@@ -16,6 +16,8 @@ import ReactFlow, {
 import { Icon } from '@/components/Icon'
 import * as whimsical from './DiagramWhimsical'
 import { FloatingEdge } from './FloatingEdge'
+import { useFullscreen } from '@/components/diagrams/useFullscreen'
+import { useDownloadImage } from '@/components/diagrams/useDownloadImage'
 
 const nodeTypes = {
   whimsical: whimsical.Node,
@@ -39,7 +41,9 @@ export function WrappedDiagram({
   edges: initialEdges,
   type,
 }) {
-  const { fitView, getNodes, getNode } = useReactFlow()
+  const { fitView, getNode } = useReactFlow()
+  const [fullscreen, toggleFullscreen] = useFullscreen()
+  const [downloadImage] = useDownloadImage()
   const [nodes, setNodes] = useNodesState(initialNodes)
   const [edges, setEdges] = useEdgesState(initialEdges)
   console.log({ nodes, edges })
@@ -64,47 +68,6 @@ export function WrappedDiagram({
       setEdges(newEdges)
       setTimeout(fitView, 20)
     }, 20)
-  }
-
-  // Fullscreen mode.
-  const [fullscreen, setFullscreen] = useState(false)
-  const toggleFullscreen = useCallback(() => {
-    setFullscreen(!fullscreen)
-    setTimeout(fitView, 20)
-  }, [fullscreen, fitView])
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.keyCode === 27 && fullscreen) {
-        toggleFullscreen()
-      }
-    }
-    window.addEventListener('keydown', handleEsc)
-    return () => window.removeEventListener('keydown', handleEsc)
-  }, [fullscreen, toggleFullscreen])
-
-  // Download image.
-  const imageWidth = 1024
-  const imageHeight = 768
-  const downloadImage = () => {
-    const nodesBounds = getRectOfNodes(getNodes())
-    const transform = getTransformForBounds(
-      nodesBounds,
-      imageWidth,
-      imageHeight,
-      0.5,
-      2
-    )
-    const isDarkMode = document.querySelector('html').classList.contains('dark')
-    toPng(document.querySelector('.react-flow__viewport'), {
-      backgroundColor: isDarkMode ? '#1e293b' : '#f8fafc',
-      width: imageWidth,
-      height: imageHeight,
-      style: {
-        width: imageWidth,
-        height: imageHeight,
-        transform: `translate(${transform[0]}px, ${transform[1]}px) scale(${transform[2]})`,
-      },
-    }).then(downloadDataUrl)
   }
 
   return (
@@ -237,11 +200,4 @@ function getEdgesFromMarkdoc(markdocEdges, type) {
       path: attributes.path,
     },
   }))
-}
-
-function downloadDataUrl(dataUrl, name = 'diagram.png') {
-  const a = document.createElement('a')
-  a.setAttribute('download', name)
-  a.setAttribute('href', dataUrl)
-  a.click()
 }
