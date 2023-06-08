@@ -77,7 +77,6 @@ function TransparentHandles() {
 
 export const Node = memo(function Node({ data }) {
   const tree = data.tree
-  const hasSections = data.sections?.length > 0
   const hasParent = tree.parent !== null
   const hasChildren = tree.children?.length > 0
   const isFirstSibling = hasParent && tree.parentIndex === 0
@@ -120,36 +119,23 @@ export const Node = memo(function Node({ data }) {
           'h-full w-full border',
           themes[data.theme ?? 'default'].node,
           {
-            'rounded-t-md': hasSections || isFirstSibling,
+            'rounded-t-md': isFirstSibling,
             'rounded-b-md': isLastSibling,
-            'rounded-md': !hasSections && !hasParent,
-            '-mt-px': !hasSections && !isFirstSibling,
+            'rounded-md': !hasParent,
+            '-mt-px': !isFirstSibling,
           }
         )}
       >
         <div
           className={clsx({
             'px-4 py-1 text-center font-medium': !hasParent || isFirstSibling,
-            'px-2 py-0.5 leading-tight': hasParent && !isFirstSibling,
+            'px-2 py-0.5 text-left text-xs leading-tight':
+              hasParent && !isFirstSibling,
           })}
         >
           <LabelOrContent data={data} />
         </div>
       </div>
-      {hasSections && (
-        <div
-          className={clsx(
-            'divide-y divide-[#c3cfd9] rounded-b-md border border-t-0 border-[#c3cfd9] text-left text-xs',
-            'dark:divide-[#788796] dark:border-[#788796]'
-          )}
-        >
-          {data.sections?.map((section, i) => (
-            <div key={i} className="px-2 py-0.5 leading-tight">
-              <LabelOrContent data={section} />
-            </div>
-          ))}
-        </div>
-      )}
       <TransparentHandles />
     </div>
   )

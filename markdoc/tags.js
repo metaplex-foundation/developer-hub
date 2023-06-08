@@ -117,13 +117,6 @@ const tags = {
       theme: { type: String },
     },
   },
-  'node-section': {
-    render: 'NodeSection',
-    attributes: {
-      label: { type: String },
-      theme: { type: String },
-    },
-  },
 }
 
 export default tags
