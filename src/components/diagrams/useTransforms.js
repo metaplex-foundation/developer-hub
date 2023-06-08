@@ -8,7 +8,6 @@ export function useTransforms(initialNodes, initialEdges, type) {
   const { fitView, getNode } = useReactFlow()
   const [nodes, setNodes] = useNodesState(hide(initialNodes))
   const [edges, setEdges] = useEdgesState(hide(initialEdges))
-  console.log({ nodes, edges })
 
   const onInit = () => {
     setTimeout(() => {
