@@ -1,23 +1,13 @@
 import { Tag } from '@markdoc/markdoc'
 import clsx from 'clsx'
-import { toPng } from 'html-to-image'
-import { useCallback, useEffect, useState } from 'react'
-import ReactFlow, {
-  Background,
-  Panel,
-  ReactFlowProvider,
-  getRectOfNodes,
-  getTransformForBounds,
-  useEdgesState,
-  useNodesState,
-  useReactFlow,
-} from 'reactflow'
+import ReactFlow, { Background, Panel, ReactFlowProvider } from 'reactflow'
 
 import { Icon } from '@/components/Icon'
 import * as whimsical from './DiagramWhimsical'
 import { FloatingEdge } from './FloatingEdge'
 import { useFullscreen } from '@/components/diagrams/useFullscreen'
 import { useDownloadImage } from '@/components/diagrams/useDownloadImage'
+import { useTransforms } from '@/components/diagrams/useTransforms'
 
 const nodeTypes = {
   whimsical: whimsical.Node,
@@ -41,34 +31,10 @@ export function WrappedDiagram({
   edges: initialEdges,
   type,
 }) {
-  const { fitView, getNode } = useReactFlow()
   const [fullscreen, toggleFullscreen] = useFullscreen()
   const [downloadImage] = useDownloadImage()
-  const [nodes, setNodes] = useNodesState(initialNodes)
-  const [edges, setEdges] = useEdgesState(initialEdges)
+  const [nodes, edges, onInit] = useTransforms(initialNodes, initialEdges, type)
   console.log({ nodes, edges })
-
-  const onInit = () => {
-    setTimeout(() => {
-      const setOpacity = (x) => ({
-        ...x,
-        style: { ...x.style, opacity: undefined },
-      })
-      let newNodes = initialNodes.map(setOpacity)
-      let newEdges = initialEdges.map(setOpacity)
-
-      switch (type) {
-        case 'whimsical':
-          newNodes = whimsical.transformNodes(newNodes, getNode)
-          newEdges = whimsical.transformEdges(newEdges)
-          break
-      }
-
-      setNodes(newNodes)
-      setEdges(newEdges)
-      setTimeout(fitView, 20)
-    }, 20)
-  }
 
   return (
     <div
@@ -174,7 +140,6 @@ function getNodesFromMarkdoc(markdocNodes, type, treeParent = undefined) {
         y: parseInt(attributes.y ?? 0, 10),
       },
       style: {
-        opacity: 0,
         zIndex: attributes.z,
       },
     }
@@ -190,7 +155,6 @@ function getEdgesFromMarkdoc(markdocEdges, type) {
     source: attributes.from,
     target: attributes.to,
     animated: attributes.animated ?? false,
-    style: { opacity: 0 },
     data: {
       content,
       label: attributes.label,
