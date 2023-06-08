@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { memo } from 'react'
-import { Handle, Position } from 'reactflow'
-import { LabelOrChildren } from './utils'
+import { Handle, Position, getRectOfNodes } from 'reactflow'
+import { LabelOrContent } from './utils'
 
 const themes = {
   default: {
@@ -58,20 +58,82 @@ const themes = {
   },
 }
 
-export const Node = memo(function ({ data }) {
-  const hasSections = data.sections?.length > 0
-
+function TransparentHandles() {
   return (
-    <div className="rounded-md bg-white text-slate-700 shadow dark:bg-slate-700 dark:text-slate-300">
+    <>
+      <Handle
+        type="target"
+        position={Position.Top}
+        className="!bg-transparent"
+      />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        className="!bg-transparent"
+      />
+    </>
+  )
+}
+
+export const Node = memo(function Node({ data }) {
+  const tree = data.tree
+  const hasSections = data.sections?.length > 0
+  const hasParent = tree.parent !== null
+  const hasChildren = tree.children?.length > 0
+  const isFirstSibling = hasParent && tree.parentIndex === 0
+  const isLastSibling =
+    hasParent && tree.parentIndex === tree.siblings.length - 1
+
+  if (hasChildren && !hasParent) {
+    return (
       <div
         className={clsx(
-          'border',
-          themes[data.theme ?? 'default'].node,
-          hasSections ? 'rounded-t-md' : 'rounded-md'
+          'h-full w-full rounded-md bg-white text-slate-700 shadow dark:bg-slate-700 dark:text-slate-300'
         )}
       >
-        <div className="px-4 py-1 text-center font-medium">
-          <LabelOrChildren data={data} />
+        <TransparentHandles />
+      </div>
+    )
+  }
+
+  if (hasChildren) {
+    return (
+      <div className="h-full w-full">
+        <TransparentHandles />
+      </div>
+    )
+  }
+
+  return (
+    <div
+      className={clsx(
+        'h-full w-full bg-white text-slate-700 dark:bg-slate-700 dark:text-slate-300',
+        {
+          'rounded-t-md': isFirstSibling,
+          'rounded-b-md': isLastSibling,
+          'rounded-md shadow': !hasParent,
+        }
+      )}
+    >
+      <div
+        className={clsx(
+          'h-full w-full border',
+          themes[data.theme ?? 'default'].node,
+          {
+            'rounded-t-md': hasSections || isFirstSibling,
+            'rounded-b-md': isLastSibling,
+            'rounded-md': !hasSections && !hasParent,
+            '-mt-px': !hasSections && !isFirstSibling,
+          }
+        )}
+      >
+        <div
+          className={clsx({
+            'px-4 py-1 text-center font-medium': !hasParent || isFirstSibling,
+            'px-2 py-0.5 leading-tight': hasParent && !isFirstSibling,
+          })}
+        >
+          <LabelOrContent data={data} />
         </div>
       </div>
       {hasSections && (
@@ -83,20 +145,87 @@ export const Node = memo(function ({ data }) {
         >
           {data.sections?.map((section, i) => (
             <div key={i} className="px-2 py-0.5 leading-tight">
-              <LabelOrChildren data={section} />
+              <LabelOrContent data={section} />
             </div>
           ))}
         </div>
       )}
-
-      <Handle type="target" position={Position.Top} className="!bg-transparent" />
-      <Handle type="source" position={Position.Bottom} className="!bg-transparent" />
+      <TransparentHandles />
     </div>
   )
 })
 
-export function transformNodes(nodes) {
+export function transformNodes(nodes, getNode) {
+  const stack = [] // Array<id>
+  const visited = {} // Record<id, node>
+
+  const visit = (node) => {
+    if (visited[node.id]) {
+      return visited[node.id]
+    }
+    if (stack.includes(node.id)) {
+      throw new Error(
+        `Circular relative nodes detected: ${[...stack, node.id].join(' -> ')}`
+      )
+    }
+    stack.push(node.id)
+    const childrenIds = node.data?.tree?.children ?? []
+    const children = nodes.filter(({ id }) => childrenIds.includes(id))
+    const visitedChildren = children.map((child) => visit(child))
+    stack.pop()
+
+    if (node.data.tree.parent) {
+      const previousSiblingId =
+        node.data.tree.siblings[node.data.tree.parentIndex - 1]
+      const previousSibling = visited[previousSiblingId]
+      const previousSiblingPos = previousSibling?.position ?? { x: 0, y: 0 }
+      const previousSiblingDim = previousSibling
+        ? getNode(previousSibling.id)
+        : { width: 0, height: 0 }
+      node = {
+        ...node,
+        position: {
+          x: node.position.x,
+          y: node.position.y + previousSiblingPos.y + previousSiblingDim.height,
+        },
+        style: {
+          zIndex: node.data.tree.parentIndex === 0 ? 1 : undefined,
+          ...node.style,
+        },
+      }
+    }
+
+    if (visitedChildren.length > 0) {
+      const childrenRect = visitedChildren.map((child) => {
+        const renderedChild = getNode(child.id)
+        return {
+          position: child.position,
+          width: child.style?.width ?? renderedChild.width,
+          height: child.style?.height ?? renderedChild.height,
+        }
+      })
+      const parentRect = getRectOfNodes(childrenRect)
+      node = {
+        ...node,
+        style: {
+          ...node.style,
+          width: parentRect.width + 1,
+          height: parentRect.height,
+        },
+      }
+    }
+
+    visited[node.id] = node
+    return node
+  }
+
   return nodes
+    .map((node) => visit(node))
+    .map((node) => {
+      if (!node.data.tree.ancestor) return node
+      const ancestor = visited[node.data.tree.ancestor]
+      return { ...node, style: { ...node.style, width: ancestor.style.width } }
+    })
 }
 
 export function transformEdges(edges) {
@@ -104,8 +233,8 @@ export function transformEdges(edges) {
     const color = themes[edge.data?.theme ?? 'default'].edge
     return {
       ...edge,
-      style: { stroke: color },
-      markerEnd: { type: 'arrowclosed', color },
+      style: { ...edge.style, stroke: color },
+      markerEnd: { ...edge.markerEnd, type: 'arrowclosed', color },
     }
   })
 }

@@ -96,6 +96,7 @@ const tags = {
       label: { type: String },
       x: { type: Number },
       y: { type: Number },
+      z: { type: Number },
       parent: { type: String },
       theme: { type: String },
     },

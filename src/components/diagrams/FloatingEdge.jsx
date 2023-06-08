@@ -9,7 +9,7 @@ import {
   useStore,
   useReactFlow,
 } from 'reactflow'
-import { LabelOrChildren, hasLabelOrChildren } from './utils'
+import { LabelOrContent, hasLabelOrContent } from './utils'
 
 export function FloatingEdge({ id, source, target, markerEnd, style, data }) {
   const { getIntersectingNodes } = useReactFlow()
@@ -24,7 +24,7 @@ export function FloatingEdge({ id, source, target, markerEnd, style, data }) {
     return null
   }
 
-  const hasLabel = hasLabelOrChildren(data)
+  const hasLabel = hasLabelOrContent(data)
 
   const candidates = getAllFromToPositions()
     .filter(([fromPosition, toPosition]) => {
@@ -71,7 +71,7 @@ export function FloatingEdge({ id, source, target, markerEnd, style, data }) {
             }}
             className="rounded-md bg-slate-50 p-1 text-center text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300"
           >
-            <LabelOrChildren data={data} />
+            <LabelOrContent data={data} />
           </div>
         </EdgeLabelRenderer>
       )}

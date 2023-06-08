@@ -15,18 +15,36 @@ Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut par
 
 Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.
 
-```js
-/** @type {import('@tailwindlabs/lorem').ipsum} */
-export default {
-  lorem: 'ipsum',
-  dolor: ['sit', 'amet', 'consectetur'],
-  adipiscing: {
-    elit: true,
-  },
-}
-```
+
+{% diagram %}
+  {% node #wallet-a-parent %}
+    {% node #wallet-a label="Wallet A" theme="slate" /%}
+    {% node #wallet-a1 label="Sub Wallet A1" /%}
+    {% node #wallet-a2 label="Sub Wallet A2" /%}
+  {% /node %}
+  {% node #wallet-b-parent parent="wallet-a" x="200" %}
+    {% node #wallet-b label="Wallet B" theme="pink" /%}
+    {% node #wallet-b1 label="Sub Wallet B1" /%}
+    {% node #wallet-b2 label="Sub Wallet B2" theme="blue" z="1" /%}
+    {% node #wallet-b3 label="Sub Wallet B3" /%}
+  {% /node %}
+  {% edge from="wallet-a" to="wallet-b" /%}
+  {% edge from="wallet-a1" to="wallet-b1" /%}
+  {% edge from="wallet-a2" to="wallet-b2" theme="blue" animated="true" /%}
+{% /diagram %}
 
 Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.
+
+
+{% diagram %}
+{% node #wallet theme="slate" label="Wallet Account" %}
+{% node #sub-wallet-a label="Sub Wallet A" /%}
+{% node #sub-wallet-b theme="pink" label="Sub Wallet B" %}
+{% node #sub-wallet-b1 label="Sub Wallet B1" /%}
+{% node #sub-wallet-b2 label="Sub Wallet B2" /%}
+{% /node %}
+{% /node %}
+{% /diagram %}
 
 ### Natus aspernatur iste
 
