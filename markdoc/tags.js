@@ -114,6 +114,8 @@ const tags = {
       toPosition: { type: String },
       path: { type: String },
       animated: { type: Boolean },
+      dashed: { type: Boolean },
+      arrow: { type: String },
       theme: { type: String },
     },
   },

@@ -11,7 +11,15 @@ import {
 } from 'reactflow'
 import { LabelOrContent, hasLabelOrContent } from './utils'
 
-export function FloatingEdge({ id, source, target, markerEnd, style, data }) {
+export function FloatingEdge({
+  id,
+  source,
+  target,
+  markerStart,
+  markerEnd,
+  style,
+  data,
+}) {
   const { getIntersectingNodes } = useReactFlow()
   const sourceNode = useStore(
     useCallback((store) => store.nodeInternals.get(source), [source])
@@ -61,7 +69,17 @@ export function FloatingEdge({ id, source, target, markerEnd, style, data }) {
 
   return (
     <>
-      <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} style={style} />
+      <g className="stroke-red-500">
+        <path
+          id={id}
+          style={style}
+          d={edgePath}
+          fill="none"
+          className="react-flow__edge-path"
+          markerEnd={markerEnd}
+          markerStart={markerStart}
+        />
+      </g>
       {hasLabel && (
         <EdgeLabelRenderer>
           <div

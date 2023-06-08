@@ -7,10 +7,17 @@ const themes = {
   default: {
     node: 'border-[#c3cfd9]',
     edge: '#788796',
+    darkEdge: '#c3cfd9',
   },
   slate: {
     node: 'border-[#788796] bg-[#ced8e0] dark:bg-[#788796]/20',
     edge: '#788796',
+    darkEdge: '#c3cfd9',
+  },
+  dimmed: {
+    node: 'border-[#c3cfd9] bg-[#f3f5f7] dark:bg-slate-800/40',
+    edge: '#c3cfd9',
+    darkEdge: '#788796',
   },
   blue: {
     node: 'border-[#2c88d9] bg-[#d5e7f7] dark:bg-[#2c88d9]/20',
@@ -216,11 +223,28 @@ export function transformNodes(nodes, getNode) {
 
 export function transformEdges(edges) {
   return edges.map((edge) => {
-    const color = themes[edge.data?.theme ?? 'default'].edge
+    const arrow = edge.data.arrow ?? 'end'
+    const hasMarkerStart = ['start', 'both'].includes(arrow)
+    const hasMarkerEnd = ['end', 'both'].includes(arrow)
+    const isDarkMode = document.querySelector('html').classList.contains('dark')
+    const theme = themes[edge.data.theme ?? 'default']
+    const color = isDarkMode ? theme.darkEdge ?? theme.edge : theme.edge
+    // TODO: Find a way to make the marker color dynamic.
+    // Currently, the marker color is set on the first render and switching
+    // between light and dark mode will not update the marker color.
     return {
       ...edge,
-      style: { ...edge.style, stroke: color },
-      markerEnd: { ...edge.markerEnd, type: 'arrowclosed', color },
+      style: {
+        stroke: color,
+        strokeDasharray: edge.data.dashed ? [4, 2] : undefined,
+        ...edge.style,
+      },
+      markerEnd: hasMarkerEnd
+        ? { ...edge.markerEnd, type: 'arrowclosed', color }
+        : undefined,
+      markerStart: hasMarkerStart
+        ? { ...edge.markerStart, type: 'arrowclosed', color }
+        : undefined,
     }
   })
 }

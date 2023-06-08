@@ -34,7 +34,6 @@ export function WrappedDiagram({
   const [fullscreen, toggleFullscreen] = useFullscreen()
   const [downloadImage] = useDownloadImage()
   const [nodes, edges, onInit] = useTransforms(initialNodes, initialEdges, type)
-  console.log({ nodes, edges })
 
   return (
     <div
@@ -158,6 +157,8 @@ function getEdgesFromMarkdoc(markdocEdges, type) {
     data: {
       content,
       label: attributes.label,
+      dashed: attributes.dashed,
+      arrow: attributes.arrow,
       theme: attributes.theme,
       fromPosition: attributes.fromPosition,
       toPosition: attributes.toPosition,

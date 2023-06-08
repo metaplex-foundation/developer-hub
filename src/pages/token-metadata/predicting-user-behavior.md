@@ -14,18 +14,18 @@ Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut par
 {% diagram %}
 {% node %}
   {% node #wallet theme="slate" label="Wallet Account" /%}
-  {% node %}
+  {% node theme="dimmed" %}
     Owner: System Program {% .italic %}
   {% /node %}
 {% /node %}
 
 {% node parent="wallet" x="200" %}
   {% node #token theme="blue" label="(Associated) Token Account" /%}
-  {% node %}
+  {% node theme="dimmed" %}
     Owner: (Associated) Token Program {% .italic %}
   {% /node %}
-  {% node label="Mint" /%}
-  {% node label="Owner" /%}
+  {% node #token-mint label="Mint" /%}
+  {% node #token-owner label="Owner" /%}
   {% node label="Amount" /%}
   {% node label="Delegate" /%}
   {% node label="State" /%}
@@ -41,7 +41,7 @@ Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut par
 
 {% node parent="token" x="300" %}
   {% node #mint theme="blue" label="Mint Account" /%}
-  {% node %}
+  {% node theme="dimmed" %}
     Owner: System Program {% .italic %}
   {% /node %}
   {% node label="Mint Authority" /%}
@@ -53,7 +53,7 @@ Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut par
 
 {% node parent="mint" x="200" %}
   {% node #metadata theme="indigo" label="Metadata Account" /%}
-  {% node %}
+  {% node theme="dimmed" %}
     Owner: Token Metadata Program {% .italic %}
   {% /node %}
   {% node label="Key = MetadataV1" /%}
@@ -61,7 +61,7 @@ Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut par
   {% node label="Mint" /%}
   {% node label="Name" /%}
   {% node label="Symbol" /%}
-  {% node label="URI" /%}
+  {% node #metadata-uri label="URI" theme="pink" z="1" /%}
   {% node label="Seller Fee Basis Points" /%}
   {% node label="Creators" /%}
   {% node label="Primary Sale Happened" /%}
@@ -82,11 +82,8 @@ Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut par
   {% node label="\"metadata\" + Program ID + Mint" /%}
 {% /node %}
 
-{% node parent="metadata" x="250" %}
-  {% node #offchain-metadata theme="indigo" label="Off-Chain Metadata" /%}
-  {% node %}
-    Owner: (Associated) Token Program {% .italic %}
-  {% /node %}
+{% node parent="metadata-uri" x="250" y="-9" %}
+  {% node #offchain-metadata theme="pink" label="Off-Chain Metadata" /%}
   {% node label="Name" /%}
   {% node label="Description" /%}
   {% node label="Image" /%}
@@ -95,12 +92,14 @@ Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut par
   {% node label="..." /%}
 {% /node %}
 
-{% edge from="wallet" to="token-pda" /%}
+{% edge from="wallet" to="token-pda" fromPosition="top" /%}
+{% edge from="wallet" to="token-owner" dashed="true" arrow="none" /%}
 {% edge from="token-pda-group" to="token" /%}
 {% edge from="mint" to="token-pda" /%}
+{% edge from="mint" to="token-mint" dashed="true" arrow="none" /%}
 {% edge from="mint" to="metadata-pda" /%}
-{% edge from="metadata-pda-group" to="metadata" type="straight" /%}
-{% edge from="metadata" to="offchain-metadata" animated="true" theme="indigo" /%}
+{% edge from="metadata-pda-group" to="metadata" path="straight" /%}
+{% edge from="metadata-uri" to="offchain-metadata" animated="true" theme="pink" /%}
 {% /diagram %}
 
 ### Et pariatur ab quas
