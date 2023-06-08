@@ -1,114 +1,219 @@
 ---
-title: Getting started
-pageTitle: CacheAdvance - Never miss the cache again.
-description: Cache every single thing your app could ever do ahead of time, so your code never even has to run at all.
+title: Overview
+pageTitle: Candy Machine - Overview
+description: "Provides a high-level overview of Candy Machines."
 ---
 
-Learn how to get CacheAdvance set up in your project in under thirty minutes or it's free. {% .lead %}
+The Metaplex Protocol **Candy Machine** is the leading minting and distribution program for fair NFT collection launches on Solana. It allows creators to bring their digital assets on-chain in a secure and customisable way. {% .lead %}
 
 {% quick-links %}
-
-{% quick-link title="Installation" icon="InboxArrowDown" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
-
-{% quick-link title="Architecture guide" icon="CubeTransparent" href="/" description="Learn how the internals work and contribute." /%}
-
-{% quick-link title="Plugins" icon="SquaresPlus" href="/" description="Extend the library with third-party plugins or write your own." /%}
-
-{% quick-link title="API reference" icon="CodeBracketSquare" href="/" description="Learn to easily customize and modify your app's visual design to fit your brand." /%}
-
+{% quick-link title="Creator Studio" icon="Star" href="/" description="Don't want to code? Launch your next drop by pressing buttons!" /%}
+{% quick-link title="Installation" icon="InboxArrowDown" href="/" description="Ready to get your hands dirty? Jump to our installation guides." /%}
+{% quick-link title="Recipes" icon="RectangleStack" href="/" description="Learn various scenarios by reading concrete code examples." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" href="/" description="Looking for something specific? We've got you." /%}
 {% /quick-links %}
 
-Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste.
-
----
-
-## Quick start
-
-Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.
-
-### Installing dependencies
-
-Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.
-
-```shell
-npm install @tailwindlabs/cache-advance
-```
-
-Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.
-
-{% callout type="warning" title="Oh no! Something bad happened!" %}
-This is what a disclaimer message looks like. You might want to include inline `code` in it. Or maybe you’ll want to include a [link](/) in it. I don’t think we should get too carried away with other scenarios like lists or tables — that would be silly.
+{% callout %}
+This documentation refers to the latest iteration of Candy Machine known as Candy Machine V3. If you’re looking for Candy Machine V2, [please refer to this documentation instead](https://docs.metaplex.com/deprecated/candy-machine-v2/).
 {% /callout %}
 
-### Configuring the library
+## Introduction
 
-Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.
+By September 2022, 78% of all NFTs in Solana were minted through Metaplex’s Candy Machine. This includes most of the well known NFT projects in the Solana ecosystem.
 
-```js
-// cache-advance.config.js
-export default {
-  strategy: 'predictive',
-  engine: {
-    cpus: 12,
-    backups: ['./storage/cache.wtf'],
-  },
-}
-```
+Here are some of the features it offers.
 
-Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.
+- Accept payments in SOL, NFTs or any Solana token.
+- Restrict your launch via start/end dates, mint limits, third party signers, etc.
+- Protect your launch against bots via configurable bot taxes and gatekeepers like Captchas.
+- Restrict minting to specific NFT/Token holders or to a curated list of wallets.
+- Create multiple minting groups with different sets of rules.
+- Reveal your NFTs after the launch whilst allowing your users to verify that information.
+- And so much more!
 
-{% callout title="You should know!" %}
-This is what a disclaimer message looks like. You might want to include inline `code` in it. Or maybe you’ll want to include a [link](/) in it. I don’t think we should get too carried away with other scenarios like lists or tables — that would be silly.
-{% /callout %}
+Interested? Let’s give you a little tour of how Candy Machines work!
 
----
+## The Lifecycle of a Candy Machine
 
-## Basic usage
+Much like its name suggests, you can think of a Candy Machine as a temporary structure which is first loaded by creators and then unloaded by buyers.
 
-Praesentium laudantium magni. Consequatur reiciendis aliquid nihil iusto ut in et. Quisquam ut et aliquid occaecati. Culpa veniam aut et voluptates amet perspiciatis. Qui exercitationem in qui. Vel qui dignissimos sit quae distinctio.
+Thus, the very first step is for the creator to create a new Candy Machine and configure it however they want.
 
-### Your first cache
+{% diagram %}
+{% node #action label="1. Create & Configure" theme="pink" /%}
+{% node parent="action" x="250" %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node label="Settings" /%}
+{% /node %}
+{% edge from="action" to="candy-machine" path="straight" /%}
+{% /diagram %}
 
-Minima vel non iste debitis. Consequatur repudiandae et quod accusamus sit molestias consequatur aperiam. Et sequi ipsa eum voluptatibus ipsam. Et quisquam ut.
+The created Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be minted. For instance, there is a `creators` parameter which will be assigned to all NFTs minted from this Candy Machine. We will see how to create and configure Candy Machines in more details, including some code examples, in the following pages: [Candy Machine Settings](/programs/candy-machine/candy-machine-settings) and [Managing Candy Machines](/programs/candy-machine/managing-candy-machines).
 
-Qui quae esse aspernatur fugit possimus. Quam sed molestiae temporibus. Eum perferendis dignissimos provident ea et. Et repudiandae quasi accusamus consequatur dolore nobis. Quia reiciendis necessitatibus a blanditiis iste quia. Ut quis et amet praesentium sapiente.
+However, we still don’t know which NFTs should be minted from that Candy Machine. In other words, the Candy Machine is not loaded. So our next step, is to insert items into the Candy Machine.
 
-Atque eos laudantium. Optio odit aspernatur consequuntur corporis soluta quidem sunt aut doloribus. Laudantium assumenda commodi.
+{% diagram %}
+{% node #action-1 label="1. Create & Configure" theme="pink" /%}
+{% node #action-2 label="2. Insert Items" parent="action-1" y="50" theme="pink" /%}
+{% node parent="action-1" x="250" %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node label="Settings" /%}
+{% node #item-1 label="Item 1" /%}
+{% node #item-2 label="Item 2" /%}
+{% node #item-3 label="Item 3" /%}
+{% node #item-rest label="..." /%}
+{% /node %}
+{% edge from="action-1" to="candy-machine" path="straight" /%}
+{% edge from="action-2" to="item-1" /%}
+{% edge from="action-2" to="item-2" /%}
+{% edge from="action-2" to="item-3" /%}
+{% edge from="action-2" to="item-rest" /%}
+{% /diagram %}
 
-### Clearing the cache
+Each item is composed of two parameters:
 
-Vel aut velit sit dolor aut suscipit at veritatis voluptas. Laudantium tempore praesentium. Qui ut voluptatem.
+- A `name`: The name of the NFT.
+- A `uri`: The URI pointing to the [JSON metadata](https://docs.metaplex.com/programs/token-metadata/overview#a-json-standard) of the NFT. This implies that the JSON metadata has already been uploaded via either an on-chain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider.
 
-Ea est autem fugiat velit esse a alias earum. Dolore non amet soluta eos libero est. Consequatur qui aliquam qui odit eligendi ut impedit illo dignissimos.
+All other parameters are shared between all NFTs and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/programs/candy-machine/inserting-items) for more details.
 
-Ut dolore qui aut nam. Natus temporibus nisi voluptatum labore est ex error vel officia. Vero repellendus ut. Suscipit voluptate et placeat. Eius quo corporis ab et consequatur quisquam. Nihil officia facere dolorem occaecati alias deleniti deleniti in.
+Notice how, at this point, no real NFTs have been created yet. We are simply loading the Candy Machine with all the data it needs to **create NFTs on-demand**, at mint time. Which brings us to the next step.
 
-### Adding middleware
+{% diagram %}
+{% node #action-1 label="1. Create & Configure" theme="pink" /%}
+{% node #action-2 label="2. Insert Items" parent="action-1" y="50" theme="pink" /%}
 
-Officia nobis tempora maiores id iusto magni reprehenderit velit. Quae dolores inventore molestiae perspiciatis aut. Quis sequi officia quasi rem officiis officiis. Nesciunt ut cupiditate. Sunt aliquid explicabo enim ipsa eum recusandae. Vitae sunt eligendi et non beatae minima aut.
+{% node parent="action-1" x="250" %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node label="Settings" /%}
+{% node #item-1 label="Item 1" /%}
+{% node #item-2 label="Item 2" /%}
+{% node #item-3 label="Item 3" /%}
+{% node #item-rest label="..." /%}
+{% /node %}
 
-Harum perferendis aut qui quibusdam tempore laboriosam voluptatum qui sed. Amet error amet totam exercitationem aut corporis accusantium dolorum. Perspiciatis aut animi et. Sed unde error ut aut rerum.
+{% node parent="candy-machine" x="180" y="20" %}
+{% node #mint label="3. Mint" theme="pink" /%}
+{% node #mint-1 label="Mint #1" theme="pink" /%}
+{% node #mint-2 label="Mint #2" theme="pink" /%}
+{% node #mint-3 label="Mint #3" theme="pink" /%}
+{% /node %}
 
-Ut quo libero aperiam mollitia est repudiandae quaerat corrupti explicabo. Voluptas accusantium sed et doloribus voluptatem fugiat a mollitia. Numquam est magnam dolorem asperiores fugiat. Soluta et fuga amet alias temporibus quasi velit. Laudantium voluptatum perspiciatis doloribus quasi facere. Eveniet deleniti veniam et quia veritatis minus veniam perspiciatis.
+{% node #nft-1 parent="mint" x="120" label="NFT" theme="blue" /%}
+{% node #nft-2 parent="nft-1" y="50" label="NFT" theme="blue" /%}
+{% node #nft-3 parent="nft-2" y="50" label="NFT" theme="blue" /%}
 
----
+{% edge from="action-1" to="candy-machine" path="straight" /%}
+{% edge from="action-2" to="item-1" /%}
+{% edge from="action-2" to="item-2" /%}
+{% edge from="action-2" to="item-3" /%}
+{% edge from="action-2" to="item-rest" /%}
+{% edge from="item-1" to="mint-1" /%}
+{% edge from="item-2" to="mint-2" /%}
+{% edge from="item-3" to="mint-3" /%}
+{% edge from="mint-1" to="nft-1" path="bezier" /%}
+{% edge from="mint-2" to="nft-2" path="bezier" /%}
+{% edge from="mint-3" to="nft-3" path="bezier" /%}
+{% /diagram %}
 
-## Getting help
+Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting NFTs from it. It’s only at this point that an NFT is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/programs/candy-machine/minting) for more details.
 
-Consequuntur et aut quisquam et qui consequatur eligendi. Necessitatibus dolorem sit. Excepturi cumque quibusdam soluta ullam rerum voluptatibus. Porro illo sequi consequatur nisi numquam nisi autem. Ut necessitatibus aut. Veniam ipsa voluptatem sed.
+Once all NFTs have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Managing Candy Machines](/programs/candy-machine/managing-candy-machines) for more details.
 
-### Submit an issue
+{% diagram %}
+{% node #action-1 label="4. Delete" theme="pink" /%}
+{% node parent="action-1" x="150" %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node label="Settings" /%}
+{% node #item-1 label="Item 1" /%}
+{% node #item-2 label="Item 2" /%}
+{% node #item-3 label="Item 3" /%}
+{% node #item-rest label="..." /%}
+{% /node %}
+{% node #nft-1 parent="candy-machine" x="200" label="NFT" theme="blue" /%}
+{% node #nft-2 parent="nft-1" y="50" label="NFT" theme="blue" /%}
+{% node #nft-3 parent="nft-2" y="50" label="NFT" theme="blue" /%}
+{% edge from="action-1" to="candy-machine" path="straight" /%}
+{% /diagram %}
 
-Inventore et aut minus ut voluptatem nihil commodi doloribus consequatur. Facilis perferendis nihil sit aut aspernatur iure ut dolores et. Aspernatur odit dignissimos. Aut qui est sint sint.
+## Candy Guards
 
-Facere aliquam qui. Dolorem officia ipsam adipisci qui molestiae. Error voluptatem reprehenderit ex.
+Now that we understand how Candy Machines work, let’s dig into the various ways creators can protect and customise the mint process of their Candy Machine.
 
-Consequatur enim quia maiores aperiam et ipsum dicta. Quam ut sit facere sit quae. Eligendi veritatis aut ut veritatis iste ut adipisci illo.
+Creators can use what we call “**Guards**” to add various features to their Candy Machine. The Metaplex Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 16 default guards**](/programs/candy-machine/available-guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
 
-### Join the community
+Each guard can be enabled and configured at will so creators can pick and choose the features they need. Disabling all guards would be equivalent to allowing anyone to mint our NFTs for free at any time, which is likely not what we want. So let’s have a look at a few guards to create a more realistic example.
 
-Praesentium facilis iste aliquid quo quia a excepturi. Fuga reprehenderit illo sequi voluptatem voluptatem omnis. Id quia consequatur rerum consectetur eligendi et omnis. Voluptates iusto labore possimus provident praesentium id vel harum quisquam. Voluptatem provident corrupti.
+Say a Candy Machine has the following guards:
 
-Eum et ut. Qui facilis est ipsa. Non facere quia sequi commodi autem. Dicta autem sit sequi omnis impedit. Eligendi amet dolorum magnam repudiandae in a.
+- **Sol Payment**: This guard ensures the minting wallet has to pay a configured amount of SOL to a configured destination wallet.
+- **Start Date**: This guard ensures minting can only start after the configured time.
+- **Mint Limit**: This guard ensures each wallet cannot mint more than a configured amount.
+- **Bot Tax**: This guard is a bit special. It doesn’t guard against anything but it changes the behaviour of a failed mint to prevent bots from minting Candy Machines. When this guard is activated, if any other activated guard fails to validate the mint, it will charge a small configured amount of SOL to the wallet that tried to mint.
 
-Molestiae iusto ut exercitationem dolorem unde iusto tempora atque nihil. Voluptatem velit facere laboriosam nobis ea. Consequatur rerum velit ipsum ipsam. Et qui saepe consequatur minima laborum tempore voluptatum et. Quia eveniet eaque sequi consequatur nihil eos.
+What we end up with is a bot-protected Candy Machine that charges SOL, launches at a specific time and only allows a limited amount of mints per wallet. Here’s a concrete example.
+
+{% diagram %}
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node label="Settings" /%}
+{% node #items label="Items" /%}
+{% node #guards %}
+Guards:
+- Sol Payment (0.1 SOL)
+- Start Date (Jan 6th)
+- Mint Limit (1)
+- Bot Tax (0.01 SOL)
+{% /node %}
+{% /node %}
+
+{% node parent="candy-machine" x="250" %}
+{% node #mints label="Mints" theme="pink" /%}
+{% node #mint-1 label="#1: Wallet A (1 SOL) on Jan 5th" theme="pink" /%}
+{% node #mint-2 label="#2: Wallet B (3 SOL) on Jan 6th" theme="pink" /%}
+{% node #mint-3 label="#3: Wallet B (2 SOL) on Jan 6th" theme="pink" /%}
+{% node #mint-4 label="#4: Wallet C (0.5 SOL) on Jan 6th" theme="pink" /%}
+{% /node %}
+{% node #fail-1 parent="mints" x="250" theme="red" %}
+Too early {% .text-xs %} \
+Bot tax charged
+{% /node %}
+{% node #nft-2 parent="fail-1" y="50" label="NFT" theme="blue" /%}
+{% node #fail-3 parent="nft-2" y="50" theme="red" %}
+Minted 1 already {% .text-xs %} \
+Bot tax charged
+{% /node %}
+{% node #fail-4 parent="fail-3" y="50" theme="red" %}
+Not enough SOL {% .text-xs %} \
+Bot tax charged
+{% /node %}
+
+{% edge from="candy-machine" to="mint-1" /%}
+{% edge from="candy-machine" to="mint-2" /%}
+{% edge from="candy-machine" to="mint-3" /%}
+{% edge from="candy-machine" to="mint-4" /%}
+{% edge from="mint-1" to="fail-1" path="bezier" /%}
+{% edge from="mint-2" to="nft-2" path="bezier" /%}
+{% edge from="mint-3" to="fail-3" path="bezier" /%}
+{% edge from="mint-4" to="fail-4" path="bezier" /%}
+{% /diagram %}
+
+As you can see, with more than 16 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/programs/candy-machine/candy-guards) page.
+
+## Next steps
+
+Whilst this provides a good overview of Candy Machines, there is a lot more to discover and learn about them. Here’s what you can expect in the other pages of this Candy Machine documentation.
+
+- [Getting Started](/programs/candy-machine/getting-started). Lists the various libraries and SDKs you can use to manage Candy Machines.
+- [Candy Machine Settings](/programs/candy-machine/candy-machine-settings). Explains Candy Machine settings in great detail.
+- [Managing Candy Machines](/programs/candy-machine/managing-candy-machines). Explains how to manage Candy Machines.
+- [Inserting Items](/programs/candy-machine/inserting-items). Explains how to load items into Candy Machines.
+- [Candy Guards](/programs/candy-machine/candy-guards). Explains how guards work and how to enable them.
+- [Guard Groups](/programs/candy-machine/guard-groups). Explains how to configure multiple groups of guards.
+- [Special Guard Instructions](/programs/candy-machine/special-guard-instructions). Explains how to execute guard-specific instructions.
+- [Minting](/programs/candy-machine/minting). Explains how to mint from Candy Machines and how to handle pre-mint requirements.
+- [Available Guards](/programs/candy-machine/available-guards). Lists all available default guards.
+- [How-To Guides](/programs/candy-machine/how-to-guides). Lists practical articles relevant to Candy Machines.
+- [Conceptual Guides](/programs/candy-machine/conceptual-guides). Lists theoretical articles relevant to Candy Machines.
+- [References](/programs/candy-machine/references). Lists API References relevant to Candy Machines.
+- [Updates](/programs/candy-machine/updates). Documents the latest changes.
