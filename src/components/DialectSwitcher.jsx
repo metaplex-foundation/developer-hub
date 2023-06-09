@@ -45,7 +45,7 @@ export function DialectSwitcher({ children, title, dialects }) {
                     clsx(
                       'flex cursor-pointer select-none items-center rounded-[0.625rem] px-2 py-1',
                       {
-                        'text-sky-500': selected,
+                        'text-accent-500': selected,
                         'text-slate-900 dark:text-white': active && !selected,
                         'text-slate-700 dark:text-slate-400':
                           !active && !selected,

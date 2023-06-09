@@ -13,6 +13,7 @@ export const fusion = {
   path: 'fusion',
   logo: Logo,
   github: 'https://github.com',
+  className: 'accent-amber',
   sections: [
     {
       ...documentationSection('fusion'),

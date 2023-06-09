@@ -13,6 +13,7 @@ export const bubblegum = {
   path: 'bubblegum',
   logo: Logo,
   github: 'https://github.com',
+  className: 'accent-green',
   sections: [
     {
       ...documentationSection('bubblegum'),
@@ -33,7 +34,10 @@ export const bubblegum = {
           title: 'Introduction',
           links: [
             { title: 'Getting started', href: '/bubblegum/references' },
-            { title: 'Installation', href: '/bubblegum/references/installation' },
+            {
+              title: 'Installation',
+              href: '/bubblegum/references/installation',
+            },
           ],
         },
       ],

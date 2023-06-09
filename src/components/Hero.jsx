@@ -1,12 +1,12 @@
-import clsx from 'clsx';
-import Image from 'next/image';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-import { Fragment } from 'react';
+import clsx from 'clsx'
+import Image from 'next/image'
+import Highlight, { defaultProps } from 'prism-react-renderer'
+import { Fragment } from 'react'
 
-import { Button } from '@/components/Button';
-import { HeroBackground } from '@/components/HeroBackground';
-import blurCyanImage from '@/images/blur-cyan.png';
-import blurIndigoImage from '@/images/blur-indigo.png';
+import { Button } from '@/components/Button'
+import { HeroBackground } from '@/components/HeroBackground'
+import blurCyanImage from '@/images/blur-cyan.png'
+import blurIndigoImage from '@/images/blur-indigo.png'
 
 const codeLanguage = 'rust'
 const code = `pub struct Metadata {
@@ -50,7 +50,7 @@ export function Hero({ page }) {
               priority
             />
             <div className="relative">
-              <p className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text font-display text-5xl tracking-tight text-transparent">
+              <p className="inline bg-gradient-to-r from-indigo-200 via-accent-400 to-indigo-200 bg-clip-text font-display text-5xl tracking-tight text-transparent">
                 {page.product.name}
               </p>
               <p className="mt-3 text-2xl tracking-tight text-slate-400">
@@ -87,10 +87,10 @@ export function Hero({ page }) {
                 unoptimized
                 priority
               />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10 blur-lg" />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10" />
+              <div className="via-accent-300/70 absolute inset-0 rounded-2xl bg-gradient-to-tr from-accent-300 to-blue-300 opacity-10 blur-lg" />
+              <div className="via-accent-300/70 absolute inset-0 rounded-2xl bg-gradient-to-tr from-accent-300 to-blue-300 opacity-10" />
               <div className="relative rounded-2xl bg-[#0A101F]/80 ring-1 ring-white/10 backdrop-blur">
-                <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-sky-300/0 via-sky-300/70 to-sky-300/0" />
+                <div className="from-accent-300/0 via-accent-300/70 to-accent-300/0 absolute -top-px left-20 right-11 h-px bg-gradient-to-r" />
                 <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0" />
                 <div className="pl-4 pt-4">
                   <TrafficLightsIcon className="h-2.5 w-auto stroke-slate-500/30" />
@@ -101,7 +101,7 @@ export function Hero({ page }) {
                         className={clsx(
                           'flex h-6 rounded-full',
                           tab.isActive
-                            ? 'bg-gradient-to-r from-sky-400/30 via-sky-400 to-sky-400/30 p-px font-medium text-sky-300'
+                            ? 'from-accent-400/30 to-accent-400/30 bg-gradient-to-r via-accent-400 p-px font-medium text-accent-300'
                             : 'text-slate-500'
                         )}
                       >

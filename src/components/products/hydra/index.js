@@ -13,6 +13,7 @@ export const hydra = {
   path: 'hydra',
   logo: Logo,
   github: 'https://github.com',
+  className: 'accent-amber',
   sections: [
     {
       ...documentationSection('hydra'),

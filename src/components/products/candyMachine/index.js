@@ -13,6 +13,7 @@ export const candyMachine = {
   path: 'candy-machine',
   logo: Logo,
   github: 'https://github.com',
+  className: 'accent-pink',
   sections: [
     {
       ...documentationSection('candy-machine'),
@@ -33,7 +34,10 @@ export const candyMachine = {
           title: 'Introduction',
           links: [
             { title: 'Getting started', href: '/candy-machine/references' },
-            { title: 'Installation', href: '/candy-machine/references/installation' },
+            {
+              title: 'Installation',
+              href: '/candy-machine/references/installation',
+            },
           ],
         },
       ],

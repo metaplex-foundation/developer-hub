@@ -1,14 +1,25 @@
+import { useEffect } from 'react'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 import { Header } from '@/components/Header'
 import { Hero } from '@/components/Hero'
 import { Navigation } from '@/components/Navigation'
 import { Prose } from '@/components/Prose'
 import { TableOfContent } from '@/components/TableOfContent'
-import clsx from 'clsx'
 
 export function Layout({ children, page }) {
   const hasNavigation = !!page.activeSection?.navigation
+  useEffect(() => {
+    document.querySelector('body').classList.forEach((className) => {
+      if (className.startsWith('accent-')) {
+        document.querySelector('body').classList.remove(className)
+      }
+    })
+    if (page.product?.className) {
+      document.querySelector('body').classList.add(page.product?.className)
+    }
+  })
 
   return (
     <>
@@ -16,12 +27,14 @@ export function Layout({ children, page }) {
 
       {page.isIndexPage && <Hero page={page} />}
 
-      <div className={clsx(
-        "relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12",
-        hasNavigation ? 'max-w-8xl' : 'max-w-6xl'
-      )}>
+      <div
+        className={clsx(
+          'relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12',
+          hasNavigation ? 'max-w-8xl' : 'max-w-6xl'
+        )}
+      >
         {/* Navigation. */}
-        { hasNavigation && (
+        {hasNavigation && (
           <div className="hidden lg:relative lg:block lg:flex-none">
             <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
             <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
@@ -36,15 +49,17 @@ export function Layout({ children, page }) {
         )}
 
         {/* Content. */}
-        <div className={clsx(
-          "min-w-0 max-w-2xl flex-auto lg:max-w-none px-4 py-16",
-          hasNavigation ? 'lg:pl-8 lg:pr-0 xl:px-16' : 'lg:pl-0 lg:pr-16'
-        )}>
+        <div
+          className={clsx(
+            'min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none',
+            hasNavigation ? 'lg:pl-8 lg:pr-0 xl:px-16' : 'lg:pl-0 lg:pr-16'
+          )}
+        >
           <article>
             {(page.title || page.activeSection?.navigationGroup) && (
               <header className="mb-9 space-y-1">
                 {page.activeSection?.navigationGroup && (
-                  <p className="font-display text-sm font-medium text-sky-500">
+                  <p className="font-display text-sm font-medium text-accent-500">
                     {page.activeSection.navigationGroup.title}
                   </p>
                 )}
@@ -94,12 +109,14 @@ export function Layout({ children, page }) {
         </div>
 
         {/* Table of contents. */}
-        <div className={clsx(
-          "hidden",
-          hasNavigation
-            ? 'xl:sticky xl:top-[7rem] xl:-mr-6 xl:block xl:h-[calc(100vh-7rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6'
-            : 'lg:sticky lg:top-[7rem] lg:-mr-6 lg:block lg:h-[calc(100vh-7rem)] lg:flex-none lg:overflow-y-auto lg:py-16 lg:pr-6'
-        )}>
+        <div
+          className={clsx(
+            'hidden',
+            hasNavigation
+              ? 'xl:sticky xl:top-[7rem] xl:-mr-6 xl:block xl:h-[calc(100vh-7rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6'
+              : 'lg:sticky lg:top-[7rem] lg:-mr-6 lg:block lg:h-[calc(100vh-7rem)] lg:flex-none lg:overflow-y-auto lg:py-16 lg:pr-6'
+          )}
+        >
           <TableOfContent
             tableOfContents={page.tableOfContents}
           ></TableOfContent>

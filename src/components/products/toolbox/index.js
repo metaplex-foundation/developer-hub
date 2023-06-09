@@ -13,6 +13,7 @@ export const toolbox = {
   path: 'toolbox',
   logo: Logo,
   github: 'https://github.com',
+  className: 'accent-sky',
   sections: [
     {
       ...documentationSection('toolbox'),

@@ -13,6 +13,7 @@ export const tokenAuthRules = {
   path: 'token-auth-rules',
   logo: Logo,
   github: 'https://github.com',
+  className: 'accent-green',
   sections: [
     {
       ...documentationSection('token-auth-rules'),
@@ -33,7 +34,10 @@ export const tokenAuthRules = {
           title: 'Introduction',
           links: [
             { title: 'Getting started', href: '/token-auth-rules/references' },
-            { title: 'Installation', href: '/token-auth-rules/references/installation' },
+            {
+              title: 'Installation',
+              href: '/token-auth-rules/references/installation',
+            },
           ],
         },
       ],

@@ -13,6 +13,7 @@ export const tokenMetadata = {
   path: 'token-metadata',
   logo: Logo,
   github: 'https://github.com',
+  className: 'accent-green',
   sections: [
     {
       ...documentationSection('token-metadata'),
@@ -122,7 +123,10 @@ export const tokenMetadata = {
           title: 'Introduction',
           links: [
             { title: 'Getting started', href: '/token-metadata/references' },
-            { title: 'Installation', href: '/token-metadata/references/installation' },
+            {
+              title: 'Installation',
+              href: '/token-metadata/references/installation',
+            },
           ],
         },
         {
