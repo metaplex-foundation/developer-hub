@@ -1,25 +1,18 @@
-import { useEffect } from 'react'
-import Link from 'next/link'
 import clsx from 'clsx'
+import Link from 'next/link'
 
 import { Header } from '@/components/Header'
 import { Hero } from '@/components/Hero'
 import { Navigation } from '@/components/Navigation'
 import { Prose } from '@/components/Prose'
 import { TableOfContent } from '@/components/TableOfContent'
+import { useAccentClass } from '@/shared/useAccentClass'
+import { useLightense } from '@/shared/useLightense'
 
 export function Layout({ children, page }) {
   const hasNavigation = !!page.activeSection?.navigation
-  useEffect(() => {
-    document.querySelector('body').classList.forEach((className) => {
-      if (className.startsWith('accent-')) {
-        document.querySelector('body').classList.remove(className)
-      }
-    })
-    if (page.product?.className) {
-      document.querySelector('body').classList.add(page.product?.className)
-    }
-  })
+  useLightense()
+  useAccentClass(page.product)
 
   return (
     <>
