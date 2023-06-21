@@ -10,7 +10,7 @@ import { Logo } from './Logo'
 export const candyMachine = {
   name: 'Candy Machine',
   headline: 'NFT launchpad',
-  description: 'TODO',
+  description: 'Launch your next NFT collection on Solana!',
   path: 'candy-machine',
   logo: Logo,
   github: 'https://github.com',

@@ -20,7 +20,7 @@ const codeProps = {
 
 export function Hero({ page }) {
   return (
-    <BaseHero page={page}>
+    <BaseHero page={page} subDescription="Create digital assets by adding Metadata to tokens.">
       <HeroCode {...codeProps}></HeroCode>
     </BaseHero>
   )

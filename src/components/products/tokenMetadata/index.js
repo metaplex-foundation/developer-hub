@@ -10,7 +10,7 @@ import { Logo } from './Logo'
 export const tokenMetadata = {
   name: 'Token Metadata',
   headline: 'Digital ownership standard',
-  description: 'TODO',
+  description: 'The NFT standard on Solana.',
   path: 'token-metadata',
   logo: Logo,
   github: 'https://github.com',

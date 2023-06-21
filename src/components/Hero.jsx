@@ -4,7 +4,7 @@ import { Button } from '@/components/Button'
 import blurCyanImage from '@/images/blur-cyan.png'
 import blurIndigoImage from '@/images/blur-indigo.png'
 
-export function Hero({ page, title, description, primaryCta, secondaryCta, children }) {
+export function Hero({ page, title, description, subDescription, primaryCta, secondaryCta, light1Off, light2Off, light3Off, children }) {
   title = title ?? page.product?.name
   description = description ?? page.product?.description
   primaryCta = primaryCta ?? {
@@ -21,15 +21,17 @@ export function Hero({ page, title, description, primaryCta, secondaryCta, child
       <div className="py-16 sm:px-2 lg:relative lg:px-0 lg:py-20">
         <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 lg:max-w-8xl lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
           <div className="relative z-10 md:text-center lg:text-left">
-            <Image
-              className="absolute bottom-full right-full -mb-56 -mr-72 opacity-50 no-lightense"
-              src={blurCyanImage}
-              alt=""
-              width={530}
-              height={530}
-              unoptimized
-              priority
-            />
+            {!light1Off && (
+              <Image
+                className="absolute bottom-full right-full -mb-56 -mr-72 opacity-50 no-lightense"
+                src={blurCyanImage}
+                alt=""
+                width={530}
+                height={530}
+                unoptimized
+                priority
+              />
+            )}
             <div className="relative">
               <p className="inline bg-gradient-to-r from-indigo-200 via-accent-400 to-indigo-200 bg-clip-text font-display text-5xl tracking-tight text-transparent">
                 {title}
@@ -37,6 +39,11 @@ export function Hero({ page, title, description, primaryCta, secondaryCta, child
               <p className="mt-3 text-2xl tracking-tight text-slate-400">
                 {description}
               </p>
+              {subDescription && (
+                <p className="mt-2 text-base tracking-tight text-slate-400">
+                  {subDescription}
+                </p>
+              )}
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
                 <Button href={primaryCta.href}>{primaryCta.title}</Button>
                 <Button href={secondaryCta.href} variant="secondary">{secondaryCta.title}</Button>
@@ -45,24 +52,28 @@ export function Hero({ page, title, description, primaryCta, secondaryCta, child
           </div>
           <div className="relative lg:static xl:pl-10">
             <div className="relative">
-              <Image
-                className="absolute -right-64 -top-64 no-lightense"
-                src={blurCyanImage}
-                alt=""
-                width={530}
-                height={530}
-                unoptimized
-                priority
-              />
-              <Image
-                className="absolute -bottom-40 -right-44 no-lightense"
-                src={blurIndigoImage}
-                alt=""
-                width={567}
-                height={567}
-                unoptimized
-                priority
-              />
+              {!light2Off && (
+                <Image
+                  className="absolute -right-64 -top-64 no-lightense"
+                  src={blurCyanImage}
+                  alt=""
+                  width={530}
+                  height={530}
+                  unoptimized
+                  priority
+                />
+              )}
+              {!light3Off && (
+                <Image
+                  className="absolute -bottom-40 -right-44 no-lightense"
+                  src={blurIndigoImage}
+                  alt=""
+                  width={567}
+                  height={567}
+                  unoptimized
+                  priority
+                />
+              )}
               {children}
             </div>
           </div>

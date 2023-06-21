@@ -10,7 +10,7 @@ import { Logo } from './Logo'
 export const hydra = {
   name: 'Hydra',
   headline: 'Fanout wallets',
-  description: 'TODO',
+  description: 'Create shared wallets split between multiple shareholders.',
   path: 'hydra',
   logo: Logo,
   github: 'https://github.com',
