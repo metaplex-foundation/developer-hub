@@ -4,7 +4,6 @@ import Highlight, { defaultProps } from 'prism-react-renderer'
 import { Fragment } from 'react'
 
 import { Button } from '@/components/Button'
-import { HeroBackground } from '@/components/HeroBackground'
 import blurCyanImage from '@/images/blur-cyan.png'
 import blurIndigoImage from '@/images/blur-indigo.png'
 
@@ -65,9 +64,6 @@ export function Hero({ page }) {
             </div>
           </div>
           <div className="relative lg:static xl:pl-10">
-            <div className="absolute inset-x-[-50vw] -bottom-48 -top-32 [mask-image:linear-gradient(transparent,white,white)] dark:[mask-image:linear-gradient(transparent,white,transparent)] lg:-bottom-32 lg:-top-32 lg:left-[calc(50%+14rem)] lg:right-0 lg:[mask-image:none] lg:dark:[mask-image:linear-gradient(white,white,transparent)]">
-              <HeroBackground className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:left-0 lg:translate-x-0 lg:translate-y-[-60%]" />
-            </div>
             <div className="relative">
               <Image
                 className="absolute -right-64 -top-64"
@@ -87,11 +83,11 @@ export function Hero({ page }) {
                 unoptimized
                 priority
               />
-              <div className="via-accent-300/70 absolute inset-0 rounded-2xl bg-gradient-to-tr from-accent-300 to-blue-300 opacity-10 blur-lg" />
-              <div className="via-accent-300/70 absolute inset-0 rounded-2xl bg-gradient-to-tr from-accent-300 to-blue-300 opacity-10" />
+              <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-sky-300/0 via-sky-300/70 to-sky-300/0"></div>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10"></div>
               <div className="relative rounded-2xl bg-[#0A101F]/80 ring-1 ring-white/10 backdrop-blur">
-                <div className="from-accent-300/0 via-accent-300/70 to-accent-300/0 absolute -top-px left-20 right-11 h-px bg-gradient-to-r" />
-                <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0" />
+                <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-sky-300/0 via-accent-300 to-sky-300/0 opacity-75"></div>
+                <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-blue-400/0 via-accent-400 to-blue-400/0 opacity-75"></div>
                 <div className="pl-4 pt-4">
                   <TrafficLightsIcon className="h-2.5 w-auto stroke-slate-500/30" />
                   <div className="mt-4 flex space-x-2 text-xs">
