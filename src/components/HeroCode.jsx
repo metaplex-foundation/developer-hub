@@ -1,16 +1,7 @@
 import clsx from 'clsx'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import { Fragment } from 'react'
-
-function TrafficLightsIcon(props) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 42 10" fill="none" {...props}>
-      <circle cx="5" cy="5" r="4.5" />
-      <circle cx="21" cy="5" r="4.5" />
-      <circle cx="37" cy="5" r="4.5" />
-    </svg>
-  )
-}
+import { IconTrafficLights } from '@/components/IconTrafficLights'
 
 export function HeroCode({ tabs, code, language }) {
   return (
@@ -21,7 +12,7 @@ export function HeroCode({ tabs, code, language }) {
         <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-sky-300/0 via-accent-300 to-sky-300/0 opacity-75"></div>
         <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-blue-400/0 via-accent-400 to-blue-400/0 opacity-75"></div>
         <div className="pl-4 pt-4">
-          <TrafficLightsIcon className="h-2.5 w-auto stroke-slate-500/30" />
+          <IconTrafficLights className="h-2.5 w-auto stroke-slate-500/30" />
           {tabs && tabs.length > 0 && (
             <div className="mt-4 flex space-x-2 text-xs">
               {tabs.map((tab) => (
