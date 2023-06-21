@@ -1,39 +1,21 @@
-import clsx from 'clsx'
 import Image from 'next/image'
-import Highlight, { defaultProps } from 'prism-react-renderer'
-import { Fragment } from 'react'
 
 import { Button } from '@/components/Button'
 import blurCyanImage from '@/images/blur-cyan.png'
 import blurIndigoImage from '@/images/blur-indigo.png'
 
-const codeLanguage = 'rust'
-const code = `pub struct Metadata {
-  pub key: Key,
-  pub update_authority: Pubkey,
-  pub mint: Pubkey,
-  pub data: Data,
-  pub primary_sale_happened: bool,
-  pub is_mutable: bool,
-  // ...
-}`
+export function Hero({ page, title, description, primaryCta, secondaryCta, children }) {
+  title = title ?? page.product?.name
+  description = description ?? page.product?.description
+  primaryCta = primaryCta ?? {
+    title: 'Get started',
+    href: `/${page.product?.path}/getting-started`,
+  }
+  secondaryCta = secondaryCta ?? {
+    title: 'View on GitHub',
+    href: page.product?.github,
+  }
 
-const tabs = [
-  { name: 'metadata.rs', isActive: true },
-  { name: 'offchain-metadata.json', isActive: false },
-]
-
-function TrafficLightsIcon(props) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 42 10" fill="none" {...props}>
-      <circle cx="5" cy="5" r="4.5" />
-      <circle cx="21" cy="5" r="4.5" />
-      <circle cx="37" cy="5" r="4.5" />
-    </svg>
-  )
-}
-
-export function Hero({ page }) {
   return (
     <div className="overflow-hidden bg-slate-900 dark:-mb-32 dark:mt-[-7rem] dark:pb-32 dark:pt-[7rem] dark:lg:mt-[-7.25rem] dark:lg:pt-[7.25rem]">
       <div className="py-16 sm:px-2 lg:relative lg:px-0 lg:py-20">
@@ -50,16 +32,14 @@ export function Hero({ page }) {
             />
             <div className="relative">
               <p className="inline bg-gradient-to-r from-indigo-200 via-accent-400 to-indigo-200 bg-clip-text font-display text-5xl tracking-tight text-transparent">
-                {page.product.name}
+                {title}
               </p>
               <p className="mt-3 text-2xl tracking-tight text-slate-400">
-                Sunt anim in quis sit sit.
+                {description}
               </p>
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                <Button href="/">Get started</Button>
-                <Button href="/" variant="secondary">
-                  View on GitHub
-                </Button>
+                <Button href={primaryCta.href}>{primaryCta.title}</Button>
+                <Button href={secondaryCta.href} variant="secondary">{secondaryCta.title}</Button>
               </div>
             </div>
           </div>
@@ -83,87 +63,7 @@ export function Hero({ page }) {
                 unoptimized
                 priority
               />
-              <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-sky-300/0 via-sky-300/70 to-sky-300/0"></div>
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10"></div>
-              <div className="relative rounded-2xl bg-[#0A101F]/80 ring-1 ring-white/10 backdrop-blur">
-                <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-sky-300/0 via-accent-300 to-sky-300/0 opacity-75"></div>
-                <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-blue-400/0 via-accent-400 to-blue-400/0 opacity-75"></div>
-                <div className="pl-4 pt-4">
-                  <TrafficLightsIcon className="h-2.5 w-auto stroke-slate-500/30" />
-                  <div className="mt-4 flex space-x-2 text-xs">
-                    {tabs.map((tab) => (
-                      <div
-                        key={tab.name}
-                        className={clsx(
-                          'flex h-6 rounded-full',
-                          tab.isActive
-                            ? 'from-accent-400/30 to-accent-400/30 bg-gradient-to-r via-accent-400 p-px font-medium text-accent-300'
-                            : 'text-slate-500'
-                        )}
-                      >
-                        <div
-                          className={clsx(
-                            'flex items-center rounded-full px-2.5',
-                            tab.isActive && 'bg-slate-800'
-                          )}
-                        >
-                          {tab.name}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-6 flex items-start px-1 text-sm">
-                    <div
-                      aria-hidden="true"
-                      className="select-none border-r border-slate-300/5 pr-4 font-mono text-slate-600"
-                    >
-                      {Array.from({
-                        length: code.split('\n').length,
-                      }).map((_, index) => (
-                        <Fragment key={index}>
-                          {(index + 1).toString().padStart(2, '0')}
-                          <br />
-                        </Fragment>
-                      ))}
-                    </div>
-                    <Highlight
-                      {...defaultProps}
-                      code={code}
-                      language={codeLanguage}
-                      theme={undefined}
-                    >
-                      {({
-                        className,
-                        style,
-                        tokens,
-                        getLineProps,
-                        getTokenProps,
-                      }) => (
-                        <pre
-                          className={clsx(
-                            className,
-                            'flex overflow-x-auto pb-6'
-                          )}
-                          style={style}
-                        >
-                          <code className="px-4">
-                            {tokens.map((line, lineIndex) => (
-                              <div key={lineIndex} {...getLineProps({ line })}>
-                                {line.map((token, tokenIndex) => (
-                                  <span
-                                    key={tokenIndex}
-                                    {...getTokenProps({ token })}
-                                  />
-                                ))}
-                              </div>
-                            ))}
-                          </code>
-                        </pre>
-                      )}
-                    </Highlight>
-                  </div>
-                </div>
-              </div>
+              {children}
             </div>
           </div>
         </div>

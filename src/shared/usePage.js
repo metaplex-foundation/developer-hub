@@ -8,12 +8,14 @@ export function usePage(pageProps) {
   const title = pageProps.markdoc?.frontmatter.title ?? 'Metaplex Documentation'
   const product = getProductFromPathname(pathname)
   const activeSection = getActiveSection(pathname, product, pageProps)
+  const activeHero = getActiveHero(pathname, product, pageProps)
 
   return {
     title,
     metaTitle: pageProps.markdoc?.frontmatter.metaTitle ?? title,
     pathname,
     product,
+    activeHero,
     activeSection,
     isIndexPage:  product?.path ? pathname === `/${product.path}` : false,
     tableOfContents: pageProps.markdoc?.content
@@ -24,7 +26,16 @@ export function usePage(pageProps) {
 
 function getProductFromPathname(pathname) {
   const path = pathname.replace(/^\/|\/$/, '').split('/')?.[0]
-  return products.find((universe) => universe.path === path)
+  return products.find((product) => product.path === path)
+}
+
+function getActiveHero(pathname, product, pageProps) {
+  if (!product?.heroes) return undefined
+  return product.heroes.find((hero) => {
+    return hero.doesPageHaveHero
+      ? hero.doesPageHaveHero({ pathname, hero, product, pageProps })
+      : pathname === hero.path
+  })?.component ?? undefined
 }
 
 function getActiveSection(pathname, product, pageProps) {

@@ -4,6 +4,7 @@ import {
   recipesSection,
   referencesSection,
 } from '@/shared/sections'
+import { Hero } from './Hero'
 import { Logo } from './Logo'
 
 export const candyMachine = {
@@ -14,6 +15,9 @@ export const candyMachine = {
   logo: Logo,
   github: 'https://github.com',
   className: 'accent-pink',
+  heroes: [
+    { path: '/candy-machine', component: Hero },
+  ],
   sections: [
     {
       ...documentationSection('candy-machine'),

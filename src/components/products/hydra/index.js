@@ -4,6 +4,7 @@ import {
   recipesSection,
   referencesSection,
 } from '@/shared/sections'
+import { Hero } from './Hero'
 import { Logo } from './Logo'
 
 export const hydra = {
@@ -14,6 +15,9 @@ export const hydra = {
   logo: Logo,
   github: 'https://github.com',
   className: 'accent-amber',
+  heroes: [
+    { path: '/hydra', component: Hero },
+  ],
   sections: [
     {
       ...documentationSection('hydra'),

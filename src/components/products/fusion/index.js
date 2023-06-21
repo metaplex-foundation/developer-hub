@@ -4,6 +4,7 @@ import {
   recipesSection,
   referencesSection,
 } from '@/shared/sections'
+import { Hero } from './Hero'
 import { Logo } from './Logo'
 
 export const fusion = {
@@ -14,6 +15,9 @@ export const fusion = {
   logo: Logo,
   github: 'https://github.com',
   className: 'accent-amber',
+  heroes: [
+    { path: '/fusion', component: Hero },
+  ],
   sections: [
     {
       ...documentationSection('fusion'),

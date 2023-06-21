@@ -4,6 +4,7 @@ import {
   recipesSection,
   referencesSection,
 } from '@/shared/sections'
+import { Hero } from './Hero'
 import { Logo } from './Logo'
 
 export const tokenAuthRules = {
@@ -14,6 +15,9 @@ export const tokenAuthRules = {
   logo: Logo,
   github: 'https://github.com',
   className: 'accent-green',
+  heroes: [
+    { path: '/token-auth-rules', component: Hero },
+  ],
   sections: [
     {
       ...documentationSection('token-auth-rules'),

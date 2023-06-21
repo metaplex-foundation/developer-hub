@@ -4,6 +4,7 @@ import {
   recipesSection,
   referencesSection,
 } from '@/shared/sections'
+import { Hero } from './Hero'
 import { Logo } from './Logo'
 
 export const bubblegum = {
@@ -14,6 +15,9 @@ export const bubblegum = {
   logo: Logo,
   github: 'https://github.com',
   className: 'accent-green',
+  heroes: [
+    { path: '/bubblegum', component: Hero },
+  ],
   sections: [
     {
       ...documentationSection('bubblegum'),

@@ -4,6 +4,7 @@ import {
   recipesSection,
   referencesSection,
 } from '@/shared/sections'
+import { Hero } from './Hero'
 import { Logo } from './Logo'
 
 export const toolbox = {
@@ -14,6 +15,9 @@ export const toolbox = {
   logo: Logo,
   github: 'https://github.com',
   className: 'accent-sky',
+  heroes: [
+    { path: '/toolbox', component: Hero },
+  ],
   sections: [
     {
       ...documentationSection('toolbox'),

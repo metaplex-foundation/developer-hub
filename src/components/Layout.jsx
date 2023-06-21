@@ -2,7 +2,6 @@ import clsx from 'clsx'
 import Link from 'next/link'
 
 import { Header } from '@/components/Header'
-import { Hero } from '@/components/Hero'
 import { Navigation } from '@/components/Navigation'
 import { Prose } from '@/components/Prose'
 import { TableOfContent } from '@/components/TableOfContent'
@@ -11,6 +10,7 @@ import { useLightense } from '@/shared/useLightense'
 
 export function Layout({ children, page }) {
   const hasNavigation = !!page.activeSection?.navigation
+  const Hero = page.activeHero
   useLightense()
   useAccentClass(page.product)
 
@@ -18,7 +18,7 @@ export function Layout({ children, page }) {
     <>
       <Header page={page} />
 
-      {page.isIndexPage && <Hero page={page} />}
+      {Hero && <Hero page={page} />}
 
       <div
         className={clsx(
