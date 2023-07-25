@@ -5,14 +5,14 @@
 To get started with this app, first install the npm dependencies:
 
 ```bash
-npm install
+pnpm install
 cp .env.example .env.local
 ```
 
 Next, run the development server:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
