@@ -11,6 +11,7 @@ import {
   transformDiagramTag,
   transformNodeTag,
 } from '@/components/diagrams'
+import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 
 const tags = {
   callout: {
@@ -52,6 +53,10 @@ const tags = {
       icon: { type: String },
       href: { type: String },
     },
+  },
+  'product-grid': {
+    selfClosing: true,
+    render: ProductGrid,
   },
   totem: {
     render: Totem,

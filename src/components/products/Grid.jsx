@@ -24,3 +24,14 @@ export function Grid({ onClick, withoutFallback, className, ...props }) {
     </ul>
   )
 }
+
+export function MarkdocGrid() {
+  return (
+    <div className="not-prose">
+      <Grid
+        className="relative md:grid-flow-col md:grid-cols-2 md:grid-rows-4"
+        withoutFallback
+      />
+    </div>
+  )
+}
