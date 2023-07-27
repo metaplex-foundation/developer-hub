@@ -18,7 +18,7 @@ export function Navigation({ product, navigation, className }) {
               className="mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200"
             >
               {section.links.map((link) => (
-                <li key={link.href} className="relative">
+                <li key={`${link.title}-${link.href}`} className="relative">
                   <Link
                     href={link.href}
                     className={clsx(

@@ -70,15 +70,22 @@ export const candyMachine = {
             { title: 'Token Payment', href: '/candy-machine/todo' },
           ],
         },
+      ],
+    },
+    {
+      id: 'sugar',
+      title: 'Sugar',
+      icon: 'SolidCake',
+      href: `/candy-machine/sugar`,
+      navigation: [
         {
-          title: 'Sugar',
+          title: 'Introduction',
           links: [
             { title: 'Overview', href: '/candy-machine/sugar' },
             { title: 'Installation', href: '/candy-machine/sugar/todo' },
             { title: 'Quick Start', href: '/candy-machine/sugar/todo' },
             { title: 'Configuration', href: '/candy-machine/sugar/todo' },
             { title: 'Upload Methods', href: '/candy-machine/sugar/todo' },
-            // The rest should live under recipes or API references.
           ],
         },
       ],
