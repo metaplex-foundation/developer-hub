@@ -23,8 +23,15 @@ export const fusion = {
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/fusion' },
-            { title: 'Getting started', href: '/fusion/getting-started' },
+            { title: 'Overview', href: '/fusion' }, // Includes accounts + instructions pages.
+            { title: 'Getting started', href: '/fusion/getting-started' }, // Use guide here.
+          ],
+        },
+        {
+          title: 'Features',
+          links: [
+            { title: 'Constraint Types', href: '/fusion/todo' },
+            { title: 'Transfer Effects', href: '/fusion/todo' },
           ],
         },
       ],
