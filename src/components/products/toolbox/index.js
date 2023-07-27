@@ -23,24 +23,13 @@ export const toolbox = {
         {
           title: 'Introduction',
           links: [
-            { title: 'Getting started', href: '/toolbox' },
-            { title: 'Installation', href: '/toolbox/installation' },
+            { title: 'Overview', href: '/toolbox' },
+            { title: 'Getting started', href: '/toolbox/getting-started' },
           ],
         },
       ],
     },
-    {
-      ...referencesSection('toolbox'),
-      navigation: [
-        {
-          title: 'Introduction',
-          links: [
-            { title: 'Getting started', href: '/toolbox/references' },
-            { title: 'Installation', href: '/toolbox/references/installation' },
-          ],
-        },
-      ],
-    },
+    { ...referencesSection('toolbox') },
     { ...recipesSection('toolbox') },
     { ...changelogSection('toolbox') },
   ],

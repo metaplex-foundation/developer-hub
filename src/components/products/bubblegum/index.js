@@ -23,27 +23,13 @@ export const bubblegum = {
         {
           title: 'Introduction',
           links: [
-            { title: 'Getting started', href: '/bubblegum' },
-            { title: 'Installation', href: '/bubblegum/installation' },
+            { title: 'Overview', href: '/bubblegum' },
+            { title: 'Getting started', href: '/bubblegum/getting-started' },
           ],
         },
       ],
     },
-    {
-      ...referencesSection('bubblegum'),
-      navigation: [
-        {
-          title: 'Introduction',
-          links: [
-            { title: 'Getting started', href: '/bubblegum/references' },
-            {
-              title: 'Installation',
-              href: '/bubblegum/references/installation',
-            },
-          ],
-        },
-      ],
-    },
+    { ...referencesSection('bubblegum') },
     { ...recipesSection('bubblegum') },
     { ...changelogSection('bubblegum') },
   ],

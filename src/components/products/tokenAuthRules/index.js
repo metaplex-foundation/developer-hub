@@ -23,27 +23,16 @@ export const tokenAuthRules = {
         {
           title: 'Introduction',
           links: [
-            { title: 'Getting started', href: '/token-auth-rules' },
-            { title: 'Installation', href: '/token-auth-rules/installation' },
-          ],
-        },
-      ],
-    },
-    {
-      ...referencesSection('token-auth-rules'),
-      navigation: [
-        {
-          title: 'Introduction',
-          links: [
-            { title: 'Getting started', href: '/token-auth-rules/references' },
+            { title: 'Overview', href: '/token-auth-rules' },
             {
-              title: 'Installation',
-              href: '/token-auth-rules/references/installation',
+              title: 'Getting started',
+              href: '/token-auth-rules/getting-started',
             },
           ],
         },
       ],
     },
+    { ...referencesSection('token-auth-rules') },
     { ...recipesSection('token-auth-rules') },
     { ...changelogSection('token-auth-rules') },
   ],

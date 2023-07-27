@@ -23,24 +23,13 @@ export const fusion = {
         {
           title: 'Introduction',
           links: [
-            { title: 'Getting started', href: '/fusion' },
-            { title: 'Installation', href: '/fusion/installation' },
+            { title: 'Overview', href: '/fusion' },
+            { title: 'Getting started', href: '/fusion/getting-started' },
           ],
         },
       ],
     },
-    {
-      ...referencesSection('fusion'),
-      navigation: [
-        {
-          title: 'Introduction',
-          links: [
-            { title: 'Getting started', href: '/fusion/references' },
-            { title: 'Installation', href: '/fusion/references/installation' },
-          ],
-        },
-      ],
-    },
+    { ...referencesSection('fusion') },
     { ...recipesSection('fusion') },
     { ...changelogSection('fusion') },
   ],

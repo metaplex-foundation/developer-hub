@@ -88,10 +88,53 @@ export const candyMachine = {
             { title: 'Upload Methods', href: '/candy-machine/sugar/todo' },
           ],
         },
+        {
+          title: 'Guides',
+          links: [
+            {
+              title: 'My First Candy Machine',
+              href: '/candy-machine/sugar/todo',
+            },
+            {
+              title: 'Preparing your Assets',
+              href: '/candy-machine/sugar/todo',
+            },
+            { title: 'Working with Sugar', href: '/candy-machine/sugar/todo' },
+            { title: 'Configuration', href: '/candy-machine/sugar/todo' },
+            {
+              title: 'Sugar with Candy Machine v3',
+              href: '/candy-machine/sugar/todo',
+            },
+            {
+              title: 'Bring Your Own Uploader',
+              href: '/candy-machine/sugar/todo',
+            },
+          ],
+        },
+        {
+          title: 'References',
+          links: [
+            { title: 'Commands', href: '/candy-machine/sugar/todo' },
+            { title: 'Configuration', href: '/candy-machine/sugar/todo' },
+            { title: 'Upload Methods', href: '/candy-machine/sugar/todo' },
+          ],
+        },
       ],
     },
     { ...referencesSection('candy-machine') },
-    { ...recipesSection('candy-machine') },
+    {
+      ...recipesSection('candy-machine'),
+      navigation: [
+        {
+          title: 'How to create a Candy Machine',
+          links: [
+            { title: 'Part 1 (Sugar)', href: '/candy-machine/recipes/todo' },
+            { title: 'Part 2 (Umi)', href: '/candy-machine/recipes/todo' },
+            { title: 'Part 2 (JS SDK)', href: '/candy-machine/recipes/todo' },
+          ],
+        },
+      ],
+    },
     { ...changelogSection('candy-machine') },
   ],
 }

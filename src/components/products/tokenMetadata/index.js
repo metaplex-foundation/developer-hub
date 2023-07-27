@@ -47,46 +47,7 @@ export const tokenMetadata = {
         },
       ],
     },
-    {
-      ...referencesSection('token-metadata'),
-      navigation: [
-        {
-          title: 'Introduction',
-          links: [
-            { title: 'Getting started', href: '/token-metadata/references' },
-            {
-              title: 'Installation',
-              href: '/token-metadata/references/installation',
-            },
-          ],
-        },
-        {
-          title: 'Core concepts',
-          links: [
-            {
-              title: 'Understanding caching',
-              href: '/token-metadata/references/understanding-caching',
-            },
-            {
-              title: 'Predicting user behavior',
-              href: '/token-metadata/references/predicting-user-behavior',
-            },
-            {
-              title: 'Basics of time-travel',
-              href: '/token-metadata/references/basics-of-time-travel',
-            },
-            {
-              title: 'Introduction to string theory',
-              href: '/token-metadata/references/introduction-to-string-theory',
-            },
-            {
-              title: 'The butterfly effect',
-              href: '/token-metadata/references/the-butterfly-effect',
-            },
-          ],
-        },
-      ],
-    },
+    { ...referencesSection('token-metadata') },
     { ...recipesSection('token-metadata') },
     { ...changelogSection('token-metadata') },
   ],

@@ -23,24 +23,13 @@ export const hydra = {
         {
           title: 'Introduction',
           links: [
-            { title: 'Getting started', href: '/hydra' },
-            { title: 'Installation', href: '/hydra/installation' },
+            { title: 'Overview', href: '/hydra' },
+            { title: 'Getting started', href: '/hydra/getting-started' },
           ],
         },
       ],
     },
-    {
-      ...referencesSection('hydra'),
-      navigation: [
-        {
-          title: 'Introduction',
-          links: [
-            { title: 'Getting started', href: '/hydra/references' },
-            { title: 'Installation', href: '/hydra/references/installation' },
-          ],
-        },
-      ],
-    },
+    { ...referencesSection('hydra') },
     { ...recipesSection('hydra') },
     { ...changelogSection('hydra') },
   ],
