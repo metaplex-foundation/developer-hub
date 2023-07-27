@@ -77,10 +77,10 @@ export function Header({ page }) {
           </Link>
         </div>
       </div>
-      {page.product?.sections && (
+      {page.product.sections && page.product.sections.length > 1 && (
         <Sections
           className="hidden gap-6 px-2 py-2 text-sm sm:px-4 lg:flex lg:px-6"
-          sections={page.product?.sections}
+          sections={page.product.sections}
           activeSectionId={page.activeSection?.id}
         />
       )}

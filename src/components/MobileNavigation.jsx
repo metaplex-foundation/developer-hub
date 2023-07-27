@@ -86,7 +86,7 @@ export function MobileNavigation({ page }) {
               <LogoWithName product={page.product} />
             </Link>
           </div>
-          {page.product.sections && (
+          {page.product.sections && page.product.sections.length > 1 && (
             <Sections
               className="-ml-2 mt-12 flex flex-col gap-2"
               sections={page.product.sections}
