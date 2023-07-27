@@ -32,11 +32,12 @@ const tags = {
       src: { type: String },
       alt: { type: String },
       caption: { type: String },
+      notRounded: { type: Boolean },
     },
-    render: ({ src, alt = '', caption }) => (
+    render: ({ src, alt = '', caption, notRounded = false }) => (
       <figure>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={alt} />
+        <img src={src} alt={alt} className={notRounded ? '' : 'rounded-lg'} />
         <figcaption>{caption}</figcaption>
       </figure>
     ),

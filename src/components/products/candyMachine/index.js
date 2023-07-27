@@ -23,7 +23,7 @@ export const candyMachine = {
         {
           title: 'Introduction',
           links: [
-            { title: 'Getting started', href: '/candy-machine' },
+            { title: 'Overview', href: '/candy-machine' },
             { title: 'Installation', href: '/candy-machine/installation' },
           ],
         },

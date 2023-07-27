@@ -1,10 +1,14 @@
 ---
 title: Overview
-pageTitle: Candy Machine - Overview
-description: "Provides a high-level overview of Candy Machines."
+metaTitle: Candy Machine - Overview
+description: Provides a high-level overview of Candy Machines.
 ---
 
-The Metaplex Protocol **Candy Machine** is the leading minting and distribution program for fair NFT collection launches on Solana. It allows creators to bring their digital assets on-chain in a secure and customisable way. {% .lead %}
+The Metaplex Protocol **Candy Machine** is the leading minting and distribution program for fair NFT collection launches on Solana. Much like its name suggests, you can think of a Candy Machine as a temporary structure which is first loaded by creators and then unloaded by buyers. It allows creators to bring their digital assets on-chain in a secure and customisable way. {% .lead %}
+
+The name refers to the vending machines that dispense candy for coins via a mechanical crank. In this case the candy are NFTs and the payment is SOL or a SPL token.
+
+{% figure src="/assets/candy-machine/candy-machine-photo.png" alt="An AI-generated photo of a typical candy machine" caption="A typical candy machine" /%}
 
 {% quick-links %}
 {% quick-link title="Creator Studio" icon="Star" href="/" description="Don't want to code? Launch your next drop by pressing buttons!" /%}
@@ -35,9 +39,7 @@ Interested? Let’s give you a little tour of how Candy Machines work!
 
 ## The Lifecycle of a Candy Machine
 
-Much like its name suggests, you can think of a Candy Machine as a temporary structure which is first loaded by creators and then unloaded by buyers.
-
-Thus, the very first step is for the creator to create a new Candy Machine and configure it however they want.
+The very first step is for the creator to create a new Candy Machine and configure it however they want.
 
 {% diagram %}
 {% node #action label="1. Create & Configure" theme="pink" /%}
@@ -160,10 +162,12 @@ What we end up with is a bot-protected Candy Machine that charges SOL, launches 
 {% node #items label="Items" /%}
 {% node #guards %}
 Guards:
+
 - Sol Payment (0.1 SOL)
 - Start Date (Jan 6th)
 - Mint Limit (1)
 - Bot Tax (0.01 SOL)
+
 {% /node %}
 {% /node %}
 
