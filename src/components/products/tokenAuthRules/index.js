@@ -10,14 +10,12 @@ import { Logo } from './Logo'
 export const tokenAuthRules = {
   name: 'Token Auth Rules',
   headline: 'NFT permissions',
-  description: 'TODO',
+  description: 'Design custom authorization rules for your NFTs.',
   path: 'token-auth-rules',
   logo: Logo,
-  github: 'https://github.com',
+  github: 'https://github.com/metaplex-foundation/mpl-token-auth-rules',
   className: 'accent-green',
-  heroes: [
-    { path: '/token-auth-rules', component: Hero },
-  ],
+  heroes: [{ path: '/token-auth-rules', component: Hero }],
   sections: [
     {
       ...documentationSection('token-auth-rules'),

@@ -5,11 +5,11 @@ import { Logo } from './Logo'
 export const global = {
   name: 'Metaplex',
   headline: 'Developer Hub',
-  description: 'TODO',
+  description: 'One place for all Metaplex developer resources.',
   path: '',
   isFallbackProduct: true,
   logo: Logo,
-  github: 'https://github.com',
+  github: 'https://github.com/metaplex-foundation',
   className: 'accent-sky',
   heroes: [{ path: '/', component: Hero }],
   sections: [

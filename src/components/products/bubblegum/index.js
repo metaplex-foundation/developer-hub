@@ -10,14 +10,12 @@ import { Logo } from './Logo'
 export const bubblegum = {
   name: 'Bubblegum',
   headline: 'Compressed NFTs',
-  description: 'TODO',
+  description: 'NFTs that scale to new orders of magnitude.',
   path: 'bubblegum',
   logo: Logo,
-  github: 'https://github.com',
+  github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',
-  heroes: [
-    { path: '/bubblegum', component: Hero },
-  ],
+  heroes: [{ path: '/bubblegum', component: Hero }],
   sections: [
     {
       ...documentationSection('bubblegum'),

@@ -13,11 +13,9 @@ export const tokenMetadata = {
   description: 'The NFT standard on Solana.',
   path: 'token-metadata',
   logo: Logo,
-  github: 'https://github.com',
+  github: 'https://github.com/metaplex-foundation/mpl-token-metadata',
   className: 'accent-green',
-  heroes: [
-    { path: '/token-metadata', component: Hero },
-  ],
+  heroes: [{ path: '/token-metadata', component: Hero }],
   sections: [
     {
       ...documentationSection('token-metadata'),

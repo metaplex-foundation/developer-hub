@@ -10,14 +10,12 @@ import { Logo } from './Logo'
 export const fusion = {
   name: 'Fusion',
   headline: 'NFTs inside NFTs',
-  description: 'TODO',
+  description: 'Create composable NFTs.',
   path: 'fusion',
   logo: Logo,
-  github: 'https://github.com',
+  github: 'https://github.com/metaplex-foundation/mpl-trifle',
   className: 'accent-amber',
-  heroes: [
-    { path: '/fusion', component: Hero },
-  ],
+  heroes: [{ path: '/fusion', component: Hero }],
   sections: [
     {
       ...documentationSection('fusion'),

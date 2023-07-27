@@ -10,14 +10,12 @@ import { Logo } from './Logo'
 export const hydra = {
   name: 'Hydra',
   headline: 'Fanout wallets',
-  description: 'Create shared wallets split between multiple shareholders.',
+  description: 'Create shared wallets, split between multiple shareholders.',
   path: 'hydra',
   logo: Logo,
-  github: 'https://github.com',
+  github: 'https://github.com/metaplex-foundation/mpl-hydra',
   className: 'accent-amber',
-  heroes: [
-    { path: '/hydra', component: Hero },
-  ],
+  heroes: [{ path: '/hydra', component: Hero }],
   sections: [
     {
       ...documentationSection('hydra'),

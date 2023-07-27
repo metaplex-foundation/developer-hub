@@ -10,14 +10,12 @@ import { Logo } from './Logo'
 export const toolbox = {
   name: 'Toolbox',
   headline: 'Core programs',
-  description: 'TODO',
+  description: 'A collection of core programs for your applications.',
   path: 'toolbox',
   logo: Logo,
-  github: 'https://github.com',
+  github: 'https://github.com/metaplex-foundation/mpl-toolbox',
   className: 'accent-sky',
-  heroes: [
-    { path: '/toolbox', component: Hero },
-  ],
+  heroes: [{ path: '/toolbox', component: Hero }],
   sections: [
     {
       ...documentationSection('toolbox'),
