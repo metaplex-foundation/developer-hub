@@ -29,21 +29,7 @@ export const candyMachine = {
         },
       ],
     },
-    {
-      ...referencesSection('candy-machine'),
-      navigation: [
-        {
-          title: 'Introduction',
-          links: [
-            { title: 'Getting started', href: '/candy-machine/references' },
-            {
-              title: 'Installation',
-              href: '/candy-machine/references/installation',
-            },
-          ],
-        },
-      ],
-    },
+    { ...referencesSection('candy-machine') },
     { ...recipesSection('candy-machine') },
     { ...changelogSection('candy-machine') },
   ],
