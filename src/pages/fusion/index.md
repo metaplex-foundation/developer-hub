@@ -1,10 +1,10 @@
 ---
-title: Getting started
-metaTitle: CacheAdvance - Never miss the cache again.
-description: Cache every single thing your app could ever do ahead of time, so your code never even has to run at all.
+title: Overview
+metaTitle: Fusion - Overview
+description: Provides a high-level overview of composable NFTs using Fusion.
 ---
 
-Learn how to get CacheAdvance set up in your project in under thirty minutes or it's free. {% .lead %}
+Dummy text. Learn how to get CacheAdvance set up in your project in under thirty minutes or it's free. {% .lead %}
 
 {% quick-links %}
 

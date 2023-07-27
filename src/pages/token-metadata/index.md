@@ -1,10 +1,10 @@
 ---
-title: Getting started
-metaTitle: CacheAdvance - Never miss the cache again.
-description: Cache every single thing your app could ever do ahead of time, so your code never even has to run at all.
+title: Overview
+metaTitle: Token Metadata - Overview
+description: Provides a high-level overview of the Solana NFT standard.
 ---
 
-Learn how to get CacheAdvance set up in your project in under thirty minutes or it's free. {% .lead %}
+Dummy text. Learn how to get CacheAdvance set up in your project in under thirty minutes or it's free. {% .lead %}
 
 {% quick-links %}
 
