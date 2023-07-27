@@ -19,8 +19,8 @@ export const global = {
         {
           title: 'Introduction',
           links: [
-            { title: 'Getting started', href: '/' },
-            { title: 'Installation', href: '/installation' },
+            { title: 'Overview', href: '/' },
+            { title: 'Our products', href: '/products' },
           ],
         },
       ],
