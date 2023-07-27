@@ -23,6 +23,24 @@ export const global = {
             { title: 'Our products', href: '/products' },
           ],
         },
+        {
+          title: 'Resources',
+          links: [
+            { title: 'Understanding Programs', href: '/todo' },
+            { title: 'RPC Providers', href: '/todo' },
+            { title: 'Storage Providers', href: '/todo' },
+            { title: 'Stability Index', href: '/todo' },
+            { title: 'Protocol Fees', href: '/todo' },
+          ],
+        },
+        {
+          title: 'Community',
+          links: [
+            { title: 'Community Guides', href: '/todo' },
+            { title: 'Security', href: '/todo' },
+            { title: 'Contact Us', href: '/todo' },
+          ],
+        },
       ],
     },
   ],

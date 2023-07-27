@@ -94,6 +94,7 @@ export function MobileNavigation({ page }) {
             />
           )}
           <Navigation
+            product={page.product}
             navigation={page.activeSection?.navigation ?? []}
             className="mt-12 px-1"
           />

@@ -34,6 +34,7 @@ export function Layout({ children, page }) {
             <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" />
             <div className="sticky top-[7rem] -ml-0.5 h-[calc(100vh-7rem)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
               <Navigation
+                product={page.product}
                 navigation={page.activeSection.navigation}
                 className="w-64 pr-8 xl:w-72 xl:pr-16"
               />

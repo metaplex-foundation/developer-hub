@@ -24,7 +24,61 @@ export const candyMachine = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/candy-machine' },
-            { title: 'Installation', href: '/candy-machine/installation' },
+            {
+              title: 'Getting Started',
+              href: '/candy-machine/getting-started',
+              // Subpages: /js /rust, etc.
+            },
+          ],
+        },
+        {
+          title: 'Features',
+          links: [
+            { title: 'Candy Machine Settings', href: '/candy-machine/todo' },
+            { title: 'Managing Candy Machines', href: '/candy-machine/todo' },
+            { title: 'Inserting Items', href: '/candy-machine/todo' },
+            { title: 'Candy Guards', href: '/candy-machine/todo' },
+            { title: 'Guard Groups', href: '/candy-machine/todo' },
+            {
+              title: 'Special Guard Instructions',
+              href: '/candy-machine/todo',
+            },
+            { title: 'Minting', href: '/candy-machine/todo' },
+            { title: 'Programmable NFTs', href: '/candy-machine/todo' },
+          ],
+        },
+        {
+          title: 'Available Guards',
+          links: [
+            { title: 'Address Gate', href: '/candy-machine/todo' },
+            { title: 'Allow List', href: '/candy-machine/todo' },
+            { title: 'Bot Tax', href: '/candy-machine/todo' },
+            { title: 'End Date', href: '/candy-machine/todo' },
+            { title: 'Freeze Sol Payment', href: '/candy-machine/todo' },
+            { title: 'Freeze Token Payment', href: '/candy-machine/todo' },
+            { title: 'Gatekeeper', href: '/candy-machine/todo' },
+            { title: 'Mint Limit', href: '/candy-machine/todo' },
+            { title: 'NFT Burn', href: '/candy-machine/todo' },
+            { title: 'NFT Gate', href: '/candy-machine/todo' },
+            { title: 'NFT Payment', href: '/candy-machine/todo' },
+            { title: 'Redeemed Amount', href: '/candy-machine/todo' },
+            { title: 'Sol Payment', href: '/candy-machine/todo' },
+            { title: 'Start Date', href: '/candy-machine/todo' },
+            { title: 'Third Party Signer', href: '/candy-machine/todo' },
+            { title: 'Token Burn', href: '/candy-machine/todo' },
+            { title: 'Token Gate', href: '/candy-machine/todo' },
+            { title: 'Token Payment', href: '/candy-machine/todo' },
+          ],
+        },
+        {
+          title: 'Sugar',
+          links: [
+            { title: 'Overview', href: '/candy-machine/sugar' },
+            { title: 'Installation', href: '/candy-machine/sugar/todo' },
+            { title: 'Quick Start', href: '/candy-machine/sugar/todo' },
+            { title: 'Configuration', href: '/candy-machine/sugar/todo' },
+            { title: 'Upload Methods', href: '/candy-machine/sugar/todo' },
+            // The rest should live under recipes or API references.
           ],
         },
       ],

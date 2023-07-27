@@ -23,97 +23,26 @@ export const tokenMetadata = {
         {
           title: 'Introduction',
           links: [
-            { title: 'Getting started', href: '/token-metadata' },
-            { title: 'Installation', href: '/token-metadata/installation' },
+            { title: 'Overview', href: '/token-metadata' },
+            {
+              title: 'Getting Started',
+              href: '/token-metadata/getting-started',
+              // Subpages: /js /rust, etc.
+            },
+            { title: 'Token Standard', href: '/token-metadata/todo' },
+            { title: 'Definitions', href: '/token-metadata/todo' },
+            { title: 'FAQ', href: '/token-metadata/todo' },
           ],
         },
         {
-          title: 'Core concepts',
+          title: 'Features',
           links: [
-            {
-              title: 'Understanding caching',
-              href: '/token-metadata/understanding-caching',
-            },
-            {
-              title: 'Predicting user behavior',
-              href: '/token-metadata/predicting-user-behavior',
-            },
-            {
-              title: 'Basics of time-travel',
-              href: '/token-metadata/basics-of-time-travel',
-            },
-            {
-              title: 'Introduction to string theory',
-              href: '/token-metadata/introduction-to-string-theory',
-            },
-            {
-              title: 'The butterfly effect',
-              href: '/token-metadata/the-butterfly-effect',
-            },
-          ],
-        },
-        {
-          title: 'Advanced guides',
-          links: [
-            {
-              title: 'Writing plugins',
-              href: '/token-metadata/writing-plugins',
-            },
-            {
-              title: 'Neuralink integration',
-              href: '/token-metadata/neuralink-integration',
-            },
-            {
-              title: 'Temporal paradoxes',
-              href: '/token-metadata/temporal-paradoxes',
-            },
-            { title: 'Testing', href: '/token-metadata/testing' },
-            {
-              title: 'Compile-time caching',
-              href: '/token-metadata/compile-time-caching',
-            },
-            {
-              title: 'Predictive data generation',
-              href: '/token-metadata/predictive-data-generation',
-            },
-          ],
-        },
-        {
-          title: 'API reference',
-          links: [
-            {
-              title: 'CacheAdvance.predict()',
-              href: '/token-metadata/cacheadvance-predict',
-            },
-            {
-              title: 'CacheAdvance.flush()',
-              href: '/token-metadata/cacheadvance-flush',
-            },
-            {
-              title: 'CacheAdvance.revert()',
-              href: '/token-metadata/cacheadvance-revert',
-            },
-            {
-              title: 'CacheAdvance.regret()',
-              href: '/token-metadata/cacheadvance-regret',
-            },
-          ],
-        },
-        {
-          title: 'Contributing',
-          links: [
-            {
-              title: 'How to contribute',
-              href: '/token-metadata/how-to-contribute',
-            },
-            {
-              title: 'Architecture guide',
-              href: '/token-metadata/architecture-guide',
-            },
-            {
-              title: 'Design principles',
-              href: '/token-metadata/design-principles',
-            },
+            { title: 'Certified Collections', href: '/token-metadata/todo' },
+            { title: 'Delegated Authorities', href: '/token-metadata/todo' },
+            { title: 'Printed Editions', href: '/token-metadata/todo' },
+            { title: 'Programmable NFTs', href: '/token-metadata/todo' },
+            { title: 'NFT Escrow', href: '/token-metadata/todo' },
+            { title: 'Using NFTs (deprecated)', href: '/token-metadata/todo' },
           ],
         },
       ],
