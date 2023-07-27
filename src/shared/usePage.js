@@ -6,7 +6,7 @@ import { products } from '@/components/products'
 export function usePage(pageProps) {
   const { pathname } = useRouter()
   const title = pageProps.markdoc?.frontmatter.title ?? 'Metaplex Documentation'
-  const product = getProductFromPathname(pathname)
+  const product = getActiveProduct(pathname, pageProps)
   const activeSection = getActiveSection(pathname, product, pageProps)
   const activeHero = getActiveHero(pathname, product, pageProps)
 
@@ -17,25 +17,41 @@ export function usePage(pageProps) {
     product,
     activeHero,
     activeSection,
-    isIndexPage:  product?.path ? pathname === `/${product.path}` : false,
+    isIndexPage: product?.path ? pathname === `/${product.path}` : false,
     tableOfContents: pageProps.markdoc?.content
       ? parseTableOfContents(pageProps.markdoc.content)
       : [],
   }
 }
 
-function getProductFromPathname(pathname) {
-  const path = pathname.replace(/^\/|\/$/, '').split('/')?.[0]
-  return products.find((product) => product.path === path)
+function getActiveProduct(pathname, pageProps) {
+  const pathnameFirstSegment = pathname.replace(/^\/|\/$/, '').split('/')?.[0]
+  const foundProduct = products.find((product) => {
+    const defaultIsPageFromProduct = () => {
+      if (product.isFallbackProduct) return false
+      return product.path === pathnameFirstSegment
+    }
+    return product.isPageFromProduct
+      ? product.isPageFromProduct({ pathname, product, pageProps })
+      : defaultIsPageFromProduct()
+  })
+  if (foundProduct) return foundProduct
+
+  const fallbackProduct = products.find((product) => product.isFallbackProduct)
+  if (fallbackProduct) return fallbackProduct
+
+  throw new Error('No product found')
 }
 
 function getActiveHero(pathname, product, pageProps) {
   if (!product?.heroes) return undefined
-  return product.heroes.find((hero) => {
-    return hero.doesPageHaveHero
-      ? hero.doesPageHaveHero({ pathname, hero, product, pageProps })
-      : pathname === hero.path
-  })?.component ?? undefined
+  return (
+    product.heroes.find((hero) => {
+      return hero.doesPageHaveHero
+        ? hero.doesPageHaveHero({ pathname, hero, product, pageProps })
+        : pathname === hero.path
+    })?.component ?? undefined
+  )
 }
 
 function getActiveSection(pathname, product, pageProps) {
@@ -45,16 +61,21 @@ function getActiveSection(pathname, product, pageProps) {
   const foundSection = product.sections.find((section) => {
     const defaultIsPageFromSection = () => {
       if (section.isFallbackSection) return false
-      return pathname.startsWith(`${section.href}/`) || pathname === section.href
+      return (
+        pathname.startsWith(`${section.href}/`) || pathname === section.href
+      )
     }
     return section.isPageFromSection
       ? section.isPageFromSection({ pathname, section, product, pageProps })
       : defaultIsPageFromSection()
   })
-  const fallbackSection = product.sections.find((section) => section.isFallbackSection)
-  const activeSection = foundSection || fallbackSection
-    ? { ...(foundSection ?? fallbackSection) }
-    : undefined
+  const fallbackSection = product.sections.find(
+    (section) => section.isFallbackSection
+  )
+  const activeSection =
+    foundSection || fallbackSection
+      ? { ...(foundSection ?? fallbackSection) }
+      : undefined
 
   // Add navigation helpers.
   if (activeSection && activeSection.navigation) {

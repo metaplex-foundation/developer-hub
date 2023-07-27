@@ -86,10 +86,10 @@ export function MobileNavigation({ page }) {
               <LogoWithName product={page.product} />
             </Link>
           </div>
-          {page.product?.sections && (
+          {page.product.sections && (
             <Sections
-              className="flex flex-col gap-2 mt-12 -ml-2"
-              sections={page.product?.sections}
+              className="-ml-2 mt-12 flex flex-col gap-2"
+              sections={page.product.sections}
               activeSectionId={page.activeSection?.id}
             />
           )}

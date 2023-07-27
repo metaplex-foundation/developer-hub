@@ -1,9 +1,13 @@
 import clsx from 'clsx'
 import { LogoWithName } from './Logo'
-import { products } from './index'
+import { products as allProducts } from './index'
 import Link from 'next/link'
 
-export function Grid({ onClick, className, ...props }) {
+export function Grid({ onClick, withoutFallback, className, ...props }) {
+  const products = withoutFallback
+    ? allProducts.filter((product) => !product.isFallbackProduct)
+    : allProducts
+
   return (
     <ul className={clsx(['grid gap-3', className])} {...props}>
       {products.map((product) => (
