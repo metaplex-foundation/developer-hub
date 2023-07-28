@@ -188,7 +188,38 @@ More precisely, NFTs in Solana are Mint Accounts with the following characterist
 
 What we end up with is a token that cannot be traded with something of the same kind, which is the definition of a Non-Fungible Token (NFT).
 
-![A simplified version of the previous diagram: no data attributes on the Metadata Account nor JSON Object cloud displayed. Instead the Mint Account displays the following attributes: "Mint Authority = None", "Supply = 1" and "Decimals = 0". The Token Account displays only one attribute: "Amount = 1".](/assets/programs/token-metadata/Token-Metadata-Overview-4.png#radius)
+{% diagram %}
+{% node %}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
+{% /node %}
+
+{% node x="200" parent="wallet" %}
+{% node #token label="Token Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node label="Amount = 1" /%}
+{% /node %}
+
+{% node x="200" parent="token" %}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node label="Mint Authority = None" /%}
+{% node label="Supply = 1" /%}
+{% node label="Decimals = 0" /%}
+{% /node %}
+
+{% node #metadata-pda parent="mint" x="41" y="-80" label="PDA" theme="crimson" /%}
+
+{% node parent="metadata-pda" x="-240" %}
+{% node #metadata label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% /node %}
+
+{% edge from="wallet" to="token" /%}
+{% edge from="mint" to="token" /%}
+{% edge from="mint" to="metadata-pda" path="straight" /%}
+{% edge from="metadata-pda" to="metadata" path="straight" /%}
+{% /diagram %}
 
 In this particular yet popular case, the goal of the Metadata Account is to provide the actual data of that NFT to make it a useful Digital Asset.
 
@@ -198,7 +229,53 @@ Before creating this account, the Token Metadata program will ensure the special
 
 Thus, **the existence of the Master Edition account acts as proof of Non-Fungibility** for that Mint Account.
 
-![Same diagram as the previous one but the Mint Account points to an additional "PDA" pill which itself points to a new brown rectangle labelled "Master Edition Account". The Mint account also displays the following updated data attributes: "Mint Authority = Edition" and "Freeze Authority = Edition" where both of these attributes point to the new PDA.](/assets/programs/token-metadata/Token-Metadata-Overview-5.png#radius)
+{% diagram %}
+{% node %}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
+{% /node %}
+
+{% node x="200" parent="wallet" %}
+{% node #token label="Token Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node label="Amount = 1" /%}
+{% /node %}
+
+{% node x="200" parent="token" %}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node #mint-authority label="Mint Authority = Edition" /%}
+{% node label="Supply = 1" /%}
+{% node label="Decimals = 0" /%}
+{% node #freeze-authority label="Freeze Authority = Edition" /%}
+{% /node %}
+
+{% node #metadata-pda parent="mint" x="-10" y="-80" label="PDA" theme="crimson" /%}
+
+{% node parent="metadata-pda" x="-240" %}
+{% node #metadata label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% /node %}
+
+{% node #master-edition-pda parent="mint" x="-10" y="-220" label="PDA" theme="crimson" /%}
+
+{% node parent="master-edition-pda" x="-240" %}
+{% node #master-edition label="Master Edition Account" theme="crimson" /%}
+{% node label="Owner: Token edition Program" theme="dimmed" /%}
+{% node label="Key = MasterEditionV2" /%}
+{% node label="Supply" /%}
+{% node label="Max Supply" /%}
+{% /node %}
+
+{% edge from="wallet" to="token" /%}
+{% edge from="mint" to="token" /%}
+{% edge from="mint" to="metadata-pda" /%}
+{% edge from="mint" to="master-edition-pda" /%}
+{% edge from="metadata-pda" to="metadata" path="straight" /%}
+{% edge from="master-edition-pda" to="master-edition" path="straight" /%}
+{% edge from="mint-authority" to="master-edition-pda" dashed=true arrow="none" fromPosition="right" toPosition="right" animated=true /%}
+{% edge from="freeze-authority" to="master-edition-pda" dashed=true arrow="none" fromPosition="right" toPosition="right" animated=true /%}
+{% /diagram %}
 
 ## Printing Editions
 
