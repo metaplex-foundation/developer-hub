@@ -60,7 +60,7 @@ Whilst Mint Accounts contain a few data attributes such as its current supply, i
 
 This is why the Token Metadata program offers a **Metadata Account** that attaches itself to a Mint Account via a PDA.
 
-{% diagram %}
+{% diagram height="h-64 md:h-[500px]" %}
 {% node %}
 {% node #wallet label="Wallet Account" theme="indigo" /%}
 {% node label="Owner: System Program" theme="dimmed" /%}
@@ -114,7 +114,65 @@ By attaching more data to the Mint Account, **the Token Metadata program is able
 
 One important attribute of the Metadata Account is the `URI` attribute that points to a JSON file off-chain. This is used to safely provide additional data whilst not being constrained by the fees involved in storing on-chain data. That JSON file [follows a certain standard](/token-metadata/token-standard) that anyone can use to find useful information on tokens.
 
-![Same diagram as the previous one with an arrow pointing out of the "URI" attribute of the Metadata Account, towards a cloud labelled "Off-chain JSON Object". A list of example attributes is displayed below that cloud: "Name, Description, Image, Animation URL, Attributes, etc.".](/assets/programs/token-metadata/Token-Metadata-Overview-3.png#radius)
+{% diagram height="h-64 md:h-[500px]" %}
+{% node %}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
+{% /node %}
+
+{% node x="200" parent="wallet" %}
+{% node #token label="Token Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% /node %}
+
+{% node x="200" parent="token" %}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% /node %}
+
+{% node #metadata-pda parent="mint" x="41" y="-100" label="PDA" theme="crimson" /%}
+
+{% node parent="metadata-pda" x="-240" y="-300" %}
+{% node #metadata label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% node label="Key = MetadataV1" /%}
+{% node label="Update Authority" /%}
+{% node label="Mint" /%}
+{% node label="Name" /%}
+{% node label="Symbol" /%}
+{% node #uri label="URI" /%}
+{% node label="Seller Fee Basis Points" /%}
+{% node label="Creators" /%}
+{% node label="Primary Sale Happened" /%}
+{% node label="Is Mutable" /%}
+{% node label="Edition Nonce" /%}
+{% node label="Token Standard" /%}
+{% node label="Collection" /%}
+{% node label="Uses" /%}
+{% node label="Collection Details" /%}
+{% node label="Programmable Configs" /%}
+{% /node %}
+
+{% node parent="uri" x="-200" y="-23" %}
+{% node #json theme="slate" %}
+Off-chain \
+JSON Metadata
+{% /node %}
+{% node label="Name" /%}
+{% node label="Description" /%}
+{% node label="Image" /%}
+{% node label="Animated URL" /%}
+{% node label="Attributes" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% edge from="wallet" to="token" /%}
+{% edge from="mint" to="token" /%}
+{% edge from="mint" to="metadata-pda" path="straight" /%}
+{% edge from="metadata-pda" to="metadata" /%}
+{% edge from="uri" to="json" path="straight" /%}
+
+{% /diagram %}
 
 Note that, this JSON file can be stored using a permanent storage solution such as Arweave to ensure it cannot be updated. Additionally, one can use the `Is Mutable` attribute of the Metadata Account to make it immutable and, therefore, forbid the `URI` attribute — and other attributes such as `Name` and `Creators` — to ever be changed. Using this combination, we can guarantee the immutability of the off-chain JSON file.
 

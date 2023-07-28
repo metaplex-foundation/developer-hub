@@ -90,6 +90,7 @@ const tags = {
     transform: transformDiagramTag,
     attributes: {
       type: { type: String },
+      height: { type: String },
     },
   },
   node: {
