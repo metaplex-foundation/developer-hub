@@ -442,7 +442,43 @@ It is then up to the creators to define custom operation-specific authorization 
 
 You can [read more about Programmable NFTs here](https://github.com/metaplex-foundation/metaplex-program-library/blob/master/token-metadata/program/ProgrammableNFTGuide.md).
 
-![Diagram of a Programmable NFT listing all the accounts they require.](/assets/programs/token-metadata/Token-Metadata-Overview-8.png#radius)
+{% diagram %}
+{% node %}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
+{% /node %}
+
+{% node x="200" parent="wallet" %}
+{% node #token label="Token Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node label="State = Frozen" /%}
+{% /node %}
+
+{% node x="200" parent="token" %}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% /node %}
+
+{% node #metadata-pda parent="mint" x="41" y="-120" label="PDA" theme="crimson" /%}
+
+{% node parent="metadata-pda" x="-230" %}
+{% node #metadata label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% node label="..." /%}
+{% node #programmable-configs label="Programmable Configs" /%}
+{% /node %}
+
+{% node parent="metadata" x="-260" y="0" %}
+{% node #ruleset label="RuleSet Account" theme="crimson" /%}
+{% node label="Owner: Token Auth Rules Program" theme="dimmed" /%}
+{% /node %}
+
+{% edge from="wallet" to="token" /%}
+{% edge from="mint" to="token" /%}
+{% edge from="mint" to="metadata-pda" path="straight" /%}
+{% edge from="metadata-pda" to="metadata" path="straight" /%}
+{% edge from="programmable-configs" to="ruleset" arrow="none" dashed=true /%}
+{% /diagram %}
 
 ## And a lot more
 
