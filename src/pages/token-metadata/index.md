@@ -291,7 +291,60 @@ Each Print NFT is made of its own Mint Account and its own Metadata Account whos
 
 Note that the Master Edition account and the Edition account share the same seeds for their PDA. That means an NFT can be one or the other but not both.
 
-![Same diagram as the previous one but with a new brown rectangle labelled "Edition Account". The "PDA" pill pointing to the Master Edition Account now also points to the new Edition Account with a big "OR" written on the arrow to show it points to one or the other.](/assets/programs/token-metadata/Token-Metadata-Overview-6.png#radius)
+{% diagram %}
+{% node %}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
+{% /node %}
+
+{% node x="200" parent="wallet" %}
+{% node #token label="Token Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node label="Amount = 1" /%}
+{% /node %}
+
+{% node x="200" parent="token" %}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node #mint-authority label="Mint Authority = Edition" /%}
+{% node label="Supply = 1" /%}
+{% node label="Decimals = 0" /%}
+{% node #freeze-authority label="Freeze Authority = Edition" /%}
+{% /node %}
+
+{% node #metadata-pda parent="mint" x="-10" y="-80" label="PDA" theme="crimson" /%}
+
+{% node parent="metadata-pda" x="-280" %}
+{% node #metadata label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% /node %}
+
+{% node #master-edition-pda parent="mint" x="-10" y="-160" label="PDA" theme="crimson" /%}
+
+{% node parent="master-edition-pda" x="-280" %}
+{% node #master-edition label="Master Edition Account" theme="crimson" /%}
+{% node label="Owner: Token edition Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="master-edition" y="-140" %}
+{% node #edition label="Edition Account" theme="crimson" /%}
+{% node label="Owner: Token edition Program" theme="dimmed" /%}
+{% node label="Key = EditionV1" /%}
+{% node #edition-parent label="Parent" /%}
+{% node label="Edition" /%}
+{% /node %}
+
+{% edge from="wallet" to="token" /%}
+{% edge from="mint" to="token" /%}
+{% edge from="mint" to="metadata-pda" /%}
+{% edge from="mint" to="master-edition-pda" /%}
+{% edge from="metadata-pda" to="metadata" path="straight" /%}
+{% edge from="master-edition-pda" to="master-edition" path="straight" /%}
+{% edge from="master-edition-pda" to="edition" fromPosition="left" label="OR" /%}
+{% edge from="mint-authority" to="master-edition-pda" dashed=true arrow="none" fromPosition="right" toPosition="right" /%}
+{% edge from="freeze-authority" to="master-edition-pda" dashed=true arrow="none" fromPosition="right" toPosition="right" /%}
+{% edge from="edition-parent" to="master-edition" dashed=true arrow="none" fromPosition="left" toPosition="left" /%}
+{% /diagram %}
 
 ## Semi-Fungible Tokens
 
@@ -309,7 +362,73 @@ To safely identify the fungibility of a token — and, thus, the standard that w
 
 You can [read more about these standards here](/token-metadata/token-standard).
 
-![This image shows three diagrams representing all three fungibility standards. From top to bottom. "NonFungible": Shows a Mint Account with the following attributes "Mint Authority = Edition", "Supply = 1", "Decimals = 0" and "Freeze Authority = Edition". It points to two PDAs, one pointing to a Metadata Account and one pointing to both a Master Edition Account and an Edition Account with a big OR in the middle. "FungibleAsset": Shows a Mint Account with the following attribute: "Decimals = 0". It points to a single PDA which points to a Metadata Account. "Fungible": Shows the same diagram as the "FungibleAsset" diagram but instead of "Decimals = 0", it displays "Decimals > 0" under the Mint Account.](/assets/programs/token-metadata/Token-Metadata-Overview-7.png#radius)
+{% diagram height="h-64 md:h-[500px]" %}
+{% node %}
+{% node #mint-1 label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node label="Mint Authority = Edition" /%}
+{% node label="Supply = 1" /%}
+{% node label="Decimals = 0" /%}
+{% node label="Freeze Authority = Edition" /%}
+{% /node %}
+{% node parent="mint-1" y="-20" x="-10" label="NonFungible" theme="transparent" /%}
+
+{% node parent="mint-1" x="220" #metadata-1-pda label="PDA" theme="crimson" /%}
+{% node parent="metadata-1-pda" x="140" %}
+{% node #metadata-1 label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% node label="Token Standard = NonFungible" /%}
+{% /node %}
+
+{% node parent="mint-1" x="220" y="100" #master-edition-pda label="PDA" theme="crimson" /%}
+{% node parent="master-edition-pda" x="140" %}
+{% node #master-edition label="Master Edition Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% /node %}
+{% node parent="master-edition" y="80" %}
+{% node #edition label="Edition Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="mint-1" y="260" %}
+{% node #mint-2 label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node label="Decimals = 0" /%}
+{% /node %}
+{% node parent="mint-2" y="-20" x="-10" label="FungibleAsset" theme="transparent" /%}
+
+{% node parent="mint-2" x="220" #metadata-2-pda label="PDA" theme="crimson" /%}
+{% node parent="metadata-2-pda" x="140" %}
+{% node #metadata-2 label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% node label="Token Standard = FungibleAsset" /%}
+{% /node %}
+
+{% node parent="mint-2" y="120" %}
+{% node #mint-3 label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node label="Decimals > 0" /%}
+{% /node %}
+{% node parent="mint-3" y="-20" x="-10" label="Fungible" theme="transparent" /%}
+
+{% node parent="mint-3" x="220" #metadata-3-pda label="PDA" theme="crimson" /%}
+{% node parent="metadata-3-pda" x="140" %}
+{% node #metadata-3 label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% node label="Token Standard = Fungible" /%}
+{% /node %}
+
+{% edge from="mint-1" to="metadata-1-pda" path="straight" /%}
+{% edge from="metadata-1-pda" to="metadata-1" path="straight" /%}
+{% edge from="mint-1" to="master-edition-pda" /%}
+{% edge from="master-edition-pda" to="master-edition" path="straight" /%}
+{% edge from="master-edition-pda" to="edition" label="OR" /%}
+
+{% edge from="mint-2" to="metadata-2-pda" path="straight" /%}
+{% edge from="metadata-2-pda" to="metadata-2" path="straight" /%}
+{% edge from="mint-3" to="metadata-3-pda" path="straight" /%}
+{% edge from="metadata-3-pda" to="metadata-3" path="straight" /%}
+{% /diagram %}
 
 ## Programmable NFTs
 
