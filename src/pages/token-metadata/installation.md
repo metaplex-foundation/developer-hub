@@ -20,8 +20,9 @@ This is a prose section inside the totem.
 It is made of [multiple](#) paragraphs and a `code` block.
 
 ```js
-export const foo = 3;
+export const foo = 3
 ```
+
 {% /totem-prose %}
 
 ```js
@@ -39,16 +40,18 @@ export default {
 This is an accordion section inside the totem.
 
 ```js
-export const foo = 3;
+export const foo = 3
 ```
+
 {% /totem-accordion %}
 
 {% totem-accordion title="Here's another example" %}
 There can be many of them.
 
 ```js
-export const foo = 42;
+export const foo = 42
 ```
+
 {% /totem-accordion %}
 
 {% /totem %}
@@ -89,28 +92,36 @@ Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut par
 {% dialect-switcher title="Some optional title here that can flex wrap" %}
 
 {% dialect title="JavaScript" id="js" %}
+
 ```js
-export const foo = 3;
+export const foo = 3
 ```
+
 {% /dialect %}
 
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 struct Foo {}
 let foo = 3;
 ```
+
 {% /dialect %}
 
 {% dialect title="PHP" id="php" %}
+
 ```php
 $foo = 3;
 ```
+
 {% /dialect %}
 
 {% dialect title="Python" id="python" %}
+
 ```python
 foo = 3
 ```
+
 {% /dialect %}
 
 {% /dialect-switcher %}
@@ -134,8 +145,9 @@ This is a prose section inside the totem.
 It is made of [multiple](#) paragraphs and a `code` block.
 
 ```js
-export const foo = 3;
+export const foo = 3
 ```
+
 {% /totem-prose %}
 
 ```js
@@ -153,16 +165,18 @@ export default {
 This is an accordion section inside the totem.
 
 ```js
-export const foo = 3;
+export const foo = 3
 ```
+
 {% /totem-accordion %}
 
 {% totem-accordion title="Here's another example" %}
 There can be many of them.
 
 ```js
-export const foo = 42;
+export const foo = 42
 ```
+
 {% /totem-accordion %}
 
 {% /totem %}
@@ -175,18 +189,23 @@ We can add some text too.
 struct Foo {}
 let foo = 3;
 ```
+
 {% /dialect %}
 
 {% dialect title="PHP" id="php" %}
+
 ```php
 $foo = 3;
 ```
+
 {% /dialect %}
 
 {% dialect title="Python" id="python" %}
+
 ```python
 foo = 3
 ```
+
 {% /dialect %}
 
 {% /dialect-switcher %}

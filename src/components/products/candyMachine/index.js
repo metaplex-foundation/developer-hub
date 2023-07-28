@@ -89,7 +89,7 @@ export const candyMachine = {
           ],
         },
         {
-          title: 'Guides',
+          title: 'Commands',
           links: [
             {
               title: 'My First Candy Machine',

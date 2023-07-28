@@ -29,20 +29,25 @@ export const tokenMetadata = {
               href: '/token-metadata/getting-started',
               // Subpages: /js /rust, etc.
             },
-            { title: 'Token Standard', href: '/token-metadata/todo' },
-            { title: 'Definitions', href: '/token-metadata/todo' },
             { title: 'FAQ', href: '/token-metadata/todo' },
           ],
         },
         {
           title: 'Features',
           links: [
-            { title: 'Certified Collections', href: '/token-metadata/todo' },
-            { title: 'Delegated Authorities', href: '/token-metadata/todo' },
-            { title: 'Printed Editions', href: '/token-metadata/todo' },
+            { title: 'Token Standards (Assets)', href: '/token-metadata/todo' }, // Include "Non-fungible tokens" definition.
+            { title: 'Minting Assets', href: '/token-metadata/todo' }, // Uploading off-chain data section + Create + Mint.
+            { title: 'Updating Assets', href: '/token-metadata/todo' },
+            { title: 'Transferring Assets', href: '/token-metadata/todo' },
+            { title: 'Burning Assets', href: '/token-metadata/todo' },
+            { title: 'Printed Editions', href: '/token-metadata/todo' }, // Include "Definitions" content.
+            { title: 'Verified Collections', href: '/token-metadata/todo' },
+            { title: 'Verified Creators', href: '/token-metadata/todo' },
+            { title: 'Delegated Authorities', href: '/token-metadata/todo' }, // Delegate + Revoke + Delegated transfer and burn.
+            { title: 'Locking Assets', href: '/token-metadata/todo' },
             { title: 'Programmable NFTs', href: '/token-metadata/todo' },
             { title: 'NFT Escrow', href: '/token-metadata/todo' },
-            { title: 'Using NFTs (deprecated)', href: '/token-metadata/todo' },
+            { title: 'Asset usage (deprecated)', href: '/token-metadata/todo' },
           ],
         },
       ],

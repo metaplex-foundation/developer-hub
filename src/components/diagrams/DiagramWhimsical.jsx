@@ -63,6 +63,10 @@ const themes = {
     node: 'border-[#f7c325] bg-[#fdf3d3] dark:bg-[#f7c325]/20',
     edge: '#f7c325',
   },
+  transparent: {
+    node: 'border-transparent bg-none text-slate-500 dark:text-slate-400',
+    edge: 'transparent',
+  },
 }
 
 function TransparentHandles() {
@@ -83,6 +87,7 @@ function TransparentHandles() {
 }
 
 export const Node = memo(function Node({ data }) {
+  const theme = data.theme ?? 'default'
   const tree = data.tree
   const hasParent = tree.parent !== null
   const hasChildren = tree.children?.length > 0
@@ -112,36 +117,37 @@ export const Node = memo(function Node({ data }) {
 
   return (
     <div
-      className={clsx(
-        'h-full w-full bg-white text-slate-700 dark:bg-slate-700 dark:text-slate-300',
-        {
-          'rounded-t-md': isFirstSibling,
-          'rounded-b-md': isLastSibling,
-          'rounded-md shadow': !hasParent,
-        }
-      )}
+      className={clsx('h-full w-full text-slate-700 dark:text-slate-300', {
+        'rounded-t-md': isFirstSibling,
+        'rounded-b-md': isLastSibling,
+        'rounded-md': !hasParent,
+        shadow: !hasParent && theme !== 'transparent',
+        'bg-white dark:bg-slate-700': theme !== 'transparent',
+      })}
     >
       <div
-        className={clsx(
-          'h-full w-full border',
-          themes[data.theme ?? 'default'].node,
-          {
-            'rounded-t-md': isFirstSibling,
-            'rounded-b-md': isLastSibling,
-            'rounded-md': !hasParent,
-            '-mt-px': !isFirstSibling,
-          }
-        )}
+        className={clsx('h-full w-full border', themes[theme].node, {
+          'rounded-t-md': isFirstSibling,
+          'rounded-b-md': isLastSibling,
+          'rounded-md': !hasParent,
+          '-mt-px': !isFirstSibling,
+        })}
       >
-        <div
-          className={clsx({
-            'px-4 py-1 text-center font-medium': !hasParent || isFirstSibling,
-            'px-2 py-0.5 text-left text-xs leading-tight':
-              hasParent && !isFirstSibling,
-          })}
-        >
-          <LabelOrContent data={data} />
-        </div>
+        {theme === 'transparent' ? (
+          <div className="px-2 py-0.5 text-left text-xs leading-tight">
+            <LabelOrContent data={data} />
+          </div>
+        ) : (
+          <div
+            className={clsx({
+              'px-4 py-1 text-center font-medium': !hasParent || isFirstSibling,
+              'px-2 py-0.5 text-left text-xs leading-tight':
+                hasParent && !isFirstSibling,
+            })}
+          >
+            <LabelOrContent data={data} />
+          </div>
+        )}
       </div>
       <TransparentHandles />
     </div>
