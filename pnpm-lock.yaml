@@ -11,11 +11,11 @@ dependencies:
     specifier: ^2.0.18
     version: 2.0.18(react@18.2.0)
   '@markdoc/markdoc':
-    specifier: 0.1.7
-    version: 0.1.7
+    specifier: 0.3.0
+    version: 0.3.0(react@18.2.0)
   '@markdoc/next.js':
-    specifier: 0.1.6
-    version: 0.1.6(@markdoc/markdoc@0.1.7)(next@13.3.0)(react@18.2.0)
+    specifier: 0.2.3
+    version: 0.2.3(@markdoc/markdoc@0.3.0)(next@13.3.0)(react@18.2.0)
   '@sindresorhus/slugify':
     specifier: ^2.1.0
     version: 2.1.0
@@ -321,19 +321,31 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: false
 
-  /@markdoc/markdoc@0.1.7:
-    resolution: {integrity: sha512-Dz7+VP5I3m/DFpLnzjwvXv64XmneYNzy4adm5uJSkcAJxFlJujIn+hCmMh11k70w+y5Qu18sjngetpuP+3570g==}
+  /@markdoc/markdoc@0.3.0(react@18.2.0):
+    resolution: {integrity: sha512-QWCF8krIIw52ulflfnoff0yG1eKl9CCGA3KAiOjHyYtHNzSEouFh8lO52nAaO3qV2Ctj1GTB8TTb2rTfvISQfA==}
     engines: {node: '>=14.7.0'}
+    peerDependencies:
+      '@types/react': '*'
+      react: '*'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+    optionalDependencies:
+      '@types/markdown-it': 12.2.3
     dev: false
 
-  /@markdoc/next.js@0.1.6(@markdoc/markdoc@0.1.7)(next@13.3.0)(react@18.2.0):
-    resolution: {integrity: sha512-AkILWoOg3zMrTPDubQgq5lRZ22UuFQsRn/J8oaYUYx/w8RtZ3ZACDNwX9hWVVDT3AcGokNSXaFRsQeWbmpPoFQ==}
+  /@markdoc/next.js@0.2.3(@markdoc/markdoc@0.3.0)(next@13.3.0)(react@18.2.0):
+    resolution: {integrity: sha512-O9WWGi/VHfGn70/BzqYYwsqcxidN1BpvKaO4Uf4AKC0z1d16TU0ADl/CepAeM/V2D8pDBmYALTMtiQoTWuObaw==}
     peerDependencies:
-      '@markdoc/markdoc': ^0.1.1
+      '@markdoc/markdoc': '*'
       next: '*'
       react: '*'
     dependencies:
-      '@markdoc/markdoc': 0.1.7
+      '@markdoc/markdoc': 0.3.0(react@18.2.0)
       js-yaml: 4.1.0
       next: 13.3.0(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -773,6 +785,25 @@ packages:
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
+
+  /@types/linkify-it@3.0.2:
+    resolution: {integrity: sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==}
+    dev: false
+    optional: true
+
+  /@types/markdown-it@12.2.3:
+    resolution: {integrity: sha512-GKMHFfv3458yYy+v/N8gjufHO6MSZKCOXpZc5GXIWWy8uldwfmPn98vp81gZ5f9SVw8YYBctgfJ22a2d7AOMeQ==}
+    requiresBuild: true
+    dependencies:
+      '@types/linkify-it': 3.0.2
+      '@types/mdurl': 1.0.2
+    dev: false
+    optional: true
+
+  /@types/mdurl@1.0.2:
+    resolution: {integrity: sha512-eC4U9MlIcu2q0KQmXszyn5Akca/0jrQmwDRgpAMJai7qBWq4amIQhZyNau4VYGtCeALvW1/NtjzJJ567aZxfKA==}
+    dev: false
+    optional: true
 
   /@typescript-eslint/parser@5.59.7(eslint@8.26.0)(typescript@5.0.4):
     resolution: {integrity: sha512-VhpsIEuq/8i5SF+mPg9jSdIwgMBBp0z9XqjiEay+81PYLJuroN+ET1hM5IhkiYMJd9MkTz8iJLt7aaGAgzWUbQ==}

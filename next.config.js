@@ -9,4 +9,6 @@ const nextConfig = {
   },
 }
 
-module.exports = withMarkdoc()(nextConfig)
+module.exports = withMarkdoc({
+  tokenizerOptions: { allowComments: true },
+})(nextConfig)

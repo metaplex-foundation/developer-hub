@@ -8,13 +8,9 @@ The Token Metadata program is a fundamental program when dealing NFTs and Fungib
 
 {% quick-links %}
 
-{% quick-link title="Installation" icon="InboxArrowDown" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/token-metadata/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
 
-{% quick-link title="Architecture guide" icon="CubeTransparent" href="/" description="Learn how the internals work and contribute." /%}
-
-{% quick-link title="Plugins" icon="SquaresPlus" href="/" description="Extend the library with third-party plugins or write your own." /%}
-
-{% quick-link title="API reference" icon="CodeBracketSquare" href="/" description="Learn to easily customize and modify your app's visual design to fit your brand." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" href="/token-metadata/references" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
 {% /quick-links %}
 
@@ -484,21 +480,13 @@ You can [read more about Programmable NFTs here](https://github.com/metaplex-fou
 
 Whilst this provides a good overview of the Token Metadata program and what it has to offer, there’s still a lot more that can be done with it.
 
-The other pages of the “Token Metadata” section aim to document it further and explain significant features in their own individual pages.
+The other pages of this documentation aim to document it further and explain significant features in their own individual pages.
 
-The next three pages focus on helping you get started with the Token Metadata program and provide detailed information on the accounts and instructions it provides, so you get the full picture and can refer back to them in the future.
-
-- [Getting started](/token-metadata/getting-started)
-- [Accounts](/token-metadata/accounts)
-- [Instructions](/token-metadata/instructions)
-
-The next pages act as in-depth guides on certain features offered by the program.
-
-- [Token Standard](/token-metadata/token-standard)
-- [Certified Collections](/token-metadata/certified-collections)
-- [Using NFTs](/token-metadata/using-nfts)
-
-Finally, the last two pages answer frequently asked questions and document version updates.
-
-- [FAQ](/token-metadata/faq)
-- [Changelog](/token-metadata/changelog/)
+- [TODO](/token-metadata/TODO)
+- [TODO](/token-metadata/TODO)
+- [TODO](/token-metadata/TODO)
+- [TODO](/token-metadata/TODO)
+- [TODO](/token-metadata/TODO)
+- [TODO](/token-metadata/TODO)
+- [TODO](/token-metadata/TODO)
+- [TODO](/token-metadata/TODO)
