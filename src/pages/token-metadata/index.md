@@ -482,11 +482,15 @@ Whilst this provides a good overview of the Token Metadata program and what it h
 
 The other pages of this documentation aim to document it further and explain significant features in their own individual pages.
 
-- [TODO](/token-metadata/TODO)
-- [TODO](/token-metadata/TODO)
-- [TODO](/token-metadata/TODO)
-- [TODO](/token-metadata/TODO)
-- [TODO](/token-metadata/TODO)
-- [TODO](/token-metadata/TODO)
-- [TODO](/token-metadata/TODO)
-- [TODO](/token-metadata/TODO)
+- [Token Standards (Assets)](/token-metadata/token-standards)
+- [Minting Assets](/token-metadata/minting-assets)
+- [Updating Assets](/token-metadata/updating-assets)
+- [Transferring Assets](/token-metadata/transferring-assets)
+- [Burning Assets](/token-metadata/burning-assets)
+- [Printed Editions](/token-metadata/printed-editions)
+- [Verified Collections](/token-metadata/verified-collections)
+- [Verified Creators](/token-metadata/verified-creators)
+- [Delegated Authorities](/token-metadata/delegated-authorities)
+- [Locking Assets](/token-metadata/locking-assets)
+- [Programmable NFTs](/token-metadata/programmable-nfts)
+- [NFT Escrow](/token-metadata/nft-escrow)
