@@ -91,9 +91,26 @@ Which brings us to an important question: where is the NFT data stored?
 
 ## Read API
 
-When we mint a new compressed NFT, its data is hashed and added as a new Leaf in a Merkle Tree. But there’s more. Additionally, the entire NFT data is stored in the transaction that created the compressed NFT. Similarly, when a compressed NFT is updated, its updated data is, once again, saved on the transaction. So, whilst there aren’t any accounts keeping track of that data, one can look at all previous transactions in the ledger and find that information.
+When we mint a new compressed NFT, its data is hashed and added as a new Leaf in a Merkle Tree. But there’s more. Additionally, the entire NFT data is stored in the transaction that created the compressed NFT. Similarly, when a compressed NFT is updated, its updated data is, once again, saved on the transaction as a changelog. So, whilst there aren’t any accounts keeping track of that data, one can look at all previous transactions in the ledger and find that information.
 
-// Diagram: Transaction events
+{% diagram %}
+
+{% node #tx-1 label="Transaction 1" /%}
+{% node #tx-2 label="Transaction 2" parent="tx-1" y="50" /%}
+{% node #tx-3 label="Transaction 3" parent="tx-2" y="50" /%}
+{% node #tx-4 label="Transaction 4" parent="tx-3" y="50" /%}
+{% node #tx-5 label="Transaction 5" parent="tx-4" y="50" /%}
+{% node #tx-rest label="..." parent="tx-5" y="50" /%}
+
+{% node #nft-1 label="Initial NFT Data" parent="tx-2" x="300" theme="blue" /%}
+{% node #nft-2 label="NFT Data Changelog" parent="tx-3" x="300" theme="blue" /%}
+{% node #nft-3 label="NFT Data Changelog" parent="tx-5" x="300" theme="blue" /%}
+
+{% edge from="nft-1" to="tx-2" label="Stored in" /%}
+{% edge from="nft-2" to="tx-3" label="Stored in" /%}
+{% edge from="nft-3" to="tx-5" label="Stored in" /%}
+
+{% /diagram %}
 
 Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Read API**.
 
