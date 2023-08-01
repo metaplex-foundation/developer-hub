@@ -4,111 +4,116 @@ metaTitle: Bubblegum - Overview
 description: Provides a high-level overview of compressed NFTs.
 ---
 
-Dummy text. Learn how to get CacheAdvance set up in your project in under thirty minutes or it's free. {% .lead %}
+Bubblegum is the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by storing data on the ledger rather than via on-chain accounts. {% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="Installation" icon="InboxArrowDown" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum/getting-started" description="Find the language or library of your choice and get started with compressed NFTs." /%}
 
-{% quick-link title="Architecture guide" icon="CubeTransparent" href="/" description="Learn how the internals work and contribute." /%}
-
-{% quick-link title="Plugins" icon="SquaresPlus" href="/" description="Extend the library with third-party plugins or write your own." /%}
-
-{% quick-link title="API reference" icon="CodeBracketSquare" href="/" description="Learn to easily customize and modify your app's visual design to fit your brand." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" href="/bubblegum/references" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
 {% /quick-links %}
 
-Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste.
+## Introduction
 
----
+As NFTs have flourished on the Solana blockchain, there’s been an increasing need for NFTs to be as ubiquitous as any digital asset on the Internet: every single item in your game’s inventory, proof-of-engagement in your favourite consumer app, or even a profile for every human on the planet.
 
-## Quick start
+So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap (0.012 SOL) but scales linearly; a billion NFTs would cost 12,000,000 SOL! From 10,000 NFTs at 3.5 SOL (34x), 1 million NFTs at 5 SOL (2,400x), and 1 billion NFTs at 500 SOL (24,000x), compression for NFTs drastically reduces the cost of on-chain storage of NFTs to enable creators to be as expressive with the technology as they wish.
 
-Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.
+| Number of cNFTs | Tree Rent | Transaction Cost | Total Cost | Cost per cNFT |
+| --------------- | --------- | ---------------- | ---------- | ------------- |
+| 10,000          | 3.48      | 0.005            | 3.485      | 0.0003485     |
+| 100,000         | 4.17      | 0.05             | 4.22       | 0.0000422     |
+| 1,000,000       | 4.85      | 0.5              | 5.35       | 0.0000053     |
+| 100,000,000     | 6.45      | 50               | 56.45      | 0.0000006     |
+| 1,000,000,000   | 7.13      | 500              | 507.13     | 0.0000005     |
 
-### Installing dependencies
+These compressed NFTs can be transferred, delegated, and even decompressed into regular NFTs for interoperability with existing smart contracts.
 
-Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.
+## Merkle Trees, leaves and proofs
 
-```shell
-npm install @tailwindlabs/cache-advance
-```
+Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum/todo) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by hashing the data of the compressed NFT.
 
-Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.
+For each Leaf in the Merkle Tree, one can provide a list of hashes — called a **Proof** — that enables anyone to verify that the given Leaf is part of that tree. Whenever a compressed NFT is updated or transferred, its associated Leaf will change and so will its Proof.
 
-{% callout type="warning" title="Oh no! Something bad happened!" %}
-This is what a disclaimer message looks like. You might want to include inline `code` in it. Or maybe you’ll want to include a [link](/) in it. I don’t think we should get too carried away with other scenarios like lists or tables — that would be silly.
-{% /callout %}
+{% diagram %}
 
-### Configuring the library
+{% node #root label="Root Node" theme="slate" /%}
+{% node #root-hash label="Hash" parent="root" x="56" y="40" theme="transparent" /%}
+{% node #node-1 label="Node 1" parent="root" y="100" x="-200" theme="blue" /%}
+{% node #node-1-hash label="Hash" parent="node-1" x="42" y="40" theme="transparent" /%}
+{% node #node-2 label="Node 2" parent="root" y="100" x="200" theme="mint" /%}
 
-Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.
+{% node #node-3 label="Node 3" parent="node-1" y="100" x="-100" theme="mint" /%}
+{% node #node-4 label="Node 4" parent="node-1" y="100" x="100" theme="blue" /%}
+{% node #node-4-hash label="Hash" parent="node-4" x="42" y="40" theme="transparent" /%}
+{% node #node-5 label="Node 5" parent="node-2" y="100" x="-100" /%}
+{% node #node-6 label="Node 6" parent="node-2" y="100" x="100" /%}
 
-```js
-// cache-advance.config.js
-export default {
-  strategy: 'predictive',
-  engine: {
-    cpus: 12,
-    backups: ['./storage/cache.wtf'],
-  },
-}
-```
+{% node #leaf-1 label="Leaf 1" parent="node-3" y="100" x="-45" /%}
+{% node #leaf-2 label="Leaf 2" parent="node-3" y="100" x="55" /%}
+{% node #leaf-3 label="Leaf 3" parent="node-4" y="100" x="-45" theme="blue" /%}
+{% node #leaf-4 label="Leaf 4" parent="node-4" y="100" x="55" theme="mint" /%}
+{% node #leaf-5 label="Leaf 5" parent="node-5" y="100" x="-45" /%}
+{% node #leaf-6 label="Leaf 6" parent="node-5" y="100" x="55" /%}
+{% node #leaf-7 label="Leaf 7" parent="node-6" y="100" x="-45" /%}
+{% node #leaf-8 label="Leaf 8" parent="node-6" y="100" x="55" /%}
+{% node #nft label="NFT Data" parent="leaf-3" y="100" x="-12" theme="blue" /%}
 
-Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.
+{% node #proof-1 label="Leaf 4" parent="nft" x="200" theme="mint" /%}
+{% node #proof-2 label="Node 3" parent="proof-1" x="90" theme="mint" /%}
+{% node #proof-3 label="Node 2" parent="proof-2" x="97" theme="mint" /%}
+{% node #proof-legend label="Proof" parent="proof-1" x="-6" y="-20" theme="transparent" /%}
 
-{% callout title="You should know!" %}
-This is what a disclaimer message looks like. You might want to include inline `code` in it. Or maybe you’ll want to include a [link](/) in it. I don’t think we should get too carried away with other scenarios like lists or tables — that would be silly.
-{% /callout %}
+{% edge from="node-1" to="root" fromPosition="top" toPosition="bottom" theme="blue" animated=true /%}
+{% edge from="node-2" to="root" fromPosition="top" toPosition="bottom" theme="mint" animated=true /%}
 
----
+{% edge from="node-3" to="node-1" fromPosition="top" toPosition="bottom" theme="mint" animated=true /%}
+{% edge from="node-4" to="node-1" fromPosition="top" toPosition="bottom" theme="blue" animated=true /%}
+{% edge from="node-6" to="node-2" fromPosition="top" toPosition="bottom" /%}
+{% edge from="node-5" to="node-2" fromPosition="top" toPosition="bottom" /%}
 
-## Basic usage
+{% edge from="leaf-1" to="node-3" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-2" to="node-3" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-4" to="node-4" fromPosition="top" toPosition="bottom" theme="mint" animated=true /%}
+{% edge from="leaf-3" to="node-4" fromPosition="top" toPosition="bottom" theme="blue" animated=true /%}
+{% edge from="leaf-5" to="node-5" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-6" to="node-5" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-7" to="node-6" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-8" to="node-6" fromPosition="top" toPosition="bottom" /%}
+{% edge from="nft" to="leaf-3" fromPosition="top" toPosition="bottom" theme="blue" animated=true label="Hash" /%}
 
-Praesentium laudantium magni. Consequatur reiciendis aliquid nihil iusto ut in et. Quisquam ut et aliquid occaecati. Culpa veniam aut et voluptates amet perspiciatis. Qui exercitationem in qui. Vel qui dignissimos sit quae distinctio.
+{% /diagram %}
 
-### Your first cache
+As such, Merkle Trees act as an on-chain structure that allows anyone to verify a given compressed NFT exist. They do this without storing any NFT data which makes them so scalable.
 
-Minima vel non iste debitis. Consequatur repudiandae et quod accusamus sit molestias consequatur aperiam. Et sequi ipsa eum voluptatibus ipsam. Et quisquam ut.
+Which brings us to an important question: where is the NFT data stored?
 
-Qui quae esse aspernatur fugit possimus. Quam sed molestiae temporibus. Eum perferendis dignissimos provident ea et. Et repudiandae quasi accusamus consequatur dolore nobis. Quia reiciendis necessitatibus a blanditiis iste quia. Ut quis et amet praesentium sapiente.
+## Read API
 
-Atque eos laudantium. Optio odit aspernatur consequuntur corporis soluta quidem sunt aut doloribus. Laudantium assumenda commodi.
+When we mint a new compressed NFT, its data is hashed and added as a new Leaf in a Merkle Tree. But there’s more. Additionally, the entire NFT data is stored in the transaction that created the compressed NFT. Similarly, when a compressed NFT is updated, its updated data is, once again, saved on the transaction. So, whilst there aren’t any accounts keeping track of that data, one can look at all previous transactions in the ledger and find that information.
 
-### Clearing the cache
+// Diagram: Transaction events
 
-Vel aut velit sit dolor aut suscipit at veritatis voluptas. Laudantium tempore praesentium. Qui ut voluptatem.
+Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Read API**.
 
-Ea est autem fugiat velit esse a alias earum. Dolore non amet soluta eos libero est. Consequatur qui aliquam qui odit eligendi ut impedit illo dignissimos.
+Note that not all RPCs support the Read API. As such, you may be interested in the [“Read API RPCs”](/bubblegum/todo) page to select an appropriate RPC when using compressed NFTs in your application.
 
-Ut dolore qui aut nam. Natus temporibus nisi voluptatum labore est ex error vel officia. Vero repellendus ut. Suscipit voluptate et placeat. Eius quo corporis ab et consequatur quisquam. Nihil officia facere dolorem occaecati alias deleniti deleniti in.
+We talk about this in more detail in our advanced [“Where is the Data Stored?”](/bubblegum/todo) guide.
 
-### Adding middleware
+## Features
 
-Officia nobis tempora maiores id iusto magni reprehenderit velit. Quae dolores inventore molestiae perspiciatis aut. Quis sequi officia quasi rem officiis officiis. Nesciunt ut cupiditate. Sunt aliquid explicabo enim ipsa eum recusandae. Vitae sunt eligendi et non beatae minima aut.
+Even though NFT data does not live inside accounts, it is still possible to execute a variety of operations on compressed NFTs. This is possible by requesting the current NFT data and ensuring its hashed Leaf is valid on the Merkle Tree. As such, the following operations can be performed on compressed NFTs:
 
-Harum perferendis aut qui quibusdam tempore laboriosam voluptatum qui sed. Amet error amet totam exercitationem aut corporis accusantium dolorum. Perspiciatis aut animi et. Sed unde error ut aut rerum.
+- [Mint a cNFT](/bubblegum/todo) with or without an associated collection.
+- Update the data of a cNFT _(Coming Soon)_.
+- [Transfer a cNFT](/bubblegum/todo).
+- [Burn a cNFT](/bubblegum/todo).
+- [Decompress a cNFT into a regular NFT](/bubblegum/todo). Note that this enables interoperability with existing smart contracts but creates on-chain accounts with rent fees.
+- [Delegate a cNFT](/bubblegum/todo).
+- [Verify and unverify a cNFT collection](/bubblegum/todo).
+- [Verify and unverify the creators of a cNFT](/bubblegum/todo).
 
-Ut quo libero aperiam mollitia est repudiandae quaerat corrupti explicabo. Voluptas accusantium sed et doloribus voluptatem fugiat a mollitia. Numquam est magnam dolorem asperiores fugiat. Soluta et fuga amet alias temporibus quasi velit. Laudantium voluptatum perspiciatis doloribus quasi facere. Eveniet deleniti veniam et quia veritatis minus veniam perspiciatis.
+## Next steps
 
----
-
-## Getting help
-
-Consequuntur et aut quisquam et qui consequatur eligendi. Necessitatibus dolorem sit. Excepturi cumque quibusdam soluta ullam rerum voluptatibus. Porro illo sequi consequatur nisi numquam nisi autem. Ut necessitatibus aut. Veniam ipsa voluptatem sed.
-
-### Submit an issue
-
-Inventore et aut minus ut voluptatem nihil commodi doloribus consequatur. Facilis perferendis nihil sit aut aspernatur iure ut dolores et. Aspernatur odit dignissimos. Aut qui est sint sint.
-
-Facere aliquam qui. Dolorem officia ipsam adipisci qui molestiae. Error voluptatem reprehenderit ex.
-
-Consequatur enim quia maiores aperiam et ipsum dicta. Quam ut sit facere sit quae. Eligendi veritatis aut ut veritatis iste ut adipisci illo.
-
-### Join the community
-
-Praesentium facilis iste aliquid quo quia a excepturi. Fuga reprehenderit illo sequi voluptatem voluptatem omnis. Id quia consequatur rerum consectetur eligendi et omnis. Voluptates iusto labore possimus provident praesentium id vel harum quisquam. Voluptatem provident corrupti.
-
-Eum et ut. Qui facilis est ipsa. Non facere quia sequi commodi autem. Dicta autem sit sequi omnis impedit. Eligendi amet dolorum magnam repudiandae in a.
-
-Molestiae iusto ut exercitationem dolorem unde iusto tempora atque nihil. Voluptatem velit facere laboriosam nobis ea. Consequatur rerum velit ipsum ipsam. Et qui saepe consequatur minima laborum tempore voluptatum et. Quia eveniet eaque sequi consequatur nihil eos.
+Now that we know how compressed NFTs work at a high level, we recommend checking out our [Getting Started](/bubblegum/todo) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum/todo) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum/todo) are also available to deepen your knowledge of cNFTs and Merkle Trees.
