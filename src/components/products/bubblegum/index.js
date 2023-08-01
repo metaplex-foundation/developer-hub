@@ -25,6 +25,7 @@ export const bubblegum = {
           links: [
             { title: 'Overview', href: '/bubblegum' },
             { title: 'Getting started', href: '/bubblegum/getting-started' },
+            { title: 'Read API RPCs', href: '/bubblegum/rpcs' },
           ],
         },
         {
@@ -35,6 +36,7 @@ export const bubblegum = {
               title: 'Minting compressed NFTs (cNFTs)',
               href: '/bubblegum/todo',
             },
+            { title: 'Fetching cNFTs', href: '/bubblegum/todo' },
             { title: 'Updating cNFTs', href: '/bubblegum/todo' },
             { title: 'Transferring cNFTs', href: '/bubblegum/todo' },
             { title: 'Burning cNFTs', href: '/bubblegum/todo' },
