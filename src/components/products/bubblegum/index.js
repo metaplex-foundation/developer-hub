@@ -31,20 +31,29 @@ export const bubblegum = {
         {
           title: 'Features',
           links: [
-            { title: 'Creating Bubblegum Trees', href: '/bubblegum/todo' },
+            {
+              title: 'Creating Bubblegum Trees',
+              href: '/bubblegum/create-trees',
+            },
             {
               title: 'Minting compressed NFTs (cNFTs)',
-              href: '/bubblegum/todo',
+              href: '/bubblegum/mint-cnfts',
             },
-            { title: 'Fetching cNFTs', href: '/bubblegum/todo' },
-            { title: 'Updating cNFTs', href: '/bubblegum/todo' },
-            { title: 'Transferring cNFTs', href: '/bubblegum/todo' },
-            { title: 'Burning cNFTs', href: '/bubblegum/todo' },
-            { title: 'Decompressing cNFTs', href: '/bubblegum/todo' },
-            { title: 'Delegating cNFTs', href: '/bubblegum/todo' },
-            { title: 'Delegating Trees', href: '/bubblegum/todo' },
-            { title: 'Verifying Collections', href: '/bubblegum/todo' },
-            { title: 'Verifying Creators', href: '/bubblegum/todo' },
+            { title: 'Fetching cNFTs', href: '/bubblegum/fetch-cnfts' },
+            { title: 'Updating cNFTs', href: '/bubblegum/update-cnfts' },
+            { title: 'Transferring cNFTs', href: '/bubblegum/transfer-cnfts' },
+            { title: 'Burning cNFTs', href: '/bubblegum/burn-cnfts' },
+            {
+              title: 'Decompressing cNFTs',
+              href: '/bubblegum/decompress-cnfts',
+            },
+            { title: 'Delegating cNFTs', href: '/bubblegum/delegate-cnfts' },
+            { title: 'Delegating Trees', href: '/bubblegum/delegate-trees' },
+            {
+              title: 'Verifying Collections',
+              href: '/bubblegum/verify-collections',
+            },
+            { title: 'Verifying Creators', href: '/bubblegum/verify-creators' },
           ],
         },
         {
