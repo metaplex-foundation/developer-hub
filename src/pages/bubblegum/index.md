@@ -32,7 +32,7 @@ These compressed NFTs can be transferred, delegated, and even decompressed into 
 
 ## Merkle Trees, leaves and proofs
 
-Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum/todo) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by hashing the data of the compressed NFT.
+Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by hashing the data of the compressed NFT.
 
 For each Leaf in the Merkle Tree, one can provide a list of hashes — called a **Proof** — that enables anyone to verify that the given Leaf is part of that tree. Whenever a compressed NFT is updated or transferred, its associated Leaf will change and so will its Proof.
 
@@ -114,23 +114,23 @@ When we mint a new compressed NFT, its data is hashed and added as a new Leaf in
 
 Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Read API**.
 
-Note that not all RPCs support the Read API. As such, you may be interested in the [“Read API RPCs”](/bubblegum/todo) page to select an appropriate RPC when using compressed NFTs in your application.
+Note that not all RPCs support the Read API. As such, you may be interested in the [“Read API RPCs”](/bubblegum/rpcs) page to select an appropriate RPC when using compressed NFTs in your application.
 
-We talk about this in more detail in our advanced [“Where is the Data Stored?”](/bubblegum/todo) guide.
+We talk about this in more detail in our advanced [“Storing and indexing NFT data”](/bubblegum/stored-nft-data) guide.
 
 ## Features
 
 Even though NFT data does not live inside accounts, it is still possible to execute a variety of operations on compressed NFTs. This is possible by requesting the current NFT data and ensuring its hashed Leaf is valid on the Merkle Tree. As such, the following operations can be performed on compressed NFTs:
 
-- [Mint a cNFT](/bubblegum/todo) with or without an associated collection.
-- Update the data of a cNFT _(Coming Soon)_.
-- [Transfer a cNFT](/bubblegum/todo).
-- [Burn a cNFT](/bubblegum/todo).
-- [Decompress a cNFT into a regular NFT](/bubblegum/todo). Note that this enables interoperability with existing smart contracts but creates on-chain accounts with rent fees.
-- [Delegate a cNFT](/bubblegum/todo).
-- [Verify and unverify a cNFT collection](/bubblegum/todo).
-- [Verify and unverify the creators of a cNFT](/bubblegum/todo).
+- [Mint a cNFT](/bubblegum/mint-cnfts) with or without an associated collection.
+- [Update the data of a cNFT](/bubblegum/update-cnfts) _(Coming Soon)_.
+- [Transfer a cNFT](/bubblegum/transfer-cnfts).
+- [Burn a cNFT](/bubblegum/burn-cnfts).
+- [Decompress a cNFT into a regular NFT](/bubblegum/decompress-cnfts). Note that this enables interoperability with existing smart contracts but creates on-chain accounts with rent fees.
+- [Delegate a cNFT](/bubblegum/delegate-cnfts).
+- [Verify and unverify a cNFT collection](/bubblegum/verify-collections).
+- [Verify and unverify the creators of a cNFT](/bubblegum/verify-creators).
 
 ## Next steps
 
-Now that we know how compressed NFTs work at a high level, we recommend checking out our [Getting Started](/bubblegum/todo) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum/todo) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum/todo) are also available to deepen your knowledge of cNFTs and Merkle Trees.
+Now that we know how compressed NFTs work at a high level, we recommend checking out our [Getting Started](/bubblegum/getting-started) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.

@@ -59,10 +59,19 @@ export const bubblegum = {
         {
           title: 'Advanced',
           links: [
-            { title: 'What are Merkle Trees?', href: '/bubblegum/todo' },
-            { title: 'Where is the Data Stored?', href: '/bubblegum/todo' },
-            { title: 'How is the Data Hashed?', href: '/bubblegum/todo' },
-            { title: 'How to Use Canopies?', href: '/bubblegum/todo' },
+            {
+              title: 'Concurrent Merkle Trees',
+              href: '/bubblegum/concurrent-merkle-trees',
+            },
+            {
+              title: 'Storing and Indexing NFT Data',
+              href: '/bubblegum/stored-nft-data',
+            },
+            { title: 'Hashing NFT Data', href: '/bubblegum/hashed-nft-data' },
+            {
+              title: 'Merkle Tree Canopy',
+              href: '/bubblegum/merkle-tree-canopy',
+            },
           ],
         },
       ],
