@@ -1,4 +1,4 @@
-import { DarkMode, Gradient, LightMode } from '@/components/Icon.bak'
+import { DarkMode, Gradient, LightMode } from '@/components/icons/dual-tone'
 
 export function ThemingIcon({ id, color }) {
   return (

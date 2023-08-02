@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { createContext, useContext } from 'react'
 
 import { useDialect } from '@/components/DialectContext'
-import { Icon } from '@/components/Icon'
+import { Icon } from '@/components/icons'
 import { Tag } from '@markdoc/markdoc'
 
 const LocalDialectContext = createContext({

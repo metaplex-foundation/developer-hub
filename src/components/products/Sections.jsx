@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import { Icon } from '@/components/Icon'
+import { Icon } from '@/components/icons'
 
 export function Sections({ sections, activeSectionId, className, props }) {
   return (

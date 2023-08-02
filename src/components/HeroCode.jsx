@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import { Fragment } from 'react'
-import { IconTrafficLights } from '@/components/IconTrafficLights'
+import { TrafficLightsIcon } from '@/components/icons/TrafficLightsIcon'
 
 export function HeroCode({ tabs, code, language }) {
   return (
@@ -12,7 +12,7 @@ export function HeroCode({ tabs, code, language }) {
         <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-sky-300/0 via-accent-300 to-sky-300/0 opacity-75"></div>
         <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-blue-400/0 via-accent-400 to-blue-400/0 opacity-75"></div>
         <div className="pl-4 pt-4">
-          <IconTrafficLights className="h-2.5 w-auto stroke-slate-500/30" />
+          <TrafficLightsIcon className="h-2.5 w-auto stroke-slate-500/30" />
           {tabs && tabs.length > 0 && (
             <div className="mt-4 flex space-x-2 text-xs">
               {tabs.map((tab) => (
@@ -57,18 +57,9 @@ export function HeroCode({ tabs, code, language }) {
               language={language}
               theme={undefined}
             >
-              {({
-                className,
-                style,
-                tokens,
-                getLineProps,
-                getTokenProps,
-              }) => (
+              {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <pre
-                  className={clsx(
-                    className,
-                    'flex overflow-x-auto pb-6'
-                  )}
+                  className={clsx(className, 'flex overflow-x-auto pb-6')}
                   style={style}
                 >
                   <code className="px-4">

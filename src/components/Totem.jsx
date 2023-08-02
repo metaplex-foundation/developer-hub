@@ -1,7 +1,7 @@
 import { Disclosure } from '@headlessui/react'
 import clsx from 'clsx'
 
-import { Icon } from '@/components/Icon'
+import { Icon } from '@/components/icons'
 
 export function Totem({ children }) {
   return <div className="totem overflow-hidden">{children}</div>

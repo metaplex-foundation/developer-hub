@@ -2,7 +2,7 @@ import { Tag } from '@markdoc/markdoc'
 import clsx from 'clsx'
 import ReactFlow, { Background, Panel, ReactFlowProvider } from 'reactflow'
 
-import { Icon } from '@/components/Icon'
+import { Icon } from '@/components/icons'
 import * as whimsical from './DiagramWhimsical'
 import { FloatingEdge } from './FloatingEdge'
 import { useFullscreen } from '@/components/diagrams/useFullscreen'

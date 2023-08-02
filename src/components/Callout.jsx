@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import { Icon } from '@/components/Icon.bak'
+import { Icon } from '@/components/icons/dual-tone'
 
 const styles = {
   note: {
