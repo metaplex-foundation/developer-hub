@@ -114,31 +114,17 @@ const builder = await createTree(umi, {
 
 ## Fetching a Bubblegum Tree
 
-TODO
+Since a **Bubblegum Tree** is composed of two on-chain accounts, let's see how to fetch either of them.
 
 ### Fetching a Merkle Tree
 
-{% dialect-switcher title="Fetch a Tree Config" %}
-{% dialect title="JavaScript" id="js" %}
+The Merkle Tree account contains various information about the tree such as:
 
-```ts
-import { fetchTreeConfigFromSeeds } from '@metaplex-foundation/mpl-bubblegum'
+- The **Tree Header** which stores the **Max Depth**, the **Max Buffer Size**, the **Authority** of the tree and the **Creation Slot** of when the tree was created.
+- The **Tree** itself which stores low-level information about the tree such as its **Change Logs** (or roots), its **Sequence Number**, etc. We talk more about Concurrent Merkle Trees in a [dedicated page](/bubblegum/concurrent-merkle-trees) of this documentation.
+- The **Canopy** as discussed in the [Merkle Tree Canopy](/bubblegum/merkle-tree-canopy) page.
 
-const treeConfig = await fetchTreeConfigFromSeeds(umi, { merkleTree })
-// treeConfig.treeCreator
-// treeConfig.treeDelegate
-// treeConfig.totalMintCapacity
-// treeConfig.numMinted
-// treeConfig.isPublic
-// ...
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-### Fetching a Tree Config
-
-TODO
+Here is how one can fetch all of that data using our libraries:
 
 {% dialect-switcher title="Fetch a Merkle Tree" %}
 {% dialect title="JavaScript" id="js" %}
@@ -147,10 +133,30 @@ TODO
 import { fetchMerkleTree } from '@metaplex-foundation/mpl-bubblegum'
 
 const merkleTreeAccount = await fetchMerkleTree(umi, merkleTree)
-// merkleTreeAccount.treeHeader
-// merkleTreeAccount.tree
-// merkleTreeAccount.canopy
-// ...
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Fetching a Tree Config
+
+The Tree Config account contains data specific to Compressed NFTs. It stores:
+
+- The **Tree Creator** of the Bubblegum Tree.
+- The **Tree Delegate** of the Bubblegum Tree, if any. Otherwise, it is set to the **Tree Creator**.
+- The **Total Capacity** of the Bubblegum Tree which is the maximum number of cNFTs that can be minted from the tree.
+- The **Number Minted** which keeps track of the number of cNFTs minted into the tree. This value is important as it is used as a **Nonce** ("number used once") value for operations to ensure the Merkle tree leaves are unique. Thus, this nonce acts as a tree-scoped unique identifier of the asset.
+- The **Is Public** parameter which indicates whether or not anyone can mint cNFTs from the tree.
+
+Here is how one can fetch all of that data using our libraries:
+
+{% dialect-switcher title="Fetch a Tree Config" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { fetchTreeConfigFromSeeds } from '@metaplex-foundation/mpl-bubblegum'
+
+const treeConfig = await fetchTreeConfigFromSeeds(umi, { merkleTree })
 ```
 
 {% /dialect %}
