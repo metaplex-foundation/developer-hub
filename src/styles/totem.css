@@ -23,6 +23,8 @@
     @apply prose-hr:border-slate-800;
     /* p */
     @apply prose-p:m-0 prose-p:px-4 prose-p:py-3;
+    /* table */
+    @apply prose-table:mx-4 prose-table:my-3 prose-table:w-[calc(100%-2rem)];
   }
 
   /* Dividers can be applied to all nested totems too. */
