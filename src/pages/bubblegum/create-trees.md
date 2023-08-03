@@ -9,9 +9,9 @@ description: Learn how to create and fetch new Merkle Trees that can hold compre
 Whilst the data of Compressed NFTs is stored inside transactions and not on-chain accounts, we still need some on-chain accounts to keep track of the Merkle Tree and its configuration. As such, before we can start minting Compressed NFTs, we need to create two accounts:
 
 - A **Merkle Tree account**. This account holds a generic Merkle Tree that can be used to verify the authenticity of any type of data. It is owned by the [Account Compression Program](https://spl.solana.com/account-compression) created and maintained by Solana. In our case, we will use it to verify the authenticity of Compressed NFTs.
-- A **Tree Config account**. This second account is a PDA derived from the address of the Merkle Tree account. It allows us to store additional configurations for the Merkle Tree that is specific to Compressed NFTs — e.g. the tree creator, the amount of minted cNFTs, etc.
+- A **Tree Config account**. This second account is a PDA derived from the address of the Merkle Tree account. It allows us to store additional configurations for the Merkle Tree that are specific to Compressed NFTs — e.g. the tree creator, the number of minted cNFTs, etc.
 
-With these two accounts, we have everything we need to start minting Compressed NFTs. Note that, we will refer to Merkle Tree accounts with an associated Tree Config accounts as **Bubblegum Trees**.
+With these two accounts, we have everything we need to start minting Compressed NFTs. Note that, we will refer to Merkle Tree accounts with associated Tree Config accounts as **Bubblegum Trees**.
 
 {% diagram height="h-64 md:h-[200px]" %}
 
@@ -34,10 +34,10 @@ With these two accounts, we have everything we need to start minting Compressed 
 
 ## Creating a Bubblegum Tree
 
-Let's now see how one can create both of these accounts to create a Bubblegum Tree. Fortunately, our libraries make this process easy by providing a **Create Tree** operation that takes care of everything for us. This operation accept a variety of parameters — most of them optional — that allow us to customize the Bubblegum Tree to our needs. The most important ones are:
+Let's now see how one can create both of these accounts to create a Bubblegum Tree. Fortunately, our libraries make this process easy by providing a **Create Tree** operation that takes care of everything for us. This operation accepts a variety of parameters — most of them optional — that allow us to customize the Bubblegum Tree to our needs. The most important ones are:
 
 - **Merkle Tree**: A newly generated signer that will be used to create the Merkle Tree account. The Merkle Tree account will then be accessible at this address.
-- **Tree Creator**: The address of the account that will be able to manage the Bubblegum tree and mint Compressed NFTs.
+- **Tree Creator**: The address of the account that will be able to manage the Bubblegum Tree and mint Compressed NFTs.
 - **Max Depth** and **Max Buffer Size**: The **Max Depth** parameter is used to compute the maximum number of leaves — and therefore Compressed NFTs — that the Merkle Tree can hold. This maximum is calculated by `2^maxDepth`. The **Max Buffer Size** parameter indicates the minimum concurrency limit of the Merkle Tree. In other words, it defines how many changes can happen in the tree in parallel. These two parameters cannot be chosen arbitrarily and have to be selected from a pre-defined set of values as displayed in the table below.
 
   {% totem %}
@@ -92,7 +92,6 @@ const builder = await createTree(umi, {
   merkleTree,
   maxDepth: 14,
   maxBufferSize: 64,
-  // treeCreator <- Default to umi.identity
 })
 await builder.sendAndConfirm(umi)
 ```
