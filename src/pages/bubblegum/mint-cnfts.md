@@ -8,7 +8,15 @@ In [the previous page](/bubblegum/create-trees), we saw that we need a Bubblegum
 
 ## Minting without a Collection
 
-TODO
+The Bubblegum program provides a **Mint V1** instruction that enables us to mint Compressed NFTs from a Bubblegum Tree. If the Bubblegum Tree is public, anyone will be able to use this instruction. Otherwise, only the Tree Creator or the Tree Delegate will be able to do so.
+
+The main parameters of the Mint V1 instruction are:
+
+- **Merkle Tree**: The Merkle Tree address from which the Compressed NFT will be minted.
+- **Tree Creator Or Delegate**: The authority allowed to mint from the Bubblegum Tree — this can either be the creator or the delegate of the tree.
+- **Leaf Owner**: The owner of the Compressed NFT that will be minted.
+- **Leaf Delegate**: An delegate authority allowed to managed the minted cNFT, if any. Otherwise, it is set to the Leaf Owner.
+- **Metadata**: The metadata of the Compressed NFT that will be minted. It contains information such as the **Name** of the NFT, its **URI**, its **Creators**, etc. Note that is it possible to provide a **Collection** object within the metadata but its **Verified** field will have to be set to `false` since the Collection Authority is not requested in this instruction and therefore cannot sign the transaction.
 
 {% dialect-switcher title="Mint a Compressed NFT without a Collection" %}
 {% dialect title="JavaScript" id="js" %}
@@ -20,7 +28,7 @@ import { mintV1 } from '@metaplex-foundation/mpl-bubblegum'
 await mintV1(umi, {
   leafOwner,
   merkleTree,
-  message: {
+  metadata: {
     name: 'My Compressed NFT',
     uri: 'https://example.com/my-cnft.json',
     sellerFeeBasisPoints: 500, // 5%
@@ -37,7 +45,16 @@ await mintV1(umi, {
 
 ## Minting to a Collection
 
-TODO
+Whilst it is possible to set and verify a Collection for a Compressed NFT _after_ it was minted, the Bubblegum program provides a convenient instruction to mint a Compressed NFT directly to a given Collection. This instruction is called **Mint To Collection V1** and it uses the same parameters as the **Mint V1** instruction, with the addition of the following parameters:
+
+- **Collection Mint**: The Mint address of the Collection NFT to which the Compressed NFT will be part of.
+- **Collection Authority**: The authority allowed to manage the given Collection NFT. This can either be the update authority of the Collection NFT or a delegated collection authority.
+- **Collection Authority Record Pda**: When using a delegated collection authority, the Delegate Record PDA must be provided to ensure the authority is allowed to manage the Collection NFT. This can either be using the new "Metadata Delegate" PDA or the legacy "Collection Authority Record" PDA.
+
+Additionally, note that the **Metadata** parameter must contain a **Collection** object such that:
+
+- Its **Address** field matches the **Collection Mint** parameter.
+- Its **Verified** field set to `false`. It will be set to `true` during the transaction but the Bubblegum program requires that the initial value for this field is `false`.
 
 {% dialect-switcher title="Mint a Compressed NFT to a Collection" %}
 {% dialect title="JavaScript" id="js" %}
@@ -51,7 +68,7 @@ await mintToCollectionV1(umi, {
   leafOwner,
   merkleTree,
   collectionMint,
-  message: {
+  metadata: {
     name: 'My Compressed NFT',
     uri: 'https://example.com/my-cnft.json',
     sellerFeeBasisPoints: 500, // 5%
@@ -61,6 +78,16 @@ await mintToCollectionV1(umi, {
     ],
   },
 }).sendAndConfirm(umi)
+```
+
+By default, the Collection Authority is set to the Umi identity but this can be customized as shown in the example below.
+
+```ts
+const customCollectionAuthority = generateSigner(umi)
+await mintToCollectionV1(umi, {
+  // ...
+  collectionAuthority: customCollectionAuthority,
+})
 ```
 
 {% totem-accordion title="Create a Collection NFT" %}
@@ -92,5 +119,3 @@ await createNft(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
-
-TODO
