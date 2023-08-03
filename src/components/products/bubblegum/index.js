@@ -37,7 +37,7 @@ export const bubblegum = {
               href: '/bubblegum/create-trees',
             },
             {
-              title: 'Minting compressed NFTs (cNFTs)',
+              title: 'Minting Compressed NFTs (cNFTs)',
               href: '/bubblegum/mint-cnfts',
             },
             { title: 'Fetching cNFTs', href: '/bubblegum/fetch-cnfts' },
