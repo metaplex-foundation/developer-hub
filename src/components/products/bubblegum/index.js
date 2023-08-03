@@ -26,6 +26,7 @@ export const bubblegum = {
             { title: 'Overview', href: '/bubblegum' },
             { title: 'Getting started', href: '/bubblegum/getting-started' },
             { title: 'Read API RPCs', href: '/bubblegum/rpcs' },
+            { title: 'FAQ', href: '/bubblegum/faq' },
           ],
         },
         {

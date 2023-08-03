@@ -4,7 +4,7 @@ metaTitle: Bubblegum - Overview
 description: Provides a high-level overview of compressed NFTs.
 ---
 
-Bubblegum is the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by storing data on the ledger rather than via on-chain accounts. {% .lead %}
+Bubblegum is the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data on-chain. {% .lead %}
 
 {% quick-links %}
 
@@ -20,13 +20,13 @@ As NFTs have flourished on the Solana blockchain, there’s been an increasing n
 
 So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap (0.012 SOL) but scales linearly; a billion NFTs would cost 12,000,000 SOL! From 10,000 NFTs at 3.5 SOL (34x), 1 million NFTs at 5 SOL (2,400x), and 1 billion NFTs at 500 SOL (24,000x), compression for NFTs drastically reduces the cost of on-chain storage of NFTs to enable creators to be as expressive with the technology as they wish.
 
-| Number of cNFTs | Tree Rent | Transaction Cost | Total Cost | Cost per cNFT |
-| --------------- | --------- | ---------------- | ---------- | ------------- |
-| 10,000          | 3.48      | 0.005            | 3.485      | 0.0003485     |
-| 100,000         | 4.17      | 0.05             | 4.22       | 0.0000422     |
-| 1,000,000       | 4.85      | 0.5              | 5.35       | 0.0000053     |
-| 100,000,000     | 6.45      | 50               | 56.45      | 0.0000006     |
-| 1,000,000,000   | 7.13      | 500              | 507.13     | 0.0000005     |
+| Number of cNFTs | Storage Cost | Transaction Cost | Total Cost | Cost per cNFT |
+| --------------- | ------------ | ---------------- | ---------- | ------------- |
+| 10,000          | 3.48         | 0.005            | 3.485      | 0.0003485     |
+| 100,000         | 4.17         | 0.05             | 4.22       | 0.0000422     |
+| 1,000,000       | 4.85         | 0.5              | 5.35       | 0.0000053     |
+| 100,000,000     | 6.45         | 50               | 56.45      | 0.0000006     |
+| 1,000,000,000   | 7.13         | 500              | 507.13     | 0.0000005     |
 
 These compressed NFTs can be transferred, delegated, and even decompressed into regular NFTs for interoperability with existing smart contracts.
 
