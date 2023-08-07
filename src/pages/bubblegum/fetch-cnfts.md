@@ -6,7 +6,9 @@ description: Learn how to fetch compressed NFTs on Bubblegum
 
 As mentioned in the [Overview](/bubblegum#read-api) page, Compressed NFTs are not stored inside on-chain accounts like regular NFTs but, instead, are logged in the transactions that created and updated them. {% .lead %}
 
-As such, a special indexer was created to facilitate the retrieval of Compressed NFTs. This indexed data is made available through an extension of the Solana RPC methods which we call the **Read API**. Since not all RPCs support the Read API, you will need to choose your RPC provider carefully if you are planning to work with Compressed NFTs. Note that we maintain a list of all RPCs that support the Read API [in a dedicated page](/bubblegum/rpcs).
+As such, a special indexer was created to facilitate the retrieval of Compressed NFTs. This indexed data is made available through an extension of the Solana RPC methods which we call the **Read API**. In fact, the Read API allows us to fetch any **Digital Asset**. This can be a Compressed NFT, a regular NFT, or even a Fungible Asset.
+
+Since not all RPCs support the Read API, you will need to choose your RPC provider carefully if you are planning to work with Compressed NFTs. Note that we maintain a list of all RPCs that support the Read API [in a dedicated page](/bubblegum/rpcs).
 
 On this page, we will learn how to fetch Compressed NFTs using the Read API.
 
@@ -41,7 +43,7 @@ In order to fetch an NFT, compressed or not, we need to have access to a unique 
 - For regular NFTs, we use the **mint address of the NFT** for that purpose since all other accounts simply derive from that address.
 - For compressed NFTs, we use a special **PDA** (Program Derived Address) that is derived from the **address of the Merkle Tree** and the **leaf index** of the Compressed NFT in the Merkle tree. We call this special PDA a **Leaf Asset ID**.
 
-Note that you should typically not need to derive the **Leaf Asset ID** yourself since the Read API methods will provide it for you when fetching Compressed NFTs in bulk — e.g. fetching all NFTs owned by a given address. However, if you had access to the address of the Merkle Tree and the leaf index of the cNFT, here's how you could use our SDKs to derive the Leaf Asset ID.
+You typically shouldn't need to derive the **Leaf Asset ID** yourself since the Read API methods will provide it for you when fetching Compressed NFTs in bulk — e.g. fetching all NFTs owned by a given address. However, if you had access to the address of the Merkle Tree and the leaf index of the cNFT, here's how you could use our SDKs to derive the Leaf Asset ID.
 
 {% dialect-switcher title="Find the Leaf Asset ID PDA" %}
 {% dialect title="JavaScript" id="js" %}
