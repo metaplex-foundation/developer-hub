@@ -1,4 +1,5 @@
 import { Head, Html, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 
 const themeScript = `
   let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)')
@@ -64,6 +65,18 @@ export default function Document() {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#30383b" />
         <meta name="msapplication-TileColor" content="#00aba9" />
         <meta name="theme-color" content="#ffffff" />
+
+        {/* Google Analytics. */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-YLQCC8102N" />
+        <Script id="google-analytics">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-YLQCC8102N');
+        `}
+        </Script>
       </Head>
       <body className="bg-white dark:bg-slate-900">
         <Main />
