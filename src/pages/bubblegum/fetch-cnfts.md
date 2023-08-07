@@ -36,9 +36,14 @@ umi.use(readApi())
 
 ## Asset IDs
 
-TODO
+In order to fetch an NFT, compressed or not, we need to have access to a unique ID that identifies the NFT. We call this unique identifier the **Asset ID**.
 
-{% dialect-switcher title="Find the Asset ID PDA" %}
+- For regular NFTs, we use the **mint address of the NFT** for that purpose since all other accounts simply derive from that address.
+- For compressed NFTs, we use a special **PDA** (Program Derived Address) that is derived from the **address of the Merkle Tree** and the **leaf index** of the Compressed NFT in the Merkle tree. We call this special PDA a **Leaf Asset ID**.
+
+Note that you should typically not need to derive the **Leaf Asset ID** yourself since the Read API methods will provide it for you when fetching Compressed NFTs in bulk — e.g. fetching all NFTs owned by a given address. However, if you had access to the address of the Merkle Tree and the leaf index of the cNFT, here's how you could use our SDKs to derive the Leaf Asset ID.
+
+{% dialect-switcher title="Find the Leaf Asset ID PDA" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -55,7 +60,21 @@ const [assetId, bump] = await findLeafAssetIdPda(umi, {
 
 ## Fetching a Compressed NFT
 
-TODO
+Fetching a Compressed NFT is as simple as calling the `getAsset` method of the Read API. This method will return an **Rpc Asset** object that contains the following information:
+
+- **Id**: The Asset ID as discussed above.
+- **Interface**: A special value that defines the type of asset we are dealing with. E.g. `V1_NFT` OR `ProgrammableNFT`.
+- **Ownership**: An object telling us who owns the asset. This includes any delegate that may have been set and whether or not the asset is marked as frozen.
+- **Mutable**: A boolean indicating whether the data of the asset is updatable or not.
+- **Authorities**: An array of authorities, each including a scope array indicating what operations the authority is allowed to perform on the asset.
+- **Content**: An object containing the data of asset. Namely, it includes its URI and a parsed `metadata` object.
+- **Royalty**: An object that defines the royalty model defined by the asset. Currently, there is only one royalty model supported which sends a percentage of the proceeds to the creator(s) of the asset.
+- **Supply**: When dealing with printable assets, this object provides the current and max supply of printed editions.
+- **Creators**: The list of creators of the asset. Each include a `verified` boolean indicating whether the creator has been verified or not and a `share` number indicating the percentage of royalties that should be sent to the creator.
+- **Grouping**: An array of key/value grouping mechanisms that can help index and retrieve assets in bulk. Currently, only one grouping mechanism is supported — `collection` — which allows us to group assets by collection.
+- **Compression**: When dealing with Compressed NFTs, this object gives us various information about the leaf of the Bubblegum Tree. For instance, it provides the full hash of the leaf, but also partial hashes such as the **Creator Hash** and **Data Hash** which are used to verify the authenticity of the asset. It also gives us the Merkle Tree address, its root, sequence, etc.
+
+Here is how one can fetch an asset from a given Asset ID using our SDKs.
 
 {% dialect-switcher title="Fetch a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
@@ -68,6 +87,22 @@ const rpcAsset = await umi.rpc.getAsset(assetId)
 {% /dialect-switcher %}
 
 ## Fetching the proof of a Compressed NFT
+
+Whilst the `getAsset` RPC method returns a whole lot of information about the asset, it does not return the **Proof** of the asset. As mentioned, in the [Overview](/bubblegum#merkle-trees-leaves-and-proofs) page, the Proof of a Compressed NFT is a list of hashes that allow us to verify the authenticity of the asset. Without it, anyone could pretend that they have a Compressed NFT in a tree with any given data.
+
+As such, many operations on Compressed NFTs — e.g. burning, transferring, updating, etc. — require the Proof of the asset before allowing us to perform them. Computing the Proof of an asset is possible but requires someone to know the hash of all Compressed NFTs that exists within a given tree. This is why the Read API also keeps track of the Proof of all Compressed NFTs.
+
+In order to access the Proof of a Compressed NFT, we may use the `getAssetProof` RPC method. This method will return an **Rpc Asset Proof** object containing the following information:
+
+- **Proof**: The proof of the Compressed NFT as promised.
+- **Root**: The root of the Merkle Tree that the asset belongs to. When verifying the asset using the provided Proof, we should end up with this root as the final hash.
+- **Node Index**: The index of the asset in the Merkle Tree if we counted every single node in the tree from left to right, top to bottom. A more useful index called the **Leaf Index** can be inferred from this value by the following formula: `leaf_index = node_index - 2^max_depth` where `max_depth` is the maximum depth of the Merkle Tree. The **Leaf Index** is the index of the asset in the Merkle Tree if we counted only the leaves of the tree — i.e. the lowest row — from left to right. This index is requested by many instructions and is used to derive the **Leaf Asset ID** of the asset.
+- **Leaf**: The full hash of the Compressed NFT.
+- **Tree ID**: The address of the Merkle Tree that the asset belongs to.
+
+As you can see some of the information here is redundant from the `getAsset` RPC call but is provided here for convenience. However, the **Proof** and the **Node Index** of the asset can only be fetch through this method.
+
+Here is how we can fetch the Proof of an asset using our SDKs.
 
 {% dialect-switcher title="Fetch the proof of a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
