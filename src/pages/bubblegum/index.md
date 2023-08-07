@@ -123,8 +123,8 @@ We talk about this in more detail in our advanced [“Storing and indexing NFT d
 Even though NFT data does not live inside accounts, it is still possible to execute a variety of operations on compressed NFTs. This is possible by requesting the current NFT data and ensuring its hashed Leaf is valid on the Merkle Tree. As such, the following operations can be performed on compressed NFTs:
 
 - [Mint a cNFT](/bubblegum/mint-cnfts) with or without an associated collection.
-- [Update the data of a cNFT](/bubblegum/update-cnfts) _(Coming Soon)_.
 - [Transfer a cNFT](/bubblegum/transfer-cnfts).
+- [Update the data of a cNFT](/bubblegum/update-cnfts) _(Coming Soon)_.
 - [Burn a cNFT](/bubblegum/burn-cnfts).
 - [Decompress a cNFT into a regular NFT](/bubblegum/decompress-cnfts). Note that this enables interoperability with existing smart contracts but creates on-chain accounts with rent fees.
 - [Delegate a cNFT](/bubblegum/delegate-cnfts).

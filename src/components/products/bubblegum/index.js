@@ -41,8 +41,8 @@ export const bubblegum = {
               href: '/bubblegum/mint-cnfts',
             },
             { title: 'Fetching cNFTs', href: '/bubblegum/fetch-cnfts' },
-            { title: 'Updating cNFTs', href: '/bubblegum/update-cnfts' },
             { title: 'Transferring cNFTs', href: '/bubblegum/transfer-cnfts' },
+            { title: 'Updating cNFTs', href: '/bubblegum/update-cnfts' },
             { title: 'Burning cNFTs', href: '/bubblegum/burn-cnfts' },
             {
               title: 'Decompressing cNFTs',
