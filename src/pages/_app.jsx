@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 
 import { Layout } from '@/components/Layout'
 import { DialectProvider } from '@/components/DialectContext'
@@ -10,7 +11,6 @@ import 'reactflow/dist/base.css'
 
 // Add Prism components.
 import { Prism } from 'prism-react-renderer'
-import { useEffect } from 'react'
 ;(typeof global !== 'undefined' ? global : window).Prism = Prism
 require('prismjs/components/prism-rust')
 
@@ -26,11 +26,23 @@ export default function App({ Component, pageProps }) {
           <meta name="description" content={page.description} />
         )}
       </Head>
+
       <DialectProvider>
         <Layout page={page}>
           <Component {...pageProps} />
         </Layout>
       </DialectProvider>
+
+      {/* Google Analytics. */}
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-YLQCC8102N" />
+      <Script id="google-analytics">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YLQCC8102N');
+          `}
+      </Script>
     </>
   )
 }

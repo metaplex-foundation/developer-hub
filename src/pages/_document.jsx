@@ -1,5 +1,4 @@
 import { Head, Html, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 
 const themeScript = `
   let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)')
@@ -69,17 +68,6 @@ export default function Document() {
       <body className="bg-white dark:bg-slate-900">
         <Main />
         <NextScript />
-
-        {/* Google Analytics. */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-YLQCC8102N" />
-        <Script id="google-analytics">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-YLQCC8102N');
-          `}
-        </Script>
       </body>
     </Html>
   )
