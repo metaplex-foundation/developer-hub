@@ -116,11 +116,18 @@ const rpcAssetProof = await umi.rpc.getAssetProof(assetId)
 
 ## Fetching multiple Compressed NFTs
 
-TODO
+The Read API also allows us to fetch multiple assets at once using the `getAssetsByOwner` and `getAssetsByGroup` RPC methods. These methods will return a paginated **Rpc Asset List** object containing the following information:
+
+- **Items**: An array of **Rpc Asset** as described above.
+- **Total**: The total number of assets available based on the provided criteria.
+- **Limit**: The maximum number of assets we are retrieving in a page.
+- **Page**: When using numbered pagination, it tells us which page we are currently on.
+- **Before** and **After**: When using cursor pagination, it tells us after which and/or before which asset we are currently browsing assets. These cursors can be used to navigate to the previous and next pages.
+- **Errors**: A potential list of errors returned by the RPC.
+
+Here is how we can use both of these RPC methods using our SDKs.
 
 ### By owner
-
-TODO
 
 {% dialect-switcher title="Fetch Compressed NFTs by owner" %}
 {% dialect title="JavaScript" id="js" %}
@@ -133,8 +140,6 @@ const rpcAssetList = await umi.rpc.getAssetsByOwner({ owner })
 {% /dialect-switcher %}
 
 ### By collection
-
-TODO
 
 {% dialect-switcher title="Fetch Compressed NFTs by collection" %}
 {% dialect title="JavaScript" id="js" %}
