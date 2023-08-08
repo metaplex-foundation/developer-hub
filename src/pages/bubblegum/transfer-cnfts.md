@@ -34,7 +34,6 @@ import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
 const assetWithProof = await getAssetWithProof(umi, assetId)
 await transfer(umi, {
   ...assetWithProof,
-  leafOwner: currentLeafOwner.publicKey,
   leafDelegate: currentLeafDelegate,
   newLeafOwner: newLeafOwner.publicKey,
 }).sendAndConfirm(umi)
