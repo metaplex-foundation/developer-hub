@@ -65,9 +65,75 @@ _Coming soon..._
 
 _Coming soon..._
 
+{% dialect-switcher title="Redeem a Compressed NFT" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```ts
+import { getAssetWithProof, redeem } from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId)
+await redeem(umi, {
+  ...assetWithProof,
+  leafOwner: currentLeafOwner,
+}).sendAndConfirm(umi)
+```
+
+{% totem-accordion title="Using a delegate" %}
+
+```ts
+import { getAssetWithProof, redeem } from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId)
+await redeem(umi, {
+  ...assetWithProof,
+  leafDelegate: currentLeafDelegate,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
 ## Decompressing a Redeemed NFT
 
 _Coming soon..._
+
+{% dialect-switcher title="Decompress a Redeemed Compressed NFT" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```ts
+import {
+  getAssetWithProof,
+  findVoucherPda,
+  findLeafAssetIdPda,
+  decompressV1,
+} from '@metaplex-foundation/mpl-bubblegum'
+
+const { merkleTree, nonce } = await getAssetWithProof(umi, assetId)
+const voucher = findVoucherPda(umi, { merkleTree, nonce })
+await decompressV1(umi, {
+  leafOwner,
+  voucher,
+  metadata,
+  mint: assetId,
+}).sendAndConfirm(umi)
+```
+
+{% totem-accordion title="Using a delegate" %}
+
+```ts
+TODO
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
 
 ## Cancelling a Redeemed NFT
 
