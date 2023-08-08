@@ -53,7 +53,7 @@ _Coming soon..._
 {% edge from="tree-config-pda" to="tree-config" path="straight" /%}
 {% edge from="merkle-tree" to="voucher" animated=true label="1️⃣  Redeem" theme="mint" /%}
 {% edge from="voucher" to="mint" animated=true label="2️⃣  Decompress" theme="mint" /%}
-{% edge from="voucher-wrapper" to="merkle-tree-wrapper" animated=true label="2️⃣  Cancel Redeem" fromPosition="bottom" toPosition="bottom" theme="red" /%}
+{% edge from="voucher-wrapper" to="merkle-tree-wrapper" animated=true label="2️⃣  Cancel Redeem" fromPosition="bottom" toPosition="bottom" theme="red" labelX=175 /%}
 {% edge from="mint" to="edition-pda" fromPosition="right" toPosition="right" /%}
 {% edge from="mint" to="metadata-pda" fromPosition="right" toPosition="right" /%}
 {% edge from="edition-pda" to="edition" path="straight" /%}

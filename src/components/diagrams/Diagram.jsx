@@ -157,6 +157,8 @@ function getEdgesFromMarkdoc(markdocEdges, type) {
     data: {
       content,
       label: attributes.label,
+      labelX: attributes.labelX ?? 0,
+      labelY: attributes.labelY ?? 0,
       dashed: attributes.dashed,
       arrow: attributes.arrow,
       theme: attributes.theme,

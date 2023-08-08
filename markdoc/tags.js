@@ -115,6 +115,8 @@ const tags = {
       id: { type: String },
       type: { type: String },
       label: { type: String },
+      labelX: { type: Number },
+      labelY: { type: Number },
       from: { type: String, required: true },
       to: { type: String, required: true },
       fromPosition: { type: String },

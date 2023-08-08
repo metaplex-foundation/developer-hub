@@ -85,7 +85,9 @@ export function FloatingEdge({
           <div
             style={{
               position: 'absolute',
-              transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
+              transform: `translate(-50%, -50%) translate(${
+                labelX + data.labelX
+              }px,${labelY + data.labelY}px)`,
             }}
             className="rounded-md bg-slate-50 p-1 text-center text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300"
           >
