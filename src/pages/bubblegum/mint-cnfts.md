@@ -15,7 +15,7 @@ The Bubblegum program provides a **Mint V1** instruction that enables us to mint
 The main parameters of the Mint V1 instruction are:
 
 - **Merkle Tree**: The Merkle Tree address from which the Compressed NFT will be minted.
-- **Tree Creator Or Delegate**: The authority allowed to mint from the Bubblegum Tree — this can either be the creator or the delegate of the tree.
+- **Tree Creator Or Delegate**: The authority allowed to mint from the Bubblegum Tree — this can either be the creator or the delegate of the tree. This authority must sign the transaction. In the case of a public tree, this parameter can be any authority but must still be a signer.
 - **Leaf Owner**: The owner of the Compressed NFT that will be minted.
 - **Leaf Delegate**: An delegate authority allowed to manage the minted cNFT, if any. Otherwise, it is set to the Leaf Owner.
 - **Metadata**: The metadata of the Compressed NFT that will be minted. It contains information such as the **Name** of the NFT, its **URI**, its **Creators**, etc. Note that is it possible to provide a **Collection** object within the metadata but its **Verified** field will have to be set to `false` since the Collection Authority is not requested in this instruction and therefore cannot sign the transaction.
@@ -50,7 +50,7 @@ await mintV1(umi, {
 Whilst it is possible to set and verify a Collection for a Compressed NFT _after_ it was minted, the Bubblegum program provides a convenient instruction to mint a Compressed NFT directly to a given Collection. This instruction is called **Mint To Collection V1** and it uses the same parameters as the **Mint V1** instruction, with the addition of the following parameters:
 
 - **Collection Mint**: The Mint address of the Collection NFT to which the Compressed NFT will be part.
-- **Collection Authority**: The authority allowed to manage the given Collection NFT. This can either be the update authority of the Collection NFT or a delegated collection authority.
+- **Collection Authority**: The authority allowed to manage the given Collection NFT. This can either be the update authority of the Collection NFT or a delegated collection authority. This authority must sign the transaction regardless of whether the Bubblegum Tree is public or not.
 - **Collection Authority Record Pda**: When using a delegated collection authority, the Delegate Record PDA must be provided to ensure the authority is allowed to manage the Collection NFT. This can either be using the new "Metadata Delegate" PDA or the legacy "Collection Authority Record" PDA.
 
 Additionally, note that the **Metadata** parameter must contain a **Collection** object such that:
