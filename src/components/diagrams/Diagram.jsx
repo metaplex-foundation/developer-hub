@@ -1,6 +1,7 @@
 import { Tag } from '@markdoc/markdoc'
 import clsx from 'clsx'
 import ReactFlow, { Background, Panel, ReactFlowProvider } from 'reactflow'
+import { useRef } from 'react'
 
 import { Icon } from '@/components/icons'
 import * as whimsical from './DiagramWhimsical'
@@ -31,8 +32,9 @@ export function WrappedDiagram({
   edges: initialEdges,
   type,
 }) {
+  const ref = useRef(null)
   const [fullscreen, toggleFullscreen] = useFullscreen()
-  const [downloadImage] = useDownloadImage()
+  const [downloadImage] = useDownloadImage(ref)
   const [nodes, edges, onInit] = useTransforms(initialNodes, initialEdges, type)
 
   return (
@@ -44,6 +46,7 @@ export function WrappedDiagram({
       })}
     >
       <ReactFlow
+        ref={ref}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         nodes={nodes}

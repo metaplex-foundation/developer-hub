@@ -2,6 +2,7 @@ import { getRectOfNodes, getTransformForBounds, useReactFlow } from 'reactflow'
 import { toPng } from 'html-to-image'
 
 export function useDownloadImage(
+  ref,
   filename = 'diagram.png',
   imageWidth = 1024,
   imageHeight = 768
@@ -16,6 +17,8 @@ export function useDownloadImage(
   }
 
   const downloadImage = () => {
+    if (!ref.current) return
+    const viewport = ref.current.querySelector('.react-flow__viewport')
     const nodesBounds = getRectOfNodes(getNodes())
     const transform = getTransformForBounds(
       nodesBounds,
@@ -25,7 +28,7 @@ export function useDownloadImage(
       2
     )
     const isDarkMode = document.querySelector('html').classList.contains('dark')
-    toPng(document.querySelector('.react-flow__viewport'), {
+    toPng(viewport, {
       backgroundColor: isDarkMode ? '#1e293b' : '#f8fafc',
       width: imageWidth,
       height: imageHeight,
