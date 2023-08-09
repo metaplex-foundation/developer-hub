@@ -4,25 +4,26 @@ metaTitle: Bubblegum - FAQ
 description: Frequently asked questions about Bubblegum
 ---
 
-## How to set up instructions that replace the leaf of a Compressed NFT?
+## How do I find the arguments needed for operations such as transfer, delegate, burn, etc? {% #replace-leaf-instruction-arguments %}
 
-Whenever we use an instruction that ends up replacing a leaf in the Bubblegum Tree, the program requires a bunch of parameters that are used to ensure the current leaf is valid and can be updated. This is because the data of Compressed NFTs is not available inside on-chain accounts and therefore additional parameters such as the **Proof**, the **Leaf Index**, the **Nonce** and more are required for the program to fill the pieces.
+Whenever we use an instruction that ends up replacing a leaf in the Bubblegum Tree — such as transfer, delegate, burn, etc. — the program requires a bunch of parameters that are used to ensure the current leaf is valid and can be updated. This is because the data of Compressed NFTs is not available inside on-chain accounts and therefore additional parameters such as the **Proof**, the **Leaf Index**, the **Nonce** and more are required for the program to fill the pieces.
 
 All of that information can be retrieved from the **Read API** using both the `getAsset` and the `getAssetProof` RPC methods. However, the RPC responses from these methods and the parameters expected by the instructions are not exactly the same and parsing from one to the other is not trivial.
 
-Fortunately, our SDKs provide a helper method that will do all the heavy lifting for us, as we can see in the code examples below. It accepts the Asset ID of the Compressed NFT and returns a bunch of parameters that can be directly injected into instructions that replace the leaf — such as Burn, Transfer, Update, etc.
+Fortunately, our SDKs provide a helper method that will do all the heavy lifting for us, as we can see in the code examples below. It accepts the Asset ID of the Compressed NFT and returns a bunch of parameters that can be directly injected into instructions that replace the leaf — such as burn, transfer, update, etc.
 
 That being said, if you ever needed to do that parsing yourself, here is a quick breakdown of the parameters expected by the instructions and how to retrieve them from the Read API. Here we will assume the result of the `getAsset` and `getAssetProof` RPC methods are accessible via the `rpcAsset` and `rpcAssetProof` variables respectively.
 
-- **Leaf Owner**: Accessible via `rpcAsset.ownership.owner`
+- **Leaf Owner**: Accessible via `rpcAsset.ownership.owner`.
 - **Leaf Delegate**: Accessible via `rpcAsset.ownership.delegate` and should default to `rpcAsset.ownership.owner` when null.
-- **Merkle Tree**: Accessible via `rpcAsset.compression.tree` or `rpcAssetProof.tree_id`
-- **Root**: Accessible via `rpcAssetProof.root`
-- **Data Hash**: Accessible via `rpcAsset.compression.data_hash`
-- **Creator Hash**: Accessible via `rpcAsset.compression.creator_hash`
-- **Nonce**: Accessible via `rpcAsset.compression.leaf_id`
+- **Merkle Tree**: Accessible via `rpcAsset.compression.tree` or `rpcAssetProof.tree_id`.
+- **Root**: Accessible via `rpcAssetProof.root`.
+- **Data Hash**: Accessible via `rpcAsset.compression.data_hash`.
+- **Creator Hash**: Accessible via `rpcAsset.compression.creator_hash`.
+- **Nonce**: Accessible via `rpcAsset.compression.leaf_id`.
 - **Index**: Accessible via `rpcAssetProof.node_index - 2^max_depth` where `max_depth` is the maximum depth of the tree and can be inferred from the length of the `rpcAssetProof.proof` array.
-- **Proof**: Accessible via `rpcAssetProof.proof`
+- **Proof**: Accessible via `rpcAssetProof.proof`.
+- **Metadata**: Currently needs to be reconstructed from various fields in the `rpcAsset` response.
 
 {% dialect-switcher title="Get parameters for instructions that replace leaves" %}
 {% dialect title="JavaScript" id="js" %}

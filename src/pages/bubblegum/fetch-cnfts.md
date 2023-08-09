@@ -36,7 +36,7 @@ umi.use(readApi())
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Asset IDs
+## Asset IDs {% #asset-ids %}
 
 In order to fetch an NFT, compressed or not, we need to have access to a unique ID that identifies the NFT. We call this unique identifier the **Asset ID**.
 
