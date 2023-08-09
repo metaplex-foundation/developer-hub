@@ -109,24 +109,34 @@ _Coming soon..._
 import {
   getAssetWithProof,
   findVoucherPda,
-  findLeafAssetIdPda,
   decompressV1,
 } from '@metaplex-foundation/mpl-bubblegum'
 
-const { merkleTree, nonce } = await getAssetWithProof(umi, assetId)
-const voucher = findVoucherPda(umi, { merkleTree, nonce })
+const assetWithProof = await getAssetWithProof(umi, assetId)
 await decompressV1(umi, {
-  leafOwner,
-  voucher,
-  metadata,
+  ...assetWithProof,
+  leafOwner: currentLeafOwner,
   mint: assetId,
+  voucher: findVoucherPda(umi, assetWithProof),
 }).sendAndConfirm(umi)
 ```
 
 {% totem-accordion title="Using a delegate" %}
 
 ```ts
-TODO
+import {
+  getAssetWithProof,
+  findVoucherPda,
+  decompressV1,
+} from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId)
+await decompressV1(umi, {
+  ...assetWithProof,
+  leafDelegate: currentLeafDelegate,
+  mint: assetId,
+  voucher: findVoucherPda(umi, assetWithProof),
+}).sendAndConfirm(umi)
 ```
 
 {% /totem-accordion %}
@@ -138,3 +148,45 @@ TODO
 ## Cancelling a Redeemed NFT
 
 _Coming soon..._
+
+{% dialect-switcher title="Cancel the decompression a Redeemed Compressed NFT" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```ts
+import {
+  getAssetWithProof,
+  findVoucherPda,
+  cancelRedeem,
+} from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId)
+await cancelRedeem(umi, {
+  ...assetWithProof,
+  leafOwner: currentLeafOwner,
+  voucher: findVoucherPda(umi, assetWithProof),
+}).sendAndConfirm(umi)
+```
+
+{% totem-accordion title="Using a delegate" %}
+
+```ts
+import {
+  getAssetWithProof,
+  findVoucherPda,
+  cancelRedeem,
+} from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId)
+await cancelRedeem(umi, {
+  ...assetWithProof,
+  leafDelegate: currentLeafDelegate,
+  voucher: findVoucherPda(umi, assetWithProof),
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
