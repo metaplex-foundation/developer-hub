@@ -8,10 +8,10 @@ The owner of a Compressed NFT can delegate it to another account whilst keeping 
 
 This allows the delegated account — which we also refer to as the **Delegate Authority** — to perform actions on behalf of the owner. These actions are:
 
-- [Transferring the cNFT](/bubblegum/transfer-cnfts).
+- [Transferring the cNFT](/bubblegum/transfer-cnfts). The Delegate Authority will be reset — i.e. set to the new owner — after the transfer.
 - [Burning the cNFT](/bubblegum/burn-cnfts).
 
-Each of these actions provide examples on how to use the **Delegate Authority** to perform them, but usually, it is simply the case of providing the **Leaf Delegate** account as a Signer instead of passing the **Leaf Owner** account as a Signer.
+Each of these actions provide examples on how to use the Delegate Authority to perform them, but usually, it is simply the case of providing the **Leaf Delegate** account as a Signer instead of passing the **Leaf Owner** account as a Signer.
 
 Let's see how we can approve and revoke Delegate Authorities for our Compressed NFTs.
 
