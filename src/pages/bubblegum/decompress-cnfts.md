@@ -10,7 +10,11 @@ This means on-chain accounts such as the Mint account, the Metadata account and 
 
 ## The decompression process
 
-_Coming soon..._
+Decompressing a Compressed NFT is a two-step process initiated by the owner of the NFT.
+
+1. First, the owner must **Redeem** the Compressed NFT for a Voucher. This will remove the leaf from the Bubblegum tree and create a Voucher account that acts as proof that the leaf once existed on the tree.
+
+2. Then, the owner must **Decompress** the Voucher into a regular NFT. At this point, all accounts of the regular NFT will be created with the same data as the Compressed NFT. Alternatively, the owner can change their mind and revert the process by using the **Cancel Redeem** instruction which will restore the leaf on the Bubblegum tree and close the Voucher account.
 
 {% diagram %}
 
@@ -63,7 +67,9 @@ _Coming soon..._
 
 ## Redeeming a Compressed NFT
 
-_Coming soon..._
+To initiate the first step of the decompression process, the owner of the Compressed NFT must send a **Redeem** instruction and sign the transaction. This will create a Voucher account for the cNFT that will be used in the next step of the decompression process.
+
+Note that this instruction removes a leaf from the Bubblegum Tree. Therefore, additional parameters must be provided to verify the integrity of the Compressed NFT to remove. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Read API.
 
 {% dialect-switcher title="Redeem a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
@@ -79,27 +85,19 @@ await redeem(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% totem-accordion title="Using a delegate" %}
-
-```ts
-import { getAssetWithProof, redeem } from '@metaplex-foundation/mpl-bubblegum'
-
-const assetWithProof = await getAssetWithProof(umi, assetId)
-await redeem(umi, {
-  ...assetWithProof,
-  leafDelegate: currentLeafDelegate,
-}).sendAndConfirm(umi)
-```
-
-{% /totem-accordion %}
-
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
 ## Decompressing a Redeemed NFT
 
-_Coming soon..._
+The finalize the decompression process, the owner of cNFT must send a **Decompress** instruction which will transform the redeemed Voucher account into a regular NFT. The following parameters must be provided:
+
+- **Mint**: The mint address of the NFT to create. This must be the **Asset ID** of the Compressed NFT, i.e. the PDA derived the Merkle Tree address and the index of the leaf.
+- **Voucher**: The address of the Voucher account that was created in the previous step. This address is also derived from the Merkle Tree address and the index of the leaf.
+- **Metadata**: The metadata object that contains all of the cNFT's data. This attribute must match exactly the data of the Compressed NFT, otherwise, the hashes won't match and decompression will fail.
+
+Here again, a helper function provided by our SDKs can be used to fetch and parse most of these attributes from the Read API.
 
 {% dialect-switcher title="Decompress a Redeemed Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
@@ -121,33 +119,13 @@ await decompressV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% totem-accordion title="Using a delegate" %}
-
-```ts
-import {
-  getAssetWithProof,
-  findVoucherPda,
-  decompressV1,
-} from '@metaplex-foundation/mpl-bubblegum'
-
-const assetWithProof = await getAssetWithProof(umi, assetId)
-await decompressV1(umi, {
-  ...assetWithProof,
-  leafDelegate: currentLeafDelegate,
-  mint: assetId,
-  voucher: findVoucherPda(umi, assetWithProof),
-}).sendAndConfirm(umi)
-```
-
-{% /totem-accordion %}
-
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
 ## Cancelling a Redeemed NFT
 
-_Coming soon..._
+Should the owner change their mind about decompressing the cNFT, they can cancel the decompression process by sending a **Cancel Redeem** instruction. This will add the leaf back to the tree and close the Voucher account. Similarly to the **Decompress** instruction, the **Voucher** address must be provided as well as other attributes that can be retrieved using the Read API.
 
 {% dialect-switcher title="Cancel the decompression a Redeemed Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
@@ -167,25 +145,6 @@ await cancelRedeem(umi, {
   voucher: findVoucherPda(umi, assetWithProof),
 }).sendAndConfirm(umi)
 ```
-
-{% totem-accordion title="Using a delegate" %}
-
-```ts
-import {
-  getAssetWithProof,
-  findVoucherPda,
-  cancelRedeem,
-} from '@metaplex-foundation/mpl-bubblegum'
-
-const assetWithProof = await getAssetWithProof(umi, assetId)
-await cancelRedeem(umi, {
-  ...assetWithProof,
-  leafDelegate: currentLeafDelegate,
-  voucher: findVoucherPda(umi, assetWithProof),
-}).sendAndConfirm(umi)
-```
-
-{% /totem-accordion %}
 
 {% /totem %}
 {% /dialect %}
