@@ -26,20 +26,23 @@ export const global = {
         {
           title: 'Resources',
           links: [
-            { title: 'Developer Tools', href: '/todo' },
-            { title: 'Understanding Programs', href: '/todo' },
-            { title: 'RPC Providers', href: '/todo' },
-            { title: 'Storage Providers', href: '/todo' },
-            { title: 'Stability Index', href: '/todo' },
-            { title: 'Protocol Fees', href: '/todo' },
+            { title: 'Developer Tools', href: '/developer-tools' },
+            {
+              title: 'Understanding Programs',
+              href: '/understanding-programs',
+            },
+            { title: 'RPC Providers', href: '/rpc-providers' },
+            { title: 'Storage Providers', href: '/storage-providers' },
+            { title: 'Stability Index', href: '/stability-index' },
+            { title: 'Protocol Fees', href: '/protocol-fees' },
           ],
         },
         {
           title: 'Community',
           links: [
-            { title: 'Community Guides', href: '/todo' },
-            { title: 'Security', href: '/todo' },
-            { title: 'Contact Us', href: '/todo' },
+            { title: 'Community Guides', href: '/community-guides' },
+            { title: 'Security', href: '/security' },
+            { title: 'Contact Us', href: '/contact-us' },
           ],
         },
       ],
