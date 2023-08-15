@@ -7,7 +7,7 @@ description: A collection of articles/projects from the Metaplex Community
 A collection of articles/projects from the Metaplex Community {% .lead %}
 
 {% callout title="Get featured" %}
-Send a tweet to [@metaplex](https://twitter.com/metaplex) or [edit this page on GitHub](/todo) to suggest additions.
+Send a tweet to [@metaplex](https://twitter.com/metaplex) or [edit this page on GitHub](https://github.com/metaplex-foundation/developer-hub/edit/main/src/pages/community-guides.md) to suggest additions.
 {% /callout %}
 
 ## General
@@ -21,7 +21,7 @@ Send a tweet to [@metaplex](https://twitter.com/metaplex) or [edit this page on 
 
 ## Awesome Solana NFTs
 
-[A curated list of Solana NFT protocols, repos & community tools](https://github.com/ilmoi/awesome-solana-nfts)
+- [A curated list of Solana NFT protocols, repos & community tools](https://github.com/ilmoi/awesome-solana-nfts)
 
 ## NFT Transfer and Airdrops
 
@@ -30,12 +30,12 @@ Send a tweet to [@metaplex](https://twitter.com/metaplex) or [edit this page on 
 
 ## NFT Viewing
 
-- [Steps for Metaplex NFT Display
-  ](https://gist.github.com/creativedrewy/9bce794ff278aae23b64e6dc8f10e906)
+- [Steps for Metaplex NFT Display](https://gist.github.com/creativedrewy/9bce794ff278aae23b64e6dc8f10e906)
 
 ## Token Metadata
 
 - [Mint NFTs on Solana Using Rust and Metaplex Token Metadata](https://betterprogramming.pub/how-to-mint-nfts-on-solana-using-rust-and-metaplex-f66bac717cb8)
+- [How NFTs are represented in Solana](https://lorisleiva.com/owning-digital-assets-in-solana/how-nfts-are-represented-in-solana)
 
 ## Candy Machine
 
