@@ -42,7 +42,7 @@ export const global = {
           links: [
             { title: 'Community Guides', href: '/community-guides' },
             { title: 'Security', href: '/security' },
-            { title: 'Contact Us', href: '/contact-us' },
+            { title: 'Contact Us', href: '/contact' },
           ],
         },
       ],
