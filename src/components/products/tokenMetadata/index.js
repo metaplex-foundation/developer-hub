@@ -27,27 +27,38 @@ export const tokenMetadata = {
             {
               title: 'Getting Started',
               href: '/token-metadata/getting-started',
-              // Subpages: /js /rust, etc.
             },
-            { title: 'FAQ', href: '/token-metadata/todo' },
+            { title: 'FAQ', href: '/token-metadata/faq' },
           ],
         },
         {
           title: 'Features',
           links: [
-            { title: 'Token Standards (Assets)', href: '/token-metadata/todo' }, // Include "Non-fungible tokens" definition.
-            { title: 'Minting Assets', href: '/token-metadata/todo' }, // Uploading off-chain data section + Create + Mint.
-            { title: 'Updating Assets', href: '/token-metadata/todo' },
-            { title: 'Transferring Assets', href: '/token-metadata/todo' },
-            { title: 'Burning Assets', href: '/token-metadata/todo' },
-            { title: 'Printed Editions', href: '/token-metadata/todo' }, // Include "Definitions" content.
-            { title: 'Verified Collections', href: '/token-metadata/todo' },
-            { title: 'Verified Creators', href: '/token-metadata/todo' },
-            { title: 'Delegated Authorities', href: '/token-metadata/todo' }, // Delegate + Revoke + Delegated transfer and burn.
-            { title: 'Locking Assets', href: '/token-metadata/todo' },
-            { title: 'Programmable NFTs', href: '/token-metadata/todo' },
-            { title: 'NFT Escrow', href: '/token-metadata/todo' },
-            { title: 'Asset usage (deprecated)', href: '/token-metadata/todo' },
+            {
+              title: 'Token Standards (Assets)',
+              href: '/token-metadata/token-standard',
+            }, // Include "Non-fungible tokens" definition.
+            { title: 'Minting Assets', href: '/token-metadata/mint' }, // Uploading off-chain data section + Create + Mint.
+            { title: 'Updating Assets', href: '/token-metadata/update' },
+            { title: 'Transferring Assets', href: '/token-metadata/transfer' },
+            { title: 'Burning Assets', href: '/token-metadata/burn' },
+            { title: 'Printed Editions', href: '/token-metadata/print' }, // Include "Definitions" content.
+            {
+              title: 'Verified Collections',
+              href: '/token-metadata/collections',
+            },
+            { title: 'Verified Creators', href: '/token-metadata/creators' },
+            {
+              title: 'Delegated Authorities',
+              href: '/token-metadata/delegates',
+            }, // Delegate + Revoke + Delegated transfer and burn.
+            { title: 'Locking Assets', href: '/token-metadata/lock' },
+            { title: 'Programmable NFTs', href: '/token-metadata/pnfts' },
+            { title: 'NFT Escrow', href: '/token-metadata/escrow' },
+            {
+              title: 'Asset usage (deprecated)',
+              href: '/token-metadata/usage',
+            },
           ],
         },
       ],
