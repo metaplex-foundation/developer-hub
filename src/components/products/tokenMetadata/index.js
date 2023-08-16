@@ -56,7 +56,7 @@ export const tokenMetadata = {
             { title: 'Programmable NFTs', href: '/token-metadata/pnfts' },
             { title: 'NFT Escrow', href: '/token-metadata/escrow' },
             {
-              title: 'Asset usage (deprecated)',
+              title: 'Asset Usage (Deprecated)',
               href: '/token-metadata/usage',
             },
           ],
