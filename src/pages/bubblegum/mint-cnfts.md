@@ -18,7 +18,9 @@ The main parameters of the Mint V1 instruction are:
 - **Tree Creator Or Delegate**: The authority allowed to mint from the Bubblegum Tree — this can either be the creator or the delegate of the tree. This authority must sign the transaction. In the case of a public tree, this parameter can be any authority but must still be a signer.
 - **Leaf Owner**: The owner of the Compressed NFT that will be minted.
 - **Leaf Delegate**: An delegate authority allowed to manage the minted cNFT, if any. Otherwise, it is set to the Leaf Owner.
-- **Metadata**: The metadata of the Compressed NFT that will be minted. It contains information such as the **Name** of the NFT, its **URI**, its **Creators**, etc. Note that is it possible to provide a **Collection** object within the metadata but its **Verified** field will have to be set to `false` since the Collection Authority is not requested in this instruction and therefore cannot sign the transaction.
+- **Metadata**: The metadata of the Compressed NFT that will be minted. It contains information such as the **Name** of the NFT, its **URI**, its **Collection**, its **Creators**, etc.
+  - Note that is it possible to provide a **Collection** object within the metadata but its **Verified** field will have to be set to `false` since the Collection Authority is not requested in this instruction and therefore cannot sign the transaction.
+  - Also note that creators can verify themselves on the cNFT when minting. To make this work, we need to set the **Verified** field of the **Creator** object to `true` and add the creator as a Signer in the remaining accounts. This can happen for multiple creators as long as they all sign the transaction and are added as remaining accounts.
 
 {% dialect-switcher title="Mint a Compressed NFT without a Collection" %}
 {% dialect title="JavaScript" id="js" %}
@@ -57,6 +59,8 @@ Additionally, note that the **Metadata** parameter must contain a **Collection**
 
 - Its **Address** field matches the **Collection Mint** parameter.
 - Its **Verified** field is set to `false`. It will be set to `true` during the transaction but the Bubblegum program requires that the initial value for this field is `false`.
+
+Also note that, just like in the **Mint V1** instruction, creators can verify themselves by signing the transaction and adding themselves as remaining accounts.
 
 {% dialect-switcher title="Mint a Compressed NFT to a Collection" %}
 {% dialect title="JavaScript" id="js" %}

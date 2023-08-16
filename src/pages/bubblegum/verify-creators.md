@@ -8,7 +8,7 @@ If a Compressed NFT has a list of creators set in its metadata, these creators c
 
 These instructions will toggle a **Verified** boolean on the appropriate item of the cNFT's **Creators** array. That boolean is important as it allows apps such as wallets and marketplaces to know which creators are genuine and which ones are not.
 
-Let's now see how a creator can verify or unverify themselves on a Compressed NFT.
+It is worth noting that creators can verify themselves directly when [minting the Compressed NFT](/bubblegum/mint-cnfts) by signing the mint transaction. That being said, let's now see how a creator can verify or unverify themselves on an existing Compressed NFT.
 
 ## Verify a Creator
 

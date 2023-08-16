@@ -14,7 +14,7 @@ Decompressing a Compressed NFT is a two-step process initiated by the owner of t
 
 1. First, the owner must **Redeem** the Compressed NFT for a Voucher. This will remove the leaf from the Bubblegum tree and create a Voucher account that acts as proof that the leaf once existed on the tree.
 
-2. Then, the owner must **Decompress** the Voucher into a regular NFT. At this point, all accounts of the regular NFT will be created with the same data as the Compressed NFT. Alternatively, the owner can change their mind and revert the process by using the **Cancel Redeem** instruction which will restore the leaf on the Bubblegum tree and close the Voucher account.
+2. Then, the owner must **Decompress** the Voucher into a regular NFT. At this point, all accounts of the regular NFT will be created with the same data as the Compressed NFT. Alternatively, the owner can revert the process by using the **Cancel Redeem** instruction which will restore the leaf on the Bubblegum tree and close the Voucher account. Note that once the cNFT is fully decompressed, the **Cancel Redeem** instruction can no longer be used and therefore the process can no longer be reverted.
 
 {% diagram %}
 

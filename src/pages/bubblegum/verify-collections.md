@@ -8,9 +8,9 @@ Whenever a collection is set on a Compressed NFT, the update authority of the co
 
 Technically, this will toggle a **Verified** boolean on the **Collection** object of the cNFT, letting anyone know that an authority of the collection approved this Compressed NFT as being part of the collection.
 
-If you are not familiar with the concept of collections with regard to NFTs, they are special NFTs that can be used to group other NFTs together. The data of the **Collection NFT** is therefore used to describe the name and the branding of the entire collection. You can [read more about Metaplex Certified Collections here](https://docs.metaplex.com/programs/token-metadata/certified-collections).
+If you are not familiar with the concept of collections with regard to NFTs, they are special non-compressed NFTs that can be used to group other NFTs together. The data of the **Collection NFT** is therefore used to describe the name and the branding of the entire collection. You can [read more about Metaplex Certified Collections here](https://docs.metaplex.com/programs/token-metadata/certified-collections).
 
-Let's now see how one can verify, unverify but also set the collection of a Compressed NFT.
+Note that is possible to mint a Compressed NFT directly into a collection by using the **Mint to Collection V1** instruction [documented here](/bubblegum/mint-cnfts#minting-to-a-collection). That being said, if you have already minted a cNFT without a collection, let's see how we can verify, unverify but also set the collection on that cNFT.
 
 ## Verify a Collection
 
@@ -19,7 +19,7 @@ The **Verify Collection** instruction of the Bubblegum program can be used to se
 The instruction accepts the following parameters:
 
 - **Collection Mint**: The mint account of the Collection NFT.
-- **Collection Authority**: The update authority of the Collection NFT — or an approved collection delegate — as a Signer.
+- **Collection Authority**: The update authority of the Collection NFT — or an approved collection delegate — as a Signer. In case the collection authority is a delegate authority, note that the program supports both the new unified **Metadata Delegate** system and the legacy **Collection Authority Records** accounts. Simply pass the approriate PDA to the **Collection Authority Record Pda** parameter.
 
 Additionally, more parameters must be provided to verify the integrity of the Compressed NFT as this instruction will end up replacing the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Read API.
 
@@ -48,8 +48,6 @@ await verifyCollection(umi, {
 ## Set and Verify a Collection
 
 If the **Collection** object has not been set on the Compressed NFT yet, the **Set and Verify Collection** instruction can be used to set it and verify it at the same time. This instruction accepts the same parameters as the **Verify Collection** instruction but also requires the **Tree Creator Or Delegate** attribute to be passed as a Signer if it is different than the collection authority.
-
-Note that is possible to mint a Compressed NFT directly into a collection by using the **Mint to Collection V1** instruction [documented here](/bubblegum/mint-cnfts#minting-to-a-collection).
 
 {% dialect-switcher title="Set and Verify the Collection of a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
