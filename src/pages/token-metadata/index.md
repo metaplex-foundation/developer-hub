@@ -430,13 +430,13 @@ You can [read more about these standards here](/token-metadata/token-standard).
 
 Because the Token Metadata program is building on top of the Solana Token program, anyone can transfer tokens (fungible or not) without going through the Token Metadata program. Whilst this is great for program composibility, it also means that the Token Metadata program cannot enforce any rules on the tokens it is attached to.
 
-A good example of why this can be problematic is that Token Metadata cannot enforce secondary sales royalties. Whilst there is **Seller Fee Basis Points** attribute on the Metadata account, it is purely [indicative](/programs/understanding-programs#indicative-fields) and anyone could create a marketplace that does not honor royalties — which is exactly what happened.
+A good example of why this can be problematic is that Token Metadata cannot enforce secondary sales royalties. Whilst there is **Seller Fee Basis Points** attribute on the Metadata account, it is purely [indicative](/understanding-programs#indicative-fields) and anyone could create a marketplace that does not honor royalties — which is exactly what happened.
 
 **Programmable NFTs** were introduced to solve this problem. They are a new _opt-in_ Token Standard that **keeps the underlying token accounts frozen at all times**. That way, nobody can transfer, lock or burn Programmable NFTs without going through the Token Metadata program.
 
 It is then up to the creators to define custom operation-specific authorization rules that will be enforced by the Token Metadata program. These are defined in a special **RuleSet** account which is attached to the Metadata account. An example of such RuleSet could be an allowlist of program addresses that honor royalties. RuleSets are part of a new Metaplex program called [Token Auth Rules](https://github.com/metaplex-foundation/mpl-token-auth-rules).
 
-You can [read more about Programmable NFTs here](https://github.com/metaplex-foundation/metaplex-program-library/blob/master/token-metadata/program/ProgrammableNFTGuide.md).
+You can [read more about Programmable NFTs here](https://github.com/metaplex-foundation/mpl-token-metadata/blob/main/programs/token-metadata/program/ProgrammableNFTGuide.md).
 
 {% diagram %}
 {% node %}
