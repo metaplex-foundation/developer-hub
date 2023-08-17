@@ -37,7 +37,7 @@ export const tokenMetadata = {
             {
               title: 'Token Standards (Assets)',
               href: '/token-metadata/token-standard',
-            }, // Include "Non-fungible tokens" definition.
+            },
             { title: 'Minting Assets', href: '/token-metadata/mint' }, // Uploading off-chain data section + Create + Mint.
             { title: 'Updating Assets', href: '/token-metadata/update' },
             { title: 'Transferring Assets', href: '/token-metadata/transfer' },
