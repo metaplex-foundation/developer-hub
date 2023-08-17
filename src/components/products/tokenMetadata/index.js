@@ -38,7 +38,8 @@ export const tokenMetadata = {
               title: 'Token Standards (Assets)',
               href: '/token-metadata/token-standard',
             },
-            { title: 'Minting Assets', href: '/token-metadata/mint' }, // Uploading off-chain data section + Create + Mint.
+            { title: 'Minting Assets', href: '/token-metadata/mint' },
+            { title: 'Fetching Assets', href: '/token-metadata/fetch' },
             { title: 'Updating Assets', href: '/token-metadata/update' },
             { title: 'Transferring Assets', href: '/token-metadata/transfer' },
             { title: 'Burning Assets', href: '/token-metadata/burn' },
