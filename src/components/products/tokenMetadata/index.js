@@ -56,10 +56,6 @@ export const tokenMetadata = {
             { title: 'Locking Assets', href: '/token-metadata/lock' },
             { title: 'Programmable NFTs', href: '/token-metadata/pnfts' },
             { title: 'NFT Escrow', href: '/token-metadata/escrow' },
-            {
-              title: 'Asset Usage (Deprecated)',
-              href: '/token-metadata/usage',
-            },
           ],
         },
       ],

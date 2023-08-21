@@ -279,6 +279,20 @@ Attached to a collection
 
 _Coming soon..._
 
+{% callout title="EXTREMELY IMPORTANT" type="warning" %}
+
+Explorers, Wallets and Marketplaces, **MUST CHECK** that `Verified` is `true`. Verified can only be set true if the Authority on the Collection NFT has run one of the Token Metadata `Verify` instructions over the NFT.
+
+This is the same pattern as the `Creators` field where `Verified` must be true to validate the NFT.
+
+In Order to check if a collection is valid on an NFT, it **MUST** have a collection struct set with:
+
+- The `key` field matching the mint address of the appropriate collection parent.
+- The `verified` field set to `true`.
+
+If those two steps are not followed you could be exposing fraudulent NFTs on real collections.
+{% /callout %}
+
 {% diagram %}
 
 {% node %}
