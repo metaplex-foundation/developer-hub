@@ -66,8 +66,9 @@ _Coming soon..._
 
 - The Delegate Authority can update a sub-set of the asset. It can update anything that the Update Authority can update aside from the **Data** object which requires a Data Delegate as explained below.
 
-{% dialect-switcher title="Use an Authority Item delegate" %}
+{% dialect-switcher title="Work with Authority Item delegates" %}
 {% dialect title="JavaScript" id="js" %}
+{% totem %}
 
 {% totem-accordion title="Approve" %}
 
@@ -82,7 +83,7 @@ await delegateAuthorityItemV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /totem-accordion  %}
+{% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
 
@@ -97,7 +98,7 @@ await revokeAuthorityItemV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /totem-accordion  %}
+{% /totem-accordion %}
 
 {% totem-accordion title="Delegated update" %}
 
@@ -112,56 +113,473 @@ await updateAsAuthorityItemDelegateV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /totem-accordion  %}
+{% /totem-accordion %}
 
+{% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
 ### Collection Delegate
-
-_Coming soon..._
 
 - The Delegate Authority can update a sub-set of the asset. It can set the **Collection** attribute of the Metadata account.
 - When applied to a Collection NFT, the Delegate Authority can perfom the following actions on the items inside that Collection:
   - It can verify and unverify that Collection NFT on the item. It can only do this if the Collection NFT is already set on the item. Otherwise, there is no way of knowing that the item is part of the delegated Collection NFT.
   - It can clear the Collection NFT from the item.
 
-### Collection Item Delegate
+{% dialect-switcher title="Work with Collection delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
 
-_Coming soon..._
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateCollectionV1(umi, {
+  mint,
+  authority: updateAuthority,
+  delegate: collectionDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeCollectionV1(umi, {
+  mint,
+  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
+  delegate: collectionDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Update collection on delegated asset" %}
+
+```ts
+import {
+  updateAsCollectionDelegateV2,
+  collectionToggle,
+} from '@metaplex-foundation/mpl-token-metadata'
+
+await updateAsCollectionDelegateV2(umi, {
+  mint,
+  authority: collectionDelegate,
+  collection: collectionToggle('Set', [
+    { key: collectionMint, verified: false },
+  ]),
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Clear collection on item" %}
+
+```ts
+import {
+  updateAsCollectionDelegateV2,
+  collectionToggle,
+} from '@metaplex-foundation/mpl-token-metadata'
+
+await updateAsCollectionDelegateV2(umi, {
+  mint,
+  delegateMint: collectionMint,
+  authority: collectionDelegate,
+  collection: collectionToggle('Clear'),
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Verify collection on item" %}
+
+```ts
+import {
+  verifyCollectionV1,
+  findMetadataPda,
+} from '@metaplex-foundation/mpl-token-metadata'
+
+await verifyCollectionV1(umi, {
+  metadata: findMetadataPda(umi, { mint }),
+  collectionMint,
+  authority: collectionDelegate,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Unverify collection on item" %}
+
+```ts
+import {
+  unverifyCollectionV1,
+  findMetadataPda,
+} from '@metaplex-foundation/mpl-token-metadata'
+
+await unverifyCollectionV1(umi, {
+  metadata: findMetadataPda(umi, { mint }),
+  collectionMint,
+  authority: collectionDelegate,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Collection Item Delegate
 
 - The Delegate Authority can update a sub-set of the asset. It can set the **Collection** attribute of the Metadata account.
 - Even if the asset is a Collection NFT, and contrary to the Collection Delegate, the Collection Item Delegate cannot affect the items of that collection.
 
-### Data Delegate
+{% dialect-switcher title="Work with Collection Item delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
 
-_Coming soon..._
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateCollectionItemV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateCollectionItemV1(umi, {
+  mint,
+  authority: updateAuthority,
+  delegate: collectionItemDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeCollectionItemV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeCollectionItemV1(umi, {
+  mint,
+  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
+  delegate: collectionItemDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated update" %}
+
+```ts
+import { updateAsCollectionItemDelegateV2 } from '@metaplex-foundation/mpl-token-metadata'
+
+await updateAsCollectionItemDelegateV2(umi, {
+  mint,
+  authority: collectionItemDelegate,
+  collection: collectionToggle('Set', [
+    { key: collectionMint, verified: false },
+  ]),
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Data Delegate
 
 - The Delegate Authority can update a sub-set of the asset. It can update the entire **Data** object of the Metadata account but nothing else. This means it can update the **Creators** of the asset.
 - When applied to a Collection NFT, the Delegate Authority can perfom the same updates on the items inside that Collection.
 
-### Data Item Delegate
+{% dialect-switcher title="Work with Data delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
 
-_Coming soon..._
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateDataV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateDataV1(umi, {
+  mint,
+  authority: updateAuthority,
+  delegate: dataDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeDataV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeDataV1(umi, {
+  mint,
+  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
+  delegate: dataDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated update" %}
+
+```ts
+import {
+  updateAsDataDelegateV2,
+  fetchMetadataFromSeeds,
+} from '@metaplex-foundation/mpl-token-metadata'
+
+const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
+await updateAsDataDelegateV2(umi, {
+  mint,
+  authority: dataDelegate,
+  data: { ...initialMetadata, name: 'Updated Name' },
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated update on item" %}
+
+```ts
+import {
+  updateAsDataDelegateV2,
+  fetchMetadataFromSeeds,
+} from '@metaplex-foundation/mpl-token-metadata'
+
+const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
+await updateAsDataDelegateV2(umi, {
+  mint,
+  delegateMint: collectionMint,
+  authority: dataDelegate,
+  data: { ...initialMetadata, name: 'Updated Name' },
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Data Item Delegate
 
 - The Delegate Authority can update a sub-set of the asset. It can update the entire **Data** object of the Metadata account but nothing else. This means it can update the **Creators** of the asset.
 - Even if the asset is a Collection NFT, and contrary to the Data Delegate, the Data Item Delegate cannot affect the items of that collection.
 
-### Programmable Config Delegate
+{% dialect-switcher title="Work with Data Item delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
 
-_Coming soon..._
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateDataItemV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateDataItemV1(umi, {
+  mint,
+  authority: updateAuthority,
+  delegate: dataItemDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeDataItemV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeDataItemV1(umi, {
+  mint,
+  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
+  delegate: dataItemDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated update" %}
+
+```ts
+import {
+  updateAsDataItemDelegateV2,
+  fetchMetadataFromSeeds,
+} from '@metaplex-foundation/mpl-token-metadata'
+
+const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
+await updateAsDataItemDelegateV2(umi, {
+  mint,
+  authority: dataItemDelegate,
+  data: { ...initialMetadata, name: 'Updated Name' },
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Programmable Config Delegate
 
 - The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
 - The Delegate Authority can update the **Programmable Config** attribute of the Metadata account but nothing else. This means it can update the **Rule Set** of the PNFT.
 - When applied to a Collection NFT, the Delegate Authority can perfom the same updates on the items inside that Collection.
 
-### Programmable Config Item Delegate
+{% dialect-switcher title="Work with Programmable Config delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
 
-_Coming soon..._
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateProgrammableConfigV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateProgrammableConfigV1(umi, {
+  mint,
+  authority: updateAuthority,
+  delegate: programmableConfigDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeProgrammableConfigV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeProgrammableConfigV1(umi, {
+  mint,
+  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
+  delegate: programmableConfigDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated update" %}
+
+```ts
+import {
+  updateAsAuthorityItemDelegateV2,
+  ruleSetToggle,
+} from '@metaplex-foundation/mpl-token-metadata'
+import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
+
+await updateAsProgrammableConfigDelegateV2(umi, {
+  mint,
+  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
+  authority: programmableConfigDelegate,
+  ruleSet: ruleSetToggle('Set', [ruleSet]),
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated update on item" %}
+
+```ts
+import {
+  updateAsAuthorityItemDelegateV2,
+  ruleSetToggle,
+} from '@metaplex-foundation/mpl-token-metadata'
+import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
+
+await updateAsProgrammableConfigDelegateV2(umi, {
+  mint,
+  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
+  delegateMint: collectionMint,
+  authority: programmableConfigDelegate,
+  ruleSet: ruleSetToggle('Set', [ruleSet]),
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Programmable Config Item Delegate
 
 - The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
 - The Delegate Authority can update the **Programmable Config** attribute of the Metadata account but nothing else. This means it can update the **Rule Set** of the PNFT.
 - Even if the asset is a Collection NFT, and contrary to the Programmable Config Delegate, the Programmable Config Item Delegate cannot affect the items of that collection.
+
+{% dialect-switcher title="Work with Programmable Config Item delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateProgrammableConfigItemV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateProgrammableConfigItemV1(umi, {
+  mint,
+  authority: updateAuthority,
+  delegate: programmableConfigItemDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeProgrammableConfigItemV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeProgrammableConfigItemV1(umi, {
+  mint,
+  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
+  delegate: programmableConfigItemDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated update" %}
+
+```ts
+import {
+  updateAsProgrammableConfigItemDelegateV2,
+  ruleSetToggle,
+} from '@metaplex-foundation/mpl-token-metadata'
+import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
+
+await updateAsProgrammableConfigItemDelegateV2(umi, {
+  mint,
+  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
+  authority: programmableConfigItemDelegate,
+  ruleSet: ruleSetToggle('Set', [ruleSet]),
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
 
 ## Token Delegates
 
