@@ -257,7 +257,7 @@ Thus, **the existence of the Master Edition account acts as proof of Non-Fungibi
 
 {% node parent="master-edition-pda" x="-240" %}
 {% node #master-edition label="Master Edition Account" theme="crimson" /%}
-{% node label="Owner: Token edition Program" theme="dimmed" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
 {% node label="Key = MasterEditionV2" /%}
 {% node label="Supply" /%}
 {% node label="Max Supply" /%}
