@@ -426,7 +426,7 @@ You can [read more about these standards here](/token-metadata/token-standard).
 {% edge from="metadata-3-pda" to="metadata-3" path="straight" /%}
 {% /diagram %}
 
-## Programmable NFTs
+## Programmable NFTs {% #pnfts %}
 
 Because the Token Metadata program is building on top of the Solana Token program, anyone can transfer tokens (fungible or not) without going through the Token Metadata program. Whilst this is great for program composibility, it also means that the Token Metadata program cannot enforce any rules on the tokens it is attached to.
 
