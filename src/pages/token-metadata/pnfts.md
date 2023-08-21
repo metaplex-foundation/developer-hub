@@ -12,22 +12,22 @@ _Coming soon..._
 
 {% diagram %}
 {% node %}
-{% node #wallet-2 label="Wallet Account" theme="indigo" /%}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
 {% node label="Owner: System Program" theme="dimmed" /%}
 {% /node %}
 
-{% node #token-2-wrapper x="200" parent="wallet-2" %}
-{% node #token-2 label="Token Account" theme="blue" /%}
+{% node #token-wrapper x="200" parent="wallet" %}
+{% node #token label="Token Account" theme="blue" /%}
 {% node label="Owner: Token Program" theme="dimmed" /%}
 {% node label="Delegate Authority" theme="orange" z=1 /%}
 {% /node %}
 
-{% node #mint-2-wrapper x="200" parent="token-2" %}
-{% node #mint-2 label="Mint Account" theme="blue" /%}
+{% node #mint-wrapper x="200" parent="token" %}
+{% node #mint label="Mint Account" theme="blue" /%}
 {% node label="Owner: Token Program" theme="dimmed" /%}
 {% /node %}
 
-{% node #token-record-pda parent="mint-2" x="0" y="120" label="PDA" theme="crimson" /%}
+{% node #token-record-pda parent="mint" x="0" y="120" label="PDA" theme="crimson" /%}
 
 {% node parent="token-record-pda" x="-240" %}
 {% node #token-record label="Token Record Account" theme="crimson" /%}
@@ -41,16 +41,62 @@ _Coming soon..._
 {% node label="Locked Transfer" /%}
 {% /node %}
 
-{% edge from="wallet-2" to="token-2" /%}
-{% edge from="mint-2" to="token-2" /%}
-{% edge from="token-2-wrapper" to="token-record-pda" /%}
-{% edge from="mint-2-wrapper" to="token-record-pda" /%}
+{% edge from="wallet" to="token" /%}
+{% edge from="mint" to="token" /%}
+{% edge from="token-wrapper" to="token-record-pda" /%}
+{% edge from="mint-wrapper" to="token-record-pda" /%}
 {% edge from="token-record-pda" to="token-record" path="straight" /%}
 {% /diagram %}
 
 ## Programmable Configs and Rulesets
 
 _Coming soon..._
+
+{% diagram %}
+{% node %}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
+{% /node %}
+
+{% node #token-wrapper x="200" parent="wallet" %}
+{% node #token label="Token Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% /node %}
+
+{% node #mint-wrapper x="200" parent="token" %}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% /node %}
+
+{% node #token-record-pda parent="mint" x="41" y="120" label="PDA" theme="crimson" /%}
+
+{% node parent="token-record-pda" x="-240" %}
+{% node #token-record label="Token Record Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% node label="..." /%}
+{% node label="Rule Set Revision" theme="orange" z=1 /%}
+{% /node %}
+
+{% node #metadata-pda parent="mint" x="41" y="-80" label="PDA" theme="crimson" /%}
+
+{% node parent="metadata-pda" x="-240" y="-80" %}
+{% node #metadata label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% node label="..." /%}
+{% node theme="orange" z=1 %}
+Programmable Configs \
+\- Rule Set
+{% /node %}
+{% /node %}
+
+{% edge from="wallet" to="token" /%}
+{% edge from="mint" to="token" /%}
+{% edge from="mint" to="metadata-pda" path="straight" /%}
+{% edge from="metadata-pda" to="metadata" fromPosition="top" /%}
+{% edge from="token-wrapper" to="token-record-pda" /%}
+{% edge from="mint-wrapper" to="token-record-pda" path="straight" /%}
+{% edge from="token-record-pda" to="token-record" path="straight" /%}
+{% /diagram %}
 
 ## Use-case: Royalty enforcement
 
