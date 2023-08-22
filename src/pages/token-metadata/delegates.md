@@ -665,39 +665,480 @@ The Standard Delegate is a wrapper around the SPL Token Program to offer the sam
 - The Delegate Authority can lock the asset — also known as "freezing" the asset on the Token program. Until the Delegate Authority unlocks the asset, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
 - When used with fungible assets, an amount greater than 1 can be provided to specify the number of tokens to delegate to the Delegate Authority.
 
+{% dialect-switcher title="Work with Standard delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateStandardV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateStandardV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: standardDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeStandardV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeStandardV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: standardDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated transfer" %}
+
+```ts
+import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await transferV1(umi, {
+  mint,
+  authority: standardDelegate,
+  tokenOwner: currentOwner,
+  destinationOwner: newOwner,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated burn" %}
+
+```ts
+import { burnV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await burnV1(umi, {
+  mint,
+  authority: standardDelegate,
+  tokenOwner: currentOwner,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Lock (freeze)" %}
+
+```ts
+import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await lockV1(umi, {
+  mint,
+  authority: standardDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Unlock (thaw)" %}
+
+```ts
+import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await unlockV1(umi, {
+  mint,
+  authority: standardDelegate,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
 ### Sale Delegate (PNFT only)
 
-_Coming soon..._
-
+- This delegate only works with Programmable Non-Fungibles.
 - The Delegate Authority can transfer the PNFT to any address. Doing so will revoke the Delegate Authority.
 - As long as a Sale Delegate is set on a PNFT, the owner cannot transfer or burn it. However, the owner can revoke the Sale Delegate at any time, which will make the PNFT transferable and burnable again.
 
+{% dialect-switcher title="Work with Sale delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateSaleV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateSaleV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: saleDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeSaleV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeSaleV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: saleDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated transfer" %}
+
+```ts
+import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await transferV1(umi, {
+  mint,
+  authority: saleDelegate,
+  tokenOwner: currentOwner,
+  destinationOwner: newOwner,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
 ### Transfer Delegate (PNFT only)
 
-_Coming soon..._
-
+- This delegate only works with Programmable Non-Fungibles.
 - The Delegate Authority can transfer the PNFT to any address. Doing so will revoke the Delegate Authority.
 - Contrary to the Sale Delegate, when a Transfer Delegate is set, the owner can still transfer and burn the PNFT.
 
+{% dialect-switcher title="Work with Transfer delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateTransferV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: transferDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeTransferV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: transferDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated transfer" %}
+
+```ts
+import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await transferV1(umi, {
+  mint,
+  authority: transferDelegate,
+  tokenOwner: currentOwner,
+  destinationOwner: newOwner,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
 ### Locked Transfer Delegate (PNFT only)
 
-_Coming soon..._
-
+- This delegate only works with Programmable Non-Fungibles.
 - The Delegate Authority can lock the PNFT. Until the Delegate Authority unlocks the PNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
 - The Delegate Authority can transfer the PNFT to any address. Doing so will revoke the Delegate Authority and unlock the PNFT if it was locked.
 
+{% dialect-switcher title="Work with Locked Transfer delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateLockedTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateLockedTransferV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: lockedTransferDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeLockedTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeLockedTransferV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: lockedTransferDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated transfer" %}
+
+```ts
+import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await transferV1(umi, {
+  mint,
+  authority: lockedTransferDelegate,
+  tokenOwner: currentOwner,
+  destinationOwner: newOwner,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Lock" %}
+
+```ts
+import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await lockV1(umi, {
+  mint,
+  authority: lockedTransferDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Unlock" %}
+
+```ts
+import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await unlockV1(umi, {
+  mint,
+  authority: lockedTransferDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
 ### Utility Delegate (PNFT only)
 
-_Coming soon..._
-
+- This delegate only works with Programmable Non-Fungibles.
 - The Delegate Authority can lock the PNFT. Until the Delegate Authority unlocks the PNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
 - The Delegate Authority can burn the PNFT.
 
+{% dialect-switcher title="Work with Utility delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateUtilityV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateUtilityV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: utilityDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeUtilityV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeUtilityV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: utilityDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Delegated burn" %}
+
+```ts
+import { burnV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await burnV1(umi, {
+  mint,
+  authority: utilityDelegate,
+  tokenOwner: currentOwner,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Lock" %}
+
+```ts
+import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await lockV1(umi, {
+  mint,
+  authority: utilityDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Unlock" %}
+
+```ts
+import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await unlockV1(umi, {
+  mint,
+  authority: utilityDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
 ### Staking Delegate (PNFT only)
 
-_Coming soon..._
-
+- This delegate only works with Programmable Non-Fungibles.
 - The Delegate Authority can lock the PNFT. Until the Delegate Authority unlocks the PNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
+
+{% dialect-switcher title="Work with Staking delegates" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Approve" %}
+
+```ts
+import { delegateStakingV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await delegateStakingV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: stakingDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Revoke" %}
+
+```ts
+import { revokeStakingV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await revokeStakingV1(umi, {
+  mint,
+  tokenOwner: owner.publicKey,
+  authority: owner,
+  delegate: stakingDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Lock" %}
+
+```ts
+import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await lockV1(umi, {
+  mint,
+  authority: stakingDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Unlock" %}
+
+```ts
+import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
+
+await unlockV1(umi, {
+  mint,
+  authority: stakingDelegate,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
 
 ## Legacy Delegates
 
