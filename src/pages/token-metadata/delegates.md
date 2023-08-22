@@ -4,11 +4,11 @@ metaTitle: Token Metadata - Delegated Authorities
 description: Learn how to approve delegated authorities for your Assets on Token Metadata
 ---
 
-Having a single authority on our assets is not always ideal. Sometimes we want to delegate some of these responsibilities to other wallets or programs so they can do things on our behalf. This is why Token Metadata offers a whole set of delegates with various different scopes. {% .lead %}
+Having a single authority on our assets is not always ideal. Sometimes we want to delegate some of these responsibilities to other wallets or programs so they can do things on our behalf. This is why Token Metadata offers a whole set of delegates with different scopes. {% .lead %}
 
 ## Metadata vs Token Delegates
 
-The delegates offered by Token Metadata can be split into two categories: the **Metadata Delegates** and the **Token Delegates**. We'll go through each of them in more details below but let's have a quick look at how they differ.
+The delegates offered by Token Metadata can be split into two categories: the **Metadata Delegates** and the **Token Delegates**. We'll go through each of them in more detail below but let's have a quick look at how they differ.
 
 - **Metadata Delegates** are associated with the Mint account of the asset and allow the delegated authority to perform updates on the Metadata account. They are approved by the update authority of the asset and there can be as many as needed.
 - **Token Delegates** are associated with the Token account of the asset and allow the delegated authority to transfer, burn and/or lock the token(s). They are approved by the owner of the asset and there can only be one per token account at a time.
@@ -70,7 +70,7 @@ Here are some key properties of Metadata Delegates:
 - Metadata delegates can be revoked by the Update Authority that approved them.
 - Metadata delegates can also revoke themselves.
 
-There exists 7 different types of Metadata Delegates, each with a different scope of action. Here is a table summarizing the different types of Metadata Delegates:
+There exist 7 different types of Metadata Delegates, each with a different scope of action. Here is a table summarizing the different types of Metadata Delegates:
 
 | Delegate                  | Self-updates | Update items in collection | Update scope                                                              |
 | ------------------------- | ------------ | -------------------------- | ------------------------------------------------------------------------- |
@@ -86,7 +86,7 @@ Notice that the Metadata delegates whose name ends with `Item` can only act on t
 
 Additionally, the **Collection** delegate is a little special as it also allows us to verify/unverify the delegated NFT on the items of the collection. In the example above, when we approve a **Collection** delegate on A, we can verify/unverify that collection on NFTs B and C.
 
-Let's go through each of these Metadata delegate in a bit more details and provide code samples for approving, revoking and using them.
+Let's go through each of these Metadata delegates in a bit more detail and provide code samples for approving, revoking and using them.
 
 ### Authority Item Delegate
 
@@ -152,7 +152,7 @@ await updateAsAuthorityItemDelegateV2(umi, {
 ### Collection Delegate
 
 - The Delegate Authority can update a sub-set of the asset. It can set the `collection` attribute of the Metadata account.
-- When applied to a Collection NFT, the Delegate Authority can perfom the following actions on the items inside that Collection:
+- When applied to a Collection NFT, the Delegate Authority can perform the following actions on the items inside that Collection:
   - It can verify and unverify that Collection NFT on the item. It can only do this if the Collection NFT is already set on the item. Otherwise, there is no way of knowing that the item is part of the delegated Collection NFT.
   - It can clear the Collection NFT from the item.
 
@@ -327,7 +327,7 @@ await updateAsCollectionItemDelegateV2(umi, {
 ### Data Delegate
 
 - The Delegate Authority can update a sub-set of the asset. It can update the entire `data` object of the Metadata account but nothing else. This means it can update the `creators` of the asset.
-- When applied to a Collection NFT, the Delegate Authority can perfom the same updates on the items inside that Collection.
+- When applied to a Collection NFT, the Delegate Authority can perform the same updates on the items inside that Collection.
 
 {% dialect-switcher title="Work with Data delegates" %}
 {% dialect title="JavaScript" id="js" %}
@@ -469,7 +469,7 @@ await updateAsDataItemDelegateV2(umi, {
 
 - The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
 - The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the PNFT.
-- When applied to a Collection NFT, the Delegate Authority can perfom the same updates on the items inside that Collection.
+- When applied to a Collection NFT, the Delegate Authority can perform the same updates on the items inside that Collection.
 
 {% dialect-switcher title="Work with Programmable Config delegates" %}
 {% dialect title="JavaScript" id="js" %}
@@ -613,9 +613,9 @@ await updateAsProgrammableConfigItemDelegateV2(umi, {
 
 ## Token Delegates
 
-Token Delegates are delegates that operate at the Token level. This mean, they are spl-token delegates that are stored directly on the Token account of the SPL Token program. As such Token Delegates allow delegates to **transfer and burn tokens** on behalf of the owner but also **lock and unlock tokens** to prevent the owner from transferring, burning or even revoking the delegate. These delegates are crucial for applications like escrowless marketplaces, staking, asset loans, etc.
+Token Delegates are delegates that operate at the Token level. This means they are spl-token delegates that are stored directly on the Token account of the SPL Token program. As such Token Delegates allow delegates to **transfer and burn tokens** on behalf of the owner but also **lock and unlock tokens** to prevent the owner from transferring, burning or even revoking the delegate. These delegates are crucial for applications like escrowless marketplaces, staking, asset loans, etc.
 
-Whilst there is only one type of delegate offered by the SPL Token program, [Programmable NFTs](/token-metadata/pnfts) (PNFTs) gave the Token Metadata program the opportunity to provide more granular delegates that can be selected on a per-case basis. This is because PNFTs are always frozen on the SPL Token program which means we can build a delegate system on top of it.
+Whilst there is only one type of delegate offered by the SPL Token program, [Programmable NFTs](/token-metadata/pnfts) (PNFTs) allowed the Token Metadata program to provide more granular delegates that can be selected on a per-case basis. This is because PNFTs are always frozen on the SPL Token program which means we can build a delegate system on top of it.
 
 We store that delegate system on a PNFT-specific account called the **Token Record** PDA — whose seeds are `["metadata", program id, mint id, "token_record", token account id]`. We synchronise the delegated authority on the SPL Token program as well but the tokens are always frozen. It is the responsibility of the Token Record account to keep track of whether the asset is really locked or not.
 
@@ -686,13 +686,13 @@ We store that delegate system on a PNFT-specific account called the **Token Reco
 Here are some key properties of Token Delegates:
 
 - There can only be one Token Delegate per token account. Setting a new Token Delegate on the same Token account will override the existing one.
-- Token delegates can be revoked the owner of the asset as long as the asset is not locked.
+- Token delegates can be revoked by the owner of the asset as long as the asset is not locked.
 - Token delegates cannot revoke themselves as they are also set on the Token Program which does not allow the delegates to self-revoke.
 - Token delegates are reset on transfer. When dealing with fungible assets, the Delegate Authority is reset when all delegated tokens are transferred.
 - The Standard delegate can be used by all assets except Programmable Non-Fungibles. All other Token delegates can only be used by Programmable Non-Fungibles.
 - All Token delegates that can be used by Programmable Non-Fungibles store the current Delegate Authority, its role and its state — locked or unlocked — on the Token Record account of the PNFT.
 
-There exists 6 different types of Token Delegates, each with a different scope of action. Here is a table summarizing the different types of Token Delegates:
+There exist 6 different types of Token Delegates, each with a different scope of action. Here is a table summarizing the different types of Token Delegates:
 
 | Delegate        | Lock/Unlock | Transfer | Burn | For              | Note                                                      |
 | --------------- | ----------- | -------- | ---- | ---------------- | --------------------------------------------------------- |
@@ -705,7 +705,7 @@ There exists 6 different types of Token Delegates, each with a different scope o
 
 Notice that the **Standard** delegate has a lot more power than the other PNFT-specific delegates as we must simply defer to the spl-token delegate. However, the other delegates are more granular and can be used in more specific use cases. For instance, the **Sale** delegate is perfect for listing assets on marketplaces since they forbid the owner to burn or transfer as long as the delegate is set.
 
-Let's go through each of these Token delegate in a bit more details and provide code samples for approving, revoking and using them.
+Let's go through each of these Token delegates in a bit more detail and provide code samples for approving, revoking and using them.
 
 ### Standard Delegate
 
@@ -1194,7 +1194,7 @@ await unlockV1(umi, {
 
 ## Legacy Delegates
 
-Finally, it is worth noting that — prior to this delegate system — collection delegates used to be stored on a specific **Collection Authority Record** PDA. That PDA is similar to the **Metadata Delegate Record** except that it supports only one role: **Collection**. This legacy collection delegate is now deprecated and we recommend using the new delegate system instead.
+Finally, it is worth noting that — before this delegate system — collection delegates used to be stored on a specific **Collection Authority Record** PDA. That PDA is similar to the **Metadata Delegate Record** except that it supports only one role: **Collection**. This legacy collection delegate is now deprecated and we recommend using the new delegate system instead.
 
 That being said, the Token Metadata program still accepts these legacy collection delegates wherever a new Collection delegate is expected. This is done to ensure backward compatibility with assets that are still delegating to these legacy delegates.
 
