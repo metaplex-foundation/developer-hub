@@ -4,20 +4,20 @@ metaTitle: Token Metadata - Delegated Authorities
 description: Learn how to approve delegated authorities for your Assets on Token Metadata
 ---
 
-_Coming soon..._
+Having a single authority on our assets is not always ideal. Sometimes we want to delegate some of these responsibilities to other wallets or programs so they can do things on our behalf. This is why Token Metadata offers a whole set of delegates with various different scopes. {% .lead %}
 
 ## Metadata vs Token Delegates
 
-_Coming soon..._
+The delegates offered by Token Metadata can be split into two categories: the **Metadata Delegates** and the **Token Delegates**. We'll go through each of them in more details below but let's have a quick look at how they differ.
+
+- **Metadata Delegates** are associated with the Mint account of the asset and allow the delegated authority to perform updates on the Metadata account. They are approved by the update authority of the asset and there can be as many as needed.
+- **Token Delegates** are associated with the Token account of the asset and allow the delegated authority to transfer, burn and/or lock the token(s). They are approved by the owner of the asset and there can only be one per token account at a time.
 
 ## Metadata Delegates
 
-_Coming soon..._
+Metadata Delegates are delegates that operate at the Metadata level. These delegates are stored using a **Metadata Delegate Record** PDA — whose seeds are `["metadata", program id, mint id, delegate role, update authority id, delegate id]`.
 
-- There can be as many Metadata delegates as needed for a given asset.
-- Metadata delegates are derived from the Mint account which means they exist regardless of the owner of the asset. Thus, transferring an asset does not affect the Metadata delegates.
-- Metadata delegates are also derived from the current Update Authority of the asset. This means, whenever the Update Authority is updated on an asset, all Metadata delegates are voided and cannot be used by the new Update Authority.
-- Metadata delegates can revoke themselves.
+That account keeps track of the **Delegate** authority as well as the **Update Authority** that approved it.
 
 {% diagram %}
 {% node %}
@@ -51,7 +51,7 @@ _Coming soon..._
 {% node label="Bump" /%}
 {% node label="Mint" /%}
 {% node label="Delegate" theme="orange" z=1 /%}
-{% node label="Update Authority" /%}
+{% node label="Update Authority" theme="orange" z=1 /%}
 {% /node %}
 
 {% edge from="wallet" to="token" /%}
@@ -62,6 +62,16 @@ _Coming soon..._
 {% edge from="metadata-delegate-pda" to="metadata-delegate" path="straight" /%}
 {% /diagram %}
 
+Here are some key properties of Metadata Delegates:
+
+- There can be as many Metadata delegates as needed for a given asset.
+- Metadata delegates are derived from the Mint account which means they exist regardless of the owner of the asset. Thus, transferring an asset does not affect the Metadata delegates.
+- Metadata delegates are also derived from the current Update Authority of the asset. This means, whenever the Update Authority is updated on an asset, all Metadata delegates are voided and cannot be used by the new Update Authority.
+- Metadata delegates can be revoked by the Update Authority that approved them.
+- Metadata delegates can also revoke themselves.
+
+There exists 7 different types of Metadata Delegates, each with a different scope of action. Here is a table summarizing the different types of Metadata Delegates and their scope of action:
+
 | Delegate                  | Self-updates | Update items in collection | Update scope                                                              |
 | ------------------------- | ------------ | -------------------------- | ------------------------------------------------------------------------- |
 | Authority Item            | ✅           | ❌                         | `newUpdateAuthority` ,`primarySaleHappened` ,`isMutable` ,`tokenStandard` |
@@ -71,6 +81,12 @@ _Coming soon..._
 | Data Item                 | ✅           | ❌                         | `data`                                                                    |
 | Programmable Configs      | ✅           | ✅                         | `programmableConfigs`                                                     |
 | Programmable Configs Item | ✅           | ❌                         | `programmableConfigs`                                                     |
+
+Notice that the Metadata delegates whose name ends with `Item` can only act on themselves, whereas the other ones can also act on the collection items of the delegate asset. For instance, say we have a Collection NFT A that includes NFTs B and C. When we approve a **Data** delegate on A, we can update the `data` object of NFTs A, B and C. However, when we approve a **Data Item** delegate on A, we can only update the `data` object of NFT A.
+
+Additionally, the **Collection** delegate is a little special as it also allows us to verify/unverify the delegated NFT on the items of the collection. In the example above, when we approve a **Collection** delegate on A, we can verify/unverify that collection on NFTs B and C.
+
+Let's go through each of these Metadata delegate in a bit more details and provide code samples for approving, revoking and using them.
 
 ### Authority Item Delegate
 
@@ -135,7 +151,7 @@ await updateAsAuthorityItemDelegateV2(umi, {
 
 ### Collection Delegate
 
-- The Delegate Authority can update a sub-set of the asset. It can set the **Collection** attribute of the Metadata account.
+- The Delegate Authority can update a sub-set of the asset. It can set the `collection` attribute of the Metadata account.
 - When applied to a Collection NFT, the Delegate Authority can perfom the following actions on the items inside that Collection:
   - It can verify and unverify that Collection NFT on the item. It can only do this if the Collection NFT is already set on the item. Otherwise, there is no way of knowing that the item is part of the delegated Collection NFT.
   - It can clear the Collection NFT from the item.
@@ -251,7 +267,7 @@ await unverifyCollectionV1(umi, {
 
 ### Collection Item Delegate
 
-- The Delegate Authority can update a sub-set of the asset. It can set the **Collection** attribute of the Metadata account.
+- The Delegate Authority can update a sub-set of the asset. It can set the `collection` attribute of the Metadata account.
 - Even if the asset is a Collection NFT, and contrary to the Collection Delegate, the Collection Item Delegate cannot affect the items of that collection.
 
 {% dialect-switcher title="Work with Collection Item delegates" %}
@@ -310,7 +326,7 @@ await updateAsCollectionItemDelegateV2(umi, {
 
 ### Data Delegate
 
-- The Delegate Authority can update a sub-set of the asset. It can update the entire **Data** object of the Metadata account but nothing else. This means it can update the **Creators** of the asset.
+- The Delegate Authority can update a sub-set of the asset. It can update the entire `data` object of the Metadata account but nothing else. This means it can update the `creators` of the asset.
 - When applied to a Collection NFT, the Delegate Authority can perfom the same updates on the items inside that Collection.
 
 {% dialect-switcher title="Work with Data delegates" %}
@@ -390,7 +406,7 @@ await updateAsDataDelegateV2(umi, {
 
 ### Data Item Delegate
 
-- The Delegate Authority can update a sub-set of the asset. It can update the entire **Data** object of the Metadata account but nothing else. This means it can update the **Creators** of the asset.
+- The Delegate Authority can update a sub-set of the asset. It can update the entire `data` object of the Metadata account but nothing else. This means it can update the `creators` of the asset.
 - Even if the asset is a Collection NFT, and contrary to the Data Delegate, the Data Item Delegate cannot affect the items of that collection.
 
 {% dialect-switcher title="Work with Data Item delegates" %}
@@ -452,7 +468,7 @@ await updateAsDataItemDelegateV2(umi, {
 ### Programmable Config Delegate
 
 - The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
-- The Delegate Authority can update the **Programmable Config** attribute of the Metadata account but nothing else. This means it can update the **Rule Set** of the PNFT.
+- The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the PNFT.
 - When applied to a Collection NFT, the Delegate Authority can perfom the same updates on the items inside that Collection.
 
 {% dialect-switcher title="Work with Programmable Config delegates" %}
@@ -535,7 +551,7 @@ await updateAsProgrammableConfigDelegateV2(umi, {
 ### Programmable Config Item Delegate
 
 - The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
-- The Delegate Authority can update the **Programmable Config** attribute of the Metadata account but nothing else. This means it can update the **Rule Set** of the PNFT.
+- The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the PNFT.
 - Even if the asset is a Collection NFT, and contrary to the Programmable Config Delegate, the Programmable Config Item Delegate cannot affect the items of that collection.
 
 {% dialect-switcher title="Work with Programmable Config Item delegates" %}
