@@ -62,9 +62,23 @@ _Coming soon..._
 {% edge from="metadata-delegate-pda" to="metadata-delegate" path="straight" /%}
 {% /diagram %}
 
+| Delegate                  | Self-updates | Update items in collection | Update scope                                                              |
+| ------------------------- | ------------ | -------------------------- | ------------------------------------------------------------------------- |
+| Authority Item            | ✅           | ❌                         | `newUpdateAuthority` ,`primarySaleHappened` ,`isMutable` ,`tokenStandard` |
+| Collection                | ✅           | ✅                         | `collection` + verify/unverify collection on items                        |
+| Collection Item           | ✅           | ❌                         | `collection`                                                              |
+| Data                      | ✅           | ✅                         | `data`                                                                    |
+| Data Item                 | ✅           | ❌                         | `data`                                                                    |
+| Programmable Configs      | ✅           | ✅                         | `programmableConfigs`                                                     |
+| Programmable Configs Item | ✅           | ❌                         | `programmableConfigs`                                                     |
+
 ### Authority Item Delegate
 
-- The Delegate Authority can update a sub-set of the asset. It can update anything that the Update Authority can update aside from the **Data** object which requires a Data Delegate as explained below.
+- The Delegate Authority can update a sub-set of the asset. It can update the following properties of the Metadata account:
+  - `newUpdateAuthority`: transfers the Update Authority to another account.
+  - `primarySaleHappened`: toggles to `true` when the primary sale of the asset has happened.
+  - `isMutable`: toggles to `false` to make the asset immutable.
+  - `tokenStandard`: can set the token standard if the asset was created before it was mandatory to set it.
 
 {% dialect-switcher title="Work with Authority Item delegates" %}
 {% dialect title="JavaScript" id="js" %}
@@ -653,6 +667,15 @@ _Coming soon..._
 {% edge from="mint-2-wrapper" to="token-record-pda" /%}
 {% edge from="token-record-pda" to="token-record" path="straight" /%}
 {% /diagram %}
+
+| Delegate        | Lock/Unlock | Transfer | Burn | For              | Note                                                      |
+| --------------- | ----------- | -------- | ---- | ---------------- | --------------------------------------------------------- |
+| Standard        | ✅          | ✅       | ✅   | All except PNFTs |                                                           |
+| Sale            | ❌          | ✅       | ❌   | PNFTs only       | Owner cannot transfer/burn until they revoke the delegate |
+| Transfer        | ❌          | ✅       | ❌   | PNFTs only       | Owner can transfer/burn even when a delegate is set       |
+| Locked Transfer | ✅          | ✅       | ❌   | PNFTs only       |                                                           |
+| Utility         | ✅          | ❌       | ✅   | PNFTs only       |                                                           |
+| Staking         | ✅          | ❌       | ❌   | PNFTs only       |                                                           |
 
 ### Standard Delegate
 
