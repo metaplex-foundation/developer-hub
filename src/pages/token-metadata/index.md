@@ -434,9 +434,9 @@ A good example of why this can be problematic is that Token Metadata cannot enfo
 
 **Programmable NFTs** were introduced to solve this problem. They are a new _opt-in_ Token Standard that **keeps the underlying token accounts frozen at all times**. That way, nobody can transfer, lock or burn Programmable NFTs without going through the Token Metadata program.
 
-It is then up to the creators to define custom operation-specific authorization rules that will be enforced by the Token Metadata program. These are defined in a special **RuleSet** account which is attached to the Metadata account. An example of such RuleSet could be an allowlist of program addresses that honor royalties. RuleSets are part of a new Metaplex program called [Token Auth Rules](https://github.com/metaplex-foundation/mpl-token-auth-rules).
+It is then up to the creators to define custom operation-specific authorization rules that will be enforced by the Token Metadata program. These are defined in a special **RuleSet** account which is attached to the Metadata account. An example of such RuleSet could be an allowlist of program addresses that honor royalties. RuleSets are part of a new Metaplex program called [Token Auth Rules](/token-auth-rules).
 
-You can [read more about Programmable NFTs here](https://github.com/metaplex-foundation/mpl-token-metadata/blob/main/programs/token-metadata/program/ProgrammableNFTGuide.md).
+You can [read more about Programmable NFTs here](/token-metadata/pnfts).
 
 {% diagram %}
 {% node %}
