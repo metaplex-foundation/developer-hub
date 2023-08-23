@@ -88,13 +88,11 @@ In the case of PNFTs, the following operations are supported:
 | `Transfer:LockedTransferDelegate` | Transfer initiated by a [Locked Transfer delegate](/token-metadata/delegates#locked-transfer-delegate-pnft-only) |
 | `Transfer:MigrationDelegate`      | Transfer initiated by a Migration delegate (legacy delegate used during the PNFT migration period)               |
 | `Transfer:WalletToWallet`         | Transfer between wallets (currently not in use)                                                                  |
-| `Transfer:*`                      | Any transfer                                                                                                     |
 | `Delegate:Sale`                   | Approve a [Sale delegate](/token-metadata/delegates#sale-delegate-pnft-only)                                     |
 | `Delegate:Transfer`               | Approve a [Transfer delegate](/token-metadata/delegates#transfer-delegate-pnft-only)                             |
 | `Delegate:LockedTransfer`         | Approve a [Locked Transfer delegate](/token-metadata/delegates#locked-transfer-delegate-pnft-only)               |
 | `Delegate:Utility`                | Approve a [Utility delegate](/token-metadata/delegates#utility-delegate-pnft-only)                               |
 | `Delegate:Staking`                | Approve a [Staking delegate](/token-metadata/delegates#staking-delegate-pnft-only)                               |
-| `Delegate:*`                      | Approve any Token Delegate                                                                                       |
 
 Creators can assign a custom **Rule** to any of these operations. When that operation is performed, the Token Metadata program will ensure the rule is valid before allowing the operation to go through. The available rules are documented by the Token Auth Rules program directly but it is worth noting that there are two types of rules:
 
