@@ -30,7 +30,11 @@ Let's dive into these two abilities in more detail.
 
 ## More granular delegates
 
-_Coming soon..._
+Since all PNFTs operation must go through the Token Metadata program, it can create a new delegate system on top of the spl-token delegate. One that is more granular and allows PNFT owners to pick the operations they want to delegate to a third-party.
+
+Information for this new delegate system is stored on a special **Token Record** PDA that is derived from both the Mint and the Token accounts of the PNFT. When a new delegate authority is assigned to a PNFT, the Token Metadata program synchronizes that information on both the Token account and the Token Record account.
+
+We discuss these delegates in more detail in the ["Token Delegates" section of the Delegated Authorities page](/token-metadata/delegates#token-delegates).
 
 {% diagram %}
 {% node %}
@@ -96,7 +100,7 @@ _Coming soon..._
 {% node #token-record label="Token Record Account" theme="crimson" /%}
 {% node label="Owner: Token Metadata Program" theme="dimmed" /%}
 {% node label="..." /%}
-{% node label="Rule Set Revision" theme="orange" z=1 /%}
+{% node #ruleset-revision label="Rule Set Revision" theme="orange" z=1 /%}
 {% /node %}
 
 {% node #metadata-pda parent="mint" x="41" y="-80" label="PDA" theme="crimson" /%}
@@ -105,10 +109,16 @@ _Coming soon..._
 {% node #metadata label="Metadata Account" theme="crimson" /%}
 {% node label="Owner: Token Metadata Program" theme="dimmed" /%}
 {% node label="..." /%}
-{% node theme="orange" z=1 %}
-Programmable Configs \
-\- Rule Set
+{% node #programmable-configs label="Programmable Configs" theme="orange" z=1 /%}
 {% /node %}
+
+{% node parent="metadata" x="-260" %}
+{% node #ruleset label="Rule Set Account" theme="crimson" /%}
+{% node label="Owner: Token Auth Rules Program" theme="dimmed" /%}
+{% node label="Header" /%}
+{% node label="Rule Set Revision 0" /%}
+{% node #ruleset-revision-1 label="Rule Set Revision 1" /%}
+{% node label="..." /%}
 {% /node %}
 
 {% edge from="wallet" to="token" /%}
@@ -118,6 +128,8 @@ Programmable Configs \
 {% edge from="token-wrapper" to="token-record-pda" /%}
 {% edge from="mint-wrapper" to="token-record-pda" path="straight" /%}
 {% edge from="token-record-pda" to="token-record" path="straight" /%}
+{% edge from="programmable-configs" to="ruleset" dashed=true arrow="none" animated=true /%}
+{% edge from="ruleset-revision" to="ruleset-revision-1" dashed=true arrow="none" animated=true toPosition="left" /%}
 {% /diagram %}
 
 ## Use-case: Royalty enforcement
