@@ -53,7 +53,7 @@ export const candyMachine = {
             { title: 'Address Gate', href: '/candy-machine/guards/addressGate' },
             { title: 'Allow List', href: '/candy-machine/guards/allowList' },
             { title: 'Bot Tax', href: '/candy-machine/guards/botTax' },
-            { title: 'End Date', href: '/candy-machine/todo' },
+            { title: 'End Date', href: '/candy-machine/guards/endDate' },
             { title: 'Freeze Sol Payment', href: '/candy-machine/todo' },
             { title: 'Freeze Token Payment', href: '/candy-machine/todo' },
             { title: 'Gatekeeper', href: '/candy-machine/todo' },
