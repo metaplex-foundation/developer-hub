@@ -50,8 +50,8 @@ export const candyMachine = {
         {
           title: 'Available Guards',
           links: [
-            { title: 'Address Gate', href: '/candy-machine/todo' },
-            { title: 'Allow List', href: '/candy-machine/todo' },
+            { title: 'Address Gate', href: '/candy-machine/guards/addressGate' },
+            { title: 'Allow List', href: '/candy-machine/guards/allowList' },
             { title: 'Bot Tax', href: '/candy-machine/todo' },
             { title: 'End Date', href: '/candy-machine/todo' },
             { title: 'Freeze Sol Payment', href: '/candy-machine/todo' },
