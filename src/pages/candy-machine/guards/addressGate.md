@@ -8,7 +8,7 @@ description: "Restricts the mint to a single address."
 
 The **Address Gate** guard restricts the mint to a single address which must match the address of the minting wallet.
 
-{% diagram height="md:h-[400px]" %}
+{% diagram  %}
 
 {% node %}
 {% node #candy-machine label="Candy Machine" theme="blue" /%}
@@ -55,10 +55,10 @@ The **Address Gate** guard restricts the mint to a single address which must m
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="74" theme="blue" %}
+{% node #nft parent="mint-candy-machine" y="140" x="75" theme="blue" %}
   NFT
 {% /node %}
-{% edge from="mint-candy-machine" to="nft" /%}
+{% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
 {% edge from="candy-guard" to="candy-machine" /%}
 {% edge from="addressGate" to="payer" arrow="none" dashed=true /%}
