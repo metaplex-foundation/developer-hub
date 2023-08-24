@@ -252,7 +252,7 @@ API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/
 {% dialect title="Sugar" id="sugar" %}
 {% totem %}
 
-Sugar does not contain a function to create manage the merkle root. When using a allowlist with sugar you would have to compute it beforehand e.g. with the previously described JavaScript function or [sol-tools](//TODO: Add tony's page) and than add the merkle root hash to your config like this:
+Sugar does not contain a function to create manage the merkle root. When using a allowlist with sugar you would have to compute it beforehand e.g. with the previously described JavaScript function or [sol-tools](https://sol-tools.tonyboyle.io/cmv3/allow-list) and than add the merkle root hash to your config like this:
 
 ```json
 "allowList" : {
