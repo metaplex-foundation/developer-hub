@@ -12,20 +12,187 @@ Providing a big list of wallets in the settings of this guard would require a lo
 
 This works by creating a binary tree of hashes where all leaves hash themselves two by two until we reach the final hash known as the **Merkle Root**. This means that if any leaf were to change, the final Merkle Root would be corrupted.
 
-TODO: Update image
-![CandyMachinesV3-GuardsAllowListMerkleTree1.png](/assets/candy-machine-v3/CandyMachinesV3-GuardsAllowListMerkleTree1.png#radius)
+{% diagram %}
+{% node #hash-7 label="Hash 7" theme="brown" /%}
+{% node #merkle-root label="Merkle Root" theme="transparent" parent="hash-7" x="-90" y="8" /%}
+{% node #hash-5 label="Hash 5" parent="hash-7" y="100" x="-200" theme="orange" /%}
+{% node #hash-6 label="Hash 6" parent="hash-7" y="100" x="200" theme="orange" /%}
+
+{% node #leaves label="Leaves" parent="hash-5" y="105" x="-170" theme="transparent" /%}
+{% node #hash-1 label="Hash 1" parent="hash-5" y="100" x="-100" theme="orange" /%}
+{% node #hash-2 label="Hash 2" parent="hash-5" y="100" x="100" theme="orange" /%}
+{% node #hash-3 label="Hash 3" parent="hash-6" y="100" x="-100" theme="orange" /%}
+{% node #hash-4 label="Hash 4" parent="hash-6" y="100" x="100" theme="orange" /%}
+
+{% node #data label="Data" parent="hash-1" y="105" x="-80" theme="transparent" /%}
+{% node #Ur1C label="Ur1C...bWSG" parent="hash-1" y="100" x="-23" /%}
+{% node #sXCd label="sXCd...edkn" parent="hash-2" y="100" x="-20" /%}
+{% node #RbJs label="RbJs...Ek7u" parent="hash-3" y="100" x="-17" /%}
+{% node #rwAv label="rwAv...u1ud" parent="hash-4" y="100" x="-16" /%}
+
+{% edge from="hash-5" to="hash-7" fromPosition="top" toPosition="bottom" /%}
+{% edge from="hash-6" to="hash-7" fromPosition="top" toPosition="bottom" /%}
+
+{% edge from="hash-1" to="hash-5" fromPosition="top" toPosition="bottom" /%}
+{% edge from="hash-2" to="hash-5" fromPosition="top" toPosition="bottom" /%}
+{% edge from="hash-3" to="hash-6" fromPosition="top" toPosition="bottom" /%}
+{% edge from="hash-4" to="hash-6" fromPosition="top" toPosition="bottom" /%}
+
+{% edge from="Ur1C" to="hash-1" fromPosition="top" toPosition="bottom" path="straight" /%}
+{% edge from="sXCd" to="hash-2" fromPosition="top" toPosition="bottom" path="straight" /%}
+{% edge from="RbJs" to="hash-3" fromPosition="top" toPosition="bottom" path="straight" /%}
+{% edge from="rwAv" to="hash-4" fromPosition="top" toPosition="bottom" path="straight" /%}
+
+{% /diagram %}
 
 To verify that a leaf is part of the tree, we simply need a list of all the intermediary hashes that allow us to go up the tree and re-compute the Merkle Root. We call this list of intermediary hashes a **Merkle Proof**. If the computed Merkle Root matches the stored Merkle Root, we can be sure that the leaf is part of the tree and therefore part of the original list.
 
-TODO: Update image
-![CandyMachinesV3-GuardsAllowListMerkleTree2.png](/assets/candy-machine-v3/CandyMachinesV3-GuardsAllowListMerkleTree2.png#radius)
+{% diagram %}
+{% node #hash-7 label="Hash 7" theme="brown" /%}
+{% node #merkle-root label="Merkle Root" theme="transparent" parent="hash-7" x="-90" y="8" /%}
+{% node #hash-5 label="Hash 5" parent="hash-7" y="100" x="-200" theme="green" /%}
+{% node #hash-6 label="Hash 6" parent="hash-7" y="100" x="200" theme="blue" /%}
+
+{% node #legend-merkle-proof label="Merkle Proof =" theme="transparent" parent="hash-7" x="200" y="10" /%}
+{% node #legend-hash-4 label="Hash 4" parent="legend-merkle-proof" x="100" y="-7" theme="green" /%}
+{% node #plus label="+" parent="legend-hash-4" theme="transparent" x="81" y="8" /%}
+{% node #legend-hash-5 label="Hash 5" parent="legend-hash-4" x="100" theme="green" /%}
+
+
+{% node #leaves label="Leaves" parent="hash-5" y="105" x="-170" theme="transparent" /%}
+{% node #hash-1 label="Hash 1" parent="hash-5" y="100" x="-100" theme="orange" /%}
+{% node #hash-2 label="Hash 2" parent="hash-5" y="100" x="100" theme="orange" /%}
+{% node #hash-3 label="Hash 3" parent="hash-6" y="100" x="-100" theme="blue" /%}
+{% node #hash-4 label="Hash 4" parent="hash-6" y="100" x="100" theme="green" /%}
+
+{% node #data label="Data" parent="hash-1" y="105" x="-80" theme="transparent" /%}
+{% node #Ur1C label="Ur1C...bWSG" parent="hash-1" y="100" x="-23" /%}
+{% node #sXCd label="sXCd...edkn" parent="hash-2" y="100" x="-20" /%}
+{% node #RbJs label="RbJs...Ek7u" parent="hash-3" y="100" x="-17" theme="blue" /%}
+{% node #rwAv label="rwAv...u1ud" parent="hash-4" y="100" x="-16" /%}
+
+{% edge from="hash-5" to="hash-7" fromPosition="top" toPosition="bottom" theme="green" /%}
+{% edge from="hash-6" to="hash-7" fromPosition="top" toPosition="bottom" theme="blue" /%}
+
+{% edge from="hash-1" to="hash-5" fromPosition="top" toPosition="bottom" /%}
+{% edge from="hash-2" to="hash-5" fromPosition="top" toPosition="bottom" /%}
+{% edge from="hash-3" to="hash-6" fromPosition="top" toPosition="bottom" theme="blue" /%}
+{% edge from="hash-4" to="hash-6" fromPosition="top" toPosition="bottom" theme="green" /%}
+
+{% edge from="Ur1C" to="hash-1" fromPosition="top" toPosition="bottom" path="straight" /%}
+{% edge from="sXCd" to="hash-2" fromPosition="top" toPosition="bottom" path="straight" /%}
+{% edge from="RbJs" to="hash-3" fromPosition="top" toPosition="bottom" path="straight" theme="blue" /%}
+{% edge from="rwAv" to="hash-4" fromPosition="top" toPosition="bottom" path="straight" /%}
+
+{% /diagram %}
 
 Therefore, the Allow List guard’s settings require a Merkle Root which acts as a source of truth for the preconfigured list of allowed wallets. For a wallet to prove it is on the allowed list, it must provide a valid Merkle Proof that allows the program to re-compute the Merkle Root and ensure it matches the guard’s settings.
 
 Note that our SDKs provide helpers to make it easy to create Merkle Root and Merkle Proofs for a given list of wallets.
 
-TODO: Update image
-![CandyMachinesV3-GuardsAllowList.png](/assets/candy-machine-v3/CandyMachinesV3-GuardsAllowList.png#radius)
+{% diagram  %}
+
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine" y="100" x="22" %}
+{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node #candy-guard-guards label="Guards" theme="green"/%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-guard" y="49" x="250" %}
+{% node #guards label="Guards" theme="green" /%}
+{% node #allowList label="AllowList" theme="green" /%}
+{% node label="..." theme="dimmed" /%}
+{% /node %}
+
+{% node parent="allowList" x="120" y="-10" %}
+{% node #merkleRoot label="Merkle Root" theme="slate" /%}
+{% /node %}
+
+{% node parent="merkleRoot" x="170" %}
+{% node #merkleProof label="Merkle Proof" theme="slate" /%}
+{% /node %}
+
+{% node parent="merkleRoot" y="100" x="-11" %}
+{% node #walletList  %}
+List of wallets
+
+allowed to mint
+{%/node %}
+{% /node %}
+{% edge from="merkleProof" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
+{% edge from="merkleRoot" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
+
+
+{% node parent="merkleProof" y="100" %}
+{% node #payer label="Payer" theme="indigo" /%}
+{% node label="Owner: Any Program" theme="dimmed" /%}
+{% /node %}
+{% edge from="merkleProof" to="payer" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" path="straight" /%}
+
+{% node parent="candy-machine" x="740" %}
+  {% node #route-validation theme="pink" %}
+    Route from the
+
+    _Candy Guard Program_
+  {% /node %}
+{% /node %}
+{% node parent="route-validation" y="-20" x="100" theme="transparent" %}
+  Verify Merkle Proof
+{% /node %}
+
+{% node parent="route-validation" y="150" x="29" %}
+{% node #allowList-pda label="Allow List PDA" theme="slate" /%}
+{% /node %}
+
+{% node parent="allowList-pda" y="110" x="-30" %}
+  {% node #mint-candy-guard theme="pink" %}
+    Mint from
+
+    _Candy Guard Program_
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
+  Access Control
+{% /node %}
+
+{% node parent="mint-candy-guard" y="110" x="-8" %}
+  {% node #mint-candy-machine theme="pink" %}
+    Mint from 
+    
+    _Candy Machine Program_
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-machine" y="-20" x="110" theme="transparent" %}
+  Mint Logic
+{% /node %}
+
+{% node #nft parent="mint-candy-machine" y="110" x="76" theme="blue" %}
+  NFT
+{% /node %}
+{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+
+{% edge from="candy-guard" to="candy-machine" /%}
+{% edge from="allowList" to="merkleRoot" arrow="start" path="straight" /%}
+{% edge from="merkleRoot" to="route-validation" arrow="none" fromPosition="top" dashed=true %}
+if the payer's Merkle Proof does not match 
+
+the guard's Merkle Root validation will fail
+{% /edge %}
+
+{% edge from="merkleProof" to="route-validation" arrow="none" fromPosition="top" dashed=true / %}
+{% edge from="candy-guard-guards" to="guards" /%}
+{% edge from="route-validation" to="allowList-pda" path="straight" /%}
+{% edge from="allowList-pda" to="mint-candy-guard" path="straight" /%}
+{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+
+
+{% /diagram %}
 
 ## Guard Settings
 
