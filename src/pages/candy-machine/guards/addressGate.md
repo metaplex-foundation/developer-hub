@@ -1,8 +1,8 @@
 ---
+title: "Address Gate"
+metaTitle: "Candy Machine Guards - Address Gate"
 description: "Restricts the mint to a single address."
 ---
-
-# Address Gate
 
 ## Overview
 
