@@ -327,7 +327,7 @@ await updateAsCollectionItemDelegateV2(umi, {
 ### Data Delegate
 
 - The Delegate Authority can update a sub-set of the asset. It can update the entire `data` object of the Metadata account but nothing else. This means it can update the `creators` of the asset.
-- Note that when updating the `creators` array inside the `data` object, it can only add and/or remove unverified creators. The exception to this rule is when the added or removed creator is the Delegate Authority itself.
+- Note that when updating the `creators` array inside the `data` object, it can only add and/or remove unverified creators.
 - When applied to a Collection NFT, the Delegate Authority can perform the same updates on the items inside that Collection.
 
 {% dialect-switcher title="Work with Data delegates" %}
@@ -408,7 +408,7 @@ await updateAsDataDelegateV2(umi, {
 ### Data Item Delegate
 
 - The Delegate Authority can update a sub-set of the asset. It can update the entire `data` object of the Metadata account but nothing else. This means it can update the `creators` of the asset.
-- Note that when updating the `creators` array inside the `data` object, it can only add and/or remove unverified creators. The exception to this rule is when the added or removed creator is the Delegate Authority itself.
+- Note that when updating the `creators` array inside the `data` object, it can only add and/or remove unverified creators.
 - Even if the asset is a Collection NFT, and contrary to the Data Delegate, the Data Item Delegate cannot affect the items of that collection.
 
 {% dialect-switcher title="Work with Data Item delegates" %}
