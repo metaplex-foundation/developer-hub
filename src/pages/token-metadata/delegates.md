@@ -66,7 +66,7 @@ Here are some key properties of Metadata Delegates:
 
 - There can be as many Metadata delegates as needed for a given asset.
 - Metadata delegates are derived from the Mint account which means they exist regardless of the owner of the asset. Thus, transferring an asset does not affect the Metadata delegates.
-- Metadata delegates are also derived from the current Update Authority of the asset. This means, whenever the Update Authority is updated on an asset, all Metadata delegates are voided and cannot be used by the new Update Authority.
+- Metadata delegates are also derived from the current Update Authority of the asset. This means, whenever the Update Authority is updated on an asset, all Metadata delegates are voided and cannot be used by the new Update Authority. However, if the Update Authority was to be transferred back, all Metadata delegates associated with it would automatically reactivate.
 - Metadata delegates can be revoked by the Update Authority that approved them.
 - Metadata delegates can also revoke themselves.
 
@@ -327,6 +327,7 @@ await updateAsCollectionItemDelegateV2(umi, {
 ### Data Delegate
 
 - The Delegate Authority can update a sub-set of the asset. It can update the entire `data` object of the Metadata account but nothing else. This means it can update the `creators` of the asset.
+- Note that when updating the `creators` array inside the `data` object, it can only add and/or remove unverified creators. The exception to this rule is when the added or removed creator is the Delegate Authority itself.
 - When applied to a Collection NFT, the Delegate Authority can perform the same updates on the items inside that Collection.
 
 {% dialect-switcher title="Work with Data delegates" %}
@@ -407,6 +408,7 @@ await updateAsDataDelegateV2(umi, {
 ### Data Item Delegate
 
 - The Delegate Authority can update a sub-set of the asset. It can update the entire `data` object of the Metadata account but nothing else. This means it can update the `creators` of the asset.
+- Note that when updating the `creators` array inside the `data` object, it can only add and/or remove unverified creators. The exception to this rule is when the added or removed creator is the Delegate Authority itself.
 - Even if the asset is a Collection NFT, and contrary to the Data Delegate, the Data Item Delegate cannot affect the items of that collection.
 
 {% dialect-switcher title="Work with Data Item delegates" %}
@@ -709,12 +711,14 @@ Let's go through each of these Token delegates in a bit more detail and provide 
 
 ### Standard Delegate
 
-As mentioned above, the Standard Delegate is a mere wrapper around spl-token delegates. Whilst we could simply send instructions to the Token program directly, this delegate aims to offer the same API on Token Metadata regardless of the Token Standard. Here are some key properties of the Standard Delegate:
+As mentioned above, the Standard Delegate is a wrapper around spl-token delegates. Whilst we could simply send instructions to the Token program directly, this delegate aims to offer the same API on Token Metadata regardless of the Token Standard. Additionally, Standard Delegates are able to lock/unlock assets which is not possible with native spl-token delegates.
+
+Here are some key properties of the Standard Delegate:
 
 - This delegate does not work with Programmable Non-Fungibles.
 - The Delegate Authority can transfer the asset to any address. Doing so will revoke the Delegate Authority.
 - The Delegate Authority can burn the asset.
-- The Delegate Authority can lock the asset — also known as "freezing" the asset on the Token program. Until the Delegate Authority unlocks (or "thaw") the asset, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
+- The Delegate Authority can lock the asset — also known as "freezing" the asset on the Token program. Until the Delegate Authority unlocks (or "thaw") the asset, the owner cannot transfer it, burn it, or revoke the Delegate Authority. This is specific to the Standard Delegate and cannot be done with a native spl-token delegate.
 - When used with fungible assets, an amount greater than 1 can be provided to specify the number of tokens to delegate to the Delegate Authority.
 
 {% dialect-switcher title="Work with Standard delegates" %}
@@ -820,7 +824,7 @@ await unlockV1(umi, {
 
 - This delegate only works with Programmable Non-Fungibles.
 - The Delegate Authority can transfer the PNFT to any address. Doing so will revoke the Delegate Authority.
-- As long as a Sale Delegate is set on a PNFT, the owner cannot transfer or burn it. However, the owner can revoke the Sale Delegate at any time, which will make the PNFT transferable and burnable again.
+- As long as a Sale Delegate is set on a PNFT, the PNFT enters a special Token State called `Listed`. The `Listed` Token State is a softer variation of the `Locked` Token State. During that time, the owner cannot transfer or burn the PNFT. However, the owner can revoke the Sale Delegate at any time, which will remove the `Listed` Token State and make the PNFT transferable and burnable again.
 
 {% dialect-switcher title="Work with Sale delegates" %}
 {% dialect title="JavaScript" id="js" %}
