@@ -13,6 +13,8 @@ The update authority of an asset can update its **Metadata** account using the *
 - **Collection Details**: This attribute enables us to set or clear the collection details of the asset.
 - **Rule Set**: This attribute enables us to set or clear the rule set of the asset. This is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
 
+Note that certain delegated authorities can also update the **Metadata** account of assets as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
+
 Here is how you can use our SDKs to update an asset on Token Metadata.
 
 {% dialect-switcher title="Update Assets" %}
