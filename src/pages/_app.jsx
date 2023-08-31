@@ -22,8 +22,16 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <title>{page.metaTitle}</title>
+        <meta property="og:title" content={page.metaTitle} />
+        <meta
+          property="og:image"
+          content="https://developers.metaplex.com/assets/social/dev-hub-preview.jpg"
+        />
         {page.description && (
-          <meta name="description" content={page.description} />
+          <>
+            <meta name="description" content={page.description} />
+            <meta name="og:description" content={page.description} />
+          </>
         )}
       </Head>
 
