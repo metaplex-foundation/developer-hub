@@ -11,10 +11,11 @@ The name refers to the vending machines that dispense candy for coins via a mech
 {% figure src="/assets/candy-machine/candy-machine-photo.png" alt="An AI-generated photo of a typical candy machine" caption="A typical candy machine" /%}
 
 {% quick-links %}
-{% quick-link title="Creator Studio" icon="Star" href="/" description="Don't want to code? Launch your next drop by pressing buttons!" /%}
-{% quick-link title="Installation" icon="InboxArrowDown" href="/" description="Ready to get your hands dirty? Jump to our installation guides." /%}
-{% quick-link title="Recipes" icon="RectangleStack" href="/" description="Learn various scenarios by reading concrete code examples." /%}
-{% quick-link title="API reference" icon="CodeBracketSquare" href="/" description="Looking for something specific? We've got you." /%}
+{% quick-link title="Creator Studio" icon="Star" href="https://studio.metaplex.com" description="Don't want to code? Launch your next drop by pressing buttons!" /%}
+
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/candy-machine/getting-started" description="Find the language or library of your choice and get started with Candy Machines." /%}
+{% quick-link title="Recipes" icon="RectangleStack" href="/candy-machine/recipes" description="Learn various scenarios by reading concrete code examples." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" href="/candy-machine/references" description="Looking for something specific? We've got you." /%}
 {% /quick-links %}
 
 {% callout %}
