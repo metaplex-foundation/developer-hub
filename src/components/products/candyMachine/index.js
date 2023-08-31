@@ -34,17 +34,20 @@ export const candyMachine = {
         {
           title: 'Features',
           links: [
-            { title: 'Candy Machine Settings', href: '/candy-machine/todo' },
-            { title: 'Managing Candy Machines', href: '/candy-machine/todo' },
-            { title: 'Inserting Items', href: '/candy-machine/todo' },
-            { title: 'Candy Guards', href: '/candy-machine/todo' },
-            { title: 'Guard Groups', href: '/candy-machine/todo' },
+            {
+              title: 'Candy Machine Settings',
+              href: '/candy-machine/settings',
+            },
+            { title: 'Managing Candy Machines', href: '/candy-machine/manage' },
+            { title: 'Inserting Items', href: '/candy-machine/insert-items' },
+            { title: 'Candy Guards', href: '/candy-machine/guards' },
+            { title: 'Guard Groups', href: '/candy-machine/guard-groups' },
             {
               title: 'Special Guard Instructions',
-              href: '/candy-machine/todo',
+              href: '/candy-machine/guard-route',
             },
-            { title: 'Minting', href: '/candy-machine/todo' },
-            { title: 'Programmable NFTs', href: '/candy-machine/todo' },
+            { title: 'Minting', href: '/candy-machine/mint' },
+            { title: 'Programmable NFTs', href: '/candy-machine/pnfts' },
           ],
         },
         {
