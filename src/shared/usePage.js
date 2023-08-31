@@ -13,6 +13,7 @@ export function usePage(pageProps) {
   return {
     title,
     metaTitle: pageProps.markdoc?.frontmatter.metaTitle ?? title,
+    description: pageProps.markdoc?.frontmatter.description,
     pathname,
     product,
     activeHero,
