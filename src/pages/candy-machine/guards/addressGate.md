@@ -18,13 +18,13 @@ The **Address Gate** guard restricts the mint to a single address which must m
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="green"/%}
+{% node #candy-guard-guards label="Guards" theme="mint"/%}
 {% node label="..." /%}
 {% /node %}
 
 {% node parent="candy-guard" y="49" x="250" %}
-{% node #guards label="Guards" theme="green" /%}
-{% node #addressGate label="AddressGate" theme="green" /%}
+{% node #guards label="Guards" theme="mint" /%}
+{% node #addressGate label="AddressGate" theme="mint" /%}
 {% node label="..." theme="dimmed" /%}
 {% /node %}
 

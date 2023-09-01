@@ -50,20 +50,20 @@ To verify that a leaf is part of the tree, we simply need a list of all the inte
 {% diagram %}
 {% node #hash-7 label="Hash 7" theme="brown" /%}
 {% node #merkle-root label="Merkle Root" theme="transparent" parent="hash-7" x="-90" y="8" /%}
-{% node #hash-5 label="Hash 5" parent="hash-7" y="100" x="-200" theme="green" /%}
+{% node #hash-5 label="Hash 5" parent="hash-7" y="100" x="-200" theme="mint" /%}
 {% node #hash-6 label="Hash 6" parent="hash-7" y="100" x="200" theme="blue" /%}
 
 {% node #legend-merkle-proof label="Merkle Proof =" theme="transparent" parent="hash-7" x="200" y="10" /%}
-{% node #legend-hash-4 label="Hash 4" parent="legend-merkle-proof" x="100" y="-7" theme="green" /%}
+{% node #legend-hash-4 label="Hash 4" parent="legend-merkle-proof" x="100" y="-7" theme="mint" /%}
 {% node #plus label="+" parent="legend-hash-4" theme="transparent" x="81" y="8" /%}
-{% node #legend-hash-5 label="Hash 5" parent="legend-hash-4" x="100" theme="green" /%}
+{% node #legend-hash-5 label="Hash 5" parent="legend-hash-4" x="100" theme="mint" /%}
 
 
 {% node #leaves label="Leaves" parent="hash-5" y="105" x="-170" theme="transparent" /%}
 {% node #hash-1 label="Hash 1" parent="hash-5" y="100" x="-100" theme="orange" /%}
 {% node #hash-2 label="Hash 2" parent="hash-5" y="100" x="100" theme="orange" /%}
 {% node #hash-3 label="Hash 3" parent="hash-6" y="100" x="-100" theme="blue" /%}
-{% node #hash-4 label="Hash 4" parent="hash-6" y="100" x="100" theme="green" /%}
+{% node #hash-4 label="Hash 4" parent="hash-6" y="100" x="100" theme="mint" /%}
 
 {% node #data label="Data" parent="hash-1" y="105" x="-80" theme="transparent" /%}
 {% node #Ur1C label="Ur1C...bWSG" parent="hash-1" y="100" x="-23" /%}
@@ -71,13 +71,13 @@ To verify that a leaf is part of the tree, we simply need a list of all the inte
 {% node #RbJs label="RbJs...Ek7u" parent="hash-3" y="100" x="-17" theme="blue" /%}
 {% node #rwAv label="rwAv...u1ud" parent="hash-4" y="100" x="-16" /%}
 
-{% edge from="hash-5" to="hash-7" fromPosition="top" toPosition="bottom" theme="green" /%}
+{% edge from="hash-5" to="hash-7" fromPosition="top" toPosition="bottom" theme="mint" /%}
 {% edge from="hash-6" to="hash-7" fromPosition="top" toPosition="bottom" theme="blue" /%}
 
 {% edge from="hash-1" to="hash-5" fromPosition="top" toPosition="bottom" /%}
 {% edge from="hash-2" to="hash-5" fromPosition="top" toPosition="bottom" /%}
 {% edge from="hash-3" to="hash-6" fromPosition="top" toPosition="bottom" theme="blue" /%}
-{% edge from="hash-4" to="hash-6" fromPosition="top" toPosition="bottom" theme="green" /%}
+{% edge from="hash-4" to="hash-6" fromPosition="top" toPosition="bottom" theme="mint" /%}
 
 {% edge from="Ur1C" to="hash-1" fromPosition="top" toPosition="bottom" path="straight" /%}
 {% edge from="sXCd" to="hash-2" fromPosition="top" toPosition="bottom" path="straight" /%}
@@ -100,13 +100,13 @@ Note that our SDKs provide helpers to make it easy to create Merkle Root and Mer
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="green"/%}
+{% node #candy-guard-guards label="Guards" theme="mint"/%}
 {% node label="..." /%}
 {% /node %}
 
 {% node parent="candy-guard" y="49" x="250" %}
-{% node #guards label="Guards" theme="green" /%}
-{% node #allowList label="AllowList" theme="green" /%}
+{% node #guards label="Guards" theme="mint" /%}
+{% node #allowList label="AllowList" theme="mint" /%}
 {% node label="..." theme="dimmed" /%}
 {% /node %}
 

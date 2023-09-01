@@ -22,15 +22,15 @@ Additionally, the Bot Tax guard enables us to ensure the mint instruction was th
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="green"/%}
+{% node #candy-guard-guards label="Guards" theme="mint"/%}
 {% node label="..." /%}
 {% /node %}
 
 {% node parent="candy-guard" y="49" x="250" %}
-{% node #guards label="Guards" theme="green" /%}
-{% node #botTax label="botTax" theme="green" /%}
-{% node #lamports label="Lamports" theme="green" /%}
-{% node #lastInstruction label="Last Instruction" theme="green" /%}
+{% node #guards label="Guards" theme="mint" /%}
+{% node #botTax label="botTax" theme="mint" /%}
+{% node #lamports label="Lamports" theme="mint" /%}
+{% node #lastInstruction label="Last Instruction" theme="mint" /%}
 {% node label="..." theme="dimmed" /%}
 {% /node %}
 
