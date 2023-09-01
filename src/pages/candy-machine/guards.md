@@ -60,16 +60,25 @@ Mint Authority = Candy Guard {% .font-semibold %}
 {% node label="Candy Guard Program" theme="pink" /%}
 {% /node %}
 {% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
+{% node parent="mint-1" x=-120 y=-35 theme="transparent" %}
+Anyone can mint as long \
+as they comply with the \
+activated guards.
+{% /node %}
 
 {% node parent="mint-1" x=-22 y=100 %}
 {% node #mint-2 label="Mint" theme="pink" /%}
 {% node label="Candy Machine Core Program" theme="pink" /%}
 {% /node %}
 {% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
+{% node parent="mint-2" x=200 y=-18 theme="transparent" %}
+Only Alice \
+can mint.
+{% /node %}
 
 {% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
 
-{% node parent="mint-2" x=250 %}
+{% node parent="mint-2" x=280 %}
 {% node #candy-machine-2 label="Candy Machine" theme="blue" /%}
 {% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
 {% node label="Features" /%}
