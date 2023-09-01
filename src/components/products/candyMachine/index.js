@@ -50,11 +50,11 @@ export const candyMachine = {
         {
           title: 'Available Guards',
           links: [
-            { title: 'Address Gate', href: '/candy-machine/guards/addressGate' },
-            { title: 'Allow List', href: '/candy-machine/guards/allowList' },
-            { title: 'Bot Tax', href: '/candy-machine/guards/botTax' },
-            { title: 'End Date', href: '/candy-machine/guards/endDate' },
-            { title: 'Freeze Sol Payment', href: '/candy-machine/guards/freezeSolPayment' },
+            { title: 'Address Gate', href: '/candy-machine/guards/address-gate' },
+            { title: 'Allow List', href: '/candy-machine/guards/allow-list' },
+            { title: 'Bot Tax', href: '/candy-machine/guards/bot-tax' },
+            { title: 'End Date', href: '/candy-machine/guards/end-date' },
+            { title: 'Freeze Sol Payment', href: '/candy-machine/guards/freeze-sol-payment' },
             { title: 'Freeze Token Payment', href: '/candy-machine/todo' },
             { title: 'Gatekeeper', href: '/candy-machine/todo' },
             { title: 'Mint Limit', href: '/candy-machine/todo' },
