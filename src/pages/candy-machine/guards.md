@@ -108,7 +108,71 @@ The reason guards don’t live in the main Candy Machine program is to separate 
 
 This enables guards to not only be modular but extendable. Anyone can create and deploy their own Candy Guard program to create custom guards whilst relying on the Candy Machine Core program for all the rest.
 
-![Candy Machines V3 - Candy Guards 2@2x.png](/assets/candy-machine-v3/CandyMachinesV3-CandyGuards2.png#radius)
+{% diagram %}
+
+{% node %}
+{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine-1" y=80 x=20 %}
+{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node label="Guards" theme="mint" z=1 /%}
+{% node label="Sol Payment" /%}
+{% node label="Token Payment" /%}
+{% node label="Start Date" /%}
+{% node label="End Date" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine-1" x=300 %}
+{% node #mint-1 label="Mint" theme="pink" /%}
+{% node label="Candy Guard Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-1" x=160 %}
+{% node #mint-1b label="Mint" theme="pink" /%}
+{% node label="Custom Candy Guard Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-1b" x=-80 y=-22 label="Different Access Control" theme="transparent" /%}
+
+{% node parent="mint-1" x=60 y=100 %}
+{% node #mint-2 label="Mint" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-2" x=95 y=-20 label="Same Mint Logic" theme="transparent" /%}
+
+{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+
+{% node parent="mint-1b" x=250 %}
+{% node #candy-machine-2 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine-2" y=80 x=0 %}
+{% node #candy-guard-2 label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Custom Candy Guard Program" theme="dimmed" /%}
+{% node label="Guards" theme="mint" z=1 /%}
+{% node label="Sol Payment" /%}
+{% node label="Token Payment" /%}
+{% node label="Start Date" /%}
+{% node %}
+My Custom Guard {% .font-semibold %}
+{% /node %}
+{% node label="..." /%}
+{% /node %}
+
+{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
+{% edge from="candy-guard-2" to="candy-machine-2" fromPosition="right" toPosition="right" arrow=false /%}
+{% edge from="mint-1" to="mint-2" theme="pink" fromPosition="bottom" toPosition="top" /%}
+{% edge from="mint-1b" to="mint-2" theme="pink" fromPosition="bottom" toPosition="top" /%}
+{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
+{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
+{% edge from="candy-guard-1" to="mint-1" theme="pink" /%}
+{% edge from="candy-machine-2" to="mint-1b" theme="pink" /%}
+{% edge from="candy-guard-2" to="mint-1b" theme="pink" /%}
+
+{% /diagram %}
 
 Note that our SDKs also offer ways to register your own Candy Guard programs and their custom guards so you can leverage their friendly API and easily share your guards with others.
 
