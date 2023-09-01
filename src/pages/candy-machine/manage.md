@@ -4,9 +4,7 @@ metaTitle: Candy Machine - Create, Update, Fetch and Delete
 description: Explains how to manage Candy Machines.
 ---
 
-## Introduction
-
-On [the previous page](/candy-machine/settings), we went through the various settings of a Candy Machine. So now, let’s see how we can use these settings to create and update Candy Machines. We’ll also talk about how to fetch an existing Candy Machine and how to delete it when it has served its purpose.
+On [the previous page](/candy-machine/settings), we went through the various settings of a Candy Machine. So now, let’s see how we can use these settings to create and update Candy Machines. We’ll also talk about how to fetch an existing Candy Machine and how to delete it when it has served its purpose. {% .lead %}
 
 Essentially, we’ll be going through the Create, Read, Update and Delete steps of a Candy Machine. Let’s go!
 

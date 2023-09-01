@@ -4,9 +4,7 @@ metaTitle: Candy Machine - Settings
 description: Explains Candy Machine settings in great detail.
 ---
 
-## Introduction
-
-On this page, we’re going to dig into all the settings available on a Candy Machine. We will focus on settings that affect the Candy Machine itself and the NFTs it generates rather than the settings that affect the minting process known as Guards. We will tackle the latter in dedicated pages.
+On this page, we’re going to dig into all the settings available on a Candy Machine. We will focus on settings that affect the Candy Machine itself and the NFTs it generates rather than the settings that affect the minting process known as Guards. We will tackle the latter in dedicated pages. {% .lead %}
 
 ## The authority
 
