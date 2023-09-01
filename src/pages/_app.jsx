@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }) {
         {page.description && (
           <>
             <meta name="description" content={page.description} />
-            <meta name="og:description" content={page.description} />
+            <meta property="og:description" content={page.description} />
             <meta name="twitter:description" content={page.description} />
           </>
         )}
