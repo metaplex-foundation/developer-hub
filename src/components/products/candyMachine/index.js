@@ -55,7 +55,7 @@ export const candyMachine = {
             { title: 'Bot Tax', href: '/candy-machine/guards/bot-tax' },
             { title: 'End Date', href: '/candy-machine/guards/end-date' },
             { title: 'Freeze Sol Payment', href: '/candy-machine/guards/freeze-sol-payment' },
-            { title: 'Freeze Token Payment', href: '/candy-machine/todo' },
+            { title: 'Freeze Token Payment', href: '/candy-machine/guards/freeze-token-payment' },
             { title: 'Gatekeeper', href: '/candy-machine/todo' },
             { title: 'Mint Limit', href: '/candy-machine/todo' },
             { title: 'NFT Burn', href: '/candy-machine/todo' },
