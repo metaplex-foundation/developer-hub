@@ -716,7 +716,9 @@ The example below illustrates a Candy Machine with three Freeze Sol Payment guar
 
 {% node %}
 {% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
 {% node parent="candy-machine" y="100" x="22" %}
