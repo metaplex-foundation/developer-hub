@@ -57,14 +57,12 @@ Group 1: "early" {% .font-semibold %}
 {% node label="Start Date" /%}
 {% node label="End Date" /%}
 {% node label="Bot Tax" /%}
-{% node label="..." /%}
 {% node theme="mint" z=1 %}
 Group 2: "late"
 {% /node %}
 {% node label="Sol Payment" /%}
 {% node label="Start Date" /%}
 {% node label="Bot Tax" /%}
-{% node label="..." /%}
 {% /node %}
 
 {% node parent="candy-machine-1" x=350 %}
@@ -199,7 +197,52 @@ To illustrate that, let’s take our example from the previous section and move 
 
 As you can see, default guards are useful to avoid repetition within your groups.
 
-![CandyMachinesV3-GuardGroups2.png](/assets/candy-machine-v3/CandyMachinesV3-GuardGroups2.png#radius)
+{% diagram %}
+
+{% node %}
+{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine-1" y=80 x=20 %}
+{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node label="Guards (default guards)" theme="mint" z=1 /%}
+{% node label="Bot Tax" /%}
+{% node #group-1 theme="mint" z=1 %}
+Group 1: "early" {% .font-semibold %}
+{% /node %}
+{% node label="Sol Payment" /%}
+{% node label="Start Date" /%}
+{% node label="End Date" /%}
+{% node theme="mint" z=1 %}
+Group 2: "late"
+{% /node %}
+{% node label="Sol Payment" /%}
+{% node label="Start Date" /%}
+{% /node %}
+
+{% node parent="candy-machine-1" x=350 %}
+{% node #mint-1 label="Mint" theme="pink" /%}
+{% node label="Candy Guard Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
+
+{% node parent="mint-1" x=-22 y=100 %}
+{% node #mint-2 label="Mint" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
+
+{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+
+{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
+{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
+{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
+{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
+{% edge from="group-1" to="mint-1" theme="pink" /%}
+
+{% /diagram %}
 
 Note that, even when using default guards, a group must be provided when minting. That means, when using guard groups, **it is not possible to mint using the default guards only**.
 
