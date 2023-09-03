@@ -91,7 +91,7 @@ The Bot Tax guard contains the following settings:
 - **Lamports**: The amount in SOL (or lamports) to charge for an invalid transaction. We recommend setting a fairly small amount to avoid affecting real users who made a genuine mistake. Client-side validation can also help reduce affecting real users.
 - **Last Instruction**: Whether or not we should forbid minting and charge a bot tax when the mint instruction is not the last instruction of the transaction. We recommend setting this to `true` to be better protected against bots.
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Bot Tax guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 

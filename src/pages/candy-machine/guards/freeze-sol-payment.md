@@ -26,13 +26,17 @@ You may initialize the Freeze Escrow account, thaw NFTs and unlock funds [via th
 {% /node %}
 {% edge from="initialize" to="freezeEscrow-pda" path="straight" /%}
 {% node #freezeEscrow-pda label="Freeze Escrow PDA" theme="slate" parent="initialize" x="15" y="70" /%}
+{% node theme="transparent" parent="freezeEscrow-pda" x="178" y="-15"%}
+Funds are transferred
 
+to the escrow account
+{% /node %}
 {% node #mintFrozen label="Mint Frozen NFTs" theme="indigo" parent="initialize" x="250" /%}
 {% node parent="mintFrozen"  theme="transparent" x="-8" y="-1" %}
 ②
 {% /node %}
 {% edge from="mintFrozen" to="frozen-NFT-bg2" path="straight" /%}
-{% edge from="mintFrozen" to="freezeEscrow-pda" /%}
+{% edge from="mintFrozen" to="freezeEscrow-pda" toPosition="right" fromPosition="bottom" /%}
 {% node #frozen-NFT-bg2 label="Frozen NFT" theme="slate" parent="frozen-NFT" x="-10" y="-10" /%}
 {% node #frozen-NFT-bg1 label="Frozen NFT" theme="slate" parent="frozen-NFT" x="-5" y="-5" /%}
 {% node #frozen-NFT label="Frozen NFT" theme="slate" parent="mintFrozen" x="33" y="120" /%}
@@ -79,7 +83,7 @@ The Freeze Sol Payment guard contains the following settings:
 - **Lamports**: The amount in SOL (or lamports) to charge the payer.
 - **Destination**: The address of the wallet that should eventually receive all payments related to this guard.
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Freeze Sol Payment guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -125,7 +129,7 @@ The Freeze Sol Payment guard contains the following Mint Settings:
 
 Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#freezesolpayment) for more details.
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Mint with the Freeze Sol Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -301,7 +305,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 ‎
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Initialize the Freeze Escrow" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -449,7 +453,7 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 
 {% /diagram %}
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Thaw a frozen NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -610,7 +614,7 @@ the Freeze Escrow Account
 
 ‎
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Unlock Funds" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 

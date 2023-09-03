@@ -200,7 +200,7 @@ The Allow List guard contains the following settings:
 
 - **Merkle Root**: The Root of the Merkle Tree representing the allow list.
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Allowlist guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -274,7 +274,7 @@ Note that, before being able to mint, **we must validate the minting wallet by p
 
 Also note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to add the Allow List Proof PDA to the remaining accounts of the mint instruction. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#allowlist) for more details.
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Mint with the Allow List guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -331,7 +331,7 @@ This path of the route instruction accepts the following arguments:
 - **Merkle Proof**: The list of intermediary hashes that should be used to compute the Merkle Root and verify that it matches the Merkle Root stored on the guard’s settings.
 - **Minter** (optional): The minter account as a signer if it is not the same as the payer. When provided, this account must be part of the allow list for the proof to be valid.
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Pre-Validate a Wallet" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 

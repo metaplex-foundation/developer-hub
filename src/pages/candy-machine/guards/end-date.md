@@ -75,7 +75,7 @@ The End Date guard contains the following settings:
 
 - **Date**: The date after which minting is no longer allowed.
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the End Date guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
