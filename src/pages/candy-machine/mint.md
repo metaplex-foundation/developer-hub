@@ -459,7 +459,52 @@ One way guards can require a pre-validation step is by using [their own special 
 
 A good example of that is the **Allow List** guard. When using this guard, we must verify that our wallet belongs to a predefined list of wallets by calling the route instruction and providing a valid Merkle Proof. If this route instruction is successful, it will create an Allow List PDA for that wallet which the mint instruction can then read to validate the Allow List guard. [You can read more about the Allow List guard on its dedicated page](/candy-machine/available-guards/allow-list).
 
-![CandyMachinesV3-Minting4.png](/assets/candy-machine-v3/CandyMachinesV3-Minting4.png#radius)
+{% diagram %}
+
+{% node %}
+{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine-1" y=80 x=20 %}
+{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node label="Guards" theme="mint" z=1 /%}
+{% node #allow-list-guard label="Allow List" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine-1" x=550 %}
+{% node #mint-1 label="Mint" theme="pink" /%}
+{% node label="Candy Guard Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
+
+{% node parent="mint-1" x=-22 y=100 %}
+{% node #mint-2 label="Mint" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
+
+{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+
+{% node parent="mint-2" x=-250 %}
+{% node #route label="Route" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="route" x=70 y=-20 label="Verify Merkle Proof" theme="transparent" /%}
+
+{% node #allow-list-pda parent="route" x=23 y=100 label="Allow List PDA" /%}
+
+{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
+{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
+{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
+{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
+{% edge from="allow-list-guard" to="route" theme="pink" /%}
+{% edge from="route" to="allow-list-pda" theme="pink" path="straight" /%}
+{% edge from="allow-list-pda" to="mint-1" theme="pink" /%}
+
+{% /diagram %}
 
 ### Using external services
 
@@ -467,7 +512,55 @@ Another way guards may perform that pre-validation step is by relying on an exte
 
 For instance, when using the **Gatekeeper** guard, we must request a Gateway Token by performing a challenge — such as completing a Captcha — which depends on the configured Gatekeeper Network. The Gatekeeper guard will then check for the existence of such Gateway Token to either validate or reject the mint. [You can learn more about the Gatekeeper guard on its dedicated page](/candy-machine/available-guards/gatekeeper).
 
-![CandyMachinesV3-Minting5.png](/assets/candy-machine-v3/CandyMachinesV3-Minting5.png#radius)
+{% diagram %}
+
+{% node %}
+{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine-1" y=80 x=20 %}
+{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node label="Guards" theme="mint" z=1 /%}
+{% node #gatekeeper-guard label="Gatekeeper" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine-1" x=550 %}
+{% node #mint-1 label="Mint" theme="pink" /%}
+{% node label="Candy Guard Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
+
+{% node parent="mint-1" x=-22 y=100 %}
+{% node #mint-2 label="Mint" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
+
+{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+
+{% node parent="mint-2" x=-250 y=-40 %}
+{% node #network label="Gatekeeper Network" theme="slate" /%}
+{% node theme="slate" %}
+Request Gateway Token \
+from the Gatekeeper \
+Network, e.g. Captcha.
+{% /node %}
+{% /node %}
+
+{% node #gateway-token parent="network" x=23 y=140 label="Gateway Token" /%}
+
+{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
+{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
+{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
+{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
+{% edge from="gatekeeper-guard" to="network" theme="slate" /%}
+{% edge from="network" to="gateway-token" theme="slate" path="straight" /%}
+{% edge from="gateway-token" to="mint-1" theme="pink" /%}
+
+{% /diagram %}
 
 ## Minting With Bot Taxes
 
