@@ -40,7 +40,57 @@ Now, whenever someone tries to mint from our Candy Machine, **they will have to 
 - It ensures buyers do not experience unexpected minting behaviour. Say we tried to mint for 1 SOL at the very end of the first group’s end date but, by the time the transaction executes, we’re now past that date. If we didn’t ask for the group label, the transaction would succeed and we would be charged 2 SOL even though we expected to only be charged 1 SOL.
 - It makes it possible to support parallel groups. We’ll talk more about this later on this page.
 
-![CandyMachinesV3-GuardGroups1.png](/assets/candy-machine-v3/CandyMachinesV3-GuardGroups1.png#radius)
+{% diagram %}
+
+{% node %}
+{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine-1" y=80 x=20 %}
+{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node #group-1 theme="mint" z=1 %}
+Group 1: "early" {% .font-semibold %}
+{% /node %}
+{% node label="Sol Payment" /%}
+{% node label="Start Date" /%}
+{% node label="End Date" /%}
+{% node label="Bot Tax" /%}
+{% node label="..." /%}
+{% node theme="mint" z=1 %}
+Group 2: "late"
+{% /node %}
+{% node label="Sol Payment" /%}
+{% node label="Start Date" /%}
+{% node label="Bot Tax" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine-1" x=350 %}
+{% node #mint-1 label="Mint" theme="pink" /%}
+{% node label="Candy Guard Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
+
+{% node parent="mint-1" x=-22 y=100 %}
+{% node #mint-2 label="Mint" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
+
+{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+
+{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
+{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
+{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
+{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
+{% edge from="group-1" to="mint-1" theme="pink" %}
+Select which group \
+to mint from
+{% /edge %}
+
+{% /diagram %}
 
 Now let’s see how we can create and update groups using our SDKs.
 
