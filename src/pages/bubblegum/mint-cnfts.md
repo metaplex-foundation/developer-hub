@@ -98,10 +98,10 @@ await mintToCollectionV1(umi, {
 
 {% totem-accordion title="Create a Collection NFT" %}
 
-If you do not have a Collection NFT yet, you can create one using the `@metaplex-foundation/mpl-token-metadata` library (currently under the `alpha` tag).
+If you do not have a Collection NFT yet, you can create one using the `@metaplex-foundation/mpl-token-metadata` library.
 
 ```shell
-npm install @metaplex-foundation/mpl-token-metadata@alpha
+npm install @metaplex-foundation/mpl-token-metadata
 ```
 
 And create a Collection NFT like so:
