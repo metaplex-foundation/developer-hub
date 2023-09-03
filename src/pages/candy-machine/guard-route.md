@@ -31,7 +31,52 @@ It does that using [Merkle Trees](https://en.m.wikipedia.org/wiki/Merkle_tree) w
 
 Therefore, the Allow List guard **uses its route instruction to verify the Merkle Proof of a given wallet** and, if successful, creates a small PDA account on the blockchain that acts as verification proof for the mint instruction.
 
-![CandyMachinesV3-SpecialGuardInstructions1.png](/assets/candy-machine-v3/CandyMachinesV3-SpecialGuardInstructions1.png#radius)
+{% diagram %}
+
+{% node %}
+{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine-1" y=80 x=20 %}
+{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node label="Guards" theme="mint" z=1 /%}
+{% node #allow-list-guard label="Allow List" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine-1" x=550 %}
+{% node #mint-1 label="Mint" theme="pink" /%}
+{% node label="Candy Guard Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
+
+{% node parent="mint-1" x=-22 y=100 %}
+{% node #mint-2 label="Mint" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
+
+{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+
+{% node parent="mint-2" x=-250 %}
+{% node #route label="Route" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="route" x=70 y=-20 label="Verify Merkle Proof" theme="transparent" /%}
+
+{% node #allow-list-pda parent="route" x=23 y=100 label="Allow List PDA" /%}
+
+{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
+{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
+{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
+{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
+{% edge from="allow-list-guard" to="route" theme="pink" /%}
+{% edge from="route" to="allow-list-pda" theme="pink" path="straight" /%}
+{% edge from="allow-list-pda" to="mint-1" theme="pink" /%}
+
+{% /diagram %}
 
 So why can’t we just verify the Merkle Proof directly within the mint instruction? That’s simply because, for big allow lists, Merkle Proofs can end up being pretty lengthy. After a certain size, it becomes impossible to include it within the mint transaction that already contains a decent amount of instructions. By separating the validation process from the minting process, we make it possible for allow lists to be as big as we need them to be.
 
