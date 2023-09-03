@@ -183,56 +183,53 @@ When initializing this Freeze Escrow account, we must provide the following argu
 
 {% node %}
 {% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+
+{% /node %}
 {% /node %}
 
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="green"/%}
+{% node #guards label="Guards" theme="mint" /%}
+{% node #freezeSolPayment label="Freeze Sol Payment" /%}
+{% node #amount label="Amount"  /%}
+{% node #destination label="Destination" /%}
 {% node label="..." /%}
 {% /node %}
 
-{% node parent="candy-guard" y="49" x="230" %}
-{% node #guards label="Guards" theme="green" /%}
-{% node #freezeSolPayment label="Freeze Sol Payment" theme="green" /%}
-{% node #amount label="Amount" theme="green" /%}
-{% node #destination label="Destination" theme="green" /%}
-{% node label="..." theme="dimmed" /%}
-{% /node %}
-
-{% node parent="candy-machine" x="431" %}
+{% node parent="candy-machine" x="415" %}
   {% node #candy-guard-route theme="pink" %}
-    Route from the
-
-    _Candy Guard Program_
-
-    with Path = *Initialize*
+    Route with Path {% .whitespace-nowrap %}
+    
+    = *Initialize*
+  {% /node %}
+  {% node parent="candy-guard-route" theme="pink" %}
+    Candy Machine Guard Program {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
-{% node parent="candy-guard-route" y="-20" x="45" theme="transparent" %}
+{% node parent="candy-guard-route" y="-20" x="-4" theme="transparent" %}
   Initialize Freeze Escrow
 {% /node %}
 
-{% node #freeze-period parent="candy-guard-route" x="220" y="27" label="Freeze Period" /%}
+{% node #freeze-period parent="candy-guard-route" x="220" y="13" label="Freeze Period" theme="slate" /%}
 {% edge from="freeze-period" to="candy-guard-route" theme="pink" path="straight" /%}
 
-{% edge from="candy-machine" to="candy-guard-route" theme="pink" /%}
-{% edge from="candy-guard" to="candy-guard-route" theme="pink" toPosition="left" /%}
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
 
 
-{% edge from="candy-guard-route" to="freezeEscrow-PDA" theme="pink" path="straight" /%}
+{% edge from="candy-guard-route" to="freezeEscrow-PDA3" theme="pink" path="straight" y="-10" /%}
 
-{% node #freezeEscrow-PDA parent="destination" x="188" y="-9" theme="slate" %}
+{% node #freezeEscrow-PDA3 parent="destination" x="390" y="-10" %}
   Freeze Escrow PDA
 {% /node %}
 
 {% edge from="candy-guard" to="candy-machine" /%}
 
-{% edge from="destination" to="freezeEscrow-PDA" arrow="none" dashed=true /%}
+{% edge from="destination" to="freezeEscrow-PDA3" arrow="none" dashed=true path="straight" /%}
 
-{% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="candy-guard-route" to="mint-candy-machine" path="straight" /%}
 
 {% /diagram %}
@@ -243,65 +240,61 @@ Last but not least, the Freeze Escrow PDA account will receive the funds of all 
 
 {% node %}
 {% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="green"/%}
+{% node #guards label="Guards" theme="mint" /%}
+{% node #freezeSolPayment label="Freeze Sol Payment" /%}
+{% node #amount label="Amount"  /%}
+{% node #destination label="Destination" /%}
 {% node label="..." /%}
 {% /node %}
 
-{% node parent="candy-guard" y="49" x="250" %}
-{% node #guards label="Guards" theme="green" /%}
-{% node #freezeSolPayment label="Freeze Sol Payment" theme="green" /%}
-{% node #amount label="Amount" theme="green" /%}
-{% node #destination label="Destination" theme="green" /%}
-{% node label="..." theme="dimmed" /%}
-{% /node %}
-
-{% node #freezeEscrow-PDA parent="destination" x="170" y="-8" theme="slate" %}
+{% node #freezeEscrow-PDA4 parent="destination" x="300" y="-8" theme="slate" %}
   Freeze Escrow PDA
 {% /node %}
-{% edge from="destination" to="freezeEscrow-PDA" arrow="none" dashed=true path="straight" /%}
+{% edge from="destination" to="freezeEscrow-PDA4" arrow="none" dashed=true path="straight" /%}
 
-{% node parent="candy-machine" x="700" %}
+{% node parent="candy-machine" x="600" %}
   {% node #mint-candy-guard theme="pink" %}
-    Route from the
-
-    _Candy Guard Program_
-
-    with Path = *Initialize*
+    Route with
+    
+    Path = *Initialize*
+  {% /node %}
+    {% node parent="candy-guard-route" theme="pink" %}
+    Candy Machine Guard Program {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
   Access Control
 {% /node %}
-{% edge from="mint-candy-guard" to="freezeEscrow-PDA" theme="pink" /%}
+{% edge from="mint-candy-guard" to="freezeEscrow-PDA4" theme="pink" /%}
 
-{% node parent="mint-candy-guard" y="150" x="-8" %}
+{% node parent="mint-candy-guard" y="150" x="2" %}
   {% node #mint-candy-machine theme="pink" %}
-    Mint from 
-    
-    _Candy Machine Program_
+    Mint
+  {% /node %}
+  {% node parent="mint-candy-guard" theme="pink" %}
+    Candy Machine Core Program {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
-{% node parent="mint-candy-machine" y="-20" x="110" theme="transparent" %}
+{% node parent="mint-candy-machine" y="-20" x="130" theme="transparent" %}
   Mint Logic
 {% /node %}
 
 
 {% edge from="mint-candy-machine" to="frozen-NFT" path="straight" /%}
-{% node #frozen-NFT parent="mint-candy-machine" y="120" x="48" theme="slate" %}
+{% node #frozen-NFT parent="mint-candy-machine" y="120" x="29" theme="slate" %}
   Frozen NFT
 {% /node %}
 
 {% edge from="candy-guard" to="candy-machine" /%}
-{% edge from="candy-machine" to="mint-candy-guard" theme="pink" toPosition="top" type="bezier" /%}
-{% edge from="candy-guard" to="mint-candy-guard" theme="pink" toPosition="top" type="bezier" /%}
 
-{% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
 {% /diagram %}
@@ -400,7 +393,61 @@ To thaw a Frozen NFT, we must provide the following arguments to the route instr
 - **NFT Token Standard**: The token standard of the Frozen NFT to thaw.
 - **NFT Rule Set** (optional): The Rule Set of the Frozen NFT to thaw, if we are thawing a Programmable NFT with a Rule Set.
 
-![CandyMachinesV3-GuardsFreezeSolPayment3.png](/assets/candy-machine-v3/CandyMachinesV3-GuardsFreezeSolPayment3.png#radius)
+{% diagram  %}
+
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node theme="dimmed" %}
+  Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="candy-machine" y="100" x="-4" %}
+{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node theme="dimmed" %}
+Candy Machine Guard Program {% .whitespace-nowrap %}
+{% /node %}
+{% node #guards label="Guards" theme="mint" /%}
+{% node #freezeSolPayment label="Freeze Sol Payment" /%}
+{% node #amount label="Amount"  /%}
+{% node #destination label="Destination" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine" x="427" y="-14" %}
+  {% node #candy-guard-route theme="pink" %}
+    Route with
+    
+    Path = *thaw*
+  {% /node %}
+  {% node parent="mint-candy-guard" theme="pink" %}
+    Candy Machine Core Program {% .whitespace-nowrap %}
+  {% /node %}
+{% /node %}
+{% node parent="candy-guard-route" y="-20" x="80" theme="transparent" %}
+  Thaw a Frozen NFT
+{% /node %}
+
+{% node #freeze-period parent="candy-guard-route" x="218" y="15" label="Freeze Escrow PDA" /%}
+{% edge from="freeze-period" to="candy-guard-route" theme="pink" path="straight" /%}
+
+{% edge from="candy-machine" to="candy-guard-route" theme="pink" /%}
+{% edge from="candy-guard" to="candy-guard-route" theme="pink" toPosition="left" /%}
+{% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
+
+
+{% edge from="candy-guard-route" to="freezeEscrow-PDA5" theme="pink" path="straight" /%}
+
+{% node #frozen-NFT parent="candy-guard-route" y="-100" x="29" label="Frozen NFT" /%}
+{% edge from="frozen-NFT" to="candy-guard-route" path="straight" /%}
+
+{% node #freezeEscrow-PDA5 parent="candy-guard-route" x="25" y="150" label="Thawed NFT" /%}
+{% edge from="candy-guard" to="candy-machine" /%}
+
+{% edge from="candy-guard-guards" to="guards" /%}
+{% edge from="candy-guard-route" to="mint-candy-machine" path="straight" /%}
+
+{% /diagram %}
 
 {% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -499,7 +546,69 @@ To unlock the funds, we must provide the following arguments to the route instru
 - **Destination**: The address of the wallet that should eventually receive all payments related to this guard.
 - **Candy Guard Authority**: The authority of the Candy Guard account as a Signer.
 
-![CandyMachinesV3-GuardsFreezeSolPayment4.png](/assets/candy-machine-v3/CandyMachinesV3-GuardsFreezeSolPayment4.png#radius)
+{% diagram  %}
+
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program
+{% /node %}
+{% /node %}
+
+{% node parent="candy-machine" y="100" x="19" %}
+{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node theme="dimmed" %}
+Candy Machine Guard Program {% .whitespace-nowrap %}
+{% /node %}
+{% node #guards label="Guards" theme="mint" /%}
+{% node #freezeSolPayment label="Freeze Sol Payment" /%}
+{% node #amount label="Amount"  /%}
+{% node #destination label="Destination" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine" x="431" %}
+  {% node #candy-guard-route theme="pink" %}
+    Route with
+    
+    Path = *unlockFunds*
+  {% /node %}
+  {% node parent="mint-candy-guard" theme="pink" %}
+    Candy Machine Guard Program {% .whitespace-nowrap %}
+  {% /node %}
+{% /node %}
+
+{% node parent="candy-guard-route" y="-20" x="10" theme="transparent" %}
+  Unlock funds from the escrow
+{% /node %}
+
+{% node #freeze-period parent="candy-guard-route" x="220" y="15" label="Freeze Escrow PDA" /%}
+{% edge from="freeze-period" to="candy-guard-route" theme="pink" path="straight" /%}
+
+{% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
+
+
+{% node parent="candy-guard-route" y="209" x="-18" %}
+{% node #destination-wallet label="Destination Wallet" theme="indigo" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program
+{% /node %}
+{% /node %}
+{% edge from="destination-wallet" to="destination" arrow="none" dashed=true /%}
+{% edge from="candy-guard-route" to="destination-wallet" theme="pink" path="straight" %}
+Transfer all funds from
+
+the Freeze Escrow Account
+{% /edge %}
+
+
+{% edge from="candy-guard" to="candy-machine" /%}
+
+{% edge from="candy-guard-guards" to="guards" /%}
+
+{% /diagram %}
+
+‎
 
 {% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -603,4 +712,89 @@ The example below illustrates a Candy Machine with three Freeze Sol Payment guar
 - Groups 1 and 2 share the same Destination address and therefore the same Freeze Escrow account.
 - Group 3 has its own Destination address and therefore its own Freeze Escrow account.
 
-![CandyMachinesV3-GuardsFreezeSolPayment5.png](/assets/candy-machine-v3/CandyMachinesV3-GuardsFreezeSolPayment5.png#radius)
+{% diagram  %}
+
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine" y="100" x="22" %}
+{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node #guards label="Guard Group 1" theme="mint" /%}
+{% node #freezeSolPayment label="Freeze Sol Payment" /%}
+{% node #amount label="Amount = 1 SOL" /%}
+{% node #destination label="Destination A" /%}
+{% node label="..." /%}
+{% node #guards-2 label="Guard Group 2" theme="mint" /%}
+{% node #freezeSolPayment-2 label="Freeze Sol Payment" /%}
+{% node #amount-2 label="Amount = 2 SOL" /%}
+{% node #destination-2 label="Destination A" /%}
+{% node label="..." /%}
+{% node #guards-3 label="Guard Group 3" theme="mint" /%}
+{% node #freezeSolPayment-3 label="Freeze Sol Payment" /%}
+{% node #amount-3 label="Amount = 3 SOL" /%}
+{% node #destination-3 label="Destination B" /%}
+{% node label="..." /%}
+{% /node %}
+{% /node %}
+
+{% node #freezeEscrow-PDA-A parent="destination" x="220" y="-22" %}
+  Freeze Escrow PDA
+
+  For Destination A
+{% /node %}
+{% edge from="destination" to="freezeEscrow-PDA-A" arrow="none" dashed=true path="straight" /%}
+{% edge from="destination-2" to="freezeEscrow-PDA-A" arrow="none" dashed=true toPosition="bottom" /%}
+
+{% node parent="freezeEscrow-PDA-A" y="-125" x="-4" %}
+  {% node #route-init-a theme="pink" %}
+    Route with 
+    
+    Path = *Initialize*
+  {% /node %}
+  {% node theme="pink" %}
+    Candy Machine Guard Program {% .whitespace-nowrap %}
+  {% /node %}
+{% /node %}
+{% node parent="route-init-a" y="-20" x="50" theme="transparent" %}
+  Initialize Freeze Escrow
+{% /node %}
+{% edge from="route-init-a" to="freezeEscrow-PDA-A" theme="pink" path="straight" /%}
+
+{% node #freeze-period-a parent="route-init-a" x="240" y="15" theme="slate" %}
+  Freeze Period A
+{% /node %}
+{% edge from="freeze-period-a" to="route-init-a" theme="pink" path="straight" /%}
+
+{% node #freezeEscrow-PDA-B parent="destination-3" x="420" y="-22" %}
+  Freeze Escrow PDA
+
+  For Destination B
+{% /node %}
+{% edge from="destination-3" to="freezeEscrow-PDA-B" arrow="none" dashed=true path="straight" /%}
+
+{% node parent="freezeEscrow-PDA-B" y="-125" x="-4" %}
+  {% node #route-init-b theme="pink" %}
+    Route with 
+    
+    Path = *Initialize*
+  {% /node %}
+  {% node theme="pink" %}
+    Candy Machine Guard Program {% .whitespace-nowrap %}
+  {% /node %}
+{% /node %}
+{% node parent="route-init-b" y="-20" x="50" theme="transparent" %}
+  Initialize Freeze Escrow
+{% /node %}
+{% edge from="route-init-b" to="freezeEscrow-PDA-B" theme="pink" path="straight" /%}
+
+{% node #freeze-period-b parent="route-init-b" x="240" y="15" theme="slate" %}
+  Freeze Period B
+{% /node %}
+{% edge from="freeze-period-b" to="route-init-b" theme="pink" path="straight" /%}
+
+{% edge from="candy-guard" to="candy-machine" /%}
+
+{% /diagram %}
