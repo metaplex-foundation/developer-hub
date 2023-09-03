@@ -16,7 +16,76 @@ As such, there are two ways to mint from a Candy Machine:
 
 - **Directly from the Candy Machine Core program**. In this case, only the configured mint authority can mint from it and, therefore, it will need to sign the transaction.
 
-![CandyMachinesV3-Minting1.png](/assets/candy-machine-v3/CandyMachinesV3-Minting1.png#radius)
+{% diagram %}
+
+{% node %}
+{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node label="Features" /%}
+{% node label="Authority" /%}
+{% node #mint-authority-1 %}
+
+Mint Authority = Candy Guard {% .font-semibold %}
+
+{% /node %}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine-1" y=160 x=20 %}
+{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node label="Guards" theme="mint" z=1 /%}
+{% node label="Sol Payment" /%}
+{% node label="Token Payment" /%}
+{% node label="Start Date" /%}
+{% node label="End Date" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine-1" x=350 %}
+{% node #mint-1 label="Mint" theme="pink" /%}
+{% node label="Candy Guard Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
+{% node parent="mint-1" x=-120 y=-35 theme="transparent" %}
+Anyone can mint as long \
+as they comply with the \
+activated guards.
+{% /node %}
+
+{% node parent="mint-1" x=-22 y=100 %}
+{% node #mint-2 label="Mint" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
+{% node parent="mint-2" x=200 y=-18 theme="transparent" %}
+Only Alice \
+can mint.
+{% /node %}
+
+{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+
+{% node parent="mint-2" x=280 %}
+{% node #candy-machine-2 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node label="Features" /%}
+{% node label="Authority" /%}
+{% node #mint-authority-2 %}
+
+Mint Authority = Alice {% .font-semibold %}
+
+{% /node %}
+{% node label="..." /%}
+{% /node %}
+
+{% edge from="candy-guard-1" to="mint-authority-1" fromPosition="left" toPosition="left" arrow=false dashed=true /%}
+{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
+{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
+{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
+{% edge from="candy-guard-1" to="mint-1" theme="pink" /%}
+{% edge from="candy-machine-2" to="mint-2" theme="pink" path="straight" /%}
+
+{% /diagram %}
 
 If everything went well, an NFT will be created following the parameters configured in the Candy Machine. For instance, if the given Candy Machine uses **Config Line Settings** with **Is Sequential** set to `false`, then we will get the next item at random.
 
@@ -116,7 +185,58 @@ If you were to build the mint instruction manually, that information would be pr
 
 A good example of a guard that requires Mint Settings is the **NFT Payment** guard which requires the mint address of the NFT we should use to pay for the mint amongst other things.
 
-![CandyMachinesV3-Minting2.png](/assets/candy-machine-v3/CandyMachinesV3-Minting2.png#radius)
+{% diagram %}
+
+{% node %}
+{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine-1" y=80 x=20 %}
+{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node label="Guards" theme="mint" z=1 /%}
+{% node #nft-payment-guard label="NFT Payment" /%}
+{% node label="Token Payment" /%}
+{% node label="Start Date" /%}
+{% node #third-party-signer-guard label="Third Party Signer" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine-1" x=700 %}
+{% node #mint-1 label="Mint" theme="pink" /%}
+{% node label="Candy Guard Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
+
+{% node parent="mint-1" x=-22 y=100 %}
+{% node #mint-2 label="Mint" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
+
+{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+
+{% node parent="mint-2" x=-400 %}
+{% node #mint-settings label="Mint Settings" /%}
+{% node label="Using our SDKs" theme="dimmed" /%}
+{% /node %}
+
+{% node #mint-args label="Mint Arguments" parent="mint-settings" x=100 y=80 theme="slate" /%}
+{% node #mint-accounts label="Mint Remaining Accounts" parent="mint-args" y=50 theme="slate" /%}
+
+{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
+{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
+{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
+{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
+{% edge from="nft-payment-guard" to="mint-settings" theme="slate" /%}
+{% edge from="third-party-signer-guard" to="mint-settings" theme="slate" /%}
+{% edge from="mint-settings" to="mint-args" theme="slate" fromPosition="bottom" /%}
+{% edge from="mint-settings" to="mint-accounts" theme="slate" fromPosition="bottom" /%}
+{% edge from="mint-args" to="mint-1" theme="pink" /%}
+{% edge from="mint-accounts" to="mint-1" theme="pink" /%}
+
+{% /diagram %}
 
 [Each available guard](/candy-machine/available-guards) contains its own documentation page and it will tell you whether or not that guard expects Mint Settings to be provided when minting.
 
