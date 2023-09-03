@@ -323,7 +323,66 @@ The Resolved Guards of Group 1 — labelled “nft” — are:
 
 Therefore, the provided Mint Settings must be related to these Resolved Guards. In the example above, Mint Settings must be provided for the Third Party Signer guard and the NFT Payment guard.
 
-![CandyMachinesV3-Minting3.png](/assets/candy-machine-v3/CandyMachinesV3-Minting3.png#radius)
+{% diagram %}
+
+{% node %}
+{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine-1" y=80 x=20 %}
+{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node label="Guards (default guards)" theme="mint" z=1 /%}
+{% node label="Bot Tax" /%}
+{% node #third-party-signer-guard label="Third Party Signer" /%}
+{% node label="Start Date" /%}
+{% node #nft-group theme="mint" z=1 %}
+Group 1: "nft" {% .font-semibold %}
+{% /node %}
+{% node #nft-payment-guard label="NFT Payment" /%}
+{% node label="Start Date" /%}
+{% node theme="mint" z=1 %}
+Group 2: "public"
+{% /node %}
+{% node label="SOL Payment" /%}
+{% /node %}
+
+{% node parent="candy-machine-1" x=700 %}
+{% node #mint-1 label="Mint" theme="pink" /%}
+{% node label="Candy Guard Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
+
+{% node parent="mint-1" x=-22 y=100 %}
+{% node #mint-2 label="Mint" theme="pink" /%}
+{% node label="Candy Machine Core Program" theme="pink" /%}
+{% /node %}
+{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
+
+{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+
+{% node parent="mint-2" x=-400 y=60 %}
+{% node #mint-settings label="Mint Settings" /%}
+{% node label="Using our SDKs" theme="dimmed" /%}
+{% /node %}
+
+{% node #mint-args label="Mint Arguments" parent="mint-settings" x=100 y=80 theme="slate" /%}
+{% node #mint-accounts label="Mint Remaining Accounts" parent="mint-args" y=50 theme="slate" /%}
+
+{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
+{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
+{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
+{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
+{% edge from="nft-payment-guard" to="mint-settings" theme="slate" /%}
+{% edge from="third-party-signer-guard" to="mint-settings" theme="slate" /%}
+{% edge from="mint-settings" to="mint-args" theme="slate" fromPosition="bottom" /%}
+{% edge from="mint-settings" to="mint-accounts" theme="slate" fromPosition="bottom" /%}
+{% edge from="mint-args" to="mint-1" theme="pink" /%}
+{% edge from="mint-accounts" to="mint-1" theme="pink" /%}
+{% edge from="nft-group" to="mint-1" theme="pink" /%}
+
+{% /diagram %}
 
 {% dialect-switcher title="Mint from a Candy Machine with guard groups" %}
 {% dialect title="JavaScript" id="js" %}
