@@ -22,6 +22,7 @@ Whilst all of Metaplex's products offer clients that include all you need to get
 - [SPL Token and SPL Associated Token](#spl-token-and-spl-associated-token). The native Solana programs that allow us to manage tokens.
 - [SPL Memo](#spl-memo). The native Solana program that allows us to attach memos to transactions.
 - [SPL Address Lookup Table](#spl-address-lookup-table). The native Solana program that allows us to manage lookup tables.
+- [SPL Compute Budget](#spl-compute-budget). The native Solana program that allows us to manage compute units.
 - [MPL System Extras](#mpl-system-extras). An immutable Metaplex program that allows us to create accounts without needing to fetch the rent exemption.
 - [MPL Token Extras](#mpl-token-extras). An immutable Metaplex program that offers a few extra low-level features on top of SPL Token.
 
@@ -381,6 +382,46 @@ await closeLut(umi, {
   authority,
   address: lutAddress,
 }).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+## SPL Compute Budget
+
+The SPL Compute Budget program allows us to set a custom Compute Unit limit and price. You can read more about this program in [Solana's official documentation](https://docs.solana.com/developing/programming-model/runtime#compute-budget).
+
+{% dialect-switcher title="Manage the Compute Budget of a transaction" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Set Compute Unit limit" %}
+
+```ts
+import { transactionBuilder } from '@metaplex-foundation/umi'
+import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
+
+await transactionBuilder()
+  .add(setComputeUnitLimit(umi, { units: 600_000 })) // Set the Compute Unit limit.
+  .add(...) // Any instruction(s) here.
+  .sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Set Compute Unit price" %}
+
+```ts
+import { transactionBuilder } from '@metaplex-foundation/umi'
+import { setComputeUnitPrice } from '@metaplex-foundation/mpl-toolbox'
+
+await transactionBuilder()
+  .add(setComputeUnitPrice(umi, { microLamports: 1 })) // Set the price per Compute Unit in micro-lamports.
+  .add(...) // Any instruction(s) here.
+  .sendAndConfirm(umi)
 ```
 
 {% /totem-accordion %}
