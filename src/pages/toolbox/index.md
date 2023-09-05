@@ -27,7 +27,7 @@ Whilst all of Metaplex's products offer clients that include all you need to get
 
 ## SPL System
 
-The instructions of the SPL System program can be used to create new uninitialized accounts on-chain and transfer SOL between wallets. You can read more about the SPL System program in [Solana's official documentation](todo).
+The instructions of the SPL System program can be used to create new uninitialized accounts on-chain and transfer SOL between wallets. You can read more about the SPL System program in [Solana's official documentation](https://docs.solana.com/developing/runtime-facilities/programs).
 
 Note that, if you need to create an account that requires less than 10Kb of space, you may be interested in the `createAccountWithRent` instruction of the [MPL System Extras program](#mpl-system-extras).
 
@@ -74,11 +74,11 @@ await transferSol(umi, {
 
 ## SPL Token and SPL Associated Token
 
-The SPL Token and SPL Associated Token programs can be used to manage tokens in Solana. It allows us to create Mint accounts, Token accounts, Associated Token PDAs, mint tokens, transfer tokens, delegate tokens, etc. You can read more about these programs in [Solana's official documentation](todo).
+The SPL Token and SPL Associated Token programs can be used to manage tokens in Solana. It allows us to create Mint accounts, Token accounts, Associated Token PDAs, mint tokens, transfer tokens, delegate tokens, etc. You can read more about these programs in [Solana's official documentation](https://spl.solana.com/token).
 
 Note that, you may be interested in the [Mpl Token Extras program](#mpl-token-extras) which offers a few convenient instructions when dealing with tokens.
 
-{% dialect-switcher title="Interact with tokens" %}
+{% dialect-switcher title="Manage tokens" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -220,16 +220,41 @@ const mintKeysFromOwner = await fetchAllMintPublicKeyByOwner(umi, owner)
 
 ## SPL Memo
 
-_Coming soon..._
+The SPL Memo program simply allows us to attach text notes — i.e. memos — to transactions. You can read more about this program in [Solana's official documentation](https://spl.solana.com/memo).
+
+{% dialect-switcher title="Add memos to transactions" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { transactionBuilder } from '@metaplex-foundation/umi'
+import { addMemo } from '@metaplex-foundation/mpl-toolbox'
+
+await transactionBuilder()
+  .add(...) // Any instruction(s) here.
+  .add(addMemo(umi, { memo: 'Hello world!' })) // Add a memo to the transaction.
+  .sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
 
 ## SPL Address Lookup Table
 
 _Coming soon..._
 
+{% /dialect %}
+{% /dialect-switcher %}
+
 ## MPL System Extras
 
 _Coming soon..._
 
+{% /dialect %}
+{% /dialect-switcher %}
+
 ## MPL Token Extras
 
 _Coming soon..._
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
