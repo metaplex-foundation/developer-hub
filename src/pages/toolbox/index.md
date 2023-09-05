@@ -23,14 +23,14 @@ Whilst all of Metaplex's products offer clients that include all you need to get
 - [SPL Memo](#spl-memo). The native Solana program that allows us to attach memos to transactions.
 - [SPL Address Lookup Table](#spl-address-lookup-table). The native Solana program that allows us to manage lookup tables.
 - [SPL Compute Budget](#spl-compute-budget). The native Solana program that allows us to manage compute units.
-- [MPL System Extras](#mpl-system-extras). An immutable Metaplex program that allows us to create accounts without needing to fetch the rent exemption.
+- [MPL System Extras](#mpl-system-extras). An immutable Metaplex program that offers a few extra low-level features on top of SPL System.
 - [MPL Token Extras](#mpl-token-extras). An immutable Metaplex program that offers a few extra low-level features on top of SPL Token.
 
 ## SPL System
 
 The instructions of the SPL System program can be used to create new uninitialized accounts on-chain and transfer SOL between wallets. You can read more about the SPL System program in [Solana's official documentation](https://docs.solana.com/developing/runtime-facilities/programs).
 
-Note that, if you need to create an account that requires less than 10Kb of space, you may be interested in the `createAccountWithRent` instruction of the [MPL System Extras program](#mpl-system-extras).
+Note that, you may be interested in the [MPL System Extras program](#mpl-system-extras) which offers a few convenient instructions when dealing creating accounts and transferring SOL.
 
 {% dialect-switcher title="Interact with SPL System" %}
 {% dialect title="JavaScript" id="js" %}
@@ -432,7 +432,49 @@ await transactionBuilder()
 
 ## MPL System Extras
 
-_Coming soon..._
+The MPL System Extras program is an immutable program that offers a few convenient instructions on top of the native SPL System program.
+
+### Create Account with Rent
+
+This instruction creates new accounts without needing to fetch the rent exemption. This instruction uses the `Rent` sysvar on the program to compute the rent exemption from the provided `space` attribute. It then does a CPI call to the SPL System program to create an account with the computed rent.
+
+The advantage is that clients using this instruction no longer need the extra HTTP request that fetches the rent exemption from the RPC node. The inconvenient is that, because we are doing a CPI call, the maximum size account that can be create using this instruction is 10KB, as opposed to 10MB when using the SPL System program directly.
+
+{% dialect-switcher title="Create account with rent" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { generateSigner } from '@metaplex-foundation/umi'
+import { createAccountWithRent } from '@metaplex-foundation/mpl-toolbox'
+
+const newAccount = generateSigner(umi)
+await createAccountWithRent(umi, {
+  newAccount,
+  space: 42,
+  programId: umi.programs.get('myProgramName').publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Transfer All SOL
+
+This instruction is similar to the **Transfer SOL** instruction from the SPL System program except that it transfers all the SOL from the source account to the destination account.
+
+This can be useful when we want to drain an account from all of its lamports whilst using this account to pay for the transaction. Without this instruction, we would need to fetch the balance of the account to drain and subtrack an estimation of the transaction fee — which can be tricky to estimate when using priorization fees.
+
+{% dialect-switcher title="Transfer all SOL" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { transferAllSol } from '@metaplex-foundation/mpl-toolbox'
+
+await transferAllSol(umi, {
+  source,
+  destination,
+}).sendAndConfirm(umi)
+```
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -440,6 +482,3 @@ _Coming soon..._
 ## MPL Token Extras
 
 _Coming soon..._
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
