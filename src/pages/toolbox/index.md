@@ -27,11 +27,196 @@ Whilst all of Metaplex's products offer clients that include all you need to get
 
 ## SPL System
 
-_Coming soon..._
+The instructions of the SPL System program can be used to create new uninitialized accounts on-chain and transfer SOL between wallets. You can read more about the SPL System program in [Solana's official documentation](todo).
+
+Note that, if you need to create an account that requires less than 10Kb of space, you may be interested in the `createAccountWithRent` instruction of the [MPL System Extras program](#mpl-system-extras).
+
+{% dialect-switcher title="Interact with SPL System" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Create Account" %}
+
+```ts
+import { generateSigner } from '@metaplex-foundation/umi'
+import { createAccount } from '@metaplex-foundation/mpl-toolbox'
+
+const space = 42
+const newAccount = generateSigner(umi)
+await createAccount(umi, {
+  newAccount,
+  lamports: await umi.rpc.getRent(space),
+  space,
+  programId: umi.programs.get('myProgramName').publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Transfer SOL" %}
+
+```ts
+import { sol } from '@metaplex-foundation/umi'
+import { transferSol } from '@metaplex-foundation/mpl-toolbox'
+
+await transferSol(umi, {
+  source,
+  destination,
+  amount: sol(1.3),
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
 
 ## SPL Token and SPL Associated Token
 
-_Coming soon..._
+The SPL Token and SPL Associated Token programs can be used to manage tokens in Solana. It allows us to create Mint accounts, Token accounts, Associated Token PDAs, mint tokens, transfer tokens, delegate tokens, etc. You can read more about these programs in [Solana's official documentation](todo).
+
+Note that, you may be interested in the [Mpl Token Extras program](#mpl-token-extras) which offers a few convenient instructions when dealing with tokens.
+
+{% dialect-switcher title="Interact with tokens" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Create Mint" %}
+
+```ts
+import { generateSigner } from '@metaplex-foundation/umi'
+import { createMint } from '@metaplex-foundation/mpl-toolbox'
+
+const mint = generateSigner(umi)
+await createMint(umi, {
+  mint,
+  decimals: 0,
+  mintAuthority,
+  freezeAuthority,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Create Token" %}
+
+```ts
+import { generateSigner } from '@metaplex-foundation/umi'
+import { createToken } from '@metaplex-foundation/mpl-toolbox'
+
+const token = generateSigner(umi)
+await createToken(umi, { token, mint, owner }).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Create Associated Token" %}
+
+```ts
+import { createAssociatedToken } from '@metaplex-foundation/mpl-toolbox'
+
+await createAssociatedToken(umi, { mint, owner }).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Mint Tokens" %}
+
+```ts
+import { mintTokensTo } from '@metaplex-foundation/mpl-toolbox'
+
+await mintTokensTo(umi, {
+  mintAuthority,
+  mint,
+  token,
+  amount: 42,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Create Mint with Associated Token (helper)" %}
+
+This helper creates a Mint account and an Associated Token account for the given mint and owner. It also mints tokens to that accounts if an amount greater than zero is provided.
+
+```ts
+import { generateSigner } from '@metaplex-foundation/umi'
+import { createMintWithAssociatedToken } from '@metaplex-foundation/mpl-toolbox'
+
+const mint = generateSigner(umi)
+await createMintWithAssociatedToken(umi, {
+  mint,
+  owner,
+  amount: 1,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Transfer Tokens" %}
+
+```ts
+import { transferTokens } from '@metaplex-foundation/mpl-toolbox'
+
+await transferTokens(umi, {
+  source: sourceTokenAccount,
+  destination: destinationTokenAccount,
+  authority: ownerOrDelegate,
+  amount: 30,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Set Authority" %}
+
+```ts
+import { setAuthority, AuthorityType } from '@metaplex-foundation/mpl-toolbox'
+
+await setAuthority(umi, {
+  owned: tokenAccount,
+  owner,
+  authorityType: AuthorityType.CloseAccount,
+  newAuthority: newCloseAuthority.publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Fetch Mint and Token accounts" %}
+
+```ts
+import {
+  fetchMint,
+  fetchToken,
+  findAssociatedTokenPda,
+  fetchAllTokenByOwner,
+  fetchAllMintByOwner,
+  fetchAllMintPublicKeyByOwner,
+} from '@metaplex-foundation/mpl-toolbox'
+
+// Fetch Mint account.
+const mintAccount = await fetchMint(umi, mint)
+
+// Fetch Token account.
+const tokenAccount = await fetchToken(umi, token)
+
+// Fetch Associated Token account.
+const [associatedToken] = findAssociatedTokenPda(umi, { owner, mint })
+const associatedTokenAccount = await fetchToken(umi, associatedToken)
+
+// Fetch by owner.
+const tokensFromOwner = await fetchAllTokenByOwner(umi, owner)
+const mintsFromOwner = await fetchAllMintByOwner(umi, owner)
+const mintKeysFromOwner = await fetchAllMintPublicKeyByOwner(umi, owner)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
 
 ## SPL Memo
 
