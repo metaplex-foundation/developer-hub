@@ -240,8 +240,152 @@ await transactionBuilder()
 
 ## SPL Address Lookup Table
 
-_Coming soon..._
+The SPL Address Lookup Table program can be used to reduce the size of transactions by creating custom lookup tables — a.k.a **LUTs** or **ALTs** — prior to using them in transactions. This program allows you to create and extend LUTs. You can read more about this program in [Solana's official documentation](https://docs.solana.com/developing/lookup-tables).
 
+{% dialect-switcher title="Manage address lookup tables" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Create empty LUTs" %}
+
+```ts
+import { createEmptyLut } from '@metaplex-foundation/mpl-toolbox'
+
+const recentSlot = await umi.rpc.getSlot({ commitment: 'finalized' })
+await createEmptyLut(umi, {
+  recentSlot,
+  authority,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Extend a LUT" %}
+
+```ts
+import {
+  findAddressLookupTablePda,
+  extendLut,
+} from '@metaplex-foundation/mpl-toolbox'
+
+// The authority and slot used to create the LUT.
+const lutAddress = findAddressLookupTablePda(umi, { authority, recentSlot })
+
+await extendLut(umi, {
+  authority,
+  address: lutAddress, // The address of the LUT.
+  addresses: [addressA, addressB], // The addresses to add to the LUT.
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Create LUT with addresses (helper)" %}
+
+This helper method creates a transaction builder with two instructions: one to create an empty LUT and one to extend it with the given addresses.
+
+```ts
+import { createLut } from '@metaplex-foundation/mpl-toolbox'
+
+const recentSlot = await umi.rpc.getSlot({ commitment: 'finalized' })
+await createLut(umi, {
+  authority,
+  recentSlot,
+  addresses: [addressA, addressB],
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Create LUT for a transaction builder (helper)" %}
+
+This helper method accepts an "base" transaction builder and a recent slot and returns:
+
+- An array of transaction builders to create all LUTs required by the base transaction builder.
+- An array of LUTs to be used in the base transaction builder once the LUTs have been created.
+
+```ts
+import { createEmptyLut } from '@metaplex-foundation/mpl-toolbox'
+
+// 1. Get the LUT builders and the LUT accounts for a given transaction builder.
+const recentSlot = await umi.rpc.getSlot({ commitment: 'finalized' })
+const [createLutBuilders, lutAccounts] = createLutForTransactionBuilder(
+  umi,
+  baseBuilder,
+  recentSlot
+)
+
+// 2. Create the LUTs.
+for (const createLutBuilder of createLutBuilders) {
+  await createLutBuilder.sendAndConfirm(umi)
+}
+
+// 3. Use the LUTs in the base transaction builder.
+await baseBuilder.setAddressLookupTables(lutAccounts).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Freeze a LUT" %}
+
+```ts
+import {
+  findAddressLookupTablePda,
+  freezeLut,
+} from '@metaplex-foundation/mpl-toolbox'
+
+// The authority and slot used to create the LUT.
+const lutAddress = findAddressLookupTablePda(umi, { authority, recentSlot })
+
+await freezeLut(umi, {
+  authority,
+  address: lutAddress,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Deactivate a LUT" %}
+
+```ts
+import {
+  findAddressLookupTablePda,
+  deactivateLut,
+} from '@metaplex-foundation/mpl-toolbox'
+
+// The authority and slot used to create the LUT.
+const lutAddress = findAddressLookupTablePda(umi, { authority, recentSlot })
+
+await deactivateLut(umi, {
+  authority,
+  address: lutAddress,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Close a LUT" %}
+
+Note that a LUT can only be closed after it has been deactivated for a certain amount of time.
+
+```ts
+import {
+  findAddressLookupTablePda,
+  closeLut,
+} from '@metaplex-foundation/mpl-toolbox'
+
+// The authority and slot used to create the LUT.
+const lutAddress = findAddressLookupTablePda(umi, { authority, recentSlot })
+
+await closeLut(umi, {
+  authority,
+  address: lutAddress,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
