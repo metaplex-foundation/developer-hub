@@ -16,7 +16,7 @@ Mpl Toolbox includes a bunch of essential Solana and Metaplex programs to get yo
 
 ## Introduction
 
-Whilst all of Metaplex's products offer clients that include all you need to get started with that particular product, they do not include clients for low-level yet essentials tasks such as creating an account from the SPL System program or extending a Lookup Table from the SPL Address Lookup Table program. MPL Toolbox aims to fix this by offering a collection of essential Solana and Metaplex programs that can be used to perform these more low-level tasks. Namely, MPL Toolbox includes the following programs:
+Whilst all of Metaplex's products offer clients that include all you need to get started with that particular product, they do not include clients for low-level yet essential tasks such as creating an account from the SPL System program or extending a Lookup Table from the SPL Address Lookup Table program. MPL Toolbox aims to fix this by offering a collection of essential Solana and Metaplex programs that can be used to perform these more low-level tasks. Namely, MPL Toolbox includes the following programs:
 
 - [SPL System](#spl-system). The native Solana program that allows us to create accounts.
 - [SPL Token and SPL Associated Token](#spl-token-and-spl-associated-token). The native Solana programs that allow us to manage tokens.
@@ -30,7 +30,7 @@ Whilst all of Metaplex's products offer clients that include all you need to get
 
 The instructions of the SPL System program can be used to create new uninitialized accounts on-chain and transfer SOL between wallets. You can read more about the SPL System program in [Solana's official documentation](https://docs.solana.com/developing/runtime-facilities/programs).
 
-Note that, you may be interested in the [MPL System Extras program](#mpl-system-extras) which offers a few convenient instructions when dealing creating accounts and transferring SOL.
+Note that, you may be interested in the [MPL System Extras program](#mpl-system-extras) which offers a few convenient instructions when dealing with creating accounts and transferring SOL.
 
 {% dialect-switcher title="Interact with SPL System" %}
 {% dialect title="JavaScript" id="js" %}
@@ -139,7 +139,7 @@ await mintTokensTo(umi, {
 
 {% totem-accordion title="Create Mint with Associated Token (helper)" %}
 
-This helper creates a Mint account and an Associated Token account for the given mint and owner. It also mints tokens to that accounts if an amount greater than zero is provided.
+This helper creates a Mint account and an Associated Token account for the given mint and owner. It also mints tokens to that account if an amount greater than zero is provided.
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -241,7 +241,7 @@ await transactionBuilder()
 
 ## SPL Address Lookup Table
 
-The SPL Address Lookup Table program can be used to reduce the size of transactions by creating custom lookup tables — a.k.a **LUTs** or **ALTs** — prior to using them in transactions. This program allows you to create and extend LUTs. You can read more about this program in [Solana's official documentation](https://docs.solana.com/developing/lookup-tables).
+The SPL Address Lookup Table program can be used to reduce the size of transactions by creating custom lookup tables — a.k.a **LUTs** or **ALTs** — before using them in transactions. This program allows you to create and extend LUTs. You can read more about this program in [Solana's official documentation](https://docs.solana.com/developing/lookup-tables).
 
 {% dialect-switcher title="Manage address lookup tables" %}
 {% dialect title="JavaScript" id="js" %}
@@ -300,7 +300,7 @@ await createLut(umi, {
 
 {% totem-accordion title="Create LUT for a transaction builder (helper)" %}
 
-This helper method accepts an "base" transaction builder and a recent slot and returns:
+This helper method accepts a "base" transaction builder and a recent slot and returns:
 
 - An array of transaction builders to create all LUTs required by the base transaction builder.
 - An array of LUTs to be used in the base transaction builder once the LUTs have been created.
@@ -438,7 +438,7 @@ The MPL System Extras program is an immutable program that offers a few convenie
 
 This instruction creates new accounts without needing to fetch the rent exemption. This instruction uses the `Rent` sysvar on the program to compute the rent exemption from the provided `space` attribute. It then does a CPI call to the SPL System program to create an account with the computed rent.
 
-The advantage is that clients using this instruction no longer need the extra HTTP request that fetches the rent exemption from the RPC node. The inconvenient is that, because we are doing a CPI call, the maximum size account that can be create using this instruction is 10KB, as opposed to 10MB when using the SPL System program directly.
+The advantage is that clients using this instruction no longer need the extra HTTP request that fetches the rent exemption from the RPC node. The inconvenience is that, because we are doing a CPI call, the maximum size account that can be created using this instruction is 10KB, as opposed to 10MB when using the SPL System program directly.
 
 {% dialect-switcher title="Create account with rent" %}
 {% dialect title="JavaScript" id="js" %}
@@ -462,7 +462,7 @@ await createAccountWithRent(umi, {
 
 This instruction is similar to the **Transfer SOL** instruction from the SPL System program except that it transfers all the SOL from the source account to the destination account.
 
-This can be useful when we want to drain an account from all of its lamports whilst using this account to pay for the transaction. Without this instruction, we would need to fetch the balance of the account to drain and subtrack an estimation of the transaction fee — which can be tricky to estimate when using priorization fees.
+This can be useful when we want to drain an account from all of its lamports whilst using this account to pay for the transaction. Without this instruction, we would need to fetch the balance of the account to drain and subtract an estimation of the transaction fee — which can be tricky to estimate when using prioritization fees.
 
 {% dialect-switcher title="Transfer all SOL" %}
 {% dialect title="JavaScript" id="js" %}
