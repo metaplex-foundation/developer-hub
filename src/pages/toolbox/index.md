@@ -481,4 +481,40 @@ await transferAllSol(umi, {
 
 ## MPL Token Extras
 
-_Coming soon..._
+The MPL Token Extras program is an immutable program that offers a few convenient instructions on top of the native SPL Token program.
+
+### Create Token If Missing
+
+This instruction creates a new Token account if and only if it does not already exist. This is useful if a subsequent instruction requires a Token account but we do not know whether it already exists or not. This instruction can be used to ensure the Token account exists without having to fetch it first on the client side.
+
+Whilst this instruction works with both associated Token accounts and regular Token accounts, it's important to note that it will only be able to create an associated Token account if the token account does not already exist. Therefore we can have the following situations:
+
+- The token account is an **associated token account**.
+  - If the account exists, the instruction succeeds and does nothing.
+  - If the account does not exist, the instruction succeeds and creates the associated token account.
+- The token account is a **regular token account** — i.e. non-associated.
+  - If the account exists, the instruction succeeds and does nothing.
+  - If the account does not exist, the instruction fails.
+
+{% dialect-switcher title="Create token if missing" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { transactionBuilder } from '@metaplex-foundation/umi'
+import { createTokenIfMissing } from '@metaplex-foundation/mpl-toolbox'
+
+// If the token account is an associated token account.
+await transactionBuilder()
+  .add(createTokenIfMissing(umi, { mint, owner }))
+  .add(...) // Subsequent instructions can be sure the Associated Token account exists.
+  .sendAndConfirm(umi)
+
+// If the token accounts is a regular token account.
+await transactionBuilder()
+  .add(createTokenIfMissing(umi, { mint, owner, token }))
+  .add(...) // Subsequent instructions can be sure the non-Associated Token account exists, otherwise the instruction fails.
+  .sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
