@@ -24,7 +24,7 @@ export const hydra = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/hydra' },
-            { title: 'Getting started', href: '/hydra/getting-started' },
+            { title: 'Quick Start', href: '/hydra/quick-start' },
           ],
         },
       ],

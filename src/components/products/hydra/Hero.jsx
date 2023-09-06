@@ -2,7 +2,15 @@ import { Hero as BaseHero } from '@/components/Hero'
 
 export function Hero({ page }) {
   return (
-    <BaseHero page={page} light2Off light3Off>
+    <BaseHero
+      page={page}
+      light2Off
+      light3Off
+      primaryCta={{
+        title: 'Quick Start',
+        href: `/${page.product.path}/quick-start`,
+      }}
+    >
       <svg
         width="541"
         height="249"
