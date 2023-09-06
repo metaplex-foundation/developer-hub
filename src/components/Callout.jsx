@@ -32,7 +32,12 @@ export function Callout({ type = 'note', title, children }) {
         <p className={clsx('m-0 font-display text-xl', styles[type].title)}>
           {title}
         </p>
-        <div className={clsx('prose mt-2.5', styles[type].body)}>
+        <div
+          className={clsx(
+            'prose prose-slate mt-2.5 dark:prose-invert',
+            styles[type].body
+          )}
+        >
           {children}
         </div>
       </div>
