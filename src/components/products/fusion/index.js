@@ -22,7 +22,10 @@ export const fusion = {
       navigation: [
         {
           title: 'Introduction',
-          links: [{ title: 'Overview', href: '/fusion' }],
+          links: [
+            { title: 'Overview', href: '/fusion' },
+            { title: 'Getting started', href: '/fusion/getting-started' },
+          ],
         },
         {
           title: 'Features',
