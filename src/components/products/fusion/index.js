@@ -22,16 +22,13 @@ export const fusion = {
       navigation: [
         {
           title: 'Introduction',
-          links: [
-            { title: 'Overview', href: '/fusion' }, // Includes accounts + instructions pages.
-            { title: 'Getting started', href: '/fusion/getting-started' }, // Use guide here.
-          ],
+          links: [{ title: 'Overview', href: '/fusion' }],
         },
         {
           title: 'Features',
           links: [
-            { title: 'Constraint Types', href: '/fusion/todo' },
-            { title: 'Transfer Effects', href: '/fusion/todo' },
+            { title: 'Constraint Types', href: '/fusion/constraint-types' },
+            { title: 'Transfer Effects', href: '/fusion/transfer-effects' },
           ],
         },
       ],
