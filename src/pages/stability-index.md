@@ -9,19 +9,27 @@ Below is a list of our products and their stability levels.
 | Product Name          | Stability Level  |
 | --------------------- | ---------------- |
 | Token Metadata        | 2 (Stable)       |
-| Auction House         | 2 (Stable)       |
-| Auctions              | 2 (Stable)       |
-| Candy Machine v1      | 0 (Deprecated)   |
-| Candy Machine v2      | 2 (Stable)       |
+| Token Auth Rules      | 2 (Stable)       |
+| Bubblegum             | 2 (Stable)       |
 | Candy Machine v3      | 2 (Stable)       |
-| Sugar                 | 1 (Experimental) |
-| Fair Launch           | 0 (Deprecated)   |
-| Token Entangler       | 1 (Experimental) |
-| Fireball              | 1 (Experimental) |
+| Sugar                 | 2 (Stable)       |
+| Umi                   | 2 (Stable)       |
+| Amman                 | 2 (Stable)       |
+| Shank                 | 2 (Stable)       |
 | Fusion                | 1 (Experimental) |
-| NFT Packs             | 1 (Experimental) |
+| Hydra                 | 1 (Experimental) |
+| Kinobi                | 1 (Experimental) |
 | Gum Drop              | 1 (Experimental) |
-| Membership Token Sale | 1 (Experimental) |
+| Candy Machine v2      | 0 (Deprecated)   |
+| Candy Machine v1      | 0 (Deprecated)   |
+| Auction House         | 0 (Deprecated)   |
+| Auctioneer            | 0 (Deprecated)   |
+| Auctions              | 0 (Deprecated)   |
+| NFT Packs             | 0 (Deprecated)   |
+| Fair Launch           | 0 (Deprecated)   |
+| Membership Token Sale | 0 (Deprecated)   |
+| Token Entangler       | 0 (Deprecated)   |
+| Fireball              | 0 (Deprecated)   |
 
 ## Stability Index System
 
