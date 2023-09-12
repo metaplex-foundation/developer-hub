@@ -22,16 +22,11 @@ Additionally, the Bot Tax guard enables us to ensure the mint instruction was th
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="mint"/%}
+{% node #candy-guard-guards label="Guards" theme="mint" z=1 /%}
+{% node #botTax label="botTax" /%}
+{% node #lamports label="Lamports" /%}
+{% node #lastInstruction label="Last Instruction" /%}
 {% node label="..." /%}
-{% /node %}
-
-{% node parent="candy-guard" y="49" x="250" %}
-{% node #guards label="Guards" theme="mint" /%}
-{% node #botTax label="botTax" theme="mint" /%}
-{% node #lamports label="Lamports" theme="mint" /%}
-{% node #lastInstruction label="Last Instruction" theme="mint" /%}
-{% node label="..." theme="dimmed" /%}
 {% /node %}
 
 {% node parent="candy-machine" x="700" %}
@@ -63,17 +58,15 @@ Additionally, the Bot Tax guard enables us to ensure the mint instruction was th
 
 {% edge from="candy-guard" to="candy-machine" /%}
 {% edge from="lamports" to="mint-candy-guard" arrow="none" dashed=true /%}
-{% node parent="lamports" y="-50" x="110" theme="transparent" %}
-If any other guard fails 
+{% node parent="lamports" y="-30" x="200" theme="transparent" %}
+If any other guard fails to validate
 
-to validate charge 
-
-this amount of SOL
+charge this amount of SOL
 {% /node %}
 {% edge from="lastInstruction" to="mint-candy-guard" arrow="none" dashed=true %}
 
 {% /edge %}
-{% node parent="lastInstruction" y="15" x="110" theme="transparent" %}
+{% node parent="lastInstruction" y="15" x="200" theme="transparent" %}
 If the mint instruction is not the last
 
 Instruction of the transaction minting will fail

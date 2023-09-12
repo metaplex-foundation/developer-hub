@@ -100,17 +100,13 @@ Note that our SDKs provide helpers to make it easy to create Merkle Root and Mer
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="mint"/%}
+{% node #candy-guard-guards label="Guards" theme="mint" z=1 /%}
+{% node #allowList label="AllowList" /%}
+
 {% node label="..." /%}
 {% /node %}
 
-{% node parent="candy-guard" y="49" x="250" %}
-{% node #guards label="Guards" theme="mint" /%}
-{% node #allowList label="AllowList" theme="mint" /%}
-{% node label="..." theme="dimmed" /%}
-{% /node %}
-
-{% node parent="allowList" x="120" y="-10" %}
+{% node parent="allowList" x="250" y="-10" %}
 {% node #merkleRoot label="Merkle Root" theme="slate" /%}
 {% /node %}
 
@@ -179,13 +175,12 @@ allowed to mint
 
 {% edge from="candy-guard" to="candy-machine" /%}
 {% edge from="allowList" to="merkleRoot" arrow="start" path="straight" /%}
-{% edge from="merkleRoot" to="route-validation" arrow="none" fromPosition="top" dashed=true %}
+{% edge from="merkleRoot" to="route-validation" arrow="none" fromPosition="top" dashed=true /%}
+{% edge from="merkleProof" to="route-validation" arrow="none" fromPosition="top" dashed=true  %}
 if the payer's Merkle Proof does not match 
 
 the guard's Merkle Root validation will fail
 {% /edge %}
-
-{% edge from="merkleProof" to="route-validation" arrow="none" fromPosition="top" dashed=true / %}
 {% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="route-validation" to="allowList-pda" path="straight" /%}
 {% edge from="allowList-pda" to="mint-candy-guard" path="straight" /%}

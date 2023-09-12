@@ -197,7 +197,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #guards label="Guards" theme="mint" /%}
+{% node #guards label="Guards" theme="mint" z=1/%}
 {% node #freezeSolPayment label="Freeze Sol Payment" /%}
 {% node #amount label="Amount"  /%}
 {% node #destination label="Destination" /%}
@@ -252,7 +252,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #guards label="Guards" theme="mint" /%}
+{% node #guards label="Guards" theme="mint" z=1 /%}
 {% node #freezeSolPayment label="Freeze Sol Payment" /%}
 {% node #amount label="Amount"  /%}
 {% node #destination label="Destination" /%}
@@ -411,7 +411,7 @@ To thaw a Frozen NFT, we must provide the following arguments to the route instr
 {% node theme="dimmed" %}
 Candy Machine Guard Program {% .whitespace-nowrap %}
 {% /node %}
-{% node #guards label="Guards" theme="mint" /%}
+{% node #guards label="Guards" theme="mint" z=1 /%}
 {% node #freezeSolPayment label="Freeze Sol Payment" /%}
 {% node #amount label="Amount"  /%}
 {% node #destination label="Destination" /%}
@@ -564,7 +564,7 @@ Owner: Candy Machine Core Program
 {% node theme="dimmed" %}
 Candy Machine Guard Program {% .whitespace-nowrap %}
 {% /node %}
-{% node #guards label="Guards" theme="mint" /%}
+{% node #guards label="Guards" theme="mint" z=1/%}
 {% node #freezeSolPayment label="Freeze Sol Payment" /%}
 {% node #amount label="Amount"  /%}
 {% node #destination label="Destination" /%}
@@ -728,17 +728,17 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #guards label="Guard Group 1" theme="mint" /%}
+{% node #guards label="Guard Group 1" theme="mint" z=1/%}
 {% node #freezeSolPayment label="Freeze Sol Payment" /%}
 {% node #amount label="Amount = 1 SOL" /%}
 {% node #destination label="Destination A" /%}
 {% node label="..." /%}
-{% node #guards-2 label="Guard Group 2" theme="mint" /%}
+{% node #guards-2 label="Guard Group 2" theme="mint" z=1/%}
 {% node #freezeSolPayment-2 label="Freeze Sol Payment" /%}
 {% node #amount-2 label="Amount = 2 SOL" /%}
 {% node #destination-2 label="Destination A" /%}
 {% node label="..." /%}
-{% node #guards-3 label="Guard Group 3" theme="mint" /%}
+{% node #guards-3 label="Guard Group 3" theme="mint" z=1/%}
 {% node #freezeSolPayment-3 label="Freeze Sol Payment" /%}
 {% node #amount-3 label="Amount = 3 SOL" /%}
 {% node #destination-3 label="Destination B" /%}
