@@ -136,7 +136,7 @@ The Freeze Token Payment guard contains the following Mint Settings:
 
 Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#freezetokenpayment) for more details.
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Freeze Token Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -472,7 +472,9 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 
 {% /diagram %}
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+‎
+
+{% dialect-switcher title="Set up a Candy Machine using the Freeze Token Payment guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -654,7 +656,7 @@ the Freeze Escrow Account
 
 ‎
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Freeze Token Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
