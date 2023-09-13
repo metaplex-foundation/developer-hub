@@ -18,22 +18,17 @@ The **Address Gate** guard restricts the mint to a single address which must m
 {% node parent="candy-machine" y="100" x="22" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="mint"/%}
+{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
+{% node #addressGate label="AddressGate" /%}
 {% node label="..." /%}
 {% /node %}
 
-{% node parent="candy-guard" y="49" x="250" %}
-{% node #guards label="Guards" theme="mint" /%}
-{% node #addressGate label="AddressGate" theme="mint" /%}
-{% node label="..." theme="dimmed" /%}
-{% /node %}
-
-{% node parent="addressGate" x="150" y="-9" %}
+{% node parent="addressGate" x="270" y="-9" %}
 {% node #payer label="Payer" theme="indigo" /%}
 {% node label="Owner: Any Program" theme="dimmed" /%}
 {% /node %}
 
-{% node parent="candy-machine" x="700" %}
+{% node parent="candy-machine" x="600" %}
   {% node #mint-candy-guard theme="pink" %}
     Mint from
 
@@ -67,7 +62,6 @@ if the payer does not match the address on the guard
 
 Minting will fail
 {% /edge %}
-{% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
 
