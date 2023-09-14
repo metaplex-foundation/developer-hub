@@ -59,7 +59,7 @@ The NFT Burn guard contains the following Mint Settings:
 
 Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#nftburn) for more details.
 
-{% dialect-switcher title="Mint with the NFT Burn" %}
+{% dialect-switcher title="Mint with the NFT Burn Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
