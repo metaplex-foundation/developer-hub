@@ -20,8 +20,6 @@ The NFT Burn guard contains the following settings:
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-Here’s how we can set up a Candy Machine using the NFT Burn guard.
-
 ```ts
 create(umi, {
   // ...

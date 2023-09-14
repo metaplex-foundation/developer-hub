@@ -87,8 +87,6 @@ The Freeze Sol Payment guard contains the following settings:
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-Here’s how we can create a Candy Machine using the Freeze Sol Payment guard. Note that, in this example, we’re using Umi's identity as the destination wallet.
-
 ```tsx
 create(umi, {
   // ...
