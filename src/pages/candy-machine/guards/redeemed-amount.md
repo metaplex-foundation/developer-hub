@@ -95,7 +95,7 @@ Like all the other guards it can also be added as a group like so:
           },
           "solPayment": {
             "value": 1,
-            "destination": "PanbgtcTiZ2PveV96t2FHSffiLHXXjMuhvoabUUKKm8"
+            "destination": "<PUBKEY>"
           }
         }
       },
@@ -104,7 +104,7 @@ Like all the other guards it can also be added as a group like so:
         "guards": {
           "solPayment": {
             "value": 2,
-            "destination": "PanbgtcTiZ2PveV96t2FHSffiLHXXjMuhvoabUUKKm8"
+            "destination": "<PUBKEY>"
           }
         }
       }
