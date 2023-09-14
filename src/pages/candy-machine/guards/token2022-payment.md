@@ -1,7 +1,7 @@
 ---
-title: "Token Payment"
+title: "Token2022 Payment"
 metaTitle: "Candy Machine Guards - Token Payment"
-description: "The Token Payment guard allows minting by charging the payer some tokens."
+description: "The Token2022 Payment guard allows minting by charging the payer some Token2022 tokens."
 ---
 
 ## Overview
@@ -31,13 +31,10 @@ import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
 create(umi, {
   // ...
   guards: {
-    tokenPayment: some({
+    token2022Payment: some({
       amount: 300,
       mint: tokenMint.publicKey,
-      destinationAta: findAssociatedTokenPda(umi, {
-        mint: tokenMint.publicKey,
-        owner: umi.identity.publicKey,
-      }),
+      destinationAta,
     }),
   },
 });
@@ -53,7 +50,7 @@ API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/
 Add this object into the guard section your config.json file:
 
 ```json
-"tokenPayment" : {
+"token2022Payment" : {
     "amount": number,
     "mint": "<PUBKEY>",
     "destinationAta": "<PUBKEY>"
@@ -91,7 +88,7 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [TokenPaymentMintArgs](https://mpl-candy-machine-js-docs.vercel.app/types/TokenPaymentMintArgs.html)
+API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [TokenPaymentMintArgs](https://mpl-candy-machine-js-docs.vercel.app/types/Token2022PaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
