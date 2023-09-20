@@ -6,11 +6,17 @@ description: "The Token2022 Payment guard allows minting by charging the payer s
 
 ## Overview
 
-The **Token Payment** guard allows minting by charging the payer some tokens from a configured mint account. Both the number of tokens and the destination address can also be configured.
+The **Token2022 Payment** guard allows minting by charging the payer some tokens from a configured mint account. Both the number of tokens and the destination address can also be configured.
 
 If the payer does not have the required amount of tokens to pay, minting will fail.
 
 ![CandyMachinesV3-GuardsTokenPayment.png](https://docs.metaplex.com/assets/candy-machine-v3/CandyMachinesV3-GuardsTokenPayment.png#radius)
+
+{% callout %}
+
+The **Token2022 Payment** guard works the same way as the **Token Payment** guard&mdash;the only difference is that the mint and token accounts should be from the [SPL Token-2022 program](https://spl.solana.com/token-2022).
+
+{% /callout %}
 
 ## Guard Settings
 
