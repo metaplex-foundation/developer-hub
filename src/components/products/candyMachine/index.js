@@ -105,6 +105,7 @@ export const candyMachine = {
         {
           title: 'Commands',
           links: [
+            { title: 'airdrop', href: '/candy-machine/sugar/commands/airdrop' },
             { title: 'bundlr', href: '/candy-machine/sugar/commands/bundlr' },
             { title: 'collection', href: '/candy-machine/sugar/commands/collection' },
             { title: 'config', href: '/candy-machine/sugar/commands/config' },
