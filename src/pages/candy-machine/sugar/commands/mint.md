@@ -12,7 +12,7 @@ When using the default `cache.json`, you can use:
 sugar mint
 ```
 
-Otherwise, specofy your cache file with the option `--cache`:
+Otherwise, specify your cache file with the option `--cache`:
 
 ```
 sugar mint --cache <CACHE>
