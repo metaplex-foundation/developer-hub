@@ -30,7 +30,7 @@ If you are using Windows, follow the steps below:
 
 3. Right-click on the executable file and go to `Properties`.
 
-   ![Properties.PNG]https://docs.metaplex.com/assets/images/Properties-a728fa4422df37b3700247294874ce06.png#radius#shadow)
+   ![Properties.PNG](https://docs.metaplex.com/assets/images/Properties-a728fa4422df37b3700247294874ce06.png#radius#shadow)
 
 4. If you trust the Metaplex developer team, check the `Unblock` button as show in the image below. This will allow you to run this binary on your computer since Microsoft does not trust it automatically.
 
