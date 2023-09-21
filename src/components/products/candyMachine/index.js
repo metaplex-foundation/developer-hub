@@ -128,6 +128,7 @@ export const candyMachine = {
       ],
     },
     { ...referencesSection('candy-machine') },
+    /*
     {
       ...recipesSection('candy-machine'),
       navigation: [
@@ -142,5 +143,6 @@ export const candyMachine = {
       ],
     },
     { ...changelogSection('candy-machine') },
+    */
   ],
 }
