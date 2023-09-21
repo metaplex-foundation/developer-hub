@@ -88,8 +88,6 @@ The Bot Tax guard contains the following settings:
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-Here’s how we can set up a Candy Machine using the Bot Tax guard.
-
 ```ts
 create(umi, {
   // ...

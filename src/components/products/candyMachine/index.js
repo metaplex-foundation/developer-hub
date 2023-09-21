@@ -54,6 +54,7 @@ export const candyMachine = {
           title: 'Available Guards',
           links: [
             { title: 'Address Gate', href: '/candy-machine/guards/address-gate' },
+            { title: 'Allocation', href: '/candy-machine/guards/allocation' },
             { title: 'Allow List', href: '/candy-machine/guards/allow-list' },
             { title: 'Bot Tax', href: '/candy-machine/guards/bot-tax' },
             { title: 'End Date', href: '/candy-machine/guards/end-date' },
@@ -64,6 +65,7 @@ export const candyMachine = {
             { title: 'NFT Burn', href: '/candy-machine/guards/nft-burn' },
             { title: 'NFT Gate', href: '/candy-machine/guards/nft-gate' },
             { title: 'NFT Payment', href: '/candy-machine/guards/nft-payment' },
+            { title: 'Program Gate', href: '/candy-machine/guards/program-gate' },
             { title: 'Redeemed Amount', href: '/candy-machine/guards/redeemed-amount' },
             { title: 'Sol Payment', href: '/candy-machine/guards/sol-payment' },
             { title: 'Start Date', href: '/candy-machine/guards/start-date' },
@@ -71,6 +73,7 @@ export const candyMachine = {
             { title: 'Token Burn', href: '/candy-machine/guards/token-burn' },
             { title: 'Token Gate', href: '/candy-machine/guards/token-gate' },
             { title: 'Token Payment', href: '/candy-machine/guards/token-payment' },
+            { title: 'Token2022 Payment', href: '/candy-machine/guards/token2022-payment' },
           ],
         },
       ],
@@ -125,6 +128,7 @@ export const candyMachine = {
       ],
     },
     { ...referencesSection('candy-machine') },
+    /*
     {
       ...recipesSection('candy-machine'),
       navigation: [
@@ -139,5 +143,6 @@ export const candyMachine = {
       ],
     },
     { ...changelogSection('candy-machine') },
+    */
   ],
 }
