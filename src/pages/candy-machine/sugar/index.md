@@ -4,7 +4,7 @@ metaTitle: Candy Machine - Sugar - Overview
 description: A detailed overview of Sugar, a CLI tool for managing Candy Machines.
 ---
 
-Sugar is a command-line tool to interact with Candy Machines. It allows you to manage the whole lifecycle of a Candy Machine:
+Sugar is a command-line tool to interact with Candy Machines. It allows you to manage the whole lifecycle of a Candy Machine and has the following advantages:
 
 - single configuration file with all Candy Machine settings;
 - better performance for upload of media/metadata files and deploy of a Candy Machine &mdash; these operations take advantage of multithreaded systems to significantly speed up the computational time needed;

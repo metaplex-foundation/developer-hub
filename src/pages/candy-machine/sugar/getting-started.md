@@ -32,7 +32,7 @@ Sugar does not require `solana-cli` to be installed on the system. Every command
 
 ## Preparing Your Files
 
-Create a folder for your project and within it, create a folder named `assets` to store your json metadata and image file pairs with the naming convention `0.json`, `0.png`, `1.json`, `1.png`, and so on. The metadata extension is `.json` and the image files can be `.png`, `.gif`, `.jpg` and `.jpeg`.
+Create a folder for your project and within it, create a folder named `assets` to store your json metadata and image file pairs with the naming convention `0.json`, `0.png`, `1.json`, `1.png`, and so on. The metadata extension is `.json` and the image files can be `.png`, `.gif`, `.jpg` and `.jpeg`. Additionally, you will need `collection.json` and `collection.png` files containing the information for your collection NFT.
 
 Your project directory will then look like:
 {% diagram %}
@@ -51,6 +51,8 @@ Your project directory will then look like:
 {% node #2-json parent="assets" y="230" x="100" label="2.json" theme="mint" /%}
 {% node #2-png parent="assets" y="275" x="100" label="2.png" theme="mint" /%}
 {% node #more parent="assets" y="320" x="100" label=". . ." theme="orange" /%}
+{% node #collection-json parent="assets" y="365" x="100" label="collection.json" theme="purple" /%}
+{% node #collection-png parent="assets" y="410" x="100" label="collection.png" theme="purple" /%}
 
 {% edge from="my-project" to="assets" fromPosition="bottom" toPosition="left" /%}
 {% edge from="assets" to="0-json" fromPosition="bottom" toPosition="left" /%}
@@ -60,6 +62,8 @@ Your project directory will then look like:
 {% edge from="assets" to="2-json" fromPosition="bottom" toPosition="left" /%}
 {% edge from="assets" to="2-png" fromPosition="bottom" toPosition="left" /%}
 {% edge from="assets" to="more" fromPosition="bottom" toPosition="left" /%}
+{% edge from="assets" to="collection-json" fromPosition="bottom" toPosition="left" /%}
+{% edge from="assets" to="collection-png" fromPosition="bottom" toPosition="left" /%}
 {% /diagram %}
 
 ## Running Sugar
