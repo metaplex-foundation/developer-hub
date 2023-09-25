@@ -6,7 +6,7 @@ description: Learn more about the Merkle Tree Canopy on Bubblegum
 
 ## Introduction
 
-Solana's networking stack uses an MTU size of 1280 bytes which, after accounting for headers, leaves 1232 bytes for data.  The result of this for compressed NFTs (cNFTs) is that it would currently be impossible to modify a Merkle tree of depth greater than 24, as the required proofs would take up too much transaction size.
+Solana's networking stack uses an MTU size of 1280 bytes which, after accounting for headers, leaves 1232 bytes for data.  The effect of this on compressed NFTs (cNFTs) is that it would currently be impossible to modify a Merkle tree of depth greater than 24, as the required proofs would take up too much transaction size.
 
 To circumvent these proof size restrictions, spl-account-compression provides the ability to cache the upper most nodes of the Merkle tree. This is called the **Canopy**, and is stored at the end of the concurrent Merkle tree account.
 
@@ -28,6 +28,6 @@ The table below was generated with help from [compressed.app](https://compressed
 | 14               | 192           | 7.6067       | 1.6667                       | 9.2734     |
 | 17               | 96            | 58.6933      | 1.6667                       | 60.36      |
 
-The reason to have a canopy depth of zero is to have the cheapest mint possible.  However, this requires sending lots of proof data with instructions such as `transfer`, `burn`, and `delegate`.  In the zero-depth canopy case, slighty more than half of the transaction size limit is consumed with proof data, which negatively affects the ability to compose Bubblegum instructions with other program instructions.
+The reason to have a canopy depth of zero is to have the cheapest mint possible.  However, this requires sending lots of proof data with instructions such as `transfer`, `delegate`, and `burn`.  In the zero-depth canopy case, slighty more than half of the transaction size limit is consumed with proof data, which negatively affects the ability to compose Bubblegum instructions with other program instructions.
 
 Ultimately, the decision for canopy size must consider the tradeoff between cost and composability.  This assessment should take into account factors such as the intended use of the cNFTs, the development platform's compatibility, and the ownership structure of the tree.
