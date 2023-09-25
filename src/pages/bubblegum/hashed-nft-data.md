@@ -16,9 +16,9 @@ pub struct MetadataArgs {
     pub uri: String,
     /// Royalty basis points that goes to creators in secondary sales (0-10000)
     pub seller_fee_basis_points: u16,
-    // Immutable, once flipped, all sales of this metadata are considered secondary.
+    /// Immutable, once flipped, all sales of this metadata are considered secondary.
     pub primary_sale_happened: bool,
-    // Whether or not the data struct is mutable, default is not
+    /// Whether or not the data struct is mutable, default is not
     pub is_mutable: bool,
     /// nonce for easy calculation of editions, if present
     pub edition_nonce: Option<u8>,
@@ -28,12 +28,16 @@ pub struct MetadataArgs {
     pub collection: Option<Collection>,
     /// Uses
     pub uses: Option<Uses>,
+    /// Which token program version (currently only `TokenProgramVersion::Original`` is supported).
     pub token_program_version: TokenProgramVersion,
+    /// The array of creators of the cNFT.
     pub creators: Vec<Creator>,
 }
 ```
 
-First the metadata is hashed, using the keccak256 hash function.  This hashNote that the metadata is hashed, and then hashed again with the `seller_fee_basis_points`.  This makes it easier for marketplaces to validate seller fee basis points.
+First the metadata is hashed, using the keccak-256 hash function.  Keccak-256 is much stronger than SHA-256, and is used in Solana as well as other blockchains such as Ethereum.
+
+Note that the metadata is hashed, and then hashed again with the `seller_fee_basis_points`.  This makes it easier for marketplaces to validate seller fee basis points, because they do not have to pass a full `MetadataArgs` struct around (which can be up to 457 bytes in length).  Instead, they can pass a 32-byte array of already-hashed `MetadataArgs`, and the `u16` `seller_fee_basis_points`, and by hashing them together they can recreate the data hash.
 
 ```rust
 /// Computes the hash of the metadata.
@@ -51,7 +55,7 @@ pub fn hash_metadata(metadata: &MetadataArgs) -> Result<[u8; 32]> {
 }
 ```
 
-Next, the creator array is hashed individually:
+Next, the creator array is hashed individually.
 
 ```rust
 /// Computes the hash of the creators.
@@ -75,7 +79,7 @@ pub fn hash_creators(creators: &[Creator]) -> [u8; 32] {
 }
 ```
 
-The data hash and creator hash are added to a leaf schema along with other information needed to uniquely identify the leaf:
+The data hash and creator hash are added to a leaf schema along with other information needed to uniquely identify the leaf.  The separation of data and creator hashes is done for a similar reason as `seller_fee_basis_points` - if a marketplace wants to validate a creator array, it can pass around a 32-byte array of already-hashed `MetadataArgs` along with the creator array.  The values in the creator array can be evaluated, and then hashed into the `creator_hash` and combined with the other existing information into the leaf schema.
 
 ```rust
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Eq, Debug, Clone)]
@@ -91,7 +95,8 @@ pub enum LeafSchema {
 }
 ```
 
-Finally, the entire leaf schema is hashed again, and this is the final leaf node on the Merkle tree:
+To create the leaf node that exists on the Merkle tree, the entire leaf schema is hashed as follows:
+
 ```rust
 impl LeafSchema {
     pub fn to_node(&self) -> Node {
@@ -119,4 +124,4 @@ impl LeafSchema {
 }
 ```
 
-Bubblegum operations that involve changing a leaf (transfer, delegate, burn, etc.) will send a "before" and "after" hashed leaf node to spl-account-compression in order to validate the Merkle tree change.
+Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to spl-account-compression in order to validate the Merkle tree change.
