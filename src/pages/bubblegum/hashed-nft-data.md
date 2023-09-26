@@ -35,6 +35,69 @@ pub struct MetadataArgs {
 }
 ```
 
+The cNFT's metadata is hashed multiple times as shown in the diagram and described below:
+
+{% diagram %}
+
+{% node %}
+{% node #metadata label="Metadata Args" theme="blue" /%}
+{% node label="Name" /%}
+{% node label="Symbol" /%}
+{% node label="URI" /%}
+{% node label="Seller Fee Basis Points" /%}
+{% node label="Primary Sale Happened" /%}
+{% node label="Is Mutable" /%}
+{% node label="Edition Nonce" /%}
+{% node label="Token Standard" /%}
+{% node label="Collection" /%}
+{% node label="Uses" /%}
+{% node label="Token Program Version" /%}
+{% node label="Creators" /%}
+{% /node %}
+
+{% node #seller-fee-basis-points parent="metadata" y="305" label="Seller Fee Basis Points" theme="blue" /%}
+
+{% node #creators parent="metadata" y="370" label="Creators" theme="blue" /%}
+
+{% node parent="metadata" x="300" y="150" %}
+{% node #data-hash label="Data Hash" theme="mint" /%}
+{% node theme="transparent" %}
+Hash(Metadata Args, \
+Seller Fee Basis Points)
+{% /node %}
+{% /node %}
+
+{% node parent="creators" x="300" %}
+{% node #creator-hash label="Creator Hash" theme="mint" /%}
+{% node theme="transparent" label="Hash(Creators)" /%}
+{% /node %}
+
+{% node parent="data-hash" x="250" %}
+{% node #leaf-schema label="Leaf Schema" theme="blue" /%}
+{% node label="ID" /%}
+{% node label="Owner" /%}
+{% node label="Delegate" /%}
+{% node label="Nonce" /%}
+{% node label="Data Hash" /%}
+{% node label="Creator Hash" /%}
+{% /node %}
+
+{% node parent="leaf-schema" x="200" %}
+{% node #leaf-node label="Leaf Node" theme="mint" /%}
+{% node theme="transparent" label="Hash(Leaf Schema)" /%}
+{% /node %}
+
+{% edge from="metadata" to="data-hash" /%}
+{% edge from="seller-fee-basis-points" to="data-hash" /%}
+{% edge from="creators" to="creator-hash" /%}
+
+{% edge from="data-hash" to="leaf-schema" /%}
+{% edge from="creator-hash" to="leaf-schema" /%}
+
+{% edge from="leaf-schema" to="leaf-node" /%}
+
+{% /diagram %}
+
 First the metadata is hashed, using the keccak-256 hash function.  Keccak-256 is much stronger than SHA-256, and is used in Solana as well as other blockchains such as Ethereum.
 
 Note that the metadata is hashed, and then hashed again with the `seller_fee_basis_points`.  This makes it easier for marketplaces to validate seller fee basis points, because they do not have to pass a full `MetadataArgs` struct around (which can be up to 457 bytes in length).  Instead, they can pass a 32-byte array of already-hashed `MetadataArgs`, and the `u16` `seller_fee_basis_points`, and by hashing them together they can recreate the data hash.
@@ -79,7 +142,9 @@ pub fn hash_creators(creators: &[Creator]) -> [u8; 32] {
 }
 ```
 
-The data hash and creator hash are added to a leaf schema along with other information needed to uniquely identify the leaf.  The separation of data and creator hashes is done for a similar reason as `seller_fee_basis_points` - if a marketplace wants to validate a creator array, it can pass around a 32-byte array of already-hashed `MetadataArgs` along with the creator array.  The values in the creator array can be evaluated, and then hashed into the `creator_hash` and combined with the other existing information into the leaf schema.
+The data hash and creator hash are added to a leaf schema along with other information needed to uniquely identify the leaf.
+
+The separation of data and creator hashes is done for a similar reason as `seller_fee_basis_points` - if a marketplace wants to validate a creator array, it can pass around a 32-byte array of already-hashed `MetadataArgs` along with the creator array.  The values in the creator array can be evaluated, and then hashed into the `creator_hash` and combined with the other existing information into the leaf schema.
 
 ```rust
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Eq, Debug, Clone)]
@@ -95,7 +160,13 @@ pub enum LeafSchema {
 }
 ```
 
-To create the leaf node that exists on the Merkle tree, the entire leaf schema is hashed as follows:
+Other than data and creator hashes, the leaf schema contains the following other items:
+* nonce: This is a "number used once" value that is unique for each leaf on the tree.  It is needed to ensure Merkle tree leaves are unique.  In practice it retrieved from off-chain indexers, similar to asset proofs.
+* id - This asset ID is a PDA derived from a fixed prefix, the Merkle tree Pubkey, and the nonce.
+* owner - The Pubkey of the cNFT owner, typically a user's wallet.
+* delegate - The delegate for the cNFT.  By default this is the user's wallet, but can be set by the `delegate` Bubblegum instruction.
+
+To create the 32-byte leaf node that exists on the Merkle tree, the entire leaf schema is hashed as follows:
 
 ```rust
 impl LeafSchema {
