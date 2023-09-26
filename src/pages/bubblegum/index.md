@@ -112,7 +112,7 @@ When we mint a new compressed NFT, its data is hashed and added as a new Leaf in
 
 {% /diagram %}
 
-Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Read API**.
+Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Metaplex Read API**.
 
 Note that not all RPCs support the Read API. As such, you may be interested in the [“Read API RPCs”](/bubblegum/rpcs) page to select an appropriate RPC when using compressed NFTs in your application.
 
