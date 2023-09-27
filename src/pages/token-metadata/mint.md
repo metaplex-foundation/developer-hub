@@ -219,7 +219,7 @@ await createNft(umi, {
 
 ```ts
 import { percentAmount, generateSigner } from '@metaplex-foundation/umi'
-import { createNft } from '@metaplex-foundation/mpl-token-metadata'
+import { createFungible } from '@metaplex-foundation/mpl-token-metadata'
 
 const mint = generateSigner(umi)
 await createFungible(umi, {
@@ -236,7 +236,7 @@ await createFungible(umi, {
 
 ```ts
 import { percentAmount, generateSigner } from '@metaplex-foundation/umi'
-import { createNft } from '@metaplex-foundation/mpl-token-metadata'
+import { createFungibleAsset } from '@metaplex-foundation/mpl-token-metadata'
 
 const mint = generateSigner(umi)
 await createFungibleAsset(umi, {
@@ -253,7 +253,7 @@ await createFungibleAsset(umi, {
 
 ```ts
 import { percentAmount, generateSigner } from '@metaplex-foundation/umi'
-import { createNft } from '@metaplex-foundation/mpl-token-metadata'
+import { createProgrammableNft } from '@metaplex-foundation/mpl-token-metadata'
 
 const mint = generateSigner(umi)
 await createProgrammableNft(umi, {
