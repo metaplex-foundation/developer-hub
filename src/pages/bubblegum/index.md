@@ -32,7 +32,7 @@ These compressed NFTs can be transferred, delegated, and even decompressed into 
 
 ## Merkle Trees, leaves and proofs
 
-Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by hashing the data of the compressed NFT.
+Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by [hashing the data of the compressed NFT](/bubblegum/hashed-nft-data).
 
 For each Leaf in the Merkle Tree, one can provide a list of hashes — called a **Proof** — that enables anyone to verify that the given Leaf is part of that tree. Whenever a compressed NFT is updated or transferred, its associated Leaf will change and so will its Proof.
 
