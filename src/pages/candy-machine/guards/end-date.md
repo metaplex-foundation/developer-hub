@@ -19,14 +19,9 @@ The **End Date** guard specifies a date to end the mint. After this date, mintin
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
 {% node #candy-guard-guards label="Guards" theme="mint"/%}
+{% node #endDate label="endDate" /%}
+{% node #date label="Date" /%}
 {% node label="..." /%}
-{% /node %}
-
-{% node parent="candy-guard" y="49" x="250" %}
-{% node #guards label="Guards" theme="mint" /%}
-{% node #endDate label="endDate" theme="mint" /%}
-{% node #date label="Date" theme="mint" /%}
-{% node label="..." theme="dimmed" /%}
 {% /node %}
 
 {% node parent="candy-machine" x="500" %}
