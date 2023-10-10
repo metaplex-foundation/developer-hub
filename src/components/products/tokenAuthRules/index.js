@@ -24,12 +24,34 @@ export const tokenAuthRules = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/token-auth-rules' },
+          ],
+        },
+        {
+          title: 'Features',
+          links: [
+            { title: 'Create or Update Rule Sets', href: '/token-auth-rules/create-or-update' },
+            { title: 'Validating with a Rule Set', href: '/token-auth-rules/validate' },
+          ],
+        },
+        {
+          title: 'Available Rules',
+          links: [
             {
-              title: 'Getting started',
-              href: '/token-auth-rules/getting-started',
+              title: 'Composite Rules',
+              href: '/token-auth-rules/composite-rules',
+            },
+            {
+              title: 'Primitive Rules',
+              href: '/token-auth-rules/primitive-rules',
             },
           ],
         },
+        {
+          title: 'Advanced',
+          links: [
+            { title: 'Rule Set Buffers', href: '/token-auth-rules/buffers' },
+          ],
+        }
       ],
     },
     { ...referencesSection('token-auth-rules') },
