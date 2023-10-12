@@ -66,5 +66,7 @@ account_infos.extend(additional_rule_accounts.into_iter().cloned());
 invoke_signed(&validate_ix, account_infos.as_slice(), &[])
 ```
 
+## Resources
+
 - [Token Auth Rule GitHub repository](https://github.com/metaplex-foundation/mpl-token-auth-rules)
 - [TypeScript references for the JS client](https://mpl-token-auth-rules-js-docs.vercel.app/)

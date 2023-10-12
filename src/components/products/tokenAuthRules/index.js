@@ -34,15 +34,52 @@ export const tokenAuthRules = {
           ],
         },
         {
-          title: 'Available Rules',
+          title: 'Composite Rules',
           links: [
             {
-              title: 'Composite Rules',
-              href: '/token-auth-rules/composite-rules',
+              title: 'All',
+              href: '/token-auth-rules/composite-rules/all',
             },
             {
-              title: 'Primitive Rules',
-              href: '/token-auth-rules/primitive-rules',
+              title: 'Any',
+              href: '/token-auth-rules/composite-rules/any',
+            },
+            {
+              title: 'Not',
+              href: '/token-auth-rules/composite-rules/not',
+            },
+          ],
+        },
+        {
+          title: 'Primitive Rules',
+          links: [
+            {
+              title: 'Additional Signer',
+              href: '/token-auth-rules/primitive-rules/additional-signer',
+            },
+            {
+              title: 'Amount',
+              href: '/token-auth-rules/primitive-rules/amount',
+            },
+            {
+              title: 'Namespace',
+              href: '/token-auth-rules/primitive-rules/namespace',
+            },
+            {
+              title: 'Pass',
+              href: '/token-auth-rules/primitive-rules/pass',
+            },
+            {
+              title: 'PDA Match',
+              href: '/token-auth-rules/primitive-rules/pda-match',
+            },
+            {
+              title: 'Program Owned',
+              href: '/token-auth-rules/primitive-rules/program-owned',
+            },
+            {
+              title: 'Public Key Match',
+              href: '/token-auth-rules/primitive-rules/pubkey-match',
             },
           ],
         },
