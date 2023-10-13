@@ -25,6 +25,14 @@ There are **Primitive Rules** and **Composed Rules** that are created by combini
 
 **Composite Rules** return a true or false based on whether any or all of the primitive rules return true.  Composed rules can then be combined into higher-level composed rules that implement more complex boolean logic.  Because of the recursive definition of the `Rule` enum, calling `validate()` on a top-level composed rule will start at the top and validate at every level, down to the component primitive rules.
 
+## Operation
+A Rule Set is built upon the `HashMap` data structure and is meant to store various sets of rules for different instruction types that could be used with a token (e.g. transfer, delegate, burn, etc.). Token Auth Rules uses the term **Operation** for these various instructions and **Operations** are used as keys in the `HashMap` data structure. Each **Operation** can have a different set of associated rules.
+
+### Scenario
+**Scenarios** are considered an extension of the **Operation** association and are used for the many different circumstances under which an instruction can be called. For example, Token Metadata uses the authority type as a **Scenario** for calls to Token Auth Rules from Token Metadata. A Transfer **Operation** may be triggered on a token by either the token's owner or delegate, and the Rule Set manager may want these different scenarios to be governed by different rules and so a **Scenario** can be used to manage this distinction. An **Operation** and **Scenario** combination is just two strings separated by a colon and so the two `HashMap` keys used for the prior example would be `Transfer:Owner` and `Transfer:Delegate`.
+
+Please see the [Namespace](/token-auth-rules/primitive-rules/namespace) for how to manage identical rules across multiple scenarios.
+
 ## Payload
 The Token Auth Rules program relies on payload data received from the program requesting evaluation from a Rule Set. The underlying data structure of the `Payload` is a `HashMap`, with `Payload` fields being represented as `HashMap` keys. Most Rules store a pre-defined `Payload` field so a lookup can be performed at validation time.
 
