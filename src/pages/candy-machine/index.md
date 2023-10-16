@@ -51,7 +51,7 @@ The very first step is for the creator to create a new Candy Machine and configu
 {% edge from="action" to="candy-machine" path="straight" /%}
 {% /diagram %}
 
-The created Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be minted. For instance, there is a `creators` parameter which will be assigned to all NFTs minted from this Candy Machine. We will see how to create and configure Candy Machines in more details, including some code examples, in the following pages: [Candy Machine Settings](/programs/candy-machine/candy-machine-settings) and [Managing Candy Machines](/programs/candy-machine/managing-candy-machines).
+The created Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be minted. For instance, there is a `creators` parameter which will be assigned to all NFTs minted from this Candy Machine. We will see how to create and configure Candy Machines in more details, including some code examples, in the following pages: [Candy Machine Settings](/candy-machine/candy-machine-settings) and [Managing Candy Machines](/candy-machine/managing-candy-machines).
 
 However, we still don’t know which NFTs should be minted from that Candy Machine. In other words, the Candy Machine is not loaded. So our next step, is to insert items into the Candy Machine.
 
@@ -78,7 +78,7 @@ Each item is composed of two parameters:
 - A `name`: The name of the NFT.
 - A `uri`: The URI pointing to the [JSON metadata](https://docs.metaplex.com/programs/token-metadata/overview#a-json-standard) of the NFT. This implies that the JSON metadata has already been uploaded via either an on-chain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider.
 
-All other parameters are shared between all NFTs and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/programs/candy-machine/inserting-items) for more details.
+All other parameters are shared between all NFTs and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/candy-machine/inserting-items) for more details.
 
 Notice how, at this point, no real NFTs have been created yet. We are simply loading the Candy Machine with all the data it needs to **create NFTs on-demand**, at mint time. Which brings us to the next step.
 
@@ -119,9 +119,9 @@ Notice how, at this point, no real NFTs have been created yet. We are simply loa
 {% edge from="mint-3" to="nft-3" path="bezier" /%}
 {% /diagram %}
 
-Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting NFTs from it. It’s only at this point that an NFT is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/programs/candy-machine/minting) for more details.
+Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting NFTs from it. It’s only at this point that an NFT is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/candy-machine/minting) for more details.
 
-Once all NFTs have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Managing Candy Machines](/programs/candy-machine/managing-candy-machines) for more details.
+Once all NFTs have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Managing Candy Machines](/candy-machine/managing-candy-machines) for more details.
 
 {% diagram %}
 {% node #action-1 label="4. Delete" theme="pink" /%}
@@ -143,7 +143,7 @@ Once all NFTs have been minted from a Candy Machine, it has served its purpose a
 
 Now that we understand how Candy Machines work, let’s dig into the various ways creators can protect and customise the mint process of their Candy Machine.
 
-Creators can use what we call “**Guards**” to add various features to their Candy Machine. The Metaplex Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 16 default guards**](/programs/candy-machine/available-guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
+Creators can use what we call “**Guards**” to add various features to their Candy Machine. The Metaplex Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 16 default guards**](/candy-machine/available-guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
 
 Each guard can be enabled and configured at will so creators can pick and choose the features they need. Disabling all guards would be equivalent to allowing anyone to mint our NFTs for free at any time, which is likely not what we want. So let’s have a look at a few guards to create a more realistic example.
 
@@ -203,22 +203,22 @@ Bot tax charged
 {% edge from="mint-4" to="fail-4" path="bezier" /%}
 {% /diagram %}
 
-As you can see, with more than 16 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/programs/candy-machine/candy-guards) page.
+As you can see, with more than 16 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/candy-machine/candy-guards) page.
 
 ## Next steps
 
 Whilst this provides a good overview of Candy Machines, there is a lot more to discover and learn about them. Here’s what you can expect in the other pages of this Candy Machine documentation.
 
-- [Getting Started](/programs/candy-machine/getting-started). Lists the various libraries and SDKs you can use to manage Candy Machines.
-- [Candy Machine Settings](/programs/candy-machine/candy-machine-settings). Explains Candy Machine settings in great detail.
-- [Managing Candy Machines](/programs/candy-machine/managing-candy-machines). Explains how to manage Candy Machines.
-- [Inserting Items](/programs/candy-machine/inserting-items). Explains how to load items into Candy Machines.
-- [Candy Guards](/programs/candy-machine/candy-guards). Explains how guards work and how to enable them.
-- [Guard Groups](/programs/candy-machine/guard-groups). Explains how to configure multiple groups of guards.
-- [Special Guard Instructions](/programs/candy-machine/special-guard-instructions). Explains how to execute guard-specific instructions.
-- [Minting](/programs/candy-machine/minting). Explains how to mint from Candy Machines and how to handle pre-mint requirements.
-- [Available Guards](/programs/candy-machine/available-guards). Lists all available default guards.
-- [How-To Guides](/programs/candy-machine/how-to-guides). Lists practical articles relevant to Candy Machines.
-- [Conceptual Guides](/programs/candy-machine/conceptual-guides). Lists theoretical articles relevant to Candy Machines.
-- [References](/programs/candy-machine/references). Lists API References relevant to Candy Machines.
-- [Updates](/programs/candy-machine/updates). Documents the latest changes.
+- [Getting Started](/candy-machine/getting-started). Lists the various libraries and SDKs you can use to manage Candy Machines.
+- [Candy Machine Settings](/candy-machine/candy-machine-settings). Explains Candy Machine settings in great detail.
+- [Managing Candy Machines](/candy-machine/managing-candy-machines). Explains how to manage Candy Machines.
+- [Inserting Items](/candy-machine/inserting-items). Explains how to load items into Candy Machines.
+- [Candy Guards](/candy-machine/candy-guards). Explains how guards work and how to enable them.
+- [Guard Groups](/candy-machine/guard-groups). Explains how to configure multiple groups of guards.
+- [Special Guard Instructions](/candy-machine/special-guard-instructions). Explains how to execute guard-specific instructions.
+- [Minting](/candy-machine/minting). Explains how to mint from Candy Machines and how to handle pre-mint requirements.
+- [Available Guards](/candy-machine/available-guards). Lists all available default guards.
+- [How-To Guides](/candy-machine/how-to-guides). Lists practical articles relevant to Candy Machines.
+- [Conceptual Guides](/candy-machine/conceptual-guides). Lists theoretical articles relevant to Candy Machines.
+- [References](/candy-machine/references). Lists API References relevant to Candy Machines.
+- [Updates](/candy-machine/updates). Documents the latest changes.
