@@ -14,7 +14,7 @@ It is worth noting that creators can verify themselves directly when [minting th
 
 The Bubblegum program offers a **Verify Creator** instruction that must be signed by the creator we are trying to verify.
 
-Additionally, more parameters must be provided to verify the integrity of the Compressed NFT as this instruction will end up replacing the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Read API.
+Additionally, more parameters must be provided to verify the integrity of the Compressed NFT as this instruction will end up replacing the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
 {% dialect-switcher title="Verify the Creator of a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}

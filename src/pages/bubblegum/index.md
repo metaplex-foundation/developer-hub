@@ -89,7 +89,7 @@ As such, Merkle Trees act as an on-chain structure that allows anyone to verify 
 
 Which brings us to an important question: where is the NFT data stored?
 
-## Read API
+## Metaplex DAS API
 
 When we mint a new compressed NFT, its data is hashed and added as a new Leaf in a Merkle Tree. But there’s more. Additionally, the entire NFT data is stored in the transaction that created the compressed NFT. Similarly, when a compressed NFT is updated, its updated data is, once again, saved on the transaction as a changelog. So, whilst there aren’t any accounts keeping track of that data, one can look at all previous transactions in the ledger and find that information.
 
@@ -112,9 +112,9 @@ When we mint a new compressed NFT, its data is hashed and added as a new Leaf in
 
 {% /diagram %}
 
-Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Metaplex Read API**.
+Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Metaplex DAS API**.
 
-Note that not all RPCs support the Read API. As such, you may be interested in the [“Read API RPCs”](/bubblegum/rpcs) page to select an appropriate RPC when using compressed NFTs in your application.
+Note that not all RPCs support the DAS API. As such, you may be interested in the [“Metaplex DAS API RPCs”](/bubblegum/rpcs) page to select an appropriate RPC when using compressed NFTs in your application.
 
 We talk about this in more detail in our advanced [“Storing and indexing NFT data”](/bubblegum/stored-nft-data) guide.
 

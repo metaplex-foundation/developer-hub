@@ -69,7 +69,7 @@ Decompressing a Compressed NFT is a two-step process initiated by the owner of t
 
 To initiate the first step of the decompression process, the owner of the Compressed NFT must send a **Redeem** instruction and sign the transaction. This will create a Voucher account for the cNFT that will be used in the next step of the decompression process.
 
-Note that this instruction removes a leaf from the Bubblegum Tree. Therefore, additional parameters must be provided to verify the integrity of the Compressed NFT to remove. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Read API.
+Note that this instruction removes a leaf from the Bubblegum Tree. Therefore, additional parameters must be provided to verify the integrity of the Compressed NFT to remove. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
 {% dialect-switcher title="Redeem a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
@@ -97,7 +97,7 @@ The finalize the decompression process, the owner of cNFT must send a **Decompre
 - **Voucher**: The address of the Voucher account that was created in the previous step. This address is also derived from the Merkle Tree address and the index of the leaf.
 - **Metadata**: The metadata object that contains all of the cNFT's data. This attribute must match exactly the data of the Compressed NFT, otherwise, the hashes won't match and decompression will fail.
 
-Here again, a helper function provided by our SDKs can be used to fetch and parse most of these attributes from the Read API.
+Here again, a helper function provided by our SDKs can be used to fetch and parse most of these attributes from the Metaplex DAS API.
 
 {% dialect-switcher title="Decompress a Redeemed Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
@@ -125,7 +125,7 @@ await decompressV1(umi, {
 
 ## Cancelling a Redeemed NFT
 
-Should the owner change their mind about decompressing the cNFT, they can cancel the decompression process by sending a **Cancel Redeem** instruction. This will add the leaf back to the tree and close the Voucher account. Similarly to the **Decompress** instruction, the **Voucher** address must be provided as well as other attributes that can be retrieved using the Read API.
+Should the owner change their mind about decompressing the cNFT, they can cancel the decompression process by sending a **Cancel Redeem** instruction. This will add the leaf back to the tree and close the Voucher account. Similarly to the **Decompress** instruction, the **Voucher** address must be provided as well as other attributes that can be retrieved using the Metaplex DAS API.
 
 {% dialect-switcher title="Cancel the decompression a Redeemed Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
