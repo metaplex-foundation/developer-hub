@@ -8,11 +8,11 @@ description: Frequently asked questions about Bubblegum
 
 Whenever we use an instruction that ends up replacing a leaf in the Bubblegum Tree — such as transfer, delegate, burn, etc. — the program requires a bunch of parameters that are used to ensure the current leaf is valid and can be updated. This is because the data of Compressed NFTs is not available inside on-chain accounts and therefore additional parameters such as the **Proof**, the **Leaf Index**, the **Nonce** and more are required for the program to fill the pieces.
 
-All of that information can be retrieved from the **Read API** using both the `getAsset` and the `getAssetProof` RPC methods. However, the RPC responses from these methods and the parameters expected by the instructions are not exactly the same and parsing from one to the other is not trivial.
+All of that information can be retrieved from the **Metaplex DAS API** using both the `getAsset` and the `getAssetProof` RPC methods. However, the RPC responses from these methods and the parameters expected by the instructions are not exactly the same and parsing from one to the other is not trivial.
 
 Fortunately, our SDKs provide a helper method that will do all the heavy lifting for us, as we can see in the code examples below. It accepts the Asset ID of the Compressed NFT and returns a bunch of parameters that can be directly injected into instructions that replace the leaf — such as burn, transfer, update, etc.
 
-That being said, if you ever needed to do that parsing yourself, here is a quick breakdown of the parameters expected by the instructions and how to retrieve them from the Read API. Here we will assume the result of the `getAsset` and `getAssetProof` RPC methods are accessible via the `rpcAsset` and `rpcAssetProof` variables respectively.
+That being said, if you ever needed to do that parsing yourself, here is a quick breakdown of the parameters expected by the instructions and how to retrieve them from the Metaplex DAS API. Here we will assume the result of the `getAsset` and `getAssetProof` RPC methods are accessible via the `rpcAsset` and `rpcAssetProof` variables respectively.
 
 - **Leaf Owner**: Accessible via `rpcAsset.ownership.owner`.
 - **Leaf Delegate**: Accessible via `rpcAsset.ownership.delegate` and should default to `rpcAsset.ownership.owner` when null.
