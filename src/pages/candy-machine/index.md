@@ -203,7 +203,7 @@ Bot tax charged
 {% edge from="mint-4" to="fail-4" path="bezier" /%}
 {% /diagram %}
 
-As you can see, with more than 16 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/candy-machine/candy-guards) page.
+As you can see, with more than 16 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/candy-machine/guards) page.
 
 ## Next steps
 
