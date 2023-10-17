@@ -210,14 +210,13 @@ As you can see, with more than 16 default guards and the ability to create custo
 Whilst this provides a good overview of Candy Machines, there is a lot more to discover and learn about them. Here’s what you can expect in the other pages of this Candy Machine documentation.
 
 - [Getting Started](/candy-machine/getting-started). Lists the various libraries and SDKs you can use to manage Candy Machines.
-- [Candy Machine Settings](/candy-machine/candy-machine-settings). Explains Candy Machine settings in great detail.
-- [Managing Candy Machines](/candy-machine/managing-candy-machines). Explains how to manage Candy Machines.
-- [Inserting Items](/candy-machine/inserting-items). Explains how to load items into Candy Machines.
-- [Candy Guards](/candy-machine/candy-guards). Explains how guards work and how to enable them.
+- [Candy Machine Settings](/candy-machine/settings). Explains Candy Machine settings in great detail.
+- [Managing Candy Machines](/candy-machine/manage). Explains how to manage Candy Machines.
+- [Inserting Items](/candy-machine/insert-items). Explains how to load items into Candy Machines.
+- [Candy Guards](/candy-machine/guards). Explains how guards work and how to enable them.
 - [Guard Groups](/candy-machine/guard-groups). Explains how to configure multiple groups of guards.
-- [Special Guard Instructions](/candy-machine/special-guard-instructions). Explains how to execute guard-specific instructions.
-- [Minting](/candy-machine/minting). Explains how to mint from Candy Machines and how to handle pre-mint requirements.
-- [Available Guards](/candy-machine/available-guards). Lists all available default guards.
+- [Special Guard Instructions](/candy-machine/guard-route). Explains how to execute guard-specific instructions.
+- [Minting](/candy-machine/mint). Explains how to mint from Candy Machines and how to handle pre-mint requirements.
 - [How-To Guides](/candy-machine/how-to-guides). Lists practical articles relevant to Candy Machines.
 - [Conceptual Guides](/candy-machine/conceptual-guides). Lists theoretical articles relevant to Candy Machines.
 - [References](/candy-machine/references). Lists API References relevant to Candy Machines.
