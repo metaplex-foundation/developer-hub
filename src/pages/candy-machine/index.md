@@ -51,7 +51,7 @@ The very first step is for the creator to create a new Candy Machine and configu
 {% edge from="action" to="candy-machine" path="straight" /%}
 {% /diagram %}
 
-The created Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be minted. For instance, there is a `creators` parameter which will be assigned to all NFTs minted from this Candy Machine. We will see how to create and configure Candy Machines in more details, including some code examples, in the following pages: [Candy Machine Settings](/candy-machine/candy-machine-settings) and [Managing Candy Machines](/candy-machine/managing-candy-machines).
+The created Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be minted. For instance, there is a `creators` parameter which will be assigned to all NFTs minted from this Candy Machine. We will see how to create and configure Candy Machines in more details, including some code examples, in the following pages: [Candy Machine Settings](/candy-machine/settings) and [Managing Candy Machines](/candy-machine/manage).
 
 However, we still don’t know which NFTs should be minted from that Candy Machine. In other words, the Candy Machine is not loaded. So our next step, is to insert items into the Candy Machine.
 
