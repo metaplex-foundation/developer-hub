@@ -119,7 +119,7 @@ Notice how, at this point, no real NFTs have been created yet. We are simply loa
 {% edge from="mint-3" to="nft-3" path="bezier" /%}
 {% /diagram %}
 
-Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting NFTs from it. It’s only at this point that an NFT is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/candy-machine/minting) for more details.
+Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting NFTs from it. It’s only at this point that an NFT is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/candy-machine/mint) for more details.
 
 Once all NFTs have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Managing Candy Machines](/candy-machine/managing-candy-machines) for more details.
 
