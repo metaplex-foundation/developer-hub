@@ -58,7 +58,7 @@ Whilst it is possible to set and verify a Collection for a Compressed NFT _after
 Additionally, note that the **Metadata** parameter must contain a **Collection** object such that:
 
 - Its **Address** field matches the **Collection Mint** parameter.
-- Its **Verified** field is set to `false`. It will be set to `true` during the transaction but the Bubblegum program requires that the initial value for this field is `false`.
+- Its **Verified** field can be passed in as either `true` or `false`. If it is passed in as `false`, it will be set to `true` during the transaction and the cNFT will be minted with **Verified** set to `true`.
 
 Also note that, just like in the **Mint V1** instruction, creators can verify themselves by signing the transaction and adding themselves as remaining accounts.
 
