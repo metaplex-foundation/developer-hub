@@ -92,7 +92,5 @@ export const tokenAuthRules = {
       ],
     },
     { ...referencesSection('token-auth-rules') },
-    { ...recipesSection('token-auth-rules') },
-    { ...changelogSection('token-auth-rules') },
   ],
 }
