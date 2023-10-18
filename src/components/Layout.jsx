@@ -7,12 +7,8 @@ import { Prose } from '@/components/Prose'
 import { TableOfContent } from '@/components/TableOfContent'
 import { useAccentClass } from '@/shared/useAccentClass'
 import { useLightense } from '@/shared/useLightense'
-import { Widget } from '@happyreact/react';
-import '@happyreact/react/theme.css';
+import Feedback from '@/components/Feedback';
 
-function FeedbackWidget() {
-  return <><Widget token="8c828a21-ead0-4998-b98b-f465fd3e4e4f" resource="users-happiness" />test</>;
-}
 
 export function Layout({ children, page }) {
   const hasNavigation = !!page.activeSection?.navigation
@@ -106,7 +102,7 @@ export function Layout({ children, page }) {
               </div>
             )}
           </dl>
-          < FeedbackWidget />
+          <Feedback resource={page.pathname} />
         </div>
 
         {/* Table of contents. */}
