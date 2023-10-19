@@ -135,7 +135,7 @@ This instruction accepts a variety of parameters and our SDKs do their best to p
 - **Mint**: The Mint account of the asset. If it doesn't exist, it must be provided as a Signer as it will be initialized. Typically, we generate a new keypair for this purpose.
 - **Authority**: The authority of the Mint account. This is the account that is or will be allowed to mint tokens from the Mint account. This will default to the "Identity" wallet — i.e. the connected wallet — if supported by the SDK.
 - **Name**, **URI**, **Seller Fee Basis Points**, **Creators**, etc.: The data of the asset to store on the **Metadata** account.
-- **Token Standard**: The Token Standard of the asset. Note that the Token Metadata program does not require this argument as it can infer that information from the accounts provided. However, our SDKs do require it as it allows them to provide default values for many other parameters.
+- **Token Standard**: The Token Standard of the asset.
 
 {% dialect-switcher title="Create on-chain Accounts" %}
 {% dialect title="JavaScript" id="js" %}
@@ -159,6 +159,92 @@ await createV1(umi, {
 ```
 
 {% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+{% totem %}
+
+```rust
+use mpl_token_metadata::{
+    instructions::CreateV1Builder,
+    types::{PrintSupply, TokenStandard},
+};
+use solana_rpc_client::rpc_client::RpcClient;
+use solana_sdk::{
+     message::Message,
+     transaction::Transaction,
+};
+
+// 1. client is a reference to the initialized RpcClient
+// 2. every account is specified by their pubkey
+
+let client = ...;
+
+let create_ix = CreateV1Builder::new()
+    .metadata(metadata)
+    .master_edition(Some(master_edition))
+    .mint(mint.pubkey(), true)
+    .authority(payer.pubkey())
+    .payer(payer.pubkey())
+    .update_authority(payer.pubkey(), false)
+    .name(String::from("My NFT"))
+    .uri(uri)
+    .seller_fee_basis_points(550)
+    .token_standard(TokenStandard::NonFungible)
+    .print_supply(PrintSupply::Zero)
+    .instruction();
+
+let message = Message::new(
+    &[create_ix],
+    Some(&payer.pubkey()),
+);
+
+let blockhash = client.get_latest_blockhash()?;
+let mut tx = Transaction::new(&[mint, payer], message, blockhash);
+client.send_and_confirm_transaction(&tx)?;
+```
+
+{% totem-prose %}
+
+Note that when setting the `mint` account, it is require to specify a `bool` flag to indicate whether the account will be a signer or not – it need to be a signer if the `mint` account does not exist.
+
+{% /totem-prose %}
+
+{% /totem %}
+
+{% /dialect %}
+
+{% dialect title="Rust (CPI)" id="rust-cpi" %}
+
+```rust
+use mpl_token_metadata::{
+    accounts::Metadata,
+    instructions::CreateV1CpiBuilder,
+    types::{PrintSupply, TokenStandard},
+};
+
+// 1. every account is specified by a reference to their AccountInfo
+
+let create_cpi = CreateV1CpiBuilder::new(token_metadata_program_info)
+    .metadata(metadata_info)
+    .mint(mint_info, true)
+    .authority(payer_info)
+    .payer(payer_info)
+    .update_authority(update_authority_info, false)
+    .master_edition(Some(master_edition_info))
+    .system_program(system_program_info)
+    .sysvar_instructions(sysvar_instructions_info)
+    .spl_token_program(spl_token_program_info);
+    .token_standard(TokenStandard::NonFungible)
+    .name(String::from("My NFT"))
+    .uri(uri)
+    .seller_fee_basis_points(550)
+    .token_standard(TokenStandard::NonFungible)
+    .print_supply(PrintSupply::Zero);
+
+create_cpi.invoke();
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ## Minting Tokens
@@ -171,7 +257,7 @@ We can use the **Mint V1** instruction of the Token Metadata program to achieve 
 - **Authority**: The authority that can authorize this instruction. For Non-Fungible assets, this is the update authority of the **Metadata** account, otherwise, this refers to the **Mint Authority** of the Mint account.
 - **Token Owner**: The address of the wallet to receive the token(s).
 - **Amount**: The number of tokens to mint. For Non-Fungible assets, this may only be 1.
-- **Token Standard**: The Token Standard of the asset. Here again, the program does not require this argument but our SDKs do so they can provide adequate default values for most of the other parameters.
+- **Token Standard**: The Token Standard of the asset (**required for our JavaScript SDK**). The program does not require this argument but our SDK do so they can provide adequate default values for most of the other parameters.
 
 {% dialect-switcher title="Mint Tokens" %}
 {% dialect title="JavaScript" id="js" %}
@@ -189,11 +275,83 @@ await mintV1(umi, {
 ```
 
 {% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+{% totem %}
+
+```rust
+use mpl_token_metadata::instructions::MintV1Builder;
+use solana_rpc_client::rpc_client::RpcClient;
+use solana_sdk::{
+     message::Message,
+     transaction::Transaction,
+};
+
+// 1. client is a reference to the initialized RpcClient
+// 2. every account is specified by their pubkey
+
+let client = ...;
+
+let mint_ix = MintV1Builder::new()
+    .token(token)
+    .token_owner(Some(token_owner))
+    .metadata(metadata)
+    .master_edition(Some(master_edition))
+    .mint(mint)
+    .authority(update_authority)
+    .payer(payer)
+    .amount(1)
+    .instruction();
+
+let message = Message::new(
+    &[mint_ix],
+    Some(&payer.pubkey()),
+);
+
+let blockhash = client.get_latest_blockhash()?;
+let mut tx = Transaction::new(&[update_authority, payer], message, blockhash);
+client.send_and_confirm_transaction(&tx)?;
+```
+
+{% totem-prose %}
+
+We are setting the `master_edition` since it is required to mint a `NonFungible`; the `token_owner` is required if the `token` account does not exist and one will be initialized.
+
+{% /totem-prose %}
+
+{% /totem %}
+{% /dialect %}
+
+{% dialect title="Rust (CPI)" id="rust-cpi" %}
+
+```rust
+use mpl_token_metadata::instructions::MintV1CpiBuilder;
+
+// 1. every account is specified by a reference to their AccountInfo
+
+let mint_cpi = MintV1CpiBuilder::new(token_metadata_program_info)
+    .token(token_info)
+    .token_owner(Some(token_owner_info))
+    .metadata(metadata_info)
+    .master_edition(Some(master_edition_info))
+    .mint(mint_info)
+    .payer(payer_info)
+    .authority(update_authority_info)
+    .system_program(system_program_info)
+    .sysvar_instructions(sysvar_instructions_info)
+    .spl_token_program(spl_token_program_info)
+    .spl_ata_program(spl_ata_program_info)
+    .amount(1);
+
+mint_cpi.invoke();
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ## Create Helpers
 
-since creating digital assets is such an important part of Token Metadata, our SDKs provide helper methods to make the process easier. Namely, these helper methods combine the **Create V1** and **Mint V1** instructions together in different ways, depending on the Token Standard we want to create.
+Since creating digital assets is such an important part of Token Metadata, our SDKs provide helper methods to make the process easier. Namely, these helper methods combine the **Create V1** and **Mint V1** instructions together in different ways, depending on the Token Standard we want to create.
 
 {% dialect-switcher title="Create helpers" %}
 {% dialect title="JavaScript" id="js" %}
