@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Widget } from '@happyreact/react';
+import { Widget, defineCustomElements } from '@happyreact/react';
  
 import '@happyreact/react/theme.css';
- 
+defineCustomElements()
 const VotedYes = () => {
   return <span>Thanks for your feedback. We are glad you like it :)</span>;
 };
@@ -18,12 +18,13 @@ export default function Feedback({ resource }) {
   const _resource = String(resource).replace(/\//g, '-');
  
   const handleReaction = (params) => {
-    setReaction(params.icon);
+    setReaction(params.detail.icon);
+    console.log(params.detail.icon)
   };
  
   return (
     <div>
-      <h3>Was this page helpful?</h3>
+      <h2>Was this page helpful?</h2>
       {!isReacted ? (
         <div>
           <Widget
