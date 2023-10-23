@@ -8,7 +8,88 @@ description: "The NFT Burn guard restricts the mint to holders of a predefined N
 
 The **NFT Burn** guard restricts the mint to holders of a predefined NFT Collection and burns the holder's NFT. Thus, the mint address of the NFT to burn must be provided by the payer when minting.
 
-![CandyMachinesV3-GuardsNFTBurn.png](https://docs.metaplex.com/assets/candy-machine-v3/CandyMachinesV3-GuardsNFTBurn.png#radius)
+{% diagram  %}
+
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="candy-machine" y="100" x="22" %}
+{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Guard Program {% .whitespace-nowrap %}
+{% /node %}
+{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
+{% node #nftBurn label="nftBurn" /%}
+{% node #requiredCollection label="Required Collection" /%}
+{% node label="..." /%}
+{% /node %}
+
+
+{% node #dummyTopLeft parent="metadataAccount" label="tl" theme="transparent" y="-20" x="-30" /%}
+{% node #dummyTopRight parent="metadataAccount" label="tr" theme="transparent" y="-20" x="200" /%}
+{% node #dummyBottomLeft parent="mintAccount" label="bl" theme="transparent" y="60" x="-30" /%}
+{% node #dummyBottomRight parent="mintAccount" label="br" theme="transparent" y="60" x="170" /%}
+{% edge from="dummyTopLeft" to="dummyTopRight" /%}
+{% edge from="dummyTopRight" to="dummyBottomRight" /%}
+{% edge from="dummyBottomRight" to="dummyBottomLeft" /%}
+{% edge from="dummyBottomLeft" to="dummyTopLeft" /%}
+
+{% node parent="requiredCollection" x="270" y="-9"  %}
+{% node #mintAccount theme="blue" %}
+Mint Account
+{% /node %}
+{% node theme="dimmed" %}
+Owner: Token Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+{% edge from="requiredCollection" to="mintAccount" /%}
+
+{% node parent="mintAccount" y="-70" x="-25" %}
+{% node #metadataAccount theme="blue" %}
+Metadata Account
+{% /node %}
+{% node theme="dimmed" %}
+Owner: Token Metadata Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% edge from="XXXXXXXXXXXXXXXXXX" to="mint-candy-guard" theme="indigo" dashed=true/%}
+{% node parent="candy-machine" x="600" %}
+  {% node #mint-candy-guard theme="pink" %}
+    Mint from
+
+    _Candy Guard Program_
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
+  Access Control
+{% /node %}
+
+{% node parent="mint-candy-guard" y="150" x="-8" %}
+  {% node #mint-candy-machine theme="pink" %}
+    Mint from 
+    
+    _Candy Machine Program_
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
+  Mint Logic
+{% /node %}
+
+{% node #nft parent="mint-candy-machine" y="140" x="75" theme="blue" %}
+  NFT
+{% /node %}
+{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+
+{% edge from="candy-guard" to="candy-machine" /%}
+
+{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+
+{% /diagram %}
 
 ## Guard Settings
 
