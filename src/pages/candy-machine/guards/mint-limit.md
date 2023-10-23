@@ -14,7 +14,9 @@ The limit is set per wallet, per candy machine and per identifier — provided i
 
 {% node %}
 {% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
 {% node parent="candy-machine" y="100" x="22" %}
