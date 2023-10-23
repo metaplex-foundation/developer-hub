@@ -74,7 +74,6 @@ Mint Counter PDA
 
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
-
 {% /diagram %}
 
 ## Guard Settings
