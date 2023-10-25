@@ -58,7 +58,7 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
 {% edge from="candy-guard" to="candy-machine" path="straight" /%}
-{% edge from="addressGate" to="mint-candy-guard" arrow="none" dashed=true %}
+{% edge from="additional" to="mint-candy-guard" arrow="none" dashed=true %}
 if the mint transaction contains instructions 
 
 from additional programs
@@ -66,7 +66,6 @@ from additional programs
 Minting will fail
 {% /edge %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
-
 
 {% /diagram %}
 
