@@ -32,25 +32,25 @@ The **Address Gate** guard restricts the mint to a single address which must m
   {% node #mint-candy-guard theme="pink" %}
     Mint from
 
-    _Candy Guard Program_
+    _Candy Guard Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" y="150" x="-8" %}
-  {% node #mint-candy-machine theme="pink" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+  {% node theme="pink" %}
     Mint from 
     
-    _Candy Machine Program_
+    _Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="75" theme="blue" %}
+{% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
   NFT
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
