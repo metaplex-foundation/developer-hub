@@ -28,36 +28,24 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
 {% node label="..." /%}
 {% /node %}
 
+{% node parent="requiredCollection" x="270" y="-23"  %}
+{% node #collectionNftMint theme="blue" %}
+Collection NFT {% .whitespace-nowrap %}
 
-{% node #dummyTopLeft parent="metadataAccount" label="tl" theme="transparent" y="-20" x="-30" /%}
-{% node #dummyTopRight parent="metadataAccount" label="tr" theme="transparent" y="-20" x="200" /%}
-{% node #dummyBottomLeft parent="mintAccount" label="bl" theme="transparent" y="60" x="-30" /%}
-{% node #dummyBottomRight parent="mintAccount" label="br" theme="transparent" y="60" x="170" /%}
-{% edge from="dummyTopLeft" to="dummyTopRight" /%}
-{% edge from="dummyTopRight" to="dummyBottomRight" /%}
-{% edge from="dummyBottomRight" to="dummyBottomLeft" /%}
-{% edge from="dummyBottomLeft" to="dummyTopLeft" /%}
-
-{% node parent="requiredCollection" x="270" y="-9"  %}
-{% node #mintAccount theme="blue" %}
 Mint Account
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Token Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="requiredCollection" to="mintAccount" /%}
-
-{% node parent="mintAccount" y="-70" x="-25" %}
-{% node #metadataAccount theme="blue" %}
-Metadata Account
 {% /node %}
 {% node theme="dimmed" %}
 Owner: Token Metadata Program {% .whitespace-nowrap %}
 {% /node %}
 {% /node %}
+{% edge from="requiredCollection" to="collectionNftMint" /%}
 
-{% edge from="XXXXXXXXXXXXXXXXXX" to="mint-candy-guard" theme="indigo" dashed=true/%}
+
+{% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
+Burn 1 NFT 
+
+from this collection
+{% /edge %}
 {% node parent="candy-machine" x="600" %}
   {% node #mint-candy-guard theme="pink" %}
     Mint from
@@ -69,7 +57,7 @@ Owner: Token Metadata Program {% .whitespace-nowrap %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" y="150" x="-8" %}
+{% node parent="mint-candy-guard" y="150" x="-9" %}
   {% node #mint-candy-machine theme="pink" %}
     Mint from 
     
@@ -80,14 +68,14 @@ Owner: Token Metadata Program {% .whitespace-nowrap %}
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="75" theme="blue" %}
+{% node #nft parent="mint-candy-machine" y="140" x="70" theme="blue" %}
   NFT
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
 {% edge from="candy-guard" to="candy-machine" /%}
 
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
 {% /diagram %}
 
