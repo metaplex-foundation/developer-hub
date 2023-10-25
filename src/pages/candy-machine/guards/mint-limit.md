@@ -33,7 +33,7 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
 
 {% node parent="id" x="270" y="-9"  %}
 {% node #mintCounterPda %}
-Mint Counter PDA
+Mint Counter PDA {% .whitespace-nowrap %}
 {% /node %}
 {% /node %}
 {% edge from="payer" to="mintCounterPda" path="straight" /%}
@@ -44,7 +44,7 @@ Mint Counter PDA
 {% node label="Owner: Any Program" theme="dimmed" /%}
 {% /node %}
 
-{% edge from="limit" to="mint-candy-guard" theme="indigo" dashed=true/%}
+{% edge from="mintLimit" to="mint-candy-guard" theme="indigo" dashed=true/%}
 {% node parent="candy-machine" x="600" %}
   {% node #mint-candy-guard theme="pink" %}
     Mint from
@@ -56,8 +56,8 @@ Mint Counter PDA
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" y="150" x="-8" %}
-  {% node #mint-candy-machine theme="pink" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+  {% node  theme="pink" %}
     Mint from 
     
     _Candy Machine Program_
@@ -67,7 +67,7 @@ Mint Counter PDA
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="75" theme="blue" %}
+{% node #nft parent="mint-candy-machine" y="140" x="71" theme="blue" %}
   NFT
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
