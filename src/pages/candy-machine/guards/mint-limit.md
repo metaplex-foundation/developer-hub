@@ -19,7 +19,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% /node %}
 
-{% node parent="candy-machine" y="100" x="22" %}
+{% node parent="candy-machine" y="100" x="20" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node theme="dimmed" %}
 Owner: Candy Guard Program {% .whitespace-nowrap %}
@@ -72,7 +72,7 @@ Mint Counter PDA {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
-{% edge from="candy-guard" to="candy-machine" /%}
+{% edge from="candy-guard" to="candy-machine" path="straight" /%}
 
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
