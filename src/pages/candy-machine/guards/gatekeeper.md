@@ -30,8 +30,8 @@ Here are some additional recommended materials you may find helpful when setting
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
 {% node #gatekeeper label="Gatekeeper" /%}
-{% node #gatekeeper-network label="Gatekeeper Network" /%}
-{% node #expire label="Expire on use" /%}
+{% node #gatekeeper-network label="- Gatekeeper Network" /%}
+{% node #expire label="- Expire on use" /%}
 {% node label="..." /%}
 {% /node %}
 

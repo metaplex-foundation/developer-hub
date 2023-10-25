@@ -26,8 +26,8 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
 {% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
 {% node #mintLimit label="MintLimit" /%}
-{% node #limit label="Limit" /%}
-{% node #id label="ID" /%}
+{% node #limit label="- Limit" /%}
+{% node #id label="- ID" /%}
 {% node label="..." /%}
 {% /node %}
 

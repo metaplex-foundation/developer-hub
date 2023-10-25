@@ -587,9 +587,9 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 {% /node %}
 {% node #guards label="Guards" theme="mint" z=1 /%}
 {% node #freezeTokenPayment label="Freeze Token Payment" /%}
-{% node #amount label="Amount = 300"  /%}
-{% node #mint label="Mint" /%}
-{% node #destination-ata label="Destination ATA" /%}
+{% node #amount label="- Amount"  /%}
+{% node #mint label="- Mint" /%}
+{% node #destination-ata label="- Destination ATA" /%}
 {% node label="..." /%}
 {% /node %}
 {% edge from="destination-ata" to="token-account" arrow="none" dashed=true arrow="none" /%}

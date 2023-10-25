@@ -24,7 +24,7 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
 {% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
 {% node #nftBurn label="nftBurn" /%}
-{% node #requiredCollection label="Required Collection" /%}
+{% node #requiredCollection label="- Required Collection" /%}
 {% node label="..." /%}
 {% /node %}
 

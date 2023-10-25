@@ -24,8 +24,8 @@ Additionally, the Bot Tax guard enables us to ensure the mint instruction was th
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1 /%}
 {% node #botTax label="botTax" /%}
-{% node #lamports label="Lamports" /%}
-{% node #lastInstruction label="Last Instruction" /%}
+{% node #lamports label="- Lamports" /%}
+{% node #lastInstruction label="- Last Instruction" /%}
 {% node label="..." /%}
 {% /node %}
 

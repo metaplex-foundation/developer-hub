@@ -14,12 +14,16 @@ The limit is set per identifier — provided in the settings — to allow multip
 
 {% node %}
 {% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
-{% node parent="candy-machine" y="100" x="22" %}
+{% node parent="candy-machine" y="100" x="20" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+Owner: Candy Guard Program {% .whitespace-nowrap %}
+{% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
 {% node #allocation label="Allocation" /%}
 {% node label="- id" /%}
@@ -33,8 +37,8 @@ Allocation Tracker PDA {% .whitespace-nowrap %}
 {% /node %}
 {% /node %}
 
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
+{% node parent="candy-machine" #mint-candy-guard x="600" %}
+  {% node theme="pink" %}
     Mint from
 
     _Candy Guard Program_ {% .whitespace-nowrap %}
@@ -44,8 +48,8 @@ Allocation Tracker PDA {% .whitespace-nowrap %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" y="150" x="-8" %}
-  {% node #mint-candy-machine theme="pink" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+  {% node theme="pink" %}
     Mint from 
     
     _Candy Machine Program_ {% .whitespace-nowrap %}
