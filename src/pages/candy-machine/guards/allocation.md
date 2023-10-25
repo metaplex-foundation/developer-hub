@@ -28,33 +28,34 @@ The limit is set per identifier — provided in the settings — to allow multip
 {% /node %}
 
 {% node parent="allocation" x="270" y="-9" %}
-{% node #pda label="Allocation Tracker PDA" theme="indigo" /%}
-{% node label="counter" theme="dimmed" /%}
+{% node #pda theme="indigo" %}
+Allocation Tracker PDA {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
 {% node parent="candy-machine" x="600" %}
   {% node #mint-candy-guard theme="pink" %}
     Mint from
 
-    _Candy Guard Program_
+    _Candy Guard Program_ {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" y="150" x="-15" %}
+{% node parent="mint-candy-guard" y="150" x="-8" %}
   {% node #mint-candy-machine theme="pink" %}
     Mint from 
     
-    _Candy Machine Program_
+    _Candy Machine Program_ {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="79" theme="blue" %}
+{% node #nft parent="mint-candy-machine" y="140" x="71" theme="blue" %}
   NFT
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
@@ -62,7 +63,9 @@ The limit is set per identifier — provided in the settings — to allow multip
 {% edge from="candy-guard" to="candy-machine" /%}
 {% edge from="allocation" to="pda" arrow="none" /%}
 {% edge from="pda" to="mint-candy-guard" arrow="none" fromPosition="top" dashed=true%}
-if the allocation tracker count is equal to the limit
+if the allocation tracker count 
+
+is equal to the limit
 
 Minting will fail
 {% /edge %}
