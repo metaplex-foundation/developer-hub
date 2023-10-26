@@ -25,7 +25,7 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
 {% node label="Token Gate" /%}
 {% node #guardAmount label="- Amount" /%}
-{% node #guardMint label="- Mint" /%}
+{% node #guardMint label="- Token Mint" /%}
 {% node label="..." /%}
 {% /node %}
 
@@ -72,7 +72,7 @@ Check that the
 
 payer's token account
 
-contains x amount tokens
+contains x amount tokens{% .whitespace-nowrap %}
 {% /edge %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
