@@ -6,9 +6,62 @@ description: "The Start Date guard determines the start date of the mint."
 
 ## Overview
 
-The **Start Date** guard determines the start date of the mint. Before this date, minting is not allowed.
+The **Start Date** guard determines the start date of the mint. Before this date, minting is not allowed.
 
-![CandyMachinesV3-GuardsStartDate.png](https://docs.metaplex.com/assets/candy-machine-v3/CandyMachinesV3-GuardsStartDate.png#radius)
+{% diagram  %}
+
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="candy-machine" y="100" x="22" %}
+{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node #candy-guard-guards label="Guards" theme="mint"/%}
+{% node #startDate label="startDate" /%}
+{% node #date label="- Date" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="candy-machine" #mint-candy-guard x="500" %}
+  {% node theme="pink" %}
+    Mint from
+
+    _Candy Guard Program_
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
+  Access Control
+{% /node %}
+
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+  {% node theme="pink" %}
+    Mint from 
+    
+    _Candy Machine Program_
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-machine" y="-20" x="110" theme="transparent" %}
+  Mint Logic
+{% /node %}
+
+{% node #nft parent="mint-candy-machine" y="120" x="70" theme="blue" %}
+  NFT
+{% /node %}
+{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+
+{% edge from="candy-guard" to="candy-machine" /%}
+{% edge from="date" to="mint-candy-guard" arrow="none" dashed=true %}
+Before that date
+
+minting will fail
+{% /edge %}
+
+{% edge from="candy-guard-guards" to="guards" /%}
+{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+
+{% /diagram %}
 
 ## Guard Settings
 
