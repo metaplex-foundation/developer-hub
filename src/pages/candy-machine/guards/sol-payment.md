@@ -8,7 +8,73 @@ description: "The Sol Payment guard allows us to charge the payer an amount in S
 
 The **Sol Payment** guard allows us to charge the payer an amount in SOL when minting. Both the amount of SOL and the destination address can be configured.
 
-![CandyMachinesV3-GuardsSolPayment.png](https://docs.metaplex.com/assets/candy-machine-v3/CandyMachinesV3-GuardsSolPayment.png#radius)
+{% diagram  %}
+
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="candy-machine" y="100" x="20" %}
+{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Guard Program {% .whitespace-nowrap %}
+{% /node %}
+{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
+{% node label="Sol Payment" /%}
+{% node #amount label="- Amount" /%}
+{% node #destination label="- Destination" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="destination" x="270" y="-9" %}
+{% node #payer theme="indigo" %}
+Destination Wallet {% .whitespace-nowrap %}
+{% /node %}
+{% node theme="dimmed" %}
+Owner: System Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="candy-machine" x="600" %}
+  {% node #mint-candy-guard theme="pink" %}
+    Mint from
+
+    _Candy Guard Program_{% .whitespace-nowrap %}
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
+  Access Control
+{% /node %}
+
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+  {% node theme="pink" %}
+    Mint from 
+    
+    _Candy Machine Program_{% .whitespace-nowrap %}
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
+  Mint Logic
+{% /node %}
+
+{% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
+  NFT
+{% /node %}
+{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+
+{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge from="destination" to="payer" arrow="none" dashed=true /%}
+{% edge from="mint-candy-guard" to="payer" %}
+Transfers SOL
+
+from the payer
+{% /edge %}
+{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+
+{% /diagram %}
 
 ## Guard Settings
 
