@@ -24,6 +24,7 @@ export const tokenAuthRules = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/token-auth-rules' },
+            { title: 'Metaplex Rule Sets', href: '/token-auth-rules/mplx-rule-sets' },
           ],
         },
         {
