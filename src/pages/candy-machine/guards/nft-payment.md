@@ -10,7 +10,92 @@ The **NFT Payment** guard allows minting by charging the payer an NFT from a spe
 
 If the payer does not own an NFT from the required collection, minting will fail.
 
-![CandyMachinesV3-GuardsNFTPayment.png](https://docs.metaplex.com/assets/candy-machine-v3/CandyMachinesV3-GuardsNFTPayment.png#radius)
+{% diagram  %}
+
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="candy-machine" y="100" x="20" %}
+{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Guard Program {% .whitespace-nowrap %}
+{% /node %}
+{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
+{% node label="nftGate" /%}
+{% node #guardRequiredCollection label="- Required Collection" /%}
+{% node #guardDestinationWallet label="- Destination Wallet" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="guardRequiredCollection" #collectionNftMint x="270" y="-100"  %}
+{% node theme="blue" %}
+Collection NFT {% .whitespace-nowrap %}
+
+Mint Account
+{% /node %}
+{% node theme="dimmed" %}
+Owner: Token Metadata Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+{% edge from="guardRequiredCollection" to="collectionNftMint" /%}
+
+{% node parent="guardDestinationWallet" #destinationWallet x="300"  %}
+{% node theme="blue" %}
+Destination Wallet {% .whitespace-nowrap %}
+{% /node %}
+{% node theme="dimmed" %}
+Owner: System Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+{% edge from="guardDestinationWallet" to="destinationWallet" /%}
+
+
+{% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true arrow="none" %}
+Transfers 
+
+1 NFT from
+
+this collection
+{% /edge %}
+
+{% edge from="mint-candy-guard" to="destinationWallet" theme="indigo" %}
+{% /edge %}
+{% node parent="candy-machine" #mint-candy-guard x="600" %}
+  {% node theme="pink" %}
+    Mint from
+
+    _Candy Guard Program_{% .whitespace-nowrap %}
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
+  Access Control
+{% /node %}
+
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
+  {% node theme="pink" %}
+    Mint from 
+    
+    _Candy Machine Program_{% .whitespace-nowrap %}
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
+  Mint Logic
+{% /node %}
+
+{% node #nft parent="mint-candy-machine" y="140" x="71" theme="blue" %}
+  NFT
+{% /node %}
+{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+
+{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+
+{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+
+{% /diagram %}
 
 ## Guard Settings
 

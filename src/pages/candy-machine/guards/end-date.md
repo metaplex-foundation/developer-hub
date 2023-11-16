@@ -19,18 +19,13 @@ The **End Date** guard specifies a date to end the mint. After this date, mintin
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
 {% node #candy-guard-guards label="Guards" theme="mint"/%}
+{% node #endDate label="endDate" /%}
+{% node #date label="- Date" /%}
 {% node label="..." /%}
 {% /node %}
 
-{% node parent="candy-guard" y="49" x="250" %}
-{% node #guards label="Guards" theme="mint" /%}
-{% node #endDate label="endDate" theme="mint" /%}
-{% node #date label="Date" theme="mint" /%}
-{% node label="..." theme="dimmed" /%}
-{% /node %}
-
-{% node parent="candy-machine" x="500" %}
-  {% node #mint-candy-guard theme="pink" %}
+{% node parent="candy-machine" #mint-candy-guard x="500" %}
+  {% node theme="pink" %}
     Mint from
 
     _Candy Guard Program_
@@ -40,8 +35,8 @@ The **End Date** guard specifies a date to end the mint. After this date, mintin
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" y="150" x="-8" %}
-  {% node #mint-candy-machine theme="pink" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+  {% node theme="pink" %}
     Mint from 
     
     _Candy Machine Program_
@@ -51,7 +46,7 @@ The **End Date** guard specifies a date to end the mint. After this date, mintin
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="120" x="76" theme="blue" %}
+{% node #nft parent="mint-candy-machine" y="120" x="70" theme="blue" %}
   NFT
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
@@ -65,7 +60,6 @@ minting will fail
 
 {% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 

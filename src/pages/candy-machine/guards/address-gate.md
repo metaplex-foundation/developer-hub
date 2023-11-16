@@ -12,51 +12,58 @@ The **Address Gate** guard restricts the mint to a single address which must m
 
 {% node %}
 {% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
-{% node parent="candy-machine" y="100" x="22" %}
+{% node parent="candy-machine" y="100" x="20" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+Owner: Candy Guard Program {% .whitespace-nowrap %}
+{% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
 {% node #addressGate label="AddressGate" /%}
+{% node #address label="- Address" /%}
 {% node label="..." /%}
 {% /node %}
 
-{% node parent="addressGate" x="270" y="-9" %}
+{% node parent="address" x="270" y="-9" %}
 {% node #payer label="Payer" theme="indigo" /%}
-{% node label="Owner: Any Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+Owner: Any Program {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
 {% node parent="candy-machine" x="600" %}
   {% node #mint-candy-guard theme="pink" %}
     Mint from
 
-    _Candy Guard Program_
+    _Candy Guard Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" y="150" x="-8" %}
-  {% node #mint-candy-machine theme="pink" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+  {% node theme="pink" %}
     Mint from 
     
-    _Candy Machine Program_
+    _Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="75" theme="blue" %}
+{% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
   NFT
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
-{% edge from="candy-guard" to="candy-machine" /%}
-{% edge from="addressGate" to="payer" arrow="none" dashed=true /%}
+{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge from="address" to="payer" arrow="none" dashed=true /%}
 {% edge from="payer" to="mint-candy-guard" arrow="none" dashed=true%}
 if the payer does not match the address on the guard 
 

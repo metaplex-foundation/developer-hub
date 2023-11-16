@@ -94,27 +94,35 @@ Note that our SDKs provide helpers to make it easy to create Merkle Root and Mer
 
 {% node %}
 {% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
-{% node parent="candy-machine" y="100" x="22" %}
+{% node parent="candy-machine" y="100" x="20" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node theme="dimmed" %}
+Owner: Candy Guard Program {% .whitespace-nowrap %}
+{% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1 /%}
 {% node #allowList label="AllowList" /%}
-
+{% node #guardMerkleRoot label="- Merkle Root" /%}
 {% node label="..." /%}
 {% /node %}
 
-{% node parent="allowList" x="250" y="-10" %}
-{% node #merkleRoot label="Merkle Root" theme="slate" /%}
+{% node parent="allowList" x="250" y="10" %}
+{% node #merkleRoot theme="slate" %}
+Merkle Root {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
 {% node parent="merkleRoot" x="170" %}
-{% node #merkleProof label="Merkle Proof" theme="slate" /%}
+{% node #merkleProof theme="slate" %}
+Merkle Proof {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
-{% node parent="merkleRoot" y="100" x="-11" %}
+{% node parent="merkleRoot" y="100" x="-12" %}
 {% node #walletList  %}
 List of wallets
 
@@ -127,7 +135,9 @@ allowed to mint
 
 {% node parent="merkleProof" y="100" %}
 {% node #payer label="Payer" theme="indigo" /%}
-{% node label="Owner: Any Program" theme="dimmed" /%}
+{% node theme="dimmed"%}
+Owner: Any Program {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 {% edge from="merkleProof" to="payer" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" path="straight" /%}
 
@@ -142,39 +152,41 @@ allowed to mint
   Verify Merkle Proof
 {% /node %}
 
-{% node parent="route-validation" y="150" x="29" %}
-{% node #allowList-pda label="Allow List PDA" theme="slate" /%}
+{% node parent="route-validation" #allowList-pda y="130" x="32" %}
+{% node theme="slate" %}
+Allowlist PDA {% .whitespace-nowrap %}
+{% /node %}
 {% /node %}
 
-{% node parent="allowList-pda" y="110" x="-30" %}
-  {% node #mint-candy-guard theme="pink" %}
+{% node parent="allowList-pda" #mint-candy-guard y="90" x="-31" %}
+  {% node theme="pink" %}
     Mint from
 
-    _Candy Guard Program_
+    _Candy Guard Program_ {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" y="110" x="-8" %}
-  {% node #mint-candy-machine theme="pink" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="110" x="-8" %}
+  {% node theme="pink" %}
     Mint from 
     
-    _Candy Machine Program_
+    _Candy Machine Program_ {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-machine" y="-20" x="110" theme="transparent" %}
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="110" x="76" theme="blue" %}
+{% node #nft parent="mint-candy-machine" y="110" x="70" theme="blue" %}
   NFT
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
 {% edge from="candy-guard" to="candy-machine" /%}
-{% edge from="allowList" to="merkleRoot" arrow="start" path="straight" /%}
+{% edge from="guardMerkleRoot" to="merkleRoot" arrow="start" path="straight" /%}
 {% edge from="merkleRoot" to="route-validation" arrow="none" fromPosition="top" dashed=true /%}
 {% edge from="merkleProof" to="route-validation" arrow="none" fromPosition="top" dashed=true  %}
 if the payer's Merkle Proof does not match 

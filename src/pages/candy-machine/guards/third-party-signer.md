@@ -10,8 +10,74 @@ The **Third Party Signer** guard requires a predefined address to sign each mint
 
 This allows for more centralized mints where every single mint transaction has to go through a specific signer.
 
-![CandyMachinesV3-GuardsThirdPartySigner.png](https://docs.metaplex.com/assets/candy-machine-v3/CandyMachinesV3-GuardsThirdPartySigner.png#radius)
+{% diagram  %}
 
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="candy-machine" y="100" x="20" %}
+{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Guard Program {% .whitespace-nowrap %}
+{% /node %}
+{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
+{% node label="Third Party Signer" /%}
+{% node #guardSigner label="- Signer" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="guardSigner" #signer x="270" y="-19" %}
+{% node  theme="indigo" %}
+Signer {% .whitespace-nowrap %}
+{% /node %}
+{% node theme="dimmed" %}
+Owner: Any Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="candy-machine" x="600" %}
+  {% node #mint-candy-guard theme="pink" %}
+    Mint from
+
+    _Candy Guard Program_{% .whitespace-nowrap %}
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
+  Access Control
+{% /node %}
+
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+  {% node theme="pink" %}
+    Mint from 
+    
+    _Candy Machine Program_{% .whitespace-nowrap %}
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
+  Mint Logic
+{% /node %}
+
+{% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
+  NFT
+{% /node %}
+{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+
+{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge from="guardSigner" to="signer" arrow="none" dashed=true /%}
+{% edge from="mint-candy-guard" to="signer" arrow="none" dashed=true  theme="pink" %}
+If this Signer Account does not
+
+sign the mint transaction
+
+minting will fail
+{% /edge %}
+{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+
+{% /diagram %}
 ## Guard Settings
 
 The Third Party Signer guard contains the following settings:

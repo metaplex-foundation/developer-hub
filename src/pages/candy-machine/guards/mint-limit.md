@@ -10,7 +10,73 @@ The **Mint Limit** guard allows specifying a limit on the number of NFTs each wa
 
 The limit is set per wallet, per candy machine and per identifier — provided in the settings — to allow multiple mint limits within the same Candy Machine.
 
-![CandyMachinesV3-GuardsMintLimit.png](https://docs.metaplex.com/assets/candy-machine-v3/CandyMachinesV3-GuardsMintLimit.png#radius)
+{% diagram  %}
+
+{% node %}
+{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="candy-machine" y="100" x="20" %}
+{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Candy Guard Program {% .whitespace-nowrap %}
+{% /node %}
+{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
+{% node #mintLimit label="MintLimit" /%}
+{% node #limit label="- Limit" /%}
+{% node #id label="- ID" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% node parent="id" x="270" y="-9"  %}
+{% node #mintCounterPda %}
+Mint Counter PDA {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+{% edge from="payer" to="mintCounterPda" path="straight" /%}
+{% edge from="id" to="mintCounterPda" /%}
+
+{% node parent="mintCounterPda" x="18" y="100" %}
+{% node #payer label="Payer" theme="indigo" /%}
+{% node label="Owner: Any Program" theme="dimmed" /%}
+{% /node %}
+
+{% edge from="mintLimit" to="mint-candy-guard" theme="indigo" dashed=true/%}
+{% node parent="candy-machine" x="600" %}
+  {% node #mint-candy-guard theme="pink" %}
+    Mint from
+
+    _Candy Guard Program_
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
+  Access Control
+{% /node %}
+
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+  {% node  theme="pink" %}
+    Mint from 
+    
+    _Candy Machine Program_
+  {% /node %}
+{% /node %}
+{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
+  Mint Logic
+{% /node %}
+
+{% node #nft parent="mint-candy-machine" y="140" x="71" theme="blue" %}
+  NFT
+{% /node %}
+{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+
+{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+
+{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+
+{% /diagram %}
 
 ## Guard Settings
 

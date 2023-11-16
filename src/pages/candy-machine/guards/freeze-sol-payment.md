@@ -197,8 +197,8 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% node label="Owner: Candy Guard Program" theme="dimmed" /%}
 {% node #guards label="Guards" theme="mint" z=1/%}
 {% node #freezeSolPayment label="Freeze Sol Payment" /%}
-{% node #amount label="Amount"  /%}
-{% node #destination label="Destination" /%}
+{% node #amount label="- Amount"  /%}
+{% node #destination label="- Destination" /%}
 {% node label="..." /%}
 {% /node %}
 
