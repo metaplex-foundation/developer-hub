@@ -146,7 +146,7 @@ Add this object into the guard section your config.json file:
 
 ```json
 "token2022Payment" : {
-    "amount": number,
+    "amount": number including decimals (e.g. 1000 for 1 Token that has 3 decimals),
     "mint": "<PUBKEY>",
     "destinationAta": "<PUBKEY>"
 }
