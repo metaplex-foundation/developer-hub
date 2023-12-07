@@ -707,7 +707,7 @@ When using multiple Freeze Sol Payment guards within various [Guard Groups](/pro
 
 The Freeze Escrow account is a PDA derived from a Destination address. This means that if **multiple Freeze Sol Payment guards** are configured to use the **same Destination address**, they will all **share the same Freeze Escrow account**.
 
-Therefore, they will also share the same Freeze Period and all funds will be collected by the same escrow account. This also means, we only need to call the `initialize` route instruction once per configured Destination address.
+Therefore, they will also share the same Freeze Period and all funds will be collected by the same escrow account. This also means, we only need to call the `initialize` route instruction once per configured Destination address. This implies that the route instruction is only required once per the configured Destination address.  Same applies for `unlockFunds`. To `thaw` you can use whichever label you like provided that those shared the same escrow account.
 
 It is also possible to use multiple Freeze Sol Payment guards with different Destination addresses. In this case, each Freeze Sol Payment guard will have its own Freeze Escrow account and its own Freeze Period.
 
