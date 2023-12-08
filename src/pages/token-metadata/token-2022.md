@@ -166,101 +166,101 @@ By default, `Create` and `Mint` will create SPL Token mint and token accounts if
 
 While Token-2022 provides several extensions, the majority of extensions focus on fungible tokens. For example, the `confidential transfer` can be used to hide the amount of tokens transferred. While this is relevant for fungibles, since the amount can vary across different transfers, it is not applicable to non-fungible tokens since their supply is always `1` and decimals is always `0`. Hence, the transfer amount of a non-fungible token will always be `1`.
 
-Token Metadata enforces restrictions on the type of extensions that can be present on mint and token accounts based on the `Token Standard`. For `Fungible` and `FungibleAsset` standards, no restrictions are placed. For `NonFungible` and `ProgrammableNonFungible` standards, Token Metadata validates which extensions are enabled and restricts the set of extensions that can be used.
+Token Metadata enforces restrictions on the type of extensions that can be present on mint and token accounts based on the `Token Standard`. For fungible assets (`Fungible` and `FungibleAsset` standards), no restrictions are placed – the only restriction is on the program providing the metadata information. For non-fungible assets (`NonFungible` and `ProgrammableNonFungible` standards), Token Metadata validates which extensions are enabled and restricts the set of extensions that can be used.
 
 ### Mint account extensions
 
 - `confidential transfers`: hides the transfer amount during transfers.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ❌             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ❌            |
   | Details        | -        | Not applicable since non-fungibles have supply of `1` |
 
 - `transfer fees`: allow to configure a transfer fee derived from the amount being transferred.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ❌             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ❌            |
   | Details        | -        | Not applicable since non-fungibles have supply of `1` |
 
 - `closing mint`: allows closing mint accounts when supply reaches `0`.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ❌             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ❌            |
   | Details        | Must specify the `Metadata` account as the close authority | Potential for a creator to recreate the same group of mint and metadata accounts |
 
 - `interest-bearing tokens`: allows to change how the UI amount of tokens are represented.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ❌             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ❌            |
   | Details        | -        | Not applicable since non-fungibles have supply of `1` |
 
 - `non-transferable tokens`: allows for "soul-bound" tokens that cannot be moved to any other address.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ✅             |
-  | Details        | -        | -             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ✅            |
+  | Details        | -        | -            |
 
 - `permanent delegate`: allows to specify a permanent account delegate for any token account of a mint.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ❌             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ❌            |
   | Details        | -        | This changes the concept of ownership |
 
 - `transfer hook`: allows call into third-party programs during transfer.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ❌             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ❌            |
   | Details        | -        | Token Metadata specifies the logic for transfer |
 
 - `metadata pointer`: allows adding an address that describes the canonical metadata.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ✅             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ✅            |
   | Details        | Must point to the `Metadata` address | Must point to the `Metadata` address |
 
 - `metadata`: allow adding metadata directly to mint accounts.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ❌       | ❌             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ❌       | ❌            |
   | Details        | Metadata information is added by Token Metadata | Metadata information is added by Token Metadata |
 
 ### Token account extensions
 
 - `memo required`: requires memo on transfers.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ❌             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ❌            |
   | Details        | -        | Not applicable |
 
 - `immutable ownership`: disables the ability to change the ownership of token accounts.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ✅             |
-  | Details        | -        | -             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ✅            |
+  | Details        | -        | -            |
 
 - `default account state`: allows to configure default token account states.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ❌             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ❌            |
   | Details        | -        | Token Metadata validates the account state |
 
 - `CPI guard`: prevent certain actions (e.g., transfer) inside cross-program invocations.
 
-  | Token Standard | Fungible | Non Funginble |
-  | -------------- | :------: |:------------: |
-  | Allowed        | ✅       | ❌             |
+  | Asset          | Fungible | Non-Fungible |
+  | -------------- | :------: |:------------:|
+  | Allowed        | ✅       | ❌            |
   | Details        | -        | Token Metadata specifies the logic for transfer |
 
 {% callout %}
