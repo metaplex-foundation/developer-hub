@@ -8,6 +8,8 @@ SPL Token-2022 is the latest token program on the Solana blokchain that can be u
 
 In order to support adding metadata information to Token-2022 mint accounts, a set of Token Metadata instructions have been updated to allow specified the desired token program. For example, Token Metadata can initialize a Token-2022 mint, create metadata and mint tokens using the `Create` and `Mint` instructions and specifying the SPL Token-2022 as the token program to use.
 
+{% totem %}
+
 {% dialect-switcher title="Specifying token program on Create and Mint" %}
 {% dialect title="JavaScript" id="js" %}
 
@@ -160,6 +162,8 @@ client.send_and_confirm_transaction(&tx)?;
 The token program of a mint account can be determined by checking the `owner` property of the account.
 
 {% /totem-prose %}
+
+{% /totem %}
 
 A similar approach can be used for other instructions, such as `Burn`, `Delegate`, `Lock`, `Print`, `Revoke`, `Transfer`, `Unlock`, `Unverify`, `Update`and `Verify`. These instruction can validate mint and token accounts from SPL Token-2022. The corresponding token program must be used in any instruction requiring a token program (e.g., `Delegate`): if the mint and token account are from Token-2022, then the `Delegate` instruction will validate that the correct token program has been specified.
 
