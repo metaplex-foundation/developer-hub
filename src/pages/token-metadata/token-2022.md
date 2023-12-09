@@ -152,6 +152,12 @@ client.send_and_confirm_transaction(&tx)?;
 
 {% /totem-accordion  %}
 
+{% totem-prose %}
+
+The token program of a mint account can be determined by checking the `owner` property of the account.
+
+{% /totem-prose %}
+
 {% /dialect %}
 
 {% /dialect-switcher %}
