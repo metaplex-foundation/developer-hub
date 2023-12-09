@@ -154,13 +154,12 @@ client.send_and_confirm_transaction(&tx)?;
 
 {% /dialect %}
 
+{% /dialect-switcher %}
 {% totem-prose %}
 
 The token program of a mint account can be determined by checking the `owner` property of the account.
 
 {% /totem-prose %}
-
-{% /dialect-switcher %}
 
 A similar approach can be used for other instructions, such as `Burn`, `Delegate`, `Lock`, `Print`, `Revoke`, `Transfer`, `Unlock`, `Unverify`, `Update`and `Verify`. These instruction can validate mint and token accounts from SPL Token-2022. The corresponding token program must be used in any instruction requiring a token program (e.g., `Delegate`): if the mint and token account are from Token-2022, then the `Delegate` instruction will validate that the correct token program has been specified.
 
