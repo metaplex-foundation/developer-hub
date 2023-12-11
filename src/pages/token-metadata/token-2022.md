@@ -4,7 +4,7 @@ metaTitle: Token Metadata - SPL Token-2022
 description: Learn about how SPL Token-2022 is integrated with Token Metadata
 ---
 
-SPL Token-2022 is the latest token program on the Solana blokchain that can be used to create fungible and non-fungible tokens. It supports the same functionalities and structures of the SPL Token program, but also includes a set of extensions to add new functionalities.
+SPL Token-2022 is the latest token program on the Solana blockchain that can be used to create fungible and non-fungible tokens. It supports the same functionalities and structures of the SPL Token program, but also includes a set of extensions to add new functionalities.
 
 In order to support adding metadata information to Token-2022 mint accounts, a set of Token Metadata instructions have been updated to allow specified the desired token program. For example, Token Metadata can initialize a Token-2022 mint, create metadata and mint tokens using the `Create` and `Mint` instructions and specifying the SPL Token-2022 as the token program to use.
 
