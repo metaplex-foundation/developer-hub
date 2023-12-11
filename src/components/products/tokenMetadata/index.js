@@ -56,6 +56,7 @@ export const tokenMetadata = {
             { title: 'Locking Assets', href: '/token-metadata/lock' },
             { title: 'Programmable NFTs', href: '/token-metadata/pnfts' },
             { title: 'NFT Escrow', href: '/token-metadata/escrow' },
+            { title: 'SPL Token-2022', href: '/token-metadata/token-2022' },
           ],
         },
       ],
