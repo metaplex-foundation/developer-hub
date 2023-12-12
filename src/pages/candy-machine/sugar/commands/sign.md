@@ -18,12 +18,11 @@ And running with a specific keypair:
 sugar sign -k creator-keypair.json
 ```
 
-Note using `sugar sign` relies on a standard `getProgramAccounts` call to the Metaplex Token Metadata program (i.e., `metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s`). Ensure that the RPC node you use supports standard gPA calls to that address, as it can be pretty intensive. Developers can provide a custom RPC URL with the command:
+Developers can provide a custom RPC URL with the command:
 ```
 sugar sign -r <RPC_URL>
 ```
-
-Alternatively, NFTs can be signed one at a time using the command:
+Note using `sugar sign` relies on a standard `getProgramAccounts` call to the Metaplex Token Metadata program (i.e., `metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s`). This is very inefficient. The recommended solution is to sign NFTs individually using the command:
 ```
 sugar sign -m <MINT_ADDRESS>
 ```
