@@ -28,7 +28,7 @@ Umi ships with an `uploader` interface that can be used to upload JSON data to t
 
 ```ts
 import { nftStorage } from '@metaplex-foundation/umi-uploader-nft-storage'
-umi.use(nftStorage())
+umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
 ```
 
 You may then use the `upload` and `uploadJson` methods of the `uploader` interface to upload your assets and their JSON metadata.
