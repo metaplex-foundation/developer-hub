@@ -22,7 +22,7 @@ Developers can provide a custom RPC URL with the command:
 ```
 sugar sign -r <RPC_URL>
 ```
-Note using `sugar sign` relies on an inefficient `getProgramAccounts` call to the Metaplex Token Metadata program (i.e., `metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s`). The recommended solution is to sign NFTs individually using the command:
+Note using `sugar sign` relies on an inefficient `getProgramAccounts` call on the Metaplex Token Metadata program (i.e., `metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s`). The recommended solution is to sign NFTs individually using the command:
 ```
 sugar sign -m <MINT_ADDRESS>
 ```
