@@ -10,18 +10,22 @@ Clearing the data removes all existing data resizes the inscription account to 0
 
 Here is how you can use our SDKs to clear inscription data.
 
-{% dialect-switcher title="Update Assets" %}
+{% dialect-switcher title="Clear Inscription Data" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```ts
 import { clearData } from '@metaplex-foundation/mpl-inscription'
 
-clearData( umi, {
+const inscriptionMetadataAccount = await findInscriptionMetadataPda(umi, {
+  inscriptionAccount: inscriptionAccount.publicKey,
+})
+
+await clearData(umi, {
   inscriptionAccount: inscriptionAccount.publicKey,
   inscriptionMetadataAccount,
   associatedTag: null, //use the same tag here as you used on creation
-  })
+})
 ```
 
 The `associatedTag` is used to derive the associated inscription account correctly.
