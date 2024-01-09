@@ -3,8 +3,7 @@ title: Overview
 metaTitle: Inscriptions - Overview
 description: Provides a high-level overview of the Metaplex Inscriptions standard.
 ---
-
-The Metaplex Inscription Program allows you to write data on-chain. This Data can be attached to NFTs but does not have to be. In this overview, we explain what this program does and how we can leverage its various features at a high level. {% .lead %}
+The Metaplex Inscription Program allows you to write data directly to Solana, using the blockchain as a method of data storage. The Inscription program also allows for this data storage to be optionally linked to an NFT. In this overview, we explain how this program works and how we can leverage its various features at a high level. {% .lead %}
 
 {% quick-links %}
 
@@ -16,9 +15,7 @@ The Metaplex Inscription Program allows you to write data on-chain. This Data ca
 
 ## Introduction
 
-The inscription program allows you to write that data directly to the chain. When used with NFTs, you can store everything related to the Metadata on Solana and do not have to rely on anything else. Before NFT Metadata was mostly stored off chain, for example on Arweave or nft.storage.
-
-There are two different kinds of Inscriptions:
+NFT JSON data and Images have historically been stored on decentralized storage providers like Arweave or IPFS. The Inscription program introduces Solana as another option for NFT data storage, allowing you to write that data directly to the chain. The Metaplex Inscription program introduces the novel use case of all of an NFT's associated data now being stored on Solana. This enables many new use cases such as Solana programs with trait-based bids, dynamic images that are updated via programs, or even RPG game state on-chain.
 
 1. Inscriptions **[attached to NFT Mints](#inscriptions-attached-to-nft-mints)** - Metadata is written to chain instead or in addition to off chain storage
 2. Inscriptions as **[storage providers](#inscriptions-as-storage-provider)** - Write arbitrary data to chain
