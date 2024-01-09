@@ -4,7 +4,7 @@ metaTitle: Inscriptions - Getting Started
 description: Get started with Metaplex Inscriptions.
 ---
 
-Select the language / library you want to use below to get started with NFTs.
+Select the language / library you want to use below to get started with Inscriptions.
 
 {% quick-links %}
 

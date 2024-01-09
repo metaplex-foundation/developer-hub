@@ -1,14 +1,13 @@
 ---
 title: Overview
-metaTitle: Token Metadata - Overview
-description: Provides a high-level overview of the Solana NFT standard.
+metaTitle: Inscriptions - Overview
+description: Provides a high-level overview of the Metaplex Inscriptions standard.
 ---
-
-Inscribing is the practice of treating the Solana blockchain as a form of data storage, much like Arweave or IPFS. While other data storage providers provide their own immutability and data integrity guarantees, there is demand for data directly on the native chain of the underlying NFT. Features such as dynamic metadata and images, on-chain attribute orders, and trait locked smart contracts all become possible with inscribed metadata. {% .lead %}
+The Metaplex inscription Program allows you to write data on chain. This Data can be attached to NFTs, but does not has to be. In this overview, we explain what this program does and how we can leverage its various features at a high level. {% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/inscription/getting-started" description="Find the language or library of your choice and get started with inscribing data on Solana." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/inscription/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="/inscription/references" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
@@ -16,15 +15,26 @@ Inscribing is the practice of treating the Solana blockchain as a form of data s
 
 ## Introduction
 
-Metaplex inscriptions have two operating modes:
+Before NFT Metadata was mostly stored off chain for example on Arweave or nft.storage. The inscription program allows you to instead write that data directly to the chain. When used with NFTs you can store everything related to the Metadata on Solana and do not have to rely on anything else.
 
-- Metadata inscribing
-- Direct data storage
+There are two different kinds of Inscriptions:
+1. Inscriptions attached to NFT Mints.
+2. Inscriptions as storage providers.
 
-In both modes binary data of any format can be directly written to the chain through the Metaplex Inscription program. In addition, the Metaplex SDKs provide direct support for inscribing schemas commonly used for NFTs (i.e. JSON and Image formats).
+Together with the [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway) you can use the normal Token Metadata Standard and just point the URI to the gateway which again reads your data directly from chain without all players like wallets and explorers reading the data have to read it any differently than NFTs are read usually.   
 
-The Metadata inscribing method creates a PDA attached to a mint account, the same way Metadata is attached to a token mint. The JSON and image data of the NFT can then be written directly to the chain in the PDA. This method provides a backup of the NFT data in the event that current data storage providers should ever go down and means the asset is “fully on Solana.”
 
-Mint inscriptions also include a ranking, which offers a FCFS rarity claim when inscribing an NFT. Using a sharded counter to prevent resource contention, the Mint inscriptions are globally ranked based on their minting order. The direct data storage can be used as a direct alternative to providers like Arweave and IPFS, rather than as a backup. JSON and Image data can be written directly to the chain. One small caveat of this method is that a gateway is required to enable maximum ecosystem support, much like ar.io, arweave.net, gateway.ipfs.io, etc.
 
-The Metaplex Inscription program is queued up for a full audit to prevent any security issues. The intention is for the program to be made immutable within 6 months to provide maximum security guarantees to users and the Foundation is open to moving upgrade authority into a community multi-sig sooner than this if we can find effective partners.
+## And a lot more
+
+Whilst this provides a good overview of the Inscription program and what it has to offer, there’s still a lot more that can be done with it.
+
+The other pages of this documentation aim to document it further and explain significant features in their own individual pages.
+
+- [Inscription Gateway](/inscription/gateway)
+- [Initialize](/inscription/initialize)
+- [Write](/inscription/write)
+- [Fetch](/inscription/fetch)
+- [Clear](/inscription/clear)
+- [close](/inscription/close)
+- [Authorities](/inscription/authority)
