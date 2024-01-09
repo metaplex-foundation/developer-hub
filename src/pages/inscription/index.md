@@ -3,7 +3,8 @@ title: Overview
 metaTitle: Inscriptions - Overview
 description: Provides a high-level overview of the Metaplex Inscriptions standard.
 ---
-The Metaplex inscription Program allows you to write data on chain. This Data can be attached to NFTs, but does not has to be. In this overview, we explain what this program does and how we can leverage its various features at a high level. {% .lead %}
+
+The Metaplex Inscription Program allows you to write data on-chain. This Data can be attached to NFTs but does not have to be. In this overview, we explain what this program does and how we can leverage its various features at a high level. {% .lead %}
 
 {% quick-links %}
 
@@ -15,15 +16,264 @@ The Metaplex inscription Program allows you to write data on chain. This Data ca
 
 ## Introduction
 
-Before NFT Metadata was mostly stored off chain for example on Arweave or nft.storage. The inscription program allows you to instead write that data directly to the chain. When used with NFTs you can store everything related to the Metadata on Solana and do not have to rely on anything else.
+The inscription program allows you to write that data directly to the chain. When used with NFTs, you can store everything related to the Metadata on Solana and do not have to rely on anything else. Before NFT Metadata was mostly stored off chain, for example on Arweave or nft.storage.
 
 There are two different kinds of Inscriptions:
-1. Inscriptions attached to NFT Mints.
-2. Inscriptions as storage providers.
 
-Together with the [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway) you can use the normal Token Metadata Standard and just point the URI to the gateway which again reads your data directly from chain without all players like wallets and explorers reading the data have to read it any differently than NFTs are read usually.   
+1. Inscriptions **[attached to NFT Mints](#inscriptions-attached-to-nft-mints)** - Metadata is written to chain instead or in addition to off chain storage
+2. Inscriptions as **[storage providers](#inscriptions-as-storage-provider)** - Write arbitrary data to chain
 
+Both of these types can have associated inscriptions. Those are basically accounts containing additional data. To better understand this structure, think of an NFT: The Inscription contains the JSON Metadata file, the associated Inscription Account contains the image referenced in the json.
 
+Each Inscription has a unique [Inscription Rank](#inscription-rank)
+
+### Inscriptions attached to NFT Mints
+
+Inscriptions can be used in addition to off chain storage like Arweave, where the metadata JSON and the media is stored, or can be completely replace those off chain storage using the [Inscription Gateway](#inscription-gateway).
+
+In both cases the same process to create the inscription is used. When using the gateway the only difference is the URI used in the on-chain metadata. Read more on this in the [Gateway section](#inscription-gateway).
+
+//TODO: Diagram NFT Mint -> Inscription Account -> Associated Inscription Account
+
+When storing the NFT Metadata on-chain two inscription accounts are used:
+
+1. `inscriptionAccount` which stores the JSON Metadata.
+2. `associatedInscriptionAccount` which is storing the media / image.
+
+The below script creates both of these Accounts for you and points the newly minted NFT to the Metaplex gateway. With this your NFT is completely on-chain.
+
+{% dialect-switcher title="Inscribe Data for new NFT using the Gateway" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```js
+const umi = await createUmi()
+umi.use(mplTokenMetadata())
+umi.use(MplInscription())
+
+const mint = generateSigner(umi)
+const inscriptionAccount = await findMintInscriptionPda(umi, {
+  mint: mint.publicKey,
+})
+await createV1(umi, {
+  mint,
+  name: 'My NFT',
+  uri: `https://igw.metaplex.com/devnet/${inscriptionAccount[0]}`,
+  sellerFeeBasisPoints: percentAmount(5.5),
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+
+await mintV1(umi, {
+  mint: mint.publicKey,
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+
+const inscriptionMetadataAccount = await findInscriptionMetadataPda(umi, {
+  inscriptionAccount: inscriptionAccount[0],
+})
+
+let builder = new TransactionBuilder()
+
+// When we create a new account.
+builder = builder.add(
+  initializeFromMint(umi, {
+    mintAccount: mint.publicKey,
+  })
+)
+
+builder = builder.add(
+  writeData(umi, {
+    inscriptionAccount: inscriptionAccount[0],
+    inscriptionMetadataAccount,
+    value: Buffer.from(
+      '{"description": "A bread! But on-chain!", "external_url": "https://breadheads.io"}'
+    ),
+    associatedTag: null,
+    offset: 0,
+  })
+)
+
+const associatedInscriptionAccount = findAssociatedInscriptionPda(umi, {
+  associated_tag: 'image/png',
+  inscriptionMetadataAccount,
+})
+
+builder = builder.add(
+  initializeAssociatedInscription(umi, {
+    inscriptionMetadataAccount,
+    associatedInscriptionAccount,
+    associationTag: 'image/png',
+  })
+)
+
+await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
+
+// Open the image file to fetch the raw bytes.
+const imageBytes: Buffer = await fs.promises.readFile('bread.png')
+
+// And set the value.
+const promises = []
+const chunkSize = 500
+for (let i = 0; i < imageBytes.length; i += chunkSize) {
+  const chunk = imageBytes.slice(i, i + chunkSize)
+  promises.push(
+    writeData(umi, {
+      inscriptionAccount: associatedInscriptionAccount,
+      inscriptionMetadataAccount,
+      value: chunk,
+      associatedTag: 'image/png',
+      offset: i,
+    }).sendAndConfirm(umi)
+  )
+}
+
+await Promise.all(promises)
+```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Inscriptions as Storage Provider
+
+In addition to the useage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB on-chain. In addition to that [associated Inscriptions](inscription/associatedInscriptions) can be created.
+
+This can for example be useful when writing a on-chain game that needs to store JSON data. 
+
+To create a Inscription you can use the following code which also shows that data could be written to chain in multiple batches to avoid transaction size issues.
+
+{% dialect-switcher title="Find the rank of a specific NFT inscription" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```js
+const inscriptionAccount = generateSigner(umi)
+
+const inscriptionMetadataAccount = await findInscriptionMetadataPda(umi, {
+  inscriptionAccount: inscriptionAccount.publicKey,
+})
+
+let builder = new TransactionBuilder()
+
+builder = builder.add(
+  initialize(umi, {
+    inscriptionAccount,
+  })
+)
+
+builder = builder.add(
+  writeData(umi, {
+    inscriptionAccount: inscriptionAccount.publicKey,
+    inscriptionMetadataAccount,
+    value: Buffer.from('{"description": "A bread! But on-chain!"'),
+    associatedTag: null,
+    offset: 0,
+  })
+)
+
+builder = builder.add(
+  writeData(umi, {
+    inscriptionAccount: inscriptionAccount.publicKey,
+    inscriptionMetadataAccount,
+    value: Buffer.from(', "external_url":'),
+    associatedTag: null,
+    offset: '{"description": "A bread! But on-chain!"'.length,
+  })
+)
+
+builder = builder.add(
+  writeData(umi, {
+    inscriptionAccount: inscriptionAccount.publicKey,
+    inscriptionMetadataAccount,
+    value: Buffer.from(' "https://breadheads.io"}'),
+    associatedTag: null,
+    offset: '{"description": "A bread! But on-chain!", "external_url":'.length,
+  })
+)
+
+await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
+```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Inscription Gateway
+
+Together with the [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway) you can use the normal Token Metadata Standard and just point the URI to the gateway which again reads your data directly from chain without all tools like wallets and explorers reading the data have to read it any differently than NFTs are read usually.
+
+You can either use the gateway that is hosted by Metaplex using the following URL structure: `https://igw.metaplex.com/<network>/<account>`, e.g. `https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF` or host the gateway yourself with a custom URL.
+
+## Inscription Rank
+
+The Inscription Rank is a unique number of each inscription. This rank is stored in 32 Shards to prevent write locks when creating new inscriptions.
+
+To find the `inscriptionRank` of your Inscription you need to fetch the `inscriptionMetadata` Account and read the `inscriptionRank` `bigint`:
+
+{% dialect-switcher title="Find the rank of a specific NFT inscription" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```js
+const inscriptionAccount = await findMintInscriptionPda(umi, {
+  mint: mint.publicKey,
+})
+const inscriptionMetadataAccount = await findInscriptionMetadataPda(umi, {
+  inscriptionAccount,
+})
+
+const { inscriptionRank } = await fetchInscriptionMetadata(
+  umi,
+  inscriptionMetadataAccount
+)
+```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+When creating your inscriptions you should always use a random shard to avoid write locks. You can just calculate the random number like this:
+
+{% dialect-switcher title="Find random shard" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```js
+const randomShard = Math.floor(Math.random() * 32)
+```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+The total amount of Metaplex Inscriptions on Solana can be calculated like this:
+
+{% dialect-switcher title="Fetch total Inscription amount" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```js
+import {
+  fetchAllInscriptionShard,
+  findInscriptionShardPda,
+} from '@metaplex-foundation/mpl-inscription'
+
+const shardKeys = []
+for (let shardNumber = 0; shardNumber < 32; shardNumber += 1) {
+  k.push(findInscriptionShardPda(umi, { shardNumber }))
+}
+
+const shards = await fetchAllInscriptionShard(umi, shardKeys)
+let numInscriptions = 0
+shards.forEach((shard) => {
+  const rank = 32 * Number(shard.count) + shard.shardNumber
+  numInscriptions = Math.max(numInscriptions, rank)
+})
+```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
 
 ## And a lot more
 
@@ -31,10 +281,10 @@ Whilst this provides a good overview of the Inscription program and what it has 
 
 The other pages of this documentation aim to document it further and explain significant features in their own individual pages.
 
-- [Inscription Gateway](/inscription/gateway)
 - [Initialize](/inscription/initialize)
 - [Write](/inscription/write)
 - [Fetch](/inscription/fetch)
 - [Clear](/inscription/clear)
 - [close](/inscription/close)
 - [Authorities](/inscription/authority)
+- [Inscription Gateway](/inscription/gateway)
