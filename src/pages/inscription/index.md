@@ -17,12 +17,16 @@ The Metaplex Inscription Program allows you to write data directly to Solana, us
 
 NFT JSON data and Images have historically been stored on decentralized storage providers like Arweave or IPFS. The Inscription program introduces Solana as another option for NFT data storage, allowing you to write that data directly to the chain. The Metaplex Inscription program introduces the novel use case of all of an NFT's associated data now being stored on Solana. This enables many new use cases such as Solana programs with trait-based bids, dynamic images that are updated via programs, or even RPG game state on-chain.
 
+There are two different kinds of Inscriptions:
+
 1. Inscriptions **[attached to NFT Mints](#inscriptions-attached-to-nft-mints)** - Metadata is written to chain instead or in addition to off chain storage
 2. Inscriptions as **[storage providers](#inscriptions-as-storage-provider)** - Write arbitrary data to chain
 
 Both of these types can have associated inscriptions. Those are basically accounts containing additional data. To better understand this structure, think of an NFT: The Inscription contains the JSON Metadata file, the associated Inscription Account contains the image referenced in the json.
 
 Each Inscription has a unique [Inscription Rank](#inscription-rank)
+
+Together with the [Inscription Gateway](#inscription-gateway) you can use the normal [Token Metadata Standard](/token-metadata) and just point the URI to the gateway which again reads your data directly from chain without all players like wallets and explorers reading the data have to read it any differently than NFTs are read usually.
 
 ### Inscriptions attached to NFT Mints
 
