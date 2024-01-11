@@ -10,15 +10,15 @@ Contrary to popular belief, Inscriptions can be used for a lot more than making 
 
 ## Where do I inscribe?
 
-- We have created the [Metaplex Inscription UI](https://inscriptions.metaplex.com), a no-code reference implementation for Inscribing existing NFTs on Solana. This UI allows creators to view all of the NFTs they have update authority over and walk them through the Inscription flow to store the NFT JSON and Images on Solana.
+- The [Metaplex Inscription UI](https://inscriptions.metaplex.com) is a no-code reference implementation for Inscribing existing NFTs on Solana. This UI allows creators to view all of the NFTs they have update authority over and walk them through the Inscription flow to store the NFT JSON and Images on Solana.
 
   {% callout type="note" %}
 
-  Due to the limitations of browser wallets, we do not recommend using the UI for bulk Inscriptions. Please use the CLI instead to save you hundreds of transaction approvals.
+  Due to the limitations of browser wallets, it is not recommended to use the UI for bulk Inscriptions. Please use the CLI instead to save you hundreds of transaction approvals.
 
   {% /callout %}
 
-- We have also created the [Inscription CLI](https://github.com/metaplex-foundation/mpl-inscription/tree/main/clients/cli) tool to handle bulk Inscribing of NFTs.
+- The [Inscription CLI](https://github.com/metaplex-foundation/mpl-inscription/tree/main/clients/cli) is a command line tool to handle bulk Inscribing of NFTs.
 
 ## How much does it cost?
 
@@ -30,4 +30,4 @@ Inscription cost fundamentally comes down to 0.003306 SOL overhead for account r
 
 ## How do I inscribe new NFTs?
 
-New NFTs can be inscribed by first minting through a creation tool (we recommend [Creator Studio](https://studio.metaplex.com/) and [Sol Tools](https://sol-tools.io/)). After minting, these new NFTs will now be listed on the Inscription UI and via the CLI tool.
+New NFTs can be inscribed by first minting through a creation tool (recommended tools are [Creator Studio](https://studio.metaplex.com/) and [Sol Tools](https://sol-tools.io/)). After minting, these new NFTs will now be listed on the Inscription UI and via the CLI tool.
