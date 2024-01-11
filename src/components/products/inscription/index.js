@@ -29,6 +29,7 @@ export const inscription = {
               href: '/inscription/getting-started',
               // Subpages: /js /rust, etc.
             },
+            { title: 'FAQ', href: '/inscription/faq' },
           ],
         },
         {
