@@ -11,6 +11,7 @@ export const tokenAuthRules = {
   name: 'Token Auth Rules',
   headline: 'NFT permissions',
   description: 'Design custom authorization rules for your NFTs.',
+  navigationMenuCatergory: 'ACM',
   path: 'token-auth-rules',
   logo: Logo,
   github: 'https://github.com/metaplex-foundation/mpl-token-auth-rules',
@@ -24,14 +25,23 @@ export const tokenAuthRules = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/token-auth-rules' },
-            { title: 'Metaplex Rule Sets', href: '/token-auth-rules/mplx-rule-sets' },
+            {
+              title: 'Metaplex Rule Sets',
+              href: '/token-auth-rules/mplx-rule-sets',
+            },
           ],
         },
         {
           title: 'Features',
           links: [
-            { title: 'Create or Update Rule Sets', href: '/token-auth-rules/create-or-update' },
-            { title: 'Validating with a Rule Set', href: '/token-auth-rules/validate' },
+            {
+              title: 'Create or Update Rule Sets',
+              href: '/token-auth-rules/create-or-update',
+            },
+            {
+              title: 'Validating with a Rule Set',
+              href: '/token-auth-rules/validate',
+            },
           ],
         },
         {
@@ -89,7 +99,7 @@ export const tokenAuthRules = {
           links: [
             { title: 'Rule Set Buffers', href: '/token-auth-rules/buffers' },
           ],
-        }
+        },
       ],
     },
     { ...referencesSection('token-auth-rules') },

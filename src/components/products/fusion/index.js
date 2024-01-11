@@ -11,6 +11,7 @@ export const fusion = {
   name: 'Fusion',
   headline: 'NFTs inside NFTs',
   description: 'Create composable NFTs.',
+  navigationMenuCatergory: 'Utility',
   path: 'fusion',
   logo: Logo,
   github: 'https://github.com/metaplex-foundation/mpl-trifle',

@@ -10,6 +10,7 @@ import { Logo, LogoWithName } from '@/components/products/Logo'
 import { Sections } from '@/components/products/Sections'
 import { SwitcherDialog } from '@/components/products/SwitcherDialog'
 import { SwitcherPopover } from '@/components/products/SwitcherPopover'
+import NavList from './NavList'
 
 export function Header({ page }) {
   let [isScrolled, setIsScrolled] = useState(false)
@@ -28,9 +29,9 @@ export function Header({ page }) {
   return (
     <header
       className={clsx(
-        'sticky top-0 z-50 bg-white shadow-md shadow-slate-900/5 transition duration-500 dark:shadow-none',
+        'sticky top-0 z-50 bg-white shadow-md shadow-neutral-900/5 transition duration-500 dark:shadow-none',
         isScrolled
-          ? 'dark:bg-slate-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-slate-900/75'
+          ? 'dark:bg-neutral-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-neutral-900/75'
           : 'dark:bg-transparent'
       )}
     >
@@ -67,10 +68,13 @@ export function Header({ page }) {
             </SwitcherDialog>
           </div>
         </div>
-        <div className="-my-5 mr-6 sm:mr-8 lg:mr-0">
-          <Search />
-        </div>
-        <div className="relative flex basis-0 justify-end gap-6 sm:gap-8 lg:flex-grow">
+
+        <NavList />
+
+        <div className="relative flex basis-0 items-center justify-end gap-6 sm:gap-8 lg:flex-grow">
+          <div className="-my-5 mr-6 sm:mr-8 lg:mr-0">
+            <Search />
+          </div>
           <ThemeSelector className="relative z-10" />
           <Link
             href={page.product.github}

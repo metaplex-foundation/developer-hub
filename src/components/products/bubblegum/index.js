@@ -12,6 +12,7 @@ export const bubblegum = {
   headline: 'Compressed NFTs',
   description: 'NFTs that scale to new orders of magnitude.',
   path: 'bubblegum',
+  navigationMenuCatergory: 'ACM',
   logo: Logo,
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',

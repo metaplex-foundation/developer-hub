@@ -3,13 +3,21 @@ import { LogoWithName } from './Logo'
 import { products as allProducts } from './index'
 import Link from 'next/link'
 
-export function Grid({ onClick, withoutFallback, className, ...props }) {
-  const products = withoutFallback
-    ? allProducts.filter((product) => !product.isFallbackProduct)
-    : allProducts
+export function Grid({
+  onClick,
+  withoutFallback,
+  className,
+  menuItem,
+  ...props
+}) {
+  console.log('menuItem', menuItem)
+  const products =  allProducts.filter(
+        (product) => menuItem === product.navigationMenuCatergory
+      )
+    
 
   return (
-    <ul className={clsx(['grid gap-3', className])} {...props}>
+    <ul className={clsx(['grid grid-flow-row gap-3', className])} {...props}>
       {products.map((product) => (
         <li key={product.path}>
           <Link

@@ -1,7 +1,8 @@
 import { Grid } from '@/components/products/Grid'
 import { Popover, Transition } from '@headlessui/react'
 
-export function SwitcherPopover({ children, props }) {
+export function SwitcherPopover({ children, menuItem, ...props }) {
+  console.log('menuItem', menuItem)
   return (
     <Popover className="relative" {...props}>
       {children}
@@ -15,10 +16,11 @@ export function SwitcherPopover({ children, props }) {
       >
         <Popover.Panel className="absolute z-10 mt-4 w-max">
           {({ close }) => (
-            <div className="overflow-hidden rounded-lg bg-white p-4 shadow-xl ring-1 ring-black ring-opacity-5 dark:border dark:border-slate-600 dark:bg-slate-800">
+            <div className="absolute -left-[225px] w-[530px] overflow-hidden rounded-lg bg-white p-4 shadow-xl ring-1 ring-black ring-opacity-5 dark:border dark:border-slate-600 dark:bg-slate-800">
               <Grid
-                className="relative md:grid-flow-col md:grid-cols-2 md:grid-rows-4"
+                className="relative md:grid-flow-row md:grid-cols-2"
                 onClick={close}
+                menuItem={menuItem}
               />
             </div>
           )}

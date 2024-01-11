@@ -11,6 +11,7 @@ export const toolbox = {
   name: 'Toolbox',
   headline: 'Core programs',
   description: 'A collection of core programs for your applications.',
+  navigationMenuCatergory: 'Dev Tools',
   path: 'toolbox',
   logo: Logo,
   github: 'https://github.com/metaplex-foundation/mpl-toolbox',
