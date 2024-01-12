@@ -26,13 +26,13 @@ import { MplInscription } from '@metaplex-foundation/mpl-inscription'
 const umi = createUmi('http://127.0.0.1:8899').use(MplInscription())
 ```
 
-That's it, you can now interact with Inscriptions by using [the various functions provided by the library](https://mpl-inscription-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of creating on how to mint a simple inscription with small metadata, fetching the data of the inscription and printing the inscription Rank.
+That's it, you can now interact with Inscriptions by using [the various functions provided by the library](https://mpl-inscription-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of how to mint a simple inscription with a small JSON file attached, fetching the data of the inscription and printing the inscription Rank.
 
 ```ts
 // Step 1: Mint an NFT or pNFT
 // See https://developers.metaplex.com/token-metadata/mint
 
-// Step 2: Inscribe metadata
+// Step 2: Inscribe JSON
 
 const inscriptionAccount = await findMintInscriptionPda(umi, {
   mint: mint.publicKey,
@@ -40,24 +40,19 @@ const inscriptionAccount = await findMintInscriptionPda(umi, {
 const inscriptionMetadataAccount = await findInscriptionMetadataPda(umi, {
   inscriptionAccount: inscriptionAccount[0],
 })
-const inscriptionShardAccount = findInscriptionShardPda(umi, {
-  shardNumber: Math.floor(Math.random() * 32),
-})
 
 await initializeFromMint(umi, {
-  mintInscriptionAccount: inscriptionAccount,
-  metadataAccount: inscriptionMetadataAccount,
   mintAccount: mint.publicKey,
-  tokenMetadataAccount, // The metadata account from token metadata
-  inscriptionShardAccount, // For concurrency
 })
   .add(
     writeData(umi, {
       inscriptionAccount,
-      metadataAccount: inscriptionMetadataAccount,
+      inscriptionMetadataAccount,
       value: Buffer.from(
-        JSON.stringify(metadata) // your NFT's metadata to be inscribed
+        JSON.stringify(metadata) // your NFT's JSON to be inscribed
       ),
+      associatedTag: null,
+      offset: 0,
     })
   )
   .sendAndConfirm(umi)

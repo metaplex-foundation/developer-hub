@@ -3,6 +3,7 @@ title: Overview
 metaTitle: Inscriptions - Overview
 description: Provides a high-level overview of the Metaplex Inscriptions standard.
 ---
+
 The Metaplex Inscription Program allows you to write data directly to Solana, using the blockchain as a method of data storage. The Inscription program also allows for this data storage to be optionally linked to an NFT. In this overview, we explain how this program works and how we can leverage its various features at a high level. {% .lead %}
 
 {% quick-links %}
@@ -52,6 +53,7 @@ const umi = await createUmi()
 umi.use(mplTokenMetadata())
 umi.use(MplInscription())
 
+// Create and mint the NFT to be inscribed.
 const mint = generateSigner(umi)
 const inscriptionAccount = await findMintInscriptionPda(umi, {
   mint: mint.publicKey,
@@ -75,13 +77,14 @@ const inscriptionMetadataAccount = await findInscriptionMetadataPda(umi, {
 
 let builder = new TransactionBuilder()
 
-// When we create a new account.
+// We initialize the Inscription and create the account where the JSON will be stored.
 builder = builder.add(
   initializeFromMint(umi, {
     mintAccount: mint.publicKey,
   })
 )
 
+// And then write the JSON data for the NFT to the Inscription account.
 builder = builder.add(
   writeData(umi, {
     inscriptionAccount: inscriptionAccount[0],
@@ -94,8 +97,9 @@ builder = builder.add(
   })
 )
 
+// We then create the associated Inscription that will contain the image.
 const associatedInscriptionAccount = findAssociatedInscriptionPda(umi, {
-  associated_tag: 'image/png',
+  associated_tag: 'image',
   inscriptionMetadataAccount,
 })
 
@@ -103,7 +107,7 @@ builder = builder.add(
   initializeAssociatedInscription(umi, {
     inscriptionMetadataAccount,
     associatedInscriptionAccount,
-    associationTag: 'image/png',
+    associationTag: 'image',
   })
 )
 
@@ -112,23 +116,29 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 // Open the image file to fetch the raw bytes.
 const imageBytes: Buffer = await fs.promises.readFile('bread.png')
 
-// And set the value.
-const promises = []
-const chunkSize = 500
+// And write the image.
+const chunkSize = 800
 for (let i = 0; i < imageBytes.length; i += chunkSize) {
   const chunk = imageBytes.slice(i, i + chunkSize)
-  promises.push(
-    writeData(umi, {
-      inscriptionAccount: associatedInscriptionAccount,
-      inscriptionMetadataAccount,
-      value: chunk,
-      associatedTag: 'image/png',
-      offset: i,
-    }).sendAndConfirm(umi)
-  )
+  await writeData(umi, {
+    inscriptionAccount: associatedInscriptionAccount,
+    inscriptionMetadataAccount,
+    value: chunk,
+    associatedTag: 'image',
+    offset: i,
+  }).sendAndConfirm(umi)
 }
+```
 
-await Promise.all(promises)
+{% /totem %}
+{% /dialect %}
+
+{% dialect title="Bash" id="bash" %}
+{% totem %}
+
+```bash
+echo "hello"
+
 ```
 
 {% /totem %}
@@ -139,7 +149,7 @@ await Promise.all(promises)
 
 In addition to the useage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB on-chain. In addition to that [associated Inscriptions](inscription/associatedInscriptions) can be created.
 
-This can for example be useful when writing a on-chain game that needs to store JSON data. 
+This can for example be useful when writing a on-chain game that needs to store JSON data.
 
 To create a Inscription you can use the following code which also shows that data could be written to chain in multiple batches to avoid transaction size issues.
 
@@ -197,6 +207,17 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 
 {% /totem %}
 {% /dialect %}
+
+{% dialect title="Bash" id="bash" %}
+{% totem %}
+
+```bash
+echo "hello"
+
+```
+
+{% /totem %}
+{% /dialect %}
 {% /dialect-switcher %}
 
 ## Inscription Gateway
@@ -227,6 +248,17 @@ const { inscriptionRank } = await fetchInscriptionMetadata(
   umi,
   inscriptionMetadataAccount
 )
+```
+
+{% /totem %}
+{% /dialect %}
+
+{% dialect title="Bash" id="bash" %}
+{% totem %}
+
+```bash
+echo "hello"
+
 ```
 
 {% /totem %}
@@ -270,6 +302,17 @@ shards.forEach((shard) => {
   const rank = 32 * Number(shard.count) + shard.shardNumber
   numInscriptions = Math.max(numInscriptions, rank)
 })
+```
+
+{% /totem %}
+{% /dialect %}
+
+{% dialect title="Bash" id="bash" %}
+{% totem %}
+
+```bash
+echo "hello"
+
 ```
 
 {% /totem %}
