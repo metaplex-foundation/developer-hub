@@ -18,6 +18,41 @@ If there _is no_ verified collection set, the **Tree Owner** is the authority th
 
 ```ts
 import {
+  updateMetadata,
+  UpdateArgsArgs,
+  getCurrentRoot,
+} from '@metaplex-foundation/mpl-bubblegum'
+
+// Then we can use it to update metadata for the NFT.
+const updateArgs: UpdateArgsArgs = {
+  name: some('New name'),
+  uri: some('https://updated-example.com/my-nft.json'),
+}
+
+await updateMetadata(umi, {
+  leafOwner,
+  merkleTree,
+  root: getCurrentRoot(merkleTreeAccount.tree),
+  nonce: leafIndex,
+  index: leafIndex,
+  currentMetadata: metadata,
+  proof: [],
+  updateArgs,
+  }).sendAndConfirm(umi);
+```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+This can also be done using the `getAssetWithProof` helper method:
+
+{% dialect-switcher title="Update a Compressed NFT as the Tree Owner using Helper Method" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```ts
+import {
   getAssetWithProof,
   updateMetadata,
   UpdateArgsArgs,
@@ -54,10 +89,46 @@ If the verified collection _is_ set, then the **Collection Update Authority** is
 
 ```ts
 import {
-  getAssetWithProof,
   updateMetadata,
   UpdateArgsArgs,
   getCurrentRoot,
+} from '@metaplex-foundation/mpl-bubblegum'
+import { findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
+
+// Then we can use it to update metadata for the NFT.
+const updateArgs: UpdateArgsArgs = {
+  name: some('New name'),
+  uri: some('https://updated-example.com/my-nft.json'),
+}
+await updateMetadata(umi, {
+  leafOwner,
+  merkleTree,
+  root: getCurrentRoot(merkleTreeAccount.tree),
+  nonce: leafIndex,
+  index: leafIndex,
+  currentMetadata: metadata,
+  proof: [],
+  updateArgs,
+  authority: collectionAuthority,
+  collectionMint: collectionMint.publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+This can also be done using the `getAssetWithProof` helper method:
+
+{% dialect-switcher title="Update a Compressed NFT as the Collection Update Authority using Helper Method" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```ts
+import {
+  getAssetWithProof,
+  updateMetadata,
+  UpdateArgsArgs,
 } from '@metaplex-foundation/mpl-bubblegum'
 import { findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
 
@@ -70,19 +141,12 @@ const updateArgs: UpdateArgsArgs = {
   uri: some('https://updated-example.com/my-nft.json'),
 }
 await updateMetadata(umi, {
+  ...assetWithProof,
   leafOwner,
-  merkleTree,
-  root: getCurrentRoot(merkleTreeAccount.tree),
-  nonce: 0,
-  index: 0,
   currentMetadata: metadata,
-  proof: [],
   updateArgs,
   authority: collectionAuthority,
   collectionMint: collectionMint.publicKey,
-  collectionMetadata: findMetadataPda(umi, {
-    mint: collectionMint.publicKey,
-  }),
 }).sendAndConfirm(umi)
 ```
 
