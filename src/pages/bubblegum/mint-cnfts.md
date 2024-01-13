@@ -47,6 +47,8 @@ await mintV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
+### Get leaf ID and asset ID from mint transaction
+
 You can retrieve the leaf and determine the asset ID from the `mintV1` transaction using the `parseLeafFromMintV1Transaction` helper.
 
 {% dialect-switcher title="Get leaf ID and asset ID from mint transaction" %}
@@ -141,6 +143,8 @@ await createNft(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+### Get leaf ID and asset ID from mint to collection transaction
 
 Again you can retrieve the leaf and determine the asset ID from the `mintToCollectionV1` transaction using the `parseLeafFromMintToCollectionV1Transaction` helper.
 
