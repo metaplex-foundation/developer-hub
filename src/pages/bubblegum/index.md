@@ -124,7 +124,7 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 
 - [Mint a cNFT](/bubblegum/mint-cnfts) with or without an associated collection.
 - [Transfer a cNFT](/bubblegum/transfer-cnfts).
-- [Update the data of a cNFT](/bubblegum/update-cnfts) _(Coming Soon)_.
+- [Update the data of a cNFT](/bubblegum/update-cnfts).
 - [Burn a cNFT](/bubblegum/burn-cnfts).
 - [Decompress a cNFT into a regular NFT](/bubblegum/decompress-cnfts). Note that this enables interoperability with existing smart contracts but creates on-chain accounts with rent fees.
 - [Delegate a cNFT](/bubblegum/delegate-cnfts).
