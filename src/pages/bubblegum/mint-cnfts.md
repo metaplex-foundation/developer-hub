@@ -47,17 +47,19 @@ await mintV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
+### Get leaf schema from mint transaction {% #get-leaf-schema-from-mint-transaction %}
+
 You can retrieve the leaf and determine the asset ID from the `mintV1` transaction using the `parseLeafFromMintV1Transaction` helper.
 
-{% dialect-switcher title="Get leaf ID and asset ID from mint transaction" %}
+{% dialect-switcher title="Get leaf schema from mint transaction" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
 import { parseLeafFromMintV1Transaction } from '../src';
 
 const { signature } = await mintV1(umi, { leafOwner, merkleTree, metadata }).sendAndConfirm(umi, { confirm: { commitment: 'confirmed' } });
-const leaf = await parseLeafFromMintV1Transaction(umi, signature);
-const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: nonce });
+const leaf: LeafSchema = await parseLeafFromMintV1Transaction(umi, signature);
+const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
 ```
 
 {% /dialect %}
@@ -142,9 +144,11 @@ await createNft(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
+### Get leaf schema from mint to collection transaction {% #get-leaf-schema-from-mint-to-collection-transaction %}
+
 Again you can retrieve the leaf and determine the asset ID from the `mintToCollectionV1` transaction using the `parseLeafFromMintToCollectionV1Transaction` helper.
 
-{% dialect-switcher title="Get leaf ID and asset ID from mint to collection transaction" %}
+{% dialect-switcher title="Get leaf schema from mint to collection transaction" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -157,8 +161,8 @@ const { signature } = await mintToCollectionV1(umi, {
   collectionMint: collectionMint.publicKey,
 }).sendAndConfirm(umi);
 
-const leaf = await parseLeafFromMintToCollectionV1Transaction(umi, signature);
-const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: nonce });
+const leaf: LeafSchema = await parseLeafFromMintToCollectionV1Transaction(umi, signature);
+const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
 ```
 
 {% /dialect %}
