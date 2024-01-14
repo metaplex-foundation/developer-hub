@@ -16,14 +16,14 @@ npm install \
   @metaplex-foundation/mpl-inscriptions
 ```
 
-Next, you may create your `Umi` instance and install the `MplInscription` plugin like so.
+Next, you may create your `Umi` instance and install the `mplInscription` plugin like so.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { MplInscription } from '@metaplex-foundation/mpl-inscription'
+import { mplInscription } from '@metaplex-foundation/mpl-inscription'
 
 // Use the RPC endpoint of your choice.
-const umi = createUmi('http://127.0.0.1:8899').use(MplInscription())
+const umi = createUmi('http://127.0.0.1:8899').use(mplInscription())
 ```
 
 That's it, you can now interact with Inscriptions by using [the various functions provided by the library](https://mpl-inscription-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of how to mint a simple inscription with a small JSON file attached, fetching the data of the inscription and printing the inscription Rank.

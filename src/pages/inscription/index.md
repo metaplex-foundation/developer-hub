@@ -20,14 +20,12 @@ NFT JSON data and Images have historically been stored on decentralized storage 
 
 There are two different kinds of Inscriptions:
 
-1. Inscriptions **[attached to NFT Mints](#inscriptions-attached-to-nft-mints)** - Metadata is written to chain instead or in addition to off chain storage
-2. Inscriptions as **[storage providers](#inscriptions-as-storage-provider)** - Write arbitrary data to chain
+1. Inscriptions **[attached to NFT Mints](#inscriptions-attached-to-nft-mints)** - NFT data is written to the chain instead or in addition to off chain storage
+2. Inscriptions as **[storage providers](#inscriptions-as-storage-provider)** - Write arbitrary data to the chain
 
-Both of these types can have associated inscriptions. Those are basically accounts containing additional data. To better understand this structure, think of an NFT: The Inscription contains the JSON Metadata file, the associated Inscription Account contains the image referenced in the json.
+### Associated Inscription Accounts
 
-Each Inscription has a unique [Inscription Rank](#inscription-rank)
-
-Together with the [Inscription Gateway](#inscription-gateway) you can use the normal [Token Metadata Standard](/token-metadata) and just point the URI to the gateway which again reads your data directly from chain without all players like wallets and explorers reading the data have to read it any differently than NFTs are read usually.
+The [Metaplex JSON standards](/token-metadata/token-standard) include an option linking associated files to a token via the files properties in the JSON schemas. The Inscription program introduces a new method of associating additional data using the power of PDAs! A PDA is derived from the Inscription and an **Assocation Tag**, resulting in a programmatic way to derive addition inscribed data, rather that requiring expensive JSON deserialization and parsing.
 
 ### Inscriptions attached to NFT Mints
 
@@ -145,7 +143,7 @@ echo "hello"
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Inscriptions as Storage Provider
+### Inscriptions as a Storage Provider
 
 In addition to the useage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB on-chain. In addition to that [associated Inscriptions](inscription/associatedInscriptions) can be created.
 
@@ -228,7 +226,7 @@ You can either use the gateway that is hosted by Metaplex using the following UR
 
 ## Inscription Rank
 
-The Inscription Rank is a unique number of each inscription. This rank is stored in 32 Shards to prevent write locks when creating new inscriptions.
+The Inscription Rank is a unique number of each inscription. This rank is stored in 32 Shards to prevent write locks when creating new inscriptions. This sharding allows for up to 32 Inscriptions to be minted in the same slot, preventing resource contention and making Inscription transactions much more likely to succeed.
 
 To find the `inscriptionRank` of your Inscription you need to fetch the `inscriptionMetadata` Account and read the `inscriptionRank` `bigint`:
 
