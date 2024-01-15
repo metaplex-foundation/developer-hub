@@ -12,6 +12,8 @@ The `initialize` instruction creates the inscription accounts for you where the 
 
 After the initialization has been done you can [write Data](write) to the inscriptions.
 
+When initializing you can choose a `shard` that is used for numbering. Make sure to use a random one to minimize locks. Read more about [Sharding here](sharding)
+
 ## `Initialize`
 
 An Inscription has to be initialized before data can written to it. It can be done like so:
