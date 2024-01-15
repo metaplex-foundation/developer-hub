@@ -3,6 +3,7 @@ import { candyMachine } from './candyMachine'
 import { fusion } from './fusion'
 import { global } from './global'
 import { hydra } from './hydra'
+import { inscription } from './inscription'
 import { tokenAuthRules } from './tokenAuthRules'
 import { tokenMetadata } from './tokenMetadata'
 import { toolbox } from './toolbox'
@@ -16,4 +17,5 @@ export const products = [
   candyMachine,
   fusion,
   hydra,
+  inscription
 ]
