@@ -46,6 +46,19 @@ export const inscription = {
             { title: 'Authority', href: '/inscription/authority' },
           ],
         },
+        {
+          title: 'Advanced',
+          links: [
+            {
+              title: 'Inscription Sharding',
+              href: '/inscription/sharding',
+            },
+            {
+              title: 'Parallel Writes',
+              href: '/inscription/parallel-writes',
+            },
+          ],
+        },
       ],
     },
     { ...referencesSection('inscription') },

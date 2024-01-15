@@ -23,16 +23,11 @@ There are two different kinds of Inscriptions:
 1. Inscriptions **[attached to NFT Mints](#inscriptions-attached-to-nft-mints)** - NFT data is written to the chain instead or in addition to off chain storage
 2. Inscriptions as **[storage providers](#inscriptions-as-storage-provider)** - Write arbitrary data to the chain
 
-### Associated Inscription Accounts
-
-The [Metaplex JSON standards](/token-metadata/token-standard) include an option linking associated files to a token via the files properties in the JSON schemas. The Inscription program introduces a new method of associating additional data using the power of PDAs! A PDA is derived from the Inscription and an **Assocation Tag**, resulting in a programmatic way to derive addition inscribed data, rather that requiring expensive JSON deserialization and parsing.
-
 ### Inscriptions attached to NFT Mints
 
 Inscriptions can be used in addition to off chain storage like Arweave, where the metadata JSON and the media is stored, or can be completely replace those off chain storage using the [Inscription Gateway](#inscription-gateway).
 
 In both cases the same process to create the inscription is used. When using the gateway the only difference is the URI used in the on-chain metadata. Read more on this in the [Gateway section](#inscription-gateway).
-
 
 When storing the NFT Metadata on-chain three inscription accounts are used:
 
@@ -50,8 +45,8 @@ Owner: Token Program {% .whitespace-nowrap %}
 {% /node %}
 
 {% node parent="mint" x="-17" y="180" %}
-{% node #inscriptionAccount theme="crimson" %} 
-Inscription Account  {% .whitespace-nowrap %}
+{% node #inscriptionAccount theme="crimson" %}
+Inscription Account {% .whitespace-nowrap %}
 {% /node %}
 {% node theme="dimmed" %}
 Owner: Inscription Program {% .whitespace-nowrap %}
@@ -80,7 +75,7 @@ Seeds:
 
 programId
 
-mintAddress 
+mintAddress
 {% /edge %}
 {% edge from="inscriptionAccount" to="inscriptionMetadata" path="straight" %}
 Seeds:
@@ -97,7 +92,7 @@ Seeds:
 
 "Inscription"
 
-"Association" 
+"Association"
 
 associationTag
 
@@ -212,14 +207,14 @@ echo "hello"
 
 ### Inscriptions as a Storage Provider
 
-In addition to the useage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB on-chain. In addition to that [associated Inscriptions](inscription/associatedInscriptions) can be created.
+In addition to the usage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB on-chain. An unlimited number of [Associated Inscriptions](inscription/associatedInscriptions) can be created.
 
-This can for example be useful when writing a on-chain game that needs to store JSON data.
+This can be useful when writing an on-chain game that needs to store JSON data, storing text on-chain, or storing any program-related data that's not an NFT.
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
-{% node #inscriptionAccount1 theme="crimson" %} 
-Inscription Account  {% .whitespace-nowrap %}
+{% node #inscriptionAccount1 theme="crimson" %}
+Inscription Account {% .whitespace-nowrap %}
 {% /node %}
 {% node theme="dimmed" %}
 Owner: Inscription Program {% .whitespace-nowrap %}
@@ -247,7 +242,7 @@ Seeds:
 
 programId
 
-mintAddress 
+mintAddress
 {% /edge %}
 {% edge from="inscriptionAccount1" to="inscriptionMetadata1" path="straight" %}
 Seeds:
@@ -264,7 +259,7 @@ Seeds:
 
 "Inscription"
 
-"Association" 
+"Association"
 
 associationTag
 
@@ -274,7 +269,7 @@ inscriptionMetadataAccount
 
 {% /diagram %}
 
-To create a Inscription you can use the following code which also shows that data could be written to chain in multiple batches to avoid transaction size issues.
+The following example shows how to write NFT JSON data to an Inscription in three different transactions to avoid the 1280 byte transaction size limit.
 
 {% dialect-switcher title="Find the rank of a specific NFT inscription" %}
 {% dialect title="JavaScript" id="js" %}
@@ -343,15 +338,19 @@ echo "hello"
 {% /dialect %}
 {% /dialect-switcher %}
 
+## Associated Inscription Accounts
+
+The [Metaplex JSON standards](/token-metadata/token-standard) include the option of linking associated files to a token via the files properties in the JSON schemas. The Inscription program introduces a new method of associating additional data using the power of PDAs! A PDA is derived from the Inscription and an **Association Tag**, resulting in a programmatic way to derive additional inscribed data, rather that requiring expensive JSON deserialization and parsing.
+
 ## Inscription Gateway
 
 Together with the [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway) you can use the normal Token Metadata Standard and just point the URI to the gateway which again reads your data directly from chain without all tools like wallets and explorers reading the data have to read it any differently than NFTs are read usually.
 
-You can either use the gateway that is hosted by Metaplex using the following URL structure: `https://igw.metaplex.com/<network>/<account>`, e.g. `https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF` or host the gateway yourself with a custom URL.
+You can either use the gateway that is hosted by Metaplex using the following URL structure: `https://igw.metaplex.com/<network>/<account>`, e.g. [https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF) or host the gateway yourself with a custom URL.
 
 ## Inscription Rank
 
-The Inscription Rank is a unique number of each inscription. This rank is stored in 32 Shards to prevent write locks when creating new inscriptions. This sharding allows for up to 32 Inscriptions to be minted in the same slot, preventing resource contention and making Inscription transactions much more likely to succeed.
+The Inscription Rank is the unique number of each inscription. This number represents a sequential, global ranking of all Metaplex Inscriptions in existence based on the total Inscription count at the time of creation. Inscription Rank is managed through a parallelized counter that is explained further in [Inscription Sharding](/inscription/sharding).
 
 To find the `inscriptionRank` of your Inscription you need to fetch the `inscriptionMetadata` Account and read the `inscriptionRank` `bigint`:
 
