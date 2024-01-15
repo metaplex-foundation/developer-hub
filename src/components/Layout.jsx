@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
+import Hotjar from '@hotjar/browser';
 
 import { Header } from '@/components/Header'
 import { Navigation } from '@/components/Navigation'
@@ -13,6 +14,7 @@ export function Layout({ children, page }) {
   const Hero = page.activeHero
   useLightense()
   useAccentClass(page.product)
+  Hotjar.init(3793483, 6);
 
   return (
     <>
