@@ -15,7 +15,9 @@ Here is how you can use our SDKs to clear inscription data.
 {% totem %}
 
 ```ts
-import { close } from '@metaplex-foundation/mpl-inscription'
+import { close, findInscriptionMetadataPda } from '@metaplex-foundation/mpl-inscription';
+
+import { close, findInscriptionMetadataPda } from '@metaplex-foundation/mpl-inscription'
 const inscriptionMetadataAccount = await findInscriptionMetadataPda(umi, {
   inscriptionAccount: inscriptionAccount.publicKey,
 })
