@@ -11,6 +11,8 @@ After [initializing](initialize) an inscription account data can be written to i
 {% totem %}
 
 ```js
+import { writeData } from '@metaplex-foundation/mpl-inscription';
+
 await writeData(umi, {
   inscriptionAccount: inscriptionAccount.publicKey,
   inscriptionMetadataAccount,
@@ -34,6 +36,9 @@ For larger data it is recommended to first `allocate` the required space, wait f
 {% totem %}
 
 ```js
+import { allocate } from '@metaplex-foundation/mpl-inscription';
+const fs = require('fs');
+
 // Open the image file to fetch the raw bytes.
 const imageBytes: Buffer = await fs.promises.readFile('test/large_bread.png')
 const resizes = Math.floor(imageBytes.length / 10240) + 1

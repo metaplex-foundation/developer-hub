@@ -21,7 +21,12 @@ An Inscription has to be initialized before data can written to it. It can be do
 {% totem %}
 
 ```js
-const umi = await createUmi()
+import {
+  findInscriptionMetadataPda,
+  findInscriptionShardPda,
+  initialize,
+} from '@metaplex-foundation/mpl-inscription'
+
 const inscriptionAccount = generateSigner(umi)
 
 const inscriptionMetadataAccount = await findInscriptionMetadataPda(umi, {
@@ -36,10 +41,10 @@ await initialize(umi, {
   inscriptionShardAccount,
 }).sendAndConfirm(umi)
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
-
 
 ## `initializeFromMint`
 
@@ -52,7 +57,10 @@ It can be done like this:
 {% totem %}
 
 ```js
-const umi = await createUmi()
+import {
+  findInscriptionShardPda,
+  initializeFromMint,
+} from '@metaplex-foundation/mpl-inscription'
 
 const inscriptionShardAccount = await findInscriptionShardPda(umi, {
   shardNumber: 0, //random number between 0 and 31
@@ -62,10 +70,10 @@ await initializeFromMint(umi, {
   inscriptionShardAccount,
 }).sendAndConfirm(umi)
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
-
 
 ## `initializeAssociatedInscription`
 
@@ -80,7 +88,10 @@ To initialize a new Associated Inscription you can use the following function:
 {% totem %}
 
 ```js
-const umi = await createUmi()
+import {
+  findInscriptionMetadataPda,
+  initializeAssociatedInscription,
+} from '@metaplex-foundation/mpl-inscription'
 
 const inscriptionMetadataAccount = await findInscriptionMetadataPda(umi, {
   inscriptionAccount: inscriptionAccount.publicKey,
@@ -91,6 +102,7 @@ await initializeAssociatedInscription(umi, {
   associationTag: 'image/png',
 }).sendAndConfirm(umi)
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
