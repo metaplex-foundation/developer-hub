@@ -37,7 +37,7 @@ export const inscription = {
           links: [
             {
               title: 'Initialize',
-              href: '/inscription/initalize',
+              href: '/inscription/initialize',
             },
             { title: 'Write Data', href: '/inscription/write' },
             { title: 'Fetch', href: '/inscription/fetch' },
