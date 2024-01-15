@@ -10,6 +10,8 @@ The `initialize` instruction creates the inscription accounts for you where the 
 2. `initializeFromMint` - for Inscriptions attached to NFTs
 3. `initializeAssociatedInscription` - Additional Data Accounts
 
+After the initialization has been done you can [write Data](write) to the inscriptions.
+
 ## `Initialize`
 
 An Inscription has to be initialized before data can written to it. It can be done like so:
