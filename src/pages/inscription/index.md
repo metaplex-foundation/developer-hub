@@ -197,12 +197,13 @@ for (let i = 0; i < imageBytes.length; i += chunkSize) {
 {% totem %}
 
 ```bash
-echo "hello"
+pnpm cli inscribe -r <RPC_ENDPOINT> -k <KEYPAIR_FILE> -m <NFT_ADDRESS>
 
 ```
 
 {% /totem %}
 {% /dialect %}
+
 {% /dialect-switcher %}
 
 ### Inscriptions as a Storage Provider
@@ -325,17 +326,6 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 
 {% /totem %}
 {% /dialect %}
-
-{% dialect title="Bash" id="bash" %}
-{% totem %}
-
-```bash
-echo "hello"
-
-```
-
-{% /totem %}
-{% /dialect %}
 {% /dialect-switcher %}
 
 ## Associated Inscription Accounts
@@ -370,17 +360,6 @@ const { inscriptionRank } = await fetchInscriptionMetadata(
   umi,
   inscriptionMetadataAccount
 )
-```
-
-{% /totem %}
-{% /dialect %}
-
-{% dialect title="Bash" id="bash" %}
-{% totem %}
-
-```bash
-echo "hello"
-
 ```
 
 {% /totem %}
@@ -424,17 +403,6 @@ shards.forEach((shard) => {
   const rank = 32 * Number(shard.count) + shard.shardNumber
   numInscriptions = Math.max(numInscriptions, rank)
 })
-```
-
-{% /totem %}
-{% /dialect %}
-
-{% dialect title="Bash" id="bash" %}
-{% totem %}
-
-```bash
-echo "hello"
-
 ```
 
 {% /totem %}
