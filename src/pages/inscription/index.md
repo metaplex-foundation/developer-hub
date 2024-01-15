@@ -33,12 +33,79 @@ Inscriptions can be used in addition to off chain storage like Arweave, where th
 
 In both cases the same process to create the inscription is used. When using the gateway the only difference is the URI used in the on-chain metadata. Read more on this in the [Gateway section](#inscription-gateway).
 
-//TODO: Diagram NFT Mint -> Inscription Account -> Associated Inscription Account
 
-When storing the NFT Metadata on-chain two inscription accounts are used:
+When storing the NFT Metadata on-chain three inscription accounts are used:
 
 1. `inscriptionAccount` which stores the JSON Metadata.
-2. `associatedInscriptionAccount` which is storing the media / image.
+2. `inscriptionMetadata` which stores the metadata of the inscription
+3. `associatedInscriptionAccount` which is storing the media / image.
+
+{% diagram height="h-64 md:h-[500px]" %}
+
+{% node %}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node theme="dimmed" %}
+Owner: Token Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="mint" x="-17" y="180" %}
+{% node #inscriptionAccount theme="crimson" %} 
+Inscription Account  {% .whitespace-nowrap %}
+{% /node %}
+{% node theme="dimmed" %}
+Owner: Inscription Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="inscriptionAccount" x="-40" y="160" %}
+{% node #inscriptionMetadata theme="crimson" %}
+Inscription Metadata Account {% .whitespace-nowrap %}
+{% /node %}
+{% node label="Owner: Inscription Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="inscriptionMetadata" x="500" y="0" %}
+{% node #associatedInscription theme="crimson" %}
+Associated Inscription Account {% .whitespace-nowrap %}
+{% /node %}
+{% node label="Owner: Inscription Program" theme="dimmed" /%}
+{% /node %}
+
+{% edge from="mint" to="metadata" path="straight" /%}
+{% edge from="mint" to="inscriptionAccount" path="straight" %}
+Seeds:
+
+"Inscription"
+
+programId
+
+mintAddress 
+{% /edge %}
+{% edge from="inscriptionAccount" to="inscriptionMetadata" path="straight" %}
+Seeds:
+
+"Inscription"
+
+programId
+
+inscriptionAccount
+{% /edge %}
+
+{% edge from="inscriptionMetadata" to="associatedInscription" path="straight" %}
+Seeds:
+
+"Inscription"
+
+"Association" 
+
+associationTag
+
+inscriptionMetadataAccount
+
+{% /edge %}
+
+{% /diagram %}
 
 The below script creates both of these Accounts for you and points the newly minted NFT to the Metaplex gateway. With this your NFT is completely on-chain.
 
@@ -148,6 +215,64 @@ echo "hello"
 In addition to the useage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB on-chain. In addition to that [associated Inscriptions](inscription/associatedInscriptions) can be created.
 
 This can for example be useful when writing a on-chain game that needs to store JSON data.
+
+{% diagram height="h-64 md:h-[500px]" %}
+{% node %}
+{% node #inscriptionAccount1 theme="crimson" %} 
+Inscription Account  {% .whitespace-nowrap %}
+{% /node %}
+{% node theme="dimmed" %}
+Owner: Inscription Program {% .whitespace-nowrap %}
+{% /node %}
+{% /node %}
+
+{% node parent="inscriptionAccount1" x="-40" y="160" %}
+{% node #inscriptionMetadata1 theme="crimson" %}
+Inscription Metadata Account {% .whitespace-nowrap %}
+{% /node %}
+{% node label="Owner: Inscription Program" theme="dimmed" /%}
+{% /node %}
+
+{% node parent="inscriptionMetadata1" x="500" y="0" %}
+{% node #associatedInscription1 theme="crimson" %}
+Associated Inscription Account {% .whitespace-nowrap %}
+{% /node %}
+{% node label="Owner: Inscription Program" theme="dimmed" /%}
+{% /node %}
+
+{% edge from="mint" to="inscriptionAccount1" path="straight" %}
+Seeds:
+
+"Inscription"
+
+programId
+
+mintAddress 
+{% /edge %}
+{% edge from="inscriptionAccount1" to="inscriptionMetadata1" path="straight" %}
+Seeds:
+
+"Inscription"
+
+programId
+
+inscriptionAccount
+{% /edge %}
+
+{% edge from="inscriptionMetadata1" to="associatedInscription1" path="straight" %}
+Seeds:
+
+"Inscription"
+
+"Association" 
+
+associationTag
+
+inscriptionMetadataAccount
+
+{% /edge %}
+
+{% /diagram %}
 
 To create a Inscription you can use the following code which also shows that data could be written to chain in multiple batches to avoid transaction size issues.
 
