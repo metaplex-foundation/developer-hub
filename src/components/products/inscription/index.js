@@ -37,13 +37,26 @@ export const inscription = {
           links: [
             {
               title: 'Initialize',
-              href: '/inscription/initalize',
+              href: '/inscription/initialize',
             },
             { title: 'Write Data', href: '/inscription/write' },
             { title: 'Fetch', href: '/inscription/fetch' },
             { title: 'Clear Data', href: '/inscription/clear' },
             { title: 'Close', href: '/inscription/close' },
             { title: 'Authority', href: '/inscription/authority' },
+          ],
+        },
+        {
+          title: 'Advanced',
+          links: [
+            {
+              title: 'Inscription Sharding',
+              href: '/inscription/sharding',
+            },
+            {
+              title: 'Parallel Writes',
+              href: '/inscription/parallel-writes',
+            },
           ],
         },
       ],
