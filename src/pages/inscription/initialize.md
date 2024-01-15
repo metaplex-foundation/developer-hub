@@ -16,6 +16,10 @@ After the initialization has been done you can [write Data](write) to the inscri
 
 An Inscription has to be initialized before data can written to it. It can be done like so:
 
+{% dialect-switcher title="Initialize Inscription" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
 ```js
 const umi = await createUmi()
 const inscriptionAccount = generateSigner(umi)
@@ -32,12 +36,20 @@ await initialize(umi, {
   inscriptionShardAccount,
 }).sendAndConfirm(umi)
 ```
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
 
 ## `initializeFromMint`
 
 If you want to inscribe a NFT a different initialization function has to be used since the account seeds are different. When using this function you have to be the update authority of the NFT.
 
 It can be done like this:
+
+{% dialect-switcher title="Initialize Mint Inscription" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
 
 ```js
 const umi = await createUmi()
@@ -50,6 +62,10 @@ await initializeFromMint(umi, {
   inscriptionShardAccount,
 }).sendAndConfirm(umi)
 ```
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
 
 ## `initializeAssociatedInscription`
 
@@ -58,6 +74,10 @@ One Inscription account can have multiple Associated Inscription Accounts. They 
 Pointers to the associated inscriptions are stored in an array in the `inscriptionMetadata` Account in the field `associatedInscriptions`.
 
 To initialize a new Associated Inscription you can use the following function:
+
+{% dialect-switcher title="Initialize Associated Inscription" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
 
 ```js
 const umi = await createUmi()
@@ -71,3 +91,6 @@ await initializeAssociatedInscription(umi, {
   associationTag: 'image/png',
 }).sendAndConfirm(umi)
 ```
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
