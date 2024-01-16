@@ -6,6 +6,7 @@ import { hydra } from './hydra'
 import { tokenAuthRules } from './tokenAuthRules'
 import { tokenMetadata } from './tokenMetadata'
 import { toolbox } from './toolbox'
+import { umi } from './umi'
 
 export const products = [
   global,
@@ -16,4 +17,5 @@ export const products = [
   candyMachine,
   fusion,
   hydra,
+  umi
 ]
