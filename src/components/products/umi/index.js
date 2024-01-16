@@ -15,8 +15,8 @@ export const umi = {
   path: 'umi',
   logo: Logo,
   github: 'https://github.com/metaplex-foundation/umi',
-  className: 'accent-sky',
-  heroes: [{ path: '/toolbox', component: Hero }],
+  className: 'accent-pink',
+  heroes: [{ path: '/umi', component: Hero }],
   sections: [
     {
       ...documentationSection('umi'),

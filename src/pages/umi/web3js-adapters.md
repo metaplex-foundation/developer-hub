@@ -16,27 +16,27 @@ Then, you will have access to a bunch of helper methods to convert to and from W
 
 ```ts
 // For public keys.
-fromWeb3JsPublicKey(myWeb3JsPublicKey);
-toWeb3JsPublicKey(myUmiPublicKey);
+fromWeb3JsPublicKey(myWeb3JsPublicKey)
+toWeb3JsPublicKey(myUmiPublicKey)
 
 // For keypairs.
-fromWeb3JsKeypair(myWeb3JsKeypair);
-toWeb3JsKeypair(myUmiKeypair);
+fromWeb3JsKeypair(myWeb3JsKeypair)
+toWeb3JsKeypair(myUmiKeypair)
 
 // For transactions.
-fromWeb3JsTransaction(myWeb3JsTransaction);
-toWeb3JsTransaction(myUmiTransaction);
-fromWeb3JsLegacyTransaction(myLegacyWeb3JsTransaction);
-toWeb3JsLegacyTransaction(myUmiTransaction);
+fromWeb3JsTransaction(myWeb3JsTransaction)
+toWeb3JsTransaction(myUmiTransaction)
+fromWeb3JsLegacyTransaction(myLegacyWeb3JsTransaction)
+toWeb3JsLegacyTransaction(myUmiTransaction)
 
 // For transaction messages.
-fromWeb3JsMessage(myWeb3JsTransactionMessage);
-toWeb3JsMessage(myUmiTransactionMessage);
-toWeb3JsMessageFromInput(myUmiTransactionInput);
+fromWeb3JsMessage(myWeb3JsTransactionMessage)
+toWeb3JsMessage(myUmiTransactionMessage)
+toWeb3JsMessageFromInput(myUmiTransactionInput)
 
 // For instructions.
-fromWeb3JsInstruction(myWeb3JsInstruction);
-toWeb3JsInstruction(myUmiInstruction);
+fromWeb3JsInstruction(myWeb3JsInstruction)
+toWeb3JsInstruction(myUmiInstruction)
 ```
 
 Let's take a look at an example. Say you want to issue a vanilla token using the `@identity.com/solana-gateway-ts` library which relies on `@solana/web3.js`. It offers an `issueVanilla` function that creates an instruction but this isn't compatible with Umi.
@@ -44,8 +44,11 @@ Let's take a look at an example. Say you want to issue a vanilla token using the
 To go around this, you could create a wrapper function that converts the `issueVanilla` function into a Umi-compatible one. Precisely, this means we need to convert the returned instruction using `fromWeb3JsInstruction` and convert any public key passed into the function using `toWeb3JsPublicKey`.
 
 ```ts
-import { issueVanilla as baseIssueVanilla } from '@identity.com/solana-gateway-ts';
-import { fromWeb3JsInstruction, toWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters';
+import { issueVanilla as baseIssueVanilla } from '@identity.com/solana-gateway-ts'
+import {
+  fromWeb3JsInstruction,
+  toWeb3JsPublicKey,
+} from '@metaplex-foundation/umi-web3js-adapters'
 
 export const issueVanilla = (
   gatewayTokenAccount: PublicKey,
@@ -53,19 +56,22 @@ export const issueVanilla = (
   gatekeeperAccount: PublicKey,
   owner: PublicKey,
   gatekeeperAuthority: Signer,
-  gatekeeperNetwork: PublicKey,
-) => transactionBuilder([{
-  instruction: fromWeb3JsInstruction(
-    baseIssueVanilla(
-      toWeb3JsPublicKey(gatewayTokenAccount),
-      toWeb3JsPublicKey(payer.publicKey),
-      toWeb3JsPublicKey(gatekeeperAccount),
-      toWeb3JsPublicKey(owner),
-      toWeb3JsPublicKey(gatekeeperAuthority.publicKey),
-      toWeb3JsPublicKey(gatekeeperNetwork),
-    )
-  ),
-  signers: [payer, gatekeeperAuthority],
-  bytesCreatedOnChain: 0,
-}])
+  gatekeeperNetwork: PublicKey
+) =>
+  transactionBuilder([
+    {
+      instruction: fromWeb3JsInstruction(
+        baseIssueVanilla(
+          toWeb3JsPublicKey(gatewayTokenAccount),
+          toWeb3JsPublicKey(payer.publicKey),
+          toWeb3JsPublicKey(gatekeeperAccount),
+          toWeb3JsPublicKey(owner),
+          toWeb3JsPublicKey(gatekeeperAuthority.publicKey),
+          toWeb3JsPublicKey(gatekeeperNetwork)
+        )
+      ),
+      signers: [payer, gatekeeperAuthority],
+      bytesCreatedOnChain: 0,
+    },
+  ])
 ```
