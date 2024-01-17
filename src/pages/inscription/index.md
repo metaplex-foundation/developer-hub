@@ -111,7 +111,7 @@ The below script creates both of these Accounts for you and points the newly min
 ```js
 const umi = await createUmi()
 umi.use(mplTokenMetadata())
-umi.use(MplInscription())
+umi.use(mplInscription())
 
 // Create and mint the NFT to be inscribed.
 const mint = generateSigner(umi)
