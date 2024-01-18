@@ -13,7 +13,7 @@ npm install \
   @metaplex-foundation/umi \
   @metaplex-foundation/umi-bundle-defaults \
   @solana/web3.js \
-  @metaplex-foundation/mpl-inscriptions
+  @metaplex-foundation/mpl-inscription
 ```
 
 Next, you may create your `Umi` instance and install the `mplInscription` plugin like so.
