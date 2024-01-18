@@ -4,6 +4,7 @@ metaTitle: Inscriptions - Inscription Authority
 description: Learn what a Inscription Authority is and where it's stored
 ---
 
+
 Metaplex Inscriptions can have **multiple** update authorities. This is different to Metaplex NFT which can just have one update Authority plus delegates.
 
 Authorities can be _added_ and _removed_ by each authority. An Inscription is seen as **immutable** as soon as no more update authorities exist.

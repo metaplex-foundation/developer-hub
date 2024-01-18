@@ -1,8 +1,10 @@
 ---
+
 title: Fetching Inscription Data
 metaTitle: Inscriptions - Fetching Inscriptions
 description: Learn how to fetch the various on-chain accounts of your inscriptions
 ---
+
 
 Once Inscription Accounts are [initialized](initialize) their Metadata can be read from chain again. Once data is [written](write) it can also be read. To fetch inscriptions you also have to use different functions according to the inscription type.
 

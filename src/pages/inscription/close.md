@@ -18,6 +18,7 @@ Here is how you can use our SDKs to close inscription accounts.
 import { close, findInscriptionMetadataPda } from '@metaplex-foundation/mpl-inscription';
 
 import { close, findInscriptionMetadataPda } from '@metaplex-foundation/mpl-inscription'
+
 const inscriptionMetadataAccount = await findInscriptionMetadataPda(umi, {
   inscriptionAccount: inscriptionAccount.publicKey,
 })
@@ -29,4 +30,5 @@ await close(umi, {
 ```
 {% /totem %}
 {% /dialect %}
+
 {% /dialect-switcher %}
