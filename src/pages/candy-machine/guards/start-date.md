@@ -79,7 +79,7 @@ import { dateTime } from "@metaplex-foundation/umi";
 create(umi, {
   // ...
   guards: {
-    startDate: some({ date: dateTime("2022-10-24T15:30:00.000Z") }),
+    startDate: some({ date: dateTime("2022-01-24T15:30:00.000Z") }),
   },
 });
 ```
