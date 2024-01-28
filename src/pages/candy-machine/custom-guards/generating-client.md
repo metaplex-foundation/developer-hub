@@ -179,4 +179,5 @@ umi.guards.add(
 )
 ```
 
+From this point you can upload your client package to npm or link/move it to your project folder where you would like to access the new guard client.
 
