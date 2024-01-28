@@ -84,7 +84,7 @@ export const raffleGateManifest: GuardManifest<
   CustomGuardMintArgs
 > = {
   name: 'customGuard',
-  serializer: getCuomstGuardSerializer,
+  serializer: getCustomGuardSerializer,
   mintParser: (context, mintContext, args) => {
     const { publicKeyArg1, arg1 } = args
     return {
