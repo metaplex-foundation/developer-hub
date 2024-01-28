@@ -26,6 +26,9 @@ export const umi = {
           links: [
             { title: 'Overview', href: '/umi' },
             { title: 'Getting started', href: '/umi/getting-started' },
+            { title: 'Connecting to Umi', href: '/umi/connecting-to-umi' },
+            { title: 'Web3js Differences', href: '/umi/web3js-differences' },
+            
           ],
         },
         {
