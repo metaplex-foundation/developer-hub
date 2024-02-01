@@ -78,7 +78,7 @@ import {
 } from '../generated'
 import { GuardManifest, noopParser } from '../guards'
 
-export const raffleGateManifest: GuardManifest<
+export const customGuardManifest: GuardManifest<
   CustomGuardArgs,
   CustomGuard,
   CustomGuardMintArgs
@@ -132,12 +132,15 @@ Export your new guard from `/clients/js/src/defaultGuards.index.ts`
 export * from './tokenGate';
 export * from './tokenPayment';
 export * from './token2022Payment';
-export * from './customGuard'; // add your guard to the list
+// add your guard to the list
+export * from './customGuard';
 ```
 
 Within `/clients/js/src/defaultGuards.defaults.ts` add your guard to these locations;
 
 ```ts
+import { CustomGuardArgs } from "../generated"
+
 export type DefaultGuardSetArgs = GuardSetArgs & {
     ...
      // add your guard to the list
@@ -146,6 +149,8 @@ export type DefaultGuardSetArgs = GuardSetArgs & {
 ```
 
 ```ts
+import { customGuard } from "../generated"
+
 export type DefaultGuardSet = GuardSet & {
     ...
      // add your guard to the list
@@ -154,30 +159,32 @@ export type DefaultGuardSet = GuardSet & {
 ```
 
 ```ts
+import { CustomGuardMintArgs } from "./defaultGuards/customGuard.ts"
 export type DefaultGuardSetMintArgs = GuardSetMintArgs & {
     ...
     // add your guard to the list
-    customGuard: OptionOrNullable<CustomGuardMintArgs> 
+    customGuard: OptionOrNullable<CustomGuardMintArgs>
 }
 ```
 
 ```ts
 export const defaultCandyGuardNames: string[] = [
-    ...
-     // add your guard to the list
-    'customGuard'
+  ...// add your guard to the list
+  'customGuard',
 ]
 ```
 
 Finally you need to add the exported customGuardManifest to the plugin file located at `/clients/js/src/plugin.ts`
 
 ```ts
+import {customGuardManifest} from "./defaultGuards"
+
 umi.guards.add(
-    ...
-     // add your guard manifest to the list
-    customGuardManifest
+  ...// add your guard manifest to the list
+  customGuardManifest
 )
 ```
 
-From this point you can upload your client package to npm or link/move it to your project folder where you would like to access the new guard client.
+From this point you can build and upload your client package to npm or link/move it to your project folder where you would like to access the new guard client.
 
+It is worth using the built in testing suite of AVA to write some tests that fully test your guard in multiple scenarios. Examples of tests can be found in `/clients/js/tests`.
