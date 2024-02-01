@@ -49,13 +49,13 @@ generateIdl({
 
 ### Genearte IDL and Client
 
-Now you should be able to generate the IDL and the initial client.
+Now you should be able to generate the IDL and the initial client. From the root of the project run
 
 ```shell
 pnpm run generate
 ```
 
-this will in turn execute both scripts `pnpm generate:idls` and `pnpm generate:clients`
+this will in turn execute both scripts `pnpm generate:idls` and `pnpm generate:clients` and build out the intial clients.
 If you need to run these seperately for what ever reason you are able to do so.
 
 ## Adding Guard(s) to the client
