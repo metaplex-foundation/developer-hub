@@ -1,6 +1,6 @@
 ---
 title: Getting Started using JavaScript
-metaTitle: Toolbox - Getting Started - JavaScript
+metaTitle: Umi - Getting Started - JavaScript
 description: Get started with essential programs using JavaScript
 ---
 

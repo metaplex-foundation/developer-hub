@@ -1,6 +1,6 @@
 ---
 title: API References
-metaTitle: Toolbox - API References
+metaTitle: Umi - API References
 description: References and code snippets for Metaplex's Toolbox product.
 ---
 
