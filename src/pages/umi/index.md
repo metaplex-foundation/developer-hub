@@ -10,9 +10,9 @@ Umi is a modular framework for building and using JavaScript clients for Solana 
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/token-metadata/getting-started" description="Find the language or library of your choice and get started essentials programs." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/umi/getting-started" description="Find the language or library of your choice and get started essentials programs." /%}
 
-{% quick-link title="API reference" icon="CodeBracketSquare" href="/token-metadata/references" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" href="/umi/references" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
 {% /quick-links %}
 
