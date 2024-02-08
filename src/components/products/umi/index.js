@@ -36,7 +36,7 @@ export const umi = {
           links: [
             { title: 'Accounts', href: '/umi/accounts' },
             { title: 'Helpers', href: '/umi/helpers' },
-            { title: 'Http Requests', href: '/umi/http-requests' },
+            { title: 'HTTP Requests', href: '/umi/http-requests' },
             { title: 'Implentations', href: '/umi/implementations' },
             { title: 'Kinobi', href: '/umi/kinobi' },
             { title: 'Plugins', href: '/umi/plugins' },
