@@ -1,6 +1,6 @@
 ---
 title: Changelog
-metaTitle: Toolbox - Changelog
+metaTitle: Umi - Changelog
 description: Keep track of changes to Metaplex's Toolbox product.
 ---
 
