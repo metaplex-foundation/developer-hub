@@ -26,8 +26,9 @@ generateIdl({
 
 ```
 
-Note
+{% callout %}
 If you are generating using anchor 28 you will need to add a fallback in to Shankjs idl generator to anchor 27 due to a missing crates.io crate.
+{% /callout %}
 
 ```js
 /configs/shank.cjs
