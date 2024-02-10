@@ -47,7 +47,7 @@ generateIdl({
 
 ```
 
-### Genearte IDL and Client
+### Generate IDL and Client
 
 Now you should be able to generate the IDL and the initial client. From the root of the project run
 
