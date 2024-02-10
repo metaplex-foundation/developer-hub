@@ -76,6 +76,13 @@ export const candyMachine = {
             { title: 'Token2022 Payment', href: '/candy-machine/guards/token2022-payment' },
           ],
         },
+        {
+          title: 'Custom Guards',
+          links: [
+            { title: 'Writing a Custom Guard', href: '/candy-machine/custom-guards/writing-custom-guards' },
+            { title: 'Generating Client', href: '/candy-machine/custom-guards/generating-client' },
+          ],
+        },
       ],
     },
     {
