@@ -4,7 +4,7 @@ metaTitle: Candy Machine - Generating Custom Guard Client
 description: How to generate a Umi compatible client for your custom guards.
 ---
 
-Once you have written your custom guard for the Candy Machine Guard program you'll need to generate a Kinobi client that works with the Umi SDK.
+Once you have written your custom guard for the Candy Machine Guard program you'll need to generate a Kinobi client that works with the Umi SDK to for example be able to use your guard in a frontend.
 
 ## Generate IDL and Initial Client
 
