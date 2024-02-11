@@ -9,15 +9,15 @@ When executed Amman will look for the configuration `.ammanrc.js` in the project
 The config should be a JavaScript module exporting 'validator' with any of the below
 properties:
 
-- killRunningValidators: if true will kill any solana-test-validators currently running on the system.
-- programs: bpf programs which should be loaded into the test validator
-- accountsCluster: default cluster to clone remote accounts from
-- accounts: array of remote accounts to load into the test validator
-- jsonRpcUrl: the URL at which the test validator should listen for JSON RPC requests
-- websocketUrl: for the RPC websocket
-- ledgerDir: where the solana test validator writes the ledger
-- resetLedger: if true the ledger is reset to genesis at startup
-- verifyFees: if true the validator is not considered fully started up until it charges transaction fees
+- **killRunningValidators**: if true will kill any solana-test-validators currently running on the system.
+- **programs**: bpf programs which should be loaded into the test validator
+- **accountsCluster**: default cluster to clone remote accounts from
+- **accounts**: array of remote accounts to load into the test validator
+- **jsonRpcUrl**: the URL at which the test validator should listen for JSON RPC requests
+- **websocketUrl**: for the RPC websocket
+- **ledgerDir**: where the solana test validator writes the ledger
+- **resetLedger**: if true the ledger is reset to genesis at startup
+- **verifyFees**: if true the validator is not considered fully started up until it charges transaction fees
 
 ## Example Configs
 
@@ -56,7 +56,7 @@ module.exports = {
   },
   relay: {
     enabled: process.env.CI == null,
-    killlRunningRelay: true,
+    killRunningRelay: true,
   },
   storage: {
     enabled: process.env.CI == null,

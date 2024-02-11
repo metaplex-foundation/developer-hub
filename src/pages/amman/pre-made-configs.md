@@ -65,7 +65,7 @@ module.exports = {
   },
   relay: {
     enabled: process.env.CI == null,
-    killlRunningRelay: true,
+    killRunningRelay: true,
   },
   storage: {
     enabled: process.env.CI == null,
@@ -128,7 +128,7 @@ module.exports = {
   },
   relay: {
     enabled: process.env.CI == null,
-    killlRunningRelay: true,
+    killRunningRelay: true,
   },
   storage: {
     enabled: process.env.CI == null,
