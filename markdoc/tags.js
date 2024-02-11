@@ -11,6 +11,7 @@ import {
   transformDiagramTag,
   transformNodeTag,
 } from '@/components/diagrams'
+import {Seperator} from '@/components/Seperator'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 
 const tags = {
@@ -128,6 +129,13 @@ const tags = {
       theme: { type: String },
     },
   },
+  seperator: {
+    render: Seperator,
+    attributes: {
+      h: { type: String },
+    },
+    selfClosing: true,
+  }
 }
 
 export default tags

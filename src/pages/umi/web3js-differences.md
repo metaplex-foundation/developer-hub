@@ -12,41 +12,56 @@ Although having the same or similar import names these function differently and 
 
 ### PublicKeys
 
-```js
-// Umi publicKey
+{% dialect-switcher title="Umi PublicKey" %}
+{% dialect title="JavaScript" id="js" %}
+```ts
 import { publicKey } from '@metaplex-foundation/umi'
 const publicKey = publicKey('tst24HZ6pbcnraCv4r8acexfgXvyQwMSRgZRCg9gEX1')
 ```
+{% /dialect %}
+{% /dialect-switcher %}
+{% seperator h="6" /%}
+{% dialect-switcher title="Solana Web3js PublicKey" %}
+{% dialect title="JavaScript" id="js" %}
 ```js
-// Solana web3js publicKey
 import { PublicKey } from '@solana/web3js'
 const publicKey = new PublicKey('tst24HZ6pbcnraCv4r8acexfgXvyQwMSRgZRCg9gEX1')
 ```
+{% /dialect %}
+{% /dialect-switcher %}
 
-These are just basic examples. To learn more about Umi's keypairs check out [PublicKeys and Signers](https://umi-docs.vercel.app/classes/umi.HttpRequestBuilder.html). There are also converters between both Umi and web3js [Web3Js Adapters](https://umi-docs.vercel.app/classes/umi.HttpRequestBuilder.html)
+These are just basic examples. To learn more about Umi's keypairs check out [PublicKeys and Signers](/umi/public-keys-and-signers). There are also converters between both Umi and web3js [Web3Js Adapters](/umi/web3js-adapters)
 
 ### Keypairs
 
+{% dialect-switcher title="Umi Keypair" %}
+{% dialect title="JavaScript" id="js" %}
 ```js
-// Umi publicKey
 const umi = createUmi(...)
 const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))
 
 ```
+{% /dialect %}
+{% /dialect-switcher %}
 
+{% seperator h="6" /%}
+
+{% dialect-switcher title="Web3js Keypair" %}
+{% dialect title="JavaScript" id="js" %}
 ```js
-// Solana web3js publicKey
 import { Keypair } from '@solana/web3js'
 const publicKey = Keypair.fromSecretKey(new Uint8Array(JSON.parse(Wallet.DEV1)))
 ```
+{% /dialect %}
+{% /dialect-switcher %}
 
-These are just basic examples. To learn more about Umi's keypairs check out [PublicKeys and Signers](https://umi-docs.vercel.app/classes/umi.HttpRequestBuilder.html). There are also converters between both Umi and web3js keypair types [Web3Js Adapters](https://umi-docs.vercel.app/classes/umi.HttpRequestBuilder.html)
+These are just basic examples. To learn more about Umi's keypairs check out [PublicKeys and Signers](/umi/public-keys-and-signers). There are also converters between both Umi and web3js keypair types [Web3Js Adapters](/umi/web3js-adapters)
 
 ### Transactions
 
+{% dialect-switcher title="Umi Transaction" %}
+{% dialect title="JavaScript" id="js" %}
 ```js
-// Umi transaction
-
 const blockhash = await umi.rpc.getLatestBlockhash()
 
 const transaction = const tx = umi.transactions.create({
@@ -58,10 +73,15 @@ const transaction = const tx = umi.transactions.create({
 
 await umi.rpc.sendTransaction(tx)
 ```
+{% /dialect %}
+{% /dialect-switcher %}
+
+{% seperator h="6" /%}
+
+{% dialect-switcher title="Web3js Transaction" %}
+{% dialect title="JavaScript" id="js" %}
 
 ```js
-// Solana web3js transaction
-
 const wallet = useWallet()
 
 const messageV0 = new TransactionMessage({
@@ -73,9 +93,11 @@ const messageV0 = new TransactionMessage({
 const tx = new VersionedTransaction(messageV0)
 
 // send via useWallet hook
-wallet.sendTransaction(tx)
+await wallet.sendTransaction(tx)
 //or send via connection
-connection.sendTransaction(tx)
+await connection.sendTransaction(tx)
 ```
+{% /dialect %}
+{% /dialect-switcher %}
 
-These are just basic examples. To learn more about Umi's Transiactions check out [Transactions](https://umi-docs.vercel.app/classes/umi.HttpRequestBuilder.html). There are also converters between both Umi and web3js Transaction types [Web3Js Adapters](https://umi-docs.vercel.app/classes/umi.HttpRequestBuilder.html)
+These are just basic examples. To learn more about Umi's Transiactions check out [Transactions](/umi/transactions). There are also converters between both Umi and web3js Transaction types [Web3Js Adapters](/umi/web3js-adapters)
