@@ -7,6 +7,7 @@ import { inscription } from './inscription'
 import { tokenAuthRules } from './tokenAuthRules'
 import { tokenMetadata } from './tokenMetadata'
 import { toolbox } from './toolbox'
+import { amman } from './amman'
 
 export const products = [
   global,
@@ -17,5 +18,6 @@ export const products = [
   candyMachine,
   fusion,
   hydra,
-  inscription
+  inscription,
+  amman
 ]
