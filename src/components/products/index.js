@@ -8,6 +8,9 @@ import { tokenAuthRules } from './tokenAuthRules'
 import { tokenMetadata } from './tokenMetadata'
 import { toolbox } from './toolbox'
 import { umi } from './umi'
+import { amman } from './amman'
+import { das } from './das-api'
+
 
 export const products = [
   global,
@@ -20,4 +23,6 @@ export const products = [
   hydra,
   inscription,
   umi
+  amman,
+  das
 ]
