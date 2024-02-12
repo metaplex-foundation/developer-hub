@@ -8,6 +8,7 @@ import { tokenAuthRules } from './tokenAuthRules'
 import { tokenMetadata } from './tokenMetadata'
 import { toolbox } from './toolbox'
 import { amman } from './amman'
+import { das } from './das-api'
 
 export const products = [
   global,
@@ -19,5 +20,6 @@ export const products = [
   fusion,
   hydra,
   inscription,
-  amman
+  amman,
+  das
 ]
