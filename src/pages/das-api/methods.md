@@ -1,7 +1,7 @@
 ---
 title: Methods
 metaTitle: DAS Api - Methods
-description: Callable Api Methods for the Metaplex DAS Api library.
+description: Callable Api Methods for the Metaplex DAS Api client.
 ---
 
 The DAS Api supports the following methods;
