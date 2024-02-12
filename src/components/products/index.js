@@ -22,7 +22,7 @@ export const products = [
   fusion,
   hydra,
   inscription,
-  umi
+  umi,
   amman,
   das
 ]
