@@ -13,6 +13,7 @@ export const hydra = {
   description: 'Create shared wallets, split between multiple shareholders.',
   navigationMenuCatergory: 'Hydra',
   path: 'hydra',
+  navigationMenuCatergory: 'Utility',
   logo: Logo,
   github: 'https://github.com/metaplex-foundation/mpl-hydra',
   className: 'accent-amber',

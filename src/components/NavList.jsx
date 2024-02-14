@@ -4,7 +4,7 @@ import { Logo, LogoWithName } from './products/Logo'
 import { SwitcherDialog } from './products/SwitcherDialog'
 import { SwitcherPopover } from './products/SwitcherPopover'
 
-const menuItems = ['ACM', 'Commerce', 'Utility', 'Dev Tools']
+const menuItems = ['Create', 'Commerce', 'Utility', 'Dev Tools']
 
 const NavList = () => {
 

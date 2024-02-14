@@ -13,6 +13,7 @@ export const amman = {
   description:
     'A local validator toolkit for testing Solana programs and applications.',
   path: 'amman',
+  navigationMenuCatergory: 'Dev Tools',
   logo: Logo,
   github: 'https://github.com/metaplex-foundation/amman',
   className: 'accent-sky',
