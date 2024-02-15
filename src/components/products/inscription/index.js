@@ -1,8 +1,6 @@
 import {
-  changelogSection,
   documentationSection,
-  recipesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
 import { Hero } from './Hero'
 import { Logo } from './Logo'
