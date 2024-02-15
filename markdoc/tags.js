@@ -13,6 +13,7 @@ import {
 } from '@/components/diagrams'
 import {Seperator} from '@/components/Seperator'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
+import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
 
 const tags = {
   callout: {
@@ -59,6 +60,10 @@ const tags = {
   'product-grid': {
     selfClosing: true,
     render: ProductGrid,
+  },
+  'all-product-grid': {
+    selfClosing: true,
+    render: AllProductsGrid,
   },
   totem: {
     render: Totem,

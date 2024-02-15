@@ -11,9 +11,7 @@ export function Grid({
   ...props
 }) {
   console.log('menuItem', menuItem)
-  const products =  allProducts.filter(
-        (product) => menuItem === product.navigationMenuCatergory
-      )
+  const products =  allProducts
     
   return (
     <ul className={clsx(['grid grid-flow-row gap-3', className])} {...props}>

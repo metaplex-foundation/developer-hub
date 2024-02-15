@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
-import { Grid } from '@/components/products/Grid'
+import { useState } from 'react'
 import { MobileAppGrid } from './MobileAppGrid'
 
 export function SwitcherDialog({ children, props }) {
@@ -22,22 +21,23 @@ export function SwitcherDialog({ children, props }) {
         />
 
         {/* Full-screen scrollable container */}
-        <div className="fixed inset-x-0 bottom-0 overflow-y-auto sm:inset-0">
+        <div className=" fixed max-h-screen h-full inset-x-0 top-0
+        l-0 p-4">
           {/* Container to center the panel */}
-          <div className="flex min-h-full items-center justify-center p-4">
+          <div className="relative flex max-h-full  p-4  items-center justify-center">
             {/* The actual dialog panel  */}
-            <Dialog.Panel className="relative mx-auto w-full rounded-xl bg-white p-4 shadow-xl ring-1 ring-black ring-opacity-5 dark:border dark:border-slate-600 dark:bg-neutral-900 sm:w-auto">
+            <Dialog.Panel className="relative max-h-screen mx-auto w-full rounded-xl bg-white p-4 shadow-xl ring-1 ring-black ring-opacity-5 dark:border dark:border-slate-600 dark:bg-neutral-900 overflow-auto">
               <div
-                className="absolute right-5 text-black hover:cursor-pointer dark:text-white z-50"
+                className="absolute right-5 z-50 text-black hover:cursor-pointer dark:text-white"
                 onClick={(e) => {
                   e.stopPropagation, setIsOpen(false)
                 }}
               >
-                Close
+                
               </div>
 
               <MobileAppGrid
-                className="relative sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-4"
+                className="relative grid-rows-1"
                 onClick={() => setIsOpen(false)}
               />
             </Dialog.Panel>

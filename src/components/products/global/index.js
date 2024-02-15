@@ -17,10 +17,10 @@ export const global = {
       ...documentationSection(''),
       navigation: [
         {
-          title: 'Introduction',
+          title: 'Overview',
           links: [
-            { title: 'Overview', href: '/' },
-            { title: 'Our products', href: '/products' },
+            { title: 'Introduction', href: '/' },
+            { title: 'Programs and Tools', href: '/programs-and-tools' },
           ],
         },
         {

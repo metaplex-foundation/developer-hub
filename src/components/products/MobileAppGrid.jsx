@@ -17,7 +17,7 @@ export function MobileAppGrid({
   const hub = products.find((product) => product.name === 'Metaplex')
 
   return (
-    <ul className={clsx(['grid grid-flow-row gap-3', className])} {...props}>
+    <ul className={clsx(['grid grid-flow-row gap-5', className])} {...props}>
       <li key={hub.path}>
         <Link
           href={`/${hub.path}`}
@@ -26,20 +26,24 @@ export function MobileAppGrid({
         >
           <LogoWithName product={hub}></LogoWithName>
         </Link>
+        <hr />
       </li>
-      <hr/>
-
-      {products.filter(product => product.name != 'Metaplex').map((product) => (
-        <li key={product.path}>
-          <Link
-            href={`/${product.path}`}
-            className="block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
-            onClick={onClick}
-          >
-            <LogoWithName product={product}></LogoWithName>
-          </Link>
-        </li>
-      ))}
+      
+    <div className='overflow-y-auto'>
+      {products
+        .filter((product) => product.name != 'Metaplex')
+        .map((product) => (
+          <li key={product.path}>
+            <Link
+              href={`/${product.path}`}
+              className="block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
+              onClick={onClick}
+            >
+              <LogoWithName product={product}></LogoWithName>
+            </Link>
+          </li>
+        ))}
+        </div>
     </ul>
   )
 }
