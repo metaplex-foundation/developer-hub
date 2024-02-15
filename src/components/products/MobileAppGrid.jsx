@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { LogoWithName } from './Logo'
 import { products as allProducts } from './index'
 import Link from 'next/link'
+import { Grid } from './Grid'
 
 export function MobileAppGrid({
   onClick,

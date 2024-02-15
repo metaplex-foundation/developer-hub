@@ -6,10 +6,10 @@ description: An overview of Metaplex's developer tools.
 
 On top of on-chain programs, Metaplex offers a variety of developer tools that can be used to create and maintain your own Solana programs.
 
-- [**Umi**](https://github.com/metaplex-foundation/umi): A JavaScript framework to build Solana clients.
+- [**Umi**](/umi): A JavaScript framework to build Solana clients.
 - [**Kinobi**](https://github.com/metaplex-foundation/kinobi): A superset of the IDL spec that allows us to generate program clients.
 - [**Shank**](https://github.com/metaplex-foundation/shank): A set of macros that help vanilla Solana program generate IDLs.
-- [**Amman**](https://github.com/metaplex-foundation/amman): A library that helps set up local validators for development.
+- [**Amman**](/amman): A library that helps set up local validators for development.
 - [**Solana Project Template**](https://github.com/metaplex-foundation/solana-project-template): A GitHub template for vanilla Solana programs and their clients.
 - [**Action**](https://github.com/metaplex-foundation/actions): A set of useful GitHub Actions for Solana devs.
 - [**Rust Bin**](https://github.com/metaplex-foundation/rustbin): A library that syncs a local Rust binary with a crate's dependencies.
