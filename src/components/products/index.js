@@ -10,6 +10,7 @@ import { toolbox } from './toolbox'
 import { umi } from './umi'
 import { amman } from './amman'
 import { das } from './das-api'
+import { legacyDocumentation } from './legacyDocumentation'
 
 
 export const products = [
@@ -24,5 +25,6 @@ export const products = [
   inscription,
   umi,
   amman,
-  das
+  das,
+  legacyDocumentation
 ]
