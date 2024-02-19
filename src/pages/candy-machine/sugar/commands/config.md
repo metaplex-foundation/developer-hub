@@ -33,5 +33,5 @@ sugar config update -n <NEW PUBLIC KEY>
 You can also change the token standard of the assets minted through the Candy Machine by using the `set` sub-command. This command supports changing the type of asset to either `NFT`s or `pNFT`s using the `-t` option. It also allows you to specify a rule set for minted pNFTs.
 
 ```
-sugar config -t "pnft" --rule-set <PUBLIC KEY>
+sugar config set -t "pnft" --rule-set <PUBLIC KEY>
 ```
