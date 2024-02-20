@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 metaTitle: Umi - Getting Started
-description: A Javascript for Solana.
+description: A Javascript Framework for Solana.
 ---
 
 # Installation

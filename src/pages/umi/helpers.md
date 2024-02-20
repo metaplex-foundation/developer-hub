@@ -1,5 +1,8 @@
-# Umi helpers
-
+---
+title: Umi helpers
+metaTitle: Umi - Umi helpers
+description: Overview over Helpers built into Umi
+---
 On top of the core interfaces, Umi provides a set of helper functions that can be used to make working with Solana programs easier.
 
 ## Amounts

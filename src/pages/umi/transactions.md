@@ -1,3 +1,8 @@
+---
+title: Sending transactions
+metaTitle: Umi - Sending transactions
+description: Sending transactions using Metaplex Umi and Transaction Builders
+---
 Managing and sending transactions is an important part of any Solana client. To help manage them, Umi provides a bunch of components:
 
 - A [TransactionFactoryInterface](https://umi-docs.vercel.app/interfaces/umi.TransactionFactoryInterface.html) that can be used to create and (de)serialize transactions.
