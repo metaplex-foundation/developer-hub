@@ -1,5 +1,8 @@
-# Umi's interfaces
-
+---
+title: Umi's Interfaces
+metaTitle: Umi - Umi's Interfaces
+description: Overview over Umi's Interfaces
+---
 ## The core interfaces
 
 Umi defines a set of core interfaces that makes it easy to interact with the Solana blockchain. Namely, they are:

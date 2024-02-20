@@ -1,5 +1,8 @@
-# Sending Http requests
-
+---
+title: Sending Http requests
+metaTitle: Umi - Sending Http requests
+description: Sending Http requests using Metaplex Umi
+---
 Umi provides a simple `HttpInterface` that can be used to send HTTP requests. This allows any Umi plugin or third-party library to rely on whichever Http client the end-user chooses to use instead of ending up with multiple Http clients in the same project.
 
 The `HttpInterface` only defines a single method `send` which accepts a generic `HttpRequest<T>` and returns a generic `HttpResponse<U>` such that `T` and `U` are the request and response body types respectively.
