@@ -25,11 +25,12 @@ export const legacyDocumentation = {
             { title: 'Overview', href: '/legacy-documentation/auction-house' },
             { title: 'Getting Started', href: '/legacy-documentation/auction-house/getting-started' },
             { title: 'Auction House Settings', href: '/legacy-documentation/auction-house/settings' },
-            { title: 'Managing Auction Houses', href: '/legacy-documentation/auction-house/managing' },
+            { title: 'Managing Auction Houses', href: '/legacy-documentation/auction-house/manage' },
             { title: 'Trading Assets', href: '/legacy-documentation/auction-house/trading-assets' },
             { title: 'Managing Buyer Escrow Account', href: '/legacy-documentation/auction-house/buyer-escrow' },
             { title: 'Auction House Receipts', href: '/legacy-documentation/auction-house/receipts' },
             { title: 'Finding Bids, listings, sales', href: '/legacy-documentation/auction-house/find' },
+            { title: 'How to manage Auction House using CLI', href: '/legacy-documentation/auction-house/manage-using-cli' },
             { title: 'Timed Auctions with Auctioneers', href: '/legacy-documentation/auction-house/auctioneer' },
             { title: 'FAQ', href: '/legacy-documentation/auction-house/faq' },
           ],
@@ -39,23 +40,23 @@ export const legacyDocumentation = {
           links: [
             {
               title: 'Solita',
-              href: '/legacy-documentation/solita',
+              href: '/legacy-documentation/developer-tools/solita',
             },
             {
               title: 'Shank',
-              href: '/legacy-documentation/shank',
+              href: '/legacy-documentation/developer-tools/shank',
             },
             {
               title: 'Beet',
-              href: '/legacy-documentation/beet',
+              href: '/legacy-documentation/developer-tools/beet',
             },
             {
               title: 'Cusper',
-              href: '/legacy-documentation/cusper',
+              href: '/legacy-documentation/developer-tools/cusper',
             },
             {
               title: 'Rust Bin',
-              href: '/legacy-documentation/rust-bin',
+              href: '/legacy-documentation/developer-tools/rust-bin',
             },
           ],
         },
@@ -63,12 +64,12 @@ export const legacyDocumentation = {
           title: 'Fixed Price Sale',
           links: [
             {
-              title: 'Overview',
-              href: '/legacy-documentation/fixed-price',
+              title: 'Introduction',
+              href: '/legacy-documentation/fixed-price-sale',
             },
             {
               title: 'Overview',
-              href: '/legacy-documentation/fixed-price/tech-description',
+              href: '/legacy-documentation/fixed-price-sale/tech-description',
             },
           ],
         },
@@ -82,15 +83,15 @@ export const legacyDocumentation = {
           ],
         },
         {
-          title: 'SDKs',
+          title: 'Mobile SDKs',
           links: [
             {
               title: 'Android SDK',
-              href: '/legacy-documentation/sdks/android',
+              href: '/legacy-documentation/mobile-sdks/android',
             },
             {
               title: 'iOS SDK',
-              href: '/legacy-documentation/ios',
+              href: '/legacy-documentation/mobile-sdks/ios',
             },
           ],
         },
