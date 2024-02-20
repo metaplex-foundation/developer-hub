@@ -72,6 +72,7 @@ export function Search() {
                 Router.push(itemUrl)
               },
             }}
+            className="fixed inset-0 z-50 bg-red-500 dark:bg-neutral-900"
           />,
           document.body
         )}
