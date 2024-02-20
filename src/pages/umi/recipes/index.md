@@ -1,7 +1,7 @@
 ---
 title: Recipes
 metaTitle: Umi - Recipes
-description: How-to guides for Metaplex's Toolbox product.
+description: How-to guides for Metaplex's Umi product.
 ---
 
 ## Passing Transactions from Backend to Frontend (and vice versa)

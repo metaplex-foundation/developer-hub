@@ -1,5 +1,8 @@
-# Generating Umi clients via Kinobi
-
+---
+title: Generating Umi clients via Kinobi
+metaTitle: Umi - Generating Umi clients via Kinobi
+description: Generating Umi clients via Kinobi
+---
 The Umi framework provides the basis for building Solana clients in JavaScript. It becomes a lot more powerful when programs offer Umi-compatible libraries as it allows end-users to simply plug their Umi instance into whichever helper functions they provide. To simplify and automate the process of creating Umi-compatible libraries, Umi provides a powerful code generator called Kinobi.
 
 [Kinobi](https://github.com/metaplex-foundation/kinobi) introduces a language-agnostic representation of Solana clients which can be composed of one or several programs. It does this by using a tree of nodes that can be visited by `Visitor` classes. Visitors can be used to update any aspect of the tree allowing developers to tailor the client to their needs. Once the tree is to the developer's liking, language-specific visitors can be used to generate the code for the target language or framework.

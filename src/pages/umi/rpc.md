@@ -1,5 +1,8 @@
-# Connecting with an RPC
-
+---
+title: Connecting with an RPC
+metaTitle: Umi - Connecting with an RPC
+description: Connecting with an RPC using Metaplex Umi
+---
 Contacting the Solana blockchain via an RPC is an important part of any decentralized application. Umi provides a [RpcInterface](https://umi-docs.vercel.app/interfaces/umi.RpcInterface.html) that helps us do just that.
 
 ## Configuring the RPC's endpoint
