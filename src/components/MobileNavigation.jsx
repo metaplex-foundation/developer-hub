@@ -6,6 +6,7 @@ import { Dialog } from '@headlessui/react'
 import { LogoWithName } from '@/components/products/Logo'
 import { Navigation } from '@/components/Navigation'
 import { Sections } from '@/components/products/Sections'
+import { ComputerDesktopIcon } from '@heroicons/react/24/outline'
 
 function MenuIcon(props) {
   return (
@@ -87,13 +88,15 @@ export function MobileNavigation({ page }) {
             </Link>
           </div>
           {page.product.name != 'Metaplex' && 
-          <Link href="/" className="mt-6 block text-slate-900 dark:text-white">
-            Products and Tools
+          <>
+          <Link href="/programs-and-tools" className="mt-12 flex items-center gap-2 text-slate-900 dark:text-white">
+            <ComputerDesktopIcon height={20} /> Programs and Tools
           </Link>
+          </>
           }
           {page.product.sections && page.product.sections.length > 1 && (
             <Sections
-              className="-ml-2 mt-12 flex flex-col gap-2"
+              className="-ml-2 mt-6 flex flex-col gap-2"
               sections={page.product.sections}
               activeSectionId={page.activeSection?.id}
             />
