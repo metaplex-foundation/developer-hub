@@ -11,6 +11,7 @@ export const tokenMetadata = {
   name: 'Token Metadata',
   headline: 'Digital ownership standard',
   description: 'The NFT standard on Solana.',
+  navigationMenuCatergory: 'Create',
   path: 'token-metadata',
   logo: Logo,
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',

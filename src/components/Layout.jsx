@@ -64,7 +64,7 @@ export function Layout({ children, page }) {
                 )}
               </header>
             )}
-            <Prose>{children}</Prose>
+            <Prose className="break-words">{children}</Prose>
           </article>
           <dl className="mt-12 flex border-t border-slate-200 pt-6 dark:border-slate-800">
             {page.activeSection?.previousPage && (

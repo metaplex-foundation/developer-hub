@@ -10,6 +10,7 @@ import { Logo, LogoWithName } from '@/components/products/Logo'
 import { Sections } from '@/components/products/Sections'
 import { SwitcherDialog } from '@/components/products/SwitcherDialog'
 import { SwitcherPopover } from '@/components/products/SwitcherPopover'
+import NavList from './NavList'
 
 export function Header({ page }) {
   let [isScrolled, setIsScrolled] = useState(false)
@@ -28,9 +29,9 @@ export function Header({ page }) {
   return (
     <header
       className={clsx(
-        'sticky top-0 z-50 bg-white shadow-md shadow-slate-900/5 transition duration-500 dark:shadow-none',
+        'sticky top-0 z-50 bg-white shadow-md shadow-neutral-900/5 transition duration-500 dark:shadow-none',
         isScrolled
-          ? 'dark:bg-slate-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-slate-900/75'
+          ? 'dark:bg-neutral-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-neutral-900/75'
           : 'dark:bg-transparent'
       )}
     >
@@ -40,15 +41,11 @@ export function Header({ page }) {
         </div>
         <div className="relative flex flex-grow basis-0 items-center">
           <div className="hidden flex-col lg:flex">
-            <SwitcherPopover>
-              <Popover.Button className="-mx-4 -my-2 rounded-lg px-4 py-2">
-                <Logo product={page.product} className="h-8 w-8 sm:hidden" />
-                <LogoWithName
-                  product={page.product}
-                  className="hidden sm:flex"
-                />
-              </Popover.Button>
-            </SwitcherPopover>
+            <Link href={`/${page.product.path}`}>
+              <Logo product={page.product} className="h-8 w-8 sm:hidden" />
+              <LogoWithName product={page.product} className="hidden sm:flex" />
+              {console.log(page.product)}
+            </Link>
           </div>
           <div className="flex flex-col lg:hidden">
             <SwitcherDialog>
@@ -67,10 +64,13 @@ export function Header({ page }) {
             </SwitcherDialog>
           </div>
         </div>
-        <div className="-my-5 mr-6 sm:mr-8 lg:mr-0">
-          <Search />
-        </div>
-        <div className="relative flex basis-0 justify-end gap-6 sm:gap-8 lg:flex-grow">
+
+        <NavList />
+
+        <div className="relative flex basis-0 items-center justify-end gap-6 sm:gap-8 lg:flex-grow">
+          <div className="-my-5 mr-6 sm:mr-8 lg:mr-0">
+            <Search />
+          </div>
           <ThemeSelector className="relative z-10" />
           <Link
             href={page.product.github}

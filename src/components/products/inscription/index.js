@@ -1,8 +1,6 @@
 import {
-  changelogSection,
   documentationSection,
-  recipesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
 import { Hero } from './Hero'
 import { Logo } from './Logo'
@@ -13,6 +11,7 @@ export const inscription = {
   description: 'Inscribe Data to Solana state.',
   path: 'inscription',
   logo: Logo,
+  navigationMenuCatergory: 'Create',
   github: 'https://github.com/metaplex-foundation/mpl-inscription',
   className: 'accent-pink',
   heroes: [{ path: '/inscription', component: Hero }],

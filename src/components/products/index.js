@@ -25,4 +25,4 @@ export const products = [
   umi,
   amman,
   das
-]
+].sort((a, b) => a.name.localeCompare(b.name))

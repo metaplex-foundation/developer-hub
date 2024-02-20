@@ -11,6 +11,7 @@ export const candyMachine = {
   name: 'Candy Machine',
   headline: 'NFT launchpad',
   description: 'Launch your next NFT collection on Solana.',
+  navigationMenuCatergory: 'Commerce',
   path: 'candy-machine',
   logo: Logo,
   github: 'https://github.com/metaplex-foundation/mpl-candy-machine',

@@ -5,7 +5,7 @@ export function Hero({ page }) {
     <BaseHero
       page={page}
       title="Developer Hub"
-      primaryCta={{ title: 'Browse our Products', href: '/products' }}
+      primaryCta={{ title: 'Browse our Products', href: '/programs-and-tools' }}
       light2Off
       light3Off
     ></BaseHero>

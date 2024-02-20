@@ -10,7 +10,7 @@ An example is something the community is calling a "semi-fungible token", an SPL
 
 The consensus seems to be that these should be stored in wallets in the same view as standard NFTs, or in their own view but separate from "standard" fungible SPL tokens. These tokens are becoming popular in gaming contexts to support fungible items such as a kind of sword or a piece of wood, etc. but which are in a different league from typical fungible SPL tokens such as USDC.
 
-## The Token Standard field
+## [The Token Standard field](/token-metadata/token-standard#the-token-standard-field)
 
 In order to support this particular use-case but also to make the standard broad enough to allow expansion to other token types in the future, we keep track of the token's fungibility using the `Token Standard` enum on the Metadata account. This field maps to a particular JSON standard and is used to objectively differentiate token types.
 
