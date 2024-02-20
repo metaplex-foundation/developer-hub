@@ -29,7 +29,7 @@ export function Hero({
   } : undefined);
 
   return (
-    <div className="overflow-hidden bg-slate-900 dark:-mb-32 dark:mt-[-7rem] dark:pb-32 dark:pt-[7rem] dark:lg:mt-[-7.25rem] dark:lg:pt-[7.25rem]">
+    <div className="overflow-hidden bg-neutral-900 dark:-mb-32 dark:mt-[-7rem] dark:pb-32 dark:pt-[7rem] dark:lg:mt-[-7.25rem] dark:lg:pt-[7.25rem]">
       <div className="py-16 sm:px-2 lg:relative lg:px-0 lg:py-20">
         <div
           className={clsx(

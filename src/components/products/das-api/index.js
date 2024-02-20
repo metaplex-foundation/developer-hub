@@ -15,6 +15,7 @@ export const das = {
   path: 'das-api',
   logo: Logo,
   github: 'https://github.com/metaplex-foundation/digital-asset-standard-api',
+  navigationMenuCatergory: 'Dev Tools',
   className: 'accent-sky',
   heroes: [{ path: '/das-api', component: Hero }],
   sections: [

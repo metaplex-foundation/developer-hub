@@ -10,7 +10,7 @@ An example is something the community is calling a "semi-fungible token", an SPL
 
 The consensus seems to be that these should be stored in wallets in the same view as standard NFTs, or in their own view but separate from "standard" fungible SPL tokens. These tokens are becoming popular in gaming contexts to support fungible items such as a kind of sword or a piece of wood, etc. but which are in a different league from typical fungible SPL tokens such as USDC.
 
-## The Token Standard field
+## [The Token Standard field](/token-metadata/token-standard#the-token-standard-field)
 
 In order to support this particular use-case but also to make the standard broad enough to allow expansion to other token types in the future, we keep track of the token's fungibility using the `Token Standard` enum on the Metadata account. This field maps to a particular JSON standard and is used to objectively differentiate token types.
 
@@ -18,11 +18,11 @@ This solves a pain point for third parties such as wallets which, before this fi
 
 The Token Standard field can have the following values:
 
-- `NonFungible`: A non-fungible token with a Master Edition.
-- `FungibleAsset`: A token with metadata that can also have attributes, sometimes called Semi-Fungible.
-- `Fungible`: A token with simple metadata.
-- `NonFungibleEdition`: A non-fungible token with an Edition account (printed from a Master edition).
-- `ProgrammableNonFungible`: A special `NonFungible` token that is frozen at all times to enforce custom authorization rules.
+- `0` / `NonFungible`: A non-fungible token with a Master Edition.
+- `1` / `FungibleAsset` (1): A token with metadata that can also have attributes, sometimes called Semi-Fungible.
+- `2` / `Fungible` (2): A token with simple metadata.
+- `3 / `NonFungibleEdition` (3): A non-fungible token with an Edition account (printed from a Master edition).
+- `4` / `ProgrammableNonFungible` (4): A special `NonFungible` token that is frozen at all times to enforce custom authorization rules.
 
 It is important to note that the Token Standard is set automatically by the Token Metadata program and cannot be manually updated. It uses the following logic to apply the correct standard:
 

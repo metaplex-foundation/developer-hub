@@ -27,4 +27,4 @@ export const products = [
   amman,
   das,
   legacyDocumentation
-]
+].sort((a, b) => a.name.localeCompare(b.name))

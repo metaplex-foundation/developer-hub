@@ -46,11 +46,11 @@ export function Search() {
     <>
       <button
         type="button"
-        className="group flex h-6 w-6 items-center justify-center sm:justify-start lg:h-auto lg:flex-none lg:rounded-lg lg:py-2.5 lg:pl-4 lg:pr-3.5 lg:text-sm lg:ring-1 lg:ring-slate-200 lg:hover:ring-slate-300 dark:lg:bg-slate-800/75 dark:lg:ring-inset dark:lg:ring-white/5 dark:lg:hover:bg-slate-700/40 dark:lg:hover:ring-slate-500 lg:w-96"
+        className='flex justify-center items-center'
         onClick={onOpen}
       >
-        <SearchIcon className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 lg:group-hover:fill-slate-400" />
-        <span className="sr-only lg:not-sr-only lg:ml-2 lg:text-slate-500 lg:dark:text-slate-400">
+        <SearchIcon className="h-7 w-7 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 lg:group-hover:fill-slate-400" />
+        {/* <span className="sr-only lg:not-sr-only lg:ml-2 lg:text-slate-500 lg:dark:text-slate-400">
           Search docs
         </span>
         {modifierKey && (
@@ -58,7 +58,7 @@ export function Search() {
             <kbd className="font-sans">{modifierKey}</kbd>
             <kbd className="font-sans">K</kbd>
           </kbd>
-        )}
+        )} */}
       </button>
       {isOpen &&
         createPortal(
@@ -72,6 +72,7 @@ export function Search() {
                 Router.push(itemUrl)
               },
             }}
+            className="fixed inset-0 z-50 bg-red-500 dark:bg-neutral-900"
           />,
           document.body
         )}
