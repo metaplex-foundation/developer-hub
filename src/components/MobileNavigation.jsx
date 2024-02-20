@@ -86,6 +86,11 @@ export function MobileNavigation({ page }) {
               <LogoWithName product={page.product} />
             </Link>
           </div>
+          {page.product.name != 'Metaplex' && 
+          <Link href="/" className="mt-6 block text-slate-900 dark:text-white">
+            Products and Tools
+          </Link>
+          }
           {page.product.sections && page.product.sections.length > 1 && (
             <Sections
               className="-ml-2 mt-12 flex flex-col gap-2"

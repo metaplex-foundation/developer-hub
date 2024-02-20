@@ -21,7 +21,7 @@ export function MobileAppGrid({
       <li key={hub.path}>
         <Link
           href={`/${hub.path}`}
-          className="block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
+          className="block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700 sticky"
           onClick={onClick}
         >
           <LogoWithName product={hub}></LogoWithName>

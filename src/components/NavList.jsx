@@ -16,7 +16,7 @@ const NavList = () => {
       {menuItems.map((item, index) => {
         return (
           <>
-            <div className="hidden flex-col lg:flex">
+            <div className="hidden flex-col lg:flex" key={index}>
               <SwitcherPopover menuItem={menuItems[index]}>
                 <Popover.Button className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white" onClick={() => setActive(index)}>
                   {item}

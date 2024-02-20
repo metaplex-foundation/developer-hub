@@ -22,11 +22,11 @@ export function SwitcherDialog({ children, props }) {
 
         {/* Full-screen scrollable container */}
         <div className=" fixed max-h-screen h-full inset-x-0 top-0
-        l-0 p-4">
+        l-0">
           {/* Container to center the panel */}
-          <div className="relative flex max-h-full  p-4  items-center justify-center">
+          <div className="relative flex max-h-[95vh]  p-4">
             {/* The actual dialog panel  */}
-            <Dialog.Panel className="relative max-h-screen mx-auto w-full rounded-xl bg-white p-4 shadow-xl ring-1 ring-black ring-opacity-5 dark:border dark:border-slate-600 dark:bg-neutral-900 overflow-auto">
+            <Dialog.Panel className="relative mx-auto w-full rounded-xl bg-white p-4 shadow-xl ring-1 ring-black ring-opacity-5 dark:border dark:border-slate-600 dark:bg-neutral-900 overflow-auto">
               <div
                 className="absolute right-5 z-50 text-black hover:cursor-pointer dark:text-white"
                 onClick={(e) => {
