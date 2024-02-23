@@ -55,7 +55,10 @@ You can retrieve the leaf and determine the asset ID from the `mintV1` transacti
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { parseLeafFromMintV1Transaction } from '../src';
+import {
+    findLeafAssetIdPda,
+    parseLeafFromMintV1Transaction
+} from "@metaplex-foundation/mpl-bubblegum";
 
 const { signature } = await mintV1(umi, { leafOwner, merkleTree, metadata }).sendAndConfirm(umi, { confirm: { commitment: 'confirmed' } });
 const leaf: LeafSchema = await parseLeafFromMintV1Transaction(umi, signature);
