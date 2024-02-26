@@ -50,6 +50,7 @@ Token Metadata is a Metaplex program that deals with the creation and management
 
 Program feature set includes:
 
+- Data Fetching
 - Minting
 - Updating
 - Transfering
