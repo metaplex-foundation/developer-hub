@@ -44,7 +44,7 @@ Program feature set includes:
 
 - Writing Data directly to the Solana blockchain
 
-## [Token Metadata](/token-metadata)
+## [Token Metadata (NFT, pNFT)](/token-metadata)
 
 Token Metadata is a Metaplex program that deals with the creation and management of NFTs and pNFTs. Token Metadata NFTs were the first nft standard on Solana while pNFTs where later created to include royalty enforcement.
 
