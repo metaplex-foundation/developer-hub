@@ -6,7 +6,7 @@ description: An overview of Metaplex Umi Plugins.
 
 Metaplex programs have been generated via Kinobi to work and run as plugin's via Umi. Each program in the Metaplex library has a different use and purpose in the Solana eco system. You can find even more Plugins to use with Umi in the [interface implementations page](/umi/implementations)!
 
-## [Bubblegum](/bubblegum)
+## [Bubblegum (cNFT)](/bubblegum)
 
 Bubblegum is a Metaplex program that deals with the creation and management of cNFTs (Compressed NFTS) on the Solana Blockchain. cNfts are cheaper to create and mint than their traditional NFT and pNFT counterparts from Token Metadata.
 
