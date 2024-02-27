@@ -43,6 +43,7 @@ The Metaplex Inscription Program allows you to write data directly to Solana, us
 Program feature set includes:
 
 - Writing Data directly to the Solana blockchain
+- Reading inscription data from the Solana blochain
 
 ## [Token Metadata (NFT, pNFT)](/token-metadata)
 
