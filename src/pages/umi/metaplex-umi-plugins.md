@@ -1,5 +1,5 @@
 ---
-title: Meteplex Umi Plugins
+title: Metaplex Umi Plugins
 metaTitle: Umi - Meteplex Umi Plugins
 description: An overview of Meteplex Umi Plugins.
 ---
