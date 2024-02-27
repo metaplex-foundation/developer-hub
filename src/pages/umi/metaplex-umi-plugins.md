@@ -4,7 +4,7 @@ metaTitle: Umi - Metaplex Umi Plugins
 description: An overview of Metaplex Umi Plugins.
 ---
 
-Metaplex programs have been generated via Kinobi to work and run as plugin's via Umi. Each program in the Metaplex library has a different use and purpose in the Solana eco system.
+Metaplex programs have been generated via Kinobi to work and run as plugin's via Umi. Each program in the Metaplex library has a different use and purpose in the Solana eco system. You can find even more Plugins to use with Umi in the [interface implementations page](/umi/implementations)!
 
 ## [Bubblegum](/bubblegum)
 
