@@ -34,7 +34,7 @@ The state data of uncompressed NFTs is all stored in on-chain accounts. This is 
 
 Program feature set includes:
 
-- Data fetching
+- Fast Data fetching, including compressed NFTs
 
 ## [Inscriptions](/inscriptions)
 
