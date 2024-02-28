@@ -27,6 +27,7 @@ export const umi = {
             { title: 'Overview', href: '/umi' },
             { title: 'Getting started', href: '/umi/getting-started' },
             { title: 'Connecting to Umi', href: '/umi/connecting-to-umi' },
+            { title: 'Metaplex Umi Plugins', href: '/umi/metaplex-umi-plugins' },
             { title: 'Web3js Differences', href: '/umi/web3js-differences' },
             
           ],
