@@ -13,6 +13,7 @@
     "@docsearch/react": "^3.2.1",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.18",
+    "@hotjar/browser": "^1.0.9",
     "@markdoc/markdoc": "0.3.0",
     "@markdoc/next.js": "0.2.3",
     "@sindresorhus/slugify": "^2.1.0",
