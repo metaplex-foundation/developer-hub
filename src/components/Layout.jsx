@@ -14,7 +14,9 @@ export function Layout({ children, page }) {
   const Hero = page.activeHero
   useLightense()
   useAccentClass(page.product)
-  Hotjar.init(3793483, 6);
+  if(process.env.NEXT_HOTJAR_ID && process.env.NEXT_HOTJAR_Version){
+    Hotjar.init(process.env.NEXT_HOTJAR_ID, process.env.NEXT_HOTJAR_Version);
+  }
 
   return (
     <>
