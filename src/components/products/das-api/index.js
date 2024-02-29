@@ -8,7 +8,7 @@ import { Hero } from './Hero'
 import { Logo } from './Logo'
 
 export const das = {
-  name: 'DAS Api',
+  name: 'DAS API',
   headline: 'DAS API',
   description:
     'A DAS API Client for access the Digital Asset Standard',

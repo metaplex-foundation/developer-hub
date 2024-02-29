@@ -1,12 +1,12 @@
 ---
 title: Getting Started
-metaTitle: DAS Api - Getting Started
-description: Installation and setup of the Metaplex DAS Api client.
+metaTitle: DAS API - Getting Started
+description: Installation and setup of the Metaplex DAS API client.
 ---
 
 The `@metaplex-foundation/digital-asset-standard-api` package can be use to interact with Metaplex DAS API:
 
-The DAS Api client is a Umi plugin so you will have to install Umi in conjunction with the DAS Api client.
+The DAS API client is a Umi plugin so you will have to install Umi in conjunction with the DAS API client.
 
 You can install the plugin from the location below.
 

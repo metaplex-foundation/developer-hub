@@ -1,10 +1,10 @@
 ---
 title: Methods
-metaTitle: DAS Api - Methods
-description: Callable Api Methods for the Metaplex DAS Api client.
+metaTitle: DAS API - Methods
+description: Callable API Methods for the Metaplex DAS API client.
 ---
 
-The DAS Api supports the following methods;
+The DAS API supports the following methods;
 
 ## `getAsset`
 
