@@ -22,12 +22,6 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 const umi = createUmi("exampleDasProvider.com").use(dasApi());
 ```
 
-The plugin can be used with any RPC that supports the Metaplex DAS API specification – the following RPCs (in alphabetical order) support the specification:
-
-- [Helius](https://www.helius.dev/)
-- [Hello Moon](https://www.hellomoon.io/developers)
-- [QuickNode](https://www.quicknode.com/)
-- [Shyft](https://shyft.to/)
-- [Triton](https://triton.one/)
+The plugin can be used with any RPC that supports the Metaplex DAS API specification – RPCs that support the specification can be found on the [RPC Providers page](/rpc-providers).
 
 Note You might need to contact your RPC provider to "enable" the DAS API on your endpoint.
