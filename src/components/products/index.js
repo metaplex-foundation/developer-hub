@@ -10,6 +10,7 @@ import { toolbox } from './toolbox'
 import { umi } from './umi'
 import { amman } from './amman'
 import { das } from './das-api'
+import { core } from './core'
 
 
 export const products = [
@@ -24,5 +25,6 @@ export const products = [
   inscription,
   umi,
   amman,
-  das
+  das,
+  core,
 ].sort((a, b) => a.name.localeCompare(b.name))
