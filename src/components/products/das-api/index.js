@@ -35,7 +35,7 @@ export const das = {
             { title: 'Method Overview', href: '/das-api/methods' },
             { title: 'Get Asset', href: '/das-api/methods/get-asset' },
             { title: 'Get Asset Proof', href: '/das-api/methods/get-asset-proof' },
-            { title: 'Get Asset By Authority', href: '/das-api/methods/get-asset-proof' },
+            { title: 'Get Asset By Authority', href: '/das-api/methods/get-asset-by-authority' },
             { title: 'Get Asset By Creator', href: '/das-api/methods/get-asset-by-creator' },
             { title: 'Get Asset By Group', href: '/das-api/methods/get-asset-by-group' },
             { title: 'Get Asset By Owner', href: '/das-api/methods/get-asset-by-owner' },
