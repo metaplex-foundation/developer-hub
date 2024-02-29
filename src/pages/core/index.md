@@ -40,10 +40,73 @@ asset, including the owner
 
 {% /diagram %}
 
-//TODO: Describe existing fields in a diagram (similar to metadata account)
+The Core Asset account represents the bare minimum data for a digital asset. This structure provides an unopinionated blockchain primitive for on-chain ownership.
 
-//TODO: Describe JSON Standard (similar to TM?)
+{% diagram %}
+{% node %}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
+{% /node %}
+{% node y="70" parent="wallet" theme="transparent" /%}
+{% node x="200" parent="wallet" %}
+{% node #asset label="Asset Account" theme="blue" /%}
+{% node label="Owner: Core Program" theme="dimmed" /%}
+{% node label="Key = Asset" /%}
+{% node label="Owner" /%}
+{% node label="Update Authority" /%}
+{% node label="Name" /%}
+{% node label="URI" /%}
+{% /node %}
+{% node y="70" parent="asset" theme="transparent" %}
+{% /node %}
 
+{% edge from="wallet" to="asset" /%}
+
+{% /diagram %}
+
+One important attribute of the Asset Account is the `URI` attribute that points to a JSON file off-chain. This is used to safely provide additional data whilst not being constrained by the fees involved in storing on-chain data. That JSON file [follows a certain standard](/token-metadata/token-standard) that anyone can use to find useful information on tokens.
+
+{% diagram %}
+{% node %}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
+{% /node %}
+{% node y="70" parent="wallet" theme="transparent" /%}
+{% node x="200" parent="wallet" %}
+{% node #asset label="Asset Account" theme="blue" /%}
+{% node label="Owner: Core Program" theme="dimmed" /%}
+{% node label="Key = Asset" /%}
+{% node label="Owner" /%}
+{% node label="Update Authority" /%}
+{% node label="Name" /%}
+{% node #uri label="URI" /%}
+{% /node %}
+{% node y="70" parent="asset" theme="transparent" %}
+{% /node %}
+
+{% node parent="uri" x="-200" y="-23" %}
+{% node #json theme="slate" %}
+Off-chain \
+JSON Metadata
+{% /node %}
+{% node label="Name" /%}
+{% node label="Description" /%}
+{% node label="Image" /%}
+{% node label="Animated URL" /%}
+{% node label="Attributes" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% edge from="wallet" to="asset" /%}
+{% edge from="uri" to="json" path="straight" /%}
+
+{% /diagram %}
+
+Note that, this JSON file can be stored using a permanent storage solution such as Arweave to ensure it cannot be updated. Additionally, one can set the `Update Authority` field to None to make it immutable and, therefore, forbid the `URI` and `Name` attributes to ever be changed. Using this combination, we can guarantee the immutability of the off-chain JSON file.
+
+## Compression
+
+## Plugins
 
 ## And a lot more
 

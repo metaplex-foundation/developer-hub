@@ -29,12 +29,32 @@ export const core = {
               title: 'Getting Started',
               href: '/core/getting-started',
             },
+            { title: 'FAQ', href: '/core/faq' },
           ],
         },
         {
           title: 'Features',
           links: [
-
+            { title: 'Minting Assets', href: '/core/mint' },
+            { title: 'Fetching Assets', href: '/core/fetch' },
+            { title: 'Updating Assets', href: '/core/update' },
+            { title: 'Transferring Assets', href: '/core/transfer' },
+            { title: 'Burning Assets', href: '/core/burn' },
+            {
+              title: 'Collection Management',
+              href: '/core/collections',
+            },
+            { title: 'Compressing Assets', href: '/core/compress' },
+          ],
+        },
+        {
+          title: 'Plugins',
+          links: [
+            { title: 'Burn Delegate', href: '/core/plugins/burn-delegate' },
+            { title: 'Freeze Delegate', href: '/core/plugins/freeze-delegate' },
+            { title: 'Transfer Delegate', href: '/core/plugins/transfer-delegate' },
+            { title: 'Update Delegate', href: '/core/plugins/update-delegate' },
+            { title: 'Royalties Delegate', href: '/core/plugins/royalties' },
           ],
         },
       ],
