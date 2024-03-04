@@ -36,7 +36,7 @@ export function MarkdocGrid() {
   return (
     <div className="not-prose">
       <Grid
-        className="relative md:grid-flow-col md:grid-cols-2 md:grid-rows-4"
+        className="relative md:grid-flow-col md:grid-cols-4 md:grid-rows-4"
         withoutFallback
       />
     </div>

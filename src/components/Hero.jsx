@@ -23,10 +23,10 @@ export function Hero({
     title: 'Get started',
     href: `/${page.product.path}/getting-started`,
   }
-  secondaryCta = secondaryCta ?? {
+  secondaryCta = secondaryCta ?? (page.product.github ? {
     title: 'View on GitHub',
     href: page.product.github,
-  }
+  } : undefined);
 
   return (
     <div className="overflow-hidden bg-neutral-900 dark:-mb-32 dark:mt-[-7rem] dark:pb-32 dark:pt-[7rem] dark:lg:mt-[-7.25rem] dark:lg:pt-[7.25rem]">
@@ -63,9 +63,11 @@ export function Hero({
               )}
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
                 <Button href={primaryCta.href}>{primaryCta.title}</Button>
-                <Button href={secondaryCta.href} variant="secondary">
-                  {secondaryCta.title}
-                </Button>
+                {secondaryCta &&
+                  <Button href={secondaryCta.href} variant="secondary">
+                    {secondaryCta.title}
+                  </Button>
+                }
               </div>
             </div>
           </div>
