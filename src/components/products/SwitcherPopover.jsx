@@ -21,7 +21,7 @@ export function SwitcherPopover({ children, menuItem, ...props }) {
               className="m-auto w-full max-w-[600px]  overflow-hidden  rounded-lg bg-white p-4 shadow-xl ring-1 ring-black ring-opacity-5 dark:border dark:border-slate-600 dark:bg-neutral-900"
             >
               <Grid
-                className="relative md:grid-flow-row md:grid-cols-4"
+                className="relative md:grid-flow-row md:grid-cols-2"
                 onClick={close}
                 menuItem={menuItem}
               />

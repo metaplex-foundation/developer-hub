@@ -12,6 +12,7 @@ export const legacyDocumentation = {
   headline: 'Products from our old docs',
   description: 'A collection of documentation of older Programs and Tools which might not be used anymore or deprecated. Migrated from our old docs for documentation for completeness.',
   path: 'legacy-documentation',
+  navigationMenuCatergory: 'Dev Tools',
   logo: Logo,
   github: '',
   className: 'accent-green',
