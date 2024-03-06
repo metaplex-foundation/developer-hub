@@ -30,11 +30,10 @@ import { create } from '@metaplex-foundation/mpl-candy-machine'
 import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
 
 // Create the Collection NFT.
-const collectionUpdateAuthority = generateSigner(umi)
 const collectionMint = generateSigner(umi)
 await createNft(umi, {
   mint: collectionMint,
-  authority: collectionUpdateAuthority,
+  authority: umi.identity,
   name: 'My Collection NFT',
   uri: 'https://example.com/path/to/some/json/metadata.json',
   sellerFeeBasisPoints: percentAmount(9.99, 2), // 9.99%
@@ -46,7 +45,7 @@ const candyMachine = generateSigner(umi)
 await create(umi, {
   candyMachine,
   collectionMint: collectionMint.publicKey,
-  collectionUpdateAuthority,
+  collectionUpdateAuthority: umi.identity,
   tokenStandard: TokenStandard.NonFungible,
   sellerFeeBasisPoints: percentAmount(9.99, 2), // 9.99%
   itemsAvailable: 5000,
