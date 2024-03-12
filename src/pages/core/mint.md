@@ -187,14 +187,14 @@ MPL Core Assets support the use of plugins at both a Collection and at an Asset 
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { create, DataState } from '@metaplex-foundation/mpl-token-metadata'
+import { create, DataState, pluginAuthorityPair } from '@metaplex-foundation/mpl-token-metadata'
 
 const mint = generateSigner(umi)
 await create(umi, {
   dataState: DataState.AccountState,
   asset: assetAddress,
-  name: 'Test Bread',
-  uri: 'https://example.com/bread',
+  name: 'My Nft',
+  uri: 'https://example.com/my-nft',
   plugins: [
     pluginAuthorityPair({
       type: 'Freeze',
