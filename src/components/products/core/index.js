@@ -68,9 +68,18 @@ export const core = {
             { title: 'Royalties Plugin', href: '/core/plugins/royalties' },
             { title: 'Update Plugin', href: '/core/plugins/update' },
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
-            { title: 'Permanent Transfer Plugin', href: '/core/plugins/permanent-transfer' },
-            { title: 'Permanent Freeze Plugin', href: '/core/plugins/permanent-freeze' },
-            { title: 'Permanent Burn Plugin', href: '/core/plugins/permanent-burn' },
+            {
+              title: 'Permanent Transfer Plugin',
+              href: '/core/plugins/permanent-transfer',
+            },
+            {
+              title: 'Permanent Freeze Plugin',
+              href: '/core/plugins/permanent-freeze',
+            },
+            {
+              title: 'Permanent Burn Plugin',
+              href: '/core/plugins/permanent-burn',
+            },
           ],
         },
         {
