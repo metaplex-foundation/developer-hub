@@ -17,7 +17,7 @@ Plugins support the ability to assign an authority over the plugin. If an `initA
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { burn } from '@metaplex-foundation/mpl-core'
+import { addPlugin, plugin } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
     asset: asset.publicKey,
@@ -34,7 +34,7 @@ await addPlugin(umi, {
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { burn } from '@metaplex-foundation/mpl-core'
+import { addPlugin, plugin  } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
     asset: asset.publicKey,

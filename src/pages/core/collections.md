@@ -4,17 +4,9 @@ metaTitle: Core - Verified Collections
 description: Learn how to safely manage Collections of Assets on Core
 ---
 
-Certified Collections enables NFTs – and tokens in general — **to be grouped together** and for that information to be **verified on-chain**. Additionally, it makes it easier to manage these collections by allocating data for them on-chain. {% .lead %}
-
-This feature provides the following advantages:
-
-- Easy to identify which collection any given NFT belongs to without making additional on-chain calls.
-- Possible to find all NFTs that belong to a given collection ([Check the FAQ to see how](/token-metadata/faq#how-can-i-filter-metadata-accounts-by-collection-using-get-program-accounts)).
-- Easy to manage the collection metadata such as its name, description and image.
-
 ## What are Collections?
 
-In order to group NFTs — or any token — together, we must first create a Collection NFT whose purpose is to store any metadata related to that collection. That's right, **a collection of NFT is itself, an NFT**. It has the same data layout on-chain as any other NFT.
+Collections are a group of Assets that belong together, part of the same series, or group. In order to group Assets together, we must first create a Collection Asset whose purpose is to store any metadata related to that collection such as collection name and collection image. The Collection Asset acts as a front cover to your collection and can also store collection wide plugins. 
 
 ## Creating a Collection
 
@@ -41,8 +33,6 @@ A full detailed look at the on chain instruction it can be viewed here. [Github]
 
 ### Creating a Collection
 
-Creating a Collection NFT is very similar to creating a Regular NFT. The only difference is that we must set the `CollectionDetails` field as seen in the previous section. Some of our SDKs encapsulate this by requesting a `isCollection` attribute when creating an NFT.
-
 {% dialect-switcher title="Create a MPL Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
 
@@ -61,7 +51,6 @@ await createCollection(umi, {
 
 ### Creating a Collection with Plugins
 
-Creating a Collection NFT is very similar to creating a Regular NFT. The only difference is that we must set the `CollectionDetails` field as seen in the previous section. Some of our SDKs encapsulate this by requesting a `isCollection` attribute when creating an NFT.
 
 {% dialect-switcher title="Create a MPL Core Collection w/ Plugin" %}
 {% dialect title="JavaScript" id="js" %}
@@ -110,8 +99,6 @@ A full detailed look at the on chain instruction it can be viewed here. [Github]
 
 ### Updating a Collection
 
-Creating a Collection NFT is very similar to creating a Regular NFT. The only difference is that we must set the `CollectionDetails` field as seen in the previous section. Some of our SDKs encapsulate this by requesting a `isCollection` attribute when creating an NFT.
-
 {% dialect-switcher title="Updating a Collection" %}
 {% dialect title="JavaScript" id="js" %}
 
@@ -152,8 +139,6 @@ Some of the accounts may be abstracted out and/or optional in our sdks for ease 
 A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com)
 
 ### Updating a Collection Plugin
-
-Creating a Collection NFT is very similar to creating a Regular NFT. The only difference is that we must set the `CollectionDetails` field as seen in the previous section. Some of our SDKs encapsulate this by requesting a `isCollection` attribute when creating an NFT.
 
 {% dialect-switcher title="Updating a Collection Plugin" %}
 {% dialect title="JavaScript" id="js" %}

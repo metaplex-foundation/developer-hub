@@ -93,7 +93,7 @@ If you do not wish to set any ruleset rules then you can just pass the `__kind` 
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-const ruleSet = { __kind: 'None'}
+const ruleSet = { __kind: 'one'}
 ```
 
 {% /dialect %}
