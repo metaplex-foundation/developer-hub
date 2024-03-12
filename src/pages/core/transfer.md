@@ -4,27 +4,37 @@ metaTitle: Core - Transferring Assets
 description: Learn how to transfer Assets on Core
 ---
 
-The owner of an asset can transfer it to another account by sending a **Transfer** instruction to the Token Metadata program. This instruction accepts the following attributes:
+The owner of an Asset can transfer ownership to another account by sending a **Transfer** instruction to the MPL Core program.
 
-- **Authority**: The signer that authorized the transfer. Typically, this is the owner of the asset but note that certain delegated authorities can also transfer assets on behalf of the owner as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
-- **Token Owner**: The public key of the current owner of the asset.
-- **Destination Owner**: The public key of the new owner of the asset.
-- **Token Standard**: The standard of the asset being transferred. This instruction works for all Token Standards in order to provide a unified interface for transferring assets. That being said, it is worth noting that non-programmable assets can be transferred using the **Transfer** instruction of the SPL Token program directly.
+## Instruction Account List
 
-Here is how you can use our SDKs to transfer an asset on Token Metadata.
+| Account          | Description                                            |
+|----------------|--------------------------------------------------------|
+| asset          | The address of the MPL Core Asset.                     |
+| collection     | The collection to which the Core Asset belongs.        |
+| authority      | The owner or delegate of the asset.                    |
+| payer          | The account paying for the storage fees.               |
+| newOwner       | The new owner to which to transfer the asset.          |
+| systemProgram  | The System Program account.                            |
+| logWrapper     | The SPL Noop Program.                                  |
+
+
+Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
+A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com)
+
+
+## Transfer
+Here is how you can use our SDKs to transfer an asset on MPL Core.
 
 {% dialect-switcher title="Transfer Assets" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
+import { transfer } from '@metaplex-foundation/mpl-core'
 
-await transferV1(umi, {
-  mint,
-  authority: currentOwner,
-  tokenOwner: currentOwner.publicKey,
-  destinationOwner: newOwner.publicKey,
-  tokenStandard: TokenStandard.NonFungible,
+await transfer(umi, {
+  asset: asset.publicKey,
+  newOwner: newOwner.publicKey,
 }).sendAndConfirm(umi)
 ```
 

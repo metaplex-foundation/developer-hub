@@ -4,53 +4,45 @@ metaTitle: Core - Updating Assets
 description: Learn how to update Assets on Core
 ---
 
-The update authority of an asset can update its **Metadata** account using the **Update** instruction as long as the **Is Mutable** attribute is set to `true`. The **Update** instruction requires the **Update Authority** to sign the transaction and can update the following attributes of the **Metadata** account:
+The update authority or delegate of an Asset has the ability to change some of the core Asset data.
 
-- **Data**: The object that defines the Name, Symbol, URI, Seller Fee Basis Points and the array of Creators of the asset. Note that the update authority can only add and/or remove unverified creators from the Creators array. The only exception is if the creator is the update authority, in which case the added or removed creators can be verified.
-- **Primary Sale Happened**: A boolean that indicates whether the asset has been sold before.
-- **Is Mutable**: A boolean that indicates whether the asset can be updated again. When changing this to `false`, any future updates will fail.
-- **Collection**: This attribute enables us to set or clear the collection of the asset. Note that when setting a new collection, the `verified` boolean must be set to `false` and [verified using another instruction](/token-metadata/collections).
-- **Collection Details**: This attribute enables us to set or clear the collection details of the asset.
-- **Rule Set**: This attribute enables us to set or clear the rule set of the asset. This is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
+## Instruction Account List
 
-Note that certain delegated authorities can also update the **Metadata** account of assets as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
+| Account       | Description                                     |
+| ------------- | ----------------------------------------------- |
+| asset         | The address of the MPL Core Asset.              |
+| collection    | The collection to which the Core Asset belongs. |
+| authority     | The owner or delegate of the asset.             |
+| payer         | The account paying for the storage fees.        |
+| newOwner      | The new owner to which to transfer the asset.   |
+| systemProgram | The System Program account.                     |
+| logWrapper    | The SPL Noop Program.                           |
 
-Here is how you can use our SDKs to update an asset on Token Metadata.
+## Instruction Args
 
-{% dialect-switcher title="Update Assets" %}
+| Args    | Description                      |
+| ------- | -------------------------------- |
+| newName | The new name of your Core Asset. |
+| newUri  | The new off-chain metadata URI.  |
+
+Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
+A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com)
+
+## Updating an Asset
+
+Here is how you can use our SDKs to update an MPL Core Asset.
+
+{% dialect-switcher title="Update an Asset" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```ts
-import {
-  updateV1,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
+import { update } from '@metaplex-foundation/core'
 
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateV1(umi, {
-  mint,
-  authority: updateAuthority,
-  data: { ...initialMetadata, name: 'Updated Asset' },
-}).sendAndConfirm(umi)
-```
-
-If you want to update more than just the **Data** attribute of the **Metadata** account, simply provide these attributes to the `updateV1` method.
-
-```ts
-import {
-  updateV1,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateV1(umi, {
-  mint,
-  authority: updateAuthority,
-  data: { ...initialMetadata, name: 'Updated Asset' },
-  primarySaleHappened: true,
-  isMutable: true,
-  // ...
+await update(umi, {
+  asset: asset.publicKey,
+  newName: 'New Nft Name',
+  newUri: 'https://example.com/new-uri',
 }).sendAndConfirm(umi)
 ```
 

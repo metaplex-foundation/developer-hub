@@ -6,9 +6,21 @@ description: Learn how to burn Assets on Core
 
 Asset can burn it using the **Burn** instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL will stay in the account to prevent it from being reopened. This instruction accepts the following attributes:
 
-- **Authority**: The signer that authorizes the burn. Typically, this is the owner of the asset but note that certain delegated authorities can also burn assets on behalf of the owner as discussed in the "[Plugins](/core/plugins)" page.
-- **Owner**: The public key of the current owner of the asset.
-- **Collection**: The address of the collection the asset is part of, if any. 
+## Instruction Account List
+
+| Account       | Description                                     |
+| ------------- | ----------------------------------------------- |
+| asset         | The address of the MPL Core Asset.              |
+| collection    | The collection to which the Core Asset belongs. |
+| authority     | The owner or delegate of the asset.             |
+| payer         | The account paying for the storage fees.        |
+| systemProgram | The System Program account.                     |
+| logWrapper    | The SPL Noop Program.                           |
+
+Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
+A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com)
+
+## Burning an Asset
 
 Here is how you can use our SDKs to burn a Core asset. The snippet assumes that you are the owner of the asset.
 
@@ -18,9 +30,9 @@ Here is how you can use our SDKs to burn a Core asset. The snippet assumes that 
 ```ts
 import { burn } from '@metaplex-foundation/mpl-core'
 
-  await burn(umi, {
-    asset: asset.publicKey,
-  }).sendAndConfirm(umi);
+await burn(umi, {
+  asset: asset.publicKey,
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
@@ -28,16 +40,18 @@ import { burn } from '@metaplex-foundation/mpl-core'
 
 {% seperator h="6" /%}
 
+## Burning an Asset that is part of a Collection
+
 {% dialect-switcher title="Burning an Asset that is part of a collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
 import { burn } from '@metaplex-foundation/mpl-core'
 
-  await burn(umi, {
-    asset: asset.publicKey,
-    collection: collectionAdress
-  }).sendAndConfirm(umi);
+await burn(umi, {
+  asset: asset.publicKey,
+  collection: collectionAdress,
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}

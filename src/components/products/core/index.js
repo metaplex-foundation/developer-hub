@@ -44,17 +44,47 @@ export const core = {
               title: 'Collection Management',
               href: '/core/collections',
             },
-            { title: 'Compressing Assets', href: '/core/compress' },
           ],
         },
         {
           title: 'Plugins',
           links: [
-            { title: 'Burn Delegate', href: '/core/plugins/burn-delegate' },
-            { title: 'Freeze Delegate', href: '/core/plugins/freeze-delegate' },
-            { title: 'Transfer Delegate', href: '/core/plugins/transfer-delegate' },
-            { title: 'Update Delegate', href: '/core/plugins/update-delegate' },
-            { title: 'Royalties Delegate', href: '/core/plugins/royalties' },
+            { title: 'Overview', href: '/core/plugins/overview' },
+            { title: 'Adding Plugins', href: '/core/plugins/adding-plugins' },
+            {
+              title: 'Removing Plugins',
+              href: '/core/plugins/removing-plugins',
+            },
+            {
+              title: 'Delegating Plugins',
+              href: '/core/plugins/delegating-plugins',
+            },
+            {
+              title: 'Transfer Plugin',
+              href: '/core/plugins/transfer',
+            },
+            { title: 'Freeze Plugin', href: '/core/plugins/freeze' },
+            { title: 'Burn Plugin', href: '/core/plugins/burn' },
+            { title: 'Royalties Plugin', href: '/core/plugins/royalties' },
+            { title: 'Update Plugin', href: '/core/plugins/update' },
+            { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
+            { title: 'Permanent Transfer Plugin', href: '/core/plugins/permanent-transfer' },
+            { title: 'Permanent Freeze Plugin', href: '/core/plugins/permanent-freeze' },
+            { title: 'Permanent Burn Plugin', href: '/core/plugins/permanent-burn' },
+          ],
+        },
+        {
+          title: 'Intergration Guides',
+          links: [
+            { title: 'Wallets', href: '/core/intergrations/wallets' },
+            {
+              title: 'Market Places',
+              href: '/core/intergrations/market-places',
+            },
+            {
+              title: 'Staking',
+              href: '/core/intergrations/staking',
+            },
           ],
         },
       ],
