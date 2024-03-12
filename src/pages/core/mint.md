@@ -1,18 +1,15 @@
 ---
-title: Minting Assets
-metaTitle: Core - Minting Assets
-description: Learn how to mint NFTs, SFTs and Programmable NFTs (a.k.a. Assets) on Core
+title: Creating Assets
+metaTitle: Core - Creating Assets
+description: Learn how to create Assets on Core
 ---
 
-As we discussed in the [Token Metadata overview](/token-metadata), digital assets on Solana are composed of several on-chain accounts and off-chain data describing the token. On this page, we'll go over the process of minting these assets. {% .lead %}
+As discussed in the [Core overview](/core), digital assets on Core are composed of exactly one on-chain account and off-chain data describing the token. On this page, we'll go over the process of minting these assets. {% .lead %}
 
 ## The minting process
 
-Whether we want to mint a Fungible, Semi-Fungible or Non-Fungible asset, the overall process is the same:
-
-1. **Upload off-chain data.** First, we must ensure our off-chain data is ready. This means we must have a JSON file stored somewhere that describes our asset. It doesn't matter how or where that JSON file is stored, as long as it's accessible via a **URI**.
-2. **Create on-chain accounts.** Then, we must create the on-chain accounts that will hold our asset's data. Which exact accounts will be created depends on the **Token Standard** of our asset, but in all cases, a **Metadata** account will be created and will store the **URI** of our off-chain data.
-3. **Mint tokens.** Finally, we must mint the tokens associated with all these accounts. For Non-Fungible assets, that simply means minting from 0 to 1, since Non-Fungibility forbids us to have a supply greater than 1. For Fungible or Semi-Fungible assets, we may mint however many tokens we want.
+1. **Upload off-chain data.** First, we must ensure our off-chain data is ready. This means we must have a JSON file stored somewhere that describes our asset. It doesn't matter how or where that JSON file is stored, as long as it's accessible via a **URI**. The off chain metadata can look similar to the [old token metadata standard](/token-metadata/token-standard#the-non-fungible-standard).
+2. **Create on-chain account.** Then, we must create the on-chain accountsthat will hold our asset's data.
 
 Let's dig into these steps in more detail, whilst providing concrete code examples.
 

@@ -4,37 +4,40 @@ metaTitle: Core - Burning Assets
 description: Learn how to burn Assets on Core
 ---
 
-The owner of an asset can burn it using the **Burn** instruction of the Token Metadata program. This will close all possible accounts associated with the asset and return the various rent-exempt fees to the owner. This instruction accepts the following attributes:
+Asset can burn it using the **Burn** instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL will stay in the account to prevent it from being reopened. This instruction accepts the following attributes:
 
-- **Authority**: The signer that authorizes the burn. Typically, this is the owner of the asset but note that certain delegated authorities can also burn assets on behalf of the owner as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
-- **Token Owner**: The public key of the current owner of the asset.
-- **Token Standard**: The standard of the asset being burnt. This instruction works for all Token Standards in order to provide a unified interface for burning assets. That being said, it is worth noting that non-programmable assets can be burnt using the **Burn** instruction of the SPL Token program directly.
+- **Authority**: The signer that authorizes the burn. Typically, this is the owner of the asset but note that certain delegated authorities can also burn assets on behalf of the owner as discussed in the "[Plugins](/core/plugins)" page.
+- **Owner**: The public key of the current owner of the asset.
+- **Collection**: The address of the collection the asset is part of, if any. 
 
-The exact accounts closed by the **Burn** instruction depend on the Token Standard of the asset being burnt. Here's a table that summarizes the accounts for each Token Standard:
+Here is how you can use our SDKs to burn a Core asset. The snippet assumes that you are the owner of the asset.
 
-| Token Standard                 | Mint | Token                      | Metadata | Edition | Token Record | Edition Marker                    |
-| ------------------------------ | ---- | -------------------------- | -------- | ------- | ------------ | --------------------------------- |
-| `NonFungible`                  | ❌   | ✅                         | ✅       | ✅      | ❌           | ❌                                |
-| `NonFungibleEdition`           | ❌   | ✅                         | ✅       | ✅      | ❌           | ✅ if all prints for it are burnt |
-| `Fungible` and `FungibleAsset` | ❌   | ✅ if all tokens are burnt | ❌       | ❌      | ❌           | ❌                                |
-| `ProgrammableNonFungible`      | ❌   | ✅                         | ✅       | ✅      | ✅           | ❌                                |
-
-Note that the Mint account is never closed because the SPL Token program does not allow it.
-
-Here is how you can use our SDKs to burn an asset on Token Metadata.
-
-{% dialect-switcher title="Burning Assets" %}
+{% dialect-switcher title="Burning an Assets" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { burnV1 } from '@metaplex-foundation/mpl-token-metadata'
+import { burn } from '@metaplex-foundation/mpl-core'
 
-await burnV1(umi, {
-  mint,
-  authority: owner,
-  tokenOwner: owner.publicKey,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
+  await burn(umi, {
+    asset: asset.publicKey,
+  }).sendAndConfirm(umi);
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+{% seperator h="6" /%}
+
+{% dialect-switcher title="Burning an Asset that is part of a collection" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { burn } from '@metaplex-foundation/mpl-core'
+
+  await burn(umi, {
+    asset: asset.publicKey,
+    collection: collectionAdress
+  }).sendAndConfirm(umi);
 ```
 
 {% /dialect %}
