@@ -12,6 +12,13 @@ The Burn Plugin will work in areas such as;
 
 - Gaming scenario where the users NFT get burned based on an event that occurs.
 
+## Works With
+
+|                     |     |
+| ------------------- | --- |
+| MPL Core Asset      | ✅  |
+| MPL Core Collection | ❌  |
+
 ## Arguments
 
 The Burn Plugin doesn't contain any arguments to pass in.
