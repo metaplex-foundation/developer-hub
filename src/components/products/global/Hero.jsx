@@ -12,7 +12,7 @@ export function Hero({ page }) {
       light3Off
     >
       <Link href="/core">
-        <img src={CoreBanner.src} alt="Developer Hub" class="no-lightense" />
+        <img src={CoreBanner.src} alt="Developer Hub" className="no-lightense" />
       </Link>
       .
     </BaseHero>
