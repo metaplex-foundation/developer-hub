@@ -30,9 +30,9 @@ Authority managed plugins are plugins that the authority of the MPL Core Asset c
 
 Permanent plugins are plugins that are only available to add to an Asset at the time of mint/creation of the MPL Core Asset. If an Asset has already been created then Pernament plugins will not be available to add to the Asset.
 
-- [Permenant Transfer](/core/plugins/permenant-transfer)
-- [Permenant Freeze](/core/plugins/permenant-freeze)
-- [Permenant Burn](/core/plugins/permenant-burn)
+- [Permanent Transfer](/core/plugins/permenant-transfer)
+- [Permanent Freeze](/core/plugins/permenant-freeze)
+- [Permanent Burn](/core/plugins/permenant-burn)
 
 ## Collection Plugins
 

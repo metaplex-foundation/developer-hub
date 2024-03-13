@@ -4,7 +4,7 @@ metaTitle: Core - Burning Assets
 description: Learn how to burn Assets on Core
 ---
 
-Asset can burn it using the **Burn** instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL will stay in the account to prevent it from being reopened. This instruction accepts the following attributes:
+Assets can be burnt using the **Burn** instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL will stay in the account to prevent it from being reopened. This instruction accepts the following attributes:
 
 ## Instruction Account List
 
@@ -24,7 +24,7 @@ A full detailed look at the on chain instruction it can be viewed here. [Github]
 
 Here is how you can use our SDKs to burn a Core asset. The snippet assumes that you are the owner of the asset.
 
-{% dialect-switcher title="Burning an Assets" %}
+{% dialect-switcher title="Burning an Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts

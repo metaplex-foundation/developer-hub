@@ -1,7 +1,7 @@
 ---
-title: Adding Plugins
-metaTitle: Core - Adding Plugins
-description: Learn how to add plugins to MPL Core Assets and Collections
+title: Removing Plugins
+metaTitle: Core - Removing Plugins
+description: Learn how to remove plugins to MPL Core Assets and Collections
 ---
 
 
