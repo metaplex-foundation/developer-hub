@@ -62,13 +62,12 @@ An Allowlist is a list of programs that are allow to interaction with your MPL C
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-const ruleSet = {
-	__kind: 'ProgramAllowList',
-	fields: [
+import { ruleSet } from '@metaplex-foundation/mpl-core'
+
+const ruleSet = ruleSet('ProgramAllowList', [
 		publicKey("11111111111111111111111111111111")
 		publicKey("22222222222222222222222222222222")
-	]
-}
+	])
 ```
 
 {% /dialect %}
@@ -82,13 +81,12 @@ A Denylist is a list of programs that are not allowed to interact with your MPL 
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-const ruleSet = {
-	__kind: 'ProgramDenyList',
-	fields: [
+import { ruleSet } from '@metaplex-foundation/mpl-core'
+
+const ruleSet = ruleSet('ProgramDenyList', [
 		publicKey("11111111111111111111111111111111")
 		publicKey("22222222222222222222222222222222")
-	]
-}
+	])
 ```
 
 {% /dialect %}
@@ -102,7 +100,9 @@ If you do not wish to set any ruleset rules then you can just pass the `__kind` 
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-const ruleSet = { __kind: 'one'}
+import { ruleSet } from '@metaplex-foundation/mpl-core'
+
+const ruleSet = ruleSet('None')
 ```
 
 {% /dialect %}
@@ -114,7 +114,7 @@ const ruleSet = { __kind: 'one'}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, plugin } from '@metaplex-foundation/mpl-core'
+import { addPlugin, plugin, ruleSet } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
   asset: asset.publicKey,
@@ -125,13 +125,11 @@ await addPlugin(umi, {
             { address: PublicKey; percentage: number }
             { address: PublicKey; percentage: number }
         ],
-      	ruleset: {
-			__kind: 'ProgramDenyList',
-			fields: [
+      	ruleset: ruleSet('ProgramDenyList', [
 				publicKey("11111111111111111111111111111111")
 				publicKey("22222222222222222222222222222222")
 			]
-		},
+		)
     },
   ]),
 }).sendAndConfirm(umi)
