@@ -68,7 +68,7 @@ export const core = {
             { title: 'Freeze Plugin', href: '/core/plugins/freeze' },
             { title: 'Burn Plugin', href: '/core/plugins/burn' },
             { title: 'Royalties Plugin', href: '/core/plugins/royalties' },
-            { title: 'Update Plugin', href: '/core/plugins/update' },
+            { title: 'Update Delegate Plugin', href: '/core/plugins/update-delegate' },
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
             {
               title: 'Permanent Transfer Plugin',

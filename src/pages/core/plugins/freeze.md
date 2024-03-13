@@ -13,6 +13,13 @@ The Freeze Plugin will work in areas such as;
 - Escrowless staking.
 - Escrowless listing of an NFT on a marketplace.
 
+## Works With
+
+|                     |     |
+| ------------------- | --- |
+| MPL Core Asset      | ✅  |
+| MPL Core Collection | ❌  |
+
 ## Arguments
 
 The Transfer Plugin doesn't contain any arguments to pass in.
