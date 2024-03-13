@@ -13,6 +13,13 @@ The Transfer Plugin will work in areas such as;
 - Escrowless sale of the Asset.
 - Gaming scenario where the user swaps/looses their asset based on an event.
 
+## Works With
+
+|                     |     |
+| ------------------- | --- |
+| MPL Core Asset      | ✅  |
+| MPL Core Collection | ❌  |
+
 ## Arguments
 
 The Transfer Plugin doesn't contain any arguments to pass in.

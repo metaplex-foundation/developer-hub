@@ -12,7 +12,16 @@ This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collectio
 
 When assigned to both MPL Core Asset and the MPL Core Collection the MPL Core Asset Royalties Plugin will take precedence over the MPL Core Collection Plugin known as a plugin overide.
 
+## Works With
+
+|                     |     |
+| ------------------- | --- |
+| MPL Core Asset      | ✅  |
+| MPL Core Collection | ✅  |
+
 ## Arguments
+
+The Royalties Plugin requires the following arguements.
 
 | Arg        | Value              |
 | ---------- | ------------------ |
