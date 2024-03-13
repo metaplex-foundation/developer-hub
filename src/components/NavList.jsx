@@ -15,7 +15,6 @@ const NavList = () => {
     <div className="hidden cursor-pointer  gap-8 lg:flex">
       {menuItems.map((item, index) => {
         return (
-          <>
             <div className="hidden flex-col lg:flex" key={index}>
               <SwitcherPopover menuItem={menuItems[index]}>
                 <Popover.Button className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white" onClick={() => setActive(index)}>
@@ -28,7 +27,6 @@ const NavList = () => {
                 </Popover.Button>
               </SwitcherPopover>
             </div>
-          </>
         )
       })}
     </div>
