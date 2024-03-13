@@ -2,6 +2,7 @@ import {
   changelogSection,
   documentationSection,
   recipesSection,
+  guidesSection,
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
@@ -9,8 +10,8 @@ import { Logo } from './Logo'
 
 export const core = {
   name: 'Core',
-  headline: 'Clean, simple digital assets',
-  description: 'Clean and simple core spec for digital assets.',
+  headline: 'The most composable and affordable Digital Asset Standard.',
+  description: 'Ultimate composability and affordability for digital assets.',
   navigationMenuCatergory: 'Create',
   path: 'core',
   logo: Logo,
@@ -44,6 +45,7 @@ export const core = {
               title: 'Collection Management',
               href: '/core/collections',
             },
+            { title: 'Compressing Assets', href: '/core/compress' },
           ],
         },
         {
@@ -83,7 +85,7 @@ export const core = {
           ],
         },
         {
-          title: 'Intergration Guides',
+          title: 'Integration Guides',
           links: [
             { title: 'Wallets', href: '/core/intergrations/wallets' },
             {
@@ -99,6 +101,7 @@ export const core = {
       ],
     },
     { ...referencesSection('core') },
+    { ...guidesSection('core') },
     { ...recipesSection('core') },
     { ...changelogSection('core') },
   ],
