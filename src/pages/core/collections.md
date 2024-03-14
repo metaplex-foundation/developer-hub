@@ -10,8 +10,12 @@ Collections are a group of Assets that belong together, part of the same series,
 
 ## Creating a Collection
 
-### Instruction Accounts Lists
+To create a Core Collection you can use the `CreateCollection` instruction like this:
 
+{% totem %}
+{% totem-accordion title="Technical Instruction Details" %}
+
+**Instruction Accounts List**
 | Accounts        | Description                                        |
 | --------------- | -------------------------------------------------- |
 | collection      | The collection to which the Core Asset belongs to. |
@@ -19,8 +23,7 @@ Collections are a group of Assets that belong together, part of the same series,
 | payer           | The account paying for the storage fees.           |
 | systemProgram   | The System Program account.                        |
 
-### Instruction Args
-
+**Instruction Arguments**
 | Arg           | Description                                        |
 | ------------- | -------------------------------------------------- |
 | name          | The collection to which the Core Asset belongs to. |
@@ -28,10 +31,15 @@ Collections are a group of Assets that belong together, part of the same series,
 | plugins       | The account paying for the storage fees.           |
 | systemProgram | The System Program account.                        |
 
-Some of the accounts/args may be abstracted out and/or optional in our SDKs for ease of use.
+Some of the accounts and arguments may be abstracted out and/or optional in our SDKs for ease of use.
 A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/processor/create_collection.rs).
 
-### Code Example
+{% /totem-accordion %}
+{% /totem %}
+
+### Creating a simple Collection
+
+The following snippet creates a simple collection without Plugins or anything special.
 
 {% dialect-switcher title="Create a MPL Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
@@ -51,6 +59,7 @@ await createCollection(umi, {
 
 ### Creating a Collection with Plugins
 
+The following snippet creates a collection with the [freeze Plugin](/core/plugins/freeze) attached. You can attach additional plugins as described [here](/core/plugins/overview). 
 
 {% dialect-switcher title="Create a MPL Core Collection with Plugin" %}
 {% dialect title="JavaScript" id="js" %}
@@ -76,7 +85,12 @@ await createCollection(umi, {
 
 ## Updating a Collection
 
-### Instruction Accounts Lists
+To update the data of a Core Collection you can use the `UpdateCollection` instruction. You want to use this for example when you need to change the name of a collection.
+
+{% totem %}
+{% totem-accordion title="Technical Instruction Details" %}
+
+**Instruction Accounts List**
 
 | Accounts           | Description                                        |
 | ------------------ | -------------------------------------------------- |
@@ -87,15 +101,18 @@ await createCollection(umi, {
 | systemProgram      | The System Program account.                        |
 | logWrapper         | The SPL Noop Program.                              |
 
-### Instruction Args
+**Instruction Arguments**
 
 | Args | Description                      |
 | ---- | -------------------------------- |
 | name | The name of your MPL Core Asset. |
 | uri  | The off chain json metadata uri. |
 
-Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
+Some of the accounts and arguments may be abstracted out and/or optional in our sdks for ease of use.
 A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/1d3da907635a4f3950a43a3cb7239d91024579cc/programs/mpl-core/src/processor/update.rs#L92).
+
+{% /totem-accordion %}
+{% /totem %}
 
 ### Code Example
 
@@ -103,15 +120,8 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import { createCollection } from '@metaplex-foundation/core'
+coming soon
 
-const collectionAddress = publicKey("11111111111111111111111111111111") // Replace this with your collection address! 
-await createCollection(umi, {
-  collection: collectionAddress,
-  name: 'new name',
-  uri: 'https://example.com/new-uri',
-})
 ```
 
 {% /dialect %}
@@ -119,7 +129,11 @@ await createCollection(umi, {
 
 ## Updating a Collection Plugin
 
-### Instruction Accounts Lists
+If you want to change the behaviour of a plugin that is attached to a collection you may want to use the `updateCollectionPlugin` instruction.
+
+{% totem %}
+{% totem-accordion title="Technical Instruction Details" %}
+**Instruction Accounts List**
 
 | Accounts      | Description                                        |
 | ------------- | -------------------------------------------------- |
@@ -129,7 +143,7 @@ await createCollection(umi, {
 | systemProgram | The System Program account.                        |
 | logWrapper    | The SPL Noop Program.                              |
 
-### Instruction Args
+**Instruction Arguments**
 
 | Args   | Description                    |
 | ------ | ------------------------------ |
@@ -138,25 +152,23 @@ await createCollection(umi, {
 Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
 A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/1d3da907635a4f3950a43a3cb7239d91024579cc/programs/mpl-core/src/processor/add_plugin.rs#L80).
 
+{% /totem-accordion %}
+{% /totem %}
+
 ### Code Example
 
 {% dialect-switcher title="Updating a Collection Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { generateSigner, publicKey } from '@metaplex-foundation/umi'
+import { publicKey } from '@metaplex-foundation/umi'
 import { createCollection, pluginAuthorityPair } from '@metaplex-foundation/core'
 
 const collectionAddress = publicKey("11111111111111111111111111111111") // Replace this with your collection address! 
-await createCollection(umi, {
-  collection: collectionAddress,
-  plugins: [
-    pluginAuthorityPair({
-      type: 'Freeze',
-      data: { frozen: false },
-    }),
-  ],
-})
+  await updateCollectionPlugin(umi, {
+    collection: collectionAddress,
+    plugin: plugin('PermanentFreeze', [{ frozen: false }]),
+  }).sendAndConfirm(umi);
 ```
 
 {% /dialect %}
