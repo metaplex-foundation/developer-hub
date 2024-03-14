@@ -17,10 +17,13 @@ const asset = await fetchAsset(umi, assetAddress.publicKey)
 
 {% /dialect %}
 {% /dialect-switcher %}
+## Fetch multiple Assets
 
-## GPA fetch assets by owner
+Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/rpc-providers). 
 
-      {% dialect-switcher title="GPA fetch assets by owner" %}
+### GPA fetch assets by owner
+
+{% dialect-switcher title="fetch assets by owner" %}
 
 {% dialect title="JavaScript" id="js" %}
 
@@ -35,9 +38,9 @@ const assetsByOwner = await getAssetGpaBuilder(umi)
 {% /dialect %}
 {% /dialect-switcher %}
 
-## GPA fetch assets by collection
+### GPA fetch assets by collection
 
-         {% dialect-switcher title="GPA fetch assets by collection" %}
+{% dialect-switcher title="GPA fetch assets by collection" %}
 
 {% dialect title="JavaScript" id="js" %}
 
