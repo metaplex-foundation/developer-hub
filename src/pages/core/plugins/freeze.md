@@ -22,7 +22,9 @@ The Freeze Plugin will work in areas such as;
 
 ## Arguments
 
-The Transfer Plugin doesn't contain any arguments to pass in.
+| Arg    | Value |
+| ------ | ----- |
+| frozen | bool  |
 
 ## Adding the Transfer Plugin to an Asset
 
