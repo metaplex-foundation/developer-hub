@@ -4,6 +4,7 @@ metaTitle: Core - Removing Plugins
 description: Learn how to remove plugins to MPL Core Assets and Collections
 ---
 
+Plugins can also be removed from MPL Core Assets and MPL Core Collections.
 
 ## Removing a Plugin from a MPL Core Asset
 
