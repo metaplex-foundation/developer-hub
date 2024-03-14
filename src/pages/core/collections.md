@@ -28,8 +28,8 @@ Collections are a group of Assets that belong together, part of the same series,
 | plugins       | The account paying for the storage fees.           |
 | systemProgram | The System Program account.                        |
 
-Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com) <!-- TODO -->
+Some of the accounts/args may be abstracted out and/or optional in our SDKs for ease of use.
+A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/processor/create_collection.rs).
 
 ### Creating a Collection
 
@@ -95,7 +95,7 @@ await createCollection(umi, {
 | uri  | The off chain json metadata uri. |
 
 Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com)
+A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/1d3da907635a4f3950a43a3cb7239d91024579cc/programs/mpl-core/src/processor/update.rs#L92).
 
 ### Updating a Collection
 
@@ -136,7 +136,7 @@ await createCollection(umi, {
 | plugin | The plugin you wish to update. |
 
 Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com)
+A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/1d3da907635a4f3950a43a3cb7239d91024579cc/programs/mpl-core/src/processor/add_plugin.rs#L80).
 
 ### Updating a Collection Plugin
 
