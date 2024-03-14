@@ -51,20 +51,55 @@ umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
 
 Now that we have our **URI**, we can move on to the next step.
 
+<!-- ## Create an Asset
+
+Explain the difference between storing in account state and ledger state. -->
+
 ## Create an Asset
 
-Explain the difference between storing in account state and ledger state.
+To create an asset the `create` instruction should be used. Below is a simple example, you can do more things with it, like adding your asset to a collection, or assigning plugins which is described [later](#create-an-asset-with-plugins).
 
-### Create Asset in Account State
+{% totem %}
+{% totem-accordion title="Technical Instruction Details" %}
+**Instruction Accounts List**
 
-{% dialect-switcher title="Create Asset in Ledger State" %}
+| Accounts      | Description                                        |
+| ------------- | -------------------------------------------------- |
+| asset         | The address of the MPL Core Asset.                 |
+| collection    | The collection to which the Core Asset belongs to. |
+| authority     | The authority of the new asset.                    |
+| payer         | The account paying for the storage fees.           |
+| new owner     | The owner which should receive the asset.          |
+| systemProgram | The System Program account.                        |
+| logWrapper    | The SPL Noop Program.                              |
+
+
+**Instruction Arguments**
+
+| Args      | Description                                                   |
+|------------|---------------------------------------------------------------|
+| dataState  | Whether the data is stored in account state or ledger state. |
+| name       | The name of your MPL Core Asset.                              |
+| uri        | The off-chain JSON metadata URI.                              |
+| plugins    | What plugins you would like the asset to have.                |
+
+
+Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
+A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/processor/create.rs)
+
+{% /totem-accordion %}
+{% /totem %}
+
+{% seperator h="6" /%}
+
+{% dialect-switcher title="Create Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
 import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
 import { create, DataState } from '@metaplex-foundation/mpl-core'
 
-const mint = generateSigner(umi)
+const assetAddress = generateSigner(umi)
 const result = create(umi, {
   asset: assetAddress,
   name: 'My Nft',
@@ -73,8 +108,6 @@ const result = create(umi, {
 ```
 
 {% /dialect %}
-
-
 
 {% dialect title="Rust" id="rust" %}
 {% totem %}
@@ -137,7 +170,7 @@ let create_ix = CreateCpiBuilder::new()
 import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
 import { create, DataState } from '@metaplex-foundation/mpl-core'
 
-const mint = generateSigner(umi)
+const assetAddress = generateSigner(umi)
 const result = create(umi, {
   dataState: DataState.LedgerState,
   asset: assetAddress,
@@ -177,7 +210,7 @@ Note that when setting the `mint` account, it is require to specify a `bool` fla
 {% /dialect %}
 {% /dialect-switcher %} -->
 
-## Create An Asset with Plugins
+## Create an Asset with Plugins
 
 MPL Core Assets support the use of plugins at both a Collection and at an Asset level. To create a Core Asset with a plugin you pass in the plugin and it's parameters into the `plugins` array arg during creation. The below example creates a mint with the `Freeze` plugin.
 
@@ -205,36 +238,10 @@ await create(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-A list of plugins includes:
+The list of plugins includes but is not limited to:
 
 - [Burn Delegate](/core/plugins/burn-delegate)
 - [Freeze Delegate](/core/plugins/freeze-delegate)
 - [Royalties Delegate](/core/plugins/royalties-delegate)
 - [Transfer Delegate](/core/plugins/transfer-delegate)
 - [Update Delegate](/core/plugins/update-delegate)
-
-## Instruction Account List
-
-| Accounts      | Description                                        |
-| ------------- | -------------------------------------------------- |
-| asset         | The address of the MPL Core Asset.                 |
-| collection    | The collection to which the Core Asset belongs to. |
-| authority     | The authority of the new asset.                    |
-| payer         | The account paying for the storage fees.           |
-| new owner     | The new owner to which to transfer the asset to.   |
-| systemProgram | The System Program account.                        |
-| logWrapper    | The SPL Noop Program.                              |
-
-
-## Instruction Args
-
-| Args      | Description                                                   |
-|------------|---------------------------------------------------------------|
-| dataState  | Whether the data is stored in account state or ledger state. |
-| name       | The name of your MPL Core Asset.                              |
-| uri        | The off-chain JSON metadata URI.                              |
-| plugins    | What plugins you would like the asset to have.                |
-
-
-Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/processor/create.rs)
