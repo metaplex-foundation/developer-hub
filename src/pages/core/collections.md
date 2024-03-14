@@ -29,7 +29,7 @@ Collections are a group of Assets that belong together, part of the same series,
 | systemProgram | The System Program account.                        |
 
 Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com)
+A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com) <!-- TODO -->
 
 ### Creating a Collection
 
@@ -52,14 +52,14 @@ await createCollection(umi, {
 ### Creating a Collection with Plugins
 
 
-{% dialect-switcher title="Create a MPL Core Collection w/ Plugin" %}
+{% dialect-switcher title="Create a MPL Core Collection with Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { generateSigner } from '@metaplex-foundation/umi'
+import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import { createCollection, pluginAuthorityPair } from '@metaplex-foundation/core'
 
-const collectionAddress = generateSigner(umi)
+const collectionAddress = publicKey("11111111111111111111111111111111") // Replace this with your collection address! 
 await createCollection(umi, {
   collection: collectionAddress,
   plugins: [
@@ -103,10 +103,10 @@ A full detailed look at the on chain instruction it can be viewed here. [Github]
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { generateSigner } from '@metaplex-foundation/umi'
+import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import { createCollection } from '@metaplex-foundation/core'
 
-const collectionAddress = generateSigner(umi)
+const collectionAddress = publicKey("11111111111111111111111111111111") // Replace this with your collection address! 
 await createCollection(umi, {
   collection: collectionAddress,
   name: 'new name',
@@ -144,10 +144,10 @@ A full detailed look at the on chain instruction it can be viewed here. [Github]
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { generateSigner } from '@metaplex-foundation/umi'
+import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import { createCollection, pluginAuthorityPair } from '@metaplex-foundation/core'
 
-const collectionAddress = generateSigner(umi)
+const collectionAddress = publicKey("11111111111111111111111111111111") // Replace this with your collection address! 
 await createCollection(umi, {
   collection: collectionAddress,
   plugins: [
