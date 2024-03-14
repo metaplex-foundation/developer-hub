@@ -104,10 +104,10 @@ A full detailed look at the on chain instruction it can be viewed here. [Github]
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { createCollection } from '@metaplex-foundation/core'
+import { updateCollection } from '@metaplex-foundation/core'
 
 const collectionAddress = generateSigner(umi)
-await createCollection(umi, {
+await updateCollection(umi, {
   collection: collectionAddress,
   name: 'new name',
   uri: 'https://example.com/new-uri',
@@ -148,7 +148,7 @@ import { generateSigner } from '@metaplex-foundation/umi'
 import { createCollection, pluginAuthorityPair } from '@metaplex-foundation/core'
 
 const collectionAddress = generateSigner(umi)
-await createCollection(umi, {
+await updateCollection(umi, {
   collection: collectionAddress,
   plugins: [
     pluginAuthorityPair({

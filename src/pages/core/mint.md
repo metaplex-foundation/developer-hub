@@ -74,13 +74,34 @@ const result = create(umi, {
 
 {% /dialect %}
 
+
+
 {% dialect title="Rust" id="rust" %}
 {% totem %}
 
 ```rust
-// TODO
+let create_ix = CreateBuilder::new()
+        .asset(input.asset.pubkey())
+        .collection(input.collection)
+        .authority(input.authority)
+        .payer(payer)
+        .owner(input.owner)
+        .update_authority(input.update_authority)
+        .system_program(system_program::ID)
+        .data_state(input.data_state.unwrap_or(DataState::AccountState))
+        .name(input.name.unwrap_or(DEFAULT_ASSET_NAME.to_owned()))
+        .uri(input.uri.unwrap_or(DEFAULT_ASSET_URI.to_owned()))
+        .plugins(input.plugins)
+        .instruction();
 
+    let tx = Transaction::new_signed_with_payer(
+        &[create_ix],
+        Some(&context.payer.pubkey()),
+        &[input.asset, &context.payer],
+        context.last_blockhash,
+    );
 ```
+
 
 {% /totem %}
 
@@ -89,8 +110,19 @@ const result = create(umi, {
 {% dialect title="Rust (CPI)" id="rust-cpi" %}
 
 ```rust
-// TODO
-
+let create_ix = CreateCpiBuilder::new()
+        .asset(input.asset.pubkey())
+        .collection(input.collection)
+        .authority(input.authority)
+        .payer(payer)
+        .owner(input.owner)
+        .update_authority(input.update_authority)
+        .system_program(system_program::ID)
+        .data_state(input.data_state.unwrap_or(DataState::AccountState))
+        .name(input.name.unwrap_or(DEFAULT_ASSET_NAME.to_owned()))
+        .uri(input.uri.unwrap_or(DEFAULT_ASSET_URI.to_owned()))
+        .plugins(input.plugins)
+        .invoke();
 ```
 
 {% /dialect %}

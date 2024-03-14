@@ -36,6 +36,5 @@ await createAsset(umi, {
   plugins: [pluginAuthorityPair({ type: 'PermanentBurn', data: {} })],
 })
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
