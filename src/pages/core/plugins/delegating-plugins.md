@@ -6,7 +6,7 @@ description: Learn how to delegate plugins to MPL Core Assets and Collections
 
 ## Delegating an Authority
 
-Plugins can be delegated to another address with a Delegate Authority instruction update. Delegated plugins allow addresses other than the main authority to have control over that plugins function.
+Plugins can be delegated to another address with a Delegate Authority instruction update. Delegated plugins allow addresses other than the main authority to have control over that plugins functionality.
 
 {% dialect-switcher title="Delegate a Plugin Authority" %}
 {% dialect title="JavaScript" id="js" %}

@@ -23,7 +23,7 @@ The Permanent Burn Plugin will work in areas such as;
 
 The Permanent Burn Plugin doesn't contain any arguments to pass in.
 
-## Creating an Asset with a Permanent Freeze plugin
+## Creating an Asset with a Permanent Burn Plugin
 
 {% dialect-switcher title="Creating an Asset with a Permanent Freeze plugin" %}
 {% dialect title="JavaScript" id="js" %}
