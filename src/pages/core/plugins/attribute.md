@@ -1,17 +1,15 @@
 ---
 title: Attribute Plugin
 metaTitle: Core - Attribute Plugin
-description: Learn about the MPL Core Asset Freeze Plugin
+description: Learn about the MPL Core Attribute Plugin
 ---
 
-## Overview
+The Attribute Plugin is a `Authority Managed` plugin that can store key value pairs of data within the asset.
 
-The Attriubute Plugin is a `Authority Managed` plugin that can store key value pairs of data with the asset.
-
-The Attribute Plugin will work in areas such as;
+The Attribute Plugin will work in areas such as:
 
 - Storing on chain attributes/traits of the Asset which can be read by on chain progams.
-- Storing health and other statisical data that can be modified by a game/program.
+- Storing health and other statistical data that can be modified by a game/program.
 
 ## Works With
 

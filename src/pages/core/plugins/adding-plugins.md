@@ -62,7 +62,7 @@ await addCollectionPlugin(umi, {
     collection: collection.publicKey,
     plugin: plugin('Royalties', [
       {
-        percentage: 5,
+        basisPoints: 5000,
         creators: [],
         ruleSet: ruleSet('None'),
       },
@@ -85,7 +85,7 @@ await addCollectionPlugin(umi, {
     collection: collection.publicKey,
     plugin: plugin('Royalties', [
       {
-        percentage: 5,
+        basisPoints: 5000,
         creators: [],
         ruleSet: ruleSet('None'),
       },
