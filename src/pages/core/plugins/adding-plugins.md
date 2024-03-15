@@ -5,7 +5,7 @@ description: Learn how to add plugins to MPL Core Assets and Collections
 ---
 
 Plugins can be assigned to both the MPL Core Asset and also the MPL Core Collection. MPL
-Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on both entities visit the [Plugins Overview](/core/plugins/overview) area.
+Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on both entities visit the [Plugins Overview](/core/plugins) area.
 
 ## Adding a Plugin to a Core Asset
 

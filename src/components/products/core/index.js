@@ -51,7 +51,7 @@ export const core = {
         {
           title: 'Plugins',
           links: [
-            { title: 'Overview', href: '/core/plugins/overview' },
+            { title: 'Overview', href: '/core/plugins' },
             { title: 'Adding Plugins', href: '/core/plugins/adding-plugins' },
             {
               title: 'Removing Plugins',

@@ -59,7 +59,7 @@ await createCollection(umi, {
 
 ### Creating a Collection with Plugins
 
-The following snippet creates a collection with the [freeze Plugin](/core/plugins/freeze) attached. You can attach additional plugins as described [here](/core/plugins/overview).
+The following snippet creates a collection with the [freeze Plugin](/core/plugins/freeze) attached. You can attach additional plugins as described [here](/core/plugins).
 
 {% dialect-switcher title="Create a MPL Core Collection with Plugin" %}
 {% dialect title="JavaScript" id="js" %}
