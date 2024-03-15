@@ -6,7 +6,10 @@ description: Learn how to update Assets on Core
 
 The update authority or delegate of an Asset has the ability to change some of the core Asset data.
 
-## Instruction Account List
+{% totem %}
+{% totem-accordion title="Technical Instruction Details" %}
+
+**Instruction Accounts List**
 
 | Account       | Description                                     |
 | ------------- | ----------------------------------------------- |
@@ -18,7 +21,7 @@ The update authority or delegate of an Asset has the ability to change some of t
 | systemProgram | The System Program account.                     |
 | logWrapper    | The SPL Noop Program.                           |
 
-## Instruction Args
+**Instruction Arguments**
 
 | Args    | Description                      |
 | ------- | -------------------------------- |
@@ -26,7 +29,10 @@ The update authority or delegate of an Asset has the ability to change some of t
 | newUri  | The new off-chain metadata URI.  |
 
 Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com)
+A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/processor/update.rs)
+
+{% /totem-accordion %}
+{% /totem %}
 
 ## Updating an Asset
 

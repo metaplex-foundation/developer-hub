@@ -4,9 +4,11 @@ metaTitle: Core - Transferring Assets
 description: Learn how to transfer Assets on Core
 ---
 
-The owner of an Asset can transfer ownership to another account by sending a **Transfer** instruction to the MPL Core program.
+The owner of an Asset can transfer ownership to another account by using the `transfer` instruction to the MPL Core program.
 
-## Instruction Account List
+{% totem %}
+{% totem-accordion title="Technical Instruction Details" %}
+**Instruction Accounts List**
 
 | Account          | Description                                            |
 |----------------|--------------------------------------------------------|
@@ -20,10 +22,11 @@ The owner of an Asset can transfer ownership to another account by sending a **T
 
 
 Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com)
+A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/processor/transfer.rs).
+{% /totem-accordion %}
+{% /totem %}
 
-
-## Transfer
+## Transfer Example
 Here is how you can use our SDKs to transfer an asset on MPL Core.
 
 {% dialect-switcher title="Transfer Assets" %}
