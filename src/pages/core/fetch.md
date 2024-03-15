@@ -6,6 +6,8 @@ description: Learn how to fetch the various on-chain accounts of your assets on 
 
 ## Fetch a single asset
 
+To fetch a single Asset the following function can be used:
+
 {% dialect-switcher title="Fetch a single asset" %}
 {% dialect title="JavaScript" id="js" %}
 
@@ -19,7 +21,7 @@ const asset = await fetchAsset(umi, assetAddress.publicKey)
 {% /dialect-switcher %}
 ## Fetch multiple Assets
 
-Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/rpc-providers). 
+Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/rpc-providers). 
 
 ### GPA fetch assets by owner
 
@@ -58,6 +60,6 @@ const assetsByCollection = await getAssetGpaBuilder(umi)
 {% /dialect %}
 {% /dialect-switcher %}
 
-## DAS
+## DAS - Digital Asset API
 
 Coming Soon!
