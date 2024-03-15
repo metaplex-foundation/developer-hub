@@ -21,17 +21,17 @@ When assigned to both MPL Core Asset and the MPL Core Collection the MPL Core As
 
 ## Arguments
 
-The Royalties Plugin requires the following arguements.
+The Royalties Plugin requires the following arguments.
 
-| Arg        | Value              |
-| ---------- | ------------------ |
-| percentage | number             |
-| creators   | Array<CreatorArgs> |
-| ruleset    | RuleSet            |
+| Arg         | Value              |
+| ----------  | ------------------ |
+| basisPoints | number             |
+| creators    | Array<CreatorArgs> |
+| ruleset     | RuleSet            |
 
-## Percentage
+## basisPoints
 
-This is the x% you wish to receieve in royalties on secondary sales. If your Royalties Plug is set to 5% and you sell a MPL Core Asset for 1 SOL your creators will recieve a total of 0.05 SOL to be distributed between them.
+This is the percentage in basispoints you wish to receieve in royalties on secondary sales. If your Royalties Plugin is set to 5000 this means 5%. So if you sell a MPL Core Asset for 1 SOL your creators will recieve a total of 0.05 SOL to be distributed between them. Some of our SDKs provide helper methods like `percentAmount` in umi, so that you do not have to do the calculation yourself.
 
 ## Creators
 
@@ -114,13 +114,14 @@ const ruleSet = ruleSet('None')
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
+import { percentAmount } from '@metaplex-foundation/umi'
 import { addPlugin, plugin, ruleSet } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
   asset: asset.publicKey,
   plugin: plugin('Royalties', [
     {
-        precentage: 5,
+        precentage: percentAmount(5),
         creators: [
             { address: PublicKey; percentage: number }
             { address: PublicKey; percentage: number }
