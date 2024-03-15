@@ -45,7 +45,7 @@ export const core = {
               title: 'Collection Management',
               href: '/core/collections',
             },
-            { title: 'Compressing Assets', href: '/core/compress' },
+            // { title: 'Compressing Assets', href: '/core/compress' },
           ],
         },
         {
