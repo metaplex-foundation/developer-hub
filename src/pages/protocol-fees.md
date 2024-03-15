@@ -18,6 +18,7 @@ Based on community feedback, Metaplex Foundation has announced an updated fee sc
 | Combine         | Fusion (Trifle) | Collector     | 0.002        |                                                                                                                                                                                                                                                                                          |
 | Split           | Fusion (Trifle) | Collector     | 0.002        |                                                                                                                                                                                                                                                                                          |
 | Edit constraint | Fusion (Trifle) | Creator       | 0.01         |                                                                                                                                                                                                                                                                                          |
+| Create | Core | Collector | 0.0015 | (As of program release) |
 
 ## Fee Schedule (as of May 22nd, 2023)
 
