@@ -4,8 +4,6 @@ metaTitle: Core - Enforcing Royalties
 description: Learn how to enforce royalties on Core
 ---
 
-## Overview
-
 The Royalties Plugin is a `Authority Managed` plugin that allows the authority of the Asset to set and change the Royalies Plugin data.
 
 This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collection`.
@@ -35,7 +33,7 @@ This is the percentage in basispoints you wish to receieve in royalties on secon
 
 ## Creators
 
-The creators list is a distribution list of where the earned royalties are sent. You can have up to 5 creators in your list that earn from royalties and the total share between all memembers must add up to 100%.
+The creators list is a distribution list of where the earned royalties are sent. You can have up to 5 creators in your list that earn from royalties and the total share between all members must add up to 100%.
 
 {% dialect-switcher title="Creators Array" %}
 {% dialect title="JavaScript" id="js" %}
@@ -56,7 +54,7 @@ RuleSets allow you to control what programs can or can not perform actions on yo
 
 ### Allowlist
 
-An Allowlist is a list of programs that are allow to interaction with your MPL Core Asset/Collection. Any program not on this list will throw an error.
+An Allowlist is a list of programs that are allowed to interact with your MPL Core Asset/Collection. Any program not on this list will throw an error.
 
 {% dialect-switcher title="RuleSet Allowlist" %}
 {% dialect title="JavaScript" id="js" %}
@@ -108,7 +106,7 @@ const ruleSet = ruleSet('None')
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Adding the Royalties Plugin to an Asset
+## Adding the Royalties Plugin to an Asset code example
 
 {% dialect-switcher title="Adding a Royalties Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}

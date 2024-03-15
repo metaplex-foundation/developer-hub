@@ -4,9 +4,9 @@ metaTitle: Core - Burn Plugin
 description: Learn about the MPL Core Asset Burn Plugin
 ---
 
-The Transfer Plugin is a `Owner Managed` plugin that allows the authority of the program to transfer the nft at any given moment.
+The Transfer Plugin is a `Owner Managed` plugin that allows the authority of the program to burn the nft at any given moment.
 
-The Burn Plugin will work in areas such as; 
+The Burn Plugin will work in areas such as:
 
 - Gaming scenario where the users NFT get burned based on an event that occurs.
 
