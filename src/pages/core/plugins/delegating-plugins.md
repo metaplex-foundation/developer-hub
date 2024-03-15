@@ -26,8 +26,7 @@ await approvePluginAuthority(umi, {
 
 ## Revoking an Authority
 
-//TODO
-Write about who's able to revoke the authority based on the plugin type.
+Once delegated the authority of a plugin can only be delegated back by the current authority. It can be done like this:
 
 {% dialect-switcher title="Revoking a Plugin Authority" %}
 {% dialect title="JavaScript" id="js" %}
@@ -48,7 +47,11 @@ await revokePluginAuthority(umi, {
 
 By setting a null value to the plugins authority you can create an immutable plugin.
 
+{% callout type="warning" %}
+
 **WARNING** - Doing so will leave your plugin immutable and unable to be updated or assigned a new authority. Proceed with caution!
+
+{% /callout %}
 
 {% dialect-switcher title="Making a Plugin Immutable" %}
 {% dialect title="JavaScript" id="js" %}
