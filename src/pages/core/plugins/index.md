@@ -12,8 +12,9 @@ Plugins can attach to both MPL Core Assets and also Collection Assets to modify 
 
 ### Owner Managed Plugins
 
-Owner managed plugins are plugins that are only allowed to be added to an asset if the asset owners signature is present in the transaction. These include plugins;
+Owner managed plugins are plugins that are only allowed to be added to an asset if the asset owners signature is present in the transaction.
 
+Those include but are not limited to:
 - [Transfer](/core/plugins/transfer) (market places, games)
 - [Freeze](/core/plugins/freeze) (market places, staking, games)
 - [Burn](/core/plugins/burn) (games)
@@ -22,21 +23,24 @@ Owner managed plugins are plugins that are only allowed to be added to an asset 
 
 Authority managed plugins are plugins that the authority of the MPL Core Asset can add and update at any time.
 
+Those include but are not limited to:
+
 - [Royalties](/core/plugins/royalties)
 - [Update](/core/plugins/update)
 - [Attribute](/core/plugins/attribute)
 
 ### Permanent Plugins
 
-Permanent plugins are plugins that are only available to add to an Asset at the time of mint/creation of the MPL Core Asset. If an Asset has already been created then Pernament plugins will not be available to add to the Asset.
+Permanent plugins are plugins that are only available to add to an Asset at the time of mint/creation of the MPL Core Asset. If an Asset has already been created then Permanent plugins will not be available to add to the Asset.
 
+Those include but are not limited to:
 - [Permanent Transfer](/core/plugins/permenant-transfer)
 - [Permanent Freeze](/core/plugins/permenant-freeze)
 - [Permanent Burn](/core/plugins/permenant-burn)
 
 ## Collection Plugins
 
-Collection Plugins are plugins that can have a collection wide effect. This is particularly useful for royalties where you should assign the royalties plugin to the Collection Asset and all nfts in that collection will now reference to that plugin.
+Collection Plugins are plugins that can have a collection wide effect. This is particularly useful for royalties where you should assign the [royalties plugin](/core/plugins/royalties) to the Collection Asset and all nfts in that collection will now reference to that plugin.
 
 Collections only have access to `Permanent Plugins` and `Authority Managed Plugins`.
 
@@ -44,7 +48,7 @@ Collections only have access to `Permanent Plugins` and `Authority Managed Plugi
 
 If a MPL Core Asset and MPL Core Collection Asset both share the same plugin type then the plugin and its data on the Core Asset will take precedence over the Collection Asset plugin.
 
-This can be used in creative ways such as setting royalties at different levels for your collection of assets.
+This can be used in creative ways such as setting royalties at different levels for your collection of assets. E.g.:
 
 - Collection Asset has a Royalties Plugin assigned at 2%
 - Your Super Rare MPL Core Asset then has a Royalty Plugin assigned at 5%
@@ -55,12 +59,12 @@ This means all your regular MPL Core Asset sales from your collection will retai
 
 | Plugin                                                | Owner Managed | Authority Managed | Permanent |
 | ----------------------------------------------------- | ------------- | ----------------- | --------- |
-| [Transfer](/core/plugins/transfer)                    | [x]           |                   |           |
-| [Freeze](/core/plugins/freeze)                        | [x]           |                   |           |
-| [Burn](/core/plugins/burn)                            | [x]           |                   |           |
-| [Royalties](/core/plugins/royalties)                  |               | [x]               |           |
-| [Update](/core/plugins/update)                        |               | [x]               |           |
-| [Attribute](core/plugins/attribute)                   |               | [x]               |           |
-| [Permanent Transfer](core/plugins/permanent-transfer) |               |                   | [x]       |
-| [Permanent Freeze](core/plugins/permanent-freeze)     |               |                   | [x]       |
-| [Permanent Burn](core/plugins/permanent-burn)         |               |                   | [x]       |
+| [Transfer](/core/plugins/transfer)                    | ✅           |                   |           |
+| [Freeze](/core/plugins/freeze)                        | ✅           |                   |           |
+| [Burn](/core/plugins/burn)                            | ✅           |                   |           |
+| [Royalties](/core/plugins/royalties)                  |               | ✅               |           |
+| [Update](/core/plugins/update)                        |               | ✅               |           |
+| [Attribute](core/plugins/attribute)                   |               | ✅               |           |
+| [Permanent Transfer](core/plugins/permanent-transfer) |               |                   | ✅       |
+| [Permanent Freeze](core/plugins/permanent-freeze)     |               |                   | ✅       |
+| [Permanent Burn](core/plugins/permanent-burn)         |               |                   | ✅       |
