@@ -16,11 +16,7 @@ To create a Core Collection you can use the `CreateCollection` instruction like 
 {% totem-accordion title="Technical Instruction Details" %}
 
 **Instruction Accounts List**
-<<<<<<< HEAD
 | Accounts | Description |
-=======
-| Accounts        | Description                                        |
->>>>>>> 1b170ce17cae26b538083a1b7431013dde4647a4
 | --------------- | -------------------------------------------------- |
 | collection | The collection to which the Core Asset belongs to. |
 | updateAuthority | The authority of the new asset. |
@@ -28,11 +24,7 @@ To create a Core Collection you can use the `CreateCollection` instruction like 
 | systemProgram | The System Program account. |
 
 **Instruction Arguments**
-<<<<<<< HEAD
 | Arg | Description |
-=======
-| Arg           | Description                                        |
->>>>>>> 1b170ce17cae26b538083a1b7431013dde4647a4
 | ------------- | -------------------------------------------------- |
 | name | The collection to which the Core Asset belongs to. |
 | uri | The authority of the new asset. |
@@ -67,29 +59,19 @@ await createCollection(umi, {
 
 ### Creating a Collection with Plugins
 
-<<<<<<< HEAD
 The following snippet creates a collection with the [freeze Plugin](/core/plugins/freeze) attached. You can attach additional plugins as described [here](/core/plugins/overview).
-=======
-The following snippet creates a collection with the [freeze Plugin](/core/plugins/freeze) attached. You can attach additional plugins as described [here](/core/plugins/overview). 
->>>>>>> 1b170ce17cae26b538083a1b7431013dde4647a4
 
 {% dialect-switcher title="Create a MPL Core Collection with Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-<<<<<<< HEAD
 import {
   createCollection,
   pluginAuthorityPair,
 } from '@metaplex-foundation/core'
 
 const collectionAddress = publicKey('11111111111111111111111111111111') // Replace this with your collection address!
-=======
-import { createCollection, pluginAuthorityPair } from '@metaplex-foundation/core'
-
-const collectionAddress = publicKey("11111111111111111111111111111111") // Replace this with your collection address! 
->>>>>>> 1b170ce17cae26b538083a1b7431013dde4647a4
 await createCollection(umi, {
   collection: collectionAddress,
   plugins: [
@@ -141,7 +123,6 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-<<<<<<< HEAD
 import { publicKey } from '@metaplex-foundation/umi'
 import {
   createCollection,
@@ -154,10 +135,6 @@ await updateCollection(umi, {
   newName: 'my-nft',
   newUri: 'https://exmaple.com/new-uri',
 }).sendAndConfirm(umi)
-=======
-coming soon
-
->>>>>>> 1b170ce17cae26b538083a1b7431013dde4647a4
 ```
 
 {% /dialect %}
