@@ -12,7 +12,7 @@ A guard is a modular piece of code that can restrict access to the mint of a Can
 
 There is a large set of guards to choose from and each of them can be activated and configured at will.
 
-We’ll touch on [all available guards](/candy-machine/available-guards) later in this documentation but let’s go through a few examples here to illustrate that.
+We’ll touch on all available guards later in this documentation but let’s go through a few examples here to illustrate that.
 
 - When the **Start Date** guard is enabled, minting will be forbidden before the preconfigured date. There is also an **End Date** guard to forbid minting after a given date.
 - When the **Sol Payment** guard is enabled, the minting wallet will have to pay a configured amount to a configured destination wallet. Similar guards exist for paying with tokens or NFTs of a specific collection.
@@ -182,24 +182,24 @@ Alright, now that we understand what guards are, let’s see what default guards
 
 In the following list, we’ll provide a short description of each guard with a link pointing to their dedicated page for more advanced reading.
 
-- [**Address Gate**](/candy-machine/available-guards/address-gate): Restricts the mint to a single address.
-- [**Allow List**](/candy-machine/available-guards/allow-list): Uses a wallet address list to determine who is allowed to mint.
-- [**Bot Tax**](/candy-machine/available-guards/bot-tax): Configurable tax to charge invalid transactions.
-- [**End Date**](/candy-machine/available-guards/end-date): Determines a date to end the mint.
-- [**Freeze Sol Payment**](/candy-machine/available-guards/freeze-sol-payment): Set the price of the mint in SOL with a freeze period.
-- [**Freeze Token Payment**](/candy-machine/available-guards/freeze-token-payment): Set the price of the mint in token amount with a freeze period.
-- [**Gatekeeper**](/candy-machine/available-guards/gatekeeper): Restricts minting via a Gatekeeper Network e.g. Captcha integration.
-- [**Mint Limit**](/candy-machine/available-guards/mint-limit): Specifies a limit on the number of mints per wallet.
-- [**Nft Burn**](/candy-machine/available-guards/nft-burn): Restricts the mint to holders of a specified collection, requiring a burn of the NFT.
-- [**Nft Gate**](/candy-machine/available-guards/nft-gate): Restricts the mint to holders of a specified collection.
-- [**Nft Payment**](/candy-machine/available-guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
-- [**Redeemed Amount**](/candy-machine/available-guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
-- [**Sol Payment**](/candy-machine/available-guards/sol-payment): Set the price of the mint in SOL.
-- [**Start Date**](/candy-machine/available-guards/start-date): Determines the start date of the mint.
-- [**Third Party Signer**](/candy-machine/available-guards/third-party-signer): Requires an additional signer on the transaction.
-- [**Token Burn**](/candy-machine/available-guards/token-burn): Restricts the mint to holders of a specified token, requiring a burn of the tokens.
-- [**Token Gate**](/candy-machine/available-guards/token-gate): Restricts the mint to holders of a specified token.
-- [**Token Payment**](/candy-machine/available-guards/token-payment): Set the price of the mint in token amount.
+- [**Address Gate**](/candy-machine/guards/address-gate): Restricts the mint to a single address.
+- [**Allow List**](/candy-machine/guards/allow-list): Uses a wallet address list to determine who is allowed to mint.
+- [**Bot Tax**](/candy-machine/guards/bot-tax): Configurable tax to charge invalid transactions.
+- [**End Date**](/candy-machine/guards/end-date): Determines a date to end the mint.
+- [**Freeze Sol Payment**](/candy-machine/guards/freeze-sol-payment): Set the price of the mint in SOL with a freeze period.
+- [**Freeze Token Payment**](/candy-machine/guards/freeze-token-payment): Set the price of the mint in token amount with a freeze period.
+- [**Gatekeeper**](/candy-machine/guards/gatekeeper): Restricts minting via a Gatekeeper Network e.g. Captcha integration.
+- [**Mint Limit**](/candy-machine/guards/mint-limit): Specifies a limit on the number of mints per wallet.
+- [**Nft Burn**](/candy-machine/guards/nft-burn): Restricts the mint to holders of a specified collection, requiring a burn of the NFT.
+- [**Nft Gate**](/candy-machine/guards/nft-gate): Restricts the mint to holders of a specified collection.
+- [**Nft Payment**](/candy-machine/guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
+- [**Redeemed Amount**](/candy-machine/guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
+- [**Sol Payment**](/candy-machine/guards/sol-payment): Set the price of the mint in SOL.
+- [**Start Date**](/candy-machine/guards/start-date): Determines the start date of the mint.
+- [**Third Party Signer**](/candy-machine/guards/third-party-signer): Requires an additional signer on the transaction.
+- [**Token Burn**](/candy-machine/guards/token-burn): Restricts the mint to holders of a specified token, requiring a burn of the tokens.
+- [**Token Gate**](/candy-machine/guards/token-gate): Restricts the mint to holders of a specified token.
+- [**Token Payment**](/candy-machine/guards/token-payment): Set the price of the mint in token amount.
 
 ## Creating a Candy Machine with guards
 
