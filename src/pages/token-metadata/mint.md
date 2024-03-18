@@ -385,6 +385,7 @@ await createFungible(umi, {
   name: 'My Fungible',
   uri: 'https://example.com/my-fungible.json',
   sellerFeeBasisPoints: percentAmount(5.5),
+  decimals: some(7), // for 0 decimals use some(0)
 }).sendAndConfirm(umi)
 ```
 
@@ -402,6 +403,7 @@ await createFungibleAsset(umi, {
   name: 'My Fungible Asset',
   uri: 'https://example.com/my-fungible-asset.json',
   sellerFeeBasisPoints: percentAmount(5.5),
+  decimals: some(7) // for 0 decimals use some(0)
 }).sendAndConfirm(umi)
 ```
 
