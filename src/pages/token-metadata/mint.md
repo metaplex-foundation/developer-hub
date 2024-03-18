@@ -380,7 +380,7 @@ await createNft(umi, {
 {% totem-accordion title="Create a Fungible" %}
 
 ```ts
-import { percentAmount, generateSigner } from '@metaplex-foundation/umi'
+import { percentAmount, generateSigner, some } from '@metaplex-foundation/umi'
 import { createFungible } from '@metaplex-foundation/mpl-token-metadata'
 
 const mint = generateSigner(umi)
@@ -398,7 +398,7 @@ await createFungible(umi, {
 {% totem-accordion title="Create a FungibleAsset" %}
 
 ```ts
-import { percentAmount, generateSigner } from '@metaplex-foundation/umi'
+import { percentAmount, generateSigner, some } from '@metaplex-foundation/umi'
 import { createFungibleAsset } from '@metaplex-foundation/mpl-token-metadata'
 
 const mint = generateSigner(umi)
