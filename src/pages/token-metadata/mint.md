@@ -54,6 +54,10 @@ umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
 
 Now that we have our **URI**, we can move on to the next step.
 
+{% callout %}
+The next steps show how to create accounts and mint the tokens in two steps. At the [bottom of the page](#create-helpers) there are **code examples** for helpers that combine those steps and make creating different token types easier.
+{% /callout %}
+
 ## Creating accounts
 
 To create all the on-chain accounts required by the Token Standard of your choice, you may simply use the **Create V1** instruction. It will adapt to the requested Token Standard and create the right accounts accordingly.
