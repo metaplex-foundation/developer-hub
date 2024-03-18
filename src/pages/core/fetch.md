@@ -12,16 +12,17 @@ To fetch a single Asset the following function can be used:
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { fetchAsset } from '@metaplex-foundation/mpl-core'
+import { fetchAssetV1 } from '@metaplex-foundation/mpl-core'
 
-const asset = await fetchAsset(umi, assetAddress.publicKey)
+const asset = await fetchAssetV1(umi, assetAddress.publicKey)
 ```
 
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Fetch multiple Assets
 
-Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/rpc-providers). 
+Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/rpc-providers).
 
 ### GPA fetch assets by owner
 
@@ -30,9 +31,9 @@ Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, w
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { getAssetGpaBuilder } from '@metaplex-foundation/mpl-core'
+import { getAssetV1GpaBuilder } from '@metaplex-foundation/mpl-core'
 
-const assetsByOwner = await getAssetGpaBuilder(umi)
+const assetsByOwner = await getAssetV1GpaBuilder(umi)
   .whereField('owner', owner.publicKey)
   .getDeserialized()
 ```
@@ -49,7 +50,7 @@ const assetsByOwner = await getAssetGpaBuilder(umi)
 ```ts
 import { getAssetGpaBuilder } from '@metaplex-foundation/mpl-core'
 
-const assetsByCollection = await getAssetGpaBuilder(umi)
+const assetsByCollection = await getAssetV1GpaBuilder(umi)
   .whereField(
     'updateAuthority',
     updateAuthority('Collection', [collectionAddress.publicKey])

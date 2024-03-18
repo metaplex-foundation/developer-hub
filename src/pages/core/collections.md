@@ -46,10 +46,10 @@ The following snippet creates a simple collection without Plugins or anything sp
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { createCollection } from '@metaplex-foundation/core'
+import { createCollectionV1 } from '@metaplex-foundation/core'
 
 const collectionAddress = generateSigner(umi)
-await createCollection(umi, {
+await createCollectionV1(umi, {
   collection: collectionAddress,
 })
 ```
@@ -67,12 +67,12 @@ The following snippet creates a collection with the [freeze Plugin](/core/plugin
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
-  createCollection,
+  createCollectionV1,
   pluginAuthorityPair,
 } from '@metaplex-foundation/core'
 
 const collectionAddress = publicKey('11111111111111111111111111111111') // Replace this with your collection address!
-await createCollection(umi, {
+await createCollectionV1(umi, {
   collection: collectionAddress,
   plugins: [
     pluginAuthorityPair({
@@ -125,12 +125,12 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import {
-  createCollection,
+  createCollectionV1,
   pluginAuthorityPair,
 } from '@metaplex-foundation/core'
 
 const collectionAddress = publicKey('11111111111111111111111111111111') // Replace this with your collection address!
-await updateCollection(umi, {
+await updateCollectionV1(umi, {
   collection: collectionAddress,
   newName: 'my-nft',
   newUri: 'https://exmaple.com/new-uri',
@@ -175,13 +175,16 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { createCollection, pluginAuthorityPair } from '@metaplex-foundation/core'
+import {
+  createCollectionV1,
+  pluginAuthorityPair,
+} from '@metaplex-foundation/core'
 
-const collectionAddress = publicKey("11111111111111111111111111111111") // Replace this with your collection address! 
-  await updateCollectionPlugin(umi, {
-    collection: collectionAddress,
-    plugin: plugin('PermanentFreeze', [{ frozen: false }]),
-  }).sendAndConfirm(umi);
+const collectionAddress = publicKey('11111111111111111111111111111111') // Replace this with your collection address!
+await updateCollectionPluginV1(umi, {
+  collection: collectionAddress,
+  plugin: plugin('PermanentFreeze', [{ frozen: false }]),
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}

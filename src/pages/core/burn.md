@@ -4,7 +4,7 @@ metaTitle: Core - Burning Assets
 description: Learn how to burn Assets on Core
 ---
 
-Assets can be burnt using the `burn` instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL will stay in the account to prevent it from being reopened. 
+Assets can be burnt using the `burn` instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL will stay in the account to prevent it from being reopened.
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details" %}
@@ -32,9 +32,9 @@ Here is how you can use our SDKs to burn a Core asset. The snippet assumes that 
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { burn } from '@metaplex-foundation/mpl-core'
+import { burnV1 } from '@metaplex-foundation/mpl-core'
 
-await burn(umi, {
+await burnV1(umi, {
   asset: asset.publicKey,
 }).sendAndConfirm(umi)
 ```
@@ -45,15 +45,16 @@ await burn(umi, {
 {% seperator h="6" /%}
 
 ## Burning an Asset that is part of a Collection
+
 Here is how you can use our SDKs to burn a Core asset that is part of a collection. The snippet assumes that you are the owner of the asset.
 
 {% dialect-switcher title="Burning an Asset that is part of a collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { burn } from '@metaplex-foundation/mpl-core'
+import { burnV1 } from '@metaplex-foundation/mpl-core'
 
-await burn(umi, {
+await burnV1(umi, {
   asset: asset.publicKey,
   collection: collectionAdress,
 }).sendAndConfirm(umi)

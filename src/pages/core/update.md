@@ -43,9 +43,9 @@ Here is how you can use our SDKs to update an MPL Core Asset.
 {% totem %}
 
 ```ts
-import { update } from '@metaplex-foundation/core'
+import { updateV1 } from '@metaplex-foundation/core'
 
-await update(umi, {
+await updateV1(umi, {
   asset: asset.publicKey,
   newName: 'New Nft Name',
   newUri: 'https://example.com/new-uri',

@@ -73,16 +73,14 @@ To create an asset the `create` instruction should be used. Below is a simple ex
 | systemProgram | The System Program account.                        |
 | logWrapper    | The SPL Noop Program.                              |
 
-
 **Instruction Arguments**
 
-| Args      | Description                                                   |
-|------------|---------------------------------------------------------------|
-| dataState  | Whether the data is stored in account state or ledger state. |
-| name       | The name of your MPL Core Asset.                              |
-| uri        | The off-chain JSON metadata URI.                              |
-| plugins    | What plugins you would like the asset to have.                |
-
+| Args      | Description                                                  |
+| --------- | ------------------------------------------------------------ |
+| dataState | Whether the data is stored in account state or ledger state. |
+| name      | The name of your MPL Core Asset.                             |
+| uri       | The off-chain JSON metadata URI.                             |
+| plugins   | What plugins you would like the asset to have.               |
 
 Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
 A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/processor/create.rs)
@@ -100,7 +98,7 @@ import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
 import { create, DataState } from '@metaplex-foundation/mpl-core'
 
 const assetAddress = generateSigner(umi)
-const result = create(umi, {
+const result = createV1(umi, {
   asset: assetAddress,
   name: 'My Nft',
   uri: 'https://example.com/my-nft',
@@ -113,7 +111,7 @@ const result = create(umi, {
 {% totem %}
 
 ```rust
-let create_ix = CreateBuilder::new()
+let create_ix = CreateV1Builder::new()
         .asset(input.asset.pubkey())
         .collection(input.collection)
         .authority(input.authority)
@@ -135,7 +133,6 @@ let create_ix = CreateBuilder::new()
     );
 ```
 
-
 {% /totem %}
 
 {% /dialect %}
@@ -143,7 +140,7 @@ let create_ix = CreateBuilder::new()
 {% dialect title="Rust (CPI)" id="rust-cpi" %}
 
 ```rust
-let create_ix = CreateCpiBuilder::new()
+let create_ix = CreateV1CpiBuilder::new()
         .asset(input.asset.pubkey())
         .collection(input.collection)
         .authority(input.authority)
@@ -219,10 +216,14 @@ MPL Core Assets support the use of plugins at both a Collection and at an Asset 
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { create, DataState, pluginAuthorityPair } from '@metaplex-foundation/mpl-token-metadata'
+import {
+  create,
+  DataState,
+  pluginAuthorityPair,
+} from '@metaplex-foundation/mpl-token-metadata'
 
 const mint = generateSigner(umi)
-await create(umi, {
+await createV1(umi, {
   asset: assetAddress,
   name: 'My Nft',
   uri: 'https://example.com/my-nft',
