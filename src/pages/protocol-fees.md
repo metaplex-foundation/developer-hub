@@ -4,11 +4,12 @@ metaTitle: Metaplex — Protocol Fees
 description: A details of the on-chain fees for Metaplex's products.
 ---
 
-The Metaplex Foundation currently charges the following protocol fees, which are based on community feedback:
+The Metaplex Foundation currently charges the following protocol fees:
 
 | Instruction     | Program         | Typical Payer | Amount (SOL) | Notes                                                                                                                                                                                                                                                                                    |
 | --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create          | Token Metadata  | Collector     | 0.01         | The minter for most NFTs created on Solana are the individual collectors minting from new drops. Creators that mint many NFTs may consider using compression for radically lower mint costs. (Includes all instructions that "create" an NFT including ones that create print editions.) |
+| Create          | Token Metadata  | Collector     | 0.01         | Paid by the minter, which is typically individual collectors minting new drops. Creators that mint many NFTs may consider using Bubblegum (compressed NFTs) for radically lower mint costs. Includes all instructions that "create" an NFT including ones that create print editions. |
+| Create          | Bubblegum       | -             | Free |
 | Combine         | Fusion (Trifle) | Collector     | 0.002        |                                                                                                                                                                                                                                                                                          |
 | Split           | Fusion (Trifle) | Collector     | 0.002        |                                                                                                                                                                                                                                                                                          |
 | Edit constraint | Fusion (Trifle) | Creator       | 0.01         |                                                                                                                                                                                                                                                                                          |
@@ -22,7 +23,3 @@ We are constantly monitoring community feedback related to the fees and may chan
 ### How much will it cost me, as a creator, in Token Metadata fees to launch a 10k NFT collection through Candy Machine?
 
 Creators will incur 0 SOL in Token Metadata fees for a standard 10k NFT drop since the Create fees are spread amongst the collectors who are minting from the Candy Machine.
-
-### Do the freeze and thaw fees impact pNFT transfers?
-
-No.
