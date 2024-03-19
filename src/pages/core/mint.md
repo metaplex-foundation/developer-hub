@@ -108,6 +108,10 @@ const result = createV1(umi, {
 {% /dialect %}
 
 {% dialect title="Rust" id="rust" %}
+```
+coming soon...
+```
+{% /dialect %}
 {% totem %}
 
 ```rust
@@ -206,6 +210,32 @@ Note that when setting the `mint` account, it is require to specify a `bool` fla
 
 {% /dialect %}
 {% /dialect-switcher %} -->
+
+## Create an Asset into a Collection
+
+MPL Core Assets can be minted straight into a collection providing you already have your MPL Core Collection premade before hand. To create a Collection Asset visit [here](/core/collections).
+
+{% dialect-switcher title="Create Asset with Plugin" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { generateSigner } from '@metaplex-foundation/umi'
+import {
+  createAssetWithCollection,
+} from '@metaplex-foundation/mpl-token-metadata'
+
+const mint = generateSigner(umi)
+await createAssetWithCollection(umi, {
+  collection: collection.publicKey,
+  asset: assetAddress,
+  name: 'My Nft',
+  uri: 'https://example.com/my-nft',
+  collection:
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
 
 ## Create an Asset with Plugins
 

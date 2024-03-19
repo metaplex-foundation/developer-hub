@@ -17,11 +17,11 @@ Plugins support the ability to assign an authority over the plugin. If an `initA
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, plugin } from '@metaplex-foundation/mpl-core'
+import { addPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
     asset: asset.publicKey,
-    plugin: plugin('Transfer', [{}]),
+    plugin: createPlugin(type: 'Transfer', data: [{}]),
   }).sendAndConfirm(umi);
 ```
 
@@ -38,7 +38,7 @@ import { addPlugin, plugin  } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
     asset: asset.publicKey,
-    plugin: plugin('Transfer', [{}]),
+    plugin: createPlugin(type: 'Transfer', data: [{}]),
     initAuthority: authority('Pubkey', { address: delegate.publicKey }),
   }).sendAndConfirm(umi);
 ```

@@ -25,7 +25,7 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 {% /totem-accordion %}
 {% /totem %}
 
-## Transfer Example
+## Transfering an Asset
 
 Here is how you can use our SDKs to transfer an asset on MPL Core.
 
@@ -38,6 +38,47 @@ import { transferV1 } from '@metaplex-foundation/mpl-core'
 await transferV1(umi, {
   asset: asset.publicKey,
   newOwner: newOwner.publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Transfering an Asset in a Collection
+
+If you are transfering an Asset which has a collection you will need to pass the collection address in.
+[How to tell if an asset is in a Collection?]()
+
+{% dialect-switcher title="Transfer Assets" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { transferV1 } from '@metaplex-foundation/mpl-core'
+
+await transferV1(umi, {
+  asset: asset.publicKey,
+  newOwner: newOwner.publicKey,
+  collection: colleciton.publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Transfering a Delegated Asset
+
+Transfering an asset via a delegate requires you to pass in the `authority` publicKey/signer.
+
+{% dialect-switcher title="Transfer Assets" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { transferV1 } from '@metaplex-foundation/mpl-core'
+
+await transferV1(umi, {
+  asset: asset.publicKey,
+  newOwner: newOwner.publicKey,
+  authority: authority.publicKey, // Delegate
 }).sendAndConfirm(umi)
 ```
 

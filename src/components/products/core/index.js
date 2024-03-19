@@ -30,6 +30,7 @@ export const core = {
               title: 'Getting Started',
               href: '/core/getting-started',
             },
+            { title: 'What is an Asset?', href: '/core/what-is-an-asset' },
             { title: 'FAQ', href: '/core/faq' },
           ],
         },
