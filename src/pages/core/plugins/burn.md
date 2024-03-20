@@ -28,11 +28,11 @@ The Burn Plugin doesn't contain any arguments to pass in.
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, plugin } from '@metaplex-foundation/mpl-core'
+import { addPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
     asset: asset.publicKey,
-    plugin: plugin('Burn', [{}]),
+    plugin: createPlugin('Burn', {}),
   }).sendAndConfirm(umi);
 ```
 

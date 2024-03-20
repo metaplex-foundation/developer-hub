@@ -34,7 +34,7 @@ await addPlugin(umi, {
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, plugin  } from '@metaplex-foundation/mpl-core'
+import { addPlugin, createPlugin  } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
     asset: asset.publicKey,
@@ -56,11 +56,11 @@ Plugins support the ability to assign an authority over the plugin. If an `initA
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addCollectionPlugin, plugin } from '@metaplex-foundation/mpl-core'
+import { addCollectionPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
 
 await addCollectionPlugin(umi, {
     collection: collection.publicKey,
-    plugin: plugin('Royalties', [
+    plugin: createPlugin('Royalties', [
       {
         basisPoints: 5000,
         creators: [],
@@ -79,11 +79,11 @@ await addCollectionPlugin(umi, {
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addCollectionPlugin, plugin } from '@metaplex-foundation/mpl-core'
+import { addCollectionPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
 
 await addCollectionPlugin(umi, {
     collection: collection.publicKey,
-    plugin: plugin('Royalties', [
+    plugin: createPlugin('Royalties', [
       {
         basisPoints: 5000,
         creators: [],

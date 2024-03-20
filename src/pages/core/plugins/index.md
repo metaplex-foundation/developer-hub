@@ -70,3 +70,84 @@ This means all your regular MPL Core Asset sales from your collection will retai
 | [Permanent Transfer Delegate](core/plugins/permanent-transfer) |               |                   | ✅        |
 | [Permanent Freeze Delegate](core/plugins/permanent-freeze)     |               |                   | ✅        |
 | [Permanent Burn Delegate](core/plugins/permanent-burn)         |               |                   | ✅        |
+
+## Plugins and Life Cycles
+
+Plugins in MPL Core have the ability to effect the outcome of certain lifecycle actions such as Create, Transfer, Burn, and Update.
+
+Each plugin has the ability to to `reject`, `approve`, or `force approve` an action to a desired outcome.
+
+During lifecycle events the action will work its way down a list of predefined plugins checking and validating against them.
+If the plugins conditions are validated the lifecycle passes and continues it's action.
+
+If a plugin validation fails then the lifecycle will be halted and rejected.
+
+The rules for plugin validation are as follows in this hierarchy of conditions;
+
+- If there is force approve, always approve
+- Else if there is any reject, reject
+- Else if there is any approve, approve
+
+The `force approve` validation is only available on 1st party plugins and only available on `permanent` plugins.
+
+### Create
+
+{% totem %}
+
+| Plugin    | Action     | Conditions |
+| --------- | ---------- | ---------- |
+| Royalties | Can Reject | Ruleset    |
+
+{% /totem %}
+
+### Update
+
+{% totem %}
+Update currently has no plugin conditions or validations.
+{% /totem %}
+
+### Transfer
+
+{% totem %}
+| Plugin | Action | Conditions |
+| --------------------------- | ----------- | ----------- |
+| Royalties | Can Reject | Ruleset |
+| Freeze Delegate | Can Reject | isFrozen |
+| Transfer Delegate | Can Approve | isAuthority |
+| Permanent Freeze Delegate | Can Reject | isFrozen |
+| Permanent Transfer Delegate | Can Approve | isAuthority |
+{% /totem %}
+
+### Burn
+
+{% totem %}
+| Plugin | Action | Conditions |
+| ------------------------- | ----------- | ----------- |
+| Freeze Delegate | Can Reject | isFrozen |
+| Burn Delegate | Can Reject | isAuthority |
+| Permanent Freeze Delegate | Can Reject | isFrozen |
+| Permanent Burn Delegate | Can Approve | isAuthority |
+{% /totem %}
+
+### Add Plugin
+
+{% totem %}
+| Plugin | Action | Conditions |
+| --------------------------- | ----------- | ----------- |
+| Royalties | Can Reject | Ruleset |
+| Update Delegate | Can Approve | isAuthority |
+| Permanent Freeze Delegate | Can Reject | isFrozen |
+| Permanent Transfer Delegate | Can Reject | isAuthority |
+{% /totem %}
+
+### Approve Plugin Authority
+
+{% totem %}
+Update currently has no plugin conditions or validations.
+{% /totem %}
+
+### Remove Authority Plugin
+
+{% totem %}
+// TODO Mentions in the asset program that is this still a `TODO`
+{% /totem %}

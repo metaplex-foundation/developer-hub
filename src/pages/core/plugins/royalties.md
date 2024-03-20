@@ -22,7 +22,7 @@ When assigned to both MPL Core Asset and the MPL Core Collection the MPL Core As
 The Royalties Plugin requires the following arguments.
 
 | Arg         | Value              |
-| ----------  | ------------------ |
+| ----------- | ------------------ |
 | basisPoints | number             |
 | creators    | Array<CreatorArgs> |
 | ruleset     | RuleSet            |
@@ -113,11 +113,11 @@ const ruleSet = ruleSet('None')
 
 ```ts
 import { percentAmount } from '@metaplex-foundation/umi'
-import { addPlugin, plugin, ruleSet } from '@metaplex-foundation/mpl-core'
+import { addPlugin, createPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
   asset: asset.publicKey,
-  plugin: plugin('Royalties', [
+  plugin: createPlugin('Royalties',
     {
         precentage: percentAmount(5),
         creators: [
@@ -130,8 +130,38 @@ await addPlugin(umi, {
 			]
 		)
     },
-  ]),
+  ),
 }).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Adding the Royalties Plugin to an Collection code example
+
+{% dialect-switcher title="Add Royalties Plugin to Collection" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { addCollectionPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
+
+await addCollectionPlugin(umi, {
+    collection: collection.publicKey,
+    plugin: createPlugin('Royalties',
+    {
+        precentage: percentAmount(5),
+        creators: [
+            { address: PublicKey; percentage: number }
+            { address: PublicKey; percentage: number }
+        ],
+      	ruleset: ruleSet('ProgramDenyList', [
+				publicKey("11111111111111111111111111111111")
+				publicKey("22222222222222222222222222222222")
+			]
+		)
+    },
+  ),
+  }).sendAndConfirm(umi);
 ```
 
 {% /dialect %}

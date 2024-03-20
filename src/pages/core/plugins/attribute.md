@@ -47,18 +47,18 @@ const attributes = [
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, plugin } from '@metaplex-foundation/mpl-core'
+import { addPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
   asset: asset.publicKey,
-  plugin: plugin('Attributes', [
+  plugin: createPlugin('Attributes', 
     {
       attributeList: [
         { key: 'key0', value: 'value0' },
         { key: 'key1', value: 'value1' },
       ],
     },
-  ]),
+  ),
 }).sendAndConfirm(umi)
 ```
 
@@ -71,18 +71,18 @@ await addPlugin(umi, {
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, plugin } from '@metaplex-foundation/mpl-core'
+import { addPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
 
 await updatePlugin(umi, {
   asset: asset.publicKey,
-  plugin: plugin('Attributes', [
+  plugin: createPlugin('Attributes', 
     {
       attributeList: [
         { key: 'key0', value: 'value0' },
         { key: 'key1', value: 'value1' },
       ],
     },
-  ]),
+  ),
 }).sendAndConfirm(umi)
 ```
 

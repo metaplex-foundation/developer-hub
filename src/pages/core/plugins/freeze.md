@@ -36,7 +36,7 @@ import { addPlugin, plugin } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
   asset: asset.publicKey,
-  plugin: plugin('Freeze', [{ frozen: true }]),
+  plugin: createPlugin('Freeze', { frozen: true }),
 }).sendAndConfirm(umi)
 ```
 

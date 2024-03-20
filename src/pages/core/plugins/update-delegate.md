@@ -31,7 +31,7 @@ import { addPlugin, plugin, authority } from '@metaplex-foundation/mpl-core'
 
 await addPlugin(umi, {
   asset: asset.publicKey,
-  plugin: plugin('UpdateDelegate', [{}]),
+  plugin: createPlugin('UpdateDelegate', {}),
   initAuthority: authority('Pubkey', { address: delegateAddress.publicKey }),
 }).sendAndConfirm(umi)
 ```
