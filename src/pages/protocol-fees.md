@@ -4,7 +4,7 @@ metaTitle: Metaplex — Protocol Fees
 description: A details of the on-chain fees for Metaplex's products.
 ---
 
-The Metaplex Foundation currently charges the following protocol fees:
+The Metaplex Protocol currently includes the following fees:
 
 | Instruction     | Program         | Typical Payer | Amount (SOL) | Notes                                                                                                                                                                                                                                                                                    |
 | --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -18,7 +18,7 @@ The Metaplex Foundation currently charges the following protocol fees:
 
 ### Will the fee amounts change over time?
 
-We are constantly monitoring community feedback related to the fees and may change the fee amounts over time. Our goal is for fees to be minimally disruptive and promote the growth and usage of the protocol.
+The Metaplex Foundation is constantly monitoring community feedback related to the fees and may change the fee amounts over time. Our goal is for fees to be minimally disruptive and promote the growth and usage of the protocol.
 
 ### How much will it cost me, as a creator, in Token Metadata fees to launch a 10k NFT collection through Candy Machine?
 
