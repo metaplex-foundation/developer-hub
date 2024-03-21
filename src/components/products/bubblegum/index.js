@@ -26,7 +26,7 @@ export const bubblegum = {
           links: [
             { title: 'Overview', href: '/bubblegum' },
             { title: 'Getting started', href: '/bubblegum/getting-started' },
-            { title: 'Metaplex DAS API RPCs', href: '/bubblegum/rpcs' },
+            { title: 'Metaplex DAS API RPCs', href: '/rpc-providers' },
             { title: 'FAQ', href: '/bubblegum/faq' },
           ],
         },

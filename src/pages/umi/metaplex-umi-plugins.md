@@ -1,12 +1,12 @@
 ---
-title: Meteplex Umi Plugins
-metaTitle: Umi - Meteplex Umi Plugins
-description: An overview of Meteplex Umi Plugins.
+title: Metaplex Umi Plugins
+metaTitle: Umi - Metaplex Umi Plugins
+description: An overview of Metaplex Umi Plugins.
 ---
 
-Metaplex programs have been generated via Kinobi to work and run as plugin's via Umi. Each program in the Metaplex library has a different use and purpose in the Solana eco system.
+Metaplex programs have been generated via Kinobi to work and run as plugin's via Umi. Each program in the Metaplex library has a different use and purpose in the Solana eco system. You can find even more Plugins to use with Umi in the [interface implementations page](/umi/implementations)!
 
-## [Bubblegum](/bubblegum)
+## [Bubblegum (cNFT)](/bubblegum)
 
 Bubblegum is a Metaplex program that deals with the creation and management of cNFTs (Compressed NFTS) on the Solana Blockchain. cNfts are cheaper to create and mint than their traditional NFT and pNFT counterparts from Token Metadata.
 
@@ -34,7 +34,7 @@ The state data of uncompressed NFTs is all stored in on-chain accounts. This is 
 
 Program feature set includes:
 
-- Data fetching
+- Fast Data fetching, including compressed NFTs
 
 ## [Inscriptions](/inscriptions)
 
@@ -43,8 +43,9 @@ The Metaplex Inscription Program allows you to write data directly to Solana, us
 Program feature set includes:
 
 - Writing Data directly to the Solana blockchain
+- Reading inscription data from the Solana blochain
 
-## [Token Metadata](/token-metadata)
+## [Token Metadata (NFT, pNFT)](/token-metadata)
 
 Token Metadata is a Metaplex program that deals with the creation and management of NFTs and pNFTs. Token Metadata NFTs were the first nft standard on Solana while pNFTs where later created to include royalty enforcement.
 
