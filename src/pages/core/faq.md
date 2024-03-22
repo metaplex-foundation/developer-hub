@@ -24,3 +24,6 @@ The Core Standard allows you to create Soulbound Assets. To achieve this you sho
 ## How to set an Asset to be Immutable?
 
 *coming soon*
+
+# What are the differences between Metaplex Token Metadata and Core?
+There are quite many differences. For example Core is cheaper, requires less Compute Units and should be easier to work with from a developer perspective. Have a look at the [differences](/core/tm-differences) page for details.
