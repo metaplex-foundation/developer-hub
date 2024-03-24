@@ -1,5 +1,5 @@
 ---
-title: Permanent Freeze
+title: Permanent Freeze Delegate
 metaTitle: Core - Permanent Freeze Plugin
 description: Learn about the Permanent Freeze Plugin for MPL Core Assets
 ---

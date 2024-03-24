@@ -17,6 +17,29 @@ This page first explores the general improvements compared with TM and will late
 ## Migration Guide
 Create
 
+{% dialect-switcher title="Token Metadata CreateV1" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
+import {
+  createV1,
+  TokenStandard,
+} from '@metaplex-foundation/mpl-token-metadata'
+
+const mint = generateSigner(umi)
+await createV1(umi, {
+  mint,
+  authority,
+  name: 'My NFT',
+  uri,
+  sellerFeeBasisPoints: percentAmount(5.5),
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+
 Transfer
 
 Burn

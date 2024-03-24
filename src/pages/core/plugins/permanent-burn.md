@@ -1,6 +1,6 @@
 ---
-title: Permanent Burn
-metaTitle: Core - Permanent Burn Plugin
+title: Permanent Burn Delegate
+metaTitle: Core - Permanent Burn Delegate
 description: Learn about the Permanent Burn Plugin for MPL Core Assets
 ---
 

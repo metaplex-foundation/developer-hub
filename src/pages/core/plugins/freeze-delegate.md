@@ -1,7 +1,7 @@
 ---
-title: Freeze Plugin
-metaTitle: Core - Freeze Plugin
-description: Learn about the MPL Core Asset Freeze Plugin
+title: Freeze Delegate
+metaTitle: Core - Freeze Delegate Plugin
+description: Learn about the MPL Core Asset Freeze Delegate Plugin
 ---
 
 ## Overview

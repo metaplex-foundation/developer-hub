@@ -6,7 +6,7 @@ description: Learn how to create Assets on Core
 
 As discussed in the [Core overview](/core), digital assets on Core are composed of exactly one on-chain account and off-chain data describing the token. On this page, we'll go over the process of minting these assets. {% .lead %}
 
-## The Minting Process
+## The Creation Process
 
 1. **Upload off-chain data.** First, we must ensure our off-chain data is ready. This means we must have a JSON file stored somewhere that describes our asset. It doesn't matter how or where that JSON file is stored, as long as it's accessible via a **URI**. The off chain metadata can look similar to the [old token metadata standard](/token-metadata/token-standard#the-non-fungible-standard).
 2. **Create on-chain Asset account.** Then, we must create the on-chain Asset account that will hold our asset's data.
@@ -108,9 +108,11 @@ const result = createV1(umi, {
 {% /dialect %}
 
 {% dialect title="Rust" id="rust" %}
+
 ```
 coming soon...
 ```
+
 {% /dialect %}
 {% totem %}
 
@@ -241,9 +243,26 @@ await createAssetWithCollection(umi, {
 
 MPL Core Assets support the use of plugins at both a Collection and at an Asset level. To create a Core Asset with a plugin you pass in the plugin and it's parameters into the `plugins` array arg during creation. The below example creates a mint with the `Freeze` plugin.
 
+**Create Plugin Helper**
+
+The `createPlugin()` helper gives you a typed method that allows you to assign plugins during the Asset creation process.
+For a full list of plugins and their arguments see the [plugins overview](/plugins/overview) page.
+
 {% dialect-switcher title="Create Asset with Plugin" %}
 {% dialect title="JavaScript" id="js" %}
+```ts
+import { createPlugin } 
 
+
+
+// example
+createPlugin('Freeze', { frozen: true })
+```
+{% /dialect %}
+{% /dialect-switcher %}
+
+{% dialect-switcher title="Create Asset with Plugin" %}
+{% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
 import {
@@ -257,12 +276,7 @@ await createV1(umi, {
   asset: assetAddress,
   name: 'My Nft',
   uri: 'https://example.com/my-nft',
-  plugins: [
-    pluginAuthorityPair({
-      type: 'Freeze',
-      data: { frozen: false },
-    }),
-  ],
+  plugins: [createPlugin('Freeze', { frozen: true })],
 }).sendAndConfirm(umi)
 ```
 

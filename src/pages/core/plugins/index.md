@@ -4,6 +4,20 @@ metaTitle: Core - Asset Plugins Overview
 description: Learn about the different types of Plugins available on MPL Core Assets
 ---
 
+## Lifecycles
+
+During an assets lifecycle there are multiple events that can be triggered such as;
+
+- Creating
+- Transfering
+- Updating
+- Burning
+- Add Plugin
+- Approve Authority Plugin
+- Remove Authority Plugin
+
+These lifecycle events affect the Asset in various ways from creation, transfering to another wallet, through to destruction of the Asset. Plugins attached on both an Asset level or a Collection level will run through a validation process during these lifecycle events to either `approve`, `reject`, or `force approve` the event from execution.
+
 ## What are Plugins?
 
 Plugins can attach to both MPL Core Assets and also Collection Assets to modify the behaviour either at asset level or even collection level depending on the plugin.
@@ -71,7 +85,7 @@ This means all your regular MPL Core Asset sales from your collection will retai
 | [Permanent Freeze Delegate](core/plugins/permanent-freeze)     |               |                   | ✅        |
 | [Permanent Burn Delegate](core/plugins/permanent-burn)         |               |                   | ✅        |
 
-## Plugins and Life Cycles
+## Plugins and Lifecycle Events
 
 Plugins in MPL Core have the ability to effect the outcome of certain lifecycle actions such as Create, Transfer, Burn, and Update.
 
@@ -87,6 +101,7 @@ The rules for plugin validation are as follows in this hierarchy of conditions;
 - If there is force approve, always approve
 - Else if there is any reject, reject
 - Else if there is any approve, approve
+- Else reject
 
 The `force approve` validation is only available on 1st party plugins and only available on `permanent` plugins.
 

@@ -75,8 +75,9 @@ The onchain account structure of an MPL Core Asset. [Link](https://github.com/me
 
 ## Is my Asset in a Collection?
 
-MPL Core Assets can belong to collections. The `updateAuthority` field in the MPL Core Asset data provides two duties. Either to report the update authority of the Asset, or to provide the publicKey of the MPL Core Collection it belongs too.
-When accessing the `updateAuthority` field of the MPL Core Asset you will be returned with one of these 3 outcomes;
+MPL Core Assets can belong to collections. The `updateAuthority` field in the MPL Core Asset data provides two duties, either to report the update authority of the Asset, or to provide the publicKey of the MPL Core Collection it belongs too.
+
+When accessing the `updateAuthority` field either directly via the asset or via the `collectionAddress` helper of the MPL Core Asset you will be returned with one of these 3 following outcomes;
 
 **None**
 
@@ -89,14 +90,19 @@ The asset has no update authority set.
 import { fetchAssetV1 } from '@metaplex-foundation/mpl-core'
 
 const asset = await fetchAssetV1(umi, assetAddress.publicKey)
+const collectionId = collectionAddress(asset)
 
+console.log({collectionId})
 console.log({asset})
 
 // log
+collectionId: undefined
 asset: {
     key: AssetV1,
     owner: "11111111111111111111111111111111",
-    updateAuthority: {__kind: 'None'},
+    updateAuthority: {
+      type: 'None',
+    },
     name: "My Core Asset",
     uri: "https://example.com/metadata.json",
     seq: 1,
@@ -124,17 +130,20 @@ The asset has an update authority set and does not belong to a collection.
 import { fetchAssetV1 } from '@metaplex-foundation/mpl-core'
 
 const asset = await fetchAssetV1(umi, assetAddress.publicKey)
+const collectionId = collectionAddress(asset)
 
+console.log({collectionId})
 console.log({asset})
 
 // log
+collectionId: undefined
 asset: {
     key: AssetV1,
     owner: "11111111111111111111111111111111",
     updateAuthority: {
-        __kind: 'Address'
-        fields: ["22222222222222222222222222222222"]
-    },
+      type: 'Address',
+      address: '2222222222222222222222222222222'
+    }
     name: "My Core Asset",
     uri: "https://example.com/metadata.json",
     ...
@@ -166,16 +175,19 @@ The asset belongs to the collection at the given address.
 import { fetchAssetV1 } from '@metaplex-foundation/mpl-core'
 
 const asset = await fetchAssetV1(umi, assetAddress.publicKey)
+const collectionId = collectionAddress(asset)
 
+console.log({collectionId})
 console.log({asset})
 
 // log
+collection: '2222222222222222222222222222222'
 asset: {
     key: AssetV1,
     owner: "11111111111111111111111111111111",
     updateAuthority: {
-        __kind: 'Collection'
-        fields: ["33333333333333333333333333333333"]
+      type: 'Collection',
+      address: '2222222222222222222222222222222'
     },
     name: "My Core Asset",
     uri: "https://example.com/metadata.json",

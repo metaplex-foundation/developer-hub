@@ -1,5 +1,5 @@
 ---
-title: Transfer Plugin
+title: Transfer Delegate Plugin
 metaTitle: Core - Transfer Plugin
 description: Learn about the MPL Core Asset Transfer Plugin
 ---
