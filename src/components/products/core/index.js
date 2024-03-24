@@ -87,20 +87,20 @@ export const core = {
             },
           ],
         },
-        {
-          title: 'Integration Guides',
-          links: [
-            { title: 'Wallets', href: '/core/intergrations/wallets' },
-            {
-              title: 'Market Places',
-              href: '/core/intergrations/market-places',
-            },
-            {
-              title: 'Staking',
-              href: '/core/intergrations/staking',
-            },
-          ],
-        },
+        // {
+        //   title: 'Integration Guides',
+        //   links: [
+        //     { title: 'Wallets', href: '/core/intergrations/wallets' },
+        //     {
+        //       title: 'Market Places',
+        //       href: '/core/intergrations/market-places',
+        //     },
+        //     {
+        //       title: 'Staking',
+        //       href: '/core/intergrations/staking',
+        //     },
+        //   ],
+        // },
       ],
     },
     { ...referencesSection('core') },
