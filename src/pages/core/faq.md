@@ -19,11 +19,33 @@ Token Metadata currently charges very small fee of 0.0015 SOL per Asset mint to 
 
 ## How to create a Soulbound Asset?
 
-The Core Standard allows you to create Soulbound Assets. To achieve this you should use the [PermanentFreeze](/core/plugins/permanent-freeze) plugin like this.
+The Core Standard allows you to create Soulbound Assets. To achieve this you should use the [PermanentFreeze](/core/plugins/permanent-freeze) plugin. On creation you would set the Asset to be frozen without authority, so that it can not be thawed. 
+
+{% dialect-switcher title="Create a Soulbound asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { createAsset, pluginAuthorityPair, nonePluginAuthority } from '@metaplex-foundation/mpl-core'
+
+await createAsset(umi, {
+  owner,
+  plugins: [
+    pluginAuthorityPair({
+      type: 'PermanentFreeze',
+      data: { frozen: true },
+      authority: nonePluginAuthority(),
+    }),
+  ],
+})
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
 
 ## How to set an Asset to be Immutable?
 
-*coming soon*
+_coming soon_
 
-# What are the differences between Metaplex Token Metadata and Core?
+## What are the differences between Metaplex Token Metadata and Core?
+
 There are quite many differences. For example Core is cheaper, requires less Compute Units and should be easier to work with from a developer perspective. Have a look at the [differences](/core/tm-differences) page for details.
