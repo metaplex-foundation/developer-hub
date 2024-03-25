@@ -40,7 +40,6 @@ Here is how you can use our SDKs to update an MPL Core Asset.
 
 {% dialect-switcher title="Update an Asset" %}
 {% dialect title="JavaScript" id="js" %}
-{% totem %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -55,7 +54,48 @@ await updateV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /totem %}
+{% /dialect %}
+{% dialect title="Rust" id="rust" %}
+
+```ts
+use mpl_core::instructions::UpdateV1Builder;
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn update_asset() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let update_asset_ix = UpdateV1Builder::new()
+        .asset(asset)
+        .payer(authority.pubkey())
+        .new_name("My asset".into())
+        .new_uri("https://example.com/my-asset.json".into())
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let update_asset_tx = Transaction::new_signed_with_payer(
+        &[update_asset_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&update_asset_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
 {% /dialect %}
 {% /dialect-switcher %}
 
@@ -65,8 +105,6 @@ Here is how you can use our SDKs to update an MPL Core Asset.
 
 {% dialect-switcher title="Update an Asset" %}
 {% dialect title="JavaScript" id="js" %}
-{% totem %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateV1 } from '@metaplex-foundation/mpl-core'
@@ -75,10 +113,20 @@ const asset = publicKey('11111111111111111111111111111111')
 
 await updateV1(umi, {
   asset: asset,
-  
 }).sendAndConfirm(umi)
 ```
+{% /dialect %}
 
-{% /totem %}
+{% dialect title="Rust" id="rust" %}
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { updateV1 } from '@metaplex-foundation/mpl-core'
+
+const asset = publicKey('11111111111111111111111111111111')
+
+await updateV1(umi, {
+  asset: asset,
+}).sendAndConfirm(umi)
+```
 {% /dialect %}
 {% /dialect-switcher %}
