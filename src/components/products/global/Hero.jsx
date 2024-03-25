@@ -1,4 +1,6 @@
 import { Hero as BaseHero } from '@/components/Hero'
+import CoreBanner from '@/images/core-banner.jpg'
+import Link from 'next/link'
 
 export function Hero({ page }) {
   return (
@@ -8,6 +10,11 @@ export function Hero({ page }) {
       primaryCta={{ title: 'Browse our Products', href: '/programs-and-tools' }}
       light2Off
       light3Off
-    ></BaseHero>
+    >
+      <Link href="/core">
+        <img src={CoreBanner.src} alt="Developer Hub" className="no-lightense" />
+      </Link>
+      .
+    </BaseHero>
   )
 }

@@ -10,6 +10,8 @@ import { toolbox } from './toolbox'
 import { umi } from './umi'
 import { amman } from './amman'
 import { das } from './das-api'
+import { core } from './core'
+import { candyMachine4 } from './candyMachine4'
 import { legacyDocumentation } from './legacyDocumentation'
 import { sugar } from './sugar'
 
@@ -27,6 +29,8 @@ export const products = [
   umi,
   amman,
   das,
+  core,
+  // candyMachine4
   legacyDocumentation,
   sugar
 ].sort((a, b) => a.name.localeCompare(b.name))
