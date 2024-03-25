@@ -100,7 +100,7 @@ const burningAllowed = canBurn(
 )
 ```
 
-# Further Reading
+## Further Reading
 The described features above are just the tip of the iceberg. Additional probably interesting topics could be:
 
 - Collection Management
