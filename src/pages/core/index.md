@@ -14,17 +14,6 @@ Metaplex Core (“Core”) sheds the complexity and technical debt of previous s
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="/core/references" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
+{% quick-link title="Differences to MPL Token Metadata Overview" icon="AcademicCap" href="/core/tm-differences" description="Used to Token Metadata and want to see an overview of new features or changes behaviour?" /%}
+
 {% /quick-links %}
-
-## Introduction
-
-
-## Plugins
-
-## And a lot more
-
-Whilst this provides a good overview of the Token Metadata program and what it has to offer, there’s still a lot more that can be done with it.
-
-The other pages of this documentation aim to document it further and explain significant features in their own individual pages.
-
-//TODO: Link to other features
