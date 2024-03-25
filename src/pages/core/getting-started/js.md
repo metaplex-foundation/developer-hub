@@ -28,7 +28,7 @@ const umi = createUmi('http://127.0.0.1:8899').use(mplCore())
 
 That's it, you can now interact with NFTs by using [the various functions provided by the library](https://mpl-core-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of creating an Asset:
 
-{% dialect-switcher title="Upload assets and JSON data" %}
+{% dialect-switcher title="Create Asset" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -39,6 +39,7 @@ const result = createV1(umi, {
   uri: 'https://example.com/my-nft',
 }).sendAndConfirm(umi)
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
