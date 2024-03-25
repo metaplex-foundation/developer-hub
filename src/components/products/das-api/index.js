@@ -46,6 +46,11 @@ export const das = {
         },
       ],
     },
+    {
+      ...referencesSection('das-api'),
+      href: `https://digital-asset-standard-api-js-docs.vercel.app/`,
+      target: '_blank',
+    },
     { ...changelogSection('das-api') },
   ],
 }
