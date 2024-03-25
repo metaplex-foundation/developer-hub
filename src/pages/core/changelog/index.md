@@ -4,4 +4,4 @@ metaTitle: Core - Changelog
 description: Keep track of changes to Metaplex's Core product.
 ---
 
-_Coming soon..._
+2024-03-25: Release to Devnet

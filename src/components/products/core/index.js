@@ -103,9 +103,12 @@ export const core = {
         // },
       ],
     },
-    { ...referencesSection('core') },
-    { ...guidesSection('core') },
-    { ...recipesSection('core') },
+    { 
+      ...referencesSection('core'),
+      href: `https://mpl-core-js-docs.vercel.app/`,
+     },
+    // { ...guidesSection('core') },
+    // { ...recipesSection('core') },
     { ...changelogSection('core') },
   ],
 }
