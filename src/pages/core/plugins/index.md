@@ -81,15 +81,15 @@ This means all your regular MPL Core Asset sales from your collection will retai
 
 | Plugin                                                         | Owner Managed | Authority Managed | Permanent |
 | -------------------------------------------------------------- | ------------- | ----------------- | --------- |
-| [Transfer Delegate](/core/plugins/transfer)                    | ✅            |                   |           |
-| [Freeze Delegate](/core/plugins/freeze)                        | ✅            |                   |           |
-| [Burn Delegate](/core/plugins/burn)                            | ✅            |                   |           |
+| [Transfer Delegate](/core/plugins/transfer-delegate)                    | ✅            |                   |           |
+| [Freeze Delegate](/core/plugins/freeze-delegate)                        | ✅            |                   |           |
+| [Burn Delegate](/core/plugins/burn-delegate)                            | ✅            |                   |           |
 | [Royalties](/core/plugins/royalties)                           |               | ✅                |           |
-| [Update Delegate](/core/plugins/update)                        |               | ✅                |           |
-| [Attribute](core/plugins/attribute)                            |               | ✅                |           |
-| [Permanent Transfer Delegate](core/plugins/permanent-transfer) |               |                   | ✅        |
-| [Permanent Freeze Delegate](core/plugins/permanent-freeze)     |               |                   | ✅        |
-| [Permanent Burn Delegate](core/plugins/permanent-burn)         |               |                   | ✅        |
+| [Update Delegate](/core/plugins/update-delegate)                        |               | ✅                |           |
+| [Attribute](/core/plugins/attribute)                            |               | ✅                |           |
+| [Permanent Transfer Delegate](/core/plugins/permanent-transfer-delegate) |               |                   | ✅        |
+| [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate)     |               |                   | ✅        |
+| [Permanent Burn Delegate](/core/plugins/permanent-burn-delegate)         |               |                   | ✅        |
 
 ## Plugins and Lifecycle Events
 
