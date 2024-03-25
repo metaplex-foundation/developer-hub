@@ -4,4 +4,4 @@ metaTitle: Core - Getting Started - Rust
 description: Get started with Core using Rust
 ---
 
-//TODO Core Rust example
+_coming soon_
