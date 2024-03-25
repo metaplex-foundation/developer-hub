@@ -18,7 +18,7 @@ const codeProps = {
 
 export function Hero({ page }) {
   return (
-    <BaseHero page={page} subDescription="Create small digital assets on chain.">
+    <BaseHero page={page}>
       <HeroCode {...codeProps}></HeroCode>
     </BaseHero>
   )

@@ -10,8 +10,8 @@ import { Logo } from './Logo'
 
 export const core = {
   name: 'Core',
-  headline: 'Composable clean assets',
-  description: 'Ultimate composability for digital assets.',
+  headline: 'Next gen NFT standard',
+  description: 'Next generation Solana NFT standard.',
   navigationMenuCatergory: 'Create',
   path: 'core',
   logo: Logo,
