@@ -62,7 +62,11 @@ export const tokenMetadata = {
         },
       ],
     },
-    { ...referencesSection('token-metadata') },
+    {
+      ...referencesSection('token-metadata'),
+      href: `https://mpl-token-metadata-js-docs.vercel.app/`,
+      target: '_blank',
+    },
     { ...recipesSection('token-metadata') },
     { ...changelogSection('token-metadata') },
   ],
