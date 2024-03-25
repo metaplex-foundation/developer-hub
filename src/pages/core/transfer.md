@@ -50,7 +50,7 @@ await transferV1(umi, {
 If you are transfering an Asset which has a collection you will need to pass the collection address in.
 [How to tell if an asset is in a Collection?]()
 
-{% dialect-switcher title="Transfer an Asset with a Collection" %}
+{% dialect-switcher title="Transfer an Asset that is part of a Collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
