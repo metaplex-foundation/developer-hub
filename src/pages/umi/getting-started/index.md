@@ -25,6 +25,8 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 const umi = createUmi('https://api.mainnet-beta.solana.com');
 ```
 
+Then you want to tell Umi which wallet to use. This can either be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
+
 That's it, now pass your Umi instance around and add more plugins as needed.
 
 ## For library authors
