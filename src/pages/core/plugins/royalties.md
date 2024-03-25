@@ -4,7 +4,7 @@ metaTitle: Core - Enforcing Royalties
 description: Learn how to enforce royalties on Core
 ---
 
-The Royalties Plugin is a `Authority Managed` plugin that allows the authority of the Asset to set and change the Royalies Plugin data.
+The Royalties Plugin is a `Authority Managed` plugin that allows the authority of the Asset to set and change the Royalties Plugin data.
 
 This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collection`.
 
