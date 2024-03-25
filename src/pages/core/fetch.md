@@ -74,11 +74,13 @@ console.log(assetsByCollection)
 
 ## DAS - Digital Asset Standard API
 
+**DAS SUPPORT IS COMING SOON!**
+
 If you use a DAS enabled RPC you'll be able to take advantage of indexed Assets for lighting fast fetches and data retrieval.
 
 DAS will index everything from metadata, off chain metadata, collection data, plugins (including Attributes), and more. To learn more about the Metaplex DAS API you can [click here](/das-api).
 
-Below is an example of returned data from fetching a MPL Core Asset.
+Below is an example of returned data from fetching a MPL Core Asset with DAS.
 
 ### FetchAsset Example
 

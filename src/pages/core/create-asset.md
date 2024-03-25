@@ -252,7 +252,7 @@ MPL Core Assets support the use of plugins at both a Collection and at an Asset 
 import { generateSigner } from '@metaplex-foundation/umi'
 import {
   createV1,
-  pluginAuthorityPair,
+  createPlugin,
   ruleSet,
 } from '@metaplex-foundation/mpl-core'
 
@@ -284,7 +284,6 @@ await createV1(umi, {
           ruleSet: ruleSet('None'), // Compatibility rule set
         },
       }),
-      authority: pluginAuthority('UpdateAuthority'),
     },
   ],
 }).sendAndConfirm(umi)

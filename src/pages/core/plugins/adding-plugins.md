@@ -42,6 +42,40 @@ await addPluginV1(umi, {
 
 ### Adding a Plugin with an assigned authority
 
+There are a few authority helpers to aid you in setting the authorities of plugins.
+
+**addressPluginAuthority()**
+```js
+addressPluginAuthority(publicKey)
+```
+
+This sets the plugins authority to a specific address.
+
+**ownerPluginAuthority()**
+```js
+ownerPluginAuthority()
+```
+
+This sets the plugins authority to the type of `Owner`.
+The current owner of the Asset will have access to this plugin.
+
+**updatePluginAuthority()**
+```js
+updatePluginAuthority()
+```
+
+This sets the plugins authority to the type of `UpdateAuthority`.
+The current update authority of the Asset will have access to this plugin.
+
+**nonePluginAuthority()**
+```js
+nonePluginAuthority()
+```
+
+This sets the plugins authority to the type of `None`.
+The plugins data if it has any becomes immutable at this point.
+
+
 {% dialect-switcher title="Adding a Plugin with an assigned authority" %}
 {% dialect title="JavaScript" id="js" %}
 
@@ -51,12 +85,15 @@ import {
   addPluginV1,
   createPlugin,
   pluginAuthority,
+  addressPluginAuthority
 } from '@metaplex-foundation/mpl-core'
+
+const delegate = publicKey("222222222222222222222222222222")
 
 await addPluginV1(umi, {
   asset: asset.publicKey,
-  plugin: createPlugin({ type: 'FreezeDelegate', data: { frozen: false } }),
-  initAuthority: pluginAuthority('Address', { address: publicKey('') }),
+  plugin: createPlugin({ type: 'FreezeDelegate', data: { frozen: true } }),
+  initAuthority: addressPluginAuthority(delegate),
 }).sendAndConfirm(umi)
 ```
 
@@ -117,7 +154,12 @@ import {
   createPlugin,
   ruleSet,
   pluginAuthority,
+  addressPluginAuthority
 } from '@metaplex-foundation/mpl-core'
+
+const collection = publicKey('11111111111111111111111111111111')
+
+const delegate = publicKey('22222222222222222222222222222222')
 
 await addCollectionPluginV1(umi, {
   collection: collection,
@@ -134,7 +176,7 @@ await addCollectionPluginV1(umi, {
       ruleSet: ruleSet('None'),
     },
   }),
-  initAuthority: pluginAuthority('Address', { address: creator }),
+  initAuthority: addressPluginAuthority(delegate),
 }).sendAndConfirm(umi)
 ```
 

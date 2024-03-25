@@ -17,15 +17,16 @@ import {
   approvePluginAuthority,
   pluginAuthority,
   PluginType,
+  addressPluginAuthority,
 } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
-const delegateAddress = publicKey('33333333333333333333333333333')
+const delegate = publicKey('33333333333333333333333333333')
 
 await approvePluginAuthorityV1(umi, {
   asset: asset,
   pluginType: PluginType.FreezeDelegate,
-  newAuthority: pluginAuthority('Address', { address: delegateAddress }),
+  newAuthority: addressPluginAuthority(delegate),
 }).sendAndConfirm(umi)
 ```
 
