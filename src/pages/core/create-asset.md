@@ -296,6 +296,6 @@ The list of plugins includes but is not limited to:
 
 - [Burn Delegate](/core/plugins/burn-delegate)
 - [Freeze Delegate](/core/plugins/freeze-delegate)
-- [Royalties Delegate](/core/plugins/royalties-delegate)
+- [Royalties](/core/plugins/royalties)
 - [Transfer Delegate](/core/plugins/transfer-delegate)
 - [Update Delegate](/core/plugins/update-delegate)
