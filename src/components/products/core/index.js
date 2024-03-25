@@ -10,8 +10,8 @@ import { Logo } from './Logo'
 
 export const core = {
   name: 'Core',
-  headline: 'The most composable and affordable Digital Asset Standard.',
-  description: 'Ultimate composability and affordability for digital assets.',
+  headline: 'Composable clean assets',
+  description: 'Ultimate composability for digital assets.',
   navigationMenuCatergory: 'Create',
   path: 'core',
   logo: Logo,
