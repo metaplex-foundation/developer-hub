@@ -105,6 +105,7 @@ Here is how you can use our SDKs to update an MPL Core Asset.
 
 {% dialect-switcher title="Update an Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateV1 } from '@metaplex-foundation/mpl-core'
@@ -113,20 +114,57 @@ const asset = publicKey('11111111111111111111111111111111')
 
 await updateV1(umi, {
   asset: asset,
+  newUpdateAuthority: updateAuthority('None'),
+  newName: null,
+  newUri: null,
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 
 {% dialect title="Rust" id="rust" %}
-```ts
-import { publicKey } from '@metaplex-foundation/umi'
-import { updateV1 } from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
+```rust
+use mpl_core::{
+    instructions::ApprovePluginAuthorityV1Builder,
+    types::{PluginAuthority, PluginType},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
 
-await updateV1(umi, {
-  asset: asset,
-}).sendAndConfirm(umi)
+pub async fn make_plugin_data_immutable() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let make_plugin_data_immutable_ix = ApprovePluginAuthorityV1Builder::new()
+        .asset(asset)
+        .payer(authority.pubkey())
+        .plugin_type(PluginType::FreezeDelegate)
+        .new_authority(PluginAuthority::None)
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let make_plugin_data_immutable_tx = Transaction::new_signed_with_payer(
+        &[make_plugin_data_immutable_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&make_plugin_data_immutable_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
