@@ -71,4 +71,4 @@ await transferV1(umi, {
 
 ## What if I am the Transfer Delegate of an Asset?
 
-If you are the Transfer Delegate of an Asset via the [Transfer Delegate](core/plugins/transfer-delegate) plugin then you can call the `transferV1` function as you would if you were the owner of the Asset.
+If you are the Transfer Delegate of an Asset via the [Transfer Delegate](/core/plugins/transfer-delegate) plugin then you can call the `transferV1` function as you would if you were the owner of the Asset.
