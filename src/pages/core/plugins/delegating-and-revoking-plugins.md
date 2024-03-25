@@ -47,6 +47,7 @@ Revoking an Authority on a plugin can have different behaviours depending on wha
 
 - An Owner Managed Plugin can be revoked by the owner which revokes the delegate and sets the pluginAuthority type to `Owner`.
 - The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `Owner`.
+- On Transfer delegated Authorities of owner managed plugins are automatically revoked. 
 
 #### Authority Managed Plugins
 
@@ -78,7 +79,7 @@ await revokePluginAuthorityV1(umi, {
 
 All Owner Managed plugins will have their delegated authorities revoked and set back to the authority type of `Owner` upon Transfer of an Asset.
 
-This includes;
+This includes:
 
 - Freeze Delegate
 - Transfer Delegate
