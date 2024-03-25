@@ -4,47 +4,30 @@ metaTitle: Metaplex — Protocol Fees
 description: A details of the on-chain fees for Metaplex's products.
 ---
 
-The Metaplex Foundation currently charges the following protocol fees:
-
-## **Revised Fee Schedule (as of May 24th, 2023)**
-
-Based on community feedback, Metaplex Foundation has announced an updated fee schedule with the following changes:
-
-- The Update, Verify, Freeze and Thaw fees for Token Metadata have been removed
+The Metaplex Protocol currently includes the following fees:
 
 | Instruction     | Program         | Typical Payer | Amount (SOL) | Notes                                                                                                                                                                                                                                                                                    |
 | --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create          | Token Metadata  | Collector     | 0.01         | The minter for most NFTs created on Solana are the individual collectors minting from new drops. Creators that mint many NFTs may consider using compression for radically lower mint costs. (Includes all instructions that "create" an NFT including ones that create print editions.) |
+| Create | Core | Collector | 0.0015 | Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions. |
+| Create          | Token Metadata  | Collector     | 0.01         | Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs). Includes all instructions that "create" an NFT including ones that create print editions. |
+| Create          | Bubblegum       | -             | Free |
 | Combine         | Fusion (Trifle) | Collector     | 0.002        |                                                                                                                                                                                                                                                                                          |
 | Split           | Fusion (Trifle) | Collector     | 0.002        |                                                                                                                                                                                                                                                                                          |
 | Edit constraint | Fusion (Trifle) | Creator       | 0.01         |                                                                                                                                                                                                                                                                                          |
-| Create | Core | Collector | 0.0015 | (As of program release) |
 
-## Fee Schedule (as of May 22nd, 2023)
-
-| Instruction     | Program         | Typical Payer | Amount (SOL) | Notes                                                                                                                                                                                        |
-| --------------- | --------------- | ------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create          | Token Metadata  | Collector     | 0.01         | The minter for most NFTs created on Solana are the individual collectors minting from new drops. Creators that mint many NFTs may consider using compression for radically lower mint costs. |
-| Update          | Token Metadata  | Creator       | 0.002\*      | This fee applies only to the update instructions that are NOT called during the initial mint of an NFT.                                                                                      |
-| Verify          | Token Metadata  | Creator       | 0.001\*      |                                                                                                                                                                                              |
-| Freeze delegate | Token Metadata  | Collector     | 0.001\*      | This is NOT the spl-token freeze and applies only to NonFungible tokens (regular NFTs). This fee is paid by the person granting the authority to freeze their NFT, e.g. for staking          |
-| Thaw delegate   | Token Metadata  | Collector     | 0.001\*      | This is NOT the spl-token freeze and applies only to NonFungible tokens (regular NFTs). This fee is paid by the person granting the authority to thaw their NFT, e.g. for staking            |
-| Combine         | Fusion (Trifle) | Collector     | 0.002        |                                                                                                                                                                                              |
-| Split           | Fusion (Trifle) | Collector     | 0.002        |                                                                                                                                                                                              |
-| Edit constraint | Fusion (Trifle) | Creator       | 0.01         |                                                                                                                                                                                              |
-
-\*These fees are currently under review and may not be the final amounts at launch.
 
 ## FAQs
 
 ### Will the fee amounts change over time?
 
-We are constantly monitoring community feedback related to the fees and may change the fee amounts over time. Our goal is for fees to be minimally disruptive and promote the growth and usage of the protocol.
+The Metaplex Foundation is constantly monitoring community feedback related to the fees and may change the fee amounts over time. Our goal is for fees to be minimally disruptive and promote the growth and usage of the protocol.
 
-### How much will it cost me, as a creator, in Token Metadata fees to launch a 10k NFT collection through Candy Machine?
+### How much will it cost me, as a creator, in Token Metadata or core fees to launch a 10k NFT collection through Candy Machine?
 
-Creators will incur 0 SOL in Token Metadata fees for a standard 10k NFT drop since the Create fees are spread amongst the collectors who are minting from the Candy Machine.
+Creators will incur 0 SOL in Token Metadata or Core fees for a standard 10k NFT drop since the Create fees are spread amongst the collectors who are minting from the Candy Machine.
 
-### Do the freeze and thaw fees impact pNFT transfers?
+### How are Metaplex Protocol Fees Used?
 
-No.
+All protocol fees are used to further the objectives of the Metaplex Foundation, which is a non-profit organization established to foster the research, development and adoption of the Metaplex ecosystem. This includes providing incentives and assistance to the Metaplex community for the continued development, security, governance, and administration of the Metaplex Protocol and Metaplex DAO.
+
+Currently, 50% of protocol fees are converted to $MPLX and contributed to the Metaplex DAO treasury. The remaining 50% are reserved by the Metaplex Foundation to support the long-term sustainable development of the Metaplex ecosystem.
