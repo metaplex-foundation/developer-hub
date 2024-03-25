@@ -171,7 +171,7 @@ const creator1 = publicKey('11111111111111111111111111111111')
 const creator2 = publicKey('2222222222222222222222222222222')
 
 await addCollectionPluginV1(umi, {
-  collection: asset.publicKey,
+  collection: collection.publicKey,
   plugin: createPlugin({
     type: 'Royalties',
     data: {

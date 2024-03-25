@@ -32,6 +32,7 @@ import {
   addPluginV1,
   createPlugin,
   pluginAuthority,
+  addressPluginAuthority
 } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
@@ -40,7 +41,7 @@ const delegate = publicKey('22222222222222222222222222222222')
 await addPluginV1(umi, {
   asset: asset,
   plugin: createPlugin({ type: 'UpdateDelegate' }),
-  initAuthority: pluginAuthority('Address', { address: delegate }),
+  initAuthority: addressPluginAuthority(delegate),
 }).sendAndConfirm(umi)
 ```
 

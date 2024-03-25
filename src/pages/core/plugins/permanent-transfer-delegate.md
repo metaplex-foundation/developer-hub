@@ -32,12 +32,19 @@ The Permanent Transfer Plugin will work in areas such as:
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { createV1, createPlugin, pluginAuthority } from '@metaplex-foundation/mpl-core'
+import {
+  createV1,
+  createPlugin,
+  pluginAuthority,
+  addressPluginAuthority
+} from '@metaplex-foundation/mpl-core'
 
 const assetSigner = generateSigner(umi)
 
+const delegate = publicKey('33333333333333333333333333333')
+
 await createV1(umi, {
-  asset: assetSigner,
+  asset: asset.publicKey,
   name: 'My NFT',
   uri: 'https://example.com/my-nft.json',
   plugins: [
@@ -45,9 +52,7 @@ await createV1(umi, {
       plugin: createPlugin({
         type: 'PermanentTransferDelegate',
       }),
-      authority: pluginAuthority('Address', {
-        address: publicKey('33333333333333333333333333333'),
-      }),
+      authority: addressPluginAuthority(delegate),
     },
   ],
 }).sendAndConfirm(umi)
