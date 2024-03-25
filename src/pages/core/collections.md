@@ -12,7 +12,7 @@ The data that is stored and accessible from the Collection Asset is as follows;
 
 | Accounts        | Description                                       |
 | --------------- | ------------------------------------------------- |
-| key             | THe account key discriminator                     |
+| key             | The account key discriminator                     |
 | updateAuthority | The authority of the new asset.                   |
 | name            | The collection name.                              |
 | uri             | THe uri to the collections off-chain metadata.    |

@@ -21,7 +21,7 @@ For a full list of plugins and their arguments see the [plugins overview](/plugi
 If you add a plugin to an Asset or Collection without specifying the authority of the plugin the authority will be set to that plugins default authority type.
 
 - Owner Managed Plugins will default to the plugin authority type of `Owner`.
-- Authority Managed Plugins will default to the pluging authority type of `UpdateAuthority`.
+- Authority Managed Plugins will default to the plugin authority type of `UpdateAuthority`.
 - Permanment Plugins will default to the plugin authority type of `UpdateAuthority`
 
 {% dialect-switcher title="Adding a Plugin with the default authority" %}
