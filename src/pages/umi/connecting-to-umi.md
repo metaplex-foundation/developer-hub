@@ -46,7 +46,7 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 To use Umi you'll need to register a wallet in order to send transactions. To use a file system wallet you can import the json stored private key and convert it to a keypair for use with Umi.
 
 ```ts
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { createUmi, keypairIdentity } from '@metaplex-foundation/umi-bundle-defaults'
 import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata'
 import { mplCandyMachine } from '@metaplex-foundation/mpl-candy-machine'
 
