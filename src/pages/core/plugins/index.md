@@ -54,9 +54,9 @@ If an Authority Managed plugin is added to an Asset/Collection without an author
 
 Those include but are not limited to:
 
-- [Permanent Transfer Delegate](/core/plugins/permanant-transfer-delegate)
-- [Permanent Freeze Delegate](/core/plugins/permanant-freeze-delegate)
-- [Permanent Burn Delegate](/core/plugins/permanant-burn-delegate)
+- [Permanent Transfer Delegate](/core/plugins/permanent-transfer-delegate)
+- [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate)
+- [Permanent Burn Delegate](/core/plugins/permanent-burn-delegate)
 
 If an Permanent Plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `update authority`.
 
