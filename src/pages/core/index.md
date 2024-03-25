@@ -4,11 +4,7 @@ metaTitle: Core - Overview
 description: Provides a high-level overview of the new Solana Core standard.
 ---
 
-The Core program is new digital asset programs by Metaplex to deal with Assets on the Solana blockchain. Its main goal is to provide a easy to use, low cost program that contains a flexible plugin system.
-
-Metaplex Core (“Core”) sheds the complexity and technical debt of previous standards and provides a clean and simple core spec for digital assets. This makes the bare minimum use case easy and understandable for users just starting out with Digital Assets.
-
-This next generation Solana NFT standard uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for users to modify the behavior of the NFTs.
+Metaplex Core (“Core”) sheds the complexity and technical debt of previous standards and provides a clean and simple core spec for digital assets. This next generation Solana NFT standard uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
 
 {% quick-links %}
 
