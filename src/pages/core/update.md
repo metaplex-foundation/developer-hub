@@ -125,45 +125,42 @@ await updateV1(umi, {
 {% dialect title="Rust" id="rust" %}
 
 ```rust
-use mpl_core::{
-    instructions::ApprovePluginAuthorityV1Builder,
-    types::{PluginAuthority, PluginType},
-};
+use mpl_core::{instructions::UpdateV1Builder, types::UpdateAuthority};
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
 
-pub async fn make_plugin_data_immutable() {
+pub async fn update_asset_data_to_immutable() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
 
-    let make_plugin_data_immutable_ix = ApprovePluginAuthorityV1Builder::new()
+    let update_asset_ix = UpdateV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
-        .plugin_type(PluginType::FreezeDelegate)
-        .new_authority(PluginAuthority::None)
+        .new_update_authority(UpdateAuthority::None)
         .instruction();
 
     let signers = vec![&authority];
 
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
 
-    let make_plugin_data_immutable_tx = Transaction::new_signed_with_payer(
-        &[make_plugin_data_immutable_ix],
+    let update_asset_tx = Transaction::new_signed_with_payer(
+        &[update_asset_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
 
     let res = rpc_client
-        .send_and_confirm_transaction(&make_plugin_data_immutable_tx)
+        .send_and_confirm_transaction(&update_asset_tx)
         .await
         .unwrap();
 
     println!("Signature: {:?}", res)
 }
+
 ```
 
 {% /dialect %}
