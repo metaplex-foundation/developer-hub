@@ -44,7 +44,7 @@ Here is how you can use our SDKs to update an MPL Core Asset.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { updateV1 } from 'core-preview'
+import { updateV1 } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
 
@@ -69,7 +69,7 @@ Here is how you can use our SDKs to update an MPL Core Asset.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { updateV1 } from 'core-preview'
+import { updateV1 } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
 

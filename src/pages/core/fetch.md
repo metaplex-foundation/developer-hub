@@ -57,7 +57,7 @@ console.log(assetsByOwner)
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { Key, getAssetV1GpaBuilder, updateAuthority } from 'core-preview'
+import { Key, getAssetV1GpaBuilder, updateAuthority } from '@metaplex-foundation/mpl-core'
 
 const collection = publicKey('11111111111111111111111111111111')
 
