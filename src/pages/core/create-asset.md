@@ -83,7 +83,7 @@ To create an asset the `create` instruction should be used. Below is a simple ex
 | plugins   | What plugins you would like the asset to have.               |
 
 Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/processor/create.rs)
+A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L18)
 
 {% /totem-accordion %}
 {% /totem %}
@@ -94,12 +94,13 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import { create, DataState } from '@metaplex-foundation/mpl-core'
+import { generateSigner } from '@metaplex-foundation/umi'
+import { createV1 } from '@metaplex-foundation/mpl-core'
 
-const assetAddress = generateSigner(umi)
+const asset = generateSigner(umi)
+
 const result = createV1(umi, {
-  asset: assetAddress,
+  asset: asset,
   name: 'My Nft',
   uri: 'https://example.com/my-nft',
 }).sendAndConfirm(umi)
@@ -108,13 +109,6 @@ const result = createV1(umi, {
 {% /dialect %}
 
 {% dialect title="Rust" id="rust" %}
-
-```
-coming soon...
-```
-
-{% /dialect %}
-{% totem %}
 
 ```rust
 let create_ix = CreateV1Builder::new()
@@ -138,6 +132,9 @@ let create_ix = CreateV1Builder::new()
         context.last_blockhash,
     );
 ```
+
+{% /dialect %}
+{% totem %}
 
 {% /totem %}
 
@@ -222,17 +219,22 @@ MPL Core Assets can be minted straight into a collection providing you already h
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import {
-  createAssetWithCollection,
-} from '@metaplex-foundation/mpl-token-metadata'
+import { createCollectionV1, createV1 } from '@metaplex-foundation/mpl-core'
 
-const mint = generateSigner(umi)
-await createAssetWithCollection(umi, {
-  collection: collection.publicKey,
-  asset: assetAddress,
+const collection = generateSigner(umi)
+
+await createCollectionV1(umi, {
+  collection: collection,
+  name: 'My NFT',
+  uri: 'https://example.com/my-nft.json',
+}).sendAndConfirm(umi)
+
+const asset = generateSigner(umi)
+const result = createV1(umi, {
+  asset: asset,
   name: 'My Nft',
-  uri: 'https://example.com/my-nft',
-  collection:
+  uri: 'https://example.com/my-nft.json',
+  collection: collection.publicKey,
 }).sendAndConfirm(umi)
 ```
 
@@ -243,40 +245,48 @@ await createAssetWithCollection(umi, {
 
 MPL Core Assets support the use of plugins at both a Collection and at an Asset level. To create a Core Asset with a plugin you pass in the plugin and it's parameters into the `plugins` array arg during creation. The below example creates a mint with the `Freeze` plugin.
 
-**Create Plugin Helper**
-
-The `createPlugin()` helper gives you a typed method that allows you to assign plugins during the Asset creation process.
-For a full list of plugins and their arguments see the [plugins overview](/plugins/overview) page.
-
 {% dialect-switcher title="Create Asset with Plugin" %}
 {% dialect title="JavaScript" id="js" %}
-```ts
-import { createPlugin } 
 
-
-
-// example
-createPlugin('Freeze', { frozen: true })
-```
-{% /dialect %}
-{% /dialect-switcher %}
-
-{% dialect-switcher title="Create Asset with Plugin" %}
-{% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
 import {
-  create,
-  DataState,
+  createV1,
   pluginAuthorityPair,
-} from '@metaplex-foundation/mpl-token-metadata'
+  ruleSet,
+} from '@metaplex-foundation/mpl-core'
 
-const mint = generateSigner(umi)
+const creator1 = publicKey('11111111111111111111111111111111')
+const creator2 = publicKey('22222222222222222222222222222222')
+
+const asset = generateSigner(umi)
+
 await createV1(umi, {
-  asset: assetAddress,
-  name: 'My Nft',
-  uri: 'https://example.com/my-nft',
-  plugins: [createPlugin('Freeze', { frozen: true })],
+  asset: assetSigner,
+  name: 'My NFT',
+  uri: 'https://example.com/my-nft.json',
+  plugins: [
+    {
+      plugin: createPlugin({
+        type: 'Royalties',
+        data: {
+          basisPoints: 500,
+          creators: [
+            {
+              address: creator1,
+              percentage: 20,
+            },
+            {
+              address: creator2,
+              percentage: 80,
+            },
+          ],
+          ruleSet: ruleSet('None'), // Compatibility rule set
+        },
+      }),
+      authority: pluginAuthority('UpdateAuthority'),
+    },
+  ],
 }).sendAndConfirm(umi)
 ```
 

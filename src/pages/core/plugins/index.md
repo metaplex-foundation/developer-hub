@@ -30,9 +30,11 @@ Owner managed plugins are plugins that are only allowed to be added to an asset 
 
 Those include but are not limited to:
 
-- [Transfer Delegate](/core/plugins/transfer) (market places, games)
-- [Freeze Delegate](/core/plugins/freeze) (market places, staking, games)
-- [Burn Delegate](/core/plugins/burn) (games)
+- [Transfer Delegate](/core/plugins/transfer-delegate) (market places, games)
+- [Freeze Delegate](/core/plugins/freeze-delegate) (market places, staking, games)
+- [Burn Delegate](/core/plugins/burn-delegate) (games)
+
+If an Owner Managed plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `owner`.
 
 ### Authority Managed Plugins
 
@@ -41,18 +43,22 @@ Authority managed plugins are plugins that the authority of the MPL Core Asset c
 Those include but are not limited to:
 
 - [Royalties](/core/plugins/royalties)
-- [Update Delegate](/core/plugins/update)
+- [Update Delegate](/core/plugins/update-delegate)
 - [Attribute](/core/plugins/attribute)
+
+If an Authority Managed plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `update authority`.
 
 ### Permanent Plugins
 
-Permanent plugins are plugins that are only available to add to an Asset at the time of mint/creation of the MPL Core Asset. If an Asset has already been created then Permanent plugins will not be available to add to the Asset.
+**Permanent plugins are plugins that are only available to add to an Asset at the time of mint/creation of the MPL Core Asset.** If an Asset has already been created then Permanent plugins will not be available to add to the Asset.
 
 Those include but are not limited to:
 
-- [Permanent Transfer Delegate](/core/plugins/permenant-transfer)
-- [Permanent Freeze Delegate](/core/plugins/permenant-freeze)
-- [Permanent Burn Delegate](/core/plugins/permenant-burn)
+- [Permanent Transfer Delegate](/core/plugins/permenant-transfer-delegate)
+- [Permanent Freeze Delegate](/core/plugins/permenant-freeze-delegate)
+- [Permanent Burn Delegate](/core/plugins/permenant-burn-delegate)
+
+If an Permanent Plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `update authority`.
 
 ## Collection Plugins
 
@@ -124,35 +130,50 @@ Update currently has no plugin conditions or validations.
 ### Transfer
 
 {% totem %}
-| Plugin | Action | Conditions |
+
+| Plugin                      | Action      | Conditions  |
 | --------------------------- | ----------- | ----------- |
-| Royalties | Can Reject | Ruleset |
-| Freeze Delegate | Can Reject | isFrozen |
-| Transfer Delegate | Can Approve | isAuthority |
-| Permanent Freeze Delegate | Can Reject | isFrozen |
+| Royalties                   | Can Reject  | Ruleset     |
+| Freeze Delegate             | Can Reject  | isFrozen    |
+| Transfer Delegate           | Can Approve | isAuthority |
+| Permanent Freeze Delegate   | Can Reject  | isFrozen    |
 | Permanent Transfer Delegate | Can Approve | isAuthority |
+
 {% /totem %}
 
 ### Burn
 
 {% totem %}
-| Plugin | Action | Conditions |
+
+| Plugin                    | Action      | Conditions  |
 | ------------------------- | ----------- | ----------- |
-| Freeze Delegate | Can Reject | isFrozen |
-| Burn Delegate | Can Reject | isAuthority |
-| Permanent Freeze Delegate | Can Reject | isFrozen |
-| Permanent Burn Delegate | Can Approve | isAuthority |
+| Freeze Delegate           | Can Reject  | isFrozen    |
+| Burn Delegate             | Can Reject  | isAuthority |
+| Permanent Freeze Delegate | Can Reject  | isFrozen    |
+| Permanent Burn Delegate   | Can Approve | isAuthority |
+
 {% /totem %}
 
 ### Add Plugin
 
 {% totem %}
-| Plugin | Action | Conditions |
-| --------------------------- | ----------- | ----------- |
-| Royalties | Can Reject | Ruleset |
+
+| Plugin          | Action      | Conditions  |
+| --------------- | ----------- | ----------- |
+| Royalties       | Can Reject  | Ruleset     |
 | Update Delegate | Can Approve | isAuthority |
-| Permanent Freeze Delegate | Can Reject | isFrozen |
-| Permanent Transfer Delegate | Can Reject | isAuthority |
+
+{% /totem %}
+
+### Remove Plugin
+
+{% totem %}
+
+| Plugin          | Action      | Conditions  |
+| --------------- | ----------- | ----------- |
+| Royalties       | Can Reject  | Ruleset     |
+| Update Delegate | Can Approve | isAuthority |
+
 {% /totem %}
 
 ### Approve Plugin Authority
@@ -161,8 +182,8 @@ Update currently has no plugin conditions or validations.
 Update currently has no plugin conditions or validations.
 {% /totem %}
 
-### Remove Authority Plugin
+### Revoke Authority Plugin
 
 {% totem %}
-// TODO Mentions in the asset program that is this still a `TODO`
+Update currently has no plugin conditions or validations.
 {% /totem %}

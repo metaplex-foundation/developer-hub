@@ -79,14 +79,17 @@ MPL Core Assets can belong to collections. The `updateAuthority` field in the MP
 
 When accessing the `updateAuthority` field either directly via the asset or via the `collectionAddress` helper of the MPL Core Asset you will be returned with one of these 3 following outcomes;
 
-**None**
+**Collection**
 
-The asset has no update authority set.
-
+The asset belongs to the collection at the given address.
 {% dialect-switcher title="Create Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```javascript
+{
+  __kind: 'Collection'
+  fields: [PublicKey]
+}
 import { fetchAssetV1 } from '@metaplex-foundation/mpl-core'
 
 const asset = await fetchAssetV1(umi, assetAddress.publicKey)
@@ -96,16 +99,17 @@ console.log({collectionId})
 console.log({asset})
 
 // log
-collectionId: undefined
+collection: '2222222222222222222222222222222'
 asset: {
     key: AssetV1,
     owner: "11111111111111111111111111111111",
     updateAuthority: {
-      type: 'None',
+      type: 'Collection',
+      address: '2222222222222222222222222222222'
     },
     name: "My Core Asset",
     uri: "https://example.com/metadata.json",
-    seq: 1,
+    ...
 }
 ```
 
@@ -114,7 +118,7 @@ asset: {
 {% dialect title="Rust" id="rust" %}
 
 ```rust
-None
+Collection(Pubkey)
 ```
 
 {% /dialect %}
@@ -161,17 +165,14 @@ Address(Pubkey)
 {% /dialect %}
 {% /dialect-switcher %}
 
-**Collection**
+**None**
 
-The asset belongs to the collection at the given address.
+The asset has no update authority set.
+
 {% dialect-switcher title="Create Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```javascript
-{
-  __kind: 'Collection'
-  fields: [PublicKey]
-}
 import { fetchAssetV1 } from '@metaplex-foundation/mpl-core'
 
 const asset = await fetchAssetV1(umi, assetAddress.publicKey)
@@ -181,17 +182,15 @@ console.log({collectionId})
 console.log({asset})
 
 // log
-collection: '2222222222222222222222222222222'
+collectionId: undefined
 asset: {
     key: AssetV1,
     owner: "11111111111111111111111111111111",
     updateAuthority: {
-      type: 'Collection',
-      address: '2222222222222222222222222222222'
+      type: 'None',
     },
     name: "My Core Asset",
     uri: "https://example.com/metadata.json",
-    ...
 }
 ```
 
@@ -200,7 +199,7 @@ asset: {
 {% dialect title="Rust" id="rust" %}
 
 ```rust
-Collection(Pubkey)
+None
 ```
 
 {% /dialect %}

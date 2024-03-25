@@ -30,11 +30,14 @@ The Transfer Plugin doesn't contain any arguments to pass in.
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import { addPluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
 
-await addPlugin(umi, {
-  asset: asset.publicKey,
-  plugin: createPlugin('Transfer', [{}]),
+const asset = publicKey('11111111111111111111111111111111')
+
+await addPluginV1(umi, {
+  asset: asset,
+  plugin: createPlugin({ type: 'TransferDelegate' }),
 }).sendAndConfirm(umi)
 ```
 

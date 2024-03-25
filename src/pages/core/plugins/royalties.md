@@ -39,9 +39,11 @@ The creators list is a distribution list of where the earned royalties are sent.
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
+import { publicKey } from '@metaplex-foundation/umi'
+
 const creators = [
-    { address: PublicKey; percentage: number }
-    { address: PublicKey; percentage: number }
+    { address: publicKey("11111111111111111111111111111111"), percentage: 80 }
+    { address: publicKey("22222222222222222222222222222222"), percentage: 20 }
 ]
 ```
 
@@ -60,12 +62,15 @@ An Allowlist is a list of programs that are allowed to interact with your MPL Co
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
+import { publicKey } from '@metaplex-foundation/umi'
 import { ruleSet } from '@metaplex-foundation/mpl-core'
 
 const ruleSet = ruleSet('ProgramAllowList', [
+    [
 		publicKey("11111111111111111111111111111111")
 		publicKey("22222222222222222222222222222222")
-	])
+    ]
+])
 ```
 
 {% /dialect %}
@@ -79,12 +84,15 @@ A Denylist is a list of programs that are not allowed to interact with your MPL 
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
+import { publicKey } from '@metaplex-foundation/umi'
 import { ruleSet } from '@metaplex-foundation/mpl-core'
 
 const ruleSet = ruleSet('ProgramDenyList', [
+    [
 		publicKey("11111111111111111111111111111111")
 		publicKey("22222222222222222222222222222222")
-	])
+    ]
+])
 ```
 
 {% /dialect %}
@@ -112,56 +120,75 @@ const ruleSet = ruleSet('None')
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { percentAmount } from '@metaplex-foundation/umi'
-import { addPlugin, createPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import {
+  addPluginV1,
+  createPlugin,
+  ruleSet,
+} from '@metaplex-foundation/mpl-core'
 
-await addPlugin(umi, {
+const creator1 = publicKey('11111111111111111111111111111111')
+const creator2 = publicKey('2222222222222222222222222222222')
+
+await addPluginV1(umi, {
   asset: asset.publicKey,
-  plugin: createPlugin('Royalties',
-    {
-        precentage: percentAmount(5),
-        creators: [
-            { address: PublicKey; percentage: number }
-            { address: PublicKey; percentage: number }
+  plugin: createPlugin({
+    type: 'Royalties',
+    data: {
+      basisPoints: 500,
+      creators: [
+        { address: creator1, percentage: 80 },
+        { address: creator2, percentage: 20 },
+      ],
+      ruleSet: ruleSet('ProgramDenyList', [
+        [
+          publicKey('44444444444444444444444444444444'),
+          publicKey('55555555555555555555555555555555'),
         ],
-      	ruleset: ruleSet('ProgramDenyList', [
-				publicKey("11111111111111111111111111111111")
-				publicKey("22222222222222222222222222222222")
-			]
-		)
+      ]),
     },
-  ),
+  }),
 }).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Adding the Royalties Plugin to an Collection code example
+## Adding the Royalties Plugin to a Collection code example
 
 {% dialect-switcher title="Add Royalties Plugin to Collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addCollectionPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import {
+  addCollectionPluginV1,
+  createPlugin,
+  ruleSet,
+} from '@metaplex-foundation/mpl-core'
 
-await addCollectionPlugin(umi, {
-    collection: collection.publicKey,
-    plugin: createPlugin('Royalties',
-    {
-        precentage: percentAmount(5),
-        creators: [
-            { address: PublicKey; percentage: number }
-            { address: PublicKey; percentage: number }
+const creator1 = publicKey('11111111111111111111111111111111')
+const creator2 = publicKey('2222222222222222222222222222222')
+
+await addCollectionPluginV1(umi, {
+  collection: asset.publicKey,
+  plugin: createPlugin({
+    type: 'Royalties',
+    data: {
+      basisPoints: 500,
+      creators: [
+        { address: creator1, percentage: 80 },
+        { address: creator2, percentage: 20 },
+      ],
+      ruleSet: ruleSet('ProgramDenyList', [
+        [
+          publicKey('44444444444444444444444444444444'),
+          publicKey('55555555555555555555555555555555'),
         ],
-      	ruleset: ruleSet('ProgramDenyList', [
-				publicKey("11111111111111111111111111111111")
-				publicKey("22222222222222222222222222222222")
-			]
-		)
+      ]),
     },
-  ),
-  }).sendAndConfirm(umi);
+  }),
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}

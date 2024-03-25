@@ -47,18 +47,22 @@ const attributes = [
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import { addPluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
 
-await addPlugin(umi, {
+const asset = publicKey('11111111111111111111111111111111')
+
+await addPluginV1(umi, {
   asset: asset.publicKey,
-  plugin: createPlugin('Attributes', 
-    {
+  plugin: createPlugin({
+    type: 'Attributes',
+    data: {
       attributeList: [
         { key: 'key0', value: 'value0' },
         { key: 'key1', value: 'value1' },
       ],
     },
-  ),
+  }),
 }).sendAndConfirm(umi)
 ```
 
@@ -71,18 +75,22 @@ await addPlugin(umi, {
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import { updatePluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
 
-await updatePlugin(umi, {
-  asset: asset.publicKey,
-  plugin: createPlugin('Attributes', 
-    {
+const asset = publicKey('11111111111111111111111111111111')
+
+await updatePluginV1(umi, {
+  asset: asset,
+  plugin: createPlugin({
+    type: 'Attributes',
+    data: {
       attributeList: [
         { key: 'key0', value: 'value0' },
         { key: 'key1', value: 'value1' },
       ],
     },
-  ),
+  }),
 }).sendAndConfirm(umi)
 ```
 

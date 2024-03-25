@@ -12,31 +12,38 @@ Plugins can also be removed from MPL Core Assets and MPL Core Collections.
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { removePlugin, PluginType } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import { removePluginV1, PluginType } from '@metaplex-foundation/mpl-core'
 
-await removePlugin(umi, {
-    asset: asset.publicKey,
-    pluginType: PluginType.Freeze,
-  }).sendAndConfirm(umi);
+const asset = publicKey('11111111111111111111111111111111')
+
+await removePluginV1(umi, {
+  asset: asset,
+  pluginType: PluginType.Royalties,
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## Removing a Plugin from a Collection
-
 
 {% dialect-switcher title="Removing a Plugin from a MPL Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { removeCollectionPlugin, PluginType } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import {
+  removeCollectionPluginV1,
+  PluginType,
+} from '@metaplex-foundation/mpl-core'
 
-await removeCollectionPlugin(umi, {
-    collection: collection.publicKey,
-    pluginType: PluginType.UpdateDelegate,
-  }).sendAndConfirm(umi);
+const collection = publicKey('11111111111111111111111111111111')
+
+await removeCollectionPluginV1(umi, {
+  collection: collection,
+  pluginType: PluginType.Royalties,
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}

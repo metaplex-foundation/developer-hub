@@ -11,18 +11,30 @@ Core Asset and MPL Core Collection both share a similar list of available plugin
 
 Plugins support the ability to assign an authority over the plugin. If an `initAuthority` is passed in this will set the authority to the desired address. If unassigned then the signer will be the default authority set for the plugin.
 
+**Create Plugin Helper**
+
+The `createPlugin()` helper gives you a typed method that allows you to assign plugins during the `addPlugin()` process.
+For a full list of plugins and their arguments see the [plugins overview](/plugins/overview) page.
+
 ### Adding a Plugin with the default authority
+
+If you add a plugin to an Asset or Collection without specifying the authority of the plugin the authority will be set to that plugins default authority type.
+
+- Owner Managed Plugins will default to the plugin authority type of `Owner`.
+- Authority Managed Plugins will default to the pluging authority type of `UpdateAuthority`.
+- Permanment Plugins will default to the plugin authority type of `UpdateAuthority`
 
 {% dialect-switcher title="Adding a Plugin with the default authority" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import { addPluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
 
-await addPlugin(umi, {
-    asset: asset.publicKey,
-    plugin: createPlugin(type: 'Transfer', data: [{}]),
-  }).sendAndConfirm(umi);
+await addPluginV1(umi, {
+  asset: asset.publicKey,
+  plugin: createPlugin({ type: 'FreezeDelegate' }),
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
@@ -34,13 +46,18 @@ await addPlugin(umi, {
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, createPlugin  } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import {
+  addPluginV1,
+  createPlugin,
+  pluginAuthority,
+} from '@metaplex-foundation/mpl-core'
 
-await addPlugin(umi, {
-    asset: asset.publicKey,
-    plugin: createPlugin(type: 'Transfer', data: [{}]),
-    initAuthority: authority('Pubkey', { address: delegate.publicKey }),
-  }).sendAndConfirm(umi);
+await addPluginV1(umi, {
+  asset: asset.publicKey,
+  plugin: createPlugin({ type: 'FreezeDelegate', data: { frozen: false } }),
+  initAuthority: pluginAuthority('Address', { address: publicKey('') }),
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
@@ -56,18 +73,33 @@ Plugins support the ability to assign an authority over the plugin. If an `initA
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addCollectionPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import {
+  addCollectionPluginV1,
+  createPlugin,
+  ruleSet,
+} from '@metaplex-foundation/mpl-core'
 
-await addCollectionPlugin(umi, {
-    collection: collection.publicKey,
-    plugin: createPlugin('Royalties', [
-      {
-        basisPoints: 5000,
-        creators: [],
-        ruleSet: ruleSet('None'),
-      },
-    ]),
-  }).sendAndConfirm(umi);
+const collection = publicKey('11111111111111111111111111111111')
+
+const creator = publicKey('22222222222222222222222222222222')
+
+await addCollectionPluginV1(umi, {
+  collection: collection,
+  plugin: createPlugin({
+    type: 'Royalties',
+    data: {
+      basisPoints: 5000,
+      creators: [
+        {
+          address: creator,
+          percentage: 100,
+        },
+      ],
+      ruleSet: ruleSet('None'),
+    },
+  }),
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
@@ -79,19 +111,31 @@ await addCollectionPlugin(umi, {
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addCollectionPlugin, createPlugin } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import {
+  addCollectionPluginV1,
+  createPlugin,
+  ruleSet,
+  pluginAuthority,
+} from '@metaplex-foundation/mpl-core'
 
-await addCollectionPlugin(umi, {
-    collection: collection.publicKey,
-    plugin: createPlugin('Royalties', [
-      {
-        basisPoints: 5000,
-        creators: [],
-        ruleSet: ruleSet('None'),
-      },
-    ]),
-    initAuthority: authority('Pubkey', { address: delegate.publicKey }),
-  }).sendAndConfirm(umi);
+await addCollectionPluginV1(umi, {
+  collection: collection,
+  plugin: createPlugin({
+    type: 'Royalties',
+    data: {
+      basisPoints: 5000,
+      creators: [
+        {
+          address: creator,
+          percentage: 100,
+        },
+      ],
+      ruleSet: ruleSet('None'),
+    },
+  }),
+  initAuthority: pluginAuthority('Address', { address: creator }),
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}

@@ -14,13 +14,13 @@ Assets can be burnt using the `burn` instruction. This will return the rent-exem
 | ------------- | ----------------------------------------------- |
 | asset         | The address of the MPL Core Asset.              |
 | collection    | The collection to which the Core Asset belongs. |
-| authority     | The owner or delegate of the asset.             |
 | payer         | The account paying for the storage fees.        |
+| authority     | The owner or delegate of the asset.             |
 | systemProgram | The System Program account.                     |
 | logWrapper    | The SPL Noop Program.                           |
 
 Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/processor/burn.rs).
+A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L123).
 {% /totem-accordion %}
 {% /totem %}
 
@@ -32,10 +32,13 @@ Here is how you can use our SDKs to burn a Core asset. The snippet assumes that 
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
+import { publicKey } from '@metaplex-foundation/umi'
 import { burnV1 } from '@metaplex-foundation/mpl-core'
 
+const asset = publicKey('11111111111111111111111111111111')
+
 await burnV1(umi, {
-  asset: asset.publicKey,
+  asset: asset,
 }).sendAndConfirm(umi)
 ```
 
@@ -52,11 +55,15 @@ Here is how you can use our SDKs to burn a Core asset that is part of a collecti
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { burnV1 } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import { burnV1, fetchAsset } from '@metaplex-foundation/mpl-core'
+
+const assetId = publicKey('11111111111111111111111111111111')
+const asset = await fetchAssetV1(umi, assetId)
 
 await burnV1(umi, {
   asset: asset.publicKey,
-  collection: collectionAdress,
+  collection: collectionAddress(asset),
 }).sendAndConfirm(umi)
 ```
 

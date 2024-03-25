@@ -61,8 +61,8 @@ export const core = {
               href: '/core/plugins/removing-plugins',
             },
             {
-              title: 'Delegating Plugins',
-              href: '/core/plugins/delegating-plugins',
+              title: 'Delegating and Revoking Plugins',
+              href: '/core/plugins/delegating-and-revoking-plugins',
             },
             {
               title: 'Transfer Delegate Plugin',
@@ -87,20 +87,20 @@ export const core = {
             },
           ],
         },
-        {
-          title: 'Integration Guides',
-          links: [
-            { title: 'Wallets', href: '/core/intergrations/wallets' },
-            {
-              title: 'Market Places',
-              href: '/core/intergrations/market-places',
-            },
-            {
-              title: 'Staking',
-              href: '/core/intergrations/staking',
-            },
-          ],
-        },
+        // {
+        //   title: 'Integration Guides',
+        //   links: [
+        //     { title: 'Wallets', href: '/core/intergrations/wallets' },
+        //     {
+        //       title: 'Market Places',
+        //       href: '/core/intergrations/market-places',
+        //     },
+        //     {
+        //       title: 'Staking',
+        //       href: '/core/intergrations/staking',
+        //     },
+        //   ],
+        // },
       ],
     },
     { ...referencesSection('core') },

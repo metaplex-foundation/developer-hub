@@ -29,12 +29,24 @@ The Permanent Burn Plugin doesn't contain any arguments to pass in.
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { createAsset, pluginAuthorityPair } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import { createV1, createPlugin, pluginAuthority } from '@metaplex-foundation/mpl-core'
 
-await createAsset(umi, {
-  owner,
-  plugins: [pluginAuthorityPair({ type: 'PermanentBurn', data: {} })],
-})
+await createV1(umi, {
+  asset: assetSigner,
+  name: 'My NFT',
+  uri: 'https://example.com/my-nft.json',
+  plugins: [
+    {
+      plugin: createPlugin({
+        type: 'PermanentBurnDelegate',
+      }),
+      authority: pluginAuthority('Address', {
+        address: publicKey('33333333333333333333333333333'),
+      }),
+    },
+  ],
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}

@@ -32,12 +32,15 @@ The Freeze Plugin will work in areas such as;
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { addPlugin, plugin } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import { addPluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
 
-await addPlugin(umi, {
-  asset: asset.publicKey,
-  plugin: createPlugin('Freeze', { frozen: true }),
-}).sendAndConfirm(umi)
+const asset = publicKey("11111111111111111111111111111111")
+
+await addPluginV1(umi, {
+    asset: asset,
+    plugin: createPlugin({ type: "FreezeDelegate", data: { frozen: true } }),
+  }).sendAndConfirm(umi);
 ```
 
 {% /dialect %}

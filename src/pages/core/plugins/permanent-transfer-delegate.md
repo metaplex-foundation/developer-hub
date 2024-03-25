@@ -31,14 +31,26 @@ The Permanent Transfer Plugin will work in areas such as:
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { createAsset, pluginAuthorityPair } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+import { createV1, createPlugin, pluginAuthority } from '@metaplex-foundation/mpl-core'
 
-await createAsset(umi, {
-  owner,
+const assetSigner = generateSigner(umi)
+
+await createV1(umi, {
+  asset: assetSigner,
+  name: 'My NFT',
+  uri: 'https://example.com/my-nft.json',
   plugins: [
-    pluginAuthorityPair({ type: 'PermanentTransfer', data: {  } }),
+    {
+      plugin: createPlugin({
+        type: 'PermanentTransferDelegate',
+      }),
+      authority: pluginAuthority('Address', {
+        address: publicKey('33333333333333333333333333333'),
+      }),
+    },
   ],
-})
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
