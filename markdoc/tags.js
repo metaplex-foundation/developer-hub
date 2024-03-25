@@ -55,6 +55,7 @@ const tags = {
       description: { type: String },
       icon: { type: String },
       href: { type: String },
+      target: { type: String }
     },
   },
   'product-grid': {

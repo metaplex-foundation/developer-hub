@@ -10,7 +10,7 @@ Bubblegum is the Metaplex Protocol program for creating and interacting with co
 
 {% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum/getting-started" description="Find the language or library of your choice and get started with compressed NFTs." /%}
 
-{% quick-link title="API reference" icon="CodeBracketSquare" href="/bubblegum/references" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-bubblegum-js-docs.vercel.app/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
 {% /quick-links %}
 
