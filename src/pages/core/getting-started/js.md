@@ -26,9 +26,38 @@ import { mplCore } from '@metaplex-foundation/mpl-core'
 const umi = createUmi('http://127.0.0.1:8899').use(mplCore())
 ```
 
-That's it, you can now interact with NFTs by using [the various functions provided by the library](https://mpl-core-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of creating an NFT and fetching the data of all of its on-chain accounts.
+That's it, you can now interact with NFTs by using [the various functions provided by the library](https://mpl-core-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of creating an Asset:
 
-//TODO: Fetch Core Asset Example
+{% dialect-switcher title="Upload assets and JSON data" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```ts
+const result = createV1(umi, {
+  asset: asset,
+  name: 'My Nft',
+  uri: 'https://example.com/my-nft',
+}).sendAndConfirm(umi)
+```
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+To then fetch the data of your newly created asset you can use:
+
+{% dialect-switcher title="Fetch a single asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { fetchAssetV1 } from '@metaplex-foundation/mpl-core'
+
+const asset = await fetchAssetV1(umi, asset.publicKey)
+
+console.log(asset)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
 
 🔗 **Helpful Links:**
 
