@@ -56,7 +56,11 @@ export const umi = {
         },
       ],
     },
-    { ...referencesSection('umi') },
+    {
+      ...referencesSection('hydra'),
+      href: `https://umi-docs.vercel.app/`,
+      target: '_blank',
+    },
     { ...recipesSection('umi') },
     { ...changelogSection('umi') },
   ],

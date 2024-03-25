@@ -237,7 +237,11 @@ export const candyMachine4 = {
         },
       ],
     },
-    { ...referencesSection('candy-machine-4') },
+    {
+      ...referencesSection('candy-machine-4'),
+      href: `https://mpl-core-candy-machine-js-docs.vercel.app/`,
+      target: '_blank',
+    },
     /*
     {
       ...recipesSection('candy-machine'),

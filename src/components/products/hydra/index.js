@@ -31,7 +31,11 @@ export const hydra = {
         },
       ],
     },
-    { ...referencesSection('hydra') },
+    {
+      ...referencesSection('hydra'),
+      href: `https://mpl-hydra-js-docs.vercel.app/`,
+      target: '_blank',
+    },
     { ...recipesSection('hydra') },
     { ...changelogSection('hydra') },
   ],

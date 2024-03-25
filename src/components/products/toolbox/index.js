@@ -30,7 +30,11 @@ export const toolbox = {
         },
       ],
     },
-    { ...referencesSection('toolbox') },
+    {
+      ...referencesSection('toolbox'),
+      href: `https://mpl-toolbox-js-docs.vercel.app/`,
+      target: '_blank',
+    },
     { ...recipesSection('toolbox') },
     { ...changelogSection('toolbox') },
   ],

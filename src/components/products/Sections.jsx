@@ -17,6 +17,7 @@ export function Sections({ sections, activeSectionId, className, props }) {
               ? 'font-medium text-slate-800 dark:text-white'
               : 'text-slate-500 dark:text-slate-400'
           )}
+          target={section.target}
         >
           <Icon
             icon={section.icon}

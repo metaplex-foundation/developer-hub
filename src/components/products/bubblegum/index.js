@@ -78,7 +78,11 @@ export const bubblegum = {
         },
       ],
     },
-    { ...referencesSection('bubblegum') },
+    {
+      ...referencesSection('bubblegum'),
+      href: 'https://mpl-bubblegum-js-docs.vercel.app/',
+      target: '_blank'
+    },
     { ...recipesSection('bubblegum') },
     { ...changelogSection('bubblegum') },
   ],

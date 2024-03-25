@@ -60,6 +60,10 @@ export const inscription = {
         },
       ],
     },
-    { ...referencesSection('inscription') },
+    {
+      ...referencesSection('inscription'),
+      href: `https://mpl-inscription-js-docs.vercel.app/`,
+      target: '_blank',
+    },
   ],
 }
