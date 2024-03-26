@@ -29,7 +29,7 @@ The Royalties Plugin requires the following arguments.
 
 ## basisPoints
 
-This is the percentage in basispoints you wish to receieve in royalties on secondary sales. If your Royalties Plugin is set to 5000 this means 5%. So if you sell a MPL Core Asset for 1 SOL your creators will recieve a total of 0.05 SOL to be distributed between them. Some of our SDKs provide helper methods like `percentAmount` in umi, so that you do not have to do the calculation yourself.
+This is the percentage in basispoints you wish to receieve in royalties on secondary sales. If your Royalties Plugin is set to 500 this means 5%. So if you sell a MPL Core Asset for 1 SOL your creators will recieve a total of 0.05 SOL to be distributed between them. Some of our SDKs provide helper methods like `percentAmount` in umi, so that you do not have to do the calculation yourself.
 
 ## Creators
 
