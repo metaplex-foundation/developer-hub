@@ -703,7 +703,7 @@ With that in mind, here is the exhaustive list of ways to stop freezing NFTs and
 
 ## Freeze Escrows and Guard Groups
 
-When using multiple Freeze Sol Payment guards within various [Guard Groups](/programs/candy-machine/guard-groups), it is important to understand the relationship between a Freeze Sol Payment guard and a Freeze Escrow account.
+When using multiple Freeze Sol Payment guards within various [Guard Groups](/programs/candy-machine-4/guard-groups), it is important to understand the relationship between a Freeze Sol Payment guard and a Freeze Escrow account.
 
 The Freeze Escrow account is a PDA derived from a Destination address. This means that if **multiple Freeze Sol Payment guards** are configured to use the **same Destination address**, they will all **share the same Freeze Escrow account**.
 

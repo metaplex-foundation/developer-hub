@@ -23,9 +23,9 @@ Since there can only be one “route” instruction per registered guard on a Ca
 
 For instance, a guard adding support for Frozen NFTs — that can only be thawed once minting is over — could use their route instruction to initialize the treasury escrow account as well as allow anyone to thaw a minted NFT under the right conditions. We could distinguish these two features by using a **Path** attribute equal to “init” for the former and “thaw” for the latter.
 
-You will find a detailed explanation of the route instruction of each guard that supports it and their underlying paths [on their respective pages](/candy-machine/available-guards).
+You will find a detailed explanation of the route instruction of each guard that supports it and their underlying paths [on their respective pages](/candy-machine-4/available-guards).
 
-Let’s take a minute to illustrate how the route instruction works by providing an example. The [**Allow List**](/candy-machine/available-guards/allow-list) guard, for instance, supports the route instruction in order to verify that the minting wallet is part of the preconfigured list of wallets.
+Let’s take a minute to illustrate how the route instruction works by providing an example. The [**Allow List**](/candy-machine-4/available-guards/allow-list) guard, for instance, supports the route instruction in order to verify that the minting wallet is part of the preconfigured list of wallets.
 
 It does that using [Merkle Trees](https://en.m.wikipedia.org/wiki/Merkle_tree) which means we need to create a hash of the entire list of allowed wallets and store that hash — known as the **Merkle Root** — on the guard settings. For a wallet to prove it is on the allowed list, it must provide a list of hashes — known as the **Merkle Proof** — that allows the program to compute the Merkle Root and ensure it matches the guard’s settings.
 
@@ -203,6 +203,6 @@ API References: [route](https://mpl-candy-machine-js-docs.vercel.app/functions/r
 
 ## Conclusion
 
-The route instruction makes guards even more powerful by allowing them to ship with their own custom program logic. Check out the dedicated pages of [all available guards](/candy-machine/available-guards) to see the full feature set of each guard.
+The route instruction makes guards even more powerful by allowing them to ship with their own custom program logic. Check out the dedicated pages of [all available guards](/candy-machine-4/available-guards) to see the full feature set of each guard.
 
-Now that we know everything there is to know about setting up Candy Machines and their guards, it’s about time we talk about minting. See you on [the next page](/candy-machine/mint)!
+Now that we know everything there is to know about setting up Candy Machines and their guards, it’s about time we talk about minting. See you on [the next page](/candy-machine-4/mint)!

@@ -4,13 +4,13 @@ metaTitle: Candy Machine - Guard Groups
 description: Explains how to configure multiple groups of guards.
 ---
 
-On [the previous page](/candy-machine/guards), we introduced guards and used them to define the access control of our Candy Machines. We’ve seen that using guards, we can for instance add payments of 1 SOL per mint and ensure the mint start after a certain date. But what if we also wanted to charge 2 SOL after a second date? What if we wanted to allow certain token holders to mint for free or at a discounted price? {% .lead %}
+On [the previous page](/candy-machine-4/guards), we introduced guards and used them to define the access control of our Candy Machines. We’ve seen that using guards, we can for instance add payments of 1 SOL per mint and ensure the mint start after a certain date. But what if we also wanted to charge 2 SOL after a second date? What if we wanted to allow certain token holders to mint for free or at a discounted price? {% .lead %}
 
 What if we could define multiple sets of guards that each have their own requirements? For that reason, we’ve created **Guard Groups**!
 
 ## How Do Groups Work?
 
-Remember [how we can set up guards on any Candy Machine](/candy-machine/guards#creating-a-candy-machine-with-guards) by simply providing the settings of the guards we want to enable? Well, Guard Groups work the same way, except you must also give them a unique **Label** to identify them.
+Remember [how we can set up guards on any Candy Machine](/candy-machine-4/guards#creating-a-candy-machine-with-guards) by simply providing the settings of the guards we want to enable? Well, Guard Groups work the same way, except you must also give them a unique **Label** to identify them.
 
 Therefore, each Guard Group has the following attributes:
 
@@ -171,7 +171,7 @@ API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/
 
 Notice how, in the example above, we had to provide the same **Bot Tax** guard to both groups. This can be simplified by leveraging the global **Guards** that are set on a Candy Machine.
 
-When using Guard Groups, the global Guards of a Candy Machine — as explained on [the previous page](/candy-machine/guards) — **act as default guards**! That means groups will default to using the same guard settings as the global guards unless they are overriding them by explicitly enabling them in the group.
+When using Guard Groups, the global Guards of a Candy Machine — as explained on [the previous page](/candy-machine-4/guards) — **act as default guards**! That means groups will default to using the same guard settings as the global guards unless they are overriding them by explicitly enabling them in the group.
 
 Here’s a quick recap:
 
@@ -348,4 +348,4 @@ API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/
 
 Guard groups bring a whole new dimension to our Candy Machines by allowing us to define sequential and/or parallel minting workflows tailored to our needs.
 
-On [the next page](/candy-machine/guard-route), we’ll see yet another exciting feature about guards: Guard instructions!
+On [the next page](/candy-machine-4/guard-route), we’ll see yet another exciting feature about guards: Guard instructions!

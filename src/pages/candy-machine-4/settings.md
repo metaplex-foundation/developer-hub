@@ -35,7 +35,7 @@ const candyMachineSettings = {
 
 A big chunk of the Candy Machine settings is used to define the NFTs that will be minted from them. This is because many of the NFT attributes will be the same for all minted NFTs. Therefore, instead of having to repeat these attributes every time we load an item in the Candy Machine, we set them up once on the Candy Machine settings.
 
-Note that the only attributes that can distinguish one minted NFT from another are the **Name** of the NFT and the **URI** pointing to its JSON metadata. See [Inserting Items](/candy-machine/insert-items) for more information.
+Note that the only attributes that can distinguish one minted NFT from another are the **Name** of the NFT and the **URI** pointing to its JSON metadata. See [Inserting Items](/candy-machine-4/insert-items) for more information.
 
 Here is the list of attributes shared between all minted NFTs.
 
@@ -269,8 +269,8 @@ const candyMachineSettings = {
 
 As mentioned in the introduction, this page focuses on the main Candy Machine settings but there is a lot more you can configure on a Candy Machine by using guards.
 
-Since this is a vast subject with a lot of available default guards to explain, we’ve dedicated an entire section of this documentation to it. The best place to start is the [Candy Guards](/candy-machine/guards) page.
+Since this is a vast subject with a lot of available default guards to explain, we’ve dedicated an entire section of this documentation to it. The best place to start is the [Candy Guards](/candy-machine-4/guards) page.
 
 ## Conclusion
 
-Now that we know about how the main Candy Machine settings, on [the next page](/candy-machine/manage), we’ll see how we can use them to create and update our own Candy Machines.
+Now that we know about how the main Candy Machine settings, on [the next page](/candy-machine-4/manage), we’ll see how we can use them to create and update our own Candy Machines.

@@ -8,18 +8,16 @@ The Metaplex Protocol **Candy Machine** is the leading minting and distribution 
 
 The name refers to the vending machines that dispense candy for coins via a mechanical crank. In this case the candy are NFTs and the payment is SOL or a SPL token.
 
-{% figure src="/assets/candy-machine/candy-machine-photo.png" alt="An AI-generated photo of a typical candy machine" caption="A typical candy machine" /%}
+{% figure src="/assets/candy-machine-4/candy-machine-photo.png" alt="An AI-generated photo of a typical candy machine" caption="A typical candy machine" /%}
 
 {% quick-links %}
-{% quick-link title="Creator Studio" icon="Star" href="https://studio.metaplex.com" description="Don't want to code? Launch your next drop by pressing buttons!" /%}
-
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/candy-machine/getting-started" description="Find the language or library of your choice and get started with Candy Machines." /%}
-{% quick-link title="Recipes" icon="RectangleStack" href="/candy-machine/recipes" description="Learn various scenarios by reading concrete code examples." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/candy-machine-4/getting-started" description="Find the language or library of your choice and get started with Candy Machines." /%}
+{% quick-link title="Recipes" icon="RectangleStack" href="/candy-machine-4/recipes" description="Learn various scenarios by reading concrete code examples." /%}
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-core-candy-machine-js-docs.vercel.app/" target="_blank" description="Looking for something specific? We've got you." /%}
 {% /quick-links %}
 
 {% callout %}
-This documentation refers to the latest iteration of Candy Machine known as Candy Machine V3. If you’re looking for Candy Machine V2, [please refer to this documentation instead](https://docs.metaplex.com/deprecated/candy-machine-v2/).
+This documentation refers to the latest iteration of Candy Machine known as Candy Machine V4. It allows minting [Core](/core) Assets. If you want to mint Metaplex Token Metadata NFTs [please refer to Candy Machine V3 instead](https://developers.metaplex.com/candy-machine/).
 {% /callout %}
 
 ## Introduction
@@ -51,7 +49,7 @@ The very first step is for the creator to create a new Candy Machine and configu
 {% edge from="action" to="candy-machine" path="straight" /%}
 {% /diagram %}
 
-The created Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be minted. For instance, there is a `creators` parameter which will be assigned to all NFTs minted from this Candy Machine. We will see how to create and configure Candy Machines in more details, including some code examples, in the following pages: [Candy Machine Settings](/candy-machine/settings) and [Managing Candy Machines](/candy-machine/manage).
+The created Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be minted. For instance, there is a `collection` parameter which will be assigned to all NFTs minted from this Candy Machine. We will see how to create and configure Candy Machines in more details, including some code examples, in the following pages: [Candy Machine Settings](/candy-machine-4/settings) and [Managing Candy Machines](/candy-machine-4/manage).
 
 However, we still don’t know which NFTs should be minted from that Candy Machine. In other words, the Candy Machine is not loaded. So our next step, is to insert items into the Candy Machine.
 
@@ -76,9 +74,9 @@ However, we still don’t know which NFTs should be minted from that Candy Machi
 Each item is composed of two parameters:
 
 - A `name`: The name of the NFT.
-- A `uri`: The URI pointing to the [JSON metadata](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard) of the NFT. This implies that the JSON metadata has already been uploaded via either an on-chain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider.
+- A `uri`: The URI pointing to the [JSON metadata](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard) of the NFT. This implies that the JSON metadata has already been uploaded via either an on-chain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider. The tools that you can use to create the Candy Machine, like Sugar or the JS SDK offer helpers to do so.
 
-All other parameters are shared between all NFTs and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/candy-machine/insert-items) for more details.
+All other parameters are shared between all NFTs and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/candy-machine-4/insert-items) for more details.
 
 Notice how, at this point, no real NFTs have been created yet. We are simply loading the Candy Machine with all the data it needs to **create NFTs on-demand**, at mint time. Which brings us to the next step.
 
@@ -119,9 +117,9 @@ Notice how, at this point, no real NFTs have been created yet. We are simply loa
 {% edge from="mint-3" to="nft-3" path="bezier" /%}
 {% /diagram %}
 
-Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting NFTs from it. It’s only at this point that an NFT is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/candy-machine/mint) for more details.
+Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting NFTs from it. It’s only at this point that an NFT is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/candy-machine-4/mint) for more details.
 
-Once all NFTs have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Managing Candy Machines](/candy-machine/manage) for more details.
+Once all NFTs have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Managing Candy Machines](/candy-machine-4/manage) for more details.
 
 {% diagram %}
 {% node #action-1 label="4. Delete" theme="pink" /%}
@@ -143,7 +141,7 @@ Once all NFTs have been minted from a Candy Machine, it has served its purpose a
 
 Now that we understand how Candy Machines work, let’s dig into the various ways creators can protect and customise the mint process of their Candy Machine.
 
-Creators can use what we call “**Guards**” to add various features to their Candy Machine. The Metaplex Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 16 default guards**](/candy-machine/guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
+Creators can use what we call “**Guards**” to add various features to their Candy Machine. The Metaplex Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 23 default guards**](/candy-machine-4/guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
 
 Each guard can be enabled and configured at will so creators can pick and choose the features they need. Disabling all guards would be equivalent to allowing anyone to mint our NFTs for free at any time, which is likely not what we want. So let’s have a look at a few guards to create a more realistic example.
 
@@ -203,21 +201,21 @@ Bot tax charged
 {% edge from="mint-4" to="fail-4" path="bezier" /%}
 {% /diagram %}
 
-As you can see, with more than 16 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/candy-machine/guards) page.
+As you can see, with more than 23 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/candy-machine-4/guards) page.
 
 ## Next steps
 
 Whilst this provides a good overview of Candy Machines, there is a lot more to discover and learn about them. Here’s what you can expect in the other pages of this Candy Machine documentation.
 
-- [Getting Started](/candy-machine/getting-started). Lists the various libraries and SDKs you can use to manage Candy Machines.
-- [Candy Machine Settings](/candy-machine/settings). Explains Candy Machine settings in great detail.
-- [Managing Candy Machines](/candy-machine/manage). Explains how to manage Candy Machines.
-- [Inserting Items](/candy-machine/insert-items). Explains how to load items into Candy Machines.
-- [Candy Guards](/candy-machine/guards). Explains how guards work and how to enable them.
-- [Guard Groups](/candy-machine/guard-groups). Explains how to configure multiple groups of guards.
-- [Special Guard Instructions](/candy-machine/guard-route). Explains how to execute guard-specific instructions.
-- [Minting](/candy-machine/mint). Explains how to mint from Candy Machines and how to handle pre-mint requirements.
-- [How-To Guides](/candy-machine/how-to-guides). Lists practical articles relevant to Candy Machines.
-- [Conceptual Guides](/candy-machine/conceptual-guides). Lists theoretical articles relevant to Candy Machines.
-- [References](/candy-machine/references). Lists API References relevant to Candy Machines.
-- [Updates](/candy-machine/updates). Documents the latest changes.
+- [Getting Started](/candy-machine-4/getting-started). Lists the various libraries and SDKs you can use to manage Candy Machines.
+- [Candy Machine Settings](/candy-machine-4/settings). Explains Candy Machine settings in great detail.
+- [Managing Candy Machines](/candy-machine-4/manage). Explains how to manage Candy Machines.
+- [Inserting Items](/candy-machine-4/insert-items). Explains how to load items into Candy Machines.
+- [Candy Guards](/candy-machine-4/guards). Explains how guards work and how to enable them.
+- [Guard Groups](/candy-machine-4/guard-groups). Explains how to configure multiple groups of guards.
+- [Special Guard Instructions](/candy-machine-4/guard-route). Explains how to execute guard-specific instructions.
+- [Minting](/candy-machine-4/mint). Explains how to mint from Candy Machines and how to handle pre-mint requirements.
+- [How-To Guides](/candy-machine-4/how-to-guides). Lists practical articles relevant to Candy Machines.
+- [Conceptual Guides](/candy-machine-4/conceptual-guides). Lists theoretical articles relevant to Candy Machines.
+- [References](/candy-machine-4/references). Lists API References relevant to Candy Machines.
+- [Updates](/candy-machine-4/updates). Documents the latest changes.

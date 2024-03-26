@@ -6,7 +6,7 @@ description: config command.
 
 The `config` command allows you manage your Candy Machine configuration. By default, Sugar looks for a `config.json` file in the current directory to load the Candy Machine configuration – the configuration file name can be specified with a `-c` or `--config` option on every command that requires it.
 
-You can either create this file manually, following these [instructions](/candy-machine/sugar/configuration), or use the config create command:
+You can either create this file manually, following these [instructions](/candy-machine-4/sugar/configuration), or use the config create command:
 
 ```
 sugar config create

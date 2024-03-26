@@ -19,7 +19,7 @@ The name refers to the vending machines that dispense candy for coins via a mech
 {% /quick-links %}
 
 {% callout %}
-This documentation refers to the latest iteration of Candy Machine known as Candy Machine V3. If you’re looking for Candy Machine V2, [please refer to this documentation instead](https://docs.metaplex.com/deprecated/candy-machine-v2/).
+This documentation refers Candy Machine V3 which can be used to mint Metaplex Token Metadata NFTs. If you want to create Core Assets instead please see [Candy Machine V4](/candy-machine-4).
 {% /callout %}
 
 ## Introduction
@@ -143,7 +143,7 @@ Once all NFTs have been minted from a Candy Machine, it has served its purpose a
 
 Now that we understand how Candy Machines work, let’s dig into the various ways creators can protect and customise the mint process of their Candy Machine.
 
-Creators can use what we call “**Guards**” to add various features to their Candy Machine. The Metaplex Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 16 default guards**](/candy-machine/guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
+Creators can use what we call “**Guards**” to add various features to their Candy Machine. The Metaplex Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 21 default guards**](/candy-machine/guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
 
 Each guard can be enabled and configured at will so creators can pick and choose the features they need. Disabling all guards would be equivalent to allowing anyone to mint our NFTs for free at any time, which is likely not what we want. So let’s have a look at a few guards to create a more realistic example.
 
@@ -203,7 +203,7 @@ Bot tax charged
 {% edge from="mint-4" to="fail-4" path="bezier" /%}
 {% /diagram %}
 
-As you can see, with more than 16 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/candy-machine/guards) page.
+As you can see, with more than 21 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/candy-machine/guards) page.
 
 ## Next steps
 
