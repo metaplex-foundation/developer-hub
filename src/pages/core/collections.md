@@ -15,7 +15,7 @@ The data that is stored and accessible from the Collection Asset is as follows;
 | key             | The account key discriminator                     |
 | updateAuthority | The authority of the new asset.                   |
 | name            | The collection name.                              |
-| uri             | THe uri to the collections off-chain metadata.    |
+| uri             | The uri to the collections off-chain metadata.    |
 | num minted      | The number of assets minted in the collection.    |
 | current size    | The number of assets currently in the collection. |
 
