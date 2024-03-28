@@ -100,7 +100,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [BotTax](https://mpl-candy-machine-js-docs.vercel.app/types/BotTax.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [BotTax](https://mpl-core-candy-machine-js-docs.vercel.app/types/BotTax.html)
 
 {% /totem %}
 {% /dialect %}

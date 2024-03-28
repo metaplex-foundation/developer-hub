@@ -30,7 +30,7 @@ export const products = [
   amman,
   das,
   core,
-  // candyMachine4
+  candyMachine4,
   legacyDocumentation,
   sugar
 ].sort((a, b) => a.name.localeCompare(b.name))

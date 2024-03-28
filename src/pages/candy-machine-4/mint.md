@@ -103,7 +103,7 @@ As mentioned above, you may need to increase the compute unit limit of the trans
 If you want to mint pNFT (e.g. for royalty enforcement) and have your Candy Machine set up accordingly you will have to add the `tokenStandard` field. By default `NonFungible` is used. If you fetched the Candy Machine before you could use `candyMachine.tokenStandard`, otherwise you have to assign it yourself by using `tokenStandard: TokenStandard.ProgrammableNonFungible` from `@metaplex-foundation/mpl-token-metadata`.
 
 ```ts
-import { mintV2 } from '@metaplex-foundation/mpl-candy-machine'
+import { mintV2 } from '@metaplex-foundation/mpl-core-candy-machine'
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
 import { transactionBuilder, generateSigner } from '@metaplex-foundation/umi'
 
@@ -125,7 +125,7 @@ await transactionBuilder()
 Note that the `mintV2` instruction takes care of creating the Mint and Token accounts for us by default and will set the NFT owner to the `minter`. If you wish to create these yourself beforehand, you may simply give the NFT mind address as a public key instead of a signer. Here's an example using the `createMintWithAssociatedToken` function from the `mpl-toolbox` Umi library:
 
 ```ts
-import { mintV2 } from '@metaplex-foundation/mpl-candy-machine'
+import { mintV2 } from '@metaplex-foundation/mpl-core-candy-machine'
 import {
   createMintWithAssociatedToken,
   setComputeUnitLimit,
@@ -151,7 +151,7 @@ await transactionBuilder()
 In the rare event that you wish to mint directly from the Candy Machine Core program, you may use the `mintFromCandyMachineV2` function instead. This function requires the mint authority of the candy machine to be provided as a signer and accepts an explicit `nftOwner` attribute.
 
 ```ts
-import { mintFromCandyMachineV2 } from '@metaplex-foundation/mpl-candy-machine'
+import { mintFromCandyMachineV2 } from '@metaplex-foundation/mpl-core-candy-machine'
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
 import { transactionBuilder, generateSigner } from '@metaplex-foundation/umi'
 
@@ -172,7 +172,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [mintFromCandyMachineV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintFromCandyMachineV2.html)
+API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [mintFromCandyMachineV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintFromCandyMachineV2.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -255,7 +255,7 @@ import {
   generateSigner,
   transactionBuilder,
 } from '@metaplex-foundation/umi'
-import { create, mintV2 } from '@metaplex-foundation/mpl-candy-machine'
+import { create, mintV2 } from '@metaplex-foundation/mpl-core-candy-machine'
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
 
 // Create a Candy Machine with guards.
@@ -287,7 +287,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [DefaultGuardSetMintArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetMintArgs.html)
+API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [DefaultGuardSetMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetMintArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -444,7 +444,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [DefaultGuardSetMintArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetMintArgs.html)
+API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [DefaultGuardSetMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetMintArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

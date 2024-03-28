@@ -22,32 +22,45 @@ Remember that a Candy Machine [must be associated with a Collection NFT](/candy-
 Here’s how you can create a Candy Machine using a brand new Collection NFT via the Umi library.
 
 ```ts
-import {
-  createNft,
-  TokenStandard,
-} from '@metaplex-foundation/mpl-token-metadata'
-import { create } from '@metaplex-foundation/mpl-candy-machine'
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
+import { createCollectionV1, pluginAuthorityPair } from '@metaplex-foundation/mpl-core'
+import { create } from '@metaplex-foundation/mpl-core-candy-machine'
+import { generateSigner, percentAmount, publicKey } from '@metaplex-foundation/umi'
 
 // Create the Collection NFT.
-const collectionUpdateAuthority = generateSigner(umi)
-const collectionMint = generateSigner(umi)
-await createNft(umi, {
-  mint: collectionMint,
-  authority: collectionUpdateAuthority,
-  name: 'My Collection NFT',
-  uri: 'https://example.com/path/to/some/json/metadata.json',
-  sellerFeeBasisPoints: percentAmount(9.99, 2), // 9.99%
-  isCollection: true,
+const collectionAddress = generateSigner(umi)
+const creator1 = publicKey('11111111111111111111111111111111')
+const creator2 = publicKey('22222222222222222222222222222222')
+await createCollectionV1(umi, {
+  collection: collectionSigner,
+  name: 'Numbers Core Collection',
+  uri: 'https://arweave.net/IEA-aND-c5kpnQt-A1jFKnM14K3ORu-CYH8Ag0FMEk8',
+  plugins: [
+    pluginAuthorityPair({
+      type: 'Royalties',
+      data: {
+        basisPoints: 500,
+        creators: [
+          {
+            address: creator1,
+            percentage: 20,
+          },
+          {
+            address: creator2,
+            percentage: 80,
+          },
+        ],
+        ruleSet: ruleSet('None'), // Compatibility rule set
+      },
+    }),
+  ],
 }).sendAndConfirm(umi)
 
 // Create the Candy Machine.
 const candyMachine = generateSigner(umi)
 await create(umi, {
   candyMachine,
-  collectionMint: collectionMint.publicKey,
-  collectionUpdateAuthority,
-  tokenStandard: TokenStandard.NonFungible,
+  collection: collectionAddress.publicKey,
+  collectionUpdateAuthority: umi.identity,
   sellerFeeBasisPoints: percentAmount(9.99, 2), // 9.99%
   itemsAvailable: 5000,
   creators: [
@@ -70,7 +83,7 @@ await create(umi, {
 As mentioned above, this operation will also take care of creating and associating a new Candy Guard account with the created Candy Machine. That’s because a Candy Machine without a Candy Guard is not very useful and you’ll want to do that most of the time. Still, if you’d like to disable that behaviour, you may use the `createCandyMachineV2` method instead.
 
 ```tsx
-import { createCandyMachineV2 } from '@metaplex-foundation/mpl-candy-machine'
+import { createCandyMachineV2 } from '@metaplex-foundation/mpl-core-candy-machine'
 
 await createCandyMachineV2(umi, {
   // ...
@@ -79,7 +92,7 @@ await createCandyMachineV2(umi, {
 
 In these examples, we only focused on the required parameters but you may want to check out the following API References to see what you can do with this `create` function.
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [createCandyMachineV2](https://mpl-candy-machine-js-docs.vercel.app/functions/createCandyMachineV2.html).
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [createCandyMachineV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyMachineV2.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -110,7 +123,7 @@ For more detailed information about the Candy Machine account, check out the [pr
 {% dialect-switcher title="Inside Candy Machine accounts" %}
 {% dialect title="JavaScript" id="js" %}
 
-The best way to check how Candy Machines are modelled in the Umi library is by checking [the API References of the `CandyMachine` account](https://mpl-candy-machine-js-docs.vercel.app/types/CandyMachine.html). You may also want to check out the [API References of the `candyGuard` account](https://mpl-candy-machine-js-docs.vercel.app/types/CandyGuard.html) since one is automatically created for each candy machine when using the `create` function.
+The best way to check how Candy Machines are modelled in the Umi library is by checking [the API References of the `CandyMachine` account](https://mpl-core-candy-machine-js-docs.vercel.app/types/CandyMachine.html). You may also want to check out the [API References of the `candyGuard` account](https://mpl-core-candy-machine-js-docs.vercel.app/types/CandyGuard.html) since one is automatically created for each candy machine when using the `create` function.
 
 Here’s a small code example showcasing some of the Candy Machine attributes.
 
@@ -118,7 +131,7 @@ Here’s a small code example showcasing some of the Candy Machine attributes.
 import {
   fetchCandyMachine,
   fetchCandyGuard,
-} from '@metaplex-foundation/mpl-candy-machine'
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = await fetchCandyMachine(umi, candyMachineAddress)
 const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority)
@@ -150,13 +163,13 @@ import { publicKey } from '@metaplex-foundation/umi'
 import {
   fetchCandyMachine,
   fetchCandyGuard,
-} from '@metaplex-foundation/mpl-candy-machine'
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = await fetchCandyMachine(umi, publicKey('...'))
 const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority)
 ```
 
-API References: [fetchCandyMachine](https://mpl-candy-machine-js-docs.vercel.app/functions/fetchCandyMachine.html), [fetchCandyGuard](https://mpl-candy-machine-js-docs.vercel.app/functions/fetchCandyGuard.html).
+API References: [fetchCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/fetchCandyMachine.html), [fetchCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/fetchCandyGuard.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -178,7 +191,7 @@ import { generateSigner } from '@metaplex-foundation/umi'
 import {
   setCandyMachineAuthority,
   setCandyGuardAuthority,
-} from '@metaplex-foundation/mpl-candy-machine'
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 const newAuthority = generateSigner(umi)
 await setCandyMachineAuthority(umi, {
@@ -200,7 +213,7 @@ Whilst you’d probably never want to update the `mintAuthority` directly since 
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { setMintAuthority } from '@metaplex-foundation/mpl-candy-machine'
+import { setMintAuthority } from '@metaplex-foundation/mpl-core-candy-machine'
 
 const newMintAuthority = generateSigner(umi)
 await setMintAuthority(umi, {
@@ -210,14 +223,14 @@ await setMintAuthority(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [setCandyMachineAuthority](https://mpl-candy-machine-js-docs.vercel.app/functions/setCandyMachineAuthority.html), [setCandyGuardAuthority](https://mpl-candy-machine-js-docs.vercel.app/functions/setCandyGuardAuthority.html), [setMintAuthority](https://mpl-candy-machine-js-docs.vercel.app/functions/setMintAuthority.html).
+API References: [setCandyMachineAuthority](https://mpl-core-candy-machine-js-docs.vercel.app/functions/setCandyMachineAuthority.html), [setCandyGuardAuthority](https://mpl-core-candy-machine-js-docs.vercel.app/functions/setCandyGuardAuthority.html), [setMintAuthority](https://mpl-core-candy-machine-js-docs.vercel.app/functions/setMintAuthority.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
 
 ## Update Shared NFT Data
 
-You may also update the attributes shared between all minted NFTs of a Candy Machine. As mentioned in [the previous page](/candy-machine-4/settings#settings-shared-by-all-nf-ts), these are: Seller Fee Basis Points, Symbol, Max Edition Supply, Is Mutable and Creators.
+You may also update the attributes shared between all minted NFTs of a Candy Machine. As mentioned in [the previous page](/candy-machine-4/settings#settings-shared-by-all-nf-ts), these are: Symbol, Max Edition Supply and Is Mutable.
 
 Note that once the first NFT has been minted, these attributes can no longer be updated.
 
@@ -231,7 +244,7 @@ import { percentAmount } from '@metaplex-foundation/umi'
 import {
   updateCandyMachine,
   fetchCandyMachine,
-} from '@metaplex-foundation/mpl-candy-machine'
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = await fetchCandyMachine(umi, candyMachineAddress)
 await updateCandyMachine(umi, {
@@ -245,53 +258,7 @@ await updateCandyMachine(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [updateCandyMachine](https://mpl-candy-machine-js-docs.vercel.app/functions/updateCandyMachine.html).
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-## Update Token Standard
-
-The Token Standard and Rule Set attributes can also be updated on a Candy Machine using the "Set Token Standard" instruction. This allows us to switch from regular NFTs to programmable NFTs and vice versa. When switching to programmable NFTs, we can optionally specify or update the Rule Set that minted NFTs should adhere to.
-
-Note that, if you candy machine is using an old account version, this instruction will also automatically upgrade it to the latest account version that supports programmable NFTs as well as regular NFTs. Once upgraded, you will need to use the latest instructions for minting from the candy machine or candy guard.
-
-{% dialect-switcher title="Update the Token Standard of a Candy Machine" %}
-{% dialect title="JavaScript" id="js" %}
-
-Here's an example of updating the token standard and rule set on a Candy Machine using Umi.
-
-```ts
-import { TokenStandard } from '@metaplex-foundation/mpl-token-metadata'
-import { setTokenStandard } from '@metaplex-foundation/mpl-candy-machine'
-
-await setTokenStandard(umi, {
-  candyMachine: candyMachine.publicKey,
-  collectionMint: candyMachine.collectionMint,
-  collectionUpdateAuthority,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  ruleSet: newRuleSetAccount,
-}).sendAndConfirm(umi)
-```
-
-Note that if your candy machine is using account version `V1`, you will need to explicitly set the `collectionAuthorityRecord` account as it uses the legacy collection delegate authority record account.
-
-```ts
-import { findCollectionAuthorityRecordPda } from '@metaplex-foundation/mpl-token-metadata'
-import { findCandyMachineAuthorityPda } from '@metaplex-foundation/mpl-candy-machine'
-
-await setTokenStandard(umi, {
-  // ...
-  collectionAuthorityRecord: findCollectionAuthorityRecordPda(umi, {
-    mint: candyMachine.collectionMint,
-    collectionAuthority: findCandyMachineAuthorityPda(umi, {
-      candyMachine: candyMachine.publicKey,
-    }),
-  }),
-}).sendAndConfirm(umi)
-```
-
-API References: [setTokenStandard](https://mpl-candy-machine-js-docs.vercel.app/functions/setTokenStandard.html).
+API References: [updateCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/updateCandyMachine.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -310,31 +277,12 @@ To update the Collection NFT of a Candy Machine using the Umi library you may us
 ```ts
 await setCollectionV2(umi, {
   candyMachine: candyMachine.publicKey,
-  collectionMint: candyMachine.collectionMint,
+  collection: candyMachine.collection,
   collectionUpdateAuthority: collectionUpdateAuthority.publicKey,
-  newCollectionMint: newCollectionMint.publicKey,
+  newCollection: newCollection.publicKey,
   newCollectionUpdateAuthority,
 }).sendAndConfirm(umi)
 ```
-
-Note that if your candy machine is using account version `V1`, you will need to explicitly set the `collectionDelegateRecord` account as it uses the legacy collection delegate authority record account.
-
-```ts
-import { findCollectionAuthorityRecordPda } from '@metaplex-foundation/mpl-token-metadata'
-import { findCandyMachineAuthorityPda } from '@metaplex-foundation/mpl-candy-machine'
-
-await setCollectionV2(umi, {
-  // ...
-  collectionDelegateRecord: findCollectionAuthorityRecordPda(umi, {
-    mint: candyMachine.collectionMint,
-    collectionAuthority: findCandyMachineAuthorityPda(umi, {
-      candyMachine: candyMachine.publicKey,
-    }),
-  }),
-}).sendAndConfirm(umi)
-```
-
-API References: [setCollectionV2](https://mpl-candy-machine-js-docs.vercel.app/functions/setCollectionV2.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -358,7 +306,7 @@ The following example shows how to update the Config Line Settings of a Candy Ma
 import {
   updateCandyMachine,
   fetchCandyMachine,
-} from '@metaplex-foundation/mpl-candy-machine'
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = await fetchCandyMachine(umi, candyMachineAddress)
 await updateCandyMachine(umi, {
@@ -378,7 +326,7 @@ await updateCandyMachine(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [updateCandyMachine](https://mpl-candy-machine-js-docs.vercel.app/functions/updateCandyMachine.html).
+API References: [updateCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/updateCandyMachine.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -396,7 +344,7 @@ You may delete a Candy Machine account and/or its associated Candy Guard account
 import {
   deleteCandyMachine,
   deleteCandyGuard,
-} from '@metaplex-foundation/mpl-candy-machine'
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 await deleteCandyMachine(umi, {
   candyMachine: candyMachine.publicKey,
@@ -407,7 +355,7 @@ await deleteCandyGuard(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [deleteCandyMachine](https://mpl-candy-machine-js-docs.vercel.app/functions/deleteCandyMachine.html), [deleteCandyGuard](https://mpl-candy-machine-js-docs.vercel.app/functions/deleteCandyGuard.html).
+API References: [deleteCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/deleteCandyMachine.html), [deleteCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/deleteCandyGuard.html).
 
 {% /dialect %}
 {% /dialect-switcher %}

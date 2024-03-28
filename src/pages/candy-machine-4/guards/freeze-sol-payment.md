@@ -99,7 +99,7 @@ create(umi, {
 })
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [FreezeSolPayment](https://mpl-candy-machine-js-docs.vercel.app/types/FreezeSolPayment.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [FreezeSolPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPayment.html)
 
 {% /totem %}
 {% /dialect %}
@@ -142,7 +142,7 @@ mintV2(umi, {
 })
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [FreezeSolPaymentMintArgs](https://mpl-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentMintArgs.html)
+API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [FreezeSolPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
@@ -322,7 +322,7 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-candy-machine-js-docs.vercel.app/functions/route.html), [FreezeSolPaymentRouteArgsInitialize](https://mpl-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentRouteArgsInitialize.html)
+API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [FreezeSolPaymentRouteArgsInitialize](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentRouteArgsInitialize.html)
 
 {% /totem %}
 {% /dialect %}
@@ -473,7 +473,7 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-candy-machine-js-docs.vercel.app/functions/route.html), [FreezeSolPaymentRouteArgsThaw](https://mpl-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentRouteArgsThaw.html)
+API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [FreezeSolPaymentRouteArgsThaw](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentRouteArgsThaw.html)
 
 {% /totem %}
 {% /dialect %}
@@ -632,7 +632,7 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-candy-machine-js-docs.vercel.app/functions/route.html), [FreezeSolPaymentRouteArgsUnlockFunds](https://mpl-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentRouteArgsUnlockFunds.html)
+API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [FreezeSolPaymentRouteArgsUnlockFunds](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentRouteArgsUnlockFunds.html)
 
 {% /totem %}
 {% /dialect %}

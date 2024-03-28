@@ -226,7 +226,7 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [DefaultGuardSetArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -260,7 +260,7 @@ await updateCandyGuard(umi, {
 })
 ```
 
-API References: [updateCandyGuard](https://mpl-candy-machine-js-docs.vercel.app/functions/updateCandyGuard.html), [CandyGuard](https://mpl-candy-machine-js-docs.vercel.app/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
+API References: [updateCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/updateCandyGuard.html), [CandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -278,7 +278,7 @@ You may access the candy guard associated with a candy machine by using the `fet
 import {
   fetchCandyMachine,
   fetchCandyGuard,
-} from '@metaplex-foundation/mpl-candy-machine'
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = await fetchCandyMachine(umi, candyMachineAddress)
 const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority)
@@ -297,7 +297,7 @@ import {
   findCandyGuardPda,
   deserializeCandyMachine,
   deserializeCandyGuard,
-} from '@metaplex-foundation/mpl-candy-machine'
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyGuardAddress = findCandyGuardPda(umi, { base: candyMachineAddress })
 const [rawCandyMachine, rawCandyGuard] = await umi.rpc.getAccounts([
@@ -311,7 +311,7 @@ const candyMachine = deserializeCandyMachine(umi, rawCandyMachine)
 const candyGuard = deserializeCandyGuard(umi, rawCandyGuard)
 ```
 
-API References: [fetchCandyGuard](https://mpl-candy-machine-js-docs.vercel.app/functions/fetchCandyGuard.html), [findCandyGuardPda](https://mpl-candy-machine-js-docs.vercel.app/functions/findCandyGuardPda.html), [CandyGuard](https://mpl-candy-machine-js-docs.vercel.app/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
+API References: [fetchCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/fetchCandyGuard.html), [findCandyGuardPda](https://mpl-core-candy-machine-js-docs.vercel.app/functions/findCandyGuardPda.html), [CandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -380,7 +380,7 @@ await unwrap({
 }).sendAndConfirm(umi)
 ```
 
-API References: [createCandyMachineV2](https://mpl-candy-machine-js-docs.vercel.app/functions/createCandyMachineV2.html), [createCandyGuard](https://mpl-candy-machine-js-docs.vercel.app/functions/createCandyGuard.html), [wrap](https://mpl-candy-machine-js-docs.vercel.app/functions/wrap.html), [unwrap](https://mpl-candy-machine-js-docs.vercel.app/functions/unwrap.html)
+API References: [createCandyMachineV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyMachineV2.html), [createCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyGuard.html), [wrap](https://mpl-core-candy-machine-js-docs.vercel.app/functions/wrap.html), [unwrap](https://mpl-core-candy-machine-js-docs.vercel.app/functions/unwrap.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

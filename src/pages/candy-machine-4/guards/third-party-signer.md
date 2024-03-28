@@ -99,7 +99,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [ThirdPartySigner](https://mpl-candy-machine-js-docs.vercel.app/types/ThirdPartySigner.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [ThirdPartySigner](https://mpl-core-candy-machine-js-docs.vercel.app/types/ThirdPartySigner.html)
 
 {% /totem %}
 {% /dialect %}

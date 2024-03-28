@@ -93,7 +93,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [AddressGate](https://mpl-candy-machine-js-docs.vercel.app/types/AddressGate.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [AddressGate](https://mpl-core-candy-machine-js-docs.vercel.app/types/AddressGate.html)
 
 
 {% /totem %}

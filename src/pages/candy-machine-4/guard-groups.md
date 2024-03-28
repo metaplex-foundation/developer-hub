@@ -162,7 +162,7 @@ await updateCandyGuard(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [updateCandyGuard](https://mpl-candy-machine-js-docs.vercel.app/functions/updateCandyGuard.html), [DefaultGuardSetArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [updateCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/updateCandyGuard.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -279,7 +279,7 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [DefaultGuardSetArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -339,7 +339,7 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [DefaultGuardSetArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

@@ -93,7 +93,7 @@ import {
   route,
   getMerkleProof,
   getMerkleRoot,
-} from '@metaplex-foundation/mpl-candy-machine'
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 // Prepare the allow list.
 // Let's assume the first wallet on the list is the Metaplex identity.
@@ -132,7 +132,7 @@ await route(umi, {
 // If we try to mint now, it will succeed.
 ```
 
-API References: [route](https://mpl-candy-machine-js-docs.vercel.app/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetRouteArgs.html)
+API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetRouteArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -154,7 +154,7 @@ import {
   route,
   getMerkleProof,
   getMerkleRoot,
-} from "@metaplex-foundation/mpl-candy-machine";
+} from "@metaplex-foundation/mpl-core-candy-machine";
 import { base58PublicKey, some } from "@metaplex-foundation/umi";
 
 // Prepare the allow lists.
@@ -196,7 +196,7 @@ await route(umi, {
 }).sendAndConfirm(umi);
 ```
 
-API References: [route](https://mpl-candy-machine-js-docs.vercel.app/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetRouteArgs.html)
+API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetRouteArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

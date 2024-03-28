@@ -84,7 +84,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [StartDate](https://mpl-candy-machine-js-docs.vercel.app/types/StartDate.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [StartDate](https://mpl-core-candy-machine-js-docs.vercel.app/types/StartDate.html)
 
 {% /totem %}
 {% /dialect %}

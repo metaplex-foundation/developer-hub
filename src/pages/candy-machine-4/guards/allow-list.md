@@ -217,7 +217,7 @@ To help us manage Merkle Trees, the Umi library provides two helper methods call
 import {
   getMerkleProof,
   getMerkleRoot,
-} from "@metaplex-foundation/mpl-candy-machine";
+} from "@metaplex-foundation/mpl-core-candy-machine";
 
 const allowList = [
   "Ur1CbWSGsXCdedknRbJsEk7urwAvu1uddmQv51nAnXB",
@@ -236,7 +236,7 @@ const invalidMerkleProof = getMerkleProof(allowList, "invalid-address");
 Once we have computed the Merkle Root of our allow list, we can use it to set up the Allow List guard on our Candy Machine.
 
 ```ts
-import { getMerkleRoot } from "@metaplex-foundation/mpl-candy-machine";
+import { getMerkleRoot } from "@metaplex-foundation/mpl-core-candy-machine";
 
 const allowList = [
   "Ur1CbWSGsXCdedknRbJsEk7urwAvu1uddmQv51nAnXB",
@@ -252,7 +252,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [AllowList](https://mpl-candy-machine-js-docs.vercel.app/types/AllowList.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [AllowList](https://mpl-core-candy-machine-js-docs.vercel.app/types/AllowList.html)
 
 {% /totem %}
 {% /dialect %}
@@ -288,7 +288,7 @@ Also note that, if you’re planning on constructing instructions without the he
 You may pass the Mint Settings of the Allow List guard using the `mintArgs` argument like so.
 
 ```ts
-import { getMerkleRoot } from "@metaplex-foundation/mpl-candy-machine";
+import { getMerkleRoot } from "@metaplex-foundation/mpl-core-candy-machine";
 
 const allowList = [
   "Ur1CbWSGsXCdedknRbJsEk7urwAvu1uddmQv51nAnXB",
@@ -304,7 +304,7 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [AllowListMintArgs](https://mpl-candy-machine-js-docs.vercel.app/types/AllowListMintArgs.html)
+API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [AllowListMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AllowListMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
@@ -348,7 +348,7 @@ You may pass the "Proof" Route Settings of the Allow List guard using the `route
 import {
   getMerkleProof,
   getMerkleRoot,
-} from "@metaplex-foundation/mpl-candy-machine";
+} from "@metaplex-foundation/mpl-core-candy-machine";
 import { publicKey } from "@metaplex-foundation/umi";
 
 const allowList = [
@@ -370,7 +370,7 @@ await route(umi, {
 
 The `umi.identity` wallet is now allowed to mint from the Candy Machine.
 
-API References: [route](https://mpl-candy-machine-js-docs.vercel.app/functions/route.html), [AllowListRouteArgs](https://mpl-candy-machine-js-docs.vercel.app/types/AllowListRouteArgs.html)
+API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [AllowListRouteArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AllowListRouteArgs.html)
 
 {% /totem %}
 {% /dialect %}
