@@ -16,7 +16,7 @@ Therefore, splitting the data into on-chain and off-chain data allows us to get 
 
 ## Are there any costs to using Core?
 
-Token Metadata currently charges very small fee of 0.0015 SOL per Asset mint to the caller. More details can be found on the [Protocol Fees](/protocol-fees) page.
+Core currently charges very small fee of 0.0015 SOL per Asset mint to the caller. More details can be found on the [Protocol Fees](/protocol-fees) page.
 
 ## How to create a Soulbound Asset?
 
