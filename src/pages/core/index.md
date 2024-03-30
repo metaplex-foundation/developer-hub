@@ -16,18 +16,16 @@ Come try out Core's features over at [https://core.metaplex.com/](https://core.m
 
 {% quick-link title="Differences to MPL Token Metadata Overview" icon="AcademicCap" href="/core/tm-differences" description="Used to Token Metadata and want to see an overview of new features or changes behaviour?" /%}
 
-{% quick-link title="Differences to MPL Token Metadata Overview" icon="Beaker" href="https://core.metaplex.com/?env=devnet" target="_blank" description="Try Core yourself using an easy to use Website!" /%}
+{% quick-link title="Try yourself in a UI!" icon="Beaker" href="https://core.metaplex.com/?env=devnet" target="_blank" description="Try Core yourself using an easy to use Website!" /%}
 
 {% /quick-links %}
 
 ## Introduction
 
-Metaplex Core is the new NFT Standard by Metaplex Foundation. 
+Metaplex Core is the new NFT Standard by Metaplex Foundation. Compared to other Standards, including our own Token Metadata Program, it has the following advantages:
 
-Compared to other Standards, including our own Token Metadata Program, it has the following advantages:
-
-- **Unprecedented Cost Efficiency**: Metaplex Core offers the lowest minting costs compared to available alternatives. For instance, an NFT that would cost .022 SOL with Token Metadata can be minted with Core for .0037 SOL.
-- **Low Compute**: Core Operations have a small Compute Unit Footprint. This allows more Transactions to be included into one block..
+- **Unprecedented Cost Efficiency**: Metaplex Core offers the lowest minting costs compared to available alternatives. For instance, an NFT that would cost .022 SOL with Token Metadata or .0046 SOL wit Token Extensions can be minted with Core for .0029 SOL.
+- **Low Compute**: Core Operations have a small Compute Unit Footprint. This allows more Transactions to be included into one block. Instead of 205000 CU for minting Core requires just 17000 CU.
 - **Single Account Design**: Instead of relying on a fungible Token Standard like SPL Token or Token extensions (aka Token22) it is focusing on the needs of a NFT Standard. This allows the Program to just use a single Program that also tracks the owner.
 - **Enforced Royalties**: Core allows you to [enforce Royalties](/core/plugins/royalties) by default.
 - **First Class Collection Support**: Assets can be grouped into [Collections](/core/collections). While this is also possible with Token Metadata in Core Collections are their own Asset class and now allow additional features like the following:  
