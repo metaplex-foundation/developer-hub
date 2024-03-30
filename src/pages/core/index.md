@@ -16,7 +16,7 @@ Come try out Core's features over at [https://core.metaplex.com/](https://core.m
 
 {% quick-link title="Differences to MPL Token Metadata Overview" icon="AcademicCap" href="/core/tm-differences" description="Used to Token Metadata and want to see an overview of new features or changes behaviour?" /%}
 
-{% quick-link title="Differences to MPL Token Metadata Overview" icon="Beaker" href="https://core.metaplex.com/?env=devnet" target="_blank" description="Try Core yourself using an easy to use Website!" /%}
+{% quick-link title="Try yourself in a UI!" icon="Beaker" href="https://core.metaplex.com/?env=devnet" target="_blank" description="Try Core yourself using an easy to use Website!" /%}
 
 {% /quick-links %}
 
