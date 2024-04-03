@@ -8,7 +8,7 @@ description: Learn about the MPL Core Asset Transfer Plugin
 
 The `Transfer Delegate` Plugin is a `Owner Managed` plugin that allows the authority of the Transfer Delegate Plugin to transfer the Asset at any time.
 
-The Transfer Plugin will work in areas such as;
+The Transfer Plugin will work in areas such as:
 
 - Escrowless sale of the Asset.
 - Gaming scenario where the user swaps/loses their asset based on an event.

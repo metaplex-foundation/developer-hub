@@ -8,7 +8,7 @@ description: Learn about the Permanent Burn Plugin for MPL Core Assets
 
 The Permanent Burn Plugin is a `Permanent` plugin that will always be present on the MPL Core Asset or MPL Core Collection to which it was added. A permanent plugin can only be added at the time of Asset or Collection creation. This plugin allows the authority of the plugin to burn the asset at any point in time.
 
-The Permanent Burn Plugin will work in areas such as;
+The Permanent Burn Plugin will work in areas such as:
 
 - Gaming event which triggers the burning of the asset.
 
