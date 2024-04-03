@@ -59,7 +59,7 @@ Explain the difference between storing in account state and ledger state. -->
 
 To create an Asset use the `createV1` instruction. The `createV1` instruction, in addition to setting the basic metadata of the Asset, encompasses the likes of adding your Asset to a collection and assigning plugins which is described a bit [later](#create-an-asset-with-plugins).
 
-Below is a simple example;
+Below is a simple example:
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details" %}
