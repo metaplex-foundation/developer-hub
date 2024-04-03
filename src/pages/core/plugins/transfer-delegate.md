@@ -6,12 +6,12 @@ description: Learn about the MPL Core Asset Transfer Plugin
 
 ## Overview
 
-The Transfer Plugin is a `Owner Managed` plugin that allows the authority of the program to transfer the nft at any given moment.
+The `Transfer Delegate` Plugin is a `Owner Managed` plugin that allows the authority of the Transfer Delegate Plugin to transfer the Asset at any time.
 
 The Transfer Plugin will work in areas such as;
 
 - Escrowless sale of the Asset.
-- Gaming scenario where the user swaps/looses their asset based on an event.
+- Gaming scenario where the user swaps/loses their asset based on an event.
 
 ## Works With
 

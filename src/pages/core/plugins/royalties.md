@@ -8,7 +8,7 @@ The Royalties Plugin is a `Authority Managed` plugin that allows the authority o
 
 This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collection`.
 
-When assigned to both MPL Core Asset and the MPL Core Collection the MPL Core Asset Royalties Plugin will take precedence over the MPL Core Collection Plugin known as a plugin overide.
+When assigned to both MPL Core Asset and the MPL Core Collection the MPL Core Asset Royalties Plugin will take precedence over the MPL Core Collection Plugin.
 
 ## Works With
 
@@ -29,11 +29,11 @@ The Royalties Plugin requires the following arguments.
 
 ## basisPoints
 
-This is the percentage in basispoints you wish to receieve in royalties on secondary sales. If your Royalties Plugin is set to 500 this means 5%. So if you sell a MPL Core Asset for 1 SOL your creators will recieve a total of 0.05 SOL to be distributed between them. Some of our SDKs provide helper methods like `percentAmount` in umi, so that you do not have to do the calculation yourself.
+This is the percentage in basispoints you wish creators from the creators array to receieve in royalties on secondary sales. If the Royalties Plugin is set to 500 this means 5%. So if you sell a MPL Core Asset for 1 SOL the Asset's designated creators will receive a total of 0.05 SOL to be distributed amongst them. Some of our SDKs provide helper methods like `percentAmount` in umi, so that you do not have to do the calculation yourself.
 
 ## Creators
 
-The creators list is a distribution list of where the earned royalties are sent. You can have up to 5 creators in your list that earn from royalties and the total share between all members must add up to 100%.
+The creators list is a distribution list for where earned royalties are distributed. You can have up to 5 creators in your list that earn from royalties. The total share between all members must add up to 100%.
 
 {% dialect-switcher title="Creators Array" %}
 {% dialect title="JavaScript" id="js" %}
@@ -74,7 +74,7 @@ let creators = vec![
 
 ## RuleSets
 
-RuleSets allow you to control what programs can or can not perform actions on your MPL Core Assets.
+RuleSets allow you to control what programs can or can not perform actions on the MPL Core Assets the Royalties plugin is assigned to.
 
 ### Allowlist
 

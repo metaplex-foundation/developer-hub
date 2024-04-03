@@ -85,11 +85,11 @@ pub async fn delegate_plugin_authority() {
 
 ## Revoking an Authority
 
-Revoking an Authority on a plugin can have different behaviours depending on what type of plugin is being revoked.
+Revoking an Authority on a plugin results in different behaviours depending on the plugin type that's being revoked.
 
-- **Owner Mananged Plugins:** If an address is revoked from an `Owner Managed Plugin` then the plugin will default back to the `Owner` authority type.
+- **Owner Managed Plugins:** If an address is revoked from an `Owner Managed Plugin` then the plugin will default back to the `Owner` authority type.
 
-- **Authority Mananged Plugins:** If an address is revoked from an `Authority Managed Plugin` then the plugin will default back to the `UpdateAuthority` authority type.
+- **Authority Managed Plugins:** If an address is revoked from an `Authority Managed Plugin` then the plugin will default back to the `UpdateAuthority` authority type.
 
 ### Who can Revoke a Plugin?
 
@@ -97,7 +97,7 @@ Revoking an Authority on a plugin can have different behaviours depending on wha
 
 - An Owner Managed Plugin can be revoked by the owner which revokes the delegate and sets the pluginAuthority type to `Owner`.
 - The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `Owner`.
-- On Transfer delegated Authorities of owner managed plugins are automatically revoked.
+- On Transfer, delegated Authorities of owner managed plugins are automatically revoked back to the `Owner Authority` type.
 
 #### Authority Managed Plugins
 
@@ -179,7 +179,7 @@ This includes:
 
 ## Making Plugin Data Immutable
 
-By updating your plugins authority to a `None` value will effectively make your plugin's data immutable.
+By updating your plugin's authority to a `None` value will effectively make your plugin's data immutable.
 
 {% callout type="warning" %}
 

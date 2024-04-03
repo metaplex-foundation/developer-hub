@@ -4,7 +4,7 @@ metaTitle: Core - Burn Delegate
 description: Learn about the MPL Core Asset Burn Delegate Plugin
 ---
 
-The Transfer Plugin is a `Owner Managed` plugin that allows the authority of the program to burn the nft at any given moment.
+The Transfer Plugin is a `Owner Managed` plugin that allows the authority of the program to burn the Asset at any given moment.
 
 The Burn Plugin will work in areas such as:
 

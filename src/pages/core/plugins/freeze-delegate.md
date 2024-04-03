@@ -6,7 +6,7 @@ description: Learn about the MPL Core Asset Freeze Delegate Plugin
 
 ## Overview
 
-The Freeze Plugin is a `Owner Managed` plugin that freezes the Asset dissallowing transfer. The authority of the plugin can revoke themselves or unfreeze at any time.
+The Freeze Plugin is a `Owner Managed` plugin that freezes the Asset disallowing transfer. The authority of the plugin can revoke themselves or unfreeze at any time.
 
 The Freeze Plugin will work in areas such as;
 

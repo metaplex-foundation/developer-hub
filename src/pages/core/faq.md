@@ -4,29 +4,32 @@ metaTitle: Core - FAQ
 description: Frequently asked questions about Core
 ---
 
-## Why does the Core account have both on-chain and off-chain data?
+## Why does the Core Asset and Collection accounts have both on-chain and off-chain data?
 
-The Core contains on-chain data, yet it also has a `URI` attribute which points to an off-chain JSON file which provides additional data. So why is that? Can't we just store everything on-chain? Well, there are several issues with that:
+The Core Asset and Collection accounts both contain on-chain data, yet both also includes a `URI` attribute that points to an off-chain JSON file which provides additional data. Why is that? Can't we just store everything on-chain? Well, there are several issues with storing data on-chain:
 
-- We have to pay rent to store data on-chain. If we had to store everything within the Metadata account, which may include long texts such as the description of an asset, it would require a lot more bytes and minting an asset would suddenly be a lot more expensive.
-- On-chain data is much less flexible. Once an account is created using a certain structure, it cannot easily be changed. Therefore, if we had to store everything on-chain, the standard would be a lot harder to evolve with the demands of the ecosystem.
-- If needed you can add additional on-chain data using the [attributes plugin](/core/plugins/attribute). It will store the data in the asset account and even be indexed in DAS. 
+- Storing data on-chain requires paying rent. If we had to store everything within the Asset or Collection account, which may include long texts such as the description of an asset, it would require a lot more bytes (more bytes means more rent) and creating an Asset would suddenly be a lot more expensive.
+- On-chain data is less flexible. Once an account state is created using a certain byte structure it cannot easily be changed without potentially causing deserialization issues. Therefore, if we had to store everything on-chain, the standard would be a lot harder to evolve with the demands of the ecosystem.
 
-Therefore, splitting the data into on-chain and off-chain data allows us to get the best of both worlds where on-chain data can be used by the program **to create guarantees and expectations for its users** whereas off-chain data can be used **to provide standardized yet flexible information**.
+Therefore, splitting the data into on-chain and off-chain data allows users to get the best of both worlds where on-chain data can be used by the program **to create guarantees and expectations for its users** and off-chain data can be used **to provide standardized yet flexible information**. But don't worry, if you want data entirely on chain Metaplex also offers [Inscriptions](/inscription) for this this purpose.
 
 ## Are there any costs to using Core?
 
-Core currently charges very small fee of 0.0015 SOL per Asset mint to the caller. More details can be found on the [Protocol Fees](/protocol-fees) page.
+Core currently charges a very small fee of 0.0015 SOL per Asset mint to the caller. More details can be found on the [Protocol Fees](/protocol-fees) page.
 
 ## How to create a Soulbound Asset?
 
-The Core Standard allows you to create Soulbound Assets. To achieve this you should use the [PermanentFreeze](/core/plugins/permanent-freeze) plugin. On creation you would set the Asset to be frozen without authority, so that it can not be thawed. 
+The Core Standard allows you to create Soulbound Assets. To achieve this use the [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate) plugin. On Asset creation you would include the `Permanent Freeze` plugin set to frozen, and with the authority set to none, making the plugins data immutable.
 
 {% dialect-switcher title="Create a Soulbound asset" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { createAsset, pluginAuthorityPair, nonePluginAuthority } from '@metaplex-foundation/mpl-core'
+import {
+  createAsset,
+  pluginAuthorityPair,
+  nonePluginAuthority,
+} from '@metaplex-foundation/mpl-core'
 
 await createAsset(umi, {
   owner,
@@ -49,4 +52,4 @@ _coming soon_
 
 ## What are the differences between Metaplex Token Metadata and Core?
 
-There are quite many differences. For example Core is cheaper, requires less Compute Units and should be easier to work with from a developer perspective. Have a look at the [differences](/core/tm-differences) page for details.
+Core is an entirely new standard designed specifically for NFTs, hence there are several notable differences. For example Core is cheaper, requires less Compute Units and should be easier to work with from a developer perspective. Have a look at the [differences](/core/tm-differences) page for details.
