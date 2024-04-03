@@ -16,13 +16,11 @@ During an Core Assets lifecycle, multiple events can be triggered such as:
 - Approve Authority Plugin
 - Remove Authority Plugin
 
-Lifecycle events impact the Asset in various ways from creation, to transfers between wallets, all the way through to the Assets destruction. Plugins attached an Asset level or a Collection level will run through a validation process during these lifecycle events to either `approve`, `reject`, or `force approve` the event from execution.
+Lifecycle events impact the Asset in various ways from creating, to transfers between wallets, all the way through to the Assets destruction. Plugins attached an Asset level or a Collection level will run through a validation process during these lifecycle events to either `approve`, `reject`, or `force approve` the event from execution.
 
 ## What are Plugins?
 
-Plugins are specific bits of data each containing certain that can be added and modified in a particular area of an Assets or Collections account state.
-
-Plugins can attach to both MPL Core Assets and also Collection Assets to modify the behaviour either at asset level or even collection level depending on the plugin.
+A plugin is like an onchain app for your NFT that can either store data or provide additional functionality to the asset.
 
 ## Types of Plugins
 
@@ -64,7 +62,7 @@ If an Permanent Plugin is added to an Asset/Collection without an authority set 
 
 ## Collection Plugins
 
-Collection Plugins are plugins that have a collection-wide effect. This is particularly useful for royalties because you can assign the [royalties plugin](/core/plugins/royalties) to the Collection Asset and all Assets in that collection will now reference that plugin.
+Collection Plugins are plugins that are added at the collection level can have a collection-wide effect. This is particularly useful for royalties because you can assign the [royalties plugin](/core/plugins/royalties) to the Collection Asset and all Assets in that collection will now reference that plugin.
 
 Collections only have access to `Permanent Plugins` and `Authority Managed Plugins`.
 
