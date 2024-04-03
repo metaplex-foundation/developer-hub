@@ -61,14 +61,14 @@ The Core Asset account represents the bare minimum data for a digital asset. Thi
 
 The onchain account structure of an MPL Core Asset. [Link](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
 
-| Name             | Type            | Size | Description                                        |                                                                                                                            |
-| ---------------- | --------------- | ---- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| key              | u8              | 1    | Discrimator of Account Type                        |                                                                                                                            |
-| owner            | pubKey          | 32   | The collection to which the Core Asset belongs to. |                                                                                                                            |
-| update_authority | enum<publicKey> | 33   | The authority or CollectionID of the new asset.    | [Link](https://github.com/metaplex-foundation/mpl-core/blob/main/clients/rust/src/generated/types/update_authority.rs#L14) |
-| name             | string          | 36   | The account paying for the storage fees.           |                                                                                                                            |
-| uri              | string          | 204  | The owner which should receive the asset.          |                                                                                                                            |
-| seq              | string          |      | The System Program account.                        |                                                                                                                            |
+| Name             | Type            | Size | Description                                                      |                                                                                                                            |
+| ---------------- | --------------- | ---- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| key              | u8              | 1    | Discrimator of Account Type                                      |                                                                                                                            |
+| owner            | pubKey          | 32   | The owner of the asset.                                          |                                                                                                                            |
+| update_authority | enum<publicKey> | 33   | The authority or CollectionID of the new asset.                  | [Link](https://github.com/metaplex-foundation/mpl-core/blob/main/clients/rust/src/generated/types/update_authority.rs#L14) |
+| name             | string          | 36   | The name of the asset.                                           |                                                                                                                            |
+| uri              | string          | 204  | The URI of the asset that points to the off-chain data.          |                                                                                                                            |
+| seq              | string          |      | The sequence number used for indexing with compression.          |                                                                                                                            |
 
 {% /totem-accordion %}
 {% /totem %}
