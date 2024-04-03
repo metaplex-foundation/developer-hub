@@ -19,7 +19,7 @@ The name refers to the vending machines that dispense candy for coins via a mech
 {% /quick-links %}
 
 {% callout %}
-This documentation refers to the latest iteration of Candy Machine known as Candy Machine V3. If you’re looking for Candy Machine V2, [please refer to this documentation instead](https://docs.metaplex.com/deprecated/candy-machine-v2/).
+This documentation refers to the latest iteration of Candy Machine known as Candy Machine V4. It allows minting Core Assets. If you are looking to mint MPL Token Metadata please have a look at [Candy Machine V3](/candy-machine) instead.
 {% /callout %}
 
 ## Introduction
