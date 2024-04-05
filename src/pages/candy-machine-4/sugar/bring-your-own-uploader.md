@@ -11,7 +11,7 @@ Sugar has an extensible architecture to easily allow the implementation of new u
 
 The use of the different traits is illustrated in the upload architecture overview below:
 
-![Uploader architecture](https://docs.metaplex.com/assets/images/UploaderOverview-c455b1d9ac30e0c664d77d49e5935b3d.png#radius#shadow)
+![Uploader architecture](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/UploaderOverview.png)
 
 To implement your uploader, the first step is to decide whether you need full control of the upload process or your method support parallel upload. This will inform which trait to implement. Independently of the trait that you implement, assets (files) requiring upload are represented by a `AssetInfo` struct:
 
