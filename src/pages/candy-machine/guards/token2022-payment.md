@@ -175,7 +175,7 @@ You may pass the Mint Settings of the Token Payment guard using the `mintArgs` a
 mintV2(umi, {
   // ...
   mintArgs: {
-    tokenPayment: some({
+    token2022Payment: some({
       mint: tokenMint.publicKey,
       destinationAta,
     }),
