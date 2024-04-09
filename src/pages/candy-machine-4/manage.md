@@ -22,9 +22,16 @@ Remember that a Candy Machine [must be associated with a Collection NFT](/candy-
 Here’s how you can create a Candy Machine using a brand new Collection NFT via the Umi library.
 
 ```ts
-import { createCollectionV1, pluginAuthorityPair } from '@metaplex-foundation/mpl-core'
+import {
+  createCollectionV1,
+  pluginAuthorityPair,
+} from '@metaplex-foundation/mpl-core'
 import { create } from '@metaplex-foundation/mpl-core-candy-machine'
-import { generateSigner, percentAmount, publicKey } from '@metaplex-foundation/umi'
+import {
+  generateSigner,
+  percentAmount,
+  publicKey,
+} from '@metaplex-foundation/umi'
 
 // Create the Collection NFT.
 const collectionAddress = generateSigner(umi)

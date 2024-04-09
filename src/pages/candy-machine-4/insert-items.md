@@ -4,57 +4,6 @@ metaTitle: Candy Machine - Inserting Items
 description: Explains how to load items into Candy Machines.
 ---
 
-So far we’ve learnt to create and configure Candy Machines but we’ve not seen how to insert items inside them that can then be minted into NFTs. Thus, let’s tackle that on this page. {% .lead %}
-
-It is important to remember that **inserting items only applies to Candy Machines using [Config Line Settings](/candy-machine-4/settings#config-line-settings)**. This is because NFTs minted from Candy Machine using [Hidden Settings](/candy-machine-4/settings#hidden-settings) will all share the same “hidden” name and URI.
-
-## Uploading JSON Metadata
-
-To insert items in a Candy Machine, you will need the following two parameters for each item:
-
-- Its **Name**: The name of the NFT that will be minted from this item. If a Name Prefix was provided in the Config Line Settings, you must only provide the part of the name that comes after that prefix.
-- Its **URI**: The URI pointing to the JSON metadata of the NFT that will be minted from this item. Here also, it excludes the URI Prefix that might have been provided in the Config Line Settings.
-
-If you do not have URIs for your items, you’ll first need to upload their JSON metadata one by one. This can either be using an off-chain solution — such as AWS or your own server — or an on-chain solution — such as Arweave or IPFS.
-
-Fortunately, our SDKs can help you with that. They allow you to upload a JSON object and retrieve its URI.
-
-Additionally, tools like [Sugar](/candy-machine-4/sugar) make uploading JSON metadata a breeze by uploading in parallel, caching the process and retrying failed uploads.
-
-{% dialect-switcher title="Upload items" %}
-{% dialect title="JavaScript" id="js" %}
-
-Umi ships with an `uploader` interface that can be used to upload JSON data to the storage provider of your choice. For instance, this is how you'd select the NFT.Storage implementation of the uploader interface.
-
-```ts
-import { nftStorage } from '@metaplex-foundation/umi-uploader-nft-storage'
-umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
-```
-
-You may then use the `upload` and `uploadJson` methods of the `uploader` interface to upload your assets and their JSON metadata.
-
-```ts
-import { createGenericFileFromBrowserFile } from '@metaplex-foundation/umi'
-
-// Upload the asset.
-const file = await createGenericFileFromBrowserFile(event.target.files[0])
-const [fileUri] = await umi.uploader.upload([file])
-
-// Upload the JSON metadata.
-const uri = await umi.uploader.uploadJson({
-  name: 'My NFT #1',
-  description: 'My description',
-  image: fileUri,
-})
-```
-
-API References: [UploaderInterface](https://umi-docs.vercel.app/interfaces/umi.UploaderInterface.html), [createGenericFileFromBrowserFile](https://umi-docs.vercel.app/functions/umi.createGenericFileFromBrowserFile.html).
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-## Inserting Items
-
 Now that we have a name and URI for all of our items, all we need to do is insert them into our Candy Machine account.
 
 This is an important part of the process and, when using Config Line Settings, **minting will not be permitted until all items have been inserted**.
