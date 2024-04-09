@@ -12,11 +12,11 @@
 
 ---
 
-- **symbol**
+<!-- - **symbol**
 - string
 - Symbol of the asset.
 
----
+--- -->
 
 - **description**
 - string
