@@ -6,7 +6,7 @@ description: Provides a high-level overview of the new Solana Core standard.
 
 Metaplex Core (“Core”) sheds the complexity and technical debt of previous standards and provides a clean and simple core spec for digital assets. This next generation Solana NFT standard uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets. {% .lead %}
 
-Come try out Core's features over at [https://core.metaplex.com/](https://core.metaplex.com/?env=devnet) and mint an Asset yourself!
+Come try out Core's features over at [https://core.metaplex.com/](https://core.metaplex.com/) and mint an Asset yourself!
 
 {% quick-links %}
 
@@ -16,7 +16,7 @@ Come try out Core's features over at [https://core.metaplex.com/](https://core.m
 
 {% quick-link title="Differences to MPL Token Metadata Overview" icon="AcademicCap" href="/core/tm-differences" description="Used to Token Metadata and want to see an overview of new features or changes behaviour?" /%}
 
-{% quick-link title="Try yourself in a UI!" icon="Beaker" href="https://core.metaplex.com/?env=devnet" target="_blank" description="Try Core yourself using an easy to use Website!" /%}
+{% quick-link title="Try yourself in a UI!" icon="Beaker" href="https://core.metaplex.com/" target="_blank" description="Try Core yourself using an easy to use Website!" /%}
 
 {% /quick-links %}
 
