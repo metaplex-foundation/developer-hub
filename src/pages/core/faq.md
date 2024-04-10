@@ -6,7 +6,7 @@ description: Frequently asked questions about Core
 
 ## Why does the Core Asset and Collection accounts have both on-chain and off-chain data?
 
-The Core Asset and Collection accounts both contain on-chain data, yet both also includes a `URI` attribute that points to an off-chain JSON file which provides additional data. Why is that? Can't we just store everything on-chain? Well, there are several issues with storing data on-chain:
+The Core Asset and Collection accounts both contain on-chain data, yet both also include a `URI` attribute that points to an off-chain JSON file which provides additional data. Why is that? Can't we just store everything on-chain? Well, there are several issues with storing data on-chain:
 
 - Storing data on-chain requires paying rent. If we had to store everything within the Asset or Collection account, which may include long texts such as the description of an asset, it would require a lot more bytes (more bytes means more rent) and creating an Asset would suddenly be a lot more expensive.
 - On-chain data is less flexible. Once an account state is created using a certain byte structure it cannot easily be changed without potentially causing deserialization issues. Therefore, if we had to store everything on-chain, the standard would be a lot harder to evolve with the demands of the ecosystem.
