@@ -348,7 +348,7 @@ The uri that appears on all Assets minted with hidden settings enabled.
 
 #### hash
 
-The purpose behind the hash is to store a crytopgraphic has/checksum of a piece of data that validates that each updated/revealed nft is the correct one matched to the index minted from the Candy Machine. This allows users to check the validation and if you have altered the data shared and in fact that `Hidden NFT #39` is also `Revealed NFT #39` and that the original data hasn't been tampered with to move rares around to specific people/holders.
+The purpose behind the hash is to store a crytopgraphic hash/checksum of a piece of data that validates that each updated/revealed nft is the correct one matched to the index minted from the Candy Machine. This allows users to check the validation and if you have altered the data shared and in fact that `Hidden NFT #39` is also `Revealed NFT #39` and that the original data hasn't been tampered with to move rares around to specific people/holders.
 
 {% dialect-switcher title="Hashing Reveal Data" %}
 {% dialect title="JavaScript" id="js" %}
