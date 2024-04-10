@@ -189,7 +189,7 @@ isMutable: boolean
 {% /dialect %}
 {% /dialect-switcher %}
 
-A boolean that markts an Asset as mutable or immutable upon creation.
+A boolean that marks an Asset as mutable or immutable upon creation.
 
 <!-- ### Creators
 
