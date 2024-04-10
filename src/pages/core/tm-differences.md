@@ -99,7 +99,7 @@ Additionally in Core freezing can be done on the **collection level**. A complet
 
 In TM you often have to check multiple Accounts to find the current status of an Asset and if it has been frozen, locked, or even in a transferable state. With Core this status is stored in the Asset account but can be also be affected by the Collection account.
 
-To make things easier we have introduced lifecycle helpers such as `canBurn`, `canTransfer`, `canUpdate` which come included in the `@metaplex-foundation/mpl-core package`. These helpers return a `boolean` value letting you know if the passed in address has permission to execute these lifecycle events.
+To make things easier we have introduced lifecycle helpers such as `canBurn`, `canTransfer`, `canUpdate` which come included in the `@metaplex-foundation/mpl-core` package. These helpers return a `boolean` value letting you know if the passed in address has permission to execute these lifecycle events.
 
 ```js
 const burningAllowed = canBurn(authority, asset, collection)
