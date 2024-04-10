@@ -340,7 +340,12 @@ hiddenSettings = {
 
 #### name
 
-The name that appears on all Assets minted with hidden settings enabled.
+The name that appears on all Assets minted with hidden settings enabled. Note that, just like for the prefixes of the Config Line Settings, special variables can be used for the Name and URI of the Hidden Settings. As a reminder, these variables are:
+
+- `$ID$`: This will be replaced by the index of the minted NFT starting at 0.
+- `$ID+1$`: This will be replaced by the index of the minted NFT starting at 1.
+
+You should use this to be able to match the NFTs that you want to your revealed data. 
 
 #### uri
 
@@ -348,7 +353,7 @@ The uri that appears on all Assets minted with hidden settings enabled.
 
 #### hash
 
-The purpose behind the hash is to store a crytopgraphic hash/checksum of a piece of data that validates that each updated/revealed nft is the correct one matched to the index minted from the Candy Machine. This allows users to check the validation and if you have altered the data shared and in fact that `Hidden NFT #39` is also `Revealed NFT #39` and that the original data hasn't been tampered with to move rares around to specific people/holders.
+The purpose behind the hash is to store a crytographic hash/checksum of a piece of data that validates that each updated/revealed nft is the correct one matched to the index minted from the Candy Machine. This allows users to check the validation and if you have altered the data shared and in fact that `Hidden NFT #39` is also `Revealed NFT #39` and that the original data hasn't been tampered with to move rares around to specific people/holders.
 
 {% dialect-switcher title="Hashing Reveal Data" %}
 {% dialect title="JavaScript" id="js" %}
