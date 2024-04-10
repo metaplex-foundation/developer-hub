@@ -6,7 +6,7 @@ description: Learn about the different types of Plugins available on MPL Core As
 
 ## Lifecycles
 
-During an Core Assets lifecycle, multiple events can be triggered such as:
+During a Core Assets lifecycle, multiple events can be triggered such as:
 
 - Creating
 - Transfering
