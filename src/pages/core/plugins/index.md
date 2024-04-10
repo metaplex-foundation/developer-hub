@@ -75,7 +75,7 @@ This can be used in creative ways like setting royalties at different levels for
 - Collection Asset has a Royalties Plugin assigned at 2%
 - A Super Rare MPL Core Asset within the collection has a Royalty Plugin assigned at 5%
 
-TIn the above case, regular MPL Core Asset sales from the collection will retain a 2% royalty while the Super Rare MPL Core Asset will retain a 5% royalty at sale because it has it's own Royalties Plugin that takes precedence over the Collection Asset Royalties Plugin.
+In the above case, regular MPL Core Asset sales from the collection will retain a 2% royalty while the Super Rare MPL Core Asset will retain a 5% royalty at sale because it has it's own Royalties Plugin that takes precedence over the Collection Asset Royalties Plugin.
 
 ## Plugin Table
 
