@@ -8,7 +8,7 @@ description: Frequently asked questions about Core
 
 The Core Asset and Collection accounts both contain on-chain data, yet both also include a `URI` attribute that points to an off-chain JSON file which provides additional data. Why is that? Can't we just store everything on-chain? Well, there are several issues with storing data on-chain:
 
-- Storing data on-chain requires paying rent. If we had to store everything within the Asset or Collection account, which may include long texts such as the description of an asset, it would require a lot more bytes (more bytes means more rent) and creating an Asset would suddenly be a lot more expensive.
+- Storing data on-chain requires paying rent. If we had to store everything within the Asset or Collection account, which may include long texts such as the description of an asset, it would require a lot more bytes and creating an Asset would suddenly be a lot more expensive, since storing more bytes means more rent has to be paid
 - On-chain data is less flexible. Once an account state is created using a certain byte structure it cannot easily be changed without potentially causing deserialization issues. Therefore, if we had to store everything on-chain, the standard would be a lot harder to evolve with the demands of the ecosystem.
 
 Therefore, splitting the data into on-chain and off-chain data allows users to get the best of both worlds where on-chain data can be used by the program **to create guarantees and expectations for its users** and off-chain data can be used **to provide standardized yet flexible information**. But don't worry, if you want data entirely on chain Metaplex also offers [Inscriptions](/inscription) for this this purpose.
