@@ -5,11 +5,11 @@ description: Learn how to add plugins to MPL Core Assets and Collections
 ---
 
 Plugins can be assigned to both the MPL Core Asset and also the MPL Core Collection. MPL
-Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on both entities visit the [Plugins Overview](/core/plugins) area.
+Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on each visit the [Plugins Overview](/core/plugins) area.
 
 ## Adding a Plugin to a Core Asset
 
-Plugins support the ability to assign an authority over the plugin. If an `initAuthority` is passed in this will set the authority to the desired address. If unassigned then the signer will be the default authority set for the plugin.
+Plugins support the ability to assign an authority over the plugin. If an `initAuthority` argument is supplied this will set the authority to the desired plugin authority type. If left unassigned the plugins default authority type will be assigned (next section).
 
 **Create Plugin Helper**
 
@@ -22,7 +22,7 @@ If you add a plugin to an Asset or Collection without specifying the authority o
 
 - Owner Managed Plugins will default to the plugin authority type of `Owner`.
 - Authority Managed Plugins will default to the plugin authority type of `UpdateAuthority`.
-- Permanment Plugins will default to the plugin authority type of `UpdateAuthority`
+- Permanent Plugins will default to the plugin authority type of `UpdateAuthority`
 
 {% dialect-switcher title="Adding a Plugin with the default authority" %}
 {% dialect title="JavaScript" id="js" %}
@@ -94,7 +94,7 @@ There are a few authority helpers to aid you in setting the authorities of plugi
 addressPluginAuthority(publicKey)
 ```
 
-This sets the plugins authority to a specific address.
+This sets the plugin's authority to a specific address.
 
 **ownerPluginAuthority()**
 
@@ -102,7 +102,7 @@ This sets the plugins authority to a specific address.
 ownerPluginAuthority()
 ```
 
-This sets the plugins authority to the type of `Owner`.
+This sets the plugin's authority to the type of `Owner`.
 The current owner of the Asset will have access to this plugin.
 
 **updatePluginAuthority()**
@@ -111,7 +111,7 @@ The current owner of the Asset will have access to this plugin.
 updatePluginAuthority()
 ```
 
-This sets the plugins authority to the type of `UpdateAuthority`.
+This sets the plugin's authority to the type of `UpdateAuthority`.
 The current update authority of the Asset will have access to this plugin.
 
 **nonePluginAuthority()**
@@ -120,8 +120,8 @@ The current update authority of the Asset will have access to this plugin.
 nonePluginAuthority()
 ```
 
-This sets the plugins authority to the type of `None`.
-The plugins data if it has any becomes immutable at this point.
+This sets the plugin's authority to the type of `None`.
+The plugin's data if it has any becomes immutable at this point.
 
 {% dialect-switcher title="Adding a Plugin with an assigned authority" %}
 {% dialect title="Rust" id="rust" %}
@@ -199,7 +199,7 @@ await addPluginV1(umi, {
 
 ## Adding a Plugin to a Collection
 
-Plugins support the ability to assign an authority over the plugin. If an `initAuthority` is passed in this will set the authority to the desired address. If unassigned then the signer will be the default authority set for the plugin.
+Adding a Plugin to a Core Collection is similar to that of adding to a Core Asset. You can add plugins during creation and also using the `addCollectionV1` instruction. Collections only have access to `Authority Plugins` and `Permanent Plugins`.
 
 ### Adding a Collection Plugin with the default authority
 

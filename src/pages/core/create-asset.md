@@ -15,7 +15,7 @@ Let's dig into these steps in more detail, whilst providing concrete code exampl
 
 ## Uploading off-chain data
 
-You may use any service to upload your off-chain data or simply store it on your own server but it is worth noting that some of our SDKs can help with that. They use a plugin system that allows you to select the uploader of your choice and offer a unified interface for you to upload your data.
+You may use any storage service (Arweave, IPFS, AWS etc...) to upload your off-chain data or simply store it on your own server. To make some of these easier for the user `Umi` has some dedicated plugins including the likes of `Irys (uploads to Arwevea)` and `nftStorage (uploads to IPFS)`. Once a plugin is selected this grants the user a unified interface for you to upload your data.
 
 {% dialect-switcher title="Upload assets and JSON data" %}
 {% dialect title="JavaScript" id="js" %}
@@ -57,7 +57,9 @@ Explain the difference between storing in account state and ledger state. -->
 
 ## Create an Asset
 
-To create an asset the `create` instruction should be used. Below is a simple example, you can do more things with it, like adding your asset to a collection, or assigning plugins which is described [later](#create-an-asset-with-plugins).
+To create an Asset use the `createV1` instruction. The `createV1` instruction, in addition to setting the basic metadata of the Asset, encompasses the likes of adding your Asset to a collection and assigning plugins which is described a bit [later](#create-an-asset-with-plugins).
+
+Below is a simple example:
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details" %}
@@ -221,7 +223,7 @@ Note that when setting the `mint` account, it is require to specify a `bool` fla
 
 ## Create an Asset into a Collection
 
-MPL Core Assets can be minted straight into a collection providing you already have your MPL Core Collection premade before hand. To create a Collection Asset visit [here](/core/collections).
+MPL Core Assets can be created straight into a collection if your MPL Core Collection already exists. To create a Collection Asset visit [here](/core/collections).
 
 {% dialect-switcher title="Create Asset into Collection" %}
 {% dialect title="JavaScript" id="js" %}
@@ -337,7 +339,7 @@ let create_ix = CreateV1CpiBuilder::new()
 
 ## Create an Asset with Plugins
 
-MPL Core Assets support the use of plugins at both a Collection and at an Asset level. To create a Core Asset with a plugin you pass in the plugin and it's parameters into the `plugins` array arg during creation. The below example creates a mint with the `Freeze` plugin.
+MPL Core Assets support the use of plugins at both the Collection and Asset levels. To create a Core Asset with a plugin you pass in the plugin type and its parameters into the `plugins` array arg during creation. The below example creates a mint with the `Freeze` plugin.
 
 {% dialect-switcher title="Create Asset with Plugin" %}
 {% dialect title="JavaScript" id="js" %}

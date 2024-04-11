@@ -6,7 +6,7 @@ description: What is an MPL Core Asset
 
 ## Overview
 
-Different to other existing Asset programs, like [Solana’s Token program](https://spl.solana.com/token) it does not rely on multiple accounts, like Associated Token Accounts, but stores the relationship between a wallet and the "mint" account in the asset itself.
+Setting itself apart from existing Asset programs, like [Solana’s Token program](https://spl.solana.com/token), Metaplex Core does not rely on multiple accounts, like Associated Token Accounts. Instead, Core stores the relationship between a wallet and the "mint" account in the asset itself.
 
 {% diagram %}
 {% node %}
@@ -75,9 +75,9 @@ The onchain account structure of an MPL Core Asset. [Link](https://github.com/me
 
 ## Is my Asset in a Collection?
 
-MPL Core Assets can belong to collections. The `updateAuthority` field in the MPL Core Asset data provides two duties, either to report the update authority of the Asset, or to provide the publicKey of the MPL Core Collection it belongs too.
+MPL Core Assets can belong to collections. The `updateAuthority` field in the MPL Core Asset data provides two duties, either to report the update authority of the Asset, or to provide the publicKey of the MPL Core Collection to which it belongs.
 
-When accessing the `updateAuthority` field either directly via the asset or via the `collectionAddress` helper of the MPL Core Asset you will be returned with one of these 3 following outcomes;
+When accessing the `updateAuthority` field either directly via the asset, or via the `collectionAddress` helper of the MPL Core Asset, the returning result will be one of the following outcomes:
 
 **Collection**
 

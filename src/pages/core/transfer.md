@@ -4,7 +4,7 @@ metaTitle: Core - Transferring Assets
 description: Learn how to transfer Assets on Core
 ---
 
-The owner of an Asset can transfer ownership to another account by using the `transfer` instruction to the MPL Core program.
+The owner of a Core Asset can transfer ownership to another account by using the `transfer` instruction to the MPL Core program.
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details" %}
@@ -25,7 +25,7 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 {% /totem-accordion %}
 {% /totem %}
 
-## Transfering an Asset
+## Transferring a Core Asset
 
 {% dialect-switcher title="Transfer an Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -89,7 +89,7 @@ pub async fn transfer_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Transfering an Asset in a Collection
+## Transferring a Core Asset in a Collection
 
 If you are transfering an Asset which has a collection you will need to pass the collection address in.
 [How to tell if an asset is in a Collection?]()

@@ -8,7 +8,7 @@ The Attribute Plugin is a `Authority Managed` plugin that can store key value pa
 
 The Attribute Plugin will work in areas such as:
 
-- Storing on chain attributes/traits of the Asset which can be read by on chain progams.
+- Storing on chain attributes/traits of the Asset which can be read by on chain programs.
 - Storing health and other statistical data that can be modified by a game/program.
 
 ## Works With
@@ -26,7 +26,7 @@ The Attribute Plugin will work in areas such as:
 
 ## AttributeList
 
-The attribute list constists of an Array[] then an object of key-value pairs `{key: "value"}` string value pairs.
+The attribute list consists of an Array[] then an object of key-value pairs `{key: "value"}` string value pairs.
 
 {% dialect-switcher title="AttributeList" %}
 {% dialect title="JavaScript" id="js" %}

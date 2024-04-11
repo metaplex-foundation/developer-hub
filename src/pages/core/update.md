@@ -4,7 +4,7 @@ metaTitle: Core - Updating Assets
 description: Learn how to update Assets on Core
 ---
 
-The update authority or delegate of an Asset has the ability to change some of the core Asset data.
+The update authority or delegate of a Core Asset has the ability to change some of the Asset's data.
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details" %}
@@ -34,7 +34,7 @@ A full detailed look at the on chain instruction it can be viewed here. [Github]
 {% /totem-accordion %}
 {% /totem %}
 
-## Updating an Asset
+## Updating a Core Asset
 
 Here is how you can use our SDKs to update an MPL Core Asset.
 
@@ -99,7 +99,7 @@ pub async fn update_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Making Asset Data Immutable
+## Making a Core Asset Data Immutable
 
 Here is how you can use our SDKs to update an MPL Core Asset.
 

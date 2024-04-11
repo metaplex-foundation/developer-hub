@@ -224,7 +224,7 @@ pub async fn create_collection_with_plugin() {
 
 ## Updating a Collection
 
-To update the data of a Core Collection you can use the `UpdateCollection` instruction. You want to use this for example when you need to change the name of a collection.
+To update the data of a Core Collection use the `UpdateCollection` instruction. For example, you use this instruction to change the name of a collection.
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details - UpdateCollectionV1" %}
@@ -320,7 +320,7 @@ pub async fn update_collection() {
 
 ## Updating a Collection Plugin
 
-If you want to change the behaviour of a plugin that is attached to a collection you may want to use the `updateCollectionPlugin` instruction.
+If you want to change the behaviour of a plugin that is attached to a Core Collection you may want to use the `updateCollectionPlugin` instruction.
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details - UpdateCollectionPluginV1" %}

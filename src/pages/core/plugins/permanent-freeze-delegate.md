@@ -6,9 +6,9 @@ description: Learn about the Permanent Freeze Plugin for MPL Core Assets
 
 ## Overview
 
-The Freeze Plugin is a `Permanent` plugin will always be present on the MPL Core Asset or MPL Core Collection. A permanent plugin can only be added at the time of Asset or Collection creation.
+The Permanent Freeze Delegate plugin is a `Permanent` plugin that will always be present on the MPL Core Asset or MPL Core Collection to which it is added. A permanent plugin can only be added at the time of Asset or Collection creation.
 
-The Permanent Freeze Plugin will work in areas such as;
+The Permanent Freeze Plugin will work in areas such as:
 
 - Soulbound Tokens.
 

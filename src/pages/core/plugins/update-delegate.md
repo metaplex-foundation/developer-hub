@@ -6,9 +6,9 @@ description: Learn how to delegate a update authority on Core
 
 The Update Delegate is a `Authority Managed` plugin that allows the authority of the MPL Core Asset to assign an Update Delegate to the Asset.
 
-The Update Delegate Plugin will work in areas such as:
+The Update Delegate Plugin can be used when:
 
-- scenarios where you need a 3rd party to update/edit the entire MPL Core Asset.
+- you need a 3rd party to update/edit the entire MPL Core Asset.
 
 ## Works With
 
