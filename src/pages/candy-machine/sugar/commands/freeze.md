@@ -14,6 +14,8 @@ sugar freeze initialize --period <SECONDS>
 
 where `--period` determines the interval in seconds that minted assets will be frozen. After this period, holders can thaw their assets.
 
+If the freeze Guard is not in the `default` group `--label <LABEL>` has to be added, too.
+
 {% callout %}
 
 You can only initialize the freeze once. After initialization, it is not possible to update the period.
