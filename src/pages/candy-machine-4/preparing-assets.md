@@ -78,6 +78,10 @@ nftStorage uploads your files to the IPFS (InterPlanetary File System) network
 
 To upload to nftStorage you can follow their [API](https://app.nft.storage/v1/docs/intro) documentation.
 
+#### Self Hosting
+
+There is also nothing wrong with self hosting your images on metadata either in AWS, Google Cloud, or even your own webserver. As long as the data is accessible from it's stored location and doesn't have something like CORS blocking it then you should be good. It would be advised to make either a few test Core Assets or small Candy Machine to test self hosted options to make sure the stored data is viewable.
+
 ### Uploading Files with Umi
 
 Umi has a few plugins that can aid the upload process via plugins. At the time the following plugins are supported:

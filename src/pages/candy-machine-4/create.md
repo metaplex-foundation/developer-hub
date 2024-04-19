@@ -6,8 +6,9 @@ description: Learn how to create your CMV4 and it's various settings.
 
 ## Prerequisites
 
+- [Prepared Assets](/candy-machine-4/preparing-assets)
 - [Create Core Collection](/core/collections#creating-a-collection)
-<!-- - [Prepared Assets](/candy-machine-4/preparing-assets) -->
+
 
 If you wish to create your Candy Machine Assets into a collection (new or existing) you will need to supply the Core Collection upon creation of the Candy Machine V4.
 
