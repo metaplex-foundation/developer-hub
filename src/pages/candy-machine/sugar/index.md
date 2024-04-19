@@ -27,7 +27,7 @@ sugar
 
 This will display a list of commands and their short description:
 ```
-sugar-cli 2.5.0
+sugar-cli 2.7.1
 Command line tool for creating and managing Metaplex Candy Machines.
 
 USAGE:
