@@ -32,9 +32,10 @@ export const candyMachine4 = {
 
           links: [
             {
-              title: 'Breakdown of a CMV4',
-              href: '/candy-machine-4/breakdown',
+              title: 'Overview',
+              href: '/candy-machine-4/overview',
             },
+            { title: 'Candy Guards', href: '/candy-machine-4/guards' },
             {
               title: 'Preparing Assets',
               href: '/candy-machine-4/preparing-assets',
@@ -45,18 +46,17 @@ export const candyMachine4 = {
               href: '/candy-machine-4/create',
             },
             {
-              title: 'Updating a Candy Machine',
+              title: 'Updating a Candy Machine and Guards',
               href: '/candy-machine-4/update',
             },
             { title: 'Inserting Items', href: '/candy-machine-4/insert-items' },
-            { title: 'Candy Guards', href: '/candy-machine-4/guards' },
             {
               title: 'Guard Groups and Phases',
               href: '/candy-machine-4/guard-groups',
             },
             {
               title: 'Fetching a Candy Machine',
-              href: '/candy-machine-4/fetch',
+              href: '/candy-machine-4/fetching-a-candy-machine',
             },
             {
               title: 'Minting from a Candy Machine',
@@ -64,7 +64,7 @@ export const candyMachine4 = {
             },
             {
               title: 'Withdrawing a Candy Machine',
-              href: '/candy-machine-4/mint',
+              href: '/candy-machine-4/withdrawing-a-candy-machine',
             },
 
             // {
@@ -88,7 +88,7 @@ export const candyMachine4 = {
           ],
         },
         {
-          title: 'Guards',
+          title: 'Available Guards',
           links: [
             {
               title: 'Address Gate',
@@ -237,11 +237,13 @@ export const candyMachine4 = {
         },
       ],
     },
+    
     {
       ...referencesSection('candy-machine-4'),
       href: `https://mpl-core-candy-machine-js-docs.vercel.app/`,
       target: '_blank',
     },
+    
     /*
     {
       ...recipesSection('candy-machine'),

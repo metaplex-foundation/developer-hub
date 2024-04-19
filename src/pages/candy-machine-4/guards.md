@@ -201,37 +201,8 @@ In the following list, we’ll provide a short description of each guard with a 
 - [**Token Gate**](/candy-machine-4/available-guards/token-gate): Restricts the mint to holders of a specified token.
 - [**Token Payment**](/candy-machine-4/available-guards/token-payment): Set the price of the mint in token amount.
 
-## Creating a Candy Machine with guards
 
-So far, the Candy Machine we created did not have any guards enabled. Now that we know all the guards available to us, let’s see how we can set up new Candy Machines with some guards enabled.
-
-The concrete implementation will depend on which SDK you are using (see below) but the main idea is that you enable guards by providing their required settings. Any guard that has not been set up will be disabled.
-
-{% dialect-switcher title="Create a Candy Machine with guards" %}
-{% dialect title="JavaScript" id="js" %}
-
-To enable guards using the Umi library, simply provides the `guards` attribute to the `create` function and pass in the settings of every guard you want to enable. Any guard set to `none()` or not provided will be disabled.
-
-```ts
-import { some, sol, dateTime } from '@metaplex-foundation/umi'
-
-await create(umi, {
-  // ...
-  guards: {
-    botTax: some({ lamports: sol(0.01), lastInstruction: true }),
-    solPayment: some({ lamports: sol(1.5), destination: treasury }),
-    startDate: some({ date: dateTime('2023-04-04T16:00:00Z') }),
-    // All other guards are disabled...
-  },
-}).sendAndConfirm(umi)
-```
-
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-## Updating guards
+<!-- ## Updating guards
 
 Did you set something wrong in your guards? Did you change your mind about the mint price? Do you need to delay the start of the mint of a little? No worries, guards can easily be updated following the same settings used when creating them.
 
@@ -383,7 +354,7 @@ await unwrap({
 API References: [createCandyMachineV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyMachineV2.html), [createCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyGuard.html), [wrap](https://mpl-core-candy-machine-js-docs.vercel.app/functions/wrap.html), [unwrap](https://mpl-core-candy-machine-js-docs.vercel.app/functions/unwrap.html)
 
 {% /dialect %}
-{% /dialect-switcher %}
+{% /dialect-switcher %} -->
 
 ## Conclusion
 

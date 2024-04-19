@@ -7,6 +7,7 @@ description: Learn how to create your CMV4 and it's various settings.
 ## Prerequisites
 
 - [Create Core Collection](/core/collections#creating-a-collection)
+<!-- - [Prepared Assets](/candy-machine-4/preparing-assets) -->
 
 If you wish to create your Candy Machine Assets into a collection (new or existing) you will need to supply the Core Collection upon creation of the Candy Machine V4.
 
@@ -17,11 +18,11 @@ If you wish to create your Candy Machine Assets into a collection (new or existi
 
 ```ts
 // Create the Candy Machine.
-import { createCandyMachineV2 } from '@metaplex-foundation/mpl-core-candy-machine'
+import { createCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = generateSigner(umi)
 
-await createCandyMachineV2(umi, {
+await createCandyMachine(umi, {
   candyMachine,
   collection: collectionMint.publicKey,
   collectionUpdateAuthority,
@@ -33,9 +34,30 @@ await createCandyMachineV2(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Args
+### Args
 
-Available arguments that can be passed into the createCandyMachineV2 function.
+Available arguments that can be passed into the createCandyMachine function.
+
+A newly generated keypair/signer that is used to create the candymachine.
+
+{% dialect-switcher title="Create CandyMahcine Args" %}
+{% dialect title="JavaScript" id="js" %}
+
+| name                      | type                          |
+| ------------------------- | ----------------------------- |
+| candyMachine              | signer                        |
+| authorityPda (optional)   | publicKey                     |
+| authority (optional)      | publicKey                     |
+| payer (optional)          | signer                        |
+| collection                | publicKey                     |
+| collectionUpdateAuthority | signer                        |
+| itemsAvailable            | number                        |
+| isMutable                 | boolean                       |
+| configLineSettings        | [link](#config-line-settings) |
+| hiddenSettings            | [link](#hidden-settings)      |
+
+{% /dialect %}
+{% dialect title="Rust" id="rust" %}
 
 | name                      | type                          |
 | ------------------------- | ----------------------------- |
@@ -50,168 +72,8 @@ Available arguments that can be passed into the createCandyMachineV2 function.
 | configLineSettings        | [link](#config-line-settings) |
 | hiddenSettings            | [link](#hidden-settings)      |
 
-### candyMachine
-
-A newly generated keypair/signer that is used to create the candymachine.
-
-{% dialect-switcher title="Authority" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-candyMachine: signer
-```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### authorityPda (optional)
-
-{% dialect-switcher title="Authority" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-authorityPda: string
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-The authorityPda field is the PDA used to verify minted NFTs to the collection. This is optional an is calculated automatically based on default seeds if left.
-
-### authority (optional)
-
-{% dialect-switcher title="authority" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-authority: string
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-### payer (optional)
-
-The wallet that pays for the transaction and rent costs. Defaults to signer.
-
-{% dialect-switcher title="authority" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-payer: publicKey
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-The authority field is the wallet/publicKey that will be the authority over the candymachine.
-
-### Collection
-
-The collection the Candy Machine will create Assets into.
-
-{% dialect-switcher title="authority" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-collection: publicKey
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-### Collection Update Authority
-
-Update authority of the collection. This needs to be a signer so the Candy Machine can approve a delegate to verify created Assets to the Collection.
-
-{% dialect-switcher title="authority" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-collectionUpdateAuthority: signer
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-<!-- ### Seller Fee Basis Points
-
-{% dialect-switcher title="sellerFeeBasisPoints" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-sellerFeeBasisPoints: number
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-The `sellerFeeBasisPoints` fields is the royalty basis points that will be written to each created Asset from the Candy Machine.
-This is designated as a number based on 2 decimal places, so `500` basis points is eqaul to `5%`.
-
-There is also a `percentageAmount` helper than can also be used for calculation that can be imported from the `umi` library.
-
-{% dialect-switcher title="percentageAmount" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { percentAmount } from '@metaplex-foundation/umi'
-
-sellerFeeBasisPoints: percentageAmount(5)
-```
-
-{% /dialect %}
-{% /dialect-switcher %} -->
-
-### itemsAvailable
-
-{% dialect-switcher title="percentageAmount" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-isMutable: number
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-The number of items being loaded into the candymachine.
-
-### Is Mutable
-
-{% dialect-switcher title="percentageAmount" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-isMutable: boolean
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-A boolean that markts an Asset as mutable or immutable upon creation.
-
-<!-- ### Creators
-
-// Do we even need these anymore? Should this now set the Royalties plugin on the Collection Asset.
-
-An array of creators that is writen to the `Royalties` plugin
-
-{% dialect-switcher title="percentageAmount" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-creators : {
-  address: publicKey,
-  share: number
-}[]
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-
-//Todo: Currently needs fixing in the program and client to remove verified. -->
 
 ### Config Line Settings
 
@@ -404,6 +266,38 @@ await createCandyMachineV2(umi, {
   }
 }).sendAndConfirm(umi)
 ```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Creating a Candy Machine with guards
+
+To create a `Candy Machine` with `Guards` you can supply the `guards:` field during creation and supply the default guards you with to apply to the Candy Machine.s 
+
+So far, the Candy Machine we created did not have any guards enabled. Now that we know all the guards available to us, let’s see how we can set up new Candy Machines with some guards enabled.
+
+The concrete implementation will depend on which SDK you are using (see below) but the main idea is that you enable guards by providing their required settings. Any guard that has not been set up will be disabled.
+
+{% dialect-switcher title="Create a Candy Machine with guards" %}
+{% dialect title="JavaScript" id="js" %}
+
+<!-- To enable guards using the Umi library, simply provides the `guards` attribute to the `create` function and pass in the settings of every guard you want to enable. Any guard set to `none()` or not provided will be disabled. -->
+
+```ts
+import { some, sol, dateTime } from '@metaplex-foundation/umi'
+
+await create(umi, {
+  // ...
+  guards: {
+    botTax: some({ lamports: sol(0.01), lastInstruction: true }),
+    solPayment: some({ lamports: sol(1.5), destination: treasury }),
+    startDate: some({ date: dateTime('2023-04-04T16:00:00Z') }),
+    // All other guards are disabled...
+  },
+}).sendAndConfirm(umi)
+```
+
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
