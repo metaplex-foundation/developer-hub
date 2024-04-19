@@ -92,6 +92,9 @@ OPTIONS:
     -l, --log-level <LOG_LEVEL>
             Log level: trace, debug, info, warn, error, off
 
+    -p, --priority-fee <PRIORITY_FEE>
+            Priority fee value [default: 500]
+
     -r, --rpc-url <RPC_URL>
             RPC Url
 ```
