@@ -75,6 +75,158 @@ A newly generated keypair/signer that is used to create the candymachine.
 {% /dialect %}
 {% /dialect-switcher %}
 
+<<<<<<< HEAD
+=======
+### authorityPda (optional)
+
+{% dialect-switcher title="Authority" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+authorityPda: string
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+The authorityPda field is the PDA used to verify minted NFTs to the collection. This is optional an is calculated automatically based on default seeds if left.
+
+### authority (optional)
+
+{% dialect-switcher title="authority" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+authority: string
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+### payer (optional)
+
+The wallet that pays for the transaction and rent costs. Defaults to signer.
+
+{% dialect-switcher title="authority" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+payer: publicKey
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+The authority field is the wallet/publicKey that will be the authority over the candymachine.
+
+### Collection
+
+The collection the Candy Machine will create Assets into.
+
+{% dialect-switcher title="authority" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+collection: publicKey
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Collection Update Authority
+
+Update authority of the collection. This needs to be a signer so the Candy Machine can approve a delegate to verify created Assets to the Collection.
+
+{% dialect-switcher title="authority" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+collectionUpdateAuthority: signer
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+<!-- ### Seller Fee Basis Points
+
+{% dialect-switcher title="sellerFeeBasisPoints" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+sellerFeeBasisPoints: number
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+The `sellerFeeBasisPoints` fields is the royalty basis points that will be written to each created Asset from the Candy Machine.
+This is designated as a number based on 2 decimal places, so `500` basis points is eqaul to `5%`.
+
+There is also a `percentageAmount` helper than can also be used for calculation that can be imported from the `umi` library.
+
+{% dialect-switcher title="percentageAmount" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { percentAmount } from '@metaplex-foundation/umi'
+
+sellerFeeBasisPoints: percentageAmount(5)
+```
+
+{% /dialect %}
+{% /dialect-switcher %} -->
+
+### itemsAvailable
+
+{% dialect-switcher title="percentageAmount" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+isMutable: number
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+The number of items being loaded into the candymachine.
+
+### Is Mutable
+
+{% dialect-switcher title="percentageAmount" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+isMutable: boolean
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+A boolean that marks an Asset as mutable or immutable upon creation.
+
+<!-- ### Creators
+
+// Do we even need these anymore? Should this now set the Royalties plugin on the Collection Asset.
+
+An array of creators that is writen to the `Royalties` plugin
+
+{% dialect-switcher title="percentageAmount" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+creators : {
+  address: publicKey,
+  share: number
+}[]
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+
+//Todo: Currently needs fixing in the program and client to remove verified. -->
+
+>>>>>>> 3474e3fffe276bfb8069c4484205737f318a5542
 ### Config Line Settings
 
 Config Line Settings is an optional field that allows advanced options of adding your Asset data to the Candymachine making the Candymachine's rent cost significantly cheaper.
@@ -202,7 +354,12 @@ hiddenSettings = {
 
 #### name
 
-The name that appears on all Assets minted with hidden settings enabled.
+The name that appears on all Assets minted with hidden settings enabled. Note that, just like for the prefixes of the Config Line Settings, special variables can be used for the Name and URI of the Hidden Settings. As a reminder, these variables are:
+
+- `$ID$`: This will be replaced by the index of the minted NFT starting at 0.
+- `$ID+1$`: This will be replaced by the index of the minted NFT starting at 1.
+
+You should use this to be able to match the NFTs that you want to your revealed data. 
 
 #### uri
 
@@ -210,7 +367,7 @@ The uri that appears on all Assets minted with hidden settings enabled.
 
 #### hash
 
-The purpose behind the hash is to store a crytopgraphic has/checksum of a piece of data that validates that each updated/revealed nft is the correct one matched to the index minted from the Candy Machine. This allows users to check the validation and if you have altered the data shared and in fact that `Hidden NFT #39` is also `Revealed NFT #39` and that the original data hasn't been tampered with to move rares around to specific people/holders.
+The purpose behind the hash is to store a crytographic hash/checksum of a piece of data that validates that each updated/revealed nft is the correct one matched to the index minted from the Candy Machine. This allows users to check the validation and if you have altered the data shared and in fact that `Hidden NFT #39` is also `Revealed NFT #39` and that the original data hasn't been tampered with to move rares around to specific people/holders.
 
 {% dialect-switcher title="Hashing Reveal Data" %}
 {% dialect title="JavaScript" id="js" %}
