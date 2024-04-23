@@ -183,6 +183,7 @@ Alright, now that we understand what guards are, let’s see what default guards
 In the following list, we’ll provide a short description of each guard with a link pointing to their dedicated page for more advanced reading.
 
 - [**Address Gate**](/candy-machine-4/available-guards/address-gate): Restricts the mint to a single address.
+- [**Allocation**](/candy-machine-4/available-guards/allocation): Allows specifying a limit on the number of NFTs each guard group can mint.
 - [**Allow List**](/candy-machine-4/available-guards/allow-list): Uses a wallet address list to determine who is allowed to mint.
 - [**Bot Tax**](/candy-machine-4/available-guards/bot-tax): Configurable tax to charge invalid transactions.
 - [**End Date**](/candy-machine-4/available-guards/end-date): Determines a date to end the mint.
@@ -193,6 +194,7 @@ In the following list, we’ll provide a short description of each guard with a 
 - [**Nft Burn**](/candy-machine-4/available-guards/nft-burn): Restricts the mint to holders of a specified collection, requiring a burn of the NFT.
 - [**Nft Gate**](/candy-machine-4/available-guards/nft-gate): Restricts the mint to holders of a specified collection.
 - [**Nft Payment**](/candy-machine-4/available-guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
+- [**Program Gate**](/candy-machine-4/available-guards/program-gate): restricts the programs that can be in a mint transaction.
 - [**Redeemed Amount**](/candy-machine-4/available-guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
 - [**Sol Payment**](/candy-machine-4/available-guards/sol-payment): Set the price of the mint in SOL.
 - [**Start Date**](/candy-machine-4/available-guards/start-date): Determines the start date of the mint.
@@ -200,6 +202,7 @@ In the following list, we’ll provide a short description of each guard with a 
 - [**Token Burn**](/candy-machine-4/available-guards/token-burn): Restricts the mint to holders of a specified token, requiring a burn of the tokens.
 - [**Token Gate**](/candy-machine-4/available-guards/token-gate): Restricts the mint to holders of a specified token.
 - [**Token Payment**](/candy-machine-4/available-guards/token-payment): Set the price of the mint in token amount.
+- [**Token2022 Payment**](/candy-machine-4/available-guards/token2022-payment): Set the price of the mint in token22 (Token Extension) amount.
 
 
 <!-- ## Updating guards
