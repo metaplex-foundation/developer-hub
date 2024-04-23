@@ -45,6 +45,6 @@ const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority)
 🔗 **Helpful Links:**
 
 - [Umi Framework](https://github.com/metaplex-foundation/umi)
-- [GitHub Repository](https://github.com/metaplex-foundation/mpl-candy-machine)
+- [GitHub Repository](https://github.com/metaplex-foundation/mpl-core-candy-machine)
 - [NPM Package](https://www.npmjs.com/package/@metaplex-foundation/mpl-core-candy-machine)
 - [API References](https://mpl-core-candy-machine-js-docs.vercel.app/)
