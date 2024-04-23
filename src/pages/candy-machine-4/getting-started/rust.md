@@ -11,10 +11,10 @@ This can be helpful if you are developing a Rust client or if you want to make [
 Since candy machines are composed of two programs, you will need to install two libraries.
 
 - **Candy Machine Core**
-  - [GitHub Repository](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core)
-  - [Crate Page](https://crates.io/crates/mpl-candy-machine-core)
-  - [API References](https://docs.rs/mpl-candy-machine-core/0.1.0/mpl_candy_machine_core/)
+  - [GitHub Repository](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-machine-core)
+  - [Crate Page](https://crates.io/crates/mpl-core-candy-machine-core)
+  - [API References](https://docs.rs/mpl-core-candy-machine-core/latest/mpl_core_candy_machine_core/)
 - **Candy Guard**
-  - [GitHub Repository](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)
-  - [Crate Page](https://crates.io/crates/mpl-candy-guard)
-  - [API References](https://docs.rs/mpl-candy-guard/0.1.0/mpl_candy_guard/)
+  - [GitHub Repository](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard)
+  - [Crate Page](https://crates.io/crates/mpl-core-candy-guard)
+  - [API References](https://docs.rs/mpl-core-candy-guard/latest/mpl_core_candy_guard/)
