@@ -158,7 +158,7 @@ export const candyMachine4 = {
         },
       ],
     },
-    {
+/*     {
       id: 'sugar',
       title: 'Sugar',
       icon: 'SolidCake',
@@ -236,7 +236,7 @@ export const candyMachine4 = {
           ],
         },
       ],
-    },
+    }, */
     
     {
       ...referencesSection('candy-machine-4'),
