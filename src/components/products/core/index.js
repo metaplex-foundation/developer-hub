@@ -90,14 +90,14 @@ export const core = {
         // {
         //   title: 'Integration Guides',
         //   links: [
-        //     { title: 'Wallets', href: '/core/intergrations/wallets' },
+        //     { title: 'Wallets', href: '/core/integrations/wallets' },
         //     {
         //       title: 'Market Places',
-        //       href: '/core/intergrations/market-places',
+        //       href: '/core/intergations/market-places',
         //     },
         //     {
         //       title: 'Staking',
-        //       href: '/core/intergrations/staking',
+        //       href: '/core/intergations/staking',
         //     },
         //   ],
         // },
