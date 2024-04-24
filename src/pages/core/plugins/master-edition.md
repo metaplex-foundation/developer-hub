@@ -39,7 +39,7 @@ These values can be changed by the Authority at any time. They are purely inform
 
 ## Creating a Collection with the Master Edition plugin
 
-{% dialect-switcher title="Adding the Editions Plugin to an MPL Core Collection" %}
+{% dialect-switcher title="Create a MPL Core Collection with Master Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
