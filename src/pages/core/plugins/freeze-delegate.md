@@ -90,3 +90,57 @@ pub async fn add_freeze_delegate_plugin() {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Delegate the Freeze Authority
+The Authority to freeze and thaw an Asset can be delegated to a different Address than the owner.
+
+{% dialect-switcher title="Thaw an MPL Core Asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { updatePluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
+
+const asset = publicKey('11111111111111111111111111111111')
+
+await updatePluginV1(umi, {
+  asset: asset,
+  plugin: createPlugin({ type: 'FreezeDelegate', data: { frozen: false } }),
+  authority: delegateAuthority
+}).sendAndConfirm(umi);
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+*coming soon*
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Thawing a Frozen Asset
+When an Asset is frozen it can be thawed again by the plugin authority.
+
+{% dialect-switcher title="Thaw an MPL Core Asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { updatePluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
+
+const asset = publicKey('11111111111111111111111111111111')
+
+await updatePluginV1(umi, {
+  asset: asset,
+  plugin: createPlugin({ type: 'FreezeDelegate', data: { frozen: false } }),
+  authority: delegateAuthority
+}).sendAndConfirm(umi);
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+*coming soon*
+
+{% /dialect %}
+{% /dialect-switcher %}
