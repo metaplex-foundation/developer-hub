@@ -38,7 +38,7 @@ The Editions Plugin must be added on creation of the asset. As long as it is mut
 
 ### Create with a mutable Plugin
 
-{% dialect-switcher title="Adding the Editions Plugin to an MPL Core Asset" %}
+{% dialect-switcher title="Creating an MPL Core Asset with the Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
