@@ -4,13 +4,20 @@ metaTitle: Core - Edition Plugin
 description: Learn about the MPL Core Edition Plugin
 ---
 
-The Attribute Plugin is a `Authority Managed` plugin that stores an Edition Number within the asset. Together with the soon to be added Master Edition Plugin those Editions could be compared to the [Edition concept in Metaplex Token Metadata](/token-metadata/print).
+The Edition Plugin is a `Authority Managed` plugin that stores an Edition Number within the asset. Together with the soon to be added Master Edition Plugin those Editions could be compared to the [Edition concept in Metaplex Token Metadata](/token-metadata/print).
 
-The Attribute Plugin will work in areas such as:
+The Edition Plugin will work in areas such as:
 
 - Prints of the same Asset
 
 We recommend to use Candy Machine to create and sell your editions. It will handle numbering automatically. 
+
+{% callout type="note" title="Intended Useage" %}
+
+We recommend to
+- Group the Editions using the Master Edition Plugin 
+- use Candy Machine with the Edition Guard to handled numbering automatically.
+{% /callout %}
 
 ## Works With
 
@@ -25,17 +32,11 @@ We recommend to use Candy Machine to create and sell your editions. It will hand
 | ------------- | ----------------------------------- |
 | number        | number                              |
 
-The number is a specific value that is assigned to the asset. Usually this number is unique.
+The number is a specific value that is assigned to the asset. Usually this number is unique, therefore the Creator should make sure that a number is not used twice. 
 
 ## Creating an Asset with the editions plugin
 
 The Editions Plugin must be added on creation of the asset. As long as it is mutable the number can be changed.
-
-{% callout type="note" %}
-
-The Creator should make sure that a number is not used twice. If you are using Candy Machine with the edition Guard this is handled automatically.
-
-{% /callout %}
 
 ### Create with a mutable Plugin
 
