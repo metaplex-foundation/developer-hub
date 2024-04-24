@@ -11,7 +11,7 @@ import { umi } from './umi'
 import { amman } from './amman'
 import { das } from './das-api'
 import { core } from './core'
-import { candyMachine4 } from './candyMachine4'
+import { coreCandyMachine } from './coreCandyMachine'
 import { legacyDocumentation } from './legacyDocumentation'
 import { sugar } from './sugar'
 
@@ -30,7 +30,7 @@ export const products = [
   amman,
   das,
   core,
-  candyMachine4,
+  coreCandyMachine,
   legacyDocumentation,
   sugar
 ].sort((a, b) => a.name.localeCompare(b.name))

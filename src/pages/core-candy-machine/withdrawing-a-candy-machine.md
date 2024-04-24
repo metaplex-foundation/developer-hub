@@ -14,14 +14,14 @@ This operation is irreversible so only withdraw your Candy Machine when you are 
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { deleteCandyMachine } from "@metaplex-foundation/mpl-core-candy-machine";
-import { publicKey } from "@metaplex-foundation/umi";
+import { deleteCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine'
+import { publicKey } from '@metaplex-foundation/umi'
 
-const candyMachineId = "11111111111111111111111111111111";
+const candyMachineId = '11111111111111111111111111111111'
 
-  await deleteCandyMachine(umi, {
-    candyMachine: publicKey(candyMachineId),
-  }).sendAndConfirm(umi);
+await deleteCandyMachine(umi, {
+  candyMachine: publicKey(candyMachineId),
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}

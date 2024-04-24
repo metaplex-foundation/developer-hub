@@ -132,5 +132,3 @@ API References: [addConfigLines](https://mpl-core-candy-machine-js-docs.vercel.a
 ## Conclusion
 
 And just like that, we have a loaded Candy Machine ready to mint NFTs! However, we've not created any requirements for our minting process. How can we configure the price of the mint? How can we ensure that buyers are holders of a specific token or an NFT from a specific collection? How can we set the start date of our mint? What about the end conditions?
-
-[On the next page](/candy-machine-4/guards), we’ll talk about Candy Guards which make all of this possible.

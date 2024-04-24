@@ -216,4 +216,4 @@ SDrive is a storage app built on top of GenesysGo Shadow Drive. You will need to
 
 The `guards` settings allows you to specify which guards will be enabled on the Candy Machine.
 
-Candy Machine support a number of guards that provide access control to minting. [Guards](#/candy-machine-4/guards) can be configured into a "default" [guard group](#/candy-machine-4/guard-groups) or appear in multiple guard groups.
+Candy Machine support a number of guards that provide access control to minting. [Guards](#/core-candy-machine/guards) can be configured into a "default" [guard group](#/core-candy-machine/guard-groups) or appear in multiple guard groups.

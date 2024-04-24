@@ -6,9 +6,8 @@ description: Learn how to create your CMV4 and it's various settings.
 
 ## Prerequisites
 
-- [Prepared Assets](/candy-machine-4/preparing-assets)
+- [Prepared Assets](/core-candy-machine/preparing-assets)
 - [Create Core Collection](/core/collections#creating-a-collection)
-
 
 If you wish to create your Candy Machine Assets into a collection (new or existing) you will need to supply the Core Collection upon creation of the Candy Machine V4.
 
@@ -76,8 +75,8 @@ A newly generated keypair/signer that is used to create the candymachine.
 {% /dialect %}
 {% /dialect-switcher %}
 
-<<<<<<< HEAD
-=======
+# <<<<<<< HEAD
+
 ### authorityPda (optional)
 
 {% dialect-switcher title="Authority" %}
@@ -227,7 +226,8 @@ creators : {
 
 //Todo: Currently needs fixing in the program and client to remove verified. -->
 
->>>>>>> 3474e3fffe276bfb8069c4484205737f318a5542
+> > > > > > > 3474e3fffe276bfb8069c4484205737f318a5542
+
 ### Config Line Settings
 
 Config Line Settings is an optional field that allows advanced options of adding your Asset data to the Candymachine making the Candymachine's rent cost significantly cheaper.
@@ -360,7 +360,7 @@ The name that appears on all Assets minted with hidden settings enabled. Note th
 - `$ID$`: This will be replaced by the index of the minted NFT starting at 0.
 - `$ID+1$`: This will be replaced by the index of the minted NFT starting at 1.
 
-You should use this to be able to match the NFTs that you want to your revealed data. 
+You should use this to be able to match the NFTs that you want to your revealed data.
 
 #### uri
 
@@ -430,7 +430,7 @@ await createCandyMachineV2(umi, {
 
 ## Creating a Candy Machine with guards
 
-To create a `Candy Machine` with `Guards` you can supply the `guards:` field during creation and supply the default guards you with to apply to the Candy Machine.s 
+To create a `Candy Machine` with `Guards` you can supply the `guards:` field during creation and supply the default guards you with to apply to the Candy Machine.s
 
 So far, the Candy Machine we created did not have any guards enabled. Now that we know all the guards available to us, let’s see how we can set up new Candy Machines with some guards enabled.
 
