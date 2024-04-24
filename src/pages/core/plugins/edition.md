@@ -10,8 +10,6 @@ The Edition Plugin will work in areas such as:
 
 - Prints of the same Asset
 
-We recommend to use Candy Machine to create and sell your editions. It will handle numbering automatically. 
-
 {% callout type="note" title="Intended Useage" %}
 
 We recommend to
