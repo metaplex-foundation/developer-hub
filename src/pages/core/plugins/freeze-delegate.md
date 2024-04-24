@@ -26,7 +26,7 @@ The Freeze Plugin will work in areas such as:
 | ------ | ----- |
 | frozen | bool  |
 
-## Adding the Freeze Plugin to an Asset
+## Adding the Freeze Delegate Plugin to an Asset
 
 {% dialect-switcher title="Adding a Freeze Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
