@@ -29,11 +29,11 @@ We recommend to
 
 ## Arguments
 
-| Arg       | Value          |
-| --------- | -------------- |
-| maxSupply | number (u32)   |
-| name      | Option<String> |
-| uri       | Option<String> |
+| Arg       | Value          | Usecase                                                                             |
+| --------- | -------------- |-------------------------------------------------------------------------------------|
+| maxSupply | Option<number> (u32)| Indicate how many prints will exist as maximum. Optional to allow Open Editions|
+| name      | Option<String> | Name of the Editions (if different to the Collection Name)                          |
+| uri       | Option<String> | URI of the Editions (if different to the Collection Name)                           |
 
 These values can be changed by the Authority at any time. They are purely informational and not enforced.
 
