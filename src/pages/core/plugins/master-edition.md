@@ -17,7 +17,8 @@ We recommend to
 
 - Group the Editions using the Master Edition Plugin
 - use Candy Machine with the Edition Guard to handled numbering automatically.
-  {% /callout %}
+
+{% /callout %}
 
 ## Works With
 
