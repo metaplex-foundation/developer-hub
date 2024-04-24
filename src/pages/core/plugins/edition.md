@@ -4,7 +4,7 @@ metaTitle: Core - Edition Plugin
 description: Learn about the MPL Core Edition Plugin
 ---
 
-The Attribute Plugin is a `Authority Managed` plugin that stores an Edition Number within the asset.
+The Attribute Plugin is a `Authority Managed` plugin that stores an Edition Number within the asset. Together with the soon to be added Master Edition Plugin those Editions could be compared to the [Edition concept in Metaplex Token Metadata](/token-metadata/print).
 
 The Attribute Plugin will work in areas such as:
 
