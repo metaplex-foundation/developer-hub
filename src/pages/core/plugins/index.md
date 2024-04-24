@@ -36,6 +36,8 @@ Owner Managed Plugins include but are not limited to:
 
 If an Owner Managed plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `owner`.
 
+The authority of owner managed plugins is automatically revoked when they are transferred.
+
 ### Authority Managed Plugins
 
 Authority managed plugins are plugins that the authority of the MPL Core Asset or Core Collection can add and update at any time.
