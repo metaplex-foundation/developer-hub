@@ -210,7 +210,7 @@ pub async fn create_asset_with_plugin() {
 
 ## Update the Editions Plugin
 
-If the Editions Plugin is mutable it can be updated similar to other Assets:
+If the Editions Plugin is mutable it can be updated similar to other Plugins:
 
 {% dialect-switcher title="Thaw an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
