@@ -73,6 +73,7 @@ export const core = {
             { title: 'Royalties Plugin', href: '/core/plugins/royalties' },
             { title: 'Update Delegate Plugin', href: '/core/plugins/update-delegate' },
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
+            { title: 'Master Edition Plugin', href: '/core/plugins/master-edition' },
             {
               title: 'Permanent Transfer Plugin',
               href: '/core/plugins/permanent-transfer-delegate',
