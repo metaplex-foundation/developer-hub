@@ -245,6 +245,24 @@ Also note that, since we are not inserting any item to the Candy Machine, Hidden
 {% dialect-switcher title="Set up hidden settings" %}
 {% dialect title="JavaScript" id="js" %}
 
+
+To calculate the hash you could use the following functions:
+
+```ts
+import crypto from 'crypto'
+
+const revealData = [
+  { name: 'Nft #1', uri: 'http://example.com/1.json' },
+  { name: 'Nft #2', uri: 'http://example.com/2.json' },
+  { name: 'Nft #3', uri: 'http://example.com/3.json' },
+]
+
+const string = JSON.stringify(revealData)
+const hash = crypto.createHash('sha256').update(string).digest()
+
+console.log(hash)
+```
+
 When using Umi, you can use the `some` and `none` helper functions to tell the library whether to use Config Line Settings or Hidden Settings via the `configLineSettings` and `hiddenSettings` attributes respectively. Only one of these settings must be used, thus, one of them must be configured and the other one must be set to `none()`.
 
 Here’s a code snippet showing how you can set up the above example using the Umi library.
