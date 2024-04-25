@@ -98,28 +98,23 @@ export const core = {
             },
           ],
         },
-        {
-          title: 'API',
-          links: [
-            { title: 'Wallets', href: '/core/intergrations/wallets' },
-            {
-              title: 'Market Places',
-              href: '/core/intergrations/market-places',
-            },
-            {
-              title: 'Staking',
-              href: '/core/intergrations/staking',
-            },
-          ],
-        },
+        // {
+        //   title: 'Integration Guides',
+        //   links: [
+        //     { title: 'Wallets', href: '/core/integrations/wallets' },
+        //     {
+        //       title: 'Market Places',
+        //       href: '/core/intergations/market-places',
+        //     },
+        //     {
+        //       title: 'Staking',
+        //       href: '/core/intergations/staking',
+        //     },
+        //   ],
+        // },
       ],
     },
-    // {
-    //   ...referencesSection('core'),
-    //   href: `https://mpl-core-js-docs.vercel.app/`,
-    //   target: '_blank'
-    //  },
-    {
+    { 
       ...referencesSection('core'),
     },
     // { ...guidesSection('core') },
