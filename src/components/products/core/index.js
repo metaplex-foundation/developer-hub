@@ -129,6 +129,7 @@ export const core = {
         {
           title: 'Guides',
           links: [
+            { title: 'Overview', href: '/core/guides' },
             { title: 'Print Editions', href: '/core/guides/print-editions' },
           ],
         },

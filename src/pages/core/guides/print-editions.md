@@ -50,15 +50,120 @@ Edition Plugin
 
 ## Create Editions using Candy Machine
 
-*coming soon*
+The easiest method to create and sell Edition is by leveraging Core Candy Machine. 
 
-## Create Editions without Candy Machine
+The following Code creates a Master Edition Collection and the Candy Machine that prints the Editions for you.
+
+{% dialect-switcher title="Create a Candy Machine with Edition Guard and Master Edition Collection" %} 
+{% dialect title="JavaScript" id="js" %}
+
+First all the required functions are imported and Umi set up with your RPC and Wallet:
+
+```ts
+import {
+  create,
+  mplCandyMachine,
+} from "@metaplex-foundation/mpl-core-candy-machine";
+import { 
+    createCollectionV1, 
+    pluginAuthorityPair, 
+    ruleSet 
+} from "@metaplex-foundation/mpl-core";
+import crypto from "crypto";
+import {
+  generateSigner,
+  keypairIdentity,
+} from "@metaplex-foundation/umi";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+
+// Use the RPC endpoint of your choice.
+const umi = createUmi("http://127.0.0.1:8899").use(mplCandyMachine());
+
+// use your keypair or Wallet Adapter here.
+const keypair = generateSigner(umi);
+umi.use(keypairIdentity(keypair));
+```
+
+After this setup we can create the Collection with [Master Edition Plugin](/core/plugins/master-edition). The `maxSupply` field determines how many Editions you want to print. The `name` and `uri` fields in the Plugin can be used in addition to the Collection Name and uri.
+
+For ease of use we also add the [Royalty Plugin](/core/plugins/royalties).
+
+```ts
+const collectionSigner = generateSigner(umi);
+await createCollectionV1(umi, {
+  collection: collectionSigner,
+  name: "Master Edition",
+  uri: "https://example.com/master-edition.json",
+  plugins: [
+    pluginAuthorityPair({
+      type: "MasterEdition",
+      data: {
+        maxSupply: 100,
+        name: null,
+        uri: null,
+      },
+    }),
+    pluginAuthorityPair({
+      type: "Royalties",
+      data: {
+        basisPoints: 500,
+        creators: [{ address: umi.identity.publicKey, percentage: 100 }],
+        ruleSet: ruleSet("None"),
+      },
+    }),
+  ],
+}).sendAndConfirm(umi);
+```
+
+After the creation of the Collection we can create the candy machine using `hiddenSettings` and the `edition` guard.
+
+- `hiddenSettings` are used to assign the same, or similar, Name and Metadata to all Assets minted
+- The `edition` Guard is used to add the [Edition Plugin](/core/plugins/editions) to the Assets. The Edition number is increasing for each minted Asset, starting with the number in `editionStartOffset`.
+
+```ts
+// The Name and off chain Metadata of your Editions
+const editionData = {
+  name: "Edition Name",
+  uri: "https://example.com/edition-asset.json",
+};
+
+// This creates a hash that editions do not 
+// use but the Candy Machine requires  
+const string = JSON.stringify(editionData);
+const hash = crypto.createHash("sha256").update(string).digest();
+
+const candyMachine = generateSigner(umi);
+await create(umi, {
+  candyMachine,
+  collection: collectionSigner.publicKey,
+  collectionUpdateAuthority: umi.identity,
+  itemsAvailable: 100,
+  hiddenSettings: {
+    name: editionData.name,
+    uri: editionData.uri,
+    hash,
+  },
+  guards: {
+    edition: { editionStartOffset: 0 },
+    // ... additional Guards
+  },
+}).sendAndConfirm(umi);
+```
+
+{% /dialect %} 
+{% /dialect-switcher %}
+
+That's it! 
+
+Now users can mint editions from your candy machine.
+
+## Create Editions without Core Candy Machine
 
 {% callout type="note" %}
-We strongly recommend to go the Candy Machine Route. Candy Machine handles the creation and also the correct numbering of the editions for you.
+We strongly recommend to use Core Candy Machine for MPL Core Editions. Candy Machine handles the creation and also the correct numbering of the editions for you.
 {% /callout %}
 
-To create an Edition without Candy Machine you would
+To create an Edition without Core Candy Machine you would:
 
 1. Create a Collection using the [Master Edition](/core/plugins/master-edition) Plugin
 
@@ -155,14 +260,17 @@ pub async fn create_collection_with_plugin() {
 
 {% /dialect-switcher %}
 
-2. Create Assets with the [Edition](/core/plugins/edition) Plugin
+2. Create Assets with the [Edition](/core/plugins/edition) Plugin. Remember to increase the number in the plugin.
 
 {% dialect-switcher title="Creating an MPL Core Asset with the Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { createV1, pluginAuthorityPair } from '@metaplex-foundation/mpl-core'
+import { 
+    createV1, 
+    pluginAuthorityPair 
+} from '@metaplex-foundation/mpl-core'
 
 const asset = generateSigner(umi)
 
@@ -237,3 +345,8 @@ pub async fn create_asset_with_plugin() {
 {% /dialect %}
 
 {% /dialect-switcher %}
+
+## Further Reading
+- Mint from Candy Machine
+- [Master Edition Plugin](/core/plugins/master-edition)
+- [Edition Plugin](/core/plugins/edition)
