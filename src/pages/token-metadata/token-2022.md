@@ -49,13 +49,23 @@ await createV1(umi, {
 
 ```ts
 import { mintV1, TokenStandard } from '@metaplex-foundation/mpl-token-metadata'
+import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
+
 
 const SPL_TOKEN_2022_PROGRAM_ID: PublicKey = publicKey(
   'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
 );
 
+const token = findAssociatedTokenPda(umi, {
+  mint: mint.publicKey,
+  owner: umi.identity.publicKey,
+  tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
+});
+
+
 await mintV1(umi, {
   mint: mint.publicKey,
+  token,
   authority,
   amount: 1,
   tokenOwner,
