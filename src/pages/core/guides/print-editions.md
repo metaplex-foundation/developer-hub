@@ -117,7 +117,7 @@ await createCollectionV1(umi, {
 
 After the creation of the Collection we can create the candy machine using `hiddenSettings` and the `edition` guard.
 
-- `hiddenSettings` are used to assign the same, or similar, Name and Metadata to all Assets minted
+- `hiddenSettings` are used to assign the same, or similar, Name and Metadata to all Assets minted. You can use a `$ID$` variable that will be replaced by the index of the minted Asset on mint.
 - The `edition` Guard is used to add the [Edition Plugin](/core/plugins/editions) to the Assets. The Edition number is increasing for each minted Asset, starting with the number in `editionStartOffset`.
 
 ```ts
