@@ -133,7 +133,7 @@ const string = JSON.stringify(editionData);
 const hash = crypto.createHash("sha256").update(string).digest();
 
 const candyMachine = generateSigner(umi);
-await create(umi, {
+const createIx = await create(umi, {
   candyMachine,
   collection: collectionSigner.publicKey,
   collectionUpdateAuthority: umi.identity,
@@ -147,7 +147,9 @@ await create(umi, {
     edition: { editionStartOffset: 0 },
     // ... additional Guards
   },
-}).sendAndConfirm(umi);
+})
+
+await createIx.sendAndConfirm(umi);
 ```
 
 {% /dialect %} 
