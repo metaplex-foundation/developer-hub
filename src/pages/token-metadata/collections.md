@@ -9,7 +9,7 @@ Certified Collections enables NFTs – and tokens in general — **to be grouped
 This feature provides the following advantages:
 
 - Easy to identify which collection any given NFT belongs to without making additional on-chain calls.
-- Possible to find all NFTs that belong to a given collection ([Check the FAQ to see how](/token-metadata/faq#how-can-i-filter-metadata-accounts-by-collection-using-get-program-accounts)).
+- Possible to find all NFTs that belong to a given collection ([Check the Recipe to see how](/token-metadata/recipes/get-by-collection)).
 - Easy to manage the collection metadata such as its name, description and image.
 
 ## Collections are NFTs

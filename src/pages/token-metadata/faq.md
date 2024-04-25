@@ -20,13 +20,9 @@ There are several ways to solve this problem:
 - Another solution is to **crawl transactions to find the accounts we're looking for**. This approach is a bit more complex and requires us to implement a custom procedure that fits our needs. For instance, we can use `getSignaturesForAddress` to get all transactions associated with an account and then use `getTransaction` on each of them to access their transaction data before filtering the ones that matter for our use case. It is also worth considering that this approach might not be the most future-proof solution since we might end up relying on instructions that could be deprecated in favor of new ones.
 - Finally, **the most robust solution is to index the data we're looking for using a [Geyser Plugin](https://docs.solana.com/developing/plugins/geyser-plugins)**. This currently requires a significant setup, but we end up with a reliable data store that mirrors the data in the Solana blockchain. Not only does it fix our filtering issue, but it also provides a much more convenient and efficient way to access our data.
 
-## How can I filter Metadata accounts by collection using `getProgramAccounts`?
+## How can I filter Metadata accounts by collection?
 
-As mentioned in the question above, filtering by fields present after the `creators` array is a challenging task because it is not a field of fixed size.
-
-Since **the `collection` field is located after the `creators` field**, this makes filtering [Metadata accounts](./accounts#metadata) by collection somewhat difficult.
-
-The solutions listed above apply here too but, because this is a common problem, we have written a more detailed guide on how to use transaction crawling to access Metadata accounts of a given collection: **[Get Collection Methods](https://metaplex.notion.site/Get-Collection-Methods-1ff0b118e4ce4605971df60e753a8559)**.
+As mentioned in the question above, filtering by fields present after the `creators` array is a challenging task because it is not a field of fixed size. We recommend to use DAS for the fastest and easiest method to get collection mints. If you want to get the data directly from chain you can use the following method, but we have a [Recipe](/token-metadata/recipes/get-by-collection) showing three different Methods to get all the NFTs in a collection.
 
 ## Why are the mint and freeze authorities transferred to the Edition PDA?
 
