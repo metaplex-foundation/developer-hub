@@ -1,28 +1,28 @@
 ---
 title: "Redeemed Amount"
-metaTitle: "Candy Machine Guards - Redeemed Amount"
-description: "The Redeemed Amount guard forbids minting when the number of minted NFTs for the entire Candy Machine reaches the configured maximum amount."
+metaTitle: "Core Candy Machine Guards - Redeemed Amount"
+description: "The Redeemed Amount guard forbids minting when the number of minted Assets for the entire Core Candy Machine reaches the configured maximum amount."
 ---
 
 ## Overview
 
-The **Redeemed Amount** guard forbids minting when the number of minted NFTs for the entire Candy Machine reaches the configured maximum amount.
+The **Redeemed Amount** guard forbids minting when the number of minted Assets for the entire Core Candy Machine reaches the configured maximum amount.
 
 This guard becomes more interesting when used with [Guard Groups](../guard-groups) since it allows us to add global minting thresholds to our groups.
 
 {% diagram  %}
 
 {% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
 {% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% /node %}
 
 {% node parent="candy-machine" y="100" x="21" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node #candy-guard label="Core Candy Guard" theme="blue" /%}
 {% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
+Owner: Core Candy Guard Program {% .whitespace-nowrap %}
 {% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
 {% node #redeemedAmount label="RedeemedAmount" /%}
@@ -34,26 +34,26 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
   {% node theme="pink" %}
     Mint from
 
-    _Candy Guard Program_{% .whitespace-nowrap %}
+    _Core Candy Guard Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
   {% node theme="pink" %}
     Mint from 
     
-    _Candy Machine Program_{% .whitespace-nowrap %}
+    _Core Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="70" theme="blue" %}
-  NFT
+{% node #nft parent="mint-candy-machine" y="140" x="93" theme="blue" %}
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -61,11 +61,11 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
 {% edge from="maximum" to="mint-candy-guard" arrow="none" dashed=true %}
 once that amount of
 
-NFTs have been minted
+Assets have been minted
 
 Minting will fail
 {% /edge %}
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
 {% /diagram %}
 
@@ -75,7 +75,7 @@ The Redeemed Amount guard contains the following settings:
 
 - **Maximum**: The maximum amount of NFTs that can be minted.
 
-{% dialect-switcher title="Set up a Candy Machine using the Redeemed Amount Guard" %}
+{% dialect-switcher title="Set up a Core Candy Machine using the Redeemed Amount Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -91,23 +91,11 @@ create(umi, {
 
 {% /totem %}
 {% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-Add this object into the guard section your config.json file:
-
-```json
-"redeemedAmount" : {
-    "maximum": number,
-}
-```
-
-{% /totem %}
-{% /dialect %}
 {% /dialect-switcher %}
 
 Notice that, even if the Candy Machine contains 500 items, only 300 of these items will be mintable because of this guard.
 
-Thus, this guard becomes more useful when using [Guard Groups](/programs/core-candy-machine/guard-groups). Here’s another example using two groups such that the first 300 NFTs can be minted for 1 SOL but the last 200 will need 2 SOL to mint.
+Thus, this guard becomes more useful when using [Guard Groups](/programs/core-candy-machine/guard-groups). Here’s another example using two groups such that the first 300 Assets can be minted for 1 SOL but the last 200 will need 2 SOL to mint.
 
 {% dialect-switcher title="Using the Redeemed Amount Guard with groups example" %}
 {% dialect title="JavaScript" id="js" %}
@@ -133,40 +121,6 @@ create(umi, {
     },
   ],
 });
-```
-
-{% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-Like all the other guards it can also be added as a group like so:
-
-```json
-    "groups": [
-      {
-        "label": "early",
-        "guards": {
-          "redeemedAmount": {
-            "maximum": 300,
-          },
-          "solPayment": {
-            "value": 1,
-            "destination": "<PUBKEY>"
-          }
-        }
-      },
-      {
-        "label": "late",
-        "guards": {
-          "solPayment": {
-            "value": 2,
-            "destination": "<PUBKEY>"
-          }
-        }
-      }
-    ]
-
 ```
 
 {% /totem %}

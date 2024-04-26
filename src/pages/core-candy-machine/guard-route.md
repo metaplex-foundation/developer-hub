@@ -1,6 +1,6 @@
 ---
 title: Special Guard Instructions
-metaTitle: Candy Machine - Special Guard Instructions
+metaTitle: Core Candy Machine - Special Guard Instructions
 description: Explains how to execute guard-specific instructions.
 ---
 
@@ -8,9 +8,9 @@ As we’ve seen on the previous pages, guards are a powerful way to customize th
 
 ## The Route Instruction
 
-The Candy Guard program ships with a special instruction called **the “Route” instruction**.
+The Core Candy Guard program ships with a special instruction called **the “Route” instruction**.
 
-This instruction allows us to **select a specific guard** from our Candy Machine and **run a custom instruction** that is specific to this guard. We call it the “Route” instruction because it will route our request to the selected guard.
+This instruction allows us to **select a specific guard** from our Core Candy Machine and **run a custom instruction** that is specific to this guard. We call it the “Route” instruction because it will route our request to the selected guard.
 
 This feature makes guards even more powerful as they can ship with their own program logic. It enables guards to:
 
@@ -23,9 +23,9 @@ Since there can only be one “route” instruction per registered guard on a Ca
 
 For instance, a guard adding support for Frozen NFTs — that can only be thawed once minting is over — could use their route instruction to initialize the treasury escrow account as well as allow anyone to thaw a minted NFT under the right conditions. We could distinguish these two features by using a **Path** attribute equal to “init” for the former and “thaw” for the latter.
 
-You will find a detailed explanation of the route instruction of each guard that supports it and their underlying paths [on their respective pages](/core-candy-machine/available-guards).
+You will find a detailed explanation of the route instruction of each guard that supports it and their underlying paths [on their respective pages](/core-candy-machine/guards).
 
-Let’s take a minute to illustrate how the route instruction works by providing an example. The [**Allow List**](/core-candy-machine/available-guards/allow-list) guard, for instance, supports the route instruction in order to verify that the minting wallet is part of the preconfigured list of wallets.
+Let’s take a minute to illustrate how the route instruction works by providing an example. The [**Allow List**](/core-candy-machine/guards/allow-list) guard, for instance, supports the route instruction in order to verify that the minting wallet is part of the preconfigured list of wallets.
 
 It does that using [Merkle Trees](https://en.m.wikipedia.org/wiki/Merkle_tree) which means we need to create a hash of the entire list of allowed wallets and store that hash — known as the **Merkle Root** — on the guard settings. For a wallet to prove it is on the allowed list, it must provide a list of hashes — known as the **Merkle Proof** — that allows the program to compute the Merkle Root and ensure it matches the guard’s settings.
 
@@ -203,6 +203,6 @@ API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functi
 
 ## Conclusion
 
-The route instruction makes guards even more powerful by allowing them to ship with their own custom program logic. Check out the dedicated pages of [all available guards](/core-candy-machine/available-guards) to see the full feature set of each guard.
+The route instruction makes guards even more powerful by allowing them to ship with their own custom program logic. Check out the dedicated pages of [all available guards](/core-candy-machine/guards) to see the full feature set of each guard.
 
-Now that we know everything there is to know about setting up Candy Machines and their guards, it’s about time we talk about minting. See you on [the next page](/core-candy-machine/mint)!
+Now that we know everything there is to know about setting up Core Candy Machines and their guards, it’s about time we talk about minting. See you on [the next page](/core-candy-machine/mint)! You might want to read about [fetching it](/core-candy-machine/fetching-a-candy-machine), too.

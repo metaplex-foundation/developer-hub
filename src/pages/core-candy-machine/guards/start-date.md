@@ -1,6 +1,6 @@
 ---
 title: "Start Date"
-metaTitle: "Candy Machine Guards - Start Date"
+metaTitle: "Core Candy Machine Guards - Start Date"
 description: "The Start Date guard determines the start date of the mint."
 ---
 
@@ -11,13 +11,13 @@ The **Start Date** guard determines the start date of the mint. Before this date
 {% diagram  %}
 
 {% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
+{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
 {% /node %}
 
 {% node parent="candy-machine" y="100" x="22" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
+{% node #candy-guard label="Core Candy Guard" theme="blue" /%}
+{% node label="Owner: Core Candy Guard Program" theme="dimmed" /%}
 {% node #candy-guard-guards label="Guards" theme="mint"/%}
 {% node #startDate label="startDate" /%}
 {% node #date label="- Date" /%}
@@ -28,7 +28,7 @@ The **Start Date** guard determines the start date of the mint. Before this date
   {% node theme="pink" %}
     Mint from
 
-    _Candy Guard Program_
+    _Core Candy Guard Program_
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
@@ -39,15 +39,15 @@ The **Start Date** guard determines the start date of the mint. Before this date
   {% node theme="pink" %}
     Mint from 
     
-    _Candy Machine Program_
+    _Core Candy Machine Program_
   {% /node %}
 {% /node %}
-{% node parent="mint-candy-machine" y="-20" x="110" theme="transparent" %}
+{% node parent="mint-candy-machine" y="-20" x="150" theme="transparent" %}
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="120" x="70" theme="blue" %}
-  NFT
+{% node #nft parent="mint-candy-machine" y="120" x="93" theme="blue" %}
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -69,7 +69,7 @@ The Start Date guard contains the following settings:
 
 - **Date**: The date before which minting is not allowed.
 
-{% dialect-switcher title="Set up a Candy Machine using the Start Date Guard" %}
+{% dialect-switcher title="Set up a Core Candy Machine using the Start Date Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -85,21 +85,6 @@ create(umi, {
 ```
 
 API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [StartDate](https://mpl-core-candy-machine-js-docs.vercel.app/types/StartDate.html)
-
-{% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-Add this object into the guard section your config.json file:
-
-```json
-"startDate" : {
-    "date": "string",
-}
-```
-
-The date needs to be specified using RFC 3339 standard. In most cases, the format used will be "yyyy-mm-ddThh:mm:ssZ", where T is the separator between the full-date and full-time and Z is the timezone offset from UTC (use Z or +00:00 for UTC time).
 
 {% /totem %}
 {% /dialect %}

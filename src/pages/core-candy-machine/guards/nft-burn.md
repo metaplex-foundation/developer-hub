@@ -1,6 +1,6 @@
 ---
 title: "NFT Burn"
-metaTitle: "Candy Machine Guards - NFT Burn"
+metaTitle: "Core Candy Machine Guards - NFT Burn"
 description: "The NFT Burn guard restricts the mint to holders of a predefined NFT Collection and burns the holder's NFT."
 ---
 
@@ -69,7 +69,7 @@ from this collection
 {% /node %}
 
 {% node #nft parent="mint-candy-machine" y="140" x="70" theme="blue" %}
-  NFT
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -102,19 +102,6 @@ API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 {% /totem %}
 {% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-Add this object into the guard section your config.json file:
-
-```json
-"nftBurn" : {
-    "requiredCollection": "<PUBKEY>",
-}
-```
-
-{% /totem %}
-{% /dialect %}
 {% /dialect-switcher %}
 
 ## Mint Settings
@@ -126,7 +113,7 @@ The NFT Burn guard contains the following Mint Settings:
 - **Token Standard**: The token standard of the NFT to burn.
 - **Token Account** (optional): You may optionally provide the token account linking the NFT with its owner explicitly. By default, the associated token account of the payer will be used.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#nftburn) for more details.
+Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftburn) for more details.
 
 {% dialect-switcher title="Mint with the NFT Burn Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -150,13 +137,6 @@ mintV1(umi, {
 ```
 
 API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [NftBurnMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftBurnMintArgs.html)
-
-{% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
 
 {% /totem %}
 {% /dialect %}

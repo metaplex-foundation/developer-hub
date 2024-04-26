@@ -1,6 +1,6 @@
 ---
 title: "NFT Gate"
-metaTitle: "Candy Machine Guards - NFT Gate"
+metaTitle: "Core Candy Machine Guards - NFT Gate"
 description: "The NFT Gate guard restricts minting to holders of a specified NFT collection."
 ---
 
@@ -11,16 +11,16 @@ The **NFT Gate** guard restricts minting to holders of a specified NFT collectio
 {% diagram  %}
 
 {% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
 {% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% /node %}
 
 {% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node #candy-guard label="Core Candy Guard" theme="blue" /%}
 {% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
+Owner: Core Candy Guard Program {% .whitespace-nowrap %}
 {% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
 {% node label="nftGate" /%}
@@ -71,7 +71,7 @@ from this collection
 {% /node %}
 
 {% node #nft parent="mint-candy-machine" y="140" x="71" theme="blue" %}
-  NFT
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -106,18 +106,6 @@ API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 {% /totem %}
 {% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-Add this object into the guard section your config.json file:
-
-```json
-"nftGate" : {
-    "requiredCollection": "<PUBKEY>",
-}
-```
-
-{% /totem %}
-{% /dialect %}
 {% /dialect-switcher %}
 
 ## Mint Settings
@@ -127,7 +115,7 @@ The NFT Gate guard contains the following Mint Settings:
 - **Mint**: The mint address of the NFT to provide as proof that the payer owns an NFT from the required collection.
 - **Token Account** (optional): You may optionally provide the token account linking the NFT with its owner explicitly. By default, the associated token account of the payer will be used.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#nftgate) for more details.
+Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftgate) for more details.
 
 {% dialect-switcher title="Set up a Candy Machine using the NFT Gate Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -145,13 +133,6 @@ mintV1(umi, {
 ```
 
 API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [NftGateMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftGateMintArgs.html)
-
-{% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
 
 {% /totem %}
 {% /dialect %}

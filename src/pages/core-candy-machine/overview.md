@@ -22,7 +22,7 @@ Interested? Let’s give you a little tour of how `Core Candy Machines` work!
 
 ## The Lifecycle of a Core Candy Machine
 
-The very first step is for the creator to create a new Candy Machine and configure it however they want.
+The very first step is for the creator to create a new Core Candy Machine and configure it however they want.
 
 {% diagram %}
 {% node #action label="1. Create & Configure" theme="pink" /%}
@@ -33,7 +33,7 @@ The very first step is for the creator to create a new Candy Machine and configu
 {% edge from="action" to="candy-machine" path="straight" /%}
 {% /diagram %}
 
-The created Core Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be minted. For instance, there is a `collection` parameter which will be assigned to all Assets minted from this Core Candy Machine. We will see how to create and configure Core Candy Machines in more details, including some code examples, in the following pages: [Core Candy Machine Settings](/core-candy-machine/settings) and [Managing Core Candy Machines](/core-candy-machine/manage).
+The created Core Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be created. For instance, there is a `collection` parameter which will be assigned to all Assets created from this Core Candy Machine. We will see how to create and configure Core Candy Machines in more details, including some code examples, in the following pages: [Core Candy Machine Settings](/core-candy-machine/settings) and [Managing Core Candy Machines](/core-candy-machine/manage).
 
 However, we still don’t know which Assets should be minted from that Core Candy Machine. In other words, the Core Candy Machine is not currently loaded. Our next step, is to insert items.
 

@@ -1,6 +1,6 @@
 ---
 title: 'Token2022 Payment'
-metaTitle: 'Candy Machine Guards - Token Payment'
+metaTitle: 'Core Candy Machine Guards - Token Payment'
 description: 'The Token2022 Payment guard allows minting by charging the payer some Token2022 tokens.'
 ---
 
@@ -13,16 +13,16 @@ If the payer does not have the required amount of tokens to pay, minting will fa
 {% diagram  %}
 
 {% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
 {% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% /node %}
 
 {% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
+{% node #candy-guard label="Core Candy Guard" theme="blue" /%}
 {% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
+Owner: Core Candy Guard Program {% .whitespace-nowrap %}
 {% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
 {% node label="Token 2022 Payment" /%}
@@ -66,7 +66,7 @@ Owner: System Program {% .whitespace-nowrap %}
 {% node #mint-candy-guard theme="pink" %}
 Mint from
 
-    _Candy Guard Program_{% .whitespace-nowrap %}
+    _Core Candy Guard Program_{% .whitespace-nowrap %}
 
 {% /node %}
 {% /node %}
@@ -74,11 +74,11 @@ Mint from
 Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
 {% node theme="pink" %}
 Mint from
 
-    _Candy Machine Program_{% .whitespace-nowrap %}
+    _Core Candy Machine Program_{% .whitespace-nowrap %}
 
 {% /node %}
 {% /node %}
@@ -86,8 +86,8 @@ Mint from
 Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
-NFT
+{% node #nft parent="mint-candy-machine" y="140" x="93" theme="blue" %}
+Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -99,7 +99,7 @@ Transfer x Amount tokens
 
 from the payer{% .whitespace-nowrap %}
 {% /edge %}
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
 {% /diagram %}
 
@@ -117,7 +117,7 @@ The Token Payment guard contains the following settings:
 - **Mint**: The address of the mint account defining the SPL Token we want to pay with.
 - **Destination Associated Token Address (ATA)**: The address of the associated token account to send the tokens to. We can get this address by finding the Associated Token Address PDA using the **Token Mint** attribute and the address of any wallet that should receive these tokens.
 
-{% dialect-switcher title="Set up a Candy Machine using the Token Payment guard" %}
+{% dialect-switcher title="Set up a Core Candy Machine using the Token Payment guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -141,21 +141,6 @@ API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 {% /totem %}
 {% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-Add this object into the guard section your config.json file:
-
-```json
-"token2022Payment" : {
-    "amount": number in basis points (e.g. 1000 for 1 Token that has 3 decimals),
-    "mint": "<PUBKEY>",
-    "destinationAta": "<PUBKEY>"
-}
-```
-
-{% /totem %}
-{% /dialect %}
 {% /dialect-switcher %}
 
 ## Mint Settings
@@ -165,7 +150,7 @@ The Token Payment guard contains the following Mint Settings:
 - **Mint**: The address of the mint account defining the SPL Token we want to pay with.
 - **Destination Associated Token Address (ATA)**: The address of the associated token account to send the tokens to.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#tokenpayment) for more details.
+Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#tokenpayment) for more details.
 
 {% dialect-switcher title="Mint with the NFT Burn Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -186,13 +171,6 @@ mintV1(umi, {
 ```
 
 API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [TokenPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/Token2022PaymentMintArgs.html)
-
-{% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
 
 {% /totem %}
 {% /dialect %}

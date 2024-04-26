@@ -71,7 +71,7 @@ Minting will fail
 
 ## Guard Settings
 
-The Address Gate guard contains the following settings:
+The Program Gate guard contains the following settings:
 
 - **Additional**: List of additional programs addresses (up to 5 addresses) that are allowed to include instructions on the mint transaction.
 

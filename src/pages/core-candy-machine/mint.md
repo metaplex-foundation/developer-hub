@@ -14,13 +14,13 @@ As such, there are two ways to mint from a Candy Machine:
 
 - **From a Candy Guard program** which will then delegate the minting to the Candy Machine Core program. Most of the time, you will want to do this as it allows for much more complex minting workflows. You may need to pass extra remaining accounts and instruction data to the mint instruction based on the guards configured in the account. Fortunately, our SDKs make this easy by requiring a few extra parameters and computing the rest for us.
 
-- **Directly from the Candy Machine Core program**. In this case, only the configured mint authority can mint from it and, therefore, it will need to sign the transaction.
+- **Directly from the Core Candy Machine Core program**. In this case, only the configured mint authority can mint from it and, therefore, it will need to sign the transaction.
 
 {% diagram %}
 
 {% node %}
-{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node #candy-machine-1 label="Core Candy Machine" theme="blue" /%}
+{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
 {% node label="Features" /%}
 {% node label="Authority" /%}
 {% node #mint-authority-1 %}
@@ -53,9 +53,9 @@ as they comply with the \
 activated guards.
 {% /node %}
 
-{% node parent="mint-1" x=-22 y=100 %}
+{% node parent="mint-1" x=-36 y=100 %}
 {% node #mint-2 label="Mint" theme="pink" /%}
-{% node label="Candy Machine Core Program" theme="pink" /%}
+{% node label="Core Candy Machine Core Program" theme="pink" /%}
 {% /node %}
 {% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
 {% node parent="mint-2" x=200 y=-18 theme="transparent" %}
@@ -63,11 +63,11 @@ Only Alice \
 can mint.
 {% /node %}
 
-{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+{% node #nft parent="mint-2" x=77 y=100 label="NFT" /%}
 
 {% node parent="mint-2" x=280 %}
-{% node #candy-machine-2 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node #candy-machine-2 label="Core Candy Machine" theme="blue" /%}
+{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
 {% node label="Features" /%}
 {% node label="Authority" /%}
 {% node #mint-authority-2 %}
@@ -87,7 +87,7 @@ Mint Authority = Alice {% .font-semibold %}
 
 {% /diagram %}
 
-If everything went well, an NFT will be created following the parameters configured in the Candy Machine. For instance, if the given Candy Machine uses **Config Line Settings** with **Is Sequential** set to `false`, then we will get the next item at random.
+If everything went well, an NFT will be created following the parameters configured in the Core Candy Machine. For instance, if the given Core Candy Machine uses **Config Line Settings** with **Is Sequential** set to `false`, then we will get the next item at random.
 
 Starting from version `1.0` of the Candy Guard program, The mint instruction accepts an additional `minter` signer which can be different than the existing `payer` signer. This allows us to create minting workflows where the wallet that mints the NFT is no longer requires to pay SOL fees — such as storage fees and SOL mint payments — as the `payer` signer will abstract away those fees. Note that the `minter` signer will still need to pay for token-based fees and will be used to validate the configured guards.
 
@@ -96,14 +96,17 @@ Please note that the latest mint instruction relies on the latest Token Metadata
 {% dialect-switcher title="Mint from a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
-To mint from a Candy Machine via a configured Candy Guard account, you may use the `mintV1` function and provide the mint address and update authority of the collection NFT the minted NFT will belong to. A `minter` signer and `payer` signer may also be provided but they will default to Umi's identity and payer respectively.
+To mint from a Core Candy Machine via a configured Candy Guard account, you may use the `mintV1` function and provide the mint address and update authority of the collection NFT the minted NFT will belong to. A `minter` signer and `payer` signer may also be provided but they will default to Umi's identity and payer respectively.
 
 As mentioned above, you may need to increase the compute unit limit of the transaction to ensure the `mintV1` instruction is successful. You may do this by using the `setComputeUnitLimit` helper function on the `mpl-toolbox` Umi library as illustrated in the code snippet below.
 
 ```ts
 import { mintV1 } from '@metaplex-foundation/mpl-core-candy-machine'
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
-import { transactionBuilder, generateSigner } from '@metaplex-foundation/umi'
+import { 
+  transactionBuilder, 
+  generateSigner 
+} from '@metaplex-foundation/umi'
 
 const candyMachineId = publicKey('11111111111111111111111111111111')
 const coreCollection = publicKey('22222222222222222222222222222222')
@@ -140,7 +143,9 @@ const nftOwner = publicKey('11111111111111111111111111111111')
 
 await transactionBuilder()
   .add(setComputeUnitLimit(umi, { units: 800_000 }))
-  .add(createMintWithAssociatedToken(umi, { mint: nftMint, owner: nftOwner }))
+  .add(
+    createMintWithAssociatedToken(umi, { mint: nftMint, owner: nftOwner })
+    )
   .add(
     mintV1(umi, {
       candyMachine: candyMachineId,
@@ -152,7 +157,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-In the rare event that you wish to mint directly from the Core Candy Machine program instead of the Candy Guard Program, you may use the `mintAssetFromCandyMachine` function instead. This function requires the mint authority of the candy machine to be provided as a signer and accepts an explicit `assetOwner` attribute.
+In the rare event that you wish to mint directly from the Core Candy Machine program instead of the Candy Guard Program, you may use the `mintAssetFromCandyMachine` function instead. This function requires the mint authority of the Core Candy Machine to be provided as a signer and accepts an explicit `assetOwner` attribute.
 
 ```ts
 import { mintFromCandyMachineV2 } from '@metaplex-foundation/mpl-core-candy-machine'
@@ -184,7 +189,7 @@ API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 ## Minting With Guards
 
-When minting from a Candy Machine that uses a bunch of guards, you may need to provide additional guard-specific information.
+When minting from a Core Candy Machine that uses a bunch of guards, you may need to provide additional guard-specific information.
 
 If you were to build the mint instruction manually, that information would be provided as a mixture of instruction data and remaining accounts. However, using our SDKs, each guard that requires additional information at mint time defines a set of settings that we call **Mint Settings**. These Mint Settings will then be parsed into whatever the program needs.
 
@@ -194,7 +199,7 @@ A good example of a guard that requires Mint Settings is the **NFT Payment** gua
 
 {% node %}
 {% node #candy-machine-1 label="Core Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
 {% /node %}
 
 {% node parent="candy-machine-1" y=80 x=20 %}
@@ -216,7 +221,7 @@ A good example of a guard that requires Mint Settings is the **NFT Payment** gua
 
 {% node parent="mint-1" x=-22 y=100 %}
 {% node #mint-2 label="Mint" theme="pink" /%}
-{% node label="Candy Machine Core Program" theme="pink" /%}
+{% node label="Core Candy Machine Core Program" theme="pink" /%}
 {% /node %}
 {% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
 
@@ -243,16 +248,16 @@ A good example of a guard that requires Mint Settings is the **NFT Payment** gua
 
 {% /diagram %}
 
-[Each available guard](/core-candy-machine/available-guards) contains its own documentation page and it will tell you whether or not that guard expects Mint Settings to be provided when minting.
+[Each available guard](/core-candy-machine/guards) contains its own documentation page and it will tell you whether or not that guard expects Mint Settings to be provided when minting.
 
 If you were to only use guards that do not require Mint Settings, you may mint in the same way described by the “Basic Minting” section above. Otherwise, you’ll need to provide an additional object attribute containing the Mint Settings of all guards that require them. Let’s have a look at what that looks like in practice using our SDKs.
 
-{% dialect-switcher title="Mint from a Candy Machine with guards" %}
+{% dialect-switcher title="Mint from a Core Candy Machine with guards" %}
 {% dialect title="JavaScript" id="js" %}
 
 When minting via the Umi library, you may use the `mintArgs` attribute to provide the required **Mint Settings**.
 
-Here’s an example using the **Third Party Signer** guard which requires an additional signer and the **Mint Limit** guard which keeps track of how many times a wallet minted from the Candy Machine.
+Here’s an example using the **Third Party Signer** guard which requires an additional signer and the **Mint Limit** guard which keeps track of how many times a wallet minted from the Core Candy Machine.
 
 ```ts
 import {
@@ -263,7 +268,7 @@ import {
 import { create, mintV1 } from '@metaplex-foundation/mpl-core-candy-machine'
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
 
-// Create a Candy Machine with guards.
+// Create a Core Candy Machine with guards.
 const thirdPartySigner = generateSigner()
 await create(umi, {
   // ...
@@ -273,7 +278,7 @@ await create(umi, {
   },
 }).sendAndConfirm(umi)
 
-// Mint from the Candy Machine.
+// Mint from the Core Candy Machine.
 const nftMint = generateSigner(umi)
 await transactionBuilder()
   .add(setComputeUnitLimit(umi, { units: 800_000 }))
@@ -298,11 +303,11 @@ API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 ## Minting With Guard Groups
 
-When minting from a Candy Machine using guard groups, **we must explicitly select which group we want to mint from** by providing its label.
+When minting from a Core Candy Machine using guard groups, **we must explicitly select which group we want to mint from** by providing its label.
 
 Additionally, Mint Settings may also be required as explained in [the previous section](#minting-with-guards). However, **the Mint Settings will apply to the “Resolved Guards” of the selected group**.
 
-For instance, imagine a Candy Machine with the following guards:
+For instance, imagine a Core Candy Machine with the following guards:
 
 - **Default Guards**:
   - Bot Tax
@@ -330,8 +335,8 @@ Therefore, the provided Mint Settings must be related to these Resolved Guards. 
 {% diagram %}
 
 {% node %}
-{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node #candy-machine-1 label="Core Candy Machine" theme="blue" /%}
+{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
 {% /node %}
 
 {% node parent="candy-machine-1" y=80 x=20 %}
@@ -360,7 +365,7 @@ Group 2: "public"
 
 {% node parent="mint-1" x=-22 y=100 %}
 {% node #mint-2 label="Mint" theme="pink" /%}
-{% node label="Candy Machine Core Program" theme="pink" /%}
+{% node label="Core Candy Machine Core Program" theme="pink" /%}
 {% /node %}
 {% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
 
@@ -388,17 +393,19 @@ Group 2: "public"
 
 {% /diagram %}
 
-{% dialect-switcher title="Mint from a Candy Machine with guard groups" %}
+{% seperator h="6" /%}
+
+{% dialect-switcher title="Mint from a Core Candy Machine with guard groups" %}
 {% dialect title="JavaScript" id="js" %}
 
-When minting from a Candy Machine using guard groups, the label of the group we want to select must be provided via the `group` attribute.
+When minting from a Core Candy Machine using guard groups, the label of the group we want to select must be provided via the `group` attribute.
 
 Additionally, the Mint Settings for the Resolved Guards of that group may be provided via the `mintArgs` attribute.
 
-Here is how we would use the Umi library to mint from the example Candy Machine described above.
+Here is how we would use the Umi library to mint from the example Core Candy Machine described above.
 
 ```ts
-// Create a Candy Machine with guards.
+// Create a Core Candy Machine with guards.
 const thirdPartySigner = generateSigner()
 await create(umi, {
   // ...
@@ -424,7 +431,7 @@ await create(umi, {
   ],
 }).sendAndConfirm(umi)
 
-// Mint from the Candy Machine.
+// Mint from the Core Candy Machine.
 
 const candyMachineId = publicKey('11111111111111111111111111111111')
 const coreCollection = publicKey('22222222222222222222222222222222')
@@ -458,19 +465,19 @@ API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 ## Minting With Pre-Validation
 
-It is important to note that some guards may require additional verification steps before we can mint from their Candy Machine. This pre-validation step usually creates an account on the blockchain or rewards the wallet with a token that acts as proof of that verification.
+It is important to note that some guards may require additional verification steps before we can mint from their Core Candy Machine. This pre-validation step usually creates an account on the blockchain or rewards the wallet with a token that acts as proof of that verification.
 
 ### Using the route instruction
 
 One way guards can require a pre-validation step is by using [their own special instruction](/core-candy-machine/guard-route) via the “route” instruction.
 
-A good example of that is the **Allow List** guard. When using this guard, we must verify that our wallet belongs to a predefined list of wallets by calling the route instruction and providing a valid Merkle Proof. If this route instruction is successful, it will create an Allow List PDA for that wallet which the mint instruction can then read to validate the Allow List guard. [You can read more about the Allow List guard on its dedicated page](/core-candy-machine/available-guards/allow-list).
+A good example of that is the **Allow List** guard. When using this guard, we must verify that our wallet belongs to a predefined list of wallets by calling the route instruction and providing a valid Merkle Proof. If this route instruction is successful, it will create an Allow List PDA for that wallet which the mint instruction can then read to validate the Allow List guard. [You can read more about the Allow List guard on its dedicated page](/core-candy-machine/guards/allow-list).
 
 {% diagram %}
 
 {% node %}
-{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node #candy-machine-1 label="Core Candy Machine" theme="blue" /%}
+{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
 {% /node %}
 
 {% node parent="candy-machine-1" y=80 x=20 %}
@@ -489,7 +496,7 @@ A good example of that is the **Allow List** guard. When using this guard, we mu
 
 {% node parent="mint-1" x=-22 y=100 %}
 {% node #mint-2 label="Mint" theme="pink" /%}
-{% node label="Candy Machine Core Program" theme="pink" /%}
+{% node label="Core Candy Machine Core Program" theme="pink" /%}
 {% /node %}
 {% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
 
@@ -497,7 +504,7 @@ A good example of that is the **Allow List** guard. When using this guard, we mu
 
 {% node parent="mint-2" x=-250 %}
 {% node #route label="Route" theme="pink" /%}
-{% node label="Candy Machine Core Program" theme="pink" /%}
+{% node label="Core Candy Machine Core Program" theme="pink" /%}
 {% /node %}
 {% node parent="route" x=70 y=-20 label="Verify Merkle Proof" theme="transparent" /%}
 
@@ -517,13 +524,13 @@ A good example of that is the **Allow List** guard. When using this guard, we mu
 
 Another way guards may perform that pre-validation step is by relying on an external solution.
 
-For instance, when using the **Gatekeeper** guard, we must request a Gateway Token by performing a challenge — such as completing a Captcha — which depends on the configured Gatekeeper Network. The Gatekeeper guard will then check for the existence of such Gateway Token to either validate or reject the mint. [You can learn more about the Gatekeeper guard on its dedicated page](/core-candy-machine/available-guards/gatekeeper).
+For instance, when using the **Gatekeeper** guard, we must request a Gateway Token by performing a challenge — such as completing a Captcha — which depends on the configured Gatekeeper Network. The Gatekeeper guard will then check for the existence of such Gateway Token to either validate or reject the mint. [You can learn more about the Gatekeeper guard on its dedicated page](/core-candy-machine/guards/gatekeeper).
 
 {% diagram %}
 
 {% node %}
-{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node #candy-machine-1 label="Core Candy Machine" theme="blue" /%}
+{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
 {% /node %}
 
 {% node parent="candy-machine-1" y=80 x=20 %}
@@ -542,7 +549,7 @@ For instance, when using the **Gatekeeper** guard, we must request a Gateway Tok
 
 {% node parent="mint-1" x=-22 y=100 %}
 {% node #mint-2 label="Mint" theme="pink" /%}
-{% node label="Candy Machine Core Program" theme="pink" /%}
+{% node label="Core Candy Machine Core Program" theme="pink" /%}
 {% /node %}
 {% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
 
@@ -571,15 +578,14 @@ Network, e.g. Captcha.
 
 ## Minting With Bot Taxes
 
-One guard you’ll likely want to include in your Candy Machine is the Box Tax guard which protects your Candy Machine against bots by charging failed mints a configurable amount of SOL. This amount is usually small to hurt bots without affecting genuine mistakes from real users. All bot taxes will be transferred to the Candy Machine account so that, once minting is over, you can access these funds by deleting the Candy Machine account.
+One guard you’ll likely want to include in your Core Candy Machine is the Box Tax guard which protects your Core Candy Machine against bots by charging failed mints a configurable amount of SOL. This amount is usually small to hurt bots without affecting genuine mistakes from real users. All bot taxes will be transferred to the Core Candy Machine account so that, once minting is over, you can access these funds by deleting the Core Candy Machine account.
 
-This guard is a bit special and affects the minting behaviour of all other guards. When the Bot Tax is activated and any other guard fails to validate the mint, **the transaction will pretend to succeed**. This means no errors will be returned by the program but no NFT will be minted either. This is because the transaction must succeed for the funds to be transferred from the bot to the Candy Machine account. [You can learn more about the Bot Tax guard on its dedicated page](/core-candy-machine/available-guards/bot-tax).
+This guard is a bit special and affects the minting behaviour of all other guards. When the Bot Tax is activated and any other guard fails to validate the mint, **the transaction will pretend to succeed**. This means no errors will be returned by the program but no NFT will be minted either. This is because the transaction must succeed for the funds to be transferred from the bot to the Core Candy Machine account. [You can learn more about the Bot Tax guard on its dedicated page](/core-candy-machine/guards/bot-tax).
 
 ## Conclusion
 
-Congratulations, you now know how Candy Machines work from A to Z!
+Congratulations, you now know how Core Candy Machines work from A to Z!
 
 Here are some additional reading resources you might be interested in:
 
-- [All Available Guards](/core-candy-machine/available-guards): Have a look through all the guards available to you so you can cherry-pick the ones you need.
-- _Create Your First Candy Machine (coming soon)_: This How-To guide helps you upload your assets and create a new Candy Machine from scratch using a CLI tool called “[Sugar](/core-candy-machine/sugar)”. It also uses our JS SDK to spin up a minting website for your Candy Machine.
+- [All Available Guards](/core-candy-machine/guards): Have a look through all the guards available to you so you can cherry-pick the ones you need.

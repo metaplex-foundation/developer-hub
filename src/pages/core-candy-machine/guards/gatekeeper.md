@@ -1,6 +1,6 @@
 ---
 title: "Gatekeeper"
-metaTitle: "Candy Machine Guards - Gatekeeper"
+metaTitle: "Core Candy Machine Guards - Gatekeeper"
 description: "The Gatekeeper guard checks whether the minting wallet has a valid Gateway Token from a specified Gatekeeper Network."
 ---
 
@@ -10,7 +10,7 @@ The **Gatekeeper** guard checks whether the minting wallet has a valid **Gateway
 
 In most cases, this token will be obtained after completing a Captcha challenge but any Gatekeeper Network may be used.
 
-There isn’t much to set up on the Candy Machine side but, depending on the selected Gatekeeper Network, you may need to ask the minting wallet to perform so pre-validation checks to grant them the required Gateway Token.
+There isn’t much to set up on the Core Candy Machine side but, depending on the selected Gatekeeper Network, you may need to ask the minting wallet to perform so pre-validation checks to grant them the required Gateway Token.
 
 Here are some additional recommended materials you may find helpful when setting up a Gatekeep Network.
 
@@ -21,8 +21,8 @@ Here are some additional recommended materials you may find helpful when setting
 {% diagram  %}
 
 {% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
+{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
 {% /node %}
 
 {% node parent="candy-machine" y="100" x="22" %}
@@ -60,19 +60,19 @@ Network e.g. Captcha
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" y="150" x="-9" %}
+{% node parent="mint-candy-guard" y="150" x="-30" %}
   {% node #mint-candy-machine theme="pink" %}
     Mint from 
     
-    _Candy Machine Program_
+    _Core Candy Machine Program_
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="78" theme="blue" %}
-  NFT
+{% node #nft parent="mint-candy-machine" y="140" x="92" theme="blue" %}
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -101,7 +101,7 @@ The Gatekeeper guard contains the following settings:
   - When set to `true`, they will need to go through the Gatekeeper Network again to mint another NFT.
   - When set to `false`, they will be able to mint another NFT until the Gateway Token expires naturally.
 
-{% dialect-switcher title="Set up a Candy Machine using the Gatekeeper guard" %}
+{% dialect-switcher title="Set up a Core Candy Machine using the Gatekeeper guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -145,7 +145,7 @@ The Gatekeeper guard accepts the following mint settings:
 - **Expire On Use**: Whether we should mark the Gateway Token of the minting wallet as expired after the NFT has been minting.
 - **Token Account** (optional): As a little disclaimer, you should very rarely need to provide this setting but it’s here if you need to. This refers to the Gateway Token PDA derived from the payer and the Gatekeeper Network which is used to verify the payer's eligibility to mint. This PDA address can be inferred by our SDKs which is why you do not need to provide it. However, some Gatekeeper Networks may issue multiple Gateway Tokens to the same wallet. To differentiate their PDA addresses, it uses a **Seeds** array which defaults to `[0, 0, 0, 0, 0, 0, 0, 0]`.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#gatekeeper) for more details.
+Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#gatekeeper) for more details.
 
 {% dialect-switcher title="Mint with the Gatekeeper Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -164,13 +164,6 @@ mintV1(umi, {
   },
 });
 ```
-{% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
-
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}

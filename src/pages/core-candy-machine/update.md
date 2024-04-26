@@ -4,13 +4,13 @@ metaTitle: Updating a Core Candy Machine
 description: Learn how to update your Core Candy Machine and it's various settings.
 ---
 
-## Updating a Core Candy Machine
-
 {% dialect-switcher title="Updating a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { updateCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine'
+import { 
+  updateCandyMachine 
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = generateSigner(umi)
 
@@ -28,12 +28,12 @@ await updateCandyMachine(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Args
+## Args
 
 {% dialect-switcher title="Update Core Candy Machine Args" %}
 {% dialect title="JavaScript" id="js" %}
 
-Available arguments that can be passed into the createCandyMachineV2 function.
+Available arguments that can be passed into the updateCandyMachine function.
 
 | name         | type      |
 | ------------ | --------- |
@@ -45,7 +45,7 @@ Available arguments that can be passed into the createCandyMachineV2 function.
 
 Some settings are unabled to be changed/updated once minting has started.
 
-#### data
+### data
 
 {% dialect-switcher title="Candy Machine Data Object" %}
 {% dialect title="JavaScript" id="js" %}
@@ -67,7 +67,7 @@ data =  {
 
 ## Assigning a new Authority to the Candy Machine
 
-There maybe scenarios where you may wish to transfer the Candy Machine authority across to a new address. This can be achieved with the `setMintAuthority` function.
+There may be scenarios where you may wish to transfer the Candy Machine authority across to a new address. This can be achieved with the `setMintAuthority` function.
 
 export declare type SetMintAuthorityInstructionAccounts = {
 /** Candy Machine account. \*/
@@ -82,7 +82,9 @@ mintAuthority: Signer;
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { setMintAuthority } from '@metaplex-foundation/mpl-core-candy-machine'
+import { 
+  setMintAuthority 
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = publicKey('11111111111111111111111111111111')
 const newAuthority = publicKey('22222222222222222222222222222222')
@@ -97,8 +99,6 @@ await setMintAuthority(umi, {
 {% /dialect-switcher %}
 
 When assigning a new Authority to a Core Candy Machine you will also have to update the Collection Asset to the same update Authority.
-
-// Todo: Check this is still the case because new authorties work different compared to Nft/pNft.
 
 ## Updating guards
 
@@ -136,9 +136,9 @@ API References: [updateCandyGuard](https://mpl-core-candy-machine-js-docs.vercel
 
 ## Wrapping and unwrapping Candy Guard accounts manually
 
-So far we’ve managed both Core Candy Machine and Candy Guard accounts together because that makes the most sense for most projects.
+So far we’ve managed both Core Candy Machine and Core Candy Guard accounts together because that makes the most sense for most projects.
 
-However, it is important to note that Core Candy Machines and Candy Guards can be created and associated in different steps, even using our SDKs.
+However, it is important to note that Core Candy Machines and Core Candy Guards can be created and associated in different steps, even using our SDKs.
 
 You will first need to create the two accounts separately and associate/dissociate them manually.
 
@@ -150,8 +150,19 @@ The `create` function of the Umi library already takes care of creating and asso
 However, if you wanted to create them separately and manually associate/dissociate them, this is how you’d do it.
 
 ```ts
-import { some, percentAmount, sol, dateTime } from '@metaplex-foundation/umi'
-import { createCandyMachine, createCandyGuard, findCandyGuardPda, wrap, unwrap } from '@metaplex-foundation/mpl-core-candy-machine'
+import { 
+  some, 
+  percentAmount, 
+  sol, 
+  dateTime 
+} from '@metaplex-foundation/umi'
+import { 
+  createCandyMachine, 
+  createCandyGuard, 
+  findCandyGuardPda, 
+  wrap, 
+  unwrap 
+} from '@metaplex-foundation/mpl-core-candy-machine'
 
 // Create a Candy Machine without a Candy Guard.
 const candyMachine = generateSigner(umi)
@@ -163,7 +174,11 @@ await createCandyMachine({
   itemsAvailable: 100,
   sellerFeeBasisPoints: percentAmount(1.23),
   creators: [
-    { address: umi.identity.publicKey, verified: false, percentageShare: 100 },
+    { 
+      address: umi.identity.publicKey, 
+      verified: false, 
+      percentageShare: 100 
+    },
   ],
   configLineSettings: some({
     prefixName: 'My NFT #',

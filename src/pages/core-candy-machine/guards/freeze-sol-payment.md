@@ -1,22 +1,22 @@
 ---
 title: 'Freeze Sol Payment'
-metaTitle: 'Candy Machine Guards - Freeze Sol Payment'
+metaTitle: 'Core Candy Machine Guards - Freeze Sol Payment'
 description: 'Set the price of the mint in SOL with a freeze period.'
 ---
 
 ## Overview
 
-The **Freeze Sol Payment** guard allows minting frozen NFTs by charging the payer an amount in SOL. Frozen NFTs cannot be transferred or listed on any marketplaces until thawed.
+The **Freeze Sol Payment** guard allows minting frozen Assets by charging the payer an amount in SOL. Frozen Assets cannot be transferred or listed on any marketplaces until thawed.
 
-Frozen NFTs can be thawed by anyone as long as one of the following conditions is met:
+Frozen Assets can be thawed by anyone as long as one of the following conditions is met:
 
-- The Candy Machine has minted out.
-- The Candy Machine was deleted.
+- The Core Candy Machine has minted out.
+- The Core Candy Machine was deleted.
 - The configured Freeze Period — which can be a maximum of 30 days — has passed.
 
-The funds are transferred to a "Freeze Escrow" account which must be initialized by the Candy Guard authority before minting can start. Once all Frozen NFTs have been thawed, the funds can be unlocked and transferred to the configured destination account by the Candy Guard authority.
+The funds are transferred to a "Freeze Escrow" account which must be initialized by the Candy Guard authority before minting can start. Once all Frozen Assets have been thawed, the funds can be unlocked and transferred to the configured destination account by the Candy Guard authority.
 
-You may initialize the Freeze Escrow account, thaw NFTs and unlock funds [via the route instruction](#route-instruction) of this guard.
+You may initialize the Freeze Escrow account, thaw Assets and unlock funds [via the route instruction](#route-instruction) of this guard.
 
 {% diagram  %}
 
@@ -31,40 +31,40 @@ Funds are transferred
 
 to the escrow account
 {% /node %}
-{% node #mintFrozen label="Mint Frozen NFTs" theme="indigo" parent="initialize" x="250" /%}
+{% node #mintFrozen label="Mint Frozen Assets" theme="indigo" parent="initialize" x="250" /%}
 {% node parent="mintFrozen"  theme="transparent" x="-8" y="-1" %}
 ②
 {% /node %}
 {% edge from="mintFrozen" to="frozen-NFT-bg2" path="straight" /%}
 {% edge from="mintFrozen" to="freezeEscrow-pda" toPosition="right" fromPosition="bottom" /%}
-{% node #frozen-NFT-bg2 label="Frozen NFT" theme="slate" parent="frozen-NFT" x="-10" y="-10" /%}
-{% node #frozen-NFT-bg1 label="Frozen NFT" theme="slate" parent="frozen-NFT" x="-5" y="-5" /%}
-{% node #frozen-NFT label="Frozen NFT" theme="slate" parent="mintFrozen" x="33" y="120" /%}
+{% node #frozen-NFT-bg2 label="Frozen Asset" theme="slate" parent="frozen-NFT" x="-10" y="-10" /%}
+{% node #frozen-NFT-bg1 label="Frozen Asset" theme="slate" parent="frozen-NFT" x="-5" y="-5" /%}
+{% node #frozen-NFT label="Frozen Asset" theme="slate" parent="mintFrozen" x="33" y="120" /%}
 
 {% node #clock label="🕑" theme="transparent" parent="mintFrozen" x="165" y="-30" /%}
 {% edge from="clock" to="clockDesc" arrow="none" theme="dimmed" path="straight" /%}
 {% node #clockDesc  theme="transparent" parent="clock" y="220" x="-91" %}
-_When all NFTs have been minted_
+_When all Assets have been minted_
 
 _OR at the end of the freeze period._
 {% /node %}
 
 {% edge from="frozen-NFT" to="thawed-NFT-bg2" path="straight" /%}
 
-{% node #thaw label="Thaw NFTs" theme="indigo" parent="mintFrozen" x="200" /%}
+{% node #thaw label="Thaw Assets" theme="indigo" parent="mintFrozen" x="200" /%}
 {% node parent="thaw"  theme="transparent" x="-8" y="-1" %}
 ③
 {% /node %}
 {% edge from="thaw" to="thawed-NFT-bg2" path="straight" /%}
-{% node #thawed-NFT-bg2 label="Thawed NFT" theme="slate" parent="thawed-NFT" x="-10" y="-10" /%}
-{% node #thawed-NFT-bg1 label="Thawed NFT" theme="slate" parent="thawed-NFT" x="-5" y="-5" /%}
-{% node #thawed-NFT label="Thawed NFT" theme="slate" parent="thaw" y="130" x="3" /%}
+{% node #thawed-NFT-bg2 label="Thawed Asset" theme="slate" parent="thawed-NFT" x="-10" y="-10" /%}
+{% node #thawed-NFT-bg1 label="Thawed Asset" theme="slate" parent="thawed-NFT" x="-5" y="-5" /%}
+{% node #thawed-NFT label="Thawed Asset" theme="slate" parent="thaw" y="130" x="3" /%}
 
 
 {% node #clock2 label="🕑" theme="transparent" parent="thaw" x="130" y="-30" /%}
 {% edge from="clock2" to="clockDesc2" arrow="none" theme="dimmed" path="straight" /%}
 {% node #clockDesc2  theme="transparent" parent="clock2" y="260" x="-91" %}
-_When all NFTs have been thawed._
+_When all Assets have been thawed._
 {% /node %}
 
 {% node #unlock label="Unlock Funds" theme="indigo" parent="thaw" x="180" /%}
@@ -123,9 +123,8 @@ Add this object into the guard section your config.json file:
 The Freeze Sol Payment guard contains the following Mint Settings:
 
 - **Destination**: The address of the wallet that should eventually receive all payments related to this guard.
-- **NFT Rule Set** (optional): The Rule Set of the minted NFT, if we are minting a Programmable NFT with a Rule Set.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#freezesolpayment) for more details.
+Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#freezesolpayment) for more details.
 
 {% dialect-switcher title="Mint with the Freeze Sol Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -164,9 +163,9 @@ The Freeze Sol Payment route instruction supports the following features.
 - [Mint Settings](#mint-settings)
 - [Route Instruction](#route-instruction)
   - [Initialize the Freeze Escrow](#initialize-the-freeze-escrow)
-  - [Thaw a Frozen NFT](#thaw-a-frozen-nft)
+  - [Thaw a Frozen Asset](#thaw-a-frozen-asset)
   - [Unlock Funds](#unlock-funds)
-- [Stop Freezing NFTs](#stop-freezing-nfts)
+- [Stop Freezing Assets](#stop-freezing-Assets)
 - [Freeze Escrows and Guard Groups](#freeze-escrows-and-guard-groups)
 
 ### Initialize the Freeze Escrow
@@ -177,14 +176,14 @@ When using the Freeze Sol Payment guard, we must initialize the Freeze Escrow ac
 
 The Freeze Escrow PDA account will keep track of several parameters such as:
 
-- How many Frozen NFTs were minted through this guard.
-- When was the first Frozen NFT minted via this guard as the Freeze Period starts counting after that.
+- How many Frozen Assets were minted through this guard.
+- When was the first Frozen Asset minted via this guard as the Freeze Period starts counting after that.
 
 When initializing this Freeze Escrow account, we must provide the following arguments to the route instruction of the guard:
 
 - **Path** = `initialize`: Selects the path to execute in the route instruction.
 - **Destination**: The address of the wallet that should eventually receive all payments related to this guard.
-- **Period**: The amount of time in seconds that the Freeze Period should last. This can be a maximum of 30 days (2,592,000 seconds) and it will start from the very first Frozen NFT minted via this guard. The Freeze Period provides a safety mechanism to ensure Frozen NFTs can eventually be thawed even if the Candy Machine never mints out.
+- **Period**: The amount of time in seconds that the Freeze Period should last. This can be a maximum of 30 days (2,592,000 seconds) and it will start from the very first Frozen Asset minted via this guard. The Freeze Period provides a safety mechanism to ensure Frozen Assets can eventually be thawed even if the Candy Machine never mints out.
 - **Candy Guard Authority**: The authority of the Candy Guard account as a Signer.
 
 {% diagram  %}
@@ -242,7 +241,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% /diagram %}
 
-Last but not least, the Freeze Escrow PDA account will receive the funds of all Frozen NFTs minted through this guard.
+Last but not least, the Freeze Escrow PDA account will receive the funds of all Frozen Assets minted through this guard.
 
 {% diagram  %}
 
@@ -298,7 +297,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% edge from="mint-candy-machine" to="frozen-NFT" path="straight" /%}
 {% node #frozen-NFT parent="mint-candy-machine" y="120" x="29" theme="slate" %}
-  Frozen NFT
+  Frozen Asset
 {% /node %}
 
 {% edge from="candy-guard" to="candy-machine" /%}
@@ -307,7 +306,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% /diagram %}
 
-‎
+{% sperator h="6" %}
 
 {% dialect-switcher title="Initialize the Freeze Escrow" %}
 {% dialect title="JavaScript" id="js" %}
@@ -332,74 +331,26 @@ API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functi
 
 {% /totem %}
 {% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-Run the following command to initialize the Freeze Escrow account
-
-```sh
-sugar freeze initialize
-```
-
-You can use the following parameters 
-
-```
-    -c, --config <CONFIG>
-            Path to the config file [default: config.json]
-
-        --cache <CACHE>
-            Path to the cache file, defaults to "cache.json" [default: cache.json]
-
-        --candy-guard <CANDY_GUARD>
-            Address of candy guard to update [defaults to cache value]
-
-        --candy-machine <CANDY_MACHINE>
-            Address of candy machine to update [defaults to cache value]
-
-        --destination <DESTINATION>
-            Address of the destination (treasury) account
-
-    -h, --help
-            Print help information
-
-    -k, --keypair <KEYPAIR>
-            Path to the keypair file, uses Sol config or defaults to "~/.config/solana/id.json"
-
-    -l, --log-level <LOG_LEVEL>
-            Log level: trace, debug, info, warn, error, off
-
-        --label <LABEL>
-            Candy guard group label
-
-    -r, --rpc-url <RPC_URL>
-            RPC Url
-```
-
-When using a candy machine with guard groups you will have to use the `--label` parameter.
-{% /totem %}
-{% /dialect %}
 {% /dialect-switcher %}
 
-### Thaw a Frozen NFT
+### Thaw a Frozen Asset
 
 _Path: `thaw`_
 
-Frozen NFTs can be thawed by anyone as long as one of the following conditions is met:
+Frozen Assets can be thawed by anyone as long as one of the following conditions is met:
 
 - The Candy Machine has minted out.
 - The Candy Machine was deleted.
 - The configured Freeze Period — which can be a maximum of 30 days — has passed.
 
-Note that since the funds in the Freeze Escrow are not transferrable until all NFTs are thawed, this creates an incentive for the treasury to thaw all NFTs as soon as possible.
+Note that since the funds in the Freeze Escrow are not transferrable until all Assets are thawed, this creates an incentive for the treasury to thaw all Assets as soon as possible.
 
-To thaw a Frozen NFT, we must provide the following arguments to the route instruction of the guard:
+To thaw a Frozen Asset, we must provide the following arguments to the route instruction of the guard:
 
 - **Path** = `thaw`: Selects the path to execute in the route instruction.
 - **Destination**: The address of the wallet that should eventually receive all payments related to this guard.
-- **NFT Mint**: The mint address of the Frozen NFT to thaw.
-- **NFT Owner**: The address of the owner of the Frozen NFT to thaw.
-- **NFT Token Standard**: The token standard of the Frozen NFT to thaw.
-- **NFT Rule Set** (optional): The Rule Set of the Frozen NFT to thaw, if we are thawing a Programmable NFT with a Rule Set.
+- **Asset Address**: The mint address of the Frozen Asset to thaw.
+- **Asset Owner**: The address of the owner of the Frozen Asset to thaw.
 
 {% diagram  %}
 
@@ -433,7 +384,7 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="candy-guard-route" y="-20" x="80" theme="transparent" %}
-  Thaw a Frozen NFT
+  Thaw a Frozen Asset
 {% /node %}
 
 {% node #freeze-period parent="candy-guard-route" x="218" y="15" label="Freeze Escrow PDA" /%}
@@ -446,10 +397,10 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 
 {% edge from="candy-guard-route" to="freezeEscrow-PDA5" theme="pink" path="straight" /%}
 
-{% node #frozen-NFT parent="candy-guard-route" y="-100" x="29" label="Frozen NFT" /%}
+{% node #frozen-NFT parent="candy-guard-route" y="-100" x="29" label="Frozen Asset" /%}
 {% edge from="frozen-NFT" to="candy-guard-route" path="straight" /%}
 
-{% node #freezeEscrow-PDA5 parent="candy-guard-route" x="25" y="150" label="Thawed NFT" /%}
+{% node #freezeEscrow-PDA5 parent="candy-guard-route" x="25" y="150" label="Thawed Asset" /%}
 {% edge from="candy-guard" to="candy-machine" /%}
 
 {% edge from="candy-guard-guards" to="guards" /%}
@@ -457,13 +408,13 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 
 {% /diagram %}
 
-‎
+{% seperator h="6" /%}
 
-{% dialect-switcher title="Thaw a frozen NFT" %}
+{% dialect-switcher title="Thaw a frozen Asset" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-In the example below, we thaw a Frozen NFT that belongs to the current identity.
+In the example below, we thaw a Frozen Asset that belongs to the current identity.
 
 ```ts
 route(umi, {
@@ -483,72 +434,14 @@ API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functi
 
 {% /totem %}
 {% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
 
-Run the following command to thaw the NFT(s):
-
-```sh
-sugar freeze thaw 
-```
-
-You can use the following parameters 
-
-```
-ARGS:
-    <NFT_MINT>    Address of the NFT to thaw
-
-OPTIONS:
-        --all
-            Unthaw all NFTs in the candy machine
-
-    -c, --config <CONFIG>
-            Path to the config file [default: config.json]
-
-        --cache <CACHE>
-            Path to the cache file, defaults to "cache.json" [default: cache.json]
-
-        --candy-guard <CANDY_GUARD>
-            Address of candy guard to update [defaults to cache value]
-
-        --candy-machine <CANDY_MACHINE>
-            Address of candy machine to update [defaults to cache value]
-
-        --destination <DESTINATION>
-            Address of the destination (treaury) account
-
-    -h, --help
-            Print help information
-
-    -k, --keypair <KEYPAIR>
-            Path to the keypair file, uses Sol config or defaults to "~/.config/solana/id.json"
-
-    -l, --log-level <LOG_LEVEL>
-            Log level: trace, debug, info, warn, error, off
-
-        --label <LABEL>
-            Candy guard group label
-
-    -r, --rpc-url <RPC_URL>
-            RPC Url
-
-    -t, --timeout <TIMEOUT>
-            RPC timeout to retrieve the mint list (in seconds)
-
-        --use-cache
-            Indicates to create/use a cache file for mint list
-```
-
-When using a candy machine with guard groups you will have to use the `--label` parameter.
-{% /totem %}
-{% /dialect %}
 {% /dialect-switcher %}
 
 ### Unlock Funds
 
 _Path: `unlockFunds`_
 
-Once all Frozen NFTs have been thawed, the treasury can unlock the funds from the Freeze Escrow account. This will transfer the funds to the configured Destination address.
+Once all Frozen Assets have been thawed, the treasury can unlock the funds from the Freeze Escrow account. This will transfer the funds to the configured Destination address.
 
 To unlock the funds, we must provide the following arguments to the route instruction of the guard:
 
@@ -618,7 +511,7 @@ the Freeze Escrow Account
 
 {% /diagram %}
 
-‎
+{% separator h="6" /%}
 
 {% dialect-switcher title="Unlock Funds" %}
 {% dialect title="JavaScript" id="js" %}
@@ -642,64 +535,18 @@ API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functi
 
 {% /totem %}
 {% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-Run the following command to unlock the funds from the Freeze Escrow Account
-
-```sh
-sugar freeze unlock-funds
-```
-
-You can use the following parameters 
-
-```
-    -c, --config <CONFIG>
-            Path to the config file [default: config.json]
-
-        --cache <CACHE>
-            Path to the cache file, defaults to "cache.json" [default: cache.json]
-
-        --candy-guard <CANDY_GUARD>
-            Address of candy guard to update [defaults to cache value]
-
-        --candy-machine <CANDY_MACHINE>
-            Address of candy machine to update [defaults to cache value]
-
-        --destination <DESTINATION>
-            Address of the destination (treasury) account
-
-    -h, --help
-            Print help information
-
-    -k, --keypair <KEYPAIR>
-            Path to the keypair file, uses Sol config or defaults to "~/.config/solana/id.json"
-
-    -l, --log-level <LOG_LEVEL>
-            Log level: trace, debug, info, warn, error, off
-
-        --label <LABEL>
-            Candy guard group label
-
-    -r, --rpc-url <RPC_URL>
-            RPC Url
-```
-
-When using a candy machine with guard groups you will have to use the `--label` parameter.
-{% /totem %}
-{% /dialect %}
 {% /dialect-switcher %}
 
-## Stop Freezing NFTs
+## Stop Freezing Assets
 
-It is possible to stop the freezing of NFTs within a Freeze Sol Payment guard. In other words, new-minted NFTs will no longer be frozen but **existing Frozen NFTs will remain frozen**.
+It is possible to stop the freezing of Assets within a Freeze Sol Payment guard. In other words, new-minted Assets will no longer be frozen but **existing Frozen Assets will remain frozen**.
 
 There are several ways of achieving this, which can be separated into two categories:
 
-- ☀️ **Can Thaw**: Existing Frozen NFTs can be thawed by anyone using the `thaw` path of the route instruction.
-- ❄️ **Cannot Thaw**: Existing Frozen NFTs cannot be thawed yet and we have to wait for one "Can Thaw" condition to be met.
+- ☀️ **Can Thaw**: Existing Frozen Assets can be thawed by anyone using the `thaw` path of the route instruction.
+- ❄️ **Cannot Thaw**: Existing Frozen Assets cannot be thawed yet and we have to wait for one "Can Thaw" condition to be met.
 
-With that in mind, here is the exhaustive list of ways to stop freezing NFTs and whether or not each of them allows thawing existing Frozen NFTs:
+With that in mind, here is the exhaustive list of ways to stop freezing Assets and whether or not each of them allows thawing existing Frozen Assets:
 
 - The Candy Machine has minted out → ☀️ **Can Thaw**.
 - The configured Freeze Period — which can be a maximum of 30 days — has passed → ☀️ **Can Thaw**.

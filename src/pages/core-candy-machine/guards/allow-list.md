@@ -181,7 +181,7 @@ Allowlist PDA {% .whitespace-nowrap %}
 {% /node %}
 
 {% node #nft parent="mint-candy-machine" y="110" x="70" theme="blue" %}
-  NFT
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -279,7 +279,7 @@ The Allow List guard contains the following Mint Settings:
 
 Note that, before being able to mint, **we must validate the minting wallet by providing a Merkle Proof**. See [Validate a Merkle Proof](#validate-a-merkle-proof) below for more details.
 
-Also note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to add the Allow List Proof PDA to the remaining accounts of the mint instruction. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#allowlist) for more details.
+Also note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to add the Allow List Proof PDA to the remaining accounts of the mint instruction. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#allowlist) for more details.
 
 {% dialect-switcher title="Mint with the Allow List guard" %}
 {% dialect title="JavaScript" id="js" %}

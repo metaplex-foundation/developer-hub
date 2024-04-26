@@ -51,8 +51,8 @@ Additionally, the Bot Tax guard enables us to ensure the mint instruction was th
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="120" x="76" theme="blue" %}
-  NFT
+{% node #nft parent="mint-candy-machine" y="120" x="73" theme="blue" %}
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 

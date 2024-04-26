@@ -6,9 +6,9 @@ description: "The Allocation guard specify the maximum number of mints in a guar
 
 ## Overview
 
-The **Allocation** guard allows specifying a limit on the number of NFTs each guard group can mint.
+The **Allocation** guard allows specifying a limit on the number of Assets each guard group can mint.
 
-The limit is set per identifier — provided in the settings — to allow multiple allocations within the same Candy Machine.
+The limit is set per identifier — provided in the settings — to allow multiple allocations within the same Core Candy Machine.
 
 {% diagram  %}
 
@@ -48,7 +48,7 @@ Allocation Tracker PDA {% .whitespace-nowrap %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
   {% node theme="pink" %}
     Mint from 
     
@@ -60,7 +60,7 @@ Allocation Tracker PDA {% .whitespace-nowrap %}
 {% /node %}
 
 {% node #nft parent="mint-candy-machine" y="140" x="71" theme="blue" %}
-  NFT
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -124,7 +124,7 @@ The Allocation guard contains the following Mint Settings:
 
 - **ID**: A unique identifier for this guard.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#allocation) for more details.
+Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#allocation) for more details.
 
 {% dialect-switcher title="Mint with the Allocation Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -165,7 +165,7 @@ The Allocation Tracker PDA account will keep track of the number of mints in a g
 When initializing this Allocation Tracker account, we must provide the following arguments to the route instruction of the guard:
 
 - **ID**: The id of the Allocation of the guard's settings.
-- **Candy Guard Authority**: The authority of the Candy Guard account as a Signer.
+- **Candy Guard Authority**: The authority of the Core Candy Guard account as a Signer.
 
 {% diagram  %}
 
@@ -188,7 +188,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% node parent="candy-machine" x="415" %}
   {% node #candy-guard-route theme="pink" %}
-    Route frmo the 
+    Route from the 
     
     _Candy Guard Program_
   {% /node %}
@@ -211,7 +211,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% /diagram %}
 
-‎
+{% seperator h="6" /%}
 
 {% dialect-switcher title="Initialize the Allocation Tracker PDA" %}
 {% dialect title="JavaScript" id="js" %}

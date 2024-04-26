@@ -125,7 +125,7 @@ Finally, it stores all items inserted in the Candy Machine and whether or not th
 
 Note that this last section is purposely not deserialised on the program but our SDKs parse all that data for you in a human-friendly format.
 
-For more detailed information about the Candy Machine account, check out the [program’s API References](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core#account).
+For more detailed information about the Candy Machine account, check out the [program’s API References](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-machine-core#account).
 
 {% dialect-switcher title="Inside Candy Machine accounts" %}
 {% dialect title="JavaScript" id="js" %}

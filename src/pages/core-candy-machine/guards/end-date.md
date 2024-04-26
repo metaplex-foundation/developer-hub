@@ -46,8 +46,8 @@ The **End Date** guard specifies a date to end the mint. After this date, mintin
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="120" x="70" theme="blue" %}
-  NFT
+{% node #nft parent="mint-candy-machine" y="120" x="73" theme="blue" %}
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 

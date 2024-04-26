@@ -4,7 +4,7 @@ metaTitle: Core Candy Machine - Inserting Items
 description: Explains how to load items into Core Candy Machines.
 ---
 
-Now that we have a name and URI for all of our items, all we need to do is insert them into our Candy Machine account.
+Now that we have a name and URI for all of our items, all we need to do is insert them into our Core Candy Machine account.
 
 This is an important part of the process and, when using Config Line Settings, **minting will not be permitted until all items have been inserted**.
 
@@ -15,7 +15,7 @@ Additionally, because transactions are limited to a certain size, we cannot inse
 {% dialect-switcher title="Add config lines" %}
 {% dialect title="JavaScript" id="js" %}
 
-When using the Umi library, you may use the `addConfigLines` function to insert items into a Candy Machine. It requires the config lines to add as well as the index in which you want to insert them.
+When using the Umi library, you may use the `addConfigLines` function to insert items into a Core Candy Machine. It requires the config lines to add as well as the index in which you want to insert them.
 
 ```ts
 await addConfigLines(umi, {
@@ -56,15 +56,15 @@ Note that, since using prefixes can significantly reduce the Name Length and URI
 {% dialect-switcher title="Add config lines from a given index" %}
 {% dialect title="JavaScript" id="js" %}
 
-When adding config lines to a candy machine that uses prefixes, you may only provide the part of the name and URI that comes after the prefix when using the `addConfigLines` function.
+When adding config lines to a Core Candy Machine that uses prefixes, you may only provide the part of the name and URI that comes after the prefix when using the `addConfigLines` function.
 
-For instance, say you had a candy machine with the following config line settings.
+For instance, say you had a Core Candy Machine with the following config line settings.
 
 ```ts
 await create(umi, {
   // ...
   configLineSettings: some({
-    prefixName: 'My NFT #',
+    prefixName: 'My Asset #',
     nameLength: 4,
     prefixUri: 'https://example.com/nft',
     uriLength: 9,
@@ -106,22 +106,22 @@ await addConfigLines(umi, {
   candyMachine: candyMachine.publicKey,
   index: 0,
   configLines: [
-    { name: 'My NFT #1', uri: 'https://example.com/nft1.json' },
-    { name: 'My NFT #2', uri: 'https://example.com/nft2.json' },
-    { name: 'My NFT #3', uri: 'https://example.com/nft3.json' },
+    { name: 'My Asset #1', uri: 'https://example.com/nft1.json' },
+    { name: 'My Asset #2', uri: 'https://example.com/nft2.json' },
+    { name: 'My Asset #3', uri: 'https://example.com/nft3.json' },
   ],
 }).sendAndConfirm(umi)
 
 await addConfigLines(umi, {
   candyMachine: candyMachine.publicKey,
   index: 1,
-  configLines: [{ name: 'My NFT #X', uri: 'https://example.com/nftX.json' }],
+  configLines: [{ name: 'My Asset #X', uri: 'https://example.com/nftX.json' }],
 }).sendAndConfirm(umi)
 
 candyMachine = await fetchCandyMachine(candyMachine.publicKey)
-candyMachine.items[0].name // "My NFT #1"
-candyMachine.items[1].name // "My NFT #X"
-candyMachine.items[2].name // "My NFT #3"
+candyMachine.items[0].name // "My Asset #1"
+candyMachine.items[1].name // "My Asset #X"
+candyMachine.items[2].name // "My Asset #3"
 ```
 
 API References: [addConfigLines](https://mpl-core-candy-machine-js-docs.vercel.app/functions/addConfigLines.html)
@@ -131,4 +131,4 @@ API References: [addConfigLines](https://mpl-core-candy-machine-js-docs.vercel.a
 
 ## Conclusion
 
-And just like that, we have a loaded Candy Machine ready to mint NFTs! However, we've not created any requirements for our minting process. How can we configure the price of the mint? How can we ensure that buyers are holders of a specific token or an NFT from a specific collection? How can we set the start date of our mint? What about the end conditions?
+And just like that, we have a loaded Core Candy Machine ready to mint Assets! However, we've not created any requirements for our minting process. How can we configure the price of the mint? How can we ensure that buyers are holders of a specific token or an Asset from a specific collection? How can we set the start date of our mint? What about the end conditions?

@@ -1,21 +1,21 @@
 ---
 title: "Mint Limit"
-metaTitle: "Candy Machine Guards - Mint Limit"
-description: "The Mint Limit guard allows specifying a limit on the number of NFTs each wallet can mint."
+metaTitle: "Core Candy Machine Guards - Mint Limit"
+description: "The Mint Limit guard allows specifying a limit on the number of Assets each wallet can mint."
 ---
 
 ## Overview
 
-The **Mint Limit** guard allows specifying a limit on the number of NFTs each wallet can mint.
+The **Mint Limit** guard allows specifying a limit on the number of Assets each wallet can mint.
 
-The limit is set per wallet, per candy machine and per identifier — provided in the settings — to allow multiple mint limits within the same Candy Machine.
+The limit is set per wallet, per candy machine and per identifier — provided in the settings — to allow multiple mint limits within the same Core Candy Machine.
 
 {% diagram  %}
 
 {% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
 {% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% /node %}
 
@@ -56,19 +56,19 @@ Mint Counter PDA {% .whitespace-nowrap %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-30" %}
   {% node  theme="pink" %}
     Mint from 
     
-    _Candy Machine Program_
+    _Core Candy Machine Program_
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="71" theme="blue" %}
-  NFT
+{% node #nft parent="mint-candy-machine" y="140" x="90" theme="blue" %}
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -102,20 +102,6 @@ API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 {% /totem %}
 {% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-Add this object into the guard section your config.json file:
-
-```json
-"mintLimit" : {
-    "id": number,
-    "limit": number
-}
-```
-
-{% /totem %}
-{% /dialect %}
 {% /dialect-switcher %}
 
 ## Mint Settings
@@ -124,7 +110,7 @@ The Mint Limit guard contains the following Mint Settings:
 
 - **ID**: A unique identifier for this guard.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#mintlimit) for more details.
+Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#mintlimit) for more details.
 
 {% dialect-switcher title="Mint with the Mint Limit Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -140,13 +126,6 @@ mintV1(umi, {
   },
 });
 ```
-
-{% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
 
 {% /totem %}
 {% /dialect %}

@@ -9,11 +9,11 @@ description: Learn how to create your Core Candy Machine and it's various settin
 - [Prepared Assets](/core-candy-machine/preparing-assets)
 - [Create Core Collection](/core/collections#creating-a-collection)
 
-If you wish to create your Candy Machine Assets into a collection (new or existing) you will need to supply the Core Collection upon creation of the Candy Machine V4.
+If you wish to create your Core Candy Machine Assets into a collection (new or existing) you will need to supply the Core Collection upon creation of the Core Candy Machine.
 
 ## Creating a Candy Machine
 
-{% dialect-switcher title="Create a Candy Machine" %}
+{% dialect-switcher title="Create a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -41,7 +41,7 @@ await createIx.sendAndConfirm(umi)
 
 Available arguments that can be passed into the createCandyMachine function.
 
-A newly generated keypair/signer that is used to create the candymachine.
+A newly generated keypair/signer that is used to create the Core Candy Machine.
 
 {% dialect-switcher title="Create CandyMahcine Args" %}
 {% dialect title="JavaScript" id="js" %}
@@ -90,7 +90,7 @@ authorityPda: string
 {% /dialect %}
 {% /dialect-switcher %}
 
-The authorityPda field is the PDA used to verify minted NFTs to the collection. This is optional an is calculated automatically based on default seeds if left.
+The authorityPda field is the PDA used to verify minted Assets to the collection. This is optional an is calculated automatically based on default seeds if left.
 
 ### authority (optional)
 
@@ -118,11 +118,11 @@ payer: publicKey
 {% /dialect %}
 {% /dialect-switcher %}
 
-The authority field is the wallet/publicKey that will be the authority over the candymachine.
+The authority field is the wallet/publicKey that will be the authority over the Core Candy Machine.
 
 ### Collection
 
-The collection the Candy Machine will create Assets into.
+The collection the Core Candy Machine will create Assets into.
 
 {% dialect-switcher title="authority" %}
 {% dialect title="JavaScript" id="js" %}
@@ -189,7 +189,7 @@ isMutable: number
 {% /dialect %}
 {% /dialect-switcher %}
 
-The number of items being loaded into the candymachine.
+The number of items being loaded into the Core Candy Machine.
 
 ### Is Mutable
 
@@ -229,13 +229,13 @@ creators : {
 
 ### Config Line Settings
 
-Config Line Settings is an optional field that allows advanced options of adding your Asset data to the Candymachine making the Candymachine's rent cost significantly cheaper.
+Config Line Settings is an optional field that allows advanced options of adding your Asset data to the Core Candy Machine making the Core Candy Machine's rent cost significantly cheaper.
 
-By storing the Assets name and URI prefixs into the Candy Machine the data required to be stored is significantly reduced as you will not be storing the same name and URI for every single Asset.
+By storing the Assets name and URI prefixs into the Core Candy Machine the data required to be stored is significantly reduced as you will not be storing the same name and URI for every single Asset.
 
 For example if all your Assests had the same naming structure of `Example Asset #1` through to `Example Asset #1000` this would normally require you to store the string `Example Asset #` 1000 times, taking up 15,000 bytes.
 
-By storing the prefix of the name in the the Candy Machine and letting the Candy Machine append the index number created to the string you save these 15,000 bytes in rent cost.
+By storing the prefix of the name in the the Core Candy Machine and letting the Core Candy Machine append the index number created to the string you save these 15,000 bytes in rent cost.
 
 This also applies to the URI prefix.
 
@@ -259,7 +259,7 @@ ConfigLineSettings = {
 
 This stores the name prefix of the nfts and appends the minted index to the end of the name upon mint.
 
-If your Asset's have a naming structure of `Example Asset #1` then your prefix would be `Example Asset #`. Upon mint the Candy Machine will attatch the index to the end of the string.
+If your Asset's have a naming structure of `Example Asset #1` then your prefix would be `Example Asset #`. Upon mint the Core Candy Machine will attatch the index to the end of the string.
 
 #### nameLength
 
@@ -281,26 +281,11 @@ If your prefixUri is `https://example.com/metadata/` this would have a length of
 
 Indicates whether to use a senquential index generator or not. If false the Candy Machine will mint randomly.
 
-create(umi, {
-candyMachine,
-collection: collectionMint.publicKey,
-collectionUpdateAuthority: umi.identity,
-sellerFeeBasisPoints: percentAmount(10),
-itemsAvailable: 1000,
-creators: [
-{
-address: umi.identity.publicKey,
-verified: true,
-percentageShare: 100,
-},
-],
-});
-
 #### configLineSettings
 
-Here is an example of creating an Candy Machine with `configLineSettings` applied:
+Here is an example of creating a Core Candy Machine with `configLineSettings` applied:
 
-{% dialect-switcher title="Create a Candy Machine with configLineSettings" %}
+{% dialect-switcher title="Create a Core Candy Machine with configLineSettings" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -332,7 +317,7 @@ await createIx.sendAndConfirm(umi)
 
 ### Hidden Settings
 
-Hidden settings allows the Candy Machine to mint exactly the same Asset to all purchasers. The design princple behind this is to allow the popular 'reveal' mechanic to take to take place at a later date.
+Hidden settings allows the Core Candy Machine to mint exactly the same Asset to all purchasers. The design princple behind this is to allow the popular 'reveal' mechanic to take to take place at a later date. It also allows printing Core Editions when combined with the Edition Guard.
 
 {% dialect-switcher title="Hidden Settings" %}
 {% dialect title="JavaScript" id="js" %}
@@ -352,10 +337,10 @@ hiddenSettings = {
 
 The name that appears on all Assets minted with hidden settings enabled. Note that, just like for the prefixes of the Config Line Settings, special variables can be used for the Name and URI of the Hidden Settings. As a reminder, these variables are:
 
-- `$ID$`: This will be replaced by the index of the minted NFT starting at 0.
-- `$ID+1$`: This will be replaced by the index of the minted NFT starting at 1.
+- `$ID$`: This will be replaced by the index of the minted Asset starting at 0.
+- `$ID+1$`: This will be replaced by the index of the minted Asset starting at 1.
 
-You should use this to be able to match the NFTs that you want to your revealed data.
+You should use this to be able to match the Assets that you want to your revealed data.
 
 #### uri
 

@@ -40,16 +40,15 @@ export const coreCandyMachine = {
               title: 'Preparing Assets',
               href: '/core-candy-machine/preparing-assets',
             },
-
             {
               title: 'Creating a Candy Machine',
               href: '/core-candy-machine/create',
             },
+            { title: 'Inserting Items', href: '/core-candy-machine/insert-items' },
             {
               title: 'Updating a Candy Machine and Guards',
               href: '/core-candy-machine/update',
             },
-            { title: 'Inserting Items', href: '/core-candy-machine/insert-items' },
             {
               title: 'Guard Groups and Phases',
               href: '/core-candy-machine/guard-groups',
@@ -70,22 +69,6 @@ export const coreCandyMachine = {
               title: 'Withdrawing a Candy Machine',
               href: '/core-candy-machine/withdrawing-a-candy-machine',
             },
-
-            // {
-            //   title: '----old----',
-            //   href: '/core-candy-machine/settings',
-            // },
-            // {
-            //   title: 'Candy Machine Settings',
-            //   href: '/core-candy-machine/settings',
-            // },
-            // { title: 'Managing Candy Machines', href: '/core-candy-machine/manage' },
-            // { title: 'Inserting Items', href: '/core-candy-machine/insert-items' },
-            // { title: 'Candy Guards', href: '/core-candy-machine/guards' },
-            // { title: 'Guard Groups', href: '/core-candy-machine/guard-groups' },
-            
-            // { title: 'Minting', href: '/core-candy-machine/mint' },
-            // { title: 'Programmable NFTs', href: '/core-candy-machine/pnfts' },
           ],
         },
         {
@@ -254,22 +237,5 @@ export const coreCandyMachine = {
       href: `https://docs.rs/mpl-core-candy-machine-core/`,
       target: '_blank',
     },
-    
-    /*
-    {
-      ...recipesSection('candy-machine'),
-      navigation: [
-        {
-          title: 'How to create a Candy Machine',
-          links: [
-            { title: 'Part 1 (Sugar)', href: '/candy-machine/recipes/todo' },
-            { title: 'Part 2 (Umi)', href: '/candy-machine/recipes/todo' },
-            { title: 'Part 2 (JS SDK)', href: '/candy-machine/recipes/todo' },
-          ],
-        },
-      ],
-    },
-    { ...changelogSection('candy-machine') },
-    */
   ],
 }

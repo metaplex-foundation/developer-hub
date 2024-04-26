@@ -1,10 +1,10 @@
 ---
 title: Getting Started
-metaTitle: Candy Machine - Getting Started
-description: Get started with Candy Machines.
+metaTitle: Core Candy Machine - Getting Started
+description: Get started with Core Candy Machines.
 ---
 
-Select the language / library you want to use below to get started with Candy Machines.
+Select the language / library you want to use below to get started with Core Candy Machines.
 
 {% quick-links %}
 

@@ -80,7 +80,7 @@ To upload to nftStorage you can follow their [API](https://app.nft.storage/v1/do
 
 #### Self Hosting
 
-There is also nothing wrong with self hosting your images on metadata either in AWS, Google Cloud, or even your own webserver. As long as the data is accessible from it's stored location and doesn't have something like CORS blocking it then you should be good. It would be advised to make either a few test Core Assets or small Candy Machine to test self hosted options to make sure the stored data is viewable.
+There is also nothing wrong with self hosting your images on metadata either in AWS, Google Cloud, or even your own webserver. As long as the data is accessible from it's stored location and doesn't have something like CORS blocking it then you should be good. It would be advised to make either a few test Core Assets or small Core Candy Machine to test self hosted options to make sure the stored data is viewable.
 
 ### Uploading Files with Umi
 
@@ -190,13 +190,13 @@ You will need to upload all your JSON metadata to a storage medium of choice and
 
 ## Create Collection Asset
 
-The final step in preparation for your Candy Machine creation is create a Core Collection that the Candy Machine can use to group all the Assets together that the users purchase from your Candy Machine. For this we will require the `mpl-core` package.
+The final step in preparation for your Core Candy Machine creation is create a Core Collection that the Core Candy Machine can use to group all the Assets together that the users purchase from your Core Candy Machine. For this we will require the `mpl-core` package.
 
 {% callout %}
 You will need to upload an image and also prepare and upload the JSON metadata like in the previous steps to have the nessacery data to create your Core Collection.
 {% /callout %}
 
-The below example creates a basic Core Collection with no plugins. To view a list of available plugins and more advanced Core Collection creation you can view the documentation over at Core's [Collection Management](core/collections).
+The below example creates a basic Core Collection with no plugins. To view a list of available plugins and more advanced Core Collection creation you can view the documentation over at Core's [Collection Management](/core/collections).
 
 {% dialect-switcher title="Create a MPL Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
@@ -228,7 +228,7 @@ await createCollectionV1(umi, {
 
 ## Conclusion
 
-At this point you should have all completed all the preperations needed in order to create a Candy Machine.
+At this point you should have all completed all the preperations needed in order to create a Core Candy Machine.
 
 - Upload images and other media files.
 - Assign image and media file URIs to JSON Metadata files.

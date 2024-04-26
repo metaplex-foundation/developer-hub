@@ -1,6 +1,6 @@
 ---
 title: "Address Gate"
-metaTitle: "Candy Machine Guards - Address Gate"
+metaTitle: "Core Candy Machine Guards - Address Gate"
 description: "Restricts the mint to a single address."
 ---
 
@@ -46,7 +46,7 @@ Owner: Any Program {% .whitespace-nowrap %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-10" %}
   {% node theme="pink" %}
     Mint from 
     
@@ -58,7 +58,7 @@ Owner: Any Program {% .whitespace-nowrap %}
 {% /node %}
 
 {% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
-  NFT
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -78,9 +78,9 @@ Minting will fail
 
 The Address Gate guard contains the following settings:
 
-- **Address**: The only address that is allowed to mint from the Candy Machine.
+- **Address**: The only address that is allowed to mint from the Core Candy Machine.
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
+{% dialect-switcher title="Set up a Core Candy Machine using the Address Gate guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -113,7 +113,7 @@ Add this object into the guard section your config.json file:
 {% /dialect %}
 {% /dialect-switcher %}
 
-Now, only the defined public key will be able to mint from this Candy Machine.
+Now, only the defined public key will be able to mint from this Core Candy Machine.
 
 ## Mint Settings
 

@@ -19,7 +19,9 @@ Next, you may create your `Umi` instance and install the `mplCore` plugin like s
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { mplCandyMachine as mplCoreCandyMachine } from "@metaplex-foundation/mpl-core-candy-machine";
+import { 
+  mplCandyMachine as mplCoreCandyMachine 
+} from "@metaplex-foundation/mpl-core-candy-machine";
 
 // Use the RPC endpoint of your choice.
 const umi = createUmi('http://127.0.0.1:8899').use(mplCoreCandyMachine())
