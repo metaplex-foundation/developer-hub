@@ -4,7 +4,7 @@ metaTitle: Core - Getting Started - JavaScript
 description: Get started with Core using JavaScript
 ---
 
-Metaplex provides a JavaScript library that can be used to interact with Core Assets. Thanks to the [Umi framework](https://github.com/metaplex-foundation/umi), it ships without many opinionated dependencies and, thus, provides a lightweight library that can be used in any JavaScript project.
+Metaplex provides a JavaScript library that can be used to interact with Core Assets. Thanks to the [Umi framework](https://github.com/metaplex-foundation/umi), it ships without many opinionated dependencies thus providing a lightweight library that can be used in any JavaScript project.
 
 To get started, you'll need to [install the Umi framework](https://github.com/metaplex-foundation/umi/blob/main/docs/installation.md) and the Core JavaScript library.
 
@@ -16,7 +16,7 @@ npm install \
   @metaplex-foundation/mpl-core
 ```
 
-Next, you may create your `Umi` instance and install the `mplCore` plugin like so.
+Next, you should create your `Umi` instance and install the `mplCore` plugin like so.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -26,9 +26,9 @@ import { mplCore } from '@metaplex-foundation/mpl-core'
 const umi = createUmi('http://127.0.0.1:8899').use(mplCore())
 ```
 
-Then you want to tell Umi which wallet to use. This can either be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
+Then instruct Umi which wallet to use. This can either be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
 
-That's it, you can now interact with NFTs by using [the various functions provided by the library](https://mpl-core-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of creating an Asset:
+That's it, you can now interact with Core Assets and Core Collections by using [the various functions provided by the library](https://mpl-core-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of creating an Asset:
 
 {% dialect-switcher title="Create Asset" %}
 {% dialect title="JavaScript" id="js" %}

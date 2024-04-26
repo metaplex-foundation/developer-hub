@@ -20,6 +20,29 @@ console.log(asset)
 ```
 
 {% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```ts
+use std::str::FromStr;
+use mpl_core::Asset;
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::pubkey::Pubkey;
+
+pub async fn fetch_asset() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let asset_id = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let rpc_data = rpc_client.get_account_data(&asset_id).await.unwrap();
+
+    let asset = Asset::from_bytes(&rpc_data).unwrap();
+
+    print!("{:?}", asset)
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ## Fetch multiple Assets
@@ -47,6 +70,64 @@ console.log(assetsByOwner)
 ```
 
 {% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use std::str::FromStr;
+use mpl_core::{accounts::BaseAssetV1, types::Key, ID as MPL_CORE_ID};
+use solana_client::{
+    nonblocking::rpc_client,
+    rpc_config::{RpcAccountInfoConfig, RpcProgramAccountsConfig},
+    rpc_filter::{Memcmp, MemcmpEncodedBytes, RpcFilterType},
+};
+use solana_sdk::pubkey::Pubkey;
+
+pub async fn fetch_assets_by_owner() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let owner = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let rpc_data = rpc_client
+        .get_program_accounts_with_config(
+            &MPL_CORE_ID,
+            RpcProgramAccountsConfig {
+                filters: Some(vec![
+                    RpcFilterType::Memcmp(Memcmp::new(
+                        0,
+                        MemcmpEncodedBytes::Bytes(vec![Key::AssetV1 as u8]),
+                    )),
+                    RpcFilterType::Memcmp(Memcmp::new(
+                        1,
+                        MemcmpEncodedBytes::Base58(owner.to_string()),
+                    )),
+                ]),
+                account_config: RpcAccountInfoConfig {
+                    encoding: None,
+                    data_slice: None,
+                    commitment: None,
+                    min_context_slot: None,
+                },
+                with_context: None,
+            },
+        )
+        .await
+        .unwrap();
+
+    let accounts_iter = rpc_data.into_iter().map(|(_, account)| account);
+
+    let mut assets: Vec<BaseAssetV1> = vec![];
+
+    for account in accounts_iter {
+        let asset = BaseAssetV1::from_bytes(&account.data).unwrap();
+        assets.push(asset);
+    }
+
+    print!("{:?}", assets)
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ### GPA fetch assets by collection
@@ -57,7 +138,11 @@ console.log(assetsByOwner)
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { Key, getAssetV1GpaBuilder, updateAuthority } from '@metaplex-foundation/mpl-core'
+import {
+  Key,
+  getAssetV1GpaBuilder,
+  updateAuthority,
+} from '@metaplex-foundation/mpl-core'
 
 const collection = publicKey('11111111111111111111111111111111')
 
@@ -70,6 +155,70 @@ console.log(assetsByCollection)
 ```
 
 {% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```ts
+use mpl_core::{accounts::BaseAssetV1, types::Key, ID as MPL_CORE_ID};
+use solana_client::{
+    nonblocking::rpc_client,
+    rpc_config::{RpcAccountInfoConfig, RpcProgramAccountsConfig},
+    rpc_filter::{Memcmp, MemcmpEncodedBytes, RpcFilterType},
+};
+use solana_sdk::pubkey::Pubkey;
+use std::str::FromStr;
+
+pub async fn fetch_assets_by_collection() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let rpc_data = rpc_client
+        .get_program_accounts_with_config(
+            &MPL_CORE_ID,
+            RpcProgramAccountsConfig {
+                filters: Some(vec![
+                    RpcFilterType::Memcmp(Memcmp::new(
+                        0,
+                        MemcmpEncodedBytes::Bytes(vec![Key::AssetV1 as u8]),
+                    )),
+                    RpcFilterType::Memcmp(Memcmp::new(
+                        34,
+                        MemcmpEncodedBytes::Bytes(vec![2 as u8]),
+                    )),
+                    RpcFilterType::Memcmp(Memcmp::new(
+                        35,
+                        MemcmpEncodedBytes::Base58(collection.to_string()),
+                    )),
+                ]),
+                account_config: RpcAccountInfoConfig {
+                    encoding: None,
+                    data_slice: None,
+                    commitment: None,
+                    min_context_slot: None,
+                },
+                with_context: None,
+            },
+        )
+        .await
+        .unwrap();
+
+    let accounts_iter = rpc_data.into_iter().map(|(_, account)| account);
+
+    let mut assets: Vec<BaseAssetV1> = vec![];
+
+    for account in accounts_iter {
+        let asset = BaseAssetV1::from_bytes(&account.data).unwrap();
+        assets.push(asset);
+    }
+
+    print!("{:?}", assets)
+}
+
+```
+
+{% /dialect %}
+
 {% /dialect-switcher %}
 
 ## DAS - Digital Asset Standard API

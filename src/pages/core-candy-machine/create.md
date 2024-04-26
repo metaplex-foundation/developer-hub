@@ -1,7 +1,7 @@
 ---
-title: Creating a Candy Machine V4
-metaTitle: Creating a Candy Machine V4
-description: Learn how to create your CMV4 and it's various settings.
+title: Creating a Core Candy Machine 
+metaTitle: Creating a Core Candy Machine
+description: Learn how to create your Core Candy Machine and it's various settings.
 ---
 
 ## Prerequisites

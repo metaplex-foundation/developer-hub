@@ -66,13 +66,5 @@ These lists are in alphabetical order. Please choose the RPC provider that best 
 - [NOWNodes](https://nownodes.io/)
 - [Syndica](https://syndica.io/)
 
-## Additional Information
-
-### Archive and Nonarchive Nodes
-
-We can divide nodes into two different categories. The first one we will look at are the Archive nodes. These can store information of previous blocks. In the case of these archival nodes, we can leverage having access to all previous blocks in several ways. Some of the advantages include being able to view an address's balance history and view any state in the history. Due to the high system requirements of running a full historical node, having private nodes available with this feature is highly beneficial.
-
-Unlike archival nodes, a non-archive node, or just a regular node, will only have access to some of the previous blocks, which is upwards of 100 blocks. We previously mentioned that running an archival node has intensive requirements, but even a non-archive node can become hard to manage. For this reason, users often choose a private RPC provider. Most use cases involving private RPCs in Solana usually revolve around Mainnet-beta uses since this involves real SOL tokens, and there is a higher chance of being rate limited.
-
 ### Further Information
 If you have any questions or would like to further understand this topic, you are welcome to ask join the [Metaplex Discord](https://discord.gg/metaplex) Server.

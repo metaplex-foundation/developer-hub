@@ -76,6 +76,7 @@ export function Header({ page }) {
             href={page.product.github}
             className="group"
             aria-label="GitHub"
+            target="_blank"
           >
             <GitHubIcon className="h-6 w-6 fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
           </Link>

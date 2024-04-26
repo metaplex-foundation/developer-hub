@@ -1,7 +1,7 @@
 ---
 title: Minting
-metaTitle: Candy Machine - Minting
-description: Explains how to mint from Candy Machines and how to handle pre-mint requirements.
+metaTitle: Core Candy Machine - Minting
+description: Explains how to mint from a Core Candy Machines and how to handle pre-mint requirements.
 ---
 
 So far, we’ve learned how to create and maintain Candy Machines. We’ve seen how to configure them and how to set up complex minting workflows using guard and guard groups. It’s about time we talk about the last piece of the puzzle: Minting! {% .lead %}

@@ -1,7 +1,7 @@
 ---
-title: Fetching a Candy Machine
-metaTitle: Candy Machine V4 - Fetching a Candy Machine
-description: How to fetch the data of a Core Candy Machine V4
+title: Fetching a Core Candy Machine
+metaTitle: Core Candy Machine - Fetching a Candy Machine
+description: How to fetch the data of a Core Core Candy Machine
 ---
 
 Fetching a Core Candy Machine and its data can be achieved as follows:

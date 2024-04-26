@@ -30,11 +30,11 @@ If you are using Windows, follow the steps below:
 
 3. Right-click on the executable file and go to `Properties`.
 
-   ![Properties.PNG](https://docs.metaplex.com/assets/images/Properties-a728fa4422df37b3700247294874ce06.png#radius#shadow)
+   ![Properties.PNG](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/Properties.png)
 
 4. If you trust the Metaplex developer team, check the `Unblock` button as show in the image below. This will allow you to run this binary on your computer since Microsoft does not trust it automatically.
 
-   ![Unblock.PNG](https://docs.metaplex.com/assets/images/Unblock-bc100bf8d7193682c0a75fa01418d07e.png#radius#shadow)
+   ![Unblock.PNG](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/Unblock.png)
 
 5. Click `Apply` and `Ok`.
 
@@ -42,11 +42,11 @@ If you are using Windows, follow the steps below:
 
 7. If everything completed successfully you will get a message saying so.
 
-   ![windows installed](https://docs.metaplex.com/assets/images/installed-2cc250e376836b86f47ed98ab4aca7d2.png#radius#shadow)
+   ![windows installed](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/installed.png)
 
 8. Try running `sugar` in your terminal and see if it prints a list of commands you can use. If so you're good to go!
 
-9. Report any errors to the `#sugar` channel on the [Metaplex Discord](https://discord.gg/metaplex).
+9. Report any errors to the `#candy-machine` forum on the [Metaplex Discord](https://discord.gg/metaplex).
    
 {% callout %}
 

@@ -1,7 +1,7 @@
 ---
 title: Inserting Items
-metaTitle: Candy Machine - Inserting Items
-description: Explains how to load items into Candy Machines.
+metaTitle: Core Candy Machine - Inserting Items
+description: Explains how to load items into Core Candy Machines.
 ---
 
 Now that we have a name and URI for all of our items, all we need to do is insert them into our Candy Machine account.

@@ -4,7 +4,7 @@ metaTitle: Core - Transferring Assets
 description: Learn how to transfer Assets on Core
 ---
 
-The owner of an Asset can transfer ownership to another account by using the `transfer` instruction to the MPL Core program.
+The owner of a Core Asset can transfer ownership to another account by using the `transfer` instruction to the MPL Core program.
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details" %}
@@ -25,7 +25,7 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 {% /totem-accordion %}
 {% /totem %}
 
-## Transfering an Asset
+## Transferring a Core Asset
 
 {% dialect-switcher title="Transfer an Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -43,9 +43,53 @@ await transferV1(umi, {
 ```
 
 {% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```ts
+use mpl_core::instructions::TransferV1Builder;
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn transfer_asset() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let new_owner = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+
+    let transfer_asset_ix = TransferV1Builder::new()
+        .asset(asset)
+        .payer(authority.pubkey())
+        .new_owner(new_owner)
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let transfer_asset_tx = Transaction::new_signed_with_payer(
+        &[transfer_asset_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&transfer_asset_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
-## Transfering an Asset in a Collection
+## Transferring a Core Asset in a Collection
 
 If you are transfering an Asset which has a collection you will need to pass the collection address in.
 [How to tell if an asset is in a Collection?]()
@@ -64,6 +108,52 @@ await transferV1(umi, {
   newOwner: newOwner.publicKey,
   collection: colleciton.publicKey,
 }).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::instructions::TransferV1Builder;
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn transfer_asset_in_collection() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+    let collection = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+
+    let new_owner = Pubkey::from_str("33333333333333333333333333333333").unwrap();
+
+    let transfer_asset_in_collection_ix = TransferV1Builder::new()
+        .asset(asset)
+        .collection(Some(collection))
+        .payer(authority.pubkey())
+        .new_owner(new_owner)
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let transfer_asset_in_collection_tx = Transaction::new_signed_with_payer(
+        &[transfer_asset_in_collection_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&transfer_asset_in_collection_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+
 ```
 
 {% /dialect %}

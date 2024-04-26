@@ -15,7 +15,7 @@ The data that is stored and accessible from the Collection Asset is as follows;
 | key             | The account key discriminator                     |
 | updateAuthority | The authority of the new asset.                   |
 | name            | The collection name.                              |
-| uri             | THe uri to the collections off-chain metadata.    |
+| uri             | The uri to the collections off-chain metadata.    |
 | num minted      | The number of assets minted in the collection.    |
 | current size    | The number of assets currently in the collection. |
 
@@ -70,6 +70,48 @@ await createCollectionV1(umi, {
 ```
 
 {% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::instructions::CreateCollectionV1Builder;
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
+
+pub async fn create_collection() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let payer = Keypair::new();
+    let collection = Keypair::new();
+
+    let create_collection_ix = CreateCollectionV1Builder::new()
+        .collection(collection.pubkey())
+        .payer(payer.pubkey())
+        .name("My Collection".into())
+        .uri("https://example.com/my-collection.json".into())
+        .instruction();
+
+    let signers = vec![&collection, &payer];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let create_collection_tx = Transaction::new_signed_with_payer(
+        &[create_collection_ix],
+        Some(&payer.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&create_collection_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ### Creating a Collection with Plugins
@@ -119,11 +161,70 @@ await createCollectionV1(umi, {
 ```
 
 {% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::{
+    instructions::CreateCollectionV1Builder,
+    types::{Creator, Plugin, PluginAuthority, PluginAuthorityPair, Royalties, RuleSet},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn create_collection_with_plugin() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let payer = Keypair::new();
+    let collection = Keypair::new();
+
+    let creator = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let create_collection_ix = CreateCollectionV1Builder::new()
+        .collection(collection.pubkey())
+        .payer(payer.pubkey())
+        .name("My Nft".into())
+        .uri("https://example.com/my-nft.json".into())
+        .plugins(vec![PluginAuthorityPair {
+            plugin: Plugin::Royalties(Royalties {
+                basis_points: 500,
+                creators: vec![Creator {
+                    address: creator,
+                    percentage: 100,
+                }],
+                rule_set: RuleSet::None,
+            }),
+            authority: Some(PluginAuthority::None),
+        }])
+        .instruction();
+
+    let signers = vec![&collection, &payer];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let create_collection_tx = Transaction::new_signed_with_payer(
+        &[create_collection_ix],
+        Some(&payer.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&create_collection_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ## Updating a Collection
 
-To update the data of a Core Collection you can use the `UpdateCollection` instruction. You want to use this for example when you need to change the name of a collection.
+To update the data of a Core Collection use the `UpdateCollection` instruction. For example, you use this instruction to change the name of a collection.
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details - UpdateCollectionV1" %}
@@ -171,11 +272,55 @@ await updateCollectionV1(umi, {
 ```
 
 {% /dialect %}
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use std::str::FromStr;
+
+use mpl_core::instructions::UpdateCollectionV1Builder;
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+
+pub async fn update_collection() {
+
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let update_collection_ix = UpdateCollectionV1Builder::new()
+        .collection(collection)
+        .payer(authority.pubkey())
+        .new_name("My Collection".into())
+        .new_uri("https://example.com/my-collection.json".into())
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let update_collection_tx = Transaction::new_signed_with_payer(
+        &[update_collection_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&update_collection_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ## Updating a Collection Plugin
 
-If you want to change the behaviour of a plugin that is attached to a collection you may want to use the `updateCollectionPlugin` instruction.
+If you want to change the behaviour of a plugin that is attached to a Core Collection you may want to use the `updateCollectionPlugin` instruction.
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details - UpdateCollectionPluginV1" %}
@@ -230,6 +375,60 @@ await updateCollectionPluginV1(umi, {
     },
   }),
 }).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use std::str::FromStr;
+use mpl_core::{
+    instructions::UpdateCollectionPluginV1Builder,
+    types::{Creator, Plugin, Royalties, RuleSet},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+
+pub async fn update_collection_plugin() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let new_creator = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+
+    let update_collection_plugin_ix = UpdateCollectionPluginV1Builder::new()
+        .collection(collection)
+        .payer(authority.pubkey())
+        .plugin(Plugin::Royalties(Royalties {
+            basis_points: 500,
+            creators: vec![Creator {
+                address: new_creator,
+                percentage: 100,
+            }],
+            rule_set: RuleSet::None,
+        }))
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let update_collection_plugin_tx = Transaction::new_signed_with_payer(
+        &[update_collection_plugin_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&update_collection_plugin_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
 ```
 
 {% /dialect %}

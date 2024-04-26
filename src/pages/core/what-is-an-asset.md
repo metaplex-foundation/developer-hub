@@ -6,7 +6,7 @@ description: What is an MPL Core Asset
 
 ## Overview
 
-Different to other existing Asset programs, like [Solana’s Token program](https://spl.solana.com/token) it does not rely on multiple accounts, like Associated Token Accounts, but stores the relationship between a wallet and the "mint" account in the asset itself.
+Setting itself apart from existing Asset programs, like [Solana’s Token program](https://spl.solana.com/token), Metaplex Core does not rely on multiple accounts, like Associated Token Accounts. Instead, Core stores the relationship between a wallet and the "mint" account in the asset itself.
 
 {% diagram %}
 {% node %}
@@ -61,23 +61,23 @@ The Core Asset account represents the bare minimum data for a digital asset. Thi
 
 The onchain account structure of an MPL Core Asset. [Link](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
 
-| Name             | Type            | Size | Description                                        |                                                                                                                            |
-| ---------------- | --------------- | ---- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| key              | u8              | 1    | Discrimator of Account Type                        |                                                                                                                            |
-| owner            | pubKey          | 32   | The collection to which the Core Asset belongs to. |                                                                                                                            |
-| update_authority | enum<publicKey> | 33   | The authority or CollectionID of the new asset.    | [Link](https://github.com/metaplex-foundation/mpl-core/blob/main/clients/rust/src/generated/types/update_authority.rs#L14) |
-| name             | string          | 36   | The account paying for the storage fees.           |                                                                                                                            |
-| uri              | string          | 204  | The owner which should receive the asset.          |                                                                                                                            |
-| seq              | string          |      | The System Program account.                        |                                                                                                                            |
+| Name             | Type            | Size | Description                                                      |                                                                                                                            |
+| ---------------- | --------------- | ---- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| key              | u8              | 1    | Discrimator of Account Type                                      |                                                                                                                            |
+| owner            | pubKey          | 32   | The owner of the asset.                                          |                                                                                                                            |
+| update_authority | enum<publicKey> | 33   | The authority or CollectionID of the new asset.                  | [Link](https://github.com/metaplex-foundation/mpl-core/blob/main/clients/rust/src/generated/types/update_authority.rs#L14) |
+| name             | string          | 36   | The name of the asset.                                           |                                                                                                                            |
+| uri              | string          | 204  | The URI of the asset that points to the off-chain data.          |                                                                                                                            |
+| seq              | string          |      | The sequence number used for indexing with compression.          |                                                                                                                            |
 
 {% /totem-accordion %}
 {% /totem %}
 
 ## Is my Asset in a Collection?
 
-MPL Core Assets can belong to collections. The `updateAuthority` field in the MPL Core Asset data provides two duties, either to report the update authority of the Asset, or to provide the publicKey of the MPL Core Collection it belongs too.
+MPL Core Assets can belong to collections. The `updateAuthority` field in the MPL Core Asset data provides two duties, either to report the update authority of the Asset, or to provide the publicKey of the MPL Core Collection to which it belongs.
 
-When accessing the `updateAuthority` field either directly via the asset or via the `collectionAddress` helper of the MPL Core Asset you will be returned with one of these 3 following outcomes;
+When accessing the `updateAuthority` field either directly via the asset, or via the `collectionAddress` helper of the MPL Core Asset, the returning result will be one of the following outcomes:
 
 **Collection**
 

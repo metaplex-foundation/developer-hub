@@ -8,7 +8,7 @@ Whenever a collection is set on a Compressed NFT, the update authority of the co
 
 Technically, this will toggle a **Verified** boolean on the **Collection** object of the cNFT, letting anyone know that an authority of the collection approved this Compressed NFT as being part of the collection.
 
-If you are not familiar with the concept of collections with regard to NFTs, they are special non-compressed NFTs that can be used to group other NFTs together. The data of the **Collection NFT** is therefore used to describe the name and the branding of the entire collection. You can [read more about Metaplex Certified Collections here](https://docs.metaplex.com/programs/token-metadata/certified-collections).
+If you are not familiar with the concept of collections with regard to NFTs, they are special non-compressed NFTs that can be used to group other NFTs together. The data of the **Collection NFT** is therefore used to describe the name and the branding of the entire collection. You can [read more about Metaplex Verified Collections here](/token-metadata/collections).
 
 Note that is possible to mint a Compressed NFT directly into a collection by using the **Mint to Collection V1** instruction [documented here](/bubblegum/mint-cnfts#minting-to-a-collection). That being said, if you have already minted a cNFT without a collection, let's see how we can verify, unverify but also set the collection on that cNFT.
 

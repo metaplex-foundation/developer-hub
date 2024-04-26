@@ -1,5 +1,5 @@
 ---
-title: Managing Candy Machines
+title: Managing Core Candy Machines
 metaTitle: Candy Machine - Create, Update, Fetch and Delete
 description: Explains how to manage Candy Machines.
 ---

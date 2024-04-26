@@ -15,7 +15,7 @@ Let's dig into these steps in more detail, whilst providing concrete code exampl
 
 ## Uploading off-chain data
 
-You may use any service to upload your off-chain data or simply store it on your own server but it is worth noting that some of our SDKs can help with that. They use a plugin system that allows you to select the uploader of your choice and offer a unified interface for you to upload your data.
+You may use any storage service (Arweave, IPFS, AWS etc...) to upload your off-chain data or simply store it on your own server. To make some of these easier for the user `Umi` has some dedicated plugins including the likes of `Irys (uploads to Arwevea)` and `nftStorage (uploads to IPFS)`. Once a plugin is selected this grants the user a unified interface for you to upload your data.
 
 {% dialect-switcher title="Upload assets and JSON data" %}
 {% dialect title="JavaScript" id="js" %}
@@ -57,7 +57,9 @@ Explain the difference between storing in account state and ledger state. -->
 
 ## Create an Asset
 
-To create an asset the `create` instruction should be used. Below is a simple example, you can do more things with it, like adding your asset to a collection, or assigning plugins which is described [later](#create-an-asset-with-plugins).
+To create an Asset use the `createV1` instruction. The `createV1` instruction, in addition to setting the basic metadata of the Asset, encompasses the likes of adding your Asset to a collection and assigning plugins which is described a bit [later](#create-an-asset-with-plugins).
+
+Below is a simple example:
 
 {% totem %}
 {% totem-accordion title="Technical Instruction Details" %}
@@ -111,32 +113,41 @@ const result = createV1(umi, {
 {% dialect title="Rust" id="rust" %}
 
 ```rust
-let create_ix = CreateV1Builder::new()
-        .asset(input.asset.pubkey())
-        .collection(input.collection)
-        .authority(input.authority)
-        .payer(payer)
-        .owner(input.owner)
-        .update_authority(input.update_authority)
-        .system_program(system_program::ID)
-        .data_state(input.data_state.unwrap_or(DataState::AccountState))
-        .name(input.name.unwrap_or(DEFAULT_ASSET_NAME.to_owned()))
-        .uri(input.uri.unwrap_or(DEFAULT_ASSET_URI.to_owned()))
-        .plugins(input.plugins)
+use mpl_core::instructions::CreateV1Builder;
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
+
+
+pub async fn create_asset() {
+
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let payer = Keypair::new();
+    let asset = Keypair::new();
+
+    let create_asset_ix = CreateV1Builder::new()
+        .asset(asset.pubkey())
+        .payer(payer.pubkey())
+        .name("My Nft".into())
+        .uri("https://example.com/my-nft.json".into())
         .instruction();
 
-    let tx = Transaction::new_signed_with_payer(
-        &[create_ix],
-        Some(&context.payer.pubkey()),
-        &[input.asset, &context.payer],
-        context.last_blockhash,
+    let signers = vec![&asset, &payer];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let create_asset_tx = Transaction::new_signed_with_payer(
+        &[create_asset_ix],
+        Some(&payer.pubkey()),
+        &signers,
+        last_blockhash,
     );
+
+    let res = rpc_client.send_and_confirm_transaction(&create_asset_tx).await.unwrap();
+
+    println!("Signature: {:?}", res)
+}
 ```
-
-{% /dialect %}
-{% totem %}
-
-{% /totem %}
 
 {% /dialect %}
 
@@ -212,9 +223,9 @@ Note that when setting the `mint` account, it is require to specify a `bool` fla
 
 ## Create an Asset into a Collection
 
-MPL Core Assets can be minted straight into a collection providing you already have your MPL Core Collection premade before hand. To create a Collection Asset visit [here](/core/collections).
+MPL Core Assets can be created straight into a collection if your MPL Core Collection already exists. To create a Collection Asset visit [here](/core/collections).
 
-{% dialect-switcher title="Create Asset with Plugin" %}
+{% dialect-switcher title="Create Asset into Collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -239,22 +250,103 @@ const result = createV1(umi, {
 ```
 
 {% /dialect %}
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::instructions::{CreateCollectionV1Builder, CreateV1Builder};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
+
+
+pub async fn create_asset_with_collection() {
+
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let payer = Keypair::new();
+    let collection = Keypair::new();
+
+    let create_collection_ix = CreateCollectionV1Builder::new()
+        .collection(collection.pubkey())
+        .payer(payer.pubkey())
+        .name("My Collection".into())
+        .uri("https://example.com/my-collection.json".into())
+        .instruction();
+
+    let signers = vec![&collection, &payer];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let create_collection_tx = Transaction::new_signed_with_payer(
+        &[create_collection_ix],
+        Some(&payer.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client.send_and_confirm_transaction(&create_collection_tx).await.unwrap();
+
+    println!("Signature: {:?}", res);
+
+    let asset = Keypair::new();
+
+    let create_asset_ix = CreateV1Builder::new()
+        .asset(asset.pubkey())
+        .payer(payer.pubkey())
+        .name("My Nft".into())
+        .uri("https://example.com/my-nft.json".into())
+        .instruction();
+
+    let signers = vec![&asset, &payer];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let create_asset_tx = Transaction::new_signed_with_payer(
+        &[create_asset_ix],
+        Some(&payer.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client.send_and_confirm_transaction(&create_asset_tx).await.unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
+
+{% dialect title="Rust (CPI)" id="rust-cpi" %}
+
+```rust
+let create_ix = CreateV1CpiBuilder::new()
+        .asset(input.asset.pubkey())
+        .collection(input.collection)
+        .authority(input.authority)
+        .payer(payer)
+        .owner(input.owner)
+        .update_authority(input.update_authority)
+        .system_program(system_program::ID)
+        .data_state(input.data_state.unwrap_or(DataState::AccountState))
+        .name(input.name.unwrap_or(DEFAULT_ASSET_NAME.to_owned()))
+        .uri(input.uri.unwrap_or(DEFAULT_ASSET_URI.to_owned()))
+        .plugins(input.plugins)
+        .invoke();
+```
+
+{% /dialect %}
+
 {% /dialect-switcher %}
 
 ## Create an Asset with Plugins
 
-MPL Core Assets support the use of plugins at both a Collection and at an Asset level. To create a Core Asset with a plugin you pass in the plugin and it's parameters into the `plugins` array arg during creation. The below example creates a mint with the `Freeze` plugin.
+MPL Core Assets support the use of plugins at both the Collection and Asset levels. To create a Core Asset with a plugin you pass in the plugin type and its parameters into the `plugins` array arg during creation. The below example creates a mint with the `Freeze` plugin.
 
 {% dialect-switcher title="Create Asset with Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import {
-  createV1,
-  createPlugin,
-  ruleSet,
-} from '@metaplex-foundation/mpl-core'
+import { createV1, createPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 
 const creator1 = publicKey('11111111111111111111111111111111')
 const creator2 = publicKey('22222222222222222222222222222222')
@@ -287,6 +379,66 @@ await createV1(umi, {
     },
   ],
 }).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use std::str::FromStr;
+use mpl_core::{
+    instructions::CreateV1Builder,
+    types::{Creator, Plugin, PluginAuthority, PluginAuthorityPair, Royalties, RuleSet},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+
+pub async fn create_asset_with_plugin() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let payer = Keypair::new();
+    let asset = Keypair::new();
+
+    let creator = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let create_asset_with_plugin_ix = CreateV1Builder::new()
+        .asset(asset.pubkey())
+        .payer(payer.pubkey())
+        .name("My Nft".into())
+        .uri("https://example.com/my-nft.json".into())
+        .plugins(vec![PluginAuthorityPair {
+            plugin: Plugin::Royalties(Royalties {
+                basis_points: 500,
+                creators: vec![Creator {
+                    address: creator,
+                    percentage: 100,
+                }],
+                rule_set: RuleSet::None,
+            }),
+            authority: Some(PluginAuthority::None),
+        }])
+        .instruction();
+
+    let signers = vec![&asset, &payer];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let create_asset_with_plugin_tx = Transaction::new_signed_with_payer(
+        &[create_asset_with_plugin_ix],
+        Some(&payer.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&create_asset_with_plugin_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+
 ```
 
 {% /dialect %}

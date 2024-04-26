@@ -1,12 +1,12 @@
 ---
-title: Updating a Candy Machine
-metaTitle: Updating a Candy Machine
-description: Learn how to update your CMV4 and it's various settings.
+title: Updating a Core Candy Machine
+metaTitle: Updating a Core Candy Machine
+description: Learn how to update your Core Candy Machine and it's various settings.
 ---
 
-## Updating a CMV4
+## Updating a Core Candy Machine
 
-{% dialect-switcher title="Updating a Candy Machine" %}
+{% dialect-switcher title="Updating a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -30,7 +30,7 @@ await updateCandyMachine(umi, {
 
 ### Args
 
-{% dialect-switcher title="Update Candy Machine Args" %}
+{% dialect-switcher title="Update Core Candy Machine Args" %}
 {% dialect title="JavaScript" id="js" %}
 
 Available arguments that can be passed into the createCandyMachineV2 function.
@@ -78,7 +78,7 @@ authority?: Signer;
 mintAuthority: Signer;
 };
 
-{% dialect-switcher title="Assign New Authority to Candy Machine" %}
+{% dialect-switcher title="Assign New Authority to Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -96,7 +96,7 @@ await setMintAuthority(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-When assigning a new Authority to a Candy Machine you will also have to update the Collection Asset to the same update Authority.
+When assigning a new Authority to a Core Candy Machine you will also have to update the Collection Asset to the same update Authority.
 
 // Todo: Check this is still the case because new authorties work different compared to Nft/pNft.
 
@@ -109,7 +109,7 @@ You can enable new guards by providing their settings or disable current ones by
 {% dialect-switcher title="Update guards" %}
 {% dialect title="JavaScript" id="js" %}
 
-You may update the guards of a Candy Machine the same way you created them. That is, by providing their settings inside the `guards` object of the `updateCandyGuard` function. Any guard set to `none()` or not provided will be disabled.
+You may update the guards of a Core Candy Machine the same way you created them. That is, by providing their settings inside the `guards` object of the `updateCandyGuard` function. Any guard set to `none()` or not provided will be disabled.
 
 Note that the entire `guards` object will be updated meaning **it will override all existing guards**!
 
@@ -136,9 +136,9 @@ API References: [updateCandyGuard](https://mpl-core-candy-machine-js-docs.vercel
 
 ## Wrapping and unwrapping Candy Guard accounts manually
 
-So far we’ve managed both Candy Machine and Candy Guard accounts together because that makes the most sense for most projects.
+So far we’ve managed both Core Candy Machine and Candy Guard accounts together because that makes the most sense for most projects.
 
-However, it is important to note that Candy Machines and Candy Guards can be created and associated in different steps, even using our SDKs.
+However, it is important to note that Core Candy Machines and Candy Guards can be created and associated in different steps, even using our SDKs.
 
 You will first need to create the two accounts separately and associate/dissociate them manually.
 

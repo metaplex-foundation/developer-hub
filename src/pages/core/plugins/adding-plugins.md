@@ -5,11 +5,11 @@ description: Learn how to add plugins to MPL Core Assets and Collections
 ---
 
 Plugins can be assigned to both the MPL Core Asset and also the MPL Core Collection. MPL
-Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on both entities visit the [Plugins Overview](/core/plugins) area.
+Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on each visit the [Plugins Overview](/core/plugins) area.
 
 ## Adding a Plugin to a Core Asset
 
-Plugins support the ability to assign an authority over the plugin. If an `initAuthority` is passed in this will set the authority to the desired address. If unassigned then the signer will be the default authority set for the plugin.
+Plugins support the ability to assign an authority over the plugin. If an `initAuthority` argument is supplied this will set the authority to the desired plugin authority type. If left unassigned the plugins default authority type will be assigned (next section).
 
 **Create Plugin Helper**
 
@@ -22,7 +22,7 @@ If you add a plugin to an Asset or Collection without specifying the authority o
 
 - Owner Managed Plugins will default to the plugin authority type of `Owner`.
 - Authority Managed Plugins will default to the plugin authority type of `UpdateAuthority`.
-- Permanment Plugins will default to the plugin authority type of `UpdateAuthority`
+- Permanent Plugins will default to the plugin authority type of `UpdateAuthority`
 
 {% dialect-switcher title="Adding a Plugin with the default authority" %}
 {% dialect title="JavaScript" id="js" %}
@@ -38,6 +38,50 @@ await addPluginV1(umi, {
 ```
 
 {% /dialect %}
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::{
+    instructions::AddPluginV1Builder,
+    types::{FreezeDelegate, Plugin},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn add_plugin() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let add_plugin_ix = AddPluginV1Builder::new()
+        .asset(asset)
+        .payer(authority.pubkey())
+        .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let add_plugin_tx = Transaction::new_signed_with_payer(
+        &[add_plugin_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&add_plugin_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ### Adding a Plugin with an assigned authority
@@ -45,38 +89,91 @@ await addPluginV1(umi, {
 There are a few authority helpers to aid you in setting the authorities of plugins.
 
 **addressPluginAuthority()**
+
 ```js
 addressPluginAuthority(publicKey)
 ```
 
-This sets the plugins authority to a specific address.
+This sets the plugin's authority to a specific address.
 
 **ownerPluginAuthority()**
+
 ```js
 ownerPluginAuthority()
 ```
 
-This sets the plugins authority to the type of `Owner`.
+This sets the plugin's authority to the type of `Owner`.
 The current owner of the Asset will have access to this plugin.
 
 **updatePluginAuthority()**
+
 ```js
 updatePluginAuthority()
 ```
 
-This sets the plugins authority to the type of `UpdateAuthority`.
+This sets the plugin's authority to the type of `UpdateAuthority`.
 The current update authority of the Asset will have access to this plugin.
 
 **nonePluginAuthority()**
+
 ```js
 nonePluginAuthority()
 ```
 
-This sets the plugins authority to the type of `None`.
-The plugins data if it has any becomes immutable at this point.
-
+This sets the plugin's authority to the type of `None`.
+The plugin's data if it has any becomes immutable at this point.
 
 {% dialect-switcher title="Adding a Plugin with an assigned authority" %}
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::{
+    instructions::AddPluginV1Builder,
+    types::{FreezeDelegate, Plugin, PluginAuthority},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn add_plugin_with_authority() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let plugin_authority = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+
+    let add_plugin_with_authority_ix = AddPluginV1Builder::new()
+        .asset(asset)
+        .payer(authority.pubkey())
+        .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
+        .init_authority(PluginAuthority::Address {
+            address: plugin_authority,
+        })
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let add_plugin_with_authority_tx = Transaction::new_signed_with_payer(
+        &[add_plugin_with_authority_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&add_plugin_with_authority_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
+
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -85,10 +182,10 @@ import {
   addPluginV1,
   createPlugin,
   pluginAuthority,
-  addressPluginAuthority
+  addressPluginAuthority,
 } from '@metaplex-foundation/mpl-core'
 
-const delegate = publicKey("222222222222222222222222222222")
+const delegate = publicKey('222222222222222222222222222222')
 
 await addPluginV1(umi, {
   asset: asset.publicKey,
@@ -102,7 +199,7 @@ await addPluginV1(umi, {
 
 ## Adding a Plugin to a Collection
 
-Plugins support the ability to assign an authority over the plugin. If an `initAuthority` is passed in this will set the authority to the desired address. If unassigned then the signer will be the default authority set for the plugin.
+Adding a Plugin to a Core Collection is similar to that of adding to a Core Asset. You can add plugins during creation and also using the `addCollectionV1` instruction. Collections only have access to `Authority Plugins` and `Permanent Plugins`.
 
 ### Adding a Collection Plugin with the default authority
 
@@ -140,6 +237,51 @@ await addCollectionPluginV1(umi, {
 ```
 
 {% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::{
+    instructions::AddCollectionPluginV1Builder,
+    types::{FreezeDelegate, Plugin},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn add_plugin_to_collection() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let add_plugin_to_collection_ix = AddCollectionPluginV1Builder::new()
+        .collection(collection)
+        .payer(authority.pubkey())
+        .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let add_plugin_to_collection_tx = Transaction::new_signed_with_payer(
+        &[add_plugin_to_collection_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&add_plugin_to_collection_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ### Adding a Collection Plugin with an assigned authority
@@ -154,7 +296,7 @@ import {
   createPlugin,
   ruleSet,
   pluginAuthority,
-  addressPluginAuthority
+  addressPluginAuthority,
 } from '@metaplex-foundation/mpl-core'
 
 const collection = publicKey('11111111111111111111111111111111')
@@ -178,6 +320,55 @@ await addCollectionPluginV1(umi, {
   }),
   initAuthority: addressPluginAuthority(delegate),
 }).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::{
+    instructions::AddCollectionPluginV1Builder,
+    types::{FreezeDelegate, Plugin, PluginAuthority},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn add_plugin_to_collection_with_authority() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let plugin_authority = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+
+    let add_plugin_to_collection_with_authority_ix = AddCollectionPluginV1Builder::new()
+        .collection(collection)
+        .payer(authority.pubkey())
+        .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
+        .init_authority(PluginAuthority::Address {
+            address: plugin_authority,
+        })
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let add_plugin_to_collection_with_authority_tx = Transaction::new_signed_with_payer(
+        &[add_plugin_to_collection_with_authority_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&add_plugin_to_collection_with_authority_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
 ```
 
 {% /dialect %}

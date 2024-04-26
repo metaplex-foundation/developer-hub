@@ -1,7 +1,7 @@
 ---
 title: Preparing Assets
-metaTitle: Candy Machine V4 - Preparing Assets
-description: How to prepare your files and assets for CMV4.
+metaTitle: Core Candy Machine - Preparing Assets
+description: How to prepare your files and assets for a Core Candy Machine.
 ---
 
 ## Asset Files
