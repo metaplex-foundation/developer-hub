@@ -222,6 +222,48 @@ pub async fn create_collection_with_plugin() {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## Fetch a Collection
+
+To fetch a collection the following function can be used:
+
+{% dialect-switcher title="Fetch a collection" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { fetchCollectionV1 } from '@metaplex-foundation/mpl-core'
+import { publicKey } from '@metaplex-foundation/umi'
+
+const collection = await fetchCollectionV1(umi, publicKey("11111111111111111111111111111111"))
+
+console.log(collection)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```ts
+use std::str::FromStr;
+use mpl_core::Collection;
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::pubkey::Pubkey;
+
+pub async fn fetch_collection() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let collection_id = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let rpc_data = rpc_client.get_account_data(&collection_id).await.unwrap();
+
+    let collection = Collection::from_bytes(&rpc_data).unwrap();
+
+    print!("{:?}", collection)
+}
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
 ## Updating a Collection
 
 To update the data of a Core Collection use the `UpdateCollection` instruction. For example, you use this instruction to change the name of a collection.
