@@ -67,7 +67,21 @@ export const tokenMetadata = {
       href: `https://mpl-token-metadata-js-docs.vercel.app/`,
       target: '_blank',
     },
-    { ...recipesSection('token-metadata') },
+    {
+      ...recipesSection('token-metadata'),
+      navigation: [
+        {
+          title: 'Recipes',
+          links: [
+            { title: 'Overview', href: '/token-metadata/recipes' },
+            {
+              title: 'Get Mints by Collection',
+              href: '/token-metadata/recipes/get-by-collection',
+            },
+          ],
+        },
+      ],
+    },
     { ...changelogSection('token-metadata') },
   ],
 }
