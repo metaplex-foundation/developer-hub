@@ -23,11 +23,13 @@ type GenericFile = {
 
 As you can see, its content is stored as a `Uint8Array` buffer and it includes some metadata such as its filename, its display name, its content type, etc. It also includes a simple key-value storage to store any additional data as tags. These can also be used to pass additional information about the file to the uploader.
 
-You can use the `createGenericFile` helper function to create a new `GenericFile` instance from its content and filename. To help us convert a file from a specific environment to and from a `GenericFile`, Umi also provides some additional helper methods.
+You can use the `createGenericFile` helper function to create a new `GenericFile` instance from its content and filename. This function also accepts a `contentType` that you should set as the [MIME Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of your file to help browsers to render your file correctly.
+
+To help us convert a file from a specific environment to and from a `GenericFile`, Umi also provides some additional helper methods.
 
 ```ts
 // Create a generic file directly.
-createGenericFile('some content', 'my-file.txt');
+createGenericFile('some content', 'my-file.txt', { contentType: "text/plain" });
 
 // Parse a generic file to and from a browser file.
 await createGenericFileFromBrowserFile(myBrowserFile);
