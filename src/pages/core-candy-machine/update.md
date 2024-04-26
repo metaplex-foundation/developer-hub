@@ -38,7 +38,7 @@ Available arguments that can be passed into the createCandyMachineV2 function.
 | name         | type      |
 | ------------ | --------- |
 | candyMachine | publicKey |
-| data         | link      |
+| data         | data      |
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -59,8 +59,8 @@ data =  {
 }
 ```
 
-- [ConfigLineSettingsArgs](/test)
-- [HiddenSettingsArgs](/test)
+- [ConfigLineSettingsArgs](/core-candy-machine/create#config-line-settings)
+- [HiddenSettingsArgs](/core-candy-machine/create#hidden-settings)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -151,10 +151,11 @@ However, if you wanted to create them separately and manually associate/dissocia
 
 ```ts
 import { some, percentAmount, sol, dateTime } from '@metaplex-foundation/umi'
+import { createCandyMachine, createCandyGuard, findCandyGuardPda, wrap, unwrap } from '@metaplex-foundation/mpl-core-candy-machine'
 
 // Create a Candy Machine without a Candy Guard.
 const candyMachine = generateSigner(umi)
-await createCandyMachineV2({
+await createCandyMachine({
   candyMachine,
   tokenStandard: TokenStandard.NonFungible,
   collectionMint: collectionMint.publicKey,
@@ -171,7 +172,7 @@ await createCandyMachineV2({
     uriLength: 20,
     isSequential: false,
   }),
-}).sendAndConfirm(umi)
+})sendAndConfirm(umi)
 
 // Create a Candy Guard.
 const base = generateSigner(umi)
@@ -198,7 +199,7 @@ await unwrap({
 }).sendAndConfirm(umi)
 ```
 
-API References: [createCandyMachineV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyMachineV2.html), [createCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyGuard.html), [wrap](https://mpl-core-candy-machine-js-docs.vercel.app/functions/wrap.html), [unwrap](https://mpl-core-candy-machine-js-docs.vercel.app/functions/unwrap.html)
+API References: [createCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyMachine.html), [createCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyGuard.html), [wrap](https://mpl-core-candy-machine-js-docs.vercel.app/functions/wrap.html), [unwrap](https://mpl-core-candy-machine-js-docs.vercel.app/functions/unwrap.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

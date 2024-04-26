@@ -137,7 +137,7 @@ You may pass the Mint Settings of the NFT Burn guard using the `mintArgs` argume
 ```ts
 import { TokenStandard } from "@metaplex-foundation/mpl-token-metadata";
 
-mintV2(umi, {
+mintV1(umi, {
   // ...
   mintArgs: {
     nftBurn: some({
@@ -149,7 +149,7 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [NftBurnMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftBurnMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [NftBurnMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftBurnMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

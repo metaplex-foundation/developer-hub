@@ -4,7 +4,9 @@ metaTitle: Candy Machine V4 - Fetching a Candy Machine
 description: How to fetch the data of a Core Candy Machine V4
 ---
 
-{% dialect-switcher title="Create a MPL Core Collection" %}
+Fetching a Core Candy Machine and its data can be achieved as follows:
+
+{% dialect-switcher title="Fetch a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts

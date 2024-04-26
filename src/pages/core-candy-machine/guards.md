@@ -4,8 +4,6 @@ metaTitle: Candy Machine - Candy Guards
 description: Explains how guards work and how to enable them.
 ---
 
-Now that we know how Candy Machines work and how to load them, it’s time we talk about the last piece of the puzzle: Guards. {% .lead %}
-
 ## What is a guard?
 
 A guard is a modular piece of code that can restrict access to the mint of a Candy Machine and even add new features to it!
@@ -25,15 +23,15 @@ As you can see, each guard takes care of one responsibility and one responsibili
 
 If you remember the content of our [Candy Machine account](/core-candy-machine/manage#candy-machine-account), you’ll see no signs of guards in there. This is because guards live in another account called the **Candy Guard account** which is created by the **Candy Guard program**.
 
-Each Candy Machine account should typically be associated with its own Candy Guard account which will add a layer of protection to it.
+Each Core Candy Machine account should typically be associated with its own Candy Guard account which will add a layer of protection to it.
 
-This works by creating a Candy Guard account and making it the **Mint Authority** of the Candy Machine account. By doing so, it is no longer possible to mint directly from the main Candy Machine program — known as the **Candy Machine Core program**. Instead, we must mint via the Candy Guard program which, if all guards are resolved successfully, will defer to the Candy Machine Core program to finish the minting process.
+This works by creating a Candy Guard account and making it the **Mint Authority** of the Core Candy Machine account. By doing so, it is no longer possible to mint directly from the main Core Candy Machine program. Instead, we must mint via the Candy Guard program which, if all guards are resolved successfully, will defer to the Candy Machine Core program to finish the minting process.
 
 {% diagram %}
 
 {% node %}
-{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
+{% node #candy-machine-1 label="Core Candy Machine" theme="blue" /%}
+{% node label="Owner: Core Candy Machine Program" theme="dimmed" /%}
 {% node label="Features" /%}
 {% node label="Authority" /%}
 {% node #mint-authority-1 %}
@@ -201,7 +199,6 @@ In the following list, we’ll provide a short description of each guard with a 
 - [**Token Gate**](/core-candy-machine/available-guards/token-gate): Restricts the mint to holders of a specified token.
 - [**Token Payment**](/core-candy-machine/available-guards/token-payment): Set the price of the mint in token amount.
 
-
 <!-- ## Updating guards
 
 Did you set something wrong in your guards? Did you change your mind about the mint price? Do you need to delay the start of the mint of a little? No worries, guards can easily be updated following the same settings used when creating them.
@@ -358,4 +355,4 @@ API References: [createCandyMachineV2](https://mpl-core-candy-machine-js-docs.ve
 
 ## Conclusion
 
-Guards are important components of Candy Machines. They make it easy to configure the minting process whilst allowing anyone to create their own guards for application-specific needs. [On the next page](/core-candy-machine/guard-groups), we’ll see how we can create even more minting scenarios by using guard groups!
+Guards are important components of Core Candy Machines. They make it easy to configure the minting process whilst allowing anyone to create their own guards for application-specific needs.

@@ -11,7 +11,7 @@ The name refers to the vending machines that dispense candy for coins via a mech
 {% figure src="/assets/candy-machine/candy-machine-photo.png" alt="An AI-generated photo of a typical candy machine" caption="A typical candy machine" /%}
 
 {% quick-links %}
-{% quick-link title="Creator Studio" icon="Star" href="https://studio.metaplex.com" description="Don't want to code? Launch your next drop by pressing buttons!" /%}
+
 
 {% quick-link title="Getting Started" icon="InboxArrowDown" href="/candy-machine/getting-started" description="Find the language or library of your choice and get started with Candy Machines." /%}
 {% quick-link title="Recipes" icon="RectangleStack" href="/candy-machine/recipes" description="Learn various scenarios by reading concrete code examples." /%}

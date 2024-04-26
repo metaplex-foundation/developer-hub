@@ -296,7 +296,7 @@ const allowList = [
   "AT8nPwujHAD14cLojTcB1qdBzA1VXnT6LVGuUd6Y73Cy",
 ];
 
-mintV2(umi, {
+mintV1(umi, {
   // ...
   mintArgs: {
     allowList: some({ merkleRoot: getMerkleRoot(allowList) }),
@@ -304,7 +304,7 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [AllowListMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AllowListMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [AllowListMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AllowListMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

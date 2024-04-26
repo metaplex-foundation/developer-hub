@@ -1,7 +1,7 @@
 ---
-title: "Token2022 Payment"
-metaTitle: "Candy Machine Guards - Token Payment"
-description: "The Token2022 Payment guard allows minting by charging the payer some Token2022 tokens."
+title: 'Token2022 Payment'
+metaTitle: 'Candy Machine Guards - Token Payment'
+description: 'The Token2022 Payment guard allows minting by charging the payer some Token2022 tokens.'
 ---
 
 ## Overview
@@ -63,29 +63,31 @@ Owner: System Program {% .whitespace-nowrap %}
 {% edge from="tokenAccount" to="destinationWallet" arrow="none" /%}
 
 {% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% node #mint-candy-guard theme="pink" %}
+Mint from
 
     _Candy Guard Program_{% .whitespace-nowrap %}
-  {% /node %}
+
+{% /node %}
 {% /node %}
 {% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
+Access Control
 {% /node %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
-  {% node theme="pink" %}
-    Mint from 
-    
+{% node theme="pink" %}
+Mint from
+
     _Candy Machine Program_{% .whitespace-nowrap %}
-  {% /node %}
+
+{% /node %}
 {% /node %}
 {% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
+Mint Logic
 {% /node %}
 
 {% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
-  NFT
+NFT
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -122,7 +124,7 @@ The Token Payment guard contains the following settings:
 Note that, in this example, we’re using the current identity as the destination wallet.
 
 ```ts
-import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
+import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
 create(umi, {
   // ...
   guards: {
@@ -132,7 +134,7 @@ create(umi, {
       destinationAta,
     }),
   },
-});
+})
 ```
 
 API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [TokenPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/TokenPaymentArgs.html)
@@ -172,7 +174,7 @@ Note that, if you’re planning on constructing instructions without the help of
 You may pass the Mint Settings of the Token Payment guard using the `mintArgs` argument like so.
 
 ```ts
-mintV2(umi, {
+mintV1(umi, {
   // ...
   mintArgs: {
     tokenPayment: some({
@@ -180,10 +182,10 @@ mintV2(umi, {
       destinationAta,
     }),
   },
-});
+})
 ```
 
-API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [TokenPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/Token2022PaymentMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [TokenPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/Token2022PaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

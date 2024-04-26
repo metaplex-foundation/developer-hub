@@ -1,16 +1,16 @@
 ---
-title: Withdrawing a Candy Machine
-metaTitle: Candy Machine V4 - Withdrawing a Candy Machine
-description: How to fetch the data of a Core Candy Machine V4
+title: Withdrawing a Core Candy Machine
+metaTitle: Core Candy Machine - Withdrawing a Core Candy Machine
+description: How to withdraw a Core Candy Machine and claim back rent.
 ---
 
-The withdrawing of a Candy Machine returns all the on chain storage rent cost of the Candy Machine while subsequently deleting the data and making the Candy Machine unusable.
+The withdrawing of a Core Candy Machine returns all the on chain storage rent cost of the Candy Machine while subsequently deleting the data and making the Candy Machine unusable.
 
 {% callout %}
-This operation is irreversible so only withdraw your Candy Machine when you are 100% finished with the minting process. Your Candy Machine can not be reinstated or recovered.
+This operation is irreversible so only withdraw your Core Candy Machine when you are 100% finished with the minting process. Your Core Candy Machine can not be reinstated or recovered.
 {% /callout %}
 
-{% dialect-switcher title="Create a MPL Core Collection" %}
+{% dialect-switcher title="Withdraw a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts

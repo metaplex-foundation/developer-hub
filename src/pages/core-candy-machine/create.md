@@ -18,17 +18,20 @@ If you wish to create your Candy Machine Assets into a collection (new or existi
 
 ```ts
 // Create the Candy Machine.
-import { createCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine'
+import { create } from '@metaplex-foundation/mpl-core-candy-machine'
+import { generateSigner } from '@metaplex-foundation/umi'
 
 const candyMachine = generateSigner(umi)
 
-await createCandyMachine(umi, {
+const createIx = await create(umi, {
   candyMachine,
   collection: collectionMint.publicKey,
-  collectionUpdateAuthority,
+  collectionUpdateAuthority: umi.identity,
+  itemsAvailable: 1000,
+  authority: umi.identity.publicKey,
+})
 
-  itemsAvailable: 5000,
-}).sendAndConfirm(umi)
+await createIx.sendAndConfirm(umi)
 ```
 
 {% /dialect %}
@@ -74,8 +77,6 @@ A newly generated keypair/signer that is used to create the candymachine.
 
 {% /dialect %}
 {% /dialect-switcher %}
-
-# <<<<<<< HEAD
 
 ### authorityPda (optional)
 
@@ -226,8 +227,6 @@ creators : {
 
 //Todo: Currently needs fixing in the program and client to remove verified. -->
 
-> > > > > > > 3474e3fffe276bfb8069c4484205737f318a5542
-
 ### Config Line Settings
 
 Config Line Settings is an optional field that allows advanced options of adding your Asset data to the Candymachine making the Candymachine's rent cost significantly cheaper.
@@ -309,27 +308,23 @@ import { create } from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = generateSigner(umi)
 
-await create(umi, {
+const coreCollection = publicKey('11111111111111111111111111111111')
+
+const createIx = await create(umi, {
   candyMachine,
-  collectionMint: collectionMint.publicKey,
-  collectionUpdateAuthority,
-  sellerFeeBasisPoints: percentAmount(10),
+  collection: coreCollection,
+  collectionUpdateAuthority: umi.identity,
   itemsAvailable: 5000,
-  creators: [
-    {
-      address: umi.identity.publicKey,
-      verified: true,
-      percentageShare: 100,
-    },
-  ],
-  configLineSettings = some({
-    prefixName: "Example Asset #;
-    nameLength: 15;
-    prefixUri: "https://example.com/metadata/";
-    uriLength: 29;
-    isSequential: false;
+  configLineSettings: some({
+    prefixName: 'Example Asset #',
+    nameLength: 15,
+    prefixUri: 'https://example.com/metadata/',
+    uriLength: 29,
+    isSequential: false,
+  }),
 })
-}).sendAndConfirm(umi)
+
+await createIx.sendAndConfirm(umi)
 ```
 
 {% /dialect %}
@@ -391,13 +386,13 @@ console.log(hash)
 {% /dialect %}
 {% /dialect-switcher %}
 
-#### Example Candy Machine with Hidden Settings
+#### Example Core Candy Machine with Hidden Settings
 
 {% dialect-switcher title="Create a Candy Machine With Hidden Settings" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { createCandyMachineV2 } from '@metaplex-foundation/mpl-core-candy-machine'
+import { create } from '@metaplex-foundation/mpl-core-candy-machine'
 import crypto from "crypto";
 
 const candyMachine = generateSigner(umi)
@@ -411,7 +406,7 @@ const revealData = [
 const string = JSON.stringify(revealData)
 const hash = crypto.createHash('sha256').update(string).digest()
 
-await createCandyMachineV2(umi, {
+const createIx = await create(umi, {
   candyMachine,
   collectionMint: collectionMint.publicKey,
   collectionUpdateAuthority,
@@ -422,21 +417,23 @@ await createCandyMachineV2(umi, {
     uri: "https://example.com/hidden-asset.json,
     hash,
   }
-}).sendAndConfirm(umi)
+})
+
+await createIx.sendAndConfirm(umi)
 ```
 
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Creating a Candy Machine with guards
+## Creating a Core Candy Machine with guards
 
-To create a `Candy Machine` with `Guards` you can supply the `guards:` field during creation and supply the default guards you with to apply to the Candy Machine.s
+To create a `Core Candy Machine` with `Guards` you can supply the `guards:` field during creation and supply the default guards you with to apply to the Candy Machine.s
 
-So far, the Candy Machine we created did not have any guards enabled. Now that we know all the guards available to us, let’s see how we can set up new Candy Machines with some guards enabled.
+So far, the Core Candy Machine we created did not have any guards enabled. Now that we know all the guards available to us, let’s see how we can set up new Candy Machines with some guards enabled.
 
 The concrete implementation will depend on which SDK you are using (see below) but the main idea is that you enable guards by providing their required settings. Any guard that has not been set up will be disabled.
 
-{% dialect-switcher title="Create a Candy Machine with guards" %}
+{% dialect-switcher title="Create a Core Candy Machine with guards" %}
 {% dialect title="JavaScript" id="js" %}
 
 <!-- To enable guards using the Umi library, simply provides the `guards` attribute to the `create` function and pass in the settings of every guard you want to enable. Any guard set to `none()` or not provided will be disabled. -->
@@ -444,7 +441,7 @@ The concrete implementation will depend on which SDK you are using (see below) b
 ```ts
 import { some, sol, dateTime } from '@metaplex-foundation/umi'
 
-await create(umi, {
+const createIx = await create(umi, {
   // ...
   guards: {
     botTax: some({ lamports: sol(0.01), lastInstruction: true }),
@@ -452,7 +449,9 @@ await create(umi, {
     startDate: some({ date: dateTime('2023-04-04T16:00:00Z') }),
     // All other guards are disabled...
   },
-}).sendAndConfirm(umi)
+})
+
+await createIx.sendAndConfirm(umi)
 ```
 
 API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)

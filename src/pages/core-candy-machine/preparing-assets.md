@@ -97,6 +97,11 @@ For a more indepth look at uploaded files with Umi please visit [Umi Storage.](u
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+
+const umi = createUmi('https://api.devnet.solana.com').use(irysUploader())
+
 const uriUploadArray = await umi.uploader.upload([myFile1, myFile2])
 
 console.log(uriUploadArray)
@@ -203,7 +208,11 @@ import { createCollectionV1 } from '@metaplex-foundation/mpl-core'
 const mainnet = 'https://api.mainnet-beta.solana.com'
 const devnet = 'https://api.devnet.solana.com'
 
-const umi = createUmi(mainnet).use(mplCore())
+const keypair = // assign keypair
+
+const umi = createUmi(mainnet)
+.use(keypairIdentity(keypair)) // Assign identity signer of your choice.
+.use(mplCore())
 
 const collectionSigner = generateSigner(umi)
 
@@ -211,7 +220,7 @@ await createCollectionV1(umi, {
   collection: collectionSigner,
   name: 'My Collection',
   uri: 'https://example.com/my-collection.json',
-})
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}

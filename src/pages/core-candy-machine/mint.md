@@ -93,86 +93,91 @@ Starting from version `1.0` of the Candy Guard program, The mint instruction acc
 
 Please note that the latest mint instruction relies on the latest Token Metadata instructions which use a fair amount of compute units. As such, you may need to increase the compute unit limit of the transaction to ensure it is successful. Our SDKs may also help with this.
 
-{% dialect-switcher title="Mint from a Candy Machine" %}
+{% dialect-switcher title="Mint from a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
-To mint from a Candy Machine via a configured Candy Guard account, you may use the `mintV2` function and provide the mint address and update authority of the collection NFT the minted NFT will belong to. A `minter` signer and `payer` signer may also be provided but they will default to Umi's identity and payer respectively.
+To mint from a Candy Machine via a configured Candy Guard account, you may use the `mintV1` function and provide the mint address and update authority of the collection NFT the minted NFT will belong to. A `minter` signer and `payer` signer may also be provided but they will default to Umi's identity and payer respectively.
 
-As mentioned above, you may need to increase the compute unit limit of the transaction to ensure the `mintV2` instruction is successful. You may do this by using the `setComputeUnitLimit` helper function on the `mpl-toolbox` Umi library as illustrated in the code snippet below.
-
-If you want to mint pNFT (e.g. for royalty enforcement) and have your Candy Machine set up accordingly you will have to add the `tokenStandard` field. By default `NonFungible` is used. If you fetched the Candy Machine before you could use `candyMachine.tokenStandard`, otherwise you have to assign it yourself by using `tokenStandard: TokenStandard.ProgrammableNonFungible` from `@metaplex-foundation/mpl-token-metadata`.
+As mentioned above, you may need to increase the compute unit limit of the transaction to ensure the `mintV1` instruction is successful. You may do this by using the `setComputeUnitLimit` helper function on the `mpl-toolbox` Umi library as illustrated in the code snippet below.
 
 ```ts
-import { mintV2 } from '@metaplex-foundation/mpl-core-candy-machine'
+import { mintV1 } from '@metaplex-foundation/mpl-core-candy-machine'
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
 import { transactionBuilder, generateSigner } from '@metaplex-foundation/umi'
 
-const nftMint = generateSigner(umi)
+const candyMachineId = publicKey('11111111111111111111111111111111')
+const coreCollection = publicKey('22222222222222222222222222222222')
+const asset = generateSigner(umi)
+
 await transactionBuilder()
   .add(setComputeUnitLimit(umi, { units: 800_000 }))
   .add(
-    mintV2(umi, {
-      candyMachine: candyMachine.publicKey,
-      nftMint,
-      collectionMint: collectionNft.publicKey,
-      collectionUpdateAuthority: collectionNft.metadata.updateAuthority,
-      tokenStandard: candyMachine.tokenStandard,
+    mintV1(umi, {
+      candyMachine: candyMachineId,
+      asset,
+      collection: coreCollection,
     })
   )
   .sendAndConfirm(umi)
 ```
 
-Note that the `mintV2` instruction takes care of creating the Mint and Token accounts for us by default and will set the NFT owner to the `minter`. If you wish to create these yourself beforehand, you may simply give the NFT mind address as a public key instead of a signer. Here's an example using the `createMintWithAssociatedToken` function from the `mpl-toolbox` Umi library:
+Note that the `mintV1` instruction takes care of creating the Mint and Token accounts for us by default and will set the NFT owner to the `minter`. If you wish to create these yourself beforehand, you may simply give the NFT mind address as a public key instead of a signer. Here's an example using the `createMintWithAssociatedToken` function from the `mpl-toolbox` Umi library:
 
 ```ts
-import { mintV2 } from '@metaplex-foundation/mpl-core-candy-machine'
+import { mintV1 } from '@metaplex-foundation/mpl-core-candy-machine'
 import {
   createMintWithAssociatedToken,
   setComputeUnitLimit,
 } from '@metaplex-foundation/mpl-toolbox'
-import { transactionBuilder, generateSigner } from '@metaplex-foundation/umi'
+import {
+  transactionBuilder,
+  generateSigner,
+  publicKey,
+} from '@metaplex-foundation/umi'
 
-const nftMint = generateSigner(umi)
-const nftOwner = generateSigner(umi).publicKey
+const asset = generateSigner(umi)
+const nftOwner = publicKey('11111111111111111111111111111111')
+
 await transactionBuilder()
   .add(setComputeUnitLimit(umi, { units: 800_000 }))
   .add(createMintWithAssociatedToken(umi, { mint: nftMint, owner: nftOwner }))
   .add(
-    mintV2(umi, {
-      candyMachine: candyMachine.publicKey,
-      nftMint: nftMint.publicKey,
-      collectionMint: collectionNft.publicKey,
-      collectionUpdateAuthority: collectionNft.metadata.updateAuthority,
+    mintV1(umi, {
+      candyMachine: candyMachineId,
+      asset,
+      collection: coreCollection,
+      owner: nftOwner,
     })
   )
   .sendAndConfirm(umi)
 ```
 
-In the rare event that you wish to mint directly from the Candy Machine Core program, you may use the `mintFromCandyMachineV2` function instead. This function requires the mint authority of the candy machine to be provided as a signer and accepts an explicit `nftOwner` attribute.
+In the rare event that you wish to mint directly from the Core Candy Machine program instead of the Candy Guard Program, you may use the `mintAssetFromCandyMachine` function instead. This function requires the mint authority of the candy machine to be provided as a signer and accepts an explicit `assetOwner` attribute.
 
 ```ts
 import { mintFromCandyMachineV2 } from '@metaplex-foundation/mpl-core-candy-machine'
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
 import { transactionBuilder, generateSigner } from '@metaplex-foundation/umi'
 
-const nftMint = generateSigner(umi)
-const nftOwner = generateSigner(umi).publicKey
+const candyMachineId = publicKey('11111111111111111111111111111111')
+const coreCollection = publicKey('22222222222222222222222222222222')
+const asset = generateSigner(umi)
+
 await transactionBuilder()
   .add(setComputeUnitLimit(umi, { units: 800_000 }))
   .add(
-    mintFromCandyMachineV2(umi, {
-      candyMachine: candyMachine.publicKey,
+    mintAssetFromCandyMachine(umi, {
+      candyMachine: candyMachineId,
       mintAuthority: umi.identity,
-      nftOwner,
-      nftMint,
-      collectionMint: collectionNft.publicKey,
-      collectionUpdateAuthority: collectionNft.metadata.updateAuthority,
+      assetOwner: umi.identity.publicKey,
+      asset,
+      collection: coreCollection,
     })
   )
   .sendAndConfirm(umi)
 ```
 
-API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [mintFromCandyMachineV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintFromCandyMachineV2.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [mintAssetFromCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintAssetFromCandyMachine.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -188,7 +193,7 @@ A good example of a guard that requires Mint Settings is the **NFT Payment** gua
 {% diagram %}
 
 {% node %}
-{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
+{% node #candy-machine-1 label="Core Candy Machine" theme="blue" /%}
 {% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
 {% /node %}
 
@@ -255,7 +260,7 @@ import {
   generateSigner,
   transactionBuilder,
 } from '@metaplex-foundation/umi'
-import { create, mintV2 } from '@metaplex-foundation/mpl-core-candy-machine'
+import { create, mintV1 } from '@metaplex-foundation/mpl-core-candy-machine'
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
 
 // Create a Candy Machine with guards.
@@ -273,11 +278,10 @@ const nftMint = generateSigner(umi)
 await transactionBuilder()
   .add(setComputeUnitLimit(umi, { units: 800_000 }))
   .add(
-    mintV2(umi, {
-      candyMachine: candyMachine.publicKey,
-      nftMint,
-      collectionMint: collectionNft.publicKey,
-      collectionUpdateAuthority: collectionNft.metadata.updateAuthority,
+    mintV1(umi, {
+      candyMachine: candyMachineId,
+      asset,
+      collection: coreCollection,
       mintArgs: {
         thirdPartySigner: some({ signer: thirdPartySigner }),
         mintLimit: some({ id: 1 }),
@@ -287,7 +291,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [DefaultGuardSetMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [DefaultGuardSetMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetMintArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -421,15 +425,18 @@ await create(umi, {
 }).sendAndConfirm(umi)
 
 // Mint from the Candy Machine.
-const nftMint = generateSigner(umi)
+
+const candyMachineId = publicKey('11111111111111111111111111111111')
+const coreCollection = publicKey('22222222222222222222222222222222')
+const asset = generateSigner(umi)
+
 await transactionBuilder()
   .add(setComputeUnitLimit(umi, { units: 800_000 }))
   .add(
-    mintV2(umi, {
-      candyMachine: candyMachine.publicKey,
-      nftMint,
-      collectionMint: collectionNft.publicKey,
-      collectionUpdateAuthority: collectionNft.metadata.updateAuthority,
+    mintV1(umi, {
+      candyMachine: candyMachineId,
+      asset,
+      collection: coreCollection,
       group: some('nft'),
       mintArgs: {
         thirdPartySigner: some({ signer: thirdPartySigner }),
@@ -444,7 +451,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [DefaultGuardSetMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [DefaultGuardSetMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetMintArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

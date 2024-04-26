@@ -154,7 +154,7 @@ Note that, if you’re planning on constructing instructions without the help of
 You may pass the Mint Settings of the Gatekeeper guard using the `mintArgs` argument like so.
 
 ```ts
-mintV2(umi, {
+mintV1(umi, {
   // ...
   mintArgs: {
     gatekeeper: some({

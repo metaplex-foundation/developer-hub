@@ -136,7 +136,7 @@ Note that, if you’re planning on constructing instructions without the help of
 When minting via the Umi library, simply provide the mint address of the NFT to use as proof of ownership via the `mint` attribute like so.
 
 ```ts
-mintV2(umi, {
+mintV1(umi, {
   // ...
   mintArgs: {
     nftGate: some({ mint: nftToBurn.publicKey }),
@@ -144,7 +144,7 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [NftGateMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftGateMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [NftGateMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftGateMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

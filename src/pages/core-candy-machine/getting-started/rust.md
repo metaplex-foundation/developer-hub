@@ -1,20 +1,23 @@
 ---
 title: Getting Started using Rust
-metaTitle: Candy Machine - Getting Started - Rust
-description: Get started with Candy Machines using Rust
+metaTitle: Core - Getting Started - Rust
+description: Get started with Core using Rust
 ---
 
-If you are a Rust developer, you can also use a Rust crate to interact with the Candy Machine program. Since the program is written in Rust, this crate contains all the program's logic, including helper methods that prepare instructions for us.
 
-This can be helpful if you are developing a Rust client or if you want to make [CPI calls](https://solanacookbook.com/references/programs.html#how-to-do-cross-program-invocation) to the Candy Machine program within your program.
+Metaplex provides a Rust library that can be used to interact with the Core Candy Machine program on both a client and program level.
 
-Since candy machines are composed of two programs, you will need to install two libraries.
 
-- **Candy Machine Core**
-  - [GitHub Repository](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-machine-core)
-  - [Crate Page](https://crates.io/crates/mpl-core-candy-machine-core)
-  - [API References](https://docs.rs/mpl-core-candy-machine-core/latest/mpl_core_candy_machine_core/)
-- **Candy Guard**
-  - [GitHub Repository](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard)
-  - [Crate Page](https://crates.io/crates/mpl-core-candy-guard)
-  - [API References](https://docs.rs/mpl-core-candy-guard/latest/mpl_core_candy_guard/)
+## Solana Program
+
+To get started, you'll need to [install the Core Candy Machine Crate](https://crates.io/crates/mpl-core-candy-machine-core/).
+
+```sh
+cargo add mpl-core-candy-machine-core
+```
+
+
+🔗 **Helpful Links:**
+- [Rust Crate](https://crates.io/crates/mpl-core-candy-machine-core/)
+- [GitHub Repository](https://github.com/metaplex-foundation/mpl-core-candy-machine)
+- [API References](https://docs.rs/mpl-core-candy-machine-core/)

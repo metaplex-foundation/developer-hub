@@ -134,7 +134,7 @@ Note that, if you’re planning on constructing instructions without the help of
 You may pass the Mint Settings of the Freeze Sol Payment guard using the `mintArgs` argument like so.
 
 ```ts
-mintV2(umi, {
+mintV1(umi, {
   // ...
   mintArgs: {
     freezeSolPayment: some({ destination: umi.identity.publicKey }),
@@ -142,7 +142,7 @@ mintV2(umi, {
 })
 ```
 
-API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [FreezeSolPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [FreezeSolPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
@@ -159,9 +159,15 @@ _As soon as a guard is assigned you cannot use sugar to mint - therefore there a
 
 The Freeze Sol Payment route instruction supports the following features.
 
-- [Initialize the Freeze Escrow](#initialize-the-freeze-escrow)
-- [Thaw a Frozen NFT](#thaw-a-frozen-nft)
-- [Unlock Funds](#unlock-funds)
+- [Overview](#overview)
+- [Guard Settings](#guard-settings)
+- [Mint Settings](#mint-settings)
+- [Route Instruction](#route-instruction)
+  - [Initialize the Freeze Escrow](#initialize-the-freeze-escrow)
+  - [Thaw a Frozen NFT](#thaw-a-frozen-nft)
+  - [Unlock Funds](#unlock-funds)
+- [Stop Freezing NFTs](#stop-freezing-nfts)
+- [Freeze Escrows and Guard Groups](#freeze-escrows-and-guard-groups)
 
 ### Initialize the Freeze Escrow
 

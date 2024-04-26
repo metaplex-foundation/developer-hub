@@ -160,7 +160,7 @@ You may pass the Mint Settings of the NFT Payment guard using the `mintArgs` arg
 ```ts
 import { TokenStandard } from "@metaplex-foundation/mpl-token-metadata";
 
-mintV2(umi, {
+mintV1(umi, {
   // ...
   mintArgs: {
     nftPayment: some({
@@ -172,7 +172,7 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [NftPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftPaymentMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [NftPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftPaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

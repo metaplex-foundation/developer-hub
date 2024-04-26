@@ -143,7 +143,7 @@ Note that, if you’re planning on constructing instructions without the help of
 You may pass the Mint Settings of the Freeze Token Payment guard using the `mintArgs` argument like so.
 
 ```ts
-mintV2(umi, {
+mintV1(umi, {
   // ...
   mintArgs: {
     freezeTokenPayment: some({
@@ -169,9 +169,15 @@ _As soon as a guard is assigned you cannot use sugar to mint - therefore there a
 
 The Freeze Token Payment route instruction supports the following features.
 
-- [Initialize the Freeze Escrow](#initialize-the-freeze-escrow)
-- [Thaw a Frozen NFT](#thaw-a-frozen-nft)
-- [Unlock Funds](#unlock-funds)
+- [Overview](#overview)
+- [Guard Settings](#guard-settings)
+- [Mint Settings](#mint-settings)
+- [Route Instruction](#route-instruction)
+  - [Initialize the Freeze Escrow](#initialize-the-freeze-escrow)
+  - [Thaw a Frozen NFT](#thaw-a-frozen-nft)
+  - [Unlock Funds](#unlock-funds)
+- [Stop Freezing NFTs](#stop-freezing-nfts)
+- [Freeze Escrows and Guard Groups](#freeze-escrows-and-guard-groups)
 
 ### Initialize the Freeze Escrow
 

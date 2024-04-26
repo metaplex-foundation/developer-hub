@@ -134,7 +134,7 @@ Note that, if you’re planning on constructing instructions without the help of
 You may pass the Mint Settings of the Token Burn guard using the `mintArgs` argument like so.
 
 ```ts
-mintV2(umi, {
+mintV1(umi, {
   // ...
   mintArgs: {
     tokenBurn: some({ mint: tokenMint.publicKey }),
@@ -142,7 +142,7 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV2.html), [TokenBurnMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/TokenBurnMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [TokenBurnMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/TokenBurnMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
