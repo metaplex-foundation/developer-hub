@@ -30,4 +30,4 @@ Inscription cost fundamentally comes down to 0.003306 SOL overhead for account r
 
 ## How do I inscribe new NFTs?
 
-New NFTs can be inscribed by first minting through a creation tool (recommended tools are [Creator Studio](https://studio.metaplex.com/) and [Sol Tools](https://sol-tools.io/)). After minting, these new NFTs will now be listed on the Inscription UI and via the CLI tool.
+New NFTs can be inscribed by first minting through a creation tool (recommended tools are [Truffle](https://truffle.wtf/) and [Sol Tools](https://sol-tools.io/)). After minting, these new NFTs will now be listed on the Inscription UI and via the CLI tool.

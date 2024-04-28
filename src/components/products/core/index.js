@@ -31,9 +31,11 @@ export const core = {
               href: '/core/getting-started',
             },
             { title: 'What is an Asset?', href: '/core/what-is-an-asset' },
-            { title: 'Token Metadata Differences', href: '/core/tm-differences' },
+            {
+              title: 'Token Metadata Differences',
+              href: '/core/tm-differences',
+            },
             { title: 'FAQ', href: '/core/faq' },
-
           ],
         },
         {
@@ -68,10 +70,19 @@ export const core = {
               title: 'Transfer Delegate Plugin',
               href: '/core/plugins/transfer-delegate',
             },
-            { title: 'Freeze Delegate Plugin', href: '/core/plugins/freeze-delegate' },
-            { title: 'Burn Delegate Plugin', href: '/core/plugins/burn-delegate' },
+            {
+              title: 'Freeze Delegate Plugin',
+              href: '/core/plugins/freeze-delegate',
+            },
+            {
+              title: 'Burn Delegate Plugin',
+              href: '/core/plugins/burn-delegate',
+            },
             { title: 'Royalties Plugin', href: '/core/plugins/royalties' },
-            { title: 'Update Delegate Plugin', href: '/core/plugins/update-delegate' },
+            {
+              title: 'Update Delegate Plugin',
+              href: '/core/plugins/update-delegate',
+            },
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
             {
               title: 'Permanent Transfer Plugin',
@@ -90,14 +101,14 @@ export const core = {
         // {
         //   title: 'Integration Guides',
         //   links: [
-        //     { title: 'Wallets', href: '/core/intergrations/wallets' },
+        //     { title: 'Wallets', href: '/core/integrations/wallets' },
         //     {
         //       title: 'Market Places',
-        //       href: '/core/intergrations/market-places',
+        //       href: '/core/intergations/market-places',
         //     },
         //     {
         //       title: 'Staking',
-        //       href: '/core/intergrations/staking',
+        //       href: '/core/intergations/staking',
         //     },
         //   ],
         // },
@@ -105,9 +116,7 @@ export const core = {
     },
     { 
       ...referencesSection('core'),
-      href: `https://mpl-core-js-docs.vercel.app/`,
-      target: '_blank'
-     },
+    },
     // { ...guidesSection('core') },
     // { ...recipesSection('core') },
     { ...changelogSection('core') },
