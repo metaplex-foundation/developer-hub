@@ -39,3 +39,23 @@ await burnV1(umi, {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+If the asset that you are trying to burn is part of a collection you additionally need to pass the collectionMetadata account into the function:
+
+{% dialect-switcher title="Burning Assets that are part of a collection" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { burnV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
+
+await burnV1(umi, {
+  mint,
+  authority: owner,
+  tokenOwner: owner.publicKey,
+  collectionMetadata: findMetadataPda( umi, { mint: collectionMintAddress })
+  tokenStandard: TokenStandard.NonFungible,
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
