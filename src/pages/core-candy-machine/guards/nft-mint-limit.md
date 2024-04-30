@@ -6,7 +6,7 @@ description: "The NFT Mint Limit guard restricts minting to holders of a specifi
 
 ## Overview
 
-The NFT Mint Limit guard restricts minting to holders of a specified NFT collection and limits the amount of mints that can be done for a provided NFT. It can be considered as a combinatino of the [NFT Gate](/core-candy-machine/guards/nft-gate) and [Mint Limit](/core-candy-machine/guards/mint-limit) Guard, based on NFT Addresses instead of wallets. 
+The NFT Mint Limit guard restricts minting to holders of a specified NFT collection and limits the amount of mints that can be done for a provided Token Metadata NFT. It can be considered as a combination of the [NFT Gate](/core-candy-machine/guards/nft-gate) and [Mint Limit](/core-candy-machine/guards/mint-limit) Guard, based on NFT Addresses instead of wallets. 
 
 The limit is set per NFT Collection, per candy machine and per identifier — provided in the settings — to allow multiple nft mint limits within the same Core Candy Machine.
 
