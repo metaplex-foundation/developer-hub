@@ -94,6 +94,7 @@ export const coreCandyMachine = {
             { title: 'Mint Limit', href: '/core-candy-machine/guards/mint-limit' },
             { title: 'NFT Burn', href: '/core-candy-machine/guards/nft-burn' },
             { title: 'NFT Gate', href: '/core-candy-machine/guards/nft-gate' },
+            { title: 'NFT Mint Limit', href: '/core-candy-machine/guards/nft-mint-limit' },
             {
               title: 'NFT Payment',
               href: '/core-candy-machine/guards/nft-payment',
