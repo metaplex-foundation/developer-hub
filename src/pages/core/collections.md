@@ -242,7 +242,7 @@ console.log(collection)
 
 {% dialect title="Rust" id="rust" %}
 
-```ts
+```rust
 use std::str::FromStr;
 use mpl_core::Collection;
 use solana_client::nonblocking::rpc_client;
