@@ -84,6 +84,7 @@ export const core = {
               href: '/core/plugins/update-delegate',
             },
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
+            { title: 'Edition Plugin', href: '/core/plugins/edition' },
             {
               title: 'Permanent Transfer Plugin',
               href: '/core/plugins/permanent-transfer-delegate',
