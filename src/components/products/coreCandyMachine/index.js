@@ -108,6 +108,10 @@ export const coreCandyMachine = {
               href: '/core-candy-machine/guards/redeemed-amount',
             },
             {
+              title: 'Sol Fixed Fee',
+              href: '/core-candy-machine/guards/sol-fixed-fee',
+            },
+            {
               title: 'Sol Payment',
               href: '/core-candy-machine/guards/sol-payment',
             },
