@@ -1,7 +1,7 @@
 ---
-title: Candy Machine Settings
-metaTitle: Candy Machine - Settings
-description: Explains Candy Machine settings in great detail.
+title: Core Candy Machine Settings
+metaTitle: Core Candy Machine - Settings
+description: Explains Core Candy Machine settings in great detail.
 ---
 
 On this page, we’re going to dig into all the settings available on a Candy Machine. We will focus on settings that affect the Candy Machine itself and the NFTs it generates rather than the settings that affect the minting process known as Guards. We will tackle the latter in dedicated pages. {% .lead %}
@@ -35,7 +35,7 @@ const candyMachineSettings = {
 
 A big chunk of the Candy Machine settings is used to define the NFTs that will be minted from them. This is because many of the NFT attributes will be the same for all minted NFTs. Therefore, instead of having to repeat these attributes every time we load an item in the Candy Machine, we set them up once on the Candy Machine settings.
 
-Note that the only attributes that can distinguish one minted NFT from another are the **Name** of the NFT and the **URI** pointing to its JSON metadata. See [Inserting Items](/candy-machine/insert-items) for more information.
+Note that the only attributes that can distinguish one minted NFT from another are the **Name** of the NFT and the **URI** pointing to its JSON metadata. See [Inserting Items](/core-candy-machine/insert-items) for more information.
 
 Here is the list of attributes shared between all minted NFTs.
 
@@ -245,24 +245,6 @@ Also note that, since we are not inserting any item to the Candy Machine, Hidden
 {% dialect-switcher title="Set up hidden settings" %}
 {% dialect title="JavaScript" id="js" %}
 
-
-To calculate the hash you could use the following functions:
-
-```ts
-import crypto from 'crypto'
-
-const revealData = [
-  { name: 'Nft #1', uri: 'http://example.com/1.json' },
-  { name: 'Nft #2', uri: 'http://example.com/2.json' },
-  { name: 'Nft #3', uri: 'http://example.com/3.json' },
-]
-
-const string = JSON.stringify(revealData)
-const hash = crypto.createHash('sha256').update(string).digest()
-
-console.log(hash)
-```
-
 When using Umi, you can use the `some` and `none` helper functions to tell the library whether to use Config Line Settings or Hidden Settings via the `configLineSettings` and `hiddenSettings` attributes respectively. Only one of these settings must be used, thus, one of them must be configured and the other one must be set to `none()`.
 
 Here’s a code snippet showing how you can set up the above example using the Umi library.
@@ -287,8 +269,8 @@ const candyMachineSettings = {
 
 As mentioned in the introduction, this page focuses on the main Candy Machine settings but there is a lot more you can configure on a Candy Machine by using guards.
 
-Since this is a vast subject with a lot of available default guards to explain, we’ve dedicated an entire section of this documentation to it. The best place to start is the [Candy Guards](/candy-machine/guards) page.
+Since this is a vast subject with a lot of available default guards to explain, we’ve dedicated an entire section of this documentation to it. The best place to start is the [Candy Guards](/core-candy-machine/guards) page.
 
 ## Conclusion
 
-Now that we know about how the main Candy Machine settings, on [the next page](/candy-machine/manage), we’ll see how we can use them to create and update our own Candy Machines.
+Now that we know about how the main Candy Machine settings, on [the next page](/core-candy-machine/manage), we’ll see how we can use them to create and update our own Candy Machines.

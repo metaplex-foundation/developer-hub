@@ -1,6 +1,6 @@
 ---
 title: "Program Gate"
-metaTitle: "Candy Machine Guards - Program Gate"
+metaTitle: "Core Candy Machine Guards - Program Gate"
 description: "Configurable list of valid programs."
 ---
 
@@ -13,16 +13,16 @@ The guard allows the necessary programs for the mint and any other program speci
 {% diagram  %}
 
 {% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
+{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
 {% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
+Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% /node %}
 
 {% node parent="candy-machine" y="100" x="21" %}
 {% node #candy-guard label="Candy Guard" theme="blue" /%}
 {% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
+Owner: Core Candy Guard Program {% .whitespace-nowrap %}
 {% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
 {% node #addressGate label="ProgramGate" /%}
@@ -34,26 +34,26 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
   {% node theme="pink" %}
     Mint from
 
-    _Candy Guard Program_{% .whitespace-nowrap %}
+    _Core Candy Guard Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
   Access Control
 {% /node %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
+{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-10" %}
   {% node theme="pink" %}
     Mint from 
     
-    _Candy Machine Program_{% .whitespace-nowrap %}
+    _Core Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
 {% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
   Mint Logic
 {% /node %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="70" theme="blue" %}
-  NFT
+{% node #nft parent="mint-candy-machine" y="140" x="93" theme="blue" %}
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
@@ -65,7 +65,7 @@ from additional programs
 
 Minting will fail
 {% /edge %}
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
 {% /diagram %}
 
@@ -75,7 +75,7 @@ The Program Gate guard contains the following settings:
 
 - **Additional**: List of additional programs addresses (up to 5 addresses) that are allowed to include instructions on the mint transaction.
 
-{% dialect-switcher title="Set up a Candy Machine using the Program Gate guard" %}
+{% dialect-switcher title="Set up a Core Candy Machine using the Program Gate guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -88,20 +88,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [ProgramGate](https://mpl-candy-machine-js-docs.vercel.app/types/ProgramGate.html)
-
-{% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
-{% totem %}
-
-Add this object into the guard section your config.json file: 
-
-```json
-"programGate" : {
-    "additional": ["<PUBKEY 1>", "<PUBKEY 2>", ..., "<PUBKEY 5>"],
-}
-```
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [ProgramGate](https://mpl-core-candy-machine-js-docs.vercel.app/types/ProgramGate.html)
 
 {% /totem %}
 {% /dialect %}

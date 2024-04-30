@@ -27,7 +27,7 @@ sugar
 
 This will display a list of commands and their short description:
 ```
-sugar-cli 2.5.0
+sugar-cli 2.7.1
 Command line tool for creating and managing Metaplex Candy Machines.
 
 USAGE:
@@ -91,6 +91,9 @@ OPTIONS:
 
     -l, --log-level <LOG_LEVEL>
             Log level: trace, debug, info, warn, error, off
+
+    -p, --priority-fee <PRIORITY_FEE>
+            Priority fee value [default: 500]
 
     -r, --rpc-url <RPC_URL>
             RPC Url

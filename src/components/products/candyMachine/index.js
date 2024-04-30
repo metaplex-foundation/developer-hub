@@ -9,7 +9,7 @@ import { Logo } from './Logo'
 
 export const candyMachine = {
   name: 'Candy Machine',
-  headline: 'NFT launchpad',
+  headline: 'TM NFT launchpad',
   description: 'Launch your next NFT collection on Solana.',
   navigationMenuCatergory: 'Commerce',
   path: 'candy-machine',
