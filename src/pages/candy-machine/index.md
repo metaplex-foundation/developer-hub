@@ -19,7 +19,7 @@ The name refers to the vending machines that dispense candy for coins via a mech
 {% /quick-links %}
 
 {% callout %}
-This documentation refers Candy Machine V3 which can be used to mint Metaplex Token Metadata NFTs. If you want to create Core Assets instead please see [Candy Machine V4](/core-candy-machine).
+This documentation refers Candy Machine V3 which can be used to mint Metaplex Token Metadata NFTs. If you want to create Core Assets instead please see [Core Candy Machine](/core-candy-machine).
 {% /callout %}
 
 ## Introduction
