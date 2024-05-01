@@ -15,7 +15,7 @@ Let's dig into these steps in more detail, whilst providing concrete code exampl
 
 ## Uploading off-chain data
 
-You may use any storage service (Arweave, IPFS, AWS etc...) to upload your off-chain data or simply store it on your own server. To make some of these easier for the user `Umi` has some dedicated plugins including the likes of `Irys (uploads to Arwevea)` and `nftStorage (uploads to IPFS)`. Once a plugin is selected this grants the user a unified interface for you to upload your data.
+You may use any storage service (Arweave, IPFS, AWS etc...) to upload your off-chain data or simply store it on your own server. To make some of these easier for the user `Umi` has some dedicated plugins including the likes of `Irys (uploads to Arweave)` and `nftStorage (uploads to IPFS)`. Once a plugin is selected this grants the user a unified interface for you to upload your data.
 
 {% dialect-switcher title="Upload assets and JSON data" %}
 {% dialect title="JavaScript" id="js" %}
