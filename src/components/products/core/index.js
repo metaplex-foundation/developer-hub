@@ -86,6 +86,10 @@ export const core = {
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
             { title: 'Edition Plugin', href: '/core/plugins/edition' },
             {
+              title: 'Master Edition Plugin',
+              href: '/core/plugins/master-edition',
+            },
+            {
               title: 'Permanent Transfer Plugin',
               href: '/core/plugins/permanent-transfer-delegate',
             },
@@ -115,10 +119,23 @@ export const core = {
         // },
       ],
     },
-    { 
+    {
       ...referencesSection('core'),
+      href: `https://mpl-core-js-docs.vercel.app/`,
+      target: '_blank',
     },
-    // { ...guidesSection('core') },
+    {
+      ...guidesSection('core'),
+      navigation: [
+        {
+          title: 'Guides',
+          links: [
+            { title: 'Overview', href: '/core/guides' },
+            { title: 'Print Editions', href: '/core/guides/print-editions' },
+          ],
+        },
+      ],
+    },
     // { ...recipesSection('core') },
     { ...changelogSection('core') },
   ],
