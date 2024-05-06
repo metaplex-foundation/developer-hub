@@ -24,7 +24,7 @@ The Attribute Plugin will work in areas such as:
 | ------------- | ----------------------------------- |
 | attributeList | Array<{key: string, value: string}> |
 
-## AttributeList
+### AttributeList
 
 The attribute list consists of an Array[] then an object of key-value pairs `{key: "value"}` string value pairs.
 

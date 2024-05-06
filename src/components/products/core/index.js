@@ -101,6 +101,31 @@ export const core = {
               title: 'Permanent Burn Delegate Plugin',
               href: '/core/plugins/permanent-burn-delegate',
             },
+            {
+              title: 'Oracle Plugin',
+              href: '/core/plugins/oracle',
+            },
+
+          ],
+        },
+        {
+          title: 'External Plugins',
+          links: [
+            { title: 'Overview', href: '/core/external-plugins/overview' },
+            { title: 'Adding External Plugins', href: '/core/external-plugins/adding-external-plugins' },
+            // {
+            //   title: 'Removing External Plugins',
+            //   href: '/core/plugins/removing-plugins',
+            // },
+            // {
+            //   title: 'Delegating and Revoking External Plugins',
+            //   href: '/core/plugins/delegating-and-revoking-plugins',
+            // },
+            {
+              title: 'Oracle Plugin',
+              href: '/core/external-plugins/oracle',
+            },
+
           ],
         },
         // {
