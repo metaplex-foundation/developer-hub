@@ -34,6 +34,8 @@ Large one-off audits are also performed when there are large changes to the code
 
 | Protocol              | Last major one-off audit date |
 | --------------------- | ----------------------------- |
+| Core                  | 2024-05-06                    |
+| Inscriptions          | 2024-01-16                    |
 | Token Metadata        | 2023-06-24                    |
 | Trifle/Fusion         | 2023-04-13                    |
 | Bubblegum/Compression | 2023-11-29                    |
@@ -41,8 +43,6 @@ Large one-off audits are also performed when there are large changes to the code
 | Candy Machine V2      | 2022-11-01                    |
 | Auction House         | 2022-10-24                    |
 | Gumdrop               | 2022-05-16                    |
-| Inscriptions          | 2024-01-16                    |
-| Core                  | 2024-05-06                    |
 
 We do not have ongoing automated nor manual security audits that are routinely performed by our audit partners for our developer tools. However, audits may be ordered, facilitated, and paid for by our community of 3rd party Solana ecosystem developers or entities of thier own accord.
 
