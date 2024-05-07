@@ -101,11 +101,6 @@ export const core = {
               title: 'Permanent Burn Delegate Plugin',
               href: '/core/plugins/permanent-burn-delegate',
             },
-            {
-              title: 'Oracle Plugin',
-              href: '/core/plugins/oracle',
-            },
-
           ],
         },
         {

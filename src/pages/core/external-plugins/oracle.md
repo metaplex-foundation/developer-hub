@@ -4,14 +4,14 @@ metaTitle: Core - Oracle Plugin
 description: Learn about the Oracle Plugin
 ---
 
-The Oracle Plugin is a `External Plugin` that is used with Core Assets that provides the ability to control the lifecycle events of:
+The Oracle Plugin is a `External Plugin` that is used with Core Assets and Collections that provides the ability to `reject` the lifecycle events of:
 
 - Create
 - Transfer
 - Update
 - Burn
 
-When aadding a Oracle Plugin to an Asset the plugin stores and references an Orcale Account external to the Mpl Core program. This external account will then be referenced and called upon to decide if lifecycle events can take place on the asset at that given time.
+When adding a Oracle Plugin to an Asset the plugin stores and references an Orcale Account external to the Mpl Core program. This external account will then be referenced and called upon to decide if lifecycle events can take place on the asset at that given point in time.
 
 ## Works With
 
@@ -25,6 +25,12 @@ When aadding a Oracle Plugin to an Asset the plugin stores and references an Orc
 ### What is an Orcale Account?
 
 An Orcale Account is an onchain account that is created by the project/developer externally from the Mpl Core program. If an Asset or Collection has an Oracle Plugin enabled and an Oracle Account assigned to it the Oracle Account will be loaded by the MPL Core program for validations during lifecycle events.
+
+The Oracle Account stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can perform a `Reject` validation on the selected lifecycle events.
+
+The ability to update and change the Oracle Account generates and very powerful and interactive lifecycle experiance.
+
+### On Chain Account Structure
 
 The Orcale Account should have the following onchain account structure.
 
@@ -63,9 +69,7 @@ pub enum OracleValidation {
 }
 
 pub enum ExternalValidationResult {
-    Approved,
     Rejected,
-    Pass,
 }
 ```
 
@@ -110,15 +114,109 @@ pub enum ExternalValidationResult {
 
 |              |                                                       |
 | ------------ | ----------------------------------------------------- |
-| **Approved** | Will approve a lifecyle validation                   |
 | **Rejected** | Will reject a lifecyle validation                     |
-| **Pass**     | Will neither approve or reject a lifescyle validation |
 
 ### Updating an Oracle Account
 
 Because the Oracle is an external account created and maintained by the creator/developer the Oracle account `Validation Results` can be updated at anytime making a dynamic Asset experiance for the Asset owners.
 
 ## The Orcale Plugin
+
+The Oracle plugin accepts the following arguments and data.
+
+### On Chain Struct
+
+```rust
+pub struct Oracle {
+    /// The address of the oracle, or if using the `pda` option, 
+    /// a program ID from which to derive a PDA.
+    pub base_address: Pubkey,
+
+    /// Optional PDA (derived from Pubkey attached to `ExternalPluginKey`).
+    pub pda: Option<ExtraAccount>,
+
+    /// Validation results offset in the Oracle account. 
+    ///  Default is `ValidationResultsOffset::NoOffset`.
+    pub results_offset: ValidationResultsOffset,
+}
+```
+
+### Declaring PDA Oracle Accounts
+
+The default behaviour of the `Oracle Plugin` is to supply the plugin with a static `base_address` which the Oracle Plugin can then read from and provide the resulting validation results.
+
+If you wish to get more dynamic with the Oracle Plugin you can pass in your `program_id` as the `base_address` and then an `ExtraAccount` which can derive single or multiple PDA addresses depending on the method chosen. This potentially allows you to have multiple Oracle Accounts that can be loaded into the single plugin instance.
+
+#### Static Examples
+
+```rust
+Preconfigured Collection
+// Will take the collection address of the Asset and use it as a seed with the 
+// supplied base_address (program_id) to derive the Oracle Account PDA.
+base_address = 11111111111111111111111111111111 // program_id
+pda = PreconfiguredCollection {
+    is_signer: bool,
+    is_writable: bool,
+},
+```
+```rust
+Address
+// Will take the address supplied and use it as a seed with the 
+// supplied base_address (program_id) to derive the Oracle Account PDA.
+base_address = 11111111111111111111111111111111 // program_id
+pda = Address {
+    address: Pubkey,
+    is_signer: bool,
+    is_writable: bool,
+}
+```
+#### Dynamic Examples
+```rust
+Preconfigured Owner
+// Will take the owner address of the Asset and use it as a seed with the 
+// supplied base_address (program_id) to derive the Oracle Account PDA.
+// This will produce a different PDA for each different owner address.
+base_address = 11111111111111111111111111111111 // program_id
+pda = PreconfiguredOwner {
+    is_signer: bool,
+    is_writable: bool,
+},
+```
+
+#### List of ExtraAccounts Options
+```rust
+PreconfiguredProgram {
+    is_signer: bool,
+    is_writable: bool,
+},
+PreconfiguredCollection {
+    is_signer: bool,
+    is_writable: bool,
+},
+PreconfiguredOwner {
+    is_signer: bool,
+    is_writable: bool,
+},
+PreconfiguredRecipient {
+    is_signer: bool,
+    is_writable: bool,
+},
+PreconfiguredAsset {
+    is_signer: bool,
+    is_writable: bool,
+},
+CustomPda {
+    seeds: Vec<Seed>,
+    is_signer: bool,
+    is_writable: bool,
+},
+Address {
+    address: Pubkey,
+    is_signer: bool,
+    is_writable: bool,
+},
+```
+
 
 ### Arguments
 
@@ -185,26 +283,26 @@ export type ValidationResultsOffset =
 ```
 
 **initAuthority**
+
 ```js
-initAuthority: 
-    addressPluginAuthority(publicKey) 
-    | ownerPluginAuthority() 
-    | updatePluginAuthority() 
-    | updatePluginAuthority() 
-    | null
+initAuthority: addressPluginAuthority(publicKey) |
+  ownerPluginAuthority() |
+  updatePluginAuthority() |
+  updatePluginAuthority() |
+  null
 ```
 
 {% /dialect  %}
 {% dialect title="Rust" id="rust" %}
 **lifecycle_checks**
 
-lifecycle_checks takes a `vec![]` of (HookableLifecycleEvent, ExternalCheckResult) types. 
+lifecycle_checks takes a `vec![]` of (HookableLifecycleEvent, ExternalCheckResult) types.
 
 ```rust
 lifecycle_checks: vec![(
-                HookableLifecycleEvent::Transfer,
-                ExternalCheckResult { flags: 4 },
-            )]
+    HookableLifecycleEvent::Transfer,
+    ExternalCheckResult { flags: 4 },
+)]
 
 pub enum HookableLifecycleEvent {
     Create,
@@ -217,12 +315,13 @@ pub struct ExternalCheckResult {
     pub flags: u32,
 }
 ```
-For `ExternalCheckResult` the flag values are as follows u32 values:
+
+For `ExternalCheckResult` the flag values for the `Oracle Plugin` are as follows:
+
 ```rust
-1 is CanListen
-2 is CanApprove
-4 is CanDeny
+4 CanReject
 ```
+
 {% /dialect  %}
 {% /dialect-switcher %}
 
@@ -231,7 +330,7 @@ For `ExternalCheckResult` the flag values are as follows u32 values:
 {% seperator h="6" /%}
 
 
-These values can be changed by the Authority at any time. They are purely informational and not enforced.
+
 
 ### Creating an Asset the Oracle Plugin
 
@@ -284,7 +383,7 @@ use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
 
-pub async fn create_asset_with_permanent_burn_delegate_plugin() {
+pub async fn create_asset_with_oracle_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
     let payer = Keypair::new();
@@ -292,18 +391,24 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
 
     let onchain_oracle_account = Pubkey::from_str("11111111111111111111111111111111").unwrap();
 
-    let create_asset_with_burn_transfer_delegate_plugin_ix = CreateV2Builder::new()
+    let create_asset_with_oracle_plugin_ix = CreateV2Builder::new()
     .asset(asset.pubkey())
     .payer(payer.pubkey())
-    .name("My Nft".into())
-    .uri("https://example.com/my-nft.json".into())
+    .name("My Asset".into())
+    .uri("https://example.com/my-asset.json".into())
     .external_plugins(vec![ExternalPluginInitInfo::Oracle(OracleInitInfo {
         base_address: onchain_oracle_account,
         init_plugin_authority: None,
-        lifecycle_checks: vec![(
-            HookableLifecycleEvent::Transfer,
-            ExternalCheckResult { flags: 4 },
-        )],
+        lifecycle_checks: vec![
+            (
+                HookableLifecycleEvent::Transfer,
+                ExternalCheckResult { flags: 4 },
+            ),
+            (
+                HookableLifecycleEvent::Burn,
+                ExternalCheckResult { flags: 4 },
+            ),
+        ],
         pda: None,
         results_offset: Some(ValidationResultsOffset::Anchor),
     })])
@@ -336,9 +441,15 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
 
 ### Adding an Oracle Plugin to An Asset
 
+// TODO: EASY
+
 ### Creating a Collection with an Oracle Plugin
 
+// TODO: EASY
+
 ### Adding an Oracle Plugin to a Collection
+
+// TODO: EASY
 
 ## Example Usage/Ideas
 
