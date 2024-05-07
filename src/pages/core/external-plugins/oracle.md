@@ -20,6 +20,8 @@ When adding a Oracle Plugin to an Asset the plugin stores and references an Orca
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
 
+
+
 ## The Orcale Account
 
 ### What is an Orcale Account?
@@ -29,6 +31,16 @@ An Orcale Account is an onchain account that is created by the project/developer
 The Oracle Account stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can perform a `Reject` validation on the selected lifecycle events.
 
 The ability to update and change the Oracle Account generates and very powerful and interactive lifecycle experiance.
+
+### Allowed Validations
+
+The following validation results can be returned from the Oracle Account to the Orcale Plugin.
+
+|         |     |
+| ------- | --- |
+| Can Approve | ❌  |
+| Can Reject  | ✅  |
+| Can Pass    | ❌  |
 
 ### On Chain Account Structure
 
@@ -110,11 +122,6 @@ pub enum ExternalValidationResult {
 
 {% /dialect-switcher %}
 
-### External Validation Results
-
-|              |                                                       |
-| ------------ | ----------------------------------------------------- |
-| **Rejected** | Will reject a lifecyle validation                     |
 
 ### Updating an Oracle Account
 
@@ -128,14 +135,14 @@ The Oracle plugin accepts the following arguments and data.
 
 ```rust
 pub struct Oracle {
-    /// The address of the oracle, or if using the `pda` option, 
+    /// The address of the oracle, or if using the `pda` option,
     /// a program ID from which to derive a PDA.
     pub base_address: Pubkey,
 
     /// Optional PDA (derived from Pubkey attached to `ExternalPluginKey`).
     pub pda: Option<ExtraAccount>,
 
-    /// Validation results offset in the Oracle account. 
+    /// Validation results offset in the Oracle account.
     ///  Default is `ValidationResultsOffset::NoOffset`.
     pub results_offset: ValidationResultsOffset,
 }
@@ -151,7 +158,7 @@ If you wish to get more dynamic with the Oracle Plugin you can pass in your `pro
 
 ```rust
 Preconfigured Collection
-// Will take the collection address of the Asset and use it as a seed with the 
+// Will take the collection address of the Asset and use it as a seed with the
 // supplied base_address (program_id) to derive the Oracle Account PDA.
 base_address = 11111111111111111111111111111111 // program_id
 pda = PreconfiguredCollection {
@@ -159,9 +166,10 @@ pda = PreconfiguredCollection {
     is_writable: bool,
 },
 ```
+
 ```rust
 Address
-// Will take the address supplied and use it as a seed with the 
+// Will take the address supplied and use it as a seed with the
 // supplied base_address (program_id) to derive the Oracle Account PDA.
 base_address = 11111111111111111111111111111111 // program_id
 pda = Address {
@@ -170,10 +178,12 @@ pda = Address {
     is_writable: bool,
 }
 ```
+
 #### Dynamic Examples
+
 ```rust
 Preconfigured Owner
-// Will take the owner address of the Asset and use it as a seed with the 
+// Will take the owner address of the Asset and use it as a seed with the
 // supplied base_address (program_id) to derive the Oracle Account PDA.
 // This will produce a different PDA for each different owner address.
 base_address = 11111111111111111111111111111111 // program_id
@@ -184,6 +194,7 @@ pda = PreconfiguredOwner {
 ```
 
 #### List of ExtraAccounts Options
+
 ```rust
 PreconfiguredProgram {
     is_signer: bool,
@@ -217,124 +228,9 @@ Address {
 },
 ```
 
+### Creating an Asset with the Oracle Plugin
 
-### Arguments
-
-{% dialect-switcher title="Args" %}
-{% dialect title="Javascript" id="js" %}
-
-| Arg             | Value           |
-| --------------- | --------------- |
-| baseAddress     | publicKey       |
-| lifecycleChecks | lifecycleChecks |
-| pda             | publicKey       |
-| resultsOffset   | resultsOffset   |
-| initAuthority   | initAuthority   |
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-| Arg                   | Value                                              |
-| --------------------- | -------------------------------------------------- |
-| base_address          | Pubkey                                             |
-| lifecycle_checks      | Vec<(HookableLifecycleEvent, ExternalCheckResult)> |
-| pda                   | Pubkey                                             |
-| results_offset        | Option<ValidationResultsOffset>                    |
-| init_plugin_authority | lifecycleChecks                                    |
-
-{% /dialect %}
-
-{% /dialect-switcher %}
-
-<!-- **lifecycleChecks / lifecycle_checks** -->
-
-{% seperator h="6" /%}
-{% dialect-switcher %}
-{% dialect title="JavaScript" id="js" %}
-**lifecycleChecks**
-
-lifecycleChecks can be performed on `'create' | 'update' | 'transfer' | 'burn'`.
-
-```js
-lifecycleChecks: {
-    create: [CheckResult.CAN_REJECT]
-    update: [CheckResult.CAN_APPROVE]
-    transfer: [CheckResult.CAN_REJECT]
-    burn: [CheckResult.CAN_REJECT],
-}
-
-enum CheckResult {
-  CAN_LISTEN,
-  CAN_APPROVE,
-  CAN_REJECT,
-}
-```
-
-**rulesetOffset**
-
-```js
-rulesetOffset: ValidationResultsOffset | null
-
-export type ValidationResultsOffset =
-  | { type: 'NoOffset' }
-  | { type: 'Anchor' }
-  | { type: 'Custom', offset: bigint }
-```
-
-**initAuthority**
-
-```js
-initAuthority: addressPluginAuthority(publicKey) |
-  ownerPluginAuthority() |
-  updatePluginAuthority() |
-  updatePluginAuthority() |
-  null
-```
-
-{% /dialect  %}
-{% dialect title="Rust" id="rust" %}
-**lifecycle_checks**
-
-lifecycle_checks takes a `vec![]` of (HookableLifecycleEvent, ExternalCheckResult) types.
-
-```rust
-lifecycle_checks: vec![(
-    HookableLifecycleEvent::Transfer,
-    ExternalCheckResult { flags: 4 },
-)]
-
-pub enum HookableLifecycleEvent {
-    Create,
-    Transfer,
-    Burn,
-    Update,
-}
-
-pub struct ExternalCheckResult {
-    pub flags: u32,
-}
-```
-
-For `ExternalCheckResult` the flag values for the `Oracle Plugin` are as follows:
-
-```rust
-4 CanReject
-```
-
-{% /dialect  %}
-{% /dialect-switcher %}
-
-<!-- **resultsOffset / results_offset** -->
-
-{% seperator h="6" /%}
-
-
-
-
-### Creating an Asset the Oracle Plugin
-
-{% dialect-switcher title="Create a MPL Core Collection with Oracle Plugin" %}
+{% dialect-switcher title="Create a MPL Core Asset with an Oracle Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -352,15 +248,16 @@ const creator2 = publicKey('22222222222222222222222222222222')
 
 const asset = await createAsset(umi, {
     plugins: [
-      {
+        {
         type: 'Oracle',
         resultsOffset: {
-          type: 'Anchor' || 'Shank', // Choose between Anchor and Shank.
+          type: 'Anchor',
         },
         lifecycleChecks: {
-          update: [CheckResult.CAN_REJECT],
+          transfer: [CheckResult.CAN_REJECT],
         },
         baseAddress: account.publicKey,
+        pda: undefined,
       },
     ],
   });.sendAndConfirm(umi)
@@ -439,6 +336,46 @@ pub async fn create_asset_with_oracle_plugin() {
 
 {% /dialect-switcher %}
 
+```js
+const resultsOffset: ValidationResultsOffset =
+  | { type: 'NoOffset' }
+  | { type: 'Anchor' }
+  | { type: 'Custom'; offset: bigint };
+```
+
+```js
+const lifecycleChecks: LifecycleChecks =  {
+    create: [CheckResult.CAN_REJECT],
+    transfer: [CheckResult.CAN_REJECT],
+    update: [CheckResult.CAN_REJECT],
+    burn: [CheckResult.CAN_REJECT],
+},
+```
+
+```js
+const pda: ExtraAccount =  {
+    type: {
+        "PreconfiguredProgram",
+        | "PreconfiguredCollection",
+        | "PreconfiguredOwner",
+        | "PreconfiguredRecipient",
+        | "PreconfiguredAsset",
+    }
+}
+
+There are two additional ExtraAccount types that take additional properties these are:
+
+const pda: ExtraAccount = {
+    type: 'CustomPda',
+    seeds: [],
+}
+
+const pda: ExtraAccount = {
+    type: 'Address',
+    address: publickey("33333333333333333333333333333333") ,
+}
+```
+
 ### Adding an Oracle Plugin to An Asset
 
 // TODO: EASY
@@ -458,7 +395,7 @@ pub async fn create_asset_with_oracle_plugin() {
 **Assets to be not transferable during the hours of noon-midnight UTC.**
 
 - Create onchain Oracle Account in a program of your choice.
-- Add the Oracle plugin to Asset specifying the lifecycles events you wish to have validation over.
+- Add the Oracle plugin to Asset specifying the lifecycles events you wish to have rejection validation over.
 - You write a cron that writes and updates to the Oracle Account at noon and midnight flipping a bit from true/false/true.
 
 ### Example 2
@@ -466,12 +403,7 @@ pub async fn create_asset_with_oracle_plugin() {
 **Assets can only be updated if the floor price is above $10 and the asset has attribute “red hat”.**
 
 - Create onchain Oracle Account in a program of your choice.
-- Add the Oracle plugin to Asset specifying the lifecycles events you wish to have validation over.
+- Add the Oracle plugin to Asset specifying the lifecycles events you wish to have rejection validation over.
+- Dev writes Anchor program that can write to the Oracle Account that derive the same PRECONFIGURED_ASSET accounts
+- Dev writes web2 script that watches prices on a marketplace, AND with known hashlist of Assets with the 'Red Hat' trait red updates and writes to the relevant Oracle Accounts.
 
-Add oracle plugin to the collection
-Check: can deny
-Event: update
-Specify the base address (custom oracle prorgam)
-Specify PDA: extra account: PRECONFIGURED_ASSET
-Dev writes anchor program that can write to the oracle accounts that derive the same PRECONFIGURED_ASSET accounts
-dev writes web2 thing that watches prices, AND with known list of red hats and writes to the relevant oracle accounts.

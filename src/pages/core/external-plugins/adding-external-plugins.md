@@ -60,7 +60,7 @@ use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
 
-pub async fn create_asset_with_permanent_burn_delegate_plugin() {
+pub async fn create_asset_with_oracle_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
     let payer = Keypair::new();
@@ -68,7 +68,7 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
 
     let onchain_oracle_account = Pubkey::from_str("11111111111111111111111111111111").unwrap();
 
-    let create_asset_with_burn_transfer_delegate_plugin_ix = CreateV2Builder::new()
+    let create_asset_with_oracle_plugin_ix = CreateV2Builder::new()
         .asset(asset.pubkey())
         .payer(payer.pubkey())
         .name("My Nft".into())
@@ -132,11 +132,23 @@ import {
 
 const delegate = publicKey('222222222222222222222222222222')
 
-await addPluginV1(umi, {
-  asset: asset.publicKey,
-  plugin: createPlugin({ type: 'FreezeDelegate', data: { frozen: true } }),
-  initAuthority: addressPluginAuthority(delegate),
-}).sendAndConfirm(umi)
+addExternalPluginV1(umi, {
+    asset: asset.publicKey,
+    initInfo: {
+      __kind: 'Oracle',
+      fields: [
+        {
+          baseAddress: account.publicKey,
+          initPluginAuthority: null,
+          lifecycleChecks: [
+            [HookableLifecycleEvent.Transfer, { flags: 4 }],
+          ],
+          pda: null,
+          resultsOffset: null,
+        },
+      ],
+    },
+  }).sendAndConfirm(umi);
 ```
 
 {% /dialect %}
