@@ -82,6 +82,7 @@ export const coreCandyMachine = {
             { title: 'Allow List', href: '/core-candy-machine/guards/allow-list' },
             { title: 'Bot Tax', href: '/core-candy-machine/guards/bot-tax' },
             { title: 'End Date', href: '/core-candy-machine/guards/end-date' },
+            { title: 'Edition', href: '/core-candy-machine/guards/edition' },
             {
               title: 'Freeze Sol Payment',
               href: '/core-candy-machine/guards/freeze-sol-payment',
