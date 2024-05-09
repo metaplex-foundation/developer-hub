@@ -54,7 +54,7 @@ Edition Counter PDA {% .whitespace-nowrap %}
 {% /node %}
 
 {% node #nft parent="mint-candy-machine" y="120" x="65" theme="blue" %}
-  NFT
+  Asset
 {% /node %}
 {% edge from="mint-candy-machine" to="nft" path="straight" /%}
 
