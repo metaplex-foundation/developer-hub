@@ -230,7 +230,7 @@ await createCollection(umi, {
 use mpl_core::{
     instructions::CreateCollectionV2Builder,
     types::{
-        ExternalCheckResult, ExternalPluginAdaptersInitInfo, HookableLifecycleEvent, OracleInitInfo,
+        ExternalCheckResult, ExternalPluginAdapterInitInfo, HookableLifecycleEvent, OracleInitInfo,
         ValidationResultsOffset,
     },
 };
@@ -251,7 +251,7 @@ pub async fn create_collection_with_oracle_plugin() {
         .payer(payer.pubkey())
         .name("My Collection".into())
         .uri("https://example.com/my-nft.json".into())
-        .external_plugins_adapters(vec![ExternalPluginAdaptersInitInfo::Oracle(OracleInitInfo {
+        .external_plugins_adapters(vec![ExternalPluginAdapterInitInfo::Oracle(OracleInitInfo {
             base_address: onchain_oracle_plugin,
             init_plugin_authority: None,
             lifecycle_checks: vec![(
