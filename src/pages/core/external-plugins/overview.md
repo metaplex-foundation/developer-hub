@@ -6,7 +6,7 @@ description: Learn about the MPL Core External Plugins
 
 ## What are External Plugins?
 
-External Plugins are [Authority Managed](/core/plugins#authority-managed-plugins), consisting of 2 parts, the `Adapter`, and the `Plugin`. A `Plugin Adapter` is assigned to the Assets/Collection and allows data and validations to to be passed from an External Plugin. The External Plugin provides data and validations for the `Plugin Adapter`.
+External Plugins are [Authority Managed](/core/plugins#authority-managed-plugins), consisting of 2 parts, the **Adapter**, and the **Plugin**. A **Plugin Adapter** is assigned to the Assets/Collection and allows data and validations to to be passed from an External Plugin. The External Plugin provides data and validations for the **Plugin Adapter**.
 
 ## Lifecycle Checks
 

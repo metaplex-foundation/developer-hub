@@ -17,7 +17,7 @@ When adding a Oracle Plugin to an Asset or Collection the Oracle Plugin Adapter 
 
 An Oracle Plugin is an onchain account that is created by the authority externally from the MPL Core Asset or Collection. If an Asset or Collection has an Oracle Adapter enabled and an Oracle Account assigned to it the Oracle Account will be loaded by the MPL Core program for validations against lifecycle events.
 
-The Oracle Plugin stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can be configured to perform a `Reject` validation.
+The Oracle Plugin stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can be configured to perform a **Reject** validation.
 
 The ability to update and change the Oracle Account provides a powerful and interactive lifecycle experience.
 
@@ -115,9 +115,10 @@ pub enum ExternalValidationResult {
 ### Oracle Account Offset
 
 The account structure will differ slightly between account frameworks (Anchor, Shank, etc.) due to the discriminator sizes needed for accounts:
-* If the `OracleValidation` struct is located at the beginning of the data section for the Oracle account, then choose `NoOffset` for the `ValidationResultsOffset`.
-* If the Oracle account only contains the `OracleValidation` struct but is managed by an Anchor program, select `Anchor` for `ValidationResultsOffset` so that the struct can be located after the Anchor account discriminator.
-* If the `OracleValidation` struct is located at some other offset in the Oracle account, use the `Custom` offset.
+
+- If the `OracleValidation` struct is located at the beginning of the data section for the Oracle account, then choose `NoOffset` for the `ValidationResultsOffset`.
+- If the Oracle account only contains the `OracleValidation` struct but is managed by an Anchor program, select `Anchor` for `ValidationResultsOffset` so that the struct can be located after the Anchor account discriminator.
+- If the `OracleValidation` struct is located at some other offset in the Oracle account, use the `Custom` offset.
 
 {% dialect-switcher title="resultsOffset / result_offset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -174,12 +175,13 @@ pub struct Oracle {
 
 ### Declaring the PDA of an Oracle Plugin
 
-The default behavior of the `Oracle Plugin Adapter` is to supply the adapter with a static `base_address` which the adapter can then read from and provide the resulting validation results.
+The default behavior of the **Oracle Plugin Adapter** is to supply the adapter with a static `base_address` which the adapter can then read from and provide the resulting validation results.
 
-If you wish to get more dynamic with the `Oracle Plugin Adapter` you can pass in your `program_id` as the `base_address` and then an `ExtraAccount`, which can be used to derive one or more PDAs pointing to `Oracle Account` addresses. This allows the Oracle Adapter to access data from multiple derived Oracle Accounts. Note that there are other advanced non-PDA specifications also available when using `ExtraAccount`.
+If you wish to get more dynamic with the **Oracle Plugin Adapter** you can pass in your `program_id` as the `base_address` and then an `ExtraAccount`, which can be used to derive one or more PDAs pointing to **Oracle Account** addresses. This allows the Oracle Adapter to access data from multiple derived Oracle Accounts. Note that there are other advanced non-PDA specifications also available when using `ExtraAccount`.
 
 #### List of ExtraAccounts Options
-An example of an extra account that is the same for all assets in a collection is the `PreconfiguredCollection` PDA, which uses the collection's Pubkey to derive the Oracle account.  An example of more dynamic extra account is the `PreconfiguredOwner` PDA, which uses the owner pubkey to derive the Oracle account.
+
+An example of an extra account that is the same for all assets in a collection is the `PreconfiguredCollection` PDA, which uses the collection's Pubkey to derive the Oracle account. An example of more dynamic extra account is the `PreconfiguredOwner` PDA, which uses the owner pubkey to derive the Oracle account.
 
 ```rust
 pub enum ExtraAccount {
@@ -311,7 +313,7 @@ pub async fn create_asset_with_oracle_plugin() {
     .payer(payer.pubkey())
     .name("My Asset".into())
     .uri("https://example.com/my-asset.json".into())
-    .external_plugins(vec![ExternalPluginInitInfo::Oracle(OracleInitInfo {
+    .external_plugin_adapters(vec![ExternalPluginInitInfo::Oracle(OracleInitInfo {
         base_address: oracle_plugin,
         init_plugin_authority: None,
         lifecycle_checks: vec![
@@ -337,7 +339,7 @@ pub async fn create_asset_with_oracle_plugin() {
     );
 
     let res = rpc_client
-        .send_and_confirm_transaction(&create_asset_with_burn_transfer_delegate_plugin_tx)
+        .send_and_confirm_transaction(&create_asset_with_oracle_plugin_tx)
         .await
         .unwrap();
 
@@ -476,17 +478,17 @@ const asset = publicKey('11111111111111111111111111111111')
 const oracleAccount = publicKey('22222222222222222222222222222222')
 
 addPlugin(umi, {
-    asset,
-    plugin: {
-        type: 'Oracle',
-        resultsOffset: {
-            type: 'Anchor',
-        },
-        lifecycleChecks: {
-            create: [CheckResult.CAN_REJECT],
-        },
-        baseAddress: oracleAccount,
+  asset,
+  plugin: {
+    type: 'Oracle',
+    resultsOffset: {
+      type: 'Anchor',
     },
+    lifecycleChecks: {
+      create: [CheckResult.CAN_REJECT],
+    },
+    baseAddress: oracleAccount,
+  },
 })
 ```
 
@@ -495,9 +497,9 @@ addPlugin(umi, {
 
 ```rust
 use mpl_core::{
-    instructions::AddExternalPluginV1Builder,
+    instructions::AddExternalPluginAdapterV1Builder,
     types::{
-        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent,
+        ExternalCheckResult, ExternalPluginAdapterInitInfo, HookableLifecycleEvent,
         OracleInitInfo, ValidationResultsOffset,
     },
 };
@@ -512,10 +514,10 @@ pub async fn add_oracle_plugin_to_asset() {
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
     let oracle_plugin = Pubkey::from_str("22222222222222222222222222222222").unwrap();
 
-    let add_oracle_plugin_to_asset_ix = AddExternalPluginV1Builder::new()
+    let add_oracle_plugin_to_asset_ix = AddExternalPluginAdapterV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
-        .init_info(ExternalPluginInitInfo::Oracle(OracleInitInfo {
+        .init_info(ExternalPluginAdapterInitInfo::Oracle(OracleInitInfo {
             base_address: oracle_plugin,
             results_offset: Some(ValidationResultsOffset::Anchor),
             lifecycle_checks: vec![(
@@ -592,7 +594,7 @@ const collection = await createCollection(umi, {
 use mpl_core::{
     instructions::CreateCollectionV2Builder,
     types::{
-        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent, OracleInitInfo,
+        ExternalCheckResult, ExternalPluginAdapterInitInfo, HookableLifecycleEvent, OracleInitInfo,
         ValidationResultsOffset,
     },
 };
@@ -612,8 +614,8 @@ pub async fn create_collection_with_oracle_plugin() {
         .collection(collection.pubkey())
         .payer(payer.pubkey())
         .name("My Collection".into())
-        .uri("https://example.com/my-nft.json".into())
-        .external_plugins(vec![ExternalPluginInitInfo::Oracle(OracleInitInfo {
+        .uri("https://example.com/my-collection.json".into())
+        .external_plugin_adapters(vec![ExternalPluginAdapterInitInfo::Oracle(OracleInitInfo {
             base_address: onchain_oracle_plugin,
             init_plugin_authority: None,
             lifecycle_checks: vec![(
@@ -656,10 +658,7 @@ pub async fn create_collection_with_oracle_plugin() {
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  addCollectionPlugin,
-  CheckResult
-} from '@metaplex-foundation/mpl-core'
+import { addCollectionPlugin, CheckResult } from '@metaplex-foundation/mpl-core'
 
 const collection = publicKey('11111111111111111111111111111111')
 const oracleAccount = publicKey('22222222222222222222222222222222')
@@ -667,15 +666,15 @@ const oracleAccount = publicKey('22222222222222222222222222222222')
 await addCollectionPlugin(umi, {
   collection: collection,
   plugin: {
-      type: 'Oracle',
-      resultsOffset: {
-        type: 'Anchor',
-      },
-      lifecycleChecks: {
-        update: [CheckResult.CAN_REJECT],
-      },
-      baseAddress: oracleAccount,
-    }
+    type: 'Oracle',
+    resultsOffset: {
+      type: 'Anchor',
+    },
+    lifecycleChecks: {
+      update: [CheckResult.CAN_REJECT],
+    },
+    baseAddress: oracleAccount,
+  },
 }).sendAndConfirm(umi)
 ```
 
@@ -684,9 +683,9 @@ await addCollectionPlugin(umi, {
 
 ```rust
 use mpl_core::{
-    instructions::AddCollectionExternalPluginV1Builder,
+    instructions::AddCollectionExternalPluginAdapterV1Builder,
     types::{
-        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent,
+        ExternalCheckResult, ExternalPluginAdapterInitInfo, HookableLifecycleEvent,
         OracleInitInfo, ValidationResultsOffset,
     },
 };
@@ -701,10 +700,10 @@ pub async fn add_oracle_plugin_to_collection() {
     let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
     let oracle_plugin = Pubkey::from_str("22222222222222222222222222222222").unwrap();
 
-    let add_oracle_plugin_to_collection_ix = AddCollectionExternalPluginV1Builder::new()
+    let add_oracle_plugin_to_collection_ix = AddCollectionExternalPluginAdapterV1Builders::new()
         .collection(collection)
         .payer(authority.pubkey())
-        .init_info(ExternalPluginInitInfo::Oracle(OracleInitInfo {
+        .init_info(ExternalPluginAdapterInitInfo::Oracle(OracleInitInfo {
             base_address: oracle_plugin,
             results_offset: Some(ValidationResultsOffset::Anchor),
             lifecycle_checks: vec![(
