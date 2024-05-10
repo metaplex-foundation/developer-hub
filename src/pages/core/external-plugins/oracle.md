@@ -577,11 +577,10 @@ import {
 } from '@metaplex-foundation/core'
 
 const collectionSigner = generateSigner(umi)
-
 const oracleAccount = publicKey('11111111111111111111111111111111')
 
-const asset = await createCollection(umi, {
-    ... CreateAssetArgs,
+const collection = await createCollection(umi, {
+    ... CreateCollectionArgs,
     plugins: [
         {
         type: 'Oracle',
