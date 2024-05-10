@@ -8,14 +8,6 @@ description: Learn how to add plugins to MPL Core Assets and Collections
 
 ### Creating a Core Asset with an External Plugin
 
-```
-///
-///
-/// Redo Rust I think with smaller examples
-///
-///
-```
-
 {% dialect-switcher title="Creating a Core Asset with an External Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 
@@ -23,7 +15,8 @@ description: Learn how to add plugins to MPL Core Assets and Collections
 import { generateSigner } from '@metaplex-foundation/umi'
 import { create, CheckResult } from '@metaplex-foundation/mpl-core'
 
-const asset = generateSigner(umi)
+const assetSigner = publicKey('11111111111111111111111111111111')
+const oracleAccount = publicKey('22222222222222222222222222222222')
 
 await create(umi, {
   asset: assetSigner,
@@ -38,7 +31,7 @@ await create(umi, {
       lifecycleChecks: {
         update: [CheckResult.CAN_REJECT],
       },
-      baseAddress: account.publicKey,
+      baseAddress: oracleAccount,
     },
   ],
 }).sendAndConfirm(umi)
@@ -114,7 +107,57 @@ pub async fn create_asset_with_oracle_plugin() {
 {% dialect title="Rust" id="rust" %}
 
 ```rust
-// making smaller
+use mpl_core::{
+    instructions::AddExternalPluginV1Builder,
+    types::{
+        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent,
+        OracleInitInfo, ValidationResultsOffset,
+    },
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn add_oracle_plugin_to_asset() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+    let oracle_plugin = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+
+    let add_oracle_plugin_to_asset_ix = AddExternalPluginV1Builder::new()
+        .asset(asset)
+        .payer(authority.pubkey())
+        .init_info(ExternalPluginInitInfo::Oracle(OracleInitInfo {
+            base_address: oracle_plugin,
+            results_offset: Some(ValidationResultsOffset::Anchor),
+            lifecycle_checks: vec![(
+                HookableLifecycleEvent::Transfer,
+                ExternalCheckResult { flags: 4 },
+            )],
+            base_address_config: None,
+            init_plugin_authority: None,
+        }))
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let add_oracle_plugin_to_asset_tx = Transaction::new_signed_with_payer(
+        &[add_oracle_plugin_to_asset_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&add_oracle_plugin_to_asset_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
 ```
 
 {% /dialect %}
@@ -123,32 +166,24 @@ pub async fn create_asset_with_oracle_plugin() {
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  addPluginV1,
-  createPlugin,
-  pluginAuthority,
-  addressPluginAuthority,
-} from '@metaplex-foundation/mpl-core'
+import { addPlugin, CheckResult } from '@metaplex-foundation/mpl-core'
 
-const delegate = publicKey('222222222222222222222222222222')
+const asset = publicKey('11111111111111111111111111111111')
+const oracleAccount = publicKey('22222222222222222222222222222222')
 
-addExternalPluginV1(umi, {
-    asset: asset.publicKey,
-    initInfo: {
-      __kind: 'Oracle',
-      fields: [
-        {
-          baseAddress: account.publicKey,
-          initPluginAuthority: null,
-          lifecycleChecks: [
-            [HookableLifecycleEvent.Transfer, { flags: 4 }],
-          ],
-          pda: null,
-          resultsOffset: null,
-        },
-      ],
+addPlugin(umi, {
+  asset,
+  plugin: {
+    type: 'Oracle',
+    resultsOffset: {
+      type: 'Anchor',
     },
-  }).sendAndConfirm(umi);
+    lifecycleChecks: {
+      create: [CheckResult.CAN_REJECT],
+    },
+    baseAddress: oracleAccount,
+  },
+})
 ```
 
 {% /dialect %}
@@ -164,20 +199,17 @@ addExternalPluginV1(umi, {
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
-  createCollectionV1,
-  pluginAuthorityPair,
-  ruleSet,
+  createCollection,
+  CheckResult
 } from '@metaplex-foundation/core'
 
 const collectionSigner = generateSigner(umi)
-
-const creator1 = publicKey('11111111111111111111111111111111')
-const creator2 = publicKey('22222222222222222222222222222222')
+const oracleAccount = publicKey('22222222222222222222222222222222')
 
 await createCollection(umi, {
   collection: collectionSigner,
-  name: 'My NFT',
-  uri: 'https://example.com/my-nft.json',
+  name: 'My Collection',
+  uri: 'https://example.com/my-collection.json',
   plugins: [
     {
       type: 'Oracle',
@@ -187,7 +219,7 @@ await createCollection(umi, {
       lifecycleChecks: {
         update: [CheckResult.CAN_REJECT],
       },
-      baseAddress: account.publicKey,
+      baseAddress: oracleAccount,
     },
     ,
   ],
@@ -199,7 +231,60 @@ await createCollection(umi, {
 {% dialect title="Rust" id="rust" %}
 
 ```rust
-// making smaller
+use mpl_core::{
+    instructions::CreateCollectionV2Builder,
+    types::{
+        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent, OracleInitInfo,
+        ValidationResultsOffset,
+    },
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn create_collection_with_oracle_plugin() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let payer = Keypair::new();
+    let collection = Keypair::new();
+
+    let onchain_oracle_plugin = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let create_collection_with_oracle_plugin_ix = CreateCollectionV2Builder::new()
+        .collection(collection.pubkey())
+        .payer(payer.pubkey())
+        .name("My Collection".into())
+        .uri("https://example.com/my-nft.json".into())
+        .external_plugins(vec![ExternalPluginInitInfo::Oracle(OracleInitInfo {
+            base_address: onchain_oracle_plugin,
+            init_plugin_authority: None,
+            lifecycle_checks: vec![(
+                HookableLifecycleEvent::Transfer,
+                ExternalCheckResult { flags: 4 },
+            )],
+            base_address_config: None,
+            results_offset: Some(ValidationResultsOffset::Anchor),
+        })])
+        .instruction();
+
+    let signers = vec![&collection, &payer];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let create_collection_with_oracle_plugin_tx = Transaction::new_signed_with_payer(
+        &[create_collection_with_oracle_plugin_ix],
+        Some(&payer.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&create_collection_with_oracle_plugin_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
 ```
 
 {% /dialect %}
@@ -212,33 +297,23 @@ await createCollection(umi, {
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  addCollectionPluginV1,
-  createPlugin,
-  ruleSet,
-  pluginAuthority,
-  addressPluginAuthority,
-} from '@metaplex-foundation/mpl-core'
+import { addCollectionPlugin, CheckResult } from '@metaplex-foundation/mpl-core'
 
 const collection = publicKey('11111111111111111111111111111111')
+const oracleAccount = publicKey('22222222222222222222222222222222')
 
-const delegate = publicKey('22222222222222222222222222222222')
-
-await addCollectionPluginV1(umi, {
+await addCollectionPlugin(umi, {
   collection: collection,
-  plugin: createPlugin({
-     {
-      type: 'Oracle',
-      resultsOffset: {
-        type: 'Anchor',
-      },
-      lifecycleChecks: {
-        update: [CheckResult.CAN_REJECT],
-      },
-      baseAddress: account.publicKey,
+  plugin: {
+    type: 'Oracle',
+    resultsOffset: {
+      type: 'Anchor',
     },
-  }),
-  initAuthority: addressPluginAuthority(delegate),
+    lifecycleChecks: {
+      update: [CheckResult.CAN_REJECT],
+    },
+    baseAddress: oracleAccount,
+  },
 }).sendAndConfirm(umi)
 ```
 
@@ -246,7 +321,57 @@ await addCollectionPluginV1(umi, {
 {% dialect title="Rust" id="rust" %}
 
 ```rust
-// making smaller
+use mpl_core::{
+    instructions::AddCollectionExternalPluginV1Builder,
+    types::{
+        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent,
+        OracleInitInfo, ValidationResultsOffset,
+    },
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn add_oracle_plugin_to_collection() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+    let oracle_plugin = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+
+    let add_oracle_plugin_to_collection_ix = AddCollectionExternalPluginV1Builder::new()
+        .collection(collection)
+        .payer(authority.pubkey())
+        .init_info(ExternalPluginInitInfo::Oracle(OracleInitInfo {
+            base_address: oracle_plugin,
+            results_offset: Some(ValidationResultsOffset::Anchor),
+            lifecycle_checks: vec![(
+                HookableLifecycleEvent::Transfer,
+                ExternalCheckResult { flags: 4 },
+            )],
+            base_address_config: None,
+            init_plugin_authority: None,
+        }))
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let add_oracle_plugin_to_collection_tx = Transaction::new_signed_with_payer(
+        &[add_oracle_plugin_to_collection_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&add_oracle_plugin_to_collection_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
 ```
 
 {% /dialect %}

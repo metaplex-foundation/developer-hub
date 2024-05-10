@@ -4,14 +4,22 @@ metaTitle: Core - Oracle Plugin
 description: Learn about the Oracle Plugin
 ---
 
-The Oracle Plugin is a `External Plugin` that is used with Core Assets and Collections that provides the ability to `reject` the lifecycle events of:
+<!-- The Oracle Plugin is a `External Plugin` that is used with Core Assets and Collections that provides the ability to `reject` the lifecycle events of:
 
 - Create
 - Transfer
 - Update
 - Burn
 
-When adding a Oracle Plugin to an Asset or Collection the Oracle Plugin Adapter stores and references an Orcale Plugin external to the Mpl Core program. This external plugin will then be referenced and called upon to decide if lifecycle events can take place on the asset at that given point in time.
+When adding a Oracle Plugin to an Asset or Collection the Oracle Plugin Adapter stores and references an Oracle Account external to the Mpl Core Asset. This external account will then be referenced and called upon to decide if lifecycle events can take place on the asset at that given point in time. -->
+
+## What is an Oracle Plugin?
+
+An Oracle Plugin is an onchain account that is created by the authority externally from the Mpl Core Asset or Collection. If an Asset or Collection has an Oracle Adapter enabled and an Oracle Account assigned to it the Oracle Account will be loaded by the MPL Core program for validations against lifecycle events.
+
+The Oracle Plugin stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can perform a `Reject` validation on the selected lifecycle events.
+
+The ability to update and change the Oracle Account generates and very powerful and interactive lifecycle experience.
 
 ## Works With
 
@@ -20,19 +28,9 @@ When adding a Oracle Plugin to an Asset or Collection the Oracle Plugin Adapter 
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
 
-## The Orcale Plugin
+## Allowed Validations
 
-### What is an Orcale Plugin?
-
-An Orcale Plugin is an onchain account that is created by the project/developer externally from the Mpl Core program. If an Asset or Collection has an Oracle Adapter enabled and an Oracle Plugin assigned to it the Oracle Plugin will be loaded by the MPL Core program for validations against lifecycle events.
-
-The Oracle Plugin stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can perform a `Reject` validation on the selected lifecycle events.
-
-The ability to update and change the Oracle Account generates and very powerful and interactive lifecycle experiance.
-
-### Allowed Validations
-
-The following validation results can be returned from the Oracle Account to the Orcale Plugin.
+The following validation results can be returned from the Oracle Account to the Oracle Plugin.
 
 |             |     |
 | ----------- | --- |
@@ -40,9 +38,9 @@ The following validation results can be returned from the Oracle Account to the 
 | Can Reject  | ✅  |
 | Can Pass    | ❌  |
 
-### On Chain Account Structure
+## On Chain Account Structure
 
-The Orcale Account should have the following onchain account structure.
+The Oracle Account should have the following onchain account structure.
 
 {% callout %}
 The account structure will differ slightly between Shank and other account frameworks due to the discriminator sizes needed for accounts.
@@ -50,7 +48,7 @@ The account structure will differ slightly between Shank and other account frame
 
 <!-- |             |     |
 | ----------- | --- |
-| Discrimator | ❌  |
+| Discriminator | ❌  |
 | Validation  | ✅  | -->
 
 {% dialect-switcher title="On Chain Account Struct of Oracle Account" %}
@@ -70,6 +68,7 @@ impl Validation {
 }
 
 pub enum OracleValidation {
+    Uninitialized,
     V1 {
         create: ExternalValidationResult,
         transfer: ExternalValidationResult,
@@ -79,7 +78,9 @@ pub enum OracleValidation {
 }
 
 pub enum ExternalValidationResult {
+    Approved,
     Rejected,
+    Pass,
 }
 ```
 
@@ -120,11 +121,11 @@ pub enum ExternalValidationResult {
 
 {% /dialect-switcher %}
 
-### Updating an Oracle Plugin
+## Updating an Oracle Plugin
 
-Because the Oracle is an external account created and maintained by the creator/developer the Oracle account `Validation Results` can be updated at anytime making a dynamic Asset experiance for the Asset owners.
+Because the Oracle Account is created and maintained by the creator/developer the Oracle account `Validation Results` can be updated at anytime allowing lifecycles to be dynamic.
 
-## The Orcale Adapter
+## The Oracle Adapter
 
 The Oracle Adapter accepts the following arguments and data.
 
@@ -135,21 +136,22 @@ pub struct Oracle {
     /// The address of the oracle, or if using the `pda` option,
     /// a program ID from which to derive a PDA.
     pub base_address: Pubkey,
-
-    /// Optional PDA (derived from Pubkey attached to `ExternalPluginKey`).
-    pub pda: Option<ExtraAccount>,
-
+    /// Optional account specification (PDA derived from `base_address` or other
+    /// available account specifications).  Note that even when this
+    /// configuration is used there is still only one
+    /// Oracle account specified by the adapter.
+    pub base_address_config: Option<ExtraAccount>,
     /// Validation results offset in the Oracle account.
-    ///  Default is `ValidationResultsOffset::NoOffset`.
+    /// Default is `ValidationResultsOffset::NoOffset`
     pub results_offset: ValidationResultsOffset,
 }
 ```
 
-### Declaring the PDA of an Oracle Plugin 
+### Declaring the PDA of an Oracle Plugin
 
-The default behaviour of the `Oracle Plugin Adapter` is to supply the adapter with a static `base_address` which the adapter can then read from and provide the resulting validation results.
+The default behavior of the `Oracle Plugin Adapter` is to supply the adapter with a static `base_address` which the adapter can then read from and provide the resulting validation results.
 
-If you wish to get more dynamic with the `Oracle Plugin Adapter` you can pass in your `program_id` as the `base_address` and then an `ExtraAccount` which can derive single or multiple PDAs pointing to  `Oracle Plugin` addresses depending on the method chosen. This potentially allows you to have multiple `Oracle Plugins` that can be loaded into a single plugin adapter instance.
+If you wish to get more dynamic with the `Oracle Plugin Adapter` you can pass in your `program_id` as the `base_address` and then an `ExtraAccount` which can derive single or multiple PDAs pointing to `Oracle Account` addresses depending on the method chosen. This allows the Oracle Adapter to access data from multiple derived Oracle Accounts.
 
 #### Static Examples
 
@@ -158,7 +160,7 @@ Preconfigured Collection
 // Will take the collection address of the Asset and use it as a seed with the
 // supplied base_address (program_id) to derive the Oracle Account PDA.
 base_address = 11111111111111111111111111111111 // program_id
-pda = PreconfiguredCollection {
+base_address_config = PreconfiguredCollection {
     is_signer: bool,
     is_writable: bool,
 },
@@ -169,7 +171,7 @@ Address
 // Will take the address supplied and use it as a seed with the
 // supplied base_address (program_id) to derive the Oracle Account PDA.
 base_address = 11111111111111111111111111111111 // program_id
-pda = Address {
+base_address_config = Address {
     address: Pubkey,
     is_signer: bool,
     is_writable: bool,
@@ -184,7 +186,7 @@ Preconfigured Owner
 // supplied base_address (program_id) to derive the Oracle Account PDA.
 // This will produce a different PDA for each different owner address.
 base_address = 11111111111111111111111111111111 // program_id
-pda = PreconfiguredOwner {
+base_address_config = PreconfiguredOwner {
     is_signer: bool,
     is_writable: bool,
 },
@@ -235,17 +237,15 @@ Address {
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
-  createCollectionV1,
-  pluginAuthorityPair,
-  ruleSet,
+  create,
+  CheckResult
 } from '@metaplex-foundation/core'
 
 const collectionSigner = generateSigner(umi)
 
-const oraclePlugin = publicKey('11111111111111111111111111111111')
+const oracleAccount = publicKey('11111111111111111111111111111111')
 
-const asset = await createAsset(umi, {
-
+const asset = await create(umi, {
     ... CreateAssetArgs,
     plugins: [
         {
@@ -253,12 +253,15 @@ const asset = await createAsset(umi, {
         resultsOffset: {
           type: 'Anchor',
         },
-        lifecycleChecks: {
-          transfer: [CheckResult.CAN_REJECT],
+        baseAddress: oracleAccount,
+        authority: {
+          type: 'UpdateAuthority',
         },
-        baseAddress: oraclePlugin,
-        pda: undefined,
-      },
+        lifecycleChecks: {
+          update: [CheckResult.CAN_REJECT],
+        },
+        baseAddressConfig: undefined,
+      },,
     ],
   });.sendAndConfirm(umi)
 ```
@@ -302,7 +305,7 @@ pub async fn create_asset_with_oracle_plugin() {
                 ExternalCheckResult { flags: 4 },
             ),
         ],
-        pda: None,
+        base_address_config: None,
         results_offset: Some(ValidationResultsOffset::Anchor),
     })])
     .instruction();
@@ -461,10 +464,6 @@ pub enum ExtraAccount {
         is_writable: bool,
     },
     Address {
-        #[cfg_attr(
-            feature = "serde",
-            serde(with = "serde_with::As::<serde_with::DisplayFromStr>")
-        )]
         address: Pubkey,
         is_signer: bool,
         is_writable: bool,
@@ -479,7 +478,33 @@ pub enum ExtraAccount {
 ### Adding an Oracle Plugin to An Asset
 
 {% dialect-switcher title="Adding an Oracle Plugin to a Collection" %}
+{% dialect title="Javascript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { addPlugin, CheckResult } from '@metaplex-foundation/mpl-core'
+
+const asset = publicKey('11111111111111111111111111111111')
+const oracleAccount = publicKey('22222222222222222222222222222222')
+
+addPlugin(umi, {
+    asset,
+    plugin: {
+        type: 'Oracle',
+        resultsOffset: {
+            type: 'Anchor',
+        },
+        lifecycleChecks: {
+            create: [CheckResult.CAN_REJECT],
+        },
+        baseAddress: oracleAccount,
+    },
+})
+```
+
+{% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::AddExternalPluginV1Builder,
@@ -509,7 +534,7 @@ pub async fn add_oracle_plugin_to_asset() {
                 HookableLifecycleEvent::Transfer,
                 ExternalCheckResult { flags: 4 },
             )],
-            pda: None,
+            base_address_config: None,
             init_plugin_authority: None,
         }))
         .instruction();
@@ -532,7 +557,6 @@ pub async fn add_oracle_plugin_to_asset() {
 
     println!("Signature: {:?}", res)
 }
-
 ```
 
 {% /dialect %}
@@ -541,7 +565,43 @@ pub async fn add_oracle_plugin_to_asset() {
 
 ### Creating a Collection with an Oracle Plugin
 
-{% dialect-switcher title="pda: ExtraAccount / extra_account" %}
+{% dialect-switcher title="Creating a Collection with an Oracle Plugin" %}
+{% dialect title="Javascript" id="js" %}
+
+```ts
+import { generateSigner, publicKey } from '@metaplex-foundation/umi'
+import {
+  create,
+  pluginAuthorityPair,
+  ruleSet,
+} from '@metaplex-foundation/core'
+
+const collectionSigner = generateSigner(umi)
+
+const oracleAccount = publicKey('11111111111111111111111111111111')
+
+const asset = await createCollection(umi, {
+    ... CreateAssetArgs,
+    plugins: [
+        {
+        type: 'Oracle',
+        resultsOffset: {
+          type: 'Anchor',
+        },
+        baseAddress: oracleAccount,
+        authority: {
+          type: 'UpdateAuthority',
+        },
+        lifecycleChecks: {
+          update: [CheckResult.CAN_REJECT],
+        },
+        baseAddressConfig: undefined,
+      },,
+    ],
+  });.sendAndConfirm(umi)
+```
+
+{% /dialect %}
 {% dialect title="Rust" id="rust" %}
 
 ```rust
@@ -556,7 +616,7 @@ use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
 
-pub async fn create_asset_with_permanent_burn_delegate_plugin() {
+pub async fn create_collection_with_oracle_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
     let payer = Keypair::new();
@@ -576,7 +636,7 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
                 HookableLifecycleEvent::Transfer,
                 ExternalCheckResult { flags: 4 },
             )],
-            pda: None,
+            base_address_config: None,
             results_offset: Some(ValidationResultsOffset::Anchor),
         })])
         .instruction();
@@ -603,13 +663,41 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
 ```
 
 {% /dialect %}
-
 {% /dialect-switcher %}
 
 ### Adding an Oracle Plugin to a Collection
 
 {% dialect-switcher title="Adding an Oracle Plugin to a Collection" %}
+{% dialect title="Javascript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import {
+  addCollectionPlugin,
+  CheckResult
+} from '@metaplex-foundation/mpl-core'
+
+const collection = publicKey('11111111111111111111111111111111')
+const oracleAccount = publicKey('22222222222222222222222222222222')
+
+await addCollectionPlugin(umi, {
+  collection: collection,
+  plugin: {
+      type: 'Oracle',
+      resultsOffset: {
+        type: 'Anchor',
+      },
+      lifecycleChecks: {
+        update: [CheckResult.CAN_REJECT],
+      },
+      baseAddress: oracleAccount,
+    }
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::AddCollectionExternalPluginV1Builder,
@@ -639,7 +727,7 @@ pub async fn add_oracle_plugin_to_collection() {
                 HookableLifecycleEvent::Transfer,
                 ExternalCheckResult { flags: 4 },
             )],
-            pda: None,
+            base_address_config: None,
             init_plugin_authority: None,
         }))
         .instruction();
@@ -675,7 +763,7 @@ pub async fn add_oracle_plugin_to_collection() {
 **Assets to be not transferable during the hours of noon-midnight UTC.**
 
 - Create onchain Oracle Plugin in a program of your choice.
-- Add the Oracle Plugin Adapter to an Asset or Collection specifying the lifecycles events you wish to have rejection validation over.
+- Add the Oracle Plugin Adapter to an Asset or Collection specifying the lifecycle events you wish to have rejection validation over.
 - You write a cron that writes and updates to your Oracle Plugin at noon and midnight flipping a bit validation from true/false/true.
 
 ### Example 2
@@ -683,6 +771,6 @@ pub async fn add_oracle_plugin_to_collection() {
 **Assets can only be updated if the floor price is above $10 and the asset has attribute “red hat”.**
 
 - Create onchain Oracle Plugin in a program of your choice.
-- Add the Oracle Plugin Adapter to Asset specifying the lifecycles events you wish to have rejection validation over.
+- Add the Oracle Plugin Adapter to Asset specifying the lifecycle events you wish to have rejection validation over.
 - Dev writes Anchor program that can write to the Oracle Account that derive the same PRECONFIGURED_ASSET accounts
 - Dev writes web2 script that watches prices on a marketplace, AND with known hashlist of Assets with the 'Red Hat' trait red updates and writes to the relevant Oracle Accounts.

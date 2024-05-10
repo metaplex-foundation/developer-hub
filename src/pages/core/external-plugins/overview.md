@@ -3,54 +3,46 @@ title: External Plugins
 metaTitle: Core - External Plugins
 description: Learn about the MPL Core External Plugins
 ---
-```
-///
-///
-/// Needs a quick rewrite, I believe some of this info is wrong.
-///
-///
-```
 
 ## What are External Plugins?
 
-External Plugins consist of 3 parts, the `adapter`, the `interface` and the `plugin`. 
+External Plugins are [Authority Managed](/core/plugins#authority-managed-plugins) consisting of 2 parts, the `adapter`, and the `plugin`.
 
 ### The External Plugin Adapter
 
-A `Plugin Adapter` is assigned to the Assets/Collection as a `plugin` and exposes an `apdapter interface`.
-
-### The Interface
-
-The Interface allows the interaction between the `Plugin` adapter and the developered `External Plugin`
-
+A `Plugin Adapter` is assigned to the Assets/Collection as a `plugin` and allows data and validations to to be passed from an External Plugin.
 
 ### The External Plugin
 
-The External Plugin ties everything together and provides data for the `Plugin Adapter`.
-
+The External Plugin ties everything together and provides data and validations for the `Plugin Adapter`.
 
 ## Lifecycle Checks
 
-Each External Plugin comes with the ability to assign lifecycle checks to Lifecycle Events influencing the behaviour of the lifecycle event that is trying to take place. The life cycle checks available are:
+Each External Plugin comes with the ability to assign lifecycle checks to Lifecycle Events influencing the behavior of the lifecycle event that is trying to take place. The lifecycle checks available are:
 
 - Create
 - Transfer
 - Update
 - Burn
 
-
 Each of the life cycle events can be assigned with the following checks:
+
 - Can Listen
 - Can Deny
 - Can Approve
 
 ### Can Listen
-A web3 type webhook that alerts the account that a lifecycle event has happened.
+
+A web3 type webhook that alerts the plugin that a lifecycle event has taken place.
+
+This is useful for tracking data or performing another task based on an event that's taken place.
 
 ### Can Deny
+
 The plugin has the ability to deny a lifecycle events action.
 
 ### Can Approve
+
 The plugin has the ability to approve a lifecycle event.
 
 ## Data Authority
@@ -63,8 +55,6 @@ The Data Authority of an External Plugin is the only authority allowed to write 
 
 ### Oracle Plugin
 
-The Oracle Plugin is designed for simplictiy in a web 2.5 - 3.0 workflow. The Oracle Plugin can access an onchain Solana Oracle Account external from the MPL Core program that can reject the use of lifecycle events set by the user on the Asset at that given time. The external Oracle Account can also be updated at any time to change the authorisation behaviour of the life cycle events making for a dynamic experiance.
+The Oracle Plugin is designed for simplicity in a web 2.5 - 3.0 workflow. The Oracle Plugin can access an onchain Solana Oracle Accounts external from the MPL Core Asset that can reject the use of lifecycle events set by the authority on the Asset at that given time. The external Oracle Account can also be updated at any time to change the authorization behavior of the life cycle events making for a dynamic experience.
 
 You can read more about the Oracle Plugin [here](/core//external-plugins/oracle).
-
-
