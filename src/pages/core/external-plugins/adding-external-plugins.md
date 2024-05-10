@@ -73,7 +73,7 @@ pub async fn create_asset_with_oracle_plugin() {
                 HookableLifecycleEvent::Transfer,
                 ExternalCheckResult { flags: 4 },
             )],
-            pda: None,
+            base_address_config: None,
             results_offset: Some(ValidationResultsOffset::Anchor),
         })])
         .instruction();

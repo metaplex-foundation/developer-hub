@@ -15,11 +15,11 @@ When adding a Oracle Plugin to an Asset or Collection the Oracle Plugin Adapter 
 
 ## What is an Oracle Plugin?
 
-An Oracle Plugin is an onchain account that is created by the authority externally from the Mpl Core Asset or Collection. If an Asset or Collection has an Oracle Adapter enabled and an Oracle Account assigned to it the Oracle Account will be loaded by the MPL Core program for validations against lifecycle events.
+An Oracle Plugin is an onchain account that is created by the authority externally from the MPL Core Asset or Collection. If an Asset or Collection has an Oracle Adapter enabled and an Oracle Account assigned to it the Oracle Account will be loaded by the MPL Core program for validations against lifecycle events.
 
-The Oracle Plugin stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can perform a `Reject` validation on the selected lifecycle events.
+The Oracle Plugin stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can be configured to perform a `Reject` validation.
 
-The ability to update and change the Oracle Account generates and very powerful and interactive lifecycle experience.
+The ability to update and change the Oracle Account provides a powerful and interactive lifecycle experience.
 
 ## Works With
 
@@ -38,18 +38,9 @@ The following validation results can be returned from the Oracle Account to the 
 | Can Reject  | ✅  |
 | Can Pass    | ❌  |
 
-## On Chain Account Structure
+## On Chain Oracle Account Structure
 
 The Oracle Account should have the following onchain account structure.
-
-{% callout %}
-The account structure will differ slightly between Shank and other account frameworks due to the discriminator sizes needed for accounts.
-{% /callout %}
-
-<!-- |             |     |
-| ----------- | --- |
-| Discriminator | ❌  |
-| Validation  | ✅  | -->
 
 {% dialect-switcher title="On Chain Account Struct of Oracle Account" %}
 {% dialect title="Anchor" id="rust-anchor" %}
@@ -121,9 +112,43 @@ pub enum ExternalValidationResult {
 
 {% /dialect-switcher %}
 
-## Updating an Oracle Plugin
+### Oracle Account Offset
 
-Because the Oracle Account is created and maintained by the creator/developer the Oracle account `Validation Results` can be updated at anytime allowing lifecycles to be dynamic.
+The account structure will differ slightly between account frameworks (Anchor, Shank, etc.) due to the discriminator sizes needed for accounts:
+* If the `OracleValidation` struct is located at the beginning of the data section for the Oracle account, then choose `NoOffset` for the `ValidationResultsOffset`.
+* If the Oracle account only contains the `OracleValidation` struct but is managed by an Anchor program, select `Anchor` for `ValidationResultsOffset` so that the struct can be located after the Anchor account discriminator.
+* If the `OracleValidation` struct is located at some other offset in the Oracle account, use the `Custom` offset.
+
+{% dialect-switcher title="resultsOffset / result_offset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```js
+const resultsOffset: ValidationResultsOffset =
+  | { type: 'NoOffset' }
+  | { type: 'Anchor' }
+  | { type: 'Custom'; offset: bigint };
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+pub enum ValidationResultsOffset {
+    NoOffset,
+    Anchor,
+    Custom(u64),
+}
+
+```
+
+{% /dialect %}
+
+{% /dialect-switcher %}
+
+## Updating the Oracle Account
+
+Because the Oracle Account is created and maintained by the creator/developer the `OracleValidation` struct can be updated at anytime allowing lifecycles to be dynamic.
 
 ## The Oracle Adapter
 
@@ -151,80 +176,70 @@ pub struct Oracle {
 
 The default behavior of the `Oracle Plugin Adapter` is to supply the adapter with a static `base_address` which the adapter can then read from and provide the resulting validation results.
 
-If you wish to get more dynamic with the `Oracle Plugin Adapter` you can pass in your `program_id` as the `base_address` and then an `ExtraAccount` which can derive single or multiple PDAs pointing to `Oracle Account` addresses depending on the method chosen. This allows the Oracle Adapter to access data from multiple derived Oracle Accounts.
-
-#### Static Examples
-
-```rust
-Preconfigured Collection
-// Will take the collection address of the Asset and use it as a seed with the
-// supplied base_address (program_id) to derive the Oracle Account PDA.
-base_address = 11111111111111111111111111111111 // program_id
-base_address_config = PreconfiguredCollection {
-    is_signer: bool,
-    is_writable: bool,
-},
-```
-
-```rust
-Address
-// Will take the address supplied and use it as a seed with the
-// supplied base_address (program_id) to derive the Oracle Account PDA.
-base_address = 11111111111111111111111111111111 // program_id
-base_address_config = Address {
-    address: Pubkey,
-    is_signer: bool,
-    is_writable: bool,
-}
-```
-
-#### Dynamic Examples
-
-```rust
-Preconfigured Owner
-// Will take the owner address of the Asset and use it as a seed with the
-// supplied base_address (program_id) to derive the Oracle Account PDA.
-// This will produce a different PDA for each different owner address.
-base_address = 11111111111111111111111111111111 // program_id
-base_address_config = PreconfiguredOwner {
-    is_signer: bool,
-    is_writable: bool,
-},
-```
+If you wish to get more dynamic with the `Oracle Plugin Adapter` you can pass in your `program_id` as the `base_address` and then an `ExtraAccount`, which can be used to derive one or more PDAs pointing to `Oracle Account` addresses. This allows the Oracle Adapter to access data from multiple derived Oracle Accounts. Note that there are other advanced non-PDA specifications also available when using `ExtraAccount`.
 
 #### List of ExtraAccounts Options
+An example of an extra account that is the same for all assets in a collection is the `PreconfiguredCollection` PDA, which uses the collection's Pubkey to derive the Oracle account.  An example of more dynamic extra account is the `PreconfiguredOwner` PDA, which uses the owner pubkey to derive the Oracle account.
 
 ```rust
-PreconfiguredProgram {
-    is_signer: bool,
-    is_writable: bool,
-},
-PreconfiguredCollection {
-    is_signer: bool,
-    is_writable: bool,
-},
-PreconfiguredOwner {
-    is_signer: bool,
-    is_writable: bool,
-},
-PreconfiguredRecipient {
-    is_signer: bool,
-    is_writable: bool,
-},
-PreconfiguredAsset {
-    is_signer: bool,
-    is_writable: bool,
-},
-CustomPda {
-    seeds: Vec<Seed>,
-    is_signer: bool,
-    is_writable: bool,
-},
-Address {
-    address: Pubkey,
-    is_signer: bool,
-    is_writable: bool,
-},
+pub enum ExtraAccount {
+    /// Program-based PDA with seeds \["mpl-core"\]
+    PreconfiguredProgram {
+        /// Account is a signer
+        is_signer: bool,
+        /// Account is writable.
+        is_writable: bool,
+    },
+    /// Collection-based PDA with seeds \["mpl-core", collection_pubkey\]
+    PreconfiguredCollection {
+        /// Account is a signer
+        is_signer: bool,
+        /// Account is writable.
+        is_writable: bool,
+    },
+    /// Owner-based PDA with seeds \["mpl-core", owner_pubkey\]
+    PreconfiguredOwner {
+        /// Account is a signer
+        is_signer: bool,
+        /// Account is writable.
+        is_writable: bool,
+    },
+    /// Recipient-based PDA with seeds \["mpl-core", recipient_pubkey\]
+    /// If the lifecycle event has no recipient the derivation will fail.
+    PreconfiguredRecipient {
+        /// Account is a signer
+        is_signer: bool,
+        /// Account is writable.
+        is_writable: bool,
+    },
+    /// Asset-based PDA with seeds \["mpl-core", asset_pubkey\]
+    PreconfiguredAsset {
+        /// Account is a signer
+        is_signer: bool,
+        /// Account is writable.
+        is_writable: bool,
+    },
+    /// PDA based on user-specified seeds.
+    CustomPda {
+        /// Seeds used to derive the PDA.
+        seeds: Vec<Seed>,
+        /// Program ID if not the base address/program ID for the external plugin.
+        custom_program_id: Option<Pubkey>,
+        /// Account is a signer
+        is_signer: bool,
+        /// Account is writable.
+        is_writable: bool,
+    },
+    /// Directly-specified address.
+    Address {
+        /// Address.
+        address: Pubkey,
+        /// Account is a signer
+        is_signer: bool,
+        /// Account is writable.
+        is_writable: bool,
+    },
+}
 ```
 
 ## Creating and Adding Oracle Plugins
@@ -337,34 +352,7 @@ pub async fn create_asset_with_oracle_plugin() {
 
 {% seperator h="6" /%}
 
-{% dialect-switcher title="resultsOffset / result_offset" %}
-{% dialect title="JavaScript" id="js" %}
-
-```js
-const resultsOffset: ValidationResultsOffset =
-  | { type: 'NoOffset' }
-  | { type: 'Anchor' }
-  | { type: 'Custom'; offset: bigint };
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```rust
-pub enum ValidationResultsOffset {
-    NoOffset,
-    Anchor,
-    Custom(u64),
-}
-
-```
-
-{% /dialect %}
-
-{% /dialect-switcher %}
-
-{% seperator h="6" /%}
+<!-- {% seperator h="6" /%}
 
 {% dialect-switcher title="lifecycleChecks / lifecycle_checks" %}
 {% dialect title="JavaScript" id="js" %}
@@ -473,7 +461,7 @@ pub enum ExtraAccount {
 
 {% /dialect %}
 
-{% /dialect-switcher %}
+{% /dialect-switcher %} -->
 
 ### Adding an Oracle Plugin to An Asset
 
