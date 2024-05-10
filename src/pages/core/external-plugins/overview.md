@@ -13,7 +13,20 @@ description: Learn about the MPL Core External Plugins
 
 ## What are External Plugins?
 
-`External Plugins` are plugins that have external influences on their own behaviour such as influencing life cycle events and allowing 3rd parties to store inside them.
+External Plugins consist of 3 parts, the `adapter`, the `interface` and the `plugin`. 
+
+### The External Plugin Adapter
+
+A `Plugin Adapter` is assigned to the Assets/Collection as a `plugin` and exposes an `apdapter interface`.
+
+### The Interface
+
+The Interface allows the interaction between the `Plugin` adapter and the developered `External Plugin`
+
+
+### The External Plugin
+
+The External Plugin ties everything together and provides data for the `Plugin Adapter`.
 
 
 ## Lifecycle Checks
@@ -32,9 +45,7 @@ Each of the life cycle events can be assigned with the following checks:
 - Can Approve
 
 ### Can Listen
-
 A web3 type webhook that alerts the account that a lifecycle event has happened.
-
 
 ### Can Deny
 The plugin has the ability to deny a lifecycle events action.

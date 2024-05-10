@@ -156,8 +156,6 @@ addExternalPluginV1(umi, {
 
 ## Collections
 
-Adding a Plugin to a Core Collection is similar to that of adding to a Core Asset. You can add plugins during creation and also using the `addCollectionV1` instruction. Collections only have access to `Authority Plugins` and `Permanent Plugins`.
-
 ### Creating a Core Collection with an External Plugin
 
 {% dialect-switcher title="Adding a External Plugin to a Core Collection" %}
