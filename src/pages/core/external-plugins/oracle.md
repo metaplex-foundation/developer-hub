@@ -561,9 +561,8 @@ pub async fn add_oracle_plugin_to_asset() {
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
   create,
-  pluginAuthorityPair,
-  ruleSet,
-} from '@metaplex-foundation/core'
+  CheckResult
+  } from '@metaplex-foundation/core'
 
 const collectionSigner = generateSigner(umi)
 const oracleAccount = publicKey('11111111111111111111111111111111')

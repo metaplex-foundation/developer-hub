@@ -44,8 +44,7 @@ await create(umi, {
 use mpl_core::{
     instructions::CreateV2Builder,
     types::{
-        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent, OracleInitInfo,
-        PermanentBurnDelegate, Plugin, PluginAuthority, PluginAuthorityPair,
+        ExternalCheckResult, ExternalPluginAdapterInitInfo, HookableLifecycleEvent, OracleInitInfo,
         ValidationResultsOffset,
     },
 };
@@ -66,7 +65,7 @@ pub async fn create_asset_with_oracle_plugin() {
         .payer(payer.pubkey())
         .name("My Nft".into())
         .uri("https://example.com/my-nft.json".into())
-        .external_plugins(vec![ExternalPluginInitInfo::Oracle(OracleInitInfo {
+        .external_plugins_adapters(vec![ExternalPluginAdapterInitInfo::Oracle(OracleInitInfo {
             base_address: onchain_oracle_account,
             init_plugin_authority: None,
             lifecycle_checks: vec![(
@@ -108,9 +107,9 @@ pub async fn create_asset_with_oracle_plugin() {
 
 ```rust
 use mpl_core::{
-    instructions::AddExternalPluginV1Builder,
+    instructions::AddExternalPluginAdapterV1Builder,
     types::{
-        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent,
+        ExternalCheckResult, ExternalPluginAdapterInitInfo, HookableLifecycleEvent,
         OracleInitInfo, ValidationResultsOffset,
     },
 };
@@ -125,10 +124,10 @@ pub async fn add_oracle_plugin_to_asset() {
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
     let oracle_plugin = Pubkey::from_str("22222222222222222222222222222222").unwrap();
 
-    let add_oracle_plugin_to_asset_ix = AddExternalPluginV1Builder::new()
+    let add_oracle_plugin_to_asset_ix = AddExternalPluginAdapterV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
-        .init_info(ExternalPluginInitInfo::Oracle(OracleInitInfo {
+        .init_info(ExternalPluginAdapterInitInfo::Oracle(OracleInitInfo {
             base_address: oracle_plugin,
             results_offset: Some(ValidationResultsOffset::Anchor),
             lifecycle_checks: vec![(
@@ -198,10 +197,7 @@ addPlugin(umi, {
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import {
-  createCollection,
-  CheckResult
-} from '@metaplex-foundation/core'
+import { createCollection, CheckResult } from '@metaplex-foundation/core'
 
 const collectionSigner = generateSigner(umi)
 const oracleAccount = publicKey('22222222222222222222222222222222')
@@ -234,7 +230,7 @@ await createCollection(umi, {
 use mpl_core::{
     instructions::CreateCollectionV2Builder,
     types::{
-        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent, OracleInitInfo,
+        ExternalCheckResult, ExternalPluginAdaptersInitInfo, HookableLifecycleEvent, OracleInitInfo,
         ValidationResultsOffset,
     },
 };
@@ -255,7 +251,7 @@ pub async fn create_collection_with_oracle_plugin() {
         .payer(payer.pubkey())
         .name("My Collection".into())
         .uri("https://example.com/my-nft.json".into())
-        .external_plugins(vec![ExternalPluginInitInfo::Oracle(OracleInitInfo {
+        .external_plugins_adapters(vec![ExternalPluginAdaptersInitInfo::Oracle(OracleInitInfo {
             base_address: onchain_oracle_plugin,
             init_plugin_authority: None,
             lifecycle_checks: vec![(
@@ -324,7 +320,7 @@ await addCollectionPlugin(umi, {
 use mpl_core::{
     instructions::AddCollectionExternalPluginV1Builder,
     types::{
-        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent,
+        ExternalCheckResult, ExternalPluginAdapterInitInfo, HookableLifecycleEvent,
         OracleInitInfo, ValidationResultsOffset,
     },
 };
@@ -342,7 +338,7 @@ pub async fn add_oracle_plugin_to_collection() {
     let add_oracle_plugin_to_collection_ix = AddCollectionExternalPluginV1Builder::new()
         .collection(collection)
         .payer(authority.pubkey())
-        .init_info(ExternalPluginInitInfo::Oracle(OracleInitInfo {
+        .init_info(ExternalPluginAdapterInitInfo::Oracle(OracleInitInfo {
             base_address: oracle_plugin,
             results_offset: Some(ValidationResultsOffset::Anchor),
             lifecycle_checks: vec![(
