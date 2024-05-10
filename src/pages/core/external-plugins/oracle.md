@@ -291,7 +291,7 @@ const asset = await create(umi, {
 use mpl_core::{
     instructions::CreateV2Builder,
     types::{
-        ExternalCheckResult, ExternalPluginInitInfo, HookableLifecycleEvent, OracleInitInfo,
+        ExternalCheckResult, ExternalPluginAdapterInitInfo, HookableLifecycleEvent, OracleInitInfo,
         PermanentBurnDelegate, Plugin, PluginAuthority, PluginAuthorityPair,
         ValidationResultsOffset,
     },
@@ -313,7 +313,7 @@ pub async fn create_asset_with_oracle_plugin() {
     .payer(payer.pubkey())
     .name("My Asset".into())
     .uri("https://example.com/my-asset.json".into())
-    .external_plugin_adapters(vec![ExternalPluginInitInfo::Oracle(OracleInitInfo {
+    .external_plugin_adapters(vec![ExternalPluginAdapterInitInfo::Oracle(OracleInitInfo {
         base_address: oracle_plugin,
         init_plugin_authority: None,
         lifecycle_checks: vec![
@@ -700,7 +700,7 @@ pub async fn add_oracle_plugin_to_collection() {
     let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
     let oracle_plugin = Pubkey::from_str("22222222222222222222222222222222").unwrap();
 
-    let add_oracle_plugin_to_collection_ix = AddCollectionExternalPluginAdapterV1Builders::new()
+    let add_oracle_plugin_to_collection_ix = AddCollectionExternalPluginAdapterV1Builder::new()
         .collection(collection)
         .payer(authority.pubkey())
         .init_info(ExternalPluginAdapterInitInfo::Oracle(OracleInitInfo {
