@@ -292,8 +292,7 @@ use mpl_core::{
     instructions::CreateV2Builder,
     types::{
         ExternalCheckResult, ExternalPluginAdapterInitInfo, HookableLifecycleEvent, OracleInitInfo,
-        PermanentBurnDelegate, Plugin, PluginAuthority, PluginAuthorityPair,
-        ValidationResultsOffset,
+        ValidationResultsOffset
     },
 };
 use solana_client::nonblocking::rpc_client;
