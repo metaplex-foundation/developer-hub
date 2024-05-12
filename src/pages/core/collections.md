@@ -41,7 +41,7 @@ To create a Core Collection you can use the `CreateCollection` instruction like 
 | ------- | -------------------------------------------------- |
 | name    | The collection to which the Core Asset belongs to. |
 | uri     | The authority of the new asset.                    |
-| plugins | The account paying for the storage fees.           |
+| plugins | Plugins you would like the collection to have.     |
 
 Some of the accounts and arguments may be abstracted out and/or optional in our SDKs for ease of use.
 A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L30).
