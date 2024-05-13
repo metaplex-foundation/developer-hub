@@ -12,7 +12,7 @@ description: Learn about Removing Plugin Adapters from Core Assets and Collectio
 To to remove the External Plugin Adapter from an Asset you'll need to use the `removePlugin()` function.
 
 ```ts
-import { generateSigner, publicKey } from '@metaplex-foundation/umi'
+import {publicKey } from '@metaplex-foundation/umi'
 import { removePlugin, CheckResult } from '@metaplex-foundation/core'
 
 const asset = publicKey('1111111111111111111111111111111')
@@ -84,7 +84,7 @@ pub async fn remove_external_plugin_adapter_from_asset() {
 To to remove the External Plugin Adapter from an Asset you'll need to use the `removeCollectionPlugin()` function.
 
 ```ts
-import { generateSigner, publicKey } from '@metaplex-foundation/umi'
+import { publicKey } from '@metaplex-foundation/umi'
 import { removeCollectionPlugin, CheckResult } from '@metaplex-foundation/core'
 
 const collection = publicKey('1111111111111111111111111111111')
