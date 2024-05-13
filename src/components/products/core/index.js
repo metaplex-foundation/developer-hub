@@ -108,6 +108,7 @@ export const core = {
           links: [
             { title: 'Overview', href: '/core/external-plugins/overview' },
             { title: 'Adding External Plugin Adapters', href: '/core/external-plugins/adding-external-plugins' },
+            { title: 'Removing External Plugin Adapters', href: '/core/external-plugins/removing-external-plugins' },
             // {
             //   title: 'Removing External Plugins',
             //   href: '/core/plugins/removing-plugins',
