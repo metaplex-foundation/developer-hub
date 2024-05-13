@@ -9,7 +9,7 @@ description: Learn about Removing Plugin Adapters from Core Assets and Collectio
 {% dialect-switcher title="Remove External Plugin from Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
-To to remove the External Plugin Adapter from an Asset you'll need to use the `removePlugin()` function.
+To remove the External Plugin Adapter from an Asset you'll need to use the `removePlugin()` function.
 
 ```ts
 import {publicKey } from '@metaplex-foundation/umi'
@@ -31,7 +31,7 @@ await removePlugin(umi, {
 
 {% dialect title="Rust" id="rust" %}
 
-To to remove the External Plugin Adapter from an Asset you'll need to use the `RemoveExternalPluginAdapterV1Builder()` function.
+To remove the External Plugin Adapter from an Asset you'll need to use the `RemoveExternalPluginAdapterV1Builder()` function.
 
 ```rust
 use mpl_core::{instructions::RemoveExternalPluginAdapterV1Builder, types::ExternalPluginAdapterKey};
@@ -81,7 +81,7 @@ pub async fn remove_external_plugin_adapter_from_asset() {
 {% dialect-switcher title="Remove External Plugin from Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
-To to remove the External Plugin Adapter from an Asset you'll need to use the `removeCollectionPlugin()` function.
+To remove the External Plugin Adapter from a Collection you'll need to use the `removeCollectionPlugin()` function.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -103,7 +103,7 @@ removeCollectionPlugin(umi, {
 
 {% dialect title="Rust" id="rust" %}
 
-To to remove the External Plugin Adapter from a Collection you'll need to use the `RemoveCollectionExternalPluginAdapterV1Builder()` function.
+To remove the External Plugin Adapter from a Collection you'll need to use the `RemoveCollectionExternalPluginAdapterV1Builder()` function.
 
 ```rust
 
