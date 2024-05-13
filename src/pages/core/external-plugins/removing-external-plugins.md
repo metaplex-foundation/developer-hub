@@ -81,7 +81,7 @@ pub async fn remove_external_plugin_adapter_from_asset() {
 {% dialect-switcher title="Remove External Plugin from Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
-To to remove the External Plugin Adapter from an Asset you'll need to use the `removePlugin()` function.
+To to remove the External Plugin Adapter from an Asset you'll need to use the `removeCollectionPlugin()` function.
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
