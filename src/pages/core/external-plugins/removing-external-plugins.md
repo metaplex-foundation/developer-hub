@@ -78,7 +78,7 @@ pub async fn remove_external_plugin_adapter_from_asset() {
 
 ## Remove from Collection
 
-{% dialect-switcher title="Remove External Plugin from Asset" %}
+{% dialect-switcher title="Remove External Plugin from Collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 To remove the External Plugin Adapter from a Collection you'll need to use the `removeCollectionPlugin()` function.
