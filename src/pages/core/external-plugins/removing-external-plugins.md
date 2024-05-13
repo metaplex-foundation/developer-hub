@@ -78,14 +78,6 @@ pub async fn remove_external_plugin_adapter_from_asset() {
 
 ## Remove from Collection
 
-```
-///
-///
-/// Check JS removeCollectionPlugin() which doesn't seem to work due to mandatory args.
-///
-///
-```
-
 {% dialect-switcher title="Remove External Plugin from Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
