@@ -1,0 +1,20 @@
+{
+    "cSpell.words": [
+        "blockhash",
+        "callout",
+        "hashlist",
+        "Hookable",
+        "Keypair",
+        "metaplex",
+        "nonblocking",
+        "Preconfigured",
+        "println",
+        "Pubkey",
+        "publickey",
+        "seperator",
+        "serde",
+        "Solana",
+        "Struct",
+        "usize"
+    ]
+}

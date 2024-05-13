@@ -103,6 +103,26 @@ export const core = {
             },
           ],
         },
+        {
+          title: 'External Plugins',
+          links: [
+            { title: 'Overview', href: '/core/external-plugins/overview' },
+            { title: 'Adding External Plugin Adapters', href: '/core/external-plugins/adding-external-plugins' },
+            // {
+            //   title: 'Removing External Plugins',
+            //   href: '/core/plugins/removing-plugins',
+            // },
+            // {
+            //   title: 'Delegating and Revoking External Plugins',
+            //   href: '/core/plugins/delegating-and-revoking-plugins',
+            // },
+            {
+              title: 'Oracle Plugin',
+              href: '/core/external-plugins/oracle',
+            },
+
+          ],
+        },
         // {
         //   title: 'Integration Guides',
         //   links: [
