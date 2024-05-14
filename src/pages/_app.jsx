@@ -11,6 +11,7 @@ import 'reactflow/dist/base.css'
 
 // Add Prism components.
 import { Prism } from 'prism-react-renderer'
+import { Plexpert } from '@/components/Plexpert'
 ;(typeof global !== 'undefined' ? global : window).Prism = Prism
 require('prismjs/components/prism-rust')
 
@@ -60,6 +61,7 @@ export default function App({ Component, pageProps }) {
             gtag('config', 'G-YLQCC8102N');
           `}
       </Script>
+      <Plexpert />
     </>
   )
 }
