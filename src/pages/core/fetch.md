@@ -92,8 +92,6 @@ pub async fn fetch_asset() {
 
 Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/rpc-providers).
 
-Below are some helper methods that wrap around some GPA calls.
-
 ### Fetch Assets By Owner
 
 {% dialect-switcher title="fetch Assets by Owner" %}
@@ -306,7 +304,7 @@ pub async fn fetch_assets_by_update_authority() {
                     )),
                     RpcFilterType::Memcmp(Memcmp::new(
                         35,
-                        MemcmpEncodedBytes::Base58(collection.to_string()),
+                        MemcmpEncodedBytes::Base58(update_authority.to_string()),
                     )),
                 ]),
                 account_config: RpcAccountInfoConfig {
