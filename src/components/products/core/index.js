@@ -35,6 +35,7 @@ export const core = {
               title: 'Token Metadata Differences',
               href: '/core/tm-differences',
             },
+            { title: 'Eco System Support', href: '/core/eco-system-support' },
             { title: 'FAQ', href: '/core/faq' },
           ],
         },
