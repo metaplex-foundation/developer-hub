@@ -27,19 +27,15 @@ The Royalties Plugin requires no arguments.
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { publicKey } from '@metaplex-foundation/umi'
 import {
-  addPluginV1,
-  createPlugin,
-  updatePluginAuthority,
+  addPlugin,
 } from '@metaplex-foundation/mpl-core'
 
-
-await addPluginV1(umi, {
+await addPlugin(umi, {
   asset: asset.publicKey,
-  plugin: createPlugin({
+  plugin: {
     type: 'ImmutableMetadata',
-  }),
+  },
 }).sendAndConfirm(umi)
 ```
 
@@ -52,79 +48,16 @@ await addPluginV1(umi, {
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { publicKey } from '@metaplex-foundation/umi'
 import {
-  addCollectionPluginV1,
-  createPlugin,
-  ruleSet,
+  addCollectionPlugin,
 } from '@metaplex-foundation/mpl-core'
 
-await addCollectionPluginV1(umi, {
+await addCollectionPlugin(umi, {
   collection: collection.publicKey,
-  plugin: createPlugin({
+  plugin: {
     type: 'ImmutableMetadata',
-  }),
+  },
 }).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```ts
-use mpl_core::{
-    instructions::AddCollectionPluginV1Builder,
-    types::{Creator, Plugin, Royalties, RuleSet},
-};
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
-use std::str::FromStr;
-
-pub async fn add_royalties_pluging_to_collection() {
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
-    let authority = Keypair::new();
-    let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
-
-    let add_royalties_plugin_to_collection_ix = AddCollectionPluginV1Builder::new()
-        .collection(collection)
-        .payer(authority.pubkey())
-        .plugin(Plugin::Royalties(Royalties {
-            basis_points: 500,
-            creators: vec![
-                Creator {
-                    address: creator1,
-                    percentage: 80,
-                },
-                Creator {
-                    address: creator2,
-                    percentage: 20,
-                },
-            ],
-            rule_set: RuleSet::None,
-        }))
-        .instruction();
-
-    let signers = vec![&authority];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let add_royalties_pluging_to_collection_tx = Transaction::new_signed_with_payer(
-        &[add_royalties_pluging_to_collection_ix],
-        Some(&authority.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client
-        .send_and_confirm_transaction(&add_royalties_pluging_to_collection_tx)
-        .await
-        .unwrap();
-
-    println!("Signature: {:?}", res)
-}
-
 ```
 
 {% /dialect %}
