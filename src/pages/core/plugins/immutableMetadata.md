@@ -21,7 +21,7 @@ As it is for other plugins, like [royalties](/core/plugins/royalties) when it is
 
 The immutableMetadata Plugin requires no arguments.
 
-## Adding the Immutability Plugin to an Asset code example
+## Adding the immutableMetadata Plugin to an Asset code example
 
 {% dialect-switcher title="Adding a Immutability Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -42,7 +42,7 @@ await addPlugin(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Adding the Immutability Plugin to a Collection code example
+## Adding the immutableMetadata Plugin to a Collection code example
 
 {% dialect-switcher title="Add immutableMetadata Plugin to Collection" %}
 {% dialect title="JavaScript" id="js" %}
