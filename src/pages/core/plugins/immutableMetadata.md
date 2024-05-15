@@ -19,7 +19,7 @@ As it is for other plugins, like [royalties](/core/plugins/royalties) when it is
 
 ## Arguments
 
-The Royalties Plugin requires no arguments.
+The immutableMetadata Plugin requires no arguments.
 
 ## Adding the Immutability Plugin to an Asset code example
 
@@ -44,7 +44,7 @@ await addPlugin(umi, {
 
 ## Adding the Immutability Plugin to a Collection code example
 
-{% dialect-switcher title="Add Royalties Plugin to Collection" %}
+{% dialect-switcher title="Add immutableMetadata Plugin to Collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
