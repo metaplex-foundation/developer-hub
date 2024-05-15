@@ -4,7 +4,7 @@ metaTitle: Core - immutableMetadata
 description: Learn how to make Metadata immutable using Core
 ---
 
-The Royalties Plugin is a `Authority Managed` plugin that allows to make the Metadata (Name and URI) immutable. It can only be added by the update authority.
+The immutableMetadata Plugin is a `Authority Managed` plugin that allows to make the Metadata (Name and URI) immutable. It can only be added by the update authority.
 
 This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collection`.
 
