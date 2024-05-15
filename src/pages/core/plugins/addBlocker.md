@@ -4,7 +4,9 @@ metaTitle: Core - addBlocker
 description: Learn how to block adding additional Plugins using Core
 ---
 
-The addBlocker Plugin is a `Authority Managed` plugin that allows to forbid adding additional plugins. This means you have to be sure that all plugins that you might need in the future have been added before. Even Plugins that are new features could not be added. It can only be added by the update authority.
+The `addBlocker` Plugin is a `Authority Managed` plugin that allows to forbid adding additional authority managed plugins. This means you as an authority have to be sure that all plugins that you might need in the future have been added before. Even Plugins that are new features could not be added. It can only be added by the update authority.
+
+The **exception** to this are user managed plugins for assets like the transfer and freeze delegate plugins. Those can always be added, even after the `addBlocker` has been added.
 
 This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collection`.
 
@@ -19,7 +21,7 @@ As it is for other plugins, like [royalties](/core/plugins/royalties) when it is
 
 ## Arguments
 
-The addBlocker Plugin requires no arguments.
+The `addBlocker` Plugin requires no arguments.
 
 ## Adding the addBlocker Plugin to an Asset code example
 
