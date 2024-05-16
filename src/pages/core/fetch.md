@@ -75,9 +75,9 @@ use solana_sdk::pubkey::Pubkey;
 pub async fn fetch_asset() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
-    let asset_id = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+    let collection_id = Pubkey::from_str("11111111111111111111111111111111").unwrap();
 
-    let rpc_data = rpc_client.get_account_data(&asset_id).await.unwrap();
+    let rpc_data = rpc_client.get_account_data(&collection_id).await.unwrap();
 
     let collection = Collection::from_bytes(&rpc_data).unwrap();
 
