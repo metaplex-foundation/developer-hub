@@ -10,12 +10,11 @@ Launching the **Core JS SDK V1** welcomes new improvements to both naming and fu
 
 ## Major Changes
 
-### No More Constructor Functions
+### Plugin Constructor Functions
 
-When using the the helper wrapper methods you no longer need to pass in the cumbersome umi constructor functions.
-e.g. createPlugin() and pluginAuthoirtyPair() are no longer required
+Though while still present in the code base, the new wrappers allow for plugins to be defined without constructor functions.
 
-**Before**
+**Auto Generated Kinobi Functions**
 
 ```ts
 await createV1(umi, {
@@ -34,7 +33,7 @@ await createV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-**After**
+**JS SDK V1**
 
 ```ts
 await create(umi, {
@@ -51,7 +50,7 @@ await create(umi, {
 
 Plugin data is elevated to the top level instead of nested under the data field in a plugin object.
 
-**Before**
+**Auto Generated Kinobi Functions**
 
 ```ts
 await addPluginV1(umi, {
@@ -61,23 +60,23 @@ await addPluginV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-**After**
+**JS SDK V1**
 
 ```ts
 await addPlugin(umi, {
-    asset: assetId,
-    plugin: {
-      type: "Attributes",
-      attributeList: [{ key: "key", value: "value" }],
-    },
-  }).sendAndConfirm(umi);
+  asset: assetId,
+  plugin: {
+    type: 'Attributes',
+    attributeList: [{ key: 'key', value: 'value' }],
+  },
+}).sendAndConfirm(umi)
 ```
 
 ### Lifecycle Wrapper now Requires Asset Objects
 
 The create/update/transfer/burn now require the full asset/collection objects in order to derive extra accounts if any.
 
-**Before**
+**Auto Generated Kinobi Functions**
 
 ```ts
 const asset = publicKey('11111111111111111111111111111111')
@@ -89,7 +88,7 @@ await updateV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-**After**
+**JS SDK V1**
 
 ```ts
 const asset = await fetchAssetV1(umi, asset)
@@ -224,30 +223,23 @@ export function hasCollectionUpdateAuthority(
 
 The **Lifecycle Helpers** provide a quick and efficient way to check whether an address can perform a certain lifecycle event.
 
-#### canTransfer()
+#### validateTransfer()
 
 Returns a `boolean` value on whether the publicKey is eligible to transfer the Asset.
 
 ```ts
-export function canTransfer(
-  authority: PublicKey | string,
-  asset: AssetV1,
-  collection?: CollectionV1
+export async function validateTransfer(
+  umi,
+  { authority, asset, collection, recipient }
 )
 ```
 
-[Link](https://github.com/metaplex-foundation/mpl-core/blob/e2b10c507b7510d4465a1b5650bc72e1be8efac2/clients/js/src/helpers/lifecycle.ts#L15)
-
-#### canBurn
+#### validateBurn
 
 Returns a `boolean` value on whether the publicKey can burn the Asset.
 
 ```ts
-export function canBurn(
-  authority: PublicKey | string,
-  asset: AssetV1,
-  collection?: CollectionV1
-)
+export async function validateBurn(umi, { authority, asset, collection })
 ```
 
 #### canUpdate()
@@ -255,10 +247,9 @@ export function canBurn(
 Returns a `boolean` value on whether the publicKey is eligible to update Asset.
 
 ```ts
-export function canUpdate(
-  authority: PublicKey | string,
-  asset: AssetV1,
-  collection?: CollectionV1
+export async function validateUpdate(
+  umi,
+  { authority, asset, collection }
 )
 ```
 
