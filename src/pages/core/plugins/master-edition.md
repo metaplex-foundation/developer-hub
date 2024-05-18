@@ -52,9 +52,6 @@ import {
 
 const collectionSigner = generateSigner(umi)
 
-const creator1 = publicKey('11111111111111111111111111111111')
-const creator2 = publicKey('22222222222222222222222222222222')
-
 await createCollectionV1(umi, {
   collection: collectionSigner,
   name: 'My NFT',
