@@ -55,6 +55,7 @@ export const core = {
               href: '/core/collections',
             },
             { title: 'Helpers', href: '/core/helpers' },
+            { title: 'Helpers', href: '/core/helpers' },
           ],
         },
         {
