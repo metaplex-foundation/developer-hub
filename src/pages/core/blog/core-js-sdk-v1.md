@@ -74,7 +74,7 @@ await addPlugin(umi, {
 
 ### Lifecycle Wrapper now Requires Asset Objects
 
-The create/update/transfer/burn now require the full asset/collection objects in order to derive extra accounts if any.
+The create/update/transfer/burn now require the full asset/collection objects in order to derive extra accounts (such as external plugin adapter accounts) if any.
 
 **Auto Generated Kinobi Functions**
 
@@ -242,7 +242,7 @@ Returns a `boolean` value on whether the publicKey can burn the Asset.
 export async function validateBurn(umi, { authority, asset, collection })
 ```
 
-#### canUpdate()
+#### validateUpdate()
 
 Returns a `boolean` value on whether the publicKey is eligible to update Asset.
 
