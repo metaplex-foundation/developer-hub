@@ -234,7 +234,7 @@ export async function validateTransfer(
 )
 ```
 
-#### validateBurn
+#### validateBurn()
 
 Returns a `boolean` value on whether the publicKey can burn the Asset.
 
