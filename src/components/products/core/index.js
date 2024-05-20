@@ -24,7 +24,7 @@ export const core = {
       navigation: [
         {
           title: 'New!',
-          links: [{ title: 'JS SDK V1', href: '/core/blog/core-js-sdk-v1' }],
+          links: [{ title: 'JS SDK V1', href: '/core/core-js-sdk-v1' }],
         },
         {
           title: 'Introduction',
