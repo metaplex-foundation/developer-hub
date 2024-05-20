@@ -32,28 +32,20 @@ The Permanent Freeze Plugin will work in areas such as:
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  createV1,
-  createPlugin,
-  pluginAuthority,
-  addressPluginAuthority,
-} from '@metaplex-foundation/mpl-core'
+import { create } from '@metaplex-foundation/mpl-core'
 
 const assetSigner = generateSigner(umi)
-
 const delegate = publicKey('33333333333333333333333333333')
 
-await createV1(umi, {
-  asset: asset.publicKey,
+await create(umi, {
+  asset: assetSigner,
   name: 'My NFT',
-  uri: 'https://example.com/my-nft.json',
+  uri: 'https://example.com/my-asset.json',
   plugins: [
     {
-      plugin: createPlugin({
-        type: 'PermanentFreezeDelegate',
-        data: { frozen: true },
-      }),
-      authority: addressPluginAuthority(delegate),
+      type: 'PermanentFreezeDelegate',
+      frozen: true,
+      authority: { type: 'Address', address: delegate },
     },
   ],
 }).sendAndConfirm(umi)

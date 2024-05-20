@@ -10,11 +10,13 @@ The Edition Plugin will work in areas such as:
 
 - Prints of the same Asset
 
-{% callout type="note" title="Intended Useage" %}
+{% callout type="note" title="Intended Usage" %}
 
 We recommend to
-- Group the Editions using the Master Edition Plugin 
+
+- Group the Editions using the Master Edition Plugin
 - use Candy Machine with the Edition Guard to handled numbering automatically.
+
 {% /callout %}
 
 ## Works With
@@ -26,11 +28,11 @@ We recommend to
 
 ## Arguments
 
-| Arg           | Value                               |
-| ------------- | ----------------------------------- |
-| number        | number                              |
+| Arg    | Value  |
+| ------ | ------ |
+| number | number |
 
-The number is a specific value that is assigned to the asset. Usually this number is unique, therefore the Creator should make sure that a number is not used twice. 
+The number is a specific value that is assigned to the asset. Usually this number is unique, therefore the Creator should make sure that a number is not used twice.
 
 ## Creating an Asset with the editions plugin
 
@@ -43,19 +45,19 @@ The Editions Plugin must be added on creation of the asset. As long as it is mut
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { createV1, pluginAuthorityPair } from '@metaplex-foundation/mpl-core'
+import { create } from '@metaplex-foundation/mpl-core'
 
-const asset = generateSigner(umi)
+const assetSigner = generateSigner(umi)
 
-const result = createV1(umi, {
-  asset: asset,
-  name: 'My Nft',
-  uri: 'https://example.com/my-nft',
+const result = create(umi, {
+  asset: assetSigner,
+  name: 'My Asset',
+  uri: 'https://example.com/my-asset.json',
   plugins: [
-    pluginAuthorityPair({
+    {
       type: 'Edition',
-      data: { number: 1 },
-    }),
+      number: 1
+    },
   ],
 }).sendAndConfirm(umi)
 ```
@@ -85,8 +87,8 @@ pub async fn create_asset_with_plugin() {
     let create_asset_with_plugin_ix = CreateV1Builder::new()
         .asset(asset.pubkey())
         .payer(payer.pubkey())
-        .name("My Nft".into())
-        .uri("https://example.com/my-nft.json".into())
+        .name("My Asset".into())
+        .uri("https://example.com/my-asset.json".into())
         .plugins(vec![PluginAuthorityPair {
             plugin: Plugin::Edition(Edition {
                 number: 1,
@@ -119,7 +121,7 @@ pub async fn create_asset_with_plugin() {
 
 {% /dialect-switcher %}
 
-### Create with a immutable Plugin
+### Create with a Immutable Plugin
 
 To create the Asset with immutable Edition Plugin the following code can be used:
 
@@ -130,20 +132,20 @@ To have the editions Plugin immutable the authority has to be set to `nonePlugin
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { createV1, pluginAuthorityPair } from '@metaplex-foundation/mpl-core'
+import { create } from '@metaplex-foundation/mpl-core'
 
 const asset = generateSigner(umi)
 
-const result = createV1(umi, {
+const result = create(umi, {
   asset: asset,
   name: 'My Nft',
   uri: 'https://example.com/my-nft',
   plugins: [
-    pluginAuthorityPair({
+    {
       type: 'Edition',
-      data: { number: 1 },
-      authority: nonePluginAuthority(),
-    }),
+      number: 1,
+      authority: { type: 'None' },
+    },
   ],
 }).sendAndConfirm(umi)
 ```
@@ -217,22 +219,20 @@ If the Editions Plugin is mutable it can be updated similar to other Plugins:
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { updatePluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
+import { updatePlugin } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
 
-await updatePluginV1(umi, {
-  asset: asset,
-  plugin: createPlugin({ type: 'Edition', data: { number: 2 } }),
-  authority: delegateAuthority
-}).sendAndConfirm(umi);
+  await updatePlugin(umi, {
+    asset: assetAccount.publicKey,
+    plugin: { type: 'Edition', number: 2 },
+  }).sendAndConfirm(umi);
 ```
 
 {% /dialect %}
 
 {% dialect title="Rust" id="rust" %}
-*coming soon*
+_coming soon_
 
 {% /dialect %}
 {% /dialect-switcher %}
-

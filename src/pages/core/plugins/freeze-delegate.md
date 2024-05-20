@@ -33,13 +33,13 @@ The Freeze Plugin will work in areas such as:
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { addPluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
+import { addPlugin } from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
+const assetAddress = publicKey('11111111111111111111111111111111')
 
-await addPluginV1(umi, {
-  asset: asset,
-  plugin: createPlugin({ type: 'FreezeDelegate', data: { frozen: true } }),
+await addPlugin(umi, {
+  asset: assetAddress,
+  plugin: { type: 'FreezeDelegate', data: { frozen: true } },
 }).sendAndConfirm(umi)
 ```
 
@@ -92,6 +92,7 @@ pub async fn add_freeze_delegate_plugin() {
 {% /dialect-switcher %}
 
 ## Delegate the Freeze Authority
+
 The Authority to freeze and thaw an Asset can be delegated to a different Address than the owner.
 
 {% dialect-switcher title="Thaw an MPL Core Asset" %}
@@ -99,26 +100,57 @@ The Authority to freeze and thaw an Asset can be delegated to a different Addres
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { updatePluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
+import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
+const delegateAddress = publicKey('22222222222222222222222222222222')
 
-await updatePluginV1(umi, {
-  asset: asset,
-  plugin: createPlugin({ type: 'FreezeDelegate', data: { frozen: false } }),
-  authority: delegateAuthority
-}).sendAndConfirm(umi);
+await approvePluginAuthority(umi, {
+  asset: asset.publicKey,
+  plugin: { type: 'FreezeDelegate' },
+  newAuthority: { type: 'Address', address: delegateAddress },
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
 
 {% dialect title="Rust" id="rust" %}
-*coming soon*
+_coming soon_
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Freezing an Asset
+
+{% dialect-switcher title="Freeze an MPL Core Asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { freezeAsset, fetchAsset } from '@metaplex-foundation/mpl-core'
+
+const assetAddress = publicKey('11111111111111111111111111111111')
+const assetAccount = await fetchAsset(umi, assetAddress)
+
+const delegateSigner = generateSigner(umi)
+
+await freezeAsset(umi, {
+    asset: assetAccount,
+    delegate: delegateSigner.publicKey,
+    authority: delegateSigner,
+  })
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+_coming soon_
 
 {% /dialect %}
 {% /dialect-switcher %}
 
 ## Thawing a Frozen Asset
+
 When an Asset is frozen it can be thawed again by the plugin authority.
 
 {% dialect-switcher title="Thaw an MPL Core Asset" %}
@@ -126,21 +158,23 @@ When an Asset is frozen it can be thawed again by the plugin authority.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { updatePluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
+import { thawAsset, fetchAsset } from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
+const assetAddress = publicKey('11111111111111111111111111111111')
+const assetAccount = await fetchAsset(umi, assetAddress)
 
-await updatePluginV1(umi, {
-  asset: asset,
-  plugin: createPlugin({ type: 'FreezeDelegate', data: { frozen: false } }),
-  authority: delegateAuthority
-}).sendAndConfirm(umi);
+const delegateSigner = generateSigner(umi)
+
+  await thawAsset(umi, {
+    asset: assetAccount,
+    delegate: delegateSigner,
+  })
 ```
 
 {% /dialect %}
 
 {% dialect title="Rust" id="rust" %}
-*coming soon*
+_coming soon_
 
 {% /dialect %}
 {% /dialect-switcher %}

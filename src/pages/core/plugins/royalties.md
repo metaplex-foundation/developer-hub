@@ -187,33 +187,27 @@ let ruleSet = RuleSet::None;
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  addPluginV1,
-  createPlugin,
-  ruleSet,
-} from '@metaplex-foundation/mpl-core'
+import { addPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 
 const creator1 = publicKey('11111111111111111111111111111111')
 const creator2 = publicKey('2222222222222222222222222222222')
 
-await addPluginV1(umi, {
+await addPlugin(umi, {
   asset: asset.publicKey,
-  plugin: createPlugin({
+  plugin: {
     type: 'Royalties',
-    data: {
-      basisPoints: 500,
-      creators: [
-        { address: creator1, percentage: 80 },
-        { address: creator2, percentage: 20 },
+    basisPoints: 500,
+    creators: [
+      { address: creator1, percentage: 80 },
+      { address: creator2, percentage: 20 },
+    ],
+    ruleSet: ruleSet('ProgramDenyList', [
+      [
+        publicKey('44444444444444444444444444444444'),
+        publicKey('55555555555555555555555555555555'),
       ],
-      ruleSet: ruleSet('ProgramDenyList', [
-        [
-          publicKey('44444444444444444444444444444444'),
-          publicKey('55555555555555555555555555555555'),
-        ],
-      ]),
-    },
-  }),
+    ]),
+  },
 }).sendAndConfirm(umi)
 ```
 
@@ -227,33 +221,27 @@ await addPluginV1(umi, {
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  addCollectionPluginV1,
-  createPlugin,
-  ruleSet,
-} from '@metaplex-foundation/mpl-core'
+import { addCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 
 const creator1 = publicKey('11111111111111111111111111111111')
 const creator2 = publicKey('2222222222222222222222222222222')
 
-await addCollectionPluginV1(umi, {
+await addCollectionPlugin(umi, {
   collection: collection.publicKey,
-  plugin: createPlugin({
+  plugin: {
     type: 'Royalties',
-    data: {
-      basisPoints: 500,
-      creators: [
-        { address: creator1, percentage: 80 },
-        { address: creator2, percentage: 20 },
+    basisPoints: 500,
+    creators: [
+      { address: creator1, percentage: 80 },
+      { address: creator2, percentage: 20 },
+    ],
+    ruleSet: ruleSet('ProgramDenyList', [
+      [
+        publicKey('44444444444444444444444444444444'),
+        publicKey('55555555555555555555555555555555'),
       ],
-      ruleSet: ruleSet('ProgramDenyList', [
-        [
-          publicKey('44444444444444444444444444444444'),
-          publicKey('55555555555555555555555555555555'),
-        ],
-      ]),
-    },
-  }),
+    ]),
+  },
 }).sendAndConfirm(umi)
 ```
 
