@@ -32,7 +32,7 @@ The attribute list consists of an Array[] then an object of key-value pairs `{ke
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-const attributes = [
+const attributeList = [
   { key: 'key0', value: 'value0' },
   { key: 'key1', value: 'value1' },
 ]
@@ -69,21 +69,19 @@ let attributes = Attributes {
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { addPluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
+import { addPlugin } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
 
-await addPluginV1(umi, {
+await addPlugin(umi, {
   asset: asset.publicKey,
-  plugin: createPlugin({
+  plugin: {
     type: 'Attributes',
-    data: {
-      attributeList: [
-        { key: 'key0', value: 'value0' },
-        { key: 'key1', value: 'value1' },
-      ],
-    },
-  }),
+    attributeList: [
+      { key: 'key0', value: 'value0' },
+      { key: 'key1', value: 'value1' },
+    ],
+  },
 }).sendAndConfirm(umi)
 ```
 
@@ -154,21 +152,19 @@ pub async fn add_attributes_plugin() {
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { updatePluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
+import { updatePlugin } from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
+const assetAddress = publicKey('11111111111111111111111111111111')
 
-await updatePluginV1(umi, {
-  asset: asset,
-  plugin: createPlugin({
+await updatePlugin(umi, {
+  asset: assetAddress,
+  plugin: {
     type: 'Attributes',
-    data: {
-      attributeList: [
-        { key: 'key0', value: 'value0' },
-        { key: 'key1', value: 'value1' },
-      ],
-    },
-  }),
+    attributeList: [
+      { key: 'key0', value: 'value0' },
+      { key: 'key1', value: 'value1' },
+    ],
+  },
 }).sendAndConfirm(umi)
 ```
 

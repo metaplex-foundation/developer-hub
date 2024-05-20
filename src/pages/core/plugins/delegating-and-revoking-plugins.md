@@ -13,20 +13,15 @@ Plugins can be delegated to another address with a Delegate Authority instructio
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  approvePluginAuthority,
-  pluginAuthority,
-  PluginType,
-  addressPluginAuthority,
-} from '@metaplex-foundation/mpl-core'
+import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
+const assetAddress = publicKey('11111111111111111111111111111111')
 const delegate = publicKey('33333333333333333333333333333')
 
-await approvePluginAuthorityV1(umi, {
-  asset: asset,
-  pluginType: PluginType.FreezeDelegate,
-  newAuthority: addressPluginAuthority(delegate),
+await approvePluginAuthority(umi, {
+  asset: assetAddress,
+  plugin: { type: 'Attributes' },
+  newAuthority: { type: 'Address', address: delegate },
 }).sendAndConfirm(umi)
 ```
 
@@ -111,14 +106,11 @@ A list of plugins and their types can be viewed on the [Plugins Overview](/core/
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  PluginType,
-  revokePluginAuthorityV1,
-} from '@metaplex-foundation/mpl-core'
+import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
 
-await revokePluginAuthorityV1(umi, {
+await revokePluginAuthority(umi, {
   asset: asset.publicKey,
-  pluginType: PluginType.Freeze,
+  plugin: { type: 'Attributes' },
 }).sendAndConfirm(umi)
 ```
 
@@ -192,15 +184,13 @@ By updating your plugin's authority to a `None` value will effectively make your
 
 ```ts
 import {
-  PluginType,
-  approvePluginAuthorityV1,
-  getNoneAuthority,
+  approvePluginAuthority
 } from '@metaplex-foundation/mpl-core'
 
-await approvePluginAuthorityV1(umi, {
+await approvePluginAuthority(umi, {
   asset: asset.publicKey,
-  pluginType: PluginType.Freeze,
-  newAuthority: getNoneAuthority(),
+  plugin: { type: 'FreezeDelegate' },
+  newAuthority: { type: 'None' },
 }).sendAndConfirm(umi)
 ```
 

@@ -23,6 +23,10 @@ export const core = {
       ...documentationSection('core'),
       navigation: [
         {
+          title: 'New!',
+          links: [{ title: 'JS SDK V1', href: '/core/blog/core-js-sdk-v1' }],
+        },
+        {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/core' },
@@ -50,7 +54,7 @@ export const core = {
               title: 'Collection Management',
               href: '/core/collections',
             },
-            // { title: 'Compressing Assets', href: '/core/compress' },
+            { title: 'Helpers', href: '/core/helpers' },
           ],
         },
         {
@@ -109,6 +113,7 @@ export const core = {
             { title: 'Overview', href: '/core/external-plugins/overview' },
             { title: 'Adding External Plugin Adapters', href: '/core/external-plugins/adding-external-plugins' },
             { title: 'Removing External Plugin Adapters', href: '/core/external-plugins/removing-external-plugins' },
+
             // {
             //   title: 'Removing External Plugins',
             //   href: '/core/plugins/removing-plugins',
@@ -121,7 +126,6 @@ export const core = {
               title: 'Oracle Plugin',
               href: '/core/external-plugins/oracle',
             },
-
           ],
         },
         // {

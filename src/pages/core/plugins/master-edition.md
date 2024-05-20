@@ -29,11 +29,11 @@ We recommend to
 
 ## Arguments
 
-| Arg       | Value          | Usecase                                                                             |
-| --------- | -------------- |-------------------------------------------------------------------------------------|
-| maxSupply | Option<number> (u32)| Indicate how many prints will exist as maximum. Optional to allow Open Editions|
-| name      | Option<String> | Name of the Editions (if different to the Collection Name)                          |
-| uri       | Option<String> | URI of the Editions (if different to the Collection Name)                           |
+| Arg       | Value                | Usecase                                                                         |
+| --------- | -------------------- | ------------------------------------------------------------------------------- |
+| maxSupply | Option<number> (u32) | Indicate how many prints will exist as maximum. Optional to allow Open Editions |
+| name      | Option<String>       | Name of the Editions (if different to the Collection Name)                      |
+| uri       | Option<String>       | URI of the Editions (if different to the Collection Name)                       |
 
 These values can be changed by the Authority at any time. They are purely informational and not enforced.
 
@@ -44,30 +44,21 @@ These values can be changed by the Authority at any time. They are purely inform
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import {
-  createCollectionV1,
-  pluginAuthorityPair,
-  ruleSet,
-} from '@metaplex-foundation/core'
+import { createCollection } from '@metaplex-foundation/core'
 
 const collectionSigner = generateSigner(umi)
 
-const creator1 = publicKey('11111111111111111111111111111111')
-const creator2 = publicKey('22222222222222222222222222222222')
-
-await createCollectionV1(umi, {
+await createCollection(umi, {
   collection: collectionSigner,
   name: 'My NFT',
   uri: 'https://example.com/my-nft.json',
   plugins: [
-    pluginAuthorityPair({
+    {
       type: 'MasterEdition',
-      data: {
-        maxSupply: 100,
-        name: 'My Master Edition',
-        uri: 'https://example.com/my-master-edition',
-      },
-    }),
+      maxSupply: 100,
+      name: 'My Master Edition',
+      uri: 'https://example.com/my-master-edition.json',
+    },
   ],
 }).sendAndConfirm(umi)
 ```
@@ -79,7 +70,7 @@ await createCollectionV1(umi, {
 ```rust
 use mpl_core::{
     instructions::CreateCollectionV1Builder,
-    types::{Creator, Plugin, PluginAuthority, PluginAuthorityPair, Royalties, RuleSet},
+    types::{Creator, Plugin, PluginAuthority, PluginAuthorityPair},
 };
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
@@ -91,18 +82,16 @@ pub async fn create_collection_with_plugin() {
     let payer = Keypair::new();
     let collection = Keypair::new();
 
-    let creator = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let create_collection_ix = CreateCollectionV1Builder::new()
         .collection(collection.pubkey())
         .payer(payer.pubkey())
-        .name("My Nft".into())
-        .uri("https://example.com/my-nft.json".into())
+        .name("My Collection".into())
+        .uri("https://example.com/my-collection.json".into())
         .plugins(vec![PluginAuthorityPair {
             plugin: Plugin::MasterEdition(MasterEdition {
                 max_supply: 100,
                 name: "My Master Edition"
-                uri: "https://example.com/my-master-edition",
+                uri: "https://example.com/my-master-edition.json",
             }),
             authority: Some(PluginAuthority::UpdateAuthority),
         }])
@@ -145,14 +134,14 @@ import { updatePluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
 
-await updatePluginV1(umi, {
+await updatePlugin(umi, {
   asset: asset,
-  plugin: createPlugin({ type: 'MasterEdition',       
-  data: {
+  plugin: {
+    type: 'MasterEdition',
     maxSupply: 110,
     name: 'My Master Edition',
     uri: 'https://example.com/my-master-edition',
-  },),
+  },
 }).sendAndConfirm(umi)
 ```
 
