@@ -28,13 +28,13 @@ The Burn Plugin doesn't contain any arguments to pass in.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { addPluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
+import { addPlugin } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
 
-await addPluginV1(umi, {
+await addPlugin(umi, {
   asset: asset,
-  plugin: createPlugin({ type: 'BurnDelegate' }),
+  plugin: { type: 'BurnDelegate' },
 }).sendAndConfirm(umi)
 ```
 

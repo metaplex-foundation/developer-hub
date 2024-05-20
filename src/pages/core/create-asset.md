@@ -97,14 +97,14 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { createV1 } from '@metaplex-foundation/mpl-core'
+import { create } from '@metaplex-foundation/mpl-core'
 
-const asset = generateSigner(umi)
+const assetSigner = generateSigner(umi)
 
-const result = createV1(umi, {
-  asset: asset,
-  name: 'My Nft',
-  uri: 'https://example.com/my-nft',
+const result = await create(umi, {
+  asset: assetSigner,
+  name: 'My Asset',
+  uri: 'https://example.com/my-asset.json',
 }).sendAndConfirm(umi)
 ```
 
@@ -230,22 +230,23 @@ MPL Core Assets can be created straight into a collection if your MPL Core Colle
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { createCollectionV1, createV1 } from '@metaplex-foundation/mpl-core'
+import { createCollection, create } from '@metaplex-foundation/mpl-core'
 
-const collection = generateSigner(umi)
+const collectionSigner = generateSigner(umi)
 
-await createCollectionV1(umi, {
-  collection: collection,
-  name: 'My NFT',
-  uri: 'https://example.com/my-nft.json',
+await createCollection(umi, {
+  collection: collectionSigner,
+  name: 'My Collection',
+  uri: 'https://example.com/my-collection.json',
 }).sendAndConfirm(umi)
 
 const asset = generateSigner(umi)
-const result = createV1(umi, {
-  asset: asset,
-  name: 'My Nft',
-  uri: 'https://example.com/my-nft.json',
-  collection: collection.publicKey,
+
+await create(umi, {
+  asset: assetSigner,
+  collection: collection,
+  name: 'My Asset',
+  uri: 'https://example.com/my-asset.json',
 }).sendAndConfirm(umi)
 ```
 
@@ -346,39 +347,35 @@ MPL Core Assets support the use of plugins at both the Collection and Asset leve
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { createV1, createPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
+import { create, ruleSet } from '@metaplex-foundation/mpl-core'
 
 const creator1 = publicKey('11111111111111111111111111111111')
 const creator2 = publicKey('22222222222222222222222222222222')
 
-const asset = generateSigner(umi)
+const assetSigner = generateSigner(umi)
 
-await createV1(umi, {
-  asset: assetSigner,
-  name: 'My NFT',
-  uri: 'https://example.com/my-nft.json',
-  plugins: [
-    {
-      plugin: createPlugin({
-        type: 'Royalties',
-        data: {
-          basisPoints: 500,
-          creators: [
-            {
-              address: creator1,
-              percentage: 20,
-            },
-            {
-              address: creator2,
-              percentage: 80,
-            },
-          ],
-          ruleSet: ruleSet('None'), // Compatibility rule set
-        },
-      }),
-    },
-  ],
-}).sendAndConfirm(umi)
+await create(umi, {
+    asset: assetSigner,
+    name: "My Asset",
+    uri: "https://example.com/my-asset.json",
+    plugins: [
+      {
+        type: "Royalties",
+        basisPoints: 500,
+        creators: [
+          {
+            address: creator1,
+            percentage: 20,
+          },
+          {
+            address: creator2,
+            percentage: 80,
+          },
+        ],
+        ruleSet: ruleSet("None"), // Compatibility rule set
+      },
+    ],
+  }).sendAndConfirm(umi)
 ```
 
 {% /dialect %}

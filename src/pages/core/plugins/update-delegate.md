@@ -29,20 +29,20 @@ The Update Delegate Plugin doesn't contain any arguments to pass in.
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import {
-  addPluginV1,
-  createPlugin,
-  pluginAuthority,
-  addressPluginAuthority,
+  addPlugin,
 } from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
+const assetAddress = publicKey('11111111111111111111111111111111')
 const delegate = publicKey('22222222222222222222222222222222')
 
-await addPluginV1(umi, {
-  asset: asset,
-  plugin: createPlugin({ type: 'UpdateDelegate' }),
-  initAuthority: addressPluginAuthority(delegate),
-}).sendAndConfirm(umi)
+await addPlugin(umi, {
+    asset: assetAddress,
+    plugin: {
+      type: 'UpdateDelegate',
+      authority: { type: 'Address', address: delegate },
+      additionalDelegates: [],
+    },
+  }).sendAndConfirm(umi);
 ```
 
 {% /dialect %}

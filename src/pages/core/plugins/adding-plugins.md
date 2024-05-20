@@ -29,11 +29,16 @@ If you add a plugin to an Asset or Collection without specifying the authority o
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { addPluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
+import { addPlugin } from '@metaplex-foundation/mpl-core'
 
-await addPluginV1(umi, {
-  asset: asset.publicKey,
-  plugin: createPlugin({ type: 'FreezeDelegate' }),
+const assetId = publicKey('11111111111111111111111111111111')
+
+await addPlugin(umi, {
+  asset: assetId,
+  plugin: {
+    type: 'Attributes',
+    attributeList: [{ key: 'key', value: 'value' }],
+  },
 }).sendAndConfirm(umi)
 ```
 
@@ -88,36 +93,69 @@ pub async fn add_plugin() {
 
 There are a few authority helpers to aid you in setting the authorities of plugins.
 
-**addressPluginAuthority()**
+**Address**
 
 ```js
-addressPluginAuthority(publicKey)
+await addPlugin(umi, {
+    ...
+    plugin: {
+      ...
+      authority: {
+        type: 'Address',
+        address: publicKey('22222222222222222222222222222222'),
+      },
+    },
+  }).sendAndConfirm(umi);
 ```
 
 This sets the plugin's authority to a specific address.
 
-**ownerPluginAuthority()**
+**Owner**
 
 ```js
-ownerPluginAuthority()
+await addPlugin(umi, {
+    ...
+    plugin: {
+      ...
+      authority: {
+        type: 'Owner'
+      },
+    },
+  }).sendAndConfirm(umi);
 ```
 
 This sets the plugin's authority to the type of `Owner`.
 The current owner of the Asset will have access to this plugin.
 
-**updatePluginAuthority()**
+**UpdateAuthority**
 
 ```js
-updatePluginAuthority()
+await addPlugin(umi, {
+    ...
+    plugin: {
+      ...
+      authority: {
+        type: "UpdateAuthority",
+      },
+    },
+  }).sendAndConfirm(umi);
 ```
 
 This sets the plugin's authority to the type of `UpdateAuthority`.
 The current update authority of the Asset will have access to this plugin.
 
-**nonePluginAuthority()**
+**None**
 
 ```js
-nonePluginAuthority()
+await addPlugin(umi, {
+    ...
+    plugin: {
+      ...
+      authority: {
+        type: "None",
+      },
+    },
+  }).sendAndConfirm(umi);
 ```
 
 This sets the plugin's authority to the type of `None`.
@@ -179,19 +217,23 @@ pub async fn add_plugin_with_authority() {
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import {
-  addPluginV1,
-  createPlugin,
-  pluginAuthority,
-  addressPluginAuthority,
+  addPlugin,
 } from '@metaplex-foundation/mpl-core'
 
+const asset = publicKey("11111111111111111111111111111111")
 const delegate = publicKey('222222222222222222222222222222')
 
-await addPluginV1(umi, {
-  asset: asset.publicKey,
-  plugin: createPlugin({ type: 'FreezeDelegate', data: { frozen: true } }),
-  initAuthority: addressPluginAuthority(delegate),
-}).sendAndConfirm(umi)
+await addPlugin(umi, {
+    asset: asset.publicKey,
+    plugin: {
+      type: 'Attributes',
+      attributeList: [{ key: 'key', value: 'value' }],
+      authority: {
+        type: 'Address',
+        address: delegate,
+      },
+    },
+  }).sendAndConfirm(umi);
 ```
 
 {% /dialect %}
@@ -208,19 +250,15 @@ Adding a Plugin to a Core Collection is similar to that of adding to a Core Asse
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  addCollectionPluginV1,
-  createPlugin,
-  ruleSet,
-} from '@metaplex-foundation/mpl-core'
+import { addCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 
 const collection = publicKey('11111111111111111111111111111111')
 
 const creator = publicKey('22222222222222222222222222222222')
 
-await addCollectionPluginV1(umi, {
+await addCollectionPlugin(umi, {
   collection: collection,
-  plugin: createPlugin({
+  plugin: {
     type: 'Royalties',
     data: {
       basisPoints: 5000,
@@ -232,7 +270,7 @@ await addCollectionPluginV1(umi, {
       ],
       ruleSet: ruleSet('None'),
     },
-  }),
+  },
 }).sendAndConfirm(umi)
 ```
 
@@ -292,33 +330,23 @@ pub async fn add_plugin_to_collection() {
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import {
-  addCollectionPluginV1,
-  createPlugin,
+  addCollectionPlugin,
   ruleSet,
-  pluginAuthority,
-  addressPluginAuthority,
 } from '@metaplex-foundation/mpl-core'
 
 const collection = publicKey('11111111111111111111111111111111')
-
 const delegate = publicKey('22222222222222222222222222222222')
 
-await addCollectionPluginV1(umi, {
-  collection: collection,
-  plugin: createPlugin({
-    type: 'Royalties',
-    data: {
-      basisPoints: 5000,
-      creators: [
-        {
-          address: creator,
-          percentage: 100,
-        },
-      ],
-      ruleSet: ruleSet('None'),
+await addCollectionPlugin(umi, {
+  collection: collection.publicKey,
+  plugin: {
+    type: 'Attributes',
+    attributeList: [{ key: 'key', value: 'value' }],
+    authority: {
+      type: 'Address',
+      address: delegate,
     },
-  }),
-  initAuthority: addressPluginAuthority(delegate),
+  },
 }).sendAndConfirm(umi)
 ```
 

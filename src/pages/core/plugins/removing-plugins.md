@@ -13,13 +13,13 @@ Plugins can also be removed from MPL Core Assets and MPL Core Collections.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { removePluginV1, PluginType } from '@metaplex-foundation/mpl-core'
+import { removePlugin } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
 
-await removePluginV1(umi, {
-  asset: asset,
-  pluginType: PluginType.Royalties,
+await removePlugin(umi, {
+  asset: asset.publicKey,
+  plugin: { type: 'Attributes' },
 }).sendAndConfirm(umi)
 ```
 
@@ -80,11 +80,11 @@ import {
   PluginType,
 } from '@metaplex-foundation/mpl-core'
 
-const collection = publicKey('11111111111111111111111111111111')
+const collectionAddress = publicKey('11111111111111111111111111111111')
 
-await removeCollectionPluginV1(umi, {
-  collection: collection,
-  pluginType: PluginType.Royalties,
+await removeCollectionPlugin(umi, {
+  collection: collectionAddress,
+  pluginType: { type: 'Royalties' },
 }).sendAndConfirm(umi)
 ```
 
