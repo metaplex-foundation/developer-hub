@@ -1,14 +1,14 @@
 ---
-title: "NFT Payment"
-metaTitle: "Core Candy Machine Guards - NFT Payment"
-description: "The NFT Payment guard allows minting by charging the payer an NFT from a specified NFT collection. The NFT will be transferred to a predefined destination."
+title: "Asset Payment"
+metaTitle: "Core Candy Machine Guards - Asset Payment"
+description: "Guard that charges another Core Asset from a specific collection as payment for the mint."
 ---
 
 ## Overview
 
-The **NFT Payment** guard allows minting by charging the payer an NFT from a specified NFT collection. The NFT will be transferred to a predefined destination.
+The **Asset Payment** guard allows minting by charging the payer a Core Asset from a specified Asset collection. The NFT will be transferred to a predefined destination.
 
-If the payer does not own an NFT from the required collection, minting will fail.
+If the payer does not own an Asset from the required collection, minting will fail.
 
 {% diagram  %}
 
@@ -25,7 +25,7 @@ Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
 Owner: Core Candy Guard Program {% .whitespace-nowrap %}
 {% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node label="nftPayment" /%}
+{% node label="assetPayment" /%}
 {% node #guardRequiredCollection label="- Required Collection" /%}
 {% node #guardDestinationWallet label="- Destination Wallet" /%}
 {% node label="..." /%}
@@ -38,7 +38,7 @@ Collection NFT {% .whitespace-nowrap %}
 Mint Account
 {% /node %}
 {% node theme="dimmed" %}
-Owner: Token Metadata Program {% .whitespace-nowrap %}
+Owner: Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% /node %}
 {% edge from="guardRequiredCollection" to="collectionNftMint" /%}
@@ -57,7 +57,7 @@ Owner: System Program {% .whitespace-nowrap %}
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true arrow="none" %}
 Transfers 
 
-1 NFT from
+1 Asset from
 
 this collection
 {% /edge %}
@@ -99,12 +99,12 @@ this collection
 
 ## Guard Settings
 
-The NFT Payment guard contains the following settings:
+The Asset Payment guard contains the following settings:
 
 - **Required Collection**: The mint address of the required NFT Collection. The NFT we use to pay with must be part of this collection.
 - **Destination**: The address of the wallet that will receive all NFTs.
 
-{% dialect-switcher title="Set up a Candy Machine using the NFT Payment Guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Asset Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -120,7 +120,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [NftPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftPayment.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [NftPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPayment.html)
 
 {% /totem %}
 {% /dialect %}
@@ -128,17 +128,14 @@ API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 ## Mint Settings
 
-The NFT Payment guard contains the following Mint Settings:
+The Asset Payment guard contains the following Mint Settings:
+- **Asset Adress**: The address of the Asset to pay with. This must be part of the required collection and must belong to the minter.
+- **Collection Address**: The Address of the Collection that is used for payment.
+- **Destination**: The address of the wallet that will receive all Assets.
 
-- **Destination**: The address of the wallet that will receive all NFTs.
-- **Mint**: The mint address of the NFT to pay with. This must be part of the required collection and must belong to the minter.
-- **Token Standard**: The token standard of the NFT used to pay.
-- **Token Account** (optional): You may optionally provide the token account linking the NFT with its owner explicitly. By default, the associated token account of the payer will be used.
-- **Rule Set** (optional): The Rule Set of the NFT used to pay, if we are paying using a Programmable NFT with a Rule Set.
+Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetpayment) for more details.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftpayment) for more details.
-
-{% dialect-switcher title="Set up a Candy Machine using the NFT Payment Guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Asset Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -159,7 +156,7 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [NftPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftPaymentMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [NftPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
