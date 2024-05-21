@@ -1,12 +1,12 @@
 ---
-title: Core JS SDK V1
-metaTitle: Core JS SDK V1
-description: Whats new in the Core JS SDK V1?
+title: Core JS SDK v1.0
+metaTitle: Core JS SDK v1.0
+description: Whats new in the Core JS SDK v1.0?
 ---
 
 ## The V1 Milestone!
 
-Launching the **Core JS SDK V1** welcomes new improvements to both naming and functionality for devs and end users working with the JS Mpl Core package.
+Launching the **Core JS SDK v1.0** welcomes new improvements to both naming and functionality for devs and end users working with the JS Mpl Core package.
 
 ## Major Changes
 
@@ -33,7 +33,7 @@ await createV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-**JS SDK V1**
+**JS SDK v1.0**
 
 ```ts
 await create(umi, {
@@ -60,7 +60,7 @@ await addPluginV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-**JS SDK V1**
+**JS SDK v1.0**
 
 ```ts
 await addPlugin(umi, {
@@ -88,7 +88,7 @@ await updateV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-**JS SDK V1**
+**JS SDK v1.0**
 
 ```ts
 const asset = await fetchAssetV1(umi, asset)
@@ -108,7 +108,7 @@ Support for the Oracle External Plugin is live.
 
 ## New Improved Helpers
 
-The **Core JS SDK V1** comes with new and improved helper methods that strip away some of the complexity when dealing with Core Assets/Collections and their data.
+The **Core JS SDK v1.0** comes with new and improved helper methods that strip away some of the complexity when dealing with Core Assets/Collections and their data.
 
 ### Fetch Helpers
 
