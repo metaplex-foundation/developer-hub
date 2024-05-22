@@ -162,7 +162,7 @@ The Authority helpers allow you to pass in a `publicKey` to check with that the 
 
 #### hasPluginAddressAuthority()
 
-The `hasPluginAddressAuthority()` returns a `boolean` value based on wether the plugin passed in its authority set to an `Address` type and the `pubkey` matches.
+The `hasPluginAddressAuthority()` returns a `boolean` value based on whether the plugin passed in its authority set to an `Address` type and the `pubkey` matches.
 
 ```ts
 export function hasPluginAddressAuthority(
@@ -173,7 +173,7 @@ export function hasPluginAddressAuthority(
 
 #### hasPluginOwnerAuthority()
 
-The `hasPluginOwnerAuthority()` returns a `boolean` value based on wether the plugin passed in its authority set to an `Owner` type and the `pubkey` matches.
+The `hasPluginOwnerAuthority()` returns a `boolean` value based on whether the plugin passed in its authority set to an `Owner` type and the `pubkey` matches.
 
 ```ts
 export function hasPluginOwnerAuthority(
@@ -185,7 +185,7 @@ export function hasPluginOwnerAuthority(
 
 #### hasPluginUpdateAuthority()
 
-The `hasPluginUpdateAuthority()` returns a `boolean` value based on wether the plugin passed in its authority set to an `UpdateAuthority` type and the `pubkey` matches.
+The `hasPluginUpdateAuthority()` returns a `boolean` value based on whether the plugin passed in its authority set to an `UpdateAuthority` type and the `pubkey` matches.
 
 ```ts
 export function hasPluginUpdateAuthority(
@@ -198,7 +198,7 @@ export function hasPluginUpdateAuthority(
 
 #### hasAssetUpdateAuthority()
 
-The `hasAssetUpdateAuthority()` returns a `boolean` value based on wether the passed in `pubkey` holds update authority over the Asset.
+The `hasAssetUpdateAuthority()` returns a `boolean` value based on whether the passed in `pubkey` holds update authority over the Asset.
 
 ```ts
 export function hasAssetUpdateAuthority(
@@ -210,7 +210,7 @@ export function hasAssetUpdateAuthority(
 
 #### hasCollectionUpdateAuthority()
 
-The `hasCollectionUpdateAuthority()` returns a `boolean` value based on wether the passed in `pubkey` holds update authority over the Collection.
+The `hasCollectionUpdateAuthority()` returns a `boolean` value based on whether the passed in `pubkey` holds update authority over the Collection.
 
 ```ts
 export function hasCollectionUpdateAuthority(
