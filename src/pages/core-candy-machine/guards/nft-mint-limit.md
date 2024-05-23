@@ -125,7 +125,7 @@ You may pass the Mint Settings of the Mint Limit guard using the `mintArgs` argu
 mintV1(umi, {
   // ...
   mintArgs: {
-    nftMintLimit: some({ id: 1, mint: nftToBurn.publicKey }),
+    nftMintLimit: some({ id: 1, mint: nftToVerify.publicKey }),
   },
 });
 ```
