@@ -88,7 +88,9 @@ export const core = {
               href: '/core/plugins/update-delegate',
             },
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
+            { title: 'AddBlocker Plugin', href: '/core/plugins/addBlocker' },
             { title: 'Edition Plugin', href: '/core/plugins/edition' },
+            { title: 'Immutable Metadata Plugin', href: '/core/plugins/immutableMetadata' },
             {
               title: 'Master Edition Plugin',
               href: '/core/plugins/master-edition',
