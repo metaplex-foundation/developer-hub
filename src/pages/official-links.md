@@ -74,11 +74,3 @@ To be used with the pNfts Auth Rules.
 | ---------------------------- | -------------------------------------------- |
 | Metaplex Foundation Rule Set | eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9  |
 | Compatability Rule Set       | AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5 |
-
-<!-- ## Team Members
-
-TonyBoyle.sol - tonyboyle - 612983988646313984
-MarkSackerberg - marksackerberg - 331688811186618370
-StephenHess - StephenHess#3571 - 735124917498151022
-Blockiosaurus - gumbercules - 339220158331748352
-Urbentom - urbentom - 354305194982506499 -->
