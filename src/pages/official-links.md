@@ -51,6 +51,7 @@ description: Offical Links for Metaplex
 | Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d | [Link](https://github.com/metaplex-foundation/mpl-core)                                                     |
 | Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard)        |
 | Core Candy Machine | CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-machine-core) |
+| Gumdrop          | gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a      | [Link](https://github.com/metaplex-foundation/gumdrop)
 | Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              |
 | Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  | [Link](https://github.com/metaplex-foundation/mpl-hydra)                                                    |
 | Token Auth Rules   | auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg  | [Link](https://github.com/metaplex-foundation/mpl-token-auth-rules)                                         |
