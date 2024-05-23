@@ -6,7 +6,7 @@ description: "Guard that charges another Core Asset from a specific collection a
 
 ## Overview
 
-The **Asset Payment** guard allows minting by charging the payer a Core Asset from a specified Asset collection. The NFT will be transferred to a predefined destination.
+The **Asset Payment** guard allows minting by charging the payer a Core Asset from a specified Asset collection. The Asset will be transferred to a predefined destination.
 
 If the payer does not own an Asset from the required collection, minting will fail.
 
@@ -33,9 +33,7 @@ Owner: Core Candy Guard Program {% .whitespace-nowrap %}
 
 {% node parent="guardRequiredCollection" #collectionNftMint x="270" y="-100"  %}
 {% node theme="blue" %}
-Collection NFT {% .whitespace-nowrap %}
-
-Mint Account
+Collection
 {% /node %}
 {% node theme="dimmed" %}
 Owner: Core Program {% .whitespace-nowrap %}
@@ -54,13 +52,15 @@ Owner: System Program {% .whitespace-nowrap %}
 {% edge from="guardDestinationWallet" to="destinationWallet" /%}
 
 
-{% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true arrow="none" %}
+{% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true arrow="none" /%}
+
+{% node parent="mint-candy-guard" theme="transparent" x="-180" y="20" %}
 Transfers 
 
 1 Asset from
 
 this collection
-{% /edge %}
+{% /node %}
 
 {% edge from="mint-candy-guard" to="destinationWallet" theme="indigo" %}
 {% /edge %}
@@ -101,8 +101,8 @@ this collection
 
 The Asset Payment guard contains the following settings:
 
-- **Required Collection**: The mint address of the required NFT Collection. The NFT we use to pay with must be part of this collection.
-- **Destination**: The address of the wallet that will receive all NFTs.
+- **Required Collection**: The mint address of the required Collection. The Asset we use to pay with must be part of this collection.
+- **Destination**: The address of the wallet that will receive all Assets.
 
 {% dialect-switcher title="Set up a Candy Machine using the Asset Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -112,15 +112,15 @@ The Asset Payment guard contains the following settings:
 create(umi, {
   // ...
   guards: {
-    nftPayment: some({
-      requiredCollection: requiredCollectionNft.publicKey,
+    assetPayment: some({
+      requiredCollection: requiredCollection.publicKey,
       destination: umi.identity.publicKey,
     }),
   },
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [NftPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPayment.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [AssetPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPayment.html)
 
 {% /totem %}
 {% /dialect %}
@@ -139,24 +139,23 @@ Note that, if you’re planning on constructing instructions without the help of
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the NFT Payment guard using the `mintArgs` argument like so.
+You may pass the Mint Settings of the Asset Payment guard using the `mintArgs` argument like so.
 
 ```ts
-import { TokenStandard } from "@metaplex-foundation/mpl-token-metadata";
 
 mintV1(umi, {
   // ...
   mintArgs: {
-    nftPayment: some({
+    assetPayment: some({
+      requiredCollection: publicKey(requiredCollection),
       destination,
-      mint: nftToPayWith.publicKey,
-      tokenStandard: TokenStandard.NonFungible,
+      asset: assetToSend.publicKey,
     }),
   },
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [NftPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPaymentMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [AssetPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
@@ -164,4 +163,4 @@ API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 ## Route Instruction
 
-_The NFT Payment guard does not support the route instruction._
+_The Asset Payment guard does not support the route instruction._
