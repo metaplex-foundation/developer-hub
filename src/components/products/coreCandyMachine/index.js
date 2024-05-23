@@ -81,6 +81,10 @@ export const coreCandyMachine = {
             { title: 'Allocation', href: '/core-candy-machine/guards/allocation' },
             { title: 'Allow List', href: '/core-candy-machine/guards/allow-list' },
             {
+              title: 'Asset Burn',
+              href: '/core-candy-machine/guards/asset-burn',
+            },
+            {
               title: 'Asset Payment',
               href: '/core-candy-machine/guards/asset-payment',
             },
