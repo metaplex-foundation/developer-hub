@@ -44,7 +44,7 @@ description: Offical Links for Metaplex
 
 | Name               | Program ID                                   | Github                                                                                                      |
 | ------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Auction House      | ausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk   | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house)           |
+| Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk   | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house)           |
 | Auctioneer         | neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh  | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auctioneer)              |
 | Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)             |
 | Candy Machine v3   | CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core)      |
