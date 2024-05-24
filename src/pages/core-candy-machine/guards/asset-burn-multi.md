@@ -1,14 +1,14 @@
 ---
-title: "Asset Burn"
-metaTitle: "Core Candy Machine Guards - Asset Burn"
-description: "The Asset Burn guard restricts the mint to holders of a predefined Collection and burns the holder's Asset."
+title: "Asset Burn Multi"
+metaTitle: "Core Candy Machine Guards - Asset Burn Multi"
+description: "The Asset Burn Multi guard restricts the mint to holders of a predefined Collection and burns the holder's Asset(s)."
 ---
 
 ## Overview
 
-The **Asset Burn** guard restricts the mint to holders of a predefined Collection and burns the holder's Asset. Thus, the address of the Asset to burn must be provided by the payer when minting.
+The **Asset Burn Multi** guard restricts the mint to holders of a predefined Collection and burns the holder's Asset(s). Thus, the address of the Asset(s) to burn must be provided by the payer when minting.
 
-To have the minter burn more than one Asset the [Asset Burn Multi Guard](/core/guards/asset-burn-multi) can be used.
+It is similar to the [Asset Burn Guard](/core/guards/asset-burn) but can accept more than one asset to burn.
 
 {% diagram  %}
 
@@ -25,8 +25,9 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 Owner: Candy Guard Program {% .whitespace-nowrap %}
 {% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #nftBurn label="nftBurn" /%}
+{% node #nftBurn label="nftBurnMulti" /%}
 {% node #requiredCollection label="- Required Collection" /%}
+{% node label="- Number" /%}
 {% node label="..." /%}
 {% /node %}
 
@@ -42,7 +43,7 @@ Owner: Core Program {% .whitespace-nowrap %}
 
 
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
-Burn 1 Asset 
+Burn n Asset(s) 
 
 from this collection
 {% /edge %}
@@ -83,9 +84,10 @@ from this collection
 
 The Asset Burn guard contains the following settings:
 
-- **Required Collection**: The address of the required Collection. The Asset we use to mint with must be part of this collection.
+- **Required Collection**: The Address of the required Collection. The Asset we use to mint with must be part of this collection.
+- **Number**: The Amount of Assets that have to be burned in exchange for the new Asset.
 
-{% dialect-switcher title="Set up a Candy Machine using the Asset Burn guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Asset Burn Multi guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -93,12 +95,15 @@ The Asset Burn guard contains the following settings:
 create(umi, {
   // ...
   guards: {
-    assetBurn: some({ requiredCollection: requiredCollection.publicKey }),
+    assetBurnMulti: some({
+      requiredCollection: requiredCollection.publicKey,
+      num: 2,
+    }),
   },
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [AssetBurn](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetBurn.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [AssetBurnMulti](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetBurnMulti.html)
 
 {% /totem %}
 {% /dialect %}
@@ -106,33 +111,33 @@ API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 ## Mint Settings
 
-The Asset Burn guard contains the following Mint Settings:
+The Asset Burn Multi guard contains the following Mint Settings:
 
 - **Required Collection**: The mint address of the required Collection.
-- **Address**: The address of the Asset to burn. This must be part of the required collection and must belong to the minter.
+- **[Address]**: An Array of Addresses of the Asset(s) to burn. These must be part of the required collection and must belong to the minter.
 
 Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#asseturn) for more details.
 
-{% dialect-switcher title="Mint with the Asset Burn Guard" %}
+{% dialect-switcher title="Mint with the Asset Burn Multi Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the Asset Burn guard using the `mintArgs` argument like so.
+You may pass the Mint Settings of the Asset Burn Multi guard using the `mintArgs` argument like so.
 
 ```ts
 
 mintV1(umi, {
   // ...
   mintArgs: {
-    assetBurn: some({
+    assetBurnMulti: some({
       requiredCollection: requiredCollection.publicKey,
-      asset: assetToBurn.publicKey,
+      assets: [assetToBurn1.publicKey, assetToBurn2.publicKey],
     }),
   },
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [AssetBurnMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetBurnMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [AssetBurnMultiMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetBurnMultiMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
@@ -140,4 +145,4 @@ API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 ## Route Instruction
 
-_The Asset Burn guard does not support the route instruction._
+_The Asset Burn Multi guard does not support the route instruction._

@@ -1,16 +1,16 @@
 ---
-title: "Asset Payment"
-metaTitle: "Core Candy Machine Guards - Asset Payment"
-description: "Guard that charges another Core Asset from a specific collection as payment for the mint."
+title: "Asset Payment Multi"
+metaTitle: "Core Candy Machine Guards - Asset Payment Multi"
+description: "Guard that charges other Core Asset(s) from a specific collection as payment for the mint."
 ---
 
 ## Overview
 
-The **Asset Payment** guard allows minting by charging the payer a Core Asset from a specified Asset collection. The Asset will be transferred to a predefined destination.
+The **Asset Payment Multi** guard allows minting by charging the payer one or more Core Asset(s) from a specified Asset collection. The Asset(s) will be transferred to a predefined destination.
 
 If the payer does not own an Asset from the required collection, minting will fail.
 
-To have the minter pay more than one Asset the [Asset Payment Multi Guard](/core/guards/asset-payment-multi) can be used.
+The guard is similar to the [Asset Payment Guard](/core/guards/asset-payment) but can accept more than one asset to pay with.
 
 {% diagram  %}
 
@@ -30,6 +30,7 @@ Owner: Core Candy Guard Program {% .whitespace-nowrap %}
 {% node label="assetPayment" /%}
 {% node #guardRequiredCollection label="- Required Collection" /%}
 {% node #guardDestinationWallet label="- Destination Wallet" /%}
+{% node label="- Number" /%}
 {% node label="..." /%}
 {% /node %}
 
@@ -59,7 +60,7 @@ Owner: System Program {% .whitespace-nowrap %}
 {% node parent="mint-candy-guard" theme="transparent" x="-180" y="20" %}
 Transfers 
 
-1 Asset from
+n Asset(s) from
 
 this collection
 {% /node %}
@@ -105,8 +106,9 @@ The Asset Payment guard contains the following settings:
 
 - **Required Collection**: The mint address of the required Collection. The Asset we use to pay with must be part of this collection.
 - **Destination**: The address of the wallet that will receive all Assets.
+- **Number**: The amount of assets that have to be paid.
 
-{% dialect-switcher title="Set up a Candy Machine using the Asset Payment Guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Asset Payment Multi Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -114,15 +116,16 @@ The Asset Payment guard contains the following settings:
 create(umi, {
   // ...
   guards: {
-    assetPayment: some({
+    assetPaymentMulti: some({
       requiredCollection: requiredCollection.publicKey,
       destination: umi.identity.publicKey,
+      num: 2
     }),
   },
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [AssetPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPayment.html)
+API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [AssetPaymentMulti](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPaymentMulti.html)
 
 {% /totem %}
 {% /dialect %}
@@ -131,13 +134,13 @@ API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 ## Mint Settings
 
 The Asset Payment guard contains the following Mint Settings:
-- **Asset Adress**: The address of the Asset to pay with. This must be part of the required collection and must belong to the minter.
+- **[Asset Adress]**: An array of the Assets to pay with. These must be part of the required collection and must belong to the minter.
 - **Collection Address**: The Address of the Collection that is used for payment.
 - **Destination**: The address of the wallet that will receive all Assets.
 
 Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetpayment) for more details.
 
-{% dialect-switcher title="Set up a Candy Machine using the Asset Payment Guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Asset Payment Multi Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -148,16 +151,17 @@ You may pass the Mint Settings of the Asset Payment guard using the `mintArgs` a
 mintV1(umi, {
   // ...
   mintArgs: {
-    assetPayment: some({
+    assetPaymentMulti: some({
       requiredCollection: publicKey(requiredCollection),
       destination,
       asset: assetToSend.publicKey,
+      num: 2
     }),
   },
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [AssetPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPaymentMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [AssetPaymentMultiMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPaymentMultiMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
@@ -165,4 +169,4 @@ API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/funct
 
 ## Route Instruction
 
-_The Asset Payment guard does not support the route instruction._
+_The Asset Payment Multi guard does not support the route instruction._

@@ -85,8 +85,16 @@ export const coreCandyMachine = {
               href: '/core-candy-machine/guards/asset-burn',
             },
             {
+              title: 'Asset Burn Multi',
+              href: '/core-candy-machine/guards/asset-burn-multi',
+            },
+            {
               title: 'Asset Payment',
               href: '/core-candy-machine/guards/asset-payment',
+            },
+            {
+              title: 'Asset Payment Multi',
+              href: '/core-candy-machine/guards/asset-payment-multi',
             },
             { title: 'Bot Tax', href: '/core-candy-machine/guards/bot-tax' },
             { title: 'End Date', href: '/core-candy-machine/guards/end-date' },
