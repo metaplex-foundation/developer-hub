@@ -20,39 +20,39 @@ Metaplex also offers a free, open-source UI for creating, transferring and viewi
 
 ## Wallets
 
-| Project  | Status       | ETA                |     |
-| -------- | ------------ | ------------------ | --- |
-| Backpack | Intergrating | TBC                |     |
-| Phantom  | Integrating  | End of June        |     |
-| Solflare | Complete     | April 1 (complete) | ✅  |
+| Project                           | Status       | ETA                |     |
+| --------------------------------- | ------------ | ------------------ | --- |
+| [Backpack](https://backpack.app/) | Intergrating | TBC                |     |
+| [Phantom](https://phantom.app/)   | Integrating  | End of June        |     |
+| [Solflare](https://solflare.com/) | Complete     | April 1 (complete) | ✅  |
 
 ## Explorers
 
-| Project  | Status   | ETA                 |     |
-| -------- | -------- | ------------------- | --- |
-| SolanaFM | Complete | April 23 (complete) | ✅  |
-| Solscan  | Complete | April 19 (complete) | ✅  |
+| Project                        | Status   | ETA                 |     |
+| ------------------------------ | -------- | ------------------- | --- |
+| [SolanaFM](https://solana.fm/) | Complete | April 23 (complete) | ✅  |
+| [Solscan](https://solscan.io/) | Complete | April 19 (complete) | ✅  |
 
 ## RPC (DAS)
 
-| Project   | Status   | ETA                 |     |
-| --------- | -------- | ------------------- | --- |
-| ExtrNode  | Complete | April 1 (complete)  | ✅  |
-| Helius    | Complete | April 9 (complete)  | ✅  |
-| Quicknode | Complete | April 15 (complete) | ✅  |
-| Shyft     | Complete | April 22 (complete) | ✅  |
-| Triton    | Complete | April 1 (complete)  | ✅  |
+| Project                                 | Status   | ETA                 |     |
+| --------------------------------------- | -------- | ------------------- | --- |
+| [ExtrNode](https://extrnode.com/)       | Complete | April 1 (complete)  | ✅  |
+| [Helius](https://www.helius.dev/)       | Complete | April 9 (complete)  | ✅  |
+| [Quicknode](https://www.quicknode.com/) | Complete | April 15 (complete) | ✅  |
+| [Shyft](https://shyft.to/)              | Complete | April 22 (complete) | ✅  |
+| [Triton](https://triton.one/)           | Complete | April 1 (complete)  | ✅  |
 
 ## No Code Tooling
 
-| Project  | Status   | ETA                 |     |
-| -------- | -------- | ------------------- | --- |
-| Truffle  | Complete | April 1 (complete)  | ✅  |
-| Underdog | Complete | April 11 (complete) | ✅  |
+| Project                                       | Status   | ETA                 |     |
+| --------------------------------------------- | -------- | ------------------- | --- |
+| [Truffle](https://truffle.wtf)                | Complete | April 1 (complete)  | ✅  |
+| [Underdog](https://www.underdogprotocol.com/) | Complete | April 11 (complete) | ✅  |
 
 ## Other
 
-| Project | Status   | ETA                 |     |
-| ------- | -------- | ------------------- | --- |
-| dReader | Complete | April 23 (complete) | ✅  |
-| Matrica | Complete | April 23 (complete) | ✅  |
+| Project                        | Status   | ETA                 |     |
+| ------------------------------ | -------- | ------------------- | --- |
+| [dReader](https://dreader.io/) | Complete | April 23 (complete) | ✅  |
+| [Matrica](https://matrica.io/) | Complete | April 23 (complete) | ✅  |
