@@ -43,14 +43,15 @@ Here is how you can use our SDKs to update an MPL Core Asset.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { updateV1 } from '@metaplex-foundation/mpl-core'
+import { update, fetchAsset } from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
+const assetId = publicKey('11111111111111111111111111111111')
+const asset = await fetchAsset(umi, assetId)
 
-await updateV1(umi, {
+await update(umi, {
   asset: asset,
-  newName: 'New Nft Name',
-  newUri: 'https://example.com/new-uri',
+  name: 'New Nft Name',
+  uri: 'https://example.com/new-uri',
 }).sendAndConfirm(umi)
 ```
 
@@ -108,15 +109,14 @@ Here is how you can use our SDKs to update an MPL Core Asset.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { updateV1 } from '@metaplex-foundation/mpl-core'
+import { update, fetchAsset } from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
+const assetId = publicKey('11111111111111111111111111111111')
+const asset = await fetchAsset(umi, asset)
 
-await updateV1(umi, {
+await update(umi, {
   asset: asset,
   newUpdateAuthority: updateAuthority('None'),
-  newName: null,
-  newUri: null,
 }).sendAndConfirm(umi)
 ```
 
