@@ -58,11 +58,11 @@ The following snippet creates a simple collection without Plugins or anything sp
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { createCollectionV1 } from '@metaplex-foundation/mpl-core'
+import { createCollection } from '@metaplex-foundation/mpl-core'
 
 const collectionSigner = generateSigner(umi)
 
-await createCollectionV1(umi, {
+await createCollection(umi, {
   collection: collectionSigner,
   name: 'My Collection',
   uri: 'https://example.com/my-collection.json',
@@ -123,39 +123,33 @@ The following snippet creates a collection with the [Royalties Plugin](/core/plu
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import {
-  createCollectionV1,
-  pluginAuthorityPair,
-  ruleSet,
-} from '@metaplex-foundation/core'
+import { createCollection, ruleSet } from '@metaplex-foundation/core'
 
 const collectionSigner = generateSigner(umi)
 
 const creator1 = publicKey('11111111111111111111111111111111')
 const creator2 = publicKey('22222222222222222222222222222222')
 
-await createCollectionV1(umi, {
+await createCollection(umi, {
   collection: collectionSigner,
   name: 'My NFT',
   uri: 'https://example.com/my-nft.json',
   plugins: [
-    pluginAuthorityPair({
+    {
       type: 'Royalties',
-      data: {
-        basisPoints: 500,
-        creators: [
-          {
-            address: creator1,
-            percentage: 20,
-          },
-          {
-            address: creator2,
-            percentage: 80,
-          },
-        ],
-        ruleSet: ruleSet('None'), // Compatibility rule set
-      },
-    }),
+      basisPoints: 500,
+      creators: [
+        {
+          address: creator1,
+          percentage: 20,
+        },
+        {
+          address: creator2,
+          percentage: 80,
+        },
+      ],
+      ruleSet: ruleSet('None'), // Compatibility rule set
+    },
   ],
 }).sendAndConfirm(umi)
 ```
@@ -233,7 +227,9 @@ To fetch a collection the following function can be used:
 import { fetchCollectionV1 } from '@metaplex-foundation/mpl-core'
 import { publicKey } from '@metaplex-foundation/umi'
 
-const collection = await fetchCollectionV1(umi, publicKey("11111111111111111111111111111111"))
+const collectionId = publicKey('11111111111111111111111111111111')
+
+const collection = await fetchCollection(umi, collectionId)
 
 console.log(collection)
 ```
@@ -302,14 +298,14 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { updateCollectionV1 } from '@metaplex-foundation/mpl-core'
+import { updateCollection } from '@metaplex-foundation/mpl-core'
 
 const collectionAddress = publicKey('1111111111111111111111111111111')
 
-await updateCollectionV1(umi, {
+await updateCollection(umi, {
   collection: collectionAddress,
-  newName: 'my-nft',
-  newUri: 'https://exmaple.com/new-uri',
+  name: 'my-nft',
+  uri: 'https://exmaple.com/new-uri',
 }).sendAndConfirm(umi)
 ```
 
@@ -396,26 +392,20 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  updateCollectionPluginV1,
-  createPlugin,
-  ruleSet,
-} from '@metaplex-foundation/mpl-core'
+import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 
 const collectionAddress = publicKey('1111111111111111111111111111111')
 
 const newCreator = publicKey('5555555555555555555555555555555')
 
-await updateCollectionPluginV1(umi, {
+await updateCollectionPlugin(umi, {
   collection: collectionAddress,
-  plugin: createPlugin({
+  plugin: {
     type: 'Royalties',
-    data: {
-      basisPoints: 400,
-      creators: [{ address: newCreator, percentage: 100 }],
-      ruleSet: ruleSet('None'),
-    },
-  }),
+    basisPoints: 400,
+    creators: [{ address: newCreator, percentage: 100 }],
+    ruleSet: ruleSet('None'),
+  },
 }).sendAndConfirm(umi)
 ```
 
