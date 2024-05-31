@@ -80,6 +80,7 @@ export const coreCandyMachine = {
             },
             { title: 'Allocation', href: '/core-candy-machine/guards/allocation' },
             { title: 'Allow List', href: '/core-candy-machine/guards/allow-list' },
+            { title: 'Asset Mint Limit', href: '/core-candy-machine/guards/asset-mint-limit' },
             { title: 'Bot Tax', href: '/core-candy-machine/guards/bot-tax' },
             { title: 'End Date', href: '/core-candy-machine/guards/end-date' },
             { title: 'Edition', href: '/core-candy-machine/guards/edition' },
