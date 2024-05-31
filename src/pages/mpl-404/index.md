@@ -8,4 +8,6 @@ MPL-404 is a framework and on-chain protocol for hybrid assets. Hybrid DeFi brin
 
 MPL-404 will be based on the "SPL-404" Program by Mutantlabs which has been contributed to the Metaplex Program Library. It is actively being built right now. 
 
+{% callout type="note" %}
 Interested? Contact us and let us know your Ideas and Plans so that we can make them possible with this new Program!
+{% /callout %}
