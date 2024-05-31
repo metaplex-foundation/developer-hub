@@ -15,6 +15,7 @@ import { coreCandyMachine } from './coreCandyMachine'
 import { legacyDocumentation } from './legacyDocumentation'
 import { sugar } from './sugar'
 
+export const productCategories = ['Create', 'Commerce', 'Utility', 'Dev Tools']
 
 export const products = [
   global,
