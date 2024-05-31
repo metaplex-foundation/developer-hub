@@ -4,6 +4,10 @@ metaTitle: "Core Candy Machine Guards - Asset Burn"
 description: "The Asset Burn guard restricts the mint to holders of a predefined Collection and burns the holder's Asset."
 ---
 
+{% callout type="note" %}
+This Guard is currently only available on devnet. [Follow us](https://x.com/metaplex) on twitter to see when it's merged to mainnet!
+{% /callout %}
+
 ## Overview
 
 The **Asset Burn** guard restricts the mint to holders of a predefined Collection and burns the holder's Asset. Thus, the address of the Asset to burn must be provided by the payer when minting.
