@@ -9,7 +9,7 @@ export function Grid({ onClick, withoutFallback, menuItem, ...props }) {
     (product) => menuItem === product.navigationMenuCatergory
   )
 
-  const className = `relative md:grid-flow-col md:grid-cols-3 md:grid-rows-${Math.ceil(
+  const className = `relative md:grid-flow-row md:grid-cols-3 md:grid-rows-${Math.ceil(
     products.length / 3
   )}`
 
@@ -33,10 +33,7 @@ export function Grid({ onClick, withoutFallback, menuItem, ...props }) {
 export function MarkdocGrid() {
   return (
     <div className="not-prose">
-      <Grid
-        className="relative md:grid-flow-col md:grid-cols-4 md:grid-rows-4"
-        withoutFallback
-      />
+      <Grid withoutFallback />
     </div>
   )
 }
