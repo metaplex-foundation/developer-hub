@@ -1,12 +1,12 @@
 ---
-title: Core JS SDK V1
-metaTitle: Core JS SDK V1
-description: Whats new in the Core JS SDK V1?
+title: Core JS SDK v1.0
+metaTitle: Core JS SDK v1.0
+description: Whats new in the Core JS SDK v1.0?
 ---
 
 ## The V1 Milestone!
 
-Launching the **Core JS SDK V1** welcomes new improvements to both naming and functionality for devs and end users working with the JS Mpl Core package.
+Launching the **Core JS SDK v1.0** welcomes new improvements to both naming and functionality for devs and end users working with the JS Mpl Core package.
 
 ## Major Changes
 
@@ -33,7 +33,7 @@ await createV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-**JS SDK V1**
+**JS SDK v1.0**
 
 ```ts
 await create(umi, {
@@ -60,7 +60,7 @@ await addPluginV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-**JS SDK V1**
+**JS SDK v1.0**
 
 ```ts
 await addPlugin(umi, {
@@ -88,7 +88,7 @@ await updateV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-**JS SDK V1**
+**JS SDK v1.0**
 
 ```ts
 const asset = await fetchAssetV1(umi, asset)
@@ -108,7 +108,7 @@ Support for the Oracle External Plugin is live.
 
 ## New Improved Helpers
 
-The **Core JS SDK V1** comes with new and improved helper methods that strip away some of the complexity when dealing with Core Assets/Collections and their data.
+The **Core JS SDK v1.0** comes with new and improved helper methods that strip away some of the complexity when dealing with Core Assets/Collections and their data.
 
 ### Fetch Helpers
 
@@ -162,7 +162,7 @@ The Authority helpers allow you to pass in a `publicKey` to check with that the 
 
 #### hasPluginAddressAuthority()
 
-The `hasPluginAddressAuthority()` returns a `boolean` value based on wether the plugin passed in its authority set to an `Address` type and the `pubkey` matches.
+The `hasPluginAddressAuthority()` returns a `boolean` value based on whether the plugin passed in its authority set to an `Address` type and the `pubkey` matches.
 
 ```ts
 export function hasPluginAddressAuthority(
@@ -173,7 +173,7 @@ export function hasPluginAddressAuthority(
 
 #### hasPluginOwnerAuthority()
 
-The `hasPluginOwnerAuthority()` returns a `boolean` value based on wether the plugin passed in its authority set to an `Owner` type and the `pubkey` matches.
+The `hasPluginOwnerAuthority()` returns a `boolean` value based on whether the plugin passed in its authority set to an `Owner` type and the `pubkey` matches.
 
 ```ts
 export function hasPluginOwnerAuthority(
@@ -185,7 +185,7 @@ export function hasPluginOwnerAuthority(
 
 #### hasPluginUpdateAuthority()
 
-The `hasPluginUpdateAuthority()` returns a `boolean` value based on wether the plugin passed in its authority set to an `UpdateAuthority` type and the `pubkey` matches.
+The `hasPluginUpdateAuthority()` returns a `boolean` value based on whether the plugin passed in its authority set to an `UpdateAuthority` type and the `pubkey` matches.
 
 ```ts
 export function hasPluginUpdateAuthority(
@@ -198,7 +198,7 @@ export function hasPluginUpdateAuthority(
 
 #### hasAssetUpdateAuthority()
 
-The `hasAssetUpdateAuthority()` returns a `boolean` value based on wether the passed in `pubkey` holds update authority over the Asset.
+The `hasAssetUpdateAuthority()` returns a `boolean` value based on whether the passed in `pubkey` holds update authority over the Asset.
 
 ```ts
 export function hasAssetUpdateAuthority(
@@ -210,7 +210,7 @@ export function hasAssetUpdateAuthority(
 
 #### hasCollectionUpdateAuthority()
 
-The `hasCollectionUpdateAuthority()` returns a `boolean` value based on wether the passed in `pubkey` holds update authority over the Collection.
+The `hasCollectionUpdateAuthority()` returns a `boolean` value based on whether the passed in `pubkey` holds update authority over the Collection.
 
 ```ts
 export function hasCollectionUpdateAuthority(

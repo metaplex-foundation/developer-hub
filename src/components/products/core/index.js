@@ -24,7 +24,7 @@ export const core = {
       navigation: [
         {
           title: 'New!',
-          links: [{ title: 'JS SDK V1', href: '/core/core-js-sdk-v1' }],
+          links: [{ title: 'JS SDK V1.0', href: '/core/core-js-sdk-v1-0' }],
         },
         {
           title: 'Introduction',
@@ -39,6 +39,7 @@ export const core = {
               title: 'Token Metadata Differences',
               href: '/core/tm-differences',
             },
+            { title: 'Ecosystem Support', href: '/core/ecosystem-support' },
             { title: 'FAQ', href: '/core/faq' },
           ],
         },
@@ -88,7 +89,9 @@ export const core = {
               href: '/core/plugins/update-delegate',
             },
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
+            { title: 'AddBlocker Plugin', href: '/core/plugins/addBlocker' },
             { title: 'Edition Plugin', href: '/core/plugins/edition' },
+            { title: 'Immutable Metadata Plugin', href: '/core/plugins/immutableMetadata' },
             {
               title: 'Master Edition Plugin',
               href: '/core/plugins/master-edition',

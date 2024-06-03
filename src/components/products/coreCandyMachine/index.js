@@ -96,6 +96,7 @@ export const coreCandyMachine = {
               title: 'Asset Payment Multi',
               href: '/core-candy-machine/guards/asset-payment-multi',
             },
+            { title: 'Asset Mint Limit', href: '/core-candy-machine/guards/asset-mint-limit' },
             { title: 'Bot Tax', href: '/core-candy-machine/guards/bot-tax' },
             { title: 'End Date', href: '/core-candy-machine/guards/end-date' },
             { title: 'Edition', href: '/core-candy-machine/guards/edition' },
