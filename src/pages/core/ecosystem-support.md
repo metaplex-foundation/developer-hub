@@ -16,7 +16,7 @@ Metaplex also offers a free, open-source UI for creating, transferring and viewi
 | [Magic Eden](https://magiceden.io/solana) | Complete    | -                   |     |
 | [Sniper](https://www.sniper.xyz/)         | Complete    | -                   |     |
 | [OKX](https://www.okx.com/)               | Complete    | -                   |     |
-| [Mallow](https://www.mallow.art/)         | Integrating | TBC                 |     |
+| [Mallow](https://www.mallow.art/)         | Complete | -                 |     |
 
 ## Wallets
 
