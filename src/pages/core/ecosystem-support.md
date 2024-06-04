@@ -13,10 +13,10 @@ Metaplex also offers a free, open-source UI for creating, transferring and viewi
 | Project                                   | Status      | ETA                 |     |
 | ----------------------------------------- | ----------- | ------------------- | --- |
 | [Tensor](https://www.tensor.trade/)       | Complete    | -                   |     |
+| [Magic Eden](https://magiceden.io/solana) | Complete    | -                   |     |
 | [Sniper](https://www.sniper.xyz/)         | Complete    | -                   |     |
 | [OKX](https://www.okx.com/)               | Complete    | -                   |     |
 | [Mallow](https://www.mallow.art/)         | Integrating | TBC                 |     |
-| [Magic Eden](https://magiceden.io/solana) | Complete    | -                   |     |
 
 ## Wallets
 
