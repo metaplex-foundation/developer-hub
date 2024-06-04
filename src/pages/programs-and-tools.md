@@ -1,7 +1,7 @@
 ---
-title: Metaplex products
-metaTitle: Metaplex products
-description: An overview of all Metaplex products.
+title: Metaplex Programs and Tools
+metaTitle: Metaplex Programs and Tools
+description: An overview of all Metaplex Programs and Tools.
 ---
 
 {% all-product-grid /%}

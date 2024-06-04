@@ -21,29 +21,29 @@ export function MobileAppGrid({
       <li key={hub.path}>
         <Link
           href={`/${hub.path}`}
-          className="block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700 sticky"
+          className="sticky block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
           onClick={onClick}
         >
           <LogoWithName product={hub}></LogoWithName>
         </Link>
         <hr />
       </li>
-      
-    <div className='overflow-y-auto'>
-      {products
-        .filter((product) => product.name != 'Metaplex')
-        .map((product) => (
-          <li key={product.path}>
-            <Link
-              href={`/${product.path}`}
-              className="block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
-              onClick={onClick}
-            >
-              <LogoWithName product={product}></LogoWithName>
-            </Link>
-          </li>
-        ))}
-        </div>
+
+      <div className="overflow-y-auto">
+        {products
+          .filter((product) => product.name != 'Metaplex')
+          .map((product) => (
+            <li key={product.path}>
+              <Link
+                href={`/${product.path}`}
+                className="block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
+                onClick={onClick}
+              >
+                <LogoWithName product={product}></LogoWithName>
+              </Link>
+            </li>
+          ))}
+      </div>
     </ul>
   )
 }
@@ -51,10 +51,7 @@ export function MobileAppGrid({
 export function MarkdocGrid() {
   return (
     <div className="not-prose">
-      <Grid
-        className="relative md:grid-flow-col md:grid-cols-4 md:grid-rows-4"
-        withoutFallback
-      />
+      <Grid withoutFallback />
     </div>
   )
 }
