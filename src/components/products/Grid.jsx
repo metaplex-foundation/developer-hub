@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { LogoWithName } from './Logo'
 import { products as allProducts } from './index'
 import Link from 'next/link'
@@ -7,7 +6,7 @@ export function Grid({
   onClick,
   withoutFallback,
   menuItem,
-  numCols = 3,
+  numCols = 'grid-cols-3',
   ...props
 }) {
   console.log('menuItem', menuItem)
@@ -15,9 +14,7 @@ export function Grid({
     (product) => menuItem === product.navigationMenuCatergory
   )
 
-  const className = `relative grid-flow-row grid-cols-${numCols} grid-rows-${Math.ceil(
-    products.length / numCols
-  )}`
+  let className = `relative grid ${numCols} gap-3`
   console.log(className)
 
   return (
@@ -26,7 +23,7 @@ export function Grid({
         <li key={product.path}>
           <Link
             href={`/${product.path}`}
-            className="block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
+            className="block content-start rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
             onClick={onClick}
           >
             <LogoWithName product={product}></LogoWithName>

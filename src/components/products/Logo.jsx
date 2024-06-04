@@ -1,6 +1,6 @@
 export function LogoWithName({ product, ...props }) {
   return (
-    <div className="flex items-center" {...props}>
+    <div className="flex" {...props}>
       <Logo product={product} className="h-8 w-8 shrink-0" />
       <div className="ml-4 flex flex-1 flex-col justify-center text-left">
         <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
