@@ -11,5 +11,5 @@ The ability to freely move between fungible and non-fungible assets in a predict
 MPL-404 also includes the option to "re-roll" the asset each time its swapped. For example, every non-fungible asset can have its metadata blanked as it enters the escrow wallet and randomly reassigned (rerolled) as it leaves escrow. The creator has the ability to both manage available traits as well as to charge a small fee during the swap (typically when swapping into an NFT). MPL-404 can add inherit “loot box” gamification to every 404 project and can serve as an alternative source of revenue (e.g. unique limited time traits for an NFT community or randomized in-game rewards). It also offers the ability to craft more dynamic collections that can evolve to better suit the needs of the project and community over time.
 
 {% callout type="note" %}
-MPL-404 is currently in alpha with fully self-serve docs and SDKs coming soon. Interested in using MPL-404 for your project or learning more? Contact us in discord [add link] and tell us more about what you're working on.
+MPL-404 is currently in alpha with fully self-serve docs and SDKs coming soon. Interested in using MPL-404 for your project or learning more? Contact us in [Discord](https://discord.gg/metaplex) and tell us more about what you're working on.
 {% /callout %}
