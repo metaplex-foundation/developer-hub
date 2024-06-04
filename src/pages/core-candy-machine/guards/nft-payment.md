@@ -25,7 +25,7 @@ Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
 Owner: Core Candy Guard Program {% .whitespace-nowrap %}
 {% /node %}
 {% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node label="nftGate" /%}
+{% node label="nftPayment" /%}
 {% node #guardRequiredCollection label="- Required Collection" /%}
 {% node #guardDestinationWallet label="- Destination Wallet" /%}
 {% node label="..." /%}

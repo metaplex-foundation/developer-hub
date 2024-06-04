@@ -80,6 +80,22 @@ export const coreCandyMachine = {
             },
             { title: 'Allocation', href: '/core-candy-machine/guards/allocation' },
             { title: 'Allow List', href: '/core-candy-machine/guards/allow-list' },
+            {
+              title: 'Asset Burn',
+              href: '/core-candy-machine/guards/asset-burn',
+            },
+            {
+              title: 'Asset Burn Multi',
+              href: '/core-candy-machine/guards/asset-burn-multi',
+            },
+            {
+              title: 'Asset Payment',
+              href: '/core-candy-machine/guards/asset-payment',
+            },
+            {
+              title: 'Asset Payment Multi',
+              href: '/core-candy-machine/guards/asset-payment-multi',
+            },
             { title: 'Asset Mint Limit', href: '/core-candy-machine/guards/asset-mint-limit' },
             { title: 'Bot Tax', href: '/core-candy-machine/guards/bot-tax' },
             { title: 'End Date', href: '/core-candy-machine/guards/end-date' },
