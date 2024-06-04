@@ -3,18 +3,25 @@ import { LogoWithName } from './Logo'
 import { products as allProducts } from './index'
 import Link from 'next/link'
 
-export function Grid({ onClick, withoutFallback, menuItem, ...props }) {
+export function Grid({
+  onClick,
+  withoutFallback,
+  menuItem,
+  numCols = 3,
+  ...props
+}) {
   console.log('menuItem', menuItem)
   const products = allProducts.filter(
     (product) => menuItem === product.navigationMenuCatergory
   )
 
-  const className = `relative md:grid-flow-row md:grid-cols-3 md:grid-rows-${Math.ceil(
-    products.length / 3
+  const className = `relative grid-flow-row grid-cols-${numCols} grid-rows-${Math.ceil(
+    products.length / numCols
   )}`
+  console.log(className)
 
   return (
-    <ul className={clsx(['grid grid-flow-row gap-3', className])} {...props}>
+    <ul className={className} {...props}>
       {products.map((product) => (
         <li key={product.path}>
           <Link

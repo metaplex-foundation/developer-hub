@@ -18,7 +18,7 @@ export function SwitcherPopover({ children, menuItem, ...props }) {
         {({ close }) => (
           <div className="fixed left-0 w-full">
             <div className="m-auto w-full max-w-[600px]  overflow-hidden  rounded-lg bg-white p-4 shadow-xl ring-1 ring-black ring-opacity-5 dark:border dark:border-slate-600 dark:bg-neutral-900">
-              <Grid onClick={close} menuItem={menuItem} />
+              <Grid onClick={close} menuItem={menuItem} numCols={2} />
             </div>
           </div>
         )}
