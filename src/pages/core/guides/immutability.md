@@ -4,7 +4,7 @@ metaTitle: Core - Immutability
 description: This Guide describes the different immutability layers of MPL Core
 ---
 
-## What is a Immutability?
+## What is Immutability?
 In the general context of Digital Assets immutability is often used referring to the metadata of a Token or NFT. In the past this was asked for by communities to make sure that a bought Asset can not be changed in the future. With the additional functionality MPL Core offers it can make sense to add additional immutability features. This guide aims to provide information about those different options and how they can be used to tailor the immutability of a digital Asset to the needs of a project.
 
 To understand some of the differentiations below it might be helpful to be familiar with the general MPL Core [plugin functionality](/core/plugins).

@@ -158,6 +158,7 @@ export const core = {
           title: 'Guides',
           links: [
             { title: 'Overview', href: '/core/guides' },
+            { title: 'Immutability', href: '/core/guides/immutability' },
             { title: 'Print Editions', href: '/core/guides/print-editions' },
           ],
         },
