@@ -1,9 +1,9 @@
-import Image from 'next/image'
+import Image from 'next/image';
 
-import { Button } from '@/components/Button'
-import blurCyanImage from '@/images/blur-cyan.png'
-import blurIndigoImage from '@/images/blur-indigo.png'
-import clsx from 'clsx'
+import { Button } from '@/components/Button';
+import blurCyanImage from '@/images/blur-cyan.png';
+import blurIndigoImage from '@/images/blur-indigo.png';
+import clsx from 'clsx';
 
 export function Hero({
   page,
@@ -17,12 +17,12 @@ export function Hero({
   light3Off,
   children,
 }) {
-  title = title ?? page.product.name
-  description = description ?? page.product.description
+  title = title ?? page.product.name;
+  description = description ?? page.product.description;
   primaryCta = primaryCta ?? {
     title: 'Get started',
     href: `/${page.product.path}/getting-started`,
-  }
+  };
   secondaryCta = secondaryCta ?? (page.product.github ? {
     title: 'View on GitHub',
     href: page.product.github,
@@ -62,7 +62,9 @@ export function Hero({
                 </p>
               )}
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                <Button href={primaryCta.href}>{primaryCta.title}</Button>
+                {primaryCta &&
+                  <Button href={primaryCta.href}>{primaryCta.title}</Button>
+                }
                 {secondaryCta &&
                   <Button href={secondaryCta.href} variant="secondary">
                     {secondaryCta.title}
@@ -101,5 +103,5 @@ export function Hero({
         </div>
       </div>
     </div>
-  )
+  );
 }
