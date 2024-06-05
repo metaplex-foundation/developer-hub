@@ -119,7 +119,7 @@ export const candyMachine = {
     {
       id: 'sugar',
       title: 'Sugar',
-      icon: 'SolidCake',
+      icon: 'SolidCommandLine',
       href: `/candy-machine/sugar`,
       navigation: [
         {
