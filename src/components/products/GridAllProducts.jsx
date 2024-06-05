@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import { LogoWithName } from './Logo'
 import { products as allProducts, productCategories } from './index'
 import Link from 'next/link'
 import { Grid } from './Grid'

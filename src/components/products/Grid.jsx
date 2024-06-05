@@ -1,4 +1,4 @@
-import { LogoWithName } from './Logo'
+import { IconWithName } from './IconWithName'
 import { products as allProducts } from './index'
 import Link from 'next/link'
 
@@ -26,7 +26,7 @@ export function Grid({
             className="block content-start rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
             onClick={onClick}
           >
-            <LogoWithName product={product}></LogoWithName>
+            {IconWithName({ product })}
           </Link>
         </li>
       ))}

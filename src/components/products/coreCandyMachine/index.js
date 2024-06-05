@@ -1,6 +1,6 @@
 import { documentationSection, referencesSection } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { Square3Stack3DIcon } from '@heroicons/react/24/solid'
 
 export const coreCandyMachine = {
   name: 'Core Candy Machine',
@@ -8,7 +8,7 @@ export const coreCandyMachine = {
   description: 'Launch your next MPL Core Asset collection on Solana.',
   navigationMenuCatergory: 'Commerce',
   path: 'core-candy-machine',
-  logo: Logo,
+  icon: <Square3Stack3DIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-core-candy-machine',
   className: 'accent-pink',
   heroes: [{ path: '/core-candy-machine', component: Hero }],
@@ -244,8 +244,8 @@ export const coreCandyMachine = {
     //     },
     //   ],
     // },
-    
-    
+
+
     {
       ...referencesSection('core-candy-machine'),
       href: `https://mpl-core-candy-machine-js-docs.vercel.app/`,

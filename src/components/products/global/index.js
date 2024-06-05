@@ -8,7 +8,7 @@ export const global = {
   description: 'One place for all Metaplex developer resources.',
   path: '',
   isFallbackProduct: true,
-  logo: Logo,
+  icon: <Logo />,
   github: 'https://github.com/metaplex-foundation',
   className: 'accent-sky',
   heroes: [{ path: '/', component: Hero }],

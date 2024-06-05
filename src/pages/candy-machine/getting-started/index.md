@@ -12,6 +12,6 @@ Select the language / library you want to use below to get started with Candy Ma
 
 {% quick-link title="Rust" icon="Rust" href="/candy-machine/getting-started/rust" description="Get started using our Rust crate." /%}
 
-{% quick-link title="Sugar" icon="SolidCake" href="/candy-machine/sugar/getting-started" description="Get started using the command-line tool Sugar." /%}
+{% quick-link title="Sugar" icon="SolidCommandLine" href="/candy-machine/sugar/getting-started" description="Get started using the command-line tool Sugar." /%}
 
 {% /quick-links %}

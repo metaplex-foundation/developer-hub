@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { ArrowsPointingOutIcon } from '@heroicons/react/24/solid'
 
 export const hydra = {
   name: 'Hydra',
@@ -14,7 +14,7 @@ export const hydra = {
   navigationMenuCatergory: 'Hydra',
   path: 'hydra',
   navigationMenuCatergory: 'Utility',
-  logo: Logo,
+  icon: <ArrowsPointingOutIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-hydra',
   className: 'accent-amber',
   heroes: [{ path: '/hydra', component: Hero }],
