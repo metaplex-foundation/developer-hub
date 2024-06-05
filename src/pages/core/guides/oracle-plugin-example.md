@@ -17,7 +17,7 @@ Each External Adapter has the ability to assign lifecycle checks to Lifecycle Ev
 - **Reject**: The plugin can reject a lifecycle event.
 - **Approve**: The plugin can approve a lifecycle event.
 
-If you want to learn more about External Plugins, read more about them [here](/core/external-plugins/oracle).
+If you want to learn more about External Plugins, read more about them [here](/core/external-plugins/overview).
 
 ### Oracle Plugin
 
@@ -49,8 +49,6 @@ Every collection using this oracle as a source of trust should run its own crank
 
 The current program design rewards crankers for maintaining the oracle with 0.001 SOL. This amount is manageable while still providing a sufficient incentive for crankers to keep the oracle state account up-to-date.
 
-Note: These incentives are paid out only if the crank is executed within the first 15 minutes of market opening or closing and are funded from a vault present in the smart contract. The vault needs to be refilled by sending SOL to the oracle vault address.
-
 **Note**: These incetives are paid out only if the crank is executed the first 15 minute of market opening or closing and are funded from a vault present in the smart contract. The vault needs to be refilled by sending SOL to the oracle vault address.
 
 ## Let's Get Our Hands Dirty: Building out the Program
@@ -59,7 +57,7 @@ Now that the logic behind our protocol is clear, it’s time to dive into the co
 
 ### Anchor Overview
 
-In this guide, we'll use the Anchor framework, but you can also implement it using a native program. Learn more about the Anchor framework here.
+In this guide, we'll use the Anchor framework, but you can also implement it using a native program. Learn more about the Anchor framework [here](https://www.anchor-lang.com/).
 
 For simplicity, we'll use a mono-file approach, with helpers, state, accounts, and instructions all in lib.rs instead of the usual separation.
 
@@ -101,6 +99,8 @@ fn is_us_market_open(unix_timestamp: i64) -> bool {
 ```
 This helper checks if the US market is open based on the given Unix timestamp by calculating the seconds since midnight and the day of the week. If the current time is a weekday and is within market hours, it returns true.
 
+**Note**: This is just an example, particular occasion (like banking holiday) will not be taken in consideration.
+
 **is_within_15_minutes_of_market_open_or_close helper:**
 ```rust
 fn is_within_15_minutes_of_market_open_or_close(unix_timestamp: i64) -> bool {
@@ -132,11 +132,11 @@ impl Space for Oracle {
 }
 ```
 Let's discuss some of the choices made in creating this struct:
-- There is no admin field because once initialized, it’s going to be crankless, allowing anyone to interact with it.
+- There is no admin field because once initialized, it’s going to be permissionless, allowing anyone to interact with it.
 - The validation field is positioned first to leverage the native way of setting up the offset to search for on the NFT with just the discriminator size (8 bytes), avoiding the need for a custom offset on the Oracle Plugin config.
 - We save the bump for both the Oracle PDA and the Oracle Vault PDA to avoid deriving bumps every time we include this accounts in the instruction. This is a standard in Solana Development and it helps saving Compute Usage. Read more about it [here](https://solana.stackexchange.com/questions/12200/why-do-i-need-to-store-the-bump-inside-the-pda)
 
-Regarding space calculation, we use the Space implementation for Anchor directly, creating a constant called INIT_SPACE to reference when creating the PDA and storing enough SOL for rent exemption.
+Regarding space calculation, we use the Space implementation for Anchor directly, creating a constant called `INIT_SPACE` to reference when creating the PDA and storing enough SOL for rent exemption.  
 The only unusual aspect is that the OracleValidation struct from mpl-core needs to have a size of 5 bytes. The rest of the space calculation is standard. Learn more about calculating space [here](https://book.anchor-lang.com/anchor_references/space.html).
 
 ### Accounts
@@ -172,8 +172,8 @@ pub struct CreateOracle<'info> {
 The struct presents two separate accounts for the signer and the payer of this instruction. This is standard for most instructions, even if not strictly necessary here, as it ensures that if a PDA signs the transaction, we still have an account to pay the fees. Both need to be signers of the transaction.
 
 Other details:
-- The Oracle account is initialized and has [b"oracle"] as seeds to ensure there is no possibility of creating more than one oracle account. The space allocated is defined by the INIT_SPACE constant. 
-- The reward_vault account is included in this instruction to save the bumps for use in the next instruction. 
+- The Oracle account is initialized and has `[b"oracle"]` as seeds to ensure there is no possibility of creating more than one oracle account. The space allocated is defined by the `INIT_SPACE` constant. 
+- The `reward_vault` account is included in this instruction to save the bumps for use in the next instruction. 
 - The System program is necessary for creating new accounts on Solana since the init macro will use the `create_account` instruction from the system program.
 
 Now let's see the `CrankOracle` Account:
@@ -313,7 +313,7 @@ The second part of the instruction checks if is_within_15_minutes_of_market_open
 
 ### Create the NFT
 
-Last part of this joruney will be to create a collection and point it to the Oracle account so every asset we include in that collection will follow the custom Oracle rule!
+Last part of this journey will be to create a collection and point it to the Oracle account so every asset we include in that collection will follow the custom Oracle rule!  
 
 Let's start by setting up your environment to use Umi. (Umi is a modular framework for building and using JavaScript clients for Solana programs. Learn more [here](../../umi/getting-started))
 
@@ -341,7 +341,7 @@ console.log("Collection Address: \n", collection.publicKey.toString())
 const oracleAccount = publicKey("...")
 
 // Generate the collection
-const collectinTx = await createCollection(umi, {
+const collectionTx = await createCollection(umi, {  
     collection: collection,
     name: 'My Collection',
     uri: 'https://example.com/my-collection.json',
@@ -364,12 +364,12 @@ const collectinTx = await createCollection(umi, {
 }).sendAndConfirm(umi)
 
 // Deserialize the Signature from the Transaction
-let signauture = base58.deserialize(collectinTx.signature)[0];
-console.log(signauture);
+let signature = base58.deserialize(collectinTx.signature)[0];  
+console.log(signature);  
 ```
 
 ## Conclusion
 
 Congratulations! You are now equipped to create an NFT collection that trades only during US market hours using the Oracle Plugin. If you want to learn more about Core and Metaplex, check out the developer portal [here](/core/getting-started).
 
-Follow my journey and stay updated with my next tutorial on [Twitter](https://twitter.com/L0STE_)!
+<!-- Follow my journey and stay updated with my next tutorial on [Twitter](https://twitter.com/L0STE_)! -->
