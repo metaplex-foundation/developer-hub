@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { CommandLineIcon } from '@heroicons/react/24/solid'
 
 export const sugar = {
   name: 'Sugar',
@@ -13,7 +13,7 @@ export const sugar = {
   description: 'Create Candy Machines easily',
   navigationMenuCatergory: 'Dev Tools',
   path: '/candy-machine/sugar',
-  logo: Logo,
+  icon: <CommandLineIcon />,
   github: 'https://github.com/metaplex-foundation/sugar',
   className: 'accent-sky',
   heroes: [{ path: '/candy-machine/sugar', component: Hero }],

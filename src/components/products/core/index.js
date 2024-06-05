@@ -6,7 +6,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { StopCircleIcon } from '@heroicons/react/24/solid'
 
 export const core = {
   name: 'Core',
@@ -14,7 +14,7 @@ export const core = {
   description: 'Next generation Solana NFT standard.',
   navigationMenuCatergory: 'Create',
   path: 'core',
-  logo: Logo,
+  icon: <StopCircleIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-core',
   className: 'accent-green',
   heroes: [{ path: '/core', component: Hero }],

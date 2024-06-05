@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { ClockIcon } from '@heroicons/react/24/solid'
 
 export const legacyDocumentation = {
   name: 'Legacy',
@@ -13,7 +13,7 @@ export const legacyDocumentation = {
   description: 'A collection of documentation of older Programs and Tools which might not be used anymore or deprecated. Migrated from our old docs for documentation for completeness.',
   path: 'legacy-documentation',
   navigationMenuCatergory: 'Dev Tools',
-  logo: Logo,
+  icon: <ClockIcon />,
   github: '',
   className: 'accent-green',
   sections: [
@@ -104,7 +104,7 @@ export const legacyDocumentation = {
               href: '/legacy-documentation/token-entangler',
             },
           ],
-        },       
+        },
       ],
     },
   ],

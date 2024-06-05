@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import { LogoWithName } from './Logo'
 import { products as allProducts } from './index'
 import Link from 'next/link'
 import { Grid } from './Grid'
+import { IconWithName } from './IconWithName'
 
 export function MobileAppGrid({
   onClick,
@@ -24,7 +24,7 @@ export function MobileAppGrid({
           className="sticky block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
           onClick={onClick}
         >
-          <LogoWithName product={hub}></LogoWithName>
+          <IconWithName product={hub}></IconWithName>
         </Link>
         <hr />
       </li>
@@ -39,7 +39,7 @@ export function MobileAppGrid({
                 className="block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
                 onClick={onClick}
               >
-                <LogoWithName product={product}></LogoWithName>
+                <IconWithName product={product}></IconWithName>
               </Link>
             </li>
           ))}

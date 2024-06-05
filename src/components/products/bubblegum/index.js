@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { ArchiveBoxIcon } from '@heroicons/react/24/solid'
 
 export const bubblegum = {
   name: 'Bubblegum',
@@ -13,7 +13,7 @@ export const bubblegum = {
   description: 'NFTs that scale to new orders of magnitude.',
   path: 'bubblegum',
   navigationMenuCatergory: 'Create',
-  logo: Logo,
+  icon: <ArchiveBoxIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',
   heroes: [{ path: '/bubblegum', component: Hero }],

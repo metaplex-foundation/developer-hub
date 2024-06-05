@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { LockOpenIcon } from '@heroicons/react/24/solid'
 
 export const tokenAuthRules = {
   name: 'Token Auth Rules',
@@ -13,7 +13,7 @@ export const tokenAuthRules = {
   description: 'Design custom authorization rules for your NFTs.',
   navigationMenuCatergory: 'Create',
   path: 'token-auth-rules',
-  logo: Logo,
+  icon: <LockOpenIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-auth-rules',
   className: 'accent-green',
   heroes: [{ path: '/token-auth-rules', component: Hero }],

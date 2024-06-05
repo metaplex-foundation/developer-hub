@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { TableCellsIcon } from '@heroicons/react/24/solid'
 
 export const das = {
   name: 'DAS API',
@@ -13,7 +13,7 @@ export const das = {
   description:
     'A DAS API Client to access Digital Asset data on chain',
   path: 'das-api',
-  logo: Logo,
+  icon: <TableCellsIcon />,
   github: 'https://github.com/metaplex-foundation/digital-asset-standard-api',
   navigationMenuCatergory: 'Dev Tools',
   className: 'accent-sky',
@@ -28,7 +28,7 @@ export const das = {
             { title: 'Overview', href: '/das-api' },
             { title: 'Getting started', href: '/das-api/getting-started' },
             { title: 'Methods', href: '/das-api/methods' },
-            { title: 'DAS API RPC Providers', href: '/rpc-providers' },   
+            { title: 'DAS API RPC Providers', href: '/rpc-providers' },
           ],
         },
         {

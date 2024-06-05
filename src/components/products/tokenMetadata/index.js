@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/solid'
 
 export const tokenMetadata = {
   name: 'Token Metadata',
@@ -13,7 +13,7 @@ export const tokenMetadata = {
   description: 'The NFT standard on Solana.',
   navigationMenuCatergory: 'Create',
   path: 'token-metadata',
-  logo: Logo,
+  icon: <EllipsisHorizontalCircleIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',
   className: 'accent-green',
   heroes: [{ path: '/token-metadata', component: Hero }],

@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { CircleStackIcon } from '@heroicons/react/24/solid'
 
 export const fusion = {
   name: 'Fusion',
@@ -13,7 +13,7 @@ export const fusion = {
   description: 'Create composable NFTs.',
   navigationMenuCatergory: 'Utility',
   path: 'fusion',
-  logo: Logo,
+  icon: <CircleStackIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-trifle',
   className: 'accent-amber',
   heroes: [{ path: '/fusion', component: Hero }],

@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { CodeBracketSquareIcon } from '@heroicons/react/24/solid'
 
 export const umi = {
   name: 'Umi',
@@ -13,7 +13,7 @@ export const umi = {
   description: 'A collection of core programs for your applications.',
   navigationMenuCatergory: 'Dev Tools',
   path: 'umi',
-  logo: Logo,
+  icon: <CodeBracketSquareIcon />,
   github: 'https://github.com/metaplex-foundation/umi',
   className: 'accent-pink',
   heroes: [{ path: '/umi', component: Hero }],
@@ -29,7 +29,7 @@ export const umi = {
             { title: 'Connecting to Umi', href: '/umi/connecting-to-umi' },
             { title: 'Metaplex Umi Plugins', href: '/umi/metaplex-umi-plugins' },
             { title: 'Web3js Differences', href: '/umi/web3js-differences' },
-            
+
           ],
         },
         {
