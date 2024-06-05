@@ -160,6 +160,7 @@ export const core = {
           links: [
             { title: 'Overview', href: '/core/guides' },
             { title: 'Print Editions', href: '/core/guides/print-editions' },
+            { title: 'Oracle Plugin Example', href: '/core/guides/oracle-plugin-example' },
           ],
         },
       ],
