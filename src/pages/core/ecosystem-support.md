@@ -12,17 +12,17 @@ Metaplex also offers a free, open-source UI for creating, transferring and viewi
 
 | Project                                   | Status      | ETA                 |     |
 | ----------------------------------------- | ----------- | ------------------- | --- |
-| [Tensor](https://www.tensor.trade/)       | Complete    | April 6 (complete)  |     |
-| [Sniper](https://www.sniper.xyz/)         | Complete    | April 19 (complete) |     |
-| [OKX](https://www.okx.com/)               | Complete    | May 1 (complete)    |     |
-| [Mallow](https://www.mallow.art/)         | Integrating | TBC                 |     |
-| [Magic Eden](https://magiceden.io/solana) | No Support  | N/A                 |     |
+| [Tensor](https://www.tensor.trade/)       | Complete    | -                   |     |
+| [Magic Eden](https://magiceden.io/solana) | Complete    | -                   |     |
+| [Sniper](https://www.sniper.xyz/)         | Complete    | -                   |     |
+| [OKX](https://www.okx.com/)               | Complete    | -                   |     |
+| [Mallow](https://www.mallow.art/)         | Complete | -                 |     |
 
 ## Wallets
 
 | Project                           | Status   | ETA                | Notes        |
 | --------------------------------- | -------- | ------------------ | ------------ |
-| [Solflare](https://solflare.com/) | Complete | April 1 (complete) |              |
+| [Solflare](https://solflare.com/) | Complete | -   |              |
 | [Phantom](https://phantom.app/)   | Partial  | End of June        | Viewing Only |
 | [Backpack](https://backpack.app/) | Partial  | TBC                | Viewing Only |
 
@@ -30,29 +30,29 @@ Metaplex also offers a free, open-source UI for creating, transferring and viewi
 
 | Project                        | Status   | ETA                 |
 | ------------------------------ | -------- | ------------------- |
-| [SolanaFM](https://solana.fm/) | Complete | April 23 (complete) |
-| [Solscan](https://solscan.io/) | Complete | April 19 (complete) |
+| [SolanaFM](https://solana.fm/) | Complete | -                   |
+| [Solscan](https://solscan.io/) | Complete | -                   |
 
 ## RPC (DAS)
 
 | Project                                 | Status   | ETA                 | 
 | --------------------------------------- | -------- | ------------------- |
-| [ExtrNode](https://extrnode.com/)       | Complete | April 1 (complete)  |
-| [Helius](https://www.helius.dev/)       | Complete | April 9 (complete)  |
-| [Quicknode](https://www.quicknode.com/) | Complete | April 15 (complete) |
-| [Shyft](https://shyft.to/)              | Complete | April 22 (complete) |
-| [Triton](https://triton.one/)           | Complete | April 1 (complete)  |
+| [ExtrNode](https://extrnode.com/)       | Complete | -                   |
+| [Helius](https://www.helius.dev/)       | Complete | -                   |
+| [Quicknode](https://www.quicknode.com/) | Complete | -                   |
+| [Shyft](https://shyft.to/)              | Complete | -                   |
+| [Triton](https://triton.one/)           | Complete | -                   |
 
 ## No Code Tooling
 
 | Project                                       | Status   | ETA                 |
 | --------------------------------------------- | -------- | ------------------- |
-| [Truffle](https://truffle.wtf)                | Complete | April 1 (complete)  |
-| [Underdog](https://www.underdogprotocol.com/) | Complete | April 11 (complete) |
+| [Truffle](https://truffle.wtf)                | Complete | -                   |
+| [Underdog](https://www.underdogprotocol.com/) | Complete | -                   |
 
 ## Other
 
 | Project                        | Status   | ETA                 |
 | ------------------------------ | -------- | ------------------- |
-| [dReader](https://dreader.io/) | Complete | April 23 (complete) |
-| [Matrica](https://matrica.io/) | Complete | April 23 (complete) |
+| [dReader](https://dreader.io/) | Complete | -                   |
+| [Matrica](https://matrica.io/) | Complete | -                   |
