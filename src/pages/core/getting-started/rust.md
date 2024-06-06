@@ -21,7 +21,7 @@ cargo add mpl-core
 Alternatively you can paste the version of `mpl-core` crate you wish to use straight into your Cargo.toml file under `[dependencies]`.
 
 ```toml
-mpl-core = "0.6.1"
+mpl-core = "x.x.x"
 ```
 
 ## Local Scripts
