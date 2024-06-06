@@ -6,19 +6,19 @@ description: A quick overview on working with Rust and the Metaplex protocal.
 
 ## Introduction
 
-It's no doubt that if you are building on Solana you most likely have come across the Language of Rust which is the most popular language for building programs within the Solana ecosystem.
+It's no doubt that if you are building on Solana you most likely have come across the term Rust which is the most popular language for building programs within the Solana ecosystem.
 
-Rust can be quite a daunting task to look and use if you are new to developing but here are some resources to get you started with Rust and the Solana eco system.
+Rust can be quite a daunting task to look at and use if you are new to developing but here are some resources to get you started with Rust and the Solana ecosystem.
 
 **The Rust Book**
 
-Start here to learn rust. It takes you through the basics through to the advanced coding.
+Start here to learn rust. It takes from basics through to the advanced coding using the language.
 
 [https://doc.rust-lang.org/stable/book/](https://doc.rust-lang.org/stable/book/)
 
 **Anchor**
 
-Anchor is a framework that helps you build Solana programs by stripping away a chunk of the security boilerplate and handling it for you.
+Anchor is a framework that helps you build Solana programs by stripping away a chunk of the security boilerplate and handling it for you speeding up the development process.
 
 [https://www.anchor-lang.com/](https://www.anchor-lang.com/)
 
@@ -26,19 +26,19 @@ Anchor is a framework that helps you build Solana programs by stripping away a c
 
 ### Setting up a Solana client
 
-Setting up an Solana RPC client for Rust scripts is fairly straight forward.
+Setting up an Solana RPC client for Rust scripts is fairly straight forward. You'll just need to grab the `solana_client` crate.
 
 ```rust
-use solana_client::nonblocking::rpc_client;
+use solana_client::rpc_client;
 
 let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 ```
 
 ### Using Metaplex Rust Transaction Builders
 
-Each instruction that comes from Metaplex Rust crate will also currently come with a `Builder` version of that instruction which you can import. This abstracts a massive amount code for you will return you with a instruction that's ready to send.
+Each instruction that comes from a Metaplex Rust crate will also currently come with a `Builder` version of that instruction which you can import. This abstracts a massive amount code for you and will return you an instruction that's ready to send.
 
-Lets take the `Create` instruction from Core as an example here (this applies to all other instructions from this Crate and all other Metaplex crates too.)
+Lets take the `CreateV1` instruction from Core as an example (this applies to all other instructions from this Crate and all other Metaplex crates too).
 
 If we look through the instructions in the [Mpl Core crate type docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) we can see we have a number of instructions available to us.
 
@@ -57,7 +57,7 @@ The one we are interested in here is the `CreateV1Builder`.
 To initialize the builder we can call `new`.
 
 ```rust
-TransferV1Builder::new();
+CreateV1Builder::new();
 ```
 
 From this point we can `ctrl + click` (pc) or `cmd + click` (mac) into the `new` function generated from the `Builder::` which positions us at the `pub fn new()` for the builder. If you scroll up slightly you'll then see the `pub struct` for the `CreateV1Builder` as outlined below.
@@ -81,7 +81,7 @@ pub struct CreateV1Builder {
 
 ```
 
-These are your arguments of publickeys and data that will need to be passed into the builder. You can fill these out (note that some accounts and data may be optional. This will all depend on the instruction you are calling). Some accounts may also be optional and default to others. If you click through to the `new()` function again and scroll down this time you'll see the individual functions with additional comments. In the below case you can see that the owner will default to payer, so we don't need to pass in upate_authority if in this case if the payer is also going to be the owner of the Asset.
+These are your arguments of publickeys and data that will need to be passed into the builder. Some accounts may also be optional and default to others, this can vary from instruction to instruction. If you click through to the `new()` function again and scroll down this time you'll see the individual functions with additional comments. In the below case you can see that the owner will default to payer, so we don't need to pass in owner if in this case if the payer is also going to be the owner of the Asset.
 
 ```rust
 /// `[optional account]`
@@ -105,7 +105,7 @@ let create_asset_ix = CreateV1Builder::new()
 .       .instruction();
 ```
 
-Now that we have our instruction ready we need to create a normal transaction to send to our RPC to execute the code on chain. This includes a blockhash, signers.
+Now that we have our instruction ready we need to create a normal Solana transaction to send to our RPC. This includes a blockhash andxx§ signers.
 
 ### Full Builder Example
 
