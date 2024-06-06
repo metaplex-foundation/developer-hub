@@ -32,6 +32,7 @@ export const global = {
               title: 'Understanding Programs',
               href: '/understanding-programs',
             },
+            {title: "Working with Rust"}, href: '/working-with-rust'},
             { title: 'RPC Providers', href: '/rpc-providers' },
             { title: 'Storage Providers', href: '/storage-providers' },
             { title: 'Stability Index', href: '/stability-index' },
