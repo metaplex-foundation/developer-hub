@@ -34,7 +34,7 @@ use solana_client::rpc_client;
 let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 ```
 
-### Using Metaplex Rust Transaction Builders
+### Using Metaplex Rust Instruction Builders
 
 Each instruction that comes from a Metaplex Rust crate will also currently come with a `Builder` version of that instruction which you can import. This abstracts a massive amount code for you and will return you an instruction that's ready to send.
 
