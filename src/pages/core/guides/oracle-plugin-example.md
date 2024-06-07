@@ -370,6 +370,6 @@ console.log(signature);
 
 ## Conclusion
 
-Congratulations! You are now equipped to create an NFT collection that trades only during US market hours using the Oracle Plugin. If you want to learn more about Core and Metaplex, check out the developer portal [here](/core/getting-started).
+Congratulations! You are now equipped to create an NFT collection that trades only during US market hours using the Oracle Plugin. If you want to learn more about Core and Metaplex, check out the [developer hub](/core/getting-started).  
 
 <!-- Follow my journey and stay updated with my next tutorial on [Twitter](https://twitter.com/L0STE_)! -->
