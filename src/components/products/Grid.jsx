@@ -1,30 +1,32 @@
-import clsx from 'clsx'
-import { LogoWithName } from './Logo'
+import { IconWithName } from './IconWithName'
 import { products as allProducts } from './index'
 import Link from 'next/link'
 
 export function Grid({
   onClick,
   withoutFallback,
-  className,
   menuItem,
+  numCols = 'grid-cols-3',
   ...props
 }) {
   console.log('menuItem', menuItem)
-  const products =  allProducts.filter(
-        (product) => menuItem === product.navigationMenuCatergory
-      )
-    
+  const products = allProducts.filter(
+    (product) => menuItem === product.navigationMenuCatergory
+  )
+
+  let className = `relative grid ${numCols} gap-3`
+  console.log(className)
+
   return (
-    <ul className={clsx(['grid grid-flow-row gap-3', className])} {...props}>
+    <ul className={className} {...props}>
       {products.map((product) => (
         <li key={product.path}>
           <Link
             href={`/${product.path}`}
-            className="block rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
+            className="block content-start rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
             onClick={onClick}
           >
-            <LogoWithName product={product}></LogoWithName>
+            {IconWithName({ product })}
           </Link>
         </li>
       ))}
@@ -35,10 +37,7 @@ export function Grid({
 export function MarkdocGrid() {
   return (
     <div className="not-prose">
-      <Grid
-        className="relative md:grid-flow-col md:grid-cols-4 md:grid-rows-4"
-        withoutFallback
-      />
+      <Grid withoutFallback />
     </div>
   )
 }

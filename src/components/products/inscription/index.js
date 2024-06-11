@@ -3,14 +3,14 @@ import {
   referencesSection
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { PencilSquareIcon } from '@heroicons/react/24/solid'
 
 export const inscription = {
   name: 'Inscription',
   headline: 'NFT inscribed on Solana',
   description: 'Inscribe Data to Solana state.',
   path: 'inscription',
-  logo: Logo,
+  icon: <PencilSquareIcon />,
   navigationMenuCatergory: 'Create',
   github: 'https://github.com/metaplex-foundation/mpl-inscription',
   className: 'accent-green',

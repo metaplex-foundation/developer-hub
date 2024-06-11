@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { ServerIcon } from '@heroicons/react/24/solid'
 
 export const amman = {
   name: 'Amman',
@@ -14,7 +14,7 @@ export const amman = {
     'A local validator toolkit for testing Solana programs and applications.',
   path: 'amman',
   navigationMenuCatergory: 'Dev Tools',
-  logo: Logo,
+  icon: <ServerIcon />,
   github: 'https://github.com/metaplex-foundation/amman',
   className: 'accent-sky',
   heroes: [{ path: '/amman', component: Hero }],

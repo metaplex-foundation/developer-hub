@@ -1,4 +1,4 @@
-import { Popover } from '@headlessui/react'
+import React from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Search } from '@/components/Search'
 import { ThemeSelector } from '@/components/ThemeSelector'
-import { Logo, LogoWithName } from '@/components/products/Logo'
 import { Sections } from '@/components/products/Sections'
 import { SwitcherDialog } from '@/components/products/SwitcherDialog'
-import { SwitcherPopover } from '@/components/products/SwitcherPopover'
+import { IconWithName } from '@/components/products/IconWithName'
 import NavList from './NavList'
+import { categoryToColor } from '@/components/products/IconWithName'
 
 export function Header({ page }) {
   let [isScrolled, setIsScrolled] = useState(false)
@@ -42,8 +42,13 @@ export function Header({ page }) {
         <div className="relative flex flex-grow basis-0 items-center">
           <div className="hidden flex-col lg:flex">
             <Link href={`/${page.product.path}`}>
-              <Logo product={page.product} className="h-8 w-8 sm:hidden" />
-              <LogoWithName product={page.product} className="hidden sm:flex" />
+              {React.cloneElement(page.product.icon, {
+                color: categoryToColor.get(
+                  page.product.navigationMenuCatergory
+                ),
+                className: 'h-8 w-8 sm:hidden',
+              })}
+              <IconWithName product={page.product} className="hidden sm:flex" />
               {console.log(page.product)}
             </Link>
           </div>
@@ -54,8 +59,13 @@ export function Header({ page }) {
                   onClick={() => setIsOpen(true)}
                   className="-mx-4 -my-2 rounded-lg px-4 py-2"
                 >
-                  <Logo product={page.product} className="h-8 w-8 sm:hidden" />
-                  <LogoWithName
+                  {React.cloneElement(page.product.icon, {
+                    color: categoryToColor.get(
+                      page.product.navigationMenuCatergory
+                    ),
+                    className: 'h-8 w-8 sm:hidden',
+                  })}
+                  <IconWithName
                     product={page.product}
                     className="hidden sm:flex"
                   />

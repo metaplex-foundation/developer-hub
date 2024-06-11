@@ -12,4 +12,6 @@ The following Guides for MPL Core are currently available:
 
 {% quick-link title="Immutability" icon="BookOpen" href="/core/guides/immutability" description="Learn how Immutability works in MPL Core" /%}
 
+{% quick-link title="Oracle Plugin Example" icon="CodeBracketSquare" href="/core/guides/oracle-plugin-example" description="Learn how you can create a collection that can be traded only during US market hours" /%}
+
 {% /quick-links %}

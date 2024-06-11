@@ -33,11 +33,17 @@ Here is how you can use our SDKs to burn a Core asset. The snippet assumes that 
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { burnV1 } from '@metaplex-foundation/mpl-core'
+import {
+  burn,
+  fetchAsset,
+  collectionAddress,
+  fetchCollection,
+} from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
+const assetId = publicKey('11111111111111111111111111111111')
+const asset = await fetchAsset(umi, assetId)
 
-await burnV1(umi, {
+await burn(umi, {
   asset: asset,
 }).sendAndConfirm(umi)
 ```
@@ -96,12 +102,28 @@ Here is how you can use our SDKs to burn a Core asset that is part of a collecti
 import { publicKey } from '@metaplex-foundation/umi'
 import { burnV1, fetchAsset } from '@metaplex-foundation/mpl-core'
 
-const assetId = publicKey('11111111111111111111111111111111')
-const asset = await fetchAssetV1(umi, assetId)
+import { publicKey } from '@metaplex-foundation/umi'
+import {
+  burn,
+  fetchAsset,
+  collectionAddress,
+  fetchCollection,
+} from '@metaplex-foundation/mpl-core'
 
-await burnV1(umi, {
-  asset: asset.publicKey,
-  collection: collectionAddress(asset),
+const assetId = publicKey('11111111111111111111111111111111')
+const asset = await fetchAsset(umi, assetId)
+
+const collectionId = collectionAddress(asset)
+
+let collection = undefined
+
+if (collectionId) {
+  collection = await fetchCollection(umi, collection)
+}
+
+await burn(umi, {
+  asset: asset,
+  collection: collection,
 }).sendAndConfirm(umi)
 ```
 

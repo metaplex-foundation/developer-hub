@@ -1,6 +1,6 @@
 ---
 title: "Token Burn"
-metaTitle: "CCore andy Machine Guards - Token Burn"
+metaTitle: "Core andy Machine Guards - Token Burn"
 description: "The Token Burn guard allows minting by burning some of the payer’s tokens."
 ---
 

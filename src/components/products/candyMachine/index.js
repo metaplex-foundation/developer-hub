@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { Square2StackIcon } from '@heroicons/react/24/solid'
 
 export const candyMachine = {
   name: 'Candy Machine',
@@ -13,7 +13,7 @@ export const candyMachine = {
   description: 'Launch your next NFT collection on Solana.',
   navigationMenuCatergory: 'Commerce',
   path: 'candy-machine',
-  logo: Logo,
+  icon: <Square2StackIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-candy-machine',
   className: 'accent-pink',
   heroes: [{ path: '/candy-machine', component: Hero }],
@@ -119,7 +119,7 @@ export const candyMachine = {
     {
       id: 'sugar',
       title: 'Sugar',
-      icon: 'SolidCake',
+      icon: 'SolidCommandLine',
       href: `/candy-machine/sugar`,
       navigation: [
         {

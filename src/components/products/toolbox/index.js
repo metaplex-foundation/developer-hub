@@ -5,7 +5,7 @@ import {
   referencesSection,
 } from '@/shared/sections'
 import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid'
 
 export const toolbox = {
   name: 'Toolbox',
@@ -13,7 +13,7 @@ export const toolbox = {
   description: 'A collection of core programs for your applications.',
   navigationMenuCatergory: 'Dev Tools',
   path: 'toolbox',
-  logo: Logo,
+  icon: <WrenchScrewdriverIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-toolbox',
   className: 'accent-sky',
   heroes: [{ path: '/toolbox', component: Hero }],

@@ -8,7 +8,7 @@ export const global = {
   description: 'One place for all Metaplex developer resources.',
   path: '',
   isFallbackProduct: true,
-  logo: Logo,
+  icon: <Logo />,
   github: 'https://github.com/metaplex-foundation',
   className: 'accent-sky',
   heroes: [{ path: '/', component: Hero }],
@@ -26,11 +26,13 @@ export const global = {
         {
           title: 'Resources',
           links: [
+            { title: 'Offical Links', href: '/official-links' },
             { title: 'Developer Tools', href: '/developer-tools' },
             {
               title: 'Understanding Programs',
               href: '/understanding-programs',
             },
+            {title: "Working with Rust", href: '/working-with-rust'},
             { title: 'RPC Providers', href: '/rpc-providers' },
             { title: 'Storage Providers', href: '/storage-providers' },
             { title: 'Stability Index', href: '/stability-index' },

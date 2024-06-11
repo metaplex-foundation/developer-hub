@@ -3,10 +3,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Dialog } from '@headlessui/react'
 
-import { LogoWithName } from '@/components/products/Logo'
 import { Navigation } from '@/components/Navigation'
 import { Sections } from '@/components/products/Sections'
 import { ComputerDesktopIcon } from '@heroicons/react/24/outline'
+import { IconWithName } from './products/IconWithName'
 
 function MenuIcon(props) {
   return (
@@ -71,10 +71,10 @@ export function MobileNavigation({ page }) {
       <Dialog
         open={isOpen}
         onClose={setIsOpen}
-        className="fixed inset-0 z-50 flex items-start overflow-y-auto bg-netural-900/50 pr-10 backdrop-blur lg:hidden"
+        className="bg-netural-900/50 fixed inset-0 z-50 flex items-start overflow-y-auto pr-10 backdrop-blur lg:hidden"
         aria-label="Navigation"
       >
-        <Dialog.Panel className="min-h-full w-full max-w-sm bg-white px-4 pb-12 pt-5 dark:bg-neutral-900 border-r border-slate-600 sm:px-6">
+        <Dialog.Panel className="min-h-full w-full max-w-sm border-r border-slate-600 bg-white px-4 pb-12 pt-5 dark:bg-neutral-900 sm:px-6">
           <div className="flex items-center">
             <button
               type="button"
@@ -84,16 +84,19 @@ export function MobileNavigation({ page }) {
               <CloseIcon className="h-6 w-6 stroke-slate-500" />
             </button>
             <Link href="/" className="ml-6" aria-label="Home page">
-              <LogoWithName product={page.product} />
+              <IconWithName product={page.product} />
             </Link>
           </div>
-          {page.product.name != 'Metaplex' && 
-          <>
-          <Link href="/programs-and-tools" className="mt-12 flex items-center gap-2 text-slate-900 dark:text-white">
-            <ComputerDesktopIcon height={20} /> Programs and Tools
-          </Link>
-          </>
-          }
+          {page.product.name != 'Metaplex' && (
+            <>
+              <Link
+                href="/programs-and-tools"
+                className="mt-12 flex items-center gap-2 text-slate-900 dark:text-white"
+              >
+                <ComputerDesktopIcon height={20} /> Programs and Tools
+              </Link>
+            </>
+          )}
           {page.product.sections && page.product.sections.length > 1 && (
             <Sections
               className="-ml-2 mt-6 flex flex-col gap-2"
