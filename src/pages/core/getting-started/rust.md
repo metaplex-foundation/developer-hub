@@ -93,7 +93,7 @@ CreateV1CpiBuilder::new()
         .system_program(context.acccounts.system_program)
         .data_state(input.data_state.unwrap_or(DataState::AccountState))
         .name(args.asset_name)
-        .uri(arts.asset_uri)
+        .uri(args.asset_uri)
         .plugins(args.plugins)
         .invoke()
 ```
