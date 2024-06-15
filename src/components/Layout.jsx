@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import Hotjar from '@hotjar/browser';
+import Hotjar from '@hotjar/browser'
 
 import { Header } from '@/components/Header'
 import { Navigation } from '@/components/Navigation'
@@ -14,8 +14,14 @@ export function Layout({ children, page }) {
   const Hero = page.activeHero
   useLightense()
   useAccentClass(page.product)
-  if(process.env.NEXT_PUBLIC_HOTJAR_ID && process.env.NEXT_PUBLIC_HOTJAR_VERSION){
-    Hotjar.init(process.env.NEXT_PUBLIC_HOTJAR_ID, process.env.NEXT_PUBLIC_HOTJAR_VERSION);
+  if (
+    process.env.NEXT_PUBLIC_HOTJAR_ID &&
+    process.env.NEXT_PUBLIC_HOTJAR_VERSION
+  ) {
+    Hotjar.init(
+      process.env.NEXT_PUBLIC_HOTJAR_ID,
+      process.env.NEXT_PUBLIC_HOTJAR_VERSION
+    )
   }
 
   return (
