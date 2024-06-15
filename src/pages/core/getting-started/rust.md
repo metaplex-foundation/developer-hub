@@ -84,7 +84,7 @@ For a more comprehensive guide on `Builder` instruction types please visit the [
 
 ```rust
 CreateV1CpiBuilder::new()
-        .asset(context.accounts,asset)
+        .asset(context.accounts.asset)
         .collection(context.accounts.collection)
         .authority(context.accounts.authority)
         .payer(context.accounts.payer)
@@ -93,7 +93,7 @@ CreateV1CpiBuilder::new()
         .system_program(context.acccounts.system_program)
         .data_state(input.data_state.unwrap_or(DataState::AccountState))
         .name(args.asset_name)
-        .uri(arts.asseet_uri)
+        .uri(arts.asset_uri)
         .plugins(args.plugins)
         .invoke()
 ```
