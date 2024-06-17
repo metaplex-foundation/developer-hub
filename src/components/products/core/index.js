@@ -72,6 +72,10 @@ export const core = {
               href: '/core/plugins/delegating-and-revoking-plugins',
             },
             {
+              title: 'Autograph Plugin',
+              href: '/core/plugins/autograph',
+            },
+            {
               title: 'Transfer Delegate Plugin',
               href: '/core/plugins/transfer-delegate',
             },
@@ -107,6 +111,10 @@ export const core = {
             {
               title: 'Permanent Burn Delegate Plugin',
               href: '/core/plugins/permanent-burn-delegate',
+            },
+            {
+              title: 'Verified Creators Plugin',
+              href: '/core/plugins/verified-creators',
             },
           ],
         },
