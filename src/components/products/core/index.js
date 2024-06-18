@@ -170,6 +170,7 @@ export const core = {
             { title: 'Immutability', href: '/core/guides/immutability' },
             { title: 'Print Editions', href: '/core/guides/print-editions' },
             { title: 'Oracle Plugin Example', href: '/core/guides/oracle-plugin-example' },
+            { title: 'Typescript Staking Example', href: '/core/guides/typescript-staking-example' }
           ],
         },
       ],
