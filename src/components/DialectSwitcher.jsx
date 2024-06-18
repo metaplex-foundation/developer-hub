@@ -36,7 +36,7 @@ export function DialectSwitcher({ children, title, dialects }) {
               <span>{localDialectTitle}</span>
               <Icon icon="SolidChevronUpDown" className="h-4 w-4" />
             </Listbox.Button>
-            <Listbox.Options className="absolute right-0 top-full mt-2 w-max space-y-1 rounded-xl bg-white p-3 text-sm font-medium shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
+            <Listbox.Options className="absolute right-0 top-full z-50 mt-2 w-max space-y-1 rounded-xl bg-white p-3 text-sm font-medium shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
               {dialects.map((dialect) => (
                 <Listbox.Option
                   key={dialect.id}

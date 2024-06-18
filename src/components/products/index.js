@@ -17,7 +17,7 @@ import { sugar } from './sugar'
 import { mpl404 } from './mpl-404'
 import { guides } from './guides'
 
-export const productCategories = ['Create', 'Commerce', 'Utility', 'Dev Tools', 'Guides']
+export const productCategories = ['Create', 'Commerce', 'Utility', 'Dev Tools']
 
 export const products = [
   global,

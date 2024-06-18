@@ -14,7 +14,6 @@ import {
 import {Seperator} from '@/components/Seperator'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
-import { InstallComponent } from '@/components/install-component'
 
 const tags = {
   callout: {
@@ -143,13 +142,6 @@ const tags = {
     },
     selfClosing: true,
   },
-  installPackages: {
-    render : InstallComponent,
-    attributes: {
-      packages: {type: Array}
-    },
-    selfClosing: true,
-  }
 }
 
 export default tags
