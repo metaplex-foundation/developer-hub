@@ -101,7 +101,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [SolPayment](https://mpl-candy-machine-js-docs.vercel.app/types/SolPayment.html)
+API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [SolPayment](https://mpl-candy-machine.typedoc.metaplex.com/types/SolPayment.html)
 
 {% /totem %}
 {% /dialect %}
@@ -144,7 +144,7 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [SolPaymentMintArgs](https://mpl-candy-machine-js-docs.vercel.app/types/SolPaymentMintArgs.html)
+API References: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [SolPaymentMintArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/SolPaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

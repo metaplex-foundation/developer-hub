@@ -99,7 +99,7 @@ create(umi, {
 })
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [FreezeSolPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPayment.html)
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [FreezeSolPayment](https://mpl-core-candy-machine.typedoc.metaplex.com/types/FreezeSolPayment.html)
 
 {% /totem %}
 {% /dialect %}
@@ -141,7 +141,7 @@ mintV1(umi, {
 })
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [FreezeSolPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [FreezeSolPaymentMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/FreezeSolPaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
@@ -327,7 +327,7 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [FreezeSolPaymentRouteArgsInitialize](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentRouteArgsInitialize.html)
+API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [FreezeSolPaymentRouteArgsInitialize](https://mpl-core-candy-machine.typedoc.metaplex.com/types/FreezeSolPaymentRouteArgsInitialize.html)
 
 {% /totem %}
 {% /dialect %}
@@ -430,7 +430,7 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [FreezeSolPaymentRouteArgsThaw](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentRouteArgsThaw.html)
+API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [FreezeSolPaymentRouteArgsThaw](https://mpl-core-candy-machine.typedoc.metaplex.com/types/FreezeSolPaymentRouteArgsThaw.html)
 
 {% /totem %}
 {% /dialect %}
@@ -531,7 +531,7 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [FreezeSolPaymentRouteArgsUnlockFunds](https://mpl-core-candy-machine-js-docs.vercel.app/types/FreezeSolPaymentRouteArgsUnlockFunds.html)
+API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [FreezeSolPaymentRouteArgsUnlockFunds](https://mpl-core-candy-machine.typedoc.metaplex.com/types/FreezeSolPaymentRouteArgsUnlockFunds.html)
 
 {% /totem %}
 {% /dialect %}

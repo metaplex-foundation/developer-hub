@@ -439,7 +439,7 @@ const createIx = await create(umi, {
 await createIx.sendAndConfirm(umi)
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

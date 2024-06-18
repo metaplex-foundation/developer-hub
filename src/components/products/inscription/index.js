@@ -62,7 +62,7 @@ export const inscription = {
     },
     {
       ...referencesSection('inscription'),
-      href: `https://mpl-inscription-js-docs.vercel.app/`,
+      href: `https://mpl-inscription.typedoc.metaplex.com/`,
       target: '_blank',
     },
   ],

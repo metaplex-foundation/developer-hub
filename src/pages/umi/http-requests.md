@@ -7,7 +7,7 @@ Umi provides a simple `HttpInterface` that can be used to send HTTP requests. Th
 
 The `HttpInterface` only defines a single method `send` which accepts a generic `HttpRequest<T>` and returns a generic `HttpResponse<U>` such that `T` and `U` are the request and response body types respectively.
 
-Umi defines various Http-related types such as `HttpHeaders` and `HttpMethod` that are used by the `HttpRequest` and `HttpResponse` types. In order to improve the developer experience around sending requests, Umi ships with a little request builder that can be used to create `HttpRequest` instances. You may want to check the [API references of the `HttpRequestBuilder` type](https://umi-docs.vercel.app/classes/umi.HttpRequestBuilder.html) to learn more about it but here are some examples:
+Umi defines various Http-related types such as `HttpHeaders` and `HttpMethod` that are used by the `HttpRequest` and `HttpResponse` types. In order to improve the developer experience around sending requests, Umi ships with a little request builder that can be used to create `HttpRequest` instances. You may want to check the [API references of the `HttpRequestBuilder` type](https://umi.typedoc.metaplex.com/classes/umi.HttpRequestBuilder.html) to learn more about it but here are some examples:
 
 ```ts
 // GET JSON request.

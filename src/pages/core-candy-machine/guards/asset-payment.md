@@ -126,7 +126,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [AssetPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPayment.html)
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [AssetPayment](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetPayment.html)
 
 {% /totem %}
 {% /dialect %}
@@ -161,7 +161,7 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [AssetPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetPaymentMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [AssetPaymentMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetPaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

@@ -129,7 +129,7 @@ await updateCandyGuard(umi, {
 })
 ```
 
-API References: [updateCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/updateCandyGuard.html), [CandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetArgs.html)
+API References: [updateCandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/updateCandyGuard.html), [CandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -214,7 +214,7 @@ await unwrap({
 }).sendAndConfirm(umi)
 ```
 
-API References: [createCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyMachine.html), [createCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyGuard.html), [wrap](https://mpl-core-candy-machine-js-docs.vercel.app/functions/wrap.html), [unwrap](https://mpl-core-candy-machine-js-docs.vercel.app/functions/unwrap.html)
+API References: [createCandyMachine](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/createCandyMachine.html), [createCandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/createCandyGuard.html), [wrap](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/wrap.html), [unwrap](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/unwrap.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

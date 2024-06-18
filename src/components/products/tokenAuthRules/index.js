@@ -104,7 +104,7 @@ export const tokenAuthRules = {
     },
     {
       ...referencesSection('token-auth-rules'),
-      href: 'https://mpl-token-auth-rules-js-docs.vercel.app/',
+      href: 'https://mpl-token-auth-rules.typedoc.metaplex.com/',
       target: '_blank'
     },
   ],

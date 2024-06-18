@@ -28,7 +28,7 @@ const umi = createUmi('http://127.0.0.1:8899').use(mplInscription())
 
 Then you want to tell Umi which wallet to use. This can either be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
 
-That's it, you can now interact with Inscriptions by using [the various functions provided by the library](https://mpl-inscription-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of how to mint a simple inscription with a small JSON file attached, fetching the data of the inscription and printing the inscription Rank.
+That's it, you can now interact with Inscriptions by using [the various functions provided by the library](https://mpl-inscription.typedoc.metaplex.com/) and passing your `Umi` instance to them. Here's an example of how to mint a simple inscription with a small JSON file attached, fetching the data of the inscription and printing the inscription Rank.
 
 ```ts
 // Step 1: Mint an NFT or pNFT
@@ -74,4 +74,4 @@ console.log(
 - [Umi Framework](https://github.com/metaplex-foundation/umi)
 - [GitHub Repository](https://github.com/metaplex-foundation/mpl-inscription)
 - [NPM Package](https://www.npmjs.com/package/@metaplex-foundation/mpl-inscription)
-- [API References](https://mpl-inscription-js-docs.vercel.app/)
+- [API References](https://mpl-inscription.typedoc.metaplex.com/)

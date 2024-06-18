@@ -27,7 +27,7 @@ const umi = createUmi('http://127.0.0.1:8899').use(mplTokenMetadata())
 ```
 Then you want to tell Umi which wallet to use. This can either be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
 
-That's it, you can now interact with NFTs by using [the various functions provided by the library](https://mpl-token-metadata-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of creating an NFT and fetching the data of all of its on-chain accounts.
+That's it, you can now interact with NFTs by using [the various functions provided by the library](https://mpl-token-metadata.typedoc.metaplex.com/) and passing your `Umi` instance to them. Here's an example of creating an NFT and fetching the data of all of its on-chain accounts.
 
 ```ts
 import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
@@ -52,4 +52,4 @@ const asset = await fetchDigitalAsset(umi, mint.publicKey)
 - [Umi Framework](https://github.com/metaplex-foundation/umi)
 - [GitHub Repository](https://github.com/metaplex-foundation/mpl-token-metadata)
 - [NPM Package](https://www.npmjs.com/package/@metaplex-foundation/mpl-token-metadata)
-- [API References](https://mpl-token-metadata-js-docs.vercel.app/)
+- [API References](https://mpl-token-metadata.typedoc.metaplex.com/)

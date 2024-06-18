@@ -117,7 +117,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [Gatekeeper](https://mpl-core-candy-machine-js-docs.vercel.app/types/Gatekeeper.html)
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [Gatekeeper](https://mpl-core-candy-machine.typedoc.metaplex.com/types/Gatekeeper.html)
 
 {% /totem %}
 {% /dialect %}

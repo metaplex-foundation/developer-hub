@@ -107,7 +107,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [AssetBurnMulti](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetBurnMulti.html)
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [AssetBurnMulti](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetBurnMulti.html)
 
 {% /totem %}
 {% /dialect %}
@@ -141,7 +141,7 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [AssetBurnMultiMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/AssetBurnMultiMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [AssetBurnMultiMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetBurnMultiMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

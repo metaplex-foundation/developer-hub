@@ -99,7 +99,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [TokenBurn](https://mpl-core-candy-machine-js-docs.vercel.app/types/TokenBurnArgs.html)
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [TokenBurn](https://mpl-core-candy-machine.typedoc.metaplex.com/types/TokenBurnArgs.html)
 
 {% /totem %}
 {% /dialect %}
@@ -128,7 +128,7 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [TokenBurnMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/TokenBurnMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [TokenBurnMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/TokenBurnMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

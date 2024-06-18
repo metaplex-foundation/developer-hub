@@ -248,7 +248,7 @@ export const coreCandyMachine = {
 
     {
       ...referencesSection('core-candy-machine'),
-      href: `https://mpl-core-candy-machine-js-docs.vercel.app/`,
+      href: `https://mpl-core-candy-machine.typedoc.metaplex.com/`,
       title: 'Javascript API References',
       icon: "JavaScript",
       target: '_blank',
