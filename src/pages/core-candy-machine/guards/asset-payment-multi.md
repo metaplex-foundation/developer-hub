@@ -158,7 +158,7 @@ mintV1(umi, {
     assetPaymentMulti: some({
       requiredCollection: publicKey(requiredCollection),
       destination,
-      asset: assetToSend.publicKey,
+      assets: [firstAssetToSend.publicKey, secondAssetToSend.publicKey],
       num: 2
     }),
   },
