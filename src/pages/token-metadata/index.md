@@ -43,7 +43,7 @@ among other things.
 {% /node %}
 {% node y="70" parent="mint" theme="transparent" %}
 Stores information about the \
-token itseft. E.g. its current \
+token itself. E.g. its current \
 supply and its authorities.
 {% /node %}
 
