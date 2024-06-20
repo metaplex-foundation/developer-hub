@@ -6,11 +6,11 @@ description: Learn about the MPL Core AppData Plugin
 
 ## What is an AppData Plugin?
 
-The `AppData` third party plugin stores and contains arbitrary data that can be written to by the `dataAuthority`. Note this is different then the overall plugin authority stored in the `ExternalRegistryRecord` as it cannot update/revoke authority or change other metadata for the plugin.
+The `AppData` external plugin stores and contains arbitrary data that can be written to by the `dataAuthority`. Note this is different then the overall plugin authority stored in the `ExternalRegistryRecord` as it cannot update/revoke authority or change other metadata for the plugin.
 
-Think of AppData as like a partitiion data area of an Asset that only a certain authority can change and write too.
+Think of AppData as like a partition data area of an Asset that only a certain authority can change and write too.
 
-This is usefull for 3rd party sites/apps to store data they made need to execute certain functionality within their product/app.
+This is useful for 3rd party sites/apps to store data they made need to execute certain functionality within their product/app.
 
 ## Works With
 
@@ -19,11 +19,11 @@ This is usefull for 3rd party sites/apps to store data they made need to execute
 | MPL Core Asset        | ✅  |
 | MPL Core Collection\* | ✅  |
 
-\* MPL Core Collections work with the LinkAppData Plugin.
+\* MPL Core Collections can also work with the LinkedAppData Plugin.
 
 ## What is a LinkedAppData Plugin?
 
-The `LinkAppAdata` plugin is built for Collections. It allows you to add a single plugin adapter on the collection which will allow you to write to any Asset in the collection.
+The `LinkedAppAdata` plugin is built for Collections. It allows you to add a single plugin adapter on the collection which will allow you to write to any Asset in the collection.
 
 ## Arguments
 
@@ -33,8 +33,6 @@ The `LinkAppAdata` plugin is built for Collections. It allows you to add a singl
 | schema        | ExternalPluginAdapterSchema |
 
 ### dataAuthority
-
-The attribute list consists of an Array[] then an object of key-value pairs `{key: "value"}` string value pairs.
 
 {% dialect-switcher title="AttributeList" %}
 {% dialect title="JavaScript" id="js" %}
