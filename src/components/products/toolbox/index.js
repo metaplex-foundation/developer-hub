@@ -32,7 +32,7 @@ export const toolbox = {
     },
     {
       ...referencesSection('toolbox'),
-      href: `https://mpl-toolbox-js-docs.vercel.app/`,
+      href: `https://mpl-toolbox.typedoc.metaplex.com/`,
       target: '_blank',
     },
     { ...recipesSection('toolbox') },

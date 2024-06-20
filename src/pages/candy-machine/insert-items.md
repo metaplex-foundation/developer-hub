@@ -48,7 +48,7 @@ const uri = await umi.uploader.uploadJson({
 })
 ```
 
-API References: [UploaderInterface](https://umi-docs.vercel.app/interfaces/umi.UploaderInterface.html), [createGenericFileFromBrowserFile](https://umi-docs.vercel.app/functions/umi.createGenericFileFromBrowserFile.html).
+API References: [UploaderInterface](https://umi.typedoc.metaplex.com/interfaces/umi.UploaderInterface.html), [createGenericFileFromBrowserFile](https://umi.typedoc.metaplex.com/functions/umi.createGenericFileFromBrowserFile.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -93,7 +93,7 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [addConfigLines](https://mpl-candy-machine-js-docs.vercel.app/functions/addConfigLines.html)
+API References: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -138,7 +138,7 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [addConfigLines](https://mpl-candy-machine-js-docs.vercel.app/functions/addConfigLines.html)
+API References: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -175,7 +175,7 @@ candyMachine.items[1].name // "My NFT #X"
 candyMachine.items[2].name // "My NFT #3"
 ```
 
-API References: [addConfigLines](https://mpl-candy-machine-js-docs.vercel.app/functions/addConfigLines.html)
+API References: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

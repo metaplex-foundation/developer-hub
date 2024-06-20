@@ -42,7 +42,7 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [addConfigLines](https://mpl-core-candy-machine-js-docs.vercel.app/functions/addConfigLines.html)
+API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -87,7 +87,7 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [addConfigLines](https://mpl-core-candy-machine-js-docs.vercel.app/functions/addConfigLines.html)
+API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -124,7 +124,7 @@ candyMachine.items[1].name // "My Asset #X"
 candyMachine.items[2].name // "My Asset #3"
 ```
 
-API References: [addConfigLines](https://mpl-core-candy-machine-js-docs.vercel.app/functions/addConfigLines.html)
+API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

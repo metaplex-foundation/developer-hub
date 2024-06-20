@@ -26,7 +26,7 @@ import { mplToolbox } from '@metaplex-foundation/mpl-toolbox'
 const umi = createUmi('http://127.0.0.1:8899').use(mplToolbox())
 ```
 
-That's it, you can now interact with essential programs by using [the various functions provided by the library](https://mpl-toolbox-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of creating a new associated token account.
+That's it, you can now interact with essential programs by using [the various functions provided by the library](https://mpl-toolbox.typedoc.metaplex.com/) and passing your `Umi` instance to them. Here's an example of creating a new associated token account.
 
 ```ts
 import { createAssociatedToken } from '@metaplex-foundation/mpl-toolbox'
@@ -39,4 +39,4 @@ await createAssociatedToken(umi, { mint, owner }).sendAndConfirm(umi)
 - [Umi Framework](https://github.com/metaplex-foundation/umi)
 - [GitHub Repository](https://github.com/metaplex-foundation/mpl-toolbox)
 - [NPM Package](https://www.npmjs.com/package/@metaplex-foundation/mpl-toolbox)
-- [API References](https://mpl-toolbox-js-docs.vercel.app/)
+- [API References](https://mpl-toolbox.typedoc.metaplex.com/)

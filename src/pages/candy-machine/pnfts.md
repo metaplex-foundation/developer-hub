@@ -34,7 +34,7 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html)
+API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -60,7 +60,7 @@ await setTokenStandard(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [setTokenStandard](https://mpl-candy-machine-js-docs.vercel.app/functions/setTokenStandard.html)
+API References: [setTokenStandard](https://mpl-candy-machine.typedoc.metaplex.com/functions/setTokenStandard.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -84,7 +84,7 @@ await setCollectionV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [setCollectionV2](https://mpl-candy-machine-js-docs.vercel.app/functions/setCollectionV2.html)
+API References: [setCollectionV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/setCollectionV2.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -117,7 +117,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html)
+API References: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

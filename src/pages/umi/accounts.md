@@ -4,7 +4,7 @@ metaTitle: Umi - Fetching Accounts
 description: How to fetch Accounts using Umi
 ---
 
-Let's see how we can fetch account data from the Solana blockchain using Umi. For that, we will need the [`RpcInterface`](https://umi-docs.vercel.app/interfaces/umi.RpcInterface.html) to fetch accounts with serialized data and [serializers](./serializers.md) to help deserialize them.
+Let's see how we can fetch account data from the Solana blockchain using Umi. For that, we will need the [`RpcInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html) to fetch accounts with serialized data and [serializers](./serializers.md) to help deserialize them.
 
 ## Account definitions
 

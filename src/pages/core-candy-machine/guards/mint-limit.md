@@ -98,7 +98,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [MintLimit](https://mpl-core-candy-machine-js-docs.vercel.app/types/MintLimit.html)
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [MintLimit](https://mpl-core-candy-machine.typedoc.metaplex.com/types/MintLimit.html)
 
 {% /totem %}
 {% /dialect %}

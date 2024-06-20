@@ -157,7 +157,7 @@ export const core = {
     },
     {
       ...referencesSection('core'),
-      href: `https://mpl-core-js-docs.vercel.app/`,
+      href: `https://mpl-core.typedoc.metaplex.com/`,
       target: '_blank',
     },
     {

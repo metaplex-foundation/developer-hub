@@ -58,7 +58,7 @@ export const umi = {
     },
     {
       ...referencesSection('hydra'),
-      href: `https://umi-docs.vercel.app/`,
+      href: `https://umi.typedoc.metaplex.com/`,
       target: '_blank',
     },
     { ...recipesSection('umi') },

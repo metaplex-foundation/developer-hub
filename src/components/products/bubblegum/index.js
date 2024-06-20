@@ -80,7 +80,7 @@ export const bubblegum = {
     },
     {
       ...referencesSection('bubblegum'),
-      href: 'https://mpl-bubblegum-js-docs.vercel.app/',
+      href: 'https://mpl-bubblegum.typedoc.metaplex.com/',
       target: '_blank'
     },
     { ...recipesSection('bubblegum') },

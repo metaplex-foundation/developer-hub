@@ -194,7 +194,7 @@ export const candyMachine = {
     },
     {
       ...referencesSection('candy-machine'),
-      href: `https://mpl-candy-machine-js-docs.vercel.app/`,
+      href: `https://mpl-candy-machine.typedoc.metaplex.com/`,
       target: '_blank',
     },
     /*

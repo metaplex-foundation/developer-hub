@@ -98,7 +98,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [Allocation](https://mpl-candy-machine-js-docs.vercel.app/types/Allocation.html)
+API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [Allocation](https://mpl-candy-machine.typedoc.metaplex.com/types/Allocation.html)
 
 {% /totem %}
 {% /dialect %}
@@ -244,7 +244,7 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-candy-machine-js-docs.vercel.app/functions/route.html), [AllocationRouteArgs](https://mpl-candy-machine-js-docs.vercel.app/types/AllocationRouteArgs.html)
+API References: [route](https://mpl-candy-machine.typedoc.metaplex.com/functions/route.html), [AllocationRouteArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/AllocationRouteArgs.html)
 
 {% /totem %}
 {% /dialect %}

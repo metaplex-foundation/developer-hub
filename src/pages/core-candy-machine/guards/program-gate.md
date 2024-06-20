@@ -88,7 +88,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [ProgramGate](https://mpl-core-candy-machine-js-docs.vercel.app/types/ProgramGate.html)
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [ProgramGate](https://mpl-core-candy-machine.typedoc.metaplex.com/types/ProgramGate.html)
 
 {% /totem %}
 {% /dialect %}

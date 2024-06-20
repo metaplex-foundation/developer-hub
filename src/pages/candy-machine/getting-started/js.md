@@ -28,7 +28,7 @@ const umi = createUmi('http://127.0.0.1:8899').use(mplCandyMachine())
 
 Then you want to tell Umi which wallet to use. This can either be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
 
-That's it, you can now interact with NFTs by using [the various functions provided by the library](https://mpl-candy-machine-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of fetching a candy machine account and its associated candy guard account.
+That's it, you can now interact with NFTs by using [the various functions provided by the library](https://mpl-candy-machine.typedoc.metaplex.com/) and passing your `Umi` instance to them. Here's an example of fetching a candy machine account and its associated candy guard account.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -47,4 +47,4 @@ const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority)
 - [Umi Framework](https://github.com/metaplex-foundation/umi)
 - [GitHub Repository](https://github.com/metaplex-foundation/mpl-candy-machine)
 - [NPM Package](https://www.npmjs.com/package/@metaplex-foundation/mpl-candy-machine)
-- [API References](https://mpl-candy-machine-js-docs.vercel.app/)
+- [API References](https://mpl-candy-machine.typedoc.metaplex.com/)
