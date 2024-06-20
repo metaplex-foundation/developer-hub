@@ -7,9 +7,11 @@ created: '06-16-2024'
 updated: '06-18-2024'
 ---
 
-To create a Fungible SPL Token on Solana using Metaplex packages you'll need to install the following via your package manager of choice.
+This is an intial guide on how to create a next-gen Nft (Core Asset) on the Solana blockchain using the Metaplex Mpl Core protocol. Mpl Core Assets provide the next wave of NFT projects on Solana with greater creativity and a broad dynamic experiance for both creators and owners with Mpl Core's unique plugin system.
 
 ## Initial Setup
+
+This guide will run through create of an Nft Core Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
 
 ### Initializing
 

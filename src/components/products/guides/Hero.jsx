@@ -1,5 +1,6 @@
 import { Hero as BaseHero } from '@/components/Hero'
 import { HeroCode } from '@/components/HeroCode'
+import HoloCode from "../../../images/holo-code.jpg"
 
 const codeProps = {
   tabs: [
@@ -19,7 +20,8 @@ const codeProps = {
 export function Hero({ page }) {
   return (
     <BaseHero page={page}>
-      <HeroCode {...codeProps}></HeroCode>
+      <img src={HoloCode.src} className='rounded-xl dropShadowLight' />
+      {/* <HeroCode {...codeProps}></HeroCode> */}
     </BaseHero>
   )
 }
