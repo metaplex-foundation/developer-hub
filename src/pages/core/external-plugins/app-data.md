@@ -23,7 +23,7 @@ This is useful for 3rd party sites/apps to store data they made need to execute 
 
 ## What is a LinkedAppData Plugin?
 
-The `LinkedAppAdata` plugin is built for Collections. It allows you to add a single plugin adapter on the collection which will allow you to write to any Asset in the collection.
+The `LinkedAppData` plugin is built for Collections. It allows you to add a single plugin adapter on the collection which will allow you to write to any Asset in the collection.
 
 ## Arguments
 
@@ -63,7 +63,7 @@ The schema determines the type of data that is being stored within the AppData p
 
 | Arg               | DAS Supported |
 | ----------------- | ------------- |
-| Binary (Raw Data) |               |
+| Binary (Raw Data) | ✅            |
 | Json              | ✅            |
 | MsgPack           | ✅            |
 
