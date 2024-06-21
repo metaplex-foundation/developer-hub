@@ -8,9 +8,9 @@ description: Learn about the MPL Core AppData Plugin
 
 The `AppData` external plugin stores and contains arbitrary data that can be written to by the `dataAuthority`. Note this is different then the overall plugin authority stored in the `ExternalRegistryRecord` as it cannot update/revoke authority or change other metadata for the plugin.
 
-Think of AppData as like a partition data area of an Asset that only a certain authority can change and write too.
+Think of AppData as like a partition data area of an Asset that only a certain authority can change and write to.
 
-This is useful for 3rd party sites/apps to store data they made need to execute certain functionality within their product/app.
+This is useful for 3rd party sites/apps to store data needed to execute certain functionality within their product/app.
 
 ## Works With
 
@@ -59,13 +59,15 @@ let data_authority = Some(PluginAuthority::Address {address: authority.key()}),
 
 ### schema
 
-The schema determines the type of data that is being stored within the AppData plugin. Certain schemas will be DAS compatible and indexed by DAS RPC providers. These schema data types include:
+The schema determines the type of data that is being stored within the AppData plugin. All schemas will be indexed by DAS.
 
-| Arg               | DAS Supported |
-| ----------------- | ------------- |
-| Binary (Raw Data) | ✅            |
-| Json              | ✅            |
-| MsgPack           | ✅            |
+| Arg               | DAS Supported | Stored as |
+| ----------------- | ------------- | --------- |
+| Binary (Raw Data) | ✅            | base64    |
+| Json              | ✅            | json      |
+| MsgPack           | ✅            | json      |
+
+When indexing the data if there was an error reading the `json` or `msgpack` schema then it will be saved as binary.
 
 {% dialect-switcher title="Writing data to the AppData plugin" %}
 {% dialect title="JavaScript" id="js" %}
@@ -143,7 +145,7 @@ use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
 
-pub async fn add_attributes_plugin() {
+pub async fn add_app_data_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
     let authority = Keypair::new();
@@ -163,7 +165,7 @@ pub async fn add_attributes_plugin() {
 
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
 
-    let add_attribute_plugin_tx = Transaction::new_signed_with_payer(
+    let add_add_data_plugin_tx = Transaction::new_signed_with_payer(
         &[add_external_plugin_app_data_ix],
         Some(&authority.pubkey()),
         &signers,
@@ -171,7 +173,7 @@ pub async fn add_attributes_plugin() {
     );
 
     let res = rpc_client
-        .send_and_confirm_transaction(&add_external_plugin_app_data_ix)
+        .send_and_confirm_transaction(&add_add_data_plugin_tx)
         .await
         .unwrap();
 

@@ -26,7 +26,12 @@ The Update Delegate Plugin can be used when:
 
 ### additionalDelegates
 
-Additional delegates allow you to add more than one delegate to the updateDelegate plugin. These additional delegates do come with some restrictions such as you can't update the Collection as an Additioanl Delegate address.
+Additional delegates allow you to add more than one delegate to the updateDelegate plugin.
+
+Additional delegates can do everything that the update authority can do except:
+- add or change the additional delegates array (apart from remove themselves).
+- change the plugin authority of the updateAuthority plugin.
+- change the root update authority of the collection.
 
 ## Adding the Update Delegate Plugin to an Asset
 
