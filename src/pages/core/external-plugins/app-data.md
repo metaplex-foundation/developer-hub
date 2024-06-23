@@ -165,7 +165,7 @@ pub async fn add_app_data_plugin() {
 
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
 
-    let add_add_data_plugin_tx = Transaction::new_signed_with_payer(
+    let add_data_plugin_tx = Transaction::new_signed_with_payer(
         &[add_external_plugin_app_data_ix],
         Some(&authority.pubkey()),
         &signers,
@@ -173,7 +173,7 @@ pub async fn add_app_data_plugin() {
     );
 
     let res = rpc_client
-        .send_and_confirm_transaction(&add_add_data_plugin_tx)
+        .send_and_confirm_transaction(&add_data_plugin_tx)
         .await
         .unwrap();
 
