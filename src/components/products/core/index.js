@@ -91,6 +91,7 @@ export const core = {
             {
               title: 'Update Delegate Plugin',
               href: '/core/plugins/update-delegate',
+              updated: "06-19-2024"
             },
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
             { title: 'AddBlocker Plugin', href: '/core/plugins/addBlocker' },
@@ -136,6 +137,11 @@ export const core = {
             {
               title: 'Oracle Plugin',
               href: '/core/external-plugins/oracle',
+            },
+            {
+              title: 'AppData Plugin',
+              href: '/core/external-plugins/app-data',
+              created: "2024-06-19"
             },
           ],
         },
