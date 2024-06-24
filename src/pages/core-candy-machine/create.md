@@ -179,19 +179,21 @@ sellerFeeBasisPoints: percentageAmount(5)
 
 ### itemsAvailable
 
+The number of items being loaded into the Core Candy Machine.
+
 {% dialect-switcher title="percentageAmount" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-isMutable: number
+itemsAvailable: number
 ```
 
 {% /dialect %}
 {% /dialect-switcher %}
 
-The number of items being loaded into the Core Candy Machine.
-
 ### Is Mutable
+
+A boolean that marks an Asset as mutable or immutable upon creation.
 
 {% dialect-switcher title="percentageAmount" %}
 {% dialect title="JavaScript" id="js" %}
@@ -203,7 +205,6 @@ isMutable: boolean
 {% /dialect %}
 {% /dialect-switcher %}
 
-A boolean that marks an Asset as mutable or immutable upon creation.
 
 <!-- ### Creators
 
