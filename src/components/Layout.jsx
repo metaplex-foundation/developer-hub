@@ -28,7 +28,7 @@ export function Layout({ children, page }) {
     <>
       <Header page={page} />
 
-      {Hero && <Hero page={page} />}
+      {Hero && page.product.name !== 'Guides' && <Hero page={page} />}
 
       <div
         className={clsx(
@@ -77,9 +77,9 @@ export function Layout({ children, page }) {
             <Prose className="break-words">
               {children}
 
-<div className='flex justify-between text-neutral-600 italic text-sm'>
-              {page.created && <div>Date created: {page.created}</div>}
-              {page.updated && <div>Date updated: {page.updated}</div>}
+              <div className="flex justify-between text-sm italic text-neutral-600">
+                {page.created && <div>Date created: {page.created}</div>}
+                {page.updated && <div>Date updated: {page.updated}</div>}
               </div>
             </Prose>
           </article>

@@ -20,7 +20,7 @@ const codeProps = {
 export function Hero({ page }) {
   return (
     <BaseHero page={page}>
-      <img src={HoloCode.src} className='rounded-xl dropShadowLight' />
+      {/* <img src={HoloCode.src} className='rounded-xl dropShadowLight' /> */}
       {/* <HeroCode {...codeProps}></HeroCode> */}
     </BaseHero>
   )

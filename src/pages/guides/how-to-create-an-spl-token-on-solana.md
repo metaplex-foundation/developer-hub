@@ -4,10 +4,15 @@ metaTitle: How to Create an Spl Token On Solana
 description: Learn how to create an Spl Token on the Solana blockchain with Metaplex packages.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
-updated: '06-18-2024'
+updated: '06-21-2024'
 ---
 
-To create a Fungible SPL Token on Solana using Metaplex packages you'll need to install the following via your package manager of choice.
+This guide walks you through setting up and minting your very own token on the Solana blockchain using Metaplex packages.
+
+## Prerequisite
+
+- Code Editor of your choice (recomended Visual Studio Code)
+- Node 18.x.x or above.
 
 ## Initial Setup
 
@@ -22,6 +27,8 @@ npm init
 ### Required Packages
 
 Install the required pacakges for this guide.
+
+{% packagesUsed packages=["umi", "umiDefaults" ,"tokenMetadata", "@metaplex-foundation/umi-uploader-irys", "toolbox"] type="npm" /%}
 
 ```js
 npm i @metaplex-foundation/umi
@@ -41,6 +48,47 @@ npm i @metaplex-foundation/umi-uploader-irys;
 
 ```js
 npm i @metaplex-foundation/mpl-toolbox;
+```
+
+### Imports and Wrapper Function
+
+Here we will define all needed imports for this particular guide and create a wrapper function where all our code will execute.
+
+```ts
+import {
+  createFungible,
+  mplTokenMetadata,
+} from '@metaplex-foundation/mpl-token-metadata'
+import {
+  createTokenIfMissing,
+  findAssociatedTokenPda,
+  getSplAssociatedTokenProgramId,
+  mintTokensTo,
+} from '@metaplex-foundation/mpl-toolbox'
+import {
+  generateSigner,
+  percentAmount,
+  createGenericFile,
+  signerIdentity,
+  sol,
+} from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+import { base58 } from '@metaplex-foundation/umi/serializers'
+import fs from 'fs'
+import path from 'path'
+
+// Create the wrapper function
+const createAndMintTokens = async () => {
+  ///
+  ///
+  ///  all our code will go in here
+  ///
+  ///
+}
+
+// run the wrapper function
+createAndMintTokens()
 ```
 
 ## Setting up Umi
@@ -300,6 +348,7 @@ import {
   percentAmount,
   createGenericFile,
   signerIdentity,
+  sol,
 } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
@@ -316,19 +365,22 @@ const createAndMintTokens = async () => {
 
   umi.use(signerIdentity(signer))
 
+  // Airdrop 1 SOL to the identity
+  // if you end up with a 429 too many requests error, you may have to use
+  // the filesystem wallet method or change rpcs.
+  await umi.rpc.airdrop(umi.identity.publicKey, sol(1))
+
   // use `fs` to read file via a string path.
   // You will need to understand the concept of pathing from a computing perspective.
 
-  const imageFile = fs.readFileSync(
-    path.join(__dirname, '..', '/assets/islandDao.jpg')
-  )
+  const imageFile = fs.readFileSync(path.join(__dirname, '/assets/image.png'))
 
   // Use `createGenericFile` to transform the file into a `GenericFile` type
   // that umi can understand. Make sure you set the mimi tag type correctly
   // otherwise Arweave will not know how to display your image.
 
-  const umiImageFile = createGenericFile(imageFile, 'island-dao.jpeg', {
-    tags: [{ name: 'Content-Type', value: 'image/jpeg' }],
+  const umiImageFile = createGenericFile(imageFile, 'image.png', {
+    tags: [{ name: 'Content-Type', value: 'image/png' }],
   })
 
   // Here we upload the image to Arweave via Irys and we get returned a uri
@@ -361,7 +413,7 @@ const createAndMintTokens = async () => {
 
   const mintSigner = generateSigner(umi)
 
-  const createFungibleIx = await createFungible(umi, {
+  const createFungibleIx = createFungible(umi, {
     mint: mintSigner,
     name: 'The Kitten Coin',
     uri: metadataUri, // we use the `metedataUri` variable we created earlier that is storing our uri.
@@ -369,7 +421,7 @@ const createAndMintTokens = async () => {
     decimals: 9, // set the amount of decimals you want your token to have.
   })
 
-  // This instruction will create a new Token Account if required, otherwise it skips.
+  // This instruction will create a new Token Account if required, if one is found then it skips.
 
   const createTokenIx = createTokenIfMissing(umi, {
     mint: mintSigner.publicKey,
@@ -392,7 +444,7 @@ const createAndMintTokens = async () => {
   // Ix's here can be ommited and added as needed during the chain.
   // If for example you just want to create the Token without minting
   // any tokens then you can only submit the `createToken` ix.
-  //
+
   // If you want to mint tokens to a different wallet then you can
   // just pull out the `createTokenIx` ix and `mintTokensIx` ix and send
   // them as another tx.
