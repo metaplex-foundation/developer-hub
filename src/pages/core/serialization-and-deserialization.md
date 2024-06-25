@@ -29,7 +29,10 @@ console.log({ assetData })
 
 {% dialect title="Rust" id="rust" %}
 
-```ts
+```rust
+/// This can be applied to both local scripts and programs.
+/// Within programs you would pass in the ctx account data to the ::from_bytes() function
+
 let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
 let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
@@ -46,7 +49,7 @@ println!("assetV1: {:?}", asset_v1);
 
 ### Collections
 
-{% dialect-switcher title="Deserialize an Collection" %}
+{% dialect-switcher title="Deserialize a Collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -67,16 +70,19 @@ console.log({ assetData })
 
 {% dialect title="Rust" id="rust" %}
 
-```ts
+```rust
+/// This can be applied to both local scripts and programs.
+/// Within programs you would pass in the ctx account data to the ::from_bytes() function
+
 let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
-let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
 
-let account = rpc_client.get_account(&asset).await.unwrap();
+let account = rpc_client.get_account(&collection).await.unwrap();
 
-let asset_v1 = BaseAssetV1::from_bytes(&account.data).unwrap();
+let collection_v1 = CollectionV1::from_bytes(&account.data).unwrap();
 
-println!("assetV1: {:?}", asset_v1);
+println!("collection_V1: {:?}", asset_v1);
 ```
 
 {% /dialect %}
