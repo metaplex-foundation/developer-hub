@@ -4,29 +4,9 @@ metaTitle: Core - Typescript Staking Example
 description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking program!
 ---
 
-
 This developer guide demonstrates how to create a staking program for your collection using only TypeScript, leveraging the attribute plugin and freeze delegate. **This approach eliminates the need for a smart contract** to track staking time and manage staking/unstaking, making it more accessible for Web2 developer.
 
-## Introduction
-
-### Metaplex Core
-
-Metaplex Core (“Core”) is a **new standard created specifically for digital assets**. By moving away from the standard SPL-Token Program, Metaplex eliminated the complexity and technical debt of the previous standard (Token Metadata), providing a clean and simple interface for digital assets.
-
-This new implementation uses a **single account design**, significantly reducing minting costs and optimizing network load by streamlining instruction processes. Additionally, it features a flexible plugin system that allows developers to modify the behavior and functionality of assets.
-
-**Here are the biggest differences and improvements:**
-- **Unprecedented Cost Efficiency**: Metaplex Core offers the lowest minting costs compared to available alternatives. For instance, an NFT that would cost 0.022 SOL with Token Metadata or 0.0046 SOL with Token Extensions can be minted with Core for just 0.0029 SOL.
-- **Low Compute**: Core operations have a small Compute Unit footprint. This allows more transactions to be included in one block. Instead of 205,000 CU for minting, Core requires just 17,000 CU.
-- **Single Account Design**: Unlike relying on a fungible Token Standard like SPL Token or Token Extensions (aka Token22), Core focuses on the needs of an NFT standard. This allows Core to use a single account that also tracks the owner.
-
-If you want to learn more, click [here](/core/getting-started)
-
 ## Starting off: Understanding the Logic behind the program
-
-To create an NFT collection that can only be traded during US market hours, we need a reliable way of updating on-chain data based on the time of day. This is how the protocol design will look like:
-
-### Overview
 
 This program operates with a standard TypeScript backend and uses the asset keypair authority in the secret to sign attribute changes.
 
