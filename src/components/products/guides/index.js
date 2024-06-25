@@ -127,46 +127,6 @@ export const guides = {
             },
           ],
         },
-        // {
-        //   title: 'Assets/Nfts',
-        //   links: [
-        //     {
-        //       title: 'Creating an Nft',
-        //       href: '/guides/how-to-create-an-nft-on-solana',
-        //       created: '2021-10-01',
-        //       updated: null, // null means it's never been updated
-        //     },
-        //     {
-        //       title: 'How to freeze an Nft',
-        //       href: '/guides/how-to-freeze-an-nft-on-solana',
-        //       created: '2021-10-01',
-        //       updated: null, // null means it's never been updated
-        //     },
-        //   ],
-        // },
-        // {
-        //   title: 'Spl Token',
-        //   links: [
-        //     {
-        //       title: 'Creating an SPL Token',
-        //       href: '/guides/how-to-create-an-spl-token-on-solana',
-        //       created: '2024-06-16',
-        //       updated: null, // null means it's never been updated
-        //     },
-        //     {
-        //       title: 'Updating an SPL Token',
-        //       href: '/guides/how-to-update-an-spl-token-on-solana',
-        //       created: '2024-06-16',
-        //       updated: null, // null means it's never been updated
-        //     },
-        //     {
-        //       title: 'Transfering Tokens',
-        //       href: '/guides/how-to-transfer-an-spl-token-on-solana',
-        //       created: '2024-06-16',
-        //       updated: null, // null means it's never been updated
-        //     },
-        //   ],
-        // },
         {
           title: 'React/Nextjs',
           links: [
@@ -178,8 +138,32 @@ export const guides = {
             },
           ],
         },
+        {
+          title: 'Program Guides',
+          links: [
+            {
+              title: 'Core',
+              href: 'core/guides/react-nextjs/plugins',
+              created: '2021-10-01',
+              updated: null, // null means it's never been updated
+            },
+            {
+              title: 'Token Metadata',
+              href: '/guides/react-nextjs/plugins',
+              created: '2021-10-01',
+              updated: null, // null means it's never been updated
+            },
+            {
+              title: 'Bubblegum',
+              href: '/guides/react-nextjs/plugins',
+              created: '2021-10-01',
+              updated: null, // null means it's never been updated
+            },
+          ],
+        },
       ],
     },
+    
     // {
     //   ...referencesSection('core'),
     //   href: `https://mpl-core-js-docs.vercel.app/`,
