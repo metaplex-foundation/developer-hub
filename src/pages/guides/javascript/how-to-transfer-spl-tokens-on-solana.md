@@ -1,13 +1,11 @@
 ---
-title: How to Send and Transfer SOL on Solana
-metaTitle: How to Send and Transfer SOL on Solana
-description: Learn how to send and transfer SOL via javascript on the Solana blockchain.
+title: How to Send and Transfer SPL Tokens on Solana
+metaTitle: How to Send and Transfer SPL Tokens on Solana
+description: Learn how to send and transfer SPL Tokens via javascript on the Solana blockchain wih Metaplex packages.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-24-2024'
 ---
-
-This guide walks you through setting up and minting your very own token on the Solana blockchain using Metaplex packages.
 
 ## Prerequisite
 
@@ -59,13 +57,11 @@ import { base58 } from '@metaplex-foundation/umi/serializers'
 
 // Create the wrapper function
 const transferSolana = async () => {
-
   ///
   ///
   ///  all our code will go in here
   ///
   ///
-
 }
 
 // run the wrapper function
@@ -110,23 +106,40 @@ const walletFile = const imageFile = fs.readFileSync(
   )
 ```
 
-## Transfering Sol
+## Key Accounts
+
+When transfering SPL Tokens on Solana we need to work out both the senders and recieves SPL Token Account addresses for the token we are trying to send.
+
+Token Account addresses are unique between coins and wallets so we need to use a helper function to determine what each account address is for the both the sender and the reciever.
 
 ```ts
+// The address of the Token you want to transfer.
+const splToken = publicKey('111111111111111111111111111111')
 
-// Here we call the transferSol() function and send it to the chain.
+// The address of the wallet you want to transfer the Token to.
+const recipeientWallet = publicKey('22222222222222222222222222222222')
 
-const res = await transferSol(umi, {
-    source: umi.identity,
-    destination: publicKey('111111111111111111111111111111'),
-    amount: sol(1),
-  }).sendAndConfirm(umi)
+// Find the associated token account for the SPL Token on the senders wallet.
+const sourceTokenAccount = findAssociatedTokenPda(umi, {
+  mint: splToken,
+  owner: umi.identity.publicKey,
+})
+
+// Find the associated token account for the SPL Token on the receivers wallet.
+const destinationTokenAccount = findAssociatedTokenPda(umi, {
+  mint: splToken,
+  owner: recipeientWallet,
+})
 ```
 
-## Full Code Example
+## Sending the SPL Tokens
 
 ```ts
-import { mplToolbox, transferSol } from '@metaplex-foundation/mpl-toolbox'
+import {
+  findAssociatedTokenPda,
+  mplToolbox,
+  transferTokens,
+} from '@metaplex-foundation/mpl-toolbox'
 import {
   generateSigner,
   publicKey,
@@ -136,7 +149,7 @@ import {
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 
-const transfer = async () => {
+const transferSplTokens = async () => {
   const umi = createUmi('https://api.devnet.solana.com').use(mplToolbox())
 
   const signer = generateSigner(umi)
@@ -149,18 +162,40 @@ const transfer = async () => {
   await umi.rpc.airdrop(umi.identity.publicKey, sol(1))
 
   //
-  // Transfer SOL
+  // Key Accounts
   //
 
-  const res = await transferSol(umi, {
-    source: umi.identity,
-    destination: publicKey('111111111111111111111111111111'),
-    amount: sol(1),
+  // The address of the Token you want to transfer.
+  const splToken = publicKey('111111111111111111111111111111')
+
+  // The address of the wallet you want to transfer the Token to.
+  const recipeientWallet = publicKey('22222222222222222222222222222222')
+
+  // Find the associated token account for the SPL Token on the senders wallet.
+  const sourceTokenAccount = findAssociatedTokenPda(umi, {
+    mint: splToken,
+    owner: umi.identity.publicKey,
+  })
+
+  // Find the associated token account for the SPL Token on the receivers wallet.
+  const destinationTokenAccount = findAssociatedTokenPda(umi, {
+    mint: splToken,
+    owner: recipeientWallet,
+  })
+
+  //
+  // Transfer SPL Token
+  //
+
+  const res = await transferTokens(umi, {
+    source: sourceTokenAccount,
+    destination: destinationTokenAccount,
+    amount: 10000, // amount of tokens to transfer*
   }).sendAndConfirm(umi)
 
   // Log the signature of the transaction
   console.log(base58.deserialize(res.signature))
 }
 
-transfer()
+transferSplTokens()
 ```

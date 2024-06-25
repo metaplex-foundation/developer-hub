@@ -43,50 +43,50 @@ export const guides = {
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
-            {
-              title: 'Where do I start?',
-              href: '/guides/where-do-i-start-on-solana',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
+            // {
+            //   title: 'Where do I start?',
+            //   href: '/guides/where-do-i-start-on-solana',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
           ],
         },
         {
           title: 'Javascript',
           links: [
-            {
-              title: 'Working with Javascript',
-              href: '/guides/javascript/working-with-javascript',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
+            // {
+            //   title: 'Working with Javascript',
+            //   href: '/guides/javascript/working-with-javascript',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
             {
               title: 'Creating an Nft',
               href: '/guides/javascript/how-to-create-an-nft-on-solana',
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
-            {
-              title: 'Freezing an Nft',
-              href: '/guides/javascript/how-to-freeze-an-nft-on-solana',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
+            // {
+            //   title: 'Freezing an Nft',
+            //   href: '/guides/javascript/how-to-freeze-an-nft-on-solana',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
             {
               title: 'Creating an SPL Token',
               href: '/guides/javascript/how-to-create-an-spl-token-on-solana',
               created: '2024-06-16',
               updated: null, // null means it's never been updated
             },
-            {
-              title: 'Updating an SPL Token',
-              href: '/guides/javascript/how-to-update-an-spl-token-on-solana',
-              created: '2024-06-16',
-              updated: null, // null means it's never been updated
-            },
+            // {
+            //   title: 'Updating an SPL Token',
+            //   href: '/guides/javascript/how-to-update-an-spl-token-on-solana',
+            //   created: '2024-06-16',
+            //   updated: null, // null means it's never been updated
+            // },
             {
               title: 'Transfering Tokens',
-              href: '/guides/javascript/how-to-transfer-an-spl-token-on-solana',
+              href: '/guides/javascript/how-to-transfer-spl-tokens-on-solana',
               created: '2024-06-16',
               updated: null, // null means it's never been updated
             },
@@ -107,63 +107,63 @@ export const guides = {
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
-            {
-              title: 'Create a Marketplace',
-              href: '/guides/rust/create-a-marketplace',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'Create a Staking Program',
-              href: '/guides/rust/create-a-staking-program',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'Program Optimization',
-              href: '/guides/rust/program-optimization',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
+            // {
+            //   title: 'Create a Marketplace',
+            //   href: '/guides/rust/create-a-marketplace',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
+            // {
+            //   title: 'Create a Staking Program',
+            //   href: '/guides/rust/create-a-staking-program',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
+            // {
+            //   title: 'Program Optimization',
+            //   href: '/guides/rust/program-optimization',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
           ],
         },
-        {
-          title: 'React/Nextjs',
-          links: [
-            {
-              title: 'Connecting to a Wallet',
-              href: '/guides/react-nextjs/plugins',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
-          ],
-        },
+        // {
+        //   title: 'React/Nextjs',
+        //   links: [
+        //     {
+        //       title: 'Connecting to a Wallet',
+        //       href: '/guides/react-nextjs/plugins',
+        //       created: '2021-10-01',
+        //       updated: null, // null means it's never been updated
+        //     },
+        //   ],
+        // },
         {
           title: 'Program Guides',
           links: [
             {
               title: 'Core',
-              href: 'core/guides/react-nextjs/plugins',
+              href: '/core/guides/',
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
-            {
-              title: 'Token Metadata',
-              href: '/guides/react-nextjs/plugins',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'Bubblegum',
-              href: '/guides/react-nextjs/plugins',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
+            // {
+            //   title: 'Token Metadata',
+            //   href: '/guides/react-nextjs/plugins',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
+            // {
+            //   title: 'Bubblegum',
+            //   href: '/guides/react-nextjs/plugins',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
           ],
         },
       ],
     },
-    
+
     // {
     //   ...referencesSection('core'),
     //   href: `https://mpl-core-js-docs.vercel.app/`,
