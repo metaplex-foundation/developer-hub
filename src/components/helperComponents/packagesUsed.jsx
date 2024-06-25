@@ -1,11 +1,16 @@
+import Link from 'next/link.js'
 import { installationPackages } from './packages.js'
 
 export const PackagesUsed = ({ packages, type }) => {
   console.log({ installationPackages })
 
-  const url = (installationPackage, type) => {
+  const url = (installationPackage) => {
     if (type === 'npm') {
-      return `https://www.npmjs.com/package/${installationPackages[installationPackage].npm}`
+      if (installationPackages[installationPackage] && installationPackages[installationPackage].npm) {
+        console.log(installationPackage)
+        return `https://www.npmjs.com/package/${installationPackages[installationPackage].npm}`
+      }
+      return `https://www.npmjs.com/package/${installationPackage}`
     } else if (type === 'rust') {
       return `https://crates.io/crates/${installationPackages[installationPackage].crate}`
     } else if (type === 'github') {
@@ -31,9 +36,11 @@ export const PackagesUsed = ({ packages, type }) => {
     return (
       <div
         key={index}
-        className="dark:text-neutral-300 rounded-lg bg-neutral-300 p-2 text-neutral-700 shadow-md dark:bg-neutral-800"
+        className="rounded-lg bg-neutral-300 p-2 text-neutral-700 shadow-md dark:bg-neutral-700 dark:text-neutral-300"
       >
-        <div className="text-xs">{packageName(installationPackage)}</div>
+        <Link href={url(installationPackage)} target="_blank">
+          <div className="text-xs">{packageName(installationPackage)}</div>
+        </Link>
         {/* <p className="text-sm text-gray-500">{packageName}</p> */}
         {/* <a
           href={url(installationPackage, type)}

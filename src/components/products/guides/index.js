@@ -62,37 +62,37 @@ export const guides = {
             },
             {
               title: 'Creating an Nft',
-              href: '/guides/how-to-create-an-nft-on-solana',
+              href: '/guides/javascript/how-to-create-an-nft-on-solana',
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
             {
               title: 'Freezing an Nft',
-              href: '/guides/how-to-freeze-an-nft-on-solana',
+              href: '/guides/javascript/how-to-freeze-an-nft-on-solana',
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
             {
               title: 'Creating an SPL Token',
-              href: '/guides/how-to-create-an-spl-token-on-solana',
+              href: '/guides/javascript/how-to-create-an-spl-token-on-solana',
               created: '2024-06-16',
               updated: null, // null means it's never been updated
             },
             {
               title: 'Updating an SPL Token',
-              href: '/guides/how-to-update-an-spl-token-on-solana',
+              href: '/guides/javascript/how-to-update-an-spl-token-on-solana',
               created: '2024-06-16',
               updated: null, // null means it's never been updated
             },
             {
               title: 'Transfering Tokens',
-              href: '/guides/how-to-transfer-an-spl-token-on-solana',
+              href: '/guides/javascript/how-to-transfer-an-spl-token-on-solana',
               created: '2024-06-16',
               updated: null, // null means it's never been updated
             },
             {
               title: 'Transfering SOL',
-              href: '/guides/how-to-transfer-sol-on-solana',
+              href: '/guides/javascript/how-to-transfer-sol-on-solana',
               created: '2024-06-16',
               updated: null, // null means it's never been updated
             },
