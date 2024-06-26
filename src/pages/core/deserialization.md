@@ -6,7 +6,7 @@ description: Learn about the deserialization of Asset accounts, Collection accou
 
 ## Deserialization
 
-As discussed in the Core overview, digital assets on Core are composed of exactly one on-chain account that has all the relevant data inside of it.
+As discussed in the Core overview, digital assets on Core are composed of exactly **one on-chain account** that has all the relevant data inside of it.
 
 That means that if we want to read that data we need to learn how to deserialize it.
 
@@ -14,10 +14,10 @@ That means that if we want to read that data we need to learn how to deserialize
 
 Deserializing the `Asset` account will return information about:
 
-- Owner: The owner of the asset
-- Update Authority: The authority over the asset, or the collection Address if it's part of one 
-- Name: The Asset Name
-- Uri: The uri to the asset off-chain metadata.
+- **Owner**: The owner of the asset
+- **Update** Authority: The authority over the asset, or the collection Address if it's part of one 
+- **Name**: The Asset Name
+- **Uri**: The uri to the asset off-chain metadata.
 
 {% dialect-switcher title="Deserialize an Asset" %}
 
@@ -69,11 +69,11 @@ println!("assetV1: {:?}", asset_v1);
 
 Deserializing the `Collection` account will return information about:
 
-- Update Authority:	The authority over the collection and all the asset inside of it
-- Name:	The collection name.
-- Uri:	The uri to the collections off-chain metadata.
-- Num Minted: The number of assets minted in the collection.
-- Current size:	The number of assets currently in the collection.
+- **Update** Authority:	The authority over the collection and all the asset inside of it
+- **Name**:	The collection name.
+- **Uri**:	The uri to the collections off-chain metadata.
+- **Num Minted**: The number of assets minted in the collection.
+- **Current size**:	The number of assets currently in the collection.
 
 {% dialect-switcher title="Deserialize a Collection" %}
 {% dialect title="JavaScript" id="js" %}
