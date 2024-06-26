@@ -130,16 +130,16 @@ Even if the plugin data is saved directly on the Asset account, because of the s
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-const accountData = await fetchAsset(
+const assetV1 = await fetchAsset(
   umi,
   publicKey('11111111111111111111111111111111')
 )
 
 // Example of saving just the deserialized data of the Attributes Plugin
-let attributes_plugin = accountData.attributes
+let attributes_plugin = assetV1.attributes
 
 // Example of saving just the deserialized data of the Royalties Plugin
-let royalties_plugin = accountData.royalties
+let royalties_plugin = assetV1.royalties
 ```
 
 {% /dialect %}
