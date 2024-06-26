@@ -4,13 +4,11 @@ metaTitle: Deserialization
 description: Learn about the deserialization of Asset accounts, Collection accounts and plugins.
 ---
 
-## Deserialization
-
-As discussed in the Core overview, digital assets on Core are composed of exactly **one on-chain account** that has all the relevant data inside of it.
+Digital assets on Core are composed of exactly **one on-chain account** that has all the relevant data inside of it.
 
 That means that if we want to read that data we need to learn how to deserialize it.
 
-### Assets
+### Deserializing Assets
 
 Deserializing the `Asset` account will return information about:
 
@@ -63,7 +61,7 @@ println!("assetV1: {:?}", asset_v1);
 
 {% /dialect-switcher %}
 
-### Collections
+### Deserializing Collections
 
 Deserializing the `Collection` account will return information about:
 
@@ -122,7 +120,7 @@ println!("collection_V1: {:?}", asset_v1);
 
 {% /dialect-switcher %}
 
-### Plugins
+### Deserializing Plugins
 
 Even if the plugin data is saved directly on the Asset account, because of the size of it we should deserialize and save just the singular plugin data
 
