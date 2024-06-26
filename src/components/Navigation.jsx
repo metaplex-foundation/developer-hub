@@ -46,25 +46,12 @@ export function Navigation({ product, navigation, className }) {
                     )}
                   >
                     {link.title}{' '}
+                    {link.updated && isRecent(link.updated) && (
+                      <Badge type="updated" />
+                    )}
                     {link.created && isRecent(link.created) && (
                       <Badge type="new" />
                     )}
-                    {/* {link.links && link.links.map(sublink => {
-                      return (
-                        <Link
-                          href={sublink.href}
-                          key={`${sublink.title}-${sublink.href}`}
-                          className={clsx(
-                            'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2 before:rounded',
-                            sublink.href === router.pathname
-                              ? 'font-semibold text-accent-500 before:bg-accent-500'
-                              : 'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300'
-                          )}
-                        >
-                          {sublink.title}
-                        </Link>
-                      )
-                    })} */}
                   </Link>
                 </li>
               ))}

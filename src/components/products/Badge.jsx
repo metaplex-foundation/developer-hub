@@ -6,7 +6,7 @@ const Badge = ({ type }) => {
     };
 
     return (
-        <span className={`inline-block ml-2 px-2 py-1 text-xs font-semibold leading-none rounded-full ${colorMap[type]}`}>
+        <span className={`inline-block ml-2 px-2 py-1 text-xs font-semibold leading-none rounded-full ${colorMap[type]} ring-1 ring-neutral-300`}>
             {type}
         </span>
     )
