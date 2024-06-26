@@ -29,9 +29,7 @@ const accountData = await umi.rpc.getAccount(
 
 if (!accountData.exists) throw 'Account does not exist'
 
-const assetData = getAssetV1AccountDataSerializer().deserialize(
-  accountData.data
-)
+const assetV1 = deserializeAssetV1(accountData)
 
 console.log({ assetData })
 ```
@@ -85,9 +83,7 @@ const accountData = await umi.rpc.getAccount(
 
 if (!accountData.exists) throw 'Account does not exist'
 
-const assetData = getCollectionV1AccountDataSerializer().deserialize(
-  accountData.data
-)
+const collectionV1 = deserializeCollectionV1(accountData)
 
 console.log({ assetData })
 ```
