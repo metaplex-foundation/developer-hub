@@ -51,10 +51,6 @@ umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
 
 Now that we have our **URI**, we can move on to the next step.
 
-<!-- ## Create an Asset
-
-Explain the difference between storing in account state and ledger state. -->
-
 ## Create an Asset
 
 To create an Asset use the `createV1` instruction. The `createV1` instruction, in addition to setting the basic metadata of the Asset, encompasses the likes of adding your Asset to a collection and assigning plugins which is described a bit [later](#create-an-asset-with-plugins).
@@ -230,16 +226,29 @@ MPL Core Assets can be created straight into a collection if your MPL Core Colle
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { createCollection, create } from '@metaplex-foundation/mpl-core'
+import {
+  createCollection,
+  create,
+  fetchCollection,
+} from '@metaplex-foundation/mpl-core'
 
 const collectionSigner = generateSigner(umi)
 
+// create collection
+// if you are doing this in a single script you may have
+// to use a sleep function or commitment level of 'finalized'
+// so the collection is fully written to change before fetching it.
 await createCollection(umi, {
   collection: collectionSigner,
   name: 'My Collection',
   uri: 'https://example.com/my-collection.json',
 }).sendAndConfirm(umi)
 
+// fetch the collection
+const collection = fetchCollection(umi, collection.publicKey)
+
+
+// generate assetSigner and then create the asset.
 const asset = generateSigner(umi)
 
 await create(umi, {
@@ -355,27 +364,27 @@ const creator2 = publicKey('22222222222222222222222222222222')
 const assetSigner = generateSigner(umi)
 
 await create(umi, {
-    asset: assetSigner,
-    name: "My Asset",
-    uri: "https://example.com/my-asset.json",
-    plugins: [
-      {
-        type: "Royalties",
-        basisPoints: 500,
-        creators: [
-          {
-            address: creator1,
-            percentage: 20,
-          },
-          {
-            address: creator2,
-            percentage: 80,
-          },
-        ],
-        ruleSet: ruleSet("None"), // Compatibility rule set
-      },
-    ],
-  }).sendAndConfirm(umi)
+  asset: assetSigner,
+  name: 'My Asset',
+  uri: 'https://example.com/my-asset.json',
+  plugins: [
+    {
+      type: 'Royalties',
+      basisPoints: 500,
+      creators: [
+        {
+          address: creator1,
+          percentage: 20,
+        },
+        {
+          address: creator2,
+          percentage: 80,
+        },
+      ],
+      ruleSet: ruleSet('None'), // Compatibility rule set
+    },
+  ],
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
