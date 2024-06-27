@@ -8,36 +8,36 @@ updated: '06-21-2024'
 ---
 
 ## Solana Programs
-Solana programs are executable code that runs on the Solana blockchain. They are similar to smart contracts on other blockchain platforms, but with some distinct characteristics and optimizations specific to Solana.
+Solana programs are **executable code** that runs on the Solana blockchain. They are similar to smart contracts on other blockchain platforms, but with some distinct characteristics and optimizations specific to Solana.
 
 #### Key Characteristics:
-- Stateless: Solana programs do not store state internally. Instead, state is stored in accounts.
-- Written in Rust: Programs are typically written in Rust, leveraging Solana's libraries and tooling.
-Executed by Transactions: Programs are invoked by transactions that specify the program ID and the required accounts.
+- **Stateless**: Solana programs do not store state internally. Instead, state is stored in accounts.
+- **Written in Rust**: Programs are typically written in Rust, leveraging Solana's libraries and tooling.
+- **Executed by Transactions**: Programs are invoked by transactions that specify the program ID and the required accounts.
 
 ## Accounts
-Accounts are a fundamental part of the Solana blockchain and are used to store both data and SOL (the native cryptocurrency). Each account has an owner, which is a program that can modify its data.
+Accounts are a fundamental part of the Solana blockchain and are **used to store both data and SOL**. Each account has an owner, which is a program that can modify its data.
 
 #### Types of Accounts:
-- Data Accounts: Store arbitrary data used by programs.
-- Token Accounts: Manage token balances (similar to ERC-20 tokens on Ethereum).
-Program Accounts: Contain the executable code of a Solana program.
+- **Data Accounts**: Store arbitrary data used by programs.
+- **Token Accounts**: Manage token balances (similar to ERC-20 tokens on Ethereum).
+- **Program Accounts**: Contain the executable code of a Solana program.
 
 ## Instructions
-Instructions are operations sent to Solana programs. They are included in transactions and specify which accounts the program should operate on, as well as any additional data needed to perform the operation.
+Instructions are **operations** sent to Solana programs. They are included in transactions and specify which accounts the program should operate on, as well as any additional data needed to perform the operation.
 
 #### Key Elements of Instructions:
-- Program ID: Identifies the program to be executed.
-- Accounts: A list of accounts that the instruction will read from or write to.
-- Data: Custom data required to perform the instruction.
+- **Program ID**: Identifies the program to be executed.
+- **Accounts**: A list of accounts that the instruction will read from or write to.
+- **Data**: Custom data required to perform the instruction.
 
 ## State Management
-In Solana, the state is managed externally from the programs, stored in accounts. This separation of state and logic enables higher scalability and efficiency.
+In Solana, the state is **managed externally** from the programs, stored in accounts. This separation of state and logic enables higher scalability and efficiency.
 
 #### State Management Workflow:
-- Account Creation: Create accounts to store data.
-- Program Execution: Execute a program with instructions specifying which accounts to read from or write to.
-- State Update: Programs modify the state by updating the data in accounts.
+- **Account Creation**: Create accounts to store data.
+- **Program Execution**: Execute a program with instructions specifying which accounts to read from or write to.
+- **State Update**: Programs modify the state by updating the data in accounts.
 
 #### Example Workflow
 1. Define a Program:
@@ -90,5 +90,3 @@ fn process_instruction(
     Ok(())
 }
 ```
-## Conclusion
-Solana programs and state management involve executing stateless programs that operate on data stored in accounts. This architecture allows for efficient and scalable decentralized applications on the Solana blockchain. Programs are typically written in Rust and deployed to the network, where they are invoked by transactions containing specific instructions and account information.

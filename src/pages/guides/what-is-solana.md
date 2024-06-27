@@ -7,7 +7,7 @@ created: '06-16-2024'
 updated: '06-21-2024'
 ---
 
-# Solana Blockchain Summary
+# Solana Overview
 
 The Solana blockchain is a high-performance, decentralized blockchain platform designed to enable scalable and user-friendly applications. Launched in 2020 by Solana Labs, Solana aims to address the limitations of earlier blockchain networks such as Bitcoin and Ethereum, particularly in terms of scalability, speed, and cost.
 
@@ -33,7 +33,3 @@ The Solana blockchain is a high-performance, decentralized blockchain platform d
 
 7. **Low Costs:**
    Solana offers low transaction fees, making it an attractive option for developers and users looking to build and interact with dApps and DeFi platforms without the high costs associated with other blockchains.
-
-## Ecosystem and Use Cases
-
-Solana supports a growing ecosystem of dApps, decentralized finance (DeFi) platforms, non-fungible tokens (NFTs), and various other blockchain-based applications. Some notable projects in the Solana ecosystem include Serum (a decentralized exchange), Mango Markets (a DeFi platform), and SolSea (an NFT marketplace).

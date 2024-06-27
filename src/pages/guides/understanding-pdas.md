@@ -7,30 +7,28 @@ created: '06-16-2024'
 updated: '06-21-2024'
 ---
 
-
-
 ## Overview
-Program Derived Addresses (PDAs) are special types of addresses used in the Solana blockchain. They are a crucial part of the architecture that enables secure and deterministic interactions between programs and accounts without exposing private keys.
+**Program Derived Addresses (PDAs)** are special types of account used on Solana that are deterministically derived and look like standard public keys, but have no associated private keys.
 
 ## Key Characteristics of PDAs
-- Deterministic: PDAs are derived from a combination of a program ID and seed values, ensuring they are unique and predictable for a given program and set of seeds.
-- Secure: PDAs cannot be directly controlled by any private key, enhancing security. Only the program that derived the PDA can sign transactions involving it.
-- Convenient: They simplify the management of program-specific state and data by providing a consistent way to address accounts.
+- **Deterministic**: PDAs are deterministically derived from a combination of a program ID and "seeds" (predefined inputs) values
+- **Secure**: no external user can generate a valid signature for the PDA address. Only the program that derived the PDA can sign transactions involving it.
+- **Convenient**: They simplify the management of program-specific state and data by providing a consistent way to address accounts.
 
 ## Role of PDAs
 PDAs are primarily used to:
 
-- Manage State: PDAs allow programs to manage state and store data securely and predictably.
-- Authorize Transactions: Only the program that owns the PDA can authorize transactions involving it, ensuring controlled access.
-- Create Program-Specific Accounts: Programs can create and interact with accounts that are uniquely associated with them, enabling modular and isolated state management.
+- **Manage State**: PDAs allow programs to store data in a determinstic address, making reading that state back easy.
+- **Authorize Transactions**: Only the program that owns the PDA can authorize transactions involving it, ensuring controlled access.
+- **Create Program-Specific Accounts**: Programs can create and interact with accounts that are uniquely associated with them, enabling modular and isolated state management.
 
 ## How PDAs are Derived
 PDAs are derived using a combination of a program ID and a set of seed values. The derivation process involves hashing these values together and ensuring the resulting address is valid.
 
 ### Derivation Process
-- Select Program ID: The public key of the program for which the PDA is being derived.
-- Choose Seeds: One or more seed values that, together with the program ID, will deterministically generate the PDA algorithmically based on the combined values.
-- Compute PDA: Use the `Pubkey::find_program_address` function to derive the PDA. This function ensures the derived address is valid and cannot collide with any regular (non-PDA) address.
+1. **Select Program ID**: The public key of the program for which the PDA is being derived.
+2. **Choose Seeds**: One or more seed values that, together with the program ID, will deterministically generate the PDA algorithmically based on the combined values.
+3. **Compute PDA**: Use the `Pubkey::find_program_address` function to derive the PDA. This function ensures the derived address is valid and cannot collide with any regular (non-PDA) address.
 
 ## Example in Rust
 Here's an example of deriving a PDA in a Solana program written in Rust:
@@ -104,7 +102,3 @@ fn create_account_with_pda(
     Ok(())
 }
 ```
-
-## Conclusion
-
-Program Derived Addresses (PDAs) are a fundamental feature of Solana, providing a secure and deterministic way to manage program-specific accounts and state. They ensure only the owning program can authorize transactions involving the PDA, enhancing security and simplifying state management. PDAs are derived using a combination of the program ID and seed values, ensuring uniqueness and predictability.
