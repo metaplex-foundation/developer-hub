@@ -4,18 +4,20 @@ metaTitle: Deserialization
 description: Learn about the deserialization of Asset accounts, Collection accounts and plugins.
 ---
 
-Digital assets on Core are composed of exactly **one on-chain account** that has all the relevant data inside of it.
+Digital assets on Core are composed of exactly **one on-chain account** that contains both the base asset data and the plugin.
 
 That means that if we want to read that data we need to learn how to deserialize it.
 
-### Deserializing Assets
+In javascript we can deserialize both the base asset data and the plugin using a single function. In Rust we should deserialize base asset and specific plugins separately to avoid wasting compute and risking to cause a stack overflow in programs.
+
+## Deserializing Assets
 
 Deserializing the `Asset` account will return information about:
 
 - **Owner**: The owner of the asset
-- **Update** Authority: The authority over the asset, or the collection Address if it's part of one 
+- **Update Authority**: The authority over the asset, or the collection Address if it's part of one 
 - **Name**: The Asset Name
-- **Uri**: The uri to the asset off-chain metadata.
+- **Uri**: The uri to the asset off-chain metadata. -->
 
 {% dialect-switcher title="Deserialize an Asset" %}
 
@@ -53,7 +55,7 @@ let asset = ctx.accounts.asset;
 
 let data = asset.try_borrow_data()?;
 
-let asset_v1 = BaseAssetV1::from_bytes(&data.as_ref())
+let asset_v1 = BaseAssetV1::from_bytes(&data.as_ref())?;
 
 println!("assetV1: {:?}", asset_v1);
 ```
@@ -61,7 +63,7 @@ println!("assetV1: {:?}", asset_v1);
 
 {% /dialect-switcher %}
 
-### Deserializing Collections
+## Deserializing Collections
 
 Deserializing the `Collection` account will return information about:
 
@@ -99,7 +101,7 @@ let account = rpc_client.get_account(&collection).await.unwrap();
 
 let collection_v1 = CollectionV1::from_bytes(&account.data).unwrap();
 
-println!("collection_V1: {:?}", asset_v1);
+println!("collection_V1: {:?}", collection_v1);
 ```
 
 {% /dialect %}
@@ -113,16 +115,18 @@ let data = collection.try_borrow_data()?;
 
 let collection_v1 = BaseCollectionV1::from_bytes(&data.as_ref())?;
 
-println!("collection_V1: {:?}", asset_v1);
+println!("collection_V1: {:?}", collection_v1);
 ```
 
 {% /dialect %}
 
 {% /dialect-switcher %}
 
-### Deserializing Plugins
+## Deserializing Plugins
 
-Even if the plugin data is saved directly on the Asset account, because of the size of it we should deserialize and save just the singular plugin data
+As said before, 
+- Using **Javascript** we can deserialize the whole asset into a single variable, in this section we're going to see how we can access the specific data associated with the plugins.
+- Using **Rust** we need to deserialize specific plugin data to avoid stack violation because of the size of the account.
 
 {% dialect-switcher title="Deserialize Plugins" %}
 {% dialect title="JavaScript" id="js" %}
