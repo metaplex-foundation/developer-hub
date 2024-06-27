@@ -51,10 +51,6 @@ umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
 
 Now that we have our **URI**, we can move on to the next step.
 
-<!-- ## Create an Asset
-
-Explain the difference between storing in account state and ledger state. -->
-
 ## Create an Asset
 
 To create an Asset use the `createV1` instruction. The `createV1` instruction, in addition to setting the basic metadata of the Asset, encompasses the likes of adding your Asset to a collection and assigning plugins which is described a bit [later](#create-an-asset-with-plugins).
@@ -249,9 +245,6 @@ await createCollection(umi, {
 }).sendAndConfirm(umi)
 
 // fetch the collection
-// if the createCollection transaction succeeds but
-// the fetch produces 'accountNotFound' then you will need
-// to sleep before executing the fetch.
 const collection = fetchCollection(umi, collection.publicKey)
 
 
