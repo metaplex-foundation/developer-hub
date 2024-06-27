@@ -230,16 +230,32 @@ MPL Core Assets can be created straight into a collection if your MPL Core Colle
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { createCollection, create } from '@metaplex-foundation/mpl-core'
+import {
+  createCollection,
+  create,
+  fetchCollection,
+} from '@metaplex-foundation/mpl-core'
 
 const collectionSigner = generateSigner(umi)
 
+// create collection
+// if you are doing this in a single script you may have
+// to use a sleep function or commitment level of 'finalized'
+// so the collection is fully written to change before fetching it.
 await createCollection(umi, {
   collection: collectionSigner,
   name: 'My Collection',
   uri: 'https://example.com/my-collection.json',
 }).sendAndConfirm(umi)
 
+// fetch the collection
+// if the createCollection transaction succeeds but
+// the fetch produces 'accountNotFound' then you will need
+// to sleep before executing the fetch.
+const collection = fetchCollection(umi, collection.publicKey)
+
+
+// generate assetSigner and then create the asset.
 const asset = generateSigner(umi)
 
 await create(umi, {
@@ -355,27 +371,27 @@ const creator2 = publicKey('22222222222222222222222222222222')
 const assetSigner = generateSigner(umi)
 
 await create(umi, {
-    asset: assetSigner,
-    name: "My Asset",
-    uri: "https://example.com/my-asset.json",
-    plugins: [
-      {
-        type: "Royalties",
-        basisPoints: 500,
-        creators: [
-          {
-            address: creator1,
-            percentage: 20,
-          },
-          {
-            address: creator2,
-            percentage: 80,
-          },
-        ],
-        ruleSet: ruleSet("None"), // Compatibility rule set
-      },
-    ],
-  }).sendAndConfirm(umi)
+  asset: assetSigner,
+  name: 'My Asset',
+  uri: 'https://example.com/my-asset.json',
+  plugins: [
+    {
+      type: 'Royalties',
+      basisPoints: 500,
+      creators: [
+        {
+          address: creator1,
+          percentage: 20,
+        },
+        {
+          address: creator2,
+          percentage: 80,
+        },
+      ],
+      ruleSet: ruleSet('None'), // Compatibility rule set
+    },
+  ],
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
