@@ -181,7 +181,7 @@ sellerFeeBasisPoints: percentageAmount(5)
 
 The number of items being loaded into the Core Candy Machine.
 
-{% dialect-switcher title="percentageAmount" %}
+{% dialect-switcher title="itemsAvailable" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -195,7 +195,7 @@ itemsAvailable: number
 
 A boolean that marks an Asset as mutable or immutable upon creation.
 
-{% dialect-switcher title="percentageAmount" %}
+{% dialect-switcher title="isMutable" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -204,29 +204,6 @@ isMutable: boolean
 
 {% /dialect %}
 {% /dialect-switcher %}
-
-
-<!-- ### Creators
-
-// Do we even need these anymore? Should this now set the Royalties plugin on the Collection Asset.
-
-An array of creators that is writen to the `Royalties` plugin
-
-{% dialect-switcher title="percentageAmount" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-creators : {
-  address: publicKey,
-  share: number
-}[]
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-
-//Todo: Currently needs fixing in the program and client to remove verified. -->
 
 ### Config Line Settings
 
