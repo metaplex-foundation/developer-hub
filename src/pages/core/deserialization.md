@@ -8,7 +8,7 @@ Digital assets on Core are composed of exactly **one on-chain account** that con
 
 That means that if we want to read that data we need to learn how to deserialize it.
 
-In javascript we can deserialize both the base asset data and the plugin using a single function. In Rust we should deserialize base asset and specific plugins separately to avoid wasting compute and risking to cause a stack overflow in programs.
+In Javascript we can deserialize both the base asset data and the plugin using a single function. In Rust we should deserialize the base asset and only the required plugins separately to avoid unnecessary compute usage and to prevent overflowing the stack.
 
 ## Deserializing Assets
 
