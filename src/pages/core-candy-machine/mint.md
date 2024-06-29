@@ -97,21 +97,20 @@ Starting from version `1.0` of the Candy Guard program, The mint instruction acc
 To mint from a Core Candy Machine via a configured Candy Guard account, you may use the `mintV1` function and provide the mint address and update authority of the collection NFT the minted NFT will belong to. A `minter` signer and `payer` signer may also be provided but they will default to Umi's identity and payer respectively.
 
 ```ts
-import { mintV1 } from '@metaplex-foundation/mpl-core-candy-machine'
-import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
-import { 
-  generateSigner 
-} from '@metaplex-foundation/umi'
+import { mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
+import { setComputeUnitLimit } from "@metaplex-foundation/mpl-toolbox";
+import { generateSigner } from "@metaplex-foundation/umi";
 
-const candyMachineId = publicKey('11111111111111111111111111111111')
-const coreCollection = publicKey('22222222222222222222222222222222')
-const asset = generateSigner(umi)
+const candyMachineId = publicKey("11111111111111111111111111111111");
+const coreCollection = publicKey("22222222222222222222222222222222");
+const asset = generateSigner(umi);
 
 await mintV1(umi, {
 	candyMachine: candyMachineId,
 	asset,
 	collection: coreCollection,
 }).sendAndConfirm(umi);
+
 ```
 
 Note that the `mintV1` instruction takes care of creating the Mint and Token accounts for us by default and will set the NFT owner to the `minter`. If you wish to create these yourself beforehand, you may simply give the NFT mind address as a public key instead of a signer. Here's an example using the `createMintWithAssociatedToken` function from the `mpl-toolbox` Umi library:
