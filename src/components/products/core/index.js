@@ -56,6 +56,7 @@ export const core = {
               href: '/core/collections',
             },
             { title: 'Helpers', href: '/core/helpers' },
+            { title: 'Deserializing Assets', href: '/core/deserialization' },
           ],
         },
         {
