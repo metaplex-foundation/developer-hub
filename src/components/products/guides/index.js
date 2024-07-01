@@ -1,6 +1,5 @@
 import { documentationSection } from '@/shared/sections'
 import { BookOpenIcon } from '@heroicons/react/24/outline'
-import { Hero } from './Hero'
 
 export const guides = {
   name: 'Guides',
@@ -11,7 +10,7 @@ export const guides = {
   icon: <BookOpenIcon className="text-green-500" />,
   github: 'https://github.com/metaplex-foundation/mpl-core',
   className: 'accent-green',
-  heroes: [{ path: '/guides', component: Hero }],
+  heroes: null,
   sections: [
     {
       ...documentationSection('guides'),
@@ -102,17 +101,35 @@ export const guides = {
           title: 'Rust',
           links: [
             {
-              title: 'Working With Rust',
-              href: '/guides/rust/working-with-rust',
+              title: 'Getting Started with Rust',
+              href: '/guides/rust/getting-started-with-rust',
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
-            // {
-            //   title: 'Create a Marketplace',
-            //   href: '/guides/rust/create-a-marketplace',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
+            {
+              title: 'How to CPI into a Metaplex Program',
+              href: '/guides/rust/how-to-cpi-into-a-metaplex-program',
+              created: '07-01-2024',
+              updated: null, // null means it's never been updated
+            },
+            {
+              title: 'Setting up and Using a Solana Client in a Rust Script',
+              href: '/guides/rust/set-up-a-solana-client-in-a-rust-script',
+              created: '07-01-2024',
+              updated: null, // null means it's never been updated
+            },
+            {
+              title: 'Using Metaplex Rust SDKs in Scripts',
+              href: '/guides/rust/using-metaplex-rust-sdks-in-scripts',
+              created: '07-01-2024',
+              updated: null, // null means it's never been updated
+            },
+            {
+              title: 'How to Deserialize an Account',
+              href: '/guides/rust/create-a-marketplace',
+              created: '2021-10-01',
+              updated: null, // null means it's never been updated
+            },
             // {
             //   title: 'Create a Staking Program',
             //   href: '/guides/rust/create-a-staking-program',

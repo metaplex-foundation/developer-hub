@@ -24,7 +24,9 @@ export function Navigation({ product, navigation, className }) {
 
   return (
     <nav className={clsx('text-base lg:text-sm', className)}>
+      <div className='text-2xl mb-4'>{product.name}</div>
       <ul role="list" className="space-y-9">
+        
         {navigation.map((section) => (
           <li key={`${product.name}-${section.title}`}>
             <h2 className="font-display font-medium text-slate-900 dark:text-white">
