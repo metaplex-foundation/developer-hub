@@ -54,7 +54,7 @@ These are simple SPL tokens with limited metadata and supply >= 0. Examples are 
 {% /totem-accordion %}
 {% /totem %}
 
-## The Fungible Asset Standard
+## The Fungible Nft Standard
 
 These are fungible tokens with more extensive metadata and supply >= 0. An example of this kind of token is something the community has been calling "semi-fungible tokens" often used to represent a fungible but attribute-heavy in-game item such as a sword or a piece of wood.
 

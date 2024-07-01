@@ -1,7 +1,7 @@
 ---
 title: Verified Collections
 metaTitle: Token Metadata - Verified Collections
-description: Learn how to safely wrap Assets into collections on Token Metadata
+description: Learn how to safely wrap Nfts into collections on Token Metadata
 ---
 
 Certified Collections enables NFTs – and tokens in general — **to be grouped together** and for that information to be **verified on-chain**. Additionally, it makes it easier to manage these collections by allocating data for them on-chain. {% .lead %}

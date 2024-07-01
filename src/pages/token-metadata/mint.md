@@ -8,10 +8,10 @@ As we discussed in the [Token Metadata overview](/token-metadata), digital asset
 
 ## The minting process
 
-Whether we want to mint a Fungible, Semi-Fungible or Non-Fungible asset, the overall process is the same:
+Whether we want to mint a Fungible, Semi-Fungible or Non-Fungible Nft, the overall process is the same:
 
-1. **Upload off-chain data.** First, we must ensure our off-chain data is ready. This means we must have a JSON file stored somewhere that describes our asset. It doesn't matter how or where that JSON file is stored, as long as it's accessible via a **URI**.
-2. **Create on-chain accounts.** Then, we must create the on-chain accounts that will hold our asset's data. Which exact accounts will be created depends on the **Token Standard** of our asset, but in all cases, a **Metadata** account will be created and will store the **URI** of our off-chain data.
+1. **Upload off-chain data.** First, we must ensure our off-chain data is ready. This means we must have a JSON file stored somewhere that describes our Nft. It doesn't matter how or where that JSON file is stored, as long as it's accessible via a **URI**.
+2. **Create on-chain accounts.** Then, we must create the on-chain accounts that will hold our Nft's data. Which exact accounts will be created depends on the **Token Standard** of our Nft, but in all cases, a **Metadata** account will be created and will store the **URI** of our off-chain data.
 3. **Mint tokens.** Finally, we must mint the tokens associated with all these accounts. For Non-Fungible assets, that simply means minting from 0 to 1, since Non-Fungibility forbids us to have a supply greater than 1. For Fungible or Semi-Fungible assets, we may mint however many tokens we want.
 
 Let's dig into these steps in more detail, whilst providing concrete code examples.
@@ -136,10 +136,10 @@ Additionally, if the provided **Mint** account does not exist, it will be create
 
 This instruction accepts a variety of parameters and our SDKs do their best to provide default values to them so you don't need to fill all of them every single time. That being said, here is a list of parameters that you may be interested in:
 
-- **Mint**: The Mint account of the asset. If it doesn't exist, it must be provided as a Signer as it will be initialized. Typically, we generate a new keypair for this purpose.
+- **Mint**: The Mint account of the Nft. If it doesn't exist, it must be provided as a Signer as it will be initialized. Typically, we generate a new keypair for this purpose.
 - **Authority**: The authority of the Mint account. This is the account that is or will be allowed to mint tokens from the Mint account. This will default to the "Identity" wallet — i.e. the connected wallet — if supported by the SDK.
-- **Name**, **URI**, **Seller Fee Basis Points**, **Creators**, etc.: The data of the asset to store on the **Metadata** account.
-- **Token Standard**: The Token Standard of the asset.
+- **Name**, **URI**, **Seller Fee Basis Points**, **Creators**, etc.: The data of the Nft to store on the **Metadata** account.
+- **Token Standard**: The Token Standard of the Nft.
 
 {% dialect-switcher title="Create on-chain Accounts" %}
 {% dialect title="JavaScript" id="js" %}
@@ -253,15 +253,15 @@ create_cpi.invoke();
 
 ## Minting Tokens
 
-Once all on-chain accounts are created for our asset, we can mint tokens for it. If the asset is Non-Fungible we will simply mint its one and only token, otherwise we can mint as many tokens as we want. Note that a Non-Fungible asset is only valid once its unique token has been minted so it is a mandatory step for that Token Standard.
+Once all on-chain accounts are created for our Nft, we can mint tokens for it. If the Nft is Non-Fungible we will simply mint its one and only token, otherwise we can mint as many tokens as we want. Note that a Non-Fungible Nft is only valid once its unique token has been minted so it is a mandatory step for that Token Standard.
 
 We can use the **Mint V1** instruction of the Token Metadata program to achieve this. It requires the following parameters:
 
-- **Mint**: The address of the asset's Mint account.
+- **Mint**: The address of the Nft's Mint account.
 - **Authority**: The authority that can authorize this instruction. For Non-Fungible assets, this is the update authority of the **Metadata** account, otherwise, this refers to the **Mint Authority** of the Mint account.
 - **Token Owner**: The address of the wallet to receive the token(s).
 - **Amount**: The number of tokens to mint. For Non-Fungible assets, this may only be 1.
-- **Token Standard**: The Token Standard of the asset (**required for our JavaScript SDK**). The program does not require this argument but our SDK do so they can provide adequate default values for most of the other parameters.
+- **Token Standard**: The Token Standard of the Nft (**required for our JavaScript SDK**). The program does not require this argument but our SDK do so they can provide adequate default values for most of the other parameters.
 
 {% dialect-switcher title="Mint Tokens" %}
 {% dialect title="JavaScript" id="js" %}
@@ -404,8 +404,8 @@ import { createFungibleAsset } from '@metaplex-foundation/mpl-token-metadata'
 const mint = generateSigner(umi)
 await createFungibleAsset(umi, {
   mint,
-  name: 'My Fungible Asset',
-  uri: 'https://example.com/my-fungible-asset.json',
+  name: 'My Fungible Nft',
+  uri: 'https://example.com/my-fungible-nft.json',
   sellerFeeBasisPoints: percentAmount(5.5),
   decimals: some(7) // for 0 decimals use some(0)
 }).sendAndConfirm(umi)
