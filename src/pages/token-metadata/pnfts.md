@@ -4,7 +4,7 @@ metaTitle: Token Metadata - Programmable NFTs
 description: Learn more about Programmable NFTs (a.k.a. pNFTs) on Token Metadata
 ---
 
-As mentioned in the [overview page](/token-metadata#pnfts), Programmable NFTs (PNFTs) are a new asset standard that allows creators to define custom rules on specific operations and delegate more granularly to third-party authorities. {% .lead %}
+As mentioned in the [overview page](/token-metadata#pnfts), Programmable NFTs (PNFTs) are a new Nft asset standard that allows creators to define custom rules on specific operations and delegate more granularly to third-party authorities. {% .lead %}
 
 ## No More Bypassing Token Metadata
 
