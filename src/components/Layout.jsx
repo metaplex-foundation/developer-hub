@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import Hotjar from '@hotjar/browser';
+import Hotjar from '@hotjar/browser'
 
 import { Header } from '@/components/Header'
 import { Navigation } from '@/components/Navigation'
@@ -14,20 +14,26 @@ export function Layout({ children, page }) {
   const Hero = page.activeHero
   useLightense()
   useAccentClass(page.product)
-  if(process.env.NEXT_PUBLIC_HOTJAR_ID && process.env.NEXT_PUBLIC_HOTJAR_VERSION){
-    Hotjar.init(process.env.NEXT_PUBLIC_HOTJAR_ID, process.env.NEXT_PUBLIC_HOTJAR_VERSION);
+  if (
+    process.env.NEXT_PUBLIC_HOTJAR_ID &&
+    process.env.NEXT_PUBLIC_HOTJAR_VERSION
+  ) {
+    Hotjar.init(
+      process.env.NEXT_PUBLIC_HOTJAR_ID,
+      process.env.NEXT_PUBLIC_HOTJAR_VERSION
+    )
   }
 
   return (
     <>
       <Header page={page} />
 
-      {Hero && <Hero page={page} />}
+      {Hero && page.product.name !== 'Guides' && <Hero page={page} />}
 
       <div
         className={clsx(
-          'relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12',
-          hasNavigation ? 'max-w-8xl' : 'max-w-6xl'
+          'relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12'
+          // hasNavigation ? 'max-w-8xl' : 'max-w-6xl'
         )}
       >
         {/* Navigation. */}
@@ -49,7 +55,7 @@ export function Layout({ children, page }) {
         {/* Content. */}
         <div
           className={clsx(
-            'min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none',
+            'min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-[1200px]',
             hasNavigation ? 'lg:pl-8 lg:pr-0 xl:px-16' : 'lg:pl-0 lg:pr-16'
           )}
         >
@@ -68,7 +74,14 @@ export function Layout({ children, page }) {
                 )}
               </header>
             )}
-            <Prose className="break-words">{children}</Prose>
+            <Prose className="break-words">
+              {children}
+
+              <div className="flex justify-between text-sm italic text-neutral-600">
+                {page.created && <div>Date created: {page.created}</div>}
+                {page.updated && <div>Date updated: {page.updated}</div>}
+              </div>
+            </Prose>
           </article>
           <dl className="mt-12 flex border-t border-slate-200 pt-6 dark:border-slate-800">
             {page.activeSection?.previousPage && (

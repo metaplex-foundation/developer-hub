@@ -8,6 +8,7 @@ import { usePage } from '@/shared/usePage'
 import '@/styles/tailwind.css'
 import 'focus-visible'
 import 'reactflow/dist/base.css'
+import '@/styles/extra.css'
 
 // Add Prism components.
 import { Prism } from 'prism-react-renderer'

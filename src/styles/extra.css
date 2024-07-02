@@ -1,0 +1,4 @@
+.dropShadowLight {
+    -webkit-box-shadow: 11px 11px 22px -3px rgba(255, 255, 255, 0.212); 
+box-shadow: 11px 11px 22px -3px rgba(255, 255, 255, 0.212);
+}
