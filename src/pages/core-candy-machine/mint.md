@@ -106,9 +106,9 @@ const coreCollection = publicKey("22222222222222222222222222222222");
 const asset = generateSigner(umi);
 
 await mintV1(umi, {
-	candyMachine: candyMachineId,
-	asset,
-	collection: coreCollection,
+  candyMachine: candyMachineId,
+  asset,
+  collection: coreCollection,
 }).sendAndConfirm(umi);
 
 ```
@@ -130,16 +130,16 @@ const asset = generateSigner(umi)
 const nftOwner = publicKey('11111111111111111111111111111111')
 
 await transactionBuilder()
-	.add(createMintWithAssociatedToken(umi, { mint: nftMint, owner: nftOwner }))
-	.add(
-		mintV1(umi, {
-			candyMachine: candyMachineId,
-			asset,
-			collection: coreCollection,
-			owner: nftOwner,
-		})
-	)
-	.sendAndConfirm(umi);
+  .add(createMintWithAssociatedToken(umi, { mint: nftMint, owner: nftOwner }))
+  .add(
+    mintV1(umi, {
+      candyMachine: candyMachineId,
+      asset,
+      collection: coreCollection,
+      owner: nftOwner,
+    })
+  )
+  .sendAndConfirm(umi);
 ```
 
 In the rare event that you wish to mint directly from the Core Candy Machine program instead of the Candy Guard Program, you may use the `mintAssetFromCandyMachine` function instead. This function requires the mint authority of the Core Candy Machine to be provided as a signer and accepts an explicit `assetOwner` attribute.
@@ -154,11 +154,11 @@ const coreCollection = publicKey('22222222222222222222222222222222')
 const asset = generateSigner(umi)
 
 await mintAssetFromCandyMachine(umi, {
-	candyMachine: candyMachineId,
-	mintAuthority: umi.identity,
-	assetOwner: umi.identity.publicKey,
-	asset,
-	collection: coreCollection,
+  candyMachine: candyMachineId,
+  mintAuthority: umi.identity,
+  assetOwner: umi.identity.publicKey,
+  asset,
+  collection: coreCollection,
 }).sendAndConfirm(umi);
 ```
 
