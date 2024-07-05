@@ -126,7 +126,7 @@ create(umi, {
       destinationAta: findAssociatedTokenPda(umi, {
         mint: tokenMint.publicKey,
         owner: umi.identity.publicKey,
-      }),
+      })[0],
     }),
   },
 });

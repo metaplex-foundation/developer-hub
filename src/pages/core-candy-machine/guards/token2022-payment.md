@@ -131,7 +131,10 @@ create(umi, {
     token2022Payment: some({
       amount: 300,
       mint: tokenMint.publicKey,
-      destinationAta,
+      destinationAta: findAssociatedTokenPda(umi, {
+        mint: tokenMint.publicKey,
+        owner: umi.identity.publicKey,
+      })[0],
     }),
   },
 })
