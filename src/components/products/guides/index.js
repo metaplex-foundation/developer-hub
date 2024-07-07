@@ -120,13 +120,13 @@ export const guides = {
             },
             {
               title: 'Using Metaplex Rust SDKs in Scripts',
-              href: '/guides/rust/using-metaplex-rust-sdks-in-scripts',
+              href: '/guides/rust/setup-a-solana-clent-in-a-rust-script',
               created: '07-01-2024',
               updated: null, // null means it's never been updated
             },
             {
               title: 'How to Deserialize an Account',
-              href: '/guides/rust/create-a-marketplace',
+              href: '/guides/rust/how-to-deserialize-an-account',
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
