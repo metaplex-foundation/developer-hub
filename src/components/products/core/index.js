@@ -177,7 +177,8 @@ export const core = {
             { title: 'Immutability', href: '/core/guides/immutability' },
             { title: 'Print Editions', href: '/core/guides/print-editions' },
             { title: 'Oracle Plugin Example', href: '/core/guides/oracle-plugin-example' },
-            { title: 'Web2 typescript Staking Example', href: '/core/guides/javascript/web2-typescript-staking-example' }
+            { title: 'Web2 typescript Staking Example', href: '/core/guides/javascript/web2-typescript-staking-example' },
+            { title: 'Using Core with Anchor', href: '/core/guides/using-core-with-anchor' }
           ],
         },
       ],
