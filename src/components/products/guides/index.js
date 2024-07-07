@@ -120,7 +120,7 @@ export const guides = {
             },
             {
               title: 'Using Metaplex Rust SDKs in Scripts',
-              href: '/guides/rust/setup-a-solana-clent-in-a-rust-script',
+              href: '/guides/rust/using-metaplex-rust-sdks-in-scripts',
               created: '07-01-2024',
               updated: null, // null means it's never been updated
             },
