@@ -40,7 +40,7 @@ export const core = {
               href: '/core/tm-differences',
             },
             { title: 'Ecosystem Support', href: '/core/ecosystem-support' },
-            { title: 'Using Core in Anchor', href: '/core/using-core-with-anchor' },
+            { title: 'Using Core in Anchor', href: '/core/using-core-in-anchor' },
             { title: 'FAQ', href: '/core/faq' },
           ],
         },
