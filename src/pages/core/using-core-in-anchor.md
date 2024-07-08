@@ -58,7 +58,7 @@ There are different methods to deserialize a core-specific BaseAccount. One meth
 
 By activating the `anchor flag` that we talked about previously, you'll be able to deserialize both the `Asset` and `Collection` accounts directly in the Anchor account struct:
 
-{% dialect-switcher title="Deserialize an Asset" %}
+{% dialect-switcher title="Accounts Deserialization" %}
 
 {% dialect title="Asset" id="asset" %}
 
@@ -90,7 +90,7 @@ pub struct ExampleAccountStruct<'info> {
 
 Borrow the data inside the asset/collection account using the `try_borrow_data()` function and create the asset/collection struct from those bytes:
 
-{% dialect-switcher title="Deserialize an Account" %}
+{% dialect-switcher title="Accounts Deserialization" %}
 
 {% dialect title="Asset" id="asset" %}
 
@@ -118,7 +118,7 @@ To access individual plugins within an Asset or Collection account, use the `fet
 
 The `fetch_plugin()` function is used for both Assets and Collections accounts and can handle every plugin type by specifying the appropriate typing. If you want to access the data inside a plugin, use the middle value returned by this function.
 
-{% dialect-switcher title="Deserialize an Asset" %}
+{% dialect-switcher title="Plugins Deserialization" %}
 
 {% dialect title="Asset" id="asset" %}
 
@@ -142,7 +142,7 @@ let (_, attribute_list, _) = fetch_plugin::<BaseCollectionV1, Attributes>(&ctx.a
 
 ## The CPI Instruction Builders
 
-Each instruction from the Metaplex Rust `mpl-core` crate comes with a **CpiBuilder** version of each transaction (listed above) which you can be imported. The CpiBuilder is created using `name of the instruction` + `CpiBuilder` and simplifies the code significantly abstracting a lot of boilerplate code away! 
+Each instruction from the Metaplex Rust `mpl-core` crate comes with a **CpiBuilder** version of each transaction which you can be imported. The CpiBuilder is created using `name of the instruction` + `CpiBuilder` and simplifies the code significantly abstracting a lot of boilerplate code away! 
 
 If you want to learn more about all the possible instruction available in Core, you can find them on the [docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)
 
