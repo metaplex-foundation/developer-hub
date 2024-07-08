@@ -4,29 +4,31 @@ metaTitle: Core - Using Core in Anchor
 description: Learn how to use Core inside your Anchor Smart Contracts
 ---
 
-## Intallation
+## Installation
 
-To start using Core in an Anchor project, first make sure that you have added the latest version of the crate to your project.
+To start using Core in an Anchor project, first ensure that you have added the latest version of the crate to your project by running:
 
 ```rust
 cargo add mpl-core
 ```
 
-Alternatively you can manually write into the dependencies list what version you want.
+Alternatively, you can manually specify the version in your cargo.toml file:
 
 ```rust
 [dependencies]
 mpl-core = "x.x.x"
 ```
 
-#### Feature Flag
+### Feature Flag
 
-With the `mpl-core` crate enable the anchor feature flag by using `features = ["anchor]"` on the dependcy entry to gain access to anchor specific features within the crate.
+With the `mpl-core` crate you can enable the anchor feature flag in the mpl-core crate to access Anchor-specific features by modifying the dependency entry in your cargo.toml:
 
 ```rust
 [dependencies]
 mpl-core = { version = "x.x.x", features = [ "anchor" ] }
 ```
+
+### Core Rust SDK Modules
 
 The Core Rust SDK is organized into several modules:
 
@@ -37,9 +39,11 @@ The Core Rust SDK is organized into several modules:
 
 For more detailed information on how different instructions are called and used, refer to the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/) or you can use cmd + left click (Cntrl + left click for window users) on the instruction to expand it.
 
-## Accounts
+## Accounts Deserialization
 
-#### Deserializable Accounts
+There are two ways to deserialize Core accounts. One approach directly deserializes the Asset or Collection account using the `Asset` or `Collection` struct to access all associated data. However, this can lead to stack overflow errors due to the large size of the accounts so our raccomendation is to to deserialize these accounts as `BaseAssetV1` or `BaseCollectionV1`, which contain basic data, and then deserialize the plugin data separately.
+
+### Deserializable Accounts
 ```rust
 - BaseAssetV1
 - BaseCollectionV1
@@ -48,23 +52,11 @@ For more detailed information on how different instructions are called and used,
 - PluginRegistryV1
 ```
 
-There are two ways to deserialize accounts while using the Anchor framework.
-
-One approach to directly deserialize the Asset or Collection account is to use the `Asset` or `Collection` struct to access all the data, including the basic information and all the plugins (normal and external). However, deserializing such a large account can lead to stack overflow errors, so our raccomandation is to deserialize these accounts as `BaseAssetV1` or `BaseCollectionV1`, which contains the basic data, and then deserialize the plugin data separately.
-
 There are different methods to deserialize a core-specific BaseAccount. One method involves using the Anchor account struct macro, while the other one involves deserializing the raw bytes of the account:
 
-#### Anchor Accounts List Method
+### Anchor Accounts List Method
 
-To deserialize assets in the account struct, enable the `anchor` feature in the mpl-core crate by modifying the cargo.toml like this:
-
-```toml
-[dependencies]
-...
-mpl-core = { version = "x.x.x", features = [ "anchor" ] }
-```
-
-By activating this feature, you'll be able to deserialize both the `Asset` and `Collection` accounts directly in the Anchor account struct:
+By activating the `anchor flag` that we talked about previously, you'll be able to deserialize both the `Asset` and `Collection` accounts directly in the Anchor account struct:
 
 {% dialect-switcher title="Deserialize an Asset" %}
 
@@ -94,9 +86,9 @@ pub struct ExampleAccountStruct<'info> {
 
 {% /dialect-switcher %}
 
-#### Account from_bytes()
+### Account from_bytes() Method
 
-Start by borrowing the data inside the asset/collection account using the `try_borrow_data()` function. Then, create the asset/collection struct from those bytes, as shown in the example below:
+Borrow the data inside the asset/collection account using the `try_borrow_data()` function and create the asset/collection struct from those bytes:
 
 {% dialect-switcher title="Deserialize an Account" %}
 
@@ -119,8 +111,6 @@ let base_collection: BaseCollectionV1 = BaseCollectionV1::from_bytes(&data.as_re
 {% /dialect %}
 
 {% /dialect-switcher %}
-
-
 
 ### Deserializing Plugins
 
@@ -154,49 +144,20 @@ let (_, attribute_list, _) = fetch_plugin::<BaseCollectionV1, Attributes>(&ctx.a
 
 Each instruction from the Metaplex Rust `mpl-core` crate comes with a **CpiBuilder** version of each transaction (listed above) which you can be imported. The CpiBuilder is created using `name of the instruction` + `CpiBuilder` and simplifies the code significantly abstracting a lot of boilerplate code away! 
 
-<!-- #### CpiBuilder List
+If you want to learn more about all the possible instruction available in Core, you can find them on the [docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)
 
-- [AddCollectionExternalPluginAdapterV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.AddCollectionExternalPluginAdapterV1CpiBuilder.html)
-- [AddCollectionPluginV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.AddCollectionPluginV1CpiBuilder.html)
-- [AddExternalPluginAdapterV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.AddExternalPluginAdapterV1CpiBuilder.html)
-- [AddPluginV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.AddPluginV1CpiBuilder.html)
-- [ApproveCollectionPluginAuthorityV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.ApproveCollectionPluginAuthorityV1CpiBuilder.html)
-- [ApprovePluginAuthorityV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.ApprovePluginAuthorityV1CpiBuilder.html)
-- [BurnCollectionV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.BurnCollectionV1CpiBuilder.html)
-- [BurnV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.BurnV1CpiBuilder.html)
-- [CollectCpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.CollectCpiBuilder.html)
-- [CreateCollectionV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.CreateCollectionV1CpiBuilder.html)
-- [CreateCollectionV2CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.CreateCollectionV2CpiBuilder.html)
-- [CreateV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.CreateV1CpiBuilder.html)
-- [CreateV2CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.CreateV2CpiBuilder.html)
-- [RemoveCollectionExternalPluginAdapterV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.RemoveCollectionExternalPluginAdapterV1CpiBuilder.html)
-- [RemoveCollectionPluginV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.RemoveCollectionPluginV1CpiBuilder.html)
-- [RemoveExternalPluginAdapterV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.RemoveExternalPluginAdapterV1CpiBuilder.html)
-- [RemovePluginV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.RemovePluginV1CpiBuilder.html)
-- [RevokeCollectionPluginAuthorityV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.RevokeCollectionPluginAuthorityV1CpiBuilder.html)
-- [RevokePluginAuthorityV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.RevokePluginAuthorityV1CpiBuilder.html)
-- [TransferV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.TransferV1CpiBuilder.html)
-- [UpdateCollectionExternalPluginAdapterV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.UpdateCollectionExternalPluginAdapterV1CpiBuilder.html)
-- [UpdateCollectionPluginV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.UpdateCollectionPluginV1CpiBuilder.html)
-- [UpdateCollectionV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.UpdateCollectionV1CpiBuilder.html)
-- [UpdateExternalPluginAdapterV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.UpdateExternalPluginAdapterV1CpiBuilder.html)
-- [UpdatePluginV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.UpdatePluginV1CpiBuilder.html)
-- [UpdateV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.UpdateV1CpiBuilder.html)
-- [WriteCollectionExternalPluginAdapterDataV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.WriteCollectionExternalPluginAdapterDataV1CpiBuilder.html)
-- [WriteExternalPluginAdapterDataV1CpiBuilder](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/struct.WriteExternalPluginAdapterDataV1CpiBuilder.html) -->
-
+### CPI Example
 
 Let's take the `CreateCollectionV2CpiBuilder` instruction as an example
 
-To initialize the builder, call `new` on the CpiBuilder and pass in the program `AccountInfo` of the program address to which the CPI call is being made.
+Initialize the builder by calling `new` on the `CpiBuilder` and passing in the core program as `AccountInfo`:
 
 ```rust
 CreateCollectionV2CpiBuilder::new(ctx.accounts.mpl_core_program.to_account_info);
 ```
 
-From this point you can use Cmd + left click (Cntrl + left click for window users) into the new function generated from the `CpiBuilder` to see all the CPI arguments (accounts and data) required for this particular CPI call.
+Use then Cmd + left click (Ctrl + left click for Windows users) to view all the CPI arguments required for this CPI call:
 
-For example this are all the accounts and data required by the `CreateCollectionV2` Cpi builder:
 ```rust
 CreateCollectionV2CpiBuilder::new(&ctx.accounts.core_program)
     .collection(&ctx.accounts.collection)
