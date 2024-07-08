@@ -40,6 +40,7 @@ export const core = {
               href: '/core/tm-differences',
             },
             { title: 'Ecosystem Support', href: '/core/ecosystem-support' },
+            { title: 'Using Core in Anchor', href: '/core/using-core-with-anchor' },
             { title: 'FAQ', href: '/core/faq' },
           ],
         },
@@ -178,7 +179,6 @@ export const core = {
             { title: 'Print Editions', href: '/core/guides/print-editions' },
             { title: 'Oracle Plugin Example', href: '/core/guides/oracle-plugin-example' },
             { title: 'Web2 typescript Staking Example', href: '/core/guides/javascript/web2-typescript-staking-example' },
-            { title: 'Using Core with Anchor', href: '/core/guides/using-core-with-anchor' }
           ],
         },
       ],

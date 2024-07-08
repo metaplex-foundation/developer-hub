@@ -16,6 +16,4 @@ The following Guides for MPL Core are currently available:
 
 {% quick-link title="Typescript Staking Example" icon="CodeBracketSquare" href="/core/guides/javascript/web2-typescript-staking-example" description="Learn how you can create a staking program for your collection using only Typescript" /%}
 
-{% quick-link title="Using Core with Anchor " icon="CodeBracketSquare" href="/core/guides/using-core-with-anchor" description="Learn how you can interact with the Core crate inside anchor" /%}
-
 {% /quick-links %}
