@@ -21,7 +21,7 @@ mpl-core = "x.x.x"
 
 ### Feature Flag
 
-With the `mpl-core` crate you can enable the anchor feature flag in the mpl-core crate to access Anchor-specific features by modifying the dependency entry in your cargo.toml:
+With the Core crate you can enable the anchor feature flag in the mpl-core crate to access Anchor-specific features by modifying the dependency entry in your `cargo.toml`:
 
 ```rust
 [dependencies]
@@ -142,9 +142,9 @@ let (_, attribute_list, _) = fetch_plugin::<BaseCollectionV1, Attributes>(&ctx.a
 
 ## The CPI Instruction Builders
 
-Each instruction from the Metaplex Rust `mpl-core` crate comes with a **CpiBuilder** version of each transaction which you can be imported. The CpiBuilder is created using `name of the instruction` + `CpiBuilder` and simplifies the code significantly abstracting a lot of boilerplate code away! 
+Each instruction from the Core crate comes with a **CpiBuilder** version. The CpiBuilder version is created using `name of the instruction` + `CpiBuilder` and simplifies the code significantly abstracting a lot of boilerplate code away! 
 
-If you want to learn more about all the possible instruction available in Core, you can find them on the [docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)
+If you want to learn more about all the possible instruction available in Core, you can find them on the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)
 
 ### CPI Example
 
