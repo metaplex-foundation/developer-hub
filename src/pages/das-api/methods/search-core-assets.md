@@ -1,10 +1,75 @@
 ---
-title: Search Assets
-metaTitle: DAS API - Search Assets
-description: Return the list of assets given a search criteria
+title: Search Core Assets
+metaTitle: DAS API Core Extension - Search Core Assets
+description: Return the list of MPL Core assets given a search criteria
 ---
 
-Return the list of assets given a search criteria.
+Return the list of Core assets given a search criteria. 
+
+## Code example
+
+In this example two filters are applied:
+1. The Public Key of the Owner
+2. The Metadata uri `jsonUri`
+
+Like this only the NFTs with the given URI owned by that wallet are returned.
+
+Additional possible Parameters can be found [below](#parameters).
+
+```js
+import { publicKey } from '@metaplex-foundation/umi';
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
+
+const umi = createUmi('<ENDPOINT>').use(dasApi());
+
+const asset = await das.searchAssets(umi, {
+    owner: publicKey('AUtnbwWJQfYZjJ5Mc6go9UancufcAuyqUZzR1jSe4esx'),
+    jsonUri: 'https://arweave.net/TkklLLQKiO9t9_JPmt-eH_S-VBLMcRjFcgyvIrENBzA',
+});
+
+console.log(asset);
+```
+
+## Example Response
+```json
+[
+  {
+    publicKey: '8VrqN8b8Y7rqWsUXqUw7dxQw9J5UAoVyb6YDJs1mBCCz',
+    header: {
+      executable: false,
+      owner: 'CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d',
+      lamports: [Object],
+      rentEpoch: 18446744073709551616n,
+      exists: true
+    },
+    pluginHeader: { key: 3, pluginRegistryOffset: 179n },
+    royalties: {
+      authority: [Object],
+      offset: 138n,
+      basisPoints: 500,
+      creators: [Array],
+      ruleSet: [Object]
+    },
+    key: 1,
+    updateAuthority: {
+      type: 'Collection',
+      address: 'FgEKkVTSfLQ7a7BFuApypy4KaTLh65oeNRn2jZ6fiBav'
+    },
+    name: 'Number 1',
+    uri: 'https://arweave.net/TkklLLQKiO9t9_JPmt-eH_S-VBLMcRjFcgyvIrENBzA',
+    content: {
+      '$schema': 'https://schema.metaplex.com/nft1.0.json',
+      json_uri: 'https://arweave.net/TkklLLQKiO9t9_JPmt-eH_S-VBLMcRjFcgyvIrENBzA',
+      files: [Array],
+      metadata: [Object],
+      links: [Object]
+    },
+    owner: 'AUtnbwWJQfYZjJ5Mc6go9UancufcAuyqUZzR1jSe4esx',
+    seq: { __option: 'None' }
+  }
+]
+```
 
 ## Parameters
 
@@ -36,44 +101,4 @@ Return the list of assets given a search criteria.
 | `after`             |          | Retrieve assets after the specified ID.    |
 | `jsonUri`           |          | The value for the JSON URI.  |
 
-## Example
-
-{% dialect-switcher title="searchAssets Example" %}
-{% dialect title="JavaScript" id="js" %}
-{% totem %}
-
-```js
-import { publicKey } from '@metaplex-foundation/umi';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-
-const umi = createUmi('<ENDPOINT>').use(dasApi());
-
-const assets = await umi.rpc.searchAssets({
-    owner: publicKey('N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw'),
-    jsonUri: 'https://arweave.net/c9aGs5fOk7gD4wWnSvmzeqgtfxAGRgtI1jYzvl8-IVs/chiaki-violet-azure-common.json',
-});
-console.log(assets.items.length == 1);
-```
-
-{% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
-{% totem %}
-
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "searchAssets",
-    "params": {
-        "ownerAddress": "N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw",
-        "jsonUri": "https://arweave.net/c9aGs5fOk7gD4wWnSvmzeqgtfxAGRgtI1jYzvl8-IVs/chiaki-violet-azure-common.json",
-        "page": 1
-    },
-    "id": 0
-}'
-```
-
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+Technically the function accepts all the above parameters since they are inherited from the standard DAS package. Some of them are not recommended to use though, e.g. the package filters the `interface` for MPL Core either way. 
