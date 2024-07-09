@@ -6,15 +6,15 @@ description: Learn how to fetch the various on-chain accounts of your assets on 
 
 Now that we know how to create and mint the various on-chain accounts of our assets, let's learn how to fetch them. {% .lead %}
 
-## Digital Assets (Nfts)
+## Digital Assets (NFTs)
 
-As mentioned in [the previous page](/token-metadata/mint#creating-accounts), an Nft — fungible or not — requires multiple on-chain accounts to be created. Depending on the Token Standard of the Nft, some accounts may not be required. Here's a quick overview of these accounts:
+As mentioned in [the previous page](/token-metadata/mint#creating-accounts), an NFT — fungible or not — requires multiple on-chain accounts to be created. Depending on the Token Standard of the NFT, some accounts may not be required. Here's a quick overview of these accounts:
 
-- **Mint** account (from the SPL Token program): It defines the core properties of the underlying SPL token. This is the entry point to any Nft as all other accounts derive from it.
+- **Mint** account (from the SPL Token program): It defines the core properties of the underlying SPL token. This is the entry point to any NFT as all other accounts derive from it.
 - **Metadata** account: It provides additional data and features to the underlying SPL token.
 - **Master Edition** or **Edition** account (only for Non-Fungibles): It enables printing multiple copies of an original NFT. Even when an NFT does not allow printing editions, the **Master Edition** account is still created as it is used as the Mint authority and Freeze authority of the **Mint** account to ensure its non-fungibility.
 
-In order to make fetching Nfts easier, our SDKs offer a set of helper methods that allow us to fetch all the relevant accounts of an Nft in one go. We call the data type that stores all these accounts a **Digital Asset**. In the next sub-sections, we will go through the various ways to fetch **Nfts/Digital Asset** accounts.
+In order to make fetching NFTs easier, our SDKs offer a set of helper methods that allow us to fetch all the relevant accounts of an NFT in one go. We call the data type that stores all these accounts a **Digital Asset**. In the next sub-sections, we will go through the various ways to fetch **NFTs/Digital Asset** accounts.
 
 {% dialect-switcher title="Digital Asset definition" %}
 {% dialect title="JavaScript" id="js" %}
@@ -43,9 +43,9 @@ export type DigitalAsset = {
 
 ### Fetch By Mint
 
-This helper fetches a single Nft and **Digital Asset** accounts from the public key of its **Mint** account.
+This helper fetches a single NFT and **Digital Asset** accounts from the public key of its **Mint** account.
 
-{% dialect-switcher title="Fetch Nft by Mint" %}
+{% dialect-switcher title="Fetch NFT by Mint" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -59,9 +59,9 @@ const asset = await fetchDigitalAsset(umi, mint)
 
 ### Fetch By Metadata
 
-This helper fetches a single **Nft** from the public key of its **Metadata** account. This is slightly less efficient than the previous helper as we first need to fetch the content of the **Metadata** account to find the **Mint** address but if you only have access to the **Metadata** public key, this can be helpful.
+This helper fetches a single **NFT** from the public key of its **Metadata** account. This is slightly less efficient than the previous helper as we first need to fetch the content of the **Metadata** account to find the **Mint** address but if you only have access to the **Metadata** public key, this can be helpful.
 
-{% dialect-switcher title="Fetch Nft by Metadata" %}
+{% dialect-switcher title="Fetch NFT by Metadata" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -75,9 +75,9 @@ const asset = await fetchDigitalAssetByMetadata(umi, metadata)
 
 ### Fetch All By Mint List
 
-This helper fetches as many **Nfts** as there are **Mint** public keys in the provided list.
+This helper fetches as many **NFTs** as there are **Mint** public keys in the provided list.
 
-{% dialect-switcher title="Fetch Nfts by Mint List" %}
+{% dialect-switcher title="Fetch NFTs by Mint List" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -91,9 +91,9 @@ const [assetA, assetB] = await fetchAllDigitalAsset(umi, [mintA, mintB])
 
 ### Fetch All By Creator
 
-This helper fetches all **Nfts** by creator. Since creators can be located in five different positions in the **Metadata** account, we must also provide the creator position we are interested in. For instance, if we know that for a set of NFTs, the first creator is creator A and the second creator B, we will want to search for creator A in position 1 and creator B in position 2.
+This helper fetches all **NFTs** by creator. Since creators can be located in five different positions in the **Metadata** account, we must also provide the creator position we are interested in. For instance, if we know that for a set of NFTs, the first creator is creator A and the second creator B, we will want to search for creator A in position 1 and creator B in position 2.
 
-{% dialect-switcher title="Fetch Nfts by Creator" %}
+{% dialect-switcher title="Fetch NFTs by Creator" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -113,9 +113,9 @@ const assetsB = await fetchAllDigitalAssetByCreator(umi, creator, {
 
 ### Fetch All By Owner
 
-This helper fetches all **Nfts** by owner.
+This helper fetches all **NFTs** by owner.
 
-{% dialect-switcher title="Fetch Nfts by Owner" %}
+{% dialect-switcher title="Fetch NFTs by Owner" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -129,7 +129,7 @@ const assets = await fetchAllDigitalAssetByOwner(umi, owner)
 
 ### Fetch All By Update Authority
 
-This helper fetches all **Nfts** from the public key of their update authority.
+This helper fetches all **NFTs** from the public key of their update authority.
 
 {% dialect-switcher title="Fetch Assets by Update Authority" %}
 {% dialect title="JavaScript" id="js" %}
@@ -145,16 +145,16 @@ const assets = await fetchAllDigitalAssetByUpdateAuthority(umi, owner)
 
 ## Digital Assets With Token
 
-Note that the **Digital Asset** data structure mentioned above does not provide any information about the owner of the Nft. This first definition only focuses on the on-chain accounts that are required regardless of their owners. However, in order to provide a more complete picture of an asset, we may also need to know who owns it. This is where the **Digital Asset With Token** data structure comes in. It is an extension of the Digital Asset data structure that also includes the following accounts:
+Note that the **Digital Asset** data structure mentioned above does not provide any information about the owner of the NFT. This first definition only focuses on the on-chain accounts that are required regardless of their owners. However, in order to provide a more complete picture of an asset, we may also need to know who owns it. This is where the **Digital Asset With Token** data structure comes in. It is an extension of the Digital Asset data structure that also includes the following accounts:
 
 - **Token** account (from the SPL Token program): It defines the relationship between a **Mint** account and its owner. It stores important data such as the amount of tokens owned by the owner. In the case of NFTs, the amount is always 1.
-- **Token Record** account (for PNFTs only): It defines additional token-related information for [Programmable Non-Fungibles](/token-metadata/pnfts) such as its current [Token Delegate](/token-metadata/delegates#token-delegates) and its role.
+- **Token Record** account (for PNFTs only): It defines additional token-related information for [Programmable Non-Fungibles](/token-metadata/pNFTs) such as its current [Token Delegate](/token-metadata/delegates#token-delegates) and its role.
 
-Note that, for fungible assets, the same Nft will likely be associated with multiple owners via multiple Token accounts.
+Note that, for fungible assets, the same NFT will likely be associated with multiple owners via multiple Token accounts.
 
-Here as well, we offer a set of helpers to fetch Nfts With Token Accounts.
+Here as well, we offer a set of helpers to fetch NFTs With Token Accounts.
 
-{% dialect-switcher title="Nft With Token definition" %}
+{% dialect-switcher title="NFT With Token definition" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -175,9 +175,9 @@ export type DigitalAssetWithToken = DigitalAsset & {
 
 ### Fetch By Mint
 
-This helper fetches a single **Nft With Token** from the public key of its **Mint** account. This is mostly relevant for Non-Fungible assets since it will only return one Digital Asset With Token, regardless of how many exist for a Fungible asset.
+This helper fetches a single **NFT With Token** from the public key of its **Mint** account. This is mostly relevant for Non-Fungible assets since it will only return one Digital Asset With Token, regardless of how many exist for a Fungible asset.
 
-{% dialect-switcher title="Fetch Nft with Token By Mint" %}
+{% dialect-switcher title="Fetch NFT with Token By Mint" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -191,9 +191,9 @@ const asset = await fetchDigitalAssetWithTokenByMint(umi, owner)
 
 ### Fetch By Mint and Owner
 
-This helper is more performant than the previous helper but requires that we know the owner of the Nft.
+This helper is more performant than the previous helper but requires that we know the owner of the NFT.
 
-{% dialect-switcher title="Fetch Nft with Token By Mint" %}
+{% dialect-switcher title="Fetch NFT with Token By Mint" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts

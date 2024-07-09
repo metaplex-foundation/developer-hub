@@ -469,8 +469,8 @@ await updateAsDataItemDelegateV2(umi, {
 
 ### Programmable Config Delegate
 
-- The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
-- The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the PNFT.
+- The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pNFTs).
+- The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the pNFT.
 - When applied to a Collection NFT, the Delegate Authority can perform the same updates on the items inside that Collection.
 
 {% dialect-switcher title="Work with Programmable Config delegates" %}
@@ -552,8 +552,8 @@ await updateAsProgrammableConfigDelegateV2(umi, {
 
 ### Programmable Config Item Delegate
 
-- The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
-- The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the PNFT.
+- The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pNFTs).
+- The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the pNFT.
 - Even if the asset is a Collection NFT, and contrary to the Programmable Config Delegate, the Programmable Config Item Delegate cannot affect the items of that collection.
 
 {% dialect-switcher title="Work with Programmable Config Item delegates" %}
@@ -617,9 +617,9 @@ await updateAsProgrammableConfigItemDelegateV2(umi, {
 
 Token Delegates are delegates that operate at the Token level. This means they are spl-token delegates that are stored directly on the Token account of the SPL Token program. As such Token Delegates allow delegates to **transfer and burn tokens** on behalf of the owner but also **lock and unlock tokens** to prevent the owner from transferring, burning or even revoking the delegate. These delegates are crucial for applications like escrowless marketplaces, staking, asset loans, etc.
 
-Whilst there is only one type of delegate offered by the SPL Token program, [Programmable NFTs](/token-metadata/pnfts) (PNFTs) allowed the Token Metadata program to provide more granular delegates that can be selected on a per-case basis. This is because PNFTs are always frozen on the SPL Token program which means we can build a delegate system on top of it.
+Whilst there is only one type of delegate offered by the SPL Token program, [Programmable NFTs](/token-metadata/pNFTs) (pNFTs) allowed the Token Metadata program to provide more granular delegates that can be selected on a per-case basis. This is because pNFTs are always frozen on the SPL Token program which means we can build a delegate system on top of it.
 
-We store that delegate system on a PNFT-specific account called the **Token Record** PDA — whose seeds are `["metadata", program id, mint id, "token_record", token account id]`. We synchronise the delegated authority on the SPL Token program as well but the tokens are always frozen. It is the responsibility of the Token Record account to keep track of whether the asset is really locked or not.
+We store that delegate system on a pNFT-specific account called the **Token Record** PDA — whose seeds are `["metadata", program id, mint id, "token_record", token account id]`. We synchronise the delegated authority on the SPL Token program as well but the tokens are always frozen. It is the responsibility of the Token Record account to keep track of whether the asset is really locked or not.
 
 {% diagram height="h-64 md:h-[600px]" %}
 {% node %}
@@ -692,20 +692,20 @@ Here are some key properties of Token Delegates:
 - Token delegates cannot revoke themselves as they are also set on the Token Program which does not allow the delegates to self-revoke.
 - Token delegates are reset on transfer. When dealing with fungible assets, the Delegate Authority is reset when all delegated tokens are transferred.
 - The Standard delegate can be used by all assets except Programmable Non-Fungibles. All other Token delegates can only be used by Programmable Non-Fungibles.
-- All Token delegates that can be used by Programmable Non-Fungibles store the current Delegate Authority, its role and its state — locked or unlocked — on the Token Record account of the PNFT.
+- All Token delegates that can be used by Programmable Non-Fungibles store the current Delegate Authority, its role and its state — locked or unlocked — on the Token Record account of the pNFT.
 
 There exist 6 different types of Token Delegates, each with a different scope of action. Here is a table summarizing the different types of Token Delegates:
 
 | Delegate        | Lock/Unlock | Transfer | Burn | For              | Note                                                      |
 | --------------- | ----------- | -------- | ---- | ---------------- | --------------------------------------------------------- |
-| Standard        | ✅          | ✅       | ✅   | All except PNFTs |                                                           |
-| Sale            | ❌          | ✅       | ❌   | PNFTs only       | Owner cannot transfer/burn until they revoke the delegate |
-| Transfer        | ❌          | ✅       | ❌   | PNFTs only       | Owner can transfer/burn even when a delegate is set       |
-| Locked Transfer | ✅          | ✅       | ❌   | PNFTs only       |                                                           |
-| Utility         | ✅          | ❌       | ✅   | PNFTs only       |                                                           |
-| Staking         | ✅          | ❌       | ❌   | PNFTs only       |                                                           |
+| Standard        | ✅          | ✅       | ✅   | All except pNFTs |                                                           |
+| Sale            | ❌          | ✅       | ❌   | pNFTs only       | Owner cannot transfer/burn until they revoke the delegate |
+| Transfer        | ❌          | ✅       | ❌   | pNFTs only       | Owner can transfer/burn even when a delegate is set       |
+| Locked Transfer | ✅          | ✅       | ❌   | pNFTs only       |                                                           |
+| Utility         | ✅          | ❌       | ✅   | pNFTs only       |                                                           |
+| Staking         | ✅          | ❌       | ❌   | pNFTs only       |                                                           |
 
-Notice that the **Standard** delegate has a lot more power than the other PNFT-specific delegates as we must simply defer to the spl-token delegate. However, the other delegates are more granular and can be used in more specific use cases. For instance, the **Sale** delegate is perfect for listing assets on marketplaces since they forbid the owner to burn or transfer as long as the delegate is set.
+Notice that the **Standard** delegate has a lot more power than the other pNFT-specific delegates as we must simply defer to the spl-token delegate. However, the other delegates are more granular and can be used in more specific use cases. For instance, the **Sale** delegate is perfect for listing assets on marketplaces since they forbid the owner to burn or transfer as long as the delegate is set.
 
 Let's go through each of these Token delegates in a bit more detail and provide code samples for approving, revoking and using them.
 
@@ -820,11 +820,11 @@ await unlockV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Sale Delegate (PNFT only)
+### Sale Delegate (pNFT only)
 
 - This delegate only works with Programmable Non-Fungibles.
-- The Delegate Authority can transfer the PNFT to any address. Doing so will revoke the Delegate Authority.
-- As long as a Sale Delegate is set on a PNFT, the PNFT enters a special Token State called `Listed`. The `Listed` Token State is a softer variation of the `Locked` Token State. During that time, the owner cannot transfer or burn the PNFT. However, the owner can revoke the Sale Delegate at any time, which will remove the `Listed` Token State and make the PNFT transferable and burnable again.
+- The Delegate Authority can transfer the pNFT to any address. Doing so will revoke the Delegate Authority.
+- As long as a Sale Delegate is set on a pNFT, the pNFT enters a special Token State called `Listed`. The `Listed` Token State is a softer variation of the `Locked` Token State. During that time, the owner cannot transfer or burn the pNFT. However, the owner can revoke the Sale Delegate at any time, which will remove the `Listed` Token State and make the pNFT transferable and burnable again.
 
 {% dialect-switcher title="Work with Sale delegates" %}
 {% dialect title="JavaScript" id="js" %}
@@ -882,11 +882,11 @@ await transferV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Transfer Delegate (PNFT only)
+### Transfer Delegate (pNFT only)
 
 - This delegate only works with Programmable Non-Fungibles.
-- The Delegate Authority can transfer the PNFT to any address. Doing so will revoke the Delegate Authority.
-- Contrary to the Sale Delegate, when a Transfer Delegate is set, the owner can still transfer and burn the PNFT.
+- The Delegate Authority can transfer the pNFT to any address. Doing so will revoke the Delegate Authority.
+- Contrary to the Sale Delegate, when a Transfer Delegate is set, the owner can still transfer and burn the pNFT.
 
 {% dialect-switcher title="Work with Transfer delegates" %}
 {% dialect title="JavaScript" id="js" %}
@@ -944,11 +944,11 @@ await transferV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Locked Transfer Delegate (PNFT only)
+### Locked Transfer Delegate (pNFT only)
 
 - This delegate only works with Programmable Non-Fungibles.
-- The Delegate Authority can lock the PNFT. Until the Delegate Authority unlocks the PNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
-- The Delegate Authority can transfer the PNFT to any address. Doing so will revoke the Delegate Authority and unlock the PNFT if it was locked.
+- The Delegate Authority can lock the pNFT. Until the Delegate Authority unlocks the pNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
+- The Delegate Authority can transfer the pNFT to any address. Doing so will revoke the Delegate Authority and unlock the pNFT if it was locked.
 
 {% dialect-switcher title="Work with Locked Transfer delegates" %}
 {% dialect title="JavaScript" id="js" %}
@@ -1034,11 +1034,11 @@ await unlockV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Utility Delegate (PNFT only)
+### Utility Delegate (pNFT only)
 
 - This delegate only works with Programmable Non-Fungibles.
-- The Delegate Authority can lock the PNFT. Until the Delegate Authority unlocks the PNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
-- The Delegate Authority can burn the PNFT.
+- The Delegate Authority can lock the pNFT. Until the Delegate Authority unlocks the pNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
+- The Delegate Authority can burn the pNFT.
 
 {% dialect-switcher title="Work with Utility delegates" %}
 {% dialect title="JavaScript" id="js" %}
@@ -1123,10 +1123,10 @@ await unlockV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Staking Delegate (PNFT only)
+### Staking Delegate (pNFT only)
 
 - This delegate only works with Programmable Non-Fungibles.
-- The Delegate Authority can lock the PNFT. Until the Delegate Authority unlocks the PNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
+- The Delegate Authority can lock the pNFT. Until the Delegate Authority unlocks the pNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
 
 {% dialect-switcher title="Work with Staking delegates" %}
 {% dialect title="JavaScript" id="js" %}

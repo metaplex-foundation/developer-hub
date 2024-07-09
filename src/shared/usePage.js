@@ -99,7 +99,7 @@ function parseTableOfContents(nodes, slugify = slugifyWithCounter()) {
     if (node.name === 'h2' || node.name === 'h3') {
       let title = getNodeText(node)
       if (title) {
-        let id = node.attributes.id ?? slugify(title)
+        let id = node.attributes.id ?? slugify(title, {decamelize: false})
         node.attributes.id = id
         if (node.name === 'h3') {
           if (!sections[sections.length - 1]) {

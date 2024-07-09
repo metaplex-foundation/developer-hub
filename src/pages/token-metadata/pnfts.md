@@ -4,22 +4,22 @@ metaTitle: Token Metadata - Programmable NFTs
 description: Learn more about Programmable NFTs (a.k.a. pNFTs) on Token Metadata
 ---
 
-As mentioned in the [overview page](/token-metadata#pnfts), Programmable NFTs (PNFTs) are a new Nft asset standard that allows creators to define custom rules on specific operations and delegate more granularly to third-party authorities. {% .lead %}
+As mentioned in the [overview page](/token-metadata#pnfts), Programmable NFTs (pNFTs) are a new NFT asset standard that allows creators to define custom rules on specific operations and delegate more granularly to third-party authorities. {% .lead %}
 
 ## No More Bypassing Token Metadata
 
 Because the Token Metadata program is built on top of the SPL Token program, any owner or spl-token delegate can interact with the SPL Token program directly and bypass the Token Metadata program on vital operations like transferring and burning. Whilst this creates a nice composibility pattern between programs it also means the Token Metadata program cannot enforce any rules on behalf of the creators.
 
-A good example of why this can be problematic is that Token Metadata cannot enforce secondary sales royalties. Even though the royalty percentage is stored on the **Metadata** account, it is up to the user or program that performs the transfer to decide whether they want to honour it or not. We talk more about this and how PNFTs fix this issue [in a section below](#use-case-royalty-enforcement).
+A good example of why this can be problematic is that Token Metadata cannot enforce secondary sales royalties. Even though the royalty percentage is stored on the **Metadata** account, it is up to the user or program that performs the transfer to decide whether they want to honour it or not. We talk more about this and how pNFTs fix this issue [in a section below](#use-case-royalty-enforcement).
 
 Programmable NFTs are introduced to solve this issue in a flexible way that **allows creators to customise the authorization layer** of their assets.
 
 Programmable NFTs work as follows:
 
-- **The Token account of the PNFT is always frozen** on the SPL Token program, regardless of whether the PNFT is delegated or not. This ensures that no one can bypass the Token Metadata program by interacting with the SPL Token program directly.
-- Whenever an operation is performed on the Token account of a PNFT, the Token Metadata program **thaws the account, performs the operation, and then freezes the account again**. All of this happens **atomically** in the same instruction. That way, all operations that could be made on the SPL Token program are still available to PNFTs but they are always performed through the Token Metadata program.
-- When a [Token Delegate](/token-metadata/delegates#token-delegates) is set on a PNFT, the information is stored in a **Token Record** account. Since PNFTs are always frozen on the SPL Token program, it is the responsibility of the Token Record account to keep track of whether the PNFT is really locked or not.
-- Because every single operation that affects a PNFT must go through the Token Metadata program, we created a bottleneck that allows us to enforce authorization rules for these operations. These rules are defined in a **Rule Set** account managed by the **Token Auth Rules** program.
+- **The Token account of the pNFT is always frozen** on the SPL Token program, regardless of whether the pNFT is delegated or not. This ensures that no one can bypass the Token Metadata program by interacting with the SPL Token program directly.
+- Whenever an operation is performed on the Token account of a pNFT, the Token Metadata program **thaws the account, performs the operation, and then freezes the account again**. All of this happens **atomically** in the same instruction. That way, all operations that could be made on the SPL Token program are still available to PNFTs but they are always performed through the Token Metadata program.
+- When a [Token Delegate](/token-metadata/delegates#token-delegates) is set on a pNFT, the information is stored in a **Token Record** account. Since PNFTs are always frozen on the SPL Token program, it is the responsibility of the Token Record account to keep track of whether the pNFT is really locked or not.
+- Because every single operation that affects a pNFT must go through the Token Metadata program, we created a bottleneck that allows us to enforce authorization rules for these operations. These rules are defined in a **Rule Set** account managed by the **Token Auth Rules** program.
 
 Essentially, this gives PNFTs the ability to:
 
@@ -30,9 +30,9 @@ Let's dive into these two abilities in more detail.
 
 ## More granular delegates
 
-Since all PNFTs operations must go through the Token Metadata program, it can create a new delegate system on top of the spl-token delegate. One that is more granular and allows PNFT owners to pick the operations they want to delegate to a third party.
+Since all PNFTs operations must go through the Token Metadata program, it can create a new delegate system on top of the spl-token delegate. One that is more granular and allows pNFT owners to pick the operations they want to delegate to a third party.
 
-Information for this new delegate system is stored on a special **Token Record** PDA that is derived from both the Mint and the Token accounts of the PNFT. When a new delegate authority is assigned to a PNFT, the Token Metadata program synchronizes that information on both the Token account and the Token Record account.
+Information for this new delegate system is stored on a special **Token Record** PDA that is derived from both the Mint and the Token accounts of the pNFT. When a new delegate authority is assigned to a pNFT, the Token Metadata program synchronizes that information on both the Token account and the Token Record account.
 
 We discuss these delegates in more detail in the ["Token Delegates" section of the Delegated Authorities page](/token-metadata/delegates#token-delegates).
 
@@ -82,10 +82,10 @@ In the case of PNFTs, the following operations are supported:
 
 | Operation                    | Description                                                                                                                                                                           |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Transfer:Owner`             | Transfer initiated by the owner of the PNFT                                                                                                                                           |
+| `Transfer:Owner`             | Transfer initiated by the owner of the pNFT                                                                                                                                           |
 | `Transfer:SaleDelegate`      | Transfer initiated by a [Sale delegate](/token-metadata/delegates#sale-delegate-pnft-only)                                                                                            |
 | `Transfer:TransferDelegate`  | Transfer initiated by a [Transfer](/token-metadata/delegates#transfer-delegate-pnft-only) or [Locked Transfer](/token-metadata/delegates#locked-transfer-delegate-pnft-only) delegate |
-| `Transfer:MigrationDelegate` | Transfer initiated by a Migration delegate (legacy delegate used during the PNFT migration period)                                                                                    |
+| `Transfer:MigrationDelegate` | Transfer initiated by a Migration delegate (legacy delegate used during the pNFT migration period)                                                                                    |
 | `Transfer:WalletToWallet`    | Transfer between wallets (currently not in use)                                                                                                                                       |
 | `Delegate:Sale`              | Approve a [Sale delegate](/token-metadata/delegates#sale-delegate-pnft-only)                                                                                                          |
 | `Delegate:Transfer`          | Approve a [Transfer delegate](/token-metadata/delegates#transfer-delegate-pnft-only)                                                                                                  |
@@ -98,7 +98,7 @@ Creators can assign a custom **Rule** to any of these operations. When that oper
 - **Primitive Rules**: These rules explicitly tell us if an operation is allowed or not. For instance: the `PubkeyMatch` rule will pass if and only if the public key at the given field matches the given public key; the `ProgramOwnedList` will pass if and only if the program owning the account at the given field is part of a given list of programs; the `Pass` rule will always pass; etc.
 - **Composite Rules**: These rules aggregate multiple rules together to create a more complex authorization logic. For instance: the `All` rule will pass if and only if all of the rules it contains pass; the `Any` rule will pass if and only if at least one of the rules it contains passes; the `Not` rule will pass if and only if the rule it contains does not pass; etc.
 
-Once we have all the rules for our operations defined, we can store them in a **Rule Set** account on the Token Auth Rules program. Whenever we need to make a change to this Rule Set, a new **Rule Set Revision** is appended to the Rule Set account. This ensures any PNFT currently locked within a specific revision can be unlocked before moving on to the latest revision.
+Once we have all the rules for our operations defined, we can store them in a **Rule Set** account on the Token Auth Rules program. Whenever we need to make a change to this Rule Set, a new **Rule Set Revision** is appended to the Rule Set account. This ensures any pNFT currently locked within a specific revision can be unlocked before moving on to the latest revision.
 
 {% diagram %}
 {% node %}

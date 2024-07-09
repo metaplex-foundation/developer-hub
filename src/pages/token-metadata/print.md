@@ -10,7 +10,7 @@ Every NFT has the potential to be printed as multiple editions when its **Master
 
 The owner of a printable NFT can print as many editions as they want from it as long as its maximum supply has not been reached.
 
-Every Non-Fungible Nft — i.e. `NonFungible` and `ProgrammableNonFungible` token standards — can be a printable NFT when created. This is done by configuring the **Max Supply** attribute of the Nft's Master Edition account. This attribute is optional and can have one of the following values:
+Every Non-Fungible NFT — i.e. `NonFungible` and `ProgrammableNonFungible` token standards — can be a printable NFT when created. This is done by configuring the **Max Supply** attribute of the NFTs Master Edition account. This attribute is optional and can have one of the following values:
 
 - `None`: The NFT does not have a fixed supply. In other words, **the NFT is printable and has an unlimited supply**.
 - `Some(x)`: The NFT has a fixed supply of `x` editions.
@@ -20,8 +20,8 @@ Every Non-Fungible Nft — i.e. `NonFungible` and `ProgrammableNonFungible` toke
 Whenever a new printed edition is created from a printable NFT, a few things happen:
 
 - A brand new edition NFT is created and its data matches the original NFT. The only difference is that the printed edition uses a different token standard than the original NFT.
-  - For a `NonFungible` Nft, the printed editions use the `NonFungibleEdition` token standard.
-  - For a `ProgrammableNonFungible` Nft, the printed editions use the `ProgrammableNonFungibleEdition` token standard.
+  - For a `NonFungible` NFT, the printed editions use the `NonFungibleEdition` token standard.
+  - For a `ProgrammableNonFungible` NFT, the printed editions use the `ProgrammableNonFungibleEdition` token standard.
 - Instead of using a **Master Edition** account, the new edition NFT uses an **Edition** account which keeps track of its edition number and its parent NFT by storing the address of its parent's **Master Edition** account.
 - The **Supply** attribute of the Master edition account is incremented by 1. When the **Supply** attribute reaches the **Max Supply** attribute, the NFT is no longer printable.
 
@@ -117,10 +117,10 @@ await createNft(umi, {
 
 Once we have a printable NFT that has not reached its **Max Supply**, we can print new editions from it. This is done by calling the **Print** instruction of the Token Metadata program. This instruction accepts the following attributes:
 
-- **Master Edition Mint**: The address of the printable NFT's Mint account.
-- **Edition Mint**: The address of the new edition NFT's Mint account. This is typically a newly generated Signer since the account will be created by the instruction if it does not exist.
+- **Master Edition Mint**: The address of the printable NFTs Mint account.
+- **Edition Mint**: The address of the new edition NFTs Mint account. This is typically a newly generated Signer since the account will be created by the instruction if it does not exist.
 - **Master Token Account Owner**: The owner of the printable NFT as a Signer. Only the owner of a printable NFT can print new editions from it.
-- **Edition Token Account Owner**: The address of the new edition NFT's owner
+- **Edition Token Account Owner**: The address of the new edition NFTs owner
 - **Edition Number**: The edition number of the new edition NFT to print. This is typically the current **Supply** of the **Master Edition** account plus 1.
 - **Token Standard**: The token standard of the printable NFT. This can be `NonFungible` or `ProgrammableNonFungible`.
 

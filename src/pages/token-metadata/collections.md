@@ -1,7 +1,7 @@
 ---
 title: Verified Collections
 metaTitle: Token Metadata - Verified Collections
-description: Learn how to safely wrap Nfts into collections on Token Metadata
+description: Learn how to safely wrap NFTs into collections on Token Metadata
 ---
 
 Certified Collections enables NFTs – and tokens in general — **to be grouped together** and for that information to be **verified on-chain**. Additionally, it makes it easier to manage these collections by allocating data for them on-chain. {% .lead %}
@@ -12,13 +12,13 @@ This feature provides the following advantages:
 - Possible to find all NFTs that belong to a given collection ([Check the Recipe to see how](/token-metadata/recipes/get-by-collection)).
 - Easy to manage the collection metadata such as its name, description and image.
 
-## Collections are NFTs
+## Collections are NFTs [#](#collections-are-nfts)
 
 In order to group NFTs — or any token — together, we must first create a Collection NFT whose purpose is to store any metadata related to that collection. That's right, **a collection of NFT is itself, an NFT**. It has the same data layout on-chain as any other NFT.
 
 The difference between a Collection NFT and a Regular NFT is that the information provided by the former will be used to define the group of NFTs it contains whereas the latter will be used to define the NFT itself.
 
-## Associating NFTs to Collection NFTs
+## Associating NFTs to Collection NFTs [#](#associating-nfts-to-collection-nfts)
 
 Collection NFTs and Regular NFTs are **linked together using a "Belong To" relationship** on the Metadata account. The optional `Collection` field on the Metadata account has been created for that purpose.
 
@@ -100,7 +100,7 @@ With no collection
 
 {% /diagram %}
 
-## Differentiating NFTs from Collection NFTs
+## Differentiating NFTs from Collection NFTs [#](#differentiating-nfts-from-collection-nfts)
 
 The `Collection` field alone allows us to link NFTs and Collections together but it doesn't help us identify if a given NFT is a Regular NFT or a Collection NFT. That's why the `CollectionDetails` field was created. It provides additional context on Collection NFTs and differentiates them from Regular NFTs.
 
@@ -189,7 +189,7 @@ With no collection
 
 {% /diagram %}
 
-## Creating Collection NFTs
+## Creating Collection NFTs [#](#creating-collection-nfts)
 
 Creating a Collection NFT is very similar to creating a Regular NFT. The only difference is that we must set the `CollectionDetails` field as seen in the previous section. Some of our SDKs encapsulate this by requesting a `isCollection` attribute when creating an NFT.
 
@@ -198,7 +198,7 @@ Creating a Collection NFT is very similar to creating a Regular NFT. The only di
 
 ```ts
 import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import { createNft } from '@metaplex-foundation/mpl-token-metadata'
+import { createNFT } from '@metaplex-foundation/mpl-token-metadata'
 
 const collectionMint = generateSigner(umi)
 await createNft(umi, {
@@ -213,7 +213,7 @@ await createNft(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Nested Collection NFTs
+## Nested Collection NFTs [#](#nested-collection-nfts)
 
 Because Collections and NFTs are linked together via a "Belong To" relationship, it is possible by design to define nested collections. In this scenario, the `Collection` and `CollectionDetails` fields can be used together to differentiate Root and Nested Collection NFTs.
 
@@ -302,7 +302,7 @@ Attached to a collection
 
 {% /diagram %}
 
-## Verifying Collection NFTs
+## Verifying Collection NFTs [#](#verifying-collection-nfts)
 
 As mentioned above, the `Collection` field contains a `Verified` boolean which is used to **determine if the NFT is truly part of the collection it points to**. Without this field, anyone could pretend their NFT to be part of any collection.
 
@@ -409,7 +409,7 @@ In order to check if a collection is valid on an NFT, it **MUST** have a collect
 If those two steps are not followed you could be exposing fraudulent NFTs on real collections.
 {% /callout %}
 
-### Verify
+### Verify [#](#verify)
 
 Once the `Collection` attribute is set on an NFT, an authority of the Collection NFT can send a **Verify** instruction on the Token Metadata to flip its `verify` attribute from `false` to `true`. This instruction accepts the following attributes:
 
@@ -435,7 +435,7 @@ await verifyCollectionV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Unverify
+### Unverify [#](#unverify)
 
 Reciprocally, the authority of a Collection NFT can unverify any NFTs that are part of its collection. This is done by sending an **Unverify** instruction to the Token Metadata program whose attributes are the same as the **Verify** instruction.
 

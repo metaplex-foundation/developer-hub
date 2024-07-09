@@ -4,13 +4,13 @@ metaTitle: Token Metadata - Burning Nfts
 description: Learn how to burn Nftss on Token Metadata
 ---
 
-The owner of an Nft can burn it using the **Burn** instruction of the Token Metadata program. This will close all possible accounts associated with the Nft and return the various rent-exempt fees to the owner. This instruction accepts the following attributes:
+The owner of an NFT can burn it using the **Burn** instruction of the Token Metadata program. This will close all possible accounts associated with the NFT and return the various rent-exempt fees to the owner. This instruction accepts the following attributes:
 
-- **Authority**: The signer that authorizes the burn. Typically, this is the owner of the Nft but note that certain delegated authorities can also burn Nftss on behalf of the owner as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
-- **Token Owner**: The public key of the current owner of the Nft.
-- **Token Standard**: The standard of the Nft being burnt. This instruction works for all Token Standards in order to provide a unified interface for burning Nfts. That being said, it is worth noting that non-programmable Nfts can be burnt using the **Burn** instruction of the SPL Token program directly.
+- **Authority**: The signer that authorizes the burn. Typically, this is the owner of the NFT but note that certain delegated authorities can also burn Nftss on behalf of the owner as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
+- **Token Owner**: The public key of the current owner of the NFT.
+- **Token Standard**: The standard of the NFT being burnt. This instruction works for all Token Standards in order to provide a unified interface for burning Nfts. That being said, it is worth noting that non-programmable Nfts can be burnt using the **Burn** instruction of the SPL Token program directly.
 
-The exact accounts closed by the **Burn** instruction depend on the Token Standard of the Nft being burnt. Here's a table that summarizes the accounts for each Token Standard:
+The exact accounts closed by the **Burn** instruction depend on the Token Standard of the NFT being burnt. Here's a table that summarizes the accounts for each Token Standard:
 
 | Token Standard                 | Mint | Token                      | Metadata | Edition | Token Record | Edition Marker                    |
 | ------------------------------ | ---- | -------------------------- | -------- | ------- | ------------ | --------------------------------- |

@@ -80,7 +80,7 @@ export function TableOfContent({ tableOfContents }) {
                         : 'font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300'
                     )}
                   >
-                    {section.title}
+                    {section.title.replace(/#/g, '')}
                   </Link>
                 </h3>
                 {section.children.length > 0 && (
@@ -98,7 +98,7 @@ export function TableOfContent({ tableOfContents }) {
                               : 'hover:text-slate-600 dark:hover:text-slate-300'
                           }
                         >
-                          {subSection.title}
+                          {subSection.title.replace(/#/g, '')}
                         </Link>
                       </li>
                     ))}

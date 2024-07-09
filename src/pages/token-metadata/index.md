@@ -426,7 +426,7 @@ You can [read more about these standards here](/token-metadata/token-standard).
 {% edge from="metadata-3-pda" to="metadata-3" path="straight" /%}
 {% /diagram %}
 
-## Programmable NFTs {% #pnfts %}
+## Programmable NFTs {% #pNFTs %}
 
 Because the Token Metadata program is building on top of the Solana Token program, anyone can transfer tokens (fungible or not) without going through the Token Metadata program. Whilst this is great for program composibility, it also means that the Token Metadata program cannot enforce any rules on the tokens it is attached to.
 
@@ -436,7 +436,7 @@ A good example of why this can be problematic is that Token Metadata cannot enfo
 
 It is then up to the creators to define custom operation-specific authorization rules that will be enforced by the Token Metadata program. These are defined in a special **RuleSet** account which is attached to the Metadata account. An example of such RuleSet could be an allowlist of program addresses that honor royalties. RuleSets are part of a new Metaplex program called [Token Auth Rules](/token-auth-rules).
 
-You can [read more about Programmable NFTs here](/token-metadata/pnfts).
+You can [read more about Programmable NFTs here](/token-metadata/pNFTs).
 
 {% diagram %}
 {% node %}
@@ -492,5 +492,5 @@ The other pages of this documentation aim to document it further and explain sig
 - [Verified Creators](/token-metadata/creators)
 - [Delegated Authorities](/token-metadata/delegates)
 - [Locking Assets](/token-metadata/lock)
-- [Programmable NFTs](/token-metadata/pnfts)
+- [Programmable NFTs](/token-metadata/pNFTs)
 - [NFT Escrow](/token-metadata/escrow)

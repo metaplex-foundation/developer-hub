@@ -4,18 +4,18 @@ metaTitle: Token Metadata - Updating Nfts
 description: Learn how to update Assets on Token Metadata
 ---
 
-The update authority of an Nft can update its **Metadata** account using the **Update** instruction as long as the **Is Mutable** attribute is set to `true`. The **Update** instruction requires the **Update Authority** to sign the transaction and can update the following attributes of the **Metadata** account:
+The update authority of an NFT can update its **Metadata** account using the **Update** instruction as long as the **Is Mutable** attribute is set to `true`. The **Update** instruction requires the **Update Authority** to sign the transaction and can update the following attributes of the **Metadata** account:
 
-- **Data**: The object that defines the Name, Symbol, URI, Seller Fee Basis Points and the array of Creators of the Nft. Note that the update authority can only add and/or remove unverified creators from the Creators array. The only exception is if the creator is the update authority, in which case the added or removed creators can be verified.
-- **Primary Sale Happened**: A boolean that indicates whether the Nft has been sold before.
-- **Is Mutable**: A boolean that indicates whether the Nft can be updated again. When changing this to `false`, any future updates will fail.
-- **Collection**: This attribute enables us to set or clear the collection of the Nft. Note that when setting a new collection, the `verified` boolean must be set to `false` and [verified using another instruction](/token-metadata/collections).
-- **Collection Details**: This attribute enables us to set or clear the collection details of the Nft.
-- **Rule Set**: This attribute enables us to set or clear the rule set of the Nft. This is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
+- **Data**: The object that defines the Name, Symbol, URI, Seller Fee Basis Points and the array of Creators of the NFT. Note that the update authority can only add and/or remove unverified creators from the Creators array. The only exception is if the creator is the update authority, in which case the added or removed creators can be verified.
+- **Primary Sale Happened**: A boolean that indicates whether the NFT has been sold before.
+- **Is Mutable**: A boolean that indicates whether the NFT can be updated again. When changing this to `false`, any future updates will fail.
+- **Collection**: This attribute enables us to set or clear the collection of the NFT. Note that when setting a new collection, the `verified` boolean must be set to `false` and [verified using another instruction](/token-metadata/collections).
+- **Collection Details**: This attribute enables us to set or clear the collection details of the NFT.
+- **Rule Set**: This attribute enables us to set or clear the rule set of the NFT. This is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
 
 Note that certain delegated authorities can also update the **Metadata** account of assets as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
 
-Here is how you can use our SDKs to update an Nft on Token Metadata.
+Here is how you can use our SDKs to update an NFT on Token Metadata.
 
 {% dialect-switcher title="Update Assets" %}
 {% dialect title="JavaScript" id="js" %}
@@ -31,7 +31,7 @@ const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
 await updateV1(umi, {
   mint,
   authority: updateAuthority,
-  data: { ...initialMetadata, name: 'Updated Nft' },
+  data: { ...initialMetadata, name: 'Updated NFT' },
 }).sendAndConfirm(umi)
 ```
 
@@ -47,7 +47,7 @@ const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
 await updateV1(umi, {
   mint,
   authority: updateAuthority,
-  data: { ...initialMetadata, name: 'Updated Nft' },
+  data: { ...initialMetadata, name: 'Updated NFT' },
   primarySaleHappened: true,
   isMutable: true,
   // ...

@@ -196,7 +196,7 @@ These are extensions that can be enabled on mint accounts of SPL Token-2022.
 
   {% table %}
 
-  - Nft {% width="20%" %}
+  - NFT {% width="20%" %}
   - Fungible {% width="40%" %} {% align="center" %}
   - Non-Fungible {% width="40%" %} {% align="center" %}
 
@@ -217,7 +217,7 @@ These are extensions that can be enabled on mint accounts of SPL Token-2022.
 
   {% table %}
 
-  - Nft {% width="20%" %}
+  - NFT {% width="20%" %}
   - Fungible {% width="40%" %} {% align="center" %}
   - Non-Fungible {% width="40%" %} {% align="center" %}
 
@@ -238,7 +238,7 @@ These are extensions that can be enabled on mint accounts of SPL Token-2022.
 
   {% table %}
 
-  - Nft {% width="20%" %}
+  - NFT {% width="20%" %}
   - Fungible {% width="40%" %} {% align="center" %}
   - Non-Fungible {% width="40%" %} {% align="center" %}
 
@@ -259,7 +259,7 @@ These are extensions that can be enabled on mint accounts of SPL Token-2022.
 
   {% table %}
 
-  - Nft {% width="20%" %}
+  - NFT {% width="20%" %}
   - Fungible {% width="40%" %} {% align="center" %}
   - Non-Fungible {% width="40%" %} {% align="center" %}
 
@@ -280,7 +280,7 @@ These are extensions that can be enabled on mint accounts of SPL Token-2022.
 
   {% table %}
 
-  - Nft {% width="20%" %}
+  - NFT {% width="20%" %}
   - Fungible {% width="40%" %} {% align="center" %}
   - Non-Fungible {% width="40%" %} {% align="center" %}
 
@@ -301,7 +301,7 @@ These are extensions that can be enabled on mint accounts of SPL Token-2022.
 
   {% table %}
 
-  - Nft {% width="20%" %}
+  - NFT {% width="20%" %}
   - Fungible {% width="40%" %} {% align="center" %}
   - Non-Fungible {% width="40%" %} {% align="center" %}
 
@@ -322,7 +322,7 @@ These are extensions that can be enabled on mint accounts of SPL Token-2022.
 
   {% table %}
 
-  - Nft {% width="20%" %}
+  - NFT {% width="20%" %}
   - Fungible {% width="40%" %} {% align="center" %}
   - Non-Fungible {% width="40%" %} {% align="center" %}
 
@@ -343,7 +343,7 @@ These are extensions that can be enabled on mint accounts of SPL Token-2022.
 
   {% table %}
 
-  - Nft {% width="20%" %}
+  - NFT {% width="20%" %}
   - Fungible {% width="40%" %} {% align="center" %}
   - Non-Fungible {% width="40%" %} {% align="center" %}
 
@@ -364,7 +364,7 @@ These are extensions that can be enabled on mint accounts of SPL Token-2022.
 
   {% table %}
 
-  - Nft {% width="20%" %}
+  - NFT {% width="20%" %}
   - Fungible {% width="40%" %} {% align="center" %}
   - Non-Fungible {% width="40%" %} {% align="center" %}
 
@@ -389,7 +389,7 @@ These are extensions that can be enabled on token accounts of SPL Token-2022.
 
   {% table %}
 
-  - Nft {% width="20%" %}
+  - NFT {% width="20%" %}
   - Fungible {% width="40%" %} {% align="center" %}
   - Non-Fungible {% width="40%" %} {% align="center" %}
 
