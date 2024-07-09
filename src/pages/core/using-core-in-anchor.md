@@ -37,13 +37,14 @@ The Core Rust SDK is organized into several modules:
 - `instructions`: facilitates the creation of instructions, instruction arguments, and CPI instructions.
 - `types`: represents types used by the program.
 
-For more detailed information on how different instructions are called and used, refer to the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/) or you can use cmd + left click (Cntrl + left click for window users) on the instruction to expand it.
+For more detailed information on how different instructions are called and used, refer to the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/) or you can use `cmd + left click` (mac) or `ctrl + left click` (windows) on the instruction to expand it.
 
 ## Accounts Deserialization
 
-There are two ways to deserialize Core accounts. One approach directly deserializes the Asset or Collection account using the `Asset` or `Collection` struct to access all associated data. However, this can lead to stack overflow errors due to the large size of the accounts so our raccomendation is to to deserialize these accounts as `BaseAssetV1` or `BaseCollectionV1`, which contain basic data, and then deserialize the plugin data separately.
-
 ### Deserializable Accounts
+
+The following account structs are available for deserialization within the `mpl-core` crate:
+
 ```rust
 - BaseAssetV1
 - BaseCollectionV1
@@ -52,11 +53,14 @@ There are two ways to deserialize Core accounts. One approach directly deseriali
 - PluginRegistryV1
 ```
 
-There are different methods to deserialize a core-specific BaseAccount. One method involves using the Anchor account struct macro, while the other one involves deserializing the raw bytes of the account:
+There are two ways to deserialize Core accounts within Anchor. 
+
+- Using Anchors Account list struct (recommended in most cases),
+- Directly in the instruction functions body using `<Account>::from_bytes()`.
 
 ### Anchor Accounts List Method
 
-By activating the `anchor flag` that we talked about previously, you'll be able to deserialize both the `Asset` and `Collection` accounts directly in the Anchor account struct:
+By activating the `anchor flag` you'll be able to deserialize both the `BaseAssetV1` and `BaseCollectionV1` accounts directly in the Anchor Accounts list struct:
 
 {% dialect-switcher title="Accounts Deserialization" %}
 
