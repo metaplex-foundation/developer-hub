@@ -39,11 +39,11 @@ export const tokenMetadata = {
               title: 'Token Standards (Assets)',
               href: '/token-metadata/token-standard',
             },
-            { title: 'Minting Nfts', href: '/token-metadata/mint' },
-            { title: 'Fetching Nfts', href: '/token-metadata/fetch' },
-            { title: 'Updating Nfts', href: '/token-metadata/update' },
-            { title: 'Transferring Nfts', href: '/token-metadata/transfer' },
-            { title: 'Burning Nfts', href: '/token-metadata/burn' },
+            { title: 'Minting NFTs', href: '/token-metadata/mint' },
+            { title: 'Fetching NFTs', href: '/token-metadata/fetch' },
+            { title: 'Updating NFTs', href: '/token-metadata/update' },
+            { title: 'Transferring NFTs', href: '/token-metadata/transfer' },
+            { title: 'Burning NFTs', href: '/token-metadata/burn' },
             { title: 'Printed Editions', href: '/token-metadata/print' }, // Include "Definitions" content.
             {
               title: 'Verified Collections',
@@ -55,7 +55,7 @@ export const tokenMetadata = {
               href: '/token-metadata/delegates',
             }, // Delegate + Revoke + Delegated transfer and burn.
             { title: 'Locking Assets', href: '/token-metadata/lock' },
-            { title: 'Programmable Nfts', href: '/token-metadata/pnfts' },
+            { title: 'Programmable NFTs', href: '/token-metadata/pnfts' },
             { title: 'NFT Escrow', href: '/token-metadata/escrow' },
             { title: 'SPL Token-2022', href: '/token-metadata/token-2022' },
           ],
