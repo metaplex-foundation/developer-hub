@@ -1,6 +1,6 @@
 ---
-title: Burning Nfts
-metaTitle: Token Metadata - Burning Nfts
+title: Burning NFTs
+metaTitle: Token Metadata - Burning NFTs
 description: Learn how to burn Nftss on Token Metadata
 ---
 
@@ -8,7 +8,7 @@ The owner of an NFT can burn it using the **Burn** instruction of the Token Meta
 
 - **Authority**: The signer that authorizes the burn. Typically, this is the owner of the NFT but note that certain delegated authorities can also burn Nftss on behalf of the owner as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
 - **Token Owner**: The public key of the current owner of the NFT.
-- **Token Standard**: The standard of the NFT being burnt. This instruction works for all Token Standards in order to provide a unified interface for burning Nfts. That being said, it is worth noting that non-programmable Nfts can be burnt using the **Burn** instruction of the SPL Token program directly.
+- **Token Standard**: The standard of the NFT being burnt. This instruction works for all Token Standards in order to provide a unified interface for burning NFTs. That being said, it is worth noting that non-programmable NFTs can be burnt using the **Burn** instruction of the SPL Token program directly.
 
 The exact accounts closed by the **Burn** instruction depend on the Token Standard of the NFT being burnt. Here's a table that summarizes the accounts for each Token Standard:
 
@@ -23,7 +23,7 @@ Note that the Mint account is never closed because the SPL Token program does no
 
 Here is how you can use our SDKs to burn an asset on Token Metadata.
 
-{% dialect-switcher title="Burning Nfts" %}
+{% dialect-switcher title="Burning NFTs" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts

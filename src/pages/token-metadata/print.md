@@ -10,7 +10,7 @@ Every NFT has the potential to be printed as multiple editions when its **Master
 
 The owner of a printable NFT can print as many editions as they want from it as long as its maximum supply has not been reached.
 
-Every Non-Fungible NFT — i.e. `NonFungible` and `ProgrammableNonFungible` token standards — can be a printable NFT when created. This is done by configuring the **Max Supply** attribute of the NFTs Master Edition account. This attribute is optional and can have one of the following values:
+Every Non-Fungible Asset — i.e. `NonFungible` and `ProgrammableNonFungible` token standards — can be a printable NFT when created. This is done by configuring the **Max Supply** attribute of the NFTs Master Edition account. This attribute is optional and can have one of the following values:
 
 - `None`: The NFT does not have a fixed supply. In other words, **the NFT is printable and has an unlimited supply**.
 - `Some(x)`: The NFT has a fixed supply of `x` editions.
@@ -20,8 +20,8 @@ Every Non-Fungible NFT — i.e. `NonFungible` and `ProgrammableNonFungible` toke
 Whenever a new printed edition is created from a printable NFT, a few things happen:
 
 - A brand new edition NFT is created and its data matches the original NFT. The only difference is that the printed edition uses a different token standard than the original NFT.
-  - For a `NonFungible` NFT, the printed editions use the `NonFungibleEdition` token standard.
-  - For a `ProgrammableNonFungible` NFT, the printed editions use the `ProgrammableNonFungibleEdition` token standard.
+  - For a `NonFungible` Asset, the printed editions use the `NonFungibleEdition` token standard.
+  - For a `ProgrammableNonFungible` Asset, the printed editions use the `ProgrammableNonFungibleEdition` token standard.
 - Instead of using a **Master Edition** account, the new edition NFT uses an **Edition** account which keeps track of its edition number and its parent NFT by storing the address of its parent's **Master Edition** account.
 - The **Supply** attribute of the Master edition account is incremented by 1. When the **Supply** attribute reaches the **Max Supply** attribute, the NFT is no longer printable.
 

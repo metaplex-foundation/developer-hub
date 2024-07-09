@@ -404,7 +404,7 @@ import { createFungibleAsset } from '@metaplex-foundation/mpl-token-metadata'
 const mint = generateSigner(umi)
 await createFungibleAsset(umi, {
   mint,
-  name: 'My Fungible NFT',
+  name: 'My Fungible Asset',
   uri: 'https://example.com/my-fungible-nft.json',
   sellerFeeBasisPoints: percentAmount(5.5),
   decimals: some(7) // for 0 decimals use some(0)
