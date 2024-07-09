@@ -19,8 +19,8 @@ Token Metadata is a protocol within Metaplex that focuses on the metadata aspect
 - Simplicity: Core was designed from the ground up with a **simplicity first approach**.
 - Plugins: Core provides an advanced plugin system that allows Core Assets and Collections to store extra state, provide lifecycle validations, and an enhanced dynamic experiance. The possibilities here are endless!
 - Cost: While not as cheap as Bubblegum, Core is **significantly cheaper** to create and mint compared to Token Metadata due to the optimized account structures.
-  
-[Create An Nft with Core](/core/guides/create-and-nft)
+
+[Create An Nft with Core](/core/guides/javascript/how-to-create-a-core-nft-asset)
 
 ## Token Metadata Nft/pNft
 
@@ -34,13 +34,12 @@ Token Metadata is the Solana Nft standard that started it all. Created back in 2
 
 [Create An Nft/pNft with Token Metadata](/core/guides/create-and-nft)
 
-### Bubblegum cNft
+## Bubblegum cNft
 
 When it comes to creating nfts that are cheap in mass then Bubblegum is the protocol to choose. Bubblegum uses the technology of **Compresed Nfts (cNfts)** By applying a merkletree approach instead of creating accounts for each invidiual Nft.
 
 #### Why Use Bubblegum:
 
 - Cheap to deploy: Metaplex Core offers a robust set of tools to handle all aspects of NFT creation and management, making it a one-stop solution for developers.
-  
-[Create An cNft with Bubble](/core/guides/create-and-nft)
 
+[Create An cNft with Bubble](/core/guides/create-and-nft)

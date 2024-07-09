@@ -7,6 +7,8 @@ created: '06-16-2024'
 updated: '06-24-2024'
 ---
 
+This guide will show you how to build out a Javascript function to send and transfer SPL tokens on the Solana blockchain utilising the Metaplex Umi client wrapper and MPL Toolbox packages.
+
 ## Prerequisite
 
 - Code Editor of your choice (recomended Visual Studio Code)

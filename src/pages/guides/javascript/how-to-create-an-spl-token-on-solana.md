@@ -7,7 +7,7 @@ created: '06-16-2024'
 updated: '06-21-2024'
 ---
 
-This guide walks you through setting up and minting your very own token on the Solana blockchain using Metaplex packages.
+This guide walks you through setting up and minting your very own token on the Solana blockchain using the Metaplex Umi client wrapper and the Mpl Toolbox package with Javascript.
 
 ## Prerequisite
 

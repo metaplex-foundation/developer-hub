@@ -39,10 +39,10 @@ export function Layout({ children, page }) {
         {/* Navigation. */}
         {hasNavigation && (
           <div className="hidden lg:relative lg:block lg:flex-none">
-            <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden " />
+            <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
             <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
             <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" />
-            <div className="scrollbar sticky top-[7rem] -ml-0.5 h-[calc(100vh-7rem)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
+            <div className="sticky top-[7rem] -ml-0.5 h-[calc(100vh-7rem)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
               <Navigation
                 product={page.product}
                 navigation={page.activeSection.navigation}
@@ -56,34 +56,25 @@ export function Layout({ children, page }) {
         <div
           className={clsx(
             'min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-[1200px]',
-            !page.product.isJsxPage && hasNavigation ? 'lg:pl-8 lg:pr-0 xl:px-16' : 'lg:pl-0'
+            hasNavigation ? 'lg:pl-8 lg:pr-0 xl:px-16' : 'lg:pl-0 lg:pr-16'
           )}
         >
-          
           <article>
-            {!page.product.isJsxPage &&
-              (page.title || page.activeSection?.navigationGroup) && (
-                <header className="mb-9 space-y-1">
-                  {page.activeSection?.navigationGroup && (
-                    <p className="font-display text-sm font-medium text-accent-500">
-                      {page.activeSection.navigationGroup.title}
-                    </p>
-                  )}
-                  {page.title && (
-                    <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
-                      {page.title}
-                    </h1>
-                  )}
-                </header>
-              )}
-            <Prose className="break-words">
-              {children}
-
-              <div className="flex justify-between text-sm italic text-neutral-600">
-                {page.created && <div>Date created: {page.created}</div>}
-                {page.updated && <div>Date updated: {page.updated}</div>}
-              </div>
-            </Prose>
+            {(page.title || page.activeSection?.navigationGroup) && (
+              <header className="mb-9 space-y-1">
+                {page.activeSection?.navigationGroup && (
+                  <p className="font-display text-sm font-medium text-accent-500">
+                    {page.activeSection.navigationGroup.title}
+                  </p>
+                )}
+                {page.title && (
+                  <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
+                    {page.title}
+                  </h1>
+                )}
+              </header>
+            )}
+            <Prose className="break-words">{children}</Prose>
           </article>
           <dl className="mt-12 flex border-t border-slate-200 pt-6 dark:border-slate-800">
             {page.activeSection?.previousPage && (
@@ -122,20 +113,18 @@ export function Layout({ children, page }) {
         </div>
 
         {/* Table of contents. */}
-        {!page.isJsxPage && page.tableOfContents && page.tableOfContents.length > 0 && (
-          <div
-            className={clsx(
-              'hidden',
-              hasNavigation
-                ? 'xl:sticky xl:top-[7rem] xl:-mr-6 xl:block xl:h-[calc(100vh-7rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6'
-                : 'lg:sticky lg:top-[7rem] lg:-mr-6 lg:block lg:h-[calc(100vh-7rem)] lg:flex-none lg:overflow-y-auto lg:py-16 lg:pr-6'
-            )}
-          >
-            <TableOfContent
-              tableOfContents={page.tableOfContents}
-            ></TableOfContent>
-          </div>
-        )}
+        <div
+          className={clsx(
+            'hidden',
+            hasNavigation
+              ? 'xl:sticky xl:top-[7rem] xl:-mr-6 xl:block xl:h-[calc(100vh-7rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6'
+              : 'lg:sticky lg:top-[7rem] lg:-mr-6 lg:block lg:h-[calc(100vh-7rem)] lg:flex-none lg:overflow-y-auto lg:py-16 lg:pr-6'
+          )}
+        >
+          <TableOfContent
+            tableOfContents={page.tableOfContents}
+          ></TableOfContent>
+        </div>
       </div>
     </>
   )

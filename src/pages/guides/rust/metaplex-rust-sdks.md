@@ -1,23 +1,44 @@
 ---
-title: Setting up a Solana Client Locally
-metaTitle: Metaplex — Setting up a Solana Client Locally
-description: A quick overview on how to set up to run scripts locally with a Solana client.
+title: Metaplex Rust SDKs
+metaTitle: Metaplex Rust SDKss
+description: A quick overview on Metaplex Rust SDKs.
 ---
 
 ## Introduction
 
+Metaplex provides Rust SDK's for most of our programs which have consistant and predictable outputs and functionality leading to improved intergration times for developers working with our products.
 
+### Modules
 
+The Core Rust SDKs our organized into several modules:
 
-## Setting up a Solana client
+- `accounts`: represents the program's accounts.
+- `errors`: enumerates the program's errors.
+- `instructions`: facilitates the creation of instructions, instruction arguments, and CPI instructions.
+- `types`: represents types used by the program.
 
-Setting up an Solana RPC client for Rust scripts is fairly straight forward. You'll just need to grab the `solana_client` crate.
+### Instructions
 
-```rust
-use solana_client::rpc_client;
+Furthermore each instruction comes with multiple versions depending on your needed use case which can strip away a lot of the boilerplate that comes with sending or cpi'ing instructions.
 
-let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 ```
+CreateV1
+CreateV1Builder
+CreateV1Cpi
+CreateV1CpiAccounts
+CreateV1CpiBuilder
+CreateV1InstructionArgs
+CreateV1InstructionData
+```
+
+#### Instruction
+
+
+#### Builder
+
+
+#### CPI Builder
+
 
 ## Using Metaplex Rust Instruction Builders
 

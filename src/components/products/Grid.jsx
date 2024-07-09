@@ -26,7 +26,7 @@ export function Grid({
             className="block content-start rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
             onClick={onClick}
           >
-            {IconWithName({ product })}
+            {IconWithName({ product, description: true})}
           </Link>
         </li>
       ))}

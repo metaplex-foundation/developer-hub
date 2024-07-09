@@ -119,7 +119,7 @@ CreateV1CpiBuilder::new()
 
 ## Invoking
 
-Invoking is the term used to exectute the CPI call to the other program. And programs version of "sending a transaction" if you may.
+Invoking is the term used to exectute the CPI call to the other program, a programs version of "sending a transaction" if you may.
 
 We have two options when it comes to invoking a CPI call. `invoke()` and `invoke_signed()`
 

@@ -60,7 +60,7 @@ export const guides = {
             //   updated: null, // null means it's never been updated
             // },
             {
-              title: 'Creating an Nft',
+              title: 'Creating an NFT',
               href: '/guides/javascript/how-to-create-an-nft-on-solana',
               created: '06-24-2024',
               updated: null, // null means it's never been updated
@@ -107,29 +107,36 @@ export const guides = {
               updated: null, // null means it's never been updated
             },
             {
-              title: 'How to CPI into a Metaplex Program',
+              title: 'Metaplex Rust SDKs',
+              href: '/guides/rust/metaplex-rust-sdks',
+              created: '07-01-2024',
+              updated: null, // null means it's never been updated
+            },
+            // {
+            //   title: 'Using Anchor',
+            //   href: '/guides/rust/anchor-programs',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
+            {
+              title: 'CPI into a Metaplex Program',
               href: '/guides/rust/how-to-cpi-into-a-metaplex-program',
               created: '07-01-2024',
               updated: null, // null means it's never been updated
             },
             {
-              title: 'Setting up and Using a Solana Client in a Rust Script',
-              href: '/guides/rust/set-up-a-solana-client-in-a-rust-script',
+              title: 'Solana Rust Client',
+              href: '/guides/rust/solana-rust-client',
               created: '07-01-2024',
               updated: null, // null means it's never been updated
             },
-            {
-              title: 'Using Metaplex Rust SDKs in Scripts',
-              href: '/guides/rust/using-metaplex-rust-sdks-in-scripts',
-              created: '07-01-2024',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'How to Deserialize an Account',
-              href: '/guides/rust/how-to-deserialize-an-account',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
+
+            // {
+            //   title: 'How to Deserialize an Account',
+            //   href: '/guides/rust/how-to-deserialize-an-account',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
             // {
             //   title: 'Create a Staking Program',
             //   href: '/guides/rust/create-a-staking-program',
@@ -156,7 +163,7 @@ export const guides = {
         //   ],
         // },
         {
-          title: 'Program Guides',
+          title: 'Metaplex Program Guides',
           links: [
             {
               title: 'Core',
@@ -164,6 +171,18 @@ export const guides = {
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
+            // {
+            //   title: 'Candy Machine',
+            //   href: '/candy-machine/guides/',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
+            // {
+            //   title: 'Core Candy Machine',
+            //   href: '/core-candy-machine/guides/',
+            //   created: '2021-10-01',
+            //   updated: null, // null means it's never been updated
+            // },
             // {
             //   title: 'Token Metadata',
             //   href: '/guides/react-nextjs/plugins',
@@ -180,27 +199,6 @@ export const guides = {
         },
       ],
     },
-
-    // {
-    //   ...referencesSection('core'),
-    //   href: `https://mpl-core-js-docs.vercel.app/`,
-    //   target: '_blank',
-    // },
-    // {
-    //   ...guidesSection('core'),
-    //   navigation: [
-    //     {
-    //       title: 'Guides',
-    //       links: [
-    //         { title: 'Overview', href: '/core/guides' },
-    //         { title: 'Immutability', href: '/core/guides/immutability' },
-    //         { title: 'Print Editions', href: '/core/guides/print-editions' },
-    //         { title: 'Oracle Plugin Example', href: '/core/guides/oracle-plugin-example' },
-    //       ],
-    //     },
-    //   ],
-    // },
-    // { ...recipesSection('core') },
     // { ...changelogSection('core') },
   ],
 }

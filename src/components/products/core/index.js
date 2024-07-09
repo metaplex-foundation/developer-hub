@@ -1,12 +1,11 @@
 import {
   changelogSection,
   documentationSection,
-  recipesSection,
   guidesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { StopCircleIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const core = {
   name: 'Core',
@@ -91,7 +90,10 @@ export const core = {
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
             { title: 'AddBlocker Plugin', href: '/core/plugins/addBlocker' },
             { title: 'Edition Plugin', href: '/core/plugins/edition' },
-            { title: 'Immutable Metadata Plugin', href: '/core/plugins/immutableMetadata' },
+            {
+              title: 'Immutable Metadata Plugin',
+              href: '/core/plugins/immutableMetadata',
+            },
             {
               title: 'Master Edition Plugin',
               href: '/core/plugins/master-edition',
@@ -114,8 +116,14 @@ export const core = {
           title: 'External Plugins',
           links: [
             { title: 'Overview', href: '/core/external-plugins/overview' },
-            { title: 'Adding External Plugin Adapters', href: '/core/external-plugins/adding-external-plugins' },
-            { title: 'Removing External Plugin Adapters', href: '/core/external-plugins/removing-external-plugins' },
+            {
+              title: 'Adding External Plugin Adapters',
+              href: '/core/external-plugins/adding-external-plugins',
+            },
+            {
+              title: 'Removing External Plugin Adapters',
+              href: '/core/external-plugins/removing-external-plugins',
+            },
 
             // {
             //   title: 'Removing External Plugins',
@@ -156,12 +164,24 @@ export const core = {
       ...guidesSection('core'),
       navigation: [
         {
-          title: 'Guides',
+          title: 'General',
           links: [
             { title: 'Overview', href: '/core/guides' },
             { title: 'Immutability', href: '/core/guides/immutability' },
             { title: 'Print Editions', href: '/core/guides/print-editions' },
-            { title: 'Oracle Plugin Example', href: '/core/guides/oracle-plugin-example' },
+            {
+              title: 'Oracle Plugin Example',
+              href: '/core/guides/oracle-plugin-example',
+            },
+          ],
+        },
+        {
+          title: 'Javascript',
+          links: [
+            {
+              title: 'How to Create a Core Asset',
+              href: '/core/guides/javascript/how-to-create-a-core-nft-asset',
+            },
           ],
         },
       ],

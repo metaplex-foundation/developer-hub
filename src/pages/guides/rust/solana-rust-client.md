@@ -6,7 +6,6 @@ description: A quick overview on how to set up to run scripts locally with a Sol
 
 ## Introduction
 
-
 ## Installation
 
 ## Generating a Client
@@ -19,7 +18,6 @@ use solana_client::rpc_client;
 let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 ```
 
-
 ## Fetching Accounts
 
 Basic information needed here about fetching accounts
@@ -27,4 +25,3 @@ Basic information needed here about fetching accounts
 ## Sending Transactions
 
 Basic information here needed about sending transactions
-

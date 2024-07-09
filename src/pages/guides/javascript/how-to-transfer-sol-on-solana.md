@@ -7,7 +7,7 @@ created: '06-16-2024'
 updated: '06-24-2024'
 ---
 
-This guide walks you through setting up and minting your very own token on the Solana blockchain using Metaplex packages.
+This guide walks will show you how to build a Javascript function that transfers SOL from one wallet to another on the Solana blockchain utilising the Metaplex Umi client wrapper and MPL Toolbox package.
 
 ## Prerequisite
 
@@ -78,6 +78,8 @@ This example is going to run through setting up Umi with a `generatedSigner()`. 
 
 ### Generating a New Wallet
 
+If you wish to generate a new wallet/private key to test with you generate a new signer with `umi`.
+
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
@@ -95,6 +97,8 @@ await umi.rpc.airdrop(umi.identity.publickey)
 
 ### Use an Existing Wallet
 
+If you wish to use an existing wallet you can import this a few different ways. The below code assumes that the private key is stored in `.json` format on your hardrive somewhere.
+
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
@@ -111,6 +115,8 @@ const walletFile = const imageFile = fs.readFileSync(
 ```
 
 ## Transfering Sol
+
+The `mpl-toolbox` package provides a helper function called `transferSol` that creates the instructions needed in order to execute a transfer on the blockchain.
 
 ```ts
 

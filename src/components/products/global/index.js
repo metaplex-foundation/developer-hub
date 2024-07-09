@@ -4,7 +4,6 @@ import { Logo } from './Logo'
 
 export const global = {
   name: 'Metaplex',
-  isJsxPage: true,
   headline: 'Developer Hub',
   description: 'One place for all Metaplex developer resources.',
   path: '',
@@ -14,5 +13,41 @@ export const global = {
   className: 'accent-sky',
   heroes: [{ path: '/', component: Hero }],
   sections: [
+    {
+      ...documentationSection(''),
+      navigation: [
+        {
+          title: 'Overview',
+          links: [
+            { title: 'Introduction', href: '/' },
+            { title: 'Programs and Tools', href: '/programs-and-tools' },
+          ],
+        },
+        {
+          title: 'Resources',
+          links: [
+            { title: 'Offical Links', href: '/official-links' },
+            { title: 'Developer Tools', href: '/developer-tools' },
+            {
+              title: 'Understanding Programs',
+              href: '/understanding-programs',
+            },
+            {title: "Working with Rust", href: '/working-with-rust'},
+            { title: 'RPC Providers', href: '/rpc-providers' },
+            { title: 'Storage Providers', href: '/storage-providers' },
+            { title: 'Stability Index', href: '/stability-index' },
+            { title: 'Protocol Fees', href: '/protocol-fees' },
+          ],
+        },
+        {
+          title: 'Community',
+          links: [
+            { title: 'Community Guides', href: '/community-guides' },
+            { title: 'Security', href: '/security' },
+            { title: 'Contact Us', href: '/contact' },
+          ],
+        },
+      ],
+    },
   ],
 }
