@@ -36,7 +36,7 @@ RPC endpoints are essential tools for developers building on Solana. They provid
 - **Fetch Program Accounts**: retrieve all accounts associated with a specific program, which is useful for managing program state.
 - **Get Logs**: detailed logs from transactions and programs to debug and optimize their applications.
 
-## Example RPC Endpoints
+### Example RPC Endpoints
 Here are some common RPC endpoints and their functionalities:
 - **getBalance**: Retrieves the balance of a specified account.
 - **sendTransaction**: Submits a transaction to the network.
@@ -71,3 +71,4 @@ const publicKey = new solanaWeb3.PublicKey('ExamplePublicKeyHere');
 // Get balance
 getBalance(publicKey);
 ```
+

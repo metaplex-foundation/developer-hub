@@ -25,6 +25,12 @@ export const guides = {
               updated: null, // null means it's never been updated
             },
             {
+              title: 'Validators and Staking',
+              href: '/guides/validators',
+              created: '2021-10-01',
+              updated: null, // null means it's never been updated
+            },
+            {
               title: 'RPCs and DAS',
               href: '/guides/rpcs-and-das',
               created: '2021-10-01',

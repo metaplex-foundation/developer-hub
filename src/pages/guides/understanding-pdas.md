@@ -19,7 +19,7 @@ updated: '06-21-2024'
 PDAs are primarily used to:
 
 - **Manage State**: PDAs allow programs to store data in a determinstic address, making reading that state back easy.
-- **Authorize Transactions**: Only the program that owns the PDA can authorize transactions involving it, ensuring controlled access.
+- **Authorize Transactions**: Only the program that owns the PDA can authorize transactions involving it, ensuring controlled access. This is due to the fact that PDAs do not occur on the Ed25519 curve (elliptic-curve cryptography). Only addresses that appear on the curve can have a matching private key making PDAs a secure way of signing transactions with a program.
 - **Create Program-Specific Accounts**: Programs can create and interact with accounts that are uniquely associated with them, enabling modular and isolated state management.
 
 ## How PDAs are Derived
