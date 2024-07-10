@@ -1,13 +1,13 @@
 ---
-title: How to Create a Core NFT Asset
-metaTitle: How to Create a Core NFT Asset
-description: Learn how to create a Core NFT Asset on the Solana blockchain with the Metaplex Core package.
+title: How to Create a NFT On Solana
+metaTitle: How to Create a NFT On Solana
+description: Learn how to create an NFT on the Solana blockchain with the Metaplex.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-18-2024'
 ---
 
-This is an intial guide on how to create a next-gen Digital Asset Nft (Core Asset) on the Solana blockchain using the Metaplex Mpl Core protocol. Mpl Core Assets provide the next wave of NFT projects on Solana with greater creativity and a broad dynamic experiance for both creators and owners with Mpl Core's simplied design and unique plugin system.
+This is an intial guide on how to create an NFT on the Solana blockchain with the Metaplex Token Metadata protocol.
 
 ## Prerequisite
 
@@ -41,7 +41,7 @@ npm i @metaplex-foundation/umi-bundle-defaults
 ```
 
 ```js
-npm i @metaplex-foundation/mpl-core
+npm i @metaplex-foundation/mpl-token-metadata
 ```
 
 ```js
@@ -54,15 +54,10 @@ Here we will define all needed imports for this particular guide and create a wr
 
 ```ts
 import {
-  createFungible,
+  createNft,
+  createProgrammableNft,
   mplTokenMetadata,
 } from '@metaplex-foundation/mpl-token-metadata'
-import {
-  createTokenIfMissing,
-  findAssociatedTokenPda,
-  getSplAssociatedTokenProgramId,
-  mintTokensTo,
-} from '@metaplex-foundation/mpl-toolbox'
 import {
   generateSigner,
   percentAmount,
@@ -170,15 +165,14 @@ console.log(imageUri[0])
 
 Once we have a valid and working image URI we can start working on the metadata for our token.
 
-the standard for offchain metadata for a funigble token is as follows
+the standard for offchain metadata for a funigble token is as follows;
 
 ```json
 {
   "name": "My Nft",
   "description": "This is an Nft on Solana",
   "image": "https://arweave.net/my-image",
-  "animation_url": "https://arweave.net/my-animation",
-  "external_url": "https://example.com",
+  "external_url": "https://example.com/my-nft.json",
   "attributes": [
     {
       "trait_type": "trait1",
@@ -194,13 +188,9 @@ the standard for offchain metadata for a funigble token is as follows
       {
         "uri": "https://arweave.net/my-image",
         "type": "image/png"
-      },
-      {
-        "uri": "https://arweave.net/my-animation",
-        "type": "video/mp4"
       }
     ],
-    "category": "video"
+    "category": "image"
   }
 }
 ```
@@ -226,6 +216,33 @@ This will be set to the imageUri (or any online location of the image) that we u
 ```js
 // Call upon umi's uploadJson function to upload our metadata to Arweave via Irys.
 
+
+const metadata = {
+  "name": "My Nft",
+  "description": "This is an Nft on Solana",
+  "image": imageUri[0],
+  "external_url": "https://example.com/my-nft.json",
+  "attributes": [
+    {
+      "trait_type": "trait1",
+      "value": "value1"
+    },
+    {
+      "trait_type": "trait2",
+      "value": "value2"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": imageUri[0],
+        "type": "image/png"
+      }
+    ],
+    "category": "image"
+  }
+}
+
 const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
   throw new Error(err)
 })
@@ -233,24 +250,62 @@ const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
 
 Now if all has gone to play we should have the uri of json file stored in the `metadataUri` providing it did not throw any errors.
 
+### NFT vs pNFT
+
+The Token Metadata program can mint 2 kinds of NFTs, a normal NFT, and a pNFT (programable non fungible asset).
+The main difference between the two types of NFTs here are one is royalty enforced (pNFT) and the other is not (NFT).
+
+#### NFT
+
+- No royatly enforcement
+- Simpler in initial setup and to work with in future.
+
+#### pNFT
+
+- More accounts to deal with when it comes to future development.
+- Royalty enforcement
+- Programable in which we have rulesets which can block programs from making a transfer.
+
 ### Minting the Nft
 
-There are a few things we need to take into account when creating and minting a new token on the Solana blockchain in that we need to create some accounts and instructions.
+From here you can pick the type of NFT mint instruction you wish to use, either `NFT` or `pNFT`.
 
-- Creating the mint account.
-- If we are minting the Tokens then we need a Token Account (holds the minted tokens in a persons wallet)
-- Mint the token.
-
-Now we can proceed to create the mintTokenTo instruction
+#### NFT
 
 ```ts
-const assetSigner = generateSigner(umi)
+// We generate a signer for the Nft
+const nftSigner = generateSigner(umi)
 
-const createTx = await create(umi, {
-  asset: assetSigner,
-  collection: collection,
-  name: 'My Asset',
-  uri: 'https://example.com/my-asset.json',
+const tx = await createNft(umi, {
+  mint: nftSigner,
+  sellerFeeBasisPoints: percentAmount(5.5),
+  name: 'My Nft',
+  uri: metadataUri,
+}).sendAndConfirm(umi)
+
+// finally we can deserialize the signature that we can check on chain.
+// import { base58 } from "@metaplex-foundation/umi/serializers";
+
+console.log(base58.deserialize(tx.signature)[0])
+```
+
+#### pNFT
+
+```ts
+// We generate a signer for the Nft
+const nftSigner = generateSigner(umi)
+
+// Decide on a ruleset for the Nft.
+// Metaplex ruleset - publicKey("eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9")
+// Compatability ruleset - publicKey("AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5")
+const ruleset = null // or set a publicKey from above
+
+const tx = await createProgrammableNft(umi, {
+  mint: nftSigner,
+  sellerFeeBasisPoints: percentAmount(5.5),
+  name: 'My Nft',
+  uri: metadataUri,
+  ruleSet: ruleset,
 }).sendAndConfirm(umi)
 
 // finally we can deserialize the signature that we can check on chain.
@@ -261,11 +316,13 @@ console.log(base58.deserialize(tx.signature)[0])
 
 ## Full Code Example
 
-```ts
-import { create } from '@metaplex-foundation/mpl-core'
+```js
+import { createProgrammableNft } from '@metaplex-foundation/mpl-token-metadata'
 import {
   createGenericFile,
   generateSigner,
+  percentAmount,
+  publicKey,
   signerIdentity,
   sol,
 } from '@metaplex-foundation/umi'
@@ -363,10 +420,20 @@ const createNft = async () => {
   // We generate a signer for the Nft
   const nftSigner = generateSigner(umi)
 
-  const tx = await create(umi, {
-    asset: nftSigner,
+  // Decide on a ruleset for the Nft.
+  // Metaplex ruleset - publicKey("eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9")
+  // Compatability ruleset - publicKey("AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5")
+  const ruleset = null // or set a publicKey from above
+
+  // decide if you are using createNft() or createProgramableNft() and swap
+  // out as desired.
+
+  const tx = await createProgrammableNft(umi, {
+    mint: nftSigner,
+    sellerFeeBasisPoints: percentAmount(5.5),
     name: 'My Nft',
     uri: metadataUri,
+    ruleSet: ruleset,
   }).sendAndConfirm(umi)
 
   // finally we can deserialize the signature that we can check on chain.
@@ -376,3 +443,7 @@ const createNft = async () => {
 
 createNft()
 ```
+
+## What's Next?
+
+This guide helped you to create a basic NFT, from here you can head over to the [Token Metadata Program](/token-metadata) and check out things like creating a collection and adding your new NFT into a collection and the various other interactions you can perform with your NFT.

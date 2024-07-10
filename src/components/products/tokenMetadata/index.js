@@ -1,6 +1,7 @@
 import {
   changelogSection,
   documentationSection,
+  guidesSection,
   recipesSection,
   referencesSection,
 } from '@/shared/sections'
@@ -63,25 +64,35 @@ export const tokenMetadata = {
       ],
     },
     {
-      ...referencesSection('token-metadata'),
-      href: `https://mpl-token-metadata-js-docs.vercel.app/`,
-      target: '_blank',
-    },
-    {
-      ...recipesSection('token-metadata'),
+      ...guidesSection('token-metadata'),
       navigation: [
         {
-          title: 'Recipes',
+          title: 'Guides',
           links: [
-            { title: 'Overview', href: '/token-metadata/recipes' },
+            { title: 'Overview', href: '/token-metadata/guides' },
             {
               title: 'Get Mints by Collection',
-              href: '/token-metadata/recipes/get-by-collection',
+              href: '/token-metadata/guides/get-by-collection',
+            },
+          ],
+        },
+        {
+          title: 'Javascript',
+          links: [
+            {
+              title: 'Create an NFT',
+              href: '/token-metadata/guides/javascript/create-an-nft',
             },
           ],
         },
       ],
     },
+    {
+      ...referencesSection('token-metadata'),
+      href: `https://mpl-token-metadata-js-docs.vercel.app/`,
+      target: '_blank',
+    },
+
     { ...changelogSection('token-metadata') },
   ],
 }

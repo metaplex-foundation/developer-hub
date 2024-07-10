@@ -124,12 +124,12 @@ export const guides = {
               created: '07-01-2024',
               updated: null, // null means it's never been updated
             },
-            {
-              title: 'Solana Rust Client',
-              href: '/guides/rust/solana-rust-client',
-              created: '07-01-2024',
-              updated: null, // null means it's never been updated
-            },
+            // {
+            //   title: 'Solana Rust Client',
+            //   href: '/guides/rust/solana-rust-client',
+            //   created: '07-01-2024',
+            //   updated: null, // null means it's never been updated
+            // },
 
             // {
             //   title: 'How to Deserialize an Account',

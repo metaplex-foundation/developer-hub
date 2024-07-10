@@ -8,18 +8,30 @@ description: A quick overview on Metaplex Rust SDKs.
 
 Metaplex provides Rust SDK's for most of our programs which have consistant and predictable outputs and functionality leading to improved intergration times for developers working with our products.
 
-### Modules
+## Modules
 
 The Core Rust SDKs our organized into several modules:
 
 - `accounts`: represents the program's accounts.
-- `errors`: enumerates the program's errors.
 - `instructions`: facilitates the creation of instructions, instruction arguments, and CPI instructions.
+- `errors`: enumerates the program's errors.
 - `types`: represents types used by the program.
+
+### Accounts
+
+The **accounts** module is generated based on on-chain account state generation and their structs. These can be deserialized using a number of different methods based on if you are using RAW program generation or using a framework such as Anchor.
+
+These can be accessed from `<crate_name>::accounts`. In the case of `mpl-core` you could access the accounts as follows;
+
+```rust
+mpl_core::accounts
+```
 
 ### Instructions
 
-Furthermore each instruction comes with multiple versions depending on your needed use case which can strip away a lot of the boilerplate that comes with sending or cpi'ing instructions.
+Each SDK comes with an **instructions** module that comes with multiple versions of the supplied insturctions from the given program that strips away alot of the boiler plate depending on your needs.
+
+An example below shows all the `CreateV1` instructions coming from the `mpl-core` crate.
 
 ```
 CreateV1
@@ -31,32 +43,57 @@ CreateV1InstructionArgs
 CreateV1InstructionData
 ```
 
-#### Instruction
+These can be accessed from `<crate_name>::instructions`. In the case of `mpl-core` you could access the accounts as follows;
+
+```rust
+mpl_core::instructions
+```
+
+### Types
+
+Each of the Metaplex Rust SDKs comes with an **types** module that supplies all the nessacery extra types that may not be in the initial accounts module structs.
+
+These can be accessed from `<crate_name>::types`. In the case of `mpl-core` you could access the accounts as follows;
+
+```rust
+mpl_core::types
+```
+
+### Errors
+
+While an **errors** module is generated for every SDK this just holds the error list for that specific program and users do not need to interact with this module.
 
 
-#### Builder
+## Instruction Builders
 
+Metaplex Rust SDKs will also currently come with two a **Builder** versions of each instruction which you can import. This abstracts a massive amount code for you and will return you an instruction that's ready to send.
 
-#### CPI Builder
+These include:
 
+- Builder
+- CpiBuilder
 
-## Using Metaplex Rust Instruction Builders
+In the case of `CreateV1` from the [mpl-Core crate docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) these instructions are currently available to us.
 
-Each instruction that comes from a Metaplex Rust crate will also currently come with a `Builder` version of that instruction which you can import. This abstracts a massive amount code for you and will return you an instruction that's ready to send.
+```
+CreateV1
+CreateV1Builder
+CreateV1Cpi
+CreateV1CpiAccounts
+CreateV1CpiBuilder
+CreateV1InstructionArgs
+CreateV1InstructionData
+```
+
+Each instruction that comes from a Metaplex Rust crate 
 
 Lets take the `CreateV1` instruction from Core as an example (this applies to all other instructions from this Crate and all other Metaplex crates too).
 
-If we look through the instructions in the [Mpl Core crate type docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) we can see we have a number of instructions available to us.
+If we look through the instructions in the  we can see we have a number of instructions available to us.
 
-```
-CreateV1
-CreateV1Builder
-CreateV1Cpi
-CreateV1CpiAccounts
-CreateV1CpiBuilder
-CreateV1InstructionArgs
-CreateV1InstructionData
-```
+### Builder
+
+Builder instructions are designed to be used via
 
 The one we are interested in here is the `CreateV1Builder`.
 
@@ -113,7 +150,7 @@ let create_asset_ix = CreateV1Builder::new()
 
 Now that we have our instruction ready we need to create a normal Solana transaction to send to our RPC. This includes a blockhash andxx§ signers.
 
-## Full Builder Example
+### Full Builder Example
 
 This is a full example of creating a instruction using a Metaplex `Builder` function and sending that transction off to the chain.
 
@@ -150,3 +187,11 @@ let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_s
     println!("Signature: {:?}", res)
 
 ```
+
+### CpiBuilder
+
+The `CpiBuilder` instructions are designed to be used when you wish to call and execute instructions from a Metaplex program from your own program.
+
+We have a full seperate guide discussing `CpiBuilders` which can be viewed here;
+
+[CPI Into a Metaplex Program](/guides/rust/how-to-cpi-into-a-metaplex-program)
