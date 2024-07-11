@@ -16,7 +16,7 @@ This is an intial guide on how to create an NFT on the Solana blockchain with th
 
 ## Initial Setup
 
-This guide will run through create of an Nft Core Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
+This guide will run through create of an NFT Core Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
 
 ### Initializing
 
@@ -121,13 +121,13 @@ const walletFile = const imageFile = fs.readFileSync(
   )
 ```
 
-## Creating the Nft
+## Creating the NFT
 
 ### Uploading the Image
 
-The first thing we need to do is to an image that represents the Nft and makes it recognisable. This can be in the form of jpeg, png or gif.
+The first thing we need to do is to an image that represents the NFT and makes it recognisable. This can be in the form of jpeg, png or gif.
 
-Umi comes with downloadable storage plugins that allow you to upload to storage solutions such Arweave, NftStore, AWS, and ShdwDrive. At start of this guide we had installed the `irsyUploader()` plugin which stores content on the Arweave blockchain so we'll stick with using that.
+Umi comes with downloadable storage plugins that allow you to upload to storage solutions such Arweave, NftStorage, AWS, and ShdwDrive. At start of this guide we had installed the `irsyUploader()` plugin which stores content on the Arweave blockchain so we'll stick with using that.
 
 {% callout title="Local script/Node.js" %}
 This example is using a localscript/node.js approach using Irys to upload to Arweave. If you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
@@ -169,8 +169,8 @@ the standard for offchain metadata for a funigble token is as follows;
 
 ```json
 {
-  "name": "My Nft",
-  "description": "This is an Nft on Solana",
+  "name": "My NFT",
+  "description": "This is an NFT on Solana",
   "image": "https://arweave.net/my-image",
   "external_url": "https://example.com/my-nft.json",
   "attributes": [
@@ -218,8 +218,8 @@ This will be set to the imageUri (or any online location of the image) that we u
 
 
 const metadata = {
-  "name": "My Nft",
-  "description": "This is an Nft on Solana",
+  "name": "My NFT",
+  "description": "This is an NFT on Solana",
   "image": imageUri[0],
   "external_url": "https://example.com/my-nft.json",
   "attributes": [
@@ -279,7 +279,7 @@ const nftSigner = generateSigner(umi)
 const tx = await createNft(umi, {
   mint: nftSigner,
   sellerFeeBasisPoints: percentAmount(5.5),
-  name: 'My Nft',
+  name: 'My NFT',
   uri: metadataUri,
 }).sendAndConfirm(umi)
 
@@ -292,7 +292,7 @@ console.log(base58.deserialize(tx.signature)[0])
 #### pNFT
 
 ```ts
-// We generate a signer for the Nft
+// We generate a signer for the NFT
 const nftSigner = generateSigner(umi)
 
 // Decide on a ruleset for the Nft.
@@ -303,7 +303,7 @@ const ruleset = null // or set a publicKey from above
 const tx = await createProgrammableNft(umi, {
   mint: nftSigner,
   sellerFeeBasisPoints: percentAmount(5.5),
-  name: 'My Nft',
+  name: 'My NFT',
   uri: metadataUri,
   ruleSet: ruleset,
 }).sendAndConfirm(umi)
@@ -382,8 +382,8 @@ const createNft = async () => {
   //
 
   const metadata = {
-    name: 'My Nft',
-    description: 'This is an Nft on Solana',
+    name: 'My NFT',
+    description: 'This is an NFT on Solana',
     image: imageUri[0],
     external_url: 'https://example.com',
     attributes: [
@@ -414,13 +414,13 @@ const createNft = async () => {
   })
 
   //
-  // ** Creating the Nft **
+  // ** Creating the NFT **
   //
 
-  // We generate a signer for the Nft
+  // We generate a signer for the NFT
   const nftSigner = generateSigner(umi)
 
-  // Decide on a ruleset for the Nft.
+  // Decide on a ruleset for the NFT.
   // Metaplex ruleset - publicKey("eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9")
   // Compatability ruleset - publicKey("AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5")
   const ruleset = null // or set a publicKey from above
@@ -431,7 +431,7 @@ const createNft = async () => {
   const tx = await createProgrammableNft(umi, {
     mint: nftSigner,
     sellerFeeBasisPoints: percentAmount(5.5),
-    name: 'My Nft',
+    name: 'My NFT',
     uri: metadataUri,
     ruleSet: ruleset,
   }).sendAndConfirm(umi)
