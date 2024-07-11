@@ -14,7 +14,7 @@ Program feature set includes:
 
 - Minting
 - Updating
-- Transfering
+- Transferring
 - Burning
 - Delegating
 - Collection Management
@@ -54,7 +54,7 @@ Program feature set includes:
 - Data Fetching
 - Minting
 - Updating
-- Transfering
+- Transferring
 - Burning
 - Delegating
 - Collection Management

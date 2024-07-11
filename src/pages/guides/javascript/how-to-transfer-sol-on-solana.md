@@ -7,11 +7,11 @@ created: '06-16-2024'
 updated: '06-24-2024'
 ---
 
-This guide walks will show you how to build a Javascript function that transfers SOL from one wallet to another on the Solana blockchain utilising the Metaplex Umi client wrapper and MPL Toolbox package.
+This guide walks will show you how to build a Javascript function that transfers SOL from one wallet to another on the Solana blockchain utilizing the Metaplex Umi client wrapper and MPL Toolbox package.
 
 ## Prerequisite
 
-- Code Editor of your choice (recomended Visual Studio Code)
+- Code Editor of your choice (recommended Visual Studio Code)
 - Node 18.x.x or above.
 
 ## Initial Setup
@@ -114,7 +114,7 @@ const walletFile = const imageFile = fs.readFileSync(
   )
 ```
 
-## Transfering Sol
+## Transferring Sol
 
 The `mpl-toolbox` package provides a helper function called `transferSol` that creates the instructions needed in order to execute a transfer on the blockchain.
 

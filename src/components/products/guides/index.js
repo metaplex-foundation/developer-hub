@@ -90,13 +90,13 @@ export const guides = {
             //   updated: null, // null means it's never been updated
             // },
             {
-              title: 'Transfering Tokens',
+              title: 'Transferring Tokens',
               href: '/guides/javascript/how-to-transfer-spl-tokens-on-solana',
               created: '2024-06-16',
               updated: '06-22-2024', // null means it's never been updated
             },
             {
-              title: 'Transfering SOL',
+              title: 'Transferring SOL',
               href: '/guides/javascript/how-to-transfer-sol-on-solana',
               created: '2024-06-16',
               updated: null, // null means it's never been updated

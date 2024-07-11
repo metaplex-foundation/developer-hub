@@ -11,7 +11,7 @@ This is an intial guide on how to create an NFT on the Solana blockchain with th
 
 ## Prerequisite
 
-- Code Editor of your choice (recomended Visual Studio Code)
+- Code Editor of your choice (recommended Visual Studio Code)
 - Node 18.x.x or above.
 
 ## Initial Setup

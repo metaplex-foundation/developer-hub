@@ -2,11 +2,10 @@ import {
   changelogSection,
   documentationSection,
   guidesSection,
-  recipesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const tokenMetadata = {
   name: 'Token Metadata',
@@ -65,12 +64,6 @@ export const tokenMetadata = {
     },
     {
       ...guidesSection('token-metadata'),
-
-      ...referencesSection('token-metadata'),
-      href: `https://mpl-token-metadata.typedoc.metaplex.com/`,
-      target: '_blank',
-    },
-
       navigation: [
         {
           title: 'Guides',
@@ -93,6 +86,12 @@ export const tokenMetadata = {
         },
       ],
     },
+    {
+      ...referencesSection('token-metadata'),
+      href: `https://mpl-token-metadata-js-docs.vercel.app/`,
+      target: '_blank',
+    },
+
     { ...changelogSection('token-metadata') },
   ],
 }

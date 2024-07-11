@@ -7,11 +7,11 @@ created: '06-16-2024'
 updated: '06-24-2024'
 ---
 
-This guide will show you how to build out a Javascript function to send and transfer SPL tokens on the Solana blockchain utilising the Metaplex Umi client wrapper and MPL Toolbox packages.
+This guide will show you how to build out a Javascript function to send and transfer SPL tokens on the Solana blockchain utilizing the Metaplex Umi client wrapper and MPL Toolbox packages.
 
 ## Prerequisite
 
-- Code Editor of your choice (recomended Visual Studio Code)
+- Code Editor of your choice (recommended Visual Studio Code)
 - Node 18.x.x or above.
 
 ## Initial Setup
@@ -110,7 +110,7 @@ const walletFile = const imageFile = fs.readFileSync(
 
 ## Key Accounts
 
-When transfering SPL Tokens on Solana we need to work out both the senders and recieves SPL Token Account addresses for the token we are trying to send.
+When transferring SPL Tokens on Solana we need to work out both the senders and recieves SPL Token Account addresses for the token we are trying to send.
 
 Token Account addresses are unique between coins and wallets so we need to use a helper function to determine what each account address is for the both the sender and the reciever.
 

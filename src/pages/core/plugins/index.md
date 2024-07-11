@@ -9,7 +9,7 @@ description: Learn about the different types of Plugins available on MPL Core As
 During a Core Assets lifecycle, multiple events can be triggered such as:
 
 - Creating
-- Transfering
+- Transferring
 - Updating
 - Burning
 - Add Plugin

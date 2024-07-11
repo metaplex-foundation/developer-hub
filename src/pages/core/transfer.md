@@ -91,7 +91,7 @@ pub async fn transfer_asset() {
 
 ## Transferring a Core Asset in a Collection
 
-If you are transfering an Asset which has a collection you will need to pass the collection address in.
+If you are transferring an Asset which has a collection you will need to pass the collection address in.
 [How to tell if an asset is in a Collection?]()
 
 {% dialect-switcher title="Transfer an Asset that is part of a Collection" %}

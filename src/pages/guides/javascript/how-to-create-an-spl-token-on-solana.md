@@ -11,7 +11,7 @@ This guide walks you through setting up and minting your very own token on the S
 
 ## Prerequisite
 
-- Code Editor of your choice (recomended Visual Studio Code)
+- Code Editor of your choice (recommended Visual Studio Code)
 - Node 18.x.x or above.
 
 ## Initial Setup
