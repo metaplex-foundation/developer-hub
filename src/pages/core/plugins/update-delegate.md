@@ -2,6 +2,7 @@
 title: Update Delegate Plugin
 metaTitle: Core - Delegating Update permissions
 description: Learn how to delegate a update authority on Core
+updated: "06-19-2024"
 ---
 
 The Update Delegate is a `Authority Managed` plugin that allows the authority of the MPL Core Asset to assign an Update Delegate to the Asset.
@@ -19,7 +20,18 @@ The Update Delegate Plugin can be used when:
 
 ## Arguments
 
-The Update Delegate Plugin doesn't contain any arguments to pass in.
+|                     |             |
+| ------------------- | ----------- |
+| additionalDelegates | publickey[] |
+
+### additionalDelegates
+
+Additional delegates allow you to add more than one delegate to the updateDelegate plugin.
+
+Additional delegates can do everything that the update authority can do except:
+- add or change the additional delegates array (apart from remove themselves).
+- change the plugin authority of the updateAuthority plugin.
+- change the root update authority of the collection.
 
 ## Adding the Update Delegate Plugin to an Asset
 
@@ -28,21 +40,19 @@ The Update Delegate Plugin doesn't contain any arguments to pass in.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-  addPlugin,
-} from '@metaplex-foundation/mpl-core'
+import { addPlugin } from '@metaplex-foundation/mpl-core'
 
 const assetAddress = publicKey('11111111111111111111111111111111')
 const delegate = publicKey('22222222222222222222222222222222')
 
 await addPlugin(umi, {
-    asset: assetAddress,
-    plugin: {
-      type: 'UpdateDelegate',
-      authority: { type: 'Address', address: delegate },
-      additionalDelegates: [],
-    },
-  }).sendAndConfirm(umi);
+  asset: assetAddress,
+  plugin: {
+    type: 'UpdateDelegate',
+    authority: { type: 'Address', address: delegate },
+    additionalDelegates: [],
+  },
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}

@@ -132,7 +132,7 @@ await route(umi, {
 // If we try to mint now, it will succeed.
 ```
 
-API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetRouteArgs.html)
+API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetRouteArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -196,7 +196,7 @@ await route(umi, {
 }).sendAndConfirm(umi);
 ```
 
-API References: [route](https://mpl-core-candy-machine-js-docs.vercel.app/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/DefaultGuardSetRouteArgs.html)
+API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetRouteArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

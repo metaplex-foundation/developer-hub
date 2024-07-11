@@ -99,7 +99,7 @@ await createCandyMachineV2(umi, {
 
 In these examples, we only focused on the required parameters but you may want to check out the following API References to see what you can do with this `create` function.
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [createCandyMachineV2](https://mpl-core-candy-machine-js-docs.vercel.app/functions/createCandyMachineV2.html).
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [createCandyMachineV2](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/createCandyMachineV2.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -130,7 +130,7 @@ For more detailed information about the Candy Machine account, check out the [pr
 {% dialect-switcher title="Inside Candy Machine accounts" %}
 {% dialect title="JavaScript" id="js" %}
 
-The best way to check how Candy Machines are modelled in the Umi library is by checking [the API References of the `CandyMachine` account](https://mpl-core-candy-machine-js-docs.vercel.app/types/CandyMachine.html). You may also want to check out the [API References of the `candyGuard` account](https://mpl-core-candy-machine-js-docs.vercel.app/types/CandyGuard.html) since one is automatically created for each candy machine when using the `create` function.
+The best way to check how Candy Machines are modelled in the Umi library is by checking [the API References of the `CandyMachine` account](https://mpl-core-candy-machine.typedoc.metaplex.com/types/CandyMachine.html). You may also want to check out the [API References of the `candyGuard` account](https://mpl-core-candy-machine.typedoc.metaplex.com/types/CandyGuard.html) since one is automatically created for each candy machine when using the `create` function.
 
 Here’s a small code example showcasing some of the Candy Machine attributes.
 
@@ -176,7 +176,7 @@ const candyMachine = await fetchCandyMachine(umi, publicKey('...'))
 const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority)
 ```
 
-API References: [fetchCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/fetchCandyMachine.html), [fetchCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/fetchCandyGuard.html).
+API References: [fetchCandyMachine](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/fetchCandyMachine.html), [fetchCandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/fetchCandyGuard.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -230,7 +230,7 @@ await setMintAuthority(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [setCandyMachineAuthority](https://mpl-core-candy-machine-js-docs.vercel.app/functions/setCandyMachineAuthority.html), [setCandyGuardAuthority](https://mpl-core-candy-machine-js-docs.vercel.app/functions/setCandyGuardAuthority.html), [setMintAuthority](https://mpl-core-candy-machine-js-docs.vercel.app/functions/setMintAuthority.html).
+API References: [setCandyMachineAuthority](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/setCandyMachineAuthority.html), [setCandyGuardAuthority](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/setCandyGuardAuthority.html), [setMintAuthority](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/setMintAuthority.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -265,7 +265,7 @@ await updateCandyMachine(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [updateCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/updateCandyMachine.html).
+API References: [updateCandyMachine](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/updateCandyMachine.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -333,7 +333,7 @@ await updateCandyMachine(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [updateCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/updateCandyMachine.html).
+API References: [updateCandyMachine](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/updateCandyMachine.html).
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -362,7 +362,7 @@ await deleteCandyGuard(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [deleteCandyMachine](https://mpl-core-candy-machine-js-docs.vercel.app/functions/deleteCandyMachine.html), [deleteCandyGuard](https://mpl-core-candy-machine-js-docs.vercel.app/functions/deleteCandyGuard.html).
+API References: [deleteCandyMachine](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/deleteCandyMachine.html), [deleteCandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/deleteCandyGuard.html).
 
 {% /dialect %}
 {% /dialect-switcher %}

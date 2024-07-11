@@ -3,7 +3,7 @@ title: Uploading and downloading assets
 metaTitle: Umi - Uploading and downloading assets
 description: Uploading and downloading assets using Metaplex Umi
 ---
-Umi enables us to upload and download any file via the [`UploaderInterface`](https://umi-docs.vercel.app/interfaces/umi.UploaderInterface.html) and [`DownloaderInterface`](https://umi-docs.vercel.app/interfaces/umi.DownloaderInterface.html) interfaces respectively.
+Umi enables us to upload and download any file via the [`UploaderInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.UploaderInterface.html) and [`DownloaderInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.DownloaderInterface.html) interfaces respectively.
 
 ## Generic files
 

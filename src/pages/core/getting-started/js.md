@@ -28,7 +28,7 @@ const umi = createUmi('http://127.0.0.1:8899').use(mplCore())
 
 Then instruct Umi which wallet to use. This can either be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
 
-That's it, you can now interact with Core Assets and Core Collections by using [the various functions provided by the library](https://mpl-core-js-docs.vercel.app/) and passing your `Umi` instance to them. Here's an example of creating an Asset:
+That's it, you can now interact with Core Assets and Core Collections by using [the various functions provided by the library](https://mpl-core.typedoc.metaplex.com/) and passing your `Umi` instance to them. Here's an example of creating an Asset:
 
 {% dialect-switcher title="Create Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -67,4 +67,4 @@ console.log(asset)
 - [Umi Framework](https://github.com/metaplex-foundation/umi)
 - [GitHub Repository](https://github.com/metaplex-foundation/mpl-core)
 - [NPM Package](https://www.npmjs.com/package/@metaplex-foundation/mpl-core)
-- [API References](https://mpl-core-js-docs.vercel.app/)
+- [API References](https://mpl-core.typedoc.metaplex.com/)

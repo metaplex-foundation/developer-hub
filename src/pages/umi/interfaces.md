@@ -6,14 +6,14 @@ description: Overview over Umi's Interfaces
 ## The core interfaces
 
 Umi defines a set of core interfaces that makes it easy to interact with the Solana blockchain. Namely, they are:
-- [`Signer`](https://umi-docs.vercel.app/interfaces/umi.Signer.html): An interface representing a wallet that can sign transactions and messages.
-- [`EddsaInterface`](https://umi-docs.vercel.app/interfaces/umi.EddsaInterface.html): An interface to create keypairs, find PDAs and sign/verify messages using the EdDSA algorithm.
-- [`RpcInterface`](https://umi-docs.vercel.app/interfaces/umi.RpcInterface.html): An interface representing a Solana RPC client.
-- [`TransactionFactoryInterface`](https://umi-docs.vercel.app/interfaces/umi.TransactionFactoryInterface.html): An interface allowing us to create and serialize transactions.
-- [`UploaderInterface`](https://umi-docs.vercel.app/interfaces/umi.UploaderInterface.html): An interface allowing us to upload files and get a URI to access them.
-- [`DownloaderInterface`](https://umi-docs.vercel.app/interfaces/umi.DownloaderInterface.html): An interface allowing us to download files from a given URI.
-- [`HttpInterface`](https://umi-docs.vercel.app/interfaces/umi.HttpInterface.html): An interface allowing us to send HTTP requests.
-- [`ProgramRepositoryInterface`](https://umi-docs.vercel.app/interfaces/umi.ProgramRepositoryInterface.html): An interface for registering and retrieving programs.
+- [`Signer`](https://umi.typedoc.metaplex.com/interfaces/umi.Signer.html): An interface representing a wallet that can sign transactions and messages.
+- [`EddsaInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.EddsaInterface.html): An interface to create keypairs, find PDAs and sign/verify messages using the EdDSA algorithm.
+- [`RpcInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html): An interface representing a Solana RPC client.
+- [`TransactionFactoryInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.TransactionFactoryInterface.html): An interface allowing us to create and serialize transactions.
+- [`UploaderInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.UploaderInterface.html): An interface allowing us to upload files and get a URI to access them.
+- [`DownloaderInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.DownloaderInterface.html): An interface allowing us to download files from a given URI.
+- [`HttpInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.HttpInterface.html): An interface allowing us to send HTTP requests.
+- [`ProgramRepositoryInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.ProgramRepositoryInterface.html): An interface for registering and retrieving programs.
 
 ## The Context interface
 

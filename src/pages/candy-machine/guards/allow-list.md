@@ -252,7 +252,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine-js-docs.vercel.app/functions/create.html), [AllowList](https://mpl-candy-machine-js-docs.vercel.app/types/AllowList.html)
+API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [AllowList](https://mpl-candy-machine.typedoc.metaplex.com/types/AllowList.html)
 
 {% /totem %}
 {% /dialect %}
@@ -304,7 +304,7 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [AllowListMintArgs](https://mpl-candy-machine-js-docs.vercel.app/types/AllowListMintArgs.html)
+API References: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [AllowListMintArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/AllowListMintArgs.html)
 
 {% /totem %}
 {% /dialect %}
@@ -370,7 +370,7 @@ await route(umi, {
 
 The `umi.identity` wallet is now allowed to mint from the Candy Machine.
 
-API References: [route](https://mpl-candy-machine-js-docs.vercel.app/functions/route.html), [AllowListRouteArgs](https://mpl-candy-machine-js-docs.vercel.app/types/AllowListRouteArgs.html)
+API References: [route](https://mpl-candy-machine.typedoc.metaplex.com/functions/route.html), [AllowListRouteArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/AllowListRouteArgs.html)
 
 {% /totem %}
 {% /dialect %}

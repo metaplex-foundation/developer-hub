@@ -5,7 +5,7 @@ description: Public keys and signers in Metaplex Umi
 ---
 On this page, we'll see how to manage public keys and signers in Umi which is partially made possible by the EdDSA interface.
 
-The [EdDSA interface](https://umi-docs.vercel.app/interfaces/umi.EddsaInterface.html) is used to create keypairs, find PDAs and sign/verify messages using the EdDSA algorithm. We can either use this interface directly and/or use helper methods that delegate to this interface to provide a better developer experience.
+The [EdDSA interface](https://umi.typedoc.metaplex.com/interfaces/umi.EddsaInterface.html) is used to create keypairs, find PDAs and sign/verify messages using the EdDSA algorithm. We can either use this interface directly and/or use helper methods that delegate to this interface to provide a better developer experience.
 
 Let's tackle this on a per-use case basis.
 

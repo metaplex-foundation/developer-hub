@@ -39,6 +39,7 @@ export const core = {
               href: '/core/tm-differences',
             },
             { title: 'Ecosystem Support', href: '/core/ecosystem-support' },
+            { title: 'Anchor', href: '/core/using-core-in-anchor' },
             { title: 'FAQ', href: '/core/faq' },
           ],
         },
@@ -55,6 +56,7 @@ export const core = {
               href: '/core/collections',
             },
             { title: 'Helpers', href: '/core/helpers' },
+            { title: 'Deserializing Assets', href: '/core/deserialization' },
           ],
         },
         {
@@ -69,6 +71,10 @@ export const core = {
             {
               title: 'Delegating and Revoking Plugins',
               href: '/core/plugins/delegating-and-revoking-plugins',
+            },
+            {
+              title: 'Autograph Plugin',
+              href: '/core/plugins/autograph',
             },
             {
               title: 'Transfer Delegate Plugin',
@@ -86,6 +92,7 @@ export const core = {
             {
               title: 'Update Delegate Plugin',
               href: '/core/plugins/update-delegate',
+              updated: "06-19-2024"
             },
             { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
             { title: 'AddBlocker Plugin', href: '/core/plugins/addBlocker' },
@@ -109,6 +116,10 @@ export const core = {
             {
               title: 'Permanent Burn Delegate Plugin',
               href: '/core/plugins/permanent-burn-delegate',
+            },
+            {
+              title: 'Verified Creators Plugin',
+              href: '/core/plugins/verified-creators',
             },
           ],
         },
@@ -137,6 +148,11 @@ export const core = {
               title: 'Oracle Plugin',
               href: '/core/external-plugins/oracle',
             },
+            {
+              title: 'AppData Plugin',
+              href: '/core/external-plugins/app-data',
+              created: "2024-06-19"
+            },
           ],
         },
         // {
@@ -157,7 +173,7 @@ export const core = {
     },
     {
       ...referencesSection('core'),
-      href: `https://mpl-core-js-docs.vercel.app/`,
+      href: `https://mpl-core.typedoc.metaplex.com/`,
       target: '_blank',
     },
     {
@@ -182,6 +198,7 @@ export const core = {
               title: 'How to Create a Core Asset',
               href: '/core/guides/javascript/how-to-create-a-core-nft-asset',
             },
+            { title: 'Web2 typescript Staking Example', href: '/core/guides/javascript/web2-typescript-staking-example' },
           ],
         },
       ],

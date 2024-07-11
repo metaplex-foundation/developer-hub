@@ -65,6 +65,12 @@ export const tokenMetadata = {
     },
     {
       ...guidesSection('token-metadata'),
+
+      ...referencesSection('token-metadata'),
+      href: `https://mpl-token-metadata.typedoc.metaplex.com/`,
+      target: '_blank',
+    },
+
       navigation: [
         {
           title: 'Guides',
@@ -87,12 +93,6 @@ export const tokenMetadata = {
         },
       ],
     },
-    {
-      ...referencesSection('token-metadata'),
-      href: `https://mpl-token-metadata-js-docs.vercel.app/`,
-      target: '_blank',
-    },
-
     { ...changelogSection('token-metadata') },
   ],
 }

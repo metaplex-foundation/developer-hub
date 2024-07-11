@@ -120,7 +120,7 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [NftPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftPayment.html)
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [NftPayment](https://mpl-core-candy-machine.typedoc.metaplex.com/types/NftPayment.html)
 
 {% /totem %}
 {% /dialect %}
@@ -159,7 +159,7 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [NftPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/NftPaymentMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [NftPaymentMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/NftPaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

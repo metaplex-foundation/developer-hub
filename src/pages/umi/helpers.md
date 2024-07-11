@@ -35,7 +35,7 @@ type PercentAmount<D extends AmountDecimals> = Amount<'%', D>;
 
 To make it easier for developers to handle amounts, Umi provides a set of helper functions that can be used to create, format, and perform operations on amounts.
 
-You may want to [check out the "Utils — Amounts" section of the API references](https://umi-docs.vercel.app/modules/umi.html) to learn more about all these helpers but here's a quick list of functions that can help create new amount types.
+You may want to [check out the "Utils — Amounts" section of the API references](https://umi.typedoc.metaplex.com/modules/umi.html) to learn more about all these helpers but here's a quick list of functions that can help create new amount types.
 
 ```ts
 // Creates an amount from basis points.
@@ -66,7 +66,7 @@ tokenAmount(123.45, 'splToken.BONK', 2); // -> Amount for "123.45 BONK"
 
 In Rust, we define optional values as an `Option<T>` enum which can either be `Some(T)` or `None`. This is usually represented as `T | null` in the JavaScript world. The issue with this approach is it doesn't work with nested options. For instance, an `Option<Option<T>>` in Rust would become a `T | null | null` in JavaScript which is equivalent to `T | null`. That means, there is no way for us to represent the `Some(None)` value in JavaScript or any other nested option.
 
-To solve this issue, Umi provides [an `Option<T>` union type](https://umi-docs.vercel.app/types/umi.Option.html) that works very similarly to the Rust `Option<T>` type. It is defined as follows:
+To solve this issue, Umi provides [an `Option<T>` union type](https://umi.typedoc.metaplex.com/types/umi.Option.html) that works very similarly to the Rust `Option<T>` type. It is defined as follows:
 
 ```ts
 type Option<T> = Some<T> | None;
@@ -131,7 +131,7 @@ formatDateTime(now(), 'fr-FR', myFormatOptions);
 
 ## GpaBuilders
 
-To help prepare `getProgramAccounts` RPC requests, Umi provides [an immutable `GpaBuilder` helper class](https://umi-docs.vercel.app/classes/umi.GpaBuilder.html). It can be used to add filters, slice data and fetch the raw accounts whilst mapping them to whatever we want. Here are some examples.
+To help prepare `getProgramAccounts` RPC requests, Umi provides [an immutable `GpaBuilder` helper class](https://umi.typedoc.metaplex.com/classes/umi.GpaBuilder.html). It can be used to add filters, slice data and fetch the raw accounts whilst mapping them to whatever we want. Here are some examples.
 
 ```ts
 // Get all accounts for a program.

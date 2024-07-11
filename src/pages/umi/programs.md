@@ -25,7 +25,7 @@ export type Program = {
 };
 ```
 
-You can [learn more about the attributes of the `Program` type via its API reference](https://umi-docs.vercel.app/types/umi.Program.html) but note that the `name` attribute should be unique and, by convention, should be use the camelCase format. To avoid conflict with other organizations, it is recommended to prefix the program name with a namespace that is unique to your organization. For instance, Metaplex programs are prefixed with `mpl` like so: `mplTokenMetadata` or `mplCandyMachine`.
+You can [learn more about the attributes of the `Program` type via its API reference](https://umi.typedoc.metaplex.com/types/umi.Program.html) but note that the `name` attribute should be unique and, by convention, should be use the camelCase format. To avoid conflict with other organizations, it is recommended to prefix the program name with a namespace that is unique to your organization. For instance, Metaplex programs are prefixed with `mpl` like so: `mplTokenMetadata` or `mplCandyMachine`.
 
 ## Adding Programs
 
@@ -53,9 +53,9 @@ const myProgram = umi.programs.get('myProgram');
 const myProgram = umi.programs.get(publicKey('...'));
 ```
 
-By default, the `get` method will only return programs that are deployed to the current cluster — such that the `isOnCluster` method returns `true` for the current cluster. It is only possible to specify a different cluster via the second argument that accepts a [`ClusterFilter`](https://umi-docs.vercel.app/types/umi.ClusterFilter.html).
+By default, the `get` method will only return programs that are deployed to the current cluster — such that the `isOnCluster` method returns `true` for the current cluster. It is only possible to specify a different cluster via the second argument that accepts a [`ClusterFilter`](https://umi.typedoc.metaplex.com/types/umi.ClusterFilter.html).
 
-A `ClusterFilter` can either be an explicit [`Cluster`](https://umi-docs.vercel.app/types/umi.Cluster.html), `"current"` to select the current cluster, or `"all"` to select programs that are deployed to any cluster.
+A `ClusterFilter` can either be an explicit [`Cluster`](https://umi.typedoc.metaplex.com/types/umi.Cluster.html), `"current"` to select the current cluster, or `"all"` to select programs that are deployed to any cluster.
 
 ```ts
 // Fetch a program on the current cluster.

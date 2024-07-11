@@ -12,7 +12,7 @@ The name refers to the vending machines that dispense candy for coins via a mech
 {% quick-link title="Getting Started" icon="InboxArrowDown" href="/core-candy-machine/getting-started" description="Find the language or library of your choice and get started with Candy Machines." /%}
 
 
-{% quick-link title="API reference" icon="JavaScript" href="https://mpl-core-candy-machine-js-docs.vercel.app/" target="_blank" description="Check out the Javascript API docs." /%}
+{% quick-link title="API reference" icon="JavaScript" href="https://mpl-core-candy-machine.typedoc.metaplex.com/" target="_blank" description="Check out the Javascript API docs." /%}
 
 
 {% quick-link title="API reference" icon="Rust" href="https://docs.rs/mpl-core-candy-machine-core/" target="_blank" description="Check out the Rust API docs." /%}

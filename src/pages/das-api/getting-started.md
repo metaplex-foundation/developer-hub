@@ -8,9 +8,11 @@ The `@metaplex-foundation/digital-asset-standard-api` package can be use to inte
 
 The DAS API client is a Umi plugin so you will have to install Umi in conjunction with the DAS API client.
 
-You can install the plugin from the location below.
+You can install umi and the plugin from the location below.
 
 ```js
+npm install @metaplex-foundation/umi
+npm install @metaplex-foundation/umi-bundle-defaults
 npm install @metaplex-foundation/digital-asset-standard-api
 ```
 
@@ -18,6 +20,7 @@ Once installed you can register the library with your Umi instance.
 
 ```js
 import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 
 const umi = createUmi("exampleDasProvider.com").use(dasApi());
 ```

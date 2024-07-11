@@ -38,4 +38,4 @@ That's it, you can now start interacting with the `Core Candy Machine` program.
 - [Umi Framework](https://github.com/metaplex-foundation/umi)
 - [GitHub Repository](https://github.com/metaplex-foundation/mpl-core-candy-machine)
 - [NPM Package](https://www.npmjs.com/package/@metaplex-foundation/mpl-core-candy-machine)
-- [API References](https://mpl-core-js-docs.vercel.app/)
+- [API References](https://mpl-core.typedoc.metaplex.com/)

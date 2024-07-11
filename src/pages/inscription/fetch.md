@@ -10,7 +10,7 @@ Once Inscription Accounts are [initialized](initialize) their Metadata can be re
 
 ## Fetch inscription Metadata
 
-Both inscription types use a metadata account. This Account contains for example the `inscriptionRank`, `associatedInscriptions`, `updateAuthorities` and [more](https://mpl-inscription-js-docs.vercel.app/types/InscriptionMetadata.html). The Metadata can be fetched like so:
+Both inscription types use a metadata account. This Account contains for example the `inscriptionRank`, `associatedInscriptions`, `updateAuthorities` and [more](https://mpl-inscription.typedoc.metaplex.com/types/InscriptionMetadata.html). The Metadata can be fetched like so:
 
 {% dialect-switcher title="Fetch Inscription Metadata" %}
 {% dialect title="JavaScript" id="js" %}

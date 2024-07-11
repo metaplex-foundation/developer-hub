@@ -126,13 +126,13 @@ create(umi, {
       destinationAta: findAssociatedTokenPda(umi, {
         mint: tokenMint.publicKey,
         owner: umi.identity.publicKey,
-      }),
+      })[0],
     }),
   },
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine-js-docs.vercel.app/functions/create.html), [TokenPayment](https://mpl-core-candy-machine-js-docs.vercel.app/types/TokenPaymentArgs.html)
+API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [TokenPayment](https://mpl-core-candy-machine.typedoc.metaplex.com/types/TokenPaymentArgs.html)
 
 {% /totem %}
 {% /dialect %}
@@ -165,7 +165,7 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine-js-docs.vercel.app/functions/mintV1.html), [TokenPaymentMintArgs](https://mpl-core-candy-machine-js-docs.vercel.app/types/TokenPaymentMintArgs.html)
+API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [TokenPaymentMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/TokenPaymentMintArgs.html)
 
 {% /totem %}
 {% /dialect %}

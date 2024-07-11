@@ -172,7 +172,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [mintFromCandyMachineV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintFromCandyMachineV2.html)
+API References: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [mintFromCandyMachineV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintFromCandyMachineV2.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -287,7 +287,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [DefaultGuardSetMintArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetMintArgs.html)
+API References: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [DefaultGuardSetMintArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetMintArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
@@ -444,7 +444,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-API References: [mintV2](https://mpl-candy-machine-js-docs.vercel.app/functions/mintV2.html), [DefaultGuardSetMintArgs](https://mpl-candy-machine-js-docs.vercel.app/types/DefaultGuardSetMintArgs.html)
+API References: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [DefaultGuardSetMintArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetMintArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

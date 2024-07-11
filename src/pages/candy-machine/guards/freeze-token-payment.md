@@ -674,7 +674,7 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-candy-machine-js-docs.vercel.app/functions/route.html), [freezeTokenPaymentRouteArgsUnlockFunds](https://mpl-candy-machine-js-docs.vercel.app/types/freezeTokenPaymentRouteArgsUnlockFunds.html)
+API References: [route](https://mpl-candy-machine.typedoc.metaplex.com/functions/route.html), [freezeTokenPaymentRouteArgsUnlockFunds](https://mpl-candy-machine.typedoc.metaplex.com/types/freezeTokenPaymentRouteArgsUnlockFunds.html)
 
 {% /totem %}
 {% /dialect %}

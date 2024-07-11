@@ -52,13 +52,13 @@ export default function App({ Component, pageProps }) {
       </DialectProvider>
 
       {/* Google Analytics. */}
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-YLQCC8102N" />
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-PJMQZF1F4X" />
       <Script id="google-analytics">
         {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-YLQCC8102N');
+            gtag('config', 'G-PJMQZF1F4X');
           `}
       </Script>
     </>

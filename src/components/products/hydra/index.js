@@ -33,7 +33,7 @@ export const hydra = {
     },
     {
       ...referencesSection('hydra'),
-      href: `https://mpl-hydra-js-docs.vercel.app/`,
+      href: `https://mpl-hydra.typedoc.metaplex.com/`,
       target: '_blank',
     },
     { ...recipesSection('hydra') },
