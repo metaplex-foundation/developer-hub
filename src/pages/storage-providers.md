@@ -63,9 +63,10 @@ Please visit [https://infura.io/docs/ipfs](https://infura.io/docs/ipfs) for deta
 
 ### NFT.Storage
 
-[NFT.Storage](https://nft.storage) is a free service that provides long-term NFT data storage on the decentralized [Filecoin](https://filecoin.io) network with fast retrieval through [IPFS][IPFS].
+[The NFT.Storage flagship product](https://nft.storage/nft-storage-flagship-product) focuses on the enduring preservation of NFTs with a low one-time fee per. First mint your NFTs, then send us the NFT data that we preserve in endowment-backed long-term Filecoin storage. As an NFT.Storage user, you support our platform when you choose Pinata and Lighthouse for hot storage and [use our referral links here](https://nft.storage/blog/announcing-our-new-partnerships-with-pinata-and-lighthouse), helping to sustain our valuable public goods. Your NFTs will also be included in the NFT Token Checker, a tool for block explorers, marketplaces and wallets to show verification that NFT collections, tokens, and CIDs are preserved by NFT.Storage.
 
-NFT.Storage currently supports files up to 31 Gib and does not charge for storage.
+
+[NFT.Storage Classic](https://nft.storage/nft-storage-classic) is a free service that provides hot data storage on the decentralized Filecoin network with fast retrieval through IPFS. As of June 30, 2024, we have officially decommissioned NFT.Storage Classic uploads, however retrieval of existing data remains operational. For NFT data already uploaded through NFT.Storage Classic, the NFT.Storage Gateway makes the data retrievable on block explorers, marketplaces and dapps. 
 
 ### Shadow Drive
 
