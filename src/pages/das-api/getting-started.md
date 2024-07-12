@@ -28,3 +28,25 @@ const umi = createUmi("exampleDasProvider.com").use(dasApi());
 The plugin can be used with any RPC that supports the Metaplex DAS API specification – RPCs that support the specification can be found on the [RPC Providers page](/rpc-providers).
 
 Note You might need to contact your RPC provider to "enable" the DAS API on your endpoint.
+
+{% callout title="Metaplex Core DAS API" type="note" %}
+If you intend to use DAS on [Metaplex Core](/core) Assets you want to install the additional `@metaplex-foundation/mpl-core-das` package:
+{% /callout %}
+
+## DAS for MPL Core
+
+The DAS Extension fpr [MPL Core](/core) helps directly returns you the correct types to further use with the MPL SDKs. It also automatically derives the plugins in assets inherited from the collection and provides [functions for DAS-to-Core type conversions](//TODO).
+
+To use it first install the additional package:
+
+```js
+npm install @metaplex-foundation/mpl-core-das
+```
+
+Then import that package
+
+```js
+import { das } from '@metaplex-foundation/mpl-core-das';
+```
+
+After this you can either use the Core specific functions like mentioned above. 
