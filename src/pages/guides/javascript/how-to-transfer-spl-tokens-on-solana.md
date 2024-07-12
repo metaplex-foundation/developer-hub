@@ -171,7 +171,7 @@ const transferSplTokens = async () => {
   const splToken = publicKey('111111111111111111111111111111')
 
   // The address of the wallet you want to transfer the Token to.
-  const recipeientWallet = publicKey('22222222222222222222222222222222')
+  const recipientWallet = publicKey('22222222222222222222222222222222')
 
   // Find the associated token account for the SPL Token on the senders wallet.
   const sourceTokenAccount = findAssociatedTokenPda(umi, {
@@ -182,7 +182,7 @@ const transferSplTokens = async () => {
   // Find the associated token account for the SPL Token on the receivers wallet.
   const destinationTokenAccount = findAssociatedTokenPda(umi, {
     mint: splToken,
-    owner: recipeientWallet,
+    owner: recipientWallet,
   })
 
   //
