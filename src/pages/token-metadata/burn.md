@@ -1,7 +1,7 @@
 ---
-title: Burning Assets
-metaTitle: Token Metadata - Burning Assets
-description: Learn how to burn Assets on Token Metadata
+title: Burning NFTs/Tokens
+metaTitle: Token Metadata - NFTs/Tokens
+description: Learn how to burn NFTs/Tokens with Token Metadata
 ---
 
 The owner of an asset can burn it using the **Burn** instruction of the Token Metadata program. This will close all possible accounts associated with the asset and return the various rent-exempt fees to the owner. This instruction accepts the following attributes:

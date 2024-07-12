@@ -1,7 +1,7 @@
 ---
-title: Locking Assets
-metaTitle: Token Metadata - Locking Assets
-description: Learn how to lock/freeze Assets on Token Metadata
+title: Locking NFTs/Tokens
+metaTitle: Token Metadata - Locking NFTs/Tokens
+description: Learn how to lock/freeze NFTs and Tokens using Token Metadata.
 ---
 
 As mentioned in the "[Delegate Authorities](/token-metadata/delegates#token-delegates)" page, certain delegates can lock and unlock assets, preventing their owners from transferring or burning them. A locked asset also forbids the owner from revoking the delegate's authority. This locking mechanism enables various utility use cases — such as staking — that would otherwise require an escrow account to function. {% .lead %}
