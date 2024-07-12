@@ -112,7 +112,7 @@ const walletFile = const imageFile = fs.readFileSync(
 
 When transferring SPL Tokens on Solana we need to work out both the senders and recievers SPL Token Account addresses for the token we are trying to send.
 
-Token Account addresses are unique between coins and wallets so we need to use a helper function to determine what each account address is for the both the sender and the reciever.
+Token Account addresses are unique between coins and wallets so we need to use a helper function to determine what each account address is for the both the sender and the receiver.
 
 ```ts
 // The address of the Token you want to transfer.
