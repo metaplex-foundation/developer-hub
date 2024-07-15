@@ -1,12 +1,11 @@
 import {
   changelogSection,
   documentationSection,
-  recipesSection,
   guidesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { StopCircleIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const core = {
   name: 'Core',
