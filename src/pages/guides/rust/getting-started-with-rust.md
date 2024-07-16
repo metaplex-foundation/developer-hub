@@ -6,13 +6,13 @@ description: A quick overview on how to get started with Rust in the Solana ecoS
 
 ## Introduction
 
-It's no doubt that if you are building on Solana you most likely have come across the term Rust which is the most popular language for building programs within the Solana ecosystem.
+It's no doubt that if you are building on Solana you most likely have come across the term "Rust", which is the most popular language for building programs within the Solana ecosystem.
 
 Rust can be quite a daunting task to look at and use if you are new to developing but here are some resources to get you started with Rust and the Solana ecosystem.
 
 ## The Rust Book
 
-Start here to learn rust. It takes from basics through to the advanced coding using the language.
+Start here to learn Rust. It takes from basics through to the advanced coding using the language.
 
 [https://doc.rust-lang.org/stable/book/](https://doc.rust-lang.org/stable/book/)
 

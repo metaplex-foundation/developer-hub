@@ -6,19 +6,19 @@ description: A quick overview on working with Rust and the Metaplex protocal.
 
 ## Introduction
 
-You may have heard the term "CPI'ing into a program" or "Call a CPI on the program" terms thrown around before and be thinking "What they hell are they talking about?".
+You may have heard the term "CPI'ing into a program" or "Call a CPI on the program" terms thrown around before and be thinking "what are they talking about?".
 
 A CPI (Cross Program Invocation) is the interaction of one program invoking an instruction on another program.
 
-An example would be that I make a program and during this transaction I need to transfer an Nft or Asset during this transaction. Well my program can CPI call and ask the Token Metadata or Core programs to exectute the transfer instruction for me if I give it all the correct details.
+An example would be that I make a program and during this transaction I need to transfer an NFT or Asset during this transaction. Well my program can CPI call and ask the Token Metadata or Core programs to exectute the transfer instruction for me if I give it all the correct details.
 
 ## Using Metaplex Rust Transaction CPI Builders
 
-Each instruction that comes from Metaplex Rust crate will also currently come with a `CpiBuilder` version of that instruction which you can import. This abstracts a massive amount code for you and can be invoked straight from the CpiBuilder itself.
+Each instruction that comes from Metaplex Rust crate will also currently come with a `CpiBuilder` version of that instruction which you can import. This abstracts a massive amount code for you and can be invoked straight from the `CpiBuilder` itself.
 
 Lets take the `Transfer` instruction from Core as an example here (this applies to all other instructions from this Crate and all other Metaplex crates too.)
 
-If we look through the instructions in the [Mpl Core crate type docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) we can see we have a number of instructions available to us.
+If we look through the instructions in the [MPL Core crate type docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) we can see we have a number of instructions available to us.
 
 ```
 TransferV1
@@ -32,13 +32,13 @@ TransferV1InstructionData
 
 The one we are interested in here is the `TransferV1CpiBuilder`.
 
-To initialize the builder we can call `new` on the CpiBuilder and pass in the program `AcountInfo` of the program address the CPI call is being made to.
+To initialize the builder we can call `new` on the `CpiBuilder` and pass in the program `AcountInfo` of the program address the CPI call is being made to.
 
 ```rust
 TransferV1CpiBuilder::new(ctx.accounts.mpl_core_program);
 ```
 
-From this point we can `ctrl + click` (pc) or `cmd + click` (mac) into the `new` function generated from the `CpiBuilder::` which presents us with all the CPI arguments (accounts and data) required for this particular CPI call.
+From this point we can `ctrl + click` (PC) or `cmd + click` (Mac) into the `new` function generated from the `CpiBuilder::` which presents us with all the CPI arguments (accounts and data) required for this particular CPI call.
 
 ```rust
 //new() function for TransferV1CpiBuilder
@@ -88,9 +88,9 @@ pub fn new(program: &'b solana_program::account_info::AccountInfo<'a>) -> Self {
     }
 ```
 
-Some accounts may be optional in CpiBuilder's so you may have to check what you do and do not need for your use case.
+Some accounts may be optional within a `CpiBuilder` so you may have to check what you do and do not need for your use case.
 
-Below are both CpiBuilders for Transfer and Create filled out.
+Below are both `CpiBuilder` versions for Transfer and Create filled out.
 
 ```rust
 TransferV1CpiBuilder::new()
@@ -154,7 +154,7 @@ CreateV1CpiBuilder::new()
 
 ## Full CpiBuilder Example
 
-Here is a full example of using a CpiBuilder using the TransferV1 instruction from the Core program.
+Here is a full example of using a `CpiBuilder` using the TransferV1 instruction from the Core program.
 
 ```rust
 TransferV1CpiBuilder::new()

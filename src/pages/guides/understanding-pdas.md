@@ -10,17 +10,13 @@ updated: '06-21-2024'
 ## Overview
 **Program Derived Addresses (PDAs)** are special types of account used on Solana that are deterministically derived and look like standard public keys, but have no associated private keys.
 
-## Key Characteristics of PDAs
-- **Deterministic**: PDAs are deterministically derived from a combination of a program ID and "seeds" (predefined inputs) values
-- **Secure**: no external user can generate a valid signature for the PDA address. Only the program that derived the PDA can sign transactions involving it.
-- **Convenient**: They simplify the management of program-specific state and data by providing a consistent way to address accounts.
+Only the program that derived the PDA can sign transactions involving the address/account. This is due to the fact that PDAs do not occur on the Ed25519 curve (elliptic-curve cryptography). Only addresses that appear on the curve can have a matching private key making PDAs a secure way of signing transactions from within a program. This means that no external user can generate a valid signature for the PDA address and sign on behalf of a pda/program.
 
 ## Role of PDAs
 PDAs are primarily used to:
 
-- **Manage State**: PDAs allow programs to store data in a determinstic address, making reading that state back easy.
-- **Authorize Transactions**: Only the program that owns the PDA can authorize transactions involving it, ensuring controlled access. This is due to the fact that PDAs do not occur on the Ed25519 curve (elliptic-curve cryptography). Only addresses that appear on the curve can have a matching private key making PDAs a secure way of signing transactions with a program.
-- **Create Program-Specific Accounts**: Programs can create and interact with accounts that are uniquely associated with them, enabling modular and isolated state management.
+- **Manage State**: PDAs allow programs to create accounts and store data to a determinstic PDA address which allows read and write access for the program.
+- **Authorize Transactions**: Only the program that owns the PDA can authorize transactions involving it, ensuring secure controlled access. For example this allows programs and PDA accounts to store tokens/own NFTs that would require the current owner of the tokens/NFT to sign a transaction to transfer the items to another account.
 
 ## How PDAs are Derived
 PDAs are derived using a combination of a program ID and a set of seed values. The derivation process involves hashing these values together and ensuring the resulting address is valid.

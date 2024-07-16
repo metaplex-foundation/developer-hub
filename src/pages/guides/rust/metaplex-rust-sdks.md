@@ -6,7 +6,7 @@ description: A quick overview on Metaplex Rust SDKs.
 
 ## Introduction
 
-Metaplex provides Rust SDK's for most of our programs which have consistant and predictable outputs and functionality leading to improved intergration times for developers working with our products.
+Metaplex provides Rust SDKs for most of our programs which have consistant and predictable outputs and functionality leading to improved intergration times for developers working with our products.
 
 ## Modules
 
@@ -29,7 +29,7 @@ mpl_core::accounts
 
 ### Instructions
 
-Each SDK comes with an **instructions** module that comes with multiple versions of the supplied insturctions from the given program that strips away alot of the boiler plate depending on your needs.
+Each SDK comes with an **instructions** module that comes with multiple versions of the supplied instructions from the given program that strips away alot of the boiler plate depending on your needs.
 
 An example below shows all the `CreateV1` instructions coming from the `mpl-core` crate.
 
@@ -51,7 +51,7 @@ mpl_core::instructions
 
 ### Types
 
-Each of the Metaplex Rust SDKs comes with an **types** module that supplies all the nessacery extra types that may not be in the initial accounts module structs.
+Each of the Metaplex Rust SDKs comes with a **types** module that supplies all the nessacery extra types that may not be in the initial accounts module structs.
 
 These can be accessed from `<crate_name>::types`. In the case of `mpl-core` you could access the accounts as follows;
 
@@ -124,7 +124,9 @@ pub struct CreateV1Builder {
 
 ```
 
-These are your arguments of publickeys and data that will need to be passed into the builder. Some accounts may also be optional and default to others, this can vary from instruction to instruction. If you click through to the `new()` function again and scroll down this time you'll see the individual functions with additional comments. In the below case you can see that the owner will default to payer, so we don't need to pass in owner if in this case if the payer is also going to be the owner of the Asset.
+These are your arguments of publickeys and data that will need to be passed into the builder. Some accounts may also be optional. These optional accounts my not be required at all by the program or could possibly default to another address if left out. This behaviour can vary from instruction to instruction. 
+
+If you click through to the `new()` function again and scroll down this time you'll see the individual functions with additional comments. In the below case you can see that the owner will default to payer, so we don't need to pass in owner if in this case if the payer is also going to be the owner of the Asset.
 
 ```rust
 /// `[optional account]`
@@ -148,7 +150,7 @@ let create_asset_ix = CreateV1Builder::new()
 .       .instruction();
 ```
 
-Now that we have our instruction ready we need to create a normal Solana transaction to send to our RPC. This includes a blockhash andxx§ signers.
+Now that we have our instruction ready we need to create a normal Solana transaction to send to our RPC. This includes a blockhash and signers.
 
 ### Full Builder Example
 

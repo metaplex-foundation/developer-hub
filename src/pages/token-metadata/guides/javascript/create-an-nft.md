@@ -16,7 +16,7 @@ This is an intial guide on how to create an NFT on the Solana blockchain with th
 
 ## Initial Setup
 
-This guide will run through create of an NFT Core Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
+This guide will run through creation of an NFT with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
 
 ### Initializing
 
@@ -163,9 +163,9 @@ console.log(imageUri[0])
 
 ### Uploading the Metadata
 
-Once we have a valid and working image URI we can start working on the metadata for our token.
+Once we have a valid and working image URI we can start working on the metadata for our NFT.
 
-the standard for offchain metadata for a funigble token is as follows;
+The standard for offchain metadata for a fungilbe token is as follows;
 
 ```json
 {
@@ -248,11 +248,11 @@ const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
 })
 ```
 
-Now if all has gone to play we should have the uri of json file stored in the `metadataUri` providing it did not throw any errors.
+Now if all has gone to play we should have the URI of json file stored in the `metadataUri` providing it did not throw any errors.
 
 ### NFT vs pNFT
 
-The Token Metadata program can mint 2 kinds of NFTs, a normal NFT, and a pNFT (programable non fungible asset).
+The Token Metadata program can mint 2 kinds of NFTs, a normal NFT, and a pNFT (programmable Non-Fungible Asset).
 The main difference between the two types of NFTs here are one is royalty enforced (pNFT) and the other is not (NFT).
 
 #### NFT

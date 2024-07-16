@@ -11,16 +11,16 @@ updated: '06-21-2024'
 Solana programs are **executable code** that runs on the Solana blockchain. They are similar to smart contracts on other blockchain platforms, but with some distinct characteristics and optimizations specific to Solana.
 
 #### Key Characteristics:
-- **Stateless**: Solana programs do not store state internally. Instead, state is stored in accounts.
-- **Written in Rust**: Programs are typically written in Rust, leveraging Solana's libraries and tooling.
-- **Executed by Transactions**: Programs are invoked by transactions that specify the program ID and the required accounts.
+- **Stateless**: Solana programs do not store state internally. Instead, state is stored in seperate accounts on the chain.
+- **Written in Rust**: Programs are typically written in Rust.
+- **Executed by Transactions**: Programs are invoked by transactions that specify the program ID and the required accounts and date.
 
 ## Accounts
-Accounts are a fundamental part of the Solana blockchain and are **used to store both data and SOL**. Each account has an owner, which is a program that can modify its data.
+Accounts **used to store both data and SOL**. Each account has an owner, which is a program that can modify its data.
 
 #### Types of Accounts:
 - **Data Accounts**: Store arbitrary data used by programs.
-- **Token Accounts**: Manage token balances (similar to ERC-20 tokens on Ethereum).
+- **SPL Token Accounts**: Manage token balances (similar to ERC-20 tokens on Ethereum).
 - **Program Accounts**: Contain the executable code of a Solana program.
 
 ## Instructions
@@ -47,7 +47,7 @@ In Solana, the state is **managed externally** from the programs, stored in acco
 3. Create Accounts:
    - Create accounts to store the program's state.
 4. Send Instructions:
-   - Send transactions containing instructions to invoke the program, specifying the accounts to use.
+   - Send transactions containing instructions to invoke the program, specifying the accounts and data to use.
 
 ## Example Code
 Below is a simple example of a Solana program written in Rust that increments a value stored in an account.

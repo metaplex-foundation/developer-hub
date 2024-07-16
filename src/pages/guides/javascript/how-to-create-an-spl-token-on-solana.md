@@ -7,7 +7,7 @@ created: '06-16-2024'
 updated: '06-21-2024'
 ---
 
-This guide walks you through setting up and minting your very own token on the Solana blockchain using the Metaplex Umi client wrapper and the Mpl Toolbox package with Javascript.
+This guide walks you through setting up and minting your very own SPL (Solana Program Library) Token  on the Solana blockchain using the Metaplex Umi client wrapper and the Mpl Toolbox package with Javascript.
 
 ## Prerequisite
 
@@ -118,7 +118,7 @@ import { generateSigner, signerIdentity } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 ```
 
-The following lines we generate a new signer (private key) and we assign it umi.
+The following lines we generate a new signer (private key) and we assign it to `umi`.
 
 ```ts
 const signer = generateSigner(umi)
@@ -145,7 +145,7 @@ This example is using a localscript/node.js approach using Irys to upload to Arw
 import fs from 'fs'
 import path from 'path'
 
-// we also add the `createGenericFile` import to the original list of umi imports.
+// we also add the `createGenericFile` import to the original list of Umi imports.
 import {
   generateSigner,
   signerIdentity,
@@ -155,14 +155,13 @@ import {
 
 ```ts
 // use `fs` to read file via a string path.
-// You will need to understand the concept of pathing from a computing perspective.
 
 const imageFile = fs.readFileSync(
   path.join(__dirname, '..', '/assets/islandDao.jpg')
 )
 
 // Use `createGenericFile` to transform the file into a `GenericFile` type
-// that umi can understand. Make sure you set the mimi tag type correctly
+// that Umi can understand. Make sure you set the mimi tag type correctly
 // otherwise Arweave will not know how to display your image.
 
 const umiImageFile = createGenericFile(imageFile, 'island-dao.jpeg', {
@@ -183,9 +182,9 @@ console.log(imageUri[0])
 
 ### Uploading the Metadata
 
-Once we have a valid and working image URI we can start working on the metadata for our token.
+Once we have a valid and working image URI we can start working on the metadata for our SPL Token.
 
-the standard for offchain metadata for a funigble token is as follows
+The standard for offchain metadata for a fungible token is as follows
 
 ```json
 {
@@ -212,11 +211,10 @@ The description of your token.
 
 #### image
 
-This will be set to the imageUri (or any online location of the image) that we uploaded previously.
+This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.
 
 ```js
 // Example metadata
-
 const metadata = {
   name: 'The Kitten Coin',
   symbol: 'KITTEN',
@@ -224,7 +222,7 @@ const metadata = {
   image: imageUri, // Either use variable or paste in string of the uri.
 }
 
-// Call upon umi's uploadJson function to upload our metadata to Arweave via Irys.
+// Call upon Umi's `uploadJson` function to upload our metadata to Arweave via Irys.
 
 const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
   throw new Error(err)
@@ -376,7 +374,7 @@ const createAndMintTokens = async () => {
   const imageFile = fs.readFileSync(path.join(__dirname, '/assets/image.png'))
 
   // Use `createGenericFile` to transform the file into a `GenericFile` type
-  // that umi can understand. Make sure you set the mimi tag type correctly
+  // that Umi can understand. Make sure you set the mimi tag type correctly
   // otherwise Arweave will not know how to display your image.
 
   const umiImageFile = createGenericFile(imageFile, 'image.png', {
@@ -403,7 +401,7 @@ const createAndMintTokens = async () => {
     image: imageUri, // Either use variable or paste in string of the uri.
   }
 
-  // Call upon umi's uploadJson function to upload our metadata to Arweave via Irys.
+  // Call upon Umi's `uploadJson` function to upload our metadata to Arweave via Irys.
 
   const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
     throw new Error(err)

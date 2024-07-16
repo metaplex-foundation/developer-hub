@@ -59,36 +59,18 @@ export const guides = {
         {
           title: 'Javascript',
           links: [
-            // {
-            //   title: 'Working with Javascript',
-            //   href: '/guides/javascript/working-with-javascript',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
             {
               title: 'Creating an NFT',
               href: '/guides/javascript/how-to-create-an-nft-on-solana',
               created: '06-24-2024',
               updated: null, // null means it's never been updated
             },
-            // {
-            //   title: 'Freezing an Nft',
-            //   href: '/guides/javascript/how-to-freeze-an-nft-on-solana',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
             {
               title: 'Creating an SPL Token',
               href: '/guides/javascript/how-to-create-an-spl-token-on-solana',
               created: '2024-06-16',
               updated: null, // null means it's never been updated
             },
-            // {
-            //   title: 'Updating an SPL Token',
-            //   href: '/guides/javascript/how-to-update-an-spl-token-on-solana',
-            //   created: '2024-06-16',
-            //   updated: null, // null means it's never been updated
-            // },
             {
               title: 'Transferring Tokens',
               href: '/guides/javascript/how-to-transfer-spl-tokens-on-solana',
@@ -118,56 +100,14 @@ export const guides = {
               created: '07-01-2024',
               updated: null, // null means it's never been updated
             },
-            // {
-            //   title: 'Using Anchor',
-            //   href: '/guides/rust/anchor-programs',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
             {
               title: 'CPI into a Metaplex Program',
               href: '/guides/rust/how-to-cpi-into-a-metaplex-program',
               created: '07-01-2024',
               updated: null, // null means it's never been updated
             },
-            // {
-            //   title: 'Solana Rust Client',
-            //   href: '/guides/rust/solana-rust-client',
-            //   created: '07-01-2024',
-            //   updated: null, // null means it's never been updated
-            // },
-
-            // {
-            //   title: 'How to Deserialize an Account',
-            //   href: '/guides/rust/how-to-deserialize-an-account',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
-            // {
-            //   title: 'Create a Staking Program',
-            //   href: '/guides/rust/create-a-staking-program',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
-            // {
-            //   title: 'Program Optimization',
-            //   href: '/guides/rust/program-optimization',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
           ],
         },
-        // {
-        //   title: 'React/Nextjs',
-        //   links: [
-        //     {
-        //       title: 'Connecting to a Wallet',
-        //       href: '/guides/react-nextjs/plugins',
-        //       created: '2021-10-01',
-        //       updated: null, // null means it's never been updated
-        //     },
-        //   ],
-        // },
         {
           title: 'Metaplex Program Guides',
           links: [
@@ -177,34 +117,10 @@ export const guides = {
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
-            // {
-            //   title: 'Candy Machine',
-            //   href: '/candy-machine/guides/',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
-            // {
-            //   title: 'Core Candy Machine',
-            //   href: '/core-candy-machine/guides/',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
-            // {
-            //   title: 'Token Metadata',
-            //   href: '/guides/react-nextjs/plugins',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
-            // {
-            //   title: 'Bubblegum',
-            //   href: '/guides/react-nextjs/plugins',
-            //   created: '2021-10-01',
-            //   updated: null, // null means it's never been updated
-            // },
+
           ],
         },
       ],
     },
-    // { ...changelogSection('core') },
   ],
 }

@@ -221,27 +221,22 @@ The description of your token.
 
 #### image
 
-This will be set to the imageUri (or any online location of the image) that we uploaded previously.
+This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.
 
 ```js
-// Call upon umi's uploadJson function to upload our metadata to Arweave via Irys.
+// Call upon umi's `uploadJson function to upload our metadata to Arweave via Irys.
 
 const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
   throw new Error(err)
 })
 ```
 
-Now if all has gone to play we should have the uri of json file stored in the `metadataUri` providing it did not throw any errors.
+Now if all has gone to play we should have the URI of JSON file stored in the `metadataUri` providing it did not throw any errors.
 
-### Minting the Nft
+### Minting the NFT Core Asset
 
-There are a few things we need to take into account when creating and minting a new token on the Solana blockchain in that we need to create some accounts and instructions.
+From here we can use the `create` function from the `mpl-core` package to create our Core Asset NFT.
 
-- Creating the mint account.
-- If we are minting the Tokens then we need a Token Account (holds the minted tokens in a persons wallet)
-- Mint the token.
-
-Now we can proceed to create the mintTokenTo instruction
 
 ```ts
 const assetSigner = generateSigner(umi)
@@ -253,8 +248,6 @@ const createTx = await create(umi, {
   uri: 'https://example.com/my-asset.json',
 }).sendAndConfirm(umi)
 
-// finally we can deserialize the signature that we can check on chain.
-// import { base58 } from "@metaplex-foundation/umi/serializers";
 
 console.log(base58.deserialize(tx.signature)[0])
 ```
@@ -350,7 +343,7 @@ const createNft = async () => {
     },
   }
 
-  // Call upon umi's uploadJson function to upload our metadata to Arweave via Irys.
+  // Call upon umi's `uploadJson` function to upload our metadata to Arweave via Irys.
 
   const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
     throw new Error(err)

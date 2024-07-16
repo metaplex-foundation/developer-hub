@@ -28,15 +28,15 @@ Token Metadata is the Solana NFT standard that started it all. Created back in 2
 
 #### Why Use Token Metadata:
 
-- Tried and Trusted: Token Metadata has been used as Solana's primary NFT Token Standard for the last 4 years from projects such as Solana Monkey Bussiness, Degods, Claynosaurus just to name a few.
+- Tried and Trusted: Token Metadata has been used as Solana's primary NFT Token Standard for the last 4 years from projects such as Solana Monkey Business, Degods, Claynosaurus just to name a few.
 - Eco System Support: NFTs and pNFTs are supported Solana wide by marketplaces and wallets such as MagicEden, Tensor, Phantom, Solflare and many others.
-- SPL Token Based: Token Metadata NFTs/pNFTs are based around Solana's Spl Token program.
+- SPL Token Based: Token Metadata NFTs/pNFTs are based around Solana's SPL Token program.
 
 [Create An NFT/pNFT with Token Metadata](/token-metadata/guides/javascript/create-an-nft)
 
 ## Bubblegum cNFT
 
-When it comes to creating NFTs that are cheap in mass then Bubblegum is the protocol to choose. Bubblegum uses the technology of **Compresed NFTs (cNFTs)** By applying a merkletree approach instead of creating accounts for each invidiual NFT.
+When it comes to creating NFTs that are cheap in mass then Bubblegum is the protocol to choose. Bubblegum uses the technology of **Compresed NFTs (cNFTs)** By applying a Merkle tree approach instead of creating accounts for each individual NFT.
 
 #### Why Use Bubblegum:
 

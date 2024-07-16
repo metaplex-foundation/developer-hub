@@ -88,7 +88,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 // Generate a new keypair signer.
 const signer = generateSigner(umi)
 
-// Tell umi to use the new signer.
+// Tell Umi to use the new signer.
 umi.use(signerIdentity(signer))
 
 // This will airdrop SOL on devnet only for testing.

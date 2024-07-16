@@ -6,13 +6,6 @@ import Badge from './products/Badge'
 export function Navigation({ product, navigation, className }) {
   let router = useRouter()
 
-  // const recentList = navigation.filter((link) => {
-  //   const guideDate = new Date(link.updated || link.created)
-  //   const now = new Date()
-
-  //   return now - guideDate < 1000 * 60 * 60 * 24 * 7
-  // })
-
   const isRecent = (date) => {
     const guideDate = new Date(date)
     const now = new Date()
