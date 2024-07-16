@@ -72,3 +72,21 @@ const publicKey = new solanaWeb3.PublicKey('ExamplePublicKeyHere');
 getBalance(publicKey);
 ```
 
+## Metaplex DAS
+
+Metaplex DAS (Digital Asset Standard) is a protocol or framework designed to standardize the read layer of NFTs and Tokens on the Solana blockchain allowing developers to standardise their code which fetching multiple different standards and layouts of Digital Assets.
+
+### Indexing Digital Assets
+By indexing all the Digital Assets (NFTs and Tokens) users have access to much faster reads of data of these assets as the data is stored in an optimized database rather than fetching directly from chain.
+
+### Syncing
+DAS has the ability to sync the reindexing of data during certain lifecycle instructions that are sent to the blockchain. By watching these instructions such as create, update, burn, and transfer we can always be assured that the DAS indexed data is up to date.
+
+Currently Core, Token Metadata, and Bubbglegum are all indexed by DAS.
+
+To find out more about Metaplex DAS you can visit these pages:
+
+- [Metaplex DAS API](/das-api)
+- [Metaplex DAS API Github](/https://github.com/metaplex-foundation/digital-asset-standard-api)
+- [Metaplex Digital Asset RPC Infrastructure Github](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)
+

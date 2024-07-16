@@ -72,7 +72,7 @@ transferSolana()
 
 ## Setting up Umi
 
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to try this example with React you'll need to setup Umi via the `React - Umi w/ Wallet Adapter` guide. Apart from the the wallet setup this guide will for fileStorage keys and wallet adapter.
+This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer in a different way you can check out the [**Connecting to Umi**](/umi/connecting-to-umi) guide.
 
 ### Generating a New Wallet
 
@@ -197,6 +197,10 @@ const transferSplTokens = async () => {
 
   // Log the signature of the transaction
   console.log(base58.deserialize(res.signature))
+
+  // *When transfering tokens you have to account for the decimal places.
+  // So if you wish to transfer 1 full token and have 5 decimal places
+  // you will need to transfer 100000 tokens to send 1 whole token.
 }
 
 transferSplTokens()

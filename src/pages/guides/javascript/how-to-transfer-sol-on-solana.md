@@ -59,13 +59,11 @@ import { base58 } from '@metaplex-foundation/umi/serializers'
 
 // Create the wrapper function
 const transferSolana = async () => {
-
   ///
   ///
   ///  all our code will go in here
   ///
   ///
-
 }
 
 // run the wrapper function
@@ -74,7 +72,7 @@ transferSolana()
 
 ## Setting up Umi
 
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to try this example with React you'll need to setup Umi via the `React - Umi w/ Wallet Adapter` guide. Apart from the the wallet setup this guide will for fileStorage keys and wallet adapter.
+This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer in a different way you can check out the [**Connecting to Umi**](/umi/connecting-to-umi) guide.
 
 ### Generating a New Wallet
 
@@ -119,14 +117,13 @@ const walletFile = const imageFile = fs.readFileSync(
 The `mpl-toolbox` package provides a helper function called `transferSol` that creates the instructions needed in order to execute a transfer on the blockchain.
 
 ```ts
-
 // Here we call the transferSol() function and send it to the chain.
 
 const res = await transferSol(umi, {
-    source: umi.identity,
-    destination: publicKey('111111111111111111111111111111'),
-    amount: sol(1),
-  }).sendAndConfirm(umi)
+  source: umi.identity,
+  destination: publicKey('111111111111111111111111111111'),
+  amount: sol(1),
+}).sendAndConfirm(umi)
 ```
 
 ## Full Code Example
