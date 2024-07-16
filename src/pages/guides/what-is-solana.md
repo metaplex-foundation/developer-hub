@@ -33,3 +33,7 @@ The Solana blockchain is a high-performance, decentralized blockchain platform d
 
 7. **Low Costs:**
    Solana offers low transaction fees, making it an attractive option for developers and users looking to build and interact with dApps and DeFi platforms without the high costs associated with other blockchains.
+
+   ## Upcoming
+   
+   In addition to what is already a performant chain Solana is advancing with new developments like Runtime v2, which aims to improve transaction processing and a simplified developer experience for everyone.
