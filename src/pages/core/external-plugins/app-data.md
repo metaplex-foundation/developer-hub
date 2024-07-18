@@ -185,7 +185,7 @@ pub async fn add_app_data_plugin() {
 
 {% /dialect-switcher %}
 
-## Writing Data to the AppData plugin.
+## Writing Data to the AppData Plugin.
 
 Only the dataAuthority address can write data to the AppData plugin.
 
@@ -248,3 +248,83 @@ let write_to_app_data_plugin_ix = WriteExternalPluginAdapterDataV1CpiBuilder::ne
 {% /dialect %}
 
 {% /dialect-switcher %}
+
+## Reading Data from the AppData Plugin.
+
+Data can be both read on chain progams and external sources pulling account data.
+
+### Fetch the Raw Data
+
+```rust
+
+let plugin_authority = ctx.accounts.authority.key();
+
+let asset = BaseAssetV1::from_bytes(&data).unwrap();
+
+let plugin_key = ExternalPluginAdapterKey::AppData(PluginAuthority::Address { 
+    address: plugin_authority }); 
+
+let app_data_plugin = fetch_external_plugin_adapter::<BaseAssetV1, AppData>(
+        &account_info,
+        Some(&base_asset),
+        &plugin_key,
+    )
+    .unwrap();
+
+let (data_offset, data_length) =
+        fetch_external_plugin_adapter_data_info(&account_info, Some(&asset), &plugin_key)
+            .unwrap();
+
+// grab app_data data from account_info
+let data = account_info.data.borrow()[data_offset..data_offset + data_length].to_vec();
+
+```
+
+### Deserialization
+
+Now that you have the data you'll need to deserialize the data depending on the schema you chose to write the data with.
+
+#### Example Struct
+
+if you are using the `serde`, `serde_json` or `rmp_serde` crates to serialize and deserlize with the **JSON** or **MsgPack** schema you'll also need to add the `Serialize` and `Deserlize` to the `derive` macro.
+
+```rust
+#[derive(Debug, Serialize, Deserialize)]
+pub struct MyData {
+    pub timestamp: u64,
+    pub message: String,
+}
+```
+
+#### Deserialze JSON Schema
+
+For the **JSON** schema you will need to use the `serde` and `serde_json` crates.
+
+```rust
+// deserialization from json to struct
+// this uses serde_json crate
+let my_data: MyData = serde_json::from_slice(&data).unwrap();
+println!("{:?}", my_data);
+```
+
+#### Deserialze MsgPack Schema
+
+For the **MsgPack** schema you will need to use the `serde` and `rmp_serde` crates.
+
+```rust
+// deserialization from msgpack to struct
+// this uses rmp_serde crate
+let my_data: MyData = rmp_serde::decode::from_slice(&data).unwrap();
+println!("{:?}", my_data);
+```
+
+#### Deserialze Binary Schema
+
+Because the **Binary** schema is arbitory data then deserialization will be dependent on the serialization you used. In the below example we'll look at deserialization using the `bincode` crate.
+
+```rust
+// deserialization from msgpack to struct
+// this uses rmp_serde crate
+let my_data: MyData = rmp_serde::decode::from_slice(&data).unwrap();
+println!("{:?}", my_data);
+```
