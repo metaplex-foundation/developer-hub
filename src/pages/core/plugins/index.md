@@ -117,7 +117,7 @@ The `force approve` validation is only available on 1st party plugins and on `Pe
 
 Force approve is the first check made when checking a plugins validations. The plugins which will force approve validations currently are:
 
-- **Pernament Transfer**
+- **Permanent Transfer**
 - **Pernament Burn**
 - **Permanent Freeze**
 
