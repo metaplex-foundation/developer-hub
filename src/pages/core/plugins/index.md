@@ -121,7 +121,7 @@ Force approve is the first check made when checking a plugins validations. The p
 - **Pernament Burn**
 - **Permanent Freeze**
 
-These plugins will take precedence with their actions over their non pernament counterparts and other plugins. 
+These plugins will take precedence with their actions over their non permanent counterparts and other plugins. 
 
 #### Example
 If you have an Asset frozen at Asset level with a Freeze Plugin while simultaneously have a **Permanent Burn** plugin on the Asset, even if the Asset is frozen the burn procedure called via the **Pernament Burn** plugin with still execute due to the `forceApprove` nature of permanent plugins.
