@@ -113,6 +113,19 @@ The rules for plugin validation are as follows in this hierarchy of conditions;
 
 The `force approve` validation is only available on 1st party plugins and on `Permanent Delegate ` plugins.
 
+### Force Approve
+
+Force approve is the first check made when checking a plugins validations. The plugins which will force approve validations currently are:
+
+- **Permanent Transfer**
+- **Pernament Burn**
+- **Permanent Freeze**
+
+These plugins will take precedence with their actions over their non permanent counterparts and other plugins. 
+
+#### Example
+If you have an Asset frozen at Asset level with a Freeze Plugin while simultaneously have a **Permanent Burn** plugin on the Asset, even if the Asset is frozen the burn procedure called via the **Pernament Burn** plugin with still execute due to the `forceApprove` nature of permanent plugins.
+
 ### Create
 
 {% totem %}
