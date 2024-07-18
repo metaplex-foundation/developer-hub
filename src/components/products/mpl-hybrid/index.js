@@ -21,7 +21,7 @@ export const mplHybrid = {
           links: [
             { title: 'Overview', href: '/mpl-hybrid' },
             { title: 'Getting Started', href: '/mpl-hybrid/getting-started' },
-            { title: 'Preperation', href: '/mpl-hybrid/preperation' },
+            { title: 'Preparation', href: '/mpl-hybrid/preparation' },
             { title: 'Philosophy', href: '/mpl-hybrid/philosophy' },
             { title: 'FAQ', href: '/mpl-hybrid/faq' },
           ],

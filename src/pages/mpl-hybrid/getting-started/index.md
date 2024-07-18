@@ -4,7 +4,7 @@ metaTitle: MPL-Hybrid - Getting Started
 description: Get started with the MPL-Hybrid Smart Escrow program.
 ---
 
-Select the language / library you want to use below to get started with the new Metaplex Core Standard.
+Select the language / library you want to use below to get started with the new Metaplex Hybrid Program.
 
 {% quick-links %}
 

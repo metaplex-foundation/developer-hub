@@ -1,6 +1,6 @@
 ---
 title: FAQ
-metaTitle: MPL-404 - FAQ
+metaTitle: MPL-Hybrid - FAQ
 description: Frequently asked questions about MPL-404
 ---
 
@@ -8,16 +8,13 @@ description: Frequently asked questions about MPL-404
 
 Not quite. MPL-404 is not a token standard, it’s a “meta” standard for hybrid assets facilitated by a dynamic swap program. To put it another way, it’s the bridge between a sets of fungible and non-fungible tokens.
 
+## Which types of assets does MPL-Hybrid support?
 
-## Which types of assets does MPL-404 support?
-
-Currently MPL-404 only supports Metaplex Core NFT assets and token metadata fungible assets. We are working to support other token standards including pNFTs & Token-2022.
-
+Currently the MPL-Hybrid program only supports Metaplex Core NFT assets and SPL Token fungible assets. We are working to support other token standards including pNFTs & Token Extensions.
 
 ## How can I provide liquidity to my token?
 
 Providing liquidity is a complex topic beyond the scope of MPL-404. The token escrow is different than a liquidity pool. To learn more about setting up a liquidity pool for your project, please visit Raydium, Orca, Meteora.
-
 
 ## How is MPL-404 different from ERC-404?
 
@@ -29,4 +26,4 @@ Yes. MPL-404 allows you to create hybrids backed by any fungible token on Solana
 
 ## Are There Any Costs Associated With Using MPL-404?
 
-Yes. There is a .005 sol swap protocal fee on every swap.
+Yes. There is a .005 sol swap protocol fee on every swap.

@@ -1,9 +1,9 @@
 ---
 title: Advanced Topics
-metaTitle: MPL-404 - Advanced Topics
-description: Advanced MPL-404 Topics
+metaTitle: MPL-Hybrid - Advanced Topics
+description: Advanced MPL-Hybrid Topics
 ---
 
 ## Advanced Topics
 
-__coming soon__
+**coming soon**
