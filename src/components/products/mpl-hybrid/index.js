@@ -22,7 +22,6 @@ export const mplHybrid = {
             { title: 'Overview', href: '/mpl-hybrid' },
             { title: 'Getting Started', href: '/mpl-hybrid/getting-started' },
             { title: 'Preparation', href: '/mpl-hybrid/preparation' },
-            { title: 'Philosophy', href: '/mpl-hybrid/philosophy' },
             { title: 'FAQ', href: '/mpl-hybrid/faq' },
           ],
         },
