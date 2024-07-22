@@ -367,7 +367,7 @@ const dataAuthority = publicKey('33333333333333333333333333333333')
 
 const asset = await fetchAsset(umi, assetId)
 
-let appDataPlugin = asset.dataStores?.filter(
+let appDataPlugin = asset.appDatas?.filter(
   (appData) => (appData.authority.address = dataAuthority)
 )
 
