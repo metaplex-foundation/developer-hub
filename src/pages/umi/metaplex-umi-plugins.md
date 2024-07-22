@@ -14,7 +14,7 @@ Program feature set includes:
 
 - Minting
 - Updating
-- Transfering
+- Transferring
 - Burning
 - Delegating
 - Collection Management
@@ -26,7 +26,22 @@ Candy Machine is a Metaplex program that allows you to set up a 'for sale' NFT a
 Program feature set includes:
 
 - Minting NFTs
-- Selling NFTs.
+- Selling NFTs
+
+## [Core](/core)
+
+Core is the next generation Solana NFT standard that uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets. 
+
+Program feature set includes:
+
+- Minting
+- Updating
+- Transferring
+- Burning
+- Delegating
+- Managing internal and external Plugins
+- Deserializing
+- Collection Management
 
 ## [DAS API](/das-api)
 
