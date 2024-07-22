@@ -48,7 +48,7 @@ await createAsset(umi, {
 
 ## How to set an Asset to be Immutable?
 
-_coming soon_
+There are multiple levels of "immutability" in Core. You can find more information and how to implement it in [this guide](/core/guides/immutability).
 
 ## What are the differences between Metaplex Token Metadata and Core?
 
