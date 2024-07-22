@@ -109,14 +109,27 @@ The sum of the share values must add up to 100, otherwise an error will be gener
 
 {% /callout %}
 
-The Candy Machine can be configured to not have the final metadata when an NFT is minted. This is useful when you are planning a revel step once mint is completed. In this case, you can specify the "placeholder" metadata values for the *hidden* NFT:
+The Candy Machine can be configured to not have the final metadata when an NFT is minted. This is useful when you are planning a reveal step once mint is completed. In this case, you can specify the "placeholder" metadata values for the *hidden* NFT:
 
 | Setting | Options | Value/Type | Description               |
 | ------- | ------- | --------------- | ------------------------- |
 | hiddenSettings | | | |
-| | name | String | Name of the mint (can use `$ID$` or `$ID+1$` mint index replacement variables) |
+| | name | String | Name of the mint (must use `$ID$` or `$ID+1$` mint index replacement variables, so that `sugar reveal` can work) |
 | | uri | String | URI of the mint (can use `$ID$` or `$ID+1$` mint index replacement variables) |
-| | hash | String | A 32 character hash (in most cases this is the hash of the cache file with the mapping between mint number and metadata so that the order can be verified when the mint is complete)
+| | hash | String | A 32 character hash (in most cases this is the hash of the cache file with the mapping between mint number and metadata so that the order can be verified when the mint is complete. Can be found using `sugar hash`)
+
+{% totem %}
+{% totem-accordion title="hiddenSettings example" %}
+The `hiddenSettings` section in the config file could look like this:
+```json
+"hiddenSettings": {
+    "name": "Name $ID+1$",
+    "uri": "https://arweave.net/IM4NByHrEzG87g2AhFY4pY7lk7YNriUVUUbZWhZ0HHY/26.png",
+    "hash": "49Bj8ZVSvSvAQwziKEts3iAeUhi27ATH"
+}
+```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Upload settings
 
