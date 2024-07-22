@@ -185,7 +185,7 @@ pub async fn add_app_data_plugin() {
 
 {% /dialect-switcher %}
 
-## Writing Data to the AppData Plugin.
+## Writing Data to the AppData Plugin
 
 Only the dataAuthority address can write data to the AppData plugin.
 
@@ -198,7 +198,109 @@ To write data to the AppData plugin we will use a `writeData()` helper which tak
 | data      | data in the format you wish to store      |
 | asset     | publicKey                                 |
 
-{% dialect-switcher title="Writing data to the AppData plugin" %}
+### Serializing JSON
+
+{% dialect-switcher title="Serializing JSON" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+const json = {
+  timeStamp: Date.now(),
+  message: 'Hello, World!',
+}
+
+const data = new TextEncoder().encode(JSON.stringify(json))
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+// this uses `serde` and the `serde_json` crates.
+
+
+let struct_data = MyData {
+    timestamp: 1234567890,
+    message: "Hello World".to_string(),
+};
+
+let data = serde_json::to_vec(&struct_data).unwrap();
+```
+
+{% /dialect %}
+
+{% /dialect-switcher %}
+
+### Serializing MsgPack
+
+{% dialect-switcher title="Serializing MsgPack" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+// This implementation uses `msgpack-lite` for serialization
+
+const json = {
+  timeStamp: Date.now(),
+  message: 'Hello, World!',
+}
+
+const data = msgpack.encode(json)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+// this uses `serde` and the `rmp-serde` crates.
+
+let data = MyData {
+    timestamp: 1234567890,
+    message: "Hello World".to_string(),
+};
+
+let data = rmp_serde::to_vec(&data).unwrap();
+```
+
+{% /dialect %}
+
+{% /dialect-switcher %}
+
+### Serializing Binary
+
+As binary can store arbitory data it's up to you to decide on how you are going to serialize and deserialize the data.
+
+{% dialect-switcher title="Serializing Binary" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+// The below example is just creating bytes that are considered `true` or `false`.
+const data = new Uint8Array([1, 0, 0, 1, 0])
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+// This example shows how to serialize a Rust struct with `bincode`.
+
+let data = MyData {
+    timestamp: 1234567890,
+    message: "Hello World".to_string(),
+};
+
+let data = bincode::serialize(&data).unwrap();
+```
+
+{% /dialect %}
+
+{% /dialect-switcher %}
+
+### Writing Data
+
+{% dialect-switcher title="Adding a Attribute Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -208,7 +310,7 @@ await writeData(umi, {
     dataAuthority,
   },
   authority: dataAuthoritySigner,
-  data: Uint8Array.from(Buffer.from(data)),
+  data: data,
   asset: asset.publicKey,
 }).sendAndConfirm(umi)
 ```
@@ -230,7 +332,6 @@ await writeData(umi, {
 
 // You need to convert your data (Binary, Json, MsgPack) to bytes for storage
 // This can be achieved in a few ways depending on your schema chosen.
-const data = data_as_schema.to_bytes()
 
 let write_to_app_data_plugin_ix = WriteExternalPluginAdapterDataV1CpiBuilder::new()
     .asset(asset)
@@ -249,11 +350,43 @@ let write_to_app_data_plugin_ix = WriteExternalPluginAdapterDataV1CpiBuilder::ne
 
 {% /dialect-switcher %}
 
-## Reading Data from the AppData Plugin.
+## Reading Data from the AppData Plugin
 
 Data can be both read on chain progams and external sources pulling account data.
 
 ### Fetch the Raw Data
+
+The first step to deserializing the data stored in an AppData plugin is to fetch the raw data and check the schema field which dictates the format in which the data is stored before serialization.
+
+{% dialect-switcher title="Fetching AppData Raw Data" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+const assetId = publicKey('11111111111111111111111111111111')
+const dataAuthority = publicKey('33333333333333333333333333333333')
+
+const asset = await fetchAsset(umi, assetId)
+
+let appDataPlugin = asset.dataStores?.filter(
+  (appData) => (appData.authority.address = dataAuthority)
+)
+
+let data
+let schema
+
+// check if AppData plugin with the given authority exists
+if (appDataPlugin && appDataPlugin.length > 0) {
+  //save plugin data to `data`
+  data = appDataPlugin[0].data
+
+  // save plugin schema to `schema`
+  schema = appDataPlugin[0].schema
+}
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
 
 ```rust
 
@@ -261,8 +394,9 @@ let plugin_authority = ctx.accounts.authority.key();
 
 let asset = BaseAssetV1::from_bytes(&data).unwrap();
 
-let plugin_key = ExternalPluginAdapterKey::AppData(PluginAuthority::Address { 
-    address: plugin_authority }); 
+// fetches the AppData plugin based on the Authority of the plugin
+let plugin_key = ExternalPluginAdapterKey::AppData(PluginAuthority::Address {
+    address: plugin_authority });
 
 let app_data_plugin = fetch_external_plugin_adapter::<BaseAssetV1, AppData>(
         &account_info,
@@ -280,13 +414,31 @@ let data = account_info.data.borrow()[data_offset..data_offset + data_length].to
 
 ```
 
+{% /dialect %}
+
+{% /dialect-switcher %}
+
 ### Deserialization
 
-Now that you have the data you'll need to deserialize the data depending on the schema you chose to write the data with.
+Now that you have the data you'll need to deserialize the data depending on the schema you chose to write the data with to the AppData plugins.
 
-#### Example Struct
+#### Deserialze JSON Schema
 
-if you are using the `serde`, `serde_json` or `rmp_serde` crates to serialize and deserlize with the **JSON** or **MsgPack** schema you'll also need to add the `Serialize` and `Deserlize` to the `derive` macro.
+For the **JSON** schema you will need to use the `serde` and `serde_json` crates.
+
+{% dialect-switcher title="Deserializing JSON" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+// decode the data into a string
+const jsonString = new TextDecoder().decode(data)
+//pasrse the string into a useable Javascript object
+const object = JSON.parse(string)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
 
 ```rust
 #[derive(Debug, Serialize, Deserialize)]
@@ -294,37 +446,81 @@ pub struct MyData {
     pub timestamp: u64,
     pub message: String,
 }
-```
 
-#### Deserialze JSON Schema
 
-For the **JSON** schema you will need to use the `serde` and `serde_json` crates.
-
-```rust
 // deserialization from json to struct
-// this uses serde_json crate
+// this uses `serde` and `serde_json` crates
 let my_data: MyData = serde_json::from_slice(&data).unwrap();
 println!("{:?}", my_data);
 ```
+
+{% /dialect %}
+
+{% /dialect-switcher %}
 
 #### Deserialze MsgPack Schema
 
 For the **MsgPack** schema you will need to use the `serde` and `rmp_serde` crates.
 
+{% dialect-switcher title="Deserializing MsgPack" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+// decode the data into a Javascript object using `msgpack-lite`
+const object = msgpack.decode(bytes)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
 ```rust
+#[derive(Debug, Serialize, Deserialize)]
+pub struct MyData {
+    pub timestamp: u64,
+    pub message: String,
+}
+
 // deserialization from msgpack to struct
-// this uses rmp_serde crate
+// this uses `serde` and `rmp_serde` crates
 let my_data: MyData = rmp_serde::decode::from_slice(&data).unwrap();
 println!("{:?}", my_data);
 ```
+
+{% /dialect %}
+
+{% /dialect-switcher %}
 
 #### Deserialze Binary Schema
 
-Because the **Binary** schema is arbitory data then deserialization will be dependent on the serialization you used. In the below example we'll look at deserialization using the `bincode` crate.
+Because the **Binary** schema is arbitory data then deserialization will be dependent on the serialization you used.
+
+{% dialect-switcher title="Deserializing MsgPack" %}
+{% dialect title="JavaScript" id="js" %}
+```js
+As the binary data is arbitory you will need to include your own deserializers to
+parse the data into a usable format your app/website will understand.
+
+
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
 
 ```rust
-// deserialization from msgpack to struct
-// this uses rmp_serde crate
-let my_data: MyData = rmp_serde::decode::from_slice(&data).unwrap();
+#[derive(Debug, Serialize, Deserialize)]
+pub struct MyData {
+    pub timestamp: u64,
+    pub message: String,
+}
+
+// In the below example we'll look at deserialization 
+// using the `bincode` crate to a struct.
+let my_data: MyData = bincode::deserialize(&data).unwrap();
 println!("{:?}", my_data);
 ```
+
+{% /dialect %}
+
+{% /dialect-switcher %}
