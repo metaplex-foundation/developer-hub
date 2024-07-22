@@ -339,7 +339,7 @@ pub async fn fetch_assets_by_update_authority() {
 
 If you use a DAS enabled RPC you'll be able to take advantage of indexed Assets for lighting fast fetches and data retrieval.
 
-DAS will index everything from metadata, off chain metadata, collection data, plugins (including Attributes), and more. To learn more about the Metaplex DAS API you can [click here](/das-api).
+DAS will index everything from metadata, off chain metadata, collection data, plugins (including Attributes), and more. To learn more about the Metaplex DAS API you can [click here](/das-api). In addition to the general DAS SDK an [extension for MPL Core]((/das-api/core-extension)) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for DAS-to-Core type conversions.
 
 Below is an example of returned data from fetching a MPL Core Asset with DAS.
 
