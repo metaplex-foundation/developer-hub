@@ -49,7 +49,7 @@ await mintV1(umi, {
 
 ### Get leaf schema and Asset ID from mint transaction {% #get-leaf-schema-from-mint-transaction %}
 
-You can retrieve the leaf and determine the asset ID from the `mintV1` transaction using the `parseLeafFromMintV1Transaction` helper.
+You can retrieve the leaf and determine the asset ID from the `mintV1` transaction using the `parseLeafFromMintV1Transaction` helper. This function parses the Transaction, therefore you have to make sure that it has been finalized before calling `parseLeafFromMintV1Transaction`.
 
 {% dialect-switcher title="Get leaf schema from mint transaction" %}
 {% dialect title="JavaScript" id="js" %}
