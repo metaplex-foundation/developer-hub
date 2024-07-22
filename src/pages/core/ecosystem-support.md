@@ -10,49 +10,49 @@ Metaplex also offers a free, open-source UI for creating, transferring and viewi
 
 ## Marketplaces
 
-| Project                                   | Status      | ETA                 |     |
-| ----------------------------------------- | ----------- | ------------------- | --- |
-| [Tensor](https://www.tensor.trade/)       | Complete    | -                   |     |
-| [Magic Eden](https://magiceden.io/solana) | Complete    | -                   |     |
-| [Sniper](https://www.sniper.xyz/)         | Complete    | -                   |     |
-| [OKX](https://www.okx.com/)               | Complete    | -                   |     |
-| [Mallow](https://www.mallow.art/)         | Complete | -                 |     |
+| Project                                   | Status   |
+| ----------------------------------------- | -------- |
+| [Tensor](https://www.tensor.trade/)       | Complete |
+| [Magic Eden](https://magiceden.io/solana) | Complete |
+| [Sniper](https://www.sniper.xyz/)         | Complete |
+| [OKX](https://www.okx.com/)               | Complete |
+| [Mallow](https://www.mallow.art/)         | Complete |
 
 ## Wallets
 
-| Project                           | Status   | ETA                | Notes        |
-| --------------------------------- | -------- | ------------------ | ------------ |
-| [Solflare](https://solflare.com/) | Complete | -   |              |
-| [Phantom](https://phantom.app/)   | Partial  | End of June        | Viewing Only |
-| [Backpack](https://backpack.app/) | Partial  | TBC                | Viewing Only |
+| Project                           | Status   |
+| --------------------------------- | -------- |
+| [Solflare](https://solflare.com/) | Complete |
+| [Phantom](https://phantom.app/)   | Complete |
+| [Backpack](https://backpack.app/) | Complete |
 
 ## Explorers
 
-| Project                        | Status   | ETA                 |
-| ------------------------------ | -------- | ------------------- |
-| [SolanaFM](https://solana.fm/) | Complete | -                   |
-| [Solscan](https://solscan.io/) | Complete | -                   |
+| Project                        | Status   |
+| ------------------------------ | -------- |
+| [SolanaFM](https://solana.fm/) | Complete |
+| [Solscan](https://solscan.io/) | Complete |
 
 ## RPC (DAS)
 
-| Project                                 | Status   | ETA                 | 
-| --------------------------------------- | -------- | ------------------- |
-| [ExtrNode](https://extrnode.com/)       | Complete | -                   |
-| [Helius](https://www.helius.dev/)       | Complete | -                   |
-| [Quicknode](https://www.quicknode.com/) | Complete | -                   |
-| [Shyft](https://shyft.to/)              | Complete | -                   |
-| [Triton](https://triton.one/)           | Complete | -                   |
+| Project                                 | Status   |
+| --------------------------------------- | -------- |
+| [ExtrNode](https://extrnode.com/)       | Complete |
+| [Helius](https://www.helius.dev/)       | Complete |
+| [Quicknode](https://www.quicknode.com/) | Complete |
+| [Shyft](https://shyft.to/)              | Complete |
+| [Triton](https://triton.one/)           | Complete |
 
 ## No Code Tooling
 
-| Project                                       | Status   | ETA                 |
-| --------------------------------------------- | -------- | ------------------- |
-| [Truffle](https://truffle.wtf)                | Complete | -                   |
-| [Underdog](https://www.underdogprotocol.com/) | Complete | -                   |
+| Project                                       | Status   |
+| --------------------------------------------- | -------- |
+| [Truffle](https://truffle.wtf)                | Complete |
+| [Underdog](https://www.underdogprotocol.com/) | Complete |
 
 ## Other
 
-| Project                        | Status   | ETA                 |
-| ------------------------------ | -------- | ------------------- |
-| [dReader](https://dreader.io/) | Complete | -                   |
-| [Matrica](https://matrica.io/) | Complete | -                   |
+| Project                        | Status   |
+| ------------------------------ | -------- |
+| [dReader](https://dreader.io/) | Complete |
+| [Matrica](https://matrica.io/) | Complete |
