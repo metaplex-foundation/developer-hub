@@ -178,6 +178,8 @@ export const core = {
             { title: 'Print Editions', href: '/core/guides/print-editions' },
             { title: 'Oracle Plugin Example', href: '/core/guides/oracle-plugin-example' },
             { title: 'Web2 typescript Staking Example', href: '/core/guides/javascript/web2-typescript-staking-example' },
+            { title: 'Anchor Staking Example', href: '/core/guides/anchor/anchor-staking-example' },
+
           ],
         },
       ],
