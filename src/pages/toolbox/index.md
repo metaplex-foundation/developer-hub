@@ -306,7 +306,7 @@ This helper method accepts a "base" transaction builder and a recent slot and re
 - An array of LUTs to be used in the base transaction builder once the LUTs have been created.
 
 ```ts
-import { createEmptyLut } from '@metaplex-foundation/mpl-toolbox'
+import { createLutForTransactionBuilder } from '@metaplex-foundation/mpl-toolbox'
 
 // 1. Get the LUT builders and the LUT accounts for a given transaction builder.
 const recentSlot = await umi.rpc.getSlot({ commitment: 'finalized' })
