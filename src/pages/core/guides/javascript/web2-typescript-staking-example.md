@@ -30,7 +30,7 @@ _Learn more about it [here](/core/plugins/freeze-delegate)_
 
 The **Attribute Plugin** is an **authority managed plugin**, that means that it requires the authority's signature to be applied to the asset. For an asset included in a collection, the collection authority serves as the authority since the asset's authority field is occupied by the collection address.
 
-This plugin allows for **data storage directly on the assets, functioning as on-chain attributes or traits**. These traits can be accessed directly by on-chain programs since they aren’t stored off-chain as it was for the mpl-program.
+This plugin allows for **data storage directly on the assets, functioning as onchain attributes or traits**. These traits can be accessed directly by onchain programs since they aren’t stored off-chain as it was for the mpl-program.
 
 **This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
 

@@ -318,12 +318,12 @@ The process for using the leaf node and its Proof to calculate the Merkle root i
 3. Hash the path value from step 2 with the next sibling inner node, which is the next value of the Proof.
 4. Continue this process of hashing values with sibling inner node values, up the tree until we calculate the Merkle root.
 
-If the Merkle root we calculate matches the Merkle root we were given for that tree, then we know that our exact leaf node exists in the Merkle tree.  Also any time a leaf node is updated (i.e. when the cNFT is transferred to a new owner), a new Merkle root must be calculated and updated on-chain.
+If the Merkle root we calculate matches the Merkle root we were given for that tree, then we know that our exact leaf node exists in the Merkle tree.  Also any time a leaf node is updated (i.e. when the cNFT is transferred to a new owner), a new Merkle root must be calculated and updated onchain.
 
 ## Concurrency
 
-The on-chain Merkle tree used for cNFTs must be able to handle multiple writes occurring in the same block.  This is because there can be multiple transactions to mint new cNFTs to the tree, transfer cNFTs, delegate cNFTs, burn cNFTs, etc.  The problem is that the first write to the on-chain tree invalidates the proofs sent for other writes within the same block.
+The onchain Merkle tree used for cNFTs must be able to handle multiple writes occurring in the same block.  This is because there can be multiple transactions to mint new cNFTs to the tree, transfer cNFTs, delegate cNFTs, burn cNFTs, etc.  The problem is that the first write to the onchain tree invalidates the proofs sent for other writes within the same block.
 
 The solution for this is that the Merkle tree used by [spl-account-compression](https://spl.solana.com/account-compression) doesn't only store one Merkle root, but also stores a [`ChangeLog`](https://github.com/solana-labs/solana-program-library/blob/master/libraries/concurrent-merkle-tree/src/changelog.rs#L9) of previous roots and the paths for previously modified leaves.  Even if the root and proof sent by the new transaction have been invalidated by a previous update, the program will fast-forward the proof.  Note the number of `ChangeLog`s available is set by the [Max Buffer Size](/bubblegum/create-trees#creating-a-bubblegum-tree) used when creating the tree.
 
-Also note that the rightmost proof for the Merkle tree is stored on-chain.  This allows for appends to the tree to occur without needing a proof to be sent.  This is exactly how Bubblegum is able to mint new cNFTs without needing a proof.
+Also note that the rightmost proof for the Merkle tree is stored onchain.  This allows for appends to the tree to occur without needing a proof to be sent.  This is exactly how Bubblegum is able to mint new cNFTs without needing a proof.

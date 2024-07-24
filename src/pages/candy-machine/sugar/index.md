@@ -43,7 +43,7 @@ SUBCOMMANDS:
     bundlr        Interact with the bundlr network
     collection    Manage the collection on the candy machine
     config        Manage candy machine configuration
-    deploy        Deploy cache items into candy machine config on-chain
+    deploy        Deploy cache items into candy machine config onchain
     freeze        Manage freeze guard actions
     guard         Manage guards on the candy machine
     hash          Generate hash of cache file for hidden settings
@@ -51,7 +51,7 @@ SUBCOMMANDS:
     launch        Create a candy machine deployment from assets
     mint          Mint one NFT from candy machine
     reveal        Reveal the NFTs from a hidden settings candy machine
-    show          Show the on-chain config of an existing candy machine
+    show          Show the onchain config of an existing candy machine
     sign          Sign one or all NFTs from candy machine
     upload        Upload assets to storage and creates the cache config
     validate      Validate JSON metadata files
@@ -68,7 +68,7 @@ sugar help deploy
 This will display a list of options together with a short description:
 
 ```
-Deploy cache items into candy machine config on-chain
+Deploy cache items into candy machine config onchain
 
 USAGE:
     sugar deploy [OPTIONS]

@@ -4,9 +4,9 @@ metaTitle: Token Metadata - Get Mints in a collection
 description: How-to guide to get all mints in a collection.
 ---
 
-Metaplex Token Metadata has [on-chain collections](/token-metadata/collections) to allow objective identifying of NFT collections instead of various subjective and potentially conflicting heuristics employed by the community in absence of an on-chain standard. 
+Metaplex Token Metadata has [onchain collections](/token-metadata/collections) to allow objective identifying of NFT collections instead of various subjective and potentially conflicting heuristics employed by the community in absence of an onchain standard. 
 
-The specification design makes it very easy to look up any given NFT and determine if it is in a collection and if so, which collection, by simply reading the Collection fields from the metadata account. The on-chain `Metadata` struct contains an option `Collection` struct which has a `key` field which is the Pubkey of the SPL token mint of the collection it belongs to.
+The specification design makes it very easy to look up any given NFT and determine if it is in a collection and if so, which collection, by simply reading the Collection fields from the metadata account. The onchain `Metadata` struct contains an option `Collection` struct which has a `key` field which is the Pubkey of the SPL token mint of the collection it belongs to.
 
 ```rust
 pub struct Metadata {

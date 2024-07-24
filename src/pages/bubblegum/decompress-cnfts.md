@@ -6,7 +6,7 @@ description: Learn how to redeem and decompress compressed NFTs on Bubblegum
 
 It is possible for the owner of a Compressed NFT to decompress it into a regular NFT. {% .lead %}
 
-This means on-chain accounts such as the Mint account, the Metadata account and the Master Edition account will be created for the NFT. This enables the NFT to perform certain operations that cannot be done with Compressed NFTs, interact with platforms that do not support Compressed NFTs and increase its interoperability with the NFT ecosystem in general.
+This means onchain accounts such as the Mint account, the Metadata account and the Master Edition account will be created for the NFT. This enables the NFT to perform certain operations that cannot be done with Compressed NFTs, interact with platforms that do not support Compressed NFTs and increase its interoperability with the NFT ecosystem in general.
 
 ## The decompression process
 

@@ -20,7 +20,7 @@ To update the Candy Guard configuration, you first need to make the required mod
 sugar guard update
 ```
 
-To print the on-chain configuration of the Candy Machine guards, use the command:
+To print the onchain configuration of the Candy Machine guards, use the command:
 
 ```
 sugar guard show

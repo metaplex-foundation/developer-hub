@@ -21,20 +21,20 @@ If you want to learn more about External Plugins, read more about them [here](/c
 
 ### Oracle Plugin
 
-The **Oracle Plugin** leverages the capability of external plugins to save data that an external authority can update by accessing **on-chain data** accounts external to the Core asset, allowing assets to dynamically reject lifecycle events set by the asset authority. The external Oracle account can also be updated at any time to change the authorization behavior of the lifecycle events, providing a flexible and dynamic experience.
+The **Oracle Plugin** leverages the capability of external plugins to save data that an external authority can update by accessing **onchain data** accounts external to the Core asset, allowing assets to dynamically reject lifecycle events set by the asset authority. The external Oracle account can also be updated at any time to change the authorization behavior of the lifecycle events, providing a flexible and dynamic experience.
 
 If you want to learn more about the Oracle Plugin, read more about it [here](/core/external-plugins/oracle).
 
 ## Starting off: Understanding the Protocol behind the Idea
 
-To create an NFT collection that can only be traded during US market hours, we need a reliable way of updating on-chain data based on the time of day. This is how the protocol design will look like:
+To create an NFT collection that can only be traded during US market hours, we need a reliable way of updating onchain data based on the time of day. This is how the protocol design will look like:
 
 ### Program Overview
 
 The program will have two main instructions (one to create the Oracle and the other to update its value) and two helper functions to facilitate implementation.
 
 **Main Instructions**
-- **Initialize Oracle Instruction**: This instruction creates the oracle account so any user wanting to employ this time-gated feature for their collection will redirect the NFT Oracle Plugin to this on-chain account address.
+- **Initialize Oracle Instruction**: This instruction creates the oracle account so any user wanting to employ this time-gated feature for their collection will redirect the NFT Oracle Plugin to this onchain account address.
 - **Crank Oracle Instruction**: This instruction updates the oracle state data to ensure it always has the right and most up-to-date data.
 
 **Helper functions**

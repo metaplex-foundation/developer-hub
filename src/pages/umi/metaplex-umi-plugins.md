@@ -45,7 +45,7 @@ Program feature set includes:
 
 ## [DAS API](/das-api)
 
-The state data of uncompressed NFTs is all stored in on-chain accounts. This is expensive at scale. Compressed NFTs save space by encoding the state data into an on-chain Merkle tree. The detailed account data is not stored on-chain, but in data stores managed by RPC providers. The Metaplex Digital Asset Standard (DAS) API represents a unified interface for interacting with digital assets on Solana, supporting both standard (Token Metadata) and compressed (Bubblegum) assets.
+The state data of uncompressed NFTs is all stored in onchain accounts. This is expensive at scale. Compressed NFTs save space by encoding the state data into an onchain Merkle tree. The detailed account data is not stored onchain, but in data stores managed by RPC providers. The Metaplex Digital Asset Standard (DAS) API represents a unified interface for interacting with digital assets on Solana, supporting both standard (Token Metadata) and compressed (Bubblegum) assets.
 
 Program feature set includes:
 

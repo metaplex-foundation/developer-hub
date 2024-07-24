@@ -28,7 +28,7 @@ Whilst all of Metaplex's products offer clients that include all you need to get
 
 ## SPL System
 
-The instructions of the SPL System program can be used to create new uninitialized accounts on-chain and transfer SOL between wallets. You can read more about the SPL System program in [Solana's official documentation](https://docs.solana.com/developing/runtime-facilities/programs).
+The instructions of the SPL System program can be used to create new uninitialized accounts onchain and transfer SOL between wallets. You can read more about the SPL System program in [Solana's official documentation](https://docs.solana.com/developing/runtime-facilities/programs).
 
 Note that, you may be interested in the [MPL System Extras program](#mpl-system-extras) which offers a few convenient instructions when dealing with creating accounts and transferring SOL.
 

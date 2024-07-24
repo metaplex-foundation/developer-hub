@@ -4,7 +4,7 @@ metaTitle: Candy Machine - Sugar - verify
 description: verify command.
 ---
 
-The `verify` command checks that all items in your cache file have been successfully written on-chain:
+The `verify` command checks that all items in your cache file have been successfully written onchain:
 
 ```
 sugar verify

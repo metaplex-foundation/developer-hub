@@ -6,7 +6,7 @@ description: Frequently asked questions about Metaplex Inscriptions
 
 ## What's the point of Inscriptions?
 
-Contrary to popular belief, Inscriptions can be used for a lot more than making Validators cry. The ability to write arbitrary data on-chain has huge benefits for Solana program integration. In the beginning, the primary use case for this will be NFTs, providing a way to store all NFT data on Solana. This will enable many use cases like on-chain trait-based gating for programs, a way to store additional NFT metadata without writing a custom program (e.g. game stat blocks, NFT history, additional information, etc.), and dynamic image generation directly in Solana programs.
+Contrary to popular belief, Inscriptions can be used for a lot more than making Validators cry. The ability to write arbitrary data onchain has huge benefits for Solana program integration. In the beginning, the primary use case for this will be NFTs, providing a way to store all NFT data on Solana. This will enable many use cases like onchain trait-based gating for programs, a way to store additional NFT metadata without writing a custom program (e.g. game stat blocks, NFT history, additional information, etc.), and dynamic image generation directly in Solana programs.
 
 ## Where do I inscribe?
 
