@@ -20,9 +20,9 @@ This program operates with a standard TypeScript backend and uses the asset keyp
 
 The **Freeze Delegate Plugin** is an **owner managed plugin**, that means that it requires the owner's signature to be applied to the asset.
 
-This plugin allows the **delegate to freeze and unfreeze the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be unfrozen before revocation).
+This plugin allows the **delegate to freeze and thaw the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be unfrozen before revocation).
 
-**Using this plugin is lightweight**, as freezing/unfreezing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
+**Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
 
 _Learn more about it [here](/core/plugins/freeze-delegate)_
 
@@ -46,7 +46,7 @@ Before diving into the instructions, let’s spend some time talking about the a
 
 **Instructions**:
 - **Stake**: This instruction applies the Freeze Delegate Plugin to freeze the asset by setting the flag to true. Additionally, it updates the`staked` key in the Attribute Plugin from 0 to the current time.
-- **Unstake**: This instruction changes the flag of the Freeze Delegate Plugin and revokes it to prevent malicious entities from controlling the asset and demanding ransom to unfreeze it. It also updates the `staked` key to 0 and sets the `staked_time` to the current time minus the staked timestamp.
+- **Unstake**: This instruction changes the flag of the Freeze Delegate Plugin and revokes it to prevent malicious entities from controlling the asset and demanding ransom to thaw it. It also updates the `staked` key to 0 and sets the `staked_time` to the current time minus the staked timestamp.
 
 ## Building the Program: A Step-by-Step Guide
 
@@ -406,8 +406,8 @@ tx = await transactionBuilder().add(updatePlugin(umi, {
 ).buildAndSign(umi);
 ```
 
-3. **Unfreeze and remove the FreezeDelegate Plugin**
-At the end of the instruction, unfreeze the asset and remove the FreezeDelegate plugin so the asset is `free` and not controlled by the `update_authority`
+3. **Thaw and remove the FreezeDelegate Plugin**
+At the end of the instruction, thaw the asset and remove the FreezeDelegate plugin so the asset is `free` and not controlled by the `update_authority`
 
 ```typescript
 tx = await transactionBuilder().add(
@@ -485,7 +485,7 @@ tx = await transactionBuilder().add(
     }
 
     // Update the Asset Attribute Plugin with the new attributeList
-    // then Update the Asset FreezeDelegate Plugin to unfreeze the asset
+    // then Update the Asset FreezeDelegate Plugin to thaw the asset
     // and then Remove the FreezeDelegate Plugin from the asset
     tx = await transactionBuilder().add(updatePlugin(umi, {
       asset,

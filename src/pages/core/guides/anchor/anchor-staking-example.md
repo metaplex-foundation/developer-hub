@@ -1,14 +1,18 @@
 ---
-title: Create a staking program for your collection using Anchor
+title: Create a staking program for your mpl-core ollection using Anchor
 metaTitle: Core - Anchor Staking Example
 description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking program!
 ---
 
-This developer guide demonstrates how to create a staking program for your collection using Anchor leveraging the attribute plugin and freeze delegate. This approach uses a smart contract for all the logic behind staking time calculation and managment of the state of the asset (staking/unstaking), but the data will not be saved in a PDA, like the standard before Core, but it will be saved on the asset itself.
+This developer guide demonstrates how to create a staking program for your collection using Anchor leveraging the attribute plugin and freeze delegate. This approach uses a smart contract for all the logic behind staking like time calculation and management of the state of the asset (staking/unstaking), but the data will not be saved in a PDA, like the standard before Core, but it will be saved on the asset itself.
 
 ## Starting off: Understanding the Logic behind the program
 
-This program operates with a standard TypeScript backend and uses the asset keypair authority in the secret to sign attribute changes.
+This program operates with a standard Anchor, leveraging a mono-file approach where all the necessary macros can be found in the lib.rs file:
+- declare_id: Specifies the program's on-chain address.
+- #[program]: Specifies the module containing the program’s instruction logic.
+- #[derive(Accounts)]: Applied to structs to indicate a list of accounts required for an instruction.
+- #[account]: Applied to structs to create custom account types specific to the program
 
 **To implement this example, you will need the following components:**
 - **An Asset**
@@ -20,9 +24,9 @@ This program operates with a standard TypeScript backend and uses the asset keyp
 
 The **Freeze Delegate Plugin** is an **owner managed plugin**, that means that it requires the owner's signature to be applied to the asset.
 
-This plugin allows the **delegate to freeze and unfreeze the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be unfrozen before revocation).
+This plugin allows the **delegate to freeze and thaw the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be thawed before revocation).
 
-**Using this plugin is lightweight**, as freezing/unfreezing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
+**Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
 
 _Learn more about it [here](/core/plugins/freeze-delegate)_
 
@@ -46,7 +50,7 @@ Before diving into the instructions, let’s spend some time talking about the a
 
 **Instructions**:
 - **Stake**: This instruction applies the Freeze Delegate Plugin to freeze the asset by setting the flag to true. Additionally, it updates the`staked` key in the Attribute Plugin from 0 to the current time.
-- **Unstake**: This instruction changes the flag of the Freeze Delegate Plugin and revokes it to prevent malicious entities from controlling the asset and demanding ransom to unfreeze it. It also updates the `staked` key to 0 and sets the `staked_time` to the current time minus the staked timestamp.
+- **Unstake**: This instruction changes the flag of the Freeze Delegate Plugin and revokes it to prevent malicious entities from controlling the asset and demanding ransom to thaw it. It also updates the `staked` key to 0 and sets the `staked_time` to the current time minus the staked timestamp.
 
 ## Building the Smart Contract: A Step-by-Step Guide
 
@@ -64,7 +68,7 @@ In the account struct of all instructions, we will separate the Signer and the P
 
 ### The Account Struct
 
-For this example we used the anchor flag from the mpl-core crate to directly deserialize the Asset and Collection account from the account struct and put some constraint on that
+For this example we use the anchor flag from the mpl-core crate to directly deserialize the Asset and Collection account from the account struct and put some constraint on that
 
 _Learn more about it [here](/core/using-core-in-anchor)_
 
@@ -118,7 +122,7 @@ pub struct Unstake<'info> {
 }
 ```
 
-As constrainted we checked:
+As constraints we checked:
 - The `owner` of the asset is the same as the `owner` in the accounts struct.
 - The `update_authority` of the asset is a Collection and the addess of that collection is the same as the `collection` in the account struct
 - The `update_authority` of the collection is the same as the `update_authority` in the account struct, since this is going to be the `update_authority` over the asset
@@ -129,7 +133,10 @@ As constrainted we checked:
 We begin by using the `fetch_plugin` function from the mpl-core crate to retrieve information about the attribute plugin of the assets. 
 
 ```rust
-match fetch_plugin::<BaseAssetV1, Attributes>(&ctx.accounts.asset.to_account_info(), mpl_core::types::PluginType::Attributes)
+match fetch_plugin::<BaseAssetV1, Attributes>(
+    &ctx.accounts.asset.to_account_info(), 
+    mpl_core::types::PluginType::Attributes
+)
 ```
 
 1. **Check for the Attribute Plugin**
@@ -153,8 +160,14 @@ Err(_) => {
     .plugin(Plugin::Attributes(
         Attributes{ 
             attribute_list: vec![
-                Attribute { key: "staked".to_string(), value: Clock::get()?.unix_timestamp.to_string() },
-                Attribute { key: "staked_time".to_string(), value: 0.to_string() },
+                Attribute { 
+                    key: "staked".to_string(), 
+                    value: Clock::get()?.unix_timestamp.to_string() 
+                },
+                Attribute { 
+                    key: "staked_time".to_string(), 
+                    value: 0.to_string() 
+                },
             ] 
         }
     ))
@@ -177,7 +190,10 @@ Ok((_, fetched_attribute_list, _)) => {
     for attribute in fetched_attribute_list.attribute_list {
         if attribute.key == "staked" {
             require!(attribute.value == "0", StakingError::AlreadyStaked);
-            attribute_list.push(Attribute { key: "staked".to_string(), value: Clock::get()?.unix_timestamp.to_string() });
+            attribute_list.push(Attribute { 
+                key: "staked".to_string(), 
+                value: Clock::get()?.unix_timestamp.to_string() 
+            });
             is_initialized = true;
         } else {
             attribute_list.push(attribute);
@@ -189,8 +205,14 @@ If it doesn't, add them to the existing attribute list.
 
 ```rust
 if !is_initialized {
-    attribute_list.push(Attribute { key: "staked".to_string(), value: Clock::get()?.unix_timestamp.to_string() });
-    attribute_list.push(Attribute { key: "staked_time".to_string(), value: 0.to_string() });
+    attribute_list.push(Attribute { 
+        key: "staked".to_string(), 
+        value: Clock::get()?.unix_timestamp.to_string() 
+    });
+    attribute_list.push(Attribute { 
+        key: "staked_time".to_string(), 
+        value: 0.to_string() 
+    });
 }
 ```
 
@@ -238,7 +260,10 @@ pub fn stake(ctx: Context<Stake>) -> Result<()> {
             for attribute in fetched_attribute_list.attribute_list {
                 if attribute.key == "staked" {
                     require!(attribute.value == "0", StakingError::AlreadyStaked);
-                    attribute_list.push(Attribute { key: "staked".to_string(), value: Clock::get()?.unix_timestamp.to_string() });
+                    attribute_list.push(Attribute { 
+                        key: "staked".to_string(), 
+                        value: Clock::get()?.unix_timestamp.to_string() 
+                    });
                     is_initialized = true;
                 } else {
                     attribute_list.push(attribute);
@@ -246,8 +271,14 @@ pub fn stake(ctx: Context<Stake>) -> Result<()> {
             }
 
             if !is_initialized {
-                attribute_list.push(Attribute { key: "staked".to_string(), value: Clock::get()?.unix_timestamp.to_string() });
-                attribute_list.push(Attribute { key: "staked_time".to_string(), value: 0.to_string() });
+                attribute_list.push(Attribute { 
+                    key: "staked".to_string(), 
+                    value: Clock::get()?.unix_timestamp.to_string() 
+                });
+                attribute_list.push(Attribute { 
+                    key: "staked_time".to_string(), 
+                    value: 0.to_string() 
+                });
             }
 
             UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
@@ -270,8 +301,14 @@ pub fn stake(ctx: Context<Stake>) -> Result<()> {
             .plugin(Plugin::Attributes(
                 Attributes{ 
                     attribute_list: vec![
-                        Attribute { key: "staked".to_string(), value: Clock::get()?.unix_timestamp.to_string() },
-                        Attribute { key: "staked_time".to_string(), value: 0.to_string() },
+                        Attribute { 
+                            key: "staked".to_string(), 
+                            value: Clock::get()?.unix_timestamp.to_string() 
+                        },
+                        Attribute { 
+                            key: "staked_time".to_string(), 
+                            value: 0.to_string() 
+                        },
                     ] 
                 }
             ))
@@ -349,21 +386,31 @@ Ok((_, fetched_attribute_list, _)) => {
     for attribute in fetched_attribute_list.attribute_list.iter() {
         if attribute.key == "staked" {
             require!(attribute.value != "0", StakingError::NotStaked);
-            attribute_list.push(Attribute { key: "staked".to_string(), value: 0.to_string() });
+            attribute_list.push(Attribute { 
+                key: "staked".to_string(), 
+                value: 0.to_string() 
+            });
             staked_time = staked_time
-                .checked_add(Clock::get()?.unix_timestamp.checked_sub(attribute.value.parse::<i64>().map_err(|_| StakingError::InvalidTimestamp)?).ok_or(StakingError::Underflow)?)
+                .checked_add(Clock::get()?.unix_timestamp
+                .checked_sub(attribute.value.parse::<i64>()
+                .map_err(|_| StakingError::InvalidTimestamp)?)
+                .ok_or(StakingError::Underflow)?)
                 .ok_or(StakingError::Overflow)?;
             is_initialized = true;
         } else if attribute.key == "staked_time" {
             staked_time = staked_time
-                .checked_add(attribute.value.parse::<i64>().map_err(|_| StakingError::InvalidTimestamp)?)
+                .checked_add(attribute.value.parse::<i64>()
+                .map_err(|_| StakingError::InvalidTimestamp)?)
                 .ok_or(StakingError::Overflow)?;
         } else {
             attribute_list.push(attribute.clone());
         } 
     }
 
-    attribute_list.push(Attribute { key: "staked_time".to_string(), value: staked_time.to_string() });
+    attribute_list.push(Attribute { 
+        key: "staked_time".to_string(), 
+        value: staked_time.to_string() 
+    });
 
     require!(is_initialized, StakingError::StakingNotInitialized);
 ```
@@ -382,8 +429,8 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
 .invoke()?;
 ```
 
-3. **Unfreeze and remove the FreezeDelegate Plugin**
-At the end of the instruction, unfreeze the asset and remove the FreezeDelegate plugin so the asset is `free` and not controlled by the `update_authority`
+3. **Thaw and remove the FreezeDelegate Plugin**
+At the end of the instruction, thaw the asset and remove the FreezeDelegate plugin so the asset is `free` and not controlled by the `update_authority`
 
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
@@ -418,21 +465,31 @@ pub fn unstake(ctx: Context<Unstake>) -> Result<()> {
             for attribute in fetched_attribute_list.attribute_list.iter() {
                 if attribute.key == "staked" {
                     require!(attribute.value != "0", StakingError::NotStaked);
-                    attribute_list.push(Attribute { key: "staked".to_string(), value: 0.to_string() });
+                    attribute_list.push(Attribute { 
+                        key: "staked".to_string(), 
+                        value: 0.to_string() 
+                    });
                     staked_time = staked_time
-                        .checked_add(Clock::get()?.unix_timestamp.checked_sub(attribute.value.parse::<i64>().map_err(|_| StakingError::InvalidTimestamp)?).ok_or(StakingError::Underflow)?)
+                        .checked_add(Clock::get()?.unix_timestamp
+                        .checked_sub(attribute.value.parse::<i64>()
+                        .map_err(|_| StakingError::InvalidTimestamp)?)
+                        .ok_or(StakingError::Underflow)?)
                         .ok_or(StakingError::Overflow)?;
                     is_initialized = true;
                 } else if attribute.key == "staked_time" {
                     staked_time = staked_time
-                        .checked_add(attribute.value.parse::<i64>().map_err(|_| StakingError::InvalidTimestamp)?)
+                        .checked_add(attribute.value.parse::<i64>()
+                        .map_err(|_| StakingError::InvalidTimestamp)?)
                         .ok_or(StakingError::Overflow)?;
                 } else {
                     attribute_list.push(attribute.clone());
                 } 
             }
 
-            attribute_list.push(Attribute { key: "staked_time".to_string(), value: staked_time.to_string() });
+            attribute_list.push(Attribute { 
+                key: "staked_time".to_string(), 
+                value: staked_time.to_string() 
+            });
 
             require!(is_initialized, StakingError::StakingNotInitialized);
 
@@ -452,7 +509,7 @@ pub fn unstake(ctx: Context<Unstake>) -> Result<()> {
         }
     }
 
-    // Unfreeze the asset
+    // Thaw the asset
     UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
     .collection(Some(&ctx.accounts.collection.to_account_info()))
