@@ -46,7 +46,7 @@ description: Offical Links for Metaplex
 | ------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | - |
 | Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk   | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house)          | [Link](/legacy-documentation/auction-house)
 | Auctioneer         | neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh  | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auctioneer)              | [Link](/legacy-documentation/auction-house/auctioneer)
-| Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)             | [Link](/legacy-documentation/auction-house)
+| Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)             | [Link](/candy-machine/guards)
 | Candy Machine v3   | CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core)      | [Link](/candy-machine)
 | Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d | [Link](https://github.com/metaplex-foundation/mpl-core)                                                     | [Link](/candy-machine/guards)
 | Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard)        | [Link](/core-candy-machine/guards)
