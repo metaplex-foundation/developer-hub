@@ -1,7 +1,7 @@
 ---
-title: Updating Assets
-metaTitle: Token Metadata - Updating Assets
-description: Learn how to update Assets on Token Metadata
+title: Updating NFTs/Tokens
+metaTitle: Token Metadata - Updating NFTs/Tokens
+description: Learn how to update NFTs and Tokens using Token Metadata.
 ---
 
 The update authority of an asset can update its **Metadata** account using the **Update** instruction as long as the **Is Mutable** attribute is set to `true`. The **Update** instruction requires the **Update Authority** to sign the transaction and can update the following attributes of the **Metadata** account:

@@ -1,10 +1,10 @@
 ---
-title: Fetching Assets
-metaTitle: Token Metadata - Fetching Assets
-description: Learn how to fetch the various on-chain accounts of your assets on Token Metadata
+title: Fetching NFTs/Tokens
+metaTitle: Token Metadata - Fetching NFTs/Tokens
+description: Learn how to fetch NFTs/Tokens with Token Metadata.
 ---
 
-Now that we know how to create and mint the various on-chain accounts of our assets, let's learn how to fetch them. {% .lead %}
+Now that we know how to create and mint NFTs and Tokens, let's learn how to fetch them. {% .lead %}
 
 ## Digital Assets
 

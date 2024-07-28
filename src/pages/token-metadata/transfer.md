@@ -1,7 +1,7 @@
 ---
-title: Transferring Assets
-metaTitle: Token Metadata - Transferring Assets
-description: Learn how to transfer Assets on Token Metadata
+title: Transferring NFTs/Tokens
+metaTitle: Token Metadata - Transferring NFTs/Tokens
+description: Learn how to transfer NFTs and Tokens using Token Metadata.
 ---
 
 The owner of an asset can transfer it to another account by sending a **Transfer** instruction to the Token Metadata program. This instruction accepts the following attributes:
