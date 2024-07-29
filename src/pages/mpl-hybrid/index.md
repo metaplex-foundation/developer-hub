@@ -1,10 +1,10 @@
 ---
 title: Overview
 metaTitle: MPL-Hybrid - Overview
-description: Provides a high-level overview of the framework and on-chain protocol for hybrid assets.
+description: Provides a high-level overview of the framework and onchain protocol for hybrid assets.
 ---
 
-**MPL-404** is a new model for digital assets, web3 games, and on-chain communities. At the core of the model is a swap program (**mpl-hybrid**) that trades a fixed number of fungible assets for a non-fungible asset and vice versa. The swap is a dual escrow system, ensuring that all available non-fungible assets are backed by escrowed fungibles and vice versa.
+**MPL-404** is a new model for digital assets, web3 games, and onchain communities. At the core of the model is a swap program (**mpl-hybrid**) that trades a fixed number of fungible assets for a non-fungible asset and vice versa. The swap is a dual escrow system, ensuring that all available non-fungible assets are backed by escrowed fungibles and vice versa.
 
 ## Swapping
 

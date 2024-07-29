@@ -18,7 +18,7 @@ await writeData(umi, {
   inscriptionMetadataAccount,
   authority,
   value: Buffer.from(
-    '{"description": "A bread! But on-chain!", "external_url": "https://breadheads.io"}'
+    '{"description": "A bread! But onchain!", "external_url": "https://breadheads.io"}'
   ),
   associatedTag: null,
   offset: 0,

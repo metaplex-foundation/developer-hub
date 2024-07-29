@@ -1,14 +1,14 @@
 ---
 title: Fetching Assets
 metaTitle: Token Metadata - Fetching Assets
-description: Learn how to fetch the various on-chain accounts of your assets on Token Metadata
+description: Learn how to fetch the various onchain accounts of your assets on Token Metadata
 ---
 
-Now that we know how to create and mint the various on-chain accounts of our assets, let's learn how to fetch them. {% .lead %}
+Now that we know how to create and mint the various onchain accounts of our assets, let's learn how to fetch them. {% .lead %}
 
 ## Digital Assets
 
-As mentioned in [the previous page](/token-metadata/mint#creating-accounts), an asset — fungible or not — requires multiple on-chain accounts to be created. Depending on the Token Standard of the asset, some accounts may not be required. Here's a quick overview of these accounts:
+As mentioned in [the previous page](/token-metadata/mint#creating-accounts), an asset — fungible or not — requires multiple onchain accounts to be created. Depending on the Token Standard of the asset, some accounts may not be required. Here's a quick overview of these accounts:
 
 - **Mint** account (from the SPL Token program): It defines the core properties of the underlying SPL token. This is the entry point to any asset as all other accounts derive from it.
 - **Metadata** account: It provides additional data and features to the underlying SPL token.
@@ -145,7 +145,7 @@ const assets = await fetchAllDigitalAssetByUpdateAuthority(umi, owner)
 
 ## Digital Assets With Token
 
-Note that the **Digital Asset** data structure mentioned above does not provide any information about the owner of the asset. This first definition only focuses on the on-chain accounts that are required regardless of their owners. However, in order to provide a more complete picture of an asset, we may also need to know who owns it. This is where the **Digital Asset With Token** data structure comes in. It is an extension of the Digital Asset data structure that also includes the following accounts:
+Note that the **Digital Asset** data structure mentioned above does not provide any information about the owner of the asset. This first definition only focuses on the onchain accounts that are required regardless of their owners. However, in order to provide a more complete picture of an asset, we may also need to know who owns it. This is where the **Digital Asset With Token** data structure comes in. It is an extension of the Digital Asset data structure that also includes the following accounts:
 
 - **Token** account (from the SPL Token program): It defines the relationship between a **Mint** account and its owner. It stores important data such as the amount of tokens owned by the owner. In the case of NFTs, the amount is always 1.
 - **Token Record** account (for PNFTs only): It defines additional token-related information for [Programmable Non-Fungibles](/token-metadata/pnfts) such as its current [Token Delegate](/token-metadata/delegates#token-delegates) and its role.

@@ -4,7 +4,7 @@ metaTitle: Metaplex — Developer Tools
 description: An overview of Metaplex's developer tools.
 ---
 
-On top of on-chain programs, Metaplex offers a variety of developer tools that can be used to create and maintain your own Solana programs.
+On top of onchain programs, Metaplex offers a variety of developer tools that can be used to create and maintain your own Solana programs.
 
 - [**Umi**](/umi): A JavaScript framework to build Solana clients.
 - [**Kinobi**](https://github.com/metaplex-foundation/kinobi): A superset of the IDL spec that allows us to generate program clients.

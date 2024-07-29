@@ -4,7 +4,7 @@ metaTitle: Bubblegum - Fetching Compressed NFTs
 description: Learn how to fetch compressed NFTs on Bubblegum
 ---
 
-As mentioned in the [Overview](/bubblegum#read-api) page, Compressed NFTs are not stored inside on-chain accounts like regular NFTs but, instead, are logged in the transactions that created and updated them. {% .lead %}
+As mentioned in the [Overview](/bubblegum#read-api) page, Compressed NFTs are not stored inside onchain accounts like regular NFTs but, instead, are logged in the transactions that created and updated them. {% .lead %}
 
 As such, a special indexer was created to facilitate the retrieval of Compressed NFTs. This indexed data is made available through an extension of the Solana RPC methods which we call the **Metaplex DAS API**. In fact, the DAS API allows us to fetch any **Digital Asset**. This can be a Compressed NFT, a regular NFT, or even a Fungible Asset.
 

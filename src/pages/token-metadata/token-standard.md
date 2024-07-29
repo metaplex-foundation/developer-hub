@@ -141,7 +141,7 @@ These are the "standard" non-fungible tokens the community is already familiar w
 
     // @deprecated
     // Do not use - may be removed in a future release.
-    // Use on-chain data instead.
+    // Use onchain data instead.
     "collection": {
       "name": "Solflare X NFT",
       "family": "Solflare"
@@ -149,7 +149,7 @@ These are the "standard" non-fungible tokens the community is already familiar w
 
     // @deprecated
     // Do not use - may be removed in a future release.
-    // Use on-chain data instead.
+    // Use onchain data instead.
     "creators": [
       {
         "address": "xEtQ9Fpv62qdc1GYfpNReMasVTe9YW5bHJwfVKqo72u",

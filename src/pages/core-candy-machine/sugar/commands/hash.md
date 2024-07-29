@@ -28,6 +28,6 @@ sugar hash --compare 44oZ3goi9ivakeUnbjWbWJpvdgcWCrsi --cache my_custom_cache.js
 
 {% callout %}
 
-After updating the hash value, you will need to update your Candy Machine configuration so that the new value is on-chain using the `update` command.
+After updating the hash value, you will need to update your Candy Machine configuration so that the new value is onchain using the `update` command.
 
 {% /callout %}

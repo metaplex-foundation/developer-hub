@@ -1,7 +1,7 @@
 ---
 title: Protocol Fees
 metaTitle: Metaplex — Protocol Fees
-description: A details of the on-chain fees for Metaplex's products.
+description: A details of the onchain fees for Metaplex's products.
 ---
 
 The Metaplex Protocol currently includes the following fees:

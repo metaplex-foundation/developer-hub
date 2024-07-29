@@ -6,13 +6,13 @@ description: How to use Metaplex Fusion.
 
 ## What is Fusion?
 
-Fusion is Metaplex's answer for composable NFTs. Fusion is itself a composition of several Metaplex programs that enable fully dynamic NFTs to be created by projects, artists, or collectors. At the contract level, Fusion is powered by Trifle which manages the on-chain tracking and rule-based fuse/defuse operations of an NFT.
+Fusion is Metaplex's answer for composable NFTs. Fusion is itself a composition of several Metaplex programs that enable fully dynamic NFTs to be created by projects, artists, or collectors. At the contract level, Fusion is powered by Trifle which manages the onchain tracking and rule-based fuse/defuse operations of an NFT.
 
 ## Steps for Setup
 
 ### Create a parent NFT
 
-Fusion is structured as a single NFT (the Fusion Parent) that owns all of the attributes it is composed of. The Fusion Parent will dynamically have its Metadata and Image re-rendered to reflect the layering of all of the Attribute Tokens tracked in its on-chain Trifle account. To enable seamless recomposition of the metadata, a static URI is created using a deterministic format.
+Fusion is structured as a single NFT (the Fusion Parent) that owns all of the attributes it is composed of. The Fusion Parent will dynamically have its Metadata and Image re-rendered to reflect the layering of all of the Attribute Tokens tracked in its onchain Trifle account. To enable seamless recomposition of the metadata, a static URI is created using a deterministic format.
 
 `https://shdw-drive.genesysgo.net/<METAPLEX_BUCKET>/<TRIFLE_ADDRESS>`
 

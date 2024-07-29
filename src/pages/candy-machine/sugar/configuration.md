@@ -103,7 +103,7 @@ The `creators` setting allows you to specify up to 4 addresses and their percent
 
 {% callout %}
 
-While the metadata on-chain stores up to 5 creators, the Candy Machine is set as one of the creators. As a result, there is a limit of 4 creators at most.
+While the metadata onchain stores up to 5 creators, the Candy Machine is set as one of the creators. As a result, there is a limit of 4 creators at most.
 
 The sum of the share values must add up to 100, otherwise an error will be generated.
 

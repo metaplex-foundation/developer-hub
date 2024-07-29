@@ -15,7 +15,7 @@ Please note that this program is marked as deprecated and is no longer actively 
 Metaplex's Fixed-Price Sale program is a Solana program for brands to create membership NFTs that they can distribute to a large audience. This NFT can be used for gating access to certain things (games, events, launches, etc.) at a future date.
 Like its name, all NFTs from the program are sold at a fixed price by minting [print editions](/token-metadata/print) from a single master edition NFT. As a result, all the NFTs will have the same metadata (apart from the edition number).
 
-The Fixed-Price Sale program also supports gating by collection. So, creators can gate sales by collection NFT, meaning that only holders of an on-chain collection are able to purchase NFTs. You can also have multiple stages of the sale: gated and not gated. For example, you can create a market with total duration of 5 hours with the first 3 being gated, so only holders can can buy an NFT.
+The Fixed-Price Sale program also supports gating by collection. So, creators can gate sales by collection NFT, meaning that only holders of an onchain collection are able to purchase NFTs. You can also have multiple stages of the sale: gated and not gated. For example, you can create a market with total duration of 5 hours with the first 3 being gated, so only holders can can buy an NFT.
 
 🔗 **Helpful links:**
 

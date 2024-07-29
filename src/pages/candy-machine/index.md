@@ -4,7 +4,7 @@ metaTitle: Candy Machine - Overview
 description: Provides a high-level overview of Candy Machines.
 ---
 
-The Metaplex Protocol **Candy Machine** is the leading minting and distribution program for fair NFT collection launches on Solana. Much like its name suggests, you can think of a Candy Machine as a temporary structure which is first loaded by creators and then unloaded by buyers. It allows creators to bring their digital assets on-chain in a secure and customisable way. {% .lead %}
+The Metaplex Protocol **Candy Machine** is the leading minting and distribution program for fair NFT collection launches on Solana. Much like its name suggests, you can think of a Candy Machine as a temporary structure which is first loaded by creators and then unloaded by buyers. It allows creators to bring their digital assets onchain in a secure and customisable way. {% .lead %}
 
 The name refers to the vending machines that dispense candy for coins via a mechanical crank. In this case the candy are NFTs and the payment is SOL or a SPL token.
 
@@ -76,7 +76,7 @@ However, we still don’t know which NFTs should be minted from that Candy Machi
 Each item is composed of two parameters:
 
 - A `name`: The name of the NFT.
-- A `uri`: The URI pointing to the [JSON metadata](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard) of the NFT. This implies that the JSON metadata has already been uploaded via either an on-chain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider.
+- A `uri`: The URI pointing to the [JSON metadata](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard) of the NFT. This implies that the JSON metadata has already been uploaded via either an onchain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider.
 
 All other parameters are shared between all NFTs and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/candy-machine/insert-items) for more details.
 

@@ -54,14 +54,14 @@ However, contrary to the Mint Authority, we actually make use of that authority 
 
 The [`FreezeDelegatedAccount`](./instructions#freeze-the-token-account-as-a-delegate) and [`ThawDelegatedAccount`](./instructions#thaw-the-token-account-as-a-delegate) instructions are the only instructions that make use of the Freeze Authority. They allow the Delegate of a Token account to freeze (and thaw) that Token account to make them what we call "**Non-Transferable NFTs**". This enables a variety of use-cases such as preventing someone from selling an NFT while it is listed in an escrowless marketplace.
 
-## Why does the Metadata account have both on-chain and off-chain data?
+## Why does the Metadata account have both onchain and off-chain data?
 
-The [Metadata account](./accounts#metadata) contains on-chain data, yet it also has a `URI` attribute which points to an off-chain JSON file which provides additional data. So why is that? Can't we just store everything on-chain? Well, there are several issues with that:
+The [Metadata account](./accounts#metadata) contains onchain data, yet it also has a `URI` attribute which points to an off-chain JSON file which provides additional data. So why is that? Can't we just store everything onchain? Well, there are several issues with that:
 
-- We have to pay rent to store data on-chain. If we had to store everything within the Metadata account, which may include long texts such as the description of an NFT, it would require a lot more bytes and minting an NFT would suddenly be a lot more expensive.
-- On-chain data is much less flexible. Once an account is created using a certain structure, it cannot easily be changed. Therefore, if we had to store everything on-chain, the NFT standard would be a lot harder to evolve with the demands of the ecosystem.
+- We have to pay rent to store data onchain. If we had to store everything within the Metadata account, which may include long texts such as the description of an NFT, it would require a lot more bytes and minting an NFT would suddenly be a lot more expensive.
+- Onchain data is much less flexible. Once an account is created using a certain structure, it cannot easily be changed. Therefore, if we had to store everything onchain, the NFT standard would be a lot harder to evolve with the demands of the ecosystem.
 
-Therefore, splitting the data into on-chain and off-chain data allows us to get the best of both worlds where on-chain data can be used by the program **to create guarantees and expectations for its users** whereas off-chain data can be used **to provide standardized yet flexible information**.
+Therefore, splitting the data into onchain and off-chain data allows us to get the best of both worlds where onchain data can be used by the program **to create guarantees and expectations for its users** whereas off-chain data can be used **to provide standardized yet flexible information**.
 
 ## Are there any costs to using Token Metadata?
 
