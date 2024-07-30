@@ -7,7 +7,7 @@ created: '06-16-2024'
 updated: '06-18-2024'
 ---
 
-This is an intial guide on how to create a next-gen Digital Asset Nft (Core Asset) on the Solana blockchain using the Metaplex Mpl Core protocol. Mpl Core Assets provide the next wave of NFT projects on Solana with greater creativity and a broad dynamic experiance for both creators and owners with Mpl Core's simplied design and unique plugin system.
+This is an intial guide on how to create a next-gen Digital Asset NFT (Core Asset) on the Solana blockchain using the Metaplex MPL Core protocol. MPL Core Assets provide the next wave of NFT projects on Solana with greater creativity and a broad dynamic experiance for both creators and owners with MPL Core's simplied design and unique plugin system.
 
 ## Prerequisite
 
@@ -16,7 +16,7 @@ This is an intial guide on how to create a next-gen Digital Asset Nft (Core Asse
 
 ## Initial Setup
 
-This guide will run through create of an Nft Core Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
+This guide will run through create of an NFT Core Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
 
 ### Initializing
 
@@ -126,13 +126,13 @@ const walletFile = const imageFile = fs.readFileSync(
   )
 ```
 
-## Creating the Nft
+## Creating the NFT
 
 ### Uploading the Image
 
-The first thing we need to do is to an image that represents the Nft and makes it recognisable. This can be in the form of jpeg, png or gif.
+The first thing we need to do is to an image that represents the NFT and makes it recognisable. This can be in the form of jpeg, png or gif.
 
-Umi comes with downloadable storage plugins that allow you to upload to storage solutions such Arweave, NftStore, AWS, and ShdwDrive. At start of this guide we had installed the `irsyUploader()` plugin which stores content on the Arweave blockchain so we'll stick with using that.
+Umi comes with downloadable storage plugins that allow you to upload to storage solutions such Arweave, NftStorage, AWS, and ShdwDrive. At start of this guide we had installed the `irsyUploader()` plugin which stores content on the Arweave blockchain so we'll stick with using that.
 
 {% callout title="Local script/Node.js" %}
 This example is using a localscript/node.js approach using Irys to upload to Arweave. If you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
@@ -174,8 +174,8 @@ the standard for offchain metadata for a funigble token is as follows
 
 ```json
 {
-  "name": "My Nft",
-  "description": "This is an Nft on Solana",
+  "name": "My NFT",
+  "description": "This is an NFT on Solana",
   "image": "https://arweave.net/my-image",
   "animation_url": "https://arweave.net/my-animation",
   "external_url": "https://example.com",
@@ -318,8 +318,8 @@ const createNft = async () => {
   //
 
   const metadata = {
-    name: 'My Nft',
-    description: 'This is an Nft on Solana',
+    name: 'My NFT',
+    description: 'This is an NFT on Solana',
     image: imageUri[0],
     external_url: 'https://example.com',
     attributes: [
@@ -350,15 +350,15 @@ const createNft = async () => {
   })
 
   //
-  // ** Creating the Nft **
+  // ** Creating the NFT **
   //
 
-  // We generate a signer for the Nft
+  // We generate a signer for the NFT
   const nftSigner = generateSigner(umi)
 
   const tx = await create(umi, {
     asset: nftSigner,
-    name: 'My Nft',
+    name: 'My NFT',
     uri: metadataUri,
   }).sendAndConfirm(umi)
 
