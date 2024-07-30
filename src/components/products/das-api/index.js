@@ -27,7 +27,6 @@ export const das = {
           links: [
             { title: 'Overview', href: '/das-api' },
             { title: 'Getting started', href: '/das-api/getting-started' },
-            { title: 'Methods', href: '/das-api/methods' },
             { title: 'DAS API RPC Providers', href: '/rpc-providers' },
           ],
         },
@@ -44,9 +43,29 @@ export const das = {
             { title: 'Search Asset', href: '/das-api/methods/search-assets' },
           ],
         },
+        {
+          title: 'Core Extension',
+          links: [
+            { title: 'Extension Overview', href: '/das-api/core-extension' },
+            { title: 'Get Core Asset', href: '/das-api/core-extension/methods/get-asset' },
+            { title: 'Get Core Collection', href: '/das-api/core-extension/methods/get-collection' },
+            { title: 'Get Core Assets By Authority', href: '/das-api/core-extension/methods/get-assets-by-authority' },
+            { title: 'Get Core Assets By Collection', href: '/das-api/core-extension/methods/get-assets-by-collection' },
+            { title: 'Get Core Assets By Owner', href: '/das-api/core-extension/methods/get-assets-by-owner' },
+            { title: 'Search Core Assets', href: '/das-api/core-extension/methods/search-assets' },
+            { title: 'Search Core Collections', href: '/das-api/core-extension/methods/search-collections' },
+            { title: 'Plugin Derivation', href: '/das-api/core-extension/plugin-derivation' },
+            { title: 'Type Conversion', href: '/das-api/core-extension/convert-das-asset-to-core' },
+          ],
+        },
       ],
     },
     {
+      ...referencesSection('das-api'),
+      href: `https://digital-asset-standard-api.typedoc.metaplex.com/`,
+      target: '_blank',
+    },
+        {
       ...referencesSection('das-api'),
       href: `https://digital-asset-standard-api.typedoc.metaplex.com/`,
       target: '_blank',

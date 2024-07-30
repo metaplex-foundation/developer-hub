@@ -4,7 +4,7 @@ import { HeroCode } from '@/components/HeroCode'
 const codeProps = {
   tabs: [
     { name: 'metadata.rs', isActive: true },
-    { name: 'offchain-metadata.json', isActive: false },
+    { name: 'off-chain-metadata.json', isActive: false },
   ],
   language: 'rust',
   code: `pub struct Asset {

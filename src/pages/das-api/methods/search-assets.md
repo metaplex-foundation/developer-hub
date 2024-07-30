@@ -38,7 +38,7 @@ Return the list of assets given a search criteria.
 
 ## Example
 
-{% dialect-switcher title="getAssetByOwner Example" %}
+{% dialect-switcher title="searchAssets Example" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 

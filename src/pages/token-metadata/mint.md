@@ -4,14 +4,14 @@ metaTitle: Token Metadata - Minting Assets
 description: Learn how to mint NFTs, SFTs and Programmable NFTs (a.k.a. Assets) on Token Metadata
 ---
 
-As we discussed in the [Token Metadata overview](/token-metadata), digital assets on Solana are composed of several on-chain accounts and off-chain data describing the token. On this page, we'll go over the process of minting these assets. {% .lead %}
+As we discussed in the [Token Metadata overview](/token-metadata), digital assets on Solana are composed of several onchain accounts and off-chain data describing the token. On this page, we'll go over the process of minting these assets. {% .lead %}
 
 ## The minting process
 
 Whether we want to mint a Fungible, Semi-Fungible or Non-Fungible asset, the overall process is the same:
 
 1. **Upload off-chain data.** First, we must ensure our off-chain data is ready. This means we must have a JSON file stored somewhere that describes our asset. It doesn't matter how or where that JSON file is stored, as long as it's accessible via a **URI**.
-2. **Create on-chain accounts.** Then, we must create the on-chain accounts that will hold our asset's data. Which exact accounts will be created depends on the **Token Standard** of our asset, but in all cases, a **Metadata** account will be created and will store the **URI** of our off-chain data.
+2. **Create onchain accounts.** Then, we must create the onchain accounts that will hold our asset's data. Which exact accounts will be created depends on the **Token Standard** of our asset, but in all cases, a **Metadata** account will be created and will store the **URI** of our off-chain data.
 3. **Mint tokens.** Finally, we must mint the tokens associated with all these accounts. For Non-Fungible assets, that simply means minting from 0 to 1, since Non-Fungibility forbids us to have a supply greater than 1. For Fungible or Semi-Fungible assets, we may mint however many tokens we want.
 
 Let's dig into these steps in more detail, whilst providing concrete code examples.
@@ -60,7 +60,7 @@ The next steps show how to create accounts and mint the tokens in two steps. At 
 
 ## Creating accounts
 
-To create all the on-chain accounts required by the Token Standard of your choice, you may simply use the **Create V1** instruction. It will adapt to the requested Token Standard and create the right accounts accordingly.
+To create all the onchain accounts required by the Token Standard of your choice, you may simply use the **Create V1** instruction. It will adapt to the requested Token Standard and create the right accounts accordingly.
 
 For instance, `NonFungible` assets will have a `Metadata` account and a `MasterEdition` account created, whereas `Fungible` assets will only have a `Metadata` account created.
 
@@ -141,7 +141,7 @@ This instruction accepts a variety of parameters and our SDKs do their best to p
 - **Name**, **URI**, **Seller Fee Basis Points**, **Creators**, etc.: The data of the asset to store on the **Metadata** account.
 - **Token Standard**: The Token Standard of the asset.
 
-{% dialect-switcher title="Create on-chain Accounts" %}
+{% dialect-switcher title="Create onchain Accounts" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -253,7 +253,7 @@ create_cpi.invoke();
 
 ## Minting Tokens
 
-Once all on-chain accounts are created for our asset, we can mint tokens for it. If the asset is Non-Fungible we will simply mint its one and only token, otherwise we can mint as many tokens as we want. Note that a Non-Fungible asset is only valid once its unique token has been minted so it is a mandatory step for that Token Standard.
+Once all onchain accounts are created for our asset, we can mint tokens for it. If the asset is Non-Fungible we will simply mint its one and only token, otherwise we can mint as many tokens as we want. Note that a Non-Fungible asset is only valid once its unique token has been minted so it is a mandatory step for that Token Standard.
 
 We can use the **Mint V1** instruction of the Token Metadata program to achieve this. It requires the following parameters:
 

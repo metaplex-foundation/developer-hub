@@ -32,7 +32,7 @@ A Hydra Wallet's lifecycle has 3 phases:
 2. Member Addition - Add Members and specify their share
 3. Distribution - Distribute funds to the Members according to their share
 
-The Distribution phase is an on-chain operation that's called on a per-Member basis. We'll get into all the details of
+The Distribution phase is an onchain operation that's called on a per-Member basis. We'll get into all the details of
 this later, but Hydra will track all distributions and ensure that Members always get their fair share of the funds. As
 new funds flow into the Hydra Wallet, members (or other automated processes) will call the Distribution operation to
 disburse the appropriate share of funds to the given Member.

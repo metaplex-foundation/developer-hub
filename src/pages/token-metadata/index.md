@@ -104,11 +104,11 @@ This is why the Token Metadata program offers a **Metadata Account** that attach
 
 That Metadata Account holds a lot of valuable information that can be used throughout the ecosystem. For instance, it maintains a list of creators for the token. Each creator has a `Verified` attribute that, when `True`, guarantees the token was signed by that creator. Each creator also has a `Share` attribute that can be used by marketplaces to distribute royalties.
 
-By attaching more data to the Mint Account, **the Token Metadata program is able to make Digital Assets** of regular on-chain Tokens.
+By attaching more data to the Mint Account, **the Token Metadata program is able to make Digital Assets** of regular onchain Tokens.
 
 ## A JSON standard
 
-One important attribute of the Metadata Account is the `URI` attribute that points to a JSON file off-chain. This is used to safely provide additional data whilst not being constrained by the fees involved in storing on-chain data. That JSON file [follows a certain standard](/token-metadata/token-standard) that anyone can use to find useful information on tokens.
+One important attribute of the Metadata Account is the `URI` attribute that points to a JSON file off-chain. This is used to safely provide additional data whilst not being constrained by the fees involved in storing onchain data. That JSON file [follows a certain standard](/token-metadata/token-standard) that anyone can use to find useful information on tokens.
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}

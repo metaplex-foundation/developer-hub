@@ -4,7 +4,7 @@ metaTitle: Core Candy Machine - Overview
 description: Provides a high-level overview of Core Candy Machines.
 ---
 
-The Metaplex Protocol **Candy Machine** is the leading minting and distribution program for fair NFT collection launches on Solana. With the introduction of the `Metaplex Core Protocol` simplifying the NFT process on Solana it was only fitting for a Core edition of the Candy Machine to come to the masses. Much like its name suggests, you can think of a Candy Machine as a temporary structure which is first loaded by creators and then unloaded by buyers. It allows creators to bring their digital assets on-chain in a secure and customisable way. {% .lead %}
+The Metaplex Protocol **Candy Machine** is the leading minting and distribution program for fair NFT collection launches on Solana. With the introduction of the `Metaplex Core Protocol` simplifying the NFT process on Solana it was only fitting for a Core edition of the Candy Machine to come to the masses. Much like its name suggests, you can think of a Candy Machine as a temporary structure which is first loaded by creators and then unloaded by buyers. It allows creators to bring their digital assets onchain in a secure and customisable way. {% .lead %}
 
 The name refers to the vending machines that dispense candy for coins via a mechanical crank. In this case the candy are NFTs and the payment is SOL or a SPL token.
 

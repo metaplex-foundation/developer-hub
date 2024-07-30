@@ -72,7 +72,7 @@ You can either implement this manually via their own [SDK](https://docs.irys.xyz
 
 #### nftStorage
 
-_"Preserve your NFTs with our low-cost, easy-to-use solution. We aim to ensure verifiable long-term storage, powered by smart contracts and backed by our soon-to-be on-chain endowment for ultimate transparency." - [nftStorage](https://nft.storage/)_
+_"Preserve your NFTs with our low-cost, easy-to-use solution. We aim to ensure verifiable long-term storage, powered by smart contracts and backed by our soon-to-be onchain endowment for ultimate transparency." - [nftStorage](https://nft.storage/)_
 
 nftStorage uploads your files to the IPFS (InterPlanetary File System) network
 

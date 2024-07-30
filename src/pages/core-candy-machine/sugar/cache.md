@@ -71,7 +71,7 @@ Sugar `upload` will only upload assets that do not have the correspondent "link"
 
 only the metadata file will be uploaded, since the image link is alredy present.
 
-Sugar stores the "hash" of both image and metadata files, so when the hash value changes as a result of chaging the corresponding file, running `sugar upload` will upload the new file. At this point, the `"onChain"` value will be set to `false` and the change will only be effective (be on-chain) after running `sugar deploy`.
+Sugar stores the "hash" of both image and metadata files, so when the hash value changes as a result of chaging the corresponding file, running `sugar upload` will upload the new file. At this point, the `"onChain"` value will be set to `false` and the change will only be effective (be onchain) after running `sugar deploy`.
 
 ## "Advance" cache management
 
