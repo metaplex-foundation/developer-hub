@@ -69,7 +69,7 @@ Program feature set includes:
 - Data Fetching
 - Minting
 - Updating
-- Transfering
+- Transferring
 - Burning
 - Delegating
 - Collection Management

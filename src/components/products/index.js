@@ -15,6 +15,7 @@ import { coreCandyMachine } from './coreCandyMachine'
 import { legacyDocumentation } from './legacyDocumentation'
 import { sugar } from './sugar'
 import { mplHybrid } from './mpl-hybrid'
+import { guides } from './guides'
 
 export const productCategories = ['Create', 'Commerce', 'Utility', 'Dev Tools']
 
@@ -35,5 +36,6 @@ export const products = [
   coreCandyMachine,
   legacyDocumentation,
   sugar,
-  mplHybrid
+  mplHybrid,
+  guides
 ].sort((a, b) => a.name.localeCompare(b.name))

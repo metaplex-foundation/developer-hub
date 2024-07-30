@@ -25,18 +25,18 @@ export function DialectSwitcher({ children, title, dialects }) {
     >
       <div className="totem">
         <div className="not-prose flex flex-wrap items-center gap-4 px-4 py-3">
-          {title && <p className="text-slate-400">{title}</p>}
+          {title && <p className="text-neutral-400">{title}</p>}
           <Listbox
             value={localDialect}
             onChange={setDialect}
             as="div"
             className="relative ml-auto"
           >
-            <Listbox.Button className="flex items-center gap-1 rounded-[0.625rem] bg-slate-800/60 px-2 py-0.5 text-sm text-slate-400 dark:bg-slate-900/40">
+            <Listbox.Button className="flex items-center gap-1 rounded-[0.625rem] bg-neutral-800/60 px-2 py-0.5 text-sm text-neutral-400 dark:bg-neutral-900/40">
               <span>{localDialectTitle}</span>
               <Icon icon="SolidChevronUpDown" className="h-4 w-4" />
             </Listbox.Button>
-            <Listbox.Options className="absolute right-0 top-full mt-2 w-max space-y-1 rounded-xl bg-white p-3 text-sm font-medium shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
+            <Listbox.Options className="absolute right-0 top-full z-50 mt-2 w-max space-y-1 rounded-xl bg-white p-3 text-sm font-medium shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-neutral-800 dark:ring-white/5">
               {dialects.map((dialect) => (
                 <Listbox.Option
                   key={dialect.id}
@@ -46,10 +46,10 @@ export function DialectSwitcher({ children, title, dialects }) {
                       'flex cursor-pointer select-none items-center rounded-[0.625rem] px-2 py-1',
                       {
                         'text-accent-500': selected,
-                        'text-slate-900 dark:text-white': active && !selected,
-                        'text-slate-700 dark:text-slate-400':
+                        'text-neutral-900 dark:text-white': active && !selected,
+                        'text-neutral-700 dark:text-neutral-400':
                           !active && !selected,
-                        'bg-slate-100 dark:bg-slate-900/40': active,
+                        'bg-neutral-100 dark:bg-neutral-900/40': active,
                       }
                     )
                   }

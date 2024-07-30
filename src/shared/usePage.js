@@ -14,6 +14,8 @@ export function usePage(pageProps) {
     title,
     metaTitle: pageProps.markdoc?.frontmatter.metaTitle ?? title,
     description: pageProps.markdoc?.frontmatter.description,
+    created: pageProps.markdoc?.frontmatter.created ?? null,
+    updated: pageProps.markdoc?.frontmatter.updated ?? null,
     pathname,
     product,
     activeHero,

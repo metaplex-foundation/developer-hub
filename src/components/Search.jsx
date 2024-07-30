@@ -22,7 +22,7 @@ function SearchIcon(props) {
   )
 }
 
-export function Search() {
+export function Search({iconOnly}) {
   let [isOpen, setIsOpen] = useState(false)
   let [modifierKey, setModifierKey] = useState()
 
@@ -46,14 +46,15 @@ export function Search() {
     <>
       <button
         type="button"
-        className='flex justify-center items-center'
+        className={`flex ${iconOnly ? "": "border border-neutral-300 dark:border-neutral-800 rounded-lg p-2 max-w-4xl w-full justify-start items-center "}`}
         onClick={onOpen}
       >
         <SearchIcon className="h-7 w-7 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 lg:group-hover:fill-slate-400" />
-        {/* <span className="sr-only lg:not-sr-only lg:ml-2 lg:text-slate-500 lg:dark:text-slate-400">
+        
+        <span className="sr-only lg:not-sr-only lg:ml-2 lg:text-slate-500 lg:dark:text-slate-400">
           Search docs
         </span>
-        {modifierKey && (
+        {/* {modifierKey && (
           <kbd className="ml-auto hidden font-medium text-slate-400 dark:text-slate-500 lg:block">
             <kbd className="font-sans">{modifierKey}</kbd>
             <kbd className="font-sans">K</kbd>
