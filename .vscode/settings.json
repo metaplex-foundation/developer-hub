@@ -1,11 +1,14 @@
 {
     "cSpell.words": [
+        "bincode",
         "blockhash",
         "callout",
+        "Datas",
         "hashlist",
         "Hookable",
         "Keypair",
         "metaplex",
+        "msgpack",
         "nonblocking",
         "Preconfigured",
         "println",
