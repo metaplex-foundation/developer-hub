@@ -1,7 +1,7 @@
 ---
-title: How to Create an Spl Token On Solana
-metaTitle: How to Create an Spl Token On Solana
-description: Learn how to create an Spl Token on the Solana blockchain with Metaplex packages.
+title: How to Create an SPL Token On Solana
+metaTitle: How to Create an SPL Token On Solana
+description: Learn how to create an SPL Token on the Solana blockchain with Metaplex packages.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-21-2024'
@@ -26,7 +26,7 @@ npm init
 
 ### Required Packages
 
-Install the required pacakges for this guide.
+Install the required packages for this guide.
 
 {% packagesUsed packages=["umi", "umiDefaults" ,"tokenMetadata", "@metaplex-foundation/umi-uploader-irys", "toolbox"] type="npm" /%}
 
