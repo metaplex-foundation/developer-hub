@@ -42,7 +42,7 @@ _Learn more about it [here](/core/plugins/attribute)_
 
 ### The Smart Contract Logic
 
-For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement. 
+For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since these are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement. 
 
 _Both the Stake and Unstake functions utilize, differently, the plugins introduced previously_.
 
