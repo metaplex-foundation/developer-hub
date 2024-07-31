@@ -56,6 +56,28 @@ Before diving into the instructions, let’s spend some time talking about the a
 
 Now that we understand the logic behind our smart contract, **it’s time to dive into the code and bring everything together**!
 
+### Dependencies and Imports
+
+Before writing our smart contracts, let's look at what crate we need and what function from them to make sure our smart contract works! 
+
+In this example, we primarily use the mpl_core crate with the [anchor](/core/using-core-in-anchor) feature enabled:
+
+```toml
+mpl-core = { version = "x.x.x", features = ["anchor"] } 
+```
+
+And the different functions from that crate are as follow:
+
+```rust
+use mpl_core::{
+    ID as CORE_PROGRAM_ID,
+    fetch_plugin,
+    accounts::{BaseAssetV1, BaseCollectionV1}, 
+    instructions::{AddPluginV1CpiBuilder, RemovePluginV1CpiBuilder, UpdatePluginV1CpiBuilder}, 
+    types::{Attribute, Attributes, FreezeDelegate, Plugin, PluginAuthority, PluginType, UpdateAuthority}, 
+};
+```
+
 ### Anchor Overview
 
 In this guide, we’ll use the Anchor framework, but you can also implement it using a native program. Learn more about the Anchor framework here: [Anchor Framework](https://book.anchor-lang.com/introduction/what_is_anchor.html).

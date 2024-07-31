@@ -52,6 +52,31 @@ Before diving into the instructions, let’s spend some time talking about the a
 
 Now that we understand the logic behind our program, **it’s time to dive into the code and bring everything together**!
 
+### Dependencies and Imports
+
+Before writing our program, let's look at what package we need and what function from them to make sure our program works! 
+
+Let's look at the different packages used for this example:
+
+```json
+"dependencies": {
+    "@metaplex-foundation/mpl-core": "1.1.0-alpha.0",
+    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
+    "bs58": "^5.0.0",
+    "typescript": "^5.4.5"
+}
+```
+
+And the different functions from those packages are as follow:
+
+```typescript
+import { createSignerFromKeypair, signerIdentity, publicKey, transactionBuilder, Transaction } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { addPlugin, updatePlugin, fetchAsset, removePlugin } from '@metaplex-foundation/mpl-core'
+import { base58 } from '@metaplex-foundation/umi/serializers';
+```
+
 ### Umi and Core SDK Overview
 
 In this guide, we’ll use both **Umi** and the **Core SDK** to create all necessary instructions. 
@@ -62,10 +87,6 @@ _For more information, you can find an overview [here](/umi/getting-started)_
 
 **The basic Umi setup for this example will look like this**:
 ```typescript
-import { generateSigner, createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import wallet from "../wallet.json";
-
 const umi = createUmi("https://api.devnet.solana.com", "finalized")
 
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
