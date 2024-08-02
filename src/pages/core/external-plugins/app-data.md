@@ -497,9 +497,8 @@ Because the **Binary** schema is arbitrary data then deserialization will be dep
 {% dialect-switcher title="Deserializing Binary" %}
 {% dialect title="JavaScript" id="js" %}
 ```js
-As the binary data is arbitrary you will need to include your own deserializer to
-parse the data into a usable format your app/website will understand.
-
+// As the binary data is arbitrary you will need to include your own deserializer to
+// parse the data into a usable format your app/website will understand.
 ```
 
 {% /dialect %}
