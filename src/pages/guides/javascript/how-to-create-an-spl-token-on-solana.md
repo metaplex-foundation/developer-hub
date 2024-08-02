@@ -116,7 +116,7 @@ await umi.rpc.airdrop(umi.identity.publicKey, sol(1));
 
 The first thing we need to do is to an image that represents the token and makes it recognizable. This can be in the form of jpeg, png or gif.
 
-Umi has plugins for storing files on Arweave, NftStore, AWS, and ShdwDrive. You can download these plugins to upload files. At start of this guide we had installed the irsyUploader() plugin which stores content on the Arweave blockchain so we'll stick with using that.
+Umi has plugins for storing files on Arweave, NftStore, AWS, and ShdwDrive. You can download these plugins to upload files. At start of this guide we had installed the irysUploader() plugin which stores content on the Arweave blockchain so we'll stick with using that.
 
 {% callout title="Local script/Node.js" %}
 This example is using a local script/node.js approach using Irys to upload to Arweave. If you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
@@ -147,21 +147,6 @@ const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
 })
 
 console.log(imageUri[0])
-```
-
-### Uploading the Metadata
-
-Once we have a valid and working image URI we can start working on the metadata for our SPL Token.
-
-The standard for offchain metadata for a fungible token is as follows
-
-```json
-{
-  "name": "TOKEN_NAME",
-  "symbol": "TOKEN_SYMBOL",
-  "description": "TOKEN_DESC",
-  "image": "TOKEN_IMAGE_URL"
-}
 ```
 
 ### Uploading the Metadata
