@@ -4,7 +4,7 @@ metaTitle: Candy Machine - Sugar - withdraw
 description: withdraw command.
 ---
 
-When the mint from a Candy Machine is complete, it is possible to recover the funds used to pay rent for the data stored on-chain. You can initiate the withdrawal by running:
+When the mint from a Candy Machine is complete, it is possible to recover the funds used to pay rent for the data stored onchain. You can initiate the withdrawal by running:
 
 ```
 sugar withdraw --candy-machine <CANDY MACHINE ID>

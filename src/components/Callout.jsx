@@ -5,7 +5,7 @@ import { Icon } from '@/components/icons/dual-tone'
 const styles = {
   note: {
     container:
-      'bg-sky-50 dark:bg-slate-800/60 dark:ring-1 dark:ring-slate-300/10',
+      'bg-sky-50 dark:bg-neutral-800/60 dark:ring-1 dark:ring-neutral-300/10',
     title: 'text-sky-900 dark:text-sky-400',
     body: 'text-sky-800 [--tw-prose-underline:theme(colors.sky.400)] [--tw-prose-background:theme(colors.sky.50)] prose-a:text-sky-900 prose-code:text-sky-900 dark:text-slate-300 dark:prose-code:text-slate-300 dark:[--tw-prose-underline:theme(colors.accent.700)]',
   },

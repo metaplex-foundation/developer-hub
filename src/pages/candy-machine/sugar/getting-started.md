@@ -74,7 +74,7 @@ Within your project directory, use the `launch` command to start an interactive 
 sugar launch
 ```
 
-At the end of the execution of the launch command, a Candy Machine will be deployed on-chain. You can use the `mint` command to mint an NFT:
+At the end of the execution of the launch command, a Candy Machine will be deployed onchain. You can use the `mint` command to mint an NFT:
 
 ```bash
 sugar mint

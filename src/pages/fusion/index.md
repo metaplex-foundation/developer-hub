@@ -6,7 +6,7 @@ description: Provides a high-level overview of composable NFTs using Fusion.
 
 Fusion is an NFT composability feature powered by the Trifle Program. {% .lead %}
 
-The Trifle Program is built upon the Escrow extension of Token Metadata. It uses a Creator Owned Escrow, or COE, using a Trifle PDA as the creator and manager of the COE. Its purpose is to add on-chain tracking and composability around NFT ownership. Additionally, the ability to specify rules and effects around token ownership allows for complex ownership models to be implemented by creators.
+The Trifle Program is built upon the Escrow extension of Token Metadata. It uses a Creator Owned Escrow, or COE, using a Trifle PDA as the creator and manager of the COE. Its purpose is to add onchain tracking and composability around NFT ownership. Additionally, the ability to specify rules and effects around token ownership allows for complex ownership models to be implemented by creators.
 
 🔗 **Helpful links:**
 
@@ -25,7 +25,7 @@ The Constraint Model can be viewed as a set of Constraints, defined as slots. Ea
 
 ### Trifle
 
-The Trifle account is what tracks tokens owned by the COE on-chain. It also links to the Constraint Model being used. The Trifle account manages tokens as an internal HashMap which reflects the slot semantics of the Constraint Model.
+The Trifle account is what tracks tokens owned by the COE onchain. It also links to the Constraint Model being used. The Trifle account manages tokens as an internal HashMap which reflects the slot semantics of the Constraint Model.
 
 ## Instructions
 

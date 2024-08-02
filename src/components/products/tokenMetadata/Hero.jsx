@@ -4,7 +4,7 @@ import { HeroCode } from '@/components/HeroCode'
 const codeProps = {
   tabs: [
     { name: 'metadata.rs', isActive: true },
-    { name: 'offchain-metadata.json', isActive: false },
+    { name: 'off-chain-metadata.json', isActive: false },
   ],
   language: 'rust',
   code: `pub struct Metadata {
@@ -20,7 +20,10 @@ const codeProps = {
 
 export function Hero({ page }) {
   return (
-    <BaseHero page={page} subDescription="Create digital assets by adding Metadata to tokens.">
+    <BaseHero
+      page={page}
+      subDescription="Create digital assets by adding Metadata to tokens."
+    >
       <HeroCode {...codeProps}></HeroCode>
     </BaseHero>
   )

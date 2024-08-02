@@ -4,7 +4,7 @@ metaTitle: Token Metadata - Burning Assets
 description: Learn how to burn Assets on Token Metadata
 ---
 
-The owner of an asset can burn it using the **Burn** instruction of the Token Metadata program. This will close all possible accounts associated with the asset and return the various rent-exempt fees to the owner. This instruction accepts the following attributes:
+The owner of an asset can burn it using the **Burn** instruction of the Token Metadata program. This will close all possible accounts associated with the asset and transfer the various rent-exempt fees previously held in the closed accounts to the owner. This instruction accepts the following attributes:
 
 - **Authority**: The signer that authorizes the burn. Typically, this is the owner of the asset but note that certain delegated authorities can also burn assets on behalf of the owner as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
 - **Token Owner**: The public key of the current owner of the asset.

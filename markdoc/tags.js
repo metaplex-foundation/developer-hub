@@ -14,6 +14,7 @@ import {
 import {Seperator} from '@/components/Seperator'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
+import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 
 const tags = {
   callout: {
@@ -141,7 +142,14 @@ const tags = {
       h: { type: String },
     },
     selfClosing: true,
-  }
+  },
+  packagesUsed: {
+    render: PackagesUsed,
+    attributes: {
+      packages: { type: Array },
+      type: { type: String },
+    },
+  },
 }
 
 export default tags

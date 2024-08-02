@@ -12,7 +12,7 @@ export function TotemAccordion({ children, title }) {
     <Disclosure>
       {({ open }) => (
         <div>
-          <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 hover:bg-slate-800">
+          <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 hover:bg-neutral-800">
             {title}
             <Icon
               icon="ChevronRight"

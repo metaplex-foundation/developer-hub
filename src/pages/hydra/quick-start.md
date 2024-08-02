@@ -58,7 +58,7 @@ const { fanout, nativeAccount } = await fanoutSdk.initializeFanout({
 // fanout is your fanout config address
 // nativeAccount is your account address
 
-// Retrieve the On-chain Hydra Wallet
+// Retrieve the onchain Hydra Wallet
 const fanoutAccount = await fanoutSdk.fetch<Fanout>(
   fanout,
   Fanout

@@ -6,7 +6,7 @@ description: Learn how to create and fetch new Merkle Trees that can hold compre
 
 ## Introduction
 
-Whilst the data of Compressed NFTs is stored inside transactions and not on-chain accounts, we still need some on-chain accounts to keep track of the Merkle Tree and its configuration. As such, before we can start minting Compressed NFTs, we need to create two accounts:
+Whilst the data of Compressed NFTs is stored inside transactions and not onchain accounts, we still need some onchain accounts to keep track of the Merkle Tree and its configuration. As such, before we can start minting Compressed NFTs, we need to create two accounts:
 
 - A **Merkle Tree account**. This account holds a generic Merkle Tree that can be used to verify the authenticity of any type of data. It is owned by the [Account Compression Program](https://spl.solana.com/account-compression) created and maintained by Solana. In our case, we will use it to verify the authenticity of Compressed NFTs.
 - A **Tree Config account**. This second account is a PDA derived from the address of the Merkle Tree account. It allows us to store additional configurations for the Merkle Tree that are specific to Compressed NFTs — e.g. the tree creator, the number of minted cNFTs, etc.
@@ -113,7 +113,7 @@ const builder = await createTree(umi, {
 
 ## Fetching a Bubblegum Tree
 
-Since a **Bubblegum Tree** is composed of two on-chain accounts, let's see how to fetch either of them.
+Since a **Bubblegum Tree** is composed of two onchain accounts, let's see how to fetch either of them.
 
 ### Fetching a Merkle Tree
 
