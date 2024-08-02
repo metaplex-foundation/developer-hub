@@ -88,7 +88,12 @@ use mpl_core::{
     ID as MPL_CORE_ID,
     fetch_external_plugin_adapter_data_info, 
     fetch_plugin, 
-    instructions::{CreateCollectionV2CpiBuilder, CreateV2CpiBuilder, WriteExternalPluginAdapterDataV1CpiBuilder, UpdatePluginV1CpiBuilder}, 
+    instructions::{
+        CreateCollectionV2CpiBuilder, 
+        CreateV2CpiBuilder, 
+        WriteExternalPluginAdapterDataV1CpiBuilder, 
+        UpdatePluginV1CpiBuilder
+    }, 
     accounts::{BaseAssetV1, BaseCollectionV1}, 
     types::{
         AppDataInitInfo, Attribute, Attributes, 
@@ -193,23 +198,46 @@ pub struct CreateEventArgs {
 }
 ```
 
-The main function, create_event, just then utilizes the above inputs to create the event collection and add attributes containing all event details.
+The main function, `create_event`, just then utilizes the above inputs to create the event collection and add attributes containing all event details.
 
 ```rust
 pub fn create_event(ctx: Context<CreateEvent>, args: CreateEventArgs) -> Result<()> {
-
     // Add an Attribute Plugin that will hold the event details
     let mut collection_plugin: Vec<PluginAuthorityPair> = vec![];
 
     let attribute_list: Vec<Attribute> = vec![
-        Attribute { key: "City".to_string(), value: args.city },
-        Attribute { key: "Venue".to_string(), value: args.venue },
-        Attribute { key: "Artist".to_string(), value: args.artist },
-        Attribute { key: "Date".to_string(), value: args.date },
-        Attribute { key: "Time".to_string(), value: args.time },
-        Attribute { key: "Capacity".to_string(), value: args.capacity.to_string() }
+        Attribute { 
+            key: "City".to_string(), 
+            value: args.city 
+        },
+        Attribute { 
+            key: "Venue".to_string(), 
+            value: args.venue 
+        },
+        Attribute { 
+            key: "Artist".to_string(), 
+            value: args.artist 
+        },
+        Attribute { 
+            key: "Date".to_string(), 
+            value: args.date 
+        },
+        Attribute { 
+            key: "Time".to_string(), 
+            value: args.time 
+        },
+        Attribute { 
+            key: "Capacity".to_string(), 
+            value: args.capacity.to_string() 
+        }
     ];
-    collection_plugin.push(PluginAuthorityPair { plugin: Plugin::Attributes(Attributes { attribute_list }), authority: Some(PluginAuthority::UpdateAuthority) });
+    
+    collection_plugin.push(
+        PluginAuthorityPair { 
+            plugin: Plugin::Attributes(Attributes { attribute_list }), 
+            authority: Some(PluginAuthority::UpdateAuthority) 
+        }
+    );
     
     // Create the Collection that will hold the tickets
     CreateCollectionV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
@@ -229,7 +257,7 @@ pub fn create_event(ctx: Context<CreateEvent>, args: CreateEventArgs) -> Result<
 ### The Create Ticket Instruction
 The Create Event Instruction sets up an event as a digital asset in the form of a collection asset, allowing you to include all related tickets and event data in a seamless and organized manner. 
 
-The whole instruction closely resemble the `create_event` one since the goal are very similar, but this time instead of creating the event asset, we’re going to create the ticket asset that will be contained inside of the even collection
+The whole instruction closely resemble the `create_event` one since the goal are very similar, but this time instead of creating the event asset, we’re going to create the ticket asset that will be contained inside of the `event collection`
 
 ```rust
 #[derive(Accounts)]
@@ -284,25 +312,73 @@ When we talk about the instruction, the main differences are:
 ```rust
 pub fn create_ticket(ctx: Context<CreateTicket>, args: CreateTicketArgs) -> Result<()> {
     // Check that the maximum number of tickets has not been reached yet
-    let (_, collection_attribute_list, _) = fetch_plugin::<BaseCollectionV1, Attributes>(&ctx.accounts.event.to_account_info(), PluginType::Attributes)?;
-    require!(ctx.accounts.event.num_minted < collection_attribute_list.attribute_list[5].value.parse::<u32>().unwrap(), TicketError::MaximumTicketsReached);
+    let (_, collection_attribute_list, _) = fetch_plugin::<BaseCollectionV1, Attributes>(
+            &ctx.accounts.event.to_account_info(), 
+            PluginType::Attributes
+        )?;
+
+    require!(
+        ctx.accounts.event.num_minted < collection_attribute_list.attribute_list[5].value.parse::<u32>().unwrap(), 
+        TicketError::MaximumTicketsReached
+    );
 
     // Add an Attribute Plugin that will hold the ticket details
     let mut ticket_plugin: Vec<PluginAuthorityPair> = vec![];
     
-    let attribute_list: Vec<Attribute> = vec![
-        Attribute { key: "Ticket Number".to_string(), value: ctx.accounts.event.num_minted.checked_add(1).unwrap().to_string() },
-        Attribute { key: "Hall".to_string(), value: args.hall },
-        Attribute { key: "Section".to_string(), value: args.section },
-        Attribute { key: "Row".to_string(), value: args.row },
-        Attribute { key: "Seat".to_string(), value: args.seat },
-        Attribute { key: "Price".to_string(), value: args.price.to_string() }
-    ];
-    ticket_plugin.push(PluginAuthorityPair { plugin: Plugin::Attributes(Attributes { attribute_list }), authority: Some(PluginAuthority::UpdateAuthority) });
-    ticket_plugin.push(PluginAuthorityPair { plugin: Plugin::PermanentFreezeDelegate( PermanentFreezeDelegate { frozen: false }), authority: Some(PluginAuthority::UpdateAuthority) });
-    ticket_plugin.push(PluginAuthorityPair { plugin: Plugin::PermanentBurnDelegate( PermanentBurnDelegate {}), authority: Some(PluginAuthority::UpdateAuthority) });
-    ticket_plugin.push(PluginAuthorityPair { plugin: Plugin::PermanentTransferDelegate( PermanentTransferDelegate {}), authority: Some(PluginAuthority::UpdateAuthority) });
-
+     let attribute_list: Vec<Attribute> = vec![
+        Attribute { 
+            key: "Ticket Number".to_string(), 
+            value: ctx.accounts.event.num_minted.checked_add(1).unwrap().to_string() 
+        },
+        Attribute { 
+            key: "Hall".to_string(), 
+            value: args.hall 
+        },
+        Attribute { 
+            key: "Section".to_string(), 
+            value: args.section 
+        },
+        Attribute { 
+            key: "Row".to_string(), 
+            value: args.row 
+        },
+        Attribute { 
+            key: "Seat".to_string(), 
+            value: args.seat 
+        },
+        Attribute { 
+            key: "Price".to_string(), 
+            value: args.price.to_string() 
+        }
+        ];
+        
+        ticket_plugin.push(
+            PluginAuthorityPair { 
+                plugin: Plugin::Attributes(Attributes { attribute_list }), 
+                authority: Some(PluginAuthority::UpdateAuthority) 
+            }
+        );
+        
+        ticket_plugin.push(
+            PluginAuthorityPair { 
+                plugin: Plugin::PermanentFreezeDelegate(PermanentFreezeDelegate { frozen: false }), 
+                authority: Some(PluginAuthority::UpdateAuthority) 
+            }
+        );
+        
+        ticket_plugin.push(
+            PluginAuthorityPair { 
+                plugin: Plugin::PermanentBurnDelegate(PermanentBurnDelegate {}), 
+                authority: Some(PluginAuthority::UpdateAuthority) 
+            }
+        );
+        
+        ticket_plugin.push(
+            PluginAuthorityPair { 
+                plugin: Plugin::PermanentTransferDelegate(PermanentTransferDelegate {}), 
+                authority: Some(PluginAuthority::UpdateAuthority) 
+            }
+        );
     let mut ticket_external_plugin: Vec<ExternalPluginAdapterInitInfo> = vec![];
     
     ticket_external_plugin.push(ExternalPluginAdapterInitInfo::AppData(
@@ -338,7 +414,7 @@ pub fn create_ticket(ctx: Context<CreateTicket>, args: CreateTicketArgs) -> Resu
 ### The Scan Ticket Instruction
 The Scan Ticket Instruction finalizes the process by verifying and updating the status of the ticket when scanned.
 
-```
+```rust
 #[derive(Accounts)]
 pub struct ScanTicket<'info> {
    pub owner: Signer<'info>,
@@ -381,7 +457,14 @@ We finish the instruction by making the digital asset soulbounded so it can’t 
 ```rust 
 pub fn scan_ticket(ctx: Context<ScanTicket>) -> Result<()> {
 
-    let (_, app_data_length) = fetch_external_plugin_adapter_data_info::<BaseAssetV1>(&ctx.accounts.ticket.to_account_info(), None, &ExternalPluginAdapterKey::AppData(PluginAuthority::Address { address: ctx.accounts.signer.key() }))?;
+    let (_, app_data_length) = fetch_external_plugin_adapter_data_info::<BaseAssetV1>(
+            &ctx.accounts.ticket.to_account_info(), 
+            None, 
+            &ExternalPluginAdapterKey::AppData(
+                PluginAuthority::Address { address: ctx.accounts.signer.key() }
+            )
+        )?;
+
     require!(app_data_length == 0, TicketError::AlreadyScanned);
 
     let data: Vec<u8> = "Scanned".as_bytes().to_vec();
