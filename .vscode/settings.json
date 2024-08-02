@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
+        "bincode",
+        "blockhash",
+        "callout",
+        "Datas",
         "Arweave",
         "blockhash",
         "callout",
@@ -9,6 +13,7 @@
         "Irys",
         "Keypair",
         "metaplex",
+        "msgpack",
         "metadata",
         "nonblocking",
         "offchain",
