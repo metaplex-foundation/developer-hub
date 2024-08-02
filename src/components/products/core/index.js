@@ -189,6 +189,10 @@ export const core = {
               title: 'Oracle Plugin Example',
               href: '/core/guides/oracle-plugin-example',
             },
+            {
+              title: 'Appdata Plugin Example',
+              href: '/core/guides/onchain-ticketing-with-appdata',
+            },
           ],
         },
         {
