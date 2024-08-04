@@ -44,7 +44,9 @@ import { fetchCollection, create } from '@metaplex-foundation/mpl-core'
 
 This example is going to show you how to set up Umi with a `generatedSigner()` or an existing wallet saved in the Backend. Then it's going to show you how to use the wallet adapter to sign those instruction on the frontend.
 
-### Generating a New Wallet
+{% totem %}
+
+{% totem-accordion title="With a New Wallet" %}
 
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
@@ -57,7 +59,9 @@ const signer = generateSigner(umi)
 umi.use(signerIdentity(signer))
 ```
 
-### Use an Existing Wallet
+{% /totem-accordion %}
+
+{% totem-accordion title="With an Existing Wallet" %}
 
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
@@ -73,7 +77,9 @@ const walletFile = fs.readFileSync(
 // need to transform it into a usable keypair
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 
-// Before using it into Umi, you need to transform it
+// Before Umi can use the keypair you need to generate a signer with it
+
+Before using it into Umi, you need to transform it
 // into a Signer type  
 const signer = createSignerFromKeypair(umi, keyair);
 
@@ -81,9 +87,16 @@ const signer = createSignerFromKeypair(umi, keyair);
 umi.use(signerIdentity(walletFile))
 ```
 
-### Use the Wallet Adaptor
+{% /totem-accordion %}
+
+{% totem-accordion title="With the Wallet Adaptor" %}
 
 /// ToDO
+
+{% /totem-accordion %}
+
+
+{% /totem %}
 
 ## Creating Partially Signed Transactions in the Backend
 
@@ -135,7 +148,7 @@ const serializedCreateAssetTx = umi.transactions.serialize(createAssetTx)
 return serializedCreateAssetTx
 ```
 
-### Front End
+### Frontend
 
 ```ts
 // Deserialize the Transaction returned by the Backend
