@@ -105,9 +105,6 @@ By logging out the transaction ID you can visit a Solana blockchain explorer and
 
 There are some common errors that normally occur 
 
-### Incorrect Owner
-
-This error normally means that an account passed in isn't owned by the expected program and therefor will fail. For example the a Token Metadata Account is expected to be owned by the Token Metadata Program, and if the account in that particular position in the transactions account list doesn't meet that criteria then the transaction will fail.
 
 ### Error Codes xx (23)
 
@@ -115,10 +112,47 @@ While normally complimented with some additional text to describe the error code
 
 Starting at an index of 0 you can count down/work out the position of the error in the list.
 
+Here is an example of a error.rs page from the Metaplex Core program.
+
+
+[https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
+
+As we can see if we were receiving an error code of 20 from our failing transaction that would transaction to
+
+```rust
+/// 20 - Missing update authority
+    #[error("Missing update authority")]
+    MissingUpdateAuthority,
+```
+
 ### Error Codes 6xxx (6002)
 
 6xxx error codes are custom program Anchor error codes. As above, if you are able to find the program in github there will normally be a errors.rs file which lists out the programs errors and codes. Anchor custom program error codes start at 6000 so the first error in the list will be 6000, the second 6001 etc... You can in theory just take the last digits of the error code, in the case of 6026 this is 26 and work our way down the errors as before starting at index 0.
 
-### Assert
+If we take the Mpl Core Candy Machine program as an example, this is an Anchor program so our error codes will start at 6xxx.
+
+[https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
+
+If your transaction is returning an error of `6006` will can take the end of the number, in this case `6` and work our way down the error.rs list starting from an index of 0. 
+
+```rust
+#[msg("Candy machine is empty")]
+CandyMachineEmpty,
+```
+
+### Hex Errors
+
+In some rare occasions you might experience the return of errors in a hex format such as `0x1e`.
+
+In this case you can use a [Hex to Decimal converter](https://www.rapidtables.com/convert/number/hex-to-decimal.html) to format the error correctly into something we can use. If the format is 
+
+- If the error is in xx format see [Error Codes xx](#error-codes-xx-23)
+- If the error is in 6xxx format see [Error Codes 6xxx](#error-codes-6xxx-6002)
+
+### Incorrect Owner
+
+This error normally means that an account passed in isn't owned by the expected program and therefor will fail. For example the a Token Metadata Account is expected to be owned by the Token Metadata Program, and if the account in that particular position in the transactions account list doesn't meet that criteria then the transaction will fail.
+
+### Assert Error
 
 Assert errors are matching errors. Assert will normally take 2 variables (in most cases address/publicKeys) and check they are the same expected value. If not an `Assert left='value' right='value'` error will be thrown detailing the two values and that they do not match as expected.
