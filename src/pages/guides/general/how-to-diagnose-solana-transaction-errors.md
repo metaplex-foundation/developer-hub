@@ -1,0 +1,124 @@
+---
+title: How to Diagnose Transaction Errors on Solana
+metaTitle: How to Diagnose Transaction Errors on Solana
+description: Learn how to diagnose transaction errors on Solana and find logical solutions these errors.
+# remember to update dates also in /components/guides/index.js
+created: '06-16-2024'
+updated: '06-21-2024'
+---
+
+## Sharing Errors to a Support Network
+
+If you are receiving errors that you do not understand and wish to show to someone else it can sometimes be difficult to describe the situation. This often happens when using a form of SDK to send transactions such as Metaplex Umi, Solana SDK, Solana Web3js. These clients will often send whats called a **pre-flight transaction** or simulation to an RPC to check if the transaction is going to succeed or not. If a transaction is deemed to fail then a transaction is not sent to the chain and will just throw an error message instead. While this is good behaviour on behalf of the network, it doesn't give us anything we can logically get help with. This is where skipping simulation/pre-flight comes into play and forcing the failing transaction to be registered by the chain which becomes sharable to other people. 
+
+
+## Skipping Preflight
+
+Most SDK's you are using to send transactions will come with the ability to `skipPreflight` when sending a transaction. This will skip the simulation and preflight and force the chain to register the transaction. The reason this helps us is that the exact transaction you are trying to send is registered and stored on the chain including:
+
+- All accounts used
+- All instructions submitted
+- All logs including error messages
+
+This failed transaction can then be send to someone to inspect the details of the transaction to help diagnose why your transaction is failing.
+
+This works on both **Mainnet** and **Devnet**. This does also work on **Localnet** but is more complicated and sharing the details is more difficult.
+
+### umi
+
+Metaplex Umi's `skipPreflight` can be found in the `sendAndConfirm()` and `send()` function args and can be enabled like so:
+
+#### sendAndConfirm()
+```ts
+const tx = createV1(umi, {
+    ...args
+}).sendAndConfirm(umi, {send: { skipPreflight: true}})
+
+// Convert signature to string
+const signature = base58.deserialize(tx.signature);
+
+// Log transaction signature
+console.log(signature)
+```
+
+#### send()
+```ts
+const tx = createV1(umi, {
+    ...args
+}).send(umi, {skipPreflight: true})
+
+// Convert signature to string
+const signature = base58.deserialize(tx);
+
+// Log transaction signature
+console.log(signature)
+```
+
+### web3js
+
+```ts
+// Create Connection
+const connection = new Connection("https://api.devnet.solana.com", "confirmed",);
+
+// Create your transaction
+const transaction = new VersionedTransaction()
+
+// Add skipPreflight to the sendTransaction() function
+const res = await connection.sendTransaction(transaction, [...signers], {skipPreflight: true})
+
+// Log out the transaction signature
+console.log(res)
+```
+
+### solana-client (rust)
+
+```rust
+// Create Connection
+let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+// Create your transaction
+let transaction = new Transaction()
+
+// Add skipPreflight to the sendTransaction() function
+let res = rpc_client
+    .send_transaction_with_config(&create_asset_tx, RpcSendTransactionConfig {
+        skip_preflight: false,
+        preflight_commitment: Some(CommitmentConfig::confirmed().commitment),
+        encoding: None,
+        max_retries: None,
+        min_context_slot: None,
+    })
+    .await
+    .unwrap();
+
+// Log out the transaction signature
+println!("Signature: {:?}", res)
+```
+
+By logging out the transaction ID you can visit a Solana blockchain explorer and search for the transaction ID which will display the failed transaction.
+
+- SolanaFM
+- Solscan
+- Solana Explorer
+
+## Common Types of Errors
+
+There are some common errors that normally occur 
+
+### Incorrect Owner
+
+This error normally means that an account passed in isn't owned by the expected program and therefor will fail. For example the a Token Metadata Account is expected to be owned by the Token Metadata Program, and if the account in that particular position in the transactions account list doesn't meet that criteria then the transaction will fail.
+
+### Error Codes xx (23)
+
+While normally complimented with some additional text to describe the error codes these codes can sometimes appear on their own in a non descriptive manor. If this happens and you know the program that threw the error you can sometimes find the program in Github and it will have an errors.rs page that lists out all the possible errors of the program.
+
+Starting at an index of 0 you can count down/work out the position of the error in the list.
+
+### Error Codes 6xxx (6002)
+
+6xxx error codes are custom program Anchor error codes. As above, if you are able to find the program in github there will normally be a errors.rs file which lists out the programs errors and codes. Anchor custom program error codes start at 6000 so the first error in the list will be 6000, the second 6001 etc... You can in theory just take the last digits of the error code, in the case of 6026 this is 26 and work our way down the errors as before starting at index 0.
+
+### Assert
+
+Assert errors are matching errors. Assert will normally take 2 variables (in most cases address/publicKeys) and check they are the same expected value. If not an `Assert left='value' right='value'` error will be thrown detailing the two values and that they do not match as expected.
