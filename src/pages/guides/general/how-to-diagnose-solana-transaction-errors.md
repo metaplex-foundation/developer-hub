@@ -151,7 +151,7 @@ In this case you can use a [Hex to Decimal converter](https://www.rapidtables.co
 
 ### Incorrect Owner
 
-This error normally means that an account passed in isn't owned by the expected program and therefor will fail. For example the a Token Metadata Account is expected to be owned by the Token Metadata Program, and if the account in that particular position in the transactions account list doesn't meet that criteria then the transaction will fail.
+This error normally means that an account passed in isn't owned by the expected program and therefor will fail. For example a Token Metadata Account is expected to be owned by the Token Metadata Program, and if the account in that particular position in the transactions account list doesn't meet that criteria then the transaction will fail.
 
 ### Assert Error
 
