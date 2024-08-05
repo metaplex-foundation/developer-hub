@@ -6,14 +6,16 @@ created: '08-2-2024'
 updated: '08-2-2024'
 ---
 
-Sometimes, for creating NFTs for example, you might need to store an `Authority` keypair to sign the inclusion of the NFT in the Collection. To safely do it, without exposing the keypair on the frontend, you'll need to create partially signed transaction in the backend that can be later signed by a wallet in the frontend. 
+Transaction are usually serialized to facilitate movement across different environments. But the reasons could be different:
+- Requiring signatures from different authorities stored in separate environments.
+- Validating the transaction before it is entered or stored in a database.
 
-**We're going to talk about:**
+For example, when creating NFTs, you might need to store an `Authority` keypair to sign the NFT's inclusion in the Collection. To safely sign it, without exposing your keypair, you'll need to create partially signed transaction in a secure environment, serialize it and broadcast it to another environoment that can be deserialized and signed by another wallet. 
+
+**In this guide we're going to talk about:**
 - Noop Signer
 - Partially signed transactions
-- Passing transactions from the Backend to the Frontend
-
-**Note**: In this guide we're going to talk about how to pass partially signed transaction from the Backend to the Frontend, but you can do the opposite too! 
+- Passing transactions from different environments
 
 ## Initial Setup
 
@@ -27,9 +29,13 @@ To install them, use the following commands:
 
 ```
 $ npm i @metaplex-foundation/umi 
+```
 
+```
 $ npm i @metaplex-foundation/umi-bundle-defaults 
+```
 
+```
 $ npm i @metaplex-foundation/mpl-core
 ```
 
@@ -98,7 +104,7 @@ umi.use(signerIdentity(walletFile))
 
 {% /totem %}
 
-## Partially Sign Transactions and use them on the Frontend
+## Passing transactions from different environments
 
 As we discussed in the introduction, the perfect example for this use case would be creating a new NFT. So that's what we're going to do! 
 
@@ -115,21 +121,18 @@ createNoopSigner(publicKey)
 
 ### The Instruction
 
-In the backend we're going to:
+In the first Environment
 - Create a Versioned Transaction and sign it with the `collectionAutority` and the `asset`
 - Serialize it so all the details are preserved and can be accurately reconstructed by the frontend
 - And send it as a String so it can be passed through a request
 
-Then in the frontend we're going to:
+Then in the second environment
 - Transform the transaction back to a Uint8Array so we can read it
 - Deserialize it so we can operate on it
 - Sign it with the `owner` that we get from the frontend
 - Send it
 
-
-We start with creating the instruction in the backend, sign it with our `collectionAutority`, serialize it and pass it to the frontend. Then the frontend will then deserialize it, sign it with the `frontendPubkey`and send the transaction!
-
-### Backend
+### Serialize Transaction
 
 ```ts
 // Use the Collection Authority Keypair
@@ -150,9 +153,9 @@ const collection = await fetchCollection(umi, publickey(`<Collection Address>`))
 let createAssetIx = create(umi, {
   asset: asset,
   collection: collection,
-  authority: signer,
-  payer: createNoopSigner(owner.publicKey),
-  owner: owner.publicKey,
+  authority: collectionAuthority,
+  payer: frontEndSigner,
+  owner: frontendPubkey,
   name: 'My NFT',
   uri: 'https://example.com/my-nft.json',
 }).getInstructions()
@@ -163,13 +166,13 @@ const blockhash = await umi.rpc.getLatestBlockhash()
 // Create a Versioned Transaction
 let createAssetTx = umi.transactions.create({
   version: 0,
-  payer: owner.publicKey,
+  payer: frontendPubkey,
   instructions: createAssetIx,
   blockhash: blockhash.blockhash,
 });
 
 // Sign it with both the CollectionAuthority and the Asset
-let signedCreateAssetTx = await signer.signTransaction(createAssetTx);
+let signedCreateAssetTx = await umi.identity.signTransaction(createAssetTx);
 signedCreateAssetTx = await asset.signTransaction(createAssetTx);
 
 // Serialize the Transaction
@@ -181,7 +184,7 @@ const serializedCreateAssetTxAsString = base64.deserialize(serializedCreateAsset
 return serializedCreateAssetTxAsString
 ```
 
-### Frontend
+### Deserialize and Send Transaction
 
 ```ts
 // Decode the String to Uint8Array to make it usable
@@ -211,13 +214,13 @@ import { createCollection, create, fetchCollection } from '@metaplex-foundation/
 
 const umi = createUmi("https://api.devnet.solana.com", "finalized")
 
-const signer = generateSigner(umi);
-umi.use(signerIdentity(signer));
+const collectionAuthority = generateSigner(umi);
+umi.use(signerIdentity(collectionAuthority));
 
-const owner = generateSigner(umi);
+const frontEndSigner = generateSigner(umi);
 
 await umi.rpc.airdrop(umi.identity.publicKey, sol(1));
-await umi.rpc.airdrop(owner.publicKey, sol(1));
+await umi.rpc.airdrop(frontEndSigner.publicKey, sol(1));
 
 (async () => {
   // Generate the Collection KeyPair
@@ -233,7 +236,7 @@ await umi.rpc.airdrop(owner.publicKey, sol(1));
 
   console.log(`\nCollection Created: https://solana.fm/tx/${base58.deserialize(createCollectionTx.signature)[0]}?cluster=devnet-alpha`);
 
-  // Backend
+  // Serialize
   
   const asset = generateSigner(umi);
   console.log("\nAsset Address: ", asset.publicKey.toString());
@@ -243,9 +246,9 @@ await umi.rpc.airdrop(owner.publicKey, sol(1));
   let createAssetIx = create(umi, {
     asset: asset,
     collection: collection,
-    authority: signer,
-    payer: createNoopSigner(owner.publicKey),
-    owner: owner.publicKey,
+    authority: collectionAuthority,
+    payer: createNoopSigner(frontEndSigner.publicKey),
+    owner: frontEndSigner.publicKey,
     name: 'My NFT',
     uri: 'https://example.com/my-nft.json',
   }).getInstructions()
@@ -253,21 +256,21 @@ await umi.rpc.airdrop(owner.publicKey, sol(1));
   const blockhash = await umi.rpc.getLatestBlockhash()
   let createAssetTx = umi.transactions.create({
     version: 0,
-    payer: owner.publicKey,
+    payer: frontEndSigner.publicKey,
     instructions: createAssetIx,
     blockhash: blockhash.blockhash,
   });
-  let signedCreateAssetTx = await signer.signTransaction(createAssetTx);
+  let signedCreateAssetTx = await umi.identity.signTransaction(createAssetTx);
   signedCreateAssetTx = await asset.signTransaction(createAssetTx);
 
   const serializedCreateAssetTx = umi.transactions.serialize(createAssetTx)
   const serializedCreateAssetTxAsString = base64.deserialize(serializedCreateAssetTx)[0];
 
-  // Frontend
+  // Deserialize
 
   const deserializedCreateAssetTxAsU8 = base64.serialize(serializedCreateAssetTxAsString);
   const deserializedCreateAssetTx = umi.transactions.deserialize(deserializedCreateAssetTxAsU8)
-  const signedDeserializedCreateAssetTx = await umi.identity.signTransaction(deserializedCreateAssetTx)
+  const signedDeserializedCreateAssetTx = await frontEndSigner.signTransaction(deserializedCreateAssetTx)
 
   console.log(`\nAsset Created: https://solana.fm/tx/${base58.deserialize(await umi.rpc.sendTransaction(signedDeserializedCreateAssetTx))[0]}}?cluster=devnet-alpha`);
 })();
