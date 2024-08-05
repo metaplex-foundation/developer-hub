@@ -4,7 +4,7 @@ metaTitle: Inscription - Clear Data
 description: Learn how to clear Inscription data
 ---
 
-The update authority of an inscription can clear its data and the data of associated inscriptions using the **ClearData** instruction as long as inscription has not been [engraved](/engraver/). The **ClearData** instruction requires one of the the **Authorites** to sign the transaction.
+The update authority of an inscription can clear its data and the data of associated inscriptions using the **ClearData** instruction as long as inscription has not been engraved. The **ClearData** instruction requires one of the the **Authorites** to sign the transaction.
 
 Clearing the data removes all existing data resizes the inscription account to 0.
 

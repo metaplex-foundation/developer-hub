@@ -91,7 +91,7 @@ Umi has a few plugins that can aid the upload process via plugins. At the time t
 
 #### Uploading to Arweave via Irys with Umi
 
-For a more indepth look at uploaded files with Umi please visit [Umi Storage.](umi/storage)
+For a more indepth look at uploaded files with Umi please visit [Umi Storage.](/umi/storage)
 
 {% dialect-switcher title="Uploading Files to Arweave Via Irys with Umi" %}
 {% dialect title="JavaScript" id="js" %}
