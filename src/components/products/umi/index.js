@@ -67,7 +67,7 @@ export const umi = {
           links: [
             {
               title: 'Passing Transaction from the Backend to the Frontend',
-              href: '/umi/guides/passing-transaction-from-backend-to-frontend',
+              href: '/umi/guides/serializing-and-deserializing',
               created: '2024-08-04',
               updated: null, // null means it's never been updated
             },
