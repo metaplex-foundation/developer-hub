@@ -7,7 +7,7 @@ Managing and sending transactions is an important part of any Solana client. To 
 
 - A [TransactionFactoryInterface](https://umi.typedoc.metaplex.com/interfaces/umi.TransactionFactoryInterface.html) that can be used to create and (de)serialize transactions.
 - A [TransactionBuilder](https://umi.typedoc.metaplex.com/classes/umi.TransactionBuilder.html) that makes it easy to build transactions.
-- A [RpcInterface](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html) that can be used to send, confirm and fetch transactions. You can [read more about the RPC interface here](./rpc.md).
+- A [RpcInterface](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html) that can be used to send, confirm and fetch transactions. You can [read more about the RPC interface here](rpc).
 
 ## Transactions and Instructions
 
@@ -64,7 +64,7 @@ builder = builder.add(myWrappedInstruction)
 builder = builder.prepend(myWrappedInstruction)
 ```
 
-Note that either of these methods also accepts other transaction builders and will merge them into the current one. In practice, this means program libraries can write (or [auto-generate](./kinobi.md)) their own helper methods that return transaction builders so they can be composed together by the end-user.
+Note that either of these methods also accepts other transaction builders and will merge them into the current one. In practice, this means program libraries can write (or [auto-generate](kinobi)) their own helper methods that return transaction builders so they can be composed together by the end-user.
 
 ```ts
 import { transferSol, addMemo } from '@metaplex-foundation/mpl-toolbox';
@@ -127,7 +127,7 @@ Note that the `build` method will throw an error if no blockhash was set on the 
 const transaction = await builder.buildWithLatestBlockhash(umi)
 ```
 
-At this point, you could use the built transaction and get all deduplicated signers from the builder via the `getSigners` method to sign it (See [Signing transactions](./publickeys-signers.md#signing-transactions) for more details). However, Umi provides a `buildAndSign` method that can do that for you. When using `buildAndSign`, the latest blockhash will be used if and only if it was not set on the builder.
+At this point, you could use the built transaction and get all deduplicated signers from the builder via the `getSigners` method to sign it (See [Signing transactions](publickeys-signers#signing-transactions) for more details). However, Umi provides a `buildAndSign` method that can do that for you. When using `buildAndSign`, the latest blockhash will be used if and only if it was not set on the builder.
 
 ```ts
 const signedTransaction = await builder.buildAndSign(umi)

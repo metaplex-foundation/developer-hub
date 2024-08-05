@@ -12,7 +12,7 @@ This Guard is currently only available on devnet. [Follow us](https://x.com/meta
 
 The **Asset Burn Multi** guard restricts the mint to holders of a predefined Collection and burns the holder's Asset(s). Thus, the address of the Asset(s) to burn must be provided by the payer when minting.
 
-It is similar to the [Asset Burn Guard](/core/guards/asset-burn) but can accept more than one asset to burn.
+It is similar to the [Asset Burn Guard](/core-candy-machine/guards/asset-burn) but can accept more than one asset to burn.
 
 {% diagram  %}
 

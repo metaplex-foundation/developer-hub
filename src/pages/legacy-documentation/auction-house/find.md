@@ -13,7 +13,7 @@ There are three types of functions provided for fetching bids, listings and sale
 
 2. **Find by receipt**: using this type of function, a single bid / listing / sale can be found, given the address of the corresponding receipt account.
 
-3. **Find by trade state**: We talked about [Trade States in the overview page](/programs/auction-house/overview). Trade state PDA accounts encoding the bid / listing / sale orders can also be used to find the corresponding action.
+3. **Find by trade state**: We talked about [Trade States in the overview page](/legacy-documentation/auction-house/overview). Trade state PDA accounts encoding the bid / listing / sale orders can also be used to find the corresponding action.
 
 ### Find All in an Auction House
 
@@ -84,7 +84,7 @@ const purchases = await metaplex
 
 ### Find by Receipt
 
-Below is the snippet for finding bids, listings and sales by corresponding receipt acccount address.
+Below is the snippet for finding bids, listings and sales by corresponding receipt account address.
 
 {% dialect-switcher title="JS SDK" %}
 {% dialect title="JavaScript" id="js" %}
@@ -137,6 +137,4 @@ const nft = await metaplex
 
 ## Conclusion
 
-We have finally covered all corners for managing trading on a marketplace. Everything covered till now was explained using code snippets using the JS SDK. 
-
-Next up we'll see how one can create and manage Auction Houses and the trading on them [using CLI](/programs/auction-house/how-to-guides/manage-auction-house-using-cli).
+We have finally covered all corners for managing trading on a marketplace. Everything covered till now was explained using code snippets using the JS SDK.

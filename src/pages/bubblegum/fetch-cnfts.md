@@ -8,7 +8,7 @@ As mentioned in the [Overview](/bubblegum#read-api) page, Compressed NFTs are no
 
 As such, a special indexer was created to facilitate the retrieval of Compressed NFTs. This indexed data is made available through an extension of the Solana RPC methods which we call the **Metaplex DAS API**. In fact, the DAS API allows us to fetch any **Digital Asset**. This can be a Compressed NFT, a regular NFT, or even a Fungible Asset.
 
-Since not all RPCs support the DAS API, you will need to choose your RPC provider carefully if you are planning to work with Compressed NFTs. Note that we maintain a list of all RPCs that support the Metaplex DAS API [in a dedicated page](/bubblegum/rpcs).
+Since not all RPCs support the DAS API, you will need to choose your RPC provider carefully if you are planning to work with Compressed NFTs. Note that we maintain a list of all RPCs that support the Metaplex DAS API [in a dedicated page](/rpc-providers).
 
 On this page, we will learn how to fetch Compressed NFTs using the Metaplex DAS API.
 

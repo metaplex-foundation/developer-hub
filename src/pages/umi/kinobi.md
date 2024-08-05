@@ -80,7 +80,7 @@ const transferDataSerializer = getTransferInstructionDataSerializer();
 
 ### Data enum helpers
 
-If a generated type is identified as a [data enum](./serializers.md#data-enums), additional helper methods will be created to help improve the developer experience. For instance, say you have the following data enum type generated.
+If a generated type is identified as a [data enum](serializers#data-enums), additional helper methods will be created to help improve the developer experience. For instance, say you have the following data enum type generated.
 
 ```ts
 type Message = 
@@ -128,7 +128,7 @@ getMetadataSize() // -> number
 findMetadataPda(umi, seeds) // -> Pda
 ```
 
-You may want to check the [documentation on `GpaBuilder`s](./helpers.md#gpabuilders) to learn more about what they can do.
+You may want to check the [documentation on `GpaBuilder`s](helpers#gpabuilders) to learn more about what they can do.
 
 ### Transaction builders
 

@@ -65,13 +65,7 @@ export const umi = {
         {
           title: 'Guides',
           links: [
-            { title: 'What is Umi?', href: '/umi/guides/what-is-umi' },
-            { title: 'RPCs and DAS', href: '/umi/guides/rpcs-and-das' },
-            { title: 'Umi Programs', href: '/umi/guides/umi-programs' },
-            {
-              title: 'Understanding PDAs',
-              href: '/umi/guides/understanding-pdas',
-            },
+            { title: 'Watch this space!', href: '' },
           ],
         },
       ],
