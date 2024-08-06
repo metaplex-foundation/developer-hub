@@ -6,16 +6,19 @@ created: '08-2-2024'
 updated: '08-2-2024'
 ---
 
+**In this guide we're going to talk about:**
+- Serializing and Deserializing Transaction
+- Noop Signer
+- Partially signed transactions
+- Passing transactions from different environments
+
+## Introduction
+
 Transaction are usually serialized to facilitate movement across different environments. But the reasons could be different:
 - Requiring signatures from different authorities stored in separate environments.
 - Validating the transaction before it is entered or stored in a database.
 
 For example, when creating NFTs, you might need to store an `Authority` keypair to sign the NFT's inclusion in the Collection. To safely sign it, without exposing your keypair, you'll need to create partially signed transaction in a secure environment, serialize it and broadcast it to another environoment that can be deserialized and signed by another wallet. 
-
-**In this guide we're going to talk about:**
-- Noop Signer
-- Partially signed transactions
-- Passing transactions from different environments
 
 ## Initial Setup
 
@@ -28,15 +31,15 @@ We're going to use the following packages:
 To install them, use the following commands:
 
 ```
-$ npm i @metaplex-foundation/umi 
+npm i @metaplex-foundation/umi 
 ```
 
 ```
-$ npm i @metaplex-foundation/umi-bundle-defaults 
+npm i @metaplex-foundation/umi-bundle-defaults 
 ```
 
 ```
-$ npm i @metaplex-foundation/mpl-core
+npm i @metaplex-foundation/mpl-core
 ```
 
 This are all the import what we're going to use for this particular guide
@@ -104,13 +107,17 @@ umi.use(signerIdentity(walletFile))
 
 {% /totem %}
 
-## Passing transactions from different environments
+## Serialization
 
-As we discussed in the introduction, the perfect example for this use case would be creating a new NFT. So that's what we're going to do! 
+In the serialization example we're going to:
+- Use the `NoopSigner` to add the `Payer` as `Signer` in the instruction
+- Create a Versioned Transaction and sign it with the `collectionAutority` and the `asset`
+- Serialize it so all the details are preserved and can be accurately reconstructed by the frontend
+- And send it as a String, instead of a u8, so it can be passed through a request
 
 ### Noop Signer
 
-Partially signing transaction, is only possible because of the `NoopSigner`. 
+Partially signing transactions to then serialize them, is only possible because of the `NoopSigner`. 
 
 The **Noop Signer** creates a `Signer` from a simple `Publickey` to be passed in instruction that requires it, even if we don't currently have access to the actual `Signer`. Once we have the possibility of using that `Signer`, we need to sing the transaction with it, or it will fail.
 
@@ -119,20 +126,23 @@ The way to use it is:
 createNoopSigner(publicKey)
 ```
 
-### The Instruction
+### Using Strings instead of Binary data
 
-In the first Environment
-- Create a Versioned Transaction and sign it with the `collectionAutority` and the `asset`
-- Serialize it so all the details are preserved and can be accurately reconstructed by the frontend
-- And send it as a String so it can be passed through a request
+The decision to turn Serialized Transactions into Strings before passing them between environment is rooted in: 
+- Formats like Base64 are universally recognized and can be safely transmitted over HTTP without the risk of data corruption or misinterpretation.
+- Using strings aligns with standard practices for web communication. Most APIs and web services expect data in JSON or other string-based formats
 
-Then in the second environment
-- Transform the transaction back to a Uint8Array so we can read it
-- Deserialize it so we can operate on it
-- Sign it with the `owner` that we get from the frontend
-- Send it
+The way to do it is to use the `base64` function present in the `@metaplex-foundation/umi/serializers` package and use:
 
-### Serialize Transaction
+```ts 
+// Using the base64.deserialize and passing in a serializedTx 
+const serializedTxAsString = base64.deserialize(serializedTx)[0];
+
+// Using the base64.serialize and passing in the serializedTxAsString
+const deserializedTxAsU8 = base64.serialize(serializedTxAsString);
+```
+
+### Code Example
 
 ```ts
 // Use the Collection Authority Keypair
@@ -184,7 +194,15 @@ const serializedCreateAssetTxAsString = base64.deserialize(serializedCreateAsset
 return serializedCreateAssetTxAsString
 ```
 
-### Deserialize and Send Transaction
+### Deserialization
+
+In the deserialization example we're going to:
+- Transform the Transaction that we received through the request back to a Uint8Array
+- Deserialize it so we can operate on it from the point we left
+- Sign it with the `Payer` keypair since we used it through the `NoopSigner` in the other environment
+- Send it
+
+### Code Example
 
 ```ts
 // Decode the String to Uint8Array to make it usable
