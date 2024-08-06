@@ -1,11 +1,11 @@
 import fs from 'fs'
 import path from 'path'
 
-export async function getServerSideProps({ res }) {
+export async function generateSitemap() {
 
   let directoryPath = path.join(process.cwd(), 'src/pages').replace(/\\/g, '/')
 
-  let files = []
+  let files= []
 
   function throughDirectory(directory) {
     fs.readdirSync(directory).forEach((file) => {
@@ -18,8 +18,6 @@ export async function getServerSideProps({ res }) {
   throughDirectory(path.join(process.cwd(), 'src/pages'))
 
   console.log(directoryPath)
-
-  const regex = new RegExp(/directoryPath|.js|.md/, '')
 
   const filter = [
     '/api',
@@ -65,17 +63,9 @@ export async function getServerSideProps({ res }) {
         .join('')}
     </urlset>`
 
-  // Set the content type to XML
-  res.setHeader('Content-Type', 'text/xml')
-  // Send the XML response
-  res.write(sitemap)
-  res.end()
+  fs.writeFileSync('src/pages/sitemap.xml', sitemap)
+  console.log('Sitemap generated!')
 
-  return {
-    props: {},
-  }
 }
 
-export default function Sitemap() {
-  // The function is empty because the response is handled in getServerSideProps
-}
+generateSitemap()
