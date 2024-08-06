@@ -13,7 +13,7 @@ There are three types of functions provided for fetching bids, listings and sale
 
 2. **Find by receipt**: using this type of function, a single bid / listing / sale can be found, given the address of the corresponding receipt account.
 
-3. **Find by trade state**: We talked about [Trade States in the overview page](/legacy-documentation/auction-house/overview). Trade state PDA accounts encoding the bid / listing / sale orders can also be used to find the corresponding action.
+3. **Find by trade state**: We talked about [Trade States in the overview page](/legacy-documentation/auction-house). Trade state PDA accounts encoding the bid / listing / sale orders can also be used to find the corresponding action.
 
 ### Find All in an Auction House
 

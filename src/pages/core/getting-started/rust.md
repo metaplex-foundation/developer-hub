@@ -78,7 +78,7 @@ Performing CPI instructions from your own programs can be achieved easily by usi
 
 A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html)
 
-For a more comprehensive guide using Metaplex Crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guide/rust/how-to-cpi-into-a-metaplex-program) page.
+For a more comprehensive guide using Metaplex Crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
 
 ### CreateV1CpiBuilder - Example
 
