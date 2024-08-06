@@ -16,7 +16,7 @@ The page aims to list all the available implementations of [the interfaces defin
 
 | Description | Maintainer | Links |
 | --- | --- | --- |
-| Internal Signer plugins | Metaplex | [Signers documentation](publickeys-signers#signers) |
+| Internal Signer plugins | Metaplex | [Signers documentation](/umi/public-keys-and-signers#signers) |
 | Use Solana's Wallet Adapters | Metaplex | [GitHub](https://github.com/metaplex-foundation/umi/tree/main/packages/umi-signer-wallet-adapters) / [NPM](https://www.npmjs.com/package/@metaplex-foundation/umi-signer-wallet-adapters) |
 | Derive new Signers from message signatures | Metaplex | [GitHub](https://github.com/metaplex-foundation/umi/tree/main/packages/umi-signer-derived) / [NPM](https://www.npmjs.com/package/@metaplex-foundation/umi-signer-derived) |
 

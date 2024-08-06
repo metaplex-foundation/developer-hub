@@ -56,7 +56,7 @@ The `FreezeDelegatedAccount` and `ThawDelegatedAccount` instructions are the onl
 
 ## Why does the Metadata account have both onchain and off-chain data?
 
-The [Metadata account](./accounts#metadata) contains onchain data, yet it also has a `URI` attribute which points to an off-chain JSON file which provides additional data. So why is that? Can't we just store everything onchain? Well, there are several issues with that:
+The **Metadata account** contains onchain data, yet it also has a `URI` attribute which points to an off-chain JSON file which provides additional data. So why is that? Can't we just store everything onchain? Well, there are several issues with that:
 
 - We have to pay rent to store data onchain. If we had to store everything within the Metadata account, which may include long texts such as the description of an NFT, it would require a lot more bytes and minting an NFT would suddenly be a lot more expensive.
 - Onchain data is much less flexible. Once an account is created using a certain structure, it cannot easily be changed. Therefore, if we had to store everything onchain, the NFT standard would be a lot harder to evolve with the demands of the ecosystem.
