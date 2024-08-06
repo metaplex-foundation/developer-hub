@@ -35,7 +35,6 @@ export async function getServerSideProps({ res }) {
       return !filter.some((f) => staticPage.includes(f))
     })
     .map((staticPagePath) => {
-      console.log({ staticPagePath })
       const path = staticPagePath
         .replace(/\\/g, '/')
         .replace(directoryPath, '')
@@ -43,8 +42,6 @@ export async function getServerSideProps({ res }) {
         .replace('.js', '')
         .replace('.md', '')
         .replace('//', '/')
-      console.log({ directoryPath })
-      console.log({ path })
       return `${`https://developers.metaplex.com`}${path}`
     })
 
