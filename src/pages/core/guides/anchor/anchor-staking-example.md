@@ -1,10 +1,10 @@
 ---
-title: Create a staking program for your mpl-core ollection using Anchor
+title: Create a staking program for your mpl-core collection using Anchor
 metaTitle: Core - Anchor Staking Example
 description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking program!
 ---
 
-This developer guide demonstrates how to create a staking program for your collection using Anchor leveraging the attribute plugin and freeze delegate. This approach uses a smart contract for all the logic behind staking like time calculation and management of the state of the asset (staking/unstaking), but the data will not be saved in a PDA, like the standard before Core, but it will be saved on the asset itself.
+This developer guide demonstrates how to create a staking program for your collection using Anchor leveraging the `Attribute` and `Freeze Delegate` plugins. This approach uses a smart contract for all the logic behind staking like time calculation and management of the state of the asset (staking/unstaking), but the data will not be saved in a PDA, like the standard before Core, but it will be saved on the asset itself.
 
 ## Starting off: Understanding the Logic behind the program
 
@@ -22,7 +22,7 @@ This program operates with a standard Anchor, leveraging a mono-file approach wh
 
 ### The Freeze Delegate Plugin
 
-The **Freeze Delegate Plugin** is an **owner managed plugin**, that means that it requires the owner's signature to be applied to the asset.
+The **Freeze Delegate Plugin** is an **owner-managed plugin**, that means that it requires the owner's signature to be applied to the asset.
 
 This plugin allows the **delegate to freeze and thaw the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be thawed before revocation).
 
@@ -32,9 +32,9 @@ _Learn more about it [here](/core/plugins/freeze-delegate)_
 
 ### The Attribute Plugin
 
-The **Attribute Plugin** is an **authority managed plugin**, that means that it requires the authority's signature to be applied to the asset. For an asset included in a collection, the collection authority serves as the authority since the asset's authority field is occupied by the collection address.
+The **Attribute Plugin** is an **authority-managed plugin**, that means that it requires the authority's signature to be applied to the asset. For an asset included in a collection, the collection authority serves as the authority since the asset's authority field is occupied by the collection address.
 
-This plugin allows for **data storage directly on the assets, functioning as on-chain attributes or traits**. These traits can be accessed directly by on-chain programs since they aren’t stored off-chain as it was for the mpl-program.
+This plugin allows for **data storage directly on the assets, functioning as on-chain attributes or traits**. These traits can be accessed directly by on-chain programs since they aren’t stored off-chain as it was for the mpl-token-metadata program.
 
 **This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
 
@@ -94,7 +94,7 @@ For this example we use the anchor flag from the mpl-core crate to directly dese
 
 _Learn more about it [here](/core/using-core-in-anchor)_
 
-The account struct for both the `Stake` and `Unstake` instruction are the same since we're going to use the same account with the same constraint for both 
+We're going to use a single account struct, `Stake`, for both the `stake` and `unstake` instructions since they use the same accounts and same constraints.
 
 ```rust
 #[derive(Accounts)]
@@ -105,36 +105,13 @@ pub struct Stake<'info> {
     pub payer: Signer<'info>,
     #[account(
         mut,
-        constraint = asset.owner == owner.key(),
+        has_one = owner,
         constraint = asset.update_authority == UpdateAuthority::Collection(collection.key()),
     )]
     pub asset: Account<'info, BaseAssetV1>,
     #[account(
         mut,
-        constraint = collection.update_authority == update_authority.key(),
-    )]
-    pub collection: Account<'info, BaseCollectionV1>,
-    #[account(address = CORE_PROGRAM_ID)]
-    /// CHECK: this will be checked by core
-    pub core_program: UncheckedAccount<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-pub struct Unstake<'info> {
-    pub owner: Signer<'info>,
-    pub update_authority: Signer<'info>,
-    #[account(mut)]
-    pub payer: Signer<'info>,
-    #[account(
-        mut,
-        constraint = asset.owner == owner.key(),
-        constraint = asset.update_authority == UpdateAuthority::Collection(collection.key()),
-    )]
-    pub asset: Account<'info, BaseAssetV1>,
-    #[account(
-        mut,
-        constraint = collection.update_authority == update_authority.key(),
+        has_one = update_authority,
     )]
     pub collection: Account<'info, BaseCollectionV1>,
     #[account(address = CORE_PROGRAM_ID)]
