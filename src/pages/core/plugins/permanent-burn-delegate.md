@@ -19,6 +19,10 @@ The Permanent Burn Plugin will work in areas such as:
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
 
+### Behaviours
+- **Asset**: Allows burning of the Asset using the delegated address.
+- **Collection**: Allows burning of any Asset in the collection using the collection authority. It does not burn all at once.
+
 ## Arguments
 
 The Permanent Burn Plugin doesn't contain any arguments to pass in.
