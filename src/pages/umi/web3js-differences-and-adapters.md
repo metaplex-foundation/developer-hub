@@ -41,13 +41,17 @@ import {
 
 Generating public keys might seem similar at first sight, but there are some subtle differences between the packages. Web3Js uses a capital `P` and requires `new`, while the Umi version uses a lowercase `p`.
 
-### Umi vs Web3Js
+### Umi
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
-import { PublicKey } from '@solana/web3.js';
 
 // Generate a new Umi Publickey
 const umiPublicKey = publicKey("11111111111111111111111111111111");
+```
+
+### Web3Js
+```ts
+import { PublicKey } from '@solana/web3.js';
 
 // Generate a new Web3Js Publickey
 const web3jsPublickey = new PublicKey("<1111111111111111111111111111111111111111>");
@@ -83,11 +87,10 @@ const web3jsPublickey = toWeb3JsPublicKey(umiPublicKey);
 
 Generating keypairs is where the difference from Web3Js and Umi increase. For Web3Js we can just use the `Keypair.generate()` function, for Umi we need a Umi instance before.
 
-### Umi vs Web3Js
+### Umi
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { generateSigner, createSignerFromKeypair } from '@metaplex-foundation/umi'
-import { Keypair } from '@solana/web3.js';
 
 // Generate a new Umi instance
 const umi = createUmi('https://api.devnet.solana.com')
@@ -97,6 +100,11 @@ const umiKeypair = generateSigner(umi)
 
 // Or use an existing one
 const umiKeypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
+```
+
+### Web3Js
+```ts
+import { Keypair } from '@solana/web3.js';
 
 // Generate a new Web3Js keypair
 const web3jsKeypair = Keypair.generate();
@@ -139,11 +147,10 @@ const web3jsKeypair = toWeb3JsKeypair(umiKeypair);
 
 When creating instructions, the main difference is that with Umi, you need to create a Umi instance first (like the `Keyapair`) and using the `getInstructions()` you receive an array of instructions rather than a single one.
 
-### Umi vs Web3Js
+### Umi
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transfer, mplCore } from '@metaplex-foundation/mpl-core'
-import { SystemProgram } from '@solana/web3.js';
 
 // Generate a new Umi instance
 const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
@@ -151,6 +158,11 @@ const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
 // Create a new instruction (like a core nft transfer)
 // get instructions will give you an Array of instructions
 const umiInstructions = transfer(umi, {...TransferParams}).getInstructions();
+```
+
+### Web3Js
+```ts
+import { SystemProgram } from '@solana/web3.js';
 
 // Create a new instruction (like a lamport transfer)
 const web3jsInstruction = SystemProgram.transfer({...TransferParams})
@@ -199,22 +211,15 @@ The Solana runtime supports two transaction versions:
 
 For `umi` and `umi-web3js-adapters` we added support for both transaction types! 
 
-### Umi vs Web3Js
+### Umi
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transfer, mplCore } from '@metaplex-foundation/mpl-core'
-import { Transaction, VersionedTransaction, TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
-
 // Generate a new Umi instance
 const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
 
 // Create a new Umi Legacy Transaction
 const umiTransaction = transfer(umi, {...TransferParams}).useLegacyVersion();
-
-// Create a new Web3Js Legacy Transaction
-const web3jsTransaction = new Transaction().add(SystemProgram.transfer({...TransferParams}));
-
-/// Versioned Transactions ///
 
 // Create a new Umi Versioned Transaction
 const blockhash = await umi.rpc.getLatestBlockhash()
@@ -227,6 +232,14 @@ const umiVersionedTransaction = umi.transactions.create({
   instructions,
   blockhash: blockhash.blockhash,
 });
+```
+
+### Web3Js
+```ts
+import { Transaction, VersionedTransaction, TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
+
+// Create a new Web3Js Legacy Transaction
+const web3jsTransaction = new Transaction().add(SystemProgram.transfer({...TransferParams}));
 
 // Create a new Web3Js Versioned Transaction
 const connection = new Connection(clusterApiUrl("devnet"));
@@ -293,11 +306,10 @@ const web3jsVersionedTransaction = toWeb3JsTransaction(umiVersionedTransaction);
 
 We've already covered creating messages during versioned transaction creation. Let's review it again.
 
-### Umi vs Web3Js
+### Umi
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transfer, mplCore } from '@metaplex-foundation/mpl-core'
-import { TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
 
 // Generate a new Umi instance
 const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
@@ -315,6 +327,11 @@ const umiVersionedTransaction = umi.transactions.create({
 });
 
 const umiMessage = umiVersionedTransaction.message
+```
+
+### Web3Js
+```ts
+import { TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
 
 // Create a new Web3Js Message
 const connection = new Connection(clusterApiUrl("devnet"));
