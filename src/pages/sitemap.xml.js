@@ -77,6 +77,8 @@ export async function getServerSideProps({ res }) {
 
   const json = JSON.parse(fs.readFileSync(directoryPath, 'utf8'))
 
+  console.log({ json })
+
   const staticRoutes = json.staticRoutes.map(route => {
     return route.page
   })
