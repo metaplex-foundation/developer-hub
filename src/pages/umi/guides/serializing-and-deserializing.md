@@ -84,12 +84,12 @@ const walletFile = fs.readFileSync(
   path.join(__dirname, './keypair.json')
 )
 
-// Usually Keypair are saved as Uint8Array, so you
-// need to transform it into a usable keypair
+// Usually Keypairs are saved as Uint8Array, so you  
+// need to transform it into a usable keypair.  
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 
 // Before Umi can use this Keypair you need to generate 
-// a Signer type with it
+// a Signer type with it.  
 const signer = createSignerFromKeypair(umi, keyair);
 
 // Tell Umi to use the new signer.
