@@ -70,14 +70,14 @@ export async function getServerSideProps({ res }) {
 
     // let directoryPath = path.join(process.cwd(), 'src/pages').replace(/\\/g, '/')
 
-    let directoryPath = path.join(process.cwd(), '/src/pages').replace(/\\/g, '/')
+    let directoryPath = path.join(process.cwd(), '.next/server/pages').replace(/\\/g, '/')
 
     console.log({directoryPath})
 
     let files = []
   
     function throughDirectory(directory) {
-      fs.readdirSync(directory).forEach((file) => {
+      fs.readdirSync("./").forEach((file) => {
         const Absolute = path.join(directory, file)
         if (fs.statSync(Absolute).isDirectory()) return throughDirectory(Absolute)
         else return files.push(Absolute)
@@ -87,25 +87,21 @@ export async function getServerSideProps({ res }) {
     throughDirectory(path.join(directoryPath))
   
     const filter = [
-      '/api',
-      '_app.jsx',
-      '_document.jsx',
-      '_error.jsx',
-      'sitemap.xml.js',
+      ".html"
     ]
   
     // List of all pages to be included in the sitemap
     const staticPages = files
       .filter((staticPage) => {
-        return !filter.some((f) => staticPage.includes(f))
+        return filter.some((f) => staticPage.includes(f))
       })
       .map((staticPagePath) => {
         const path = staticPagePath
           .replace(/\\/g, '/')
           .replace(directoryPath, '')
-          .replace('.jsx', '')
-          .replace('.js', '')
-          .replace('.md', '')
+          .replace('.html', '')
+        //   .replace('.js', '')
+        //   .replace('.md', '')
           .replace('//', '/')
         return `${`https://developers.metaplex.com`}${path}`
       })
