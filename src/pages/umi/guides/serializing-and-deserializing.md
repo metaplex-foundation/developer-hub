@@ -15,10 +15,10 @@ updated: '08-2-2024'
 ## Introduction
 
 Transaction are usually serialized to facilitate movement across different environments. But the reasons could be different:
-- Requiring signatures from different authorities stored in separate environments.
-- Validating the transaction before it is entered or stored in a database.
+- You may require signatures from different authorities stored in separate environments.
+- You may wish to create a transaction on the frontend, but then send and validate it on the backend before storing it to a database.
 
-For example, when creating NFTs, you might need to store an `Authority` keypair to sign the NFT's inclusion in the Collection. To safely sign it, without exposing your keypair, you'll need to create partially signed transaction in a secure environment, serialize it and broadcast it to another environoment that can be deserialized and signed by another wallet. 
+For example, when creating NFTs, you may need to sign the transaction with the `Collection Authority` keypair to authorise the NFT into the Collection. To safely sign it, without exposing your keypair, you could first create the transaction clientside/frontend, partially sign the transaction with the purchaser, serialize the transaction and then send it to your secure enviroment (server/backend). You can then safely deserialize the transactions and sign it with the `Collection Authority` keypair without exposing the keypair in a non secure enviroment.
 
 ## Initial Setup
 
@@ -42,7 +42,7 @@ npm i @metaplex-foundation/umi-bundle-defaults
 npm i @metaplex-foundation/mpl-core
 ```
 
-This are all the import what we're going to use for this particular guide
+These are all the imports that we're going to use for this guide.  
 
 ```ts
 import { generateSigner, signerIdentity, createNoopSigner } from '@metaplex-foundation/umi'
@@ -53,8 +53,7 @@ import { base64 } from '@metaplex-foundation/umi/serializers';
 
 ## Setting up Umi
 
-To set up Umi you can use wallets from different sources. You could create it with a new wallet, an existing wallet, or with the wallet adapter
-
+While setting up Umi you can use or generate keypairs/wallets from different sources. You create a new wallet for testing, import an existing wallet from the filesystem, or use `walletAdapter` if you are creating a website/dApp.  
 
 {% totem %}
 
@@ -109,7 +108,9 @@ umi.use(signerIdentity(walletFile))
 
 ## Serialization
 
-In the serialization example we're going to:
+Serialization of a transaction is the process of converting the transaction object into a series of bytes or string that saves the state of the transction in an easily transmittable form. This allows it to be passed through the likes of a http request.  
+
+Within the serialization example we're going to:  
 - Use the `NoopSigner` to add the `Payer` as `Signer` in the instruction
 - Create a Versioned Transaction and sign it with the `collectionAutority` and the `asset`
 - Serialize it so all the details are preserved and can be accurately reconstructed by the frontend
@@ -119,11 +120,15 @@ In the serialization example we're going to:
 
 Partially signing transactions to then serialize them, is only possible because of the `NoopSigner`. 
 
-The **Noop Signer** creates a `Signer` from a simple `Publickey` to be passed in instruction that requires it, even if we don't currently have access to the actual `Signer`. Once we have the possibility of using that `Signer`, we need to sing the transaction with it, or it will fail.
+Umi instructions can take `Signer` types by default that are often generated from local keypair files or `walletAdapter` signers. Sometimes you may not have access to a certain signer yet and will need to sign with said signer at a later point in time. This is where the Noop Signer comes into play.
+
+The **Noop Signer** takes a publicKey and generates a special `Signer` type which allows Umi to build instructions without needing the Noop Signer to be present or to sign the transaction at the current point in time.
+
+Instructions and transactions built with  *Noop Signers* will be expecting them to sign at some point before sending off the transaction to the chain and will cause a "missing signature" error if not present.
 
 The way to use it is: 
 ```ts
-createNoopSigner(publicKey)
+createNoopSigner(publickey('11111111111111111111111111111111'))
 ```
 
 ### Using Strings instead of Binary data
@@ -132,7 +137,7 @@ The decision to turn Serialized Transactions into Strings before passing them be
 - Formats like Base64 are universally recognized and can be safely transmitted over HTTP without the risk of data corruption or misinterpretation.
 - Using strings aligns with standard practices for web communication. Most APIs and web services expect data in JSON or other string-based formats
 
-The way to do it is to use the `base64` function present in the `@metaplex-foundation/umi/serializers` package and use:
+The way to do it is to use the `base64` function present in the `@metaplex-foundation/umi/serializers` package.
 
 ```ts 
 // Using the base64.deserialize and passing in a serializedTx 
@@ -150,7 +155,7 @@ const collectionAuthority = generateSigner(umi)
 umi.use(signerIdentity(collectionAuthority))
 
 // Create a noop signer that allows you to sign later
-const frontendPubkey = publickey('<Frontend Pubkey>')
+const frontendPubkey = publickey('11111111111111111111111111111111')
 const frontEndSigner = createNoopSigner(frontendPubkey)
 
 // Create the Asset Keypair
@@ -194,7 +199,7 @@ const serializedCreateAssetTxAsString = base64.deserialize(serializedCreateAsset
 return serializedCreateAssetTxAsString
 ```
 
-### Deserialization
+## Deserialization
 
 In the deserialization example we're going to:
 - Transform the Transaction that we received through the request back to a Uint8Array
@@ -252,7 +257,8 @@ await umi.rpc.airdrop(frontEndSigner.publicKey, sol(1));
     uri: 'https://example.com/my-collection.json',
   }).sendAndConfirm(umi)
 
-  console.log(`\nCollection Created: https://solana.fm/tx/${base58.deserialize(createCollectionTx.signature)[0]}?cluster=devnet-alpha`);
+  const createCollectionSignature = base58.deserialize(createCollectionTx.signature)[0]
+  console.log(`\nCollection Created: https://solana.fm/tx/${createCollectionSignature}?cluster=devnet-alpha`);
 
   // Serialize
   
@@ -290,6 +296,7 @@ await umi.rpc.airdrop(frontEndSigner.publicKey, sol(1));
   const deserializedCreateAssetTx = umi.transactions.deserialize(deserializedCreateAssetTxAsU8)
   const signedDeserializedCreateAssetTx = await frontEndSigner.signTransaction(deserializedCreateAssetTx)
 
-  console.log(`\nAsset Created: https://solana.fm/tx/${base58.deserialize(await umi.rpc.sendTransaction(signedDeserializedCreateAssetTx))[0]}}?cluster=devnet-alpha`);
+  const createAssetSignature = base58.deserialize(await umi.rpc.sendTransaction(signedDeserializedCreateAssetTx))[0]
+  console.log(`\nAsset Created: https://solana.fm/tx/${createAssetSignature}}?cluster=devnet-alpha`);
 })();
 ```
