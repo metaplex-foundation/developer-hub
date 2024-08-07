@@ -5,7 +5,7 @@ description: generates a low level TypeScript SDK for your Solana Rust programs
 ---
 
 Solita generates a low level TypeScript SDK for your Solana Rust programs from the IDL extracted by Anchor
-or [Shank](../shank).
+or [Shank](shank).
 
 🔗 **Helpful links:**
 

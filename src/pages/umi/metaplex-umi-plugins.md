@@ -51,14 +51,14 @@ Program feature set includes:
 
 - Fast Data fetching, including compressed NFTs
 
-## [Inscriptions](/inscriptions)
+## [Inscriptions](/inscription)
 
 The Metaplex Inscription Program allows you to write data directly to Solana, using the blockchain as a method of data storage. The Inscription program also allows for this data storage to be optionally linked to an NFT. In this overview, we explain how this program works and how we can leverage its various features at a high level.
 
 Program feature set includes:
 
 - Writing Data directly to the Solana blockchain
-- Reading inscription data from the Solana blochain
+- Reading inscription data from the Solana blockchain
 
 ## [Token Metadata (NFT, pNFT)](/token-metadata)
 

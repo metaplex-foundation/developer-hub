@@ -1,7 +1,7 @@
 ---
 title: Official Links
 metaTitle: Metaplex — Official Links
-description: Offical Links for Metaplex
+description: Official Links for Metaplex
 ---
 
 ## Websites

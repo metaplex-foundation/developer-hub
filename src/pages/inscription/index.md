@@ -208,7 +208,7 @@ pnpm cli inscribe -r <RPC_ENDPOINT> -k <KEYPAIR_FILE> -m <NFT_ADDRESS>
 
 ### Inscriptions as a Storage Provider
 
-In addition to the usage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB onchain. An unlimited number of [Associated Inscriptions](inscription/associatedInscriptions) can be created.
+In addition to the usage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB onchain. An unlimited number of [Associated Inscriptions](#associated-inscription-accounts) can be created.
 
 This can be useful when writing an onchain game that needs to store JSON data, storing text onchain, or storing any program-related data that's not an NFT.
 
@@ -421,4 +421,4 @@ The other pages of this documentation aim to document it further and explain sig
 - [Clear](/inscription/clear)
 - [close](/inscription/close)
 - [Authorities](/inscription/authority)
-- [Inscription Gateway](/inscription/gateway)
+- [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway)
