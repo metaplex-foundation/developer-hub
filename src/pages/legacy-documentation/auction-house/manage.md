@@ -6,7 +6,7 @@ description: Explains how to manage Auction Houses.
 
 ## Introduction
 
-[On the previous page](auction-house/settings), we went through the various settings of an Auction House. So now, let’s see how we can use these settings to create and update Auction Houses. 
+[On the previous page](/legacy-documentation/auction-house/settings), we went through the various settings of an Auction House. So now, let’s see how we can use these settings to create and update Auction Houses. 
 
 We'll also talk about different ways of fetching Auction House. Lastly, we'll go see how to withdraw funds from the Auction House fee and treasury accounts.
 
@@ -183,4 +183,4 @@ await metaplex
 
 ## Conclusion
 
-At this point we've gone over the Auction House settings, the data an Auction House instance stores and how to create and update this data. However, we still don't know how assets are traded on Auction Houses. We'll talk about this in the [next page](auction-house/trading-assets).
+At this point we've gone over the Auction House settings, the data an Auction House instance stores and how to create and update this data. However, we still don't know how assets are traded on Auction Houses. We'll talk about this in the [next page](/legacy-documentation/auction-house/trading-assets).

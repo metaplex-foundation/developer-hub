@@ -1,11 +1,11 @@
 ---
-title: Solita
-metaTitle: Developer Tools - Solita
+title: Shank
+metaTitle: Developer Tools - Shank
 description: extract IDLs from Rust Solana program code
 ---
 
 Shank makes it possible to extract IDLs from Rust Solana program code annotated with Shank attribute macros. This IDL
-can then be fed to [Solita](../solita) in order to generate low level TypeScript SDK for that particular Rust program.
+can then be fed to [Solita](solita) in order to generate low level TypeScript SDK for that particular Rust program.
 
 🔗 **Helpful links:**
 

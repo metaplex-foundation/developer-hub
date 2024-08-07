@@ -6,7 +6,7 @@ description: resolves Custom Program Errors from Solana program logs or error co
 # Cusper
 
 Cusper resolves **Cus**tom **P**rogram **Er**rors from Solana program logs or error codes. It is used
-by [Solita](../solita) to make dealing with program errors significantly easier.
+by [Solita](solita) to make dealing with program errors significantly easier.
 
 🔗 **Helpful links:**
 

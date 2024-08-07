@@ -6,7 +6,7 @@ description: How to Create and Update Rule Sets
 
 ## Introduction
 
-A Token Authorization Rules Rule Set is a collection of [Composite Rules](/token-auth-rules/composite-rules) and [Primitive Rules](/token-auth-rules/primitive-rules) stored in a PDA owned by the Token Auth Rules program.
+A Token Authorization Rules Rule Set is a collection of **Composite Rules** and **Primitive Rules** stored in a PDA owned by the Token Auth Rules program.
 
 ## Creating or Updating a Rule Set
 

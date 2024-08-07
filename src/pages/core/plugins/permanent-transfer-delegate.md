@@ -19,6 +19,10 @@ The Permanent Transfer Plugin will work in areas such as:
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
 
+### Behaviours
+- **Asset**: Allows transferring of the Asset using the delegated address.
+- **Collection**: Allows transferring of any Asset in the collection using the collection authority. It does not transfer all at once.
+
 ## Arguments
 
 | Arg    | Value |

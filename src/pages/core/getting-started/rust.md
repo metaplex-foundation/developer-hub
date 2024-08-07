@@ -30,7 +30,7 @@ For local scripts is recommended to use the `Builder` versions of all the instru
 
 A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html)
 
-For a more comprehensive guide on `Builder` instruction types please visit the [Working with Rust](working-with-rust#working-with-rust-scripts-locally) page.
+For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/guides/rust/metaplex-rust-sdks) page.
 
 ### CreateV1Builder - Example
 
@@ -78,7 +78,7 @@ Performing CPI instructions from your own programs can be achieved easily by usi
 
 A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html)
 
-For a more comprehensive guide on `Builder` instruction types please visit the [Working with Rust](working-with-rust#working-with-rust-scripts-locally) page.
+For a more comprehensive guide using Metaplex Crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
 
 ### CreateV1CpiBuilder - Example
 

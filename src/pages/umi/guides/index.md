@@ -1,7 +1,7 @@
 ---
-title: Guides
+title: Umi Guides
 metaTitle: Umi - Guides
-description: Walkthrough guides for using Metaplex's Umi product.
+description: How-to guides for Metaplex's Umi client wrapper and RPC client.
 ---
 
 The following Guides for Umi are currently available:

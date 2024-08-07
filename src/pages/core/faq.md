@@ -55,4 +55,4 @@ There are multiple levels of "immutability" in Core. You can find more informati
 Core is an entirely new standard designed specifically for NFTs, hence there are several notable differences. For example Core is cheaper, requires less Compute Units and should be easier to work with from a developer perspective. Have a look at the [differences](/core/tm-differences) page for details.
 
 ## Does Core Support Editions?
-Yes! Using the [Edition](/core/plugins/edition) and [Master Edition](/core/plugins/editions) Plugins. You can find more information in the ["How to print Editions" Guide](/core/guides/print-editions).
+Yes! Using the [Edition](/core/plugins/edition) and [Master Edition](/core/plugins/master-edition) Plugins. You can find more information in the ["How to print Editions" Guide](/core/guides/print-editions).
