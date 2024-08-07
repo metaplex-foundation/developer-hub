@@ -341,7 +341,7 @@ pub fn create_ticket(ctx: Context<CreateTicket>, args: CreateTicketArgs) -> Resu
     let attribute_list: Vec<Attribute> = vec![
     Attribute { 
         key: "Ticket Number".to_string(), 
-        value: ctx.accounts.event.num_minted.checked_add(1).unwrap().to_string() 
+        value: ctx.accounts.event.num_minted.checked_add(1).ok_or(TicketError::NumericalOverflow)?.to_string()
     },
     Attribute { 
         key: "Hall".to_string(), 
