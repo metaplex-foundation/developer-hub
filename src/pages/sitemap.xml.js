@@ -67,56 +67,58 @@ import path from 'path'
 // }
 
 export async function getServerSideProps({ res }) {
+  console.log('running sitemap generation')
 
-    // let directoryPath = path.join(process.cwd(), 'src/pages').replace(/\\/g, '/')
+  // let directoryPath = path.join(process.cwd(), 'src/pages').replace(/\\/g, '/')
 
-    let directoryPath = path.join(process.cwd(), '.next/server/pages').replace(/\\/g, '/')
+  let directoryPath = path
+    .join(process.cwd(), '.next/server/pages')
+    .replace(/\\/g, '/')
 
-    console.log({directoryPath})
+  console.log({ directoryPath })
 
-    let files = []
-  
-    function throughDirectory(directory) {
-      fs.readdirSync(directory).forEach((file) => {
-        const Absolute = path.join(directory, file)
-        if (fs.statSync(Absolute).isDirectory()) return throughDirectory(Absolute)
-        else return files.push(Absolute)
-      })
-    }
-  
-    throughDirectory(path.join(directoryPath))
+  let files = []
 
-    console.log(files)
-  
-    const filter = [
-      ".html"
-    ]
-  
-    // List of all pages to be included in the sitemap
-    const staticPages = files
-      .filter((staticPage) => {
-        return filter.some((f) => staticPage.includes(f))
-      })
-      .map((staticPagePath) => {
-        const path = staticPagePath
-          .replace(/\\/g, '/')
-          .replace(directoryPath, '')
-          .replace('.html', '')
+  function throughDirectory(directory) {
+    fs.readdirSync(directory).forEach((file) => {
+      const Absolute = path.join(directory, file)
+      if (fs.statSync(Absolute).isDirectory()) return throughDirectory(Absolute)
+      else return files.push(Absolute)
+    })
+  }
+
+  throughDirectory(path.join(directoryPath))
+
+  console.log(files)
+
+  const filter = ['.html']
+
+  // List of all pages to be included in the sitemap
+  const staticPages = files
+    .filter((staticPage) => {
+      return filter.some((f) => staticPage.includes(f))
+    })
+    .map((staticPagePath) => {
+      const path = staticPagePath
+        .replace(/\\/g, '/')
+        .replace(directoryPath, '')
+        .replace('.html', '')
         //   .replace('.js', '')
         //   .replace('.md', '')
-          .replace('//', '/')
-        return `${`https://developers.metaplex.com`}${path}`
-      })
-  
-      console.log({staticPages})
-    // Include dynamic pages if you have any
-    // Example: Fetch dynamic routes from your CMS or database
-  
-    // Combine static and dynamic pages
-    const allPages = [...staticPages]
-  
-    // Generate the sitemap XML
-    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+        .replace('//', '/')
+      return `${`https://developers.metaplex.com`}${path}`
+    })
+
+  // Include dynamic pages if you have any
+  // Example: Fetch dynamic routes from your CMS or database
+
+  // Combine static and dynamic pages
+  const allPages = [...staticPages]
+
+  console.log({ allPages })
+
+  // Generate the sitemap XML
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
           ${allPages
             .map((url) => {
@@ -129,6 +131,7 @@ export async function getServerSideProps({ res }) {
             .join('')}
         </urlset>`
 
+  res.setHeader('Cache-Control', 'no-store')
   res.setHeader('Content-Type', 'text/xml')
   // Send the XML to the browser
   res.write(sitemap)
