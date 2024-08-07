@@ -23,7 +23,7 @@ If you want to learn more about External Plugins, read more about them [here](/c
 
 The **AppData Plugin** allows asset/collection authorities to save arbitrary data that can be written and changed by the `data_authority`, an external source of trust and can be assigned to anyone the asset/collection authority decides to. With the AppData Plugin, collection/asset authorities can delegate the task of adding data to their assets to trusted third parties.
 
-If you’re not familiar with the new Appdata Plugin, read more about it [here](core/external-plugins/app-data).
+If you’re not familiar with the new Appdata Plugin, read more about it [here](/core/external-plugins/app-data).
 
 ## General Overview: Program Design
 
@@ -36,7 +36,7 @@ In this example, we will develop a ticketing solution that comes with four basic
 
 **Note**: While these operations provide a foundational start for a ticketing solution, a full-scale implementation would require additional features like an external database for indexing the event collection. However, this example serves as a good starting point for those interested in developing a ticketing solution.
 
-### The importance of having an external source of trust to handle scanning tickets
+### The importance of having an external source of trust to handle scanning tickets
 
 Until the introduction of the **AppData plugin** and the **Core standard**, managing attribute changes for assets was limited due to off-chain storage constraints. It was also impossible to delegate authority over specific parts of an asset. 
 
@@ -46,7 +46,7 @@ This setup reduces the risk of fraudulent activities and shifts the responsibili
 
 ### Using Digital Assets to store data instead of PDAs 
 
-Instead of relying on generic, external PDAs ([Program Derived Address](https://www.anchor-lang.com/docs/pdas)) for event-related data, **you can create the event itself as a collection asset**. This approach allow all tickets for the event to be included in the "event" collection, making general event data easily accessible and easily link event details with the ticket assets itself. You can then apply the same method for individual ticket-related data, including ticket number, hall, section, row, seat, and price directly on the Asset. 
+Instead of relying on generic external Program Derived Addresses ([PDAs](/guides/understanding-pdas)) for event-related data, **you can create the event itself as a collection asset**. This approach allow all tickets for the event to be included in the "event" collection, making general event data easily accessible and easily link event details with the ticket assets itself. You can then apply the same method for individual ticket-related data, including ticket number, hall, section, row, seat, and price directly on the Asset. 
 
 Using Core accounts like `Collection` or `Asset` accounts to save relevant data when dealing with digital assets, rather than relying on external PDAs, let ticket purchasers view all relevant event information directly from their wallet without needing to deserialize data. In addition, storing data directly on the asset itself allows you to leverage the Digital Asset Standard (DAS) to fetch and display it on your website with a single instruction, as shown below:
 
@@ -67,7 +67,7 @@ For simplicity, we’ll use Anchor, leveraging a mono-file approach where all th
 
 **Note**: You can follow along and open the following example in Solana Playground, an online tool to build and deploy Solana programs: [Solana Playground](https://beta.solpg.io/669fef20cffcf4b13384d277).
 
-As a stylistic choice, in the account struct of all instructions, we will separate the Signer and the Payer. This is a standard procedure because PDAs (Program Derived Addresses) cannot pay for account creation. Therefore, if the user wants a PDA to be the authority over the instruction, there need to be two different fields for it. While this separation isn't strictly necessary for our instructions, it's considered good practice.
+As a stylistic choice, in the account struct of all instructions, we will separate the `Signer` and the `Payer`. Quite often the same account is used for both but this is a standard procedure in case the `Signer` is a PDAs since it cannot pay for account creation, therefore, there need to be two different fields for it. While this separation isn't strictly necessary for our instructions, it's considered good practice.
 
 **Note**: Both the Signer and the Payer must still be signers of the transaction.
 
@@ -317,68 +317,82 @@ pub fn create_ticket(ctx: Context<CreateTicket>, args: CreateTicketArgs) -> Resu
             PluginType::Attributes
         )?;
 
+    // Search for the Capacity attribute
+    let capacity_attribute = collection_attribute_list
+        .attribute_list
+        .iter()
+        .find(|attr| attr.key == "Capacity")
+        .ok_or(TicketError::MissingAttribute)?;
+
+    // Unwrap the Capacity attribute value
+    let capacity = capacity_attribute
+        .value
+        .parse::<u32>()
+        .map_err(|_| TicketError::NumericalOverflow)?;
+
     require!(
-        ctx.accounts.event.num_minted < collection_attribute_list.attribute_list[5].value.parse::<u32>().unwrap(), 
+        ctx.accounts.event.num_minted < capacity, 
         TicketError::MaximumTicketsReached
     );
 
     // Add an Attribute Plugin that will hold the ticket details
     let mut ticket_plugin: Vec<PluginAuthorityPair> = vec![];
     
-     let attribute_list: Vec<Attribute> = vec![
-        Attribute { 
-            key: "Ticket Number".to_string(), 
-            value: ctx.accounts.event.num_minted.checked_add(1).unwrap().to_string() 
-        },
-        Attribute { 
-            key: "Hall".to_string(), 
-            value: args.hall 
-        },
-        Attribute { 
-            key: "Section".to_string(), 
-            value: args.section 
-        },
-        Attribute { 
-            key: "Row".to_string(), 
-            value: args.row 
-        },
-        Attribute { 
-            key: "Seat".to_string(), 
-            value: args.seat 
-        },
-        Attribute { 
-            key: "Price".to_string(), 
-            value: args.price.to_string() 
+    let attribute_list: Vec<Attribute> = vec![
+    Attribute { 
+        key: "Ticket Number".to_string(), 
+        value: ctx.accounts.event.num_minted.checked_add(1).unwrap().to_string() 
+    },
+    Attribute { 
+        key: "Hall".to_string(), 
+        value: args.hall 
+    },
+    Attribute { 
+        key: "Section".to_string(), 
+        value: args.section 
+    },
+    Attribute { 
+        key: "Row".to_string(), 
+        value: args.row 
+    },
+    Attribute { 
+        key: "Seat".to_string(), 
+        value: args.seat 
+    },
+    Attribute { 
+        key: "Price".to_string(), 
+        value: args.price.to_string() 
+    }
+    ];
+    
+    ticket_plugin.push(
+        PluginAuthorityPair { 
+            plugin: Plugin::Attributes(Attributes { attribute_list }), 
+            authority: Some(PluginAuthority::UpdateAuthority) 
         }
-        ];
-        
-        ticket_plugin.push(
-            PluginAuthorityPair { 
-                plugin: Plugin::Attributes(Attributes { attribute_list }), 
-                authority: Some(PluginAuthority::UpdateAuthority) 
-            }
-        );
-        
-        ticket_plugin.push(
-            PluginAuthorityPair { 
-                plugin: Plugin::PermanentFreezeDelegate(PermanentFreezeDelegate { frozen: false }), 
-                authority: Some(PluginAuthority::UpdateAuthority) 
-            }
-        );
-        
-        ticket_plugin.push(
-            PluginAuthorityPair { 
-                plugin: Plugin::PermanentBurnDelegate(PermanentBurnDelegate {}), 
-                authority: Some(PluginAuthority::UpdateAuthority) 
-            }
-        );
-        
-        ticket_plugin.push(
-            PluginAuthorityPair { 
-                plugin: Plugin::PermanentTransferDelegate(PermanentTransferDelegate {}), 
-                authority: Some(PluginAuthority::UpdateAuthority) 
-            }
-        );
+    );
+    
+    ticket_plugin.push(
+        PluginAuthorityPair { 
+            plugin: Plugin::PermanentFreezeDelegate(PermanentFreezeDelegate { frozen: false }), 
+            authority: Some(PluginAuthority::UpdateAuthority) 
+        }
+    );
+    
+    ticket_plugin.push(
+        PluginAuthorityPair { 
+            plugin: Plugin::PermanentBurnDelegate(PermanentBurnDelegate {}), 
+            authority: Some(PluginAuthority::UpdateAuthority) 
+        }
+    );
+    
+    ticket_plugin.push(
+        PluginAuthorityPair { 
+            plugin: Plugin::PermanentTransferDelegate(PermanentTransferDelegate {}), 
+            authority: Some(PluginAuthority::UpdateAuthority) 
+        }
+    );
+    
     let mut ticket_external_plugin: Vec<ExternalPluginAdapterInitInfo> = vec![];
     
     ticket_external_plugin.push(ExternalPluginAdapterInitInfo::AppData(
