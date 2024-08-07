@@ -358,39 +358,3 @@ const umiMessage = umi.transactions.create({...createParams}).message;
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsMessage = toWeb3JMessage(umiMessage);
 ```
-
-```ts
-
-const connection = new Connection(clusterApiUrl("devnet"));
-const minRent = await connection.getMinimumBalanceForRentExemption(0);
-const blockhash = await connection.getLatestBlockhash().then(res => res.blockhash);
-
-const instructions = [SystemProgram.transfer({...TransferParams})];
-
-const messageV0 = new TransactionMessage({
-    payerKey: payer.publicKey,
-    recentBlockhash: blockhash,
-    instructions,
-}).compileToV0Message();
-
-const umiMessage = fromWeb3JsMessage(messageV0);
-
-    // Create a new Web3Js Versioned Transaction
-    const blockhash = await umi.rpc.getLatestBlockhash()
-
-    const instructions = transfer(umi, {...TransferParams}).getInstructions()
-
-    const umiVersionedTransaction = umi.transactions.create({
-        version: 0,
-        payer: frontEndSigner.publicKey,
-        instructions: createAssetIx,
-        blockhash: blockhash.blockhash,
-    });
-
-    toWeb3JsMessage(umiVersionedTransaction.message);
-
-
-// For transaction messages.
-toWeb3JsMessage(myUmiTransactionMessage)
-toWeb3JsMessageFromInput(myUmiTransactionInput)
-```
