@@ -20,9 +20,9 @@ This program operates with a standard TypeScript backend and uses the asset keyp
 
 The **Freeze Delegate Plugin** is an **owner managed plugin**, that means that it requires the owner's signature to be applied to the asset.
 
-This plugin allows the **delegate to freeze and unfreeze the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be unfrozen before revocation).
+This plugin allows the **delegate to freeze and thaw the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be thawed before revocation).
 
-**Using this plugin is lightweight**, as freezing/unfreezing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
+**Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
 
 _Learn more about it [here](/core/plugins/freeze-delegate)_
 
@@ -46,11 +46,36 @@ Before diving into the instructions, let’s spend some time talking about the a
 
 **Instructions**:
 - **Stake**: This instruction applies the Freeze Delegate Plugin to freeze the asset by setting the flag to true. Additionally, it updates the`staked` key in the Attribute Plugin from 0 to the current time.
-- **Unstake**: This instruction changes the flag of the Freeze Delegate Plugin and revokes it to prevent malicious entities from controlling the asset and demanding ransom to unfreeze it. It also updates the `staked` key to 0 and sets the `staked_time` to the current time minus the staked timestamp.
+- **Unstake**: This instruction changes the flag of the Freeze Delegate Plugin and revokes it to prevent malicious entities from controlling the asset and demanding ransom to thaw it. It also updates the `staked` key to 0 and sets the `staked_time` to the current time minus the staked timestamp.
 
 ## Building the Program: A Step-by-Step Guide
 
 Now that we understand the logic behind our program, **it’s time to dive into the code and bring everything together**!
+
+### Dependencies and Imports
+
+Before writing our program, let's look at what package we need and what function from them to make sure our program works! 
+
+Let's look at the different packages used for this example:
+
+```json
+"dependencies": {
+    "@metaplex-foundation/mpl-core": "1.1.0-alpha.0",
+    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
+    "bs58": "^5.0.0",
+    "typescript": "^5.4.5"
+}
+```
+
+And the different functions from those packages are as follow:
+
+```typescript
+import { createSignerFromKeypair, signerIdentity, publicKey, transactionBuilder, Transaction } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { addPlugin, updatePlugin, fetchAsset, removePlugin } from '@metaplex-foundation/mpl-core'
+import { base58 } from '@metaplex-foundation/umi/serializers';
+```
 
 ### Umi and Core SDK Overview
 
@@ -62,10 +87,6 @@ _For more information, you can find an overview [here](/umi/getting-started)_
 
 **The basic Umi setup for this example will look like this**:
 ```typescript
-import { generateSigner, createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import wallet from "../wallet.json";
-
 const umi = createUmi("https://api.devnet.solana.com", "finalized")
 
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
@@ -145,7 +166,7 @@ If the asset does not have the attribute plugin, add it and populate it with the
 
 ```typescript
 if (!fetchedAsset.attributes) {
-    tx = await addPlugin(umi, {
+    tx = await transactionBuilder().add(addPlugin(umi, {
         asset,
         collection,
         plugin: {
@@ -155,12 +176,14 @@ if (!fetchedAsset.attributes) {
             { key: "stakedTime", value: "0" },
         ],
         },
-    }).sendAndConfirm(umi);
+    })).add(
+        [...]
+    )
 } else {
 ```
 
 2. **Check for Staking Attributes**:
-If the asset has the attribute plugin, ensure it contains the staking attributes necessary for the staking instruction.
+If the asset has the staking attribute, ensure it contains the staking attributes necessary for the staking instruction. 
 
 ```typescript
 } else {
@@ -170,15 +193,13 @@ If the asset has the attribute plugin, ensure it contains the staking attributes
     );
 ```
 
-3. **Check Staking Attributes Value**
-If the asset has the staking attribute, check if the asset is already staked and if not we need to update the `staked` key with the current timeStamp as string:
+If it does, check if the asset is already staked and update the `staked` key with the current timeStamp as string:
 
 ```typescript
 if (isInitialized) {
     const stakedAttribute = assetAttribute.find(
         (attr) => attr.key === "staked"
     );
-
 
     if (stakedAttribute && stakedAttribute.value !== "0") {
         throw new Error("Asset is already staked");
@@ -192,8 +213,7 @@ if (isInitialized) {
 } else {
 ```
 
-4. **Add Staking Attributes if Not Present**:
-If the asset does not have the staking attributes, add them to the existing attribute list.
+If it doesn't, add them to the existing attribute list.
 
 ```typescript
 } else {
@@ -202,18 +222,37 @@ If the asset does not have the staking attributes, add them to the existing attr
 }
 ```
 
-5. **Update the Attribute Plugin**:
-Finally, update the attribute plugin with the new or modified attributes.
+3. **Update the Attribute Plugin**:
+Update the attribute plugin with the new or modified attributes.
 
 ```typescript
-tx = await updatePlugin(umi, {
+tx = await transactionBuilder().add(updatePlugin(umi, {
     asset,
     collection,
     plugin: {
     type: "Attributes",
         attributeList: assetAttribute,
     },
-}).sendAndConfirm(umi);
+})).add(
+    [...]
+)
+```
+
+4. **Freeze the Asset**
+Whether the asset already had the attribute plugin or not, freeze the asset in place so it can't be traded
+
+```typescript
+tx = await transactionBuilder().add(
+    [...]
+).add(addPlugin(umi, {
+    asset,
+    collection,
+    plugin: {
+        type: "FreezeDelegate",
+        frozen: true,
+        authority: { type: "UpdateAuthority" }
+    }
+})).buildAndSign(umi);
 ```
 
 **Here's the full instruction**:
@@ -229,11 +268,11 @@ tx = await updatePlugin(umi, {
 
     const currentTime = new Date().getTime().toString();
 
-    let tx;
+    let tx: Transaction;
 
     // Check if the Asset has an Attribute Plugin attached to it, if not, add it
     if (!fetchedAsset.attributes) {
-        tx = await addPlugin(umi, {
+        tx = await transactionBuilder().add(addPlugin(umi, {
             asset,
             collection,
             plugin: {
@@ -243,7 +282,15 @@ tx = await updatePlugin(umi, {
                 { key: "stakedTime", value: "0" },
             ],
             },
-        }).sendAndConfirm(umi);
+        })).add(addPlugin(umi, {
+            asset,
+            collection,
+            plugin: {
+                type: "FreezeDelegate",
+                frozen: true,
+                authority: { type: "UpdateAuthority" }
+            }
+        })).buildAndSign(umi);
     } else {
         // If it is, fetch the Asset Attribute Plugin attributeList
         const assetAttribute = fetchedAsset.attributes.attributeList;
@@ -273,20 +320,27 @@ tx = await updatePlugin(umi, {
             assetAttribute.push({ key: "stakedTime", value: "0" });
         }
 
-        // Update the Asset Attribute Plugin
-        tx = await updatePlugin(umi, {
+        // Update the Asset Attribute Plugin and Add the FreezeDelegate Plugin
+        tx = await transactionBuilder().add(updatePlugin(umi, {
             asset,
             collection,
             plugin: {
             type: "Attributes",
                 attributeList: assetAttribute,
             },
-        }).sendAndConfirm(umi);
+        })).add(addPlugin(umi, {
+            asset,
+            collection,
+            plugin: {
+                type: "FreezeDelegate",
+                frozen: true,
+                authority: { type: "UpdateAuthority" }
+            }
+        })).buildAndSign(umi);
     }
 
     // Deserialize the Signature from the Transaction
-    const signature = base58.deserialize(tx.signature)[0];
-    console.log(`\nAsset Staked: https://solana.fm/tx/${signature}?cluster=devnet-alpha`);
+    console.log(`Asset Staked: https://solana.fm/tx/${base58.deserialize(await umi.rpc.sendTransaction(tx))[0]}?cluster=devnet-alpha`);
 })();
 ```
 
@@ -295,6 +349,7 @@ tx = await updatePlugin(umi, {
 The unstaking instruction will be even easier simpler because, since the unstaking instruction can be called only after the staking instruction, many of the checks are inherently covered by the staking instruction itself. 
 
 We start by calling the `fetchAsset(...)` instruction to retrieve all information about the asset.
+
 ```typescript
 const fetchedAsset = await fetchAsset(umi, asset);
 ```
@@ -330,8 +385,6 @@ if (!stakedAttribute) {
     );
 }
 ```
-   
-2. **Check if the Asset is staked and update the attributes**
 
 Once we confirm that the asset has the staking attributes, **we check if the asset is currently staked**. If it is staked, we update the staking attributes as follows:
 - Set `Staked` field to zero
@@ -356,29 +409,54 @@ if (stakedAttribute.value === "0") {
 }
 ```
 
-3. **Update the Attribute Plugin**
-Finally, update the attribute plugin with the updated data from the unstaking instruction.
+2. **Update the Attribute Plugin**
+Update the attribute plugin with the new or modified attributes.
 
 ```typescript
-let tx = await updatePlugin(umi, {
+tx = await transactionBuilder().add(updatePlugin(umi, {
     asset,
     collection,
     plugin: {
         type: "Attributes",
         attributeList: assetAttribute,
     },
-}).sendAndConfirm(umi);
+})).add(
+    [...]
+).add(
+    [...]
+).buildAndSign(umi);
+```
 
-const signature = base58.deserialize(tx.signature)[0];
-console.log(`\nAsset Unstaked: https://solana.fm/tx/${signature}?cluster=devnet-alpha`);
+3. **Thaw and remove the FreezeDelegate Plugin**
+At the end of the instruction, thaw the asset and remove the FreezeDelegate plugin so the asset is `free` and not controlled by the `update_authority`
+
+```typescript
+tx = await transactionBuilder().add(
+    [...]
+).add(updatePlugin(umi, {
+    asset,
+    collection,
+    plugin: {
+    type: "FreezeDelegate",
+    frozen: false,
+    },
+})).add(removePlugin(umi, {
+    asset,
+    collection,
+    plugin: {
+    type: "FreezeDelegate",
+    },
+})).buildAndSign(umi);
 ```
 
 **Here's the full instruction**:
 ```typescript
 (async () => {
     // Pass the Asset and Collection
-    const asset = publicKey("<asset-pubkey>");
-    const collection = publicKey("<collection-pubkey>")
+    const asset = publicKey("6AWm5uyhmHQXygeJV7iVotjvs2gVZbDXaGUQ8YGVtnJo");
+    const collection = publicKey("CYKbtF2Y56QwQLYHUmpAPeiMJTz1DbBZGvXGgbB6VdNQ")
+
+    let tx: Transaction;
 
     // Fetch the Asset Attributes
     const fetchedAsset = await fetchAsset(umi, asset);
@@ -428,17 +506,32 @@ console.log(`\nAsset Unstaked: https://solana.fm/tx/${signature}?cluster=devnet-
     }
 
     // Update the Asset Attribute Plugin with the new attributeList
-    let tx = await updatePlugin(umi, {
+    // then Update the Asset FreezeDelegate Plugin to thaw the asset
+    // and then Remove the FreezeDelegate Plugin from the asset
+    tx = await transactionBuilder().add(updatePlugin(umi, {
       asset,
       collection,
       plugin: {
         type: "Attributes",
         attributeList: assetAttribute,
       },
-    }).sendAndConfirm(umi);
+    })).add(updatePlugin(umi, {
+      asset,
+      collection,
+      plugin: {
+        type: "FreezeDelegate",
+        frozen: false,
+      },
+    })).add(removePlugin(umi, {
+      asset,
+      collection,
+      plugin: {
+        type: "FreezeDelegate",
+      },
+    })).buildAndSign(umi);
 
-    const signature = base58.deserialize(tx.signature)[0];
-    console.log(`\nAsset Unstaked: https://solana.fm/tx/${signature}?cluster=devnet-alpha`);
+     // Deserialize the Signature from the Transaction
+     console.log(`Asset Unstaked: https://solana.fm/tx/${base58.deserialize(await umi.rpc.sendTransaction(tx))[0]}?cluster=devnet-alpha`);
 })();
 ```
 
