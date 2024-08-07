@@ -2,10 +2,9 @@ import fs from 'fs'
 import path from 'path'
 
 export async function generateSitemap() {
-
   let directoryPath = path.join(process.cwd(), 'src/pages').replace(/\\/g, '/')
 
-  let files= []
+  let files = []
 
   function throughDirectory(directory) {
     fs.readdirSync(directory).forEach((file) => {
@@ -65,7 +64,6 @@ export async function generateSitemap() {
 
   fs.writeFileSync('public/sitemap.xml', sitemap)
   console.log('Sitemap generated!')
-
 }
 
 generateSitemap()
