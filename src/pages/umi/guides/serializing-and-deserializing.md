@@ -100,7 +100,7 @@ umi.use(signerIdentity(walletFile))
 
 {% totem-accordion title="With the Wallet Adapter" %}
 
-/// ToDO
+// Coming Soon
 
 {% /totem-accordion %}
 
