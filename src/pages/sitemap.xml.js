@@ -85,6 +85,8 @@ export async function getServerSideProps({ res }) {
     }
   
     throughDirectory(path.join(directoryPath))
+
+    console.log(files)
   
     const filter = [
       ".html"
@@ -106,6 +108,7 @@ export async function getServerSideProps({ res }) {
         return `${`https://developers.metaplex.com`}${path}`
       })
   
+      console.log({staticPages})
     // Include dynamic pages if you have any
     // Example: Fetch dynamic routes from your CMS or database
   
