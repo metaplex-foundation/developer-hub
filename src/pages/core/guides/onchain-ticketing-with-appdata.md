@@ -392,7 +392,7 @@ pub fn create_ticket(ctx: Context<CreateTicket>, args: CreateTicketArgs) -> Resu
             authority: Some(PluginAuthority::UpdateAuthority) 
         }
     );
-    
+
     let mut ticket_external_plugin: Vec<ExternalPluginAdapterInitInfo> = vec![];
     
     ticket_external_plugin.push(ExternalPluginAdapterInitInfo::AppData(
@@ -460,7 +460,7 @@ pub struct ScanTicket<'info> {
 
 The main differences in the account struct are:
 - The ticket account is already initialized so we can deserialize it as a `BaseAssetV1` asset where we can check that the `update_authority` is the event collection and that the owner of the asset is the `owner` account. 
-- We require for both the `owner` and the `venue_authority` to be signer to ensure the scan is authenticated by both party and error-free.
+- We require for both the `owner` and the `venue_authority` to be signer to ensure the scan is authenticated by both party and error-free. The application will create a transaction, partially signed by the `venue_authority` and broadcast it so the `owner` of the ticket can sign it and send it
 
 In the instruction we start with a sanity check to see if there is any data inside of the Appdata plugin because if there is, the ticket would’ve been already scanned.
 
