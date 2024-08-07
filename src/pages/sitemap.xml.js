@@ -80,8 +80,12 @@ export async function getServerSideProps({ res }) {
   let files = []
 
   function throughDirectory(directory) {
-    fs.readdirSync(directory).forEach((file) => {
+    const fileDirectory = fs.readdirSync(directory)
+
+    console.log({ fileDirectory })
+    fileDirectory.forEach((file) => {
       const Absolute = path.join(directory, file)
+      console.log({ Absolute })
       if (fs.statSync(Absolute).isDirectory()) return throughDirectory(Absolute)
       else return files.push(Absolute)
     })
