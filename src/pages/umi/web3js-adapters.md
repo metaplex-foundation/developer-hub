@@ -1,12 +1,12 @@
 ---
-title: Web3.js adapters
+title: Web3.js Difference and Adapters
 metaTitle: Umi - Web3.js adapters
 description: Adapters to make Metaplex Umi work with Solana web3js.
 ---
 
 The `@solana/web3.js` library is currently widely used in the Solana ecosystem and defines its own types for `Publickeys`, `Transactions`, `Instructions`, etc. 
 
-When creating `Umi`, we wanted to move away from the class-based types defined in `@solana/web3.js` and instead use a more functional approach by relying only on TypeScript types. This unfortunately means that not all types from `@solana/web3.js` are compatible with the ones provided by `Umi` and vice versa.
+When creating `Umi`, we wanted to move away from the class-based types defined in `@solana/web3.js` and instead use a more functional approach by relying only on TypeScript types. This unfortunately means that, although having the same or similar import names, not all types from `@solana/web3.js` are compatible with the ones provided by `Umi` and vice versa.
 
 To help with this issue, `Umi` provides a set of adapters that allows to parse types to and from their `Web3.js` counterparts and they can be found in the [`@metaplex-foundation/umi-web3js-adapters`](https://www.npmjs.com/package/@metaplex-foundation/umi-web3js-adapters) package.
 
@@ -39,27 +39,41 @@ import {
 
 ## Publickeys
 
-Let's look into how the different publickey types gets generated and can be transformed:
+Generating public keys might seem similar at first sight, but there are some subtle differences between the packages. Web3Js uses a capital `P` and requires `new`, while the Umi version uses a lowercase `p`.
 
-**From Web3Js to Umi**
+### Umi vs Web3Js
+```ts
+import { publicKey } from '@metaplex-foundation/umi';
+import { PublicKey } from '@solana/web3.js';
+
+// Generate a new Umi Publickey
+const umiPublicKey = publicKey("11111111111111111111111111111111");
+
+// Generate a new Web3Js Publickey
+const web3jsPublickey = new PublicKey("<1111111111111111111111111111111111111111>");
+```
+
+Next, let's look into how to use the adapters.
+
+### From Web3Js to Umi
 ```ts
 import { PublicKey } from '@solana/web3.js';
 import { fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters';
 
 // Generate a new Publickey
-const web3jsPublickey = new PublicKey("<SOLANA_PUBLIC_KEY>");
+const web3jsPublickey = new PublicKey("<1111111111111111111111111111111111111111>");
 
 // Convert it using the UmiWeb3jsAdapters Package
 const umiPublicKey = fromWeb3JsPublicKey(web3jsPublickey);
 ```
 
-**From Umi to Web3Js**
+### From Umi to Web3Js
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
 import { toWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters';
 
 // Generate a new Publickey
-const umiPublicKey = publicKey("<SOLANA_PUBLIC_KEY>");
+const umiPublicKey = publicKey("11111111111111111111111111111111");
 
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsPublickey = toWeb3JsPublicKey(umiPublicKey);
@@ -67,9 +81,33 @@ const web3jsPublickey = toWeb3JsPublicKey(umiPublicKey);
 
 ## Keypairs
 
-Let's look into how the different keypair types gets generated and can be transformed:
+Generating keypairs is where the difference from Web3Js and Umi increase. For Web3Js we can just use the `Keypair.generate()` function, for Umi we need a Umi instance before.
 
-**From Web3Js to Umi**
+### Umi vs Web3Js
+```ts
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { generateSigner, createSignerFromKeypair } from '@metaplex-foundation/umi'
+import { Keypair } from '@solana/web3.js';
+
+// Generate a new Umi instance
+const umi = createUmi('https://api.devnet.solana.com')
+
+// Generate a new Umi keypair
+const umiKeypair = generateSigner(umi)
+
+// Or use an existing one
+const umiKeypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
+
+// Generate a new Web3Js keypair
+const web3jsKeypair = Keypair.generate();
+
+// Or use an existing one
+const web3jsKeypair = Keypair.fromSecretKey(new Uint8Array(walletFile));
+```
+
+Next, let's look into how to use the adapters.
+
+### From Web3Js to Umi
 ```ts
 import { Keypair } from '@solana/web3.js';
 import { fromWeb3JsKeypair } from '@metaplex-foundation/umi-web3js-adapters';
@@ -77,17 +115,14 @@ import { fromWeb3JsKeypair } from '@metaplex-foundation/umi-web3js-adapters';
 // Generate a new keypair
 const web3jsKeypair = Keypair.generate();
 
-// Or use an existing one
-const web3jsKeypair = Keypair.fromSecretKey(new Uint8Array(walletFile));
-
 // Convert it using the UmiWeb3jsAdapters Package
 const umiKeypair = fromWeb3JsKeypair(web3jsKeypair);
 ```
 
-**From Umi to Web3Js**
+### From Umi to Web3Js
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { generateSigner, createSignerFromKeypair } from '@metaplex-foundation/umi'
+import { generateSigner } from '@metaplex-foundation/umi'
 import { toWeb3JsKeypair } from '@metaplex-foundation/umi-web3js-adapters';
 
 // Generate a new Umi instance
@@ -96,37 +131,59 @@ const umi = createUmi('https://api.devnet.solana.com')
 // Generate a new keypair
 const umiKeypair = generateSigner(umi)
 
-// Or use an existing one
-const umiKeypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
-
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsKeypair = toWeb3JsKeypair(umiKeypair);
 ```
 
 ## Instructions
 
-Let's look into how the different instructions types gets generated and can be transformed:
+When creating instructions, the main difference is that with Umi, you need to create a Umi instance first (like the `Keyapair`) and using the `getInstructions()` you receive an array of instructions rather than a single one.
 
-**From Web3Js to Umi**
+### Umi vs Web3Js
+```ts
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { transfer, mplCore } from '@metaplex-foundation/mpl-core'
+import { SystemProgram } from '@solana/web3.js';
+
+// Generate a new Umi instance
+const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
+
+// Create a new instruction (like a core nft transfer)
+// get instructions will give you an Array of instructions
+const umiInstructions = transfer(umi, {...TransferParams}).getInstructions();
+
+// Create a new instruction (like a lamport transfer)
+const web3jsInstruction = SystemProgram.transfer({...TransferParams})
+```
+
+Next, let's look into how to use the adapters.
+
+### From Web3Js to Umi
 ```ts
 import { SystemProgram } from '@solana/web3.js';
 import { fromWeb3JsInstruction } from '@metaplex-foundation/umi-web3js-adapters';
 
+// Generate a new Umi instance
+const umi = createUmi('https://api.devnet.solana.com')
+
 // Create a new instruction (like a lamport transfer)
-const web3jsInstruction = SystemProgram.transfer(...)
+const web3jsInstruction = SystemProgram.transfer({...TransferParams})
 
 // Convert it using the UmiWeb3jsAdapters Package
 const umiInstruction = fromWeb3JsInstruction(web3jsInstruction);
 ```
 
-**From Umi to Web3Js**
+### From Umi to Web3Js
 ```ts
-import { transfer } from '@metaplex-foundation/mpl-core'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { transfer, mplCore } from '@metaplex-foundation/mpl-core'
 import { toWeb3JsInstruction } from '@metaplex-foundation/umi-web3js-adapters';
 
+// Generate a new Umi instance
+const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
+
 // Create a new instruction (like a core nft transfer)
-// get instructions will give you an Array of instructions
-const umiInstruction = transfer().getInstructions();
+const umiInstruction = transfer(umi, {...TransferParams}).getInstructions();
 
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsInstruction = umiInstruction.map(toWeb3JsInstruction);
