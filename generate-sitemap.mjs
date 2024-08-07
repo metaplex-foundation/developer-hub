@@ -63,7 +63,7 @@ export async function generateSitemap() {
         .join('')}
     </urlset>`
 
-  fs.writeFileSync('src/pages/sitemap.xml', sitemap)
+  fs.writeFileSync('public/sitemap.xml', sitemap)
   console.log('Sitemap generated!')
 
 }
