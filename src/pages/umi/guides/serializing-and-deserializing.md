@@ -1,7 +1,7 @@
 ---
 title: Serializing, Deserializing, and sending Transactions
 metaTitle: Serializing, Deserializing, and sending Transactions
-description: Learn how to use the Noop signer to pass partially signed transaction from the Backend to the Frontend (and viceversa)
+description: Learn how to Serialize and Deserialize Transactions to move them across different enviroments
 created: '08-2-2024'
 updated: '08-2-2024'
 ---

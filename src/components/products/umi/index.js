@@ -67,7 +67,7 @@ export const umi = {
           links: [
             {
               title: 'Serializing and Deserializing Transactions',
-              href: '/umi/guides/serializing-and-deserializing',
+              href: '/umi/guides/serializing-and-deserializing-transactions',
               created: '2024-08-04',
               updated: null, // null means it's never been updated
             },
