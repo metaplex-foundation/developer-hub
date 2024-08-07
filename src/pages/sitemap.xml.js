@@ -79,7 +79,7 @@ export async function getServerSideProps({ res }) {
 
   console.log({ json })
 
-  const staticRoutes = json.staticRoutes.map(route => {
+  const staticRoutes = json.dataRoutes.map(route => {
     return route.page
   })
 
