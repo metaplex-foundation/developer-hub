@@ -8,7 +8,7 @@ description: "The Redeemed Amount guard forbids minting when the number of minte
 
 The **Redeemed Amount** guard forbids minting when the number of minted NFTs for the entire Candy Machine reaches the configured maximum amount.
 
-This guard becomes more interesting when used with [Guard Groups](../guard-groups) since it allows us to add global minting thresholds to our groups.
+This guard becomes more interesting when used with [Guard Groups](/candy-machine/guard-groups) since it allows us to add global minting thresholds to our groups.
 
 {% diagram  %}
 
@@ -107,7 +107,7 @@ Add this object into the guard section your config.json file:
 
 Notice that, even if the Candy Machine contains 500 items, only 300 of these items will be mintable because of this guard.
 
-Thus, this guard becomes more useful when using [Guard Groups](/programs/candy-machine/guard-groups). Here’s another example using two groups such that the first 300 NFTs can be minted for 1 SOL but the last 200 will need 2 SOL to mint.
+Thus, this guard becomes more useful when using [Guard Groups](/candy-machine/guard-groups). Here’s another example using two groups such that the first 300 NFTs can be minted for 1 SOL but the last 200 will need 2 SOL to mint.
 
 {% dialect-switcher title="Using the Redeemed Amount Guard with groups example" %}
 {% dialect title="JavaScript" id="js" %}

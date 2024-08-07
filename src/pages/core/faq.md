@@ -4,14 +4,14 @@ metaTitle: Core - FAQ
 description: Frequently asked questions about Core
 ---
 
-## Why does the Core Asset and Collection accounts have both on-chain and off-chain data?
+## Why does the Core Asset and Collection accounts have both onchain and off-chain data?
 
-The Core Asset and Collection accounts both contain on-chain data, yet both also include a `URI` attribute that points to an off-chain JSON file which provides additional data. Why is that? Can't we just store everything on-chain? Well, there are several issues with storing data on-chain:
+The Core Asset and Collection accounts both contain onchain data, yet both also include a `URI` attribute that points to an off-chain JSON file which provides additional data. Why is that? Can't we just store everything onchain? Well, there are several issues with storing data onchain:
 
-- Storing data on-chain requires paying rent. If we had to store everything within the Asset or Collection account, which may include long texts such as the description of an asset, it would require a lot more bytes and creating an Asset would suddenly be a lot more expensive, since storing more bytes means more rent has to be paid
-- On-chain data is less flexible. Once an account state is created using a certain byte structure it cannot easily be changed without potentially causing deserialization issues. Therefore, if we had to store everything on-chain, the standard would be a lot harder to evolve with the demands of the ecosystem.
+- Storing data onchain requires paying rent. If we had to store everything within the Asset or Collection account, which may include long texts such as the description of an asset, it would require a lot more bytes and creating an Asset would suddenly be a lot more expensive, since storing more bytes means more rent has to be paid
+- onchain data is less flexible. Once an account state is created using a certain byte structure it cannot easily be changed without potentially causing deserialization issues. Therefore, if we had to store everything onchain, the standard would be a lot harder to evolve with the demands of the ecosystem.
 
-Therefore, splitting the data into on-chain and off-chain data allows users to get the best of both worlds where on-chain data can be used by the program **to create guarantees and expectations for its users** and off-chain data can be used **to provide standardized yet flexible information**. But don't worry, if you want data entirely on chain Metaplex also offers [Inscriptions](/inscription) for this this purpose.
+Therefore, splitting the data into onchain and off-chain data allows users to get the best of both worlds where onchain data can be used by the program **to create guarantees and expectations for its users** and off-chain data can be used **to provide standardized yet flexible information**. But don't worry, if you want data entirely on chain Metaplex also offers [Inscriptions](/inscription) for this this purpose.
 
 ## Are there any costs to using Core?
 
@@ -48,11 +48,11 @@ await createAsset(umi, {
 
 ## How to set an Asset to be Immutable?
 
-_coming soon_
+There are multiple levels of "immutability" in Core. You can find more information and how to implement it in [this guide](/core/guides/immutability).
 
 ## What are the differences between Metaplex Token Metadata and Core?
 
 Core is an entirely new standard designed specifically for NFTs, hence there are several notable differences. For example Core is cheaper, requires less Compute Units and should be easier to work with from a developer perspective. Have a look at the [differences](/core/tm-differences) page for details.
 
 ## Does Core Support Editions?
-Yes! Using the [Edition](/core/plugins/edition) and [Master Edition](/core/plugins/editions) Plugins. You can find more information in the ["How to print Editions" Guide](/core/guides/print-editions).
+Yes! Using the [Edition](/core/plugins/edition) and [Master Edition](/core/plugins/master-edition) Plugins. You can find more information in the ["How to print Editions" Guide](/core/guides/print-editions).

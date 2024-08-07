@@ -16,7 +16,7 @@ The Metaplex Inscription Program allows you to write data directly to Solana, us
 
 ## Introduction
 
-NFT JSON data and Images have historically been stored on decentralized storage providers like Arweave or IPFS. The Inscription program introduces Solana as another option for NFT data storage, allowing you to write that data directly to the chain. The Metaplex Inscription program introduces the novel use case of all of an NFT's associated data now being stored on Solana. This enables many new use cases such as Solana programs with trait-based bids, dynamic images that are updated via programs, or even RPG game state on-chain.
+NFT JSON data and Images have historically been stored on decentralized storage providers like Arweave or IPFS. The Inscription program introduces Solana as another option for NFT data storage, allowing you to write that data directly to the chain. The Metaplex Inscription program introduces the novel use case of all of an NFT's associated data now being stored on Solana. This enables many new use cases such as Solana programs with trait-based bids, dynamic images that are updated via programs, or even RPG game state onchain.
 
 There are two different kinds of Inscriptions:
 
@@ -27,9 +27,9 @@ There are two different kinds of Inscriptions:
 
 Inscriptions can be used in addition to off chain storage like Arweave, where the metadata JSON and the media is stored, or can be completely replace those off chain storage using the [Inscription Gateway](#inscription-gateway).
 
-In both cases the same process to create the inscription is used. When using the gateway the only difference is the URI used in the on-chain metadata. Read more on this in the [Gateway section](#inscription-gateway).
+In both cases the same process to create the inscription is used. When using the gateway the only difference is the URI used in the onchain metadata. Read more on this in the [Gateway section](#inscription-gateway).
 
-When storing the NFT Metadata on-chain three inscription accounts are used:
+When storing the NFT Metadata onchain three inscription accounts are used:
 
 1. `inscriptionAccount` which stores the JSON Metadata.
 2. `inscriptionMetadata` which stores the metadata of the inscription
@@ -102,7 +102,7 @@ inscriptionMetadataAccount
 
 {% /diagram %}
 
-The below script creates both of these Accounts for you and points the newly minted NFT to the Metaplex gateway. With this your NFT is completely on-chain.
+The below script creates both of these Accounts for you and points the newly minted NFT to the Metaplex gateway. With this your NFT is completely onchain.
 
 {% dialect-switcher title="Inscribe Data for new NFT using the Gateway" %}
 {% dialect title="JavaScript" id="js" %}
@@ -150,7 +150,7 @@ builder = builder.add(
     inscriptionAccount: inscriptionAccount[0],
     inscriptionMetadataAccount,
     value: Buffer.from(
-      '{"description": "A bread! But on-chain!", "external_url": "https://breadheads.io"}'
+      '{"description": "A bread! But onchain!", "external_url": "https://breadheads.io"}'
     ),
     associatedTag: null,
     offset: 0,
@@ -208,9 +208,9 @@ pnpm cli inscribe -r <RPC_ENDPOINT> -k <KEYPAIR_FILE> -m <NFT_ADDRESS>
 
 ### Inscriptions as a Storage Provider
 
-In addition to the usage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB on-chain. An unlimited number of [Associated Inscriptions](inscription/associatedInscriptions) can be created.
+In addition to the usage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB onchain. An unlimited number of [Associated Inscriptions](#associated-inscription-accounts) can be created.
 
-This can be useful when writing an on-chain game that needs to store JSON data, storing text on-chain, or storing any program-related data that's not an NFT.
+This can be useful when writing an onchain game that needs to store JSON data, storing text onchain, or storing any program-related data that's not an NFT.
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -295,7 +295,7 @@ builder = builder.add(
   writeData(umi, {
     inscriptionAccount: inscriptionAccount.publicKey,
     inscriptionMetadataAccount,
-    value: Buffer.from('{"description": "A bread! But on-chain!"'),
+    value: Buffer.from('{"description": "A bread! But onchain!"'),
     associatedTag: null,
     offset: 0,
   })
@@ -307,7 +307,7 @@ builder = builder.add(
     inscriptionMetadataAccount,
     value: Buffer.from(', "external_url":'),
     associatedTag: null,
-    offset: '{"description": "A bread! But on-chain!"'.length,
+    offset: '{"description": "A bread! But onchain!"'.length,
   })
 )
 
@@ -317,7 +317,7 @@ builder = builder.add(
     inscriptionMetadataAccount,
     value: Buffer.from(' "https://breadheads.io"}'),
     associatedTag: null,
-    offset: '{"description": "A bread! But on-chain!", "external_url":'.length,
+    offset: '{"description": "A bread! But onchain!", "external_url":'.length,
   })
 )
 
@@ -421,4 +421,4 @@ The other pages of this documentation aim to document it further and explain sig
 - [Clear](/inscription/clear)
 - [close](/inscription/close)
 - [Authorities](/inscription/authority)
-- [Inscription Gateway](/inscription/gateway)
+- [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway)

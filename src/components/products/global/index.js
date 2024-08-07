@@ -26,13 +26,13 @@ export const global = {
         {
           title: 'Resources',
           links: [
-            { title: 'Offical Links', href: '/official-links' },
+            { title: 'Official Links', href: '/official-links' },
             { title: 'Developer Tools', href: '/developer-tools' },
             {
               title: 'Understanding Programs',
               href: '/understanding-programs',
             },
-            {title: "Working with Rust", href: '/working-with-rust'},
+            {title: "Metaplex Rust SDKs", href: '/guides/rust/metaplex-rust-sdks'},
             { title: 'RPC Providers', href: '/rpc-providers' },
             { title: 'Storage Providers', href: '/storage-providers' },
             { title: 'Stability Index', href: '/stability-index' },

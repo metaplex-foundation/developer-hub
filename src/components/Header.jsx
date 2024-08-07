@@ -11,6 +11,7 @@ import { SwitcherDialog } from '@/components/products/SwitcherDialog'
 import { IconWithName } from '@/components/products/IconWithName'
 import NavList from './NavList'
 import { categoryToColor } from '@/components/products/IconWithName'
+import { Logo } from './products/global/Logo'
 
 export function Header({ page }) {
   let [isScrolled, setIsScrolled] = useState(false)
@@ -35,21 +36,32 @@ export function Header({ page }) {
           : 'dark:bg-transparent'
       )}
     >
-      <div className="flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
+      <div className="flex flex-wrap items-center justify-between border-b border-neutral-600 px-4 py-5 sm:px-6 lg:px-8">
         <div className="mr-6 flex lg:hidden">
           <MobileNavigation page={page} />
         </div>
         <div className="relative flex flex-grow basis-0 items-center">
           <div className="hidden flex-col lg:flex">
-            <Link href={`/${page.product.path}`}>
+            <Link href={`/`}>
               {React.cloneElement(page.product.icon, {
                 color: categoryToColor.get(
                   page.product.navigationMenuCatergory
                 ),
                 className: 'h-8 w-8 sm:hidden',
               })}
-              <IconWithName product={page.product} className="hidden sm:flex" />
-              {console.log(page.product)}
+              {/* <IconWithName product={page.product} className="hidden sm:flex" /> */}
+              {/* {console.log(page.product)} */}
+              <div className="flex">
+                <Logo className="h-8 w-8" />
+                <div className="ml-4 flex flex-1 flex-col justify-center text-left">
+                  <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
+                    Metaplex
+                  </div>
+                  <div className="mt-1 text-sm leading-none text-slate-500 dark:text-slate-400">
+                    Developer Hub
+                  </div>
+                </div>
+              </div>
             </Link>
           </div>
           <div className="flex flex-col lg:hidden">
@@ -68,6 +80,7 @@ export function Header({ page }) {
                   <IconWithName
                     product={page.product}
                     className="hidden sm:flex"
+                    description={true}
                   />
                 </button>
               )}
@@ -92,13 +105,23 @@ export function Header({ page }) {
           </Link>
         </div>
       </div>
-      {page.product.sections && page.product.sections.length > 1 && (
-        <Sections
-          className="hidden gap-6 px-2 py-2 text-sm sm:px-4 lg:flex lg:px-6"
-          sections={page.product.sections}
-          activeSectionId={page.activeSection?.id}
-        />
-      )}
+
+      {!page.product.isJsxPage &&
+        page.product.sections &&
+        page.product.sections.length > 1 && (
+          <div className="flex justify-center px-8 py-2">
+            <IconWithName
+              product={page.product}
+              className="flex items-center sm:flex"
+            />
+
+            <Sections
+              className="hidden gap-6 px-2 py-2 text-sm sm:px-4 lg:flex lg:px-6 "
+              sections={page.product.sections}
+              activeSectionId={page.activeSection?.id}
+            />
+          </div>
+        )}
     </header>
   )
 }

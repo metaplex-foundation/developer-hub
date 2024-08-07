@@ -1,11 +1,11 @@
 import {
   changelogSection,
   documentationSection,
-  recipesSection,
-  referencesSection,
+  guidesSection,
+  referencesSection
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const tokenMetadata = {
   name: 'Token Metadata',
@@ -63,25 +63,35 @@ export const tokenMetadata = {
       ],
     },
     {
-      ...referencesSection('token-metadata'),
-      href: `https://mpl-token-metadata.typedoc.metaplex.com/`,
-      target: '_blank',
-    },
-    {
-      ...recipesSection('token-metadata'),
+      ...guidesSection('token-metadata'),
       navigation: [
         {
-          title: 'Recipes',
+          title: 'Guides',
           links: [
-            { title: 'Overview', href: '/token-metadata/recipes' },
+            { title: 'Overview', href: '/token-metadata/guides' },
             {
               title: 'Get Mints by Collection',
-              href: '/token-metadata/recipes/get-by-collection',
+              href: '/token-metadata/guides/get-by-collection',
+            },
+          ],
+        },
+        {
+          title: 'Javascript',
+          links: [
+            {
+              title: 'Create an NFT',
+              href: '/token-metadata/guides/javascript/create-an-nft',
             },
           ],
         },
       ],
     },
+    {
+      ...referencesSection('token-metadata'),
+      href: `https://mpl-token-metadata-js-docs.vercel.app/`,
+      target: '_blank',
+    },
+
     { ...changelogSection('token-metadata') },
   ],
 }

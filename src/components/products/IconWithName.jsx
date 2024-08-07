@@ -7,7 +7,7 @@ export const categoryToColor = new Map([
   ['Dev Tools', '#7DEDFC'],
 ])
 
-export function IconWithName({ product, ...props }) {
+export function IconWithName({ product, description, ...props }) {
   return (
     <div className="flex" {...props}>
       {React.cloneElement(product.icon, {
@@ -18,9 +18,11 @@ export function IconWithName({ product, ...props }) {
         <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
           {product.name}
         </div>
-        <div className="mt-1 text-sm leading-none text-slate-500 dark:text-slate-400">
-          {product.headline}
-        </div>
+        {description && (
+          <div className="mt-1 text-sm leading-none text-slate-500 dark:text-slate-400">
+            {product.headline}
+          </div>
+        )}
       </div>
     </div>
   )

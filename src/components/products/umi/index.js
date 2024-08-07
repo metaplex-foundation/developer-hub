@@ -1,11 +1,12 @@
 import {
   changelogSection,
   documentationSection,
+  guidesSection,
   recipesSection,
   referencesSection,
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { CodeBracketSquareIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const umi = {
   name: 'Umi',
@@ -27,9 +28,11 @@ export const umi = {
             { title: 'Overview', href: '/umi' },
             { title: 'Getting started', href: '/umi/getting-started' },
             { title: 'Connecting to Umi', href: '/umi/connecting-to-umi' },
-            { title: 'Metaplex Umi Plugins', href: '/umi/metaplex-umi-plugins' },
+            {
+              title: 'Metaplex Umi Plugins',
+              href: '/umi/metaplex-umi-plugins',
+            },
             { title: 'Web3js Differences', href: '/umi/web3js-differences' },
-
           ],
         },
         {
@@ -57,11 +60,22 @@ export const umi = {
       ],
     },
     {
-      ...referencesSection('hydra'),
+      ...guidesSection('umi'),
+      navigation: [
+        {
+          title: 'Guides',
+          links: [
+            { title: 'Watch this space!', href: '' },
+          ],
+        },
+      ],
+    },
+    {
+      ...referencesSection('umi'),
       href: `https://umi.typedoc.metaplex.com/`,
       target: '_blank',
     },
-    { ...recipesSection('umi') },
-    { ...changelogSection('umi') },
+
+    // { ...changelogSection('umi') },
   ],
 }

@@ -14,7 +14,7 @@ Plugins support the ability to assign an authority over the plugin. If an `initA
 **Create Plugin Helper**
 
 The `createPlugin()` helper gives you a typed method that allows you to assign plugins during the `addPlugin()` process.
-For a full list of plugins and their arguments see the [plugins overview](/core/plugins/overview) page.
+For a full list of plugins and their arguments see the [plugins overview](/core/plugins) page.
 
 ### Adding a Plugin with the default authority
 

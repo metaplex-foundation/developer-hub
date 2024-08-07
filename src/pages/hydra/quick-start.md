@@ -22,7 +22,7 @@ Install the package from npm:
 yarn add @glasseaters/hydra-sdk
 ```
 
-This is how you'd set up a Hydra with the Wallet [membership model](./intro#adding-members).
+This is how you'd set up a Hydra with the Wallet [membership model](/hydra#adding-members).
 
 ```ts
 import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
@@ -58,7 +58,7 @@ const { fanout, nativeAccount } = await fanoutSdk.initializeFanout({
 // fanout is your fanout config address
 // nativeAccount is your account address
 
-// Retrieve the On-chain Hydra Wallet
+// Retrieve the onchain Hydra Wallet
 const fanoutAccount = await fanoutSdk.fetch<Fanout>(
   fanout,
   Fanout

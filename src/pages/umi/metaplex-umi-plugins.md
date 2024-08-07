@@ -14,7 +14,7 @@ Program feature set includes:
 
 - Minting
 - Updating
-- Transfering
+- Transferring
 - Burning
 - Delegating
 - Collection Management
@@ -26,24 +26,39 @@ Candy Machine is a Metaplex program that allows you to set up a 'for sale' NFT a
 Program feature set includes:
 
 - Minting NFTs
-- Selling NFTs.
+- Selling NFTs
+
+## [Core](/core)
+
+Core is the next generation Solana NFT standard that uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets. 
+
+Program feature set includes:
+
+- Minting
+- Updating
+- Transferring
+- Burning
+- Delegating
+- Managing internal and external Plugins
+- Deserializing
+- Collection Management
 
 ## [DAS API](/das-api)
 
-The state data of uncompressed NFTs is all stored in on-chain accounts. This is expensive at scale. Compressed NFTs save space by encoding the state data into an on-chain Merkle tree. The detailed account data is not stored on-chain, but in data stores managed by RPC providers. The Metaplex Digital Asset Standard (DAS) API represents a unified interface for interacting with digital assets on Solana, supporting both standard (Token Metadata) and compressed (Bubblegum) assets.
+The state data of uncompressed NFTs is all stored in onchain accounts. This is expensive at scale. Compressed NFTs save space by encoding the state data into an onchain Merkle tree. The detailed account data is not stored onchain, but in data stores managed by RPC providers. The Metaplex Digital Asset Standard (DAS) API represents a unified interface for interacting with digital assets on Solana, supporting both standard (Token Metadata) and compressed (Bubblegum) assets.
 
 Program feature set includes:
 
 - Fast Data fetching, including compressed NFTs
 
-## [Inscriptions](/inscriptions)
+## [Inscriptions](/inscription)
 
 The Metaplex Inscription Program allows you to write data directly to Solana, using the blockchain as a method of data storage. The Inscription program also allows for this data storage to be optionally linked to an NFT. In this overview, we explain how this program works and how we can leverage its various features at a high level.
 
 Program feature set includes:
 
 - Writing Data directly to the Solana blockchain
-- Reading inscription data from the Solana blochain
+- Reading inscription data from the Solana blockchain
 
 ## [Token Metadata (NFT, pNFT)](/token-metadata)
 
@@ -54,7 +69,7 @@ Program feature set includes:
 - Data Fetching
 - Minting
 - Updating
-- Transfering
+- Transferring
 - Burning
 - Delegating
 - Collection Management

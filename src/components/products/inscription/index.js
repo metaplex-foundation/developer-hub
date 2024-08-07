@@ -52,10 +52,10 @@ export const inscription = {
               title: 'Inscription Sharding',
               href: '/inscription/sharding',
             },
-            {
-              title: 'Parallel Writes',
-              href: '/inscription/parallel-writes',
-            },
+            // {
+            //   title: 'Parallel Writes',
+            //   href: '/inscription/parallel-writes',
+            // },
           ],
         },
       ],

@@ -4,17 +4,17 @@ metaTitle: Token Metadata - Verified Collections
 description: Learn how to safely wrap Assets into collections on Token Metadata
 ---
 
-Certified Collections enables NFTs – and tokens in general — **to be grouped together** and for that information to be **verified on-chain**. Additionally, it makes it easier to manage these collections by allocating data for them on-chain. {% .lead %}
+Certified Collections enables NFTs – and tokens in general — **to be grouped together** and for that information to be **verified onchain**. Additionally, it makes it easier to manage these collections by allocating data for them onchain. {% .lead %}
 
 This feature provides the following advantages:
 
-- Easy to identify which collection any given NFT belongs to without making additional on-chain calls.
-- Possible to find all NFTs that belong to a given collection ([Check the Recipe to see how](/token-metadata/recipes/get-by-collection)).
+- Easy to identify which collection any given NFT belongs to without making additional onchain calls.
+- Possible to find all NFTs that belong to a given collection ([Check the Guide to see how](/token-metadata/guides/get-by-collection)).
 - Easy to manage the collection metadata such as its name, description and image.
 
 ## Collections are NFTs
 
-In order to group NFTs — or any token — together, we must first create a Collection NFT whose purpose is to store any metadata related to that collection. That's right, **a collection of NFT is itself, an NFT**. It has the same data layout on-chain as any other NFT.
+In order to group NFTs — or any token — together, we must first create a Collection NFT whose purpose is to store any metadata related to that collection. That's right, **a collection of NFT is itself, an NFT**. It has the same data layout onchain as any other NFT.
 
 The difference between a Collection NFT and a Regular NFT is that the information provided by the former will be used to define the group of NFTs it contains whereas the latter will be used to define the NFT itself.
 

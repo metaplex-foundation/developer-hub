@@ -47,9 +47,9 @@ await mintV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Get leaf schema from mint transaction {% #get-leaf-schema-from-mint-transaction %}
+### Get leaf schema and Asset ID from mint transaction {% #get-leaf-schema-from-mint-transaction %}
 
-You can retrieve the leaf and determine the asset ID from the `mintV1` transaction using the `parseLeafFromMintV1Transaction` helper.
+You can retrieve the leaf and determine the asset ID from the `mintV1` transaction using the `parseLeafFromMintV1Transaction` helper. This function parses the Transaction, therefore you have to make sure that it has been finalized before calling `parseLeafFromMintV1Transaction`.
 
 {% dialect-switcher title="Get leaf schema from mint transaction" %}
 {% dialect title="JavaScript" id="js" %}
@@ -63,6 +63,7 @@ import {
 const { signature } = await mintV1(umi, { leafOwner, merkleTree, metadata }).sendAndConfirm(umi, { confirm: { commitment: 'confirmed' } });
 const leaf: LeafSchema = await parseLeafFromMintV1Transaction(umi, signature);
 const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
+// or const assetId = leaf.id;
 ```
 
 {% /dialect %}
@@ -147,7 +148,7 @@ await createNft(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Get leaf schema from mint to collection transaction {% #get-leaf-schema-from-mint-to-collection-transaction %}
+### Get leaf schema and Asset ID from mint to collection transaction {% #get-leaf-schema-from-mint-to-collection-transaction %}
 
 Again you can retrieve the leaf and determine the asset ID from the `mintToCollectionV1` transaction using the `parseLeafFromMintToCollectionV1Transaction` helper.
 
@@ -166,6 +167,7 @@ const { signature } = await mintToCollectionV1(umi, {
 
 const leaf: LeafSchema = await parseLeafFromMintToCollectionV1Transaction(umi, signature);
 const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
+// or const assetId = leaf.id;
 ```
 
 {% /dialect %}

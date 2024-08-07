@@ -28,7 +28,7 @@ Whilst all of Metaplex's products offer clients that include all you need to get
 
 ## SPL System
 
-The instructions of the SPL System program can be used to create new uninitialized accounts on-chain and transfer SOL between wallets. You can read more about the SPL System program in [Solana's official documentation](https://docs.solana.com/developing/runtime-facilities/programs).
+The instructions of the SPL System program can be used to create new uninitialized accounts onchain and transfer SOL between wallets. You can read more about the SPL System program in [Solana's official documentation](https://docs.solana.com/developing/runtime-facilities/programs).
 
 Note that, you may be interested in the [MPL System Extras program](#mpl-system-extras) which offers a few convenient instructions when dealing with creating accounts and transferring SOL.
 
@@ -306,7 +306,7 @@ This helper method accepts a "base" transaction builder and a recent slot and re
 - An array of LUTs to be used in the base transaction builder once the LUTs have been created.
 
 ```ts
-import { createEmptyLut } from '@metaplex-foundation/mpl-toolbox'
+import { createLutForTransactionBuilder } from '@metaplex-foundation/mpl-toolbox'
 
 // 1. Get the LUT builders and the LUT accounts for a given transaction builder.
 const recentSlot = await umi.rpc.getSlot({ commitment: 'finalized' })

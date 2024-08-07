@@ -4,7 +4,7 @@ metaTitle: Bubblegum - Overview
 description: Provides a high-level overview of compressed NFTs.
 ---
 
-Bubblegum is the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data on-chain. {% .lead %}
+Bubblegum is the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
 
 {% quick-links %}
 
@@ -18,7 +18,7 @@ Bubblegum is the Metaplex Protocol program for creating and interacting with co
 
 As NFTs have flourished on the Solana blockchain, there’s been an increasing need for NFTs to be as ubiquitous as any digital asset on the Internet: every single item in your game’s inventory, proof-of-engagement in your favourite consumer app, or even a profile for every human on the planet.
 
-So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap (0.012 SOL) but scales linearly; a billion NFTs would cost 12,000,000 SOL! From 10,000 NFTs at 3.5 SOL (34x), 1 million NFTs at 5 SOL (2,400x), and 1 billion NFTs at 500 SOL (24,000x), compression for NFTs drastically reduces the cost of on-chain storage of NFTs to enable creators to be as expressive with the technology as they wish.
+So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap (0.012 SOL) but scales linearly; a billion NFTs would cost 12,000,000 SOL! From 10,000 NFTs at 3.5 SOL (34x), 1 million NFTs at 5 SOL (2,400x), and 1 billion NFTs at 500 SOL (24,000x), compression for NFTs drastically reduces the cost of onchain storage of NFTs to enable creators to be as expressive with the technology as they wish.
 
 | Number of cNFTs | Storage Cost | Transaction Cost | Total Cost | Cost per cNFT |
 | --------------- | ------------ | ---------------- | ---------- | ------------- |
@@ -85,7 +85,7 @@ For each Leaf in the Merkle Tree, one can provide a list of hashes — called a 
 
 {% /diagram %}
 
-As such, Merkle Trees act as an on-chain structure that allows anyone to verify a given compressed NFT exist. They do this without storing any NFT data which makes them so scalable.
+As such, Merkle Trees act as an onchain structure that allows anyone to verify a given compressed NFT exist. They do this without storing any NFT data which makes them so scalable.
 
 Which brings us to an important question: where is the NFT data stored?
 
@@ -114,7 +114,7 @@ When we mint a new compressed NFT, its data is hashed and added as a new Leaf in
 
 Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Metaplex DAS API**.
 
-Note that not all RPCs support the DAS API. As such, you may be interested in the [“Metaplex DAS API RPCs”](/bubblegum/rpcs) page to select an appropriate RPC when using compressed NFTs in your application.
+Note that not all RPCs support the DAS API. As such, you may be interested in the [“Metaplex DAS API RPCs”](/rpc-providers) page to select an appropriate RPC when using compressed NFTs in your application.
 
 We talk about this in more detail in our advanced [“Storing and indexing NFT data”](/bubblegum/stored-nft-data) guide.
 
@@ -126,7 +126,7 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 - [Transfer a cNFT](/bubblegum/transfer-cnfts).
 - [Update the data of a cNFT](/bubblegum/update-cnfts).
 - [Burn a cNFT](/bubblegum/burn-cnfts).
-- [Decompress a cNFT into a regular NFT](/bubblegum/decompress-cnfts). Note that this enables interoperability with existing smart contracts but creates on-chain accounts with rent fees.
+- [Decompress a cNFT into a regular NFT](/bubblegum/decompress-cnfts). Note that this enables interoperability with existing smart contracts but creates onchain accounts with rent fees.
 - [Delegate a cNFT](/bubblegum/delegate-cnfts).
 - [Verify and unverify a cNFT collection](/bubblegum/verify-collections).
 - [Verify and unverify the creators of a cNFT](/bubblegum/verify-creators).

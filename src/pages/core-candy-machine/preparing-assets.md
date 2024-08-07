@@ -72,7 +72,7 @@ You can either implement this manually via their own [SDK](https://docs.irys.xyz
 
 #### nftStorage
 
-_"Preserve your NFTs with our low-cost, easy-to-use solution. We aim to ensure verifiable long-term storage, powered by smart contracts and backed by our soon-to-be on-chain endowment for ultimate transparency." - [nftStorage](https://nft.storage/)_
+_"Preserve your NFTs with our low-cost, easy-to-use solution. We aim to ensure verifiable long-term storage, powered by smart contracts and backed by our soon-to-be onchain endowment for ultimate transparency." - [nftStorage](https://nft.storage/)_
 
 nftStorage uploads your files to the IPFS (InterPlanetary File System) network
 
@@ -91,7 +91,7 @@ Umi has a few plugins that can aid the upload process via plugins. At the time t
 
 #### Uploading to Arweave via Irys with Umi
 
-For a more indepth look at uploaded files with Umi please visit [Umi Storage.](umi/storage)
+For a more indepth look at uploaded files with Umi please visit [Umi Storage.](/umi/storage)
 
 {% dialect-switcher title="Uploading Files to Arweave Via Irys with Umi" %}
 {% dialect title="JavaScript" id="js" %}

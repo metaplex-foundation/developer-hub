@@ -24,14 +24,14 @@ The client SDK is divided into several modules:
 
 - `accounts`: structs representing the accounts of the program
 - `errors`: enum representing program errors
-- `instructions`: structs to facilitate the creation of instructions from client (off-chain) and programs (on-chain), and instruction arguments
+- `instructions`: structs to facilitate the creation of instructions from client (off-chain) and programs (onchain), and instruction arguments
 - `types`: structs representing types used by the program
 
 A good starting point to explore is the `instructions` module, which contains helpers to create instructions to interact with Token Metadata. These are designed to be flexible and easy-to-use. If an instruction requires additional types, these will be referenced from the `types` module. If you want to deserialize the content of a Token Metadata account, the `accounts` module has a struct representing each account with helpers methods to deserialize their content.
 
 ## 🏗️ Instruction Builders
 
-One of the main features of the client SDK is to facilitate the creation of instructions. There are two _types_ of instruction builders depending on whether you are writing off-chain or on-chain code, and both support passing accounts by name and optional positional accounts.
+One of the main features of the client SDK is to facilitate the creation of instructions. There are two _types_ of instruction builders depending on whether you are writing off-chain or onchain code, and both support passing accounts by name and optional positional accounts.
 
 ### Client (off-chain)
 
@@ -160,9 +160,9 @@ let create_ix = CreateV1Builder::new()
 
 The end result is the same `create_ix` instruction to be added to a transaction and sent for processing.
 
-### Cross Program Invocation (on-chain)
+### Cross Program Invocation (onchain)
 
-When you are writing a program that needs to interact with Token Metadata, you can use the on-chain Cross Program Invocation (CPI) builder. They work similarly to off-chain builders, with the main difference being that they expect `AccountInfo` references instead of `Pubkey`s.
+When you are writing a program that needs to interact with Token Metadata, you can use the onchain Cross Program Invocation (CPI) builder. They work similarly to off-chain builders, with the main difference being that they expect `AccountInfo` references instead of `Pubkey`s.
 
 {% totem %}
 {% totem-prose %}
@@ -362,7 +362,7 @@ let (metadata_pubkey, _) = Metadata::find_pda(mint);
 {% /totem-prose %}
 {% totem-prose %}
 
-The `create_pda` method is recommended to be used on-chain, since it can save compute units in comparison to `find_pda`, but it does require storing the `bump` used to generate the PDA derivation:
+The `create_pda` method is recommended to be used onchain, since it can save compute units in comparison to `find_pda`, but it does require storing the `bump` used to generate the PDA derivation:
 
 ```rust
 let metadata_pubkey = Metadata::create_pda(mint, bump)?;

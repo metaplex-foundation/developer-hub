@@ -83,7 +83,7 @@ const candyMachineSettings = {
 ## Metaplex Certified Collections
 
 Each Candy Machine must be associated with a special NFT known as a [Metaplex Certified Collection (MCC)](/token-metadata/collections). This **Collection NFT** enables minted NFTs to be grouped together
-and for that information to be verified on-chain.
+and for that information to be verified onchain.
 
 To ensure no one else can use your Collection NFT on their Candy Machine, the **Collection's Update Authority** is required to sign any transaction that changes the Collection on a Candy Machine. As a result, the Candy Machine can safely verify the Collection of all minted NFTs automatically.
 
