@@ -70,7 +70,9 @@ export async function getServerSideProps({ res }) {
 
     // let directoryPath = path.join(process.cwd(), 'src/pages').replace(/\\/g, '/')
 
-    let directoryPath = path.join(process.cwd(), '../src/pages').replace(/\\/g, '/')
+    let directoryPath = path.join(process.cwd(), '/src/pages').replace(/\\/g, '/')
+
+    console.log({directoryPath})
 
     let files = []
   
@@ -82,9 +84,7 @@ export async function getServerSideProps({ res }) {
       })
     }
   
-    throughDirectory(path.join(process.cwd(), 'src/pages'))
-  
-    console.log(directoryPath)
+    throughDirectory(path.join(directoryPath))
   
     const filter = [
       '/api',
