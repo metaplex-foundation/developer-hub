@@ -199,7 +199,7 @@ export const candyMachine = {
     },
     /*
     {
-      ...recipesSection('candy-machine'),
+      ...guideSection('candy-machine'),
       navigation: [
         {
           title: 'How to create a Candy Machine',
@@ -211,7 +211,6 @@ export const candyMachine = {
         },
       ],
     },
-    { ...changelogSection('candy-machine') },
     */
   ],
 }

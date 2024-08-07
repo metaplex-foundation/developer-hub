@@ -155,26 +155,7 @@ export const core = {
             },
           ],
         },
-        // {
-        //   title: 'Integration Guides',
-        //   links: [
-        //     { title: 'Wallets', href: '/core/integrations/wallets' },
-        //     {
-        //       title: 'Market Places',
-        //       href: '/core/intergations/market-places',
-        //     },
-        //     {
-        //       title: 'Staking',
-        //       href: '/core/intergations/staking',
-        //     },
-        //   ],
-        // },
       ],
-    },
-    {
-      ...referencesSection('core'),
-      href: `https://mpl-core.typedoc.metaplex.com/`,
-      target: '_blank',
     },
     {
       ...guidesSection('core'),
@@ -215,7 +196,10 @@ export const core = {
         },
       ],
     },
-    // { ...recipesSection('core') },
-    { ...changelogSection('core') },
+    {
+      ...referencesSection('core'),
+      href: `https://mpl-core.typedoc.metaplex.com/`,
+      target: '_blank',
+    },
   ],
 }
