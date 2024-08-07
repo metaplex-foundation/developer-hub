@@ -209,8 +209,7 @@ export const core = {
           links: [
             {
               title: 'Anchor Staking Example', 
-              href: '/core/guides/anchor/anchor-staking-example' },
-
+              href: '/core/guides/anchor/anchor-staking-example' 
             },
           ],
         },
