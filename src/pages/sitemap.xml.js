@@ -8,14 +8,13 @@ import path from 'path'
 export async function getServerSideProps({ res }) {
   console.log('running sitemap generation')
 
-
   let directoryPath = path
     .join(process.cwd(), '.next/routes-manifest.json')
     .replace(/\\/g, '/')
 
   const json = JSON.parse(fs.readFileSync(directoryPath, 'utf8'))
 
-  const staticRoutes = json.dataRoutes.map(route => {
+  const staticRoutes = json.dataRoutes.map((route) => {
     return route.page
   })
 

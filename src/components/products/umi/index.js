@@ -76,6 +76,5 @@ export const umi = {
       target: '_blank',
     },
 
-    // { ...changelogSection('umi') },
   ],
 }

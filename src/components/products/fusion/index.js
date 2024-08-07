@@ -38,7 +38,5 @@ export const fusion = {
       ],
     },
     { ...referencesSection('fusion') },
-    { ...recipesSection('fusion') },
-    { ...changelogSection('fusion') },
   ],
 }

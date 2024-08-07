@@ -4,7 +4,7 @@ metaTitle: Token Metadata - Guides
 description: How-to guides for Metaplex's Token Metadata product.
 ---
 
-The following recipes for MPL Token Metadata are currently available:
+The following guides for MPL Token Metadata are currently available:
 
 {% quick-links %}
 
