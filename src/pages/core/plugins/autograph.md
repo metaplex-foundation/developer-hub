@@ -1,6 +1,6 @@
 ---
-title: Core - Autograph Plugin
-metaTitle: Core - Autograph Plugin
+title: Autograph Plugin
+metaTitle: Autograph Plugin | Core
 description: Learn how to add your signatures and messages to a Core NFT Asset or Collection.
 ---
 

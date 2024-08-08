@@ -1,7 +1,7 @@
 ---
-title: Core - MPL Core Asset
-metaTitle: MPL Core Asset
-description: What is an MPL Core Asset
+title: MPL Core Asset
+metaTitle: What is a Core Asset | Core
+description: Learn what an MPL Core Asset is and why its the future of Solana NFTs.
 ---
 
 ## Overview

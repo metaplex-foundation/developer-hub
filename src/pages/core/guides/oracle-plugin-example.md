@@ -1,6 +1,6 @@
 ---
-title: Core - Create a US Market Trading Experience Using the Oracle External Plugin
-metaTitle: Core - Create a US Market Trading Experience Using the Oracle External Plugin
+title: Create a US Market Trading Experience Using the Oracle External Plugin
+metaTitle: Create a US Market Trading Experience Using the Oracle External Plugin | Core Guides
 description: This guide shows how to limit your Core Collection trades and sales during open US market hours.
 ---
 

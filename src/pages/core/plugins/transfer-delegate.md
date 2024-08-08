@@ -1,6 +1,6 @@
 ---
-title: Core - Transfer Delegate Plugin
-metaTitle: Core - Transfer Delegate Plugin
+title: Transfer Delegate Plugin
+metaTitle: Transfer Delegate Plugin | Core
 description: The Transfer Delegate plugin allows the delegate to transfer the Asset to another address at any point in time.
 ---
 

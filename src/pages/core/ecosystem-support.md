@@ -1,6 +1,6 @@
 ---
-title: Core - Ecosystem Support
-metaTitle: Core - Ecosystem Support
+title: Ecosystem Support
+metaTitle: Ecosystem Support | Core
 description: Learn about the Metaplex Core Ecosystem and which websites/apps/dApps support Metaplex Core.
 ---
 

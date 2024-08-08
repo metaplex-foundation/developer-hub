@@ -1,6 +1,6 @@
 ---
-title: Core-  Delegating and Revoking Plugins
-metaTitle: Core-  Delegating and Revoking Plugins
+title: Delegating and Revoking Plugins
+metaTitle: Delegating and Revoking Plugins | Core
 description: Learn how to delegate and revoke plugin authorities to MPL Core Assets and Collections.
 ---
 

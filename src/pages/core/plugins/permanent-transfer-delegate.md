@@ -1,6 +1,6 @@
 ---
-title: Core - Permanent Transfer Plugin
-metaTitle: Core - Permanent Transfer Plugin
+title: Permanent Transfer Plugin
+metaTitle: Permanent Transfer Plugin | Core
 description: A powerful plugin that allows the plugins delegate to transfer the Asset at any point to a given address.
 ---
 

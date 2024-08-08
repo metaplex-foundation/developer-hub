@@ -1,6 +1,6 @@
 ---
-title: Core - Create a Staking Program in Anchor
-metaTitle: Core - Create a Staking Program in Anchor
+title: Create a Staking Program in Anchor
+metaTitle: Create a Staking Program in Anchor | Core Guides
 description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking program using the Metaplex Core digital asset standard!
 ---
 

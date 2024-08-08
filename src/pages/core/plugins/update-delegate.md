@@ -1,6 +1,6 @@
 ---
-title: Core - Update Delegate Plugin
-metaTitle: Core - Update Delegate Plugin
+title: Update Delegate Plugin
+metaTitle: Update Delegate Plugin | Core
 description: Learn how to delegate additional update authorities onto a Core NFT Asset or Collection.
 updated: "06-19-2024"
 ---
