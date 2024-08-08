@@ -1,7 +1,7 @@
 ---
 title: Getting Started using Rust
-metaTitle: Token Metadata - Getting Started - Rust
-description: Get started with NFTs using Rust
+metaTitle: Rust SDK | Token Metadata
+description: Get started with NFTs using the Token Metadata Rust SDK
 ---
 
 If you are a Rust developer, you can also use a Rust client SDK to interact with the Token Metadata program. Metaplex provides a dedicated Rust client crate, which is a lightweight crate with minimal dependencies.

@@ -1,6 +1,6 @@
 ---
 title: FAQ
-metaTitle: MPL-Hybrid - FAQ
+metaTitle: FAQ | MPL-Hybrid
 description: Frequently asked questions about MPL-404
 ---
 

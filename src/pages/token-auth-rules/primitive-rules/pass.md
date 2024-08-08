@@ -1,6 +1,6 @@
 ---
 title: Pass
-metaTitle: Token Auth Rules - Pass
+metaTitle: Pass | Token Auth Rules
 description: The Pass primitive rule
 ---
 

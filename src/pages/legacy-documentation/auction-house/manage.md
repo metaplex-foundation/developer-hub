@@ -1,6 +1,6 @@
 ---
 title: Manage Auction Houses
-metaTitle: Auction House - Manage Auction Houses
+metaTitle: Manage Auction Houses | Auction House
 description: Explains how to manage Auction Houses.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: FAQ
-metaTitle: Inscription - FAQ
+metaTitle: FAQ | Inscription
 description: Frequently asked questions about Metaplex Inscriptions
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Legacy Documentation - Overview
+metaTitle: Legacy Documentation | Developer Hub
 description: A collection of documentation of older Programs and Tools which might not be used anymore or deprecated. Migrated from our old docs for documentation for completeness.
 ---
 

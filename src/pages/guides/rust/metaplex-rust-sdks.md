@@ -1,6 +1,6 @@
 ---
 title: Metaplex Rust SDKs
-metaTitle: Metaplex Rust SDKss
+metaTitle: Metaplex Rust SDKs | Guides
 description: A quick overview on Metaplex Rust SDKs.
 ---
 

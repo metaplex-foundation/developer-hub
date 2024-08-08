@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Umi - Overview
+metaTitle: Overview | Umi
 description: Provides a high-level overview of the Toolbox product and what it includes.
 ---
 

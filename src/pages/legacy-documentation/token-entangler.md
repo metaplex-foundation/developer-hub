@@ -1,3 +1,9 @@
+---
+title: Token Entangler
+metaTitle: Token Entangler | Developer Hub
+description: Documentation on the deprecated Token Entangler program by Metaplex.
+---
+
 # Overview
 
 {% callout type="warning" %}

@@ -1,6 +1,6 @@
 ---
 title: Umi and Web3js Differences
-metaTitle: Umi - Umi and Web3js Differences
+metaTitle: Umi and Web3js Differences | Umi
 description: Differences between Metaplex Umi and Solana web3js.
 ---
 

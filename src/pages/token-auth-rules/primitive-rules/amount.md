@@ -1,6 +1,6 @@
 ---
 title: Amount
-metaTitle: Token Auth Rules - Amount
+metaTitle: Amount | Token Auth Rules
 description: The Amount primitive rule
 ---
 

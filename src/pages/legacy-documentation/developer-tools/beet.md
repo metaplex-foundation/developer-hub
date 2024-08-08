@@ -1,6 +1,6 @@
 ---
 title: Beet
-metaTitle: Developer Tools - Beet
+metaTitle: Developer Tools | Beet
 description: Strict borsh compatible de/serializer and related extensions
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Inscriptions - Getting Started
+metaTitle: Getting Started | Inscription
 description: Get started with Metaplex Inscriptions.
 ---
 

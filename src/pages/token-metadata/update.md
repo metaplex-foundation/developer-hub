@@ -1,6 +1,6 @@
 ---
 title: Updating Assets
-metaTitle: Token Metadata - Updating Assets
+metaTitle: Updating Assets | Token Metadata
 description: Learn how to update Assets on Token Metadata
 ---
 

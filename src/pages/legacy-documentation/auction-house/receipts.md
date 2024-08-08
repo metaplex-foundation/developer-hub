@@ -1,6 +1,6 @@
 ---
 title: Receipts
-metaTitle: Auction House - Receipts
+metaTitle: Receipts | Auction House
 description: Explains how to generate Auction House receipts.
 ---
 ## Introduction

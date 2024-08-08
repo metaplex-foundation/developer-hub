@@ -1,6 +1,6 @@
 ---
 title: Initialize Inscriptions
-metaTitle: Inscriptions - Initialize Inscriptions
+metaTitle: Initialize Inscriptions | Inscription
 description: Learn how to create Metaplex Inscriptions
 ---
 

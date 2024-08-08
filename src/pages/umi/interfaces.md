@@ -1,6 +1,6 @@
 ---
 title: Umi's Interfaces
-metaTitle: Umi - Umi's Interfaces
+metaTitle: Interfaces | Umi
 description: Overview over Umi's Interfaces
 ---
 ## The core interfaces

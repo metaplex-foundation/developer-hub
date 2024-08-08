@@ -1,6 +1,6 @@
 ---
 title: All
-metaTitle: Token Auth Rules - All
+metaTitle: All | Token Auth Rules
 description: The All composite rule
 ---
 

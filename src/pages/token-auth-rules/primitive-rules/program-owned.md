@@ -1,6 +1,6 @@
 ---
 title: Program Owned
-metaTitle: Token Auth Rules - Program Owned
+metaTitle: Program Owned | Token Auth Rules
 description: The Program Owned primitive rule
 ---
 

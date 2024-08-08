@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Fixed-Price-Sale - Overview
+metaTitle: Overview | Fixed Price Sale
 description: Sell prints from Master Edition NFTs
 ---
 

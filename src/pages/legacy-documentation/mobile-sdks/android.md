@@ -1,6 +1,6 @@
 ---
 title: Android SDK
-metaTitle: Android SDK
+metaTitle: Android SDK | Developer Hub
 description: Metaplex Android SDK
 ---
 

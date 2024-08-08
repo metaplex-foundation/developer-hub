@@ -1,6 +1,6 @@
 ---
 title: Sending transactions
-metaTitle: Umi - Sending transactions
+metaTitle: Sending transactions | Umi
 description: Sending transactions using Metaplex Umi and Transaction Builders
 ---
 Managing and sending transactions is an important part of any Solana client. To help manage them, Umi provides a bunch of components:

@@ -1,6 +1,6 @@
 ---
 title: Fetching Accounts
-metaTitle: Umi - Fetching Accounts
+metaTitle: Fetching Accounts | Umi
 description: How to fetch Accounts using Umi
 ---
 

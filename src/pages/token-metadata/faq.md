@@ -1,6 +1,6 @@
 ---
 title: FAQ
-metaTitle: Token Metadata - FAQ
+metaTitle: FAQ | Token Metadata
 description: Frequently asked questions about Token Metadata
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Guides
-metaTitle: Token Metadata - Guides
+metaTitle: Guides | Token Metadata
 description: How-to guides for Metaplex's Token Metadata product.
 ---
 

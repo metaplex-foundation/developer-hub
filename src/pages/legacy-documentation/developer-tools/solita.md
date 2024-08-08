@@ -1,6 +1,6 @@
 ---
 title: Solita
-metaTitle: Developer Tools - Solita
+metaTitle: Developer Tools | Solita
 description: generates a low level TypeScript SDK for your Solana Rust programs
 ---
 
