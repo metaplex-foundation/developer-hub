@@ -1,6 +1,6 @@
 ---
-title: Getting Started using JavaScript with Core Candy Machine
-metaTitle: Core Candy Machine - Getting Started - JavaScript
+title: Getting Started using JavaScript
+metaTitle: Javascript SDK | Core Candy Machine
 description: Get started using Javascript with the latest mpl-core-candy-machine packages for Core Candy Machine.
 ---
 

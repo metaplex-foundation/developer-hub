@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Start Date Guard"
-metaTitle: "Core Candy Machine - Start Date Guard"
+title: "Start Date Guard"
+metaTitle: Start Date Guard | Core Candy Machine
 description: "The Core Candy Machine 'Start Date' guard determines the start date of the mint for the Core Candy Machine or phase."
 ---
 

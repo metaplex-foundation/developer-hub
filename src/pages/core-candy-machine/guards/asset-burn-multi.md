@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Asset Burn Multi Guard"
-metaTitle: "Core Candy Machine - Guards - Asset Burn Multi"
+title: Asset Burn Multi Guard
+metaTitle: Asset Burn Multi Guard | Core Candy Machine
 description: "The Core Candy Machine 'Asset Burn Multi' guard restricts minting to holders of a predefined Collection and burns the holder's Asset(s) upon purchase."
 ---
 

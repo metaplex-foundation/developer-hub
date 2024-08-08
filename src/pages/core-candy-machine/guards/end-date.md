@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - End Date Guard"
-metaTitle: "Core Candy Machine - Guards- End Date"
+title: "End Date Guard"
+metaTitle: "End Date Guard | Core Candy Machine"
 description: "The Core Candy Machine 'End Date' guard determines a date to end the minting process for the Core Candy Machine and its phases."
 ---
 

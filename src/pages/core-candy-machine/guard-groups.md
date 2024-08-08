@@ -1,6 +1,6 @@
 ---
-title: Core Candy Machine - Guard Groups
-metaTitle: Core Candy Machine - Guard Groups
+title: Guard Groups
+metaTitle: Guard Groups | Core Candy Machine
 description: Explains how to configure and use multiple groups of guards with a Core Candy Machine.
 ---
 

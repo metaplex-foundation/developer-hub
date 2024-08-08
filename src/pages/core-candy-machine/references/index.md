@@ -1,6 +1,6 @@
 ---
 title: API References
-metaTitle: Candy Machine - API References
+metaTitle: API References | Core Candy Machine
 description: References and code snippets for Metaplex's Candy Machine product.
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Allocation Guard"
-metaTitle: "Core Candy Machine - Guards - Mint Allocation"
+title: Allocation Guard
+metaTitle: Mint Allocation Guard | Core Candy Machine
 description: "Learn about the Core Candy Machine 'Allocation' guard in which you can specify the maximum number of mints in a guard group for a Core Candy Machine."
 ---
 

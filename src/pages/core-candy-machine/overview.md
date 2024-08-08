@@ -1,6 +1,6 @@
 ---
-title: Core Candy Machine - Overview of the Core Candy Machine Program
-metaTitle: Core Candy Machine - Overview of the Core Candy Machine Program
+title: Program Overview
+metaTitle: Program Overview | Core Candy Machine
 description: An overview of the Core Candy Machine program and its feature sets to help you create a minting experience.
 ---
 

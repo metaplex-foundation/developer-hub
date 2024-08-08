@@ -1,6 +1,6 @@
 ---
-title: Core Candy Machine - Getting Started with Rust SDK
-metaTitle: Core Candy Machine - Getting Started - Rust SDK
+title: Getting Started with Rust SDK
+metaTitle: Rust SDK | Core Candy Machine
 description: Get Started with the mpl-core-candy-machine Rust SDK for the Core Candy Machine program from Metaplex.
 ---
 

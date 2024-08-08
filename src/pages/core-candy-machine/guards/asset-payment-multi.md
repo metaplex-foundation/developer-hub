@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Asset Payment Multi Guard"
-metaTitle: "Core Candy Machine - Guards - Asset Payment Multi"
+title: "Asset Payment Multi Guard"
+metaTitle: "Asset Payment Multi Guard | Core Candy Machine"
 description: "The Core Candy Machine 'Asset Payment Multi' guard that charges other Core Asset(s) from a specific collection as payment for the mint from the Core Candy Machine."
 ---
 

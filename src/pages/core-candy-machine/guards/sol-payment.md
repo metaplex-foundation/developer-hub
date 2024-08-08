@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Sol Payment Guard"
-metaTitle: "Core Candy Machine - Sol Payment Guard"
+title: "Sol Payment Guard"
+metaTitle: Sol Payment Guard Guard | Core Candy Machine
 description: "The Core Candy Machine 'Sol Payment' guard charges the payer an amount in SOL when minting."
 ---
 

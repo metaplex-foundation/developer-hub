@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Edition Guard"
-metaTitle: "Candy Machine - Guards - Edition"
+title: "Edition Guard"
+metaTitle: "Edition Guard | Core Candy Machine"
 description: "The Core Candy Machine 'Edition' guard allows the minting of Editions from a Core Candy Machine."
 ---
 

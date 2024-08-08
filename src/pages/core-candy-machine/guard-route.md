@@ -1,6 +1,6 @@
 ---
-title: Core Candy Machine - Special Guard Instructions
-metaTitle: Core Candy Machine - Special Guard Instructions
+title: Special Guard Instructions
+metaTitle: Special Guard Instructions | Core Candy Machine
 description: Explains how to execute guard-specific instructions for the Core Candy Machine.
 ---
 

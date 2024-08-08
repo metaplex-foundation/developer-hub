@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Token Gate Guard"
-metaTitle: "Core Candy Machine - Token Gate Guard"
+title: Token Gate Guard
+metaTitle: Token Gate Guard | Core Candy Machine
 description: "The Core Candy Machine 'Token Gate' guard restricts minting to holders of a configured SPL Token."
 ---
 

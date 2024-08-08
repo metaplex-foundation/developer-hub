@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Mint Limit Guard"
-metaTitle: "Core Candy Machine - Mint Limit Guard"
+title: Mint Limit Guard"
+metaTitle: "Mint Limit Guard | Core Candy Machine"
 description: "The Core Candy Machine 'Mint Limit' guard allows specifying a limit on the number of Assets each wallet can mint."
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Core Candy Machine - Preparing Assets
-metaTitle: Core Candy Machine - Preparing Assets
+title: Preparing Assets
+metaTitle: Preparing Assets | Core Candy Machine
 description: How to prepare your files and assets for uploading into a Core Candy Machine.
 ---
 
