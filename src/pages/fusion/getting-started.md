@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Fusion - Getting Started
+metaTitle: Getting Started | Fusion
 description: How to use Metaplex Fusion.
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Getting Started
-metaTitle: Bubblegum - Getting Started
-description: Get started with compressed NFTs.
+metaTitle: Getting Started | Bubblegum
+description: Get started with compressed NFTs with the Metaplex Bubblegum program.
 ---
 
 Select the language / library you want to use below to get started with compressed NFTs.

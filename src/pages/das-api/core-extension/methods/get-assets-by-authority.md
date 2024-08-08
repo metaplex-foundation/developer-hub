@@ -1,6 +1,6 @@
 ---
 title: Get Core Assets by Authority
-metaTitle: DAS API Core Extension - Get Core Assets by Authority
+metaTitle: Get Core Assets by Authority | DAS API Core Extension
 description: Returns the information of all MPL Core asset with the given authority
 ---
 

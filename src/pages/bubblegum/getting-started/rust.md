@@ -1,7 +1,7 @@
 ---
 title: Getting Started using Rust
-metaTitle: Bubblegum - Getting Started - Rust
-description: Get started with compressed NFTs using Rust
+metaTitle: Rust SDK | Bubblegum
+description: Get started with compressed NFTs using the Metaplex Bubblegum Rust SDK.
 ---
 
 If you are a Rust developer, you can also use a Rust crate to interact with the Bubblegum program. Since the program is written in Rust, this crate contains all the program's logic, including helper methods that prepare instructions for us.

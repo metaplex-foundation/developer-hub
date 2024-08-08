@@ -1,6 +1,6 @@
 ---
 title: Get Core Collection
-metaTitle: DAS API Core Extension - Get Collection
+metaTitle: Get Collection | DAS API Core Extension
 description: Returns the information of a MPL Core Collection
 ---
 

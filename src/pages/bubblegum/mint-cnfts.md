@@ -1,7 +1,7 @@
 ---
 title: Minting Compressed NFTs
-metaTitle: Bubblegum - Minting Compressed NFTs
-description: Learn how to mint compressed NFTs on Bubblegum
+metaTitle: Minting Compressed NFTs | Bubblegum
+description: Learn how to mint compressed NFTs on Bubblegum.
 ---
 
 In [the previous page](/bubblegum/create-trees), we saw that we need a Bubblegum Tree to mint Compressed NFTs and we saw how to create one. Now, let's see how to mint compressed NFTs from a given Bubblegum Tree. {% .lead %}

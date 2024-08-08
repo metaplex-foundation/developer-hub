@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Hydra - Overview
+metaTitle: Overview | Hydra
 description: Provides a high-level overview of Hydra wallets.
 ---
 

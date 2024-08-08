@@ -1,6 +1,6 @@
 ---
 title: Verifying Creators
-metaTitle: Bubblegum - Verifying Creators
+metaTitle: Verifying Creators | Bubblegum
 description: Learn how to verify and unverify creators on Bubblegum
 ---
 

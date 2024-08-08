@@ -1,6 +1,6 @@
 ---
 title: Get Core Assets by Owner
-metaTitle: DAS API Core Extension - Get Core Assets by Owner
+metaTitle: Get Core Assets by Owner | DAS API Core Extension
 description: Returns the information of all MPL Core asset by Owner
 ---
 

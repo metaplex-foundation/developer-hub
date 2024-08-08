@@ -1,6 +1,6 @@
 ---
 title: Convert from standard DAS Asset to Core Asset or Collection type
-metaTitle: DAS API Core Extension - Convert standard DAS to Core type
+metaTitle: Convert standard DAS to Core Type | DAS API Core Extension
 description: Converts DAS Assets to Core Asset or Collection 
 ---
 

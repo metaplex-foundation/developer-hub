@@ -1,6 +1,6 @@
 ---
 title: Transfer Effects
-metaTitle: Fusion - Transfer Effects
+metaTitle: Transfer Effects | Fusion
 description: Effects that can be triggered on compose and decompose events.
 ---
 

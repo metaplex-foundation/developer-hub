@@ -1,7 +1,7 @@
 ---
 title: Concurrent Merkle Trees
-metaTitle: Bubblegum - Concurrent Merkle Trees
-description: Learn more about Concurrent Merkle Trees and how they are used on Bubblegum
+metaTitle: Concurrent Merkle Trees | Bubblegum
+description: Learn more about Concurrent Merkle Trees and how they are used on Bubblegum.
 ---
 
 ## Introduction
