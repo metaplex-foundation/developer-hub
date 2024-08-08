@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Redeemed Amount Guard"
-metaTitle: "Core Candy Machine - Redeemed Amount Guard"
+title: "Redeemed Amount Guard"
+metaTitle: "Redeemed Amount Guard | Core Candy Machine"
 description: "The Core Candy Machine 'Redeemed Amount' guard forbids minting when the number of minted Assets for the entire Core Candy Machine reaches the configured maximum amount."
 ---
 

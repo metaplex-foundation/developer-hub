@@ -1,6 +1,6 @@
 ---
-title: Core Candy Machine - Withdrawing a Core Candy Machine
-metaTitle: Core Candy Machine - Withdrawing a Core Candy Machine
+title: Withdrawing a Core Candy Machine
+metaTitle: Withdrawing a Core Candy Machine | Core Candy Machine
 description: How to withdraw a Core Candy Machine and claim back rent from it.
 ---
 

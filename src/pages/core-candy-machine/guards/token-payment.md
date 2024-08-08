@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Token Payment Guard"
-metaTitle: "Core Candy Machine - Token Payment Guard"
+title: Token Payment Guard
+metaTitle: Token Payment Guard | Core Candy Machine
 description: "The Core Candy Machine 'Token Payment' guard allows minting by charging the payer a set value of an SPL Token."
 ---
 

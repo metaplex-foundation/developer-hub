@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - NFT Gate Guard"
-metaTitle: "Core Candy Machine - NFT Gate Guard"
+title: "NFT Gate Guard"
+metaTitle: "NFT Gate Guard Guard | Core Candy Machine"
 description: "The Core Candy Machine 'NFT Gate' guard restricts minting to holders of a specified NFT/pNFT collection."
 ---
 

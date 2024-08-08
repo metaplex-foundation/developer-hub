@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - NFT Burn Guard"
-metaTitle: "Core Candy Machine - NFT Burn Guard"
+title: "NFT Burn Guard"
+metaTitle: "NFT Burn Guard  | Core Candy Machine"
 description: "The Core Candy Machine 'NFT Burn' guard restricts the mint to holders of a predefined Token Metadata NFT/pNFT Collection and burns the holder's NFT during purchase."
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Program Gate Guard"
-metaTitle: "Core Candy Machine - Program Gate Guard"
+title: "Program Gate Guard"
+metaTitle: "Program  Guard Guard | Core Candy Machine"
 description: "The Core Candy Machine 'Program Gate' guard restricts the programs that can be used during the mint transaction."
 ---
 

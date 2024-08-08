@@ -1,6 +1,6 @@
 ---
 title: Fetching a Core Candy Machine
-metaTitle: Core Candy Machine - Fetching a Core Candy Machine
+metaTitle: Fetching a Core Candy Machine | Core Candy Machine
 description: How to fetch the data of a Core Core Candy Machine from the Solana blockchain.
 ---
 

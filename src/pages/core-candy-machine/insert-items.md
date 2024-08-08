@@ -1,6 +1,6 @@
 ---
-title: Core Candy Machine -  Inserting Items
-metaTitle: Core Candy Machine - Inserting Items
+title: Inserting Items
+metaTitle: Inserting Items | Core Candy Machine
 description: How to load Core NFT Assets into a Core Candy Machine.
 ---
 

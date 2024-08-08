@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Allowlist Guard"
-metaTitle: "Core Candy Machine - Allowlist Guard"
+title: Allowlist Guard
+metaTitle: Allowlist Guard | Core Candy Machine
 description: "The Core Candy Machine 'Allowlist' guard guard allows you to set a list of predefined wallets that are allowed to mint from your Core Candy Machine"
 ---
 

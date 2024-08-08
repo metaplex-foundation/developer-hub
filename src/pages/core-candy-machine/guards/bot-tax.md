@@ -1,6 +1,6 @@
 ---
-title: "Core Candy Machine - Bot Tax Guard"
-metaTitle: "Candy Machine - Guards - Bot Tax"
+title: "Bot Tax Guard"
+metaTitle: "Bot Tax Guard | Core Candy Machine"
 description: "The Core Candy Machine 'Bot Tax' guard allows you to set up a configurable tax to charge invalid transactions from users. This can deter spam and bots."
 ---
 
