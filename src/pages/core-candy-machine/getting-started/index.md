@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Core Candy Machine - Getting Started
+metaTitle: Getting Started | Core Candy Machine
 description: The starting point in getting to know the Core Candy Machine program and packages.
 ---
 
