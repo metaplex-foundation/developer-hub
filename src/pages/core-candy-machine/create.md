@@ -1,7 +1,7 @@
 ---
 title: Creating a Core Candy Machine 
 metaTitle: Creating a Core Candy Machine
-description: Learn how to create your Core Candy Machine and it's various settings.
+description: Learn how to create your Core Candy Machine and it's various settings in both Javascript and Rust.
 ---
 
 ## Prerequisites

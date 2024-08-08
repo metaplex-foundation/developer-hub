@@ -1,6 +1,6 @@
 ---
-title: Updating a Core Candy Machine
-metaTitle: Updating a Core Candy Machine
+title: Core Candy Machine - Updating a Core Candy Machine
+metaTitle: Core Candy Machine - Updating a Core Candy Machine
 description: Learn how to update your Core Candy Machine and it's various settings.
 ---
 
@@ -8,8 +8,8 @@ description: Learn how to update your Core Candy Machine and it's various settin
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { 
-  updateCandyMachine 
+import {
+  updateCandyMachine
 } from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = generateSigner(umi)
@@ -82,9 +82,7 @@ mintAuthority: Signer;
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { 
-  setMintAuthority 
-} from '@metaplex-foundation/mpl-core-candy-machine'
+import { setMintAuthority } from '@metaplex-foundation/mpl-core-candy-machine'
 
 const candyMachine = publicKey('11111111111111111111111111111111')
 const newAuthority = publicKey('22222222222222222222222222222222')
@@ -150,18 +148,18 @@ The `create` function of the Umi library already takes care of creating and asso
 However, if you wanted to create them separately and manually associate/dissociate them, this is how you’d do it.
 
 ```ts
-import { 
-  some, 
-  percentAmount, 
-  sol, 
-  dateTime 
+import {
+  some,
+  percentAmount,
+  sol,
+  dateTime
 } from '@metaplex-foundation/umi'
-import { 
-  createCandyMachine, 
-  createCandyGuard, 
-  findCandyGuardPda, 
-  wrap, 
-  unwrap 
+import {
+  createCandyMachine,
+  createCandyGuard,
+  findCandyGuardPda,
+  wrap,
+  unwrap
 } from '@metaplex-foundation/mpl-core-candy-machine'
 
 // Create a Candy Machine without a Candy Guard.
@@ -174,10 +172,10 @@ await createCandyMachine({
   itemsAvailable: 100,
   sellerFeeBasisPoints: percentAmount(1.23),
   creators: [
-    { 
-      address: umi.identity.publicKey, 
-      verified: false, 
-      percentageShare: 100 
+    {
+      address: umi.identity.publicKey,
+      verified: false,
+      percentageShare: 100
     },
   ],
   configLineSettings: some({

@@ -1,7 +1,7 @@
 ---
-title: "Third Party Signer"
-metaTitle: "Core Candy Machine Guards - Third Party Signer"
-description: "The Third Party Signer guard requires a predefined address to sign each mint transaction."
+title: "Core Candy Machine - Third Party Signer Guard"
+metaTitle: "Core Candy Machine - Third Party Signer Guard"
+description: "The Core Candy Machine 'Third Party Signer' guard requires a predefined address to sign each mint transaction or the transaction will fail."
 ---
 
 ## Overview

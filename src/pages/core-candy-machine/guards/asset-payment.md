@@ -1,7 +1,7 @@
 ---
-title: "Asset Payment"
-metaTitle: "Core Candy Machine Guards - Asset Payment"
-description: "Guard that charges another Core Asset from a specific collection as payment for the mint."
+title: "Core Candy Machine - Asset Payment Guard"
+metaTitle: "Core Candy Machine - Guards - Asset Payment"
+description: "The Core Candy Machine 'Asset Payment' guard requires another Core Asset from a specific collection as payment for the mint from the Core Candy Machine"
 ---
 
 {% callout type="note" %}

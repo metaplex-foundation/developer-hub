@@ -1,12 +1,10 @@
 ---
-title: Getting Started using Rust
-metaTitle: Core Candy Machine - Getting Started - Rust
-description: Get started with Core Candy Machine using Rust
+title: Core Candy Machine - Getting Started with Rust SDK
+metaTitle: Core Candy Machine - Getting Started - Rust SDK
+description: Get Started with the mpl-core-candy-machine Rust SDK for the Core Candy Machine program from Metaplex.
 ---
 
-
 Metaplex provides a Rust library that can be used to interact with the Core Candy Machine program on both a client and program level.
-
 
 ## Solana Program
 

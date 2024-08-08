@@ -1,7 +1,7 @@
 ---
-title: Special Guard Instructions
+title: Core Candy Machine - Special Guard Instructions
 metaTitle: Core Candy Machine - Special Guard Instructions
-description: Explains how to execute guard-specific instructions.
+description: Explains how to execute guard-specific instructions for the Core Candy Machine.
 ---
 
 As we’ve seen on the previous pages, guards are a powerful way to customize the minting process of your Candy Machines. But did you know guards can even provide their own custom instructions? {% .lead %}

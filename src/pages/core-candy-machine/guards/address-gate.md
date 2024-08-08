@@ -1,7 +1,7 @@
 ---
-title: "Address Gate"
-metaTitle: "Core Candy Machine Guards - Address Gate"
-description: "Restricts the mint to a single address."
+title: "Core Candy Machine - Address Gate Guard"
+metaTitle: "Core Candy Machine - Guards - Address Gate"
+description: "The Core Candy Machine 'Address Gate' restricts the minting to a single address provided."
 ---
 
 ## Overview

@@ -1,7 +1,7 @@
 ---
-title: Guard Groups
+title: Core Candy Machine - Guard Groups
 metaTitle: Core Candy Machine - Guard Groups
-description: Explains how to configure multiple groups of guards.
+description: Explains how to configure and use multiple groups of guards with a Core Candy Machine.
 ---
 
 On one of [the previous pages](/core-candy-machine/guards), we introduced guards and used them to define the access control of our Candy Machines. We’ve seen that using guards, we can for instance add payments of 1 SOL per mint and ensure the mint start after a certain date. But what if we also wanted to charge 2 SOL after a second date? What if we wanted to allow certain token holders to mint for free or at a discounted price? {% .lead %}

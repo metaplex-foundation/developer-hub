@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Core Candy Machine - Overview
 metaTitle: Core Candy Machine - Overview
 description: Provides a high-level overview of Core Candy Machines.
 ---

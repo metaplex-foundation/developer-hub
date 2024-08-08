@@ -1,7 +1,7 @@
 ---
-title: Candy Guards
+title: Core Candy Machine - Candy Guards
 metaTitle: Core Candy Machine - Candy Guards
-description: Explains how guards work and how to enable them.
+description: Learn about the different types of guards available for the Core Candy Machine and their functionality.
 ---
 
 ## What is a guard?

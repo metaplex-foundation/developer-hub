@@ -1,7 +1,7 @@
 ---
-title: "NFT Mint Limit"
-metaTitle: "Core Candy Machine Guards - NFT Mint Limit"
-description: "The NFT Mint Limit guard restricts minting to holders of a specified NFT collection and limits the amount of mints that can be done for a provided NFT."
+title: "Core Candy Machine - NFT Mint Limit Guard"
+metaTitle: "Core Candy Machine - NFT Mint Limit Guard"
+description: "The Core Candy Machine 'NFT Mint Limit' guard restricts minting to holders of a specified NFT/pNFT collection and limits the amount of Assets that can be minted for a provided NFT."
 ---
 
 ## Overview

@@ -1,7 +1,7 @@
 ---
-title: "Allowlist"
-metaTitle: "Candy Machine Guards - Allowlist"
-description: "Uses a wallet address list to determine who is allowed to mint."
+title: "Core Candy Machine - Allowlist Guard"
+metaTitle: "Core Candy Machine - Allowlist Guard"
+description: "The Core Candy Machine 'Allowlist' guard guard allows you to set a list of predefined wallets that are allowed to mint from your Core Candy Machine"
 ---
 
 ## Overview

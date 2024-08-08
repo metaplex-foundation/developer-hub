@@ -1,7 +1,7 @@
 ---
-title: Withdrawing a Core Candy Machine
+title: Core Candy Machine - Withdrawing a Core Candy Machine
 metaTitle: Core Candy Machine - Withdrawing a Core Candy Machine
-description: How to withdraw a Core Candy Machine and claim back rent.
+description: How to withdraw a Core Candy Machine and claim back rent from it.
 ---
 
 The withdrawing of a Core Candy Machine returns all the on chain storage rent cost of the Candy Machine while subsequently deleting the data and making the Candy Machine unusable.
