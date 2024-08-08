@@ -16,7 +16,7 @@ The Master Edition Plugin will work in areas such as:
 We recommend to
 
 - Group the Editions using the Master Edition Plugin
-- use Candy Machine with the Edition Guard to handled numbering automatically.
+- use Candy Machine with the Edition Guard to handle numbering automatically.
 
 {% /callout %}
 
@@ -33,7 +33,7 @@ We recommend to
 | --------- | -------------------- | ------------------------------------------------------------------------------- |
 | maxSupply | Option<number> (u32) | Indicate how many prints will exist as maximum. Optional to allow Open Editions |
 | name      | Option<String>       | Name of the Editions (if different to the Collection Name)                      |
-| uri       | Option<String>       | URI of the Editions (if different to the Collection Name)                       |
+| uri       | Option<String>       | URI of the Editions (if different to the Collection uri)                       |
 
 These values can be changed by the Authority at any time. They are purely informational and not enforced.
 
