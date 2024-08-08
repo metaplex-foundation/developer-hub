@@ -16,7 +16,7 @@ The Master Edition Plugin will work in areas such as:
 We recommend to
 
 - Group the Editions using the Master Edition Plugin
-- use Candy Machine with the Edition Guard to handled numbering automatically.
+- use Candy Machine with the Edition Guard to handle numbering automatically.
 
 {% /callout %}
 
