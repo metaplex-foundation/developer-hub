@@ -1,7 +1,7 @@
 ---
-title: Getting Started using JavaScript
-metaTitle: Core - Getting Started - JavaScript
-description: Get started with Core using JavaScript
+title: Getting Started using JavaScript with Core Candy Machine
+metaTitle: Core Candy Machine - Getting Started - JavaScript
+description: Get started using Javascript with the latest mpl-core-candy-machine packages for Core Candy Machine.
 ---
 
 Metaplex provides a JavaScript library that can be used to interact with the Core Candy Machine program. Thanks to the [Umi framework](https://github.com/metaplex-foundation/umi), it ships without many opinionated dependencies and, thus, provides a lightweight library that can be used in any JavaScript project.

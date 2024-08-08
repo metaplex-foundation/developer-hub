@@ -1,7 +1,7 @@
 ---
-title: 'Freeze Token Payment'
-metaTitle: 'Core Candy Machine Guards - Freeze Token Payment'
-description: 'Set the price of the mint in token amount with a freeze period.'
+title: 'Core Candy Machine - Freeze Token Payment Guard'
+metaTitle: 'Core Candy Machine - Guards - Freeze Token Payment'
+description: "The Core Candy Machine 'Freeze Token Payment' guard allows you to set an SPL Token as the currency of minting and its value while also freezing the minted Core NFT Assets upon purchase for a set duration of time."
 ---
 
 ## Overview

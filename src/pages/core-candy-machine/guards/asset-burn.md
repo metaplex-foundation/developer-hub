@@ -1,7 +1,7 @@
 ---
-title: "Asset Burn"
-metaTitle: "Core Candy Machine Guards - Asset Burn"
-description: "The Asset Burn guard restricts the mint to holders of a predefined Collection and burns the holder's Asset."
+title: "Core Candy Machine - Asset Burn Guard"
+metaTitle: "Core Candy Machine - Guards - Asset Burn"
+description: "The Core Candy Machine 'Asset Burn' guard restricts minting to holders of a predefined Collection and burns the holder's Asset during purchase from the Core Candy Machine."
 ---
 
 {% callout type="note" %}
