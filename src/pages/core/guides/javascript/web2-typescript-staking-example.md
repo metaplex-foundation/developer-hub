@@ -1,7 +1,7 @@
 ---
-title: Create a staking program for your collection using only Typescript
-metaTitle: Core - Typescript Staking Example
-description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking program!
+title: Core - Create Core Staking Using Javascript
+metaTitle: Core - Create Core Staking Using Javascript
+description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking platform using web2 practices with a backend server.
 ---
 
 This developer guide demonstrates how to create a staking program for your collection using only TypeScript, leveraging the attribute plugin and freeze delegate. **This approach eliminates the need for a smart contract** to track staking time and manage staking/unstaking, making it more accessible for Web2 developer.

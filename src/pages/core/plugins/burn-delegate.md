@@ -1,7 +1,7 @@
 ---
-title: Burn Delegate
+title: Core - Burn Delegate
 metaTitle: Core - Burn Delegate
-description: Learn about the MPL Core Asset Burn Delegate Plugin
+description: Learn about the Core Asset Burn Delegate Plugin. The delegate can burn the Asset at any point in time.
 ---
 
 The Transfer Plugin is a `Owner Managed` plugin that allows the authority of the program to burn the Asset at any given moment.

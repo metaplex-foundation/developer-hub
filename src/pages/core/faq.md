@@ -1,7 +1,7 @@
 ---
-title: FAQ
+title: Core - FAQ
 metaTitle: Core - FAQ
-description: Frequently asked questions about Core
+description: Frequently asked questions about the Metaplex Core protocol.
 ---
 
 ## Why does the Core Asset and Collection accounts have both onchain and off-chain data?

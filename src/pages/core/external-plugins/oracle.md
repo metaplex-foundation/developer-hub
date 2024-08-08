@@ -1,7 +1,7 @@
 ---
-title: Oracle Plugin
+title: Core - External Plugins - Oracle Plugin
 metaTitle: Core - Oracle Plugin
-description: Learn about the Oracle Plugin
+description: Learn about the Oracle Plugin and Oracle accounts and how they interact with the lifecycle events of Core NFT Assets.
 ---
 
 <!-- The Oracle Plugin is a `External Plugin` that is used with Core Assets and Collections that provides the ability to `reject` the lifecycle events of:

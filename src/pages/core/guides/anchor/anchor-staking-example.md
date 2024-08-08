@@ -1,7 +1,7 @@
 ---
-title: Create a staking program for your mpl-core collection using Anchor
-metaTitle: Core - Anchor Staking Example
-description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking program!
+title: Core - Create a Staking Program in Anchor
+metaTitle: Core - Create a Staking Program in Anchor
+description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking program using the Metaplex Core digital asset standard!
 ---
 
 This developer guide demonstrates how to create a staking program for your collection using Anchor leveraging the `Attribute` and `Freeze Delegate` plugins. This approach uses a smart contract for all the logic behind staking like time calculation and management of the state of the asset (staking/unstaking), but the data will not be saved in a PDA, like the standard before Core, but it will be saved on the asset itself.

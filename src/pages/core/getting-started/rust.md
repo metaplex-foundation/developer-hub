@@ -1,7 +1,7 @@
 ---
-title: Getting Started using Rust
-metaTitle: Core - Getting Started - Rust
-description: Get started with Core using Rust
+title: Core - Getting Started with Rust
+metaTitle: Core - Getting Started with Rust
+description: Get started with Core using `mpl-core` Rust crate.
 ---
 
 ## Resources

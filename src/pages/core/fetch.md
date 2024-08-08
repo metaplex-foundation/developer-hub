@@ -1,7 +1,7 @@
 ---
-title: Fetching Assets
+title: Core - Fetching Assets
 metaTitle: Core - Fetching Assets
-description: Learn how to fetch the various onchain accounts of your assets on Core
+description: Learn how to fetch Core NFT Assets and Collections using the `fetch` functions from the Metaplex Core packages.
 ---
 
 ## Fetch a Single Asset or Collection

@@ -1,7 +1,7 @@
 ---
-title: External Plugins
+title: Core - External Plugins
 metaTitle: Core - External Plugins
-description: Learn about the MPL Core External Plugins
+description: Learn about the MPL Core External Plugins and their functionality.
 ---
 
 ## What are External Plugins?

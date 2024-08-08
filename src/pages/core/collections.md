@@ -1,7 +1,7 @@
 ---
-title: Managing Collections
+title: Core - Managing Collections
 metaTitle: Core - Verified Collections
-description: Learn how to safely manage Collections of Assets on Core
+description: Learn how to manage Core Collections of Assets such as adding and removing to the collection with the Metaplex Core packages.
 ---
 
 ## What are Collections?
