@@ -1,6 +1,6 @@
 ---
 title: Constraint Types
-metaTitle: Fusion - Constraint Types
+metaTitle: Constraint Types | Fusion
 description: The different options for Trifle composition rules.
 ---
 

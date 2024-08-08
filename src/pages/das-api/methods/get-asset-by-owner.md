@@ -1,6 +1,6 @@
 ---
 title: Get Asset By Owner
-metaTitle: DAS API - Get Asset By Owner
+metaTitle: Get Asset By Owner | DAS API
 description: Return the list of assets given an owner address
 ---
 

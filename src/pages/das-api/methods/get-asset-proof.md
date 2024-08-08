@@ -1,6 +1,6 @@
 ---
 title: Get Asset Proof
-metaTitle: DAS API - Get Asset Proof
+metaTitle: Get Asset Proof | DAS API
 description: Returns the merkle tree proof information for a compressed asset
 ---
 

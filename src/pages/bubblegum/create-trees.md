@@ -1,7 +1,7 @@
 ---
 title: Creating Bubblegum Trees
-metaTitle: Bubblegum - Creating Bubblegum Trees
-description: Learn how to create and fetch new Merkle Trees that can hold compressed NFTs
+metaTitle: Creating Bubblegum Trees | Bubblegum
+description: Learn how to create and fetch new Merkle Trees that can hold compressed NFTs.
 ---
 
 ## Introduction
