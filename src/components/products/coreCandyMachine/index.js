@@ -89,6 +89,10 @@ export const coreCandyMachine = {
               href: '/core-candy-machine/guards/asset-burn-multi',
             },
             {
+              title: 'Asset Gate',
+              href: '/core-candy-machine/guards/asset-gate',
+            },
+            {
               title: 'Asset Payment',
               href: '/core-candy-machine/guards/asset-payment',
             },
