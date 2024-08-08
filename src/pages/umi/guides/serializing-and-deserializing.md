@@ -1,7 +1,7 @@
 ---
-title: Serializing, Deserializing, and sending Transactions
-metaTitle: Serializing, Deserializing, and sending Transactions
-description: Learn how to Serialize and Deserialize Transactions to move them across different enviroments
+title: Umi - Serializing, Deserializing, and sending Transactions
+metaTitle: Umi - Serializing, Deserializing, and sending Transactions
+description: Learn how to Serialize and Deserialize Transactions to move them across different environments while using the Metaplex Umi client.
 created: '08-2-2024'
 updated: '08-2-2024'
 ---
@@ -18,7 +18,7 @@ Transaction are usually serialized to facilitate movement across different envir
 - You may require signatures from different authorities stored in separate environments.
 - You may wish to create a transaction on the frontend, but then send and validate it on the backend before storing it to a database.
 
-For example, when creating NFTs, you may need to sign the transaction with the `Collection Authority` keypair to authorise the NFT into the Collection. To safely sign it, without exposing your keypair, you could first create the transaction clientside/frontend, partially sign the transaction with the purchaser, serialize the transaction and then send it to your secure enviroment (server/backend). You can then safely deserialize the transactions and sign it with the `Collection Authority` keypair without exposing the keypair in a non secure enviroment.
+For example, when creating NFTs, you may need to sign the transaction with the `Collection Authority` keypair to authorize the NFT into the Collection. To safely sign it, without exposing your keypair, you could first create the transaction client side/frontend, partially sign the transaction with the purchaser, serialize the transaction and then send it to your secure environment (server/backend). You can then safely deserialize the transactions and sign it with the `Collection Authority` keypair without exposing the keypair in a non secure environment.
 
 ## Initial Setup
 
@@ -165,7 +165,7 @@ const asset = generateSigner(umi);
 const collection = await fetchCollection(umi, publickey(`<Collection Address>`)); 
 
 // Create the createAssetIx
-let createAssetIx = create(umi, {
+const createAssetTx = await create(umi, {
   asset: asset,
   collection: collection,
   authority: collectionAuthority,
@@ -173,22 +173,10 @@ let createAssetIx = create(umi, {
   owner: frontendPubkey,
   name: 'My NFT',
   uri: 'https://example.com/my-nft.json',
-}).getInstructions()
-
-// Get the latest blockhash
-const blockhash = await umi.rpc.getLatestBlockhash()
-
-// Create a Versioned Transaction
-let createAssetTx = umi.transactions.create({
-  version: 0,
-  payer: frontendPubkey,
-  instructions: createAssetIx,
-  blockhash: blockhash.blockhash,
-});
-
-// Sign it with both the CollectionAuthority and the Asset
-let signedCreateAssetTx = await umi.identity.signTransaction(createAssetTx);
-signedCreateAssetTx = await asset.signTransaction(createAssetTx);
+})
+  .useV0()
+  .setBlockhash(await umi.rpc.getLatestBlockhash())
+  .buildAndSign(umi);
 
 // Serialize the Transaction
 const serializedCreateAssetTx = umi.transactions.serialize(createAssetTx)
@@ -267,7 +255,7 @@ await umi.rpc.airdrop(frontEndSigner.publicKey, sol(1));
 
   const collection = await fetchCollection(umi, collectionAddress.publicKey); 
 
-  let createAssetIx = create(umi, {
+  let createAssetIx = await create(umi, {
     asset: asset,
     collection: collection,
     authority: collectionAuthority,
@@ -275,17 +263,11 @@ await umi.rpc.airdrop(frontEndSigner.publicKey, sol(1));
     owner: frontEndSigner.publicKey,
     name: 'My NFT',
     uri: 'https://example.com/my-nft.json',
-  }).getInstructions()
+  })
+    .useV0()
+    .setBlockhash(await umi.rpc.getLatestBlockhash())
+    .buildAndSign(umi);
 
-  const blockhash = await umi.rpc.getLatestBlockhash()
-  let createAssetTx = umi.transactions.create({
-    version: 0,
-    payer: frontEndSigner.publicKey,
-    instructions: createAssetIx,
-    blockhash: blockhash.blockhash,
-  });
-  let signedCreateAssetTx = await umi.identity.signTransaction(createAssetTx);
-  signedCreateAssetTx = await asset.signTransaction(createAssetTx);
 
   const serializedCreateAssetTx = umi.transactions.serialize(createAssetTx)
   const serializedCreateAssetTxAsString = base64.deserialize(serializedCreateAssetTx)[0];
