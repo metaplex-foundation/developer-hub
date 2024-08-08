@@ -33,7 +33,7 @@ The very first step is for the creator to create a new Core Candy Machine and co
 {% edge from="action" to="candy-machine" path="straight" /%}
 {% /diagram %}
 
-The created Core Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be created. For instance, there is a `collection` parameter which will be assigned to all Assets created from this Core Candy Machine. We will see how to create and configure Core Candy Machines in more details, including some code examples, in the following pages: [Core Candy Machine Settings](/core-candy-machine/settings) and [Managing Core Candy Machines](/core-candy-machine/manage).
+The created Core Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be created. For instance, there is a `collection` parameter which will be assigned to all Assets created from this Core Candy Machine. We will see how to create and configure Core Candy Machines in more details in the **Features** section of the menu.
 
 However, we still don’t know which Assets should be minted from that Core Candy Machine. In other words, the Core Candy Machine is not currently loaded. Our next step, is to insert items.
 
