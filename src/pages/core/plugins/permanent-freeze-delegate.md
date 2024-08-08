@@ -1,7 +1,7 @@
 ---
-title: Permanent Freeze Delegate
+title: Core - Permanent Freeze Delegate
 metaTitle: Core - Permanent Freeze Plugin
-description: Learn about the Permanent Freeze Plugin for MPL Core Assets
+description: A powerful plugin that allows the plugins delegate to freeze the Asset at any point.
 ---
 
 ## Overview

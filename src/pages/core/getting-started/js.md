@@ -1,7 +1,7 @@
 ---
-title: Getting Started using JavaScript
+title: Core - Getting Started using the JavaScript 
 metaTitle: Core - Getting Started - JavaScript
-description: Get started with Core using JavaScript
+description: Get started with Core using the `mpl-core` JavaScript package.
 ---
 
 Metaplex provides a JavaScript library that can be used to interact with Core Assets. Thanks to the [Umi framework](https://github.com/metaplex-foundation/umi), it ships without many opinionated dependencies thus providing a lightweight library that can be used in any JavaScript project.

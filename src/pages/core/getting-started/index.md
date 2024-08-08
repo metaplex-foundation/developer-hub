@@ -1,7 +1,7 @@
 ---
-title: Getting Started
+title: Core - Getting Started
 metaTitle: Core - Getting Started
-description: Get started with the new Digital Asset Standard.
+description: Get started with the new Digital Asset Standard from Metaplex, Core. Core provides a simplicity first approach to NFTs and Digital Assets on the Solana blockchain.
 ---
 
 Select the language / library you want to use below to get started with the new Metaplex Core Standard.

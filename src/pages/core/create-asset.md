@@ -1,7 +1,7 @@
 ---
-title: Creating Assets
+title: Core - Creating Assets
 metaTitle: Core - Creating Assets
-description: Learn how to create Assets on Core
+description: Learn how to create Core NFT Assets on using the Metaplex Core packages.
 ---
 
 As discussed in the [Core overview](/core), digital assets on Core are composed of exactly one onchain account and off-chain data describing the token. On this page, we'll go over the process of minting these assets. {% .lead %}

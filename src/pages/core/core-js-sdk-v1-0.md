@@ -1,7 +1,7 @@
 ---
 title: Core JS SDK v1.0
 metaTitle: Core JS SDK v1.0
-description: Whats new in the Core JS SDK v1.0?
+description: Whats new in the Metaplex Core JS SDK v1.0?
 ---
 
 ## The V1 Milestone!

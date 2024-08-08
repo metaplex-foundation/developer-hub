@@ -1,7 +1,7 @@
 ---
-title: Deserialization
-metaTitle: Deserialization
-description: Learn about the deserialization of Asset accounts, Collection accounts and plugins.
+title: Core - Deserialization
+metaTitle: Core -  Deserialization
+description: Learn about the deserialization of Asset accounts, Collection accounts and plugins using the Metaplex Core packages.
 ---
 
 Digital assets on Core are composed of exactly **one onchain account** that contains both the base asset data and the plugin.

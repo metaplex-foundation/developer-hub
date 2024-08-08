@@ -1,7 +1,7 @@
 ---
-title: How to Create a Core NFT Asset
-metaTitle: How to Create a Core NFT Asset
-description: Learn how to create a Core NFT Asset on the Solana blockchain with the Metaplex Core package.
+title: Core -  How to Create a Core NFT Asset
+metaTitle: Core -  How to Create a Core NFT Asset
+description: Learn how to create a Core NFT Asset on the Solana blockchain with the Metaplex Core javascript package.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-18-2024'

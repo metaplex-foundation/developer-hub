@@ -1,7 +1,7 @@
 ---
-title: Ecosystem Support
+title: Core - Ecosystem Support
 metaTitle: Core - Ecosystem Support
-description: Learn about the Metaplex Core Ecosystem Support
+description: Learn about the Metaplex Core Ecosystem and which websites/apps/dApps support Metaplex Core.
 ---
 
 The table below includes the Core integration status of many of the major marketplaces, wallets, explorers, RPC providers, and other dapps across the ecosystem.

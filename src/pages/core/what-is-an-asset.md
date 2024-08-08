@@ -1,12 +1,12 @@
 ---
-title: MPL Core Asset
+title: Core - MPL Core Asset
 metaTitle: MPL Core Asset
 description: What is an MPL Core Asset
 ---
 
 ## Overview
 
-Setting itself apart from existing Asset programs, like [Solana’s Token program](https://spl.solana.com/token), Metaplex Core does not rely on multiple accounts, like Associated Token Accounts. Instead, Core stores the relationship between a wallet and the "mint" account in the asset itself.
+Setting itself apart from existing Asset programs, like [Solana’s Token program](https://spl.solana.com/token), Metaplex Core and Core Assets (sometimes referred to as Core NFT Assets) do not rely on multiple accounts, like Associated Token Accounts. Instead, Core Assets store the relationship between a wallet and the "mint" account within the asset itself.
 
 {% diagram %}
 {% node %}

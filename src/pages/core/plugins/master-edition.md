@@ -1,7 +1,7 @@
 ---
-title: Master Edition Plugin
+title: Core - Master Edition Plugin
 metaTitle: Core - Master Edition Plugin
-description: Learn about the MPL Core Master Edition Plugin
+description: Learn about the MPL Core Master Edition Plugin.
 ---
 
 The Master Edition Plugin is a `Authority Managed` plugin that is used with Core Collections to group [Editions](/core/plugins/edition), provide provenance and store the maximum edition supply. Together with the Edition Plugin those Editions could be compared to the [Edition concept in Metaplex Token Metadata](/token-metadata/print).
