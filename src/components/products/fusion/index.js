@@ -1,11 +1,8 @@
 import {
-  changelogSection,
-  documentationSection,
-  recipesSection,
-  referencesSection,
+  documentationSection
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { CircleStackIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const fusion = {
   name: 'Fusion',
@@ -37,6 +34,5 @@ export const fusion = {
         },
       ],
     },
-    { ...referencesSection('fusion') },
   ],
 }
