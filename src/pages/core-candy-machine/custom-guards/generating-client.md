@@ -1,6 +1,6 @@
 ---
 title: Generating Custom Guard Client for the new Core Candy Machine
-metaTitle: Core Candy Machine - Generating Custom Guard Client for newest Candy Machine, Core Candy Machine.
+metaTitle: Core Candy Machine - Generating Custom Guard Client for Core Candy Machine.
 description: Learn how to generate a Umi compatible client for your custom built guards for the newest Core Candy Machine program.
 ---
 
