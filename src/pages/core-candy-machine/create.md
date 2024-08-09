@@ -247,7 +247,7 @@ For Example given...
 - a candy machine containing `1000` items.
 - The name of each item is `Example Asset #X` where X is the item’s index starting from 1.
 
-... would result in `nameLength` = 19. 15 characters for “My NFT Project #” and 4 characters for the highest number which is “1000”.
+... would result in 19 characters that would need to be stored. 15 characters for “My NFT Project #” and 4 characters for the highest number which is “1000”. When using the `prefixName` the `nameLength` instead can be reduced to 4.
 
 #### prefixUri
 
@@ -260,10 +260,10 @@ If your Asset's will have a metadata URI of `https://example.com/metadata/0.json
 The maximum lengths of your URIs excluding the `prefixUri`.
 
 For Example given...
-- a base URI ` https://arweave.net/`.
+- a base URI ` https://arweave.net/` with 20 characters.
 - and a unique unifier with a maximum length of 43 characters
 
-... would result in `uriLength` = 63. 20 characters for `https://arweave.net/` and 43 characters for the unique identifier.
+... without prefix would result in 63 required characters to store. When using the `prefixUri` the `uriLength` can be reduced by 20 characters for `https://arweave.net/` to the 43 characters for the unique identifier.
 
 #### isSequential
 
