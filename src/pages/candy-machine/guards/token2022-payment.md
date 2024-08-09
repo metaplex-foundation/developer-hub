@@ -1,6 +1,6 @@
 ---
 title: "Token2022 Payment"
-metaTitle: "Candy Machine Guards - Token Payment"
+metaTitle: "Candy Machine Guards - Token2022 Payment"
 description: "The Token2022 Payment guard allows minting by charging the payer some Token2022 tokens."
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Core - Adding External Plugins
-metaTitle: Core - Adding Plugins
+metaTitle: Core - Adding External Plugins
 description: Learn how to add plugins to MPL Core Assets and Collections.
 ---
 
