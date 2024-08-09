@@ -241,9 +241,13 @@ If your Asset's have a naming structure of `Example Asset #1` then your prefix w
 
 #### nameLength
 
-The lengh of your prefixName.
+The maximum length for the name of each inserted item excluding the name prefix
 
-If your Asset's prefix name is `Example Asset #` then the length would be `15`
+For Example given...
+- a candy machine containing `1000` items.
+- The name of each item is `Example Asset #X` where X is the item’s index starting from 1.
+
+... would result in `nameLength` = 19. 15 characters for “My NFT Project #” and 4 characters for the highest number which is “1000”.
 
 #### prefixUri
 
@@ -253,7 +257,13 @@ If your Asset's will have a metadata URI of `https://example.com/metadata/0.json
 
 #### uriLength
 
-If your prefixUri is `https://example.com/metadata/` this would have a length of `29`
+The maximum lengths of your URIs excluding the `prefixUri`.
+
+For Example given...
+- a base URI ` https://arweave.net/`.
+- and a unique unifier with a maximum length of 43 characters
+
+... would result in `uriLength` = 63. 20 characters for `https://arweave.net/` and 43 characters for the unique identifier.
 
 #### isSequential
 
