@@ -1,6 +1,6 @@
 ---
 title: Getting Started using JavaScript
-metaTitle: JavaScript SDK  | Umi
+metaTitle: JavaScript SDK | Umi
 description: Get started with essential programs using JavaScript
 ---
 
