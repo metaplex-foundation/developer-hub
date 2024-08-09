@@ -1,6 +1,6 @@
 ---
-title: Core - ImmutableMetadata Plugin
-metaTitle: Core - ImmutableMetadata
+title: ImmutableMetadata Plugin
+metaTitle: ImmutableMetadata | Core
 description: The 'ImmutableMetadata' plugin makes the metadata on Core NFT Assets and Collections immutable.
 ---
 

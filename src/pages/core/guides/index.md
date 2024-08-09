@@ -1,6 +1,6 @@
 ---
-title: Core - Guides
-metaTitle: Core - Guides
+title: Guides
+metaTitle: Guides | Core
 description: A list of guides and tutorials for the Metaplex Core digital asset standard on the Solana blockchain.
 ---
 

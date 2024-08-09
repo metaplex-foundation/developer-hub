@@ -1,6 +1,6 @@
 ---
-title: Core - Overview
-metaTitle: Core - Overview
+title: Overview
+metaTitle: Overview | Core
 description: Provides a high-level overview of the new Solana NFT Asset standard called Core created by Metaplex.
 ---
 

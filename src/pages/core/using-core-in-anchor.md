@@ -1,6 +1,6 @@
 ---
-title: Core - Using Metaplex Core in Anchor
-metaTitle: Core - Using Metaplex Core in Anchor
+title: Using Metaplex Core in Anchor
+metaTitle: Using Metaplex Core in Anchor | Core
 description: Learn how to utilize the Metaplex Core crate inside your Anchor programs.
 ---
 

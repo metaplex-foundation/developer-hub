@@ -1,6 +1,6 @@
 ---
-title: Core -  Freeze Delegate
-metaTitle: Core - Freeze Delegate Plugin
+title: Freeze Delegate
+metaTitle: Freeze Delegate Plugin | Core
 description: Learn about the MPL Core Asset Freeze Delegate Plugin. The 'Freeze Delegate' can freeze the Core NFT Asset which will block lifecycle events such as transfer, and burn.
 ---
 

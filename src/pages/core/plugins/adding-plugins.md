@@ -1,6 +1,6 @@
 ---
-title: Core - Adding Plugins
-metaTitle: Core - Adding Plugins
+title: Adding Plugins
+metaTitle: Adding Plugins | Core
 description: Learn how to add plugins to MPL Core NFT Assets and Collections.
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Core - Creating Assets
-metaTitle: Core - Creating Assets
+title: Creating Assets
+metaTitle: Creating Assets | Core
 description: Learn how to create Core NFT Assets on using the Metaplex Core packages.
 ---
 

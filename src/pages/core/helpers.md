@@ -1,6 +1,6 @@
 ---
-title: Core - Helpers
-metaTitle: Core - Helpers
+title: Helpers
+metaTitle: Helpers | Core
 description: Learn about the Core helper functions such as validation helpers, fetch helpers, plugin helpers, and more.
 ---
 

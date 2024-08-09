@@ -1,6 +1,6 @@
 ---
-title: Core - Permanent Freeze Delegate
-metaTitle: Core - Permanent Freeze Plugin
+title: Permanent Freeze Delegate
+metaTitle: Permanent Freeze Plugin | Core
 description: A powerful plugin that allows the plugins delegate to freeze the Asset at any point.
 ---
 

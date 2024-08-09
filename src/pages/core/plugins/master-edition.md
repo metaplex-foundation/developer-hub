@@ -1,6 +1,6 @@
 ---
-title: Core - Master Edition Plugin
-metaTitle: Core - Master Edition Plugin
+title: Master Edition Plugin
+metaTitle: Master Edition Plugin | Core
 description: Learn about the MPL Core Master Edition Plugin.
 ---
 
