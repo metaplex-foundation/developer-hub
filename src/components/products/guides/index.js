@@ -48,6 +48,12 @@ export const guides = {
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
+            {
+              title: 'Using the Local Validator',
+              href: '/guides/using-local-validator',
+              created: '2021-10-08',
+              updated: null, // null means it's never been updated
+            },
             // {
             //   title: 'Where do I start?',
             //   href: '/guides/where-do-i-start-on-solana',
