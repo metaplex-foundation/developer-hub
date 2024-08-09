@@ -4,10 +4,6 @@ metaTitle: "Asset Payment Multi Guard | Core Candy Machine"
 description: "The Core Candy Machine 'Asset Payment Multi' guard that charges other Core Asset(s) from a specific collection as payment for the mint from the Core Candy Machine."
 ---
 
-{% callout type="note" %}
-This Guard is currently only available on devnet. [Follow us](https://x.com/metaplex) on twitter to see when it's merged to mainnet!
-{% /callout %}
-
 ## Overview
 
 The **Asset Payment Multi** guard allows minting by charging the payer one or more Core Asset(s) from a specified Asset collection. The Asset(s) will be transferred to a predefined destination.

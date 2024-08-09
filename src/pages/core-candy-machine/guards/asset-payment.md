@@ -4,10 +4,6 @@ metaTitle: "Asset Payment Guard | Core Candy Machine"
 description: "The Core Candy Machine 'Asset Payment' guard requires another Core Asset from a specific collection as payment for the mint from the Core Candy Machine"
 ---
 
-{% callout type="note" %}
-This Guard is currently only available on devnet. [Follow us](https://x.com/metaplex) on twitter to see when it's merged to mainnet!
-{% /callout %}
-
 ## Overview
 
 The **Asset Payment** guard allows minting by charging the payer a Core Asset from a specified Asset collection. The Asset will be transferred to a predefined destination.
