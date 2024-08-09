@@ -1,6 +1,6 @@
 ---
 title: Interface implementations
-metaTitle: Umi - Interface Implementations
+metaTitle: Interface Implementations | Umi
 description: Overview over Public Interface Implementations
 ---
 The page aims to list all the available implementations of [the interfaces defined by Umi](interfaces) page.

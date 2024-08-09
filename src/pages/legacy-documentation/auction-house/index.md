@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Auction House - Overview
+metaTitle: Overview | Auction House
 description: Gives an overview of the Auction House program
 ---
 

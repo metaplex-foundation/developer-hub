@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Umi - Getting Started
+metaTitle: Getting Started | Umi
 description: A Javascript Framework for Solana.
 ---
 

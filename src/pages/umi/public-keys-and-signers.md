@@ -1,6 +1,6 @@
 ---
-title: Public keys and signers
-metaTitle: Umi - Public keys and signers
+title: Public keys and Signers
+metaTitle: Public keys and Signers | Umi
 description: Public keys and signers in Metaplex Umi
 ---
 On this page, we'll see how to manage public keys and signers in Umi which is partially made possible by the EdDSA interface.

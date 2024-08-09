@@ -1,6 +1,6 @@
 ---
 title: What is Solana?
-metaTitle: What is Solana?
+metaTitle: What is Solana? | Guides
 description: What is Solana and why would you want to build on it.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

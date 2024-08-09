@@ -1,6 +1,6 @@
 ---
 title: Official Links
-metaTitle: Metaplex — Official Links
+metaTitle: Metaplex Official Links | Developer Hub
 description: Official Links for Metaplex
 ---
 

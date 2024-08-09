@@ -1,6 +1,6 @@
 ---
 title: Connecting to Umi
-metaTitle: Umi - Connecting to Umi
+metaTitle: Connecting to Umi | Umi
 description: Learn how hook up Umi to Node and front end clients such as React.
 ---
 

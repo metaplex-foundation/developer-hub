@@ -1,6 +1,6 @@
 ---
 title: Getting started using the Inscriptions CLI
-metaTitle: Inscription - Getting Started - CLI
+metaTitle: CLI | Inscription
 description: Get started using the Inscriptions CLI
 ---
 

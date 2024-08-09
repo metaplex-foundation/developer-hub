@@ -1,6 +1,6 @@
 ---
-title: Recipes
-metaTitle: Umi - Recipes
+title: Serializing and Deserializing Transactions
+metaTitle: Serializing and Deserializing Transactions | Umi Guides
 description: How-to guides for Metaplex's Umi product.
 ---
 

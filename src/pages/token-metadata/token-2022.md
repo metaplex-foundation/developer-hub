@@ -1,6 +1,6 @@
 ---
 title: SPL Token-2022 on Token Metadata
-metaTitle: Token Metadata - SPL Token-2022
+metaTitle: SPL Token-2022 | Token Metadata
 description: Learn about how SPL Token-2022 is integrated with Token Metadata
 ---
 

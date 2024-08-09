@@ -1,6 +1,6 @@
 ---
 title: Contact Us
-metaTitle: Metaplex — Contact Us
+metaTitle: Contact Us | Developer Hub
 description: How to reach out to the Metaplex team.
 ---
 

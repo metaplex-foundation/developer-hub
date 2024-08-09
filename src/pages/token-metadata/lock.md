@@ -1,6 +1,6 @@
 ---
 title: Locking Assets
-metaTitle: Token Metadata - Locking Assets
+metaTitle: Locking Assets | Token Metadata
 description: Learn how to lock/freeze Assets on Token Metadata
 ---
 

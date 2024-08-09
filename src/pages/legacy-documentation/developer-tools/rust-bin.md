@@ -1,6 +1,6 @@
 ---
 title: Rust Bin
-metaTitle: Developer Tools - Rust Bin
+metaTitle: Developer Tools | Rust Bin
 description: Synchronizes a Rust binary version with the related Rust crate
 ---
 
