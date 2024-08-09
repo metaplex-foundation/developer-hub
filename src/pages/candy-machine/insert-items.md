@@ -1,6 +1,6 @@
 ---
 title: Inserting Items
-metaTitle: Candy Machine - Inserting Items
+metaTitle: Inserting Items | Candy Machine
 description: Explains how to load items into Candy Machines.
 ---
 

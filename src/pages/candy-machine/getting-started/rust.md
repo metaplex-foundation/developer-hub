@@ -1,6 +1,6 @@
 ---
 title: Getting Started using Rust
-metaTitle: Candy Machine - Getting Started - Rust
+metaTitle: Candy Machine - Getting Started - Rust SDK | Candy Machine
 description: Get started with Candy Machines using Rust
 ---
 

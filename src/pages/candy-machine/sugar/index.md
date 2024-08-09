@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Candy Machine - Sugar - Overview
+metaTitle: Overview | Sugar
 description: A detailed overview of Sugar, a CLI tool for managing Candy Machines.
 ---
 

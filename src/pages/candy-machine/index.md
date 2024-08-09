@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Candy Machine - Overview
+metaTitle: Overview | Candy Machine
 description: Provides a high-level overview of Candy Machines.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: update
-metaTitle: Candy Machine - Sugar - update
+metaTitle: update | Sugar
 description: update command.
 ---
 
