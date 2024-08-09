@@ -32,7 +32,7 @@ export const umi = {
               title: 'Metaplex Umi Plugins',
               href: '/umi/metaplex-umi-plugins',
             },
-            { title: 'Web3js Differences', href: '/umi/web3js-differences' },
+            { title: 'Web3js Differences and Adapters', href: '/umi/web3js-differences-and-adapters' },
           ],
         },
         {
@@ -54,7 +54,6 @@ export const umi = {
             { title: 'Serializers', href: '/umi/serializers' },
             { title: 'Storage', href: '/umi/storage' },
             { title: 'Transactions', href: '/umi/transactions' },
-            { title: 'Web3Js Adapters', href: '/umi/web3js-adapters' },
           ],
         },
       ],
