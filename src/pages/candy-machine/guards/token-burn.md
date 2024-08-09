@@ -1,6 +1,6 @@
 ---
-title: "Token Burn"
-metaTitle: "Candy Machine Guards - Token Burn"
+title: "Token Burn Guard"
+metaTitle: Token Burn Guard | Candy Machine
 description: "The Token Burn guard allows minting by burning some of the payer’s tokens."
 ---
 

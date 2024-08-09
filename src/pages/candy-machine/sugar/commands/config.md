@@ -1,6 +1,6 @@
 ---
 title: config
-metaTitle: Candy Machine - Sugar - config
+metaTitle: config | Sugar
 description: config command.
 ---
 

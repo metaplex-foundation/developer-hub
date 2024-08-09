@@ -1,6 +1,6 @@
 ---
 title: freeze
-metaTitle: Candy Machine - Sugar - freeze
+metaTitle: freeze | Sugar
 description: freeze command.
 ---
 

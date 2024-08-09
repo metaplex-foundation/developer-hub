@@ -1,6 +1,6 @@
 ---
 title: Configuration File
-metaTitle: Candy Machine - Sugar - Configuration File
+metaTitle: Configuration File | Sugar
 description: A detailed overview of Sugar configuration file.
 ---
 

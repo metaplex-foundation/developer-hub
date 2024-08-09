@@ -1,6 +1,6 @@
 ---
 title: launch
-metaTitle: Candy Machine - Sugar - launch
+metaTitle: launch | Sugar
 description: launch command.
 ---
 
