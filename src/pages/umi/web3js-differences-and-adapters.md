@@ -12,22 +12,26 @@ To help with this issue, `Umi` provides a set of adapters that allows to parse t
 
 ## Required Package and Imports
 
-To install the `umi-web3js-adapters` package and be abel to access to a bunch of helper methods to convert to and from Web3.js types, use the following commands:
+The package where you can find all the helper methods to convert to and from Web3.js types is the `umi-web3js-adapters` package. This package can be individually installed using the following command:
+
+The `umi-web3js-adapters` package provides all the helper methods to convert between Umi and Web3.js types. Although you can install it separately usign the following command:
 
 ```
 npm i @metaplex-foundation/umi-web3js-adapters
 ```
 
-And this are all the imports that you will gain access to
+It's not necessary because this package get's already installed when you install the `@metaplex-foundation/umi` package.
+
+**Here are the imports you’ll have access to:**
 
 ```ts
 import { 
-  // Instructions
-  fromWeb3JsInstruction, toWeb3JsInstruction,
   // Keypairs
   fromWeb3JsKeypair, toWeb3JsKeypair,
   // Publickey
   fromWeb3JsPublicKey, toWeb3JsPublicKey,
+  // Instructions
+  fromWeb3JsInstruction, toWeb3JsInstruction,
   // Legacy Transactions
   fromWeb3JsLegacyTransaction, toWeb3JsLegacyTransaction,
   // Versioned Transactions
@@ -39,7 +43,7 @@ import {
 
 ## Publickeys
 
-Generating public keys might seem similar at first sight, but there are some subtle differences between the packages. Web3Js uses a capital `P` and requires `new`, while the Umi version uses a lowercase `p`.
+Generating publickeys might seem similar at first sight, but there are some subtle differences between the packages. Web3Js uses a capital `P` and requires `new`, while the Umi version uses a lowercase `p`.
 
 ### Umi
 ```ts
@@ -85,7 +89,7 @@ const web3jsPublickey = toWeb3JsPublicKey(umiPublicKey);
 
 ## Keypairs
 
-Generating keypairs is where the difference from Web3Js and Umi increase. For Web3Js we can just use the `Keypair.generate()` function, for Umi we need a Umi instance before.
+Generating keypairs is where the difference from Web3Js and Umi increase. With Web3Js, you can simply use `Keypair.generate()`, however, in Umi, you first need to create an Umi instance, which you'll use for most Umi and Metaplex-related operations.
 
 ### Umi
 ```ts
@@ -145,7 +149,9 @@ const web3jsKeypair = toWeb3JsKeypair(umiKeypair);
 
 ## Instructions
 
-When creating instructions, the main difference is that with Umi, you need to create a Umi instance first (like the `Keyapair`) and using the `getInstructions()` you receive an array of instructions rather than a single one.
+When creating instructions, the key difference with Umi is that you must first create an Umi instance (as with `Keypairs`). Additionally, `getInstructions()` returns an array of instructions instead of a single one.
+
+For most use cases, handling individual instructions isn't necessary anyway, as this can be simplified using other helpers and transaction builders.
 
 ### Umi
 ```ts
@@ -204,10 +210,10 @@ const web3jsInstruction = umiInstruction.map(toWeb3JsInstruction);
 ## Transactions
 
 The Solana runtime supports two transaction versions:
-- Legacy Transaction: older transaction format with no additional benefit
-- 0 / Versioned Transaction: added support for Address Lookup Tables
+- Legacy Transaction: Older transaction format with no additional benefit
+- 0 / Versioned Transaction: Added support for Address Lookup Tables
 
-**Note**: if you're not familiar with the concept of Versioned Transactions, read more about it [here](https://solana.com/it/docs/advanced/versions)
+**Note**: if you're not familiar with the concept of Versioned Transactions, read more about it [here](https://solana.com/en/docs/advanced/versions)
 
 For `umi` and `umi-web3js-adapters` we added support for both transaction types! 
 
@@ -222,16 +228,7 @@ const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
 const umiTransaction = transfer(umi, {...TransferParams}).useLegacyVersion();
 
 // Create a new Umi Versioned Transaction
-const blockhash = await umi.rpc.getLatestBlockhash()
-
-const instructions = transfer(umi, {...TransferParams}).getInstructions()
-
-const umiVersionedTransaction = umi.transactions.create({
-  version: 0,
-  payer: frontEndSigner.publicKey,
-  instructions,
-  blockhash: blockhash.blockhash,
-});
+const umiVersionedTransaction = transfer(umi, {...TransferParams}).useV0().build(umi)
 ```
 
 ### Web3Js
@@ -242,11 +239,10 @@ import { Transaction, VersionedTransaction, TransactionMessage, Connection, clus
 const web3jsTransaction = new Transaction().add(SystemProgram.transfer({...TransferParams}));
 
 // Create a new Web3Js Versioned Transaction
-const connection = new Connection(clusterApiUrl("devnet"));
-const minRent = await connection.getMinimumBalanceForRentExemption(0);
-const blockhash = await connection.getLatestBlockhash().then(res => res.blockhash);
-
 const instructions = [SystemProgram.transfer({...TransferParams})];
+
+const connection = new Connection(clusterApiUrl("devnet"));
+const blockhash = await connection.getLatestBlockhash().then(res => res.blockhash);
 
 const messageV0 = new TransactionMessage({
   payerKey: payer.publicKey,
