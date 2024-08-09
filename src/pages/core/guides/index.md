@@ -14,6 +14,8 @@ The following Guides for MPL Core are currently available:
 
 {% quick-link title="Oracle Plugin Example" icon="CodeBracketSquare" href="/core/guides/oracle-plugin-example" description="Learn how you can create a collection that can be traded only during US market hours" /%}
 
+{% quick-link title="Appdata Plugin Example" icon="CodeBracketSquare" href="/core/guides/onchain-ticketing-with-appdata" description="Learn how you can create a ticketing platform leveraging the Appdata plugin" /%}
+
 {% quick-link title="Typescript Staking Example" icon="CodeBracketSquare" href="/core/guides/javascript/web2-typescript-staking-example" description="Learn how you can create a staking program for your collection using only Typescript" /%}
 
 {% quick-link title="Anchor Staking Example" icon="CodeBracketSquare" href="/core/guides/anchor/anchor-staking-example" description="Learn how you can create a staking smart contract for your collection" /%}
