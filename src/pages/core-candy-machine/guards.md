@@ -21,8 +21,6 @@ As you can see, each guard takes care of one responsibility and one responsibili
 
 ## The Core Candy Guard account
 
-If you remember the content of our [Core Candy Machine account](/core-candy-machine/manage#candy-machine-account), you’ll see no signs of guards in there. This is because guards live in another account called the **Core Candy Guard account** which is created by the **Core Candy Guard program**.
-
 Each Core Candy Machine account should typically be associated with its own Core Candy Guard account which will add a layer of protection to it.
 
 This works by creating a Core Candy Guard account and making it the **Mint Authority** of the Core Candy Machine account. By doing so, it is no longer possible to mint directly from the main Core Candy Machine program. Instead, we must mint via the Core Candy Guard program which, if all guards are resolved successfully, will defer to the Core Candy Machine Core program to finish the minting process.
