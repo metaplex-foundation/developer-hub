@@ -142,7 +142,7 @@ The table below provides an overview of the settings available:
 | uploadMethod |   |  | Configure the storage to upload images and metadata |  
 |  |   | "bundlr" |  Uploads to Arweave using [Bundlr](https://bundlr.network) and payments are made in SOL (works on both mainnet and devnet; files are only stored for 7 days on devnet)
 |  |   | "aws" | Uploads to Amazon Web Services (AWS) |
-|  |   | "nftStorage" | Uploads to [NFT.Storage](https://nft.storage) (works on all networks; no payment required) |
+|  |   | "nftStorage" | Uploads to [NFT.Storage](https://nft.storage) (works on all networks) |
 |  |   | "shdw" | Uploads to the GenesysGo [Shadow Drive](https://docs.shadow.cloud) (works on mainnet only)
 |  |   | "pinata" | Uploads to [Pinata](https://www.pinata.cloud) (works on all networks; free and tiered subscriptions) |
 |  |   | "sdrive" | Uploads to Shador Drive using [SDrive Cloud Storage](https://sdrive.app) |
@@ -188,7 +188,7 @@ The `profile` value allows you to specify which profile to read from your creden
 {% /totem-accordion %}
 {% totem-accordion title="NFT.Storage" %}
 
-NFT.Storage is a popular free service that uploads data on the public IPFS network. You will need to register an account to obtain an API key (token), which need to be specified by `"nftStorageAuthToken"` in the configuration file.
+NFT.Storage is a popular service that uploads data on the public IPFS network. You will need to register an account to obtain an API key (token), which need to be specified by `"nftStorageAuthToken"` in the configuration file.
 
 {% /totem-accordion %}
 {% totem-accordion title="Pinata" %}
