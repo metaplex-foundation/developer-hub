@@ -1,5 +1,5 @@
 ---
-title: Umi - Serializing, Deserializing, and sending Transactions
+title: Serializing, Deserializing, and sending Transactions
 metaTitle: Umi - Serializing, Deserializing, and sending Transactions
 description: Learn how to Serialize and Deserialize Transactions to move them across different environments while using the Metaplex Umi client.
 created: '08-2-2024'
@@ -100,7 +100,17 @@ umi.use(signerIdentity(walletFile))
 
 {% totem-accordion title="With the Wallet Adapter" %}
 
-// Coming Soon
+```ts
+import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
+import { useWallet } from '@solana/wallet-adapter-react'
+
+const wallet = useWallet()
+
+const umi = createUmi('https://api.devnet.solana.com')
+.use(mplCore())
+// Register Wallet Adapter to Umi
+.use(walletAdapterIdentity(wallet))
+```
 
 {% /totem-accordion %}
 
