@@ -123,7 +123,7 @@ The following snippet creates a collection with the [Royalties Plugin](/core/plu
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import { createCollection, ruleSet } from '@metaplex-foundation/core'
+import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core'
 
 const collectionSigner = generateSigner(umi)
 
