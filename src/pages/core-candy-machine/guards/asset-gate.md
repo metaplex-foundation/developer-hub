@@ -10,7 +10,7 @@ This Guard is currently only available on devnet. [Follow us](https://x.com/meta
 
 ## Overview
 
-The **Asset Gate** guard allows minting if the payer is Holder of an Asset of the specified Asset collection. The Asset will be **not** be transferred.
+The **Asset Gate** guard allows minting if the payer is Holder of an Asset of the specified Asset collection. The Asset will **not** be transferred.
 
 If the payer does not own an Asset from the required collection, minting will fail.
 
