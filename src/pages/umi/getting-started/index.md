@@ -93,53 +93,18 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 const umi = createUmi('<RPC-Endpoint>', '<Commitment-Level>')
 ```
 
-Here are all the public endpoints for the different clusters:
-
-{% totem %}
-
-{% totem-accordion title="Mainnet-beta" %}
-
-```ts
-const umi = createUmi('https://api.mainnet-beta.solana.com')
-```
-
-{% /totem-accordion %}
-
-{% totem-accordion title="Devnet" %}
-
-```ts
-const umi = createUmi('https://api.devnet.solana.com')
-```
-
-{% /totem-accordion %}
-
-{% totem-accordion title="Testnet" %}
-
-```ts
-const umi = createUmi('https://api.testnet.solana.com')
-```
-
-{% /totem-accordion %}
-
-{% totem-accordion title="Localnet" %}
-
-```ts
-const umi = createUmi('http://127.0.0.1:8899')
-```
-
-{% /totem-accordion %}
-
-{% /totem %}
-
 ### Connecting a Wallet
 
 When setting up Umi, you'll need to use or generate a wallet in order to send transactions. To do so, you can create a new wallet for testing, import an existing wallet from the filesystem, or use a walletAdapter for web-based dApps.
 
+**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
+
 {% totem %}
 
-{% totem-accordion title="With a New Wallet" %}
+{% totem-accordion title="From a New Wallet" %}
 
 ```ts
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { generateSigner, signerIdentity } from '@metaplex-foundation/umi'
 
 const umi = createUmi('https://api.devnet.solana.com')
@@ -153,10 +118,13 @@ umi.use(signerIdentity(signer))
 
 {% /totem-accordion %}
 
-{% totem-accordion title="With an Existing Wallet" %}
+{% totem-accordion title="From an Existing Wallet saved using a File System" %}
 
 ```ts
-import { generateSigner, createSignerFromKeypair } from '@metaplex-foundation/umi'
+import * as fs from "fs";
+import * as path from "path";
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'
 
 const umi = createUmi('https://api.devnet.solana.com')
 
@@ -180,9 +148,10 @@ umi.use(signerIdentity(walletFile))
 
 {% /totem-accordion %}
 
-{% totem-accordion title="With the Wallet Adapter" %}
+{% totem-accordion title="From an Existing Wallet saved using Wallet Adapter" %}
 
 ```ts
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
 import { useWallet } from '@solana/wallet-adapter-react'
 
