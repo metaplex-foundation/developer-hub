@@ -9,6 +9,10 @@ The [EdDSA interface](https://umi.typedoc.metaplex.com/interfaces/umi.EddsaInter
 
 Let's tackle this on a per-use case basis.
 
+{% callout type="note" %}
+Looking for a snippet to use the Wallet Adapter or a Filesystem wallet? Check out the [Getting Started Page](/umi/getting-started)!
+{% /callout %}
+
 ## Public keys
 
 In Umi, a public key is a simple base58 `string` representing a 32-byte array. We use an opaque type to tell TypeScript that the given public key has been verified and is valid. We also use a type parameter to offer more granular type safety.
