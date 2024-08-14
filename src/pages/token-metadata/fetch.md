@@ -1,6 +1,6 @@
 ---
 title: Fetching Assets
-metaTitle: Token Metadata - Fetching Assets
+metaTitle: Fetching Assets | Token Metadata
 description: Learn how to fetch the various onchain accounts of your assets on Token Metadata
 ---
 

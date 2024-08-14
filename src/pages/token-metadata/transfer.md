@@ -1,6 +1,6 @@
 ---
 title: Transferring Assets
-metaTitle: Token Metadata - Transferring Assets
+metaTitle: Transferring Assets | Token Metadata
 description: Learn how to transfer Assets on Token Metadata
 ---
 

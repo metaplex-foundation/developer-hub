@@ -1,6 +1,6 @@
 ---
 title: Settings
-metaTitle: Auction House - Settings
+metaTitle: Settings | Auction House
 description: Explains Auction House settings in great detail.
 ---
 
@@ -186,4 +186,4 @@ const auctionHouseSettings = {
 {% /dialect-switcher %}
 
 ## Conclusion
-Now that we know about Auction House settings, on the [next page](/programs/auction-house/manage), we’ll see how we can use them to create and update our own Auction House.
+Now that we know about Auction House settings, on the [next page](/legacy-documentation/auction-house/manage), we’ll see how we can use them to create and update our own Auction House.

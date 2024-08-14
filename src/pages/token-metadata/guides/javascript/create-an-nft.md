@@ -1,6 +1,6 @@
 ---
 title: How to Create a NFT On Solana
-metaTitle: How to Create a NFT On Solana
+metaTitle: How to Create a NFT On Solana | Token Metadata Guides
 description: Learn how to create an NFT on the Solana blockchain with the Metaplex.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

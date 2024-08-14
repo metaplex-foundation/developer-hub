@@ -1,7 +1,7 @@
 ---
 title: Working with Rust
-metaTitle: Metaplex — Working with Rust
-description: A quick overview on working with Rust and the Metaplex protocal.
+metaTitle: Working with Rust | Guides
+description: A quick overview on working with Rust and the Metaplex protocol.
 ---
 
 ## Introduction

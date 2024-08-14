@@ -1,6 +1,6 @@
 ---
 title: reveal
-metaTitle: Candy Machine - Sugar - reveal
+metaTitle: reveal | Sugar
 description: reveal command.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Fusion - Getting Started
+metaTitle: Getting Started | Fusion
 description: How to use Metaplex Fusion.
 ---
 
@@ -63,6 +63,6 @@ Fusion utilizes the `schema` field of the Constraint Model account to determine 
 
 ### Setup Trifle
 
-Lastly, the Constraint Model and Trifle account should then be setup according to [these instructions](/programs/fusion/getting-started).
+Lastly, the Constraint Model and Trifle account should then be setup according to [these instructions](/fusion/getting-started).
 
 After the above steps, the Fusion Parent should be re-rendered after every `transfer_in` or `transfer_out` operation.

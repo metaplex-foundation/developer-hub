@@ -1,6 +1,6 @@
 ---
 title: Developer Tools
-metaTitle: Metaplex — Developer Tools
+metaTitle: Developer Tools | Developer Hub
 description: An overview of Metaplex's developer tools.
 ---
 

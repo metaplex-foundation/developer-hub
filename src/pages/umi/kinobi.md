@@ -1,6 +1,6 @@
 ---
 title: Generating Umi clients via Kinobi
-metaTitle: Umi - Generating Umi clients via Kinobi
+metaTitle: Generating Umi clients via Kinobi | Umi
 description: Generating Umi clients via Kinobi
 ---
 The Umi framework provides the basis for building Solana clients in JavaScript. It becomes a lot more powerful when programs offer Umi-compatible libraries as it allows end-users to simply plug their Umi instance into whichever helper functions they provide. To simplify and automate the process of creating Umi-compatible libraries, Umi provides a powerful code generator called Kinobi.
@@ -80,7 +80,7 @@ const transferDataSerializer = getTransferInstructionDataSerializer();
 
 ### Data enum helpers
 
-If a generated type is identified as a [data enum](./serializers.md#data-enums), additional helper methods will be created to help improve the developer experience. For instance, say you have the following data enum type generated.
+If a generated type is identified as a [data enum](serializers#data-enums), additional helper methods will be created to help improve the developer experience. For instance, say you have the following data enum type generated.
 
 ```ts
 type Message = 
@@ -128,7 +128,7 @@ getMetadataSize() // -> number
 findMetadataPda(umi, seeds) // -> Pda
 ```
 
-You may want to check the [documentation on `GpaBuilder`s](./helpers.md#gpabuilders) to learn more about what they can do.
+You may want to check the [documentation on `GpaBuilder`s](helpers#gpabuilders) to learn more about what they can do.
 
 ### Transaction builders
 

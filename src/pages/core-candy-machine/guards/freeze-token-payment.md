@@ -1,7 +1,7 @@
 ---
-title: 'Freeze Token Payment'
-metaTitle: 'Core Candy Machine Guards - Freeze Token Payment'
-description: 'Set the price of the mint in token amount with a freeze period.'
+title: 'Freeze Token Payment Guard'
+metaTitle: 'Freeze Token Payment Guard | Core Candy Machine'
+description: "The Core Candy Machine 'Freeze Token Payment' guard allows you to set an SPL Token as the currency of minting and its value while also freezing the minted Core NFT Assets upon purchase for a set duration of time."
 ---
 
 ## Overview
@@ -152,9 +152,9 @@ The Freeze Token Payment route instruction supports the following features.
 - [Mint Settings](#mint-settings)
 - [Route Instruction](#route-instruction)
   - [Initialize the Freeze Escrow](#initialize-the-freeze-escrow)
-  - [Thaw a Frozen Asset](#thaw-a-frozen-Asset)
+  - [Thaw a Frozen Asset](#thaw-a-frozen-asset)
   - [Unlock Funds](#unlock-funds)
-- [Stop Freezing Assets](#stop-freezing-Assets)
+- [Stop Freezing Assets](#stop-freezing-assets)
 - [Freeze Escrows and Guard Groups](#freeze-escrows-and-guard-groups)
 
 ### Initialize the Freeze Escrow
@@ -576,7 +576,7 @@ With that in mind, here is the exhaustive list of ways to stop freezing Assets a
 
 ## Freeze Escrows and Guard Groups
 
-When using multiple Freeze Token Payment guards within various [Guard Groups](/programs/core-candy-machine/guard-groups), it is important to understand the relationship between a Freeze Token Payment guard and a Freeze Escrow account.
+When using multiple Freeze Token Payment guards within various [Guard Groups](/core-candy-machine/guard-groups), it is important to understand the relationship between a Freeze Token Payment guard and a Freeze Escrow account.
 
 The Freeze Escrow account is a PDA derived from a Destination address. This means that if **multiple Freeze Token Payment guards** are configured to use the **same Destination address**, they will all **share the same Freeze Escrow account**.
 

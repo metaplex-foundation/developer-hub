@@ -1,7 +1,7 @@
 ---
 title: Transfer Delegate Plugin
-metaTitle: Core - Transfer Plugin
-description: Learn about the MPL Core Asset Transfer Plugin
+metaTitle: Transfer Delegate Plugin | Core
+description: The Transfer Delegate plugin allows the delegate to transfer the Asset to another address at any point in time.
 ---
 
 ## Overview

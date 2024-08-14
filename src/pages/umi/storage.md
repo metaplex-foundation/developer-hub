@@ -1,6 +1,6 @@
 ---
-title: Uploading and downloading assets
-metaTitle: Umi - Uploading and downloading assets
+title: Uploading and Downloading Assets
+metaTitle: Uploading and Downloading Assets | Umi
 description: Uploading and downloading assets using Metaplex Umi
 ---
 Umi enables us to upload and download any file via the [`UploaderInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.UploaderInterface.html) and [`DownloaderInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.DownloaderInterface.html) interfaces respectively.

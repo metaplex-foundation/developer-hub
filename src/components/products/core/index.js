@@ -155,26 +155,7 @@ export const core = {
             },
           ],
         },
-        // {
-        //   title: 'Integration Guides',
-        //   links: [
-        //     { title: 'Wallets', href: '/core/integrations/wallets' },
-        //     {
-        //       title: 'Market Places',
-        //       href: '/core/intergations/market-places',
-        //     },
-        //     {
-        //       title: 'Staking',
-        //       href: '/core/intergations/staking',
-        //     },
-        //   ],
-        // },
       ],
-    },
-    {
-      ...referencesSection('core'),
-      href: `https://mpl-core.typedoc.metaplex.com/`,
-      target: '_blank',
     },
     {
       ...guidesSection('core'),
@@ -189,6 +170,10 @@ export const core = {
               title: 'Oracle Plugin Example',
               href: '/core/guides/oracle-plugin-example',
             },
+            {
+              title: 'Appdata Plugin Example',
+              href: '/core/guides/onchain-ticketing-with-appdata',
+            },
           ],
         },
         {
@@ -198,12 +183,27 @@ export const core = {
               title: 'How to Create a Core Asset',
               href: '/core/guides/javascript/how-to-create-a-core-nft-asset',
             },
-            { title: 'Web2 typescript Staking Example', href: '/core/guides/javascript/web2-typescript-staking-example' },
+            { 
+              title: 'Web2 typescript Staking Example', 
+              href: '/core/guides/javascript/web2-typescript-staking-example' 
+            },
+          ],
+        },
+        {
+          title: 'Anchor',
+          links: [
+            {
+              title: 'Anchor Staking Example', 
+              href: '/core/guides/anchor/anchor-staking-example' 
+            },
           ],
         },
       ],
     },
-    // { ...recipesSection('core') },
-    { ...changelogSection('core') },
+    {
+      ...referencesSection('core'),
+      href: `https://mpl-core.typedoc.metaplex.com/`,
+      target: '_blank',
+    },
   ],
 }

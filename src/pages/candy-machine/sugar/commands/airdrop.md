@@ -1,6 +1,6 @@
 ---
 title: airdrop
-metaTitle: Candy Machine - Sugar - airdrop
+metaTitle: airdrop | Sugar
 description: Command to airdrop (p)NFTs with sugar.
 ---
 

@@ -1,7 +1,7 @@
 ---
-title: "Sol Fixed Fee"
-metaTitle: "Core Candy Machine Guards - Sol Fixed Fee"
-description: "The Sol Fixed Fee guard allows to charge the payer an amount in SOL when minting."
+title: Sol Fixed Fee Guard
+metaTitle: Sol Fixed Fee Guard | Core Candy Machine
+description: The Core Candy Machine 'Sol Fixed Fee' guard charges the payer an amount in SOL when minting
 ---
 
 ## Overview

@@ -1,7 +1,7 @@
 ---
-title: "Asset Payment Multi"
-metaTitle: "Core Candy Machine Guards - Asset Payment Multi"
-description: "Guard that charges other Core Asset(s) from a specific collection as payment for the mint."
+title: "Asset Payment Multi Guard"
+metaTitle: "Asset Payment Multi Guard | Core Candy Machine"
+description: "The Core Candy Machine 'Asset Payment Multi' guard that charges other Core Asset(s) from a specific collection as payment for the mint from the Core Candy Machine."
 ---
 
 {% callout type="note" %}
@@ -14,7 +14,7 @@ The **Asset Payment Multi** guard allows minting by charging the payer one or mo
 
 If the payer does not own an Asset from the required collection, minting will fail.
 
-The guard is similar to the [Asset Payment Guard](/core/guards/asset-payment) but can accept more than one asset to pay with.
+The guard is similar to the [Asset Payment Guard](/core-candy-machine/guards/asset-payment) but can accept more than one asset to pay with.
 
 {% diagram  %}
 

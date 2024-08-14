@@ -1,7 +1,7 @@
 ---
-title: immutableMetadata Plugin
-metaTitle: Core - immutableMetadata
-description: Learn how to make Metadata immutable using Core
+title: ImmutableMetadata Plugin
+metaTitle: ImmutableMetadata | Core
+description: The 'ImmutableMetadata' plugin makes the metadata on Core NFT Assets and Collections immutable.
 ---
 
 The immutableMetadata Plugin is a `Authority Managed` plugin that allows to make the Metadata (Name and URI) immutable. It can only be added by the update authority.

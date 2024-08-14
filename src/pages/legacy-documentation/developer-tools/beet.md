@@ -1,10 +1,10 @@
 ---
 title: Beet
-metaTitle: Developer Tools - Beet
+metaTitle: Beet | Developer Tools
 description: Strict borsh compatible de/serializer and related extensions
 ---
 
-Strict borsh compatible de/serializer and related extensions. Beet is used by [Solita](../solita) to improve type
+Strict borsh compatible de/serializer and related extensions. Beet is used by [Solita](solita) to improve type
 safety. The Solana specific extension
 package, [@metaplex-foundation/beet-solana](https://www.npmjs.com/package/@metaplex-foundation/beet), adds new features
 such as GPA builders due to Beet's knowledge of account layouts.

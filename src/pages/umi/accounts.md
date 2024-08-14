@@ -1,10 +1,10 @@
 ---
 title: Fetching Accounts
-metaTitle: Umi - Fetching Accounts
+metaTitle: Fetching Accounts | Umi
 description: How to fetch Accounts using Umi
 ---
 
-Let's see how we can fetch account data from the Solana blockchain using Umi. For that, we will need the [`RpcInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html) to fetch accounts with serialized data and [serializers](./serializers.md) to help deserialize them.
+Let's see how we can fetch account data from the Solana blockchain using Umi. For that, we will need the [`RpcInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html) to fetch accounts with serialized data and [serializers](serializers) to help deserialize them.
 
 ## Account definitions
 
@@ -84,11 +84,11 @@ const filteredProgramAccounts = await umi.rpc.getProgramAccounts(myProgramId, {
 });
 ```
 
-Note that when fetching program accounts, you might be interested in [`GpaBuilder`s](./helpers.md#gpabuilders).
+Note that when fetching program accounts, you might be interested in [`GpaBuilder`s](helpers#gpabuilders).
 
 ## Deserializing accounts
 
-In order to turn a `RpcAccount` into a deserialized `Account<T>`, we simply need the `deserializeAccount` function and a `Serializer` that knows how to deserialize the account's data. You can read more about `Serializer`s in the [Serializers page](./serializers.md) but here's a quick example assuming the data is composed of two public keys and one `u64` number.
+In order to turn a `RpcAccount` into a deserialized `Account<T>`, we simply need the `deserializeAccount` function and a `Serializer` that knows how to deserialize the account's data. You can read more about `Serializer`s in the [Serializers page](serializers) but here's a quick example assuming the data is composed of two public keys and one `u64` number.
 
 ```ts
 import { assertAccountExists, deserializeAccount } from '@metaplex-foundation/umi';
@@ -114,7 +114,7 @@ const myAccount = deserializeAccount(rawAccount, myDataSerializer);
 // myAccount.header -> AccountHeader
 ```
 
-Note that, in practice, program libraries should provide account data serializers and helpers for you. Here's an example using a [Kinobi-generated library](./kinobi.md).
+Note that, in practice, program libraries should provide account data serializers and helpers for you. Here's an example using a [Kinobi-generated library](kinobi).
 
 ```ts
 import { Metadata, deserializeMetadata, fetchMetadata, safeFetchMetadata } from '@metaplex-foundation/mpl-token-metadata';

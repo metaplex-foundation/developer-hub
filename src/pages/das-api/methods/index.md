@@ -1,6 +1,6 @@
 ---
 title: Methods
-metaTitle: DAS API - Methods
+metaTitle: Methods | DAS API
 description: Callable API Methods for the Metaplex DAS API client.
 ---
 

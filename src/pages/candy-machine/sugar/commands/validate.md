@@ -1,6 +1,6 @@
 ---
 title: validate
-metaTitle: Candy Machine - Sugar - validate
+metaTitle: validate | Sugar
 description: validate command.
 ---
 

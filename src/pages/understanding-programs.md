@@ -1,6 +1,6 @@
 ---
 title: Understanding Programs
-metaTitle: Metaplex — Understanding Programs
+metaTitle: Understanding Programs | Developer Hub
 description: A quick overview of how programs work on Solana.
 ---
 

@@ -1,7 +1,7 @@
 ---
-title: "Asset Mint Limit"
-metaTitle: "Core Candy Machine Guards - Asset Mint Limit"
-description: "The Asset Mint Limit guard restricts minting to holders of a specified collection and limits the amount of mints that can be done for a provided Asset."
+title: Asset Mint Limit Guard
+metaTitle: Asset Mint Limit Guard | Core Candy Machine
+description: "The Core Candy Machine 'Asset Mint Limit' guard restricts minting to holders of a specified collection and limits the amount of mints that can be purchased for a provided Asset on the Core Candy Machine."
 ---
 
 {% callout type="note" %}

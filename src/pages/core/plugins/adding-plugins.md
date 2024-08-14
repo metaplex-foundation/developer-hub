@@ -1,7 +1,7 @@
 ---
 title: Adding Plugins
-metaTitle: Core - Adding Plugins
-description: Learn how to add plugins to MPL Core Assets and Collections
+metaTitle: Adding Plugins | Core
+description: Learn how to add plugins to MPL Core NFT Assets and Collections.
 ---
 
 Plugins can be assigned to both the MPL Core Asset and also the MPL Core Collection. MPL
@@ -14,7 +14,7 @@ Plugins support the ability to assign an authority over the plugin. If an `initA
 **Create Plugin Helper**
 
 The `createPlugin()` helper gives you a typed method that allows you to assign plugins during the `addPlugin()` process.
-For a full list of plugins and their arguments see the [plugins overview](/core/plugins/overview) page.
+For a full list of plugins and their arguments see the [plugins overview](/core/plugins) page.
 
 ### Adding a Plugin with the default authority
 

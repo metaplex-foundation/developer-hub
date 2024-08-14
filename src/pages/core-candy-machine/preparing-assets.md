@@ -1,7 +1,7 @@
 ---
 title: Preparing Assets
-metaTitle: Core Candy Machine - Preparing Assets
-description: How to prepare your files and assets for a Core Candy Machine.
+metaTitle: Preparing Assets | Core Candy Machine
+description: How to prepare your files and assets for uploading into a Core Candy Machine.
 ---
 
 ## Asset Files
@@ -91,7 +91,7 @@ Umi has a few plugins that can aid the upload process via plugins. At the time t
 
 #### Uploading to Arweave via Irys with Umi
 
-For a more indepth look at uploaded files with Umi please visit [Umi Storage.](umi/storage)
+For a more indepth look at uploaded files with Umi please visit [Umi Storage.](/umi/storage)
 
 {% dialect-switcher title="Uploading Files to Arweave Via Irys with Umi" %}
 {% dialect title="JavaScript" id="js" %}

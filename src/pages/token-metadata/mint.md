@@ -1,6 +1,6 @@
 ---
 title: Minting Assets
-metaTitle: Token Metadata - Minting Assets
+metaTitle: Minting Assets | Token Metadata
 description: Learn how to mint NFTs, SFTs and Programmable NFTs (a.k.a. Assets) on Token Metadata
 ---
 
@@ -41,9 +41,9 @@ To select the Uploader of your choice using Umi, simply install the plugin provi
 For instance, here is how we can install the NFT.Storage plugin:
 
 ```ts
-import { nftStorageUploader } from '@metaplex-foundation/umi-uploader-nft-storage'
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 
-umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
+umi.use(irysUploader())
 ```
 
 {% /totem-accordion %}

@@ -1,6 +1,6 @@
 ---
 title: Get Core Assets by Collection
-metaTitle: DAS API Core Extension - Get Core Assets by Collection
+metaTitle: Get Core Assets by Collection | DAS API Core Extension
 description: Returns the information of all MPL Core asset in a given Collection
 ---
 

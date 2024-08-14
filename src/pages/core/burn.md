@@ -1,7 +1,7 @@
 ---
 title: Burning Assets
-metaTitle: Core - Burning Assets
-description: Learn how to burn Assets on Core
+metaTitle: Burning Assets | Core
+description: Learn how to burn Core NFT Assets with the Metaplex Core packages.
 ---
 
 Assets can be burnt using the `burn` instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL (0.00089784) will stay in the account to prevent it from being reopened.

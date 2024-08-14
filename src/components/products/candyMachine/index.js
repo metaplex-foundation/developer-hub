@@ -105,10 +105,6 @@ export const candyMachine = {
           title: 'Custom Guards',
           links: [
             {
-              title: 'Writing a Custom Guard',
-              href: '/candy-machine/custom-guards/writing-custom-guards',
-            },
-            {
               title: 'Generating Client',
               href: '/candy-machine/custom-guards/generating-client',
             },
@@ -199,7 +195,7 @@ export const candyMachine = {
     },
     /*
     {
-      ...recipesSection('candy-machine'),
+      ...guideSection('candy-machine'),
       navigation: [
         {
           title: 'How to create a Candy Machine',
@@ -211,7 +207,6 @@ export const candyMachine = {
         },
       ],
     },
-    { ...changelogSection('candy-machine') },
     */
   ],
 }

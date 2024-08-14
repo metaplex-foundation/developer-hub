@@ -1,6 +1,6 @@
 ---
 title: How to Send and Transfer SOL on Solana
-metaTitle: How to Send and Transfer SOL on Solana
+metaTitle: How to Send and Transfer SOL on Solana | Guides
 description: Learn how to send and transfer SOL via javascript on the Solana blockchain.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

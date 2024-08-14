@@ -83,7 +83,5 @@ export const bubblegum = {
       href: 'https://mpl-bubblegum.typedoc.metaplex.com/',
       target: '_blank'
     },
-    { ...recipesSection('bubblegum') },
-    { ...changelogSection('bubblegum') },
   ],
 }

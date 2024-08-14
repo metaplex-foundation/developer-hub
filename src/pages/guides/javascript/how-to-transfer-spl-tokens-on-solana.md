@@ -1,6 +1,6 @@
 ---
 title: How to Send and Transfer SPL Tokens on Solana
-metaTitle: How to Send and Transfer SPL Tokens on Solana
+metaTitle: How to Send and Transfer SPL Tokens on Solana| Guides
 description: Learn how to send and transfer SPL Tokens via javascript on the Solana blockchain wih Metaplex packages.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

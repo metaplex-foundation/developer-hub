@@ -1,7 +1,7 @@
 ---
-title: "Asset Burn"
-metaTitle: "Core Candy Machine Guards - Asset Burn"
-description: "The Asset Burn guard restricts the mint to holders of a predefined Collection and burns the holder's Asset."
+title: Asset Burn Guard
+metaTitle: Asset Burn Guard | Core Candy Machine
+description: "The Core Candy Machine 'Asset Burn' guard restricts minting to holders of a predefined Collection and burns the holder's Asset during purchase from the Core Candy Machine."
 ---
 
 {% callout type="note" %}
@@ -12,7 +12,7 @@ This Guard is currently only available on devnet. [Follow us](https://x.com/meta
 
 The **Asset Burn** guard restricts the mint to holders of a predefined Collection and burns the holder's Asset. Thus, the address of the Asset to burn must be provided by the payer when minting.
 
-To have the minter burn more than one Asset the [Asset Burn Multi Guard](/core/guards/asset-burn-multi) can be used.
+To have the minter burn more than one Asset the [Asset Burn Multi Guard](/core-candy-machine/guards/asset-burn-multi) can be used.
 
 {% diagram  %}
 

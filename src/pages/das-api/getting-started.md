@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: DAS API - Getting Started
+metaTitle: Getting Started | DAS API
 description: Installation and setup of the Metaplex DAS API client.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Token Auth Rules - Metaplex Rule Sets
+metaTitle: Metaplex Rule Sets | Token Auth Rules
 description: The pNFT Rule Sets that Metaplex Foundation manages.
 ---
 The Metaplex Foundation manages two Rule Sets for pNFTs.

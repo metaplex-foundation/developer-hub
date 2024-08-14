@@ -1,7 +1,7 @@
 ---
 title: Managing Collections
-metaTitle: Core - Verified Collections
-description: Learn how to safely manage Collections of Assets on Core
+metaTitle: Verified Collections | Core
+description: Learn how to manage Core Collections of Assets such as adding and removing to the collection with the Metaplex Core packages.
 ---
 
 ## What are Collections?
@@ -123,7 +123,7 @@ The following snippet creates a collection with the [Royalties Plugin](/core/plu
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import { createCollection, ruleSet } from '@metaplex-foundation/core'
+import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core'
 
 const collectionSigner = generateSigner(umi)
 

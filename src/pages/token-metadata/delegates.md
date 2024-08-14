@@ -1,6 +1,6 @@
 ---
 title: Delegated Authorities
-metaTitle: Token Metadata - Delegated Authorities
+metaTitle: Delegated Authorities | Token Metadata
 description: Learn how to approve delegated authorities for your Assets on Token Metadata
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: bundlr
-metaTitle: Candy Machine - Sugar - bundlr
+metaTitle: bundlr | Sugar
 description: bundlr command.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Inscription Sharding
-metaTitle: Inscriptions - Sharding
+metaTitle: Sharding | Inscription
 description: Explains the method used to prevent write-lock contention on Inscription minting.
 ---
 

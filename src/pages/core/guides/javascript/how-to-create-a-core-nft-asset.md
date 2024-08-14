@@ -1,13 +1,13 @@
 ---
 title: How to Create a Core NFT Asset
-metaTitle: How to Create a Core NFT Asset
-description: Learn how to create a Core NFT Asset on the Solana blockchain with the Metaplex Core package.
+metaTitle: How to Create a Core NFT Asset | Core Guides
+description: Learn how to create a Core NFT Asset on the Solana blockchain with the Metaplex Core javascript package.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-18-2024'
 ---
 
-This is an intial guide on how to create a next-gen Digital Asset NFT (Core Asset) on the Solana blockchain using the Metaplex MPL Core protocol. MPL Core Assets provide the next wave of NFT projects on Solana with greater creativity and a broad dynamic experiance for both creators and owners with MPL Core's simplied design and unique plugin system.
+This is an initial guide on how to create a next-gen Digital Asset NFT (Core Asset) on the Solana blockchain using the Metaplex MPL Core protocol. MPL Core Assets provide the next wave of NFT projects on Solana with greater creativity and a broad dynamic experience for both creators and owners with MPL Core's simplified design and unique plugin system.
 
 ## Prerequisite
 
@@ -28,7 +28,7 @@ npm init
 
 ### Required Packages
 
-Install the required pacakges for this guide.
+Install the required packages for this guide.
 
 {% packagesUsed packages=["umi", "umiDefaults" ,"tokenMetadata", "core", "@solana/spl-token"] type="npm" /%}
 
@@ -102,7 +102,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 // Generate a new keypair signer.
 const signer = generateSigner(umi)
 
-// Tell umit to use the new signer.
+// Tell umi to use the new signer.
 umi.use(signerIdentity(signer))
 
 // This will airdrop SOL on devnet only for testing.
@@ -121,21 +121,31 @@ const signer = generateSigner(umi)
 
 // You will need to us fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
-const walletFile = const imageFile = fs.readFileSync(
+const walletFile = fs.readFileSync(
     path.join(__dirname, './keypair.json')
   )
+
+// Convert your walletFile onto a keypair.
+let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
+
+// Create an Umi Signer.
+const signer = createSignerFromKeypair(umi, keypair);
+
+// Assign signer to umi as the identity.
+umi.use(signerIdentity(walletFile))
+
 ```
 
 ## Creating the NFT
 
 ### Uploading the Image
 
-The first thing we need to do is to an image that represents the NFT and makes it recognisable. This can be in the form of jpeg, png or gif.
+The first thing we need to do is to an image that represents the NFT and makes it recognizable. This can be in the form of jpeg, png or gif.
 
-Umi comes with downloadable storage plugins that allow you to upload to storage solutions such Arweave, NftStorage, AWS, and ShdwDrive. At start of this guide we had installed the `irsyUploader()` plugin which stores content on the Arweave blockchain so we'll stick with using that.
+Umi comes with downloadable storage plugins that allow you to upload to storage solutions such Arweave, NftStorage, AWS, and ShdwDrive. At start of this guide we had installed the `irysUploader()` plugin which stores content on the Arweave blockchain so we'll stick with using that.
 
 {% callout title="Local script/Node.js" %}
-This example is using a localscript/node.js approach using Irys to upload to Arweave. If you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
+This example is using a local script/node.js approach using Irys to upload to Arweave. If you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
 {% /callout %}
 
 ```ts
@@ -170,7 +180,7 @@ console.log(imageUri[0])
 
 Once we have a valid and working image URI we can start working on the metadata for our token.
 
-the standard for offchain metadata for a funigble token is as follows
+the standard for offchain metadata for a fungible token is as follows
 
 ```json
 {
