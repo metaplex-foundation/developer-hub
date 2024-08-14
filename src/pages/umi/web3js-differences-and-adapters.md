@@ -75,6 +75,8 @@ const web3jsPublickey = new PublicKey("1111111111111111111111111111111111111111"
 const umiPublicKey = fromWeb3JsPublicKey(web3jsPublickey);
 ```
 
+Next, let's look into how to use the adapters.
+
 ### From Umi to Web3Js
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
@@ -119,18 +121,6 @@ const web3jsKeypair = Keypair.fromSecretKey(new Uint8Array(walletFile));
 
 Next, let's look into how to use the adapters.
 
-### From Web3Js to Umi
-```ts
-import { Keypair } from '@solana/web3.js';
-import { fromWeb3JsKeypair } from '@metaplex-foundation/umi-web3js-adapters';
-
-// Generate a new keypair
-const web3jsKeypair = Keypair.generate();
-
-// Convert it using the UmiWeb3jsAdapters Package
-const umiKeypair = fromWeb3JsKeypair(web3jsKeypair);
-```
-
 ### From Umi to Web3Js
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -145,6 +135,18 @@ const umiKeypair = generateSigner(umi)
 
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsKeypair = toWeb3JsKeypair(umiKeypair);
+```
+
+### From Web3Js to Umi
+```ts
+import { Keypair } from '@solana/web3.js';
+import { fromWeb3JsKeypair } from '@metaplex-foundation/umi-web3js-adapters';
+
+// Generate a new keypair
+const web3jsKeypair = Keypair.generate();
+
+// Convert it using the UmiWeb3jsAdapters Package
+const umiKeypair = fromWeb3JsKeypair(web3jsKeypair);
 ```
 
 ## Instructions
@@ -176,21 +178,6 @@ const web3jsInstruction = SystemProgram.transfer({...TransferParams})
 
 Next, let's look into how to use the adapters.
 
-### From Web3Js to Umi
-```ts
-import { SystemProgram } from '@solana/web3.js';
-import { fromWeb3JsInstruction } from '@metaplex-foundation/umi-web3js-adapters';
-
-// Generate a new Umi instance
-const umi = createUmi('https://api.devnet.solana.com')
-
-// Create a new instruction (like a lamport transfer)
-const web3jsInstruction = SystemProgram.transfer({...TransferParams})
-
-// Convert it using the UmiWeb3jsAdapters Package
-const umiInstruction = fromWeb3JsInstruction(web3jsInstruction);
-```
-
 ### From Umi to Web3Js
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -205,6 +192,21 @@ const umiInstruction = transferSol(umi, {...TransferParams}).getInstructions();
 
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsInstruction = umiInstruction.map(toWeb3JsInstruction);
+```
+
+### From Web3Js to Umi
+```ts
+import { SystemProgram } from '@solana/web3.js';
+import { fromWeb3JsInstruction } from '@metaplex-foundation/umi-web3js-adapters';
+
+// Generate a new Umi instance
+const umi = createUmi('https://api.devnet.solana.com')
+
+// Create a new instruction (like a lamport transfer)
+const web3jsInstruction = SystemProgram.transfer({...TransferParams})
+
+// Convert it using the UmiWeb3jsAdapters Package
+const umiInstruction = fromWeb3JsInstruction(web3jsInstruction);
 ```
 
 ## Transactions
@@ -253,25 +255,7 @@ const messageV0 = new TransactionMessage({
 const web3jsVersionedTransaction = new VersionedTransaction(messageV0);
 ```
 
-### From Web3Js to Umi
-```ts
-import { Transaction, VersionedTransaction, TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
-import { fromWeb3JsLegacyTransaction, fromWeb3JsTransaction } from '@metaplex-foundation/umi-web3js-adapters';
-
-// Create a new Legacy Transaction
-const web3jsTransaction = new Transaction().add(SystemProgram.transfer({...TransferParams}));
-
-// Convert it using the UmiWeb3jsAdapters Package
-const umiTransaction = fromWeb3JsLegacyTransaction(web3jsTransaction);
-
-/// Versioned Transactions ///
-
-// Create a new Versioned Transaction
-const web3jsVersionedTransaction = new VersionedTransaction(...messageV0Params);
-
-// Convert it using the UmiWeb3jsAdapters Package
-const umiVersionedTransaction = fromWeb3JsTransaction(web3jsVersionedTransaction);
-```
+Next, let's look into how to use the adapters.
 
 ### From Umi to Web3Js
 ```ts
@@ -295,6 +279,26 @@ const umiVersionedTransaction = transferSol(umi, {...TransferParams}).useV0().bu
 
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsVersionedTransaction = toWeb3JsTransaction(umiVersionedTransaction);
+```
+
+### From Web3Js to Umi
+```ts
+import { Transaction, VersionedTransaction, TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
+import { fromWeb3JsLegacyTransaction, fromWeb3JsTransaction } from '@metaplex-foundation/umi-web3js-adapters';
+
+// Create a new Legacy Transaction
+const web3jsTransaction = new Transaction().add(SystemProgram.transfer({...TransferParams}));
+
+// Convert it using the UmiWeb3jsAdapters Package
+const umiTransaction = fromWeb3JsLegacyTransaction(web3jsTransaction);
+
+/// Versioned Transactions ///
+
+// Create a new Versioned Transaction
+const web3jsVersionedTransaction = new VersionedTransaction(...messageV0Params);
+
+// Convert it using the UmiWeb3jsAdapters Package
+const umiVersionedTransaction = fromWeb3JsTransaction(web3jsVersionedTransaction);
 ```
 
 
@@ -345,18 +349,6 @@ const Web3JsMessage = new TransactionMessage({
 
 Next, let's look into how to use the adapters.
 
-### From Web3Js to Umi
-```ts
-import { TransactionMessage } from '@solana/web3.js';
-import { fromWeb3JMessage } from '@metaplex-foundation/umi-web3js-adapters';
-
-// Create a new Versioned Transaction
-const Web3JsMessage = new TransactionMessage({...createMessageParams}).compileToV0Message();
-
-// Convert it using the UmiWeb3jsAdapters Package
-const umiMessage = fromWeb3JMessage(Web3JsMessage);
-```
-
 ### From Umi to Web3Js
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -370,4 +362,16 @@ const umiMessage = umi.transactions.create({...createParams}).message;
 
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsMessage = toWeb3JMessage(umiMessage);
+```
+
+### From Web3Js to Umi
+```ts
+import { TransactionMessage } from '@solana/web3.js';
+import { fromWeb3JMessage } from '@metaplex-foundation/umi-web3js-adapters';
+
+// Create a new Versioned Transaction
+const Web3JsMessage = new TransactionMessage({...createMessageParams}).compileToV0Message();
+
+// Convert it using the UmiWeb3jsAdapters Package
+const umiMessage = fromWeb3JMessage(Web3JsMessage);
 ```
