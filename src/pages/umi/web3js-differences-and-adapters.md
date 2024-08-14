@@ -73,8 +73,6 @@ const web3jsPublickey = new PublicKey("1111111111111111111111111111111111111111"
 const umiPublicKey = fromWeb3JsPublicKey(web3jsPublickey);
 ```
 
-Next, let's look into how to use the adapters.
-
 ### From Umi to Web3Js
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
