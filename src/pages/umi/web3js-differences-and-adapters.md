@@ -156,14 +156,14 @@ For most use cases, handling individual instructions isn't necessary anyway, as 
 ### Umi
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { transfer, mplCore } from '@metaplex-foundation/mpl-core'
+import { transferSol } from '@metaplex-foundation/mpl-toolbox';
 
 // Generate a new Umi instance
 const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
 
 // Create a new instruction (like a core nft transfer)
 // get instructions will give you an Array of instructions
-const umiInstructions = transfer(umi, {...TransferParams}).getInstructions();
+const umiInstructions = transferSol(umi, {...TransferParams}).getInstructions();
 ```
 
 ### Web3Js
@@ -194,14 +194,14 @@ const umiInstruction = fromWeb3JsInstruction(web3jsInstruction);
 ### From Umi to Web3Js
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { transfer, mplCore } from '@metaplex-foundation/mpl-core'
+import { transferSol } from '@metaplex-foundation/mpl-toolbox';
 import { toWeb3JsInstruction } from '@metaplex-foundation/umi-web3js-adapters';
 
 // Generate a new Umi instance
 const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
 
 // Create a new instruction (like a core nft transfer)
-const umiInstruction = transfer(umi, {...TransferParams}).getInstructions();
+const umiInstruction = transferSol(umi, {...TransferParams}).getInstructions();
 
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsInstruction = umiInstruction.map(toWeb3JsInstruction);
@@ -220,15 +220,15 @@ For `umi` and `umi-web3js-adapters` we added support for both transaction types!
 ### Umi
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { transfer, mplCore } from '@metaplex-foundation/mpl-core'
+import { transferSol } from '@metaplex-foundation/mpl-toolbox';
 // Generate a new Umi instance
 const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
 
 // Create a new Umi Legacy Transaction
-const umiTransaction = transfer(umi, {...TransferParams}).useLegacyVersion();
+const umiTransaction = transferSol(umi, {...TransferParams}).useLegacyVersion();
 
 // Create a new Umi Versioned Transaction
-const umiVersionedTransaction = transfer(umi, {...TransferParams}).useV0().build(umi)
+const umiVersionedTransaction = transferSol(umi, {...TransferParams}).useV0().build(umi)
 ```
 
 ### Web3Js
@@ -276,14 +276,14 @@ const umiVersionedTransaction = fromWeb3JsTransaction(web3jsVersionedTransaction
 ### From Umi to Web3Js
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { transfer } from '@metaplex-foundation/mpl-core'
+import { transferSol } from '@metaplex-foundation/mpl-toolbox';
 import { toWeb3JsLegacyTransaction, toWeb3JsTransaction } from '@metaplex-foundation/umi-web3js-adapters';
 
 // Generate a new Umi instance
 const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
 
 // Create a new Legacy Transaction
-const umiTransaction = transfer(umi, {...TransferParams}).useLegacyVersion();
+const umiTransaction = transferSol(umi, {...TransferParams}).useLegacyVersion();
 
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsTransaction = toWeb3JsTransaction(umiTransaction);
@@ -291,7 +291,7 @@ const web3jsTransaction = toWeb3JsTransaction(umiTransaction);
 /// Versioned Transactions ///
 
 // Create a new Versioned Transaction
-const umiVersionedTransaction = umi.transactions.create({...createParams});
+const umiVersionedTransaction = transferSol(umi, {...TransferParams}).useV0().build(umi)
 
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsVersionedTransaction = toWeb3JsTransaction(umiVersionedTransaction);
