@@ -12,15 +12,13 @@ To help with this issue, `Umi` provides a set of adapters that allows to parse t
 
 ## Required Package and Imports
 
-The package where you can find all the helper methods to convert to and from Web3.js types is the `umi-web3js-adapters` package. This package can be individually installed using the following command:
+The `umi-web3js-adapters` package includes all the helper methods needed to convert between Umi and Web3.js types. 
 
-The `umi-web3js-adapters` package provides all the helper methods to convert between Umi and Web3.js types. Although you can install it separately usign the following command:
+While it's already included when you install the `@metaplex-foundation/umi` package, you can also install it separately using the following command:
 
 ```
 npm i @metaplex-foundation/umi-web3js-adapters
 ```
-
-It's not necessary because this package get's already installed when you install the `@metaplex-foundation/umi` package.
 
 **Here are the imports you’ll have access to:**
 
@@ -43,7 +41,7 @@ import {
 
 ## Publickeys
 
-Generating publickeys might seem similar at first sight, but there are some subtle differences between the packages. Web3Js uses a capital `P` and requires `new`, while the Umi version uses a lowercase `p`.
+Generating publickeys might seem similar at first sight, but there are some subtle differences between the packages. **Web3Js** uses a capital `P` and requires `new`, while the **Umi** version uses a lowercase `p`.
 
 ### Umi
 ```ts
@@ -91,7 +89,7 @@ const web3jsPublickey = toWeb3JsPublicKey(umiPublicKey);
 
 ## Keypairs
 
-Generating keypairs is where the difference from Web3Js and Umi increase. With Web3Js, you can simply use `Keypair.generate()`, however, in Umi, you first need to create an Umi instance, which you'll use for most Umi and Metaplex-related operations.
+Generating keypairs is where the difference from Web3Js and Umi increase. With **Web3Js**, you can simply use `Keypair.generate()`, however, in **Umi**, you first need to create an Umi instance, which you'll use for most Umi and Metaplex-related operations.
 
 ### Umi
 ```ts
