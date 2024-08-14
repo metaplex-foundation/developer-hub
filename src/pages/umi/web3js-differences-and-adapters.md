@@ -58,7 +58,7 @@ const umiPublicKey = publicKey("11111111111111111111111111111111");
 import { PublicKey } from '@solana/web3.js';
 
 // Generate a new Web3Js Publickey
-const web3jsPublickey = new PublicKey("<1111111111111111111111111111111111111111>");
+const web3jsPublickey = new PublicKey("1111111111111111111111111111111111111111");
 ```
 
 Next, let's look into how to use the adapters.
@@ -69,7 +69,7 @@ import { PublicKey } from '@solana/web3.js';
 import { fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters';
 
 // Generate a new Publickey
-const web3jsPublickey = new PublicKey("<1111111111111111111111111111111111111111>");
+const web3jsPublickey = new PublicKey("1111111111111111111111111111111111111111");
 
 // Convert it using the UmiWeb3jsAdapters Package
 const umiPublicKey = fromWeb3JsPublicKey(web3jsPublickey);
