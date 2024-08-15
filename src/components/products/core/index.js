@@ -193,6 +193,10 @@ export const core = {
           title: 'Anchor',
           links: [
             {
+              title: 'How to Create a Core Asset',
+              href: '/core/guides/anchor/how-to-create-a-core-nft-asset',
+            },
+            {
               title: 'Anchor Staking Example', 
               href: '/core/guides/anchor/anchor-staking-example' 
             },
