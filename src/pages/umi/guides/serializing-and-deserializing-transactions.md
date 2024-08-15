@@ -18,9 +18,9 @@ Transactions are usually serialized to facilitate movement across different envi
 - You may require signatures from different authorities stored in separate environments.
 - You may wish to create a transaction on the frontend, but then send and validate it on the backend before storing it to a database.
 
-For example, when creating NFTs, you may need to sign the transaction with the `Collection Authority` keypair to authorize the NFT into the Collection. To safely sign it, without exposing your keypair, you could first create the transaction in the backend, partially sign the transaction with the `collection_authority` without having to expose the keypair in a non secure environment, serialize the transaction and then send it. You can then safely deserialize the transactions and sign it with the `Buyer` wallet.
+For example, when creating NFTs, you may need to sign the transaction with the `collectionAutority` keypair to authorize the NFT into the Collection. To safely sign it, without exposing your keypair, you could first create the transaction in the backend, partially sign the transaction with the `collectionAutority` without having to expose the keypair in a non secure environment, serialize the transaction and then send it. You can then safely deserialize the transactions and sign it with the `Buyer` wallet.
 
-**Note**: When using the Candy Machine, you don't need the `collection_authority` signature 
+**Note**: When using the Candy Machine, you don't need the `collectionAutority` signature 
 
 ## Initial Setup
 
@@ -127,7 +127,7 @@ Serialization of a transaction is the process of converting the transaction obje
 
 Within the serialization example we're going to:  
 - Use the `NoopSigner` to add the `Payer` as `Signer` in the instruction
-- Create a Versioned Transaction and sign it with the `collectionAutority` and the `asset`
+- Create a Versioned Transaction and sign it with the `collectionAutority` and the `Asset`
 - Serialize it so all the details are preserved and can be accurately reconstructed by the frontend
 - And send it as a String, instead of a u8, so it can be passed through a request
 
@@ -153,6 +153,8 @@ The decision to turn Serialized Transactions into Strings before passing them be
 - Using strings aligns with standard practices for web communication. Most APIs and web services expect data in JSON or other string-based formats
 
 The way to do it is to use the `base64` function present in the `@metaplex-foundation/umi/serializers` package.
+
+**Note**: you don't need to install the package since it's included in the `@metaplex-foundation/umi` package
 
 ```ts 
 // Using the base64.deserialize and passing in a serializedTx 
@@ -246,6 +248,7 @@ umi.use(signerIdentity(collectionAuthority));
 const frontEndSigner = generateSigner(umi);
 
 (async () => {
+  
   // Airdrop Tokens inside of the wallets
   await umi.rpc.airdrop(umi.identity.publicKey, sol(1));
   await umi.rpc.airdrop(frontEndSigner.publicKey, sol(1));
