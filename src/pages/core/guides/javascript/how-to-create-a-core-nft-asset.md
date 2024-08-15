@@ -298,15 +298,15 @@ const createNft = async () => {
   // You will need to understand the concept of pathing from a computing perspective.
 
   const imageFile = fs.readFileSync(
-    path.join('./assets/images/0.png')
+    path.join('./image.png')
   )
 
   // Use `createGenericFile` to transform the file into a `GenericFile` type
   // that umi can understand. Make sure you set the mimi tag type correctly
   // otherwise Arweave will not know how to display your image.
 
-  const umiImageFile = createGenericFile(imageFile, '0.png', {
-    tags: [{ name: 'Content-Type', value: 'image/jpeg' }],
+  const umiImageFile = createGenericFile(imageFile, 'image.png', {
+    tags: [{ name: 'Content-Type', value: 'image/png' }],
   })
 
   // Here we upload the image to Arweave via Irys and we get returned a uri
