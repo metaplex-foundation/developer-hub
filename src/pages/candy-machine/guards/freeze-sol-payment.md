@@ -1,6 +1,6 @@
 ---
-title: 'Freeze Sol Payment'
-metaTitle: 'Candy Machine Guards - Freeze Sol Payment'
+title: Freeze Sol Payment Guard
+metaTitle: Freeze Sol Payment Guard | Candy Machine
 description: 'Set the price of the mint in SOL with a freeze period.'
 ---
 

@@ -60,6 +60,5 @@ export const das = {
         },
       ],
     },
-    { ...changelogSection('das-api') },
   ],
 }

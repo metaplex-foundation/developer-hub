@@ -1,7 +1,7 @@
 ---
 title: Getting Started using MPL-Hybrid
-metaTitle: MPL-Hybrid - Getting Started - JavaScript
-description: Get started with MPL-Hybrid using JavaScript
+metaTitle: Javascript SDK | MPL-Hybrid
+description: Get started with MPL-Hybrid using JavaScript SDK.
 ---
 
 Metaplex provides a JavaScript library that can be used to interact with the MPL-Hybrid program. Thanks to the [Umi framework](https://github.com/metaplex-foundation/mpl-hybrid), it ships without many opinionated dependencies thus providing a lightweight library that can be used in any JavaScript project.

@@ -1,7 +1,7 @@
 ---
-title: "Token Burn"
-metaTitle: "Core andy Machine Guards - Token Burn"
-description: "The Token Burn guard allows minting by burning some of the payer’s tokens."
+title: Token Burn Guard
+metaTitle: Token Burn Guard | Core Candy Machine
+description: "The Core Candy Machine 'Token Burn' guard allows minting by setting the minting currency to an SPL token address and value."
 ---
 
 ## Overview

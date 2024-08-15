@@ -1,6 +1,6 @@
 ---
 title: Candy Machine Settings
-metaTitle: Candy Machine - Settings
+metaTitle: Settings | Candy Machine
 description: Explains Candy Machine settings in great detail.
 ---
 

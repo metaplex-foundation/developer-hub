@@ -1,7 +1,7 @@
 ---
-title: 'Freeze Sol Payment'
-metaTitle: 'Core Candy Machine Guards - Freeze Sol Payment'
-description: 'Set the price of the mint in SOL with a freeze period.'
+title: 'Freeze Sol Payment Guard'
+metaTitle: Freeze Sol Payment Guard | Core Candy Machine
+description: "The Core Candy Machine 'Freeze Sol Payment' allows you to set the price of minting in SOL while also freezing the minted Core NFT Assets upon purchase for a set duration of time."
 ---
 
 ## Overview

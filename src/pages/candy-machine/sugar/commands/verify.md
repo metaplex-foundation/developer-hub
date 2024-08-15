@@ -1,6 +1,6 @@
 ---
 title: verify
-metaTitle: Candy Machine - Sugar - verify
+metaTitle: verify | Sugar
 description: verify command.
 ---
 

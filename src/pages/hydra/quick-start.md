@@ -1,6 +1,6 @@
 ---
 title: Quick Start
-metaTitle: Hydra - Quick Start
+metaTitle: Quick Start | Hydra
 description: Provides a high-level overview of Hydra wallets.
 ---
 

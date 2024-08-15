@@ -1,6 +1,6 @@
 ---
 title: Public Key
-metaTitle: Token Auth Rules - Public Key
+metaTitle: Public Key | Token Auth Rules
 description: The Public Key primitive rule
 ---
 

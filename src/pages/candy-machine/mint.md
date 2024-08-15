@@ -1,6 +1,6 @@
 ---
 title: Minting
-metaTitle: Candy Machine - Minting
+metaTitle: Minting | Candy Machine
 description: Explains how to mint from Candy Machines and how to handle pre-mint requirements.
 ---
 

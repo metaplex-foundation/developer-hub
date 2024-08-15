@@ -1,7 +1,7 @@
 ---
 title: Getting Started using JavaScript
-metaTitle: Bubblegum - Getting Started - JavaScript
-description: Get started with compressed NFTs using JavaScript
+metaTitle: Javascript SDK | Bubblegum
+description: Get started with compressed NFTs using the Bubblegum JavaScript SDK.
 ---
 
 Metaplex provides a JavaScript library that can be used to interact with Compressed NFTs. Thanks to the [Umi framework](https://github.com/metaplex-foundation/umi), it ships without many opinionated dependencies and, thus, provides a lightweight library that can be used in any JavaScript project.

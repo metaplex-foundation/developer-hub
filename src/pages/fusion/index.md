@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Fusion - Overview
+metaTitle: Overview | Fusion
 description: Provides a high-level overview of composable NFTs using Fusion.
 ---
 

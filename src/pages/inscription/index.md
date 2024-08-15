@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Inscriptions - Overview
+metaTitle: Overview | Inscription
 description: Provides a high-level overview of the Metaplex Inscriptions standard.
 ---
 

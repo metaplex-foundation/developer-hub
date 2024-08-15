@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Amman - Getting Started
+metaTitle: Getting Started | Amman
 description: Installation and setup of the Metaplex Amman local validator toolkit.
 ---
 

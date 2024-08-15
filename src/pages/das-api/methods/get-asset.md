@@ -1,6 +1,6 @@
 ---
 title: Get Asset
-metaTitle: DAS API - Get Asset
+metaTitle: Get Asset | DAS API
 description: Returns the information of a compressed/standard asset
 ---
 

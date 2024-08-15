@@ -1,6 +1,6 @@
 ---
 title: Official Links
-metaTitle: Metaplex — Official Links
+metaTitle: Metaplex Official Links | Developer Hub
 description: Official Links for Metaplex
 ---
 
@@ -44,14 +44,15 @@ description: Official Links for Metaplex
 
 | Name               | Program ID                                   | Github                                                                                                      | Documentation |
 | ------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | - |
-| Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk   | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house)          | [Link](/legacy-documentation/auction-house)
+| Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk  | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house)           | [Link](/legacy-documentation/auction-house)
 | Auctioneer         | neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh  | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auctioneer)              | [Link](/legacy-documentation/auction-house/auctioneer)
+| Bubblegum          | BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY | [Link](https://github.com/metaplex-foundation/mpl-bubblegum)                                                | [Link](/bubblegum)
 | Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)             | [Link](/candy-machine/guards)
 | Candy Machine v3   | CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core)      | [Link](/candy-machine)
-| Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d | [Link](https://github.com/metaplex-foundation/mpl-core)                                                     | [Link](/candy-machine/guards)
+| Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d | [Link](https://github.com/metaplex-foundation/mpl-core)                                                     | [Link](/core)
 | Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard)        | [Link](/core-candy-machine/guards)
 | Core Candy Machine | CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-machine-core) | [Link](/core-candy-machine)
-| Gumdrop            | gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a      | [Link](https://github.com/metaplex-foundation/gumdrop)                                                  | [Link](/legacy-documentation/gumdrop)
+| Gumdrop            | gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a  | [Link](https://github.com/metaplex-foundation/gumdrop)                                                  | [Link](/legacy-documentation/gumdrop)
 | Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  | [Link](https://github.com/metaplex-foundation/mpl-hydra)                                                    | [Link](/hydra)
 | Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              | [Link](/inscription)
 | MPL-Hybrid         | MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              | [Link](/mpl-hybrid)

@@ -1,6 +1,6 @@
 ---
 title: Getting Started using JavaScript
-metaTitle: Candy Machine - Getting Started - JavaScript
+metaTitle: JavaScript SDK | Candy Machine
 description: Get started with Candy Machines using JavaScript
 ---
 

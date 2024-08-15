@@ -1,6 +1,6 @@
 ---
 title: Gumdrop
-metaTitle: Gumdrop
+metaTitle: Gumdrop | Developer Hub
 description: Easy token airdrops and print edition airdrops, without requiring high up-front rent costs
 ---
 

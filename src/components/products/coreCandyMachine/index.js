@@ -154,10 +154,6 @@ export const coreCandyMachine = {
           title: 'Custom Guards',
           links: [
             {
-              title: 'Writing a Custom Guard',
-              href: '/core-candy-machine/custom-guards/writing-custom-guards',
-            },
-            {
               title: 'Generating Client',
               href: '/core-candy-machine/custom-guards/generating-client',
             },

@@ -1,7 +1,7 @@
 ---
 title: Candy Guards
-metaTitle: Core Candy Machine - Candy Guards
-description: Explains how guards work and how to enable them.
+metaTitle: Candy Guards | Core Candy Machine
+description: Learn about the different types of guards available for the Core Candy Machine and their functionality.
 ---
 
 ## What is a guard?
@@ -20,8 +20,6 @@ We’ll touch on [all available guards](/core-candy-machine/guards) later in thi
 As you can see, each guard takes care of one responsibility and one responsibility only which makes them composable. In other words, you can pick and choose the guards your need to create your perfect Candy Machine.
 
 ## The Core Candy Guard account
-
-If you remember the content of our [Core Candy Machine account](/core-candy-machine/manage#candy-machine-account), you’ll see no signs of guards in there. This is because guards live in another account called the **Core Candy Guard account** which is created by the **Core Candy Guard program**.
 
 Each Core Candy Machine account should typically be associated with its own Core Candy Guard account which will add a layer of protection to it.
 

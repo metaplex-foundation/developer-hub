@@ -1,7 +1,7 @@
 ---
-title: Create a US Market Trading Experience for Your Collection!
-metaTitle: Core - Oracle Plugin Example
-description: This guide shows how to limit your collection to trade only during US market hours.
+title: Create a US Market Trading Experience Using the Oracle External Plugin
+metaTitle: Create a US Market Trading Experience Using the Oracle External Plugin | Core Guides
+description: This guide shows how to limit your Core Collection trades and sales during open US market hours.
 ---
 
 This developer guide leverages the new Oracle Plugin to **create an NFT collection that can only be traded during US market hours**.

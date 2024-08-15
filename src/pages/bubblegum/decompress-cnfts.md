@@ -1,7 +1,7 @@
 ---
 title: Decompressing Compressed NFTs
-metaTitle: Bubblegum - Decompressing Compressed NFTs
-description: Learn how to redeem and decompress compressed NFTs on Bubblegum
+metaTitle: Decompressing Compressed NFTs | Bubblegum
+description: Learn how to redeem and decompress compressed NFTs on Bubblegum.
 ---
 
 It is possible for the owner of a Compressed NFT to decompress it into a regular NFT. {% .lead %}

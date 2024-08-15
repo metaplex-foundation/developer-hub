@@ -1,7 +1,7 @@
 ---
 title: Fetching Compressed NFTs
-metaTitle: Bubblegum - Fetching Compressed NFTs
-description: Learn how to fetch compressed NFTs on Bubblegum
+metaTitle: Fetching Compressed NFTs | Bubblegum
+description: Learn how to fetch compressed NFTs on Bubblegum.
 ---
 
 As mentioned in the [Overview](/bubblegum#read-api) page, Compressed NFTs are not stored inside onchain accounts like regular NFTs but, instead, are logged in the transactions that created and updated them. {% .lead %}

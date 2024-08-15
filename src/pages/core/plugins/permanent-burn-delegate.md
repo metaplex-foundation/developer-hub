@@ -1,7 +1,7 @@
 ---
 title: Permanent Burn Delegate
-metaTitle: Core - Permanent Burn Delegate
-description: Learn about the Permanent Burn Plugin for MPL Core Assets
+metaTitle: Permanent Burn Delegate | Core
+description: A powerful plugin that allows the plugins delegate to burn the Asset at any point. Particularly good for applications like gaming and subscriptions.
 ---
 
 ## Overview

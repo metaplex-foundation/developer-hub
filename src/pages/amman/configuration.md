@@ -1,6 +1,6 @@
 ---
 title: Configuration
-metaTitle: Amman - Configuration
+metaTitle: Configuration | Amman
 description: Configuring Amman local validator toolkit.
 ---
 

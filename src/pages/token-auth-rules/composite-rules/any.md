@@ -1,6 +1,6 @@
 ---
 title: Any
-metaTitle: Token Auth Rules - Any
+metaTitle: Any | Token Auth Rules
 description: The Any composite rule
 ---
 

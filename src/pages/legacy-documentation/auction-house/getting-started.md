@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Auction House - Getting Started
+metaTitle: Getting Started | Auction House
 description: Lists the various libraries and SDKs you can use to manage Auction Houses.
 ---
 

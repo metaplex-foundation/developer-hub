@@ -1,7 +1,7 @@
 ---
-title: Overview of a Core Candy Machine
-metaTitle: Core Candy Machine - Account Overview
-description: An overview of the Core Candy Machine and its lifecycles.
+title: Program Overview
+metaTitle: Program Overview | Core Candy Machine
+description: An overview of the Core Candy Machine program and its feature sets to help you create a minting experience.
 ---
 
 ## Introduction
@@ -33,7 +33,7 @@ The very first step is for the creator to create a new Core Candy Machine and co
 {% edge from="action" to="candy-machine" path="straight" /%}
 {% /diagram %}
 
-The created Core Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be created. For instance, there is a `collection` parameter which will be assigned to all Assets created from this Core Candy Machine. We will see how to create and configure Core Candy Machines in more details, including some code examples, in the following pages: [Core Candy Machine Settings](/core-candy-machine/settings) and [Managing Core Candy Machines](/core-candy-machine/manage).
+The created Core Candy Machine keeps track its own settings which helps us understand how all of its NFTs should be created. For instance, there is a `collection` parameter which will be assigned to all Assets created from this Core Candy Machine. We will see how to create and configure Core Candy Machines in more details in the **Features** section of the menu.
 
 However, we still don’t know which Assets should be minted from that Core Candy Machine. In other words, the Core Candy Machine is not currently loaded. Our next step, is to insert items.
 
@@ -103,7 +103,7 @@ Notice how, at this point, no real Assets have been created yet. We are simply l
 
 Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting Assets from it. It’s only at this point that an Asset is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/core-candy-machine/mint) for more details.
 
-Once all Assets have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Managing Candy Machines](/core-candy-machine/manage) for more details.
+Once all Assets have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Withdrawing a Candy Machine](/core-candy-machine/withdrawing-a-candy-machine) for more details.
 
 {% diagram %}
 {% node #action-1 label="4. Delete" theme="pink" /%}

@@ -1,7 +1,7 @@
 ---
 title: Delegating Compressed NFTs
-metaTitle: Bubblegum - Delegating Compressed NFTs
-description: Learn how to delegate compressed NFTs on Bubblegum
+metaTitle: Delegating Compressed NFTs - Bubblegum
+description: Learn how to delegate compressed NFTs on Bubblegum.
 ---
 
 The owner of a Compressed NFT can delegate it to another account whilst keeping ownership of the cNFT. {% .lead %}

@@ -1,6 +1,6 @@
 ---
-title: "Start Date"
-metaTitle: "Candy Machine Guards - Start Date"
+title: "Start Date Guard"
+metaTitle: Start Date Guard | Candy Machine
 description: "The Start Date guard determines the start date of the mint."
 ---
 

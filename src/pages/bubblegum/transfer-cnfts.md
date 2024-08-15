@@ -1,6 +1,6 @@
 ---
 title: Transferring Compressed NFTs
-metaTitle: Bubblegum - Transferring Compressed NFTs
+metaTitle: Transferring Compressed NFTs | Bubblegum
 description: Learn how to transfer compressed NFTs on Bubblegum
 ---
 

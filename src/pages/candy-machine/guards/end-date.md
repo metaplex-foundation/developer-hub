@@ -1,6 +1,6 @@
 ---
-title: "End Date"
-metaTitle: "Candy Machine Guards - End Date"
+title: End Date Guard
+metaTitle: Candy Machine Guards - End Date Guard | Candy Machine
 description: "Determines a date to end the mint."
 ---
 

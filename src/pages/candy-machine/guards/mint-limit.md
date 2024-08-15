@@ -1,6 +1,6 @@
 ---
-title: "Mint Limit"
-metaTitle: "Candy Machine Guards - Mint Limit"
+title: "Mint Limit Guard"
+metaTitle: Mint Limit Guard | Candy Machine
 description: "The Mint Limit guard allows specifying a limit on the number of NFTs each wallet can mint."
 ---
 

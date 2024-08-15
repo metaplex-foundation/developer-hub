@@ -1,6 +1,6 @@
 ---
 title: How to Create an SPL Token On Solana
-metaTitle: How to Create an SPL Token On Solana
+metaTitle: How to Create an SPL Token On Solana | Guides
 description: Learn how to create an SPL Token on the Solana blockchain with Metaplex packages.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
@@ -369,7 +369,7 @@ const createAndMintTokens = async () => {
   const createFungibleIx = createFungible(umi, {
     mint: mintSigner,
     name: 'The Kitten Coin',
-    uri: metadataUri, // we use the `metedataUri` variable we created earlier that is storing our uri.
+    uri: metadataUri, // we use the `metadataUri` variable we created earlier that is storing our uri.
     sellerFeeBasisPoints: percentAmount(0),
     decimals: 9, // set the amount of decimals you want your token to have.
   })

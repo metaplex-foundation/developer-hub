@@ -1,6 +1,6 @@
 ---
 title: Web3.js adapters
-metaTitle: Umi - Web3.js adapters
+metaTitle: Web3.js adapters | Umi
 description: Adapters to make Metaplex Umi work with Solana web3js.
 ---
 The `@solana/web3.js` library is currently widely used in the Solana ecosystem and defines its own types for public keys, transactions, instructions, etc.

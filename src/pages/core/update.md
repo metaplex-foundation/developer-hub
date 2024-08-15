@@ -1,7 +1,7 @@
 ---
 title: Updating Assets
-metaTitle: Core - Updating Assets
-description: Learn how to update Assets on Core
+metaTitle: Updating Assets | Core
+description: Learn how to update Core NFT Assets on using Metaplex packages.
 ---
 
 The update authority or delegate of a Core Asset has the ability to change some of the Asset's data.

@@ -1,6 +1,6 @@
 ---
 title: Security
-metaTitle: Metaplex — Security
+metaTitle: Security | Developer Hub
 description: Audits and how to report a vulnerability.
 ---
 

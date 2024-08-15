@@ -1,6 +1,6 @@
 ---
 title: Settings
-metaTitle: Auction House - Settings
+metaTitle: Settings | Auction House
 description: Explains Auction House settings in great detail.
 ---
 

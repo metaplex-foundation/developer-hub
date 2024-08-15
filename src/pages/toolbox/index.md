@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Toolbox - Overview
+metaTitle: Overview | Toolbox
 description: Provides a high-level overview of the Toolbox product and what it includes.
 ---
 
@@ -10,7 +10,7 @@ Mpl Toolbox includes a bunch of essential Solana and Metaplex programs to get yo
 
 {% quick-link title="Getting Started" icon="InboxArrowDown" href="/token-metadata/getting-started" description="Find the language or library of your choice and get started essentials programs." /%}
 
-{% quick-link title="API reference" icon="CodeBracketSquare" href="/token-metadata/references" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" target="_blank" href="https://mpl-toolbox.typedoc.metaplex.com/" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
 {% /quick-links %}
 

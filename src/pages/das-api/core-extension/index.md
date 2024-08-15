@@ -1,6 +1,6 @@
 ---
 title: Core DAS API Extension
-metaTitle: Core DAS API - Methods
+metaTitle: Methods | Core DAS API Extension
 description: Digital Asset Standard API Extension for MPL Core
 ---
 

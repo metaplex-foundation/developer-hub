@@ -1,6 +1,6 @@
 ---
 title: NFT Escrow
-metaTitle: Token Metadata - NFT Escrow
+metaTitle: NFT Escrow | Token Metadata
 description: Learn more about the Token Owned Escrow feature of Token Metadata
 ---
 

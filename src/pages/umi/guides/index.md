@@ -1,6 +1,6 @@
 ---
 title: Umi Guides
-metaTitle: Umi - Guides
+metaTitle: Guides | Umi Guides
 description: How-to guides for Metaplex's Umi client wrapper and RPC client.
 ---
 

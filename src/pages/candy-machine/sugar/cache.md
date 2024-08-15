@@ -1,6 +1,6 @@
 ---
 title: Cache File
-metaTitle: Candy Machine - Sugar - Cache File
+metaTitle: Cache File | Sugar
 description: Sugar cache file.
 ---
 

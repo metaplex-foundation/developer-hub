@@ -1,7 +1,7 @@
 ---
-title: Permanent Transfer
-metaTitle: Core - Permanent Transfer Plugin
-description: Learn about the Permanent Transfer Plugin for MPL Core Assets
+title: Permanent Transfer Plugin
+metaTitle: Permanent Transfer Plugin | Core
+description: A powerful plugin that allows the plugins delegate to transfer the Asset at any point to a given address.
 ---
 
 ## Overview

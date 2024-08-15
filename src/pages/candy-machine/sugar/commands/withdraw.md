@@ -1,6 +1,6 @@
 ---
 title: withdraw
-metaTitle: Candy Machine - Sugar - withdraw
+metaTitle: withdraw | Sugar
 description: withdraw command.
 ---
 

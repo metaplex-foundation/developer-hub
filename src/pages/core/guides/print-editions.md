@@ -1,7 +1,7 @@
 ---
 title: Print Editions with MPL Core
-metaTitle: Core - Print Editions
-description: This Guide shows how to combine Plugins to create Editions using Core
+metaTitle: Print Editions | Core Guides
+description: This guide shows you how to combine plugins to create Editions with the Metaplex Core protocol.
 ---
 
 ## Introduction

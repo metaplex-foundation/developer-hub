@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Toolbox - Getting Started
+metaTitle: Getting Started | Toolbox
 description: Get started with essential programs.
 ---
 

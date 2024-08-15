@@ -1,6 +1,6 @@
 ---
 title: Create or Update Rule Sets
-metaTitle: Token Auth Rules - Create/Update
+metaTitle: Create/Update | Token Auth Rules
 description: How to Create and Update Rule Sets
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Solana Programs and State Overview
-metaTitle: Solana Programs and State Overview
+metaTitle: Solana Programs and State Overview | Guides
 description: Learn about Solana Programs and how data is stored in account state on Solana.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

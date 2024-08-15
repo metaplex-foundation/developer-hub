@@ -1,7 +1,7 @@
 ---
-title: "NFT Payment"
-metaTitle: "Core Candy Machine Guards - NFT Payment"
-description: "The NFT Payment guard allows minting by charging the payer an NFT from a specified NFT collection. The NFT will be transferred to a predefined destination."
+title: "NFT Payment Guard"
+metaTitle: "NFT Payment Guard | Core Candy Machine"
+description: "The Core Candy Machine 'NFT Payment' guard allows minting by charging the payer an NFT/pNFT from a specified NFT collection. The NFT/pNFT used as payment will be transferred to a predefined destination."
 ---
 
 ## Overview

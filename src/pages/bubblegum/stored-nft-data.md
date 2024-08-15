@@ -1,7 +1,7 @@
 ---
 title: Storing and Indexing NFT Data
-metaTitle: Bubblegum - Storing and Indexing NFT Data
-description: Learn more about how NFT data is stored on Bubblegum
+metaTitle: Storing and Indexing NFT Data | Bubblegum
+description: Learn more about how NFT data is stored on Bubblegum.
 ---
 
 As mentioned in the [Overview](/bubblegum#read-api), whenever compressed NFTs (cNFTs) are created or modified, the corresponding transactions are recorded onchain in the ledger, but the cNFT state data is not stored in account space.  This is the reason for the massive cost savings of cNFTs, but for convenience and usability, the cNFT state data is indexed by RPC providers and available via the **the Metaplex DAS API**.

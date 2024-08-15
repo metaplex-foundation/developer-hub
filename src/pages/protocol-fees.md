@@ -1,6 +1,6 @@
 ---
 title: Protocol Fees
-metaTitle: Metaplex — Protocol Fees
+metaTitle: Protocol Fees | Developer Hub
 description: A details of the onchain fees for Metaplex's products.
 ---
 

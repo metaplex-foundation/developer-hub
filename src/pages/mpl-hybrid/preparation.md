@@ -1,6 +1,6 @@
 ---
 title: Preparation
-metaTitle: MPL-Hybrid - Preparation
+metaTitle: Preparation | MPL-Hybrid
 description: How to prepare before creating a MPL-404 hybrid
 ---
 

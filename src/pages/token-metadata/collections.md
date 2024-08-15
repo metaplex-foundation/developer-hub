@@ -1,6 +1,6 @@
 ---
 title: Verified Collections
-metaTitle: Token Metadata - Verified Collections
+metaTitle: Verified Collections | Token Metadata
 description: Learn how to safely wrap Assets into collections on Token Metadata
 ---
 

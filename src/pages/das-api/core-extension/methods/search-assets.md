@@ -1,6 +1,6 @@
 ---
 title: Search Core Assets
-metaTitle: DAS API Core Extension - Search Core Assets
+metaTitle: Search Core Assets | DAS API Core Extension
 description: Return the list of MPL Core assets given a search criteria
 ---
 

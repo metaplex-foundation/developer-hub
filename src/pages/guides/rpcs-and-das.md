@@ -1,6 +1,6 @@
 ---
 title: RPCs and DAS
-metaTitle: RPCs and DAS on the Solana Blockchain
+metaTitle: RPCs and DAS on the Solana Blockchain | Guides
 description: Learn about RPCS on the Solana blockchain and how DAS by Metaplex aids in storing and reading data on Solana.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

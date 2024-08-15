@@ -1,6 +1,6 @@
 ---
 title: Get Asset By Group
-metaTitle: DAS API - Get Asset By Group
+metaTitle: Get Asset By Group | DAS API
 description: Return the list of assets given a group (key, value) pair
 ---
 

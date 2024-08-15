@@ -1,7 +1,7 @@
 ---
 title: addBlocker Plugin
-metaTitle: Core - addBlocker
-description: Learn how to block adding additional Plugins using Core
+metaTitle: addBlocker Plugin | Core Plugins
+description: Learn how to block adding additional Plugins to Core NFT Assets and Collections using Metaplex Core packages.
 ---
 
 The `addBlocker` Plugin is a `Authority Managed` plugin that allows to forbid adding additional authority managed plugins. This means you as an authority have to be sure that all plugins that you might need in the future have been added before. Even Plugins that are new features could not be added. It can only be added by the update authority.

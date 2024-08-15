@@ -1,6 +1,6 @@
 ---
-title: "Bot Tax"
-metaTitle: "Candy Machine Guards - Bot Tax"
+title: Bot Tax Guard
+metaTitle: Bot Tax Guard | Candy Machine
 description: "Configurable tax to charge invalid transactions."
 ---
 

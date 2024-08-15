@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Token Metadata - Overview
+metaTitle: Overview | Token Metadata
 description: Provides a high-level overview of the Solana NFT standard.
 ---
 

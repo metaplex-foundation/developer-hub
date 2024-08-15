@@ -1,6 +1,6 @@
 ---
 title: Validating with a Rule Set
-metaTitle: Token Auth Rules - Validate
+metaTitle: Validate | Token Auth Rules
 description: How to run validation using a Rule Set
 ---
 

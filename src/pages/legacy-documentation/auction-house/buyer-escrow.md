@@ -1,6 +1,6 @@
 ---
 title: Manage Buyer Escrow Accounts
-metaTitle: Auction House - Manage Buyer Escrow Accounts
+metaTitle: Manage Buyer Escrow Accounts | Auction House
 description: "Explains how to manage Buyer Escrow Accounts."
 ---
 ## Introduction

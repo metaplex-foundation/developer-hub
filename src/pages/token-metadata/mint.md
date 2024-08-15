@@ -1,6 +1,6 @@
 ---
 title: Minting Assets
-metaTitle: Token Metadata - Minting Assets
+metaTitle: Minting Assets | Token Metadata
 description: Learn how to mint NFTs, SFTs and Programmable NFTs (a.k.a. Assets) on Token Metadata
 ---
 
@@ -41,9 +41,9 @@ To select the Uploader of your choice using Umi, simply install the plugin provi
 For instance, here is how we can install the NFT.Storage plugin:
 
 ```ts
-import { nftStorageUploader } from '@metaplex-foundation/umi-uploader-nft-storage'
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 
-umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
+umi.use(irysUploader())
 ```
 
 {% /totem-accordion %}
@@ -58,7 +58,7 @@ Now that we have our **URI**, we can move on to the next step.
 The next steps show how to create accounts and mint the tokens in two steps. At the [bottom of the page](#create-helpers) there are **code examples** for helpers that combine those steps and make creating different token types easier.
 {% /callout %}
 
-## Creating accounts
+## Creating Mint and Metadata accounts
 
 To create all the onchain accounts required by the Token Standard of your choice, you may simply use the **Create V1** instruction. It will adapt to the requested Token Standard and create the right accounts accordingly.
 
@@ -140,6 +140,11 @@ This instruction accepts a variety of parameters and our SDKs do their best to p
 - **Authority**: The authority of the Mint account. This is the account that is or will be allowed to mint tokens from the Mint account. This will default to the "Identity" wallet — i.e. the connected wallet — if supported by the SDK.
 - **Name**, **URI**, **Seller Fee Basis Points**, **Creators**, etc.: The data of the asset to store on the **Metadata** account.
 - **Token Standard**: The Token Standard of the asset.
+
+{% callout %}
+`createV1` is a helper function that can initialize the Mint Account and create the Metadata Account. If the mint exists already it will only create the metadata Account. If you are looking on how to use [`createMetadataAccountV3`](https://mpl-token-metadata-js-docs.vercel.app/functions/createMetadataAccountV3.html) you should be using this function instead.
+
+{% /callout %}
 
 {% dialect-switcher title="Create onchain Accounts" %}
 {% dialect title="JavaScript" id="js" %}
