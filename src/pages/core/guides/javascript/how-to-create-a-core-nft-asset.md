@@ -117,9 +117,8 @@ const signer = generateSigner(umi)
 
 // You will need to us fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
-const walletFile = const imageFile = fs.readFileSync(
-    path.join(__dirname, './keypair.json')
-  )
+const walletFile = fs.readFileSync('./keypair.json')
+  
 
 // Convert your walletFile onto a keypair.
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
@@ -143,9 +142,7 @@ This example is using a local script/node.js approach using Irys to upload to Ar
 ```ts
 // use `fs` to read file via a string path.
 
-const imageFile = fs.readFileSync(
-  path.join(__dirname, '..', '/assets/my-image.jpg')
-)
+const imageFile = fs.readFileSync('./assets/my-image.jpg')
 
 // Use `createGenericFile` to transform the file into a `GenericFile` type
 // that umi can understand. Make sure you set the mimi tag type correctly
@@ -225,7 +222,7 @@ const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
 })
 ```
 
-Now if all has gone to play we should have the URI of JSON file stored in the `metadataUri` providing it did not throw any errors.
+Now if all has gone to plan we should have the URI of JSON file stored in the `metadataUri` providing it did not throw any errors.
 
 ### Minting the NFT Core Asset
 
@@ -239,34 +236,18 @@ const tx = await create(umi, {
   name: 'My NFT',
   uri: metadataUri,
 }).sendAndConfirm(umi)
-
-//
-// ** Logging out Details**
-//
-
-// Log out the signature and the links to the transaction and the NFT.
-console.log('\nNFT Created')
-console.log('View Transaction on SolanaFM')
-console.log(`https://solana.fm/tx/${signature}?cluster=devnet-alpha`)
-console.log('\n')
-console.log('View NFT on Metaplex Explorer')
-console.log(
-  `https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`
-)
 ```
 
 ### Loggin Out The Details
 
 ```ts
-// Log out the signature and the links to the transaction and the NFT and our work.
-console.log('\nNFT Created')
-console.log('View Transaction on SolanaFM')
-console.log(`https://solana.fm/tx/${signature}?cluster=devnet-alpha`)
-console.log('\n')
-console.log('View NFT on Metaplex Explorer')
-console.log(
-  `https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`
-)
+  // Log out the signature and the links to the transaction and the NFT.
+  console.log('\nNFT Created')
+  console.log('View Transaction on Solana Explorer')
+  console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
+  console.log('\n')
+  console.log('View NFT on Metaplex Explorer')
+  console.log(`https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`)
 ```
 
 ## Full Code Example
@@ -317,7 +298,7 @@ const createNft = async () => {
   // You will need to understand the concept of pathing from a computing perspective.
 
   const imageFile = fs.readFileSync(
-    path.join(__dirname, '../assets/images/0.png')
+    path.join('./assets/images/0.png')
   )
 
   // Use `createGenericFile` to transform the file into a `GenericFile` type
@@ -399,9 +380,7 @@ const createNft = async () => {
   console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
   console.log('\n')
   console.log('View NFT on Metaplex Explorer')
-  console.log(
-    `https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`
-  )
+  console.log(`https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`)
 }
 
 createNft()

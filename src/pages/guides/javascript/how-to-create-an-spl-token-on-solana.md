@@ -122,9 +122,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 
 // You will need to us fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
-const walletFile = const imageFile = fs.readFileSync(
-    path.join(__dirname, './keypair.json')
-  )
+const walletFile = const imageFile = fs.readFileSync('./keypair.json')
 
 // Convert your walletFile onto a keypair.
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
@@ -149,15 +147,13 @@ This example is using a local script/node.js approach using Irys to upload to Ar
 ```ts
 // use `fs` to read file via a string path.
 
-const imageFile = fs.readFileSync(
-  path.join(__dirname, '..', '/assets/islandDao.jpg')
-)
+const imageFile = fs.readFileSync('./image.jpg')
 
 // Use `createGenericFile` to transform the file into a `GenericFile` type
 // that Umi can understand. Make sure you set the mimi tag type correctly
 // otherwise Arweave will not know how to display your image.
 
-const umiImageFile = createGenericFile(imageFile, 'island-dao.jpeg', {
+const umiImageFile = createGenericFile(imageFile, 'image.jpeg', {
   tags: [{ name: 'contentType', value: 'image/jpeg' }],
 })
 
@@ -350,13 +346,13 @@ const createAndMintTokens = async () => {
 
   // use `fs` to read file via a string path.
   
-  const imageFile = fs.readFileSync(path.join(__dirname, "../assets/images/1.png"));
+  const imageFile = fs.readFileSync("./image.jpg");
 
   // Use `createGenericFile` to transform the file into a `GenericFile` type
   // that umi can understand. Make sure you set the mimi tag type correctly
   // otherwise Arweave will not know how to display your image.
 
-  const umiImageFile = createGenericFile(imageFile, "1.png", {
+  const umiImageFile = createGenericFile(imageFile, "image.png", {
     tags: [{ name: "Content-Type", value: "image/png" }],
   });
 

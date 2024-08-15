@@ -102,9 +102,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 
 // You will need to us fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
-const walletFile = const imageFile = fs.readFileSync(
-    path.join(__dirname, './keypair.json')
-  )
+const walletFile = const imageFile = fs.readFileSync('./keypair.json')
 
 // Convert your walletFile onto a keypair.
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));

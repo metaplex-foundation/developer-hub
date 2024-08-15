@@ -64,7 +64,7 @@ const transferSplTokens = async () => {
   const umi = createUmi('https://api.devnet.solana.com').use(mplToolbox())
 
   // import a wallet that has the SPL Token you want to transfer
-  const walletFile = fs.readFileSync(path.join(__dirname, './keypair.json'))
+  const walletFile = fs.readFileSync('./keypair.json')
 
   // Convert your walletFile onto a keypair.
   let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile))
