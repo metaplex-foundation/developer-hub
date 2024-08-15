@@ -6,7 +6,7 @@ description: Difference and Adapters to make Metaplex Umi work with Solana web3j
 
 The `@solana/web3.js` library is currently widely used in the Solana ecosystem and defines its own types for `Publickeys`, `Transactions`, `Instructions`, etc. 
 
-When creating `Umi`, we wanted to move away from the class-based types defined in `@solana/web3.js` and instead use a more functional approach by relying only on TypeScript types. This unfortunately means that, although having the same or similar import names, not all types from `@solana/web3.js` are compatible with the ones provided by `Umi` and vice versa.
+When creating `Umi`, we wanted to move away from the class-based types defined in `@solana/web3.js`. This unfortunately means that, although having the same or similar import names, not all types from `@solana/web3.js` are compatible with the ones provided by `Umi` and vice versa.
 
 To help with this issue, `Umi` provides a set of adapters that allows to parse types to and from their `Web3.js` counterparts and they can be found in the [`@metaplex-foundation/umi-web3js-adapters`](https://www.npmjs.com/package/@metaplex-foundation/umi-web3js-adapters) package.
 
