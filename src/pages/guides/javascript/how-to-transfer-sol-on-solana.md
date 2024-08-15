@@ -13,6 +13,7 @@ This guide walks will show you how to build a Javascript function that transfers
 
 - Code Editor of your choice (recommended Visual Studio Code)
 - Node 18.x.x or above.
+- Basic Javascript knowledge
 
 ## Initial Setup
 
@@ -93,23 +94,23 @@ umi.use(signerIdentity(signer))
 await umi.rpc.airdrop(umi.identity.publickey)
 ```
 
-### Use an Existing Wallet
-
-If you wish to use an existing wallet you can import this a few different ways. The below code assumes that the private key is stored in `.json` format on your hardrive somewhere.
+### Use an Existing Wallet Stored Locally
 
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
-  .use(mplCore())
-  .use(irysUploader())
+  .use(mplToolbox())
 
-// Generate a new keypair signer.
-const signer = generateSigner(umi)
-
-// You will need to use fs and navigate the filesystem to
+// You will need to us fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
 const walletFile = const imageFile = fs.readFileSync(
     path.join(__dirname, './keypair.json')
   )
+
+// Convert your walletFile onto a keypair.
+let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
+
+// Load the keypair into umi.
+umi.use(keypairIdentity(umiSigner));
 ```
 
 ## Transferring Sol

@@ -9,6 +9,8 @@ updated: '06-24-2024'
 
 This guide will show you how to build out a Javascript function to send and transfer SPL tokens on the Solana blockchain utilizing the Metaplex Umi client wrapper and MPL Toolbox packages.
 
+For this guide you will need to have some SPL Tokens in your wallet to transfer so if you not have any in your wallet you will need to get someone to transfer some to you or you can follow our other [how to create an SPL Token guide](/guides/javascript/how-to-create-an-spl-token-on-solana).
+
 ## Prerequisite
 
 - Code Editor of your choice (recommended Visual Studio Code)
@@ -47,121 +49,28 @@ npm i @metaplex-foundation/mpl-toolbox;
 Here we will define all needed imports for this particular guide and create a wrapper function where all our code will execute.
 
 ```ts
-import { mplToolbox, transferSol } from '@metaplex-foundation/mpl-toolbox'
-import {
-  generateSigner,
-  publicKey,
-  signerIdentity,
-  sol,
-} from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { base58 } from '@metaplex-foundation/umi/serializers'
-
-// Create the wrapper function
-const transferSolana = async () => {
-  ///
-  ///
-  ///  all our code will go in here
-  ///
-  ///
-}
-
-// run the wrapper function
-transferSolana()
-```
-
-## Setting up Umi
-
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer in a different way you can check out the [**Connecting to Umi**](/umi/connecting-to-umi) guide.
-
-### Generating a New Wallet
-
-```ts
-const umi = createUmi('https://api.devnet.solana.com')
-  .use(mplCore())
-  .use(irysUploader())
-
-// Generate a new keypair signer.
-const signer = generateSigner(umi)
-
-// Tell umit to use the new signer.
-umi.use(signerIdentity(signer))
-
-// This will airdrop SOL on devnet only for testing.
-await umi.rpc.airdrop(umi.identity.publickey)
-```
-
-### Use an Existing Wallet
-
-```ts
-const umi = createUmi('https://api.devnet.solana.com')
-  .use(mplCore())
-  .use(irysUploader())
-
-// Generate a new keypair signer.
-const signer = generateSigner(umi)
-
-// You will need to us fs and navigate the filesystem to
-// load the wallet you wish to use via relative pathing.
-const walletFile = const imageFile = fs.readFileSync(
-    path.join(__dirname, './keypair.json')
-  )
-```
-
-## Key Accounts
-
-When transferring SPL Tokens on Solana we need to work out both the senders and recievers SPL Token Account addresses for the token we are trying to send.
-
-Token Account addresses are unique between coins and wallets so we need to use a helper function to determine what each account address is for the both the sender and the receiver.
-
-```ts
-// The address of the Token you want to transfer.
-const splToken = publicKey('111111111111111111111111111111')
-
-// The address of the wallet you want to transfer the Token to.
-const recipientWallet = publicKey('22222222222222222222222222222222')
-
-// Find the associated token account for the SPL Token on the senders wallet.
-const sourceTokenAccount = findAssociatedTokenPda(umi, {
-  mint: splToken,
-  owner: umi.identity.publicKey,
-})
-
-// Find the associated token account for the SPL Token on the receivers wallet.
-const destinationTokenAccount = findAssociatedTokenPda(umi, {
-  mint: splToken,
-  owner: recipientWallet,
-})
-```
-
-## Sending the SPL Tokens
-
-```ts
 import {
   findAssociatedTokenPda,
   mplToolbox,
   transferTokens,
 } from '@metaplex-foundation/mpl-toolbox'
-import {
-  generateSigner,
-  publicKey,
-  signerIdentity,
-  sol,
-} from '@metaplex-foundation/umi'
+import { keypairIdentity, publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { base58 } from '@metaplex-foundation/umi/serializers'
+import fs from 'fs'
+import path from 'path'
 
 const transferSplTokens = async () => {
   const umi = createUmi('https://api.devnet.solana.com').use(mplToolbox())
 
-  const signer = generateSigner(umi)
+  // import a wallet that has the SPL Token you want to transfer
+  const walletFile = fs.readFileSync(path.join(__dirname, './keypair.json'))
 
-  umi.use(signerIdentity(signer))
+  // Convert your walletFile onto a keypair.
+  let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile))
 
-  // Airdrop 1 SOL to the identity
-  // if you end up with a 429 too many requests error, you may have to use
-  // the filesystem wallet method or change rpcs.
-  await umi.rpc.airdrop(umi.identity.publicKey, sol(1))
+  // Load the keypair into umi.
+  umi.use(keypairIdentity(keypair))
 
   //
   // Key Accounts
@@ -171,7 +80,7 @@ const transferSplTokens = async () => {
   const splToken = publicKey('111111111111111111111111111111')
 
   // The address of the wallet you want to transfer the Token to.
-  const recipientWallet = publicKey('22222222222222222222222222222222')
+  const destinationWallet = publicKey('22222222222222222222222222222222')
 
   // Find the associated token account for the SPL Token on the senders wallet.
   const sourceTokenAccount = findAssociatedTokenPda(umi, {
@@ -182,25 +91,27 @@ const transferSplTokens = async () => {
   // Find the associated token account for the SPL Token on the receivers wallet.
   const destinationTokenAccount = findAssociatedTokenPda(umi, {
     mint: splToken,
-    owner: recipientWallet,
+    owner: destinationWallet,
   })
 
   //
-  // Transfer SPL Token
+  // Transfer SOL
   //
 
-  const res = await transferTokens(umi, {
-    source: sourceTokenAccount,
-    destination: destinationTokenAccount,
-    amount: 10000, // amount of tokens to transfer*
+  const res = await transferSol(umi, {
+    source: umi.identity,
+    // change address to an address you wish to send SOL to
+    destination: publicKey('111111111111111111111111111111111111'),
+    amount: sol(0.2),
   }).sendAndConfirm(umi)
 
-  // Log the signature of the transaction
-  console.log(base58.deserialize(res.signature))
+  // Finally we can deserialize the signature that we can check on chain.
+  const signature = base58.deserialize(res.signature)[0]
 
-  // *When transfering tokens you have to account for the decimal places.
-  // So if you wish to transfer 1 full token and have 5 decimal places
-  // you will need to transfer 100000 tokens to send 1 whole token.
+  // Log out the signature and the links to the transaction and the NFT.
+  console.log('\nTransfer Complete')
+  console.log('View Transaction on Solana Explorer')
+  console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
 }
 
 transferSplTokens()
