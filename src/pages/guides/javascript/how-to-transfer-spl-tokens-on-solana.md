@@ -72,46 +72,45 @@ const transferSplTokens = async () => {
   // Load the keypair into umi.
   umi.use(keypairIdentity(keypair))
 
-  //
+//
   // Key Accounts
   //
 
   // The address of the Token you want to transfer.
-  const splToken = publicKey('111111111111111111111111111111')
+  const splToken = publicKey("111111111111111111111111111111");
 
   // The address of the wallet you want to transfer the Token to.
-  const destinationWallet = publicKey('22222222222222222222222222222222')
+  const destinationWallet = publicKey("22222222222222222222222222222222");
 
   // Find the associated token account for the SPL Token on the senders wallet.
   const sourceTokenAccount = findAssociatedTokenPda(umi, {
     mint: splToken,
     owner: umi.identity.publicKey,
-  })
+  });
 
   // Find the associated token account for the SPL Token on the receivers wallet.
   const destinationTokenAccount = findAssociatedTokenPda(umi, {
     mint: splToken,
     owner: destinationWallet,
-  })
+  });
 
   //
-  // Transfer SOL
+  // Transfer SPL Token
   //
 
-  const res = await transferSol(umi, {
-    source: umi.identity,
-    // change address to an address you wish to send SOL to
-    destination: publicKey('111111111111111111111111111111111111'),
-    amount: sol(0.2),
-  }).sendAndConfirm(umi)
+  const res = await transferTokens(umi, {
+    source: sourceTokenAccount,
+    destination: destinationTokenAccount,
+    amount: 10000, // amount of tokens to transfer*
+  }).sendAndConfirm(umi);
 
   // Finally we can deserialize the signature that we can check on chain.
-  const signature = base58.deserialize(res.signature)[0]
+  const signature = base58.deserialize(res.signature)[0];
 
   // Log out the signature and the links to the transaction and the NFT.
-  console.log('\nTransfer Complete')
-  console.log('View Transaction on Solana Explorer')
-  console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
+  console.log("\nTransfer Complete")
+  console.log("View Transaction on SolanaFM");
+  console.log(`https://solana.fm/tx/${signature}?cluster=devnet-alpha`);
 }
 
 transferSplTokens()
