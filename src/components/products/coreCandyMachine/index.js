@@ -178,9 +178,9 @@ export const coreCandyMachine = {
       title: 'Guides',
       navigation: [
         {
-          title: 'Guides',
+          title: 'Candy Machine Guides',
           links: [
-            { title: 'Create an NFT Collection On Solana', href: 'core-candy-machine/guides/create-a-core-nft-collection-on-solana-with-candy-machine' },
+            { title: 'Create an NFT Collection On Solana', href: '/core-candy-machine/guides/create-a-core-nft-collection-on-solana-with-candy-machine' },
           ],
         },
       ]

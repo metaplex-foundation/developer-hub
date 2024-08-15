@@ -60,6 +60,12 @@ export const guides = {
           title: 'Javascript',
           links: [
             {
+              title: 'Create an NFT Collection',
+              href: '/core-candy-machine/guides/create-a-core-nft-collection-on-solana-with-candy-machine',
+              created: '06-24-2024',
+              updated: null, // null means it's never been updated
+            },
+            {
               title: 'Creating an NFT',
               href: '/guides/javascript/how-to-create-an-nft-on-solana',
               created: '06-24-2024',
