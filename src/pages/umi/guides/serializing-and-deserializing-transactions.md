@@ -14,11 +14,13 @@ updated: '08-2-2024'
 
 ## Introduction
 
-Transaction are usually serialized to facilitate movement across different environments. But the reasons could be different:
+Transactions are usually serialized to facilitate movement across different environments. But the reasons could be different:
 - You may require signatures from different authorities stored in separate environments.
 - You may wish to create a transaction on the frontend, but then send and validate it on the backend before storing it to a database.
 
-For example, when creating NFTs, you may need to sign the transaction with the `Collection Authority` keypair to authorize the NFT into the Collection. To safely sign it, without exposing your keypair, you could first create the transaction client side/frontend, partially sign the transaction with the purchaser, serialize the transaction and then send it to your secure environment (server/backend). You can then safely deserialize the transactions and sign it with the `Collection Authority` keypair without exposing the keypair in a non secure environment.
+For example, when creating NFTs, you may need to sign the transaction with the `Collection Authority` keypair to authorize the NFT into the Collection. To safely sign it, without exposing your keypair, you could first create the transaction in the backend, partially sign the transaction with the `collection_authority` without having to expose the keypair in a non secure environment, serialize the transaction and then send it. You can then safely deserialize the transactions and sign it with the `Buyer` wallet.
+
+**Note**: When using the Candy Machine, you don't need the `collection_authority` signature 
 
 ## Initial Setup
 
@@ -47,7 +49,7 @@ These are all the imports that we're going to use for this guide.
 ```ts
 import { generateSigner, signerIdentity, createNoopSigner } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { fetchCollection, create } from '@metaplex-foundation/mpl-core'
+import { fetchCollection, create, mplCore } from '@metaplex-foundation/mpl-core'
 import { base64 } from '@metaplex-foundation/umi/serializers';
 ```
 
@@ -75,6 +77,9 @@ umi.use(signerIdentity(signer))
 {% totem-accordion title="With an Existing Wallet" %}
 
 ```ts
+import * as fs from "fs";
+import * as path from "path";
+
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
 
@@ -172,7 +177,7 @@ const frontEndSigner = createNoopSigner(frontendPubkey)
 const asset = generateSigner(umi);
 
 // Fetch the Collection
-const collection = await fetchCollection(umi, publickey(`<Collection Address>`)); 
+const collection = await fetchCollection(umi, publickey(`11111111111111111111111111111111`)); 
 
 // Create the createAssetIx
 const createAssetTx = await create(umi, {
@@ -240,10 +245,11 @@ umi.use(signerIdentity(collectionAuthority));
 
 const frontEndSigner = generateSigner(umi);
 
-await umi.rpc.airdrop(umi.identity.publicKey, sol(1));
-await umi.rpc.airdrop(frontEndSigner.publicKey, sol(1));
-
 (async () => {
+  // Airdrop Tokens inside of the wallets
+  await umi.rpc.airdrop(umi.identity.publicKey, sol(1));
+  await umi.rpc.airdrop(frontEndSigner.publicKey, sol(1));
+
   // Generate the Collection KeyPair
   const collectionAddress = generateSigner(umi)
   console.log("\nCollection Address: ", collectionAddress.publicKey.toString())
