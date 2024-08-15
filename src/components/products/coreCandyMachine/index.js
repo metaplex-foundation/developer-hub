@@ -1,4 +1,4 @@
-import { documentationSection, referencesSection } from '@/shared/sections'
+import { documentationSection, guidesSection, referencesSection } from '@/shared/sections'
 import { Hero } from './Hero'
 import { Square3Stack3DIcon } from '@heroicons/react/24/solid'
 
@@ -161,85 +161,19 @@ export const coreCandyMachine = {
         },
       ],
     },
-    // {
-    //   id: 'sugar',
-    //   title: 'Sugar',
-    //   icon: 'SolidCake',
-    //   href: `/core-candy-machine/sugar`,
-    //   navigation: [
-    //     {
-    //       title: 'Introduction',
-    //       links: [
-    //         { title: 'Overview', href: '/core-candy-machine/sugar' },
-    //         {
-    //           title: 'Installation',
-    //           href: '/core-candy-machine/sugar/installation',
-    //         },
-    //         {
-    //           title: 'Getting Started',
-    //           href: '/core-candy-machine/sugar/getting-started',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: 'Working with Sugar',
-    //       links: [
-    //         {
-    //           title: 'Configuration File',
-    //           href: '/core-candy-machine/sugar/configuration',
-    //         },
-    //         {
-    //           title: 'Cache file',
-    //           href: '/core-candy-machine/sugar/cache',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: 'Commands',
-    //       links: [
-    //         {
-    //           title: 'airdrop',
-    //           href: '/core-candy-machine/sugar/commands/airdrop',
-    //         },
-    //         { title: 'bundlr', href: '/core-candy-machine/sugar/commands/bundlr' },
-    //         {
-    //           title: 'collection',
-    //           href: '/core-candy-machine/sugar/commands/collection',
-    //         },
-    //         { title: 'config', href: '/core-candy-machine/sugar/commands/config' },
-    //         { title: 'deploy', href: '/core-candy-machine/sugar/commands/deploy' },
-    //         { title: 'freeze', href: '/core-candy-machine/sugar/commands/freeze' },
-    //         { title: 'guard', href: '/core-candy-machine/sugar/commands/guard' },
-    //         { title: 'hash', href: '/core-candy-machine/sugar/commands/hash' },
-    //         { title: 'launch', href: '/core-candy-machine/sugar/commands/launch' },
-    //         { title: 'mint', href: '/core-candy-machine/sugar/commands/mint' },
-    //         { title: 'reveal', href: '/core-candy-machine/sugar/commands/reveal' },
-    //         { title: 'show', href: '/core-candy-machine/sugar/commands/show' },
-    //         { title: 'sign', href: '/core-candy-machine/sugar/commands/sign' },
-    //         { title: 'update', href: '/core-candy-machine/sugar/commands/update' },
-    //         { title: 'upload', href: '/core-candy-machine/sugar/commands/upload' },
-    //         {
-    //           title: 'validate',
-    //           href: '/core-candy-machine/sugar/commands/validate',
-    //         },
-    //         { title: 'verify', href: '/core-candy-machine/sugar/commands/verify' },
-    //         {
-    //           title: 'withdraw',
-    //           href: '/core-candy-machine/sugar/commands/withdraw',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: 'References',
-    //       links: [
-    //         {
-    //           title: 'Bring Your Own Uploader',
-    //           href: '/core-candy-machine/sugar/bring-your-own-uploader',
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
+    
+    {
+      ...guidesSection('core-candy-machine'),
+      title: 'Guides',
+      navigation: [
+        {
+          title: 'Guides',
+          links: [
+            { title: 'Create an NFT Collection On Solana', href: 'core-candy-machine/guides/create-a-core-nft-collection-on-solana-with-candy-machine' },
+          ],
+        },
+      ]
+    },
 
 
     {
@@ -256,5 +190,6 @@ export const coreCandyMachine = {
       href: `https://docs.rs/mpl-core-candy-machine-core/`,
       target: '_blank',
     },
+  
   ],
 }
