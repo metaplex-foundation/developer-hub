@@ -4,7 +4,7 @@ metaTitle: Sugar for Core Candy Machine | Core Candy Machine
 description: Learn about Sugar CLI which makes creating and deploying Core Candy Machines effortless.
 ---
 
-## What is Sugar?
+## Using Sugar
 
 Sugar is a CLI based tool that abstracts some of the complexity of a Candy Machine deployment and management into an easy to use CLI tool.
 

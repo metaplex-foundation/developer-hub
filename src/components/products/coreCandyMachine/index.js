@@ -25,8 +25,19 @@ export const coreCandyMachine = {
               href: '/core-candy-machine/getting-started',
               // Subpages: /js /rust, etc.
             },
+            {
+              title: 'Sugar Commands',
+              href: '/core-candy-machine/sugar',
+              // Subpages: /js /rust, etc.
+            },
           ],
         },
+        // {
+        //   title: 'Sugar',
+        //   links: [
+        //     { title: 'Sugar w/ Candy Machine', href: '/core-candy-machine/sugar' },
+        //   ],
+        // },
         {
           title: 'Core Candy Machine',
 
