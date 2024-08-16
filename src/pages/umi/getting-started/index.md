@@ -6,9 +6,9 @@ description: A Javascript Framework for Solana.
 
 ## Umi Installation
 
-To use Umi to build applications, you'll need to install Umi and the external plugins you want to use. Alternatively, you can install the default bundle that includes a set of plugins that's suitable for most use cases. 
+To use Umi you need to install Umi and all the external plugins you'll want to use. Alternatively, if you don't need a specific plugin, you can install the default bundle that includes a set of plugins that's suitable for most use cases. 
 
-**Note**: for now the default bundle relies on web3.js for some of the interfaces so we have to install it as well.
+**Note**: since the default bundle relies on web3.js for some of the interfaces you'll need to install that package as well.
 
 ### Required Packages
 
@@ -25,12 +25,12 @@ npm i @metaplex-foundation/umi-bundle-defaults
 ```
 
 ```
-npm i @metaplex-foundation/@solana/web3.js
+npm i @solana/web3.js
 ```
 
 ### For library authors
 
-Library authors that want to use Umi's interfaces to drastically reduce their dependencies only need to install the main Umi library. It is highly recommended to install it as a peer dependency to ensure the end-user does not end up with multiple versions of the Umi library.
+Library authors, that want to use Umi's interfaces to drastically reduce their dependencies, will only need to install the main Umi library. It is highly recommended to install it as a peer dependency to ensure the end-user does not end up with multiple versions of the Umi library using the following command:
 
 ```
 npm i @metaplex-foundation/umi --save-peer
@@ -83,7 +83,9 @@ In this section, we'll cover the essential steps to get started with Umi:
 
 Solana has different clusters (e.g., Mainnet-beta, Devnet, Testnet, ...) that serve various purposes, each with dedicated API nodes to handle RPC requests.
 
-Connecting Umi to a cluster of choice is is as simple as creating an umi instance since the RPC endpoint is passed as the first argument. If you're connecting to `Mainnet`, it's recommended to use a dedicated RPC endpoint from a Solana RPC provider instead of the public endpoint (https://api.mainnet-beta.solana.com) due to its limitations.
+Connecting Umi to a cluster of choice is is as simple as creating an umi instance since the RPC endpoint is passed as the first argument. 
+
+**Note**: If you're connecting to **Mainnet**, it's recommended to use a dedicated RPC endpoint from a Solana RPC provider instead of the public endpoint (`https://api.mainnet-beta.solana.com`) due to its limitations.
 
 To create a Umi instance, import the `createUmi` function and provide your RPC endpoint. Optionally, you can also specify the commitment level as the second argument.
 
@@ -95,7 +97,7 @@ const umi = createUmi('<RPC-Endpoint>', '<Commitment-Level>')
 
 ### Connecting a Wallet
 
-When setting up Umi, you'll need to use or generate a wallet in order to send transactions. To do so, you can create a new wallet for testing, import an existing wallet from the filesystem, or use a walletAdapter for web-based dApps.
+When setting up Umi, you'll need to use or generate a wallet in order to send transactions. To do so, you can **create a new wallet** for testing, **import an existing wallet** from the filesystem, or **use a walletAdapter** for web-based dApps.
 
 **Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
 
@@ -167,7 +169,7 @@ umi.use(walletAdapterIdentity(wallet))
 
 {% /totem %}
 
-**Note**: The `Umi` interface stores two instances of `Signer`: The `identity` using the app and the `payer` paying for transaction and storage fees. By default, the `signerIdentity` method will also update the `payer` attribute since, in most cases, the identity is also the payer. 
+**Note**: The **Umi** interface stores two instances of **Signer**: The **identity** using the app and the **payer** paying for transaction and storage fees. By default, the `signerIdentity` method will also update the **payer** attribute since, in most cases, the identity is also the payer. 
 
 If you want to learn more, go to the [Umi Context Interfaces Paragraph](/umi/interfaces#the-context-interface) 
 
