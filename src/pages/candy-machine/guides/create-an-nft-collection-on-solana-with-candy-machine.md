@@ -4,7 +4,7 @@ metaTitle: Create a Token Metadata TM NFT Collection on Solana with Candy Machin
 description: How to create an NFT collection on the Solana blockchain using Candy Machine.
 ---
 
-If you are looking to launch an NFT Collection on Solana Solana the Sugar CLI toolkit will abstract some of the trickier settup and management steps for you providing you with a automated launch system to create Candy Machines on the Solana blockchain.
+If you are looking to launch an NFT Collection on Solana the Sugar CLI toolkit will abstract some of the trickier settup and management steps for you providing you with a automated launch system to create Candy Machines on the Solana blockchain.
 
 ## Prerequisite
 

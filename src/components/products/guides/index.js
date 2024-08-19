@@ -56,6 +56,14 @@ export const guides = {
             // },
           ],
         },
+        {title: 'Genral',
+          links: [
+            {
+              title: 'Creating an NFT Collection With Candy Machine',
+              href: '/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine',
+            }
+          ]
+        },
         {
           title: 'Javascript',
           links: [
