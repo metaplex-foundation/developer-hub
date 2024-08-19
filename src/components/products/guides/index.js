@@ -125,6 +125,12 @@ export const guides = {
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
+            {
+              title: 'Candy Machine',
+              href: '/candy-machine/guides/',
+              created: '2021-10-01',
+              updated: null, // null means it's never been updated
+            },
 
           ],
         },
