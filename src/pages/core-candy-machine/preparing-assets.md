@@ -127,7 +127,7 @@ The goal of this point is to have a list full list of URI's of where your media 
 
 ```
 
-With the index uri list of uploaded media you will then need to loop through your JSON metadata files and add the URIs to the appropiate places.
+With the index uri list of uploaded media you will then need to loop through your JSON metadata files and add the URIs to the appropriate places.
 
 Image URIs would be inserted into the `image:` field, and also into the `properties: files: []` array.
 
