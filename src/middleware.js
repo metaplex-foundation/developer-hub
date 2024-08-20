@@ -9,6 +9,10 @@ const redirectData = {
     "destination": "/umi/web3js-differences-and-adapters",
     "permanent": true
   },
+  "/umi/connecting-to-umi": {
+    "destination": "/umi/getting-started",
+    "permanent": true
+  },
 }
 
 export async function middleware(request) {
