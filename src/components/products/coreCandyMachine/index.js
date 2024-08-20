@@ -152,6 +152,10 @@ export const coreCandyMachine = {
               title: 'Token2022 Payment',
               href: '/core-candy-machine/guards/token2022-payment',
             },
+            {
+              title: 'Vanity Mint',
+              href: '/core-candy-machine/guards/vanity-mint',
+            },
           ],
         },
         {
