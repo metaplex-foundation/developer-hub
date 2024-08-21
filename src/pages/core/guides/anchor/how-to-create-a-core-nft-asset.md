@@ -122,6 +122,7 @@ Constraints add extra validation logic. For example, the `#[account(mut)]` const
 pub struct CreateAsset<'info> {
     #[account(mut)]
     pub asset: Signer<'info>,
+    #[account(mut)]
     pub collection: Option<Account<'info, BaseCollectionV1>>,
     pub authority: Option<Signer<'info>>,
     #[account(mut)]
