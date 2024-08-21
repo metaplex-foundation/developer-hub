@@ -159,41 +159,58 @@ The `create_core_asset` function utilizes the inputs from the `CreateAsset` acco
 
 ```rust
 pub fn create_core_asset(ctx: Context<CreateAsset>, args: CreateAssetArgs) -> Result<()> {
+  let collection = match &ctx.accounts.collection {
+    Some(collection) => Some(collection.to_account_info()),
+    None => None,
+  };
 
-  let mpl_core_program = &ctx.accounts.mpl_core_program.to_account_info();
-  let asset = &ctx.accounts.asset.to_account_info();
-  let collection = ctx.accounts.collection.as_ref().map(|tmp| tmp.to_account_info());
-  let authority = ctx.accounts.authority.as_ref().map(|tmp| tmp.to_account_info());
-  let payer = &ctx.accounts.payer.to_account_info();
-  let owner = ctx.accounts.owner.as_ref().map(|tmp| tmp.to_account_info());
-  let update_authority = ctx.accounts.update_authority.as_ref().map(|tmp| tmp.to_account_info());
-  let system_program = &ctx.accounts.system_program.to_account_info();        
+  let authority = match &ctx.accounts.authority {
+    Some(authority) => Some(authority.to_account_info()),
+    None => None,
+  };
+
+  let owner = match &ctx.accounts.owner {
+    Some(owner) => Some(owner.to_account_info()),
+    None => None,
+  };
+
+  let update_authority = match &ctx.accounts.update_authority {
+    Some(update_authority) => Some(update_authority.to_account_info()),
+    None => None,
+  };
   
-  CreateV2CpiBuilder::new(mpl_core_program)
-    .asset(asset)
+  CreateV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
+    .asset(&ctx.accounts.asset.to_account_info())
     .collection(collection.as_ref())
     .authority(authority.as_ref())
-    .payer(payer)
+    .payer(&ctx.accounts.payer.to_account_info())
     .owner(owner.as_ref())
     .update_authority(update_authority.as_ref())
-    .system_program(system_program)
+    .system_program(&ctx.accounts.system_program.to_account_info())
     .name(args.name)
     .uri(args.uri)
     .invoke()?;
 
   Ok(())
-}
+    }
 ```
 
-We can access the accounts defined in the account struct using `ctx.accounts`, but before passing these accounts to the `CreateV2CpiBuilder` program instruction, we need to convert them to their raw data form using the `.to_account_info()` function.
+In this function, the accounts defined in the `CreateAsset` struct are accessed using `ctx.accounts`. Before passing these accounts to the `CreateV2CpiBuilder` program instruction, they need to be converted to their raw data form using the `.to_account_info()` method. This conversion is necessary because the builder requires the accounts in this format to interact correctly with the Solana runtime.
 
-**Note**: directly passing these accounts in the instruction can result in a **"temporary value dropped while borrowed" error**. To prevent this, we need to bind the account to a variable before passing it. Also for `optional accounts`, since the account might be **None**, we need to add another step: using the map method to check if an account is present and, if so, bind it to its `AccountInfo` like this:
+Some of the accounts in the `CreateAsset` struct are `optional`, meaning their value could be either `Some(account)` or `None`. Since these optional accounts need to be passed to the builder, we must handle them using a match statement to check if an account is present (Some) or not (None). Based on the response we then declare the `binding` account as `Some(account.to_account_info())` or as `None` so it's ready to be passed in the `CpiBuilder` like this:
+
+Some of the accounts in the `CreateAsset` struct are `optional`, meaning their value could be either `Some(account)` or `None`. To handle these optional accounts before passing them to the builder, we use a match statement that allows us to check if an account is present (Some) or absent (None) and based on this check, we bind the account as `Some(account.to_account_info())` if it exists, or as `None` if it doesn't like this:
 
 ```rust
-let collection = ctx.accounts.collection.as_ref().map(|tmp| tmp.to_account_info());
+let collection = match &ctx.accounts.collection {
+  Some(collection) => Some(collection.to_account_info()),
+  None => None,
+};
 ```
 
-After binding all the necessary accounts, we can pass them to the `CreateV2CpiBuilder` and finally use `.invoke()` to execute the instruction, or `.invoke_signed()` if we need to use signer seeds.
+**Note**: As you can see, this approach is repeated for other optional accounts like `authority`, `owner`, and `update_authority`.
+
+After preparing all the necessary accounts, we pass them to the `CreateV2CpiBuilder` and use `.invoke()` to execute the instruction, or `.invoke_signed()` if we need to use signer seeds.
 
 For more details on how the Metaplex CPI Builder works, you can refer to this [documentation](/guides/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)
 
@@ -241,14 +258,14 @@ external_plugin_adapters.push(
 Lastly, let's integrate these plugins into the `CreateV2CpiBuilder` program instruction like this:
 
 ```rust
-CreateV2CpiBuilder::new(mpl_core_program)
-  .asset(asset)
+CreateV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
+  .asset(&ctx.accounts.asset.to_account_info())
   .collection(collection.as_ref())
   .authority(authority.as_ref())
-  .payer(payer)
+  .payer(&ctx.accounts.payer.to_account_info())
   .owner(owner.as_ref())
   .update_authority(update_authority.as_ref())
-  .system_program(system_program)
+  .system_program(&ctx.accounts.system_program.to_account_info())
   .name(args.name)
   .uri(args.uri)
   .plugins(plugins)
