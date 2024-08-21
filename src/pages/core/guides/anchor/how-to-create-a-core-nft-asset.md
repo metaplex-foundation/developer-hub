@@ -9,7 +9,9 @@ updated: '06-18-2024'
 
 This guide will teach you how to create a **Core Digital Asset** on Solana using the Metaplex `mpl-core` program. 
 
-**Core Digital Assets** use a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
+{% callout title="What is Core?" %}
+**Core** use a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
+{% /callout %}
 
 ## Prerequisite
 
@@ -198,7 +200,7 @@ pub fn create_core_asset(ctx: Context<CreateAsset>, args: CreateAssetArgs) -> Re
 
 In this function, the accounts defined in the `CreateAsset` struct are accessed using `ctx.accounts`. Before passing these accounts to the `CreateV2CpiBuilder` program instruction, they need to be converted to their raw data form using the `.to_account_info()` method. This conversion is necessary because the builder requires the accounts in this format to interact correctly with the Solana runtime.
 
-Some of the accounts in the `CreateAsset` struct are `optional`, meaning their value could be either `Some(account)` or `None`. To handle these optional accounts before passing them to the builder, we use a match statement that allows us to check if an account is present (Some) or absent (None) and based on this check, we bind the account as `Some(account.to_account_info())` if it exists, or as `None` if it doesn't like this:
+Some of the accounts in the `CreateAsset` struct are `optional`, meaning their value could be either `Some(account)` or `None`. To handle these optional accounts before passing them to the builder, we use a match statement that allows us to check if an account is present (Some) or absent (None) and based on this check, we bind the account as `Some(account.to_account_info())` if it exists, or as `None` if it doesn't. Like this:
 
 ```rust
 let collection = match &ctx.accounts.collection {
@@ -280,7 +282,7 @@ To display a recognisable image for your digital asset in the Wallets or on the 
 
 Umi comes with downloadable storage plugins that allow you to upload to storage solutions such `Arweave`, `NftStorage`, `AWS`, and `ShdwDrive`. For this guide we're going to use the `irysUploader()` plugin which stores content on  Arweave.
 
-**Note**: This example uses a local approach using Irys to upload to Arweave; if you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
+In this example we're going to use a local approach using Irys to upload to Arweave; if you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -318,49 +320,53 @@ console.log(imageUri[0])
 
 ### Uploading the Metadata
 
-Once we have a valid and working image URI we can start working on the metadata for our token.
+Once we have a valid and working image URI we can start working on the metadata for our Collection.
 
-the standard for offchain metadata for a fungible token is as follows
+The standard for offchain metadata for a fungible token is as follows. This should be filled out and writen to either an object `{}` without Javascript or saved to a `metadata.json` file.
+We are going to look at the Javascript object approach.
 
-```json
-{
-  "name": "My NFT",
-  "description": "This is an NFT on Solana",
-  "image": "https://arweave.net/my-image",
-  "animation_url": "https://arweave.net/my-animation",
-  "external_url": "https://example.com",
-  "attributes": [
+```ts
+const metadata = {
+  name: 'My Collection',
+  description: 'This is a Collection on Solana',
+  image: imageUri[0],
+  external_url: 'https://example.com',
+  attributes: [
     {
-      "trait_type": "trait1",
-      "value": "value1"
+      trait_type: 'trait1',
+      value: 'value1',
     },
     {
-      "trait_type": "trait2",
-      "value": "value2"
-    }
+      trait_type: 'trait2',
+      value: 'value2',
+    },
   ],
-  "properties": {
-    "files": [
+  properties: {
+    files: [
       {
-        "uri": "https://arweave.net/my-image",
-        "type": "image/png"
+        uri: imageUri[0],
+        type: 'image/jpeg',
       },
-      {
-        "uri": "https://arweave.net/my-animation",
-        "type": "video/mp4"
-      }
     ],
-    "category": "video"
-  }
+    category: 'image',
+  },
 }
 ```
 
-The fields here include
+The fields here include:
 
-- **Name**: The name of your token.
-- **Symbol**:The short hand of your token. Where Solana's shorthand would be `SOL`.
-- **Description**: The description of your token.
-- **Image**: This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.
+| field         | description                                                                                                                                                                               |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name          | The name of your Collection.                                                                                                                                                                     |
+| description   | The description of your Collection.                                                                                                                                                              |
+| image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
+| animation_url | This will be set to the `animation_ulr` (or any online location of the video/glb) that you've uploaded.                                                                                   |
+| external_url  | This would link to an external address of your choice. This is normally the projects website.                                                                                             |
+| attributes    | Using an object og `{trait_type: vlue, "value": "value1"}`                                                                                                                                |
+| image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
+| properties    | Contains the `files` field that takes an `[] array` of `{uri: string, type: mimeType}`. Also contains the category field which can be set to `image`, `audio`, `video`, `vfx`, and `html` |
+
+After creating the metadata, we need to Upload that as a Json file, so we can get an Uri to attach to our Collection
 
 ```js
 // Call upon umi's `uploadJson function to upload our metadata to Arweave via Irys.
