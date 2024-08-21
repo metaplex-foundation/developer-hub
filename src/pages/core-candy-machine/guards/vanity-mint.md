@@ -109,7 +109,7 @@ API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 
 ## Mint Settings
 
-_The Vanity Mint guard does not require mint settings. It expexts the mint address to match._
+_The Vanity Mint guard does not require mint settings. It expects the mint address to match._
 
 ## Route Instruction
 
