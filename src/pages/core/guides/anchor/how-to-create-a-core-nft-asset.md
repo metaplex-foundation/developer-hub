@@ -198,8 +198,6 @@ pub fn create_core_asset(ctx: Context<CreateAsset>, args: CreateAssetArgs) -> Re
 
 In this function, the accounts defined in the `CreateAsset` struct are accessed using `ctx.accounts`. Before passing these accounts to the `CreateV2CpiBuilder` program instruction, they need to be converted to their raw data form using the `.to_account_info()` method. This conversion is necessary because the builder requires the accounts in this format to interact correctly with the Solana runtime.
 
-Some of the accounts in the `CreateAsset` struct are `optional`, meaning their value could be either `Some(account)` or `None`. Since these optional accounts need to be passed to the builder, we must handle them using a match statement to check if an account is present (Some) or not (None). Based on the response we then declare the `binding` account as `Some(account.to_account_info())` or as `None` so it's ready to be passed in the `CpiBuilder` like this:
-
 Some of the accounts in the `CreateAsset` struct are `optional`, meaning their value could be either `Some(account)` or `None`. To handle these optional accounts before passing them to the builder, we use a match statement that allows us to check if an account is present (Some) or absent (None) and based on this check, we bind the account as `Some(account.to_account_info())` if it exists, or as `None` if it doesn't like this:
 
 ```rust
