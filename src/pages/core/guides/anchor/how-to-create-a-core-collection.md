@@ -38,7 +38,7 @@ anchor init create-core-collection-example
 
 ### Required Crates
 
-In this guide, we'll use the `mpl_core` crate with the `anchor` feature enabled. To install it, first navigate to the `create-core-asset-example` directory:
+In this guide, we'll use the `mpl_core` crate with the `anchor` feature enabled. To install it, first navigate to the `create-core-collection-example` directory:
 
 ```
 cd create-core-collection-example
@@ -290,7 +290,7 @@ console.log(imageUri[0])
 
 ### Uploading the Metadata
 
-Once we have a valid and working image URI we can start working on the metadata for our Asset.
+Once we have a valid and working image URI we can start working on the metadata for our Collection.
 
 The standard for offchain metadata for a fungible token is as follows. This should be filled out and writen to either an object `{}` without Javascript or saved to a `metadata.json` file.
 We are going to look at the Javascript object approach.
