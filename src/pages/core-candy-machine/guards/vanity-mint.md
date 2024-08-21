@@ -86,7 +86,14 @@ The Vanity Mint guard contains the following settings:
 
 - **Regular Expression**: A Regex that the mint address has to match. E.g. if you want all mints to start with string `mplx` you could use this as `regex` Parameter.
 
-{% dialect-switcher title="Set up a Candy Machine using the Asset Gate Guard" %}
+Ideas for regular expressions that can be used for example could be:
+- Starting with a specific pattern: `^mplx`
+- Ending with a specific pattern: `mplx$`
+- Starting and Ending with a specific pattern: `^mplx*mplx$`
+- Exactly matches a specific pattern: `^mplx1111111111111111111111111111111111111mplx$`
+The string `mplx` would need to be replaced with the expected characters. 
+
+{% dialect-switcher title="Set up a Candy Machine using the Vanity Mint Guard where the mint starts and ends with `mplx`" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
@@ -95,7 +102,7 @@ create(umi, {
   // ...
   guards: {
     vanityMint: some({
-      regex: "String",
+      regex: "^mplx*mplx$",
     }),
   },
 });
