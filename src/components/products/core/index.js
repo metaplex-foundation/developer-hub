@@ -180,6 +180,10 @@ export const core = {
           title: 'Javascript',
           links: [
             {
+              title: 'How to Create a Core Collection',
+              href: '/core/guides/javascript/how-to-create-a-core-collection',
+            },
+            {
               title: 'How to Create a Core Asset',
               href: '/core/guides/javascript/how-to-create-a-core-nft-asset',
             },
@@ -192,6 +196,10 @@ export const core = {
         {
           title: 'Anchor',
           links: [
+            {
+              title: 'How to Create a Core Collection',
+              href: '/core/guides/anchor/how-to-create-a-core-collection',
+            },
             {
               title: 'Anchor Staking Example', 
               href: '/core/guides/anchor/anchor-staking-example' 
