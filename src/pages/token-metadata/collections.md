@@ -423,7 +423,13 @@ Here is how you can use our SDKs to verify a Collection NFT on Token Metadata.
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { verifyCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
+import { publicKey } from "@metaplex-foundation/umi";
+import { verifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
+
+// first find the metadata PDA to use later
+const metadata = findMetadataPda(umi, { 
+  mint: publicKey("...")
+});
 
 await verifyCollectionV1(umi, {
   metadata,
@@ -443,7 +449,13 @@ Reciprocally, the authority of a Collection NFT can unverify any NFTs that are p
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { unverifyCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
+import { publicKey } from "@metaplex-foundation/umi";
+import { unverifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
+
+// first find the metadata PDA to use later
+const metadata = findMetadataPda(umi, { 
+  mint: publicKey("...")
+});
 
 await unverifyCollectionV1(umi, {
   metadata,
