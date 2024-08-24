@@ -87,7 +87,8 @@ There is also nothing wrong with self hosting your images on metadata either in 
 Umi has a few plugins that can aid the upload process via plugins. At the time the following plugins are supported:
 
 - Irys
-- NFT Storage
+- NFT Storage 
+- AWS 
 
 #### Uploading to Arweave via Irys with Umi
 

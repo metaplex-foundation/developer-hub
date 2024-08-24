@@ -38,7 +38,7 @@ const uri = await umi.uploader.uploadJson({
 
 To select the Uploader of your choice using Umi, simply install the plugin provided by the Uploader.
 
-For instance, here is how we can install the NFT.Storage plugin:
+For instance, here is how we can install the irysUploader plugin for interacting with the Arweave network:
 
 ```ts
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
