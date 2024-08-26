@@ -1,39 +1,51 @@
 ---
-title: Overview
-metaTitle: Overview | Toolbox
+title: Toolbox
+metaTitle: Toolbox | Umi
 description: Provides a high-level overview of the Toolbox product and what it includes.
 ---
 
-Mpl Toolbox includes a bunch of essential Solana and Metaplex programs to get you up and running with your decentralized applications. {% .lead %}
+The **mpl-toolbox** package is designed to complement Umi by providing a set of essential functions for Solana's Native Programs.
 
 {% quick-links %}
-
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/token-metadata/getting-started" description="Find the language or library of your choice and get started essentials programs." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" target="_blank" href="https://mpl-toolbox.typedoc.metaplex.com/" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
 {% /quick-links %}
 
+## Installation
+
+{% packagesUsed packages=["toolbox"] type="npm" /%}
+
+The package isn't included by default when using the Umi package, so to install it and start using it, you need to run the following command
+
+```
+npm i @metaplex-foundation/mpl-toolbox
+```
+
 ## Introduction
 
-Whilst all of Metaplex's products offer clients that include all you need to get started with that particular product, they do not include clients for low-level yet essential tasks such as creating an account from the SPL System program or extending a Lookup Table from the SPL Address Lookup Table program. MPL Toolbox aims to fix this by offering a collection of essential Solana and Metaplex programs that can be used to perform these more low-level tasks. Namely, MPL Toolbox includes the following programs:
+While Umi, and the other Metaplex products, already offer comprehensive packages that includes all the essential functions to get you started, they don't include the necessary helpers and functions for lower-level yet critical tasks, especially when dealing with Solana's native programs. For example, with just Umi, creating an account using the SPL System Program or extending a Lookup Table from the SPL Address Lookup Table program it's not possible.
 
-- [SPL System](#spl-system). The native Solana program that allows us to create accounts.
-- [SPL Token and SPL Associated Token](#spl-token-and-spl-associated-token). The native Solana programs that allow us to manage tokens.
-- [SPL Memo](#spl-memo). The native Solana program that allows us to attach memos to transactions.
-- [SPL Address Lookup Table](#spl-address-lookup-table). The native Solana program that allows us to manage lookup tables.
-- [SPL Compute Budget](#spl-compute-budget). The native Solana program that allows us to manage compute units.
-- [MPL System Extras](#mpl-system-extras). An immutable Metaplex program that offers a few extra low-level features on top of SPL System.
-- [MPL Token Extras](#mpl-token-extras). An immutable Metaplex program that offers a few extra low-level features on top of SPL Token.
+That's why we created **mpl-toolbox**, a package that provides a set of essential helpers for Solana's Native that simplifies these low-level tasks. 
+
+**The mpl-toolbox package includes helpers from the following programs:**
+
+| Programs                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [SPL System](#spl-system).                                                  | Solana's native program for account creation.                                                                               |
+| [SPL Token and SPL Associated Token](#spl-token-and-spl-associated-token).  | Solana's native programs for managing tokens.                                                                               |
+| [SPL Memo](#spl-memo).                                                      | Solana's native program for attaching memos to transactions.                                                                |
+| [SPL Address Lookup Table](#spl-address-lookup-table).                      | Solana's native program for managing lookup tables.                                                                         |
+| [SPL Compute Budget](#spl-compute-budget).                                  | Solana's native program for managing compute units.                                                                         |
+| [MPL System Extras](#mpl-system-extras).                                    | A Metaplex program offering additional low-level features on top of SPL System.                                             |
+| [MPL Token Extras](#mpl-token-extras).                                      | A Metaplex program offering additional low-level features on top of SPL Token.                                              |
 
 ## SPL System
 
-The instructions of the SPL System program can be used to create new uninitialized accounts onchain and transfer SOL between wallets. You can read more about the SPL System program in [Solana's official documentation](https://docs.solana.com/developing/runtime-facilities/programs).
+The instructions of the SPL System Program are used to create new uninitialized accounts onchain and transfer SOL between wallets. You can learn more about the SPL System program in [Solana's official documentation](https://docs.solanalabs.com/runtime/programs#system-program).
 
-Note that, you may be interested in the [MPL System Extras program](#mpl-system-extras) which offers a few convenient instructions when dealing with creating accounts and transferring SOL.
+**Note**: If you're using the SPL System Program, you might also be interested in the [MPL System Extras program](#mpl-system-extras), which provides additional convenient instructions for creating accounts and transferring SOL.
 
-{% dialect-switcher title="Interact with SPL System" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Create Account" %}
@@ -42,10 +54,12 @@ Note that, you may be interested in the [MPL System Extras program](#mpl-system-
 import { generateSigner } from '@metaplex-foundation/umi'
 import { createAccount } from '@metaplex-foundation/mpl-toolbox'
 
-const space = 42
 const newAccount = generateSigner(umi)
+const space = 42
+
 await createAccount(umi, {
   newAccount,
+  payer: umi.payer
   lamports: await umi.rpc.getRent(space),
   space,
   programId: umi.programs.get('myProgramName').publicKey,
@@ -57,11 +71,13 @@ await createAccount(umi, {
 {% totem-accordion title="Transfer SOL" %}
 
 ```ts
-import { sol } from '@metaplex-foundation/umi'
-import { transferSol } from '@metaplex-foundation/mpl-toolbox'
+import { sol, publicKey } from '@metaplex-foundation/umi'
+import { transferSol, transferAllSol } from '@metaplex-foundation/mpl-toolbox'
+
+const destination = publicKey(`11111111111111111111111`)
 
 await transferSol(umi, {
-  source,
+  source: umi.identity,
   destination,
   amount: sol(1.3),
 }).sendAndConfirm(umi)
@@ -70,17 +86,13 @@ await transferSol(umi, {
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ## SPL Token and SPL Associated Token
 
-The SPL Token and SPL Associated Token programs can be used to manage tokens in Solana. It allows us to create Mint accounts, Token accounts, Associated Token PDAs, mint tokens, transfer tokens, delegate tokens, etc. You can read more about these programs in [Solana's official documentation](https://spl.solana.com/token).
+The SPL Token and SPL Associated Token programs are essential for managing tokens on Solana. They enable you to create Mint accounts, Token accounts, Associated Token PDAs, mint tokens, transfer tokens, delegate tokens, and more. You can learn more about these programs in [Solana's official documentation](https://spl.solana.com/token).
 
-Note that, you may be interested in the [Mpl Token Extras program](#mpl-token-extras) which offers a few convenient instructions when dealing with tokens.
+**Note**: If you're using the SPL Token & Associated Program, you might also be interested in the [Mpl Token Extras program](#mpl-token-extras), which provides additional convenient instructions for working with tokens.
 
-{% dialect-switcher title="Manage tokens" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Create Mint" %}
@@ -90,6 +102,7 @@ import { generateSigner } from '@metaplex-foundation/umi'
 import { createMint } from '@metaplex-foundation/mpl-toolbox'
 
 const mint = generateSigner(umi)
+
 await createMint(umi, {
   mint,
   decimals: 0,
@@ -216,15 +229,14 @@ const mintKeysFromOwner = await fetchAllMintPublicKeyByOwner(umi, owner)
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ## SPL Memo
 
-The SPL Memo program simply allows us to attach text notes — i.e. memos — to transactions. You can read more about this program in [Solana's official documentation](https://spl.solana.com/memo).
+The SPL Memo program allows you to attach text notes - i.e. memos - to transactions. You can learn more about this program in [Solana's official documentation](https://spl.solana.com/memo).
 
-{% dialect-switcher title="Add memos to transactions" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Add memos to transactions" %}
 
 ```ts
 import { transactionBuilder } from '@metaplex-foundation/umi'
@@ -236,15 +248,14 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem-accordion %}
+
+{% /totem %}
 
 ## SPL Address Lookup Table
 
-The SPL Address Lookup Table program can be used to reduce the size of transactions by creating custom lookup tables — a.k.a **LUTs** or **ALTs** — before using them in transactions. This program allows you to create and extend LUTs. You can read more about this program in [Solana's official documentation](https://docs.solana.com/developing/lookup-tables).
+The SPL Address Lookup Table program can be used to reduce the size of transactions by creating custom lookup tables — a.k.a **LUTs** or **ALTs** — before using them in transactions. This program allows you to create and extend LUTs. You can learn more about this program in [Solana's official documentation](https://docs.solana.com/developing/lookup-tables).
 
-{% dialect-switcher title="Manage address lookup tables" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Create empty LUTs" %}
@@ -387,15 +398,11 @@ await closeLut(umi, {
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ## SPL Compute Budget
 
 The SPL Compute Budget program allows us to set a custom Compute Unit limit and price. You can read more about this program in [Solana's official documentation](https://docs.solana.com/developing/programming-model/runtime#compute-budget).
 
-{% dialect-switcher title="Manage the Compute Budget of a transaction" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Set Compute Unit limit" %}
@@ -427,21 +434,22 @@ await transactionBuilder()
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ## MPL System Extras
 
-The MPL System Extras program is an immutable program that offers a few convenient instructions on top of the native SPL System program.
+The MPL System Extras program is an immutable program that provides additional convenient instructions on top of the native SPL System program.
 
 ### Create Account with Rent
 
-This instruction creates new accounts without needing to fetch the rent exemption. This instruction uses the `Rent` sysvar on the program to compute the rent exemption from the provided `space` attribute. It then does a CPI call to the SPL System program to create an account with the computed rent.
+This instruction allows you to create new accounts without needing to manually fetch the rent exemption. It leverages the `Rent` sysvar within the program to compute the rent exemption based on the provided `space` attribute, and then performs a CPI (Cross-Program Invocation) call to the SPL System program to create the account with the calculated rent.
 
-The advantage is that clients using this instruction no longer need the extra HTTP request that fetches the rent exemption from the RPC node. The inconvenience is that, because we are doing a CPI call, the maximum size account that can be created using this instruction is 10KB, as opposed to 10MB when using the SPL System program directly.
+**Advantages**: By using this instruction, clients avoid the need for an extra HTTP request to fetch the rent exemption from the RPC node, streamlining the process.
 
-{% dialect-switcher title="Create account with rent" %}
-{% dialect title="JavaScript" id="js" %}
+**Limitations**: Since this instruction involves a CPI call, the maximum account size that can be created is limited to 10KB, compared to 10MB when using the SPL System program directly.
+
+{% totem %}
+
+{% totem-accordion title="Code Example" %}
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -450,34 +458,38 @@ import { createAccountWithRent } from '@metaplex-foundation/mpl-toolbox'
 const newAccount = generateSigner(umi)
 await createAccountWithRent(umi, {
   newAccount,
+  payer: umi.payer,
   space: 42,
   programId: umi.programs.get('myProgramName').publicKey,
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem-accordion %}
+
+{% /totem %}
 
 ### Transfer All SOL
 
 This instruction is similar to the **Transfer SOL** instruction from the SPL System program except that it transfers all the SOL from the source account to the destination account.
 
-This can be useful when we want to drain an account from all of its lamports whilst using this account to pay for the transaction. Without this instruction, we would need to fetch the balance of the account to drain and subtract an estimation of the transaction fee — which can be tricky to estimate when using prioritization fees.
+This is particularly useful when you want to drain an account of all its lamports while still using the account to pay for the transaction. Without this instruction, you'd need to manually fetch the account balance, then subtract an estimated transaction fee—a process that can be challenging, especially when dealing with prioritization fees.
 
-{% dialect-switcher title="Transfer all SOL" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+{% totem-accordion title="Code Example" %}
 
 ```ts
 import { transferAllSol } from '@metaplex-foundation/mpl-toolbox'
 
 await transferAllSol(umi, {
-  source,
+  source: umi.identity,
   destination,
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem-accordion %}
+
+{% /totem %}
 
 ## MPL Token Extras
 
@@ -485,19 +497,15 @@ The MPL Token Extras program is an immutable program that offers a few convenien
 
 ### Create Token If Missing
 
-This instruction creates a new Token account if and only if it does not already exist. This is useful if a subsequent instruction requires a Token account but we do not know whether it already exists or not. This instruction can be used to ensure the Token account exists without having to fetch it first on the client side.
+This instruction creates a new Token account only if it doesn't already exist. It's particularly useful when a subsequent instruction requires a Token account, but you’re unsure whether it already exists. This instruction ensures the Token account's existence without needing to fetch it on the client side.
 
-Whilst this instruction works with both associated Token accounts and regular Token accounts, it's important to note that it will only be able to create an associated Token account if the token account does not already exist. Therefore we can have the following situations:
+Here’s how it works:
+- If the account exists, the instruction succeeds and does nothing.
+- If the account does not exist, the instruction succeeds and creates the associated token account.
 
-- The token account is an **associated token account**.
-  - If the account exists, the instruction succeeds and does nothing.
-  - If the account does not exist, the instruction succeeds and creates the associated token account.
-- The token account is a **regular token account** — i.e. non-associated.
-  - If the account exists, the instruction succeeds and does nothing.
-  - If the account does not exist, the instruction fails.
+{% totem %}
 
-{% dialect-switcher title="Create token if missing" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem-accordion title="Code Example" %}
 
 ```ts
 import { transactionBuilder } from '@metaplex-foundation/umi'
@@ -508,13 +516,8 @@ await transactionBuilder()
   .add(createTokenIfMissing(umi, { mint, owner }))
   .add(...) // Subsequent instructions can be sure the Associated Token account exists.
   .sendAndConfirm(umi)
-
-// If the token accounts is a regular token account.
-await transactionBuilder()
-  .add(createTokenIfMissing(umi, { mint, owner, token }))
-  .add(...) // Subsequent instructions can be sure the non-Associated Token account exists, otherwise the instruction fails.
-  .sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem-accordion %}
+
+{% /totem %}

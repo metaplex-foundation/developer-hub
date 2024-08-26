@@ -33,7 +33,12 @@ export const umi = {
               title: 'Metaplex Umi Plugins',
               href: '/umi/metaplex-umi-plugins',
             },
-            { title: 'Web3js Differences and Adapters', href: '/umi/web3js-differences-and-adapters' },
+            { title: 'Web3js Differences and Adapters', 
+              href: '/umi/web3js-differences-and-adapters' 
+            },
+            { title: 'Mpl-Toolbox', 
+              href: '/umi/toolbox' 
+            },
           ],
         },
         {
