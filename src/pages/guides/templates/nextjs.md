@@ -94,7 +94,7 @@ umi.use(signerIdentity(signer))
 
 ## Helpers
 
-Stored in the /lib/umi folder there are some pre made helps you can use to make your development easier.
+Stored in the `/lib/umi` folder there are some pre made helps you can use to make your development easier.
 
 Umi is split up into several components which can be called in different scenarios.
 
