@@ -9,7 +9,7 @@ updated: '06-21-2024'
 
 ## Sharing Errors to a Support Network
 
-If you are receiving errors that you do not understand and wish to show to someone else it can sometimes be difficult to describe the situation. This often happens when using a form of SDK to send transactions such as Metaplex Umi, Solana SDK, Solana Web3js. These clients will often send whats called a **pre-flight transaction** or simulation to an RPC to check if the transaction is going to succeed or not. If a transaction is deemed to fail then a transaction is not sent to the chain and will just throw an error message instead. While this is good behaviour on behalf of the network, it doesn't give us anything we can logically get help with. This is where skipping simulation/pre-flight comes into play and forcing the failing transaction to be registered by the chain which becomes sharable to other people. 
+If you are receiving errors that you do not understand and wish to show to someone else it can sometimes be difficult to describe the situation. This often happens when using a form of SDK to send transactions such as Metaplex Umi, Solana SDK, Solana Web3js. These clients will often send whats called a **pre-flight transaction** or simulation to an RPC to check if the transaction is going to succeed or not. If a transaction is deemed to fail then a transaction is not sent to the chain and will just throw an error message instead. While this is good behavior on behalf of the network, it doesn't give us anything we can logically get help with. This is where skipping simulation/pre-flight comes into play and forcing the failing transaction to be registered by the chain which becomes sharable to other people. 
 
 
 ## Skipping Preflight
@@ -20,7 +20,7 @@ Most SDK's you are using to send transactions will come with the ability to `ski
 - All instructions submitted
 - All logs including error messages
 
-This failed transaction can then be send to someone to inspect the details of the transaction to help diagnose why your transaction is failing.
+This failed transaction can then be sent to someone to inspect the details of the transaction to help diagnose why your transaction is failing.
 
 This works on both **Mainnet** and **Devnet**. This does also work on **Localnet** but is more complicated and sharing the details is more difficult.
 
@@ -101,6 +101,8 @@ By logging out the transaction ID you can visit a Solana blockchain explorer and
 - Solscan
 - Solana Explorer
 
+This transaction ID or explorer link can the be shared with someone who may be able to assist you.
+
 ## Common Types of Errors
 
 There are some common errors that normally occur 
@@ -151,7 +153,9 @@ In this case you can use a [Hex to Decimal converter](https://www.rapidtables.co
 
 ### Incorrect Owner
 
-This error normally means that an account passed in isn't owned by the expected program and therefor will fail. For example a Token Metadata Account is expected to be owned by the Token Metadata Program, and if the account in that particular position in the transactions account list doesn't meet that criteria then the transaction will fail.
+This error normally means that an account passed into the account list isn't owned by the expected program and therefor will fail. For example a Token Metadata Account is expected to be owned by the Token Metadata Program, and if the account in that particular position in the transactions account list doesn't meet that criteria then the transaction will fail.
+
+These types of errors often occur when a PDA is perhaps generated with the wrong seeds or an account hasn't been initialized/created yet.
 
 ### Assert Error
 
