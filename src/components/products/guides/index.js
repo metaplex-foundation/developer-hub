@@ -117,6 +117,17 @@ export const guides = {
           ],
         },
         {
+          title: 'Templates',
+          links: [
+            {
+              title: 'NextJs Template',
+              href: '/guides/templates/nextjs',
+              created: '2024-08-29',
+              updated: null, // null means it's never been updated
+            },
+          ],
+        },
+        {
           title: 'Metaplex Program Guides',
           links: [
             {
