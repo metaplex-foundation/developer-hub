@@ -61,7 +61,7 @@ By storing the umiInstance in **zustand** we can access it in both `ts` and `tsx
 
 While it's normally easier to use the helper methods below to access umi you can also access the state methods manually by calling for the `umiStore` state yourself.
 
-When fetching the umi state directly without a helper it will only pickup the umi instance and not the latest signer. By design the when the walletAdapter changes the state of the `signer` in the `umiStore` is updated but **NOT** applied to the `umi` state. So you will need to also pull the latest `signer` state and apply it to `umi`. This behaviour can be outlined in the `umiProvider.tsx` file. The helpers always pull a fresh instance of the `signer` state.
+When fetching the umi state directly without a helper it will only pickup the umi instance and not the latest signer. By design when the walletAdapter changes state the state of the `signer` in the `umiStore` is updated but **NOT** applied to the `umi` state. So you will need to also pull the latest `signer` state and apply it to `umi`. This behaviour can be outlined in the `umiProvider.tsx` file. The helpers always pull a fresh instance of the `signer` state.
 
 ```ts
 // umiProvider.tsx snippet
