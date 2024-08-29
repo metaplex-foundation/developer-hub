@@ -102,7 +102,7 @@ umi.use(signerIdentity(signer))
 
 // This will airdrop SOL on devnet only for testing.
 console.log('Airdropping 1 SOL to identity')
-await umi.rpc.airdrop(umi.identity.publickey)
+await umi.rpc.airdrop(umi.identity.publickey, sol(1))
 ```
 
 ### Use an Existing Wallet Locally
