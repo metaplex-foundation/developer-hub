@@ -82,7 +82,7 @@ let transaction = new Transaction()
 // Add skipPreflight to the sendTransaction() function
 let res = rpc_client
     .send_transaction_with_config(&create_asset_tx, RpcSendTransactionConfig {
-        skip_preflight: false,
+        skip_preflight: true,
         preflight_commitment: Some(CommitmentConfig::confirmed().commitment),
         encoding: None,
         max_retries: None,
