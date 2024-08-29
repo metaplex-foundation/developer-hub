@@ -119,7 +119,7 @@ Here is an example of a error.rs page from the Metaplex Core program.
 
 [https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
 
-As we can see if we were receiving an error code of 20 from our failing transaction that would transaction to
+As we can see if we were receiving an error code of 20 from our failing transaction that would translate to
 
 ```rust
 /// 20 - Missing update authority
