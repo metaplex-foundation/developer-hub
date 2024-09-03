@@ -1,6 +1,6 @@
 ---
 title: Getting Started using JavaScript
-metaTitle: Inscription - Getting Started - JavaScript
+metaTitle: JavaScript SDK | Inscription
 description: Get started with Inscription using JavaScript
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Permanent Freeze Delegate
-metaTitle: Core - Permanent Freeze Plugin
-description: Learn about the Permanent Freeze Plugin for MPL Core Assets
+metaTitle: Permanent Freeze Plugin | Core
+description: A powerful plugin that allows the plugins delegate to freeze the Asset at any point.
 ---
 
 ## Overview
@@ -18,6 +18,10 @@ The Permanent Freeze Plugin will work in areas such as:
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
+
+### Behaviours
+- **Asset**: Allows the delegated address to freeze and thaw the NFT at any time.
+- **Collection**: Allows the collection authority to freeze and thaw the whole collection at once. It does **not** allow to freeze a single asset in the collection using this delegate.
 
 ## Arguments
 

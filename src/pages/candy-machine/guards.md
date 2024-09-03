@@ -1,6 +1,6 @@
 ---
 title: Candy Guards
-metaTitle: Candy Machine - Candy Guards
+metaTitle: Candy Guards | Candy Machine
 description: Explains how guards work and how to enable them.
 ---
 

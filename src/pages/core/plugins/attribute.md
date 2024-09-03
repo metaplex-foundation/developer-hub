@@ -1,7 +1,7 @@
 ---
 title: Attribute Plugin
-metaTitle: Core - Attribute Plugin
-description: Learn about the MPL Core Attribute Plugin
+metaTitle: Attribute Plugin | Core
+description: The Attribute Plugin stores onchain JSON to an Asset or Collection readable by onchain programs. Learn how to utilize this plugin for gaming and data storage.
 ---
 
 The Attribute Plugin is a `Authority Managed` plugin that can store key value pairs of data within the asset.

@@ -1,7 +1,7 @@
 ---
 title: FAQ
-metaTitle: Bubblegum - FAQ
-description: Frequently asked questions about Bubblegum
+metaTitle: FAQ | Bubblegum
+description: Frequently asked questions about Bubblegum.
 ---
 
 ## How do I find the arguments needed for operations such as transfer, delegate, burn, etc? {% #replace-leaf-instruction-arguments %}

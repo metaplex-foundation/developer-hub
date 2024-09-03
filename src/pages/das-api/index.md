@@ -1,6 +1,6 @@
 ---
 title: DAS API
-metaTitle: DAS API - Overview
+metaTitle: Overview | DAS API
 description: A DAS API client used to access the Metaplex Digital Asset Standard.
 ---
 

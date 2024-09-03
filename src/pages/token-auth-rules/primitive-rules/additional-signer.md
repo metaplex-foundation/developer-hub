@@ -1,6 +1,6 @@
 ---
 title: Additional Signer
-metaTitle: Token Auth Rules - Additional Signer
+metaTitle: Additional Signer | Token Auth Rules
 description: The Additional Signer primitive rule
 ---
 

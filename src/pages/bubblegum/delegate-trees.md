@@ -1,7 +1,7 @@
 ---
 title: Delegating Trees
-metaTitle: Bubblegum - Delegating Trees
-description: Learn how to delegate Merkle Trees on Bubblegum
+metaTitle: Delegating Trees | Bubblegum
+description: Learn how to delegate Merkle Trees on Bubblegum.
 ---
 
 Similarly to how the owner of a Compressed NFT can approve a Delegate Authority, the creator of a Bubblegum Tree can also approve another account to perform actions on their behalf. {% .lead %}

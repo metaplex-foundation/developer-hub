@@ -1,6 +1,6 @@
 ---
 title: Umi Plugins
-metaTitle: Umi - Plugins
+metaTitle: Plugins | Umi
 description: Plugins in Metaplex Umi
 ---
 Whilst Umi is a small zero-dependency framework, it is designed to be extended with plugins. Plugins allow us to not only interact with its interfaces or swap out its interface implementations but also to add new features to Umi itself.

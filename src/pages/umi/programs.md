@@ -1,6 +1,6 @@
 ---
 title: Registering Programs
-metaTitle: Umi - Registering Programs
+metaTitle: Registering Programs | Umi
 description: Registering Programs to Metaplex Umi
 ---
 In order to create clients that interact with Solana programs, it is important to know which programs are available within your cluster and at which address. Umi offers a `ProgramRepositoryInterface` that acts as one big registry of programs for you client.

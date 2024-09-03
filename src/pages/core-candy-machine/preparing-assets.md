@@ -1,7 +1,7 @@
 ---
 title: Preparing Assets
-metaTitle: Core Candy Machine - Preparing Assets
-description: How to prepare your files and assets for a Core Candy Machine.
+metaTitle: Preparing Assets | Core Candy Machine
+description: How to prepare your files and assets for uploading into a Core Candy Machine.
 ---
 
 ## Asset Files
@@ -87,11 +87,12 @@ There is also nothing wrong with self hosting your images on metadata either in 
 Umi has a few plugins that can aid the upload process via plugins. At the time the following plugins are supported:
 
 - Irys
-- NFT Storage
+- NFT Storage 
+- AWS 
 
 #### Uploading to Arweave via Irys with Umi
 
-For a more indepth look at uploaded files with Umi please visit [Umi Storage.](umi/storage)
+For a more indepth look at uploaded files with Umi please visit [Umi Storage.](/umi/storage)
 
 {% dialect-switcher title="Uploading Files to Arweave Via Irys with Umi" %}
 {% dialect title="JavaScript" id="js" %}
@@ -127,7 +128,7 @@ The goal of this point is to have a list full list of URI's of where your media 
 
 ```
 
-With the index uri list of uploaded media you will then need to loop through your JSON metadata files and add the URIs to the appropiate places.
+With the index uri list of uploaded media you will then need to loop through your JSON metadata files and add the URIs to the appropriate places.
 
 Image URIs would be inserted into the `image:` field, and also into the `properties: files: []` array.
 

@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Amman - Overview
+metaTitle: Overview | Amman
 description: Provides a high-level overview of Amman local validator.
 ---
 

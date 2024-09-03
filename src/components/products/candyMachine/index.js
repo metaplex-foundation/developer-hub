@@ -3,6 +3,7 @@ import {
   documentationSection,
   recipesSection,
   referencesSection,
+  guidesSection
 } from '@/shared/sections'
 import { Hero } from './Hero'
 import { Square2StackIcon } from '@heroicons/react/24/solid'
@@ -105,13 +106,20 @@ export const candyMachine = {
           title: 'Custom Guards',
           links: [
             {
-              title: 'Writing a Custom Guard',
-              href: '/candy-machine/custom-guards/writing-custom-guards',
-            },
-            {
               title: 'Generating Client',
               href: '/candy-machine/custom-guards/generating-client',
             },
+          ],
+        },
+      ],
+    },
+    {
+      ...guidesSection('candy-machine'),
+      navigation: [
+        {
+          title: 'Candy Machine Guides',
+          links: [
+            { title: 'Create an NFT Collection on Solana with Candy Machine', href: '/candy-machine/recipes/todo' }
           ],
         },
       ],
@@ -196,22 +204,6 @@ export const candyMachine = {
       ...referencesSection('candy-machine'),
       href: `https://mpl-candy-machine.typedoc.metaplex.com/`,
       target: '_blank',
-    },
-    /*
-    {
-      ...recipesSection('candy-machine'),
-      navigation: [
-        {
-          title: 'How to create a Candy Machine',
-          links: [
-            { title: 'Part 1 (Sugar)', href: '/candy-machine/recipes/todo' },
-            { title: 'Part 2 (Umi)', href: '/candy-machine/recipes/todo' },
-            { title: 'Part 2 (JS SDK)', href: '/candy-machine/recipes/todo' },
-          ],
-        },
-      ],
-    },
-    { ...changelogSection('candy-machine') },
-    */
+    }
   ],
 }

@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Token Auth Rules - Overview
+metaTitle: Overview | Token Auth Rules
 description: Provides a high-level overview of NFT permissions.
 ---
 Token Authorization Rules (aka Token Auth Rules) is an advanced metaprogramming tool meant to evaluate permissions of an instruction occurring on an SPL Token. The program itself can be used to create and update Rule Sets, which are collections of Rules which represent specific criteria.

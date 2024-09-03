@@ -1,7 +1,7 @@
 ---
 title: How to CPI into a Metaplex Program
-metaTitle: Metaplex — Working with Rust
-description: A quick overview on working with Rust and the Metaplex protocal.
+metaTitle: How to CPI into a Metaplex Program | Guides
+description: An overview of how Metaplex makes a consistent experience when performing a CPI into each Metaplex program.
 ---
 
 ## Introduction

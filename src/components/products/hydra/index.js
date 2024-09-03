@@ -36,7 +36,5 @@ export const hydra = {
       href: `https://mpl-hydra.typedoc.metaplex.com/`,
       target: '_blank',
     },
-    { ...recipesSection('hydra') },
-    { ...changelogSection('hydra') },
   ],
 }

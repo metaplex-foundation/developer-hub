@@ -1,6 +1,6 @@
 ---
 title: upload
-metaTitle: Candy Machine - Sugar - upload
+metaTitle: upload | Sugar
 description: upload command.
 ---
 

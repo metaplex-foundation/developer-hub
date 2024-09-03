@@ -1,6 +1,6 @@
 ---
 title: guard
-metaTitle: Candy Machine - Sugar - guard
+metaTitle: guard | Sugar
 description: guard command.
 ---
 

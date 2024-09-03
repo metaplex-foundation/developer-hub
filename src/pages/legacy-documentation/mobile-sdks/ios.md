@@ -1,6 +1,6 @@
 ---
 title: iOS SDK
-metaTitle: iOS SDK
+metaTitle: iOS SDK | Developer Hub
 description: Metaplex iOS SDK
 ---
 

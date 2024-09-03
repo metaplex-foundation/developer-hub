@@ -1,7 +1,7 @@
 ---
 title: Verified Creator Plugin
-metaTitle: Core - Verified Creator
-description: Learn what Verified Creators are and how to add them to your asset or collection
+metaTitle: Verified Creator Plugin | Core
+description: A plugin that stores data which is a list of creators who worked on the Assets/Collection. 
 ---
 
 The `Verified Creator` Plugin is a `Authority Managed` plugin that allows people to add verified creators to your Asset or Collection. It works similar to the verified Creator Array Metaplex Token Metadata used, different to that in MPL Core the Verified Creatores are not used to distribute royalties.

@@ -1,7 +1,7 @@
 ---
-title: Removing Plugin Adapters
-metaTitle: Core - Removing Plugin Adapters
-description: Learn about Removing Plugin Adapters from Core Assets and Collections.
+title: Removing External Plugin Adapters
+metaTitle: Removing External Plugin Adapters | Core
+description: Learn about Removing External Plugin Adapters from Core Assets and Collections.
 ---
 
 ## Remove from Asset

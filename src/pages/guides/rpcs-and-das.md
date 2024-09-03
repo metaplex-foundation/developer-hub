@@ -1,6 +1,6 @@
 ---
 title: RPCs and DAS
-metaTitle: RPCs and DAS on the Solana Blockchain
+metaTitle: RPCs and DAS on the Solana Blockchain | Guides
 description: Learn about RPCS on the Solana blockchain and how DAS by Metaplex aids in storing and reading data on Solana.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
@@ -87,6 +87,6 @@ Currently Core, Token Metadata, and Bubbglegum are all indexed by DAS.
 To find out more about Metaplex DAS you can visit these pages:
 
 - [Metaplex DAS API](/das-api)
-- [Metaplex DAS API Github](/https://github.com/metaplex-foundation/digital-asset-standard-api)
+- [Metaplex DAS API Github](https://github.com/metaplex-foundation/digital-asset-standard-api)
 - [Metaplex Digital Asset RPC Infrastructure Github](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)
 

@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: MPL-Hybrid - Overview
+metaTitle: Overview | MPL-Hybrid
 description: Provides a high-level overview of the framework and onchain protocol for hybrid assets.
 ---
 

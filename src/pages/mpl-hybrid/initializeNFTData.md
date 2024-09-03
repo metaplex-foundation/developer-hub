@@ -1,6 +1,6 @@
 ---
 title: Initializing NFT Data
-metaTitle: MPL-Hybrid - Initializing Escrow
+metaTitle: Initializing Escrow | MPL-Hybrid
 description: Initializing MPL-Hybrid NFT Data
 ---
 

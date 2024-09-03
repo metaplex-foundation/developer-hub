@@ -1,7 +1,7 @@
 ---
 title: Print Editions with MPL Core
-metaTitle: Core - Print Editions
-description: This Guide shows how to combine Plugins to create Editions using Core
+metaTitle: Print Editions | Core Guides
+description: This guide shows you how to combine plugins to create Editions with the Metaplex Core protocol.
 ---
 
 ## Introduction
@@ -118,7 +118,7 @@ await createCollectionV1(umi, {
 After the creation of the Collection we can create the candy machine using `hiddenSettings` and the `edition` guard.
 
 - `hiddenSettings` are used to assign the same, or similar, Name and Metadata to all Assets minted. You can use a `$ID$` variable that will be replaced by the index of the minted Asset on mint.
-- The `edition` Guard is used to add the [Edition Plugin](/core/plugins/editions) to the Assets. The Edition number is increasing for each minted Asset, starting with the number in `editionStartOffset`.
+- The `edition` Guard is used to add the [Edition Plugin](/core/plugins/edition) to the Assets. The Edition number is increasing for each minted Asset, starting with the number in `editionStartOffset`.
 
 ```ts
 // The Name and off chain Metadata of your Editions
@@ -349,6 +349,6 @@ pub async fn create_asset_with_plugin() {
 {% /dialect-switcher %}
 
 ## Further Reading
-- Mint from Candy Machine
+- [Mint from Candy Machine](/core-candy-machine/mint)
 - [Master Edition Plugin](/core/plugins/master-edition)
 - [Edition Plugin](/core/plugins/edition)

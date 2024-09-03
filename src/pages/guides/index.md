@@ -1,6 +1,6 @@
 ---
 title: Guides
-metaTitle: Metaplex Solana Guides
+metaTitle: Metaplex Solana Guides | Guides
 description: Guides by Metaplex about the Solana blockchain.
 ---
 

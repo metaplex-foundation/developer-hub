@@ -1,6 +1,6 @@
 ---
 title: Bring Your Own Uploader
-metaTitle: Candy Machine - Sugar - Bring Your Own Uploader
+metaTitle: Bring Your Own Uploader | Sugar
 description: How to bring your own uploader to Sugar.
 ---
 

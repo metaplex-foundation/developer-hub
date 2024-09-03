@@ -1,6 +1,6 @@
 ---
 title: Validators and Staking
-metaTitle: Validators and Staking
+metaTitle: Validators and Staking | Guides
 description: An overview of Solana Validators and staking mechanics.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

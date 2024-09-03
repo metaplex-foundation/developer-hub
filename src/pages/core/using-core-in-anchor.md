@@ -1,7 +1,7 @@
 ---
-title: How to use Core in Anchor
-metaTitle: Core - Using Core in Anchor
-description: Learn how to use Core inside your Anchor Smart Contracts
+title: Using Metaplex Core in Anchor
+metaTitle: Using Metaplex Core in Anchor | Core
+description: Learn how to utilize the Metaplex Core crate inside your Anchor programs.
 ---
 
 ## Installation

@@ -1,7 +1,7 @@
 ---
-title: "Allowlist"
-metaTitle: "Candy Machine Guards - Allowlist"
-description: "Uses a wallet address list to determine who is allowed to mint."
+title: Allowlist Guard
+metaTitle: Allowlist Guard | Core Candy Machine
+description: "The Core Candy Machine 'Allowlist' guard guard allows you to set a list of predefined wallets that are allowed to mint from your Core Candy Machine"
 ---
 
 ## Overview
@@ -325,7 +325,7 @@ The Allow List route instruction supports the following features.
 
 _Path: `proof`_
 
-Instead of passing the Merkle Proof directly to the mint instruction, the minting wallet must perform a [Pre-Validation](/programs/core-candy-machine/minting#minting-with-pre-validation) by using the route instruction of the Allow List guard.
+Instead of passing the Merkle Proof directly to the mint instruction, the minting wallet must perform a [Pre-Validation](/core-candy-machine/mint#minting-with-pre-validation) by using the route instruction of the Allow List guard.
 
 This route instruction will compute the Merkle Root from the provided Merkle Proof and, if valid, will create a new PDA account acting as proof that the minting wallet is part of the allowed list. Therefore, when minting, the Allow List guard only needs to check for the existence of this PDA account to authorize or deny minting to the wallet.
 

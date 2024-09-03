@@ -1,6 +1,6 @@
 ---
 title: Not
-metaTitle: Token Auth Rules - Not
+metaTitle: Not | Token Auth Rules
 description: The Not composite rule
 ---
 

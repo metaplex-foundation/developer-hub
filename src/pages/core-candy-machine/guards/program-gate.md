@@ -1,12 +1,12 @@
 ---
-title: "Program Gate"
-metaTitle: "Core Candy Machine Guards - Program Gate"
-description: "Configurable list of valid programs."
+title: "Program Gate Guard"
+metaTitle: "Program  Guard Guard | Core Candy Machine"
+description: "The Core Candy Machine 'Program Gate' guard restricts the programs that can be used during the mint transaction."
 ---
 
 ## Overview
 
-The **Program Gate** guard restricts the programs that can be in a mint transaction. This is useful to prevent bots adding malicious instructions from arbritary programs in the same transaction as the mint.
+The **Program Gate** guard restricts the programs that can be in a mint transaction. This is useful to prevent bots adding malicious instructions from arbitrary programs in the same transaction as the mint.
 
 The guard allows the necessary programs for the mint and any other program specified in the configuration.
 

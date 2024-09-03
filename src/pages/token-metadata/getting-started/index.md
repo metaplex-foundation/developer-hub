@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Token Metadata - Getting Started
+metaTitle: Getting Started | Token Metadata
 description: Get started with NFTs.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Search Assets
-metaTitle: DAS API - Search Assets
+metaTitle: Search Assets | DAS API
 description: Return the list of assets given a search criteria
 ---
 

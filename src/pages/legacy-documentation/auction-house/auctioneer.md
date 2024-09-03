@@ -1,6 +1,6 @@
 ---
 title: Timed Auction using Auctioneer
-metaTitle: Auction House - Timed Auction using Auctioneer
+metaTitle: Timed Auction using Auctioneer | Auction House
 description: Explains how to manage timed Auctions using Auctioneer.
 ---
 
