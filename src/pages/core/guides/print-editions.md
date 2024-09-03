@@ -349,6 +349,6 @@ pub async fn create_asset_with_plugin() {
 {% /dialect-switcher %}
 
 ## Further Reading
-- Mint from Candy Machine
+- [Mint from Candy Machine](/core-candy-machine/mint)
 - [Master Edition Plugin](/core/plugins/master-edition)
 - [Edition Plugin](/core/plugins/edition)
