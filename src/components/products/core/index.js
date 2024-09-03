@@ -180,8 +180,8 @@ export const core = {
           title: 'Javascript',
           links: [
             {
-              title: 'How to Create a Core Asset',
-              href: '/core/guides/javascript/how-to-create-a-core-nft-asset',
+              title: 'How to Create a Core Asset in Javascript',
+              href: '/core/guides/javascript/how-to-create-a-core-nft-asset-in-javascript',
             },
             { 
               title: 'Web2 typescript Staking Example', 
@@ -193,8 +193,8 @@ export const core = {
           title: 'Anchor',
           links: [
             {
-              title: 'How to Create a Core Asset',
-              href: '/core/guides/anchor/how-to-create-a-core-nft-asset',
+              title: 'How to Create a Core Asset in Anchor',
+              href: '/core/guides/anchor/how-to-create-a-core-nft-asset-in-anchor',
             },
             {
               title: 'Anchor Staking Example', 
