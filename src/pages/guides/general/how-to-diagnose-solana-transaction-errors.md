@@ -110,7 +110,7 @@ There are some common errors that normally occur
 
 ### Error Codes xx (23)
 
-While normally complimented with some additional text to describe the error codes these codes can sometimes appear on their own in a non descriptive manor. If this happens and you know the program that threw the error you can sometimes find the program in Github and it will have an errors.rs page that lists out all the possible errors of the program.
+While normally complimented with some additional text to describe the error codes these codes can sometimes appear on their own in a non descriptive manner. If this happens and you know the program that threw the error you can sometimes find the program in Github and it will have an errors.rs page that lists out all the possible errors of the program.
 
 Starting at an index of 0 you can count down/work out the position of the error in the list.
 
@@ -146,17 +146,21 @@ CandyMachineEmpty,
 
 In some rare occasions you might experience the return of errors in a hex format such as `0x1e`.
 
-In this case you can use a [Hex to Decimal converter](https://www.rapidtables.com/convert/number/hex-to-decimal.html) to format the error correctly into something we can use. If the format is 
+In this case you can use a [Hex to Decimal converter](https://www.rapidtables.com/convert/number/hex-to-decimal.html) to format the error correctly into something we can use.
 
 - If the error is in xx format see [Error Codes xx](#error-codes-xx-23)
 - If the error is in 6xxx format see [Error Codes 6xxx](#error-codes-6xxx-6002)
 
 ### Incorrect Owner
 
-This error normally means that an account passed into the account list isn't owned by the expected program and therefor will fail. For example a Token Metadata Account is expected to be owned by the Token Metadata Program, and if the account in that particular position in the transactions account list doesn't meet that criteria then the transaction will fail.
+This error normally means that an account passed into the account list isn't owned by the expected program and therefore will fail. For example a Token Metadata Account is expected to be owned by the Token Metadata Program, and if the account in that particular position in the transactions account list doesn't meet that criteria then the transaction will fail.
 
 These types of errors often occur when a PDA is perhaps generated with the wrong seeds or an account hasn't been initialized/created yet.
 
 ### Assert Error
 
 Assert errors are matching errors. Assert will normally take 2 variables (in most cases address/publicKeys) and check they are the same expected value. If not an `Assert left='value' right='value'` error will be thrown detailing the two values and that they do not match as expected.
+
+### 0x1 Attempt to Debit
+
+This is a common error that reads `Attempt to debit an account but found no record of a prior credit`. This error basicly implies that the account does not have any SOL within it.
