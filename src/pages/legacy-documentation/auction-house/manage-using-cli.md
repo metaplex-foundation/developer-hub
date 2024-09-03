@@ -1,6 +1,6 @@
 ---
 title: Manage Auction House using CLI
-metaTitle: Auction House - Manage using CLI
+metaTitle: Manage Auction Houses using CLI | Auction House
 description: "How to manage Auction House using CLI"
 ---
 

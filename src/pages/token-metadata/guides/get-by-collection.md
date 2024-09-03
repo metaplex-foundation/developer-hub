@@ -1,6 +1,6 @@
 ---
-title: Get Mints in a collection
-metaTitle: Token Metadata - Get Mints in a collection
+title: Get Mints in a Collection
+metaTitle: Get Mints in a Collection | Token Metadata Guides
 description: How-to guide to get all mints in a collection.
 ---
 

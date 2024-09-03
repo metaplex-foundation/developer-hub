@@ -1,7 +1,7 @@
 ---
 title: Plugins Overview
-metaTitle: Core - Asset Plugins Overview
-description: Learn about the different types of Plugins available on MPL Core Assets
+metaTitle: Asset Plugins Overview | Core
+description: The new Metaplex Core digital asset standard provides new ways to interact with your Assets by the way of plugins. Plugins can be added to Assets to change behaviors or store data further enhancing NFTs and Digital Assets on the Solana blockchain.
 ---
 
 ## Lifecycles

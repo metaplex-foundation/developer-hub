@@ -1,6 +1,6 @@
 ---
 title: Guard Groups
-metaTitle: Candy Machine - Guard Groups
+metaTitle: Guard Groups | Candy Machine
 description: Explains how to configure multiple groups of guards.
 ---
 

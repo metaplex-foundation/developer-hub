@@ -1,7 +1,7 @@
 ---
 title: Getting Started using JavaScript
-metaTitle: Token Metadata - Getting Started - JavaScript
-description: Get started with NFTs using JavaScript
+metaTitle: JavaScript SDK | Token Metadata
+description: Get started with NFTs using the Metaplex Token Metadata JavaScript SDK.
 ---
 
 Metaplex provides a JavaScript library that can be used to interact with NFTs. Thanks to the [Umi framework](https://github.com/metaplex-foundation/umi), it ships without many opinionated dependencies and, thus, provides a lightweight library that can be used in any JavaScript project.

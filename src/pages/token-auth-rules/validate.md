@@ -1,6 +1,6 @@
 ---
 title: Validating with a Rule Set
-metaTitle: Token Auth Rules - Validate
+metaTitle: Validate | Token Auth Rules
 description: How to run validation using a Rule Set
 ---
 
@@ -8,7 +8,7 @@ description: How to run validation using a Rule Set
 The Validate instruction on Token Authorization Rules takes an operation, token, and payload and uses that data to evaluate the rule set to determine if the operation is allowed. The most common use of this is royalty enforcement on Metaplex programmable NFTs. On pNFTs, the Delegate and Transfer instructions are **Operations**, the NFT that is being delegated or transferred is the **Token**, and the **Payload** is constructed using the different attributes of the Operation.
 
 ## Constructing the Payload
-Most [Primitive Rules](/token-auth-rules/primitive-rules/) include a **field**. This is meant to indicate a field in the Payload passed in to the validate call. The values stored in these fields are fetched from the Payload HashMap and used for evaluation of the various rules. Below is an example of how Token Metadata constructs a payload for transferring an NFT.
+Most **Primitive Rules** include a **field**. This is meant to indicate a field in the Payload passed in to the validate call. The values stored in these fields are fetched from the Payload HashMap and used for evaluation of the various rules. Below is an example of how Token Metadata constructs a payload for transferring an NFT.
 
 ```rust
 // Transfer Amount

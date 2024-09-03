@@ -1,6 +1,6 @@
 ---
 title: Printing Editions
-metaTitle: Token Metadata - Printing Editions
+metaTitle: Printing Editions | Token Metadata
 description: Learn how to print NFT editions on Token Metadata
 ---
 

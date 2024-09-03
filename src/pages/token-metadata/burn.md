@@ -1,6 +1,6 @@
 ---
 title: Burning Assets
-metaTitle: Token Metadata - Burning Assets
+metaTitle: Burning Assets | Token Metadata
 description: Learn how to burn Assets on Token Metadata
 ---
 

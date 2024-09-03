@@ -1,6 +1,6 @@
 ---
 title: Premade Configurations
-metaTitle: Amman - Pre Made Configurations
+metaTitle: Pre Made Configurations | Amman
 description: A set of premade configurations from Metaplex Amman local validator toolkit.
 ---
 

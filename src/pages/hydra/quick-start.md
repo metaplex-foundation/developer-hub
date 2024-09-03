@@ -1,6 +1,6 @@
 ---
 title: Quick Start
-metaTitle: Hydra - Quick Start
+metaTitle: Quick Start | Hydra
 description: Provides a high-level overview of Hydra wallets.
 ---
 
@@ -22,7 +22,7 @@ Install the package from npm:
 yarn add @glasseaters/hydra-sdk
 ```
 
-This is how you'd set up a Hydra with the Wallet [membership model](./intro#adding-members).
+This is how you'd set up a Hydra with the Wallet [membership model](/hydra#adding-members).
 
 ```ts
 import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";

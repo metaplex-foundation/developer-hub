@@ -1,6 +1,6 @@
 ---
 title: Connecting with an RPC
-metaTitle: Umi - Connecting with an RPC
+metaTitle: Connecting with an RPC | Umi
 description: Connecting with an RPC using Metaplex Umi
 ---
 Contacting the Solana blockchain via an RPC is an important part of any decentralized application. Umi provides a [RpcInterface](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html) that helps us do just that.
@@ -55,7 +55,7 @@ const confirmResult = await umi.rpc.confirmTransaction(signature, { strategy });
 const transaction = await umi.rpc.getTransaction(signature);
 ```
 
-Since transactions are an important component of Solana clients, we discuss them in more detail on the [Sending transactions](./transactions.md) documentation page.
+Since transactions are an important component of Solana clients, we discuss them in more detail on the [Sending transactions](/umi/transactions) documentation page.
 
 ## Fetching accounts
 
@@ -68,7 +68,7 @@ const maybeAccounts = await umi.rpc.getAccounts(myPublicKeys);
 const accounts = await umi.rpc.getProgramAccounts(myProgramId, { filters });
 ```
 
-Since fetching accounts is one of the most common operations, we discuss it in more detail on the [Fetching accounts](./accounts.md) documentation page.
+Since fetching accounts is one of the most common operations, we discuss it in more detail on the [Fetching accounts](accounts) documentation page.
 
 ## Airdropping SOL on supported clusters
 
@@ -81,7 +81,7 @@ await umi.rpc.airdrop(myPublicKey, sol(1.5));
 
 ## Getting the balance of an account
 
-You may use the following method to get the SOL balance of any account. This will return a `SolAmount` object [as documented here](./helpers.md#amounts).
+You may use the following method to get the SOL balance of any account. This will return a `SolAmount` object [as documented here](helpers#amounts).
 
 ```ts
 const balance = await umi.rpc.getBalance(myPublicKey);

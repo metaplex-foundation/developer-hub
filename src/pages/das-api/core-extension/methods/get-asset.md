@@ -1,6 +1,6 @@
 ---
 title: Get Core Asset
-metaTitle: DAS API Core Extension - Get Asset
+metaTitle: Get Asset | DAS API Core Extension
 description: Returns the information of a MPL Core asset
 ---
 

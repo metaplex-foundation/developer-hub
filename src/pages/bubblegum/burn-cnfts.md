@@ -1,7 +1,7 @@
 ---
 title: Burning Compressed NFTs
-metaTitle: Bubblegum - Burning Compressed NFTs
-description: Learn how to burn compressed NFTs on Bubblegum
+metaTitle: Burning Compressed NFTs | Bubblegum
+description: Learn how to burn compressed NFTs on Bubblegum.
 ---
 
 The **Burn** instruction can be used to burn a Compressed NFT and, therefore, remove it from the Bubblegum Tree permanently. To authorize this operation, either the current owner or the delegate authority — if any — must sign the transaction. The instruction accepts the following parameter:

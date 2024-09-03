@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Auction House - Overview
+metaTitle: Overview | Auction House
 description: Gives an overview of the Auction House program
 ---
 
@@ -35,7 +35,7 @@ The Auction House program can be used to create a new marketplace by instantiati
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
 
-The account can be configured in whichever way the user wants. We'll talk [more about these configurations in a dedicated page](settings) but here are some interesting configurable parameters:
+The account can be configured in whichever way the user wants. We'll talk [more about these configurations in a dedicated page](auction-house/settings) but here are some interesting configurable parameters:
 
 - `requireSignOff`: this allows marketplaces to gate which assets can be listed and which bids can be placed. On every relevant instruction, the Auction House [authority](https://docs.solana.com/staking/stake-accounts#understanding-account-authorities) needs to sign the transaction.
 - `canChangeSalePrice`: this parameter is only intended to be used on Auction Houses with `requireSignOff` set to `true`. This allows the Auction House to perform custom order matching to find the best price for the seller.

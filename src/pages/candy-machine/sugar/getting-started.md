@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Candy Machine - Sugar - Getting Started
+metaTitle: Getting Started | Sugar
 description: Getting started with Sugar.
 ---
 

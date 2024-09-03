@@ -1,6 +1,6 @@
 ---
 title: mint
-metaTitle: Candy Machine - Sugar - mint
+metaTitle: mint | Sugar
 description: mint command.
 ---
 

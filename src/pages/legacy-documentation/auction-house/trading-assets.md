@@ -1,6 +1,6 @@
 ---
 title: Trading Assets
-metaTitle: Auction House - Trading Assets
+metaTitle: Trading Assets | Auction House
 description: Explains how to manage the trading of assets on Auction House.
 ---
 ## Introduction

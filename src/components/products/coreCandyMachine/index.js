@@ -89,6 +89,10 @@ export const coreCandyMachine = {
               href: '/core-candy-machine/guards/asset-burn-multi',
             },
             {
+              title: 'Asset Gate',
+              href: '/core-candy-machine/guards/asset-gate',
+            },
+            {
               title: 'Asset Payment',
               href: '/core-candy-machine/guards/asset-payment',
             },
@@ -148,15 +152,15 @@ export const coreCandyMachine = {
               title: 'Token2022 Payment',
               href: '/core-candy-machine/guards/token2022-payment',
             },
+            {
+              title: 'Vanity Mint',
+              href: '/core-candy-machine/guards/vanity-mint',
+            },
           ],
         },
         {
           title: 'Custom Guards',
           links: [
-            {
-              title: 'Writing a Custom Guard',
-              href: '/core-candy-machine/custom-guards/writing-custom-guards',
-            },
             {
               title: 'Generating Client',
               href: '/core-candy-machine/custom-guards/generating-client',

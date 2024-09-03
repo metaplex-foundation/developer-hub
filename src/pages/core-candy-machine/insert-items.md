@@ -1,7 +1,7 @@
 ---
 title: Inserting Items
-metaTitle: Core Candy Machine - Inserting Items
-description: Explains how to load items into Core Candy Machines.
+metaTitle: Inserting Items | Core Candy Machine
+description: How to load Core NFT Assets into a Core Candy Machine.
 ---
 
 Now that we have a name and URI for all of our items, all we need to do is insert them into our Core Candy Machine account.

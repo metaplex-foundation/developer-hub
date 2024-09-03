@@ -1,6 +1,6 @@
 ---
 title: Immutability in MPL Core
-metaTitle: Core - Immutability
+metaTitle: Immutability in MPL Core | Core Guides
 description: This Guide describes the different immutability layers of MPL Core
 ---
 

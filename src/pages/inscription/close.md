@@ -1,6 +1,6 @@
 ---
 title: Close Inscriptions
-metaTitle: Inscription - Close
+metaTitle: Close | Inscription
 description: Learn how to close Inscription accounts
 ---
 

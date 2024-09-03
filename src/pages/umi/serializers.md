@@ -1,6 +1,6 @@
 ---
 title: Serializers
-metaTitle: Umi - Serializers
+metaTitle: Serializers | Umi
 description: Serializers and Deserializers in Metaplex Umi
 ---
 Whether we are sending data to the blockchain or reading from it, serialization is a big part of the process. The serialization logic may vary from one program to another and, whilst Borsh serialization is the most popular choice for Solana programs, it is not the only one.
@@ -344,7 +344,7 @@ map(u8(), u8(), { size: 'remainder' }) // Map of (u8, u8) entries with a variabl
 
 Umi provides two functions to serialize optional values:
 - `nullable`: Serializes a value that can be null. It accepts a `Serializer<T>` as an argument and returns a `Serializer<Nullable<T>>` where `Nullable<T>` is a type alias for `T | null`.
-- `option`: Serializes an `Option` instance ([See documentation](./helpers.md#options)). It accepts a `Serializer<T>` as an argument and returns a `Serializer<OptionOrNullable<T>, Option<T>>`. This means deserialized values will always be wrapped in an `Option` type but serialized values can either be an `Option<T>` or a `Nullable<T>`.
+- `option`: Serializes an `Option` instance ([See documentation](helpers#options)). It accepts a `Serializer<T>` as an argument and returns a `Serializer<OptionOrNullable<T>, Option<T>>`. This means deserialized values will always be wrapped in an `Option` type but serialized values can either be an `Option<T>` or a `Nullable<T>`.
 
 Both functions serialize optional values by prefixing them with a boolean value that indicates whether the value is present or not. If the prefixed boolean is `false`, the value is `null` (for nullables) or `None` (for options) and we can skip deserializing the actual value. Otherwise, the value is deserialized using the provided serializer and returned.
 
@@ -509,7 +509,7 @@ messageSerializer.serialize({ __kind: 'Write', fields: ['Hi'] }); // -> 0x010200
 messageSerializer.serialize({ __kind: 'Move', x: 5, y: 6 }); // -> 0x020500000006000000
 ```
 
-Note that, when dealing with data enums, you may want to offer some helper methods to improve the developer experience so that it feels closer to the Rust way of handling enums. This is something that [Kinobi](./kinobi.md) offers to generated JavaScript clients out of the box.
+Note that, when dealing with data enums, you may want to offer some helper methods to improve the developer experience so that it feels closer to the Rust way of handling enums. This is something that [Kinobi](kinobi) offers to generated JavaScript clients out of the box.
 
 ```ts
 // Example of helper methods.

@@ -1,7 +1,7 @@
 ---
 title: Autograph Plugin
-metaTitle: Core - Autograph
-description: Learn how to add your signature and message to an asset or collection
+metaTitle: Autograph Plugin | Core
+description: Learn how to add your signatures and messages to a Core NFT Asset or Collection.
 ---
 
 The `autograph` Plugin is a `Owner Managed` plugin that allows people to add signatures and a message to an asset or collection.

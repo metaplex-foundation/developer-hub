@@ -1,6 +1,6 @@
 ---
 title: RPC Providers
-metaTitle: Metaplex — RPC Providers
+metaTitle: RPC Providers | Developer Hub
 description: A list of available RPCs on Solana.
 ---
 

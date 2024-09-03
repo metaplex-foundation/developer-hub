@@ -1,7 +1,7 @@
 ---
 title: Creating a Core Candy Machine 
-metaTitle: Creating a Core Candy Machine
-description: Learn how to create your Core Candy Machine and it's various settings.
+metaTitle: Creating a Core Candy Machine | Core Candy Machine
+description: Learn how to create your Core Candy Machine and it's various settings in both Javascript and Rust.
 ---
 
 ## Prerequisites
@@ -241,9 +241,13 @@ If your Asset's have a naming structure of `Example Asset #1` then your prefix w
 
 #### nameLength
 
-The lengh of your prefixName.
+The maximum length for the name of each inserted item excluding the name prefix
 
-If your Asset's prefix name is `Example Asset #` then the length would be `15`
+For Example given...
+- a candy machine containing `1000` items.
+- The name of each item is `Example Asset #X` where X is the item’s index starting from 1.
+
+... would result in 19 characters that would need to be stored. 15 characters for “My NFT Project #” and 4 characters for the highest number which is “1000”. When using the `prefixName` the `nameLength` instead can be reduced to 4.
 
 #### prefixUri
 
@@ -253,7 +257,13 @@ If your Asset's will have a metadata URI of `https://example.com/metadata/0.json
 
 #### uriLength
 
-If your prefixUri is `https://example.com/metadata/` this would have a length of `29`
+The maximum lengths of your URIs excluding the `prefixUri`.
+
+For Example given...
+- a base URI ` https://arweave.net/` with 20 characters.
+- and a unique unifier with a maximum length of 43 characters
+
+... without prefix would result in 63 required characters to store. When using the `prefixUri` the `uriLength` can be reduced by 20 characters for `https://arweave.net/` to the 43 characters for the unique identifier.
 
 #### isSequential
 

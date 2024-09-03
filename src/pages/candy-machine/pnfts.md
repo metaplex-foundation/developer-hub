@@ -1,6 +1,6 @@
 ---
 title: Programmable NFTs
-metaTitle: Candy Machine - Programmable NFTs
+metaTitle: Programmable NFTs | Candy Machine
 description: Explains how to mint Programmable NFTs from candy machines.
 ---
 
@@ -18,7 +18,7 @@ Also, note that some optional accounts may be required depending on the token st
 
 Additionally, the `collectionDelegateRecord` account should now refer to the new [Metadata Delegate Record](https://docs.rs/mpl-token-metadata/latest/mpl_token_metadata/state/struct.MetadataDelegateRecord.html) from Token Metadata.
 
-You may want to read the "[Create Candy Machines](/candy-machine/managing-candy-machines#create-candy-machines)" section of this documentation for more details but here are some examples on how to use our SDKs to create a new Candy Machine that mints Programmable NFTs.
+You may want to read the "[Create Candy Machines](/candy-machine/manage#create-candy-machines)" section of this documentation for more details but here are some examples on how to use our SDKs to create a new Candy Machine that mints Programmable NFTs.
 
 {% dialect-switcher title="Create a new PNFT Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}

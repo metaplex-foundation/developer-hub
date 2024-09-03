@@ -1,6 +1,6 @@
 ---
 title: FAQ
-metaTitle: Auction House - FAQ
+metaTitle: FAQ | Auction House
 description: "FAQ for Auction House"
 ---
 

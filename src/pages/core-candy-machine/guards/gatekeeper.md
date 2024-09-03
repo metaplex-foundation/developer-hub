@@ -1,7 +1,7 @@
 ---
-title: "Gatekeeper"
-metaTitle: "Core Candy Machine Guards - Gatekeeper"
-description: "The Gatekeeper guard checks whether the minting wallet has a valid Gateway Token from a specified Gatekeeper Network."
+title: "Gatekeeper Guard"
+metaTitle: "Gatekeeper Guard | Core Candy Machine"
+description: "The Core Candy Machine `Gatekeeper` guard checks whether the minting wallet has a valid Gateway Token from a specified Gatekeeper Network."
 ---
 
 ## Overview

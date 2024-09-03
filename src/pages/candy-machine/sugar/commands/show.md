@@ -1,6 +1,6 @@
 ---
 title: show
-metaTitle: Candy Machine - Sugar - show
+metaTitle: show | Sugar
 description: show command.
 ---
 

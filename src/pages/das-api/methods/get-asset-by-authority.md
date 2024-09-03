@@ -1,6 +1,6 @@
 ---
 title: Get Asset By Authority
-metaTitle: DAS API - Get Asset By Authority
+metaTitle: Get Asset By Authority | DAS API
 description: Returns the list of assets given an authority address
 ---
 

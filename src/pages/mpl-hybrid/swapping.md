@@ -1,6 +1,6 @@
 ---
 title: Swapping
-metaTitle: MPL-404 - Swapping
+metaTitle: Swapping | MPL-Hybrid
 description: MPL-404 Swapping
 ---
 

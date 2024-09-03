@@ -92,6 +92,5 @@ export const tokenMetadata = {
       target: '_blank',
     },
 
-    { ...changelogSection('token-metadata') },
   ],
 }

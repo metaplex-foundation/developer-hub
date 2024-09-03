@@ -1,7 +1,7 @@
 ---
 title: Edition Plugin
-metaTitle: Core - Edition Plugin
-description: Learn about the MPL Core Edition Plugin
+metaTitle: Edition Plugin | Core
+description: Learn about the MPL Core Edition Plugin.
 ---
 
 The Edition Plugin is a `Authority Managed` plugin that stores an Edition Number within the asset. Together with the soon to be added Master Edition Plugin those Editions could be compared to the [Edition concept in Metaplex Token Metadata](/token-metadata/print).

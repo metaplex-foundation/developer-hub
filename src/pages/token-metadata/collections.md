@@ -1,6 +1,6 @@
 ---
 title: Verified Collections
-metaTitle: Token Metadata - Verified Collections
+metaTitle: Verified Collections | Token Metadata
 description: Learn how to safely wrap Assets into collections on Token Metadata
 ---
 
@@ -9,7 +9,7 @@ Certified Collections enables NFTs – and tokens in general — **to be grouped
 This feature provides the following advantages:
 
 - Easy to identify which collection any given NFT belongs to without making additional onchain calls.
-- Possible to find all NFTs that belong to a given collection ([Check the Recipe to see how](/token-metadata/recipes/get-by-collection)).
+- Possible to find all NFTs that belong to a given collection ([Check the Guide to see how](/token-metadata/guides/get-by-collection)).
 - Easy to manage the collection metadata such as its name, description and image.
 
 ## Collections are NFTs
@@ -423,7 +423,13 @@ Here is how you can use our SDKs to verify a Collection NFT on Token Metadata.
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { verifyCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
+import { publicKey } from "@metaplex-foundation/umi";
+import { verifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
+
+// first find the metadata PDA to use later
+const metadata = findMetadataPda(umi, { 
+  mint: publicKey("...")
+});
 
 await verifyCollectionV1(umi, {
   metadata,
@@ -443,7 +449,13 @@ Reciprocally, the authority of a Collection NFT can unverify any NFTs that are p
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { unverifyCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
+import { publicKey } from "@metaplex-foundation/umi";
+import { unverifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
+
+// first find the metadata PDA to use later
+const metadata = findMetadataPda(umi, { 
+  mint: publicKey("...")
+});
 
 await unverifyCollectionV1(umi, {
   metadata,

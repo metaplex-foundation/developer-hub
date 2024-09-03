@@ -35,7 +35,5 @@ export const toolbox = {
       href: `https://mpl-toolbox.typedoc.metaplex.com/`,
       target: '_blank',
     },
-    { ...recipesSection('toolbox') },
-    { ...changelogSection('toolbox') },
   ],
 }

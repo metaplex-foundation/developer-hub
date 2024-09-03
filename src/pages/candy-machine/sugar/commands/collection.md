@@ -1,6 +1,6 @@
 ---
 title: collection
-metaTitle: Candy Machine - Sugar - collection
+metaTitle: collection | Sugar
 description: collection command.
 ---
 

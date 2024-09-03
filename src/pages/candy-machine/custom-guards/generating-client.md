@@ -1,6 +1,6 @@
 ---
-title: Generating Custom Guard Client
-metaTitle: Candy Machine - Generating Custom Guard Client
+title: Generating Custom Guard Client for Candy Machine 
+metaTitle: Generating Custom Guard Client | Candy Machine 
 description: How to generate a Umi compatible client for your custom guards.
 ---
 

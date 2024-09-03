@@ -1,6 +1,6 @@
 ---
 title: Storage Providers
-metaTitle: Metaplex — Storage Providers
+metaTitle: Storage Providers | Developer Hub
 description: A list of available Storage Providers on Solana.
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Transferring Assets
-metaTitle: Core - Transferring Assets
-description: Learn how to transfer Assets on Core
+metaTitle: Transferring Assets | Core
+description: Learn how to transfer Core NFT Assets between wallets using Metaplex packages.
 ---
 
 The owner of a Core Asset can transfer ownership to another account by using the `transfer` instruction to the MPL Core program.

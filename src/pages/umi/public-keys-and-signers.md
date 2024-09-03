@@ -1,6 +1,6 @@
 ---
-title: Public keys and signers
-metaTitle: Umi - Public keys and signers
+title: Public keys and Signers
+metaTitle: Public keys and Signers | Umi
 description: Public keys and signers in Metaplex Umi
 ---
 On this page, we'll see how to manage public keys and signers in Umi which is partially made possible by the EdDSA interface.
@@ -8,6 +8,10 @@ On this page, we'll see how to manage public keys and signers in Umi which is pa
 The [EdDSA interface](https://umi.typedoc.metaplex.com/interfaces/umi.EddsaInterface.html) is used to create keypairs, find PDAs and sign/verify messages using the EdDSA algorithm. We can either use this interface directly and/or use helper methods that delegate to this interface to provide a better developer experience.
 
 Let's tackle this on a per-use case basis.
+
+{% callout type="note" %}
+Looking for a snippet to use the Wallet Adapter or a Filesystem wallet? Check out the [Getting Started Page](/umi/getting-started)!
+{% /callout %}
 
 ## Public keys
 
@@ -80,7 +84,7 @@ To derive a new PDA, we can use the `findPda` method of the EdDSA interface.
 const pda = umi.eddsa.findPda(programId, seeds);
 ```
 
-Each seed must be serialized as a `Uint8Array`. You can learn more about serializers on [the Serializers page](./serializers.md) but here is a quick example showing how to find the metadata PDA of a given mint address.
+Each seed must be serialized as a `Uint8Array`. You can learn more about serializers on [the Serializers page](serializers) but here is a quick example showing how to find the metadata PDA of a given mint address.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
@@ -94,7 +98,7 @@ const metadata = umi.eddsa.findPda(tokenMetadataProgramId, [
 ]);
 ```
 
-Note that in most cases, programs will provide helper methods to find specific PDAs. For instance, the code snippet above can be simplified to the following using the `findMetadataPda` method of the [`@metaplex-foundation/mpl-token-metadata`](https://github.com/metaplex-foundation/mpl-token-metadata) [Kinobi](./kinobi.md)-generated library.
+Note that in most cases, programs will provide helper methods to find specific PDAs. For instance, the code snippet above can be simplified to the following using the `findMetadataPda` method of the [`@metaplex-foundation/mpl-token-metadata`](https://github.com/metaplex-foundation/mpl-token-metadata) [Kinobi](kinobi)-generated library.
 
 ```ts
 import { findMetadataPda } from '@metaplex-foundation/mpl-token-metadata';
@@ -141,7 +145,7 @@ isSigner(mySigner);
 uniqueSigners(mySigners);
 ```
 
-As mentioned in [the Umi interfaces page](./interfaces.md), the `Umi` interface stores two instances of `Signer`: The `identity` using the app and the `payer` paying for transaction and storage fees. Umi provides plugins to quickly assign new signers to these attributes. The `signerIdentity` and `signerPayer` plugins are available for this purpose. Note that, by default, the `signerIdentity` method will also update the `payer` attribute since, in most cases, the identity is also the payer.
+As mentioned in [the Umi interfaces page](interfaces), the `Umi` interface stores two instances of `Signer`: The `identity` using the app and the `payer` paying for transaction and storage fees. Umi provides plugins to quickly assign new signers to these attributes. The `signerIdentity` and `signerPayer` plugins are available for this purpose. Note that, by default, the `signerIdentity` method will also update the `payer` attribute since, in most cases, the identity is also the payer.
 
 ```ts
 umi.use(signerIdentity(mySigner));

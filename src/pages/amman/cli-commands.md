@@ -1,6 +1,6 @@
 ---
 title: CLI Commands
-metaTitle: Amman - CLI Commands
+metaTitle: CLI Commands | Amman
 description: CLI Commands of the Metaplex Amman local validator toolkit.
 ---
 

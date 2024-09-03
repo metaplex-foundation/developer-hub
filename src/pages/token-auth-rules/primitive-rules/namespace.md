@@ -1,6 +1,6 @@
 ---
 title: Namespace
-metaTitle: Token Auth Rules - Namespace
+metaTitle: Namespace | Token Auth Rules
 description: The Namespace primitive rule
 ---
 

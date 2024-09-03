@@ -56,6 +56,14 @@ export const guides = {
             },
           ],
         },
+        {title: 'Genral',
+          links: [
+            {
+              title: 'Creating an NFT Collection With Candy Machine',
+              href: '/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine',
+            }
+          ]
+        },
         {
           title: 'Javascript',
           links: [
@@ -117,7 +125,24 @@ export const guides = {
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
+            {
+              title: 'Candy Machine',
+              href: '/candy-machine/guides/',
+              created: '2021-10-01',
+              updated: null, // null means it's never been updated
+            },
 
+          ],
+        },
+        {
+          title: 'Translated Guides',
+          links: [
+            {
+              title: 'Japanese 日本語',
+              href: '/guides/translated/japanese',
+              created: '2024-08-14',
+              updated: null, // null means it's never been updated
+            },
           ],
         },
       ],
