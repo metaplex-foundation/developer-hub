@@ -6,6 +6,10 @@ const redirectRules = {
     "/web3js-differences": "/umi/web3js-differences-and-adapters",
     "/connecting-to-umi": "/umi/getting-started",
   },
+  "/toolbox": {
+    "/": "/umi/toolbox",
+    "/getting-started": "/umi/toolbox",
+  },
 }
 
 export function middleware(request) {
@@ -27,5 +31,6 @@ export function middleware(request) {
 export const config = {
   matcher: [
     '/umi/:path*',
+    '/toolbox/:path*',
   ],
 }
