@@ -1,6 +1,6 @@
 ---
-title: How to Create a Core Collection
-metaTitle: How to Create a Core Collection | Core Guides
+title: How to Create a Core Collection with Javascript
+metaTitle: How to Create a Core Collection with Javascript | Core Guides
 description: Learn how to create a Core Collection on Solana with the Metaplex Core javascript package.
 # remember to update dates also in /components/guides/index.js
 created: '08-21-2024'
@@ -10,7 +10,17 @@ updated: '08-21-2024'
 This guide will teach you how to create a **Core Collection** on Solana using the Metaplex `@metaplex-foundation/mpl-core` package. 
 
 {% callout title="What is Core?" %}
-**Core** use a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
+
+**Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
+
+{% /callout %}
+
+But before starting, let's talk about Collections: 
+
+{% callout title="What are Collections?" %}
+
+Collections are a group of Assets that belong together, part of the same series, or group. In order to group Assets together, we must first create a Collection Asset whose purpose is to store any metadata related to that collection such as collection name and collection image. The Collection Asset acts as a front cover to your collection and can also store collection wide plugins.
+
 {% /callout %}
 
 ## Prerequisite
@@ -90,7 +100,7 @@ createCollection()
 
 While setting up Umi you can use or generate keypairs/wallets from different sources. You create a new wallet for testing, import an existing wallet from the filesystem, or use `walletAdapter` if you are creating a website/dApp.  
 
-For this example we're going to set up Umi with a `generatedSigner()`. 
+**Note**: For this example we're going to set up Umi with a `generatedSigner()` but you can find all the possible setup down below!
 
 {% totem %}
 
@@ -217,7 +227,7 @@ console.log(imageUri[0])
 Once we have a valid and working image URI we can start working on the metadata for our collection.
 
 The standard for offchain metadata for a fungible token is as follows. This should be filled out and writen to either an object `{}` without Javascript or saved to a `metadata.json` file.
-We are going to look at the Javascript object approach.
+We are going to look at the JavaScript object approach.
 
 ```ts
 const metadata = {
@@ -225,16 +235,6 @@ const metadata = {
   description: 'This is a Collection on Solana',
   image: imageUri[0],
   external_url: 'https://example.com',
-  attributes: [
-    {
-      trait_type: 'trait1',
-      value: 'value1',
-    },
-    {
-      trait_type: 'trait2',
-      value: 'value2',
-    },
-  ],
   properties: {
     files: [
       {
@@ -251,29 +251,30 @@ The fields here include:
 
 | field         | description                                                                                                                                                                               |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name          | The name of your Collection.                                                                                                                                                                     |
-| description   | The description of your Collection.                                                                                                                                                              |
+| name          | The name of your Collection.                                                                                                                                                              |
+| description   | The description of your Collection.                                                                                                                                                       |
 | image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
 | animation_url | This will be set to the `animation_ulr` (or any online location of the video/glb) that you've uploaded.                                                                                   |
 | external_url  | This would link to an external address of your choice. This is normally the projects website.                                                                                             |
-| attributes    | Using an object og `{trait_type: vlue, "value": "value1"}`                                                                                                                                |
 | image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
 | properties    | Contains the `files` field that takes an `[] array` of `{uri: string, type: mimeType}`. Also contains the category field which can be set to `image`, `audio`, `video`, `vfx`, and `html` |
 
-After creating the metadata, we need to Upload that as a Json file, so we can get an Uri to attach to our Collection
+After creating the metadata, we need to upload it as a JSON file, so we can get a URI to attach to our Collection. To do this, we'll use Umi's `uploadJson()` function:
 
 ```js
-// Call upon umi's `uploadJson()` function to upload our metadata to Arweave via Irys.
+// Call upon Umi's `uploadJson()` function to upload our metadata to Arweave via Irys.
 const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
   throw new Error(err)
 })
 ```
 
+This function automatically converts our JavaScript object to JSON before uploading.
+
 Now we should finally have the URI of JSON file stored in the `metadataUri` providing it did not throw any errors.
 
 ### Minting the Core Collection
 
-From here we can use the `createCollection` function from the `@metaplex-foundation/mpl-core` package to create our Core Asset NFT.
+From here we can use the `createCollection` function from the `@metaplex-foundation/mpl-core` package to create our Core NFT Asset.
 
 ```ts
 const collection = generateSigner(umi)
@@ -290,13 +291,47 @@ const signature = base58.deserialize(tx.signature)[0]
 And log out the detail as follow: 
 
 ```ts
-  // Log out the signature and the links to the transaction and the NFT.
-  console.log('\nCollection Created')
-  console.log('View Transaction on Solana Explorer')
-  console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
-  console.log('\n')
-  console.log('View Collection on Metaplex Explorer')
-  console.log(`https://core.metaplex.com/explorer/${collection.publicKey}?env=devnet`)
+// Log out the signature and the links to the transaction and the NFT.
+console.log('\nCollection Created')
+console.log('View Transaction on Solana Explorer')
+console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
+console.log('\n')
+console.log('View Collection on Metaplex Explorer')
+console.log(`https://core.metaplex.com/explorer/${collection.publicKey}?env=devnet`)
+```
+
+### Additional Actions
+
+Before moving on, what if we want to create a collection with plugins and/or external plugins, such as the `FreezeDelegate` plugin or the `AppData` external plugin, already included? Here's how we can do it.
+
+The `createCollection()` instruction supports adding both normal and external plugin through the `plugins` field. So we can just easily add all the required field for the specific plugins, and everything it will be handled by the instruction.
+
+**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
+
+Here's an example on how to use it!
+
+```typescript
+const collection = generateSigner(umi)
+
+const tx = await createCollection(umi, {
+  collection: collection,
+  name: 'My Collection',
+  uri: 'https://example.com/my-collection.json',
+  plugins: [
+    {
+      type: "PermanentFreezeDelegate",
+      frozen: true,
+      authority: { type: "UpdateAuthority"}
+    },
+    {
+      type: "AppData",
+      dataAuthority: { type: "UpdateAuthority"},
+      schema: ExternalPluginAdapterSchema.Binary,
+    }           
+  ]
+}).sendAndConfirm(umi)
+
+const signature = base58.deserialize(tx.signature)[0]
 ```
 
 ## Full Code Example
@@ -361,16 +396,6 @@ const createCollection = async () => {
     description: 'This is a Collection on Solana',
     image: imageUri[0],
     external_url: 'https://example.com',
-    attributes: [
-      {
-        trait_type: 'trait1',
-        value: 'value1',
-      },
-      {
-        trait_type: 'trait2',
-        value: 'value2',
-      },
-    ],
     properties: {
       files: [
         {
