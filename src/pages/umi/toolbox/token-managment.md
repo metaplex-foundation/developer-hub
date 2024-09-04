@@ -1,16 +1,12 @@
 ---
-title: Token Program, Associated Token Program & Extras
-metaTitle: Token Program, Associated Token Program and Extras | Toolbox
-description: How to use the Solana System Program with Umi.
+title: Token Management
+metaTitle: Token Management | Toolbox
+description: How to manage Token with Umi.
 ---
 
-## Token and Associated Token Programs
+The following instructions are part of the Token Programm the Associated Token Program and MPL Token Extras Program. The Token Program and Associated Token programs are essential for managing tokens on Solana since they enable you to create Mint accounts, Token accounts, Associated Token PDAs, mint tokens, transfer tokens, delegate tokens, and more. You can learn more about these programs in [Solana's official documentation](https://spl.solana.com/token).
 
-The Token Program and Associated Token programs are essential for managing tokens on Solana. They enable you to create Mint accounts, Token accounts, Associated Token PDAs, mint tokens, transfer tokens, delegate tokens, and more. You can learn more about these programs in [Solana's official documentation](https://spl.solana.com/token).
-
-**Note**: If you're using the SPL Token & Associated Program, you might also be interested in the [Mpl Token Extras program](#mpl-token-extras), which provides additional convenient instructions for working with tokens.
-
-### Create a Mint
+## Create a Mint
 
 This instruction allows you to create a new Mint account.
 
@@ -28,7 +24,7 @@ await createMint(umi, {
 }).sendAndConfirm(umi)
 ```
 
-### Create a Token Account
+## Create a Token Account
 
 This instruction creates a new Token account, which is used to hold tokens of a specific mint for a particular owner.
 
@@ -40,7 +36,7 @@ const token = generateSigner(umi)
 await createToken(umi, { token, mint, owner }).sendAndConfirm(umi)
 ```
 
-### Create an Associated Token Account
+## Create an Associated Token Account
 
 This instruction creates an Associated Token Account, which is a deterministic Token account derived from the owner's and mint's public keys.
 
@@ -50,7 +46,7 @@ import { createAssociatedToken } from '@metaplex-foundation/mpl-toolbox'
 await createAssociatedToken(umi, { mint, owner }).sendAndConfirm(umi)
 ```
 
-### Mint Tokens
+## Mint Tokens
 
 This instruction allows you to mint new tokens to a specified Token account.
 
@@ -65,7 +61,7 @@ await mintTokensTo(umi, {
 }).sendAndConfirm(umi)
 ```
 
-### Create Mint with Associated Token Account
+## Create Mint with Associated Token Account
 
 This helper creates a Mint account and an Associated Token account for the given mint and owner. It also mints tokens to that account if an amount greater than zero is provided.
 
@@ -81,7 +77,7 @@ await createMintWithAssociatedToken(umi, {
 }).sendAndConfirm(umi)
 ```
 
-### Transfer Tokens
+## Transfer Tokens
 
 This instruction allows you to transfer tokens from one Token account to another.
 
@@ -96,7 +92,7 @@ await transferTokens(umi, {
 }).sendAndConfirm(umi)
 ```
 
-### Set Authority
+## Set Authority
 
 This instruction allows you to change the authority on a Token or Mint account.
 
@@ -111,7 +107,7 @@ await setAuthority(umi, {
 }).sendAndConfirm(umi)
 ```
 
-### Fetch Mint and Token accounts
+## Fetch Mint and Token accounts
 
 These functions allow you to fetch information about Mint and Token accounts.
 
@@ -141,11 +137,7 @@ const mintsFromOwner = await fetchAllMintByOwner(umi, owner)
 const mintKeysFromOwner = await fetchAllMintPublicKeyByOwner(umi, owner)
 ```
 
-## MPL Token Extras
-
-The MPL Token Extras program is an immutable program that offers a few convenient instructions on top of the native SPL Token program.
-
-### Create Token If Missing
+## Create Token If Missing
 
 This instruction creates a new Token account only if it doesn't already exist. It's particularly useful when a subsequent instruction requires a Token account, but you’re unsure whether it already exists. This instruction ensures the Token account's existence without needing to fetch it on the client side.
 

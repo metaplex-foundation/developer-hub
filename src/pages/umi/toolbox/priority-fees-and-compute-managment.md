@@ -1,14 +1,12 @@
 ---
-title: Compute Budget Program
-metaTitle: Compute Budget Program | Toolbox
-description: How to use the Solana Compute Budget Program with Umi.
+title: Priority Fees and Compute Mangement
+metaTitle: Priority Fees and Compute Mangement | Toolbox
+description: How to use Priority Fees and the Compute Budget Program with Umi.
 ---
-
-## Compute Budget Program
 
 The Compute Budget Program allows us to set a custom Compute Unit limit and price. You can read more about this program in [Solana's official documentation](https://docs.solana.com/developing/programming-model/runtime#compute-budget).
 
-### Set Compute Unit limit
+## Set Compute Unit limit
 
 This instruction allows you to set a custom Compute Unit limit for your transaction.
 
@@ -22,7 +20,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-### Set Compute Unit price
+## Set Compute Unit price
 
 This instruction allows you to set a custom price per Compute Unit for your transaction
 

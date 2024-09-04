@@ -67,22 +67,26 @@ export const umi = {
               href: '/umi/toolbox' 
             },
             { 
-              title: 'System Program and Extras', 
-              href: '/umi/toolbox/system-program-and-extras' },
+              title: 'Create Account', 
+              href: '/umi/toolbox/create-account' },
             {
-              title: 'Token Program, Associated Token Program and Extras',
-              href: '/umi/toolbox/token-program-and-extras',
+              title: 'Transfer Sol',
+              href: '/umi/toolbox/transfer-sol',
+            },
+            {
+              title: 'Token Managment',
+              href: '/umi/toolbox/token-managment',
             },
             { 
-              title: 'Compute Budget Program', 
-              href: '/umi/toolbox/compute-budget-program' },
+              title: 'Priority Fees and Compute Managment', 
+              href: '/umi/toolbox/priority-fees-and-compute-managment' },
             {
-              title: 'Address Lookup Table Program',
-              href: '/umi/toolbox/address-lookup-table-program',
+              title: 'Address Lookup Table',
+              href: '/umi/toolbox/address-lookup-table',
             },
             { 
-              title: 'Memo Program', 
-              href: '/umi/toolbox/memo-program' },
+              title: 'Transaction Memo', 
+              href: '/umi/toolbox/transaction-memo' },
           ],
         },
       ],
