@@ -23,47 +23,91 @@ export const core = {
       navigation: [
         {
           title: 'New!',
-          links: [{ title: 'JS SDK V1.0', href: '/core/core-js-sdk-v1-0' }],
+          links: [
+            { title: 'JS SDK V1.0', 
+              href: '/core/core-js-sdk-v1-0' }
+            ],
         },
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/core' },
+            { 
+              title: 'Overview', 
+              href: '/core' 
+            },
             {
               title: 'Getting Started',
               href: '/core/getting-started',
             },
-            { title: 'What is an Asset?', href: '/core/what-is-an-asset' },
+            { 
+              title: 'What is an Asset?', 
+              href: '/core/what-is-an-asset' 
+            },
             {
               title: 'Token Metadata Differences',
               href: '/core/tm-differences',
             },
-            { title: 'Ecosystem Support', href: '/core/ecosystem-support' },
-            { title: 'Anchor', href: '/core/using-core-in-anchor' },
-            { title: 'FAQ', href: '/core/faq' },
+            { 
+              title: 'Ecosystem Support', 
+              href: '/core/ecosystem-support' },
+            { 
+              title: 'Anchor', 
+              href: '/core/using-core-in-anchor' 
+            },
+            { 
+              title: 'FAQ', 
+              href: '/core/faq' 
+            },
           ],
         },
         {
           title: 'Features',
           links: [
-            { title: 'Creating Assets', href: '/core/create-asset' },
-            { title: 'Fetching Assets', href: '/core/fetch' },
-            { title: 'Updating Assets', href: '/core/update' },
-            { title: 'Transferring Assets', href: '/core/transfer' },
-            { title: 'Burning Assets', href: '/core/burn' },
+            { 
+              title: 'Creating Assets', 
+              href: '/core/create-asset' 
+            },
+            { 
+              title: 'Fetching Assets', 
+              href: '/core/fetch'
+            },
+            { 
+              title: 'Updating Assets', 
+              href: '/core/update' 
+            },
+            { 
+              title: 'Transferring Assets', 
+              href: '/core/transfer' 
+            },
+            { 
+              title: 'Burning Assets', 
+              href: '/core/burn' 
+            },
             {
               title: 'Collection Management',
               href: '/core/collections',
             },
-            { title: 'Helpers', href: '/core/helpers' },
-            { title: 'Deserializing Assets', href: '/core/deserialization' },
+            { 
+              title: 'Helpers', 
+              href: '/core/helpers' 
+            },
+            { 
+              title: 'Deserializing Assets', 
+              href: '/core/deserialization' 
+            },
           ],
         },
         {
           title: 'Plugins',
           links: [
-            { title: 'Overview', href: '/core/plugins' },
-            { title: 'Adding Plugins', href: '/core/plugins/adding-plugins' },
+            { 
+              title: 'Overview', 
+              href: '/core/plugins' 
+            },
+            { 
+              title: 'Adding Plugins', 
+              href: '/core/plugins/adding-plugins' 
+            },
             {
               title: 'Removing Plugins',
               href: '/core/plugins/removing-plugins',
@@ -88,15 +132,27 @@ export const core = {
               title: 'Burn Delegate Plugin',
               href: '/core/plugins/burn-delegate',
             },
-            { title: 'Royalties Plugin', href: '/core/plugins/royalties' },
+            { 
+              title: 'Royalties Plugin', 
+              href: '/core/plugins/royalties' 
+            },
             {
               title: 'Update Delegate Plugin',
               href: '/core/plugins/update-delegate',
               updated: "06-19-2024"
             },
-            { title: 'Attribute Plugin', href: '/core/plugins/attribute' },
-            { title: 'AddBlocker Plugin', href: '/core/plugins/addBlocker' },
-            { title: 'Edition Plugin', href: '/core/plugins/edition' },
+            { 
+              title: 'Attribute Plugin', 
+              href: '/core/plugins/attribute' 
+            },
+            { 
+              title: 'AddBlocker Plugin', 
+              href: '/core/plugins/addBlocker' 
+            },
+            { 
+              title: 'Edition Plugin', 
+              href: '/core/plugins/edition' 
+            },
             {
               title: 'Immutable Metadata Plugin',
               href: '/core/plugins/immutableMetadata',
@@ -163,9 +219,18 @@ export const core = {
         {
           title: 'General',
           links: [
-            { title: 'Overview', href: '/core/guides' },
-            { title: 'Immutability', href: '/core/guides/immutability' },
-            { title: 'Print Editions', href: '/core/guides/print-editions' },
+            { 
+              title: 'Overview', 
+              href: '/core/guides' 
+            },
+            { 
+              title: 'Immutability', 
+              href: '/core/guides/immutability' 
+            },
+            { 
+              title: 'Print Editions', 
+              href: '/core/guides/print-editions'
+            },
             {
               title: 'Oracle Plugin Example',
               href: '/core/guides/oracle-plugin-example',
@@ -180,11 +245,11 @@ export const core = {
           title: 'Javascript',
           links: [
             {
-              title: 'How to Create an Asset',
+              title: 'How to Create a Core Asset with JavaScript',
               href: '/core/guides/javascript/how-to-create-a-core-nft-asset',
             },
             {
-              title: 'How to Create a Collection',
+              title: 'How to Create a Core Collection with JavaScript',
               href: '/core/guides/javascript/how-to-create-a-core-collection-with-javascript',
             },
             { 
@@ -197,7 +262,7 @@ export const core = {
           title: 'Anchor',
           links: [
             {
-              title: 'How to Create a Collection',
+              title: 'How to Create a Core Collection with Anchor',
               href: '/core/guides/anchor/how-to-create-a-core-collection-with-anchor',
             },
             {
