@@ -14,6 +14,7 @@ This instruction allows you to create an empty Address Lookup Table (LUT) accoun
 import { createEmptyLut } from '@metaplex-foundation/mpl-toolbox'
 
 const recentSlot = await umi.rpc.getSlot({ commitment: 'finalized' })
+
 await createEmptyLut(umi, {
   recentSlot,
   authority,
@@ -25,10 +26,7 @@ await createEmptyLut(umi, {
 This instruction enables you to add new addresses to an existing LUT account.
 
 ```ts
-import {
-  findAddressLookupTablePda,
-  extendLut,
-} from '@metaplex-foundation/mpl-toolbox'
+import { findAddressLookupTablePda, extendLut } from '@metaplex-foundation/mpl-toolbox'
 
 // The authority and slot used to create the LUT.
 const lutAddress = findAddressLookupTablePda(umi, { authority, recentSlot })
@@ -48,6 +46,7 @@ This helper method simplifies the process of creating a LUT with initial address
 import { createLut } from '@metaplex-foundation/mpl-toolbox'
 
 const recentSlot = await umi.rpc.getSlot({ commitment: 'finalized' })
+
 await createLut(umi, {
   authority,
   recentSlot,
@@ -64,6 +63,7 @@ import { createLutForTransactionBuilder } from '@metaplex-foundation/mpl-toolbox
 
 // 1. Get the LUT builders and the LUT accounts for a given transaction builder.
 const recentSlot = await umi.rpc.getSlot({ commitment: 'finalized' })
+
 const [createLutBuilders, lutAccounts] = createLutForTransactionBuilder(
   umi,
   baseBuilder,
@@ -84,10 +84,7 @@ await baseBuilder.setAddressLookupTables(lutAccounts).sendAndConfirm(umi)
 This instruction allows you to freeze a LUT, making it immutable.
 
 ```ts
-import {
-  findAddressLookupTablePda,
-  freezeLut,
-} from '@metaplex-foundation/mpl-toolbox'
+import { findAddressLookupTablePda, freezeLut } from '@metaplex-foundation/mpl-toolbox'
 
 // The authority and slot used to create the LUT.
 const lutAddress = findAddressLookupTablePda(umi, { authority, recentSlot })
@@ -105,10 +102,7 @@ This instruction puts a LUT in a “deactivation” period before it can be clos
 **Note**: Deactivating a LUT can't be used in new transactions but still maintains its data.
 
 ```ts
-import {
-  findAddressLookupTablePda,
-  deactivateLut,
-} from '@metaplex-foundation/mpl-toolbox'
+import { findAddressLookupTablePda, deactivateLut } from '@metaplex-foundation/mpl-toolbox'
 
 // The authority and slot used to create the LUT.
 const lutAddress = findAddressLookupTablePda(umi, { authority, recentSlot })
@@ -124,10 +118,7 @@ await deactivateLut(umi, {
 This instruction permanently closes an LUT account after it has been deactivated for a certain period.
 
 ```ts
-import {
-  findAddressLookupTablePda,
-  closeLut,
-} from '@metaplex-foundation/mpl-toolbox'
+import { findAddressLookupTablePda, closeLut } from '@metaplex-foundation/mpl-toolbox'
 
 // The authority and slot used to create the LUT.
 const lutAddress = findAddressLookupTablePda(umi, { authority, recentSlot })

@@ -12,7 +12,7 @@ This instruction allows you to transfer SOL from one account to another. You nee
 
 ```ts
 import { sol, publicKey } from '@metaplex-foundation/umi'
-import { transferSol, transferAllSol } from '@metaplex-foundation/mpl-toolbox'
+import { transferSol } from '@metaplex-foundation/mpl-toolbox'
 
 const destination = publicKey(`11111111111111111111111`)
 
@@ -30,7 +30,10 @@ This instruction is similar to the **Transfer SOL** instruction from the SPL Sys
 This is particularly useful when you want to drain an account of all its lamports while still using the account to pay for the transaction. Without this instruction, you'd need to manually fetch the account balance, then subtract an estimated transaction fee—a process that can be challenging, especially when dealing with prioritization fees.
 
 ```ts
+import { publicKey } from '@metaplex-foundation/umi'
 import { transferAllSol } from '@metaplex-foundation/mpl-toolbox'
+
+const destination = publicKey(`11111111111111111111111`)
 
 await transferAllSol(umi, {
   source: umi.identity,

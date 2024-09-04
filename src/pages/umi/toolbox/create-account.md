@@ -39,10 +39,12 @@ import { generateSigner } from '@metaplex-foundation/umi'
 import { createAccountWithRent } from '@metaplex-foundation/mpl-toolbox'
 
 const newAccount = generateSigner(umi)
+const space = 42
+
 await createAccountWithRent(umi, {
   newAccount,
   payer: umi.payer,
-  space: 42,
+  space,
   programId: umi.programs.get('myProgramName').publicKey,
 }).sendAndConfirm(umi)
 ```

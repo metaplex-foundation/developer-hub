@@ -33,6 +33,7 @@ import { generateSigner } from '@metaplex-foundation/umi'
 import { createToken } from '@metaplex-foundation/mpl-toolbox'
 
 const token = generateSigner(umi)
+
 await createToken(umi, { token, mint, owner }).sendAndConfirm(umi)
 ```
 
@@ -70,6 +71,7 @@ import { generateSigner } from '@metaplex-foundation/umi'
 import { createMintWithAssociatedToken } from '@metaplex-foundation/mpl-toolbox'
 
 const mint = generateSigner(umi)
+
 await createMintWithAssociatedToken(umi, {
   mint,
   owner,
