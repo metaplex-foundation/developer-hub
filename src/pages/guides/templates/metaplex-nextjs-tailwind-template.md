@@ -1,6 +1,6 @@
 ---
-title: NextJs Template for Solana and Metaplex
-metaTitle: NextJs Template for Solana | Web UI Templates
+title: Metaplex Solana NextJs Tailwind Template
+metaTitle: Metaplex Solana NextJs Tailwind Template | Web UI Templates
 description: A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
 ---
 
@@ -94,7 +94,7 @@ umi.use(signerIdentity(signer))
 
 ## Helpers
 
-Stored in the `/lib/umi` folder there are some pre made helps you can use to make your development easier.
+Stored in the `/lib/umi` folder there are some pre made helpers you can use to make your development easier.
 
 Umi is split up into several components which can be called in different scenarios.
 
@@ -102,7 +102,7 @@ Umi is split up into several components which can be called in different scenari
 
 Passing a transaction into `sendAndConfirmWithWalletAdapter()` will send the transaction while pulling the latest walletAdapter state from the zustand `umiStore` and will return the signature as a `string`. This can be accessed in both `.ts` and `.tsx` files.
 
-The function also provides and locks in the commitment level across `blockhash`, `send`, and `confirm` if provide. By default `confirmed` is used.
+The function also provides and locks in the commitment level across `blockhash`, `send`, and `confirm` if provided. By default `confirmed` is used if no value is passed.
 
 We also have a `skipPreflight` flag that can be enabled.
 
@@ -113,6 +113,8 @@ import useUmiStore from '@/store/useUmiStore'
 import { setComputeUnitPrice } from '@metaplex-foundation/mpl-toolbox'
 import { TransactionBuilder, signerIdentity } from '@metaplex-foundation/umi'
 import { base58 } from '@metaplex-foundation/umi/serializers'
+
+const defaultPriorityFee
 
 const sendAndConfirmWalletAdapter = async (
   tx: TransactionBuilder,

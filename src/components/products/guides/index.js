@@ -121,8 +121,8 @@ export const guides = {
           links: [
             {
               title: 'NextJs Template',
-              href: '/guides/templates/nextjs',
-              created: '2024-08-29',
+              href: '/guides/templates/metaplex-nextjs-tailwind-template',
+              created: '2024-09-04',
               updated: null, // null means it's never been updated
             },
           ],
