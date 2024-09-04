@@ -32,6 +32,6 @@
         "usize"
     ],
   "editor.codeActionsOnSave": {
-    "source.sortImports": "explicit"
+    "source.sortImports": true
   }
 }
