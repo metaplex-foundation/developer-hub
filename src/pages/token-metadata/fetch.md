@@ -183,7 +183,7 @@ This helper fetches a single **Digital Asset With Token** from the public key of
 ```ts
 import { fetchDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token-metadata'
 
-const asset = await fetchDigitalAssetWithTokenByMint(umi, owner)
+const asset = await fetchDigitalAssetWithTokenByMint(umi, mint)
 ```
 
 {% /dialect %}
@@ -231,7 +231,7 @@ This helper fetches all **Digital Assets With Token** from the public key of a *
 ```ts
 import { fetchAllDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token-metadata'
 
-const assets = await fetchAllDigitalAssetWithTokenByMint(umi, owner)
+const assets = await fetchAllDigitalAssetWithTokenByMint(umi, mint)
 ```
 
 {% /dialect %}
