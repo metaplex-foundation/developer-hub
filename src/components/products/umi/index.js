@@ -36,9 +36,6 @@ export const umi = {
             { title: 'Web3js Differences and Adapters', 
               href: '/umi/web3js-differences-and-adapters' 
             },
-            { title: 'Mpl-Toolbox', 
-              href: '/umi/toolbox' 
-            },
           ],
         },
         {
@@ -60,6 +57,32 @@ export const umi = {
             { title: 'Serializers', href: '/umi/serializers' },
             { title: 'Storage', href: '/umi/storage' },
             { title: 'Transactions', href: '/umi/transactions' },
+          ],
+        },
+        {
+          title: 'Toolbox',
+          links: [
+            { 
+              title: 'Overview', 
+              href: '/umi/toolbox' 
+            },
+            { 
+              title: 'System Program and Extras', 
+              href: '/umi/toolbox/system-program-and-extras' },
+            {
+              title: 'Token Program, Associated Token Program and Extras',
+              href: '/umi/toolbox/token-program-and-extras',
+            },
+            { 
+              title: 'Compute Budget Program', 
+              href: '/umi/toolbox/compute-budget-program' },
+            {
+              title: 'Address Lookup Table Program',
+              href: '/umi/toolbox/address-lookup-table-program',
+            },
+            { 
+              title: 'Memo Program', 
+              href: '/umi/toolbox/memo-program' },
           ],
         },
       ],
