@@ -1,16 +1,26 @@
 ---
-title: How to Create a Core NFT Asset
-metaTitle: How to Create a Core NFT Asset | Core Guides
+title: How to Create a Core NFT Asset with Anchor
+metaTitle: How to Create a Core NFT Asset with Anchor | Core Guides
 description: Learn how to create a Core NFT Asset on Solana with Metaplex Core using Anchor!
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-18-2024'
 ---
 
-This guide will teach you how to create a **Core Digital Asset** on Solana using the Metaplex `mpl-core` program. 
+This guide will teach you how to create a **Core NFT Asset** on Solana using the Metaplex `mpl-core` program. 
 
 {% callout title="What is Core?" %}
-**Core** use a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
+
+**Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
+
+{% /callout %}
+
+But before starting, let's talk about Assets: 
+
+{% callout title="What is an Asset?" %}
+
+Setting itself apart from existing Asset programs, like Solana’s Token program, Metaplex Core and Core NFT Assets (sometimes referred to as Core NFT Assets) do not rely on multiple accounts, like Associated Token Accounts. Instead, Core NFT Assets store the relationship between a wallet and the "mint" account within the asset itself.
+
 {% /callout %}
 
 ## Prerequisite
@@ -100,7 +110,9 @@ pub struct CreateAssetArgs {
 }
 ```
 
-In this `CreateAssetArgs` struct, the **name** and **uri** fields are provided as inputs, which will serve as arguments for the `CreateV2CpiBuilder` instruction used to create the **Core Digital Asset**.
+In this `CreateAssetArgs` struct, the **name** and **uri** fields are provided as inputs, which will serve as arguments for the `CreateV2CpiBuilder` instruction used to create the **Core NFT Asset**.
+
+**Note**: Since this is an Anchor focused guide, we're not going to include here how to create the Uri. If you aren't sure how to do it, refer to [this example](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#creating-the-metadata-for-the-asset)
 
 ### Creating the Account Struct
 
@@ -198,7 +210,9 @@ pub fn create_core_asset(ctx: Context<CreateAsset>, args: CreateAssetArgs) -> Re
     }
 ```
 
-In this function, the accounts defined in the `CreateAsset` struct are accessed using `ctx.accounts`. Before passing these accounts to the `CreateV2CpiBuilder` program instruction, they need to be converted to their raw data form using the `.to_account_info()` method. This conversion is necessary because the builder requires the accounts in this format to interact correctly with the Solana runtime.
+In this function, the accounts defined in the `CreateAsset` struct are accessed using `ctx.accounts`. Before passing these accounts to the `CreateV2CpiBuilder` program instruction, they need to be converted to their raw data form using the `.to_account_info()` method. 
+
+This conversion is necessary because the builder requires the accounts in this format to interact correctly with the Solana runtime.
 
 Some of the accounts in the `CreateAsset` struct are `optional`, meaning their value could be either `Some(account)` or `None`. To handle these optional accounts before passing them to the builder, we use a match statement that allows us to check if an account is present (Some) or absent (None) and based on this check, we bind the account as `Some(account.to_account_info())` if it exists, or as `None` if it doesn't. Like this:
 
@@ -229,9 +243,7 @@ use mpl_core::types::{
 };
 ```
 
-Then let's create vectors to hold the plugins and external plugin adapters, so we can easily add the plugin (or more) using the right imports!
-
-**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what to use! 
+Then let's create vectors to hold the plugins and external plugin adapters, so we can easily add the plugin (or more) using the right imports:
 
 ```rust
 let mut plugins: Vec<PluginAuthorityPair> = vec![];
@@ -274,118 +286,17 @@ CreateV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
   .invoke()?;
 ```
 
-## Creating the Metadata for the Digital Asset
-
-To display a recognisable image for your digital asset in the Wallets or on the Explorer, we need to create the URI where we can store the Metadata!
-
-### Uploading the Image
-
-Umi comes with downloadable storage plugins that allow you to upload to storage solutions such `Arweave`, `NftStorage`, `AWS`, and `ShdwDrive`. For this guide we're going to use the `irysUploader()` plugin which stores content on  Arweave.
-
-In this example we're going to use a local approach using Irys to upload to Arweave; if you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
-
-```ts
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
-import fs from 'fs'
-import path from 'path'
-
-// Create Umi and tell it to use Irys
-const umi = createUmi('https://api.devnet.solana.com')
-  .use(irysUploader())
-
-// use `fs` to read file via a string path.
-// You will need to understand the concept of pathing from a computing perspective.
-const imageFile = fs.readFileSync(
-  path.join(__dirname, '..', '/assets/my-image.jpg')
-)
-
-// Use `createGenericFile` to transform the file into a `GenericFile` type
-// that umi can understand. Make sure you set the mimi tag type correctly
-// otherwise Arweave will not know how to display your image.
-const umiImageFile = createGenericFile(imageFile, 'my-image.jpeg', {
-  tags: [{ name: 'Content-Type', value: 'image/jpeg' }],
-})
-
-// Here we upload the image to Arweave via Irys and we get returned a uri
-// address where the file is located. You can log this out but as the
-// uploader can takes an array of files it also returns an array of uris.
-// To get the uri we want we can call index [0] in the array.
-const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
-  throw new Error(err)
-})
-
-console.log(imageUri[0])
-```
-
-### Uploading the Metadata
-
-Once we have a valid and working image URI we can start working on the metadata for our Collection.
-
-The standard for offchain metadata for a fungible token is as follows. This should be filled out and writen to either an object `{}` without Javascript or saved to a `metadata.json` file.
-We are going to look at the Javascript object approach.
-
-```ts
-const metadata = {
-  name: 'My Collection',
-  description: 'This is a Collection on Solana',
-  image: imageUri[0],
-  external_url: 'https://example.com',
-  attributes: [
-    {
-      trait_type: 'trait1',
-      value: 'value1',
-    },
-    {
-      trait_type: 'trait2',
-      value: 'value2',
-    },
-  ],
-  properties: {
-    files: [
-      {
-        uri: imageUri[0],
-        type: 'image/jpeg',
-      },
-    ],
-    category: 'image',
-  },
-}
-```
-
-The fields here include:
-
-| field         | description                                                                                                                                                                               |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name          | The name of your Collection.                                                                                                                                                                     |
-| description   | The description of your Collection.                                                                                                                                                              |
-| image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
-| animation_url | This will be set to the `animation_ulr` (or any online location of the video/glb) that you've uploaded.                                                                                   |
-| external_url  | This would link to an external address of your choice. This is normally the projects website.                                                                                             |
-| attributes    | Using an object og `{trait_type: vlue, "value": "value1"}`                                                                                                                                |
-| image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
-| properties    | Contains the `files` field that takes an `[] array` of `{uri: string, type: mimeType}`. Also contains the category field which can be set to `image`, `audio`, `video`, `vfx`, and `html` |
-
-After creating the metadata, we need to Upload that as a Json file, so we can get an Uri to attach to our Collection
-
-```js
-// Call upon umi's `uploadJson function to upload our metadata to Arweave via Irys.
-const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
-  throw new Error(err)
-})
-```
-
-Now we should finally have the URI of JSON file stored in the `metadataUri` providing it did not throw any errors.
+**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
 
 ## The Client
 
-We finally arrived to the "testing" part of the guide. But before testing the program we've built, we need to compile the workspace. Use the following command to build everything so it's ready for deployment and testing:
+We've now reached the "testing" part of the guide for creating a Core Collection. But before testing the program we've built, we need to compile the workspace. Use the following command to build everything so it's ready for deployment and testing:
 
 ```
 anchor build
 ```
 
-After testing, we should deploy the program so we can access it with our script. We can set the cluster we want to deploy the program to, in the `anchor.toml` file and then use the following command:
+After building, we should deploy the program so we can access it with our script. We can set the cluster we want to deploy the program to, in the `anchor.toml` file and then use the following command:
 
 ```
 anchor deploy
