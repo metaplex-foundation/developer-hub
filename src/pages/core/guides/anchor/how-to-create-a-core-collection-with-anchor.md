@@ -111,6 +111,8 @@ pub struct CreateCollectionArgs {
 
 In this `CreateCollectionArgs` struct, the **name** and **uri** fields are provided as inputs, which will serve as arguments for the `CreateCollectionV2CpiBuilder` instruction used to create the **Core Collection**.
 
+**Note**: Since this is an Anchor focused guide, we're not going to include here how to create the Uri. If you aren't sure how to do it, refer to [this example](/core/guides/javascript/how-to-create-a-core-collection-with-javascript#creating-the-metadata-for-the-collection)
+
 ### Creating the Account Struct
 
 The `Account` struct is where we define the accounts the instruction expects, and specify the constraints that these accounts must meet. This is done using two key constructs: **types** and **constraints**.
@@ -212,9 +214,7 @@ use mpl_core::types::{
 };
 ```
 
-Then let's create vectors to hold the plugins and external plugin adapters, so we can easily add the plugin (or more) using the right imports!
-
-**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what to use! 
+Then let's create vectors to hold the plugins and external plugin adapters, so we can easily add the plugin (or more) using the right imports:
 
 ```rust
 let mut plugins: Vec<PluginAuthorityPair> = vec![];
@@ -253,6 +253,8 @@ CreateCollectionV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info
   .external_plugin_adapters(external_plugin_adapters)    
   .invoke()?;
 ```
+
+**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
 
 ## The Client
 

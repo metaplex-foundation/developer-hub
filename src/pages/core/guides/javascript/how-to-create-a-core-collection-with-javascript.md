@@ -25,8 +25,8 @@ Collections are a group of Assets that belong together, part of the same series,
 
 ## Prerequisite
 
-- Code Editor of your choice (recommended Visual Studio Code)
-- Node 18.x.x or above.
+- Code Editor of your choice (recommended **Visual Studio Code**)
+- Node **18.x.x** or above.
 
 ## Initial Setup
 
@@ -306,9 +306,7 @@ Before moving on, what if we want to create a collection with plugins and/or ext
 
 The `createCollection()` instruction supports adding both normal and external plugin through the `plugins` field. So we can just easily add all the required field for the specific plugins, and everything it will be handled by the instruction.
 
-**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
-
-Here's an example on how to use it!
+Here's an example on how to do it:
 
 ```typescript
 const collection = generateSigner(umi)
@@ -333,6 +331,8 @@ const tx = await createCollection(umi, {
 
 const signature = base58.deserialize(tx.signature)[0]
 ```
+
+**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
 
 ## Full Code Example
 
