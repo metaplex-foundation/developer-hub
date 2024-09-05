@@ -16,7 +16,7 @@ export const guides = {
       ...documentationSection('guides'),
       navigation: [
         {
-          title: 'Solana Newcomers',
+          title: 'Solana Basics',
           links: [
             {
               title: 'What is Solana?',
@@ -56,7 +56,7 @@ export const guides = {
             },
           ],
         },
-        {title: 'Genral',
+        {title: 'General',
           links: [
             {
               title: 'Creating an NFT Collection With Candy Machine',
