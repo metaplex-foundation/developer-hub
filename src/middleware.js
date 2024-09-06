@@ -6,6 +6,10 @@ const redirectRules = {
     "/web3js-differences": "/umi/web3js-differences-and-adapters",
     "/connecting-to-umi": "/umi/getting-started",
   },
+  "/toolbox": {
+    "/": "/umi/toolbox",
+    "/getting-started": "/umi/toolbox",
+  },
   "/core/guides/javascript/how-to-create-a-core-nft-asset": "/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript",
 }
 
@@ -34,6 +38,7 @@ export function middleware(request) {
 export const config = {
   matcher: [
     '/umi/:path*',
+    '/toolbox/:path*',
     '/core/guides/javascript/how-to-create-a-core-nft-asset',
   ],
 }
