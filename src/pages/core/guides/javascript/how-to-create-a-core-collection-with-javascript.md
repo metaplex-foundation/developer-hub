@@ -7,7 +7,7 @@ created: '08-21-2024'
 updated: '08-21-2024'
 ---
 
-This guide will teach you how to create a **Core Collection** on Solana using the Metaplex `@metaplex-foundation/mpl-core` package. 
+This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Javascript sdk package to create a **Core Collection** using the Metaplex Core onchain program.
 
 {% callout title="What is Core?" %}
 
