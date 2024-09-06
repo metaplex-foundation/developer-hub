@@ -6,17 +6,24 @@ const redirectRules = {
     "/web3js-differences": "/umi/web3js-differences-and-adapters",
     "/connecting-to-umi": "/umi/getting-started",
   },
+  "/core/guides/javascript/how-to-create-a-core-nft-asset": "/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript",
 }
 
 export function middleware(request) {
   const { pathname } = request.nextUrl
 
-  for (const [rootPath, subPaths] of Object.entries(redirectRules)) {
+  for (const [rootPath, rule] of Object.entries(redirectRules)) {
     if (pathname.startsWith(rootPath)) {
-      const subPath = pathname.slice(rootPath.length) || "/"
-      const destination = subPaths[subPath]
-      if (destination) {
-        return NextResponse.redirect(new URL(destination, request.url), 308)
+      if (typeof rule === 'string') {
+        // Direct redirect
+        return NextResponse.redirect(new URL(rule, request.url), 308)
+      } else if (typeof rule === 'object') {
+        // Nested redirects
+        const subPath = pathname.slice(rootPath.length) || "/"
+        const destination = rule[subPath]
+        if (destination) {
+          return NextResponse.redirect(new URL(destination, request.url), 308)
+        }
       }
     }
   }
@@ -27,5 +34,6 @@ export function middleware(request) {
 export const config = {
   matcher: [
     '/umi/:path*',
+    '/core/guides/javascript/how-to-create-a-core-nft-asset',
   ],
 }
