@@ -245,8 +245,8 @@ export const core = {
           title: 'Javascript',
           links: [
             {
-              title: 'How to Create a Core Asset with JavaScript',
-              href: '/core/guides/javascript/how-to-create-a-core-nft-asset',
+              title: 'How to Create a Core Asset with Javascript',
+              href: '/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript',
             },
             {
               title: 'How to Create a Core Collection with JavaScript',
@@ -261,6 +261,10 @@ export const core = {
         {
           title: 'Anchor',
           links: [
+            {
+              title: 'How to Create a Core Asset with Anchor',
+              href: '/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor',
+            },
             {
               title: 'How to Create a Core Collection with Anchor',
               href: '/core/guides/anchor/how-to-create-a-core-collection-with-anchor',
