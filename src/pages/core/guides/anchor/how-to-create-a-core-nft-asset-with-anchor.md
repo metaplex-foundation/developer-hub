@@ -7,7 +7,7 @@ created: '06-16-2024'
 updated: '06-18-2024'
 ---
 
-This guide will teach you how to create a **Core NFT Asset** on Solana using the Metaplex `mpl-core` program. 
+This guide will demonstrate the use of the `mpl-core` Rust SDK crate to create a **Core NFT Asset** via CPI using the **Anchor** framework in a **Solana** program.
 
 {% callout title="What is Core?" %}
 

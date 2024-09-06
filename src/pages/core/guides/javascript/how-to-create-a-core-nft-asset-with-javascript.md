@@ -7,7 +7,7 @@ created: '06-16-2024'
 updated: '06-18-2024'
 ---
 
-This guide will teach you how to create a **Core NFT Asset** on Solana using the Metaplex `@metaplex-foundation/mpl-core` package. 
+This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Javascript SDK package to create a **Core NFT Asset** using the Metaplex Core onchain program.
 
 {% callout title="What is Core?" %}
 
