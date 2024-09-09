@@ -126,7 +126,7 @@ export type CustomGuardMintArgs = {
 
 From here you need to add your new guard to some existing files.
 
-Export your new guard from `/clients/js/src/defaultGuards.index.ts`
+Export your new guard from `/clients/js/src/defaultGuards/index.ts`
 
 ```ts
 ...
@@ -137,7 +137,7 @@ export * from './token2022Payment';
 export * from './customGuard';
 ```
 
-Within `/clients/js/src/defaultGuards.defaults.ts` add your guard to these locations;
+Within `/clients/js/src/defaultGuards/defaults.ts` add your guard to these locations;
 
 ```ts
 import { CustomGuardArgs } from "../generated"
