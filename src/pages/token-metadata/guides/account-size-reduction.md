@@ -24,7 +24,7 @@ The Account sizes are reduced as you can see in the table below.
 Every Program and Tool that is based on our Rust SDK and deserializes Data from the TM Accounts and is using very old SDK Versions might be affected.
 
 ## Which SDK Versions are affected?
-- **Javascript**: The Umi based JS SDK is not affected.
+- **Javascript**: The JS SDKs (both @metaplex-foundation/js and Umi-based SDKs) are not affected
 - **Rust**: The Rust SDK became compatible over a Year ago starting with v2.0.0 (Available since August 2023)
 - **Anchor**: Anchor 0.29 and above is compatible to the new sizes (Available since October 2023)
 
