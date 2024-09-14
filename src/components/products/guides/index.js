@@ -74,8 +74,8 @@ export const guides = {
               updated: null, // null means it's never been updated
             },
             {
-              title: 'Creating an SPL Token',
-              href: '/guides/javascript/how-to-create-an-spl-token-on-solana',
+              title: 'How to Create a Solana Token',
+              href: '/guides/javascript/how-to-create-a-solana-token',
               created: '2024-06-16',
               updated: null, // null means it's never been updated
             },
