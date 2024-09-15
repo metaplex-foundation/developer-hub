@@ -214,7 +214,7 @@ export const coreCandyMachine = {
               href: '/core-candy-machine/guides' 
             },
             {
-              title: 'Build your own website to mint from Candy Machine',
+              title: 'Create a Website for minting Assets from your Core Candy Machine',
               href: '/core-candy-machine/guides/create-a-core-candy-machine-ui',
             },
           ],

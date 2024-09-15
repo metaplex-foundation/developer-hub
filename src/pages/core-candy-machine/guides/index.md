@@ -5,4 +5,4 @@ description: A list of guides for the Metaplex Core Candy Machine for creating C
 ---
 
 
-{% quick-link title="Build your own website to mint from Candy Machine" icon="CodeBracketSquare" href="/core-candy-machine/guides/create-a-core-candy-machine-ui" description="Learn how to build your own Core Candy Machine UI" /%}
+{% quick-link title="Create a Website for minting Assets from your Core Candy Machine" icon="CodeBracketSquare" href="/core-candy-machine/guides/create-a-core-candy-machine-ui" description="Learn how to build your own Core Candy Machine UI" /%}
