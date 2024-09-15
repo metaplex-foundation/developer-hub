@@ -4,11 +4,11 @@ metaTitle: Create a Website for minting Assets from your Core Candy Machine | Co
 description: How to create an NFT collection on the Solana blockchain using Candy Machine.
 ---
 
-If you are looking to launch a Core NFT Collection on Solana you would usually use a Candy Machine where your users can come and buy your Assets. To have a user friendly experience it is recommended to have a Website for it. This Guide will focus on how to build your very own mint function. It will also show you how to fetch data from the Candy Machine to for example show the remaining amount that can be minted.
+If you are looking to launch a Core NFT Collection on Solana, you would typically use a Candy Machine where your users can come and buy your Assets. To provide a user-friendly experience, it is recommended to have a website for it. This guide will focus on how to build your own mint function. It will also show you how to fetch data from the Candy Machine to, for example, display the remaining amount that can be minted.
 
-The result of this Guide will not be a finalized website, but provides all the Metaplex related information you need to build your own. 
+The result of this guide will not be a finalized website, but provides all the Metaplex related information you need to build your own. 
 
-## Prerequisite
+## Prerequisites
 
 - A already created Candy Machine. Find more info on how to create one [here](https://developers.metaplex.com/core-candy-machine/create).
 - A Website template. For example the [`metaplex-nextjs-tailwind-template`](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template). Using a Template like this allows you to skip many setup steps e.g. for the Wallet Adapter.
@@ -22,7 +22,7 @@ Install the required packages for this guide (if they are not installed in your 
 
 {% packagesUsed packages=["umi", "umiDefaults", "core", "candyMachineCore"] type="npm" /%}
 
-```js
+```ts
 npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-core @metaplex-foundation/mpl-core-candy-machine
 ```
 
@@ -43,7 +43,7 @@ In the Candy Machine Account Data like the Amount of Available and Redeemed asse
 
 To fetch the Candy Machine the `fetchCandyMachine` function can be used as shown below:
 
-```js
+```ts
 import {
   mplCandyMachine,
   fetchCandyMachine,
@@ -65,7 +65,7 @@ This would return the Candy Machine Data like this:
 {% dialect title="JSON" id="json-cm" %}
 
 {% totem-accordion title="Candy Machine Data" %}
-```json
+```tson
 {
     "publicKey": "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9",
     "header": {
@@ -133,13 +133,13 @@ From a UI perspective the most important field in here are `itemsRedeemed`, `ite
 #### Show remaining Asset Amount
 To show a Section like `13 / 16 Assets minted` one would use something like:
 
-```js
+```ts
 const mintedString = `${candyMachine.itemsRedeemed} / ${candyMachine.itemsAvailable} Assets minted`
 ```
 
 If you want to get the remaining mintable Assets like `3 available` you would instead run a calculation like:
 
-```js
+```ts
 const availableString = `${candyMachine.itemsAvailable - candyMachine.itemsRedeemed} available`;
 ```
 
@@ -152,7 +152,7 @@ If you want to build a more flexible UI that can be used for multiple Candy Mach
 
 The following snippet assumes that the `candyMachine` account was fetched before. Alternatively to `candyMachine.mintAuthority` the publicKey of the Candy Guard could be hardcoded.
 
-```js
+```ts
 import { safeFetchCandyGuard } from "@metaplex-foundation/mpl-core-candy-machine";
 
 const candyGuard = await safeFetchCandyGuard(umi, candyMachine.mintAuthority);
@@ -168,7 +168,7 @@ In this Object the most important field for the UI is the `guards` object. It co
 
 {% /totem-prose %}
 
-```json
+```tson
 {
     "publicKey": "ACJCHhsWCKw9Euu9nLdyxajqitvmwrXQMRWe2mrmva8u",
     "header": {
@@ -431,7 +431,7 @@ When the [`MintLimit`](/core-candy-machine/guards/mint-limit) guard is active, i
 
 The following code snippet demonstrates how to fetch the `MintCounter`. Note that this example assumes you've already obtained the Candy Machine and Candy Guard data:
 
-```js
+```ts
 import { safeFetchMintCounterFromSeeds } from "@metaplex-foundation/mpl-core-candy-machine";
 
 const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
@@ -447,7 +447,7 @@ Similar to the `MintLimit` guard it can make sense to fetch the `NftMintCounter`
 
 The following code snippet demonstrates how to fetch the `NftMintCounter`. Note that this example assumes you've already obtained the Candy Machine and Candy Guard data:
 
-```js
+```ts
 import { 
   findNftMintCounterPda,
   fetchNftMintCounter
@@ -468,7 +468,7 @@ Similar to the `NftMintCounter` guard it can make sense to fetch the `AssetMintC
 
 The following code snippet demonstrates how to fetch the `AssetMintCounter`. Note that this example assumes you've already obtained the Candy Machine data:
 
-```js
+```ts
 import { 
   findAssetMintCounterPda,
   fetchAssetMintCounter
@@ -489,7 +489,7 @@ For the `Allocation` guard it can make sense to fetch the `AllocationTracker` to
 
 The following code snippet demonstrates how to fetch the `AllocationTracker`. Note that this example assumes you've already obtained the Candy Machine data:
 
-```js
+```ts
 import {
   safeFetchAllocationTrackerFromSeeds,
 } from "@metaplex-foundation/mpl-core-candy-machine";
@@ -508,7 +508,7 @@ From a UI perspective, it's beneficial to query this account. This allows you to
 
 The following code snippet demonstrates how to fetch this account. It assumes that you've already retrieved the Candy Machine data. However, if you prefer, you can hardcode the `candyGuard` and `candyMachine` public keys instead.
 
-```js
+```ts
 import {
   safeFetchAllowListProofFromSeeds,
   getMerkleRoot,
@@ -532,14 +532,14 @@ const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
 To validate the legility you may also want to fetch information about the connected wallet. Depending on the Guards you are using you may want to know how much SOL is in the wallet and which Tokens and NFTs they own.
 
 To fetch the SOL balance the built in `getAccount` umi function can be used to fetch the wallet account:
-```js
+```ts
 const account = await umi.rpc.getAccount(umi.identity.publicKey);
 const solBalance = account.lamports;
 ```
 
 If you are using one of the guards that require tokens or NFTs you may want to fetch those, too. We recommend to use [DAS API](/das-api/methods/get-asset-by-owner) for this. DAS is an index of Tokens mainained by your RPC Provider. Using this allows to fetch all the required information with one call. In the UI you can then use the returned object to verify if the connected wallet owns the requried tokens or NFTs.
 
-```js
+```ts
 import { publicKey } from '@metaplex-foundation/umi';
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
 
@@ -563,7 +563,7 @@ Therefore, if there are no groups defined you need to check if all the mint cond
 Given a Candy Machine with the `startDate`, `SolPayment` and `mintLimit` guards attached that is not leveraging groups the following validations should be done before allowing the user to call the mint function. It is assumed that the `candyGuard` was fetched before and one Core NFT Asset should be minted.
 
 1. Validate the `startDate` is in the past. Note that we are not using the users devices time here but instead fetch the current internal Solana Blocktime since this is the time the Candy Machine will use for the validation on mint: 
-```js
+```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 
 let allowed = true;
@@ -584,7 +584,7 @@ if (startDate) {
 ```
 
 2. Check if the Wallet has enough SOL to pay for the mint. Note that we are not including transaction fees here and assume that the `SolBalance` was fetched as described above.
-```js
+```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 
 const solPayment = unwrapOption(candyGuard.guards.solPayment);
@@ -597,7 +597,7 @@ if (solPayment){
 ```
 
 3. Make sure the `mintLimit` was not reached yet:
-```js
+```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 import { 
   safeFetchMintCounterFromSeeds,
@@ -639,7 +639,7 @@ Other Guards require their routes to be executed for each individual wallet. In 
 
 For an example of how to implement Guard routes, consider the case of the Allowlist guard. This assumes that the allowListProof has been fetched as described earlier, and that `allowlist` represents an array of eligible wallet addresses. The following code demonstrates how to handle this scenario in your implementation.
 
-```js
+```ts
 import {
   getMerkleRoot,
   getMerkleProof,
@@ -666,17 +666,123 @@ if (allowListProof === null) {
 ```
 
 ## Create a Mint Function
-Keep in mind that if there are any groups attached the `default` ones apply to all groups, but you also have to use the groups and can not mint from the `default` group anymore.
+It is recommended to implement legibility checks for all the guards that are attached. Keep in mind that if there are any groups attached the `default` ones apply to all groups, but you also have to use the groups and can not mint from the `default` group anymore.
 
-### Single Mint
+After those checks are done and, if required, the route instructions were run the mint transaction can be built. Depending on the guards `mintArgs` have to be passed in. These are arguments that help building the mint transaction by passing in the correct Accounts. For example the `mintLimit` accounts needs the `mintCounter` account. The Umi SDK abstracts these details away but still requires some information to build the transaction correctly.
 
-### Mint multiple Core NFT Assets in one Transaction
+Assuming again a Candy Machine with `startDate`, `SolPayment` and `mintLimit` Guards attached let's see how to build the `mintArgs`.
 
+```ts
+import { some, unwrapOption } from '@metaplex-foundation/umi';
+import {
+  DefaultGuardSetMintArgs
+} from "@metaplex-foundation/mpl-core-candy-machine";
+
+let mintArgs: Partial<DefaultGuardSetMintArgs> = {};
+
+// add solPayment mintArgs
+const solPayment = unwrapOption(candyGuard.guards.solPayment)
+if (solPayment) {
+  mintArgs.solPayment = some({
+    destination: solPayment.destination,
+  });
+}
+
+// add mintLimit mintArgs
+const mintLimit = unwrapOption(candyGuard.guards.mintLimit)
+if (mintLimit) {
+  mintArgs.mintLimit = some({ id: mintLimit.id });
+}
+```
+
+Not all Guards require additional `mintArgs` to be passed in. This is the reason `startDate` is not in the above code snippet. To understand if the guards you are using require `mintArgs` to be passed in it is recommended to check the [Developer Hub](/core-candy-machine) Guard pages. If there are "Mint Settings" described you need to pass in `mintArgs` for this guard.
+
+Now that the `mintArgs` are built let's see how to call the mint function itself. The following snippet assumes that the `candyMachine` and `candyGuard` were fetched as described above. Technically the publicKeys of `candyMachine`, `collection`, `candyGuard` and all the `mintArgs` can also be passed in manually in case you do not want to fetch them.
+
+```ts
+// Generate the NFT address
+const nftMint = generateSigner(umi);
+
+await mintV1(umi, {
+  candyMachine: candyMachine.publicKey,
+  collection: candyMachine.collectionMint,
+  asset: nftMint,
+  candyGuard: candyGuard.publicKey,
+  mintArgs,
+}).sendAndConfirm(umi)
+
+console.log(`NFT ${nftMint.publicKey} minted!`)
+```
+
+
+## Advanced Minting Techniques
+
+While the basic minting function we've discussed works well for most cases, there are some advanced techniques you can use to enhance your minting process. Let's explore a couple of these:
+
+### Minting Multiple NFTs in One Transaction
+
+For efficiency, you might want to allow users to mint multiple NFTs in a single transaction. Here's how you can achieve this:
+
+Depending on the specific setup it can be helpful to allow minting multiple NFTs in one Transaction by combining the [Transaction Builders](/umi/transactions#transaction-builders).
+
+```ts
+let builder = transactionBuilder()
+  .add(mintV1(...))
+  .add(mintV1(...))
+```
+
+In case you allow to mint many Assets in one transaction you might experience `Transaction too large` errors. The function [`builder.fitsInOneTransaction(umi)`](/umi/transactions#transaction-builders) allows to check for this before sending the transaction so that the transaction can be split before sending it. In case splitting is needed using [`signAllTransactions`](/umi/transactions#building-and-signing-transactions) is recommended so that only one popup has to be approved in the Wallet Adapter.    
 
 ### Guard Groups
-- how to decide which group to use (buttons, automatic)
-- how to pass in a label to the mint function
+
+Guard groups are a powerful feature of Core Candy Machine that allow you to define multiple sets of guards with different configurations. They can be particularly useful in scenarios such as:
+
+1. Tiered minting: Different groups for VIP, early access, and public sale.
+2. Multiple payment options: Groups for SOL payment, SPL token payment, etc.
+3. Time-based minting: Groups with different start and end dates.
+4. Allowlist-based minting: Groups for allowlisted users and public sale.
+
+To implement guard groups in your UI, you have two main approaches:
+
+1. Multiple buttons approach:
+   Create a separate button for each group, allowing users to choose their preferred minting option.
+
+2. Automatic group selection:
+   Implement a function that determines the best group for a user based on their eligibility and current conditions.
+
+Regardless of which scenario or approach you choose, here's how to adjust the `mintV1` instruction to work with your specific group. The key modification is to include a `group` parameter that specifies the desired label.
+
+```ts
+// Generate the NFT address
+const nftMint = generateSigner(umi);
+
+await mintV1(umi, {
+  candyMachine: candyMachine.publicKey,
+  collection: candyMachine.collectionMint,
+  asset: nftMint,
+  candyGuard: candyGuard.publicKey,
+  mintArgs,
+  group: "group1",
+}).sendAndConfirm(umi)
+
+console.log(`NFT ${nftMint.publicKey} minted!`)
+```
+
 
 ## Next Steps
 
-Now that you learned the important information to interact with the Candy Machine in your Frontend you might want to host it so that it is available to your users. Often used by other Projects are e.g. Vercel and Cloudflare for this.
+Now that you've mastered the essentials of interacting with the Candy Machine in your frontend, you might want to consider the following steps to further enhance and distribute your project:
+
+1. Hosting: Make your frontend accessible to users by deploying it to a hosting platform. Popular options among developers include:
+   - Vercel
+   - Cloudflare Pages
+   - Netlify
+   - GitHub Pages
+
+2. Testing: Thoroughly test your UI on various devices and browsers to ensure a smooth user experience.
+
+3. Optimization: Fine-tune your frontend for performance, especially if you're expecting high traffic during minting events.
+
+8. Monitoring: Set up monitoring tools to keep track of your Candy Machine UIs status and quickly address any issues that may arise.
+
+By focusing on these areas, you'll be well-prepared to launch and maintain a successful NFT minting project using Core Candy Machine.
