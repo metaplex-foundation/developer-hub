@@ -4,10 +4,6 @@ metaTitle: "Core Candy Machine - Guards - Asset Gate"
 description: "The Core Candy Machine 'Asset Gate' guard requires the minting wallet to hold another Core Asset from a specific collection to allow the mint from the Core Candy Machine"
 ---
 
-{% callout type="note" %}
-This Guard is currently only available on devnet. [Follow us](https://x.com/metaplex) on twitter to see when it's merged to mainnet!
-{% /callout %}
-
 ## Overview
 
 The **Asset Gate** guard allows minting if the payer is Holder of an Asset of the specified Asset collection. The Asset will **not** be transferred.
