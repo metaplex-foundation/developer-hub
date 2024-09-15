@@ -54,8 +54,8 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCandyMachine());
 
-let candyMachineId = "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9";
-let candyMachine = await fetchCandyMachine(umi, publicKey(candyMachineId));
+const candyMachineId = "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9";
+const candyMachine = await fetchCandyMachine(umi, publicKey(candyMachineId));
 console.log(candyMachine)
 ```
 
@@ -149,6 +149,14 @@ The Candy Guard contains the conditions that have to be met to allow minting. Th
 Similar to the Candy Machine Data it is not a necessity to fetch the guard account. Doing so can allow more flexibility like just updating the SOL price in the Candy Guard and automatically updating the numbers on the website, too. 
 
 If you want to build a more flexible UI that can be used for multiple Candy Machines fetching the Candy Guard then allows you to both building your mint function and checking eligibility dynamically.
+
+The following snippet assumes that the `candyMachine` account was fetched before. Alternatively to `candyMachine.mintAuthority` the publicKey of the Candy Guard could be hardcoded.
+
+```js
+import { safeFetchCandyGuard } from "@metaplex-foundation/mpl-core-candy-machine";
+
+const candyGuard = await safeFetchCandyGuard(umi, candyMachine.mintAuthority);
+```
 
 {% dialect-switcher title="JSON Result" %}
 {% dialect title="JSON" id="json-cg" %}
@@ -540,17 +548,86 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
 const umi = createUmi('<ENDPOINT>').use(dasApi());
 
 const assets = await umi.rpc.getAssetsByOwner({
-    umi.identity.publicKey,
-    limit: 10
+    umi.identity.publicKey
 });
 
 ```
 
 ## Verify legibility
+After fetching all this data it can be used to check if a connected wallet is allowed to mint.
+
 It's important to note that when groups are attached to a Candy Machine, the `default` guards apply universally across all groups. However, in this scenario, you must utilize the specific groups for minting, as minting directly from the `default` group is no longer an option.
 
+Therefore, if there are no groups defined you need to check if all the mint conditions of the `default` group are met. If there are groups defined the combination of `default` guards and each group need to be validated.
+
+Given a Candy Machine with the `startDate`, `SolPayment` and `mintLimit` guards attached that is not leveraging groups the following validations should be done before allowing the user to call the mint function. It is assumed that the `candyGuard` was fetched before and one Core NFT Asset should be minted.
+
+1. Validate the `startDate` is in the past. Note that we are not using the users devices time here but instead fetch the current internal Solana Blocktime since this is the time the Candy Machine will use for the validation on mint: 
+```js
+import { unwrapOption } from '@metaplex-foundation/umi';
+
+let allowed = true;
+
+// fetch the current slot and read the blocktime
+const slot = await umi.rpc.getSlot();
+let solanaTime = await umi.rpc.getBlockTime(slot);
+
+// Check if a `default` startDate guard is attached
+const startDate = unwrapOption(candyGuard.guards.startDate);
+if (startDate) {
+  // validate the startTime is in the future
+  if (solanaTime < startDate) {
+        console.info(`StartDate not reached!`);
+        allowed = false;
+  }
+}
+```
+
+2. Check if the Wallet has enough SOL to pay for the mint. Note that we are not including transaction fees here and assume that the `SolBalance` was fetched as described above.
+```js
+import { unwrapOption } from '@metaplex-foundation/umi';
+
+const solPayment = unwrapOption(candyGuard.guards.solPayment);
+if (solPayment){
+  if (solPayment.lamports.basisPoints > solBalance){
+    console.info(`Not enough SOL!`);
+    allowed = false;
+  }
+}
+```
+
+3. Make sure the `mintLimit` was not reached yet:
+```js
+import { unwrapOption } from '@metaplex-foundation/umi';
+import { 
+  safeFetchMintCounterFromSeeds,
+} from "@metaplex-foundation/mpl-core-candy-machine";
+
+const mintLimit = unwrapOption(candyGuard.guards.mintLimit);
+if (mintLimit){
+      const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
+      id: mintLimit.id,
+      user: umi.identity.publicKey,
+      candyMachine: candyMachine.publicKey,
+      candyGuard: candyMachine.mintAuthority,
+    });
+
+    // mintCounter PDA exists (not the first mint)
+    if (mintCounter && mintLimit.limit >= mintCounter.count
+    ) {
+      allowed = false;
+    }
+}
+```
+
+When the wallet is not eligible to mint it is helpful to disable the mint button and show the User the reason for it. E.g. a `Not enough SOL!` message.
+
 ## Guard Routes
-Certain Guards require specific instructions to be executed before minting can occur. These instructions create accounts that store data or provide proof of a wallet's eligibility to mint. The execution frequency of these instructions varies depending on the Guard type.
+Certain Guards require specific instructions to be executed before minting can occur. These instructions create accounts that store data or provide proof of a wallet's eligibility to mint. The execution frequency of these instructions varies depending on the Guard type. 
+
+{% callout type="note" title="Target Audience of this section" %}
+In case you are not using the `Allocation`, `FreezeSolPayment`, `FreezeTokenPayment` or `Allowlist` guard it is safe to skip this section.
+{% callout type="note" title="Configuration" %}
 
 Some Guards need their routes executed only once for the entire Candy Machine. For these, it's not necessary to include a function in the UI but can be run upfront once through a script:
 - [Allocation](/core-candy-machine/guards/allocation)
@@ -561,6 +638,7 @@ Other Guards require their routes to be executed for each individual wallet. In 
 - [Allowlist](/core-candy-machine/guards/allow-list)
 
 For an example of how to implement Guard routes, consider the case of the Allowlist guard. This assumes that the allowListProof has been fetched as described earlier, and that `allowlist` represents an array of eligible wallet addresses. The following code demonstrates how to handle this scenario in your implementation.
+
 ```js
 import {
   getMerkleRoot,
@@ -571,8 +649,8 @@ import {
   publicKey,
 } from "@metaplex-foundation/umi";
 
-
-if (allowListProof === null) {
+// assuming you fetched the AllowListProof as described above
+if (allowListProof === null) { 
   route(umi, {
     guard: "allowList",
     candyMachine: candyMachine.publicKey,
@@ -587,13 +665,12 @@ if (allowListProof === null) {
 }
 ```
 
-Understanding these Guard routes is crucial for implementing a smooth minting process in your Candy Machine UI when using the guards that require a route to be run.
-
-###
-
 ## Create a Mint Function
 Keep in mind that if there are any groups attached the `default` ones apply to all groups, but you also have to use the groups and can not mint from the `default` group anymore.
 
+### Single Mint
+
+### Mint multiple Core NFT Assets in one Transaction
 
 
 ### Guard Groups
