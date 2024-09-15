@@ -133,6 +133,12 @@ At this point, you could use the built transaction and get all deduplicated sign
 const signedTransaction = await builder.buildAndSign(umi)
 ```
 
+Transactions that were already built but not signed yet can be pushed into an Array and signed all at once using `signAllTransactions`.
+
+```ts
+const signedTransactions = await signAllTransactions(transactionArray);
+```
+
 ## Sending transactions
 
 Now that we have a signed transaction, let's see how we can send it to the blockchain.
