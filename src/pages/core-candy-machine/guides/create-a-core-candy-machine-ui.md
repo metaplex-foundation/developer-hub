@@ -6,42 +6,43 @@ description: How to create an NFT collection on the Solana blockchain using Cand
 
 If you are looking to launch a Core NFT Collection on Solana, you would typically use a Candy Machine where your users can come and buy your Assets. To provide a user-friendly experience, it is recommended to have a website for it. This guide will focus on how to build your own mint function. It will also show you how to fetch data from the Candy Machine to, for example, display the remaining amount that can be minted.
 
-The result of this guide will not be a finalized website, but provides all the Metaplex related information you need to build your own. 
+This guide focuses on the core Candy Machine functionality and interactions, rather than providing a complete website implementation. It will not cover aspects like adding buttons to a website or integrating with a wallet adapter. Instead, it provides essential information on working with the Core Candy Machine.
+
+For a full website implementation, including UI elements and wallet integration, you may want to start with a template like the [`metaplex-nextjs-tailwind-template`](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template). This template includes many setup steps for components like the Wallet Adapter.
+
+If you're looking for guidance on general web development practices or how to use specific frameworks, tools like Visual Studio Code offer extensive documentation and community resources.
 
 ## Prerequisites
 
-- A already created Candy Machine. Find more info on how to create one [here](https://developers.metaplex.com/core-candy-machine/create).
-- A Website template. For example the [`metaplex-nextjs-tailwind-template`](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template). Using a Template like this allows you to skip many setup steps e.g. for the Wallet Adapter.
-- Code Editor of your choice (recommended **Visual Studio Code**)
+- An already created Candy Machine. Find more info on how to create one [here](https://developers.metaplex.com/core-candy-machine/create).
+- Basic familiarity with web development and your chosen framework. We recommend Next JS for easiest compatability to umi.
 
-## First Steps
-Download the template and install the required packages, e.g. using `npm install`
+## Required Packages
 
-### Required Packages
-Install the required packages for this guide (if they are not installed in your template already).
+Regardless of your chosen template or implementation, you'll need to install the following packages for interacting with the Core Candy Machine:
 
 {% packagesUsed packages=["umi", "umiDefaults", "core", "candyMachineCore"] type="npm" /%}
 
 ```ts
-npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-core @metaplex-foundation/mpl-core-candy-machine
+npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-core-candy-machine
 ```
 
-## Fetch onchain Data
+## Fetch On-chain Data
 
-After setting up your environment we can start focusing on the Candy Machine. Mint UIs often want to show data like
+After setting up your environment, we can start focusing on the Candy Machine. Mint UIs often want to show data such as:
 
-- Amount of already minted Assets
-- Amount of Assets in the Candy Machine
+- Number of already minted Assets
+- Number of Assets in the Candy Machine
 - Time until the mint starts
 - Price of Assets
 - etc.
 
-It can also make sense to fetch additional Data that is not shown to the User but used in background calculations. E.g. when using the [Redeemed Amount](core-candy-machine/guards/redeemed-amount) Guard you would want to fetch the already redeemed Amount to see if the user is allowed to mint more.
+It can also make sense to fetch additional data that is not shown to the user but used in background calculations. For example, when using the [Redeemed Amount](core-candy-machine/guards/redeemed-amount) Guard, you would want to fetch the already redeemed amount to see if the user is allowed to mint more.
 
 ### Fetch Candy Machine Data
-In the Candy Machine Account Data like the Amount of Available and Redeemed assets is stored. It also stores the `mintAuthority` which usually is the address of your Candy Guard.  
+In the Candy Machine Account, data such as the number of Available and Redeemed assets is stored. It also stores the `mintAuthority`, which is usually the address of your Candy Guard.  
 
-To fetch the Candy Machine the `fetchCandyMachine` function can be used as shown below:
+To fetch the Candy Machine, the `fetchCandyMachine` function can be used as shown below:
 
 ```ts
 import {
@@ -168,7 +169,7 @@ In this Object the most important field for the UI is the `guards` object. It co
 
 {% /totem-prose %}
 
-```tson
+```json
 {
     "publicKey": "ACJCHhsWCKw9Euu9nLdyxajqitvmwrXQMRWe2mrmva8u",
     "header": {
@@ -529,7 +530,7 @@ const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
 ```
 
 ### Fetch Wallet Data
-To validate the legility you may also want to fetch information about the connected wallet. Depending on the Guards you are using you may want to know how much SOL is in the wallet and which Tokens and NFTs they own.
+To validate the legibility you may also want to fetch information about the connected wallet. Depending on the Guards you are using you may want to know how much SOL is in the wallet and which Tokens and NFTs they own.
 
 To fetch the SOL balance the built in `getAccount` umi function can be used to fetch the wallet account:
 ```ts
@@ -537,7 +538,7 @@ const account = await umi.rpc.getAccount(umi.identity.publicKey);
 const solBalance = account.lamports;
 ```
 
-If you are using one of the guards that require tokens or NFTs you may want to fetch those, too. We recommend to use [DAS API](/das-api/methods/get-asset-by-owner) for this. DAS is an index of Tokens mainained by your RPC Provider. Using this allows to fetch all the required information with one call. In the UI you can then use the returned object to verify if the connected wallet owns the requried tokens or NFTs.
+If you are using one of the guards that require tokens or NFTs you may want to fetch those, too. We recommend to use [DAS API](/das-api/methods/get-asset-by-owner) for this. DAS is an index of Tokens maintained by your RPC Provider. Using this allows to fetch all the required information with one call. In the UI you can then use the returned object to verify if the connected wallet owns the required tokens or NFTs.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
