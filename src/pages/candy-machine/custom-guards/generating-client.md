@@ -150,7 +150,7 @@ export type DefaultGuardSetArgs = GuardSetArgs & {
 ```
 
 ```ts
-import { customGuard } from "../generated"
+import { CustomGuard } from "../generated"
 
 export type DefaultGuardSet = GuardSet & {
     ...
