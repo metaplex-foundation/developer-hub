@@ -31,10 +31,20 @@ That being said, if you ever needed to do that parsing yourself, here is a quick
 
 The Bubblegum Umi library provides a `getAssetWithProof` helper method that fits the description above. Here's an example of how to use it using the `transfer` instruction. Note that, in this case, we override the `leafOwner` parameter as it needs to be a Signer and `assetWithProof` gives us the owner as a Public Key.
 
+Depending on Canopy size it can make sense to use the `truncateCanopy: true` parameter of the `getAssetWithProof` helper. It fetches the tree config and truncates not required proofs. This will help if your transaction sizes grow too large.
+
 ```ts
 import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, 
+// {  truncateCanopy: true } // optional to prune the proofs 
+);
+await transfer(umi, {
+  ...assetWithProof,
+  leafOwner: leafOwnerA, // As a signer.
+  newLeafOwner: leafOwnerB.publicKey,
+}).sendAndConfirm(umi);
+
 await transfer(umi, {
   ...assetWithProof,
   leafOwner: leafOwnerA, // As a signer.
@@ -71,3 +81,23 @@ await transfer(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## How to Resolve "Transaction too large" Errors {% #transaction-size %}
+
+When performing leaf-replacing operations like transfers or burns, you may encounter a "Transaction too large" error. To resolve this, consider the following solutions:
+
+1. Use the `truncateCanopy` option:
+   Pass `{ truncateCanopy: true }` to the `getAssetWithProof` function:
+
+   ```ts
+   const assetWithProof = await getAssetWithProof(umi, assetId, 
+    { truncateCanopy: true }
+   );
+   ```
+
+   This option retrieves the Merkle Tree configuration and optimizes the `assetWithProof` by removing unnecessary proofs based on the Canopy. While it adds an extra RPC call, it significantly reduces the transaction size.
+
+2. Utilize versioned transactions and Address Lookup Tables:
+   Another approach is to implement [versioned transactions and Address Lookup Tables](https://developers.metaplex.com/umi/toolbox/address-lookup-table). This method can help manage transaction size more effectively.
+
+By applying these techniques, you can overcome transaction size limitations and successfully execute your operations.
