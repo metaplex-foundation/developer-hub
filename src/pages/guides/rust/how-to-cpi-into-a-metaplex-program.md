@@ -10,7 +10,7 @@ You may have heard the term "CPI'ing into a program" or "Call a CPI on the progr
 
 A CPI (Cross Program Invocation) is the interaction of one program invoking an instruction on another program.
 
-An example would be that I make a program and during this transaction I need to transfer an NFT or Asset during this transaction. Well my program can CPI call and ask the Token Metadata or Core programs to exectute the transfer instruction for me if I give it all the correct details.
+An example would be that I make a program and during this transaction I need to transfer an NFT or Asset during this transaction. Well my program can CPI call and ask the Token Metadata or Core programs to execute the transfer instruction for me if I give it all the correct details.
 
 ## Using Metaplex Rust Transaction CPI Builders
 
@@ -32,7 +32,7 @@ TransferV1InstructionData
 
 The one we are interested in here is the `TransferV1CpiBuilder`.
 
-To initialize the builder we can call `new` on the `CpiBuilder` and pass in the program `AcountInfo` of the program address the CPI call is being made to.
+To initialize the builder we can call `new` on the `CpiBuilder` and pass in the program `AccountInfo` of the program address the CPI call is being made to.
 
 ```rust
 TransferV1CpiBuilder::new(ctx.accounts.mpl_core_program);
@@ -110,16 +110,16 @@ CreateV1CpiBuilder::new()
         .payer(context.accounts.payer)
         .owner(context.accounts.owner)
         .update_authority(context.accounts.update_authority)
-        .system_program(context.acccounts.system_program)
+        .system_program(context.accounts.system_program)
         .data_state(input.data_state.unwrap_or(DataState::AccountState))
         .name(args.asset_name)
-        .uri(arts.asseet_uri)
+        .uri(arts.asset_uri)
         .plugins(args.plugins)
 ```
 
 ## Invoking
 
-Invoking is the term used to exectute the CPI call to the other program, a programs version of "sending a transaction" if you may.
+Invoking is the term used to execute the CPI call to the other program, a programs version of "sending a transaction" if you may.
 
 We have two options when it comes to invoking a CPI call. `invoke()` and `invoke_signed()`
 
@@ -138,7 +138,7 @@ CreateV1CpiBuilder::new()
 
 ### invoke_signed()
 
-`invoke_signed()` is used when a PDA is one of the accounts that needs to be a signer in a cpi call. Lets say for example we had a program that took possesion of our Asset and one of our programs PDA addresses became the other of it. In order to transfer it and change the owner to someone else that PDA will have sign transaction.
+`invoke_signed()` is used when a PDA is one of the accounts that needs to be a signer in a cpi call. Lets say for example we had a program that took possession of our Asset and one of our programs PDA addresses became the other of it. In order to transfer it and change the owner to someone else that PDA will have sign transaction.
 
 You'll need to pass in the original PDA seeds and bump so that the PDA can be recreated can sign the cpi call on your programs behalf.
 

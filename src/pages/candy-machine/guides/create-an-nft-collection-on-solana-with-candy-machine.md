@@ -4,7 +4,7 @@ metaTitle: Create a Token Metadata TM NFT Collection on Solana with Candy Machin
 description: How to create an NFT collection on the Solana blockchain using Candy Machine.
 ---
 
-If you are looking to launch an NFT Collection on Solana the Sugar CLI toolkit will abstract some of the trickier settup and management steps for you providing you with a automated launch system to create Candy Machines on the Solana blockchain.
+If you are looking to launch an NFT Collection on Solana the Sugar CLI toolkit will abstract some of the trickier setup and management steps for you providing you with a automated launch system to create Candy Machines on the Solana blockchain.
 
 ## Prerequisite
 
@@ -34,7 +34,7 @@ Try to run the binary by double-clicking on it. If you get a pop-up message warn
 
 ## Preparing Your Assets
 
-NFTs have two fundemental parts, the `image`, and the `metadata`.
+NFTs have two fundamental parts, the `image`, and the `metadata`.
 
 The image is what is showcased and displayed in wallets and markets while the `metadata` contains all the relevant information for that NFT on the blockchain such as `name`, what link to find the `image` at, the `attributes` of the NFT.
 
@@ -109,7 +109,7 @@ git clone https://github.com/metaplex-foundation/example-candy-machine-assets.gi
 
 ### Image and Metadata Generators
 
-If you need to generate artwork images and metadata from layers there are several automated scripts and websites where you can supply the generator with your image layers and some basic information about your project and it will generate x number of Asset Image and JSON Metadata combos based on your paramenters given.
+If you need to generate artwork images and metadata from layers there are several automated scripts and websites where you can supply the generator with your image layers and some basic information about your project and it will generate x number of Asset Image and JSON Metadata combos based on your parameters given.
 
 | Name                                                        | type   | Difficulty | Requirements | Free |
 | ----------------------------------------------------------- | ------ | ---------- | ------------ | ---- |
@@ -222,20 +222,20 @@ Sugar should now start the process of
 - Uploading your assets to Bundlr
 - Create the Candy Machine
 
-If successful you will be greated with the follwing message but containing your own Candy Machine address within the link:
+If successful you will be greeted with the following message but containing your own Candy Machine address within the link:
 
 ```
 https://www.solaneyes.com/address/Beag81WvAPUCeFpJ2qFnvd2f1CFCpQBf3abTJXA1fH9o?cluster=devnet
 ```
 
-Congrations you just created a Candy Machine on Solana.
+Congratulations you just created a Candy Machine on Solana.
 If you click the above link you can view your Candy Machine details on chain.
 
 ### Updating the Candy Machine with Guards and Groups
 
-Currently your Candy Machine has no Guards attatched. By default if no Candy Guard is attatched to the Candy Machine only the **mint authoirty** (which is you) can mint from the Candy Machine.
+Currently your Candy Machine has no Guards attached. By default if no Candy Guard is attached to the Candy Machine only the **mint authority** (which is you) can mint from the Candy Machine.
 
-So solve this we have to attatch Guards to the Candy Machine which allows the public to mint from the Candy Machine following a set of rules. For example we might want the public to be able to mint from the Candy Machine while charging the user 1 SOL. For this we can use a **Sol Payment Guard**.
+So solve this we have to attach Guards to the Candy Machine which allows the public to mint from the Candy Machine following a set of rules. For example we might want the public to be able to mint from the Candy Machine while charging the user 1 SOL. For this we can use a **Sol Payment Guard**.
 
 #### Adding Guard (SOL Payment)
 
