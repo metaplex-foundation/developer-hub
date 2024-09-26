@@ -17,6 +17,8 @@ To insert items in a Candy Machine, you will need the following two parameters f
 
 If you do not have URIs for your items, you’ll first need to upload their JSON metadata one by one. This can either be using an off-chain solution — such as AWS or your own server — or an onchain solution — such as Arweave or IPFS.
 
+You can find example assets for testing in this [Github repository](https://github.com/metaplex-foundation/example-candy-machine-assets).
+
 Fortunately, our SDKs can help you with that. They allow you to upload a JSON object and retrieve its URI.
 
 Additionally, tools like [Sugar](/candy-machine/sugar) make uploading JSON metadata a breeze by uploading in parallel, caching the process and retrying failed uploads.
