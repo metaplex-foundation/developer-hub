@@ -15,6 +15,9 @@ import { Prism } from 'prism-react-renderer'
 ;(typeof global !== 'undefined' ? global : window).Prism = Prism
 require('prismjs/components/prism-rust')
 
+// Ask Cookbook (AI Assistant) integration.
+import AskCookbook from '../components/AskCookbook'
+
 export default function App({ Component, pageProps }) {
   const page = usePage(pageProps)
   console.log({ page })
@@ -61,6 +64,7 @@ export default function App({ Component, pageProps }) {
             gtag('config', 'G-PJMQZF1F4X');
           `}
       </Script>
+      <AskCookbook />
     </>
   )
 }
