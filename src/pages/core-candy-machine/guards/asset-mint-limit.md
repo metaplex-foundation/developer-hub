@@ -137,3 +137,24 @@ mintV1(umi, {
 ## Route Instruction
 
 _The Asset Mint Limit guard does not support the route instruction._
+
+## AssetMintLimit Accounts
+When the `AssetMintLimit` Guard is used a `AssetMintCounter` Account is created for each Core NFT Asset, CandyMachine and `id` combination. For validation purposes it can be fetched like this:
+
+```js
+import { 
+  findAssetMintCounterPda,
+  fetchNftMintCounter
+ } from "@metaplex-foundation/mpl-core-candy-machine";
+
+const pda = findAssetMintCounterPda(umi, {
+  id: 1, // The nftMintLimit id you set in your guard config
+  mint: asset.publicKey, // The address of the nft your user owns
+  candyMachine: candyMachine.publicKey,
+  // or candyMachine: publicKey("Address") with your CM Address
+  candyGuard: candyMachine.mintAuthority
+  // or candyGuard: publicKey("Address") with your candyGuard Address
+});
+      
+const nftMintCounter = fetchAssetMintCounter(umi, pda)
+```

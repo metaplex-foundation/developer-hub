@@ -382,3 +382,29 @@ _Sugar can not be used to call the "Proof" Route._
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Allowlist Accounts
+When the `Allowlist` Guard is used a `AllowListProof` Account is created after the route instruction was run. When it can be fetched the user is on the allowlist and the route was run already. For validation purposes it can be fetched like this:
+
+```js
+import {
+  safeFetchAllowListProofFromSeeds,
+  getMerkleRoot,
+} from "@metaplex-foundation/mpl-core-candy-machine";
+
+const allowlist = [
+  "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV",
+  "GjwcWFQYzemBtpUoN5fMAP2FZviTtMRWCmrppGuTthJS",
+  "AT8nPwujHAD14cLojTcB1qdBzA1VXnT6LVGuUd6Y73Cy"
+];
+
+const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
+  candyMachine: candyMachine.publicKey,
+  // or candyMachine: publicKey("Address") with your CM Address
+  candyGuard: candyMachine.mintAuthority,
+  // or candyGuard: publicKey("Address") with your candyGuard Address
+  merkleRoot: getMerkleRoot(allowlist),
+  user: umi.identity.publicKey,
+  // or publicKey of the "minting" account
+});
+```

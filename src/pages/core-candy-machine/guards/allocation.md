@@ -256,3 +256,20 @@ _Sugar currently does not support route instructions._
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Allocation Accounts
+When the `Allocation` Guard is used a `allocationTracker` Account is created after the route instruction was run. For validation purposes it can be fetched like this:
+
+```js
+import {
+  safeFetchAllocationTrackerFromSeeds,
+} from "@metaplex-foundation/mpl-core-candy-machine";
+
+const allocationTracker = await safeFetchAllocationTrackerFromSeeds(umi, {
+  id: 1, // The allocation id you set in your guard config
+  candyMachine: candyMachine.publicKey,
+  // or candyMachine: publicKey("Address") with your CM Address
+  candyGuard: candyMachine.mintAuthority,
+  // or candyGuard: publicKey("Address") with your candyGuard Address
+});
+```
