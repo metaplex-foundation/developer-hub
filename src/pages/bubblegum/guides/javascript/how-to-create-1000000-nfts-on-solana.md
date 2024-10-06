@@ -37,11 +37,11 @@ npm i @metaplex-foundation/umi-bundle-defaults
 ```
 
 ```js
-npm i @metaplex-foundation/bubblegum
+npm i @metaplex-foundation/mpl-bubblegum
 ```
 
 ```js
-npm i @metaplex-foundation/token-metadata
+npm i @metaplex-foundation/mpl-token-metadata
 ```
 
 ```js
