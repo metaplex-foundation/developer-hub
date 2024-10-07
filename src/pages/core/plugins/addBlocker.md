@@ -1,6 +1,6 @@
 ---
-title: Core - addBlocker Plugin
-metaTitle: Core - addBlocker Plugin
+title: addBlocker Plugin
+metaTitle: addBlocker Plugin | Core Plugins
 description: Learn how to block adding additional Plugins to Core NFT Assets and Collections using Metaplex Core packages.
 ---
 

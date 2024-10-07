@@ -1,6 +1,6 @@
 ---
 title: Clear Inscription Data
-metaTitle: Inscription - Clear Data
+metaTitle: Clear Data | Inscription
 description: Learn how to clear Inscription data
 ---
 

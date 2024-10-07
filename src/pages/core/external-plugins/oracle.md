@@ -1,6 +1,6 @@
 ---
-title: Core - External Plugins - Oracle Plugin
-metaTitle: Core - Oracle Plugin
+title: Oracle Plugin
+metaTitle: Oracle Plugin | Core
 description: Learn about the Oracle Plugin and Oracle accounts and how they interact with the lifecycle events of Core NFT Assets.
 ---
 

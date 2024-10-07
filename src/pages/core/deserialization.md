@@ -1,6 +1,6 @@
 ---
-title: Core - Deserialization
-metaTitle: Core -  Deserialization
+title: Deserialization
+metaTitle: Deserialization | Core
 description: Learn about the deserialization of Asset accounts, Collection accounts and plugins using the Metaplex Core packages.
 ---
 

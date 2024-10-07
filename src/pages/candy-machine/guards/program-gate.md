@@ -1,6 +1,6 @@
 ---
-title: "Program Gate"
-metaTitle: "Candy Machine Guards - Program Gate"
+title: "Program Gate Guard"
+metaTitle: Program Gate Guard | Candy Machine
 description: "Configurable list of valid programs."
 ---
 

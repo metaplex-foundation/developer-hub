@@ -1,6 +1,6 @@
 ---
-title: Core - External Plugins - AppData
-metaTitle: Core - External Plugins - AppData
+title: AppData Plugin
+metaTitle: AppData Plugin | Core
 description: Learn about the MPL Core AppData plugin providing Core Assets with a secure data partitioned area that only data authorities can write to.
 ---
 

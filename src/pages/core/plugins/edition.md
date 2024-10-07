@@ -1,6 +1,6 @@
 ---
-title: Core - Edition Plugin
-metaTitle: Core - Edition Plugin
+title: Edition Plugin
+metaTitle: Edition Plugin | Core
 description: Learn about the MPL Core Edition Plugin.
 ---
 

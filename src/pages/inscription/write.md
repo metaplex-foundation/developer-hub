@@ -1,6 +1,6 @@
 ---
 title: Write Inscription Data
-metaTitle: Inscription - Write Inscription Data
+metaTitle: Write Inscription Data | Inscription
 description: Learn how to write Data to your Inscription
 ---
 

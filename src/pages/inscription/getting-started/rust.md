@@ -1,6 +1,6 @@
 ---
 title: Getting Started using Rust
-metaTitle: Inscription - Getting Started - Rust
+metaTitle: Rust SDK | Inscription
 description: Get started with Inscriptions using Rust
 ---
 

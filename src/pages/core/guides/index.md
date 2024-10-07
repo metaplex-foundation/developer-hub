@@ -1,6 +1,6 @@
 ---
-title: Core - Guides
-metaTitle: Core - Guides
+title: Guides
+metaTitle: Guides | Core
 description: A list of guides and tutorials for the Metaplex Core digital asset standard on the Solana blockchain.
 ---
 
@@ -13,6 +13,8 @@ The following Guides for MPL Core are currently available:
 {% quick-link title="Immutability" icon="BookOpen" href="/core/guides/immutability" description="Learn how Immutability works in MPL Core" /%}
 
 {% quick-link title="Oracle Plugin Example" icon="CodeBracketSquare" href="/core/guides/oracle-plugin-example" description="Learn how you can create a collection that can be traded only during US market hours" /%}
+
+{% quick-link title="Appdata Plugin Example" icon="CodeBracketSquare" href="/core/guides/onchain-ticketing-with-appdata" description="Learn how you can create a ticketing platform leveraging the Appdata plugin" /%}
 
 {% quick-link title="Typescript Staking Example" icon="CodeBracketSquare" href="/core/guides/javascript/web2-typescript-staking-example" description="Learn how you can create a staking program for your collection using only Typescript" /%}
 

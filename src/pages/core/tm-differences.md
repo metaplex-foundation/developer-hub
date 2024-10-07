@@ -1,6 +1,6 @@
 ---
-title: Core - Differences between Core and Token Metadata
-metaTitle: Core - Differences between Core and Token Metadata
+title: Differences between Core and Token Metadata
+metaTitle: Differences between Core and Token Metadata | Core
 description: Differences between Core and Token Metadata NFT protocols on the Solana blockchain.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Generating Custom Guard Client for Candy Machine 
-metaTitle: Candy Machine - Generating Custom Guard Client
+metaTitle: Generating Custom Guard Client | Candy Machine 
 description: How to generate a Umi compatible client for your custom guards.
 ---
 
@@ -126,7 +126,7 @@ export type CustomGuardMintArgs = {
 
 From here you need to add your new guard to some existing files.
 
-Export your new guard from `/clients/js/src/defaultGuards.index.ts`
+Export your new guard from `/clients/js/src/defaultGuards/index.ts`
 
 ```ts
 ...
@@ -137,7 +137,7 @@ export * from './token2022Payment';
 export * from './customGuard';
 ```
 
-Within `/clients/js/src/defaultGuards.defaults.ts` add your guard to these locations;
+Within `/clients/js/src/defaultGuards/defaults.ts` add your guard to these locations;
 
 ```ts
 import { CustomGuardArgs } from "../generated"
@@ -150,7 +150,7 @@ export type DefaultGuardSetArgs = GuardSetArgs & {
 ```
 
 ```ts
-import { customGuard } from "../generated"
+import { CustomGuard } from "../generated"
 
 export type DefaultGuardSet = GuardSet & {
     ...

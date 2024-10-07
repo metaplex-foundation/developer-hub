@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: MPL-Hybrid - Getting Started
+metaTitle: Getting Started | MPL-Hybrid
 description: Get started with the MPL-Hybrid Smart Escrow program.
 ---
 

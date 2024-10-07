@@ -1,6 +1,6 @@
 ---
-title: "Allowlist"
-metaTitle: "Candy Machine Guards - Allowlist"
+title: Allowlist Guard
+metaTitle: Allowlist | Candy Machine
 description: "Uses a wallet address list to determine who is allowed to mint."
 ---
 

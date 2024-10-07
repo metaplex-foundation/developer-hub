@@ -47,6 +47,10 @@ await updateMetadata(umi, {
 
 This can also be done using the `getAssetWithProof` helper method:
 
+{% callout title="Transaction size" type="note" %}
+If you encounter transaction size errors, consider using `{ truncateCanopy: true }` with `getAssetWithProof`. See the [FAQ](/bubblegum/faq#replace-leaf-instruction-arguments) for details.
+{% /callout %}
+
 {% dialect-switcher title="Update a Compressed NFT as the Tree Owner using Helper Method" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}

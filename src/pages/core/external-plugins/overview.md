@@ -1,6 +1,6 @@
 ---
-title: Core - External Plugins
-metaTitle: Core - External Plugins
+title: External Plugins
+metaTitle: External Plugins | Core
 description: Learn about the MPL Core External Plugins and their functionality.
 ---
 

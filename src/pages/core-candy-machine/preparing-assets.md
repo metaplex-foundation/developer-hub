@@ -87,7 +87,8 @@ There is also nothing wrong with self hosting your images on metadata either in 
 Umi has a few plugins that can aid the upload process via plugins. At the time the following plugins are supported:
 
 - Irys
-- NFT Storage
+- NFT Storage 
+- AWS 
 
 #### Uploading to Arweave via Irys with Umi
 
@@ -127,7 +128,7 @@ The goal of this point is to have a list full list of URI's of where your media 
 
 ```
 
-With the index uri list of uploaded media you will then need to loop through your JSON metadata files and add the URIs to the appropiate places.
+With the index uri list of uploaded media you will then need to loop through your JSON metadata files and add the URIs to the appropriate places.
 
 Image URIs would be inserted into the `image:` field, and also into the `properties: files: []` array.
 

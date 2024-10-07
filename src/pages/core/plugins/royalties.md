@@ -1,6 +1,6 @@
 ---
-title: Core - Royalties Plugin
-metaTitle: Core - Enforcing Royalties
+title: Royalties Plugin
+metaTitle: Enforcing Royalties | Core
 description: The Royalties plugin allows you set the royalty percentage for secondary sales on market places. This can now be set collection wide by applying the Royalty plugin to the Core Collection.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Verified Creators
-metaTitle: Token Metadata - Verified Creators
+metaTitle: Verified Creators | Token Metadata
 description: Learn how to verify the creators of an Asset on Token Metadata
 ---
 

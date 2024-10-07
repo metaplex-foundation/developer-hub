@@ -26,13 +26,16 @@ export const umi = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/umi' },
-            { title: 'Getting started', href: '/umi/getting-started' },
-            { title: 'Connecting to Umi', href: '/umi/connecting-to-umi' },
+            { 
+              title: 'Getting started', 
+              href: '/umi/getting-started' },
             {
               title: 'Metaplex Umi Plugins',
               href: '/umi/metaplex-umi-plugins',
             },
-            { title: 'Web3js Differences', href: '/umi/web3js-differences' },
+            { title: 'Web3js Differences and Adapters', 
+              href: '/umi/web3js-differences-and-adapters' 
+            },
           ],
         },
         {
@@ -54,7 +57,36 @@ export const umi = {
             { title: 'Serializers', href: '/umi/serializers' },
             { title: 'Storage', href: '/umi/storage' },
             { title: 'Transactions', href: '/umi/transactions' },
-            { title: 'Web3Js Adapters', href: '/umi/web3js-adapters' },
+          ],
+        },
+        {
+          title: 'Toolbox',
+          links: [
+            { 
+              title: 'Overview', 
+              href: '/umi/toolbox' 
+            },
+            { 
+              title: 'Create Account', 
+              href: '/umi/toolbox/create-account' },
+            {
+              title: 'Transfer Sol',
+              href: '/umi/toolbox/transfer-sol',
+            },
+            {
+              title: 'Token Managment',
+              href: '/umi/toolbox/token-managment',
+            },
+            { 
+              title: 'Priority Fees and Compute Managment', 
+              href: '/umi/toolbox/priority-fees-and-compute-managment' },
+            {
+              title: 'Address Lookup Table',
+              href: '/umi/toolbox/address-lookup-table',
+            },
+            { 
+              title: 'Transaction Memo', 
+              href: '/umi/toolbox/transaction-memo' },
           ],
         },
       ],
@@ -65,7 +97,12 @@ export const umi = {
         {
           title: 'Guides',
           links: [
-            { title: 'Watch this space!', href: '' },
+            {
+              title: 'Serializing and Deserializing Transactions',
+              href: '/umi/guides/serializing-and-deserializing-transactions',
+              created: '2024-08-04',
+              updated: null, // null means it's never been updated
+            },
           ],
         },
       ],

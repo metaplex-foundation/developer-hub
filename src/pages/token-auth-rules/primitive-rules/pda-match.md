@@ -1,6 +1,6 @@
 ---
 title: PDA Match
-metaTitle: Token Auth Rules - PDA Match
+metaTitle: PDA Match | Token Auth Rules
 description: The PDA Match primitive rule
 ---
 

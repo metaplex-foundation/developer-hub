@@ -1,6 +1,6 @@
 ---
 title: Stability Index
-metaTitle: Metaplex — Stability Index
+metaTitle: Stability Index | Developer Hub
 description: A list of Metaplex's products and their stability levels
 ---
 
