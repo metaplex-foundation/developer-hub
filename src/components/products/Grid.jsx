@@ -9,13 +9,12 @@ export function Grid({
   numCols = 'grid-cols-3',
   ...props
 }) {
-  console.log('menuItem', menuItem)
+  
   const products = allProducts.filter(
     (product) => menuItem === product.navigationMenuCatergory
   )
 
   let className = `relative grid ${numCols} gap-3`
-  console.log(className)
 
   return (
     <ul className={className} {...props}>

@@ -2,7 +2,6 @@ import Link from 'next/link.js'
 import { installationPackages } from './packages.js'
 
 export const PackagesUsed = ({ packages, type }) => {
-  console.log({ installationPackages })
 
   const url = (installationPackage) => {
     if (type === 'npm') {
@@ -10,7 +9,6 @@ export const PackagesUsed = ({ packages, type }) => {
         installationPackages[installationPackage] &&
         installationPackages[installationPackage].npm
       ) {
-        console.log(installationPackage)
         return `https://www.npmjs.com/package/${installationPackages[installationPackage].npm}`
       }
       return `https://www.npmjs.com/package/${installationPackage}`

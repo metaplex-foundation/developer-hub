@@ -17,7 +17,6 @@ require('prismjs/components/prism-rust')
 
 export default function App({ Component, pageProps }) {
   const page = usePage(pageProps)
-  console.log({ page })
 
   return (
     <>
