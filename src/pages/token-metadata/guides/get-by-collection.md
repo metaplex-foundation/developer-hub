@@ -98,7 +98,7 @@ Rust `Option`s are represented in [Borsh](https://borsh.io/) encoding with a 0 f
 
 There are two ways to do this: brute force and gathering a priori knowledge of the variants. 
 
-Brute force requires computing all the possible variants and running multiple `getProgramAccount` calls in parallel. Given up to five creators in the creators array and two possible options for each of the two `Option` fields prior to `Collection`, that leads to a total number of 20 possible combinations, meaning that you would have to make 20 `getProgramAccount` calls with various offsets to take this approach. This is obviously not a feasible nor scaleable approach. 
+Brute force requires computing all the possible variants and running multiple `getProgramAccount` calls in parallel. Given up to five creators in the creators array and two possible options for each of the two `Option` fields prior to `Collection`, that leads to a total number of 20 possible combinations, meaning that you would have to make 20 `getProgramAccount` calls with various offsets to take this approach. This is obviously not a feasible nor scalable approach. 
 If some a priori information is known about a collection though, this can be reduced to a smaller number of calls. Knowing how many creators there are is the biggest gain, reducing the number of `getProgramAccount` calls down to only four which can be reasonably run in parallel. 
 
 This approach is not the recommended one due to the high number of edge cases it involves and the fact that it can only be pragmatically used on collections where there is only one creator or the number of variations of how many creators there are is known ahead of time. 

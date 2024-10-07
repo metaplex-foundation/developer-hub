@@ -163,4 +163,4 @@ Assert errors are matching errors. Assert will normally take 2 variables (in mos
 
 ### 0x1 Attempt to Debit
 
-This is a common error that reads `Attempt to debit an account but found no record of a prior credit`. This error basicly implies that the account does not have any SOL within it.
+This is a common error that reads `Attempt to debit an account but found no record of a prior credit`. This error basically implies that the account does not have any SOL within it.

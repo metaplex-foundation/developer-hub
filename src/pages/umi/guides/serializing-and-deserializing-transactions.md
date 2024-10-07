@@ -18,9 +18,9 @@ Transactions are usually serialized to facilitate movement across different envi
 - You may require signatures from different authorities stored in separate environments.
 - You may wish to create a transaction on the frontend, but then send and validate it on the backend before storing it to a database.
 
-For example, when creating NFTs, you may need to sign the transaction with the `collectionAutority` keypair to authorize the NFT into the Collection. To safely sign it, without exposing your keypair, you could first create the transaction in the backend, partially sign the transaction with the `collectionAutority` without having to expose the keypair in a non secure environment, serialize the transaction and then send it. You can then safely deserialize the transactions and sign it with the `Buyer` wallet.
+For example, when creating NFTs, you may need to sign the transaction with the `collectionAuthority` keypair to authorize the NFT into the Collection. To safely sign it, without exposing your keypair, you could first create the transaction in the backend, partially sign the transaction with the `collectionAuthority` without having to expose the keypair in a non secure environment, serialize the transaction and then send it. You can then safely deserialize the transactions and sign it with the `Buyer` wallet.
 
-**Note**: When using the Candy Machine, you don't need the `collectionAutority` signature 
+**Note**: When using the Candy Machine, you don't need the `collectionAuthority` signature 
 
 ## Initial Setup
 
@@ -123,11 +123,11 @@ const umi = createUmi('https://api.devnet.solana.com')
 
 ## Serialization
 
-Serialization of a transaction is the process of converting the transaction object into a series of bytes or string that saves the state of the transction in an easily transmittable form. This allows it to be passed through the likes of a http request.  
+Serialization of a transaction is the process of converting the transaction object into a series of bytes or string that saves the state of the transaction in an easily transmittable form. This allows it to be passed through the likes of a http request.  
 
 Within the serialization example we're going to:  
 - Use the `NoopSigner` to add the `Payer` as `Signer` in the instruction
-- Create a Versioned Transaction and sign it with the `collectionAutority` and the `Asset`
+- Create a Versioned Transaction and sign it with the `collectionAuthority` and the `Asset`
 - Serialize it so all the details are preserved and can be accurately reconstructed by the frontend
 - And send it as a String, instead of a u8, so it can be passed through a request
 
