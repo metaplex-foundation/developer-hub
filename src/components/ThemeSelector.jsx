@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
 import { Listbox } from '@headlessui/react'
 import clsx from 'clsx'
+import { useEffect, useState } from 'react'
 
 const themes = [
   { name: 'Light', value: 'light', icon: LightIcon },
@@ -73,6 +73,18 @@ export function ThemeSelector(props) {
     return () => window.removeEventListener('storage', handler)
   }, [])
 
+  const handle95 = () => {
+    const elements = document.body.getElementsByTagName("*")
+
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style = ""
+      elements[i].classList = ""
+      document.body.style = "background:white"
+      elements[i].tagName === "svg" ? elements[i].remove() : null
+    }
+
+  }
+
   return (
     <Listbox
       as="div"
@@ -123,7 +135,11 @@ export function ThemeSelector(props) {
               </>
             )}
           </Listbox.Option>
+          
         ))}
+        <Listbox.Option onClick={handle95}>
+        <div className='w-full text-center text-neutral-800 dark:text-white cursor-pointer'>&apos;95</div>
+        </Listbox.Option>
       </Listbox.Options>
     </Listbox>
   )
