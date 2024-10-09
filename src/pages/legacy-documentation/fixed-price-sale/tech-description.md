@@ -1,6 +1,6 @@
 ---
 title: Technical Description
-metaTitle: Fixed-Price-Sale - Technical Description
+metaTitle: Technical Description | Fixed Price Sale
 description: Technical Description of the Fixed Price Sale Program
 ---
 

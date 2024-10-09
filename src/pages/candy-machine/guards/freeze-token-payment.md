@@ -1,6 +1,6 @@
 ---
-title: 'Freeze Token Payment'
-metaTitle: 'Candy Machine Guards - Freeze Token Payment'
+title: 'Freeze Token Payment Guard'
+metaTitle: Freeze Token Payment Guard | Candy Machine
 description: 'Set the price of the mint in token amount with a freeze period.'
 ---
 

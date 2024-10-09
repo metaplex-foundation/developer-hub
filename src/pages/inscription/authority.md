@@ -1,6 +1,6 @@
 ---
 title: Inscription Authority
-metaTitle: Inscriptions - Inscription Authority
+metaTitle: Inscription Authority | Inscription
 description: Learn what a Inscription Authority is and where it's stored
 ---
 

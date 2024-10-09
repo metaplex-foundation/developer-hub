@@ -1,6 +1,6 @@
 ---
-title: Core - Getting Started using the JavaScript 
-metaTitle: Core - Getting Started - JavaScript
+title: Getting Started using the JavaScript 
+metaTitle: JavaScript SDK | Core
 description: Get started with Core using the `mpl-core` JavaScript package.
 ---
 

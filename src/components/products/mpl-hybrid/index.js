@@ -6,7 +6,7 @@ export const mplHybrid = {
   name: 'MPL-Hybrid',
   headline: 'Hybrid Assets',
   description: 'Framework and on-chain protocol for hybrid assets.',
-  navigationMenuCatergory: 'Utility',
+  navigationMenuCatergory: 'Create',
   path: 'mpl-hybrid',
   icon: <ArrowsRightLeftIcon />,
   github: '',

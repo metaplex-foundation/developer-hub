@@ -1,6 +1,6 @@
 ---
-title: Core - Burning Assets
-metaTitle: Core - Burning Assets
+title: Burning Assets
+metaTitle: Burning Assets | Core
 description: Learn how to burn Core NFT Assets with the Metaplex Core packages.
 ---
 

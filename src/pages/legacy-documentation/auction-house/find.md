@@ -1,6 +1,6 @@
 ---
 title: Find bids, listings and sales
-metaTitle: Auction House - Find
+metaTitle: Find | Auction House
 description: "Explains how to find bids, listings and sales."
 ---
 ## Introduction

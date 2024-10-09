@@ -103,7 +103,7 @@ Notice how, at this point, no real Assets have been created yet. We are simply l
 
 Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting Assets from it. It’s only at this point that an Asset is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/core-candy-machine/mint) for more details.
 
-Once all Assets have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Managing Candy Machines](/core-candy-machine/manage) for more details.
+Once all Assets have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Withdrawing a Candy Machine](/core-candy-machine/withdrawing-a-candy-machine) for more details.
 
 {% diagram %}
 {% node #action-1 label="4. Delete" theme="pink" /%}

@@ -1,6 +1,6 @@
 ---
-title: Core - Verified Creator Plugin
-metaTitle: Core - Verified Creator Plugin
+title: Verified Creator Plugin
+metaTitle: Verified Creator Plugin | Core
 description: A plugin that stores data which is a list of creators who worked on the Assets/Collection. 
 ---
 

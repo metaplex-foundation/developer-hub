@@ -1,6 +1,6 @@
 ---
 title: hash
-metaTitle: Candy Machine - Sugar - hash
+metaTitle: hash | Sugar
 description: hash command.
 ---
 

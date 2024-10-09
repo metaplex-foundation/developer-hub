@@ -1,6 +1,6 @@
 ---
-title: Core - Burn Delegate
-metaTitle: Core - Burn Delegate
+title: Burn Delegate
+metaTitle: Burn Delegate | Core
 description: Learn about the Core Asset Burn Delegate Plugin. The delegate can burn the Asset at any point in time.
 ---
 

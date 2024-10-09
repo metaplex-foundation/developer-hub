@@ -1,6 +1,6 @@
 ---
 title: Special Guard Instructions
-metaTitle: Candy Machine - Special Guard Instructions
+metaTitle: Special Guard Instructions | Candy Machine
 description: Explains how to execute guard-specific instructions.
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Core - FAQ
-metaTitle: Core - FAQ
+title: FAQ
+metaTitle: FAQ | Core
 description: Frequently asked questions about the Metaplex Core protocol.
 ---
 

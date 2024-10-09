@@ -6,17 +6,17 @@
         "callout",
         "Datas",
         "Devnet",
-        "eddsa",
         "hashlist",
         "Hookable",
         "Irys",
         "Keypair",
+        "Localnet",
         "metadata",
         "metaplex",
         "msgpack",
         "nonblocking",
         "offchain",
-        "pathing",
+        "pdas",
         "Preconfigured",
         "println",
         "Pubkey",
@@ -30,5 +30,8 @@
         "Solscan",
         "Struct",
         "usize"
-    ]
+    ],
+  "editor.codeActionsOnSave": {
+    "source.sortImports": "explicit"
+  }
 }

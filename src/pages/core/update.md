@@ -1,6 +1,6 @@
 ---
-title: Core - Updating Assets
-metaTitle: Core - Updating Assets
+title: Updating Assets
+metaTitle: Updating Assets | Core
 description: Learn how to update Core NFT Assets on using Metaplex packages.
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Core - Transferring Assets
-metaTitle: Core - Transferring Assets
+title: Transferring Assets
+metaTitle: Transferring Assets | Core
 description: Learn how to transfer Core NFT Assets between wallets using Metaplex packages.
 ---
 

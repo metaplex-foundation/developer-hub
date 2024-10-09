@@ -1,6 +1,6 @@
 ---
-title: Core - Create Core Staking Using Javascript
-metaTitle: Core - Create Core Staking Using Javascript
+title: Create Core Staking Using Javascript
+metaTitle: Create Core Staking Using Javascript | Core Guides
 description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking platform using web2 practices with a backend server.
 ---
 

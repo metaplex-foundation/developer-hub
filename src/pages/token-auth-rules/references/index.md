@@ -1,6 +1,6 @@
 ---
 title: API References
-metaTitle: Token Auth Rules - API References
+metaTitle: API References | Token Auth Rules
 description: References and code snippets for Metaplex's Token Auth Rules product.
 ---
 

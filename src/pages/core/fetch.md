@@ -1,6 +1,6 @@
 ---
-title: Core - Fetching Assets
-metaTitle: Core - Fetching Assets
+title: Fetching Assets
+metaTitle: Fetching Assets | Core
 description: Learn how to fetch Core NFT Assets and Collections using the `fetch` functions from the Metaplex Core packages.
 ---
 

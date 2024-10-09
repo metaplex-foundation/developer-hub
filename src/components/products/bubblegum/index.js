@@ -1,11 +1,12 @@
 import {
   changelogSection,
   documentationSection,
+  guidesSection,
   recipesSection,
   referencesSection,
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { ArchiveBoxIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const bubblegum = {
   name: 'Bubblegum',
@@ -73,6 +74,20 @@ export const bubblegum = {
             {
               title: 'Merkle Tree Canopy',
               href: '/bubblegum/merkle-tree-canopy',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      ...guidesSection('bubblegum'),
+      navigation: [
+        {
+          title: 'Javascript',
+          links: [
+            {
+              title: 'How to Create a 1,000,000 NFT Collection on Solana',
+              href: 'guides/javascript/how-to-create-1000000-nfts-on-solana',
             },
           ],
         },

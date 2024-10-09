@@ -1,6 +1,6 @@
 ---
-title: Core - Creating Assets
-metaTitle: Core - Creating Assets
+title: Creating Assets
+metaTitle: Creating Assets | Core
 description: Learn how to create Core NFT Assets on using the Metaplex Core packages.
 ---
 
@@ -35,12 +35,12 @@ const uri = await umi.uploader.uploadJson({
 
 To select the Uploader of your choice using Umi, simply install the plugin provided by the Uploader.
 
-For instance, here is how we can install the NFT.Storage plugin:
+For instance, here is how we can install the Irys plugin:
 
 ```ts
-import { nftStorageUploader } from '@metaplex-foundation/umi-uploader-nft-storage'
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 
-umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
+umi.use(irysUploader())
 ```
 
 {% /totem-accordion %}

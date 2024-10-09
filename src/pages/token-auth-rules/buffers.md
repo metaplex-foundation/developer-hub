@@ -1,6 +1,6 @@
 ---
 title: Using Buffers
-metaTitle: Token Auth Rules - Buffers
+metaTitle: Buffers | Token Auth Rules
 description: Documentation of Token Auth Rule Buffers.
 ---
 

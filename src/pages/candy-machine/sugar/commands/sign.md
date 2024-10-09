@@ -1,6 +1,6 @@
 ---
 title: sign
-metaTitle: Candy Machine - Sugar - sign
+metaTitle: sign | Sugar
 description: sign command.
 ---
 

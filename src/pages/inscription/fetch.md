@@ -1,7 +1,7 @@
 ---
 
 title: Fetching Inscription Data
-metaTitle: Inscriptions - Fetching Inscriptions
+metaTitle: Fetching Inscriptions | Inscription
 description: Learn how to fetch the various onchain accounts of your inscriptions
 ---
 

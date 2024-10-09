@@ -1,6 +1,6 @@
 ---
 title: Shank
-metaTitle: Developer Tools - Shank
+metaTitle: Developer Tools | Shank
 description: extract IDLs from Rust Solana program code
 ---
 

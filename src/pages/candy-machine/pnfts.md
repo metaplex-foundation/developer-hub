@@ -1,6 +1,6 @@
 ---
 title: Programmable NFTs
-metaTitle: Candy Machine - Programmable NFTs
+metaTitle: Programmable NFTs | Candy Machine
 description: Explains how to mint Programmable NFTs from candy machines.
 ---
 

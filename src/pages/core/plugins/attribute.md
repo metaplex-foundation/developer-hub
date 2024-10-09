@@ -1,6 +1,6 @@
 ---
-title: Core - Attribute Plugin
-metaTitle: Core - Attribute Plugin
+title: Attribute Plugin
+metaTitle: Attribute Plugin | Core
 description: The Attribute Plugin stores onchain JSON to an Asset or Collection readable by onchain programs. Learn how to utilize this plugin for gaming and data storage.
 ---
 

@@ -1,11 +1,13 @@
 ---
 title: Umi Guides
-metaTitle: Umi - Guides
+metaTitle: Guides | Umi Guides
 description: How-to guides for Metaplex's Umi client wrapper and RPC client.
 ---
 
-# Coming Soon! Like VERY soon!
+The following Guides for Umi are currently available:
 
-We are currently writing loads of guides to help you bring you ideas to life on the Solana blockchain.
+{% quick-links %}
 
-If you have any guides you would like to see please to feel free to get in contact and lets us know.
+{% quick-link title="Serializing and Deserializing Transactions" icon="CodeBracketSquare" href="/umi/guides/serializing-and-deserializing-transactions" description="Learn how to Serialize and Deserialize Transactions to move them across different environments while using the Metaplex Umi client." /%}  
+
+{% /quick-links %}

@@ -1,6 +1,6 @@
 ---
 title: Cusper
-metaTitle: Developer Tools - Cusper
+metaTitle: Developer Tools | Cusper
 description: resolves Custom Program Errors from Solana program logs or error codes
 ---
 # Cusper

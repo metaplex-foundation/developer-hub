@@ -1,6 +1,6 @@
 ---
 title: Initializing Escrow
-metaTitle: MPL-Hybrid - Initializing Escrow
+metaTitle: Initializing Escrow | MPL-Hybrid
 description: Initializing MPL-Hybrid Escrow
 ---
 

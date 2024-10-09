@@ -1,6 +1,6 @@
 ---
 title: Installation
-metaTitle: Candy Machine - Sugar - Installation
+metaTitle: Installation | Sugar
 description: Sugar installation guide.
 ---
 

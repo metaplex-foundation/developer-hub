@@ -1,6 +1,6 @@
 ---
-title: Core - Print Editions with MPL Core
-metaTitle: Core - Print Editions
+title: Print Editions with MPL Core
+metaTitle: Print Editions | Core Guides
 description: This guide shows you how to combine plugins to create Editions with the Metaplex Core protocol.
 ---
 
@@ -349,6 +349,6 @@ pub async fn create_asset_with_plugin() {
 {% /dialect-switcher %}
 
 ## Further Reading
-- Mint from Candy Machine
+- [Mint from Candy Machine](/core-candy-machine/mint)
 - [Master Edition Plugin](/core/plugins/master-edition)
 - [Edition Plugin](/core/plugins/edition)

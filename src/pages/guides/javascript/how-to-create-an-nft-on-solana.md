@@ -1,6 +1,6 @@
 ---
 title: How to Create an NFT On Solana
-metaTitle: How to Create an NFT On Solana
+metaTitle: How to Create an NFT On Solana | Guides
 description: Learn how to create an NFT on the Solana blockchain with Metaplex packages.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
@@ -40,8 +40,7 @@ When it comes to creating NFTs that are cheap in mass then Bubblegum is the prot
 
 #### Why Use Bubblegum:
 
-- Cheap to deploy: Being a merkletree based product trees are cheap to deploy that can store millions of NFTs if needed.
-- Mass Airdrops: Once a tree is created the cost of airdrop cNFTs is close to non existant
+- Cheap to deploy: Being a Merkle tree based product trees are cheap to deploy that can store millions of NFTs if needed.
+- Mass Airdrops: Once a tree is created the cost of airdrop cNFTs is close to non existent as the storage of the tree has already been paid for.
 
-**Bubblegum Guide Coming Soon!**
-<!-- [Create An cNFT with Bubble](/core/guides/create-and-nft) -->
+[Create 1,000,000 NFTs on Solana with Bubblegum](/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)

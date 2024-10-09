@@ -4,10 +4,6 @@ metaTitle: Asset Mint Limit Guard | Core Candy Machine
 description: "The Core Candy Machine 'Asset Mint Limit' guard restricts minting to holders of a specified collection and limits the amount of mints that can be purchased for a provided Asset on the Core Candy Machine."
 ---
 
-{% callout type="note" %}
-This Guard is currently only available on devnet. [Follow us](https://x.com/metaplex) on twitter to see when it's merged to mainnet!
-{% /callout %}
-
 ## Overview
 
 The Asset Mint Limit guard restricts minting to holders of a specified collection and limits the amount of mints that can be done for a provided Core Asset. It can be considered as a combination of the [NFT Gate](/core-candy-machine/guards/nft-gate) for Core Assets and [Mint Limit](/core-candy-machine/guards/mint-limit) Guard, based on Asset Addresses instead of wallets. 

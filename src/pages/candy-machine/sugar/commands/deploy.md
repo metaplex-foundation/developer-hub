@@ -1,6 +1,6 @@
 ---
 title: deploy
-metaTitle: Candy Machine - Sugar - deploy
+metaTitle: deploy | Sugar
 description: deploy command.
 ---
 
