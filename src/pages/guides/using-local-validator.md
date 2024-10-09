@@ -13,7 +13,7 @@ A **Local Validator** acts as your personal node, providing a local sandbox envi
 
 ### Setup 
 
-To start using the local validator, you'll need to install the **Solana Tools CLI** using the appropriate commands for your operating system.
+To start using the local validator, you'll need to install the Solana Tools CLI using the appropriate commands for your operating system.
 
 {% dialect-switcher title="Installation Commands" %}
 
@@ -45,7 +45,7 @@ After installing the CLI, you can start your local validator by running a simple
 solana-test-validator
 ```
 
-Upon launch, the validator will be accessible at a **local URL(http://127.0.0.1:8899)**. You'll need to establish a connection by configuring your code with this URL.
+Upon launch, the validator will be accessible at a local URL(http://127.0.0.1:8899). You'll need to establish a connection by configuring your code with this URL.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -55,15 +55,13 @@ const umi = createUmi("http://127.0.0.1:8899")
 
 The local validator will generate a directory named `test-ledger` in your user folder. This directory holds all data related to your validator, including accounts and programs. 
 
-To reset your local validator, you can either:
-- **Delete the `test-ledger` folder**, or
-- Use a reset command to restart the validator.
+To reset your local validator, you can either delete the `test-ledger` folder or use a reset command to restart the validator.
 
 Additionally, the `solana-logs` feature is extremely useful for monitoring program outputs during testing.
 
 ## Managing Programs and Accounts
 
-The **Local Validator** doesn’t include specific programs and accounts found on mainnet. It only comes with **Native Programs** and the accounts you create during testing. If you need specific programs or accounts from mainnet, the **Solana CLI** allows you to download and load them onto your local validator.
+The Local Validator doesn’t include specific programs and accounts found on mainnet. It only comes with Native Programs and the accounts you create during testing. If you need specific programs or accounts from mainnet, the Solana CLI allows you to download and load them onto your local validator.
 
 ### Downloading Accounts and Programs:
 
@@ -93,13 +91,19 @@ solana-test-validator --bpf-program <address to load the program to> <path to pr
 
 ## Creating a "Metaplex" Local Validator
 
+{% callout title="Disclaimer" %}
+
+Unfortunately, this part of the guide is available only for users on **Linux** or **MacOS** due to the use of Bash scripts. However, if you're using Windows and still want to follow along to create your own Metaplex validator, you can use the [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+{% /callout %}
+
 With the basics of the local validator setup and management, you can create and manage personalized local validators through **bash scripts**. 
 
-For example, you can create a **`metaplex-test-validator`** that includes main **Metaplex programs** like `mpl-token-metadata`, `mpl-bubblegum`, and `mpl-core`.
+For example, you can create a `metaplex-test-validator` that includes main Metaplex programs like `mpl-token-metadata`, `mpl-bubblegum`, and `mpl-core`.
 
 ### Setting Up Directories and Downloading Program Data
 
-First, you'll create a directory within your path to store the necessary programs for your **local validator**.
+First, you'll create a directory within your path to store the necessary programs for your local validator.
 
 ```
 mkdir ~/.local/share/metaplex-local-validator
@@ -119,7 +123,7 @@ solana program dump -u m CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d ~/.local/s
 
 ### Creating a Validator Script
 
-Next, create a **validator script** that simplifies the process of running your local validator with all the required programs. By scripting the validator setup, you can easily start testing with your personalized environment, including all relevant Metaplex programs.
+Next, create a validator script that simplifies the process of running your local validator with all the required programs. By scripting the validator setup, you can easily start testing with your personalized environment, including all relevant Metaplex programs.
 
 Start by opening a new script file using:
 
