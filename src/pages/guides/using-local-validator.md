@@ -99,7 +99,7 @@ Unfortunately, this part of the guide is available only for users on **Linux** o
 
 With the basics of the local validator setup and management, you can create and manage personalized local validators through **bash scripts**. 
 
-For example, you can create a `metaplex-test-validator` that includes main Metaplex programs like `mpl-token-metadata`, `mpl-bubblegum`, and `mpl-core`.
+For example, you can create a `metaplex-test-validator` that includes the main Metaplex programs: `mpl-token-metadata`, `mpl-bubblegum`, and `mpl-core`.
 
 ### Setting Up Directories and Downloading Program Data
 
@@ -120,6 +120,31 @@ solana program dump -u m BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY ~/.local/s
 ```
 solana program dump -u m CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d ~/.local/share/metaplex-local-validator/mpl-core.so
 ```
+
+{% totem %}
+
+{% totem-accordion title="Additional Metaplex Programs" %}
+
+| Name               | Program ID                                   | 
+| ------------------ | -------------------------------------------- | 
+| Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk  | 
+| Auctioneer         | neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh  | 
+| Bubblegum          | BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY | 
+| Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | 
+| Candy Machine v3   | CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR | 
+| Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d | 
+| Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | 
+| Core Candy Machine | CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J | 
+| Gumdrop            | gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a  |
+| Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  | 
+| Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  | 
+| MPL-Hybrid         | MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb  | 
+| Token Auth Rules   | auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg  | 
+| Token Metadata     | metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s  | 
+
+{% /totem-accordion %}
+
+{% /totem %}
 
 ### Creating a Validator Script
 
