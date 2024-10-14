@@ -1,9 +1,7 @@
 import {
-  changelogSection,
   documentationSection,
   guidesSection,
-  recipesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
 import { ArchiveBoxIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
@@ -13,7 +11,7 @@ export const bubblegum = {
   headline: 'Compressed NFTs',
   description: 'NFTs that scale to new orders of magnitude.',
   path: 'bubblegum',
-  navigationMenuCatergory: 'Create',
+  navigationMenuCatergory: 'MPL',
   icon: <ArchiveBoxIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',

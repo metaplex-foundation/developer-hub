@@ -1,12 +1,12 @@
 import { documentationSection, referencesSection } from '@/shared/sections'
-import { Hero } from './Hero'
 import { Square3Stack3DIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const coreCandyMachine = {
   name: 'Core Candy Machine',
   headline: 'Core Asset launchpad',
   description: 'Launch your next MPL Core Asset collection on Solana.',
-  navigationMenuCatergory: 'Commerce',
+  navigationMenuCatergory: 'MPL',
   path: 'core-candy-machine',
   icon: <Square3Stack3DIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-core-candy-machine',
