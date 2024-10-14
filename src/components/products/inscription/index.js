@@ -2,8 +2,8 @@ import {
   documentationSection,
   referencesSection
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const inscription = {
   name: 'Inscription',
@@ -11,7 +11,7 @@ export const inscription = {
   description: 'Inscribe Data to Solana state.',
   path: 'inscription',
   icon: <PencilSquareIcon />,
-  navigationMenuCatergory: 'Create',
+  navigationMenuCatergory: 'MPL',
   github: 'https://github.com/metaplex-foundation/mpl-inscription',
   className: 'accent-green',
   heroes: [{ path: '/inscription', component: Hero }],

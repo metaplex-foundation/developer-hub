@@ -11,7 +11,7 @@ export const core = {
   name: 'Core',
   headline: 'Next gen NFT standard',
   description: 'Next generation Solana NFT standard.',
-  navigationMenuCatergory: 'Create',
+  navigationMenuCatergory: 'MPL',
   path: 'core',
   icon: <StopCircleIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-core',

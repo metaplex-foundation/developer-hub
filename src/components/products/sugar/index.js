@@ -1,11 +1,5 @@
-import {
-  changelogSection,
-  documentationSection,
-  recipesSection,
-  referencesSection,
-} from '@/shared/sections'
-import { Hero } from './Hero'
 import { CommandLineIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const sugar = {
   name: 'Sugar',

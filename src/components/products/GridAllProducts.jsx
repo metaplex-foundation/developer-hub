@@ -1,12 +1,15 @@
-import clsx from 'clsx'
-import { products as allProducts, productCategories } from './index'
-import Link from 'next/link'
 import { Grid } from './Grid'
+import { productCategories } from './index'
 
 export function MarkdocGrid() {
   return (
     <div className="not-prose">
       {productCategories.map((item, index) => {
+
+        console.log(item)
+
+        if (item === 'Aura') return
+
         return (
           <>
             <h2 key={index} className="mb-4 mt-8 text-2xl font-bold">
@@ -16,6 +19,7 @@ export function MarkdocGrid() {
               key={index}
               withoutFallback
               menuItem={productCategories[index]}
+              
             />
           </>
         )

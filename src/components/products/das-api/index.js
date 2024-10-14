@@ -3,9 +3,9 @@ import {
   documentationSection,
   recipesSection,
   referencesSection,
-} from '@/shared/sections';
-import { TableCellsIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
+} from '@/shared/sections'
+import { TableCellsIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const das = {
   name: 'DAS API',
