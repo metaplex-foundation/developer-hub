@@ -145,7 +145,7 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 const signer = createSignerFromKeypair(umi, keypair);
 
 // Tell Umi to use the new signer.
-umi.use(signerIdentity(walletFile))
+umi.use(signerIdentity(signer))
 ```
 
 {% /totem-accordion %}
