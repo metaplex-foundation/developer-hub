@@ -30,3 +30,6 @@ NEXT_PUBLIC_DOCSEARCH_APP_ID=
 NEXT_PUBLIC_DOCSEARCH_API_KEY=
 NEXT_PUBLIC_DOCSEARCH_INDEX_NAME=
 ```
+## Note
+
+This repo is made available pursuant to the Tailwind UI License (https://tailwindui.com/license). Please carefully review the terms of the Tailwind UI License if you are considering forking this repo.
