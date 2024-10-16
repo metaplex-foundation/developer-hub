@@ -136,7 +136,7 @@ pub fn hash_offer(
 
 ## Types
 
-Bakstag is an Omnichain OTC Market, supporting both crosschain and monochain trades.
+Bakstag is an Omnichain OTC Market, supporting both crosschain and monochain offers.
 
 ### Crosschain
 
@@ -144,7 +144,7 @@ In crosschain trades, users can exchange assets between different blockchains po
 
 ### Monochain
 
-We also support monochain offers, where both assets are on the same blockchain. For example, you can sell ETH on Base for USDC on Base.
+In monochain offers both assets are on the same blockchain. In this case source endpoint ID equals destination endpoint ID. For example, you can sell ETH on Base for USDC on Base.
 
 ### Token support
 
@@ -152,3 +152,5 @@ We support both native tokens and standard fungible tokens:
 
 - **Native Tokens:** ETH, SOL, TRX, etc.
 - **Fungible Tokens:** ERC20, SPL, TRC20, etc.
+
+In case of native token, token address is set to null bytes.
