@@ -87,7 +87,7 @@ Once the entire amount in the offer has been purchased by buyers, the advertiser
 In the next steps, advertisers will also have the option to **refill** the offer instead of canceling it entirely.
 
 {% diagram %}
-{% node #action label="#. Refill" theme="purple" /%}
+{% node #action label="Refill" theme="purple" /%}
 {% node parent="action" x="250" %}
 {% node #offer label="Offer #ID" theme="pink" /%}
 {% /node %}

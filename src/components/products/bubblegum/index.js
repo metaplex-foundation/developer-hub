@@ -33,6 +33,10 @@ export const bubblegum = {
           title: 'Features',
           links: [
             {
+              title: 'Offer',
+              href: '/bubblegum/offer',
+            },
+            {
               title: 'Creating Bubblegum Trees',
               href: '/bubblegum/create-trees',
             },
