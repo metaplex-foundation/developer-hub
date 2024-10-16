@@ -10,7 +10,6 @@ An offer is the core component of the OTC Market. Each offer is composed of a un
 Every offer can be interpreted either as a sell or a buy offer. For example, selling 100 SOL for 1 ETH is equivalent to buying 1 ETH for 100 SOL. However, when it comes to technical details, we strictly adhere to sell offers.
 {% /callout %}
 
-
 ## Parameters
 
 The main parameters of the offer are:
@@ -131,6 +130,73 @@ pub fn hash_offer(
 ```
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Lifecycle
+
+The very first step is for the advertiser to **create** a new offer with the desired parameters.
+
+{% diagram %}
+{% node #action label="1. Create" theme="blue" /%}
+{% node parent="action" x="300" %}
+{% node #offer label="Offer #ID" theme="pink" /%}
+{% node label="Parameters" /%}
+{% /node %}
+{% edge from="action" to="offer" path="straight" label="create offer parameters" /%}
+{% /diagram %}
+
+The created offer keeps track of its own parameters which helps us understand its type and how to handle it.
+
+We will see how to create offers in more details [in the following page](/bubblegum/concurrent-merkle-trees).
+
+After the offer is created, buyers can see and **accept** it in whole or in part.
+
+{% diagram %}
+{% node #action label="2. Accept" theme="green" /%}
+{% node parent="action" x="300" %}
+{% node #offer label="Offer #ID" theme="pink" /%}
+{% /node %}
+{% edge from="action" to="offer" path="straight" label="accept offer parameters" /%}
+{% /diagram %}
+
+Buyers accept the offer by interacting with the smart contract on the offer's destination chain.
+
+**Example:**
+
+- **Offer**: Selling 10 ETH (Base) for 10 SOL (Solana).
+  
+  - **Advertiser**:
+    - Holds ETH on the Base chain.
+    - Interacts with the OTC Market smart contract on the Base chain to create the offer.
+  
+  - **Buyer**:
+    - Holds SOL on the Solana chain.
+    - Interacts with the OTC Market smart contract on the Solana chain to accept the offer.
+
+Once the entire amount in the offer has been purchased by buyers, the advertiser can **cancel** the offer, allowing them to create a new offer with the same parameters. This will also free some storage on the blockchain and return the rent to the advertiser (on Solana).
+
+{% diagram %}
+{% node #action label="3. Cancel" theme="red" /%}
+{% node parent="action" x="250" %}
+{% node #offer label="Offer #ID" theme="pink" /%}
+{% /node %}
+{% edge from="action" to="offer" path="straight" /%}
+{% /diagram %}
+
+In the next steps, advertisers will also have the option to **refill** the offer instead of canceling it entirely.
+
+{% diagram %}
+{% node #action label="Refill" theme="purple" /%}
+{% node parent="action" x="250" %}
+{% node #offer label="Offer #ID" theme="pink" /%}
+{% /node %}
+{% edge from="action" to="offer" path="straight" label="refill offer parameters" /%}
+{% /diagram %}
+
+Overall, the lifecycle of an offer follows the following path:
+
+{% figure src="/assets/bakstag/lifecycle.svg" alt="Offer lifecycle (Created, Accepted, Refilled, Canceled)" caption="Offer lifecycle" /%}
+
+We will discuss each of these actions in detail [in the features section](/bubblegum/concurrent-merkle-trees).
 
 ## Types
 
