@@ -67,19 +67,88 @@ struct Offer {
 #[account]
 #[derive(InitSpace)]
 pub struct Offer {
-    pub src_seller_address: [u8; 32],
-    pub dst_seller_address: [u8; 32],
-    pub src_eid: u32,
-    pub dst_eid: u32,
-    pub src_token_address: [u8; 32],
-    pub dst_token_address: [u8; 32],
-    pub src_amount_sd: u64,
-    pub exchange_rate_sd: u64,
+  pub src_seller_address: [u8; 32],
+  pub dst_seller_address: [u8; 32],
+  pub src_eid: u32,
+  pub dst_eid: u32,
+  pub src_token_address: [u8; 32],
+  pub dst_token_address: [u8; 32],
+  pub src_amount_sd: u64,
+  pub exchange_rate_sd: u64,
 
-    pub bump: u8,
+  pub bump: u8,
 }
 ```
 {% /dialect %}
 {% /dialect-switcher %}
 
 Addresses use `bytes32` for handling non-EVM chains. Source amount and exchange rate are represented in `uint64` and expressed in [shared decimals](/).
+
+## ID
+
+Offers are identified globally by their unique identifier. Once an advertiser creates an offer, they cannot recreate it with the same parameters.
+
+The offer ID is derived hashing source seller address, path, token pair, and exchange rate.
+
+{% dialect-switcher title="Hash offer" %}
+{% dialect title="Solidity" id="solidity" %}
+```solidity
+function hashOffer(
+  bytes32 _srcSellerAddress,
+  uint32 _srcEid,
+  uint32 _dstEid,
+  bytes32 _srcTokenAddress,
+  bytes32 _dstTokenAddress,
+  uint64 _exchangeRateSD
+) public pure virtual override returns (bytes32 offerId) {
+  offerId = keccak256(
+      abi.encodePacked(_srcSellerAddress, _srcEid, _dstEid, _srcTokenAddress, _dstTokenAddress, _exchangeRateSD)
+  );
+}
+```
+{% /dialect %}
+{% dialect title="Rust" id="rust" %}
+```rust
+use anchor_lang::solana_program::keccak::hash;
+
+pub fn hash_offer(
+  src_seller_address: &[u8; 32],
+  src_eid: u32,
+  dst_eid: u32,
+  src_token_address: &[u8; 32],
+  dst_token_address: &[u8; 32],
+  exchange_rate_sd: u64
+) -> [u8; 32] {
+  hash(
+      &[
+          src_seller_address,
+          &src_eid.to_be_bytes()[..],
+          &dst_eid.to_be_bytes()[..],
+          src_token_address,
+          dst_token_address,
+          &exchange_rate_sd.to_be_bytes()[..],
+      ].concat()
+  ).to_bytes()
+}
+```
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Types
+
+Bakstag is an Omnichain OTC Market, supporting both crosschain and monochain trades.
+
+### Crosschain
+
+In crosschain trades, users can exchange assets between different blockchains possible with LayerZero messaging. For example, you can sell ETH on Base and receive SOL on Solana in return. This allows users to trade assets across chains without bridging or wrapping.
+
+### Monochain
+
+We also support monochain offers, where both assets are on the same blockchain. For example, you can sell ETH on Base for USDC on Base.
+
+### Token support
+
+We support both native tokens and standard fungible tokens:
+
+- **Native Tokens:** ETH, SOL, TRX, etc.
+- **Fungible Tokens:** ERC20, SPL, TRC20, etc.
