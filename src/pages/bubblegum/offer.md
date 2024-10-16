@@ -28,8 +28,6 @@ The main parameters of the offer are:
   - **Source Amount:** The total amount of the source token to sell. Locked in the [Escrow](/) when the offer is created.
   - **Exchange Rate:** The number of destination tokens paid by the buyer for each source token [dst/src].
 
-Later on we will use source meaning offer's source and destination meaning offer's destination.
-
 {% diagram %}
 {% node %}
 {% node label="Offer" /%}
