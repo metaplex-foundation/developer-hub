@@ -9,14 +9,14 @@ import { ArchiveBoxIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
 
 export const bubblegum = {
-  name: 'Bubblegum',
-  headline: 'Compressed NFTs',
-  description: 'NFTs that scale to new orders of magnitude.',
+  name: 'Bakstag',
+  headline: 'P2P DEX',
+  description: 'Omnichain OTC Market.',
   path: 'bubblegum',
   navigationMenuCatergory: 'Create',
   icon: <ArchiveBoxIcon />,
-  github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
-  className: 'accent-green',
+  github: 'https://github.com/bakstag-finance',
+  className: 'accent-blue',
   heroes: [{ path: '/bubblegum', component: Hero }],
   sections: [
     {
@@ -27,8 +27,6 @@ export const bubblegum = {
           links: [
             { title: 'Overview', href: '/bubblegum' },
             { title: 'Getting started', href: '/bubblegum/getting-started' },
-            { title: 'Metaplex DAS API RPCs', href: '/rpc-providers' },
-            { title: 'FAQ', href: '/bubblegum/faq' },
           ],
         },
         {

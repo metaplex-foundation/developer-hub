@@ -4,7 +4,7 @@ import { HeroCode } from '@/components/HeroCode'
 export function Hero({ page }) {
   return (
     <BaseHero page={page} light2Off light3Off>
-      <svg
+      {/* <svg
         width="380"
         height="243"
         viewBox="0 0 380 243"
@@ -274,7 +274,7 @@ export function Hero({ page }) {
             <stop offset="1" stopColor="#16A34A" />
           </linearGradient>
         </defs>
-      </svg>
+      </svg> */}
     </BaseHero>
   )
 }
