@@ -80,9 +80,15 @@ export const guides = {
               updated: null, // null means it's never been updated
             },
             {
-              title: 'Transferring Tokens',
-              href: '/guides/javascript/how-to-transfer-spl-tokens-on-solana',
+              title: 'How to Add Metadata to a Solana Token',
+              href: '/guides/javascript/how-to-create-a-solana-token',
               created: '2024-06-16',
+              updated: null, // null means it's never been updated
+            },
+            {
+              title: 'Transferring Tokens',
+              href: '/guides/javascript/how-to-add-metadata-to-spl-tokens',
+              created: '2024-10-01',
               updated: '06-22-2024', // null means it's never been updated
             },
             {
