@@ -51,12 +51,13 @@ The onchain account structure of an MPL-404 Escrow [Link](https://github.com/met
 The name of your escrow.
 
 ```ts
-name: "My Test Escrow"
+name: 'My Test Escrow'
 ```
 
 #### uri
 
 This is the base uri for your metadata pool. This needs to be a static uri which also contains your metadata json files at sequential destination. ie:
+
 ```
 https://shdw-drive.genesysgo.net/.../0.json
 https://shdw-drive.genesysgo.net/.../1.json
@@ -64,7 +65,7 @@ https://shdw-drive.genesysgo.net/.../2.json
 ```
 
 ```ts
-uri: "https://shdw-drive.genesysgo.net/<bucket-id>/"
+uri: 'https://shdw-drive.genesysgo.net/<bucket-id>/'
 ```
 
 #### escrow
@@ -72,12 +73,12 @@ uri: "https://shdw-drive.genesysgo.net/<bucket-id>/"
 The escrow address is a PDA of the two following seeds `["escrow", collectionAddress]`.
 
 ```ts
-const collectionAddress = publicKey("11111111111111111111111111111111")
+const collectionAddress = publicKey('11111111111111111111111111111111')
 
 const escrowAddress = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
-    string({ size: "variable" }).serialize("escrow"),
-    publicKeySerializer().serialize(collectionAddress),
-  ]);
+  string({ size: 'variable' }).serialize('escrow'),
+  publicKeySerializer().serialize(collectionAddress),
+])
 ```
 
 #### collection
@@ -85,15 +86,15 @@ const escrowAddress = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
 The collection address being used in your MPL Hybrid 404 project.
 
 ```ts
-collection: publicKey("11111111111111111111111111111111")
+collection: publicKey('11111111111111111111111111111111')
 ```
 
 #### token
 
-The Token mint address that is being used in your MPL Hybrid 404 project. 
+The Token mint address that is being used in your MPL Hybrid 404 project.
 
 ```ts
-token: publicKey("11111111111111111111111111111111")
+token: publicKey('11111111111111111111111111111111')
 ```
 
 #### feeLocation
@@ -101,7 +102,7 @@ token: publicKey("11111111111111111111111111111111")
 The wallet address which will be receiving the fees from the swaps.
 
 ```ts
-feeLocation: publicKey("11111111111111111111111111111111")
+feeLocation: publicKey('11111111111111111111111111111111')
 ```
 
 #### feeAta
@@ -110,9 +111,9 @@ The Token Account of the wallet that will be receiving the tokens.
 
 ```ts
 feeAta: findAssociatedTokenPda(umi, {
-    mint: publicKey("111111111111111111111111111111111"),
-    owner: publicKey("22222222222222222222222222222222"),
-  });
+  mint: publicKey('111111111111111111111111111111111'),
+  owner: publicKey('22222222222222222222222222222222'),
+})
 ```
 
 #### min and max
@@ -126,6 +127,7 @@ Highest index: 4999.json
 ```
 
 This would then translate into the min and max args.
+
 ```ts
 min: 0,
 max: 4999
@@ -136,26 +138,26 @@ max: 4999
 There are 3 separate fees that can be set.
 
 ```ts
-// Amount of tokens to receive when swapping an NFT to tokens. 
-// This value is in lamports and you will need to take into account 
-// the number of decimals the token has. If the token has 5 decimals 
+// Amount of tokens to receive when swapping an NFT to tokens.
+// This value is in lamports and you will need to take into account
+// the number of decimals the token has. If the token has 5 decimals
 // and you wish to charge 1 whole token then feeAmount would be `100000`.
 
 amount: swapToTokenValueReceived,
 ```
 
 ```ts
-// Fee amount to pay when swapping Tokens to an NFT. This value is 
-// in lamports and you will need to take into account the number of 
-// decimals the token has. If the token has 5 decimals and you wish 
+// Fee amount to pay when swapping Tokens to an NFT. This value is
+// in lamports and you will need to take into account the number of
+// decimals the token has. If the token has 5 decimals and you wish
 // to charge 1 whole token then feeAmount would be `100000`.
 
 feeAmount: swapToNftTokenFee,
 ```
 
 ```ts
-// Optional fee to pay when swapping from Tokens to NFT. 
-// This is in lamports so you can use `sol()` to calculate 
+// Optional fee to pay when swapping from Tokens to NFT.
+// This is in lamports so you can use `sol()` to calculate
 // the lamports.
 
 solFeeAmount: sol(0.5).basisPoints,
@@ -179,38 +181,37 @@ The `SPL_ASSOCIATED_TOKEN_PROGRAM_ID` can be pulled from the `mpl-toolbox` packa
 associatedTokenProgram: SPL_ASSOCIATED_TOKEN_PROGRAM_ID,
 ```
 
-
 ### Code
 
 ```ts
 const initTx = await initEscrowV1(umi, {
-    // Escrow Name
-    name: escrowName,
-    // Metadata Pool Base Uri
-    uri: baseMetadataPoolUri,
-    // Escrow Address based on "escrow" + collection address seeds
-    escrow: escrowAddress,
-    // Collection Address
-    collection: collectionAddress,
-    // Token Mint
-    token: tokenMint,
-    // Fee Wallet
-    feeLocation: feeWallet,
-    // Fee Token Account
-    feeAta: feeTokenAccount,
-    // Min index of NFTs in the pool
-    min: minAssetIndex,
-    // Max index of NFTs in the pool
-    max: maxAssetIndex,
-    // Amount of fungible token to swap to
-    amount: swapToTokenValueReceived,
-    // Fee amount to pay when swapping to NFTs
-    feeAmount: swapToNftTokenFee,
-    // Optional additional fee to pay when swapping to NFTs
-    solFeeAmount: sol(0.5).basisPoints,
-    // Reroll metadata on swap 0 = true, 1 = false
-    path: rerollEnabled,
-    // Associated Token Program ID
-    associatedTokenProgram: SPL_ASSOCIATED_TOKEN_PROGRAM_ID,
-  }).sendAndConfirm(umi);
+  // Escrow Name
+  name: escrowName,
+  // Metadata Pool Base Uri
+  uri: baseMetadataPoolUri,
+  // Escrow Address based on "escrow" + collection address seeds
+  escrow: escrowAddress,
+  // Collection Address
+  collection: collectionAddress,
+  // Token Mint
+  token: tokenMint,
+  // Fee Wallet
+  feeLocation: feeWallet,
+  // Fee Token Account
+  feeAta: feeTokenAccount,
+  // Min index of NFTs in the pool
+  min: minAssetIndex,
+  // Max index of NFTs in the pool
+  max: maxAssetIndex,
+  // Amount of fungible token to swap to
+  amount: swapToTokenValueReceived,
+  // Fee amount to pay when swapping to NFTs
+  feeAmount: swapToNftTokenFee,
+  // Optional additional fee to pay when swapping to NFTs
+  solFeeAmount: sol(0.5).basisPoints,
+  // Reroll metadata on swap 0 = true, 1 = false
+  path: rerollEnabled,
+  // Associated Token Program ID
+  associatedTokenProgram: SPL_ASSOCIATED_TOKEN_PROGRAM_ID,
+}).sendAndConfirm(umi)
 ```
