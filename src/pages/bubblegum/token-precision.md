@@ -158,7 +158,7 @@ pub fn remove_dust(amount_ld: u64, decimal_conversion_rate: u64) -> (u64, u64) {
 
 #### Accept offer
 
-Let's say buyer wants to accept the offer in whole, **source amount = 1.234567 SOL** (**= 1234567** in shared decimals).
+Let's say buyer wants to accept the offer in whole, **source amount = 1.234567 ETH** (**= 1234567** in shared decimals).
 They provide the desired source amount in shared decimals.
 
 OTC Market will:
