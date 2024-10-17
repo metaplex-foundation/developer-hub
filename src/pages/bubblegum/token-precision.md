@@ -213,3 +213,5 @@ pub fn to_dst_amount(
 ```
 {% /dialect %}
 {% /dialect-switcher %}
+
+4. Transfer destination amount in local decimals from the buyer to the seller destination address.
