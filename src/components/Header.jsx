@@ -1,16 +1,14 @@
-import React from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Search } from '@/components/Search'
 import { ThemeSelector } from '@/components/ThemeSelector'
+import { categoryToColor, IconWithName } from '@/components/products/IconWithName'
 import { Sections } from '@/components/products/Sections'
 import { SwitcherDialog } from '@/components/products/SwitcherDialog'
-import { IconWithName } from '@/components/products/IconWithName'
 import NavList from './NavList'
-import { categoryToColor } from '@/components/products/IconWithName'
 import { Logo } from './products/global/Logo'
 
 export function Header({ page }) {
@@ -55,10 +53,10 @@ export function Header({ page }) {
                 <Logo className="h-8 w-8" />
                 <div className="ml-4 flex flex-1 flex-col justify-center text-left">
                   <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
-                    Metaplex
+                    Bakstag
                   </div>
                   <div className="mt-1 text-sm leading-none text-slate-500 dark:text-slate-400">
-                    Developer Hub
+                    OTC Market
                   </div>
                 </div>
               </div>

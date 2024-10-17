@@ -1,11 +1,11 @@
 'use client'
 
 import { Popover } from '@headlessui/react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { SwitcherPopover } from './products/SwitcherPopover'
 import { productCategories } from './products/index'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
 
 const NavList = () => {
 
@@ -24,13 +24,16 @@ const NavList = () => {
           </div>
         )
       })}
-      <div className="hidden flex-col lg:flex">
-        <Link href="/guides">
+      <Link href="https://bakstag-landing.vercel.app/" target='_blank'>
         <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
-          Guides
+          Explore
         </div>
-        </Link>
-      </div>
+      </Link>
+      <Link href="https://bakstag-frontend.vercel.app/" target='_blank'>
+        <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
+          Exchange
+        </div>
+      </Link>
     </div>
   )
 }

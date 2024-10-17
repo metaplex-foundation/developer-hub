@@ -1,9 +1,5 @@
 import {
-  changelogSection,
   documentationSection,
-  guidesSection,
-  recipesSection,
-  referencesSection,
 } from '@/shared/sections'
 import { ArchiveBoxIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
@@ -84,25 +80,6 @@ export const bubblegum = {
           ],
         },
       ],
-    },
-    {
-      ...guidesSection('bubblegum'),
-      navigation: [
-        {
-          title: 'Javascript',
-          links: [
-            {
-              title: 'How to Create a 1,000,000 NFT Collection on Solana',
-              href: 'guides/javascript/how-to-create-1000000-nfts-on-solana',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      ...referencesSection('bubblegum'),
-      href: 'https://mpl-bubblegum.typedoc.metaplex.com/',
-      target: '_blank'
     },
   ],
 }

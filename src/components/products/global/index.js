@@ -3,13 +3,13 @@ import { Hero } from './Hero'
 import { Logo } from './Logo'
 
 export const global = {
-  name: 'Metaplex',
-  headline: 'Developer Hub',
-  description: 'One place for all Metaplex developer resources.',
+  name: 'Bakstag',
+  headline: 'P2P DEX',
+  description: 'Omnichain OTC Market.',
   path: '',
   isFallbackProduct: true,
   icon: <Logo />,
-  github: 'https://github.com/metaplex-foundation',
+  github: 'https://github.com/bakstag-finance',
   className: 'accent-sky',
   heroes: [{ path: '/', component: Hero }],
   sections: [
@@ -20,30 +20,34 @@ export const global = {
           title: 'Overview',
           links: [
             { title: 'Introduction', href: '/' },
-            { title: 'Programs and Tools', href: '/programs-and-tools' },
+            { title: 'Getting started', href: '/getting-started' },
+            {
+              title: 'Offer',
+              href: '/offer',
+            },
           ],
         },
         {
-          title: 'Resources',
+          title: 'Settings',
           links: [
-            { title: 'Official Links', href: '/official-links' },
-            { title: 'Developer Tools', href: '/developer-tools' },
             {
-              title: 'Understanding Programs',
-              href: '/understanding-programs',
+              title: 'Token Precision',
+              href: '/token-precision',
             },
-            {title: "Metaplex Rust SDKs", href: '/guides/rust/metaplex-rust-sdks'},
-            { title: 'RPC Providers', href: '/rpc-providers' },
-            { title: 'Storage Providers', href: '/storage-providers' },
-            { title: 'Stability Index', href: '/stability-index' },
-            { title: 'Protocol Fees', href: '/protocol-fees' },
+          ],
+        },
+        {
+          title: 'Features',
+          links: [
+            {
+              title: 'Create Offer',
+              href: '/',
+            },
           ],
         },
         {
           title: 'Community',
           links: [
-            { title: 'Community Guides', href: '/community-guides' },
-            { title: 'Security', href: '/security' },
             { title: 'Contact Us', href: '/contact' },
           ],
         },

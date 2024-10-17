@@ -6,8 +6,8 @@ export function Hero({ page }) {
   return (
     <BaseHero
       page={page}
-      title="Developer Hub"
-      primaryCta={{ title: 'Browse our Products', href: '/programs-and-tools' }}
+      title="Bakstag"
+      primaryCta={{ title: 'Exchange', href: 'https://bakstag-frontend.vercel.app/' }}
       light2Off
       light3Off
     >

@@ -1,19 +1,13 @@
 ---
 title: Contact Us
-metaTitle: Contact Us | Developer Hub
-description: How to reach out to the Metaplex team.
+metaTitle: Contact Us | Bakstag
+description: How to reach out to the Bakstag team.
 ---
 
 ## Social
 
-- [Discord][]
-- [Twitter][]
-- [GitHub][]
+- [Telegram][]
+- [X][]
 
-## Security issues
-
-To report a security issue, please follow the guidance on our [security](/security) page.
-
-[discord]: https://discord.com/invite/metaplex
-[twitter]: https://twitter.com/metaplex
-[github]: https://github.com/metaplex-foundation
+[telegram]: https://t.me/+DmgZ6hqjajgwYWM6
+[x]: https://x.com/BakstagFi

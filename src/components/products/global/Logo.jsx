@@ -16,3 +16,18 @@ export function Logo({ className, ...props }) {
     </svg>
   )
 }
+
+
+
+// import Image from "next/image"
+
+// export function Logo({ className, ...props }) {
+//   return (
+//     <Image
+//     src="/blue.png"
+//     width={112}
+//     height={112}
+//     alt="Logo of Bakstag"
+//   />
+//   )
+// }
