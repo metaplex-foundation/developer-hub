@@ -39,14 +39,14 @@ export function Header({ page }) {
           <MobileNavigation page={page} />
         </div>
         <div className="relative flex flex-grow basis-0 items-center">
-          <div className="hidden flex-col lg:flex">
+          <div className="hidden flex-col sm:flex">
             <Link href={`/`}>
-              {React.cloneElement(page.product.icon, {
+              {/* {React.cloneElement(page.product.icon, {
                 color: categoryToColor.get(
                   page.product.navigationMenuCatergory
                 ),
                 className: 'h-8 w-8 sm:hidden',
-              })}
+              })} */}
               {/* <IconWithName product={page.product} className="hidden sm:flex" /> */}
               {/* {console.log(page.product)} */}
               <div className="flex">
@@ -62,28 +62,23 @@ export function Header({ page }) {
               </div>
             </Link>
           </div>
-          <div className="flex flex-col lg:hidden">
+          {/* <div className="flex flex-col lg:hidden">
             <SwitcherDialog>
               {({ setIsOpen }) => (
                 <button
                   onClick={() => setIsOpen(true)}
                   className="-mx-4 -my-2 rounded-lg px-4 py-2"
                 >
-                  {React.cloneElement(page.product.icon, {
-                    color: categoryToColor.get(
-                      page.product.navigationMenuCatergory
-                    ),
-                    className: 'h-8 w-8 sm:hidden',
-                  })}
+                  <Logo className="h-8 w-8" />
                   <IconWithName
                     product={page.product}
-                    className="hidden sm:flex"
+                    // className="hidden sm:flex"
                     description={true}
                   />
                 </button>
               )}
             </SwitcherDialog>
-          </div>
+          </div> */}
         </div>
 
         <NavList />

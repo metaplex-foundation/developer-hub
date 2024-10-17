@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { Dialog } from '@headlessui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Dialog } from '@headlessui/react'
+import { useEffect, useState } from 'react'
 
 import { Navigation } from '@/components/Navigation'
 import { Sections } from '@/components/products/Sections'
@@ -87,7 +87,7 @@ export function MobileNavigation({ page }) {
               <IconWithName product={page.product} />
             </Link>
           </div>
-          {page.product.name != 'Metaplex' && (
+          {/* {page.product.name != 'Metaplex' && (
             <>
               <Link
                 href="/programs-and-tools"
@@ -96,7 +96,7 @@ export function MobileNavigation({ page }) {
                 <ComputerDesktopIcon height={20} /> Programs and Tools
               </Link>
             </>
-          )}
+          )} */}
           {page.product.sections && page.product.sections.length > 1 && (
             <Sections
               className="-ml-2 mt-6 flex flex-col gap-2"

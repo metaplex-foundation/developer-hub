@@ -2,32 +2,135 @@ import clsx from 'clsx'
 
 export function Logo({ className, ...props }) {
   return (
-    <svg
+    <>
+     <svg
       width="112"
       height="112"
       viewBox="0 0 112 112"
       xmlns="http://www.w3.org/2000/svg"
-      className={clsx('fill-slate-900 dark:fill-slate-100', className)}
+      className={clsx('dark:hidden', className)}
       {...props}
     >
-      <path d="M111.712 89.3819C112.649 90.9852 111.492 92.9998 109.634 92.9998H88.7318C87.8777 92.9998 87.0879 92.5474 86.656 91.8105L46.0955 22.6205C45.1557 21.0173 46.3123 19 48.1712 19H69.1906C70.0457 19 70.8366 19.4537 71.2679 20.1916L111.712 89.3819Z" />
-      <path d="M55.5027 70.5526C55.9845 71.3624 55.9481 72.3784 55.4101 73.1519L43.7707 89.8792C42.7676 91.3206 40.6051 91.2377 39.7162 89.7231L0.333968 22.6189C-0.606477 21.0165 0.550995 19 2.41125 19H23.4572C24.3066 19 25.0932 19.4469 25.5271 20.176L55.5027 70.5526Z" />
-      <path d="M18.9993 88.7289C19.9512 90.334 18.7947 92.3647 16.9287 92.3647H2.49828C1.16868 92.3647 0.0908203 91.2868 0.0908203 89.9575V65.6304C0.0908203 63.1823 3.31983 62.2966 4.56882 64.4021L18.9993 88.7289Z" />
+      <path d="M9.33325 56H102.667" stroke="url(#paint0_linear_5059_9012)" style={{ strokeWidth: "10.4422" }} stroke-linecap="round"/>
+      <path d="M56 102.667L56 9.33317" stroke="url(#paint1_linear_5059_9012)" style={{ strokeWidth: "10.4422" }} stroke-linecap="round"/>
+      <path d="M23.0017 88.9985L88.9983 23.0019" stroke="url(#paint2_linear_5059_9012)" style={{ strokeWidth: "10.4422" }} stroke-linecap="round"/>
+      <path d="M23.0017 23.0015L88.9983 88.9981" stroke="url(#paint3_linear_5059_9012)" style={{ strokeWidth: "10.4422" }} stroke-linecap="round"/>
+      <defs>
+        <linearGradient id="paint0_linear_5059_9012" x1="9.33325" y1="56.5" x2="102.667" y2="56.5" gradientUnits="userSpaceOnUse">
+          <stop style={{ stopColor: "black", stopOpacity: 1 }} />
+          <stop offset="0.35" stopOpacity="0" style={{ stopColor: "none", stopOpacity: 0 }} />
+          <stop offset="0.65" stopOpacity="0" style={{ stopColor: "none", stopOpacity: 0 }} />
+          <stop offset="1" style={{ stopColor: "black", stopOpacity: 1 }} />
+        </linearGradient>
+        <linearGradient id="paint1_linear_5059_9012" x1="56.5" y1="102.667" x2="56.5" y2="9.33317" gradientUnits="userSpaceOnUse">
+          <stop style={{ stopColor: "black", stopOpacity: 1 }} />
+          <stop offset="0.35" stopOpacity="0" style={{ stopColor: "none", stopOpacity: 0 }} />
+          <stop offset="0.65" stopOpacity="0" style={{ stopColor: "none", stopOpacity: 0 }} />
+          <stop offset="1" style={{ stopColor: "black", stopOpacity: 1 }} />
+        </linearGradient>
+        <linearGradient id="paint2_linear_5059_9012" x1="23.3553" y1="89.3521" x2="89.3519" y2="23.3555" gradientUnits="userSpaceOnUse">
+          <stop style={{ stopColor: "black", stopOpacity: 1 }} />
+          <stop offset="0.35" stopOpacity="0" style={{ stopColor: "none", stopOpacity: 0 }} />
+          <stop offset="0.65" stopOpacity="0" style={{ stopColor: "none", stopOpacity: 0 }} />
+          <stop offset="1" style={{ stopColor: "black", stopOpacity: 1 }} />
+        </linearGradient>
+        <linearGradient id="paint3_linear_5059_9012" x1="22.6482" y1="23.355" x2="88.6448" y2="89.3517" gradientUnits="userSpaceOnUse">
+          <stop style={{ stopColor: "black", stopOpacity: 1 }} />
+          <stop offset="0.35" stopOpacity="0" style={{ stopColor: "none", stopOpacity: 0 }} />
+          <stop offset="0.65" stopOpacity="0" style={{ stopColor: "none", stopOpacity: 0 }} />
+          <stop offset="1" style={{ stopColor: "black", stopOpacity: 1 }} />
+        </linearGradient>
+      </defs>
     </svg>
+    
+    <svg
+  width="112"
+  height="112"
+  viewBox="0 0 112 112"
+  xmlns="http://www.w3.org/2000/svg"
+  className={clsx('hidden dark:block', className)}
+  {...props}
+>
+  <path
+    d="M9.33325 56H102.667"
+    stroke="url(#paint0_linear_5059_9017)"
+    style={{ strokeWidth: "10.4422" }}
+    strokeLinecap="round"
+  />
+  <path
+    d="M56 102.667L56 9.33317"
+    stroke="url(#paint1_linear_5059_9017)"
+    style={{ strokeWidth: "10.4422" }}
+    strokeLinecap="round"
+  />
+  <path
+    d="M23.0017 88.9985L88.9983 23.0019"
+    stroke="url(#paint2_linear_5059_9017)"
+    style={{ strokeWidth: "10.4422" }}
+    strokeLinecap="round"
+  />
+  <path
+    d="M23.0017 23.0015L88.9983 88.9981"
+    stroke="url(#paint3_linear_5059_9017)"
+    style={{ strokeWidth: "10.4422" }}
+    strokeLinecap="round"
+  />
+  <defs>
+    <linearGradient
+      id="paint0_linear_5059_9017"
+      x1="9.33325"
+      y1="56.5"
+      x2="102.667"
+      y2="56.5"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop style={{ stopColor: "white", stopOpacity: 1 }} />
+      <stop offset="0.35" style={{ stopOpacity: 0 }} />
+      <stop offset="0.65" style={{ stopOpacity: 0 }} />
+      <stop offset="1" style={{ stopColor: "white", stopOpacity: 1 }} />
+    </linearGradient>
+    <linearGradient
+      id="paint1_linear_5059_9017"
+      x1="56.5"
+      y1="102.667"
+      x2="56.5"
+      y2="9.33317"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop style={{ stopColor: "white", stopOpacity: 1 }} />
+      <stop offset="0.35" style={{ stopOpacity: 0 }} />
+      <stop offset="0.65" style={{ stopOpacity: 0 }} />
+      <stop offset="1" style={{ stopColor: "white", stopOpacity: 1 }} />
+    </linearGradient>
+    <linearGradient
+      id="paint2_linear_5059_9017"
+      x1="23.3553"
+      y1="89.3521"
+      x2="89.3519"
+      y2="23.3555"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop style={{ stopColor: "white", stopOpacity: 1 }} />
+      <stop offset="0.35" style={{ stopOpacity: 0 }} />
+      <stop offset="0.65" style={{ stopOpacity: 0 }} />
+      <stop offset="1" style={{ stopColor: "white", stopOpacity: 1 }} />
+    </linearGradient>
+    <linearGradient
+      id="paint3_linear_5059_9017"
+      x1="22.6482"
+      y1="23.355"
+      x2="88.6448"
+      y2="89.3517"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop style={{ stopColor: "white", stopOpacity: 1 }} />
+      <stop offset="0.35" style={{ stopOpacity: 0 }} />
+      <stop offset="0.65" style={{ stopOpacity: 0 }} />
+      <stop offset="1" style={{ stopColor: "white", stopOpacity: 1 }} />
+    </linearGradient>
+  </defs>
+</svg>
+
+    </>
   )
 }
-
-
-
-// import Image from "next/image"
-
-// export function Logo({ className, ...props }) {
-//   return (
-//     <Image
-//     src="/blue.png"
-//     width={112}
-//     height={112}
-//     alt="Logo of Bakstag"
-//   />
-//   )
-// }
