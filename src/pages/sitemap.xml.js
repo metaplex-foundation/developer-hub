@@ -25,7 +25,7 @@ export async function getServerSideProps({ res }) {
             .map((route) => {
               return `
                 <url>
-                  <loc>${`https://developers.metaplex.com`}${route}</loc>
+                  <loc>${`https://developer-hub-seven.vercel.app`}${route}</loc>
                 </url>
               `
             })

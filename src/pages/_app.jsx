@@ -1,18 +1,18 @@
 import Head from 'next/head'
 import Script from 'next/script'
 
-import { Layout } from '@/components/Layout'
 import { DialectProvider } from '@/components/DialectContext'
+import { Layout } from '@/components/Layout'
 import { usePage } from '@/shared/usePage'
 
+import '@/styles/extra.css'
 import '@/styles/tailwind.css'
 import 'focus-visible'
 import 'reactflow/dist/base.css'
-import '@/styles/extra.css'
 
 // Add Prism components.
 import { Prism } from 'prism-react-renderer'
-;(typeof global !== 'undefined' ? global : window).Prism = Prism
+(typeof global !== 'undefined' ? global : window).Prism = Prism
 require('prismjs/components/prism-rust')
 
 export default function App({ Component, pageProps }) {
@@ -29,11 +29,11 @@ export default function App({ Component, pageProps }) {
         <meta property="twitter:domain" content="developers.metaplex.com" />
         <meta
           property="og:image"
-          content="https://developers.metaplex.com/assets/social/dev-hub-preview.jpg"
+          content="https://developers.metaplex.com/assets/social/dev-hub-preview.png"
         />
         <meta
           name="twitter:image"
-          content="https://developers.metaplex.com/assets/social/dev-hub-preview.jpg"
+          content="https://developers.metaplex.com/assets/social/dev-hub-preview.png"
         />
 
         {page.description && (
