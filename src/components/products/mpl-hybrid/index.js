@@ -78,7 +78,7 @@ export const mplHybrid = {
     },
     {
       ...referencesSection('mpl-hybrid'),
-      href: 'https://mpl-bubblegum.typedoc.metaplex.com/',
+      href: 'https://mpl-hybrid.typedoc.metaplex.com/',
       target: '_blank',
     },
   ],
