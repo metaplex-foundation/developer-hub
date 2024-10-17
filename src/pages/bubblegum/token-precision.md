@@ -35,7 +35,7 @@ When someone sells **20 ETH** for **10 SOL**, the difference in precision makes 
 
 #### Create offer
 
-An advertiser creates an offer selling **1.234567890123456789 ETH = 1,234,567,890,123,456,789 wei** (Base) with an exchange rate of **1 ETH** to approx. **2 SOL**.
+An advertiser creates an offer selling **1.234567890123456789 ETH = 1,234,567,890,123,456,789 wei** (Base) with an exchange rate of **1 ETH** to **2 SOL**.
 
 OTC Market will:
 
