@@ -29,11 +29,11 @@ export default function App({ Component, pageProps }) {
         <meta property="twitter:domain" content="developers.metaplex.com" />
         <meta
           property="og:image"
-          content="https://developer-hub-seven.vercel.app/assets/social/dev-hub-preview.jpg"
+          content="https://bakstag-developers.vercel.app//assets/social/dev-hub-preview.jpg"
         />
         <meta
           name="twitter:image"
-          content="https://developer-hub-seven.vercel.app/assets/social/dev-hub-preview.jpg"
+          content="https://bakstag-developers.vercel.app//assets/social/dev-hub-preview.jpg"
         />
 
         {page.description && (
