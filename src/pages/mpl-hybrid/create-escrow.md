@@ -5,9 +5,10 @@ description: Learn to create the MPL 404 Hybrid Escrow account that makes 404 sw
 ---
 
 ## Prerequisites
-s
-- A MPL Core Collection created with NFTs
-- An SPL Token created with required token amount.
+
+- A MPL Core Collection - [Link](/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
+- Core NFT Assets Minted to the Collection - [Link](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+- An SPL Token created with required token amount. - [Link](/guides/javascript/how-to-create-a-solana-token)
 - An online storage of sequential metadata JSON files at a consistent gateway/uri.
 
 Initializing the escrow is the essential step that links an NFT collection with a fungible token. Before starting this step, you should have ready a Core collection address, a fungible token mint address, and a range of off-chain metadata URIs using numerically named, sequential files. The need for Base URI string consistency will limit some off-chain metadata options. Note that the authority of the escrow needs to match the authority of the collection to perform metadata updates. Additionally, because the escrow is funded, there is no need to be the token authority which allows collections to be backed by existing memecoins or other fungible assets.
@@ -138,16 +139,16 @@ There are 3 separate fees that can be set.
 // Amount of tokens to receive when swapping an NFT to tokens. 
 // This value is in lamports and you will need to take into account 
 // the number of decimals the token has. If the token has 5 decimals 
-// and you wish to charge 1 whole token then feeAmount would be `100000`
+// and you wish to charge 1 whole token then feeAmount would be `100000`.
 
 amount: swapToTokenValueReceived,
 ```
 
 ```ts
-// Fee amount to pay when swapping Tokens to an NFT. 
-// This value is in lamports and you will need to take into 
-// account the number of decimals the token has. 
-// If the token has 5 decimals and you wish to charge 1 whole token then feeAmount would be `100000`
+// Fee amount to pay when swapping Tokens to an NFT. This value is 
+// in lamports and you will need to take into account the number of 
+// decimals the token has. If the token has 5 decimals and you wish 
+// to charge 1 whole token then feeAmount would be `100000`.
 
 feeAmount: swapToNftTokenFee,
 ```
