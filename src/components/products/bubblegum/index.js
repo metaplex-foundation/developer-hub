@@ -37,6 +37,10 @@ export const bubblegum = {
               href: '/bubblegum/offer',
             },
             {
+              title: 'Token Precision',
+              href: '/bubblegum/token-precision',
+            },
+            {
               title: 'Creating Bubblegum Trees',
               href: '/bubblegum/create-trees',
             },

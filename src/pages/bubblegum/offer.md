@@ -204,7 +204,7 @@ Bakstag is an Omnichain OTC Market, supporting both crosschain and monochain off
 
 ### Crosschain
 
-In crosschain trades, users can exchange assets between different blockchains possible with LayerZero messaging. For example, you can sell ETH on Base and receive SOL on Solana in return. This allows users to trade assets across chains without bridging or wrapping.
+In crosschain trades, users can exchange assets between different blockchains possible with LayerZero messaging. For example, you can sell ETH on Base and receive SOL on Solana in return. This allows users to trade assets across chains without slippage, bridging, or wrapping.
 
 ### Monochain
 
