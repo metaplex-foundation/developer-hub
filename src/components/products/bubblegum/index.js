@@ -1,9 +1,7 @@
 import {
-  changelogSection,
   documentationSection,
   guidesSection,
-  recipesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
 import { ArchiveBoxIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
