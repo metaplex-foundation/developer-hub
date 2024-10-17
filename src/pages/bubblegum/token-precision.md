@@ -22,9 +22,9 @@ Standard degree of divisibility:
 
 
 **20** whole tokens are represented differently depending on the token's decimal precision. For example:
-- ERC20: `20 * 10^18` (20,000,000,000,000,000,000)
-- SOL: `20 * 10^9` (20,000,000,000)
-- TRX: `20 * 10^6` (20,000,000)
+- ERC20: `20 * 10^18` (20,000,000,000,000,000,000 wei)
+- SOL: `20 * 10^9` (20,000,000,000 lamports)
+- TRX: `20 * 10^6` (20,000,000 sun)
 
 ## Shared Decimal System
 
@@ -35,7 +35,7 @@ When someone sells **20 ETH** for **10 SOL**, the difference in precision makes 
 
 #### Create offer
 
-An advertiser creates an offer selling **1.234567890123456789 ETH = 1,234,567,890,123,456,789** (Base) with an exchange rate of **1 ETH** to approx. **2 SOL**.
+An advertiser creates an offer selling **1.234567890123456789 ETH = 1,234,567,890,123,456,789 wei** (Base) with an exchange rate of **1 ETH** to approx. **2 SOL**.
 
 OTC Market will:
 
@@ -170,10 +170,17 @@ decimalConversionRate = 10^(localDecimals − sharedDecimals) = 10^(9−6) = 10^
 
 2. Calculate destination amount to take from buyer in shared decimals:
 ```
-dstAmountSD = (srcAmountSD * exchangeRateSD) / 10**SHARED_DECIMALS
+dstAmountSD = (srcAmountSD * exchangeRateSD) / 10**SHARED_DECIMALS 
+= 1234567 * 2000000 / 10^6
+= 2469134
 ```
 
 3. Convert destination amount from shared to local decimals
+```
+2469134 * 10^3 = 2469134000
+```
+
+This means that the buyer will pay **2,469,134,000 lamports** (**2.469134 SOL**) for **1,234,567,000,000,000,000 wei** (**1.234567 ETH**)
 
 {% callout title="TIP" type="note" %}
 In reality, arithmetic operations happen in a different order to ensure minimal loss from the rounding.
