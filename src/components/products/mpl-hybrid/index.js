@@ -1,4 +1,8 @@
-import { documentationSection } from '@/shared/sections'
+import {
+  documentationSection,
+  guidesSection,
+  referencesSection
+} from '@/shared/sections'
 import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
 
@@ -9,8 +13,8 @@ export const mplHybrid = {
   navigationMenuCatergory: 'Create',
   path: 'mpl-hybrid',
   icon: <ArrowsRightLeftIcon />,
-  github: '',
-  className: 'accent-amber',
+  github: 'https://github.com/metaplex-foundation/mpl-hybrid',
+  className: 'accent-green',
   heroes: [{ path: '/mpl-hybrid', component: Hero }],
   sections: [
     {
@@ -20,19 +24,62 @@ export const mplHybrid = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/mpl-hybrid' },
-            { title: 'Getting Started', href: '/mpl-hybrid/getting-started' },
             { title: 'Preparation', href: '/mpl-hybrid/preparation' },
             { title: 'FAQ', href: '/mpl-hybrid/faq' },
           ],
         },
         {
+          title: 'SDK',
+          links: [
+            { title: 'Javascript SDK', href: '/mpl-hybrid/sdk/javascript' },
+          ],
+        },
+        {
           title: 'Features',
           links: [
-            { title: 'Escrow', href: '/mpl-hybrid/escrow' },
-            { title: 'Swapping', href: '/mpl-hybrid/swapping' },
+            {
+              title: 'Create Escrow Configuration',
+              href: '/mpl-hybrid/create-escrow',
+            },
+            {
+              title: 'Fetch Escrow Configuration',
+              href: '/mpl-hybrid/fetch-escrow',
+            },
+            { title: 'Funding Escrow', href: '/mpl-hybrid/funding-escrow' },
+            {
+              title: 'Updating Escrow Configuration',
+              href: '/mpl-hybrid/update-escrow',
+            },
+            {
+              title: 'Swapping NFTs to Tokens',
+              href: '/mpl-hybrid/swapping-nfts-to-tokens',
+            },
+            {
+              title: 'Swapping Tokens to NFTs',
+              href: '/mpl-hybrid/swapping-tokens-to-nfts',
+            },
           ],
         },
       ],
+    },
+    {
+      ...guidesSection('mpl-hybrid'),
+      navigation: [
+        {
+          title: 'Javascript',
+          links: [
+            {
+              title: 'How to Create a 1,000,000 NFT Collection on Solana',
+              href: 'guides/javascript/how-to-create-1000000-nfts-on-solana',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      ...referencesSection('mpl-hybrid'),
+      href: 'https://mpl-bubblegum.typedoc.metaplex.com/',
+      target: '_blank',
     },
   ],
 }
