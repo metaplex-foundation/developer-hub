@@ -41,7 +41,7 @@ export const global = {
           links: [
             {
               title: 'Create Offer',
-              href: '/',
+              href: '/create-offer',
             },
           ],
         },
