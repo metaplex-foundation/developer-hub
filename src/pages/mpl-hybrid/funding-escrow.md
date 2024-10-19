@@ -10,7 +10,7 @@ To fund your escrow with your Token you will need to send that token to the **es
 
 ```ts
 // Address of your escrow configuration.
-const escrowAddress = publicKey('11111111111111111111111111111111')
+const escrowConfigurationAddress = publicKey('11111111111111111111111111111111')
 // Address of the SPL token.
 const tokenMint = publicKey('22222222222222222222222222222222')
 
@@ -22,23 +22,24 @@ const sourceTokenAccountPda = findAssociatedTokenPda(umi, {
 
 // Generate the Token Account PDA for the escrow destination.
 const escrowTokenAccountPda = findAssociatedTokenPda(umi, {
-  owner: hybridEscrowAddress,
-  mint: TOKEN,
+  owner: escrowConfigurationAddress,
+  mint: tokenMint,
 })
 
 // Execute transfer of tokens while also checking if the
 // destination token account exists, if not, create it.
 await createTokenIfMissing(umi, {
   mint: tokenMint,
-  owner: escrowAddress,
+  owner: escrowConfigurationAddress,
   token: escrowTokenAccountPda,
   payer: umi.identity,
 })
   .add(
     transferTokens(umi, {
-      source: sourcePda,
+      source: sourceTokenAccountPda,
       destination: escrowTokenAccountPda,
-      amount: amountToNumber(tokenAmount(100, undefined, 9)),
+      // amount is calculated in lamports and decimals.
+      amount: 100000,
     })
   )
   .sendAndConfirm(umi)
