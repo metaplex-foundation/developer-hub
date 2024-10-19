@@ -3,11 +3,11 @@ title: Create deterministic metadata with Turbo
 metaTitle: Create deterministic metadata with Turbo | Hybrid Guides
 description: Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
 # remember to update dates also in /components/guides/index.js
-created: '09-17-2024'
-updated: '09-17-2024'
+created: '10-19-2024'
+updated: '10-19-2024'
 ---
 
-To utilize the metadata randomization feature in the MPL-Hybrid program, the off-chain metadata URIs need to follow a consistent, incremental structure. To achieve this, we will use the [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) feature from Arweave and the Turbo SDK. This guide will demonstrate how to set this up!
+To utilize the metadata randomization feature in the MPL-Hybrid program, the off-chain metadata URIs need to follow a consistent, incremental structure. To achieve this, we will use the [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) feature from Arweave and the Turbo SDK. **This guide will demonstrate how to set this up!**
 
 {% callout title="What is Turbo" %}
 
@@ -17,34 +17,41 @@ Turbo is a ultrahigh-throughput Permaweb service that streamlines the funding, i
 
 ## Prerequisite
 
-- Code Editor of your choice (recommended **Visual Studio Code**)
-- Node **18.x.x** or above.
-
-## Initial Setup
-
-This guide will teach you how to use Turbo SDK to upload entire folders and leverage the manifest feature for deterministic metadata generation. The functions provided in the code can be adapted based on your project's specific needs.
-
-### Initializing the Project
-
-Start by creating a new project. This step is optional if you're already working within a project. Use the package manager of your choice (npm, yarn, pnpm, or bun), and fill in the project details when prompted.
-
-```js
-npm init
-```
-
 ### Required Packages
 
-Install the required packages for this guide.
-
 {% packagesUsed packages=[ "@ardrive/turbo-sdk" ] type="npm" /%}
+
+Install the required packages for this guide.
 
 ```js
 npm i @ardrive/turbo-sdk
 ```
 
+### Assets Folder
+
+In this example, we will create the metadata from scratch, so you’ll just need to prepare all the images in the assets folder for the script to work.
+
+Images (and metadata JSON files) should follow an incremental naming convention starting from 0.
+
+```
+assets/
+├─ 0.png
+├─ 1.png
+├─ 2.png
+├─ ...
+```
+
+### Metadata Folder
+
+Since we’re building the metadata from scratch in this example, you’ll just need to create a metadata folder to store the newly generated metadata files.
+
+However, the workflow we're presenting in this guide will still work even if you use other methods to upload images or prepare the metadata. Just remember to use Turbo to upload the metadata files and obtain the correct Manifest ID, which is required for setting up the Hybrid Escrow.
+
+To generate assets and metadata, you can use [one of these methods](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata in the metadata folder. If you do this, skip ahead to [this part of the tutorial](#create-and-upload-the-metadata-files)
+
 ## Setting up Turbo 
 
-Since Turbo is compatible with multiple tokens and chains, we'll configure our Turbo instance to use Solana as the token for this guide. We do this by calling the `TurboFactory.authenticated()` method and passing in Solana-specific configuration options.
+Since Turbo is compatible with multiple tokens and chains, we'll need to configure our Turbo instance to use Solana as the token for this guide. We do this by calling the `TurboFactory.authenticated()` method and passing in Solana-specific configuration options.
 
 ```javascript
 import { TurboFactory } from '@ardrive/turbo-sdk';
@@ -58,7 +65,7 @@ const turbo = TurboFactory.authenticated({
 });
 ```
 
-**Note**: In this example, we explicitly provide the `gatewayUrl`, `paymentServiceConfig`, and `uploadServiceConfig` because we are working on devnet. For mainnet usage, you can leave these fields empty, and Turbo will default to the mainnet endpoints.
+**Note**: In this example, we explicitly provide the `gatewayUrl`, `paymentServiceConfig`, and `uploadServiceConfig` because we want to configure the environment to work on devnet. For mainnet usage, you can leave these fields empty, and Turbo will default to the mainnet endpoints.
 
 ## Upload Images and Metadata with Turbo
 
@@ -163,7 +170,7 @@ const imageUploadResponse = await turbo.uploadFolder({
 
 ### Create and Upload the Metadata Files
 
-Once the images have been uploaded and the manifest ID is returned, the next step is to generate the metadata for both the assets and the collection. We'll use the `createMetadataFiles()` helper function to handle this efficiently. The image upload response, which contains the manifest ID linking the assets, is passed into this function.
+Once the images have been uploaded and the manifest ID is returned, the next step is to generate the metadata for both the assets and the collection. We'll use the `createMetadataFiles()` helper function to handle this efficiently.
 
 ```javascript
 // Create metadata files concurrently
@@ -283,9 +290,6 @@ await umi.rpc.airdrop(umi.identity.publickey)
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
 
-// Generate a new keypair signer.
-const signer = generateSigner(umi)
-
 // You will need to us fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
 const walletFile = fs.readFileSync('./keypair.json')
@@ -295,7 +299,7 @@ const walletFile = fs.readFileSync('./keypair.json')
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 
 // Load the keypair into umi.
-umi.use(keypairIdentity(umiSigner));
+umi.use(keypairIdentity(keypair));
 ```
 
 {% /totem-accordion %}
@@ -321,15 +325,13 @@ const umi = createUmi('https://api.devnet.solana.com')
 
 ### Creates Collection and Assets
 
-To simplify the process, I created a function called `createHybridCollection()`. This function takes two inputs: the Umi instance that was set up earlier, and the metadataUploadResponse we obtained when uploading the metadata to handle the creation of all the necessary on-chain accounts.
+We now can finally use the umi instance we just created to call the `createHybridCollection()` helper to handle the creation of all the necessary on-chain accounts.
 
 ```javascript
 await createHybridCollection(umi, metadataUploadResponse);
 ```
 
-Once Umi is set up, the process to create the on-chain collection and assets begins:
-
-We first create a collection, which is linked to the manifest ID of the metadata uploaded earlier (e.g., collection.json). This establishes the collection as the parent for all the assets we're about to create.
+We first create a collection, which is linked to the manifest ID of the metadata uploaded earlier (e.g., collection.json).
 
 After the collection is created, we mint each asset and link it to the collection. Each asset will point to its respective metadata (e.g., 0.json, 1.json), ensuring they are correctly organized under the collection.
 
@@ -350,6 +352,7 @@ async function createHybridCollection(umi: Umi, metadataUploadResponse: TurboUpl
 
     // Create assets concurrently using Promise.all
     const collectionSize = 10;
+
     const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
         string({ size: 'variable' }).serialize('escrow'),
         publicKeySerializer().serialize(collection),

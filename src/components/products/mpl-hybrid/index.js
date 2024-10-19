@@ -45,8 +45,8 @@ export const mplHybrid = {
               href: '/mpl-hybrid/guides' 
             },
             { 
-              title: 'Creating Deterministic Metadata with Turbo', 
-              href: '/mpl-hybrid/guides/creating-deterministic-metadata-with-turbo' 
+              title: 'Create Deterministic Metadata with Turbo', 
+              href: '/mpl-hybrid/guides/create-deterministic-metadata-with-turbo' 
             },
             { 
               title: 'Create your first Hybrid Collection', 
