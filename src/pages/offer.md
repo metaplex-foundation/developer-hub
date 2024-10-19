@@ -146,7 +146,7 @@ The very first step is for the advertiser to **create** a new offer with the des
 
 The created offer keeps track of its own parameters which helps us understand its type and how to handle it.
 
-We will see how to create offers in more details [in the following page](/bubblegum/concurrent-merkle-trees).
+We will see how to create offers in more details [in the following page](/create-offer).
 
 After the offer is created, buyers can see and **accept** it in whole or in part.
 
@@ -192,7 +192,7 @@ In the next steps, advertisers will also have the option to **refill** the offer
 {% edge from="action" to="offer" path="straight" label="refill offer parameters" /%}
 {% /diagram %}
 
-Overall, the lifecycle of an offer follows the following path:
+Overall, the lifecycle of an offer follows this path:
 
 {% figure src="/assets/bakstag/lifecycle.svg" alt="Offer lifecycle (Created, Accepted, Refilled, Canceled)" caption="Offer lifecycle" /%}
 
