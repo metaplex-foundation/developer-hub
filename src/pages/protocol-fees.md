@@ -6,16 +6,27 @@ description: A details of the onchain fees for Metaplex's products.
 
 The Metaplex Protocol currently includes the following fees:
 
-| Instruction     | Program         | Typical Payer | Amount (SOL) | Notes                                                                                                                                                                                                                                                                                    |
+{% totem %}
+{% totem-accordion title="Solana" test="test" defaultOpen="true" %}
+| Instruction | Program | Typical Payer | Amount (SOL) | Notes |
 | --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Create | Core | Collector | 0.0015 | Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions. |
-| Create          | Token Metadata  | Collector     | 0.01         | Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs). Includes all instructions that "create" an NFT including ones that create print editions. |
-| Create          | Bubblegum       | -             | Free |
-| Swap   | MPL-Hybrid | Collector | 0.005 | Paid by the individual who swaps tokens and NFTs. |
-| Combine         | Fusion (Trifle) | Collector     | 0.002        |                                                                                                                                                                                                                                                                                          |
-| Split           | Fusion (Trifle) | Collector     | 0.002        |                                                                                                                                                                                                                                                                                          |
-| Edit constraint | Fusion (Trifle) | Creator       | 0.01         |                                                                                                                                                                                                                                                                                          |
-
+| Create | Token Metadata | Collector | 0.01 | Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs). Includes all instructions that "create" an NFT including ones that create print editions. |
+| Create | Bubblegum | - | Free |
+| Swap | MPL-Hybrid | Collector | 0.005 | Paid by the individual who swaps tokens and NFTs. |
+| Combine | Fusion (Trifle) | Collector | 0.002 | |
+| Split | Fusion (Trifle) | Collector | 0.002 | |
+| Edit constraint | Fusion (Trifle) | Creator | 0.01 | |
+{% /totem-accordion %}
+{% totem-accordion title="Eclipse" %}
+| Instruction | Program | Typical Payer | Amount (ETH) | Notes |
+| --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Create | Core | Collector | 0.00001822 | Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions. |
+| Create | Token Metadata | Collector | 0.000103088 | Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs). Includes all instructions that "create" an NFT including ones that create print editions. |
+| Create | Bubblegum | - | Free |
+| Swap | MPL-Hybrid | Collector | 0.005 | Paid by the individual who swaps tokens and NFTs. |
+{% /totem-accordion %}
+{% /totem %}
 
 ## FAQs
 

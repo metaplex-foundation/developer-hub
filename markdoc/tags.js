@@ -5,16 +5,16 @@ import {
   transformDialectSwitcherTag,
 } from '@/components/DialectSwitcher'
 import { QuickLink, QuickLinks } from '@/components/QuickLinks'
+import { Seperator } from '@/components/Seperator'
 import { Totem, TotemAccordion, TotemProse } from '@/components/Totem'
 import {
   Diagram,
   transformDiagramTag,
   transformNodeTag,
 } from '@/components/diagrams'
-import {Seperator} from '@/components/Seperator'
+import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
-import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 
 const tags = {
   callout: {
@@ -74,6 +74,7 @@ const tags = {
     render: TotemAccordion,
     attributes: {
       title: { type: String },
+      defaultOpen: { type: Boolean },
     },
   },
   'totem-prose': {
