@@ -32,7 +32,7 @@ Additionally, more parameters must be provided to verify the integrity of the Co
 ```ts
 import { getAssetWithProof, delegate } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await delegate(umi, {
   ...assetWithProof,
   leafOwner,
@@ -56,7 +56,7 @@ To revoke an existing Delegate Authority, the owner simply needs to set themselv
 ```ts
 import { getAssetWithProof, delegate } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await delegate(umi, {
   ...assetWithProof,
   leafOwner,

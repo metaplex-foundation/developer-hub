@@ -26,7 +26,7 @@ import {
   verifyCreator,
 } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await verifyCreator(umi, { ...assetWithProof, creator }).sendAndConfirm(umi)
 ```
 
@@ -48,7 +48,7 @@ import {
   unverifyCreator,
 } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await unverifyCreator(umi, { ...assetWithProof, creator }).sendAndConfirm(umi)
 ```
 
