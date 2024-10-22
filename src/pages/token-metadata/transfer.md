@@ -13,7 +13,9 @@ The owner of an asset can transfer it to another account by sending a **Transfer
 
 Here is how you can use our SDKs to transfer an asset on Token Metadata.
 
-{% dialect-switcher title="Transfer Assets" %}
+## Transfer NFT
+
+{% dialect-switcher title="Transfer an NFT" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -28,5 +30,73 @@ await transferV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Transfer pNFT
+
+The following code is an example of transferring a pNFT to a new owner.
+
+{% dialect-switcher title="Transfer a pNFT" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { getMplTokenAuthRulesProgramId } from "@metaplex-foundation/mpl-candy-machine";
+import {
+  fetchDigitalAssetWithAssociatedToken,
+  findTokenRecordPda,
+  TokenStandard,
+  transferV1,
+} from "@metaplex-foundation/mpl-token-metadata";
+import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
+import { publicKey, unwrapOptionRecursively } from "@metaplex-foundation/umi";
+import { base58 } from "@metaplex-foundation/umi/serializers";
+
+// The NFT Asset Mint ID
+const mintId = publicKey("11111111111111111111111111111111");
+
+// Fetch the pNFT Asset with the Token Account
+const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
+  umi,
+  mintId,
+  umi.identity.publicKey
+);
+
+// The destination wallet
+const destinationAddress = publicKey(
+  "22222222222222222222222222222222"
+);
+
+// Calculates the destination wallet's Token Account
+const destinationTokenAccount = findAssociatedTokenPda(umi, {
+  mint: mintId,
+  owner: destinationAddress,
+});
+
+// Calculates the destinations wallet's Token Record Account
+const destinationTokenRecord = findTokenRecordPda(umi, {
+  mint: mintId,
+  token: destinationTokenAccount[0],
+});
+
+// Transfer the pNFT
+const { signature } = await transferV1(umi, {
+  mint: mintId,
+  destinationOwner: destinationAddress,
+  destinationTokenRecord: destinationTokenRecord,
+  tokenRecord: assetWithToken.tokenRecord?.publicKey,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+  // Check to see if the pNFT asset as auth rules.
+  authorizationRules:
+    unwrapOptionRecursively(assetWithToken.metadata.programmableConfig)
+      ?.ruleSet || undefined,
+  // Auth rules program ID
+  authorizationRulesProgram: getMplTokenAuthRulesProgramId(umi),
+  // Some pNFTs may require authorization data if set.
+  authorizationData: undefined,
+}).sendAndConfirm(umi);
+
+console.log("Signature: ", base58.deserialize(signature));
+```
 {% /dialect %}
 {% /dialect-switcher %}

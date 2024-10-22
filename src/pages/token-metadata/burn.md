@@ -23,7 +23,9 @@ Note that the Mint account is never closed because the SPL Token program does no
 
 Here is how you can use our SDKs to burn an asset on Token Metadata.
 
-{% dialect-switcher title="Burning Assets" %}
+## NFT Burn
+
+{% dialect-switcher title="NFT Asset Burn" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -42,7 +44,7 @@ await burnV1(umi, {
 
 If the asset that you are trying to burn is part of a collection you additionally need to pass the collectionMetadata account into the function:
 
-{% dialect-switcher title="Burning Assets that are part of a collection" %}
+{% dialect-switcher title="NFT Asset Burn that's part of a collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -55,6 +57,56 @@ await burnV1(umi, {
   collectionMetadata: findMetadataPda( umi, { mint: collectionMintAddress })
   tokenStandard: TokenStandard.NonFungible,
 }).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## pNFT Burn
+
+{% dialect-switcher title="pNFT Asset Burn" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import {
+  burnV1,
+  fetchDigitalAssetWithAssociatedToken,
+  findMetadataPda,
+  TokenStandard,
+} from "@metaplex-foundation/mpl-token-metadata";
+import { publicKey, unwrapOption } from "@metaplex-foundation/umi";
+import { base58 } from "@metaplex-foundation/umi/serializers";
+
+// The NFT mint ID
+const mintId = publicKey("11111111111111111111111111111111");
+
+// Fetch the NFT Asset with the Token Account
+const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
+  umi,
+  mintId,
+  umi.identity.publicKey
+);
+
+// Determine if the Asset is in a collection
+const collectionMint = unwrapOption(assetWithToken.metadata.collection);
+
+// If there's a collection find the collection metadata PDAs
+const collectionMetadata = collectionMint
+  ? findMetadataPda(umi, { mint: collectionMint.key })
+  : null;
+
+// Burn the pNFT Asset
+const res = await burnV1(umi, {
+  mint: mintId,
+  collectionMetadata: collectionMetadata || undefined,
+  token: assetWithToken.token.publicKey,
+  tokenRecord: assetWithToken.tokenRecord?.publicKey,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi);
+
+
+const signature = base58.deserialize(tx.signature)[0];
+console.log('Transaction Signature: ' + signature)
 ```
 
 {% /dialect %}
