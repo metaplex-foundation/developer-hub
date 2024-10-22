@@ -122,7 +122,7 @@ await transactionBuilder()
   .sendAndConfirm(umi)
 ```
 
-Note that the `mintV2` instruction takes care of creating the Mint and Token accounts for us by default and will set the NFT owner to the `minter`. If you wish to create these yourself beforehand, you may simply give the NFT mind address as a public key instead of a signer. Here's an example using the `createMintWithAssociatedToken` function from the `mpl-toolbox` Umi library:
+Note that the `mintV2` instruction takes care of creating the Mint and Token accounts for us by default and will set the NFT owner to the `minter`. If you wish to create these yourself beforehand, you may simply give the NFT mint address as a public key instead of a signer. Here's an example using the `createMintWithAssociatedToken` function from the `mpl-toolbox` Umi library:
 
 ```ts
 import { mintV2 } from '@metaplex-foundation/mpl-candy-machine'
