@@ -11,7 +11,7 @@ This guide will demonstrate how to create an **Hybrid Collection** fully end-to-
 
 {% callout title="What is MPL-Hybrid?" %}
 
-...
+MPL-Hybrid is a new model for digital assets, web3 games, and onchain communities. At the core of the model is a swap program that trades a fixed number of fungible assets for a non-fungible asset and vice versa. 
 
 {% /callout %}
 
@@ -22,7 +22,7 @@ This guide will demonstrate how to create an **Hybrid Collection** fully end-to-
 
 ## Initial Setup
 
-This guide will teach you how to create an Hybrid Collection using Javascript, we're going to use different scripts throughout the example based on the function we want to use! You may need to modify and move functions around to suit your needs.
+This guide will teach you how to create an Hybrid Collection using Javascript! You may need to modify and move functions around to suit your needs.
 
 ### Initializing the Project
 
@@ -62,9 +62,9 @@ npm i @metaplex-foundation/mpl-token-metadata
 
 Before setting up the escrow for the MPL-Hybrid program, which facilitates the swapping of fungible tokens for non-fungible tokens (NFTs) and vice versa, you’ll need to have both a collection of Core NFTs and fungible tokens already minted.
 
-**Note**: The escrow will need to be funded with NFTs, fungible tokens, or a combination of both. The simplest way to maintain balance in the escrow is to fill it entirely with one type of asset while distributing the other, ensuring that the escrow remains functional.
+If you’re missing any of these prerequisites, don’t worry! We’ll give you all the resources you need to go through each step.
 
-If you’re missing any of these prerequisites, don’t worry! We’ll guide you through each step from the beginning.
+**Note**: To work, the escrow will need to be funded with NFTs, fungible tokens, or a combination of both. The simplest way to maintain balance in the escrow is to fill it entirely with one type of asset while distributing the other!
 
 ### Creating the NFT Collection
 
@@ -73,24 +73,24 @@ To utilize the metadata randomization feature in the MPL-Hybrid program, the off
 Manifest allows multiple transactions to be linked under a single base transaction ID and assigned human-readable file names, like this:
 - https://arweave.net/manifestID/0.json
 - https://arweave.net/manifestID/1.json
-...
+- ...
 - https://arweave.net/manifestID/9999.json
 
 If you're unfamiliar with how to create a core digital asset collection with deterministic URIs, you can follow [this guide](create-deterministic-metadata-with-turbo) for a detailed walkthrough.
 
-**Note**: Currently, the MPL-Hybrid program randomly picks a number between the min and max URI index provided and does not check to see if the URI is already used. As such, swapping suffers from the [Birthday Paradox](https://betterexplained.com/articles/understanding-the-birthday-paradox/). In order for projects to benefit from sufficient swap randomization, we recommend preparing and uploading a minimum of 250k asset metadata that can be randomly picked from. The more available potential assets the better.
+**Note**: Currently, the MPL-Hybrid program randomly picks a number between the min and max URI index provided and does not check to see if the URI is already used. As such, swapping suffers from the [Birthday Paradox](https://betterexplained.com/articles/understanding-the-birthday-paradox/). In order for projects to benefit from sufficient swap randomization, we recommend preparing and uploading a minimum of 250k asset metadata that can be randomly picked from. The more available potential assets the better!
 
 ### Creating the Fungible Tokens
 
-The MPL-Hybrid escrow requires an associated fungible token that can be used to redeem or pay for the release of an NFT. This can be an existing token that's already minted and circulating.
+The MPL-Hybrid escrow requires an associated fungible token that can be used to redeem or pay for the release of an NFT. This can be an existing token that's already minted and circulating, or entirely a new one! 
 
 If you’re unfamiliar with creating a token, you can follow [this guide](/guides/javascript/how-to-create-a-solana-token) to learn how to mint your own fungible token on Solana.
 
-**After creating both the NFT Collection and Tokens, we're finally ready to create the Escrow and start swapping!**
-
 ## Creating the Escrow
 
-Before jumping in the relevant information about MPL-Hybrid, it's a good idea to learn how to set up your Umi instance since we're going to do that multiple time during the guide.
+**After creating both the NFT Collection and Tokens, we're finally ready to create the Escrow and start swapping!**
+
+But before jumping in the relevant information about MPL-Hybrid, it's a good idea to learn how to set up your Umi instance since we're going to do that multiple time during the guide.
 
 ### Setting up Umi
 
@@ -196,7 +196,7 @@ const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
 | **Fee Location**  | The address where any fees from the swaps will be sent. |
 | **Escrow**        | The derived escrow account, which is responsible for holding the NFTs and tokens during the swap process. |
 
-Lastly, we define the token-related parameters and create a helper function, addZeros(), to adjust token amounts for decimals:
+Lastly, we define the token-related parameters and create a helper function, `addZeros()`, to adjust token amounts for decimals:
 
 ```javascript
 // Token Swap Settings - Change these to your needs
@@ -241,7 +241,7 @@ const signature = base58.deserialize(initEscrowTx.signature)[0]
 console.log(`Escrow created! https://explorer.solana.com/tx/${signature}?cluster=devnet`)
 ```
 
-**Note**: Simply creating the escrow won’t make it "ready" for swapping. You’ll need to populate the escrow with either NFTs or tokens (or both). **Here’s how**:
+**Note**: As we said before, simply creating the escrow won’t make it "ready" for swapping. You’ll need to populate the escrow with either NFTs or tokens (or both). **Here’s how**:
 
 {% totem %}
 
@@ -297,6 +297,8 @@ const transferTokenTx = await transactionBuilder().add(
 {% /totem %}
 
 ### Full Code Example
+
+If you want to simply copy and paste the full code for creating the escrow, here it is! 
 
 {% totem %}
 
@@ -377,7 +379,7 @@ function addZeros(num: number, numZeros: number): number {
 
 ### Setup the Accounts 
 
-After setting up Umi (as we did in the previous section), the next step is configuring the accounts needed for the Capture & Release process. These accounts will feel familiar since they’re similar to what we used earlier and they are the same for both instructions:
+After setting up Umi (as we did in the [previous section](#setting-up-umi)), the next step is configuring the accounts needed for the `Capture` & `Release` process. These accounts will feel familiar since they’re similar to what we used earlier and they are the same for both instructions:
 
 ```javascript
 // Step 2: Escrow Accounts - Change these to your needs
@@ -394,9 +396,9 @@ const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
 
 ### Choose the Asset to Capture/Release
 
-How you choose the asset depends on the path you selected when creating the Escrow (either 0 or 1):
+How you choose the asset to caputre and release, depends on the path you selected when creating the Escrow:
 - **Path 0**: If the path is set to `0`, the NFT metadata will be updated during the swap, so you can just grab a random asset from the escrow since this will not matter.
-- **Path 1**: If the path is `1`, the NFT metadata stays the same after the swap, so you could let the user choose which specific NFT they want to swap into.
+- **Path 1**: If the path is set to `1`, the NFT metadata stays the same after the swap, so you could let the user choose which specific NFT they want to swap into.
 
 **For Capture**
 
@@ -471,7 +473,63 @@ console.log(`Released! Check it out: https://explorer.solana.com/tx/${signature}
 
 ### Full Code Example
 
+Here's the full code for `Capture` and `Release`
+
 {% totem %}
+
+{% totem-accordion title="Capture" %}
+
+```javascript
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { generateSigner, signerIdentity, publicKey, sol } from '@metaplex-foundation/umi'
+import { mplHybrid, MPL_HYBRID_PROGRAM_ID, captureV1 } from '@metaplex-foundation/mpl-hybrid'
+import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata'
+import { base58, string, publicKey as publicKeySerializer } from '@metaplex-foundation/umi/serializers'
+import { fetchAssetsByCollection } from '@metaplex-foundation/mpl-core'
+
+(async () => {
+  /// Step 1: Setup Umi
+  const umi = createUmi('https://api.devnet.solana.com')
+    .use(mplHybrid())
+    .use(mplTokenMetadata())
+
+  let signer = generateSigner(umi);
+
+  umi.use(signerIdentity(signer)).rpc.airdrop(umi.identity.publicKey, sol(1));
+
+  // Step 2: Escrow Accounts - Change these to your needs
+  const collection = publicKey('<YOUR-COLLECTION-ADDRESS>');  // The collection we are swapping to/from
+  const token = publicKey('<YOUR-TOKEN-ADDRESS>');            // The token we are swapping to/from
+  const feeProjectAccount = publicKey('<YOUR-FEE-ADDRESS>');  // The address where the fees will be sent
+  const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
+    string({ size: 'variable' }).serialize('escrow'),
+    publicKeySerializer().serialize(collection),
+  ]);                    
+
+  // Fetch all the assets in the collection
+  const assetsListByCollection = await fetchAssetsByCollection(umi, collection, {
+    skipDerivePlugins: false,
+  })
+
+  // Find the assets owned by the escrow
+  const asset = assetsListByCollection.filter(
+    (a) => a.owner === publicKey(escrow)
+  )[0].publicKey
+
+  /// Step 3: "Capture" (Swap from Fungible to Non-Fungible) the Asset
+  const captureTx = await captureV1(umi, {
+    owner: umi.payer,
+    escrow,
+    asset,
+    collection,
+    token,
+    feeProjectAccount,
+  }).sendAndConfirm(umi)
+  const signature = base58.deserialize(captureTx.signature)[0]
+  console.log(`Captured! https://explorer.solana.com/tx/${signature}?cluster=devnet`)})();
+```
+
+{% /totem-accordion %}
 
 {% totem-accordion title="Release" %}
 
@@ -527,60 +585,6 @@ import walletFile from "/Users/leo/.config/solana/id.json";
   const signature = base58.deserialize(releaseTx.signature)[0]
   console.log(`Released! https://explorer.solana.com/tx/${signature}?cluster=devnet`)
 })();
-```
-
-{% /totem-accordion %}
-
-{% totem-accordion title="Capture" %}
-
-```javascript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { generateSigner, signerIdentity, publicKey, sol } from '@metaplex-foundation/umi'
-import { mplHybrid, MPL_HYBRID_PROGRAM_ID, captureV1 } from '@metaplex-foundation/mpl-hybrid'
-import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata'
-import { base58, string, publicKey as publicKeySerializer } from '@metaplex-foundation/umi/serializers'
-import { fetchAssetsByCollection } from '@metaplex-foundation/mpl-core'
-
-(async () => {
-    /// Step 1: Setup Umi
-    const umi = createUmi('https://api.devnet.solana.com')
-      .use(mplHybrid())
-      .use(mplTokenMetadata())
-
-    let signer = generateSigner(umi);
-
-    umi.use(signerIdentity(signer)).rpc.airdrop(umi.identity.publicKey, sol(1));
-
-    // Step 2: Escrow Accounts - Change these to your needs
-    const collection = publicKey('<YOUR-COLLECTION-ADDRESS>');  // The collection we are swapping to/from
-    const token = publicKey('<YOUR-TOKEN-ADDRESS>');            // The token we are swapping to/from
-    const feeProjectAccount = publicKey('<YOUR-FEE-ADDRESS>');  // The address where the fees will be sent
-    const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
-      string({ size: 'variable' }).serialize('escrow'),
-      publicKeySerializer().serialize(collection),
-    ]);                    
-
-    // Fetch all the assets in the collection
-    const assetsListByCollection = await fetchAssetsByCollection(umi, collection, {
-      skipDerivePlugins: false,
-    })
-
-    // Find the assets owned by the escrow
-    const asset = assetsListByCollection.filter(
-      (a) => a.owner === publicKey(escrow)
-    )[0].publicKey
-
-    /// Step 3: "Capture" (Swap from Fungible to Non-Fungible) the Asset
-    const captureTx = await captureV1(umi, {
-      owner: umi.payer,
-      escrow,
-      asset,
-      collection,
-      token,
-      feeProjectAccount,
-    }).sendAndConfirm(umi)
-  const signature = base58.deserialize(captureTx.signature)[0]
-  console.log(`Captured! https://explorer.solana.com/tx/${signature}?cluster=devnet`)})();
 ```
 
 {% /totem-accordion %}
