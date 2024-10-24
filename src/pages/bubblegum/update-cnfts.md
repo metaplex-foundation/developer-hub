@@ -63,7 +63,7 @@ import {
 } from '@metaplex-foundation/mpl-bubblegum'
 
 // Use the helper to fetch the proof.
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 
 // Then we can use it to update metadata for the NFT.
 const updateArgs: UpdateArgsArgs = {
@@ -137,7 +137,7 @@ import {
 import { findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
 
 // Use the helper to fetch the proof.
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 
 // Then we can use it to update metadata for the NFT.
 const updateArgs: UpdateArgsArgs = {

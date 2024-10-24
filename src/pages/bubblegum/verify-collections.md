@@ -33,7 +33,7 @@ import {
   verifyCollection,
 } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await verifyCollection(umi, {
   ...assetWithProof,
   collectionMint,
@@ -59,7 +59,7 @@ import {
   setAndVerifyCollection,
 } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await setAndVerifyCollection(umi, {
   ...assetWithProof,
   treeCreatorOrDelegate,
@@ -86,7 +86,7 @@ import {
   unverifyCollection,
 } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await unverifyCollection(umi, {
   ...assetWithProof,
   collectionMint,

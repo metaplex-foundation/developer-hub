@@ -33,6 +33,7 @@
       "Solscan",
       "SPACEBAR",
       "Struct",
+      "unverify",
       "usize"
     ],
   "editor.codeActionsOnSave": {
