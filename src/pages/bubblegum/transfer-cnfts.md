@@ -22,7 +22,7 @@ If you encounter transaction size errors, consider using `{ truncateCanopy: true
 ```ts
 import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await transfer(umi, {
   ...assetWithProof,
   leafOwner: currentLeafOwner,
@@ -35,7 +35,7 @@ await transfer(umi, {
 ```ts
 import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await transfer(umi, {
   ...assetWithProof,
   leafDelegate: currentLeafDelegate,
