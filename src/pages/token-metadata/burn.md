@@ -44,7 +44,7 @@ await burnV1(umi, {
 
 If the asset that you are trying to burn is part of a collection you additionally need to pass the collectionMetadata account into the function:
 
-{% dialect-switcher title="NFT Asset Burn that's part of a collection" %}
+{% dialect-switcher title="Burning NFT Assets that are part of a collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -77,17 +77,17 @@ import {
 import { publicKey, unwrapOption } from "@metaplex-foundation/umi";
 import { base58 } from "@metaplex-foundation/umi/serializers";
 
-// The NFT mint ID
+// The pNFT mint ID
 const mintId = publicKey("11111111111111111111111111111111");
 
-// Fetch the NFT Asset with the Token Account
+// Fetch the pNFT Asset with the Token Account
 const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
   umi,
   mintId,
   umi.identity.publicKey
 );
 
-// Determine if the Asset is in a collection
+// Determine if the pNFT Asset is in a collection
 const collectionMint = unwrapOption(assetWithToken.metadata.collection);
 
 // If there's a collection find the collection metadata PDAs

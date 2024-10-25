@@ -1,6 +1,6 @@
 ---
-title: Programmable NFTs (pNFTS)
-metaTitle: Programmable NFTs (pNFTS) | Token Metadata
+title: Programmable NFTs (pNFTs)
+metaTitle: Programmable NFTs (pNFTs) | Token Metadata
 description: Learn more about Programmable NFTs (a.k.a. pNFTs) on Token Metadata
 ---
 
@@ -10,7 +10,7 @@ As mentioned in the [overview page](/token-metadata#pnfts), Programmable NFTs (p
 
 Because the Token Metadata program is built on top of the SPL Token program, any owner or spl-token delegate can interact with the SPL Token program directly and bypass the Token Metadata program on vital operations like transferring and burning. Whilst this creates a nice composability pattern between programs it also means the Token Metadata program cannot enforce any rules on behalf of the creators.
 
-A good example of why this can be problematic is that Token Metadata cannot enforce secondary sales royalties. Even though the royalty percentage is stored on the **Metadata** account, it is up to the user or program that performs the transfer to decide whether they want to honour it or not. We talk more about this and how pNFTs fix this issue [in a section below](#use-case-royalty-enforcement).
+A good example of why this can be problematic is that Token Metadata cannot enforce secondary sales royalties. Even though the royalty percentage is stored on the **Metadata** account, it is up to the user or program that performs the transfer to decide whether they want to honor it or not. We talk more about this and how pNFTs fix this issue [in a section below](#use-case-royalty-enforcement).
 
 Programmable NFTs are introduced to solve this issue in a flexible way that **allows creators to customize the authorization layer** of their assets.
 

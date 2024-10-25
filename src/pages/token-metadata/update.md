@@ -10,6 +10,8 @@ The update authority of an asset can update its **Metadata** account using the *
 
 Note that certain delegated authorities can also update the **Metadata** account of assets as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
 
+Below is an explanation of all the individual fields available for update in the `UpdateV1` instruction.
+
 ### The Data Object
 
 The object that defines the Name, Symbol, URI, Seller Fee Basis Points and the array of Creators of the asset. Note that the update authority can only add and/or remove unverified creators from the Creators array. The only exception is if the creator is the update authority, in which case the added or removed creators can be verified.
@@ -145,7 +147,7 @@ import {
 import { publicKey, unwrapOptionRecursively } from '@metaplex-foundation/umi'
 
 // The Mint ID of the pNFT Asset
-const mintId = publicKey('HckzL4iRK3j6DsznzedwNFzmFj4z7xCBoRkMMrd8THd5')
+const mintId = publicKey('1111111111111111111111111111111')
 
 // Fetch the Metadata of the pNFT Asset
 const metadata = await fetchMetadataFromSeeds(umi, { mint: mintId })

@@ -117,7 +117,7 @@ import {
 import { publicKey } from "@metaplex-foundation/umi";
 import { base58 } from "@metaplex-foundation/umi/serializers";
 
-// Mint ID of the Asset
+// Mint pNFT ID of the Asset
 const mintId = publicKey("11111111111111111111111111111111");
 
 // Fetch the mint token accounts
