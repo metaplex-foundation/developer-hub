@@ -3,9 +3,9 @@ import {
   documentationSection,
   guidesSection,
   referencesSection
-} from '@/shared/sections'
-import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
+} from '@/shared/sections';
+import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const tokenMetadata = {
   name: 'Token Metadata',
@@ -21,6 +21,15 @@ export const tokenMetadata = {
     {
       ...documentationSection('token-metadata'),
       navigation: [
+        {
+          title: 'Breaking Change!',
+          links: [
+            {
+              title: 'Account Size Reduction',
+              href: '/token-metadata/guides/account-size-reduction',
+            },
+          ],
+        },
         {
           title: 'Introduction',
           links: [
@@ -55,7 +64,7 @@ export const tokenMetadata = {
               href: '/token-metadata/delegates',
             }, // Delegate + Revoke + Delegated transfer and burn.
             { title: 'Locking Assets', href: '/token-metadata/lock' },
-            { title: 'Programmable NFTs', href: '/token-metadata/pnfts' },
+            { title: 'Programmable NFTs (pNFTs)', href: '/token-metadata/pnfts' },
             { title: 'NFT Escrow', href: '/token-metadata/escrow' },
             { title: 'SPL Token-2022', href: '/token-metadata/token-2022' },
           ],
@@ -72,6 +81,10 @@ export const tokenMetadata = {
             {
               title: 'Get Mints by Collection',
               href: '/token-metadata/guides/get-by-collection',
+            },
+            {
+              title: 'Account Size Reduction',
+              href: '/token-metadata/guides/account-size-reduction',
             },
           ],
         },

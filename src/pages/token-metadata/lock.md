@@ -10,14 +10,16 @@ In the table below, we list all the Token Delegates that support locking assets.
 
 | Delegate                                                                        | Lock/Unlock | Transfer | Burn | For              |
 | ------------------------------------------------------------------------------- | ----------- | -------- | ---- | ---------------- |
-| [Standard](/token-metadata/delegates#standard-delegate)                         | ✅          | ✅       | ✅   | All except PNFTs |
-| [Locked Transfer](/token-metadata/delegates#locked-transfer-delegate-pnft-only) | ✅          | ✅       | ❌   | PNFTs only       |
-| [Utility](/token-metadata/delegates#utility-delegate-pnft-only)                 | ✅          | ❌       | ✅   | PNFTs only       |
-| [Staking](/token-metadata/delegates#staking-delegate-pnft-only)                 | ✅          | ❌       | ❌   | PNFTs only       |
+| [Standard](/token-metadata/delegates#standard-delegate)                         | ✅          | ✅       | ✅   | All except pNFTs |
+| [Locked Transfer](/token-metadata/delegates#locked-transfer-delegate-pnft-only) | ✅          | ✅       | ❌   | pNFTs only       |
+| [Utility](/token-metadata/delegates#utility-delegate-pnft-only)                 | ✅          | ❌       | ✅   | pNFTs only       |
+| [Staking](/token-metadata/delegates#staking-delegate-pnft-only)                 | ✅          | ❌       | ❌   | pNFTs only       |
 
 Assuming we have an approved Token Delegate on an asset, let's now see how the delegate can lock and unlock it.
 
-## Lock an asset
+## Lock an Asset
+
+### NFT
 
 To lock an asset, the delegate may use the **Lock** instruction of the Token Metadata program. This instruction accepts the following attributes:
 
@@ -41,11 +43,52 @@ await lockV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Unlock an asset
+### pNFT
+
+```ts
+import {
+  fetchDigitalAssetWithAssociatedToken,
+  lockV1,
+  TokenStandard,
+} from "@metaplex-foundation/mpl-token-metadata";
+import { publicKey } from "@metaplex-foundation/umi";
+
+// Mint ID of the pNFT Asset
+const mintId = publicKey("11111111111111111111111111111111");
+
+// Fetch pNFT Asset with Token Accounts
+const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
+  umi,
+  mintId,
+  umi.identity.publicKey
+);
+
+// Send lock instruction
+const { signature } = await lockV1(umi, {
+  // Mint ID of the pNFT Asset
+  mint: mintId,
+  // Update Authority or Delegate Authority
+  authority: umi.identity,
+  // Token Standard
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+  // Owner of the pNFT Asset
+  tokenOwner: assetWithToken.token.owner,
+  // Token Account of the pNFT Asset
+  token: assetWithToken.token.publicKey,
+  // Token Record of the pNFT Asset
+  tokenRecord: assetWithToken.tokenRecord?.publicKey,
+}).sendAndConfirm(umi);
+
+console.log("Signature: ", base58.deserialize(signature));
+```
+
+## Unlock an Asset
+
+### NFT
 
 Reciprocally, the delegate may use the **Unlock** instruction of the Token Metadata program to unlock an asset. This instruction accepts the same attributes as the **Lock** instruction and can be used in the same way.
 
-{% dialect-switcher title="Unlock an asset" %}
+{% dialect-switcher title="Unlock an NFT Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -60,3 +103,45 @@ await unlockV1(umi, {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+### pNFT
+
+{% dialect-switcher title="Unlock a pNFT Asset" %}
+{% dialect title="JavaScript" id="js" %}
+```ts
+import {
+    fetchDigitalAssetWithAssociatedToken,
+    TokenStandard,
+    unlockV1
+} from "@metaplex-foundation/mpl-token-metadata";
+import { publicKey } from "@metaplex-foundation/umi";
+import { base58 } from "@metaplex-foundation/umi/serializers";
+
+// Mint pNFT ID of the Asset
+const mintId = publicKey("11111111111111111111111111111111");
+
+// Fetch the mint token accounts
+const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
+  umi,
+  mintId,
+  umi.identity.publicKey
+);
+
+// Send unlock instruction
+const { signature } = await unlockV1(umi, {
+  // Mint ID of the pNFT Asset
+  mint: mintId,
+  // Update Authority or Delegate Authority
+  authority: umi.identity,
+  // Token Standard
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+  // Owner of the pNFT Assets
+  tokenOwner: assetWithToken.token.owner,
+  // Token Account of the pNFT Asset
+  token: assetWithToken.token.publicKey,
+  // Token Record of the pNFT Asset
+  tokenRecord: assetWithToken.tokenRecord?.publicKey,
+}).sendAndConfirm(umi);
+
+console.log("Signature: ", base58.deserialize(signature));
+```

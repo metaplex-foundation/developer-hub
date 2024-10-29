@@ -33,7 +33,9 @@ export const umi = {
               title: 'Metaplex Umi Plugins',
               href: '/umi/metaplex-umi-plugins',
             },
-            { title: 'Web3js Differences and Adapters', href: '/umi/web3js-differences-and-adapters' },
+            { title: 'Web3js Differences and Adapters', 
+              href: '/umi/web3js-differences-and-adapters' 
+            },
           ],
         },
         {
@@ -55,6 +57,36 @@ export const umi = {
             { title: 'Serializers', href: '/umi/serializers' },
             { title: 'Storage', href: '/umi/storage' },
             { title: 'Transactions', href: '/umi/transactions' },
+          ],
+        },
+        {
+          title: 'Toolbox',
+          links: [
+            { 
+              title: 'Overview', 
+              href: '/umi/toolbox' 
+            },
+            { 
+              title: 'Create Account', 
+              href: '/umi/toolbox/create-account' },
+            {
+              title: 'Transfer Sol',
+              href: '/umi/toolbox/transfer-sol',
+            },
+            {
+              title: 'Token Managment',
+              href: '/umi/toolbox/token-managment',
+            },
+            { 
+              title: 'Priority Fees and Compute Managment', 
+              href: '/umi/toolbox/priority-fees-and-compute-managment' },
+            {
+              title: 'Address Lookup Table',
+              href: '/umi/toolbox/address-lookup-table',
+            },
+            { 
+              title: 'Transaction Memo', 
+              href: '/umi/toolbox/transaction-memo' },
           ],
         },
       ],

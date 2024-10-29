@@ -14,8 +14,7 @@ Sugar is a command-line tool to interact with Candy Machines. It allows you to m
 Setting up Sugar is as simple as opening your favourite terminal application and downloading a binary file. 
 
 {% callout %}
-
-View OtterSec's audit of Sugar commissioned by Ape16Z [here](https://docsend.com/view/is7963h8tbbvp2g9).
+Find a full guide on how to create a Candy Machine using sugar [here](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine).
 
 {% /callout %}
 
@@ -99,3 +98,4 @@ OPTIONS:
             RPC Url
 ```
 
+View OtterSec's audit of Sugar commissioned by Ape16Z [here](https://docsend.com/view/is7963h8tbbvp2g9).

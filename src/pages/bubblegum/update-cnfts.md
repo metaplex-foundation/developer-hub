@@ -47,6 +47,10 @@ await updateMetadata(umi, {
 
 This can also be done using the `getAssetWithProof` helper method:
 
+{% callout title="Transaction size" type="note" %}
+If you encounter transaction size errors, consider using `{ truncateCanopy: true }` with `getAssetWithProof`. See the [FAQ](/bubblegum/faq#replace-leaf-instruction-arguments) for details.
+{% /callout %}
+
 {% dialect-switcher title="Update a Compressed NFT as the Tree Owner using Helper Method" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
@@ -59,7 +63,7 @@ import {
 } from '@metaplex-foundation/mpl-bubblegum'
 
 // Use the helper to fetch the proof.
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 
 // Then we can use it to update metadata for the NFT.
 const updateArgs: UpdateArgsArgs = {
@@ -133,7 +137,7 @@ import {
 import { findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
 
 // Use the helper to fetch the proof.
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 
 // Then we can use it to update metadata for the NFT.
 const updateArgs: UpdateArgsArgs = {

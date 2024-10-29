@@ -97,3 +97,6 @@ Some of the instructions of the Token Metadata program have been through a few i
 - [UnverifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L423) Sized collections have been deprecated.
 - [SetCollectionSize](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L456) Sized collections have been deprecated.
 - [SetTokenStandard](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L464) the TokenStandard is automatically set now.
+
+## Where can I learn more about Token Metadata Account Size Reduction?
+Please check the [special FAQ](/token-metadata/guides/account-size-reduction) for more information or join our [Discord](https://discord.gg/metaplex) in case of remaining open quesitons.

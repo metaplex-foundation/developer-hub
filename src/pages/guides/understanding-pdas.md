@@ -15,7 +15,7 @@ Only the program that derived the PDA can sign transactions involving the addres
 ## Role of PDAs
 PDAs are primarily used to:
 
-- **Manage State**: PDAs allow programs to create accounts and store data to a determinstic PDA address which allows read and write access for the program.
+- **Manage State**: PDAs allow programs to create accounts and store data to a deterministic PDA address which allows read and write access for the program.
 - **Authorize Transactions**: Only the program that owns the PDA can authorize transactions involving it, ensuring secure controlled access. For example this allows programs and PDA accounts to store tokens/own NFTs that would require the current owner of the tokens/NFT to sign a transaction to transfer the items to another account.
 
 ## How PDAs are Derived

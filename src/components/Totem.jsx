@@ -7,9 +7,9 @@ export function Totem({ children }) {
   return <div className="totem overflow-hidden">{children}</div>
 }
 
-export function TotemAccordion({ children, title }) {
+export function TotemAccordion({ children, title, defaultOpen = false }) {
   return (
-    <Disclosure>
+    <Disclosure defaultOpen={defaultOpen}>
       {({ open }) => (
         <div>
           <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 hover:bg-neutral-800">

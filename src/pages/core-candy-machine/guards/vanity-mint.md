@@ -4,10 +4,6 @@ metaTitle: "Core Candy Machine - Guards - Vanity Mint"
 description: "The Core Candy Machine 'Vanity Mint' guard requires the minter to provide a specific vanity mint as Asset Address"
 ---
 
-{% callout type="note" %}
-This Guard is currently only available on devnet. [Follow us](https://x.com/metaplex) on twitter to see when it's merged to mainnet!
-{% /callout %}
-
 ## Overview
 
 The **Vanity Mint** guard allows minting if the specified mint address matches a specific format. This guard basically allows to add a Proof of Work (POW) requirement where the user has to grind for a Public Key that matches the pattern.

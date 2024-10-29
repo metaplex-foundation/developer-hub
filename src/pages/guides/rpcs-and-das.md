@@ -82,7 +82,7 @@ By indexing all the Digital Assets (NFTs and Tokens) users have access to much f
 ### Syncing
 DAS has the ability to sync the reindexing of data during certain lifecycle instructions that are sent to the blockchain. By watching these instructions such as create, update, burn, and transfer we can always be assured that the DAS indexed data is up to date.
 
-Currently Core, Token Metadata, and Bubbglegum are all indexed by DAS.
+Currently Core, Token Metadata, and Bubblegum are all indexed by DAS.
 
 To find out more about Metaplex DAS you can visit these pages:
 
