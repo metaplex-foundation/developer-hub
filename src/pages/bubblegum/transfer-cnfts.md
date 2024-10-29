@@ -11,6 +11,10 @@ The **Transfer** instruction can be used to transfer a Compressed NFT from one o
 
 Note that this instruction updates the Compressed NFT and therefore replaces the leaf on the Bubblegum Tree. This means additional parameters must be provided to verify the integrity of the Compressed NFT. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
+{% callout title="Transaction size" type="note" %}
+If you encounter transaction size errors, consider using `{ truncateCanopy: true }` with `getAssetWithProof`. See the [FAQ](/bubblegum/faq#replace-leaf-instruction-arguments) for details.
+{% /callout %}
+
 {% dialect-switcher title="Transfer a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
@@ -18,7 +22,7 @@ Note that this instruction updates the Compressed NFT and therefore replaces the
 ```ts
 import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await transfer(umi, {
   ...assetWithProof,
   leafOwner: currentLeafOwner,
@@ -31,7 +35,7 @@ await transfer(umi, {
 ```ts
 import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await transfer(umi, {
   ...assetWithProof,
   leafDelegate: currentLeafDelegate,

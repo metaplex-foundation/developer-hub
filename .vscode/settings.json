@@ -7,6 +7,12 @@
       "callout",
       "Datas",
       "Devnet",
+      "Bundlr",
+      "callout",
+      "composability",
+      "Datas",
+      "Devnet",
+      "eddsa",
       "hashlist",
       "Hookable",
       "Irys",
@@ -33,6 +39,9 @@
       "Solflare",
       "Solscan",
       "Struct",
+      "SPACEBAR",
+      "Struct",
+      "unverify",
       "usize"
     ],
   "editor.codeActionsOnSave": {

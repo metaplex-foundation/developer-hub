@@ -10,6 +10,10 @@ The **Burn** instruction can be used to burn a Compressed NFT and, therefore, re
 
 Note that, since this instruction replaces the leaf on the Bubblegum Tree, additional parameters must be provided to verify the integrity of the Compressed NFT before it can be burnt. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
+{% callout title="Transaction size" type="note" %}
+If you encounter transaction size errors, consider using `{ truncateCanopy: true }` with `getAssetWithProof`. See the [FAQ](/bubblegum/faq#replace-leaf-instruction-arguments) for details.
+{% /callout %}
+
 {% dialect-switcher title="Burn a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
@@ -17,7 +21,7 @@ Note that, since this instruction replaces the leaf on the Bubblegum Tree, addit
 ```ts
 import { getAssetWithProof, burn } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await burn(umi, {
   ...assetWithProof,
   leafOwner: currentLeafOwner,
@@ -29,7 +33,7 @@ await burn(umi, {
 ```ts
 import { getAssetWithProof, burn } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId)
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await burn(umi, {
   ...assetWithProof,
   leafDelegate: currentLeafDelegate,

@@ -6,7 +6,7 @@ description: A quick overview on Metaplex Rust SDKs.
 
 ## Introduction
 
-Metaplex provides Rust SDKs for most of our programs which have consistant and predictable outputs and functionality leading to improved intergration times for developers working with our products.
+Metaplex provides Rust SDKs for most of our programs which have consistent and predictable outputs and functionality leading to improved integration times for developers working with our products.
 
 ## Modules
 
@@ -29,7 +29,7 @@ mpl_core::accounts
 
 ### Instructions
 
-Each SDK comes with an **instructions** module that comes with multiple versions of the supplied instructions from the given program that strips away alot of the boiler plate depending on your needs.
+Each SDK comes with an **instructions** module that comes with multiple versions of the supplied instructions from the given program that strips away a lot of the boiler plate depending on your needs.
 
 An example below shows all the `CreateV1` instructions coming from the `mpl-core` crate.
 
@@ -51,7 +51,7 @@ mpl_core::instructions
 
 ### Types
 
-Each of the Metaplex Rust SDKs comes with a **types** module that supplies all the nessacery extra types that may not be in the initial accounts module structs.
+Each of the Metaplex Rust SDKs comes with a **types** module that supplies all the necessary extra types that may not be in the initial accounts module structs.
 
 These can be accessed from `<crate_name>::types`. In the case of `mpl-core` you could access the accounts as follows;
 
@@ -154,7 +154,7 @@ Now that we have our instruction ready we need to create a normal Solana transac
 
 ### Full Builder Example
 
-This is a full example of creating a instruction using a Metaplex `Builder` function and sending that transction off to the chain.
+This is a full example of creating a instruction using a Metaplex `Builder` function and sending that transaction off to the chain.
 
 ```rust
 use mpl_core::instructions::CreateV1Builder;
@@ -194,6 +194,6 @@ let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_s
 
 The `CpiBuilder` instructions are designed to be used when you wish to call and execute instructions from a Metaplex program from your own program.
 
-We have a full seperate guide discussing `CpiBuilders` which can be viewed here;
+We have a full separate guide discussing `CpiBuilders` which can be viewed here;
 
 [CPI Into a Metaplex Program](/guides/rust/how-to-cpi-into-a-metaplex-program)
