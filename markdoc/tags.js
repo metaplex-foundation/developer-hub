@@ -15,7 +15,6 @@ import {
 import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
-import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 import Image from '@/components/Image'
 
 
