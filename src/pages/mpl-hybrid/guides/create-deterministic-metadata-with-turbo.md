@@ -27,11 +27,11 @@ Install the required packages for this guide.
 npm i @ardrive/turbo-sdk
 ```
 
-### Assets Folder
+### Assets & Metadata Folder
 
-In this example, we will create the metadata from scratch, so you’ll just need to prepare all the images in the assets folder for the script to work.
+In this example, we will show you how to upload both the images and metadata, to do so, you'll need to prepare all the assets before starting. 
 
-Images (and metadata JSON files) should follow an incremental naming convention starting from 0.
+Both images and metadata files should follow an incremental naming convention starting from 0.
 
 ```
 assets/
@@ -41,13 +41,17 @@ assets/
 ├─ ...
 ```
 
-### Metadata Folder
+To generate assets and metadata, you can use [one of these methods](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata in the metadata folder like this:
 
-Since we’re building the metadata from scratch in this example, you’ll just need to create a metadata folder to store the newly generated metadata files.
+```
+metadata/
+├─ 0.json
+├─ 1.json
+├─ 2.json
+├─ ...
+```
 
-However, the workflow we're presenting in this guide will still work even if you use other methods to upload images or prepare the metadata. Just remember to use Turbo to upload the metadata files and obtain the correct Manifest ID, which is required for setting up the Hybrid Escrow.
-
-To generate assets and metadata, you can use [one of these methods](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata in the metadata folder. If you do this, skip ahead to [this part of the tutorial](#create-and-upload-the-metadata-files)
+**Note**: When creating the metadata, make sure to follow the proper [JSON schema for NFTs](/token-metadata/token-standard#the-non-fungible-standard)!
 
 ## Setting up Turbo 
 
@@ -55,6 +59,10 @@ Since Turbo is compatible with multiple tokens and chains, we'll need to configu
 
 ```javascript
 import { TurboFactory } from '@ardrive/turbo-sdk';
+
+// Import here the keypair.json file that you're going
+// to use to pay for the upload
+import secretKey from "/path/to/your/kepypair.json";
 
 const turbo = TurboFactory.authenticated({
   privateKey: bs58.encode(Uint8Array.from(secretKey)),
@@ -71,7 +79,7 @@ const turbo = TurboFactory.authenticated({
 
 Turbo simplifies the process of uploading entire folders of images and metadata using the `TurboAuthenticatedClient.uploadFolder()` function. This function supports Manifests by default, returning a Manifest ID via `result.manifestResponse?.id`, which can be used for metadata creation and escrow setup.
 
-To simplify the process, I've created a helper function called `uploadAssetsAndMetadata()` that handles the entire workflow.
+To simplify the process, this guide provides helper function called `uploadAssetsAndMetadata()` that handles the entire workflow.
 
 ```javascript
 const metadataUploadResponse = await uploadAssetsAndMetadata(turbo);
@@ -85,7 +93,7 @@ const metadataUploadResponse = await uploadAssetsAndMetadata(turbo);
 
 3. Once the wallet has enough Winc, the image folder is uploaded using `TurboAuthenticatedClient.uploadFolder()`, which returns a Manifest ID for the images.
 
-4. Using the image folder’s Manifest ID, metadata is generated for each image and saved to a folder. The metadata folder is then uploaded using `TurboAuthenticatedClient.uploadFolder()`, returning a Manifest ID that can be used for the escrow process.
+4. The metadata folder is then uploaded using `TurboAuthenticatedClient.uploadFolder()`, returning a Manifest ID that can be used for the escrow process.
 
 ### Calculating Required Lamports
 
@@ -168,76 +176,9 @@ const imageUploadResponse = await turbo.uploadFolder({
 });
 ```
 
-### Create and Upload the Metadata Files
+### Upload the Metadata Files
 
-Once the images have been uploaded and the manifest ID is returned, the next step is to generate the metadata for both the assets and the collection. We'll use the `createMetadataFiles()` helper function to handle this efficiently.
-
-```javascript
-// Create metadata files concurrently
-await createMetadataFiles(imageUploadResponse);
-```
-
-The `createMetadataFiles()` function uses `createMetadata()` to generate metadata for each individual asset and `createCollectionMetadata()` to generate metadata for the collection asset.
-
-**Note**: The metadata files are generated concurrently using `Promise.all`, improving performance by creating all metadata files in parallel.
-
-```javascript
-async function createMetadataFiles(imageUploadResponse: TurboUploadFolderResponse) {
-    const files = fs.readdirSync(imageFolderPath).filter(file => file.endsWith('.png') && file !== 'collection.png');
-
-    // Generate metadata files concurrently using Promise.all
-    await Promise.all(
-        files.map((file, i) => {
-            const metadata = createMetadata(i, imageUploadResponse);
-            const jsonFilePath = path.join(metadataFolderPath, `${i}.json`);
-            return fs.promises.writeFile(jsonFilePath, JSON.stringify(metadata, null, 2));
-        })
-    );
-
-    // Create metadata for collection
-    const collectionMetadata = createCollectionMetadata(imageUploadResponse);
-    const jsonFilePath = path.join(metadataFolderPath, `collection.json`);
-    await fs.promises.writeFile(jsonFilePath, JSON.stringify(collectionMetadata, null, 2));
-}
-
-function createMetadata(i: number, imageUploadResponse: TurboUploadFolderResponse) {
-    return {
-        name: `Hybrid Asset  #${i}`,
-        symbol: "HYB",
-        image: `arweave.net/${imageUploadResponse.manifestResponse?.id}/${i}.png`,
-        external_url: 'https://example.com',
-        attributes: [
-            { trait_type: 'trait1', value: 'value1' },
-            { trait_type: 'trait2', value: 'value2' },
-        ],
-        properties: {
-            files: [{ uri: `arweave.net/${imageUploadResponse.manifestResponse?.id}/${i}.png`, type: 'image/png' }],
-            category: 'image',
-        },
-    };
-}
-
-function createCollectionMetadata(imageUploadResponse: TurboUploadFolderResponse) {
-    return {
-        name: `Hybrid Collection`,
-        symbol: "HYB",
-        image: `arweave.net/${imageUploadResponse.manifestResponse?.id}/collection.png`,
-        external_url: 'https://example.com',
-        attributes: [
-            { trait_type: 'trait1', value: 'value1' },
-            { trait_type: 'trait2', value: 'value2' },
-        ],
-        properties: {
-            files: [{ uri: `arweave.net/${imageUploadResponse.manifestResponse?.id}/collection.png`, type: 'image/png' }],
-            category: 'image',
-        },
-    };
-}
-```
-
-**Note**: Depending on your specific use case, you may need to modify certain fields in the metadata to fit your requirements. However, make sure to follow the proper [JSON schema for NFTs](/token-metadata/token-standard#the-non-fungible-standard) when creating the metadata.
-
-Once the metadata for all assets and the collection has been created, the files are saved into the designated metadata folder and prepared for upload. The next step follows the same preparation process as before:
+The upload of the metadata follows the same preparation process as before and will return the manifestID that we need for the Hybrid Escrow:
 
 ```javascript
 // Calculate and upload metadata folder
@@ -259,122 +200,7 @@ console.log('Metadata Manifest ID:', metadataUploadResponse.manifestResponse?.id
 return metadataUploadResponse;
 ```
 
-## Create the Collection and all the Assets onchain
-
-In this final step, we set up Umi and create the on-chain collection along with its associated assets.
-
-### Setting up Umi
-
-While setting up Umi you can use or generate keypairs/wallets from different sources. You create a new wallet for testing, import an existing wallet from the filesystem, or use `walletAdapter` if you are creating a website/dApp.  
-
-{% totem %}
-
-{% totem-accordion title="With a New Wallet" %}
-
-```ts
-const umi = createUmi('https://api.devnet.solana.com')
-
-const signer = generateSigner(umi)
-
-umi.use(signerIdentity(signer))
-
-// This will airdrop SOL on devnet only for testing.
-console.log('Airdropping 1 SOL to identity')
-await umi.rpc.airdrop(umi.identity.publickey)
-```
-
-{% /totem-accordion %}
-
-{% totem-accordion title="With an Existing Wallet" %}
-
-```ts
-const umi = createUmi('https://api.devnet.solana.com')
-
-// You will need to us fs and navigate the filesystem to
-// load the wallet you wish to use via relative pathing.
-const walletFile = fs.readFileSync('./keypair.json')
-  
-
-// Convert your walletFile onto a keypair.
-let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
-
-// Load the keypair into umi.
-umi.use(keypairIdentity(keypair));
-```
-
-{% /totem-accordion %}
-
-{% totem-accordion title="With the Wallet Adapter" %}
-
-```ts
-import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
-import { useWallet } from '@solana/wallet-adapter-react'
-
-const wallet = useWallet()
-
-const umi = createUmi('https://api.devnet.solana.com')
-// Register Wallet Adapter to Umi
-.use(walletAdapterIdentity(wallet))
-```
-
-{% /totem-accordion %}
-
-{% /totem %}
-
-**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
-
-### Creates Collection and Assets
-
-We now can finally use the umi instance we just created to call the `createHybridCollection()` helper to handle the creation of all the necessary on-chain accounts.
-
-```javascript
-await createHybridCollection(umi, metadataUploadResponse);
-```
-
-We first create a collection, which is linked to the manifest ID of the metadata uploaded earlier (e.g., collection.json).
-
-After the collection is created, we mint each asset and link it to the collection. Each asset will point to its respective metadata (e.g., 0.json, 1.json), ensuring they are correctly organized under the collection.
-
-**Note**: Since this guide focuses on creating metadata for MPL-Hybrid, the owner of the assets will be an escrow account, which we set up using the program. If you intend to distribute the NFTs and lock tokens in the escrow, you may need to modify the owner field accordingly for each asset.
-
-```javascript
-async function createHybridCollection(umi: Umi, metadataUploadResponse: TurboUploadFolderResponse) {
-    // Create collection
-    const collection = generateSigner(umi);
-    console.log("Collection Address: ", collection.publicKey);
-
-    const createCollectionTx = await createCollection(umi, {
-        collection,
-        name: 'Hybrid Collection',
-        uri: `arweave.net/${metadataUploadResponse.manifestResponse?.id}/collection.json`,
-    }).sendAndConfirm(umi);
-    console.log(`Collection created! https://explorer.solana.com/tx/${base58.deserialize(createCollectionTx.signature)[0]}?cluster=devnet`);
-
-    // Create assets concurrently using Promise.all
-    const collectionSize = 10;
-
-    const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
-        string({ size: 'variable' }).serialize('escrow'),
-        publicKeySerializer().serialize(collection),
-    ]);
-
-    await Promise.all(
-        Array.from({ length: collectionSize }, async (_, i) => {
-            const asset = generateSigner(umi);
-            const createAssetTx = await create(umi, {
-                asset,
-                collection,
-                owner: escrow,
-                name: `Hybrid Asset #${i}`,
-                uri: `arweave.net/${metadataUploadResponse.manifestResponse?.id}/${i}.json`,
-            }).sendAndConfirm(umi);
-            console.log(`Asset #${i} created! https://explorer.solana.com/tx/${base58.deserialize(createAssetTx.signature)[0]}?cluster=devnet`);
-        })
-    );
-}
-```
-
-## Full Code Example
+## Full code Example
 
 Here's the full code example that you can copy and paste for easy use
 
@@ -383,19 +209,19 @@ Here's the full code example that you can copy and paste for easy use
 {% totem-accordion title="Full Code Example" %}
 
 ```javascript
-import { TurboFactory, TurboAuthenticatedClient, lamportToTokenAmount, TurboUploadFolderResponse } from '@ardrive/turbo-sdk';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { generateSigner, createSignerFromKeypair, signerIdentity, Umi } from '@metaplex-foundation/umi';
-import { string, base58, publicKey as publicKeySerializer } from '@metaplex-foundation/umi/serializers';
-import { mplCore, create, createCollection } from '@metaplex-foundation/mpl-core';
-import { MPL_HYBRID_PROGRAM_ID } from '@metaplex-foundation/mpl-hybrid';
+import { 
+    TurboFactory, 
+    TurboAuthenticatedClient, 
+    lamportToTokenAmount, 
+    TurboUploadFolderResponse 
+} from '@ardrive/turbo-sdk';
 
 import bs58 from 'bs58';
 import path from 'path';
 import fs from 'fs';
 import BigNumber from 'bignumber.js';
 
-import secretKey from "/Users/leo/.config/solana/id.json";
+import secretKey from "/path/to/your/kepypair.json";
 
 const imageFolderPath = path.join(__dirname, './assets');
 const metadataFolderPath = path.join(__dirname, './metadata');
@@ -411,17 +237,8 @@ const metadataFolderPath = path.join(__dirname, './metadata');
             uploadServiceConfig: { url: "https://upload.ardrive.dev" },
         });
 
-        /// Step 2: Upload Images
+        /// Step 2: Upload Images and Metadata
         const metadataUploadResponse = await uploadAssetsAndMetadata(turbo);
-
-        /// Step 3: Setup Umi and Create Collection & Assets
-        const umi = createUmi('https://api.devnet.solana.com')
-            .use(mplCore());
-
-        const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
-        umi.use(signerIdentity(createSignerFromKeypair(umi, keypair)));
-
-        await createHybridCollection(umi, metadataUploadResponse);
     } catch (error) {
         console.error("Error during execution:", error);
     }
@@ -431,11 +248,11 @@ async function uploadAssetsAndMetadata(turbo: TurboAuthenticatedClient): Promise
     // Calculate and upload image folder
     const requiredLamportsForAssets = await calculateRequiredLamportsForUpload(
         turbo,
-        calculateFolderSize(imageFolderPath)
+        await calculateFolderSize(imageFolderPath)
     );
 
     // Top up wallet if required
-    // await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsForAssets)});
+    await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsForAssets)});
 
     // Upload image folder
     const imageUploadResponse = await turbo.uploadFolder({
@@ -443,17 +260,14 @@ async function uploadAssetsAndMetadata(turbo: TurboAuthenticatedClient): Promise
         dataItemOpts: { tags: [{ name: 'Content-Type', value: 'image/jpeg' }] },
     });
 
-    // Create metadata files concurrently
-    await createMetadataFiles(imageUploadResponse);
-
     // Calculate and upload metadata folder
     const requiredLamportsForMetadata = await calculateRequiredLamportsForUpload(
         turbo,
-        calculateFolderSize(metadataFolderPath)
+        await calculateFolderSize(metadataFolderPath)
     );
 
     // Top up wallet if required
-    // await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsForMetadata)});
+    await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsForMetadata)});
 
     // Upload metadata folder
     const metadataUploadResponse = await turbo.uploadFolder({
@@ -465,102 +279,16 @@ async function uploadAssetsAndMetadata(turbo: TurboAuthenticatedClient): Promise
     return metadataUploadResponse;
 }
 
-async function createMetadataFiles(imageUploadResponse: TurboUploadFolderResponse) {
-    const files = fs.readdirSync(imageFolderPath).filter(file => file.endsWith('.png') && file !== 'collection.png');
-
-    // Generate metadata files concurrently using Promise.all
-    await Promise.all(
-        files.map((file, i) => {
-            const metadata = createMetadata(i, imageUploadResponse);
-            const jsonFilePath = path.join(metadataFolderPath, `${i}.json`);
-            return fs.promises.writeFile(jsonFilePath, JSON.stringify(metadata, null, 2));
-        })
-    );
-
-    // Create metadata for collection
-    const collectionMetadata = createCollectionMetadata(imageUploadResponse);
-    const jsonFilePath = path.join(metadataFolderPath, `collection.json`);
-    await fs.promises.writeFile(jsonFilePath, JSON.stringify(collectionMetadata, null, 2));
-}
-
-function createMetadata(i: number, imageUploadResponse: TurboUploadFolderResponse) {
-    return {
-        name: `Hybrid Asset  #${i}`,
-        symbol: "HYB",
-        image: `arweave.net/${imageUploadResponse.manifestResponse?.id}/${i}.png`,
-        external_url: 'https://example.com',
-        attributes: [
-            { trait_type: 'trait1', value: 'value1' },
-            { trait_type: 'trait2', value: 'value2' },
-        ],
-        properties: {
-            files: [{ uri: `arweave.net/${imageUploadResponse.manifestResponse?.id}/${i}.png`, type: 'image/png' }],
-            category: 'image',
-        },
-    };
-}
-
-function createCollectionMetadata(imageUploadResponse: TurboUploadFolderResponse) {
-    return {
-        name: `Hybrid Collection`,
-        symbol: "HYB",
-        image: `arweave.net/${imageUploadResponse.manifestResponse?.id}/collection.png`,
-        external_url: 'https://example.com',
-        attributes: [
-            { trait_type: 'trait1', value: 'value1' },
-            { trait_type: 'trait2', value: 'value2' },
-        ],
-        properties: {
-            files: [{ uri: `arweave.net/${imageUploadResponse.manifestResponse?.id}/collection.png`, type: 'image/png' }],
-            category: 'image',
-        },
-    };
-}
-
-async function createHybridCollection(umi: Umi, metadataUploadResponse: TurboUploadFolderResponse) {
-    // Create collection
-    const collection = generateSigner(umi);
-    console.log("Collection Address: ", collection.publicKey);
-
-    const createCollectionTx = await createCollection(umi, {
-        collection,
-        name: 'Hybrid Collection',
-        uri: `arweave.net/${metadataUploadResponse.manifestResponse?.id}/collection.json`,
-    }).sendAndConfirm(umi);
-    console.log(`Collection created! https://explorer.solana.com/tx/${base58.deserialize(createCollectionTx.signature)[0]}?cluster=devnet`);
-
-    // Create assets concurrently using Promise.all
-    const collectionSize = 10;
-    const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
-        string({ size: 'variable' }).serialize('escrow'),
-        publicKeySerializer().serialize(collection),
-    ]);
-
-    await Promise.all(
-        Array.from({ length: collectionSize }, async (_, i) => {
-            const asset = generateSigner(umi);
-            const createAssetTx = await create(umi, {
-                asset,
-                collection,
-                owner: escrow,
-                name: `Hybrid Asset #${i}`,
-                uri: `arweave.net/${metadataUploadResponse.manifestResponse?.id}/${i}.json`,
-            }).sendAndConfirm(umi);
-            console.log(`Asset #${i} created! https://explorer.solana.com/tx/${base58.deserialize(createAssetTx.signature)[0]}?cluster=devnet`);
-        })
-    );
-}
-
 function calculateFolderSize(folderPath: string): number {
-    return fs.readdirSync(folderPath).reduce((totalSize, item) => {
-        const fullPath = path.join(folderPath, item);
-        
-        const stats = fs.statSync(fullPath);
+  return fs.readdirSync(folderPath).reduce((totalSize, item) => {
+    const fullPath = path.join(folderPath, item);
+    
+    const stats = fs.statSync(fullPath);
 
-        return stats.isFile() 
-            ? totalSize + stats.size 
-            : totalSize + calculateFolderSize(fullPath);
-    }, 0);
+    return stats.isFile() 
+        ? totalSize + stats.size 
+        : totalSize + calculateFolderSize(fullPath);
+  }, 0);
 }
 
 async function calculateRequiredLamportsForUpload(turbo: TurboAuthenticatedClient, fileSize: number): Promise<number> {
@@ -590,6 +318,8 @@ async function calculateRequiredLamportsForUpload(turbo: TurboAuthenticatedClien
     /// Return the amount of SOL required in Lamports
     return Math.floor(requiredSol * 1_000_000_000)
 }
+
+
 ```
 
 {% /totem %}
