@@ -7,7 +7,7 @@ created: '09-17-2024'
 updated: '09-17-2024'
 ---
 
-This guide will demonstrate how to create an **Hybrid Collection** fully end-to-end. Starting from how to create all the assets needed, to how to create the escrow and setting up all the parameters for the **capture** and **release** feature!
+This guide will demonstrate how to create an **Hybrid Collection** fully end-to-end. Starting from how to create all the assets needed, to how to create the escrow and setting up all the parameters to swap from Fungible Token to Non Fungible Token and viceversa!
 
 {% callout title="What is MPL-Hybrid?" %}
 
@@ -76,7 +76,7 @@ Manifest allows multiple transactions to be linked under a single base transacti
 - ...
 - https://arweave.net/manifestID/9999.json
 
-If you're unfamiliar with how to create a core digital asset collection with deterministic URIs, you can follow [this guide](create-deterministic-metadata-with-turbo) for a detailed walkthrough.
+If you're unfamiliar with creating deterministic URIs, you can follow [this guide](create-deterministic-metadata-with-turbo) for a detailed walkthrough. Additionally, you can find instructions on creating a [collection](/core/guides/javascript/how-to-create-a-core-collection-with-javascript) and the [assets](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript) required for the Hybrid program to function.
 
 **Note**: Currently, the MPL-Hybrid program randomly picks a number between the min and max URI index provided and does not check to see if the URI is already used. As such, swapping suffers from the [Birthday Paradox](https://betterexplained.com/articles/understanding-the-birthday-paradox/). In order for projects to benefit from sufficient swap randomization, we recommend preparing and uploading a minimum of 250k asset metadata that can be randomly picked from. The more available potential assets the better!
 
