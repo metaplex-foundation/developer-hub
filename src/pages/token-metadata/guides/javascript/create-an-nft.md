@@ -28,7 +28,7 @@ npm init
 
 ### Required Packages
 
-Install the required pacakges for this guide.
+Install the required packages for this guide.
 
 {% packagesUsed packages=["umi", "umiDefaults" ,"tokenMetadata", "core", "@solana/spl-token"] type="npm" /%}
 

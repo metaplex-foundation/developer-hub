@@ -27,7 +27,7 @@ npm init
 
 ### Required Packages
 
-Install the required pacakges for this guide.
+Install the required packages for this guide.
 
 {% packagesUsed packages=["umi", "umiDefaults" ,"toolbox"] type="npm" /%}
 
