@@ -22,11 +22,11 @@ So far, though, these types of products have been held back by the cost of rent 
 
 | Number of cNFTs | Storage Cost | Transaction Cost | Total Cost | Cost per cNFT |
 | --------------- | ------------ | ---------------- | ---------- | ------------- |
-| 10,000          | 3.48         | 0.005            | 3.485      | 0.0003485     |
-| 100,000         | 4.17         | 0.05             | 4.22       | 0.0000422     |
-| 1,000,000       | 4.85         | 0.5              | 5.35       | 0.0000053     |
-| 100,000,000     | 6.45         | 50               | 56.45      | 0.0000006     |
-| 1,000,000,000   | 7.13         | 500              | 507.13     | 0.0000005     |
+| 10,000          | 3.48         | 0.05             | 3.485      | 0.0003485     |
+| 100,000         | 4.17         | 0.5              | 4.67       | 0.0000467     |
+| 1,000,000       | 4.85         | 5                | 9.85       | 0.0000099     |
+| 100,000,000     | 6.45         | 500              | 506.45     | 0.0000050     |
+| 1,000,000,000   | 7.13         | 5000             | 5007.13    | 0.0000050     |
 
 These compressed NFTs can be transferred, delegated, and even decompressed into regular NFTs for interoperability with existing smart contracts.
 
