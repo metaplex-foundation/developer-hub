@@ -25,7 +25,7 @@ npm i @metaplex-foundation/umi-bundle-defaults
 ```
 
 ```
-npm i @solana/web3.js
+npm i @solana/web3.js@1
 ```
 
 ### For library authors
