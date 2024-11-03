@@ -4,8 +4,7 @@ metaTitle: Metaplex Solana NextJs Tailwind Template | Web UI Templates
 description: A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
 ---
 
-This is a downloadable reusable UI template that utilizes Nextjs and Tailwind for the front end framework while also being preinstalled with Metaplex Umi, Solana WalletAdapter, and Zustand global store for ease of use.
-
+Downloadable and reusable templates that utilizes Nextjs and Tailwind for the front end framework while also being preinstalled with Metaplex Umi, Solana WalletAdapter, and Zustand global store for ease of use.
 
 {% image src="/images/metaplex-next-js-template.png" classes="m-auto" /%}
 
@@ -21,15 +20,31 @@ This is a downloadable reusable UI template that utilizes Nextjs and Tailwind fo
 
 ## Installation
 
-```
+We currently have a number of templates available for Next JS with slightly different configurations and UI frameworks/component library.
+
+### Tailwind
+
+```shell
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template.git
 ```
+
+Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+
+### Tailwind + Shadcn
+
+```shell
+git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template.git
+```
+
+Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
+
+_The following sections cover common features shared by all templates listed on this page. Template-specific features are not included here; please refer to the respective GitHub repositories for detailed documentation on individual templates._
 
 ## Setup
 
 ### Change RPC
 
-You are free to set up the RPC url into project as you wish either via
+You are free to set up the RPC url into your project as you wish either via:
 
 - .env
 - constants.ts file
@@ -45,11 +60,7 @@ const useUmiStore = create<UmiState>()((set) => ({
       createNoopSigner(publicKey('11111111111111111111111111111111'))
     )
   ),
-  signer: undefined,
-  updateSigner: (signer) => {
-    console.log('updateSigner')
-    set(() => ({ signer: createSignerFromWalletAdapter(signer) }))
-  },
+  ...
 }))
 ```
 
@@ -57,11 +68,11 @@ const useUmiStore = create<UmiState>()((set) => ({
 
 Zustand is a global store that allows you to access the store state from both hooks and regular state fetching.
 
-By storing the umiInstance in **zustand** we can access it in both `ts` and `tsx` files while also having the state update via other providers and hooks such as walletAdapter.
+By storing the umiInstance in **zustand** we can access it in both `.ts` and `.tsx` files while also having the state update via other providers and hooks such as `walletAdapter`.
 
 While it's normally easier to use the helper methods below to access umi you can also access the state methods manually by calling for the `umiStore` state yourself.
 
-When fetching the umi state directly without a helper it will only pickup the umi instance and not the latest signer. By design when the walletAdapter changes state the state of the `signer` in the `umiStore` is updated but **NOT** applied to the `umi` state. So you will need to also pull the latest `signer` state and apply it to `umi`. This behaviour can be outlined in the `umiProvider.tsx` file. The helpers always pull a fresh instance of the `signer` state.
+When fetching the `umi` state directly without a helper it will only pickup the umi instance and not the latest signer. By design when the walletAdapter changes state the state of the `signer` in the `umiStore` is updated but **NOT** applied to the `umi` state. So you will need to also pull the latest `signer` state and apply it to `umi`. This behavior can be outlined in the `umiProvider.tsx` file. In contrast, the `umi` [helpers](#helpers) always pull a fresh instance of the `signer` state.
 
 ```ts
 // umiProvider.tsx snippet
@@ -69,7 +80,7 @@ useEffect(() => {
   if (!wallet.publicKey) return
   // When wallet.publicKey changes, update the signer in umiStore with the new wallet adapter.
   umiStore.updateSigner(wallet as unknown as WalletAdapter)
-}, [wallet.publicKey])
+}, [wallet, umiStore])
 ```
 
 ### Access Umi in .tsx
@@ -94,19 +105,21 @@ umi.use(signerIdentity(signer))
 
 ## Helpers
 
-Stored in the `/lib/umi` folder there are some pre made helpers you can use to make your development easier.
+Located in the `/lib/umi` folder there are some pre made helpers you can use to make your development easier.
 
-Umi is split up into several components which can be called in different scenarios.
+Umi helpers are split up into several areas which can be called in different scenarios.
+
+### Transaction Helpers
 
 #### sendAndConfirmWithWalletAdapter()
 
 Passing a transaction into `sendAndConfirmWithWalletAdapter()` will send the transaction while pulling the latest walletAdapter state from the zustand `umiStore` and will return the signature as a `string`. This can be accessed in both `.ts` and `.tsx` files.
 
-The function also provides and locks in the commitment level across `blockhash`, `send`, and `confirm` if provided. By default `confirmed` is used if no value is passed.
+The function also provides and locks in the commitment level across `blockhash`, `send`, and `confirm` if provided. By default the commitment level of `confirmed` is used if no value is passed.
 
-We also have a `skipPreflight` flag that can be enabled.
+There is also a `skipPreflight` flag that can be enabled if you need to debug failing transactions on chain. For more information about transactions errors you can view this guide [How to Diagnose Transaction Errors on Solana](/guides/general/how-to-diagnose-solana-transaction-errors).
 
-If using priority fees it would best to set them here so they can globally be used by the send function or to remove them entirely if you do not wish to use them.
+`sendAndConfirmWithWalletAdapter()` comes ready for priority fees via the `setComputeUnitPrice` instruction. These should reviewed and possibly adjusted or removed depending on your situation.
 
 ```ts
 import useUmiStore from '@/store/useUmiStore'
@@ -162,9 +175,11 @@ const sendAndConfirmWalletAdapter = async (
 export default sendAndConfirmWalletAdapter
 ```
 
+### Umi State
+
 #### umiWithCurrentWalletAdapter()
 
-This fetches the current umi state with the current walletAdapter state from the `umiStore`. This is used to create transactions or perform operations with umi that requires the current wallet adapter user.
+`umiWithCurrentWalletAdapter` fetches the current umi state with the current walletAdapter state from the `umiStore`. This can then be used to create transactions or perform operations with umi that requires the current wallet adapter user.
 
 Can be used in both `.ts` and `.tsx` files
 
@@ -187,7 +202,9 @@ export default umiWithCurrentWalletAdapter
 
 #### umiWithSigner()
 
-`umiWithSigner()` allows you to pass in a signer element (`generateSigner()`, `createNoopSigner()`) and use it with the umi instance stored in the `umiStore` state.
+`umiWithSigner` allows you to pass in a signer element (`generateSigner()`, `createNoopSigner()`) as an arg which is then assigned to the `umi` instance currently stored in state. This is useful for when you want an `umi` instance that uses a private key or `generatedSigner`/`createNoopSigner`.
+
+Can be used in both `.ts` and `.tsx` files
 
 ```ts
 import useUmiStore from '@/store/useUmiStore'
@@ -202,13 +219,13 @@ const umiWithSigner = (signer: Signer) => {
 export default umiWithSigner
 ```
 
-#### Example Transaction Using Helpers
+### Example Transaction Using Helpers
 
 Within the `/lib` folder you will find a `transferSol` example transaction that utilizes both the fetching of the umi state using `umiWithCurrentWalletAdapter()` and the sending of the generated transaction using `sendAndConfirmWithWalletAdapter()`.
 
-By pulling state from the umi store with `umiWithCurrentWalletAdapter()` if any of our transaction args require the `signer` type this will be automatically pulled from the umi instance which is generated with walletAdapter. In this case the `from` account is determined by the current signer connected to umi (walletAdapter) and auto inferred in the transaction for us.
+By pulling state from the umi store with `umiWithCurrentWalletAdapter()` if any of our transaction args require the `signer` type this will be automatically pulled from the umi instance which is generated with current user of `walletAdapter`. In this case the `from` account is determined by the current signer connected to umi (walletAdapter) and auto inferred in the transaction for us.
 
-By then sending transaction with `sendAndConfirmWithWalletAdapter` the signing process will use the walletAdapter and ask the current user to signer the transaction. The transaction will be sent to the chain.
+By then sending transaction with `sendAndConfirmWithWalletAdapter` the signing process will use the `walletAdapter` and ask the current user to sign the transaction. The transaction will then be sent to the chain.
 
 ```ts
 // Example of a function that transfers SOL from one account to another pulling umi
