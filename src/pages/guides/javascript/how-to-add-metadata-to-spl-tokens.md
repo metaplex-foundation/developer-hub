@@ -8,6 +8,11 @@ updated: '10-01-2024'
 
 This guide will take you through adding metadata to an already initialized Solana Token (SPL Token) using the Metaplex Token Metadata protocol.
 
+{% callout %}
+It is recommended to use the available [create helper](https://developers.metaplex.com/token-metadata/mint#create-helpers) functions to create and initialize your token instead of doing so separately. If you are looking on how to do this, check out this guide instead [`How to create a Solana Token`](https://developers.metaplex.com/guides/javascript/how-to-create-a-solana-token).
+
+{% /callout %}
+
 ## Prerequisite
 
 - Code Editor of your choice (recommended Visual Studio Code)
@@ -15,11 +20,11 @@ This guide will take you through adding metadata to an already initialized Solan
 
 ## Initial Setup
 
-This guide will start by first initializing an SPL token without any metadata and finish of with adding metadata to this initialized token with JavaScript. You might need to modify and move functions around to suite your needs. 
+This guide assumes that you already have an SPL token initialized for which you'd like to add metadata to. You might need to modify and move functions around to suite your needs. 
 
 ## Initializing
 
-Start by initializing a new empty project using a JS/TS package manager (npm, yarn, pnpm, bun) of your choice.
+Start by initializing a new empty project using a JS/TS package manager (npm, yarn, pnpm, bun, deno) of your choice.
 
 ```bash
 npm init -y
@@ -27,9 +32,9 @@ npm init -y
 
 ### Required Packages
 
-Install the required pacakges for this guide.
+Install the required packages for this guide.
 
-{% packagesUsed packages=["umi", "umiDefaults" ,"tokenMetadata", "mpl-toolbox"] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefaults" ,"tokenMetadata"] type="npm" /%}
 
 ```bash
 npm i @metaplex-foundation/umi
@@ -43,17 +48,11 @@ npm i @metaplex-foundation/umi-bundle-defaults
 npm i @metaplex-foundation/mpl-token-metadata
 ```
 
-```bash
-npm i @metaplex-foundation/mpl-toolbox
-```
-
 ### Imports and Wrapper Function
 
-We will list the necessary imports and create two wrappers functions,
+We will list the necessary imports and our wrapper function,
 
-1. `createSPLToken` _(Optional, if you do not have an SPL token already)_
-
-2. `addMetadata`
+1. `addMetadata`
 
 ```typescript
 import {
@@ -61,7 +60,6 @@ import {
 	findMetadataPda,
 	mplTokenMetadata,
 } from "@metaplex-foundation/mpl-token-metadata";
-import { createMint, mplToolbox } from "@metaplex-foundation/mpl-toolbox";
 import { generateSigner, signerIdentity, sol } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { base58 } from "@metaplex-foundation/umi/serializers";
@@ -70,17 +68,6 @@ import { base58 } from "@metaplex-foundation/umi/serializers";
 /// instantiate umi 
 ///
 
-// Create SPL token wrapper function
-async function createSPLToken() {
-	///
-	///
-	///  SPL token initialization code will go here
-	///
-	///
-}
-
-// run the function
-createSPLToken();
 
 // Add metadata to an existing SPL token wrapper function
 async function addMetadata() {
@@ -138,37 +125,9 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 umi.use(keypairIdentity(umiSigner));
 ```
 
-## Creating the Token
-
-This section is can be skipped if you already have an SPL token initialized, otherwise let's update the `createSPLToken` wrapper function. 
-
-We will use the `createMint` method from `mpl-toolbox` library to initialize an SPL token mint. We will also need to initialize a new keypair for the mint account.
-
-```typescript
-// initialize a new keypair for our mint account
-const mint = generateSigner(umi);
-
-// Create SPL token wrapper function
-async function createSPLToken() {
-	let tx = await createMint(umi, {
-		mint,
-		decimals: 6,
-		mintAuthority: umi.identity.publicKey,
-		freezeAuthority: null,
-	}).sendAndConfirm(umi);
-
-	let txSig = base58.deserialize(tx.signature);
-
-	console.log("token mint address -> ", mint.publicKey);
-	console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
-}
-```
-
-Calling the function will initialize a new SPL token, but it won't have any metadata associated with it.
-
 ## Adding Metadata
 
-Adding metadata is also as simple as creating the token, we will utilize the `createMetadataAccountV3` method from the `mpl-token-metadata` library.
+Adding metadata is also as simple as creating an SPL token. We will utilize the `createMetadataAccountV3` method from the `mpl-token-metadata` library.
 
 Also note that this guide assumes that you already had your off-chain token metadata prepared beforehand. We will need the name, off-chain uri address and symbol
 
@@ -188,16 +147,18 @@ const tokenMetadata = {
 
 // Add metadata to an existing SPL token wrapper function
 async function addMetadata() {
+    const mint = publicKey("YOUR_TOKEN_MINT_ADDRESS");
+
     // derive the metadata account that will store our metadata data onchain
 	const metadataAccountAddress = await findMetadataPda(umi, {
-		mint: mint.publicKey,
+		mint: mint,
 	});
 
    // add metadata to our already initialized token using `createMetadataAccountV3` 
    // from the token metadata program
 	const tx = await createMetadataAccountV3(umi, {
 		metadata: metadataAccountAddress,
-		mint: mint.publicKey,
+		mint: mint,
 		mintAuthority: umi.identity,
 		payer: umi.identity,
 		updateAuthority: umi.identity,
@@ -251,26 +212,9 @@ umi.use(signerIdentity(signer));
 // the a different rpc other than the free default one supplied.
 await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 
-// initialize a new keypair for our mint account
-const mint = generateSigner(umi);
-
-// Create SPL token wrapper function
-async function createSPLToken() {
-	let tx = await createMint(umi, {
-		mint,
-		decimals: 6,
-		mintAuthority: umi.identity.publicKey,
-		freezeAuthority: null,
-	}).sendAndConfirm(umi);
-
-	let txSig = base58.deserialize(tx.signature);
-
-	console.log("token mint address -> ", mint.publicKey);
-	console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
-}
-
-// run the function
-createSPLToken();
+// your SPL Token mint address
+const mint = publicKey("YOUR_TOKEN_MINT_ADDRESS");
+ 
 
 // Sample Metadata for our Token
 const tokenMetadata = {
@@ -283,12 +227,12 @@ const tokenMetadata = {
 async function addMetadata() {
     // derive the metadata account that will store our metadata data onchain
 	const metadataAccountAddress = await findMetadataPda(umi, {
-		mint: mint.publicKey,
+		mint: mint,
 	});
 
 	const tx = await createMetadataAccountV3(umi, {
 		metadata: metadataAccountAddress,
-		mint: mint.publicKey,
+		mint: mint,
 		mintAuthority: umi.identity,
 		payer: umi.identity,
 		updateAuthority: umi.identity,
