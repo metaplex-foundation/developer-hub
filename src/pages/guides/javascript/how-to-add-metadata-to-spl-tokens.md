@@ -56,7 +56,7 @@ We will list the necessary imports and our wrapper function,
 
 ```typescript
 import {
-	createMetadataAccountV3,
+	createV1,
 	findMetadataPda,
 	mplTokenMetadata,
 } from "@metaplex-foundation/mpl-token-metadata";
@@ -127,7 +127,7 @@ umi.use(keypairIdentity(umiSigner));
 
 ## Adding Metadata
 
-Adding metadata is also as simple as creating an SPL token. We will utilize the `createMetadataAccountV3` method from the `mpl-token-metadata` library.
+Adding metadata is also as simple as creating an SPL token. We will utilize the `createV1` helper method from the `mpl-token-metadata` library.
 
 Also note that this guide assumes that you already had your off-chain token metadata prepared beforehand. We will need the name, off-chain uri address and symbol
 
@@ -154,25 +154,17 @@ async function addMetadata() {
 		mint: mint,
 	});
 
-   // add metadata to our already initialized token using `createMetadataAccountV3` 
-   // from the token metadata program
-	const tx = await createMetadataAccountV3(umi, {
-		metadata: metadataAccountAddress,
-		mint: mint,
-		mintAuthority: umi.identity,
+   // add metadata to our already initialized token using `createV1` helper 
+	const tx = await createV1(umi, {
+		mint,
+		authority: umi.identity,
 		payer: umi.identity,
 		updateAuthority: umi.identity,
-		data: {
-			creators: null,
-			name: tokenMetadata.name,
-			symbol: tokenMetadata.symbol,
-			uri: tokenMetadata.uri,
-			sellerFeeBasisPoints: 0,
-			collection: null,
-			uses: null,
-		},
-		collectionDetails: null,
-		isMutable: true,
+		name: tokenMetadata.name,
+		symbol: tokenMetadata.symbol,
+		uri: tokenMetadata.uri,
+		sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
+		tokenStandard: TokenStandard.Fungible,
 	}).sendAndConfirm(umi);
 
 	let txSig = base58.deserialize(tx.signature);
@@ -188,7 +180,7 @@ Take note of the mint address, If you will call the functions at different insta
 
 ```typescript
 import {
-	createMetadataAccountV3,
+	createV1,
 	findMetadataPda,
 	mplTokenMetadata,
 } from "@metaplex-foundation/mpl-token-metadata";
@@ -230,23 +222,16 @@ async function addMetadata() {
 		mint: mint,
 	});
 
-	const tx = await createMetadataAccountV3(umi, {
-		metadata: metadataAccountAddress,
-		mint: mint,
-		mintAuthority: umi.identity,
+	const tx = await createV1(umi, {
+		mint,
+		authority: umi.identity,
 		payer: umi.identity,
 		updateAuthority: umi.identity,
-		data: {
-			creators: null,
-			name: tokenMetadata.name,
-			symbol: tokenMetadata.symbol,
-			uri: tokenMetadata.uri,
-			sellerFeeBasisPoints: 0,
-			collection: null,
-			uses: null,
-		},
-		collectionDetails: null,
-		isMutable: true,
+		name: tokenMetadata.name,
+		symbol: tokenMetadata.symbol,
+		uri: tokenMetadata.uri,
+		sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
+		tokenStandard: TokenStandard.Fungible,
 	}).sendAndConfirm(umi);
 
 	let txSig = base58.deserialize(tx.signature);
