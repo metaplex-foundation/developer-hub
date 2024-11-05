@@ -4,14 +4,14 @@ metaTitle: Swapping Tokens to NFTs with MPL-Hybrid 404 | MPL-Hybrid
 description: Learn to your SPL tokens to an NFT in the MPL-Hybrid Program.
 ---
 
-The action of swapping Tokens for an NFT in the MPL-Hybrid program is called a `release`. The process involves releasing an NFT from the escrow to the user in exchange for a set amount of tokens.
+The action of swapping Tokens for an NFT in the escrow of the MPL-Hybrid program is called a `capture`. The process involves the user capturing an NFT from the escrow in exchange for a set amount of tokens.
 
-If reroll (path) is enabled in the escrow configuration then the metadata index written to the NFT will be picked at random from the pool of available indexes (min, max)
+If reroll (path) is enabled in the escrow configuration then the metadata index written to the NFT will be picked at random from the pool of available indexes `min`, `max`.
 
-## Swapping an NFT
+## Swapping Tokens
 
 ```ts
-await releaseV1(umi, {
+await captureV1(umi, {
   // The owner of the asset being swapped.
   owner: umi.identity,
   // The escrow configuration address.

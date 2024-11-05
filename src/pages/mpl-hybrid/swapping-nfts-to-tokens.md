@@ -4,12 +4,14 @@ metaTitle: Swapping an NFT to Tokens | MPL-Hybrid
 description: Learn to write a swap function so users can swap their NFT into Tokens in the MPL-Hybrid Program.
 ---
 
-The action of swapping Tokens into an NFT in the MPL-Hybrid program is called a `capture`. The escrow will capture your NFT and in exchange reward you with some Tokens equal to the `feeAmount`.
+The action of swapping Tokens in your possession to an NFT held in the escrow in the MPL-Hybrid program is called a `capture`.
+
+
 
 ## Swapping an NFT
 
 ```ts
-await releaseV1(umi, {
+await captureV1(umi, {
     // The owner of the asset being swapped.
     owner: umi.identity,
     // The escrow configuration address.
