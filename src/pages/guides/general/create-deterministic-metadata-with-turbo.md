@@ -27,21 +27,11 @@ Install the required packages for this guide.
 npm i @ardrive/turbo-sdk
 ```
 
-### Assets & Metadata Folder
+### Metadata Folder
 
-In this example, we will show you how to upload both the images and metadata, to do so, you'll need to prepare all the assets before starting. 
+In this example, we will show you how to upload metadata in a deterministic way. To do so, you'll need to prepare all the assets before starting. 
 
-Both images and metadata files should follow an incremental naming convention starting from 0.
-
-```
-assets/
-├─ 0.png
-├─ 1.png
-├─ 2.png
-├─ ...
-```
-
-To generate assets and metadata, you can use [one of these methods](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata in the metadata folder like this:
+To generate the metadata, you can use [one of these methods](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata follow an incremental naming convention starting from 0 like this:
 
 ```
 metadata/
@@ -75,14 +65,14 @@ const turbo = TurboFactory.authenticated({
 
 **Note**: In this example, we explicitly provide the `gatewayUrl`, `paymentServiceConfig`, and `uploadServiceConfig` because we want to configure the environment to work on devnet. For mainnet usage, you can leave these fields empty, and Turbo will default to the mainnet endpoints.
 
-## Upload Images and Metadata with Turbo
+## Upload the Metadata
 
-Turbo simplifies the process of uploading entire folders of images and metadata using the `TurboAuthenticatedClient.uploadFolder()` function. This function supports Manifests by default, returning a Manifest ID via `result.manifestResponse?.id`, which can be used for metadata creation and escrow setup.
+Turbo simplifies the process of uploading entire folders of metadata using the `TurboAuthenticatedClient.uploadFolder()` function. This function supports Manifests by default, returning a Manifest ID via `result.manifestResponse?.id`, which can be used for metadata creation and escrow setup.
 
 To simplify the process, this guide provides helper function called `uploadAssetsAndMetadata()` that handles the entire workflow.
 
 ```javascript
-const metadataUploadResponse = await uploadAssetsAndMetadata(turbo);
+const metadataUploadResponse = await uploadMetadata(turbo);
 ```
 
 **Steps of the `uploadAssetsAndMetadata()` helper**
@@ -91,16 +81,14 @@ const metadataUploadResponse = await uploadAssetsAndMetadata(turbo);
 
 2. If the wallet lacks sufficient Winc, the function uses `TurboAuthenticatedClient.topUpWithTokens()` to top up the required amount by converting lamports to Winc.
 
-3. Once the wallet has enough Winc, the image folder is uploaded using `TurboAuthenticatedClient.uploadFolder()`, which returns a Manifest ID for the images.
-
-4. The metadata folder is then uploaded using `TurboAuthenticatedClient.uploadFolder()`, returning a Manifest ID that can be used for the escrow process.
+3. Once the wallet has enough Winc, upload the metadata folder using `TurboAuthenticatedClient.uploadFolder()`, which returns a Manifest ID for the metadata.
 
 ### Calculating Required Lamports
 
 ```javascript
-const requiredLamportsForAssets = await calculateRequiredLamportsForUpload(
+const requiredLamportsForMetadata = await calculateRequiredLamportsForUpload(
   turbo,
-  calculateFolderSize(imageFolderPath)
+  calculateFolderSize(metadataFolderPath)
 );
 ```
 
@@ -152,7 +140,7 @@ async function calculateRequiredLamportsForUpload(turbo: TurboAuthenticatedClien
 }
 ```
 
-### Top Up the Wallet and Upload Images
+### Top Up the Wallet and Upload Metadata
 
 To top up the wallet, we use the `TurboAuthenticatedClient.topUpWithTokens()` method, specifying the amount of lamports calculated in the previous step. This amount is converted into Winc (Turbo’s token), which is required for the upload process.
 
@@ -160,7 +148,7 @@ To top up the wallet, we use the `TurboAuthenticatedClient.topUpWithTokens()` me
 
 ```javascript
 // Top up wallet if required
-await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsForAssets)});
+await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsForMetadata)});
 ```
 
 After ensuring the wallet has enough Winc, we can proceed with uploading the image folder. This is done using the `TurboAuthenticatedClient.uploadFolder()` method. The upload will return a manifest ID that allows access to the uploaded files, formatted like this: `https://arweave.net/${manifestID}/${nameOfTheFile.extension}.`
@@ -170,34 +158,10 @@ After ensuring the wallet has enough Winc, we can proceed with uploading the ima
 
 ```javascript 
 // Upload image folder
-const imageUploadResponse = await turbo.uploadFolder({
-    folderPath: imageFolderPath,
-    dataItemOpts: { tags: [{ name: 'Content-Type', value: 'image/jpeg' }] },
-});
-```
-
-### Upload the Metadata Files
-
-The upload of the metadata follows the same preparation process as before and will return the manifestID that we need for the Hybrid Escrow:
-
-```javascript
-// Calculate and upload metadata folder
-const requiredLamportsForMetadata = await calculateRequiredLamportsForUpload(
-    turbo,
-    calculateFolderSize(metadataFolderPath)
-);
-
-// Top up wallet if required
-await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsForMetadata)});
-
-// Upload metadata folder
 const metadataUploadResponse = await turbo.uploadFolder({
     folderPath: metadataFolderPath,
     dataItemOpts: { tags: [{ name: 'Content-Type', value: 'application/json' }] },
 });
-
-console.log('Metadata Manifest ID:', metadataUploadResponse.manifestResponse?.id);
-return metadataUploadResponse;
 ```
 
 ## Full code Example
@@ -237,29 +201,14 @@ const metadataFolderPath = path.join(__dirname, './metadata');
             uploadServiceConfig: { url: "https://upload.ardrive.dev" },
         });
 
-        /// Step 2: Upload Images and Metadata
-        const metadataUploadResponse = await uploadAssetsAndMetadata(turbo);
+        /// Step 2: Upload Metadata
+        const metadataUploadResponse = await uploadMetadata(turbo);
     } catch (error) {
         console.error("Error during execution:", error);
     }
 })();
 
-async function uploadAssetsAndMetadata(turbo: TurboAuthenticatedClient): Promise<TurboUploadFolderResponse> {
-    // Calculate and upload image folder
-    const requiredLamportsForAssets = await calculateRequiredLamportsForUpload(
-        turbo,
-        await calculateFolderSize(imageFolderPath)
-    );
-
-    // Top up wallet if required
-    await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsForAssets)});
-
-    // Upload image folder
-    const imageUploadResponse = await turbo.uploadFolder({
-        folderPath: imageFolderPath,
-        dataItemOpts: { tags: [{ name: 'Content-Type', value: 'image/jpeg' }] },
-    });
-
+async function uploadMetadata(turbo: TurboAuthenticatedClient): Promise<TurboUploadFolderResponse> {
     // Calculate and upload metadata folder
     const requiredLamportsForMetadata = await calculateRequiredLamportsForUpload(
         turbo,
@@ -318,8 +267,6 @@ async function calculateRequiredLamportsForUpload(turbo: TurboAuthenticatedClien
     /// Return the amount of SOL required in Lamports
     return Math.floor(requiredSol * 1_000_000_000)
 }
-
-
 ```
 
 {% /totem %}
