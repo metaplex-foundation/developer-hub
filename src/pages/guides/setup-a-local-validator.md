@@ -93,7 +93,7 @@ solana-test-validator --bpf-program <address to load the program to> <path to pr
 
 {% callout title="Disclaimer" %}
 
-Unfortunately, this part of the guide is available only for users on **Linux** or **MacOS** due to the use of Bash scripts. However, if you're using Windows and still want to follow along to create your own Metaplex validator, you can use the [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install).
+Unfortunately, this part of the guide is available only for users on **Linux** or **MacOS** due to the use of Bash scripts. However, if you're using Windows and still want to follow along to create your own Metaplex validator, you can use the [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install) or one of the solutions provided in [this thread](https://stackoverflow.com/questions/6413377/is-there-a-way-to-run-bash-scripts-on-windows)!.
 
 {% /callout %}
 
