@@ -117,6 +117,17 @@ export const guides = {
           ],
         },
         {
+          title: 'Templates',
+          links: [
+            {
+              title: 'NextJs Template',
+              href: '/guides/templates/metaplex-nextjs-tailwind-template',
+              created: '2024-09-04',
+              updated: null, // null means it's never been updated
+            },
+          ],
+        },
+        {
           title: 'Metaplex Program Guides',
           links: [
             {
