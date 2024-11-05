@@ -1,6 +1,6 @@
 ---
 title: Create deterministic metadata with Turbo
-metaTitle: Create deterministic metadata with Turbo | Hybrid Guides
+metaTitle: Create deterministic metadata with Turbo | General Guides
 description: Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
 # remember to update dates also in /components/guides/index.js
 created: '10-19-2024'
