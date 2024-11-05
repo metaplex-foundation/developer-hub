@@ -44,7 +44,7 @@ npm i @metaplex-foundation/umi-uploader-irys;
 
 ```js
 npm i @metaplex-foundation/mpl-toolbox;
-```
+
 
 ### Imports and Wrapper Function
 
