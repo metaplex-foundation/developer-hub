@@ -11,7 +11,7 @@ The action of swapping Tokens in your possession to an NFT held in the escrow in
 ## Swapping an NFT
 
 ```ts
-await captureV1(umi, {
+await releaseV1(umi, {
     // The owner of the asset being swapped.
     owner: umi.identity,
     // The escrow configuration address.

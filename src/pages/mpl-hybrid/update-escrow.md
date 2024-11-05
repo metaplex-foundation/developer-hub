@@ -20,7 +20,8 @@ const escrowConfigurationData = await fetchEscrowV1(umi, escrowConfigurationAddr
 // and adjust any fields you wish to update.
 const res = await updateEscrowV1(umi, {
     ...escrowConfigurationData,
-    escrow: hybridEscrowAddress,
+    // your escrow configuration address.
+    escrow: escrowConfigurationAddress,
     authority: umi.identity,
     // add any fields below that you wish to change and update.
     feeAmount: 100000,

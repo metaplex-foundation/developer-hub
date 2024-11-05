@@ -4,7 +4,7 @@ metaTitle: Funding the MPL Hybrid 404 Escrow | MPL-Hybrid
 description: Learn to fund the MPL 404 Hybrid Escrow account with SPL Tokens that makes 404 swaps possible.
 ---
 
-The next step before the smart-swap is live it to fund the escrow. Typically if a project wants to ensure the escrow always stays funded, they start by releasing all of the NFTs or tokens and then placing all of the other assets in the escrow. This ensures that every outstanding asset is "backed" by the counter-asset in the escrow. Because the Escrow is a PDA, loading it via wallets is not widely supported. You can use the below code to transfer assets into your escrow.
+Before making your smart-swap live you will need to fund the escrow. Typically if a project wants to ensure the escrow always stays funded, they start by releasing all of the NFTs or tokens and then placing all of the other assets in the escrow. This ensures that every outstanding asset is "backed" by the counter-asset in the escrow. Because the Escrow is a PDA, loading it via wallets is not widely supported. You can use the below code to transfer assets into your escrow.
 
 To fund your escrow with your Token you will need to send that token to the **escrows token account**.
 

@@ -48,7 +48,7 @@ The onchain account structure of an MPL-404 Escrow [Link](https://github.com/met
 
 #### name
 
-The name of your escrow.
+The name of your escrow. This data can be used to show the name of your escrow on a UI.
 
 ```ts
 name: 'My Test Escrow'
@@ -56,7 +56,7 @@ name: 'My Test Escrow'
 
 #### uri
 
-This is the base uri for your metadata pool. This needs to be a static uri which also contains your metadata json files at sequential destination. ie:
+This is the base uri for your metadata pool. This needs to be a static uri which also contains your metadata json files at sequential destination. i.e:
 
 ```
 https://shdw-drive.genesysgo.net/.../0.json
@@ -175,6 +175,10 @@ path: rerollEnabled,
 #### associatedTokenProgram
 
 The `SPL_ASSOCIATED_TOKEN_PROGRAM_ID` can be pulled from the `mpl-toolbox` package.
+
+```ts
+import { SPL_ASSOCIATED_TOKEN_PROGRAM_ID } from @metaplex/mpl-toolbox
+```
 
 ```ts
 // Associated Token Program ID
