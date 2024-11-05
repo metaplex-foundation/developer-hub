@@ -7,6 +7,7 @@ import {
 import { QuickLink, QuickLinks } from '@/components/QuickLinks'
 import { Seperator } from '@/components/Seperator'
 import { Totem, TotemAccordion, TotemProse } from '@/components/Totem'
+import MerkleTreeConfigTable from '@/components/bubblegum/merkleTreeConfigTable'
 import {
   Diagram,
   transformDiagramTag,
@@ -150,6 +151,9 @@ const tags = {
       packages: { type: Array },
       type: { type: String },
     },
+  },
+  merkleTreeConfigurator: {
+    render: MerkleTreeConfigTable,
   },
 }
 
