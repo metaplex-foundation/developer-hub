@@ -1,6 +1,5 @@
-import { Fragment } from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
-import { ClipboardIcon } from '@heroicons/react/24/outline'
+import { Fragment } from 'react'
 import CopyToClipboardButton from './products/CopyToClipboard'
 
 export function Fence({ children, language }) {
@@ -12,9 +11,9 @@ export function Fence({ children, language }) {
       theme={undefined}
     >
       {({ className, style, tokens, getTokenProps }) => (
-        <pre className={className + ' relative'} style={style}>
+        <pre className={className + ' relative scrollbar '} style={style}>
           <CopyToClipboardButton text={children} />
-          <code>
+          <code className='w-[calc(100%-25px)] block overflow-auto '>
             {tokens.map((line, lineIndex) => (
               <Fragment key={lineIndex}>
                 {line
