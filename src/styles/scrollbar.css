@@ -1,7 +1,7 @@
 .scrollbar {
 ::-webkit-scrollbar {
     width: 4px;
-    height: 10px;
+    height: 4px;
   }
   ::-webkit-scrollbar-button {
     width: 0px;
