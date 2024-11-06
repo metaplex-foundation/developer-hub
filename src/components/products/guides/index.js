@@ -51,7 +51,7 @@ export const guides = {
             {
               title: 'Setup a Local Validator',
               href: '/guides/setup-a-local-validator',
-              created: '2021-10-08',
+              created: '2021-11-6',
               updated: null, // null means it's never been updated
             },
             {

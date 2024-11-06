@@ -1,10 +1,10 @@
 ---
-title: Using the Local Validator
-metaTitle: Using the Local Validator
+title: Setup a Local Validator
+metaTitle: Setup a Local Validator
 description: Learn how to setup a local development environment and use a local validator
 # remember to update dates also in /components/guides/index.js
-created: '08-9-2024'
-updated: '08-9-2024'
+created: '11-06-2024'
+updated: '11-06-2024'
 ---
 
 ## Overview
