@@ -1,5 +1,5 @@
-import { documentationSection } from '@/shared/sections'
-import { BookOpenIcon } from '@heroicons/react/24/outline'
+import { documentationSection } from '@/shared/sections';
+import { BookOpenIcon } from '@heroicons/react/24/outline';
 
 export const guides = {
   name: 'Guides',
@@ -149,7 +149,12 @@ export const guides = {
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
-
+            {
+              title: 'Core Candy Machine',
+              href: '/core-candy-machine/guides/',
+              created: '2024-09-20',
+              updated: null, // null means it's never been updated
+            },
           ],
         },
         {
