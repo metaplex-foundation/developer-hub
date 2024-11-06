@@ -89,6 +89,53 @@ solana-test-validator --account <address to load the account to> <path to accoun
 solana-test-validator --bpf-program <address to load the program to> <path to program file> --reset
 ```
 
+## Looking at Local transaction on Explorers
+
+A blockchain explorer is an application that allows users to extract, visualize, and review transactions along with various network metrics, such as transactions per second (TPS), median transaction fees, and the amount staked to the network. Block explorers are typically accessed online through web browsers and are especially useful for developers looking to identify bugs and ensure that transactions have executed as expected.
+
+Using a local validator doesn't prevent us from using the explorer since many explorers have the capability to connect to our local port and read the local ledger stored in the `test-ledger` folder we mentioned earlier.
+
+There are two ways to do this:
+- Create a link to the transaction signature that points to the local cluster of your favorite explorer.
+- Manually change the cluster on the webpage and then paste the transaction link.
+
+### Creating a link to the transaction signature
+
+When you send a transaction with Umi, you'll receive two key pieces of information: a signature and a result. The signature is in base58 format, so you'll need to deserialize it to make it readable for the blockchain. 
+
+You can do this with the following code:
+```typescript 
+const signature = base58.deserialize(transaction.signature)[0]
+```
+
+Once you have the signature, you can use it with your preferred explorer like this:
+
+{% totem %}
+
+{% totem-accordion title="Solana Explorer" %}
+
+```typescript
+console.log(`Transaction Submitted! https://explorer.solana.com/tx/${signature}?cluster=custom&customUrl=http%3A%2F%2Flocalhost%3A8899`)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="SolanaFM" %}
+
+```typescript
+console.log(`Transaction Submitted! https://solana.fm/tx/${signature}?cluster=localnet-solana`)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+
+### Manually changing the Cluster
+
+As mentioned earlier, block explorers allow users to utilize a custom RPC to view transactions. To look at local validator transaction you'll need to look for an input box in the `choose cluster` modal and enter the following address: `http://127.0.0.1:8899`.
+
+Note: The [Solana Explorer](/https://explorer.solana.com/) automatically defaults to the local validator port when you select Custom RPC URL, so you don’t need to make any additional changes. 
+
 ## Creating a "Metaplex" Local Validator
 
 {% callout title="Disclaimer" %}
