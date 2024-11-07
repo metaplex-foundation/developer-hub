@@ -52,6 +52,12 @@ Every Program and Tool that is based on our Rust SDK and deserializes Data from 
 
 If you are using an older SDK Version than listed above and deserializing Token Metadata Data it is recommended to update the used Packages to ensure compatibility.
 
+## Where can I resize my NFT?
+
+You can use our free, open source UI at [resize.metaplex.com](https://resize.metaplex.com) to resize your eligible assets between now and April 25, 2025.
+
+Alternative tools exist that offer a paid service for processing the Resize instruction, such as [Sol Incinerator](https://sol-incinerator.com/) (5% of the resize amount).
+
 ## Where can I find Help and more Information?
 
 In case something is unclear after reading this FAQ please feel free to join our [Discord](https://discord.gg/metaplex) and drop your questions!
