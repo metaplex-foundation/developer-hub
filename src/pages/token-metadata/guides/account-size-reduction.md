@@ -31,7 +31,7 @@ There are 25.7M eligible Token Metadata NFTs with Token Metadata accounts that a
 
 ## Where can I resize my NFT?
 
-You can use our free UI at [resize.metaplex.com](https://resize.metaplex.com) to resize your eligible assets between now and April 25, 2025.
+You can use our free UI at [resize.metaplex.com](https://resize.metaplex.com) to resize your eligible assets between now and April 25th, 2025.
 
 Alternative tools exist that offer a paid service for processing the Resize instruction, such as [Sol Incinerator](https://sol-incinerator.com/) (5% of the resize amount).
 
