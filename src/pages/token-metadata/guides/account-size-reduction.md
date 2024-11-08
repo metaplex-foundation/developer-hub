@@ -1,7 +1,7 @@
 ---
 title: FAQ - Token Metadata Account Size Reduction
 metaTitle: Token Metadata Account Size Reduction | Token Metadata Guides
-description: Learn about the impacts of the TM Account Size reduction
+description: Learn about the impacts of the TM Account Size reduction.
 ---
 
 On 9th of September 2024 a Metaplex Token Metadata program change was deployed to devnet that reduces the size of all future metadata accounts created. If your product fetches any metadata from TM, this change might affect you. Make sure to read below and implement any necessary changes so things don't break!
