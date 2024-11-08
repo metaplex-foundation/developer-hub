@@ -46,6 +46,8 @@ using exceedingly old SDK versions will need to update to handle the smaller Tok
 
 ## Why does the the resize window end after 6 months? And why will the remaining excess SOL no longer needed for rent be transferred to the Metaplex DAO?
 
+The goal of the resize initiative is to improve performance of the Solana network.
+
 In order to do this, we've allowed NFT holders to optimize the network directly by adding a Resize instruction which enables the release of excess SOL not previously accessible without fully closing (aka burning) the Token Metadata accounts.
 
 Six months is a reasonable time frame to allow NFT holders to access this new benefit while also making sure the benefits to the network are realized in a timely manner.
