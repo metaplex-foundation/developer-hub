@@ -8,7 +8,7 @@ Below is a list of our products and their stability levels.
 
 | Product Name          | Stability Level  |
 | --------------------- | ---------------- |
-| Token Metadata        | 2 (Stable)       |
+| Token Metadata        | 3 (Code Freeze)  |
 | Token Auth Rules      | 2 (Stable)       |
 | Bubblegum             | 2 (Stable)       |
 | Candy Machine v3      | 2 (Stable)       |
