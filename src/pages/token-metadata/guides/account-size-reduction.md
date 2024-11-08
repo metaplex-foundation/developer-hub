@@ -44,6 +44,14 @@ Yes, resizing the NFT now and burning the NFT later would enable NFT holders to 
 Resize does not impact your NFT’s functionality. TM accounts associated with your NFT will be optimized to free up space on the Solana network. You will receive the excess SOL from the optimization. However, as stated below, programs
 using exceedingly old SDK versions will need to update to handle the smaller Token Metadata accounts.
 
+## Why does the the resize window end after 6 months? And why will the remaining excess SOL no longer needed for rent be transferred to the Metaplex DAO?
+
+In order to do this, we've allowed NFT holders to optimize the network directly by adding a Resize instruction which enables the release of excess SOL not previously accessible without fully closing (aka burning) the Token Metadata accounts.
+
+Six months is a reasonable time frame to allow NFT holders to access this new benefit while also making sure the benefits to the network are realized in a timely manner.
+
+After that point any remaining SOL will be contributed to the Metaplex DAO which is responsible for stewarding the Protocol and Metaplex ecosystem, at which point the DAO can vote to airdrop the SOL, distribute grants to ecosystem builders, or other initiatives.
+
 ## Who is affected by the Change?
 
 Every Program and Tool that is based on our Rust SDK and deserializes Data from the TM Accounts and is using very old SDK Versions might be affected.
