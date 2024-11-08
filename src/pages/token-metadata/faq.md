@@ -110,7 +110,7 @@ await createV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-If it is required to use TokenKeg SPL tokens, you can create a Soulbound Asset using the [Locked Transfer Deleagate](/token-metadata/delegates#locked-transfer-delegate-pnft-only) on a pNFT and then locking the pNFT.  Note however that this will not only prevent the owner from transferring the pNFT, but will also prevent the owner from burning it.  This is why the recommendation for Soulbound Assets is to use Token22 tokens.
+If it is required to use TokenKeg SPL tokens, you can create a Soulbound Asset using the [Locked Transfer Delegate](/token-metadata/delegates#locked-transfer-delegate-pnft-only) on a pNFT and then locking the pNFT.  Note however that this will not only prevent the owner from transferring the pNFT, but will also prevent the owner from burning it.  This is why the recommendation for Soulbound Assets is to use Token22 tokens.
 
 ## Why are the mint and freeze authorities transferred to the Edition PDA?
 
