@@ -91,8 +91,6 @@ solana-test-validator --bpf-program <address to load the program to> <path to pr
 
 ## Looking at Local transaction on Explorers
 
-A blockchain explorer is an application that allows users to extract, visualize, and review transactions along with various network metrics, such as transactions per second (TPS), median transaction fees, and the amount staked to the network. Block explorers are typically accessed online through web browsers and are especially useful for developers looking to identify bugs and ensure that transactions have executed as expected.
-
 Using a local validator doesn't prevent us from using the explorer since many explorers have the capability to connect to our local port and read the local ledger stored in the `test-ledger` folder we mentioned earlier.
 
 There are two ways to do this:
