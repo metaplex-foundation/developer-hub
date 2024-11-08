@@ -1,7 +1,7 @@
 ---
 title: FAQ - Token Metadata Account Size Reduction
 metaTitle: Token Metadata Account Size Reduction | Token Metadata Guides
-description: Learn about the impacts of the TM Account Size reduction
+description: Learn about the impacts of the TM Account Size reduction.
 ---
 
 On 9th of September 2024 a Metaplex Token Metadata program change was deployed to devnet that reduces the size of all future metadata accounts created. If your product fetches any metadata from TM, this change might affect you. Make sure to read below and implement any necessary changes so things don't break!
@@ -29,6 +29,12 @@ The Account sizes are reduced as you can see in the table below.
 
 There are 25.7M eligible Token Metadata NFTs with Token Metadata accounts that are eligible to be resized (as of October 30th). 0.0023 excess SOL can be claimed per Master Edition and 0.0019 excess SOL can be claimed per Edition.
 
+## Where can I resize my NFT?
+
+You can use our free UI at [resize.metaplex.com](https://resize.metaplex.com) to resize your eligible assets between now and April 25th, 2025.
+
+Alternative tools exist that offer a paid service for processing the Resize instruction, such as [Sol Incinerator](https://sol-incinerator.com/) (5% of the resize amount).
+
 ## If I resize my NFT now, can I still burn the NFT later and claim the remaining rent?
 
 Yes, resizing the NFT now and burning the NFT later would enable NFT holders to receive the same amount of SOL as if they closed all of the Token Metadata accounts today.
@@ -37,6 +43,16 @@ Yes, resizing the NFT now and burning the NFT later would enable NFT holders to 
 
 Resize does not impact your NFT’s functionality. TM accounts associated with your NFT will be optimized to free up space on the Solana network. You will receive the excess SOL from the optimization. However, as stated below, programs
 using exceedingly old SDK versions will need to update to handle the smaller Token Metadata accounts.
+
+## Why does the the resize window end after 6 months? And why will the remaining excess SOL no longer needed for rent be transferred to the Metaplex DAO?
+
+The goal of the resize initiative is to improve performance of the Solana network.
+
+In order to do this, we've allowed NFT holders to optimize the network directly by adding a Resize instruction which enables the release of excess SOL not previously accessible without fully closing (aka burning) the Token Metadata accounts.
+
+Six months is a reasonable time frame to allow NFT holders to access this new benefit while also making sure the benefits to the network are realized in a timely manner.
+
+After that point any remaining SOL will be contributed to the Metaplex DAO which is responsible for stewarding the Protocol and Metaplex ecosystem, at which point the DAO can vote to airdrop the SOL, distribute grants to ecosystem builders, or other initiatives.
 
 ## Who is affected by the Change?
 
@@ -51,12 +67,6 @@ Every Program and Tool that is based on our Rust SDK and deserializes Data from 
 ## How to make your Program compatible?
 
 If you are using an older SDK Version than listed above and deserializing Token Metadata Data it is recommended to update the used Packages to ensure compatibility.
-
-## Where can I resize my NFT?
-
-You can use our free, open source UI at [resize.metaplex.com](https://resize.metaplex.com) to resize your eligible assets between now and April 25, 2025.
-
-Alternative tools exist that offer a paid service for processing the Resize instruction, such as [Sol Incinerator](https://sol-incinerator.com/) (5% of the resize amount).
 
 ## Where can I find Help and more Information?
 
