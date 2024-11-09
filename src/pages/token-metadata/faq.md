@@ -56,6 +56,7 @@ const extensions = [ExtensionType.NonTransferable];
 const space = getMintLen(extensions);
 const lamports = await umi.rpc.getRent(space);
 
+// Create the mint account.
 const createAccountIx = createAccount(umi, {
   payer: umi.identity,
   newAccount: mint,
@@ -64,12 +65,14 @@ const createAccountIx = createAccount(umi, {
   programId: SPL_TOKEN_2022_PROGRAM_ID,
 }).getInstructions();
 
+// Initialize the non-transferable extension.
 const createInitNonTransferableMintIx =
   createInitializeNonTransferableMintInstruction(
     toWeb3JsPublicKey(mint.publicKey),
     toWeb3JsPublicKey(SPL_TOKEN_2022_PROGRAM_ID)
   );
 
+// Initialize the mint.
 const createInitMintIx = createInitializeMintInstruction(
   toWeb3JsPublicKey(mint.publicKey),
   0,
@@ -78,6 +81,7 @@ const createInitMintIx = createInitializeMintInstruction(
   toWeb3JsPublicKey(SPL_TOKEN_2022_PROGRAM_ID)
 );
 
+// Create the transaction with the Token22 instructions.
 const blockhash = await umi.rpc.getLatestBlockhash();
 const tx = umi.transactions.create({
   version: 0,
@@ -90,21 +94,40 @@ const tx = umi.transactions.create({
   blockhash: blockhash.blockhash,
 });
 
-const signedTx = await mint.signTransaction(tx);
-const signedTx2 = await umi.identity.signTransaction(signedTx);
-const signature = await umi.rpc.sendTransaction(signedTx2);
+// Sign, send, and confirm the transaction.
+let signedTx = await mint.signTransaction(tx);
+signedTx = await umi.identity.signTransaction(signedTx);
+const signature = await umi.rpc.sendTransaction(signedTx);
 await umi.rpc.confirmTransaction(signature, {
   strategy: { type: 'blockhash', ...blockhash },
   commitment: 'confirmed',
 });
 
+// Create the Token Metadata accounts.
 await createV1(umi, {
-  mint: mint,
+  mint,
   name: 'My Programmable NFT',
   uri: 'https://example.com/my-programmable-nft.json',
   sellerFeeBasisPoints: percentAmount(5.5),
   tokenStandard: TokenStandard.ProgrammableNonFungible,
   splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
+}).sendAndConfirm(umi);
+
+// Derive the token PDA.
+const token = findAssociatedTokenPda(umi, {
+  mint: mint.publicKey,
+  owner: umi.identity.publicKey,
+  tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
+});
+
+// Mint the token.
+await mintV1(umi, {
+  mint: mint.publicKey,
+  token,
+  tokenOwner: umi.identity.publicKey,
+  amount: 1,
+  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
 }).sendAndConfirm(umi);
 ```
 {% /dialect %}
