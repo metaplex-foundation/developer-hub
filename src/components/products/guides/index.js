@@ -68,6 +68,10 @@ export const guides = {
             {
               title: 'Creating an NFT Collection With Candy Machine',
               href: '/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine',
+            },
+            {
+              title: 'Create deterministic Metadata with Turbo',
+              href: '/guides/general/create-deterministic-metadata-with-turbo',
             }
           ]
         },

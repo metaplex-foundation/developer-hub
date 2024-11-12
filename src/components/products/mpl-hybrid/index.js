@@ -1,4 +1,4 @@
-import { documentationSection } from '@/shared/sections'
+import { documentationSection, guidesSection } from '@/shared/sections'
 import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
 
@@ -34,5 +34,23 @@ export const mplHybrid = {
         },
       ],
     },
+    {
+      ...guidesSection('mpl-hybrid'),
+      navigation: [
+        {
+          title: 'General',
+          links: [
+            { 
+              title: 'Overview', 
+              href: '/mpl-hybrid/guides' 
+            },
+            { 
+              title: 'Create your first Hybrid Collection', 
+              href: '/mpl-hybrid/guides/create-your-first-hybrid-collection' 
+            },
+          ],
+        },
+      ],
+    }
   ],
 }
