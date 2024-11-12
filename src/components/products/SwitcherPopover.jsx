@@ -2,7 +2,6 @@ import { Grid } from '@/components/products/Grid'
 import { Popover, Transition } from '@headlessui/react'
 
 export function SwitcherPopover({ children, menuItem, ...props }) {
-  console.log('menuItem', menuItem)
   return (
     <Popover {...props}>
       {children}

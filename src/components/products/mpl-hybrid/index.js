@@ -1,3 +1,4 @@
+
 import {
   documentationSection,
   guidesSection,
@@ -63,23 +64,26 @@ export const mplHybrid = {
       ],
     },
     {
-      ...guidesSection('mpl-hybrid'),
-      navigation: [
-        {
-          title: 'Javascript',
-          links: [
-            {
-              title: 'How to Create a 1,000,000 NFT Collection on Solana',
-              href: 'guides/javascript/how-to-create-1000000-nfts-on-solana',
-            },
-          ],
-        },
-      ],
-    },
-    {
       ...referencesSection('mpl-hybrid'),
       href: 'https://mpl-hybrid.typedoc.metaplex.com/',
       target: '_blank',
     },
+      ...guidesSection('mpl-hybrid'),
+      navigation: [
+        {
+          title: 'General',
+          links: [
+            { 
+              title: 'Overview', 
+              href: '/mpl-hybrid/guides' 
+            },
+            { 
+              title: 'Create your first Hybrid Collection', 
+              href: '/mpl-hybrid/guides/create-your-first-hybrid-collection' 
+            },
+          ],
+        },
+      ],
+    }
   ],
 }

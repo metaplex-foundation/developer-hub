@@ -1,5 +1,5 @@
-import { documentationSection } from '@/shared/sections'
-import { BookOpenIcon } from '@heroicons/react/24/outline'
+import { documentationSection } from '@/shared/sections';
+import { BookOpenIcon } from '@heroicons/react/24/outline';
 
 export const guides = {
   name: 'Guides',
@@ -49,6 +49,12 @@ export const guides = {
               updated: null, // null means it's never been updated
             },
             {
+              title: 'Setup a Local Validator',
+              href: '/guides/setup-a-local-validator',
+              created: '2021-11-6',
+              updated: null, // null means it's never been updated
+            },
+            {
               title: 'How to Diagnose Transaction Errors on Solana',
               href: '/guides/general/how-to-diagnose-solana-transaction-errors',
               created: '2024-08-29',
@@ -56,11 +62,16 @@ export const guides = {
             },
           ],
         },
-        {title: 'General',
+        {
+          title: 'General',
           links: [
             {
               title: 'Creating an NFT Collection With Candy Machine',
               href: '/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine',
+            },
+            {
+              title: 'Create deterministic Metadata with Turbo',
+              href: '/guides/general/create-deterministic-metadata-with-turbo',
             }
           ]
         },
@@ -77,6 +88,12 @@ export const guides = {
               title: 'How to Create a Solana Token',
               href: '/guides/javascript/how-to-create-a-solana-token',
               created: '2024-06-16',
+              updated: null, // null means it's never been updated
+            },
+            {
+              title: 'How to Add Metadata to a Solana Token',
+              href: '/guides/javascript/how-to-add-metadata-to-spl-tokens',
+              created: '2024-10-01',
               updated: null, // null means it's never been updated
             },
             {
@@ -117,6 +134,17 @@ export const guides = {
           ],
         },
         {
+          title: 'Templates',
+          links: [
+            {
+              title: 'NextJs Template',
+              href: '/guides/templates/metaplex-nextjs-tailwind-template',
+              created: '2024-09-04',
+              updated: null, // null means it's never been updated
+            },
+          ],
+        },
+        {
           title: 'Metaplex Program Guides',
           links: [
             {
@@ -131,7 +159,12 @@ export const guides = {
               created: '2021-10-01',
               updated: null, // null means it's never been updated
             },
-
+            {
+              title: 'Core Candy Machine',
+              href: '/core-candy-machine/guides/',
+              created: '2024-09-20',
+              updated: null, // null means it's never been updated
+            },
           ],
         },
         {

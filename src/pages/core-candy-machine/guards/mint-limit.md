@@ -1,5 +1,5 @@
 ---
-title: Mint Limit Guard"
+title: Mint Limit Guard
 metaTitle: "Mint Limit Guard | Core Candy Machine"
 description: "The Core Candy Machine 'Mint Limit' guard allows specifying a limit on the number of Assets each wallet can mint."
 ---
@@ -134,3 +134,23 @@ mintV1(umi, {
 ## Route Instruction
 
 _The Mint Limit guard does not support the route instruction._
+
+## MintLimit Accounts
+When the `MintLimit` Guard is used a `MintCounter` Account is created for each Wallet, CandyMachine and `id` combination. For validation purposes it can be fetched like this:
+
+```js
+import { safeFetchMintCounterFromSeeds } from "@metaplex-foundation/mpl-core-candy-machine";
+import { umi } from "@metaplex-foundation/mpl-core-candy-machine";
+
+const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
+  id: 1, // The mintLimit id you set in your guard config
+  user: umi.identity.publicKey,
+  candyMachine: candyMachine.publicKey, 
+  // or candyMachine: publicKey("Address") with your CM Address
+  candyGuard: candyMachine.mintAuthority, 
+  // or candyGuard: publicKey("Address") with your candyGuard Address
+});
+
+// Amount already minted
+console.log(mintCounter.count)
+```
