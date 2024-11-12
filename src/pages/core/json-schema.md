@@ -61,7 +61,31 @@ If you miss some fields that you knew from Metaplex Token Metadata those are pro
 {% totem-accordion title="Image" %}
 
 ```json
-
+{
+  "name": "Number #0001",
+  "description": "Collection of 10 numbers on the blockchain. This is the number 1/10.",
+  "image": "https://arweave.net/swS5eZNrKGtuu5ebdqotzPny4OBoM4wHneZ_Ld17ZU8?ext=png",
+  "external_url": "https://example.com",
+  "attributes": [
+    {
+      "trait_type": "trait1",
+      "value": "value1"
+    },
+    {
+      "trait_type": "trait2",
+      "value": "value2"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://arweave.net/swS5eZNrKGtuu5ebdqotzPny4OBoM4wHneZ_Ld17ZU8?ext=png",
+        "type": "image/png"
+      },
+    ],
+    "category": "image"
+  }
+}
 ```
 
 {% /totem-accordion  %}
