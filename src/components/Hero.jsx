@@ -66,7 +66,7 @@ export function Hero({
                   <Button href={primaryCta.href}>{primaryCta.title}</Button>
                 }
                 {secondaryCta &&
-                  <Button href={secondaryCta.href} variant="secondary">
+                  <Button href={secondaryCta.href} target="_blank" variant="secondary">
                     {secondaryCta.title}
                   </Button>
                 }
