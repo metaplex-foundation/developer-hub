@@ -1,8 +1,7 @@
-
 import {
   documentationSection,
   guidesSection,
-  referencesSection
+  referencesSection,
 } from '@/shared/sections'
 import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
@@ -68,22 +67,23 @@ export const mplHybrid = {
       href: 'https://mpl-hybrid.typedoc.metaplex.com/',
       target: '_blank',
     },
+    {
       ...guidesSection('mpl-hybrid'),
       navigation: [
         {
           title: 'General',
           links: [
-            { 
-              title: 'Overview', 
-              href: '/mpl-hybrid/guides' 
+            {
+              title: 'Overview',
+              href: '/mpl-hybrid/guides',
             },
-            { 
-              title: 'Create your first Hybrid Collection', 
-              href: '/mpl-hybrid/guides/create-your-first-hybrid-collection' 
+            {
+              title: 'Create your first Hybrid Collection',
+              href: '/mpl-hybrid/guides/create-your-first-hybrid-collection',
             },
           ],
         },
       ],
-    }
+    },
   ],
 }
