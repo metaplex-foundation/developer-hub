@@ -14,7 +14,7 @@ This guide details the specific requirements for interacting with compressed NFT
 We are creating a Merkle Tree that with a real up-front SOL cost that will vary depending on the tree size and the specific SVM you are using. Until you are ready, please try this example on devnet only, as Merkle Trees can not be closed or refunded.
 {% /callout %}
 
-Creating a tree can be done using the same `createTree` function that is used on Solana mainnet-beta/devnet. However, we must override the default `logWrapper` and `compressionProgram` values. This could be accomplished as simply as:
+Creating a tree can be done using the same `createTree` function that is used on Solana devnet/mainnet-beta. However, we must override the default `logWrapper` and `compressionProgram` values. This could be accomplished as simply as:
 
 ```ts
 import {
@@ -27,7 +27,8 @@ import {
   publicKey,
 } from '@metaplex-foundation/umi';
 
-// Create a Merkle tree specifying the correct `logWrapper` and `compressionProgram` for the SVM.
+// Create a Merkle tree specifying the correct `logWrapper` and
+// `compressionProgram` for the SVM.
 const merkleTree = generateSigner(umi);
 const createTreeTx = await createTree(umi, {
   merkleTree,
