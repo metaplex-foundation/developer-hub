@@ -12,7 +12,7 @@ description: How to Create a Compressed NFT Collection of 1 Million cNFTs on Sol
 
 ## Initial Setup
 
-This guide will run through create of an NFT Core Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
+This guide will run through creation of a compressed NFT (cNFT) Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
 
 ### Initializing
 
