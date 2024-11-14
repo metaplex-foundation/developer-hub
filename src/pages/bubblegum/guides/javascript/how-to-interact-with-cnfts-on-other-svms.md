@@ -8,6 +8,14 @@ description: How to Interact with compressed NFTs, using the Metaplex Bubblegum 
 
 This guide details the specific requirements for interacting with compressed NFT (cNFT) assets using JavaScript on Solana Virtual Machine (SVM) environments other than Solana's devnet and mainnet-beta. For a more comprehensive overview of creating cNFTs, see the [Create 1,000,000 NFTs on Solana with Bubblegum](/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana) guide.
 
+### Required Package
+
+This guide makes use of a specific beta npm package for `@metaplex-foundation/mpl-bubblegum`.  Install using:
+
+```bash
+npm -i @metaplex-foundation/mpl-bubblegum@4.3.1-beta.0
+```
+
 ### Creating a Tree
 
 {% callout title="Tree Cost" type="warning" %}

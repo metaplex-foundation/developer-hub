@@ -18,7 +18,7 @@ This guide will run through creation of a compressed NFT (cNFT) Asset with Javas
 
 Start by initializing a new project (optional) with the package manager of your choice (npm, yarn, pnpm, bun) and fill in required details when prompted.
 
-```js
+```bash
 npm init
 ```
 
@@ -28,23 +28,23 @@ Install the required packages for this guide.
 
 {% packagesUsed packages=["umi", "umiDefaults", "bubblegum", "tokenMetadata", "@metaplex-foundation/umi-uploader-irys"] type="npm" /%}
 
-```js
+```bash
 npm i @metaplex-foundation/umi
 ```
 
-```js
+```bash
 npm i @metaplex-foundation/umi-bundle-defaults
 ```
 
-```js
+```bash
 npm i @metaplex-foundation/mpl-bubblegum
 ```
 
-```js
+```bash
 npm i @metaplex-foundation/mpl-token-metadata
 ```
 
-```js
+```bash
 npm i @metaplex-foundation/umi-uploader-irys;
 ```
 
