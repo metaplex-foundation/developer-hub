@@ -26,11 +26,7 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 const umi = createUmi('<RPC endpoint for the SVM>')
   .use(mplBubblegum())
   .use(mplTokenMetadata())
-  .use(
-    irysUploader({
-      ...
-    })
-  )
+  ...
 ```
 
 ### Creating a Tree
