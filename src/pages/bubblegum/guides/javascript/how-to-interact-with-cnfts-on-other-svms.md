@@ -16,6 +16,23 @@ This guide makes use of a specific beta npm package for `@metaplex-foundation/mp
 npm -i @metaplex-foundation/mpl-bubblegum@4.3.1-beta.0
 ```
 
+### Connecting to the SVM
+
+Note you will need to create your umi instance using the endpoint for the SVM.
+
+```ts
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+
+const umi = createUmi('<RPC endpoint for the SVM>')
+  .use(mplBubblegum())
+  .use(mplTokenMetadata())
+  .use(
+    irysUploader({
+      ...
+    })
+  )
+```
+
 ### Creating a Tree
 
 {% callout title="Tree Cost" type="warning" %}
