@@ -173,7 +173,7 @@ const umi = createUmi('https://rpcAddress.com')
 ### Creating a Tree
 
 {% callout title="Tree Cost" type="warning" %}
-We are creating a Merkle Tree that holds 1,000,000 cNFTs in this guide which requires the cost of roughly 7.7 SOL. Please try this example on devnet only until you are ready as Merkle Trees can not be closed or refunded. You will need at least 7.7 devnet SOL in order to run this code, this may require multiple airdrops.
+We are creating a Merkle Tree that holds 1,000,000 cNFTs in this guide which requires the cost of roughly 7.7 SOL. Until you are ready, please try this example on devnet only, as Merkle Trees can not be closed or refunded. You will need at least 7.7 devnet SOL in order to run this code. This may require multiple airdrops.
 {% /callout %}
 
 To store Compressed NFTs (cNFTs) on the Solana blockchain you need to create a **Merkle Tree** in which to store the data. The size and cost of the merkle tree is determined by the merkle tree creator and all cNFTs storage on chain is paid for in advanced which differs from Token Metadata's approach of **lazy minting** where normally the payer would pay for the necessary storage space and account creation on the solana blockchain at the time of minting the NFT itself, with bubblegum all data space needed is determined and paid for at tree creation by the tree creator.
