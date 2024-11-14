@@ -45,7 +45,7 @@ npm i @metaplex-foundation/mpl-token-metadata
 ```
 
 ```bash
-npm i @metaplex-foundation/umi-uploader-irys;
+npm i @metaplex-foundation/umi-uploader-irys
 ```
 
 ### Imports and Wrapper Function
