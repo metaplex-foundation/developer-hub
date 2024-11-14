@@ -4,9 +4,9 @@ metaTitle: freeze | Sugar
 description: freeze command.
 ---
 
-When the Candy Machine has the freeze guard enabled, the `freeze` command can be used to manege its different stages.
+When the Candy Machine has the freeze guard enabled, the `freeze` command can be used to manage its different stages.
 
-After enabling the freeze guard on the default guards or an individual group, it needs to be initialized before minting can start. To initialize the freeza guard, use the `initialize` sub-command:
+After enabling the freeze guard on the default guards or an individual group, it needs to be initialized before minting can start. To initialize the freeze guard, use the `initialize` sub-command:
 
 ```
 sugar freeze initialize --period <SECONDS>
