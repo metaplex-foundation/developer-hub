@@ -148,6 +148,12 @@ export const guides = {
           title: 'Metaplex Program Guides',
           links: [
             {
+              title: 'Bubblegum',
+              href: '/bubblegum/guides/',
+              created: '2024-11-13',
+              updated: null, // null means it's never been updated
+            },
+            {
               title: 'Core',
               href: '/core/guides/',
               created: '2021-10-01',
