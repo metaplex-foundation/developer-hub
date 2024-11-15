@@ -4,10 +4,10 @@ import {
   DialectSwitcher,
   transformDialectSwitcherTag,
 } from '@/components/DialectSwitcher'
+import Image from '@/components/Image'
 import { QuickLink, QuickLinks } from '@/components/QuickLinks'
 import { Seperator } from '@/components/Seperator'
 import { Totem, TotemAccordion, TotemProse } from '@/components/Totem'
-import MerkleTreeConfigTable from '@/components/bubblegum/merkleTreeConfigTable'
 import {
   Diagram,
   transformDiagramTag,
@@ -16,7 +16,6 @@ import {
 import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
-import Image from '@/components/Image'
 
 
 const tags = {
