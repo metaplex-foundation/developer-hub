@@ -387,7 +387,7 @@ const createIx = await create(umi, {
   itemsAvailable: 5000,
   hiddenSettings = {
     name: "Hidden Asset",
-    uri: "https://example.com/hidden-asset.json,
+    uri: "https://example.com/hidden-asset.json",
     hash,
   }
 })

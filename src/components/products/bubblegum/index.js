@@ -1,9 +1,7 @@
 import {
-  changelogSection,
   documentationSection,
   guidesSection,
-  recipesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
 import { ArchiveBoxIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
@@ -87,7 +85,11 @@ export const bubblegum = {
           links: [
             {
               title: 'How to Create a 1,000,000 NFT Collection on Solana',
-              href: 'guides/javascript/how-to-create-1000000-nfts-on-solana',
+              href: '/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana',
+            },
+            {
+              title: 'How to Interact with cNFTs on Other SVMs',
+              href: '/bubblegum/guides/javascript/how-to-interact-with-cnfts-on-other-svms',
             },
           ],
         },

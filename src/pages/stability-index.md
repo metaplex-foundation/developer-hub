@@ -8,7 +8,7 @@ Below is a list of our products and their stability levels.
 
 | Product Name          | Stability Level  |
 | --------------------- | ---------------- |
-| Token Metadata        | 2 (Stable)       |
+| Token Metadata        | 3 (Code Freeze)  |
 | Token Auth Rules      | 2 (Stable)       |
 | Bubblegum             | 2 (Stable)       |
 | Candy Machine v3      | 2 (Stable)       |
@@ -43,7 +43,8 @@ The stability indices are as follows:
 - **Stability: 0 - Deprecated**. The feature may emit warnings. Backward compatibility is not guaranteed.
 - **Stability: 1 - Experimental**. The feature may emit warnings. The feature is not subject to [Semantic Versioning](https://semver.org) rules. Non-backward compatible changes or removal may occur in any future release. Use of the feature is not recommended in production or mainnet environments.
 - **Stability: 2 - Stable**. Compatibility with the ecosystem is a high priority.
-- **Stability: 3 - Legacy**. The feature is no longer recommended for use. While it likely will not be removed, and is still covered by semantic-versioning guarantees, use of the feature should be avoided.
+- **Stability: 3 - Code Freeze**. Functionality and features of program are finalized. Security firms perform final audits before upgrade authority is destroyed.
+- **Stability: 4 - Immutable**. Program is immutable. This allows the program to inherit the full security guarantees of Solana or the SVM.
 
 Use caution when making use of Experimental features. Users may not be aware
 that experimental features are being used. Bugs or behavior changes may

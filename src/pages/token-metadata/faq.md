@@ -24,6 +24,117 @@ There are several ways to solve this problem:
 
 As mentioned in the question above, filtering by fields present after the `creators` array is a challenging task because it is not a field of fixed size. We recommend to use DAS for the fastest and easiest method to get collection mints. If you want to get the data directly from chain you can use the following method, but we have a [Guide](/token-metadata/guides/get-by-collection) showing three different Methods to get all the NFTs in a collection.
 
+## How to create a Soulbound Asset?
+
+Token Metadata allows you to create Soulbound Assets. The best way to achieve this is using Token22 as the base SPL token, along with the `non-transferrable` Token Extension.
+
+{% dialect-switcher title="Create a Soulbound asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { createV1 } from "@metaplex-foundation/mpl-token-metadata";
+import { createAccount } from '@metaplex-foundation/mpl-toolbox';
+import {
+  ExtensionType,
+  createInitializeMintInstruction,
+  getMintLen,
+  createInitializeNonTransferableMintInstruction,
+} from '@solana/spl-token';
+import {
+  fromWeb3JsInstruction,
+  toWeb3JsPublicKey,
+} from '@metaplex-foundation/umi-web3js-adapters';
+
+const SPL_TOKEN_2022_PROGRAM_ID: PublicKey = publicKey(
+  'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
+);
+
+const umi = await createUmi();
+const mint = generateSigner(umi);
+
+const extensions = [ExtensionType.NonTransferable];
+const space = getMintLen(extensions);
+const lamports = await umi.rpc.getRent(space);
+
+// Create the mint account.
+const createAccountIx = createAccount(umi, {
+  payer: umi.identity,
+  newAccount: mint,
+  lamports,
+  space,
+  programId: SPL_TOKEN_2022_PROGRAM_ID,
+}).getInstructions();
+
+// Initialize the non-transferable extension.
+const createInitNonTransferableMintIx =
+  createInitializeNonTransferableMintInstruction(
+    toWeb3JsPublicKey(mint.publicKey),
+    toWeb3JsPublicKey(SPL_TOKEN_2022_PROGRAM_ID)
+  );
+
+// Initialize the mint.
+const createInitMintIx = createInitializeMintInstruction(
+  toWeb3JsPublicKey(mint.publicKey),
+  0,
+  toWeb3JsPublicKey(umi.identity.publicKey),
+  toWeb3JsPublicKey(umi.identity.publicKey),
+  toWeb3JsPublicKey(SPL_TOKEN_2022_PROGRAM_ID)
+);
+
+// Create the transaction with the Token22 instructions.
+const blockhash = await umi.rpc.getLatestBlockhash();
+const tx = umi.transactions.create({
+  version: 0,
+  instructions: [
+    ...createAccountIx,
+    fromWeb3JsInstruction(createInitNonTransferableMintIx),
+    fromWeb3JsInstruction(createInitMintIx),
+  ],
+  payer: umi.identity.publicKey,
+  blockhash: blockhash.blockhash,
+});
+
+// Sign, send, and confirm the transaction.
+let signedTx = await mint.signTransaction(tx);
+signedTx = await umi.identity.signTransaction(signedTx);
+const signature = await umi.rpc.sendTransaction(signedTx);
+await umi.rpc.confirmTransaction(signature, {
+  strategy: { type: 'blockhash', ...blockhash },
+  commitment: 'confirmed',
+});
+
+// Create the Token Metadata accounts.
+await createV1(umi, {
+  mint,
+  name: 'My Programmable NFT',
+  uri: 'https://example.com/my-programmable-nft.json',
+  sellerFeeBasisPoints: percentAmount(5.5),
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
+}).sendAndConfirm(umi);
+
+// Derive the token PDA.
+const token = findAssociatedTokenPda(umi, {
+  mint: mint.publicKey,
+  owner: umi.identity.publicKey,
+  tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
+});
+
+// Mint the token.
+await mintV1(umi, {
+  mint: mint.publicKey,
+  token,
+  tokenOwner: umi.identity.publicKey,
+  amount: 1,
+  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+}).sendAndConfirm(umi);
+```
+{% /dialect %}
+{% /dialect-switcher %}
+
+If it is required to use TokenKeg SPL tokens, you can create a Soulbound Asset using the [Locked Transfer Delegate](/token-metadata/delegates#locked-transfer-delegate-pnft-only) on a pNFT and then locking the pNFT.  Note however that this will not only prevent the owner from transferring the pNFT, but will also prevent the owner from burning it.  This is why the recommendation for Soulbound Assets is to use Token22 tokens.
+
 ## Why are the mint and freeze authorities transferred to the Edition PDA?
 
 One question we often receive is: Why does the Token Metadata program transfer the `Mint Authority` and the `Freeze Authority` of the Mint Account to the Edition PDA when creating NFTs? Why not just void them by setting them to `None`?
