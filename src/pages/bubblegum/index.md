@@ -16,17 +16,21 @@ Bubblegum is the Metaplex Protocol program for creating and interacting with co
 
 ## Introduction
 
-As NFTs have flourished on the Solana blockchain, there’s been an increasing need for NFTs to be as ubiquitous as any digital asset on the Internet: every single item in your game’s inventory, proof-of-engagement in your favourite consumer app, or even a profile for every human on the planet.
+As NFTs have flourished on the Solana blockchain, there’s been an increasing need for NFTs to be as ubiquitous as any digital asset on the Internet: every single item in your game’s inventory, proof-of-engagement in your favorite consumer app, or even a profile for every human on the planet.
 
 So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap (0.012 SOL) but scales linearly; a billion NFTs would cost 12,000,000 SOL! From 10,000 NFTs at 3.5 SOL (34x), 1 million NFTs at 5 SOL (2,400x), and 1 billion NFTs at 500 SOL (24,000x), compression for NFTs drastically reduces the cost of onchain storage of NFTs to enable creators to be as expressive with the technology as they wish.
 
-| Number of cNFTs | Storage Cost | Transaction Cost | Total Cost | Cost per cNFT |
-| --------------- | ------------ | ---------------- | ---------- | ------------- |
-| 10,000          | 3.48         | 0.005            | 3.485      | 0.0003485     |
-| 100,000         | 4.17         | 0.05             | 4.22       | 0.0000422     |
-| 1,000,000       | 4.85         | 0.5              | 5.35       | 0.0000053     |
-| 100,000,000     | 6.45         | 50               | 56.45      | 0.0000006     |
-| 1,000,000,000   | 7.13         | 500              | 507.13     | 0.0000005     |
+The following table represents what we believe is a workable composable tree across the Solana eco system, including marketplaces and other ecosystem products.
+
+| Number of cNFTs | Tree Depth | Canopy Depth | Concurrency Buffer | Tree Cost | Cost per cNFT |
+| --------------- | ---------- | ------------ | ------------------ | --------- | ------------- |
+| 16,384          | 14         | 8            | 64                 | 0.3358    | 0.00002550    |
+| 65,536          | 16         | 10           | 64                 | 0.7069    | 0.00001579    |
+| 262,144         | 18         | 12           | 64                 | 2.1042    | 0.00001303    |
+| 1,048,576       | 20         | 13           | 1024               | 8.5012    | 0.00001311    |
+| 16,777,216      | 24         | 15           | 2048               | 26.1201   | 0.00000656    |
+| 67,108,864      | 26         | 17           | 2048               | 70.8213   | 0.00000606    |
+| 1,073,741,824   | 30         | 17           | 2048               | 72.6468   | 0.00000507    |
 
 These compressed NFTs can be transferred, delegated, and even decompressed into regular NFTs for interoperability with existing smart contracts.
 
