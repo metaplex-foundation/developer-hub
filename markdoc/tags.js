@@ -151,10 +151,7 @@ const tags = {
       packages: { type: Array },
       type: { type: String },
     },
-  },
-  merkleTreeConfigurator: {
-    render: MerkleTreeConfigTable,
-  },
+  }
 }
 
 export default tags
