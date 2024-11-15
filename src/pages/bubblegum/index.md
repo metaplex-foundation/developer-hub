@@ -22,15 +22,15 @@ So far, though, these types of products have been held back by the cost of rent 
 
 The following table represents what we believe is a workable composable tree across the Solana eco system, including marketplaces and other ecosystem products.
 
-| Number of cNFTs | Tree Depth | Canopy Depth | Concurrency Buffer | Tree Cost | Cost per cNFT |
-| --------------- | ---------- | ------------ | ------------------ | --------- | ------------- |
-| 16,384          | 14         | 8            | 64                 | 0.3358    | 0.00002550    |
-| 65,536          | 16         | 10           | 64                 | 0.7069    | 0.00001579    |
-| 262,144         | 18         | 12           | 64                 | 2.1042    | 0.00001303    |
-| 1,048,576       | 20         | 13           | 1024               | 8.5012    | 0.00001311    |
-| 16,777,216      | 24         | 15           | 2048               | 26.1201   | 0.00000656    |
-| 67,108,864      | 26         | 17           | 2048               | 70.8213   | 0.00000606    |
-| 1,073,741,824   | 30         | 17           | 2048               | 72.6468   | 0.00000507    |
+| Number of cNFTs   | Tree Cost | Cost per cNFT |
+|-------------------|-----------|---------------------------|
+| 10,000            | 0.3358    | 0.00003358               |
+| 100,000           | 0.7069    | 0.00000706               |
+| 1,000,000         | 2.1042    | 0.00000210               |
+| 10,000,000        | 8.5012    | 0.00000085               |
+| 100,000,000       | 26.1201   | 0.00000026               |
+| 1,000,000,000     | 72.6468   | 0.00000007               |
+
 
 These compressed NFTs can be transferred, delegated, and even decompressed into regular NFTs for interoperability with existing smart contracts.
 
