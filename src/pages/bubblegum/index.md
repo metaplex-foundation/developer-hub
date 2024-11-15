@@ -20,14 +20,16 @@ As NFTs have flourished on the Solana blockchain, there’s been an increasing n
 
 So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap (0.012 SOL) but scales linearly; a billion NFTs would cost 12,000,000 SOL! From 10,000 NFTs at 3.5 SOL (34x), 1 million NFTs at 5 SOL (2,400x), and 1 billion NFTs at 500 SOL (24,000x), compression for NFTs drastically reduces the cost of onchain storage of NFTs to enable creators to be as expressive with the technology as they wish.
 
-| Number of cNFTs   | Tree Cost | Cost per cNFT |
-|-------------------|-----------|---------------|
-| 10,000            | 0.3358    | 0.00003358    |
-| 100,000           | 2.1042    | 0.00002104    |
-| 1,000,000         | 8.5012    | 0.00000850    |
-| 10,000,000        | 26.1201   | 0.00000261    |
-| 100,000,000       | 72.6468   | 0.00000073    |
-| 1,000,000,000     | 72.6468   | 0.00000007    |
+| Number of cNFTs | Tree Cost | Cost per cNFT\* |
+| --------------- | --------- | --------------- |
+| 10,000          | 0.3358    | 0.00003858      |
+| 100,000         | 2.1042    | 0.00002604      |
+| 1,000,000       | 8.5012    | 0.00001350      |
+| 10,000,000      | 26.1201   | 0.00000761      |
+| 100,000,000     | 72.6468   | 0.00000573      |
+| 1,000,000,000   | 72.6468   | 0.00000507      |
+
+\* *The cost per cNFT includes the Solana base transaction fee of 0.000005 SOL.*
 
 These compressed NFTs can be transferred, delegated, and even decompressed into regular NFTs for interoperability with existing smart contracts.
 
