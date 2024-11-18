@@ -18,7 +18,7 @@ Bubblegum is the Metaplex Protocol program for creating and interacting with co
 
 As NFTs have flourished on the Solana blockchain, there’s been an increasing need for NFTs to be as ubiquitous as any digital asset on the Internet: every single item in your game’s inventory, proof-of-engagement in your favorite consumer app, or even a profile for every human on the planet.
 
-So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap (0.012 SOL) but scales linearly; a billion NFTs would cost 12,000,000 SOL! From 10,000 NFTs at 3.5 SOL (34x), 1 million NFTs at 5 SOL (2,400x), and 1 billion NFTs at 500 SOL (24,000x), compression for NFTs drastically reduces the cost of onchain storage of NFTs to enable creators to be as expressive with the technology as they wish.
+So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap but scales linearly. Compression for NFTs drastically reduces the cost of onchain storage of NFTs to enable creators to be as expressive with the technology as they wish.
 
 Launching a cNFT project on Solana using Merkle trees can be incredibly cost-effective, with costs starting as low as:
 
