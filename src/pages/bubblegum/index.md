@@ -20,17 +20,16 @@ As NFTs have flourished on the Solana blockchain, there’s been an increasing n
 
 So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap (0.012 SOL) but scales linearly; a billion NFTs would cost 12,000,000 SOL! From 10,000 NFTs at 3.5 SOL (34x), 1 million NFTs at 5 SOL (2,400x), and 1 billion NFTs at 500 SOL (24,000x), compression for NFTs drastically reduces the cost of onchain storage of NFTs to enable creators to be as expressive with the technology as they wish.
 
-The following table represents what we believe is a workable composable tree across the Solana eco system, including marketplaces and other ecosystem products.
+Launching a cNFT project on Solana with merkle trees could cost as low as:
 
-| Number of cNFTs | Tree Depth | Canopy Depth | Concurrency Buffer | Tree Cost | Cost per cNFT |
-| --------------- | ---------- | ------------ | ------------------ | --------- | ------------- |
-| 16,384          | 14         | 8            | 64                 | 0.3358    | 0.00002550    |
-| 65,536          | 16         | 10           | 64                 | 0.7069    | 0.00001579    |
-| 262,144         | 18         | 12           | 64                 | 2.1042    | 0.00001303    |
-| 1,048,576       | 20         | 13           | 1024               | 8.5012    | 0.00001311    |
-| 16,777,216      | 24         | 15           | 2048               | 26.1201   | 0.00000656    |
-| 67,108,864      | 26         | 17           | 2048               | 70.8213   | 0.00000606    |
-| 1,073,741,824   | 30         | 17           | 2048               | 72.6468   | 0.00000507    |
+| Number of cNFTs | Storage Cost | Transaction Cost | Total Cost | Cost per cNFT |
+| --------------- | ------------ | ---------------- | ---------- | ------------- |
+| 10,000          | 0.2222       | 0.05             | 0.2722     | 0.000027222   |
+| 100,000         | 0.2656       | 0.5              | 0.7656     | 0.000007656   |
+| 1,000,000       | 0.3122       | 5                | 5.3122     | 0.000005312   |
+| 10,000,000      | 0.4236       | 50               | 50.4236    | 0.000005042   |
+| 100,000,000     | 7.2205       | 500              | 507.2205   | 0.000005072   |
+| 1,000,000,000   | 7.2205       | 5,000            | 5007.2205  | 0.000005007   |
 
 These compressed NFTs can be transferred, delegated, and even decompressed into regular NFTs for interoperability with existing smart contracts.
 
