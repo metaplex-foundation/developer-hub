@@ -4,7 +4,7 @@ metaTitle: JSON Schema | Core
 description: Understand the structure and requirements of the off-chain JSON schema for Metaplex Core assets.
 ---
 
-The off-chain JSON metadata for Metaplex Core assets is similar to the Metaplex Token Metadata standard. However, since more data can be stored on-chain in the asset itself using plugins, some of the data, like attributes and creators, are no longer part of the JSON standard. Although they are not required, they can still be used, and some wallets and tools might render them.
+The off-chain JSON metadata for Metaplex Core assets is similar to the Metaplex Token Metadata standard. However, since more data can be stored on-chain in the asset itself using plugins, some of the data, like creators, are no longer part of the JSON standard. Although they are not required, they can still be used, and some wallets and tools might render them.
 
 ## JSON Schema Fields
 
