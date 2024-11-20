@@ -52,12 +52,14 @@ description: Official Links for Metaplex
 | Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d | [Link](https://github.com/metaplex-foundation/mpl-core)                                                     | [Link](/core)
 | Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard)        | [Link](/core-candy-machine/guards)
 | Core Candy Machine | CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-machine-core) | [Link](/core-candy-machine)
-| Gumdrop            | gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a  | [Link](https://github.com/metaplex-foundation/gumdrop)                                                  | [Link](/legacy-documentation/gumdrop)
+| Gumdrop            | gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a  | [Link](https://github.com/metaplex-foundation/gumdrop)                                                      | [Link](/legacy-documentation/gumdrop)
 | Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  | [Link](https://github.com/metaplex-foundation/mpl-hydra)                                                    | [Link](/hydra)
 | Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              | [Link](/inscription)
 | MPL-Hybrid         | MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              | [Link](/mpl-hybrid)
 | Token Auth Rules   | auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg  | [Link](https://github.com/metaplex-foundation/mpl-token-auth-rules)                                         | [Link](/token-auth-rules)
 | Token Metadata     | metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s  | [Link](https://github.com/metaplex-foundation/mpl-token-metadata)                                           | [Link](/token-metadata)
+| MPL System Extras  | SysExL2WDyJi9aRZrXorrjHJut3JwHQ7R9bTyctbNNG  | [Link](https://github.com/metaplex-foundation/mpl-toolbox)                                                  | [Link](/umi/toolbox)
+| MPL Token Extras   | TokExjvjJmhKaRBShsBAsbSvEWMA1AgUNK7ps4SAc2p  | [Link](https://github.com/metaplex-foundation/mpl-toolbox)                                                  | [Link](/umi/toolbox)
 
 ## Tokens and Nfts
 
