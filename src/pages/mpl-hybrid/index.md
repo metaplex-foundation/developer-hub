@@ -13,7 +13,3 @@ The ability to freely move between fungible and non-fungible assets in a predict
 ## Re-Rolling
 
 the `mpl-hybrid` program includes the option to "re-roll" the asset each time its swapped. For example, every non-fungible asset can have its metadata blanked as it enters the escrow wallet and randomly reassigned (rerolled) as it leaves escrow. The creator has the ability to both manage available traits as well as to charge a small fee during the swap (typically when swapping into an NFT). MPL-Hybrid can add “loot box” gamification to every 404 project and can serve as an alternative source of revenue (e.g. unique limited time traits for an NFT community or randomized in-game rewards). It also offers the ability to craft more dynamic collections that can evolve to better suit the needs of the project and community over time.
-
-{% callout type="note" %}
-**mpl-hybrid** is in early stage development and currently undergoing a security audit. Use at your own risk.
-{% /callout %}
