@@ -3,9 +3,9 @@ import {
   documentationSection,
   guidesSection,
   referencesSection
-} from '@/shared/sections'
-import { StopCircleIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
+} from '@/shared/sections';
+import { StopCircleIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const core = {
   name: 'Core',
@@ -42,6 +42,10 @@ export const core = {
             { 
               title: 'What is an Asset?', 
               href: '/core/what-is-an-asset' 
+            },
+            { 
+              title: 'JSON Schema', 
+              href: '/core/json-schema' 
             },
             {
               title: 'Token Metadata Differences',
