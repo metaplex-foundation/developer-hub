@@ -219,6 +219,21 @@ await lutBuilder.sendAndConfirm(umi)
 myBuilder = myBuilder.setAddressLookupTables([lut])
 ```
 
+## Get human readable transaction signature
+
+The `signature` that is returned when sending transactions is of type `Uint8Array`. Therefore to get a string instead that can be copied and, for example opened in an explorer you it is required to deserialize it first like this:
+
+```ts
+// example to receive a sent transaction signature
+const { signature } = await builder.send(umi)
+
+// Deserializing it
+const serializedSignature = base58.deserialize(signature);
+console.log(
+        `View Transaction on Explorer: https://explorer.solana.com/tx/${serializedSignature}`
+      );
+```
+
 ## Fetching sent transactions
 
 Let's now take a look at how to fetch a transaction that was sent to the blockchain.
