@@ -224,11 +224,12 @@ myBuilder = myBuilder.setAddressLookupTables([lut])
 The `signature` that is returned when sending transactions is of type `Uint8Array`. Therefore to get a string instead that can be copied and, for example opened in an explorer you it is required to deserialize it first like this:
 
 ```ts
+import { base58 } from "@metaplex-foundation/umi/serializers";
 // example to receive a sent transaction signature
 const { signature } = await builder.send(umi)
 
 // Deserializing it
-const serializedSignature = base58.deserialize(signature);
+const serializedSignature = base58.deserialize(signature)[0];
 console.log(
         `View Transaction on Explorer: https://explorer.solana.com/tx/${serializedSignature}`
       );
