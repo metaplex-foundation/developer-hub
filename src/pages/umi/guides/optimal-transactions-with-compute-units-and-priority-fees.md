@@ -1,116 +1,136 @@
 ---
 title: Optimal transaction landing using Compute Units (CU) and priority fees
 metaTitle: Umi - Optimal transaction landing using Compute Units (CU) and priority fees
-description: Improve your transactions by adding the optimal Compute Units (CU) and priority fees.
-created: '12-01-2024'
-updated: '12-01-2024'
+description: Learn how to optimize your Solana transactions by calculating and setting appropriate Compute Units (CU) and priority fees.
+created: '12-02-2024'
+updated: '12-02-2024'
 ---
 
-When sending transactions on Solana, two key parameters can significantly improve your transaction's success rate and network efficiency:
+When sending transactions on Solana, optimizing two key parameters can significantly improve your transaction's success rate and cost-effectiveness:
 
 ## Priority Fees
 
-Priority fees allow you to participate in local fee markets to prioritize your transaction. When multiple transactions try to write data to the same accounts, transactions with higher priority fees are more likely to be included in the next block. While this creates a small additional cost, it can be crucial for time-sensitive operations or when the network is busy. The amount of priorization Fees is paid for a transaction is calculated by multiplying the compute unit limit by the compute unit price.
+Priority fees let you bid in local fee markets to get your transactions included faster. When the network is congested and multiple transactions compete to modify the same accounts, validators prioritize transactions with higher priority fees.
+
+Key points about priority fees:
+- They are calculated as: `compute_unit_limit * compute_unit_price`
+- Higher fees increase likelihood of faster inclusion
+- Only pay what's necessary based on current network competition
 
 ## Compute Unit Limit
 
-Every Solana transaction requires computational resources (Compute Units or CU) to execute. By default, transactions request a huge amount of CUs as a safety measure. However, this is often excessive and can be inefficient for two reasons:
+Compute Units (CUs) represent the computational resources your transaction needs. While transactions default to requesting many CUs as a safety measure, this is often inefficient:
 
-1. You pay for all requested CUs, even if your transaction uses less
-2. Each block has limited computational capacity - requesting excessive CUs means fewer transactions can fit in each block
+1. You pay priority fees for all requested CUs regardless of actual usage
+2. Blocks have limited CU capacity - requesting excess CUs reduces total transactions per block
 
-By setting an appropriate CU limit based on your transaction's actual needs, you can:
-- Reduce transaction costs by only paying for CUs you'll use
-- Help the network process more transactions per block
-- Still ensure your transaction has sufficient resources to execute
+Benefits of optimizing your CU limit:
+- Lower transaction costs by only paying for needed CUs
+- Improved network efficiency by allowing more transactions per block
+- Still ensures sufficient resources for execution
 
 For example, a simple token transfer might only need 20,000 CUs, while an NFT mint could require 100,000 CUs. Setting these limits appropriately helps optimize both your costs and overall network throughput.
 
-## How to use
-General information on how you set those parameters in umi using mpl-toolbox can be found in the [umi documentation](https://developers.metaplex.com/umi/toolbox/priority-fees-and-compute-managment). In this guide we want to explore how to get the most useful numbers to not have to take random guesses, but have the numbers based on facts.
+## Implementation Guide
 
-{% callout type="note" %}
-Umi has not yet been extended to include some of the simulation and RPC calls we are using to calculate the numbers, therefore we are mixing web3.js@1 in here. Please be careful when mixing those packages since some types like Publickeys and Transactions are incompatible between each other and need to be converted to be used in the other package.
+This guide demonstrates how to programmatically calculate optimal values rather than guessing. 
 
+{% callout type="warning" %}
+The code examples use `fetch` for RPC calls since Umi hasn't implemented these methods yet. When official support is added, prefer using Umi's built-in methods.
 {% /callout %}
 
-### Get Priority Fees
+### Calculate Priority Fees
 When using priority fees it is important to remember that those have the best effect when the competition is taken into account. Adding a huge number manually may result in overpaying more fees than required, while using a too low number might result in the transaction not being included into the block in case there is too much competition.
 
-To get the last paid prioritization fees that were paid for the accounts in our transaction one can use the `getRecentPrioritizationFees` RPC call. We use the result to calculate an average based on the top 1000 fees paid. This number can be aligned according to your experience.
+To get the last paid prioritization fees that were paid for the accounts in our transaction one can use the `getRecentPrioritizationFees` RPC call. We use the result to calculate an average based on the top 100 fees paid. This number can be aligned according to your experience. 
 
-The below function shows how to get all the `uniquePublicKeys`, pass them into the RPC call and then calculates the priority fee we want to use based on a umi transaction that is being passed in. At the bottom of the page you can find a full example where a Sol Transfer is done.
+The following steps are necessary:
+1. Extract writable accounts from your transaction
+2. Query recent fees paid for those accounts
+3. Calculate optimal fee based on market conditions
+
+At the bottom of the page you can find a full example where a Sol Transfer is done with this.
 ```js
 import {
-  Transaction,
+  TransactionBuilder,
   Umi,
-  uniquePublicKeys,
 } from "@metaplex-foundation/umi";
 
-const getPriorityFee = async (
+export const getPriorityFee = async (
   umi: Umi,
-  transaction: Transaction
+  transaction: TransactionBuilder
 ): Promise<number> => {
-  const distinctPublicKeys = uniquePublicKeys(transaction.message.accounts);
-
+  // Get unique writable accounts involved in the transaction
+  // We only care about writable accounts since they affect priority fees
+  const distinctPublicKeys = new Set<string>();
+  
+  transaction.items.forEach(item => {
+    item.instruction.keys.forEach(key => {
+      if (key.isWritable) {
+        distinctPublicKeys.add(key.pubkey.toString());
+      }
+    });
+  });
+  
+  // Query recent prioritization fees for these accounts from the RPC
   const response = await fetch(umi.rpc.getEndpoint(), {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       jsonrpc: "2.0",
       id: 1,
       method: "getRecentPrioritizationFees",
-      params: [distinctPublicKeys],
+      params: [Array.from(distinctPublicKeys)],
     }),
   });
 
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    throw new Error(`Failed to fetch priority fees: ${response.status}`);
   }
 
-  const data = (await response.json()) as {
-    jsonrpc: string;
-    result: {
-      prioritizationFee: number;
-      slot: number;
-    }[];
-    id: number;
+  const data = await response.json() as {
+    result: { prioritizationFee: number; slot: number; }[];
   };
-  const fees = data.result.map((entry) => entry.prioritizationFee);
 
-  const sortedFees = fees.sort((a, b) => b - a);
-
-  const topFees = sortedFees.slice(0, 1000);
-
-  const sumTopFees = topFees.reduce((sum, fee) => sum + fee, 0);
-  const averageFees = Math.ceil(sumTopFees / topFees.length);
-
-  return averageFees;
+  // Calculate average of top 100 fees to get a competitive rate
+  const fees = data.result?.map(entry => entry.prioritizationFee) || [];
+  const topFees = fees.sort((a, b) => b - a).slice(0, 100);
+  const averageFee = topFees.length > 0 ? Math.ceil(
+    topFees.reduce((sum, fee) => sum + fee, 0) / topFees.length
+  ) : 0;
+  return averageFee;
 };
+
 ```
 
-### Get Compute Units
-When looking to get the best amount of compute units one can take advantage of transaction simulation. First the transaction is built with the maximum amount of 1400000 compute units.
+### Calculate Compute Units
+To optimize transaction costs and ensure reliable execution, we can calculate the ideal compute unit limit by simulating the transaction first. This approach is more precise than using fixed values and helps avoid over-allocation of resources.
 
-Since umi does not support the `simulateTransaction` function right now we again manually build the rpc call and use `fetch` to get the result. When returning the number of compute units we multiply it by 1.1 as safeguard since for some functions the required CU may vary slightly.
-
+The simulation process works by:
+1. Building the transaction with maximum compute units (1,400,000)
+2. Simulating it to measure actual compute units consumed
+3. Adding a 10% safety buffer to account for variations
+4. Falling back to a conservative default if simulation fails
 
 ```js
-const getRequiredCU = async (umi: Umi, transaction: Transaction) => {
-  const defaultCU = 800_000;
+export const getRequiredCU = async (
+  umi: Umi,
+  transaction: Transaction
+): Promise<number> => {
+  // Default values if estimation fails
+  const DEFAULT_COMPUTE_UNITS = 800_000; // Standard safe value
+  const BUFFER_FACTOR = 1.1; // Add 10% safety margin
+
+  // Simulate the transaction to get actual compute units needed
   const response = await fetch(umi.rpc.getEndpoint(), {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       jsonrpc: "2.0",
       id: 1,
       method: "simulateTransaction",
       params: [
-        base64.deserialize(umi.transactions.serialize(transaction)),
+        base64.deserialize(umi.transactions.serialize(transaction))[0],
         {
           encoding: "base64",
           replaceRecentBlockhash: true,
@@ -119,23 +139,221 @@ const getRequiredCU = async (umi: Umi, transaction: Transaction) => {
       ],
     }),
   });
+
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    throw new Error(`Failed to simulate transaction: ${response.status}`);
   }
 
-  const data = (await response.json()) as any;
-  if (!data.result.value.unitsConsumed) {
-    return defaultCU;
+  const data = await response.json();
+  const unitsConsumed = data.result?.value?.unitsConsumed;
+
+  // Fallback to default if simulation doesn't provide compute units
+  if (!unitsConsumed) {
+    console.log("Simulation didn't return compute units, using default value");
+    return DEFAULT_COMPUTE_UNITS;
   }
-  return response.value.unitsConsumed * 1.1 || defaultCU;
+
+  // Add safety buffer to estimated compute units
+  return Math.ceil(unitsConsumed * BUFFER_FACTOR);
 };
 
+
+  const withCU = baseTransaction.prepend(
+    setComputeUnitPrice(umi, { microLamports: priorityFee })
+  ).prepend(
+    setComputeUnitLimit(umi, { units: 1400000 })
+  );
+
+  // Step 8: Calculate optimal compute unit limit
+  console.log("Estimating required compute units...");
+  const requiredUnits = await getRequiredCU(umi, withCU.build(umi));
 ```
 
 ### Full example for Sol Transfer
 Following the code above and introducing some boilerplate to create the Umi instance could result in a script like this to create a Sol Transfer transaction:
 
 ```js
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import {
+  sol,
+  publicKey,
+  Transaction,
+  Umi,
+  generateSigner,
+  keypairIdentity,
+  TransactionBuilder,
+} from "@metaplex-foundation/umi";
+import {
+  transferSol,
+  setComputeUnitLimit,
+  setComputeUnitPrice,
+  mplToolbox,
+} from "@metaplex-foundation/mpl-toolbox";
+import { base58, base64 } from "@metaplex-foundation/umi/serializers";
+
+/**
+ * Calculates the optimal priority fee based on recent transactions
+ * This helps ensure our transaction gets processed quickly by offering an appropriate fee
+ * @param umi - The Umi instance
+ * @param transaction - The transaction to calculate the fee for
+ * @returns The average priority fee in microLamports (1 lamport = 0.000000001 SOL)
+ */
+export const getPriorityFee = async (
+  umi: Umi,
+  transaction: TransactionBuilder
+): Promise<number> => {
+  // Get unique writable accounts involved in the transaction
+  // We only care about writable accounts since they affect priority fees
+  const distinctPublicKeys = new Set<string>();
+  
+  transaction.items.forEach(item => {
+    item.instruction.keys.forEach(key => {
+      if (key.isWritable) {
+        distinctPublicKeys.add(key.pubkey.toString());
+      }
+    });
+  });
+  
+  // Query recent prioritization fees for these accounts from the RPC
+  const response = await fetch(umi.rpc.getEndpoint(), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "getRecentPrioritizationFees",
+      params: [Array.from(distinctPublicKeys)],
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch priority fees: ${response.status}`);
+  }
+
+  const data = await response.json() as {
+    result: { prioritizationFee: number; slot: number; }[];
+  };
+
+  // Calculate average of top 100 fees to get a competitive rate
+  const fees = data.result?.map(entry => entry.prioritizationFee) || [];
+  const topFees = fees.sort((a, b) => b - a).slice(0, 100);
+  const averageFee = topFees.length > 0 ? Math.ceil(
+    topFees.reduce((sum, fee) => sum + fee, 0) / topFees.length
+  ) : 0;
+  return averageFee;
+};
+
+/**
+ * Estimates the required compute units for a transaction
+ * This helps prevent compute unit allocation errors while being cost-efficient
+ * @param umi - The Umi instance
+ * @param transaction - The transaction to estimate compute units for
+ * @returns Estimated compute units needed with 10% safety buffer
+ */
+export const getRequiredCU = async (
+  umi: Umi,
+  transaction: Transaction
+): Promise<number> => {
+  // Default values if estimation fails
+  const DEFAULT_COMPUTE_UNITS = 800_000; // Standard safe value
+  const BUFFER_FACTOR = 1.1; // Add 10% safety margin
+
+  // Simulate the transaction to get actual compute units needed
+  const response = await fetch(umi.rpc.getEndpoint(), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "simulateTransaction",
+      params: [
+        base64.deserialize(umi.transactions.serialize(transaction))[0],
+        {
+          encoding: "base64",
+          replaceRecentBlockhash: true,
+          sigVerify: false,
+        },
+      ],
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to simulate transaction: ${response.status}`);
+  }
+
+  const data = await response.json();
+  const unitsConsumed = data.result?.value?.unitsConsumed;
+
+  // Fallback to default if simulation doesn't provide compute units
+  if (!unitsConsumed) {
+    console.log("Simulation didn't return compute units, using default value");
+    return DEFAULT_COMPUTE_UNITS;
+  }
+
+  // Add safety buffer to estimated compute units
+  return Math.ceil(unitsConsumed * BUFFER_FACTOR);
+};
+
+/**
+ * Example usage: Demonstrates how to send SOL with optimized compute units and priority fees
+ * This example shows a complete flow of creating and optimizing a Solana transaction
+ */
+const example = async () => {
+  // Step 1: Initialize Umi with your RPC endpoint
+  const umi = createUmi("YOUR-ENDPOINT").use(mplToolbox());
+  
+  // Step 2: Set up a test wallet
+  const signer = generateSigner(umi);
+  umi.use(keypairIdentity(signer));
+  
+  // Step 3: Fund the wallet (devnet only)
+  console.log("Requesting airdrop for testing...");
+  await umi.rpc.airdrop(signer.publicKey, sol(0.001));
+  await new Promise(resolve => setTimeout(resolve, 15000)); // Wait for airdrop confirmation
+  
+  // Step 4: Set up the basic transfer parameters
+  const destination = publicKey("BeeryDvghgcKPTUw3N3bdFDFFWhTWdWHnsLuVebgsGSD");
+  const transferAmount = sol(0.00001); // 0.00001 SOL
+  
+  // Step 5: Create the base transaction
+  console.log("Creating base transfer transaction...");
+  const baseTransaction = await transferSol(umi, {
+    source: signer,
+    destination,
+    amount: transferAmount,
+  }).setLatestBlockhash(umi);
+
+  // Step 6: Calculate optimal priority fee
+  console.log("Calculating optimal priority fee...");
+  const priorityFee = await getPriorityFee(umi, baseTransaction);
+  
+  // Step 7: Create intermediate transaction for compute unit estimation
+  const withCU = baseTransaction.prepend(
+    setComputeUnitPrice(umi, { microLamports: priorityFee })
+  ).prepend(
+    setComputeUnitLimit(umi, { units: 1400000 })
+  );
+
+  // Step 8: Calculate optimal compute unit limit
+  console.log("Estimating required compute units...");
+  const requiredUnits = await getRequiredCU(umi, withCU.build(umi));
+  
+  // Step 9: Build the final optimized transaction
+  const finalTransaction = baseTransaction.prepend(
+    setComputeUnitPrice(umi, { microLamports: priorityFee })
+  ).prepend(
+    setComputeUnitLimit(umi, { units: requiredUnits })
+  );
+  console.log(`Transaction optimized with Priority Fee: ${priorityFee} microLamports and ${requiredUnits} compute units`);
+
+  // Step 10: Send and confirm the transaction
+  console.log("Sending optimized transaction...");
+  const signature = await finalTransaction.sendAndConfirm(umi);
+  console.log("Transaction confirmed! Signature:", base58.deserialize(signature.signature)[0]);
+};
+
+// Run the example
+example().catch(console.error);
 
 ```
 
