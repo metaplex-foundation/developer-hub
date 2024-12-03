@@ -8,6 +8,14 @@ In [the previous page](/bubblegum/create-trees), we saw that we need a Bubblegum
 
 The Bubblegum program offers two minting instructions. One that mints NFTs without associating them with a collection and one that mints NFTs to a given collection. Let's start by looking at the former since the latter simply requires a few more parameters.
 
+{% callout title="Batch Minting" %}
+
+With the release of the [Aura](/aura) network extension, to optimize the process of minting compressed NFT and reduce the number of transaction, a new featured called `batch minting` allows the user to create and manage Merkle trees offline, adding or removing NFTs for example, before finalizing them on-chain. **Note: This feature is only usable through the Aura gateway**
+
+If you want to learn more about this feature, read the [Batch Minting](/aura/batch-minting) documentation
+
+{% /callout %}
+
 ## Minting without a Collection
 
 The Bubblegum program provides a **Mint V1** instruction that enables us to mint Compressed NFTs from a Bubblegum Tree. If the Bubblegum Tree is public, anyone will be able to use this instruction. Otherwise, only the Tree Creator or the Tree Delegate will be able to do so.

@@ -34,9 +34,20 @@ For Developers the DAS API is required to interact with cNFTs, but it can also m
 
 You can find out more about the DAS API in a [dedicated section](/das-api).
 
+## Metaplex Aura
+
+Aura is a Solana Network Extension that can provide users with efficient, decentralized, and comprehensive indexing of digital asset data. Its main features include:
+
+- **Automated Synchronization**: Ensures data integrity by enabling nodes to assist one another during periods of high load, maintaining consistency across the network.
+- **Integrated Media CDN**: Enhances media delivery, speeding up load times for digital assets displayed on web pages.
+- **Support for Light Clients**: Enables node operators to index specific protocols or sub-protocols, such as Core assets or a particular Bubblegum tree. Light clients can operate without running a full Solana node or Geyser plugin, instead receiving updates from the Aura network. This reduces infrastructure costs significantly compared to maintaining a full Solana node.
+- **Digital Asset Standard API**: Fully implements the DAS API, the main interface for accessing digital asset data on the Solana Virtual Machine (SVM).
+
+Learn more about Aura's indexing features in the [dedicated section](/aura/data-availability-and-decentralized-indexing).
+
 ## Archive and Nonarchive Nodes
 
-We can divide nodes into two different categories. The first one we will look at are the **Archive nodes**. These can store information of previous blocks. In the case of these archival nodes, we can leverage having access to all previous blocks in several ways. Some of the advantages include being able to view an address's balance history and view any state in the history. Due to the high system requirements of running a full historical node, having private nodes available with this feature is highly beneficial.
+We can divide nodes into two different categories. The first one we will look at are the Archive nodes. These can store information of previous blocks. In the case of these archival nodes, we can leverage having access to all previous blocks in several ways. Some of the advantages include being able to view an address's balance history and view any state in the history. Due to the high system requirements of running a full historical node, having private nodes available with this feature is highly beneficial.
 
 Unlike archival nodes, a non-archive node, or just a regular node, will only have access to some of the previous blocks, which is upwards of 100 blocks. We previously mentioned that running an archival node has intensive requirements, but even a non-archive node can become hard to manage. For this reason, users often choose a private RPC provider. Most use cases involving private RPCs in Solana usually revolve around Mainnet-beta uses since this involves real SOL tokens, and there is a higher chance of being rate limited.
 
@@ -47,6 +58,10 @@ The following section includes multiple RPC providers.
 {% callout type="note" %}
 These lists are in alphabetical order. Please choose the RPC provider that best suits your project's needs. If we are missing a provider, let us know in our discord or submit a PR.
 {% /callout %}
+
+### RPCs with Aura Support
+- [Mainnet Aura](http://aura-mainnet.metaplex.com)
+- [Devnet Aura](http://aura-devnet.metaplex.com)
 
 ### RPCs with DAS Support
 - [Extrnode](https://docs.extrnode.com/das_api/)
