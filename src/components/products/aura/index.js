@@ -1,6 +1,4 @@
-import {
-  documentationSection
-} from '@/shared/sections'
+import { documentationSection } from '@/shared/sections'
 import { SparklesIcon } from '@heroicons/react/24/outline'
 import { Hero } from './Hero'
 
@@ -14,6 +12,9 @@ export const aura = {
   icon: <SparklesIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-aura',
   className: 'accent-pink',
+  primaryCta: {
+    disabled: true,
+  },
   heroes: [{ path: '/aura', component: Hero }],
   sections: [
     {
@@ -61,7 +62,7 @@ export const aura = {
               href: '/aura/blockchains/eclipse',
             },
           ],
-        }
+        },
       ],
     },
   ],

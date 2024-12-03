@@ -21,7 +21,7 @@ const codeProps = {
 
 export function Hero({ page }) {
   return (
-    <BaseHero page={page}>
+    <BaseHero page={page} primaryCta={{title: "View on Github", href: page.product.github }} secondaryCta={{disabled: true}}>
       <HeroCode {...codeProps}></HeroCode>
     </BaseHero>
   )

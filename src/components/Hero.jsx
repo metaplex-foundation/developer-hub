@@ -62,10 +62,10 @@ export function Hero({
                 </p>
               )}
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                {primaryCta &&
+                {primaryCta && !primaryCta.disabled &&
                   <Button href={primaryCta.href}>{primaryCta.title}</Button>
                 }
-                {secondaryCta &&
+                {secondaryCta && !secondaryCta.disabled &&
                   <Button href={secondaryCta.href} target="_blank" variant="secondary">
                     {secondaryCta.title}
                   </Button>
