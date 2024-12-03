@@ -10,7 +10,7 @@ export const aura = {
   navigationMenuCatergory: 'Utility',
   path: 'aura',
   icon: <SparklesIcon />,
-  github: 'https://github.com/metaplex-foundation/mpl-aura',
+  github: 'https://github.com/metaplex-foundation/aura/',
   className: 'accent-pink',
   primaryCta: {
     disabled: true,
