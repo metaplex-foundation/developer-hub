@@ -36,5 +36,5 @@ To incentivize nodes for processing batch operations and indexing asset data, an
 
 ## Development Progress
 
-The developement of batch minting can be found in our github repo here [https://github.com/metaplex-foundation/bubblegum-batch-sdk](https://github.com/metaplex-foundation/bubblegum-batch-sdk) and within our Aura repo [https://github.com/metaplex-foundation/aura/](ttps://github.com/metaplex-foundation/aura/)
+The developement of batch minting can be found in our github repo here [https://github.com/metaplex-foundation/bubblegum-batch-sdk](https://github.com/metaplex-foundation/bubblegum-batch-sdk) and within our Aura repo [https://github.com/metaplex-foundation/aura/](https://github.com/metaplex-foundation/aura/)
 
