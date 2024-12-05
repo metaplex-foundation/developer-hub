@@ -197,7 +197,7 @@ addPlugin(umi, {
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import { createCollection, CheckResult } from '@metaplex-foundation/core'
+import { createCollection, CheckResult } from '@metaplex-foundation/mpl-core'
 
 const collectionSigner = generateSigner(umi)
 const oracleAccount = publicKey('22222222222222222222222222222222')

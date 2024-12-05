@@ -256,7 +256,7 @@ import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
   create,
   CheckResult
-} from '@metaplex-foundation/core'
+} from '@metaplex-foundation/mpl-core'
 
 const collectionSigner = generateSigner(umi)
 
@@ -278,7 +278,7 @@ const asset = await create(umi, {
           update: [CheckResult.CAN_REJECT],
         },
         baseAddressConfig: undefined,
-      },,
+      },
     ],
   });.sendAndConfirm(umi)
 ```
@@ -562,7 +562,7 @@ import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
   create,
   CheckResult
-  } from '@metaplex-foundation/core'
+  } from '@metaplex-foundation/mpl-core'
 
 const collectionSigner = generateSigner(umi)
 const oracleAccount = publicKey('11111111111111111111111111111111')
