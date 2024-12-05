@@ -61,7 +61,7 @@ In this guide, we'll use the Anchor framework, but you can also implement it usi
 
 For simplicity, we'll use a mono-file approach, with helpers, state, accounts, and instructions all in lib.rs instead of the usual separation.
 
-*Note: You can follow along and open the example in Solana Playground, an online tool to build and deploy Solana programs: [Solana Playground](https://solanaplayground.io/).*
+*Note: You can follow along and open the example on the Metaplex Foundation Github: [Oracle Trading Example](https://github.com/metaplex-foundation/mpl-core-oracle-trading-example)*
 
 ### Helpers & Constants
 
