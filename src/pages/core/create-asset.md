@@ -245,11 +245,11 @@ await createCollection(umi, {
 }).sendAndConfirm(umi)
 
 // fetch the collection
-const collection = fetchCollection(umi, collection.publicKey)
+const collection = await fetchCollection(umi, collectionSigner.publicKey)
 
 
 // generate assetSigner and then create the asset.
-const asset = generateSigner(umi)
+const assetSigner = generateSigner(umi)
 
 await create(umi, {
   asset: assetSigner,
