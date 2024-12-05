@@ -271,9 +271,6 @@ const asset = await create(umi, {
           type: 'Anchor',
         },
         baseAddress: oracleAccount,
-        authority: {
-          type: 'UpdateAuthority',
-        },
         lifecycleChecks: {
           update: [CheckResult.CAN_REJECT],
         },
