@@ -580,7 +580,7 @@ const collection = await createCollection(umi, {
           update: [CheckResult.CAN_REJECT],
         },
         baseAddressConfig: undefined,
-      },,
+      },
     ],
   });.sendAndConfirm(umi)
 ```
