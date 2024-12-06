@@ -306,7 +306,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% /diagram %}
 
-{% seperator h="6" %}
+{% seperator h="6" /%}
 
 {% dialect-switcher title="Initialize the Freeze Escrow" %}
 {% dialect title="JavaScript" id="js" %}
