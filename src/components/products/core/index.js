@@ -232,6 +232,12 @@ export const core = {
               href: '/core/guides/immutability' 
             },
             { 
+              title: 'Soulbound Assets', 
+              href: '/core/guides/create-soulbound-nft-asset',
+              created: '2024-12-06',
+              updated: null, // null means it's never been updated
+            },
+            { 
               title: 'Print Editions', 
               href: '/core/guides/print-editions'
             },
