@@ -184,7 +184,7 @@ await create(umi, {
 await route(umi, {
   candyMachine: candyMachine.publicKey,
   guard: 'allowList',
-  group: some('listA'), // <- We are veryfing using "allowListA".
+  group: some('listA'), // <- We are verifying using "allowListA".
   routeArgs: {
     path: 'proof',
     merkleRoot: getMerkleRoot(allowListA),

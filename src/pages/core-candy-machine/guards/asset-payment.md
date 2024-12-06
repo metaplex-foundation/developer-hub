@@ -131,7 +131,7 @@ API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Mint Settings
 
 The Asset Payment guard contains the following Mint Settings:
-- **Asset Adress**: The address of the Asset to pay with. This must be part of the required collection and must belong to the minter.
+- **Asset Address**: The address of the Asset to pay with. This must be part of the required collection and must belong to the minter.
 - **Collection Address**: The Address of the Collection that is used for payment.
 - **Destination**: The address of the wallet that will receive all Assets.
 

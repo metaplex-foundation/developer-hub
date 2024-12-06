@@ -111,7 +111,7 @@ API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Mint Settings
 
 The Asset Gate guard contains the following Mint Settings:
-- **Asset Adress**: The address of the Asset to prove ownership with. This must be part of the required collection and must belong to the minter.
+- **Asset Address**: The address of the Asset to prove ownership with. This must be part of the required collection and must belong to the minter.
 - **Collection Address**: The Address of the Collection that is used to prove ownership.
 
 Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetgate) for more details.

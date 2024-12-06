@@ -84,7 +84,7 @@ The Third Party Signer guard contains the following settings:
 
 - **Signer Key**: The address of the signer that will need to sign each mint transaction.
 
-{% dialect-switcher title="Set up a Candy Machine using the Third Pary Signer Guard" %}
+{% dialect-switcher title="Set up a Candy Machine using the Third Party Signer Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 

@@ -6,7 +6,7 @@ description: An overview of the Core Candy Machine program and its feature sets 
 
 ## Introduction
 
-By September 2022, 78% of all NFTs in Solana were minted through Metaplex’s Candy Machine. This includes most of the well known NFT projects in the Solana ecosystem. Come 2024 Metaplex introduced the `Core` prototcol which redefines NFTs on Solana and with it a new Candy Machine to accomendate the same minting mechanics users loved for the `Core` standard.
+By September 2022, 78% of all NFTs in Solana were minted through Metaplex’s Candy Machine. This includes most of the well known NFT projects in the Solana ecosystem. Come 2024 Metaplex introduced the `Core` protocol which redefines NFTs on Solana and with it a new Candy Machine to accommodate the same minting mechanics users loved for the `Core` standard.
 
 Here are some of the features it offers.
 
@@ -144,7 +144,7 @@ The onchain account structure of an MPL Core Asset. [Link](https://github.com/me
 
 ## Candy Guards
 
-Now that we understand how Core Candy Machines work, let’s dig into the various ways creators can protect and customise the mint process of their Core Candy Machine.
+Now that we understand how Core Candy Machines work, let’s dig into the various ways creators can protect and customize the mint process of their Core Candy Machine.
 
 Creators can use what we call “**Guards**” to add various features to their Core Candy Machine. The Metaplex Core Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 23 default guards**](/core-candy-machine/guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
 

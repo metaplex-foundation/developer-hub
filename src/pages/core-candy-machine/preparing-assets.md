@@ -24,17 +24,17 @@ Assets support the following categories:
 
 ## Preparing Images
 
-While there are no inherant rules regarding images, it's in best practice to optimize you images to be as `web deliverable` as possible. You need to take into account that not all users may not have access to a super quick broadband connection. Users might be in remote areas where accesss to the internet is sparse so trying to get your user to view a 8mb image may impact their experiance with your project.
+While there are no inherent rules regarding images, it's in best practice to optimize you images to be as `web deliverable` as possible. You need to take into account that not all users may not have access to a super quick broadband connection. Users might be in remote areas where access to the internet is sparse so trying to get your user to view a 8mb image may impact their experience with your project.
 
 Even if your Asset is of the type `audio`, `video`, `html`, or `vr` it is still worth preparing images as these will be used as fallback for areas such as wallets or marketplaces that may not support the loading of the other Asset types.
 
 ## Preparing Animation Files
 
-Animation files consist of the remaining types of Asset catergories `audio`, `video`, `vr`, and `html`
+Animation files consist of the remaining types of Asset categories `audio`, `video`, `vr`, and `html`
 
 The same applies here as to preparing image files. You need to take into account. You need to take into consideration the file size and expected download sizes for your users.
 
-The following file types have been tested and confirmed working in nearlly all major wallets and marketplaces.
+The following file types have been tested and confirmed working in nearly all major wallets and marketplaces.
 
 - video (.mp4)
 - audio (.wav, .mp3)
@@ -194,7 +194,7 @@ You will need to upload all your JSON metadata to a storage medium of choice and
 The final step in preparation for your Core Candy Machine creation is create a Core Collection that the Core Candy Machine can use to group all the Assets together that the users purchase from your Core Candy Machine. For this we will require the `mpl-core` package.
 
 {% callout %}
-You will need to upload an image and also prepare and upload the JSON metadata like in the previous steps to have the nessacery data to create your Core Collection.
+You will need to upload an image and also prepare and upload the JSON metadata like in the previous steps to have the necessary data to create your Core Collection.
 {% /callout %}
 
 The below example creates a basic Core Collection with no plugins. To view a list of available plugins and more advanced Core Collection creation you can view the documentation over at Core's [Collection Management](/core/collections).
@@ -229,7 +229,7 @@ await createCollectionV1(umi, {
 
 ## Conclusion
 
-At this point you should have all completed all the preperations needed in order to create a Core Candy Machine.
+At this point you should have all completed all the preparations needed in order to create a Core Candy Machine.
 
 - Upload images and other media files.
 - Assign image and media file URIs to JSON Metadata files.

@@ -56,14 +56,14 @@ Now you should be able to generate the IDL and the initial client. From the root
 pnpm run generate
 ```
 
-this will in turn execute both scripts `pnpm generate:idls` and `pnpm generate:clients` and build out the intial clients.
-If you need to run these seperately for what ever reason you are able to do so.
+this will in turn execute both scripts `pnpm generate:idls` and `pnpm generate:clients` and build out the initial clients.
+If you need to run these separately for what ever reason you are able to do so.
 
 ## Adding Guard(s) to the client
 
 ### Create Guard File
 
-Once a sucessful generation of the intial client is made navigate to `/clients/js/src`.
+Once a successful generation of the initial client is made navigate to `/clients/js/src`.
 
 The first step would be to add you new guard into the `/clients/js/src/defaultGuards` folder.
 
