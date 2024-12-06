@@ -108,6 +108,12 @@ export const guides = {
               created: '2024-06-16',
               updated: null, // null means it's never been updated
             },
+            {
+              title: 'Optimal transaction landing using umi',
+              href: '/umi/guides/optimal-transactions-with-compute-units-and-priority-fees',
+              created: '2024-12-01',
+              updated: null, // null means it's never been updated
+            },
           ],
         },
         {
