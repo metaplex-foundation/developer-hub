@@ -11,9 +11,9 @@ export function Fence({ children, language }) {
       theme={undefined}
     >
       {({ className, style, tokens, getTokenProps }) => (
-        <pre className={className + ' relative scrollbar '} style={style}>
+        <pre className={className + ' scrollbar relative '} style={style}>
           <CopyToClipboardButton text={children} />
-          <code className='w-[calc(100%-25px)] block overflow-auto '>
+          <code className="block w-[calc(100%-25px)] overflow-auto ">
             {tokens.map((line, lineIndex) => (
               <Fragment key={lineIndex}>
                 {line
