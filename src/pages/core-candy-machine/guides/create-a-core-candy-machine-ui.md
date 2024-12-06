@@ -15,7 +15,7 @@ If you're looking for guidance on general web development practices or how to us
 ## Prerequisites
 
 - An already created Candy Machine. Find more info on how to create one [here](https://developers.metaplex.com/core-candy-machine/create).
-- Basic familiarity with web development and your chosen framework. We recommend Next JS for easiest compatability to umi.
+- Basic familiarity with web development and your chosen framework. We recommend Next JS for easiest compatibility to umi.
 
 ## Required Packages
 
@@ -66,7 +66,7 @@ This would return the Candy Machine Data like this:
 {% dialect title="JSON" id="json-cm" %}
 
 {% totem-accordion title="Candy Machine Data" %}
-```tson
+```json
 {
     "publicKey": "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9",
     "header": {
@@ -732,7 +732,7 @@ let builder = transactionBuilder()
   .add(mintV1(...))
 ```
 
-If you add to many `mintV1` instructions into a transaction you will recieve a `Transaction too large` error. The function [`builder.fitsInOneTransaction(umi)`](/umi/transactions#transaction-builders) allows to check for this before sending the transaction so that the transaction can be split before being sent. In case splitting is needed using [`signAllTransactions`](/umi/transactions#building-and-signing-transactions) is recommended so that only one popup has to be approved in the Wallet Adapter.    
+If you add to many `mintV1` instructions into a transaction you will receive a `Transaction too large` error. The function [`builder.fitsInOneTransaction(umi)`](/umi/transactions#transaction-builders) allows to check for this before sending the transaction so that the transaction can be split before being sent. In case splitting is needed using [`signAllTransactions`](/umi/transactions#building-and-signing-transactions) is recommended so that only one popup has to be approved in the Wallet Adapter.    
 
 ### Guard Groups
 
