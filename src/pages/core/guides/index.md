@@ -8,6 +8,8 @@ The following Guides for MPL Core are currently available:
 
 {% quick-links %}
 
+{% quick-link title="Soulbound NFT" icon="CodeBracketSquare" href="/core/guides/create-soulbound-nft-asset" description="Different options for Soulbound NFT including code examples" /%}
+
 {% quick-link title="Print Editions" icon="CodeBracketSquare" href="/core/guides/print-editions" description="Learn how to combine plugins to create Editions with MPL Core" /%}
 
 {% quick-link title="Immutability" icon="BookOpen" href="/core/guides/immutability" description="Learn how Immutability works in MPL Core" /%}
