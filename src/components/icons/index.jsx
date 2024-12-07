@@ -1,13 +1,35 @@
-import * as outlineIcons24 from '@heroicons/react/24/outline'
 import * as solidIcons20 from '@heroicons/react/20/solid'
+import * as outlineIcons24 from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 
-import { JavaScriptIcon } from './JavaScriptIcon'
-import { RustIcon } from './RustIcon'
+import { CSharpIcon } from './languages/CSharpIcon'
+import { CurlIcon } from './languages/CurlIcon'
+import { GoIcon } from './languages/GoIcon'
+import { JavaIcon } from './languages/JavaIcon'
+import { JavaScriptIcon } from './languages/JavaScriptIcon'
+import { KotlinIcon } from './languages/KotlinIcon'
+import { PhpIcon } from './languages/PhpIcon'
+import { PythonIcon } from './languages/PythonIcon'
+import { RubyIcon } from './languages/RubyIcon'
+import { RustIcon } from './languages/RustIcon'
+import { ShellIcon } from './languages/ShellIcon'
+import { SwiftIcon } from './languages/SwiftIcon'
+import { TypescriptIcon } from './languages/TypescriptIcon'
 
 const customIcons = {
-  JavaScriptIcon: JavaScriptIcon,
-  RustIcon: RustIcon,
+  CSharpIcon,
+  CurlIcon,
+  GoIcon,
+  JavaIcon,
+  JavaScriptIcon,
+  KotlinIcon,
+  PhpIcon,
+  PythonIcon,
+  RubyIcon,
+  RustIcon,
+  ShellIcon,
+  SwiftIcon,
+  TypescriptIcon,
 }
 
 export function Icon({ icon, className, ...props }) {
