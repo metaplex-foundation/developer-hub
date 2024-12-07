@@ -1,14 +1,16 @@
 // Recursive component for rendering nested parameters
-const ParamRenderer = ({ param, subValue }) => {
+const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
   let content
 
   switch (param.type) {
     case 'string':
       content = (
         <input
+          name={param.name}
           type="text"
           className="w-full rounded px-2"
           placeholder={param.value}
+          onChange={(e) => setParam({ [param.name]: e.target.value })}
         />
       )
       break
@@ -16,6 +18,7 @@ const ParamRenderer = ({ param, subValue }) => {
     case 'number':
       content = (
         <input
+          name={param.name}
           type="number"
           className="w-full rounded px-2"
           placeholder={param.value}
@@ -28,8 +31,10 @@ const ParamRenderer = ({ param, subValue }) => {
         <div className="flex flex-col gap-4">
           {Object.entries(param.value).map(([key, value]) => (
             <ParamRenderer
+              path={[...path, key]}
               key={key}
               param={{ name: key, ...value, subValue: true }}
+              setParam={(param) => setParam(param)}
             />
           ))}
         </div>
@@ -48,7 +53,7 @@ const ParamRenderer = ({ param, subValue }) => {
 
     case 'boolean':
       content = (
-        <select className="w-full rounded px-2">
+        <select name={param.name} className="w-full rounded px-2">
           <option value="true">true</option>
           <option value="false">false</option>
         </select>
@@ -71,7 +76,7 @@ const ParamRenderer = ({ param, subValue }) => {
 }
 
 // Main component
-const ApiParameterDisplay = ({ params }) => {
+const ApiParameterDisplay = ({ params, setParam }) => {
   console.log(params)
 
   return (
@@ -79,9 +84,14 @@ const ApiParameterDisplay = ({ params }) => {
       className={`flex w-full max-w-[400px] flex-col gap-4 rounded-xl border border-white p-4`}
     >
       <div>Body</div>
-      <div className="flex flex-col">
+      <div className="flex w-full flex-col">
         {params.map((param) => (
-          <ParamRenderer key={param.name} param={param} />
+          <ParamRenderer
+            path={[param.name]}
+            key={param.name}
+            param={param}
+            setParam={(param) => setParam(param)}
+          />
         ))}
       </div>
     </div>

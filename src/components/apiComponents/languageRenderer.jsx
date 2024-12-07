@@ -15,6 +15,8 @@ const LanguageRenderer = ({ api, playgroundParams }) => {
   )
   const [activeLanguage, setActiveLanguage] = useState('javascript')
 
+  const [responce, setResponce] = useState('')
+
   const renderLanguage = (activeLanguage) => {
     switch (activeLanguage) {
       case 'javascript':

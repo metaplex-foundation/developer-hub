@@ -1,21 +1,9 @@
 import { useState } from 'react'
 
 const endPoints = {
-  solanaAuraMainnet: {
-    name: 'Aura Mainnet',
-    uri: 'https://aura-mainnet.metaplex.com',
-  },
-  solanaAuraDevnet: {
-    name: 'Aura Devnet',
-    uri: 'https://aura-devnet.metaplex.com',
-  },
   eclipseAuraMainnet: {
     name: 'Eclipse Mainnet',
     uri: 'https://aura-eclipse-mainnet.metaplex.com',
-  },
-  eclipseAuraDevnet: {
-    name: 'Eclipse Devnet',
-    uri: 'https://aura-eclipse-devnet.metaplex.com',
   },
   custom: {
     name: 'Custom',

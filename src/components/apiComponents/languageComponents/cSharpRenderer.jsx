@@ -54,7 +54,7 @@ const CSharpRequestRenderer = ({ method, url, headers, body }) => {
     `
   
     return (
-      <Fence className="w-full" language="c">
+      <Fence maxHeight={400} language="c">
         {code}
       </Fence>
     )
