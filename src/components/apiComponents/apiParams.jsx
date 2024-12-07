@@ -8,7 +8,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
         <input
           name={param.name}
           type="text"
-          className="w-full rounded px-2"
+          className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
           placeholder={param.value}
           onChange={(e) => setParam({ [param.name]: e.target.value })}
         />
@@ -20,7 +20,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
         <input
           name={param.name}
           type="number"
-          className="w-full rounded px-2"
+          className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
           placeholder={param.value}
         />
       )
@@ -28,12 +28,13 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
 
     case 'object':
       content = (
-        <div className="flex flex-col gap-4">
+        <div className="-mx-3 mt-1 flex flex-col">
           {Object.entries(param.value).map(([key, value]) => (
             <ParamRenderer
               path={[...path, key]}
               key={key}
               param={{ name: key, ...value, subValue: true }}
+              subValue={true}
               setParam={(param) => setParam(param)}
             />
           ))}
@@ -43,9 +44,11 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
 
     case 'array':
       content = (
-        <ul>
+        <ul className="m-0 pl-4">
           {param.value.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li key={index} className="mb-0 mt-0 text-sm">
+              {item}
+            </li>
           ))}
         </ul>
       )
@@ -53,7 +56,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
 
     case 'boolean':
       content = (
-        <select name={param.name} className="w-full rounded px-2">
+        <select className="block w-full rounded-md border border-gray-200 px-2 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500">
           <option value="true">true</option>
           <option value="false">false</option>
         </select>
@@ -61,16 +64,27 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
       break
 
     default:
-      content = <span>{String(param.value)}</span>
+      content = <span className="text-sm">{String(param.value)}</span>
   }
 
   return (
     <div
-      className={`${!subValue && 'border-t border-white'} py-4 ${
-        param.type === 'object' ? '' : 'flex gap-2'
-      }`}
+      className={`${
+        !subValue && 'border-t border-gray-200 py-2 dark:border-neutral-700/50'
+      } ${param.type === 'object' ? '' : 'flex flex-col gap-2'}`}
     >
-      <strong>{param.name} </strong>({param.type}) {content}
+      <div className="px-3">
+        <label className="text-sm font-medium text-black dark:text-white">
+          {param.name}
+        </label>
+        <span className="ml-2 inline-block text-xs text-gray-500 dark:text-neutral-400">
+          {param.type}
+        </span>
+        <span className="ml-2 inline-block text-xs text-red-500 dark:text-red-400">
+          required
+        </span>
+      </div>
+      <div className="px-3 pb-2">{content}</div>
     </div>
   )
 }
@@ -80,11 +94,11 @@ const ApiParameterDisplay = ({ params, setParam }) => {
   console.log(params)
 
   return (
-    <div
-      className={`flex w-full max-w-[400px] flex-col gap-4 rounded-xl border border-white p-4`}
-    >
-      <div>Body</div>
-      <div className="flex w-full flex-col">
+    <div className="flex w-full max-w-[400px] flex-col gap-4 rounded-xl border border-gray-200 bg-white py-4 pb-0 dark:border-neutral-700/50 dark:bg-neutral-800/50">
+      <div className="px-3 text-xs font-semibold uppercase text-gray-500 dark:text-neutral-300">
+        Body Params
+      </div>
+      <div className="flex flex-col">
         {params.map((param) => (
           <ParamRenderer
             path={[param.name]}

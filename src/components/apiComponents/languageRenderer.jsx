@@ -15,6 +15,10 @@ const LanguageRenderer = ({ api, playgroundParams }) => {
   )
   const [activeLanguage, setActiveLanguage] = useState('javascript')
 
+  function strToTitleCase(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
   const [responce, setResponce] = useState('')
 
   const renderLanguage = (activeLanguage) => {
@@ -22,7 +26,9 @@ const LanguageRenderer = ({ api, playgroundParams }) => {
       case 'javascript':
         return (
           <div className="flex flex-col">
-            <div>{activeLanguage}</div>
+            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+              {strToTitleCase(activeLanguage)} Request
+            </div>
             <JavascriptRequestRenderer
               method={api.method}
               url={activeEndpoint}
@@ -35,7 +41,9 @@ const LanguageRenderer = ({ api, playgroundParams }) => {
       case 'python':
         return (
           <div className="flex flex-col">
-            <div>{activeLanguage}</div>
+            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+              {strToTitleCase(activeLanguage)} Request
+            </div>
             <PythonRequestRenderer
               method={api.method}
               url={activeEndpoint}
@@ -48,7 +56,9 @@ const LanguageRenderer = ({ api, playgroundParams }) => {
       case 'curl':
         return (
           <div className="flex flex-col">
-            <div>{activeLanguage}</div>
+            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+              {strToTitleCase(activeLanguage)} Request
+            </div>
             <CurlRequestRenderer
               method={api.method}
               url={activeEndpoint}
@@ -61,7 +71,9 @@ const LanguageRenderer = ({ api, playgroundParams }) => {
       case 'go':
         return (
           <div className="flex flex-col">
-            <div>{activeLanguage}</div>
+            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+              {strToTitleCase(activeLanguage)} Request
+            </div>
             <GoRequestRenderer
               method={api.method}
               url={activeEndpoint}
@@ -74,7 +86,9 @@ const LanguageRenderer = ({ api, playgroundParams }) => {
       case 'csharp':
         return (
           <div className="flex flex-col">
-            <div>{activeLanguage}</div>
+            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+              {strToTitleCase(activeLanguage)} Request
+            </div>
             <CSharpRequestRenderer
               method={api.method}
               url={activeEndpoint}
@@ -87,7 +101,9 @@ const LanguageRenderer = ({ api, playgroundParams }) => {
       case 'java':
         return (
           <div className="flex flex-col">
-            <div>{activeLanguage}</div>
+            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+              {strToTitleCase(activeLanguage)} Request
+            </div>
             <JavaRenderer
               method={api.method}
               url={activeEndpoint}
@@ -100,7 +116,9 @@ const LanguageRenderer = ({ api, playgroundParams }) => {
       case 'php':
         return (
           <div className="flex flex-col">
-            <div>{activeLanguage}</div>
+            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+              {strToTitleCase(activeLanguage)} Request
+            </div>
             <PhpRenderer
               method={api.method}
               url={activeEndpoint}
@@ -118,6 +136,7 @@ const LanguageRenderer = ({ api, playgroundParams }) => {
         setActiveEndpoint={(endpoint) => setActiveEndpoint(endpoint)}
       />
       <LanguageSelector
+        activeLanguage={activeLanguage}
         setActiveLanguage={(language) => setActiveLanguage(language)}
       />
       {renderLanguage(activeLanguage)}
