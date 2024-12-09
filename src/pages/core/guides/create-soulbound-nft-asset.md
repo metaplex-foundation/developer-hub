@@ -35,7 +35,23 @@ The Permanent Freeze Delegate Plugin provides functionality to make assets non-t
 2. Set the initial state to frozen
 3. Set the authority to None, making the frozen state permanent and immutable
 
-This effectively creates a permanently soulbound asset that cannot be transferred or thawed.
+This effectively creates a permanently soulbound asset that cannot be transferred or thawed. In the following code snippet it is shown where to add those three options:
+
+```js
+  await create(umi, {
+    asset: assetSigner,
+    collection: collection,
+    name: "My Frozen Asset",
+    uri: "https://example.com/my-asset.json",
+    plugins: [
+      {
+        type: 'PermanentFreezeDelegate', // Include the Permanent Freeze plugin
+        frozen: true, // Set the initial state to frozen
+        authority: { type: "None" }, // Set the authority to None
+      },
+    ],
+  })
+```
 
 
 ### Asset-Level Implementation
