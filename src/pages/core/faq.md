@@ -19,32 +19,9 @@ Core currently charges a very small fee of 0.0015 SOL per Asset mint to the call
 
 ## How to create a Soulbound Asset?
 
-The Core Standard allows you to create Soulbound Assets. To achieve this use the [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate) plugin. On Asset creation you would include the `Permanent Freeze` plugin set to frozen, and with the authority set to none, making the plugins data immutable.
+The Core Standard allows you to create Soulbound Assets. To achieve this either the [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate) plugin or the [Oracle Plugin](/core/external-plugins/oracle) can be used. 
 
-{% dialect-switcher title="Create a Soulbound asset" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import {
-  createAsset,
-  pluginAuthorityPair,
-  nonePluginAuthority,
-} from '@metaplex-foundation/mpl-core'
-
-await createAsset(umi, {
-  owner,
-  plugins: [
-    pluginAuthorityPair({
-      type: 'PermanentFreeze',
-      data: { frozen: true },
-      authority: nonePluginAuthority(),
-    }),
-  ],
-})
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+To learn more check out the [Soulbound Assets Guide](/core/guides/create-soulbound-nft-asset)!
 
 ## How to set an Asset to be Immutable?
 
