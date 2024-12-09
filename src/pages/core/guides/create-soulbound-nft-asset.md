@@ -41,8 +41,7 @@ This effectively creates a permanently soulbound asset that cannot be transferre
 ### Asset-Level Implementation
 The Permanent Freeze Delegate Plugin can be attached to individual assets to make them soulbound. This provides more granular control but requires more rent and separate thaw transactions per asset in case it ever should not be soulbound anymore.
 
-{% dialect-switcher title="" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem %}
 {% totem-accordion title="Code Example" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -142,14 +141,12 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 
 ```
 {% /totem-accordion  %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem %}
 
 ### Collection-Level Implementation
 For collections where all assets should be soulbound, applying the plugin at the collection level is more efficient. This requires less rent and enables thawing the entire collection in one transaction.
 
-{% dialect-switcher title="" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem %}
 {% totem-accordion title="Code Example" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -250,8 +247,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 
 ```
 {% /totem-accordion  %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem %}
 
 ## Creating Soulbound NFTs with the Oracle Plugin
 
@@ -260,8 +256,7 @@ The Oracle Plugin provides a way to approve or reject different lifecycle events
 ### Asset-Level Implementation
 The Oracle Plugin can make individual assets non-transferrable while preserving the ability to burn them. This provides flexibility for cases where assets may need to be destroyed.
 
-{% dialect-switcher title="" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem %}
 {% totem-accordion title="Code Example" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -375,14 +370,12 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 
 ```
 {% /totem-accordion  %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem %}
 
 ### Collection-Level Implementation
 Applying the Oracle Plugin at the collection level makes all assets in the collection non-transferrable but burnable. This is more rent efficient and allows managing permissions for the entire collection at once.
 
-{% dialect-switcher title="" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem %}
 {% totem-accordion title="Code Example" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -497,5 +490,4 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 
 ```
 {% /totem-accordion  %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem %}
