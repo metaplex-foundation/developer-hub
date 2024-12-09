@@ -50,6 +50,9 @@ The following steps are necessary:
 3. Calculate optimal fee based on market conditions
 
 At the bottom of the page you can find a full example where a Sol Transfer is done with this.
+
+{% totem %}
+{% totem-accordion title="Code Snippet" %}
 ```js
 import {
   TransactionBuilder,
@@ -60,7 +63,7 @@ export const getPriorityFee = async (
   umi: Umi,
   transaction: TransactionBuilder
 ): Promise<number> => {
-  // Get unique writable accounts involved in the transaction
+  // Step 1: Get unique writable accounts involved in the transaction
   // We only care about writable accounts since they affect priority fees
   const distinctPublicKeys = new Set<string>();
   
@@ -72,7 +75,7 @@ export const getPriorityFee = async (
     });
   });
   
-  // Query recent prioritization fees for these accounts from the RPC
+  // Step 2: Query recent prioritization fees for these accounts from the RPC
   const response = await fetch(umi.rpc.getEndpoint(), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -92,7 +95,7 @@ export const getPriorityFee = async (
     result: { prioritizationFee: number; slot: number; }[];
   };
 
-  // Calculate average of top 100 fees to get a competitive rate
+  // Step 3: Calculate average of top 100 fees to get a competitive rate
   const fees = data.result?.map(entry => entry.prioritizationFee) || [];
   const topFees = fees.sort((a, b) => b - a).slice(0, 100);
   const averageFee = topFees.length > 0 ? Math.ceil(
@@ -102,6 +105,8 @@ export const getPriorityFee = async (
 };
 
 ```
+{% /totem-accordion  %}
+{% /totem %}
 
 ### Calculate Compute Units
 To optimize transaction costs and ensure reliable execution, we can calculate the ideal compute unit limit by simulating the transaction first. This approach is more precise than using fixed values and helps avoid over-allocation of resources.
@@ -112,16 +117,18 @@ The simulation process works by:
 3. Adding a 10% safety buffer to account for variations
 4. Falling back to a conservative default if simulation fails
 
+{% totem %}
+{% totem-accordion title="Code Snippet" %}
 ```js
 export const getRequiredCU = async (
   umi: Umi,
-  transaction: Transaction
+  transaction: Transaction // Step 1: pass the transaction
 ): Promise<number> => {
   // Default values if estimation fails
   const DEFAULT_COMPUTE_UNITS = 800_000; // Standard safe value
   const BUFFER_FACTOR = 1.1; // Add 10% safety margin
 
-  // Simulate the transaction to get actual compute units needed
+  // Step 2: Simulate the transaction to get actual compute units needed
   const response = await fetch(umi.rpc.getEndpoint(), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -154,7 +161,7 @@ export const getRequiredCU = async (
   }
 
   // Add safety buffer to estimated compute units
-  return Math.ceil(unitsConsumed * BUFFER_FACTOR);
+  return Math.ceil(unitsConsumed * BUFFER_FACTOR); // Step 3: use the buffer
 };
 
 
@@ -168,10 +175,14 @@ export const getRequiredCU = async (
   console.log("Estimating required compute units...");
   const requiredUnits = await getRequiredCU(umi, withCU.build(umi));
 ```
+{% /totem-accordion  %}
+{% /totem %}
 
 ### Full example for Sol Transfer
 Following the code above and introducing some boilerplate to create the Umi instance could result in a script like this to create a Sol Transfer transaction:
 
+{% totem %}
+{% totem-accordion title="Full Code Example" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import {
@@ -356,6 +367,5 @@ const example = async () => {
 example().catch(console.error);
 
 ```
-
-## Further Actions
-- staked connection
+{% /totem-accordion  %}
+{% /totem %}
