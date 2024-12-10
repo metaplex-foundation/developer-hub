@@ -8,6 +8,7 @@ import Image from '@/components/Image'
 import { QuickLink, QuickLinks } from '@/components/QuickLinks'
 import { Seperator } from '@/components/Seperator'
 import { Totem, TotemAccordion, TotemProse } from '@/components/Totem'
+import ApiComponentWrapper from '@/components/apiComponents/apiComponentWrapper'
 import {
   Diagram,
   transformDiagramTag,
@@ -16,7 +17,6 @@ import {
 import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
-
 
 const tags = {
   callout: {
@@ -58,7 +58,7 @@ const tags = {
       description: { type: String },
       icon: { type: String },
       href: { type: String },
-      target: { type: String }
+      target: { type: String },
     },
   },
   'product-grid': {
@@ -161,6 +161,12 @@ const tags = {
       classes: { type: String },
     },
     selfClosing: true,
+  },
+  apiRenderer: {
+    attributes: {
+      method: { type: String },
+    },
+    render: ApiComponentWrapper,
   },
 }
 
