@@ -1,7 +1,7 @@
 ---
 title: Create a Website for minting Assets from your Core Candy Machine
 metaTitle: Create a Website for minting Assets from your Core Candy Machine | Core Candy Machine
-description: How to create an NFT collection on the Solana blockchain using Candy Machine.
+description: How to create an UI to interact with your Candy Machine minting Program on Solana.
 ---
 
 If you are looking to launch a Core NFT Collection on Solana, you would typically use a Candy Machine where your users can come and buy your Assets. To provide a user-friendly experience, it is recommended to have a website for it. This guide will focus on how to build your own mint function. It will also show you how to fetch data from the Candy Machine to, for example, display the remaining amount that can be minted.

@@ -1,7 +1,7 @@
 ---
 title: Quick Start
 metaTitle: Quick Start | Hydra
-description: Provides a high-level overview of Hydra wallets.
+description: Provides a high-level overview over the non-Umi Hydra SDK.
 ---
 
 To get started with Hydra, you'll need the package for your programming environment.
