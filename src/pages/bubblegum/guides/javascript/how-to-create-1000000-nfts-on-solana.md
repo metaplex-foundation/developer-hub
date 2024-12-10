@@ -60,7 +60,6 @@ import {
   mintV1,
   mplBubblegum,
   parseLeafFromMintV1Transaction,
-  verifyCollection,
 } from '@metaplex-foundation/mpl-bubblegum'
 import {
   createNft,
@@ -214,13 +213,13 @@ const createTreeTx = await createTree(umi, {
 await createTreeTx.sendAndConfirm(umi)
 ```
 
-### Create a Collection NFT (Optional)
+### Create a Collection NFT
 
 Collections for cNFTs are still maintained and manged by Token Metadata and the original Collection NFTs minted from Token Metadata. If you wish to create a collection for your cNFTs and mint them to it you will need to create a Token Metadata Collection NFT.
 
 ```ts
 //
-// ** Create Token Metadata Collection NFT (Optional) **
+// ** Create Token Metadata Collection NFT **
 //
 
 //
@@ -229,7 +228,7 @@ Collections for cNFTs are still maintained and manged by Token Metadata and the 
 // or have previously created a collection NFT.
 //
 
-const collectionId = generateSigner(umi)
+const collectionSigner = generateSigner(umi)
 
 // Path to image file
 const collectionImageFile = fs.readFileSync('./collection.png')
@@ -260,7 +259,7 @@ const collectionMetadata = {
 const collectionMetadataUri = await umi.uploader.uploadJson(collectionMetadata)
 
 await createNft(umi, {
-  mint: collectionId,
+  mint: collectionSigner.publicKey,
   name: 'My cNFT Collection',
   uri: 'https://www.example.com/collection.json',
   isCollection: true,
@@ -333,15 +332,22 @@ const newOwner = publicKey('111111111111111111111111111111')
 
 console.log('Minting Compressed NFT to Merkle Tree...')
 
-const { signature } = await mintV1(umi, {
-  leafOwner: newOwner.publicKey,
+const { signature } = await mintToCollectionV1(umi, {
+  leafOwner: newOwner,
   merkleTree: merkleTree.publicKey,
+  collectionMint: collectionSigner.publicKey,
   metadata: {
     name: 'My cNFT',
     uri: nftMetadataUri, // Either use `nftMetadataUri` or a previously uploaded uri.
     sellerFeeBasisPoints: 500, // 5%
-    collection: { key: collectionId.publicKey, verified: false },
-    creators: [{ address: umi.identity.publicKey, verified: true, share: 100 }],
+    collection: { key: collectionSigner.publicKey, verified: false },
+    creators: [
+      {
+        address: umi.identity.publicKey,
+        verified: true,
+        share: 100,
+      },
+    ],
   },
 }).sendAndConfirm(umi, { send: { commitment: 'finalized' } })
 ```
@@ -371,27 +377,6 @@ console.log('Compressed NFT Asset ID:', assetId.toString())
 const asset = await umi.rpc.getAsset(assetId[0])
 
 console.log({ asset })
-```
-
-### Verifying the Collection
-
-NFTs from Token Metadata and cNFTs from Bubblegum both mint assets into collections as unverified. Due to this an additional instruction is needed to verify the asset to the collection by the function of `verifyCollection()` from `mpl-bubblegum`.
-
-To achieve the verification we need to pass some additional details from the asset which can be found by called `getAssetWithProof()` from the `assetId` we previously worked out.
-
-Once we have the `assetWithProof` result we can spread that out into the `verifyCollection` object argument using `...assetWithProof`. This takes all the fields from `assetWithProof` and adds them to the object. Finally we just need to pass in the `collectionMint` address and the `collectionAuthority` and send off the transaction.
-
-```ts
-//
-// ** Verify cNFT to Collection **
-//
-
-const assetWithProof = await getAssetWithProof(umi, assetId[0])
-await verifyCollection(umi, {
-  ...assetWithProof,
-  collectionMint: collectionId.publicKey,
-  collectionAuthority: umi.identity,
-}).sendAndConfirm(umi)
 ```
 
 ### Minting 1,000,000 cNFTs
@@ -424,7 +409,7 @@ Below is an example of minting cNFTs to an array of addresses that increment the
         name: `My Compressed NFT #${index}`,
         uri: `https://example.com/${index}.json`, //either use metadataUri or the uri of the uploaded metadata file
         sellerFeeBasisPoints: 500, // 5%
-        collection: { key: collectionId.publicKey, verified: false },
+        collection: { key: collectionSigner.publicKey, verified: false },
         creators: [
           { address: umi.identity.publicKey, verified: true, share: 100 },
         ],
@@ -441,27 +426,24 @@ Below is an example of minting cNFTs to an array of addresses that increment the
 import {
   createTree,
   findLeafAssetIdPda,
-  getAssetWithProof,
-  mintV1,
+  mintToCollectionV1,
   mplBubblegum,
-  parseLeafFromMintV1Transaction,
-  verifyCollection,
-} from "@metaplex-foundation/mpl-bubblegum";
+  parseLeafFromMintV1Transaction
+} from '@metaplex-foundation/mpl-bubblegum'
 import {
   createNft,
   mplTokenMetadata,
-} from "@metaplex-foundation/mpl-token-metadata";
+} from '@metaplex-foundation/mpl-token-metadata'
 import {
   createGenericFile,
   generateSigner,
   keypairIdentity,
   percentAmount,
-  publicKey,
-  sol,
-} from "@metaplex-foundation/umi";
-import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
-import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
-import fs from "fs";
+  publicKey
+} from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+import fs from 'fs'
 
 // Create the wrapper function
 const createCnft = async () => {
@@ -534,7 +516,7 @@ const createCnft = async () => {
   // or have previously created a collection NFT.
   //
 
-  const collectionId = generateSigner(umi)
+  const collectionSigner = generateSigner(umi)
 
   // Path to image file
   const collectionImageFile = fs.readFileSync('./collection.png')
@@ -569,7 +551,7 @@ const createCnft = async () => {
 
   console.log('Creating Collection NFT...')
   await createNft(umi, {
-    mint: collectionId,
+    mint: collectionSigner,
     name: 'My cNFT Collection',
     uri: 'https://www.example.com/collection.json',
     isCollection: true,
@@ -631,19 +613,24 @@ const createCnft = async () => {
 
   console.log('Minting Compressed NFT to Merkle Tree...')
 
-  const { signature } = await mintV1(umi, {
-    leafOwner: newOwner,
-    merkleTree: merkleTree.publicKey,
-    metadata: {
-      name: 'My cNFT',
-      uri: nftMetadataUri, // Either use `nftMetadataUri` or a previously uploaded uri.
-      sellerFeeBasisPoints: 500, // 5%
-      collection: { key: collectionId.publicKey, verified: false },
-      creators: [
-        { address: umi.identity.publicKey, verified: true, share: 100 },
-      ],
-    },
-  }).sendAndConfirm(umi, { send: { commitment: 'finalized' } })
+const { signature } = await mintToCollectionV1(umi, {
+  leafOwner: newOwner,
+  merkleTree: merkleTree.publicKey,
+  collectionMint: collectionSigner.publicKey,
+  metadata: {
+    name: 'My cNFT',
+    uri: nftMetadataUri, // Either use `nftMetadataUri` or a previously uploaded uri.
+    sellerFeeBasisPoints: 500, // 5%
+    collection: { key: collectionSigner.publicKey, verified: false },
+    creators: [
+      {
+        address: umi.identity.publicKey,
+        verified: true,
+        share: 100,
+      },
+    ],
+  },
+}).sendAndConfirm(umi, { send: { commitment: 'finalized' } })
 
   //
   // ** Fetching Asset **
@@ -667,20 +654,8 @@ const createCnft = async () => {
   const asset = await umi.rpc.getAsset(assetId[0])
 
   console.log({ asset })
-
-  //
-  // ** Verify cNFT to Collection **
-  //
-
-  console.log('verifying Collection')
-  const assetWithProof = await getAssetWithProof(umi, assetId[0])
-  await verifyCollection(umi, {
-    ...assetWithProof,
-    collectionMint: collectionId.publicKey,
-    collectionAuthority: umi.identity,
-  }).sendAndConfirm(umi)
-}
+};
 
 // run the wrapper function
-createCnft()
+createCnft();
 ```
