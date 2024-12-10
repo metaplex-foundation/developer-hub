@@ -59,8 +59,8 @@ await updateMetadata(umi, {
   leafOwner,
   currentMetadata: assetWithProof.metadata,
   updateArgs,
-  // Optional param. If your authority is a different signer type than the
-  // current umi identity assign that signer here. 
+  // Optional param. If your authority is a different signer type 
+  // than the current umi identity assign that signer here.
   authority: <Signer>
   // Optional param. If cNFT belongs to a collection pass it here.
   collectionMint: publicKey("22222222222222222222222222222222"),
