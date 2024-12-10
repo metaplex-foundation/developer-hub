@@ -1,7 +1,7 @@
 ---
 title: Create a Website for minting Assets from your Core Candy Machine
 metaTitle: Create a Website for minting Assets from your Core Candy Machine | Core Candy Machine
-description: How to create an NFT collection on the Solana blockchain using Candy Machine.
+description: How to create an UI to interact with your Candy Machine minting Program on Solana.
 ---
 
 If you are looking to launch a Core NFT Collection on Solana, you would typically use a Candy Machine where your users can come and buy your Assets. To provide a user-friendly experience, it is recommended to have a website for it. This guide will focus on how to build your own mint function. It will also show you how to fetch data from the Candy Machine to, for example, display the remaining amount that can be minted.
@@ -37,7 +37,7 @@ After setting up your environment, we can start focusing on the Candy Machine. M
 - Price of Assets
 - etc.
 
-It can also make sense to fetch additional data that is not shown to the user but used in background calculations. For example, when using the [Redeemed Amount](core-candy-machine/guards/redeemed-amount) Guard, you would want to fetch the already redeemed amount to see if the user is allowed to mint more.
+It can also make sense to fetch additional data that is not shown to the user but used in background calculations. For example, when using the [Redeemed Amount](/core-candy-machine/guards/redeemed-amount) Guard, you would want to fetch the already redeemed amount to see if the user is allowed to mint more.
 
 ### Fetch Candy Machine Data
 In the Candy Machine Account, data such as the number of Available and Redeemed assets is stored. It also stores the `mintAuthority`, which is usually the address of your Candy Guard.  

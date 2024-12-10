@@ -1,8 +1,8 @@
 import {
   documentationSection
-} from '@/shared/sections'
-import { CircleStackIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
+} from '@/shared/sections';
+import { CircleStackIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const fusion = {
   name: 'Fusion',
@@ -22,7 +22,7 @@ export const fusion = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/fusion' },
-            { title: 'Getting started', href: '/fusion/getting-started' },
+            { title: 'Getting Started', href: '/fusion/getting-started' },
           ],
         },
         {

@@ -1,12 +1,12 @@
-import { Hero as BaseHero } from '@/components/Hero'
-import { HeroScreenshot } from '@/components/HeroScreenshot'
+import { Hero as BaseHero } from '@/components/Hero';
+import { HeroScreenshot } from '@/components/HeroScreenshot';
 
 export function Hero({ page }) {
   return (
     <BaseHero
       page={page}
       subDescription="Read our documentation to create your own applications or use our Creator Studio to launch your collection in minutes."
-      primaryCta={{ title: 'Sign Up for Creator Studio', href: 'https://studio.metaplex.com/' }}
+      primaryCta={{title: "Getting Started", href: "/candy-machine/getting-started" }} 
     >
       <HeroScreenshot 
         src="/assets/candy-machine/creator-studio.png"

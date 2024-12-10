@@ -1,12 +1,12 @@
 import {
   changelogSection,
   documentationSection,
+  guidesSection,
   recipesSection,
-  referencesSection,
-  guidesSection
-} from '@/shared/sections'
-import { Hero } from './Hero'
-import { Square2StackIcon } from '@heroicons/react/24/solid'
+  referencesSection
+} from '@/shared/sections';
+import { Square2StackIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const candyMachine = {
   name: 'Candy Machine',
@@ -119,7 +119,7 @@ export const candyMachine = {
         {
           title: 'Candy Machine Guides',
           links: [
-            { title: 'Create an NFT Collection on Solana with Candy Machine', href: '/candy-machine/recipes/todo' }
+            { title: 'Create an NFT Collection on Solana with Candy Machine', href: '/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine' }
           ],
         },
       ],

@@ -1,5 +1,5 @@
-import { Hero as BaseHero } from '@/components/Hero'
-import { HeroCode } from '@/components/HeroCode'
+import { Hero as BaseHero } from '@/components/Hero';
+import { HeroCode } from '@/components/HeroCode';
 
 const codeProps = {
   tabs: [
@@ -18,7 +18,7 @@ const codeProps = {
 
 export function Hero({ page }) {
   return (
-    <BaseHero page={page}>
+    <BaseHero page={page} primaryCta={{title: "Getting started", href: "/mpl-hybrid/sdk/javascript"  }} >
       <HeroCode {...codeProps}></HeroCode>
     </BaseHero>
   )

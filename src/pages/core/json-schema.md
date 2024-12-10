@@ -15,7 +15,7 @@ Below are examples for the different known types of NFTs. It's important to note
 
 {% totem-accordion title="Image" %}
 
-The Attributes  can alternatively be stored onchain using the [Attributes Plugin](plugins/attributes).
+The Attributes  can alternatively be stored onchain using the [Attributes Plugin](/core/plugins/attribute).
 ```json
 {
   "name": "Number #0001",
@@ -185,7 +185,7 @@ The following example for HTML Assets is not supported by wallets currently, as 
 
 Below explanations for the different fields can be found.
 
-If you miss some fields that you knew from Metaplex Token Metadata those are probably deprecated. The `creators` for example are part of the [Royalties Plugin](core/plugins/royalties) now.
+If you miss some fields that you knew from Metaplex Token Metadata those are probably deprecated. The `creators` for example are part of the [Royalties Plugin](/core/plugins/royalties) now.
 
 ### Required Fields
 
@@ -211,7 +211,7 @@ If you miss some fields that you knew from Metaplex Token Metadata those are pro
 - **external_url**: Link to an external website for the NFT
   - Example: `https://www.myproject.io/nft/123`
 
-- **attributes**: Array of traits and their values. These can alternatively be stored onchain using the [Attributes Plugin](plugins/attributes)
+- **attributes**: Array of traits and their values. These can alternatively be stored onchain using the [Attributes Plugin](/plugins/attributes)
   - Example:
     ```json
     {

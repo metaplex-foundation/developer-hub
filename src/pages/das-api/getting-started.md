@@ -35,7 +35,7 @@ If you intend to use DAS on [Metaplex Core](/core) Assets you want to install th
 
 ## DAS for MPL Core
 
-The DAS Extension fpr [MPL Core](/core) helps directly returns you the correct types to further use with the MPL SDKs. It also automatically derives the plugins in assets inherited from the collection and provides [functions for DAS-to-Core type conversions](//TODO).
+The [DAS Extension](/das-api/core-extension) for [MPL Core](/core) helps directly returns you the correct types to further use with the MPL SDKs. It also automatically derives the plugins in assets inherited from the collection and provides [functions for DAS-to-Core type conversions](/das-api/core-extension/convert-das-asset-to-core).
 
 To use it first install the additional package:
 

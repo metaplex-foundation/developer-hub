@@ -43,7 +43,7 @@ Aura is a Solana Network Extension that can provide users with efficient, decent
 - **Support for Light Clients**: Enables node operators to index specific protocols or sub-protocols, such as Core assets or a particular Bubblegum tree. Light clients can operate without running a full Solana node or Geyser plugin, instead receiving updates from the Aura network. This reduces infrastructure costs significantly compared to maintaining a full Solana node.
 - **Digital Asset Standard API**: Fully implements the DAS API, the main interface for accessing digital asset data on the Solana Virtual Machine (SVM).
 
-Learn more about Aura's indexing features in the [dedicated section](/aura/data-availability-and-decentralized-indexing).
+Learn more about Aura's indexing features in the [dedicated section](/aura/reading-solana-and-svm-data).
 
 ## Archive and Nonarchive Nodes
 

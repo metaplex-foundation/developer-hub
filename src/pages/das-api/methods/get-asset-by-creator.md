@@ -1,7 +1,7 @@
 ---
 title: Get Asset By Creator
 metaTitle: Get Asset By Creator | DAS API
-description: Returns the list of assets given an authority address
+description: Returns the list of assets given a creator address
 ---
 
 Return the list of assets given a creator address.

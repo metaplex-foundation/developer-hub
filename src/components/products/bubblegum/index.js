@@ -2,9 +2,9 @@ import {
   documentationSection,
   guidesSection,
   referencesSection
-} from '@/shared/sections'
-import { ArchiveBoxIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
+} from '@/shared/sections';
+import { ArchiveBoxIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const bubblegum = {
   name: 'Bubblegum',
@@ -24,7 +24,7 @@ export const bubblegum = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/bubblegum' },
-            { title: 'Getting started', href: '/bubblegum/getting-started' },
+            { title: 'Getting Started', href: '/bubblegum/getting-started' },
             { title: 'Metaplex DAS API RPCs', href: '/rpc-providers' },
             { title: 'FAQ', href: '/bubblegum/faq' },
           ],
