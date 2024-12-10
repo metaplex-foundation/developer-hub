@@ -6,9 +6,10 @@ const getAssetProofBatch = {
     {
       type: 'array',
       description: 'Public keys of the assets you want to fetch proofs for',
-      name: 'id',
+      name: 'ids',
       value: [],
       required: true,
+      placeHolder: 'Asset Public Key',
     },
   ],
 }

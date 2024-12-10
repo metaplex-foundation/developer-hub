@@ -12,14 +12,13 @@ import RubyRenderer from './languageComponents/rubyRenderer'
 import LanguageSelector from './languageSelector'
 
 const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
-  
   const [activeLanguage, setActiveLanguage] = useState('javascript')
 
   function strToTitleCase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  const renderLanguage = (activeLanguage) => {
+  const renderLanguage = (activeLanguage, activeEndpoint) => {
     const headers = api.headers
       ? api.headers
       : { 'Content-Type': 'application/json' }
@@ -175,7 +174,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
   return (
     <div className="flex w-full flex-col gap-8 overflow-hidden">
       <EndPointSelector
-        setActiveEndpoint={(name, endpoint) => setActiveEndPoint(name, endpoint)}
+        setActiveEndpoint={(endpoint) => setActiveEndPoint(endpoint)}
       />
       <LanguageSelector
         activeLanguage={activeLanguage}

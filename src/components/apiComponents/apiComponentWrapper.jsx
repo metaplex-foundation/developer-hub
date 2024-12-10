@@ -9,24 +9,15 @@ import Responce from './responce'
 const ApiComponentWrapper = (args) => {
   const api = apiMethods[args.method]
 
-  const [selectedExample, setSelectedExample] = useState(0)
+  const [selectedExample, setSelectedExample] = useState(-1)
   const [activeEndpoint, setActiveEndpoint] = useState(
-    'https://eclipse-aura-mainnet.metaplex.com'
+    'https://aura-eclipse-mainnet.metaplex.com'
   )
-  useEffect(() => {
-    //load endpoint from local storage
 
-    const endPoint = localStorage.getItem('endPoint')
-
-    if (endPoint) {
-      setActiveEndpoint(endPoint)
-    }
-  }, [])
-
-  const handleSetActiveEndPoint = (name, endpoint) => {
-    console.log('set active endpoint')
-    console.log({name, endpoint})
-  }
+  // const handleSetActiveEndPoint = (name, endpoint) => {
+  //   console.log('set active endpoint')
+  //   console.log({name, endpoint})
+  // }
 
   const handleSetExample = (index) => {
     console.log(index)
@@ -54,12 +45,9 @@ const ApiComponentWrapper = (args) => {
 
   const [body, setBody] = useState({
     jsonrpc: '2.0',
-    id: '0',
+    id: '1',
     method: api.method,
-    params:
-      api.examples && api.examples[0].body.params
-        ? api.examples[0].body.params
-        : {},
+    params: {},
   })
 
   const [responce, setResponce] = useState(null)
@@ -76,6 +64,9 @@ const ApiComponentWrapper = (args) => {
 
       if (path.length === 1) {
         newBody.params[path[0]] = value
+        if (!value) {
+          delete newBody.params[path[0]]
+        }
       } else {
         let current = newBody.params
 
@@ -101,7 +92,7 @@ const ApiComponentWrapper = (args) => {
 
   const handleTryItOut = async () => {
     const res = await fetch(
-      'https://mainnet.helius-rpc.com/?api-key=555f20ad-afaf-4a78-a889-244f281ab399',
+      activeEndpoint,
       {
         method: 'POST',
         headers: {
@@ -137,7 +128,11 @@ const ApiComponentWrapper = (args) => {
               >
                 <option value={-1}>-</option>
                 {api.examples.map((example, index) => {
-                  return <option value={index}>{example.name}</option>
+                  return (
+                    <option key={index} value={index}>
+                      {example.name}
+                    </option>
+                  )
                 })}
               </select>
               <button
@@ -170,7 +165,7 @@ const ApiComponentWrapper = (args) => {
           api={api}
           body={body}
           activeEndPoint={activeEndpoint}
-          setActiveEndPoint={(name, endpoint) => handleSetActiveEndPoint(name, endpoint)}
+          setActiveEndPoint={(endpoint) => setActiveEndpoint(endpoint)}
         />
         <button
           className="bg-primary hidden rounded-md border px-4 py-2 text-white 2xl:block"

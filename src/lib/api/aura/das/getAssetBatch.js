@@ -5,9 +5,10 @@ const getAssetBatch = {
     {
       type: 'array',
       description: 'Public keys of the Assets to fetch',
-      name: 'id',
+      name: 'ids',
       value: [""],
       required: true,
+      placeHolder: "Asset Public Key"
     },
   ],
 }

@@ -3,7 +3,7 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 import { PluginsIcon } from '../icons/dual-tone/PluginsIcon'
 
 // Recursive component for rendering nested parameters
-const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
+const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
   let content
 
   switch (param.type) {
@@ -15,6 +15,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
           className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
           placeholder={param.placeholder}
           onChange={(e) => setParam(path, e.target.value)}
+          value={value || ''}
         />
       )
       break
@@ -27,6 +28,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
           className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
           placeholder={param.value}
           onChange={(e) => setParam(path, Number.parseInt(e.target.value))}
+          value={value || ''}
         />
       )
       break
@@ -54,12 +56,13 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
             <div key={index} className="flex gap-2">
               <input
                 className="block w-full rounded-md border border-gray-200 px-2 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
-                placeholder={item}
+                placeholder={param.placeHolder}
                 onChange={(e) => {
                   const newValue = param.value
                   newValue[index] = e.target.value
                   setParam(path, newValue)
                 }}
+                value={item}
               />
               <TrashIcon
                 className=" h-6 w-6 cursor-pointer self-center text-gray-500 dark:text-neutral-400"
@@ -90,7 +93,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
           onChange={(e) => setParam(path, e.target.value)}
           className="block w-full rounded-md border border-gray-200 px-2 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
         >
-          {!param.required && <option value={''}/>}
+          {!param.required && <option value={''} />}
           <option value="true">true</option>
           <option value="false">false</option>
         </select>
@@ -102,9 +105,13 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
           onChange={(e) => setParam(path, e.target.value)}
           className="block w-full rounded-md border border-gray-200 px-2 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
         >
-          {!param.required && <option value={''}/>}
-          {param.value.map((choice) => {
-            return <option value={choice}>{choice}</option>
+          {!param.required && <option value={''} />}
+          {param.value.map((choice, index) => {
+            return (
+              <option key={index} value={choice}>
+                {choice}
+              </option>
+            )
           })}
         </select>
       )
@@ -140,8 +147,8 @@ const ParamRenderer = ({ param, subValue, setParam, path = [] }) => {
 }
 
 // Main component
-const ApiParameterDisplay = ({ params, setParam }) => {
-  console.log(params)
+const ApiParameterDisplay = ({ params, setParam, body }) => {
+  console.log(body)
 
   return (
     <div className="flex w-full flex-col gap-4 rounded-xl border border-gray-200 bg-white py-4 pb-0 dark:border-neutral-700/50 dark:bg-neutral-800/50">
@@ -151,6 +158,7 @@ const ApiParameterDisplay = ({ params, setParam }) => {
       <div className="flex flex-col">
         {params.map((param) => (
           <ParamRenderer
+            value={body[param.name]}
             path={[param.name]}
             key={param.name}
             param={param}

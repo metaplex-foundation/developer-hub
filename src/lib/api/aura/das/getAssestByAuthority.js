@@ -1,6 +1,6 @@
 const getAssetsByAuthority = {
   description: 'Returns the list of assets given an authority address.',
-  method: 'getAssetByAuthority',
+  method: 'getAssetsByAuthority',
   params: [
     {
       name: 'authorityAddress',
