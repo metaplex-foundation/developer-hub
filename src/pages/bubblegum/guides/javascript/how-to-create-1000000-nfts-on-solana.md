@@ -214,13 +214,13 @@ const createTreeTx = await createTree(umi, {
 await createTreeTx.sendAndConfirm(umi)
 ```
 
-### Create a Collection NFT (Optional)
+### Create a Collection NFT
 
 Collections for cNFTs are still maintained and manged by Token Metadata and the original Collection NFTs minted from Token Metadata. If you wish to create a collection for your cNFTs and mint them to it you will need to create a Token Metadata Collection NFT.
 
 ```ts
 //
-// ** Create Token Metadata Collection NFT (Optional) **
+// ** Create Token Metadata Collection NFT **
 //
 
 //
@@ -333,15 +333,26 @@ const newOwner = publicKey('111111111111111111111111111111')
 
 console.log('Minting Compressed NFT to Merkle Tree...')
 
-const { signature } = await mintV1(umi, {
+const { signature } = await mintToCollectionV1(umi, {
   leafOwner: newOwner.publicKey,
   merkleTree: merkleTree.publicKey,
+  collectionMint: collectionId,
   metadata: {
     name: 'My cNFT',
     uri: nftMetadataUri, // Either use `nftMetadataUri` or a previously uploaded uri.
     sellerFeeBasisPoints: 500, // 5%
     collection: { key: collectionId.publicKey, verified: false },
-    creators: [{ address: umi.identity.publicKey, verified: true, share: 100 }],
+    collection: {
+      key: collectionId,
+      verified: false,
+    },
+    creators: [
+      {
+        address: umi.identity.publicKey,
+        verified: true,
+        share: 100,
+      },
+    ],
   },
 }).sendAndConfirm(umi, { send: { commitment: 'finalized' } })
 ```
@@ -446,11 +457,11 @@ import {
   mplBubblegum,
   parseLeafFromMintV1Transaction,
   verifyCollection,
-} from "@metaplex-foundation/mpl-bubblegum";
+} from '@metaplex-foundation/mpl-bubblegum'
 import {
   createNft,
   mplTokenMetadata,
-} from "@metaplex-foundation/mpl-token-metadata";
+} from '@metaplex-foundation/mpl-token-metadata'
 import {
   createGenericFile,
   generateSigner,
@@ -458,10 +469,10 @@ import {
   percentAmount,
   publicKey,
   sol,
-} from "@metaplex-foundation/umi";
-import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
-import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
-import fs from "fs";
+} from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+import fs from 'fs'
 
 // Create the wrapper function
 const createCnft = async () => {
