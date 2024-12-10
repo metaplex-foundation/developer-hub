@@ -16,7 +16,7 @@ There are two possible update authorities for a cNFT which are either the tree o
 
 If your cNFT belongs to a collection then the update authority of that cNFT will be the authority of the collection. When updating the cNFT you will need to pass in a `collectionMint` arg to the update function.
 
-The authority will be infered from the current umi identity. If the authority is different that the current umi identity then you will either have to pass in the `authority` arg as a signer type or create a 'noopSigner' for later signing.
+The authority will be inferred from the current umi identity. If the authority is different that the current umi identity then you will either have to pass in the `authority` arg as a signer type or create a 'noopSigner' for later signing.
 
 ```js
 await updateMetadata(umi, {
