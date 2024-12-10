@@ -37,7 +37,7 @@ After setting up your environment, we can start focusing on the Candy Machine. M
 - Price of Assets
 - etc.
 
-It can also make sense to fetch additional data that is not shown to the user but used in background calculations. For example, when using the [Redeemed Amount](core-candy-machine/guards/redeemed-amount) Guard, you would want to fetch the already redeemed amount to see if the user is allowed to mint more.
+It can also make sense to fetch additional data that is not shown to the user but used in background calculations. For example, when using the [Redeemed Amount](/core-candy-machine/guards/redeemed-amount) Guard, you would want to fetch the already redeemed amount to see if the user is allowed to mint more.
 
 ### Fetch Candy Machine Data
 In the Candy Machine Account, data such as the number of Available and Redeemed assets is stored. It also stores the `mintAuthority`, which is usually the address of your Candy Guard.  

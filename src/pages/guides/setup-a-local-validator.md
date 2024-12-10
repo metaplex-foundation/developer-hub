@@ -132,7 +132,7 @@ console.log(`Transaction Submitted! https://solana.fm/tx/${signature}?cluster=lo
 
 As mentioned earlier, block explorers allow users to utilize a custom RPC to view transactions. To look at local validator transaction you'll need to look for an input box in the `choose cluster` modal and enter the following address: `http://127.0.0.1:8899`.
 
-Note: The [Solana Explorer](/https://explorer.solana.com/) automatically defaults to the local validator port when you select Custom RPC URL, so you don’t need to make any additional changes. 
+Note: The [Solana Explorer](https://explorer.solana.com/) automatically defaults to the local validator port when you select Custom RPC URL, so you don’t need to make any additional changes. 
 
 ## Creating a "Metaplex" Local Validator
 
