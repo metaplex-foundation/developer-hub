@@ -1,6 +1,13 @@
-import Highlight, { defaultProps } from 'prism-react-renderer'
-import { Fragment } from 'react'
-import CopyToClipboardButton from './products/CopyToClipboard'
+import Highlight, { defaultProps } from 'prism-react-renderer';
+import { Fragment } from 'react';
+import CopyToClipboardButton from './products/CopyToClipboard';
+(typeof global !== 'undefined' ? global : window).Prism = Prism
+
+require('prismjs/components/prism-kotlin')
+require('prismjs/components/prism-csharp')
+require('prismjs/components/prism-java')
+require('prismjs/components/prism-php')
+require('prismjs/components/prism-ruby')
 
 export function Fence({ children, language }) {
   return (

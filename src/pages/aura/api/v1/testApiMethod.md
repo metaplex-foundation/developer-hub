@@ -5,4 +5,4 @@ description: Learn how Batch Minting works.
 ---
 
 
-{% apiRenderer method="testApiMethod" %}
+{% apiRenderer method="testApiMethod" /%}
