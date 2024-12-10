@@ -60,7 +60,6 @@ import {
   mintV1,
   mplBubblegum,
   parseLeafFromMintV1Transaction,
-  verifyCollection,
 } from '@metaplex-foundation/mpl-bubblegum'
 import {
   createNft,
