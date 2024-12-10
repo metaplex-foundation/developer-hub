@@ -18,7 +18,7 @@ const codeProps = {
 
 export function Hero({ page }) {
   return (
-    <BaseHero page={page} primaryCta={{title: "Getting started!", href: "/mpl-hybrid/sdk/javascript"  }} >
+    <BaseHero page={page} primaryCta={{title: "Getting started", href: "/mpl-hybrid/sdk/javascript"  }} >
       <HeroCode {...codeProps}></HeroCode>
     </BaseHero>
   )

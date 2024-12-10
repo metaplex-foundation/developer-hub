@@ -27,7 +27,7 @@ export const umi = {
           links: [
             { title: 'Overview', href: '/umi' },
             { 
-              title: 'Getting started', 
+              title: 'Getting Started', 
               href: '/umi/getting-started' },
             {
               title: 'Metaplex Umi Plugins',
