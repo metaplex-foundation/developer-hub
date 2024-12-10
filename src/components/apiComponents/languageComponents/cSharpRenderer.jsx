@@ -9,7 +9,9 @@ const CSharpRequestRenderer = ({ method, url, headers, body }) => {
   
     const object = {
       method: method,
-      headers: headers,
+      headers: headers
+      ? `{${headerString}}`
+      : { 'Content-Type': 'application/json' },
       body: bodyString,
     }
   
@@ -54,7 +56,7 @@ const CSharpRequestRenderer = ({ method, url, headers, body }) => {
     `
   
     return (
-      <Fence maxHeight={400} language="c">
+      <Fence maxHeight={400} language="csharp">
         {code}
       </Fence>
     )

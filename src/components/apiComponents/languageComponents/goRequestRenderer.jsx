@@ -10,7 +10,9 @@ const GoRequestRenderer = ({ method, url, headers, body }) => {
 
   const object = {
     method: method,
-    headers: headers,
+    headers: headers
+      ? `{${headerString}}`
+      : { 'Content-Type': 'application/json' },
     body: bodyString,
   }
 

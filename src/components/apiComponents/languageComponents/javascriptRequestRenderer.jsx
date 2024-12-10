@@ -1,25 +1,28 @@
 import { Fence } from '@/components/Fence'
 import renderRequestBody from '@/lib/api/renderRequestBody'
 
-const JavascriptRequestRenderer = ({ method, url, headers, body }) => {
-  const headerString = headers
-    ? headers.map(({ key, value }) => `'${key}': '${value}'`).join(', ')
-    : ''
-  const bodyString = body ? renderRequestBody(body) : ''
+const JavascriptRequestRenderer = ({
+  url,
+  headers,
+  bodyMethod,
+  rpcVersion,
+  bodyParams,
+  id,
+}) => {
+  const httpBody = bodyParams
 
   const object = {
     method: 'POST',
-    headers: headers
-      ? `{${headerString}}`
-      : { 'Content-Type': 'application/json' },
+    headers: headers,
     body: {
-      jsonrpc: '2.0',
-      id: 'test',
-      method: method,
-      id: 'test',
-      params: bodyString,
+      jsonrpc: rpcVersion ? rpcVersion : '2.0',
+      id: id ? id : 1,
+      method: bodyMethod,
+      params: httpBody,
     },
   }
+
+  console.log(object)
 
   const code = `const res = await fetch('${url}', ${JSON.stringify(
     object,

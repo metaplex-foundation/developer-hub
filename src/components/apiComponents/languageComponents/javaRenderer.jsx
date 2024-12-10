@@ -1,19 +1,21 @@
-const { Fence } = require("@/components/Fence")
-const { default: renderRequestBody } = require("@/lib/api/renderRequestBody")
+const { Fence } = require('@/components/Fence')
+const { default: renderRequestBody } = require('@/lib/api/renderRequestBody')
 
 const JavaRenderer = ({ method, url, headers, body }) => {
-    const headerString = headers
-      ? headers.map(({ key, value }) => `'${key}': '${value}'`).join(', ')
-      : ''
-    const bodyString = body ? renderRequestBody(body) : ''
-  
-    const object = {
-      method: method,
-      headers: headers,
-      body: bodyString,
-    }
-  
-    const code = `import java.net.URI;
+  const headerString = headers
+    ? headers.map(({ key, value }) => `'${key}': '${value}'`).join(', ')
+    : ''
+  const bodyString = body ? renderRequestBody(body) : ''
+
+  const object = {
+    method: 'POST',
+    headers: headers
+      ? `{${headerString}}`
+      : { 'Content-Type': 'application/json' },
+    body: bodyString,
+  }
+
+  const code = `import java.net.URI;
     import java.net.http.HttpClient;
     import java.net.http.HttpRequest;
     import java.net.http.HttpResponse;
@@ -45,12 +47,12 @@ const JavaRenderer = ({ method, url, headers, body }) => {
         }
     }
     `
-  
-    return (
-      <Fence className="w-full" language="java">
-        {code}
-      </Fence>
-    )
-  }
 
-  export default JavaRenderer
+  return (
+    <Fence className="w-full" language="java">
+      {code}
+    </Fence>
+  )
+}
+
+export default JavaRenderer
