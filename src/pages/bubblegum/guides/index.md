@@ -8,7 +8,7 @@ The following Guides for MPL Bubblegum are currently available:
 
 {% quick-links %}
 
-{% quick-link title="How to Mint 1 Million cNFTs on Solana" icon="CodeBracketSquare" href="/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana" description="Learn how to create and mint cNFTs from Bubblegum trees" /%}
+{% quick-link title="How to create a 1,000,000 NFT Collection on Solana" icon="CodeBracketSquare" href="/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana" description="Learn how to create and mint cNFTs from Bubblegum trees" /%}
 
 {% quick-link title="How to Interact with cNFTs on Other SVMs" icon="CodeBracketSquare" href="/bubblegum/guides/javascript/how-to-interact-with-cnfts-on-other-svms" description="How to Interact with compressed NFTs, using the Metaplex Bubblegum program, on Solana Virtual Machine (SVM) environments other than Solana devnet and mainnet-beta." /%}
 
