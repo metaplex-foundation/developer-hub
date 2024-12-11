@@ -267,7 +267,39 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 
 ## Creating Soulbound NFTs with the Oracle Plugin
 
-The Oracle Plugin provides a way to approve or reject different lifecycle events for an asset. To create soulbound NFTs, we can use a special Oracle deployed by Metaplex that always rejects transfer events while still allowing other operations like burning. This differs from the Permanent Freeze Delegate Plugin approach since assets remain burnable even though they cannot be transferred   .
+The Oracle Plugin provides a way to approve or reject different lifecycle events for an asset. To create soulbound NFTs, we can use a special Oracle deployed by Metaplex that always rejects transfer events while still allowing other operations like burning. This differs from the Permanent Freeze Delegate Plugin approach since assets remain burnable even though they cannot be transferred.
+
+When creating a soulbound asset using the Oracle Plugin, one would attach the plugin to the asset. This can be done on creation or afterwards. In this example we are using a [default Oracle](/core/external-plugins/oracle#default-oracles-deployed-by-metaplex) that will always reject and has been deployed by Metaplex.
+
+This effectively creates a permanently soulbound asset that cannot be transferred but burned. In the following code snippet it is shown how:
+
+```js
+const ORACLE_ACCOUNT = publicKey(
+  "GxaWxaQVeaNeFHehFQEDeKR65MnT6Nup81AGwh2EEnuq"
+);
+
+await create(umi, {
+  asset: assetSigner,
+  collection: collection,
+  name: "My Soulbound Asset",
+  uri: "https://example.com/my-asset.json",
+  plugins: [
+    {
+      // The Oracle plugin allows us to control transfer permissions
+      type: "Oracle",
+      resultsOffset: {
+        type: "Anchor",
+      },
+      baseAddress: ORACLE_ACCOUNT,
+      lifecycleChecks: {
+        // Configure the Oracle to reject all transfer attempts
+        transfer: [CheckResult.CAN_REJECT],
+      },
+      baseAddressConfig: undefined,
+    },
+  ],
+})
+```
 
 ### Asset-Level Implementation
 The Oracle Plugin can make individual assets non-transferrable while preserving the ability to burn them. This provides flexibility for cases where assets may need to be destroyed.
