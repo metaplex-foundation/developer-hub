@@ -23,17 +23,6 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
       ? api.headers
       : { 'Content-Type': 'application/json' }
 
-    // const object = {
-    //   method: 'POST',
-    //   headers: headers,
-    //   body: {
-    //     jsonrpc: rpcVersion ? rpcVersion : '2.0',
-    //     id: id ? id : 1,
-    //     method: bodyMethod,
-    //     params: httpBody,
-    //   },
-    // }
-
     switch (activeLanguage) {
       case 'javascript':
         return (

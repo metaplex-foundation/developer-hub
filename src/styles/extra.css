@@ -9,3 +9,21 @@ box-shadow: 11px 11px 22px -3px rgba(255, 255, 255, 0.212);
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  .loader {
+    border: 2px solid #FFF;
+    border-bottom-color: #d162c2;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+        } 

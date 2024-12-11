@@ -116,6 +116,34 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
         </select>
       )
       break
+      case 'arrayKeyValuePair':
+      content = (
+        <div div className="flex flex-col gap-2">
+        <input
+          name={`${param.name}-key`}
+          type="text"
+          className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
+          placeholder={"key"}
+          onChange={(e) => {
+            const newValue = [e.target.value, value ? value[1] : ""];
+            setParam(path, newValue);
+          }}
+          value={value ? value[0] : ''}
+        />
+        <input
+          name={`${param.name}-value`}
+          type="text"
+          className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
+          placeholder={"value"}
+          onChange={(e) => {
+            const newValue = [value ? value[0] : "", e.target.value];
+            setParam(path, newValue);
+          }}
+          value={value ? value[1] : ''}
+        />
+        </div>
+      )
+      break
 
     default:
       content = <span className="text-sm">{String(param.value)}</span>

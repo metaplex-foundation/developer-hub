@@ -59,7 +59,7 @@ const searchAssets = {
     },
     {
       name: 'grouping',
-      type: 'array',
+      type: 'arrayKeyValuePair',
       locked: true,
       length: 2,
       value: [],

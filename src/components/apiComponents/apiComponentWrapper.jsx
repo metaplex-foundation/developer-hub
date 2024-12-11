@@ -2,6 +2,7 @@
 
 import apiMethods from '@/lib/api/aura/methods'
 import { useEffect, useState } from 'react'
+import Spinner from '../icons/spinner'
 import ApiParameterDisplay from './apiParams'
 import LanguageRenderer from './languageRenderer'
 import Responce from './responce'
@@ -9,6 +10,8 @@ import Responce from './responce'
 const ApiComponentWrapper = (args) => {
   const api = apiMethods[args.method]
 
+  const [responce, setResponce] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const [selectedExample, setSelectedExample] = useState(-1)
   const [activeEndpoint, setActiveEndpoint] = useState(
     'https://aura-eclipse-mainnet.metaplex.com'
@@ -50,37 +53,45 @@ const ApiComponentWrapper = (args) => {
     params: {},
   })
 
-  const [responce, setResponce] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-
   console.log(body)
 
   const handleSetParam = (path, value) => {
-    console.log(path)
-    console.log(value)
-
     setBody((prev) => {
-      let newBody = { ...prev }
+      const newBody = { ...prev }
 
-      if (path.length === 1) {
-        newBody.params[path[0]] = value
-        if (!value) {
-          delete newBody.params[path[0]]
-        }
-      } else {
-        let current = newBody.params
+      // Recursive function to traverse and update or clean up fields
+      const updateField = (obj, path) => {
+        const key = path[0]
 
-        for (let i = 0; i < path.length; i++) {
-          if (i === path.length - 1) {
-            current[path[i]] = value
+        if (path.length === 1) {
+          // If we are at the target field
+          if (
+            !value ||
+            (Array.isArray(value) && value.every((v) => v === ''))
+          ) {
+            // Delete the field if value is null, undefined, or an empty key-value pair
+            delete obj[key]
           } else {
-            if (!current[path[i]]) {
-              current[path[i]] = {}
-            }
-            current = current[path[i]]
+            // Otherwise, set the value
+            obj[key] = value
+          }
+        } else {
+          // Ensure the parent key exists and is an object
+          if (!obj[key] || typeof obj[key] !== 'object') {
+            obj[key] = {}
+          }
+
+          // Recurse into the nested object
+          updateField(obj[key], path.slice(1))
+
+          // Remove the parent key if it becomes empty after the update
+          if (Object.keys(obj[key]).length === 0) {
+            delete obj[key]
           }
         }
       }
+
+      updateField(newBody.params, path)
 
       return newBody
     })
@@ -91,22 +102,24 @@ const ApiComponentWrapper = (args) => {
   }, [body])
 
   const handleTryItOut = async () => {
-    const res = await fetch(
-      activeEndpoint,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      }
-    )
+    setResponce(null)
+    setIsLoading(true)
+
+    const res = await fetch(activeEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
 
     const resJson = await res.json()
 
     console.log(resJson)
 
     setResponce(resJson)
+
+    setIsLoading(false)
   }
 
   return (
@@ -153,10 +166,10 @@ const ApiComponentWrapper = (args) => {
           }}
         />
         <button
-          className="bg-primary rounded-md border px-4 py-2 text-white 2xl:hidden"
+          className="block min-w-[150px] rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500 2xl:hidden"
           onClick={handleTryItOut}
         >
-          Try it out
+          {isLoading ? <Spinner className="h-6 w-6" /> : 'Try it out'}
         </button>
       </div>
 
@@ -168,10 +181,10 @@ const ApiComponentWrapper = (args) => {
           setActiveEndPoint={(endpoint) => setActiveEndpoint(endpoint)}
         />
         <button
-          className="bg-primary hidden rounded-md border px-4 py-2 text-white 2xl:block"
+          className="hidden min-w-[150px] items-center justify-center rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500 2xl:flex"
           onClick={handleTryItOut}
         >
-          Try it out
+          {isLoading ? <Spinner className="h-6 w-6" /> : 'Try it out'}
         </button>
         {responce && <Responce responce={responce} />}
       </div>
