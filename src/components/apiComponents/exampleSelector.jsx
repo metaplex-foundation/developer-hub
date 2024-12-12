@@ -14,6 +14,7 @@ return <div className="w-full">
     className="block w-full rounded-lg border border-gray-200 px-2 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500"
   >
     <option value={-1}>-</option>
+    <optgroup label="Solana Mainnet">
     {examples.map((example, index) => {
       return (
         <option key={index} value={index}>
@@ -21,6 +22,7 @@ return <div className="w-full">
         </option>
       )
     })}
+    </optgroup>
   </select>
   <button
     onClick={() => handleSetExample(-1)}

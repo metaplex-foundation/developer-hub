@@ -12,17 +12,9 @@ const getAsset = {
   ],
   examples: [
     {
-      name: 'Fetch Madlad #4221 (pNFT)',
+      name: 'Saga Monkes #6233 (cNFT)',
       description: 'Get an asset by its ID',
-      body: {
-        params: {
-          id: 'G3nEdTzAvPvSuj2Z5oSSiMN42NayQDZvkC3usMrnGaTi',
-        },
-      },
-    },
-    {
-      name: 'Fetch Saga Monkes #6233 (cNFT)',
-      description: 'Get an asset by its ID',
+      chain: 'solana-mainnet',
       body: {
         params: {
           id: 'H6GDZujkpEcxbpDgEbSbNFxNtSi3RBJPJC5GZCvzagaP',
@@ -30,8 +22,19 @@ const getAsset = {
       },
     },
     {
-      name: 'Fetch SMB Geb2 #121 (NFT)',
+      name: 'Madlad #4221 (pNFT)',
       description: 'Get an asset by its ID',
+      chain: 'solana-mainnet',
+      body: {
+        params: {
+          id: 'G3nEdTzAvPvSuj2Z5oSSiMN42NayQDZvkC3usMrnGaTi',
+        },
+      },
+    },
+    {
+      name: 'SMB Gen2 #121 (NFT)',
+      description: 'Get an asset by its ID',
+      chain: 'solana-mainnet',
       body: {
         params: {
           id: '8aguf5d15kvHVsXyr8WfY73JgdQnWq1z6FhsUWqawivd',

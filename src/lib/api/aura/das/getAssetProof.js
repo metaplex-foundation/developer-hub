@@ -12,7 +12,8 @@ const getAssetProof = {
     ],
     examples: [
       {
-        name: 'Fetch asset proof of Saga Monkes #6233 (cNFT)',
+        name: 'Saga Monkes #6233 (cNFT)',
+        chain: 'solana-mainnet',
         description: 'Get an asset by its ID',
         body: {
           params: {
