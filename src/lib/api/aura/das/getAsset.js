@@ -12,6 +12,16 @@ const getAsset = {
   ],
   examples: [
     {
+      name: 'Galactic Geckos EP 1 #985 (Core Asset)',
+      description: 'Get an asset by its ID',
+      chain: 'solana-mainnet',
+      body: {
+        params: {
+          id: '5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa',
+        },
+      },
+    },
+    {
       name: 'Saga Monkes #6233 (cNFT)',
       description: 'Get an asset by its ID',
       chain: 'solana-mainnet',
@@ -31,6 +41,7 @@ const getAsset = {
         },
       },
     },
+    
     {
       name: 'SMB Gen2 #121 (NFT)',
       description: 'Get an asset by its ID',
