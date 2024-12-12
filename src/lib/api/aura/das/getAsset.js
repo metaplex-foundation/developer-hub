@@ -43,12 +43,12 @@ const getAsset = {
     },
     
     {
-      name: 'SMB Gen2 #121 (NFT)',
+      name: 'THUG #2926 (NFT)',
       description: 'Get an asset by its ID',
       chain: 'solana-mainnet',
       body: {
         params: {
-          id: '8aguf5d15kvHVsXyr8WfY73JgdQnWq1z6FhsUWqawivd',
+          id: 'EvGJtxZAjxYGwYDtHprvApfLTx44PxsSCtWq3uVmfboy',
         },
       },
     },
