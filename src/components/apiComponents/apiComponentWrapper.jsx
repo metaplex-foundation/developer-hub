@@ -4,23 +4,20 @@ import apiMethods from '@/lib/api/aura/methods'
 import { useEffect, useState } from 'react'
 import Spinner from '../icons/spinner'
 import ApiParameterDisplay from './apiParams'
+import ApiExampleSelector from './exampleSelector'
 import LanguageRenderer from './languageRenderer'
 import Responce from './responce'
 
 const ApiComponentWrapper = (args) => {
   const api = apiMethods[args.method]
 
+  const [screenWidth, setScreenWidth] = useState(null)
   const [responce, setResponce] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [selectedExample, setSelectedExample] = useState(-1)
   const [activeEndpoint, setActiveEndpoint] = useState(
     'https://aura-eclipse-mainnet.metaplex.com'
   )
-
-  // const handleSetActiveEndPoint = (name, endpoint) => {
-  //   console.log('set active endpoint')
-  //   console.log({name, endpoint})
-  // }
 
   const handleSetExample = (index) => {
     console.log(index)
@@ -53,7 +50,27 @@ const ApiComponentWrapper = (args) => {
     params: {},
   })
 
-  console.log(body)
+  // Track screen width on resize (client-side only)
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth)
+    }
+
+    // Set the initial screen width when the component mounts
+    if (screenWidth === null) {
+      setScreenWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [screenWidth])
+
+  if (screenWidth === null) {
+    return null
+  }
+
+  const isLargeScreen = screenWidth >= 1536 // 2xl breakpoint
 
   const handleSetParam = (path, value) => {
     setBody((prev) => {
@@ -97,10 +114,6 @@ const ApiComponentWrapper = (args) => {
     })
   }
 
-  useEffect(() => {
-    console.log(body)
-  }, [body])
-
   const handleTryItOut = async () => {
     setResponce(null)
     setIsLoading(true)
@@ -125,37 +138,12 @@ const ApiComponentWrapper = (args) => {
   return (
     <div className="flex w-full flex-col-reverse gap-8 2xl:flex-row ">
       <div className="flex w-full flex-col gap-8 2xl:w-1/2">
-        {api.examples && (
-          <div className="w-full">
-            <label
-              className="mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400"
-              htmlFor="endPoint"
-            >
-              Loaded Example
-            </label>
-            <div className="flex w-full gap-2">
-              <select
-                onChange={(e) => handleSetExample(e.target.value)}
-                value={selectedExample}
-                className="block w-full rounded-lg border border-gray-200 px-2 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500"
-              >
-                <option value={-1}>-</option>
-                {api.examples.map((example, index) => {
-                  return (
-                    <option key={index} value={index}>
-                      {example.name}
-                    </option>
-                  )
-                })}
-              </select>
-              <button
-                onClick={() => handleSetExample(-1)}
-                className="block rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500"
-              >
-                Clear
-              </button>
-            </div>
-          </div>
+        {api.examples && isLargeScreen && (
+          <ApiExampleSelector
+            examples={api.examples}
+            selectedExample={selectedExample}
+            handleSetExample={(index) => handleSetExample(index)}
+          />
         )}
 
         <ApiParameterDisplay
@@ -171,9 +159,17 @@ const ApiComponentWrapper = (args) => {
         >
           {isLoading ? <Spinner className="h-6 w-6" /> : 'Try it out'}
         </button>
+        {responce && !isLargeScreen && <Responce responce={responce} />}
       </div>
 
-      <div className="flex w-full flex-col items-end 2xl:w-1/2">
+      <div className="flex w-full flex-col items-end gap-4 2xl:w-1/2">
+        {api.examples && !isLargeScreen && (
+          <ApiExampleSelector
+            examples={api.examples}
+            selectedExample={selectedExample}
+            handleSetExample={(index) => handleSetExample(index)}
+          />
+        )}
         <LanguageRenderer
           api={api}
           body={body}
@@ -186,7 +182,7 @@ const ApiComponentWrapper = (args) => {
         >
           {isLoading ? <Spinner className="h-6 w-6" /> : 'Try it out'}
         </button>
-        {responce && <Responce responce={responce} />}
+        {responce && isLargeScreen && <Responce responce={responce} />}
       </div>
     </div>
   )

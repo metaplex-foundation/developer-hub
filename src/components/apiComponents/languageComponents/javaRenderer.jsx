@@ -1,58 +1,74 @@
-const { Fence } = require('@/components/Fence')
-const { default: renderRequestBody } = require('@/lib/api/renderRequestBody')
+import { Fence } from "@/components/Fence";
 
-const JavaRenderer = ({ method, url, headers, body }) => {
-  const headerString = headers
-    ? headers.map(({ key, value }) => `'${key}': '${value}'`).join(', ')
-    : ''
-  const bodyString = body ? renderRequestBody(body) : ''
+const JavaRequestRenderer = ({ url, headers, bodyMethod, rpcVersion, bodyParams, id }) => {
+  const httpBody = bodyParams;
 
   const object = {
     method: 'POST',
-    headers: headers
-      ? `{${headerString}}`
-      : { 'Content-Type': 'application/json' },
-    body: bodyString,
-  }
+    headers: headers,
+    body: {
+      jsonrpc: rpcVersion ? rpcVersion : '2.0',
+      id: id ? id : 1,
+      method: bodyMethod,
+      params: httpBody,
+    },
+  };
 
-  const code = `import java.net.URI;
-    import java.net.http.HttpClient;
-    import java.net.http.HttpRequest;
-    import java.net.http.HttpResponse;
-    import java.net.http.HttpResponse.BodyHandlers;
-    import java.net.http.HttpRequest.BodyPublishers;
-    import java.util.Map;
-    import java.util.HashMap;
-    
-    public class Main {
-        public static void main(String[] args) throws Exception {
+  // Dynamically generate the headers dictionary for Java
+  const headersCode = Object.entries(headers)
+    .map(([key, value]) => `con.setRequestProperty("${key}", "${value}");`)
+    .join('\n');
+
+  // Format the JSON body correctly for the Java code with proper indentation
+  const jsonBody = JSON.stringify(object.body, null, 2);  // 4-space indentation for JSON
+
+  const code = `import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
             String url = "${url}";
-            Map<String, String> headers = new HashMap<String, String>() {{
-                ${headerString}
-            }};
-            String data = "${JSON.stringify(object, null, 2)}";
-    
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .headers(headers.entrySet().stream()
-                    .map(e -> e.getKey() + ": " + e.getValue())
-                    .toArray(String[]::new))
-                .method("${method}", BodyPublishers.ofString(data))
-                .build();
-    
-            HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-    
-            System.out.println(response.body());
+            String jsonInputString = """
+            ${jsonBody.replace(/\n/g, '\n            ')}
+            """ ;
+
+            // Create a URL object from the string URL
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+            // Set the HTTP method to POST
+            con.setRequestMethod("POST");
+
+            // Set the headers
+            ${headersCode}
+
+            // Enable input and output streams
+            con.setDoOutput(true);
+
+            // Write the request body (JSON)
+            try (OutputStream os = con.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            // Get the response code
+            int responseCode = con.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-    `
+}
+`;
 
   return (
     <Fence className="w-full" language="java">
       {code}
     </Fence>
-  )
-}
+  );
+};
 
-export default JavaRenderer
+export default JavaRequestRenderer;

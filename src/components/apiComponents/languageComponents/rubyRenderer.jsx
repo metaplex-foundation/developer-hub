@@ -1,43 +1,47 @@
-import { Fence } from '@/components/Fence'
-import renderRequestBody from '@/lib/api/renderRequestBody'
+import { Fence } from '@/components/Fence';
 
+const RubyRequestRenderer = ({ url, headers, bodyMethod, rpcVersion, bodyParams, id }) => {
+  const httpBody = bodyParams;
 
-const RubyRenderer = ({ method, url, headers, body }) => {
-  const headerString = headers
-    ? headers.map(({ key, value }) => `:'${key}' => '${value}'`).join(', ')
-    : ''
-  const bodyString = body ? renderRequestBody(body) : ''
+  const headersCode = Object.entries(headers)
+    .map(([key, value]) => `    req["${key}"] = "${value}"`)
+    .join("\n");
 
-  const object = {
-    method: method,
-    headers: headers
-    ? `{${headerString}}`
-    : { 'Content-Type': 'application/json' },
-    body: bodyString,
-  }
-
-  const code = `require 'net/http'
+  const code = `
+require 'net/http'
 require 'json'
+require 'uri'
 
-url = URI.parse('${url}')
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = (url.scheme == 'https')
+uri = URI.parse("${url}")
+http = Net::HTTP.new(uri.host, uri.port)
 
-headers = ${JSON.stringify(object.headers, null, 2)}
+# Prepare the request body
+request_body = {
+  "jsonrpc": "${rpcVersion ? rpcVersion : '2.0'}",
+  "id": ${id ? id : 1},
+  "method": "${bodyMethod}",
+  "params": ${JSON.stringify(httpBody)}
+}.to_json
 
-request = Net::HTTP::POST.new(url)
-request['Content-Type'] = 'application/json'
-headers.each { |key, value| request[key] = value }
-request.body = ${JSON.stringify(object, null, 2)}
+# Create the POST request
+request = Net::HTTP::Post.new(uri.path, { "Content-Type" => "application/json" })
+${headersCode}
 
+# Set the request body
+request.body = request_body
+
+# Send the request and get the response
 response = http.request(request)
-puts response.body`
+
+# Output the response
+puts "Response: #{response.body}"
+`;
 
   return (
     <Fence className="w-full" language="ruby">
       {code}
     </Fence>
-  )
-}
+  );
+};
 
-export default RubyRenderer
+export default RubyRequestRenderer;

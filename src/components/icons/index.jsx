@@ -14,7 +14,7 @@ import { RubyIcon } from './languages/RubyIcon'
 import { RustIcon } from './languages/RustIcon'
 import { ShellIcon } from './languages/ShellIcon'
 import { SwiftIcon } from './languages/SwiftIcon'
-import { TypescriptIcon } from './languages/TypescriptIcon'
+// import { TypescriptIcon } from './languages/TypescriptIcon'
 
 const customIcons = {
   CSharpIcon,
@@ -29,7 +29,7 @@ const customIcons = {
   RustIcon,
   ShellIcon,
   SwiftIcon,
-  TypescriptIcon,
+  // TypescriptIcon,
 }
 
 export function Icon({ icon, className, ...props }) {

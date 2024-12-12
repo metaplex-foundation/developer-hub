@@ -1,57 +1,59 @@
-import { Fence } from '@/components/Fence'
-import renderRequestBody from '@/lib/api/renderRequestBody'
+import { Fence } from '@/components/Fence';
 
-const KotlinRenderer = ({ method, url, headers, body }) => {
-  const headerString = headers
-    ? headers.map(({ key, value }) => `'${key}': '${value}'`).join(', ')
-    : ''
-  const bodyString = body ? renderRequestBody(body) : ''
-
-  const object = {
-    method: 'POST',
-    headers: headers
-      ? `{${headerString}}`
-      : { 'Content-Type': 'application/json' },
-    body: bodyString,
-  }
+const KotlinRequestRenderer = ({ url, bodyMethod, bodyParams }) => {
+  const httpBody = bodyParams;
 
   const code = `
-  import java.net.URI;
-  import java.net.http.HttpClient;
-  import java.net.http.HttpRequest;
-  import java.net.http.HttpResponse;
-  import java.net.http.HttpResponse.BodyHandlers;
-  import java.net.http.HttpRequest.BodyPublishers;
-  import java.util.Map;
-  import java.util.HashMap;
-  
-  fun main() {
-      val url = "${url}"
-      val headers = mapOf(
-          ${headerString}
-      )
-      val data = 
-          ${JSON.stringify(object, null, 2)}
-      
+import java.io.OutputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
-      val client = HttpClient.newHttpClient()
-      val request = HttpRequest.newBuilder()
-          .uri(URI.create(url))
-          .headers(headers.map { it.key + ": " + it.value }.toTypedArray())
-          .method("${method}", BodyPublishers.ofString(data))
-          .build()
+fun main() {
+    try {
+        val url = "${url}"
+        val jsonInputString = """
+            {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "${bodyMethod}",
+                "params": ${JSON.stringify(httpBody, null, 2).replace(/\n/g, '\n                ')}
+            }
+        """
 
-      val response = client.send(request, BodyHandlers.ofString())
+        // Create a URL object from the string URL
+        val obj = URL(url)
+        val con = obj.openConnection() as HttpURLConnection
 
-      println(response.body())
-  }
-  `
+        // Set the HTTP method to POST
+        con.requestMethod = "POST"
+
+        // Set the headers
+        con.setRequestProperty("Content-Type", "application/json")
+
+        // Enable input and output streams
+        con.doOutput = true
+
+        // Write the request body (JSON)
+        con.outputStream.use { os: OutputStream ->
+            val input = jsonInputString.toByteArray(Charsets.UTF_8)
+            os.write(input, 0, input.size)
+        }
+
+        // Get the response code
+        val responseCode = con.responseCode
+        println("Response Code: \$responseCode")
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+`;
 
   return (
     <Fence className="w-full" language="kotlin">
       {code}
     </Fence>
-  )
-}
+  );
+};
 
-export default KotlinRenderer
+export default KotlinRequestRenderer;

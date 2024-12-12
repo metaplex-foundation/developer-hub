@@ -1,38 +1,52 @@
-import { Fence } from '@/components/Fence'
-import renderRequestBody from '@/lib/api/renderRequestBody'
+import { Fence } from '@/components/Fence';
 
-const PythonRequestRenderer = ({ method, url, headers, body }) => {
-  const headerString = headers
-    ? headers.map(({ key, value }) => `'${key}': '${value}'`).join(', ')
-    : ''
-  const bodyString = body ? renderRequestBody(body) : ''
+const PythonRequestRenderer = ({ url, headers, bodyMethod, rpcVersion, bodyParams, id }) => {
+  const httpBody = bodyParams;
 
   const object = {
-    method: method,
+    method: 'POST',
     headers: headers,
-    body: bodyString,
-  }
+    body: {
+      jsonrpc: rpcVersion ? rpcVersion : '2.0',
+      id: id ? id : 1,
+      method: bodyMethod,
+      params: httpBody,
+    },
+  };
 
-  const code = `import requests
-  
-  url = "${url}"
-  headers = {
-      ${headerString}
-  }
-  data = ${JSON.stringify(object, null, 2)}
-  
-  response = requests.request("${method}", url, headers=headers, data=data)
-  
-  print(response.text)
-  `
+  const headersCode = Object.entries(headers)
+    .map(([key, value]) => `"${key}": "${value}"`)
+    .join(",\n    ");
+
+  const code = `
+import requests
+import json
+
+url = "${url}"
+
+headers = {
+    "Content-Type": "application/json",
+    ${headersCode}
+}
+
+data = {
+    "jsonrpc": "${rpcVersion ? rpcVersion : '2.0'}",
+    "id": ${id ? id : 1},
+    "method": "${bodyMethod}",
+    "params": ${JSON.stringify(httpBody, null, 2).replace(/\n/g, '\n    ')}
+}
+
+response = requests.post(url, headers=headers, data=json.dumps(data))
+
+print(f"Response Code: {response.status_code}")
+print(f"Response Body: {response.text}")
+`;
 
   return (
     <Fence className="w-full" language="python">
       {code}
     </Fence>
-  )
-}
+  );
+};
 
-export default PythonRequestRenderer
-
-
+export default PythonRequestRenderer;

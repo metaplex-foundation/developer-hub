@@ -1,20 +1,33 @@
-import renderRequestBody from '@/lib/api/renderRequestBody'
+import { Fence } from '@/components/Fence'
 
-const { Fence } = require('@/components/Fence')
-
-const GoRequestRenderer = ({ method, url, headers, body }) => {
-  const headerString = headers
-    ? headers.map(({ key, value }) => `'${key}': '${value}'`).join(', ')
-    : ''
-  const bodyString = body ? renderRequestBody(body) : ''
+const GoRequestRenderer = ({
+  url,
+  headers,
+  bodyMethod,
+  rpcVersion,
+  bodyParams,
+  id,
+}) => {
+  const httpBody = bodyParams
 
   const object = {
-    method: method,
-    headers: headers
-      ? `{${headerString}}`
-      : { 'Content-Type': 'application/json' },
-    body: bodyString,
+    method: 'POST',
+    headers: headers,
+    body: {
+      jsonrpc: rpcVersion ? rpcVersion : '2.0',
+      id: id ? id : 1,
+      method: bodyMethod,
+      params: httpBody,
+    },
   }
+
+  // Dynamically generate the headers dictionary for Go
+  const headersCode = Object.entries(headers)
+    .map(([key, value]) => `    "${key}": "${value}",`)
+    .join('\n')
+
+  // Generate the raw string literal JSON body (no escaping quotes)
+  const jsonBody = JSON.stringify(object.body, null, 2)
 
   const code = `package main
 
@@ -24,15 +37,15 @@ import (
   "net/http"
 )
 
-
 func main() {
   url := "${url}"
   headers := map[string]string{
-    ${headerString}
+${headersCode}
   }
-  data := bytes.NewBuffer([]byte(\`${JSON.stringify(object, null, 2)}\`))
+  data := bytes.NewBuffer([]byte(\`${jsonBody.replace(/\n/g, '\n    ')}
+\`))
 
-  req, err := http.NewRequest("${method}", url, data)
+  req, err := http.NewRequest("POST", url, data)
   if err != nil {
     fmt.Println(err)
   }
@@ -51,7 +64,7 @@ func main() {
 
   fmt.Println(resp.Status)
 }
-  `
+`
 
   return (
     <Fence className="w-full" language="go">

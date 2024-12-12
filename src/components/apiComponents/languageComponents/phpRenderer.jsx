@@ -1,45 +1,67 @@
-import { Fence } from '@/components/Fence'
-import renderRequestBody from '@/lib/api/renderRequestBody'
+import { Fence } from '@/components/Fence';
 
-const PhpRenderer = ({ method, url, headers, body }) => {
-  const headerString = headers
-    ? headers.map(({ key, value }) => `'${key}' => '${value}'`).join(', ')
-    : ''
-  const bodyString = body ? renderRequestBody(body) : ''
+const PhpRequestRenderer = ({ url, headers, bodyMethod, rpcVersion, bodyParams, id }) => {
+  const httpBody = bodyParams;
 
   const object = {
-    method: method,
+    method: 'POST',
     headers: headers,
-    body: bodyString,
-  }
+    body: {
+      jsonrpc: rpcVersion ? rpcVersion : '2.0',
+      id: id ? id : 1,
+      method: bodyMethod,
+      params: httpBody,
+    },
+  };
 
-  const code = `<?php
-    $url = '${url}';
-    $headers = array(
-      ${headerString}
-    );
-    $data = json_encode(${JSON.stringify(object, null, 2)});
-    
-    $ch = curl_init();
-    
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '${method}');
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    
-    $result = curl_exec($ch);
-    
-    curl_close($ch);
-    
-    echo $result;
-    ?>`
+  const headersCode = Object.entries(headers)
+    .map(([key, value]) => `"${key}" => "${value}"`)
+    .join(",\n        ");
+
+  const code = `
+<?php
+
+$url = "${url}";
+$data = [
+    "jsonrpc" => "${rpcVersion ? rpcVersion : '2.0'}",
+    "id" => ${id ? id : 1},
+    "method" => "${bodyMethod}",
+    "params" => ${JSON.stringify(httpBody, null, 2).replace(/\n/g, '\n    ')}
+];
+
+// Initialize cURL session
+$ch = curl_init($url);
+
+// Set cURL options
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Content-Type: application/json",
+    ${headersCode}
+]);
+
+// Execute cURL request
+$response = curl_exec($ch);
+
+// Check for errors
+if($response === false) {
+    echo "cURL Error: " . curl_error($ch);
+} else {
+    echo "Response: " . $response;
+}
+
+// Close cURL session
+curl_close($ch);
+
+?>
+`;
 
   return (
     <Fence className="w-full" language="php">
       {code}
     </Fence>
-  )
-}
+  );
+};
 
-export default PhpRenderer
+export default PhpRequestRenderer;

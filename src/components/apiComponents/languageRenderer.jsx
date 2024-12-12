@@ -9,6 +9,8 @@ import KotlinRenderer from './languageComponents/kotlinRenderer'
 import PhpRenderer from './languageComponents/phpRenderer'
 import PythonRequestRenderer from './languageComponents/pythonRequestRenderer'
 import RubyRenderer from './languageComponents/rubyRenderer'
+import RustRequestRenderer from './languageComponents/rustRenderer'
+import SwiftRequestRenderer from './languageComponents/swiftRenderer'
 import LanguageSelector from './languageSelector'
 
 const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
@@ -49,8 +51,9 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             <PythonRequestRenderer
               method={api.method}
               url={activeEndPoint}
-              headers={api.headers}
-              body={api.params}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
             />
           </div>
         )
@@ -64,8 +67,9 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             <CurlRequestRenderer
               method={api.method}
               url={activeEndPoint}
-              headers={api.headers}
-              body={api.params}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
             />
           </div>
         )
@@ -79,8 +83,9 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             <GoRequestRenderer
               method={api.method}
               url={activeEndPoint}
-              headers={api.headers}
-              body={api.params}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
             />
           </div>
         )
@@ -94,8 +99,9 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             <CSharpRequestRenderer
               method={api.method}
               url={activeEndPoint}
-              headers={api.headers}
-              body={api.params}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
             />
           </div>
         )
@@ -109,8 +115,9 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             <JavaRenderer
               method={api.method}
               url={activeEndPoint}
-              headers={api.headers}
-              body={api.params}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
             />
           </div>
         )
@@ -124,8 +131,9 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             <PhpRenderer
               method={api.method}
               url={activeEndPoint}
-              headers={api.headers}
-              body={api.params}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
             />
           </div>
         )
@@ -138,8 +146,9 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             <KotlinRenderer
               method={api.method}
               url={activeEndPoint}
-              headers={api.headers}
-              body={api.params}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
             />
           </div>
         )
@@ -152,8 +161,39 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             <RubyRenderer
               method={api.method}
               url={activeEndPoint}
-              headers={api.headers}
-              body={api.params}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
+            />
+          </div>
+        )
+      case 'rust':
+        return (
+          <div className="flex flex-col">
+            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+              {strToTitleCase(activeLanguage)} Request Example
+            </div>
+            <RustRequestRenderer
+              method={api.method}
+              url={activeEndPoint}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
+            />
+          </div>
+        )
+      case 'swift':
+        return (
+          <div className="flex flex-col">
+            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+              {strToTitleCase(activeLanguage)} Request Example
+            </div>
+            <SwiftRequestRenderer
+              method={api.method}
+              url={activeEndPoint}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
             />
           </div>
         )
