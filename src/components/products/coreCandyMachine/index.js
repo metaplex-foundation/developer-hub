@@ -32,41 +32,20 @@ export const coreCandyMachine = {
           ],
         },
         {
-          title: 'Core Candy Machine',
+          title: 'Actions',
 
           links: [
-            {
-              title: 'Overview',
-              href: '/core-candy-machine/overview',
-            },
-            { title: 'Candy Guards', href: '/core-candy-machine/guards' },
-            {
-              title: 'Preparing Assets',
-              href: '/core-candy-machine/preparing-assets',
-            },
             {
               title: 'Creating a Candy Machine',
               href: '/core-candy-machine/create',
             },
             {
-              title: 'Inserting Items',
+              title: 'Loading Items in a Candy Machine',
               href: '/core-candy-machine/insert-items',
             },
             {
               title: 'Updating a Candy Machine and Guards',
               href: '/core-candy-machine/update',
-            },
-            {
-              title: 'Guard Groups and Phases',
-              href: '/core-candy-machine/guard-groups',
-            },
-            {
-              title: 'Special Guard Instructions',
-              href: '/core-candy-machine/guard-route',
-            },
-            {
-              title: 'Fetching a Candy Machine',
-              href: '/core-candy-machine/fetching-a-candy-machine',
             },
             {
               title: 'Minting from a Candy Machine',
@@ -76,119 +55,31 @@ export const coreCandyMachine = {
               title: 'Withdrawing a Candy Machine',
               href: '/core-candy-machine/withdrawing-a-candy-machine',
             },
+            {
+              title: 'Fetching a Candy Machine',
+              href: '/core-candy-machine/fetching-a-candy-machine',
+            },
           ],
         },
         {
-          title: 'Available Guards',
+          title: 'Candy Guards',
+
           links: [
             {
-              title: 'Address Gate',
-              href: '/core-candy-machine/guards/address-gate',
+              title: 'Overview',
+              href: '/core-candy-machine/guards/candy-guard-overview',
             },
             {
-              title: 'Allocation',
-              href: '/core-candy-machine/guards/allocation',
+              title: 'Candy Groups and Phases',
+              href: '/core-candy-machine/guards/candy-guard-overview',
             },
             {
-              title: 'Allow List',
-              href: '/core-candy-machine/guards/allow-list',
+              title: 'Custom Guards',
+              href: '/core-candy-machine/guards/candy-guard-overview',
             },
             {
-              title: 'Asset Burn',
-              href: '/core-candy-machine/guards/asset-burn',
-            },
-            {
-              title: 'Asset Burn Multi',
-              href: '/core-candy-machine/guards/asset-burn-multi',
-            },
-            {
-              title: 'Asset Gate',
-              href: '/core-candy-machine/guards/asset-gate',
-            },
-            {
-              title: 'Asset Payment',
-              href: '/core-candy-machine/guards/asset-payment',
-            },
-            {
-              title: 'Asset Payment Multi',
-              href: '/core-candy-machine/guards/asset-payment-multi',
-            },
-            {
-              title: 'Asset Mint Limit',
-              href: '/core-candy-machine/guards/asset-mint-limit',
-            },
-            { title: 'Bot Tax', href: '/core-candy-machine/guards/bot-tax' },
-            { title: 'End Date', href: '/core-candy-machine/guards/end-date' },
-            { title: 'Edition', href: '/core-candy-machine/guards/edition' },
-            {
-              title: 'Freeze Sol Payment',
-              href: '/core-candy-machine/guards/freeze-sol-payment',
-            },
-            {
-              title: 'Freeze Token Payment',
-              href: '/core-candy-machine/guards/freeze-token-payment',
-            },
-            {
-              title: 'Gatekeeper',
-              href: '/core-candy-machine/guards/gatekeeper',
-            },
-            {
-              title: 'Mint Limit',
-              href: '/core-candy-machine/guards/mint-limit',
-            },
-            { title: 'NFT Burn', href: '/core-candy-machine/guards/nft-burn' },
-            { title: 'NFT Gate', href: '/core-candy-machine/guards/nft-gate' },
-            {
-              title: 'NFT Mint Limit',
-              href: '/core-candy-machine/guards/nft-mint-limit',
-            },
-            {
-              title: 'NFT Payment',
-              href: '/core-candy-machine/guards/nft-payment',
-            },
-            {
-              title: 'Program Gate',
-              href: '/core-candy-machine/guards/program-gate',
-            },
-            {
-              title: 'Redeemed Amount',
-              href: '/core-candy-machine/guards/redeemed-amount',
-            },
-            {
-              title: 'Sol Fixed Fee',
-              href: '/core-candy-machine/guards/sol-fixed-fee',
-            },
-            {
-              title: 'Sol Payment',
-              href: '/core-candy-machine/guards/sol-payment',
-            },
-            {
-              title: 'Start Date',
-              href: '/core-candy-machine/guards/start-date',
-            },
-            {
-              title: 'Third Party Signer',
-              href: '/core-candy-machine/guards/third-party-signer',
-            },
-            {
-              title: 'Token Burn',
-              href: '/core-candy-machine/guards/token-burn',
-            },
-            {
-              title: 'Token Gate',
-              href: '/core-candy-machine/guards/token-gate',
-            },
-            {
-              title: 'Token Payment',
-              href: '/core-candy-machine/guards/token-payment',
-            },
-            {
-              title: 'Token2022 Payment',
-              href: '/core-candy-machine/guards/token2022-payment',
-            },
-            {
-              title: 'Vanity Mint',
-              href: '/core-candy-machine/guards/vanity-mint',
+              title: 'Available Candy Guards',
+              href: '/core-candy-machine/guards/candy-guard-overview',
             },
           ],
         },
