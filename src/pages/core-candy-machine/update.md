@@ -4,6 +4,19 @@ metaTitle: Update a Core Candy Machine | Core Candy Machine
 description: Learn how to update your Core Candy Machine and it's various settings.
 ---
 
+If the `isMutable` field was set to true when creating the Candy Machine, some data within the Candy Machine can be updated using the `updateCandyMachine()` function.
+
+Below is a breakdown of the arguments in the data structure that can be modified:
+
+| Attribute                | Type                                |
+|--------------------------|-------------------------------------|
+| **itemsAvailable**       | number | bigint                     |
+| **isMutable**            | boolean                             |
+| **configLineSettings**   | [Link](/core-candy-machine/create#with-config-line-settings)    |
+| **hiddenSettings**       | [Link](/core-candy-machine/create#with-hidden-settings)  |
+
+Here is an example of how to update a Core Candy Machine:
+
 {% dialect-switcher title="Updating a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
@@ -12,7 +25,8 @@ import {
   updateCandyMachine
 } from '@metaplex-foundation/mpl-core-candy-machine'
 
-const candyMachine = generateSigner(umi)
+// Publickey of the candyMachine to update
+const candyMachine = publicKey('11111111111111111111111111111111')
 
 await updateCandyMachine(umi, {
   candyMachine,
@@ -28,57 +42,13 @@ await updateCandyMachine(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Args
+## Updating the Authority
 
-{% dialect-switcher title="Update Core Candy Machine Args" %}
-{% dialect title="JavaScript" id="js" %}
+To update the authority of the Candy Machine to a new address, use the `setMintAuthority()` function and pass the new address in the `mintAuthority` field.
 
-Available arguments that can be passed into the updateCandyMachine function.
+Here's an example of how to update the authority of a Candy Machine:
 
-| name         | type      |
-| ------------ | --------- |
-| candyMachine | publicKey |
-| data         | data      |
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-Some settings are unabled to be changed/updated once minting has started.
-
-### data
-
-{% dialect-switcher title="Candy Machine Data Object" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-data =  {
-    itemsAvailable: number | bigint;
-    isMutable: boolean;
-    configLineSettings: OptionOrNullable<ConfigLineSettingsArgs>;
-    hiddenSettings: OptionOrNullable<HiddenSettingsArgs>;
-}
-```
-
-- [ConfigLineSettingsArgs](/core-candy-machine/create#config-line-settings)
-- [HiddenSettingsArgs](/core-candy-machine/create#hidden-settings)
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-## Assigning a new Authority to the Candy Machine
-
-There may be scenarios where you may wish to transfer the Candy Machine authority across to a new address. This can be achieved with the `setMintAuthority` function.
-
-export declare type SetMintAuthorityInstructionAccounts = {
-/** Candy Machine account. \*/
-candyMachine: PublicKey | Pda;
-/** Candy Machine authority _/
-authority?: Signer;
-/\*\* New candy machine authority _/
-mintAuthority: Signer;
-};
-
-{% dialect-switcher title="Assign New Authority to Core Candy Machine" %}
+{% dialect-switcher title="Update Authority of Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -96,27 +66,67 @@ await setMintAuthority(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-When assigning a new Authority to a Core Candy Machine you will also have to update the Collection Asset to the same update Authority.
+## Updating the Guards
 
-## Updating guards
+Updating the Guards, works similarly to the way we set them when we created the Candy Machine. To enable guards, provide their settings; to disable them, set them to none() or leave them out.
 
-Did you set something wrong in your guards? Did you change your mind about the mint price? Do you need to delay the start of the mint of a little? No worries, guards can easily be updated following the same settings used when creating them.
+**Note**: The entire guards object is replaced during the update, so include all guards you want to keep, even if their settings remain unchanged. Consider fetching the current guard settings before updating to avoid overwriting unintended fields.
 
-You can enable new guards by providing their settings or disable current ones by giving them empty settings.
+Here's a list of all the Candy Guards available and the individual attributes:  
 
-{% dialect-switcher title="Update guards" %}
+{% totem %}
+
+{% totem-accordion title="Candy Guards Attributes" %}
+
+| Guard Name                 | Arguments                                                                |
+|----------------------------|--------------------------------------------------------------------------|
+| **addressGate**            | { `address`: PublicKey }                                                 |
+| **allocation**             | { `id`: number, `limit`: number }                                        |
+| **allowList**              | { `merkleRoot`: Uint8Array }                                             |
+| **assetBurn**              | { `requiredCollection`: PublicKey }                                      |
+| **assetBurnMulti**         | { `num`: number, `requiredCollection`: PublicKey }                       |
+| **assetGate**              | { `requiredCollection`: PublicKey }                                      |
+| **assetMintLimit**         | { `id`: number, `limit`: number, `requiredCollection`: PublicKey }       |
+| **assetPayment**           | { `destination`: PublicKey, `requiredCollection`: PublicKey }            |
+| **assetPaymentMulti**      | { `destination`: PublicKey, `num`: number, `requiredCollection`: PublicKey } |
+| **botTax**                 | { `lamports`: SolAmount, `lastInstruction`: boolean }                    |
+| **edition**                | { `editionStartOffset`: number }                                         |
+| **endDate**                | { `date`: DateTimeInput }                                                |
+| **freezeSolPayment**       | { `destination`: PublicKey, `lamports`: SolAmount }                      |
+| **freezeTokenPayment**     | { `amount`: number | bigint, `mint`: PublicKey, `destination`: PublicKey } |
+| **gatekeeper**             | { `expireOnUse`: boolean, `gatekeeperNetwork`: PublicKey }               |
+| **mintLimit**              | { `id`: number, `limit`: number }                                        |
+| **nftBurn**                | { `requiredCollection`: PublicKey }                                      |
+| **nftGate**                | { `requiredCollection`: PublicKey }                                      |
+| **nftMintLimit**           | { `id`: number, `limit`: number, `requiredCollection`: PublicKey }       |
+| **nftPayment**             | { `destination`: PublicKey, `requiredCollection`: PublicKey }            |
+| **programGate**            | { `additional`: PublicKey[] }                                            |
+| **redeemedAmount**         | { `maximum`: number | bigint }                                           |
+| **solFixedFee**            | { `destination`: PublicKey, `lamports`: SolAmount }                      |
+| **solPayment**             | { `lamports`: SolAmount, `destination`: PublicKey }                      |
+| **startDate**              | { `date`: DateTimeInput }                                                |
+| **thirdPartySigner**       | { `signerKey`: PublicKey }                                               |
+| **token2022Payment**       | { `amount`: number | bigint, `destinationAta`: PublicKey, `mint`: PublicKey } |
+| **tokenBurn**              | { `amount`: number | bigint, `mint`: PublicKey }                         |
+| **tokenGate**              | { `amount`: number | bigint, `mint`: PublicKey }                         |
+| **tokenPayment**           | { `amount`: number | bigint, `destinationAta`: PublicKey, `mint`: PublicKey } |
+| **vanityMint**             | { `regex`: string }                                                      |
+
+
+{% /totem-accordion %}
+
+{% /totem %}
+
+Here is an example of updating the `guards` from an existing Candy Machine:
+
+{% dialect-switcher title="Update the Guards of a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
-You may update the guards of a Core Candy Machine the same way you created them. That is, by providing their settings inside the `guards` object of the `updateCandyGuard` function. Any guard set to `none()` or not provided will be disabled.
-
-Note that the entire `guards` object will be updated meaning **it will override all existing guards**!
-
-Therefore, make sure to provide the settings for all guards you want to enable, even if their settings are not changing. You may want to fetch the candy guard account first to fallback to its current guards.
-
-```tsx
+```ts
 import { some, none, sol } from '@metaplex-foundation/umi'
 
 const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority)
+
 await updateCandyGuard(umi, {
   candyGuard: candyGuard.publicKey,
   guards: {
@@ -124,31 +134,22 @@ await updateCandyGuard(umi, {
     botTax: none(),
     solPayment: some({ lamports: sol(3), destination: treasury }),
   },
-  groups: [
-    // Either empty, or if you are using groups add the data here
-  ]
 })
 ```
-
-API References: [updateCandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/updateCandyGuard.html), [CandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
 
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Wrapping and unwrapping Candy Guard accounts manually
+## Associating and Dissociating Guard accounts manually
 
-So far we’ve managed both Core Candy Machine and Core Candy Guard accounts together because that makes the most sense for most projects.
+The create function that we [used previously](/core-candy-machine/create) already takes care of creating and associating a brand new Candy Guard account for every Candy Machine account created. 
 
-However, it is important to note that Core Candy Machines and Core Candy Guards can be created and associated in different steps, even using our SDKs.
+However, it is important to note that Core Candy Machines and Core Candy Guards can be created and associated in different steps by creating the two accounts separately and associate/dissociate them manually after using the `wrap()` and `unwrap()` function.
 
-You will first need to create the two accounts separately and associate/dissociate them manually.
+Here is an example of associating and dissociating the guards from an existing Candy Machine:
 
 {% dialect-switcher title="Associate and dissociate guards from a Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
-
-The `create` function of the Umi library already takes care of creating and associating a brand new Candy Guard account for every Candy Machine account created.
-
-However, if you wanted to create them separately and manually associate/dissociate them, this is how you’d do it.
 
 ```ts
 import {
@@ -167,32 +168,19 @@ import {
 
 // Create a Candy Machine without a Candy Guard.
 const candyMachine = generateSigner(umi)
+
 await createCandyMachine({
   candyMachine,
-  tokenStandard: TokenStandard.NonFungible,
-  collectionMint: collectionMint.publicKey,
+  collection: collectionMint.publicKey,
   collectionUpdateAuthority: umi.identity,
-  itemsAvailable: 100,
-  sellerFeeBasisPoints: percentAmount(1.23),
-  creators: [
-    {
-      address: umi.identity.publicKey,
-      verified: false,
-      percentageShare: 100
-    },
-  ],
-  configLineSettings: some({
-    prefixName: 'My NFT #',
-    nameLength: 3,
-    prefixUri: 'https://example.com/',
-    uriLength: 20,
-    isSequential: false,
-  }),
+  itemsAvailable: 1000,
+  authority: umi.identity.publicKey,
 }).sendAndConfirm(umi)
 
 // Create a Candy Guard.
 const base = generateSigner(umi)
 const candyGuard = findCandyGuardPda(umi, { base: base.publicKey })
+
 await createCandyGuard({
   base,
   guards: {
@@ -214,8 +202,6 @@ await unwrap({
   candyGuard,
 }).sendAndConfirm(umi)
 ```
-
-API References: [createCandyMachine](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/createCandyMachine.html), [createCandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/createCandyGuard.html), [wrap](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/wrap.html), [unwrap](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/unwrap.html)
 
 {% /dialect %}
 {% /dialect-switcher %}

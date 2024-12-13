@@ -67,7 +67,7 @@ Start by creating a new Core Candy Machine and configuring it with custom settin
 
 **Note**: Candy Guards are modular code that adds custom behavior to the Candy Machine.
 
-Learn more about [How to create a Candy Machine]()
+To learn more about how to create a Candy Machine, follow this link: [Create a Candy Machine]()
 
 ### Load Items
 
@@ -79,40 +79,53 @@ Each item to load includes:
 
 **Note**: If you're not familiar with how to upload metadata, you can follow [this paragraph](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#creating-the-metadata-for-the-asset) or use Sugar!
 
-Learn more about [How to load a Candy Machine]()
+To learn more about how to load a Candy Machine, follow this link: [Load a Candy Machine]()
 
 ### Mint Asset
 
 Once all items are loaded into the Candy Machine and pre-configured conditions are met, users can begin minting assets. 
 
-**Note**: To let the user easily access a way to mint from the candy machine, we've created this guide: [Create a Website for minting Assets from your Core Candy Machine](/guides/create-a-core-candy-machine-ui)
+**Note**: To let the user easily access a way to mint from the candy machine, we've created this guide: [Create a Website for minting Assets from your Core Candy Machine](/core-candy-machine/guides/create-a-core-candy-machine-ui)
 
-Learn more about [How to Mint from a Candy Machine]()
+
+To learn more about how to Mint from a Candy Machine, follow this link:  [Mint from a Candy Machine]()
 
 ### Delete and Withdraw
 
 After the Candy Machine has fulfilled its purpose, it can be safely deleted to reclaim the rent paid for storing its data on-chain.
 
-Learn more about [How to Delete a Candy Machine]()
-
-----todo
+To learn more about how to delete a Candy Machine, follow this link:  [Delete a Candy Machine]()
 
 ## Candy Guards
 
-Now that we understand how Core Candy Machines work, let’s dig into the various ways creators can protect and customize the mint process of their Core Candy Machine.
+Creators can use `Candy Guards` to secure and customize the minting process of their Core Candy Machine by leveraging an additional program with 23 built-in guards!
 
-Creators can use what we call “**Guards**” to add various features to their Core Candy Machine. The Metaplex Core Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 23 default guards**](/core-candy-machine/guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
+For a list of all the available guards and how to use them, follow this link: [Candy Guard Overview]()
 
-Each guard can be enabled and configured at will so creators can pick and choose the features they need. Disabling all guards would be equivalent to allowing anyone to mint our NFTs for free at any time, which is likely not what we want. So let’s have a look at a few guards to create a more realistic example.
+**Note**: Metaplex Candy Machine is designed to be a large-scale NFT collections distributor and doesn't natively support setting a price for the NFTs. To add pricing, configure the Sol Payment or SPL token payment guard!
 
-Say a Core Candy Machine has the following guards:
+### Custom Guards
 
-- **Sol Payment**: This guard ensures the minting wallet has to pay a configured amount of SOL to a configured destination wallet.
-- **Start Date**: This guard ensures minting can only start after the configured time.
-- **Mint Limit**: This guard ensures each wallet cannot mint more than a configured amount.
-- **Bot Tax**: This guard is a bit special. It doesn’t guard against anything but it changes the behaviour of a failed mint to prevent bots from minting Candy Machines. When this guard is activated, if any other activated guard fails to validate the mint, it will charge a small configured amount of SOL to the wallet that tried to mint.
+Additionally, for the more advanced developers, Candy Guards include a "route instruction," allowing fully customizable mint request routing through custom guard logic.
 
-What we end up with is a bot-protected Candy Machine that charges SOL, launches at a specific time and only allows a limited amount of mints per wallet. Here’s a concrete example.
+To learn more about how to create your Custom Guard, follow this link: [Special Guard Instructions]()
+
+### Candy Groups
+
+Candy Machine also supports `Guard Groups`, enabling multiple guard configuration with unique requirements that can operate simultaneously. This allows for different minting phases or behaviors within the same Candy Machine based on varying conditions.
+
+To learn more about how to create Groups, follow this link: [Guard Groups]()
+
+### Guard Example
+
+To create a bot-protected Candy Machine that charges SOL, launches at a specific time, and limits mints per wallet, configure the following guards:
+
+- **Sol Payment**: Requires the minting wallet to pay a configured amount of SOL to a destination wallet.
+- **Start Date**: Allows minting only after a configured time.
+- **Mint Limit**: Restricts each wallet from minting more than a set amount.
+- **Bot Tax**: Penalizes failed mint attempts to deter bots by charging a small configured SOL fee to the minting wallet if any active guard blocks a mint.
+
+On-chain, this configuration would look like this:
 
 {% diagram %}
 {% node %}
@@ -160,6 +173,3 @@ Bot tax charged
 {% edge from="mint-3" to="fail-3" path="bezier" /%}
 {% edge from="mint-4" to="fail-4" path="bezier" /%}
 {% /diagram %}
-
-As you can see, with more than 23 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/core-candy-machine/guards) page.
-Documents the latest changes.
