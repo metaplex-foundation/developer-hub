@@ -95,9 +95,9 @@ const createIx = await create(umi, {
   // ...
   configLineSettings: some({
     prefixName: 'Example Asset #',
-    nameLength: 15,
+    nameLength: 4,
     prefixUri: 'https://example.com/metadata/',
-    uriLength: 29,
+    uriLength: 9,
     isSequential: false,
   }),
 })

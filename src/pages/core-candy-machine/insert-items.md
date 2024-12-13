@@ -1,23 +1,29 @@
 ---
-title: Inserting Items
-metaTitle: Inserting Items | Core Candy Machine
+title: Loading Items
+metaTitle: Loading Items | Core Candy Machine
 description: How to load Core NFT Assets into a Core Candy Machine.
 ---
 
-Now that we have a name and URI for all of our items, all we need to do is insert them into our Core Candy Machine account.
+After [preparing the Candy Machine Assets](/core-candy-machine/guides/preparing-assets), the next step is to insert them into the Candy Machine. This is extremely important because **minting will not be permitted until all items have been inserted**.
 
-This is an important part of the process and, when using Config Line Settings, **minting will not be permitted until all items have been inserted**.
+**Note**: Solana transactions have size limits, this restrict the number of items that can be inserted per transaction based on the length of asset names and URIs. Shorter names and URIs allow more items to fit into a single transaction.
 
-Note that the name and URI of each inserted item are respectively constraint by the **Name Length** and **URI Length** attributes of the Config Line Settings.
+## Loading Items in the Candy Machine 
 
-Additionally, because transactions are limited to a certain size, we cannot insert thousands of items within the same transaction. The number of items we can insert per transaction will depend on the **Name Length** and **URI Length** attributes defined in the Config Line Settings. The shorter our names and URIs are, the more we'll be able to fit into a transaction.
+You can use the `addConfigLines()` function to load items into the Candy Machine. You need to specify the configLines to insert and the index where they should be added. 
 
-{% dialect-switcher title="Add config lines" %}
+Here's an example of how to do it:
+
+{% dialect-switcher title="Loading Items in the Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
-When using the Umi library, you may use the `addConfigLines` function to insert items into a Core Candy Machine. It requires the config lines to add as well as the index in which you want to insert them.
-
 ```ts
+import { publicKey } from "@metaplex-foundation/umi";
+import { fetchCandyMachine, addConfigLines } from "@metaplex-foundation/mpl-core-candy-machine";
+
+const candyMachineId = "11111111111111111111111111111111"
+const candyMachine = await fetchCandyMachine( umi, publicKey(candyMachineId))
+
 await addConfigLines(umi, {
   candyMachine: candyMachine.publicKey,
   index: 0,
@@ -41,24 +47,19 @@ await addConfigLines(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
-
-API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
-
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Inserting Items Using Prefixes
+### that uses Config Line Settings
 
-When using name and/or URI prefixes, you only need to insert the part that comes after them.
+By setting up the [Config Line Settings](/core-candy-machine/create#with-config-line-settings), you only need to insert the part that comes after the prefixes that we set up on creation. Using this setup, significantly reduce the Name Length and URI Length helping you fit a lot more items per transaction.
 
-Note that, since using prefixes can significantly reduce the Name Length and URI Length, it should help you fit a lot more items per transaction.
+**Note**: name and URI of each inserted item are respectively constraint by the **Name Length** and **URI Length** attributes of the Config Line Settings.
 
-{% dialect-switcher title="Add config lines from a given index" %}
+The way to do it is the same, it's just much shorter to do, here's an example of it
+
+{% dialect-switcher title="Loading Items in the Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
-
-When adding config lines to a Core Candy Machine that uses prefixes, you may only provide the part of the name and URI that comes after the prefix when using the `addConfigLines` function.
-
-For instance, say you had a Core Candy Machine with the following config line settings.
 
 ```ts
 await create(umi, {
@@ -71,14 +72,10 @@ await create(umi, {
     isSequential: false,
   }),
 }).sendAndConfirm(umi)
-```
 
-Then, you can insert config lines like so.
-
-```ts
 await addConfigLines(umi, {
   candyMachine: candyMachine.publicKey,
-  index: candyMachine.itemsLoaded,
+  index: 0,
   configLines: [
     { name: '1', uri: '1.json' },
     { name: '2', uri: '2.json' },
@@ -87,19 +84,17 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
-
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Overriding Existing Items
+## Overriding Existing Items in the Candy Machine 
 
-When inserting items, you may provide the position in which these items should be inserted. This enables you to insert items in any order you want but also allows you to update items that have already been inserted.
+Since the `addConfigLines()` function requires an index, it can be used not only for inserting new items but also for updating items that have already been inserted.
 
-{% dialect-switcher title="Override config lines" %}
+Here's a showcase of this behaviour:
+
+{% dialect-switcher title="Overriding Existing Items in the Candy Machine " %}
 {% dialect title="JavaScript" id="js" %}
-
-The following examples show how you can insert three items and, later on, update the second item inserted.
 
 ```ts
 await addConfigLines(umi, {
@@ -124,11 +119,5 @@ candyMachine.items[1].name // "My Asset #X"
 candyMachine.items[2].name // "My Asset #3"
 ```
 
-API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## Conclusion
-
-And just like that, we have a loaded Core Candy Machine ready to mint Assets! However, we've not created any requirements for our minting process. How can we configure the price of the mint? How can we ensure that buyers are holders of a specific token or an Asset from a specific collection? How can we set the start date of our mint? What about the end conditions?
