@@ -1,5 +1,8 @@
+import { Select } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { PlusIcon } from '@heroicons/react/24/solid'
+import clsx from 'clsx'
 import { PluginsIcon } from '../icons/dual-tone/PluginsIcon'
 
 // Recursive component for rendering nested parameters
@@ -89,58 +92,80 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
 
     case 'boolean':
       content = (
-        <select
+        <div className="relative flex h-10 w-full">
+        <Select
           onChange={(e) => setParam(path, e.target.value)}
-          className="block w-full rounded-md border border-gray-200 px-2 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
+          className={clsx(
+            'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
+            'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
+            // Make the text of each option black on Windows
+            '*:text-black dark:text-white'
+          )}
         >
           {!param.required && <option value={''} />}
           <option value="true">true</option>
           <option value="false">false</option>
-        </select>
+        </Select>
+        <ChevronDownIcon
+            className="group pointer-events-none absolute right-2.5 top-3 my-auto size-4 fill-black/60 dark:fill-white"
+            aria-hidden="true"
+          />
+        </div>
       )
       break
     case 'option':
       content = (
-        <select
-          onChange={(e) => setParam(path, e.target.value)}
-          className="block w-full rounded-md border border-gray-200 px-2 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
-        >
-          {!param.required && <option value={''} />}
-          {param.value.map((choice, index) => {
-            return (
-              <option key={index} value={choice}>
-                {choice}
-              </option>
-            )
-          })}
-        </select>
+        <div className="relative flex h-10 w-full">
+          <Select
+            onChange={(e) => setParam(path, e.target.value)}
+            className={clsx(
+              'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
+              'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
+              // Make the text of each option black on Windows
+              '*:text-black dark:text-white'
+            )}
+          >
+            {!param.required && <option value={''} />}
+            {param.value.map((choice, index) => {
+              return (
+                <option key={index} value={choice}>
+                  {choice}
+                </option>
+              )
+            })}
+          </Select>
+          <ChevronDownIcon
+            className="group pointer-events-none absolute right-2.5 top-3 my-auto size-4 fill-black/60 dark:fill-white"
+            aria-hidden="true"
+          />
+        </div>
       )
       break
-      case 'arrayKeyValuePair':
+    case 'arrayKeyValuePair':
       content = (
         <div div className="flex flex-col gap-2">
-        <input
-          name={`${param.name}-key`}
-          type="text"
-          className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
-          placeholder={"key"}
-          onChange={(e) => {
-            const newValue = [e.target.value, value ? value[1] : ""];
-            setParam(path, newValue);
-          }}
-          value={value ? value[0] : ''}
-        />
-        <input
-          name={`${param.name}-value`}
-          type="text"
-          className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
-          placeholder={"value"}
-          onChange={(e) => {
-            const newValue = [value ? value[0] : "", e.target.value];
-            setParam(path, newValue);
-          }}
-          value={value ? value[1] : ''}
-        />
+          <input
+            name={`${param.name}-key`}
+            type="text"
+            className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
+            placeholder={'key'}
+            onChange={(e) => {
+              const newValue = [e.target.value, value ? value[1] : '']
+              setParam(path, newValue)
+            }}
+            value={value ? value[0] : ''}
+          />
+          <input
+            name={`${param.name}-value`}
+            type="text"
+            className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
+            placeholder={'value'}
+            onChange={(e) => {
+              const newValue = [value ? value[0] : '', e.target.value]
+              setParam(path, newValue)
+            }}
+            value={value ? value[1] : ''}
+          />
         </div>
       )
       break
