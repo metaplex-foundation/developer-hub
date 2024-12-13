@@ -20,11 +20,9 @@ const ApiExampleSelector = ({
           <Select
             onChange={(e) => handleSetExample(e.target.value)}
             value={selectedExample}
-            // className="block w-full rounded-lg border border-gray-200 px-2 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500"
             className={clsx(
               'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
               'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
-              // Make the text of each option black on Windows
               '*:text-black dark:text-white'
             )}
           >

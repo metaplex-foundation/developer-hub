@@ -1,7 +1,14 @@
-import { Fence } from "@/components/Fence";
+import { Fence } from '@/components/Fence'
 
-const JavaRequestRenderer = ({ url, headers, bodyMethod, rpcVersion, bodyParams, id }) => {
-  const httpBody = bodyParams;
+const JavaRequestRenderer = ({
+  url,
+  headers,
+  bodyMethod,
+  rpcVersion,
+  bodyParams,
+  id,
+}) => {
+  const httpBody = bodyParams
 
   const object = {
     method: 'POST',
@@ -12,15 +19,15 @@ const JavaRequestRenderer = ({ url, headers, bodyMethod, rpcVersion, bodyParams,
       method: bodyMethod,
       params: httpBody,
     },
-  };
+  }
 
   // Dynamically generate the headers dictionary for Java
   const headersCode = Object.entries(headers)
     .map(([key, value]) => `con.setRequestProperty("${key}", "${value}");`)
-    .join('\n');
+    .join('\n')
 
   // Format the JSON body correctly for the Java code with proper indentation
-  const jsonBody = JSON.stringify(object.body, null, 2);  // 4-space indentation for JSON
+  const jsonBody = JSON.stringify(object.body, null, 2) // 4-space indentation for JSON
 
   const code = `import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -62,13 +69,13 @@ public class Main {
         }
     }
 }
-`;
+`
 
   return (
     <Fence className="w-full" language="java">
       {code}
     </Fence>
-  );
-};
+  )
+}
 
-export default JavaRequestRenderer;
+export default JavaRequestRenderer

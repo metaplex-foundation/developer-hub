@@ -98,7 +98,6 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
           className={clsx(
             'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
             'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
-            // Make the text of each option black on Windows
             '*:text-black dark:text-white'
           )}
         >
@@ -121,7 +120,6 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
             className={clsx(
               'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
               'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
-              // Make the text of each option black on Windows
               '*:text-black dark:text-white'
             )}
           >
@@ -199,7 +197,6 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
   )
 }
 
-// Main component
 const ApiParameterDisplay = ({ params, setParam, body }) => {
   console.log(body)
 
