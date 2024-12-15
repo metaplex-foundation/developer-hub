@@ -1,19 +1,22 @@
 ---
-title: How to Mint NFTs to Another Wallet - Airdrop example
-metaTitle: Mint from Candy Machine to a different wallet | Candy Machine
+title: Airdrops - How to Mint NFTs to another Wallet
+metaTitle: Airdrops - Mint from Candy Machine to a different wallet | Candy Machine
 description: A developer guide on how to mint NFTs from a Candy Machine to a different wallet address. Useful for airdrops and similar use cases.
 ---
 
-## Overview
 This guide explains how to mint NFTs from a Candy Machine to different wallet addresses - a common requirement for airdrops, giveaways, or distributing NFTs to multiple recipients.
 
 ## Prerequisites
-Either
+
 - Basic understanding of Solana and NFTs
 - A funded wallet for transaction fees
 
+**either**
+
 - Sugar CLI (v2.0.0 or higher)
-Or
+
+**or**
+
 - Node.js 16.0 or higher
 - @metaplex-foundation/mpl-token-metadata
 - @metaplex-foundation/mpl-toolbox
@@ -23,18 +26,20 @@ Or
 Minting NFTs to another wallet can be particularly useful for airdrops, giveaways, or distributing NFTs to multiple recipients. This guide will walk you through the process of minting NFTs from a Candy Machine to a different wallet address. It is important to note that the person initiating the minting process will bear the minting cost. Therefore, it is often more cost-effective to have the recipient claim the NFT themselves.
 
 {% callout type="note" title="Important Consideration" %}
-- Minting to another wallet can be expensive. You might want to consider using a claim mechanic instead.
+- Minting to another wallet can be expensive. You might want to consider using a claim mechanic instead, e.g. using [allowlist](/candy-machine/guards/allow-list) or the [NFT Gate](/candy-machine/guards/nft-gate) Guard. 
 - There are different tools available for Candy Machines with or without guards. Minting without guards is generally easier.
 {% /callout %}
 
 There are two approaches described in this guide:
-1. Mint using [sugar CLI](#using-sugar-cli)
+1. Mint using [Sugar CLI](#using-sugar-cli). No Coding required!
 2. Mint using [Javascript](#using-typescript-and-mpl-candy-machine)
 
 ## Using Sugar CLI
 The Sugar CLI provides two main commands for minting NFTs to other wallets:
 1. `sugar mint` to mint to *one* specific wallet
 2. `sugar airdrop` to mint to *multiple* wallets 
+
+Prerequisite to allow minting through sugar is to have your Candy Machine created **without guard attached**. To create a Candy Machine with sugar you can follow the first steps of [this](https://developers.metaplex.com/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine) Guide. If your Candy Machine has guards attached they can be removed using `sugar guard remove`.
 
 ### Single Recipient Minting with `sugar mint`
 To mint NFTs to a single recipient wallet, use the `sugar mint` command with these parameters:
@@ -70,9 +75,9 @@ To execute this airdrop the following command can be used
 sugar airdrop --candy-machine 11111111111111111111111111111111
 ```
 
-## Using Typescript and `mpl-candy-machine`
+## Using Typescript and `@metaplex-foundation/mpl-candy-machine`
 
-In this section the code Snippets for mint functions in Javascript are shown. Both examples also include a full code snippet where a candy machine is created and afterwards a single NFT is minted. To implement a full blown airdrop script one needs to implement loops and error handling around the mint function.
+In this section the code Snippets for mint functions in Javascript are shown. Both examples also include a full code snippet where a candy machine is created and afterwards a single NFT is minted to a specific wallet. To implement a full blown airdrop script one needs to implement loops and error handling around the mint function.
 
 When minting to another wallet using Typescript, there are two main approaches depending on whether your Candy Machine uses guards:
 
@@ -267,7 +272,7 @@ const RPC_ENDPOINT = "https://devnet.helius-rpc.com/?api-key=0aa5bfbe-0077-4414-
 {% /totem %}
 
 ### Mint with Guards
-For Candy Machines with guards, use `mintV2`. In this case, you'll need to first create the Token Account and Associated Token Account for the recipient using `createMintWithAssociatedToken`. This allows the recipient to receive the NFT without having to sign the transaction.
+For Candy Machines with guards `mintV2` can be used. In this case, you'll need to first create the Token Account and Associated Token Account for the recipient using `createMintWithAssociatedToken`. This allows the recipient to receive the NFT without having to sign the transaction.
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -459,5 +464,5 @@ const RPC_ENDPOINT = "ENDPOINT";
   }
 })();
 ```
-{% /totem-accordion  %}
-{% /totem %
+{% /totem-accordion %}
+{% /totem %}
