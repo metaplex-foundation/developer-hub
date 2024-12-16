@@ -1,5 +1,5 @@
 ---
-title: Updating The Core Candy Machine
+title: Updating a Candy Machine
 metaTitle: Update a Core Candy Machine | Core Candy Machine
 description: Learn how to update your Core Candy Machine and it's various settings.
 ---

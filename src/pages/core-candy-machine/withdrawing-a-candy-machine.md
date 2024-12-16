@@ -12,6 +12,8 @@ Withdrawing a Candy Machine means deleting all its onchain data and retrieving t
 
 **Note**: Note: This process applies to all types of Candy Machines (with Config Line Settings, Hidden Settings, and Guards). However, if your Candy Machine has an associated Candy Guard, this instruction will not withdraw the rent from that as well. To learn how to withdraw a Candy Guard, refer to this [paragraph]().
 
+Here is an example of how to withdraw a Core Candy Machine:
+
 {% dialect-switcher title="Withdraw a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
