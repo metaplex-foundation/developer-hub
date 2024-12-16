@@ -1,9 +1,17 @@
 import { Select } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
-import { act, useState } from 'react'
+import { useState } from 'react'
 
-const endPoints = {
+export const endpoints = {
+  solanaMainnet: {
+    name: 'Solana Mainnet',
+    uri: 'https://aura-mainnet.metaplex.com',
+  },
+  solanaDevnet: {
+    name: 'Solana Devnet',
+    uri: 'https://aura-devnet.metaplex.com',
+  },
   eclipseAuraMainnet: {
     name: 'Eclipse Mainnet',
     uri: 'https://aura-eclipse-mainnet.metaplex.com',
@@ -23,21 +31,20 @@ const EndPointSelector = ({ setActiveEndpoint, activeEndpoint }) => {
   // read endpoint from local storage
 
   const handleSelectEndpoint = (e) => {
-    console.log(e.target.name)
+
     if (e.target.name === 'selectEndPoint') {
       if (e.target.value === 'custom') {
         setIsCustom(true)
         const endpoint = localStorage.getItem('customEndPoint') || ''
-        console.log(endpoint)
+
         setActiveEndpoint(endpoint)
         setCustomEndPoint(endpoint)
       } else {
         setIsCustom(false)
-        setActiveEndpoint(e.target.value)
+        setActiveEndpoint(endpoints[e.target.value].uri)
       }
     }
     if (e.target.name === 'customEndPoint') {
-      console.log(e.target.value)
       setActiveEndpoint(e.target.value)
       setCustomEndPoint(e.target.value)
     }
@@ -55,16 +62,16 @@ const EndPointSelector = ({ setActiveEndpoint, activeEndpoint }) => {
         <Select
           id="endPoint"
           name="selectEndPoint"
-        className={clsx(
-                      'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
-                      'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
-                      // Make the text of each option black on Windows
-                      '*:text-black dark:text-white'
-                    )}
+          className={clsx(
+            'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
+            'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
+            // Make the text of each option black on Windows
+            '*:text-black dark:text-white'
+          )}
           onChange={(e) => handleSelectEndpoint(e)}
         >
-          {Object.entries(endPoints).map(([key, value]) => (
-            <option key={key} value={value.uri}>
+          {Object.entries(endpoints).map(([key, value]) => (
+            <option key={key} value={key}>
               {value.name}
             </option>
           ))}
@@ -74,19 +81,19 @@ const EndPointSelector = ({ setActiveEndpoint, activeEndpoint }) => {
           aria-hidden="true"
         />
       </div>
-    
-        <input
-          type="text"
-          name="customEndPoint"
-          placeholder="https://"
-          className="block w-full rounded-lg border border-gray-200 px-2 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500"
-          onChange={(e) => {
-            handleSelectEndpoint(e)
-            localStorage.setItem('customEndPoint', e.target.value)
-          }}
-          disabled={!isCustom}
-          value={isCustom ? customEndPoint : activeEndpoint}
-        />
+
+      <input
+        type="text"
+        name="customEndPoint"
+        placeholder="https://"
+        className="block w-full rounded-lg border border-gray-200 px-2 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500"
+        onChange={(e) => {
+          handleSelectEndpoint(e)
+          localStorage.setItem('customEndPoint', e.target.value)
+        }}
+        disabled={!isCustom}
+        value={isCustom ? customEndPoint : activeEndpoint}
+      />
     </div>
   )
 }

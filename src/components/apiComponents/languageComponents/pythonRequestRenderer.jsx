@@ -35,7 +35,6 @@ url = "${url}"
 
 headers = {
     "Content-Type": "application/json",
-    ${headersCode}
 }
 
 data = {

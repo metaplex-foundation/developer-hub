@@ -198,7 +198,6 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
 }
 
 const ApiParameterDisplay = ({ params, setParam, body }) => {
-  console.log(body)
 
   return (
     <div className="flex w-full flex-col gap-4 rounded-xl border border-gray-200 bg-white py-4 pb-0 dark:border-neutral-700/50 dark:bg-neutral-800/50">

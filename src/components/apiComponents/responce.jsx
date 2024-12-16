@@ -1,7 +1,6 @@
 import { Fence } from '../Fence'
 
 const Responce = ({ responce }) => {
-  console.log(responce)
   return (
     <div className="flex flex-col w-full overflow-hidden">
       <div className='-mb-3'>Response</div>

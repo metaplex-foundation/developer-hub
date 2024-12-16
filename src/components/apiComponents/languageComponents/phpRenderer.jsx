@@ -1,30 +1,37 @@
-import { Fence } from '@/components/Fence';
+import { Fence } from '@/components/Fence'
 
-const PhpRequestRenderer = ({ url, headers, bodyMethod, rpcVersion, bodyParams, id }) => {
-  const httpBody = bodyParams;
+const PhpRequestRenderer = ({
+  url,
+  headers,
+  bodyMethod,
+  rpcVersion,
+  bodyParams,
+  id,
+}) => {
+  const httpBody = bodyParams
 
   // Handle default values for `rpcVersion` and `id`
-  const rpcVersionValue = rpcVersion || '2.0';
-  const idValue = id || 1;
+  const rpcVersionValue = rpcVersion || '2.0'
+  const idValue = id || 1
 
   // Convert httpBody to a PHP-compatible format
   const formatParamsForPhp = (params) => {
     if (Array.isArray(params)) {
-      return `[${params.map(item => `'${item}'`).join(', ')}]`; // Correct array formatting for PHP
+      return `[${params.map((item) => `'${item}'`).join(', ')}]` // Correct array formatting for PHP
     }
     if (typeof params === 'object') {
       return `[${Object.entries(params)
         .map(([key, value]) => `'${key}' => '${value}'`)
-        .join(', ')}]`; // Use PHP array syntax for key-value pairs
+        .join(', ')}]` // Use PHP array syntax for key-value pairs
     }
-    return `'${params}'`;
-  };
+    return `'${params}'`
+  }
 
-  const formattedParams = formatParamsForPhp(httpBody);
+  const formattedParams = formatParamsForPhp(httpBody)
 
   const headersCode = Object.entries(headers)
     .map(([key, value]) => `"${key}: ${value}"`)
-    .join(",\n    ");
+    .join(',\n    ')
 
   const code = `
 <?php
@@ -46,7 +53,6 @@ curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Content-Type: application/json",
-    ${headersCode}
 ]);
 
 // Execute cURL request
@@ -63,13 +69,13 @@ if ($response === false) {
 curl_close($ch);
 
 ?>
-`;
+`
 
   return (
     <Fence className="w-full" language="php">
       {code}
     </Fence>
-  );
-};
+  )
+}
 
-export default PhpRequestRenderer;
+export default PhpRequestRenderer

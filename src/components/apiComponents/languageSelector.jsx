@@ -6,10 +6,10 @@ const languages = [
   { name: 'python', icon: 'PythonIcon' },
   { name: 'php', icon: 'PhpIcon' },
   { name: 'go', icon: 'GoIcon' },
-  { name: 'ruby', icon: 'RubyIcon' },
+  // { name: 'ruby', icon: 'RubyIcon' },
   // { name: 'kotlin', icon: 'KotlinIcon' },
   { name: 'java', icon: 'JavaIcon' },
-  { name: 'swift', icon: 'SwiftIcon' },
+  // { name: 'swift', icon: 'SwiftIcon' },
   { name: 'rust', icon: 'RustIcon' },
   { name: 'csharp', icon: 'CSharpIcon' },
 ]

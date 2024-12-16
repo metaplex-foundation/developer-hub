@@ -6,6 +6,7 @@ import { Fence } from '../Fence'
 import Spinner from '../icons/spinner'
 import { Totem, TotemAccordion } from '../Totem'
 import ApiParameterDisplay from './apiParams'
+import { endPoints } from './endPointSelector'
 import ApiExampleSelector from './exampleSelector'
 import LanguageRenderer from './languageRenderer'
 import Responce from './responce'
@@ -18,14 +19,14 @@ const ApiComponentWrapper = (args) => {
   const [isLoading, setIsLoading] = useState(false)
   const [selectedExample, setSelectedExample] = useState(-1)
   const [activeEndpoint, setActiveEndpoint] = useState(
-    'https://aura-eclipse-mainnet.metaplex.com'
+    'https://aura-mainnet.metaplex.com'
   )
 
   const handleSetExample = (index) => {
-    console.log(index)
+
+
 
     if (index == -1) {
-      console.log('clear')
 
       setBody((prev) => {
         let newBody = { ...prev }
