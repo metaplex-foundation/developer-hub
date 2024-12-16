@@ -1,14 +1,16 @@
 ---
-title: Withdrawing a Core Candy Machine
+title: Withdrawing a Candy Machine
 metaTitle: Withdrawing a Core Candy Machine | Core Candy Machine
 description: How to withdraw a Core Candy Machine and claim back rent from it.
 ---
 
-The withdrawing of a Core Candy Machine returns all the on chain storage rent cost of the Candy Machine while subsequently deleting the data and making the Candy Machine unusable.
+**Note**: This is an **IRREVERSIBLE** action. Since there is no way to reinstate/recover a Candy Machine after this action, you should look at withdrawing from the Candy Machine only if the minting process is 100% done.  
 
-{% callout %}
-This operation is irreversible so only withdraw your Core Candy Machine when you are 100% finished with the minting process. Your Core Candy Machine can not be reinstated or recovered.
-{% /callout %}
+## Withdrawing a Candy Machine
+
+Withdrawing a Candy Machine means deleting all its onchain data and retrieving the rent cost making the account effectively unusable. 
+
+**Note**: Note: This process applies to all types of Candy Machines (with Config Line Settings, Hidden Settings, and Guards). However, if your Candy Machine has an associated Candy Guard, this instruction will not withdraw the rent from that as well. To learn how to withdraw a Candy Guard, refer to this [paragraph]().
 
 {% dialect-switcher title="Withdraw a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}

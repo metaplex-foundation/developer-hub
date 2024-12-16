@@ -1,12 +1,16 @@
 ---
-title: Minting
+title: Minting Assets from a Candy Machine
 metaTitle: Minting | Core Candy Machine
 description: How to mint from a Core Candy Machine allowing users to purchase your Core NFT Assets.
 ---
 
-So far, we’ve learned how to create and maintain Candy Machines. We’ve seen how to configure them and how to set up complex minting workflows using guard and guard groups. It’s about time we talk about the last piece of the puzzle: Minting! {% .lead %}
+**Note**: Minting can only begin after all assets have been loaded into the Candy Machine. If you missed this step, refer to [Loading Items in the Candy Machine](/core-candy-machine/insert-items)
 
-## Basic Minting
+## Minting Assets from a Candy Machine
+
+There are different way to mint Assets from the Candy Machine: 
+- From the Candy Machine Program: only the authority can mint from it and, therefore, it will need to sign the transaction
+- From the Candy Guard Program: 
 
 As mentioned [in the Candy Guards page](/core-candy-machine/guards#why-another-program), there are two programs responsible for minting NFTs from Candy Machines: The Candy Machine Core program — responsible for minting the NFT — and the Candy Guard program which adds a configurable Access Control layer on top of it and can be forked to offer custom guards.
 

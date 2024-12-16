@@ -4,7 +4,7 @@ metaTitle: Update a Core Candy Machine | Core Candy Machine
 description: Learn how to update your Core Candy Machine and it's various settings.
 ---
 
-If the `isMutable` field was set to true when creating the Candy Machine, some data within the Candy Machine can be updated using the `updateCandyMachine()` function.
+## Updating the Data
 
 Below is a breakdown of the arguments in the data structure that can be modified:
 
@@ -44,11 +44,37 @@ await updateCandyMachine(umi, {
 
 ## Updating the Authority
 
-To update the authority of the Candy Machine to a new address, use the `setMintAuthority()` function and pass the new address in the `mintAuthority` field.
+To update the authority of the Candy Machine to a new address, use the `setCandyMachineAuthority()` function and pass the new address in the `newAuthority` field.
 
 Here's an example of how to update the authority of a Candy Machine:
 
 {% dialect-switcher title="Update Authority of Core Candy Machine" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { setMintAuthority } from '@metaplex-foundation/mpl-core-candy-machine'
+
+const candyMachine = publicKey('11111111111111111111111111111111')
+const newAuthority = publicKey('22222222222222222222222222222222')
+
+await setMintAuthority(umi, {
+  candyMachine,
+  mintAuthority: newAuthority,
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Updating the Mint Authority
+
+To update the mint authority of the Candy Machine to a new address, use the `setMintAuthority()` function and pass the new address in the `mintAuthority` field.
+
+**Note**: If the Candy Machine has any guards, the `mintAuthority` field will be assigned to that account. By changing the mintAuthority, you're `disabling` the Candy Guard mechanism.
+
+Here's an example of how to update the mint authority of a Candy Machine:
+
+{% dialect-switcher title="Update Mint Authority of Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts

@@ -1,5 +1,5 @@
 ---
-title: Loading Items
+title: Loading Items in the Candy Machine
 metaTitle: Loading Items | Core Candy Machine
 description: How to load Core NFT Assets into a Core Candy Machine.
 ---
