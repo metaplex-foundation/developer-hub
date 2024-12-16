@@ -32,7 +32,7 @@ Minting NFTs to another wallet can be particularly useful for airdrops, giveaway
 
 There are two approaches described in this guide:
 1. Mint using [Sugar CLI](#using-sugar-cli). No Coding required!
-2. Mint using [Javascript](#using-typescript-and-mpl-candy-machine)
+2. Mint using [Javascript](#using-typescript-and-metaplex-foundation-mpl-candy-machine)
 
 ## Using Sugar CLI
 The Sugar CLI provides two main commands for minting NFTs to other wallets:
