@@ -66,7 +66,7 @@ To mint NFTs to multiple wallets in a single command `sugar airdrop` can be used
 }
 ```
 
-By default sugar expects this file to be called `airdrop_list.json`. This default name can be changed with 
+By default sugar expects this file to be called `airdrop_list.json` but if if you wish to use a file of which has a different file name you can pass the file name in using
 `--airdrop-list`.
 
 **Example**:
