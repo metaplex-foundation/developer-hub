@@ -49,7 +49,7 @@ To mint NFTs to a single recipient wallet, use the `sugar mint` command with the
 
 **Example**:
 
-To mint 3 NFT to wallet Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV one would call:
+To mint 3 NFTs to the wallet `Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV` one would call:
 
 ```sh
 sugar mint --receiver Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV -n 3 --candy-machine 11111111111111111111111111111111
