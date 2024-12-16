@@ -77,7 +77,7 @@ sugar airdrop --candy-machine 11111111111111111111111111111111
 
 ## Using Typescript and `@metaplex-foundation/mpl-candy-machine`
 
-In this section the code Snippets for mint functions in Javascript are shown. Both examples also include a full code snippet where a candy machine is created and afterwards a single NFT is minted to a specific wallet. To implement a full blown airdrop script one needs to implement loops and error handling around the mint function.
+In this section the code Snippets for the mint functions in Javascript are shown. Both examples also include a full code snippet where a Candy Machine is created and afterwards a single NFT is minted to a specific wallet. To implement a full blown airdrop script one needs to implement loops and error handling around the mint function.
 
 When minting to another wallet using Typescript, there are two main approaches depending on whether your Candy Machine uses guards:
 
