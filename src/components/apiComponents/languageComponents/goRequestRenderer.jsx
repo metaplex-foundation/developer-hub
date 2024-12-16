@@ -34,7 +34,9 @@ const GoRequestRenderer = ({
 import (
   "bytes"
   "fmt"
+  "io/ioutil"
   "net/http"
+  "time"
 )
 
 func main() {
@@ -47,22 +49,45 @@ ${headersCode}
 
   req, err := http.NewRequest("POST", url, data)
   if err != nil {
-    fmt.Println(err)
+    fmt.Printf("Error creating request: %v\\n", err)
+    return
   }
 
   for key, value := range headers {
     req.Header.Set(key, value)
   }
 
-  client := &http.Client{}
-  resp, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
+  // Create an HTTP client with a timeout
+  client := &http.Client{
+    Timeout: 10 * time.Second,
   }
 
-  defer resp.Body.Close()
+  // Send the request
+  resp, err := client.Do(req)
+  if err != nil {
+    fmt.Printf("Error making request to %s: %v\\n", url, err)
+    return
+  }
 
-  fmt.Println(resp.Status)
+  // Ensure response body is closed
+  defer func() {
+    if resp != nil && resp.Body != nil {
+      resp.Body.Close()
+    }
+  }()
+
+  // Print the status code
+  fmt.Println("Status:", resp.Status)
+
+  // Read the response body
+  body, err := ioutil.ReadAll(resp.Body)
+  if err != nil {
+    fmt.Printf("Error reading response body: %v\\n", err)
+    return
+  }
+
+  // Print the response body
+  fmt.Println("Response Body:", string(body))
 }
 `
 

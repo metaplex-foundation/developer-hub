@@ -31,10 +31,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         params: serde_json::json!(${JSON.stringify(httpBody)}),
     };
 
-    let mut request = client.post(url)
+    let request = client.post(url)
         .header(CONTENT_TYPE, "application/json");
-
-    ${headersCode}
 
     let response = request.json(&request_body).send()?;
 

@@ -99,7 +99,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             <CSharpRequestRenderer
               method={api.method}
               url={activeEndPoint}
-              headers={headers}
+              // headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
             />
@@ -137,21 +137,21 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             />
           </div>
         )
-      case 'kotlin':
-        return (
-          <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
-              {strToTitleCase(activeLanguage)} Request Example
-            </div>
-            <KotlinRenderer
-              method={api.method}
-              url={activeEndPoint}
-              headers={headers}
-              bodyMethod={body.method}
-              bodyParams={body.params}
-            />
-          </div>
-        )
+      // case 'kotlin':
+      //   return (
+      //     <div className="flex flex-col">
+      //       <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+      //         {strToTitleCase(activeLanguage)} Request Example
+      //       </div>
+      //       <KotlinRenderer
+      //         method={api.method}
+      //         url={activeEndPoint}
+      //         headers={headers}
+      //         bodyMethod={body.method}
+      //         bodyParams={body.params}
+      //       />
+      //     </div>
+      //   )
       case 'ruby':
         return (
           <div className="flex flex-col">
@@ -204,6 +204,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
     <div className="flex w-full flex-col gap-8 overflow-hidden">
       <EndPointSelector
         setActiveEndpoint={(endpoint) => setActiveEndPoint(endpoint)}
+        activeEndpoint={activeEndPoint}
       />
       <LanguageSelector
         activeLanguage={activeLanguage}

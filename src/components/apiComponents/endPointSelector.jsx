@@ -16,7 +16,7 @@ const endPoints = {
   },
 }
 
-const EndPointSelector = ({ setActiveEndpoint }) => {
+const EndPointSelector = ({ setActiveEndpoint, activeEndpoint }) => {
   const [isCustom, setIsCustom] = useState(false)
   const [customEndPoint, setCustomEndPoint] = useState('')
 
@@ -49,7 +49,7 @@ const EndPointSelector = ({ setActiveEndpoint }) => {
         className="text-sm font-medium text-gray-800 dark:text-neutral-400"
         htmlFor="endPoint"
       >
-        End Point
+        Endpoint
       </label>
       <div className="relative flex h-12 w-full">
         <Select
@@ -74,7 +74,7 @@ const EndPointSelector = ({ setActiveEndpoint }) => {
           aria-hidden="true"
         />
       </div>
-      {isCustom && (
+    
         <input
           type="text"
           name="customEndPoint"
@@ -84,9 +84,9 @@ const EndPointSelector = ({ setActiveEndpoint }) => {
             handleSelectEndpoint(e)
             localStorage.setItem('customEndPoint', e.target.value)
           }}
-          value={customEndPoint}
+          disabled={!isCustom}
+          value={isCustom ? customEndPoint : activeEndpoint}
         />
-      )}
     </div>
   )
 }

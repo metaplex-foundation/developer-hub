@@ -27,9 +27,11 @@ const JavaRequestRenderer = ({
     .join('\n')
 
   // Format the JSON body correctly for the Java code with proper indentation
-  const jsonBody = JSON.stringify(object.body, null, 2) // 4-space indentation for JSON
+  const jsonBody = JSON.stringify(object.body, null, 2)
 
-  const code = `import java.io.OutputStream;
+  const code = `import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -64,7 +66,19 @@ public class Main {
             int responseCode = con.getResponseCode();
             System.out.println("Response Code: " + responseCode);
 
+            // Read the response body
+            try (BufferedReader br = new BufferedReader(
+                    new InputStreamReader(con.getInputStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Response Body: " + response.toString());
+            }
+
         } catch (Exception e) {
+            System.err.println("Error occurred while making the request:");
             e.printStackTrace();
         }
     }

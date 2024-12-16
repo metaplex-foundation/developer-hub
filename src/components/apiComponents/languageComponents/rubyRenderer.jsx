@@ -4,7 +4,7 @@ const RubyRequestRenderer = ({ url, headers, bodyMethod, rpcVersion, bodyParams,
   const httpBody = bodyParams;
 
   const headersCode = Object.entries(headers)
-    .map(([key, value]) => `    req["${key}"] = "${value}"`)
+    .map(([key, value]) => `    request["${key}"] = "${value}"`)
     .join("\n");
 
   const code = `
@@ -12,7 +12,10 @@ require 'net/http'
 require 'json'
 require 'uri'
 
+# Parse the URL
 uri = URI.parse("${url}")
+uri.path = uri.path.empty? ? "/" : uri.path  # Ensure the path is not empty
+
 http = Net::HTTP.new(uri.host, uri.port)
 
 # Prepare the request body

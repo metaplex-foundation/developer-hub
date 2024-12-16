@@ -3,30 +3,38 @@ import { Fence } from '@/components/Fence';
 const PhpRequestRenderer = ({ url, headers, bodyMethod, rpcVersion, bodyParams, id }) => {
   const httpBody = bodyParams;
 
-  const object = {
-    method: 'POST',
-    headers: headers,
-    body: {
-      jsonrpc: rpcVersion ? rpcVersion : '2.0',
-      id: id ? id : 1,
-      method: bodyMethod,
-      params: httpBody,
-    },
+  // Handle default values for `rpcVersion` and `id`
+  const rpcVersionValue = rpcVersion || '2.0';
+  const idValue = id || 1;
+
+  // Convert httpBody to a PHP-compatible format
+  const formatParamsForPhp = (params) => {
+    if (Array.isArray(params)) {
+      return `[${params.map(item => `'${item}'`).join(', ')}]`; // Correct array formatting for PHP
+    }
+    if (typeof params === 'object') {
+      return `[${Object.entries(params)
+        .map(([key, value]) => `'${key}' => '${value}'`)
+        .join(', ')}]`; // Use PHP array syntax for key-value pairs
+    }
+    return `'${params}'`;
   };
 
+  const formattedParams = formatParamsForPhp(httpBody);
+
   const headersCode = Object.entries(headers)
-    .map(([key, value]) => `"${key}" => "${value}"`)
-    .join(",\n        ");
+    .map(([key, value]) => `"${key}: ${value}"`)
+    .join(",\n    ");
 
   const code = `
 <?php
 
 $url = "${url}";
 $data = [
-    "jsonrpc" => "${rpcVersion ? rpcVersion : '2.0'}",
-    "id" => ${id ? id : 1},
+    "jsonrpc" => "${rpcVersionValue}",
+    "id" => ${idValue},
     "method" => "${bodyMethod}",
-    "params" => ${JSON.stringify(httpBody, null, 2).replace(/\n/g, '\n    ')}
+    "params" => ${formattedParams}
 ];
 
 // Initialize cURL session
@@ -35,7 +43,7 @@ $ch = curl_init($url);
 // Set cURL options
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Content-Type: application/json",
     ${headersCode}
@@ -45,7 +53,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 $response = curl_exec($ch);
 
 // Check for errors
-if($response === false) {
+if ($response === false) {
     echo "cURL Error: " . curl_error($ch);
 } else {
     echo "Response: " . $response;

@@ -32,11 +32,16 @@ request.httpBody = jsonData
 
 let task = URLSession.shared.dataTask(with: request) { data, response, error in
     if let error = error {
-        print("Error: \(error)")
+        print("Error: \(error.localizedDescription)")
         return
     }
+
+    if let response = response as? HTTPURLResponse {
+        print("Response Status Code: \(response.statusCode)")
+    }
+
     if let data = data, let responseString = String(data: data, encoding: .utf8) {
-        print("Response: \(responseString)")
+        print("Response Body: \(responseString)")
     }
 }
 
