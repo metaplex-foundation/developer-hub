@@ -5,10 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Search } from '@/components/Search'
 import { ThemeSelector } from '@/components/ThemeSelector'
-import {
-  categoryToColor,
-  IconWithName,
-} from '@/components/products/IconWithName'
+import { categoryToColor, IconWithName } from '@/components/products/IconWithName'
 import { Sections } from '@/components/products/Sections'
 import { SwitcherDialog } from '@/components/products/SwitcherDialog'
 import NavList from './NavList'
