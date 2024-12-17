@@ -94,7 +94,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
       content = (
         <div className="relative flex h-10 w-full">
         <Select
-          onChange={(e) => setParam(path, e.target.value)}
+          onChange={(e) => setParam(path, e.target.value === 'true' ? true : false)}
           className={clsx(
             'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
             'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
