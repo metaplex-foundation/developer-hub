@@ -119,6 +119,7 @@ export const candyMachine = {
         {
           title: 'Candy Machine Guides',
           links: [
+            { title: 'Mint NFTs to Another Wallet - Airdrop example', href: '/candy-machine/guides/airdrop-mint-to-another-wallet' },
             { title: 'Create an NFT Collection on Solana with Candy Machine', href: '/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine' }
           ],
         },
