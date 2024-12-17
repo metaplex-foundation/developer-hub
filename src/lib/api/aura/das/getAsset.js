@@ -14,7 +14,7 @@ const getAsset = {
     {
       name: 'Galactic Geckos EP 1 #985 (Core Asset)',
       description: 'Get an asset by its ID',
-      chain: 'solana-mainnet',
+      chain: 'solanaMainnet',
       body: {
         params: {
           id: '5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa',
@@ -24,7 +24,7 @@ const getAsset = {
     {
       name: 'Saga Monkes #6233 (cNFT)',
       description: 'Get an asset by its ID',
-      chain: 'solana-mainnet',
+      chain: 'solanaMainnet',
       body: {
         params: {
           id: 'H6GDZujkpEcxbpDgEbSbNFxNtSi3RBJPJC5GZCvzagaP',
@@ -34,7 +34,7 @@ const getAsset = {
     {
       name: 'Madlad #4221 (pNFT)',
       description: 'Get an asset by its ID',
-      chain: 'solana-mainnet',
+      chain: 'solanaMainnet',
       body: {
         params: {
           id: 'G3nEdTzAvPvSuj2Z5oSSiMN42NayQDZvkC3usMrnGaTi',
@@ -45,7 +45,7 @@ const getAsset = {
     {
       name: 'THUG #2926 (NFT)',
       description: 'Get an asset by its ID',
-      chain: 'solana-mainnet',
+      chain: 'solanaMainnet',
       body: {
         params: {
           id: 'EvGJtxZAjxYGwYDtHprvApfLTx44PxsSCtWq3uVmfboy',

@@ -6,7 +6,7 @@ import { Fence } from '../Fence'
 import Spinner from '../icons/spinner'
 import { Totem, TotemAccordion } from '../Totem'
 import ApiParameterDisplay from './apiParams'
-import { endPoints } from './endPointSelector'
+import { endpoints } from './endPointSelector'
 import ApiExampleSelector from './exampleSelector'
 import LanguageRenderer from './languageRenderer'
 import Responce from './responce'
@@ -18,16 +18,10 @@ const ApiComponentWrapper = (args) => {
   const [responce, setResponce] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [selectedExample, setSelectedExample] = useState(-1)
-  const [activeEndpoint, setActiveEndpoint] = useState(
-    'https://aura-mainnet.metaplex.com'
-  )
+  const [activeEndpoint, setActiveEndpoint] = useState(endpoints.solanaMainnet)
 
   const handleSetExample = (index) => {
-
-
-
     if (index == -1) {
-
       setBody((prev) => {
         let newBody = { ...prev }
         newBody.params = {}
@@ -44,6 +38,11 @@ const ApiComponentWrapper = (args) => {
     })
 
     setSelectedExample(index)
+    if (activeEndpoint.name !== 'Custom') {
+      console.log(activeEndpoint)
+      console.log(api.examples[index])
+      setActiveEndpoint(endpoints[api.examples[index].chain])
+    }
   }
 
   const [body, setBody] = useState({
@@ -121,7 +120,7 @@ const ApiComponentWrapper = (args) => {
     setResponce(null)
     setIsLoading(true)
 
-    const res = await fetch(activeEndpoint, {
+    const res = await fetch(activeEndpoint.uri, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

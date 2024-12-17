@@ -7,19 +7,22 @@ export const endpoints = {
   solanaMainnet: {
     name: 'Solana Mainnet',
     uri: 'https://aura-mainnet.metaplex.com',
+    value: 'solanaMainnet',
   },
   solanaDevnet: {
     name: 'Solana Devnet',
     uri: 'https://aura-devnet.metaplex.com',
+    value: 'solanaDevnet',
   },
   eclipseAuraMainnet: {
     name: 'Eclipse Mainnet',
     uri: 'https://aura-eclipse-mainnet.metaplex.com',
     value: 'eclipseAuraMainnet',
+    value: 'eclipseAuraMainnet',
   },
   custom: {
     name: 'Custom',
-    uri: 'custom',
+    uri: '',
     value: 'custom',
   },
 }
@@ -37,15 +40,21 @@ const EndPointSelector = ({ setActiveEndpoint, activeEndpoint }) => {
         setIsCustom(true)
         const endpoint = localStorage.getItem('customEndPoint') || ''
 
-        setActiveEndpoint(endpoint)
+        setActiveEndpoint({
+          name: 'Custom',
+          uri: endpoint,
+        })
         setCustomEndPoint(endpoint)
       } else {
         setIsCustom(false)
-        setActiveEndpoint(endpoints[e.target.value].uri)
+        setActiveEndpoint(endpoints[e.target.value])
       }
     }
     if (e.target.name === 'customEndPoint') {
-      setActiveEndpoint(e.target.value)
+      setActiveEndpoint({
+        name: 'Custom',
+        uri: e.target.value,
+      })
       setCustomEndPoint(e.target.value)
     }
   }
@@ -69,6 +78,7 @@ const EndPointSelector = ({ setActiveEndpoint, activeEndpoint }) => {
             '*:text-black dark:text-white'
           )}
           onChange={(e) => handleSelectEndpoint(e)}
+          value={isCustom ? 'custom' : activeEndpoint.value}
         >
           {Object.entries(endpoints).map(([key, value]) => (
             <option key={key} value={key}>
@@ -92,7 +102,7 @@ const EndPointSelector = ({ setActiveEndpoint, activeEndpoint }) => {
           localStorage.setItem('customEndPoint', e.target.value)
         }}
         disabled={!isCustom}
-        value={isCustom ? customEndPoint : activeEndpoint}
+        value={isCustom ? customEndPoint : activeEndpoint.uri}
       />
     </div>
   )

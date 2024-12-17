@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import EndPointSelector from './endPointSelector'
+import { useCallback, useState } from 'react'
+import EndPointSelector, { endpoints } from './endPointSelector'
 import CSharpRequestRenderer from './languageComponents/cSharpRenderer'
 import CurlRequestRenderer from './languageComponents/curlRequestRenderer'
 import GoRequestRenderer from './languageComponents/goRequestRenderer'
@@ -20,6 +20,8 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  console.log({activeEndPoint})
+
   const renderLanguage = (activeLanguage, activeEndpoint) => {
     const headers = api.headers
       ? api.headers
@@ -34,7 +36,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             </div>
             <JavascriptRequestRenderer
               method={api.method}
-              url={activeEndPoint}
+              url={activeEndPoint.uri}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -50,7 +52,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             </div>
             <PythonRequestRenderer
               method={api.method}
-              url={activeEndPoint}
+              url={activeEndpoint.uri}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -66,7 +68,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             </div>
             <CurlRequestRenderer
               method={api.method}
-              url={activeEndPoint}
+              url={end}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -82,7 +84,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             </div>
             <GoRequestRenderer
               method={api.method}
-              url={activeEndPoint}
+              url={activeEndpoint.uri}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -97,7 +99,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <CSharpRequestRenderer
-              method={api.method}
+              method={endpoint}
               url={activeEndPoint}
               // headers={headers}
               bodyMethod={body.method}
@@ -113,7 +115,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <JavaRenderer
-              method={api.method}
+              method={endpoint}
               url={activeEndPoint}
               headers={headers}
               bodyMethod={body.method}
@@ -130,7 +132,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             </div>
             <PhpRenderer
               method={api.method}
-              url={activeEndPoint}
+              url={activeEndpoint.uri}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -160,7 +162,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             </div>
             <RubyRenderer
               method={api.method}
-              url={activeEndPoint}
+              url={activeEndpoint.uri}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -175,7 +177,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             </div>
             <RustRequestRenderer
               method={api.method}
-              url={activeEndPoint}
+              url={activeEndpoint.uri}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -190,7 +192,7 @@ const LanguageRenderer = ({ api, body, setActiveEndPoint, activeEndPoint }) => {
             </div>
             <SwiftRequestRenderer
               method={api.method}
-              url={activeEndPoint}
+              url={activeEndpoint.uri}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}

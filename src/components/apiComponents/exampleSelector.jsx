@@ -13,7 +13,7 @@ const ApiExampleSelector = ({
         className="mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400"
         htmlFor="endPoint"
       >
-        Loaded Example
+        Example Queries
       </label>
       <div className="relative flex w-full gap-2">
         <div className="relative flex h-12 w-full">
