@@ -93,19 +93,21 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
     case 'boolean':
       content = (
         <div className="relative flex h-10 w-full">
-        <Select
-          onChange={(e) => setParam(path, e.target.value === 'true' ? true : false)}
-          className={clsx(
-            'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
-            'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
-            '*:text-black dark:text-white'
-          )}
-        >
-          {!param.required && <option value={''} />}
-          <option value="true">true</option>
-          <option value="false">false</option>
-        </Select>
-        <ChevronDownIcon
+          <Select
+            onChange={(e) =>
+              setParam(path, e.target.value === 'true' ? true : false)
+            }
+            className={clsx(
+              'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
+              'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
+              '*:text-black dark:text-white'
+            )}
+          >
+            {!param.required && <option value={''} />}
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </Select>
+          <ChevronDownIcon
             className="group pointer-events-none absolute right-2.5 top-3 my-auto size-4 fill-black/60 dark:fill-white"
             aria-hidden="true"
           />
@@ -198,7 +200,6 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
 }
 
 const ApiParameterDisplay = ({ params, setParam, body }) => {
-
   return (
     <div className="flex w-full flex-col gap-4 rounded-xl border border-gray-200 bg-white py-4 pb-0 dark:border-neutral-700/50 dark:bg-neutral-800/50">
       <div className="px-3 text-xs font-semibold uppercase text-gray-500 dark:text-neutral-300">
