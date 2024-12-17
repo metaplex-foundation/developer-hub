@@ -62,7 +62,7 @@ Both of these images are used to save fetching the collection and token Metadata
 
 ### Change RPC
 
-You are free to set up the RPC url into your project as you wish either via:
+You can configure the RPC URL for your project in any way you prefer, using one of the following methods:
 
 - .env
 - constants.ts file
