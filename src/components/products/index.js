@@ -1,4 +1,4 @@
-import { amman } from './amman'
+import { amman, amman } from './amman'
 import { aura } from './aura'
 import { bubblegum } from './bubblegum'
 import { candyMachine } from './candyMachine'
