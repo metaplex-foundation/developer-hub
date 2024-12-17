@@ -40,6 +40,7 @@ const getSignaturesForAsset = {
     {
       name: 'Fetch signatures of Saga Monkes #6233 (cNFT)',
       description: 'Fetch the signatures associated with an asset by its ID',
+      chain: "solanaMainnet",
       body: {
         params: {
           id: 'H6GDZujkpEcxbpDgEbSbNFxNtSi3RBJPJC5GZCvzagaP',
