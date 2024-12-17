@@ -78,7 +78,7 @@ export function Header({ page }) {
           <ThemeSelector className="relative z-10" />
           <Link
             href={page.product.github}
-            className="group"
+            className="group hidden sm:block"
             aria-label="GitHub"
             target="_blank"
           >
@@ -86,7 +86,7 @@ export function Header({ page }) {
           </Link>
           <Link
             href={'https://discord.com/invite/metaplex'}
-            className="group"
+            className="group hidden sm:block"
             aria-label="Discord"
             target="_blank"
           >
@@ -94,7 +94,7 @@ export function Header({ page }) {
           </Link>
           <Link
             href={'https://x.com/metaplex'}
-            className="group"
+            className="group hidden sm:block"
             aria-label="X"
             target="_blank"
           >
