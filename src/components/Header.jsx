@@ -1,16 +1,14 @@
-import React from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Search } from '@/components/Search'
 import { ThemeSelector } from '@/components/ThemeSelector'
+import { categoryToColor, IconWithName } from '@/components/products/IconWithName'
 import { Sections } from '@/components/products/Sections'
 import { SwitcherDialog } from '@/components/products/SwitcherDialog'
-import { IconWithName } from '@/components/products/IconWithName'
 import NavList from './NavList'
-import { categoryToColor } from '@/components/products/IconWithName'
 import { Logo } from './products/global/Logo'
 
 export function Header({ page }) {

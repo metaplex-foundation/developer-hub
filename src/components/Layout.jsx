@@ -33,7 +33,6 @@ export function Layout({ children, page }) {
       <div
         className={clsx(
           'relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12'
-          // hasNavigation ? 'max-w-8xl' : 'max-w-6xl'
         )}
       >
         {/* Navigation. */}
