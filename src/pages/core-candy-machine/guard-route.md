@@ -1,12 +1,12 @@
 ---
-title: Special Guard Instructions
-metaTitle: Special Guard Instructions | Core Candy Machine
+title: Custom Guard Instructions
+metaTitle: Custom Guard Instructions | Core Candy Machine
 description: Explains how to execute guard-specific instructions for the Core Candy Machine.
 ---
 
-As we’ve seen on the previous pages, guards are a powerful way to customize the minting process of your Candy Machines. But did you know guards can even provide their own custom instructions? {% .lead %}
+Guards offer a powerful way to customize your Candy Machine minting process, but the `Route Guard` offer the more advanced creator an even more customizable exprience allowing for custom behaviour. 
 
-## The Route Instruction
+## The Route Guard
 
 The Core Candy Guard program ships with a special instruction called **the “Route” instruction**.
 

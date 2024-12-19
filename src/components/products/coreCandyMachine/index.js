@@ -27,7 +27,6 @@ export const coreCandyMachine = {
             {
               title: 'Getting Started',
               href: '/core-candy-machine/getting-started',
-              // Subpages: /js /rust, etc.
             },
           ],
         },
@@ -67,19 +66,19 @@ export const coreCandyMachine = {
           links: [
             {
               title: 'Overview',
-              href: '/core-candy-machine/guards/candy-guard-overview',
+              href: '/core-candy-machine/guards',
             },
             {
               title: 'Candy Groups and Phases',
-              href: '/core-candy-machine/guards/candy-guard-overview',
+              href: '/core-candy-machine/guard-groups',
             },
             {
               title: 'Custom Guards',
-              href: '/core-candy-machine/guards/candy-guard-overview',
+              href: '/core-candy-machine/guard-route',
             },
             {
               title: 'Available Candy Guards',
-              href: '/core-candy-machine/guards/candy-guard-overview',
+              href: '/core-candy-machine/guards/overview',
             },
           ],
         },
