@@ -101,28 +101,25 @@ export function MobileNavigation({ page }) {
           </Link>
           {/* {page.product.name != 'Metaplex' && (
             <> */}
-              <Link
-                href="/programs-and-tools"
-                className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
-              >
-                <ComputerDesktopIcon height={20} /> Programs and Tools
-              </Link>
-              <Link
-                href="/aura"
-                className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
-              >
-                <SparklesIcon height={20} /> Aura
-              </Link>
-            {/* </>
-          )} */}
-          {/* {page.product.name == 'Metaplex' && ( */}
-            <Link
+          <Link
+            href="/programs-and-tools"
+            className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
+          >
+            <ComputerDesktopIcon height={20} /> Programs and Tools
+          </Link>
+          <Link
+            href="/aura"
+            className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
+          >
+            <SparklesIcon height={20} /> Aura
+          </Link>
+
+          <Link
             href="/guides"
             className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
           >
             <BookOpenIcon height={20} /> Guides
           </Link>
-          {/* )} */}
 
           <div className="mt-8 text-2xl font-bold text-black dark:text-white">
             {page.product.name}
