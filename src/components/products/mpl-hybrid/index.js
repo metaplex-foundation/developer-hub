@@ -2,9 +2,9 @@ import {
   documentationSection,
   guidesSection,
   referencesSection,
-} from '@/shared/sections'
-import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
+} from '@/shared/sections';
+import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const mplHybrid = {
   name: 'MPL-Hybrid',
@@ -88,8 +88,8 @@ export const mplHybrid = {
               href: '/mpl-hybrid/guides/create-your-first-hybrid-collection',
             },
             {
-              title: 'MPL-404 Hyrbid UI Template',
-              href: '/mpl-hybrid/guides/mpl-404-hyrbid-ui-template',
+              title: 'MPL-404 Hybrid UI Template',
+              href: '/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
               created: '2024-12-16',
             },
           ],

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
 const redirectRules = {
   '/umi': {
@@ -13,6 +13,8 @@ const redirectRules = {
   '/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
       '/guides/javascript/how-to-create-a-solana-token',
+    '/mpl-hybrid/guides/mpl-404-hyrbid-ui-template':
+      '/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
   },
   '/core/guides/javascript/how-to-create-a-core-nft-asset':
     '/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript',
