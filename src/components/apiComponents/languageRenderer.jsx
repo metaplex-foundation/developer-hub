@@ -24,8 +24,6 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
       ? api.headers
       : { 'Content-Type': 'application/json' }
 
-    console.log({ activeEndpoint })
-
     switch (activeLanguage) {
       case 'javascript':
         return (

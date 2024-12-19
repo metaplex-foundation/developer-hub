@@ -39,8 +39,6 @@ const ApiComponentWrapper = (args) => {
 
     setSelectedExample(index)
     if (activeEndpoint.name !== 'Custom') {
-      console.log(activeEndpoint)
-      console.log(api.examples[index])
       setActiveEndpoint(endpoints[api.examples[index].chain])
     }
   }
@@ -129,8 +127,6 @@ const ApiComponentWrapper = (args) => {
     })
 
     const resJson = await res.json()
-
-    console.log(resJson)
 
     setResponce(resJson)
 
