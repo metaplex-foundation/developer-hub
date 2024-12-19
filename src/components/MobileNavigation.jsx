@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { Dialog } from '@headlessui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Dialog } from '@headlessui/react'
+import { useEffect, useState } from 'react'
 
 import { Navigation } from '@/components/Navigation'
 import { Sections } from '@/components/products/Sections'
-import { ComputerDesktopIcon } from '@heroicons/react/24/outline'
+import { ChevronLeftIcon, HomeIcon } from '@heroicons/react/20/solid'
 import { IconWithName } from './products/IconWithName'
 
 function MenuIcon(props) {
@@ -87,16 +87,25 @@ export function MobileNavigation({ page }) {
               <IconWithName product={page.product} />
             </Link>
           </div>
+          <Link
+                href="/"
+                className="mt-12 flex items-center gap-2 text-slate-900 dark:text-white"
+              >
+                <HomeIcon height={20} /> Home
+              </Link>
           {page.product.name != 'Metaplex' && (
             <>
               <Link
                 href="/programs-and-tools"
-                className="mt-12 flex items-center gap-2 text-slate-900 dark:text-white"
+                className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
               >
-                <ComputerDesktopIcon height={20} /> Programs and Tools
+                <ChevronLeftIcon height={20} /> Programs and Tools
               </Link>
             </>
           )}
+
+          <div className="text-black dark:text-white mt-8 text-2xl font-bold">{page.product.name}</div>
+
           {page.product.sections && page.product.sections.length > 1 && (
             <Sections
               className="-ml-2 mt-6 flex flex-col gap-2"

@@ -1,5 +1,4 @@
 import {
-  changelogSection,
   documentationSection,
   guidesSection,
   referencesSection
@@ -11,7 +10,7 @@ export const tokenMetadata = {
   name: 'Token Metadata',
   headline: 'Digital ownership standard',
   description: 'The NFT standard on Solana.',
-  navigationMenuCatergory: 'Create',
+  navigationMenuCatergory: 'MPL',
   path: 'token-metadata',
   icon: <EllipsisHorizontalCircleIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',

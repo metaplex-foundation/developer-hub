@@ -1,9 +1,8 @@
 import React from 'react'
 
 export const categoryToColor = new Map([
-  ['Create', '#BEF264'],
-  ['Commerce', '#F0ABFC'],
-  ['Utility', '#FCE04D'],
+  ['MPL', '#BEF264'],
+  ['Aura', '#F0ABFC'],
   ['Dev Tools', '#7DEDFC'],
 ])
 

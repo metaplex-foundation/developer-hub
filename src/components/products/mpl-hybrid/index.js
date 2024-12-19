@@ -10,7 +10,7 @@ export const mplHybrid = {
   name: 'MPL-Hybrid',
   headline: 'Hybrid Assets',
   description: 'Framework and on-chain protocol for hybrid assets.',
-  navigationMenuCatergory: 'Create',
+  navigationMenuCatergory: 'MPL',
   path: 'mpl-hybrid',
   icon: <ArrowsRightLeftIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-hybrid',

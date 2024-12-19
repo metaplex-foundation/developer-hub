@@ -10,6 +10,12 @@
   background-clip: text;
 }
 
+
+html {
+  overflow-y: overlay;
+  scrollbar-gutter: stable;
+}
+
 .loader {
   border: 2px solid #fff;
   border-bottom-color: #d162c2;
@@ -27,6 +33,8 @@
     transform: rotate(360deg);
   }
 }
+
+
 select::-ms-expand {
   display: none;
 }

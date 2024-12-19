@@ -1,18 +1,16 @@
 import {
-  changelogSection,
   documentationSection,
   guidesSection,
-  recipesSection,
   referencesSection
-} from '@/shared/sections';
-import { Square2StackIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
+} from '@/shared/sections'
+import { Square2StackIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const candyMachine = {
   name: 'Candy Machine',
   headline: 'TM NFT launchpad',
   description: 'Launch your next NFT collection on Solana.',
-  navigationMenuCatergory: 'Commerce',
+  navigationMenuCatergory: 'MPL',
   path: 'candy-machine',
   icon: <Square2StackIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-candy-machine',

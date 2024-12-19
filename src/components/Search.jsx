@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
+import { DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react'
 import Link from 'next/link'
 import Router from 'next/router'
-import { DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react'
+import { useCallback, useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 const docSearchConfig = {
   appId: process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID,
@@ -46,14 +46,14 @@ export function Search({iconOnly}) {
     <>
       <button
         type="button"
-        className={`flex ${iconOnly ? "": "border border-neutral-300 dark:border-neutral-800 rounded-lg p-2 max-w-4xl w-full justify-start items-center "}`}
+        className={`flex ${iconOnly ? "": "p-2 max-w-4xl w-full justify-start items-center "}`}
         onClick={onOpen}
       >
         <SearchIcon className="h-7 w-7 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 lg:group-hover:fill-slate-400" />
         
-        <span className="sr-only lg:not-sr-only lg:ml-2 lg:text-slate-500 lg:dark:text-slate-400">
+        {/* <span className="sr-only lg:not-sr-only lg:ml-2 lg:text-slate-500 lg:dark:text-slate-400">
           Search docs
-        </span>
+        </span> */}
         {/* {modifierKey && (
           <kbd className="ml-auto hidden font-medium text-slate-400 dark:text-slate-500 lg:block">
             <kbd className="font-sans">{modifierKey}</kbd>
