@@ -1,17 +1,15 @@
 import {
-  changelogSection,
   documentationSection,
-  recipesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { LockOpenIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const tokenAuthRules = {
   name: 'Token Auth Rules',
   headline: 'NFT permissions',
   description: 'Design custom authorization rules for your NFTs.',
-  navigationMenuCatergory: 'Create',
+  navigationMenuCatergory: 'MPL',
   path: 'token-auth-rules',
   icon: <LockOpenIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-auth-rules',

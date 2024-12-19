@@ -1,19 +1,16 @@
 import {
-  changelogSection,
   documentationSection,
-  recipesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { ArrowsPointingOutIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const hydra = {
   name: 'Hydra',
   headline: 'Fanout wallets',
   description: 'Create shared wallets, split between multiple shareholders.',
-  navigationMenuCatergory: 'Hydra',
   path: 'hydra',
-  navigationMenuCatergory: 'Utility',
+  navigationMenuCatergory: 'MPL',
   icon: <ArrowsPointingOutIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-hydra',
   className: 'accent-amber',

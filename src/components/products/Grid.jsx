@@ -1,20 +1,19 @@
+import Link from 'next/link'
 import { IconWithName } from './IconWithName'
 import { products as allProducts } from './index'
-import Link from 'next/link'
 
 export function Grid({
   onClick,
   withoutFallback,
   menuItem,
-  numCols = 'grid-cols-3',
+  numCols,
   ...props
 }) {
-  
   const products = allProducts.filter(
     (product) => menuItem === product.navigationMenuCatergory
   )
 
-  let className = `relative grid ${numCols} gap-3`
+  let className = `relative grid sm:grid-cols-2 grid-cols-1`
 
   return (
     <ul className={className} {...props}>
@@ -25,7 +24,7 @@ export function Grid({
             className="block content-start rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
             onClick={onClick}
           >
-            {IconWithName({ product, description: true})}
+            {IconWithName({ product, description: true })}
           </Link>
         </li>
       ))}

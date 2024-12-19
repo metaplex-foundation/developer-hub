@@ -1,12 +1,10 @@
 import {
-  changelogSection,
   documentationSection,
   guidesSection,
-  recipesSection,
-  referencesSection,
-} from '@/shared/sections';
-import { CodeBracketSquareIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
+  referencesSection
+} from '@/shared/sections'
+import { CodeBracketSquareIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const umi = {
   name: 'Umi',
