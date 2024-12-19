@@ -39,8 +39,6 @@ const ApiComponentWrapper = (args) => {
 
     setSelectedExample(index)
     if (activeEndpoint.name !== 'Custom') {
-      console.log(activeEndpoint)
-      console.log(api.examples[index])
       setActiveEndpoint(endpoints[api.examples[index].chain])
     }
   }
@@ -130,8 +128,6 @@ const ApiComponentWrapper = (args) => {
 
     const resJson = await res.json()
 
-    console.log(resJson)
-
     setResponce(resJson)
 
     setIsLoading(false)
@@ -176,8 +172,8 @@ const ApiComponentWrapper = (args) => {
           <LanguageRenderer
             api={api}
             body={body}
-            activeEndPoint={activeEndpoint}
-            setActiveEndPoint={(endpoint) => setActiveEndpoint(endpoint)}
+            activeEndpoint={activeEndpoint}
+            setActiveEndpoint={(endpoint) => setActiveEndpoint(endpoint)}
           />
           <button
             className="hidden min-w-[150px] items-center justify-center rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500 2xl:flex"
