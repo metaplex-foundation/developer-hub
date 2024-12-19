@@ -35,6 +35,12 @@ export const mplHybrid = {
           ],
         },
         {
+          title: 'UI Templates',
+          links: [
+            { title: 'MPL-404 Hybrid UI', href: '/mpl-hybrid/guides/mpl-404-hyrbid-ui-template', created: '2024-12-16' },
+          ],
+        },
+        {
           title: 'Features',
           links: [
             {
@@ -80,6 +86,11 @@ export const mplHybrid = {
             {
               title: 'Create your first Hybrid Collection',
               href: '/mpl-hybrid/guides/create-your-first-hybrid-collection',
+            },
+            {
+              title: 'MPL-404 Hyrbid UI Template',
+              href: '/mpl-hybrid/guides/mpl-404-hyrbid-ui-template',
+              created: '2024-12-16',
             },
           ],
         },
