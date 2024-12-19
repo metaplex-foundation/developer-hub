@@ -99,8 +99,6 @@ export function MobileNavigation({ page }) {
           >
             <HomeIcon height={20} /> Home
           </Link>
-          {/* {page.product.name != 'Metaplex' && (
-            <> */}
           <Link
             href="/programs-and-tools"
             className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
