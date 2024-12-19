@@ -4,8 +4,10 @@ metaTitle: Aura on Solana | Aura
 description: Learn about Metaplex Aura on the Solana blockchain.
 ---
 
-Metaplex Aura is currently available for beta access on Solana mainnet and devnet.
+{% callout title="Aura Endpoints" %}
 
-Apply here:
+**You can test out Aura on the Eclipse SVM at the following endpoint:**
+- **Mainnet**: https://aura-mainnet.metaplex.com
+- **Devnet** : https://aura-devnet.metaplex.com
 
-- [Beta Access to Aura for Solana](https://docs.google.com/forms/d/e/1FAIpQLSeGkSCyBwGp48mR1Zvc5-SqTBFWV6BUXDiGCqgYHP5qGEOYjA/viewform)
+{% /callout %}
