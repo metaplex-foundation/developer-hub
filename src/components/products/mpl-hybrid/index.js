@@ -37,7 +37,7 @@ export const mplHybrid = {
         {
           title: 'UI Templates',
           links: [
-            { title: 'MPL-404 Hybrid UI', href: '/mpl-hybrid/guides/mpl-404-hyrbid-ui-template', created: '2024-12-16' },
+            { title: 'MPL-404 Hybrid UI', href: '/mpl-hybrid/guides/mpl-404-hybrid-ui-template', created: '2024-12-16' },
           ],
         },
         {

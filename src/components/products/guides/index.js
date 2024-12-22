@@ -150,7 +150,7 @@ export const guides = {
             },
             {
               title: 'MPL-404 Hybrid UI Template',
-              href: '/mpl-hybrid/guides/mpl-404-hyrbid-ui-template',
+              href: '/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
               created: '2024-12-16',
               updated: null, // null means it's never been updated
             },
