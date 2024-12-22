@@ -283,13 +283,21 @@ const mintTx = await transactionBuilder()
   .add(setComputeUnitLimit(umi, { units: 800_000 }))
   .add(createMintWithAssociatedToken(umi, { mint: nftMint, owner: recipient }))
   .add(
-    mintFromCandyMachineV2(umi, {
-      candyMachine: candyMachine.publicKey,
-      mintAuthority: umi.identity,
-      nftOwner: recipient,
+    mintV2(umi, {
+      candyMachine: candyMachineAccount.publicKey,
       nftMint,
+      token: findAssociatedTokenPda(umi, {
+        mint: nftMint.publicKey,
+        owner: recipient,
+      }),
       collectionMint: candyMachineAccount.collectionMint,
       collectionUpdateAuthority: candyMachineAccount.authority,
+      tokenStandard: TokenStandard.NonFungible,
+      mintArgs: {
+        mintLimit: some({
+          id: 1,
+        }),
+      },
     })
   )
   .sendAndConfirm(umi, {
