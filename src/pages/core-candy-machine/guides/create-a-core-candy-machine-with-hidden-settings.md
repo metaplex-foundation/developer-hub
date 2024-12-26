@@ -12,9 +12,6 @@ Every NFT that will be minted pre-reveal will have the same name and URI. After 
 
 This guide focuses on the core Candy Machine functionality and interactions, rather than providing a complete website implementation. It will not cover aspects like adding buttons to a website or integrating with a wallet adapter. Instead, it provides essential information on working with the Core Candy Machine.
 
-For a full website implementation, including UI elements and wallet integration, you may want to start with a template like the [`metaplex-nextjs-tailwind-template`](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template). This template includes many setup steps for components like the Wallet Adapter.
-
-If you're looking for guidance on general web development practices or how to use specific frameworks, tools like Visual Studio Code offer extensive documentation and community resources.
 
 ## Prerequisites
 
@@ -50,10 +47,8 @@ console.log("Signer: ", signer.publicKey);
 umi.use(signerIdentity(signer));
 ```
 
-It can also make sense to fetch additional data that is not shown to the user but used in background calculations. For example, when using the [Redeemed Amount](/core-candy-machine/guards/redeemed-amount) Guard, you would want to fetch the already redeemed amount to see if the user is allowed to mint more.
-
 ### Prepare Reveal Data
-Let's now prepare the reveal data, that will contain the metadata that will be updated to the NFT upon reveal.  
+Let's now prepare the reveal data. This will basically contain the name and the URI, that will be used to update our collection assets once they are minted.  
 
 ```ts
 import crypto from 'crypto';
@@ -70,9 +65,13 @@ let string = JSON.stringify(revealData)
 let hash = crypto.createHash('sha256').update(string).digest()
 ```
 
-Here, we just created an array with 5 different attributes that will be updated into our revealed NFTs
+Here, we just created an array with 5 different elements since our Core Candy Machine will have 5 assets available.
 
-### Create a collection
+We also created an hash of all the elements, that will be used to configure our Core Candy Machine.
+
+### Create a Collection
+
+Let's now create a Collection asset. For that, the mpl-core library provides a `createCollection` method will help us performing that action
 
 ```ts
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
@@ -108,6 +107,8 @@ await createCollection(umi, {
     ],
 }).sendAndConfirm(umi)
 ```
+
+We added a plugin of type `Royalties` and added 2 different creators that will share those royalties
 
 Let's now fetch our created collection and print the details of it
 
@@ -145,7 +146,7 @@ const res = await create(umi, {
 let tx = await res.sendAndConfirm(umi);
 ```
 
-Let's now fetch our created candy machine and print the details of it
+Let's now fetch our created candy machine and print the details of it. To achieve that, we will use the `fetchCandyMachine` method from the mpl-core-candy-machine library
 
 ```ts
 import { fetchCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
@@ -185,7 +186,7 @@ This would return the Candy Machine Data like this:
   "items": [],
   "itemsLoaded": 0
 }
-Candy Guard Account: 
+"Candy Guard Account": 
  {
   "publicKey": "4P6VhHmNi9Qt5eRuQsE9SaE5bYWoLxpdPwmfNZeiU2mv",
   "header": {
@@ -239,6 +240,8 @@ Candy Guard Account:
 }
 ```
 
+As you can see, it also prints the Candy Guard Account where we can check that actually only the `startDate` is set, as intended.
+
 ### Mint the collection
 
 Let's now mint the 5 NFTs from our Core Candy Machine
@@ -271,10 +274,14 @@ for(let i = 0; i < nftMint.length; i++) {
 
 ### Reveal the Collection
 
-Let's now reveal the collection
+Let's now reveal the collection.
+
+To reveal the collection, we will fetch the collection assets using the `fetchAssetsByCollection` method and will update those assets by invoking the method `update` with the `revealData` that we prepared in the beggining of this guide.
+
+As we only want to reveal our assets after all items have been minted, we will fetch the Core Candy Machine details and make sure that the items available are the same as the items redeemed. This unsures us that all assets have been minted
 
 ```ts
-import { fetchAssetsByCollection } from '@metaplex-foundation/mpl-core';
+import { update, fetchAssetsByCollection } from '@metaplex-foundation/mpl-core';
 
 candyMachineDetails = await fetchCandyMachine(umi, candyMachine.publicKey);
 assert(candyMachineDetails.data.itemsAvailable == candyMachineDetails.itemsRedeemed);
@@ -296,6 +303,12 @@ for(let i = 0; i < candyMachineDetails.itemsRedeemed; i++) {
 ```
 
 ### Confirm the hidden settings
+
+Now that the we revealed our assets, it is time to confirm that the assets are indeed the intended ones.
+
+For that, we will again fetch the assets of our collections, but this time we will save the name and the URI of every single one of them.
+
+After that, we will log both arrays (`revealData` and `fetchedAssets`) and will also hash the `fetchedAssets` data and compare to the initial hash
 
 ```ts
 let fetchedAssets = [];
