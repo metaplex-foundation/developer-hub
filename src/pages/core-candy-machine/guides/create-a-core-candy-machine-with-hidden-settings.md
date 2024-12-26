@@ -331,3 +331,15 @@ let string2 = JSON.stringify(fetchedAssets);
 let hash2 = crypto.createHash('sha256').update(string2).digest();
 assert(hash == hash2);
 ```
+
+### And that is it
+Congrats! You just created your Core Candy Machine with hiddens settings.
+
+Let's revise all that we did:
+- We started by setting up UMI
+- After setting up UMI, we create an array with the data that will be used to update our assets after the initial mint
+- We created a Collection asset to where our minted assets will beling to
+- We create a Core Candy Machine with hidden setting, 5 items available, and a start time guard
+- We minted all the assets from out Core Candy Machine
+- We fetched all the assets of our collection and updated those assets with our reveal data
+- We confirmed that the reveal of our collection was correct
