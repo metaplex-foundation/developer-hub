@@ -122,6 +122,12 @@ console.log("Collection Details: \n", collection);
 
 ### Create a Core Candy Machine with Hidden Settings
 
+Next step is to create our Core Candy Machine with the Hidden Settings.
+
+To achieve that, we will use the `create` method from the mpl-core-candy-machine library, and we will set the `hiddenSettings` with the name and URI that all the assets will be minted with. We also pass the hash that was previously calculated from the `revealData`
+
+We will also add a `startDate` guard. You can find the list of all available guards here.
+
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';
 
@@ -140,7 +146,7 @@ const res = await create(umi, {
         hash: hash,
     }),
     guards: {
-        startDate: some({ date: dateTime('2023-04-04T16:00:00Z') }),
+        startDate: some({ date: dateTime('2024-01-01T16:00:00Z') }),
     }
 });
 let tx = await res.sendAndConfirm(umi);
