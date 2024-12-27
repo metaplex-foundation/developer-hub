@@ -1,0 +1,81 @@
+---
+title: Aura Pricing
+metaTitle: Pricing | Aura
+description: Aura Pricing Tiers
+---
+
+Choosing the right pricing model for your RPC (Remote Procedure Call) needs depends on your project’s scale, usage, and budget. Whether you're just starting, scaling, or managing enterprise-level operations, these flexible models cater to various demands:
+
+## Free Plan
+
+Start exploring blockchain development at no cost. Perfect for hobbyists, early-stage projects, or developers looking to test APIs without committing financially.
+
+**Ideal For**: Beginners, small projects, or anyone just testing the waters with blockchain applications.
+
+| Feature                    | RPS | Price/Req MPLX | Price/Req USD |
+| -------------------------- | --- | -------------- | ------------- |
+| Solana DAS API             | 10  | Free           | Free          |
+| Eclipse DAS API            | 10  | Free           | Free          |
+| Solana RPC                 | 10  | Free           | Free          |
+| Eclipse RPC                | 10  | Free           | Free          |
+| getProgramAccounts         | N/A | N/A            | N/A           |
+| Solana SWQOS               | N/A | N/A            | N/A           |
+| Websocket Live Connections | N/A | N/A            | N/A           |
+| Batch Mint                 | N/A | N/A            | N/A           |
+
+## Pay As You Go
+
+Only pay for what you use. This flexible model ensures you’re not locked into a subscription and is perfect for projects with unpredictable or variable traffic.
+
+**Ideal For**: Startups, scaling projects, or developers who want cost efficiency without committing to an upfront plan.
+
+| Feature                    | RPS  | Price/Req MPLX | Price/Req USD |
+| -------------------------- | ---- | -------------- | ------------- |
+| Solana DAS API             | 75   | 0.000107       | 0.0000380     |
+| Eclipse DAS API            | 75   | 0.000107       | 0.0000380     |
+| Solana RPC                 | 50   | 0.000013       | 0.0000048     |
+| Eclipse RPC                | 50   | 0.000013       | 0.0000048     |
+| getProgramAccounts         | 25   | 0.000134       | 0.0000475     |
+| Solana SWQOS               | 20   | 0.000537       | 0.0001900     |
+| Websocket Live Connections | 10   | 0.000013       | 0.0000048     |
+| Batch Mint\*               | 1000 | 0.001207       | 0.0004275     |
+
+## Unlimited
+
+For consistent, high-demand applications, the Unlimited model offers flat-rate plans tailored to your throughput and performance needs.
+
+**Benefits**: Unlimited requests, enhanced priority support, and often additional features like private nodes or custom SLAs (Service Level Agreements).
+
+**Ideal For**: Enterprise-level projects, medium to large-scale dApps, and organizations with consistently high demand for reliable RPC services.
+
+### Tier 1 - 500 MPLX/Month
+
+Designed for mid-sized projects or growing applications.
+
+| Feature                    | RPS  | Requests Limit |
+| -------------------------- | ---- | -------------- |
+| Solana DAS API             | 30   | ∞              |
+| Eclipse DAS API            | 30   | ∞              |
+| Solana RPC                 | 30   | ∞              |
+| Eclipse RPC                | 30   | ∞              |
+| getProgramAccounts         | 20   | ∞              |
+| Solana SWQOS               | 10   | ∞              |
+| Websocket Live Connections | 5    | ∞              |
+| Batch Mint\*               | 1000 | ∞              |
+
+### Tier 2 - 1500 MPLX/Month
+
+A premium option for enterprise-level projects or high-traffic applications requiring maximum performance.
+
+| Feature                    | RPS | Requests Limit |
+| -------------------------- | --- | -------------- |
+| Solana DAS API             | 100 | ∞              |
+| Eclipse DAS API            | 100 | ∞              |
+| Solana RPC                 | 100 | ∞              |
+| Eclipse RPC                | 100 | ∞              |
+| getProgramAccounts         | 50  | ∞              |
+| Solana SWQOS               | 30  | ∞              |
+| Websocket Live Connections | 20  | ∞              |
+| Batch Mint\*               | N/A | ∞              |
+
+**\*Note:** There may in the future be other limitations on these besides RPS.
