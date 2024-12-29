@@ -7,12 +7,14 @@ description: How to create a Core Candy Machine with hidden settings to create a
 If you are looking to create a hide-and-reveal NFT drop, you can use Core Candy Machine to achieve that goal.
 A hide-and-reveal NFT drop can be useful when you want to reveal all the NFTs after they have been minted.
 
-How this works, is that you Core Candy Machine will have a hidden settings field, that will contain some basic metadata (name and URI) that will be the same to all the minted assets and a hash of the metadata of the revealed NFTs
+In this guide, we’ll walk you through the step-by-step process of setting up, minting, revealing, and validating your hide-and-reveal NFT drop using Core Candy Machine. Whether you’re an experienced developer or new to NFT drops, this guide will provide you with everything you need
+
+How this works, is that when setting up your Core Candy Machine, you’ll configure the hidden settings field. This field will contain placeholder metadata (generic name and URI) that will be applied to all minted NFTs prior to the reveal. Additionally, it includes a pre-calculated hash of the metadata.
 Every NFT that will be minted pre-reveal will have the same name and URI. After the collection has been minted, the assets will be updated with the correct name and URI
 
 After minting our collection, we will perform a reveal process where we will update the assets with the proper metadata.
 
-To ensure that the assets were correctly updated, we will perform a validation process where we will check the name and URI of the updated assets, hash it, and compare it with the previously calculated hash
+To ensure that the assets were correctly updated, a validation step is performed. This involves hashing the updated metadata (name and URI) of the revealed assets and comparing it with the original hash stored in the hidden settings. This ensures that every NFT has been updated accurately.
 
 
 ## Prerequisites
@@ -52,11 +54,11 @@ umi.use(signerIdentity(signer));
 ```
 
 ### Prepare Reveal Data
-Let's now prepare the reveal data. This will basically contain the name and the URI, that will be used to update our collection assets once they are minted.
+Now, let’s prepare the reveal data, which will include the metadata for the final revealed NFTs. This data contains the name and URI for each NFT in the collection and will be used to update the placeholder metadata after minting.
 
-We will create an array with 5 different elements since our Core Candy Machine will have 5 assets available.
+In this example, we will work with a collection of five assets, so our reveal data will include an array of five objects, each representing an individual NFT’s name and URI.
 
-We will also create an hash of all the elements, that will be used to configure our Core Candy Machine.
+We’ll also generate a hash of the reveal data. This hash will be stored in the hidden settings of the Core Candy Machine and used during the validation step to confirm that the metadata was updated correctly.
 
 ```ts
 import crypto from 'crypto';
@@ -75,7 +77,8 @@ let hash = crypto.createHash('sha256').update(string).digest()
 
 ### Create a Collection
 
-Let's now create a Collection asset. For that, the mpl-core library provides a `createCollection` method will help us performing that action
+Let's now create a Collection asset. 
+For that, the mpl-core library provides a `createCollection` method will help us performing that action
 
 ```ts
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
@@ -128,9 +131,9 @@ console.log("Collection Details: \n", collection);
 
 Next step is to create our Core Candy Machine with the Hidden Settings.
 
-To achieve that, we will use the `create` method from the mpl-core-candy-machine library, and we will set the `hiddenSettings` with the name and URI that all the assets will be minted with. We also pass the hash that was previously calculated from the `revealData`
+To achieve that, we will use the `create` method from the mpl-core-candy-machine library, and we will set the `hiddenSettings` with the placeholder name, URI, and pre-calculated hash from the `revealData`
 
-We will also add a `startDate` guard. You can find the list of all available guards here.
+Additionally, we’ll configure a startDate guard, which determines when minting begins. This is only one of the many guards available and you can find the list of all available guards here.
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';
@@ -141,7 +144,6 @@ const res = await create(umi, {
     candyMachine,
     collection: collectionMint.publicKey,
     collectionUpdateAuthority: collectionUpdateAuthority,
-    authority: umi.identity.publicKey,
     itemsAvailable: 5,
     configLineSettings: none(),
     hiddenSettings: some({
@@ -156,7 +158,8 @@ const res = await create(umi, {
 let tx = await res.sendAndConfirm(umi);
 ```
 
-Let's now fetch our created candy machine and print the details of it. To achieve that, we will use the `fetchCandyMachine` method from the mpl-core-candy-machine library
+Let's now fetch our created candy machine and print the details of it. 
+To achieve that, we will use the `fetchCandyMachine` method from the mpl-core-candy-machine library
 
 ```ts
 import { fetchCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
@@ -256,6 +259,8 @@ As you can see, it also prints the Candy Guard Account where we can check that a
 
 Let's now mint the 5 NFTs from our Core Candy Machine
 
+All these minted assets will have the placeholder name and URI that we set in the `hiddenSettings` field of the Core Candy machine that we created
+
 ```ts
 import { mintV1 } from '@metaplex-foundation/mpl-core-candy-machine';
 
@@ -286,9 +291,9 @@ for(let i = 0; i < nftMint.length; i++) {
 
 Let's now reveal the collection.
 
-To reveal the collection, we will fetch the collection assets using the `fetchAssetsByCollection` method and will update those assets by invoking the method `update` with the `revealData` that we prepared in the beggining of this guide.
+To reveal the collection, we will fetch the collection assets using the `fetchAssetsByCollection` method and will update those same minted assets by invoking the method `update` with the `revealData` that we prepared in the beggining of this guide.
 
-As we only want to reveal our assets after all items have been minted, we will fetch the Core Candy Machine details and make sure that the items available are the same as the items redeemed. This unsures us that all assets have been minted
+As we only want to reveal our assets after all items have been minted, we will validate the mint completion by fetching the Core Candy Machine details and making sure that the items available are the same as the items redeemed. This unsures us that all assets have been minted
 
 ```ts
 import { update, fetchAssetsByCollection } from '@metaplex-foundation/mpl-core';
@@ -312,13 +317,13 @@ for(let i = 0; i < candyMachineDetails.itemsRedeemed; i++) {
 }
 ```
 
-### Confirm the hidden settings
+### Validation of the revealed assets
 
 Now that the we revealed our assets, it is time to confirm that the assets are indeed the intended ones.
 
-For that, we will again fetch the assets of our collections, but this time we will save the name and the URI of every single one of them.
+For that, we will again fetch the assets of our collection and, for each asset, we will extract the name and URI and store them in a new array.
 
-After that, we will log both arrays (`revealData` and `fetchedAssets`) and will also hash the `fetchedAssets` data and compare to the initial hash
+After that, we will log both arrays (`revealData` and `fetchedAssets`) to help visualize and verify that the metadata has been updated as expected and will also hash the `fetchedAssets` data and compare to the initial hash
 
 ```ts
 let fetchedAssets = [];
@@ -341,9 +346,9 @@ Congrats! You just created your Core Candy Machine with hiddens settings.
 
 Let's revise all that we did:
 - We started by setting up UMI
-- After setting up UMI, we create an array with the data that will be used to update our assets after the initial mint
-- We created a Collection asset to where our minted assets will beling to
+- After setting up UMI, we created an array containing the metadata (name and URI) that would be used to update the assets after the initial mint. This included calculating a hash for validation purposes.
+- We created a Collection asset to where our minted assets will belong to
 - We create a Core Candy Machine with hidden setting, 5 items available, and a start time guard
-- We minted all the assets from out Core Candy Machine
-- We fetched all the assets of our collection and updated those assets with our reveal data
-- We confirmed that the reveal of our collection was correct
+- We minted all the assets from our Core Candy Machine
+- After verifying that all assets were minted, we fetched the collection assets and updated their metadata with the prepared reveal data.
+- We confirmed that the reveal of our collection was correct by hashing the metadata (name and URI) of the revealed assets and comparing it to the expected hash
