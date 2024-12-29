@@ -7,10 +7,12 @@ description: How to create a Core Candy Machine with hidden settings to create a
 If you are looking to create a hide-and-reveal NFT drop, you can use Core Candy Machine to achieve that goal.
 A hide-and-reveal NFT drop can be useful when you want to reveal all the NFTs after they have been minted.
 
-How this works, is that you Core Candy Machine will have a hidden settings field, that will contain a hash of the metadata of the revealed NFTs
+How this works, is that you Core Candy Machine will have a hidden settings field, that will contain some basic metadata (name and URI) that will be the same to all the minted assets and a hash of the metadata of the revealed NFTs
 Every NFT that will be minted pre-reveal will have the same name and URI. After the collection has been minted, the assets will be updated with the correct name and URI
 
-This guide focuses on the core Candy Machine functionality and interactions, rather than providing a complete website implementation. It will not cover aspects like adding buttons to a website or integrating with a wallet adapter. Instead, it provides essential information on working with the Core Candy Machine.
+After minting our collection, we will perform a reveal process where we will update the assets with the proper metadata.
+
+To ensure that the assets were correctly updated, we will perform a validation process where we will check the name and URI of the updated assets, hash it, and compare it with the previously calculated hash
 
 
 ## Prerequisites
@@ -29,7 +31,7 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 
 ## Setting up umi
 
-After setting up your environment, let's start by setting up umi:
+After setting up your environment, let's start by setting up umi
 
 ```ts
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -37,9 +39,11 @@ import { generateSigner, some, none, createSignerFromKeypair, signerIdentity, tr
 import { mplCandyMachine as mplCoreCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
 import wallet from "../wallet.json";
 
+// We will be using Solana Devnet as endpoint, and loading the mplCoreCandyMachine plugin
 const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCoreCandyMachine());
 
+// Let's create a Keypair from our wallet json file that contains a secret key, and create a signer based on the created keypair
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const signer = createSignerFromKeypair(umi, keypair);
 console.log("Signer: ", signer.publicKey);
@@ -48,7 +52,11 @@ umi.use(signerIdentity(signer));
 ```
 
 ### Prepare Reveal Data
-Let's now prepare the reveal data. This will basically contain the name and the URI, that will be used to update our collection assets once they are minted.  
+Let's now prepare the reveal data. This will basically contain the name and the URI, that will be used to update our collection assets once they are minted.
+
+We will create an array with 5 different elements since our Core Candy Machine will have 5 assets available.
+
+We will also create an hash of all the elements, that will be used to configure our Core Candy Machine.
 
 ```ts
 import crypto from 'crypto';
@@ -64,10 +72,6 @@ const revealData = [
 let string = JSON.stringify(revealData)
 let hash = crypto.createHash('sha256').update(string).digest()
 ```
-
-Here, we just created an array with 5 different elements since our Core Candy Machine will have 5 assets available.
-
-We also created an hash of all the elements, that will be used to configure our Core Candy Machine.
 
 ### Create a Collection
 
