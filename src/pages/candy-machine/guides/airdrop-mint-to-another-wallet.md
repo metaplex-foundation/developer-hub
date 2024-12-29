@@ -81,7 +81,7 @@ In this section the code Snippets for the mint functions in Javascript are shown
 
 When minting to another wallet using Typescript, there are two main approaches depending on whether your Candy Machine uses guards:
 
-### Mint without guards
+### Mint without Guards
 For Candy Machines without guards, use `mintFromCandyMachineV2`. This function allows you to directly specify the recipient as the `nftOwner`.
 
 ```js
@@ -93,21 +93,13 @@ const mintTx = await transactionBuilder()
   .add(setComputeUnitLimit(umi, { units: 800_000 }))
   .add(createMintWithAssociatedToken(umi, { mint: nftMint, owner: recipient }))
   .add(
-    mintV2(umi, {
-      candyMachine: candyMachineAccount.publicKey,
+    mintFromCandyMachineV2(umi, {
+      candyMachine: candyMachine.publicKey,
+      mintAuthority: umi.identity,
+      nftOwner: recipient,
       nftMint,
-      token: findAssociatedTokenPda(umi, {
-        mint: nftMint.publicKey,
-        owner: recipient,
-      }),
       collectionMint: candyMachineAccount.collectionMint,
       collectionUpdateAuthority: candyMachineAccount.authority,
-      tokenStandard: TokenStandard.NonFungible,
-      mintArgs: {
-        mintLimit: some({ // The guards that require mintArgs have to be specified here 
-          id: 1,
-        }),
-      },
     })
   )
   .sendAndConfirm(umi, {
@@ -283,13 +275,21 @@ const mintTx = await transactionBuilder()
   .add(setComputeUnitLimit(umi, { units: 800_000 }))
   .add(createMintWithAssociatedToken(umi, { mint: nftMint, owner: recipient }))
   .add(
-    mintFromCandyMachineV2(umi, {
-      candyMachine: candyMachine.publicKey,
-      mintAuthority: umi.identity,
-      nftOwner: recipient,
+    mintV2(umi, {
+      candyMachine: candyMachineAccount.publicKey,
       nftMint,
+      token: findAssociatedTokenPda(umi, {
+        mint: nftMint.publicKey,
+        owner: recipient,
+      }),
       collectionMint: candyMachineAccount.collectionMint,
       collectionUpdateAuthority: candyMachineAccount.authority,
+      tokenStandard: TokenStandard.NonFungible,
+      mintArgs: {
+        mintLimit: some({ // The guards that require mintArgs have to be specified here 
+          id: 1,
+        }),
+      },
     })
   )
   .sendAndConfirm(umi, {
