@@ -72,6 +72,10 @@ export const guides = {
             {
               title: 'Create deterministic Metadata with Turbo',
               href: '/guides/general/create-deterministic-metadata-with-turbo',
+            },
+            {
+              title: 'The Payer-Authority Pattern',
+              href: '/guides/general/payer-authority-pattern',
             }
           ]
         },
