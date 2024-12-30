@@ -16,14 +16,9 @@ After minting our collection, we will perform a reveal process where we will upd
 
 To ensure that the assets were correctly updated, a validation step is performed. This involves hashing the updated metadata (name and URI) of the revealed assets and comparing it with the original hash stored in the hidden settings. This ensures that every NFT has been updated accurately.
 
-
-## Prerequisites
-
-- Basic familiarity with web development and your chosen framework. We recommend Next JS for easiest compatibility to umi.
-
 ## Required Packages
 
-Regardless of your chosen template or implementation, you'll need to install the following packages for interacting with the Core Candy Machine:
+You'll need to install the following packages for interacting with the Core Candy Machine:
 
 {% packagesUsed packages=["umi", "umiDefaults", "core", "candyMachineCore", "mpl-toolbox"] type="npm" /%}
 
