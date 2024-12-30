@@ -416,7 +416,7 @@ const createAndMintTokens = async () => {
   });
 
   // The last step is to send the ix's off in a transaction to the chain.
-  // Ix's here can be ommited and added as needed during the transaction chain.
+  // Ix's here can be omitted and added as needed during the transaction chain.
   // If for example you just want to create the Token without minting
   // any tokens then you may only want to submit the `createToken` ix.
 

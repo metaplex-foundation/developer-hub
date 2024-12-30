@@ -38,7 +38,7 @@ let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_s
 
 Each instruction that comes from a Metaplex Rust crate will also currently come with a `Builder` version of that instruction which you can import. This abstracts a massive amount code for you and will return you an instruction that's ready to send.
 
-Lets take the `CreateV1` instruction from Core as an example (this applies to all other instructions from this Crate and all other Metaplex crates too).
+Let's take the `CreateV1` instruction from Core as an example (this applies to all other instructions from this Crate and all other Metaplex crates too).
 
 If we look through the instructions in the [Mpl Core crate type docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) we can see we have a number of instructions available to us.
 

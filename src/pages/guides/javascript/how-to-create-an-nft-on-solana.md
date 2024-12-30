@@ -29,7 +29,7 @@ Token Metadata is the Solana NFT standard that started it all. Created back in 2
 #### Why Use Token Metadata:
 
 - Tried and Trusted: Token Metadata has been used as Solana's primary NFT Token Standard for the last 4 years from projects such as Solana Monkey Business, DeGods, Claynosaurus just to name a few.
-- Eco System Support: NFTs and pNFTs are supported Solana wide by marketplaces and wallets such as MagicEden, Tensor, Phantom, Solflare and many others.
+- Ecosystem Support: NFTs and pNFTs are supported Solana wide by marketplaces and wallets such as MagicEden, Tensor, Phantom, Solflare and many others.
 - SPL Token Based: Token Metadata NFTs/pNFTs are based around Solana's SPL Token program.
 
 [Create An NFT/pNFT with Token Metadata](/token-metadata/guides/javascript/create-an-nft)
@@ -41,6 +41,6 @@ When it comes to creating NFTs that are cheap in mass then Bubblegum is the prot
 #### Why Use Bubblegum:
 
 - Cheap to deploy: Being a Merkle tree based product trees are cheap to deploy that can store millions of NFTs if needed.
-- Mass Airdrops: Once a tree is created the cost of airdrop cNFTs is close to non existent as the storage of the tree has already been paid for.
+- Mass Airdrops: Once a tree is created the cost of airdrop cNFTs is close to non-existent as the storage of the tree has already been paid for.
 
 [Create 1,000,000 NFTs on Solana with Bubblegum](/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)
