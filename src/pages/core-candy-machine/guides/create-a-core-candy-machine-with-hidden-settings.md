@@ -28,23 +28,29 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 
 ## Setting up umi
 
-After setting up your environment, let's start by setting up umi
+After setting up your environment, let's start by setting up umi.
+
+While setting up Umi, you can create new wallets for testing, import wallets from you filesystem or even use `walletAdapter`.
+For this example, we will be creating a Keypair from a json file (wallet.json) containing a secret key.
 
 ```ts
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { generateSigner, some, none, createSignerFromKeypair, signerIdentity, transactionBuilder, dateTime } from "@metaplex-foundation/umi";
 import { mplCandyMachine as mplCoreCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
-import wallet from "../wallet.json";
+import * as fs from 'fs';
 
 // We will be using Solana Devnet as endpoint, and loading the mplCoreCandyMachine plugin
 const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCoreCandyMachine());
 
 // Let's create a Keypair from our wallet json file that contains a secret key, and create a signer based on the created keypair
-let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
+const walletFile = fs.readFileSync('./wallet.json');
+
+let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 const signer = createSignerFromKeypair(umi, keypair);
 console.log("Signer: ", signer.publicKey);
 
+// Set the identity and the payer to the given signer
 umi.use(signerIdentity(signer));
 ```
 
@@ -58,6 +64,7 @@ We’ll also generate a hash of the reveal data. This hash will be stored in the
 ```ts
 import crypto from 'crypto';
 
+// Reveal data of our assets, to be used during the reveal process
 const revealData = [
       { name: 'Nft #1', uri: 'http://example.com/1.json' },
       { name: 'Nft #2', uri: 'http://example.com/2.json' },
@@ -129,6 +136,8 @@ console.log("Collection Details: \n", collection);
 Next step is to create our Core Candy Machine with the Hidden Settings.
 
 To achieve that, we will use the `create` method from the mpl-core-candy-machine library, and we will set the `hiddenSettings` with the placeholder name, URI, and pre-calculated hash from the `revealData`
+
+More details on the Core Candy Machine creation and guards can be found [here](https://developers.metaplex.com/core-candy-machine/create).
 
 Additionally, we’ll configure a startDate guard, which determines when minting begins. This is only one of the many guards available and you can find the list of all available guards [here](https://developers.metaplex.com/candy-machine/guards).
 
