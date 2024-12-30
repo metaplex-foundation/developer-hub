@@ -1,7 +1,7 @@
 ---
 title: How to Send and Transfer SPL Tokens on Solana
 metaTitle: How to Send and Transfer SPL Tokens on Solana| Guides
-description: Learn how to send and transfer SPL Tokens via javascript on the Solana blockchain wih Metaplex packages.
+description: Learn how to send and transfer SPL Tokens via javascript on the Solana blockchain with Metaplex packages.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-24-2024'
@@ -9,7 +9,7 @@ updated: '06-24-2024'
 
 This guide will show you how to build out a Javascript function to send and transfer SPL tokens on the Solana blockchain utilizing the Metaplex Umi client wrapper and MPL Toolbox packages.
 
-For this guide you will need to have some SPL Tokens in your wallet to transfer so if you not have any in your wallet you will need to get someone to transfer some to you or you can follow our other [how to create an SPL Token guide](/guides/javascript/how-to-create-an-spl-token-on-solana).
+For this guide you will need to have some SPL Tokens in your wallet to transfer so if you do not have any in your wallet you will need to get someone to transfer some to you or you can follow our other [how to create an SPL Token guide](/guides/javascript/how-to-create-an-spl-token-on-solana).
 
 ## Prerequisite
 
