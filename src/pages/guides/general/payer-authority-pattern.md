@@ -37,11 +37,12 @@ but have your program or a PDA serve as the authority for subsequent actions.
 
 3. **PDA Signers**:
    Program Derived Addresses (PDAs) do not possess private keys that allow them
-   to sign transactions in the same way as regular keypairs. While a PDA can own
-   an account, it cannot directly pay for rent or fees without difficult funds
-   shuffling. Having a separate payer account to cover rent or small storage
-   adjustments on behalf of the PDA avoids the complexity of funneling funds
-   into the PDA just to pay for minor changes.
+   to sign transactions in the same way as regular keypairs, so all of their
+   interactions must be managed by calling a program. While a PDA can be the
+   authority of an account, It cannot directly be used to pay rent or fees
+   without involving complicated fund movements. Having a separate payer account
+   to cover rent or small storage adjustments on behalf of the PDA avoids the
+   complexity of funneling funds into the PDA just to pay for minor changes.
 
 ## Rust Example
 
