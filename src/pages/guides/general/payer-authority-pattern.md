@@ -57,7 +57,7 @@ a client that works with this pattern.
     /// Create a new account.
     #[account(0, writable, signer, name="account", desc = "The address of the new account")]
     #[account(1, writable, signer, name="payer", desc = "The account paying for the storage fees")]
-    #[account(2, optional, name="authority", desc = "The authority signing for account creation")]
+    #[account(2, optional, signer, name="authority", desc = "The authority signing for account creation")]
     #[account(3, name="system_program", desc = "The system program")]
     CreateAccountV1(CreateAccountV1Args),
 ```
@@ -139,7 +139,7 @@ these accounts might be structured for a CreateAccountV1 instruction.
         /** The account paying for the storage fees */
         payer: Signer;
         /** The authority of the new asset */
-        authority?: PublicKey | Pda;
+        authority?: Signer | Pda;
         /** The system program */
         systemProgram?: PublicKey | Pda;
     };
