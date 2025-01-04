@@ -18,9 +18,9 @@ npm install @metaplex-foundation/mpl-core
 
 {% quick-links %}
 
-{% quick-link title="typedoc" icon="JavaScript" href="https://mpl-core.typedoc.metaplex.com/" description="MPL-Core Javascript SDK generated package API documentation." /%}
+{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-core.typedoc.metaplex.com/" description="MPL-Core Javascript SDK generated package API documentation." /%}
 
-{% quick-link title="npmjs.com" icon="JavaScript" href="https://crates.io/crates/mpl-core" description="MPL-Core Javascript SDK on NPM." /%}
+{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-core" description="MPL-Core Javascript SDK on NPM." /%}
 
 {% /quick-links %}
 

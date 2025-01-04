@@ -13,11 +13,12 @@ The MPL-Core Rust SDK can be used in both scripts/desktop/mobile applications as
 ```rust
 cargo add mpl-core
 ```
+
 {% quick-links %}
 
-{% quick-link title="crates.io" icon="Rust" href="https://crates.io/crates/mpl-core" description="Get started with our JavaScript library based on the Umi framework." /%}
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core" description="Get started with our JavaScript library based on the Umi framework." /%}
 
-{% quick-link title="docs.rs" icon="Rust" href="/core/getting-started/rust" description="The Rust SDK typedoc platform." /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core/latest/mpl_core/" description="The Rust SDK typedoc platform." /%}
 
 {% /quick-links %}
 
