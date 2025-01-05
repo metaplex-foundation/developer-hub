@@ -48,8 +48,14 @@ import { update, fetchAsset } from '@metaplex-foundation/mpl-core'
 const assetId = publicKey('11111111111111111111111111111111')
 const asset = await fetchAsset(umi, assetId)
 
+// Optional: If the Asset is in a collection fetch the collection
+const collectionId = publicKey('2222222222222222222222222222222')
+const collection = await fetchCollection(umi, collectionId)
+
 await update(umi, {
-  asset: asset,
+  asset,
+  // Optional: Collection is only required if Asset is part of a collection
+  collection,
   name: 'New Nft Name',
   uri: 'https://example.com/new-uri',
 }).sendAndConfirm(umi)
@@ -70,8 +76,13 @@ pub async fn update_asset() {
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
 
+    // Optional: If the Asset is in a collection fetch the collection
+    let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
     let update_asset_ix = UpdateV1Builder::new()
         .asset(asset)
+        // Optional: Collection is only required if Asset is part of a collection
+        .collection(collection)
         .payer(authority.pubkey())
         .new_name("My asset".into())
         .new_uri("https://example.com/my-asset.json".into())

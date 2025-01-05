@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server'
 
 const redirectRules = {
   '/umi': {
@@ -14,10 +14,15 @@ const redirectRules = {
     '/javascript/how-to-create-an-spl-token-on-solana':
       '/guides/javascript/how-to-create-a-solana-token',
   },
-  '/core/guides/javascript/how-to-create-a-core-nft-asset':
-    '/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript',
-  '/mpl-hybrid/guides/mpl-404-hyrbid-ui-template':
-    '/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
+  '/core': {
+    '/getting-started': '/core/sdk',
+    'guides/javascript/how-to-create-a-core-nft-asset':
+      '/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript',
+  },
+  '/mpl-hybrid': {
+    'guides/mpl-404-hyrbid-ui-template':
+      '/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
+  },
 }
 
 export function middleware(request) {
@@ -46,8 +51,8 @@ export const config = {
   matcher: [
     '/umi/:path*',
     '/toolbox/:path*',
-    '/core/guides/javascript/how-to-create-a-core-nft-asset',
+    '/core/:path*',
+    '/mpl-hybrid/:path*',
     '/guides/javascript/how-to-create-an-spl-token-on-solana',
-    '/mpl-hybrid/guides/mpl-404-hyrbid-ui-template'
   ],
 }
