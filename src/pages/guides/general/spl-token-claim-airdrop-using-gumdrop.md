@@ -37,7 +37,7 @@ yarn install
 
 First, create the SPL token that will be distributed. You can follow [our guide](/guides/javascript/how-to-create-a-solana-token) or use tools like [sol-tools.io](https://sol-tools.io/token-tools/create-token).
 
-{% callout type="warning" %}
+{% callout type="note" title="Token Amount" %}
 Ensure you mint enough tokens to cover your entire distribution list plus some buffer for testing.
 {% /callout %}
 
@@ -97,7 +97,7 @@ ts-node gumdrop-cli.ts create \
   --distribution-method <METHOD>
 ```
 
-{% callout type="info" %}
+{% callout type="note" title="Gumdrop Keypair" %}
 The CLI will create a `.log` folder containing a keypair. Save it. You need it to close the Gumdrop.
 {% /callout %}
 
