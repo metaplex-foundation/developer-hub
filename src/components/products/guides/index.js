@@ -72,6 +72,12 @@ export const guides = {
             {
               title: 'Create deterministic Metadata with Turbo',
               href: '/guides/general/create-deterministic-metadata-with-turbo',
+            },
+            {
+              title: 'Create a claim based airdrop using Gumdrop',
+              href: '/guides/general/spl-token-claim-airdrop-using-gumdrop',
+              created: '2025-01-06',
+              updated: null, // null means it's never been updated
             }
           ]
         },
