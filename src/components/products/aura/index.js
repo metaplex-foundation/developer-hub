@@ -31,6 +31,10 @@ export const aura = {
               title: 'FAQ',
               href: '/aura/faq',
             },
+            {
+              title: 'Pricing',
+              href: '/aura/pricing',
+            },
           ],
         },
         {

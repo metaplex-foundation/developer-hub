@@ -22,22 +22,11 @@ export const core = {
       ...documentationSection('core'),
       navigation: [
         {
-          title: 'New!',
-          links: [
-            { title: 'JS SDK V1.0', 
-              href: '/core/core-js-sdk-v1-0' }
-            ],
-        },
-        {
           title: 'Introduction',
           links: [
             { 
               title: 'Overview', 
               href: '/core' 
-            },
-            {
-              title: 'Getting Started',
-              href: '/core/getting-started',
             },
             { 
               title: 'What is an Asset?', 
@@ -63,6 +52,19 @@ export const core = {
               href: '/core/faq' 
             },
           ],
+        },
+        {
+          title: 'SDK',
+          links: [
+            {
+              title: 'Javascript SDK',
+              href: '/core/sdk/javascript',
+            },
+            {
+              title: 'Rust SDK',
+              href: '/core/sdk/rust',
+            }
+          ]
         },
         {
           title: 'Features',
