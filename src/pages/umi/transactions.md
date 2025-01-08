@@ -219,7 +219,9 @@ await lutBuilder.sendAndConfirm(umi)
 myBuilder = myBuilder.setAddressLookupTables([lut])
 ```
 
-## Get human readable transaction signature
+## Convert Transaction Signature format
+
+### Get human readable (base58) transaction signature
 
 The `signature` that is returned when sending transactions is of type `Uint8Array`. Therefore to get a string instead that can be copied and, for example opened in an explorer you it is required to deserialize it first like this:
 
@@ -233,6 +235,20 @@ const serializedSignature = base58.deserialize(signature)[0];
 console.log(
         `View Transaction on Explorer: https://explorer.solana.com/tx/${serializedSignature}`
       );
+```
+
+### Convert human readable (base58) transaction signature to Uint8Array
+
+In some cases you might have a base58 encoded transaction signature and you want to convert it to a Uint8Array. For example this might be the case if you copied a transaction signature from an explorer and you want to use it in an umi script. 
+
+This can be done using the `base58.deserialize` method.
+
+```ts
+import { base58 } from "@metaplex-foundation/umi/serializers";
+
+const signature = "4NJhR8zm3G7hU1uhPZaBiTMBCERh4CWp2cF1x2Ly9yCvenrY6oS9hF2PAGfT26odWvb49BktkWkoBPGoXMYUVqkY";
+
+const transaction: Uint8Array = base58.serialize(signature)
 ```
 
 ## Fetching sent transactions
