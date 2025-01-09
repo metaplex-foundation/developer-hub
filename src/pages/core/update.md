@@ -111,11 +111,53 @@ pub async fn update_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## Change the collection of a Core Asset
+
+Here is how you can use our SDKs to change the collection of a Core Asset.
+
+{% dialect-switcher title="Change the collection of a Core Asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from "@metaplex-foundation/umi";
+import {
+  update,
+  fetchAsset,
+  fetchCollection,
+  updateAuthority,
+} from "@metaplex-foundation/mpl-core";
+
+const assetId = publicKey("11111111111111111111111111111111");
+const asset = await fetchAsset(umi, assetId);
+const oldCollectionId = publicKey("22222222222222222222222222222222");
+const collection = await fetchCollection(umi, oldCollectionId);
+const newCollectionId = publicKey("33333333333333333333333333333333");
+
+const updateTx = await update(umi, {
+  asset,
+  name: "Updated Asset",
+  collection,
+  newUpdateAuthority: updateAuthority("Collection", [newCollectionId]),
+}).sendAndConfirm(umi);
+
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
 ## Making a Core Asset Data Immutable
 
-Here is how you can use our SDKs to update an MPL Core Asset.
+Here is how you can use our SDKs to make a Core Asset fully immutable. Be aware that there are different levels of immutability described in the [immutability Guide](/core/guides/immutability).
 
-{% dialect-switcher title="Update an Asset" %}
+{% callout type="warning" title="Important" %}
+
+This is a destructive action and will remove the ability to update the asset.
+
+It will also remove the asset from any collections it was in. To make collection assets immutable you will need to change the update authority of the collection.
+
+{% /callout %}
+
+{% dialect-switcher title="Make a Core Asset Immutable" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
