@@ -111,7 +111,7 @@ pub async fn update_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Change the collection of a Core Asset
+## Change the Collection of a Core Asset
 
 Here is how you can use our SDKs to change the collection of a Core Asset.
 
