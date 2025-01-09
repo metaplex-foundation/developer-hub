@@ -32,7 +32,7 @@ export const aura = {
               href: '/aura/faq',
             },
             {
-              title: 'Pricing',
+              title: 'Access and Pricing',
               href: '/aura/pricing',
             },
           ],
@@ -54,20 +54,6 @@ export const aura = {
             },
           ],
         },
-        {
-          title: 'Blockchains',
-          links: [
-            {
-              title: 'Solana',
-              href: '/aura/blockchains/solana',
-            },
-            {
-              title: 'Eclipse',
-              href: '/aura/blockchains/eclipse',
-            },
-          ],
-        },
-
         {
           title: 'DAS Methods',
           collapsed: true,
