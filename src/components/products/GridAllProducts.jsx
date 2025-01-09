@@ -1,5 +1,5 @@
-import { Grid } from './Grid'
-import { productCategories } from './index'
+import { Grid } from './Grid';
+import { productCategories } from './index';
 
 export function MarkdocGrid() {
   return (
