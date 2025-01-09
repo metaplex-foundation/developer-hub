@@ -4,9 +4,15 @@ metaTitle: Pricing | Aura
 description: Aura Pricing Tiers
 ---
 
+{% callout title="Get Aura Access" %}
+To gain access to Metaplex Aura network on the **Solana** and **Eclipse** blockchains you can visit the Aura App for an endpoint and API key at [https://aura-app.metaplex.com/](https://aura-app.metaplex.com/).
+{% /callout %}
+
+## Plans
+
 Choosing the right pricing model for your RPC (Remote Procedure Call) needs depends on your project’s scale, usage, and budget. Whether you're just starting, scaling, or managing enterprise-level operations, these flexible models cater to various demands:
 
-## Free Plan
+### Free Plan
 
 Start exploring blockchain development at no cost. Perfect for hobbyists, early-stage projects, or developers looking to test APIs without committing financially.
 
@@ -20,7 +26,7 @@ Start exploring blockchain development at no cost. Perfect for hobbyists, early-
 | Eclipse RPC        | 10  | Free           | Free          |
 | getProgramAccounts | N/A | N/A            | N/A           |
 
-## Pay As You Go
+### Pay As You Go
 
 Only pay for what you use. This flexible model ensures you’re not locked into a subscription and is perfect for projects with unpredictable or variable traffic.
 
@@ -34,7 +40,7 @@ Only pay for what you use. This flexible model ensures you’re not locked into 
 | Eclipse RPC        | 50  | 0.000013       | 0.0000048     |
 | getProgramAccounts | 25  | 0.000134       | 0.0000475     |
 
-## Unlimited
+### Unlimited
 
 For consistent, high-demand applications, the Unlimited model offers flat-rate plans tailored to your throughput and performance needs.
 
@@ -42,7 +48,7 @@ For consistent, high-demand applications, the Unlimited model offers flat-rate p
 
 **Ideal For**: Enterprise-level projects, medium to large-scale dApps, and organizations with consistently high demand for reliable RPC services.
 
-### Tier 1 - 500 MPLX/Month
+#### Tier 1 - 500 MPLX/Month
 
 Designed for mid-sized projects or growing applications.
 
@@ -54,7 +60,7 @@ Designed for mid-sized projects or growing applications.
 | Eclipse RPC        | 30  | ∞              |
 | getProgramAccounts | 20  | ∞              |
 
-### Tier 2 - 1500 MPLX/Month
+#### Tier 2 - 1500 MPLX/Month
 
 A premium option for enterprise-level projects or high-traffic applications requiring maximum performance.
 
