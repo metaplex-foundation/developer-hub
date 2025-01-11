@@ -211,7 +211,7 @@ If you miss some fields that you knew from Metaplex Token Metadata those are pro
 - **external_url**: Link to an external website for the NFT
   - Example: `https://www.myproject.io/nft/123`
 
-- **attributes**: Array of traits and their values. These can alternatively be stored onchain using the [Attributes Plugin](/plugins/attributes)
+- **attributes**: Array of traits and their values. These can alternatively be stored onchain using the [Attributes Plugin](/core/plugins/attributes)
   - Example:
     ```json
     {

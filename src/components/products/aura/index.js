@@ -1,13 +1,13 @@
-import { documentationSection } from '@/shared/sections'
-import { SparklesIcon } from '@heroicons/react/24/outline'
-import { Hero } from './Hero'
+import { documentationSection } from '@/shared/sections';
+import { SparklesIcon } from '@heroicons/react/24/outline';
+import { Hero } from './Hero';
 
 export const aura = {
   name: 'Aura',
   headline: 'Indexing and Data Availability Network',
   description:
     'A decentralized indexing and data availability network that extends Solana and the Solana Virtual Machine (SVM)',
-  navigationMenuCatergory: 'Utility',
+  navigationMenuCatergory: 'Aura',
   path: 'aura',
   icon: <SparklesIcon />,
   github: 'https://github.com/metaplex-foundation/aura/',
@@ -31,6 +31,10 @@ export const aura = {
               title: 'FAQ',
               href: '/aura/faq',
             },
+            {
+              title: 'Access and Pricing',
+              href: '/aura/pricing',
+            },
           ],
         },
         {
@@ -50,20 +54,6 @@ export const aura = {
             },
           ],
         },
-        {
-          title: 'Blockchains',
-          links: [
-            {
-              title: 'Solana',
-              href: '/aura/blockchains/solana',
-            },
-            {
-              title: 'Eclipse',
-              href: '/aura/blockchains/eclipse',
-            },
-          ],
-        },
-
         {
           title: 'DAS Methods',
           collapsed: true,

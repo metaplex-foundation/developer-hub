@@ -1,38 +1,36 @@
 ---
-title: Getting Started with Rust
-metaTitle: Rust SDK | Core
-description: Get started with Core using `mpl-core` Rust crate.
+title: MPL-Core Rust SDK
+metaTitle: Rust SDK | MPL-Core
+description: Learn how to set up your project to run the MPL-Core Rust SDK.
 ---
 
-## Resources
-
-| Site          | Link                                                                   |
-| ------------- | ---------------------------------------------------------------------- |
-| crates.io     | [https://crates.io/crates/mpl-core](https://crates.io/crates/mpl-core) |
-| rust autodocs | [https://docs.rs/mpl-core/](https://docs.rs/mpl-core/)                 |
+Metaplex provides a Rust library that can be used to interact with the MPL-Core program. The Rust library can be used in rust scripts/builds as well as onchain programs via CPI instructions.
 
 ## Installation
-You can add the `mpl-core` crate to your Rust project by installing with `cargo`.
 
-```shell
+The MPL-Core Rust SDK can be used in both scripts/desktop/mobile applications as well as with Solana onchain programs.
+
+```rust
 cargo add mpl-core
 ```
 
-Alternatively you can paste the version of `mpl-core` crate you wish to use straight into your Cargo.toml file under `[dependencies]`.
+{% quick-links %}
 
-```toml
-mpl-core = "x.x.x"
-```
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core" description="Get started with our JavaScript library based on the Umi framework." /%}
+
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core/latest/mpl_core/" description="The Rust SDK typedoc platform." /%}
+
+{% /quick-links %}
 
 ## Local Scripts
 
 For local scripts is recommended to use the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return a instruction that can be added to a transaction.
 
-A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html)
+A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
 
 For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/guides/rust/metaplex-rust-sdks) page.
 
-### CreateV1Builder - Example
+#### CreateV1Builder - Example
 
 ```rust
 use mpl_core::instructions::CreateV1Builder;
@@ -74,13 +72,13 @@ let keypair_path = ".../my-key.json"
 
 ## CPI (Cross Program Invocation)
 
-Performing CPI instructions from your own programs can be achieved easily by using the `CpiBuilder` version of an instruction function that can be found for all instructions.
+Performing CPI instructions from your own programs can be achieved easily by using the `CpiBuilder` version of an instruction function that can be found for all instructions in the `mpl-core` Rust crate.
 
-A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html)
+A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
 
-For a more comprehensive guide using Metaplex Crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
+For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
 
-### CreateV1CpiBuilder - Example
+#### CreateV1CpiBuilder - Example
 
 ```rust
 CreateV1CpiBuilder::new()
@@ -97,7 +95,3 @@ CreateV1CpiBuilder::new()
         .plugins(args.plugins)
         .invoke()
 ```
-
-
-
-

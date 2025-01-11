@@ -577,4 +577,4 @@ Congratulations, you now know how Candy Machines work from A to Z!
 Here are some additional reading resources you might be interested in:
 
 - [All Available Guards](/candy-machine/guards): Have a look through all the guards available to you so you can cherry-pick the ones you need.
-- [Create Your First Candy Machine](/candy-machine/create-an-nft-collection-on-solana-with-candy-machine.md): This How-To guide helps you upload your assets and create a new Candy Machine from scratch using a CLI tool called “[Sugar](/candy-machine/sugar)”.
+- [Create Your First Candy Machine](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine): This How-To guide helps you upload your assets and create a new Candy Machine from scratch using a CLI tool called “[Sugar](/candy-machine/sugar)”.
