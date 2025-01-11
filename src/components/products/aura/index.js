@@ -1,6 +1,6 @@
-import { documentationSection } from '@/shared/sections';
-import { SparklesIcon } from '@heroicons/react/24/outline';
-import { Hero } from './Hero';
+import { documentationSection } from '@/shared/sections'
+import { SparklesIcon } from '@heroicons/react/24/outline'
+import { Hero } from './Hero'
 
 export const aura = {
   name: 'Aura',
@@ -101,6 +101,15 @@ export const aura = {
             {
               title: 'Search Assets',
               href: '/aura/api/v1/das/search-assets',
+            },
+          ],
+        },
+        {
+          title: 'Guides',
+          links: [
+            {
+              title: 'Using Aura Endpoints',
+              href: '/aura/using-aura-endpoints',
             },
           ],
         },
