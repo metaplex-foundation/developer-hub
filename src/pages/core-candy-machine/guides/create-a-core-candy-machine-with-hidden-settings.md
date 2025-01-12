@@ -10,11 +10,11 @@ A hide-and-reveal NFT drop can be useful when you want to reveal all the NFTs af
 In this guide, we’ll walk you through the step-by-step process of setting up, minting, revealing, and validating your hide-and-reveal NFT drop using Core Candy Machine. Whether you’re an experienced developer or new to NFT drops, this guide will provide you with everything you need
 
 How this works, is that when setting up your Core Candy Machine, you’ll configure the hidden settings field. This field will contain placeholder metadata (generic name and URI) that will be applied to all minted NFTs prior to the reveal. Additionally, it includes a pre-calculated hash of the metadata.
-Every NFT that will be minted pre-reveal will have the same name and URI. After the collection has been minted, the assets will be updated with the correct name and URI
+Every NFT that will be minted pre-reveal will have the same name and URI. After the collection has been minted, the assets will be updated with the correct name and URI (metadata).
 
-After minting our collection, we will perform a reveal process where we will update the assets with the proper metadata.
+After minting our collection, we will perform a reveal process where we will update the Assets with the proper metadata.
 
-To ensure that the assets were correctly updated, a validation step is performed. This involves hashing the updated metadata (name and URI) of the revealed assets and comparing it with the original hash stored in the hidden settings. This ensures that every NFT has been updated accurately.
+To ensure that the Assets were correctly updated, a validation step is performed. This involves hashing the updated metadata (name and URI) of the revealed Assets and comparing it with the original hash stored in the hidden settings. This ensures that every NFT has been updated accurately.
 
 ## Required Packages
 
@@ -30,7 +30,7 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 
 After setting up your environment, let's start by setting up umi.
 
-While setting up Umi, you can create new wallets for testing, import wallets from you filesystem or even use `walletAdapter`.
+While setting up Umi, you can create new wallets for testing, import wallets from you filesystem or even use `walletAdapter` with a UI/frontend.
 For this example, we will be creating a Keypair from a json file (wallet.json) containing a secret key.
 
 ```ts
@@ -79,7 +79,7 @@ let string = JSON.stringify(revealData)
 let hash = crypto.createHash('sha256').update(string).digest()
 ```
 
-Please note that you will need to upload the reveal data yoursel. In order to do it in a determenistic way, you can use [turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo)
+Please note that you will need to upload the reveal data yourself. In order to do it in a determenistic way, you can use [turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo)
 
 ### Create a Collection
 
