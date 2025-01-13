@@ -7,7 +7,7 @@ created: '01-13-2025'
 updated: '01-13-2025'
 ---
 
-This guide leverages the use of **Merkle Trees** and **Compression** to create a low-cost **Token Claimer** for **Token Metadata Tokens** using **Anchor**.
+This guide leverages the use of Merkle Trees and Compression to create a low-cost Token Claimer for Token Metadata Tokens using Anchor.
 
 ## Prerequisite
 
@@ -35,11 +35,11 @@ Parent2 = Hash(Hash(C) + Hash(D))
 Root = Hash(Parent1 + Parent2)
 ```
 
-Merkle trees form the foundation of on-chain compression. Since altering any part of the dataset invalidates the root, it is possible to prove the validity of a specific entry by storing only the root onchain and providing a Merkle Proof (a minimal set of sibling hashes needed to recalculate the root).
+Merkle trees are a cornerstone of on-chain compression, enabling efficient and secure data verification. By design, altering any part of the dataset invalidates the root, which means the integrity of a specific entry can be verified by storing only the Merkle root on-chain and providing a Merkle Proof—a minimal set of sibling hashes needed to reconstruct the root.
 
-This makes it extremely cost-efficient for on-chain storage, as only the root (32 bytes) is stored, and proofs are passed as inputs during verification. Additionally, proof sizes grow logarithmically with the number of entries, making this approach ideal for large datasets.
-
-Moreover, Merkle trees can be generated and stored in a private manner, without broadcasting the full dataset on-chain (like Compressed NFT do with the noop program), further enhancing efficiency and privacy.
+- **Key Advantages**: Cost-Efficient Storage: Only the Merkle root (32 bytes) is stored on-chain, significantly reducing storage costs. Verification is achieved by passing Merkle proofs as inputs.
+- **Scalability**: Proof sizes grow logarithmically with the number of entries, making this method ideal for managing large datasets.
+- **Privacy and Efficiency**: Entire Merkle trees can be generated and managed off-chain, keeping the full dataset private. Programs like Compressed NFTs use this approach with Solana’s noop program, optimizing performance while maintaining privacy.
 
 ### Concurrent Merkle Tree
 
@@ -78,15 +78,25 @@ In this guide, we'll use the `svm_merkle_tree` crate an optimized version for cr
 cd token-claimer-example
 ```
 
-Then run the following command:
+Then run the following command to install the merkle tree crate:
 
 ```
 cargo add svm_merkle_tree
 ```
 
+And then we run the following command to install the anchor-spl to interact with the Token Program:
+
+```
+cargo add anchor-spl
+```
+
 ## The program
 
-### todo()! - ADD Disclaimer. 
+{% callout title = "Disclaimer" %}
+
+todo()!
+
+{% /callout %}
 
 ### Imports and Templates
 
