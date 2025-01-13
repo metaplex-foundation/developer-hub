@@ -94,7 +94,11 @@ cargo add anchor-spl
 
 {% callout title = "Disclaimer" %}
 
-todo()!
+This example is not a full-fledged implementation suitable for production. To make it production-ready, several additional components and considerations are necessary:
+
+- **Event Emission**: Use the `event!()` macro to emit events for important actions, such as successful claims or updates to the Merkle root. Alternatively, you can integrate with Solana's noop program to log updates and facilitate data indexing for off-chain applications.
+
+- **Database Hosting**: You'll need to store and host the complete Merkle tree dataset off-chain and derive hashes for leaves and internal nodes other than generate and serve Merkle proofs dynamically and validate input consistency for claims.
 
 {% /callout %}
 
