@@ -85,6 +85,10 @@ export const tokenMetadata = {
               title: 'Account Size Reduction',
               href: '/token-metadata/guides/account-size-reduction',
             },
+            {
+              title: 'Token Claimer Smart Contract',
+              href: '/token-metadata/guides/anchor/token-claimer-smart-contract',
+            },
           ],
         },
         {
