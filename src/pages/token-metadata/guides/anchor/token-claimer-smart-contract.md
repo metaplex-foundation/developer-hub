@@ -92,7 +92,7 @@ cargo add anchor-spl
 
 ## The program
 
-{% callout title = "Disclaimer" %}
+{% callout %}
 
 This example is not a full-fledged implementation suitable for production. To make it production-ready, several additional components and considerations are necessary:
 
