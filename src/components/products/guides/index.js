@@ -187,6 +187,12 @@ export const guides = {
               created: '2024-09-20',
               updated: null, // null means it's never been updated
             },
+            {
+              title: 'MPL-Hybrid / MPL-404',
+              href: '/mpl-hybrid/guides',
+              created: '2025-01-06',
+              updated: null, // null means it's never been updated
+            },
           ],
         },
         {
