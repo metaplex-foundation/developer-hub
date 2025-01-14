@@ -59,16 +59,26 @@ await mintV1(umi, {
 
 You can retrieve the leaf and determine the asset ID from the `mintV1` transaction using the `parseLeafFromMintV1Transaction` helper. This function parses the Transaction, therefore you have to make sure that it has been finalized before calling `parseLeafFromMintV1Transaction`.
 
+{% callout type="note" title="Transaction finalization" %}
+Please make sure that the transaction has been finalized before calling `parseLeafFromMintV1Transaction`.
+{% /callout %}
+
 {% dialect-switcher title="Get leaf schema from mint transaction" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
 import {
     findLeafAssetIdPda,
+    mintV1,
     parseLeafFromMintV1Transaction
 } from "@metaplex-foundation/mpl-bubblegum";
 
-const { signature } = await mintV1(umi, { leafOwner, merkleTree, metadata }).sendAndConfirm(umi, { confirm: { commitment: 'confirmed' } });
+const { signature } = await mintV1(umi, {
+  leafOwner,
+  merkleTree,
+  metadata,
+}).sendAndConfirm(umi, { confirm: { commitment: "confirmed" } });
+
 const leaf: LeafSchema = await parseLeafFromMintV1Transaction(umi, signature);
 const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
 // or const assetId = leaf.id;
@@ -160,11 +170,19 @@ await createNft(umi, {
 
 Again you can retrieve the leaf and determine the asset ID from the `mintToCollectionV1` transaction using the `parseLeafFromMintToCollectionV1Transaction` helper.
 
-{% dialect-switcher title="Get leaf schema from mint to collection transaction" %}
+{% callout type="note" title="Transaction finalization" %}
+Please make sure that the transaction has been finalized before calling `parseLeafFromMintToCollectionV1Transaction`.
+{% /callout %}
+
+{% dialect-switcher title="Get leaf schema from mintToCollectionV1 transaction" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { parseLeafFromMintToCollectionV1Transaction } from '../src';
+import {
+    findLeafAssetIdPda,
+    mintV1,
+    parseLeafFromMintToCollectionV1Transaction
+} from "@metaplex-foundation/mpl-bubblegum";
 
 const { signature } = await mintToCollectionV1(umi, {
   leafOwner,
