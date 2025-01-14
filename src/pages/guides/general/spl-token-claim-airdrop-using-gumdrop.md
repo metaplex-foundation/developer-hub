@@ -17,6 +17,16 @@ Gumdrop is a Solana program that enables the creation of claimable airdrops. Unl
 
 This guide demonstrates how to create a claimable SPL token airdrop using Gumdrop.
 
+## How It Works
+
+1. When creating the Gumdrop, a merkle tree is generated from your distribution list
+2. The merkle root is stored on-chain as part of the Gumdrop program
+3. Each recipient gets a unique merkle proof derived from their position in the tree
+4. When claiming, the proof is verified against the on-chain root to ensure:
+   - The claimer is in the original distribution list
+   - They are claiming the correct amount of tokens
+   - They haven't claimed before
+
 ## Prerequisites
 
 - Node.js 14
@@ -41,9 +51,28 @@ First, create the SPL token that will be distributed. You can follow [our guide]
 Ensure you mint enough tokens to cover your entire distribution list plus some buffer for testing.
 {% /callout %}
 
-## Distribution List Setup
+## Distribution Methods
 
-The distribution list defines who can claim tokens and how many they can claim. This data is used to:
+To distribute the proofs to the users gumdrop supports multiple distribution methods. Wallet-based distribution is recommended for:
+- Better reliability
+- Simpler implementation
+- No dependency on external services
+- Direct wallet verification
+
+For wallet distribution, you'll need to either
+- send your users a claim URL containing the required proof data. There are for example Discord Bots that can help you with this.
+or:
+1. Store the claim data in your database indexed by wallet address
+2. Create a frontend that fetches claim data when users connect their wallet
+3. Use the claim data to execute the on-chain claim transaction
+
+Other distribution methods are:
+- Email through AWS SES
+- SMS through AWS SNS
+- Discord through Discord API
+
+## Distribution List Setup
+After creating the SPL token, you need to create a distribution list. This list defines who can claim tokens and how many they can claim. This data is used to:
 1. Generate unique claim proofs for each recipient
 2. Create a merkle tree where the root is stored on-chain for verification
 3. Ensure only listed recipients can claim their exact allocation
@@ -67,16 +96,6 @@ Create a JSON file containing the distribution list:
 The amount should be specified without decimals. For example, if you want to drop 10 tokens of a mint with 6 decimals, specify 10000000 (10 * 10^6).
 {% /callout %}
 
-### How It Works
-
-1. When creating the Gumdrop, a merkle tree is generated from your distribution list
-2. The merkle root is stored on-chain as part of the Gumdrop program
-3. Each recipient gets a unique merkle proof derived from their position in the tree
-4. When claiming, the proof is verified against the on-chain root to ensure:
-   - The claimer is in the original distribution list
-   - They are claiming the correct amount of tokens
-   - They haven't claimed before
-
 The `handle` can be:
 - Wallet address for direct distribution **recommended**
 - Email address for AWS SES distribution
@@ -85,7 +104,7 @@ The `handle` can be:
 
 ## Creating the Gumdrop
 
-Use the Gumdrop CLI to create the airdrop:
+Use the Gumdrop CLI you downloaded and installed before to create the airdrop. The command can look like this:
 
 ```bash
 ts-node gumdrop-cli.ts create \
@@ -98,23 +117,8 @@ ts-node gumdrop-cli.ts create \
 ```
 
 {% callout type="note" title="Gumdrop Keypair" %}
-The CLI will create a `.log` folder containing a keypair. Save it. You need it to close the Gumdrop.
+The CLI will create a `.log` folder containing a keypair. Save it. You need it to close the Gumdrop and recover unclaimed tokens.
 {% /callout %}
-
-### Distribution Methods
-
-While Gumdrop supports multiple distribution methods, wallet-based distribution is recommended for:
-- Better reliability
-- Simpler implementation
-- No dependency on external services
-- Direct wallet verification
-
-For wallet distribution, you'll need to either
-- send your users a claim URL containing the required proof data. There are   Discord Bots that can help you with this.
-or:
-1. Store the claim data in your database indexed by wallet address
-2. Create a frontend that fetches claim data when users connect their wallet
-3. Use the claim data to execute the on-chain claim transaction
 
 ## Hosting the Claim Interface
 
@@ -129,7 +133,6 @@ Before launching:
 1. Test on devnet with a small distribution list
 2. Verify claim URLs and proofs work correctly
 3. Test the closing process
-4. Monitor transaction fees and adjust as needed
 
 ## Closing the Gumdrop
 
@@ -163,6 +166,6 @@ By following this guide, you can create a secure and efficient token distributio
 
 ## Need Help?
 
-- Check the [Metaplex Gumdrop docs](https://developers.metaplex.com/legacy-documentation/gumdrop)
 - Join our [Discord](https://discord.gg/metaplex) for support
+- Check the [Metaplex Gumdrop Docs](https://developers.metaplex.com/legacy-documentation/gumdrop)
 - Review the [source code](https://github.com/metaplex-foundation/gumdrop)
