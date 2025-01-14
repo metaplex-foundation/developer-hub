@@ -551,7 +551,7 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [freezeTokenPaymentRouteArgsUnlockFunds](https://mpl-core-candy-machine.typedoc.metaplex.com/types/freezeTokenPaymentRouteArgsUnlockFunds.html)
+API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [freezeTokenPaymentRouteArgsUnlockFunds](https://mpl-core-candy-machine.typedoc.metaplex.com/types/FreezeTokenPaymentRouteArgsUnlockFunds.html)
 
 {% /totem %}
 {% /dialect %}
