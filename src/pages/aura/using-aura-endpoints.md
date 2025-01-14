@@ -4,7 +4,7 @@ metaTitle: Aura Endpoints | Aura
 description: How to get started with Aura Endpoints
 ---
 
-{% video src="https://www.youtube.com/embed/TSkt0_t3cs4?si=d4NQxpexH0rpO2lG?&autoplay=1&mute=1" classes="m-auto" /%}
+{% video src="https://www.youtube.com/embed/TSkt0_t3cs4?si=d4NQxpexH0rpO2lG?&autoplay=1&mute=1" classes="m-auto" embed="true" /%}
 
 ## Login to Aura
 

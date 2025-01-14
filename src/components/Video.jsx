@@ -1,4 +1,4 @@
-function Video({ src, classes, embed = true }) {
+function Video({ src, classes, embed = false }) {
   return (
     <div
       className={classes}

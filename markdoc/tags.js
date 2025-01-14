@@ -168,6 +168,7 @@ const tags = {
     attributes: {
       src: { type: String },
       classes: { type: String },
+      embed: { type: Boolean },
     },
   },
   apiRenderer: {
