@@ -33,6 +33,8 @@ After setting up your environment, let's start by setting up umi.
 While setting up Umi, you can create new wallets for testing, import wallets from you filesystem or even use `walletAdapter` with a UI/frontend.
 For this example, we will be creating a Keypair from a json file (wallet.json) containing a secret key.
 
+We will be using the devnet public API node, which is rate-limited. For large-scale use, you can find more information about RPC nodes [here](https://developers.metaplex.com/rpc-providers).
+
 ```ts
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { generateSigner, some, none, createSignerFromKeypair, signerIdentity, transactionBuilder, dateTime } from "@metaplex-foundation/umi";
@@ -58,6 +60,10 @@ You can find more details about setting up UMI [here](https://developers.metaple
 
 ### Prepare Reveal Data
 Now, let’s prepare the reveal data, which will include the metadata for the final revealed NFTs. This data contains the name and URI for each NFT in the collection and will be used to update the placeholder metadata after minting.
+This metadata will be uploaded for each asset, and we will be using the resulting URI's
+
+Please note that you will need to upload the reveal data yourself.
+This process will probably not be deterministic by default. In order to do it in a deterministic way, you can use [turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo)
 
 In this example, we will work with a collection of five assets, so our reveal data will include an array of five objects, each representing an individual NFT’s name and URI.
 
@@ -79,8 +85,6 @@ let string = JSON.stringify(revealData)
 let hash = crypto.createHash('sha256').update(string).digest()
 ```
 
-Please note that you will need to upload the reveal data yourself. In order to do it in a determenistic way, you can use [turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo)
-
 ### Create a Collection
 
 Let's now create a Collection asset. 
@@ -92,7 +96,6 @@ You can learn more about collections [here](https://developers.metaplex.com/core
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
 
 const collectionMint = generateSigner(umi);
-const collectionUpdateAuthority = generateSigner(umi);
 
 const creator1 = generateSigner(umi).publicKey;
 const creator2 = generateSigner(umi).publicKey;
@@ -100,7 +103,6 @@ const creator2 = generateSigner(umi).publicKey;
 console.log("collection update authority: ", collectionUpdateAuthority.publicKey);
 await createCollection(umi, {
     collection: collectionMint,
-    updateAuthority: collectionUpdateAuthority.publicKey,
     name: 'My NFT',
     uri: 'https://example.com/my-nft.json',
     plugins: [
@@ -153,7 +155,7 @@ const candyMachine = generateSigner(umi);
 const res = await create(umi, {
     candyMachine,
     collection: collectionMint.publicKey,
-    collectionUpdateAuthority: collectionUpdateAuthority,
+    collectionUpdateAuthority: umi.identity,
     itemsAvailable: 5,
     configLineSettings: none(),
     hiddenSettings: some({
@@ -320,7 +322,6 @@ for(let i = 0; i < candyMachineDetails.itemsRedeemed; i++) {
     await update(umi, {
         asset: collectionAssets[i],
         collection: collectionDetails,
-        authority: collectionUpdateAuthority,
         name: revealData[i].name,
         uri: revealData[i].uri,
     }).sendAndConfirm(umi);
