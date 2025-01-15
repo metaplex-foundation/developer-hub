@@ -76,7 +76,7 @@ These lists are in alphabetical order. Please choose the RPC provider that best 
 - [Ankr](https://www.ankr.com/protocol/public/solana/)
 - [Blockdaemon](https://blockdaemon.com/marketplace/solana/)
 - [Chainstack](https://chainstack.com/build-better-with-solana/)
-- [Figment](https://figment.io/datahub/solana/)
+- [Figment](https://figment.io/)
 - [GetBlock](https://getblock.io/)
 - [NOWNodes](https://nownodes.io/)
 - [Syndica](https://syndica.io/)

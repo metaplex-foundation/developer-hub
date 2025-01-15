@@ -17,7 +17,7 @@ Umi defines its own set of interfaces for transactions, instructions and all oth
 - [TransactionMessage](https://umi.typedoc.metaplex.com/interfaces/umi.TransactionMessage.html): A transaction message is composed of all required public keys, one or many compiled instructions using indexes instead of public keys, a recent blockhash and other attributes such as its version. A transaction message can have one of the following versions:
   - Version: "legacy": The first Solana iteration of the transaction message.
   - Version: 0: The first transaction message version that introduces transaction versioning. It also introduces address lookup tables.
-- [Instruction](https://umi.typedoc.metaplex.com/interfaces/umi.Instruction.html): An instruction is composed of a program id, a list of [AccountMeta](https://umi.typedoc.metaplex.com/types/umi.AccountMeta.html) and some serialized data. Each account `AccountMeta` is composed of a public key, a boolean indicating whether it will be signing the transaction and another boolean indicating whether it's writable or not.
+- [Instruction](https://umi.typedoc.metaplex.com/types/umi.Instruction.html): An instruction is composed of a program id, a list of [AccountMeta](https://umi.typedoc.metaplex.com/types/umi.AccountMeta.html) and some serialized data. Each account `AccountMeta` is composed of a public key, a boolean indicating whether it will be signing the transaction and another boolean indicating whether it's writable or not.
 
 To create a new transaction, you may use the `create` method of the `TransactionFactoryInterface`. For instance, here's how you'd create a version `0` transaction with a single instruction:
 
