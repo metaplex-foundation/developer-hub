@@ -6,7 +6,7 @@ export const aura = {
   name: 'Aura',
   headline: 'Indexing and Data Availability Network',
   description:
-    'A decentralized indexing and data availability network that extends Solana and the Solana Virtual Machine (SVM)',
+    'A data network that extends Solana and the Solana Virtual Machine (SVM)',
   navigationMenuCatergory: 'Aura',
   path: 'aura',
   icon: <SparklesIcon />,
