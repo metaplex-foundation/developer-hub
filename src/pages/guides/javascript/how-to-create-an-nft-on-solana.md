@@ -20,7 +20,7 @@ Token Metadata is a protocol within Metaplex that focuses on the metadata aspect
 - Plugins: Core provides an advanced plugin system that allows Core Assets and Collections to store extra state, provide lifecycle validations, and an enhanced dynamic experience. The possibilities here are endless!
 - Cost: While not as cheap as Bubblegum, Core is **significantly cheaper** to create and mint compared to Token Metadata due to the optimized account structures.
 
-[Create An NFT with Core](/core/guides/javascript/how-to-create-a-core-nft-asset)
+[Create An NFT with Core](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
 
 ## Token Metadata NFT/pNFT
 
