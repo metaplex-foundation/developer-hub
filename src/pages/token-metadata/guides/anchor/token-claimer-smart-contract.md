@@ -35,6 +35,55 @@ Parent2 = Hash(Hash(C) + Hash(D))
 Root = Hash(Parent1 + Parent2)
 ```
 
+{% diagram %}
+
+{% node #root label="Root Node" theme="slate" /%}
+{% node #root-hash label="Hash" parent="root" x="56" y="40" theme="transparent" /%}
+{% node #node-1 label="Node 1" parent="root" y="100" x="-200" theme="blue" /%}
+{% node #node-1-hash label="Hash" parent="node-1" x="42" y="40" theme="transparent" /%}
+{% node #node-2 label="Node 2" parent="root" y="100" x="200" theme="mint" /%}
+
+{% node #node-3 label="Node 3" parent="node-1" y="100" x="-100" theme="mint" /%}
+{% node #node-4 label="Node 4" parent="node-1" y="100" x="100" theme="blue" /%}
+{% node #node-4-hash label="Hash" parent="node-4" x="42" y="40" theme="transparent" /%}
+{% node #node-5 label="Node 5" parent="node-2" y="100" x="-100" /%}
+{% node #node-6 label="Node 6" parent="node-2" y="100" x="100" /%}
+
+{% node #leaf-1 label="Leaf 1" parent="node-3" y="100" x="-45" /%}
+{% node #leaf-2 label="Leaf 2" parent="node-3" y="100" x="55" /%}
+{% node #leaf-3 label="Leaf 3" parent="node-4" y="100" x="-45" theme="blue" /%}
+{% node #leaf-4 label="Leaf 4" parent="node-4" y="100" x="55" theme="mint" /%}
+{% node #leaf-5 label="Leaf 5" parent="node-5" y="100" x="-45" /%}
+{% node #leaf-6 label="Leaf 6" parent="node-5" y="100" x="55" /%}
+{% node #leaf-7 label="Leaf 7" parent="node-6" y="100" x="-45" /%}
+{% node #leaf-8 label="Leaf 8" parent="node-6" y="100" x="55" /%}
+{% node #nft label="NFT Data" parent="leaf-3" y="100" x="-12" theme="blue" /%}
+
+{% node #proof-1 label="Leaf 4" parent="nft" x="200" theme="mint" /%}
+{% node #proof-2 label="Node 3" parent="proof-1" x="90" theme="mint" /%}
+{% node #proof-3 label="Node 2" parent="proof-2" x="97" theme="mint" /%}
+{% node #proof-legend label="Proof" parent="proof-1" x="-6" y="-20" theme="transparent" /%}
+
+{% edge from="node-1" to="root" fromPosition="top" toPosition="bottom" theme="blue" animated=true /%}
+{% edge from="node-2" to="root" fromPosition="top" toPosition="bottom" theme="mint" animated=true /%}
+
+{% edge from="node-3" to="node-1" fromPosition="top" toPosition="bottom" theme="mint" animated=true /%}
+{% edge from="node-4" to="node-1" fromPosition="top" toPosition="bottom" theme="blue" animated=true /%}
+{% edge from="node-6" to="node-2" fromPosition="top" toPosition="bottom" /%}
+{% edge from="node-5" to="node-2" fromPosition="top" toPosition="bottom" /%}
+
+{% edge from="leaf-1" to="node-3" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-2" to="node-3" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-4" to="node-4" fromPosition="top" toPosition="bottom" theme="mint" animated=true /%}
+{% edge from="leaf-3" to="node-4" fromPosition="top" toPosition="bottom" theme="blue" animated=true /%}
+{% edge from="leaf-5" to="node-5" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-6" to="node-5" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-7" to="node-6" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-8" to="node-6" fromPosition="top" toPosition="bottom" /%}
+{% edge from="nft" to="leaf-3" fromPosition="top" toPosition="bottom" theme="blue" animated=true label="Hash" /%}
+
+{% /diagram %}
+
 Merkle trees are a cornerstone of on-chain compression, enabling efficient and secure data verification. By design, altering any part of the dataset invalidates the root, which means the integrity of a specific entry can be verified by storing only the Merkle root on-chain and providing a Merkle Proof—a minimal set of sibling hashes needed to reconstruct the root.
 
 - **Key Advantages**: Cost-Efficient Storage: Only the Merkle root (32 bytes) is stored on-chain, significantly reducing storage costs. Verification is achieved by passing Merkle proofs as inputs.
@@ -47,7 +96,7 @@ Solana's state compression employs a unique type of Merkle tree that enables mul
 
 This specialized tree, called a concurrent Merkle tree, maintains an on-chain changelog, allowing multiple rapid updates to the same tree (e.g., all within the same block) without invalidating proofs.
 
-This functionality is crucial because, on Solana, only one writer per block is allowed per account, meaning only a single change can be made to an account per block, while multiple readers are permitted. The runtime ensures that the account remains secure and cannot be corrupted. However, since every action involves writing—because the Merkle root must be re-uploaded—the concurrent Merkle tree provides a solution for handling multiple updates seamlessly within the same block.
+This functionality is essential on Solana where only one writer per block is allowed per account. This limites updates to a single change per block, so the runtime can ensure the account's security and prevents corruption. Since every action requires writing, concurrent Merkle tree offers an efficient solution for managing multiple updates within the same block seamlessly.
 
 ## Setup 
 
@@ -446,6 +495,36 @@ pub fn claim_airdrop(
 
   Ok(())
 }
+
+#[derive(Accounts)]
+pub struct Claim<'info> {
+    #[account(
+        mut,
+        has_one = mint,
+        seeds = [b"merkle_tree".as_ref(), mint.key().to_bytes().as_ref()],
+        bump = airdrop_state.bump
+    )]
+    pub airdrop_state: Account<'info, AirdropState>,
+    pub mint: Account<'info, Mint>,
+    #[account(
+        mut,
+        associated_token::mint = mint,
+        associated_token::authority = airdrop_state,
+    )]
+    pub vault: Account<'info, TokenAccount>,
+    #[account(
+        init_if_needed,
+        payer = signer,
+        associated_token::mint = mint,
+        associated_token::authority = signer,
+    )]
+    pub signer_ata: Account<'info, TokenAccount>,
+    #[account(mut)]
+    pub signer: Signer<'info>,
+    pub system_program: Program<'info, System>,
+    pub token_program: Program<'info, Token>,
+    pub associated_token_program: Program<'info, AssociatedToken>,
+}
 ```
 
 To ensure accuracy, the root is reconstructed from the input provided in the accounts struct and compared against the stored root on-chain to verify they match.
@@ -518,7 +597,7 @@ pub struct UserReceipt {
 
 {% /totem %}
 
-**Note**: The `user_receipt` account could be left empty to minimize rent costs. However, this makes it harder to check on the frontend if a user has already claimed their tokens. This tradeoff should be considered based on the specific requirements of the program.
+**Note**: The `user_receipt` account can be left empty to reduce rent costs. To further optimize, you can save bytes on the discriminator by assigning the account to the program and passing it as an `UncheckedAccount`. A `require()` can then be used to verify ownership of the account, and you would need to add the `assign` instruction from the system program to assign it to the right program.
 
 ## Full Example Code
 
