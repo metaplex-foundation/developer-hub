@@ -307,7 +307,9 @@ Let's now reveal the collection.
 
 To reveal the collection, we will fetch the collection assets using the `fetchAssetsByCollection` method and will update those same minted assets by invoking the method `update` with the `revealData` that we prepared in the beggining of this guide.
 
-As we only want to reveal our assets after all items have been minted, we will validate the mint completion by fetching the Core Candy Machine details using the `fetchCandyMachine` method and making sure that the items available are the same as the items redeemed. This unsures us that all assets have been minted
+As we only want to reveal our assets after all items have been minted, we will validate the mint completion by fetching the Core Candy Machine details using the `fetchCandyMachine` method and making sure that the items available are the same as the items redeemed. This unsures us that all assets have been minted.
+
+Important note: This reveal process is designed solely for demonstration purposes and is not optimized for production use. Executing the reveal sequentially for each asset using update can lead to performance issues and failed transactions, especially for large collections.
 
 ```ts
 import { update, fetchAssetsByCollection } from '@metaplex-foundation/mpl-core';
