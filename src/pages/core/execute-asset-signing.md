@@ -218,13 +218,22 @@ const destinationAssetSignerPda = findAssetSignerPda(umi, {
   asset: destinationAssetId,
 })
 
-const res = await transfer(umi, {
+const transferAssetTx = transfer(umi, {
   // Asset object via `fetchAsset()`.
   asset,
   // Optional - Collection object via `fetchCollection()`
   collection,
   // New Owner of the Asset.
   newOwner: destinationAssetSignerPda,
+}).sendAndConfirm(umi)
+
+const res = await execute(umi, {
+  // Execute transaction/instruction(s) with this asset
+  asset,
+  // If Asset is part of collection pass in collection object via `fetchCollection()`
+  collection,
+  // The transactionBuilder/instruction[] to execute
+  instructions: transferAssetTx,
 }).sendAndConfirm(umi)
 
 console.log({ res })
