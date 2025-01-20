@@ -207,7 +207,7 @@ const collection =
 // Asset ID that owns the Asset we wish to transfer.
 const sourceAssetId = publickey('2222222222222222222222222222222222')
 // The source Asset object.
-const sourceAsset = fetchAsset(umi, assetId)
+const sourceAsset = fetchAsset(umi, sourceAssetId)
 // Asset signer has a balance of 1 SOL in the account.
 const sourceAssetSignerPda = findAssetSignerPda(umi, { asset: assetId })
 
