@@ -19,6 +19,11 @@ const redirectRules = {
     'guides/javascript/how-to-create-a-core-nft-asset':
       '/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript',
   },
+  '/core-candy-machine': {
+    '/getting-started': '/core-candy-machine/sdk',
+    '/getting-started/js': '/core-candy-machine/sdk/javascript',
+    '/getting-started/rust': '/core-candy-machine/sdk/rust',
+  },
   '/mpl-hybrid': {
     'guides/mpl-404-hyrbid-ui-template':
       '/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
@@ -54,5 +59,6 @@ export const config = {
     '/core/:path*',
     '/mpl-hybrid/:path*',
     '/guides/javascript/how-to-create-an-spl-token-on-solana',
+    '/core-candy-machine/:path*',
   ],
 }
