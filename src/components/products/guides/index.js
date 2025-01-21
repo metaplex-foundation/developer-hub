@@ -76,6 +76,12 @@ export const guides = {
             {
               title: 'The Payer-Authority Pattern',
               href: '/guides/general/payer-authority-pattern',
+            },
+            {
+              title: 'Create a claim based airdrop using Gumdrop',
+              href: '/guides/general/spl-token-claim-airdrop-using-gumdrop',
+              created: '2025-01-06',
+              updated: null, // null means it's never been updated
             }
           ]
         },

@@ -86,7 +86,11 @@ export const tokenMetadata = {
               href: '/token-metadata/guides/account-size-reduction',
             },
             {
-              title: 'Token Claimer Smart Contract',
+              title: 'Create a claim based airdrop using Gumdrop',
+              href: '/guides/general/spl-token-claim-airdrop-using-gumdrop',
+            },
+            {
+              title: 'Token Claimer (Airdrop) Smart Contract',
               href: '/token-metadata/guides/anchor/token-claimer-smart-contract',
             },
           ],
