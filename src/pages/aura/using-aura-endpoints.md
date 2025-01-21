@@ -22,4 +22,4 @@ description: How to get started with Aura Endpoints
 1. Click on Endpoints in the sidebar.
 2. Select your API Key, by default we show the latest API Key created.
 3. You'll see two endpoint options from the API Key you've selected: Solana DAS API + Solana RPC or Eclipse DAS API + Eclipse RPC.
-4. Click copy to start using the perferred API Endpoint in your application.
+4. Click copy to start using the preferred API Endpoint in your application.

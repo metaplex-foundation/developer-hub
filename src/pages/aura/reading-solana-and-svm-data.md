@@ -21,7 +21,7 @@ Aura provides performant, decentralized and comprehensive indexing of digital as
 
 ## Development Progress
 
-The developement progress of Aura and its features can be found in our github repo [https://github.com/metaplex-foundation/aura/](https://github.com/metaplex-foundation/aura/)
+The development progress of Aura and its features can be found in our github repo [https://github.com/metaplex-foundation/aura/](https://github.com/metaplex-foundation/aura/)
 
 
 
