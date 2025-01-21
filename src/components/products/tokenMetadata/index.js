@@ -85,6 +85,10 @@ export const tokenMetadata = {
               title: 'Account Size Reduction',
               href: '/token-metadata/guides/account-size-reduction',
             },
+            {
+              title: 'Create a claim based airdrop using Gumdrop',
+              href: '/guides/general/spl-token-claim-airdrop-using-gumdrop',
+            },
           ],
         },
         {

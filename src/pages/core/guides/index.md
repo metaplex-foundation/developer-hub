@@ -22,4 +22,6 @@ The following Guides for MPL Core are currently available:
 
 {% quick-link title="Anchor Staking Example" icon="CodeBracketSquare" href="/core/guides/anchor/anchor-staking-example" description="Learn how you can create a staking smart contract for your collection" /%}
 
+{% quick-link title="Create a claim based airdrop using Gumdrop" icon="CodeBracketSquare" href="/guides/general/spl-token-claim-airdrop-using-gumdrop" description="Learn how to create a claim based airdrop using Gumdrop" /%}
+
 {% /quick-links %}
