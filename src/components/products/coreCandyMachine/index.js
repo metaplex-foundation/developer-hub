@@ -20,11 +20,6 @@ export const coreCandyMachine = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/core-candy-machine' },
-            {
-              title: 'Getting Started',
-              href: '/core-candy-machine/getting-started',
-              // Subpages: /js /rust, etc.
-            },
           ],
         },
         {
