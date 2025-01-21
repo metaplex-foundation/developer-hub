@@ -53,14 +53,14 @@ Ensure you mint enough tokens to cover your entire distribution list plus some b
 
 ## Distribution Methods
 
-To distribute the proofs to the users gumdrop supports multiple distribution methods. Wallet-based distribution is recommended for:
+To distribute the proofs to the users, gumdrop supports multiple distribution methods. Wallet-based distribution is recommended for:
 - Better reliability
 - Simpler implementation
 - No dependency on external services
 - Direct wallet verification
 
 For wallet distribution, you'll need to either
-- send your users a claim URL containing the required proof data. There are for example Discord Bots that can help you with this.
+- Send your users a claim URL containing the required proof data, using one of the already available Discord Bots 
 or:
 1. Store the claim data in your database indexed by wallet address
 2. Create a frontend that fetches claim data when users connect their wallet
@@ -72,7 +72,7 @@ Other distribution methods are:
 - Discord through Discord API
 
 ## Distribution List Setup
-After creating the SPL token, you need to create a distribution list. This list defines who can claim tokens and how many they can claim. This data is used to:
+After creating the SPL token, you need to create a distribution list. This list defines who can claim tokens and the amount. This data is used to:
 1. Generate unique claim proofs for each recipient
 2. Create a merkle tree where the root is stored on-chain for verification
 3. Ensure only listed recipients can claim their exact allocation
@@ -117,7 +117,7 @@ ts-node gumdrop-cli.ts create \
 ```
 
 {% callout type="note" title="Gumdrop Keypair" %}
-The CLI will create a `.log` folder containing a keypair. Save it. You need it to close the Gumdrop and recover unclaimed tokens.
+The CLI will create a `.log` folder containing a keypair. Save it since you will need it to close the Gumdrop account and recover any unclaimed tokens.
 {% /callout %}
 
 ## Hosting the Claim Interface
