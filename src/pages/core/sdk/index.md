@@ -8,7 +8,7 @@ Select the language / library you want to use below to get started with the new 
 
 {% quick-links %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/core/sdk/js" description="Get started with our JavaScript library for MPL-Core based on the Umi framework." /%}
+{% quick-link title="JavaScript" icon="JavaScript" href="/core/sdk/javascript" description="Get started with our JavaScript library for MPL-Core based on the Umi framework." /%}
 
 {% quick-link title="Rust" icon="Rust" href="/core/sdk/rust" description="Get started using our MPL-Core Rust crate." /%}
 
