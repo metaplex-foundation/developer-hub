@@ -34,7 +34,7 @@ During the initialization of the `umi` instance you can add the mpl-core package
 .use(mplCandyMachine())
 ```
 
-You can add the `mplCoreCandyMachine()` package anywhere in your umi instance creation with `.use()`.
+You can add the `mpCandyMachine()` package anywhere in your umi instance creation with `.use()`.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
