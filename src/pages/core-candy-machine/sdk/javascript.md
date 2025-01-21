@@ -41,7 +41,7 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { mplCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine'
 
 // Use the RPC endpoint of your choice.
-const umi = createUmi('http://api.devenet.solana.com')
+const umi = createUmi('http://api.devnet.solana.com')
 ... // additional umi settings, packages, and signers
 .use(mplCandyMachine())
 ```
