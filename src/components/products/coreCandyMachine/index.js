@@ -26,6 +26,7 @@ export const coreCandyMachine = {
           title: 'SDK',
           links: [
             { title: 'Javascript SDK', href: '/core-candy-machine/sdk/javascript' },
+            { title: 'Rust SDK', href: '/core-candy-machine/sdk/rust' },
           ],
         },
         {
