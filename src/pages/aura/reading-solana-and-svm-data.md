@@ -4,7 +4,7 @@ metaTitle: Reading Solana and SVM Data | Aura
 description: Learn about Reading Solana and SVM data with Metaplex Aura.
 ---
 
-The Metaplex Aura network provides developers performant, reliable and accurate read access to onchain state for Solana and other SVM based chains like Eclipse.
+The Metaplex Aura data network provides developers performant, reliable and accurate read access to onchain state for Solana and other SVM based chains like Eclipse.
 
 Indexers and RPC providers often face substantial challenges in maintaining data consistency and performance. This is due to several issues:
 

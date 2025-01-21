@@ -8,6 +8,7 @@ import Image from '@/components/Image'
 import { QuickLink, QuickLinks } from '@/components/QuickLinks'
 import { Seperator } from '@/components/Seperator'
 import { Totem, TotemAccordion, TotemProse } from '@/components/Totem'
+import Video from '@/components/Video'
 import ApiComponentWrapper from '@/components/apiComponents/apiComponentWrapper'
 import {
   Diagram,
@@ -161,6 +162,14 @@ const tags = {
       classes: { type: String },
     },
     selfClosing: true,
+  },
+  video: {
+    render: Video,
+    attributes: {
+      src: { type: String },
+      classes: { type: String },
+      embed: { type: Boolean },
+    },
   },
   apiRenderer: {
     attributes: {

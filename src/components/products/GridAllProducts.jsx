@@ -1,14 +1,10 @@
-import { Grid } from './Grid'
-import { productCategories } from './index'
+import { Grid } from './Grid';
+import { productCategories } from './index';
 
 export function MarkdocGrid() {
   return (
     <div className="not-prose">
       {productCategories.map((item, index) => {
-
-        console.log(item)
-
-        if (item === 'Aura') return
 
         return (
           <>

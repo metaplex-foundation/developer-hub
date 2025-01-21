@@ -6,8 +6,8 @@ export const aura = {
   name: 'Aura',
   headline: 'Indexing and Data Availability Network',
   description:
-    'A decentralized indexing and data availability network that extends Solana and the Solana Virtual Machine (SVM)',
-  navigationMenuCatergory: 'Utility',
+    'A data network that extends Solana and the Solana Virtual Machine (SVM)',
+  navigationMenuCatergory: 'Aura',
   path: 'aura',
   icon: <SparklesIcon />,
   github: 'https://github.com/metaplex-foundation/aura/',
@@ -32,7 +32,7 @@ export const aura = {
               href: '/aura/faq',
             },
             {
-              title: 'Pricing',
+              title: 'Access and Pricing',
               href: '/aura/pricing',
             },
           ],
@@ -54,20 +54,6 @@ export const aura = {
             },
           ],
         },
-        {
-          title: 'Blockchains',
-          links: [
-            {
-              title: 'Solana',
-              href: '/aura/blockchains/solana',
-            },
-            {
-              title: 'Eclipse',
-              href: '/aura/blockchains/eclipse',
-            },
-          ],
-        },
-
         {
           title: 'DAS Methods',
           collapsed: true,
@@ -115,6 +101,15 @@ export const aura = {
             {
               title: 'Search Assets',
               href: '/aura/api/v1/das/search-assets',
+            },
+          ],
+        },
+        {
+          title: 'Guides',
+          links: [
+            {
+              title: 'Using Aura Endpoints',
+              href: '/aura/using-aura-endpoints',
             },
           ],
         },

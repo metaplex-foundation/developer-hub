@@ -159,6 +159,5 @@ We will also explore how to track listings, bids and sales on Auction Houses and
 
 ## Additional Reading Material
 
-- [Prof Lupin's Auction House guide](https://proflupin.xyz/metaplex-auction-house)
 - [Jordan's twitter thread](https://twitter.com/redacted_j/status/1453926144248623104)
 - [Armani's twitter thread](https://twitter.com/armaniferrante/status/1460760940454965248)

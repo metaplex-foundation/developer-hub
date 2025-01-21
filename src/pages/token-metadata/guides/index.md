@@ -14,4 +14,6 @@ The following guides for MPL Token Metadata are currently available:
 
 {% quick-link title="Account Size Reduction" icon="Lightbulb" href="/token-metadata/guides/account-size-reduction" description="Learn more about the TM Account Size Reduction" /%}
 
+{% quick-link title="Token Claimer Smart Contract" icon="CodeBracketSquare" href="/token-metadata/guides/anchor/token-claimer-smart-contract" description="Learn how to create a Token Claimer Smart Contract on Solana leveraging Merkle Trees and using Anchor!" /%}
+
 {% /quick-links %}

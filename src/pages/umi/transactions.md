@@ -17,7 +17,7 @@ Umi defines its own set of interfaces for transactions, instructions and all oth
 - [TransactionMessage](https://umi.typedoc.metaplex.com/interfaces/umi.TransactionMessage.html): A transaction message is composed of all required public keys, one or many compiled instructions using indexes instead of public keys, a recent blockhash and other attributes such as its version. A transaction message can have one of the following versions:
   - Version: "legacy": The first Solana iteration of the transaction message.
   - Version: 0: The first transaction message version that introduces transaction versioning. It also introduces address lookup tables.
-- [Instruction](https://umi.typedoc.metaplex.com/interfaces/umi.Instruction.html): An instruction is composed of a program id, a list of [AccountMeta](https://umi.typedoc.metaplex.com/types/umi.AccountMeta.html) and some serialized data. Each account `AccountMeta` is composed of a public key, a boolean indicating whether it will be signing the transaction and another boolean indicating whether it's writable or not.
+- [Instruction](https://umi.typedoc.metaplex.com/types/umi.Instruction.html): An instruction is composed of a program id, a list of [AccountMeta](https://umi.typedoc.metaplex.com/types/umi.AccountMeta.html) and some serialized data. Each account `AccountMeta` is composed of a public key, a boolean indicating whether it will be signing the transaction and another boolean indicating whether it's writable or not.
 
 To create a new transaction, you may use the `create` method of the `TransactionFactoryInterface`. For instance, here's how you'd create a version `0` transaction with a single instruction:
 
@@ -219,7 +219,9 @@ await lutBuilder.sendAndConfirm(umi)
 myBuilder = myBuilder.setAddressLookupTables([lut])
 ```
 
-## Get human readable transaction signature
+## Convert Transaction Signature format
+
+### Get human readable (base58) transaction signature
 
 The `signature` that is returned when sending transactions is of type `Uint8Array`. Therefore to get a string instead that can be copied and, for example opened in an explorer you it is required to deserialize it first like this:
 
@@ -233,6 +235,20 @@ const serializedSignature = base58.deserialize(signature)[0];
 console.log(
         `View Transaction on Explorer: https://explorer.solana.com/tx/${serializedSignature}`
       );
+```
+
+### Convert human readable (base58) transaction signature to Uint8Array
+
+In some cases you might have a base58 encoded transaction signature and you want to convert it to a Uint8Array. For example this might be the case if you copied a transaction signature from an explorer and you want to use it in an umi script. 
+
+This can be done using the `base58.deserialize` method.
+
+```ts
+import { base58 } from "@metaplex-foundation/umi/serializers";
+
+const signature = "4NJhR8zm3G7hU1uhPZaBiTMBCERh4CWp2cF1x2Ly9yCvenrY6oS9hF2PAGfT26odWvb49BktkWkoBPGoXMYUVqkY";
+
+const transaction: Uint8Array = base58.serialize(signature)
 ```
 
 ## Fetching sent transactions
