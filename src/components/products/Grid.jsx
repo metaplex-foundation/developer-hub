@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { IconWithName } from './IconWithName'
-import { products as allProducts } from './index'
+import Link from 'next/link';
+import { IconWithName } from './IconWithName';
+import { products as allProducts } from './index';
 
 export function Grid({
   onClick,
