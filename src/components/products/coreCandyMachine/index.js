@@ -28,6 +28,12 @@ export const coreCandyMachine = {
           ],
         },
         {
+          title: 'SDK',
+          links: [
+            { title: 'Javascript SDK', href: '/core-candy-machine/sdk/javascript' },
+          ],
+        },
+        {
           title: 'Core Candy Machine',
 
           links: [
