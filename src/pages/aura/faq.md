@@ -10,7 +10,7 @@ description: Frequently asked questions about Aura
 
 Decentralized applications struggle to compete with centralized alternatives because it can be difficult, costly, and slow to read and display the current state of blockchain data. Aura solves this by indexing and replicating the most important state across a decentralized network of node operators, while working in conjunction with the Metaplex Program Library (MPL) to speed up execution performance on Solana and the SVM by operating in compressed state.
 
-### Why do we need decentralised indexing?
+### Why do we need decentralized indexing?
 
 Censorship resistant applications require decentralized networks for performantly, accurately and reliably reading onchain state. In additional, decentralized systems can achieve greater networks effects and data replication which will allow them to compete fundamentally on performance and cost while also providing censorship resistance. 
 
