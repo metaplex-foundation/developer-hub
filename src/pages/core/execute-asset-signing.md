@@ -49,7 +49,7 @@ the MPL Core programs `execute` instruction on chain.
 An overview of the `execute` instruction and it's args.
 
 ```ts
-const executeTx = await execute(umi, {
+const executeIx = await execute(umi, {
     {
         // The asset via `fetchAsset()` that is signing the transaction.
         asset: AssetV1,
@@ -105,7 +105,7 @@ const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
 const destination = publickey('2222222222222222222222222222222222')
 
 // A standard `transferSol()` transactionBuilder.
-const transferSolTx = transferSol(umi, {
+const transferSolIx = transferSol(umi, {
   // Create a noopSigner as the assetSigner will sign later during CPI
   source: createNoopSigner(publicKey(assetSigner)),
   // Destination address
@@ -114,14 +114,14 @@ const transferSolTx = transferSol(umi, {
   amount: sol(0.5),
 })
 
-// Call the `execute` transaction and send to the chain.
+// Call the `execute` instruction and send to the chain.
 const res = await execute(umi, {
-  // Execute transaction/instruction(s) with this asset
+  // Execute instruction(s) with this asset
   asset,
   // If Asset is part of collection pass in collection object via `fetchCollection()`
   collection,
   // The transactionBuilder/instruction[] to execute
-  instructions: transferSolTx,
+  instructions: transferSolIx,
 }).sendAndConfirm(umi)
 
 console.log({ res })
@@ -168,7 +168,7 @@ const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
 const destinationWallet = publickey('3333333333333333333333333333333')
 
 // A standard `transferTokens()` transactionBuilder.
-const transferTokensTx = transferTokens(umi, {
+const transferTokensIx = transferTokens(umi, {
   // Source is the `assetSignerPda` derived Token Account
   source: findAssociatedTokenPda(umi, {
     mint: splTokenMint,
@@ -183,14 +183,14 @@ const transferTokensTx = transferTokens(umi, {
   amount: 5000,
 })
 
-// Call the `execute` transaction and send to the chain.
+// Call the `execute` instruction and send to the chain.
 const res = await execute(umi, {
-  // Execute transaction/instruction(s) with this asset
+  // Execute instruction(s) with this asset
   asset,
   // If Asset is part of collection pass in collection object via `fetchCollection()`
   collection,
   // The transactionBuilder/instruction[] to execute
-  instructions: transferTokensTx,
+  instructions: transferTokensIx,
 }).sendAndConfirm(umi)
 
 console.log({ res })
@@ -235,7 +235,7 @@ const destinationAssetSignerPda = findAssetSignerPda(umi, {
   asset: destinationAssetId,
 })
 
-const transferAssetTx = transfer(umi, {
+const transferAssetIx = transfer(umi, {
   // Asset object via `fetchAsset()`.
   asset,
   // Optional - Collection object via `fetchCollection()`
@@ -245,12 +245,12 @@ const transferAssetTx = transfer(umi, {
 }).sendAndConfirm(umi)
 
 const res = await execute(umi, {
-  // Execute transaction/instruction(s) with this asset
+  // Execute instruction(s) with this asset
   asset,
   // If Asset is part of collection pass in collection object via `fetchCollection()`
   collection,
   // The transactionBuilder/instruction[] to execute
-  instructions: transferAssetTx,
+  instructions: transferAssetIx,
 }).sendAndConfirm(umi)
 
 console.log({ res })
