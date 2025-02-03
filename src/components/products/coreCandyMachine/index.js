@@ -215,6 +215,10 @@ export const coreCandyMachine = {
               title: 'Create a Website for minting Assets from your Core Candy Machine',
               href: '/core-candy-machine/guides/create-a-core-candy-machine-ui',
             },
+            {
+              title: 'Create a Core Candy Machine with Hidden Settings',
+              href: '/core-candy-machine/guides/create-a-core-candy-machine-with-hidden-settings',
+            },
           ],
         },
       ],
