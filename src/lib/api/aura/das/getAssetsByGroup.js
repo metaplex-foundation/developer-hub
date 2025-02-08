@@ -6,14 +6,14 @@ const getAssetsByGroup = {
       {
         name: 'groupKey',
         type: 'string',
-        description: 'Public key of the group',
-        placeholder: 'Public key of the group',
+        description: 'Grouping Key',
+        placeholder: 'collection',
         required: true,
       },
       {
         name: 'groupValue',
         type: 'string',
-        description: 'The value of the group.',
+        description: 'Value of the group. E.g. Public key of the collection',
         required: true,
       },
       {
