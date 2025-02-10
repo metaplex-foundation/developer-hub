@@ -33,8 +33,8 @@ const JavaScriptRequestRenderer = ({
 
 fetch(url, {
     method: "POST",
-    headers: ${headersCode},
-    body: ${jsonBody.replace(/\n/g, '\n    ')}
+    headers: {${headersCode}},
+    body: JSON.stringify(${jsonBody.replace(/\n/g, '\n    ')})
 })
 .then(response => response.json())
 .then(data => console.log(data))
