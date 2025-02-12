@@ -11,6 +11,7 @@ The Metaplex Protocol currently includes the following fees:
 | Instruction | Program | Typical Payer | Amount (SOL) | Notes |
 | --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Create | Core | Collector | 0.0015 | Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions. |
+| Execute | Core | Owner | 0.00004872 | Typical paid by the current owner the Core NFT Asset that is calling for the execute instruction. |
 | Create | Token Metadata | Collector | 0.01 | Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs). Includes all instructions that "create" an NFT including ones that create print editions. |
 | Create | Bubblegum | - | Free |
 | Swap | MPL-Hybrid | Collector | 0.005 | Paid by the individual who swaps tokens and NFTs. |
@@ -22,6 +23,7 @@ The Metaplex Protocol currently includes the following fees:
 | Instruction | Program | Typical Payer | Amount (ETH) | Notes |
 | --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Create | Core | Collector | 0.00001822 | Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions. |
+| Execute | Core | Owner | 0.000000478 | Typical paid by the current owner the Core NFT Asset that is calling for the execute instruction. |
 | Create | Token Metadata | Collector | 0.000103088 | Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs). Includes all instructions that "create" an NFT including ones that create print editions. |
 | Create | Bubblegum | - | Free |
 | Swap | MPL-Hybrid | Collector | 0.005 | Paid by the individual who swaps tokens and NFTs. |
