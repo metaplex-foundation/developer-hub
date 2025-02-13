@@ -130,7 +130,7 @@ cd token-claimer-example
 Then run the following command to install the merkle tree crate:
 
 ```
-cargo add svm_merkle_tree
+cargo add svm-merkle-tree --git https://github.com/deanmlittle/svm-merkle-tree
 ```
 
 And then we run the following command to install the anchor-spl to interact with the Token Program:
