@@ -84,6 +84,8 @@ When minting to another wallet using Typescript, there are two main approaches d
 ### Mint without Guards
 For Candy Machines without guards, use `mintFromCandyMachineV2`. This function allows you to directly specify the recipient as the `nftOwner`.
 
+To gain access to Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
+
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
 
@@ -144,7 +146,7 @@ import {
 
 // Configuration
 const RECIPIENT_ADDRESS = "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV";
-const RPC_ENDPOINT = "https://devnet.helius-rpc.com/?api-key=0aa5bfbe-0077-4414-9d87-02ffa09cc50b";
+const RPC_ENDPOINT = "https://aura-devnet.metaplex.com";
 
 (async () => {
   try {

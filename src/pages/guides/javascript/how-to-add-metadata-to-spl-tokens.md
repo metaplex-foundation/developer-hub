@@ -91,7 +91,7 @@ You can place the Umi instantiation code inside or outside the code blocks, but 
 ### Generating a New Wallet
 
 ```ts
-const umi = createUmi("https://api.devnet.solana.com")
+const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
 	.use(mplTokenMetadata())
 	.use(mplToolbox());
 

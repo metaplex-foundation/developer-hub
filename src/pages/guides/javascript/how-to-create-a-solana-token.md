@@ -96,7 +96,7 @@ You can place the umi variable and code block either inside or outside the `crea
 ### Generating a New Wallet
 
 ```ts
-const umi = createUmi('https://api.devnet.solana.com')
+const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
   .use(mplCore())
   .use(irysUploader())
 
@@ -115,7 +115,7 @@ await umi.rpc.airdrop(umi.identity.publickey)
 ### Use an Existing Wallet Stored Locally
 
 ```ts
-const umi = createUmi('https://api.devnet.solana.com')
+const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
   .use(mplTokenMetadata())
   .use(mplToolbox())
   .use(irysUploader())
@@ -330,7 +330,7 @@ import fs from 'fs'
 import path from 'path'
 
 const createAndMintTokens = async () => {
-  const umi = createUmi('https://api.devnet.solana.com')
+  const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
     .use(mplTokenMetadata())
     .use(irysUploader())
 

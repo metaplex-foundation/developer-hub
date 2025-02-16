@@ -44,6 +44,9 @@ In the Candy Machine Account, data such as the number of Available and Redeemed 
 
 To fetch the Candy Machine, the `fetchCandyMachine` function can be used as shown below:
 
+We will be usinf the Metaplex Aura Devnet endpoint.
+To gain access to Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
+
 ```ts
 import {
   mplCandyMachine,
@@ -52,7 +55,8 @@ import {
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 
 // The next two lines are only required if you did not set up umi before
-const umi = createUmi("https://api.devnet.solana.com")
+// We will be using Solana Devnet from Aura data network as endpoint
+const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
             .use(mplCandyMachine());
 
 const candyMachineId = "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9";

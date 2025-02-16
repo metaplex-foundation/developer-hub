@@ -87,7 +87,7 @@ This example is going to run through setting up Umi with a `generatedSigner()`. 
 ### Generating a New Wallet
 
 ```ts
-const umi = createUmi('https://api.devnet.solana.com')
+const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
   .use(mplTokenMetadata())
   .use(
     irysUploader({
@@ -110,7 +110,7 @@ await umi.rpc.airdrop(umi.identity.publickey)
 ### Use an Existing Wallet
 
 ```ts
-const umi = createUmi('https://api.devnet.solana.com')
+const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
   .use(mplTokenMetadata())
   .use(
     irysUploader({
@@ -345,7 +345,7 @@ const createNft = async () => {
   // ** Setting Up Umi **
   //
 
-  const umi = createUmi('https://api.devnet.solana.com')
+  const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
     .use(mplTokenMetadata())
   .use(
     irysUploader({
