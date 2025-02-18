@@ -12,7 +12,7 @@ Return the list of assets given a group (key, value) pair. For example this can 
 | ------------------ | :------: | ------------------------------------------ |
 | `groupKey`         |    ✅    | The key of the group (e.g., `"collection"`).  |
 | `groupValue`       |    ✅    | The value of the group.  |
-| `sortBy`           |          | Sorting criteria. This is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, where `sortBy` is one of `["created", "updated", "recentAction", "none"]` and `sortDirection` is one of `["asc", "desc"]`     |
+| `sortBy`           |          | Sorting criteria. This is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, where `sortBy` is one of `["created", "updated", "recentAction", "id", "none"]` and `sortDirection` is one of `["asc", "desc"]`     |
 | `limit`            |          | The maximum number of assets to retrieve.  |
 | `page`             |          | The index of the "page" to retrieve.       |
 | `before`           |          | Retrieve assets before the specified ID.   |
