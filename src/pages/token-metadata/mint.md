@@ -377,6 +377,8 @@ await createNft(umi, {
   name: 'My NFT',
   uri: 'https://example.com/my-nft.json',
   sellerFeeBasisPoints: percentAmount(5.5),
+  // optional if you directly want to add to a collection. Need to verify later.
+  // collection: some({ key: collectionMint.publicKey, verified: false }),
 }).sendAndConfirm(umi)
 ```
 
@@ -430,6 +432,8 @@ await createProgrammableNft(umi, {
   name: 'My Programmable NFT',
   uri: 'https://example.com/my-programmable-nft.json',
   sellerFeeBasisPoints: percentAmount(5.5),
+  // optional if you directly want to add to a collection. Need to verify later.
+  // collection: some({ key: collectionMint.publicKey, verified: false }),
 }).sendAndConfirm(umi)
 ```
 
