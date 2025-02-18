@@ -109,7 +109,7 @@ umi.use(signerIdentity(signer))
 // Airdrop 1 SOL to the identity
 // if you end up with a 429 too many requests error, you may have to use
 // the a different rpc other than the free default one supplied.
-await umi.rpc.airdrop(umi.identity.publickey)
+await umi.rpc.airdrop(umi.identity.publicKey)
 ```
 
 ### Use an Existing Wallet Stored Locally
@@ -255,8 +255,8 @@ If we are minting the tokens straight away then we need a place to store the tok
 The first thing we need to do is figure out what the Token Account address should be. MPL-Toolbox has a helper function we can import that does just that while also creating the Token Account for if it doesn't exist.
 
 ```ts
-const createTokenIx = createTokenAccountIfMissing(umi, {
-  mint: mintSigner.publickey,
+const createTokenIx = createTokenIfMissing(umi, {
+  mint: mintSigner.publicKey,
   owner: umi.identity.publicKey,
   ataProgram: getSplAssociatedTokenProgramId(umi),
 })
@@ -268,9 +268,9 @@ Now that we have a instruction to create an Token Account we can mint tokens to 
 
 ```ts
 const mintTokensIx = mintTokensTo(umi, {
-  mint: mintSigner.publickey,
+  mint: mintSigner.publicKey,
   token: findAssociatedTokenPda(umi, {
-    mint: mintSigner.publickey,
+    mint: mintSigner.publicKey,
     owner: umi.identity.publicKey,
   }),
   amount: BigInt(1000),
