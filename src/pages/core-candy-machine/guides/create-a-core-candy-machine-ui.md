@@ -44,7 +44,7 @@ In the Candy Machine Account, data such as the number of Available and Redeemed 
 
 To fetch the Candy Machine, the `fetchCandyMachine` function can be used as shown below:
 
-We will be usinf the Metaplex Aura Devnet endpoint.
+We will be using the Metaplex Aura Devnet endpoint.
 To gain access to Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
 
 ```ts
