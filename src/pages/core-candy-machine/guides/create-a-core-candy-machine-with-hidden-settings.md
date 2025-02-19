@@ -37,7 +37,7 @@ While setting up Umi, you can create new wallets for testing, import wallets fro
 For this example, we will be creating a Keypair from a json file (wallet.json) containing a secret key.
 
 We will be using the devnet Aura endpoint.
-To gain access to Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
+To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
 
 ```ts
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
