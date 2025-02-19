@@ -45,7 +45,7 @@ import { generateSigner, some, none, createSignerFromKeypair, signerIdentity, tr
 import { mplCandyMachine as mplCoreCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
 import * as fs from 'fs';
 
-// We will be using Solana Devnet from Aura data network as endpoint, and loading the mplCoreCandyMachine plugin
+// We will be using Solana Devnet from the Metaplex Aura data network as the endpoint while also loading the `mplCoreCandyMachine()` plugin.
 const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
             .use(mplCoreCandyMachine());
 
