@@ -146,7 +146,7 @@ import {
 
 // Configuration
 const RECIPIENT_ADDRESS = "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV";
-const RPC_ENDPOINT = "https://aura-devnet.metaplex.com";
+const RPC_ENDPOINT = "https://devnet-aura.metaplex.com/<YOUR_API_KEY>";
 
 (async () => {
   try {
