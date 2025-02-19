@@ -64,7 +64,7 @@ const turbo = TurboFactory.authenticated({
 ```
 
 **Note**: In this example, we explicitly provide the `gatewayUrl`, `paymentServiceConfig`, and `uploadServiceConfig` because we want to configure the environment to work on devnet. For mainnet usage, you can leave these fields empty, and Turbo will default to the mainnet endpoints.
-To gain access to Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
+To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
 
 ## Upload the Metadata
 
