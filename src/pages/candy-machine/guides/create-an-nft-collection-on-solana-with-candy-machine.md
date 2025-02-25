@@ -48,7 +48,7 @@ Both your images and your metadata files will reside in the `assets` folder.
 
 Images and Metadata JSON files are expected to follow an incremental index naming convention starting from 0.
 
-If any indices are missed of if the `image` and `metadata` folders do not include the same amount of files then folder validation will fail.
+If any indices are missed or if the `image` and `metadata` folders do not include the same amount of files then folder validation will fail.
 
 ```
 assets/
