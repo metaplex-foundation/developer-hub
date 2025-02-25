@@ -80,7 +80,7 @@ This example is going to run through setting up Umi with a `generatedSigner()`. 
 If you wish to generate a new wallet/private key to test with you generate a new signer with `umi`.
 
 ```ts
-const umi = createUmi('https://api.devnet.solana.com')
+const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
   .use(mplCore())
   .use(irysUploader())
 
@@ -97,7 +97,7 @@ await umi.rpc.airdrop(umi.identity.publickey)
 ### Use an Existing Wallet Stored Locally
 
 ```ts
-const umi = createUmi('https://api.devnet.solana.com')
+const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
   .use(mplToolbox())
 
 // You will need to use fs and navigate the filesystem to
@@ -139,7 +139,7 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 
 const transfer = async () => {
-  const umi = createUmi('https://api.devnet.solana.com').use(mplToolbox())
+  const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(mplToolbox())
 
   const signer = generateSigner(umi)
 
