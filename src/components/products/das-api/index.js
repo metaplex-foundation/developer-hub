@@ -1,8 +1,8 @@
 import {
-  changelogSection,
-  documentationSection,
-  recipesSection,
-  referencesSection,
+    changelogSection,
+    documentationSection,
+    recipesSection,
+    referencesSection,
 } from '@/shared/sections'
 import { TableCellsIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
@@ -35,7 +35,10 @@ export const das = {
           links: [
             { title: 'Method Overview', href: '/das-api/methods' },
             { title: 'Get Asset', href: '/das-api/methods/get-asset' },
+            { title: 'Get Assets', href: '/das-api/methods/get-assets' },
             { title: 'Get Asset Proof', href: '/das-api/methods/get-asset-proof' },
+            { title: 'Get Asset Proofs', href: '/das-api/methods/get-asset-proofs' },
+            { title: 'Get Asset Signatures', href: '/das-api/methods/get-asset-signatures' },
             { title: 'Get Asset By Authority', href: '/das-api/methods/get-asset-by-authority' },
             { title: 'Get Asset By Creator', href: '/das-api/methods/get-asset-by-creator' },
             { title: 'Get Asset By Group', href: '/das-api/methods/get-asset-by-group' },
