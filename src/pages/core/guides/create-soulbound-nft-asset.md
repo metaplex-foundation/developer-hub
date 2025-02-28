@@ -11,6 +11,8 @@ Soulbound NFTs are non-fungible tokens that are permanently bound to a specific 
 
 In this guide, we'll explore how to create soulbound assets using MPL Core and the Umi Framework. Whether you're a developer looking to implement soulbound NFTs in TypeScript or just want to understand how they work, we'll cover everything from basic concepts to practical implementation. We'll examine different approaches for making assets soulbound and walk through creating your first soulbound NFT within a collection.
 
+To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
+
 In MPL Core, there are two main approaches to create soulbound NFTs:
 
 ### 1. Permanent Freeze Delegate Plugin
@@ -83,7 +85,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
-    "YOUR ENDPOINT"
+    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
   ).use(mplCore());
 
   // Step 2: Create and fund a test wallet
@@ -188,7 +190,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
-    "YOUR ENDPOINT"
+    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
   ).use(mplCore());
 
   // Step 2: Create and fund a test wallet
@@ -337,7 +339,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
-    "YOUR ENDPOINT"
+    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
   ).use(mplCore());
 
   // Step 2: Create and fund a test wallet
@@ -456,7 +458,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
-    "YOUR ENDPOINT"
+    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
   ).use(mplCore());
 
   // Step 2: Create and fund a test wallet
