@@ -37,7 +37,10 @@ There are 25.7M eligible Token Metadata NFTs with Token Metadata accounts that a
 
 You can use our free UI at [resize.metaplex.com](https://resize.metaplex.com) to resize your eligible assets between now and April 25th, 2025.
 
-Alternative tools exist that offer a paid service for processing the Resize instruction, such as [Sol Incinerator](https://sol-incinerator.com/) (5% of the resize amount).
+Alternative resize tools exist at various fee levels:
+
+* [SolRip](https://solrip.io/) (Free)
+* [Sol Incinerator](https://sol-incinerator.com/) (5% of the resize amount).
 
 ## If I resize my NFT now, can I still burn the NFT later and claim the remaining rent?
 
@@ -64,9 +67,9 @@ Every Program and Tool that is based on our Rust SDK and deserializes Data from 
 
 ## Which SDK Versions are affected?
 
-- **Javascript**: The JS SDKs (both @metaplex-foundation/js and Umi-based SDKs) are not affected
-- **Rust**: The Rust SDK became compatible over a Year ago starting with v2.0.0 (Available since August 2023)
-- **Anchor**: Anchor 0.29 and above is compatible to the new sizes (Available since October 2023)
+* **Javascript**: The JS SDKs (both @metaplex-foundation/js and Umi-based SDKs) are not affected
+* **Rust**: The Rust SDK became compatible over a Year ago starting with v2.0.0 (Available since August 2023)
+* **Anchor**: Anchor 0.29 and above is compatible to the new sizes (Available since October 2023)
 
 ## How to make your Program compatible?
 
