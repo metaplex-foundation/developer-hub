@@ -18,7 +18,7 @@ cargo add mpl-bubblegum
 
 {% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-bubblegum" description="Get started with our MPL-Bubblegum Rust crate." /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/MPL-Bubblegum/latest/mpl_core/" description="The Rust SDK typedoc platform for MPL-Bubblegum." /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/MPL-Bubblegum/latest/mpl_bubblegum/" description="The Rust SDK typedoc platform for MPL-Bubblegum." /%}
 
 {% /quick-links %}
 
@@ -97,7 +97,7 @@ pub async fn create_tree(keypair: Keypair) {
 
 Performing CPI instructions from your own programs can be achieved easily by using the `CpiBuilder` version of an instruction function that can be found for all instructions in the `MPL-Bubblegum` Rust crate.
 
-A list of all Core instructions can be found here: [Metaplex Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_core/instructions/index.html)
+A list of all Core instructions can be found here: [Metaplex Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
 For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
 
