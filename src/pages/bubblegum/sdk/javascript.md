@@ -26,7 +26,7 @@ npm install @metaplex-foundation/mpl-bubblegum
 
 ## Umi Setup
 
-An `umi` instance is required to interact with the Metaplex Javascript SDKs. If you haven't set up and configured an `umi` instance yet then you can get checkout the [Umi Getting Started](/umi/getting-started) page and configure your RPC endpoint and your `umi` identity/signer.
+An `umi` instance is required to interact with the Metaplex Javascript SDKs. If you haven't set up and configured an `umi` instance yet then you can checkout the [Umi Getting Started](/umi/getting-started) page and configure your RPC endpoint and your `umi` identity/signer.
 
 During the initialization of the `umi` instance you can add the MPL-Bubblegum package to `umi` using
 
@@ -34,11 +34,11 @@ During the initialization of the `umi` instance you can add the MPL-Bubblegum pa
 .use(mplCore())
 ```
 
-You can add the `mplCore()` package anywhere in your umi instance creation with `.use()`.
+You can add the `mplBubblegum()` package anywhere in your umi instance creation with `umi.use(mplBubblegum())`.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { mplbubblegum } from '@metaplex-foundation/mpl-bubblegum'
+import { mplBubblegum } from '@metaplex-foundation/mpl-bubblegum'
 
 // Use the RPC endpoint of your choice.
 const umi = createUmi('http://api.devnet.solana.com')
