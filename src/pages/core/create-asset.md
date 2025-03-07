@@ -334,19 +334,19 @@ pub async fn create_asset_with_collection() {
 {% dialect title="Rust (CPI)" id="rust-cpi" %}
 
 ```rust
-let create_ix = CreateV1CpiBuilder::new()
-        .asset(input.asset.pubkey())
-        .collection(input.collection)
-        .authority(input.authority)
-        .payer(payer)
-        .owner(input.owner)
-        .update_authority(input.update_authority)
-        .system_program(system_program::ID)
-        .data_state(input.data_state.unwrap_or(DataState::AccountState))
-        .name(input.name.unwrap_or(DEFAULT_ASSET_NAME.to_owned()))
-        .uri(input.uri.unwrap_or(DEFAULT_ASSET_URI.to_owned()))
-        .plugins(input.plugins)
-        .invoke();
+let create_ix = CreateV1CpiBuilder::new(input.program)
+    .asset(input.asset.pubkey())
+    .collection(Some(input.collection))
+    .authority(Some(input.authority))
+    .payer(input.payer)
+    .owner(Some(input.owner))
+    .update_authority(Some(input.update_authority))
+    .system_program(system_program::ID)
+    .data_state(input.data_state.unwrap_or(DataState::AccountState))
+    .name(input.name)
+    .uri(input.uri)
+    .plugins(input.plugins)
+    .invoke();
 ```
 
 {% /dialect %}
