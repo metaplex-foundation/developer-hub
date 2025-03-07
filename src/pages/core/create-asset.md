@@ -267,12 +267,10 @@ use mpl_core::instructions::{CreateCollectionV1Builder, CreateV1Builder};
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
 
-
-pub async fn create_asset_with_collection() {
-
+pub async fn create_asset_with_collection(keypair: Keypair) {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
-    let payer = Keypair::new();
+    let payer = keypair;
     let collection = Keypair::new();
 
     let create_collection_ix = CreateCollectionV1Builder::new()
@@ -293,7 +291,10 @@ pub async fn create_asset_with_collection() {
         last_blockhash,
     );
 
-    let res = rpc_client.send_and_confirm_transaction(&create_collection_tx).await.unwrap();
+    let res = rpc_client
+        .send_and_confirm_transaction(&create_collection_tx)
+        .await
+        .unwrap();
 
     println!("Signature: {:?}", res);
 
@@ -301,6 +302,7 @@ pub async fn create_asset_with_collection() {
 
     let create_asset_ix = CreateV1Builder::new()
         .asset(asset.pubkey())
+        .collection(Some(collection.pubkey()))
         .payer(payer.pubkey())
         .name("My Nft".into())
         .uri("https://example.com/my-nft.json".into())
@@ -317,7 +319,10 @@ pub async fn create_asset_with_collection() {
         last_blockhash,
     );
 
-    let res = rpc_client.send_and_confirm_transaction(&create_asset_tx).await.unwrap();
+    let res = rpc_client
+        .send_and_confirm_transaction(&create_asset_tx)
+        .await
+        .unwrap();
 
     println!("Signature: {:?}", res)
 }
