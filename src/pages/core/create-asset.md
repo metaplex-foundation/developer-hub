@@ -267,26 +267,27 @@ use mpl_core::instructions::{CreateCollectionV1Builder, CreateV1Builder};
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
 
-pub async fn create_asset_with_collection(keypair: Keypair) {
+pub async fn create_asset_with_collection() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
-    let payer = keypair;
+    let signer = Keypair::new(); // Load keypair here.
+
     let collection = Keypair::new();
 
     let create_collection_ix = CreateCollectionV1Builder::new()
         .collection(collection.pubkey())
-        .payer(payer.pubkey())
+        .payer(signer.pubkey())
         .name("My Collection".into())
         .uri("https://example.com/my-collection.json".into())
         .instruction();
 
-    let signers = vec![&collection, &payer];
+    let signers = vec![&collection, &signer];
 
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
 
     let create_collection_tx = Transaction::new_signed_with_payer(
         &[create_collection_ix],
-        Some(&payer.pubkey()),
+        Some(&signer.pubkey()),
         &signers,
         last_blockhash,
     );
@@ -303,18 +304,18 @@ pub async fn create_asset_with_collection(keypair: Keypair) {
     let create_asset_ix = CreateV1Builder::new()
         .asset(asset.pubkey())
         .collection(Some(collection.pubkey()))
-        .payer(payer.pubkey())
+        .payer(signer.pubkey())
         .name("My Nft".into())
         .uri("https://example.com/my-nft.json".into())
         .instruction();
 
-    let signers = vec![&asset, &payer];
+    let signers = vec![&asset, &signer];
 
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
 
     let create_asset_tx = Transaction::new_signed_with_payer(
         &[create_asset_ix],
-        Some(&payer.pubkey()),
+        Some(&signer.pubkey()),
         &signers,
         last_blockhash,
     );
