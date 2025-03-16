@@ -147,7 +147,7 @@ This instruction accepts a variety of parameters and our SDKs do their best to p
 {% /callout %}
 
 {% dialect-switcher title="Create onchain Accounts" %}
-{% dialect title="JavaScript" id="js" %}
+{% dialect title="JavaScript - Umi" id="js-umi" %}
 
 ```ts
 import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
@@ -169,7 +169,7 @@ await createV1(umi, {
 
 {% /dialect %}
 
-{% dialect title="Rust" id="rust" %}
+{% dialect title="Rust Script" id="rust-script" %}
 {% totem %}
 
 ```rust
@@ -222,7 +222,7 @@ Note that when setting the `mint` account, it is require to specify a `bool` fla
 
 {% /dialect %}
 
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
+{% dialect title="Rust MPL SDK - CPI" id="rust-cpi" %}
 
 ```rust
 use mpl_token_metadata::{
