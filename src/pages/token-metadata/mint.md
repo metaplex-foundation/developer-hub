@@ -142,8 +142,7 @@ This instruction accepts a variety of parameters and our SDKs do their best to p
 - **Token Standard**: The Token Standard of the asset.
 
 {% callout %}
-`createV1` is a helper function that can initialize the Mint Account and create the Metadata Account. If the mint exists already it will only create the metadata Account. If you are looking on how to use [`createMetadataAccountV3`](https://mpl-token-metadata-js-docs.vercel.app/functions/createMetadataAccountV3.html) you should be using this function instead.
-
+`createV1` is a helper function that can initialize the Mint Account and create the Metadata Account. If the mint exists already it will only create the metadata Account. If you are looking for how to use [`createMetadataAccountV3`](https://mpl-token-metadata-js-docs.vercel.app/functions/createMetadataAccountV3.html) you should be using this function instead.
 {% /callout %}
 
 {% dialect-switcher title="Create onchain Accounts" %}
@@ -214,7 +213,7 @@ client.send_and_confirm_transaction(&tx)?;
 
 {% totem-prose %}
 
-Note that when setting the `mint` account, it is require to specify a `bool` flag to indicate whether the account will be a signer or not – it need to be a signer if the `mint` account does not exist.
+Note that when setting the `mint` account, it is required to specify a `bool` flag to indicate whether the account will be a signer or not – it needs to be a signer if the `mint` account does not exist.
 
 {% /totem-prose %}
 
@@ -242,7 +241,7 @@ let create_cpi = CreateV1CpiBuilder::new(token_metadata_program_info)
     .master_edition(Some(master_edition_info))
     .system_program(system_program_info)
     .sysvar_instructions(sysvar_instructions_info)
-    .spl_token_program(spl_token_program_info);
+    .spl_token_program(spl_token_program_info)
     .token_standard(TokenStandard::NonFungible)
     .name(String::from("My NFT"))
     .uri(uri)
@@ -439,5 +438,9 @@ await createProgrammableNft(umi, {
 
 {% /totem-accordion  %}
 
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+<!-- Rust helper examples are not provided in this version of the documentation -->
 {% /dialect %}
 {% /dialect-switcher %}

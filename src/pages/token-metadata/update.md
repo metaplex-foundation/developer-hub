@@ -234,7 +234,7 @@ await updateV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-    {% /totem %}
+{% /totem %}
 
 {% /dialect %}
 
