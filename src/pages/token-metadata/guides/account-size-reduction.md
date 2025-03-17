@@ -46,7 +46,7 @@ After that point any remaining SOL will be contributed to the Metaplex DAO which
 
 ### Who is affected by the change?
 
-Every Program and Tool that is based on our Rust SDK and deserializes Data from the TM Accounts and is using very old SDK Versions might be affected.
+Every Program and Tool that is based on our Rust SDK and deserializes Data from the TM Accounts and is using very old SDK Versions might be affected. The specific versions can be found [below](#which-sdk-versions-are-affected).
 
 ### How much is the Size reduced?
 
