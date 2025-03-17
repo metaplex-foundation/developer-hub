@@ -16,7 +16,7 @@ However, as stated in the Developer FAQ, programs using SDK versions dating back
 
 ## How many NFTs are eligible to be resized and how much SOL can I claim?
 
-There are 23.2M eligible NFTs that are eligible to be resized (as of March 4th). 0.0023 excess SOL can be claimed per Master Edition and 0.0019 excess SOL can be claimed per Edition.
+There are 23.2M NFTs that are eligible to be resized (as of March 4th). 0.0023 excess SOL can be claimed per Master Edition and 0.0019 excess SOL can be claimed per Edition.
 
 ## Why should I Resize?
 
