@@ -14,6 +14,11 @@ const redirectRules = {
     '/javascript/how-to-create-an-spl-token-on-solana':
       '/guides/javascript/how-to-create-a-solana-token',
   },
+  '/bubblegum': {
+    '/getting-started': '/bubblegum/sdk',
+    '/getting-started/js': '/bubblegum/sdk/javascript',
+    '/getting-started/rust': '/bubblegum/sdk/rust',
+  },
   '/core': {
     '/getting-started': '/core/sdk',
     'guides/javascript/how-to-create-a-core-nft-asset':
@@ -60,5 +65,6 @@ export const config = {
     '/mpl-hybrid/:path*',
     '/guides/javascript/how-to-create-an-spl-token-on-solana',
     '/core-candy-machine/:path*',
+    '/bubblegum/:path*',
   ],
 }

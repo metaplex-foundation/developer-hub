@@ -24,9 +24,15 @@ export const bubblegum = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/bubblegum' },
-            { title: 'Getting Started', href: '/bubblegum/getting-started' },
             { title: 'Metaplex DAS API RPCs', href: '/rpc-providers' },
             { title: 'FAQ', href: '/bubblegum/faq' },
+          ],
+        },
+        {
+          title: 'SDK',
+          links: [
+            { title: 'Javascript', href: '/bubblegum/sdk/javascript' },
+            { title: 'Rust', href: '/bubblegum/sdk/rust' },
           ],
         },
         {
