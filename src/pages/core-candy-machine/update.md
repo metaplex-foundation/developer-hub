@@ -116,7 +116,7 @@ Therefore, make sure to provide the settings for all guards you want to enable, 
 ```tsx
 import { some, none, sol } from '@metaplex-foundation/umi'
 
-const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority)
+const candyGuard = await fetchCandyGuard(umi, candyGuardId)
 await updateCandyGuard(umi, {
   candyGuard: candyGuard.publicKey,
   guards: {
