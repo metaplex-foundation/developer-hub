@@ -4,6 +4,7 @@ import {
   DialectSwitcher,
   transformDialectSwitcherTag,
 } from '@/components/DialectSwitcher'
+import { GitHubCode } from '@/components/GitHubCode'
 import Image from '@/components/Image'
 import { QuickLink, QuickLinks } from '@/components/QuickLinks'
 import { Seperator } from '@/components/Seperator'
@@ -176,6 +177,17 @@ const tags = {
       method: { type: String },
     },
     render: ApiComponentWrapper,
+  },
+  'github-code': {
+    render: GitHubCode,
+    // transform: transformDialectSwitcherTag,
+    attributes: {
+      repo: { type: String },
+      filePath: { type: String },
+      startLine: { type: Number },
+      endLine: { type: Number },
+      language: { type: String },
+    },
   },
 }
 
