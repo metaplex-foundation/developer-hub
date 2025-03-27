@@ -183,9 +183,16 @@ import {
 	createV1,
 	findMetadataPda,
 	mplTokenMetadata,
+	TokenStandard
 } from "@metaplex-foundation/mpl-token-metadata";
-import { createMint, mplToolbox } from "@metaplex-foundation/mpl-toolbox";
-import { generateSigner, signerIdentity, sol } from "@metaplex-foundation/umi";
+import { mplToolbox } from "@metaplex-foundation/mpl-toolbox";
+import {
+  generateSigner,
+  percentAmount,
+  publicKey,
+  signerIdentity,
+  sol,
+} from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { base58 } from "@metaplex-foundation/umi/serializers";
 
@@ -198,11 +205,6 @@ const signer = generateSigner(umi);
 
 // Tell umi to use the new signer.
 umi.use(signerIdentity(signer));
-
-// Airdrop 2 SOL to the identity
-// if you end up with a 429 too many requests error, you may have to use
-// the a different rpc other than the free default one supplied.
-await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 
 // your SPL Token mint address
 const mint = publicKey("YOUR_TOKEN_MINT_ADDRESS");
@@ -217,6 +219,11 @@ const tokenMetadata = {
 
 // Add metadata to an existing SPL token wrapper function
 async function addMetadata() {
+	// Airdrop 2 SOL to the identity
+    // if you end up with a 429 too many requests error, you may have to use
+    // the a different rpc other than the free default one supplied.
+    await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
+
     // derive the metadata account that will store our metadata data onchain
 	const metadataAccountAddress = await findMetadataPda(umi, {
 		mint: mint,
