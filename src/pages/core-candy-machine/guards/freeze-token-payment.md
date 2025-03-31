@@ -348,7 +348,7 @@ To thaw a Frozen Asset, we must provide the following arguments to the route ins
 - **Path** = `thaw`: Selects the path to execute in the route instruction.
 - **Mint**: The address of the mint account defining the SPL Token we want to pay with.
 - **Destination Associated Token Address (ATA)**: The address of the associated token account to eventually send the tokens to.
-- **Asset Adress**: The mint address of the Frozen Asset to thaw.
+- **Asset Address**: The mint address of the Frozen Asset to thaw.
 - **Asset Owner**: The address of the owner of the Frozen Asset to thaw.
 
 {% diagram  %}
@@ -551,7 +551,7 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [freezeTokenPaymentRouteArgsUnlockFunds](https://mpl-core-candy-machine.typedoc.metaplex.com/types/freezeTokenPaymentRouteArgsUnlockFunds.html)
+API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [freezeTokenPaymentRouteArgsUnlockFunds](https://mpl-core-candy-machine.typedoc.metaplex.com/types/FreezeTokenPaymentRouteArgsUnlockFunds.html)
 
 {% /totem %}
 {% /dialect %}

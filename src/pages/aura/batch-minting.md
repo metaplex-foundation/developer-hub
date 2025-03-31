@@ -4,7 +4,7 @@ metaTitle: Batch Minting | Aura
 description: Learn how Batch Minting works.
 ---
 
-Aura will allow a feature called **Batch Minting** which till take Bubblegum minting data and allow the user to mint cNFT Digtal Assets in minimal transactions.
+Aura will allow a feature called **Batch Minting** which till take Bubblegum minting data and allow the user to mint cNFT Digital Assets in minimal transactions.
 
 Minting digital assets accounts for more than 90% of all operations related to asset creation. To optimize this process and reduce transaction costs, Aura introduces an efficient solution through network extension. This extension to the Bubblegum program allows users to create and manage Merkle trees offline before finalizing them on-chain, enabling developers to generate entire trees with only a few transactions. This reduces the network load on Solana and lowers the costs associated with asset creation.
 
@@ -36,5 +36,5 @@ To incentivize nodes for processing batch operations and indexing asset data, an
 
 ## Development Progress
 
-The developement of batch minting can be found in our github repo here [https://github.com/metaplex-foundation/bubblegum-batch-sdk](https://github.com/metaplex-foundation/bubblegum-batch-sdk) and within our Aura repo [https://github.com/metaplex-foundation/aura/](ttps://github.com/metaplex-foundation/aura/)
+The development of batch minting can be found in our github repo here [https://github.com/metaplex-foundation/bubblegum-batch-sdk](https://github.com/metaplex-foundation/bubblegum-batch-sdk) and within our Aura repo [https://github.com/metaplex-foundation/aura/](https://github.com/metaplex-foundation/aura/)
 

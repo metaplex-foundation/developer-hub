@@ -1,11 +1,8 @@
 import {
-  changelogSection,
-  documentationSection,
-  recipesSection,
-  referencesSection,
+  documentationSection
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { ServerIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const amman = {
   name: 'Amman',
@@ -26,7 +23,7 @@ export const amman = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/amman' },
-            { title: 'Getting started', href: '/amman/getting-started' },
+            { title: 'Getting Started', href: '/amman/getting-started' },
             { title: 'CLI Commands', href: '/amman/cli-commands' },
             { title: 'Configuration', href: '/amman/configuration' },
             { title: 'Pre-made Configs', href: '/amman/pre-made-configs' },

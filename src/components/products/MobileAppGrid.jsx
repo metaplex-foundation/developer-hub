@@ -11,7 +11,6 @@ export function MobileAppGrid({
   menuItem,
   ...props
 }) {
-  console.log('menuItem', menuItem)
   const products = allProducts
 
   const hub = products.find((product) => product.name === 'Metaplex')

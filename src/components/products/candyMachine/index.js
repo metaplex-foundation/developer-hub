@@ -1,18 +1,16 @@
 import {
-  changelogSection,
   documentationSection,
-  recipesSection,
-  referencesSection,
-  guidesSection
+  guidesSection,
+  referencesSection
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { Square2StackIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const candyMachine = {
   name: 'Candy Machine',
   headline: 'TM NFT launchpad',
   description: 'Launch your next NFT collection on Solana.',
-  navigationMenuCatergory: 'Commerce',
+  navigationMenuCatergory: 'MPL',
   path: 'candy-machine',
   icon: <Square2StackIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-candy-machine',
@@ -119,7 +117,8 @@ export const candyMachine = {
         {
           title: 'Candy Machine Guides',
           links: [
-            { title: 'Create an NFT Collection on Solana with Candy Machine', href: '/candy-machine/recipes/todo' }
+            { title: 'Mint NFTs to Another Wallet - Airdrop example', href: '/candy-machine/guides/airdrop-mint-to-another-wallet' },
+            { title: 'Create an NFT Collection on Solana with Candy Machine', href: '/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine' }
           ],
         },
       ],

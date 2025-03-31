@@ -1,9 +1,7 @@
 import {
-  changelogSection,
   documentationSection,
   guidesSection,
-  recipesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
 import { ArchiveBoxIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
@@ -13,7 +11,7 @@ export const bubblegum = {
   headline: 'Compressed NFTs',
   description: 'NFTs that scale to new orders of magnitude.',
   path: 'bubblegum',
-  navigationMenuCatergory: 'Create',
+  navigationMenuCatergory: 'MPL',
   icon: <ArchiveBoxIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',
@@ -26,9 +24,15 @@ export const bubblegum = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/bubblegum' },
-            { title: 'Getting started', href: '/bubblegum/getting-started' },
             { title: 'Metaplex DAS API RPCs', href: '/rpc-providers' },
             { title: 'FAQ', href: '/bubblegum/faq' },
+          ],
+        },
+        {
+          title: 'SDK',
+          links: [
+            { title: 'Javascript', href: '/bubblegum/sdk/javascript' },
+            { title: 'Rust', href: '/bubblegum/sdk/rust' },
           ],
         },
         {
@@ -87,7 +91,11 @@ export const bubblegum = {
           links: [
             {
               title: 'How to Create a 1,000,000 NFT Collection on Solana',
-              href: 'guides/javascript/how-to-create-1000000-nfts-on-solana',
+              href: '/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana',
+            },
+            {
+              title: 'How to Interact with cNFTs on Other SVMs',
+              href: '/bubblegum/guides/javascript/how-to-interact-with-cnfts-on-other-svms',
             },
           ],
         },

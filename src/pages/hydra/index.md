@@ -9,9 +9,11 @@ in fund distribution from a central wallet. It works with SOL and any SPL token.
 
 🔗 **Helpful links:**
 
-- [Hydra UI](https://github.com/cardinal-labs/hydra-ui)
-- [GitHub Repository](https://github.com/GlassEaters/hydra)
+- [Hydra UI](https://hydra.metaplex.com/)
+- [Hydra UI on Github](https://github.com/metaplex-foundation/hydra-ui)
+- [Program GitHub Repository](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/hydra)
 - [JS SDK](https://www.npmjs.com/package/@glasseaters/hydra-sdk)
+- [Umi Based JS SDK](https://www.npmjs.com/package/@metaplex-foundation/mpl-hydra)
 - [Rust Crate](https://crates.io/crates/hydra_wallet)
 
 {% callout %}

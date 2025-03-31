@@ -13,7 +13,7 @@ To remove the External Plugin Adapter from an Asset you'll need to use the `remo
 
 ```ts
 import {publicKey } from '@metaplex-foundation/umi'
-import { removePlugin, CheckResult } from '@metaplex-foundation/core'
+import { removePlugin, CheckResult } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('1111111111111111111111111111111')
 const oracleAccount = publicKey('2222222222222222222222222222222')
@@ -85,7 +85,7 @@ To remove the External Plugin Adapter from a Collection you'll need to use the `
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { removeCollectionPlugin, CheckResult } from '@metaplex-foundation/core'
+import { removeCollectionPlugin, CheckResult } from '@metaplex-foundation/mpl-core'
 
 const collection = publicKey('1111111111111111111111111111111')
 const oracleAccount = publicKey('2222222222222222222222222222222')

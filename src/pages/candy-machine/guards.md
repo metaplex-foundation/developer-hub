@@ -336,7 +336,7 @@ import { some, percentAmount, sol, dateTime } from '@metaplex-foundation/umi'
 
 // Create a Candy Machine without a Candy Guard.
 const candyMachine = generateSigner(umi)
-await createCandyMachineV2({
+await (await createCandyMachineV2(umi, {
   candyMachine,
   tokenStandard: TokenStandard.NonFungible,
   collectionMint: collectionMint.publicKey,
@@ -353,12 +353,12 @@ await createCandyMachineV2({
     uriLength: 20,
     isSequential: false,
   }),
-}).sendAndConfirm(umi)
+})).sendAndConfirm(umi)
 
 // Create a Candy Guard.
 const base = generateSigner(umi)
 const candyGuard = findCandyGuardPda(umi, { base: base.publicKey })
-await createCandyGuard({
+await createCandyGuard(umi, {
   base,
   guards: {
     botTax: { lamports: sol(0.01), lastInstruction: false },
@@ -368,13 +368,13 @@ await createCandyGuard({
 }).sendAndConfirm(umi)
 
 // Associate the Candy Guard with the Candy Machine.
-await wrap({
+await wrap(umi, {
   candyMachine: candyMachine.publicKey,
   candyGuard,
 }).sendAndConfirm(umi)
 
 // Dissociate them.
-await unwrap({
+await unwrap(umi, {
   candyMachine: candyMachine.publicKey,
   candyGuard,
 }).sendAndConfirm(umi)

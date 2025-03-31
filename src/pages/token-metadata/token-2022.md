@@ -48,10 +48,7 @@ await createV1(umi, {
 {% totem-accordion title="Mint a token" %}
 
 ```ts
-import { 
-  mintV1, 
-  TokenStandard 
-} from '@metaplex-foundation/mpl-token-metadata'
+import { mintV1, TokenStandard } from '@metaplex-foundation/mpl-token-metadata'
 import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
 
 const SPL_TOKEN_2022_PROGRAM_ID: PublicKey = publicKey(
@@ -194,192 +191,84 @@ These are extensions that can be enabled on mint accounts of SPL Token-2022.
 
 - `confidential transfers`: hides the amount during transfers.
 
-  {% table %}
+  | Asset   | Fungible | Non-Fungible                                          |
+  | ------- | -------- | ----------------------------------------------------- |
+  | Allowed | ✅       | ❌                                                    |
+  | Details | --       | Not applicable since non-fungibles have supply of `1` |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ❌ {% align="center" %}
-
-  ***
-
-  - Details
-  - -- {% align="center" %}
-  - Not applicable since non-fungibles have supply of `1` {% align="center" %}
-    {% /table %}
+---
 
 - `transfer fees`: allow to configure a transfer fee derived from the amount being transferred.
 
-  {% table %}
+  | Asset   | Fungible | Non-Fungible                                          |
+  | ------- | -------- | ----------------------------------------------------- |
+  | Allowed | ✅       | ❌                                                    |
+  | Details | --       | Not applicable since non-fungibles have supply of `1` |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ❌ {% align="center" %}
-
-  ***
-
-  - Details
-  - -- {% align="center" %}
-  - Not applicable since non-fungibles have supply of `1` {% align="center" %}
-    {% /table %}
+---
 
 - `closing mint`: allows closing mint accounts when supply reaches `0`.
 
-  {% table %}
+| Asset   | Fungible                                                   | Non-Fungible                                                                     |
+| ------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Allowed | ✅                                                         | ❌                                                                               |
+| Details | Must specify the `Metadata` account as the close authority | Potential for a creator to recreate the same group of mint and metadata accounts |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ❌ {% align="center" %}
-
-  ***
-
-  - Details
-  - Must specify the `Metadata` account as the close authority {% align="center" %}
-  - Potential for a creator to recreate the same group of mint and metadata accounts {% align="center" %}
-    {% /table %}
+---
 
 - `interest-bearing tokens`: allows to change how the UI amount of tokens are represented.
 
-  {% table %}
+  | Asset   | Fungible | Non-Fungible                                          |
+  | ------- | -------- | ----------------------------------------------------- |
+  | Allowed | ✅       | ❌                                                    |
+  | Details | --       | Not applicable since non-fungibles have supply of `1` |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ❌ {% align="center" %}
-
-  ***
-
-  - Details
-  - -- {% align="center" %}
-  - Not applicable since non-fungibles have supply of `1` {% align="center" %}
-    {% /table %}
+---
 
 - `non-transferable tokens`: allows for "soul-bound" tokens that cannot be moved to any other address.
 
-  {% table %}
+  | Asset   | Fungible | Non-Fungible |
+  | ------- | -------- | ------------ |
+  | Allowed | ✅       | ✅           |
+  | Details | --       | --           |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ✅ {% align="center" %}
-
-  ***
-
-  - Details
-  - -- {% align="center" %}
-  - -- {% align="center" %}
-    {% /table %}
+---
 
 - `permanent delegate`: allows to specify a permanent account delegate for any token account of a mint.
 
-  {% table %}
+  | Asset   | Fungible | Non-Fungible                          |
+  | ------- | -------- | ------------------------------------- |
+  | Allowed | ✅       | ❌                                    |
+  | Details | --       | This changes the concept of ownership |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ❌ {% align="center" %}
-
-  ***
-
-  - Details
-  - -- {% align="center" %}
-  - This changes the concept of ownership {% align="center" %}
-    {% /table %}
+---
 
 - `transfer hook`: allows call into third-party programs during transfer.
 
-  {% table %}
+  | Asset   | Fungible | Non-Fungible                                    |
+  | ------- | -------- | ----------------------------------------------- |
+  | Allowed | ✅       | ❌                                              |
+  | Details | --       | Token Metadata specifies the logic for transfer |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ❌ {% align="center" %}
-
-  ***
-
-  - Details
-  - -- {% align="center" %}
-  - Token Metadata specifies the logic for transfer {% align="center" %}
-    {% /table %}
+---
 
 - `metadata pointer`: allows adding an address that describes the canonical metadata.
 
-  {% table %}
+  | Asset   | Fungible                             | Non-Fungible                         |
+  | ------- | ------------------------------------ | ------------------------------------ |
+  | Allowed | ✅                                   | ✅                                   |
+  | Details | Must point to the `Metadata` address | Must point to the `Metadata` address |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ✅ {% align="center" %}
-
-  ***
-
-  - Details
-  - Must point to the `Metadata` address {% align="center" %}
-  - Must point to the `Metadata` address {% align="center" %}
-    {% /table %}
+---
 
 - `metadata`: allow adding metadata directly to mint accounts.
 
-  {% table %}
+  | Asset   | Fungible                                        | Non-Fungible                                    |
+  | ------- | ----------------------------------------------- | ----------------------------------------------- |
+  | Allowed | ❌                                              | ❌                                              |
+  | Details | Metadata information is added by Token Metadata | Metadata information is added by Token Metadata |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ❌ {% align="center" %}
-  - ❌ {% align="center" %}
-
-  ***
-
-  - Details
-  - Metadata information is added by Token Metadata {% align="center" %}
-  - Metadata information is added by Token Metadata {% align="center" %}
-    {% /table %}
+---
 
 ### Token account extensions
 
@@ -387,87 +276,39 @@ These are extensions that can be enabled on token accounts of SPL Token-2022.
 
 - `memo required`: requires memo on transfers.
 
-  {% table %}
+  | Asset   | Fungible | Non-Fungible   |
+  | ------- | -------- | -------------- |
+  | Allowed | ✅       | ❌             |
+  | Details | --       | Not applicable |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ❌ {% align="center" %}
-
-  ***
-
-  - Details
-  - -- {% align="center" %}
-  - Not applicable {% align="center" %}
-    {% /table %}
+---
 
 - `immutable ownership`: disables the ability to change the ownership of token accounts.
 
-  {% table %}
+  | Asset   | Fungible | Non-Fungible |
+  | ------- | -------- | ------------ |
+  | Allowed | ✅       | ✅           |
+  | Details | --       | --           |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ✅ {% align="center" %}
-
-  ***
-
-  - Details
-  - -- {% align="center" %}
-  - -- {% align="center" %}
-    {% /table %}
+---
 
 - `default account state`: allows to configure default token account states.
 
-  {% table %}
+  | Asset   | Fungible | Non-Fungible                               |
+  | ------- | -------- | ------------------------------------------ |
+  | Allowed | ✅       | ❌                                         |
+  | Details | --       | Token Metadata validates the account state |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ❌ {% align="center" %}
-
-  ***
-
-  - Details
-  - -- {% align="center" %}
-  - Token Metadata validates the account state {% align="center" %}
-    {% /table %}
+---
 
 - `CPI guard`: prevent certain actions (e.g., transfer) inside cross-program invocations.
 
-  {% table %}
+  | Asset   | Fungible | Non-Fungible                                    |
+  | ------- | -------- | ----------------------------------------------- |
+  | Allowed | ✅       | ❌                                              |
+  | Details | --       | Token Metadata specifies the logic for transfer |
 
-  - Asset {% width="20%" %}
-  - Fungible {% width="40%" %} {% align="center" %}
-  - Non-Fungible {% width="40%" %} {% align="center" %}
-
-  ***
-
-  - Allowed
-  - ✅ {% align="center" %}
-  - ❌ {% align="center" %}
-
-  ***
-
-  - Details
-  - -- {% align="center" %}
-  - Token Metadata specifies the logic for transfer {% align="center" %}
-    {% /table %}
+---
 
 {% callout %}
 A comprehensibe overview of each extension can be found on SPL Token-2022 program [documentation](https://spl.solana.com/token-2022).

@@ -4,10 +4,6 @@ metaTitle: "Core Candy Machine - Guards - Asset Gate"
 description: "The Core Candy Machine 'Asset Gate' guard requires the minting wallet to hold another Core Asset from a specific collection to allow the mint from the Core Candy Machine"
 ---
 
-{% callout type="note" %}
-This Guard is currently only available on devnet. [Follow us](https://x.com/metaplex) on twitter to see when it's merged to mainnet!
-{% /callout %}
-
 ## Overview
 
 The **Asset Gate** guard allows minting if the payer is Holder of an Asset of the specified Asset collection. The Asset will **not** be transferred.
@@ -115,7 +111,7 @@ API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Mint Settings
 
 The Asset Gate guard contains the following Mint Settings:
-- **Asset Adress**: The address of the Asset to prove ownership with. This must be part of the required collection and must belong to the minter.
+- **Asset Address**: The address of the Asset to prove ownership with. This must be part of the required collection and must belong to the minter.
 - **Collection Address**: The Address of the Collection that is used to prove ownership.
 
 Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetgate) for more details.

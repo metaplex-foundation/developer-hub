@@ -1,11 +1,40 @@
 .dropShadowLight {
-    -webkit-box-shadow: 11px 11px 22px -3px rgba(255, 255, 255, 0.212); 
-box-shadow: 11px 11px 22px -3px rgba(255, 255, 255, 0.212);
+  -webkit-box-shadow: 11px 11px 22px -3px rgba(255, 255, 255, 0.212);
+  box-shadow: 11px 11px 22px -3px rgba(255, 255, 255, 0.212);
 }
 
 .gradientTextHeader {
-    background: linear-gradient(0.25turn, #cf4fb4, #6186b1, #39ce95);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  background: linear-gradient(0.25turn, #cf4fb4, #6186b1, #39ce95);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+html {
+  overflow-y: overlay;
+  scrollbar-gutter: stable;
+}
+
+.loader {
+  border: 2px solid #fff;
+  border-bottom-color: #d162c2;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+select::-ms-expand {
+  display: none;
+}

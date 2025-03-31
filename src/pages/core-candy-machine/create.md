@@ -43,7 +43,7 @@ Available arguments that can be passed into the createCandyMachine function.
 
 A newly generated keypair/signer that is used to create the Core Candy Machine.
 
-{% dialect-switcher title="Create CandyMahcine Args" %}
+{% dialect-switcher title="Create CandyMachine Args" %}
 {% dialect title="JavaScript" id="js" %}
 
 | name                      | type                          |
@@ -161,7 +161,7 @@ sellerFeeBasisPoints: number
 {% /dialect-switcher %}
 
 The `sellerFeeBasisPoints` fields is the royalty basis points that will be written to each created Asset from the Candy Machine.
-This is designated as a number based on 2 decimal places, so `500` basis points is eqaul to `5%`.
+This is designated as a number based on 2 decimal places, so `500` basis points is equal to `5%`.
 
 There is also a `percentageAmount` helper than can also be used for calculation that can be imported from the `umi` library.
 
@@ -209,9 +209,9 @@ isMutable: boolean
 
 Config Line Settings is an optional field that allows advanced options of adding your Asset data to the Core Candy Machine making the Core Candy Machine's rent cost significantly cheaper.
 
-By storing the Assets name and URI prefixs into the Core Candy Machine the data required to be stored is significantly reduced as you will not be storing the same name and URI for every single Asset.
+By storing the Assets name and URI prefix into the Core Candy Machine the data required to be stored is significantly reduced as you will not be storing the same name and URI for every single Asset.
 
-For example if all your Assests had the same naming structure of `Example Asset #1` through to `Example Asset #1000` this would normally require you to store the string `Example Asset #` 1000 times, taking up 15,000 bytes.
+For example if all your Assets had the same naming structure of `Example Asset #1` through to `Example Asset #1000` this would normally require you to store the string `Example Asset #` 1000 times, taking up 15,000 bytes.
 
 By storing the prefix of the name in the the Core Candy Machine and letting the Core Candy Machine append the index number created to the string you save these 15,000 bytes in rent cost.
 
@@ -237,7 +237,7 @@ ConfigLineSettings = {
 
 This stores the name prefix of the nfts and appends the minted index to the end of the name upon mint.
 
-If your Asset's have a naming structure of `Example Asset #1` then your prefix would be `Example Asset #`. Upon mint the Core Candy Machine will attatch the index to the end of the string.
+If your Asset's have a naming structure of `Example Asset #1` then your prefix would be `Example Asset #`. Upon mint the Core Candy Machine will attach the index to the end of the string.
 
 #### nameLength
 
@@ -251,7 +251,7 @@ For Example given...
 
 #### prefixUri
 
-The base URI of your metadata excluding the varible identification id.
+The base URI of your metadata excluding the variable identification id.
 
 If your Asset's will have a metadata URI of `https://example.com/metadata/0.json` then your base metadata URI will be `https://example.com/metadata/`.
 
@@ -267,7 +267,7 @@ For Example given...
 
 #### isSequential
 
-Indicates whether to use a senquential index generator or not. If false the Candy Machine will mint randomly.
+Indicates whether to use a sequential index generator or not. If false the Candy Machine will mint randomly.
 
 #### configLineSettings
 
@@ -305,7 +305,7 @@ await createIx.sendAndConfirm(umi)
 
 ### Hidden Settings
 
-Hidden settings allows the Core Candy Machine to mint exactly the same Asset to all purchasers. The design princple behind this is to allow the popular 'reveal' mechanic to take to take place at a later date. It also allows printing Core Editions when combined with the Edition Guard.
+Hidden settings allows the Core Candy Machine to mint exactly the same Asset to all purchasers. The design principle behind this is to allow the popular 'reveal' mechanic to take to take place at a later date. It also allows printing Core Editions when combined with the Edition Guard.
 
 {% dialect-switcher title="Hidden Settings" %}
 {% dialect title="JavaScript" id="js" %}
@@ -336,7 +336,7 @@ The uri that appears on all Assets minted with hidden settings enabled.
 
 #### hash
 
-The purpose behind the hash is to store a crytographic hash/checksum of a piece of data that validates that each updated/revealed nft is the correct one matched to the index minted from the Candy Machine. This allows users to check the validation and if you have altered the data shared and in fact that `Hidden NFT #39` is also `Revealed NFT #39` and that the original data hasn't been tampered with to move rares around to specific people/holders.
+The purpose behind the hash is to store a cryptographic hash/checksum of a piece of data that validates that each updated/revealed nft is the correct one matched to the index minted from the Candy Machine. This allows users to check the validation and if you have altered the data shared and in fact that `Hidden NFT #39` is also `Revealed NFT #39` and that the original data hasn't been tampered with to move rares around to specific people/holders.
 
 {% dialect-switcher title="Hashing Reveal Data" %}
 {% dialect title="JavaScript" id="js" %}
@@ -385,9 +385,9 @@ const createIx = await create(umi, {
   collectionUpdateAuthority,
   sellerFeeBasisPoints: percentAmount(10),
   itemsAvailable: 5000,
-  hiddenSettings = {
+  hiddenSettings: {
     name: "Hidden Asset",
-    uri: "https://example.com/hidden-asset.json,
+    uri: "https://example.com/hidden-asset.json",
     hash,
   }
 })

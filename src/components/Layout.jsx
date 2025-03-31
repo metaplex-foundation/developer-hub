@@ -1,6 +1,6 @@
+import Hotjar from '@hotjar/browser'
 import clsx from 'clsx'
 import Link from 'next/link'
-import Hotjar from '@hotjar/browser'
 
 import { Header } from '@/components/Header'
 import { Navigation } from '@/components/Navigation'
@@ -33,16 +33,15 @@ export function Layout({ children, page }) {
       <div
         className={clsx(
           'relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12'
-          // hasNavigation ? 'max-w-8xl' : 'max-w-6xl'
         )}
       >
         {/* Navigation. */}
         {hasNavigation && (
-          <div className="hidden lg:relative lg:block lg:flex-none">
+          <div className="hidden lg:relative lg:block lg:flex-none scrollbar">
             <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
             <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
             <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" />
-            <div className="sticky top-[7rem] -ml-0.5 h-[calc(100vh-7rem)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
+            <div className="sticky top-[133px] -ml-0.5 h-[calc(100vh-133px)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
               <Navigation
                 product={page.product}
                 navigation={page.activeSection.navigation}

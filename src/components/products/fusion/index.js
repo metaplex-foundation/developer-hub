@@ -1,14 +1,14 @@
 import {
   documentationSection
-} from '@/shared/sections'
-import { CircleStackIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
+} from '@/shared/sections';
+import { CircleStackIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const fusion = {
   name: 'Fusion',
   headline: 'NFTs inside NFTs',
   description: 'Create composable NFTs.',
-  navigationMenuCatergory: 'Utility',
+  navigationMenuCatergory: 'MPL',
   path: 'fusion',
   icon: <CircleStackIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-trifle',
@@ -22,7 +22,7 @@ export const fusion = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/fusion' },
-            { title: 'Getting started', href: '/fusion/getting-started' },
+            { title: 'Getting Started', href: '/fusion/getting-started' },
           ],
         },
         {

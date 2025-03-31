@@ -384,6 +384,8 @@ Group 2: "public"
 
 {% /diagram %}
 
+{% seperator h="6" /%}
+
 {% dialect-switcher title="Mint from a Candy Machine with guard groups" %}
 {% dialect title="JavaScript" id="js" %}
 
@@ -575,4 +577,4 @@ Congratulations, you now know how Candy Machines work from A to Z!
 Here are some additional reading resources you might be interested in:
 
 - [All Available Guards](/candy-machine/guards): Have a look through all the guards available to you so you can cherry-pick the ones you need.
-- _Create Your First Candy Machine (coming soon)_: This How-To guide helps you upload your assets and create a new Candy Machine from scratch using a CLI tool called “[Sugar](/candy-machine/sugar)”. It also uses our JS SDK to spin up a minting website for your Candy Machine.
+- [Create Your First Candy Machine](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine): This How-To guide helps you upload your assets and create a new Candy Machine from scratch using a CLI tool called “[Sugar](/candy-machine/sugar)”.

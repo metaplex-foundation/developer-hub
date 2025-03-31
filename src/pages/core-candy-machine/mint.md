@@ -113,35 +113,6 @@ await mintV1(umi, {
 
 ```
 
-Note that the `mintV1` instruction takes care of creating the Mint and Token accounts for us by default and will set the NFT owner to the `minter`. If you wish to create these yourself beforehand, you may simply give the NFT mind address as a public key instead of a signer. Here's an example using the `createMintWithAssociatedToken` function from the `mpl-toolbox` Umi library:
-
-```ts
-import { mintV1 } from '@metaplex-foundation/mpl-core-candy-machine'
-import {
-  createMintWithAssociatedToken,
-} from '@metaplex-foundation/mpl-toolbox'
-import {
-  transactionBuilder,
-  generateSigner,
-  publicKey,
-} from '@metaplex-foundation/umi'
-
-const asset = generateSigner(umi)
-const nftOwner = publicKey('11111111111111111111111111111111')
-
-await transactionBuilder()
-  .add(createMintWithAssociatedToken(umi, { mint: nftMint, owner: nftOwner }))
-  .add(
-    mintV1(umi, {
-      candyMachine: candyMachineId,
-      asset,
-      collection: coreCollection,
-      owner: nftOwner,
-    })
-  )
-  .sendAndConfirm(umi);
-```
-
 In the rare event that you wish to mint directly from the Core Candy Machine program instead of the Candy Guard Program, you may use the `mintAssetFromCandyMachine` function instead. This function requires the mint authority of the Core Candy Machine to be provided as a signer and accepts an explicit `assetOwner` attribute.
 
 ```ts

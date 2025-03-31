@@ -21,6 +21,7 @@ export const global = {
           links: [
             { title: 'Introduction', href: '/' },
             { title: 'Programs and Tools', href: '/programs-and-tools' },
+            { title: 'Metaplex Aura', href: '/aura' },
           ],
         },
         {
@@ -32,11 +33,15 @@ export const global = {
               title: 'Understanding Programs',
               href: '/understanding-programs',
             },
-            {title: "Metaplex Rust SDKs", href: '/guides/rust/metaplex-rust-sdks'},
+            {
+              title: 'Metaplex Rust SDKs',
+              href: '/guides/rust/metaplex-rust-sdks',
+            },
             { title: 'RPC Providers', href: '/rpc-providers' },
             { title: 'Storage Providers', href: '/storage-providers' },
             { title: 'Stability Index', href: '/stability-index' },
             { title: 'Protocol Fees', href: '/protocol-fees' },
+            {title: 'Terms and Conditions', target:"_blank", href: 'https://www.metaplex.com/terms-and-conditions'},
           ],
         },
         {

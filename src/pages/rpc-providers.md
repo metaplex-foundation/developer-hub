@@ -18,7 +18,7 @@ https://api.devnet.solana.com
 
 This is the node for Devnet, and it is rate limited.
 
-In the Mainnet Beta cluster, many developers choose to use their own private RPC node to take advantage of higher rate limits not avalible to them from Solana's public API nodes.
+In the Mainnet Beta cluster, many developers choose to use their own private RPC node to take advantage of higher rate limits not available to them from Solana's public API nodes.
 
 ![](https://i.imgur.com/1GmCbcu.png#radius")
 
@@ -43,7 +43,7 @@ Aura is a Solana Network Extension that can provide users with efficient, decent
 - **Support for Light Clients**: Enables node operators to index specific protocols or sub-protocols, such as Core assets or a particular Bubblegum tree. Light clients can operate without running a full Solana node or Geyser plugin, instead receiving updates from the Aura network. This reduces infrastructure costs significantly compared to maintaining a full Solana node.
 - **Digital Asset Standard API**: Fully implements the DAS API, the main interface for accessing digital asset data on the Solana Virtual Machine (SVM).
 
-Learn more about Aura's indexing features in the [dedicated section](/aura/data-availability-and-decentralized-indexing).
+Learn more about Aura's indexing features in the [dedicated section](/aura/reading-solana-and-svm-data).
 
 ## Archive and Nonarchive Nodes
 
@@ -76,7 +76,7 @@ These lists are in alphabetical order. Please choose the RPC provider that best 
 - [Ankr](https://www.ankr.com/protocol/public/solana/)
 - [Blockdaemon](https://blockdaemon.com/marketplace/solana/)
 - [Chainstack](https://chainstack.com/build-better-with-solana/)
-- [Figment](https://figment.io/datahub/solana/)
+- [Figment](https://figment.io/)
 - [GetBlock](https://getblock.io/)
 - [NOWNodes](https://nownodes.io/)
 - [Syndica](https://syndica.io/)

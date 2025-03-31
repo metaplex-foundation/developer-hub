@@ -116,7 +116,7 @@ Therefore, make sure to provide the settings for all guards you want to enable, 
 ```tsx
 import { some, none, sol } from '@metaplex-foundation/umi'
 
-const candyGuard = fetchCandyGuard(umi, candyMachine.mintAuthority)
+const candyGuard = await fetchCandyGuard(umi, candyGuardId)
 await updateCandyGuard(umi, {
   candyGuard: candyGuard.publicKey,
   guards: {
@@ -124,6 +124,9 @@ await updateCandyGuard(umi, {
     botTax: none(),
     solPayment: some({ lamports: sol(3), destination: treasury }),
   },
+  groups: [
+    // Either empty, or if you are using groups add the data here
+  ]
 })
 ```
 
@@ -185,7 +188,7 @@ await createCandyMachine({
     uriLength: 20,
     isSequential: false,
   }),
-})sendAndConfirm(umi)
+}).sendAndConfirm(umi)
 
 // Create a Candy Guard.
 const base = generateSigner(umi)

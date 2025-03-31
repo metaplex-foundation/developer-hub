@@ -1,12 +1,12 @@
-import { documentationSection, referencesSection } from '@/shared/sections'
-import { Hero } from './Hero'
+import { documentationSection, guidesSection, referencesSection } from '@/shared/sections'
 import { Square3Stack3DIcon } from '@heroicons/react/24/solid'
+import { Hero } from './Hero'
 
 export const coreCandyMachine = {
   name: 'Core Candy Machine',
   headline: 'Core Asset launchpad',
   description: 'Launch your next MPL Core Asset collection on Solana.',
-  navigationMenuCatergory: 'Commerce',
+  navigationMenuCatergory: 'MPL',
   path: 'core-candy-machine',
   icon: <Square3Stack3DIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-core-candy-machine',
@@ -20,11 +20,13 @@ export const coreCandyMachine = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/core-candy-machine' },
-            {
-              title: 'Getting Started',
-              href: '/core-candy-machine/getting-started',
-              // Subpages: /js /rust, etc.
-            },
+          ],
+        },
+        {
+          title: 'SDK',
+          links: [
+            { title: 'Javascript SDK', href: '/core-candy-machine/sdk/javascript' },
+            { title: 'Rust SDK', href: '/core-candy-machine/sdk/rust' },
           ],
         },
         {
@@ -44,7 +46,10 @@ export const coreCandyMachine = {
               title: 'Creating a Candy Machine',
               href: '/core-candy-machine/create',
             },
-            { title: 'Inserting Items', href: '/core-candy-machine/insert-items' },
+            {
+              title: 'Inserting Items',
+              href: '/core-candy-machine/insert-items',
+            },
             {
               title: 'Updating a Candy Machine and Guards',
               href: '/core-candy-machine/update',
@@ -78,8 +83,14 @@ export const coreCandyMachine = {
               title: 'Address Gate',
               href: '/core-candy-machine/guards/address-gate',
             },
-            { title: 'Allocation', href: '/core-candy-machine/guards/allocation' },
-            { title: 'Allow List', href: '/core-candy-machine/guards/allow-list' },
+            {
+              title: 'Allocation',
+              href: '/core-candy-machine/guards/allocation',
+            },
+            {
+              title: 'Allow List',
+              href: '/core-candy-machine/guards/allow-list',
+            },
             {
               title: 'Asset Burn',
               href: '/core-candy-machine/guards/asset-burn',
@@ -100,7 +111,10 @@ export const coreCandyMachine = {
               title: 'Asset Payment Multi',
               href: '/core-candy-machine/guards/asset-payment-multi',
             },
-            { title: 'Asset Mint Limit', href: '/core-candy-machine/guards/asset-mint-limit' },
+            {
+              title: 'Asset Mint Limit',
+              href: '/core-candy-machine/guards/asset-mint-limit',
+            },
             { title: 'Bot Tax', href: '/core-candy-machine/guards/bot-tax' },
             { title: 'End Date', href: '/core-candy-machine/guards/end-date' },
             { title: 'Edition', href: '/core-candy-machine/guards/edition' },
@@ -112,11 +126,20 @@ export const coreCandyMachine = {
               title: 'Freeze Token Payment',
               href: '/core-candy-machine/guards/freeze-token-payment',
             },
-            { title: 'Gatekeeper', href: '/core-candy-machine/guards/gatekeeper' },
-            { title: 'Mint Limit', href: '/core-candy-machine/guards/mint-limit' },
+            {
+              title: 'Gatekeeper',
+              href: '/core-candy-machine/guards/gatekeeper',
+            },
+            {
+              title: 'Mint Limit',
+              href: '/core-candy-machine/guards/mint-limit',
+            },
             { title: 'NFT Burn', href: '/core-candy-machine/guards/nft-burn' },
             { title: 'NFT Gate', href: '/core-candy-machine/guards/nft-gate' },
-            { title: 'NFT Mint Limit', href: '/core-candy-machine/guards/nft-mint-limit' },
+            {
+              title: 'NFT Mint Limit',
+              href: '/core-candy-machine/guards/nft-mint-limit',
+            },
             {
               title: 'NFT Payment',
               href: '/core-candy-machine/guards/nft-payment',
@@ -137,13 +160,22 @@ export const coreCandyMachine = {
               title: 'Sol Payment',
               href: '/core-candy-machine/guards/sol-payment',
             },
-            { title: 'Start Date', href: '/core-candy-machine/guards/start-date' },
+            {
+              title: 'Start Date',
+              href: '/core-candy-machine/guards/start-date',
+            },
             {
               title: 'Third Party Signer',
               href: '/core-candy-machine/guards/third-party-signer',
             },
-            { title: 'Token Burn', href: '/core-candy-machine/guards/token-burn' },
-            { title: 'Token Gate', href: '/core-candy-machine/guards/token-gate' },
+            {
+              title: 'Token Burn',
+              href: '/core-candy-machine/guards/token-burn',
+            },
+            {
+              title: 'Token Gate',
+              href: '/core-candy-machine/guards/token-gate',
+            },
             {
               title: 'Token Payment',
               href: '/core-candy-machine/guards/token-payment',
@@ -164,6 +196,28 @@ export const coreCandyMachine = {
             {
               title: 'Generating Client',
               href: '/core-candy-machine/custom-guards/generating-client',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      ...guidesSection('core-candy-machine'),
+      navigation: [
+        {
+          title: 'General',
+          links: [
+            { 
+              title: 'Overview', 
+              href: '/core-candy-machine/guides' 
+            },
+            {
+              title: 'Create a Website for minting Assets from your Core Candy Machine',
+              href: '/core-candy-machine/guides/create-a-core-candy-machine-ui',
+            },
+            {
+              title: 'Create a Core Candy Machine with Hidden Settings',
+              href: '/core-candy-machine/guides/create-a-core-candy-machine-with-hidden-settings',
             },
           ],
         },
@@ -249,12 +303,11 @@ export const coreCandyMachine = {
     //   ],
     // },
 
-
     {
       ...referencesSection('core-candy-machine'),
       href: `https://mpl-core-candy-machine.typedoc.metaplex.com/`,
       title: 'Javascript API References',
-      icon: "JavaScript",
+      icon: 'JavaScript',
       target: '_blank',
     },
     {

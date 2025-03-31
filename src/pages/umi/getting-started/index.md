@@ -12,7 +12,7 @@ To use Umi you need to install Umi and all the external plugins you'll want to u
 
 ### Required Packages
 
-{% packagesUsed packages=["umi", "umiDefaults", "@solana/web3.js"] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefaults", "@solana/web3.js@1"] type="npm" /%}
 
 To install them, use the following commands:
 
@@ -25,7 +25,7 @@ npm i @metaplex-foundation/umi-bundle-defaults
 ```
 
 ```
-npm i @solana/web3.js
+npm i @solana/web3.js@1
 ```
 
 ### For library authors
@@ -145,7 +145,7 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 const signer = createSignerFromKeypair(umi, keypair);
 
 // Tell Umi to use the new signer.
-umi.use(signerIdentity(walletFile))
+umi.use(signerIdentity(signer))
 ```
 
 {% /totem-accordion %}

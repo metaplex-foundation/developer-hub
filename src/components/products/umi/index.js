@@ -1,9 +1,7 @@
 import {
-  changelogSection,
   documentationSection,
   guidesSection,
-  recipesSection,
-  referencesSection,
+  referencesSection
 } from '@/shared/sections'
 import { CodeBracketSquareIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
@@ -27,7 +25,7 @@ export const umi = {
           links: [
             { title: 'Overview', href: '/umi' },
             { 
-              title: 'Getting started', 
+              title: 'Getting Started', 
               href: '/umi/getting-started' },
             {
               title: 'Metaplex Umi Plugins',
@@ -97,6 +95,12 @@ export const umi = {
         {
           title: 'Guides',
           links: [
+            {
+              title: 'Optimal transaction landing',
+              href: '/umi/guides/optimal-transactions-with-compute-units-and-priority-fees',
+              created: '2024-12-01',
+              updated: null, // null means it's never been updated
+            },
             {
               title: 'Serializing and Deserializing Transactions',
               href: '/umi/guides/serializing-and-deserializing-transactions',
