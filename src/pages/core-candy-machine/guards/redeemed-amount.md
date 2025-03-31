@@ -75,6 +75,9 @@ The Redeemed Amount guard contains the following settings:
 
 - **Maximum**: The maximum amount of NFTs that can be minted.
 
+> **Important:**
+> **Maximum** is regarded as a index, so when you do update it, keep in mind of it.
+
 {% dialect-switcher title="Set up a Core Candy Machine using the Redeemed Amount Guard" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
