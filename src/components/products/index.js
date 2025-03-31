@@ -1,6 +1,7 @@
 import { amman } from './amman';
 import { aura } from './aura';
 import { bubblegum } from './bubblegum';
+import { bubblegumv2 } from './bubblegum-v2';
 import { candyMachine } from './candyMachine';
 import { core } from './core';
 import { coreCandyMachine } from './coreCandyMachine';
@@ -24,6 +25,7 @@ export const products = [
   tokenMetadata,
   tokenAuthRules,
   bubblegum,
+  bubblegumv2,
   candyMachine,
   fusion,
   hydra,

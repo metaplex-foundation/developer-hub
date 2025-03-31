@@ -6,16 +6,16 @@ import {
 import { ArchiveBoxIcon } from '@heroicons/react/24/solid';
 import { Hero } from './Hero';
 
-export const bubblegum = {
-  name: 'Bubblegum',
-  headline: 'Compressed NFTs',
+export const bubblegumv2 = {
+  name: 'Bubblegum v2',
+  headline: 'Better Compressed NFTs',
   description: 'NFTs that scale to new orders of magnitude.',
-  path: 'bubblegum',
+  path: 'bubblegum-v2',
   navigationMenuCatergory: 'MPL',
   icon: <ArchiveBoxIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',
-  heroes: [{ path: '/bubblegum', component: Hero }],
+  heroes: [{ path: '/bubblegum-v2', component: Hero }],
   sections: [
     {
       ...documentationSection('bubblegum'),
@@ -36,41 +36,17 @@ export const bubblegum = {
           ],
         },
         {
-          title: 'General Features',
+          title: 'Features',
           links: [
             {
               title: 'Creating Bubblegum Trees',
               href: '/bubblegum/create-trees',
             },
+            {
+              title: 'Minting Compressed NFTs (cNFTs)',
+              href: '/bubblegum/mint-cnfts',
+            },
             { title: 'Fetching cNFTs', href: '/bubblegum/fetch-cnfts' },
-            { title: 'Delegating Trees', href: '/bubblegum/delegate-trees' },
-          ],
-        },
-        {
-          title: 'Bubblegum v2',
-          links: [
-            {
-              title: 'Minting Compressed NFTs (cNFTs)',
-              href: '/bubblegum/mint-cnfts',
-            },
-            { title: 'Transferring cNFTs', href: '/bubblegum/transfer-cnfts' },
-            { title: 'Updating cNFTs', href: '/bubblegum/update-cnfts' },
-            { title: 'Burning cNFTs', href: '/bubblegum/burn-cnfts' },
-            { title: 'Delegating cNFTs', href: '/bubblegum/delegate-cnfts' },
-            {
-              title: 'Verifying Collections',
-              href: '/bubblegum/verify-collections',
-            },
-            { title: 'Verifying Creators', href: '/bubblegum/verify-creators' },
-          ],
-        },
-        {
-          title: 'Bubblegum v1 (legacy)',
-          links: [
-            {
-              title: 'Minting Compressed NFTs (cNFTs)',
-              href: '/bubblegum/mint-cnfts',
-            },
             { title: 'Transferring cNFTs', href: '/bubblegum/transfer-cnfts' },
             { title: 'Updating cNFTs', href: '/bubblegum/update-cnfts' },
             { title: 'Burning cNFTs', href: '/bubblegum/burn-cnfts' },
@@ -79,6 +55,7 @@ export const bubblegum = {
               href: '/bubblegum/decompress-cnfts',
             },
             { title: 'Delegating cNFTs', href: '/bubblegum/delegate-cnfts' },
+            { title: 'Delegating Trees', href: '/bubblegum/delegate-trees' },
             {
               title: 'Verifying Collections',
               href: '/bubblegum/verify-collections',
