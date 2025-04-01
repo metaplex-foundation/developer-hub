@@ -150,7 +150,7 @@ Note that once a Candy Machine is created using one of these two modes, it canno
 
 Let’s go through both of them in a bit more detail.
 
-{% callout type="info" %}
+{% callout type="note" title="Randomness" %}
 
 It can be advisable to utilize [Hidden Settings](#hidden-settings) for the reveal mechanic, as the "random" minting process of the assets is not entirely unpredictable and can be influenced by sufficient resources and malicious intent.
 

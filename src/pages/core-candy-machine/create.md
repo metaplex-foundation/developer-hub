@@ -207,7 +207,7 @@ isMutable: boolean
 
 ### Config Line Settings
 
-{% callout type="info" %}
+{% callout type="note" title="Randomness" %}
 
 Config Line Settings and Hidden Settings are mutually exclusive. Only one can be used at a time.
 
