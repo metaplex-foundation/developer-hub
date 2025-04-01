@@ -18,56 +18,66 @@ Start exploring blockchain development at no cost. Perfect for hobbyists, early-
 
 **Ideal For**: Beginners, small projects, or anyone just testing the waters with blockchain applications.
 
-| Feature            | RPS | Price/Req MPLX | Price/Req USD |
-| ------------------ | --- | -------------- | ------------- |
-| Solana DAS API     | 10  | Free           | Free          |
-| Eclipse DAS API    | 10  | Free           | Free          |
-| Solana RPC         | 10  | Free           | Free          |
-| Eclipse RPC        | 10  | Free           | Free          |
-| getProgramAccounts | N/A | N/A            | N/A           |
+**Number of API Keys**: 2
+
+| Feature               | RPS | Price/Req MPLX |
+| --------------------- | --- | -------------- |
+| Solana DAS API        | 10  | Free           |
+| Eclipse DAS API       | 10  | Free           |
+| Solana RPC            | 10  | Free           |
+| Eclipse RPC           | 10  | Free           |
+| getProgramAccounts    | 5   | Free           |
+| Websocket Connections | 2   | N/A            |
 
 ### Pay As You Go
 
-Only pay for what you use. This flexible model ensures you’re not locked into a subscription and is perfect for projects with unpredictable or variable traffic.
+Great for small projects, pay per request in MPLX.
 
 **Ideal For**: Startups, scaling projects, or developers who want cost efficiency without committing to an upfront plan.
 
-| Feature            | RPS | Price/Req MPLX | Price/Req USD |
-| ------------------ | --- | -------------- | ------------- |
-| Solana DAS API     | 75  | 0.000107       | 0.0000380     |
-| Eclipse DAS API    | 75  | 0.000107       | 0.0000380     |
-| Solana RPC         | 50  | 0.000013       | 0.0000048     |
-| Eclipse RPC        | 50  | 0.000013       | 0.0000048     |
-| getProgramAccounts | 25  | 0.000134       | 0.0000475     |
+**Number of API Keys**: 20
 
-### Unlimited
+| Feature               | RPS | Price/Req MPLX |
+| --------------------- | --- | -------------- |
+| Solana DAS API        | 25  | 0.00035631     |
+| Eclipse DAS API       | 25  | 0.00035631     |
+| Solana RPC            | 25  | 0.00004329     |
+| Eclipse RPC           | 25  | 0.00004329     |
+| getProgramAccounts    | 25  | 0.00044622     |
+| Websocket Connections | 5   | N/A            |
 
-For consistent, high-demand applications, the Unlimited model offers flat-rate plans tailored to your throughput and performance needs.
+### Builder – 1,499 MPLX /mo
 
-**Benefits**: Unlimited requests, enhanced priority support, and often additional features like private nodes or custom SLAs (Service Level Agreements).
+Built for teams launching and scaling production-ready dApps.
+
+**Ideal For**: Indie builders, startups, and small to mid-sized teams looking for scalable RPC access, DAS indexing, and robust performance without the overhead of enterprise-level pricing.
+
+**Number of API Keys**: 20
+
+| Feature               | RPS | Request Limit |
+| --------------------- | --- | ------------- |
+| Solana DAS API        | 75  | ∞             |
+| Eclipse DAS API       | 75  | ∞             |
+| Solana RPC            | 75  | ∞             |
+| Eclipse RPC           | 75  | ∞             |
+| getProgramAccounts    | 50  | ∞             |
+| Websocket Connections | 10  | ∞             |
+| Priority Support      |     |               |
+
+### Enterprise - 4,499 MPLX /mo
+
+Designed for high-growth teams and large organizations.
 
 **Ideal For**: Enterprise-level projects, medium to large-scale dApps, and organizations with consistently high demand for reliable RPC services.
 
-#### Tier 1 - 500 MPLX/Month
+**Number of API Keys**: 20
 
-Designed for mid-sized projects or growing applications.
-
-| Feature            | RPS | Requests Limit |
-| ------------------ | --- | -------------- |
-| Solana DAS API     | 30  | ∞              |
-| Eclipse DAS API    | 30  | ∞              |
-| Solana RPC         | 30  | ∞              |
-| Eclipse RPC        | 30  | ∞              |
-| getProgramAccounts | 20  | ∞              |
-
-#### Tier 2 - 1500 MPLX/Month
-
-A premium option for enterprise-level projects or high-traffic applications requiring maximum performance.
-
-| Feature            | RPS | Requests Limit |
-| ------------------ | --- | -------------- |
-| Solana DAS API     | 100 | ∞              |
-| Eclipse DAS API    | 100 | ∞              |
-| Solana RPC         | 100 | ∞              |
-| Eclipse RPC        | 100 | ∞              |
-| getProgramAccounts | 50  | ∞              |
+| Feature               | RPS | Request Limit |
+| --------------------- | --- | ------------- |
+| Solana DAS API        | 250 | ∞             |
+| Eclipse DAS API       | 250 | ∞             |
+| Solana RPC            | 250 | ∞             |
+| Eclipse RPC           | 250 | ∞             |
+| getProgramAccounts    | 165 | ∞             |
+| Websocket Connections | 15  | ∞             |
+| Priority Support      |     |               |
