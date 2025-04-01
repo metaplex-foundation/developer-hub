@@ -18,13 +18,13 @@ Start exploring blockchain development at no cost. Perfect for hobbyists, early-
 
 **Ideal For**: Beginners, small projects, or anyone just testing the waters with blockchain applications.
 
-| Feature            | RPS | Price/Req MPLX | Price/Req USD |
-| ------------------ | --- | -------------- | ------------- |
-| Solana DAS API     | 10  | Free           | Free          |
-| Eclipse DAS API    | 10  | Free           | Free          |
-| Solana RPC         | 10  | Free           | Free          |
-| Eclipse RPC        | 10  | Free           | Free          |
-| getProgramAccounts | N/A | N/A            | N/A           |
+| Feature            | RPS | Price/Req MPLX |
+| ------------------ | --- | -------------- |
+| Solana DAS API     | 10  | Free           |
+| Eclipse DAS API    | 10  | Free           |
+| Solana RPC         | 10  | Free           |
+| Eclipse RPC        | 10  | Free           |
+| getProgramAccounts | N/A | N/A            |
 
 ### Pay As You Go
 
@@ -32,13 +32,13 @@ Only pay for what you use. This flexible model ensures you’re not locked into 
 
 **Ideal For**: Startups, scaling projects, or developers who want cost efficiency without committing to an upfront plan.
 
-| Feature            | RPS | Price/Req MPLX | Price/Req USD |
-| ------------------ | --- | -------------- | ------------- |
-| Solana DAS API     | 75  | 0.00035631       | 0.000071     |
-| Eclipse DAS API    | 75  | 0.00035631       | 0.000071     |
-| Solana RPC         | 50  | 0.00004329       | 0.000009     |
-| Eclipse RPC        | 50  | 0.00004329       | 0.000009     |
-| getProgramAccounts | 25  | 0.00044622       | 0.000089     |
+| Feature            | RPS | Price/Req MPLX |
+| ------------------ | --- | -------------- | 
+| Solana DAS API     | 75  | 0.00035631       |
+| Eclipse DAS API    | 75  | 0.00035631       |
+| Solana RPC         | 50  | 0.00004329       |
+| Eclipse RPC        | 50  | 0.00004329       |
+| getProgramAccounts | 25  | 0.00044622       |
 
 ### Unlimited
 
