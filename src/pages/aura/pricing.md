@@ -18,7 +18,7 @@ Start exploring blockchain development at no cost. Perfect for hobbyists, early-
 
 **Ideal For**: Beginners, small projects, or anyone just testing the waters with blockchain applications.
 
-Number of API Keys: 2
+**Number of API Keys**: 2
 
 | Feature               | RPS | Price/Req MPLX |
 | --------------------- | --- | -------------- |
