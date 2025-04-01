@@ -34,11 +34,11 @@ Only pay for what you use. This flexible model ensures you’re not locked into 
 
 | Feature            | RPS | Price/Req MPLX | Price/Req USD |
 | ------------------ | --- | -------------- | ------------- |
-| Solana DAS API     | 75  | 0.000107       | 0.0000380     |
-| Eclipse DAS API    | 75  | 0.000107       | 0.0000380     |
-| Solana RPC         | 50  | 0.000013       | 0.0000048     |
-| Eclipse RPC        | 50  | 0.000013       | 0.0000048     |
-| getProgramAccounts | 25  | 0.000134       | 0.0000475     |
+| Solana DAS API     | 75  | 0.00035631       | 0.000071     |
+| Eclipse DAS API    | 75  | 0.00035631       | 0.000071     |
+| Solana RPC         | 50  | 0.00004329       | 0.000009     |
+| Eclipse RPC        | 50  | 0.00004329       | 0.000009     |
+| getProgramAccounts | 25  | 0.00044622       | 0.000089     |
 
 ### Unlimited
 
