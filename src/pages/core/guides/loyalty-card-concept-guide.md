@@ -1,7 +1,7 @@
 ---
 title: Loyalty Card Concept Guide
 metaTitle: Loyalty Card Concept Guide | Core Guides
-description: This Guide describes the how to build out a Loyalty Card program on Solana using MPL Core NFT Assets and the MPL Core plugin system.
+description: This guide describes how to build a Loyalty Card program on Solana using MPL Core NFT Assets and the MPL Core plugin system.
 ---
 
 ## Concept Guide: Setting Up Loyalty Cards with Metaplex Core and Plugins
@@ -15,9 +15,8 @@ Metaplex Core is a modern NFT Asset standard on Solana that provides a plugin-ba
 
 In this example, you'll use three components from Metaplex Core:
 - **AppData Plugin**: To store custom structured data (like loyalty points).
-**Freeze Delegate Plugin**: To lock NFTs, so users cannot transfer or burn them (soulbound behavior).
+- **Freeze Delegate Plugin**: To lock NFTs, so users cannot transfer or burn them (soulbound behavior).
 - **Update Delegate Authority (via PDA)**: To give your program control to update child NFTs minted under a specific collection.
-
 We'll also use **CPI builders** (e.g., `CreateV2CpiBuilder`) to interact with the Metaplex Core program. These builders simplify how you construct and invoke instructions, making code easier to read and maintain.
 
 ### Quick Lifecycle Overview
@@ -106,8 +105,6 @@ Using per-card authorities is especially useful when you want fine-grained, asse
 This step can be handled off-chain using tools like the Metaplex JS SDK or CLI. You might create a collection NFT that represents your loyalty program (e.g., "Sol Coffee Loyalty Cards"). This collection can act as a parent to individual loyalty card NFTs, giving your program an efficient way to manage them.
 
 Assigning a PDA as the collection's update authority allows your program to issue and modify cards programmatically. While it isn’t strictly required to implement this as a Solana program instruction, doing so might be useful if you're building functionality for onboarding "manager" accounts or supporting white-labeled loyalty programs for multiple businesses.
-
-You might begin by creating a collection NFT that represents your loyalty program (e.g., "Sol Coffee Loyalty Cards"). This collection can act as a parent to individual loyalty card NFTs, giving your program an efficient way to manage them.
 
 Assigning a PDA as the collection's update authority allows your program to issue and modify cards programmatically. This isn’t strictly required but helps streamline control.
 
