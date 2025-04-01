@@ -15,7 +15,7 @@ Metaplex Core is a modern NFT Asset standard on Solana that provides a plugin-ba
 
 In this example, you'll use three components from Metaplex Core:
 - **AppData Plugin**: To store custom structured data (like loyalty points).
-- **Freeze Delegate Plugin**: To lock NFTs so users cannot transfer or burn them (soulbound behavior).
+**Freeze Delegate Plugin**: To lock NFTs, so users cannot transfer or burn them (soulbound behavior).
 - **Update Delegate Authority (via PDA)**: To give your program control to update child NFTs minted under a specific collection.
 
 We'll also use **CPI builders** (e.g., `CreateV2CpiBuilder`) to interact with the Metaplex Core program. These builders simplify how you construct and invoke instructions, making code easier to read and maintain.
@@ -111,8 +111,7 @@ You might begin by creating a collection NFT that represents your loyalty progra
 
 Assigning a PDA as the collection's update authority allows your program to issue and modify cards programmatically. This isn’t strictly required but helps streamline control.
 
-To understand more about minting a Core Collection you could visit (Creating a Core Collection).
-[https://developers.metaplex.com/core/collections#creating-a-collection]
+To understand more about minting a Core Collection, you could visit [Creating a Core Collection](https://developers.metaplex.com/core/collections#creating-a-collection).
 
 
 ### Step 2: Minting a Soulbound Loyalty Card
@@ -225,4 +224,4 @@ Once you have the basics in place, here are a few directions you might explore t
 
 By combining Metaplex Core's plugin system with your own creativity, you can build a loyalty platform that feels genuinely rewarding and uniquely yours.
 
-This pattern offers a flexible, modular approach to managing on-chain loyalty systems. Feel free to adapt and expand based on your program’s goals and structure!. Feel free to adapt and expand based on your program’s goals and structure!
+This pattern offers a flexible, modular approach to managing on-chain loyalty systems. Feel free to adapt and expand based on your program's goals and structure!
