@@ -50,8 +50,6 @@ Great for small projects, pay per request in MPLX.
 
 Built for teams launching and scaling production-ready dApps.
 
-**Benefits**: Unlimited requests, priority support, and generous rate limits across Solana and Eclipse. Perfect for shipping fast with reliable infrastructure and flexible access management.
-
 **Ideal For**: Indie builders, startups, and small to mid-sized teams looking for scalable RPC access, DAS indexing, and robust performance without the overhead of enterprise-level pricing.
 
 **Number of API Keys**: 20
@@ -64,12 +62,11 @@ Built for teams launching and scaling production-ready dApps.
 | Eclipse RPC           | 75  | ∞             |
 | getProgramAccounts    | 50  | ∞             |
 | Websocket Connections | 10  | ∞             |
+| Priority Support      |     |               |
 
 ### Enterprise - 4,499 MPLX /mo
 
 Designed for high-growth teams and large organizations.
-
-**Benefits**: Unlimited requests, enhanced priority support, and often additional features like private nodes or custom SLAs (Service Level Agreements).
 
 **Ideal For**: Enterprise-level projects, medium to large-scale dApps, and organizations with consistently high demand for reliable RPC services.
 
@@ -83,3 +80,4 @@ Designed for high-growth teams and large organizations.
 | Eclipse RPC           | 250 | ∞             |
 | getProgramAccounts    | 165 | ∞             |
 | Websocket Connections | 15  | ∞             |
+| Priority Support      |     |               |
