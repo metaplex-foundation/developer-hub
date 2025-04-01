@@ -65,7 +65,7 @@ Built for teams launching and scaling production-ready dApps.
 | getProgramAccounts    | 50  | ∞             |
 | Websocket Connections | 10  | ∞             |
 
-### Enterprise - 4,999 MPLX /mo
+### Enterprise - 4,499 MPLX /mo
 
 Designed for high-growth teams and large organizations.
 
