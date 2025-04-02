@@ -30,6 +30,7 @@ The Permanent Freeze Plugin will work in areas such as:
 | frozen | bool  |
 
 ## Creating an Asset with a Permanent Freeze plugin
+The following example shows how to create an Asset with a Permanent Freeze plugin.
 
 {% dialect-switcher title="Creating an Asset with a Permanent Freeze plugin" %}
 {% dialect title="JavaScript" id="js" %}
@@ -112,6 +113,7 @@ pub async fn create_asset_with_permanent_freeze_delegate_plugin() {
 {% /dialect-switcher %}
 
 ## Updating the Permanent Freeze Delegate plugin on an Asset
+The following example shows how to update the Permanent Freeze Delegate plugin on an Asset to freeze or unfreeze it set the `frozen` argument to `true` or `false` respectively.
 
 {% dialect-switcher title="Updating the Permanent Freeze Delegate plugin on an Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -134,6 +136,7 @@ const updateAssetResponse = await updatePlugin(umi, {
 
 
 ## Creating a Collection with a Permanent Freeze plugin
+The following example shows how to create a collection with a Permanent Freeze plugin.
 
 {% dialect-switcher title="Creating a Collection with a Permanent Freeze plugin" %}
 {% dialect title="JavaScript" id="js" %}
