@@ -113,7 +113,7 @@ pub async fn create_asset_with_permanent_freeze_delegate_plugin() {
 {% /dialect-switcher %}
 
 ## Updating the Permanent Freeze Delegate plugin on an Asset
-The following example shows how to update the Permanent Freeze Delegate plugin on an Asset to freeze or unfreeze it set the `frozen` argument to `true` or `false` respectively.
+The following example shows how to update the Permanent Freeze Delegate plugin on an Asset to freeze or unfreeze it set the `frozen` argument to `true` or `false` respectively. It assumes that the signing wallet is the plugin authority.
 
 {% dialect-switcher title="Updating the Permanent Freeze Delegate plugin on an Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -165,7 +165,7 @@ await createCollection(umi, {
 
 ## Updating a Collection with a Permanent Freeze plugin
 
-The Permanent Freeze Delegate plugin can be updated to freeze or unfreeze the collection like below.
+The Permanent Freeze Delegate plugin can be updated to freeze or unfreeze the collection like below it assumes that the signing wallet is the plugin authority.
 
 {% dialect-switcher title="Updating a Collection with a Permanent Freeze plugin" %}
 {% dialect title="JavaScript" id="js" %}
