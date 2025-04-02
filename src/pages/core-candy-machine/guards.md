@@ -181,7 +181,14 @@ In the following list, we’ll provide a short description of each guard with a 
 - [**Address Gate**](/core-candy-machine/guards/address-gate): Restricts the mint to a single address.
 - [**Allocation**](/core-candy-machine/guards/allocation): Allows specifying a limit on the number of NFTs each guard group can mint.
 - [**Allow List**](/core-candy-machine/guards/allow-list): Uses a wallet address list to determine who is allowed to mint.
+- [**Asset Burn Multi**](/core-candy-machine/guards/asset-burn-multi): Restricts the mint to holders of a specified collection, requiring a burn of one or more core assets.
+- [**Asset Burn**](/core-candy-machine/guards/asset-burn): Restricts the mint to holders of a specified collection, requiring a burn of a single core asset.
+- [**Asset Gate**](/core-candy-machine/guards/asset-gate): Restricts the mint to holders of a specified collection.
+- [**Asset Mint Limit**](/core-candy-machine/guards/asset-mint-limit): Restricts minting to holders of a specified collection and limits the number of mints that can be executed for a provided Core Asset.
+- [**Asset Payment Multi**](/core-candy-machine/guards/asset-payment-multi): Set the price of the mint as multiple Core Assets of a specified collection.
+- [**Asset Payment**](/core-candy-machine/guards/asset-payment): Set the price of the mint as a Core Asset of a specified collection.
 - [**Bot Tax**](/core-candy-machine/guards/bot-tax): Configurable tax to charge invalid transactions.
+- [**Edition**](/core-candy-machine/guards/edition): Adds the Edition Plugin to the minted Core Asset. See the [Print Editions](/core/guides/print-editions) guide for more information.
 - [**End Date**](/core-candy-machine/guards/end-date): Determines a date to end the mint.
 - [**Freeze Sol Payment**](/core-candy-machine/guards/freeze-sol-payment): Set the price of the mint in SOL with a freeze period.
 - [**Freeze Token Payment**](/core-candy-machine/guards/freeze-token-payment): Set the price of the mint in token amount with a freeze period.
@@ -192,6 +199,7 @@ In the following list, we’ll provide a short description of each guard with a 
 - [**Nft Payment**](/core-candy-machine/guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
 - [**Program Gate**](/core-candy-machine/guards/program-gate): Restricts the programs that can be in a mint transaction
 - [**Redeemed Amount**](/core-candy-machine/guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
+- [**Sol Fixed fee**](/core-candy-machine/guards/sol-fixed-fee): Set the price of the mint in SOL with a fixed price. Similar to the [Sol Payment](/core-candy-machine/guards/sol-payment) guard.
 - [**Sol Payment**](/core-candy-machine/guards/sol-payment): Set the price of the mint in SOL.
 - [**Start Date**](/core-candy-machine/guards/start-date): Determines the start date of the mint.
 - [**Third Party Signer**](/core-candy-machine/guards/third-party-signer): Requires an additional signer on the transaction.
@@ -199,6 +207,7 @@ In the following list, we’ll provide a short description of each guard with a 
 - [**Token Gate**](/core-candy-machine/guards/token-gate): Restricts the mint to holders of a specified token.
 - [**Token Payment**](/core-candy-machine/guards/token-payment): Set the price of the mint in token amount.
 - [**Token22 Payment**](/core-candy-machine/guards/token2022-payment): Set the price of the mint in token22 (token extension) amount.
+- [**Vanity Mint**](/core-candy-machine/guards/vanity-mint): Restricts the mint to by expecting the new mint address to match a specific pattern.
 
 ## Conclusion
 
