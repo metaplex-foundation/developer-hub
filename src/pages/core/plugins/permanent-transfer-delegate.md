@@ -31,7 +31,7 @@ The Permanent Transfer Plugin will work in areas such as:
 
 ## Creating a MPL Core Asset with a Permanent Transfer Plugin
 
-{% dialect-switcher title="## Creating a MPL Core Asset with a Permanent Transfer Plugin" %}
+{% dialect-switcher title="Creating a MPL Core Asset with a Permanent Transfer Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts

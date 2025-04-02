@@ -110,3 +110,74 @@ pub async fn create_asset_with_permanent_freeze_delegate_plugin() {
 {% /dialect %}
 
 {% /dialect-switcher %}
+
+## Updating the Permanent Freeze Delegate plugin on an Asset
+
+{% dialect-switcher title="Updating the Permanent Freeze Delegate plugin on an Asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { updatePlugin } from '@metaplex-foundation/mpl-core'
+
+const updateAssetResponse = await updatePlugin(umi, {
+  asset: asset.publicKey,
+  plugin: {
+    type: "PermanentFreezeDelegate",
+    frozen: false,
+  },
+}).sendAndConfirm(umi);
+```
+
+{% /dialect %}
+{% /dialect-switcher %} 
+
+
+
+## Creating a Collection with a Permanent Freeze plugin
+
+{% dialect-switcher title="Creating a Collection with a Permanent Freeze plugin" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { generateSigner } from '@metaplex-foundation/umi'
+import { createCollection } from '@metaplex-foundation/mpl-core'
+
+const collectionSigner = generateSigner(umi)
+await createCollection(umi, {
+  collection: collectionSigner,
+  name: "Frozen Collection",
+  uri: "https://example.com/my-collection.json",
+  plugins: [
+      {
+        type: 'PermanentFreezeDelegate',
+        frozen: true,
+        authority: { type: "UpdateAuthority"}, // The update authority can unfreeze it
+      },
+    ],
+  }).sendAndConfirm(umi);
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Updating a Collection with a Permanent Freeze plugin
+
+The Permanent Freeze Delegate plugin can be updated to freeze or unfreeze the collection like below.
+
+{% dialect-switcher title="Updating a Collection with a Permanent Freeze plugin" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { updateCollectionPlugin } from '@metaplex-foundation/mpl-core'
+
+const updateCollectionResponse =  await updateCollectionPlugin(umi, {
+  collection: collectionSigner.publicKey,
+  plugin: {
+      type: "PermanentFreezeDelegate",
+      frozen: false,
+    },
+  }).sendAndConfirm(umi);
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
