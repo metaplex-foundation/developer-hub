@@ -92,7 +92,7 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { generateSigner } from '@metaplex-foundation/umi'
+import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import { create } from '@metaplex-foundation/mpl-core'
 
 const assetSigner = generateSigner(umi)
@@ -101,6 +101,7 @@ const result = await create(umi, {
   asset: assetSigner,
   name: 'My Asset',
   uri: 'https://example.com/my-asset.json',
+  //owner: publicKey('11111111111111111111111111111111'), //optional to mint into a different wallet
 }).sendAndConfirm(umi)
 ```
 
@@ -225,7 +226,7 @@ MPL Core Assets can be created straight into a collection if your MPL Core Colle
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { generateSigner } from '@metaplex-foundation/umi'
+import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
   createCollection,
   create,
@@ -256,6 +257,7 @@ await create(umi, {
   collection: collection,
   name: 'My Asset',
   uri: 'https://example.com/my-asset.json',
+  //owner: publicKey('11111111111111111111111111111111'), //optional to mint into a different wallet
 }).sendAndConfirm(umi)
 ```
 
