@@ -30,6 +30,7 @@ The Permanent Freeze Plugin will work in areas such as:
 | frozen | bool  |
 
 ## Creating an Asset with a Permanent Freeze plugin
+The following example shows how to create an Asset with a Permanent Freeze plugin.
 
 {% dialect-switcher title="Creating an Asset with a Permanent Freeze plugin" %}
 {% dialect title="JavaScript" id="js" %}
@@ -109,4 +110,76 @@ pub async fn create_asset_with_permanent_freeze_delegate_plugin() {
 
 {% /dialect %}
 
+{% /dialect-switcher %}
+
+## Updating the Permanent Freeze Delegate plugin on an Asset
+The following example shows how to update the Permanent Freeze Delegate plugin on an Asset. Freeze or unfreeze it by setting the `frozen` argument to `true` or `false` respectively. It assumes that the signing wallet is the plugin authority.
+
+{% dialect-switcher title="Updating the Permanent Freeze Delegate plugin on an Asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { updatePlugin } from '@metaplex-foundation/mpl-core'
+
+const updateAssetResponse = await updatePlugin(umi, {
+  asset: asset.publicKey,
+  plugin: {
+    type: "PermanentFreezeDelegate",
+    frozen: false,
+  },
+}).sendAndConfirm(umi);
+```
+
+{% /dialect %}
+{% /dialect-switcher %} 
+
+
+
+## Creating a Collection with a Permanent Freeze plugin
+The following example shows how to create a collection with a Permanent Freeze plugin.
+
+{% dialect-switcher title="Creating a Collection with a Permanent Freeze plugin" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { generateSigner } from '@metaplex-foundation/umi'
+import { createCollection } from '@metaplex-foundation/mpl-core'
+
+const collectionSigner = generateSigner(umi)
+await createCollection(umi, {
+  collection: collectionSigner,
+  name: "Frozen Collection",
+  uri: "https://example.com/my-collection.json",
+  plugins: [
+      {
+        type: 'PermanentFreezeDelegate',
+        frozen: true,
+        authority: { type: "UpdateAuthority"}, // The update authority can unfreeze it
+      },
+    ],
+  }).sendAndConfirm(umi);
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Updating a Collection with a Permanent Freeze plugin
+The following example shows how to update the Permanent Freeze Delegate plugin on a Collection. Freeze or unfreeze it by setting the `frozen` argument to `true` or `false` respectively. It assumes that the signing wallet is the plugin authority.
+
+{% dialect-switcher title="Updating a Collection with a Permanent Freeze plugin" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { updateCollectionPlugin } from '@metaplex-foundation/mpl-core'
+
+const updateCollectionResponse =  await updateCollectionPlugin(umi, {
+  collection: collectionSigner.publicKey,
+  plugin: {
+      type: "PermanentFreezeDelegate",
+      frozen: false,
+    },
+  }).sendAndConfirm(umi);
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
