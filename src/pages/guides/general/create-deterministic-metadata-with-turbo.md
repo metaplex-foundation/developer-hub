@@ -57,13 +57,14 @@ import secretKey from "/path/to/your/kepypair.json";
 const turbo = TurboFactory.authenticated({
   privateKey: bs58.encode(Uint8Array.from(secretKey)),
   token: 'solana',
-  gatewayUrl: `https://api.devnet.solana.com`,
+  gatewayUrl: `https://devnet-aura.metaplex.com/<YOUR_API_KEY>`,
   paymentServiceConfig: { url: "https://payment.ardrive.dev" },
   uploadServiceConfig: { url: "https://upload.ardrive.dev" },
 });
 ```
 
 **Note**: In this example, we explicitly provide the `gatewayUrl`, `paymentServiceConfig`, and `uploadServiceConfig` because we want to configure the environment to work on devnet. For mainnet usage, you can leave these fields empty, and Turbo will default to the mainnet endpoints.
+To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
 
 ## Upload the Metadata
 

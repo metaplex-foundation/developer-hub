@@ -101,7 +101,7 @@ For a more indepth look at uploaded files with Umi please visit [Umi Storage.](/
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 
-const umi = createUmi('https://api.devnet.solana.com').use(irysUploader())
+const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(irysUploader())
 
 const uriUploadArray = await umi.uploader.upload([myFile1, myFile2])
 
