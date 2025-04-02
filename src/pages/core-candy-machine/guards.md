@@ -199,7 +199,7 @@ In the following list, we’ll provide a short description of each guard with a 
 - [**Nft Payment**](/core-candy-machine/guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
 - [**Program Gate**](/core-candy-machine/guards/program-gate): Restricts the programs that can be in a mint transaction
 - [**Redeemed Amount**](/core-candy-machine/guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
-- [**Sol Fixed Price**](/core-candy-machine/guards/sol-fixed-price): Set the price of the mint in SOL with a fixed price. Similar to the [Sol Payment](/core-candy-machine/guards/sol-payment) guard.
+- [**Sol Fixed fee**](/core-candy-machine/guards/sol-fixed-fee): Set the price of the mint in SOL with a fixed price. Similar to the [Sol Payment](/core-candy-machine/guards/sol-payment) guard.
 - [**Sol Payment**](/core-candy-machine/guards/sol-payment): Set the price of the mint in SOL.
 - [**Start Date**](/core-candy-machine/guards/start-date): Determines the start date of the mint.
 - [**Third Party Signer**](/core-candy-machine/guards/third-party-signer): Requires an additional signer on the transaction.
