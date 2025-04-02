@@ -65,8 +65,7 @@ import {
   mplCandyMachine,
 } from "@metaplex-foundation/mpl-core-candy-machine";
 import { 
-    createCollectionV1, 
-    pluginAuthorityPair, 
+    createCollection, 
     ruleSet 
 } from "@metaplex-foundation/mpl-core";
 import crypto from "crypto";
@@ -90,29 +89,26 @@ For ease of use we also add the [Royalty Plugin](/core/plugins/royalties).
 
 ```ts
 const collectionSigner = generateSigner(umi);
-await createCollectionV1(umi, {
+await createCollection(umi, {
   collection: collectionSigner,
   name: "Master Edition",
   uri: "https://example.com/master-edition.json",
   plugins: [
-    pluginAuthorityPair({
+    {
       type: "MasterEdition",
-      data: {
         maxSupply: 100,
-        name: null,
-        uri: null,
-      },
-    }),
-    pluginAuthorityPair({
+        //name and uri are not needed if you want them to be similar to the parent collection
+        name: undefined,
+        uri: undefined,
+    },
+    {
       type: "Royalties",
-      data: {
-        basisPoints: 500,
-        creators: [{ address: umi.identity.publicKey, percentage: 100 }],
-        ruleSet: ruleSet("None"),
-      },
-    }),
-  ],
-}).sendAndConfirm(umi);
+      basisPoints: 500,
+      creators: [{ address: umi.identity.publicKey, percentage: 100 }],
+      ruleSet: ruleSet("None"),
+    }
+    ]
+  }).sendAndConfirm(umi);
 ```
 
 After the creation of the Collection we can create the candy machine using `hiddenSettings` and the `edition` guard.
@@ -175,8 +171,7 @@ To create an Edition without Core Candy Machine you would:
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
-  createCollectionV1,
-  pluginAuthorityPair,
+  createCollection,
   ruleSet,
 } from '@metaplex-foundation/core'
 
@@ -185,21 +180,29 @@ const collectionSigner = generateSigner(umi)
 const creator1 = publicKey('11111111111111111111111111111111')
 const creator2 = publicKey('22222222222222222222222222222222')
 
-await createCollectionV1(umi, {
+await createCollection(umi, {
   collection: collectionSigner,
-  name: 'My NFT',
-  uri: 'https://example.com/my-nft.json',
+  name: "Master Edition",
+  uri: "https://example.com/master-edition.json",
   plugins: [
-    pluginAuthorityPair({
-      type: 'MasterEdition',
-      data: {
+    {
+      type: "MasterEdition",
         maxSupply: 100,
-        name: 'My Master Edition',
-        uri: 'https://example.com/my-master-edition',
-      },
-    }),
-  ],
-}).sendAndConfirm(umi)
+        //name and uri are not needed if you want them to be similar to the parent collection
+        name: undefined,
+        uri: undefined,
+    },
+    {
+      type: "Royalties",
+      basisPoints: 500,
+      creators: [
+        { address: creator1, percentage: 50 }, 
+        { address: creator2, percentage: 50 }
+      ],
+      ruleSet: ruleSet("None"),
+    }
+    ]
+  }).sendAndConfirm(umi);
 ```
 
 {% /dialect %}
@@ -270,21 +273,21 @@ pub async fn create_collection_with_plugin() {
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { 
-    createV1, 
-    pluginAuthorityPair 
+    create, 
 } from '@metaplex-foundation/mpl-core'
 
 const asset = generateSigner(umi)
 
-const result = createV1(umi, {
+const result = create(umi, {
   asset: asset,
   name: 'My Nft',
   uri: 'https://example.com/my-nft',
+  collection: collectionSigner.publicKey,
   plugins: [
-    pluginAuthorityPair({
+    {
       type: 'Edition',
-      data: { number: 1 },
-    }),
+      number: 1,
+    }
   ],
 }).sendAndConfirm(umi)
 ```
