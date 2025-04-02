@@ -150,6 +150,12 @@ Note that once a Candy Machine is created using one of these two modes, it canno
 
 Let’s go through both of them in a bit more detail.
 
+{% callout type="note" title="Randomness" %}
+
+It can be advisable to utilize [Hidden Settings](#hidden-settings) for the reveal mechanic, as the "random" minting process of the assets is not entirely unpredictable and can be influenced by sufficient resources and malicious intent.
+
+{% /callout %}
+
 ### Config Line Settings
 
 The **Config Line Settings** attribute allows us to describe the items that are or will be inserted inside our Candy Machine. It enables us to keep the size of the Candy Machine to a minimum by providing exact lengths for the **Names** and **URIs** of our items as well as providing some shared prefixes to reduce that length. The **Config Line Settings** attribute is an object containing the following properties:
