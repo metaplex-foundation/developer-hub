@@ -184,9 +184,10 @@ In the following list, we’ll provide a short description of each guard with a 
 - [**Asset Burn Multi**](/core-candy-machine/guards/asset-burn-multi): Restricts the mint to holders of a specified collection, requiring a burn of one or more core assets.
 - [**Asset Burn**](/core-candy-machine/guards/asset-burn): Restricts the mint to holders of a specified collection, requiring a burn of a single core asset.
 - [**Asset Gate**](/core-candy-machine/guards/asset-gate): Restricts the mint to holders of a specified collection.
-- [**Asset Mint Limit**](/core-candy-machine/guards/asset-mint-limit): Restricts minting to holders of a specified collection and limits the amount of mints that can be done for a provided Core Asset.
+- [**Asset Mint Limit**](/core-candy-machine/guards/asset-mint-limit): Restricts minting to holders of a specified collection and limits the number of mints that can be executed for a provided Core Asset.
 - [**Asset Payment Multi**](/core-candy-machine/guards/asset-payment-multi): Set the price of the mint as multiple Core Assets of a specified collection.
 - [**Asset Payment**](/core-candy-machine/guards/asset-payment): Set the price of the mint as a Core Asset of a specified collection.
+- [**Vanity Mint**](/core-candy-machine/guards/vanity-mint): Restricts minting by requiring the new mint address to match a specific pattern.
 - [**Bot Tax**](/core-candy-machine/guards/bot-tax): Configurable tax to charge invalid transactions.
 - [**Edition**](/core-candy-machine/guards/edition): Adds the Edition Plugin to the minted Core Asset. See the [Print Editions](/core/guides/print-editions) guide for more information.
 - [**End Date**](/core-candy-machine/guards/end-date): Determines a date to end the mint.
