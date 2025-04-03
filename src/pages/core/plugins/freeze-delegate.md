@@ -232,7 +232,7 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
    .payer(&ctx.accounts.payer.to_account_info())
    .authority(Some(&ctx.accounts.update_authority.to_account_info()))
    .system_program(&ctx.accounts.system_program.to_account_info())
-   //set the FreezeDelegete plugin to `frozen: false`
+   //set the FreezeDelegete plugin to `frozen: true`
    .plugin(Plugin::FreezeDelegate( FreezeDelegate{ frozen: true } ))
    .invoke()?;
 ```
