@@ -12,9 +12,11 @@ The Transfer Plugin will work in areas such as:
 
 - Escrowless sale of the Asset: Transfer NFTs directly to buyers without needing an escrow account
 - Gaming scenario where the user swaps/loses their asset based on an event: Automatically transfer assets when game events occur
-- Rental marketplaces: Transfer NFTs to renters for a specified period
-- Automated trading: Execute trades based on predefined conditions
 - Subscription services: Transfer NFTs as part of a subscription service
+
+{% callout title="Warning!" %}
+The transfer delegate authority is only a temporary authority. Any assigned delegate authority be will reset and be removed upon transfer of the Asset.
+{% /callout %}
 
 ## Works With
 
