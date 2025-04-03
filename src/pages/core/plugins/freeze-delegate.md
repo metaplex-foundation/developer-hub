@@ -54,7 +54,7 @@ await addPlugin(umi, {
 
 {% /dialect %}
 
-{% dialect title="Rust CPI" id="rust_cpi" %}
+{% dialect title="Rust CPI" id="rust-cpi" %}
 ```rust
 AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -135,7 +135,7 @@ await approvePluginAuthority(umi, {
 
 {% /dialect %}
 
-{% dialect title="Rust CPI" id="rust_cpi" %}
+{% dialect title="Rust CPI" id="rust-cpi" %}
 ```rust
 ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -224,7 +224,19 @@ await freezeAsset(umi, {
 
 {% /dialect %}
 
-{% dialect title="Rust CPI" id="rust_cpi" %}
+{% dialect title="Rust CPI" id="rust-cpi" %}
+```rust
+UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
+    .asset(&ctx.accounts.asset.to_account_info())
+    .collection(Some(&ctx.accounts.collection.to_account_info()))
+    .payer(&ctx.accounts.payer.to_account_info())
+    .authority(Some(&ctx.accounts.update_authority.to_account_info()))
+    .system_program(&ctx.accounts.system_program.to_account_info())
+    // Set the FreezeDelegate plugin to `frozen: true`
+    .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: true }))
+    .invoke()?;
+```
+{% /dialect %}
 
 {% dialect title="Rust" id="rust" %}
 ```rust
@@ -245,11 +257,11 @@ pub async fn update_freeze_delegate_plugin() {
 
     let update_freeze_delegate_plugin_ix = UpdatePluginV1Builder::new()
         .asset(asset)
-        // Pass in Collection if Asset is part of collection.
+        // Pass in Collection if Asset is part of collection
         .collection(Some(collection))
         .payer(authority.pubkey())
-        // Set the `froze: true`
-        .plugin(Plugin::FreezeDelegate(FreezeDelegate {frozen: true}))
+        // Set the FreezeDelegate plugin to `frozen: true`
+        .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: true }))
         .instruction();
 
     let signers = vec![&authority];
@@ -268,9 +280,8 @@ pub async fn update_freeze_delegate_plugin() {
         .await
         .unwrap();
 
-    println!("Signature: {:?}", res)
+    println!("Signature: {:?}", res);
 }
-
 ```
 
 {% /dialect %}
@@ -292,25 +303,25 @@ const assetAccount = await fetchAsset(umi, assetAddress)
 
 const delegateSigner = generateSigner(umi)
 
-  await thawAsset(umi, {
-    asset: assetAccount,
-    delegate: delegateSigner,
-  }).sendAndConfirm(umi)
+await thawAsset(umi, {
+  asset: assetAccount,
+  delegate: delegateSigner,
+}).sendAndConfirm(umi)
 ```
 
 {% /dialect %}
 
-{% dialect title="Rust CPI" id="rust_cpi" %}
+{% dialect title="Rust CPI" id="rust-cpi" %}
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
-   .asset(&ctx.accounts.asset.to_account_info())
-   .collection(Some(&ctx.accounts.collection.to_account_info()))
-   .payer(&ctx.accounts.payer.to_account_info())
-   .authority(Some(&ctx.accounts.update_authority.to_account_info()))
-   .system_program(&ctx.accounts.system_program.to_account_info())
-   //set the FreezeDelegete plugin to `frozen: false`
-   .plugin(Plugin::FreezeDelegate( FreezeDelegate{ frozen: false } ))
-   .invoke()?;
+    .asset(&ctx.accounts.asset.to_account_info())
+    .collection(Some(&ctx.accounts.collection.to_account_info()))
+    .payer(&ctx.accounts.payer.to_account_info())
+    .authority(Some(&ctx.accounts.update_authority.to_account_info()))
+    .system_program(&ctx.accounts.system_program.to_account_info())
+    // Set the FreezeDelegate plugin to `frozen: false`
+    .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
+    .invoke()?;
 ```
 {% /dialect %}
 
@@ -333,11 +344,11 @@ pub async fn thaw_freeze_delegate_plugin() {
 
     let thaw_freeze_delegate_plugin_ix = UpdatePluginV1Builder::new()
         .asset(asset)
-        // Pass in Collection if Asset is part of collection.
+        // Pass in Collection if Asset is part of collection
         .collection(Some(collection))
         .payer(authority.pubkey())
-        // Set the `frozen: false`
-        .plugin(Plugin::FreezeDelegate(FreezeDelegate {frozen: false}))
+        // Set the FreezeDelegate plugin to `frozen: false`
+        .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
         .instruction();
 
     let signers = vec![&authority];
@@ -356,7 +367,7 @@ pub async fn thaw_freeze_delegate_plugin() {
         .await
         .unwrap();
 
-    println!("Signature: {:?}", res)
+    println!("Signature: {:?}", res);
 }
 ```
 
