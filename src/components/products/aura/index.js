@@ -1,6 +1,6 @@
-import { documentationSection } from '@/shared/sections'
-import { SparklesIcon } from '@heroicons/react/24/outline'
-import { Hero } from './Hero'
+import { documentationSection } from '@/shared/sections';
+import { SparklesIcon } from '@heroicons/react/24/outline';
+import { Hero } from './Hero';
 
 export const aura = {
   name: 'Aura',
@@ -63,12 +63,12 @@ export const aura = {
               href: '/aura/api/v1/das/get-asset',
             },
             {
-              title: 'Get Asset Proof',
-              href: '/aura/api/v1/das/get-asset-proof',
-            },
-            {
               title: 'Get Asset Batch',
               href: '/aura/api/v1/das/get-asset-batch',
+            },
+            {
+              title: 'Get Asset Proof',
+              href: '/aura/api/v1/das/get-asset-proof',
             },
             {
               title: 'Get Asset Proof Batch',
