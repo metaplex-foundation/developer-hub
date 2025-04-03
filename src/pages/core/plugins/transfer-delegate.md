@@ -15,7 +15,7 @@ The Transfer Plugin will work in areas such as:
 - Subscription services: Transfer NFTs as part of a subscription service
 
 {% callout title="Warning!" %}
-The transfer delegate authority is only a temporary authority. Any assigned delegate authority be will reset and be removed upon transfer of the Asset.
+The transfer delegate authority is only a temporary authority. Any assigned delegate authority will be reset and be removed upon transfer of the Asset.
 {% /callout %}
 
 ## Works With
@@ -126,14 +126,16 @@ The `approvePluginAuthority` command delegates the transfer authority to a diffe
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
-const delegateAddress = publicKey('22222222222222222222222222222222')
+const asset = publicKey("11111111111111111111111111111111");
+const collection = publicKey("22222222222222222222222222222");
+const delegateAddress = publicKey("33333333333333333333333333333");
 
 await approvePluginAuthority(umi, {
-  asset: asset.publicKey,
-  plugin: { type: 'TransferDelegate' },
-  newAuthority: { type: 'Address', address: delegateAddress },
-}).sendAndConfirm(umi)
+  asset: asset,
+  collection: collection,
+  plugin: { type: "FreezeDelegate" },
+  newAuthority: { type: "Address", address: delegateAddress },
+}).sendAndConfirm(umi);
 ```
 
 {% /dialect %}
