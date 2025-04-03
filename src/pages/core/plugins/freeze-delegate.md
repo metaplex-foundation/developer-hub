@@ -258,7 +258,7 @@ pub async fn update_freeze_delegate_plugin() {
     let update_freeze_delegate_plugin_ix = UpdatePluginV1Builder::new()
         .asset(asset)
         // Pass in Collection if Asset is part of collection.
-        .collection()
+        .collection(Some(collection))
         .payer(authority.pubkey())
         // Set the `froze: true`
         .plugin(Plugin::FreezeDelegate(FreezeDelegate {frozen: true}))
