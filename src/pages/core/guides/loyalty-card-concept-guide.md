@@ -15,7 +15,7 @@ Metaplex Core is a modern NFT Asset standard on Solana that provides a plugin-ba
 
 In this example, you'll use three components from Metaplex Core:
 - **AppData Plugin**: To store custom structured data (like loyalty points).
-- **Freeze Delegate Plugin**: To lock NFTs, so users cannot transfer or burn them (soulbound behavior).
+- **Freeze Delegate Plugin**: To lock NFTs, so users cannot transfer or burn them (Soulbound behavior).
 - **Update Delegate Authority (via PDA)**: To give your program control to update child NFTs minted under a specific collection.
 We'll also use **CPI builders** (e.g., `CreateV2CpiBuilder`) to interact with the Metaplex Core program. These builders simplify how you construct and invoke instructions, making code easier to read and maintain.
 
@@ -23,7 +23,7 @@ We'll also use **CPI builders** (e.g., `CreateV2CpiBuilder`) to interact with th
 ```
 [User] → requests loyalty card
     ↓
-[Program] → mints NFT + AppData + FreezeDelegate (soulbound)
+[Program] → mints NFT + AppData + FreezeDelegate (Soulbound)
     ↓
 [User] → purchases coffee or redeems points
     ↓
@@ -40,7 +40,7 @@ This example outlines one potential structure for creating a loyalty card system
 
 ### Why Use Soulbound NFT Assets?
 
-Making loyalty cards soulbound helps ensure that they're tied to a single user and can't be transferred or sold. This can help preserve the integrity of the loyalty program and prevent users from gaming the system by trading or duplicating rewards.
+Making loyalty cards Soulbound helps ensure that they're tied to a single user and can't be transferred or sold. This can help preserve the integrity of the loyalty program and prevent users from gaming the system by trading or duplicating rewards.
 
 ### LoyaltyCardData Structure
 
@@ -116,7 +116,7 @@ To understand more about minting a Core Collection, you could visit [Creating a 
 When a user joins your program, you could mint them a loyalty card NFT with the following traits:
 
 - Belongs to your loyalty collection
-- Frozen (soulbound) using the Freeze Delegate plugin
+- Frozen (Soulbound) using the Freeze Delegate plugin
 - Stores its state in an AppData plugin
 
 Here’s one way to structure the minting logic:
@@ -197,7 +197,7 @@ This guide has walked through a conceptual implementation of a loyalty card syst
 
 - Create a collection NFT for loyalty cards
 
-- Use plugins like AppData and FreezeDelegate to store data and make NFTs soulbound
+- Use plugins like AppData and FreezeDelegate to store data and make NFTs Soulbound
 
 - Assign PDA authorities to allow your program to control loyalty cards
 
