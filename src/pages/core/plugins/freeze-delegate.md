@@ -35,10 +35,6 @@ The Freeze Plugin will work in areas such as:
 
 The `addPlugin` command adds the Freeze Delegate Plugin to an Asset. This plugin allows the Asset to be frozen, preventing transfers and burns.
 
-Parameters:
-- `asset`: The public key of the Asset to add the plugin to
-- `plugin`: The plugin configuration with `type: 'FreezeDelegate'` and `frozen: boolean`
-
 {% dialect-switcher title="Adding a Freeze Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 
