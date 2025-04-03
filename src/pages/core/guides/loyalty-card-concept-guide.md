@@ -6,7 +6,12 @@ description: This guide describes how to build a Loyalty Card program on Solana 
 
 ## Concept Guide: Setting Up Loyalty Cards with Metaplex Core and Plugins
 
-> ⚠️ This is a **concept guide**, not a complete end-to-end tutorial. It is intended for developers with a working understanding of Rust and Solana, particularly using the Anchor framework. While it walks through key architectural decisions and code examples, it assumes familiarity with program structure, CPIs, and deploying Solana smart contracts.
+{% callout %}
+
+⚠️ This is a **concept guide**, not a complete end-to-end tutorial. It is intended for developers with a working understanding of Rust and Solana, particularly using the Anchor framework. While it walks through key architectural decisions and code examples, it assumes familiarity with program structure, CPIs, and deploying Solana smart contracts.
+
+{% /callout %}
+> 
 
 This guide assumes you have some basic knowledge of Solana and Rust using Anchor. It explores one way to implement a loyalty card system using Core NFT Assets on Solana, powered by Metaplex Core. Rather than prescribing a rigid approach, this guide aims to demonstrate a flexible pattern that you can adapt to your own project.
 
@@ -44,7 +49,11 @@ Making loyalty cards Soulbound helps ensure that they're tied to a single user a
 
 ### LoyaltyCardData Structure
 
-Here's one way to define the loyalty card data you'll store with the AppData plugin:
+Each loyalty card needs to track user-specific data, such as how many coffees they’ve purchased or redeemed. Since Core NFTs are designed to be lightweight and extensible, we use the AppData plugin to store this structured loyalty data directly on the NFT in a binary format.
+
+This plugin attaches to the NFT and can only be written to by the authority set during minting — in this case, a PDA derived per loyalty card (explained below). Your Solana program will write to this plugin anytime a stamp is earned or redeemed.
+
+Here’s one example of the data structure you might store:
 
 ```rust
 pub struct LoyaltyCardData {
@@ -221,4 +230,4 @@ Once you have the basics in place, here are a few directions you might explore t
 
 By combining Metaplex Core's plugin system with your own creativity, you can build a loyalty platform that feels genuinely rewarding and uniquely yours.
 
-This pattern offers a flexible, modular approach to managing on-chain loyalty systems. Feel free to adapt and expand based on your program's goals and structure!
+This pattern offers a flexible, modular approach to managing on-chain loyalty systems. You may customize and extend this approach to align with your program’s specific goals.
