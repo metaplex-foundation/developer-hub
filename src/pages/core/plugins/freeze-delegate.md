@@ -31,7 +31,9 @@ The Freeze Plugin will work in areas such as:
 | ------ | ----- |
 | frozen | bool  |
 
-## Adding the Freeze Delegate Plugin to an Asset
+## Functions
+
+### Add Freeze Delegate Plugin to an Asset
 
 The `addPlugin` command adds the Freeze Delegate Plugin to an Asset. This plugin allows the Asset to be frozen, preventing transfers and burns.
 
@@ -110,7 +112,7 @@ pub async fn add_freeze_delegate_plugin() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Delegate the Freeze Authority
+### Delegate the Freeze Authority
 
 The `approvePluginAuthority` command delegates the freeze authority to a different address. This allows another address to freeze and thaw the Asset while maintaining ownership.
 
@@ -197,7 +199,7 @@ pub async fn approve_plugin_authority() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Freezing an Asset
+### Freezing an Asset
 
 The `freezeAsset` command freezes an Asset, preventing it from being transferred or burned. This is useful for escrowless staking or marketplace listings.
 
@@ -286,7 +288,7 @@ pub async fn update_freeze_delegate_plugin() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Thawing a Frozen Asset
+### Thawing a Frozen Asset
 
 The `thawAsset` command unfreezes a frozen Asset, restoring its ability to be transferred and burned.
 
