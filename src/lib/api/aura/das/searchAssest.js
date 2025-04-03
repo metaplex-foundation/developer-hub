@@ -155,6 +155,38 @@ const searchAssets = {
       type: 'string',
       description: 'The value of the JSON URI of the asset',
     },
+    {
+      name: 'options',
+      type: 'object',
+      description: 'Display options',
+      value: {
+        showCollectionMetadata: {
+          type: 'boolean',
+          description: 'Show collection metadata',
+          value: ['false', 'true'],
+        },
+        showFungible: {
+          type: 'boolean',
+          description: 'Show fungible assets',
+          value: ['false', 'true'],
+        },
+        showInscription: {
+          type: 'boolean',
+          description: 'Show inscription data',
+          value: ['false', 'true'],
+        },
+        showUnverifiedCollections: {
+          type: 'boolean',
+          description: 'Show unverified collections',
+          value: ['false', 'true'],
+        },
+        showZeroBalance: {
+          type: 'boolean',
+          description: 'Show token accounts with zero balance',
+          value: ['false', 'true'],
+        },
+      },
+    },
   ],
 }
 
