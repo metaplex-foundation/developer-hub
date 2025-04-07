@@ -15,7 +15,7 @@ The Transfer Plugin will work in areas such as:
 - Subscription services: Transfer NFTs as part of a subscription service
 
 {% callout title="Warning!" %}
-The transfer delegate authority is only a temporary authority. Any assigned delegate authority will be reset and be removed upon transfer of the Asset.
+The transfer delegate authority is temporary and will be reset upon asset transfer.
 {% /callout %}
 
 ## Works With
@@ -133,7 +133,7 @@ const delegateAddress = publicKey("33333333333333333333333333333");
 await approvePluginAuthority(umi, {
   asset: asset,
   collection: collection,
-  plugin: { type: "FreezeDelegate" },
+  plugin: { type: "TransferDelegate" },
   newAuthority: { type: "Address", address: delegateAddress },
 }).sendAndConfirm(umi);
 ```
@@ -234,11 +234,10 @@ const collectionItem =
 // Transfer the Core NFT Asset
 const { signature } = await transfer(umi, {
     asset: assetItem,
-    newOwner: publicKey(""),
+    newOwner: publicKey("33333333333333333333333333333333"),
     collection: collectionItem,
   })
   .sendAndConfirm(umi);
-```
 
 {% /dialect %}
 
