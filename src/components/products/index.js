@@ -17,7 +17,11 @@ import { tokenAuthRules } from './tokenAuthRules';
 import { tokenMetadata } from './tokenMetadata';
 import { umi } from './umi';
 
-export const productCategories = ['Aura', 'MPL', 'Dev Tools']
+export const productCategories = [
+  // 'Aura', 
+  'MPL', 
+  'Dev Tools'
+]
 
 export const products = [
   global,

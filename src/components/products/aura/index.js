@@ -7,7 +7,7 @@ export const aura = {
   headline: 'Indexing and Data Availability Network',
   description:
     'A data network that extends Solana and the Solana Virtual Machine (SVM)',
-  navigationMenuCatergory: 'Aura',
+  navigationMenuCatergory: 'Dev Tools',
   path: 'aura',
   icon: <SparklesIcon />,
   github: 'https://github.com/metaplex-foundation/aura/',
