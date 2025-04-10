@@ -31,10 +31,6 @@ export const aura = {
               title: 'FAQ',
               href: '/aura/faq',
             },
-            {
-              title: 'Access and Pricing',
-              href: '/aura/pricing',
-            },
           ],
         },
         {
@@ -103,16 +99,7 @@ export const aura = {
               href: '/aura/api/v1/das/search-assets',
             },
           ],
-        },
-        {
-          title: 'Guides',
-          links: [
-            {
-              title: 'Using Aura Endpoints',
-              href: '/aura/using-aura-endpoints',
-            },
-          ],
-        },
+        }
       ],
     },
   ],
