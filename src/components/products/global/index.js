@@ -1,6 +1,6 @@
-import { documentationSection } from '@/shared/sections'
-import { Hero } from './Hero'
-import { Logo } from './Logo'
+import { documentationSection } from '@/shared/sections';
+import { Hero } from './Hero';
+import { Logo } from './Logo';
 
 export const global = {
   name: 'Metaplex',
@@ -21,7 +21,6 @@ export const global = {
           links: [
             { title: 'Introduction', href: '/' },
             { title: 'Programs and Tools', href: '/programs-and-tools' },
-            { title: 'Metaplex Aura', href: '/aura' },
           ],
         },
         {
