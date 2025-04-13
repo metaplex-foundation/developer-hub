@@ -30,7 +30,6 @@ A basic configuration file is shown below:
   "hiddenSettings": null,
   "uploadMethod": "bundlr",
   "awsConfig": null,
-  "nftStorageAuthToken": null,
   "shdwStorageAccount": null,
   "pinataConfig": null,
   "sdriveApiKey": null,
@@ -142,7 +141,6 @@ The table below provides an overview of the settings available:
 | uploadMethod |   |  | Configure the storage to upload images and metadata |  
 |  |   | "bundlr" |  Uploads to Arweave using [Bundlr](https://bundlr.network) and payments are made in SOL (works on both mainnet and devnet; files are only stored for 7 days on devnet)
 |  |   | "aws" | Uploads to Amazon Web Services (AWS) |
-|  |   | "nftStorage" | Uploads to [NFT.Storage](https://nft.storage) (works on all networks) |
 |  |   | "shdw" | Uploads to the GenesysGo [Shadow Drive](https://docs.shadow.cloud) (works on mainnet only)
 |  |   | "pinata" | Uploads to [Pinata](https://www.pinata.cloud) (works on all networks; free and tiered subscriptions) |
 |  |   | "sdrive" | Uploads to Shador Drive using [SDrive Cloud Storage](https://sdrive.app) |
@@ -150,7 +148,6 @@ The table below provides an overview of the settings available:
 | | bucket | String | AWS bucket name
 | | profile | String | AWS profile to use from the credentials file name |
 | | directory | String | The directory within the bucket to upload the items to. An empty string means uploading files to the bucket root directory. |
-| nftStorageAuthToken | | String | NFT.Storage API Key *(required when "nftStorage" is used)* |
 | pinataConfig | | | *(required when "pinata" is used)* |
 | | JWT | String | JWT authentication token |
 | | apiGateway | String | URL to connect to Pinata API |
@@ -184,11 +181,6 @@ It is also important to set up the ACL permission of the bucket correctly to ena
 * [CORS configuration](https://aws.amazon.com/premiumsupport/knowledge-center/s3-configure-cors/)
 
 The `profile` value allows you to specify which profile to read from your credentials file. The `directory` value is the name of the directory in the bucket where the files will be uploaded, allowing you to have multiple candy machine or collections in a single bucket separated by different directories. Leaving this as an empty string will upload the files to the root of the bucket. The (optional) `domain` allows you to specify a custom domain to serve the data from AWS — e.g., using the domain as `https://mydomain.com` will create links to files in the format `https://mydomain.com/0.json`. If you do not specify a domain, the default AWS S3 domain will be used (`https://<BUCKET_NAME>.s3.amazonaws.com`).
-
-{% /totem-accordion %}
-{% totem-accordion title="NFT.Storage" %}
-
-NFT.Storage is a popular service that uploads data on the public IPFS network. You will need to register an account to obtain an API key (token), which need to be specified by `"nftStorageAuthToken"` in the configuration file.
 
 {% /totem-accordion %}
 {% totem-accordion title="Pinata" %}

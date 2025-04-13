@@ -259,7 +259,6 @@ The config file will look like this:
   "ruleSet": null,
   "awsConfig": null,
   "sdriveApiKey": null,
-  "nftStorageAuthToken": null,
   "shdwStorageAccount": null,
   "pinataConfig": null,
   "hiddenSettings": null,

@@ -180,7 +180,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 
 ## Creating the Metadata for the Collection
 
-To display a recognisable image for your Collection in the Wallets or on the Explorer, we need to create the URI where we can store the Metadata!
+To display a recognizable image for your Collection in the Wallets or on the Explorer, we need to create the URI where we can store the Metadata!
 
 ### Uploading the Image
 

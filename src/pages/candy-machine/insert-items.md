@@ -29,8 +29,8 @@ Additionally, tools like [Sugar](/candy-machine/sugar) make uploading JSON metad
 Umi ships with an `uploader` interface that can be used to upload JSON data to the storage provider of your choice. For instance, this is how you'd select the NFT.Storage implementation of the uploader interface.
 
 ```ts
-import { nftStorage } from '@metaplex-foundation/umi-uploader-nft-storage'
-umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
+import {irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+umi.use(irysUploader())
 ```
 
 You may then use the `upload` and `uploadJson` methods of the `uploader` interface to upload your assets and their JSON metadata.
