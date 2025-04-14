@@ -1,75 +1,31 @@
 ---
-title: Verified Creator Plugin
-metaTitle: Verified Creator Plugin | Core
-description: A plugin that stores data which is a list of creators who worked on the Assets/Collection. 
+titwe: Vewified Cweatow Pwugin
+metaTitwe: Vewified Cweatow Pwugin | Cowe
+descwiption: A pwugin dat stowes data which is a wist of cweatows who wowked on de Assets/Cowwection~ 
 ---
 
-The `Verified Creator` Plugin is a `Authority Managed` plugin that allows people to add verified creators to your Asset or Collection. It works similar to the verified Creator Array Metaplex Token Metadata used, different to that in MPL Core the Verified Creatores are not used to distribute royalties.
+De `Verified Creator` Pwugin is a `Authority Managed` pwugin dat awwows peopwe to add vewified cweatows to youw Asset ow Cowwection~ It wowks simiwaw to de vewified Cweatow Awway Metapwex Token Metadata used, diffewent to dat in MPW Cowe de Vewified Cweatowes awe nyot used to distwibute woyawties.
 
-Possible use cases for this plugins can be to publicly verify that a Creator was part of the asset creation process. For example the Designer, Developer and Founder could sign as proof as creatorship.
+Possibwe use cases fow dis pwugins can be to pubwicwy vewify dat a Cweatow was pawt of de asset cweation pwocess~ Fow exampwe de Designyew, Devewopew and Foundew couwd sign as pwoof as cweatowship.
 
-The `update authority` can: 
-- Add the plugin.
-- Add unverified creators to the creators array.
-- Can remove unverified creators. To remove verified creators they must unverify themselves first.
-- Can verify themselves.
+De `update authority` can: 
+- Add de pwugin.
+- Add unvewified cweatows to de cweatows awway.
+- Can wemuv unvewified cweatows~ To wemuv vewified cweatows dey must unvewify demsewves fiwst.
+- Can vewify demsewves.
 
-To verify a creator the `updatePlugin` instruction has to be signed by the public key that was added by the update authority to the creators array. 
+To vewify a cweatow de `updatePlugin` instwuction has to be signyed by de pubwic key dat was added by de update audowity to de cweatows awway~ 
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
 
-## Arguments
+## Awguments
 
-The `verifiedCreator` Plugin requires the following arguments in a `VerifiedCreatorsSignature` Array:
-
-| Arg     | Value     |
-| ------- | ------    |
-| address | publicKey |
-| message | string    |
-
-Assets inherit the Creators array from the Collection.
-
-## Adding the autograph Plugin to an Asset code example
-
-{% dialect-switcher title="Adding a verified Creators Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
-
-This snippet assumes that the umi identity is the update authority of the asset.
-
-```ts
-import {
-  addPlugin,
-} from '@metaplex-foundation/mpl-core'
-
-await addPlugin(umi, {
-  asset: asset.publicKey,
-  plugin: {
-    type: 'VerifiedCreators',
-    signatures: [
-      {
-        address: umi.identity.publicKey,
-        verified: true,
-      },
-  },
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-## Adding a different Creator to an Asset code example
-
-{% dialect-switcher title="Adding a different Creator to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
-
-This snippet assumes that the umi identity is the update authority of the asset to add a unverified Creator.
-
-```ts
+De ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 
@@ -97,10 +53,54 @@ await updatePlugin(umi, {
   },
   authority: umi.identity,
 }).sendAndConfirm(umi)
+```0 Pwugin wequiwes de fowwowing awguments in a `VerifiedCreatorsSignature` Awway:
+
+| Awg     | Vawue     |
+| ------- | ------    |
+| addwess | pubwicKey |
+| message | stwing    |
+
+Assets inhewit de Cweatows awway fwom de Cowwection.
+
+## Adding de autogwaph Pwugin to an Asset code exampwe
+
+{% diawect-switchew titwe="Adding a vewified Cweatows Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+Dis snyippet assumes dat de umi identity is de update audowity of de asset.
+
+```ts
+import {
+  addPlugin,
+} from '@metaplex-foundation/mpl-core'
+
+await addPlugin(umi, {
+  asset: asset.publicKey,
+  plugin: {
+    type: 'VerifiedCreators',
+    signatures: [
+      {
+        address: umi.identity.publicKey,
+        verified: true,
+      },
+  },
+}).sendAndConfirm(umi)
 ```
 
-After adding the unverified Creator they can verify themselves using the `updatePlugin` function again.
-This snippet assumes that the umi identity is the Creator.
+{% /diawect %}
+{% /diawect-switchew %}
+
+## Adding a diffewent Cweatow to an Asset code exampwe
+
+{% diawect-switchew titwe="Adding a diffewent Cweatow to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+Dis snyippet assumes dat de umi identity is de update audowity of de asset to add a unvewified Cweatow.
+
+UWUIFY_TOKEN_1744632833759_1
+
+Aftew adding de unvewified Cweatow dey can vewify demsewves using de `updatePlugin` function again.
+Dis snyippet assumes dat de umi identity is de Cweatow.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -132,18 +132,18 @@ await updatePlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Removing a Creator from an Asset code example
+## Wemoving a Cweatow fwom an Asset code exampwe
 
-{% dialect-switcher title="Removing a Creator from an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wemoving a Cweatow fwom an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-Only the update authority can remove creators. To remove the creator it has to be `verified:false` or the update authority itself. Therefore the update will be done in two steps. If you are able to sign with the update authority and the creator at the same time this could be done in one transaction combining both instructions.
+Onwy de update audowity can wemuv cweatows~ To wemuv de cweatow it has to be `verified:false` ow de update audowity itsewf~ Dewefowe de update wiww be donye in two steps~ If you awe abwe to sign wid de update audowity and de cweatow at de same time dis couwd be donye in onye twansaction combinying bod instwuctions.
 
-1. Set `verified:false`
-This snippet assumes that `umi.identity` is the creator that you want to remove
+1~ Set `verified:false`
+Dis snyippet assumes dat `umi.identity` is de cweatow dat you want to wemuv
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -172,8 +172,8 @@ await updatePlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-2. remove the creator
-This snippet assumes that `umi.identity` is the update authority
+2~ wemuv de cweatow
+Dis snyippet assumes dat `umi.identity` is de update audowity
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -201,14 +201,14 @@ await updatePlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Adding the verified Creators Plugin to a Collection code example
+## Adding de vewified Cweatows Pwugin to a Cowwection code exampwe
 
-{% dialect-switcher title="Add verified Creators Plugin to Collection" %}
-{% dialect title="JavaScript" id="js" %}
-This snippet assumes that the `umi.identity` is the update authority
+{% diawect-switchew titwe="Add vewified Cweatows Pwugin to Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+Dis snyippet assumes dat de `umi.identity` is de update audowity
 
 ```ts
 import { addCollectionPlugin } from '@metaplex-foundation/mpl-core'
@@ -226,5 +226,5 @@ await addCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
