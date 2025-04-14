@@ -1,30 +1,30 @@
 ---
-title: Burn Delegate
-metaTitle: Burn Delegate | Core
-description: Learn about the Core Asset Burn Delegate Plugin. The delegate can burn the Asset at any point in time.
+titwe: Buwn Dewegate
+metaTitwe: Buwn Dewegate | Cowe
+descwiption: Weawn about de Cowe Asset Buwn Dewegate Pwugin~ De dewegate can buwn de Asset at any point in time.
 ---
 
-The Transfer Plugin is a `Owner Managed` plugin that allows the authority of the program to burn the Asset at any given moment.
+De Twansfew Pwugin is a `Owner Managed` pwugin dat awwows de audowity of de pwogwam to buwn de Asset at any given moment.
 
-The Burn Plugin will work in areas such as:
+De Buwn Pwugin wiww wowk in aweas such as:
 
-- Gaming scenario where the users NFT get burned based on an event that occurs.
+- Gaming scenyawio whewe de usews NFT get buwnyed based on an event dat occuws.
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ❌  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ❌  |
 
-## Arguments
+## Awguments
 
-The Burn Plugin doesn't contain any arguments to pass in.
+De Buwn Pwugin doesn't contain any awguments to pass in.
 
-## Adding the Burn Plugin to an Asset
+## Adding de Buwn Pwugin to an Asset
 
-{% dialect-switcher title="Adding a Burn Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Buwn Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -38,9 +38,9 @@ await addPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```ts
 use mpl_core::{
@@ -83,5 +83,5 @@ pub async fn add_burn_delegate_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
