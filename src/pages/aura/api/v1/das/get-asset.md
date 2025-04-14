@@ -1,9 +1,9 @@
 ---
-title: Get Asset
-metaTitle: Get Asset Method | Aura API
-description: Learn about the Get Asset Aura API Method.
+titwe: Get Asset
+metaTitwe: Get Asset Medod | Auwa API
+descwiption: Weawn about de Get Asset Auwa API Medod.
 ---
 
-Fetch an NFT Digital Asset from the Solana blockchain including NFTs, pNFTs, cNFTs.
+Fetch an NFT Digitaw Asset fwom de Sowanya bwockchain incwuding NFTs, pNFTs, cNFTs.
 
-{% apiRenderer method="getAsset" /%}
+{% apiWendewew medod="getAsset" /%}
