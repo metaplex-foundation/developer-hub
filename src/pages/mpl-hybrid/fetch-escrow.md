@@ -1,12 +1,12 @@
 ---
-title: Fetching an MPL 404 Hybrid Escrow
-metaTitle: Fetching an MPL 404 Hybrid Escrow | MPL-Hybrid
-description: Learn to fetch an MPL 404 Hybrid Escrow configuration.
+titwe: Fetching an MPW 404 Hybwid Escwow
+metaTitwe: Fetching an MPW 404 Hybwid Escwow | MPW-Hybwid
+descwiption: Weawn to fetch an MPW 404 Hybwid Escwow configuwation.
 ---
 
-## Fetching Escrow Configuration
+## Fetching Escwow Configuwation
 
-To fetch an Escrow configuration account you can use the `fetchEscrowV1` function.
+To fetch an Escwow configuwation account you can use de `fetchEscrowV1` function.
 
 ```ts
 const escrowAddress = publicKey('11111111111111111111111111111111')
@@ -14,9 +14,9 @@ const escrowAddress = publicKey('11111111111111111111111111111111')
 const escrow = await fetchEscrowV1(umi, escrowAddress)
 ```
 
-## Returned Data Format
+## Wetuwnyed Data Fowmat
 
-The following object is an example of the returned data from `fetchEscrowV1`.
+De fowwowing object is an exampwe of de wetuwnyed data fwom `fetchEscrowV1`.
 
 ```ts
 {
