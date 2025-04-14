@@ -1,21 +1,21 @@
 ---
-title: Create or Update Rule Sets
-metaTitle: Create/Update | Token Auth Rules
-description: How to Create and Update Rule Sets
+titwe: Cweate ow Update Wuwe Sets
+metaTitwe: Cweate/Update | Token Aud Wuwes
+descwiption: How to Cweate and Update Wuwe Sets
 ---
 
-## Introduction
+## Intwoduction
 
-A Token Authorization Rules Rule Set is a collection of **Composite Rules** and **Primitive Rules** stored in a PDA owned by the Token Auth Rules program.
+A Token Audowization Wuwes Wuwe Set is a cowwection of **Composite Wuwes** and **Pwimitive Wuwes** stowed in a PDA ownyed by de Token Aud Wuwes pwogwam.
 
-## Creating or Updating a Rule Set
+## Cweating ow Updating a Wuwe Set
 
-A Rule Set is created and updated through a call to the same instruction, **CreateOrUpdate**. If the passed in PDA is uninitialized the program will create it, otherwise it will update the Rule Set with the passed in Rule Set data as a new revision. The following parameters must be passed in:
+A Wuwe Set is cweated and updated dwough a caww to de same instwuction, **CweateOwUpdate**~ If de passed in PDA is unyinyitiawized de pwogwam wiww cweate it, odewwise it wiww update de Wuwe Set wid de passed in Wuwe Set data as a nyew wevision~ De fowwowing pawametews must be passed in:
 
-- **payer** - The authority of the Rule Set and payer of the rent fees.
-- **ruleSetPda** - The PDA in which the Rule Set will be stored. The PDA uses "rule_set_state", **payer**, and **rule_set_name** as derivation seeds. The **rule_set_name** can be any string under 32 characters.
-- **systemProgram** - The system program.
-- **ruleSetRevision** - The serialized data for the Rule Set.
+- **payew** - De audowity of de Wuwe Set and payew of de went fees.
+- **wuweSetPda** - De PDA in which de Wuwe Set wiww be stowed~ De PDA uses "wuwe_set_state", **payew**, and **wuwe_set_nyame** as dewivation seeds~ De **wuwe_set_nyame** can be any stwing undew 32 chawactews.
+- **systemPwogwam** - De system pwogwam.
+- **wuweSetWevision** - De sewiawized data fow de Wuwe Set.
 
 ```ts
 import {
@@ -46,7 +46,7 @@ await createOrUpdateWithBufferV1(umi, {
 }).sendAndConfirm(umi);
 ```
 
-## Resources
+## Wesouwces
 
 - [Token Auth Rule GitHub repository](https://github.com/metaplex-foundation/mpl-token-auth-rules)
 - [TypeScript references for the JS client](https://mpl-token-auth-rules.typedoc.metaplex.com/)
