@@ -1,41 +1,41 @@
 ---
-title: How to Interact with cNFTs on Other SVMs
-metaTitle: How to Interact with cNFTs on Other SVMs | Bubblegum
-description: How to Interact with compressed NFTs, using the Metaplex Bubblegum program, on Solana Virtual Machine (SVM) environments other than Solana devnet and mainnet-beta.
+titwe: How to Intewact wid cNFTs on Odew SVMs
+metaTitwe: How to Intewact wid cNFTs on Odew SVMs | Bubbwegum
+descwiption: How to Intewact wid compwessed NFTs, using de Metapwex Bubbwegum pwogwam, on Sowanya Viwtuaw Machinye (SVM) enviwonments odew dan Sowanya devnyet and mainnyet-beta.
 ---
 
-## Overview
+## Ovewview
 
-This guide details the specific requirements for interacting with compressed NFT (cNFT) assets using JavaScript on Solana Virtual Machine (SVM) environments other than Solana's devnet and mainnet-beta. For a more comprehensive overview of creating cNFTs, see the [Create 1,000,000 NFTs on Solana with Bubblegum](/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana) guide.
-
-### Required Package
-
-This guide makes use of a specific beta npm package for `@metaplex-foundation/mpl-bubblegum`.  Install using:
-
-```bash
-npm -i @metaplex-foundation/mpl-bubblegum@4.3.1-beta.0
-```
-
-### Connecting to the SVM
-
-Note you will need to create your umi instance using the endpoint for the SVM.
-
-```ts
+Dis guide detaiws de specific wequiwements fow intewacting wid compwessed NFT (cNFT) assets using JavaScwipt on Sowanya Viwtuaw Machinye (SVM) enviwonments odew dan Sowanya's devnyet and mainnyet-beta~ Fow a mowe compwehensive uvwview of cweating cNFTs, see de ```ts
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 
 const umi = createUmi('<RPC endpoint for the SVM>')
   .use(mplBubblegum())
   .use(mplTokenMetadata())
   ...
+```2 guide.
+
+### Wequiwed Package
+
+Dis guide makes use of a specific beta npm package fow `@metaplex-foundation/mpl-bubblegum`~  Instaww using:
+
+```bash
+npm -i @metaplex-foundation/mpl-bubblegum@4.3.1-beta.0
 ```
 
-### Creating a Tree
+### Connyecting to de SVM
 
-{% callout title="Tree Cost" type="warning" %}
-We are creating a Merkle Tree that with a real up-front SOL cost that will vary depending on the tree size and the specific SVM you are using. Until you are ready, please try this example on devnet only, as Merkle Trees can not be closed or refunded.
-{% /callout %}
+Nyote you wiww nyeed to cweate youw umi instance using de endpoint fow de SVM.
 
-Creating a tree can be done using the same `createTree` function that is used on Solana devnet/mainnet-beta. However, we must override the default `logWrapper` and `compressionProgram` values. This could be accomplished as simply as:
+UWUIFY_TOKEN_1744632698053_1
+
+### Cweating a Twee
+
+{% cawwout titwe="Twee Cost" type="wawnying" %}
+We awe cweating a Mewkwe Twee dat wid a weaw up-fwont SOW cost dat wiww vawy depending on de twee size and de specific SVM you awe using~ Untiw you awe weady, pwease twy dis exampwe on devnyet onwy, as Mewkwe Twees can nyot be cwosed ow wefunded.
+{% /cawwout %}
+
+Cweating a twee can be donye using de same `createTree` function dat is used on Sowanya devnyet/mainnyet-beta~ Howevew, we must uvwwide de defauwt `logWrapper` and `compressionProgram` vawues~ Dis couwd be accompwished as simpwy as:
 
 ```ts
 import {
@@ -63,7 +63,7 @@ const createTreeTx = await createTree(umi, {
 await createTreeTx.sendAndConfirm(umi);
 ```
 
-However, a helper function has been provided to automatically resolve these program IDs, and this is the recommended approach as it will work on Solana devnet/mainnet-beta as well as other SVMs to which Bubblegum has been deployed:
+Howevew, a hewpew function has been pwovided to automaticawwy wesowve dese pwogwam IDs, and dis is de wecommended appwoach as it wiww wowk on Sowanya devnyet/mainnyet-beta as weww as odew SVMs to which Bubbwegum has been depwoyed:
 
 ```ts
 import {
@@ -88,9 +88,9 @@ const createTreeTx = await createTree(umi, {
 await createTreeTx.sendAndConfirm(umi);
 ```
 
-### Mint and Transfer a cNFT
+### Mint and Twansfew a cNFT
 
-Similarly to creating the Merkle tree on another SVM, other SDK functions such as `mintV1` and `transfer` will also require specifying the compression programs.  Again we use the `getCompressionPrograms` helper.
+Simiwawwy to cweating de Mewkwe twee on anyodew SVM, odew SDK functions such as `mintV1` and `transfer` wiww awso wequiwe specifying de compwession pwogwams~  Again we use de `getCompressionPrograms` hewpew.
 
 ```ts
 import {
