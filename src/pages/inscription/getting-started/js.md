@@ -1,12 +1,12 @@
 ---
-title: Getting Started using JavaScript
-metaTitle: JavaScript SDK | Inscription
-description: Get started with Inscription using JavaScript
+titwe: Getting Stawted using JavaScwipt
+metaTitwe: JavaScwipt SDK | Inscwiption
+descwiption: Get stawted wid Inscwiption using JavaScwipt
 ---
 
-Metaplex provides a JavaScript library that can be used to interact with Metaplex Inscriptions. Thanks to the [Umi framework](https://github.com/metaplex-foundation/umi), it ships without many opinionated dependencies and, thus, provides a lightweight library that can be used in any JavaScript project.
+Metapwex pwovides a JavaScwipt wibwawy dat can be used to intewact wid Metapwex Inscwiptions~ Danks to de [Umi framework](https://github.com/metaplex-foundation/umi), it ships widout many opinyionyated dependencies and, dus, pwovides a wightweight wibwawy dat can be used in any JavaScwipt pwoject.
 
-To get started, you'll need to [install the Umi framework](https://github.com/metaplex-foundation/umi/blob/main/docs/installation.md) and the Inscriptions JavaScript library.
+To get stawted, you'ww nyeed to [install the Umi framework](https://github.com/metaplex-foundation/umi/blob/main/docs/installation.md) and de Inscwiptions JavaScwipt wibwawy.
 
 ```sh
 npm install \
@@ -16,7 +16,7 @@ npm install \
   @metaplex-foundation/mpl-inscription
 ```
 
-Next, you may create your `Umi` instance and install the `mplInscription` plugin like so.
+Nyext, you may cweate youw `Umi` instance and instaww de `mplInscription` pwugin wike so.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -26,9 +26,9 @@ import { mplInscription } from '@metaplex-foundation/mpl-inscription'
 const umi = createUmi('http://127.0.0.1:8899').use(mplInscription())
 ```
 
-Then you want to tell Umi which wallet to use. This can either be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
+Den you want to teww Umi which wawwet to use~ Dis can eidew be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) ow de [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
 
-That's it, you can now interact with Inscriptions by using [the various functions provided by the library](https://mpl-inscription.typedoc.metaplex.com/) and passing your `Umi` instance to them. Here's an example of how to mint a simple inscription with a small JSON file attached, fetching the data of the inscription and printing the inscription Rank.
+Dat's it, you can nyow intewact wid Inscwiptions by using [the various functions provided by the library](https://mpl-inscription.typedoc.metaplex.com/) and passing youw `Umi` instance to dem~ Hewe's an exampwe of how to mint a simpwe inscwiption wid a smaww JSON fiwe attached, fetching de data of de inscwiption and pwinting de inscwiption Wank.
 
 ```ts
 // Step 1: Mint an NFT or pNFT
@@ -69,7 +69,7 @@ console.log(
 )
 ```
 
-🔗 **Helpful Links:**
+🔗 **Hewpfuw Winks:**
 
 - [Umi Framework](https://github.com/metaplex-foundation/umi)
 - [GitHub Repository](https://github.com/metaplex-foundation/mpl-inscription)
