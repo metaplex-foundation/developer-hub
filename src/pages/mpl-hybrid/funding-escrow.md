@@ -1,12 +1,12 @@
 ---
-title: Funding the MPL Hybrid 404 Escrow
-metaTitle: Funding the MPL Hybrid 404 Escrow | MPL-Hybrid
-description: Learn to fund the MPL 404 Hybrid Escrow account with SPL Tokens that makes 404 swaps possible.
+titwe: Funding de MPW Hybwid 404 Escwow
+metaTitwe: Funding de MPW Hybwid 404 Escwow | MPW-Hybwid
+descwiption: Weawn to fund de MPW 404 Hybwid Escwow account wid SPW Tokens dat makes 404 swaps possibwe.
 ---
 
-Before making your smart-swap live you will need to fund the escrow. Typically if a project wants to ensure the escrow always stays funded, they start by releasing all of the NFTs or tokens and then placing all of the other assets in the escrow. This ensures that every outstanding asset is "backed" by the counter-asset in the escrow. Because the Escrow is a PDA, loading it via wallets is not widely supported. You can use the below code to transfer assets into your escrow.
+Befowe making youw smawt-swap wive you wiww nyeed to fund de escwow~ Typicawwy if a pwoject wants to ensuwe de escwow awways stays funded, dey stawt by weweasing aww of de NFTs ow tokens and den pwacing aww of de odew assets in de escwow~ Dis ensuwes dat evewy outstanding asset is "backed" by de countew-asset in de escwow~ Because de Escwow is a PDA, woading it via wawwets is nyot widewy suppowted~ You can use de bewow code to twansfew assets into youw escwow.
 
-To fund your escrow with your Token you will need to send that token to the **escrows token account**.
+To fund youw escwow wid youw Token you wiww nyeed to send dat token to de **escwows token account**.
 
 ```ts
 // Address of your escrow configuration.
