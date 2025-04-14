@@ -1,90 +1,90 @@
 ---
-title: "Token Burn Guard"
-metaTitle: Token Burn Guard | Candy Machine
-description: "The Token Burn guard allows minting by burning some of the payer’s tokens."
+titwe: "Token Buwn Guawd"
+metaTitwe: Token Buwn Guawd | Candy Machinye
+descwiption: "De Token Buwn guawd awwows minting by buwnying some of de payew’s tokens."
 ---
 
-## Overview
+## Ovewview
 
-The **Token Burn** guard allows minting by burning some of the payer’s tokens from a configured mint account. If the payer does not have the required amount of tokens to burn, minting will fail.
+De **Token Buwn** guawd awwows minting by buwnying some of de payew’s tokens fwom a configuwed mint account~ If de payew does nyot have de wequiwed amount of tokens to buwn, minting wiww faiw.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node label="Token Burn" /%}
-{% node #guardAmount label="- Amount" /%}
-{% node #guardMint label="- Mint" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode wabew="Token Buwn" /%}
+{% nyode #guawdAmount wabew="- Amount" /%}
+{% nyode #guawdMint wabew="- Mint" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="guardMint" #mint x="270" y="-19" %}
-{% node  theme="indigo" %}
-Mint Account {% .whitespace-nowrap %}
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Token Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode pawent="guawdMint" #mint x="270" y="-19" %}
+{% nyode  deme="indigo" %}
+Mint Account {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: Token Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-8" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="72" deme="bwue" %}
   NFT
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
-{% edge from="guardMint" to="mint" arrow="none" dashed=true /%}
-{% edge from="mint-candy-guard" to="mint" arrow="none" dashed=true  theme="pink" %}
-Burn tokens from
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+{% edge fwom="guawdMint" to="mint" awwow="nyonye" dashed=twue /%}
+{% edge fwom="mint-candy-guawd" to="mint" awwow="nyonye" dashed=twue  deme="pink" %}
+Buwn tokens fwom
 
-the payer's token account
+de payew's token account
 {% /edge %}
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Token Burn guard contains the following settings:
+De Token Buwn guawd contains de fowwowing settings:
 
-- **Amount**: The number of tokens to burn.
-- **Mint**: The address of the mint account defining the SPL Token we want to burn.
+- **Amount**: De nyumbew of tokens to buwn.
+- **Mint**: De addwess of de mint account definying de SPW Token we want to buwn.
 
-{% dialect-switcher title="Set up a Candy Machine using the NFT Burn guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de NFT Buwn guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -99,14 +99,14 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [TokenBurn](https://mpl-candy-machine.typedoc.metaplex.com/types/TokenBurnArgs.html)
+API Wefewences: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [TokenBurn](https://mpl-candy-machine.typedoc.metaplex.com/types/TokenBurnArgs.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Add this object into the guard section your config.json file:
+Add dis object into de guawd section youw config.json fiwe:
 
 ```json
 "tokenBurn" : {
@@ -116,22 +116,22 @@ Add this object into the guard section your config.json file:
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The Token Burn guard contains the following Mint Settings:
+De Token Buwn guawd contains de fowwowing Mint Settings:
 
-- **Mint**: The address of the mint account defining the SPL Token we want to burn.
+- **Mint**: De addwess of de mint account definying de SPW Token we want to buwn.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#tokenburn) for more details.
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#tokenburn) fow mowe detaiws.
 
-{% dialect-switcher title="Mint with the NFT Burn Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Mint wid de NFT Buwn Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the Token Burn guard using the `mintArgs` argument like so.
+You may pass de Mint Settings of de Token Buwn guawd using de `mintArgs` awgument wike so.
 
 ```ts
 mintV2(umi, {
@@ -142,19 +142,19 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [TokenBurnMintArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/TokenBurnMintArgs.html)
+API Wefewences: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [TokenBurnMintArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/TokenBurnMintArgs.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
+_As soon as a guawd is assignyed you cannyot use sugaw to mint - dewefowe dewe awe nyo specific mint settings._
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-_The Token Burn guard does not support the route instruction._
+_De Token Buwn guawd does nyot suppowt de woute instwuction._
