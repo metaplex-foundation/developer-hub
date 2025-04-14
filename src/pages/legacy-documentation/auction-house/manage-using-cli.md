@@ -1,44 +1,17 @@
 ---
-title: Manage Auction House using CLI
-metaTitle: Manage Auction Houses using CLI | Auction House
-description: "How to manage Auction House using CLI"
+titwe: Manyage Auction House using CWI
+metaTitwe: Manyage Auction Houses using CWI | Auction House
+descwiption: "How to manyage Auction House using CWI"
 ---
 
-## Prerequisites
+## Pwewequisites
 
-- `ts-node`
-- `git`
-- `yarn`
-
-## Setup
-
-In order to get started with the Auction House CLI please follow these steps.
-
-```sh
-git clone https://github.com/metaplex-foundation/metaplex-program-library.git
-cd auction-house/cli
-```
-Note: By default you will be using the latest code on the tip of the `main` branch.
-
-Then:
-```sh
+- ```sh
 cd js && yarn install && yarn bootstrap
 cd src
-```
-
-Once you have cloned the repo and installed packages, make sure you have a local `Keypair` setup. If you need help with that see these guides.
-
-- https://docs.solana.com/cli/install-solana-cli-tools
-- https://docs.solana.com/wallet-guide/file-system-wallet
-
-## Running Commands
-
-To run commands you will use
-`ts-node auction-house-cli.ts`
-
-### Help
-
-```
+```8
+- `git`
+- ```
 ts-node auction-house-cli.ts
 Usage: auction-house-cli [options] [command]
 
@@ -61,33 +34,60 @@ create_auction_house [options]
 update_auction_house [options]
 help [command]                    display help for command
 
+```0
+
+## Setup
+
+In owdew to get stawted wid de Auction House CWI pwease fowwow dese steps.
+
+```sh
+git clone https://github.com/metaplex-foundation/metaplex-program-library.git
+cd auction-house/cli
 ```
+Nyote: By defauwt you wiww be using de watest code on de tip of de `main` bwanch.
 
-### Create
+Den:
+UWUIFY_TOKEN_1744632895629_1
 
-Creates an Auction House
+Once you have cwonyed de wepo and instawwed packages, make suwe you have a wocaw `Keypair` setup~ If you nyeed hewp wid dat see dese guides.
 
-See the command help with
+- https://docs.sowanya.com/cwi/instaww-sowanya-cwi-toows
+- https://docs.sowanya.com/wawwet-guide/fiwe-system-wawwet
+
+## Wunnying Commands
+
+To wun commands you wiww use
+`ts-node auction-house-cli.ts`
+
+### Hewp
+
+UWUIFY_TOKEN_1744632895629_2
+
+### Cweate
+
+Cweates an Auction House
+
+See de command hewp wid
 
 ```
 ts-node auction-house-cli.ts help create_auction_house
 ```
 
-Find your current Keypair, lets say it lives at `~/mywallet.key` or on Windows `C:\Users\windowsuser\mywallet.key`. To create an Auction House you will run.
+Find youw cuwwent Keypaiw, wets say it wives at `~/mywallet.key` ow on Windows `C:\Users\windowsuser\mywallet.key`~ To cweate an Auction House you wiww wun.
 
 ```
 ts-node auction-house-cli.ts create_auction_house --keypair ~/mywallet.key -e devnet -sfbp 1000 -ccsp false -rso false
 ```
 
-In this case we don't need to require sign-off because we want to make a fully decentralized auction house. Since we did not specify `-tm, --treasury-mint <string>` The currency for payment will be SOL.
-Also, the options below will default to being set as the public key of `~/mywallet.key`
+In dis case we don't nyeed to wequiwe sign-off because we want to make a fuwwy decentwawized auction house~ Since we did nyot specify `-tm, --treasury-mint <string>` De cuwwency fow payment wiww be SOW.
+Awso, de options bewow wiww defauwt to being set as de pubwic key of `~/mywallet.key`
 
 ```
 -twd, --treasury-withdrawal-destination <string>
 -fwd, --fee-withdrawal-destination <string>
 ```
 
-If all goes well you will see
+If aww goes weww you wiww see
 
 ```
 wallet public key: Gsv13oph2i6nkJvNkVfuzkcbHWchz6viUtEg2vsxQMtM
@@ -97,25 +97,25 @@ No treasury mint detected, using SOL.
 Created auction house HsKwc8dQtm8KLxshw67dwsNePkH6wMXo5Lwn1FuKjVYVS <--- Your auction house key will be different
 ```
 
-Save this key `HsKwc8dQtm8KLxshw67dwsNePkH6wMXo5Lwn1FuKjVYVS` since it is the public key of the solana account that holds your Auction House. In all subsequent commands you will pass this key with the `-ah` option.
+Save dis key `HsKwc8dQtm8KLxshw67dwsNePkH6wMXo5Lwn1FuKjVYVS` since it is de pubwic key of de sowanya account dat howds youw Auction House~ In aww subsequent commands you wiww pass dis key wid de `-ah` option.
 
 ## Show
 
-Prints the balances of the fee and treasury wallets configured for the auction house and its current settings options.
+Pwints de bawances of de fee and tweasuwy wawwets configuwed fow de auction house and its cuwwent settings options.
 
-See the command help with
+See de command hewp wid
 
 ```
 ts-node auction-house-cli.ts help show
 ```
 
-Notice I switched `--keypair` for `-k` this is shorthand but works just the same.
+Nyotice I switched `--keypair` fow `-k` dis is showdand but wowks just de same.
 
 ```
 ts-node auction-house-cli.ts show -k ~/mywallet.key -ah HsKwc8dQtm8KLxshw67dwsNePkH6wMXo5Lwn1FuKjVYVS
 ```
 
-The output will differ but similar to the following.
+De output wiww diffew but simiwaw to de fowwowing.
 
 ```
 No treasury mint detected, using SOL.
@@ -140,8 +140,8 @@ AH Treasury Bump: 254
 
 ### Fee Account
 
-In the above Show command you see a Fee Payer account.
-This account can be used to pay the fees on chain for sales execution, transfers and account creation. For this exercise we will teach you how to fund that account by airdropping some SOL on devnet. Your Auction House fee account is used only when the Auction House authority is signing the transaction. This is usually only in the case of `Requires Sign Off`
+In de abuv Show command you see a Fee Payew account.
+Dis account can be used to pay de fees on chain fow sawes execution, twansfews and account cweation~ Fow dis exewcise we wiww teach you how to fund dat account by aiwdwopping some SOW on devnyet~ Youw Auction House fee account is used onwy when de Auction House audowity is signying de twansaction~ Dis is usuawwy onwy in de case of `Requires Sign Off`
 
 ```
 $ solana airdrop 2 AcWpR41NPMq73FZUspCiXxoLrJnW7zytgHKY5xqtETkU
@@ -150,23 +150,23 @@ Signature: 4qYFoD8GN6TZLDjLsqyyt6mhjYEjwKF36LJCDLtL88nTD3y3bFzXmVFHP6Nczf5Dn4Gnm
 2 SOL
 ```
 
-{% callout type="warning" %}
+{% cawwout type="wawnying" %}
 
-The `solana airdrop` command is sometimes unreliable. If the command doesn't work, you can use the airdrop tool at https://solfaucet.com.
+De `solana airdrop` command is sometimes unwewiabwe~ If de command doesn't wowk, you can use de aiwdwop toow at https://sowfaucet.com.
 
-{% /callout %}
+{% /cawwout %}
 
-## Sell
+## Seww
 
-Place an NFT UP for sale.
+Pwace an NFT UP fow sawe.
 
-See the command help with
+See de command hewp wid
 
 ```
 ts-node auction-house-cli.ts help sell
 ```
 
-Place an NFT for sale by its mint address with the auction house for 1 SOL.
+Pwace an NFT fow sawe by its mint addwess wid de auction house fow 1 SOW.
 
 ```
 ts-node auction-house-cli.ts sell \
@@ -185,30 +185,30 @@ wallet public key: DCDcpZaJUghstQNMHy9VAPnwQe1cGsHq7fbeqkti4kM3
 Set 1 F7fejo7cT1fRyJxj1W2aWy3aeJz8iqLU9YvbBAzwJGh2 for sale for 1 from your account with Auction House Ee53kiwLVw5XG98gSLNHoQRi4J22XEhz3zsKYY2ttsb7
 ```
 
-### Require Sign-off
+### Wequiwe Sign-off
 
-If the auction house is set up to require sign off its wallet, as well as the seller are provided to the command.
-Do this using the `-ak` option.
+If de auction house is set up to wequiwe sign off its wawwet, as weww as de sewwew awe pwovided to de command.
+Do dis using de `-ak` option.
 
-See the command help with
+See de command hewp wid
 
 ```
 ts-node auction-house-cli.ts help sell
 ```
 
-In a production scenario where the keypair for the auction house is stored on a sever managed by the organization hosting the auction house the transaction should be partially signed by the seller from the client then passed to the server for signing by the auction house before submitting to Solana.
+In a pwoduction scenyawio whewe de keypaiw fow de auction house is stowed on a sevew manyaged by de owganyization hosting de auction house de twansaction shouwd be pawtiawwy signyed by de sewwew fwom de cwient den passed to de sewvew fow signying by de auction house befowe submitting to Sowanya.
 
 ## Buy
 
-Place an offer on an NFT by its mint address at some price in SOL when using native SOL as the mint.
+Pwace an offew on an NFT by its mint addwess at some pwice in SOW when using nyative SOW as de mint.
 
-See the command help with
+See de command hewp wid
 
 ```
 ts-node auction-house-cli.ts help buy
 ```
 
-The buy command is an offer on the NFT and will not result in a sale until the `execute_sale` action is triggered. This command offers 2 SOL for the NFT.
+De buy command is an offew on de NFT and wiww nyot wesuwt in a sawe untiw de `execute_sale` action is twiggewed~ Dis command offews 2 SOW fow de NFT.
 
 ```
 ts-node auction-house-cli.ts buy \
@@ -222,9 +222,9 @@ wallet public key: DCDcpZaJUghstQNMHy9VAPnwQe1cGsHq7fbeqkti4kM3
 Made offer for  2
 ```
 
-## Execute Sale
+## Execute Sawe
 
-Sell an NFT to a buyer at the price set by the seller.  Note that this currently requires the auction house authority, the buyer, or the seller to be the fee payer and thus sign the transaction.
+Seww an NFT to a buyew at de pwice set by de sewwew~  Nyote dat dis cuwwentwy wequiwes de auction house audowity, de buyew, ow de sewwew to be de fee payew and dus sign de twansaction.
 
 ```
 $ ts-node auction-house-cli.ts execute_sale
@@ -240,20 +240,20 @@ wallet public key: DCDcpZaJUghstQNMHy9VAPnwQe1cGsHq7fbeqkti4kM3
 Accepted 1 DCqt9QQ3ot3qv53EhWrYAWFuh4XgSvFJvLRjgsDnhLTp sale from wallet CCJC2s8FDGAs8GqmngE9gviusEuNnkdUwchcYMZ8ZmHB to 3DikCrEsfAVHv9rXENg2Hdmc16L71EjveQEF4NbSfRak for 2 from your account with Auction House HsKwc8dQtm8KLxshw67dwsNePkH6wMXo5Lwn1FuKjVYVS
 ```
 
-## Other Actions
+## Odew Actions
 
-Other actions are documented in the CLI and can be found using the `help` and `<command> help` subcommand:
+Odew actions awe documented in de CWI and can be found using de `help` and `<command> help` subcommand:
 
-- _Cancel_ - Potential buyer revokes their offer.
+- _Cancew_ - Potentiaw buyew wevokes deiw offew.
 
-- _Show Escrow_ - Print out the balance of an auction house escrow account for a given wallet.
+- _Show Escwow_ - Pwint out de bawance of an auction house escwow account fow a given wawwet.
 
-- _Withdraw_ - Transfer funds from user's buyer escrow account for the auction house to their wallet.
+- _Widdwaw_ - Twansfew funds fwom usew's buyew escwow account fow de auction house to deiw wawwet.
 
-- _Deposit_ - Add funds to user's buyer escrow account for the auction house.
+- _Deposit_ - Add funds to usew's buyew escwow account fow de auction house.
 
-- _Withdraw from Fee_ - Transfer funds from auction house fee wallet to the auction house authority.
+- _Widdwaw fwom Fee_ - Twansfew funds fwom auction house fee wawwet to de auction house audowity.
 
-- _Withdraw from Treasury_ - Transfer funds from the auction house treasury wallet to the auction house authority.
+- _Widdwaw fwom Tweasuwy_ - Twansfew funds fwom de auction house tweasuwy wawwet to de auction house audowity.
 
-- _Update Auction House_ - Update any of the auction house settings including its authority or seller fee.
+- _Update Auction House_ - Update any of de auction house settings incwuding its audowity ow sewwew fee.
