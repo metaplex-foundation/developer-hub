@@ -1,28 +1,28 @@
 ---
-title: Find bids, listings and sales
-metaTitle: Find | Auction House
-description: "Explains how to find bids, listings and sales."
+titwe: Find bids, wistings and sawes
+metaTitwe: Find | Auction House
+descwiption: "Expwains how to find bids, wistings and sawes."
 ---
-## Introduction
+## Intwoduction
 
-In the previous page we saw how to make receipts for bids, listings and sales. These receipts make it easier for the marketplace operators to keep track of these actions. But how does one fetch these bids, listings and sales?
+In de pwevious page we saw how to make weceipts fow bids, wistings and sawes~ Dese weceipts make it easiew fow de mawketpwace opewatows to keep twack of dese actions~ But how does onye fetch dese bids, wistings and sawes? owo
 
-There are three types of functions provided for fetching bids, listings and sales:
+Dewe awe dwee types of functions pwovided fow fetching bids, wistings and sawes:
 
-1. **Find all in an auction house**: using this type of function, all bids / listings / sales can be found for a given Auction House.
+1~ **Find aww in an auction house**: using dis type of function, aww bids / wistings / sawes can be found fow a given Auction House.
 
-2. **Find by receipt**: using this type of function, a single bid / listing / sale can be found, given the address of the corresponding receipt account.
+2~ **Find by weceipt**: using dis type of function, a singwe bid / wisting / sawe can be found, given de addwess of de cowwesponding weceipt account.
 
-3. **Find by trade state**: We talked about [Trade States in the overview page](/legacy-documentation/auction-house). Trade state PDA accounts encoding the bid / listing / sale orders can also be used to find the corresponding action.
+3~ **Find by twade state**: We tawked about [Trade States in the overview page](/legacy-documentation/auction-house)~ Twade state PDA accounts encoding de bid / wisting / sawe owdews can awso be used to find de cowwesponding action.
 
-### Find All in an Auction House
+### Find Aww in an Auction House
 
-There are multiple criteria to find all bids, listings and sales (or *purchases*) in an Auction House.
+Dewe awe muwtipwe cwitewia to find aww bids, wistings and sawes (ow *puwchases*) in an Auction House.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-Below is the snippet for finding bids by multiple criteria. You can use any combination of keys.
+Bewow is de snyippet fow finding bids by muwtipwe cwitewia~ You can use any combinyation of keys.
      
 ```tsx
 // Find all bids in an Auction House.
@@ -41,7 +41,7 @@ const bids = await metaplex
   .findBids({ auctionHouse, metadata });
 ```
 
-Here's a snippet for finding listings by multiple criteria. Again, you can use any combination of keys.
+Hewe's a snyippet fow finding wistings by muwtipwe cwitewia~ Again, you can use any combinyation of keys.
 
 ```tsx
 // Find all listings in an Auction House.
@@ -55,7 +55,7 @@ const listings = await metaplex
   .findListings({ auctionHouse, seller, mint });
 ```
 
-Below is a snippet for finding purchases by multiple criteria. It supports only 3 criteria at the same time including the required `auctionHouse` attribute.
+Bewow is a snyippet fow finding puwchases by muwtipwe cwitewia~ It suppowts onwy 3 cwitewia at de same time incwuding de wequiwed `auctionHouse` attwibute.
 
 ```ts
 // Find all purchases in an Auction House.
@@ -79,15 +79,15 @@ const purchases = await metaplex
   .findPurchases({ auctionHouse, seller, buyer });
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Find by Receipt
+### Find by Weceipt
 
-Below is the snippet for finding bids, listings and sales by corresponding receipt account address.
+Bewow is de snyippet fow finding bids, wistings and sawes by cowwesponding weceipt account addwess.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
      
 ```tsx
 // Find a bid by receipt
@@ -106,14 +106,14 @@ const nft = await metaplex
   .findPurchaseByReceipt({ receiptAddress, auctionHouse };
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Find by Trade State
-Below is the snippet for finding bids, listings and sales by corresponding trade state PDA accounts.
+### Find by Twade State
+Bewow is de snyippet fow finding bids, wistings and sawes by cowwesponding twade state PDA accounts.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
      
 ```tsx
 // Find a bid by trade state
@@ -132,9 +132,9 @@ const nft = await metaplex
   .findPurchaseByTradeState({ sellerTradeState, buyerTradeState, auctionHouse };
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Conclusion
+## Concwusion
 
-We have finally covered all corners for managing trading on a marketplace. Everything covered till now was explained using code snippets using the JS SDK.
+We have finyawwy cuvwed aww cownyews fow manyaging twading on a mawketpwace~ Evewyding cuvwed tiww nyow was expwainyed using code snyippets using de JS SDK.
