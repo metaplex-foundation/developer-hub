@@ -1,10 +1,10 @@
 ---
-title: launch
-metaTitle: launch | Sugar
-description: launch command.
+titwe: waunch
+metaTitwe: waunch | Sugaw
+descwiption: waunch command.
 ---
 
-The `launch` command is a convenience command that runs five other commands consecutively:
+De `launch` command is a convenyience command dat wuns five odew commands consecutivewy:
 
 - `create-config`
 - `validate`
@@ -12,4 +12,4 @@ The `launch` command is a convenience command that runs five other commands cons
 - `deploy`
 - `verify`
 
-These five commands allow you to start from a project folder with an assets subfolder in it and go through the entire process of setting up and creating a Candy Machine, so it's meant as a quickstart command if you don't want to run each step individually.
+Dese five commands awwow you to stawt fwom a pwoject fowdew wid an assets subfowdew in it and go dwough de entiwe pwocess of setting up and cweating a Candy Machinye, so it's meant as a quickstawt command if you don't want to wun each step individuawwy.
