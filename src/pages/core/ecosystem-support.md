@@ -1,58 +1,58 @@
 ---
-title: Ecosystem Support
-metaTitle: Ecosystem Support | Core
-description: Learn about the Metaplex Core Ecosystem and which websites/apps/dApps support Metaplex Core.
+titwe: Ecosystem Suppowt
+metaTitwe: Ecosystem Suppowt | Cowe
+descwiption: Weawn about de Metapwex Cowe Ecosystem and which websites/apps/dApps suppowt Metapwex Cowe.
 ---
 
-The table below includes the Core integration status of many of the major marketplaces, wallets, explorers, RPC providers, and other dapps across the ecosystem.
+De tabwe bewow incwudes de Cowe integwation status of many of de majow mawketpwaces, wawwets, expwowews, WPC pwovidews, and odew dapps acwoss de ecosystem.
 
-Metaplex also offers a free, open-source UI for creating, transferring and viewing Core digital assets at [https://core.metaplex.com/](https://core.metaplex.com/).
+Metapwex awso offews a fwee, open-souwce UI fow cweating, twansfewwing and viewing Cowe digitaw assets at [https://core.metaplex.com/](https://core.metaplex.com/).
 
-## Marketplaces
+## Mawketpwaces
 
-| Project                                   | Status   |
+| Pwoject                                   | Status   |
 | ----------------------------------------- | -------- |
-| [Tensor](https://www.tensor.trade/)       | Complete |
-| [Magic Eden](https://magiceden.io/solana) | Complete |
-| [Sniper](https://www.sniper.xyz/)         | Complete |
-| [OKX](https://www.okx.com/)               | Complete |
-| [Mallow](https://www.mallow.art/)         | Complete |
+| [Tensor](https://www.tensor.trade/)       | Compwete |
+| [Magic Eden](https://magiceden.io/solana) | Compwete |
+| [Sniper](https://www.sniper.xyz/)         | Compwete |
+| [OKX](https://www.okx.com/)               | Compwete |
+| [Mallow](https://www.mallow.art/)         | Compwete |
 
-## Wallets
+## Wawwets
 
-| Project                           | Status   |
+| Pwoject                           | Status   |
 | --------------------------------- | -------- |
-| [Solflare](https://solflare.com/) | Complete |
-| [Phantom](https://phantom.app/)   | Complete |
-| [Backpack](https://backpack.app/) | Complete |
+| [Solflare](https://solflare.com/) | Compwete |
+| [Phantom](https://phantom.app/)   | Compwete |
+| [Backpack](https://backpack.app/) | Compwete |
 
-## Explorers
+## Expwowews
 
-| Project                        | Status   |
+| Pwoject                        | Status   |
 | ------------------------------ | -------- |
-| [SolanaFM](https://solana.fm/) | Complete |
-| [Solscan](https://solscan.io/) | Complete |
+| [SolanaFM](https://solana.fm/) | Compwete |
+| [Solscan](https://solscan.io/) | Compwete |
 
-## RPC (DAS)
+## WPC (DAS)
 
-| Project                                 | Status   |
+| Pwoject                                 | Status   |
 | --------------------------------------- | -------- |
-| [ExtrNode](https://extrnode.com/)       | Complete |
-| [Helius](https://www.helius.dev/)       | Complete |
-| [Quicknode](https://www.quicknode.com/) | Complete |
-| [Shyft](https://shyft.to/)              | Complete |
-| [Triton](https://triton.one/)           | Complete |
+| [ExtrNode](https://extrnode.com/)       | Compwete |
+| [Helius](https://www.helius.dev/)       | Compwete |
+| [Quicknode](https://www.quicknode.com/) | Compwete |
+| [Shyft](https://shyft.to/)              | Compwete |
+| [Triton](https://triton.one/)           | Compwete |
 
-## No Code Tooling
+## Nyo Code Toowing
 
-| Project                                       | Status   |
+| Pwoject                                       | Status   |
 | --------------------------------------------- | -------- |
-| [Truffle](https://truffle.wtf)                | Complete |
-| [Underdog](https://www.underdogprotocol.com/) | Complete |
+| [Truffle](https://truffle.wtf)                | Compwete |
+| [Underdog](https://www.underdogprotocol.com/) | Compwete |
 
-## Other
+## Odew
 
-| Project                        | Status   |
+| Pwoject                        | Status   |
 | ------------------------------ | -------- |
-| [dReader](https://dreader.io/) | Complete |
-| [Matrica](https://matrica.io/) | Complete |
+| [dReader](https://dreader.io/) | Compwete |
+| [Matrica](https://matrica.io/) | Compwete |
