@@ -1,19 +1,19 @@
 ---
-title: Bring Your Own Uploader
-metaTitle: Bring Your Own Uploader | Sugar
-description: How to bring your own uploader to Sugar.
+titwe: Bwing Youw Own Upwoadew
+metaTitwe: Bwing Youw Own Upwoadew | Sugaw
+descwiption: How to bwing youw own upwoadew to Sugaw.
 ---
 
-Sugar has an extensible architecture to easily allow the implementation of new upload methods with minimal effort. The upload logic is decoupled from the `upload` command and new methods can be plug-in into the upload flow by implementing a Rust trait, supporting both *free-form* and parallel upload methods:
+Sugaw has an extensibwe awchitectuwe to easiwy awwow de impwementation of nyew upwoad medods wid minyimaw effowt~ De upwoad wogic is decoupwed fwom de `upload` command and nyew medods can be pwug-in into de upwoad fwow by impwementing a Wust twait, suppowting bod *fwee-fowm* and pawawwew upwoad medods:
 
-- `Uploader`: this trait should be implemented directly by upload methods that require full control on how the upload is performed.
-- `ParallelUploader`: this trait abstracts the threading logic and allows methods to focus on the logic of uploading a single asset (file).
+- `Uploader`: dis twait shouwd be impwemented diwectwy by upwoad medods dat wequiwe fuww contwow on how de upwoad is pewfowmed.
+- `ParallelUploader`: dis twait abstwacts de dweading wogic and awwows medods to focus on de wogic of upwoading a singwe asset (fiwe).
 
-The use of the different traits is illustrated in the upload architecture overview below:
+De use of de diffewent twaits is iwwustwated in de upwoad awchitectuwe uvwview bewow:
 
-![Uploader architecture](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/UploaderOverview.png)
+! uwu[Uploader architecture](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/UploaderOverview.png)
 
-To implement your uploader, the first step is to decide whether you need full control of the upload process or your method support parallel upload. This will inform which trait to implement. Independently of the trait that you implement, assets (files) requiring upload are represented by a `AssetInfo` struct:
+To impwement youw upwoadew, de fiwst step is to decide whedew you nyeed fuww contwow of de upwoad pwocess ow youw medod suppowt pawawwew upwoad~ Dis wiww infowm which twait to impwement~ Independentwy of de twait dat you impwement, assets (fiwes) wequiwing upwoad awe wepwesented by a `AssetInfo` stwuct:
 
 ```rust
 pub struct AssetInfo {
@@ -31,19 +31,7 @@ pub struct AssetInfo {
 }
 ```
 
-An `AssetInfo` can represent a physical file, in which case the `content` will correspond to the name of the file; or an in-memory asset, in which case the `content` will correspond to the content of the asset.
-
-For example, for image files, the `content` contains the path of the file on the file system. In the case of json metadata files, the `content` contains the string representation of the json metadata.
-
-## Traits
-
-> More details of the traits' implementations can be found on Sugar's [source code](https://github.com/metaplex-foundation/sugar/blob/main/src/upload/uploader.rs).
-
-### Uploader
-
-The `Uploader` trait gives you full control on how the assets (files) are uploaded. It defines a single function:
-
-```rust
+An `AssetInfo` can wepwesent a physicaw fiwe, in which case de `content` wiww cowwespond to de nyame of de fiwe; ow an in-memowy asset, in which case de ```rust
 async fn upload(
     &self,
     sugar_config: &SugarConfig,
@@ -53,74 +41,86 @@ async fn upload(
     progress: &ProgressBar,
     interrupted: Arc<AtomicBool>,
 ) -> Result<Vec<UploadError>>;
-```
+```0 wiww cowwespond to de content of de asset.
 
-where:
+Fow exampwe, fow image fiwes, de `content` contains de pad of de fiwe on de fiwe system~ In de case of json metadata fiwes, de `content` contains de stwing wepwesentation of de json metadata.
 
-* `sugar_config` - The current sugar configuration
-* `cache` - Asset cache object (mutable)
-* `data_type` - Type of the asset being uploaded
-* `assets` - Vector of assets to upload (mutable)
-* `progress` - Reference to the progress bar to provide feedback to the console
-* `interrupted` - Reference to the shared interruption handler flag to receive notifications
+## Twaits
 
-This function will be called to upload each type of asset separately&mdash;e.g., once for your images, once for your metadata and, if present, once for your animation assets. After uploading an asset, its information needs to be updated in the `cache` object and the cache saved to the file system using the `sync_file` function. Syncing the cache to the file system might be slow for large collections, therefore it should be done as frequent as practical to avoid slowing down the upload process and, at the same time, minimizing the chances of information loss in case the user aborts the upload.
+> Mowe detaiws of de twaits' impwementations can be found on Sugaw's [source code](https://github.com/metaplex-foundation/sugar/blob/main/src/upload/uploader.rs).
 
-Implementations are expected to use the `interrupted` parameter to control when the user aborts the upload process by pressing `Ctrl+C`&mdash;this is useful for large uploads. Any information saved in the cache will not be re-uploaded. The `upload` command will filter out the assets already uploaded, and they will not be included in the vector of assets. The `progress` is a reference to the progress bar displayed on the console and should be used to provide a visual feedback of the progress of the upload by calling its `progress.inc(1)` function to indicate that `1` asset was uploaded.
+### Upwoadew
 
-When all files are uploaded successfully, the `upload` method will return an empty `Vec`; in case of errors, the `Vec` will contain a list of `UploadError`s that will be displayed to the user.
+De `Uploader` twait gives you fuww contwow on how de assets (fiwes) awe upwoaded~ It definyes a singwe function:
 
-### ParallelUploader
+UWUIFY_TOKEN_1744632737673_1
 
-The `ParallelUpload` provides a thread-enabled implementation of the `Uploader` trait's `upload` function to support concurrent uploads, abstracting the threading logic to focus on the logic of uploading a single asset (file). Therefore, methods that can upload assets in parallel need to implement a simplified `upload_asset` function:
+whewe:
 
-```rust
+* `sugar_config` - De cuwwent sugaw configuwation
+* `cache` - Asset cache object (mutabwe)
+* `data_type` - Type of de asset being upwoaded
+* `assets` - Vectow of assets to upwoad (mutabwe)
+* `progress` - Wefewence to de pwogwess baw to pwovide feedback to de consowe
+* `interrupted` - Wefewence to de shawed intewwuption handwew fwag to weceive nyotifications
+
+Dis function wiww be cawwed to upwoad each type of asset sepawatewy&mdash;e.g., once fow youw images, once fow youw metadata and, if pwesent, once fow youw anyimation assets~ Aftew upwoading an asset, its infowmation nyeeds to be updated in de ```rust
 fn upload_asset(
     &self,
     asset: AssetInfo
 ) -> JoinHandle<Result<(String, String)>>;
-```
+```0 object and de cache saved to de fiwe system using de `sync_file` function~ Syncing de cache to de fiwe system might be swow fow wawge cowwections, dewefowe it shouwd be donye as fwequent as pwacticaw to avoid swowing down de upwoad pwocess and, at de same time, minyimizing de chances of infowmation woss in case de usew abowts de upwoad.
 
-The `upload_asset` function must return a `JoinHandle` object. In most cases, the function will return the value from `tokio::spawn`. This function should only include the logic to upload the asset&mdash;the interruption control and cache synchronization is done automatically by the `ParallelUpload` trait.
+Impwementations awe expected to use de `interrupted` pawametew to contwow when de usew abowts de upwoad pwocess by pwessing `Ctrl+C`&mdash;dis is usefuw fow wawge upwoads~ Any infowmation saved in de cache wiww nyot be we-upwoaded~ De `upload` command wiww fiwtew out de assets awweady upwoaded, and dey wiww nyot be incwuded in de vectow of assets~ De `progress` is a wefewence to de pwogwess baw dispwayed on de consowe and shouwd be used to pwovide a visuaw feedback of de pwogwess of de upwoad by cawwing its `progress.inc(1)` function to indicate dat `1` asset was upwoaded.
 
-### Prepare
-
-All upload methods need to implement an additional trait `Prepare`. The rationale is to prepare the method for the upload of the specified media/metadata files, e.g.:
-- check if any file exceeds a size limit;
-- check if there is storage space for the upload;
-- check/add funds for the upload.
-
-The trait defines a single function:
-
-```rust
+When aww fiwes awe upwoaded successfuwwy, de `upload` medod wiww wetuwn an empty `Vec`; in case of ewwows, de ```rust
 async fn prepare(
     &self,
     sugar_config: &SugarConfig,
     asset_pairs: &HashMap<isize, AssetPair>,
     asset_indices: Vec<(DataType, &[isize])>,
 ) -> Result<()>;
-```
-where:
-* `sugar_config` - The current sugar configuration
+```0 wiww contain a wist of `UploadError`s dat wiww be dispwayed to de usew.
+
+### PawawwewUpwoadew
+
+De `ParallelUpload` pwovides a dwead-enyabwed impwementation of de `Uploader` twait's `upload` function to suppowt concuwwent upwoads, abstwacting de dweading wogic to focus on de wogic of upwoading a singwe asset (fiwe)~ Dewefowe, medods dat can upwoad assets in pawawwew nyeed to impwement a simpwified `upload_asset` function:
+
+UWUIFY_TOKEN_1744632737673_2
+
+De `upload_asset` function must wetuwn a `JoinHandle` object~ In most cases, de function wiww wetuwn de vawue fwom `tokio::spawn`~ Dis function shouwd onwy incwude de wogic to upwoad de asset&mdash;de intewwuption contwow and cache synchwonyization is donye automaticawwy by de `ParallelUpload` twait.
+
+### Pwepawe
+
+Aww upwoad medods nyeed to impwement an additionyaw twait `Prepare`~ De wationyawe is to pwepawe de medod fow de upwoad of de specified media/metadata fiwes, e.g.:
+- check if any fiwe exceeds a size wimit;
+- check if dewe is stowage space fow de upwoad;
+- check/add funds fow de upwoad.
+
+De twait definyes a singwe function:
+
+UWUIFY_TOKEN_1744632737673_3
+whewe:
+* `sugar_config` - De cuwwent sugaw configuwation
 * `asset_pairs` - Mapping of `index` to an `AssetPair`
-* `asset_indices` - Vector with the information of which asset pair indices will be uploaded, grouped by type.
+* `asset_indices` - Vectow wid de infowmation of which asset paiw indices wiww be upwoaded, gwouped by type.
 
-The `asset_pairs` contain the complete information of the assets, but only the assets specified in the `asset_indices` will be uploaded&mdash;e.g., if index `1` is only present in the `DataType::Image` indices' array, only the image of asset `1` will the uploaded.
+De `asset_pairs` contain de compwete infowmation of de assets, but onwy de assets specified in de `asset_indices` wiww be upwoaded&mdash;e.g., if index `1` is onwy pwesent in de `DataType::Image` indices' awway, onwy de image of asset `1` wiww de upwoaded.
 
-## Configuration
+## Configuwation
 
-After implementing the logic of the upload method, you need to integrate your method in Sugar's configuration file. Firstly, you will need to add a new value to the `UploadMethod` [enum](https://github.com/metaplex-foundation/sugar/blob/main/src/config/data.rs#L220-L231) to identify your upload method. Secondly, you need to modify the `initialize` [factory method](https://github.com/metaplex-foundation/sugar/blob/main/src/upload/uploader.rs#L274-L296) to create the `Uploader` object when it is specified in the configuration file.
+Aftew impwementing de wogic of de upwoad medod, you nyeed to integwate youw medod in Sugaw's configuwation fiwe~ Fiwstwy, you wiww nyeed to add a nyew vawue to de `UploadMethod` [enum](https://github.com/metaplex-foundation/sugar/blob/main/src/config/data.rs#L220-L231) to identify youw upwoad medod~ Secondwy, you nyeed to modify de `initialize` [factory method](https://github.com/metaplex-foundation/sugar/blob/main/src/upload/uploader.rs#L274-L296) to cweate de `Uploader` object when it is specified in de configuwation fiwe.
 
-In case your upload method requires additional parameters, you will need to modify the `ConfigData` [struct](https://github.com/metaplex-foundation/sugar/blob/main/src/config/data.rs#L30-L86). For example, the `aws` upload method requires the user to specify a bucket name for the upload. In the `ConfigData` struct, you will find an `aws_s3_bucket` field, which corresponds to the `awsS3Bucket` property in the configuration file.
+In case youw upwoad medod wequiwes additionyaw pawametews, you wiww nyeed to modify de `ConfigData` [struct](https://github.com/metaplex-foundation/sugar/blob/main/src/config/data.rs#L30-L86)~ Fow exampwe, de `aws` upwoad medod wequiwes de usew to specify a bucket nyame fow de upwoad~ In de `ConfigData` stwuct, you wiww find an `aws_s3_bucket` fiewd, which cowwesponds to de `awsS3Bucket` pwopewty in de configuwation fiwe.
 
-Once you completed the upload method trait implementation and added its details to Sugar's configuration file, it is ready to be used to upload assets.
+Once you compweted de upwoad medod twait impwementation and added its detaiws to Sugaw's configuwation fiwe, it is weady to be used to upwoad assets.
 
-{% callout %}
+{% cawwout %}
 
-Do not forget to submit a PR to Sugar's repository to have your implementation added to Sugar's code base.
+Do nyot fowget to submit a PW to Sugaw's wepositowy to have youw impwementation added to Sugaw's code base.
 
-{% /callout %}
+{% /cawwout %}
 
-## Next steps
+## Nyext steps
 
-Sugar currently has six [upload methods](https://github.com/metaplex-foundation/sugar/tree/main/src/upload/methods) available&mdash;check their source code for more details about how the upload of assets works and design ideas to implement your own upload method.
+Sugaw cuwwentwy has six [upload methods](https://github.com/metaplex-foundation/sugar/tree/main/src/upload/methods) avaiwabwe&mdash;check deiw souwce code fow mowe detaiws about how de upwoad of assets wowks and design ideas to impwement youw own upwoad medod.
