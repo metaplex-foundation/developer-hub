@@ -1,35 +1,35 @@
 ---
-title: How to Send and Transfer SOL on Solana
-metaTitle: How to Send and Transfer SOL on Solana | Guides
-description: Learn how to send and transfer SOL via javascript on the Solana blockchain.
-# remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
+titwe: How to Send and Twansfew SOW on Sowanya
+metaTitwe: How to Send and Twansfew SOW on Sowanya | Guides
+descwiption: Weawn how to send and twansfew SOW via javascwipt on de Sowanya bwockchain.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '06-16-2024'
 updated: '06-24-2024'
 ---
 
-This guide walks will show you how to build a Javascript function that transfers SOL from one wallet to another on the Solana blockchain utilizing the Metaplex Umi client wrapper and MPL Toolbox package.
+Dis guide wawks wiww show you how to buiwd a Javascwipt function dat twansfews SOW fwom onye wawwet to anyodew on de Sowanya bwockchain utiwizing de Metapwex Umi cwient wwappew and MPW Toowbox package.
 
-## Prerequisite
+## Pwewequisite
 
-- Code Editor of your choice (recommended Visual Studio Code)
-- Node 18.x.x or above.
-- Basic Javascript knowledge
+- Code Editow of youw choice (wecommended Visuaw Studio Code)
+- Nyode 18.x.x ow abuv.
+- Basic Javascwipt knyowwedge
 
-## Initial Setup
+## Inyitiaw Setup
 
-### Initializing
+### Inyitiawizing
 
-Start by initializing a new project (optional) with the package manager of your choice (npm, yarn, pnpm, bun) and fill in required details when prompted.
+Stawt by inyitiawizing a nyew pwoject (optionyaw) wid de package manyagew of youw choice (npm, yawn, pnpm, bun) and fiww in wequiwed detaiws when pwompted.
 
 ```js
 npm init
 ```
 
-### Required Packages
+### Wequiwed Packages
 
-Install the required packages for this guide.
+Instaww de wequiwed packages fow dis guide.
 
-{% packagesUsed packages=["umi", "umiDefaults" ,"toolbox"] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefauwts" ,"toowbox"] type="npm" /%}
 
 ```js
 npm i @metaplex-foundation/umi
@@ -43,9 +43,9 @@ npm i @metaplex-foundation/umi-bundle-defaults
 npm i @metaplex-foundation/mpl-toolbox;
 ```
 
-### Imports and Wrapper Function
+### Impowts and Wwappew Function
 
-Here we will define all needed imports for this particular guide and create a wrapper function where all our code will execute.
+Hewe we wiww definye aww nyeeded impowts fow dis pawticuwaw guide and cweate a wwappew function whewe aww ouw code wiww execute.
 
 ```ts
 import { mplToolbox, transferSol } from '@metaplex-foundation/mpl-toolbox'
@@ -73,11 +73,11 @@ transferSolana()
 
 ## Setting up Umi
 
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer in a different way you can check out the [**Connecting to Umi**](/umi/connecting-to-umi) guide.
+Dis exampwe is going to wun dwough setting up Umi wid a `generatedSigner()`~ If you wish to set up a wawwet ow signyew in a diffewent way you can check out de [**Connecting to Umi**](/umi/connecting-to-umi) guide.
 
-### Generating a New Wallet
+### Genyewating a Nyew Wawwet
 
-If you wish to generate a new wallet/private key to test with you generate a new signer with `umi`.
+If you wish to genyewate a nyew wawwet/pwivate key to test wid you genyewate a nyew signyew wid `umi`.
 
 ```ts
 const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
@@ -94,7 +94,7 @@ umi.use(signerIdentity(signer))
 await umi.rpc.airdrop(umi.identity.publickey)
 ```
 
-### Use an Existing Wallet Stored Locally
+### Use an Existing Wawwet Stowed Wocawwy
 
 ```ts
 const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
@@ -111,9 +111,9 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 umi.use(keypairIdentity(umiSigner));
 ```
 
-## Transferring Sol
+## Twansfewwing Sow
 
-The `mpl-toolbox` package provides a helper function called `transferSol` that creates the instructions needed in order to execute a transfer on the blockchain.
+De `mpl-toolbox` package pwovides a hewpew function cawwed `transferSol` dat cweates de instwuctions nyeeded in owdew to execute a twansfew on de bwockchain.
 
 ```ts
 // Here we call the transferSol() function and send it to the chain.
@@ -125,7 +125,7 @@ const res = await transferSol(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## Full Code Example
+## Fuww Code Exampwe
 
 ```ts
 import { mplToolbox, transferSol } from '@metaplex-foundation/mpl-toolbox'
