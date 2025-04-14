@@ -1,214 +1,214 @@
 ---
-title: Candy Guards
-metaTitle: Candy Guards | Core Candy Machine
-description: Learn about the different types of guards available for the Core Candy Machine and their functionality.
+titwe: Candy Guawds
+metaTitwe: Candy Guawds | Cowe Candy Machinye
+descwiption: Weawn about de diffewent types of guawds avaiwabwe fow de Cowe Candy Machinye and deiw functionyawity.
 ---
 
-## What is a guard?
+## What is a guawd? owo
 
-A guard is a modular piece of code that can restrict access to the mint of a Core Candy Machine and even add new features to it!
+A guawd is a moduwaw piece of code dat can westwict access to de mint of a Cowe Candy Machinye and even add nyew featuwes to it! uwu
 
-There is a large set of guards to choose from and each of them can be activated and configured at will.
+Dewe is a wawge set of guawds to choose fwom and each of dem can be activated and configuwed at wiww.
 
-We’ll touch on [all available guards](/core-candy-machine/guards) later in this documentation but let’s go through a few examples here to illustrate that.
+We’ww touch on [all available guards](/core-candy-machine/guards) watew in dis documentation but wet’s go dwough a few exampwes hewe to iwwustwate dat.
 
-- When the **Start Date** guard is enabled, minting will be forbidden before the preconfigured date. There is also an **End Date** guard to forbid minting after a given date.
-- When the **Sol Payment** guard is enabled, the minting wallet will have to pay a configured amount to a configured destination wallet. Similar guards exist for paying with tokens or NFTs of a specific collection.
-- The **Token Gate** and **NFT Gate** guards restrict minting to certain token holders and NFT holders respectively.
-- The **Allow List** guard only allows minting if the wallet is part of a predefined list of wallets. Kind of like a guest list for minting.
+- When de **Stawt Date** guawd is enyabwed, minting wiww be fowbidden befowe de pweconfiguwed date~ Dewe is awso an **End Date** guawd to fowbid minting aftew a given date.
+- When de **Sow Payment** guawd is enyabwed, de minting wawwet wiww have to pay a configuwed amount to a configuwed destinyation wawwet~ Simiwaw guawds exist fow paying wid tokens ow NFTs of a specific cowwection.
+- De **Token Gate** and **NFT Gate** guawds westwict minting to cewtain token howdews and NFT howdews wespectivewy.
+- De **Awwow Wist** guawd onwy awwows minting if de wawwet is pawt of a pwedefinyed wist of wawwets~ Kind of wike a guest wist fow minting.
 
-As you can see, each guard takes care of one responsibility and one responsibility only which makes them composable. In other words, you can pick and choose the guards your need to create your perfect Candy Machine.
+As you can see, each guawd takes cawe of onye wesponsibiwity and onye wesponsibiwity onwy which makes dem composabwe~ In odew wowds, you can pick and choose de guawds youw nyeed to cweate youw pewfect Candy Machinye.
 
-## The Core Candy Guard account
+## De Cowe Candy Guawd account
 
-Each Core Candy Machine account should typically be associated with its own Core Candy Guard account which will add a layer of protection to it.
+Each Cowe Candy Machinye account shouwd typicawwy be associated wid its own Cowe Candy Guawd account which wiww add a wayew of pwotection to it.
 
-This works by creating a Core Candy Guard account and making it the **Mint Authority** of the Core Candy Machine account. By doing so, it is no longer possible to mint directly from the main Core Candy Machine program. Instead, we must mint via the Core Candy Guard program which, if all guards are resolved successfully, will defer to the Core Candy Machine Core program to finish the minting process.
+Dis wowks by cweating a Cowe Candy Guawd account and making it de **Mint Audowity** of de Cowe Candy Machinye account~ By doing so, it is nyo wongew possibwe to mint diwectwy fwom de main Cowe Candy Machinye pwogwam~ Instead, we must mint via de Cowe Candy Guawd pwogwam which, if aww guawds awe wesowved successfuwwy, wiww defew to de Cowe Candy Machinye Cowe pwogwam to finyish de minting pwocess.
 
-{% diagram %}
+{% diagwam %}
 
-{% node %}
-{% node #candy-machine-1 label="Core Candy Machine" theme="blue" /%}
-{% node label="Owner: Core Candy Machine Program" theme="dimmed" /%}
-{% node label="Features" /%}
-{% node label="Authority" /%}
-{% node #mint-authority-1 %}
+{% nyode %}
+{% nyode #candy-machinye-1 wabew="Cowe Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Candy Machinye Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Featuwes" /%}
+{% nyode wabew="Audowity" /%}
+{% nyode #mint-audowity-1 %}
 
-Mint Authority = Candy Guard {% .font-semibold %}
+Mint Audowity = Candy Guawd {% .font-semibowd %}
 
-{% /node %}
-{% node label="..." /%}
-{% /node %}
+{% /nyode %}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="candy-machine-1" y=160 x=20 %}
-{% node #candy-guard-1 label="Core Candy Guard" theme="blue" /%}
-{% node label="Owner: Core Candy Guard Program" theme="dimmed" /%}
-{% node label="Guards" theme="mint" z=1 /%}
-{% node label="Sol Payment" /%}
-{% node label="Token Payment" /%}
-{% node label="Start Date" /%}
-{% node label="End Date" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye-1" y=160 x=20 %}
+{% nyode #candy-guawd-1 wabew="Cowe Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Guawds" deme="mint" z=1 /%}
+{% nyode wabew="Sow Payment" /%}
+{% nyode wabew="Token Payment" /%}
+{% nyode wabew="Stawt Date" /%}
+{% nyode wabew="End Date" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="candy-machine-1" x=350 %}
-{% node #mint-1 label="Mint" theme="pink" /%}
-{% node label="Core Candy Guard Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
-{% node parent="mint-1" x=-120 y=-35 theme="transparent" %}
-Anyone can mint as long \
-as they comply with the \
-activated guards.
-{% /node %}
+{% nyode pawent="candy-machinye-1" x=350 %}
+{% nyode #mint-1 wabew="Mint" deme="pink" /%}
+{% nyode wabew="Cowe Candy Guawd Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-1" x=45 y=-20 wabew="Access Contwow" deme="twanspawent" /%}
+{% nyode pawent="mint-1" x=-120 y=-35 deme="twanspawent" %}
+Anyonye can mint as wong \
+as dey compwy wid de \
+activated guawds.
+{% /nyode %}
 
-{% node parent="mint-1" x=-22 y=100 %}
-{% node #mint-2 label="Mint" theme="pink" /%}
-{% node label="Core Candy Machine Core Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
-{% node parent="mint-2" x=215 y=-18 theme="transparent" %}
-Only Alice \
+{% nyode pawent="mint-1" x=-22 y=100 %}
+{% nyode #mint-2 wabew="Mint" deme="pink" /%}
+{% nyode wabew="Cowe Candy Machinye Cowe Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-2" x=120 y=-20 wabew="Mint Wogic" deme="twanspawent" /%}
+{% nyode pawent="mint-2" x=215 y=-18 deme="twanspawent" %}
+Onwy Awice \
 can mint.
-{% /node %}
+{% /nyode %}
 
-{% node #nft parent="mint-2" x=78 y=100 label="NFT" /%}
+{% nyode #nft pawent="mint-2" x=78 y=100 wabew="NFT" /%}
 
-{% node parent="mint-2" x=280 %}
-{% node #candy-machine-2 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
-{% node label="Features" /%}
-{% node label="Authority" /%}
-{% node #mint-authority-2 %}
+{% nyode pawent="mint-2" x=280 %}
+{% nyode #candy-machinye-2 wabew="Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Featuwes" /%}
+{% nyode wabew="Audowity" /%}
+{% nyode #mint-audowity-2 %}
 
-Mint Authority = Alice {% .font-semibold %}
+Mint Audowity = Awice {% .font-semibowd %}
 
-{% /node %}
-{% node label="..." /%}
-{% /node %}
+{% /nyode %}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% edge from="candy-guard-1" to="mint-authority-1" fromPosition="left" toPosition="left" arrow=false dashed=true /%}
-{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
-{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
-{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
-{% edge from="candy-guard-1" to="mint-1" theme="pink" /%}
-{% edge from="candy-machine-2" to="mint-2" theme="pink" path="straight" /%}
+{% edge fwom="candy-guawd-1" to="mint-audowity-1" fwomPosition="weft" toPosition="weft" awwow=fawse dashed=twue /%}
+{% edge fwom="mint-1" to="mint-2" deme="pink" pad="stwaight" /%}
+{% edge fwom="mint-2" to="nft" deme="pink" pad="stwaight" /%}
+{% edge fwom="candy-machinye-1" to="mint-1" deme="pink" /%}
+{% edge fwom="candy-guawd-1" to="mint-1" deme="pink" /%}
+{% edge fwom="candy-machinye-2" to="mint-2" deme="pink" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-Note that, since Core Candy Machine and Core Candy Guard accounts work hand and hand together, our SDKs treat them as one entity. When you create a Core Candy Machine with our SDKs, an associated Core Candy Guard account will also be created by default. The same goes when updating Core Candy Machines as they allow you to update guards at the same time. We will see some concrete examples on this page.
+Nyote dat, since Cowe Candy Machinye and Cowe Candy Guawd accounts wowk hand and hand togedew, ouw SDKs tweat dem as onye entity~ When you cweate a Cowe Candy Machinye wid ouw SDKs, an associated Cowe Candy Guawd account wiww awso be cweated by defauwt~ De same goes when updating Cowe Candy Machinyes as dey awwow you to update guawds at de same time~ We wiww see some concwete exampwes on dis page.
 
-## Why another program?
+## Why anyodew pwogwam? owo
 
-The reason guards don’t live in the main Core Candy Machine program is to separate the access control logic from the main Core Candy Machine responsibility which is to mint an NFT.
+De weason guawds don’t wive in de main Cowe Candy Machinye pwogwam is to sepawate de access contwow wogic fwom de main Cowe Candy Machinye wesponsibiwity which is to mint an NFT.
 
-This enables guards to not only be modular but extendable. Anyone can create and deploy their own Core Candy Guard program to create custom guards whilst relying on the Core Candy Machine Core program for all the rest.
+Dis enyabwes guawds to nyot onwy be moduwaw but extendabwe~ Anyonye can cweate and depwoy deiw own Cowe Candy Guawd pwogwam to cweate custom guawds whiwst wewying on de Cowe Candy Machinye Cowe pwogwam fow aww de west.
 
-{% diagram %}
+{% diagwam %}
 
-{% node %}
-{% node #candy-machine-1 label="Core Candy Machine" theme="blue" /%}
-{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye-1 wabew="Cowe Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node parent="candy-machine-1" y=80 x=20 %}
-{% node #candy-guard-1 label="Core Candy Guard" theme="blue" /%}
-{% node label="Owner: Core Candy Guard Program" theme="dimmed" /%}
-{% node label="Guards" theme="mint" z=1 /%}
-{% node label="Sol Payment" /%}
-{% node label="Token Payment" /%}
-{% node label="Start Date" /%}
-{% node label="End Date" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye-1" y=80 x=20 %}
+{% nyode #candy-guawd-1 wabew="Cowe Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Guawds" deme="mint" z=1 /%}
+{% nyode wabew="Sow Payment" /%}
+{% nyode wabew="Token Payment" /%}
+{% nyode wabew="Stawt Date" /%}
+{% nyode wabew="End Date" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="candy-machine-1" x=300 %}
-{% node #mint-1 label="Mint" theme="pink" /%}
-{% node label="Core Candy Guard Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-1" x=180 %}
-{% node #mint-1b label="Mint" theme="pink" /%}
-{% node label="Custom Core Candy Guard Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-1b" x=-80 y=-22 label="Different Access Control" theme="transparent" /%}
+{% nyode pawent="candy-machinye-1" x=300 %}
+{% nyode #mint-1 wabew="Mint" deme="pink" /%}
+{% nyode wabew="Cowe Candy Guawd Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-1" x=180 %}
+{% nyode #mint-1b wabew="Mint" deme="pink" /%}
+{% nyode wabew="Custom Cowe Candy Guawd Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-1b" x=-80 y=-22 wabew="Diffewent Access Contwow" deme="twanspawent" /%}
 
-{% node parent="mint-1" x=70 y=100 %}
-{% node #mint-2 label="Mint" theme="pink" /%}
-{% node label="Core Candy Machine Core Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-2" x=110 y=-20 label="Same Mint Logic" theme="transparent" /%}
+{% nyode pawent="mint-1" x=70 y=100 %}
+{% nyode #mint-2 wabew="Mint" deme="pink" /%}
+{% nyode wabew="Cowe Candy Machinye Cowe Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-2" x=110 y=-20 wabew="Same Mint Wogic" deme="twanspawent" /%}
 
-{% node #nft parent="mint-2" x=77 y=100 label="NFT" /%}
+{% nyode #nft pawent="mint-2" x=77 y=100 wabew="NFT" /%}
 
-{% node parent="mint-1b" x=250 %}
-{% node #candy-machine-2 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
-{% /node %}
+{% nyode pawent="mint-1b" x=250 %}
+{% nyode #candy-machinye-2 wabew="Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node parent="candy-machine-2" y=80 x=0 %}
-{% node #candy-guard-2 label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Custom Core Candy Guard Program" theme="dimmed" /%}
-{% node label="Guards" theme="mint" z=1 /%}
-{% node label="Sol Payment" /%}
-{% node label="Token Payment" /%}
-{% node label="Start Date" /%}
-{% node %}
-My Custom Guard {% .font-semibold %}
-{% /node %}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye-2" y=80 x=0 %}
+{% nyode #candy-guawd-2 wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Custom Cowe Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Guawds" deme="mint" z=1 /%}
+{% nyode wabew="Sow Payment" /%}
+{% nyode wabew="Token Payment" /%}
+{% nyode wabew="Stawt Date" /%}
+{% nyode %}
+My Custom Guawd {% .font-semibowd %}
+{% /nyode %}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
-{% edge from="candy-guard-2" to="candy-machine-2" fromPosition="right" toPosition="right" arrow=false /%}
-{% edge from="mint-1" to="mint-2" theme="pink" fromPosition="bottom" toPosition="top" /%}
-{% edge from="mint-1b" to="mint-2" theme="pink" fromPosition="bottom" toPosition="top" /%}
-{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
-{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
-{% edge from="candy-guard-1" to="mint-1" theme="pink" /%}
-{% edge from="candy-machine-2" to="mint-1b" theme="pink" /%}
-{% edge from="candy-guard-2" to="mint-1b" theme="pink" /%}
+{% edge fwom="candy-guawd-1" to="candy-machinye-1" fwomPosition="weft" toPosition="weft" awwow=fawse /%}
+{% edge fwom="candy-guawd-2" to="candy-machinye-2" fwomPosition="wight" toPosition="wight" awwow=fawse /%}
+{% edge fwom="mint-1" to="mint-2" deme="pink" fwomPosition="bottom" toPosition="top" /%}
+{% edge fwom="mint-1b" to="mint-2" deme="pink" fwomPosition="bottom" toPosition="top" /%}
+{% edge fwom="mint-2" to="nft" deme="pink" pad="stwaight" /%}
+{% edge fwom="candy-machinye-1" to="mint-1" deme="pink" /%}
+{% edge fwom="candy-guawd-1" to="mint-1" deme="pink" /%}
+{% edge fwom="candy-machinye-2" to="mint-1b" deme="pink" /%}
+{% edge fwom="candy-guawd-2" to="mint-1b" deme="pink" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-Note that our SDKs also offer ways to register your own Core Candy Guard programs and their custom guards so you can leverage their friendly API and easily share your guards with others.
+Nyote dat ouw SDKs awso offew ways to wegistew youw own Cowe Candy Guawd pwogwams and deiw custom guawds so you can wevewage deiw fwiendwy API and easiwy shawe youw guawds wid odews.
 
-## All available guards
+## Aww avaiwabwe guawds
 
-Alright, now that we understand what guards are, let’s see what default guards are available to us.
+Awwight, nyow dat we undewstand what guawds awe, wet’s see what defauwt guawds awe avaiwabwe to us.
 
-In the following list, we’ll provide a short description of each guard with a link pointing to their dedicated page for more advanced reading.
+In de fowwowing wist, we’ww pwovide a showt descwiption of each guawd wid a wink pointing to deiw dedicated page fow mowe advanced weading.
 
-- [**Address Gate**](/core-candy-machine/guards/address-gate): Restricts the mint to a single address.
-- [**Allocation**](/core-candy-machine/guards/allocation): Allows specifying a limit on the number of NFTs each guard group can mint.
-- [**Allow List**](/core-candy-machine/guards/allow-list): Uses a wallet address list to determine who is allowed to mint.
-- [**Asset Burn Multi**](/core-candy-machine/guards/asset-burn-multi): Restricts the mint to holders of a specified collection, requiring a burn of one or more core assets.
-- [**Asset Burn**](/core-candy-machine/guards/asset-burn): Restricts the mint to holders of a specified collection, requiring a burn of a single core asset.
-- [**Asset Gate**](/core-candy-machine/guards/asset-gate): Restricts the mint to holders of a specified collection.
-- [**Asset Mint Limit**](/core-candy-machine/guards/asset-mint-limit): Restricts minting to holders of a specified collection and limits the number of mints that can be executed for a provided Core Asset.
-- [**Asset Payment Multi**](/core-candy-machine/guards/asset-payment-multi): Set the price of the mint as multiple Core Assets of a specified collection.
-- [**Asset Payment**](/core-candy-machine/guards/asset-payment): Set the price of the mint as a Core Asset of a specified collection.
-- [**Bot Tax**](/core-candy-machine/guards/bot-tax): Configurable tax to charge invalid transactions.
-- [**Edition**](/core-candy-machine/guards/edition): Adds the Edition Plugin to the minted Core Asset. See the [Print Editions](/core/guides/print-editions) guide for more information.
-- [**End Date**](/core-candy-machine/guards/end-date): Determines a date to end the mint.
-- [**Freeze Sol Payment**](/core-candy-machine/guards/freeze-sol-payment): Set the price of the mint in SOL with a freeze period.
-- [**Freeze Token Payment**](/core-candy-machine/guards/freeze-token-payment): Set the price of the mint in token amount with a freeze period.
-- [**Gatekeeper**](/core-candy-machine/guards/gatekeeper): Restricts minting via a Gatekeeper Network e.g. Captcha integration.
-- [**Mint Limit**](/core-candy-machine/guards/mint-limit): Specifies a limit on the number of mints per wallet.
-- [**Nft Burn**](/core-candy-machine/guards/nft-burn): Restricts the mint to holders of a specified collection, requiring a burn of the NFT.
-- [**Nft Gate**](/core-candy-machine/guards/nft-gate): Restricts the mint to holders of a specified collection.
-- [**Nft Payment**](/core-candy-machine/guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
-- [**Program Gate**](/core-candy-machine/guards/program-gate): Restricts the programs that can be in a mint transaction
-- [**Redeemed Amount**](/core-candy-machine/guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
-- [**Sol Fixed fee**](/core-candy-machine/guards/sol-fixed-fee): Set the price of the mint in SOL with a fixed price. Similar to the [Sol Payment](/core-candy-machine/guards/sol-payment) guard.
-- [**Sol Payment**](/core-candy-machine/guards/sol-payment): Set the price of the mint in SOL.
-- [**Start Date**](/core-candy-machine/guards/start-date): Determines the start date of the mint.
-- [**Third Party Signer**](/core-candy-machine/guards/third-party-signer): Requires an additional signer on the transaction.
-- [**Token Burn**](/core-candy-machine/guards/token-burn): Restricts the mint to holders of a specified token, requiring a burn of the tokens.
-- [**Token Gate**](/core-candy-machine/guards/token-gate): Restricts the mint to holders of a specified token.
-- [**Token Payment**](/core-candy-machine/guards/token-payment): Set the price of the mint in token amount.
-- [**Token22 Payment**](/core-candy-machine/guards/token2022-payment): Set the price of the mint in token22 (token extension) amount.
-- [**Vanity Mint**](/core-candy-machine/guards/vanity-mint): Restricts the mint to by expecting the new mint address to match a specific pattern.
+- [**Address Gate**](/core-candy-machine/guards/address-gate): Westwicts de mint to a singwe addwess.
+- [**Allocation**](/core-candy-machine/guards/allocation): Awwows specifying a wimit on de nyumbew of NFTs each guawd gwoup can mint.
+- [**Allow List**](/core-candy-machine/guards/allow-list): Uses a wawwet addwess wist to detewminye who is awwowed to mint.
+- [**Asset Burn Multi**](/core-candy-machine/guards/asset-burn-multi): Westwicts de mint to howdews of a specified cowwection, wequiwing a buwn of onye ow mowe cowe assets.
+- [**Asset Burn**](/core-candy-machine/guards/asset-burn): Westwicts de mint to howdews of a specified cowwection, wequiwing a buwn of a singwe cowe asset.
+- [**Asset Gate**](/core-candy-machine/guards/asset-gate): Westwicts de mint to howdews of a specified cowwection.
+- [**Asset Mint Limit**](/core-candy-machine/guards/asset-mint-limit): Westwicts minting to howdews of a specified cowwection and wimits de nyumbew of mints dat can be executed fow a pwovided Cowe Asset.
+- [**Asset Payment Multi**](/core-candy-machine/guards/asset-payment-multi): Set de pwice of de mint as muwtipwe Cowe Assets of a specified cowwection.
+- [**Asset Payment**](/core-candy-machine/guards/asset-payment): Set de pwice of de mint as a Cowe Asset of a specified cowwection.
+- [**Bot Tax**](/core-candy-machine/guards/bot-tax): Configuwabwe tax to chawge invawid twansactions.
+- [**Edition**](/core-candy-machine/guards/edition): Adds de Edition Pwugin to de minted Cowe Asset~ See de [Print Editions](/core/guides/print-editions) guide fow mowe infowmation.
+- [**End Date**](/core-candy-machine/guards/end-date): Detewminyes a date to end de mint.
+- [**Freeze Sol Payment**](/core-candy-machine/guards/freeze-sol-payment): Set de pwice of de mint in SOW wid a fweeze pewiod.
+- [**Freeze Token Payment**](/core-candy-machine/guards/freeze-token-payment): Set de pwice of de mint in token amount wid a fweeze pewiod.
+- [**Gatekeeper**](/core-candy-machine/guards/gatekeeper): Westwicts minting via a Gatekeepew Nyetwowk e.g~ Captcha integwation.
+- [**Mint Limit**](/core-candy-machine/guards/mint-limit): Specifies a wimit on de nyumbew of mints pew wawwet.
+- [**Nft Burn**](/core-candy-machine/guards/nft-burn): Westwicts de mint to howdews of a specified cowwection, wequiwing a buwn of de NFT.
+- [**Nft Gate**](/core-candy-machine/guards/nft-gate): Westwicts de mint to howdews of a specified cowwection.
+- [**Nft Payment**](/core-candy-machine/guards/nft-payment): Set de pwice of de mint as an NFT of a specified cowwection.
+- [**Program Gate**](/core-candy-machine/guards/program-gate): Westwicts de pwogwams dat can be in a mint twansaction
+- [**Redeemed Amount**](/core-candy-machine/guards/redeemed-amount): Detewminyes de end of de mint based on de totaw amount minted.
+- [**Sol Fixed fee**](/core-candy-machine/guards/sol-fixed-fee): Set de pwice of de mint in SOW wid a fixed pwice~ Simiwaw to de [Sol Payment](/core-candy-machine/guards/sol-payment) guawd.
+- [**Sol Payment**](/core-candy-machine/guards/sol-payment): Set de pwice of de mint in SOW.
+- [**Start Date**](/core-candy-machine/guards/start-date): Detewminyes de stawt date of de mint.
+- [**Third Party Signer**](/core-candy-machine/guards/third-party-signer): Wequiwes an additionyaw signyew on de twansaction.
+- [**Token Burn**](/core-candy-machine/guards/token-burn): Westwicts de mint to howdews of a specified token, wequiwing a buwn of de tokens.
+- [**Token Gate**](/core-candy-machine/guards/token-gate): Westwicts de mint to howdews of a specified token.
+- [**Token Payment**](/core-candy-machine/guards/token-payment): Set de pwice of de mint in token amount.
+- [**Token22 Payment**](/core-candy-machine/guards/token2022-payment): Set de pwice of de mint in token22 (token extension) amount.
+- [**Vanity Mint**](/core-candy-machine/guards/vanity-mint): Westwicts de mint to by expecting de nyew mint addwess to match a specific pattewn.
 
-## Conclusion
+## Concwusion
 
-Guards are important components of Core Candy Machines. They make it easy to configure the minting process whilst allowing anyone to create their own guards for application-specific needs.
+Guawds awe impowtant componyents of Cowe Candy Machinyes~ Dey make it easy to configuwe de minting pwocess whiwst awwowing anyonye to cweate deiw own guawds fow appwication-specific nyeeds.
