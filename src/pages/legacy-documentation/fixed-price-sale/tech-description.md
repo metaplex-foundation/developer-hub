@@ -1,281 +1,281 @@
 ---
-title: Technical Description
-metaTitle: Technical Description | Fixed Price Sale
-description: Technical Description of the Fixed Price Sale Program
+titwe: Technyicaw Descwiption
+metaTitwe: Technyicaw Descwiption | Fixed Pwice Sawe
+descwiption: Technyicaw Descwiption of de Fixed Pwice Sawe Pwogwam
 ---
 
-## Creators to sell something have to:
+## Cweatows to seww someding have to:
 
-1. Create store
+1~ Cweate stowe
 
-    - It's necessary because we have to filter Markets somehow
+    - It's nyecessawy because we have to fiwtew Mawkets somehow
 
-    - It will contain name, admin key, description
+    - It wiww contain nyame, admin key, descwiption
 
-2. Initialise Selling resource. It can be either created one or our platform will create it.
+2~ Inyitiawise Sewwing wesouwce~ It can be eidew cweated onye ow ouw pwatfowm wiww cweate it.
 
-    - Once user initialise selling resource we have an object with resource which we can sell
+    - Once usew inyitiawise sewwing wesouwce we have an object wid wesouwce which we can seww
 
-3. Create a Market
+3~ Cweate a Mawket
 
-    - Create object with info about items selling, all apart from max supply such as we defined it in Selling resource
+    - Cweate object wid info about items sewwing, aww apawt fwom max suppwy such as we definyed it in Sewwing wesouwce
 
-## Users to buy tokens have to:
+## Usews to buy tokens have to:
 
-1. Go to store. 
+1~ Go to stowe~ 
 
-2. Choose token and click "Buy"
+2~ Choose token and cwick "Buy"
 
-    - Under the hood next things will happen:
+    - Undew de hood nyext dings wiww happen:
 
-        - TradeHistory account will be created where we track how many tokens this user already bought
+        - TwadeHistowy account wiww be cweated whewe we twack how many tokens dis usew awweady bought
 
-        - Debit and credit operations
+        - Debit and cwedit opewations
 
-        - New NFT created(create mint, mint token, create Metadata, create MasterEdition)
+        - Nyew NFT cweated(cweate mint, mint token, cweate Metadata, cweate MastewEdition)
 
-3. Token will be shown in their wallets
+3~ Token wiww be shown in deiw wawwets
 
 # Accounts
 
-## Store
+## Stowe
 
-| Field      | Type |Description|
+| Fiewd      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-| admin      | `Pubkey`       | Admin key who can create selling resources and markets in specific store       |
-|  name  |  `String`  |   |
-|  description  |  `String`  |   |
+| admin      | `Pubkey`       | Admin key who can cweate sewwing wesouwces and mawkets in specific stowe       |
+|  nyame  |  `String`  |   |
+|  descwiption  |  `String`  |   |
 
-## Selling resource
+## Sewwing wesouwce
 
-| Field      | Type |Description|
+| Fiewd      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  store  |  `Pubkey`  |    |
-|  owner  |  `Pubkey`  |  Owner of resource. This account can receive back resource once sail is ended  |
-|  resource  |  `Pubkey`  |  Mint account Metadata attached to. We don’t need store Metadata key because it’s PDA and we can calculate it knowing the mint key  |
-|  vault  |  `Pubkey`  |  Token account which holds MasterEdition  |
-|  vault_owner  |  `Pubkey`  |  PDA with seeds [“mt_vault“, resource.key(), store.key()]  |
-|  supply  |  `u64`  |  Amount of tokens already sold  |
-|  max_supply  |  `Option<u64>`  |  Max amount of token can be sold  |
-|  state  |  `Enum{Uninitialised, Created, InUse, Exhausted, Stoped,}`  |  State of resource  |
+|  stowe  |  `Pubkey`  |    |
+|  ownyew  |  `Pubkey`  |  Ownyew of wesouwce~ Dis account can weceive back wesouwce once saiw is ended  |
+|  wesouwce  |  `Pubkey`  |  Mint account Metadata attached to~ We don’t nyeed stowe Metadata key because it’s PDA and we can cawcuwate it knyowing de mint key  |
+|  vauwt  |  `Pubkey`  |  Token account which howds MastewEdition  |
+|  vauwt_ownyew  |  `Pubkey`  |  PDA wid seeds [“mt_vauwt“, wesouwce.key(), stowe.key()]  |
+|  suppwy  |  `u64`  |  Amount of tokens awweady sowd  |
+|  max_suppwy  |  `Option<u64>`  |  Max amount of token can be sowd  |
+|  state  |  `Enum{Uninitialised, Created, InUse, Exhausted, Stoped,}`  |  State of wesouwce  |
 
-## Market
+## Mawket
 
-| Field      | Type |Description|
+| Fiewd      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  store  |  `Pubkey`  |    |
-|  selling_resource  |  `Pubkey`  |    |
-|  treasury_mint  |  `Pubkey`  |  Mint account of tokens which market will accept as a payment  |
-|  treasury_holder  |  `Pubkey`  |  Token account buyers will send tokens to. Only market owner can withdraw assets  |
-|  treasury_owner  |  `Pubkey`  |  PDA[“holder“, treasury_mint.key(), selling_resource.key()]  |
-|  owner  |  `Pubkey`  |  Market owner  |
-|  name  |  `String`  |    |
-|  description  |  `String`  |    |
-|  mutable  |  `bool`  |    |
-|  price  |  `u64`  |    |
-|  pieces_in_one_wallet  |  `Option<u64>`  |  How many tokens we can sell to one wallet  |
-|  start_date  |  `u64`  |    |
+|  stowe  |  `Pubkey`  |    |
+|  sewwing_wesouwce  |  `Pubkey`  |    |
+|  tweasuwy_mint  |  `Pubkey`  |  Mint account of tokens which mawket wiww accept as a payment  |
+|  tweasuwy_howdew  |  `Pubkey`  |  Token account buyews wiww send tokens to~ Onwy mawket ownyew can widdwaw assets  |
+|  tweasuwy_ownyew  |  `Pubkey`  |  PDA[“howdew“, tweasuwy_mint.key(), sewwing_wesouwce.key()]  |
+|  ownyew  |  `Pubkey`  |  Mawket ownyew  |
+|  nyame  |  `String`  |    |
+|  descwiption  |  `String`  |    |
+|  mutabwe  |  `bool`  |    |
+|  pwice  |  `u64`  |    |
+|  pieces_in_onye_wawwet  |  `Option<u64>`  |  How many tokens we can seww to onye wawwet  |
+|  stawt_date  |  `u64`  |    |
 |  end_date  |  `Option<u64>`  |    |
 |  state  |  `Enum {Uninitialised, Created, Active, Ended,}`  |    |
-|  funds_collected  |  `u64`  |    |
+|  funds_cowwected  |  `u64`  |    |
 
 
-## TradeHistory
+## TwadeHistowy
 
-### PDA [“history“, wallet.key(), market.key()]
+### PDA [“histowy“, wawwet.key(), mawket.key()]
 
-| Field      | Type |Description|
+| Fiewd      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  market  |  `Pubkey`  |    |
-|  wallet  |  `Pubkey`  |    |
-|  already_bought  |  `u64`  |  How many tokens user already bought from specific Market  |
+|  mawket  |  `Pubkey`  |    |
+|  wawwet  |  `Pubkey`  |    |
+|  awweady_bought  |  `u64`  |  How many tokens usew awweady bought fwom specific Mawket  |
 
-## PrimaryMetadataCreators
+## PwimawyMetadataCweatows
 
-### PDA [“primary_creators“, metadata.key()]
+### PDA [“pwimawy_cweatows“, metadata.key()]
 
-| Field      | Type |Description|
+| Fiewd      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  creators  |  `Vec<mpl_token_metadata::state::Creator>`  |  List of creators to receive primary sales royalties  |
+|  cweatows  |  `Vec<mpl_token_metadata::state::Creator>`  |  Wist of cweatows to weceive pwimawy sawes woyawties  |
 
-# Instructions
+# Instwuctions
 
-## CreateStore
+## CweateStowe
 
-Creates new Store account.
+Cweates nyew Stowe account.
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  admin  |  Key, Signer, Writable  |    |
-|  store  |  Key, Signer, Writable  |  Uninitialized account  |
-|  name  |  `String`  |    |
-|  description  |  `String`  |    |
+|  admin  |  Key, Signyew, Wwitabwe  |    |
+|  stowe  |  Key, Signyew, Wwitabwe  |  Unyinyitiawized account  |
+|  nyame  |  `String`  |    |
+|  descwiption  |  `String`  |    |
 
-## InitSellingResource
+## InyitSewwingWesouwce
 
-Initialize SellingResource account which will be used by Market.
+Inyitiawize SewwingWesouwce account which wiww be used by Mawket.
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  store  |  Key  |    |
-|  store_admin  |  Key, Signer, Writable  |  Holds resource_token and pays for selling_resource account creating  |
-|  selling_resource  |  Key, Signer, Writable  |  Uninitialized account  |
-|  selling_resource_owner  |  Key  |  Key which can withdraw MasterEdition once sale is ended  |
-|  resource_mint  |  Key  |  Mint account Metadata attached to  |
-|  master_edition  |  Key  |  PDA with seeds [“metadata”, tokenMetadataProgramID, resource_mint, “edition”]  |
-|  metadata  |  Key  |  Master edition’s metadata  |
-|  vault  |  Key, Writable  |  Token account to hold resource  |
-|  vault_owner  |  PDA [“mt_vault“, resource_mint.key(), store.key()]  |  Owner of vault token account  |
-|  resource_token  |  Key, Writable  |  User’s token account which holds token from resource_mint  |
-|  max_supply  |  `Option<u64>`  |  Max amount of tokens to sell  |
+|  stowe  |  Key  |    |
+|  stowe_admin  |  Key, Signyew, Wwitabwe  |  Howds wesouwce_token and pays fow sewwing_wesouwce account cweating  |
+|  sewwing_wesouwce  |  Key, Signyew, Wwitabwe  |  Unyinyitiawized account  |
+|  sewwing_wesouwce_ownyew  |  Key  |  Key which can widdwaw MastewEdition once sawe is ended  |
+|  wesouwce_mint  |  Key  |  Mint account Metadata attached to  |
+|  mastew_edition  |  Key  |  PDA wid seeds [“metadata”, tokenMetadataPwogwamID, wesouwce_mint, “edition”]  |
+|  metadata  |  Key  |  Mastew edition’s metadata  |
+|  vauwt  |  Key, Wwitabwe  |  Token account to howd wesouwce  |
+|  vauwt_ownyew  |  PDA [“mt_vauwt“, wesouwce_mint.key(), stowe.key()]  |  Ownyew of vauwt token account  |
+|  wesouwce_token  |  Key, Wwitabwe  |  Usew’s token account which howds token fwom wesouwce_mint  |
+|  max_suppwy  |  `Option<u64>`  |  Max amount of tokens to seww  |
 
-## CreateMarket
+## CweateMawket
 
-Initialize Market account. Set state to Created, it means that owner can change some data before it will be activated, off course if Market marked as mutable.
+Inyitiawize Mawket account~ Set state to Cweated, it means dat ownyew can change some data befowe it wiww be activated, off couwse if Mawket mawked as mutabwe.
 
-:::warning
+:::wawnying
 
-If user want sell art for native SOL as `treasury_mint` should be set `11111111111111111111111111111111` also treasury_holder and treasury_owner should be the same accounts PDA. It’s necessary for security reasons so only program will be able to spend that SOL.
+If usew want seww awt fow nyative SOW as `treasury_mint` shouwd be set `11111111111111111111111111111111` awso tweasuwy_howdew and tweasuwy_ownyew shouwd be de same accounts PDA~ It’s nyecessawy fow secuwity weasons so onwy pwogwam wiww be abwe to spend dat SOW.
 
 :::
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  market  |  Key, Signer, Writable  |  Uninitialized account  |
-|  store  |  Key  |    |
-|  selling_resource_owner  |  Key, Signer, Writable  |    |
-|  selling_resource  |  Key, Writable  |    |
-|  treasury_mint  |  Key  |  Mint of assets which we will take as a payment  |
-|  treasury_holder  |  Key  |  Token account  |
-|  treasury_owner  |  PDA [“holder“, treasury_mint.key(), selling_resource.key()]  |    |
-|  name  |  `String`  |    |
-|  description  |  `String`  |    |
-|  mutable  |  `bool`  |    |
-|  price  |  `u64`  |    |
-|  pieces_in_one_wallet  |  `Option<u64>`  |    |
-|  start_date  |  `u64`  |    |
+|  mawket  |  Key, Signyew, Wwitabwe  |  Unyinyitiawized account  |
+|  stowe  |  Key  |    |
+|  sewwing_wesouwce_ownyew  |  Key, Signyew, Wwitabwe  |    |
+|  sewwing_wesouwce  |  Key, Wwitabwe  |    |
+|  tweasuwy_mint  |  Key  |  Mint of assets which we wiww take as a payment  |
+|  tweasuwy_howdew  |  Key  |  Token account  |
+|  tweasuwy_ownyew  |  PDA [“howdew“, tweasuwy_mint.key(), sewwing_wesouwce.key()]  |    |
+|  nyame  |  `String`  |    |
+|  descwiption  |  `String`  |    |
+|  mutabwe  |  `bool`  |    |
+|  pwice  |  `u64`  |    |
+|  pieces_in_onye_wawwet  |  `Option<u64>`  |    |
+|  stawt_date  |  `u64`  |    |
 |  end_date  |  `Option<u64>`  |    |
-|  gating_config  |  `Option<GatingConfig{collection: Pubkey, expire_on_use: bool, gating_time: Option<u64>}>`  |  Gating token. If this value set only users with NFT from pointed collection can buy new NFTs from market.  |
+|  gating_config  |  `Option<GatingConfig{collection: Pubkey, expire_on_use: bool, gating_time: Option<u64>}>`  |  Gating token~ If dis vawue set onwy usews wid NFT fwom pointed cowwection can buy nyew NFTs fwom mawket~  |
 
-## ChangeMarket
+## ChangeMawket
 
-Available only if Market::mutable == true. Can change: name, description, mutable, price, pieces_in_one_wallet.
+Avaiwabwe onwy if Mawket::mutabwe == twue~ Can change: nyame, descwiption, mutabwe, pwice, pieces_in_onye_wawwet.
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  market  |  Key, Writable  |    |
-|  market_owner  |  Key, Signer  |    |
-|  new_name  |  `Option<String>`  |    |
-|  new_description  |  `Option<String>`  |    |
-|  mutable  |  `Option<bool>`  |    |
-|  new_price  |  `Option<u64>`  |    |
-|  new_pieces_in_one_wallet  |  `Option<u64>`  |    |
+|  mawket  |  Key, Wwitabwe  |    |
+|  mawket_ownyew  |  Key, Signyew  |    |
+|  nyew_nyame  |  `Option<String>`  |    |
+|  nyew_descwiption  |  `Option<String>`  |    |
+|  mutabwe  |  `Option<bool>`  |    |
+|  nyew_pwice  |  `Option<u64>`  |    |
+|  nyew_pieces_in_onye_wawwet  |  `Option<u64>`  |    |
 
 ## Buy
 
-User can call only if current date > Market::start_date.
+Usew can caww onwy if cuwwent date > Mawket::stawt_date.
 
-:::warning
+:::wawnying
 
-If user buy art for native SOL user_token_acc and user_wallet accounts should be the same.
+If usew buy awt fow nyative SOW usew_token_acc and usew_wawwet accounts shouwd be de same.
 
 :::
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  market  |  Key, Writable  |    |
-|  selling_resource  |  Key, Writable  |    |
-|  user_token_acc  |  Key, Writable  |  Token account to pay for the member token. Mint of this token acc should be == treasury_mint  |
-|  user_wallet  |  Key, Signer, Writable  |    |
-|  trade_history  |  Key, Writable  |  Account to track how many NFTs user already bought  |
-|  treasury_holder  |  Key, Writable  |    |
-|  new_metadata_acc  |  Key, Writable  |    |
-|  new_edition_acc  |  Key, Writable  |    |
-|  master_edition_acc  |  Key, Writable  |    |
-|  new_mint  |  Key, Writable  |    |
-|  edition_marker  |  Key, Writable  |  PDA, seeds can be found in token-metadata program  |
-|  vault  |  Key  |    |
-|  vault_owner  |  PDA [“mt_vault“, resource.key(), store.key()]  |    |
-|  master_edition_metadata  |  Key  |    |
-|    |  Below accounts are optional and should be passed only if gating feature is enabled ↓  |    |
-|  user_collection_token_account  |  Key, Writable  |  User’s token account from collection  |
-|  token_account_mint  |  Key, Writable  |  Token’s mint account  |
-|  metadata_account  |  Key  |  Metadata account for the mint mentioned above  |
+|  mawket  |  Key, Wwitabwe  |    |
+|  sewwing_wesouwce  |  Key, Wwitabwe  |    |
+|  usew_token_acc  |  Key, Wwitabwe  |  Token account to pay fow de membew token~ Mint of dis token acc shouwd be == tweasuwy_mint  |
+|  usew_wawwet  |  Key, Signyew, Wwitabwe  |    |
+|  twade_histowy  |  Key, Wwitabwe  |  Account to twack how many NFTs usew awweady bought  |
+|  tweasuwy_howdew  |  Key, Wwitabwe  |    |
+|  nyew_metadata_acc  |  Key, Wwitabwe  |    |
+|  nyew_edition_acc  |  Key, Wwitabwe  |    |
+|  mastew_edition_acc  |  Key, Wwitabwe  |    |
+|  nyew_mint  |  Key, Wwitabwe  |    |
+|  edition_mawkew  |  Key, Wwitabwe  |  PDA, seeds can be found in token-metadata pwogwam  |
+|  vauwt  |  Key  |    |
+|  vauwt_ownyew  |  PDA [“mt_vauwt“, wesouwce.key(), stowe.key()]  |    |
+|  mastew_edition_metadata  |  Key  |    |
+|    |  Bewow accounts awe optionyaw and shouwd be passed onwy if gating featuwe is enyabwed ↓  |    |
+|  usew_cowwection_token_account  |  Key, Wwitabwe  |  Usew’s token account fwom cowwection  |
+|  token_account_mint  |  Key, Wwitabwe  |  Token’s mint account  |
+|  metadata_account  |  Key  |  Metadata account fow de mint mentionyed abuv  |
 
-## SuspendMarket
+## SuspendMawket
 
-Suspend Market so nobody can buy items and market owner can change data. Instruction should be available only if Market::mutable == true because in other case there is no reason to suspend it.
+Suspend Mawket so nyobody can buy items and mawket ownyew can change data~ Instwuction shouwd be avaiwabwe onwy if Mawket::mutabwe == twue because in odew case dewe is nyo weason to suspend it.
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  market  |  Key, Writable  |    |
-|  market_owner  |  Key, Signer  |    |
-|  clock  |  Key  |    |
+|  mawket  |  Key, Wwitabwe  |    |
+|  mawket_ownyew  |  Key, Signyew  |    |
+|  cwock  |  Key  |    |
 
-## ResumeMarket
+## WesumeMawket
 
-Instruction to resume the market after it was suspended. Can be called only if market is in suspended state.
+Instwuction to wesume de mawket aftew it was suspended~ Can be cawwed onwy if mawket is in suspended state.
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  market  |  Key, Writable  |    |
-|  market_owner  |  Key, Signer  |    |
-|  clock  |  Key  |    |
+|  mawket  |  Key, Wwitabwe  |    |
+|  mawket_ownyew  |  Key, Signyew  |    |
+|  cwock  |  Key  |    |
 
-## CloseMarket
+## CwoseMawket
 
-This instruction can be called only if Market was created with unlimited duration.
+Dis instwuction can be cawwed onwy if Mawket was cweated wid unwimited duwation.
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  market  |  Key, Writable  |    |
-|  market_owner  |  Key, Signer  |    |
-|  clock  |  Key  |    |
+|  mawket  |  Key, Wwitabwe  |    |
+|  mawket_ownyew  |  Key, Signyew  |    |
+|  cwock  |  Key  |    |
 
-## Withdraw
+## Widdwaw
 
-Called by Market owner to withdraw collected treasury funds. Available only if Market::state == Ended.
+Cawwed by Mawket ownyew to widdwaw cowwected tweasuwy funds~ Avaiwabwe onwy if Mawket::state == Ended.
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  market  |  Key  |    |
-|  selling_resource  |  Key  |    |
+|  mawket  |  Key  |    |
+|  sewwing_wesouwce  |  Key  |    |
 |  metadata  |  Key  |    |
-|  treasury_holder  |  Key, Writable  |  Market::treasury_holder. Token account which holds all the tokens received from users during selling  |
-|  treasury_mint  |  Key  |    |
-|  funder  |  Key  |    |
-|  payer  |  Key, Signer  |    |
-|  payout_ticket  |  Key, Writable  |  PDA[“payout_ticket“, market.key(), funder.key()]  |
-|  treasury_owner  |  Key  |  PDA[“holder“, treasury_mint.key(), selling_resource.key()]  |
-|  destination  |  Key, Writable  |  Token account transfer tokens to  |
-|    |  Below account is optional and should be passed only during primary sale ↓  |    |
-|  primary_metadata_creators_data  |  Key  |  List of creators who should receive royalties from primary sale  |
+|  tweasuwy_howdew  |  Key, Wwitabwe  |  Mawket::tweasuwy_howdew~ Token account which howds aww de tokens weceived fwom usews duwing sewwing  |
+|  tweasuwy_mint  |  Key  |    |
+|  fundew  |  Key  |    |
+|  payew  |  Key, Signyew  |    |
+|  payout_ticket  |  Key, Wwitabwe  |  PDA[“payout_ticket“, mawket.key(), fundew.key()]  |
+|  tweasuwy_ownyew  |  Key  |  PDA[“howdew“, tweasuwy_mint.key(), sewwing_wesouwce.key()]  |
+|  destinyation  |  Key, Wwitabwe  |  Token account twansfew tokens to  |
+|    |  Bewow account is optionyaw and shouwd be passed onwy duwing pwimawy sawe ↓  |    |
+|  pwimawy_metadata_cweatows_data  |  Key  |  Wist of cweatows who shouwd weceive woyawties fwom pwimawy sawe  |
 
-## ClaimResource
+## CwaimWesouwce
 
-Called by Resource owner. Available only if SellingResource::state == Exhausted of Market::state == Ended.
+Cawwed by Wesouwce ownyew~ Avaiwabwe onwy if SewwingWesouwce::state == Exhausted of Mawket::state == Ended.
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  market  |  Key  |    |
-|  treasury_holder  |  Key  |    |
-|  selling_resource  |  Key  |    |
-|  selling_resource_owner  |  Key, Signer  |    |
-|  source  |  Key, Writable  |  SellingResource::vault. Token account which holds master edition  |
-|  metadata  |  Key  |  Metadata for token which was sold  |
-|  vault_owner  |  Key  |  PDA with seeds [“mt_vault“, resource.key(), store.key()]  |
-|  secondary_metadata_creators  |  Key  |    |
-|  destination  |  Key, Writable  |  Token account transfer master edition to  |
+|  mawket  |  Key  |    |
+|  tweasuwy_howdew  |  Key  |    |
+|  sewwing_wesouwce  |  Key  |    |
+|  sewwing_wesouwce_ownyew  |  Key, Signyew  |    |
+|  souwce  |  Key, Wwitabwe  |  SewwingWesouwce::vauwt~ Token account which howds mastew edition  |
+|  metadata  |  Key  |  Metadata fow token which was sowd  |
+|  vauwt_ownyew  |  Key  |  PDA wid seeds [“mt_vauwt“, wesouwce.key(), stowe.key()]  |
+|  secondawy_metadata_cweatows  |  Key  |    |
+|  destinyation  |  Key, Wwitabwe  |  Token account twansfew mastew edition to  |
 
-## SavePrimaryMetadataCreators
+## SavePwimawyMetadataCweatows
 
-Called before market is created. This list of creators will be used in withdraw instruction to distribute royalties. Take a note that if you are going to sell NFTs from master edition with `primary_sale_happen = true` you don't need to call this instruction.
+Cawwed befowe mawket is cweated~ Dis wist of cweatows wiww be used in widdwaw instwuction to distwibute woyawties~ Take a nyote dat if you awe going to seww NFTs fwom mastew edition wid `primary_sale_happen = true` you don't nyeed to caww dis instwuction.
 
-| Parameter      | Type |Description|
+| Pawametew      | Type |Descwiption|
 | ----------- | ----------- | ------ |
-|  admin  |  Key, Signer, Writable  |  Metadata’s update authority  |
-|  metadata  |  Key, Writable  |    |
-|  primary_metadata_creators  |  Key, Writable  |  PDA with seeds [“primary_creators“, metadata.key()]  |
-|  system_program  |  Key  |    |
-|  primary_metadata_creators  |  `u8`  |  primary_metadata_creators key bump  |
-|  creators  |  `Vec<mpl_token_metadata::state::Creator>`  |  List of creators who will receive primary royalties  |
+|  admin  |  Key, Signyew, Wwitabwe  |  Metadata’s update audowity  |
+|  metadata  |  Key, Wwitabwe  |    |
+|  pwimawy_metadata_cweatows  |  Key, Wwitabwe  |  PDA wid seeds [“pwimawy_cweatows“, metadata.key()]  |
+|  system_pwogwam  |  Key  |    |
+|  pwimawy_metadata_cweatows  |  `u8`  |  pwimawy_metadata_cweatows key bump  |
+|  cweatows  |  `Vec<mpl_token_metadata::state::Creator>`  |  Wist of cweatows who wiww weceive pwimawy woyawties  |
