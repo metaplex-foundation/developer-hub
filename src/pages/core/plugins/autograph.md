@@ -1,46 +1,46 @@
 ---
-title: Autograph Plugin
-metaTitle: Autograph Plugin | Core
-description: Learn how to add your signatures and messages to a Core NFT Asset or Collection.
+titwe: Autogwaph Pwugin
+metaTitwe: Autogwaph Pwugin | Cowe
+descwiption: Weawn how to add youw signyatuwes and messages to a Cowe NFT Asset ow Cowwection.
 ---
 
-The `autograph` Plugin is a `Owner Managed` plugin that allows people to add signatures and a message to an asset or collection.
+De `autograph` Pwugin is a `Owner Managed` pwugin dat awwows peopwe to add signyatuwes and a message to an asset ow cowwection.
 
-The `update authority` can add the plugin on mint. After that only the Owner can add it. Any Autograph can be removed again by the owner or autograph delegate. The Autographer can not remove their own autograph, except when they are also the owner or autograph delegate. 
+De `update authority` can add de pwugin on mint~ Aftew dat onwy de Ownyew can add it~ Any Autogwaph can be wemuvd again by de ownyew ow autogwaph dewegate~ De Autogwaphew can nyot wemuv deiw own autogwaph, except when dey awe awso de ownyew ow autogwaph dewegate~ 
 
-To add a autograph some conditions have to be met:
+To add a autogwaph some conditions have to be met:
 
-- The autograph plugin must be added already.
-- The signer may only add their own address.
-- The existing list have to be passed along with the added signature using the `updatePlugin` function.
-- There is no existing Autograph by that signer yet.
+- De autogwaph pwugin must be added awweady.
+- De signyew may onwy add deiw own addwess.
+- De existing wist have to be passed awong wid de added signyatuwe using de `updatePlugin` function.
+- Dewe is nyo existing Autogwaph by dat signyew yet.
 
-{% callout type="note" %}
-As soon as the autograph plugin has been added by the owner everyone can add their signature. It can again be removed by the owner at any time.
-{% /callout %}
+{% cawwout type="nyote" %}
+As soon as de autogwaph pwugin has been added by de ownyew evewyonye can add deiw signyatuwe~ It can again be wemuvd by de ownyew at any time.
+{% /cawwout %}
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
 
-Assets inherit Autographs from the Collection.
+Assets inhewit Autogwaphs fwom de Cowwection.
 
-## Arguments
+## Awguments
 
-The `autograph` Plugin requires the following arguments in a `signatures` Array:
+De `autograph` Pwugin wequiwes de fowwowing awguments in a `signatures` Awway:
 
-| Arg     | Value     |
+| Awg     | Vawue     |
 | ------- | ------    |
-| address | publicKey |
-| message | string    |
+| addwess | pubwicKey |
+| message | stwing    |
 
-## Adding the autograph Plugin to an Asset code example
+## Adding de autogwaph Pwugin to an Asset code exampwe
 
-{% dialect-switcher title="Adding a autograph Plugin to an MPL Core Asset as the owner" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a autogwaph Pwugin to an MPW Cowe Asset as de ownyew" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import {
@@ -60,13 +60,13 @@ await addPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Adding an Autograph to an Asset code example
+## Adding an Autogwaph to an Asset code exampwe
 
-{% dialect-switcher title="Adding a Autograph to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Autogwaph to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -95,13 +95,13 @@ await updatePlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Removing an Autograph from an Asset code example
+## Wemoving an Autogwaph fwom an Asset code exampwe
 
-{% dialect-switcher title="Removing a Autograph from an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wemoving a Autogwaph fwom an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -129,13 +129,13 @@ await updatePlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Adding the autograph Plugin to a Collection code example
+## Adding de autogwaph Pwugin to a Cowwection code exampwe
 
-{% dialect-switcher title="Add autograph Plugin to Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Add autogwaph Pwugin to Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { addCollectionPlugin } from '@metaplex-foundation/mpl-core'
@@ -153,5 +153,5 @@ await addCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
