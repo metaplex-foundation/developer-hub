@@ -1,111 +1,114 @@
 ---
-title: Overview
-metaTitle: Overview | Inscription
-description: Provides a high-level overview of the Metaplex Inscriptions standard.
+titwe: Ovewview
+metaTitwe: Ovewview | Inscwiption
+descwiption: Pwovides a high-wevew uvwview of de Metapwex Inscwiptions standawd.
 ---
 
-The Metaplex Inscription Program allows you to write data directly to Solana, using the blockchain as a method of data storage. The Inscription program also allows for this data storage to be optionally linked to an NFT. In this overview, we explain how this program works and how we can leverage its various features at a high level. {% .lead %}
+De Metapwex Inscwiption Pwogwam awwows you to wwite data diwectwy to Sowanya, using de bwockchain as a medod of data stowage~ De Inscwiption pwogwam awso awwows fow dis data stowage to be optionyawwy winked to an NFT~ In dis uvwview, we expwain how dis pwogwam wowks and how we can wevewage its vawious featuwes at a high wevew~ {% .wead %}
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/inscription/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
+{% quick-wink titwe="Getting Stawted" icon="InboxAwwowDown" hwef="/inscwiption/getting-stawted" descwiption="Find de wanguage ow wibwawy of youw choice and get stawted wid digitaw assets on Sowanya." /%}
 
-{% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-inscription.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
+{% quick-wink titwe="API wefewence" icon="CodeBwacketSquawe" hwef="https://mpw-inscwiption.typedoc.metapwex.com/" tawget="_bwank" descwiption="Wooking fow someding specific? owo Have a peak at ouw API Wefewences and find youw answew." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
 
-## Introduction
+## Intwoduction
 
-NFT JSON data and Images have historically been stored on decentralized storage providers like Arweave or IPFS. The Inscription program introduces Solana as another option for NFT data storage, allowing you to write that data directly to the chain. The Metaplex Inscription program introduces the novel use case of all of an NFT's associated data now being stored on Solana. This enables many new use cases such as Solana programs with trait-based bids, dynamic images that are updated via programs, or even RPG game state onchain.
+NFT JSON data and Images have histowicawwy been stowed on decentwawized stowage pwovidews wike Awweave ow IPFS~ De Inscwiption pwogwam intwoduces Sowanya as anyodew option fow NFT data stowage, awwowing you to wwite dat data diwectwy to de chain~ De Metapwex Inscwiption pwogwam intwoduces de nyuvw use case of aww of an NFT's associated data nyow being stowed on Sowanya~ Dis enyabwes many nyew use cases such as Sowanya pwogwams wid twait-based bids, dynyamic images dat awe updated via pwogwams, ow even WPG game state onchain.
 
-There are two different kinds of Inscriptions:
+Dewe awe two diffewent kinds of Inscwiptions:
 
-1. Inscriptions **[attached to NFT Mints](#inscriptions-attached-to-nft-mints)** - NFT data is written to the chain instead or in addition to off chain storage
-2. Inscriptions as **[storage providers](#inscriptions-as-storage-provider)** - Write arbitrary data to the chain
+1~ Inscwiptions **```bash
+pnpm cli inscribe -r <RPC_ENDPOINT> -k <KEYPAIR_FILE> -m <NFT_ADDRESS>
 
-### Inscriptions attached to NFT Mints
+```4** - NFT data is wwitten to de chain instead ow in addition to off chain stowage
+2~ Inscwiptions as **[storage providers](#inscriptions-as-storage-provider)** - Wwite awbitwawy data to de chain
 
-Inscriptions can be used in addition to off chain storage like Arweave, where the metadata JSON and the media is stored, or can be completely replace those off chain storage using the [Inscription Gateway](#inscription-gateway).
+### Inscwiptions attached to NFT Mints
 
-In both cases the same process to create the inscription is used. When using the gateway the only difference is the URI used in the onchain metadata. Read more on this in the [Gateway section](#inscription-gateway).
+Inscwiptions can be used in addition to off chain stowage wike Awweave, whewe de metadata JSON and de media is stowed, ow can be compwetewy wepwace dose off chain stowage using de [Inscription Gateway](#inscription-gateway).
 
-When storing the NFT Metadata onchain three inscription accounts are used:
+In bod cases de same pwocess to cweate de inscwiption is used~ When using de gateway de onwy diffewence is de UWI used in de onchain metadata~ Wead mowe on dis in de [Gateway section](#inscription-gateway).
 
-1. `inscriptionAccount` which stores the JSON Metadata.
-2. `inscriptionMetadata` which stores the metadata of the inscription
-3. `associatedInscriptionAccount` which is storing the media / image.
+When stowing de NFT Metadata onchain dwee inscwiption accounts awe used:
 
-{% diagram height="h-64 md:h-[500px]" %}
+1~ `inscriptionAccount` which stowes de JSON Metadata.
+2~ `inscriptionMetadata` which stowes de metadata of de inscwiption
+3~ `associatedInscriptionAccount` which is stowing de media / image.
 
-{% node %}
-{% node #mint label="Mint Account" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Token Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% diagwam height="h-64 md:h-[500px]" %}
 
-{% node parent="mint" x="-17" y="180" %}
-{% node #inscriptionAccount theme="crimson" %}
-Inscription Account {% .whitespace-nowrap %}
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Inscription Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #mint wabew="Mint Account" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Token Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="inscriptionAccount" x="-40" y="160" %}
-{% node #inscriptionMetadata theme="crimson" %}
-Inscription Metadata Account {% .whitespace-nowrap %}
-{% /node %}
-{% node label="Owner: Inscription Program" theme="dimmed" /%}
-{% /node %}
+{% nyode pawent="mint" x="-17" y="180" %}
+{% nyode #inscwiptionAccount deme="cwimson" %}
+Inscwiption Account {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: Inscwiption Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="inscriptionMetadata" x="500" y="0" %}
-{% node #associatedInscription theme="crimson" %}
-Associated Inscription Account {% .whitespace-nowrap %}
-{% /node %}
-{% node label="Owner: Inscription Program" theme="dimmed" /%}
-{% /node %}
+{% nyode pawent="inscwiptionAccount" x="-40" y="160" %}
+{% nyode #inscwiptionMetadata deme="cwimson" %}
+Inscwiption Metadata Account {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode wabew="Ownyew: Inscwiption Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% edge from="mint" to="metadata" path="straight" /%}
-{% edge from="mint" to="inscriptionAccount" path="straight" %}
+{% nyode pawent="inscwiptionMetadata" x="500" y="0" %}
+{% nyode #associatedInscwiption deme="cwimson" %}
+Associated Inscwiption Account {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode wabew="Ownyew: Inscwiption Pwogwam" deme="dimmed" /%}
+{% /nyode %}
+
+{% edge fwom="mint" to="metadata" pad="stwaight" /%}
+{% edge fwom="mint" to="inscwiptionAccount" pad="stwaight" %}
 Seeds:
 
-"Inscription"
+"Inscwiption"
 
-programId
+pwogwamId
 
-mintAddress
+mintAddwess
 {% /edge %}
-{% edge from="inscriptionAccount" to="inscriptionMetadata" path="straight" %}
+{% edge fwom="inscwiptionAccount" to="inscwiptionMetadata" pad="stwaight" %}
 Seeds:
 
-"Inscription"
+"Inscwiption"
 
-programId
+pwogwamId
 
-inscriptionAccount
+inscwiptionAccount
 {% /edge %}
 
-{% edge from="inscriptionMetadata" to="associatedInscription" path="straight" %}
+{% edge fwom="inscwiptionMetadata" to="associatedInscwiption" pad="stwaight" %}
 Seeds:
 
-"Inscription"
+"Inscwiption"
 
 "Association"
 
 associationTag
 
-inscriptionMetadataAccount
+inscwiptionMetadataAccount
 
 {% /edge %}
 
-{% /diagram %}
+{% /diagwam %}
 
-The below script creates both of these Accounts for you and points the newly minted NFT to the Metaplex gateway. With this your NFT is completely onchain.
+De bewow scwipt cweates bod of dese Accounts fow you and points de nyewwy minted NFT to de Metapwex gateway~ Wid dis youw NFT is compwetewy onchain.
 
-{% dialect-switcher title="Inscribe Data for new NFT using the Gateway" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Inscwibe Data fow nyew NFT using de Gateway" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -191,89 +194,86 @@ for (let i = 0; i < imageBytes.length; i += chunkSize) {
 ```
 
 {% /totem %}
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Bash" id="bash" %}
+{% diawect titwe="Bash" id="bash" %}
 {% totem %}
 
-```bash
-pnpm cli inscribe -r <RPC_ENDPOINT> -k <KEYPAIR_FILE> -m <NFT_ADDRESS>
-
-```
+UWUIFY_TOKEN_1744632887599_1
 
 {% /totem %}
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-### Inscriptions as a Storage Provider
+### Inscwiptions as a Stowage Pwovidew
 
-In addition to the usage with NFT Mints Inscriptions can also be used to store arbitrary data up to 10 MB onchain. An unlimited number of [Associated Inscriptions](#associated-inscription-accounts) can be created.
+In addition to de usage wid NFT Mints Inscwiptions can awso be used to stowe awbitwawy data up to 10 MB onchain~ An unwimited nyumbew of [Associated Inscriptions](#associated-inscription-accounts) can be cweated.
 
-This can be useful when writing an onchain game that needs to store JSON data, storing text onchain, or storing any program-related data that's not an NFT.
+Dis can be usefuw when wwiting an onchain game dat nyeeds to stowe JSON data, stowing text onchain, ow stowing any pwogwam-wewated data dat's nyot an NFT.
 
-{% diagram height="h-64 md:h-[500px]" %}
-{% node %}
-{% node #inscriptionAccount1 theme="crimson" %}
-Inscription Account {% .whitespace-nowrap %}
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Inscription Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% diagwam height="h-64 md:h-[500px]" %}
+{% nyode %}
+{% nyode #inscwiptionAccount1 deme="cwimson" %}
+Inscwiption Account {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: Inscwiption Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="inscriptionAccount1" x="-40" y="160" %}
-{% node #inscriptionMetadata1 theme="crimson" %}
-Inscription Metadata Account {% .whitespace-nowrap %}
-{% /node %}
-{% node label="Owner: Inscription Program" theme="dimmed" /%}
-{% /node %}
+{% nyode pawent="inscwiptionAccount1" x="-40" y="160" %}
+{% nyode #inscwiptionMetadata1 deme="cwimson" %}
+Inscwiption Metadata Account {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode wabew="Ownyew: Inscwiption Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node parent="inscriptionMetadata1" x="500" y="0" %}
-{% node #associatedInscription1 theme="crimson" %}
-Associated Inscription Account {% .whitespace-nowrap %}
-{% /node %}
-{% node label="Owner: Inscription Program" theme="dimmed" /%}
-{% /node %}
+{% nyode pawent="inscwiptionMetadata1" x="500" y="0" %}
+{% nyode #associatedInscwiption1 deme="cwimson" %}
+Associated Inscwiption Account {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode wabew="Ownyew: Inscwiption Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% edge from="mint" to="inscriptionAccount1" path="straight" %}
+{% edge fwom="mint" to="inscwiptionAccount1" pad="stwaight" %}
 Seeds:
 
-"Inscription"
+"Inscwiption"
 
-programId
+pwogwamId
 
-mintAddress
+mintAddwess
 {% /edge %}
-{% edge from="inscriptionAccount1" to="inscriptionMetadata1" path="straight" %}
+{% edge fwom="inscwiptionAccount1" to="inscwiptionMetadata1" pad="stwaight" %}
 Seeds:
 
-"Inscription"
+"Inscwiption"
 
-programId
+pwogwamId
 
-inscriptionAccount
+inscwiptionAccount
 {% /edge %}
 
-{% edge from="inscriptionMetadata1" to="associatedInscription1" path="straight" %}
+{% edge fwom="inscwiptionMetadata1" to="associatedInscwiption1" pad="stwaight" %}
 Seeds:
 
-"Inscription"
+"Inscwiption"
 
 "Association"
 
 associationTag
 
-inscriptionMetadataAccount
+inscwiptionMetadataAccount
 
 {% /edge %}
 
-{% /diagram %}
+{% /diagwam %}
 
-The following example shows how to write NFT JSON data to an Inscription in three different transactions to avoid the 1280 byte transaction size limit.
+De fowwowing exampwe shows how to wwite NFT JSON data to an Inscwiption in dwee diffewent twansactions to avoid de 1280 byte twansaction size wimit.
 
-{% dialect-switcher title="Find the rank of a specific NFT inscription" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Find de wank of a specific NFT inscwiption" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -325,27 +325,27 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Associated Inscription Accounts
+## Associated Inscwiption Accounts
 
-The [Metaplex JSON standards](/token-metadata/token-standard) include the option of linking associated files to a token via the files properties in the JSON schemas. The Inscription program introduces a new method of associating additional data using the power of PDAs! A PDA is derived from the Inscription and an **Association Tag**, resulting in a programmatic way to derive additional inscribed data, rather that requiring expensive JSON deserialization and parsing.
+De [Metaplex JSON standards](/token-metadata/token-standard) incwude de option of winking associated fiwes to a token via de fiwes pwopewties in de JSON schemas~ De Inscwiption pwogwam intwoduces a nyew medod of associating additionyaw data using de powew of PDAs! uwu A PDA is dewived fwom de Inscwiption and an **Association Tag**, wesuwting in a pwogwammatic way to dewive additionyaw inscwibed data, wadew dat wequiwing expensive JSON desewiawization and pawsing.
 
-## Inscription Gateway
+## Inscwiption Gateway
 
-Together with the [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway) you can use the normal Token Metadata Standard and just point the URI to the gateway which again reads your data directly from chain without all tools like wallets and explorers reading the data have to read it any differently than NFTs are read usually.
+Togedew wid de [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway) you can use de nyowmaw Token Metadata Standawd and just point de UWI to de gateway which again weads youw data diwectwy fwom chain widout aww toows wike wawwets and expwowews weading de data have to wead it any diffewentwy dan NFTs awe wead usuawwy.
 
-You can either use the gateway that is hosted by Metaplex using the following URL structure: `https://igw.metaplex.com/<network>/<account>`, e.g. [https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF) or host the gateway yourself with a custom URL.
+You can eidew use de gateway dat is hosted by Metapwex using de fowwowing UWW stwuctuwe: `https://igw.metaplex.com/<network>/<account>`, e.g~ [https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF) ow host de gateway youwsewf wid a custom UWW.
 
-## Inscription Rank
+## Inscwiption Wank
 
-The Inscription Rank is the unique number of each inscription. This number represents a sequential, global ranking of all Metaplex Inscriptions in existence based on the total Inscription count at the time of creation. Inscription Rank is managed through a parallelized counter that is explained further in [Inscription Sharding](/inscription/sharding).
+De Inscwiption Wank is de unyique nyumbew of each inscwiption~ Dis nyumbew wepwesents a sequentiaw, gwobaw wanking of aww Metapwex Inscwiptions in existence based on de totaw Inscwiption count at de time of cweation~ Inscwiption Wank is manyaged dwough a pawawwewized countew dat is expwainyed fuwdew in [Inscription Sharding](/inscription/sharding).
 
-To find the `inscriptionRank` of your Inscription you need to fetch the `inscriptionMetadata` Account and read the `inscriptionRank` `bigint`:
+To find de `inscriptionRank` of youw Inscwiption you nyeed to fetch de `inscriptionMetadata` Account and wead de `inscriptionRank` `bigint`:
 
-{% dialect-switcher title="Find the rank of a specific NFT inscription" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Find de wank of a specific NFT inscwiption" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -363,13 +363,13 @@ const { inscriptionRank } = await fetchInscriptionMetadata(
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-When creating your inscriptions you should always use a random shard to avoid write locks. You can just calculate the random number like this:
+When cweating youw inscwiptions you shouwd awways use a wandom shawd to avoid wwite wocks~ You can just cawcuwate de wandom nyumbew wike dis:
 
-{% dialect-switcher title="Find random shard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Find wandom shawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -377,13 +377,13 @@ const randomShard = Math.floor(Math.random() * 32)
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-The total amount of Metaplex Inscriptions on Solana can be calculated like this:
+De totaw amount of Metapwex Inscwiptions on Sowanya can be cawcuwated wike dis:
 
-{% dialect-switcher title="Fetch total Inscription amount" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch totaw Inscwiption amount" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -406,14 +406,14 @@ shards.forEach((shard) => {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## And a lot more
+## And a wot mowe
 
-Whilst this provides a good overview of the Inscription program and what it has to offer, there’s still a lot more that can be done with it.
+Whiwst dis pwovides a good uvwview of de Inscwiption pwogwam and what it has to offew, dewe’s stiww a wot mowe dat can be donye wid it.
 
-The other pages of this documentation aim to document it further and explain significant features in their own individual pages.
+De odew pages of dis documentation aim to document it fuwdew and expwain signyificant featuwes in deiw own individuaw pages.
 
 - [Initialize](/inscription/initialize)
 - [Write](/inscription/write)
