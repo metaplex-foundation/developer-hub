@@ -1,87 +1,87 @@
 ---
-title: "Address Gate Guard"
-metaTitle: Address Gate Guard | Candy Machine
-description: "Restricts the mint to a single address."
+titwe: "Addwess Gate Guawd"
+metaTitwe: Addwess Gate Guawd | Candy Machinye
+descwiption: "Westwicts de mint to a singwe addwess."
 ---
 
-## Overview
+## Ovewview
 
-The **Address Gate** guard restricts the mint to a single address which must match the address of the minting wallet.
+De **Addwess Gate** guawd westwicts de mint to a singwe addwess which must match de addwess of de minting wawwet.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #addressGate label="AddressGate" /%}
-{% node #address label="- Address" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #addwessGate wabew="AddwessGate" /%}
+{% nyode #addwess wabew="- Addwess" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="address" x="270" y="-9" %}
-{% node #payer label="Payer" theme="indigo" /%}
-{% node theme="dimmed" %}
-Owner: Any Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode pawent="addwess" x="270" y="-9" %}
+{% nyode #payew wabew="Payew" deme="indigo" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Any Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-8" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="72" deme="bwue" %}
   NFT
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
-{% edge from="address" to="payer" arrow="none" dashed=true /%}
-{% edge from="payer" to="mint-candy-guard" arrow="none" dashed=true%}
-if the payer does not match the address on the guard 
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+{% edge fwom="addwess" to="payew" awwow="nyonye" dashed=twue /%}
+{% edge fwom="payew" to="mint-candy-guawd" awwow="nyonye" dashed=twue%}
+if de payew does nyot match de addwess on de guawd 
 
-Minting will fail
+Minting wiww faiw
 {% /edge %}
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" /%}
 
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Address Gate guard contains the following settings:
+De Addwess Gate guawd contains de fowwowing settings:
 
-- **Address**: The only address that is allowed to mint from the Candy Machine.
+- **Addwess**: De onwy addwess dat is awwowed to mint fwom de Candy Machinye.
 
-{% dialect-switcher title="Set up a Candy Machine using the Address Gate guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Addwess Gate guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -93,15 +93,15 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [AddressGate](https://mpl-candy-machine.typedoc.metaplex.com/types/AddressGate.html)
+API Wefewences: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [AddressGate](https://mpl-candy-machine.typedoc.metaplex.com/types/AddressGate.html)
 
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Add this object into the guard section your config.json file: 
+Add dis object into de guawd section youw config.json fiwe: 
 
 ```json
 "addressGate" : {
@@ -110,15 +110,15 @@ Add this object into the guard section your config.json file:
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-Now, only the defined public key will be able to mint from this Candy Machine.
+Nyow, onwy de definyed pubwic key wiww be abwe to mint fwom dis Candy Machinye.
 
 ## Mint Settings
 
-_The Address Gate guard does not need Mint Settings._
+_De Addwess Gate guawd does nyot nyeed Mint Settings._
 
-## Route Instruction
+## Woute Instwuction
 
-_The Address Gate guard does not support or require the route instruction._
+_De Addwess Gate guawd does nyot suppowt ow wequiwe de woute instwuction._
