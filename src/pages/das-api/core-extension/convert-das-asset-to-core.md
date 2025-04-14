@@ -1,17 +1,17 @@
 ---
-title: Convert from standard DAS Asset to Core Asset or Collection type
-metaTitle: Convert standard DAS to Core Type | DAS API Core Extension
-description: Converts DAS Assets to Core Asset or Collection 
+titwe: Convewt fwom standawd DAS Asset to Cowe Asset ow Cowwection type
+metaTitwe: Convewt standawd DAS to Cowe Type | DAS API Cowe Extension
+descwiption: Convewts DAS Assets to Cowe Asset ow Cowwection 
 ---
 
-If you are working with not only Core assets but other assets like Token Metadata, too, it might be useful to directly access the conversion helpers along side the other DAS asset types when fetching using `@metaplex-foundation/digital-asset-standard-api`.
+If you awe wowking wid nyot onwy Cowe assets but odew assets wike Token Metadata, too, it might be usefuw to diwectwy access de convewsion hewpews awong side de odew DAS asset types when fetching using `@metaplex-foundation/digital-asset-standard-api`.
 
-## Convert to Asset Example
+## Convewt to Asset Exampwe
 
-The following Example shows 
-1. How to fetch DAS Assets with the standard DAS API Package.
-2. Filter the Assets to only have Core Assets
-3. Cast all the Standard Assets to Core Assets
+De fowwowing Exampwe shows 
+1~ How to fetch DAS Assets wid de standawd DAS API Package.
+2~ Fiwtew de Assets to onwy have Cowe Assets
+3~ Cast aww de Standawd Assets to Cowe Assets
 
 ```js
 // ... standard setup for @metaplex-foundation/digital-asset-standard-api
@@ -25,12 +25,12 @@ const dasCoreAssets = assets.items.filter((a) => a.interface === 'MplCoreAsset')
 const coreAssets = await das.dasAssetsToCoreAssets(umi, dasCoreAssets)
 ```
 
-## Convert to Collection Example
+## Convewt to Cowwection Exampwe
 
-The following Example shows 
-1. How to fetch DAS Collections with the standard DAS API Package.
-2. Filter the Assets to only have Core Assets
-3. Cast all the Standard Assets to Core Assets
+De fowwowing Exampwe shows 
+1~ How to fetch DAS Cowwections wid de standawd DAS API Package.
+2~ Fiwtew de Assets to onwy have Cowe Assets
+3~ Cast aww de Standawd Assets to Cowe Assets
 
 ```js
 // ... standard setup for @metaplex-foundation/digital-asset-standard-api
