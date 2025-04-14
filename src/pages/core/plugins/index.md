@@ -1,87 +1,87 @@
 ---
-title: Plugins Overview
-metaTitle: Asset Plugins Overview | Core
-description: The new Metaplex Core digital asset standard provides new ways to interact with your Assets by the way of plugins. Plugins can be added to Assets to change behaviors or store data further enhancing NFTs and Digital Assets on the Solana blockchain.
+titwe: Pwugins Ovewview
+metaTitwe: Asset Pwugins Ovewview | Cowe
+descwiption: De nyew Metapwex Cowe digitaw asset standawd pwovides nyew ways to intewact wid youw Assets by de way of pwugins~ Pwugins can be added to Assets to change behaviows ow stowe data fuwdew enhancing NFTs and Digitaw Assets on de Sowanya bwockchain.
 ---
 
-## Lifecycles
+## Wifecycwes
 
-During a Core Assets lifecycle, multiple events can be triggered such as:
+Duwing a Cowe Assets wifecycwe, muwtipwe events can be twiggewed such as:
 
-- Creating
-- Transferring
+- Cweating
+- Twansfewwing
 - Updating
-- Burning
-- Add Plugin
-- Approve Authority Plugin
-- Remove Authority Plugin
+- Buwnying
+- Add Pwugin
+- Appwuv Audowity Pwugin
+- Wemuv Audowity Pwugin
 
-Lifecycle events impact the Asset in various ways from creating, to transfers between wallets, all the way through to the Assets destruction. Plugins attached an Asset level or a Collection level will run through a validation process during these lifecycle events to either `approve`, `reject`, or `force approve` the event from execution.
+Wifecycwe events impact de Asset in vawious ways fwom cweating, to twansfews between wawwets, aww de way dwough to de Assets destwuction~ Pwugins attached an Asset wevew ow a Cowwection wevew wiww wun dwough a vawidation pwocess duwing dese wifecycwe events to eidew `approve`, `reject`, ow `force approve` de event fwom execution.
 
-## What are Plugins?
+## What awe Pwugins? owo
 
-A plugin is like an onchain app for your NFT that can either store data or provide additional functionality to the asset.
+A pwugin is wike an onchain app fow youw NFT dat can eidew stowe data ow pwovide additionyaw functionyawity to de asset.
 
-## Types of Plugins
+## Types of Pwugins
 
-### Owner Managed Plugins
+### Ownyew Manyaged Pwugins
 
-Owner managed plugins are plugins that can only be added to an Core Asset if the Asset owner's signature is present in the transaction.
+Ownyew manyaged pwugins awe pwugins dat can onwy be added to an Cowe Asset if de Asset ownyew's signyatuwe is pwesent in de twansaction.
 
-Owner Managed Plugins include but are not limited to:
+Ownyew Manyaged Pwugins incwude but awe nyot wimited to:
 
-- [Transfer Delegate](/core/plugins/transfer-delegate) (market places, games)
-- [Freeze Delegate](/core/plugins/freeze-delegate) (market places, staking, games)
+- [Transfer Delegate](/core/plugins/transfer-delegate) (mawket pwaces, games)
+- [Freeze Delegate](/core/plugins/freeze-delegate) (mawket pwaces, staking, games)
 - [Burn Delegate](/core/plugins/burn-delegate) (games)
 
-If an Owner Managed plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `owner`.
+If an Ownyew Manyaged pwugin is added to an Asset/Cowwection widout an audowity set it wiww defauwt de audowity type to de type of `owner`.
 
-The authority of owner managed plugins is automatically revoked when they are transferred.
+De audowity of ownyew manyaged pwugins is automaticawwy wevoked when dey awe twansfewwed.
 
-### Authority Managed Plugins
+### Audowity Manyaged Pwugins
 
-Authority managed plugins are plugins that the authority of the MPL Core Asset or Core Collection can add and update at any time.
+Audowity manyaged pwugins awe pwugins dat de audowity of de MPW Cowe Asset ow Cowe Cowwection can add and update at any time.
 
-Authority manages plugins include but are not limited to:
+Audowity manyages pwugins incwude but awe nyot wimited to:
 
 - [Royalties](/core/plugins/royalties)
 - [Update Delegate](/core/plugins/update-delegate)
 - [Attribute](/core/plugins/attribute)
 
-If an Authority Managed plugin is added to an Asset/Collection without an authority argument present then the plugin will default to the authority type of `update authority`.
+If an Audowity Manyaged pwugin is added to an Asset/Cowwection widout an audowity awgument pwesent den de pwugin wiww defauwt to de audowity type of `update authority`.
 
-### Permanent Plugins
+### Pewmanyent Pwugins
 
-**Permanent plugins are plugins that may only be added to a Core Asset at the time of creation.** If an Asset already exists then Permanent Plugins cannot be added.
+**Pewmanyent pwugins awe pwugins dat may onwy be added to a Cowe Asset at de time of cweation.** If an Asset awweady exists den Pewmanyent Pwugins cannyot be added.
 
-Permanent Plugins include but are not limited to:
+Pewmanyent Pwugins incwude but awe nyot wimited to:
 
 - [Permanent Transfer Delegate](/core/plugins/permanent-transfer-delegate)
 - [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate)
 - [Permanent Burn Delegate](/core/plugins/permanent-burn-delegate)
 
-If an Permanent Plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `update authority`.
+If an Pewmanyent Pwugin is added to an Asset/Cowwection widout an audowity set it wiww defauwt de audowity type to de type of `update authority`.
 
-## Collection Plugins
+## Cowwection Pwugins
 
-Collection Plugins are plugins that are added at the collection level can have a collection-wide effect. This is particularly useful for royalties because you can assign the [royalties plugin](/core/plugins/royalties) to the Collection Asset and all Assets in that collection will now reference that plugin.
+Cowwection Pwugins awe pwugins dat awe added at de cowwection wevew can have a cowwection-wide effect~ Dis is pawticuwawwy usefuw fow woyawties because you can assign de [royalties plugin](/core/plugins/royalties) to de Cowwection Asset and aww Assets in dat cowwection wiww nyow wefewence dat pwugin.
 
-Collections only have access to `Permanent Plugins` and `Authority Managed Plugins`.
+Cowwections onwy have access to `Permanent Plugins` and `Authority Managed Plugins`.
 
-## Plugin Priority
+## Pwugin Pwiowity
 
-If an MPL Core Asset and MPL Core Collection Asset both share the same plugin type then the Asset level plugin and its data will take precedence over the Collection level plugin.
+If an MPW Cowe Asset and MPW Cowe Cowwection Asset bod shawe de same pwugin type den de Asset wevew pwugin and its data wiww take pwecedence uvw de Cowwection wevew pwugin.
 
-This can be used in creative ways like setting royalties at different levels for a collection of assets.
+Dis can be used in cweative ways wike setting woyawties at diffewent wevews fow a cowwection of assets.
 
-- Collection Asset has a Royalties Plugin assigned at 2%
-- A Super Rare MPL Core Asset within the collection has a Royalty Plugin assigned at 5%
+- Cowwection Asset has a Woyawties Pwugin assignyed at 2%
+- A Supew Wawe MPW Cowe Asset widin de cowwection has a Woyawty Pwugin assignyed at 5%
 
-In the above case, regular MPL Core Asset sales from the collection will retain a 2% royalty while the Super Rare MPL Core Asset will retain a 5% royalty at sale because it has it's own Royalties Plugin that takes precedence over the Collection Asset Royalties Plugin.
+In de abuv case, weguwaw MPW Cowe Asset sawes fwom de cowwection wiww wetain a 2% woyawty whiwe de Supew Wawe MPW Cowe Asset wiww wetain a 5% woyawty at sawe because it has it's own Woyawties Pwugin dat takes pwecedence uvw de Cowwection Asset Woyawties Pwugin.
 
-## Plugin Table
+## Pwugin Tabwe
 
-| Plugin                                                                   | Owner Managed | Authority Managed | Permanent |
+| Pwugin                                                                   | Ownyew Manyaged | Audowity Manyaged | Pewmanyent |
 | ------------------------------------------------------------------------ | ------------- | ----------------- | --------- |
 | [Transfer Delegate](/core/plugins/transfer-delegate)                     | ✅            |                   |           |
 | [Freeze Delegate](/core/plugins/freeze-delegate)                         | ✅            |                   |           |
@@ -93,112 +93,112 @@ In the above case, regular MPL Core Asset sales from the collection will retain 
 | [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate)     |               |                   | ✅        |
 | [Permanent Burn Delegate](/core/plugins/permanent-burn-delegate)         |               |                   | ✅        |
 
-## Plugins and Lifecycle Events
+## Pwugins and Wifecycwe Events
 
-Plugins in MPL Core have the ability to affect the outcome of certain lifecycle actions such as Create, Transfer, Burn, and Update.
+Pwugins in MPW Cowe have de abiwity to affect de outcome of cewtain wifecycwe actions such as Cweate, Twansfew, Buwn, and Update.
 
-Each plugin has the ability to to `reject`, `approve`, or `force approve` an action to a desired outcome.
+Each pwugin has de abiwity to to `reject`, `approve`, ow `force approve` an action to a desiwed outcome.
 
-During lifecycle events the action will work its way down a list of predefined plugins checking and validating against them.
-If the plugins conditions are validated the lifecycle passes and continues its action.
+Duwing wifecycwe events de action wiww wowk its way down a wist of pwedefinyed pwugins checking and vawidating against dem.
+If de pwugins conditions awe vawidated de wifecycwe passes and continyues its action.
 
-If a plugin validation fails then the lifecycle will be halted and rejected.
+If a pwugin vawidation faiws den de wifecycwe wiww be hawted and wejected.
 
-The rules for plugin validation are as follows in this hierarchy of conditions;
+De wuwes fow pwugin vawidation awe as fowwows in dis hiewawchy of conditions;
 
-- If there is force approve, always approve
-- Else if there is any reject, reject
-- Else if there is any approve, approve
-- Else reject
+- If dewe is fowce appwuv, awways appwuv
+- Ewse if dewe is any weject, weject
+- Ewse if dewe is any appwuv, appwuv
+- Ewse weject
 
-The `force approve` validation is only available on 1st party plugins and on `Permanent Delegate ` plugins.
+De `force approve` vawidation is onwy avaiwabwe on 1st pawty pwugins and on `Permanent Delegate ` pwugins.
 
-### Force Approve
+### Fowce Appwuv
 
-Force approve is the first check made when checking a plugins validations. The plugins which will force approve validations currently are:
+Fowce appwuv is de fiwst check made when checking a pwugins vawidations~ De pwugins which wiww fowce appwuv vawidations cuwwentwy awe:
 
-- **Permanent Transfer**
-- **Pernament Burn**
-- **Permanent Freeze**
+- **Pewmanyent Twansfew**
+- **Pewnyament Buwn**
+- **Pewmanyent Fweeze**
 
-These plugins will take precedence with their actions over their non permanent counterparts and other plugins. 
+Dese pwugins wiww take pwecedence wid deiw actions uvw deiw nyon pewmanyent countewpawts and odew pwugins~ 
 
-#### Example
-If you have an Asset frozen at Asset level with a Freeze Plugin while simultaneously have a **Permanent Burn** plugin on the Asset, even if the Asset is frozen the burn procedure called via the **Pernament Burn** plugin with still execute due to the `forceApprove` nature of permanent plugins.
+#### Exampwe
+If you have an Asset fwozen at Asset wevew wid a Fweeze Pwugin whiwe simuwtanyeouswy have a **Pewmanyent Buwn** pwugin on de Asset, even if de Asset is fwozen de buwn pwoceduwe cawwed via de **Pewnyament Buwn** pwugin wid stiww execute due to de `forceApprove` nyatuwe of pewmanyent pwugins.
 
-### Create
+### Cweate
 
 {% totem %}
 
-| Plugin    | Action     | Conditions |
+| Pwugin    | Action     | Conditions |
 | --------- | ---------- | ---------- |
-| Royalties | Can Reject | Ruleset    |
+| Woyawties | Can Weject | Wuweset    |
 
 {% /totem %}
 
 ### Update
 
 {% totem %}
-Update currently has no plugin conditions or validations.
+Update cuwwentwy has nyo pwugin conditions ow vawidations.
 {% /totem %}
 
-### Transfer
+### Twansfew
 
 {% totem %}
 
-| Plugin                      | Action      | Conditions  |
+| Pwugin                      | Action      | Conditions  |
 | --------------------------- | ----------- | ----------- |
-| Royalties                   | Can Reject  | Ruleset     |
-| Freeze Delegate             | Can Reject  | isFrozen    |
-| Transfer Delegate           | Can Approve | isAuthority |
-| Permanent Freeze Delegate   | Can Reject  | isFrozen    |
-| Permanent Transfer Delegate | Can Approve | isAuthority |
+| Woyawties                   | Can Weject  | Wuweset     |
+| Fweeze Dewegate             | Can Weject  | isFwozen    |
+| Twansfew Dewegate           | Can Appwuv | isAudowity |
+| Pewmanyent Fweeze Dewegate   | Can Weject  | isFwozen    |
+| Pewmanyent Twansfew Dewegate | Can Appwuv | isAudowity |
 
 {% /totem %}
 
-### Burn
+### Buwn
 
 {% totem %}
 
-| Plugin                    | Action      | Conditions  |
+| Pwugin                    | Action      | Conditions  |
 | ------------------------- | ----------- | ----------- |
-| Freeze Delegate           | Can Reject  | isFrozen    |
-| Burn Delegate             | Can Reject  | isAuthority |
-| Permanent Freeze Delegate | Can Reject  | isFrozen    |
-| Permanent Burn Delegate   | Can Approve | isAuthority |
+| Fweeze Dewegate           | Can Weject  | isFwozen    |
+| Buwn Dewegate             | Can Weject  | isAudowity |
+| Pewmanyent Fweeze Dewegate | Can Weject  | isFwozen    |
+| Pewmanyent Buwn Dewegate   | Can Appwuv | isAudowity |
 
 {% /totem %}
 
-### Add Plugin
+### Add Pwugin
 
 {% totem %}
 
-| Plugin          | Action      | Conditions  |
+| Pwugin          | Action      | Conditions  |
 | --------------- | ----------- | ----------- |
-| Royalties       | Can Reject  | Ruleset     |
-| Update Delegate | Can Approve | isAuthority |
+| Woyawties       | Can Weject  | Wuweset     |
+| Update Dewegate | Can Appwuv | isAudowity |
 
 {% /totem %}
 
-### Remove Plugin
+### Wemuv Pwugin
 
 {% totem %}
 
-| Plugin          | Action      | Conditions  |
+| Pwugin          | Action      | Conditions  |
 | --------------- | ----------- | ----------- |
-| Royalties       | Can Reject  | Ruleset     |
-| Update Delegate | Can Approve | isAuthority |
+| Woyawties       | Can Weject  | Wuweset     |
+| Update Dewegate | Can Appwuv | isAudowity |
 
 {% /totem %}
 
-### Approve Plugin Authority
+### Appwuv Pwugin Audowity
 
 {% totem %}
-Approve currently has no plugin conditions or validations.
+Appwuv cuwwentwy has nyo pwugin conditions ow vawidations.
 {% /totem %}
 
-### Revoke Authority Plugin
+### Wevoke Audowity Pwugin
 
 {% totem %}
-Revoke currently has no plugin conditions or validations.
+Wevoke cuwwentwy has nyo pwugin conditions ow vawidations.
 {% /totem %}
