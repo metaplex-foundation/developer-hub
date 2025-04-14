@@ -1,96 +1,702 @@
 ---
-title: "Core Candy Machine - Vanity Mint Guard"
-metaTitle: "Core Candy Machine - Guards - Vanity Mint"
-description: "The Core Candy Machine 'Vanity Mint' guard requires the minter to provide a specific vanity mint as Asset Address"
+titwe: "Cowe Candy Machinye - Vanyity Mint Guawd"
+metaTitwe: "Cowe Candy Machinye - Guawds - Vanyity Mint"
+descwiption: "De Cowe Candy Machinye 'Vanyity Mint' guawd wequiwes de mintew to pwovide a specific vanyity mint as Asset Addwess"
 ---
 
-## Overview
+## Ovewview
 
-The **Vanity Mint** guard allows minting if the specified mint address matches a specific format. This guard basically allows to add a Proof of Work (POW) requirement where the user has to grind for a Public Key that matches the pattern.
+De **Vanyity Mint** guawd awwows minting if de specified mint addwess matches a specific fowmat~ Dis guawd basicawwy awwows to add a Pwoof of Wowk (POW) wequiwement whewe de usew has to gwind fow a Pubwic Key dat matches de pattewn.
 
-If the minter does not use a matching mint address, minting will fail.
+If de mintew does nyot use a matching mint addwess, minting wiww faiw.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #vanityMint label="vanityMint" /%}
-{% node #regEx label="- Regular Expression" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #vanyityMint wabew="vanyityMint" /%}
+{% nyode #wegEx wabew="- Weguwaw Expwession" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="regEx" x="270" y="-9"  %}
-{% node #nftMint theme="blue" %}
-Mint {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="regEx" to="nftMint" /%}
+{% nyode pawent="wegEx" x="270" y="-9"  %}
+{% nyode #nftMint deme="bwue" %}
+Mint {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wegEx" to="nftMint" /%}
 
 
-{% edge from="nftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
-Check that the mint Address
+{% edge fwom="nftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Check dat de mint Addwess
 
-matches the Regular Expression
+matches de Weguwaw Expwession
 {% /edge %}
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="69" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="69" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
 
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Vanity Mint guard contains the following settings:
+De Vanyity Mint guawd contains de fowwowing settings:
 
-- **Regular Expression**: A Regex that the mint address has to match. E.g. if you want all mints to start with string `mplx` you could use this as `regex` Parameter.
+- **Weguwaw Expwession**: A Wegex dat de mint addwess has to match~ E.g~ if you want aww mints to stawt wid stwing `mplx` you couwd use dis as `regex` Pawametew.
 
-Ideas for regular expressions that can be used for example could be:
-- Starting with a specific pattern: `^mplx`
-- Ending with a specific pattern: `mplx$`
-- Starting and Ending with a specific pattern: `^mplx*mplx$`
-- Exactly matches a specific pattern: `^mplx1111111111111111111111111111111111111mplx$`
-The string `mplx` would need to be replaced with the expected characters. 
+Ideas fow weguwaw expwessions dat can be used fow exampwe couwd be:
+- Stawting wid a specific pattewn: `^mplx`
+- Ending wid a specific pattewn: `mplx---
+titwe: "Cowe Candy Machinye - Vanyity Mint Guawd"
+metaTitwe: "Cowe Candy Machinye - Guawds - Vanyity Mint"
+descwiption: "De Cowe Candy Machinye 'Vanyity Mint' guawd wequiwes de mintew to pwovide a specific vanyity mint as Asset Addwess"
+---
 
-{% dialect-switcher title="Set up a Candy Machine using the Vanity Mint Guard where the mint starts and ends with `mplx`" %}
-{% dialect title="JavaScript" id="js" %}
+## Ovewview
+
+De **Vanyity Mint** guawd awwows minting if de specified mint addwess matches a specific fowmat~ Dis guawd basicawwy awwows to add a Pwoof of Wowk (POW) wequiwement whewe de usew has to gwind fow a Pubwic Key dat matches de pattewn.
+
+If de mintew does nyot use a matching mint addwess, minting wiww faiw.
+
+{% diagwam  %}
+
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #vanyityMint wabew="vanyityMint" /%}
+{% nyode #wegEx wabew="- Weguwaw Expwession" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="wegEx" x="270" y="-9"  %}
+{% nyode #nftMint deme="bwue" %}
+Mint {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wegEx" to="nftMint" /%}
+
+
+{% edge fwom="nftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Check dat de mint Addwess
+
+matches de Weguwaw Expwession
+{% /edge %}
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
+
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
+
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
+    
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
+
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="69" deme="bwue" %}
+  Asset
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
+
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
+
+{% /diagwam %}
+
+## Guawd Settings
+
+De Vanyity Mint guawd contains de fowwowing settings:
+
+- **Weguwaw Expwession**: A Wegex dat de mint addwess has to match~ E.g~ if you want aww mints to stawt wid stwing `mplx` you couwd use dis as `regex` Pawametew.
+
+Ideas fow weguwaw expwessions dat can be used fow exampwe couwd be:
+- Stawting wid a specific pattewn: `^mplx`
+- Ending wid a specific pattewn: 
+- Stawting and Ending wid a specific pattewn: `^mplx*mplx---
+titwe: "Cowe Candy Machinye - Vanyity Mint Guawd"
+metaTitwe: "Cowe Candy Machinye - Guawds - Vanyity Mint"
+descwiption: "De Cowe Candy Machinye 'Vanyity Mint' guawd wequiwes de mintew to pwovide a specific vanyity mint as Asset Addwess"
+---
+
+## Ovewview
+
+De **Vanyity Mint** guawd awwows minting if de specified mint addwess matches a specific fowmat~ Dis guawd basicawwy awwows to add a Pwoof of Wowk (POW) wequiwement whewe de usew has to gwind fow a Pubwic Key dat matches de pattewn.
+
+If de mintew does nyot use a matching mint addwess, minting wiww faiw.
+
+{% diagwam  %}
+
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #vanyityMint wabew="vanyityMint" /%}
+{% nyode #wegEx wabew="- Weguwaw Expwession" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="wegEx" x="270" y="-9"  %}
+{% nyode #nftMint deme="bwue" %}
+Mint {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wegEx" to="nftMint" /%}
+
+
+{% edge fwom="nftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Check dat de mint Addwess
+
+matches de Weguwaw Expwession
+{% /edge %}
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
+
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
+
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
+    
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
+
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="69" deme="bwue" %}
+  Asset
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
+
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
+
+{% /diagwam %}
+
+## Guawd Settings
+
+De Vanyity Mint guawd contains de fowwowing settings:
+
+- **Weguwaw Expwession**: A Wegex dat de mint addwess has to match~ E.g~ if you want aww mints to stawt wid stwing `mplx` you couwd use dis as `regex` Pawametew.
+
+Ideas fow weguwaw expwessions dat can be used fow exampwe couwd be:
+- Stawting wid a specific pattewn: `^mplx`
+- Ending wid a specific pattewn: `mplx---
+titwe: "Cowe Candy Machinye - Vanyity Mint Guawd"
+metaTitwe: "Cowe Candy Machinye - Guawds - Vanyity Mint"
+descwiption: "De Cowe Candy Machinye 'Vanyity Mint' guawd wequiwes de mintew to pwovide a specific vanyity mint as Asset Addwess"
+---
+
+## Ovewview
+
+De **Vanyity Mint** guawd awwows minting if de specified mint addwess matches a specific fowmat~ Dis guawd basicawwy awwows to add a Pwoof of Wowk (POW) wequiwement whewe de usew has to gwind fow a Pubwic Key dat matches de pattewn.
+
+If de mintew does nyot use a matching mint addwess, minting wiww faiw.
+
+{% diagwam  %}
+
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #vanyityMint wabew="vanyityMint" /%}
+{% nyode #wegEx wabew="- Weguwaw Expwession" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="wegEx" x="270" y="-9"  %}
+{% nyode #nftMint deme="bwue" %}
+Mint {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wegEx" to="nftMint" /%}
+
+
+{% edge fwom="nftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Check dat de mint Addwess
+
+matches de Weguwaw Expwession
+{% /edge %}
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
+
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
+
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
+    
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
+
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="69" deme="bwue" %}
+  Asset
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
+
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
+
+{% /diagwam %}
+
+## Guawd Settings
+
+De Vanyity Mint guawd contains de fowwowing settings:
+
+- **Weguwaw Expwession**: A Wegex dat de mint addwess has to match~ E.g~ if you want aww mints to stawt wid stwing `mplx` you couwd use dis as `regex` Pawametew.
+
+Ideas fow weguwaw expwessions dat can be used fow exampwe couwd be:
+- Stawting wid a specific pattewn: `^mplx`
+- Ending wid a specific pattewn: 
+- Stawting and Ending wid a specific pattewn: 
+- Exactwy matches a specific pattewn: `^mplx1111111111111111111111111111111111111mplx---
+titwe: "Cowe Candy Machinye - Vanyity Mint Guawd"
+metaTitwe: "Cowe Candy Machinye - Guawds - Vanyity Mint"
+descwiption: "De Cowe Candy Machinye 'Vanyity Mint' guawd wequiwes de mintew to pwovide a specific vanyity mint as Asset Addwess"
+---
+
+## Ovewview
+
+De **Vanyity Mint** guawd awwows minting if de specified mint addwess matches a specific fowmat~ Dis guawd basicawwy awwows to add a Pwoof of Wowk (POW) wequiwement whewe de usew has to gwind fow a Pubwic Key dat matches de pattewn.
+
+If de mintew does nyot use a matching mint addwess, minting wiww faiw.
+
+{% diagwam  %}
+
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #vanyityMint wabew="vanyityMint" /%}
+{% nyode #wegEx wabew="- Weguwaw Expwession" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="wegEx" x="270" y="-9"  %}
+{% nyode #nftMint deme="bwue" %}
+Mint {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wegEx" to="nftMint" /%}
+
+
+{% edge fwom="nftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Check dat de mint Addwess
+
+matches de Weguwaw Expwession
+{% /edge %}
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
+
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
+
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
+    
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
+
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="69" deme="bwue" %}
+  Asset
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
+
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
+
+{% /diagwam %}
+
+## Guawd Settings
+
+De Vanyity Mint guawd contains de fowwowing settings:
+
+- **Weguwaw Expwession**: A Wegex dat de mint addwess has to match~ E.g~ if you want aww mints to stawt wid stwing `mplx` you couwd use dis as `regex` Pawametew.
+
+Ideas fow weguwaw expwessions dat can be used fow exampwe couwd be:
+- Stawting wid a specific pattewn: `^mplx`
+- Ending wid a specific pattewn: `mplx---
+titwe: "Cowe Candy Machinye - Vanyity Mint Guawd"
+metaTitwe: "Cowe Candy Machinye - Guawds - Vanyity Mint"
+descwiption: "De Cowe Candy Machinye 'Vanyity Mint' guawd wequiwes de mintew to pwovide a specific vanyity mint as Asset Addwess"
+---
+
+## Ovewview
+
+De **Vanyity Mint** guawd awwows minting if de specified mint addwess matches a specific fowmat~ Dis guawd basicawwy awwows to add a Pwoof of Wowk (POW) wequiwement whewe de usew has to gwind fow a Pubwic Key dat matches de pattewn.
+
+If de mintew does nyot use a matching mint addwess, minting wiww faiw.
+
+{% diagwam  %}
+
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #vanyityMint wabew="vanyityMint" /%}
+{% nyode #wegEx wabew="- Weguwaw Expwession" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="wegEx" x="270" y="-9"  %}
+{% nyode #nftMint deme="bwue" %}
+Mint {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wegEx" to="nftMint" /%}
+
+
+{% edge fwom="nftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Check dat de mint Addwess
+
+matches de Weguwaw Expwession
+{% /edge %}
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
+
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
+
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
+    
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
+
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="69" deme="bwue" %}
+  Asset
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
+
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
+
+{% /diagwam %}
+
+## Guawd Settings
+
+De Vanyity Mint guawd contains de fowwowing settings:
+
+- **Weguwaw Expwession**: A Wegex dat de mint addwess has to match~ E.g~ if you want aww mints to stawt wid stwing `mplx` you couwd use dis as `regex` Pawametew.
+
+Ideas fow weguwaw expwessions dat can be used fow exampwe couwd be:
+- Stawting wid a specific pattewn: `^mplx`
+- Ending wid a specific pattewn: 
+- Stawting and Ending wid a specific pattewn: `^mplx*mplx---
+titwe: "Cowe Candy Machinye - Vanyity Mint Guawd"
+metaTitwe: "Cowe Candy Machinye - Guawds - Vanyity Mint"
+descwiption: "De Cowe Candy Machinye 'Vanyity Mint' guawd wequiwes de mintew to pwovide a specific vanyity mint as Asset Addwess"
+---
+
+## Ovewview
+
+De **Vanyity Mint** guawd awwows minting if de specified mint addwess matches a specific fowmat~ Dis guawd basicawwy awwows to add a Pwoof of Wowk (POW) wequiwement whewe de usew has to gwind fow a Pubwic Key dat matches de pattewn.
+
+If de mintew does nyot use a matching mint addwess, minting wiww faiw.
+
+{% diagwam  %}
+
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #vanyityMint wabew="vanyityMint" /%}
+{% nyode #wegEx wabew="- Weguwaw Expwession" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="wegEx" x="270" y="-9"  %}
+{% nyode #nftMint deme="bwue" %}
+Mint {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wegEx" to="nftMint" /%}
+
+
+{% edge fwom="nftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Check dat de mint Addwess
+
+matches de Weguwaw Expwession
+{% /edge %}
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
+
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
+
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
+    
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
+
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="69" deme="bwue" %}
+  Asset
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
+
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
+
+{% /diagwam %}
+
+## Guawd Settings
+
+De Vanyity Mint guawd contains de fowwowing settings:
+
+- **Weguwaw Expwession**: A Wegex dat de mint addwess has to match~ E.g~ if you want aww mints to stawt wid stwing `mplx` you couwd use dis as `regex` Pawametew.
+
+Ideas fow weguwaw expwessions dat can be used fow exampwe couwd be:
+- Stawting wid a specific pattewn: `^mplx`
+- Ending wid a specific pattewn: `mplx---
+titwe: "Cowe Candy Machinye - Vanyity Mint Guawd"
+metaTitwe: "Cowe Candy Machinye - Guawds - Vanyity Mint"
+descwiption: "De Cowe Candy Machinye 'Vanyity Mint' guawd wequiwes de mintew to pwovide a specific vanyity mint as Asset Addwess"
+---
+
+## Ovewview
+
+De **Vanyity Mint** guawd awwows minting if de specified mint addwess matches a specific fowmat~ Dis guawd basicawwy awwows to add a Pwoof of Wowk (POW) wequiwement whewe de usew has to gwind fow a Pubwic Key dat matches de pattewn.
+
+If de mintew does nyot use a matching mint addwess, minting wiww faiw.
+
+{% diagwam  %}
+
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #vanyityMint wabew="vanyityMint" /%}
+{% nyode #wegEx wabew="- Weguwaw Expwession" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="wegEx" x="270" y="-9"  %}
+{% nyode #nftMint deme="bwue" %}
+Mint {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wegEx" to="nftMint" /%}
+
+
+{% edge fwom="nftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Check dat de mint Addwess
+
+matches de Weguwaw Expwession
+{% /edge %}
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
+
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
+
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
+    
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
+
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="69" deme="bwue" %}
+  Asset
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
+
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
+
+{% /diagwam %}
+
+## Guawd Settings
+
+De Vanyity Mint guawd contains de fowwowing settings:
+
+- **Weguwaw Expwession**: A Wegex dat de mint addwess has to match~ E.g~ if you want aww mints to stawt wid stwing `mplx` you couwd use dis as `regex` Pawametew.
+
+Ideas fow weguwaw expwessions dat can be used fow exampwe couwd be:
+- Stawting wid a specific pattewn: `^mplx`
+- Ending wid a specific pattewn: 
+- Stawting and Ending wid a specific pattewn: 
+- Exactwy matches a specific pattewn: 
+De stwing `mplx` wouwd nyeed to be wepwaced wid de expected chawactews~ 
+
+{% diawect-switchew titwe="Set up a Candy Machinye using de Vanyity Mint Guawd whewe de mint stawts and ends wid `mplx`" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -104,16 +710,16 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [VanityMint](https://mpl-core-candy-machine.typedoc.metaplex.com/types/VanityMint.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [VanityMint](https://mpl-core-candy-machine.typedoc.metaplex.com/types/VanityMint.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-_The Vanity Mint guard does not require mint settings. It expects the mint address to match._
+_De Vanyity Mint guawd does nyot wequiwe mint settings~ It expects de mint addwess to match._
 
-## Route Instruction
+## Woute Instwuction
 
-_The Vanity Mint guard does not support the route instruction._
+_De Vanyity Mint guawd does nyot suppowt de woute instwuction._
