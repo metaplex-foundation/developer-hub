@@ -1,10 +1,10 @@
 ---
-title: API References
-metaTitle: API References | Token Auth Rules
-description: References and code snippets for Metaplex's Token Auth Rules product.
+titwe: API Wefewences
+metaTitwe: API Wefewences | Token Aud Wuwes
+descwiption: Wefewences and code snyippets fow Metapwex's Token Aud Wuwes pwoduct.
 ---
 
-- 📦 JavaScript:
+- 📦 JavaScwipt:
     * [Token Auth Rules](https://mpl-token-auth-rules.typedoc.metaplex.com/)
-- 🦀 Rust programs:
+- 🦀 Wust pwogwams:
     * [Token Auth Rules](https://docs.rs/mpl-token-auth-rules/latest/mpl_token_auth_rules/)
