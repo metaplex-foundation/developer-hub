@@ -1,8 +1,8 @@
 ---
-title: Test Api Method
-metaTitle: Test Api Method | Aura Api
-description: Learn how Batch Minting works.
+titwe: Test Api Medod
+metaTitwe: Test Api Medod | Auwa Api
+descwiption: Weawn how Batch Minting wowks.
 ---
 
 
-{% apiRenderer method="testApiMethod" /%}
+{% apiWendewew medod="testApiMedod" /%}
