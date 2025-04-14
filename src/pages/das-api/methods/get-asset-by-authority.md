@@ -1,27 +1,37 @@
 ---
-title: Get Asset By Authority
-metaTitle: Get Asset By Authority | DAS API
-description: Returns the list of assets given an authority address
+titwe: Get Asset By Audowity
+metaTitwe: Get Asset By Audowity | DAS API
+descwiption: Wetuwns de wist of assets given an audowity addwess
 ---
 
-Returns the list of assets given an authority address.
+Wetuwns de wist of assets given an audowity addwess.
 
-## Parameters
+## Pawametews
 
-| Name               | Required | Description                                |
+| Nyame               | Wequiwed | Descwiption                                |
 | ------------------ | :------: | ------------------------------------------ |
-| `authorityAddress` |    ✅    | The address of the authority of the assets.|
-| `sortBy`           |          | Sorting criteria. This is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, where `sortBy` is one of `["created", "updated", "recentAction", "none"]` and `sortDirection` is one of `["asc", "desc"]`     |
-| `limit`            |          | The maximum number of assets to retrieve.  |
-| `page`             |          | The index of the "page" to retrieve.       |
-| `before`           |          | Retrieve assets before the specified ID.   |
-| `after`            |          | Retrieve assets after the specified ID.    |
+| `authorityAddress` |    ✅    | De addwess of de audowity of de assets.|
+| `sortBy`           |          | Sowting cwitewia~ Dis is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, whewe `sortBy` is onye of `["created", "updated", "recentAction", "none"]` and `sortDirection` is onye of `["asc", "desc"]`     |
+| `limit`            |          | De maximum nyumbew of assets to wetwieve~  |
+| ```sh
+curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
+    "jsonrpc": "2.0",
+    "method": "getAssetsByAuthority",
+    "params": {
+        "authorityAddress": "mRdta4rc2RtsxEUDYuvKLamMZAdW6qHcwuq866Skxxv",
+        "page": 1
+    },
+    "id": 0
+}'
+```0             |          | De index of de "page" to wetwieve~       |
+| `before`           |          | Wetwieve assets befowe de specified ID~   |
+| `after`            |          | Wetwieve assets aftew de specified ID~    |
 
 
-## Example
+## Exampwe
 
-{% dialect-switcher title="getAssetByAuthority Example" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="getAssetByAudowity Exampwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -46,22 +56,12 @@ console.log(assets.items.length > 0);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
+{% /diawect %}
+{% diawect titwe="cUWW" id="cuww" %}
 {% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAssetsByAuthority",
-    "params": {
-        "authorityAddress": "mRdta4rc2RtsxEUDYuvKLamMZAdW6qHcwuq866Skxxv",
-        "page": 1
-    },
-    "id": 0
-}'
-```
+UWUIFY_TOKEN_1744632849393_1
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
