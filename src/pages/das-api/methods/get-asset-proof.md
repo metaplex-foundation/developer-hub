@@ -2,6 +2,7 @@
 title: Get Asset Proof
 metaTitle: Get Asset Proof | DAS API
 description: Returns the merkle tree proof information for a compressed asset
+tableOfContents: false
 ---
 
 Returns the merkle tree proof information for a compressed asset.
@@ -12,10 +13,8 @@ Returns the merkle tree proof information for a compressed asset.
 | --------------- | :------: | ------------------------------------------ |
 | `id`            |    ✅    | The id of the asset.                       |
 
-## Example
+## UMI w/ DAS SDK
 
-{% dialect-switcher title="getAssetProof Example" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```js
@@ -31,21 +30,8 @@ console.log(proof);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
-{% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAssetProof",
-    "params": [
-      "Ez6ezCMkRaUkWS5v6WVcP7uuCWiKadr3W2dHFkoZmteW"
-    ],
-    "id": 0
-}'
-```
 
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+## Playground
+
+{% apiRenderer method="getAssetProof" /%}

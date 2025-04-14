@@ -21,7 +21,7 @@ export function usePage(pageProps) {
     activeHero,
     activeSection,
     isIndexPage: product?.path ? pathname === `/${product.path}` : false,
-    tableOfContents: pageProps.markdoc?.content
+    tableOfContents: pageProps.markdoc?.frontmatter.tableOfContents != false && pageProps.markdoc?.content
       ? parseTableOfContents(pageProps.markdoc.content)
       : [],
   }

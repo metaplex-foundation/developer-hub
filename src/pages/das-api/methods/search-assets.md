@@ -2,6 +2,7 @@
 title: Search Assets
 metaTitle: Search Assets | DAS API
 description: Return the list of assets given a search criteria
+tableOfContents: false
 ---
 
 Return the list of assets given a search criteria.
@@ -36,10 +37,8 @@ Return the list of assets given a search criteria.
 | `after`             |          | Retrieve assets after the specified ID.    |
 | `jsonUri`           |          | The value for the JSON URI.  |
 
-## Example
+## UMI w/ DAS SDK
 
-{% dialect-switcher title="searchAssets Example" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```js
@@ -55,25 +54,8 @@ const assets = await umi.rpc.searchAssets({
 });
 console.log(assets.items.length == 1);
 ```
-
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
-{% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "searchAssets",
-    "params": {
-        "ownerAddress": "N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw",
-        "jsonUri": "https://arweave.net/c9aGs5fOk7gD4wWnSvmzeqgtfxAGRgtI1jYzvl8-IVs/chiaki-violet-azure-common.json",
-        "page": 1
-    },
-    "id": 0
-}'
-```
+## Playground
 
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% apiRenderer method="searchAssets" /%}

@@ -33,6 +33,19 @@ const redirectRules = {
     'guides/mpl-404-hyrbid-ui-template':
       '/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
   },
+  '/aura': {
+    '/api/v1/das/get-asset': '/das-api/methods/get-asset',
+    '/api/v1/das/get-asset-batch': '/das-api/methods/get-assets',
+    '/api/v1/das/get-asset-proof': '/das-api/methods/get-asset-proof',
+    '/api/v1/das/get-asset-proof-batch': '/das-api/methods/get-asset-proofs',
+    '/api/v1/das/get-assets-by-owner': '/das-api/methods/get-assets-by-owner',
+    '/api/v1/das/get-assets-by-authority': '/das-api/methods/get-assets-by-authority',
+    '/api/v1/das/get-assets-by-creator': '/das-api/methods/get-assets-by-creator',
+    '/api/v1/das/get-assets-by-group': '/das-api/methods/get-assets-by-group',
+    '/api/v1/das/get-signatures-for-asset': '/das-api/methods/get-asset-signatures',
+    '/api/v1/das/get-token-accounts': '/das-api/methods/get-token-accounts',
+    '/api/v1/das/search-assets': '/das-api/methods/search-assets',
+  },
 }
 
 export function middleware(request) {
@@ -66,5 +79,6 @@ export const config = {
     '/guides/javascript/how-to-create-an-spl-token-on-solana',
     '/core-candy-machine/:path*',
     '/bubblegum/:path*',
+    '/aura/:path*',
   ],
 }

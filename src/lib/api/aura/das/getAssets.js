@@ -1,6 +1,6 @@
-const getAssetBatch = {
+const getAssets = {
   description: 'Get an asset by its ID',
-  method: 'getAssetBatch',
+  method: 'getAssets',
   params: [
     {
       type: 'array',
@@ -386,4 +386,4 @@ const getAssetBatch = {
   }
 }
 
-export default getAssetBatch
+export default getAssets

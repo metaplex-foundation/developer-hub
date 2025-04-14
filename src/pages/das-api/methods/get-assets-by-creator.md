@@ -1,7 +1,8 @@
 ---
-title: Get Asset By Creator
-metaTitle: Get Asset By Creator | DAS API
+title: Get Assets By Creator
+metaTitle: Get Assets By Creator | DAS API
 description: Returns the list of assets given a creator address
+tableOfContents: false
 ---
 
 Return the list of assets given a creator address.
@@ -23,10 +24,8 @@ We recommend to fetch data with `onlyVerified: true` to make sure the asset actu
 | `after`            |          | Retrieve assets after the specified ID.    |
 
 
-## Example
+## UMI w/ DAS SDK
 
-{% dialect-switcher title="getAssetByCreator Example" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```js
@@ -46,24 +45,7 @@ console.log(assets.items.length > 0);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
-{% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAssetsByCreator",
-    "params": {
-        "creatorAddress": "D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3",
-        "onlyVerified": false,
-        "limit": 10,
-        "page": 1
-    },
-    "id": 0
-}'
-```
+## Playground
 
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% apiRenderer method="getAssetsByCreator" /%}
