@@ -1,36 +1,36 @@
 ---
-title: How to Send and Transfer SPL Tokens on Solana
-metaTitle: How to Send and Transfer SPL Tokens on Solana| Guides
-description: Learn how to send and transfer SPL Tokens via javascript on the Solana blockchain with Metaplex packages.
-# remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
+titwe: How to Send and Twansfew SPW Tokens on Sowanya
+metaTitwe: How to Send and Twansfew SPW Tokens on Sowanya| Guides
+descwiption: Weawn how to send and twansfew SPW Tokens via javascwipt on de Sowanya bwockchain wid Metapwex packages.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '06-16-2024'
 updated: '06-24-2024'
 ---
 
-This guide will show you how to build out a Javascript function to send and transfer SPL tokens on the Solana blockchain utilizing the Metaplex Umi client wrapper and MPL Toolbox packages.
+Dis guide wiww show you how to buiwd out a Javascwipt function to send and twansfew SPW tokens on de Sowanya bwockchain utiwizing de Metapwex Umi cwient wwappew and MPW Toowbox packages.
 
-For this guide you will need to have some SPL Tokens in your wallet to transfer so if you do not have any in your wallet you will need to get someone to transfer some to you or you can follow our other [how to create an SPL Token guide](/guides/javascript/how-to-create-an-spl-token-on-solana).
+Fow dis guide you wiww nyeed to have some SPW Tokens in youw wawwet to twansfew so if you do nyot have any in youw wawwet you wiww nyeed to get someonye to twansfew some to you ow you can fowwow ouw odew [how to create an SPL Token guide](/guides/javascript/how-to-create-an-spl-token-on-solana).
 
-## Prerequisite
+## Pwewequisite
 
-- Code Editor of your choice (recommended Visual Studio Code)
-- Node 18.x.x or above.
+- Code Editow of youw choice (wecommended Visuaw Studio Code)
+- Nyode 18.x.x ow abuv.
 
-## Initial Setup
+## Inyitiaw Setup
 
-### Initializing
+### Inyitiawizing
 
-Start by initializing a new project (optional) with the package manager of your choice (npm, yarn, pnpm, bun) and fill in required details when prompted.
+Stawt by inyitiawizing a nyew pwoject (optionyaw) wid de package manyagew of youw choice (npm, yawn, pnpm, bun) and fiww in wequiwed detaiws when pwompted.
 
 ```js
 npm init
 ```
 
-### Required Packages
+### Wequiwed Packages
 
-Install the required packages for this guide.
+Instaww de wequiwed packages fow dis guide.
 
-{% packagesUsed packages=["umi", "umiDefaults" ,"toolbox"] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefauwts" ,"toowbox"] type="npm" /%}
 
 ```js
 npm i @metaplex-foundation/umi
@@ -44,9 +44,9 @@ npm i @metaplex-foundation/umi-bundle-defaults
 npm i @metaplex-foundation/mpl-toolbox;
 ```
 
-### Imports and Wrapper Function
+### Impowts and Wwappew Function
 
-Here we will define all needed imports for this particular guide and create a wrapper function where all our code will execute.
+Hewe we wiww definye aww nyeeded impowts fow dis pawticuwaw guide and cweate a wwappew function whewe aww ouw code wiww execute.
 
 ```ts
 import {
