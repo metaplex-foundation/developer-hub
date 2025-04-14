@@ -289,9 +289,9 @@ You'll need to pass in the original PDA seeds and bump so that the PDA can be re
 let signers = &[&[b"escrow", ctx.accounts.asset.key(), &[ctx.bumps.pda_escrow]]]
 
 CreateV1CpiBuilder::new()
-        .asset(context.accounts,asset)
+        .asset(context.accounts.asset)
         ...
-        .invoke(signers)
+        .invoke_signed(signers)
 
 ```
 
