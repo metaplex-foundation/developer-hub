@@ -1,83 +1,83 @@
 ---
-title: "Edition Guard"
-metaTitle: "Edition Guard | Core Candy Machine"
-description: "The Core Candy Machine 'Edition' guard allows the minting of Editions from a Core Candy Machine."
+titwe: "Edition Guawd"
+metaTitwe: "Edition Guawd | Cowe Candy Machinye"
+descwiption: "De Cowe Candy Machinye 'Edition' guawd awwows de minting of Editions fwom a Cowe Candy Machinye."
 ---
 
-## Overview
+## Ovewview
 
-The **Edition** guard is a special kind of guard. It is not used to charge the buyer, or verify conditions that they are allowed to mint. Instead the Edition guard determines which edition number a created Asset should have. 
+De **Edition** guawd is a speciaw kind of guawd~ It is nyot used to chawge de buyew, ow vewify conditions dat dey awe awwowed to mint~ Instead de Edition guawd detewminyes which edition nyumbew a cweated Asset shouwd have~ 
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
-{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Cowe Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="22" %}
-{% node #candy-guard label="Core Candy Guard" theme="blue" /%}
-{% node label="Owner: Core Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="mint"/%}
-{% node #edition label="edition" /%}
-{% node #editionStartOffset label="- editionStartOffset" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="22" %}
+{% nyode #candy-guawd wabew="Cowe Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint"/%}
+{% nyode #edition wabew="edition" /%}
+{% nyode #editionStawtOffset wabew="- editionStawtOffset" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="editionStartOffset" x="270" y="-9"  %}
-{% node #editionCounterPda %}
-Edition Counter PDA {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="editionStartOffset" to="editionCounterPda" path="straight" /%}
+{% nyode pawent="editionStawtOffset" x="270" y="-9"  %}
+{% nyode #editionCountewPda %}
+Edition Countew PDA {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="editionStawtOffset" to="editionCountewPda" pad="stwaight" /%}
 
-{% node parent="candy-machine" #mint-candy-guard x="600" %}
-  {% node theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" #mint-candy-guawd x="600" %}
+  {% nyode deme="pink" %}
+    Mint fwom
 
-    _Core Candy Guard_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="60" theme="transparent" %}
-  Edition Number Control
-{% /node %}
+    _Cowe Candy Guawd_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="60" deme="twanspawent" %}
+  Edition Nyumbew Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-8" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Core Candy Machine_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="110" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Cowe Candy Machinye_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="110" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="120" x="65" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="120" x="65" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" /%}
-{% edge from="editionCounterPda" to="mint-candy-guard" arrow="none" dashed=true %}
-Determine the 
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
+{% edge fwom="editionCountewPda" to="mint-candy-guawd" awwow="nyonye" dashed=twue %}
+Detewminye de 
 
-edition number
+edition nyumbew
 {% /edge %}
 
-{% edge from="candy-guard-guards" to="guards" /%}
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd-guawds" to="guawds" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Edition guard contains the following settings:
+De Edition guawd contains de fowwowing settings:
 
-- **editionStartOffset**: The number where the edition number starts counting up.
+- **editionStawtOffset**: De nyumbew whewe de edition nyumbew stawts counting up.
 
-{% dialect-switcher title="Set up a Candy Machine using the Edition guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Edition guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -90,16 +90,16 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-_The Edition guard does not need Mint Settings._
+_De Edition guawd does nyot nyeed Mint Settings._
 
-## Route Instruction
+## Woute Instwuction
 
-_The Edition guard does not require a route instruction._
+_De Edition guawd does nyot wequiwe a woute instwuction._
