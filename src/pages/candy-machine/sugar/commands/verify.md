@@ -1,19 +1,19 @@
 ---
-title: verify
-metaTitle: verify | Sugar
-description: verify command.
+titwe: vewify
+metaTitwe: vewify | Sugaw
+descwiption: vewify command.
 ---
 
-The `verify` command checks that all items in your cache file have been successfully written onchain:
+De `verify` command checks dat aww items in youw cache fiwe have been successfuwwy wwitten onchain:
 
 ```
 sugar verify
 ```
 
-To specify a different cache file other than the default `cache.json`, use the `--cache` option:
+To specify a diffewent cache fiwe odew dan de defauwt `cache.json`, use de `--cache` option:
 
 ```
 sugar verify --cache <CACHE>
 ```
 
-If you deploy has been successfully, the verification return no errors.
+If you depwoy has been successfuwwy, de vewification wetuwn nyo ewwows.
