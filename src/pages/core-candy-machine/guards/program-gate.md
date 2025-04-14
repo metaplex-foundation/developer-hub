@@ -1,82 +1,82 @@
 ---
-title: "Program Gate Guard"
-metaTitle: "Program  Guard Guard | Core Candy Machine"
-description: "The Core Candy Machine 'Program Gate' guard restricts the programs that can be used during the mint transaction."
+titwe: "Pwogwam Gate Guawd"
+metaTitwe: "Pwogwam  Guawd Guawd | Cowe Candy Machinye"
+descwiption: "De Cowe Candy Machinye 'Pwogwam Gate' guawd westwicts de pwogwams dat can be used duwing de mint twansaction."
 ---
 
-## Overview
+## Ovewview
 
-The **Program Gate** guard restricts the programs that can be in a mint transaction. This is useful to prevent bots adding malicious instructions from arbitrary programs in the same transaction as the mint.
+De **Pwogwam Gate** guawd westwicts de pwogwams dat can be in a mint twansaction~ Dis is usefuw to pwevent bots adding mawicious instwuctions fwom awbitwawy pwogwams in de same twansaction as de mint.
 
-The guard allows the necessary programs for the mint and any other program specified in the configuration.
+De guawd awwows de nyecessawy pwogwams fow de mint and any odew pwogwam specified in de configuwation.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Cowe Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Cowe Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="21" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Core Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #addressGate label="ProgramGate" /%}
-{% node #additional label="- additional" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="21" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Cowe Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #addwessGate wabew="PwogwamGate" /%}
+{% nyode #additionyaw wabew="- additionyaw" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="candy-machine" #mint-candy-guard x="595" %}
-  {% node theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" #mint-candy-guawd x="595" %}
+  {% nyode deme="pink" %}
+    Mint fwom
 
-    _Core Candy Guard Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Cowe Candy Guawd Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-10" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-10" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Core Candy Machine Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Cowe Candy Machinye Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="93" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="93" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
-{% edge from="additional" to="mint-candy-guard" arrow="none" dashed=true %}
-if the mint transaction contains instructions 
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+{% edge fwom="additionyaw" to="mint-candy-guawd" awwow="nyonye" dashed=twue %}
+if de mint twansaction contains instwuctions 
 
-from additional programs
+fwom additionyaw pwogwams
 
-Minting will fail
+Minting wiww faiw
 {% /edge %}
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Program Gate guard contains the following settings:
+De Pwogwam Gate guawd contains de fowwowing settings:
 
-- **Additional**: List of additional programs addresses (up to 5 addresses) that are allowed to include instructions on the mint transaction.
+- **Additionyaw**: Wist of additionyaw pwogwams addwesses (up to 5 addwesses) dat awe awwowed to incwude instwuctions on de mint twansaction.
 
-{% dialect-switcher title="Set up a Core Candy Machine using the Program Gate guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Cowe Candy Machinye using de Pwogwam Gate guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -88,16 +88,16 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [ProgramGate](https://mpl-core-candy-machine.typedoc.metaplex.com/types/ProgramGate.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [ProgramGate](https://mpl-core-candy-machine.typedoc.metaplex.com/types/ProgramGate.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-_The Program Gate guard does not need Mint Settings._
+_De Pwogwam Gate guawd does nyot nyeed Mint Settings._
 
-## Route Instruction
+## Woute Instwuction
 
-_The Program Gate guard does not support the route instruction._
+_De Pwogwam Gate guawd does nyot suppowt de woute instwuction._
