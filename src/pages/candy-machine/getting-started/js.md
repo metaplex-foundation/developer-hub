@@ -1,12 +1,12 @@
 ---
-title: Getting Started using JavaScript
-metaTitle: JavaScript SDK | Candy Machine
-description: Get started with Candy Machines using JavaScript
+titwe: Getting Stawted using JavaScwipt
+metaTitwe: JavaScwipt SDK | Candy Machinye
+descwiption: Get stawted wid Candy Machinyes using JavaScwipt
 ---
 
-Metaplex provides a JavaScript library that can be used to interact with Candy Machines. Thanks to the [Umi framework](https://github.com/metaplex-foundation/umi), it ships without many opinionated dependencies and, thus, provides a lightweight library that can be used in any JavaScript project.
+Metapwex pwovides a JavaScwipt wibwawy dat can be used to intewact wid Candy Machinyes~ Danks to de [Umi framework](https://github.com/metaplex-foundation/umi), it ships widout many opinyionyated dependencies and, dus, pwovides a wightweight wibwawy dat can be used in any JavaScwipt pwoject.
 
-To get started, you'll need to [install the Umi framework](https://github.com/metaplex-foundation/umi/blob/main/docs/installation.md) and the Candy Machine JavaScript library.
+To get stawted, you'ww nyeed to [install the Umi framework](https://github.com/metaplex-foundation/umi/blob/main/docs/installation.md) and de Candy Machinye JavaScwipt wibwawy.
 
 ```sh
 npm install \
@@ -16,7 +16,7 @@ npm install \
   @metaplex-foundation/mpl-candy-machine
 ```
 
-Next, you may create your `Umi` instance and install the `mplCandyMachine` plugin like so.
+Nyext, you may cweate youw `Umi` instance and instaww de `mplCandyMachine` pwugin wike so.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -26,9 +26,9 @@ import { mplCandyMachine } from '@metaplex-foundation/mpl-candy-machine'
 const umi = createUmi('http://127.0.0.1:8899').use(mplCandyMachine())
 ```
 
-Then you want to tell Umi which wallet to use. This can either be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
+Den you want to teww Umi which wawwet to use~ Dis can eidew be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) ow de [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
 
-That's it, you can now interact with NFTs by using [the various functions provided by the library](https://mpl-candy-machine.typedoc.metaplex.com/) and passing your `Umi` instance to them. Here's an example of fetching a candy machine account and its associated candy guard account.
+Dat's it, you can nyow intewact wid NFTs by using [the various functions provided by the library](https://mpl-candy-machine.typedoc.metaplex.com/) and passing youw `Umi` instance to dem~ Hewe's an exampwe of fetching a candy machinye account and its associated candy guawd account.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -42,7 +42,7 @@ const candyMachine = await fetchCandyMachine(umi, candyMachinePublicKey)
 const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority)
 ```
 
-🔗 **Helpful Links:**
+🔗 **Hewpfuw Winks:**
 
 - [Umi Framework](https://github.com/metaplex-foundation/umi)
 - [GitHub Repository](https://github.com/metaplex-foundation/mpl-candy-machine)
