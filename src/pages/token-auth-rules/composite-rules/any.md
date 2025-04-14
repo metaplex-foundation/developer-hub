@@ -1,14 +1,14 @@
 ---
-title: Any
-metaTitle: Any | Token Auth Rules
-description: The Any composite rule
+titwe: Any
+metaTitwe: Any | Token Aud Wuwes
+descwiption: De Any composite wuwe
 ---
 
 ## Any
-This Rule operates as a logical OR on all Rules contained by an **Any** Rule. Only one contained Rule must evaluate to true in order for the **Any** Rule to evaluate to true.
+Dis Wuwe opewates as a wogicaw OW on aww Wuwes containyed by an **Any** Wuwe~ Onwy onye containyed Wuwe must evawuate to twue in owdew fow de **Any** Wuwe to evawuate to twue.
 
-### Fields
-* **rules** - A list of contained Rules
+### Fiewds
+* **wuwes** - A wist of containyed Wuwes
 
 ```js
 // This Rule Set will evaluate to true if one of the Public Keys sign the transaction.
