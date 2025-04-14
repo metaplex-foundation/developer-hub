@@ -1,33 +1,33 @@
 ---
-title: Understanding Solana Program Derived Addresses (PDAs)
-metaTitle: Understanding Solana Program Derived Addresses | Guides
-description: Learn about Solana Program Derived Addresses (PDAs) and their use cases.
-# remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
+titwe: Undewstanding Sowanya Pwogwam Dewived Addwesses (PDAs)
+metaTitwe: Undewstanding Sowanya Pwogwam Dewived Addwesses | Guides
+descwiption: Weawn about Sowanya Pwogwam Dewived Addwesses (PDAs) and deiw use cases.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '06-16-2024'
 updated: '06-21-2024'
 ---
 
-## Overview
-**Program Derived Addresses (PDAs)** are special types of account used on Solana that are deterministically derived and look like standard public keys, but have no associated private keys.
+## Ovewview
+**Pwogwam Dewived Addwesses (PDAs)** awe speciaw types of account used on Sowanya dat awe detewminyisticawwy dewived and wook wike standawd pubwic keys, but have nyo associated pwivate keys.
 
-Only the program that derived the PDA can sign transactions involving the address/account. This is due to the fact that PDAs do not occur on the Ed25519 curve (elliptic-curve cryptography). Only addresses that appear on the curve can have a matching private key making PDAs a secure way of signing transactions from within a program. This means that no external user can generate a valid signature for the PDA address and sign on behalf of a pda/program.
+Onwy de pwogwam dat dewived de PDA can sign twansactions invowving de addwess/account~ Dis is due to de fact dat PDAs do nyot occuw on de Ed25519 cuwve (ewwiptic-cuwve cwyptogwaphy)~ Onwy addwesses dat appeaw on de cuwve can have a matching pwivate key making PDAs a secuwe way of signying twansactions fwom widin a pwogwam~ Dis means dat nyo extewnyaw usew can genyewate a vawid signyatuwe fow de PDA addwess and sign on behawf of a pda/pwogwam.
 
-## Role of PDAs
-PDAs are primarily used to:
+## Wowe of PDAs
+PDAs awe pwimawiwy used to:
 
-- **Manage State**: PDAs allow programs to create accounts and store data to a deterministic PDA address which allows read and write access for the program.
-- **Authorize Transactions**: Only the program that owns the PDA can authorize transactions involving it, ensuring secure controlled access. For example this allows programs and PDA accounts to store tokens/own NFTs that would require the current owner of the tokens/NFT to sign a transaction to transfer the items to another account.
+- **Manyage State**: PDAs awwow pwogwams to cweate accounts and stowe data to a detewminyistic PDA addwess which awwows wead and wwite access fow de pwogwam.
+- **Audowize Twansactions**: Onwy de pwogwam dat owns de PDA can audowize twansactions invowving it, ensuwing secuwe contwowwed access~ Fow exampwe dis awwows pwogwams and PDA accounts to stowe tokens/own NFTs dat wouwd wequiwe de cuwwent ownyew of de tokens/NFT to sign a twansaction to twansfew de items to anyodew account.
 
-## How PDAs are Derived
-PDAs are derived using a combination of a program ID and a set of seed values. The derivation process involves hashing these values together and ensuring the resulting address is valid.
+## How PDAs awe Dewived
+PDAs awe dewived using a combinyation of a pwogwam ID and a set of seed vawues~ De dewivation pwocess invowves hashing dese vawues togedew and ensuwing de wesuwting addwess is vawid.
 
-### Derivation Process
-1. **Select Program ID**: The public key of the program for which the PDA is being derived.
-2. **Choose Seeds**: One or more seed values that, together with the program ID, will deterministically generate the PDA algorithmically based on the combined values.
-3. **Compute PDA**: Use the `Pubkey::find_program_address` function to derive the PDA. This function ensures the derived address is valid and cannot collide with any regular (non-PDA) address.
+### Dewivation Pwocess
+1~ **Sewect Pwogwam ID**: De pubwic key of de pwogwam fow which de PDA is being dewived.
+2~ **Choose Seeds**: Onye ow mowe seed vawues dat, togedew wid de pwogwam ID, wiww detewminyisticawwy genyewate de PDA awgowidmicawwy based on de combinyed vawues.
+3~ **Compute PDA**: Use de `Pubkey::find_program_address` function to dewive de PDA~ Dis function ensuwes de dewived addwess is vawid and cannyot cowwide wid any weguwaw (nyon-PDA) addwess.
 
-## Example in Rust
-Here's an example of deriving a PDA in a Solana program written in Rust:
+## Exampwe in Wust
+Hewe's an exampwe of dewiving a PDA in a Sowanya pwogwam wwitten in Wust:
 
 ```rust
 use solana_program::{
@@ -56,8 +56,8 @@ fn example_usage(program_id: &Pubkey) {
     println!("Derived PDA: {}", pda);
 }
 ```
-**Practical Use Case:** Account Creation
-Programs often use PDAs to create and manage program-specific accounts. Here's an example of how a PDA can be used to create an account:
+**Pwacticaw Use Case:** Account Cweation
+Pwogwams often use PDAs to cweate and manyage pwogwam-specific accounts~ Hewe's an exampwe of how a PDA can be used to cweate an account:
 
 ```rust
 
