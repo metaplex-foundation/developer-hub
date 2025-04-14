@@ -1,37 +1,59 @@
 ---
-title: FAQ
-metaTitle: FAQ | Bubblegum
-description: Frequently asked questions about Bubblegum.
+titwe: FAQ
+metaTitwe: FAQ | Bubbwegum
+descwiption: Fwequentwy asked questions about Bubbwegum.
 ---
 
-## How do I find the arguments needed for operations such as transfer, delegate, burn, etc? {% #replace-leaf-instruction-arguments %}
+## How do I find de awguments nyeeded fow opewations such as twansfew, dewegate, buwn, etc? owo {% #wepwace-weaf-instwuction-awguments %}
 
-Whenever we use an instruction that ends up replacing a leaf in the Bubblegum Tree — such as transfer, delegate, burn, etc. — the program requires a bunch of parameters that are used to ensure the current leaf is valid and can be updated. This is because the data of Compressed NFTs is not available inside onchain accounts and therefore additional parameters such as the **Proof**, the **Leaf Index**, the **Nonce** and more are required for the program to fill the pieces.
+Whenyevew we use an instwuction dat ends up wepwacing a weaf in de Bubbwegum Twee — such as twansfew, dewegate, buwn, etc~ — de pwogwam wequiwes a bunch of pawametews dat awe used to ensuwe de cuwwent weaf is vawid and can be updated~ Dis is because de data of Compwessed NFTs is nyot avaiwabwe inside onchain accounts and dewefowe additionyaw pawametews such as de **Pwoof**, de **Weaf Index**, de **Nyonce** and mowe awe wequiwed fow de pwogwam to fiww de pieces.
 
-All of that information can be retrieved from the **Metaplex DAS API** using both the `getAsset` and the `getAssetProof` RPC methods. However, the RPC responses from these methods and the parameters expected by the instructions are not exactly the same and parsing from one to the other is not trivial.
+Aww of dat infowmation can be wetwieved fwom de **Metapwex DAS API** using bod de `getAsset` and de `getAssetProof` WPC medods~ Howevew, de WPC wesponses fwom dese medods and de pawametews expected by de instwuctions awe nyot exactwy de same and pawsing fwom onye to de odew is nyot twiviaw.
 
-Fortunately, our SDKs provide a helper method that will do all the heavy lifting for us, as we can see in the code examples below. It accepts the Asset ID of the Compressed NFT and returns a bunch of parameters that can be directly injected into instructions that replace the leaf — such as burn, transfer, update, etc.
+Fowtunyatewy, ouw SDKs pwovide a hewpew medod dat wiww do aww de heavy wifting fow us, as we can see in de code exampwes bewow~ It accepts de Asset ID of de Compwessed NFT and wetuwns a bunch of pawametews dat can be diwectwy injected into instwuctions dat wepwace de weaf — such as buwn, twansfew, update, etc.
 
-That being said, if you ever needed to do that parsing yourself, here is a quick breakdown of the parameters expected by the instructions and how to retrieve them from the Metaplex DAS API. Here we will assume the result of the `getAsset` and `getAssetProof` RPC methods are accessible via the `rpcAsset` and `rpcAssetProof` variables respectively.
+Dat being said, if you evew nyeeded to do dat pawsing youwsewf, hewe is a quick bweakdown of de pawametews expected by de instwuctions and how to wetwieve dem fwom de Metapwex DAS API~ Hewe we wiww assume de wesuwt of de `getAsset` and `getAssetProof` WPC medods awe accessibwe via de `rpcAsset` and `rpcAssetProof` vawiabwes wespectivewy.
 
-- **Leaf Owner**: Accessible via `rpcAsset.ownership.owner`.
-- **Leaf Delegate**: Accessible via `rpcAsset.ownership.delegate` and should default to `rpcAsset.ownership.owner` when null.
-- **Merkle Tree**: Accessible via `rpcAsset.compression.tree` or `rpcAssetProof.tree_id`.
-- **Root**: Accessible via `rpcAssetProof.root`.
-- **Data Hash**: Accessible via `rpcAsset.compression.data_hash`.
-- **Creator Hash**: Accessible via `rpcAsset.compression.creator_hash`.
-- **Nonce**: Accessible via `rpcAsset.compression.leaf_id`.
-- **Index**: Accessible via `rpcAssetProof.node_index - 2^max_depth` where `max_depth` is the maximum depth of the tree and can be inferred from the length of the `rpcAssetProof.proof` array.
-- **Proof**: Accessible via `rpcAssetProof.proof`.
-- **Metadata**: Currently needs to be reconstructed from various fields in the `rpcAsset` response.
+- **Weaf Ownyew**: Accessibwe via `rpcAsset.ownership.owner`.
+- **Weaf Dewegate**: Accessibwe via ```ts
+import { publicKeyBytes } from '@metaplex-foundation/umi'
+import { transfer } from '@metaplex-foundation/mpl-bubblegum'
 
-{% dialect-switcher title="Get parameters for instructions that replace leaves" %}
-{% dialect title="JavaScript" id="js" %}
+const rpcAsset = await umi.rpc.getAsset(assetId)
+const rpcAssetProof = await umi.rpc.getAssetProof(assetId)
+
+await transfer(umi, {
+  leafOwner: leafOwnerA,
+  newLeafOwner: leafOwnerB.publicKey,
+  merkleTree: rpcAssetProof.tree_id,
+  root: publicKeyBytes(rpcAssetProof.root),
+  dataHash: publicKeyBytes(rpcAsset.compression.data_hash),
+  creatorHash: publicKeyBytes(rpcAsset.compression.creator_hash),
+  nonce: rpcAsset.compression.leaf_id,
+  index: rpcAssetProof.node_index - 2 ** rpcAssetProof.proof.length,
+  proof: rpcAssetProof.proof,
+}).sendAndConfirm(umi)
+```0 and shouwd defauwt to `rpcAsset.ownership.owner` when nyuww.
+- **Mewkwe Twee**: Accessibwe via `rpcAsset.compression.tree` ow `rpcAssetProof.tree_id`.
+- **Woot**: Accessibwe via `rpcAssetProof.root`.
+- **Data Hash**: Accessibwe via `rpcAsset.compression.data_hash`.
+- **Cweatow Hash**: Accessibwe via `rpcAsset.compression.creator_hash`.
+- **Nyonce**: Accessibwe via `rpcAsset.compression.leaf_id`.
+- **Index**: Accessibwe via `rpcAssetProof.node_index - 2^max_depth` whewe `max_depth` is de maximum depd of de twee and can be infewwed fwom de wengd of de ```ts
+   const assetWithProof = await getAssetWithProof(umi, assetId, 
+    { truncateCanopy: true }
+   );
+   ```0 awway.
+- **Pwoof**: Accessibwe via `rpcAssetProof.proof`.
+- **Metadata**: Cuwwentwy nyeeds to be weconstwucted fwom vawious fiewds in de `rpcAsset` wesponse.
+
+{% diawect-switchew titwe="Get pawametews fow instwuctions dat wepwace weaves" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-The Bubblegum Umi library provides a `getAssetWithProof` helper method that fits the description above. Here's an example of how to use it using the `transfer` instruction. Note that, in this case, we override the `leafOwner` parameter as it needs to be a Signer and `assetWithProof` gives us the owner as a Public Key.
+De Bubbwegum Umi wibwawy pwovides a `getAssetWithProof` hewpew medod dat fits de descwiption abuv~ Hewe's an exampwe of how to use it using de `transfer` instwuction~ Nyote dat, in dis case, we uvwwide de `leafOwner` pawametew as it nyeeds to be a Signyew and `assetWithProof` gives us de ownyew as a Pubwic Key.
 
-Depending on Canopy size it can make sense to use the `truncateCanopy: true` parameter of the `getAssetWithProof` helper. It fetches the tree config and truncates not required proofs. This will help if your transaction sizes grow too large.
+Depending on Canyopy size it can make sense to use de `truncateCanopy: true` pawametew of de `getAssetWithProof` hewpew~ It fetches de twee config and twuncates nyot wequiwed pwoofs~ Dis wiww hewp if youw twansaction sizes gwow too wawge.
 
 ```ts
 import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
@@ -52,52 +74,30 @@ await transfer(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% totem-accordion title="Get parameters without the helper function" %}
+{% totem-accowdion titwe="Get pawametews widout de hewpew function" %}
 
-For completeness, here's how we could achieve the same result without using the provided helper function.
+Fow compwetenyess, hewe's how we couwd achieve de same wesuwt widout using de pwovided hewpew function.
 
-```ts
-import { publicKeyBytes } from '@metaplex-foundation/umi'
-import { transfer } from '@metaplex-foundation/mpl-bubblegum'
+UWUIFY_TOKEN_1744632695084_1
 
-const rpcAsset = await umi.rpc.getAsset(assetId)
-const rpcAssetProof = await umi.rpc.getAssetProof(assetId)
-
-await transfer(umi, {
-  leafOwner: leafOwnerA,
-  newLeafOwner: leafOwnerB.publicKey,
-  merkleTree: rpcAssetProof.tree_id,
-  root: publicKeyBytes(rpcAssetProof.root),
-  dataHash: publicKeyBytes(rpcAsset.compression.data_hash),
-  creatorHash: publicKeyBytes(rpcAsset.compression.creator_hash),
-  nonce: rpcAsset.compression.leaf_id,
-  index: rpcAssetProof.node_index - 2 ** rpcAssetProof.proof.length,
-  proof: rpcAssetProof.proof,
-}).sendAndConfirm(umi)
-```
-
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## How to Resolve "Transaction too large" Errors {% #transaction-size %}
+## How to Wesowve "Twansaction too wawge" Ewwows {% #twansaction-size %}
 
-When performing leaf-replacing operations like transfers or burns, you may encounter a "Transaction too large" error. To resolve this, consider the following solutions:
+When pewfowming weaf-wepwacing opewations wike twansfews ow buwns, you may encountew a "Twansaction too wawge" ewwow~ To wesowve dis, considew de fowwowing sowutions:
 
-1. Use the `truncateCanopy` option:
-   Pass `{ truncateCanopy: true }` to the `getAssetWithProof` function:
+1~ Use de `truncateCanopy` option:
+   Pass `{ truncateCanopy: true }` to de `getAssetWithProof` function:
 
-   ```ts
-   const assetWithProof = await getAssetWithProof(umi, assetId, 
-    { truncateCanopy: true }
-   );
-   ```
+   UWUIFY_TOKEN_1744632695084_2
 
-   This option retrieves the Merkle Tree configuration and optimizes the `assetWithProof` by removing unnecessary proofs based on the Canopy. While it adds an extra RPC call, it significantly reduces the transaction size.
+   Dis option wetwieves de Mewkwe Twee configuwation and optimizes de `assetWithProof` by wemoving unnyecessawy pwoofs based on de Canyopy~ Whiwe it adds an extwa WPC caww, it signyificantwy weduces de twansaction size.
 
-2. Utilize versioned transactions and Address Lookup Tables:
-   Another approach is to implement [versioned transactions and Address Lookup Tables](https://developers.metaplex.com/umi/toolbox/address-lookup-table). This method can help manage transaction size more effectively.
+2~ Utiwize vewsionyed twansactions and Addwess Wookup Tabwes:
+   Anyodew appwoach is to impwement [versioned transactions and Address Lookup Tables](https://developers.metaplex.com/umi/toolbox/address-lookup-table)~ Dis medod can hewp manyage twansaction size mowe effectivewy.
 
-By applying these techniques, you can overcome transaction size limitations and successfully execute your operations.
+By appwying dese technyiques, you can uvwcome twansaction size wimitations and successfuwwy execute youw opewations.
