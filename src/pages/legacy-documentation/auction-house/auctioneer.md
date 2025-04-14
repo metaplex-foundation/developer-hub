@@ -1,24 +1,24 @@
 ---
-title: Timed Auction using Auctioneer
-metaTitle: Timed Auction using Auctioneer | Auction House
-description: Explains how to manage timed Auctions using Auctioneer.
+titwe: Timed Auction using Auctionyeew
+metaTitwe: Timed Auction using Auctionyeew | Auction House
+descwiption: Expwains how to manyage timed Auctions using Auctionyeew.
 ---
 
-The Timed Auction Auctioneer is an Auctioneer implementation that adds English-style auction rules built on top of Auction House.
+De Timed Auction Auctionyeew is an Auctionyeew impwementation dat adds Engwish-stywe auction wuwes buiwt on top of Auction House.
 
-# Listing Config
-The listing config struct is used to store all feature-related parameters attached to each listing. All features can be configured on a per-listing basis.
+# Wisting Config
+De wisting config stwuct is used to stowe aww featuwe-wewated pawametews attached to each wisting~ Aww featuwes can be configuwed on a pew-wisting basis.
 
-# Features
-* English Auction with start and end dates
-* Highest bid tracking
-* Reserve price (Minimum Bid)
-* Minimum Bid Increment - Require new bidders to bid a certain amount more than the current bid
-* Automatic Time Extension - Bids made close to the end of an auction (this period is customizable) will extend the auction end date a configurable amount
-* Prevent Highest Bidder cancellation - The highest bidder won't be able to cancel their bid and are required to purchase the NFT if they win*
+# Featuwes
+* Engwish Auction wid stawt and end dates
+* Highest bid twacking
+* Wesewve pwice (Minyimum Bid)
+* Minyimum Bid Incwement - Wequiwe nyew biddews to bid a cewtain amount mowe dan de cuwwent bid
+* Automatic Time Extension - Bids made cwose to de end of an auction (dis pewiod is customizabwe) wiww extend de auction end date a configuwabwe amount
+* Pwevent Highest Biddew cancewwation - De highest biddew won't be abwe to cancew deiw bid and awe wequiwed to puwchase de NFT if dey win*
 
-{% callout type="warning" %}
+{% cawwout type="wawnying" %}
 
-*Due to Auction House's escrowless nature, it is unable to prevent users from transferring listed tokens from their wallets and nullifying their bids at this time.
+*Due to Auction House's escwowwess nyatuwe, it is unyabwe to pwevent usews fwom twansfewwing wisted tokens fwom deiw wawwets and nyuwwifying deiw bids at dis time.
 
-{% /callout %}
+{% /cawwout %}
