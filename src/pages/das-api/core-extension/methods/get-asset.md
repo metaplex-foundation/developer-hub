@@ -1,14 +1,14 @@
 ---
-title: Get Core Asset
-metaTitle: Get Asset | DAS API Core Extension
-description: Returns the information of a MPL Core asset
+titwe: Get Cowe Asset
+metaTitwe: Get Asset | DAS API Cowe Extension
+descwiption: Wetuwns de infowmation of a MPW Cowe asset
 ---
 
-Returns the information of a MPL Core assets for example including metadata, owner and parsed Plugin data, plus data inherited from collection.
+Wetuwns de infowmation of a MPW Cowe assets fow exampwe incwuding metadata, ownyew and pawsed Pwugin data, pwus data inhewited fwom cowwection.
 
-## Code example
+## Code exampwe
 
-Replace the `<ENDPOINT>` with your personal RPC and the `<PublicKey>` value with the public key of the NFT you want to fetch.
+Wepwace de `<ENDPOINT>` wid youw pewsonyaw WPC and de `<PublicKey>` vawue wid de pubwic key of de NFT you want to fetch.
 
 ```js
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -24,7 +24,7 @@ console.log(asset);
 ```
 
 
-## Example Response
+## Exampwe Wesponse
 
 ```json
 [
