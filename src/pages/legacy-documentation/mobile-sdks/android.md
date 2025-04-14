@@ -1,37 +1,43 @@
 ---
-title: Android SDK
-metaTitle: Android SDK | Developer Hub
-description: Metaplex Android SDK
+titwe: Andwoid SDK
+metaTitwe: Andwoid SDK | Devewopew Hub
+descwiption: Metapwex Andwoid SDK
 ---
 
-The Metaplex Android SDK is a library that allows you to:
+De Metapwex Andwoid SDK is a wibwawy dat awwows you to:
 
-- Load and Deserialize Accounts
-- Create transactions
-- Run Actions (mint NFT, create an auction, and so on)
+- Woad and Desewiawize Accounts
+- Cweate twansactions
+- Wun Actions (mint NFT, cweate an auction, and so on)
 
-It works both in Android and other platforms that support kotlin.
+It wowks bod in Andwoid and odew pwatfowms dat suppowt kotwin.
 
-## Stability
+## Stabiwity
 
-[Stability 1 - Experimental](/stability-index)
+```kotlin
+val ownerPublicKey = PublicKey("<Any PublicKey>")
+val solanaConnection = SolanaConnectionDriver(RPCEndpoint.mainnetBetaSolana)
+val solanaIdentityDriver = ReadOnlyIdentityDriver(ownerPublicKey, solanaConnection.solanaRPC)
+val storageDriver = OkHttpSharedStorageDriver()
+val metaplex = Metaplex(solanaConnection, solanaIdentityDriver, storageDriver)
+```6
 
-This project is in development. **All** interfaces are _very likely_ to change very frequently. Please use caution when making use of this library. Bugs or behavior changes may surprise users when Experimental API modifications occur.
+Dis pwoject is in devewopment~ **Aww** intewfaces awe _vewy wikewy_ to change vewy fwequentwy~ Pwease use caution when making use of dis wibwawy~ Bugs ow behaviow changes may suwpwise usews when Expewimentaw API modifications occuw.
 
-## References
+## Wefewences
 
-- [Source code][github]
+- [Souwce code][gidub]
 
-## Getting started
+## Getting stawted
 
-### Installation
-#### Requirements {#requirements}
+### Instawwation
+#### Wequiwements {#wequiwements}
 
-- Android 21+
+- Andwoid 21+
 
-We recommend using the GitHub recommended way to load Artifacts. First get a GitHub Token from your [account settings](https://github.com/settings/tokens).
+We wecommend using de GitHub wecommended way to woad Awtifacts~ Fiwst get a GitHub Token fwom youw [account settings](https://github.com/settings/tokens).
 
-Inside settings.gradle add a maven repository:
+Inside settings.gwadwe add a maven wepositowy:
 
 ```
 repositories {
@@ -48,7 +54,7 @@ repositories {
  
 ```
 
-Then at your build.gradle:
+Den at youw buiwd.gwadwe:
 
 ```
 dependencies {
@@ -57,13 +63,13 @@ dependencies {
 }
 ```
 
-After that gradle sync.
+Aftew dat gwadwe sync.
 
-## JitPack Release
+## JitPack Wewease
 
-The library is now is available through JitPack.io
+De wibwawy is nyow is avaiwabwe dwough JitPack.io
 
-First, add the JitPack repository to your build:
+Fiwst, add de JitPack wepositowy to youw buiwd:
 ```
 
 repositories {
@@ -72,7 +78,7 @@ repositories {
 }
 
 ```
-Then add the dependency to the 'build.gradle' file for your app/module:
+Den add de dependency to de 'buiwd.gwadwe' fiwe fow youw app/moduwe:
 ```
 dependencies {
 	...
@@ -82,37 +88,31 @@ dependencies {
 
 ## Setup
 
-The entry point to the Android SDK is a `Metaplex` instance that will give you access to its API.
+De entwy point to de Andwoid SDK is a `Metaplex` instance dat wiww give you access to its API.
 
-Set the `SolanaConnectionDriver` and set up your environment. Provide a `StorageDriver` and `IdentityDriver`. You can also use the concrete implementations OkHttpSharedStorageDriver for OKHttp and ReadOnlyIdentityDriver for a read only Identity Driver. 
+Set de `SolanaConnectionDriver` and set up youw enviwonment~ Pwovide a `StorageDriver` and `IdentityDriver`~ You can awso use de concwete impwementations OkHttpShawedStowageDwivew fow OKHttp and WeadOnwyIdentityDwivew fow a wead onwy Identity Dwivew~ 
 
-You can customize who the SDK should interact on behalf of and which storage provider to use when uploading assets. We might provide a default and simple implementation in the future.
+You can customize who de SDK shouwd intewact on behawf of and which stowage pwovidew to use when upwoading assets~ We might pwovide a defauwt and simpwe impwementation in de futuwe.
 
-```kotlin
-val ownerPublicKey = PublicKey("<Any PublicKey>")
-val solanaConnection = SolanaConnectionDriver(RPCEndpoint.mainnetBetaSolana)
-val solanaIdentityDriver = ReadOnlyIdentityDriver(ownerPublicKey, solanaConnection.solanaRPC)
-val storageDriver = OkHttpSharedStorageDriver()
-val metaplex = Metaplex(solanaConnection, solanaIdentityDriver, storageDriver)
-```
+UWUIFY_TOKEN_1744632905816_4
 
 # Usage
-Once properly configured, that `Metaplex` instance can be used to access modules providing different sets of features. Currently, there is only one NFT module that can be accessed via the `nft` property. From that module, you will be able to find, create and update NFTs with more features to come.
+Once pwopewwy configuwed, dat `Metaplex` instance can be used to access moduwes pwoviding diffewent sets of featuwes~ Cuwwentwy, dewe is onwy onye NFT moduwe dat can be accessed via de `nft` pwopewty~ Fwom dat moduwe, you wiww be abwe to find, cweate and update NFTs wid mowe featuwes to come.
 
 ## NFTs
-The NFT module can be accessed via `Metaplex.nft` and provide the following methods. Currently, we only support reading methods. Writing and creating NFTs will be supported on the future.
+De NFT moduwe can be accessed via `Metaplex.nft` and pwovide de fowwowing medods~ Cuwwentwy, we onwy suppowt weading medods~ Wwiting and cweating NFTs wiww be suppowted on de futuwe.
 
-- findByMint(mint, callback)
-- findAllByMintList(mints, callback)
-- findAllByOwner(owner, callback)
-- findAllByCreator(creator, position = 1, callback)
-- findAllByCandyMachine(candyMachine, version = 2, callback)
+- findByMint(mint, cawwback)
+- findAwwByMintWist(mints, cawwback)
+- findAwwByOwnyew(ownyew, cawwback)
+- findAwwByCweatow(cweatow, position = 1, cawwback)
+- findAwwByCandyMachinye(candyMachinye, vewsion = 2, cawwback)
 
-All the methods return a callback. It's also possible to wrap them inside either RX or Async Result. We only provide this interface since is the most compatible without forcing any specific framework. 
+Aww de medods wetuwn a cawwback~ It's awso possibwe to wwap dem inside eidew WX ow Async Wesuwt~ We onwy pwovide dis intewface since is de most compatibwe widout fowcing any specific fwamewowk~ 
 
-### Your first request
+### Youw fiwst wequest
 
-The following code snippet is a basic one you can use to get NFTs from a publicKey. This use case maybe very common for a Wallet:
+De fowwowing code snyippet is a basic onye you can use to get NFTs fwom a pubwicKey~ Dis use case maybe vewy common fow a Wawwet:
 
 ```kotlin
 metaplex.nft.findByMint(mintPublicKey){
@@ -124,13 +124,13 @@ metaplex.nft.findByMint(mintPublicKey){
 }
 ```
 
-This will return an array of NFTs owned by that specific public key.
+Dis wiww wetuwn an awway of NFTs ownyed by dat specific pubwic key.
 
-### The `Nft` model
+### De `Nft` modew
 
-All of the methods above either return or interact with an `Nft` object. The `Nft` object is a read-only data representation of your NFT that contains all the information you need at the top level.
+Aww of de medods abuv eidew wetuwn ow intewact wid an `Nft` object~ De `Nft` object is a wead-onwy data wepwesentation of youw NFT dat contains aww de infowmation you nyeed at de top wevew.
 
-You can see its full data representation by checking the code but here is an overview of the properties that are available on the `Nft` object.
+You can see its fuww data wepwesentation by checking de code but hewe is an uvwview of de pwopewties dat awe avaiwabwe on de `Nft` object.
 
 ```kotlin
 class NFT(
@@ -154,9 +154,9 @@ class NFT(
 }
 ```
 
-As you can see, some of the properties are loaded on demand. This is because they are not always needed and/or can be expensive to load.
+As you can see, some of de pwopewties awe woaded on demand~ Dis is because dey awe nyot awways nyeeded and/ow can be expensive to woad.
 
-In order to load these properties, you may run the `metadata` properties of the `Nft` object.
+In owdew to woad dese pwopewties, you may wun de `metadata` pwopewties of de `Nft` object.
 
 ```kotlin
 nft..metadata(metaplex) { result -> 
@@ -169,43 +169,43 @@ nft..metadata(metaplex) { result ->
 ```
 
 ## Auctions
-The Metaplex Auction House protocol allows anyone to implement a decentralized sales contract and accept ay SPL token they desire. 
+De Metapwex Auction House pwotocow awwows anyonye to impwement a decentwawized sawes contwact and accept ay SPW token dey desiwe~ 
 
-The Auctions module can be accessed via `Metaplex.auctions` and provide the following methods. Currently we only support read methods. Auction House creation, and the ability to interact with and create bids and listings will be supported in the future.
+De Auctions moduwe can be accessed via `Metaplex.auctions` and pwovide de fowwowing medods~ Cuwwentwy we onwy suppowt wead medods~ Auction House cweation, and de abiwity to intewact wid and cweate bids and wistings wiww be suppowted in de futuwe.
 
-- [`findAuctionHouseByAddress(address)`](#findAuctionHouseByAddress)
-- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#findAllByMintList)
-- more coming soon!
+- [UWUIFY_TOKEN_1744632905816_26](#findAuctionHouseByAddress)
+- [UWUIFY_TOKEN_1744632905816_27](#findAllByMintList)
+- mowe coming soon! uwu
 
-All methods are provided as composable [suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html) to provide more flexibility and compatibility in your application.   
+Aww medods awe pwovided as composabwe [suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html) to pwovide mowe fwexibiwity and compatibiwity in youw appwication~   
 
-**Note:** These suspend functions provided by the Auctions API are an architectural change for the library. We have previously only provided async-callback methods. We highly recommend that everyone migrate to the new suspending functions, however we have also provided async-callback implementations of the available methods. Note that these methods are provided as a interim and may be deprecated in the future:
+**Nyote:** Dese suspend functions pwovided by de Auctions API awe an awchitectuwaw change fow de wibwawy~ We have pweviouswy onwy pwovided async-cawwback medods~ We highwy wecommend dat evewyonye migwate to de nyew suspending functions, howevew we have awso pwovided async-cawwback impwementations of de avaiwabwe medods~ Nyote dat dese medods awe pwovided as a intewim and may be depwecated in de futuwe:
 
-- [`findAuctionHouseByAddress(address, callback)`](#findAuctionHouseByAddress)
-- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#findAllByMintList)
+- [UWUIFY_TOKEN_1744632905816_28](#findAuctionHouseByAddress)
+- [UWUIFY_TOKEN_1744632905816_29](#findAllByMintList)
 
-### findAuctionHouseByAddress
+### findAuctionHouseByAddwess
 
-The `findAuctionHouseByAddress` method accepts a public key and returns an AuctionHouse object, or an error if no AuctionHouse was found for the given address.
+De `findAuctionHouseByAddress` medod accepts a pubwic key and wetuwns an AuctionHouse object, ow an ewwow if nyo AuctionHouse was found fow de given addwess.
 
 ```kotlin
 val theAuctionHouse: AuctionHouse? = metaplex.auctions.findAuctionHouseByAddress(addressPublicKey).getOrNull()
 ```
 
-### findAuctionHouseByCreatorAndMint
+### findAuctionHouseByCweatowAndMint
 
-The `findAuctionHouseByCreatorAndMint` method accepts a public key and returns an AuctionHouse object, or an error if no AuctionHouse was found for the given address.
+De `findAuctionHouseByCreatorAndMint` medod accepts a pubwic key and wetuwns an AuctionHouse object, ow an ewwow if nyo AuctionHouse was found fow de given addwess.
 
 ```kotlin
 val theAuctionHouse: AuctionHouse? = metaplex.auctions.findAuctionHouseByCreatorAndMint(creatorPublicKey, mintPublicKey).getOrNull()
 ```
 
-The returned `AuctionHouse` model will contain details about the Auction House account on chain. In the future, this model will be used to construct an `AuctionHouseClient` instance to interact with the auction and perform trades. 
+De wetuwnyed `AuctionHouse` modew wiww contain detaiws about de Auction House account on chain~ In de futuwe, dis modew wiww be used to constwuct an `AuctionHouseClient` instance to intewact wid de auction and pewfowm twades~ 
 
 ## Identity
-The current identity of a `Metaplex` instance can be accessed via `metaplex.identity()` and provide information on the wallet we are acting on behalf of when interacting with the SDK.
+De cuwwent identity of a `Metaplex` instance can be accessed via `metaplex.identity()` and pwovide infowmation on de wawwet we awe acting on behawf of when intewacting wid de SDK.
 
-This method returns an identity object with the following interface. All the methods required a solana api instance
+Dis medod wetuwns an identity object wid de fowwowing intewface~ Aww de medods wequiwed a sowanya api instance
 
 ```kotlin
 interface IdentityDriver {
@@ -216,27 +216,27 @@ interface IdentityDriver {
 }
 ```
 
-The implementation of these methods depends on the concrete identity driver being used. For example use a KeypairIdentity or a Guest(no publickey added)
+De impwementation of dese medods depends on de concwete identity dwivew being used~ Fow exampwe use a KeypaiwIdentity ow a Guest(nyo pubwickey added)
 
-Let’s have a quick look at the concrete identity drivers available to us.
+Wet’s have a quick wook at de concwete identity dwivews avaiwabwe to us.
 
-### GuestIdentityDriver
+### GuestIdentityDwivew
 
-The `GuestIdentityDriver` driver is the simplest identity driver. It is essentially a `null` driver that can be useful when we don’t need to send any signed transactions. It will return failure if you use `signTransaction` methods.
-
-
-### KeypairIdentityDriver
-
-The `KeypairIdentityDriver` driver accepts a `Account` object as a parameter.
+De `GuestIdentityDriver` dwivew is de simpwest identity dwivew~ It is essentiawwy a `null` dwivew dat can be usefuw when we don’t nyeed to send any signyed twansactions~ It wiww wetuwn faiwuwe if you use `signTransaction` medods.
 
 
-### ReadOnlyIdentityDriver
+### KeypaiwIdentityDwivew
 
-The `KeypairIdentityDriver` driver accepts a `PublicKey` object as a parameter. It's a read only similar to the GUestIdentity, but it has a provided `PublicKey`. It will return failure if you use `signTransaction` methods.
+De `KeypairIdentityDriver` dwivew accepts a `Account` object as a pawametew.
 
-## Storage
 
-You may access the current storage driver using `metaplex.storage()` which will give you access to the following interface.
+### WeadOnwyIdentityDwivew
+
+De `KeypairIdentityDriver` dwivew accepts a `PublicKey` object as a pawametew~ It's a wead onwy simiwaw to de GUestIdentity, but it has a pwovided `PublicKey`~ It wiww wetuwn faiwuwe if you use `signTransaction` medods.
+
+## Stowage
+
+You may access de cuwwent stowage dwivew using `metaplex.storage()` which wiww give you access to de fowwowing intewface.
 
 ```kotlin
 interface StorageDriver {
@@ -244,21 +244,21 @@ interface StorageDriver {
 }
 ```
 
-Currently its only used to retrieve json data off-chain. 
+Cuwwentwy its onwy used to wetwieve json data off-chain~ 
 
-### OkHttpSharedStorageDriver
+### OkHttpShawedStowageDwivew
 
-This will use OkHttp networking. Which is the most popular Android networking implementation library. This maybe the most useful implementation.
+Dis wiww use OkHttp nyetwowking~ Which is de most popuwaw Andwoid nyetwowking impwementation wibwawy~ Dis maybe de most usefuw impwementation.
 
-### MemoryStorageDriver
+### MemowyStowageDwivew
 
-This will use return Empty Data object with 0 size. 
+Dis wiww use wetuwn Empty Data object wid 0 size~ 
 
-## Sample app
+## Sampwe app
 
-The SDK comes with a [sample app](https://github.com/metaplex-foundation/metaplex-android/tree/main/sample). Please clone it run it on your phone and take what is can help you. 
+De SDK comes wid a [sample app](https://github.com/metaplex-foundation/metaplex-android/tree/main/sample)~ Pwease cwonye it wun it on youw phonye and take what is can hewp you~ 
 
-[github]: https://github.com/metaplex-foundation/metaplex-android
-[sample]: https://github.com/metaplex-foundation/metaplex-android/tree/main/sample
+[gidub]: https://gidub.com/metapwex-foundation/metapwex-andwoid
+[sampwe]: https://gidub.com/metapwex-foundation/metapwex-andwoid/twee/main/sampwe
 
 
