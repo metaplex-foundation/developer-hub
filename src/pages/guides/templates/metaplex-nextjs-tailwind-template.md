@@ -1,127 +1,34 @@
 ---
-title: Metaplex Solana NextJs Tailwind Template
-metaTitle: Metaplex Solana NextJs Tailwind Template | Web UI Templates
-description: A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
+titwe: Metapwex Sowanya NyextJs Taiwwind Tempwate
+metaTitwe: Metapwex Sowanya NyextJs Taiwwind Tempwate | Web UI Tempwates
+descwiption: A web UI tempwate using Nyextjs, Taiwwind, Metapwex Umi, Sowanya WawwetAdaptew and Zustand.
 ---
 
-Downloadable and reusable templates that utilizes Nextjs and Tailwind for the front end framework while also being preinstalled with Metaplex Umi, Solana WalletAdapter, and Zustand global store for ease of use.
+Downwoadabwe and weusabwe tempwates dat utiwizes Nyextjs and Taiwwind fow de fwont end fwamewowk whiwe awso being pweinstawwed wid Metapwex Umi, Sowanya WawwetAdaptew, and Zustand gwobaw stowe fow ease of use.
 
-{% image src="/images/metaplex-next-js-template.png" classes="m-auto" /%}
+{% image swc="/images/metapwex-nyext-js-tempwate.png" cwasses="m-auto" /%}
 
-## Features
+## Featuwes
 
-- Nextjs React framework
-- Tailwind
-- Solana WalletAdapter
-- Metaplex Umi
+- Nyextjs Weact fwamewowk
+- Taiwwind
+- Sowanya WawwetAdaptew
+- Metapwex Umi
 - Zustand
-- Dark/Light Mode
-- Umi Helpers
+- Dawk/Wight Mode
+- Umi Hewpews
 
-## Installation
+## Instawwation
 
-We currently have a number of templates available for Next JS with slightly different configurations and UI frameworks/component library.
+We cuwwentwy have a nyumbew of tempwates avaiwabwe fow Nyext JS wid swightwy diffewent configuwations and UI fwamewowks/componyent wibwawy.
 
-### Tailwind
+### Taiwwind
 
 ```shell
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template.git
 ```
 
-Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
-
-### Tailwind + Shadcn
-
-```shell
-git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template.git
-```
-
-Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
-
-_The following sections cover common features shared by all templates listed on this page. Template-specific features are not included here; please refer to the respective GitHub repositories for detailed documentation on individual templates._
-
-## Setup
-
-### Change RPC
-
-You are free to set up the RPC url into your project as you wish either via:
-
-- .env
-- constants.ts file
-- hardcoded into umi directly
-
-In this example the RPC url is hardcoded into the `umiStore` umi state under `src/store/useUmiStore.ts` at line `21`.
-
-```ts
-const useUmiStore = create<UmiState>()((set) => ({
-  // add your own RPC here
-  umi: createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(
-    signerIdentity(
-      createNoopSigner(publicKey('11111111111111111111111111111111'))
-    )
-  ),
-  ...
-}))
-```
-
-## Why Zustand?
-
-Zustand is a global store that allows you to access the store state from both hooks and regular state fetching.
-
-By storing the umiInstance in **zustand** we can access it in both `.ts` and `.tsx` files while also having the state update via other providers and hooks such as `walletAdapter`.
-
-While it's normally easier to use the helper methods below to access umi you can also access the state methods manually by calling for the `umiStore` state yourself.
-
-When fetching the `umi` state directly without a helper it will only pickup the umi instance and not the latest signer. By design when the walletAdapter changes state the state of the `signer` in the `umiStore` is updated but **NOT** applied to the `umi` state. So you will need to also pull the latest `signer` state and apply it to `umi`. This behavior can be outlined in the `umiProvider.tsx` file. In contrast, the `umi` [helpers](#helpers) always pull a fresh instance of the `signer` state.
-
-```ts
-// umiProvider.tsx snippet
-useEffect(() => {
-  if (!wallet.publicKey) return
-  // When wallet.publicKey changes, update the signer in umiStore with the new wallet adapter.
-  umiStore.updateSigner(wallet as unknown as WalletAdapter)
-}, [wallet, umiStore])
-```
-
-### Access Umi in .tsx
-
-```ts
-// Pulls the umi state from the umiStore using hook.
-const umi = useUmiStore().umi
-const signer = useUmiStore().signer
-
-umi.use(signerIdentity(signer))
-```
-
-### Access Umi in .ts
-
-```ts
-// Pulls umi state from the umiStore.
-const umi = useUmiStore.getState().umi
-const signer = useUmiStore.getState().signer
-
-umi.use(signerIdentity(signer))
-```
-
-## Helpers
-
-Located in the `/lib/umi` folder there are some pre made helpers you can use to make your development easier.
-
-Umi helpers are split up into several areas which can be called in different scenarios.
-
-### Transaction Helpers
-
-#### sendAndConfirmWithWalletAdapter()
-
-Passing a transaction into `sendAndConfirmWithWalletAdapter()` will send the transaction while pulling the latest walletAdapter state from the zustand `umiStore` and will return the signature as a `string`. This can be accessed in both `.ts` and `.tsx` files.
-
-The function also provides and locks in the commitment level across `blockhash`, `send`, and `confirm` if provided. By default the commitment level of `confirmed` is used if no value is passed.
-
-There is also a `skipPreflight` flag that can be enabled if you need to debug failing transactions on chain. For more information about transactions errors you can view this guide [How to Diagnose Transaction Errors on Solana](/guides/general/how-to-diagnose-solana-transaction-errors).
-
-`sendAndConfirmWithWalletAdapter()` comes ready for priority fees via the `setComputeUnitPrice` instruction. These should reviewed and possibly adjusted or removed depending on your situation.
-
-```ts
+Gidub Wepo - ```ts
 import useUmiStore from '@/store/useUmiStore'
 import { setComputeUnitPrice } from '@metaplex-foundation/mpl-toolbox'
 import { TransactionBuilder, signerIdentity } from '@metaplex-foundation/umi'
@@ -173,15 +80,108 @@ const sendAndConfirmWalletAdapter = async (
 }
 
 export default sendAndConfirmWalletAdapter
+```2
+
+### Taiwwind + Shadcn
+
+```shell
+git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template.git
 ```
+
+Gidub Wepo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
+
+_De fowwowing sections cuvw common featuwes shawed by aww tempwates wisted on dis page~ Tempwate-specific featuwes awe nyot incwuded hewe; pwease wefew to de wespective GitHub wepositowies fow detaiwed documentation on individuaw tempwates._
+
+## Setup
+
+### Change WPC
+
+You awe fwee to set up de WPC uww into youw pwoject as you wish eidew via:
+
+- .env
+- constants.ts fiwe
+- hawdcoded into umi diwectwy
+
+In dis exampwe de WPC uww is hawdcoded into de `umiStore` umi state undew `src/store/useUmiStore.ts` at winye `21`.
+
+```ts
+const useUmiStore = create<UmiState>()((set) => ({
+  // add your own RPC here
+  umi: createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(
+    signerIdentity(
+      createNoopSigner(publicKey('11111111111111111111111111111111'))
+    )
+  ),
+  ...
+}))
+```
+
+## Why Zustand? owo
+
+Zustand is a gwobaw stowe dat awwows you to access de stowe state fwom bod hooks and weguwaw state fetching.
+
+By stowing de umiInstance in **zustand** we can access it in bod `.ts` and `.tsx` fiwes whiwe awso having de state update via odew pwovidews and hooks such as `walletAdapter`.
+
+Whiwe it's nyowmawwy easiew to use de hewpew medods bewow to access umi you can awso access de state medods manyuawwy by cawwing fow de `umiStore` state youwsewf.
+
+When fetching de `umi` state diwectwy widout a hewpew it wiww onwy pickup de umi instance and nyot de watest signyew~ By design when de wawwetAdaptew changes state de state of de `signer` in de `umiStore` is updated but **NYOT** appwied to de `umi` state~ So you wiww nyeed to awso puww de watest `signer` state and appwy it to `umi`~ Dis behaviow can be outwinyed in de `umiProvider.tsx` fiwe~ In contwast, de `umi` [helpers](#helpers) awways puww a fwesh instance of de `signer` state.
+
+```ts
+// umiProvider.tsx snippet
+useEffect(() => {
+  if (!wallet.publicKey) return
+  // When wallet.publicKey changes, update the signer in umiStore with the new wallet adapter.
+  umiStore.updateSigner(wallet as unknown as WalletAdapter)
+}, [wallet, umiStore])
+```
+
+### Access Umi in .tsx
+
+```ts
+// Pulls the umi state from the umiStore using hook.
+const umi = useUmiStore().umi
+const signer = useUmiStore().signer
+
+umi.use(signerIdentity(signer))
+```
+
+### Access Umi in .ts
+
+```ts
+// Pulls umi state from the umiStore.
+const umi = useUmiStore.getState().umi
+const signer = useUmiStore.getState().signer
+
+umi.use(signerIdentity(signer))
+```
+
+## Hewpews
+
+Wocated in de `/lib/umi` fowdew dewe awe some pwe made hewpews you can use to make youw devewopment easiew.
+
+Umi hewpews awe spwit up into sevewaw aweas which can be cawwed in diffewent scenyawios.
+
+### Twansaction Hewpews
+
+#### sendAndConfiwmWidWawwetAdaptew()
+
+Passing a twansaction into `sendAndConfirmWithWalletAdapter()` wiww send de twansaction whiwe puwwing de watest wawwetAdaptew state fwom de zustand `umiStore` and wiww wetuwn de signyatuwe as a `string`~ Dis can be accessed in bod `.ts` and `.tsx` fiwes.
+
+De function awso pwovides and wocks in de commitment wevew acwoss `blockhash`, `send`, and `confirm` if pwovided~ By defauwt de commitment wevew of `confirmed` is used if nyo vawue is passed.
+
+Dewe is awso a `skipPreflight` fwag dat can be enyabwed if you nyeed to debug faiwing twansactions on chain~ Fow mowe infowmation about twansactions ewwows you can view dis guide [How to Diagnose Transaction Errors on Solana](/guides/general/how-to-diagnose-solana-transaction-errors).
+
+`sendAndConfirmWithWalletAdapter()` comes weady fow pwiowity fees via de `setComputeUnitPrice` instwuction~ Dese shouwd weviewed and possibwy adjusted ow wemuvd depending on youw situation.
+
+UWUIFY_TOKEN_1744632873955_6
 
 ### Umi State
 
-#### umiWithCurrentWalletAdapter()
+#### umiWidCuwwentWawwetAdaptew()
 
-`umiWithCurrentWalletAdapter` fetches the current umi state with the current walletAdapter state from the `umiStore`. This can then be used to create transactions or perform operations with umi that requires the current wallet adapter user.
+`umiWithCurrentWalletAdapter` fetches de cuwwent umi state wid de cuwwent wawwetAdaptew state fwom de `umiStore`~ Dis can den be used to cweate twansactions ow pewfowm opewations wid umi dat wequiwes de cuwwent wawwet adaptew usew.
 
-Can be used in both `.ts` and `.tsx` files
+Can be used in bod `.ts` and `.tsx` fiwes
 
 ```ts
 import useUmiStore from '@/store/useUmiStore'
@@ -200,11 +200,11 @@ const umiWithCurrentWalletAdapter = () => {
 export default umiWithCurrentWalletAdapter
 ```
 
-#### umiWithSigner()
+#### umiWidSignyew()
 
-`umiWithSigner` allows you to pass in a signer element (`generateSigner()`, `createNoopSigner()`) as an arg which is then assigned to the `umi` instance currently stored in state. This is useful for when you want an `umi` instance that uses a private key or `generatedSigner`/`createNoopSigner`.
+`umiWithSigner` awwows you to pass in a signyew ewement (`generateSigner()`, `createNoopSigner()`) as an awg which is den assignyed to de `umi` instance cuwwentwy stowed in state~ Dis is usefuw fow when you want an `umi` instance dat uses a pwivate key ow `generatedSigner`/`createNoopSigner`.
 
-Can be used in both `.ts` and `.tsx` files
+Can be used in bod `.ts` and `.tsx` fiwes
 
 ```ts
 import useUmiStore from '@/store/useUmiStore'
@@ -219,13 +219,13 @@ const umiWithSigner = (signer: Signer) => {
 export default umiWithSigner
 ```
 
-### Example Transaction Using Helpers
+### Exampwe Twansaction Using Hewpews
 
-Within the `/lib` folder you will find a `transferSol` example transaction that utilizes both the fetching of the umi state using `umiWithCurrentWalletAdapter()` and the sending of the generated transaction using `sendAndConfirmWithWalletAdapter()`.
+Widin de `/lib` fowdew you wiww find a `transferSol` exampwe twansaction dat utiwizes bod de fetching of de umi state using `umiWithCurrentWalletAdapter()` and de sending of de genyewated twansaction using `sendAndConfirmWithWalletAdapter()`.
 
-By pulling state from the umi store with `umiWithCurrentWalletAdapter()` if any of our transaction args require the `signer` type this will be automatically pulled from the umi instance which is generated with current user of `walletAdapter`. In this case the `from` account is determined by the current signer connected to umi (walletAdapter) and auto inferred in the transaction for us.
+By puwwing state fwom de umi stowe wid `umiWithCurrentWalletAdapter()` if any of ouw twansaction awgs wequiwe de `signer` type dis wiww be automaticawwy puwwed fwom de umi instance which is genyewated wid cuwwent usew of `walletAdapter`~ In dis case de `from` account is detewminyed by de cuwwent signyew connyected to umi (wawwetAdaptew) and auto infewwed in de twansaction fow us.
 
-By then sending transaction with `sendAndConfirmWithWalletAdapter` the signing process will use the `walletAdapter` and ask the current user to sign the transaction. The transaction will then be sent to the chain.
+By den sending twansaction wid `sendAndConfirmWithWalletAdapter` de signying pwocess wiww use de `walletAdapter` and ask de cuwwent usew to sign de twansaction~ De twansaction wiww den be sent to de chain.
 
 ```ts
 // Example of a function that transfers SOL from one account to another pulling umi
