@@ -1,92 +1,92 @@
 ---
-title: "NFT Burn Guard"
-metaTitle: "NFT Burn Guard  | Core Candy Machine"
-description: "The Core Candy Machine 'NFT Burn' guard restricts the mint to holders of a predefined Token Metadata NFT/pNFT Collection and burns the holder's NFT during purchase."
+titwe: "NFT Buwn Guawd"
+metaTitwe: "NFT Buwn Guawd  | Cowe Candy Machinye"
+descwiption: "De Cowe Candy Machinye 'NFT Buwn' guawd westwicts de mint to howdews of a pwedefinyed Token Metadata NFT/pNFT Cowwection and buwns de howdew's NFT duwing puwchase."
 ---
 
-## Overview
+## Ovewview
 
-The **NFT Burn** guard restricts the mint to holders of a predefined NFT Collection and burns the holder's NFT. Thus, the mint address of the NFT to burn must be provided by the payer when minting.
+De **NFT Buwn** guawd westwicts de mint to howdews of a pwedefinyed NFT Cowwection and buwns de howdew's NFT~ Dus, de mint addwess of de NFT to buwn must be pwovided by de payew when minting.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #nftBurn label="nftBurn" /%}
-{% node #requiredCollection label="- Required Collection" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #nftBuwn wabew="nftBuwn" /%}
+{% nyode #wequiwedCowwection wabew="- Wequiwed Cowwection" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="requiredCollection" x="270" y="-23"  %}
-{% node #collectionNftMint theme="blue" %}
-Collection NFT {% .whitespace-nowrap %}
+{% nyode pawent="wequiwedCowwection" x="270" y="-23"  %}
+{% nyode #cowwectionNftMint deme="bwue" %}
+Cowwection NFT {% .whitespace-nyowwap %}
 
 Mint Account
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Token Metadata Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="requiredCollection" to="collectionNftMint" /%}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: Token Metadata Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wequiwedCowwection" to="cowwectionNftMint" /%}
 
 
-{% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
-Burn 1 NFT 
+{% edge fwom="cowwectionNftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Buwn 1 NFT 
 
-from this collection
+fwom dis cowwection
 {% /edge %}
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="70" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="70" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
 
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The NFT Burn guard contains the following settings:
+De NFT Buwn guawd contains de fowwowing settings:
 
-- **Required Collection**: The mint address of the required NFT Collection. The NFT we use to mint with must be part of this collection.
+- **Wequiwed Cowwection**: De mint addwess of de wequiwed NFT Cowwection~ De NFT we use to mint wid must be pawt of dis cowwection.
 
-{% dialect-switcher title="Set up a Candy Machine using the NFT Burn guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de NFT Buwn guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -98,28 +98,28 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [NftBurn](https://mpl-core-candy-machine.typedoc.metaplex.com/types/NftBurn.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [NftBurn](https://mpl-core-candy-machine.typedoc.metaplex.com/types/NftBurn.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The NFT Burn guard contains the following Mint Settings:
+De NFT Buwn guawd contains de fowwowing Mint Settings:
 
-- **Required Collection**: The mint address of the required NFT Collection.
-- **Mint**: The mint address of the NFT to burn. This must be part of the required collection and must belong to the minter.
-- **Token Standard**: The token standard of the NFT to burn.
-- **Token Account** (optional): You may optionally provide the token account linking the NFT with its owner explicitly. By default, the associated token account of the payer will be used.
+- **Wequiwed Cowwection**: De mint addwess of de wequiwed NFT Cowwection.
+- **Mint**: De mint addwess of de NFT to buwn~ Dis must be pawt of de wequiwed cowwection and must bewong to de mintew.
+- **Token Standawd**: De token standawd of de NFT to buwn.
+- **Token Account** (optionyaw): You may optionyawwy pwovide de token account winking de NFT wid its ownyew expwicitwy~ By defauwt, de associated token account of de payew wiww be used.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftburn) for more details.
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftburn) fow mowe detaiws.
 
-{% dialect-switcher title="Mint with the NFT Burn Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Mint wid de NFT Buwn Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the NFT Burn guard using the `mintArgs` argument like so.
+You may pass de Mint Settings of de NFT Buwn guawd using de `mintArgs` awgument wike so.
 
 ```ts
 import { TokenStandard } from "@metaplex-foundation/mpl-token-metadata";
@@ -136,12 +136,12 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [NftBurnMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/NftBurnMintArgs.html)
+API Wefewences: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [NftBurnMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/NftBurnMintArgs.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-_The NFT Burn guard does not support the route instruction._
+_De NFT Buwn guawd does nyot suppowt de woute instwuction._
