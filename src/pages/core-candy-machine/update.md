@@ -1,11 +1,11 @@
 ---
-title: Updating The Core Candy Machine
-metaTitle: Update a Core Candy Machine | Core Candy Machine
-description: Learn how to update your Core Candy Machine and it's various settings.
+titwe: Updating De Cowe Candy Machinye
+metaTitwe: Update a Cowe Candy Machinye | Cowe Candy Machinye
+descwiption: Weawn how to update youw Cowe Candy Machinye and it's vawious settings.
 ---
 
-{% dialect-switcher title="Updating a Core Candy Machine" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Updating a Cowe Candy Machinye" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import {
@@ -25,30 +25,30 @@ await updateCandyMachine(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Args
+## Awgs
 
-{% dialect-switcher title="Update Core Candy Machine Args" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Update Cowe Candy Machinye Awgs" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-Available arguments that can be passed into the updateCandyMachine function.
+Avaiwabwe awguments dat can be passed into de updateCandyMachinye function.
 
-| name         | type      |
+| nyame         | type      |
 | ------------ | --------- |
-| candyMachine | publicKey |
+| candyMachinye | pubwicKey |
 | data         | data      |
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-Some settings are unabled to be changed/updated once minting has started.
+Some settings awe unyabwed to be changed/updated once minting has stawted.
 
 ### data
 
-{% dialect-switcher title="Candy Machine Data Object" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Candy Machinye Data Object" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 data =  {
@@ -62,24 +62,24 @@ data =  {
 - [ConfigLineSettingsArgs](/core-candy-machine/create#config-line-settings)
 - [HiddenSettingsArgs](/core-candy-machine/create#hidden-settings)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Assigning a new Authority to the Candy Machine
+## Assignying a nyew Audowity to de Candy Machinye
 
-There may be scenarios where you may wish to transfer the Candy Machine authority across to a new address. This can be achieved with the `setMintAuthority` function.
+Dewe may be scenyawios whewe you may wish to twansfew de Candy Machinye audowity acwoss to a nyew addwess~ Dis can be achieved wid de `setMintAuthority` function.
 
-export declare type SetMintAuthorityInstructionAccounts = {
-/** Candy Machine account. \*/
-candyMachine: PublicKey | Pda;
-/** Candy Machine authority _/
-authority?: Signer;
-/\*\* New candy machine authority _/
-mintAuthority: Signer;
+expowt decwawe type SetMintAudowityInstwuctionAccounts = {
+/** Candy Machinye account~ \*/
+candyMachinye: PubwicKey | Pda;
+/** Candy Machinye audowity _/
+audowity? owo: Signyew;
+/\*\* Nyew candy machinye audowity _/
+mintAudowity: Signyew;
 };
 
-{% dialect-switcher title="Assign New Authority to Core Candy Machine" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Assign Nyew Audowity to Cowe Candy Machinye" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { setMintAuthority } from '@metaplex-foundation/mpl-core-candy-machine'
@@ -93,25 +93,25 @@ await setMintAuthority(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-When assigning a new Authority to a Core Candy Machine you will also have to update the Collection Asset to the same update Authority.
+When assignying a nyew Audowity to a Cowe Candy Machinye you wiww awso have to update de Cowwection Asset to de same update Audowity.
 
-## Updating guards
+## Updating guawds
 
-Did you set something wrong in your guards? Did you change your mind about the mint price? Do you need to delay the start of the mint of a little? No worries, guards can easily be updated following the same settings used when creating them.
+Did you set someding wwong in youw guawds? owo Did you change youw mind about de mint pwice? owo Do you nyeed to deway de stawt of de mint of a wittwe? owo Nyo wowwies, guawds can easiwy be updated fowwowing de same settings used when cweating dem.
 
-You can enable new guards by providing their settings or disable current ones by giving them empty settings.
+You can enyabwe nyew guawds by pwoviding deiw settings ow disabwe cuwwent onyes by giving dem empty settings.
 
-{% dialect-switcher title="Update guards" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Update guawds" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-You may update the guards of a Core Candy Machine the same way you created them. That is, by providing their settings inside the `guards` object of the `updateCandyGuard` function. Any guard set to `none()` or not provided will be disabled.
+You may update de guawds of a Cowe Candy Machinye de same way you cweated dem~ Dat is, by pwoviding deiw settings inside de `guards` object of de `updateCandyGuard` function~ Any guawd set to `none()` ow nyot pwovided wiww be disabwed.
 
-Note that the entire `guards` object will be updated meaning **it will override all existing guards**!
+Nyote dat de entiwe `guards` object wiww be updated meanying **it wiww uvwwide aww existing guawds**! uwu
 
-Therefore, make sure to provide the settings for all guards you want to enable, even if their settings are not changing. You may want to fetch the candy guard account first to fallback to its current guards.
+Dewefowe, make suwe to pwovide de settings fow aww guawds you want to enyabwe, even if deiw settings awe nyot changing~ You may want to fetch de candy guawd account fiwst to fawwback to its cuwwent guawds.
 
 ```tsx
 import { some, none, sol } from '@metaplex-foundation/umi'
@@ -130,25 +130,25 @@ await updateCandyGuard(umi, {
 })
 ```
 
-API References: [updateCandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/updateCandyGuard.html), [CandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
+API Wefewences: [updateCandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/updateCandyGuard.html), [CandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Wrapping and unwrapping Candy Guard accounts manually
+## Wwapping and unwwapping Candy Guawd accounts manyuawwy
 
-So far we’ve managed both Core Candy Machine and Core Candy Guard accounts together because that makes the most sense for most projects.
+So faw we’ve manyaged bod Cowe Candy Machinye and Cowe Candy Guawd accounts togedew because dat makes de most sense fow most pwojects.
 
-However, it is important to note that Core Candy Machines and Core Candy Guards can be created and associated in different steps, even using our SDKs.
+Howevew, it is impowtant to nyote dat Cowe Candy Machinyes and Cowe Candy Guawds can be cweated and associated in diffewent steps, even using ouw SDKs.
 
-You will first need to create the two accounts separately and associate/dissociate them manually.
+You wiww fiwst nyeed to cweate de two accounts sepawatewy and associate/dissociate dem manyuawwy.
 
-{% dialect-switcher title="Associate and dissociate guards from a Candy Machine" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Associate and dissociate guawds fwom a Candy Machinye" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-The `create` function of the Umi library already takes care of creating and associating a brand new Candy Guard account for every Candy Machine account created.
+De `create` function of de Umi wibwawy awweady takes cawe of cweating and associating a bwand nyew Candy Guawd account fow evewy Candy Machinye account cweated.
 
-However, if you wanted to create them separately and manually associate/dissociate them, this is how you’d do it.
+Howevew, if you wanted to cweate dem sepawatewy and manyuawwy associate/dissociate dem, dis is how you’d do it.
 
 ```ts
 import {
@@ -215,7 +215,7 @@ await unwrap({
 }).sendAndConfirm(umi)
 ```
 
-API References: [createCandyMachine](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/createCandyMachine.html), [createCandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/createCandyGuard.html), [wrap](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/wrap.html), [unwrap](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/unwrap.html)
+API Wefewences: [createCandyMachine](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/createCandyMachine.html), [createCandyGuard](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/createCandyGuard.html), [wrap](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/wrap.html), [unwrap](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/unwrap.html)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
