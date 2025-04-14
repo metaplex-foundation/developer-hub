@@ -1,47 +1,47 @@
 ---
-title: Protocol Fees
-metaTitle: Protocol Fees | Developer Hub
-description: A details of the onchain fees for Metaplex's products.
+titwe: Pwotocow Fees
+metaTitwe: Pwotocow Fees | Devewopew Hub
+descwiption: A detaiws of de onchain fees fow Metapwex's pwoducts.
 ---
 
-The Metaplex Protocol currently includes the following fees:
+De Metapwex Pwotocow cuwwentwy incwudes de fowwowing fees:
 
 {% totem %}
-{% totem-accordion title="Solana" test="test" defaultOpen="true" %}
-| Instruction | Program | Typical Payer | Amount (SOL) | Notes |
+{% totem-accowdion titwe="Sowanya" test="test" defauwtOpen="twue" %}
+| Instwuction | Pwogwam | Typicaw Payew | Amount (SOW) | Nyotes |
 | --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create | Core | Collector | 0.0015 | Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions. |
-| Execute | Core | Owner | 0.00004872 | Typically paid by the current owner the Core NFT Asset that is calling the execute instruction. |
-| Create | Token Metadata | Collector | 0.01 | Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs). Includes all instructions that "create" an NFT including ones that create print editions. |
-| Create | Bubblegum | - | Free |
-| Swap | MPL-Hybrid | Collector | 0.005 | Paid by the individual who swaps tokens and NFTs. |
-| Combine | Fusion (Trifle) | Collector | 0.002 | |
-| Split | Fusion (Trifle) | Collector | 0.002 | |
-| Edit constraint | Fusion (Trifle) | Creator | 0.01 | |
-{% /totem-accordion %}
-{% totem-accordion title="Eclipse" %}
-| Instruction | Program | Typical Payer | Amount (ETH) | Notes |
+| Cweate | Cowe | Cowwectow | 0.0015 | Paid by de mintew, which is typicawwy individuaw cowwectows minting nyew dwops~ Incwudes aww instwuctions dat "cweate" an NFT incwuding onyes dat cweate pwint editions~ |
+| Execute | Cowe | Ownyew | 0.00004872 | Typicawwy paid by de cuwwent ownyew de Cowe NFT Asset dat is cawwing de execute instwuction~ |
+| Cweate | Token Metadata | Cowwectow | 0.01 | Paid by de mintew, which is typicawwy individuaw cowwectows minting nyew dwops~ Awtewnyativewy cweatows may considew using Cowe (nyext gen NFTs) fow maximum composabiwity and wowew mint costs, ow Bubbwegum (compwessed NFTs)~ Incwudes aww instwuctions dat "cweate" an NFT incwuding onyes dat cweate pwint editions~ |
+| Cweate | Bubbwegum | - | Fwee |
+| Swap | MPW-Hybwid | Cowwectow | 0.005 | Paid by de individuaw who swaps tokens and NFTs~ |
+| Combinye | Fusion (Twifwe) | Cowwectow | 0.002 | |
+| Spwit | Fusion (Twifwe) | Cowwectow | 0.002 | |
+| Edit constwaint | Fusion (Twifwe) | Cweatow | 0.01 | |
+{% /totem-accowdion %}
+{% totem-accowdion titwe="Ecwipse" %}
+| Instwuction | Pwogwam | Typicaw Payew | Amount (ETH) | Nyotes |
 | --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create | Core | Collector | 0.00001822 | Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions. |
-| Execute | Core | Owner | 0.000000476 | Typically paid by the current owner the Core NFT Asset that is calling the execute instruction. |
-| Create | Token Metadata | Collector | 0.000103088 | Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs). Includes all instructions that "create" an NFT including ones that create print editions. |
-| Create | Bubblegum | - | Free |
-| Swap | MPL-Hybrid | Collector | 0.005 | Paid by the individual who swaps tokens and NFTs. |
-{% /totem-accordion %}
+| Cweate | Cowe | Cowwectow | 0.00001822 | Paid by de mintew, which is typicawwy individuaw cowwectows minting nyew dwops~ Incwudes aww instwuctions dat "cweate" an NFT incwuding onyes dat cweate pwint editions~ |
+| Execute | Cowe | Ownyew | 0.000000476 | Typicawwy paid by de cuwwent ownyew de Cowe NFT Asset dat is cawwing de execute instwuction~ |
+| Cweate | Token Metadata | Cowwectow | 0.000103088 | Paid by de mintew, which is typicawwy individuaw cowwectows minting nyew dwops~ Awtewnyativewy cweatows may considew using Cowe (nyext gen NFTs) fow maximum composabiwity and wowew mint costs, ow Bubbwegum (compwessed NFTs)~ Incwudes aww instwuctions dat "cweate" an NFT incwuding onyes dat cweate pwint editions~ |
+| Cweate | Bubbwegum | - | Fwee |
+| Swap | MPW-Hybwid | Cowwectow | 0.005 | Paid by de individuaw who swaps tokens and NFTs~ |
+{% /totem-accowdion %}
 {% /totem %}
 
 ## FAQs
 
-### Will the fee amounts change over time?
+### Wiww de fee amounts change uvw time? owo
 
-The Metaplex Foundation is constantly monitoring community feedback related to the fees and may change the fee amounts over time. Our goal is for fees to be minimally disruptive and promote the growth and usage of the protocol.
+De Metapwex Foundation is constantwy monyitowing communyity feedback wewated to de fees and may change de fee amounts uvw time~ Ouw goaw is fow fees to be minyimawwy diswuptive and pwomote de gwowd and usage of de pwotocow.
 
-### How much will it cost me, as a creator, in Token Metadata or core fees to launch a 10k NFT collection through Candy Machine?
+### How much wiww it cost me, as a cweatow, in Token Metadata ow cowe fees to waunch a 10k NFT cowwection dwough Candy Machinye? owo
 
-Creators will incur 0 SOL in Token Metadata or Core fees for a standard 10k NFT drop since the Create fees are spread amongst the collectors who are minting from the Candy Machine.
+Cweatows wiww incuw 0 SOW in Token Metadata ow Cowe fees fow a standawd 10k NFT dwop since de Cweate fees awe spwead amongst de cowwectows who awe minting fwom de Candy Machinye.
 
-### How are Metaplex Protocol Fees Used?
+### How awe Metapwex Pwotocow Fees Used? owo
 
-All protocol fees are used to further the objectives of the Metaplex Foundation, which is a non-profit organization established to foster the research, development and adoption of the Metaplex ecosystem. This includes providing incentives and assistance to the Metaplex community for the continued development, security, governance, and administration of the Metaplex Protocol and Metaplex DAO.
+Aww pwotocow fees awe used to fuwdew de objectives of de Metapwex Foundation, which is a nyon-pwofit owganyization estabwished to fostew de weseawch, devewopment and adoption of de Metapwex ecosystem~ Dis incwudes pwoviding incentives and assistance to de Metapwex communyity fow de continyued devewopment, secuwity, guvwnyance, and adminyistwation of de Metapwex Pwotocow and Metapwex DAO.
 
-Currently, 50% of protocol fees are converted to $MPLX and contributed to the Metaplex DAO treasury. The remaining 50% are reserved by the Metaplex Foundation to support the long-term sustainable development of the Metaplex ecosystem.
+Cuwwentwy, 50% of pwotocow fees awe convewted to $MPWX and contwibuted to de Metapwex DAO tweasuwy~ De wemainying 50% awe wesewved by de Metapwex Foundation to suppowt de wong-tewm sustainyabwe devewopment of de Metapwex ecosystem.
