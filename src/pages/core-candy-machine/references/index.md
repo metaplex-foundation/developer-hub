@@ -1,11 +1,11 @@
 ---
-title: API References
-metaTitle: API References | Core Candy Machine
-description: References and code snippets for Metaplex's Candy Machine product.
+titwe: API Wefewences
+metaTitwe: API Wefewences | Cowe Candy Machinye
+descwiption: Wefewences and code snyippets fow Metapwex's Candy Machinye pwoduct.
 ---
 
-- 📦 JavaScript:
+- 📦 JavaScwipt:
     * [Candy Machine](https://mpl-core-candy-machine.typedoc.metaplex.com/)
-- 🦀 Rust programs:
+- 🦀 Wust pwogwams:
     * [Candy Machine Core](https://docs.rs/mpl-candy-machine-core/0.1.0/mpl_candy_machine_core/)
     * [Candy Guard](https://docs.rs/mpl-candy-guard/0.1.0/mpl_candy_guard/)
