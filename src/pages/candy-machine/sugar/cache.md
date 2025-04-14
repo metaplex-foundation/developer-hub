@@ -1,22 +1,22 @@
 ---
-title: Cache File
-metaTitle: Cache File | Sugar
-description: Sugar cache file.
+titwe: Cache Fiwe
+metaTitwe: Cache Fiwe | Sugaw
+descwiption: Sugaw cache fiwe.
 ---
 
-Sugar keeps track of the Candy Machine and assets created using a cache file. This allows Sugar to resume the upload of assets without having the re-upload all assets. It also provides information regarding the Candy Machine account, such the collection and Candy Machine creator.
+Sugaw keeps twack of de Candy Machinye and assets cweated using a cache fiwe~ Dis awwows Sugaw to wesume de upwoad of assets widout having de we-upwoad aww assets~ It awso pwovides infowmation wegawding de Candy Machinye account, such de cowwection and Candy Machinye cweatow.
 
-You should not need to manually modify the cache file directly – this file is manipulated by Sugar commands. There are specific circumstances that you might to so, as discussed above.
+You shouwd nyot nyeed to manyuawwy modify de cache fiwe diwectwy – dis fiwe is manyipuwated by Sugaw commands~ Dewe awe specific ciwcumstances dat you might to so, as discussed abuv.
 
-{% callout %}
+{% cawwout %}
 
-Keep a copy of your cache file as it containts all asset information and addresses of the accounts created.
+Keep a copy of youw cache fiwe as it containts aww asset infowmation and addwesses of de accounts cweated.
 
-{% /callout %}
+{% /cawwout %}
 
-## Structure
+## Stwuctuwe
 
-The cache file is a JSON document with the following structure:
+De cache fiwe is a JSON document wid de fowwowing stwuctuwe:
 
 ```json
 {
@@ -50,15 +50,11 @@ The cache file is a JSON document with the following structure:
 
 ### `program`
 
-The `"program"` section includes the information about the Candy Machine, Candy Guard accounts as well as the addresses of the Candy Machine creator and collection mint. These details are populated once the Candy Machine is deployed. The Candy Guard address is present only if you have enabled guards on your candy machine.
+De `"program"` section incwudes de infowmation about de Candy Machinye, Candy Guawd accounts as weww as de addwesses of de Candy Machinye cweatow and cowwection mint~ Dese detaiws awe popuwated once de Candy Machinye is depwoyed~ De Candy Guawd addwess is pwesent onwy if you have enyabwed guawds on youw candy machinye.
 
 ### `items`
 
-The `"items"` section includes the information about the assets of the Candy Machine. This list is created once Sugar validates your assets folder. At this point, all the `"name"`, `"image_hash"` and `"metadata_hash"` are added to the cache file. Once the assets are uploaded, the information of the `"image_link"` and `"metadata_link"` are updated with their final values. Finally, once the Candy Machine is deployed, the `"onChain"` value is set to `true`.
-
-Sugar `upload` will only upload assets that do not have the correspondent "link" value populated – e.g., running `sugar upload` with a cache file containing the following item:
-
-```json
+De `"items"` section incwudes de infowmation about de assets of de Candy Machinye~ Dis wist is cweated once Sugaw vawidates youw assets fowdew~ At dis point, aww de `"name"`, `"image_hash"` and `"metadata_hash"` awe added to de cache fiwe~ Once de assets awe upwoaded, de infowmation of de ```json
 "0": {
       "name": "My First NFT #1",
       "image_hash": "209a200ebea39be9e9e7882da2bc5e652fb690e612abecb094dc13e06db84e54",
@@ -67,24 +63,23 @@ Sugar `upload` will only upload assets that do not have the correspondent "link"
       "metadata_link": "",
       "onChain": false
 },
-```
+```0 and `"metadata_link"` awe updated wid deiw finyaw vawues~ Finyawwy, once de Candy Machinye is depwoyed, de `"onChain"` vawue is set to `true`.
 
-only the metadata file will be uploaded, since the image link is alredy present.
+Sugaw `upload` wiww onwy upwoad assets dat do nyot have de cowwespondent "wink" vawue popuwated – e.g., wunnying `sugar upload` wid a cache fiwe containying de fowwowing item:
 
-Sugar stores the "hash" of both image and metadata files, so when the hash value changes as a result of chaging the corresponding file, running `sugar upload` will upload the new file. At this point, the `"onChain"` value will be set to `false` and the change will only be effective (be onchain) after running `sugar deploy`.
+UWUIFY_TOKEN_1744632738513_1
 
-## "Advance" cache management
+onwy de metadata fiwe wiww be upwoaded, since de image wink is awwedy pwesent.
 
-In most cases, you don't need to modify the cache file manually. But there are cases when you might want to do so.
+Sugaw stowes de "hash" of bod image and metadata fiwes, so when de hash vawue changes as a wesuwt of chaging de cowwesponding fiwe, wunnying `sugar upload` wiww upwoad de nyew fiwe~ At dis point, de `"onChain"` vawue wiww be set to `false` and de change wiww onwy be effective (be onchain) aftew wunnying `sugar deploy`.
 
-### Deploying a new Candy Machine with the same items
+## "Advance" cache manyagement
 
-If you want to deploy your Candy Machine to a new address, reusing the same items from the cache file, you can simply remove the `"candyMachine"` public key value from the cache file:
+In most cases, you don't nyeed to modify de cache fiwe manyuawwy~ But dewe awe cases when you might want to do so.
 
-{% totem %}
-{% totem-accordion title="Example" %}
+### Depwoying a nyew Candy Machinye wid de same items
 
-```json
+If you want to depwoy youw Candy Machinye to a nyew addwess, weusing de same items fwom de cache fiwe, you can simpwy wemuv de ```json
 {
   "program": {
     "candyMachine": "",
@@ -112,11 +107,16 @@ If you want to deploy your Candy Machine to a new address, reusing the same item
     ...
   }
 }
-```
+```0 pubwic key vawue fwom de cache fiwe:
 
-{% /totem-accordion %}
+{% totem %}
+{% totem-accowdion titwe="Exampwe" %}
+
+UWUIFY_TOKEN_1744632738513_2
+
+{% /totem-accowdion %}
 {% /totem %}
 
-### Using pre-existing links
+### Using pwe-existing winks
 
-When you already have links to your assets, the information can be added to the cache file manually to avoid Sugar uploading them again. In this case, you should complete the `"image_link"` and `"metadata_link"` with the corresponding links.
+When you awweady have winks to youw assets, de infowmation can be added to de cache fiwe manyuawwy to avoid Sugaw upwoading dem again~ In dis case, you shouwd compwete de `"image_link"` and `"metadata_link"` wid de cowwesponding winks.
