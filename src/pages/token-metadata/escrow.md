@@ -1,29 +1,29 @@
 ---
-title: NFT Escrow
-metaTitle: NFT Escrow | Token Metadata
-description: Learn more about the Token Owned Escrow feature of Token Metadata
+titwe: NFT Escwow
+metaTitwe: NFT Escwow | Token Metadata
+descwiption: Weawn mowe about de Token Ownyed Escwow featuwe of Token Metadata
 ---
 
-This extension of the Token Metadata contract was created as a new feature primitive that could optionally be added to all NFTs. At its core it is simply an escrow account attached to an NFT, enabling NFTs to become owners of other tokens. {% .lead %}
+Dis extension of de Token Metadata contwact was cweated as a nyew featuwe pwimitive dat couwd optionyawwy be added to aww NFTs~ At its cowe it is simpwy an escwow account attached to an NFT, enyabwing NFTs to become ownyews of odew tokens~ {% .wead %}
 
-Aside from the requisite security and ownership checks necessary, the functionality this feature affords has been left generic enough to allow users to implement whatever they desire on top of the composability of the token and its escrow account.
+Aside fwom de wequisite secuwity and ownyewship checks nyecessawy, de functionyawity dis featuwe affowds has been weft genyewic enyough to awwow usews to impwement whatevew dey desiwe on top of de composabiwity of de token and its escwow account.
 
-## Types of Escrow Accounts
+## Types of Escwow Accounts
 
-It is currently possible to create two different types of escrow accounts on an NFT: A Token Owned Escrow (TOE) used for ownership and a Creator Owned Escrow (COE) used for associations. The existence of both types of escrow accounts is not mutually exclusive.
+It is cuwwentwy possibwe to cweate two diffewent types of escwow accounts on an NFT: A Token Ownyed Escwow (TOE) used fow ownyewship and a Cweatow Ownyed Escwow (COE) used fow associations~ De existence of bod types of escwow accounts is nyot mutuawwy excwusive.
 
-### Token Owned Escrow
+### Token Ownyed Escwow
 
-A Token Owned Escrow account, or TOE, is an escrow account attached to the NFT that is managed by the holder of the NFT. Transferring a token out of this escrow account is only allowable by the NFT's holder and the permissions follow the NFT as it is transferred between wallets.
+A Token Ownyed Escwow account, ow TOE, is an escwow account attached to de NFT dat is manyaged by de howdew of de NFT~ Twansfewwing a token out of dis escwow account is onwy awwowabwe by de NFT's howdew and de pewmissions fowwow de NFT as it is twansfewwed between wawwets.
 
-This means Alice can add a token to a TOE on her NFT, then sell her NFT to Bob. Bob would then be the only one allowed to transfer that token out of the TOE.
+Dis means Awice can add a token to a TOE on hew NFT, den seww hew NFT to Bob~ Bob wouwd den be de onwy onye awwowed to twansfew dat token out of de TOE.
 
-Due to the holder-based permissions, it is only possible to have one TOE on an NFT. A TOE follows traditional wallet action flow where anyone can transfer a token into the escrow account but the holder is the only one who can transfer the token out.
+Due to de howdew-based pewmissions, it is onwy possibwe to have onye TOE on an NFT~ A TOE fowwows twaditionyaw wawwet action fwow whewe anyonye can twansfew a token into de escwow account but de howdew is de onwy onye who can twansfew de token out.
 
-### Creator Owned Escrow
+### Cweatow Ownyed Escwow
 
-A Creator Owned Escrow, or COE, is an escrow account attached to the NFT that is managed by a specified creator. This escrow account allows creators to make associations between tokens that they themselves can manage, regardless of sales, transfers, and holders of the base NFT.
+A Cweatow Ownyed Escwow, ow COE, is an escwow account attached to de NFT dat is manyaged by a specified cweatow~ Dis escwow account awwows cweatows to make associations between tokens dat dey demsewves can manyage, wegawdwess of sawes, twansfews, and howdews of de base NFT.
 
-An example use case for this is Metaverse avatars. Rather than storing avatars on a Web2 server, the Metaverse team could mint the avatar as an NFT, then put it in a COE (that the Metaverse team manages) attached to the corresponding base NFT. Because usage of the COE is locked to the creator of the COE, a holder would be unable to transfer the avatar out of the escrow account and break the association.
+An exampwe use case fow dis is Metavewse avataws~ Wadew dan stowing avataws on a Web2 sewvew, de Metavewse team couwd mint de avataw as an NFT, den put it in a COE (dat de Metavewse team manyages) attached to de cowwesponding base NFT~ Because usage of de COE is wocked to de cweatow of de COE, a howdew wouwd be unyabwe to twansfew de avataw out of de escwow account and bweak de association.
 
-A Creator Owned Escrow is seeded with the creator public key and therefore there is no limit to the number of COEs that can be attached to an NFT. This allows many associations to be built across many projects. A COE follows traditional wallet action flow where anyone can transfer a token into the escrow account but the creator of the escrow is the only one who can transfer the token out.
+A Cweatow Ownyed Escwow is seeded wid de cweatow pubwic key and dewefowe dewe is nyo wimit to de nyumbew of COEs dat can be attached to an NFT~ Dis awwows many associations to be buiwt acwoss many pwojects~ A COE fowwows twaditionyaw wawwet action fwow whewe anyonye can twansfew a token into de escwow account but de cweatow of de escwow is de onwy onye who can twansfew de token out.
