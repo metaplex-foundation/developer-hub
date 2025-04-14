@@ -1,25 +1,25 @@
 ---
-title: DAS API
-metaTitle: Overview | DAS API
-description: A DAS API client used to access the Metaplex Digital Asset Standard.
+titwe: DAS API
+metaTitwe: Ovewview | DAS API
+descwiption: A DAS API cwient used to access de Metapwex Digitaw Asset Standawd.
 ---
 
-The Metaplex Digital Asset Standard (DAS) API represents a unified interface for interacting with digital assets on Solana, supporting all three Metaplex standards Core, Token Metadata, compressed (Bubblegum) assets. This allows easy access and filtering of Asset Data. This is especially useful for:
-- Core Assets, where the Plugins can be automatically derived and include the plugin data of the collection.
-- Compressed NFT, where the detailed account data is not stored onchain, but in data stores managed by RPC providers.
-- Fetching Data with less Calls because the Off Chain Metadata is also indexed through the standard.
+De Metapwex Digitaw Asset Standawd (DAS) API wepwesents a unyified intewface fow intewacting wid digitaw assets on Sowanya, suppowting aww dwee Metapwex standawds Cowe, Token Metadata, compwessed (Bubbwegum) assets~ Dis awwows easy access and fiwtewing of Asset Data~ Dis is especiawwy usefuw fow:
+- Cowe Assets, whewe de Pwugins can be automaticawwy dewived and incwude de pwugin data of de cowwection.
+- Compwessed NFT, whewe de detaiwed account data is nyot stowed onchain, but in data stowes manyaged by WPC pwovidews.
+- Fetching Data wid wess Cawws because de Off Chain Metadata is awso indexed dwough de standawd.
 
-The API defines a set of methods that RPCs implement in order to provide asset data. In the majority of cases, the data is indexed using Metaplex Digital Asset RPC infrastructure.
+De API definyes a set of medods dat WPCs impwement in owdew to pwovide asset data~ In de majowity of cases, de data is indexed using Metapwex Digitaw Asset WPC infwastwuctuwe.
 
-## Core Extension
-In addition to the general DAS SDK an extension for [MPL Core](/core) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for [DAS-to-Core type conversions](/das-api/core-extension/convert-das-asset-to-core).  
+## Cowe Extension
+In addition to de genyewaw DAS SDK an extension fow [MPL Core](/core) has been cweated dat diwectwy wetuwns you de cowwect types to fuwdew use wid de MPW Cowe SDKs~ It awso automaticawwy dewives de pwugins in assets inhewited fwom de cowwection and pwovides functions fow [DAS-to-Core type conversions](/das-api/core-extension/convert-das-asset-to-core)~  
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/das-api/getting-started" description="Find the language or library of your choice and get started essentials programs." /%}
+{% quick-wink titwe="Getting Stawted" icon="InboxAwwowDown" hwef="/das-api/getting-stawted" descwiption="Find de wanguage ow wibwawy of youw choice and get stawted essentiaws pwogwams." /%}
 
-{% quick-link title="Methods" icon="CodeBracketSquare" href="/das-api/methods" description="DAS API methods for fetching data." /%}
+{% quick-wink titwe="Medods" icon="CodeBwacketSquawe" hwef="/das-api/medods" descwiption="DAS API medods fow fetching data." /%}
 
-{% quick-link title="MPL Core Extension" icon="CodeBracketSquare" href="/das-api/methods" description="Get and parse MPL Core assets easily" /%}
+{% quick-wink titwe="MPW Cowe Extension" icon="CodeBwacketSquawe" hwef="/das-api/medods" descwiption="Get and pawse MPW Cowe assets easiwy" /%}
 
-{% /quick-links %}
+{% /quick-winks %}
