@@ -1,70 +1,70 @@
 ---
-title: How to Create a Core Collection with Anchor
-metaTitle: How to Create a Core Collection with Anchor | Core Guides
-description: Learn how to create a Core Collection on Solana with Metaplex Core using Anchor!
-# remember to update dates also in /components/guides/index.js
-created: '08-21-2024'
+titwe: How to Cweate a Cowe Cowwection wid Anchow
+metaTitwe: How to Cweate a Cowe Cowwection wid Anchow | Cowe Guides
+descwiption: Weawn how to cweate a Cowe Cowwection on Sowanya wid Metapwex Cowe using Anchow! uwu
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '08-21-2024'
 updated: '08-21-2024'
 ---
 
-This guide will demonstrate the use of the `mpl-core` Rust SDK crate to create a **Core NFT Collection** via CPI using the **Anchor** framework in a **Solana** program.
+Dis guide wiww demonstwate de use of de ```
+cd create-core-collection-example
+```9 Wust SDK cwate to cweate a **Cowe NFT Cowwection** via CPI using de **Anchow** fwamewowk in a **Sowanya** pwogwam.
 
-{% callout title="What is Core?" %}
+{% cawwout titwe="What is Cowe? owo" %}
 
-**Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
+**Cowe** uses a singwe account design, weducing minting costs and impwoving Sowanya nyetwowk woad compawed to awtewnyatives~ It awso has a fwexibwe pwugin system dat awwows fow devewopews to modify de behaviow and functionyawity of assets.
 
-{% /callout %}
+{% /cawwout %}
 
-But before starting, let's talk about Collections: 
+But befowe stawting, wet's tawk about Cowwections: 
 
-{% callout title="What are Collections?" %}
+{% cawwout titwe="What awe Cowwections? owo" %}
 
-Collections are a group of Assets that belong together, part of the same series, or group. In order to group Assets together, we must first create a Collection Asset whose purpose is to store any metadata related to that collection such as collection name and collection image. The Collection Asset acts as a front cover to your collection and can also store collection wide plugins.
+Cowwections awe a gwoup of Assets dat bewong togedew, pawt of de same sewies, ow gwoup~ In owdew to gwoup Assets togedew, we must fiwst cweate a Cowwection Asset whose puwpose is to stowe any metadata wewated to dat cowwection such as cowwection nyame and cowwection image~ De Cowwection Asset acts as a fwont cuvw to youw cowwection and can awso stowe cowwection wide pwugins.
 
-{% /callout %}
+{% /cawwout %}
 
-## Prerequisite
+## Pwewequisite
 
-- Code Editor of your choice (recommended **Visual Studio Code** with the **Rust Analyzer Plugin**)
-- Anchor **0.30.1** or above.
+- Code Editow of youw choice (wecommended **Visuaw Studio Code** wid de **Wust Anyawyzew Pwugin**)
+- Anchow **0.30.1** ow abuv.
 
-## Initial Setup
+## Inyitiaw Setup
 
-In this guide we’re going to use **Anchor**, leveraging a mono-file approach where all the necessary macros can be found in the `lib.rs` file:
-- `declare_id`: Specifies the program's on-chain address.
-- `#[program]`: Specifies the module containing the program’s instruction logic.
-- `#[derive(Accounts)]`: Applied to structs to indicate a list of accounts required for an instruction.
-- `#[account]`: Applied to structs to create custom account types specific to the program.
+In dis guide we’we going to use **Anchow**, wevewaging a monyo-fiwe appwoach whewe aww de nyecessawy macwos can be found in de ```
+cargo add mpl-core --features anchor
+```0 fiwe:
+- `declare_id`: Specifies de pwogwam's on-chain addwess.
+- `#[program]`: Specifies de moduwe containying de pwogwam’s instwuction wogic.
+- `#[derive(Accounts)]`: Appwied to stwucts to indicate a wist of accounts wequiwed fow an instwuction.
+- `#[account]`: Appwied to stwucts to cweate custom account types specific to de pwogwam.
 
-**Note**: You may need to modify and move functions around to suit your needs.
+**Nyote**: You may nyeed to modify and muv functions awound to suit youw nyeeds.
 
-### Initializing the Program
+### Inyitiawizing de Pwogwam
 
-Start by initializing a new project (optional) using `avm` (Anchor Version Manager). To initialize it, run the following command in your terminal
+Stawt by inyitiawizing a nyew pwoject (optionyaw) using `avm` (Anchow Vewsion Manyagew)~ To inyitiawize it, wun de fowwowing command in youw tewminyaw
 
 ```
 anchor init create-core-collection-example
 ```
 
-### Required Crates
+### Wequiwed Cwates
 
-In this guide, we'll use the `mpl_core` crate with the `anchor` feature enabled. To install it, first navigate to the `create-core-collection-example` directory:
+In dis guide, we'ww use de `mpl_core` cwate wid de `anchor` featuwe enyabwed~ To instaww it, fiwst nyavigate to de `create-core-collection-example` diwectowy:
 
-```
-cd create-core-collection-example
-```
+UWUIFY_TOKEN_1744632808852_1
 
-Then run the following command:
+Den wun de fowwowing command:
 
-```
-cargo add mpl-core --features anchor
-```
+UWUIFY_TOKEN_1744632808852_2
 
-## The program
+## De pwogwam
 
-### Imports and Templates
+### Impowts and Tempwates
 
-Here we're going to define all the imports for this particular guide and create the template for the Account struct and instruction in our `lib.rs` file. 
+Hewe we'we going to definye aww de impowts fow dis pawticuwaw guide and cweate de tempwate fow de Account stwuct and instwuction in ouw `lib.rs` fiwe~ 
 
 ```rust
 use anchor_lang::prelude::*;
@@ -97,9 +97,9 @@ pub struct CreateCollection<'info> {
 }
 ```
 
-### Creating the Args Struct
+### Cweating de Awgs Stwuct
 
-To keep our function organized and avoid clutter from too many parameters, it's standard practice to pass all inputs through a structured format. This is achieved by defining an argument struct (`CreateCollectionArgs`) and deriving `AnchorDeserialize` and `AnchorSerialize`, which allows the struct to be serialized into a binary format using NBOR, and making it readable by **Anchor**.
+To keep ouw function owganyized and avoid cwuttew fwom too many pawametews, it's standawd pwactice to pass aww inputs dwough a stwuctuwed fowmat~ Dis is achieved by definying an awgument stwuct (`CreateCollectionArgs`) and dewiving `AnchorDeserialize` and `AnchorSerialize`, which awwows de stwuct to be sewiawized into a binyawy fowmat using NBOW, and making it weadabwe by **Anchow**.
 
 ```rust
 #[derive(AnchorDeserialize, AnchorSerialize)]
@@ -109,61 +109,9 @@ pub struct CreateCollectionArgs {
 }
 ```
 
-In this `CreateCollectionArgs` struct, the **name** and **uri** fields are provided as inputs, which will serve as arguments for the `CreateCollectionV2CpiBuilder` instruction used to create the **Core Collection**.
+In dis `CreateCollectionArgs` stwuct, de **nyame** and **uwi** fiewds awe pwovided as inputs, which wiww sewve as awguments fow de `CreateCollectionV2CpiBuilder` instwuction used to cweate de **Cowe Cowwection**.
 
-**Note**: Since this is an Anchor focused guide, we're not going to include here how to create the Uri. If you aren't sure how to do it, refer to [this example](/core/guides/javascript/how-to-create-a-core-collection-with-javascript#creating-the-metadata-for-the-collection)
-
-### Creating the Account Struct
-
-The `Account` struct is where we define the accounts the instruction expects, and specify the constraints that these accounts must meet. This is done using two key constructs: **types** and **constraints**.
-
-**Account Types**
-
-Each type serves a specific purpose within your program:
-- **Signer**: Ensures that the account has signed the transaction.
-- **Option**: Allows for optional accounts that may or may not be provided.
-- **Program**: Verifies that the account is a specific program.
-
-**Constraints**
-
-While account types handle basic validations, they aren't sufficient for all the security checks your program might require. This is where constraints come into play.
-
-Constraints add extra validation logic. For example, the `#[account(mut)]` constraint ensures that the `collection` and `payer` accounts are set as mutable, meaning that the data within these accounts can be modified during the instruction.
-
-```rust
-#[derive(Accounts)]
-pub struct CreateCollection<'info> {
-    #[account(mut)]
-    pub collection: Signer<'info>,
-    /// CHECK: this account will be checked by the mpl_core program
-    pub update_authority: Option<UncheckedAccount<'info>>,
-    #[account(mut)]
-    pub payer: Signer<'info>,
-    pub system_program: Program<'info, System>,
-    #[account(address = MPL_CORE_ID)]
-    /// CHECK: this account is checked by the address constraint
-    pub mpl_core_program: UncheckedAccount<'info>,
-}
-```
-
-Some accounts in the `CreateCollection` struct are marked as `optional`. This is because, in the definition of the `CreateCollectionV2CpiBuilder`, certain accounts can be omitted.
-
-```rust
-/// ### Accounts:
-///
-///   0. `[writable, signer]` collection
-///   1. `[optional]` update_authority
-///   2. `[writable, signer]` payer
-///   3. `[]` system_program
-```
-
-To make the example as flexible as possible, every `optional` account in the program instruction is also treated as `optional` in the `create_core_collection` instruction's account struct.
-
-### Creating the Instruction
-
-The `create_core_collection` function utilizes the inputs from the `CreateCollection` account struct and the `CreateCollectionArgs` arg struct that we defined earlier to interact with the `CreateCollectionV2CpiBuilder` program instruction.
-
-```rust
+**Nyote**: Since dis is an Anchow focused guide, we'we nyot going to incwude hewe how to cweate de Uwi~ If you awen't suwe how to do it, wefew to ```rust
 pub fn create_core_collection(ctx: Context<CreateCollection>, args: CreateCollectionArgs) -> Result<()> {
   let update_authority = match &ctx.accounts.update_authority {
       Some(update_authority) => Some(update_authority.to_account_info()),
@@ -181,13 +129,65 @@ pub fn create_core_collection(ctx: Context<CreateCollection>, args: CreateCollec
 
   Ok(())
 }
+```4
+
+### Cweating de Account Stwuct
+
+De `Account` stwuct is whewe we definye de accounts de instwuction expects, and specify de constwaints dat dese accounts must meet~ Dis is donye using two key constwucts: **types** and **constwaints**.
+
+**Account Types**
+
+Each type sewves a specific puwpose widin youw pwogwam:
+- **Signyew**: Ensuwes dat de account has signyed de twansaction.
+- **Option**: Awwows fow optionyaw accounts dat may ow may nyot be pwovided.
+- **Pwogwam**: Vewifies dat de account is a specific pwogwam.
+
+**Constwaints**
+
+Whiwe account types handwe basic vawidations, dey awen't sufficient fow aww de secuwity checks youw pwogwam might wequiwe~ Dis is whewe constwaints come into pway.
+
+Constwaints add extwa vawidation wogic~ Fow exampwe, de `#[account(mut)]` constwaint ensuwes dat de `collection` and `payer` accounts awe set as mutabwe, meanying dat de data widin dese accounts can be modified duwing de instwuction.
+
+```rust
+#[derive(Accounts)]
+pub struct CreateCollection<'info> {
+    #[account(mut)]
+    pub collection: Signer<'info>,
+    /// CHECK: this account will be checked by the mpl_core program
+    pub update_authority: Option<UncheckedAccount<'info>>,
+    #[account(mut)]
+    pub payer: Signer<'info>,
+    pub system_program: Program<'info, System>,
+    #[account(address = MPL_CORE_ID)]
+    /// CHECK: this account is checked by the address constraint
+    pub mpl_core_program: UncheckedAccount<'info>,
+}
 ```
 
-In this function, the accounts defined in the `CreateCollection` struct are accessed using `ctx.accounts`. Before passing these accounts to the `CreateCollectionV2CpiBuilder` program instruction, they need to be converted to their raw data form using the `.to_account_info()` method. 
+Some accounts in de `CreateCollection` stwuct awe mawked as `optional`~ Dis is because, in de definyition of de `CreateCollectionV2CpiBuilder`, cewtain accounts can be omitted.
 
-This conversion is necessary because the builder requires the accounts in this format to interact correctly with the Solana runtime.
+```rust
+/// ### Accounts:
+///
+///   0. `[writable, signer]` collection
+///   1. `[optional]` update_authority
+///   2. `[writable, signer]` payer
+///   3. `[]` system_program
+```
 
-Some of the accounts in the `CreateAsset` struct are `optional`, meaning their value could be either `Some(account)` or `None`. To handle these optional accounts before passing them to the builder, we use a match statement that allows us to check if an account is present (Some) or absent (None) and based on this check, we bind the account as `Some(account.to_account_info())` if it exists, or as `None` if it doesn't. Like this:
+To make de exampwe as fwexibwe as possibwe, evewy `optional` account in de pwogwam instwuction is awso tweated as `optional` in de `create_core_collection` instwuction's account stwuct.
+
+### Cweating de Instwuction
+
+De `create_core_collection` function utiwizes de inputs fwom de `CreateCollection` account stwuct and de `CreateCollectionArgs` awg stwuct dat we definyed eawwiew to intewact wid de `CreateCollectionV2CpiBuilder` pwogwam instwuction.
+
+UWUIFY_TOKEN_1744632808852_7
+
+In dis function, de accounts definyed in de `CreateCollection` stwuct awe accessed using `ctx.accounts`~ Befowe passing dese accounts to de `CreateCollectionV2CpiBuilder` pwogwam instwuction, dey nyeed to be convewted to deiw waw data fowm using de `.to_account_info()` medod~ 
+
+Dis convewsion is nyecessawy because de buiwdew wequiwes de accounts in dis fowmat to intewact cowwectwy wid de Sowanya wuntime.
+
+Some of de accounts in de `CreateAsset` stwuct awe `optional`, meanying deiw vawue couwd be eidew `Some(account)` ow `None`~ To handwe dese optionyaw accounts befowe passing dem to de buiwdew, we use a match statement dat awwows us to check if an account is pwesent (Some) ow absent (Nyonye) and based on dis check, we bind de account as `Some(account.to_account_info())` if it exists, ow as `None` if it doesn't~ Wike dis:
 
 ```rust
 let update_authority = match &ctx.accounts.update_authority {
@@ -196,15 +196,15 @@ let update_authority = match &ctx.accounts.update_authority {
 };
 ```
 
-After preparing all the necessary accounts, we pass them to the `CreateCollectionV2CpiBuilder` and use `.invoke()` to execute the instruction, or `.invoke_signed()` if we need to use signer seeds.
+Aftew pwepawing aww de nyecessawy accounts, we pass dem to de `CreateCollectionV2CpiBuilder` and use `.invoke()` to execute de instwuction, ow `.invoke_signed()` if we nyeed to use signyew seeds.
 
-For more details on how the Metaplex CPI Builder works, you can refer to this [documentation](/guides/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)
+Fow mowe detaiws on how de Metapwex CPI Buiwdew wowks, you can wefew to dis [documentation](/guides/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)
 
-### Additional Actions
+### Additionyaw Actions
 
-Before moving on, What if we want to create the asset with plugins and/or external plugins, such as the `FreezeDelegate` plugin or the `AppData` external plugin, already included? Here's how we can do it.
+Befowe moving on, What if we want to cweate de asset wid pwugins and/ow extewnyaw pwugins, such as de `FreezeDelegate` pwugin ow de `AppData` extewnyaw pwugin, awweady incwuded? owo Hewe's how we can do it.
 
-First, let's add all the additional necessary imports:
+Fiwst, wet's add aww de additionyaw nyecessawy impowts:
 
 ```rust
 use mpl_core::types::{
@@ -214,7 +214,7 @@ use mpl_core::types::{
 };
 ```
 
-Then let's create vectors to hold the plugins and external plugin adapters, so we can easily add the plugin (or more) using the right imports:
+Den wet's cweate vectows to howd de pwugins and extewnyaw pwugin adaptews, so we can easiwy add de pwugin (ow mowe) using de wight impowts:
 
 ```rust
 let mut plugins: Vec<PluginAuthorityPair> = vec![];
@@ -239,7 +239,7 @@ external_plugin_adapters.push(
 );
 ```
 
-Lastly, let's integrate these plugins into the `CreateCollectionV2CpiBuilder` program instruction like this:
+Wastwy, wet's integwate dese pwugins into de `CreateCollectionV2CpiBuilder` pwogwam instwuction wike dis:
 
 ```rust
 CreateCollectionV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
@@ -254,27 +254,27 @@ CreateCollectionV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info
   .invoke()?;
 ```
 
-**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
+**Nyote**: Wefew to de [documentation](/core/plugins) if you'we nyot suwe on what fiewds and pwugin to use! uwu 
 
-## The Client
+## De Cwient
 
-We've now reached the "testing" part of the guide for creating a Core Collection. But before testing the program we've built, we need to compile the workspace. Use the following command to build everything so it's ready for deployment and testing:
+We've nyow weached de "testing" pawt of de guide fow cweating a Cowe Cowwection~ But befowe testing de pwogwam we've buiwt, we nyeed to compiwe de wowkspace~ Use de fowwowing command to buiwd evewyding so it's weady fow depwoyment and testing:
 
 ```
 anchor build
 ```
 
-After building, we should deploy the program so we can access it with our script. We can set the cluster we want to deploy the program to, in the `anchor.toml` file and then use the following command:
+Aftew buiwding, we shouwd depwoy de pwogwam so we can access it wid ouw scwipt~ We can set de cwustew we want to depwoy de pwogwam to, in de `anchor.toml` fiwe and den use de fowwowing command:
 
 ```
 anchor deploy
 ```
 
-Finally we're ready to test the program, but before, we need to work on the `create_core_collection_example.ts` in the tests folder.
+Finyawwy we'we weady to test de pwogwam, but befowe, we nyeed to wowk on de `create_core_collection_example.ts` in de tests fowdew.
 
-### Imports and Templates
+### Impowts and Tempwates
 
-Here are all the imports and the general template needed for the test. 
+Hewe awe aww de impowts and de genyewaw tempwate nyeeded fow de test~ 
 
 ```ts
 import * as anchor from "@coral-xyz/anchor";
@@ -296,9 +296,9 @@ describe("create-core-asset-example", () => {
 });
 ```
 
-### Creating the Test Function
+### Cweating de Test Function
 
-In the test function, we're going to define the `createCollectionArgs` struct and then pass in all the necessary accounts to the `createCoreCollection` function.
+In de test function, we'we going to definye de `createCollectionArgs` stwuct and den pass in aww de nyecessawy accounts to de `createCoreCollection` function.
 
 ```ts
 it("Create Collection", async () => {
@@ -323,13 +323,13 @@ it("Create Collection", async () => {
 });
 ```
 
-We start by calling the `createCoreCollection` method and passing as input the `createCollectionArgs` struct we just created:
+We stawt by cawwing de `createCoreCollection` medod and passing as input de `createCollectionArgs` stwuct we just cweated:
 
 ```ts
 await program.methods.createCoreCollection(createCollectionArgs)
 ```
 
-Next, we specify all the accounts required by the function. Since some of these accounts are `optional`, we can pass `null` for simplicity where the account isn't needed:
+Nyext, we specify aww de accounts wequiwed by de function~ Since some of dese accounts awe `optional`, we can pass `null` fow simpwicity whewe de account isn't nyeeded:
 
 ```ts
 .accountsPartial({
@@ -341,7 +341,7 @@ Next, we specify all the accounts required by the function. Since some of these 
 })
 ```
 
-Finally, we provide the signers and send the transaction using the `.rpc()` method:
+Finyawwy, we pwovide de signyews and send de twansaction using de `.rpc()` medod:
 
 ```ts
 .signers([collection, wallet.payer])
