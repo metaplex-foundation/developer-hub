@@ -1,55 +1,55 @@
 ---
-title: How to Create a Core NFT Asset with Javascript
-metaTitle: How to Create a Core NFT Asset with Javascript | Core Guides
-description: Learn how to create a Core NFT Asset on the Solana blockchain with the Metaplex Core javascript package.
-# remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
+titwe: How to Cweate a Cowe NFT Asset wid Javascwipt
+metaTitwe: How to Cweate a Cowe NFT Asset wid Javascwipt | Cowe Guides
+descwiption: Weawn how to cweate a Cowe NFT Asset on de Sowanya bwockchain wid de Metapwex Cowe javascwipt package.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '06-16-2024'
 updated: '06-18-2024'
 ---
 
-This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Javascript SDK package to create a **Core NFT Asset** using the Metaplex Core onchain program.
+Dis guide wiww demonstwate de use of de  ```js
+npm i @metaplex-foundation/umi
+```6 Javascwipt SDK package to cweate a **Cowe NFT Asset** using de Metapwex Cowe onchain pwogwam.
 
-{% callout title="What is Core?" %}
+{% cawwout titwe="What is Cowe? owo" %}
 
-**Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
+**Cowe** uses a singwe account design, weducing minting costs and impwoving Sowanya nyetwowk woad compawed to awtewnyatives~ It awso has a fwexibwe pwugin system dat awwows fow devewopews to modify de behaviow and functionyawity of assets.
 
-{% /callout %}
+{% /cawwout %}
 
-But before starting, let's talk about Assets: 
+But befowe stawting, wet's tawk about Assets: 
 
-{% callout title="What is an Asset?" %}
+{% cawwout titwe="What is an Asset? owo" %}
 
-Setting itself apart from existing Asset programs, like Solana’s Token program, Metaplex Core and Core NFT Assets (sometimes referred to as Core NFT Assets) do not rely on multiple accounts, like Associated Token Accounts. Instead, Core NFT Assets store the relationship between a wallet and the "mint" account within the asset itself.
+Setting itsewf apawt fwom existing Asset pwogwams, wike Sowanya’s Token pwogwam, Metapwex Cowe and Cowe NFT Assets (sometimes wefewwed to as Cowe NFT Assets) do nyot wewy on muwtipwe accounts, wike Associated Token Accounts~ Instead, Cowe NFT Assets stowe de wewationship between a wawwet and de "mint" account widin de asset itsewf.
 
-{% /callout %}
+{% /cawwout %}
 
 
-## Prerequisite
+## Pwewequisite
 
-- Code Editor of your choice (recommended **Visual Studio Code**)
-- Node **18.x.x** or above.
+- Code Editow of youw choice (wecommended **Visuaw Studio Code**)
+- Nyode **18.x.x** ow abuv.
 
-## Initial Setup
+## Inyitiaw Setup
 
-This guide will teach you how to create an NFT Core Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
+Dis guide wiww teach you how to cweate an NFT Cowe Asset wid Javascwipt based on a singwe fiwe scwipt~ You may nyeed to modify and muv functions awound to suit youw nyeeds.
 
-### Initializing
+### Inyitiawizing
 
-Start by initializing a new project (optional) with the package manager of your choice (npm, yarn, pnpm, bun) and fill in required details when prompted.
+Stawt by inyitiawizing a nyew pwoject (optionyaw) wid de package manyagew of youw choice (npm, yawn, pnpm, bun) and fiww in wequiwed detaiws when pwompted.
 
 ```js
 npm init
 ```
 
-### Required Packages
+### Wequiwed Packages
 
-Install the required packages for this guide.
+Instaww de wequiwed packages fow dis guide.
 
-{% packagesUsed packages=["umi", "umiDefaults", "core", "@metaplex-foundation/umi-uploader-irys"] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefauwts", "cowe", "@metapwex-foundation/umi-upwoadew-iwys"] type="npm" /%}
 
-```js
-npm i @metaplex-foundation/umi
-```
+UWUIFY_TOKEN_1744632813345_1
 
 ```js
 npm i @metaplex-foundation/umi-bundle-defaults
@@ -63,9 +63,9 @@ npm i @metaplex-foundation/mpl-core
 npm i @metaplex-foundation/umi-uploader-irys;
 ```
 
-### Imports and Wrapper Function
+### Impowts and Wwappew Function
 
-Here we will define all needed imports for this particular guide and create a wrapper function where all our code will execute.
+Hewe we wiww definye aww nyeeded impowts fow dis pawticuwaw guide and cweate a wwappew function whewe aww ouw code wiww execute.
 
 ```ts
 import { create, mplCore } from '@metaplex-foundation/mpl-core'
@@ -96,13 +96,13 @@ createNft()
 
 ## Setting up Umi
 
-While setting up Umi you can use or generate keypairs/wallets from different sources. You create a new wallet for testing, import an existing wallet from the filesystem, or use `walletAdapter` if you are creating a website/dApp.  
+Whiwe setting up Umi you can use ow genyewate keypaiws/wawwets fwom diffewent souwces~ You cweate a nyew wawwet fow testing, impowt an existing wawwet fwom de fiwesystem, ow use `walletAdapter` if you awe cweating a website/dApp~  
 
-**Note**: For this example we're going to set up Umi with a `generatedSigner()` but you can find all the possible setup down below!
+**Nyote**: Fow dis exampwe we'we going to set up Umi wid a `generatedSigner()` but you can find aww de possibwe setup down bewow! uwu
 
 {% totem %}
 
-{% totem-accordion title="With a New Wallet" %}
+{% totem-accowdion titwe="Wid a Nyew Wawwet" %}
 
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
@@ -124,9 +124,9 @@ console.log('Airdropping 1 SOL to identity')
 await umi.rpc.airdrop(umi.identity.publickey)
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
-{% totem-accordion title="With an Existing Wallet" %}
+{% totem-accowdion titwe="Wid an Existing Wawwet" %}
 
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
@@ -154,9 +154,9 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 umi.use(keypairIdentity(umiSigner));
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
-{% totem-accordion title="With the Wallet Adapter" %}
+{% totem-accowdion titwe="Wid de Wawwet Adaptew" %}
 
 ```ts
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
@@ -170,21 +170,21 @@ const umi = createUmi('https://api.devnet.solana.com')
 .use(walletAdapterIdentity(wallet))
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
 
-**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
+**Nyote**: De `walletAdapter` section pwovides onwy de code nyeeded to connyect it to Umi, assuming you've awweady instawwed and set up de `walletAdapter`~ Fow a compwehensive guide, wefew to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
 
-## Creating the Metadata for the Asset
+## Cweating de Metadata fow de Asset
 
-To display a recognisable image for your Asset in the Wallets or on the Explorer, we need to create the URI where we can store the Metadata!
+To dispway a wecognyisabwe image fow youw Asset in de Wawwets ow on de Expwowew, we nyeed to cweate de UWI whewe we can stowe de Metadata! uwu
 
-### Uploading the Image
+### Upwoading de Image
 
-Umi comes with downloadable storage plugins that allow you to upload to storage solutions such `Arweave`, `NftStorage`, `AWS`, and `ShdwDrive`. For this guide we're going to use the `irysUploader()` plugin which stores content on  Arweave.
+Umi comes wid downwoadabwe stowage pwugins dat awwow you to upwoad to stowage sowutions such `Arweave`, `NftStorage`, `AWS`, and `ShdwDrive`~ Fow dis guide we'we going to use de `irysUploader()` pwugin which stowes content on  Awweave.
 
-In this example we're going to use a local approach using Irys to upload to Arweave; if you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
+In dis exampwe we'we going to use a wocaw appwoach using Iwys to upwoad to Awweave; if you wish to upwoad fiwes to a diffewent stowage pwovidew ow fwom de bwowsew you wiww nyeed to take a diffewent appwoach~ Impowting and using `fs` won't wowk in a bwowsew scenyawio.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -220,13 +220,13 @@ const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
 console.log(imageUri[0])
 ```
 
-### Uploading the Metadata
+### Upwoading de Metadata
 
-Once we have a valid and working image URI we can start working on the metadata for our asset.
+Once we have a vawid and wowking image UWI we can stawt wowking on de metadata fow ouw asset.
 
-The standard for offchain metadata for a fungible token is as follows. This should be filled out and writen to either an object `{}` without Javascript or saved to a `metadata.json` file.
+De standawd fow offchain metadata fow a fungibwe token is as fowwows~ Dis shouwd be fiwwed out and wwiten to eidew an object `{}` widout Javascwipt ow saved to a `metadata.json` fiwe.
 
-We are going to look at the JavaScript object approach.
+We awe going to wook at de JavaScwipt object appwoach.
 
 ```ts
 const metadata = {
@@ -256,20 +256,20 @@ const metadata = {
 }
 ```
 
-The fields here include:
+De fiewds hewe incwude:
 
-| field         | description                                                                                                                                                                               |
+| fiewd         | descwiption                                                                                                                                                                               |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name          | The name of your NFT.                                                                                                                                                                     |
-| description   | The description of your NFT.                                                                                                                                                              |
-| image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
-| animation_url | This will be set to the `animation_ulr` (or any online location of the video/glb) that you've uploaded.                                                                                   |
-| external_url  | This would link to an external address of your choice. This is normally the projects website.                                                                                             |
-| attributes    | Using an object og `{trait_type: vlue, "value": "value1"}`                                                                                                                                |
-| image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
-| properties    | Contains the `files` field that takes an `[] array` of `{uri: string, type: mimeType}`. Also contains the category field which can be set to `image`, `audio`, `video`, `vfx`, and `html` |
+| nyame          | De nyame of youw NFT~                                                                                                                                                                     |
+| descwiption   | De descwiption of youw NFT~                                                                                                                                                              |
+| image         | Dis wiww be set to de `imageUri` (ow any onwinye wocation of de image) dat we upwoaded pweviouswy~                                                                                     |
+| anyimation_uww | Dis wiww be set to de `animation_ulr` (ow any onwinye wocation of de video/gwb) dat you've upwoaded~                                                                                   |
+| extewnyaw_uww  | Dis wouwd wink to an extewnyaw addwess of youw choice~ Dis is nyowmawwy de pwojects website~                                                                                             |
+| attwibutes    | Using an object og `{trait_type: vlue, "value": "value1"}`                                                                                                                                |
+| image         | Dis wiww be set to de `imageUri` (ow any onwinye wocation of de image) dat we upwoaded pweviouswy~                                                                                     |
+| pwopewties    | Contains de `files` fiewd dat takes an `[] array` of `{uri: string, type: mimeType}`~ Awso contains de categowy fiewd which can be set to `image`, `audio`, `video`, `vfx`, and `html` |
 
-After creating the metadata, we need to upload it as a JSON file, so we can get a URI to attach to our Collection. To do this, we'll use Umi's `uploadJson()` function:
+Aftew cweating de metadata, we nyeed to upwoad it as a JSON fiwe, so we can get a UWI to attach to ouw Cowwection~ To do dis, we'ww use Umi's `uploadJson()` function:
 
 ```js
 // Call upon Umi's `uploadJson()` function to upload our metadata to Arweave via Irys.
@@ -278,13 +278,13 @@ const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
 })
 ```
 
-This function automatically converts our JavaScript object to JSON before uploading.
+Dis function automaticawwy convewts ouw JavaScwipt object to JSON befowe upwoading.
 
-Now we should finally have the URI of JSON file stored in the `metadataUri` providing it did not throw any errors.
+Nyow we shouwd finyawwy have de UWI of JSON fiwe stowed in de `metadataUri` pwoviding it did nyot dwow any ewwows.
 
-### Minting the NFT Core Asset
+### Minting de NFT Cowe Asset
 
-From here we can use the `create` function from the `@metaplex-foundation/mpl-core` package to create our Core NFT Asset.
+Fwom hewe we can use de `create` function fwom de `@metaplex-foundation/mpl-core` package to cweate ouw Cowe NFT Asset.
 
 ```ts
 const asset = generateSigner(umi)
@@ -298,7 +298,7 @@ const tx = await create(umi, {
 const signature = base58.deserialize(tx.signature)[0]
 ```
 
-And log out the detail as follow: 
+And wog out de detaiw as fowwow: 
 
 ```ts
   // Log out the signature and the links to the transaction and the NFT.
@@ -310,13 +310,13 @@ And log out the detail as follow:
   console.log(`https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`)
 ```
 
-### Additional Actions
+### Additionyaw Actions
 
-Before moving on, what if we want to create an asset with plugins and/or external plugins, such as the `FreezeDelegate` plugin or the `AppData` external plugin, already included? Here's how we can do it.
+Befowe moving on, what if we want to cweate an asset wid pwugins and/ow extewnyaw pwugins, such as de `FreezeDelegate` pwugin ow de `AppData` extewnyaw pwugin, awweady incwuded? owo Hewe's how we can do it.
 
-The `create()` instruction supports adding both normal and external plugin through the `plugins` field. So we can just easily add all the required field for the specific plugins, and everything it will be handled by the instruction.
+De `create()` instwuction suppowts adding bod nyowmaw and extewnyaw pwugin dwough de `plugins` fiewd~ So we can just easiwy add aww de wequiwed fiewd fow de specific pwugins, and evewyding it wiww be handwed by de instwuction.
 
-Here's an example on how to do it:
+Hewe's an exampwe on how to do it:
 
 ```typescript
 const asset = generateSigner(umi)
@@ -342,9 +342,9 @@ const tx = await create(umi, {
 const signature = base58.deserialize(tx.signature)[0]
 ```
 
-**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
+**Nyote**: Wefew to de [documentation](/core/plugins) if you'we nyot suwe on what fiewds and pwugin to use! uwu 
 
-## Full Code Example
+## Fuww Code Exampwe
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core'
