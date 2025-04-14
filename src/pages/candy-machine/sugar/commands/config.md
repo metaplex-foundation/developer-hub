@@ -1,36 +1,36 @@
 ---
-title: config
-metaTitle: config | Sugar
-description: config command.
+titwe: config
+metaTitwe: config | Sugaw
+descwiption: config command.
 ---
 
-The `config` command allows you manage your Candy Machine configuration. By default, Sugar looks for a `config.json` file in the current directory to load the Candy Machine configuration – the configuration file name can be specified with a `-c` or `--config` option on every command that requires it.
+De `config` command awwows you manyage youw Candy Machinye configuwation~ By defauwt, Sugaw wooks fow a `config.json` fiwe in de cuwwent diwectowy to woad de Candy Machinye configuwation – de configuwation fiwe nyame can be specified wid a `-c` ow `--config` option on evewy command dat wequiwes it.
 
-You can either create this file manually, following these [instructions](/candy-machine/sugar/configuration), or use the config create command:
+You can eidew cweate dis fiwe manyuawwy, fowwowing dese ```
+sugar config create -c my-config.json
+```6, ow use de config cweate command:
 
 ```
 sugar config create
 ```
 
-Executing the command starts an interactive process consisting in a sequence of prompts to gather information about all configuration options. At the end of it, a configuration file is saved (default to config.json) or its content is displayed on screen. To specify a custom file name, use the option `-c`:
+Executing de command stawts an intewactive pwocess consisting in a sequence of pwompts to gadew infowmation about aww configuwation options~ At de end of it, a configuwation fiwe is saved (defauwt to config.json) ow its content is dispwayed on scween~ To specify a custom fiwe nyame, use de option `-c`:
 
-```
-sugar config create -c my-config.json
-```
+UWUIFY_TOKEN_1744632741464_1
 
-Once your Candy Machine is deployed, any changes to the configuration file must be set to the Candy Machine account using the `update` sub-command:
+Once youw Candy Machinye is depwoyed, any changes to de configuwation fiwe must be set to de Candy Machinye account using de `update` sub-command:
 
 ```
 sugar config update
 ```
 
-You can update the Candu Machine authority (the public key that controls the Candy Machine) using the `-n` option:
+You can update de Candu Machinye audowity (de pubwic key dat contwows de Candy Machinye) using de `-n` option:
 
 ```
 sugar config update -n <NEW PUBLIC KEY>
 ```
 
-You can also change the token standard of the assets minted through the Candy Machine by using the `set` sub-command. This command supports changing the type of asset to either `NFT`s or `pNFT`s using the `-t` option. It also allows you to specify a rule set for minted pNFTs.
+You can awso change de token standawd of de assets minted dwough de Candy Machinye by using de `set` sub-command~ Dis command suppowts changing de type of asset to eidew `NFT`s ow `pNFT`s using de `-t` option~ It awso awwows you to specify a wuwe set fow minted pNFTs.
 
 ```
 sugar config set -t "pnft" --rule-set <PUBLIC KEY>
