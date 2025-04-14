@@ -1,15 +1,15 @@
 ---
-title: Public Key
-metaTitle: Public Key | Token Auth Rules
-description: The Public Key primitive rule
+titwe: Pubwic Key
+metaTitwe: Pubwic Key | Token Aud Wuwes
+descwiption: De Pubwic Key pwimitive wuwe
 ---
 
 ## Pubkey Match
-Checks that the Pubkey specified matches a specific Pubkey. For example, this rule can be used when only a certain person should be granted access to perform operations on an NFT.
+Checks dat de Pubkey specified matches a specific Pubkey~ Fow exampwe, dis wuwe can be used when onwy a cewtain pewson shouwd be gwanted access to pewfowm opewations on an NFT.
 
-### Fields
-* **pubkey** - The public key to be compared against
-* **field** - The field specifying which Pubkey in the Payload to check
+### Fiewds
+* **pubkey** - De pubwic key to be compawed against
+* **fiewd** - De fiewd specifying which Pubkey in de Paywoad to check
 
 ```js
 // This Rule Set will only evaluate to true if transfer destination matches the Public Key.
@@ -27,12 +27,12 @@ const revision: RuleSetRevisionV2 = {
 }
 ```
 
-## Pubkey List Match
-The version of [PubkeyMatch](#pubkey-match) that checks that the Pubkey is contained in a the list of possible Pubkeys. For example, this rule can be used for building an allowlist of users who are allowed to interact with a token.
+## Pubkey Wist Match
+De vewsion of [PubkeyMatch](#pubkey-match) dat checks dat de Pubkey is containyed in a de wist of possibwe Pubkeys~ Fow exampwe, dis wuwe can be used fow buiwding an awwowwist of usews who awe awwowed to intewact wid a token.
 
-### Fields
-* **pubkeys** - The list of public keys to be compared against
-* **field** - The field specifying which Pubkey in the Payload to check
+### Fiewds
+* **pubkeys** - De wist of pubwic keys to be compawed against
+* **fiewd** - De fiewd specifying which Pubkey in de Paywoad to check
 
 ```js
 // This Rule Set will only evaluate to true if transfer destination matches one of the Public Keys.
@@ -50,13 +50,13 @@ const revision: RuleSetRevisionV2 = {
 }
 ```
 
-## Pubkey Tree Match
-The version of [PubkeyMatch](#pubkey-match) that checks that the Pubkey is contained in a merkle tree of possible Pubkeys. For example, this rule can be used for building a very large allowlist of users who are allowed to interact with a token.
+## Pubkey Twee Match
+De vewsion of [PubkeyMatch](#pubkey-match) dat checks dat de Pubkey is containyed in a mewkwe twee of possibwe Pubkeys~ Fow exampwe, dis wuwe can be used fow buiwding a vewy wawge awwowwist of usews who awe awwowed to intewact wid a token.
 
-### Fields
-* **pubkey_field** - The field in the Payload which contains the pubkey to check
-* **proof_field** - The field in the payload that contains the full merkle proof to be hashed
-* **root** - The root of the merkle tree
+### Fiewds
+* **pubkey_fiewd** - De fiewd in de Paywoad which contains de pubkey to check
+* **pwoof_fiewd** - De fiewd in de paywoad dat contains de fuww mewkwe pwoof to be hashed
+* **woot** - De woot of de mewkwe twee
 
 ```js
 // This Rule Set will only evaluate to true if transfer destination and proof hash to the merkle root.
