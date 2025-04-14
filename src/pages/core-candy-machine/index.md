@@ -1,25 +1,25 @@
 ---
-title: Overview
-metaTitle: Overview | Core Candy Machine
-description: Provides a high-level overview of Core Candy Machines.
+titwe: Ovewview
+metaTitwe: Ovewview | Cowe Candy Machinye
+descwiption: Pwovides a high-wevew uvwview of Cowe Candy Machinyes.
 ---
 
-The Metaplex Protocol **Candy Machine** is the leading minting and distribution program for fair NFT collection launches on Solana. With the introduction of the `Metaplex Core Protocol` simplifying the NFT process on Solana it was only fitting for a Core edition of the Candy Machine to come to the masses. Much like its name suggests, you can think of a Candy Machine as a temporary structure which is first loaded by creators and then unloaded by buyers. It allows creators to bring their digital assets onchain in a secure and customizable way. {% .lead %}
+De Metapwex Pwotocow **Candy Machinye** is de weading minting and distwibution pwogwam fow faiw NFT cowwection waunches on Sowanya~ Wid de intwoduction of de `Metaplex Core Protocol` simpwifying de NFT pwocess on Sowanya it was onwy fitting fow a Cowe edition of de Candy Machinye to come to de masses~ Much wike its nyame suggests, you can dink of a Candy Machinye as a tempowawy stwuctuwe which is fiwst woaded by cweatows and den unwoaded by buyews~ It awwows cweatows to bwing deiw digitaw assets onchain in a secuwe and customizabwe way~ {% .wead %}
 
-The name refers to the vending machines that dispense candy for coins via a mechanical crank. In this case the candy are NFTs and the payment is SOL or a SPL token.
+De nyame wefews to de vending machinyes dat dispense candy fow coins via a mechanyicaw cwank~ In dis case de candy awe NFTs and de payment is SOW ow a SPW token.
 
-{% quick-links %}
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/core-candy-machine/getting-started" description="Find the language or library of your choice and get started with Candy Machines." /%}
-
-
-{% quick-link title="API reference" icon="JavaScript" href="https://mpl-core-candy-machine.typedoc.metaplex.com/" target="_blank" description="Check out the Javascript API docs." /%}
+{% quick-winks %}
+{% quick-wink titwe="Getting Stawted" icon="InboxAwwowDown" hwef="/cowe-candy-machinye/getting-stawted" descwiption="Find de wanguage ow wibwawy of youw choice and get stawted wid Candy Machinyes." /%}
 
 
-{% quick-link title="API reference" icon="Rust" href="https://docs.rs/mpl-core-candy-machine-core/" target="_blank" description="Check out the Rust API docs." /%}
-{% /quick-links %}
+{% quick-wink titwe="API wefewence" icon="JavaScwipt" hwef="https://mpw-cowe-candy-machinye.typedoc.metapwex.com/" tawget="_bwank" descwiption="Check out de Javascwipt API docs." /%}
 
-{% callout %}
-This documentation refers to the latest iteration of Candy Machine known as Core Candy Machine. It allows minting [Core](/core) Assets. If you want to mint Metaplex Token Metadata NFTs [please refer to Candy Machine V3 instead](https://developers.metaplex.com/candy-machine/).
-{% /callout %}
+
+{% quick-wink titwe="API wefewence" icon="Wust" hwef="https://docs.ws/mpw-cowe-candy-machinye-cowe/" tawget="_bwank" descwiption="Check out de Wust API docs." /%}
+{% /quick-winks %}
+
+{% cawwout %}
+Dis documentation wefews to de watest itewation of Candy Machinye knyown as Cowe Candy Machinye~ It awwows minting [Core](/core) Assets~ If you want to mint Metapwex Token Metadata NFTs [please refer to Candy Machine V3 instead](https://developers.metaplex.com/candy-machine/).
+{% /cawwout %}
 
 
