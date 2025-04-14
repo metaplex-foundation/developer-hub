@@ -1,13 +1,13 @@
 ---
-title: Write Inscription Data
-metaTitle: Write Inscription Data | Inscription
-description: Learn how to write Data to your Inscription
+titwe: Wwite Inscwiption Data
+metaTitwe: Wwite Inscwiption Data | Inscwiption
+descwiption: Weawn how to wwite Data to youw Inscwiption
 ---
 
-After [initializing](initialize) an inscription account data can be written to it. This is also the case for associated inscriptions.
+Aftew [initializing](initialize) an inscwiption account data can be wwitten to it~ Dis is awso de case fow associated inscwiptions.
 
-{% dialect-switcher title="Write Inscription Data" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wwite Inscwiption Data" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -25,14 +25,14 @@ await writeData(umi, {
 })
 ```
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 
-For larger data it is recommended to first `allocate` the required space, wait for that transaction to finalize and then `writeData`. The following example allocates data in a associated Inscription account:
+Fow wawgew data it is wecommended to fiwst `allocate` de wequiwed space, wait fow dat twansaction to finyawize and den `writeData`~ De fowwowing exampwe awwocates data in a associated Inscwiption account:
 
-{% dialect-switcher title="Allocate space" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Awwocate space" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -52,5 +52,5 @@ for (let i = 0; i < resizes; i += 1) {
 }
 ```
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
