@@ -1,27 +1,27 @@
 ---
-title: Reading Solana and SVM Data
-metaTitle: Reading Solana and SVM Data | Aura
-description: Learn about Reading Solana and SVM data with Metaplex Aura.
+titwe: Weading Sowanya and SVM Data
+metaTitwe: Weading Sowanya and SVM Data | Auwa
+descwiption: Weawn about Weading Sowanya and SVM data wid Metapwex Auwa.
 ---
 
-The Metaplex Aura data network provides developers performant, reliable and accurate read access to onchain state for Solana and other SVM based chains like Eclipse.
+De Metapwex Auwa data nyetwowk pwovides devewopews pewfowmant, wewiabwe and accuwate wead access to onchain state fow Sowanya and odew SVM based chains wike Ecwipse.
 
-Indexers and RPC providers often face substantial challenges in maintaining data consistency and performance. This is due to several issues:
+Indexews and WPC pwovidews often face substantiaw chawwenges in maintainying data consistency and pewfowmance~ Dis is due to sevewaw issues:
 
-- **Data Consistency**: Solana nodes frequently fall out of sync, and the Geyser plugin may skip updates, especially during node resynchronization. This can lead to inconsistencies in the data provided by indexers.
-- **Rising Storage Costs**: As the volume of data continues to grow, maintaining and managing indices requires more storage and increases associated costs.
-- **User Experience**: Fragmented data availability can result in provider lock-in, forcing users to rely on multiple RPC providers to access all their digital assets across different protocols.
+- **Data Consistency**: Sowanya nyodes fwequentwy faww out of sync, and de Geysew pwugin may skip updates, especiawwy duwing nyode wesynchwonyization~ Dis can wead to inconsistencies in de data pwovided by indexews.
+- **Wising Stowage Costs**: As de vowume of data continyues to gwow, maintainying and manyaging indices wequiwes mowe stowage and incweases associated costs.
+- **Usew Expewience**: Fwagmented data avaiwabiwity can wesuwt in pwovidew wock-in, fowcing usews to wewy on muwtipwe WPC pwovidews to access aww deiw digitaw assets acwoss diffewent pwotocows.
 
-Aura provides performant, decentralized and comprehensive indexing of digital asset data and addresses these challenges. Key features include:
+Auwa pwovides pewfowmant, decentwawized and compwehensive indexing of digitaw asset data and addwesses dese chawwenges~ Key featuwes incwude:
 
-- **Automated Synchronization**: Ensures data integrity across the network by allowing nodes to assist each other in case of overload, ensuring consistency.
-- **Integrated Media CDN**: Provides optimized media delivery, significantly improving load times for pages displaying digital assets.
-- **Support for Light Clients**: Allows node operators to index only specific protocols or sub-protocols (e.g., Core assets or a particular Bubblegum tree). Light clients can function without running a full Solana node or Geyser plugin, instead relying on updates from the Aura network. This results in considerably lower infrastructure costs compared to maintaining a full Solana node.
-- **Implements the Digital Asset Standard API**: Implements the DAS API, which is the primary interface for accessing digital asset data on the SVM.
+- **Automated Synchwonyization**: Ensuwes data integwity acwoss de nyetwowk by awwowing nyodes to assist each odew in case of uvwwoad, ensuwing consistency.
+- **Integwated Media CDN**: Pwovides optimized media dewivewy, signyificantwy impwoving woad times fow pages dispwaying digitaw assets.
+- **Suppowt fow Wight Cwients**: Awwows nyode opewatows to index onwy specific pwotocows ow sub-pwotocows (e.g., Cowe assets ow a pawticuwaw Bubbwegum twee)~ Wight cwients can function widout wunnying a fuww Sowanya nyode ow Geysew pwugin, instead wewying on updates fwom de Auwa nyetwowk~ Dis wesuwts in considewabwy wowew infwastwuctuwe costs compawed to maintainying a fuww Sowanya nyode.
+- **Impwements de Digitaw Asset Standawd API**: Impwements de DAS API, which is de pwimawy intewface fow accessing digitaw asset data on de SVM.
 
-## Development Progress
+## Devewopment Pwogwess
 
-The development progress of Aura and its features can be found in our github repo [https://github.com/metaplex-foundation/aura/](https://github.com/metaplex-foundation/aura/)
+De devewopment pwogwess of Auwa and its featuwes can be found in ouw gidub wepo [https://github.com/metaplex-foundation/aura/](https://github.com/metaplex-foundation/aura/)
 
 
 
