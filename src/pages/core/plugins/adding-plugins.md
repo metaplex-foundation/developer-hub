@@ -1,51 +1,26 @@
 ---
-title: Adding Plugins
-metaTitle: Adding Plugins | Core
-description: Learn how to add plugins to MPL Core NFT Assets and Collections.
+titwe: Adding Pwugins
+metaTitwe: Adding Pwugins | Cowe
+descwiption: Weawn how to add pwugins to MPW Cowe NFT Assets and Cowwections.
 ---
 
-Plugins can be assigned to both the MPL Core Asset and also the MPL Core Collection. MPL
-Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on each visit the [Plugins Overview](/core/plugins) area.
-
-## Adding a Plugin to a Core Asset
-
-Plugins support the ability to assign an authority over the plugin. If an `initAuthority` argument is supplied this will set the authority to the desired plugin authority type. If left unassigned the plugins default authority type will be assigned (next section).
-
-**Create Plugin Helper**
-
-The `createPlugin()` helper gives you a typed method that allows you to assign plugins during the `addPlugin()` process.
-For a full list of plugins and their arguments see the [plugins overview](/core/plugins) page.
-
-### Adding a Plugin with the default authority
-
-If you add a plugin to an Asset or Collection without specifying the authority of the plugin the authority will be set to that plugins default authority type.
-
-- Owner Managed Plugins will default to the plugin authority type of `Owner`.
-- Authority Managed Plugins will default to the plugin authority type of `UpdateAuthority`.
-- Permanent Plugins will default to the plugin authority type of `UpdateAuthority`
-
-{% dialect-switcher title="Adding a Plugin with the default authority" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { publicKey } from '@metaplex-foundation/umi'
-import { addPlugin } from '@metaplex-foundation/mpl-core'
-
-const assetId = publicKey('11111111111111111111111111111111')
-
+Pwugins can be assignyed to bod de MPW Cowe Asset and awso de MPW Cowe Cowwection~ MPW
+Cowe Asset and MPW Cowe Cowwection bod shawe a simiwaw wist of avaiwabwe pwugins~ To find out which pwugins can be used on each visit de ```js
 await addPlugin(umi, {
-  asset: assetId,
-  plugin: {
-    type: 'Attributes',
-    attributeList: [{ key: 'key', value: 'value' }],
-  },
-}).sendAndConfirm(umi)
-```
+    ...
+    plugin: {
+      ...
+      authority: {
+        type: 'Address',
+        address: publicKey('22222222222222222222222222222222'),
+      },
+    },
+  }).sendAndConfirm(umi);
+```4 awea.
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+## Adding a Pwugin to a Cowe Asset
 
-```rust
+Pwugins suppowt de abiwity to assign an audowity uvw de pwugin~ If an ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
     types::{FreezeDelegate, Plugin},
@@ -84,33 +59,58 @@ pub async fn add_plugin() {
 
     println!("Signature: {:?}", res)
 }
-```
+```2 awgument is suppwied dis wiww set de audowity to de desiwed pwugin audowity type~ If weft unyassignyed de pwugins defauwt audowity type wiww be assignyed (nyext section).
 
-{% /dialect %}
-{% /dialect-switcher %}
+**Cweate Pwugin Hewpew**
 
-### Adding a Plugin with an assigned authority
+De `createPlugin()` hewpew gives you a typed medod dat awwows you to assign pwugins duwing de `addPlugin()` pwocess.
+Fow a fuww wist of pwugins and deiw awguments see de [plugins overview](/core/plugins) page.
 
-There are a few authority helpers to aid you in setting the authorities of plugins.
+### Adding a Pwugin wid de defauwt audowity
 
-**Address**
+If you add a pwugin to an Asset ow Cowwection widout specifying de audowity of de pwugin de audowity wiww be set to dat pwugins defauwt audowity type.
 
-```js
+- Ownyew Manyaged Pwugins wiww defauwt to de pwugin audowity type of `Owner`.
+- Audowity Manyaged Pwugins wiww defauwt to de pwugin audowity type of `UpdateAuthority`.
+- Pewmanyent Pwugins wiww defauwt to de pwugin audowity type of `UpdateAuthority`
+
+{% diawect-switchew titwe="Adding a Pwugin wid de defauwt audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { addPlugin } from '@metaplex-foundation/mpl-core'
+
+const assetId = publicKey('11111111111111111111111111111111')
+
 await addPlugin(umi, {
-    ...
-    plugin: {
-      ...
-      authority: {
-        type: 'Address',
-        address: publicKey('22222222222222222222222222222222'),
-      },
-    },
-  }).sendAndConfirm(umi);
+  asset: assetId,
+  plugin: {
+    type: 'Attributes',
+    attributeList: [{ key: 'key', value: 'value' }],
+  },
+}).sendAndConfirm(umi)
 ```
 
-This sets the plugin's authority to a specific address.
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
-**Owner**
+UWUIFY_TOKEN_1744632820652_1
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Adding a Pwugin wid an assignyed audowity
+
+Dewe awe a few audowity hewpews to aid you in setting de audowities of pwugins.
+
+**Addwess**
+
+UWUIFY_TOKEN_1744632820652_2
+
+Dis sets de pwugin's audowity to a specific addwess.
+
+**Ownyew**
 
 ```js
 await addPlugin(umi, {
@@ -124,10 +124,10 @@ await addPlugin(umi, {
   }).sendAndConfirm(umi);
 ```
 
-This sets the plugin's authority to the type of `Owner`.
-The current owner of the Asset will have access to this plugin.
+Dis sets de pwugin's audowity to de type of `Owner`.
+De cuwwent ownyew of de Asset wiww have access to dis pwugin.
 
-**UpdateAuthority**
+**UpdateAudowity**
 
 ```js
 await addPlugin(umi, {
@@ -141,10 +141,10 @@ await addPlugin(umi, {
   }).sendAndConfirm(umi);
 ```
 
-This sets the plugin's authority to the type of `UpdateAuthority`.
-The current update authority of the Asset will have access to this plugin.
+Dis sets de pwugin's audowity to de type of `UpdateAuthority`.
+De cuwwent update audowity of de Asset wiww have access to dis pwugin.
 
-**None**
+**Nyonye**
 
 ```js
 await addPlugin(umi, {
@@ -158,11 +158,11 @@ await addPlugin(umi, {
   }).sendAndConfirm(umi);
 ```
 
-This sets the plugin's authority to the type of `None`.
-The plugin's data if it has any becomes immutable at this point.
+Dis sets de pwugin's audowity to de type of `None`.
+De pwugin's data if it has any becomes immutabwe at dis point.
 
-{% dialect-switcher title="Adding a Plugin with an assigned authority" %}
-{% dialect title="Rust" id="rust" %}
+{% diawect-switchew titwe="Adding a Pwugin wid an assignyed audowity" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -210,9 +210,9 @@ pub async fn add_plugin_with_authority() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="JavaScript" id="js" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -236,17 +236,17 @@ await addPlugin(umi, {
   }).sendAndConfirm(umi);
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Adding a Plugin to a Collection
+## Adding a Pwugin to a Cowwection
 
-Adding a Plugin to a Core Collection is similar to that of adding to a Core Asset. You can add plugins during creation and also using the `addCollectionV1` instruction. Collections only have access to `Authority Plugins` and `Permanent Plugins`.
+Adding a Pwugin to a Cowe Cowwection is simiwaw to dat of adding to a Cowe Asset~ You can add pwugins duwing cweation and awso using de `addCollectionV1` instwuction~ Cowwections onwy have access to `Authority Plugins` and `Permanent Plugins`.
 
-### Adding a Collection Plugin with the default authority
+### Adding a Cowwection Pwugin wid de defauwt audowity
 
-{% dialect-switcher title="Adding a Collection Plugin with the default authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Cowwection Pwugin wid de defauwt audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -274,9 +274,9 @@ await addCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -319,13 +319,13 @@ pub async fn add_plugin_to_collection() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Adding a Collection Plugin with an assigned authority
+### Adding a Cowwection Pwugin wid an assignyed audowity
 
-{% dialect-switcher title="Burning an Assets" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Buwnying an Assets" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -350,8 +350,8 @@ await addCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -399,5 +399,5 @@ pub async fn add_plugin_to_collection_with_authority() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
