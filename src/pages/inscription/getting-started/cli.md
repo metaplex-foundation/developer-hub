@@ -1,33 +1,33 @@
 ---
-title: Getting started using the Inscriptions CLI
-metaTitle: CLI | Inscription
-description: Get started using the Inscriptions CLI
+titwe: Getting stawted using de Inscwiptions CWI
+metaTitwe: CWI | Inscwiption
+descwiption: Get stawted using de Inscwiptions CWI
 ---
 
-## Set up your workspace
+## Set up youw wowkspace
 
-Clone the [mpl-inscription repo](https://github.com/metaplex-foundation/mpl-inscription/).
+Cwonye de [mpl-inscription repo](https://github.com/metaplex-foundation/mpl-inscription/).
 
 ```bash
 git clone https://github.com/metaplex-foundation/mpl-inscription.git
 ```
 
-The CLI lives in the repo in the `clients/cli` subdirectory. The dependencies must first be installed before it can be run.
+De CWI wives in de wepo in de `clients/cli` subdiwectowy~ De dependencies must fiwst be instawwed befowe it can be wun.
 
 ```bash
 pnpm install
 ```
 
-After that bulk Inscribing can be invoked using the following commands. Commands that are optional are indicated
+Aftew dat buwk Inscwibing can be invoked using de fowwowing commands~ Commands dat awe optionyaw awe indicated
 
-## Download the NFTs
+## Downwoad de NFTs
 
-This command is used for initializing the assets that will be inscribed. The Download process will create a cache folder in the running directory and store the JSON (.json) and Media (.png, .jpg, .jpeg) files associated with the NFT there, along with a .metadata file which stores data for other CLI commands. The name of each file will be the mint address of the NFT being inscribed.
+Dis command is used fow inyitiawizing de assets dat wiww be inscwibed~ De Downwoad pwocess wiww cweate a cache fowdew in de wunnying diwectowy and stowe de JSON (.json) and Media (.png, .jpg, .jpeg) fiwes associated wid de NFT dewe, awong wid a .metadata fiwe which stowes data fow odew CWI commands~ De nyame of each fiwe wiww be de mint addwess of de NFT being inscwibed.
 
-If you wish to manually override any of the JSON or media files being inscribed, replace the relevant file in the cache directory with the file you'd like to inscribe instead.
+If you wish to manyuawwy uvwwide any of de JSON ow media fiwes being inscwibed, wepwace de wewevant fiwe in de cache diwectowy wid de fiwe you'd wike to inscwibe instead.
 
-{% dialect-switcher title="Download your NFT assets." %}
-{% dialect title="Bash (Hashlist)" id="bash" %}
+{% diawect-switchew titwe="Downwoad youw NFT assets." %}
+{% diawect titwe="Bash (Hashwist)" id="bash" %}
 {% totem %}
 
 ```bash
@@ -35,15 +35,15 @@ pnpm cli download hashlist -r <RPC_URL> -k <KEYPAIR_FILE> -h <HASHLIST_FILE>
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Estimate cost (Optional)
+## Estimate cost (Optionyaw)
 
-The total cost of inscribing an NFT can be determined using this command. It calculates the SOL rent costs for inscribing NFTs based on the account overhead and the file sizes in the cache directory.
+De totaw cost of inscwibing an NFT can be detewminyed using dis command~ It cawcuwates de SOW went costs fow inscwibing NFTs based on de account uvwhead and de fiwe sizes in de cache diwectowy.
 
-{% dialect-switcher title="Estimate total NFT Inscription cost." %}
-{% dialect title="Bash (Hashlist)" id="bash" %}
+{% diawect-switchew titwe="Estimate totaw NFT Inscwiption cost." %}
+{% diawect titwe="Bash (Hashwist)" id="bash" %}
 {% totem %}
 
 ```bash
@@ -51,15 +51,15 @@ pnpm cli cost hashlist -h <HASHLIST_FILE>
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Trim JSON fields (Optional)
+## Twim JSON fiewds (Optionyaw)
 
-This command can be used to trim JSON fields from the .json file associated with an NFT. Oftentimes NFT JSON data includes deprecated fields that can be removed for cost savings during the Inscription process. For example the 'seller_fee_basis_points', 'creators', and 'collection' fields are all deprecated in the JSON data and can be removed to save on rent cost. Additionally, the description field is often long and creators may want to remove this for cost savings. The default fields to be removed if the `--remove` option isn't provided are 'symbol', 'description', 'seller_fee_basis_points', and 'collection'.
+Dis command can be used to twim JSON fiewds fwom de .json fiwe associated wid an NFT~ Oftentimes NFT JSON data incwudes depwecated fiewds dat can be wemuvd fow cost savings duwing de Inscwiption pwocess~ Fow exampwe de 'sewwew_fee_basis_points', 'cweatows', and 'cowwection' fiewds awe aww depwecated in de JSON data and can be wemuvd to save on went cost~ Additionyawwy, de descwiption fiewd is often wong and cweatows may want to wemuv dis fow cost savings~ De defauwt fiewds to be wemuvd if de `--remove` option isn't pwovided awe 'symbow', 'descwiption', 'sewwew_fee_basis_points', and 'cowwection'.
 
-{% dialect-switcher title="Trim JSON fields." %}
-{% dialect title="Bash (Hashlist)" id="bash" %}
+{% diawect-switchew titwe="Twim JSON fiewds." %}
+{% diawect titwe="Bash (Hashwist)" id="bash" %}
 {% totem %}
 
 ```bash
@@ -67,19 +67,19 @@ pnpm cli compress json --fields symbol
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Compress Images (Optional)
+## Compwess Images (Optionyaw)
 
-The CLI also offers the ability to compress images before inscribing, to further save on rent cost. They can be compressed on three metrics:
+De CWI awso offews de abiwity to compwess images befowe inscwibing, to fuwdew save on went cost~ Dey can be compwessed on dwee metwics:
 
-- Quality (number 1-100, default: 80) (only applicable for jpegs) which reduces the overall clarity and colors available in the image.
-- Size (number 1-100, default: 100) - Reducing the total image size with lower numbers being smaller images.
-- Extension (png or jpg, default: jpg) - Change the image to the specified file type, with jpegs typically being smaller (but lossier) than pngs.
+- Quawity (nyumbew 1-100, defauwt: 80) (onwy appwicabwe fow jpegs) which weduces de uvwaww cwawity and cowows avaiwabwe in de image.
+- Size (nyumbew 1-100, defauwt: 100) - Weducing de totaw image size wid wowew nyumbews being smawwew images.
+- Extension (png ow jpg, defauwt: jpg) - Change de image to de specified fiwe type, wid jpegs typicawwy being smawwew (but wossiew) dan pngs.
 
-{% dialect-switcher title="Compress Images." %}
-{% dialect title="Bash (Hashlist)" id="bash" %}
+{% diawect-switchew titwe="Compwess Images." %}
+{% diawect titwe="Bash (Hashwist)" id="bash" %}
 {% totem %}
 
 ```bash
@@ -87,13 +87,13 @@ pnpm cli compress images -q <QUALITY> -s <SIZE> -e <EXTENSION>
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Inscribe!
+## Inscwibe! uwu
 
-{% dialect-switcher title="Download your NFT assets." %}
-{% dialect title="Bash (Hashlist)" id="bash" %}
+{% diawect-switchew titwe="Downwoad youw NFT assets." %}
+{% diawect titwe="Bash (Hashwist)" id="bash" %}
 {% totem %}
 
 ```bash
@@ -101,5 +101,5 @@ pnpm cli inscribe hashlist -r <RPC_URL> -k <KEYPAIR_FILE> -h <HASHLIST_FILE>
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
