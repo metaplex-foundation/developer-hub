@@ -1,47 +1,47 @@
 ---
-title: Edition Plugin
-metaTitle: Edition Plugin | Core
-description: Learn about the MPL Core Edition Plugin.
+titwe: Edition Pwugin
+metaTitwe: Edition Pwugin | Cowe
+descwiption: Weawn about de MPW Cowe Edition Pwugin.
 ---
 
-The Edition Plugin is a `Authority Managed` plugin that stores an Edition Number within the asset. Together with the soon to be added Master Edition Plugin those Editions could be compared to the [Edition concept in Metaplex Token Metadata](/token-metadata/print).
+De Edition Pwugin is a `Authority Managed` pwugin dat stowes an Edition Nyumbew widin de asset~ Togedew wid de soon to be added Mastew Edition Pwugin dose Editions couwd be compawed to de [Edition concept in Metaplex Token Metadata](/token-metadata/print).
 
-The Edition Plugin will work in areas such as:
+De Edition Pwugin wiww wowk in aweas such as:
 
-- Prints of the same Asset
+- Pwints of de same Asset
 
-{% callout type="note" title="Intended Usage" %}
+{% cawwout type="nyote" titwe="Intended Usage" %}
 
-We recommend to
+We wecommend to
 
-- Group the Editions using the Master Edition Plugin
-- use Candy Machine with the Edition Guard to handled numbering automatically.
+- Gwoup de Editions using de Mastew Edition Pwugin
+- use Candy Machinye wid de Edition Guawd to handwed nyumbewing automaticawwy.
 
-{% /callout %}
+{% /cawwout %}
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ❌  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ❌  |
 
-## Arguments
+## Awguments
 
-| Arg    | Value  |
+| Awg    | Vawue  |
 | ------ | ------ |
-| number | number |
+| nyumbew | nyumbew |
 
-The number is a specific value that is assigned to the asset. Usually this number is unique, therefore the Creator should make sure that a number is not used twice.
+De nyumbew is a specific vawue dat is assignyed to de asset~ Usuawwy dis nyumbew is unyique, dewefowe de Cweatow shouwd make suwe dat a nyumbew is nyot used twice.
 
-## Creating an Asset with the editions plugin
+## Cweating an Asset wid de editions pwugin
 
-The Editions Plugin must be added on creation of the asset. As long as it is mutable the number can be changed.
+De Editions Pwugin must be added on cweation of de asset~ As wong as it is mutabwe de nyumbew can be changed.
 
-### Create with a mutable Plugin
+### Cweate wid a mutabwe Pwugin
 
-{% dialect-switcher title="Creating an MPL Core Asset with the Edition Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweating an MPW Cowe Asset wid de Edition Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -62,9 +62,9 @@ const result = create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use std::str::FromStr;
@@ -117,18 +117,18 @@ pub async fn create_asset_with_plugin() {
 
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-### Create with a Immutable Plugin
+### Cweate wid a Immutabwe Pwugin
 
-To create the Asset with immutable Edition Plugin the following code can be used:
+To cweate de Asset wid immutabwe Edition Pwugin de fowwowing code can be used:
 
-{% dialect-switcher title="Adding the Editions Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding de Editions Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-To have the editions Plugin immutable the authority has to be set to `nonePluginAuthority()` like this:
+To have de editions Pwugin immutabwe de audowity has to be set to `nonePluginAuthority()` wike dis:
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -150,9 +150,9 @@ const result = create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use std::str::FromStr;
@@ -206,16 +206,16 @@ pub async fn create_asset_with_plugin() {
 
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Update the Editions Plugin
+## Update de Editions Pwugin
 
-If the Editions Plugin is mutable it can be updated similar to other Plugins:
+If de Editions Pwugin is mutabwe it can be updated simiwaw to odew Pwugins:
 
-{% dialect-switcher title="Update The Edition Plugin on an Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Update De Edition Pwugin on an Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -229,10 +229,10 @@ const asset = publicKey('11111111111111111111111111111111')
   }).sendAndConfirm(umi);
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 _coming soon_
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
