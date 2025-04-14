@@ -1,21 +1,21 @@
 ---
-title: Get Asset Proof
-metaTitle: Get Asset Proof | DAS API
-description: Returns the merkle tree proof information for a compressed asset
+titwe: Get Asset Pwoof
+metaTitwe: Get Asset Pwoof | DAS API
+descwiption: Wetuwns de mewkwe twee pwoof infowmation fow a compwessed asset
 ---
 
-Returns the merkle tree proof information for a compressed asset.
+Wetuwns de mewkwe twee pwoof infowmation fow a compwessed asset.
 
-## Parameters
+## Pawametews
 
-| Name            | Required | Description                                |
+| Nyame            | Wequiwed | Descwiption                                |
 | --------------- | :------: | ------------------------------------------ |
-| `id`            |    ✅    | The id of the asset.                       |
+| `id`            |    ✅    | De id of de asset~                       |
 
-## Example
+## Exampwe
 
-{% dialect-switcher title="getAssetProof Example" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="getAssetPwoof Exampwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -31,8 +31,8 @@ console.log(proof);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
+{% /diawect %}
+{% diawect titwe="cUWW" id="cuww" %}
 {% totem %}
 
 ```sh
@@ -47,5 +47,5 @@ curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json'
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
