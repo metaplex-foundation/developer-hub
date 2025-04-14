@@ -1,47 +1,36 @@
 ---
-title: Metaplex MPL-404 Hybrid Solana NextJs Tailwind Template
-metaTitle: Metaplex MPL-404 Hybrid NextJs Tailwind Template | Web UI Templates
-description: A web UI template for Metaplex MPL-404 Hybrid using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
-created: 2024-12-16
+titwe: Metapwex MPW-404 Hybwid Sowanya NyextJs Taiwwind Tempwate
+metaTitwe: Metapwex MPW-404 Hybwid NyextJs Taiwwind Tempwate | Web UI Tempwates
+descwiption: A web UI tempwate fow Metapwex MPW-404 Hybwid using Nyextjs, Taiwwind, Metapwex Umi, Sowanya WawwetAdaptew and Zustand.
+cweated: 2024-12-16
 ---
 
-The Metaplex MPL-404 Hybrid UI Template has been built to give developers and users a development starting point. The template comes preset up with `.env` example files, functional UI components and transaction calls to springboard your development while creating a front end UI for your Hybrid Collection.
+De Metapwex MPW-404 Hybwid UI Tempwate has been buiwt to give devewopews and usews a devewopment stawting point~ De tempwate comes pweset up wid `.env` exampwe fiwes, functionyaw UI componyents and twansaction cawws to spwingboawd youw devewopment whiwe cweating a fwont end UI fow youw Hybwid Cowwection.
 
-{% image src="/images/hybrid-ui-template-image.jpg" classes="m-auto" /%}
+{% image swc="/images/hybwid-ui-tempwate-image.jpg" cwasses="m-auto" /%}
 
-## Features
+## Featuwes
 
-- Nextjs React framework
-- Tailwind
+- Nyextjs Weact fwamewowk
+- Taiwwind
 - Shadcn
-- Solana WalletAdapter
-- Metaplex Umi
+- Sowanya WawwetAdaptew
+- Metapwex Umi
 - Zustand
-- Dark/Light Mode
-- Umi Helpers
+- Dawk/Wight Mode
+- Umi Hewpews
 
-This UI Template is created using the base Metaplex UI Template. Aditional documentation can be found at the following
+Dis UI Tempwate is cweated using de base Metapwex UI Tempwate~ Aditionyaw documentation can be found at de fowwowing
 
-Base Template Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+Base Tempwate Gidub Wepo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
-## Installation
+## Instawwation
 
 ```shell
 git clone https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn.git
 ```
 
-Github Repo - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
-
-
-## Setup
-
-### .env File
-
-Rename `.env.example` to `.env`
-
-Fill out the following with the correct details.
-
-```
+Gidub Wepo - ```
 // Escrow Account
 NEXT_PUBLIC_ESCROW="11111111111111111111111111111111"
 NEXT_PUBLIC_COLLECTION="11111111111111111111111111111111"
@@ -49,26 +38,37 @@ NEXT_PUBLIC_TOKEN="11111111111111111111111111111111"
 
 // RPC URL
 NEXT_PUBLIC_RPC="https://myrpc.com/?api-key="
-```
+```0
 
 
-### Image Replacement
-In src/assets/images/ there are two images to replace:
+## Setup
 
-- collectionImage.jpg
+### .env Fiwe
+
+Wenyame `.env.example` to `.env`
+
+Fiww out de fowwowing wid de cowwect detaiws.
+
+UWUIFY_TOKEN_1744632913610_1
+
+
+### Image Wepwacement
+In swc/assets/images/ dewe awe two images to wepwace:
+
+- cowwectionImage.jpg
 - token.jpg
 
-Both of these images are used to save fetching the collection and token Metadata just to access the image uri.
+Bod of dese images awe used to save fetching de cowwection and token Metadata just to access de image uwi.
 
-### Change RPC
+### Change WPC
 
-You can configure the RPC URL for your project in any way you prefer, using one of the following methods:
+You can configuwe de WPC UWW fow youw pwoject in any way you pwefew, using onye of de fowwowing medods:
 
 - .env
-- constants.ts file
-- hardcoded into umi directly
+- constants.ts fiwe
+- hawdcoded into umi diwectwy
 
-In this example the RPC url is hardcoded into the `umiStore` umi state under `src/store/useUmiStore.ts` at line `21`.
+In dis exampwe de WPC uww is hawdcoded into de `umiStore` umi state undew `src/store/useUmiStore.ts` at winye `21`.
 
 ```ts
 const useUmiStore = create<UmiState>()((set) => ({
@@ -81,8 +81,8 @@ const useUmiStore = create<UmiState>()((set) => ({
   ...
 }))
 ```
-## Additional Documentation
+## Additionyaw Documentation
 
-It is recommended to further read the documentation for the base template to understand the helpers and functionality this template is built with
+It is wecommended to fuwdew wead de documentation fow de base tempwate to undewstand de hewpews and functionyawity dis tempwate is buiwt wid
 
-Github Repo - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+Gidub Wepo - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
