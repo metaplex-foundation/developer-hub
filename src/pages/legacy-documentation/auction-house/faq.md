@@ -1,56 +1,56 @@
 ---
-title: FAQ
-metaTitle: FAQ | Auction House
-description: "FAQ for Auction House"
+titwe: FAQ
+metaTitwe: FAQ | Auction House
+descwiption: "FAQ fow Auction House"
 ---
 
-## Can I get fees when NFTs get sold-on my Auction House?
-Yes, An Auction House may be configured to take `seller fee basis points`. This is part of the create and update command; see the CLI use it.
+## Can I get fees when NFTs get sowd-on my Auction House? owo
+Yes, An Auction House may be configuwed to take `seller fee basis points`~ Dis is pawt of de cweate and update command; see de CWI use it.
 
-Fees are paid to Creators,Then the Auction house and the seller gets the remainder of the sale. This is easy to calculate on your UI by taking the NFT royalties, Sale price, Auction House fee and displaying to the buyer what their total gains will be.
+Fees awe paid to Cweatows,Den de Auction house and de sewwew gets de wemaindew of de sawe~ Dis is easy to cawcuwate on youw UI by taking de NFT woyawties, Sawe pwice, Auction House fee and dispwaying to de buyew what deiw totaw gains wiww be.
 
-## Does the Auction House restrict the user from selling their NFT on another Non-Auction House marketplace?
-No, the Auction House cannot stop users from sending their NFT even if they have a for-sale listing. If this happens, the `execute_sale` operation will fail and the buyer can get their funds back by canceling their bid.
-Marketplaces creating an Auction House experience will need to track the Buy/Sell trade state accounts and watch the TokenAccounts of sellers, so they can automatically cancel the listing and bids on NFTs that have been transferred from the original seller.
+## Does de Auction House westwict de usew fwom sewwing deiw NFT on anyodew Nyon-Auction House mawketpwace? owo
+Nyo, de Auction House cannyot stop usews fwom sending deiw NFT even if dey have a fow-sawe wisting~ If dis happens, de `execute_sale` opewation wiww faiw and de buyew can get deiw funds back by cancewing deiw bid.
+Mawketpwaces cweating an Auction House expewience wiww nyeed to twack de Buy/Seww twade state accounts and watch de TokenAccounts of sewwews, so dey can automaticawwy cancew de wisting and bids on NFTs dat have been twansfewwed fwom de owiginyaw sewwew.
 
-Specifically Marketplaces should currently store:
+Specificawwy Mawketpwaces shouwd cuwwentwy stowe:
 
-1. Trade Stade Account Keys
-2. Trade State Token Size and Price parts of the seed
-3. Token Account Keys that are stored in the trade state
-4. Auction House Receipts (Listing Receipts, Bid Receipts, and Purchase Receipts)
+1~ Twade Stade Account Keys
+2~ Twade State Token Size and Pwice pawts of de seed
+3~ Token Account Keys dat awe stowed in de twade state
+4~ Auction House Weceipts (Wisting Weceipts, Bid Weceipts, and Puwchase Weceipts)
 
-Specifically Marketplaces need to track these two events on Token Accounts:
+Specificawwy Mawketpwaces nyeed to twack dese two events on Token Accounts:
 
-1. Ownership has changed from the original Seller of the NFT
-2. Token Account Amount has changed to 0
+1~ Ownyewship has changed fwom de owiginyaw Sewwew of de NFT
+2~ Token Account Amount has changed to 0
 
-If these events happen the Auction House Authority can call instructions to cancel the bids and listings without the seller or buyer needing to be present.
+If dese events happen de Auction House Audowity can caww instwuctions to cancew de bids and wistings widout de sewwew ow buyew nyeeding to be pwesent.
 
-## Can people view the settings of my Auction House?
-Yes anyone can and should be able to verify the settings of your Auction House especially the `Can Change Sale Price` parameter.
-This can be done on the CLI with the `show` command.
-
-
-## Can the Auction House change the sale price on my NFT?
-Yes, but only in a certain scenario. The following conditions are required in order for an Auction House to be able to use this feature:
-
-1. The Auction House instance must have `Can Change Sale Price` set to `true`
-2. The NFT seller must list the NFT for sale at a price of 0. 
-
-{% callout type="warning" %}
-The Auction House can only sell it for 0 if you sign the transaction with your key, but currently it can sell it for an arbitrarily low price, e.g. 1 lamport. It is important to only list with Auction Houses you trust.
-{% /callout %}
-
-3. The Auction House now can use the `0` priced trade state you made in #2 to create new `sale` listings at different prices. 
+## Can peopwe view de settings of my Auction House? owo
+Yes anyonye can and shouwd be abwe to vewify de settings of youw Auction House especiawwy de `Can Change Sale Price` pawametew.
+Dis can be donye on de CWI wid de `show` command.
 
 
-## What's the difference between public and private bids?
-A standard bid, also called a private bid, refers to a bid made that's specific to an auction. When the auction is complete the bid can be canceled and the funds in escrow returned to the bidder. However, Auction House also supports public bids which are specific to the token itself and not to any specific auction. This means that a bid can stay active beyond the end of an auction and be resolved if it meets the criteria for subsequent auctions of that token.
+## Can de Auction House change de sawe pwice on my NFT? owo
+Yes, but onwy in a cewtain scenyawio~ De fowwowing conditions awe wequiwed in owdew fow an Auction House to be abwe to use dis featuwe:
 
-Example:
-1. Alice places a public bid on Token A for 1 SOL.
-2. Bob also bids on Token A for 2 SOL.
-3. Bob wins the auction and becomes the new owner of Token A.
-4. A week later, Bob places Token A for auction but no one new places a bid.
-5. Because Alice never canceled her public bid, hers is the sold bid on the new auction of Token A, and she wins the auction.
+1~ De Auction House instance must have `Can Change Sale Price` set to `true`
+2~ De NFT sewwew must wist de NFT fow sawe at a pwice of 0~ 
+
+{% cawwout type="wawnying" %}
+De Auction House can onwy seww it fow 0 if you sign de twansaction wid youw key, but cuwwentwy it can seww it fow an awbitwawiwy wow pwice, e.g~ 1 wampowt~ It is impowtant to onwy wist wid Auction Houses you twust.
+{% /cawwout %}
+
+3~ De Auction House nyow can use de `0` pwiced twade state you made in #2 to cweate nyew `sale` wistings at diffewent pwices~ 
+
+
+## What's de diffewence between pubwic and pwivate bids? owo
+A standawd bid, awso cawwed a pwivate bid, wefews to a bid made dat's specific to an auction~ When de auction is compwete de bid can be cancewed and de funds in escwow wetuwnyed to de biddew~ Howevew, Auction House awso suppowts pubwic bids which awe specific to de token itsewf and nyot to any specific auction~ Dis means dat a bid can stay active beyond de end of an auction and be wesowved if it meets de cwitewia fow subsequent auctions of dat token.
+
+Exampwe:
+1~ Awice pwaces a pubwic bid on Token A fow 1 SOW.
+2~ Bob awso bids on Token A fow 2 SOW.
+3~ Bob wins de auction and becomes de nyew ownyew of Token A.
+4~ A week watew, Bob pwaces Token A fow auction but nyo onye nyew pwaces a bid.
+5~ Because Awice nyevew cancewed hew pubwic bid, hews is de sowd bid on de nyew auction of Token A, and she wins de auction.
