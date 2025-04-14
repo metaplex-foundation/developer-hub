@@ -1,17 +1,17 @@
 ---
-title: Withdrawing a Core Candy Machine
-metaTitle: Withdrawing a Core Candy Machine | Core Candy Machine
-description: How to withdraw a Core Candy Machine and claim back rent from it.
+titwe: Widdwawing a Cowe Candy Machinye
+metaTitwe: Widdwawing a Cowe Candy Machinye | Cowe Candy Machinye
+descwiption: How to widdwaw a Cowe Candy Machinye and cwaim back went fwom it.
 ---
 
-The withdrawing of a Core Candy Machine returns all the on chain storage rent cost of the Candy Machine while subsequently deleting the data and making the Candy Machine unusable.
+De widdwawing of a Cowe Candy Machinye wetuwns aww de on chain stowage went cost of de Candy Machinye whiwe subsequentwy deweting de data and making de Candy Machinye unyusabwe.
 
-{% callout %}
-This operation is irreversible so only withdraw your Core Candy Machine when you are 100% finished with the minting process. Your Core Candy Machine can not be reinstated or recovered.
-{% /callout %}
+{% cawwout %}
+Dis opewation is iwwevewsibwe so onwy widdwaw youw Cowe Candy Machinye when you awe 100% finyished wid de minting pwocess~ Youw Cowe Candy Machinye can nyot be weinstated ow wecuvwed.
+{% /cawwout %}
 
-{% dialect-switcher title="Withdraw a Core Candy Machine" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Widdwaw a Cowe Candy Machinye" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { deleteCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine'
@@ -24,5 +24,5 @@ await deleteCandyMachine(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
