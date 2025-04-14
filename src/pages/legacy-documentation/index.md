@@ -1,23 +1,23 @@
 ---
-title: Overview
-metaTitle: Legacy Documentation | Developer Hub
-description: A collection of documentation of older Programs and Tools which might not be used anymore or deprecated. Migrated from our old docs for documentation for completeness.
+titwe: Ovewview
+metaTitwe: Wegacy Documentation | Devewopew Hub
+descwiption: A cowwection of documentation of owdew Pwogwams and Toows which might nyot be used anymowe ow depwecated~ Migwated fwom ouw owd docs fow documentation fow compwetenyess.
 ---
 
-A collection of documentation of older Programs and Tools which might not be used anymore or deprecated. Migrated from our old docs for documentation for completeness. {% .lead %}
+A cowwection of documentation of owdew Pwogwams and Toows which might nyot be used anymowe ow depwecated~ Migwated fwom ouw owd docs fow documentation fow compwetenyess~ {% .wead %}
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="Auction House" icon="BookOpen" href="/legacy-documentation/auction-house" description="Allows users to exchange assets within the Solana blockchain." /%}
+{% quick-wink titwe="Auction House" icon="BookOpen" hwef="/wegacy-documentation/auction-house" descwiption="Awwows usews to exchange assets widin de Sowanya bwockchain." /%}
 
-{% quick-link title="Fixed Price Sale" icon="BookOpen" href="/legacy-documentation/fixed-price-sale" description="Sell NFTs at a fixed price by minting print editions from a single master edition." /%}
+{% quick-wink titwe="Fixed Pwice Sawe" icon="BookOpen" hwef="/wegacy-documentation/fixed-pwice-sawe" descwiption="Seww NFTs at a fixed pwice by minting pwint editions fwom a singwe mastew edition." /%}
 
-{% quick-link title="Gumdrop" icon="BookOpen" href="/legacy-documentation/gumdrop" description="Let your community claim tokens instead of having to airdrop them and paying the fees yourself." /%}
+{% quick-wink titwe="Gumdwop" icon="BookOpen" hwef="/wegacy-documentation/gumdwop" descwiption="Wet youw communyity cwaim tokens instead of having to aiwdwop dem and paying de fees youwsewf." /%}
 
-{% quick-link title="Token Entangler" icon="BookOpen" href="/legacy-documentation/token-entangler" description="Entangle NFTs with each other. E.g. to derug projects or fix ones with messed up immutable metadata." /%}
+{% quick-wink titwe="Token Entangwew" icon="BookOpen" hwef="/wegacy-documentation/token-entangwew" descwiption="Entangwe NFTs wid each odew~ E.g~ to dewug pwojects ow fix onyes wid messed up immutabwe metadata." /%}
 
-{% quick-link title="Mobile SDKs" icon="CodeBracketSquare" href="" description="Probably helpful when looking into Android or iOS Development." /%}
+{% quick-wink titwe="Mobiwe SDKs" icon="CodeBwacketSquawe" hwef="" descwiption="Pwobabwy hewpfuw when wooking into Andwoid ow iOS Devewopment." /%}
 
-{% quick-link title="Developer Tools" icon="CodeBracketSquare" href="" description="Some older developer tools that might still help you along the way." /%}
+{% quick-wink titwe="Devewopew Toows" icon="CodeBwacketSquawe" hwef="" descwiption="Some owdew devewopew toows dat might stiww hewp you awong de way." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
