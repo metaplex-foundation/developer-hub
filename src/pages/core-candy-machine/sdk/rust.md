@@ -1,45 +1,45 @@
 ---
-title: Core Candy Machine Rust SDK
-metaTitle: Core Candy Machine Rust SDK | Core Candy Machine
-description: Get Started with the mpl-core-candy-machine Rust SDK for the Core Candy Machine program from Metaplex.
+titwe: Cowe Candy Machinye Wust SDK
+metaTitwe: Cowe Candy Machinye Wust SDK | Cowe Candy Machinye
+descwiption: Get Stawted wid de mpw-cowe-candy-machinye Wust SDK fow de Cowe Candy Machinye pwogwam fwom Metapwex.
 ---
 
-## Core Candy Machine
+## Cowe Candy Machinye
 
-The Core Candy Machine is the heart of the Candymachine which allows initialization and filling of a Core Candy Machine
+De Cowe Candy Machinye is de heawt of de Candymachinye which awwows inyitiawization and fiwwing of a Cowe Candy Machinye
 
-### Installation
+### Instawwation
 
-The MPL-Core Rust SDK can be used in both scripts/desktop/mobile applications as well as with Solana onchain programs.
+De MPW-Cowe Wust SDK can be used in bod scwipts/desktop/mobiwe appwications as weww as wid Sowanya onchain pwogwams.
 
 ```rust
 cargo add mpl-core-candy-machine-core
 ```
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core-candy-machine-core" description="Get started with our Rust SDK for MPL Core Candy Machine." /%}
+{% quick-wink titwe="cwates.io" tawget="_bwank" icon="Wust" hwef="https://cwates.io/cwates/mpw-cowe-candy-machinye-cowe" descwiption="Get stawted wid ouw Wust SDK fow MPW Cowe Candy Machinye." /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core-candy-machine-core/" description="The Rust SDK typedoc platform for Core Candy Machine crate." /%}
+{% quick-wink titwe="docs.ws" tawget="_bwank" icon="Wust" hwef="https://docs.ws/mpw-cowe-candy-machinye-cowe/" descwiption="De Wust SDK typedoc pwatfowm fow Cowe Candy Machinye cwate." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
 
-## Core Candy Guards
+## Cowe Candy Guawds
 
-The Core Candy Guards crate allows the creating and management of Core Candy Guards that can be wrapped over a Core Candy Machine.
+De Cowe Candy Guawds cwate awwows de cweating and manyagement of Cowe Candy Guawds dat can be wwapped uvw a Cowe Candy Machinye.
 
-### Installation
+### Instawwation
 
-The MPL-Core Rust SDK can be used in both scripts/desktop/mobile applications as well as with Solana onchain programs.
+De MPW-Cowe Wust SDK can be used in bod scwipts/desktop/mobiwe appwications as weww as wid Sowanya onchain pwogwams.
 
 ```rust
 cargo add mpl-core-candy-guard
 ```
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core-candy-guard" description="Get started with our Rust SDK for Core Candy Guards." /%}
+{% quick-wink titwe="cwates.io" tawget="_bwank" icon="Wust" hwef="https://cwates.io/cwates/mpw-cowe-candy-guawd" descwiption="Get stawted wid ouw Wust SDK fow Cowe Candy Guawds." /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core-candy-guard" description="The Rust SDK typedoc platform for Core Candy Guards crate." /%}
+{% quick-wink titwe="docs.ws" tawget="_bwank" icon="Wust" hwef="https://docs.ws/mpw-cowe-candy-guawd" descwiption="De Wust SDK typedoc pwatfowm fow Cowe Candy Guawds cwate." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
