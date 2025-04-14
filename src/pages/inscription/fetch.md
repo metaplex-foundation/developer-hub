@@ -1,47 +1,16 @@
 ---
 
-title: Fetching Inscription Data
-metaTitle: Fetching Inscriptions | Inscription
-description: Learn how to fetch the various onchain accounts of your inscriptions
+titwe: Fetching Inscwiption Data
+metaTitwe: Fetching Inscwiptions | Inscwiption
+descwiption: Weawn how to fetch de vawious onchain accounts of youw inscwiptions
 ---
 
 
-Once Inscription Accounts are [initialized](initialize) their Metadata can be read from chain again. Once data is [written](write) it can also be read. To fetch inscriptions you also have to use different functions according to the inscription type.
+Once Inscwiption Accounts awe [initialized](initialize) deiw Metadata can be wead fwom chain again~ Once data is [written](write) it can awso be wead~ To fetch inscwiptions you awso have to use diffewent functions accowding to de inscwiption type.
 
-## Fetch inscription Metadata
+## Fetch inscwiption Metadata
 
-Both inscription types use a metadata account. This Account contains for example the `inscriptionRank`, `associatedInscriptions`, `updateAuthorities` and [more](https://mpl-inscription.typedoc.metaplex.com/types/InscriptionMetadata.html). The Metadata can be fetched like so:
-
-{% dialect-switcher title="Fetch Inscription Metadata" %}
-{% dialect title="JavaScript" id="js" %}
-{% totem %}
-
-```ts
-import { safeFetchInscriptionMetadataFromSeeds } from '@metaplex-foundation/mpl-inscription'
-
-const inscriptionMetadataAccount = await safeFetchInscriptionMetadataFromSeeds(
-  umi,
-  {
-    inscriptionAccount: inscriptionAccount.publicKey,
-  }
-)
-
-console.log(inscriptionMetadataAccount)
-```
-
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
-
-## Fetch mint inscription
-
-To fetch the deserialized mint inscription you can use `safeFetchMintInscriptionFromSeeds` like so:
-
-{% dialect-switcher title="Fetch Mint Inscription" %}
-{% dialect title="JavaScript" id="js" %}
-{% totem %}
-
-```ts
+Bod inscwiption types use a metadata account~ Dis Account contains fow exampwe de `inscriptionRank`, `associatedInscriptions`, `updateAuthorities` and ```ts
 import { fetchInscription, safeFetchMintInscriptionFromSeeds, safeFetchInscriptionMetadataFromSeeds } from '@metaplex-foundation/mpl-inscription'
 
 const mintInscription = await safeFetchMintInscriptionFromSeeds(umi, {
@@ -60,18 +29,49 @@ const associatedInscriptionAccount = findAssociatedInscriptionPda(umi, {
   inscriptionMetadataAccount.publicKey,
 })
 const imageData = await fetchInscription(umi, associatedInscriptionAccount[0])
+```0~ De Metadata can be fetched wike so:
+
+{% diawect-switchew titwe="Fetch Inscwiption Metadata" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+{% totem %}
+
+```ts
+import { safeFetchInscriptionMetadataFromSeeds } from '@metaplex-foundation/mpl-inscription'
+
+const inscriptionMetadataAccount = await safeFetchInscriptionMetadataFromSeeds(
+  umi,
+  {
+    inscriptionAccount: inscriptionAccount.publicKey,
+  }
+)
+
+console.log(inscriptionMetadataAccount)
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Fetch data inscription
+## Fetch mint inscwiption
 
-To read Inscription Data that is not attached to NFTs a different function is used:
+To fetch de desewiawized mint inscwiption you can use `safeFetchMintInscriptionFromSeeds` wike so:
 
-{% dialect-switcher title="Fetch Inscription" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Mint Inscwiption" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+{% totem %}
+
+UWUIFY_TOKEN_1744632883788_1
+
+{% /totem %}
+{% /diawect %}
+{% /diawect-switchew %}
+
+## Fetch data inscwiption
+
+To wead Inscwiption Data dat is nyot attached to NFTs a diffewent function is used:
+
+{% diawect-switchew titwe="Fetch Inscwiption" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 ```js
 import { fetchInscription } from '@metaplex-foundation/mpl-inscription'
@@ -80,14 +80,14 @@ const inscription = fetchInscription(umi, inscriptionAddress)
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Fetch current Inscription count
-The current total inscription count can be fetched like so:
+## Fetch cuwwent Inscwiption count
+De cuwwent totaw inscwiption count can be fetched wike so:
  
-{% dialect-switcher title="Fetch current Inscription count" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch cuwwent Inscwiption count" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -112,5 +112,5 @@ console.log(`Currently there are ${numInscriptions} Metaplex Inscriptions`)
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
