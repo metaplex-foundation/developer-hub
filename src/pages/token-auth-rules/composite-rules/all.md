@@ -1,16 +1,16 @@
 ---
-title: All
-metaTitle: All | Token Auth Rules
-description: The All composite rule
+titwe: Aww
+metaTitwe: Aww | Token Aud Wuwes
+descwiption: De Aww composite wuwe
 ---
 
-## All
+## Aww
 
-This Rule operates as a logical AND on all Rules contained by an **All** Rule. All contained Rules must evaluate to true in order for the **All** Rule to evaluate to true.
+Dis Wuwe opewates as a wogicaw AND on aww Wuwes containyed by an **Aww** Wuwe~ Aww containyed Wuwes must evawuate to twue in owdew fow de **Aww** Wuwe to evawuate to twue.
 
-### Fields
+### Fiewds
 
-- **rules** - A list of contained Rules
+- **wuwes** - A wist of containyed Wuwes
 
 ```js
 // This Rule Set will only evaluate to true if both Public Keys sign the transaction.
