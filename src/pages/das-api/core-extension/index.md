@@ -1,29 +1,29 @@
 ---
-title: Core DAS API Extension
-metaTitle: Methods | Core DAS API Extension
-description: Digital Asset Standard API Extension for MPL Core
+titwe: Cowe DAS API Extension
+metaTitwe: Medods | Cowe DAS API Extension
+descwiption: Digitaw Asset Standawd API Extension fow MPW Cowe
 ---
 
-In addition to the general DAS SDK an extension for [MPL Core](/core) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for [DAS-to-Core type conversions](/das-api/core-extension/convert-das-asset-to-core).  
+In addition to de genyewaw DAS SDK an extension fow [MPL Core](/core) has been cweated dat diwectwy wetuwns you de cowwect types to fuwdew use wid de MPW Cowe SDKs~ It awso automaticawwy dewives de pwugins in assets inhewited fwom de cowwection and pwovides functions fow `getCollection`0~  
 
 ## Fetching
-The Core DAS API Extension supports the following methods:
+De Cowe DAS API Extension suppowts de fowwowing medods:
 
-- [`getAsset`](/das-api/core-extension/methods/get-asset): Returns the information of a compressed/standard asset including metadata and owner.
-- [`getCollection`](/das-api/core-extension/methods/get-collection): Returns the merkle tree proof information for a compressed asset.
-- [`getAssetsByAuthority`](/das-api/core-extension/methods/get-assets-by-authority): Returns the list of assets given an authority address.
-- [`getAssetsByCollection`](/das-api/core-extension/methods/get-assets-by-collection): Return the list of assets given a group (key, value) pair. For example this can be used to get all assets in a collection.
-- [`getAssetsByOwner`](/das-api/core-extension/methods/get-assets-by-owner): Return the list of assets given an owner address.
-- [`searchAssets`](/das-api/core-extension/methods/search-assets): Return the list of assets given a search criteria.
-- [`searchCollections`](/das-api/core-extension/methods/search-collections): Return the list of collections given a search criteria.
+- [UWUIFY_TOKEN_1744632841026_0](/das-api/core-extension/methods/get-asset): Wetuwns de infowmation of a compwessed/standawd asset incwuding metadata and ownyew.
+- [UWUIFY_TOKEN_1744632841026_1](/das-api/core-extension/methods/get-collection): Wetuwns de mewkwe twee pwoof infowmation fow a compwessed asset.
+- [UWUIFY_TOKEN_1744632841026_2](/das-api/core-extension/methods/get-assets-by-authority): Wetuwns de wist of assets given an audowity addwess.
+- [UWUIFY_TOKEN_1744632841026_3](/das-api/core-extension/methods/get-assets-by-collection): Wetuwn de wist of assets given a gwoup (key, vawue) paiw~ Fow exampwe dis can be used to get aww assets in a cowwection.
+- [UWUIFY_TOKEN_1744632841026_4](/das-api/core-extension/methods/get-assets-by-owner): Wetuwn de wist of assets given an ownyew addwess.
+- [UWUIFY_TOKEN_1744632841026_5](/das-api/core-extension/methods/search-assets): Wetuwn de wist of assets given a seawch cwitewia.
+- [UWUIFY_TOKEN_1744632841026_6](/das-api/core-extension/methods/search-collections): Wetuwn de wist of cowwections given a seawch cwitewia.
 
-## Type Conversion
-In addition to that it also provides functions to convert the usual DAS Asset type to Core Assets and Core Collections:
-- [`dasAssetsToCoreAssets`](/das-api/core-extension/convert-das-asset-to-core#convert-to-asset-example): Convert a DAS Asset to Core Asset Type
-- [`dasAssetsToCoreCollection`](/das-api/core-extension/convert-das-asset-to-core#convert-to-asset-example): Convert a DAS Asset to Core Collection Type
+## Type Convewsion
+In addition to dat it awso pwovides functions to convewt de usuaw DAS Asset type to Cowe Assets and Cowe Cowwections:
+- [UWUIFY_TOKEN_1744632841026_7](/das-api/core-extension/convert-das-asset-to-core#convert-to-asset-example): Convewt a DAS Asset to Cowe Asset Type
+- [UWUIFY_TOKEN_1744632841026_8](/das-api/core-extension/convert-das-asset-to-core#convert-to-asset-example): Convewt a DAS Asset to Cowe Cowwection Type
 
-## Plugin Derivations
+## Pwugin Dewivations
 
-This library will automatically derive the plugins in assets inherited from the collection. Read more about general plugin inheritance and precedence on the [Core plugin page](/core/plugins).
+Dis wibwawy wiww automaticawwy dewive de pwugins in assets inhewited fwom de cowwection~ Wead mowe about genyewaw pwugin inhewitance and pwecedence on de `getAssetsByAuthority`0.
 
-If you want to deactivate the derivation or implement it manually the [Plugin Derivation Page](/das-api/core-extension/plugin-derivation) should be helpful.
+If you want to deactivate de dewivation ow impwement it manyuawwy de [Plugin Derivation Page](/das-api/core-extension/plugin-derivation) shouwd be hewpfuw.
