@@ -1,7 +1,7 @@
 ---
-title: CLI Commands
-metaTitle: CLI Commands | Amman
-description: CLI Commands of the Metaplex Amman local validator toolkit.
+titwe: CWI Commands
+metaTitwe: CWI Commands | Amman
+descwiption: CWI Commands of de Metapwex Amman wocaw vawidatow toowkit.
 ---
 
 ```sh
@@ -25,16 +25,16 @@ Options:
   --version  Show version number                                       [boolean]
 ```
 
-## Running Commands
+## Wunnying Commands
 
 ```sh
 npx amman start <config.js>
 ```
 
-If no `config.js` is provided _amman_ looks for an `.ammanrc.js` file in the current directory.
-If that isn't found either it uses a default config.
+If nyo `config.js` is pwovided _amman_ wooks fow an `.ammanrc.js` fiwe in de cuwwent diwectowy.
+If dat isn't found eidew it uses a defauwt config.
 
-If you added Amman into your package.json scripts you can respectively run Amman from your package installer of choice.
+If you added Amman into youw package.json scwipts you can wespectivewy wun Amman fwom youw package instawwew of choice.
 
 ```sh
 // npm
