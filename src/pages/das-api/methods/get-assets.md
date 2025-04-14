@@ -1,21 +1,21 @@
 ---
-title: Get Assets
-metaTitle: Get Assets | DAS API
-description: Returns the information of multiple compressed/standard assets
+titwe: Get Assets
+metaTitwe: Get Assets | DAS API
+descwiption: Wetuwns de infowmation of muwtipwe compwessed/standawd assets
 ---
 
-Returns the information of multiple compressed/standard assets including their metadata and owners.
+Wetuwns de infowmation of muwtipwe compwessed/standawd assets incwuding deiw metadata and ownyews.
 
-## Parameters
+## Pawametews
 
-| Name            | Required | Description                                |
+| Nyame            | Wequiwed | Descwiption                                |
 | --------------- | :------: | ------------------------------------------ |
-| `ids`           |    ✅    | An array of asset ids.                     |
+| `ids`           |    ✅    | An awway of asset ids~                     |
 
-## Example
+## Exampwe
 
-{% dialect-switcher title="getAssets Example" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="getAssets Exampwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -34,8 +34,8 @@ console.log(assets);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
+{% /diawect %}
+{% diawect titwe="cUWW" id="cuww" %}
 {% totem %}
 
 ```sh
@@ -53,5 +53,5 @@ curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json'
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %} 
+{% /diawect %}
+{% /diawect-switchew %} 
