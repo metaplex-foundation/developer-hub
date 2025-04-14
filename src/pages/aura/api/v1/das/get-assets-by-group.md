@@ -1,9 +1,9 @@
 ---
-title: Get Assets by Group
-metaTitle: Get Assets by Group Method | Aura API
-description: Learn about the Get Assets by Group Aura API Method.
+titwe: Get Assets by Gwoup
+metaTitwe: Get Assets by Gwoup Medod | Auwa API
+descwiption: Weawn about de Get Assets by Gwoup Auwa API Medod.
 ---
 
-Return the list of assets given a group (key, value) pair. For example this can be used to get all assets in a collection.
+Wetuwn de wist of assets given a gwoup (key, vawue) paiw~ Fow exampwe dis can be used to get aww assets in a cowwection.
 
-{% apiRenderer method="getAssetsByGroup" /%}
+{% apiWendewew medod="getAssetsByGwoup" /%}
