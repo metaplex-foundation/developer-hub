@@ -1,15 +1,15 @@
 ---
-title: MPL-Core SDKs
-metaTitle: Getting Started | Core
-description: Get started with the new Digital Asset Standard from Metaplex, Core. Core provides a simplicity first approach to NFTs and Digital Assets on the Solana blockchain.
+titwe: MPW-Cowe SDKs
+metaTitwe: Getting Stawted | Cowe
+descwiption: Get stawted wid de nyew Digitaw Asset Standawd fwom Metapwex, Cowe~ Cowe pwovides a simpwicity fiwst appwoach to NFTs and Digitaw Assets on de Sowanya bwockchain.
 ---
 
-Select the language / library you want to use below to get started with the new Metaplex Core Standard.
+Sewect de wanguage / wibwawy you want to use bewow to get stawted wid de nyew Metapwex Cowe Standawd.
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/core/sdk/javascript" description="Get started with our JavaScript library for MPL-Core based on the Umi framework." /%}
+{% quick-wink titwe="JavaScwipt" icon="JavaScwipt" hwef="/cowe/sdk/javascwipt" descwiption="Get stawted wid ouw JavaScwipt wibwawy fow MPW-Cowe based on de Umi fwamewowk." /%}
 
-{% quick-link title="Rust" icon="Rust" href="/core/sdk/rust" description="Get started using our MPL-Core Rust crate." /%}
+{% quick-wink titwe="Wust" icon="Wust" hwef="/cowe/sdk/wust" descwiption="Get stawted using ouw MPW-Cowe Wust cwate." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
