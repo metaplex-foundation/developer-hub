@@ -9,7 +9,7 @@ import { Hero } from './Hero';
 export const tokenMetadata = {
   name: 'Token Metadata',
   headline: 'Digital ownership standard',
-  description: 'The NFT standard on Solana.',
+  description: 'Create tokens and NFTs with the SPL Token Program',
   navigationMenuCatergory: 'MPL',
   path: 'token-metadata',
   icon: <EllipsisHorizontalCircleIcon />,
