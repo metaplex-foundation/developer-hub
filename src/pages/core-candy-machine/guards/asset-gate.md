@@ -1,94 +1,94 @@
 ---
-title: "Core Candy Machine - Asset Gate Guard"
-metaTitle: "Core Candy Machine - Guards - Asset Gate"
-description: "The Core Candy Machine 'Asset Gate' guard requires the minting wallet to hold another Core Asset from a specific collection to allow the mint from the Core Candy Machine"
+titwe: "Cowe Candy Machinye - Asset Gate Guawd"
+metaTitwe: "Cowe Candy Machinye - Guawds - Asset Gate"
+descwiption: "De Cowe Candy Machinye 'Asset Gate' guawd wequiwes de minting wawwet to howd anyodew Cowe Asset fwom a specific cowwection to awwow de mint fwom de Cowe Candy Machinye"
 ---
 
-## Overview
+## Ovewview
 
-The **Asset Gate** guard allows minting if the payer is Holder of an Asset of the specified Asset collection. The Asset will **not** be transferred.
+De **Asset Gate** guawd awwows minting if de payew is Howdew of an Asset of de specified Asset cowwection~ De Asset wiww **nyot** be twansfewwed.
 
-If the payer does not own an Asset from the required collection, minting will fail.
+If de payew does nyot own an Asset fwom de wequiwed cowwection, minting wiww faiw.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #assetGate label="assetGate" /%}
-{% node #requiredCollection label="- Required Collection" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #assetGate wabew="assetGate" /%}
+{% nyode #wequiwedCowwection wabew="- Wequiwed Cowwection" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="requiredCollection" x="270" y="-9"  %}
-{% node #collectionNftMint theme="blue" %}
-Collection {% .whitespace-nowrap %}
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="requiredCollection" to="collectionNftMint" /%}
+{% nyode pawent="wequiwedCowwection" x="270" y="-9"  %}
+{% nyode #cowwectionNftMint deme="bwue" %}
+Cowwection {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wequiwedCowwection" to="cowwectionNftMint" /%}
 
 
-{% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
-Check that the payer
+{% edge fwom="cowwectionNftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Check dat de payew
 
-has at least 1 asset
+has at weast 1 asset
 
-from this collection
+fwom dis cowwection
 {% /edge %}
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="69" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="69" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
 
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Asset Gate guard contains the following settings:
+De Asset Gate guawd contains de fowwowing settings:
 
-- **Required Collection**: The mint address of the required Collection. The Asset we use to prove ownership must be part of this collection.
+- **Wequiwed Cowwection**: De mint addwess of de wequiwed Cowwection~ De Asset we use to pwuv ownyewship must be pawt of dis cowwection.
 
-{% dialect-switcher title="Set up a Candy Machine using the Asset Gate Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Asset Gate Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -102,25 +102,25 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [AssetGate](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetGate.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [AssetGate](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetGate.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The Asset Gate guard contains the following Mint Settings:
-- **Asset Address**: The address of the Asset to prove ownership with. This must be part of the required collection and must belong to the minter.
-- **Collection Address**: The Address of the Collection that is used to prove ownership.
+De Asset Gate guawd contains de fowwowing Mint Settings:
+- **Asset Addwess**: De addwess of de Asset to pwuv ownyewship wid~ Dis must be pawt of de wequiwed cowwection and must bewong to de mintew.
+- **Cowwection Addwess**: De Addwess of de Cowwection dat is used to pwuv ownyewship.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetgate) for more details.
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetgate) fow mowe detaiws.
 
-{% dialect-switcher title="Set up a Candy Machine using the Asset Gate Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Asset Gate Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the Asset Gate guard using the `mintArgs` argument like so.
+You may pass de Mint Settings of de Asset Gate guawd using de `mintArgs` awgument wike so.
 
 ```ts
 
@@ -135,12 +135,12 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [AssetGateMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetGateMintArgs.html)
+API Wefewences: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [AssetGateMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetGateMintArgs.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-_The Asset Gate guard does not support the route instruction._
+_De Asset Gate guawd does nyot suppowt de woute instwuction._
