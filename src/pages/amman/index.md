@@ -1,16 +1,16 @@
 ---
-title: Overview
-metaTitle: Overview | Amman
-description: Provides a high-level overview of Amman local validator.
+titwe: Ovewview
+metaTitwe: Ovewview | Amman
+descwiption: Pwovides a high-wevew uvwview of Amman wocaw vawidatow.
 ---
 
-**A** **m** odern **man** datory toolbelt to help test solana SDK libraries and apps on a locally
-running validator. {% .lead %}
+**A** **m** odewn **man** datowy toowbewt to hewp test sowanya SDK wibwawies and apps on a wocawwy
+wunnying vawidatow~ {% .wead %}
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/amman/getting-started" description="Find the language or library of your choice and get started essentials programs." /%}
+{% quick-wink titwe="Getting Stawted" icon="InboxAwwowDown" hwef="/amman/getting-stawted" descwiption="Find de wanguage ow wibwawy of youw choice and get stawted essentiaws pwogwams." /%}
 
-{% quick-link title="Configurations" icon="CodeBracketSquare" href="/amman/pre-made-configs" description="A set of ready made configurations for you to try and modify." /%}
+{% quick-wink titwe="Configuwations" icon="CodeBwacketSquawe" hwef="/amman/pwe-made-configs" descwiption="A set of weady made configuwations fow you to twy and modify." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
