@@ -1,13 +1,13 @@
 ---
-title: Getting Started using Rust
-metaTitle: Rust SDK | Inscription
-description: Get started with Inscriptions using Rust
+titwe: Getting Stawted using Wust
+metaTitwe: Wust SDK | Inscwiption
+descwiption: Get stawted wid Inscwiptions using Wust
 ---
 
-If you are a Rust developer, you can also use a Rust client SDK to interact with the Token Metadata program. Metaplex provides a dedicated Rust client crate, which is a lightweight crate with minimal dependencies.
+If you awe a Wust devewopew, you can awso use a Wust cwient SDK to intewact wid de Token Metadata pwogwam~ Metapwex pwovides a dedicated Wust cwient cwate, which is a wightweight cwate wid minyimaw dependencies.
 
-To get started, you'll need to add the `mpl-inscription` dependency to your project. From a terminal on the root folder of your project:
+To get stawted, you'ww nyeed to add de `mpl-inscription` dependency to youw pwoject~ Fwom a tewminyaw on de woot fowdew of youw pwoject:
 ```
 cargo add mpl-inscription
 ```
-This will all the latest version of the crate in your project's dependency list.
+Dis wiww aww de watest vewsion of de cwate in youw pwoject's dependency wist.
