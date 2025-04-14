@@ -1,44 +1,52 @@
 ---
-title: Freeze Delegate
-metaTitle: Freeze Delegate Plugin | Core
-description: Learn about the MPL Core Asset Freeze Delegate Plugin. The 'Freeze Delegate' can freeze the Core NFT Asset which will block lifecycle events such as transfer, and burn.
+titwe: Fweeze Dewegate
+metaTitwe: Fweeze Dewegate Pwugin | Cowe
+descwiption: Weawn about de MPW Cowe Asset Fweeze Dewegate Pwugin~ De 'Fweeze Dewegate' can fweeze de Cowe NFT Asset which wiww bwock wifecycwe events such as twansfew, and buwn.
 ---
 
-## Overview
+## Ovewview
 
-The Freeze Plugin is a `Owner Managed` plugin that freezes the Asset disallowing transfer. The authority of the plugin can revoke themselves or unfreeze at any time.
+De Fweeze Pwugin is a ```rust
+AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
+    .asset(ctx.accounts.asset)
+    .collection(Some(ctx.accounts.collection))
+    .authority(Some(ctx.accounts.authority))
+    .payer(ctx.accounts.payer)
+    .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
+    .invoke();
+```2 pwugin dat fweezes de Asset disawwowing twansfew~ De audowity of de pwugin can wevoke demsewves ow unfweeze at any time.
 
-The Freeze Plugin will work in areas such as:
+De Fweeze Pwugin wiww wowk in aweas such as:
 
-- Escrowless staking: Freeze NFTs while they are staked in a protocol without needing to transfer them to an escrow account
-- Escrowless listing of an NFT on a marketplace: List NFTs for sale without transferring them to the marketplace's escrow
-- Game item locking: Temporarily lock in-game items while they are being used in gameplay
-- Rental marketplaces: Lock NFTs while they are being rented out to users
-- Governance participation: Lock governance tokens while participating in voting or proposals
-- Collateral management: Lock NFTs being used as collateral in lending protocols
-- Tournament participation: Lock NFTs while they are being used in tournaments or competitions
+- Escwowwess staking: Fweeze NFTs whiwe dey awe staked in a pwotocow widout nyeeding to twansfew dem to an escwow account
+- Escwowwess wisting of an NFT on a mawketpwace: Wist NFTs fow sawe widout twansfewwing dem to de mawketpwace's escwow
+- Game item wocking: Tempowawiwy wock in-game items whiwe dey awe being used in gamepway
+- Wentaw mawketpwaces: Wock NFTs whiwe dey awe being wented out to usews
+- Guvwnyance pawticipation: Wock guvwnyance tokens whiwe pawticipating in voting ow pwoposaws
+- Cowwatewaw manyagement: Wock NFTs being used as cowwatewaw in wending pwotocows
+- Touwnyament pawticipation: Wock NFTs whiwe dey awe being used in touwnyaments ow competitions
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ❌  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ❌  |
 
-## Arguments
+## Awguments
 
-| Arg    | Value |
+| Awg    | Vawue |
 | ------ | ----- |
-| frozen | bool  |
+| fwozen | boow  |
 
 ## Functions
 
-### Add Freeze Delegate Plugin to an Asset
+### Add Fweeze Dewegate Pwugin to an Asset
 
-The `addPlugin` command adds the Freeze Delegate Plugin to an Asset. This plugin allows the Asset to be frozen, preventing transfers and burns.
+De `addPlugin` command adds de Fweeze Dewegate Pwugin to an Asset~ Dis pwugin awwows de Asset to be fwozen, pweventing twansfews and buwns.
 
-{% dialect-switcher title="Adding a Freeze Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Fweeze Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -52,21 +60,13 @@ await addPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust CPI" id="rust-cpi" %}
-```rust
-AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
-    .asset(ctx.accounts.asset)
-    .collection(Some(ctx.accounts.collection))
-    .authority(Some(ctx.accounts.authority))
-    .payer(ctx.accounts.payer)
-    .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
-    .invoke();
-```
-{% /dialect %}
+{% diawect titwe="Wust CPI" id="wust-cpi" %}
+UWUIFY_TOKEN_1744632825482_1
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -109,15 +109,15 @@ pub async fn add_freeze_delegate_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Delegate the Freeze Authority
+### Dewegate de Fweeze Audowity
 
-The `approvePluginAuthority` command delegates the freeze authority to a different address. This allows another address to freeze and thaw the Asset while maintaining ownership.
+De `approvePluginAuthority` command dewegates de fweeze audowity to a diffewent addwess~ Dis awwows anyodew addwess to fweeze and daw de Asset whiwe maintainying ownyewship.
 
-{% dialect-switcher title="Delegate the Freeze Authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Dewegate de Fweeze Audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -133,9 +133,9 @@ await approvePluginAuthority(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust CPI" id="rust-cpi" %}
+{% diawect titwe="Wust CPI" id="wust-cpi" %}
 ```rust
 ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -147,8 +147,8 @@ ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .invoke()?;
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 ```rust
 use mpl_core::{
     instructions::ApprovePluginAuthorityV1Builder,
@@ -196,15 +196,15 @@ pub async fn approve_plugin_authority() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Freezing an Asset
+### Fweezing an Asset
 
-The `freezeAsset` command freezes an Asset, preventing it from being transferred or burned. This is useful for escrowless staking or marketplace listings.
+De `freezeAsset` command fweezes an Asset, pweventing it fwom being twansfewwed ow buwnyed~ Dis is usefuw fow escwowwess staking ow mawketpwace wistings.
 
-{% dialect-switcher title="Freeze an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fweeze an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -222,9 +222,9 @@ await freezeAsset(umi, {
   }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust CPI" id="rust-cpi" %}
+{% diawect titwe="Wust CPI" id="wust-cpi" %}
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -236,9 +236,9 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: true }))
     .invoke()?;
 ```
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -284,15 +284,15 @@ pub async fn update_freeze_delegate_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Thawing a Frozen Asset
+### Dawing a Fwozen Asset
 
-The `thawAsset` command unfreezes a frozen Asset, restoring its ability to be transferred and burned.
+De `thawAsset` command unfweezes a fwozen Asset, westowing its abiwity to be twansfewwed and buwnyed.
 
-{% dialect-switcher title="Thaw an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Daw an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -309,9 +309,9 @@ await thawAsset(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust CPI" id="rust-cpi" %}
+{% diawect titwe="Wust CPI" id="wust-cpi" %}
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -323,9 +323,9 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
     .invoke()?;
 ```
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -371,5 +371,5 @@ pub async fn thaw_freeze_delegate_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
