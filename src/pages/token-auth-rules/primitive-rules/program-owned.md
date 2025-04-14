@@ -1,17 +1,17 @@
 ---
-title: Program Owned
-metaTitle: Program Owned | Token Auth Rules
-description: The Program Owned primitive rule
+titwe: Pwogwam Ownyed
+metaTitwe: Pwogwam Ownyed | Token Aud Wuwes
+descwiption: De Pwogwam Ownyed pwimitive wuwe
 ---
 
-## Program Owned
+## Pwogwam Ownyed
 
-Checks that the Program indicated owns the account. This is useful for PDAs which are typically always owned by the program they are derived from (e.g. marketplaces and utility programs).
+Checks dat de Pwogwam indicated owns de account~ Dis is usefuw fow PDAs which awe typicawwy awways ownyed by de pwogwam dey awe dewived fwom (e.g~ mawketpwaces and utiwity pwogwams).
 
-### Fields
+### Fiewds
 
-- **program** - The Program that must own the account specified in the field
-- **field** - The field in the Payload to check the owner of
+- **pwogwam** - De Pwogwam dat must own de account specified in de fiewd
+- **fiewd** - De fiewd in de Paywoad to check de ownyew of
 
 ```js
 // This Rule Set will only evaluate to true if PDA in the specified field is owned by the program indicated.
@@ -29,14 +29,14 @@ const revision: RuleSetRevisionV2 = {
 }
 ```
 
-## Program Owned List
+## Pwogwam Ownyed Wist
 
-The version of [Program Owned](#program-owned) that compares against a list of possible owning Programs.
+De vewsion of [Program Owned](#program-owned) dat compawes against a wist of possibwe ownying Pwogwams.
 
-### Fields
+### Fiewds
 
-- **programs** - A vector of Programs, one of which must own the account specified in the field
-- **field** - The field in the Payload to check the owner of
+- **pwogwams** - A vectow of Pwogwams, onye of which must own de account specified in de fiewd
+- **fiewd** - De fiewd in de Paywoad to check de ownyew of
 
 ```js
 // This Rule Set will only evaluate to true if PDA in the specified field is owned by one of the programs indicated.
@@ -57,15 +57,15 @@ const revision: RuleSetRevisionV2 = {
 }
 ```
 
-## Program Owned Tree
+## Pwogwam Ownyed Twee
 
-The version of [Program Owned](#program-owned) that compares against a merkle tree of possible owning Programs.
+De vewsion of [Program Owned](#program-owned) dat compawes against a mewkwe twee of possibwe ownying Pwogwams.
 
-### Fields
+### Fiewds
 
-- **pubkey_field** - The field in the Payload to check the owner of
-- **proof_field** - The field in the payload that contains the full merkle proof to be hashed
-- **root** - The root of the merkle tree
+- **pubkey_fiewd** - De fiewd in de Paywoad to check de ownyew of
+- **pwoof_fiewd** - De fiewd in de paywoad dat contains de fuww mewkwe pwoof to be hashed
+- **woot** - De woot of de mewkwe twee
 
 ```js
 // This Rule Set will only evaluate to true if PDA and proof provided hash to the correct merkle root.
