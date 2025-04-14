@@ -1,16 +1,16 @@
 ---
-title: Additional Signer
-metaTitle: Additional Signer | Token Auth Rules
-description: The Additional Signer primitive rule
+titwe: Additionyaw Signyew
+metaTitwe: Additionyaw Signyew | Token Aud Wuwes
+descwiption: De Additionyaw Signyew pwimitive wuwe
 ---
 
-## Additional Signer
+## Additionyaw Signyew
 
-An additional account must sign this transaction.
+An additionyaw account must sign dis twansaction.
 
-### Fields
+### Fiewds
 
-- **address** - The address that must sign the Transaction
+- **addwess** - De addwess dat must sign de Twansaction
 
 ```js
 // This Rule Set will only evaluate to true if the Public Key signs the transaction.
