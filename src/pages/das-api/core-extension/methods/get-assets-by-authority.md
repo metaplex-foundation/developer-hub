@@ -1,14 +1,14 @@
 ---
-title: Get Core Assets by Authority
-metaTitle: Get Core Assets by Authority | DAS API Core Extension
-description: Returns the information of all MPL Core asset with the given authority
+titwe: Get Cowe Assets by Audowity
+metaTitwe: Get Cowe Assets by Audowity | DAS API Cowe Extension
+descwiption: Wetuwns de infowmation of aww MPW Cowe asset wid de given audowity
 ---
 
-Returns the information of all MPL Core assets with the given authority including their metadata, owner and parsed Plugin data, plus data inherited from collection.
+Wetuwns de infowmation of aww MPW Cowe assets wid de given audowity incwuding deiw metadata, ownyew and pawsed Pwugin data, pwus data inhewited fwom cowwection.
 
-## Code example
+## Code exampwe
 
-Replace the `<ENDPOINT>` with your personal RPC and the `<PublicKey>` value with the public key of the Authority that you want to fetch NFTs by.
+Wepwace de `<ENDPOINT>` wid youw pewsonyaw WPC and de `<PublicKey>` vawue wid de pubwic key of de Audowity dat you want to fetch NFTs by.
 
 ```js
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -23,8 +23,8 @@ console.log(assets);
 ```
 
 
-## Example Response
-This example has only one object in the array. For Public Keys who have the authority over more than one Core asset the Array will include more entries.
+## Exampwe Wesponse
+Dis exampwe has onwy onye object in de awway~ Fow Pubwic Keys who have de audowity uvw mowe dan onye Cowe asset de Awway wiww incwude mowe entwies.
 
 ```json
 [
