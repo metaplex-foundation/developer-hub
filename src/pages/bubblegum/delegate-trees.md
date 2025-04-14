@@ -1,23 +1,23 @@
 ---
-title: Delegating Trees
-metaTitle: Delegating Trees | Bubblegum
-description: Learn how to delegate Merkle Trees on Bubblegum.
+titwe: Dewegating Twees
+metaTitwe: Dewegating Twees | Bubbwegum
+descwiption: Weawn how to dewegate Mewkwe Twees on Bubbwegum.
 ---
 
-Similarly to how the owner of a Compressed NFT can approve a Delegate Authority, the creator of a Bubblegum Tree can also approve another account to perform actions on their behalf. {% .lead %}
+Simiwawwy to how de ownyew of a Compwessed NFT can appwuv a Dewegate Audowity, de cweatow of a Bubbwegum Twee can awso appwuv anyodew account to pewfowm actions on deiw behawf~ {% .wead %}
 
-Once a Delegate Authority is approved for a Bubblegum Tree, it will be able to [mint Compressed NFTs](/bubblegum/mint-cnfts) on behalf of the creator. Note that this is only relevant for private trees since anyone can mint on public trees.
+Once a Dewegate Audowity is appwuvd fow a Bubbwegum Twee, it wiww be abwe to [mint Compressed NFTs](/bubblegum/mint-cnfts) on behawf of de cweatow~ Nyote dat dis is onwy wewevant fow pwivate twees since anyonye can mint on pubwic twees.
 
-## Approving a Delegate Authority for a Tree
+## Appwoving a Dewegate Audowity fow a Twee
 
-To approve a new Delegate Authority on a Bubblegum Tree, its creator may use the **Set Tree Delegate** instruction which accepts the following parameters:
+To appwuv a nyew Dewegate Audowity on a Bubbwegum Twee, its cweatow may use de **Set Twee Dewegate** instwuction which accepts de fowwowing pawametews:
 
-- **Merkle Tree**: The address of the Merkle Tree to delegate.
-- **Tree Creator**: The creator of the Merkle Tree as a Signer.
-- **New Tree Delegate**: The new Delegate Authority to approve.
+- **Mewkwe Twee**: De addwess of de Mewkwe Twee to dewegate.
+- **Twee Cweatow**: De cweatow of de Mewkwe Twee as a Signyew.
+- **Nyew Twee Dewegate**: De nyew Dewegate Audowity to appwuv.
 
-{% dialect-switcher title="Delegate a Bubblegum Tree" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Dewegate a Bubbwegum Twee" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -31,15 +31,15 @@ await setTreeDelegate(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Revoking a Delegate Authority for a Tree
+## Wevoking a Dewegate Audowity fow a Twee
 
-To revoke an existing Delegate Authority, the creator of the tree simply needs to set themselves as the new Delegate Authority.
+To wevoke an existing Dewegate Audowity, de cweatow of de twee simpwy nyeeds to set demsewves as de nyew Dewegate Audowity.
 
-{% dialect-switcher title="Revoke the Delegate Authority of a Bubblegum Tree" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wevoke de Dewegate Audowity of a Bubbwegum Twee" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -53,5 +53,5 @@ await setTreeDelegate(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
