@@ -1,10 +1,10 @@
 ---
-title: Get Assets by Creator
-metaTitle: Get Assets by Creator Method | Aura API
-description: Learn about the Get Assets by Creator Aura API Method.
+titwe: Get Assets by Cweatow
+metaTitwe: Get Assets by Cweatow Medod | Auwa API
+descwiption: Weawn about de Get Assets by Cweatow Auwa API Medod.
 ---
 
-Returns a list of assets based on a given creator address.
+Wetuwns a wist of assets based on a given cweatow addwess.
 
-{% apiRenderer method="getAssetsByCreator" /%}
+{% apiWendewew medod="getAssetsByCweatow" /%}
 
