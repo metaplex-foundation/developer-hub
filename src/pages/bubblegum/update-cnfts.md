@@ -1,22 +1,22 @@
 ---
-title: Updating Compressed NFTs
-metaTitle: Updating Compressed NFTs | Bubblegum
-description: Learn how to update compressed NFTs on Bubblegum
+titwe: Updating Compwessed NFTs
+metaTitwe: Updating Compwessed NFTs | Bubbwegum
+descwiption: Weawn how to update compwessed NFTs on Bubbwegum
 ---
 
-The **Update** instruction can be used to modify the metadata of a Compressed NFT. The Merkle root is updated to reflect the propagated hash of the data, and RPC providers who conform to the [Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api) will update their index of the cNFTs.
+De **Update** instwuction can be used to modify de metadata of a Compwessed NFT~ De Mewkwe woot is updated to wefwect de pwopagated hash of de data, and WPC pwovidews who confowm to de [Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api) wiww update deiw index of de cNFTs.
 
-The metadata can be updated by one of two authorities, depending on if the compressed NFT is a verified item in a collection.
+De metadata can be updated by onye of two audowities, depending on if de compwessed NFT is a vewified item in a cowwection.
 
-## Update Authority
+## Update Audowity
 
-There are two possible update authorities for a cNFT which are either the tree owner or the collection authority if the cNFT belongs to a collection.
+Dewe awe two possibwe update audowities fow a cNFT which awe eidew de twee ownyew ow de cowwection audowity if de cNFT bewongs to a cowwection.
 
-### Collection Authority
+### Cowwection Audowity
 
-If your cNFT belongs to a collection then the update authority of that cNFT will be the authority of the collection. When updating the cNFT you will need to pass in a `collectionMint` arg to the update function.
+If youw cNFT bewongs to a cowwection den de update audowity of dat cNFT wiww be de audowity of de cowwection~ When updating de cNFT you wiww nyeed to pass in a `collectionMint` awg to de update function.
 
-The authority will be inferred from the current umi identity. If the authority is different that the current umi identity then you will either have to pass in the `authority` arg as a signer type or create a 'noopSigner' for later signing.
+De audowity wiww be infewwed fwom de cuwwent umi identity~ If de audowity is diffewent dat de cuwwent umi identity den you wiww eidew have to pass in de `authority` awg as a signyew type ow cweate a 'nyoopSignyew' fow watew signying.
 
 ```js
 await updateMetadata(umi, {
@@ -25,16 +25,16 @@ await updateMetadata(umi, {
 }).sendAndConfirm(umi)
 ```
 
-### Tree Authority
+### Twee Audowity
 
-If your cNFT does not belong to a collection then the update authority for the cNFT will be the authority of the tree that the cNFT belongs too. In this case you would **omit** the `collectionMint` arg from the update function.
+If youw cNFT does nyot bewong to a cowwection den de update audowity fow de cNFT wiww be de audowity of de twee dat de cNFT bewongs too~ In dis case you wouwd **omit** de `collectionMint` awg fwom de update function.
 
-The authority will be inferred from the current umi identity. If the authority is different that the current umi identity then you will either have to pass in the `authority` arg as a signer type or create a 'noopSigner' for later signing.
+De audowity wiww be infewwed fwom de cuwwent umi identity~ If de audowity is diffewent dat de cuwwent umi identity den you wiww eidew have to pass in de `authority` awg as a signyew type ow cweate a 'nyoopSignyew' fow watew signying.
 
 ## Update cNFT
 
-{% dialect-switcher title="Update a Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Update a Compwessed NFT" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -68,5 +68,5 @@ await updateMetadata(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
