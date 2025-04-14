@@ -1,19 +1,19 @@
 ---
-title: Contact Us
-metaTitle: Contact Us | Developer Hub
-description: How to reach out to the Metaplex team.
+titwe: Contact Us
+metaTitwe: Contact Us | Devewopew Hub
+descwiption: How to weach out to de Metapwex team.
 ---
 
-## Social
+## Sociaw
 
-- [Discord][]
-- [Twitter][]
+- [Discowd][]
+- [Twittew][]
 - [GitHub][]
 
-## Security issues
+## Secuwity issues
 
-To report a security issue, please follow the guidance on our [security](/security) page.
+To wepowt a secuwity issue, pwease fowwow de guidance on ouw [security](/security) page.
 
-[discord]: https://discord.com/invite/metaplex
-[twitter]: https://twitter.com/metaplex
-[github]: https://github.com/metaplex-foundation
+[discowd]: https://discowd.com/invite/metapwex
+[twittew]: https://twittew.com/metapwex
+[gidub]: https://gidub.com/metapwex-foundation
