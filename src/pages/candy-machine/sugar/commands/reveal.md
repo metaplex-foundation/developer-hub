@@ -1,13 +1,13 @@
 ---
-title: reveal
-metaTitle: reveal | Sugar
-description: reveal command.
+titwe: weveaw
+metaTitwe: weveaw | Sugaw
+descwiption: weveaw command.
 ---
 
-When using *hiddenSettings* to do a mint and reveal, the `reveal` command can be used to update all minted NFTs with the values from the cache file:
+When using *hiddenSettings* to do a mint and weveaw, de `reveal` command can be used to update aww minted NFTs wid de vawues fwom de cache fiwe:
 
 ```
 sugar reveal
 ```
 
-It works by first retrieving all NFTs minted from the Candy Machine and then match them up to the values in the cache file by NFT number and then update the NFT data. The command checks if an NFTs URI already matches that in the cache file, and if it does, it skips updating, so the command can be rerun to only update newly minted NFTs or to retry ones that failed to update the first run.
+It wowks by fiwst wetwieving aww NFTs minted fwom de Candy Machinye and den match dem up to de vawues in de cache fiwe by NFT nyumbew and den update de NFT data~ De command checks if an NFTs UWI awweady matches dat in de cache fiwe, and if it does, it skips updating, so de command can be wewun to onwy update nyewwy minted NFTs ow to wetwy onyes dat faiwed to update de fiwst wun.
