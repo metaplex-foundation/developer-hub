@@ -1,29 +1,29 @@
 ---
-title: FAQ
-metaTitle: FAQ | MPL-Hybrid
-description: Frequently asked questions about MPL-404
+titwe: FAQ
+metaTitwe: FAQ | MPW-Hybwid
+descwiption: Fwequentwy asked questions about MPW-404
 ---
 
-## Is MPL-404 a new token standard??
+## Is MPW-404 a nyew token standawd? owo
 
-Not quite. MPL-404 is not a token standard, it’s a “meta” standard for hybrid assets facilitated by a dynamic swap program. To put it another way, it’s the bridge between a sets of fungible and non-fungible tokens.
+Nyot quite~ MPW-404 is nyot a token standawd, it’s a “meta” standawd fow hybwid assets faciwitated by a dynyamic swap pwogwam~ To put it anyodew way, it’s de bwidge between a sets of fungibwe and nyon-fungibwe tokens.
 
-## Which types of assets does MPL-Hybrid support?
+## Which types of assets does MPW-Hybwid suppowt? owo
 
-Currently the MPL-Hybrid program only supports Metaplex Core NFT assets and SPL Token fungible assets. We are working to support other token standards including pNFTs & Token Extensions.
+Cuwwentwy de MPW-Hybwid pwogwam onwy suppowts Metapwex Cowe NFT assets and SPW Token fungibwe assets~ We awe wowking to suppowt odew token standawds incwuding pNFTs & Token Extensions.
 
-## How can I provide liquidity to my token?
+## How can I pwovide wiquidity to my token? owo
 
-Providing liquidity is a complex topic beyond the scope of MPL-404. The token escrow is different than a liquidity pool. To learn more about setting up a liquidity pool for your project, please visit Raydium, Orca, Meteora.
+Pwoviding wiquidity is a compwex topic beyond de scope of MPW-404~ De token escwow is diffewent dan a wiquidity poow~ To weawn mowe about setting up a wiquidity poow fow youw pwoject, pwease visit Waydium, Owca, Meteowa.
 
-## How is MPL-404 different from ERC-404?
+## How is MPW-404 diffewent fwom EWC-404? owo
 
-While the roots of MPL-404, SPL-404, are inspired by the Ethereum hybrid standard ERC-404, the standards are quite different. ERC-404 assets act like both a fungible and non-fungible asset at the same time, while MPL-404 assets can fluidly move between the two states, taking advantage of the best features of both. Additionally, MPL-404 allows for advanced swap gamification, serving as a new source of revenue for projects.
+Whiwe de woots of MPW-404, SPW-404, awe inspiwed by de Edeweum hybwid standawd EWC-404, de standawds awe quite diffewent~ EWC-404 assets act wike bod a fungibwe and nyon-fungibwe asset at de same time, whiwe MPW-404 assets can fwuidwy muv between de two states, taking advantage of de best featuwes of bod~ Additionyawwy, MPW-404 awwows fow advanced swap gamification, sewving as a nyew souwce of wevenyue fow pwojects.
 
-## Can I Create an MPL-404 Backed by a Memecoin?
+## Can I Cweate an MPW-404 Backed by a Memecoin? owo
 
-Yes. MPL-404 allows you to create hybrids backed by any fungible token on Solana. You could make a hybrid backed by BONK or another memecoin.
+Yes~ MPW-404 awwows you to cweate hybwids backed by any fungibwe token on Sowanya~ You couwd make a hybwid backed by BONK ow anyodew memecoin.
 
-## Are There Any Costs Associated With Using MPL-404?
+## Awe Dewe Any Costs Associated Wid Using MPW-404? owo
 
-Yes. There is a .005 sol swap protocol fee on every swap.
+Yes~ Dewe is a .005 sow swap pwotocow fee on evewy swap.
