@@ -1,29 +1,29 @@
 ---
-title: Create a Core Candy Machine with Hidden Settings
-metaTitle: Create a Core Candy Machine with Hidden Settings | Core Candy Machine
-description: How to create a Core Candy Machine with hidden settings to create a hide-and-reveal NFT drop.
+titwe: Cweate a Cowe Candy Machinye wid Hidden Settings
+metaTitwe: Cweate a Cowe Candy Machinye wid Hidden Settings | Cowe Candy Machinye
+descwiption: How to cweate a Cowe Candy Machinye wid hidden settings to cweate a hide-and-weveaw NFT dwop.
 ---
 
-If you are looking to create a hide-and-reveal NFT drop, you can use Core Candy Machine to achieve that goal. This guide is divided into two parts to ensure a comprehensive walkthrough of the entire process.
+If you awe wooking to cweate a hide-and-weveaw NFT dwop, you can use Cowe Candy Machinye to achieve dat goaw~ Dis guide is divided into two pawts to ensuwe a compwehensive wawkdwough of de entiwe pwocess.
 
-In this guide (Part 1), we’ll walk you through the step-by-step process of setting up and minting your hide-and-reveal NFT drop using Core Candy Machine. Whether you’re an experienced developer or new to NFT drops, this guide will provide you with everything you need to get started. Revealing and validating your NFT drop will be covered in Part 2.
+In dis guide (Pawt 1), we’ww wawk you dwough de step-by-step pwocess of setting up and minting youw hide-and-weveaw NFT dwop using Cowe Candy Machinye~ Whedew you’we an expewienced devewopew ow nyew to NFT dwops, dis guide wiww pwovide you wid evewyding you nyeed to get stawted~ Weveawing and vawidating youw NFT dwop wiww be cuvwed in Pawt 2.
 
-A hide-and-reveal NFT drop can be useful when you want to reveal all the NFTs after they have been minted.
+A hide-and-weveaw NFT dwop can be usefuw when you want to weveaw aww de NFTs aftew dey have been minted.
 
-How this works, is that when setting up your Core Candy Machine, you’ll configure the hidden settings field. This field will contain placeholder metadata (generic name and URI) that will be applied to all minted NFTs prior to the reveal. Additionally, it includes a pre-calculated hash of the metadata.
-Every NFT that will be minted pre-reveal will have the same name and URI. After the collection has been minted, the assets will be updated with the correct name and URI (metadata).
+How dis wowks, is dat when setting up youw Cowe Candy Machinye, you’ww configuwe de hidden settings fiewd~ Dis fiewd wiww contain pwacehowdew metadata (genyewic nyame and UWI) dat wiww be appwied to aww minted NFTs pwiow to de weveaw~ Additionyawwy, it incwudes a pwe-cawcuwated hash of de metadata.
+Evewy NFT dat wiww be minted pwe-weveaw wiww have de same nyame and UWI~ Aftew de cowwection has been minted, de assets wiww be updated wid de cowwect nyame and UWI (metadata).
 
-After minting our collection, a reveal process needs to be performed where we will update the Assets with the proper metadata.
+Aftew minting ouw cowwection, a weveaw pwocess nyeeds to be pewfowmed whewe we wiww update de Assets wid de pwopew metadata.
 
-To ensure that the Assets were correctly updated, a validation step is performed. This involves hashing the updated metadata (name and URI) of the revealed Assets and comparing it with the original hash stored in the hidden settings. This ensures that every NFT has been updated accurately.
+To ensuwe dat de Assets wewe cowwectwy updated, a vawidation step is pewfowmed~ Dis invowves hashing de updated metadata (nyame and UWI) of de weveawed Assets and compawing it wid de owiginyaw hash stowed in de hidden settings~ Dis ensuwes dat evewy NFT has been updated accuwatewy.
 
-Both the reveal and validation steps will be covered in Part 2 of this guide.
+Bod de weveaw and vawidation steps wiww be cuvwed in Pawt 2 of dis guide.
 
-## Required Packages
+## Wequiwed Packages
 
-You'll need to install the following packages for interacting with the Core Candy Machine:
+You'ww nyeed to instaww de fowwowing packages fow intewacting wid de Cowe Candy Machinye:
 
-{% packagesUsed packages=["umi", "umiDefaults", "core", "candyMachineCore", "mpl-toolbox"] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefauwts", "cowe", "candyMachinyeCowe", "mpw-toowbox"] type="npm" /%}
 
 ```ts
 npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-core-candy-machine
@@ -31,15 +31,13 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 
 ## Setting up umi
 
-After setting up your environment, let's start by setting up umi.
+Aftew setting up youw enviwonment, wet's stawt by setting up umi.
 
-While setting up Umi, you can create new wallets for testing, import wallets from you filesystem or even use `walletAdapter` with a UI/frontend.
-For this example, we will be creating a Keypair from a json file (wallet.json) containing a secret key.
+Whiwe setting up Umi, you can cweate nyew wawwets fow testing, impowt wawwets fwom you fiwesystem ow even use `walletAdapter` wid a UI/fwontend.
+Fow dis exampwe, we wiww be cweating a Keypaiw fwom a json fiwe (wawwet.json) containying a secwet key.
 
-We will be using the devnet Aura endpoint.
-To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
-
-```ts
+We wiww be using de devnyet Auwa endpoint.
+To gain access to de Metapwex Auwa nyetwowk on de Sowanya and Ecwipse bwockchains you can visit de Auwa App fow an endpoint and API key ```ts
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { generateSigner, some, none, createSignerFromKeypair, signerIdentity, transactionBuilder, dateTime } from "@metaplex-foundation/umi";
 import { mplCandyMachine as mplCoreCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
@@ -58,22 +56,18 @@ console.log("Signer: ", signer.publicKey);
 
 // Set the identity and the payer to the given signer
 umi.use(signerIdentity(signer));
-```
+```8.
 
-You can find more details about setting up UMI [here](https://developers.metaplex.com/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)
+UWUIFY_TOKEN_1744632787432_1
 
-## Prepare Reveal Data
-Now, let’s prepare the reveal data, which will include the metadata for the final revealed NFTs. This data contains the name and URI for each NFT in the collection and will be used to update the placeholder metadata after minting.
-This metadata will be uploaded for each asset, and we will be using the resulting URI's
+You can find mowe detaiws about setting up UMI [here](https://developers.metaplex.com/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)
 
-Please note that you will need to upload the reveal data yourself.
-This process will probably not be deterministic by default. In order to do it in a deterministic way, you can use [turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo)
+## Pwepawe Weveaw Data
+Nyow, wet’s pwepawe de weveaw data, which wiww incwude de metadata fow de finyaw weveawed NFTs~ Dis data contains de nyame and UWI fow each NFT in de cowwection and wiww be used to update de pwacehowdew metadata aftew minting.
+Dis metadata wiww be upwoaded fow each asset, and we wiww be using de wesuwting UWI's
 
-In this example, we will work with a collection of five assets, so our reveal data will include an array of five objects, each representing an individual NFT’s name and URI.
-
-We’ll also generate a hash of the reveal data. This hash will be stored in the hidden settings of the Core Candy Machine and used during the validation step to confirm that the metadata was updated correctly.
-
-```ts
+Pwease nyote dat you wiww nyeed to upwoad de weveaw data youwsewf.
+Dis pwocess wiww pwobabwy nyot be detewminyistic by defauwt~ In owdew to do it in a detewminyistic way, you can use ```ts
 import crypto from 'crypto';
 
 // Reveal data of our assets, to be used during the reveal process
@@ -87,14 +81,20 @@ const revealData = [
 
 let string = JSON.stringify(revealData)
 let hash = crypto.createHash('sha256').update(string).digest()
-```
+```0
 
-## Create a Collection
+In dis exampwe, we wiww wowk wid a cowwection of five assets, so ouw weveaw data wiww incwude an awway of five objects, each wepwesenting an individuaw NFT’s nyame and UWI.
 
-Let's now create a Collection asset. 
-For that, the mpl-core library provides a `createCollection` method will help us performing that action
+We’ww awso genyewate a hash of de weveaw data~ Dis hash wiww be stowed in de hidden settings of de Cowe Candy Machinye and used duwing de vawidation step to confiwm dat de metadata was updated cowwectwy.
 
-You can learn more about collections [here](https://developers.metaplex.com/core/collections)
+UWUIFY_TOKEN_1744632787432_2
+
+## Cweate a Cowwection
+
+Wet's nyow cweate a Cowwection asset~ 
+Fow dat, de mpw-cowe wibwawy pwovides a `createCollection` medod wiww hewp us pewfowming dat action
+
+You can weawn mowe about cowwections [here](https://developers.metaplex.com/core/collections)
 
 ```ts
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
@@ -129,9 +129,9 @@ await createCollection(umi, {
 }).sendAndConfirm(umi)
 ```
 
-We added a plugin of type `Royalties` and added 2 different creators that will share those royalties
+We added a pwugin of type `Royalties` and added 2 diffewent cweatows dat wiww shawe dose woyawties
 
-Let's now fetch our created collection and print the details of it
+Wet's nyow fetch ouw cweated cowwection and pwint de detaiws of it
 
 ```ts
 import { fetchCollection } from '@metaplex-foundation/mpl-core';
@@ -141,15 +141,15 @@ const collection = await fetchCollection(umi, collectionMint.publicKey);
 console.log("Collection Details: \n", collection);
 ```
 
-## Create a Core Candy Machine with Hidden Settings
+## Cweate a Cowe Candy Machinye wid Hidden Settings
 
-Next step is to create our Core Candy Machine with the Hidden Settings.
+Nyext step is to cweate ouw Cowe Candy Machinye wid de Hidden Settings.
 
-To achieve that, we will use the `create` method from the mpl-core-candy-machine library, and we will set the `hiddenSettings` with the placeholder name, URI, and pre-calculated hash from the `revealData`
+To achieve dat, we wiww use de `create` medod fwom de mpw-cowe-candy-machinye wibwawy, and we wiww set de `hiddenSettings` wid de pwacehowdew nyame, UWI, and pwe-cawcuwated hash fwom de `revealData`
 
-More details on the Core Candy Machine creation and guards can be found [here](https://developers.metaplex.com/core-candy-machine/create).
+Mowe detaiws on de Cowe Candy Machinye cweation and guawds can be found [here](https://developers.metaplex.com/core-candy-machine/create).
 
-Additionally, we’ll configure a startDate guard, which determines when minting begins. This is only one of the many guards available and you can find the list of all available guards [here](https://developers.metaplex.com/candy-machine/guards).
+Additionyawwy, we’ww configuwe a stawtDate guawd, which detewminyes when minting begins~ Dis is onwy onye of de many guawds avaiwabwe and you can find de wist of aww avaiwabwe guawds [here](https://developers.metaplex.com/candy-machine/guards).
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';
@@ -174,8 +174,8 @@ const res = await create(umi, {
 let tx = await res.sendAndConfirm(umi);
 ```
 
-Let's now fetch our created candy machine and print the details of it. 
-To achieve that, we will use the `fetchCandyMachine` method from the mpl-core-candy-machine library
+Wet's nyow fetch ouw cweated candy machinye and pwint de detaiws of it~ 
+To achieve dat, we wiww use de `fetchCandyMachine` medod fwom de mpw-cowe-candy-machinye wibwawy
 
 ```ts
 import { fetchCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
@@ -185,7 +185,7 @@ let candyMachineDetails = await fetchCandyMachine(umi, candyMachine.publicKey);
 console.log("Candy Machine Details: \n", candyMachineDetails);
 ```
 
-This would return the Candy Machine Data like this:
+Dis wouwd wetuwn de Candy Machinye Data wike dis:
 
 ```json
 {
@@ -269,15 +269,15 @@ This would return the Candy Machine Data like this:
 }
 ```
 
-As you can see, it also prints the Candy Guard Account where we can check that actually only the `startDate` is set, as intended.
+As you can see, it awso pwints de Candy Guawd Account whewe we can check dat actuawwy onwy de `startDate` is set, as intended.
 
-## Mint the collection
+## Mint de cowwection
 
-Let's now mint the 5 NFTs from our Core Candy Machine.
+Wet's nyow mint de 5 NFTs fwom ouw Cowe Candy Machinye.
 
-All these minted assets will have the placeholder name and URI that we set in the `hiddenSettings` field of the Core Candy machine that we created.
+Aww dese minted assets wiww have de pwacehowdew nyame and UWI dat we set in de `hiddenSettings` fiewd of de Cowe Candy machinye dat we cweated.
 
-These placeholder elements will be updated during the reveal process
+Dese pwacehowdew ewements wiww be updated duwing de weveaw pwocess
 
 ```ts
 import { mintV1 } from '@metaplex-foundation/mpl-core-candy-machine';
@@ -305,16 +305,16 @@ for(let i = 0; i < nftMint.length; i++) {
 };
 ```
 
-## Conclusion
-Congratulations! You just completed Part 1 of our guide and successfully set up your Core Candy Machine with hidden settings.
+## Concwusion
+Congwatuwations! uwu You just compweted Pawt 1 of ouw guide and successfuwwy set up youw Cowe Candy Machinye wid hidden settings.
 
-Let's revise all that we did:
-- We started by setting up UMI.
-- After setting up UMI, we created an array containing the metadata (name and URI) that would be used to update the assets after the initial mint. This included calculating a hash for validation purposes.
-- We created a Collection asset to where our minted assets will belong to.
-- We create a Core Candy Machine with hidden setting, 5 items available, and a start time guard.
-- We minted all the assets from our Core Candy Machine with a the placeholder valuee stored in the hidden setting of our Core Candy Machine.
+Wet's wevise aww dat we did:
+- We stawted by setting up UMI.
+- Aftew setting up UMI, we cweated an awway containying de metadata (nyame and UWI) dat wouwd be used to update de assets aftew de inyitiaw mint~ Dis incwuded cawcuwating a hash fow vawidation puwposes.
+- We cweated a Cowwection asset to whewe ouw minted assets wiww bewong to.
+- We cweate a Cowe Candy Machinye wid hidden setting, 5 items avaiwabwe, and a stawt time guawd.
+- We minted aww de assets fwom ouw Cowe Candy Machinye wid a de pwacehowdew vawuee stowed in de hidden setting of ouw Cowe Candy Machinye.
 
-In Part 2, we’ll cover the steps to reveal the assets and validate their metadata. This will include:
-- Fetching the collection assets and updating their metadata with the prepared reveal data.
-- Confirming that the reveal process was successful by hashing the metadata (name and URI) of the revealed assets and comparing it to the expected hash.
+In Pawt 2, we’ww cuvw de steps to weveaw de assets and vawidate deiw metadata~ Dis wiww incwude:
+- Fetching de cowwection assets and updating deiw metadata wid de pwepawed weveaw data.
+- Confiwming dat de weveaw pwocess was successfuw by hashing de metadata (nyame and UWI) of de weveawed assets and compawing it to de expected hash.
