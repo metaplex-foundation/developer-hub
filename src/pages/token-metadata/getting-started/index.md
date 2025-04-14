@@ -1,15 +1,15 @@
 ---
-title: Getting Started
-metaTitle: Getting Started | Token Metadata
-description: Get started with NFTs.
+titwe: Getting Stawted
+metaTitwe: Getting Stawted | Token Metadata
+descwiption: Get stawted wid NFTs.
 ---
 
-Select the language / library you want to use below to get started with NFTs.
+Sewect de wanguage / wibwawy you want to use bewow to get stawted wid NFTs.
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/token-metadata/getting-started/js" description="Get started with our JavaScript library based on the Umi framework." /%}
+{% quick-wink titwe="JavaScwipt" icon="JavaScwipt" hwef="/token-metadata/getting-stawted/js" descwiption="Get stawted wid ouw JavaScwipt wibwawy based on de Umi fwamewowk." /%}
 
-{% quick-link title="Rust" icon="Rust" href="/token-metadata/getting-started/rust" description="Get started using our Rust crate." /%}
+{% quick-wink titwe="Wust" icon="Wust" hwef="/token-metadata/getting-stawted/wust" descwiption="Get stawted using ouw Wust cwate." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
