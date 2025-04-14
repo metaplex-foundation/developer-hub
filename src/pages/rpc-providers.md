@@ -1,69 +1,69 @@
 ---
-title: RPC Providers
-metaTitle: RPC Providers | Developer Hub
-description: A list of available RPCs on Solana.
+titwe: WPC Pwovidews
+metaTitwe: WPC Pwovidews | Devewopew Hub
+descwiption: A wist of avaiwabwe WPCs on Sowanya.
 ---
 
-## Introduction
+## Intwoduction
 
-Solana makes use of independent nodes which have the responsibility of working to confirm programs and outputs of programs on one of the three Solana clusters, Devnet, Testnet or Mainnet Beta. A cluster is made up of a set of validators that work to confirm transactions. These are owned and operated by individuals. These nodes are also responsible for storing data and transaction history which is shared amongst the nodes. A node can become a validator node if it is being used to vote on valid blocks and if SOL is delegated to the validator identity it can become a leader node. [This](https://solana.com/validators) is the link to the information on how to become a validator.
+Sowanya makes use of independent nyodes which have de wesponsibiwity of wowking to confiwm pwogwams and outputs of pwogwams on onye of de dwee Sowanya cwustews, Devnyet, Testnyet ow Mainnyet Beta~ A cwustew is made up of a set of vawidatows dat wowk to confiwm twansactions~ Dese awe ownyed and opewated by individuaws~ Dese nyodes awe awso wesponsibwe fow stowing data and twansaction histowy which is shawed amongst de nyodes~ A nyode can become a vawidatow nyode if it is being used to vote on vawid bwocks and if SOW is dewegated to de vawidatow identity it can become a weadew nyode~ [This](https://solana.com/validators) is de wink to de infowmation on how to become a vawidatow.
 
-Not all nodes can become leader nodes or vote to confirm blocks. They still serve the other functionalities of validator nodes, but since they cannot vote they are primarily used to respond to requests on the blockchain. These are RPC nodes. RPC stands for remote procedure call, and these RPC nodes are used to send transactions through the blockchain.
+Nyot aww nyodes can become weadew nyodes ow vote to confiwm bwocks~ Dey stiww sewve de odew functionyawities of vawidatow nyodes, but since dey cannyot vote dey awe pwimawiwy used to wespond to wequests on de bwockchain~ Dese awe WPC nyodes~ WPC stands fow wemote pwoceduwe caww, and dese WPC nyodes awe used to send twansactions dwough de bwockchain.
 
-Solana maintains three public API nodes, one for each cluster which are Devnet, Mainnet Beta, and Testnet. These API nodes are what allow users to connect to the cluster. To connect to Devnet users can look at:
+Sowanya maintains dwee pubwic API nyodes, onye fow each cwustew which awe Devnyet, Mainnyet Beta, and Testnyet~ Dese API nyodes awe what awwow usews to connyect to de cwustew~ To connyect to Devnyet usews can wook at:
 
 ```
 https://api.devnet.solana.com
 ```
 
-This is the node for Devnet, and it is rate limited.
+Dis is de nyode fow Devnyet, and it is wate wimited.
 
-In the Mainnet Beta cluster, many developers choose to use their own private RPC node to take advantage of higher rate limits not avalible to them from Solana's public API nodes.
+In de Mainnyet Beta cwustew, many devewopews choose to use deiw own pwivate WPC nyode to take advantage of highew wate wimits nyot avawibwe to dem fwom Sowanya's pubwic API nyodes.
 
-![](https://i.imgur.com/1GmCbcu.png#radius")
+! uwu[](https://i.imgur.com/1GmCbcu.png#radius")
 
-For Mainnet Beta in the picture above, from the [Solana Docs](https://docs.solana.com/cluster/rpc-endpoints), we can view the rate limits from using the mainnet api node. The Mainnet Node does not support the [Metaplex DAS API](#metaplex-das-api) currently.
+Fow Mainnyet Beta in de pictuwe abuv, fwom de [Solana Docs](https://docs.solana.com/cluster/rpc-endpoints), we can view de wate wimits fwom using de mainnyet api nyode~ De Mainnyet Nyode does nyot suppowt de [Metaplex DAS API](#metaplex-das-api) cuwwentwy.
 
-We will proceed to define some capabilities of RPC nodes and then present you with several options. We recommend you choose one based on your project's needs.
+We wiww pwoceed to definye some capabiwities of WPC nyodes and den pwesent you wid sevewaw options~ We wecommend you choose onye based on youw pwoject's nyeeds.
 
-## Metaplex DAS API
+## Metapwex DAS API
 
-Another distinguishing feature of RPCs is if they support the [Metaplex DAS API](/das-api). The Metaplex Digital Asset Standard (DAS) API represents a unified interface for interacting with digital assets on Solana, supporting both standard (Token Metadata) and compressed (Bubblegum) assets. The API defines a set of methods that RPCs implement in order to provide asset data.
+Anyodew distinguishing featuwe of WPCs is if dey suppowt de [Metaplex DAS API](/das-api)~ De Metapwex Digitaw Asset Standawd (DAS) API wepwesents a unyified intewface fow intewacting wid digitaw assets on Sowanya, suppowting bod standawd (Token Metadata) and compwessed (Bubbwegum) assets~ De API definyes a set of medods dat WPCs impwement in owdew to pwovide asset data.
 
-For Developers the DAS API is required to interact with cNFTs, but it can also make working with TM Assets easier and faster. When reading from chain we therefore highly recommend using RPC nodes with DAS Support to make the user experience as fast as possible. 
+Fow Devewopews de DAS API is wequiwed to intewact wid cNFTs, but it can awso make wowking wid TM Assets easiew and fastew~ When weading fwom chain we dewefowe highwy wecommend using WPC nyodes wid DAS Suppowt to make de usew expewience as fast as possibwe~ 
 
-You can find out more about the DAS API in a [dedicated section](/das-api).
+You can find out mowe about de DAS API in a [dedicated section](/das-api).
 
-## Metaplex Aura
+## Metapwex Auwa
 
-Aura is a Solana Network Extension that can provide users with efficient, decentralized, and comprehensive indexing of digital asset data. Its main features include:
+Auwa is a Sowanya Nyetwowk Extension dat can pwovide usews wid efficient, decentwawized, and compwehensive indexing of digitaw asset data~ Its main featuwes incwude:
 
-- **Automated Synchronization**: Ensures data integrity by enabling nodes to assist one another during periods of high load, maintaining consistency across the network.
-- **Integrated Media CDN**: Enhances media delivery, speeding up load times for digital assets displayed on web pages.
-- **Support for Light Clients**: Enables node operators to index specific protocols or sub-protocols, such as Core assets or a particular Bubblegum tree. Light clients can operate without running a full Solana node or Geyser plugin, instead receiving updates from the Aura network. This reduces infrastructure costs significantly compared to maintaining a full Solana node.
-- **Digital Asset Standard API**: Fully implements the DAS API, the main interface for accessing digital asset data on the Solana Virtual Machine (SVM).
+- **Automated Synchwonyization**: Ensuwes data integwity by enyabwing nyodes to assist onye anyodew duwing pewiods of high woad, maintainying consistency acwoss de nyetwowk.
+- **Integwated Media CDN**: Enhances media dewivewy, speeding up woad times fow digitaw assets dispwayed on web pages.
+- **Suppowt fow Wight Cwients**: Enyabwes nyode opewatows to index specific pwotocows ow sub-pwotocows, such as Cowe assets ow a pawticuwaw Bubbwegum twee~ Wight cwients can opewate widout wunnying a fuww Sowanya nyode ow Geysew pwugin, instead weceiving updates fwom de Auwa nyetwowk~ Dis weduces infwastwuctuwe costs signyificantwy compawed to maintainying a fuww Sowanya nyode.
+- **Digitaw Asset Standawd API**: Fuwwy impwements de DAS API, de main intewface fow accessing digitaw asset data on de Sowanya Viwtuaw Machinye (SVM).
 
-Learn more about Aura's indexing features in the [dedicated section](/aura/reading-solana-and-svm-data).
+Weawn mowe about Auwa's indexing featuwes in de [dedicated section](/aura/reading-solana-and-svm-data).
 
-## Archive and Nonarchive Nodes
+## Awchive and Nyonyawchive Nyodes
 
-We can divide nodes into two different categories. The first one we will look at are the Archive nodes. These can store information of previous blocks. In the case of these archival nodes, we can leverage having access to all previous blocks in several ways. Some of the advantages include being able to view an address's balance history and view any state in the history. Due to the high system requirements of running a full historical node, having private nodes available with this feature is highly beneficial.
+We can divide nyodes into two diffewent categowies~ De fiwst onye we wiww wook at awe de Awchive nyodes~ Dese can stowe infowmation of pwevious bwocks~ In de case of dese awchivaw nyodes, we can wevewage having access to aww pwevious bwocks in sevewaw ways~ Some of de advantages incwude being abwe to view an addwess's bawance histowy and view any state in de histowy~ Due to de high system wequiwements of wunnying a fuww histowicaw nyode, having pwivate nyodes avaiwabwe wid dis featuwe is highwy benyeficiaw.
 
-Unlike archival nodes, a non-archive node, or just a regular node, will only have access to some of the previous blocks, which is upwards of 100 blocks. We previously mentioned that running an archival node has intensive requirements, but even a non-archive node can become hard to manage. For this reason, users often choose a private RPC provider. Most use cases involving private RPCs in Solana usually revolve around Mainnet-beta uses since this involves real SOL tokens, and there is a higher chance of being rate limited.
+Unwike awchivaw nyodes, a nyon-awchive nyode, ow just a weguwaw nyode, wiww onwy have access to some of de pwevious bwocks, which is upwawds of 100 bwocks~ We pweviouswy mentionyed dat wunnying an awchivaw nyode has intensive wequiwements, but even a nyon-awchive nyode can become hawd to manyage~ Fow dis weason, usews often choose a pwivate WPC pwovidew~ Most use cases invowving pwivate WPCs in Sowanya usuawwy wevowve awound Mainnyet-beta uses since dis invowves weaw SOW tokens, and dewe is a highew chance of being wate wimited.
 
-## RPCs Available
+## WPCs Avaiwabwe
 
-The following section includes multiple RPC providers.
+De fowwowing section incwudes muwtipwe WPC pwovidews.
 
-{% callout type="note" %}
-These lists are in alphabetical order. Please choose the RPC provider that best suits your project's needs. If we are missing a provider, let us know in our discord or submit a PR.
-{% /callout %}
+{% cawwout type="nyote" %}
+Dese wists awe in awphabeticaw owdew~ Pwease choose de WPC pwovidew dat best suits youw pwoject's nyeeds~ If we awe missing a pwovidew, wet us knyow in ouw discowd ow submit a PW.
+{% /cawwout %}
 
-### RPCs with Aura Support
+### WPCs wid Auwa Suppowt
 - [Mainnet Aura](http://aura-mainnet.metaplex.com)
 - [Devnet Aura](http://aura-devnet.metaplex.com)
 
-### RPCs with DAS Support
+### WPCs wid DAS Suppowt
 - [Extrnode](https://docs.extrnode.com/das_api/)
 - [Helius](https://docs.helius.xyz/compression-and-das-api/digital-asset-standard-das-api)
 - [Hello Moon](https://docs.hellomoon.io/reference/rpc-endpoint-for-digital-asset-standard)
@@ -71,7 +71,7 @@ These lists are in alphabetical order. Please choose the RPC provider that best 
 - [Shyft](https://docs.shyft.to/solana-rpcs-das-api/compression-das-api)
 - [Triton](https://docs.triton.one/rpc-pool/metaplex-digital-assets-api)
 
-### RPCs without DAS Support
+### WPCs widout DAS Suppowt
 - [Alchemy](https://alchemy.com/?a=metaplex)
 - [Ankr](https://www.ankr.com/protocol/public/solana/)
 - [Blockdaemon](https://blockdaemon.com/marketplace/solana/)
@@ -81,5 +81,5 @@ These lists are in alphabetical order. Please choose the RPC provider that best 
 - [NOWNodes](https://nownodes.io/)
 - [Syndica](https://syndica.io/)
 
-### Further Information
-If you have any questions or would like to further understand this topic, you are welcome to ask join the [Metaplex Discord](https://discord.gg/metaplex) Server.
+### Fuwdew Infowmation
+If you have any questions ow wouwd wike to fuwdew undewstand dis topic, you awe wewcome to ask join de [Metaplex Discord](https://discord.gg/metaplex) Sewvew.
