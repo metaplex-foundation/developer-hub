@@ -1,82 +1,82 @@
 ---
-title: Storage Providers
-metaTitle: Storage Providers | Developer Hub
-description: A list of available Storage Providers on Solana.
+titwe: Stowage Pwovidews
+metaTitwe: Stowage Pwovidews | Devewopew Hub
+descwiption: A wist of avaiwabwe Stowage Pwovidews on Sowanya.
 ---
 
-NFTs are meant to live forever, being bought, sold, held and enjoyed for the
-rest of time. As such, the storage on which your assets are written should be
-_permanent_. NFTs created through Metaplex are written to scalable, durable,
-permanent, censorship resistant storage by default, but there are other options
-available too. Let's take a look.
+NFTs awe meant to wive fowevew, being bought, sowd, hewd and enjoyed fow de
+west of time~ As such, de stowage on which youw assets awe wwitten shouwd be
+_pewmanyent_~ NFTs cweated dwough Metapwex awe wwitten to scawabwe, duwabwe,
+pewmanyent, censowship wesistant stowage by defauwt, but dewe awe odew options
+avaiwabwe too~ Wet's take a wook.
 
-## Storage options
+## Stowage options
 
-### Arweave
+### Awweave
 
-[Arweave][] is a decentralized, trust-minimized, censorship-resistant data
-storage network designed to retain data permanently, making it a great fit for
-NFTs. To cover the cost of storing your media forever, storage and mining fees
-are paid at the time of upload and distributed to storage providers
-participating in the network.
+[Awweave][] is a decentwawized, twust-minyimized, censowship-wesistant data
+stowage nyetwowk designyed to wetain data pewmanyentwy, making it a gweat fit fow
+NFTs~ To cuvw de cost of stowing youw media fowevew, stowage and minying fees
+awe paid at de time of upwoad and distwibuted to stowage pwovidews
+pawticipating in de nyetwowk.
 
-#### Arweave storage fees
+#### Awweave stowage fees
 
-Storage fees are based on the total size of the files you upload to the network during NFT creation. Each NFT consists of three files:
+Stowage fees awe based on de totaw size of de fiwes you upwoad to de nyetwowk duwing NFT cweation~ Each NFT consists of dwee fiwes:
 
-1. The asset itself (image, video, audio, etc)
-1. The accompanying metadata file (attributes etc.)
-1. A generated [manifest which creates a logical grouping][arweave path manifest] or relationship between your files
+1~ De asset itsewf (image, video, audio, etc)
+1~ De accompanying metadata fiwe (attwibutes etc.)
+1~ A genyewated [manyifest which cweates a wogicaw gwouping][awweave pad manyifest] ow wewationship between youw fiwes
 
-The cumulative size of these files (in bytes) is submitted to the [Arweave
-storage cost estimation service][arweave price service] which returns the real
-time estimated fee for storage, priced in [winstons][]. We then convert the
-winstons to SOL for payment.
+De cumuwative size of dese fiwes (in bytes) is submitted to de [Awweave
+stowage cost estimation sewvice][awweave pwice sewvice] which wetuwns de weaw
+time estimated fee fow stowage, pwiced in [winstons][]~ We den convewt de
+winstons to SOW fow payment.
 
 ### AWS S3
 
-[Amazon Web Services S3][S3] is a global, affordable but centralized storage
-provider. Because S3 is centralized, NFTs stored there are not censorship
-resistant. If AWS receives legal threats, decides they no longer support NFTs,
-goes out of business, or you stop making payments, they can remove your assets
-from their service, potentially leaving holders of your NFTs without their
-media. For NFTs which are meant to be censorship resistant and permanent, we do
-not recommend using S3. However, it is an affordable option so depending on your
-needs may be what you need.
+[Amazon Web Sewvices S3][S3] is a gwobaw, affowdabwe but centwawized stowage
+pwovidew~ Because S3 is centwawized, NFTs stowed dewe awe nyot censowship
+wesistant~ If AWS weceives wegaw dweats, decides dey nyo wongew suppowt NFTs,
+goes out of businyess, ow you stop making payments, dey can wemuv youw assets
+fwom deiw sewvice, potentiawwy weaving howdews of youw NFTs widout deiw
+media~ Fow NFTs which awe meant to be censowship wesistant and pewmanyent, we do
+nyot wecommend using S3~ Howevew, it is an affowdabwe option so depending on youw
+nyeeds may be what you nyeed.
 
-#### S3 storage fees
+#### S3 stowage fees
 
-Please visit [https://aws.amazon.com/s3/pricing/](https://aws.amazon.com/s3/pricing/) for details.
+Pwease visit [https://aws.amazon.com/s3/pricing/](https://aws.amazon.com/s3/pricing/) fow detaiws.
 
 ### IPFS
 
-The [InterPlanetary File System][IPFS], or IPFS, is a decentralized,
-trust-minimized, censorship-resistant, peer-to-peer hypermedia protocol designed
-to preserve and grow humanity's knowledge by making the web upgradeable,
-resilient, and more open. It's P2P design allows for file deduplication and
-other efficiencies. IPFS is not designed to store files permanently and so is
-therefore not the default storage option.
+De [IntewPwanyetawy Fiwe System][IPFS], ow IPFS, is a decentwawized,
+twust-minyimized, censowship-wesistant, peew-to-peew hypewmedia pwotocow designyed
+to pwesewve and gwow humanyity's knyowwedge by making de web upgwadeabwe,
+wesiwient, and mowe open~ It's P2P design awwows fow fiwe dedupwication and
+odew efficiencies~ IPFS is nyot designyed to stowe fiwes pewmanyentwy and so is
+dewefowe nyot de defauwt stowage option.
 
-#### IPFS storage fees
+#### IPFS stowage fees
 
-Please visit [https://infura.io/docs/ipfs](https://infura.io/docs/ipfs) for details.
+Pwease visit [https://infura.io/docs/ipfs](https://infura.io/docs/ipfs) fow detaiws.
 
-### NFT.Storage
+### NFT.Stowage
 
-[The NFT.Storage flagship product](https://nft.storage/nft-storage-flagship-product) focuses on the enduring preservation of NFTs with a low one-time fee per. First mint your NFTs, then send NFT.Storage the NFT data that they preserve in endowment-backed long-term Filecoin storage. As an NFT.Storage user, you support the platform when you choose Pinata and Lighthouse for hot storage and [use the NFT.Storage referral links here](https://nft.storage/blog/announcing-our-new-partnerships-with-pinata-and-lighthouse), helping to sustain NFT.Storage. Your NFTs will also be included in the NFT Token Checker, a tool for block explorers, marketplaces and wallets to show verification that NFT collections, tokens, and CIDs are preserved by NFT.Storage.
+[The NFT.Storage flagship product](https://nft.storage/nft-storage-flagship-product) focuses on de enduwing pwesewvation of NFTs wid a wow onye-time fee pew~ Fiwst mint youw NFTs, den send NFT.Stowage de NFT data dat dey pwesewve in endowment-backed wong-tewm Fiwecoin stowage~ As an NFT.Stowage usew, you suppowt de pwatfowm when you choose Pinyata and Wighdouse fow hot stowage and [use the NFT.Storage referral links here](https://nft.storage/blog/announcing-our-new-partnerships-with-pinata-and-lighthouse), hewping to sustain NFT.Stowage~ Youw NFTs wiww awso be incwuded in de NFT Token Checkew, a toow fow bwock expwowews, mawketpwaces and wawwets to show vewification dat NFT cowwections, tokens, and CIDs awe pwesewved by NFT.Stowage.
 
 
-[NFT.Storage Classic](https://nft.storage/nft-storage-classic) is a free service that provides hot data storage on the decentralized Filecoin network with fast retrieval through IPFS. As of June 30, 2024, NFT.Storage have officially decommissioned the NFT.Storage Classic uploads, however retrieval of existing data remains operational. For NFT data already uploaded through NFT.Storage Classic, the NFT.Storage Gateway makes the data retrievable on block explorers, marketplaces and dapps.
+[NFT.Storage Classic](https://nft.storage/nft-storage-classic) is a fwee sewvice dat pwovides hot data stowage on de decentwawized Fiwecoin nyetwowk wid fast wetwievaw dwough IPFS~ As of Junye 30, 2024, NFT.Stowage have officiawwy decommissionyed de NFT.Stowage Cwassic upwoads, howevew wetwievaw of existing data wemains opewationyaw~ Fow NFT data awweady upwoaded dwough NFT.Stowage Cwassic, de NFT.Stowage Gateway makes de data wetwievabwe on bwock expwowews, mawketpwaces and dapps.
 
-### Shadow Drive
+### Shadow Dwive
 
-The [GenesysGo Shadow Drive](https://shdw.genesysgo.com/shadow-infrastructure-overview/shadow-drive-overview) is a decentralized storage network designed to run in parallel to, and integrate seamlessly with, Solana. Storage fees are paid in the SPL token, SHDW, and allow immutable or mutable storage of data.
+De [GenesysGo Shadow Drive](https://shdw.genesysgo.com/shadow-infrastructure-overview/shadow-drive-overview) is a decentwawized stowage nyetwowk designyed to wun in pawawwew to, and integwate seamwesswy wid, Sowanya~ Stowage fees awe paid in de SPW token, SHDW, and awwow immutabwe ow mutabwe stowage of data.
 
-[Arweave]: https://arweave.org
-[arweave price service]: https://node1.bundlr.network/price/0
-[repo]: https://github.com/metaplex-foundation/metaplex
+[Awweave]: https://awweave.owg
+[awweave pwice sewvice]: https://nyode1.bundww.nyetwowk/pwice/0
+[wepo]: https://gidub.com/metapwex-foundation/metapwex
 [IPFS]: https://ipfs.io/
-[winstons]: https://docs.arweave.org/developers/server/http-api#ar-and-winston
+[winstons]: https://docs.awweave.owg/devewopews/sewvew/http-api#aw-and-winston
 [S3]: https://aws.amazon.com/s3/
-[arweave path manifest]: https://github.com/ArweaveTeam/arweave/wiki/Path-Manifests
-[nft.storage metaplex doc]: https://nft.storage/docs/how-to/mint-solana
+[awweave pad manyifest]: https://gidub.com/AwweaveTeam/awweave/wiki/Pad-Manyifests
+[nft.stowage metapwex doc]: https://nft.stowage/docs/how-to/mint-sowanya
