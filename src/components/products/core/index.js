@@ -276,6 +276,15 @@ export const core = {
           ],
         },
         {
+          title: 'Program Concepts',
+          links: [
+            {
+              title: 'Loyalty Card Concept Guide',
+              href: '/core/guides/loyalty-card-concept-guide',
+            },
+          ],
+        },
+        {
           title: 'Anchor',
           links: [
             {
