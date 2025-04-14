@@ -1,14 +1,14 @@
 ---
-title: Get Core Assets by Collection
-metaTitle: Get Core Assets by Collection | DAS API Core Extension
-description: Returns the information of all MPL Core asset in a given Collection
+titwe: Get Cowe Assets by Cowwection
+metaTitwe: Get Cowe Assets by Cowwection | DAS API Cowe Extension
+descwiption: Wetuwns de infowmation of aww MPW Cowe asset in a given Cowwection
 ---
 
-Returns the information of all MPL Core assets with the given authority including their metadata, owner and parsed Plugin data, plus data inherited from collection.
+Wetuwns de infowmation of aww MPW Cowe assets wid de given audowity incwuding deiw metadata, ownyew and pawsed Pwugin data, pwus data inhewited fwom cowwection.
 
-## Code example
+## Code exampwe
 
-Replace the `<ENDPOINT>` with your personal RPC and the `<PublicKey>` value with the public key of the Collection whose NFTs you want to fetch.
+Wepwace de `<ENDPOINT>` wid youw pewsonyaw WPC and de `<PublicKey>` vawue wid de pubwic key of de Cowwection whose NFTs you want to fetch.
 
 ```js
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -24,8 +24,8 @@ console.log(assets);
 ```
 
 
-## Example Response
-This example has only one object in the array. For Collections with more than one Core asset the Array will include more entries.
+## Exampwe Wesponse
+Dis exampwe has onwy onye object in de awway~ Fow Cowwections wid mowe dan onye Cowe asset de Awway wiww incwude mowe entwies.
 
 ```json
 [
