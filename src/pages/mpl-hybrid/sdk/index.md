@@ -1,13 +1,13 @@
 ---
-title: MPL-Hybrid SDKs
-metaTitle: SDKs | MPL-Hybrid
-description: View the available SDKs for the MPL-Hybrid Metaplex program.
+titwe: MPW-Hybwid SDKs
+metaTitwe: SDKs | MPW-Hybwid
+descwiption: View de avaiwabwe SDKs fow de MPW-Hybwid Metapwex pwogwam.
 ---
 
-Below are the available SDKs for the MPL-Hybrid 404 program that guide you through initial client setup.
+Bewow awe de avaiwabwe SDKs fow de MPW-Hybwid 404 pwogwam dat guide you dwough inyitiaw cwient setup.
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="JavaScript SDK" icon="JavaScript" href="/mpl-hybrid/sdk/javascript" description="Get started with our MPL-Hybrid 404 JavaScript library based on the Umi framework." /%}
+{% quick-wink titwe="JavaScwipt SDK" icon="JavaScwipt" hwef="/mpw-hybwid/sdk/javascwipt" descwiption="Get stawted wid ouw MPW-Hybwid 404 JavaScwipt wibwawy based on de Umi fwamewowk." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
