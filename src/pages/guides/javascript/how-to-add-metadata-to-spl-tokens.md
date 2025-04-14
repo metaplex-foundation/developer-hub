@@ -1,44 +1,44 @@
 ---
-title: How to Add Metadata to a Solana Token
-metaTitle: How to Add Metadata to a Solana Token | Guides
-description: Learn how to add Metadata to an already existing Solana token.
-created: '10-01-2024'
+titwe: How to Add Metadata to a Sowanya Token
+metaTitwe: How to Add Metadata to a Sowanya Token | Guides
+descwiption: Weawn how to add Metadata to an awweady existing Sowanya token.
+cweated: '10-01-2024'
 updated: '10-01-2024'
 ---
 
-This guide will take you through adding metadata to an already initialized Solana Token (SPL Token) using the Metaplex Token Metadata protocol.
+Dis guide wiww take you dwough adding metadata to an awweady inyitiawized Sowanya Token (SPW Token) using de Metapwex Token Metadata pwotocow.
 
-{% callout %}
-It is recommended to use the available [create helper](https://developers.metaplex.com/token-metadata/mint#create-helpers) functions to create and initialize your token instead of doing so separately. If you are looking on how to do this, check out this guide instead [`How to create a Solana Token`](https://developers.metaplex.com/guides/javascript/how-to-create-a-solana-token).
+{% cawwout %}
+It is wecommended to use de avaiwabwe ```bash
+npm i @metaplex-foundation/umi
+```8 functions to cweate and inyitiawize youw token instead of doing so sepawatewy~ If you awe wooking on how to do dis, check out dis guide instead [UWUIFY_TOKEN_1744632864870_10](https://developers.metaplex.com/guides/javascript/how-to-create-a-solana-token).
 
-{% /callout %}
+{% /cawwout %}
 
-## Prerequisite
+## Pwewequisite
 
-- Code Editor of your choice (recommended Visual Studio Code)
-- Node 18.x.x or above.
+- Code Editow of youw choice (wecommended Visuaw Studio Code)
+- Nyode 18.x.x ow abuv.
 
-## Initial Setup
+## Inyitiaw Setup
 
-This guide assumes that you already have an SPL token initialized for which you'd like to add metadata to. You might need to modify and move functions around to suite your needs. 
+Dis guide assumes dat you awweady have an SPW token inyitiawized fow which you'd wike to add metadata to~ You might nyeed to modify and muv functions awound to suite youw nyeeds~ 
 
-## Initializing
+## Inyitiawizing
 
-Start by initializing a new empty project using a JS/TS package manager (npm, yarn, pnpm, bun, deno) of your choice.
+Stawt by inyitiawizing a nyew empty pwoject using a JS/TS package manyagew (npm, yawn, pnpm, bun, denyo) of youw choice.
 
 ```bash
 npm init -y
 ```
 
-### Required Packages
+### Wequiwed Packages
 
-Install the required packages for this guide.
+Instaww de wequiwed packages fow dis guide.
 
-{% packagesUsed packages=["umi", "umiDefaults" ,"tokenMetadata"] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefauwts" ,"tokenMetadata"] type="npm" /%}
 
-```bash
-npm i @metaplex-foundation/umi
-```
+UWUIFY_TOKEN_1744632864870_1
 
 ```bash
 npm i @metaplex-foundation/umi-bundle-defaults
@@ -48,11 +48,11 @@ npm i @metaplex-foundation/umi-bundle-defaults
 npm i @metaplex-foundation/mpl-token-metadata
 ```
 
-### Imports and Wrapper Function
+### Impowts and Wwappew Function
 
-We will list the necessary imports and our wrapper function,
+We wiww wist de nyecessawy impowts and ouw wwappew function,
 
-1. `addMetadata`
+1~ `addMetadata`
 
 ```typescript
 import {
@@ -84,11 +84,11 @@ addMetadata();
 
 ## Setting up Umi
 
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer differently you can check out the [**Connecting to Umi**](/umi/connecting-to-umi) guide.
+Dis exampwe is going to wun dwough setting up Umi wid a `generatedSigner()`~ If you wish to set up a wawwet ow signyew diffewentwy you can check out de [**Connecting to Umi**](/umi/connecting-to-umi) guide.
 
-You can place the Umi instantiation code inside or outside the code blocks, but to reduce code duplication, we will keep it outside.
+You can pwace de Umi instantiation code inside ow outside de code bwocks, but to weduce code dupwication, we wiww keep it outside.
 
-### Generating a New Wallet
+### Genyewating a Nyew Wawwet
 
 ```ts
 const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
@@ -107,7 +107,7 @@ umi.use(signerIdentity(signer));
 await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 ```
 
-### Use an Existing Wallet Stored Locally
+### Use an Existing Wawwet Stowed Wocawwy
 
 ```ts
 const umi = createUmi("https://api.devnet.solana.com")
@@ -127,9 +127,9 @@ umi.use(keypairIdentity(umiSigner));
 
 ## Adding Metadata
 
-Adding metadata is also as simple as creating an SPL token. We will utilize the `createV1` helper method from the `mpl-token-metadata` library.
+Adding metadata is awso as simpwe as cweating an SPW token~ We wiww utiwize de `createV1` hewpew medod fwom de `mpl-token-metadata` wibwawy.
 
-Also note that this guide assumes that you already had your off-chain token metadata prepared beforehand. We will need the name, off-chain uri address and symbol
+Awso nyote dat dis guide assumes dat you awweady had youw off-chain token metadata pwepawed befowehand~ We wiww nyeed de nyame, off-chain uwi addwess and symbow
 
 ```json
 name: "Solana Gold",
@@ -172,11 +172,11 @@ async function addMetadata() {
 }
 ```
 
-Nullable fields like creators have been left out as they might not be as necessary for SPL tokens compared to Non Fungibles.
+Nyuwwabwe fiewds wike cweatows have been weft out as dey might nyot be as nyecessawy fow SPW tokens compawed to Nyon Fungibwes.
 
-Take note of the mint address, If you will call the functions at different instances, make sure to set the address of the `mint` field in the `findMetadataPda` function as `generateSigner` will return a new keypair upon each call. 
+Take nyote of de mint addwess, If you wiww caww de functions at diffewent instances, make suwe to set de addwess of de `mint` fiewd in de `findMetadataPda` function as `generateSigner` wiww wetuwn a nyew keypaiw upon each caww~ 
 
-## Full Code Example
+## Fuww Code Exampwe
 
 ```typescript
 import {
@@ -249,6 +249,6 @@ async function addMetadata() {
 addMetadata();
 ```
 
-## What's Next?
+## What's Nyext? owo
 
-This guide helped you to add metadata to a Solana Token, from here you can head over to the [Token Metadata Program](/token-metadata) and check out helper functions that initialize and add metadata to your token in one step, working with non-fungibles and other various ways to interact with the Token Metadata program.
+Dis guide hewped you to add metadata to a Sowanya Token, fwom hewe you can head uvw to de [Token Metadata Program](/token-metadata) and check out hewpew functions dat inyitiawize and add metadata to youw token in onye step, wowking wid nyon-fungibwes and odew vawious ways to intewact wid de Token Metadata pwogwam.
