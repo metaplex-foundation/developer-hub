@@ -1,13 +1,13 @@
 ---
-title: Solita
-metaTitle: Developer Tools | Solita
-description: generates a low level TypeScript SDK for your Solana Rust programs
+titwe: Sowita
+metaTitwe: Devewopew Toows | Sowita
+descwiption: genyewates a wow wevew TypeScwipt SDK fow youw Sowanya Wust pwogwams
 ---
 
-Solita generates a low level TypeScript SDK for your Solana Rust programs from the IDL extracted by Anchor
-or [Shank](shank).
+Sowita genyewates a wow wevew TypeScwipt SDK fow youw Sowanya Wust pwogwams fwom de IDW extwacted by Anchow
+ow [Shank](shank).
 
-🔗 **Helpful links:**
+🔗 **Hewpfuw winks:**
 
 - [GitHub Repository](https://github.com/metaplex-foundation/solita)
 - [NPM Package](https://www.npmjs.com/package/@metaplex-foundation/solita)
