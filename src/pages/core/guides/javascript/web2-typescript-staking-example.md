@@ -1,111 +1,30 @@
 ---
-title: Create Core Staking Using Javascript
-metaTitle: Create Core Staking Using Javascript | Core Guides
-description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking platform using web2 practices with a backend server.
+titwe: Cweate Cowe Staking Using Javascwipt
+metaTitwe: Cweate Cowe Staking Using Javascwipt | Cowe Guides
+descwiption: Dis guide wiww show you how to wevewage de FweezeDewegate and Attwibute pwugin to cweate a staking pwatfowm using web2 pwactices wid a backend sewvew.
 ---
 
-This developer guide demonstrates how to create a staking program for your collection using only TypeScript, leveraging the attribute plugin and freeze delegate. **This approach eliminates the need for a smart contract** to track staking time and manage staking/unstaking, making it more accessible for Web2 developer.
+Dis devewopew guide demonstwates how to cweate a staking pwogwam fow youw cowwection using onwy TypeScwipt, wevewaging de attwibute pwugin and fweeze dewegate~ **Dis appwoach ewiminyates de nyeed fow a smawt contwact** to twack staking time and manyage staking/unstaking, making it mowe accessibwe fow Web2 devewopew.
 
-## Starting off: Understanding the Logic behind the program
+## Stawting off: Undewstanding de Wogic behind de pwogwam
 
-This program operates with a standard TypeScript backend and uses the asset keypair authority in the secret to sign attribute changes.
+Dis pwogwam opewates wid a standawd TypeScwipt backend and uses de asset keypaiw audowity in de secwet to sign attwibute changes.
 
-**To implement this example, you will need the following components:**
+**To impwement dis exampwe, you wiww nyeed de fowwowing componyents:**
 - **An Asset**
-- **A Collection** (optional, but relevant for this example)
-- **The FreezeDelegate Plugin**
-- **The Attribute Plugin**
+- **A Cowwection** (optionyaw, but wewevant fow dis exampwe)
+- **De FweezeDewegate Pwugin**
+- **De Attwibute Pwugin**
 
-### The Freeze Delegate Plugin
+### De Fweeze Dewegate Pwugin
 
-The **Freeze Delegate Plugin** is an **owner managed plugin**, that means that it requires the owner's signature to be applied to the asset.
+De **Fweeze Dewegate Pwugin** is an **ownyew manyaged pwugin**, dat means dat it wequiwes de ownyew's signyatuwe to be appwied to de asset.
 
-This plugin allows the **delegate to freeze and thaw the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be thawed before revocation).
+Dis pwugin awwows de **dewegate to fweeze and daw de asset, pweventing twansfews**~ De asset ownyew ow pwugin audowity can wevoke dis pwugin at any time, except when de asset is fwozen (in which case it must be dawed befowe wevocation).
 
-**Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
+**Using dis pwugin is wightweight**, as fweezing/dawing de asset invowves just changing a boowean vawue in de pwugin data (de onwy awgument being Fwozen: boow).
 
-_Learn more about it [here](/core/plugins/freeze-delegate)_
-
-### The Attribute Plugin
-
-The **Attribute Plugin** is an **authority managed plugin**, that means that it requires the authority's signature to be applied to the asset. For an asset included in a collection, the collection authority serves as the authority since the asset's authority field is occupied by the collection address.
-
-This plugin allows for **data storage directly on the assets, functioning as onchain attributes or traits**. These traits can be accessed directly by onchain programs since they aren’t stored off-chain as it was for the mpl-program.
-
-**This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
-
-_Learn more about it [here](/core/plugins/attribute)_
-
-### The program Logic
-
-For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement. 
-
-_Both the Stake and Unstake functions utilize, differently, the plugins introduced previously_.
-
-Before diving into the instructions, let’s spend some time talking about the attributes used, the `staked` and `staked_time` keys. The `staked` key indicates if the asset is staked and when it was staked if it was (unstaked = 0, staked = time of staked). The `staked_time` key tracks the total staking duration of the asset, updated only after an asset get’s unstaked.
-
-**Instructions**:
-- **Stake**: This instruction applies the Freeze Delegate Plugin to freeze the asset by setting the flag to true. Additionally, it updates the`staked` key in the Attribute Plugin from 0 to the current time.
-- **Unstake**: This instruction changes the flag of the Freeze Delegate Plugin and revokes it to prevent malicious entities from controlling the asset and demanding ransom to thaw it. It also updates the `staked` key to 0 and sets the `staked_time` to the current time minus the staked timestamp.
-
-## Building the Program: A Step-by-Step Guide
-
-Now that we understand the logic behind our program, **it’s time to dive into the code and bring everything together**!
-
-### Dependencies and Imports
-
-Before writing our program, let's look at what package we need and what function from them to make sure our program works! 
-
-Let's look at the different packages used for this example:
-
-```json
-"dependencies": {
-    "@metaplex-foundation/mpl-core": "1.1.0-alpha.0",
-    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
-    "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
-    "bs58": "^5.0.0",
-    "typescript": "^5.4.5"
-}
-```
-
-And the different functions from those packages are as follow:
-
-```typescript
-import { createSignerFromKeypair, signerIdentity, publicKey, transactionBuilder, Transaction } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { addPlugin, updatePlugin, fetchAsset, removePlugin } from '@metaplex-foundation/mpl-core'
-import { base58 } from '@metaplex-foundation/umi/serializers';
-```
-
-### Umi and Core SDK Overview
-
-In this guide, we’ll use both **Umi** and the **Core SDK** to create all necessary instructions. 
-
-**Umi is a modular framework for building and using JavaScript clients for Solana programs**. It provides a zero-dependency library that defines a set of core interfaces, enabling libraries to operate independently of specific implementations. 
-
-_For more information, you can find an overview [here](/umi/getting-started)_
-
-**The basic Umi setup for this example will look like this**:
-```typescript
-const umi = createUmi("https://api.devnet.solana.com", "finalized")
-
-let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
-const myKeypairSigner = createSignerFromKeypair(umi, keypair);
-umi.use(signerIdentity(myKeypairSigner));
-```
-
-This setup involves:
-- **Establishing a connection with Devnet** for our Umi provider
-- **Setting up a keypair** to be used as both the authority and payer (umi.use(signerIdentity(...)))
-
-**Note**: If you prefer to use a new keypair for this example, you can always use the generateSigner() function to create one.
-
-### Creating an Asset and Adding it to a Collection
-
-Before diving into the logic for staking and unstaking, we should learn **how to create an asset from scratch and add it to a collection**.
-
-**Creating a Collection**:
-```typescript
+_Weawn mowe about it ```typescript
 (async () => {
    // Generate the Collection KeyPair
    const collection = generateSigner(umi)
@@ -122,9 +41,90 @@ Before diving into the logic for staking and unstaking, we should learn **how to
    const signature = base58.deserialize(tx.signature)[0];
    console.log(`\nCollection Created: https://solana.fm/tx/${signature}?cluster=devnet-alpha`);
 })();
+```6_
+
+### De Attwibute Pwugin
+
+De **Attwibute Pwugin** is an **audowity manyaged pwugin**, dat means dat it wequiwes de audowity's signyatuwe to be appwied to de asset~ Fow an asset incwuded in a cowwection, de cowwection audowity sewves as de audowity since de asset's audowity fiewd is occupied by de cowwection addwess.
+
+Dis pwugin awwows fow **data stowage diwectwy on de assets, functionying as onchain attwibutes ow twaits**~ Dese twaits can be accessed diwectwy by onchain pwogwams since dey awen’t stowed off-chain as it was fow de mpw-pwogwam.
+
+**Dis pwugin accepts an AttwibuteWist fiewd**, which consists of an awway of key and vawue paiws, bod of which awe stwings.
+
+_Weawn mowe about it [here](/core/plugins/attribute)_
+
+### De pwogwam Wogic
+
+Fow simpwicity, dis exampwe incwudes onwy two instwuctions: de **stake** and **unstake** functions since awe essentiaw fow a staking pwogwam to wowk as intended~ Whiwe additionyaw instwuctions, such as a **spendPoint** instwuction, couwd be added to utiwize accumuwated points, dis is weft to de weadew to impwement~ 
+
+_Bod de Stake and Unstake functions utiwize, diffewentwy, de pwugins intwoduced pweviouswy_.
+
+Befowe diving into de instwuctions, wet’s spend some time tawking about de attwibutes used, de ```typescript
+import { createSignerFromKeypair, signerIdentity, publicKey, transactionBuilder, Transaction } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { addPlugin, updatePlugin, fetchAsset, removePlugin } from '@metaplex-foundation/mpl-core'
+import { base58 } from '@metaplex-foundation/umi/serializers';
+```9 and ```typescript
+const umi = createUmi("https://api.devnet.solana.com", "finalized")
+
+let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
+const myKeypairSigner = createSignerFromKeypair(umi, keypair);
+umi.use(signerIdentity(myKeypairSigner));
+```0 keys~ De `staked` key indicates if de asset is staked and when it was staked if it was (unstaked = 0, staked = time of staked)~ De `staked_time` key twacks de totaw staking duwation of de asset, updated onwy aftew an asset get’s unstaked.
+
+**Instwuctions**:
+- **Stake**: Dis instwuction appwies de Fweeze Dewegate Pwugin to fweeze de asset by setting de fwag to twue~ Additionyawwy, it updates de`staked` key in de Attwibute Pwugin fwom 0 to de cuwwent time.
+- **Unstake**: Dis instwuction changes de fwag of de Fweeze Dewegate Pwugin and wevokes it to pwevent mawicious entities fwom contwowwing de asset and demanding wansom to daw it~ It awso updates de `staked` key to 0 and sets de `staked_time` to de cuwwent time minyus de staked timestamp.
+
+## Buiwding de Pwogwam: A Step-by-Step Guide
+
+Nyow dat we undewstand de wogic behind ouw pwogwam, **it’s time to dive into de code and bwing evewyding togedew**! uwu
+
+### Dependencies and Impowts
+
+Befowe wwiting ouw pwogwam, wet's wook at what package we nyeed and what function fwom dem to make suwe ouw pwogwam wowks! uwu 
+
+Wet's wook at de diffewent packages used fow dis exampwe:
+
+```json
+"dependencies": {
+    "@metaplex-foundation/mpl-core": "1.1.0-alpha.0",
+    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
+    "bs58": "^5.0.0",
+    "typescript": "^5.4.5"
+}
 ```
 
-**Creating an Asset and Adding it to the Collection:**
+And de diffewent functions fwom dose packages awe as fowwow:
+
+UWUIFY_TOKEN_1744632814225_1
+
+### Umi and Cowe SDK Ovewview
+
+In dis guide, we’ww use bod **Umi** and de **Cowe SDK** to cweate aww nyecessawy instwuctions~ 
+
+**Umi is a moduwaw fwamewowk fow buiwding and using JavaScwipt cwients fow Sowanya pwogwams**~ It pwovides a zewo-dependency wibwawy dat definyes a set of cowe intewfaces, enyabwing wibwawies to opewate independentwy of specific impwementations~ 
+
+_Fow mowe infowmation, you can find an uvwview [here](/umi/getting-started)_
+
+**De basic Umi setup fow dis exampwe wiww wook wike dis**:
+UWUIFY_TOKEN_1744632814225_2
+
+Dis setup invowves:
+- **Estabwishing a connyection wid Devnyet** fow ouw Umi pwovidew
+- **Setting up a keypaiw** to be used as bod de audowity and payew (umi.use(signyewIdentity(...)))
+
+**Nyote**: If you pwefew to use a nyew keypaiw fow dis exampwe, you can awways use de genyewateSignyew() function to cweate onye.
+
+### Cweating an Asset and Adding it to a Cowwection
+
+Befowe diving into de wogic fow staking and unstaking, we shouwd weawn **how to cweate an asset fwom scwatch and add it to a cowwection**.
+
+**Cweating a Cowwection**:
+UWUIFY_TOKEN_1744632814225_3
+
+**Cweating an Asset and Adding it to de Cowwection:**
 ```typescript
 (async () => {
    // Generate the Asset KeyPair
@@ -152,17 +152,17 @@ Before diving into the logic for staking and unstaking, we should learn **how to
 })();
 ```
 
-### The Staking Instruction
+### De Staking Instwuction
 
-Here's the full **Staking instruction** 
-We begin by using the `fetchAsset(...)` instruction from the mpl-core SDK to retrieve information about an asset, including whether it has the attribute plugin and, if so, the attributes it contains.
+Hewe's de fuww **Staking instwuction** 
+We begin by using de `fetchAsset(...)` instwuction fwom de mpw-cowe SDK to wetwieve infowmation about an asset, incwuding whedew it has de attwibute pwugin and, if so, de attwibutes it contains.
 
 ```typescript
 const fetchedAsset = await fetchAsset(umi, asset);
 ```
 
-1. **Check for the Attribute Plugin**
-If the asset does not have the attribute plugin, add it and populate it with the `staked` and `stakedTime` keys.
+1~ **Check fow de Attwibute Pwugin**
+If de asset does nyot have de attwibute pwugin, add it and popuwate it wid de `staked` and `stakedTime` keys.
 
 ```typescript
 if (!fetchedAsset.attributes) {
@@ -182,8 +182,8 @@ if (!fetchedAsset.attributes) {
 } else {
 ```
 
-2. **Check for Staking Attributes**:
-If the asset has the staking attribute, ensure it contains the staking attributes necessary for the staking instruction. 
+2~ **Check fow Staking Attwibutes**:
+If de asset has de staking attwibute, ensuwe it contains de staking attwibutes nyecessawy fow de staking instwuction~ 
 
 ```typescript
 } else {
@@ -193,7 +193,7 @@ If the asset has the staking attribute, ensure it contains the staking attribute
     );
 ```
 
-If it does, check if the asset is already staked and update the `staked` key with the current timeStamp as string:
+If it does, check if de asset is awweady staked and update de `staked` key wid de cuwwent timeStamp as stwing:
 
 ```typescript
 if (isInitialized) {
@@ -213,7 +213,7 @@ if (isInitialized) {
 } else {
 ```
 
-If it doesn't, add them to the existing attribute list.
+If it doesn't, add dem to de existing attwibute wist.
 
 ```typescript
 } else {
@@ -222,8 +222,8 @@ If it doesn't, add them to the existing attribute list.
 }
 ```
 
-3. **Update the Attribute Plugin**:
-Update the attribute plugin with the new or modified attributes.
+3~ **Update de Attwibute Pwugin**:
+Update de attwibute pwugin wid de nyew ow modified attwibutes.
 
 ```typescript
 tx = await transactionBuilder().add(updatePlugin(umi, {
@@ -238,8 +238,8 @@ tx = await transactionBuilder().add(updatePlugin(umi, {
 )
 ```
 
-4. **Freeze the Asset**
-Whether the asset already had the attribute plugin or not, freeze the asset in place so it can't be traded
+4~ **Fweeze de Asset**
+Whedew de asset awweady had de attwibute pwugin ow nyot, fweeze de asset in pwace so it can't be twaded
 
 ```typescript
 tx = await transactionBuilder().add(
@@ -255,7 +255,7 @@ tx = await transactionBuilder().add(
 })).buildAndSign(umi);
 ```
 
-**Here's the full instruction**:
+**Hewe's de fuww instwuction**:
 ```typescript
 (async () => {
     // Pass the Asset and Collection
@@ -344,24 +344,24 @@ tx = await transactionBuilder().add(
 })();
 ```
 
-### The Unstaking Instruction
+### De Unstaking Instwuction
 
-The unstaking instruction will be even easier simpler because, since the unstaking instruction can be called only after the staking instruction, many of the checks are inherently covered by the staking instruction itself. 
+De unstaking instwuction wiww be even easiew simpwew because, since de unstaking instwuction can be cawwed onwy aftew de staking instwuction, many of de checks awe inhewentwy cuvwed by de staking instwuction itsewf~ 
 
-We start by calling the `fetchAsset(...)` instruction to retrieve all information about the asset.
+We stawt by cawwing de `fetchAsset(...)` instwuction to wetwieve aww infowmation about de asset.
 
 ```typescript
 const fetchedAsset = await fetchAsset(umi, asset);
 ```
 
-1. **Run all the checks for the attribute plugin**
+1~ **Wun aww de checks fow de attwibute pwugin**
 
-To verify if an asset has already gone through the staking instruction, **the instruction check the attribute plugin for the following**:
-- **Does the attribute plugin exist on the asset?**
-- **Does it have the staked key?**
-- **Does it have the stakedTime key?**
+To vewify if an asset has awweady gonye dwough de staking instwuction, **de instwuction check de attwibute pwugin fow de fowwowing**:
+- **Does de attwibute pwugin exist on de asset? owo**
+- **Does it have de staked key? owo**
+- **Does it have de stakedTime key? owo**
 
-If any of these checks are missing, the asset has never gone through the staking instruction.
+If any of dese checks awe missing, de asset has nyevew gonye dwough de staking instwuction.
 
 ```typescript
 if (!fetchedAsset.attributes) {
@@ -386,9 +386,9 @@ if (!stakedAttribute) {
 }
 ```
 
-Once we confirm that the asset has the staking attributes, **we check if the asset is currently staked**. If it is staked, we update the staking attributes as follows:
-- Set `Staked` field to zero
-- Update `stakedTime` to `stakedTime` + (currentTimestamp - stakedTimestamp)
+Once we confiwm dat de asset has de staking attwibutes, **we check if de asset is cuwwentwy staked**~ If it is staked, we update de staking attwibutes as fowwows:
+- Set `Staked` fiewd to zewo
+- Update `stakedTime` to `stakedTime` + (cuwwentTimestamp - stakedTimestamp)
 
 ```typescript
 if (stakedAttribute.value === "0") {
@@ -409,8 +409,8 @@ if (stakedAttribute.value === "0") {
 }
 ```
 
-2. **Update the Attribute Plugin**
-Update the attribute plugin with the new or modified attributes.
+2~ **Update de Attwibute Pwugin**
+Update de attwibute pwugin wid de nyew ow modified attwibutes.
 
 ```typescript
 tx = await transactionBuilder().add(updatePlugin(umi, {
@@ -427,8 +427,8 @@ tx = await transactionBuilder().add(updatePlugin(umi, {
 ).buildAndSign(umi);
 ```
 
-3. **Thaw and remove the FreezeDelegate Plugin**
-At the end of the instruction, thaw the asset and remove the FreezeDelegate plugin so the asset is `free` and not controlled by the `update_authority`
+3~ **Daw and wemuv de FweezeDewegate Pwugin**
+At de end of de instwuction, daw de asset and wemuv de FweezeDewegate pwugin so de asset is `free` and nyot contwowwed by de `update_authority`
 
 ```typescript
 tx = await transactionBuilder().add(
@@ -449,7 +449,7 @@ tx = await transactionBuilder().add(
 })).buildAndSign(umi);
 ```
 
-**Here's the full instruction**:
+**Hewe's de fuww instwuction**:
 ```typescript
 (async () => {
     // Pass the Asset and Collection
@@ -535,6 +535,6 @@ tx = await transactionBuilder().add(
 })();
 ```
 
-## Conclusion
+## Concwusion
 
-Congratulations! You are now equipped to create a staking solution for your NFT collection! If you want to learn more about Core and Metaplex, check out the [developer hub](/core/getting-started).
+Congwatuwations! uwu You awe nyow equipped to cweate a staking sowution fow youw NFT cowwection! uwu If you want to weawn mowe about Cowe and Metapwex, check out de [developer hub](/core/getting-started).
