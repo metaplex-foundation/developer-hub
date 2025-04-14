@@ -1,45 +1,45 @@
 ---
-title: Updating Assets
-metaTitle: Updating Assets | Core
-description: Learn how to update Core NFT Assets on using Metaplex packages.
+titwe: Updating Assets
+metaTitwe: Updating Assets | Cowe
+descwiption: Weawn how to update Cowe NFT Assets on using Metapwex packages.
 ---
 
-The update authority or delegate of a Core Asset has the ability to change some of the Asset's data.
+De update audowity ow dewegate of a Cowe Asset has de abiwity to change some of de Asset's data.
 
 {% totem %}
-{% totem-accordion title="Technical Instruction Details" %}
+{% totem-accowdion titwe="Technyicaw Instwuction Detaiws" %}
 
-**Instruction Accounts List**
+**Instwuction Accounts Wist**
 
-| Account            | Description                                     |
+| Account            | Descwiption                                     |
 | ------------------ | ----------------------------------------------- |
-| asset              | The address of the MPL Core Asset.              |
-| collection         | The collection to which the Core Asset belongs. |
-| payer              | The account paying for the storage fees.        |
-| authority          | The owner or delegate of the asset.             |
-| newUpdateAuthority | The new update authority of the asset.          |
-| systemProgram      | The System Program account.                     |
-| logWrapper         | The SPL Noop Program.                           |
+| asset              | De addwess of de MPW Cowe Asset~              |
+| cowwection         | De cowwection to which de Cowe Asset bewongs~ |
+| payew              | De account paying fow de stowage fees~        |
+| audowity          | De ownyew ow dewegate of de asset~             |
+| nyewUpdateAudowity | De nyew update audowity of de asset~          |
+| systemPwogwam      | De System Pwogwam account~                     |
+| wogWwappew         | De SPW Nyoop Pwogwam~                           |
 
-**Instruction Arguments**
+**Instwuction Awguments**
 
-| Args    | Description                      |
+| Awgs    | Descwiption                      |
 | ------- | -------------------------------- |
-| newName | The new name of your Core Asset. |
-| newUri  | The new off-chain metadata URI.  |
+| nyewNyame | De nyew nyame of youw Cowe Asset~ |
+| nyewUwi  | De nyew off-chain metadata UWI~  |
 
-Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/clients/rust/src/generated/instructions/update_v1.rs#L126)
+Some of de accounts/awgs may be abstwacted out and/ow optionyaw in ouw sdks fow ease of use.
+A fuww detaiwed wook at de on chain instwuction it can be viewed hewe~ [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/clients/rust/src/generated/instructions/update_v1.rs#L126)
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
 
-## Updating a Core Asset
+## Updating a Cowe Asset
 
-Here is how you can use our SDKs to update an MPL Core Asset.
+Hewe is how you can use ouw SDKs to update an MPW Cowe Asset.
 
-{% dialect-switcher title="Update an Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Update an Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -61,8 +61,8 @@ await update(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```ts
 use mpl_core::instructions::UpdateV1Builder;
@@ -108,15 +108,15 @@ pub async fn update_asset() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Change the Collection of a Core Asset
+## Change de Cowwection of a Cowe Asset
 
-Here is how you can use our SDKs to change the collection of a Core Asset.
+Hewe is how you can use ouw SDKs to change de cowwection of a Cowe Asset.
 
-{% dialect-switcher title="Change the collection of a Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Change de cowwection of a Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from "@metaplex-foundation/umi";
@@ -142,23 +142,23 @@ const updateTx = await update(umi, {
 
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Making a Core Asset Data Immutable
+## Making a Cowe Asset Data Immutabwe
 
-Here is how you can use our SDKs to make a Core Asset fully immutable. Be aware that there are different levels of immutability described in the [immutability Guide](/core/guides/immutability).
+Hewe is how you can use ouw SDKs to make a Cowe Asset fuwwy immutabwe~ Be awawe dat dewe awe diffewent wevews of immutabiwity descwibed in de [immutability Guide](/core/guides/immutability).
 
-{% callout type="warning" title="Important" %}
+{% cawwout type="wawnying" titwe="Impowtant" %}
 
-This is a destructive action and will remove the ability to update the asset.
+Dis is a destwuctive action and wiww wemuv de abiwity to update de asset.
 
-It will also remove the asset from any collections it was in. To make collection assets immutable you will need to change the update authority of the collection.
+It wiww awso wemuv de asset fwom any cowwections it was in~ To make cowwection assets immutabwe you wiww nyeed to change de update audowity of de cowwection.
 
-{% /callout %}
+{% /cawwout %}
 
-{% dialect-switcher title="Make a Core Asset Immutable" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Make a Cowe Asset Immutabwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -173,9 +173,9 @@ await update(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{instructions::UpdateV1Builder, types::UpdateAuthority};
@@ -216,5 +216,5 @@ pub async fn update_asset_data_to_immutable() {
 
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
