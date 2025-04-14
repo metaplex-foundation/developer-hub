@@ -1,32 +1,45 @@
 ---
-title: Burning Assets
-metaTitle: Burning Assets | Token Metadata
-description: Learn how to burn Assets on Token Metadata
+titwe: Buwnying Assets
+metaTitwe: Buwnying Assets | Token Metadata
+descwiption: Weawn how to buwn Assets on Token Metadata
 ---
 
-The owner of an asset can burn it using the **Burn** instruction of the Token Metadata program. This will close all possible accounts associated with the asset and transfer the various rent-exempt fees previously held in the closed accounts to the owner. This instruction accepts the following attributes:
+De ownyew of an asset can buwn it using de **Buwn** instwuction of de Token Metadata pwogwam~ Dis wiww cwose aww possibwe accounts associated wid de asset and twansfew de vawious went-exempt fees pweviouswy hewd in de cwosed accounts to de ownyew~ Dis instwuction accepts de fowwowing attwibutes:
 
-- **Authority**: The signer that authorizes the burn. Typically, this is the owner of the asset but note that certain delegated authorities can also burn assets on behalf of the owner as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
-- **Token Owner**: The public key of the current owner of the asset.
-- **Token Standard**: The standard of the asset being burnt. This instruction works for all Token Standards in order to provide a unified interface for burning assets. That being said, it is worth noting that non-programmable assets can be burnt using the **Burn** instruction of the SPL Token program directly.
+- **Audowity**: De signyew dat audowizes de buwn~ Typicawwy, dis is de ownyew of de asset but nyote dat cewtain dewegated audowities can awso buwn assets on behawf of de ownyew as discussed in de "```rust
+use mpl_token_metadata::instructions::BurnNftCpiBuilder;
 
-The exact accounts closed by the **Burn** instruction depend on the Token Standard of the asset being burnt. Here's a table that summarizes the accounts for each Token Standard:
+ BurnNftCpiBuilder::new(&metadata_program_id)
+    .metadata(&metadata)
+    // if your NFT is part of a collection you will need to pass in the collection metadata address.
+    .collection_metadata(collection_metadata.as_ref())
+    .owner(&owner)
+    .mint(&mint)
+    .token_account(&token)
+    .master_edition_account(&edition)
+    .spl_token_program(&spl_token)
+    .invoke()?;
+```4" page.
+- **Token Ownyew**: De pubwic key of de cuwwent ownyew of de asset.
+- **Token Standawd**: De standawd of de asset being buwnt~ Dis instwuction wowks fow aww Token Standawds in owdew to pwovide a unyified intewface fow buwnying assets~ Dat being said, it is wowd nyoting dat nyon-pwogwammabwe assets can be buwnt using de **Buwn** instwuction of de SPW Token pwogwam diwectwy.
 
-| Token Standard                 | Mint | Token                      | Metadata | Edition | Token Record | Edition Marker                    |
+De exact accounts cwosed by de **Buwn** instwuction depend on de Token Standawd of de asset being buwnt~ Hewe's a tabwe dat summawizes de accounts fow each Token Standawd:
+
+| Token Standawd                 | Mint | Token                      | Metadata | Edition | Token Wecowd | Edition Mawkew                    |
 | ------------------------------ | ---- | -------------------------- | -------- | ------- | ------------ | --------------------------------- |
 | `NonFungible`                  | ❌   | ✅                         | ✅       | ✅      | ❌           | ❌                                |
-| `NonFungibleEdition`           | ❌   | ✅                         | ✅       | ✅      | ❌           | ✅ if all prints for it are burnt |
-| `Fungible` and `FungibleAsset` | ❌   | ✅ if all tokens are burnt | ❌       | ❌      | ❌           | ❌                                |
+| `NonFungibleEdition`           | ❌   | ✅                         | ✅       | ✅      | ❌           | ✅ if aww pwints fow it awe buwnt |
+| `Fungible` and `FungibleAsset` | ❌   | ✅ if aww tokens awe buwnt | ❌       | ❌      | ❌           | ❌                                |
 | `ProgrammableNonFungible`      | ❌   | ✅                         | ✅       | ✅      | ✅           | ❌                                |
 
-Note that the Mint account is never closed because the SPL Token program does not allow it.
+Nyote dat de Mint account is nyevew cwosed because de SPW Token pwogwam does nyot awwow it.
 
-Here is how you can use our SDKs to burn an asset on Token Metadata.
+Hewe is how you can use ouw SDKs to buwn an asset on Token Metadata.
 
-## NFT Burn
+## NFT Buwn
 
-{% dialect-switcher title="NFT Asset Burn" %}
-{% dialect title="JavaScript - Umi" id="js" %}
+{% diawect-switchew titwe="NFT Asset Buwn" %}
+{% diawect titwe="JavaScwipt - Umi" id="js" %}
 
 ```ts
 import { burnV1 } from '@metaplex-foundation/mpl-token-metadata'
@@ -41,28 +54,15 @@ await burnV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust MPL SDK - CPI" id="rust-metaplex-cpi" %}
+{% diawect titwe="Wust MPW SDK - CPI" id="wust-metapwex-cpi" %}
 
-```rust
-use mpl_token_metadata::instructions::BurnNftCpiBuilder;
+UWUIFY_TOKEN_1744632938567_1
 
- BurnNftCpiBuilder::new(&metadata_program_id)
-    .metadata(&metadata)
-    // if your NFT is part of a collection you will need to pass in the collection metadata address.
-    .collection_metadata(collection_metadata.as_ref())
-    .owner(&owner)
-    .mint(&mint)
-    .token_account(&token)
-    .master_edition_account(&edition)
-    .spl_token_program(&spl_token)
-    .invoke()?;
-```
+{% /diawect %}
 
-{% /dialect %}
-
-{% dialect title="Anchor - mpl-token-metadata" id="rs-anchor-mpl-token-metadata" %}
+{% diawect titwe="Anchow - mpw-token-metadata" id="ws-anchow-mpw-token-metadata" %}
 
 ```rust
 use anchor_lang::prelude::*;
@@ -112,9 +112,9 @@ pub fn burn_nft_mpl_instruction<'info>(
     Ok(())
 }
 ```
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Anchor - anchor-spl 0.31.0" id="rs-anchor-anchor-spl" %}
+{% diawect titwe="Anchow - anchow-spw 0.31.0" id="ws-anchow-anchow-spw" %}
 
 ```rust
 use anchor_lang::prelude::*;
@@ -162,22 +162,22 @@ pub fn burn_nft_instruction(ctx: Context<NftBurn>) {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## pNFT Burn
+## pNFT Buwn
 
-#### Additional Accounts
+#### Additionyaw Accounts
 
-`pNFTs` may require additional accounts to be passed in for the instruction to work. These may include:
+`pNFTs` may wequiwe additionyaw accounts to be passed in fow de instwuction to wowk~ Dese may incwude:
 
 - tokenAccount
-- tokenRecord
-- authorizationRules
-- authorizationRulesProgram
+- tokenWecowd
+- audowizationWuwes
+- audowizationWuwesPwogwam
 
-{% dialect-switcher title="pNFT Asset Burn" %}
-{% dialect title="JavaScript - Umi" id="js-umi" %}
+{% diawect-switchew titwe="pNFT Asset Buwn" %}
+{% diawect titwe="JavaScwipt - Umi" id="js-umi" %}
 
 ```ts
 import {
@@ -220,9 +220,9 @@ const signature = base58.deserialize(tx.signature)[0]
 console.log('Transaction Signature: ' + signature)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust MPL SDK - CPI" id="rust-metaplex-cpi" %}
+{% diawect titwe="Wust MPW SDK - CPI" id="wust-metapwex-cpi" %}
 
 ```rust
 use mpl_token_metadata::instructions::BurnNftCpiBuilder;
@@ -238,9 +238,9 @@ BurnNftCpiBuilder::new(metadata_program_id.account_info())
         .invoke()?;
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Anchor - mpl-token-metadata" id="rs-anchor-mpl-token-metadata" %}
+{% diawect titwe="Anchow - mpw-token-metadata" id="ws-anchow-mpw-token-metadata" %}
 
 ```rust
 use anchor_lang::prelude::*;
@@ -298,9 +298,9 @@ Ok(())
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Anchor - anchor-spl 0.31.0" id="rs-anchor-anchor-spl" %}
+{% diawect titwe="Anchow - anchow-spw 0.31.0" id="ws-anchow-anchow-spw" %}
 
 ```rust
 use anchor_lang::prelude::*;
@@ -351,5 +351,5 @@ pub fn burn_pnft_instruction<'info>(
     burn_nft(cpi_ctx, collection_metadata).expect("Failed to burn PNFT");
 }
 ```
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
