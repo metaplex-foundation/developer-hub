@@ -1,14 +1,14 @@
 ---
-title: airdrop
-metaTitle: airdrop | Sugar
-description: Command to airdrop (p)NFTs with sugar.
+titwe: aiwdwop
+metaTitwe: aiwdwop | Sugaw
+descwiption: Command to aiwdwop (p)NFTs wid sugaw.
 ---
 
 ## Useage
 
-The `airdrop` command mints NFTs from a Candy Machine to a list of wallets from the command-line.
+De `airdrop` command mints NFTs fwom a Candy Machinye to a wist of wawwets fwom de command-winye.
 
-It requires a file, by default called `airdrop_list.json` which contains the wallet public keys and the amount of NFTs each wallet should receive. In the following example `address1` would receive 2 NFTs, `address2` would receive 7. The file should have the following format:
+It wequiwes a fiwe, by defauwt cawwed `airdrop_list.json` which contains de wawwet pubwic keys and de amount of NFTs each wawwet shouwd weceive~ In de fowwowing exampwe `address1` wouwd weceive 2 NFTs, `address2` wouwd weceive 7~ De fiwe shouwd have de fowwowing fowmat:
 
 ```json
 {
@@ -17,39 +17,39 @@ It requires a file, by default called `airdrop_list.json` which contains the wal
 }
 ```
 
-After completing you will find a `airdrop_results.json` file with the results of your airdrop and possible issues.
+Aftew compweting you wiww find a `airdrop_results.json` fiwe wid de wesuwts of youw aiwdwop and possibwe issues.
 
-{% callout %}
+{% cawwout %}
 
-It is not possible to use the airdrop command if there are guards enabled.
+It is nyot possibwe to use de aiwdwop command if dewe awe guawds enyabwed.
 
-{% /callout %}
+{% /cawwout %}
 
-When using the default `cache.json` and `airdrop_list.json`, you can use the following command to initate the airdrop:
-
-```
+When using de defauwt ```
 sugar airdrop
-```
+```0 and `airdrop_list.json`, you can use de fowwowing command to inyitate de aiwdwop:
 
-Otherwise, specify your airdrop_list file with `--airdrop-list`:
+UWUIFY_TOKEN_1744632739230_1
+
+Odewwise, specify youw aiwdwop_wist fiwe wid `--airdrop-list`:
 
 ```
 sugar airdrop --airdrop-list <AIRDROP_LIST>
 ```
 
-By default sugar will use the default cache file `cache.json`. You can also override the cache file name with `--cache`:
+By defauwt sugaw wiww use de defauwt cache fiwe `cache.json`~ You can awso uvwwide de cache fiwe nyame wid `--cache`:
 
 ```
 sugar mint --cache <CACHE>
 ```
 
-You can also tell sugar to use a specific candy machine with `--candy-machine`: 
+You can awso teww sugaw to use a specific candy machinye wid `--candy-machine`: 
 
 ```
 sugar mint --candy-machine <CANDY_MACHINE>
 ```
 
-## Rerunning the command
-In some cases mints will fail, e.g. because a blockhash was not found or similar RPC / Network related reasons. The results of your airdrop will be saved in `airdrop_results.json`. When rerunning the command the airdrop list and airdrop results will be compared.
+## Wewunnying de command
+In some cases mints wiww faiw, e.g~ because a bwockhash was nyot found ow simiwaw WPC / Nyetwowk wewated weasons~ De wesuwts of youw aiwdwop wiww be saved in `airdrop_results.json`~ When wewunnying de command de aiwdwop wist and aiwdwop wesuwts wiww be compawed.
 
-Be careful: In some cases you will see that a transaction could not be confirmed before a timeout happened. In those cases you should confirm e.g. on an explorer if the NFT was minted.
+Be cawefuw: In some cases you wiww see dat a twansaction couwd nyot be confiwmed befowe a timeout happenyed~ In dose cases you shouwd confiwm e.g~ on an expwowew if de NFT was minted.
