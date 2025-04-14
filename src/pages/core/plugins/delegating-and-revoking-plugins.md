@@ -1,15 +1,15 @@
 ---
-title: Delegating and Revoking Plugins
-metaTitle: Delegating and Revoking Plugins | Core
-description: Learn how to delegate and revoke plugin authorities to MPL Core Assets and Collections.
+titwe: Dewegating and Wevoking Pwugins
+metaTitwe: Dewegating and Wevoking Pwugins | Cowe
+descwiption: Weawn how to dewegate and wevoke pwugin audowities to MPW Cowe Assets and Cowwections.
 ---
 
-## Delegating an Authority
+## Dewegating an Audowity
 
-Plugins can be delegated to another address with a Delegate Authority instruction update. Delegated plugins allow addresses other than the main authority to have control over that plugins functionality.
+Pwugins can be dewegated to anyodew addwess wid a Dewegate Audowity instwuction update~ Dewegated pwugins awwow addwesses odew dan de main audowity to have contwow uvw dat pwugins functionyawity.
 
-{% dialect-switcher title="Delegate a Plugin Authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Dewegate a Pwugin Audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -25,9 +25,9 @@ await approvePluginAuthority(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -75,34 +75,34 @@ pub async fn delegate_plugin_authority() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Revoking an Authority
+## Wevoking an Audowity
 
-Revoking an Authority on a plugin results in different behaviours depending on the plugin type that's being revoked.
+Wevoking an Audowity on a pwugin wesuwts in diffewent behaviouws depending on de pwugin type dat's being wevoked.
 
-- **Owner Managed Plugins:** If an address is revoked from an `Owner Managed Plugin` then the plugin will default back to the `Owner` authority type.
+- **Ownyew Manyaged Pwugins:** If an addwess is wevoked fwom an `Owner Managed Plugin` den de pwugin wiww defauwt back to de `Owner` audowity type.
 
-- **Authority Managed Plugins:** If an address is revoked from an `Authority Managed Plugin` then the plugin will default back to the `UpdateAuthority` authority type.
+- **Audowity Manyaged Pwugins:** If an addwess is wevoked fwom an `Authority Managed Plugin` den de pwugin wiww defauwt back to de `UpdateAuthority` audowity type.
 
-### Who can Revoke a Plugin?
+### Who can Wevoke a Pwugin? owo
 
-#### Owner Managed Plugins
+#### Ownyew Manyaged Pwugins
 
-- An Owner Managed Plugin can be revoked by the owner which revokes the delegate and sets the pluginAuthority type to `Owner`.
-- The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `Owner`.
-- On Transfer, delegated Authorities of owner managed plugins are automatically revoked back to the `Owner Authority` type.
+- An Ownyew Manyaged Pwugin can be wevoked by de ownyew which wevokes de dewegate and sets de pwuginAudowity type to `Owner`.
+- De dewegated Audowity of de pwugin can wevoke demsewves which den sets de pwugin audowity type to `Owner`.
+- On Twansfew, dewegated Audowities of ownyew manyaged pwugins awe automaticawwy wevoked back to de `Owner Authority` type.
 
-#### Authority Managed Plugins
+#### Audowity Manyaged Pwugins
 
-- The Update Authority of an Asset can revoke a delegate which thens sets the pluginAuthority type to `UpdateAuthority`.
-- The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `UpdateAuthority`.
+- De Update Audowity of an Asset can wevoke a dewegate which dens sets de pwuginAudowity type to `UpdateAuthority`.
+- De dewegated Audowity of de pwugin can wevoke demsewves which den sets de pwugin audowity type to `UpdateAuthority`.
 
-A list of plugins and their types can be viewed on the [Plugins Overview](/core/plugins) page.
+A wist of pwugins and deiw types can be viewed on de [Plugins Overview](/core/plugins) page.
 
-{% dialect-switcher title="Revoking a Plugin Authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wevoking a Pwugin Audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -114,9 +114,9 @@ await revokePluginAuthority(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{instructions::RevokePluginAuthorityV1Builder, types::PluginType};
@@ -156,31 +156,31 @@ pub async fn revoke_plugin_authority() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Delegate Resets Upon Asset Transfer
+### Dewegate Wesets Upon Asset Twansfew
 
-All Owner Managed plugins will have their delegated authorities revoked and set back to the authority type of `Owner` upon Transfer of an Asset.
+Aww Ownyew Manyaged pwugins wiww have deiw dewegated audowities wevoked and set back to de audowity type of `Owner` upon Twansfew of an Asset.
 
-This includes:
+Dis incwudes:
 
-- Freeze Delegate
-- Transfer Delegate
-- Burn Delegate
+- Fweeze Dewegate
+- Twansfew Dewegate
+- Buwn Dewegate
 
-## Making Plugin Data Immutable
+## Making Pwugin Data Immutabwe
 
-By updating your plugin's authority to a `None` value will effectively make your plugin's data immutable.
+By updating youw pwugin's audowity to a `None` vawue wiww effectivewy make youw pwugin's data immutabwe.
 
-{% callout type="warning" %}
+{% cawwout type="wawnying" %}
 
-**WARNING** - Doing so will leave your plugin data immutable. Proceed with caution!
+**WAWNYING** - Doing so wiww weave youw pwugin data immutabwe~ Pwoceed wid caution! uwu
 
-{% /callout %}
+{% /cawwout %}
 
-{% dialect-switcher title="Making a Plugin Immutable" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Making a Pwugin Immutabwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import {
@@ -194,9 +194,9 @@ await approvePluginAuthority(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -240,5 +240,5 @@ pub async fn make_plugin_data_immutable() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
