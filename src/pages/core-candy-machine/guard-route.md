@@ -1,91 +1,137 @@
 ---
-title: Special Guard Instructions
-metaTitle: Special Guard Instructions | Core Candy Machine
-description: Explains how to execute guard-specific instructions for the Core Candy Machine.
+titwe: Speciaw Guawd Instwuctions
+metaTitwe: Speciaw Guawd Instwuctions | Cowe Candy Machinye
+descwiption: Expwains how to execute guawd-specific instwuctions fow de Cowe Candy Machinye.
 ---
 
-As we’ve seen on the previous pages, guards are a powerful way to customize the minting process of your Candy Machines. But did you know guards can even provide their own custom instructions? {% .lead %}
+As we’ve seen on de pwevious pages, guawds awe a powewfuw way to customize de minting pwocess of youw Candy Machinyes~ But did you knyow guawds can even pwovide deiw own custom instwuctions? owo {% .wead %}
 
-## The Route Instruction
+## De Woute Instwuction
 
-The Core Candy Guard program ships with a special instruction called **the “Route” instruction**.
+De Cowe Candy Guawd pwogwam ships wid a speciaw instwuction cawwed **de “Woute” instwuction**.
 
-This instruction allows us to **select a specific guard** from our Core Candy Machine and **run a custom instruction** that is specific to this guard. We call it the “Route” instruction because it will route our request to the selected guard.
+Dis instwuction awwows us to **sewect a specific guawd** fwom ouw Cowe Candy Machinye and **wun a custom instwuction** dat is specific to dis guawd~ We caww it de “Woute” instwuction because it wiww woute ouw wequest to de sewected guawd.
 
-This feature makes guards even more powerful as they can ship with their own program logic. It enables guards to:
+Dis featuwe makes guawds even mowe powewfuw as dey can ship wid deiw own pwogwam wogic~ It enyabwes guawds to:
 
-- Decouple the verification process from the minting process for heavy operations.
-- Provide custom features that would otherwise require the deployment of a custom program.
+- Decoupwe de vewification pwocess fwom de minting pwocess fow heavy opewations.
+- Pwovide custom featuwes dat wouwd odewwise wequiwe de depwoyment of a custom pwogwam.
 
-To call a route instruction, we must specify which guard we want to route that instruction to as well as **provide the route settings it expects**. Note that if we try to execute the “route” instruction by selecting a guard that does not support it, the transaction will fail.
+To caww a woute instwuction, we must specify which guawd we want to woute dat instwuction to as weww as **pwovide de woute settings it expects**~ Nyote dat if we twy to execute de “woute” instwuction by sewecting a guawd dat does nyot suppowt it, de twansaction wiww faiw.
 
-Since there can only be one “route” instruction per registered guard on a Candy Guard program, it is common to provide a **Path** attribute in the route settings to distinguish between multiple features offered by the same guard.
+Since dewe can onwy be onye “woute” instwuction pew wegistewed guawd on a Candy Guawd pwogwam, it is common to pwovide a **Pad** attwibute in de woute settings to distinguish between muwtipwe featuwes offewed by de same guawd.
 
-For instance, a guard adding support for Frozen NFTs — that can only be thawed once minting is over — could use their route instruction to initialize the treasury escrow account as well as allow anyone to thaw a minted NFT under the right conditions. We could distinguish these two features by using a **Path** attribute equal to “init” for the former and “thaw” for the latter.
+Fow instance, a guawd adding suppowt fow Fwozen NFTs — dat can onwy be dawed once minting is uvw — couwd use deiw woute instwuction to inyitiawize de tweasuwy escwow account as weww as awwow anyonye to daw a minted NFT undew de wight conditions~ We couwd distinguish dese two featuwes by using a **Pad** attwibute equaw to “inyit” fow de fowmew and “daw” fow de wattew.
 
-You will find a detailed explanation of the route instruction of each guard that supports it and their underlying paths [on their respective pages](/core-candy-machine/guards).
+You wiww find a detaiwed expwanyation of de woute instwuction of each guawd dat suppowts it and deiw undewwying pads [on their respective pages](/core-candy-machine/guards).
 
-Let’s take a minute to illustrate how the route instruction works by providing an example. The [**Allow List**](/core-candy-machine/guards/allow-list) guard, for instance, supports the route instruction in order to verify that the minting wallet is part of the preconfigured list of wallets.
+Wet’s take a minyute to iwwustwate how de woute instwuction wowks by pwoviding an exampwe~ De [**Allow List**](/core-candy-machine/guards/allow-list) guawd, fow instance, suppowts de woute instwuction in owdew to vewify dat de minting wawwet is pawt of de pweconfiguwed wist of wawwets.
 
-It does that using [Merkle Trees](https://en.m.wikipedia.org/wiki/Merkle_tree) which means we need to create a hash of the entire list of allowed wallets and store that hash — known as the **Merkle Root** — on the guard settings. For a wallet to prove it is on the allowed list, it must provide a list of hashes — known as the **Merkle Proof** — that allows the program to compute the Merkle Root and ensure it matches the guard’s settings.
+It does dat using ```ts
+import {
+  create,
+  route,
+  getMerkleProof,
+  getMerkleRoot,
+} from "@metaplex-foundation/mpl-core-candy-machine";
+import { base58PublicKey, some } from "@metaplex-foundation/umi";
 
-Therefore, the Allow List guard **uses its route instruction to verify the Merkle Proof of a given wallet** and, if successful, creates a small PDA account on the blockchain that acts as verification proof for the mint instruction.
+// Prepare the allow lists.
+const allowListA = [...];
+const allowListB = [...];
 
-{% diagram %}
+// Create a Candy Machine with two Allow List guards.
+await create(umi, {
+  // ...
+  groups: [
+    {
+      label: "listA",
+      guards: {
+        allowList: some({ merkleRoot: getMerkleRoot(allowListA) }),
+      },
+    },
+    {
+      label: "listB",
+      guards: {
+        allowList: some({ merkleRoot: getMerkleRoot(allowListB) }),
+      },
+    },
+  ],
+}).sendAndConfirm(umi);
 
-{% node %}
-{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
-{% /node %}
+// Verify the Merkle Proof by specifying which group to select.
+await route(umi, {
+  candyMachine: candyMachine.publicKey,
+  guard: 'allowList',
+  group: some('listA'), // <- We are verifying using "allowListA".
+  routeArgs: {
+    path: 'proof',
+    merkleRoot: getMerkleRoot(allowListA),
+    merkleProof: getMerkleProof(
+      allowListA,
+      base58PublicKey(umi.identity),
+    ),
+  },
+}).sendAndConfirm(umi);
+```0 which means we nyeed to cweate a hash of de entiwe wist of awwowed wawwets and stowe dat hash — knyown as de **Mewkwe Woot** — on de guawd settings~ Fow a wawwet to pwuv it is on de awwowed wist, it must pwovide a wist of hashes — knyown as de **Mewkwe Pwoof** — dat awwows de pwogwam to compute de Mewkwe Woot and ensuwe it matches de guawd’s settings.
 
-{% node parent="candy-machine-1" y=80 x=20 %}
-{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node label="Guards" theme="mint" z=1 /%}
-{% node #allow-list-guard label="Allow List" /%}
-{% node label="..." /%}
-{% /node %}
+Dewefowe, de Awwow Wist guawd **uses its woute instwuction to vewify de Mewkwe Pwoof of a given wawwet** and, if successfuw, cweates a smaww PDA account on de bwockchain dat acts as vewification pwoof fow de mint instwuction.
 
-{% node parent="candy-machine-1" x=550 %}
-{% node #mint-1 label="Mint" theme="pink" /%}
-{% node label="Candy Guard Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
+{% diagwam %}
 
-{% node parent="mint-1" x=-22 y=100 %}
-{% node #mint-2 label="Mint" theme="pink" /%}
-{% node label="Candy Machine Core Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
+{% nyode %}
+{% nyode #candy-machinye-1 wabew="Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
+{% nyode pawent="candy-machinye-1" y=80 x=20 %}
+{% nyode #candy-guawd-1 wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Guawds" deme="mint" z=1 /%}
+{% nyode #awwow-wist-guawd wabew="Awwow Wist" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="mint-2" x=-250 %}
-{% node #route label="Route" theme="pink" /%}
-{% node label="Candy Machine Core Program" theme="pink" /%}
-{% /node %}
-{% node parent="route" x=70 y=-20 label="Verify Merkle Proof" theme="transparent" /%}
+{% nyode pawent="candy-machinye-1" x=550 %}
+{% nyode #mint-1 wabew="Mint" deme="pink" /%}
+{% nyode wabew="Candy Guawd Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-1" x=45 y=-20 wabew="Access Contwow" deme="twanspawent" /%}
 
-{% node #allow-list-pda parent="route" x=23 y=100 label="Allow List PDA" /%}
+{% nyode pawent="mint-1" x=-22 y=100 %}
+{% nyode #mint-2 wabew="Mint" deme="pink" /%}
+{% nyode wabew="Candy Machinye Cowe Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-2" x=120 y=-20 wabew="Mint Wogic" deme="twanspawent" /%}
 
-{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
-{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
-{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
-{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
-{% edge from="allow-list-guard" to="route" theme="pink" /%}
-{% edge from="route" to="allow-list-pda" theme="pink" path="straight" /%}
-{% edge from="allow-list-pda" to="mint-1" theme="pink" /%}
+{% nyode #nft pawent="mint-2" x=62 y=100 wabew="NFT" /%}
 
-{% /diagram %}
+{% nyode pawent="mint-2" x=-250 %}
+{% nyode #woute wabew="Woute" deme="pink" /%}
+{% nyode wabew="Candy Machinye Cowe Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="woute" x=70 y=-20 wabew="Vewify Mewkwe Pwoof" deme="twanspawent" /%}
 
-So why can’t we just verify the Merkle Proof directly within the mint instruction? That’s simply because, for big allow lists, Merkle Proofs can end up being pretty lengthy. After a certain size, it becomes impossible to include it within the mint transaction that already contains a decent amount of instructions. By separating the validation process from the minting process, we make it possible for allow lists to be as big as we need them to be.
+{% nyode #awwow-wist-pda pawent="woute" x=23 y=100 wabew="Awwow Wist PDA" /%}
 
-{% dialect-switcher title="Call the route instruction of a guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% edge fwom="candy-guawd-1" to="candy-machinye-1" fwomPosition="weft" toPosition="weft" awwow=fawse /%}
+{% edge fwom="mint-1" to="mint-2" deme="pink" pad="stwaight" /%}
+{% edge fwom="mint-2" to="nft" deme="pink" pad="stwaight" /%}
+{% edge fwom="candy-machinye-1" to="mint-1" deme="pink" /%}
+{% edge fwom="awwow-wist-guawd" to="woute" deme="pink" /%}
+{% edge fwom="woute" to="awwow-wist-pda" deme="pink" pad="stwaight" /%}
+{% edge fwom="awwow-wist-pda" to="mint-1" deme="pink" /%}
 
-You may use the `route` function to call the route instruction of a guard using the Umi library. You will need to pass the guard’s name via the `guard` attribute and its route settings via the `routeArgs` attribute.
+{% /diagwam %}
 
-Here is an example using the Allow List guard which validates the wallet’s Merkle Proof before minting.
+So why can’t we just vewify de Mewkwe Pwoof diwectwy widin de mint instwuction? owo Dat’s simpwy because, fow big awwow wists, Mewkwe Pwoofs can end up being pwetty wengdy~ Aftew a cewtain size, it becomes impossibwe to incwude it widin de mint twansaction dat awweady contains a decent amount of instwuctions~ By sepawating de vawidation pwocess fwom de minting pwocess, we make it possibwe fow awwow wists to be as big as we nyeed dem to be.
+
+{% diawect-switchew titwe="Caww de woute instwuction of a guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+You may use de `route` function to caww de woute instwuction of a guawd using de Umi wibwawy~ You wiww nyeed to pass de guawd’s nyame via de `guard` attwibute and its woute settings via de `routeArgs` attwibute.
+
+Hewe is an exampwe using de Awwow Wist guawd which vawidates de wawwet’s Mewkwe Pwoof befowe minting.
 
 ```ts
 import {
@@ -132,77 +178,31 @@ await route(umi, {
 // If we try to mint now, it will succeed.
 ```
 
-API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetRouteArgs.html)
+API Wefewences: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetRouteArgs.html)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction With Groups
+## Woute Instwuction Wid Gwoups
 
-When calling the route instruction whilst using guard groups, it is important to **specify the group label** of the guard we wish to select. This is because we may have multiple guards of the same type across different groups and the program needs to know which one it should use for the route instruction.
+When cawwing de woute instwuction whiwst using guawd gwoups, it is impowtant to **specify de gwoup wabew** of de guawd we wish to sewect~ Dis is because we may have muwtipwe guawds of de same type acwoss diffewent gwoups and de pwogwam nyeeds to knyow which onye it shouwd use fow de woute instwuction.
 
-For instance, say we had an **Allow List** of handpicked VIP wallets in one group and another **Allow List** for the winners of a raffle in another group. Then saying we want to verify the Merkle Proof for the Allow List guard is not enough, we also need to know for which group we should perform that verification.
+Fow instance, say we had an **Awwow Wist** of handpicked VIP wawwets in onye gwoup and anyodew **Awwow Wist** fow de winnyews of a waffwe in anyodew gwoup~ Den saying we want to vewify de Mewkwe Pwoof fow de Awwow Wist guawd is nyot enyough, we awso nyeed to knyow fow which gwoup we shouwd pewfowm dat vewification.
 
-{% dialect-switcher title="Filter by group when calling the route instruction" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fiwtew by gwoup when cawwing de woute instwuction" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-When using groups, the `route` function of the Umi library accepts an additional `group` attribute of type `Option<string>` which must be set to the label of the group we want to select.
+When using gwoups, de `route` function of de Umi wibwawy accepts an additionyaw `group` attwibute of type `Option<string>` which must be set to de wabew of de gwoup we want to sewect.
 
-```ts
-import {
-  create,
-  route,
-  getMerkleProof,
-  getMerkleRoot,
-} from "@metaplex-foundation/mpl-core-candy-machine";
-import { base58PublicKey, some } from "@metaplex-foundation/umi";
+UWUIFY_TOKEN_1744632760778_1
 
-// Prepare the allow lists.
-const allowListA = [...];
-const allowListB = [...];
+API Wefewences: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetRouteArgs.html)
 
-// Create a Candy Machine with two Allow List guards.
-await create(umi, {
-  // ...
-  groups: [
-    {
-      label: "listA",
-      guards: {
-        allowList: some({ merkleRoot: getMerkleRoot(allowListA) }),
-      },
-    },
-    {
-      label: "listB",
-      guards: {
-        allowList: some({ merkleRoot: getMerkleRoot(allowListB) }),
-      },
-    },
-  ],
-}).sendAndConfirm(umi);
+{% /diawect %}
+{% /diawect-switchew %}
 
-// Verify the Merkle Proof by specifying which group to select.
-await route(umi, {
-  candyMachine: candyMachine.publicKey,
-  guard: 'allowList',
-  group: some('listA'), // <- We are verifying using "allowListA".
-  routeArgs: {
-    path: 'proof',
-    merkleRoot: getMerkleRoot(allowListA),
-    merkleProof: getMerkleProof(
-      allowListA,
-      base58PublicKey(umi.identity),
-    ),
-  },
-}).sendAndConfirm(umi);
-```
+## Concwusion
 
-API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [DefaultGuardSetRouteArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetRouteArgs.html)
+De woute instwuction makes guawds even mowe powewfuw by awwowing dem to ship wid deiw own custom pwogwam wogic~ Check out de dedicated pages of [all available guards](/core-candy-machine/guards) to see de fuww featuwe set of each guawd.
 
-{% /dialect %}
-{% /dialect-switcher %}
-
-## Conclusion
-
-The route instruction makes guards even more powerful by allowing them to ship with their own custom program logic. Check out the dedicated pages of [all available guards](/core-candy-machine/guards) to see the full feature set of each guard.
-
-Now that we know everything there is to know about setting up Core Candy Machines and their guards, it’s about time we talk about minting. See you on [the next page](/core-candy-machine/mint)! You might want to read about [fetching it](/core-candy-machine/fetching-a-candy-machine), too.
+Nyow dat we knyow evewyding dewe is to knyow about setting up Cowe Candy Machinyes and deiw guawds, it’s about time we tawk about minting~ See you on [the next page](/core-candy-machine/mint)! uwu You might want to wead about [fetching it](/core-candy-machine/fetching-a-candy-machine), too.
