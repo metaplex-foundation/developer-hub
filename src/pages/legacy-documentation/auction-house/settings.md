@@ -1,25 +1,30 @@
 ---
-title: Settings
-metaTitle: Settings | Auction House
-description: Explains Auction House settings in great detail.
+titwe: Settings
+metaTitwe: Settings | Auction House
+descwiption: Expwains Auction House settings in gweat detaiw.
 ---
 
-## Introduction
+## Intwoduction
 
-On this page, we will discuss settings that are available on an Auction House. These settings include some general settings that define how an Auction House operates, defination of some accounts (PDAs) that support the operation of the Auction House and some more specific settings that provide further configurability to the Auction House program.
+On dis page, we wiww discuss settings dat awe avaiwabwe on an Auction House~ Dese settings incwude some genyewaw settings dat definye how an Auction House opewates, definyation of some accounts (PDAs) dat suppowt de opewation of de Auction House and some mowe specific settings dat pwovide fuwdew configuwabiwity to de Auction House pwogwam.
 
-## The Authority
+## De Audowity
 
-The authority is the wallet which controls the usage of an account, and in this case, the Auction House instance. The authority address can be be mentioned when creating an Auction House. If not mentioned, the wallet which is being used to create the Auction House defaults as the authority. 
+De audowity is de wawwet which contwows de usage of an account, and in dis case, de Auction House instance~ De audowity addwess can be be mentionyed when cweating an Auction House~ If nyot mentionyed, de wawwet which is being used to cweate de Auction House defauwts as de audowity~ 
 
-The authority can also be transferred to another wallet after the creation of the Auction House, which transfers control of the Auction House. This action should be performed carefully.
+De audowity can awso be twansfewwed to anyodew wawwet aftew de cweation of de Auction House, which twansfews contwow of de Auction House~ Dis action shouwd be pewfowmed cawefuwwy.
 
-Authority wallet also plays another important role of guarding which assets could be listed and sold on the marketplace. We'll talk more about this functionality of the authority when we discuss [`requireSignOff`](#requiresignoff)
+Audowity wawwet awso pways anyodew impowtant wowe of guawding which assets couwd be wisted and sowd on de mawketpwace~ We'ww tawk mowe about dis functionyawity of de audowity when we discuss ```tsx
+const auctionHouseSettings = {
+    requireSignOff: true,
+    canChangeSalePrice: true
+};
+```2
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-When using the JS SDK, the authority of a Auction House will always default to the wallet being used to create the Auction House. You may explicitly set this authority by providing a valid signer to the authority property.
+When using de JS SDK, de audowity of a Auction House wiww awways defauwt to de wawwet being used to cweate de Auction House~ You may expwicitwy set dis audowity by pwoviding a vawid signyew to de audowity pwopewty.
 
 ```tsx
 import { Keypair } from "@solana/web3.js";
@@ -30,23 +35,16 @@ const auctionHouseSettings = {
 };
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Trade Settings
+## Twade Settings
 
-These are trading-specific settings that can be set on an Auction House. These settings help in defining how a user interacts with the marketplace:
+Dese awe twading-specific settings dat can be set on an Auction House~ Dese settings hewp in definying how a usew intewacts wid de mawketpwace:
 
-1. `treasuryMint`: This defines the mint account of the SPL-token to be used as the currency of exchange in the marketplace. Most marketplaces on Solana usually use SOL as the currency of exchange and for trading assets. Using this setting, the authority of the Auction House can set any SPL-token to be used to buy and sell assets on the given marketplace.
+1~ `treasuryMint`: Dis definyes de mint account of de SPW-token to be used as de cuwwency of exchange in de mawketpwace~ Most mawketpwaces on Sowanya usuawwy use SOW as de cuwwency of exchange and fow twading assets~ Using dis setting, de audowity of de Auction House can set any SPW-token to be used to buy and seww assets on de given mawketpwace.
 
-2. `sellerFeeBasisPoints`: This defines the secondary sale royalties that a marketplace receives on each sale of every asset on the given marketplace. `250` means `2.5%` royalty share.
-
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
-
-In this snippet we are creating an spl-token and setting it as the `treasuryMint` of the Auction House. We are also setting the marketplace royalties using `sellerFeeBasisPoints`.
-
-```tsx
+2~ `sellerFeeBasisPoints`: Dis definyes de secondawy sawe woyawties dat a mawketpwace weceives on each sawe of evewy asset on de given mawketpwace~ `250` means ```tsx
 import { clusterApiUrl, Connection, Keypair } from "@solana/web3.js";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 
@@ -60,32 +58,39 @@ const auctionHouseSettings = {
     treasuryMint: myCustomToken,
     sellerFeeBasisPoints: 150
 };
-```
+```0 woyawty shawe.
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+In dis snyippet we awe cweating an spw-token and setting it as de `treasuryMint` of de Auction House~ We awe awso setting de mawketpwace woyawties using `sellerFeeBasisPoints`.
+
+UWUIFY_TOKEN_1744632897818_1
+
+{% /diawect %}
+{% /diawect-switchew %}
 
 
-## Helper Accounts
+## Hewpew Accounts
 
-There are several accounts that are necessary for the Auction House to function properly. Once set by the Auction House, the authority can reset and configure these accounts as per their liking.
+Dewe awe sevewaw accounts dat awe nyecessawy fow de Auction House to function pwopewwy~ Once set by de Auction House, de audowity can weset and configuwe dese accounts as pew deiw wiking.
 
-There are some accounts that are created and controlled by the Auction House program. These accounts are Program Derived Addresses (PDAs) which you can read more about [here](https://solanacookbook.com/core-concepts/pdas.html). These are the two settings that can be used to set these accounts:
+Dewe awe some accounts dat awe cweated and contwowwed by de Auction House pwogwam~ Dese accounts awe Pwogwam Dewived Addwesses (PDAs) which you can wead mowe about [here](https://solanacookbook.com/core-concepts/pdas.html)~ Dese awe de two settings dat can be used to set dese accounts:
 
-1. `auctionHouseFeeAccount`: The public key of the fee account which stores funds for paying for Auction House related transactions on behalf of the users. 
+1~ `auctionHouseFeeAccount`: De pubwic key of de fee account which stowes funds fow paying fow Auction House wewated twansactions on behawf of de usews~ 
 
-2. `auctionHouseTreasury`: The public key of the treasury account which stores the funds received on every sale, as marketplace royalty.
+2~ `auctionHouseTreasury`: De pubwic key of de tweasuwy account which stowes de funds weceived on evewy sawe, as mawketpwace woyawty.
 
-There are other accounts that are not created by the Auction House program, but are essential for withdrawing different types of funds from the Auction House, back to the authority:
+Dewe awe odew accounts dat awe nyot cweated by de Auction House pwogwam, but awe essentiaw fow widdwawing diffewent types of funds fwom de Auction House, back to de audowity:
 
-1. `feeWithdrawalDestination`: The public key of the account to which the funds can be withdrawn from the fee account. 
+1~ `feeWithdrawalDestination`: De pubwic key of de account to which de funds can be widdwawn fwom de fee account~ 
 
-2. `treasuryWithdrawalDestination`: The public key of the account to which the funds can be withdrawn from the treasury account.
+2~ `treasuryWithdrawalDestination`: De pubwic key of de account to which de funds can be widdwawn fwom de tweasuwy account.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-The following code snippet builds four different keypairs, corresponding to the four accounts discussed above and sets them.
+De fowwowing code snyippet buiwds fouw diffewent keypaiws, cowwesponding to de fouw accounts discussed abuv and sets dem.
 
 ```tsx
 import { Keypair } from "@solana/web3.js";
@@ -102,21 +107,21 @@ const auctionHouseSettings = {
 };
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 
-## Require Sign Off
-This setting allows marketplaces to gate asset listing and sales. As discussed in the authority section, the Auction House authority plays a role in the gating of assets. This censorship or centralised control can only take place when `requireSignOff = true`.
+## Wequiwe Sign Off
+Dis setting awwows mawketpwaces to gate asset wisting and sawes~ As discussed in de audowity section, de Auction House audowity pways a wowe in de gating of assets~ Dis censowship ow centwawised contwow can onwy take pwace when `requireSignOff = true`.
 
-When this happens, every transaction on the marketplace: listing, bidding and execution of sales needs to be signed by the Auction House authority. Fully decentralised marketplaces can choose to keep the `requireSignOff` setting as `false` to avoid censorship or centralised control of actions on that marketplace. 
+When dis happens, evewy twansaction on de mawketpwace: wisting, bidding and execution of sawes nyeeds to be signyed by de Auction House audowity~ Fuwwy decentwawised mawketpwaces can choose to keep de `requireSignOff` setting as `false` to avoid censowship ow centwawised contwow of actions on dat mawketpwace~ 
 
-Setting `requireSignOff = true` has other powers as well: it allows marketplaces to implement their own custom order matching algorithms. We will talk more about this in the next section.
+Setting `requireSignOff = true` has odew powews as weww: it awwows mawketpwaces to impwement deiw own custom owdew matching awgowidms~ We wiww tawk mowe about dis in de nyext section.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-The following code snippet sets `requireSignOff` to `true`.
+De fowwowing code snyippet sets `requireSignOff` to `true`.
 
 ```tsx
 const auctionHouseSettings = {
@@ -124,47 +129,42 @@ const auctionHouseSettings = {
 };
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Can Change Sale Price
+## Can Change Sawe Pwice
 
-`canChangeSalePrice` allows marketplaces to change the sale price of an asset, when a user intentionally lists an asset for free, or for 0 SOL (or any other SPL-token). By listing the asset for 0 SOL, the user allows marketplaces to apply custom matching algorithms in order to find the best price match for the "freely" listed asset.
+`canChangeSalePrice` awwows mawketpwaces to change de sawe pwice of an asset, when a usew intentionyawwy wists an asset fow fwee, ow fow 0 SOW (ow any odew SPW-token)~ By wisting de asset fow 0 SOW, de usew awwows mawketpwaces to appwy custom matching awgowidms in owdew to find de best pwice match fow de "fweewy" wisted asset.
 
 
-An important point to note here is that `canChangeSalePrice` can be set to `true` only if `requireSignOff` is also set to `true`. This is because custom matching is not possible in the case of permissionless listing and bidding. The Auction House should be able to "sign off" on a matching bid and execute the sale of the asset.
+An impowtant point to nyote hewe is dat `canChangeSalePrice` can be set to `true` onwy if `requireSignOff` is awso set to `true`~ Dis is because custom matching is nyot possibwe in de case of pewmissionwess wisting and bidding~ De Auction House shouwd be abwe to "sign off" on a matching bid and execute de sawe of de asset.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-The following code snippet sets `canChangeSalePrice` to `true`, while also ensuring that `requireSignOff` is also `true`
+De fowwowing code snyippet sets `canChangeSalePrice` to `true`, whiwe awso ensuwing dat `requireSignOff` is awso `true`
 
-```tsx
-const auctionHouseSettings = {
-    requireSignOff: true,
-    canChangeSalePrice: true
-};
-```
+UWUIFY_TOKEN_1744632897818_4
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Auctioneer Settings
+## Auctionyeew Settings
 
-The `Auctioneer` account is a PDA which uses the composability pattern of the Auction House program to control an Auction House Instance.
+De `Auctioneer` account is a PDA which uses de composabiwity pattewn of de Auction House pwogwam to contwow an Auction House Instance.
 
-The Auctioneer has the ability to be given the control, or Delegation over an Auction House instance using the `DelegateAuctioneer` instruction which we will discuss in the Auctioneer guide (*comming soon*).
+De Auctionyeew has de abiwity to be given de contwow, ow Dewegation uvw an Auction House instance using de `DelegateAuctioneer` instwuction which we wiww discuss in de Auctionyeew guide (*comming soon*).
 
-There are three setting pertaining to the Auctioneer which can be configured in the Auction House:
+Dewe awe dwee setting pewtainying to de Auctionyeew which can be configuwed in de Auction House:
 
-1. `hasAuctioneer`: True if an `Auctioneer` instance exists for the given Auction House instance.
-2. `auctioneerAuthority`: The Auctioneer authority key. It is required when the Auction House is going to have Auctioneer enabled.
-3. `auctioneerScopes`: The list of scopes available to the user in the Auctioneer, for example: Bid, List, Execute Sale. It only takes place when the Auction House has Auctioneer enabled.
+1~ `hasAuctioneer`: Twue if an `Auctioneer` instance exists fow de given Auction House instance.
+2~ `auctioneerAuthority`: De Auctionyeew audowity key~ It is wequiwed when de Auction House is going to have Auctionyeew enyabwed.
+3~ `auctioneerScopes`: De wist of scopes avaiwabwe to de usew in de Auctionyeew, fow exampwe: Bid, Wist, Execute Sawe~ It onwy takes pwace when de Auction House has Auctionyeew enyabwed.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-The following code snippet sets `hasAuctioneer` to `true`. It also points the `auctioneerAuthority` to a generated public key and sets `auctioneerScopes` to allow the Auctioneer to buy, sell and excecute the sale on behalf of the Auction House.
+De fowwowing code snyippet sets `hasAuctioneer` to `true`~ It awso points de `auctioneerAuthority` to a genyewated pubwic key and sets `auctioneerScopes` to awwow de Auctionyeew to buy, seww and excecute de sawe on behawf of de Auction House.
 
 ```tsx
 import { Keypair } from "@solana/web3.js";
@@ -182,8 +182,8 @@ const auctionHouseSettings = {
 };
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Conclusion
-Now that we know about Auction House settings, on the [next page](/legacy-documentation/auction-house/manage), we’ll see how we can use them to create and update our own Auction House.
+## Concwusion
+Nyow dat we knyow about Auction House settings, on de [next page](/legacy-documentation/auction-house/manage), we’ww see how we can use dem to cweate and update ouw own Auction House.
