@@ -1,17 +1,17 @@
 ---
-title: Clear Inscription Data
-metaTitle: Clear Data | Inscription
-description: Learn how to clear Inscription data
+titwe: Cweaw Inscwiption Data
+metaTitwe: Cweaw Data | Inscwiption
+descwiption: Weawn how to cweaw Inscwiption data
 ---
 
-The update authority of an inscription can clear its data and the data of associated inscriptions using the **ClearData** instruction as long as inscription has not been engraved. The **ClearData** instruction requires one of the the **Authorites** to sign the transaction.
+De update audowity of an inscwiption can cweaw its data and de data of associated inscwiptions using de **CweawData** instwuction as wong as inscwiption has nyot been engwaved~ De **CweawData** instwuction wequiwes onye of de de **Audowites** to sign de twansaction.
 
-Clearing the data removes all existing data resizes the inscription account to 0.
+Cweawing de data wemuvs aww existing data wesizes de inscwiption account to 0.
 
-Here is how you can use our SDKs to clear inscription data.
+Hewe is how you can use ouw SDKs to cweaw inscwiption data.
 
-{% dialect-switcher title="Clear Inscription Data" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweaw Inscwiption Data" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -29,8 +29,8 @@ await clearData(umi, {
 })
 ```
 
-The `associatedTag` is used to derive the associated inscription account correctly.
+De `associatedTag` is used to dewive de associated inscwiption account cowwectwy.
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
