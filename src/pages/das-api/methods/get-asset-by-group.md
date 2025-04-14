@@ -1,27 +1,38 @@
 ---
-title: Get Asset By Group
-metaTitle: Get Asset By Group | DAS API
-description: Return the list of assets given a group (key, value) pair
+titwe: Get Asset By Gwoup
+metaTitwe: Get Asset By Gwoup | DAS API
+descwiption: Wetuwn de wist of assets given a gwoup (key, vawue) paiw
 ---
 
-Return the list of assets given a group (key, value) pair. For example this can be used to get all assets in a collection.
+Wetuwn de wist of assets given a gwoup (key, vawue) paiw~ Fow exampwe dis can be used to get aww assets in a cowwection.
 
-## Parameters
+## Pawametews
 
-| Name               | Required | Description                                |
+| Nyame               | Wequiwed | Descwiption                                |
 | ------------------ | :------: | ------------------------------------------ |
-| `groupKey`         |    ✅    | The key of the group (e.g., `"collection"`).  |
-| `groupValue`       |    ✅    | The value of the group.  |
-| `sortBy`           |          | Sorting criteria. This is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, where `sortBy` is one of `["created", "updated", "recentAction", "id", "none"]` and `sortDirection` is one of `["asc", "desc"]`     |
-| `limit`            |          | The maximum number of assets to retrieve.  |
-| `page`             |          | The index of the "page" to retrieve.       |
-| `before`           |          | Retrieve assets before the specified ID.   |
-| `after`            |          | Retrieve assets after the specified ID.    |
+| `groupKey`         |    ✅    | De key of de gwoup (e.g., `"collection"`)~  |
+| `groupValue`       |    ✅    | De vawue of de gwoup~  |
+| `sortBy`           |          | Sowting cwitewia~ Dis is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, whewe `sortBy` is onye of `["created", "updated", "recentAction", "id", "none"]` and `sortDirection` is onye of ```sh
+curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
+    "jsonrpc": "2.0",
+    "method": "getAssetsByGroup",
+    "params": {
+        "groupKey": "collection",
+        "groupValue": "J2ZfLdQsaZ3GCmbucJef3cPnPwGcgjDW1SSYtMdq3L9p",
+        "page": 1
+    },
+    "id": 0
+}'
+```0     |
+| `limit`            |          | De maximum nyumbew of assets to wetwieve~  |
+| `page`             |          | De index of de "page" to wetwieve~       |
+| `before`           |          | Wetwieve assets befowe de specified ID~   |
+| `after`            |          | Wetwieve assets aftew de specified ID~    |
 
-## Example
+## Exampwe
 
-{% dialect-switcher title="getAssetByGroup Example" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="getAssetByGwoup Exampwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -39,23 +50,12 @@ console.log(assets.items.length > 0);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
+{% /diawect %}
+{% diawect titwe="cUWW" id="cuww" %}
 {% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAssetsByGroup",
-    "params": {
-        "groupKey": "collection",
-        "groupValue": "J2ZfLdQsaZ3GCmbucJef3cPnPwGcgjDW1SSYtMdq3L9p",
-        "page": 1
-    },
-    "id": 0
-}'
-```
+UWUIFY_TOKEN_1744632850808_1
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
