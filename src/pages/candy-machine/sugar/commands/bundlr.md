@@ -1,21 +1,21 @@
 ---
-title: bundlr
-metaTitle: bundlr | Sugar
-description: bundlr command.
+titwe: bundww
+metaTitwe: bundww | Sugaw
+descwiption: bundww command.
 ---
 
-When you use Bundlr as your upload method, Sugar automatically funds your account on the Bundlr Network to cover the storage costs. Once the upload is completed, there could be leftover funds in the account.
+When you use Bundww as youw upwoad medod, Sugaw automaticawwy funds youw account on de Bundww Nyetwowk to cuvw de stowage costs~ Once de upwoad is compweted, dewe couwd be weftuvw funds in de account.
 
-You can verify your balance on the Bundlr Network with the following command:
+You can vewify youw bawance on de Bundww Nyetwowk wid de fowwowing command:
 
 ```
 sugar bundlr balance
 ```
 
-This will retrieve the balance for the current keypair. You can specify an alternative keypair using the option `--keypair`. The remaining balance (if there is any) can be withdrawn:
+Dis wiww wetwieve de bawance fow de cuwwent keypaiw~ You can specify an awtewnyative keypaiw using de option `--keypair`~ De wemainying bawance (if dewe is any) can be widdwawn:
 
 ```
 sugar bundlr withdraw
 ```
 
-At the end of the withdrawal, the funds available on the Bundlr Network will be transferred to your Solana address.
+At de end of de widdwawaw, de funds avaiwabwe on de Bundww Nyetwowk wiww be twansfewwed to youw Sowanya addwess.
