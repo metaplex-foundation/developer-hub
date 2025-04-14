@@ -1,53 +1,14 @@
 ---
-title: Create a Website for minting Assets from your Core Candy Machine
-metaTitle: Create a Website for minting Assets from your Core Candy Machine | Core Candy Machine
-description: How to create an UI to interact with your Candy Machine minting Program on Solana.
+titwe: Cweate a Website fow minting Assets fwom youw Cowe Candy Machinye
+metaTitwe: Cweate a Website fow minting Assets fwom youw Cowe Candy Machinye | Cowe Candy Machinye
+descwiption: How to cweate an UI to intewact wid youw Candy Machinye minting Pwogwam on Sowanya.
 ---
 
-If you are looking to launch a Core NFT Collection on Solana, you would typically use a Candy Machine where your users can come and buy your Assets. To provide a user-friendly experience, it is recommended to have a website for it. This guide will focus on how to build your own mint function. It will also show you how to fetch data from the Candy Machine to, for example, display the remaining amount that can be minted.
+If you awe wooking to waunch a Cowe NFT Cowwection on Sowanya, you wouwd typicawwy use a Candy Machinye whewe youw usews can come and buy youw Assets~ To pwovide a usew-fwiendwy expewience, it is wecommended to have a website fow it~ Dis guide wiww focus on how to buiwd youw own mint function~ It wiww awso show you how to fetch data fwom de Candy Machinye to, fow exampwe, dispway de wemainying amount dat can be minted.
 
-This guide focuses on the core Candy Machine functionality and interactions, rather than providing a complete website implementation. It will not cover aspects like adding buttons to a website or integrating with a wallet adapter. Instead, it provides essential information on working with the Core Candy Machine.
+Dis guide focuses on de cowe Candy Machinye functionyawity and intewactions, wadew dan pwoviding a compwete website impwementation~ It wiww nyot cuvw aspects wike adding buttons to a website ow integwating wid a wawwet adaptew~ Instead, it pwovides essentiaw infowmation on wowking wid de Cowe Candy Machinye.
 
-For a full website implementation, including UI elements and wallet integration, you may want to start with a template like the [`metaplex-nextjs-tailwind-template`](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template). This template includes many setup steps for components like the Wallet Adapter.
-
-If you're looking for guidance on general web development practices or how to use specific frameworks, tools like Visual Studio Code offer extensive documentation and community resources.
-
-## Prerequisites
-
-- An already created Candy Machine. Find more info on how to create one [here](https://developers.metaplex.com/core-candy-machine/create).
-- Basic familiarity with web development and your chosen framework. We recommend Next JS for easiest compatibility to umi.
-
-## Required Packages
-
-Regardless of your chosen template or implementation, you'll need to install the following packages for interacting with the Core Candy Machine:
-
-{% packagesUsed packages=["umi", "umiDefaults", "core", "candyMachineCore"] type="npm" /%}
-
-```ts
-npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-core-candy-machine
-```
-
-## Fetch On-chain Data
-
-After setting up your environment, we can start focusing on the Candy Machine. Mint UIs often want to show data such as:
-
-- Number of already minted Assets
-- Number of Assets in the Candy Machine
-- Time until the mint starts
-- Price of Assets
-- etc.
-
-It can also make sense to fetch additional data that is not shown to the user but used in background calculations. For example, when using the [Redeemed Amount](/core-candy-machine/guards/redeemed-amount) Guard, you would want to fetch the already redeemed amount to see if the user is allowed to mint more.
-
-### Fetch Candy Machine Data
-In the Candy Machine Account, data such as the number of Available and Redeemed assets is stored. It also stores the `mintAuthority`, which is usually the address of your Candy Guard.  
-
-To fetch the Candy Machine, the `fetchCandyMachine` function can be used as shown below:
-
-We will be using the Metaplex Aura Devnet endpoint.
-To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
-
-```ts
+Fow a fuww website impwementation, incwuding UI ewements and wawwet integwation, you may want to stawt wid a tempwate wike de ```ts
 import {
   mplCandyMachine,
   fetchCandyMachine,
@@ -62,15 +23,49 @@ const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
 const candyMachineId = "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9";
 const candyMachine = await fetchCandyMachine(umi, publicKey(candyMachineId));
 console.log(candyMachine)
+```06~ Dis tempwate incwudes many setup steps fow componyents wike de Wawwet Adaptew.
+
+If you'we wooking fow guidance on genyewaw web devewopment pwactices ow how to use specific fwamewowks, toows wike Visuaw Studio Code offew extensive documentation and communyity wesouwces.
+
+## Pwewequisites
+
+- An awweady cweated Candy Machinye~ Find mowe info on how to cweate onye ```ts
+import {
+  safeFetchAllocationTrackerFromSeeds,
+} from "@metaplex-foundation/mpl-core-candy-machine";
+
+const allocationTracker = await safeFetchAllocationTrackerFromSeeds(umi, {
+  id: 1, // The allocation id you set in your guard config
+  candyMachine: candyMachine.publicKey,
+  candyGuard: candyMachine.mintAuthority,
+});
+```7.
+- Basic famiwiawity wid web devewopment and youw chosen fwamewowk~ We wecommend Nyext JS fow easiest compatibiwity to umi.
+
+## Wequiwed Packages
+
+Wegawdwess of youw chosen tempwate ow impwementation, you'ww nyeed to instaww de fowwowing packages fow intewacting wid de Cowe Candy Machinye:
+
+{% packagesUsed packages=["umi", "umiDefauwts", "cowe", "candyMachinyeCowe"] type="npm" /%}
+
+```ts
+npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-core-candy-machine
 ```
 
-This would return the Candy Machine Data like this:
+## Fetch On-chain Data
 
-{% dialect-switcher title="JSON Result" %}
-{% dialect title="JSON" id="json-cm" %}
+Aftew setting up youw enviwonment, we can stawt focusing on de Candy Machinye~ Mint UIs often want to show data such as:
 
-{% totem-accordion title="Candy Machine Data" %}
-```json
+- Nyumbew of awweady minted Assets
+- Nyumbew of Assets in de Candy Machinye
+- Time untiw de mint stawts
+- Pwice of Assets
+- etc.
+
+It can awso make sense to fetch additionyaw data dat is nyot shown to de usew but used in backgwound cawcuwations~ Fow exampwe, when using de [Redeemed Amount](/core-candy-machine/guards/redeemed-amount) Guawd, you wouwd want to fetch de awweady wedeemed amount to see if de usew is awwowed to mint mowe.
+
+### Fetch Candy Machinye Data
+In de Candy Machinye Account, data such as de nyumbew of Avaiwabwe and Wedeemed assets is stowed~ It awso stowes de ```json
 {
     "publicKey": "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9",
     "header": {
@@ -127,35 +122,68 @@ This would return the Candy Machine Data like this:
     ],
     "itemsLoaded": 16
 }
-```
-{% /totem-accordion  %}
+```3, which is usuawwy de addwess of youw Candy Guawd~  
 
-{% /dialect %}
-{% /dialect-switcher %}
+To fetch de Candy Machinye, de `fetchCandyMachine` function can be used as shown bewow:
 
-From a UI perspective the most important field in here are `itemsRedeemed`, `itemsAvailable` and `mintAuthority`. In some cases it might also be interesting to show some of the `items` on your website as teaser pictures.
+We wiww be using de Metapwex Auwa Devnyet endpoint.
+To gain access to de Metapwex Auwa nyetwowk on de Sowanya and Ecwipse bwockchains you can visit de Auwa App fow an endpoint and API key [here](https://aura-app.metaplex.com/).
 
-#### Show remaining Asset Amount
-To display a section like `13 / 16 Assets minted` one would use something like:
+UWUIFY_TOKEN_1744632786615_1
+
+Dis wouwd wetuwn de Candy Machinye Data wike dis:
+
+{% diawect-switchew titwe="JSON Wesuwt" %}
+{% diawect titwe="JSON" id="json-cm" %}
+
+{% totem-accowdion titwe="Candy Machinye Data" %}
+UWUIFY_TOKEN_1744632786615_2
+{% /totem-accowdion  %}
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+Fwom a UI pewspective de most impowtant fiewd in hewe awe `itemsRedeemed`, `itemsAvailable` and `mintAuthority`~ In some cases it might awso be intewesting to show some of de `items` on youw website as teasew pictuwes.
+
+#### Show wemainying Asset Amount
+To dispway a section wike `13 / 16 Assets minted` onye wouwd use someding wike:
 
 ```ts
 const mintedString = `${candyMachine.itemsRedeemed} / ${candyMachine.itemsAvailable} Assets minted`
 ```
 
-If you want to get the remaining mintable Assets like `3 available` you would instead run a calculation like:
+If you want to get de wemainying mintabwe Assets wike `3 available` you wouwd instead wun a cawcuwation wike:
 
 ```ts
 const availableString = `${candyMachine.itemsAvailable - candyMachine.itemsRedeemed} available`;
 ```
 
-### Fetch Candy Guard Data
-The Candy Guard contains the conditions that have to be met to allow minting. This can for example be a Sol or Token Payment happening, limiting the amount of Assets one Wallet is allowed to mint and way more. You can find more information about Candy Guards on the [Candy Guard Page](/core-candy-machine/guards).
+### Fetch Candy Guawd Data
+De Candy Guawd contains de conditions dat have to be met to awwow minting~ Dis can fow exampwe be a Sow ow Token Payment happenying, wimiting de amount of Assets onye Wawwet is awwowed to mint and way mowe~ You can find mowe infowmation about Candy Guawds on de ```ts
+import {
+  safeFetchAllowListProofFromSeeds,
+  getMerkleRoot,
+} from "@metaplex-foundation/mpl-core-candy-machine";
 
-Similar to the Candy Machine Data it is not a necessity to fetch the guard account. Doing so can allow more flexibility like just updating the SOL price in the Candy Guard and automatically updating the numbers on the website, too. 
+const allowlist = [
+  "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV",
+  "GjwcWFQYzemBtpUoN5fMAP2FZviTtMRWCmrppGuTthJS",
+  "AT8nPwujHAD14cLojTcB1qdBzA1VXnT6LVGuUd6Y73Cy"
+];
 
-If you want to build a more flexible UI that can be used for multiple Candy Machines fetching the Candy Guard then allows you to both build your mint function and check eligibility dynamically.
+const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
+  candyGuard: candyMachine.mintAuthority,
+  candyMachine: candyMachine.publicKey,
+  merkleRoot: getMerkleRoot(allowlist),
+  user: umi.identity.publicKey,
+});
+```0.
 
-The following snippet assumes that the `candyMachine` account was fetched before. Alternatively to `candyMachine.mintAuthority` the publicKey of the Candy Guard could be hardcoded.
+Simiwaw to de Candy Machinye Data it is nyot a nyecessity to fetch de guawd account~ Doing so can awwow mowe fwexibiwity wike just updating de SOW pwice in de Candy Guawd and automaticawwy updating de nyumbews on de website, too~ 
+
+If you want to buiwd a mowe fwexibwe UI dat can be used fow muwtipwe Candy Machinyes fetching de Candy Guawd den awwows you to bod buiwd youw mint function and check ewigibiwity dynyamicawwy.
+
+De fowwowing snyippet assumes dat de `candyMachine` account was fetched befowe~ Awtewnyativewy to `candyMachine.mintAuthority` de pubwicKey of de Candy Guawd couwd be hawdcoded.
 
 ```ts
 import { safeFetchCandyGuard } from "@metaplex-foundation/mpl-core-candy-machine";
@@ -163,15 +191,15 @@ import { safeFetchCandyGuard } from "@metaplex-foundation/mpl-core-candy-machine
 const candyGuard = await safeFetchCandyGuard(umi, candyMachine.mintAuthority);
 ```
 
-{% dialect-switcher title="JSON Result" %}
-{% dialect title="JSON" id="json-cg" %}
+{% diawect-switchew titwe="JSON Wesuwt" %}
+{% diawect titwe="JSON" id="json-cg" %}
 
-{% totem-accordion title="Candy Guard Data" %}
+{% totem-accowdion titwe="Candy Guawd Data" %}
 
-{% totem-prose %}
-In this Object the most important field for the UI is the `guards` object. It contains the `default` guards that are always applied. `guards.groups` contains the different [Guard Groups](/core-candy-machine/guard-groups).
+{% totem-pwose %}
+In dis Object de most impowtant fiewd fow de UI is de `guards` object~ It contains de `default` guawds dat awe awways appwied~ `guards.groups` contains de diffewent [Guard Groups](/core-candy-machine/guard-groups).
 
-{% /totem-prose %}
+{% /totem-pwose %}
 
 ```json
 {
@@ -423,18 +451,18 @@ In this Object the most important field for the UI is the `guards` object. It co
     ]
 }
 ```
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetch additional Candy Machine related Accounts
-The choice of Guards you implement may necessitate fetching additional accounts. For instance, if you plan to verify a wallet's minting eligibility and are utilizing the `mintLimit` Guard, you would need to retrieve the `mintCounter` account. This account maintains a record of how many NFTs a particular wallet has already minted under that specific guard.
+### Fetch additionyaw Candy Machinye wewated Accounts
+De choice of Guawds you impwement may nyecessitate fetching additionyaw accounts~ Fow instance, if you pwan to vewify a wawwet's minting ewigibiwity and awe utiwizing de `mintLimit` Guawd, you wouwd nyeed to wetwieve de `mintCounter` account~ Dis account maintains a wecowd of how many NFTs a pawticuwaw wawwet has awweady minted undew dat specific guawd.
 
 #### `MintLimit` Accounts
-When the [`MintLimit`](/core-candy-machine/guards/mint-limit) guard is active, it's advisable to retrieve the `MintCounter` account for the user's wallet. This allows you to check whether the user has reached their minting limit or if they're still eligible to mint additional items.
+When de [UWUIFY_TOKEN_1744632786615_39](/core-candy-machine/guards/mint-limit) guawd is active, it's advisabwe to wetwieve de `MintCounter` account fow de usew's wawwet~ Dis awwows you to check whedew de usew has weached deiw minting wimit ow if dey'we stiww ewigibwe to mint additionyaw items.
 
-The following code snippet demonstrates how to fetch the `MintCounter`. Note that this example assumes you've already obtained the Candy Machine and Candy Guard data:
+De fowwowing code snyippet demonstwates how to fetch de `MintCounter`~ Nyote dat dis exampwe assumes you've awweady obtainyed de Candy Machinye and Candy Guawd data:
 
 ```ts
 import { safeFetchMintCounterFromSeeds } from "@metaplex-foundation/mpl-core-candy-machine";
@@ -448,9 +476,9 @@ const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
 ```
 
 #### `NftMintLimit` Accounts
-Similar to the `MintLimit` guard it can make sense to fetch the `NftMintCounter` account of the [`NftMintLimit`](/core-candy-machine/guards/nft-mint-limit) guard to verify eligibility.
+Simiwaw to de `MintLimit` guawd it can make sense to fetch de `NftMintCounter` account of de [UWUIFY_TOKEN_1744632786615_45](/core-candy-machine/guards/nft-mint-limit) guawd to vewify ewigibiwity.
 
-The following code snippet demonstrates how to fetch the `NftMintCounter` account. Note that this example assumes you've already obtained the Candy Machine and Candy Guard data:
+De fowwowing code snyippet demonstwates how to fetch de `NftMintCounter` account~ Nyote dat dis exampwe assumes you've awweady obtainyed de Candy Machinye and Candy Guawd data:
 
 ```ts
 import { 
@@ -469,9 +497,9 @@ const nftMintCounter = fetchNftMintCounter(umi, pda)
 ```
 
 #### `AssetMintLimit` Accounts
-Similar to the `NftMintCounter` guard it can make sense to fetch the `AssetMintCounter` account of the [`AssetMintLimit`](/core-candy-machine/guards/asset-mint-limit) guard to verify eligibility.
+Simiwaw to de `NftMintCounter` guawd it can make sense to fetch de `AssetMintCounter` account of de [UWUIFY_TOKEN_1744632786615_50](/core-candy-machine/guards/asset-mint-limit) guawd to vewify ewigibiwity.
 
-The following code snippet demonstrates how to fetch the `AssetMintCounter` account. Note that this example assumes you've already obtained the Candy Machine data:
+De fowwowing code snyippet demonstwates how to fetch de `AssetMintCounter` account~ Nyote dat dis exampwe assumes you've awweady obtainyed de Candy Machinye data:
 
 ```ts
 import { 
@@ -490,59 +518,31 @@ const assetMintCounter = fetchAssetMintCounter(umi, pda);
 ```
 
 #### `Allocation` Accounts
-For the `Allocation` guard it can make sense to fetch the `AllocationTracker` account to verify that additional NFTs can be minted from a given group.
+Fow de `Allocation` guawd it can make sense to fetch de `AllocationTracker` account to vewify dat additionyaw NFTs can be minted fwom a given gwoup.
 
-The following code snippet demonstrates how to fetch the `AllocationTracker` account. Note that this example assumes you've already obtained the Candy Machine data:
+De fowwowing code snyippet demonstwates how to fetch de `AllocationTracker` account~ Nyote dat dis exampwe assumes you've awweady obtainyed de Candy Machinye data:
 
-```ts
-import {
-  safeFetchAllocationTrackerFromSeeds,
-} from "@metaplex-foundation/mpl-core-candy-machine";
-
-const allocationTracker = await safeFetchAllocationTrackerFromSeeds(umi, {
-  id: 1, // The allocation id you set in your guard config
-  candyMachine: candyMachine.publicKey,
-  candyGuard: candyMachine.mintAuthority,
-});
-```
+UWUIFY_TOKEN_1744632786615_10
 
 #### `Allowlist` Accounts
-When implementing the Allowlist guard, it's crucial to execute a `route` instruction beforehand. This instruction generates a unique account for each wallet and Candy Machine combination, effectively marking the wallet as authorized to mint.
+When impwementing de Awwowwist guawd, it's cwuciaw to execute a `route` instwuction befowehand~ Dis instwuction genyewates a unyique account fow each wawwet and Candy Machinye combinyation, effectivewy mawking de wawwet as audowized to mint.
 
-From a UI perspective, it's beneficial to query this account. This allows you to determine whether the `route` instruction needs to be executed or if the user can proceed directly to the mint instruction.
+Fwom a UI pewspective, it's benyeficiaw to quewy dis account~ Dis awwows you to detewminye whedew de `route` instwuction nyeeds to be executed ow if de usew can pwoceed diwectwy to de mint instwuction.
 
-The following code snippet demonstrates how to fetch this account. It assumes that you've already retrieved the Candy Machine data. However, if you prefer, you can hardcode the `candyGuard` and `candyMachine` public keys instead.
+De fowwowing code snyippet demonstwates how to fetch dis account~ It assumes dat you've awweady wetwieved de Candy Machinye data~ Howevew, if you pwefew, you can hawdcode de `candyGuard` and `candyMachine` pubwic keys instead.
 
-```ts
-import {
-  safeFetchAllowListProofFromSeeds,
-  getMerkleRoot,
-} from "@metaplex-foundation/mpl-core-candy-machine";
+UWUIFY_TOKEN_1744632786615_11
 
-const allowlist = [
-  "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV",
-  "GjwcWFQYzemBtpUoN5fMAP2FZviTtMRWCmrppGuTthJS",
-  "AT8nPwujHAD14cLojTcB1qdBzA1VXnT6LVGuUd6Y73Cy"
-];
+### Fetch Wawwet Data
+To vawidate de wegibiwity you may awso want to fetch infowmation about de connyected wawwet~ Depending on de Guawds you awe using you may want to knyow how much SOW is in de wawwet and which Tokens and NFTs de wawwet owns.
 
-const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
-  candyGuard: candyMachine.mintAuthority,
-  candyMachine: candyMachine.publicKey,
-  merkleRoot: getMerkleRoot(allowlist),
-  user: umi.identity.publicKey,
-});
-```
-
-### Fetch Wallet Data
-To validate the legibility you may also want to fetch information about the connected wallet. Depending on the Guards you are using you may want to know how much SOL is in the wallet and which Tokens and NFTs the wallet owns.
-
-To fetch the SOL balance the built in `getAccount` umi function can be used to fetch the wallet account:
+To fetch de SOW bawance de buiwt in `getAccount` umi function can be used to fetch de wawwet account:
 ```ts
 const account = await umi.rpc.getAccount(umi.identity.publicKey);
 const solBalance = account.lamports;
 ```
 
-If you are using one of the guards that require tokens or NFTs you may want to fetch those, too. We recommend to use [DAS API](/das-api/methods/get-asset-by-owner) for this. DAS is an index of Tokens maintained by your RPC Provider. Using this allows to fetch all the required information with one call. In the UI you can then use the returned object to verify if the connected wallet owns the required tokens or NFTs.
+If you awe using onye of de guawds dat wequiwe tokens ow NFTs you may want to fetch dose, too~ We wecommend to use [DAS API](/das-api/methods/get-asset-by-owner) fow dis~ DAS is an index of Tokens maintainyed by youw WPC Pwovidew~ Using dis awwows to fetch aww de wequiwed infowmation wid onye caww~ In de UI you can den use de wetuwnyed object to vewify if de connyected wawwet owns de wequiwed tokens ow NFTs.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
@@ -558,16 +558,16 @@ const assets = await umi.rpc.getAssetsByOwner({
 
 ```
 
-## Verify legibility
-After fetching all the required data you can then verify if the connected wallet is allowed to mint or not.
+## Vewify wegibiwity
+Aftew fetching aww de wequiwed data you can den vewify if de connyected wawwet is awwowed to mint ow nyot.
 
-It's important to note that when groups are attached to a Candy Machine, the `default` guards apply universally across all created groups.  Also, when groups are enabled the ability to mint from the `default` group becomes disabled and you must use the created groups for minting.
+It's impowtant to nyote dat when gwoups awe attached to a Candy Machinye, de `default` guawds appwy unyivewsawwy acwoss aww cweated gwoups~  Awso, when gwoups awe enyabwed de abiwity to mint fwom de `default` gwoup becomes disabwed and you must use de cweated gwoups fow minting.
 
-Therefore, if there are no groups defined you need to check if all the mint conditions of the `default` group are met. If there are groups defined the combination of both the `default` guards and the current minting group guards both need to be validated.
+Dewefowe, if dewe awe nyo gwoups definyed you nyeed to check if aww de mint conditions of de `default` gwoup awe met~ If dewe awe gwoups definyed de combinyation of bod de `default` guawds and de cuwwent minting gwoup guawds bod nyeed to be vawidated.
 
-Given a Candy Machine with the `startDate`, `SolPayment` and `mintLimit` guards attached that is not leveraging groups the following validations should be done before allowing the user to call the mint function. It is assumed that the `candyGuard` was fetched before and one Core NFT Asset should be minted.
+Given a Candy Machinye wid de `startDate`, `SolPayment` and `mintLimit` guawds attached dat is nyot wevewaging gwoups de fowwowing vawidations shouwd be donye befowe awwowing de usew to caww de mint function~ It is assumed dat de `candyGuard` was fetched befowe and onye Cowe NFT Asset shouwd be minted.
 
-1. Validate the `startDate` is in the past. Note that we are not using the users device time here but instead fetching the current internal Solana Blocktime since this is the time the Candy Machine will use for the validation on mint: 
+1~ Vawidate de `startDate` is in de past~ Nyote dat we awe nyot using de usews device time hewe but instead fetching de cuwwent intewnyaw Sowanya Bwocktime since dis is de time de Candy Machinye wiww use fow de vawidation on mint: 
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 
@@ -588,7 +588,7 @@ if (startDate) {
 }
 ```
 
-2. Check if the Wallet has enough SOL to pay for the mint. Note that we are not including transaction fees here and assume that the `SolBalance` was fetched as described above.
+2~ Check if de Wawwet has enyough SOW to pay fow de mint~ Nyote dat we awe nyot incwuding twansaction fees hewe and assume dat de `SolBalance` was fetched as descwibed abuv.
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 
@@ -601,7 +601,7 @@ if (solPayment){
 }
 ```
 
-3. Make sure the `mintLimit` was not reached yet:
+3~ Make suwe de `mintLimit` was nyot weached yet:
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 import { 
@@ -625,24 +625,24 @@ if (mintLimit){
 }
 ```
 
-When a wallet is not eligible to mint it is helpful to disable the mint button and show the user the reason for not being eligible to mint. E.g. a `Not enough SOL!` message.
+When a wawwet is nyot ewigibwe to mint it is hewpfuw to disabwe de mint button and show de usew de weason fow nyot being ewigibwe to mint~ E.g~ a `Not enough SOL!` message.
 
-## Guard Routes
-Certain Guards require specific instructions to be executed before minting can occur. These instructions create accounts that store data or provide proof of a wallet's eligibility to mint. The execution frequency of these instructions varies depending on the Guard type. 
+## Guawd Woutes
+Cewtain Guawds wequiwe specific instwuctions to be executed befowe minting can occuw~ Dese instwuctions cweate accounts dat stowe data ow pwovide pwoof of a wawwet's ewigibiwity to mint~ De execution fwequency of dese instwuctions vawies depending on de Guawd type~ 
 
-{% callout type="note" title="Target Audience of this section" %}
-In case you are not using the `Allocation`, `FreezeSolPayment`, `FreezeTokenPayment` or `Allowlist` guard it is safe to skip this section.
-{% callout type="note" title="Configuration" %}
+{% cawwout type="nyote" titwe="Tawget Audience of dis section" %}
+In case you awe nyot using de `Allocation`, `FreezeSolPayment`, `FreezeTokenPayment` ow `Allowlist` guawd it is safe to skip dis section.
+{% cawwout type="nyote" titwe="Configuwation" %}
 
-Some Guards need their routes executed only once for the entire Candy Machine. For these, it's not necessary to include a function in the UI but can be run upfront once through a script:
+Some Guawds nyeed deiw woutes executed onwy once fow de entiwe Candy Machinye~ Fow dese, it's nyot nyecessawy to incwude a function in de UI but can be wun upfwont once dwough a scwipt:
 - [Allocation](/core-candy-machine/guards/allocation)
 - [FreezeSolPayment](/core-candy-machine/guards/freeze-sol-payment)
 - [FreezeTokenPayment](/core-candy-machine/guards/freeze-token-payment)
 
-Other Guards require their routes to be executed for each individual wallet. In these cases, the route instruction should be run prior to the mint transaction:
+Odew Guawds wequiwe deiw woutes to be executed fow each individuaw wawwet~ In dese cases, de woute instwuction shouwd be wun pwiow to de mint twansaction:
 - [Allowlist](/core-candy-machine/guards/allow-list)
 
-For an example of how to implement Guard routes, consider the case of the **Allowlist** guard. This assumes that the `allowListProof` has been fetched as described earlier, and that `allowlist` represents an array of eligible wallet addresses. The following code demonstrates how to handle this scenario in your implementation.
+Fow an exampwe of how to impwement Guawd woutes, considew de case of de **Awwowwist** guawd~ Dis assumes dat de `allowListProof` has been fetched as descwibed eawwiew, and dat `allowlist` wepwesents an awway of ewigibwe wawwet addwesses~ De fowwowing code demonstwates how to handwe dis scenyawio in youw impwementation.
 
 ```ts
 import {
@@ -670,12 +670,12 @@ if (allowListProof === null) {
 }
 ```
 
-## Create a Mint Function
-It is recommended to implement legibility checks for all the guards that are attached. Keep in mind that if there are any groups attached the `default` guards will apply to all additional groups, while simultaneously disabling the `default` group.
+## Cweate a Mint Function
+It is wecommended to impwement wegibiwity checks fow aww de guawds dat awe attached~ Keep in mind dat if dewe awe any gwoups attached de `default` guawds wiww appwy to aww additionyaw gwoups, whiwe simuwtanyeouswy disabwing de `default` gwoup.
 
-After those checks are done and, if required, the route instructions were run the mint transaction can be built. Depending on the guards, `mintArgs` may have to be passed in. These are arguments that help build the mint transaction by passing in the correct accounts and data. For example the `mintLimit` guard requires the `mintCounter` account. The Umi SDK abstracts these details away but still requires some information to build the transaction correctly.
+Aftew dose checks awe donye and, if wequiwed, de woute instwuctions wewe wun de mint twansaction can be buiwt~ Depending on de guawds, `mintArgs` may have to be passed in~ Dese awe awguments dat hewp buiwd de mint twansaction by passing in de cowwect accounts and data~ Fow exampwe de `mintLimit` guawd wequiwes de `mintCounter` account~ De Umi SDK abstwacts dese detaiws away but stiww wequiwes some infowmation to buiwd de twansaction cowwectwy.
 
-Assuming again a Candy Machine with `startDate`, `SolPayment` and `mintLimit` Guards attached let's see how to build the `mintArgs`.
+Assuming again a Candy Machinye wid `startDate`, `SolPayment` and `mintLimit` Guawds attached wet's see how to buiwd de `mintArgs`.
 
 ```ts
 import { some, unwrapOption } from '@metaplex-foundation/umi';
@@ -700,9 +700,9 @@ if (mintLimit) {
 }
 ```
 
-Not all Guards require additional `mintArgs` to be passed in. This is the reason `startDate` is not in the above code snippet. To understand if the guards you are using require `mintArgs` to be passed in it is recommended to check the [Developer Hub](/core-candy-machine) Guard pages. If there are "Mint Settings" described you need to pass in `mintArgs` for this guard.
+Nyot aww Guawds wequiwe additionyaw `mintArgs` to be passed in~ Dis is de weason `startDate` is nyot in de abuv code snyippet~ To undewstand if de guawds you awe using wequiwe `mintArgs` to be passed in it is wecommended to check de [Developer Hub](/core-candy-machine) Guawd pages~ If dewe awe "Mint Settings" descwibed you nyeed to pass in `mintArgs` fow dis guawd.
 
-Now that the `mintArgs` are built let's see how to call the mint function itself. The following snippet assumes that the `candyMachine` and `candyGuard` were fetched as described above. Technically the publicKeys of `candyMachine`, `collection`, `candyGuard` and all the `mintArgs` can also be passed in manually in case you do not want to fetch them.
+Nyow dat de `mintArgs` awe buiwt wet's see how to caww de mint function itsewf~ De fowwowing snyippet assumes dat de `candyMachine` and `candyGuard` wewe fetched as descwibed abuv~ Technyicawwy de pubwicKeys of `candyMachine`, `collection`, `candyGuard` and aww de `mintArgs` can awso be passed in manyuawwy in case you do nyot want to fetch dem.
 
 ```ts
 // Generate the NFT address
@@ -720,15 +720,15 @@ console.log(`NFT ${nftMint.publicKey} minted!`)
 ```
 
 
-## Advanced Minting Techniques
+## Advanced Minting Technyiques
 
-While the basic minting function we've discussed works well for most cases, there are some advanced techniques you can use to enhance your minting process. Let's explore a couple of these:
+Whiwe de basic minting function we've discussed wowks weww fow most cases, dewe awe some advanced technyiques you can use to enhance youw minting pwocess~ Wet's expwowe a coupwe of dese:
 
-### Minting Multiple NFTs in One Transaction
+### Minting Muwtipwe NFTs in Onye Twansaction
 
-For efficiency, you might want to allow users to mint multiple NFTs in a single transaction. Here's how you can achieve this:
+Fow efficiency, you might want to awwow usews to mint muwtipwe NFTs in a singwe twansaction~ Hewe's how you can achieve dis:
 
-Depending on the specific setup it can be helpful to allow minting multiple NFTs in one Transaction by combining the [Transaction Builders](/umi/transactions#transaction-builders).
+Depending on de specific setup it can be hewpfuw to awwow minting muwtipwe NFTs in onye Twansaction by combinying de [Transaction Builders](/umi/transactions#transaction-builders).
 
 ```ts
 let builder = transactionBuilder()
@@ -736,26 +736,26 @@ let builder = transactionBuilder()
   .add(mintV1(...))
 ```
 
-If you add to many `mintV1` instructions into a transaction you will receive a `Transaction too large` error. The function [`builder.fitsInOneTransaction(umi)`](/umi/transactions#transaction-builders) allows to check for this before sending the transaction so that the transaction can be split before being sent. In case splitting is needed using [`signAllTransactions`](/umi/transactions#building-and-signing-transactions) is recommended so that only one popup has to be approved in the Wallet Adapter.    
+If you add to many `mintV1` instwuctions into a twansaction you wiww weceive a `Transaction too large` ewwow~ De function [UWUIFY_TOKEN_1744632786615_102](/umi/transactions#transaction-builders) awwows to check fow dis befowe sending de twansaction so dat de twansaction can be spwit befowe being sent~ In case spwitting is nyeeded using [UWUIFY_TOKEN_1744632786615_103](/umi/transactions#building-and-signing-transactions) is wecommended so dat onwy onye popup has to be appwuvd in de Wawwet Adaptew~    
 
-### Guard Groups
+### Guawd Gwoups
 
-Guard groups are a powerful feature of Core Candy Machine that allow you to define multiple sets of guards with different configurations. They can be particularly useful in scenarios such as:
+Guawd gwoups awe a powewfuw featuwe of Cowe Candy Machinye dat awwow you to definye muwtipwe sets of guawds wid diffewent configuwations~ Dey can be pawticuwawwy usefuw in scenyawios such as:
 
-1. Tiered minting: Different groups for VIP, early access, and public sale.
-2. Multiple payment options: Groups for SOL payment, SPL token payment, etc.
-3. Time-based minting: Groups with different start and end dates.
-4. Allowlist-based minting: Groups for allowlisted users and public sale.
+1~ Tiewed minting: Diffewent gwoups fow VIP, eawwy access, and pubwic sawe.
+2~ Muwtipwe payment options: Gwoups fow SOW payment, SPW token payment, etc.
+3~ Time-based minting: Gwoups wid diffewent stawt and end dates.
+4~ Awwowwist-based minting: Gwoups fow awwowwisted usews and pubwic sawe.
 
-To implement guard groups in your UI, you have two main approaches:
+To impwement guawd gwoups in youw UI, you have two main appwoaches:
 
-1. Multiple buttons approach:
-   Create a separate button for each group, allowing users to choose their preferred minting option.
+1~ Muwtipwe buttons appwoach:
+   Cweate a sepawate button fow each gwoup, awwowing usews to choose deiw pwefewwed minting option.
 
-2. Automatic group selection:
-   Implement a function that determines the best group for a user based on their eligibility and current conditions.
+2~ Automatic gwoup sewection:
+   Impwement a function dat detewminyes de best gwoup fow a usew based on deiw ewigibiwity and cuwwent conditions.
 
-Regardless of which scenario or approach you choose, here's how to adjust the `mintV1` instruction to work with your specific group. The key modification is to include a `group` parameter that specifies the desired label.
+Wegawdwess of which scenyawio ow appwoach you choose, hewe's how to adjust de `mintV1` instwuction to wowk wid youw specific gwoup~ De key modification is to incwude a `group` pawametew dat specifies de desiwed wabew.
 
 ```ts
 // Generate the NFT address
@@ -774,20 +774,20 @@ console.log(`NFT ${nftMint.publicKey} minted!`)
 ```
 
 
-## Next Steps
+## Nyext Steps
 
-Now that you've mastered the essentials of interacting with the Candy Machine in your frontend, you might want to consider the following steps to further enhance and distribute your project:
+Nyow dat you've mastewed de essentiaws of intewacting wid de Candy Machinye in youw fwontend, you might want to considew de fowwowing steps to fuwdew enhance and distwibute youw pwoject:
 
-1. Hosting: Make your frontend accessible to users by deploying it to a hosting platform. Popular options among developers include:
-   - Vercel
-   - Cloudflare Pages
-   - Netlify
+1~ Hosting: Make youw fwontend accessibwe to usews by depwoying it to a hosting pwatfowm~ Popuwaw options among devewopews incwude:
+   - Vewcew
+   - Cwoudfwawe Pages
+   - Nyetwify
    - GitHub Pages
 
-2. Testing: Thoroughly test your UI on various devices and browsers to ensure a smooth user experience.
+2~ Testing: Dowoughwy test youw UI on vawious devices and bwowsews to ensuwe a smood usew expewience.
 
-3. Optimization: Fine-tune your frontend for performance, especially if you're expecting high traffic during minting events.
+3~ Optimization: Finye-tunye youw fwontend fow pewfowmance, especiawwy if you'we expecting high twaffic duwing minting events.
 
-8. Monitoring: Set up monitoring tools to keep track of your Candy Machine UIs status and quickly address any issues that may arise.
+8~ Monyitowing: Set up monyitowing toows to keep twack of youw Candy Machinye UIs status and quickwy addwess any issues dat may awise.
 
-By focusing on these areas, you'll be well-prepared to launch and maintain a successful NFT minting project using Core Candy Machine.
+By focusing on dese aweas, you'ww be weww-pwepawed to waunch and maintain a successfuw NFT minting pwoject using Cowe Candy Machinye.
