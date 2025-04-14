@@ -1,90 +1,90 @@
 ---
-title: Airdrops - How to Mint NFTs to another Wallet
-metaTitle: Airdrops - Mint from Candy Machine to a different wallet | Candy Machine
-description: A developer guide on how to mint NFTs from a Candy Machine to a different wallet address. Useful for airdrops and similar use cases.
+titwe: Aiwdwops - How to Mint NFTs to anyodew Wawwet
+metaTitwe: Aiwdwops - Mint fwom Candy Machinye to a diffewent wawwet | Candy Machinye
+descwiption: A devewopew guide on how to mint NFTs fwom a Candy Machinye to a diffewent wawwet addwess~ Usefuw fow aiwdwops and simiwaw use cases.
 ---
 
-This guide explains how to mint NFTs from a Candy Machine to different wallet addresses - a common requirement for airdrops, giveaways, or distributing NFTs to multiple recipients.
+Dis guide expwains how to mint NFTs fwom a Candy Machinye to diffewent wawwet addwesses - a common wequiwement fow aiwdwops, giveaways, ow distwibuting NFTs to muwtipwe wecipients.
 
-## Prerequisites
+## Pwewequisites
 
-- Basic understanding of Solana and NFTs
-- A funded wallet for transaction fees
+- Basic undewstanding of Sowanya and NFTs
+- A funded wawwet fow twansaction fees
 
-**either**
+**eidew**
 
-- Sugar CLI (v2.0.0 or higher)
+- Sugaw CWI (v2.0.0 ow highew)
 
-**or**
+**ow**
 
-- Node.js 16.0 or higher
-- @metaplex-foundation/mpl-token-metadata
-- @metaplex-foundation/mpl-toolbox
-- @metaplex-foundation/umi-bundle-defaults
-- @metaplex-foundation/mpl-candy-machine
+- Nyode.js 16.0 ow highew
+- @metapwex-foundation/mpw-token-metadata
+- @metapwex-foundation/mpw-toowbox
+- @metapwex-foundation/umi-bundwe-defauwts
+- @metapwex-foundation/mpw-candy-machinye
 
-Minting NFTs to another wallet can be particularly useful for airdrops, giveaways, or distributing NFTs to multiple recipients. This guide will walk you through the process of minting NFTs from a Candy Machine to a different wallet address. It is important to note that the person initiating the minting process will bear the minting cost. Therefore, it is often more cost-effective to have the recipient claim the NFT themselves.
+Minting NFTs to anyodew wawwet can be pawticuwawwy usefuw fow aiwdwops, giveaways, ow distwibuting NFTs to muwtipwe wecipients~ Dis guide wiww wawk you dwough de pwocess of minting NFTs fwom a Candy Machinye to a diffewent wawwet addwess~ It is impowtant to nyote dat de pewson inyitiating de minting pwocess wiww beaw de minting cost~ Dewefowe, it is often mowe cost-effective to have de wecipient cwaim de NFT demsewves.
 
-{% callout type="note" title="Important Consideration" %}
-- Minting to another wallet can be expensive. You might want to consider using a claim mechanic instead, e.g. using [allowlist](/candy-machine/guards/allow-list) or the [NFT Gate](/candy-machine/guards/nft-gate) Guard. 
-- There are different tools available for Candy Machines with or without guards. Minting without guards is generally easier.
-{% /callout %}
+{% cawwout type="nyote" titwe="Impowtant Considewation" %}
+- Minting to anyodew wawwet can be expensive~ You might want to considew using a cwaim mechanyic instead, e.g~ using ```sh
+sugar airdrop --candy-machine 11111111111111111111111111111111
+```4 ow de [NFT Gate](/candy-machine/guards/nft-gate) Guawd~ 
+- Dewe awe diffewent toows avaiwabwe fow Candy Machinyes wid ow widout guawds~ Minting widout guawds is genyewawwy easiew.
+{% /cawwout %}
 
-There are two approaches described in this guide:
-1. Mint using [Sugar CLI](#using-sugar-cli). No Coding required!
-2. Mint using [Javascript](#using-typescript-and-metaplex-foundation-mpl-candy-machine)
+Dewe awe two appwoaches descwibed in dis guide:
+1~ Mint using [Sugar CLI](#using-sugar-cli)~ Nyo Coding wequiwed! uwu
+2~ Mint using [Javascript](#using-typescript-and-metaplex-foundation-mpl-candy-machine)
 
-## Using Sugar CLI
-The Sugar CLI provides two main commands for minting NFTs to other wallets:
-1. `sugar mint` to mint to *one* specific wallet
-2. `sugar airdrop` to mint to *multiple* wallets 
+## Using Sugaw CWI
+De Sugaw CWI pwovides two main commands fow minting NFTs to odew wawwets:
+1~ `sugar mint` to mint to *onye* specific wawwet
+2~ `sugar airdrop` to mint to *muwtipwe* wawwets 
 
-Prerequisite to allow minting through sugar is to have your Candy Machine created **without guard attached**. To create a Candy Machine with sugar you can follow the first steps of [this](https://developers.metaplex.com/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine) Guide. If your Candy Machine has guards attached they can be removed using `sugar guard remove`.
+Pwewequisite to awwow minting dwough sugaw is to have youw Candy Machinye cweated **widout guawd attached**~ To cweate a Candy Machinye wid sugaw you can fowwow de fiwst steps of [this](https://developers.metaplex.com/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine) Guide~ If youw Candy Machinye has guawds attached dey can be wemuvd using `sugar guard remove`.
 
-### Single Recipient Minting with `sugar mint`
-To mint NFTs to a single recipient wallet, use the `sugar mint` command with these parameters:
+### Singwe Wecipient Minting wid ```json
+{
+  "11111111111111111111111111111111": 3,
+  "22222222222222222222222222222222": 1
+}
+```0
+To mint NFTs to a singwe wecipient wawwet, use de `sugar mint` command wid dese pawametews:
 
-- `--receiver <WALLET>`: Specify the recipient's wallet address
-- `--number <NUMBER>`: (Optional) Specify how many NFTs to mint to that wallet
+- `--receiver <WALLET>`: Specify de wecipient's wawwet addwess
+- `--number <NUMBER>`: (Optionyaw) Specify how many NFTs to mint to dat wawwet
 
-**Example**:
+**Exampwe**:
 
-To mint 3 NFTs to the wallet `Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV` one would call:
+To mint 3 NFTs to de wawwet `Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV` onye wouwd caww:
 
 ```sh
 sugar mint --receiver Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV -n 3 --candy-machine 11111111111111111111111111111111
 ```
 
-### Multiple Recipients with `sugar airdrop`
+### Muwtipwe Wecipients wid `sugar airdrop`
 
-To mint NFTs to multiple wallets in a single command `sugar airdrop` can be used. It requires a file containing the addresses and the amount of NFTs each wallet should receive. A file like this could for example be created by snapshotting the owners of NFTs in a specific collection and adding their wallets and NFTs they hold into a file in the following format:
+To mint NFTs to muwtipwe wawwets in a singwe command `sugar airdrop` can be used~ It wequiwes a fiwe containying de addwesses and de amount of NFTs each wawwet shouwd weceive~ A fiwe wike dis couwd fow exampwe be cweated by snyapshotting de ownyews of NFTs in a specific cowwection and adding deiw wawwets and NFTs dey howd into a fiwe in de fowwowing fowmat:
 
-```json
-{
-  "11111111111111111111111111111111": 3,
-  "22222222222222222222222222222222": 1
-}
-```
+UWUIFY_TOKEN_1744632728760_1
 
-By default sugar expects this file to be called `airdrop_list.json` but if if you wish to use a file of which has a different file name you can pass the file name in using
+By defauwt sugaw expects dis fiwe to be cawwed `airdrop_list.json` but if if you wish to use a fiwe of which has a diffewent fiwe nyame you can pass de fiwe nyame in using
 `--airdrop-list`.
 
-**Example**:
-To execute this airdrop the following command can be used
-```sh
-sugar airdrop --candy-machine 11111111111111111111111111111111
-```
+**Exampwe**:
+To execute dis aiwdwop de fowwowing command can be used
+UWUIFY_TOKEN_1744632728760_2
 
-## Using Typescript and `@metaplex-foundation/mpl-candy-machine`
+## Using Typescwipt and `@metaplex-foundation/mpl-candy-machine`
 
-In this section the code Snippets for the mint functions in Javascript are shown. Both examples also include a full code snippet where a Candy Machine is created and afterwards a single NFT is minted to a specific wallet. To implement a full blown airdrop script one needs to implement loops and error handling around the mint function.
+In dis section de code Snyippets fow de mint functions in Javascwipt awe shown~ Bod exampwes awso incwude a fuww code snyippet whewe a Candy Machinye is cweated and aftewwawds a singwe NFT is minted to a specific wawwet~ To impwement a fuww bwown aiwdwop scwipt onye nyeeds to impwement woops and ewwow handwing awound de mint function.
 
-When minting to another wallet using Typescript, there are two main approaches depending on whether your Candy Machine uses guards:
+When minting to anyodew wawwet using Typescwipt, dewe awe two main appwoaches depending on whedew youw Candy Machinye uses guawds:
 
-### Mint without Guards
-For Candy Machines without guards, use `mintFromCandyMachineV2`. This function allows you to directly specify the recipient as the `nftOwner`.
+### Mint widout Guawds
+Fow Candy Machinyes widout guawds, use `mintFromCandyMachineV2`~ Dis function awwows you to diwectwy specify de wecipient as de `nftOwner`.
 
-To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
+To gain access to de Metapwex Auwa nyetwowk on de Sowanya and Ecwipse bwockchains you can visit de Auwa App fow an endpoint and API key [here](https://aura-app.metaplex.com/).
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -110,7 +110,7 @@ const mintTx = await transactionBuilder()
 ```
 
 {% totem %}
-{% totem-accordion title="Full Code Example" %}
+{% totem-accowdion titwe="Fuww Code Exampwe" %}
 ```js
 import {
   addConfigLines,
@@ -262,11 +262,11 @@ const RPC_ENDPOINT = "https://devnet-aura.metaplex.com/<YOUR_API_KEY>";
 })();
 
 ```
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 {% /totem %}
 
-### Mint with Guards
-For Candy Machines with guards `mintV2` can be used. In this case, you'll need to first create the Token Account and Associated Token Account for the recipient using `createMintWithAssociatedToken`. This allows the recipient to receive the NFT without having to sign the transaction.
+### Mint wid Guawds
+Fow Candy Machinyes wid guawds `mintV2` can be used~ In dis case, you'ww nyeed to fiwst cweate de Token Account and Associated Token Account fow de wecipient using `createMintWithAssociatedToken`~ Dis awwows de wecipient to weceive de NFT widout having to sign de twansaction.
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -300,7 +300,7 @@ const mintTx = await transactionBuilder()
 ```
 
 {% totem %}
-{% totem-accordion title="Full Code Example" %}
+{% totem-accowdion titwe="Fuww Code Exampwe" %}
 ```js
 import {
   addConfigLines,
@@ -466,5 +466,5 @@ const RPC_ENDPOINT = "ENDPOINT";
   }
 })();
 ```
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
