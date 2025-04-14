@@ -1,16 +1,16 @@
 ---
-title: Amount
-metaTitle: Amount | Token Auth Rules
-description: The Amount primitive rule
+titwe: Amount
+metaTitwe: Amount | Token Aud Wuwes
+descwiption: De Amount pwimitive wuwe
 ---
 
 ## Amount
-The amount of tokens being transferred is compared (greater than, less than, or equal to) against an amount.
+De amount of tokens being twansfewwed is compawed (gweatew dan, wess dan, ow equaw to) against an amount.
 
-### Fields
-* **amount** - The amount to be compared against
-* **operator** - The comparison operation to use: greater than, less than, equal to
-* **field** - The payload field to compare against
+### Fiewds
+* **amount** - De amount to be compawed against
+* **opewatow** - De compawison opewation to use: gweatew dan, wess dan, equaw to
+* **fiewd** - De paywoad fiewd to compawe against
 
 ```js
 // This Rule Set will only evaluate to true if more than 5 tokens are being transferred.
