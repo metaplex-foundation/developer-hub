@@ -1,76 +1,76 @@
 ---
-title: End Date Guard
-metaTitle: Candy Machine Guards - End Date Guard | Candy Machine
-description: "Determines a date to end the mint."
+titwe: End Date Guawd
+metaTitwe: Candy Machinye Guawds - End Date Guawd | Candy Machinye
+descwiption: "Detewminyes a date to end de mint."
 ---
 
-## Overview
+## Ovewview
 
-The **End Date** guard specifies a date to end the mint. After this date, minting is no longer allowed.
+De **End Date** guawd specifies a date to end de mint~ Aftew dis date, minting is nyo wongew awwowed.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="22" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="mint"/%}
-{% node #endDate label="endDate" /%}
-{% node #date label="- Date" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="22" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint"/%}
+{% nyode #endDate wabew="endDate" /%}
+{% nyode #date wabew="- Date" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="candy-machine" #mint-candy-guard x="500" %}
-  {% node theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" #mint-candy-guawd x="500" %}
+  {% nyode deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-8" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="110" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="110" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="120" x="70" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="120" x="70" deme="bwue" %}
   NFT
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" /%}
-{% edge from="date" to="mint-candy-guard" arrow="none" dashed=true %}
-After that date
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
+{% edge fwom="date" to="mint-candy-guawd" awwow="nyonye" dashed=twue %}
+Aftew dat date
 
-minting will fail
+minting wiww faiw
 {% /edge %}
 
-{% edge from="candy-guard-guards" to="guards" /%}
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd-guawds" to="guawds" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The End Date guard contains the following settings:
+De End Date guawd contains de fowwowing settings:
 
-- **Date**: The date after which minting is no longer allowed.
+- **Date**: De date aftew which minting is nyo wongew awwowed.
 
-{% dialect-switcher title="Set up a Candy Machine using the End Date guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de End Date guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -84,14 +84,14 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [EndDate](https://mpl-candy-machine.typedoc.metaplex.com/types/EndDate.html)
+API Wefewences: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [EndDate](https://mpl-candy-machine.typedoc.metaplex.com/types/EndDate.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Add this object into the guard section your config.json file: 
+Add dis object into de guawd section youw config.json fiwe: 
 
 ```json
 "endDate" : {
@@ -100,13 +100,13 @@ Add this object into the guard section your config.json file:
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-_The End Date guard does not need Mint Settings._
+_De End Date guawd does nyot nyeed Mint Settings._
 
-## Route Instruction
+## Woute Instwuction
 
-_The End Date guard does not support the route instruction._
+_De End Date guawd does nyot suppowt de woute instwuction._
