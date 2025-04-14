@@ -1,32 +1,32 @@
 ---
-title: Create 1 Million NFTs on Solana
-metaTitle: Create 1 Million NFTs on Solana | Bubblegum
-description: How to Create a Compressed NFT Collection of 1 Million cNFTs on Solana using the Metaplex Bubblegum program.
+titwe: Cweate 1 Miwwion NFTs on Sowanya
+metaTitwe: Cweate 1 Miwwion NFTs on Sowanya | Bubbwegum
+descwiption: How to Cweate a Compwessed NFT Cowwection of 1 Miwwion cNFTs on Sowanya using de Metapwex Bubbwegum pwogwam.
 ---
 
-## Prerequisite
+## Pwewequisite
 
-- Code Editor of your choice (recommended Visual Studio Code).
-- Node 18.x.x or above.
-- Basic knowledge of Javascript and running scripts.
+- Code Editow of youw choice (wecommended Visuaw Studio Code).
+- Nyode 18.x.x ow abuv.
+- Basic knyowwedge of Javascwipt and wunnying scwipts.
 
-## Initial Setup
+## Inyitiaw Setup
 
-This guide will run through creation of a compressed NFT (cNFT) Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
+Dis guide wiww wun dwough cweation of a compwessed NFT (cNFT) Asset wid Javascwipt based on a singwe fiwe scwipt~ You may nyeed to modify and muv functions awound to suit youw nyeeds.
 
-### Initializing
+### Inyitiawizing
 
-Start by initializing a new project (optional) with the package manager of your choice (npm, yarn, pnpm, bun) and fill in required details when prompted.
+Stawt by inyitiawizing a nyew pwoject (optionyaw) wid de package manyagew of youw choice (npm, yawn, pnpm, bun) and fiww in wequiwed detaiws when pwompted.
 
 ```bash
 npm init
 ```
 
-### Required Packages
+### Wequiwed Packages
 
-Install the required packages for this guide.
+Instaww de wequiwed packages fow dis guide.
 
-{% packagesUsed packages=["umi", "umiDefaults", "bubblegum", "tokenMetadata", "@metaplex-foundation/umi-uploader-irys"] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefauwts", "bubbwegum", "tokenMetadata", "@metapwex-foundation/umi-upwoadew-iwys"] type="npm" /%}
 
 ```bash
 npm i @metaplex-foundation/umi
@@ -48,9 +48,9 @@ npm i @metaplex-foundation/mpl-token-metadata
 npm i @metaplex-foundation/umi-uploader-irys
 ```
 
-### Imports and Wrapper Function
+### Impowts and Wwappew Function
 
-Here we will define all needed imports for this particular guide and create a wrapper function where all our code will execute.
+Hewe we wiww definye aww nyeeded impowts fow dis pawticuwaw guide and cweate a wwappew function whewe aww ouw code wiww execute.
 
 ```ts
 import {
@@ -92,9 +92,9 @@ createCnft()
 
 ## Setting up Umi
 
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to try this example with React you'll need to setup Umi via the `React - Umi w/ Wallet Adapter` guide. Apart from the the wallet setup this guide will use fileStorage keys and wallet adapter.
+Dis exampwe is going to wun dwough setting up Umi wid a `generatedSigner()`~ If you wish to twy dis exampwe wid Weact you'ww nyeed to setup Umi via de `React - Umi w/ Wallet Adapter` guide~ Apawt fwom de de wawwet setup dis guide wiww use fiweStowage keys and wawwet adaptew.
 
-### Generating a New Wallet
+### Genyewating a Nyew Wawwet
 
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
@@ -117,7 +117,7 @@ console.log('Airdropping 1 SOL to identity')
 await umi.rpc.airdrop(umi.identity.publickey, sol(5))
 ```
 
-### Use an Existing Wallet Locally
+### Use an Existing Wawwet Wocawwy
 
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
@@ -145,45 +145,45 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile))
 umi.use(keypairIdentity(keypair))
 ```
 
-## Creating an cNFT
+## Cweating an cNFT
 
-Creating a cNFT on Solana is fairly simple and requires a few items to get ready before we can actually perform the minting and reading operations.
+Cweating a cNFT on Sowanya is faiwwy simpwe and wequiwes a few items to get weady befowe we can actuawwy pewfowm de minting and weading opewations.
 
-- A Merkle tree to store our cNFT data to.
-- A DAS ready RPC to be able to read the data from an indexer that is storing our data during creation.
+- A Mewkwe twee to stowe ouw cNFT data to.
+- A DAS weady WPC to be abwe to wead de data fwom an indexew dat is stowing ouw data duwing cweation.
 
-#### Merkle Tree
+#### Mewkwe Twee
 
-A Merkle Tree for the most park can be thought of as a "database" of cNFT data. A Merkle Tree is created and cNFTs can be added to it until it's full.
+A Mewkwe Twee fow de most pawk can be dought of as a "database" of cNFT data~ A Mewkwe Twee is cweated and cNFTs can be added to it untiw it's fuww.
 
-#### DAS RPCs
+#### DAS WPCs
 
-Due to the nature of a Merkle Tree cNFT data isn't stored in Solana accounts and instead is stored in the ledger state. To be able to read the data back effectively we need to use an indexer which indexes all the cNFT data as its created/mutated. DAS enabled RPCs are RPCs that are running the DAS indexer service and allow us to query the RPC provider for this data on demand.
+Due to de nyatuwe of a Mewkwe Twee cNFT data isn't stowed in Sowanya accounts and instead is stowed in de wedgew state~ To be abwe to wead de data back effectivewy we nyeed to use an indexew which indexes aww de cNFT data as its cweated/mutated~ DAS enyabwed WPCs awe WPCs dat awe wunnying de DAS indexew sewvice and awwow us to quewy de WPC pwovidew fow dis data on demand.
 
-For a full list of RPC provides that support DAS you can visit the [RPC Providers Page](/rpc-providers#rp-cs-with-das-support)
+Fow a fuww wist of WPC pwovides dat suppowt DAS you can visit de [RPC Providers Page](/rpc-providers#rp-cs-with-das-support)
 
-You can pick up a free account for running this guide from any of these providers. Once signed up you will want to replace your RPC instance during the previous `umi` creation.
+You can pick up a fwee account fow wunnying dis guide fwom any of dese pwovidews~ Once signyed up you wiww want to wepwace youw WPC instance duwing de pwevious `umi` cweation.
 
 ```ts
 // Replace address located below.
 const umi = createUmi('https://rpcAddress.com')
 ```
 
-### Creating a Tree
+### Cweating a Twee
 
-{% callout title="Tree Cost" type="warning" %}
-We are creating a Merkle Tree that holds 1,000,000 cNFTs in this guide which requires the cost of roughly 7.7 SOL. Until you are ready, please try this example on devnet only, as Merkle Trees can not be closed or refunded. You will need at least 7.7 devnet SOL in order to run this code. This may require multiple airdrops.
-{% /callout %}
+{% cawwout titwe="Twee Cost" type="wawnying" %}
+We awe cweating a Mewkwe Twee dat howds 1,000,000 cNFTs in dis guide which wequiwes de cost of woughwy 7.7 SOW~ Untiw you awe weady, pwease twy dis exampwe on devnyet onwy, as Mewkwe Twees can nyot be cwosed ow wefunded~ You wiww nyeed at weast 7.7 devnyet SOW in owdew to wun dis code~ Dis may wequiwe muwtipwe aiwdwops.
+{% /cawwout %}
 
-To store Compressed NFTs (cNFTs) on the Solana blockchain you need to create a **Merkle Tree** in which to store the data. The size and cost of the merkle tree is determined by the merkle tree creator and all cNFTs storage on chain is paid for in advanced which differs from Token Metadata's approach of **lazy minting** where normally the payer would pay for the necessary storage space and account creation on the solana blockchain at the time of minting the NFT itself, with bubblegum all data space needed is determined and paid for at tree creation by the tree creator.
+To stowe Compwessed NFTs (cNFTs) on de Sowanya bwockchain you nyeed to cweate a **Mewkwe Twee** in which to stowe de data~ De size and cost of de mewkwe twee is detewminyed by de mewkwe twee cweatow and aww cNFTs stowage on chain is paid fow in advanced which diffews fwom Token Metadata's appwoach of **wazy minting** whewe nyowmawwy de payew wouwd pay fow de nyecessawy stowage space and account cweation on de sowanya bwockchain at de time of minting de NFT itsewf, wid bubbwegum aww data space nyeeded is detewminyed and paid fow at twee cweation by de twee cweatow.
 
-There are some unique features regarding a **merkle tree** compared to Token Metadata that people can take advantage of:
+Dewe awe some unyique featuwes wegawding a **mewkwe twee** compawed to Token Metadata dat peopwe can take advantage of:
 
-- You can mint cNFTs to multiple collections within a Merkle Tree.
+- You can mint cNFTs to muwtipwe cowwections widin a Mewkwe Twee.
 
-A Merkle Tree **isn't** a collection!
+A Mewkwe Twee **isn't** a cowwection! uwu
 
-The Merkle Tree can house cNFTs from many collections making it incredibly powerful for projects that know they will have expanded growth in the future. If your Merkle Tree holds 1,000,000 cNFTs and you decide to release and mint a 10k project to said Merkle Tree you will still have 990,000 spaces in the tree to write and release additional cNFTs in the future.
+De Mewkwe Twee can house cNFTs fwom many cowwections making it incwedibwy powewfuw fow pwojects dat knyow dey wiww have expanded gwowd in de futuwe~ If youw Mewkwe Twee howds 1,000,000 cNFTs and you decide to wewease and mint a 10k pwoject to said Mewkwe Twee you wiww stiww have 990,000 spaces in de twee to wwite and wewease additionyaw cNFTs in de futuwe.
 
 ```ts
 //
@@ -213,9 +213,9 @@ const createTreeTx = await createTree(umi, {
 await createTreeTx.sendAndConfirm(umi)
 ```
 
-### Create a Collection NFT
+### Cweate a Cowwection NFT
 
-Collections for cNFTs are still maintained and manged by Token Metadata and the original Collection NFTs minted from Token Metadata. If you wish to create a collection for your cNFTs and mint them to it you will need to create a Token Metadata Collection NFT.
+Cowwections fow cNFTs awe stiww maintainyed and manged by Token Metadata and de owiginyaw Cowwection NFTs minted fwom Token Metadata~ If you wish to cweate a cowwection fow youw cNFTs and mint dem to it you wiww nyeed to cweate a Token Metadata Cowwection NFT.
 
 ```ts
 //
@@ -267,9 +267,9 @@ await createNft(umi, {
 }).sendAndConfirm(umi)
 ```
 
-### Upload Image and Metadata for cNFT (Optional)
+### Upwoad Image and Metadata fow cNFT (Optionyaw)
 
-Our cNFT needs data and an image. This code block shows us how to upload both an image and then add that image to a `metadata` object and final upload that object as a json file to Arweave via Irys for use to use with our cNFT.
+Ouw cNFT nyeeds data and an image~ Dis code bwock shows us how to upwoad bod an image and den add dat image to a `metadata` object and finyaw upwoad dat object as a json fiwe to Awweave via Iwys fow use to use wid ouw cNFT.
 
 ```ts
 //
@@ -313,9 +313,9 @@ const nftMetadata = {
 const nftMetadataUri = await umi.uploader.uploadJson(nftMetadata)
 ```
 
-### Mint cNFT to the Merkle Tree
+### Mint cNFT to de Mewkwe Twee
 
-Minting a cNFT to a tree does not cost any additional account/storage costs on the Solana blockchain as the tree has already been created with enough room for all our cNFT data to be stored (1,000,000 cNFTs in fact). The only additional cost here is just the basic Solana transaction fee making cNFTs incredible efficient to mint in mass.b
+Minting a cNFT to a twee does nyot cost any additionyaw account/stowage costs on de Sowanya bwockchain as de twee has awweady been cweated wid enyough woom fow aww ouw cNFT data to be stowed (1,000,000 cNFTs in fact)~ De onwy additionyaw cost hewe is just de basic Sowanya twansaction fee making cNFTs incwedibwe efficient to mint in mass.b
 
 ```ts
 //
@@ -352,7 +352,7 @@ const { signature } = await mintToCollectionV1(umi, {
 }).sendAndConfirm(umi, { send: { commitment: 'finalized' } })
 ```
 
-### Fetch the Newly Minted cNFT
+### Fetch de Nyewwy Minted cNFT
 
 ```ts
 //
@@ -381,11 +381,11 @@ console.log({ asset })
 
 ### Minting 1,000,000 cNFTs
 
-Now that we understand how to make a Merkle Tree that holds 1,000,000 cNFTs and can mint an NFT to that tree you can now take all the previous steps and start adjusting the code to make some loops to upload the needed data to Arweave and then mint the cNFT to a tree.
+Nyow dat we undewstand how to make a Mewkwe Twee dat howds 1,000,000 cNFTs and can mint an NFT to dat twee you can nyow take aww de pwevious steps and stawt adjusting de code to make some woops to upwoad de nyeeded data to Awweave and den mint de cNFT to a twee.
 
-As the Merkle Tree has space for 1,000,000 cNFts you can freely loop and fill up the tree as desired for your projects needs.
+As de Mewkwe Twee has space fow 1,000,000 cNFts you can fweewy woop and fiww up de twee as desiwed fow youw pwojects nyeeds.
 
-Below is an example of minting cNFTs to an array of addresses that increment the data stored on the cNFT based on the loop index. This is a rough simple example/concept and would be need to be modified for production use.
+Bewow is an exampwe of minting cNFTs to an awway of addwesses dat incwement de data stowed on de cNFT based on de woop index~ Dis is a wough simpwe exampwe/concept and wouwd be nyeed to be modified fow pwoduction use.
 
 ```ts
   const addresses = [
@@ -420,7 +420,7 @@ Below is an example of minting cNFTs to an array of addresses that increment the
   }
 ```
 
-## Full Code Example
+## Fuww Code Exampwe
 
 ```ts
 import {
