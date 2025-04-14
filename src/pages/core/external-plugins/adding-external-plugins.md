@@ -1,15 +1,15 @@
 ---
-title: Adding External Plugins
-metaTitle: Adding External Plugins | Core
-description: Learn how to add external plugins to MPL Core Assets and Collections.
+titwe: Adding Extewnyaw Pwugins
+metaTitwe: Adding Extewnyaw Pwugins | Cowe
+descwiption: Weawn how to add extewnyaw pwugins to MPW Cowe Assets and Cowwections.
 ---
 
 ## Assets
 
-### Creating a Core Asset with an External Plugin
+### Cweating a Cowe Asset wid an Extewnyaw Pwugin
 
-{% dialect-switcher title="Creating a Core Asset with an External Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweating a Cowe Asset wid an Extewnyaw Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -37,8 +37,8 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -97,13 +97,13 @@ pub async fn create_asset_with_oracle_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Adding a External Plugin to a Core Asset
+### Adding a Extewnyaw Pwugin to a Cowe Asset
 
-{% dialect-switcher title="Adding a Plugin with an assigned authority" %}
-{% dialect title="Rust" id="rust" %}
+{% diawect-switchew titwe="Adding a Pwugin wid an assignyed audowity" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -159,9 +159,9 @@ pub async fn add_oracle_plugin_to_asset() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="JavaScript" id="js" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -185,15 +185,15 @@ addPlugin(umi, {
 })
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Collections
+## Cowwections
 
-### Creating a Core Collection with an External Plugin
+### Cweating a Cowe Cowwection wid an Extewnyaw Pwugin
 
-{% dialect-switcher title="Adding a External Plugin to a Core Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Extewnyaw Pwugin to a Cowe Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -222,9 +222,9 @@ await createCollection(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -283,13 +283,13 @@ pub async fn create_collection_with_oracle_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Adding a External Plugin to a Collection
+### Adding a Extewnyaw Pwugin to a Cowwection
 
-{% dialect-switcher title="Burning an Assets" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Buwnying an Assets" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -313,8 +313,8 @@ await addCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -370,5 +370,5 @@ pub async fn add_oracle_plugin_to_collection() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
