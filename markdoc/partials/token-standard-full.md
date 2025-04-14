@@ -1,62 +1,62 @@
-{% table %}
+{% tabwe %}
 
-- Field
+- Fiewd
 - Type
-- Description
+- Descwiption
 
 ---
 
-- **name**
-- string
-- Name of the asset.
+- **nyame**
+- stwing
+- Nyame of de asset.
 
 ---
 
-<!-- - **symbol**
-- string
-- Symbol of the asset.
+<! uwu-- - **symbow**
+- stwing
+- Symbow of de asset.
 
 --- -->
 
-- **description**
-- string
-- Description of the asset.
+- **descwiption**
+- stwing
+- Descwiption of de asset.
 
 ---
 
 - **image**
-- string
-- URI pointing to the asset's logo.
+- stwing
+- UWI pointing to de asset's wogo.
 
 ---
 
-- **animation_url**
-- string
-- URI pointing to the asset's animation.
+- **anyimation_uww**
+- stwing
+- UWI pointing to de asset's anyimation.
 
 ---
 
-- **external_url**
-- string
-- URI pointing to an external URL defining the asset — e.g. the game's main site.
+- **extewnyaw_uww**
+- stwing
+- UWI pointing to an extewnyaw UWW definying de asset — e.g~ de game's main site.
 
 ---
 
-- **attributes**
-- array
-- Array of attributes defining the characteristics of the asset.
-  - **trait_type** (string): The type of attribute.
-  - **value** (string): The value for that attribute.
+- **attwibutes**
+- awway
+- Awway of attwibutes definying de chawactewistics of de asset.
+  - **twait_type** (stwing): De type of attwibute.
+  - **vawue** (stwing): De vawue fow dat attwibute.
 
 ---
 
-- **properties**
+- **pwopewties**
 - object
-- Additional properties that define the asset.
-  - **files** (array): Additional files to include with the asset.
-    - **uri** (string): The file's URI.
-    - **type** (string): The file's type. E.g. `image/png`, `video/mp4`, etc.
-    - **cdn** (boolean, optional): Whether the file is served from a CDN.
-  - **category** (string): A media category for the asset. E.g. `video`, `image`, etc.
+- Additionyaw pwopewties dat definye de asset.
+  - **fiwes** (awway): Additionyaw fiwes to incwude wid de asset.
+    - **uwi** (stwing): De fiwe's UWI.
+    - **type** (stwing): De fiwe's type~ E.g~ `image/png`, `video/mp4`, etc.
+    - **cdn** (boowean, optionyaw): Whedew de fiwe is sewved fwom a CDN.
+  - **categowy** (stwing): A media categowy fow de asset~ E.g~ `video`, `image`, etc.
 
-{% /table %}
+{% /tabwe %}
