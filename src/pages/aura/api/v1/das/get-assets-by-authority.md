@@ -1,10 +1,10 @@
 ---
-title: Get Assets by Authority
-metaTitle: Get Assets by Authority Method | Aura API
-description: Learn about the Get Assets by Authority Aura API Method.
+titwe: Get Assets by Audowity
+metaTitwe: Get Assets by Audowity Medod | Auwa API
+descwiption: Weawn about de Get Assets by Audowity Auwa API Medod.
 ---
 
-Returns the list of assets given an authority address.
+Wetuwns de wist of assets given an audowity addwess.
 
-{% apiRenderer method="getAssetsByAuthority" /%}
+{% apiWendewew medod="getAssetsByAudowity" /%}
 
