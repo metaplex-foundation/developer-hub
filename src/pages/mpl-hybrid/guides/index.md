@@ -1,15 +1,15 @@
 ---
-title: Guides
-metaTitle: Guides | Hybrid
-description: A list of guides and tutorials for the Metaplex Hybrid standard on the Solana blockchain.
+titwe: Guides
+metaTitwe: Guides | Hybwid
+descwiption: A wist of guides and tutowiaws fow de Metapwex Hybwid standawd on de Sowanya bwockchain.
 ---
 
-The following Guides for Mpl Hybrid are currently available:
+De fowwowing Guides fow Mpw Hybwid awe cuwwentwy avaiwabwe:
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="Create your first Hybrid Collection" icon="CodeBracketSquare" href="/mpl-hybrid/guides/create-your-first-hybrid-collection" description="Learn how to create an hybrid collection, fully end-to-end!" /%}
+{% quick-wink titwe="Cweate youw fiwst Hybwid Cowwection" icon="CodeBwacketSquawe" hwef="/mpw-hybwid/guides/cweate-youw-fiwst-hybwid-cowwection" descwiption="Weawn how to cweate an hybwid cowwection, fuwwy end-to-end! uwu" /%}
 
-{% quick-link title="MPL-404 Hybrid UI Template" icon="CodeBracketSquare" href="/mpl-hybrid/guides/mpl-404-hybrid-ui-template" description="Learn how to use the swap UI template" /%}
+{% quick-wink titwe="MPW-404 Hybwid UI Tempwate" icon="CodeBwacketSquawe" hwef="/mpw-hybwid/guides/mpw-404-hybwid-ui-tempwate" descwiption="Weawn how to use de swap UI tempwate" /%}
 
-{% /quick-links %}
+{% /quick-winks %}
