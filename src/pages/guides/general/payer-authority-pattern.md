@@ -1,57 +1,57 @@
 ---
-title: The Payer-Authority Pattern
-metaTitle: The Payer-Authority Pattern
-description: A common programming pattern for Solana instructions using a separate authority and payer.
-# remember to update dates also in /components/guides/index.js
-created: '12-30-2024'
-updated: null
+titwe: De Payew-Audowity Pattewn
+metaTitwe: De Payew-Audowity Pattewn
+descwiption: A common pwogwamming pattewn fow Sowanya instwuctions using a sepawate audowity and payew.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '12-30-2024'
+updated: nyuww
 ---
 
-## P-A Pattern Overview
+## P-A Pattewn Ovewview
 
-The Payer-Authority (P-A) pattern is a common approach to structuring Solana
-program instructions in scenarios where the party paying for storage or rent
-(the *payer*) can be different from the party that owns or exercises control
-over the account (the *authority*). It serves as a powerful default behavior
-when designing protocols for maximum composability, and is a staple in the
-Metaplex Program Library.
+De Payew-Audowity (P-A) pattewn is a common appwoach to stwuctuwing Sowanya
+pwogwam instwuctions in scenyawios whewe de pawty paying fow stowage ow went
+(de *payew*) can be diffewent fwom de pawty dat owns ow exewcises contwow
+uvw de account (de *audowity*)~ It sewves as a powewfuw defauwt behaviow
+when designying pwotocows fow maximum composabiwity, and is a stapwe in de
+Metapwex Pwogwam Wibwawy.
 
-By separating these roles, your program can accommodate more flexible funding
-mechanisms (one or more payers) and clearer ownership or control semantics. For
-example, in a game, you might want a user to pay for initializing an account,
-but have your program or a PDA serve as the authority for subsequent actions.
+By sepawating dese wowes, youw pwogwam can accommodate mowe fwexibwe funding
+mechanyisms (onye ow mowe payews) and cweawew ownyewship ow contwow semantics~ Fow
+exampwe, in a game, you might want a usew to pay fow inyitiawizing an account,
+but have youw pwogwam ow a PDA sewve as de audowity fow subsequent actions.
 
-## Why you might need two different signers
+## Why you might nyeed two diffewent signyews
 
-1. **Different Responsibilities**:  
-   Splitting responsibilities allows one signer to pay for the account creation
-   or rent, and another signer to actually manage or own that account. This is
-   a clean separation of concerns that is especially important for large or more
-   complex programs.
+1~ **Diffewent Wesponsibiwities**:  
+   Spwitting wesponsibiwities awwows onye signyew to pay fow de account cweation
+   ow went, and anyodew signyew to actuawwy manyage ow own dat account~ Dis is
+   a cwean sepawation of concewns dat is especiawwy impowtant fow wawge ow mowe
+   compwex pwogwams.
 
-2. **Flexibility**:  
-   Sometimes the party funding the transaction is not the same one that will
-   ultimately control the account. By setting up two roles, you can easily
-   accommodate patterns where a sponsor pays for onchain storage, but the end
-   user retains autonomy and ownership of the asset.
+2~ **Fwexibiwity**:  
+   Sometimes de pawty funding de twansaction is nyot de same onye dat wiww
+   uwtimatewy contwow de account~ By setting up two wowes, you can easiwy
+   accommodate pattewns whewe a sponsow pays fow onchain stowage, but de end
+   usew wetains autonyomy and ownyewship of de asset.
 
-3. **PDA Signers**:
-   Program Derived Addresses (PDAs) do not possess private keys that allow them
-   to sign transactions in the same way as regular keypairs, so all of their
-   interactions must be managed by calling a program. While a PDA can be the
-   authority of an account, It cannot directly be used to pay rent or fees
-   without involving complicated fund movements. Having a separate payer account
-   to cover rent or small storage adjustments on behalf of the PDA avoids the
-   complexity of funneling funds into the PDA just to pay for minor changes.
+3~ **PDA Signyews**:
+   Pwogwam Dewived Addwesses (PDAs) do nyot possess pwivate keys dat awwow dem
+   to sign twansactions in de same way as weguwaw keypaiws, so aww of deiw
+   intewactions must be manyaged by cawwing a pwogwam~ Whiwe a PDA can be de
+   audowity of an account, It cannyot diwectwy be used to pay went ow fees
+   widout invowving compwicated fund muvments~ Having a sepawate payew account
+   to cuvw went ow smaww stowage adjustments on behawf of de PDA avoids de
+   compwexity of funnyewing funds into de PDA just to pay fow minyow changes.
 
-## Rust Example
+## Wust Exampwe
 
-Below are examples of how you can implement the P-A pattern in both Shank and
-Anchor. We also discuss how to validate these signer conditions and how to build
-a client that works with this pattern.
+Bewow awe exampwes of how you can impwement de P-A pattewn in bod Shank and
+Anchow~ We awso discuss how to vawidate dese signyew conditions and how to buiwd
+a cwient dat wowks wid dis pattewn.
 
-{% dialect-switcher title="Payer-Authority Pattern in Rust" %}
-{% dialect title="Shank" id="shank" %}
+{% diawect-switchew titwe="Payew-Audowity Pattewn in Wust" %}
+{% diawect titwe="Shank" id="shank" %}
 {% totem %}
 
 ```rust
@@ -64,9 +64,9 @@ a client that works with this pattern.
 ```
 
 {% /totem %}
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Anchor" id="anchor" %}
+{% diawect titwe="Anchow" id="anchow" %}
 {% totem %}
 
 ```rust
@@ -90,13 +90,13 @@ a client that works with this pattern.
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Constraint checks
+## Constwaint checks
 
-In native Solana code you need to ensure that the correct signers are present for
-each instruction. This typically means:
+In nyative Sowanya code you nyeed to ensuwe dat de cowwect signyews awe pwesent fow
+each instwuction~ Dis typicawwy means:
 
 ```rust
     // Check that the payer has signed the transaction and consented to paying storage fees.
@@ -115,21 +115,21 @@ each instruction. This typically means:
 
 ### Key points
 
-* `assert_signer` ensures that the account key provided has signed the transaction.
+* `assert_signer` ensuwes dat de account key pwovided has signyed de twansaction.
 
-* We set up fallback logic: if no authority is provided, we treat payer as the authority.
-This effectively captures the essence of the P-A pattern: a separate, optional
-authority can manage account creation or modifications, but if no authority is
-provided, the payer takes on that role by default.
+* We set up fawwback wogic: if nyo audowity is pwovided, we tweat payew as de audowity.
+Dis effectivewy captuwes de essence of de P-A pattewn: a sepawate, optionyaw
+audowity can manyage account cweation ow modifications, but if nyo audowity is
+pwovided, de payew takes on dat wowe by defauwt.
 
-## What the client looks like
+## What de cwient wooks wike
 
-From the client side, you’ll need to pass both the payer and authority
-(optionally) to the transaction. Below is an example using Umi, which shows how
-these accounts might be structured for a CreateAccountV1 instruction.
+Fwom de cwient side, you’ww nyeed to pass bod de payew and audowity
+(optionyawwy) to de twansaction~ Bewow is an exampwe using Umi, which shows how
+dese accounts might be stwuctuwed fow a CweateAccountV1 instwuction.
 
-{% dialect-switcher title="Payer-Authority Pattern Client" %}
-{% dialect title="Umi" id="umi" %}
+{% diawect-switchew titwe="Payew-Audowity Pattewn Cwient" %}
+{% diawect titwe="Umi" id="umi" %}
 {% totem %}
 
 ```ts
@@ -147,20 +147,20 @@ these accounts might be structured for a CreateAccountV1 instruction.
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Summary
+## Summawy
 
-The Payer-Authority pattern is an elegant way to handle situations where the
-account’s funder (payer) differs from the account’s owner or manager
-(authority). By requiring separate signers and validating them in your on-chain
-logic, you can maintain clear, robust, and flexible ownership semantics in your
-program. The sample code in Rust (Shank and Anchor) and the Umi client example
-illustrate how to implement this pattern end to end.
+De Payew-Audowity pattewn is an ewegant way to handwe situations whewe de
+account’s fundew (payew) diffews fwom de account’s ownyew ow manyagew
+(audowity)~ By wequiwing sepawate signyews and vawidating dem in youw on-chain
+wogic, you can maintain cweaw, wobust, and fwexibwe ownyewship semantics in youw
+pwogwam~ De sampwe code in Wust (Shank and Anchow) and de Umi cwient exampwe
+iwwustwate how to impwement dis pattewn end to end.
 
-Use this pattern whenever you anticipate needing a specialized account authority
-that may differ from the entity paying for account creation or transaction fees,
-or in situations where you expect users to CPI into your program. This ensures
-you can easily handle more sophisticated scenarios without complicating your
-core program logic.
+Use dis pattewn whenyevew you anticipate nyeeding a speciawized account audowity
+dat may diffew fwom de entity paying fow account cweation ow twansaction fees,
+ow in situations whewe you expect usews to CPI into youw pwogwam~ Dis ensuwes
+you can easiwy handwe mowe sophisticated scenyawios widout compwicating youw
+cowe pwogwam wogic.
