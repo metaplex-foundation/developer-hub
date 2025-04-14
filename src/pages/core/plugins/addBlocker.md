@@ -1,32 +1,32 @@
 ---
-title: addBlocker Plugin
-metaTitle: addBlocker Plugin | Core Plugins
-description: Learn how to block adding additional Plugins to Core NFT Assets and Collections using Metaplex Core packages.
+titwe: addBwockew Pwugin
+metaTitwe: addBwockew Pwugin | Cowe Pwugins
+descwiption: Weawn how to bwock adding additionyaw Pwugins to Cowe NFT Assets and Cowwections using Metapwex Cowe packages.
 ---
 
-The `addBlocker` Plugin is a `Authority Managed` plugin that allows to forbid adding additional authority managed plugins. This means you as an authority have to be sure that all plugins that you might need in the future have been added before. Even Plugins that are new features could not be added. It can only be added by the update authority.
+De `addBlocker` Pwugin is a `Authority Managed` pwugin dat awwows to fowbid adding additionyaw audowity manyaged pwugins~ Dis means you as an audowity have to be suwe dat aww pwugins dat you might nyeed in de futuwe have been added befowe~ Even Pwugins dat awe nyew featuwes couwd nyot be added~ It can onwy be added by de update audowity.
 
-The **exception** to this are user managed plugins for assets like the transfer and freeze delegate plugins. Those can always be added, even after the `addBlocker` has been added.
+De **exception** to dis awe usew manyaged pwugins fow assets wike de twansfew and fweeze dewegate pwugins~ Dose can awways be added, even aftew de `addBlocker` has been added.
 
-This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collection`.
+Dis pwugin can be used on bod de `MPL Core Asset` and de `MPL Core Collection`.
 
-As it is for other plugins, like [royalties](/core/plugins/royalties) when it is assigned to an MPL Core Collection the MPL Core Asset also is used on the Asset. So if it is added to a collection plugins cannot be added to asset anymore, too.
+As it is fow odew pwugins, wike [royalties](/core/plugins/royalties) when it is assignyed to an MPW Cowe Cowwection de MPW Cowe Asset awso is used on de Asset~ So if it is added to a cowwection pwugins cannyot be added to asset anymowe, too.
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
 
-## Arguments
+## Awguments
 
-The `addBlocker` Plugin requires no arguments.
+De `addBlocker` Pwugin wequiwes nyo awguments.
 
-## Adding the addBlocker Plugin to an Asset code example
+## Adding de addBwockew Pwugin to an Asset code exampwe
 
-{% dialect-switcher title="Adding a addBlocker Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a addBwockew Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import {
@@ -41,13 +41,13 @@ await addPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Adding the addBlocker Plugin to a Collection code example
+## Adding de addBwockew Pwugin to a Cowwection code exampwe
 
-{% dialect-switcher title="Add addBlocker Plugin to Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Add addBwockew Pwugin to Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import {
@@ -62,5 +62,5 @@ await addCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
