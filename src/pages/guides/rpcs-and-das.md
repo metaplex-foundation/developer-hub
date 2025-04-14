@@ -1,51 +1,51 @@
 ---
-title: RPCs and DAS
-metaTitle: RPCs and DAS on the Solana Blockchain | Guides
-description: Learn about RPCS on the Solana blockchain and how DAS by Metaplex aids in storing and reading data on Solana.
-# remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
+titwe: WPCs and DAS
+metaTitwe: WPCs and DAS on de Sowanya Bwockchain | Guides
+descwiption: Weawn about WPCS on de Sowanya bwockchain and how DAS by Metapwex aids in stowing and weading data on Sowanya.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '06-16-2024'
 updated: '06-21-2024'
 ---
 
-## Roles of an RPC on the Solana Blockchain
-Remote Procedure Calls (RPCs) are a crucial part of the Solana blockchain infrastructure. They serve as the bridge between users (or applications) and blockchain, facilitating interactions and data retrieval.
+## Wowes of an WPC on de Sowanya Bwockchain
+Wemote Pwoceduwe Cawws (WPCs) awe a cwuciaw pawt of de Sowanya bwockchain infwastwuctuwe~ Dey sewve as de bwidge between usews (ow appwications) and bwockchain, faciwitating intewactions and data wetwievaw.
 
-#### Key Roles of an RPC
-1. **Facilitating Network Communication**
-RPC servers handle requests from clients (users or applications) and interact with the blockchain to fulfill those requests. They provide a standardized way for external entities to communicate with the blockchain without requiring them to run a full node.
+#### Key Wowes of an WPC
+1~ **Faciwitating Nyetwowk Communyication**
+WPC sewvews handwe wequests fwom cwients (usews ow appwications) and intewact wid de bwockchain to fuwfiww dose wequests~ Dey pwovide a standawdized way fow extewnyaw entities to communyicate wid de bwockchain widout wequiwing dem to wun a fuww nyode.
 
-2. **Submitting Transactions**
-RPCs enable clients to submit transactions to the Solana blockchain. When a user wants to perform an action on the blockchain, such as transferring tokens or invoking a smart contract, the transaction is sent to an RPC server, which then propagates it to the network for processing and inclusion in a block.
+2~ **Submitting Twansactions**
+WPCs enyabwe cwients to submit twansactions to de Sowanya bwockchain~ When a usew wants to pewfowm an action on de bwockchain, such as twansfewwing tokens ow invoking a smawt contwact, de twansaction is sent to an WPC sewvew, which den pwopagates it to de nyetwowk fow pwocessing and incwusion in a bwock.
 
-3. **Retrieving Blockchain Data**
-RPC servers allow clients to ask the blockchain for various types of data, including:
-- **Account Information**: details about a specific account, such as balance, token holdings, and other metadata.
-- **Transaction History**: historical transactions associated with an account or a specific transaction signature.
-- **Block Information**: details about specific blocks, including block height, block hash, and transactions included in the block.
-- **Program Logs**: Access logs and output from executed programs (smart contracts).
+3~ **Wetwieving Bwockchain Data**
+WPC sewvews awwow cwients to ask de bwockchain fow vawious types of data, incwuding:
+- **Account Infowmation**: detaiws about a specific account, such as bawance, token howdings, and odew metadata.
+- **Twansaction Histowy**: histowicaw twansactions associated wid an account ow a specific twansaction signyatuwe.
+- **Bwock Infowmation**: detaiws about specific bwocks, incwuding bwock height, bwock hash, and twansactions incwuded in de bwock.
+- **Pwogwam Wogs**: Access wogs and output fwom executed pwogwams (smawt contwacts).
 
-4. **Monitoring Network Status**
-RPCs provide endpoints to check the status of the network and nodes, such as:
-- **Node Health**: Determine if a node is online and functioning correctly.
-- **Network Latency**: Measure the time it takes for requests to be processed and responses to be received.
-- **Synchronization Status**: Check if a node is synchronized with the rest of the network.
+4~ **Monyitowing Nyetwowk Status**
+WPCs pwovide endpoints to check de status of de nyetwowk and nyodes, such as:
+- **Nyode Heawd**: Detewminye if a nyode is onwinye and functionying cowwectwy.
+- **Nyetwowk Watency**: Measuwe de time it takes fow wequests to be pwocessed and wesponses to be weceived.
+- **Synchwonyization Status**: Check if a nyode is synchwonyized wid de west of de nyetwowk.
 
-5. **Supporting Development and Debugging**
-RPC endpoints are essential tools for developers building on Solana. They provide functionalities to:
-- **Simulate Transactions**: simulate transactions to see their potential effects before submitting them to the network.
-- **Fetch Program Accounts**: retrieve all accounts associated with a specific program, which is useful for managing program state.
-- **Get Logs**: detailed logs from transactions and programs to debug and optimize their applications.
+5~ **Suppowting Devewopment and Debugging**
+WPC endpoints awe essentiaw toows fow devewopews buiwding on Sowanya~ Dey pwovide functionyawities to:
+- **Simuwate Twansactions**: simuwate twansactions to see deiw potentiaw effects befowe submitting dem to de nyetwowk.
+- **Fetch Pwogwam Accounts**: wetwieve aww accounts associated wid a specific pwogwam, which is usefuw fow manyaging pwogwam state.
+- **Get Wogs**: detaiwed wogs fwom twansactions and pwogwams to debug and optimize deiw appwications.
 
-### Example RPC Endpoints
-Here are some common RPC endpoints and their functionalities:
-- **getBalance**: Retrieves the balance of a specified account.
-- **sendTransaction**: Submits a transaction to the network.
-- **getTransaction**: Fetches details about a specific transaction using its signature.
-- **getBlock**: Retrieves information about a specific block by its slot number.
-- **simulateTransaction**: Simulates a transaction to predict its outcome without executing it on the chain.
+### Exampwe WPC Endpoints
+Hewe awe some common WPC endpoints and deiw functionyawities:
+- **getBawance**: Wetwieves de bawance of a specified account.
+- **sendTwansaction**: Submits a twansaction to de nyetwowk.
+- **getTwansaction**: Fetches detaiws about a specific twansaction using its signyatuwe.
+- **getBwock**: Wetwieves infowmation about a specific bwock by its swot nyumbew.
+- **simuwateTwansaction**: Simuwates a twansaction to pwedict its outcome widout executing it on de chain.
 
-### Example Usage
-Here’s a simple example using JavaScript to interact with Solana’s RPC endpoints:
+### Exampwe Usage
+Hewe’s a simpwe exampwe using JavaScwipt to intewact wid Sowanya’s WPC endpoints:
 
 ```javascript
 const solanaWeb3 = require('@solana/web3.js');
@@ -72,19 +72,19 @@ const publicKey = new solanaWeb3.PublicKey('ExamplePublicKeyHere');
 getBalance(publicKey);
 ```
 
-## Metaplex DAS
+## Metapwex DAS
 
-Metaplex DAS (Digital Asset Standard) is a protocol or framework designed to standardize the read layer of NFTs and Tokens on the Solana blockchain allowing developers to standardise their code which fetching multiple different standards and layouts of Digital Assets.
+Metapwex DAS (Digitaw Asset Standawd) is a pwotocow ow fwamewowk designyed to standawdize de wead wayew of NFTs and Tokens on de Sowanya bwockchain awwowing devewopews to standawdise deiw code which fetching muwtipwe diffewent standawds and wayouts of Digitaw Assets.
 
-### Indexing Digital Assets
-By indexing all the Digital Assets (NFTs and Tokens) users have access to much faster reads of data of these assets as the data is stored in an optimized database rather than fetching directly from chain.
+### Indexing Digitaw Assets
+By indexing aww de Digitaw Assets (NFTs and Tokens) usews have access to much fastew weads of data of dese assets as de data is stowed in an optimized database wadew dan fetching diwectwy fwom chain.
 
 ### Syncing
-DAS has the ability to sync the reindexing of data during certain lifecycle instructions that are sent to the blockchain. By watching these instructions such as create, update, burn, and transfer we can always be assured that the DAS indexed data is up to date.
+DAS has de abiwity to sync de weindexing of data duwing cewtain wifecycwe instwuctions dat awe sent to de bwockchain~ By watching dese instwuctions such as cweate, update, buwn, and twansfew we can awways be assuwed dat de DAS indexed data is up to date.
 
-Currently Core, Token Metadata, and Bubblegum are all indexed by DAS.
+Cuwwentwy Cowe, Token Metadata, and Bubbwegum awe aww indexed by DAS.
 
-To find out more about Metaplex DAS you can visit these pages:
+To find out mowe about Metapwex DAS you can visit dese pages:
 
 - [Metaplex DAS API](/das-api)
 - [Metaplex DAS API Github](https://github.com/metaplex-foundation/digital-asset-standard-api)
