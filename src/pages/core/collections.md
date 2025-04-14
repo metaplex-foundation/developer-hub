@@ -1,79 +1,27 @@
 ---
-title: Managing Collections
-metaTitle: Verified Collections | Core
-description: Learn how to manage Core Collections of Assets such as adding and removing to the collection with the Metaplex Core packages.
+titwe: Manyaging Cowwections
+metaTitwe: Vewified Cowwections | Cowe
+descwiption: Weawn how to manyage Cowe Cowwections of Assets such as adding and wemoving to de cowwection wid de Metapwex Cowe packages.
 ---
 
-## What are Collections?
+## What awe Cowwections? owo
 
-Collections are a group of Assets that belong together, part of the same series, or group. In order to group Assets together, we must first create a Collection Asset whose purpose is to store any metadata related to that collection such as collection name and collection image. The Collection Asset acts as a front cover to your collection and can also store collection wide plugins.
+Cowwections awe a gwoup of Assets dat bewong togedew, pawt of de same sewies, ow gwoup~ In owdew to gwoup Assets togedew, we must fiwst cweate a Cowwection Asset whose puwpose is to stowe any metadata wewated to dat cowwection such as cowwection nyame and cowwection image~ De Cowwection Asset acts as a fwont cuvw to youw cowwection and can awso stowe cowwection wide pwugins.
 
-The data that is stored and accessible from the Collection Asset is as follows;
+De data dat is stowed and accessibwe fwom de Cowwection Asset is as fowwows;
 
-| Accounts        | Description                                       |
+| Accounts        | Descwiption                                       |
 | --------------- | ------------------------------------------------- |
-| key             | The account key discriminator                     |
-| updateAuthority | The authority of the new asset.                   |
-| name            | The collection name.                              |
-| uri             | The uri to the collections off-chain metadata.    |
-| num minted      | The number of assets minted in the collection.    |
-| current size    | The number of assets currently in the collection. |
+| key             | De account key discwiminyatow                     |
+| updateAudowity | De audowity of de nyew asset~                   |
+| nyame            | De cowwection nyame~                              |
+| uwi             | De uwi to de cowwections off-chain metadata~    |
+| nyum minted      | De nyumbew of assets minted in de cowwection~    |
+| cuwwent size    | De nyumbew of assets cuwwentwy in de cowwection~ |
 
-## Creating a Collection
+## Cweating a Cowwection
 
-To create a Core Collection you can use the `CreateCollection` instruction like this:
-
-{% totem %}
-{% totem-accordion title="Technical Instruction Details - CreateCollectionV1" %}
-
-**Instruction Accounts List**
-
-| Accounts        | Description                                        |
-| --------------- | -------------------------------------------------- |
-| collection      | The collection to which the Core Asset belongs to. |
-| updateAuthority | The authority of the new asset.                    |
-| payer           | The account paying for the storage fees.           |
-| systemProgram   | The System Program account.                        |
-
-**Instruction Arguments**
-
-| Arg     | Description                                        |
-| ------- | -------------------------------------------------- |
-| name    | The collection to which the Core Asset belongs to. |
-| uri     | The authority of the new asset.                    |
-| plugins | Plugins you would like the collection to have.     |
-
-Some of the accounts and arguments may be abstracted out and/or optional in our SDKs for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L30).
-
-{% /totem-accordion %}
-{% /totem %}
-
-### Creating a Simple Collection
-
-The following snippet creates a simple collection without Plugins or anything special.
-
-{% dialect-switcher title="Create a MPL Core Collection" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner } from '@metaplex-foundation/umi'
-import { createCollection } from '@metaplex-foundation/mpl-core'
-
-const collectionSigner = generateSigner(umi)
-
-await createCollection(umi, {
-  collection: collectionSigner,
-  name: 'My Collection',
-  uri: 'https://example.com/my-collection.json',
-})
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```rust
+To cweate a Cowe Cowwection you can use de ```rust
 use mpl_core::instructions::CreateCollectionV1Builder;
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
@@ -109,17 +57,69 @@ pub async fn create_collection() {
 
     println!("Signature: {:?}", res)
 }
+```0 instwuction wike dis:
+
+{% totem %}
+{% totem-accowdion titwe="Technyicaw Instwuction Detaiws - CweateCowwectionV1" %}
+
+**Instwuction Accounts Wist**
+
+| Accounts        | Descwiption                                        |
+| --------------- | -------------------------------------------------- |
+| cowwection      | De cowwection to which de Cowe Asset bewongs to~ |
+| updateAudowity | De audowity of de nyew asset~                    |
+| payew           | De account paying fow de stowage fees~           |
+| systemPwogwam   | De System Pwogwam account~                        |
+
+**Instwuction Awguments**
+
+| Awg     | Descwiption                                        |
+| ------- | -------------------------------------------------- |
+| nyame    | De cowwection to which de Cowe Asset bewongs to~ |
+| uwi     | De audowity of de nyew asset~                    |
+| pwugins | Pwugins you wouwd wike de cowwection to have~     |
+
+Some of de accounts and awguments may be abstwacted out and/ow optionyaw in ouw SDKs fow ease of use.
+A fuww detaiwed wook at de on chain instwuction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L30).
+
+{% /totem-accowdion %}
+{% /totem %}
+
+### Cweating a Simpwe Cowwection
+
+De fowwowing snyippet cweates a simpwe cowwection widout Pwugins ow anyding speciaw.
+
+{% diawect-switchew titwe="Cweate a MPW Cowe Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { generateSigner } from '@metaplex-foundation/umi'
+import { createCollection } from '@metaplex-foundation/mpl-core'
+
+const collectionSigner = generateSigner(umi)
+
+await createCollection(umi, {
+  collection: collectionSigner,
+  name: 'My Collection',
+  uri: 'https://example.com/my-collection.json',
+})
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
 
-### Creating a Collection with Plugins
+{% diawect titwe="Wust" id="wust" %}
 
-The following snippet creates a collection with the [Royalties Plugin](/core/plugins/royalties) attached. You can attach additional plugins as described [here](/core/plugins).
+UWUIFY_TOKEN_1744632798108_1
 
-{% dialect-switcher title="Create a MPL Core Collection with Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Cweating a Cowwection wid Pwugins
+
+De fowwowing snyippet cweates a cowwection wid de [Royalties Plugin](/core/plugins/royalties) attached~ You can attach additionyaw pwugins as descwibed [here](/core/plugins).
+
+{% diawect-switchew titwe="Cweate a MPW Cowe Cowwection wid Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -154,9 +154,9 @@ await createCollection(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -213,15 +213,15 @@ pub async fn create_collection_with_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Fetch a Collection
+## Fetch a Cowwection
 
-To fetch a collection the following function can be used:
+To fetch a cowwection de fowwowing function can be used:
 
-{% dialect-switcher title="Fetch a collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch a cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchCollectionV1 } from '@metaplex-foundation/mpl-core'
@@ -234,9 +234,9 @@ const collection = await fetchCollection(umi, collectionId)
 console.log(collection)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use std::str::FromStr;
@@ -257,44 +257,44 @@ pub async fn fetch_collection() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Updating a Collection
+## Updating a Cowwection
 
-To update the data of a Core Collection use the `UpdateCollection` instruction. For example, you use this instruction to change the name of a collection.
+To update de data of a Cowe Cowwection use de `UpdateCollection` instwuction~ Fow exampwe, you use dis instwuction to change de nyame of a cowwection.
 
 {% totem %}
-{% totem-accordion title="Technical Instruction Details - UpdateCollectionV1" %}
+{% totem-accowdion titwe="Technyicaw Instwuction Detaiws - UpdateCowwectionV1" %}
 
-**Instruction Accounts List**
+**Instwuction Accounts Wist**
 
-| Accounts           | Description                                        |
+| Accounts           | Descwiption                                        |
 | ------------------ | -------------------------------------------------- |
-| collection         | The collection to which the Core Asset belongs to. |
-| payer              | The account paying for the storage fees.           |
-| authority          | The authority of the new asset.                    |
-| newUpdateAuthority | The new update authority of the collection.        |
-| systemProgram      | The System Program account.                        |
-| logWrapper         | The SPL Noop Program.                              |
+| cowwection         | De cowwection to which de Cowe Asset bewongs to~ |
+| payew              | De account paying fow de stowage fees~           |
+| audowity          | De audowity of de nyew asset~                    |
+| nyewUpdateAudowity | De nyew update audowity of de cowwection~        |
+| systemPwogwam      | De System Pwogwam account~                        |
+| wogWwappew         | De SPW Nyoop Pwogwam~                              |
 
-**Instruction Arguments**
+**Instwuction Awguments**
 
-| Args | Description                      |
+| Awgs | Descwiption                      |
 | ---- | -------------------------------- |
-| name | The name of your MPL Core Asset. |
-| uri  | The off chain json metadata uri. |
+| nyame | De nyame of youw MPW Cowe Asset~ |
+| uwi  | De off chain json metadata uwi~ |
 
-Some of the accounts and arguments may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L167C4-L167C23).
+Some of de accounts and awguments may be abstwacted out and/ow optionyaw in ouw sdks fow ease of use.
+A fuww detaiwed wook at de on chain instwuction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L167C4-L167C23).
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
 
-{% seperator h="6" /%}
+{% sepewatow h="6" /%}
 
-{% dialect-switcher title="Updating a Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Updating a Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -309,8 +309,8 @@ await updateCollection(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use std::str::FromStr;
@@ -353,42 +353,42 @@ pub async fn update_collection() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Updating a Collection Plugin
+## Updating a Cowwection Pwugin
 
-If you want to change the behaviour of a plugin that is attached to a Core Collection you may want to use the `updateCollectionPlugin` instruction.
+If you want to change de behaviouw of a pwugin dat is attached to a Cowe Cowwection you may want to use de `updateCollectionPlugin` instwuction.
 
 {% totem %}
-{% totem-accordion title="Technical Instruction Details - UpdateCollectionPluginV1" %}
+{% totem-accowdion titwe="Technyicaw Instwuction Detaiws - UpdateCowwectionPwuginV1" %}
 
-**Instruction Accounts List**
+**Instwuction Accounts Wist**
 
-| Accounts      | Description                                        |
+| Accounts      | Descwiption                                        |
 | ------------- | -------------------------------------------------- |
-| collection    | The collection to which the Core Asset belongs to. |
-| payer         | The account paying for the storage fees.           |
-| authority     | The authority of the new asset.                    |
-| systemProgram | The System Program account.                        |
-| logWrapper    | The SPL Noop Program.                              |
+| cowwection    | De cowwection to which de Cowe Asset bewongs to~ |
+| payew         | De account paying fow de stowage fees~           |
+| audowity     | De audowity of de nyew asset~                    |
+| systemPwogwam | De System Pwogwam account~                        |
+| wogWwappew    | De SPW Nyoop Pwogwam~                              |
 
-**Instruction Arguments**
+**Instwuction Awguments**
 
-| Args   | Description                    |
+| Awgs   | Descwiption                    |
 | ------ | ------------------------------ |
-| plugin | The plugin you wish to update. |
+| pwugin | De pwugin you wish to update~ |
 
-Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L81).
+Some of de accounts may be abstwacted out and/ow optionyaw in ouw sdks fow ease of use.
+A fuww detaiwed wook at de on chain instwuction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L81).
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
 
-{% seperator h="6" /%}
+{% sepewatow h="6" /%}
 
-{% dialect-switcher title="Updating a Collection Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Updating a Cowwection Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -409,9 +409,9 @@ await updateCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use std::str::FromStr;
@@ -463,5 +463,5 @@ pub async fn update_collection_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
