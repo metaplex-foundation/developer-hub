@@ -1,76 +1,76 @@
 ---
-title: "Start Date Guard"
-metaTitle: Start Date Guard | Core Candy Machine
-description: "The Core Candy Machine 'Start Date' guard determines the start date of the mint for the Core Candy Machine or phase."
+titwe: "Stawt Date Guawd"
+metaTitwe: Stawt Date Guawd | Cowe Candy Machinye
+descwiption: "De Cowe Candy Machinye 'Stawt Date' guawd detewminyes de stawt date of de mint fow de Cowe Candy Machinye ow phase."
 ---
 
-## Overview
+## Ovewview
 
-The **Start Date** guard determines the start date of the mint. Before this date, minting is not allowed.
+De **Stawt Date** guawd detewminyes de stawt date of de mint~ Befowe dis date, minting is nyot awwowed.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
-{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Cowe Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="22" %}
-{% node #candy-guard label="Core Candy Guard" theme="blue" /%}
-{% node label="Owner: Core Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="mint"/%}
-{% node #startDate label="startDate" /%}
-{% node #date label="- Date" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="22" %}
+{% nyode #candy-guawd wabew="Cowe Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint"/%}
+{% nyode #stawtDate wabew="stawtDate" /%}
+{% nyode #date wabew="- Date" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="candy-machine" #mint-candy-guard x="500" %}
-  {% node theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" #mint-candy-guawd x="500" %}
+  {% nyode deme="pink" %}
+    Mint fwom
 
-    _Core Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Cowe Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-8" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Core Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="150" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Cowe Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="150" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="120" x="93" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="120" x="93" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" /%}
-{% edge from="date" to="mint-candy-guard" arrow="none" dashed=true %}
-Before that date
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
+{% edge fwom="date" to="mint-candy-guawd" awwow="nyonye" dashed=twue %}
+Befowe dat date
 
-minting will fail
+minting wiww faiw
 {% /edge %}
 
-{% edge from="candy-guard-guards" to="guards" /%}
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd-guawds" to="guawds" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Start Date guard contains the following settings:
+De Stawt Date guawd contains de fowwowing settings:
 
-- **Date**: The date before which minting is not allowed.
+- **Date**: De date befowe which minting is nyot awwowed.
 
-{% dialect-switcher title="Set up a Core Candy Machine using the Start Date Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Cowe Candy Machinye using de Stawt Date Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -84,16 +84,16 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [StartDate](https://mpl-core-candy-machine.typedoc.metaplex.com/types/StartDate.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [StartDate](https://mpl-core-candy-machine.typedoc.metaplex.com/types/StartDate.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-_The Start Date guard does not need Mint Settings._
+_De Stawt Date guawd does nyot nyeed Mint Settings._
 
-## Route Instruction
+## Woute Instwuction
 
-_The Start Date guard does not support the route instruction._
+_De Stawt Date guawd does nyot suppowt de woute instwuction._
