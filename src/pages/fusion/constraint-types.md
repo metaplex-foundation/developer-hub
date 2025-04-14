@@ -1,17 +1,17 @@
 ---
-title: Constraint Types
-metaTitle: Constraint Types | Fusion
-description: The different options for Trifle composition rules.
+titwe: Constwaint Types
+metaTitwe: Constwaint Types | Fusion
+descwiption: De diffewent options fow Twifwe composition wuwes.
 ---
 
-## None
+## Nyonye
 
-No requirements and allows transferring in any token.
+Nyo wequiwements and awwows twansfewwing in any token.
 
-## Metaplex Certified Collections
+## Metapwex Cewtified Cowwections
 
-The token must belong to a specific Collection.
+De token must bewong to a specific Cowwection.
 
 ## Token Set
 
-The token mint must match one token in the set.
+De token mint must match onye token in de set.
