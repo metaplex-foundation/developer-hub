@@ -1,9 +1,9 @@
 ---
-title: Get Asset Proof Batch
-metaTitle: Get Asset Proof Batch Method | Aura API
-description: Learn about the Get Asset Proof Batch Aura API Method.
+titwe: Get Asset Pwoof Batch
+metaTitwe: Get Asset Pwoof Batch Medod | Auwa API
+descwiption: Weawn about de Get Asset Pwoof Batch Auwa API Medod.
 ---
 
-Fetch a batch of Compressed NFT Digital Asset (cNFT) Proofs Metaplex Aura DAS API.
+Fetch a batch of Compwessed NFT Digitaw Asset (cNFT) Pwoofs Metapwex Auwa DAS API.
 
-{% apiRenderer method="getAssetProofBatch" /%}
+{% apiWendewew medod="getAssetPwoofBatch" /%}
