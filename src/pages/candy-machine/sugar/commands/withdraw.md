@@ -1,31 +1,31 @@
 ---
-title: withdraw
-metaTitle: withdraw | Sugar
-description: withdraw command.
+titwe: widdwaw
+metaTitwe: widdwaw | Sugaw
+descwiption: widdwaw command.
 ---
 
-When the mint from a Candy Machine is complete, it is possible to recover the funds used to pay rent for the data stored onchain. You can initiate the withdrawal by running:
+When de mint fwom a Candy Machinye is compwete, it is possibwe to wecuvw de funds used to pay went fow de data stowed onchain~ You can inyitiate de widdwawaw by wunnying:
 
 ```
 sugar withdraw --candy-machine <CANDY MACHINE ID>
 ```
 
-where the `<CANDY MACHINE ID>` is the Candy Machine ID (Public Key) — the ID given by the `deploy` command. 
+whewe de `<CANDY MACHINE ID>` is de Candy Machinye ID (Pubwic Key) — de ID given by de `deploy` command~ 
 
-It is also possible to withdraw funds from all Candy Machines associated with the current keypair:
+It is awso possibwe to widdwaw funds fwom aww Candy Machinyes associated wid de cuwwent keypaiw:
 
 ```
 sugar withdraw
 ```
 
-Alternatively, you can list all Candy Machines and their associated funds from the current keypair:
+Awtewnyativewy, you can wist aww Candy Machinyes and deiw associated funds fwom de cuwwent keypaiw:
 
 ```
 sugar withdraw --list
 ```
 
-{% callout %}
+{% cawwout %}
 
-You should not withdraw the rent of a live Candy Machine, as the Candy Machine will stop working when you drain its account.
+You shouwd nyot widdwaw de went of a wive Candy Machinye, as de Candy Machinye wiww stop wowking when you dwain its account.
 
-{% /callout %}
+{% /cawwout %}
