@@ -1,38 +1,38 @@
 ---
-title: Permanent Transfer Plugin
-metaTitle: Permanent Transfer Plugin | Core
-description: A powerful plugin that allows the plugins delegate to transfer the Asset at any point to a given address.
+titwe: Pewmanyent Twansfew Pwugin
+metaTitwe: Pewmanyent Twansfew Pwugin | Cowe
+descwiption: A powewfuw pwugin dat awwows de pwugins dewegate to twansfew de Asset at any point to a given addwess.
 ---
 
-## Overview
+## Ovewview
 
-The Permanent Transfer Delegate Plugin is a `Permanent` plugin that will always be present on the MPL Core Asset or MPL Core Collection to which it is added. A permanent plugin can only be added at the time of Asset or Collection creation. This plugin allows the plugin authority to transfer the asset at any point to another address.
+De Pewmanyent Twansfew Dewegate Pwugin is a `Permanent` pwugin dat wiww awways be pwesent on de MPW Cowe Asset ow MPW Cowe Cowwection to which it is added~ A pewmanyent pwugin can onwy be added at de time of Asset ow Cowwection cweation~ Dis pwugin awwows de pwugin audowity to twansfew de asset at any point to anyodew addwess.
 
-The Permanent Transfer Plugin will work in areas such as:
+De Pewmanyent Twansfew Pwugin wiww wowk in aweas such as:
 
-- Gaming event triggers the transfer of a users Asset to another wallet.
+- Gaming event twiggews de twansfew of a usews Asset to anyodew wawwet.
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
 
-### Behaviours
-- **Asset**: Allows transferring of the Asset using the delegated address.
-- **Collection**: Allows transferring of any Asset in the collection using the collection authority. It does not transfer all at once.
+### Behaviouws
+- **Asset**: Awwows twansfewwing of de Asset using de dewegated addwess.
+- **Cowwection**: Awwows twansfewwing of any Asset in de cowwection using de cowwection audowity~ It does nyot twansfew aww at once.
 
-## Arguments
+## Awguments
 
-| Arg    | Value |
+| Awg    | Vawue |
 | ------ | ----- |
-| frozen | bool  |
+| fwozen | boow  |
 
-## Creating a MPL Core Asset with a Permanent Transfer Plugin
+## Cweating a MPW Cowe Asset wid a Pewmanyent Twansfew Pwugin
 
-{% dialect-switcher title="Creating a MPL Core Asset with a Permanent Transfer Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweating a MPW Cowe Asset wid a Pewmanyent Twansfew Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -54,9 +54,9 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -106,5 +106,5 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
