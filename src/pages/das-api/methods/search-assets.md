@@ -1,45 +1,56 @@
 ---
-title: Search Assets
-metaTitle: Search Assets | DAS API
-description: Return the list of assets given a search criteria
+titwe: Seawch Assets
+metaTitwe: Seawch Assets | DAS API
+descwiption: Wetuwn de wist of assets given a seawch cwitewia
 ---
 
-Return the list of assets given a search criteria.
+Wetuwn de wist of assets given a seawch cwitewia.
 
-## Parameters
+## Pawametews
 
-| Name                | Required | Description                                |
+| Nyame                | Wequiwed | Descwiption                                |
 | ------------------- | :------: | ------------------------------------------ |
-| `negate`            |          | Indicates whether the search criteria should be inverted or not.  |
-| `conditionType`     |          | Indicates whether to retrieve all (`"all"`) or any (`"any"`) asset that matches the search criteria.  |
-| `interface`         |          | The interface value (one of `["V1_NFT", "V1_PRINT" "LEGACY_NFT", "V2_NFT", "FungibleAsset", "Custom", "Identity", "Executable"]`).  |
-| `ownerAddress`      |          | The address of the owner.  |
-| `ownerType`         |          | Type of ownership `["single", "token"]`.  |
-| `creatorAddress`    |          | The address of the creator.  |
-| `creatorVerified`   |          | Indicates whether the creator must be verified or not.  |
-| `authorityAddress`  |          | The address of the authority.  |
-| `grouping`          |          | The grouping `["key", "value"]` pair.  |
-| `delegateAddress`   |          | The address of the delegate.  |
-| `frozen`            |          | Indicates whether the asset is frozen or not.  |
-| `supply`            |          | The supply of the asset.  |
-| `supplyMint`        |          | The address of the supply mint.  |
-| `compressed`        |          | Indicates whether the asset is compressed or not.  |
-| `compressible`      |          | Indicates whether the asset is compressible or not.  |
-| `royaltyTargetType` |          | Type of royalty `["creators", "fanout", "single"]`.  |
-| `royaltyTarget`     |          | The target address for royalties.  |
-| `royaltyAmount`     |          | The royalties amount.  |
-| `burnt`             |          | Indicates whether the asset is burnt or not.  |
-| `sortBy`            |          | Sorting criteria. This is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, where `sortBy` is one of `["created", "updated", "recentAction", "id", "none"]` and `sortDirection` is one of `["asc", "desc"]`.     |
-| `limit`             |          | The maximum number of assets to retrieve.  |
-| `page`              |          | The index of the "page" to retrieve.       |
-| `before`            |          | Retrieve assets before the specified ID.   |
-| `after`             |          | Retrieve assets after the specified ID.    |
-| `jsonUri`           |          | The value for the JSON URI.  |
+| `negate`            |          | Indicates whedew de seawch cwitewia shouwd be invewted ow nyot~  |
+| `conditionType`     |          | Indicates whedew to wetwieve aww (`"all"`) ow any (`"any"`) asset dat matches de seawch cwitewia~  |
+| `interface`         |          | De intewface vawue (onye of `["V1_NFT", "V1_PRINT" "LEGACY_NFT", "V2_NFT", "FungibleAsset", "Custom", "Identity", "Executable"]`)~  |
+| `ownerAddress`      |          | De addwess of de ownyew~  |
+| `ownerType`         |          | Type of ownyewship ```sh
+curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
+    "jsonrpc": "2.0",
+    "method": "searchAssets",
+    "params": {
+        "ownerAddress": "N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw",
+        "jsonUri": "https://arweave.net/c9aGs5fOk7gD4wWnSvmzeqgtfxAGRgtI1jYzvl8-IVs/chiaki-violet-azure-common.json",
+        "page": 1
+    },
+    "id": 0
+}'
+```0~  |
+| `creatorAddress`    |          | De addwess of de cweatow~  |
+| `creatorVerified`   |          | Indicates whedew de cweatow must be vewified ow nyot~  |
+| `authorityAddress`  |          | De addwess of de audowity~  |
+| `grouping`          |          | De gwouping `["key", "value"]` paiw~  |
+| `delegateAddress`   |          | De addwess of de dewegate~  |
+| `frozen`            |          | Indicates whedew de asset is fwozen ow nyot~  |
+| `supply`            |          | De suppwy of de asset~  |
+| `supplyMint`        |          | De addwess of de suppwy mint~  |
+| `compressed`        |          | Indicates whedew de asset is compwessed ow nyot~  |
+| `compressible`      |          | Indicates whedew de asset is compwessibwe ow nyot~  |
+| `royaltyTargetType` |          | Type of woyawty `["creators", "fanout", "single"]`~  |
+| `royaltyTarget`     |          | De tawget addwess fow woyawties~  |
+| `royaltyAmount`     |          | De woyawties amount~  |
+| `burnt`             |          | Indicates whedew de asset is buwnt ow nyot~  |
+| `sortBy`            |          | Sowting cwitewia~ Dis is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, whewe `sortBy` is onye of `["created", "updated", "recentAction", "id", "none"]` and `sortDirection` is onye of `["asc", "desc"]`~     |
+| `limit`             |          | De maximum nyumbew of assets to wetwieve~  |
+| `page`              |          | De index of de "page" to wetwieve~       |
+| `before`            |          | Wetwieve assets befowe de specified ID~   |
+| `after`             |          | Wetwieve assets aftew de specified ID~    |
+| `jsonUri`           |          | De vawue fow de JSON UWI~  |
 
-## Example
+## Exampwe
 
-{% dialect-switcher title="searchAssets Example" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="seawchAssets Exampwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -57,23 +68,12 @@ console.log(assets.items.length == 1);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
+{% /diawect %}
+{% diawect titwe="cUWW" id="cuww" %}
 {% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "searchAssets",
-    "params": {
-        "ownerAddress": "N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw",
-        "jsonUri": "https://arweave.net/c9aGs5fOk7gD4wWnSvmzeqgtfxAGRgtI1jYzvl8-IVs/chiaki-violet-azure-common.json",
-        "page": 1
-    },
-    "id": 0
-}'
-```
+UWUIFY_TOKEN_1744632856606_1
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
