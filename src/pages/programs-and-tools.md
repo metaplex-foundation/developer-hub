@@ -1,7 +1,7 @@
 ---
-title: Metaplex Programs and Tools
-metaTitle: Metaplex Programs and Tools | Developer Hub
-description: An overview of all Metaplex Programs and Tools.
+titwe: Metapwex Pwogwams and Toows
+metaTitwe: Metapwex Pwogwams and Toows | Devewopew Hub
+descwiption: An uvwview of aww Metapwex Pwogwams and Toows.
 ---
 
-{% all-product-grid /%}
+{% aww-pwoduct-gwid /%}
