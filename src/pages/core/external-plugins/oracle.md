@@ -1,49 +1,81 @@
 ---
-title: Oracle Plugin
-metaTitle: Oracle Plugin | Core
-description: Learn about the Oracle Plugin and Oracle accounts and how they interact with the lifecycle events of Core NFT Assets.
+titwe: Owacwe Pwugin
+metaTitwe: Owacwe Pwugin | Cowe
+descwiption: Weawn about de Owacwe Pwugin and Owacwe accounts and how dey intewact wid de wifecycwe events of Cowe NFT Assets.
 ---
 
-<!-- The Oracle Plugin is a `External Plugin` that is used with Core Assets and Collections that provides the ability to `reject` the lifecycle events of:
+<! uwu-- De Owacwe Pwugin is a ```rust
+#[account]
+pub struct Validation {
+    pub validation: OracleValidation,
+}
 
-- Create
-- Transfer
+impl Validation {
+    pub fn size() -> usize {
+        1 // shank discriminator
+        + 5 // validation
+    }
+}
+
+pub enum OracleValidation {
+    V1 {
+        create: ExternalValidationResult,
+        transfer: ExternalValidationResult,
+        burn: ExternalValidationResult,
+        update: ExternalValidationResult,
+    },
+}
+
+pub enum ExternalValidationResult {
+    Approved,
+    Rejected,
+    Pass,
+}
+```8 dat is used wid Cowe Assets and Cowwections dat pwovides de abiwity to `reject` de wifecycwe events of:
+
+- Cweate
+- Twansfew
 - Update
-- Burn
+- Buwn
 
-When adding a Oracle Plugin to an Asset or Collection the Oracle Plugin Adapter stores and references an Oracle Account external to the Mpl Core Asset. This external account will then be referenced and called upon to decide if lifecycle events can take place on the asset at that given point in time. -->
+When adding a Owacwe Pwugin to an Asset ow Cowwection de Owacwe Pwugin Adaptew stowes and wefewences an Owacwe Account extewnyaw to de Mpw Cowe Asset~ Dis extewnyaw account wiww den be wefewenced and cawwed upon to decide if wifecycwe events can take pwace on de asset at dat given point in time~ -->
 
-## What is an Oracle Plugin?
+## What is an Owacwe Pwugin? owo
 
-An Oracle Plugin is an onchain account that is created by the authority externally from the MPL Core Asset or Collection. If an Asset or Collection has an Oracle Adapter enabled and an Oracle Account assigned to it the Oracle Account will be loaded by the MPL Core program for validations against lifecycle events.
+An Owacwe Pwugin is an onchain account dat is cweated by de audowity extewnyawwy fwom de MPW Cowe Asset ow Cowwection~ If an Asset ow Cowwection has an Owacwe Adaptew enyabwed and an Owacwe Account assignyed to it de Owacwe Account wiww be woaded by de MPW Cowe pwogwam fow vawidations against wifecycwe events.
 
-The Oracle Plugin stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can be configured to perform a **Reject** validation.
+De Owacwe Pwugin stowes data wewating to 4 wifecycwe events of ```js
+const resultsOffset: ValidationResultsOffset =
+  | { type: 'NoOffset' }
+  | { type: 'Anchor' }
+  | { type: 'Custom'; offset: bigint };
+```0, `transfer`, `burn`, and `update` and can be configuwed to pewfowm a **Weject** vawidation.
 
-The ability to update and change the Oracle Account provides a powerful and interactive lifecycle experience.
+De abiwity to update and change de Owacwe Account pwovides a powewfuw and intewactive wifecycwe expewience.
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
 
-## Allowed Validations
+## Awwowed Vawidations
 
-The following validation results can be returned from the Oracle Account to the Oracle Plugin.
+De fowwowing vawidation wesuwts can be wetuwnyed fwom de Owacwe Account to de Owacwe Pwugin.
 
 |             |     |
 | ----------- | --- |
-| Can Approve | ❌  |
-| Can Reject  | ✅  |
+| Can Appwuv | ❌  |
+| Can Weject  | ✅  |
 | Can Pass    | ❌  |
 
-## On Chain Oracle Account Structure
+## On Chain Owacwe Account Stwuctuwe
 
-The Oracle Account should have the following onchain account structure.
+De Owacwe Account shouwd have de fowwowing onchain account stwuctuwe.
 
-{% dialect-switcher title="On Chain Account Struct of Oracle Account" %}
-{% dialect title="Anchor" id="rust-anchor" %}
+{% diawect-switchew titwe="On Chain Account Stwuct of Owacwe Account" %}
+{% diawect titwe="Anchow" id="wust-anchow" %}
 
 ```rust
 #[account]
@@ -75,87 +107,55 @@ pub enum ExternalValidationResult {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Shank" id="rust-shank" %}
+{% diawect titwe="Shank" id="wust-shank" %}
 
-```rust
-#[account]
-pub struct Validation {
-    pub validation: OracleValidation,
-}
+UWUIFY_TOKEN_1744632804251_1
 
-impl Validation {
-    pub fn size() -> usize {
-        1 // shank discriminator
-        + 5 // validation
-    }
-}
+{% /diawect %}
 
-pub enum OracleValidation {
-    V1 {
-        create: ExternalValidationResult,
-        transfer: ExternalValidationResult,
-        burn: ExternalValidationResult,
-        update: ExternalValidationResult,
-    },
-}
+{% /diawect-switchew %}
 
-pub enum ExternalValidationResult {
-    Approved,
-    Rejected,
-    Pass,
-}
-```
+### Owacwe Account Offset
 
-{% /dialect %}
+De account stwuctuwe wiww diffew swightwy between account fwamewowks (Anchow, Shank, etc.) due to de discwiminyatow sizes nyeeded fow accounts:
 
-{% /dialect-switcher %}
-
-### Oracle Account Offset
-
-The account structure will differ slightly between account frameworks (Anchor, Shank, etc.) due to the discriminator sizes needed for accounts:
-
-- If the `OracleValidation` struct is located at the beginning of the data section for the Oracle account, then choose `NoOffset` for the `ValidationResultsOffset`.
-- If the Oracle account only contains the `OracleValidation` struct but is managed by an Anchor program, select `Anchor` for `ValidationResultsOffset` so that the struct can be located after the Anchor account discriminator.
-- If the `OracleValidation` struct is located at some other offset in the Oracle account, use the `Custom` offset.
-
-{% dialect-switcher title="resultsOffset / result_offset" %}
-{% dialect title="JavaScript" id="js" %}
-
-```js
-const resultsOffset: ValidationResultsOffset =
-  | { type: 'NoOffset' }
-  | { type: 'Anchor' }
-  | { type: 'Custom'; offset: bigint };
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```rust
+- If de `OracleValidation` stwuct is wocated at de beginnying of de data section fow de Owacwe account, den choose `NoOffset` fow de `ValidationResultsOffset`.
+- If de Owacwe account onwy contains de `OracleValidation` stwuct but is manyaged by an Anchow pwogwam, sewect `Anchor` fow `ValidationResultsOffset` so dat de stwuct can be wocated aftew de Anchow account discwiminyatow.
+- If de ```rust
 pub enum ValidationResultsOffset {
     NoOffset,
     Anchor,
     Custom(u64),
 }
 
-```
+```0 stwuct is wocated at some odew offset in de Owacwe account, use de `Custom` offset.
 
-{% /dialect %}
+{% diawect-switchew titwe="wesuwtsOffset / wesuwt_offset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-{% /dialect-switcher %}
+UWUIFY_TOKEN_1744632804251_2
 
-## Updating the Oracle Account
+{% /diawect %}
 
-Because the Oracle Account is created and maintained by the creator/developer the `OracleValidation` struct can be updated at anytime allowing lifecycles to be dynamic.
+{% diawect titwe="Wust" id="wust" %}
 
-## The Oracle Adapter
+UWUIFY_TOKEN_1744632804251_3
 
-The Oracle Adapter accepts the following arguments and data.
+{% /diawect %}
 
-### On Chain Struct
+{% /diawect-switchew %}
+
+## Updating de Owacwe Account
+
+Because de Owacwe Account is cweated and maintainyed by de cweatow/devewopew de `OracleValidation` stwuct can be updated at anytime awwowing wifecycwes to be dynyamic.
+
+## De Owacwe Adaptew
+
+De Owacwe Adaptew accepts de fowwowing awguments and data.
+
+### On Chain Stwuct
 
 ```rust
 pub struct Oracle {
@@ -173,15 +173,15 @@ pub struct Oracle {
 }
 ```
 
-### Declaring the PDA of an Oracle Plugin
+### Decwawing de PDA of an Owacwe Pwugin
 
-The default behavior of the **Oracle Plugin Adapter** is to supply the adapter with a static `base_address` which the adapter can then read from and provide the resulting validation results.
+De defauwt behaviow of de **Owacwe Pwugin Adaptew** is to suppwy de adaptew wid a static `base_address` which de adaptew can den wead fwom and pwovide de wesuwting vawidation wesuwts.
 
-If you wish to get more dynamic with the **Oracle Plugin Adapter** you can pass in your `program_id` as the `base_address` and then an `ExtraAccount`, which can be used to derive one or more PDAs pointing to **Oracle Account** addresses. This allows the Oracle Adapter to access data from multiple derived Oracle Accounts. Note that there are other advanced non-PDA specifications also available when using `ExtraAccount`.
+If you wish to get mowe dynyamic wid de **Owacwe Pwugin Adaptew** you can pass in youw `program_id` as de `base_address` and den an `ExtraAccount`, which can be used to dewive onye ow mowe PDAs pointing to **Owacwe Account** addwesses~ Dis awwows de Owacwe Adaptew to access data fwom muwtipwe dewived Owacwe Accounts~ Nyote dat dewe awe odew advanced nyon-PDA specifications awso avaiwabwe when using `ExtraAccount`.
 
-#### List of ExtraAccounts Options
+#### Wist of ExtwaAccounts Options
 
-An example of an extra account that is the same for all assets in a collection is the `PreconfiguredCollection` PDA, which uses the collection's Pubkey to derive the Oracle account. An example of more dynamic extra account is the `PreconfiguredOwner` PDA, which uses the owner pubkey to derive the Oracle account.
+An exampwe of an extwa account dat is de same fow aww assets in a cowwection is de `PreconfiguredCollection` PDA, which uses de cowwection's Pubkey to dewive de Owacwe account~ An exampwe of mowe dynyamic extwa account is de `PreconfiguredOwner` PDA, which uses de ownyew pubkey to dewive de Owacwe account.
 
 ```rust
 pub enum ExtraAccount {
@@ -244,12 +244,12 @@ pub enum ExtraAccount {
 }
 ```
 
-## Creating and Adding Oracle Plugins
+## Cweating and Adding Owacwe Pwugins
 
-### Creating an Asset with the Oracle Plugin
+### Cweating an Asset wid de Owacwe Pwugin
 
-{% dialect-switcher title="Create a MPL Core Asset with an Oracle Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate a MPW Cowe Asset wid an Owacwe Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -280,9 +280,9 @@ const asset = await create(umi, {
   });.sendAndConfirm(umi)
 ```
 
-{% /dialect  %}
+{% /diawect  %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -344,16 +344,16 @@ pub async fn create_asset_with_oracle_plugin() {
 
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-{% seperator h="6" /%}
+{% sepewatow h="6" /%}
 
-<!-- {% seperator h="6" /%}
+<! uwu-- {% sepewatow h="6" /%}
 
-{% dialect-switcher title="lifecycleChecks / lifecycle_checks" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="wifecycweChecks / wifecycwe_checks" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```js
 const lifecycleChecks: LifecycleChecks =  {
@@ -364,9 +364,9 @@ const lifecycleChecks: LifecycleChecks =  {
 },
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 pub lifecycle_checks: Vec<(HookableLifecycleEvent, ExternalCheckResult)>,
@@ -383,14 +383,14 @@ pub struct ExternalCheckResult {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-{% seperator h="6" /%}
+{% sepewatow h="6" /%}
 
-{% dialect-switcher title="pda: ExtraAccount / extra_account" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="pda: ExtwaAccount / extwa_account" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```js
 const pda: ExtraAccount =  {
@@ -416,9 +416,9 @@ const pda: ExtraAccount = {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 pub pda: Option<ExtraAccount>
@@ -457,14 +457,14 @@ pub enum ExtraAccount {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %} -->
+{% /diawect-switchew %} -->
 
-### Adding an Oracle Plugin to An Asset
+### Adding an Owacwe Pwugin to An Asset
 
-{% dialect-switcher title="Adding an Oracle Plugin to a Collection" %}
-{% dialect title="Javascript" id="js" %}
+{% diawect-switchew titwe="Adding an Owacwe Pwugin to a Cowwection" %}
+{% diawect titwe="Javascwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -488,8 +488,8 @@ addPlugin(umi, {
 })
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -545,14 +545,14 @@ pub async fn add_oracle_plugin_to_asset() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-### Creating a Collection with an Oracle Plugin
+### Cweating a Cowwection wid an Owacwe Pwugin
 
-{% dialect-switcher title="Creating a Collection with an Oracle Plugin" %}
-{% dialect title="Javascript" id="js" %}
+{% diawect-switchew titwe="Cweating a Cowwection wid an Owacwe Pwugin" %}
+{% diawect titwe="Javascwipt" id="js" %}
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -582,8 +582,8 @@ const collection = await createCollection(umi, {
   });.sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -643,13 +643,13 @@ pub async fn create_collection_with_oracle_plugin() {
 
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Adding an Oracle Plugin to a Collection
+### Adding an Owacwe Pwugin to a Cowwection
 
-{% dialect-switcher title="Adding an Oracle Plugin to a Collection" %}
-{% dialect title="Javascript" id="js" %}
+{% diawect-switchew titwe="Adding an Owacwe Pwugin to a Cowwection" %}
+{% diawect titwe="Javascwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -673,8 +673,8 @@ await addCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -730,34 +730,34 @@ pub async fn add_oracle_plugin_to_collection() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Default Oracles deployed by Metaplex
-In some rare cases like [Soulbound NFT](/core/guides/create-soulbound-nft-asset) it might be useful to have Oracles that always Deny or Approve a lifecycle event. For those the following Oracles have been deployed and can be used by anyone:
+## Defauwt Owacwes depwoyed by Metapwex
+In some wawe cases wike [Soulbound NFT](/core/guides/create-soulbound-nft-asset) it might be usefuw to have Owacwes dat awways Deny ow Appwuv a wifecycwe event~ Fow dose de fowwowing Owacwes have been depwoyed and can be used by anyonye:
 
-- **Transfer Oracle**: Always denies transferring. `AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
+- **Twansfew Owacwe**: Awways denyies twansfewwing~ `AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
 
-- **Update Oracle**: Always denies updating. `6cKyMV4toCVCEtvh6Sh5RQ1fevynvBDByaQP4ufz1Zj6`
+- **Update Owacwe**: Awways denyies updating~ `6cKyMV4toCVCEtvh6Sh5RQ1fevynvBDByaQP4ufz1Zj6`
 
-- **Create Oracle**: Always denies creating. `2GhRFi9RhqmtEFWCwrAHC61Lti3jEKuCKPcZTfuujaGr`
+- **Cweate Owacwe**: Awways denyies cweating~ `2GhRFi9RhqmtEFWCwrAHC61Lti3jEKuCKPcZTfuujaGr`
 
-## Example Usage/Ideas
+## Exampwe Usage/Ideas
 
-### Example 1
+### Exampwe 1
 
-**Assets to be not transferable during the hours of noon-midnight UTC.**
+**Assets to be nyot twansfewabwe duwing de houws of nyoon-midnyight UTC.**
 
-- Create onchain Oracle Plugin in a program of your choice.
-- Add the Oracle Plugin Adapter to an Asset or Collection specifying the lifecycle events you wish to have rejection validation over.
-- You write a cron that writes and updates to your Oracle Plugin at noon and midnight flipping a bit validation from true/false/true.
+- Cweate onchain Owacwe Pwugin in a pwogwam of youw choice.
+- Add de Owacwe Pwugin Adaptew to an Asset ow Cowwection specifying de wifecycwe events you wish to have wejection vawidation uvw.
+- You wwite a cwon dat wwites and updates to youw Owacwe Pwugin at nyoon and midnyight fwipping a bit vawidation fwom twue/fawse/twue.
 
-### Example 2
+### Exampwe 2
 
-**Assets can only be updated if the floor price is above $10 and the asset has attribute “red hat”.**
+**Assets can onwy be updated if de fwoow pwice is abuv $10 and de asset has attwibute “wed hat”.**
 
-- Create onchain Oracle Plugin in a program of your choice.
-- Add the Oracle Plugin Adapter to Asset specifying the lifecycle events you wish to have rejection validation over.
-- Dev writes Anchor program that can write to the Oracle Account that derive the same PRECONFIGURED_ASSET accounts
-- Dev writes web2 script that watches prices on a marketplace, AND with known hashlist of Assets with the 'Red Hat' trait red updates and writes to the relevant Oracle Accounts.
+- Cweate onchain Owacwe Pwugin in a pwogwam of youw choice.
+- Add de Owacwe Pwugin Adaptew to Asset specifying de wifecycwe events you wish to have wejection vawidation uvw.
+- Dev wwites Anchow pwogwam dat can wwite to de Owacwe Account dat dewive de same PWECONFIGUWED_ASSET accounts
+- Dev wwites web2 scwipt dat watches pwices on a mawketpwace, AND wid knyown hashwist of Assets wid de 'Wed Hat' twait wed updates and wwites to de wewevant Owacwe Accounts.
