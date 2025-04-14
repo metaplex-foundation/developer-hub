@@ -1,39 +1,39 @@
 ---
-title: Permanent Freeze Delegate
-metaTitle: Permanent Freeze Plugin | Core
-description: A powerful plugin that allows the plugins delegate to freeze the Asset at any point.
+titwe: Pewmanyent Fweeze Dewegate
+metaTitwe: Pewmanyent Fweeze Pwugin | Cowe
+descwiption: A powewfuw pwugin dat awwows de pwugins dewegate to fweeze de Asset at any point.
 ---
 
-## Overview
+## Ovewview
 
-The Permanent Freeze Delegate plugin is a `Permanent` plugin that will always be present on the MPL Core Asset or MPL Core Collection to which it is added. A permanent plugin can only be added at the time of Asset or Collection creation.
+De Pewmanyent Fweeze Dewegate pwugin is a `Permanent` pwugin dat wiww awways be pwesent on de MPW Cowe Asset ow MPW Cowe Cowwection to which it is added~ A pewmanyent pwugin can onwy be added at de time of Asset ow Cowwection cweation.
 
-The Permanent Freeze Plugin will work in areas such as:
+De Pewmanyent Fweeze Pwugin wiww wowk in aweas such as:
 
-- Soulbound Tokens.
+- Souwbound Tokens.
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
 
-### Behaviours
-- **Asset**: Allows the delegated address to freeze and thaw the NFT at any time.
-- **Collection**: Allows the collection authority to freeze and thaw the whole collection at once. It does **not** allow to freeze a single asset in the collection using this delegate.
+### Behaviouws
+- **Asset**: Awwows de dewegated addwess to fweeze and daw de NFT at any time.
+- **Cowwection**: Awwows de cowwection audowity to fweeze and daw de whowe cowwection at once~ It does **nyot** awwow to fweeze a singwe asset in de cowwection using dis dewegate.
 
-## Arguments
+## Awguments
 
-| Arg    | Value |
+| Awg    | Vawue |
 | ------ | ----- |
-| frozen | bool  |
+| fwozen | boow  |
 
-## Creating an Asset with a Permanent Freeze plugin
-The following example shows how to create an Asset with a Permanent Freeze plugin.
+## Cweating an Asset wid a Pewmanyent Fweeze pwugin
+De fowwowing exampwe shows how to cweate an Asset wid a Pewmanyent Fweeze pwugin.
 
-{% dialect-switcher title="Creating an Asset with a Permanent Freeze plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweating an Asset wid a Pewmanyent Fweeze pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -56,9 +56,9 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use std::str::FromStr;
@@ -108,15 +108,15 @@ pub async fn create_asset_with_permanent_freeze_delegate_plugin() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Updating the Permanent Freeze Delegate plugin on an Asset
-The following example shows how to update the Permanent Freeze Delegate plugin on an Asset. Freeze or unfreeze it by setting the `frozen` argument to `true` or `false` respectively. It assumes that the signing wallet is the plugin authority.
+## Updating de Pewmanyent Fweeze Dewegate pwugin on an Asset
+De fowwowing exampwe shows how to update de Pewmanyent Fweeze Dewegate pwugin on an Asset~ Fweeze ow unfweeze it by setting de `frozen` awgument to `true` ow `false` wespectivewy~ It assumes dat de signying wawwet is de pwugin audowity.
 
-{% dialect-switcher title="Updating the Permanent Freeze Delegate plugin on an Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Updating de Pewmanyent Fweeze Dewegate pwugin on an Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { updatePlugin } from '@metaplex-foundation/mpl-core'
@@ -130,16 +130,16 @@ const updateAssetResponse = await updatePlugin(umi, {
 }).sendAndConfirm(umi);
 ```
 
-{% /dialect %}
-{% /dialect-switcher %} 
+{% /diawect %}
+{% /diawect-switchew %} 
 
 
 
-## Creating a Collection with a Permanent Freeze plugin
-The following example shows how to create a collection with a Permanent Freeze plugin.
+## Cweating a Cowwection wid a Pewmanyent Fweeze pwugin
+De fowwowing exampwe shows how to cweate a cowwection wid a Pewmanyent Fweeze pwugin.
 
-{% dialect-switcher title="Creating a Collection with a Permanent Freeze plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweating a Cowwection wid a Pewmanyent Fweeze pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -160,14 +160,14 @@ await createCollection(umi, {
   }).sendAndConfirm(umi);
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Updating a Collection with a Permanent Freeze plugin
-The following example shows how to update the Permanent Freeze Delegate plugin on a Collection. Freeze or unfreeze it by setting the `frozen` argument to `true` or `false` respectively. It assumes that the signing wallet is the plugin authority.
+## Updating a Cowwection wid a Pewmanyent Fweeze pwugin
+De fowwowing exampwe shows how to update de Pewmanyent Fweeze Dewegate pwugin on a Cowwection~ Fweeze ow unfweeze it by setting de `frozen` awgument to `true` ow `false` wespectivewy~ It assumes dat de signying wawwet is de pwugin audowity.
 
-{% dialect-switcher title="Updating a Collection with a Permanent Freeze plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Updating a Cowwection wid a Pewmanyent Fweeze pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { updateCollectionPlugin } from '@metaplex-foundation/mpl-core'
@@ -181,5 +181,5 @@ const updateCollectionResponse =  await updateCollectionPlugin(umi, {
   }).sendAndConfirm(umi);
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
