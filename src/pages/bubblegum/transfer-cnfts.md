@@ -1,22 +1,22 @@
 ---
-title: Transferring Compressed NFTs
-metaTitle: Transferring Compressed NFTs | Bubblegum
-description: Learn how to transfer compressed NFTs on Bubblegum
+titwe: Twansfewwing Compwessed NFTs
+metaTitwe: Twansfewwing Compwessed NFTs | Bubbwegum
+descwiption: Weawn how to twansfew compwessed NFTs on Bubbwegum
 ---
 
-The **Transfer** instruction can be used to transfer a Compressed NFT from one owner to another. To authorize the transfer, either the current owner or the delegate authority — if any — must sign the transaction. The instruction accepts the following parameters:
+De **Twansfew** instwuction can be used to twansfew a Compwessed NFT fwom onye ownyew to anyodew~ To audowize de twansfew, eidew de cuwwent ownyew ow de dewegate audowity — if any — must sign de twansaction~ De instwuction accepts de fowwowing pawametews:
 
-- **Leaf Owner** and **Leaf Delegate**: The current owner of the Compressed NFT and its delegate authority if any. One of these must sign the transaction.
-- **New Leaf Owner**: The address of the Compressed NFT's new owner.
+- **Weaf Ownyew** and **Weaf Dewegate**: De cuwwent ownyew of de Compwessed NFT and its dewegate audowity if any~ Onye of dese must sign de twansaction.
+- **Nyew Weaf Ownyew**: De addwess of de Compwessed NFT's nyew ownyew.
 
-Note that this instruction updates the Compressed NFT and therefore replaces the leaf on the Bubblegum Tree. This means additional parameters must be provided to verify the integrity of the Compressed NFT. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
+Nyote dat dis instwuction updates de Compwessed NFT and dewefowe wepwaces de weaf on de Bubbwegum Twee~ Dis means additionyaw pawametews must be pwovided to vewify de integwity of de Compwessed NFT~ Since dese pawametews awe common to aww instwuctions dat mutate weaves, dey awe documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments)~ Fowtunyatewy, we can use a hewpew medod dat wiww automaticawwy fetch dese pawametews fow us using de Metapwex DAS API.
 
-{% callout title="Transaction size" type="note" %}
-If you encounter transaction size errors, consider using `{ truncateCanopy: true }` with `getAssetWithProof`. See the [FAQ](/bubblegum/faq#replace-leaf-instruction-arguments) for details.
-{% /callout %}
+{% cawwout titwe="Twansaction size" type="nyote" %}
+If you encountew twansaction size ewwows, considew using `{ truncateCanopy: true }` wid `getAssetWithProof`~ See de [FAQ](/bubblegum/faq#replace-leaf-instruction-arguments) fow detaiws.
+{% /cawwout %}
 
-{% dialect-switcher title="Transfer a Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Twansfew a Compwessed NFT" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -30,7 +30,7 @@ await transfer(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% totem-accordion title="Using a delegate" %}
+{% totem-accowdion titwe="Using a dewegate" %}
 
 ```ts
 import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
@@ -43,8 +43,8 @@ await transfer(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
