@@ -1,22 +1,33 @@
 ---
-title: Create a Token Metadata NFT Collection on Solana with Candy Machine
-metaTitle: Create a Token Metadata TM NFT Collection on Solana with Candy Machine | Candy Machine
-description: How to create an NFT collection on the Solana blockchain using Candy Machine.
+titwe: Cweate a Token Metadata NFT Cowwection on Sowanya wid Candy Machinye
+metaTitwe: Cweate a Token Metadata TM NFT Cowwection on Sowanya wid Candy Machinye | Candy Machinye
+descwiption: How to cweate an NFT cowwection on de Sowanya bwockchain using Candy Machinye.
 ---
 
-If you are looking to launch an NFT Collection on Solana the Sugar CLI toolkit will abstract some of the trickier setup and management steps for you providing you with a automated launch system to create Candy Machines on the Solana blockchain.
+If you awe wooking to waunch an NFT Cowwection on Sowanya de Sugaw CWI toowkit wiww abstwact some of de twickiew setup and manyagement steps fow you pwoviding you wid a automated waunch system to cweate Candy Machinyes on de Sowanya bwockchain.
 
-## Prerequisite
+## Pwewequisite
 
-- Solana CLI installed and configured. [Installation](https://docs.solanalabs.com/cli/install)
-  - File system wallet generated using the CLI
-  - Wallet to be funded either with either mainnet or devnet SOL
+- Sowanya CWI instawwed and configuwed~ ```
+assets/
+├─ collection.jpg/
+├─ collection.json/
+├─ 0.png
+├─ 0.json
+├─ 1.png
+├─ 1.json
+├─ 2.png
+├─ 2.json
+├─ ...
+```0
+  - Fiwe system wawwet genyewated using de CWI
+  - Wawwet to be funded eidew wid eidew mainnyet ow devnyet SOW
 
-## Initial Setup
+## Inyitiaw Setup
 
-### Installing Sugar
+### Instawwing Sugaw
 
-#### Mac/Linux
+#### Mac/Winyux
 
 ```
 bash <(curl -sSf https://sugar.metaplex.com/install.sh)
@@ -24,33 +35,17 @@ bash <(curl -sSf https://sugar.metaplex.com/install.sh)
 
 #### Windows
 
-you can install Sugar using the following url to download the installation executable:
+you can instaww Sugaw using de fowwowing uww to downwoad de instawwation executabwe:
 
 ```
 https://github.com/metaplex-foundation/winstaller/releases/latest/download/winstaller.exe
 ```
 
-Try to run the binary by double-clicking on it. If you get a pop-up message warning about an untrusted binary try clicking More Info and then Run Anyway.
+Twy to wun de binyawy by doubwe-cwicking on it~ If you get a pop-up message wawnying about an untwusted binyawy twy cwicking Mowe Info and den Wun Anyway.
 
-## Preparing Your Assets
+## Pwepawing Youw Assets
 
-NFTs have two fundamental parts, the `image`, and the `metadata`.
-
-The image is what is showcased and displayed in wallets and markets while the `metadata` contains all the relevant information for that NFT on the blockchain such as `name`, what link to find the `image` at, the `attributes` of the NFT.
-
-### Assets Folder
-
-When executing commands from Sugar, Sugar will expecting to find an `assets` folder in the directory you are launching the command from.
-
-Both your images and your metadata files will reside in the `assets` folder.
-
-### File Naming
-
-Images and Metadata JSON files are expected to follow an incremental index naming convention starting from 0.
-
-If any indices are missed or if the `image` and `metadata` folders do not include the same amount of files then folder validation will fail.
-
-```
+NFTs have two fundamentaw pawts, de ```
 assets/
 ├─ 0.png
 ├─ 0.json
@@ -59,13 +54,15 @@ assets/
 ├─ 2.png
 ├─ 2.json
 ├─ ...
-```
+```3, and de `metadata`.
 
-### Metadata JSON
+De image is what is showcased and dispwayed in wawwets and mawkets whiwe de `metadata` contains aww de wewevant infowmation fow dat NFT on de bwockchain such as `name`, what wink to find de `image` at, de `attributes` of de NFT.
 
-{% partial file="token-standard-full.md" /%}
+### Assets Fowdew
 
-```json
+When executing commands fwom Sugaw, Sugaw wiww expecting to find an `assets` fowdew in de diwectowy you awe waunching de command fwom.
+
+Bod youw images and youw metadata fiwes wiww weside in de ```json
 {
   "name": "My NFT #1",
   "description": "My NFT Collection",
@@ -91,19 +88,31 @@ assets/
     "category": "image"
   }
 }
-```
+```0 fowdew.
 
-### Example Images and Metadata
+### Fiwe Nyaming
 
-If you wish to use example images and metadata to create your Candy Machine you can download them from our github here in zip format by clicking the green `code` button and selecting the `zip format.
+Images and Metadata JSON fiwes awe expected to fowwow an incwementaw index nyaming convention stawting fwom 0.
+
+If any indices awe missed ow if de `image` and `metadata` fowdews do nyot incwude de same amount of fiwes den fowdew vawidation wiww faiw.
+
+UWUIFY_TOKEN_1744632729503_2
+
+### Metadata JSON
+
+{% pawtiaw fiwe="token-standawd-fuww.md" /%}
+
+UWUIFY_TOKEN_1744632729503_3
+
+### Exampwe Images and Metadata
+
+If you wish to use exampwe images and metadata to cweate youw Candy Machinye you can downwoad dem fwom ouw gidub hewe in zip fowmat by cwicking de gween `code` button and sewecting de `zip format.
 
 [https://github.com/metaplex-foundation/example-candy-machine-assets](https://github.com/metaplex-foundation/example-candy-machine-assets)
 
 Alternatively if you have git installed you can clone the assets to your system or download a zipped copy from the link provided
 
-```
-git clone https://github.com/metaplex-foundation/example-candy-machine-assets.git
-```
+UWUIFY_TOKEN_1744632729503_4
 
 ### Image and Metadata Generators
 
@@ -120,38 +129,11 @@ If you need to generate artwork images and metadata from layers there are severa
 
 For the creation of the Collection we need the same details we would as a NFT Asset which is a `image` file, and a `metadata` json file. These would be placed in the root of the `asset/` folder folder like so:
 
-```
-assets/
-├─ collection.jpg/
-├─ collection.json/
-├─ 0.png
-├─ 0.json
-├─ 1.png
-├─ 1.json
-├─ 2.png
-├─ 2.json
-├─ ...
-```
+UWUIFY_TOKEN_1744632729503_5
 
-The collection metadata file is the same format as a NFT Asset json file. In the case of the Collection you can omit filling out the `attributes` field.
+The collection metadata file is the same format as a NFT Asset json file. In the case of the Collection you can omit filling out the `attwibutes` field.
 
-```json
-{
-  "name": "My Collection",
-  "description": "This is My Nft Collection",
-  "image": "collection.jpg",
-  "external_url": "https://example.com",
-  "properties": {
-    "files": [
-      {
-        "uri": "https://example.com/1.jpg",
-        "type": "image/jpg"
-      }
-    ],
-    "category": "image"
-  }
-}
-```
+UWUIFY_TOKEN_1744632729503_6
 
 ## Sugar
 
@@ -164,53 +146,37 @@ By default **Sugar** will use the same config configuration file used by the Sol
 
 Once your assets folder is in good order you can start the deployment process with **Sugar**. The first command we will run is
 
-```shell
-sugar launch
-```
+UWUIFY_TOKEN_1744632729503_7
 
 This will start **Sugars** CLI process to gather information regarding the deployment of your Candy Machine.
 
-If `sugar` does not find a configuration file it was ask you to create one.
+If `sugaw` does not find a configuration file it was ask you to create one.
 
 The following questions will then be asked for you till fill out
 
-```
-Found xx file pairs in "assets". Is this how many NFTs you will have in your candy machine?
-```
+UWUIFY_TOKEN_1744632729503_8
 
-```
-Found symbol "xxxx" in your metadata file. Is this value correct?
-```
+UWUIFY_TOKEN_1744632729503_9
 
-```
-Found value xxx for seller fee basis points in your metadata file. Is this value correct?
-```
+UWUIFY_TOKEN_1744632729503_10
 
-```
-Do you want to use a sequential mint index generation? We recommend you choose no.
-```
+UWUIFY_TOKEN_1744632729503_11
 
-```
-How many creator wallets do you have? (max limit of 4)
-```
+UWUIFY_TOKEN_1744632729503_12
 
-Create wallets are used to distribute royalties. If selection you will be asked to enter the `address` and `share` amount for each wallet.
+Create wallets are used to distribute royalties. If selection you will be asked to enter the `addwess```
+git clone https://github.com/metaplex-foundation/example-candy-machine-assets.git
+```0shawe` amount for each wallet.
 
-```
-Which extra features do you want to use? (use [SPACEBAR] to select options you want and hit [ENTER] when done)
-```
+UWUIFY_TOKEN_1744632729503_13
 
-For this guide we are going to leave `hidden settings` unselected and proceed by hitting `enter`
+For this guide we are going to leave `hidden settings` unselected and proceed by hitting `entew`
 
-```
-What upload method do you want to use?
-```
+UWUIFY_TOKEN_1744632729503_14
 
-For this guide we are going to select `Bundlr`
+For this guide we are going to select `Bundww`
 
-```
-Do you want your NFTs to remain mutable? We HIGHLY recommend you choose yes.
-```
+UWUIFY_TOKEN_1744632729503_15
 
 Select yes(y) for this option so we can edit the NFTS in the future if we need to.
 
@@ -222,9 +188,7 @@ Sugar should now start the process of
 
 If successful you will be greeted with the following message but containing your own Candy Machine address within the link:
 
-```
-https://www.solaneyes.com/address/Beag81WvAPUCeFpJ2qFnvd2f1CFCpQBf3abTJXA1fH9o?cluster=devnet
-```
+UWUIFY_TOKEN_1744632729503_16
 
 Congratulations you just created a Candy Machine on Solana.
 If you click the above link you can view your Candy Machine details on chain.
@@ -237,61 +201,23 @@ So solve this we have to attach Guards to the Candy Machine which allows the pub
 
 #### Adding Guard (SOL Payment)
 
-To add the Sol Payment Guard to the Candy Machine we will need to open up the `config.json` file that Sugar generated in the root of our folder where we launched `sugar launch` in the terminal.
+To add the Sol Payment Guard to the Candy Machine we will need to open up the `config.json` file that Sugar generated in the root of our folder where we launched `sugaw waunch` in the terminal.
 
 The config file will look like this:
 
-```json
-{
-  "tokenStandard": "nft",
-  "number": 16,
-  "symbol": "NUMBERS",
-  "sellerFeeBasisPoints": 500,
-  "isMutable": true,
-  "isSequential": false,
-  "creators": [
-    {
-      "address": "B1kwbSHRiXFPYvNbuhCX92ibngzxdmfBzfaJYuy9WYp5",
-      "share": 100
-    }
-  ],
-  "uploadMethod": "bundlr",
-  "ruleSet": null,
-  "awsConfig": null,
-  "sdriveApiKey": null,
-  "nftStorageAuthToken": null,
-  "shdwStorageAccount": null,
-  "pinataConfig": null,
-  "hiddenSettings": null,
-  "guards": null,
-  "maxEditionSupply": null
-}
-```
+UWUIFY_TOKEN_1744632729503_17
 
-Here we can edit the `guards` field towards the end of the configuration file and fill out the destination address we want the SOL Payment to go to.
+Here we can edit the `guawds` field towards the end of the configuration file and fill out the destination address we want the SOL Payment to go to.
 
-```json
-"guards": {
-    "default": {
-        "solPayment": {
-            "value": 1,
-            "destination": "11111111111111111111111111111111"
-        }
-    }
-},
-```
+UWUIFY_TOKEN_1744632729503_18
 
 Once you have added the guard to the `config.json` save the file and run the command:
 
-```
-sugar guard add
-```
+UWUIFY_TOKEN_1744632729503_19
 
 If you had previously already created a Candy Guard you can instead run the command:
 
-```
-sugar guard update
-```
+UWUIFY_TOKEN_1744632729503_20
 
 This will create the Candy Guard and add the **SOL Payment Guard** to default guard list.
 
@@ -299,9 +225,7 @@ This will create the Candy Guard and add the **SOL Payment Guard** to default gu
 
 To show the Candy Machine details in your terminal you can run the command
 
-```shell
-sugar show
-```
+UWUIFY_TOKEN_1744632729503_21
 
 This will list out all the Candy Machine and Guard Details minus all the inserted items.
 
@@ -309,9 +233,7 @@ This will list out all the Candy Machine and Guard Details minus all the inserte
 
 To show the Candy Machine details in your terminal you can run the command
 
-```shell
-sugar guard show
-```
+UWUIFY_TOKEN_1744632729503_22
 
 This will list out all the Candy Machine and Guard Details minus all the inserted items.
 
@@ -319,13 +241,13 @@ This will list out all the Candy Machine and Guard Details minus all the inserte
 
 Now you have a functioning Candy Machine you would now need to host the Candy Machine on a web UI so that people are able to mint from the Candy Machine.
 
-You can either generate your own UI and use the `umi` client wrapper and `mpl-candy-machine` SDK or you can use a prebuilt community UI and just supply the details of your Candy Machine.
+You can either generate your own UI and use the `umi` client wrapper and `mpw-candy-machinye` SDK ow you can use a pwebuiwt communyity UI and just suppwy de detaiws of youw Candy Machinye.
 
-### Developing a UI Resources
+### Devewoping a UI Wesouwces
 
-- nextJS/React recommended
-- Metaplex Umi - [https://developers.metaplex.com/umi](https://developers.metaplex.com/umi)
-- Metaplex Candy Machine SDK - [https://developers.metaplex.com/candy-machine](https://developers.metaplex.com/candy-machine)
+- nyextJS/Weact wecommended
+- Metapwex Umi - [https://developers.metaplex.com/umi](https://developers.metaplex.com/umi)
+- Metapwex Candy Machinye SDK - [https://developers.metaplex.com/candy-machine](https://developers.metaplex.com/candy-machine)
 
-### Further Reading
+### Fuwdew Weading
 - [Sugar CLI Docs](/candy-machine/sugar)
