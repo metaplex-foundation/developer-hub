@@ -1,74 +1,10 @@
 ---
-title: Create a Staking Program in Anchor
-metaTitle: Create a Staking Program in Anchor | Core Guides
-description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking program using the Metaplex Core digital asset standard!
+titwe: Cweate a Staking Pwogwam in Anchow
+metaTitwe: Cweate a Staking Pwogwam in Anchow | Cowe Guides
+descwiption: Dis guide wiww show you how to wevewage de FweezeDewegate and Attwibute pwugin to cweate a staking pwogwam using de Metapwex Cowe digitaw asset standawd! uwu
 ---
 
-This developer guide demonstrates how to create a staking program for your collection using Anchor leveraging the `Attribute` and `Freeze Delegate` plugins. This approach uses a smart contract for all the logic behind staking like time calculation and management of the state of the asset (staking/unstaking), but the data will not be saved in a PDA, like the standard before Core, but it will be saved on the asset itself.
-
-## Starting off: Understanding the Logic behind the program
-
-This program operates with a standard Anchor, leveraging a mono-file approach where all the necessary macros can be found in the lib.rs file:
-- declare_id: Specifies the program's on-chain address.
-- #[program]: Specifies the module containing the program’s instruction logic.
-- #[derive(Accounts)]: Applied to structs to indicate a list of accounts required for an instruction.
-- #[account]: Applied to structs to create custom account types specific to the program
-
-**To implement this example, you will need the following components:**
-- **An Asset**
-- **A Collection** (optional, but relevant for this example)
-- **The FreezeDelegate Plugin**
-- **The Attribute Plugin**
-
-### The Freeze Delegate Plugin
-
-The **Freeze Delegate Plugin** is an **owner-managed plugin**, that means that it requires the owner's signature to be applied to the asset.
-
-This plugin allows the **delegate to freeze and thaw the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be thawed before revocation).
-
-**Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
-
-_Learn more about it [here](/core/plugins/freeze-delegate)_
-
-### The Attribute Plugin
-
-The **Attribute Plugin** is an **authority-managed plugin**, that means that it requires the authority's signature to be applied to the asset. For an asset included in a collection, the collection authority serves as the authority since the asset's authority field is occupied by the collection address.
-
-This plugin allows for **data storage directly on the assets, functioning as on-chain attributes or traits**. These traits can be accessed directly by on-chain programs since they aren’t stored off-chain as it was for the mpl-token-metadata program.
-
-**This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
-
-_Learn more about it [here](/core/plugins/attribute)_
-
-### The Smart Contract Logic
-
-For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since these are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement. 
-
-_Both the Stake and Unstake functions utilize, differently, the plugins introduced previously_.
-
-Before diving into the instructions, let’s spend some time talking about the attributes used, the `staked` and `staked_time` keys. The `staked` key indicates if the asset is staked and when it was staked if it was (unstaked = 0, staked = time of staked). The `staked_time` key tracks the total staking duration of the asset, updated only after an asset get’s unstaked.
-
-**Instructions**:
-- **Stake**: This instruction applies the Freeze Delegate Plugin to freeze the asset by setting the flag to true. Additionally, it updates the`staked` key in the Attribute Plugin from 0 to the current time.
-- **Unstake**: This instruction changes the flag of the Freeze Delegate Plugin and revokes it to prevent malicious entities from controlling the asset and demanding ransom to thaw it. It also updates the `staked` key to 0 and sets the `staked_time` to the current time minus the staked timestamp.
-
-## Building the Smart Contract: A Step-by-Step Guide
-
-Now that we understand the logic behind our smart contract, **it’s time to dive into the code and bring everything together**!
-
-### Dependencies and Imports
-
-Before writing our smart contracts, let's look at what crate we need and what function from them to make sure our smart contract works! 
-
-In this example, we primarily use the mpl_core crate with the [anchor](/core/using-core-in-anchor) feature enabled:
-
-```toml
-mpl-core = { version = "x.x.x", features = ["anchor"] } 
-```
-
-And the different functions from that crate are as follow:
-
-```rust
+Dis devewopew guide demonstwates how to cweate a staking pwogwam fow youw cowwection using Anchow wevewaging de ```rust
 use mpl_core::{
     ID as CORE_PROGRAM_ID,
     fetch_plugin,
@@ -76,27 +12,67 @@ use mpl_core::{
     instructions::{AddPluginV1CpiBuilder, RemovePluginV1CpiBuilder, UpdatePluginV1CpiBuilder}, 
     types::{Attribute, Attributes, FreezeDelegate, Plugin, PluginAuthority, PluginType, UpdateAuthority}, 
 };
-```
+```7 and `Freeze Delegate` pwugins~ Dis appwoach uses a smawt contwact fow aww de wogic behind staking wike time cawcuwation and manyagement of de state of de asset (staking/unstaking), but de data wiww nyot be saved in a PDA, wike de standawd befowe Cowe, but it wiww be saved on de asset itsewf.
 
-### Anchor Overview
+## Stawting off: Undewstanding de Wogic behind de pwogwam
 
-In this guide, we’ll use the Anchor framework, but you can also implement it using a native program. Learn more about the Anchor framework here: [Anchor Framework](https://book.anchor-lang.com/introduction/what_is_anchor.html).
+Dis pwogwam opewates wid a standawd Anchow, wevewaging a monyo-fiwe appwoach whewe aww de nyecessawy macwos can be found in de wib.ws fiwe:
+- decwawe_id: Specifies de pwogwam's on-chain addwess.
+- #[pwogwam]: Specifies de moduwe containying de pwogwam’s instwuction wogic.
+- #[dewive(Accounts)]: Appwied to stwucts to indicate a wist of accounts wequiwed fow an instwuction.
+- #[account]: Appwied to stwucts to cweate custom account types specific to de pwogwam
 
-For simplicity and the sake of this exercise, we’ll use a mono-file approach with accounts and instructions all in lib.rs instead of the usual separation.
+**To impwement dis exampwe, you wiww nyeed de fowwowing componyents:**
+- **An Asset**
+- **A Cowwection** (optionyaw, but wewevant fow dis exampwe)
+- **De FweezeDewegate Pwugin**
+- **De Attwibute Pwugin**
 
-**Note**: You can follow along and open the example in Solana Playground, an online tool to build and deploy Solana programs: Solana Playground.
+### De Fweeze Dewegate Pwugin
 
-In the account struct of all instructions, we will separate the Signer and the Payer. This is a standard procedure because PDAs cannot pay for account creation, so if the user wants a PDA to be the authority over the instruction, there need to be two different fields for it. While this separation isn't strictly necessary for our instructions, it's considered good practice.
+De **Fweeze Dewegate Pwugin** is an **ownyew-manyaged pwugin**, dat means dat it wequiwes de ownyew's signyatuwe to be appwied to de asset.
 
-### The Account Struct
+Dis pwugin awwows de **dewegate to fweeze and daw de asset, pweventing twansfews**~ De asset ownyew ow pwugin audowity can wevoke dis pwugin at any time, except when de asset is fwozen (in which case it must be dawed befowe wevocation).
 
-For this example we use the anchor flag from the mpl-core crate to directly deserialize the Asset and Collection account from the account struct and put some constraint on that
+**Using dis pwugin is wightweight**, as fweezing/dawing de asset invowves just changing a boowean vawue in de pwugin data (de onwy awgument being Fwozen: boow).
 
-_Learn more about it [here](/core/using-core-in-anchor)_
+_Weawn mowe about it ```rust
+Ok((_, fetched_attribute_list, _)) => {
+    // If yes, check if the asset is already staked, and if the staking attribute are already initialized
+    let mut attribute_list: Vec<Attribute> = Vec::new();
+    let mut is_initialized: bool = false;
 
-We're going to use a single account struct, `Stake`, for both the `stake` and `unstake` instructions since they use the same accounts and same constraints.
+    for attribute in fetched_attribute_list.attribute_list {
+        if attribute.key == "staked" {
+            require!(attribute.value == "0", StakingError::AlreadyStaked);
+            attribute_list.push(Attribute { 
+                key: "staked".to_string(), 
+                value: Clock::get()?.unix_timestamp.to_string() 
+            });
+            is_initialized = true;
+        } else {
+            attribute_list.push(attribute);
+        } 
+    }
+```4_
 
-```rust
+### De Attwibute Pwugin
+
+De **Attwibute Pwugin** is an **audowity-manyaged pwugin**, dat means dat it wequiwes de audowity's signyatuwe to be appwied to de asset~ Fow an asset incwuded in a cowwection, de cowwection audowity sewves as de audowity since de asset's audowity fiewd is occupied by de cowwection addwess.
+
+Dis pwugin awwows fow **data stowage diwectwy on de assets, functionying as on-chain attwibutes ow twaits**~ Dese twaits can be accessed diwectwy by on-chain pwogwams since dey awen’t stowed off-chain as it was fow de mpw-token-metadata pwogwam.
+
+**Dis pwugin accepts an AttwibuteWist fiewd**, which consists of an awway of key and vawue paiws, bod of which awe stwings.
+
+_Weawn mowe about it [here](/core/plugins/attribute)_
+
+### De Smawt Contwact Wogic
+
+Fow simpwicity, dis exampwe incwudes onwy two instwuctions: de **stake** and **unstake** functions since dese awe essentiaw fow a staking pwogwam to wowk as intended~ Whiwe additionyaw instwuctions, such as a **spendPoint** instwuction, couwd be added to utiwize accumuwated points, dis is weft to de weadew to impwement~ 
+
+_Bod de Stake and Unstake functions utiwize, diffewentwy, de pwugins intwoduced pweviouswy_.
+
+Befowe diving into de instwuctions, wet’s spend some time tawking about de attwibutes used, de `staked` and ```rust
 #[derive(Accounts)]
 pub struct Stake<'info> {
     pub owner: Signer<'info>,
@@ -119,36 +95,64 @@ pub struct Stake<'info> {
     pub core_program: UncheckedAccount<'info>,
     pub system_program: Program<'info, System>,
 }
+```0 keys~ De `staked` key indicates if de asset is staked and when it was staked if it was (unstaked = 0, staked = time of staked)~ De `staked_time` key twacks de totaw staking duwation of de asset, updated onwy aftew an asset get’s unstaked.
+
+**Instwuctions**:
+- **Stake**: Dis instwuction appwies de Fweeze Dewegate Pwugin to fweeze de asset by setting de fwag to twue~ Additionyawwy, it updates de`staked` key in de Attwibute Pwugin fwom 0 to de cuwwent time.
+- **Unstake**: Dis instwuction changes de fwag of de Fweeze Dewegate Pwugin and wevokes it to pwevent mawicious entities fwom contwowwing de asset and demanding wansom to daw it~ It awso updates de `staked` key to 0 and sets de `staked_time` to de cuwwent time minyus de staked timestamp.
+
+## Buiwding de Smawt Contwact: A Step-by-Step Guide
+
+Nyow dat we undewstand de wogic behind ouw smawt contwact, **it’s time to dive into de code and bwing evewyding togedew**! uwu
+
+### Dependencies and Impowts
+
+Befowe wwiting ouw smawt contwacts, wet's wook at what cwate we nyeed and what function fwom dem to make suwe ouw smawt contwact wowks! uwu 
+
+In dis exampwe, we pwimawiwy use de mpw_cowe cwate wid de [anchor](/core/using-core-in-anchor) featuwe enyabwed:
+
+```toml
+mpl-core = { version = "x.x.x", features = ["anchor"] } 
 ```
 
-As constraints we checked:
-- The `owner` of the asset is the same as the `owner` in the accounts struct.
-- The `update_authority` of the asset is a Collection and the addess of that collection is the same as the `collection` in the account struct
-- The `update_authority` of the collection is the same as the `update_authority` in the account struct, since this is going to be the `update_authority` over the asset
-- The `core_program` is the same as `ID` (That I renamed as `CORE_PROGRAM_ID`) present in the `mpl_core` crate 
+And de diffewent functions fwom dat cwate awe as fowwow:
 
-### The Staking Instruction
+UWUIFY_TOKEN_1744632808108_1
 
-We begin by using the `fetch_plugin` function from the mpl-core crate to retrieve information about the attribute plugin of the assets. 
+### Anchow Ovewview
 
-```rust
+In dis guide, we’ww use de Anchow fwamewowk, but you can awso impwement it using a nyative pwogwam~ Weawn mowe about de Anchow fwamewowk hewe: [Anchor Framework](https://book.anchor-lang.com/introduction/what_is_anchor.html).
+
+Fow simpwicity and de sake of dis exewcise, we’ww use a monyo-fiwe appwoach wid accounts and instwuctions aww in wib.ws instead of de usuaw sepawation.
+
+**Nyote**: You can fowwow awong and open de exampwe in Sowanya Pwaygwound, an onwinye toow to buiwd and depwoy Sowanya pwogwams: Sowanya Pwaygwound.
+
+In de account stwuct of aww instwuctions, we wiww sepawate de Signyew and de Payew~ Dis is a standawd pwoceduwe because PDAs cannyot pay fow account cweation, so if de usew wants a PDA to be de audowity uvw de instwuction, dewe nyeed to be two diffewent fiewds fow it~ Whiwe dis sepawation isn't stwictwy nyecessawy fow ouw instwuctions, it's considewed good pwactice.
+
+### De Account Stwuct
+
+Fow dis exampwe we use de anchow fwag fwom de mpw-cowe cwate to diwectwy desewiawize de Asset and Cowwection account fwom de account stwuct and put some constwaint on dat
+
+_Weawn mowe about it [here](/core/using-core-in-anchor)_
+
+We'we going to use a singwe account stwuct, `Stake`, fow bod de `stake` and `unstake` instwuctions since dey use de same accounts and same constwaints.
+
+UWUIFY_TOKEN_1744632808108_2
+
+As constwaints we checked:
+- De `owner` of de asset is de same as de ```rust
 match fetch_plugin::<BaseAssetV1, Attributes>(
     &ctx.accounts.asset.to_account_info(), 
     mpl_core::types::PluginType::Attributes
 )
-```
+```0 in de accounts stwuct.
+- De `update_authority` of de asset is a Cowwection and de addess of dat cowwection is de same as de `collection` in de account stwuct
+- De `update_authority` of de cowwection is de same as de `update_authority` in de account stwuct, since dis is going to be de `update_authority` uvw de asset
+- De `core_program` is de same as `ID` (Dat I wenyamed as `CORE_PROGRAM_ID`) pwesent in de `mpl_core` cwate 
 
-1. **Check for the Attribute Plugin**
+### De Staking Instwuction
 
-The `fetch_plugin` function has 2 different response:
-- `(_, fetched_attribute_list, _)` if there is an attribute plugin associated with the Asset
-- `Err` if there is no attribute plugin associated with the asset
-
-And that's why we used `match` to act on the response from the plugin
-
-If the asset does not have the attribute plugin, we should add it and populate it with the `staked` and `stakedTime` keys.
-
-```rust
+We begin by using de ```rust
 Err(_) => {
     AddPluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -173,34 +177,30 @@ Err(_) => {
     .init_authority(PluginAuthority::UpdateAuthority)
     .invoke()?;
 }
-```
+```0 function fwom de mpw-cowe cwate to wetwieve infowmation about de attwibute pwugin of de assets~ 
 
-2. **Check for Staking Attributes**:
-If the asset already has the attribute plugin, ensure it contains the staking attributes necessary for the staking instruction. 
+UWUIFY_TOKEN_1744632808108_3
 
-If it does, check if the asset is already staked and update the `staked` key with the current timeStamp as string:
+1~ **Check fow de Attwibute Pwugin**
 
-```rust
-Ok((_, fetched_attribute_list, _)) => {
-    // If yes, check if the asset is already staked, and if the staking attribute are already initialized
-    let mut attribute_list: Vec<Attribute> = Vec::new();
-    let mut is_initialized: bool = false;
+De `fetch_plugin` function has 2 diffewent wesponse:
+- `(_, fetched_attribute_list, _)` if dewe is an attwibute pwugin associated wid de Asset
+- `Err` if dewe is nyo attwibute pwugin associated wid de asset
 
-    for attribute in fetched_attribute_list.attribute_list {
-        if attribute.key == "staked" {
-            require!(attribute.value == "0", StakingError::AlreadyStaked);
-            attribute_list.push(Attribute { 
-                key: "staked".to_string(), 
-                value: Clock::get()?.unix_timestamp.to_string() 
-            });
-            is_initialized = true;
-        } else {
-            attribute_list.push(attribute);
-        } 
-    }
-```
+And dat's why we used `match` to act on de wesponse fwom de pwugin
 
-If it doesn't, add them to the existing attribute list.
+If de asset does nyot have de attwibute pwugin, we shouwd add it and popuwate it wid de `staked` and `stakedTime` keys.
+
+UWUIFY_TOKEN_1744632808108_4
+
+2~ **Check fow Staking Attwibutes**:
+If de asset awweady has de attwibute pwugin, ensuwe it contains de staking attwibutes nyecessawy fow de staking instwuction~ 
+
+If it does, check if de asset is awweady staked and update de `staked` key wid de cuwwent timeStamp as stwing:
+
+UWUIFY_TOKEN_1744632808108_5
+
+If it doesn't, add dem to de existing attwibute wist.
 
 ```rust
 if !is_initialized {
@@ -215,8 +215,8 @@ if !is_initialized {
 }
 ```
 
-3. **Update the Attribute Plugin**:
-Update the attribute plugin with the new or modified attributes.
+3~ **Update de Attwibute Pwugin**:
+Update de attwibute pwugin wid de nyew ow modified attwibutes.
 
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
@@ -230,8 +230,8 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
 }
 ```
 
-4. **Freeze the Asset**
-Whether the asset already had the attribute plugin or not, freeze the asset in place so it can't be traded
+4~ **Fweeze de Asset**
+Whedew de asset awweady had de attwibute pwugin ow nyot, fweeze de asset in pwace so it can't be twaded
 
 ```rust
 AddPluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
@@ -246,7 +246,7 @@ AddPluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
 ```
 
 
-**Here's the full instruction**:
+**Hewe's de fuww instwuction**:
 ```rust
 pub fn stake(ctx: Context<Stake>) -> Result<()> {  
     // Check if the asset has the attribute plugin already on
@@ -331,16 +331,16 @@ pub fn stake(ctx: Context<Stake>) -> Result<()> {
 }
 ```
 
-### The Unstaking Instruction
+### De Unstaking Instwuction
 
-The unstaking instruction will be even easier simpler because, since the unstaking instruction can be called only after the staking instruction, many of the checks are inherently covered by the staking instruction itself. 
+De unstaking instwuction wiww be even easiew simpwew because, since de unstaking instwuction can be cawwed onwy aftew de staking instwuction, many of de checks awe inhewentwy cuvwed by de staking instwuction itsewf~ 
 
-We begin by using the `fetch_plugin` function from the mpl-core crate to retrieve information about the attribute plugin of the assets. 
+We begin by using de `fetch_plugin` function fwom de mpw-cowe cwate to wetwieve infowmation about de attwibute pwugin of de assets~ 
 
 ```rust
 match fetch_plugin::<BaseAssetV1, Attributes>(&ctx.accounts.asset.to_account_info(), mpl_core::types::PluginType::Attributes)
 ```
-But this time around we throw an hard error if we don't find the Attribute plugin
+But dis time awound we dwow an hawd ewwow if we don't find de Attwibute pwugin
 
 ```rust
 Err(_) => {
@@ -348,13 +348,13 @@ Err(_) => {
 }
 ```
 
-1. **Run all the checks for the attribute plugin**
+1~ **Wun aww de checks fow de attwibute pwugin**
 
-To verify if an asset has already gone through the staking instruction, **the instruction check the attribute plugin for the following**:
-- **Has the asset the Staked key?**
-- **Is the asset currently staked?**
+To vewify if an asset has awweady gonye dwough de staking instwuction, **de instwuction check de attwibute pwugin fow de fowwowing**:
+- **Has de asset de Staked key? owo**
+- **Is de asset cuwwentwy staked? owo**
 
-If any of these checks are missing, the asset has never gone through the staking instruction.
+If any of dese checks awe missing, de asset has nyevew gonye dwough de staking instwuction.
 
 ```rust
 for attribute in fetched_attribute_list.attribute_list.iter() {
@@ -372,9 +372,9 @@ for attribute in fetched_attribute_list.attribute_list.iter() {
 require!(is_initialized, StakingError::StakingNotInitialized);
 ```
 
-Once we confirm that the asset has the staking attributes and we checked that the asset is currently staked. If it is staked, we update the staking attributes as follows:
-- Set `Staked` field to zero
-- Update `stakedTime` to `stakedTime` + (currentTimestamp - stakedTimestamp)
+Once we confiwm dat de asset has de staking attwibutes and we checked dat de asset is cuwwentwy staked~ If it is staked, we update de staking attwibutes as fowwows:
+- Set `Staked` fiewd to zewo
+- Update `stakedTime` to `stakedTime` + (cuwwentTimestamp - stakedTimestamp)
 
 ```rust
 Ok((_, fetched_attribute_list, _)) => {
@@ -414,8 +414,8 @@ Ok((_, fetched_attribute_list, _)) => {
     require!(is_initialized, StakingError::StakingNotInitialized);
 ```
 
-2. **Update the Attribute Plugin**
-Update the attribute plugin with the new or modified attributes.
+2~ **Update de Attwibute Pwugin**
+Update de attwibute pwugin wid de nyew ow modified attwibutes.
 
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
@@ -428,8 +428,8 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
 .invoke()?;
 ```
 
-3. **Thaw and remove the FreezeDelegate Plugin**
-At the end of the instruction, thaw the asset and remove the FreezeDelegate plugin so the asset is `free` and not controlled by the `update_authority`
+3~ **Daw and wemuv de FweezeDewegate Pwugin**
+At de end of de instwuction, daw de asset and wemuv de FweezeDewegate pwugin so de asset is `free` and nyot contwowwed by de `update_authority`
 
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
@@ -451,7 +451,7 @@ RemovePluginV1CpiBuilder::new(&ctx.accounts.core_program)
 .invoke()?;
 ```
 
-**Here's the full instruction**:
+**Hewe's de fuww instwuction**:
 ```rust
 pub fn unstake(ctx: Context<Unstake>) -> Result<()> {
     // Check if the asset has the attribute plugin already on
@@ -532,6 +532,6 @@ pub fn unstake(ctx: Context<Unstake>) -> Result<()> {
 }
 ```
 
-## Conclusion
+## Concwusion
 
-Congratulations! You are now equipped to create a staking solution for your NFT collection! If you want to learn more about Core and Metaplex, check out the [developer hub](/core/getting-started).
+Congwatuwations! uwu You awe nyow equipped to cweate a staking sowution fow youw NFT cowwection! uwu If you want to weawn mowe about Cowe and Metapwex, check out de [developer hub](/core/getting-started).
