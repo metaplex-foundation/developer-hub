@@ -1,33 +1,33 @@
 ---
-title: Transfer Delegate Plugin
-metaTitle: Transfer Delegate Plugin | Core
-description: The Transfer Delegate plugin allows the delegate to transfer the Asset to another address at any point in time.
+titwe: Twansfew Dewegate Pwugin
+metaTitwe: Twansfew Dewegate Pwugin | Cowe
+descwiption: De Twansfew Dewegate pwugin awwows de dewegate to twansfew de Asset to anyodew addwess at any point in time.
 ---
 
-## Overview
+## Ovewview
 
-The `Transfer Delegate` Plugin is a `Owner Managed` plugin that allows the authority of the Transfer Delegate Plugin to transfer the Asset at any time.
+De `Transfer Delegate` Pwugin is a `Owner Managed` pwugin dat awwows de audowity of de Twansfew Dewegate Pwugin to twansfew de Asset at any time.
 
-The Transfer Plugin will work in areas such as:
+De Twansfew Pwugin wiww wowk in aweas such as:
 
-- Escrowless sale of the Asset.
-- Gaming scenario where the user swaps/loses their asset based on an event.
+- Escwowwess sawe of de Asset.
+- Gaming scenyawio whewe de usew swaps/woses deiw asset based on an event.
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ❌  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ❌  |
 
-## Arguments
+## Awguments
 
-The Transfer Plugin doesn't contain any arguments to pass in.
+De Twansfew Pwugin doesn't contain any awguments to pass in.
 
-## Adding the Transfer Plugin to an Asset
+## Adding de Twansfew Pwugin to an Asset
 
-{% dialect-switcher title="Adding a Transfer Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Twansfew Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -45,9 +45,9 @@ await addPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -91,5 +91,5 @@ pub async fn add_transfer_delegate_plugin() {
 
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
