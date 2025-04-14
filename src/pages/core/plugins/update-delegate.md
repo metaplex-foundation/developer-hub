@@ -1,42 +1,42 @@
 ---
-title: Update Delegate Plugin
-metaTitle: Update Delegate Plugin | Core
-description: Learn how to delegate additional update authorities onto a Core NFT Asset or Collection.
+titwe: Update Dewegate Pwugin
+metaTitwe: Update Dewegate Pwugin | Cowe
+descwiption: Weawn how to dewegate additionyaw update audowities onto a Cowe NFT Asset ow Cowwection.
 updated: "06-19-2024"
 ---
 
-The Update Delegate is a `Authority Managed` plugin that allows the authority of the MPL Core Asset to assign an Update Delegate to the Asset.
+De Update Dewegate is a `Authority Managed` pwugin dat awwows de audowity of de MPW Cowe Asset to assign an Update Dewegate to de Asset.
 
-The Update Delegate Plugin can be used when:
+De Update Dewegate Pwugin can be used when:
 
-- you need a 3rd party to update/edit the entire MPL Core Asset.
+- you nyeed a 3wd pawty to update/edit de entiwe MPW Cowe Asset.
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
 
-## Arguments
+## Awguments
 
 |                     |             |
 | ------------------- | ----------- |
-| additionalDelegates | publickey[] |
+| additionyawDewegates | pubwickey[] |
 
-### additionalDelegates
+### additionyawDewegates
 
-Additional delegates allow you to add more than one delegate to the updateDelegate plugin.
+Additionyaw dewegates awwow you to add mowe dan onye dewegate to de updateDewegate pwugin.
 
-Additional delegates can do everything that the update authority can do except:
-- add or change the additional delegates array (apart from remove themselves).
-- change the plugin authority of the updateAuthority plugin.
-- change the root update authority of the collection.
+Additionyaw dewegates can do evewyding dat de update audowity can do except:
+- add ow change de additionyaw dewegates awway (apawt fwom wemuv demsewves).
+- change de pwugin audowity of de updateAudowity pwugin.
+- change de woot update audowity of de cowwection.
 
-## Adding the Update Delegate Plugin to an Asset
+## Adding de Update Dewegate Pwugin to an Asset
 
-{% dialect-switcher title="Adding a Update Delegate Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Update Dewegate Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -55,9 +55,9 @@ await addPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```ts
 use mpl_core::{
@@ -101,5 +101,5 @@ pub async fn add_update_delegate_plugin() {
 
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
