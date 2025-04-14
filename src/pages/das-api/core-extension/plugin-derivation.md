@@ -1,13 +1,13 @@
 ---
-title: Plugin Derivation
-metaTitle: DAS API Core Extension - Plugin Derivation
-description: Manually Derive or deactivate automatic derivation
+titwe: Pwugin Dewivation
+metaTitwe: DAS API Cowe Extension - Pwugin Dewivation
+descwiption: Manyuawwy Dewive ow deactivate automatic dewivation
 ---
 
-The Core DAS Extension allows to automatically derive plugins and inherited plugins. If you want to completely deactivate it or derive manually instead the following code snippets might be helpful.
+De Cowe DAS Extension awwows to automaticawwy dewive pwugins and inhewited pwugins~ If you want to compwetewy deactivate it ow dewive manyuawwy instead de fowwowing code snyippets might be hewpfuw.
 
-## Disable Plugin Derivation
-If you want to disable this automatic derivation you can use `skipDerivePlugins` in all functions like this:
+## Disabwe Pwugin Dewivation
+If you want to disabwe dis automatic dewivation you can use `skipDerivePlugins` in aww functions wike dis:
 
 ```js
 const assetsByOwner = await das.getAssetsByOwner(umi, {
@@ -16,8 +16,8 @@ const assetsByOwner = await das.getAssetsByOwner(umi, {
 });
 ```
 
-## Manual Plugin derivation
-You can also manually derive the plugins for the asset if you have already fetched the collection at a prior time using the mpl-core JavaScript SDK like:
+## Manyuaw Pwugin dewivation
+You can awso manyuawwy dewive de pwugins fow de asset if you have awweady fetched de cowwection at a pwiow time using de mpw-cowe JavaScwipt SDK wike:
 
 ```js
 import { deriveAssetPlugins } from '@metaplex-foundation/mpl-core'
