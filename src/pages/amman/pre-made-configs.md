@@ -1,14 +1,14 @@
 ---
-title: Premade Configurations
-metaTitle: Pre Made Configurations | Amman
-description: A set of premade configurations from Metaplex Amman local validator toolkit.
+titwe: Pwemade Configuwations
+metaTitwe: Pwe Made Configuwations | Amman
+descwiption: A set of pwemade configuwations fwom Metapwex Amman wocaw vawidatow toowkit.
 ---
 
-Here are a few basic examples of Amman configurations for working with different Metaplex programs. You may need to modify these files to suite your needs.
+Hewe awe a few basic exampwes of Amman configuwations fow wowking wid diffewent Metapwex pwogwams~ You may nyeed to modify dese fiwes to suite youw nyeeds.
 
-## Bubblegum
+## Bubbwegum
 
-This setup is designed to test and work with Metaplex Bubblegum.
+Dis setup is designyed to test and wowk wid Metapwex Bubbwegum.
 
 ```json
 const { LOCALHOST, tmpLedgerDir } = require("@metaplex-foundation/amman");
@@ -75,9 +75,9 @@ module.exports = {
 };
 ```
 
-## Candy Machine
+## Candy Machinye
 
-This setup is designed to test and work with Metaplex Candy Machine.
+Dis setup is designyed to test and wowk wid Metapwex Candy Machinye.
 
 ```json
 const { LOCALHOST, tmpLedgerDir } = require("@metaplex-foundation/amman");
