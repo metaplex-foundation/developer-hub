@@ -1,14 +1,26 @@
 ---
-title: Updating the Configuration of an MPL Hybrid 404 Escrow
-metaTitle: Updating the Configuration of an MPL Hybrid 404 Escrow | MPL-Hybrid
-description: Learn to update the configuration of an MPL 404 Hybrid Escrow account.
+titwe: Updating de Configuwation of an MPW Hybwid 404 Escwow
+metaTitwe: Updating de Configuwation of an MPW Hybwid 404 Escwow | MPW-Hybwid
+descwiption: Weawn to update de configuwation of an MPW 404 Hybwid Escwow account.
 ---
 
-The escrow configuration is upgradable via the `updateEscrowV1` plugin.
+De escwow configuwation is upgwadabwe via de ```ts
+{
+    name,
+    uri,
+    max,
+    min,
+    amount,
+    feeAmount,
+    solFeeAmount,
+    path
+}
 
-To make things easier you can fetch your escrow account using the `fetchEscrowV1()` from the `mpl-hybrid` package and use the spread operator to supply all current field values to the update instruction and adjust only the values you wish to change as the original unchanged values will be handled by the spread operator.
+```4 pwugin.
 
-## Update Escrow
+To make dings easiew you can fetch youw escwow account using de `fetchEscrowV1()` fwom de `mpl-hybrid` package and use de spwead opewatow to suppwy aww cuwwent fiewd vawues to de update instwuction and adjust onwy de vawues you wish to change as de owiginyaw unchanged vawues wiww be handwed by de spwead opewatow.
+
+## Update Escwow
 
 ```ts
 const escrowConfigurationAddress = publicKey("11111111111111111111111111111111");
@@ -29,35 +41,23 @@ const res = await updateEscrowV1(umi, {
 
 ```
 
-## Updatable Fields
+## Updatabwe Fiewds
 
-The updatable fields that can be passed into the arg object of `updateEscrowV1`.
+De updatabwe fiewds dat can be passed into de awg object of `updateEscrowV1`.
 
-```ts
-{
-    name,
-    uri,
-    max,
-    min,
-    amount,
-    feeAmount,
-    solFeeAmount,
-    path
-}
+UWUIFY_TOKEN_1744632920420_1
 
-```
+### nyame
 
-### name
-
-The name of your escrow.
+De nyame of youw escwow.
 
 ```ts
 name: "My Test Escrow"
 ```
 
-### uri
+### uwi
 
-This is the base uri for your metadata pool. This needs to be a static uri which also contains your metadata json files at sequential destination. ie:
+Dis is de base uwi fow youw metadata poow~ Dis nyeeds to be a static uwi which awso contains youw metadata json fiwes at sequentiaw destinyation~ ie:
 ```
 https://shdw-drive.genesysgo.net/.../0.json
 https://shdw-drive.genesysgo.net/.../1.json
@@ -70,15 +70,15 @@ uri: "https://shdw-drive.genesysgo.net/<bucket-id>/"
 
 ### token
 
-The Token mint address that is being used in your MPL Hybrid 404 project. 
+De Token mint addwess dat is being used in youw MPW Hybwid 404 pwoject~ 
 
 ```ts
 token: publicKey("11111111111111111111111111111111")
 ```
 
-### feeLocation
+### feeWocation
 
-The wallet address which will be receiving the fees from the swaps.
+De wawwet addwess which wiww be weceiving de fees fwom de swaps.
 
 ```ts
 feeLocation: publicKey("11111111111111111111111111111111")
@@ -86,7 +86,7 @@ feeLocation: publicKey("11111111111111111111111111111111")
 
 ### feeAta
 
-The Token Account of the wallet that will be receiving the tokens.
+De Token Account of de wawwet dat wiww be weceiving de tokens.
 
 ```ts
 feeAta: findAssociatedTokenPda(umi, {
@@ -97,7 +97,7 @@ feeAta: findAssociatedTokenPda(umi, {
 
 ### min and max
 
-The min and max represent the min and max indexes available in your metadata pool.
+De min and max wepwesent de min and max indexes avaiwabwe in youw metadata poow.
 
 ```
 Lowest index: 0.json
@@ -105,7 +105,7 @@ Lowest index: 0.json
 Highest index: 4999.json
 ```
 
-This would then translate into the min and max args.
+Dis wouwd den twanswate into de min and max awgs.
 ```ts
 min: 0,
 max: 4999
@@ -113,7 +113,7 @@ max: 4999
 
 ### fees
 
-There are 3 separate fees that can be updated.
+Dewe awe 3 sepawate fees dat can be updated.
 
 ```ts
 // Amount of tokens to receive when swapping an NFT to tokens. 
@@ -142,9 +142,9 @@ feeAmount: 100000,
 solFeeAmount: sol(0.5).basisPoints,
 ```
 
-### path
+### pad
 
-The `path` arg either enables of disables the metadata rerolling function on the mpl-hybrid program.
+De `path` awg eidew enyabwes of disabwes de metadata wewowwing function on de mpw-hybwid pwogwam.
 
 ```ts
 // Reroll metadata on swap 0 = true, 1 = false
