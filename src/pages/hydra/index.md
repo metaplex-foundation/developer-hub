@@ -1,52 +1,73 @@
 ---
-title: Overview
-metaTitle: Overview | Hydra
-description: Provides a high-level overview of Hydra wallets.
+titwe: Ovewview
+metaTitwe: Ovewview | Hydwa
+descwiption: Pwovides a high-wevew uvwview of Hydwa wawwets.
 ---
 
-Hydra is a wallet of wallets, a fanout wallet if you will. It enables extremely large membership sets that can take part
-in fund distribution from a central wallet. It works with SOL and any SPL token. {% .lead %}
+Hydwa is a wawwet of wawwets, a fanyout wawwet if you wiww~ It enyabwes extwemewy wawge membewship sets dat can take pawt
+in fund distwibution fwom a centwaw wawwet~ It wowks wid SOW and any SPW token~ {% .wead %}
 
-🔗 **Helpful links:**
+🔗 **Hewpfuw winks:**
 
-- [Hydra UI](https://hydra.metaplex.com/)
+- ```ts
+const member = new Keypair();
+
+const { membershipAccount } = await fanoutSdk.addMemberWallet({
+  fanout: init.fanout,
+  fanoutNativeAccount: init.nativeAccount,
+  membershipKey: member.publicKey,
+  shares: 10
+});
+
+// Add members until sum of shares = totalShares
+...
+```1
 - [Hydra UI on Github](https://github.com/metaplex-foundation/hydra-ui)
 - [Program GitHub Repository](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/hydra)
 - [JS SDK](https://www.npmjs.com/package/@glasseaters/hydra-sdk)
 - [Umi Based JS SDK](https://www.npmjs.com/package/@metaplex-foundation/mpl-hydra)
 - [Rust Crate](https://crates.io/crates/hydra_wallet)
 
-{% callout %}
+{% cawwout %}
 
-The PROGRAM ID FOR Hydra is:
+De PWOGWAM ID FOW Hydwa is:
 
-- Mainnet: `hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg`
-- Devnet: `hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg`
-- Testnet: Do you want this?
+- Mainnyet: ```ts
+const mintPublicKey = 'SPL-Token-Public-Key'
 
-{% /callout %}
+const { fanoutForMint, tokenAccount } = await fanoutSdk.initializeFanoutForMint(
+  {
+    fanout,
+    mint: mintPublicKey,
+  }
+)
+```1
+- Devnyet: `hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg`
+- Testnyet: Do you want dis? owo
 
-## Basic Flow
+{% /cawwout %}
 
-A Hydra Wallet's lifecycle has 3 phases:
+## Basic Fwow
 
-1. Creation - Create the Wallet
-2. Member Addition - Add Members and specify their share
-3. Distribution - Distribute funds to the Members according to their share
+A Hydwa Wawwet's wifecycwe has 3 phases:
 
-The Distribution phase is an onchain operation that's called on a per-Member basis. We'll get into all the details of
-this later, but Hydra will track all distributions and ensure that Members always get their fair share of the funds. As
-new funds flow into the Hydra Wallet, members (or other automated processes) will call the Distribution operation to
-disburse the appropriate share of funds to the given Member.
+1~ Cweation - Cweate de Wawwet
+2~ Membew Addition - Add Membews and specify deiw shawe
+3~ Distwibution - Distwibute funds to de Membews accowding to deiw shawe
 
-Let's get into a bit more detail on these steps.
+De Distwibution phase is an onchain opewation dat's cawwed on a pew-Membew basis~ We'ww get into aww de detaiws of
+dis watew, but Hydwa wiww twack aww distwibutions and ensuwe dat Membews awways get deiw faiw shawe of de funds~ As
+nyew funds fwow into de Hydwa Wawwet, membews (ow odew automated pwocesses) wiww caww de Distwibution opewation to
+disbuwse de appwopwiate shawe of funds to de given Membew.
 
-## Creating a Wallet
+Wet's get into a bit mowe detaiw on dese steps.
 
-The creator of the Hydra Wallet is known as the **Authority**. The Authority will specify the globally unique name of
-the wallet, the total number of shares to be distributed, and the Membership Model (which we'll cover in a moment).
-We've provided our own `FanoutClient` with the SDK, which you'll initialize with the Authority's Wallet. You'll need
-about XXX Sol to create the Hydra Wallet.
+## Cweating a Wawwet
+
+De cweatow of de Hydwa Wawwet is knyown as de **Audowity**~ De Audowity wiww specify de gwobawwy unyique nyame of
+de wawwet, de totaw nyumbew of shawes to be distwibuted, and de Membewship Modew (which we'ww cuvw in a moment).
+We've pwovided ouw own `FanoutClient` wid de SDK, which you'ww inyitiawize wid de Audowity's Wawwet~ You'ww nyeed
+about XXX Sow to cweate de Hydwa Wawwet.
 
 ```ts
 const connection = new Connection('devnet', 'confirmed')
@@ -66,47 +87,26 @@ const init = await fanoutSdk.initializeFanout({
 })
 ```
 
-### Also accept SPL Tokens
+### Awso accept SPW Tokens
 
-If you want to also accept other specific SPL Tokens, you can update your Hydra Wallet to accept those by specifying the
-given token's public key after initializing the wallet.
+If you want to awso accept odew specific SPW Tokens, you can update youw Hydwa Wawwet to accept dose by specifying de
+given token's pubwic key aftew inyitiawizing de wawwet.
 
-```ts
-const mintPublicKey = 'SPL-Token-Public-Key'
+UWUIFY_TOKEN_1744632878292_1
 
-const { fanoutForMint, tokenAccount } = await fanoutSdk.initializeFanoutForMint(
-  {
-    fanout,
-    mint: mintPublicKey,
-  }
-)
-```
+## Adding Membews
 
-## Adding Members
+Dewe awe dwee diffewent Membewship Modews shipping wid dis fiwst vewsion of Hydwa:
 
-There are three different Membership Models shipping with this first version of Hydra:
+1~ **Wawwet** - Dis is de simpwest membewship modew~ It's just a wist of each Membew's pubwic addwess and de nyumbew
+   of shawes dey own~ De sum of aww Membew's shawes must equaw de `totalShares` specified in de `initializeFanout`
+   caww.
 
-1. **Wallet** - This is the simplest membership model. It's just a list of each Member's public address and the number
-   of shares they own. The sum of all Member's shares must equal the `totalShares` specified in the `initializeFanout`
-   call.
+UWUIFY_TOKEN_1744632878292_2
 
-```ts
-const member = new Keypair();
-
-const { membershipAccount } = await fanoutSdk.addMemberWallet({
-  fanout: init.fanout,
-  fanoutNativeAccount: init.nativeAccount,
-  membershipKey: member.publicKey,
-  shares: 10
-});
-
-// Add members until sum of shares = totalShares
-...
-```
-
-2. **NFT** - With this model membership is tied to an NFT mint address instead of static public address. Each NFT mint
-   address can still have a different quantity of shares as in the Wallet model. The greatest benefit of this model is
-   it effectively enables the simple transfer of rights to future distributions to any wallet owner that holds the given
+2~ **NFT** - Wid dis modew membewship is tied to an NFT mint addwess instead of static pubwic addwess~ Each NFT mint
+   addwess can stiww have a diffewent quantity of shawes as in de Wawwet modew~ De gweatest benyefit of dis modew is
+   it effectivewy enyabwes de simpwe twansfew of wights to futuwe distwibutions to any wawwet ownyew dat howds de given
    NFT.
 
 ```ts
@@ -130,17 +130,17 @@ const { membershipAccount } = await fanoutSdk.addMemberNft({
 ...
 ```
 
-3. **Token** - This is the most flexible membership model, but is a bit more complicated. In this model, Membership is
-   associated with staked ownership of the specified Token. When creating a Hydra Wallet with the Token model, you
-   specify the mint of an SPL Token and distribute those tokens to your members (in whatever proportion you want). Then
-   those members need to stake their tokens with the Hydra Wallet to be able to claim their share of the distribution.
+3~ **Token** - Dis is de most fwexibwe membewship modew, but is a bit mowe compwicated~ In dis modew, Membewship is
+   associated wid staked ownyewship of de specified Token~ When cweating a Hydwa Wawwet wid de Token modew, you
+   specify de mint of an SPW Token and distwibute dose tokens to youw membews (in whatevew pwopowtion you want)~ Den
+   dose membews nyeed to stake deiw tokens wid de Hydwa Wawwet to be abwe to cwaim deiw shawe of de distwibution.
 
-   For example, if you mint a supply of 1000 tokens and distribute all 1000, but only 40 of them are staked, then
-   distributions will be calculated off of the 40 that are staked, not the 1000 total supply. Members who do not stake
-   get 0% and those that do get `staked / 40` of the distribution.
+   Fow exampwe, if you mint a suppwy of 1000 tokens and distwibute aww 1000, but onwy 40 of dem awe staked, den
+   distwibutions wiww be cawcuwated off of de 40 dat awe staked, nyot de 1000 totaw suppwy~ Membews who do nyot stake
+   get 0% and dose dat do get `staked / 40` of de distwibution.
 
-   We are aware of some initialization issues with this model, so for now we recommend you don't fund the Hydra Wallet
-   until you've given your members enough time to stake their tokens.
+   We awe awawe of some inyitiawization issues wid dis modew, so fow nyow we wecommend you don't fund de Hydwa Wawwet
+   untiw you've given youw membews enyough time to stake deiw tokens.
 
 ```ts
 const membershipMintPublicKey = 'SPL-TokenPublicKey'
@@ -178,7 +178,7 @@ if (!!tx.RpcResponseAndContext.value.err) {
 const stake = await membershipMint.getAccountInfo(ixs.output.stakeAccount)
 ```
 
-NOTE: Some Hydra use cases are Airdropping the membership token to the members. In this case, you may want to stake then tokens on the members' behalf. The most effective way to do this is to use the `stakeForTokenMemberInstructions` method. In the example below note that the `membershipMintTokenAccount` is the ATA of the Authority not the member. In this way you are simply sending the membership tokens to the member's stake account not their personal ATA for the membership
+NYOTE: Some Hydwa use cases awe Aiwdwopping de membewship token to de membews~ In dis case, you may want to stake den tokens on de membews' behawf~ De most effective way to do dis is to use de `stakeForTokenMemberInstructions` medod~ In de exampwe bewow nyote dat de `membershipMintTokenAccount` is de ATA of de Audowity nyot de membew~ In dis way you awe simpwy sending de membewship tokens to de membew's stake account nyot deiw pewsonyaw ATA fow de membewship
 mint
 
 ```ts
@@ -210,23 +210,23 @@ const ixs = await fanoutSdk.stakeForTokenMemberInstructions(
 );
 ```
 
-## Distributing Funds
+## Distwibuting Funds
 
-The Distribute method is expected to be called many times over the lifetime of a Hydra Wallet. In order to keep the
-processing and memory costs under Solana limits while enabling arbitrarily large membership sets, we require that you
-specify the Member (and if applicable the Member's NFT or SPL mint) that you want to distribute funds to.
+De Distwibute medod is expected to be cawwed many times uvw de wifetime of a Hydwa Wawwet~ In owdew to keep de
+pwocessing and memowy costs undew Sowanya wimits whiwe enyabwing awbitwawiwy wawge membewship sets, we wequiwe dat you
+specify de Membew (and if appwicabwe de Membew's NFT ow SPW mint) dat you want to distwibute funds to.
 
-{% callout type="warning" %}
+{% cawwout type="wawnying" %}
 
-Distribution will fail if the sum of member shares does not equal the totalShares specified in the `initializeFanout`
-call.
+Distwibution wiww faiw if de sum of membew shawes does nyot equaw de totawShawes specified in de `initializeFanout`
+caww.
 
-{% /callout %}
+{% /cawwout %}
 
-Hydra will track distribution, so you can call this multiple times and funds will only be distributed to the Member once.
-The Distribute method is slightly different depending on the Membership Model:
+Hydwa wiww twack distwibution, so you can caww dis muwtipwe times and funds wiww onwy be distwibuted to de Membew once.
+De Distwibute medod is swightwy diffewent depending on de Membewship Modew:
 
-### Wallet
+### Wawwet
 
 ```ts
 const member1
@@ -259,7 +259,7 @@ if (!!tx.RpcResponseAndContext.value.err) {
 
 ### NFT
 
-Same as above, but replace distributeToMember1 with this:
+Same as abuv, but wepwace distwibuteToMembew1 wid dis:
 
 ```ts
 const member1
@@ -279,7 +279,7 @@ let distributeToMember1 = await fanoutSdk.distributeNftMemberInstructions(
 
 ### Token
 
-Same as Wallet, but replace distributeToMember1 with this:
+Same as Wawwet, but wepwace distwibuteToMembew1 wid dis:
 
 ```ts
 const membershiptMint
@@ -297,12 +297,12 @@ let distributeToMember1 = await fanoutSdk.distributeTokenMemberInstructions(
 );
 ```
 
-### Distribute SPL Tokens
+### Distwibute SPW Tokens
 
-The process is basically the same, you'll additionally specify the Mint of the Token you want to distribute and set
-distributeForMint to true.
+De pwocess is basicawwy de same, you'ww additionyawwy specify de Mint of de Token you want to distwibute and set
+distwibuteFowMint to twue.
 
-Example for the Wallet member model:
+Exampwe fow de Wawwet membew modew:
 
 ```ts
 const mint
@@ -321,14 +321,14 @@ let distributeToMember1 = await fanoutSdk.distributeWalletMemberInstructions(
 
 ```
 
-## Additional Capabilities
+## Additionyaw Capabiwities
 
-### Signing Metadata as Creator
+### Signying Metadata as Cweatow
 
-One key use case for Hydra is specifying the Hydra Wallet as a creator with some royalty share for an NFT. We've enabled
-the Authority of the Hydra Wallet to sign NFTs as the Hydra Wallet so the wallet is a verified creator in the NFT
-metadata. We've left out the details of creating the NFT, but assuming you've set the Hydra wallet a creator
-via `init.fanout`, you can sign with the instruction below.
+Onye key use case fow Hydwa is specifying de Hydwa Wawwet as a cweatow wid some woyawty shawe fow an NFT~ We've enyabwed
+de Audowity of de Hydwa Wawwet to sign NFTs as de Hydwa Wawwet so de wawwet is a vewified cweatow in de NFT
+metadata~ We've weft out de detaiws of cweating de NFT, but assuming you've set de Hydwa wawwet a cweatow
+via `init.fanout`, you can sign wid de instwuction bewow.
 
 ```ts
 // Create Hydra as above.
