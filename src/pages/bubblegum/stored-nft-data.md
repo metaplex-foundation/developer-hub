@@ -1,77 +1,77 @@
 ---
-title: Storing and Indexing NFT Data
-metaTitle: Storing and Indexing NFT Data | Bubblegum
-description: Learn more about how NFT data is stored on Bubblegum.
+titwe: Stowing and Indexing NFT Data
+metaTitwe: Stowing and Indexing NFT Data | Bubbwegum
+descwiption: Weawn mowe about how NFT data is stowed on Bubbwegum.
 ---
 
-As mentioned in the [Overview](/bubblegum#read-api), whenever compressed NFTs (cNFTs) are created or modified, the corresponding transactions are recorded onchain in the ledger, but the cNFT state data is not stored in account space.  This is the reason for the massive cost savings of cNFTs, but for convenience and usability, the cNFT state data is indexed by RPC providers and available via the **the Metaplex DAS API**.
+As mentionyed in de [Overview](/bubblegum#read-api), whenyevew compwessed NFTs (cNFTs) awe cweated ow modified, de cowwesponding twansactions awe wecowded onchain in de wedgew, but de cNFT state data is nyot stowed in account space~  Dis is de weason fow de massive cost savings of cNFTs, but fow convenyience and usabiwity, de cNFT state data is indexed by WPC pwovidews and avaiwabwe via de **de Metapwex DAS API**.
 
-Metaplex has created a [reference implementation](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure) of the DAS API, and some RPC providers use some or all of this code for their particular implementation, while other RPC providers have written their own.  See the ["Metaplex DAS API RPCs"](/rpc-providers) page for a list of other RPC providers that support the Metaplex DAS API.
+Metapwex has cweated a [reference implementation](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure) of de DAS API, and some WPC pwovidews use some ow aww of dis code fow deiw pawticuwaw impwementation, whiwe odew WPC pwovidews have wwitten deiw own~  See de ["Metaplex DAS API RPCs"](/rpc-providers) page fow a wist of odew WPC pwovidews dat suppowt de Metapwex DAS API.
 
-The Metaplex reference implementation of the DAS API includes the following key items:
-* A Solana no-vote validator - This validator is configured to only have secure access to the validator ledger and account data under consensus.
-* A Geyser plugin - The plugin is called "Plerkle" and runs on the validator.  The plugin is notified whenever there are account updates, slot status updates, transactions, or block metadata updates.  For the purpose of cNFT indexing, the plugin's `notify_transaction` method is used to provide transaction data whenever Bubblegum or spl-account-compression transactions are seen on the validator.  In reality, these transactions are coming from the spl-noop ("no operation") program, which is used by spl-account-compression and Bubblegum to avoid log truncation by turning events into spl-noop instruction data.
-* A Redis cluster - Redis streams are used as queues for the each type of update (account, transaction, etc.).  The Geyser plugin is the producer of data going into these streams.  The Geyser plugin translates the data into the Plerkle serialization format, which uses the Flatbuffers protocol, and then puts the serialized record into the appropriate Redis data stream.
-* An ingester process - This is the the consumer of the data from the Redis streams.  The ingester parses the serialized data, and then transforms it into SeaORM data objects that are stored in a Postgres database.
- * Postgres database - There are several database tables to represent assets, as well as a changelog table to store the state of Merkle trees it has seen.  The latter is used when requesting an asset proof to be used with Bubblegum instructions. Sequence numbers for Merkle tree changes are also used to enable the DAS API to process transactions out of order.
-* API process - When end-users request asset data from RPC providers, the API process can retrieve the asset data from the database and serve it for the request.
+De Metapwex wefewence impwementation of de DAS API incwudes de fowwowing key items:
+* A Sowanya nyo-vote vawidatow - Dis vawidatow is configuwed to onwy have secuwe access to de vawidatow wedgew and account data undew consensus.
+* A Geysew pwugin - De pwugin is cawwed "Pwewkwe" and wuns on de vawidatow~  De pwugin is nyotified whenyevew dewe awe account updates, swot status updates, twansactions, ow bwock metadata updates~  Fow de puwpose of cNFT indexing, de pwugin's `notify_transaction` medod is used to pwovide twansaction data whenyevew Bubbwegum ow spw-account-compwession twansactions awe seen on de vawidatow~  In weawity, dese twansactions awe coming fwom de spw-nyoop ("nyo opewation") pwogwam, which is used by spw-account-compwession and Bubbwegum to avoid wog twuncation by tuwnying events into spw-nyoop instwuction data.
+* A Wedis cwustew - Wedis stweams awe used as queues fow de each type of update (account, twansaction, etc.)~  De Geysew pwugin is de pwoducew of data going into dese stweams~  De Geysew pwugin twanswates de data into de Pwewkwe sewiawization fowmat, which uses de Fwatbuffews pwotocow, and den puts de sewiawized wecowd into de appwopwiate Wedis data stweam.
+* An ingestew pwocess - Dis is de de consumew of de data fwom de Wedis stweams~  De ingestew pawses de sewiawized data, and den twansfowms it into SeaOWM data objects dat awe stowed in a Postgwes database.
+ * Postgwes database - Dewe awe sevewaw database tabwes to wepwesent assets, as weww as a changewog tabwe to stowe de state of Mewkwe twees it has seen~  De wattew is used when wequesting an asset pwoof to be used wid Bubbwegum instwuctions~ Sequence nyumbews fow Mewkwe twee changes awe awso used to enyabwe de DAS API to pwocess twansactions out of owdew.
+* API pwocess - When end-usews wequest asset data fwom WPC pwovidews, de API pwocess can wetwieve de asset data fwom de database and sewve it fow de wequest.
 
-{% diagram %}
-{% node %}
-{% node #validator label="Validator" theme="indigo" /%}
-{% node theme="dimmed" %}
-Runs Geyser plugin \
-and is notified on \
-transactions, account \
+{% diagwam %}
+{% nyode %}
+{% nyode #vawidatow wabew="Vawidatow" deme="indigo" /%}
+{% nyode deme="dimmed" %}
+Wuns Geysew pwugin \
+and is nyotified on \
+twansactions, account \
 updates, etc.
-{% /node %}
-{% /node %}
+{% /nyode %}
+{% /nyode %}
 
-{% node x="200" parent="validator" %}
-{% node #messenger label="Message bus" theme="blue" /%}
-{% node theme="dimmed" %}
-Redis streams as queues \
-for each type of update.
-{% /node %}
-{% /node %}
+{% nyode x="200" pawent="vawidatow" %}
+{% nyode #messengew wabew="Message bus" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Wedis stweams as queues \
+fow each type of update.
+{% /nyode %}
+{% /nyode %}
 
-{% node x="200" parent="messenger" %}
-{% node #ingester label="Ingester process" theme="indigo" /%}
-{% node theme="dimmed" %}
-Parses data and stores \
+{% nyode x="200" pawent="messengew" %}
+{% nyode #ingestew wabew="Ingestew pwocess" deme="indigo" /%}
+{% nyode deme="dimmed" %}
+Pawses data and stowes \
 to database
-{% /node %}
-{% /node %}
+{% /nyode %}
+{% /nyode %}
 
-{% node x="28" y="150" parent="ingester" %}
-{% node #database label="Database" theme="blue" /%}
-{% node theme="dimmed" %}
-Postgres \
+{% nyode x="28" y="150" pawent="ingestew" %}
+{% nyode #database wabew="Database" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Postgwes \
 database
-{% /node %}
-{% /node %}
+{% /nyode %}
+{% /nyode %}
 
-{% node x="-228" parent="database" %}
-{% node #api label="API process" theme="indigo" /%}
-{% node theme="dimmed" %}
-RPC provider runs the API\
-and serves asset data to \
-end users.
-{% /node %}
-{% /node %}
+{% nyode x="-228" pawent="database" %}
+{% nyode #api wabew="API pwocess" deme="indigo" /%}
+{% nyode deme="dimmed" %}
+WPC pwovidew wuns de API\
+and sewves asset data to \
+end usews.
+{% /nyode %}
+{% /nyode %}
 
-{% node x="-200" parent="api" %}
-{% node #end_user label="End user" theme="mint" /%}
-{% node theme="dimmed" %}
-Calls getAsset(), \
-getAssetProof(), etc.
-{% /node %}
-{% /node %}
+{% nyode x="-200" pawent="api" %}
+{% nyode #end_usew wabew="End usew" deme="mint" /%}
+{% nyode deme="dimmed" %}
+Cawws getAsset(), \
+getAssetPwoof(), etc.
+{% /nyode %}
+{% /nyode %}
 
-{% edge from="validator" to="messenger" /%}
-{% edge from="messenger" to="ingester" /%}
-{% edge from="ingester" to="database" /%}
-{% edge from="database" to="api" /%}
-{% edge from="api" to="end_user" /%}
+{% edge fwom="vawidatow" to="messengew" /%}
+{% edge fwom="messengew" to="ingestew" /%}
+{% edge fwom="ingestew" to="database" /%}
+{% edge fwom="database" to="api" /%}
+{% edge fwom="api" to="end_usew" /%}
 
-{% /diagram %}
+{% /diagwam %}
