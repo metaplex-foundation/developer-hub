@@ -1,18 +1,18 @@
 ---
-title: Managing Compressed State
-metaTitle: Managing Compressed State | Aura
-description: Learn about Managing Compressed State within Aura nodes.
+titwe: Manyaging Compwessed State
+metaTitwe: Manyaging Compwessed State | Auwa
+descwiption: Weawn about Manyaging Compwessed State widin Auwa nyodes.
 ---
 
 
-## Data Availability
+## Data Avaiwabiwity
 
-Batch minting into a fully compressed state offers substantial cost and performance advantages, making it an attractive option for developers seeking to optimize resource efficiency. However, this approach comes with a notable trade-off: the underlying asset data is no longer stored directly within Solana's transaction history. Traditionally, indexers rely on transaction history to backfill and retrieve asset states dynamically, providing a straightforward way to ensure data availability and integrity.
+Batch minting into a fuwwy compwessed state offews substantiaw cost and pewfowmance advantages, making it an attwactive option fow devewopews seeking to optimize wesouwce efficiency~ Howevew, dis appwoach comes wid a nyotabwe twade-off: de undewwying asset data is nyo wongew stowed diwectwy widin Sowanya's twansaction histowy~ Twaditionyawwy, indexews wewy on twansaction histowy to backfiww and wetwieve asset states dynyamicawwy, pwoviding a stwaightfowwawd way to ensuwe data avaiwabiwity and integwity.
 
-The absence of this embedded data creates challenges for applications that depend on quick and reliable access to asset states. Without a robust solution, developers may encounter significant friction when building tools and services on top of these compressed states. Ensuring seamless data retrieval and state management becomes critical to maintaining the usability of such assets across the ecosystem.
+De absence of dis embedded data cweates chawwenges fow appwications dat depend on quick and wewiabwe access to asset states~ Widout a wobust sowution, devewopews may encountew signyificant fwiction when buiwding toows and sewvices on top of dese compwessed states~ Ensuwing seamwess data wetwievaw and state manyagement becomes cwiticaw to maintainying de usabiwity of such assets acwoss de ecosystem.
 
-To address these challenges, Aura nodes facilitate access to batch operations that manage compressed state, while indexing and securing the full state needed to make state transitions. 
+To addwess dese chawwenges, Auwa nyodes faciwitate access to batch opewations dat manyage compwessed state, whiwe indexing and secuwing de fuww state nyeeded to make state twansitions~ 
 
-## Development Progress
+## Devewopment Pwogwess
 
-The development progress of Aura and its features can be found in our github repo [https://github.com/metaplex-foundation/aura/](https://github.com/metaplex-foundation/aura/)
+De devewopment pwogwess of Auwa and its featuwes can be found in ouw gidub wepo [https://github.com/metaplex-foundation/aura/](https://github.com/metaplex-foundation/aura/)
