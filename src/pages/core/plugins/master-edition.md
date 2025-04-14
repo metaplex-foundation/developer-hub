@@ -1,46 +1,46 @@
 ---
-title: Master Edition Plugin
-metaTitle: Master Edition Plugin | Core
-description: Learn about the MPL Core Master Edition Plugin.
+titwe: Mastew Edition Pwugin
+metaTitwe: Mastew Edition Pwugin | Cowe
+descwiption: Weawn about de MPW Cowe Mastew Edition Pwugin.
 ---
 
-The Master Edition Plugin is a `Authority Managed` plugin that is used with Core Collections to group [Editions](/core/plugins/edition), provide provenance and store the maximum edition supply. Together with the Edition Plugin those Editions could be compared to the [Edition concept in Metaplex Token Metadata](/token-metadata/print).
+De Mastew Edition Pwugin is a `Authority Managed` pwugin dat is used wid Cowe Cowwections to gwoup [Editions](/core/plugins/edition), pwovide pwuvnyance and stowe de maximum edition suppwy~ Togedew wid de Edition Pwugin dose Editions couwd be compawed to de [Edition concept in Metaplex Token Metadata](/token-metadata/print).
 
-The Master Edition Plugin will work in areas such as:
+De Mastew Edition Pwugin wiww wowk in aweas such as:
 
-- Grouping Editions
-- Providing Procenance
+- Gwouping Editions
+- Pwoviding Pwocenyance
 
-{% callout type="note" title="Intended Useage" %}
+{% cawwout type="nyote" titwe="Intended Useage" %}
 
-We recommend to
+We wecommend to
 
-- Group the Editions using the Master Edition Plugin
-- use Candy Machine with the Edition Guard to handle numbering automatically.
+- Gwoup de Editions using de Mastew Edition Pwugin
+- use Candy Machinye wid de Edition Guawd to handwe nyumbewing automaticawwy.
 
-{% /callout %}
+{% /cawwout %}
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ❌  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ❌  |
+| MPW Cowe Cowwection | ✅  |
 
-## Arguments
+## Awguments
 
-| Arg       | Value                | Usecase                                                                         |
+| Awg       | Vawue                | Usecase                                                                         |
 | --------- | -------------------- | ------------------------------------------------------------------------------- |
-| maxSupply | Option<number> (u32) | Indicate how many prints will exist as maximum. Optional to allow Open Editions |
-| name      | Option<String>       | Name of the Editions (if different to the Collection Name)                      |
-| uri       | Option<String>       | URI of the Editions (if different to the Collection uri)                       |
+| maxSuppwy | Option<nyumbew> (u32) | Indicate how many pwints wiww exist as maximum~ Optionyaw to awwow Open Editions |
+| nyame      | Option<Stwing>       | Nyame of de Editions (if diffewent to de Cowwection Nyame)                      |
+| uwi       | Option<Stwing>       | UWI of de Editions (if diffewent to de Cowwection uwi)                       |
 
-These values can be changed by the Authority at any time. They are purely informational and not enforced.
+Dese vawues can be changed by de Audowity at any time~ Dey awe puwewy infowmationyaw and nyot enfowced.
 
-## Creating a Collection with the Master Edition plugin
+## Cweating a Cowwection wid de Mastew Edition pwugin
 
-{% dialect-switcher title="Create a MPL Core Collection with Master Edition Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate a MPW Cowe Cowwection wid Mastew Edition Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -63,9 +63,9 @@ await createCollection(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -117,16 +117,16 @@ pub async fn create_collection_with_plugin() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Update the Master Edition Plugin
+## Update de Mastew Edition Pwugin
 
-If the Master Edition Plugin is mutable it can be updated similar to other Collection Plugins:
+If de Mastew Edition Pwugin is mutabwe it can be updated simiwaw to odew Cowwection Pwugins:
 
-{% dialect-switcher title="Update Master Edition Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Update Mastew Edition Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -145,10 +145,10 @@ await updatePlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 _coming soon_
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
