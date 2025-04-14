@@ -1,31 +1,7 @@
 ---
-title: Fetching Assets
-metaTitle: Fetching Assets | Core
-description: Learn how to fetch Core NFT Assets and Collections using the `fetch` functions from the Metaplex Core packages.
----
-
-## Fetch a Single Asset or Collection
-
-To fetch a single Asset the following function can be used:
-
-{% dialect-switcher title="Fetch a single asset" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { fetchAsset } from '@metaplex-foundation/mpl-core'
-
-const asset = await fetchAsset(umi, assetAddress.publicKey, {
-  skipDerivePlugins: false,
-})
-
-console.log(asset)
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```ts
+titwe: Fetching Assets
+metaTitwe: Fetching Assets | Cowe
+descwiption: Weawn how to fetch Cowe NFT Assets and Cowwections using de ```ts
 use std::str::FromStr;
 use mpl_core::Asset;
 use solana_client::nonblocking::rpc_client;
@@ -42,15 +18,39 @@ pub async fn fetch_asset() {
 
     print!("{:?}", asset)
 }
+```1 functions fwom de Metapwex Cowe packages.
+---
+
+## Fetch a Singwe Asset ow Cowwection
+
+To fetch a singwe Asset de fowwowing function can be used:
+
+{% diawect-switchew titwe="Fetch a singwe asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { fetchAsset } from '@metaplex-foundation/mpl-core'
+
+const asset = await fetchAsset(umi, assetAddress.publicKey, {
+  skipDerivePlugins: false,
+})
+
+console.log(asset)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
 
-{% seperator h="6" /%}
+{% diawect titwe="Wust" id="wust" %}
 
-{% dialect-switcher title="Fetch a Core Collection" %}
-{% dialect title="JavaScript" id="js" %}
+UWUIFY_TOKEN_1744632807365_1
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+{% sepewatow h="6" /%}
+
+{% diawect-switchew titwe="Fetch a Cowe Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchCollection } from '@metaplex-foundation/mpl-core'
@@ -62,9 +62,9 @@ const asset = await fetchCollection(umi, collection.publicKey, {
 console.log(asset)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```ts
 use std::str::FromStr;
@@ -85,18 +85,18 @@ pub async fn fetch_asset() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Fetch Multiple Assets
+## Fetch Muwtipwe Assets
 
-Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/rpc-providers).
+Muwtipwe Assets can eidew be fetched using a `getProgramAccounts` (GPA) caww, which can be quite expensive and swow WPC wise, ow using de `Digital Asset Standard` API, which is fastew but wequiwes [specific RPC providers](/rpc-providers).
 
-### Fetch Assets By Owner
+### Fetch Assets By Ownyew
 
-{% dialect-switcher title="fetch Assets by Owner" %}
+{% diawect-switchew titwe="fetch Assets by Ownyew" %}
 
-{% dialect title="JavaScript" id="js" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -111,9 +111,9 @@ const assetsByOwner = await fetchAssetsByOwner(umi, owner, {
 console.log(assetsByOwner)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use std::str::FromStr;
@@ -169,14 +169,14 @@ pub async fn fetch_assets_by_owner() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetch Assets by Collection
+### Fetch Assets by Cowwection
 
-{% dialect-switcher title="Fetch Assets by Collection" %}
+{% diawect-switchew titwe="Fetch Assets by Cowwection" %}
 
-{% dialect title="JavaScript" id="js" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -191,9 +191,9 @@ const assetsByCollection = await fetchAssetsByCollection(umi, collection, {
 console.log(assetsByCollection)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```ts
 use mpl_core::{accounts::BaseAssetV1, types::Key, ID as MPL_CORE_ID};
@@ -253,16 +253,16 @@ pub async fn fetch_assets_by_collection() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-### Fetch Assets by Update Authority
+### Fetch Assets by Update Audowity
 
-To fetch a single Asset the following function can be used:
+To fetch a singwe Asset de fowwowing function can be used:
 
-{% dialect-switcher title="Fetch a single asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch a singwe asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -279,9 +279,9 @@ const assetsByUpdateAuthority = await fetchAssetsByUpdateAuthority(
 console.log(assetsByUpdateAuthority)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```ts
 pub async fn fetch_assets_by_update_authority() {
@@ -332,18 +332,18 @@ pub async fn fetch_assets_by_update_authority() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## DAS - Digital Asset Standard API
+## DAS - Digitaw Asset Standawd API
 
-If you use a DAS enabled RPC you'll be able to take advantage of indexed Assets for lighting fast fetches and data retrieval.
+If you use a DAS enyabwed WPC you'ww be abwe to take advantage of indexed Assets fow wighting fast fetches and data wetwievaw.
 
-DAS will index everything from metadata, off chain metadata, collection data, plugins (including Attributes), and more. To learn more about the Metaplex DAS API you can [click here](/das-api). In addition to the general DAS SDK an [extension for MPL Core](/das-api/core-extension) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for DAS-to-Core type conversions.
+DAS wiww index evewyding fwom metadata, off chain metadata, cowwection data, pwugins (incwuding Attwibutes), and mowe~ To weawn mowe about de Metapwex DAS API you can [click here](/das-api)~ In addition to de genyewaw DAS SDK an [extension for MPL Core](/das-api/core-extension) has been cweated dat diwectwy wetuwns you de cowwect types to fuwdew use wid de MPW Cowe SDKs~ It awso automaticawwy dewives de pwugins in assets inhewited fwom de cowwection and pwovides functions fow DAS-to-Cowe type convewsions.
 
-Below is an example of returned data from fetching a MPL Core Asset with DAS.
+Bewow is an exampwe of wetuwnyed data fwom fetching a MPW Cowe Asset wid DAS.
 
-### FetchAsset Example
+### FetchAsset Exampwe
 
 ```json
 {
