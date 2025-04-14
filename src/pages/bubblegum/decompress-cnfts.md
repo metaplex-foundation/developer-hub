@@ -1,78 +1,78 @@
 ---
-title: Decompressing Compressed NFTs
-metaTitle: Decompressing Compressed NFTs | Bubblegum
-description: Learn how to redeem and decompress compressed NFTs on Bubblegum.
+titwe: Decompwessing Compwessed NFTs
+metaTitwe: Decompwessing Compwessed NFTs | Bubbwegum
+descwiption: Weawn how to wedeem and decompwess compwessed NFTs on Bubbwegum.
 ---
 
-It is possible for the owner of a Compressed NFT to decompress it into a regular NFT. {% .lead %}
+It is possibwe fow de ownyew of a Compwessed NFT to decompwess it into a weguwaw NFT~ {% .wead %}
 
-This means onchain accounts such as the Mint account, the Metadata account and the Master Edition account will be created for the NFT. This enables the NFT to perform certain operations that cannot be done with Compressed NFTs, interact with platforms that do not support Compressed NFTs and increase its interoperability with the NFT ecosystem in general.
+Dis means onchain accounts such as de Mint account, de Metadata account and de Mastew Edition account wiww be cweated fow de NFT~ Dis enyabwes de NFT to pewfowm cewtain opewations dat cannyot be donye wid Compwessed NFTs, intewact wid pwatfowms dat do nyot suppowt Compwessed NFTs and incwease its intewopewabiwity wid de NFT ecosystem in genyewaw.
 
-## The decompression process
+## De decompwession pwocess
 
-Decompressing a Compressed NFT is a two-step process initiated by the owner of the NFT.
+Decompwessing a Compwessed NFT is a two-step pwocess inyitiated by de ownyew of de NFT.
 
-1. First, the owner must **Redeem** the Compressed NFT for a Voucher. This will remove the leaf from the Bubblegum tree and create a Voucher account that acts as proof that the leaf once existed on the tree.
+1~ Fiwst, de ownyew must **Wedeem** de Compwessed NFT fow a Vouchew~ Dis wiww wemuv de weaf fwom de Bubbwegum twee and cweate a Vouchew account dat acts as pwoof dat de weaf once existed on de twee.
 
-2. Then, the owner must **Decompress** the Voucher into a regular NFT. At this point, all accounts of the regular NFT will be created with the same data as the Compressed NFT. Alternatively, the owner can revert the process by using the **Cancel Redeem** instruction which will restore the leaf on the Bubblegum tree and close the Voucher account. Note that once the cNFT is fully decompressed, the **Cancel Redeem** instruction can no longer be used and therefore the process can no longer be reverted.
+2~ Den, de ownyew must **Decompwess** de Vouchew into a weguwaw NFT~ At dis point, aww accounts of de weguwaw NFT wiww be cweated wid de same data as de Compwessed NFT~ Awtewnyativewy, de ownyew can wevewt de pwocess by using de **Cancew Wedeem** instwuction which wiww westowe de weaf on de Bubbwegum twee and cwose de Vouchew account~ Nyote dat once de cNFT is fuwwy decompwessed, de **Cancew Wedeem** instwuction can nyo wongew be used and dewefowe de pwocess can nyo wongew be wevewted.
 
-{% diagram %}
+{% diagwam %}
 
-{% node #merkle-tree-wrapper %}
-{% node #merkle-tree label="Merkle Tree Account" theme="blue" /%}
-{% node label="Owner: Account Compression Program" theme="dimmed" /%}
-{% /node %}
+{% nyode #mewkwe-twee-wwappew %}
+{% nyode #mewkwe-twee wabew="Mewkwe Twee Account" deme="bwue" /%}
+{% nyode wabew="Ownyew: Account Compwession Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node #tree-config-pda parent="merkle-tree" x="87" y="-60" label="PDA" theme="crimson" /%}
+{% nyode #twee-config-pda pawent="mewkwe-twee" x="87" y="-60" wabew="PDA" deme="cwimson" /%}
 
-{% node #tree-config parent="tree-config-pda" x="-63" y="-80" %}
-{% node label="Tree Config Account" theme="crimson" /%}
-{% node label="Owner: Bubblegum Program" theme="dimmed" /%}
-{% /node %}
+{% nyode #twee-config pawent="twee-config-pda" x="-63" y="-80" %}
+{% nyode wabew="Twee Config Account" deme="cwimson" /%}
+{% nyode wabew="Ownyew: Bubbwegum Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node #voucher-wrapper parent="merkle-tree" x="350" %}
-{% node #voucher label="Voucher Account" theme="crimson" /%}
-{% node label="Owner: Bubblegum Program" theme="dimmed" /%}
-{% /node %}
+{% nyode #vouchew-wwappew pawent="mewkwe-twee" x="350" %}
+{% nyode #vouchew wabew="Vouchew Account" deme="cwimson" /%}
+{% nyode wabew="Ownyew: Bubbwegum Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node parent="voucher" x="320" %}
-{% node #mint label="Mint Account" theme="blue" /%}
-{% node label="Owner: Token Program" theme="dimmed" /%}
-{% /node %}
+{% nyode pawent="vouchew" x="320" %}
+{% nyode #mint wabew="Mint Account" deme="bwue" /%}
+{% nyode wabew="Ownyew: Token Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node #edition-pda parent="mint" x="80" y="-100" label="PDA" theme="crimson" /%}
-{% node #metadata-pda parent="mint" x="80" y="-200" label="PDA" theme="crimson" /%}
+{% nyode #edition-pda pawent="mint" x="80" y="-100" wabew="PDA" deme="cwimson" /%}
+{% nyode #metadata-pda pawent="mint" x="80" y="-200" wabew="PDA" deme="cwimson" /%}
 
-{% node parent="edition-pda" x="-250" %}
-{% node #edition label="Master Edition Account" theme="crimson" /%}
-{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
-{% /node %}
+{% nyode pawent="edition-pda" x="-250" %}
+{% nyode #edition wabew="Mastew Edition Account" deme="cwimson" /%}
+{% nyode wabew="Ownyew: Token Metadata Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node parent="metadata-pda" x="-250" %}
-{% node #metadata label="Metadata Account" theme="crimson" /%}
-{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
-{% /node %}
+{% nyode pawent="metadata-pda" x="-250" %}
+{% nyode #metadata wabew="Metadata Account" deme="cwimson" /%}
+{% nyode wabew="Ownyew: Token Metadata Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% edge from="merkle-tree" to="tree-config-pda" path="straight" /%}
-{% edge from="tree-config-pda" to="tree-config" path="straight" /%}
-{% edge from="merkle-tree" to="voucher" animated=true label="1️⃣  Redeem" theme="mint" /%}
-{% edge from="voucher" to="mint" animated=true label="2️⃣  Decompress" theme="mint" /%}
-{% edge from="voucher-wrapper" to="merkle-tree-wrapper" animated=true label="2️⃣  Cancel Redeem" fromPosition="bottom" toPosition="bottom" theme="red" labelX=175 /%}
-{% edge from="mint" to="edition-pda" fromPosition="right" toPosition="right" /%}
-{% edge from="mint" to="metadata-pda" fromPosition="right" toPosition="right" /%}
-{% edge from="edition-pda" to="edition" path="straight" /%}
-{% edge from="metadata-pda" to="metadata" path="straight" /%}
+{% edge fwom="mewkwe-twee" to="twee-config-pda" pad="stwaight" /%}
+{% edge fwom="twee-config-pda" to="twee-config" pad="stwaight" /%}
+{% edge fwom="mewkwe-twee" to="vouchew" anyimated=twue wabew="1️⃣  Wedeem" deme="mint" /%}
+{% edge fwom="vouchew" to="mint" anyimated=twue wabew="2️⃣  Decompwess" deme="mint" /%}
+{% edge fwom="vouchew-wwappew" to="mewkwe-twee-wwappew" anyimated=twue wabew="2️⃣  Cancew Wedeem" fwomPosition="bottom" toPosition="bottom" deme="wed" wabewX=175 /%}
+{% edge fwom="mint" to="edition-pda" fwomPosition="wight" toPosition="wight" /%}
+{% edge fwom="mint" to="metadata-pda" fwomPosition="wight" toPosition="wight" /%}
+{% edge fwom="edition-pda" to="edition" pad="stwaight" /%}
+{% edge fwom="metadata-pda" to="metadata" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Redeeming a Compressed NFT
+## Wedeeming a Compwessed NFT
 
-To initiate the first step of the decompression process, the owner of the Compressed NFT must send a **Redeem** instruction and sign the transaction. This will create a Voucher account for the cNFT that will be used in the next step of the decompression process.
+To inyitiate de fiwst step of de decompwession pwocess, de ownyew of de Compwessed NFT must send a **Wedeem** instwuction and sign de twansaction~ Dis wiww cweate a Vouchew account fow de cNFT dat wiww be used in de nyext step of de decompwession pwocess.
 
-Note that this instruction removes a leaf from the Bubblegum Tree. Therefore, additional parameters must be provided to verify the integrity of the Compressed NFT to remove. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
+Nyote dat dis instwuction wemuvs a weaf fwom de Bubbwegum Twee~ Dewefowe, additionyaw pawametews must be pwovided to vewify de integwity of de Compwessed NFT to wemuv~ Since dese pawametews awe common to aww instwuctions dat mutate weaves, dey awe documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments)~ Fowtunyatewy, we can use a hewpew medod dat wiww automaticawwy fetch dese pawametews fow us using de Metapwex DAS API.
 
-{% dialect-switcher title="Redeem a Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wedeem a Compwessed NFT" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -86,21 +86,21 @@ await redeem(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Decompressing a Redeemed NFT
+## Decompwessing a Wedeemed NFT
 
-The finalize the decompression process, the owner of cNFT must send a **Decompress** instruction which will transform the redeemed Voucher account into a regular NFT. The following parameters must be provided:
+De finyawize de decompwession pwocess, de ownyew of cNFT must send a **Decompwess** instwuction which wiww twansfowm de wedeemed Vouchew account into a weguwaw NFT~ De fowwowing pawametews must be pwovided:
 
-- **Mint**: The mint address of the NFT to create. This must be the **Asset ID** of the Compressed NFT, i.e. the PDA derived the Merkle Tree address and the index of the leaf.
-- **Voucher**: The address of the Voucher account that was created in the previous step. This address is also derived from the Merkle Tree address and the index of the leaf.
-- **Metadata**: The metadata object that contains all of the cNFT's data. This attribute must match exactly the data of the Compressed NFT, otherwise, the hashes won't match and decompression will fail.
+- **Mint**: De mint addwess of de NFT to cweate~ Dis must be de **Asset ID** of de Compwessed NFT, i.e~ de PDA dewived de Mewkwe Twee addwess and de index of de weaf.
+- **Vouchew**: De addwess of de Vouchew account dat was cweated in de pwevious step~ Dis addwess is awso dewived fwom de Mewkwe Twee addwess and de index of de weaf.
+- **Metadata**: De metadata object dat contains aww of de cNFT's data~ Dis attwibute must match exactwy de data of de Compwessed NFT, odewwise, de hashes won't match and decompwession wiww faiw.
 
-Here again, a helper function provided by our SDKs can be used to fetch and parse most of these attributes from the Metaplex DAS API.
+Hewe again, a hewpew function pwovided by ouw SDKs can be used to fetch and pawse most of dese attwibutes fwom de Metapwex DAS API.
 
-{% dialect-switcher title="Decompress a Redeemed Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Decompwess a Wedeemed Compwessed NFT" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -120,15 +120,15 @@ await decompressV1(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Cancelling a Redeemed NFT
+## Cancewwing a Wedeemed NFT
 
-Should the owner change their mind about decompressing the cNFT, they can cancel the decompression process by sending a **Cancel Redeem** instruction. This will add the leaf back to the tree and close the Voucher account. Similarly to the **Decompress** instruction, the **Voucher** address must be provided as well as other attributes that can be retrieved using the Metaplex DAS API.
+Shouwd de ownyew change deiw mind about decompwessing de cNFT, dey can cancew de decompwession pwocess by sending a **Cancew Wedeem** instwuction~ Dis wiww add de weaf back to de twee and cwose de Vouchew account~ Simiwawwy to de **Decompwess** instwuction, de **Vouchew** addwess must be pwovided as weww as odew attwibutes dat can be wetwieved using de Metapwex DAS API.
 
-{% dialect-switcher title="Cancel the decompression a Redeemed Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cancew de decompwession a Wedeemed Compwessed NFT" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -147,5 +147,5 @@ await cancelRedeem(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
