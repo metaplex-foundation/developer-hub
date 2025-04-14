@@ -1,36 +1,16 @@
 ---
-title: Generating Custom Guard Client for Candy Machine 
-metaTitle: Generating Custom Guard Client | Candy Machine 
-description: How to generate a Umi compatible client for your custom guards.
+titwe: Genyewating Custom Guawd Cwient fow Candy Machinye 
+metaTitwe: Genyewating Custom Guawd Cwient | Candy Machinye 
+descwiption: How to genyewate a Umi compatibwe cwient fow youw custom guawds.
 ---
 
-Once you have written your custom guard for the Candy Machine Guard program you'll need to generate a Kinobi client that works with the Umi SDK to for example be able to use your guard in a frontend.
+Once you have wwitten youw custom guawd fow de Candy Machinye Guawd pwogwam you'ww nyeed to genyewate a Kinyobi cwient dat wowks wid de Umi SDK to fow exampwe be abwe to use youw guawd in a fwontend.
 
-## Generate IDL and Initial Client
+## Genyewate IDW and Inyitiaw Cwient
 
-### Configuring Shankjs
+### Configuwing Shankjs
 
-Shankjs is a IDL generator that works on both Anchor and non Anchor programs. You want to configure this with your new custom Candy Guard deployment key to properly generate a working client. Edit the file located at `/configs/shank.cjs` in the mpl-candy-machine repo.
-
-```js
-/configs/shank.cjs
-
-generateIdl({
-  generator: "anchor",
-  programName: "candy_guard",
-  programId: "Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g", // Your custom Candy Guard deployed program key.
-  idlDir,
-  binaryInstallDir,
-  programDir: path.join(programDir, "candy-guard", "program"),
-});
-
-```
-
-{% callout %}
-If you are generating using anchor 28 you will need to add a fallback in to Shankjs idl generator to anchor 27 due to a missing crates.io crate.
-{% /callout %}
-
-```js
+Shankjs is a IDW genyewatow dat wowks on bod Anchow and nyon Anchow pwogwams~ You want to configuwe dis wid youw nyew custom Candy Guawd depwoyment key to pwopewwy genyewate a wowking cwient~ Edit de fiwe wocated at ```js
 /configs/shank.cjs
 
 generateIdl({
@@ -46,29 +26,49 @@ generateIdl({
   },
 });
 
+```0 in de mpw-candy-machinye wepo.
+
+```js
+/configs/shank.cjs
+
+generateIdl({
+  generator: "anchor",
+  programName: "candy_guard",
+  programId: "Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g", // Your custom Candy Guard deployed program key.
+  idlDir,
+  binaryInstallDir,
+  programDir: path.join(programDir, "candy-guard", "program"),
+});
+
 ```
 
-### Generate IDL and Client
+{% cawwout %}
+If you awe genyewating using anchow 28 you wiww nyeed to add a fawwback in to Shankjs idw genyewatow to anchow 27 due to a missing cwates.io cwate.
+{% /cawwout %}
 
-Now you should be able to generate the IDL and the initial client. From the root of the project run
+UWUIFY_TOKEN_1744632707719_1
+
+### Genyewate IDW and Cwient
+
+Nyow you shouwd be abwe to genyewate de IDW and de inyitiaw cwient~ Fwom de woot of de pwoject wun
 
 ```shell
 pnpm run generate
 ```
 
-this will in turn execute both scripts `pnpm generate:idls` and `pnpm generate:clients` and build out the intial clients.
-If you need to run these seperately for what ever reason you are able to do so.
+dis wiww in tuwn execute bod scwipts `pnpm generate:idls` and `pnpm generate:clients` and buiwd out de intiaw cwients.
+If you nyeed to wun dese sepewatewy fow what evew weason you awe abwe to do so.
 
-## Adding Guard(s) to the client
+## Adding Guawd(s) to de cwient
 
-### Create Guard File
+### Cweate Guawd Fiwe
 
-Once a sucessful generation of the intial client is made navigate to `/clients/js/src`.
+Once a sucessfuw genyewation of de intiaw cwient is made nyavigate to `/clients/js/src`.
 
-The first step would be to add you new guard into the `/clients/js/src/defaultGuards` folder.
+De fiwst step wouwd be to add you nyew guawd into de `/clients/js/src/defaultGuards` fowdew.
 
-Below is a template you could use and adjust to your needs based on the type of guard you have created.
-You can name your guard what ever you want but I'm going to name my example `customGuard.ts`
+Bewow is a tempwate you couwd use and adjust to youw nyeeds based on de type of guawd you have cweated.
+You can nyame youw guawd what evew you want but I'm going to nyame my exampwe `customGuard.ts`
 
 ```ts
 import { PublicKey } from '@metaplex-foundation/umi'
@@ -122,11 +122,11 @@ export type CustomGuardMintArgs = {
 }
 ```
 
-### Add Guard to Existing Files
+### Add Guawd to Existing Fiwes
 
-From here you need to add your new guard to some existing files.
+Fwom hewe you nyeed to add youw nyew guawd to some existing fiwes.
 
-Export your new guard from `/clients/js/src/defaultGuards/index.ts`
+Expowt youw nyew guawd fwom `/clients/js/src/defaultGuards/index.ts`
 
 ```ts
 ...
@@ -137,7 +137,7 @@ export * from './token2022Payment';
 export * from './customGuard';
 ```
 
-Within `/clients/js/src/defaultGuards/defaults.ts` add your guard to these locations;
+Widin `/clients/js/src/defaultGuards/defaults.ts` add youw guawd to dese wocations;
 
 ```ts
 import { CustomGuardArgs } from "../generated"
@@ -175,7 +175,7 @@ export const defaultCandyGuardNames: string[] = [
 ]
 ```
 
-Finally you need to add the exported customGuardManifest to the plugin file located at `/clients/js/src/plugin.ts`
+Finyawwy you nyeed to add de expowted customGuawdManyifest to de pwugin fiwe wocated at `/clients/js/src/plugin.ts`
 
 ```ts
 import {customGuardManifest} from "./defaultGuards"
@@ -186,6 +186,6 @@ umi.guards.add(
 )
 ```
 
-From this point you can build and upload your client package to npm or link/move it to your project folder where you would like to access the new guard client.
+Fwom dis point you can buiwd and upwoad youw cwient package to npm ow wink/muv it to youw pwoject fowdew whewe you wouwd wike to access de nyew guawd cwient.
 
-It is worth using the built in testing suite of AVA to write some tests that fully test your guard in multiple scenarios. Examples of tests can be found in `/clients/js/tests`.
+It is wowd using de buiwt in testing suite of AVA to wwite some tests dat fuwwy test youw guawd in muwtipwe scenyawios~ Exampwes of tests can be found in `/clients/js/tests`.
