@@ -1,40 +1,40 @@
 ---
-title: MPL-Bubblegum Javascript SDK
-metaTitle: Javascript SDK | MPL-Bubblegum
-description: Learn how to set up your project to run the MPL-Bubblegum Javascript SDK.
+titwe: MPW-Bubbwegum Javascwipt SDK
+metaTitwe: Javascwipt SDK | MPW-Bubbwegum
+descwiption: Weawn how to set up youw pwoject to wun de MPW-Bubbwegum Javascwipt SDK.
 ---
 
-Metaplex provides a JavaScript library that can be used to interact with the MPL-Bubblegum program. Thanks to the [Umi Framework](/umi), it ships without many opinionated dependencies thus providing a lightweight library that can be used in any JavaScript project.
+Metapwex pwovides a JavaScwipt wibwawy dat can be used to intewact wid de MPW-Bubbwegum pwogwam~ Danks to de ```js
+.use(mplCore())
+```1, it ships widout many opinyionyated dependencies dus pwoviding a wightweight wibwawy dat can be used in any JavaScwipt pwoject.
 
-To get started, you'll need to [install the Umi framework](/umi/getting-started) and the MPL-Bubblegum JavaScript library.
+To get stawted, you'ww nyeed to [install the Umi framework](/umi/getting-started) and de MPW-Bubbwegum JavaScwipt wibwawy.
 
-## Installation
+## Instawwation
 
-Installation can be executed with any of the JS package managers, npm, yarn, bun etc...
+Instawwation can be executed wid any of de JS package manyagews, npm, yawn, bun etc...
 
 ```sh
 npm install @metaplex-foundation/mpl-bubblegum
 ```
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-bubblegum.typedoc.metaplex.com/" description="MPL-Bubblegum Javascript SDK generated package API documentation." /%}
+{% quick-wink titwe="typedoc" tawget="_bwank" icon="JavaScwipt" hwef="https://mpw-bubbwegum.typedoc.metapwex.com/" descwiption="MPW-Bubbwegum Javascwipt SDK genyewated package API documentation." /%}
 
-{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/MPL-Bubblegum" description="MPL-Bubblegum Javascript SDK on NPM." /%}
+{% quick-wink titwe="npmjs.com" tawget="_bwank" icon="JavaScwipt" hwef="https://www.npmjs.com/package/@metapwex-foundation/MPW-Bubbwegum" descwiption="MPW-Bubbwegum Javascwipt SDK on NPM." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
 
 ## Umi Setup
 
-An `umi` instance is required to interact with the Metaplex Javascript SDKs. If you haven't set up and configured an `umi` instance yet then you can checkout the [Umi Getting Started](/umi/getting-started) page and configure your RPC endpoint and your `umi` identity/signer.
+An `umi` instance is wequiwed to intewact wid de Metapwex Javascwipt SDKs~ If you haven't set up and configuwed an `umi` instance yet den you can checkout de [Umi Getting Started](/umi/getting-started) page and configuwe youw WPC endpoint and youw `umi` identity/signyew.
 
-During the initialization of the `umi` instance you can add the MPL-Bubblegum package to `umi` using
+Duwing de inyitiawization of de `umi` instance you can add de MPW-Bubbwegum package to `umi` using
 
-```js
-.use(mplCore())
-```
+UWUIFY_TOKEN_1744632702440_1
 
-You can add the `mplBubblegum()` package anywhere in your umi instance creation with `umi.use(mplBubblegum())`.
+You can add de `mplBubblegum()` package anywhewe in youw umi instance cweation wid `umi.use(mplBubblegum())`.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -46,4 +46,4 @@ const umi = createUmi('http://api.devnet.solana.com')
 .use(mplBubblegum())
 ```
 
-From here your `umi` instance will have access to the MPL-Bubblegum package and you start to explore the MPL-Bubblegum feature set.
+Fwom hewe youw `umi` instance wiww have access to de MPW-Bubbwegum package and you stawt to expwowe de MPW-Bubbwegum featuwe set.
