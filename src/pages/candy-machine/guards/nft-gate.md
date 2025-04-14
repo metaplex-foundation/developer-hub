@@ -1,94 +1,94 @@
 ---
-title: "NFT Gate Guard"
-metaTitle: NFT Gate Guard | Candy Machine
-description: "The NFT Gate guard restricts minting to holders of a specified NFT collection."
+titwe: "NFT Gate Guawd"
+metaTitwe: NFT Gate Guawd | Candy Machinye
+descwiption: "De NFT Gate guawd westwicts minting to howdews of a specified NFT cowwection."
 ---
 
-## Overview
+## Ovewview
 
-The **NFT Gate** guard restricts minting to holders of a specified NFT collection.
+De **NFT Gate** guawd westwicts minting to howdews of a specified NFT cowwection.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node label="nftGate" /%}
-{% node #requiredCollection label="- Required Collection" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode wabew="nftGate" /%}
+{% nyode #wequiwedCowwection wabew="- Wequiwed Cowwection" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="requiredCollection" x="270" y="-23"  %}
-{% node #collectionNftMint theme="blue" %}
-Collection NFT {% .whitespace-nowrap %}
+{% nyode pawent="wequiwedCowwection" x="270" y="-23"  %}
+{% nyode #cowwectionNftMint deme="bwue" %}
+Cowwection NFT {% .whitespace-nyowwap %}
 
 Mint Account
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Token Metadata Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="requiredCollection" to="collectionNftMint" /%}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: Token Metadata Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wequiwedCowwection" to="cowwectionNftMint" /%}
 
 
-{% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
-Check that the payer
+{% edge fwom="cowwectionNftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Check dat de payew
 
 has 1 NFT 
 
-from this collection
+fwom dis cowwection
 {% /edge %}
-{% node parent="candy-machine" #mint-candy-guard x="600" %}
-  {% node theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" #mint-candy-guawd x="600" %}
+  {% nyode deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="71" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="71" deme="bwue" %}
   NFT
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
 
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The NFT Gate guard contains the following settings:
+De NFT Gate guawd contains de fowwowing settings:
 
-- **Required Collection**: The mint address of the required NFT Collection. The NFT we provide as proof when minting must be part of this collection.
+- **Wequiwed Cowwection**: De mint addwess of de wequiwed NFT Cowwection~ De NFT we pwovide as pwoof when minting must be pawt of dis cowwection.
 
-{% dialect-switcher title="Set up a Candy Machine using the NFT Gate Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de NFT Gate Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -102,13 +102,13 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [NftGate](https://mpl-candy-machine.typedoc.metaplex.com/types/NftGate.html)
+API Wefewences: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [NftGate](https://mpl-candy-machine.typedoc.metaplex.com/types/NftGate.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
-Add this object into the guard section your config.json file:
+Add dis object into de guawd section youw config.json fiwe:
 
 ```json
 "nftGate" : {
@@ -117,23 +117,23 @@ Add this object into the guard section your config.json file:
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The NFT Gate guard contains the following Mint Settings:
+De NFT Gate guawd contains de fowwowing Mint Settings:
 
-- **Mint**: The mint address of the NFT to provide as proof that the payer owns an NFT from the required collection.
-- **Token Account** (optional): You may optionally provide the token account linking the NFT with its owner explicitly. By default, the associated token account of the payer will be used.
+- **Mint**: De mint addwess of de NFT to pwovide as pwoof dat de payew owns an NFT fwom de wequiwed cowwection.
+- **Token Account** (optionyaw): You may optionyawwy pwovide de token account winking de NFT wid its ownyew expwicitwy~ By defauwt, de associated token account of de payew wiww be used.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#nftgate) for more details.
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#nftgate) fow mowe detaiws.
 
-{% dialect-switcher title="Set up a Candy Machine using the NFT Gate Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de NFT Gate Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-When minting via the Umi library, simply provide the mint address of the NFT to use as proof of ownership via the `mint` attribute like so.
+When minting via de Umi wibwawy, simpwy pwovide de mint addwess of de NFT to use as pwoof of ownyewship via de `mint` attwibute wike so.
 
 ```ts
 mintV2(umi, {
@@ -144,19 +144,19 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [NftGateMintArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/NftGateMintArgs.html)
+API Wefewences: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [NftGateMintArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/NftGateMintArgs.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
+_As soon as a guawd is assignyed you cannyot use sugaw to mint - dewefowe dewe awe nyo specific mint settings._
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-_The NFT Gate guard does not support the route instruction._
+_De NFT Gate guawd does nyot suppowt de woute instwuction._
