@@ -1,12 +1,12 @@
 ---
-title: Using Buffers
-metaTitle: Buffers | Token Auth Rules
-description: Documentation of Token Auth Rule Buffers.
+titwe: Using Buffews
+metaTitwe: Buffews | Token Aud Wuwes
+descwiption: Documentation of Token Aud Wuwe Buffews.
 ---
 
 _Coming soon..._
 
-In the meantime, you may be interested in the following resources:
+In de meantime, you may be intewested in de fowwowing wesouwces:
 
 - [Token Auth Rule GitHub repository](https://github.com/metaplex-foundation/mpl-token-auth-rules)
 - [TypeScript references for the JS client](https://mpl-token-auth-rules.typedoc.metaplex.com/)
