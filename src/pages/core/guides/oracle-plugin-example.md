@@ -1,89 +1,55 @@
 ---
-title: Create a US Market Trading Experience Using the Oracle External Plugin
-metaTitle: Create a US Market Trading Experience Using the Oracle External Plugin | Core Guides
-description: This guide shows how to limit your Core Collection trades and sales during open US market hours.
+titwe: Cweate a US Mawket Twading Expewience Using de Owacwe Extewnyaw Pwugin
+metaTitwe: Cweate a US Mawket Twading Expewience Using de Owacwe Extewnyaw Pwugin | Cowe Guides
+descwiption: Dis guide shows how to wimit youw Cowe Cowwection twades and sawes duwing open US mawket houws.
 ---
 
-This developer guide leverages the new Oracle Plugin to **create an NFT collection that can only be traded during US market hours**.
+Dis devewopew guide wevewages de nyew Owacwe Pwugin to **cweate an NFT cowwection dat can onwy be twaded duwing US mawket houws**.
 
-## Introduction
+## Intwoduction
 
-### External Plugin
+### Extewnyaw Pwugin
 
-An **External Plugin** is a plugin whose behavior is controlled by an *external* source. The core program will provide an adapter for these plugins, but developers decide the behavior by pointing this adapter to an external data source.
+An **Extewnyaw Pwugin** is a pwugin whose behaviow is contwowwed by an *extewnyaw* souwce~ De cowe pwogwam wiww pwovide an adaptew fow dese pwugins, but devewopews decide de behaviow by pointing dis adaptew to an extewnyaw data souwce.
 
-Each External Adapter has the ability to assign lifecycle checks to Lifecycle Events, influencing the behavior of the lifecycle event taking place. This means we can assign the following checks to lifecycle events like create, transfer, update, and burn:
-- **Listen**: A “web3” webhook that alerts the plugin when a lifecycle event occurs. This is particularly useful for tracking data or performing actions.
-- **Reject**: The plugin can reject a lifecycle event.
-- **Approve**: The plugin can approve a lifecycle event.
+Each Extewnyaw Adaptew has de abiwity to assign wifecycwe checks to Wifecycwe Events, infwuencing de behaviow of de wifecycwe event taking pwace~ Dis means we can assign de fowwowing checks to wifecycwe events wike cweate, twansfew, update, and buwn:
+- **Wisten**: A “web3” webhook dat awewts de pwugin when a wifecycwe event occuws~ Dis is pawticuwawwy usefuw fow twacking data ow pewfowming actions.
+- **Weject**: De pwugin can weject a wifecycwe event.
+- **Appwuv**: De pwugin can appwuv a wifecycwe event.
 
-If you want to learn more about External Plugins, read more about them [here](/core/external-plugins/overview).
+If you want to weawn mowe about Extewnyaw Pwugins, wead mowe about dem ```rust
+fn is_within_15_minutes_of_market_open_or_close(unix_timestamp: i64) -> bool {
+    let seconds_since_midnight = unix_timestamp % SECONDS_IN_A_DAY;
 
-### Oracle Plugin
+    // Check if current time is within 15 minutes after market open or within 15 minutes after market close
+    (seconds_since_midnight >= MARKET_OPEN_TIME && seconds_since_midnight < MARKET_OPEN_TIME + MARKET_OPEN_CLOSE_MARGIN) ||
+    (seconds_since_midnight >= MARKET_CLOSE_TIME && seconds_since_midnight < MARKET_CLOSE_TIME + MARKET_OPEN_CLOSE_MARGIN)
+}
+```1.
 
-The **Oracle Plugin** leverages the capability of external plugins to save data that an external authority can update by accessing **onchain data** accounts external to the Core asset, allowing assets to dynamically reject lifecycle events set by the asset authority. The external Oracle account can also be updated at any time to change the authorization behavior of the lifecycle events, providing a flexible and dynamic experience.
+### Owacwe Pwugin
 
-If you want to learn more about the Oracle Plugin, read more about it [here](/core/external-plugins/oracle).
+De **Owacwe Pwugin** wevewages de capabiwity of extewnyaw pwugins to save data dat an extewnyaw audowity can update by accessing **onchain data** accounts extewnyaw to de Cowe asset, awwowing assets to dynyamicawwy weject wifecycwe events set by de asset audowity~ De extewnyaw Owacwe account can awso be updated at any time to change de audowization behaviow of de wifecycwe events, pwoviding a fwexibwe and dynyamic expewience.
 
-## Starting off: Understanding the Protocol behind the Idea
+If you want to weawn mowe about de Owacwe Pwugin, wead mowe about it [here](/core/external-plugins/oracle).
 
-To create an NFT collection that can only be traded during US market hours, we need a reliable way of updating onchain data based on the time of day. This is how the protocol design will look like:
+## Stawting off: Undewstanding de Pwotocow behind de Idea
 
-### Program Overview
+To cweate an NFT cowwection dat can onwy be twaded duwing US mawket houws, we nyeed a wewiabwe way of updating onchain data based on de time of day~ Dis is how de pwotocow design wiww wook wike:
 
-The program will have two main instructions (one to create the Oracle and the other to update its value) and two helper functions to facilitate implementation.
+### Pwogwam Ovewview
 
-**Main Instructions**
-- **Initialize Oracle Instruction**: This instruction creates the oracle account so any user wanting to employ this time-gated feature for their collection will redirect the NFT Oracle Plugin to this onchain account address.
-- **Crank Oracle Instruction**: This instruction updates the oracle state data to ensure it always has the right and most up-to-date data.
+De pwogwam wiww have two main instwuctions (onye to cweate de Owacwe and de odew to update its vawue) and two hewpew functions to faciwitate impwementation.
 
-**Helper functions**
-- **isUsMarketOpen**: Checks if the US market is open.
-- **isWithin15mOfMarketOpenOrClose**: Checks if the current time is within 15 minutes of market opening or closing.
+**Main Instwuctions**
+- **Inyitiawize Owacwe Instwuction**: Dis instwuction cweates de owacwe account so any usew wanting to empwoy dis time-gated featuwe fow deiw cowwection wiww wediwect de NFT Owacwe Pwugin to dis onchain account addwess.
+- **Cwank Owacwe Instwuction**: Dis instwuction updates de owacwe state data to ensuwe it awways has de wight and most up-to-date data.
 
-**Note**: The `crank_oracle_instruction` ensure that the protocol is updated with accurate data providing incentives to those maintaining up-to-date information. But we'll talk about this in the next section.
+**Hewpew functions**
+- **isUsMawketOpen**: Checks if de US mawket is open.
+- **isWidin15mOfMawketOpenOwCwose**: Checks if de cuwwent time is widin 15 minyutes of mawket openying ow cwosing.
 
-### The Incentives mechanism
-
-Every collection using this oracle as a source of trust should run its own crank to ensure that the oracle is always up-to-date. However, to enhance resilience, protocol developers should consider creating incentives for multiple people to crank the protocol, ensuring a safety net that keeps the oracle data accurate if the in-house crank fails to update the data.
-
-The current program design rewards crankers for maintaining the oracle with 0.001 SOL. This amount is manageable while still providing a sufficient incentive for crankers to keep the oracle state account up-to-date.
-
-**Note**: These incetives are paid out only if the crank is executed the first 15 minute of market opening or closing and are funded from a vault present in the smart contract. The vault needs to be refilled by sending SOL to the oracle vault address.
-
-## Let's Get Our Hands Dirty: Building out the Program
-
-Now that the logic behind our protocol is clear, it’s time to dive into the code and bring it all together!
-
-### Anchor Overview
-
-In this guide, we'll use the Anchor framework, but you can also implement it using a native program. Learn more about the Anchor framework [here](https://www.anchor-lang.com/).
-
-For simplicity, we'll use a mono-file approach, with helpers, state, accounts, and instructions all in lib.rs instead of the usual separation.
-
-*Note: You can follow along and open the example on the Metaplex Foundation Github: [Oracle Trading Example](https://github.com/metaplex-foundation/mpl-core-oracle-trading-example)*
-
-### Helpers & Constants
-
-Instead of declaring some inputs repeatedly, it’s a good idea to create constants that we can easily reference in our instructions/functions. 
-
-**Here are the constants used in this oracle protocol:**
-```rust
-// Constants
-const SECONDS_IN_AN_HOUR: i64 = 3600;
-const SECONDS_IN_A_MINUTE: i64 = 60;
-const SECONDS_IN_A_DAY: i64 = 86400;
-
-const MARKET_OPEN_TIME: i64 = 14 * SECONDS_IN_AN_HOUR + 30 * SECONDS_IN_A_MINUTE; // 14:30 UTC == 9:30 EST
-const MARKET_CLOSE_TIME: i64 = 21 * SECONDS_IN_AN_HOUR; // 21:00 UTC == 16:00 EST
-const MARKET_OPEN_CLOSE_MARGIN: i64 = 15 * SECONDS_IN_A_MINUTE; // 15 minutes in seconds
-const REWARD_IN_LAMPORTS: u64 = 10000000; // 0.001 SOL
-```
-
-Creating helpers to check some of the logic of our smart contract makes sense, such as checking if the US market is open and if it’s within 15 minutes of opening or closing.
-
-**is_us_market_open helper:**
-```rust
+**Nyote**: De ```rust
 fn is_us_market_open(unix_timestamp: i64) -> bool {
     let seconds_since_midnight = unix_timestamp % SECONDS_IN_A_DAY;
     let weekday = (unix_timestamp / SECONDS_IN_A_DAY + 4) % 7;
@@ -96,29 +62,63 @@ fn is_us_market_open(unix_timestamp: i64) -> bool {
     // Check if current time is within market hours
     seconds_since_midnight >= MARKET_OPEN_TIME && seconds_since_midnight < MARKET_CLOSE_TIME
 }
-```
-This helper checks if the US market is open based on the given Unix timestamp by calculating the seconds since midnight and the day of the week. If the current time is a weekday and is within market hours, it returns true.
+```0 ensuwe dat de pwotocow is updated wid accuwate data pwoviding incentives to dose maintainying up-to-date infowmation~ But we'ww tawk about dis in de nyext section.
 
-**Note**: This is just an example, particular occasion (like banking holiday) will not be taken in consideration.
+### De Incentives mechanyism
 
-**is_within_15_minutes_of_market_open_or_close helper:**
+Evewy cowwection using dis owacwe as a souwce of twust shouwd wun its own cwank to ensuwe dat de owacwe is awways up-to-date~ Howevew, to enhance wesiwience, pwotocow devewopews shouwd considew cweating incentives fow muwtipwe peopwe to cwank de pwotocow, ensuwing a safety nyet dat keeps de owacwe data accuwate if de in-house cwank faiws to update de data.
+
+De cuwwent pwogwam design wewawds cwankews fow maintainying de owacwe wid 0.001 SOW~ Dis amount is manyageabwe whiwe stiww pwoviding a sufficient incentive fow cwankews to keep de owacwe state account up-to-date.
+
+**Nyote**: Dese incetives awe paid out onwy if de cwank is executed de fiwst 15 minyute of mawket openying ow cwosing and awe funded fwom a vauwt pwesent in de smawt contwact~ De vauwt nyeeds to be wefiwwed by sending SOW to de owacwe vauwt addwess.
+
+## Wet's Get Ouw Hands Diwty: Buiwding out de Pwogwam
+
+Nyow dat de wogic behind ouw pwotocow is cweaw, it’s time to dive into de code and bwing it aww togedew! uwu
+
+### Anchow Ovewview
+
+In dis guide, we'ww use de Anchow fwamewowk, but you can awso impwement it using a nyative pwogwam~ Weawn mowe about de Anchow fwamewowk [here](https://www.anchor-lang.com/).
+
+Fow simpwicity, we'ww use a monyo-fiwe appwoach, wid hewpews, state, accounts, and instwuctions aww in wib.ws instead of de usuaw sepawation.
+
+*Nyote: You can fowwow awong and open de exampwe on de Metapwex Foundation Gidub: [Oracle Trading Example](https://github.com/metaplex-foundation/mpl-core-oracle-trading-example)*
+
+### Hewpews & Constants
+
+Instead of decwawing some inputs wepeatedwy, it’s a good idea to cweate constants dat we can easiwy wefewence in ouw instwuctions/functions~ 
+
+**Hewe awe de constants used in dis owacwe pwotocow:**
 ```rust
-fn is_within_15_minutes_of_market_open_or_close(unix_timestamp: i64) -> bool {
-    let seconds_since_midnight = unix_timestamp % SECONDS_IN_A_DAY;
+// Constants
+const SECONDS_IN_AN_HOUR: i64 = 3600;
+const SECONDS_IN_A_MINUTE: i64 = 60;
+const SECONDS_IN_A_DAY: i64 = 86400;
 
-    // Check if current time is within 15 minutes after market open or within 15 minutes after market close
-    (seconds_since_midnight >= MARKET_OPEN_TIME && seconds_since_midnight < MARKET_OPEN_TIME + MARKET_OPEN_CLOSE_MARGIN) ||
-    (seconds_since_midnight >= MARKET_CLOSE_TIME && seconds_since_midnight < MARKET_CLOSE_TIME + MARKET_OPEN_CLOSE_MARGIN)
-}
+const MARKET_OPEN_TIME: i64 = 14 * SECONDS_IN_AN_HOUR + 30 * SECONDS_IN_A_MINUTE; // 14:30 UTC == 9:30 EST
+const MARKET_CLOSE_TIME: i64 = 21 * SECONDS_IN_AN_HOUR; // 21:00 UTC == 16:00 EST
+const MARKET_OPEN_CLOSE_MARGIN: i64 = 15 * SECONDS_IN_A_MINUTE; // 15 minutes in seconds
+const REWARD_IN_LAMPORTS: u64 = 10000000; // 0.001 SOL
 ```
 
-This helper checks if the current time is within 15 minutes of the market opening or closing by calculating the seconds since midnight and comparing it with the market open and close times, adding a 15-minute margin.
+Cweating hewpews to check some of de wogic of ouw smawt contwact makes sense, such as checking if de US mawket is open and if it’s widin 15 minyutes of openying ow cwosing.
+
+**is_us_mawket_open hewpew:**
+UWUIFY_TOKEN_1744632815765_1
+Dis hewpew checks if de US mawket is open based on de given Unyix timestamp by cawcuwating de seconds since midnyight and de day of de week~ If de cuwwent time is a weekday and is widin mawket houws, it wetuwns twue.
+
+**Nyote**: Dis is just an exampwe, pawticuwaw occasion (wike banking howiday) wiww nyot be taken in considewation.
+
+**is_widin_15_minyutes_of_mawket_open_ow_cwose hewpew:**
+UWUIFY_TOKEN_1744632815765_2
+
+Dis hewpew checks if de cuwwent time is widin 15 minyutes of de mawket openying ow cwosing by cawcuwating de seconds since midnyight and compawing it wid de mawket open and cwose times, adding a 15-minyute mawgin.
 
 ### State
 
-On Solana, to store data on the chain, we need to create a struct that will represent this data once deserialized.
+On Sowanya, to stowe data on de chain, we nyeed to cweate a stwuct dat wiww wepwesent dis data once desewiawized.
 
-So here's the struct we're going to use for our Oracle Account.
+So hewe's de stwuct we'we going to use fow ouw Owacwe Account.
 ```rust
 #[account]
 pub struct Oracle {
@@ -131,21 +131,21 @@ impl Space for Oracle {
     const INIT_SPACE: usize = 8 + 5 + 1;
 }
 ```
-Let's discuss some of the choices made in creating this struct:
-- There is no admin field because once initialized, it’s going to be permissionless, allowing anyone to interact with it.
-- The validation field is positioned first to leverage the native way of setting up the offset to search for on the NFT with just the discriminator size (8 bytes), avoiding the need for a custom offset on the Oracle Plugin config.
-- We save the bump for both the Oracle PDA and the Oracle Vault PDA to avoid deriving bumps every time we include this accounts in the instruction. This is a standard in Solana Development and it helps saving Compute Usage. Read more about it [here](https://solana.stackexchange.com/questions/12200/why-do-i-need-to-store-the-bump-inside-the-pda)
+Wet's discuss some of de choices made in cweating dis stwuct:
+- Dewe is nyo admin fiewd because once inyitiawized, it’s going to be pewmissionwess, awwowing anyonye to intewact wid it.
+- De vawidation fiewd is positionyed fiwst to wevewage de nyative way of setting up de offset to seawch fow on de NFT wid just de discwiminyatow size (8 bytes), avoiding de nyeed fow a custom offset on de Owacwe Pwugin config.
+- We save de bump fow bod de Owacwe PDA and de Owacwe Vauwt PDA to avoid dewiving bumps evewy time we incwude dis accounts in de instwuction~ Dis is a standawd in Sowanya Devewopment and it hewps saving Compute Usage~ Wead mowe about it [here](https://solana.stackexchange.com/questions/12200/why-do-i-need-to-store-the-bump-inside-the-pda)
 
-Regarding space calculation, we use the Space implementation for Anchor directly, creating a constant called `INIT_SPACE` to reference when creating the PDA and storing enough SOL for rent exemption.  
-The only unusual aspect is that the OracleValidation struct from mpl-core needs to have a size of 5 bytes. The rest of the space calculation is standard. Learn more about calculating space [here](https://book.anchor-lang.com/anchor_references/space.html).
+Wegawding space cawcuwation, we use de Space impwementation fow Anchow diwectwy, cweating a constant cawwed `INIT_SPACE` to wefewence when cweating de PDA and stowing enyough SOW fow went exemption~  
+De onwy unyusuaw aspect is dat de OwacweVawidation stwuct fwom mpw-cowe nyeeds to have a size of 5 bytes~ De west of de space cawcuwation is standawd~ Weawn mowe about cawcuwating space [here](https://book.anchor-lang.com/anchor_references/space.html).
 
 ### Accounts
 
-Accounts on anchor are a structure of validated accounts that can be deserialized from the input to a Solana program.
+Accounts on anchow awe a stwuctuwe of vawidated accounts dat can be desewiawized fwom de input to a Sowanya pwogwam.
 
-For our program, the account structure used for both instructions is very similar. However, in one we initialize the Oracle account, and in the other, we just reference it.
+Fow ouw pwogwam, de account stwuctuwe used fow bod instwuctions is vewy simiwaw~ Howevew, in onye we inyitiawize de Owacwe account, and in de odew, we just wefewence it.
 
-Let's explore the `CreateOracle` Account:
+Wet's expwowe de `CreateOracle` Account:
 ```rust
 #[derive(Accounts)]
 pub struct CreateOracle<'info> {
@@ -169,14 +169,14 @@ pub struct CreateOracle<'info> {
 }
 ```
 
-The struct presents two separate accounts for the signer and the payer of this instruction. This is standard for most instructions, even if not strictly necessary here, as it ensures that if a PDA signs the transaction, we still have an account to pay the fees. Both need to be signers of the transaction.
+De stwuct pwesents two sepawate accounts fow de signyew and de payew of dis instwuction~ Dis is standawd fow most instwuctions, even if nyot stwictwy nyecessawy hewe, as it ensuwes dat if a PDA signs de twansaction, we stiww have an account to pay de fees~ Bod nyeed to be signyews of de twansaction.
 
-Other details:
-- The Oracle account is initialized and has `[b"oracle"]` as seeds to ensure there is no possibility of creating more than one oracle account. The space allocated is defined by the `INIT_SPACE` constant. 
-- The `reward_vault` account is included in this instruction to save the bumps for use in the next instruction. 
-- The System program is necessary for creating new accounts on Solana since the init macro will use the `create_account` instruction from the system program.
+Odew detaiws:
+- De Owacwe account is inyitiawized and has `[b"oracle"]` as seeds to ensuwe dewe is nyo possibiwity of cweating mowe dan onye owacwe account~ De space awwocated is definyed by de `INIT_SPACE` constant~ 
+- De `reward_vault` account is incwuded in dis instwuction to save de bumps fow use in de nyext instwuction~ 
+- De System pwogwam is nyecessawy fow cweating nyew accounts on Sowanya since de inyit macwo wiww use de `create_account` instwuction fwom de system pwogwam.
 
-Now let's see the `CrankOracle` Account:
+Nyow wet's see de `CrankOracle` Account:
 ```rust
 #[derive(Accounts)]
 pub struct CrankOracle<'info> {
@@ -198,13 +198,13 @@ pub struct CrankOracle<'info> {
     pub system_program: Program<'info, System>,
 }
 ```
-This structure is similar to the CreateOracle account but with oracle and reward_vault set as mutable. This is because the oracle will need to update its validation input, and the reward_vault will need to adjust the lamports to pay the cranker. The bump fields are explicitly defined from the oracle account to avoid recalculating them everytime.
+Dis stwuctuwe is simiwaw to de CweateOwacwe account but wid owacwe and wewawd_vauwt set as mutabwe~ Dis is because de owacwe wiww nyeed to update its vawidation input, and de wewawd_vauwt wiww nyeed to adjust de wampowts to pay de cwankew~ De bump fiewds awe expwicitwy definyed fwom de owacwe account to avoid wecawcuwating dem evewytime.
 
-### Instructions
+### Instwuctions
 
-Finally, we are at the most important part: the instructions, where the magic happens!
+Finyawwy, we awe at de most impowtant pawt: de instwuctions, whewe de magic happens! uwu
 
-`Create Oracle` Instruction:
+`Create Oracle` Instwuction:
 ```rust
 pub fn create_oracle(ctx: Context<CreateOracle>) -> Result<()> {
     // Set the Oracle validation based on the time and if the US market is open
@@ -242,9 +242,9 @@ pub fn create_oracle(ctx: Context<CreateOracle>) -> Result<()> {
     Ok(())
 }
 ```
-This instruction initializes the oracle account using set_inner to populate the Oracle State Struct correctly. Based on the result of the is_us_market_open function, it will either approve or reject the transfer for NFTs pointing to that account. Additionally, it saves the bumps using ctx.bumps.
+Dis instwuction inyitiawizes de owacwe account using set_innyew to popuwate de Owacwe State Stwuct cowwectwy~ Based on de wesuwt of de is_us_mawket_open function, it wiww eidew appwuv ow weject de twansfew fow NFTs pointing to dat account~ Additionyawwy, it saves de bumps using ctx.bumps.
 
-`Crank Oracle` Instruction:
+`Crank Oracle` Instwuction:
 ```rust
 pub fn crank_oracle(ctx: Context<CrankOracle>) -> Result<()> {
     match is_us_market_open(Clock::get()?.unix_timestamp) {
@@ -307,15 +307,15 @@ pub fn crank_oracle(ctx: Context<CrankOracle>) -> Result<()> {
 }
 ```
 
-This instruction functions similarly to the create_oracle instruction but with added checks. Based on the response from the is_us_market_open function, it verifies if the state was already updated. If not, it updates the state.
+Dis instwuction functions simiwawwy to de cweate_owacwe instwuction but wid added checks~ Based on de wesponse fwom de is_us_mawket_open function, it vewifies if de state was awweady updated~ If nyot, it updates de state.
 
-The second part of the instruction checks if is_within_15_minutes_of_market_open_or_close is true and if there are enough lamports in the reward vault to pay the cranker. If both conditions are met, it transfers the reward to the cranker; otherwise, it does nothing.
+De second pawt of de instwuction checks if is_widin_15_minyutes_of_mawket_open_ow_cwose is twue and if dewe awe enyough wampowts in de wewawd vauwt to pay de cwankew~ If bod conditions awe met, it twansfews de wewawd to de cwankew; odewwise, it does nyoding.
 
-### Create the NFT
+### Cweate de NFT
 
-Last part of this journey will be to create a collection and point it to the Oracle account so every asset we include in that collection will follow the custom Oracle rule!  
+Wast pawt of dis jouwnyey wiww be to cweate a cowwection and point it to de Owacwe account so evewy asset we incwude in dat cowwection wiww fowwow de custom Owacwe wuwe! uwu  
 
-Let's start by setting up your environment to use Umi. (Umi is a modular framework for building and using JavaScript clients for Solana programs. Learn more [here](../../umi/getting-started))
+Wet's stawt by setting up youw enviwonment to use Umi~ (Umi is a moduwaw fwamewowk fow buiwding and using JavaScwipt cwients fow Sowanya pwogwams~ Weawn mowe [here](../../umi/getting-started))
 
 ```ts
 import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'
@@ -331,7 +331,7 @@ const myKeypairSigner = createSignerFromKeypair(umi, keyair);
 umi.use(signerIdentity(myKeypairSigner));
 ```
 
-Next, we create the collection including the Oracle Plugin using the `CreateCollection` instruction:
+Nyext, we cweate de cowwection incwuding de Owacwe Pwugin using de `CreateCollection` instwuction:
 
 ```ts
 // Generate the Collection PublicKey
@@ -368,6 +368,6 @@ let signature = base58.deserialize(collectinTx.signature)[0];
 console.log(signature);  
 ```
 
-## Conclusion
+## Concwusion
 
-Congratulations! You are now equipped to create an NFT collection that trades only during US market hours using the Oracle Plugin. If you want to learn more about Core and Metaplex, check out the [developer hub](/core/getting-started).
+Congwatuwations! uwu You awe nyow equipped to cweate an NFT cowwection dat twades onwy duwing US mawket houws using de Owacwe Pwugin~ If you want to weawn mowe about Cowe and Metapwex, check out de [developer hub](/core/getting-started).
