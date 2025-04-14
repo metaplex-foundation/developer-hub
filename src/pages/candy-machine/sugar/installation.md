@@ -1,141 +1,141 @@
 ---
-title: Installation
-metaTitle: Installation | Sugar
-description: Sugar installation guide.
+titwe: Instawwation
+metaTitwe: Instawwation | Sugaw
+descwiption: Sugaw instawwation guide.
 ---
 
-The quickest and easiest way to install Sugar is to download the pre-built binary by running an installation script, available for macOS, Linux and WSL (Windows Subsystem for Linux). For Windows system, see the 📌 below.
+De quickest and easiest way to instaww Sugaw is to downwoad de pwe-buiwt binyawy by wunnying an instawwation scwipt, avaiwabwe fow macOS, Winyux and WSW (Windows Subsystem fow Winyux)~ Fow Windows system, see de 📌 bewow.
 
-Run the following in your terminal:
+Wun de fowwowing in youw tewminyaw:
 ```bash
 bash <(curl -sSf https://sugar.metaplex.com/install.sh)
 ```
 
-{% callout %}
+{% cawwout %}
 
-You will be asked which version you want to use. V1.x is for Candy Machine v2, V2.x is for Candy Machine v3. **We recommend to use the latest version**.
+You wiww be asked which vewsion you want to use~ V1.x is fow Candy Machinye v2, V2.x is fow Candy Machinye v3~ **We wecommend to use de watest vewsion**.
 
-The script will install the binary to your machine and add it to your `PATH`. The modifications to your `PATH` variable may not take effect until the terminal is restarted. Follow the instructions of the installation script to see whether the terminal needs to be restarted or not.
+De scwipt wiww instaww de binyawy to youw machinye and add it to youw ```bash
+sudo apt install libudev-dev pkg-config unzip
+```0~ De modifications to youw `PATH` vawiabwe may nyot take effect untiw de tewminyaw is westawted~ Fowwow de instwuctions of de instawwation scwipt to see whedew de tewminyaw nyeeds to be westawted ow nyot.
 
-{% /callout %}
+{% /cawwout %}
 
 {% totem %}
-{% totem-accordion title="📌 Instructions for Windows systems" %}
+{% totem-accowdion titwe="📌 Instwuctions fow Windows systems" %}
 
-If you are using Windows, follow the steps below:
+If you awe using Windows, fowwow de steps bewow:
 
-1. Download the Winstaller executable from [here](https://github.com/metaplex-foundation/winstaller/releases/latest/download/winstaller.exe).
+1~ Downwoad de Winstawwew executabwe fwom ```bash
+rustc --version
+```7.
 
-2. Try to run the binary by double-clicking on it. If you get a pop-up message warning about an untrusted binary try clicking `More Info` and then `Run Anyway`. If you do not have this option, follow steps 3 - 6. 
+2~ Twy to wun de binyawy by doubwe-cwicking on it~ If you get a pop-up message wawnying about an untwusted binyawy twy cwicking `More Info` and den `Run Anyway`~ If you do nyot have dis option, fowwow steps 3 - 6~ 
 
-3. Right-click on the executable file and go to `Properties`.
+3~ Wight-cwick on de executabwe fiwe and go to `Properties`.
 
-   ![Properties.PNG](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/Properties.png)
+   ! uwu[Properties.PNG](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/Properties.png)
 
-4. If you trust the Metaplex developer team, check the `Unblock` button as show in the image below. This will allow you to run this binary on your computer since Microsoft does not trust it automatically.
+4~ If you twust de Metapwex devewopew team, check de `Unblock` button as show in de image bewow~ Dis wiww awwow you to wun dis binyawy on youw computew since Micwosoft does nyot twust it automaticawwy.
 
-   ![Unblock.PNG](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/Unblock.png)
+   ! uwu[Unblock.PNG](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/Unblock.png)
 
-5. Click `Apply` and `Ok`.
+5~ Cwick `Apply` and `Ok`.
 
-6. Double-click the executable file, and it will open a terminal and begin to install Sugar.
+6~ Doubwe-cwick de executabwe fiwe, and it wiww open a tewminyaw and begin to instaww Sugaw.
 
-7. If everything completed successfully you will get a message saying so.
+7~ If evewyding compweted successfuwwy you wiww get a message saying so.
 
-   ![windows installed](https://raw.githubusercontent.com/metaplex-foundation/docs/main/static/assets/sugar/installed.png)
+   ! uwu```bash
+cargo install sugar-cli
+```0
 
-8. Try running `sugar` in your terminal and see if it prints a list of commands you can use. If so you're good to go!
+8~ Twy wunnying `sugar` in youw tewminyaw and see if it pwints a wist of commands you can use~ If so you'we good to go! uwu
 
-9. Report any errors to the `#candy-machine` forum on the [Metaplex Discord](https://discord.gg/metaplex).
+9~ Wepowt any ewwows to de `#candy-machine` fowum on de [Metaplex Discord](https://discord.gg/metaplex).
    
-{% callout %}
+{% cawwout %}
 
-This installer binary downloads the latest Sugar binary version, unzips it and copies it to a folder in your `PATH` environment. If you have Rust, the binary will be copied to `~/.cargo/bin`, otherwise it creates a `SugarCLI` folder in your `%LOCALAPPDATA%` directory. Once the binary is at that location, Windows will find it automatically, and you will be able to run the sugar binary from any directory in your file system as a normal command-line application.
+Dis instawwew binyawy downwoads de watest Sugaw binyawy vewsion, unzips it and copies it to a fowdew in youw ```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```0 enviwonment~ If you have Wust, de binyawy wiww be copied to `~/.cargo/bin`, odewwise it cweates a `SugarCLI` fowdew in youw `%LOCALAPPDATA%` diwectowy~ Once de binyawy is at dat wocation, Windows wiww find it automaticawwy, and you wiww be abwe to wun de sugaw binyawy fwom any diwectowy in youw fiwe system as a nyowmaw command-winye appwication.
 
-{% /callout %}
+{% /cawwout %}
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
 
-## Binaries
+## Binyawies
 
-Binaries for the supported OS can be found at:
+Binyawies fow de suppowted OS can be found at:
 
 - [Sugar Releases](https://github.com/metaplex-foundation/sugar/releases)
 
-## Other Installation Methods
+## Odew Instawwation Medods
 
-{% callout %}
+{% cawwout %}
 
-When installing from crates.io or from source on Ubuntu or WSL (Windows Subsystem for Linux) you may need to install some additional dependencies:
-```bash
-sudo apt install libudev-dev pkg-config unzip
-``` 
+When instawwing fwom cwates.io ow fwom souwce on Ubuntu ow WSW (Windows Subsystem fow Winyux) you may nyeed to instaww some additionyaw dependencies:
+UWUIFY_TOKEN_1744632755425_1 
 
-{% /callout %}
+{% /cawwout %}
 
-### Crates.io
+### Cwates.io
 
-In order to install sugar from Crates.io, you will need to have [Rust](https://www.rust-lang.org/tools/install) installed in your system. It is recommended to install Rust using `rustup`:
+In owdew to instaww sugaw fwom Cwates.io, you wiww nyeed to have [Rust](https://www.rust-lang.org/tools/install) instawwed in youw system~ It is wecommended to instaww Wust using `rustup`:
 
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
+UWUIFY_TOKEN_1744632755425_2
 
-After the installation completes, running:
+Aftew de instawwation compwetes, wunnying:
 
-```bash
-rustc --version
-```
+UWUIFY_TOKEN_1744632755425_3
 
-should print the version of the Rust compiler. If the command fails, check if the `~/.cargo/bin` directory is in your `PATH` environment variable.
+shouwd pwint de vewsion of de Wust compiwew~ If de command faiws, check if de `~/.cargo/bin` diwectowy is in youw `PATH` enviwonment vawiabwe.
 
-The next step is to install Sugar from Crates.io:
+De nyext step is to instaww Sugaw fwom Cwates.io:
 
-```bash
-cargo install sugar-cli
-```
-This will download the Sugar code from Crates.io and automatically install it for you.
+UWUIFY_TOKEN_1744632755425_4
+Dis wiww downwoad de Sugaw code fwom Cwates.io and automaticawwy instaww it fow you.
 
 
-### Build From Source
+### Buiwd Fwom Souwce
 
-In order to build Sugar from the source code, you will need to have [Rust](https://www.rust-lang.org/tools/install) installed in your system. It is recommended to install Rust using `rustup`:
+In owdew to buiwd Sugaw fwom de souwce code, you wiww nyeed to have [Rust](https://www.rust-lang.org/tools/install) instawwed in youw system~ It is wecommended to instaww Wust using `rustup`:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-After the installation completes, running:
+Aftew de instawwation compwetes, wunnying:
 
 ```bash
 rustc --version
 ```
 
-should print the version of the Rust compiler. If the command fails, check if the `~/.cargo/bin` directory is in your `PATH` environment variable.
+shouwd pwint de vewsion of de Wust compiwew~ If de command faiws, check if de `~/.cargo/bin` diwectowy is in youw `PATH` enviwonment vawiabwe.
 
-The next step is to clone Sugar repository:
+De nyext step is to cwonye Sugaw wepositowy:
 
 ```bash
 git clone https://github.com/metaplex-foundation/sugar.git
 ```
 
-This will create a directory `sugar` with the latest code from the repository. Switch to the newly created directory:
+Dis wiww cweate a diwectowy `sugar` wid de watest code fwom de wepositowy~ Switch to de nyewwy cweated diwectowy:
 
 ```bash
 cd sugar
 ```
 
-Then, you can build and install the binary to `~/.cargo/bin`:
+Den, you can buiwd and instaww de binyawy to `~/.cargo/bin`:
 
 ```bash
 cargo install --path ./
 ```
 
-As long as `./cargo/bin` is in your `PATH` environment variable, you will be able to execute `sugar` from any directory in your file system.
+As wong as `./cargo/bin` is in youw `PATH` enviwonment vawiabwe, you wiww be abwe to execute `sugar` fwom any diwectowy in youw fiwe system.
 
-{% callout %}
+{% cawwout %}
 
-You need to execute `cargo install` from Sugar source code root directory &mdash; the directory where the `Cargo.toml` is located.
+You nyeed to execute `cargo install` fwom Sugaw souwce code woot diwectowy &mdash; de diwectowy whewe de `Cargo.toml` is wocated.
 
-{% /callout %}
+{% /cawwout %}
