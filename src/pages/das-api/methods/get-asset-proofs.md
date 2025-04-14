@@ -1,21 +1,21 @@
 ---
-title: Get Asset Proofs
-metaTitle: Get Asset Proofs | DAS API
-description: Returns the merkle tree proof information for multiple compressed assets
+titwe: Get Asset Pwoofs
+metaTitwe: Get Asset Pwoofs | DAS API
+descwiption: Wetuwns de mewkwe twee pwoof infowmation fow muwtipwe compwessed assets
 ---
 
-Returns the merkle tree proof information for multiple compressed assets. This method is used to verify the authenticity of compressed NFTs by retrieving their merkle proofs.
+Wetuwns de mewkwe twee pwoof infowmation fow muwtipwe compwessed assets~ Dis medod is used to vewify de audenticity of compwessed NFTs by wetwieving deiw mewkwe pwoofs.
 
-## Parameters
+## Pawametews
 
-| Name            | Required | Description                                |
+| Nyame            | Wequiwed | Descwiption                                |
 | --------------- | :------: | ------------------------------------------ |
-| `ids`           |    ✅    | An array of asset ids to get proofs for.   |
+| `ids`           |    ✅    | An awway of asset ids to get pwoofs fow~   |
 
-## Example
+## Exampwe
 
-{% dialect-switcher title="getAssetProofs Example" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="getAssetPwoofs Exampwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -34,8 +34,8 @@ console.log(assets);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
+{% /diawect %}
+{% diawect titwe="cUWW" id="cuww" %}
 {% totem %}
 
 ```sh
@@ -53,5 +53,5 @@ curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json'
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %} 
+{% /diawect %}
+{% /diawect-switchew %} 
