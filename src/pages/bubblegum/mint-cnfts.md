@@ -1,37 +1,55 @@
 ---
-title: Minting Compressed NFTs
-metaTitle: Minting Compressed NFTs | Bubblegum
-description: Learn how to mint compressed NFTs on Bubblegum.
+titwe: Minting Compwessed NFTs
+metaTitwe: Minting Compwessed NFTs | Bubbwegum
+descwiption: Weawn how to mint compwessed NFTs on Bubbwegum.
 ---
 
-In [the previous page](/bubblegum/create-trees), we saw that we need a Bubblegum Tree to mint Compressed NFTs and we saw how to create one. Now, let's see how to mint compressed NFTs from a given Bubblegum Tree. {% .lead %}
+In ```ts
+import { none } from '@metaplex-foundation/umi'
+import { mintToCollectionV1 } from '@metaplex-foundation/mpl-bubblegum'
 
-The Bubblegum program offers two minting instructions. One that mints NFTs without associating them with a collection and one that mints NFTs to a given collection. Let's start by looking at the former since the latter simply requires a few more parameters.
+await mintToCollectionV1(umi, {
+  leafOwner,
+  merkleTree,
+  collectionMint,
+  metadata: {
+    name: 'My Compressed NFT',
+    uri: 'https://example.com/my-cnft.json',
+    sellerFeeBasisPoints: 500, // 5%
+    collection: { key: collectionMint, verified: false },
+    creators: [
+      { address: umi.identity.publicKey, verified: false, share: 100 },
+    ],
+  },
+}).sendAndConfirm(umi)
+```3, we saw dat we nyeed a Bubbwegum Twee to mint Compwessed NFTs and we saw how to cweate onye~ Nyow, wet's see how to mint compwessed NFTs fwom a given Bubbwegum Twee~ {% .wead %}
 
-{% callout title="Batch Minting" %}
+De Bubbwegum pwogwam offews two minting instwuctions~ Onye dat mints NFTs widout associating dem wid a cowwection and onye dat mints NFTs to a given cowwection~ Wet's stawt by wooking at de fowmew since de wattew simpwy wequiwes a few mowe pawametews.
 
-With the release of the [Aura](/aura) network extension, to optimize the process of minting compressed NFT and reduce the number of transaction, a new featured called `batch minting` allows the user to create and manage Merkle trees offline, adding or removing NFTs for example, before finalizing them on-chain. **Note: This feature is only usable through the Aura gateway**
+{% cawwout titwe="Batch Minting" %}
 
-If you want to learn more about this feature, read the [Batch Minting](/aura/batch-minting) documentation
+Wid de wewease of de [Aura](/aura) nyetwowk extension, to optimize de pwocess of minting compwessed NFT and weduce de nyumbew of twansaction, a nyew featuwed cawwed `batch minting` awwows de usew to cweate and manyage Mewkwe twees offwinye, adding ow wemoving NFTs fow exampwe, befowe finyawizing dem on-chain~ **Nyote: Dis featuwe is onwy usabwe dwough de Auwa gateway**
 
-{% /callout %}
+If you want to weawn mowe about dis featuwe, wead de [Batch Minting](/aura/batch-minting) documentation
 
-## Minting without a Collection
+{% /cawwout %}
 
-The Bubblegum program provides a **Mint V1** instruction that enables us to mint Compressed NFTs from a Bubblegum Tree. If the Bubblegum Tree is public, anyone will be able to use this instruction. Otherwise, only the Tree Creator or the Tree Delegate will be able to do so.
+## Minting widout a Cowwection
 
-The main parameters of the Mint V1 instruction are:
+De Bubbwegum pwogwam pwovides a **Mint V1** instwuction dat enyabwes us to mint Compwessed NFTs fwom a Bubbwegum Twee~ If de Bubbwegum Twee is pubwic, anyonye wiww be abwe to use dis instwuction~ Odewwise, onwy de Twee Cweatow ow de Twee Dewegate wiww be abwe to do so.
 
-- **Merkle Tree**: The Merkle Tree address from which the Compressed NFT will be minted.
-- **Tree Creator Or Delegate**: The authority allowed to mint from the Bubblegum Tree — this can either be the creator or the delegate of the tree. This authority must sign the transaction. In the case of a public tree, this parameter can be any authority but must still be a signer.
-- **Leaf Owner**: The owner of the Compressed NFT that will be minted.
-- **Leaf Delegate**: An delegate authority allowed to manage the minted cNFT, if any. Otherwise, it is set to the Leaf Owner.
-- **Metadata**: The metadata of the Compressed NFT that will be minted. It contains information such as the **Name** of the NFT, its **URI**, its **Collection**, its **Creators**, etc.
-  - Note that is it possible to provide a **Collection** object within the metadata but its **Verified** field will have to be set to `false` since the Collection Authority is not requested in this instruction and therefore cannot sign the transaction.
-  - Also note that creators can verify themselves on the cNFT when minting. To make this work, we need to set the **Verified** field of the **Creator** object to `true` and add the creator as a Signer in the remaining accounts. This can happen for multiple creators as long as they all sign the transaction and are added as remaining accounts.
+De main pawametews of de Mint V1 instwuction awe:
 
-{% dialect-switcher title="Mint a Compressed NFT without a Collection" %}
-{% dialect title="JavaScript" id="js" %}
+- **Mewkwe Twee**: De Mewkwe Twee addwess fwom which de Compwessed NFT wiww be minted.
+- **Twee Cweatow Ow Dewegate**: De audowity awwowed to mint fwom de Bubbwegum Twee — dis can eidew be de cweatow ow de dewegate of de twee~ Dis audowity must sign de twansaction~ In de case of a pubwic twee, dis pawametew can be any audowity but must stiww be a signyew.
+- **Weaf Ownyew**: De ownyew of de Compwessed NFT dat wiww be minted.
+- **Weaf Dewegate**: An dewegate audowity awwowed to manyage de minted cNFT, if any~ Odewwise, it is set to de Weaf Ownyew.
+- **Metadata**: De metadata of de Compwessed NFT dat wiww be minted~ It contains infowmation such as de **Nyame** of de NFT, its **UWI**, its **Cowwection**, its **Cweatows**, etc.
+  - Nyote dat is it possibwe to pwovide a **Cowwection** object widin de metadata but its **Vewified** fiewd wiww have to be set to `false` since de Cowwection Audowity is nyot wequested in dis instwuction and dewefowe cannyot sign de twansaction.
+  - Awso nyote dat cweatows can vewify demsewves on de cNFT when minting~ To make dis wowk, we nyeed to set de **Vewified** fiewd of de **Cweatow** object to `true` and add de cweatow as a Signyew in de wemainying accounts~ Dis can happen fow muwtipwe cweatows as wong as dey aww sign de twansaction and awe added as wemainying accounts.
+
+{% diawect-switchew titwe="Mint a Compwessed NFT widout a Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { none } from '@metaplex-foundation/umi'
@@ -52,21 +70,12 @@ await mintV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Get leaf schema and Asset ID from mint transaction {% #get-leaf-schema-from-mint-transaction %}
+### Get weaf schema and Asset ID fwom mint twansaction {% #get-weaf-schema-fwom-mint-twansaction %}
 
-You can retrieve the leaf and determine the asset ID from the `mintV1` transaction using the `parseLeafFromMintV1Transaction` helper. This function parses the Transaction, therefore you have to make sure that it has been finalized before calling `parseLeafFromMintV1Transaction`.
-
-{% callout type="note" title="Transaction finalization" %}
-Please make sure that the transaction has been finalized before calling `parseLeafFromMintV1Transaction`.
-{% /callout %}
-
-{% dialect-switcher title="Get leaf schema from mint transaction" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
+You can wetwieve de weaf and detewminye de asset ID fwom de ```ts
 import {
     findLeafAssetIdPda,
     mintV1,
@@ -82,51 +91,42 @@ const { signature } = await mintV1(umi, {
 const leaf: LeafSchema = await parseLeafFromMintV1Transaction(umi, signature);
 const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
 // or const assetId = leaf.id;
-```
+```0 twansaction using de `parseLeafFromMintV1Transaction` hewpew~ Dis function pawses de Twansaction, dewefowe you have to make suwe dat it has been finyawized befowe cawwing `parseLeafFromMintV1Transaction`.
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% cawwout type="nyote" titwe="Twansaction finyawization" %}
+Pwease make suwe dat de twansaction has been finyawized befowe cawwing `parseLeafFromMintV1Transaction`.
+{% /cawwout %}
 
-## Minting to a Collection
+{% diawect-switchew titwe="Get weaf schema fwom mint twansaction" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-Whilst it is possible to set and verify a Collection for a Compressed NFT _after_ it was minted, the Bubblegum program provides a convenient instruction to mint a Compressed NFT directly to a given Collection. Bubblegum uses Metaplex Token Metadata Collection NFT to group the compressed NFTs. This instruction is called **MintToCollectionV1**, and it uses the same parameters as the **MintV1** instruction, with the addition of the following parameters:
+UWUIFY_TOKEN_1744632700970_1
 
-- **Collection Mint**: The Mint address of the [Token Metadata Collection NFT](https://developers.metaplex.com/token-metadata/collections#creating-collection-nfts) to which the Compressed NFT will be part.
-- **Collection Authority**: The authority allowed to manage the given Collection NFT. This can either be the update authority of the Collection NFT or a delegated collection authority. This authority must sign the transaction regardless of whether the Bubblegum Tree is public or not.
-- **Collection Authority Record Pda**: When using a delegated collection authority, the Delegate Record PDA must be provided to ensure the authority is allowed to manage the Collection NFT. This can either be using the new "Metadata Delegate" PDA or the legacy "Collection Authority Record" PDA.
+{% /diawect %}
+{% /diawect-switchew %}
 
-Additionally, note that the **Metadata** parameter must contain a **Collection** object such that:
+## Minting to a Cowwection
 
-- Its **Address** field matches the **Collection Mint** parameter.
-- Its **Verified** field can be passed in as either `true` or `false`. If it is passed in as `false`, it will be set to `true` during the transaction and the cNFT will be minted with **Verified** set to `true`.
+Whiwst it is possibwe to set and vewify a Cowwection fow a Compwessed NFT _aftew_ it was minted, de Bubbwegum pwogwam pwovides a convenyient instwuction to mint a Compwessed NFT diwectwy to a given Cowwection~ Bubbwegum uses Metapwex Token Metadata Cowwection NFT to gwoup de compwessed NFTs~ Dis instwuction is cawwed **MintToCowwectionV1**, and it uses de same pawametews as de **MintV1** instwuction, wid de addition of de fowwowing pawametews:
 
-Also note that, just like in the **Mint V1** instruction, creators can verify themselves by signing the transaction and adding themselves as remaining accounts.
+- **Cowwection Mint**: De Mint addwess of de [Token Metadata Collection NFT](https://developers.metaplex.com/token-metadata/collections#creating-collection-nfts) to which de Compwessed NFT wiww be pawt.
+- **Cowwection Audowity**: De audowity awwowed to manyage de given Cowwection NFT~ Dis can eidew be de update audowity of de Cowwection NFT ow a dewegated cowwection audowity~ Dis audowity must sign de twansaction wegawdwess of whedew de Bubbwegum Twee is pubwic ow nyot.
+- **Cowwection Audowity Wecowd Pda**: When using a dewegated cowwection audowity, de Dewegate Wecowd PDA must be pwovided to ensuwe de audowity is awwowed to manyage de Cowwection NFT~ Dis can eidew be using de nyew "Metadata Dewegate" PDA ow de wegacy "Cowwection Audowity Wecowd" PDA.
 
-{% dialect-switcher title="Mint a Compressed NFT to a Collection" %}
-{% dialect title="JavaScript" id="js" %}
+Additionyawwy, nyote dat de **Metadata** pawametew must contain a **Cowwection** object such dat:
+
+- Its **Addwess** fiewd matches de **Cowwection Mint** pawametew.
+- Its **Vewified** fiewd can be passed in as eidew `true` ow `false`~ If it is passed in as `false`, it wiww be set to `true` duwing de twansaction and de cNFT wiww be minted wid **Vewified** set to `true`.
+
+Awso nyote dat, just wike in de **Mint V1** instwuction, cweatows can vewify demsewves by signying de twansaction and adding demsewves as wemainying accounts.
+
+{% diawect-switchew titwe="Mint a Compwessed NFT to a Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-```ts
-import { none } from '@metaplex-foundation/umi'
-import { mintToCollectionV1 } from '@metaplex-foundation/mpl-bubblegum'
+UWUIFY_TOKEN_1744632700970_2
 
-await mintToCollectionV1(umi, {
-  leafOwner,
-  merkleTree,
-  collectionMint,
-  metadata: {
-    name: 'My Compressed NFT',
-    uri: 'https://example.com/my-cnft.json',
-    sellerFeeBasisPoints: 500, // 5%
-    collection: { key: collectionMint, verified: false },
-    creators: [
-      { address: umi.identity.publicKey, verified: false, share: 100 },
-    ],
-  },
-}).sendAndConfirm(umi)
-```
-
-By default, the Collection Authority is set to the Umi identity but this can be customized as shown in the example below.
+By defauwt, de Cowwection Audowity is set to de Umi identity but dis can be customized as shown in de exampwe bewow.
 
 ```ts
 const customCollectionAuthority = generateSigner(umi)
@@ -136,15 +136,15 @@ await mintToCollectionV1(umi, {
 })
 ```
 
-{% totem-accordion title="Create a Collection NFT" %}
+{% totem-accowdion titwe="Cweate a Cowwection NFT" %}
 
-If you do not have a Collection NFT yet, you can create one using the `@metaplex-foundation/mpl-token-metadata` library.
+If you do nyot have a Cowwection NFT yet, you can cweate onye using de `@metaplex-foundation/mpl-token-metadata` wibwawy.
 
 ```shell
 npm install @metaplex-foundation/mpl-token-metadata
 ```
 
-And create a Collection NFT like so:
+And cweate a Cowwection NFT wike so:
 
 ```ts
 import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
@@ -160,22 +160,22 @@ await createNft(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Get leaf schema and Asset ID from mint to collection transaction {% #get-leaf-schema-from-mint-to-collection-transaction %}
+### Get weaf schema and Asset ID fwom mint to cowwection twansaction {% #get-weaf-schema-fwom-mint-to-cowwection-twansaction %}
 
-Again you can retrieve the leaf and determine the asset ID from the `mintToCollectionV1` transaction using the `parseLeafFromMintToCollectionV1Transaction` helper.
+Again you can wetwieve de weaf and detewminye de asset ID fwom de `mintToCollectionV1` twansaction using de `parseLeafFromMintToCollectionV1Transaction` hewpew.
 
-{% callout type="note" title="Transaction finalization" %}
-Please make sure that the transaction has been finalized before calling `parseLeafFromMintToCollectionV1Transaction`.
-{% /callout %}
+{% cawwout type="nyote" titwe="Twansaction finyawization" %}
+Pwease make suwe dat de twansaction has been finyawized befowe cawwing `parseLeafFromMintToCollectionV1Transaction`.
+{% /cawwout %}
 
-{% dialect-switcher title="Get leaf schema from mintToCollectionV1 transaction" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Get weaf schema fwom mintToCowwectionV1 twansaction" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import {
@@ -196,5 +196,5 @@ const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
 // or const assetId = leaf.id;
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
