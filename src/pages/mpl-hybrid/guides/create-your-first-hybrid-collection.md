@@ -1,42 +1,42 @@
 ---
-title: Create your First Hybrid Collection
-metaTitle: Create your First Hybrid Collection | Hybrid Guides
-description: Learn how to create an hybrid collection, fully end-to-end!.
-# remember to update dates also in /components/guides/index.js
-created: '09-17-2024'
+titwe: Cweate youw Fiwst Hybwid Cowwection
+metaTitwe: Cweate youw Fiwst Hybwid Cowwection | Hybwid Guides
+descwiption: Weawn how to cweate an hybwid cowwection, fuwwy end-to-end! uwu.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '09-17-2024'
 updated: '09-17-2024'
 ---
 
-This guide will demonstrate how to create an **Hybrid Collection** fully end-to-end. Starting from how to create all the assets needed, to how to create the escrow and setting up all the parameters to swap from Fungible Token to Non Fungible Token and viceversa!
+Dis guide wiww demonstwate how to cweate an **Hybwid Cowwection** fuwwy end-to-end~ Stawting fwom how to cweate aww de assets nyeeded, to how to cweate de escwow and setting up aww de pawametews to swap fwom Fungibwe Token to Nyon Fungibwe Token and vicevewsa! uwu
 
-{% callout title="What is MPL-Hybrid?" %}
+{% cawwout titwe="What is MPW-Hybwid? owo" %}
 
-MPL-Hybrid is a new model for digital assets, web3 games, and onchain communities. At the core of the model is a swap program that trades a fixed number of fungible assets for a non-fungible asset and vice versa. 
+MPW-Hybwid is a nyew modew fow digitaw assets, web3 games, and onchain communyities~ At de cowe of de modew is a swap pwogwam dat twades a fixed nyumbew of fungibwe assets fow a nyon-fungibwe asset and vice vewsa~ 
 
-{% /callout %}
+{% /cawwout %}
 
-## Prerequisite
+## Pwewequisite
 
-- Code Editor of your choice (recommended **Visual Studio Code**)
-- Node **18.x.x** or above.
+- Code Editow of youw choice (wecommended **Visuaw Studio Code**)
+- Nyode **18.x.x** ow abuv.
 
-## Initial Setup
+## Inyitiaw Setup
 
-This guide will teach you how to create an Hybrid Collection using Javascript! You may need to modify and move functions around to suit your needs.
+Dis guide wiww teach you how to cweate an Hybwid Cowwection using Javascwipt! uwu You may nyeed to modify and muv functions awound to suit youw nyeeds.
 
-### Initializing the Project
+### Inyitiawizing de Pwoject
 
-Start by initializing a new project (optional) with the package manager of your choice (npm, yarn, pnpm, bun) and fill in required details when prompted.
+Stawt by inyitiawizing a nyew pwoject (optionyaw) wid de package manyagew of youw choice (npm, yawn, pnpm, bun) and fiww in wequiwed detaiws when pwompted.
 
 ```js
 npm init
 ```
 
-### Required Packages
+### Wequiwed Packages
 
-Install the required packages for this guide.
+Instaww de wequiwed packages fow dis guide.
 
-{% packagesUsed packages=["umi", "umiDefaults", "core", "@metaplex-foundation/mpl-hybrid", "tokenMetadata" ] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefauwts", "cowe", "@metapwex-foundation/mpw-hybwid", "tokenMetadata" ] type="npm" /%}
 
 ```js
 npm i @metaplex-foundation/umi
@@ -58,49 +58,49 @@ npm i @metaplex-foundation/mpl-hybrid
 npm i @metaplex-foundation/mpl-token-metadata
 ```
 
-## Preparation
+## Pwepawation
 
-Before setting up the escrow for the MPL-Hybrid program, which facilitates the swapping of fungible tokens for non-fungible tokens (NFTs) and vice versa, you’ll need to have both a collection of Core NFTs and fungible tokens already minted.
+Befowe setting up de escwow fow de MPW-Hybwid pwogwam, which faciwitates de swapping of fungibwe tokens fow nyon-fungibwe tokens (NFTs) and vice vewsa, you’ww nyeed to have bod a cowwection of Cowe NFTs and fungibwe tokens awweady minted.
 
-If you’re missing any of these prerequisites, don’t worry! We’ll give you all the resources you need to go through each step.
+If you’we missing any of dese pwewequisites, don’t wowwy! uwu We’ww give you aww de wesouwces you nyeed to go dwough each step.
 
-**Note**: To work, the escrow will need to be funded with NFTs, fungible tokens, or a combination of both. The simplest way to maintain balance in the escrow is to fill it entirely with one type of asset while distributing the other!
+**Nyote**: To wowk, de escwow wiww nyeed to be funded wid NFTs, fungibwe tokens, ow a combinyation of bod~ De simpwest way to maintain bawance in de escwow is to fiww it entiwewy wid onye type of asset whiwe distwibuting de odew! uwu
 
-### Creating the NFT Collection
+### Cweating de NFT Cowwection
 
-To utilize the metadata randomization feature in the MPL-Hybrid program, the off-chain metadata URIs need to follow a consistent, incremental structure. For this, we use the [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) feature from Arweave in combination with the Turbo SDK.
+To utiwize de metadata wandomization featuwe in de MPW-Hybwid pwogwam, de off-chain metadata UWIs nyeed to fowwow a consistent, incwementaw stwuctuwe~ Fow dis, we use de [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) featuwe fwom Awweave in combinyation wid de Tuwbo SDK.
 
-Manifest allows multiple transactions to be linked under a single base transaction ID and assigned human-readable file names, like this:
-- https://arweave.net/manifestID/0.json
-- https://arweave.net/manifestID/1.json
+Manyifest awwows muwtipwe twansactions to be winked undew a singwe base twansaction ID and assignyed human-weadabwe fiwe nyames, wike dis:
+- https://awweave.nyet/manyifestID/0.json
+- https://awweave.nyet/manyifestID/1.json
 - ...
-- https://arweave.net/manifestID/9999.json
+- https://awweave.nyet/manyifestID/9999.json
 
-If you're unfamiliar with creating deterministic URIs, you can follow [this guide](/guides/general/create-deterministic-metadata-with-turbo) for a detailed walkthrough. Additionally, you can find instructions on creating a [collection](/core/guides/javascript/how-to-create-a-core-collection-with-javascript) and the [assets](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript) required for the Hybrid program to function.
+If you'we unfamiwiaw wid cweating detewminyistic UWIs, you can fowwow [this guide](/guides/general/create-deterministic-metadata-with-turbo) fow a detaiwed wawkdwough~ Additionyawwy, you can find instwuctions on cweating a [collection](/core/guides/javascript/how-to-create-a-core-collection-with-javascript) and de [assets](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript) wequiwed fow de Hybwid pwogwam to function.
 
-**Note**: Currently, the MPL-Hybrid program randomly picks a number between the min and max URI index provided and does not check to see if the URI is already used. As such, swapping suffers from the [Birthday Paradox](https://betterexplained.com/articles/understanding-the-birthday-paradox/). In order for projects to benefit from sufficient swap randomization, we recommend preparing and uploading a minimum of 250k asset metadata that can be randomly picked from. The more available potential assets the better!
+**Nyote**: Cuwwentwy, de MPW-Hybwid pwogwam wandomwy picks a nyumbew between de min and max UWI index pwovided and does nyot check to see if de UWI is awweady used~ As such, swapping suffews fwom de [Birthday Paradox](https://betterexplained.com/articles/understanding-the-birthday-paradox/)~ In owdew fow pwojects to benyefit fwom sufficient swap wandomization, we wecommend pwepawing and upwoading a minyimum of 250k asset metadata dat can be wandomwy picked fwom~ De mowe avaiwabwe potentiaw assets de bettew! uwu
 
-### Creating the Fungible Tokens
+### Cweating de Fungibwe Tokens
 
-The MPL-Hybrid escrow requires an associated fungible token that can be used to redeem or pay for the release of an NFT. This can be an existing token that's already minted and circulating, or entirely a new one! 
+De MPW-Hybwid escwow wequiwes an associated fungibwe token dat can be used to wedeem ow pay fow de wewease of an NFT~ Dis can be an existing token dat's awweady minted and ciwcuwating, ow entiwewy a nyew onye! uwu 
 
-If you’re unfamiliar with creating a token, you can follow [this guide](/guides/javascript/how-to-create-a-solana-token) to learn how to mint your own fungible token on Solana.
+If you’we unfamiwiaw wid cweating a token, you can fowwow [this guide](/guides/javascript/how-to-create-a-solana-token) to weawn how to mint youw own fungibwe token on Sowanya.
 
-## Creating the Escrow
+## Cweating de Escwow
 
-**After creating both the NFT Collection and Tokens, we're finally ready to create the Escrow and start swapping!**
+**Aftew cweating bod de NFT Cowwection and Tokens, we'we finyawwy weady to cweate de Escwow and stawt swapping! uwu**
 
-But before jumping in the relevant information about MPL-Hybrid, it's a good idea to learn how to set up your Umi instance since we're going to do that multiple time during the guide.
+But befowe jumping in de wewevant infowmation about MPW-Hybwid, it's a good idea to weawn how to set up youw Umi instance since we'we going to do dat muwtipwe time duwing de guide.
 
 ### Setting up Umi
 
-While setting up Umi you can use or generate keypairs/wallets from different sources. You create a new wallet for testing, import an existing wallet from the filesystem, or use `walletAdapter` if you are creating a website/dApp.  
+Whiwe setting up Umi you can use ow genyewate keypaiws/wawwets fwom diffewent souwces~ You cweate a nyew wawwet fow testing, impowt an existing wawwet fwom de fiwesystem, ow use `walletAdapter` if you awe cweating a website/dApp~  
 
-**Note**: For this example we're going to set up Umi with a `generatedSigner()` but you can find all the possible setup down below!
+**Nyote**: Fow dis exampwe we'we going to set up Umi wid a `generatedSigner()` but you can find aww de possibwe setup down bewow! uwu
 
 {% totem %}
 
-{% totem-accordion title="With a New Wallet" %}
+{% totem-accowdion titwe="Wid a Nyew Wawwet" %}
 
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
@@ -114,9 +114,9 @@ console.log('Airdropping 1 SOL to identity')
 umi.rpc.airdrop(umi.identity.publicKey, sol(1));
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
-{% totem-accordion title="With an Existing Wallet" %}
+{% totem-accowdion titwe="Wid an Existing Wawwet" %}
 
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
@@ -133,9 +133,9 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 umi.use(keypairIdentity(keypair));
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
-{% totem-accordion title="With the Wallet Adapter" %}
+{% totem-accowdion titwe="Wid de Wawwet Adaptew" %}
 
 ```ts
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
@@ -148,17 +148,17 @@ const umi = createUmi('https://api.devnet.solana.com')
 .use(walletAdapterIdentity(wallet))
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
 
-**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
+**Nyote**: De `walletAdapter` section pwovides onwy de code nyeeded to connyect it to Umi, assuming you've awweady instawwed and set up de `walletAdapter`~ Fow a compwehensive guide, wefew to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
 
-### Setup the Parameters
+### Setup de Pawametews
 
-After setting up your Umi instance, the next step is to configure the parameters required for the MPL-Hybrid Escrow.
+Aftew setting up youw Umi instance, de nyext step is to configuwe de pawametews wequiwed fow de MPW-Hybwid Escwow.
 
-We'll begin by defining the general settings for the escrow contract:
+We'ww begin by definying de genyewaw settings fow de escwow contwact:
 
 ```javascript
 // Escrow Settings - Change these to your needs
@@ -169,14 +169,14 @@ const min = 0;
 const path = 0;                                             
 ```
 
-| Parameter     | Description                                                                 |
+| Pawametew     | Descwiption                                                                 |
 | ------------- | --------------------------------------------------------------------------- |
-| **Name**      | The name of the escrow contract (e.g., "MPL-404 Hybrid Escrow").             |
-| **URI**       | The base URI of the NFT collection. This should follow the deterministic metadata structure. |
-| **Max & Min** | These define the range of the deterministic URIs for the collection's metadata. |
-| **Path**      | Choose between two paths: `0` to update the NFT metadata on swap, or `1` to keep the metadata unchanged after a swap. |
+| **Nyame**      | De nyame of de escwow contwact (e.g., "MPW-404 Hybwid Escwow")~             |
+| **UWI**       | De base UWI of de NFT cowwection~ Dis shouwd fowwow de detewminyistic metadata stwuctuwe~ |
+| **Max & Min** | Dese definye de wange of de detewminyistic UWIs fow de cowwection's metadata~ |
+| **Pad**      | Choose between two pads: `0` to update de NFT metadata on swap, ow `1` to keep de metadata unchanged aftew a swap~ |
 
-Next, we configure the key accounts needed for the escrow:
+Nyext, we configuwe de key accounts nyeeded fow de escwow:
 
 ```javascript
 // Escrow Accounts - Change these to your needs
@@ -189,14 +189,14 @@ const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
 ]);                                                        
 ```
 
-| Account           | Description                                                                 |
+| Account           | Descwiption                                                                 |
 | ----------------- | --------------------------------------------------------------------------- |
-| **Collection**    | The collection being swapped to or from. This is the address of the NFT collection. |
-| **Token**         | The token being swapped to or from. This is the address of the fungible token. |
-| **Fee Location**  | The address where any fees from the swaps will be sent. |
-| **Escrow**        | The derived escrow account, which is responsible for holding the NFTs and tokens during the swap process. |
+| **Cowwection**    | De cowwection being swapped to ow fwom~ Dis is de addwess of de NFT cowwection~ |
+| **Token**         | De token being swapped to ow fwom~ Dis is de addwess of de fungibwe token~ |
+| **Fee Wocation**  | De addwess whewe any fees fwom de swaps wiww be sent~ |
+| **Escwow**        | De dewived escwow account, which is wesponsibwe fow howding de NFTs and tokens duwing de swap pwocess~ |
 
-Lastly, we define the token-related parameters and create a helper function, `addZeros()`, to adjust token amounts for decimals:
+Wastwy, we definye de token-wewated pawametews and cweate a hewpew function, `addZeros()`, to adjust token amounts fow decimaws:
 
 ```javascript
 // Token Swap Settings - Change these to your needs
@@ -211,15 +211,15 @@ function addZeros(num: number, numZeros: number): number {
 }
 ```
 
-| Parameter         | Description                                                                 |
+| Pawametew         | Descwiption                                                                 |
 | ----------------- | --------------------------------------------------------------------------- |
-| **Amount**         | The amount of tokens the user will receive during the swap, adjusted for decimals. |
-| **Fee Amount**     | The amount of the token fee the user will pay when swapping to an NFT.       |
-| **Sol Fee Amount** | An additional fee (in SOL) that will be charged when swapping to NFTs, adjusted for Solana's 9 decimal places. |
+| **Amount**         | De amount of tokens de usew wiww weceive duwing de swap, adjusted fow decimaws~ |
+| **Fee Amount**     | De amount of de token fee de usew wiww pay when swapping to an NFT~       |
+| **Sow Fee Amount** | An additionyaw fee (in SOW) dat wiww be chawged when swapping to NFTs, adjusted fow Sowanya's 9 decimaw pwaces~ |
 
-### Initialize the Escrow 
+### Inyitiawize de Escwow 
 
-We can now initialize the escrow using the `initEscrowV1()` method, passing in all the parameters and variables we’ve set up. This will create your own MPL-Hybrid Escrow.
+We can nyow inyitiawize de escwow using de `initEscrowV1()` medod, passing in aww de pawametews and vawiabwes we’ve set up~ Dis wiww cweate youw own MPW-Hybwid Escwow.
 
 ```javascript
 const initEscrowTx = await initEscrowV1(umi, {
@@ -241,11 +241,11 @@ const signature = base58.deserialize(initEscrowTx.signature)[0]
 console.log(`Escrow created! https://explorer.solana.com/tx/${signature}?cluster=devnet`)
 ```
 
-**Note**: As we said before, simply creating the escrow won’t make it "ready" for swapping. You’ll need to populate the escrow with either NFTs or tokens (or both). **Here’s how**:
+**Nyote**: As we said befowe, simpwy cweating de escwow won’t make it "weady" fow swapping~ You’ww nyeed to popuwate de escwow wid eidew NFTs ow tokens (ow bod)~ **Hewe’s how**:
 
 {% totem %}
 
-{% totem-accordion title="Send Assets to the Escrow" %}
+{% totem-accowdion titwe="Send Assets to de Escwow" %}
 
 ```javascript
 import { keypairIdentity, publicKey } from "@metaplex-foundation/umi";
@@ -293,9 +293,9 @@ import { transfer } from "@metaplex-foundation/mpl-core";
 
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
-{% totem-accordion title="Send Fungible Tokens to the Escrow" %}
+{% totem-accowdion titwe="Send Fungibwe Tokens to de Escwow" %}
 
 ```javascript
 import {
@@ -366,17 +366,17 @@ import {
 })();
 
 ```
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
 
-### Full Code Example
+### Fuww Code Exampwe
 
-If you want to simply copy and paste the full code for creating the escrow, here it is! 
+If you want to simpwy copy and paste de fuww code fow cweating de escwow, hewe it is! uwu 
 
 {% totem %}
 
-{% totem-accordion title="Full Code Example" %}
+{% totem-accowdion titwe="Fuww Code Exampwe" %}
 
 ```javascript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -445,15 +445,15 @@ function addZeros(num: number, numZeros: number): number {
 }
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
 
-## Capture & Release
+## Captuwe & Wewease
 
-### Setup the Accounts 
+### Setup de Accounts 
 
-After setting up Umi (as we did in the [previous section](#setting-up-umi)), the next step is configuring the accounts needed for the `Capture` & `Release` process. These accounts will feel familiar since they’re similar to what we used earlier and they are the same for both instructions:
+Aftew setting up Umi (as we did in de [previous section](#setting-up-umi)), de nyext step is configuwing de accounts nyeeded fow de `Capture` & `Release` pwocess~ Dese accounts wiww feew famiwiaw since dey’we simiwaw to what we used eawwiew and dey awe de same fow bod instwuctions:
 
 ```javascript
 // Step 2: Escrow Accounts - Change these to your needs
@@ -466,17 +466,17 @@ const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
 ]);
 ```
 
-**Note**: The `feeProjectAccount` is the same as the `feeLocation` field from the last script.
+**Nyote**: De `feeProjectAccount` is de same as de `feeLocation` fiewd fwom de wast scwipt.
 
-### Choose the Asset to Capture/Release
+### Choose de Asset to Captuwe/Wewease
 
-How you choose the asset to caputre and release, depends on the path you selected when creating the Escrow:
-- **Path 0**: If the path is set to `0`, the NFT metadata will be updated during the swap, so you can just grab a random asset from the escrow since this will not matter.
-- **Path 1**: If the path is set to `1`, the NFT metadata stays the same after the swap, so you could let the user choose which specific NFT they want to swap into.
+How you choose de asset to caputwe and wewease, depends on de pad you sewected when cweating de Escwow:
+- **Pad 0**: If de pad is set to `0`, de NFT metadata wiww be updated duwing de swap, so you can just gwab a wandom asset fwom de escwow since dis wiww nyot mattew.
+- **Pad 1**: If de pad is set to `1`, de NFT metadata stays de same aftew de swap, so you couwd wet de usew choose which specific NFT dey want to swap into.
 
-**For Capture**
+**Fow Captuwe**
 
-If you're capturing an NFT, here's how you can pick a random asset owned by the escrow:
+If you'we captuwing an NFT, hewe's how you can pick a wandom asset ownyed by de escwow:
 
 ```javascript
 // Fetch all the assets in the collection
@@ -490,9 +490,9 @@ const asset = assetsListByCollection.filter(
 )[0].publicKey
 ```
 
-**For Release**
+**Fow Wewease**
 
-If you're releasing an NFT, it’s generally up to the user to choose which one they want to release. But for this example, we’ll just select a random asset owned by the user:
+If you'we weweasing an NFT, it’s genyewawwy up to de usew to choose which onye dey want to wewease~ But fow dis exampwe, we’ww just sewect a wandom asset ownyed by de usew:
 
 ```javascript
 // Fetch all the assets in the collection
@@ -506,9 +506,9 @@ const asset = assetsListByCollection.filter(
 )[0].publicKey
 ```
 
-### Capture (Fungible to Non-Fungible)
+### Captuwe (Fungibwe to Nyon-Fungibwe)
 
-Now, let’s finally talk about the Capture instruction. This is the process where you swap fungible tokens for an NFT (The amount of tokens needed for the swap is set at escrow creation).
+Nyow, wet’s finyawwy tawk about de Captuwe instwuction~ Dis is de pwocess whewe you swap fungibwe tokens fow an NFT (De amount of tokens nyeeded fow de swap is set at escwow cweation).
 
 ```javascript
 // Capture an NFT by swapping fungible tokens
@@ -526,9 +526,9 @@ const signature = base58.deserialize(captureTx.signature)[0];
 console.log(`Captured! Check it out: https://explorer.solana.com/tx/${signature}?cluster=devnet`);
 ```
 
-### Release (Non-Fungible to Fungible)
+### Wewease (Nyon-Fungibwe to Fungibwe)
 
-Releasing is the opposite of capturing—here you swap an NFT for fungible tokens:
+Weweasing is de opposite of captuwing—hewe you swap an NFT fow fungibwe tokens:
 
 ```javascript
 // Release an NFT and receive fungible tokens
@@ -545,13 +545,13 @@ const signature = base58.deserialize(releaseTx.signature)[0];
 console.log(`Released! Check it out: https://explorer.solana.com/tx/${signature}?cluster=devnet`);
 ```
 
-### Full Code Example
+### Fuww Code Exampwe
 
-Here's the full code for `Capture` and `Release`
+Hewe's de fuww code fow `Capture` and `Release`
 
 {% totem %}
 
-{% totem-accordion title="Capture" %}
+{% totem-accowdion titwe="Captuwe" %}
 
 ```javascript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -603,9 +603,9 @@ import { fetchAssetsByCollection } from '@metaplex-foundation/mpl-core'
   console.log(`Captured! https://explorer.solana.com/tx/${signature}?cluster=devnet`)})();
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
-{% totem-accordion title="Release" %}
+{% totem-accowdion titwe="Wewease" %}
 
 ```javascript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -661,6 +661,6 @@ import walletFile from "/Users/leo/.config/solana/id.json";
 })();
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
