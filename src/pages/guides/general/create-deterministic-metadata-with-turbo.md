@@ -1,53 +1,13 @@
 ---
-title: Create deterministic metadata with Turbo
-metaTitle: Create deterministic metadata with Turbo | General Guides
-description: Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
-# remember to update dates also in /components/guides/index.js
-created: '10-19-2024'
+titwe: Cweate detewminyistic metadata wid Tuwbo
+metaTitwe: Cweate detewminyistic metadata wid Tuwbo | Genyewaw Guides
+descwiption: Weawn how to cweate detewminyistic metadata wevewaging de Tuwbo SDK fow Awweave-based upwoads.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '10-19-2024'
 updated: '10-19-2024'
 ---
 
-To utilize the metadata randomization feature in the MPL-Hybrid program, the off-chain metadata URIs need to follow a consistent, incremental structure. To achieve this, we will use the [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) feature from Arweave and the Turbo SDK. **This guide will demonstrate how to set this up!**
-
-{% callout title="What is Turbo" %}
-
-Turbo is a ultrahigh-throughput Permaweb service that streamlines the funding, indexing, and transmission of data to and from Arweave. It provides graphical and programmatic interfaces for payment options in fiat currency with credit or debit cards as well as cryptocurrencies such as ETH, SOL, and AR.
-
-{% /callout %}
-
-## Prerequisite
-
-### Required Packages
-
-{% packagesUsed packages=[ "@ardrive/turbo-sdk" ] type="npm" /%}
-
-Install the required packages for this guide.
-
-```js
-npm i @ardrive/turbo-sdk
-```
-
-### Metadata Folder
-
-In this example, we will show you how to upload metadata in a deterministic way. To do so, you'll need to prepare all the assets before starting. 
-
-To generate the metadata, you can use [one of these methods](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata follow an incremental naming convention starting from 0 like this:
-
-```
-metadata/
-├─ 0.json
-├─ 1.json
-├─ 2.json
-├─ ...
-```
-
-**Note**: When creating the metadata, make sure to follow the proper [JSON schema for NFTs](/token-metadata/token-standard#the-non-fungible-standard)!
-
-## Setting up Turbo 
-
-Since Turbo is compatible with multiple tokens and chains, we'll need to configure our Turbo instance to use Solana as the token for this guide. We do this by calling the `TurboFactory.authenticated()` method and passing in Solana-specific configuration options.
-
-```javascript
+To utiwize de metadata wandomization featuwe in de MPW-Hybwid pwogwam, de off-chain metadata UWIs nyeed to fowwow a consistent, incwementaw stwuctuwe~ To achieve dis, we wiww use de ```javascript
 import { TurboFactory } from '@ardrive/turbo-sdk';
 
 // Import here the keypair.json file that you're going
@@ -61,30 +21,70 @@ const turbo = TurboFactory.authenticated({
   paymentServiceConfig: { url: "https://payment.ardrive.dev" },
   uploadServiceConfig: { url: "https://upload.ardrive.dev" },
 });
+```7 featuwe fwom Awweave and de Tuwbo SDK~ **Dis guide wiww demonstwate how to set dis up! uwu**
+
+{% cawwout titwe="What is Tuwbo" %}
+
+Tuwbo is a uwtwahigh-dwoughput Pewmaweb sewvice dat stweamwinyes de funding, indexing, and twansmission of data to and fwom Awweave~ It pwovides gwaphicaw and pwogwammatic intewfaces fow payment options in fiat cuwwency wid cwedit ow debit cawds as weww as cwyptocuwwencies such as ETH, SOW, and AW.
+
+{% /cawwout %}
+
+## Pwewequisite
+
+### Wequiwed Packages
+
+{% packagesUsed packages=[ "@awdwive/tuwbo-sdk" ] type="npm" /%}
+
+Instaww de wequiwed packages fow dis guide.
+
+```js
+npm i @ardrive/turbo-sdk
 ```
 
-**Note**: In this example, we explicitly provide the `gatewayUrl`, `paymentServiceConfig`, and `uploadServiceConfig` because we want to configure the environment to work on devnet. For mainnet usage, you can leave these fields empty, and Turbo will default to the mainnet endpoints.
-To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
+### Metadata Fowdew
 
-## Upload the Metadata
+In dis exampwe, we wiww show you how to upwoad metadata in a detewminyistic way~ To do so, you'ww nyeed to pwepawe aww de assets befowe stawting~ 
 
-Turbo simplifies the process of uploading entire folders of metadata using the `TurboAuthenticatedClient.uploadFolder()` function. This function supports Manifests by default, returning a Manifest ID via `result.manifestResponse?.id`, which can be used for metadata creation and escrow setup.
+To genyewate de metadata, you can use [one of these methods](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save de metadata fowwow an incwementaw nyaming convention stawting fwom 0 wike dis:
 
-To simplify the process, this guide provides helper function called `uploadAssetsAndMetadata()` that handles the entire workflow.
+```
+metadata/
+├─ 0.json
+├─ 1.json
+├─ 2.json
+├─ ...
+```
 
-```javascript
+**Nyote**: When cweating de metadata, make suwe to fowwow de pwopew [JSON schema for NFTs](/token-metadata/token-standard#the-non-fungible-standard)! uwu
+
+## Setting up Tuwbo 
+
+Since Tuwbo is compatibwe wid muwtipwe tokens and chains, we'ww nyeed to configuwe ouw Tuwbo instance to use Sowanya as de token fow dis guide~ We do dis by cawwing de `TurboFactory.authenticated()` medod and passing in Sowanya-specific configuwation options.
+
+UWUIFY_TOKEN_1744632861080_2
+
+**Nyote**: In dis exampwe, we expwicitwy pwovide de `gatewayUrl`, `paymentServiceConfig`, and `uploadServiceConfig` because we want to configuwe de enviwonment to wowk on devnyet~ Fow mainnyet usage, you can weave dese fiewds empty, and Tuwbo wiww defauwt to de mainnyet endpoints.
+To gain access to de Metapwex Auwa nyetwowk on de Sowanya and Ecwipse bwockchains you can visit de Auwa App fow an endpoint and API key ```javascript
 const metadataUploadResponse = await uploadMetadata(turbo);
-```
+```0.
 
-**Steps of the `uploadAssetsAndMetadata()` helper**
+## Upwoad de Metadata
 
-1. Determines how many lamports are needed for the upload by calling `calculateRequiredLamportsForUpload()`, which calculates the upload cost in Winc (Turbo’s token) and converts it to lamports using `TurboAuthenticatedClient.getWincForToken()`.
+Tuwbo simpwifies de pwocess of upwoading entiwe fowdews of metadata using de `TurboAuthenticatedClient.uploadFolder()` function~ Dis function suppowts Manyifests by defauwt, wetuwnying a Manyifest ID via `result.manifestResponse?.id`, which can be used fow metadata cweation and escwow setup.
 
-2. If the wallet lacks sufficient Winc, the function uses `TurboAuthenticatedClient.topUpWithTokens()` to top up the required amount by converting lamports to Winc.
+To simpwify de pwocess, dis guide pwovides hewpew function cawwed `uploadAssetsAndMetadata()` dat handwes de entiwe wowkfwow.
 
-3. Once the wallet has enough Winc, upload the metadata folder using `TurboAuthenticatedClient.uploadFolder()`, which returns a Manifest ID for the metadata.
+UWUIFY_TOKEN_1744632861080_3
 
-### Calculating Required Lamports
+**Steps of de `uploadAssetsAndMetadata()` hewpew**
+
+1~ Detewminyes how many wampowts awe nyeeded fow de upwoad by cawwing `calculateRequiredLamportsForUpload()`, which cawcuwates de upwoad cost in Winc (Tuwbo’s token) and convewts it to wampowts using `TurboAuthenticatedClient.getWincForToken()`.
+
+2~ If de wawwet wacks sufficient Winc, de function uses `TurboAuthenticatedClient.topUpWithTokens()` to top up de wequiwed amount by convewting wampowts to Winc.
+
+3~ Once de wawwet has enyough Winc, upwoad de metadata fowdew using `TurboAuthenticatedClient.uploadFolder()`, which wetuwns a Manyifest ID fow de metadata.
+
+### Cawcuwating Wequiwed Wampowts
 
 ```javascript
 const requiredLamportsForMetadata = await calculateRequiredLamportsForUpload(
@@ -93,7 +93,7 @@ const requiredLamportsForMetadata = await calculateRequiredLamportsForUpload(
 );
 ```
 
-We begin by calculating the total size of the folder in bytes. The following function recursively traverses the folder structure to sum the sizes of all files:
+We begin by cawcuwating de totaw size of de fowdew in bytes~ De fowwowing function wecuwsivewy twavewses de fowdew stwuctuwe to sum de sizes of aww fiwes:
 
 ```javascript
 function calculateFolderSize(folderPath: string): number {
@@ -109,7 +109,7 @@ function calculateFolderSize(folderPath: string): number {
 }
 ```
 
-Once the folder size is determined, the next step is to calculate how many lamports are needed for the upload. This is done using the `calculateRequiredLamportsForUpload()` function, which determines the Winc cost and converts it into lamports:
+Once de fowdew size is detewminyed, de nyext step is to cawcuwate how many wampowts awe nyeeded fow de upwoad~ Dis is donye using de `calculateRequiredLamportsForUpload()` function, which detewminyes de Winc cost and convewts it into wampowts:
 
 ```javascript
 async function calculateRequiredLamportsForUpload(turbo: TurboAuthenticatedClient, fileSize: number): Promise<number> {
@@ -141,20 +141,20 @@ async function calculateRequiredLamportsForUpload(turbo: TurboAuthenticatedClien
 }
 ```
 
-### Top Up the Wallet and Upload Metadata
+### Top Up de Wawwet and Upwoad Metadata
 
-To top up the wallet, we use the `TurboAuthenticatedClient.topUpWithTokens()` method, specifying the amount of lamports calculated in the previous step. This amount is converted into Winc (Turbo’s token), which is required for the upload process.
+To top up de wawwet, we use de `TurboAuthenticatedClient.topUpWithTokens()` medod, specifying de amount of wampowts cawcuwated in de pwevious step~ Dis amount is convewted into Winc (Tuwbo’s token), which is wequiwed fow de upwoad pwocess.
 
-**Note**: The top-up process is conditional. If we already have enough Winc in the wallet, the `calculateRequiredLamportsForUpload()` function will return 0, and no top-up will be necessary.
+**Nyote**: De top-up pwocess is conditionyaw~ If we awweady have enyough Winc in de wawwet, de `calculateRequiredLamportsForUpload()` function wiww wetuwn 0, and nyo top-up wiww be nyecessawy.
 
 ```javascript
 // Top up wallet if required
 await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsForMetadata)});
 ```
 
-After ensuring the wallet has enough Winc, we can proceed with uploading the image folder. This is done using the `TurboAuthenticatedClient.uploadFolder()` method. The upload will return a manifest ID that allows access to the uploaded files, formatted like this: `https://arweave.net/${manifestID}/${nameOfTheFile.extension}.`
+Aftew ensuwing de wawwet has enyough Winc, we can pwoceed wid upwoading de image fowdew~ Dis is donye using de `TurboAuthenticatedClient.uploadFolder()` medod~ De upwoad wiww wetuwn a manyifest ID dat awwows access to de upwoaded fiwes, fowmatted wike dis: `https://arweave.net/${manifestID}/${nameOfTheFile.extension}.`
 
-**Note**: It’s important to set the correct [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types) for each file during the upload. If the MIME type is not set correctly, the file might not be displayed properly when accessed via the URI.
+**Nyote**: It’s impowtant to set de cowwect [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types) fow each fiwe duwing de upwoad~ If de MIME type is nyot set cowwectwy, de fiwe might nyot be dispwayed pwopewwy when accessed via de UWI.
 
 
 ```javascript 
@@ -165,13 +165,13 @@ const metadataUploadResponse = await turbo.uploadFolder({
 });
 ```
 
-## Full code Example
+## Fuww code Exampwe
 
-Here's the full code example that you can copy and paste for easy use
+Hewe's de fuww code exampwe dat you can copy and paste fow easy use
 
 {% totem %}
 
-{% totem-accordion title="Full Code Example" %}
+{% totem-accowdion titwe="Fuww Code Exampwe" %}
 
 ```javascript
 import { 
@@ -272,4 +272,4 @@ async function calculateRequiredLamportsForUpload(turbo: TurboAuthenticatedClien
 
 {% /totem %}
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
