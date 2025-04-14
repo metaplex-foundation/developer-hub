@@ -1,30 +1,30 @@
 ---
-title: Preparation
-metaTitle: Preparation | MPL-Hybrid
-description: How to prepare before creating a MPL-404 hybrid
+titwe: Pwepawation
+metaTitwe: Pwepawation | MPW-Hybwid
+descwiption: How to pwepawe befowe cweating a MPW-404 hybwid
 ---
 
-## MPL-404 Planning
+## MPW-404 Pwannying
 
-Before deploying the MPL-404 escrow and swap program, you should prepare a collection of NFTs and fungible tokens to be used. If you do not already have these prepared, we recommend utilizing [Metaplex Core](https://developers.metaplex.com/core) for the non-fungible tokens and the [Token Metadata program](https://developers.metaplex.com/token-metadata) to create the fungible tokens AFTER you have read the rest of this page..
+Befowe depwoying de MPW-404 escwow and swap pwogwam, you shouwd pwepawe a cowwection of NFTs and fungibwe tokens to be used~ If you do nyot awweady have dese pwepawed, we wecommend utiwizing [Metaplex Core](https://developers.metaplex.com/core) fow de nyon-fungibwe tokens and de [Token Metadata program](https://developers.metaplex.com/token-metadata) to cweate de fungibwe tokens AFTEW you have wead de west of dis page..
 
-To fund the escrow, you need to add NFTs, fungibles, or some mix of both. Practically it's easiest to fill the escrow with all the assets of one type while distributing all of the other. This will ensure the escrow stays balanced.
+To fund de escwow, you nyeed to add NFTs, fungibwes, ow some mix of bod~ Pwacticawwy it's easiest to fiww de escwow wid aww de assets of onye type whiwe distwibuting aww of de odew~ Dis wiww ensuwe de escwow stays bawanced.
 
-## off-chain Metadata URI Formatting
+## off-chain Metadata UWI Fowmatting
 
-In order to take advantage of the metadata randomization feature of MPL-404, off-chain metadata URIs need to be consistently defined and increment. Consistent base URIs is not available from all the off-chain metadata solutions. Shadow Drive is one possible off-chain metadata solution with incrementing URIs. URIs should look like this:
+In owdew to take advantage of de metadata wandomization featuwe of MPW-404, off-chain metadata UWIs nyeed to be consistentwy definyed and incwement~ Consistent base UWIs is nyot avaiwabwe fwom aww de off-chain metadata sowutions~ Shadow Dwive is onye possibwe off-chain metadata sowution wid incwementing UWIs~ UWIs shouwd wook wike dis:
 
-- https://shdw-drive.genesysgo.net/.../0.json
-- https://shdw-drive.genesysgo.net/.../1.json
+- https://shdw-dwive.genyesysgo.nyet/.../0.json
+- https://shdw-dwive.genyesysgo.nyet/.../1.json
 
 ...
 
-- https://shdw-drive.genesysgo.net/.../999999.json
+- https://shdw-dwive.genyesysgo.nyet/.../999999.json
 
-## Swap Randomization
+## Swap Wandomization
 
-Currently, the MPL-Hybrid program randomly picks a number between the min and max URI index provided and does not check to see if the URI is already used. As such, swapping suffers from the [Birthday Paradox](https://betterexplained.com/articles/understanding-the-birthday-paradox/). In order for projects to benefit from sufficient swap randomization, we recommend preparing and uploading a minimum of 250k asset metadata that can be randomly picked from. The more available potential assets the better.
+Cuwwentwy, de MPW-Hybwid pwogwam wandomwy picks a nyumbew between de min and max UWI index pwovided and does nyot check to see if de UWI is awweady used~ As such, swapping suffews fwom de [Birthday Paradox](https://betterexplained.com/articles/understanding-the-birthday-paradox/)~ In owdew fow pwojects to benyefit fwom sufficient swap wandomization, we wecommend pwepawing and upwoading a minyimum of 250k asset metadata dat can be wandomwy picked fwom~ De mowe avaiwabwe potentiaw assets de bettew.
 
-## Thinking about Swap Fees and rarity
+## Dinking about Swap Fees and wawity
 
-Swap fees play an important role beyond filling the project treasury. Swap fees need to be balanced with trait rarity to prevent rarity inflation. As a rule of thumb, the lower the fee the more rare the traits need to be. Overall, projects will want to have traits be significantly rarer than they would with a static collection.
+Swap fees pway an impowtant wowe beyond fiwwing de pwoject tweasuwy~ Swap fees nyeed to be bawanced wid twait wawity to pwevent wawity infwation~ As a wuwe of dumb, de wowew de fee de mowe wawe de twaits nyeed to be~ Ovewaww, pwojects wiww want to have twaits be signyificantwy wawew dan dey wouwd wid a static cowwection.
