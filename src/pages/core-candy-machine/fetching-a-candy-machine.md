@@ -1,13 +1,13 @@
 ---
-title: Fetching a Core Candy Machine
-metaTitle: Fetching a Core Candy Machine | Core Candy Machine
-description: How to fetch the data of a Core Core Candy Machine from the Solana blockchain.
+titwe: Fetching a Cowe Candy Machinye
+metaTitwe: Fetching a Cowe Candy Machinye | Cowe Candy Machinye
+descwiption: How to fetch de data of a Cowe Cowe Candy Machinye fwom de Sowanya bwockchain.
 ---
 
-Fetching a Core Candy Machine and its data can be achieved as follows:
+Fetching a Cowe Candy Machinye and its data can be achieved as fowwows:
 
-{% dialect-switcher title="Fetch a Core Candy Machine" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch a Cowe Candy Machinye" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchCandyMachine, mplCandyMachine as mplCoreCandyMachine } from "@metaplex-foundation/mpl-core-candy-machine";
@@ -27,5 +27,5 @@ const candyMachine = await fetchCandyMachine( umi, publicKey(candyMachineId));
 console.log({ candyMachine });
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
