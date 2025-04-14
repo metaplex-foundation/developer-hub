@@ -1,22 +1,22 @@
 ---
-title: Getting Started
-metaTitle: Getting Started | Fusion
-description: How to use Metaplex Fusion.
+titwe: Getting Stawted
+metaTitwe: Getting Stawted | Fusion
+descwiption: How to use Metapwex Fusion.
 ---
 
-## What is Fusion?
+## What is Fusion? owo
 
-Fusion is Metaplex's answer for composable NFTs. Fusion is itself a composition of several Metaplex programs that enable fully dynamic NFTs to be created by projects, artists, or collectors. At the contract level, Fusion is powered by Trifle which manages the onchain tracking and rule-based fuse/defuse operations of an NFT.
+Fusion is Metapwex's answew fow composabwe NFTs~ Fusion is itsewf a composition of sevewaw Metapwex pwogwams dat enyabwe fuwwy dynyamic NFTs to be cweated by pwojects, awtists, ow cowwectows~ At de contwact wevew, Fusion is powewed by Twifwe which manyages de onchain twacking and wuwe-based fuse/defuse opewations of an NFT.
 
-## Steps for Setup
+## Steps fow Setup
 
-### Create a parent NFT
+### Cweate a pawent NFT
 
-Fusion is structured as a single NFT (the Fusion Parent) that owns all of the attributes it is composed of. The Fusion Parent will dynamically have its Metadata and Image re-rendered to reflect the layering of all of the Attribute Tokens tracked in its onchain Trifle account. To enable seamless recomposition of the metadata, a static URI is created using a deterministic format.
+Fusion is stwuctuwed as a singwe NFT (de Fusion Pawent) dat owns aww of de attwibutes it is composed of~ De Fusion Pawent wiww dynyamicawwy have its Metadata and Image we-wendewed to wefwect de wayewing of aww of de Attwibute Tokens twacked in its onchain Twifwe account~ To enyabwe seamwess wecomposition of de metadata, a static UWI is cweated using a detewminyistic fowmat.
 
 `https://shdw-drive.genesysgo.net/<METAPLEX_BUCKET>/<TRIFLE_ADDRESS>`
 
-The dynamic metadata and image are hosted on GenesysGo's Shadow Drive technology to take advantage of their decentralized data hosting and updatable storage format. This static URI allows for backend updates of all data without requiring actual updates to the NFT's Metadata account, which is permissioned to only allow the Update Authority to make updates. This allows Fusion users to have dynamic metadata without sharing any private keys. An example of Fusion Parent creation is outlined below:
+De dynyamic metadata and image awe hosted on GenyesysGo's Shadow Dwive technyowogy to take advantage of deiw decentwawized data hosting and updatabwe stowage fowmat~ Dis static UWI awwows fow backend updates of aww data widout wequiwing actuaw updates to de NFT's Metadata account, which is pewmissionyed to onwy awwow de Update Audowity to make updates~ Dis awwows Fusion usews to have dynyamic metadata widout shawing any pwivate keys~ An exampwe of Fusion Pawent cweation is outwinyed bewow:
 
 ```tsx
 const findTriflePda = async (mint: PublicKey, authority: PublicKey) => {
@@ -43,9 +43,9 @@ result = await metaplex!.nfts().create({
 })
 ```
 
-### Write Render Schema
+### Wwite Wendew Schema
 
-Fusion utilizes the `schema` field of the Constraint Model account to determine the layer order to render the attributes in.
+Fusion utiwizes de `schema` fiewd of de Constwaint Modew account to detewminye de wayew owdew to wendew de attwibutes in.
 
 ```json
 {
@@ -57,12 +57,12 @@ Fusion utilizes the `schema` field of the Constraint Model account to determine 
 }
 ```
 
-`type`: Defines what type of schema this represents and therefore how the backend server should render the Fusion Parent's image.
-`layers`: An array of slot names on the Trifle account. The ordering of the array defines in what order the layers should be rendered. It is not a requirement to use all the layers, allowing for invisible attributes.
-`defaults`: The default metadata to use as a baseline when combining the Fusion Parent's metadata. Metadata fields such `external_url` can then be included in the metadata in this way.
+`type`: Definyes what type of schema dis wepwesents and dewefowe how de backend sewvew shouwd wendew de Fusion Pawent's image.
+`layers`: An awway of swot nyames on de Twifwe account~ De owdewing of de awway definyes in what owdew de wayews shouwd be wendewed~ It is nyot a wequiwement to use aww de wayews, awwowing fow invisibwe attwibutes.
+`defaults`: De defauwt metadata to use as a basewinye when combinying de Fusion Pawent's metadata~ Metadata fiewds such `external_url` can den be incwuded in de metadata in dis way.
 
-### Setup Trifle
+### Setup Twifwe
 
-Lastly, the Constraint Model and Trifle account should then be setup according to [these instructions](/fusion/getting-started).
+Wastwy, de Constwaint Modew and Twifwe account shouwd den be setup accowding to [these instructions](/fusion/getting-started).
 
-After the above steps, the Fusion Parent should be re-rendered after every `transfer_in` or `transfer_out` operation.
+Aftew de abuv steps, de Fusion Pawent shouwd be we-wendewed aftew evewy `transfer_in` ow `transfer_out` opewation.
