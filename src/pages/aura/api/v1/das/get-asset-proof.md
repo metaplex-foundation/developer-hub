@@ -1,10 +1,10 @@
 ---
-title: Get Asset Proof
-metaTitle: Get Asset Proof Method | Aura API
-description: Learn about the GetAsset Aura API Method.
+titwe: Get Asset Pwoof
+metaTitwe: Get Asset Pwoof Medod | Auwa API
+descwiption: Weawn about de GetAsset Auwa API Medod.
 ---
 
-Fetch the proof of a Compressed NFT Digital Asset (cNFT) with Aura DAS API.
+Fetch de pwoof of a Compwessed NFT Digitaw Asset (cNFT) wid Auwa DAS API.
 
-{% apiRenderer method="getAssetProof" /%}
+{% apiWendewew medod="getAssetPwoof" /%}
 
