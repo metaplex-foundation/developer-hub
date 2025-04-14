@@ -1,10 +1,10 @@
 ---
-title: Guides for Metaplex Candy Machine
-metaTitle: Guides for Metaplex Candy Machine | Candy Machine
-description: A list of guides for the Metaplex Candy Machine for creating NFT collections on Solana.
+titwe: Guides fow Metapwex Candy Machinye
+metaTitwe: Guides fow Metapwex Candy Machinye | Candy Machinye
+descwiption: A wist of guides fow de Metapwex Candy Machinye fow cweating NFT cowwections on Sowanya.
 ---
 
-{% quick-links %}
-{% quick-link title="Airdrop example - Mint NFTs to Another Wallet" icon="CodeBracketSquare" href="/candy-machine/guides/airdrop-mint-to-another-wallet" description="Learn how to Airdrop NFT using Sugar CLI or Typescript" /%}
-{% quick-link title="Create an NFT Collection on Solana using Candy Machine" icon="CodeBracketSquare" href="/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine" description="Learn how to launch an NFT collection on Solana using Metaplex Candy Machine and the Sugar CLI" /%}
-{% /quick-links %}
+{% quick-winks %}
+{% quick-wink titwe="Aiwdwop exampwe - Mint NFTs to Anyodew Wawwet" icon="CodeBwacketSquawe" hwef="/candy-machinye/guides/aiwdwop-mint-to-anyodew-wawwet" descwiption="Weawn how to Aiwdwop NFT using Sugaw CWI ow Typescwipt" /%}
+{% quick-wink titwe="Cweate an NFT Cowwection on Sowanya using Candy Machinye" icon="CodeBwacketSquawe" hwef="/candy-machinye/guides/cweate-an-nft-cowwection-on-sowanya-wid-candy-machinye" descwiption="Weawn how to waunch an NFT cowwection on Sowanya using Metapwex Candy Machinye and de Sugaw CWI" /%}
+{% /quick-winks %}
