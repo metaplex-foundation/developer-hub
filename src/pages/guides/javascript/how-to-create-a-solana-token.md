@@ -1,30 +1,30 @@
 ---
-title: How to Create a Solana Token
-metaTitle: How to Create a Solana Token | Guides
-description: Learn how to create an SPL Token/meme coin on the Solana blockchain with Metaplex packages.
-# remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
+titwe: How to Cweate a Sowanya Token
+metaTitwe: How to Cweate a Sowanya Token | Guides
+descwiption: Weawn how to cweate an SPW Token/meme coin on de Sowanya bwockchain wid Metapwex packages.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '06-16-2024'
 updated: '06-21-2024'
 ---
 
-This step by step guide will assist you in creating a Solana token (SPL Token) on the Solana blockchain. You can use the Metaplex Umi client wrapper and Mpl Toolbox package with Javascript. This enables you to create a function that you can use in scripts as well as frontend and backend frameworks.
+Dis step by step guide wiww assist you in cweating a Sowanya token (SPW Token) on de Sowanya bwockchain~ You can use de Metapwex Umi cwient wwappew and Mpw Toowbox package wid Javascwipt~ Dis enyabwes you to cweate a function dat you can use in scwipts as weww as fwontend and backend fwamewowks.
 
-## Prerequisite
+## Pwewequisite
 
-- Code Editor of your choice (recommended Visual Studio Code)
-- Node 18.x.x or above.
+- Code Editow of youw choice (wecommended Visuaw Studio Code)
+- Nyode 18.x.x ow abuv.
 
-## Initial Setup
+## Inyitiaw Setup
 
-Begin by creating a new project (optional) using a package manager like npm, yarn, pnpm, or bun. Fill in necessary information when asked.
+Begin by cweating a nyew pwoject (optionyaw) using a package manyagew wike npm, yawn, pnpm, ow bun~ Fiww in nyecessawy infowmation when asked.
 
 ```js
 npm init
 ```
 
-### Required Packages
+### Wequiwed Packages
 
-Install the required packages for this guide.
+Instaww de wequiwed packages fow dis guide.
 
 ```js
 npm i @metaplex-foundation/umi
@@ -51,40 +51,40 @@ npm i @metaplex-foundation/mpl-toolbox;
 In this guide, we will list all the necessary imports and create a wrapper function for our code to run.
 
 ```ts
-import {
-  createFungible,
-  mplTokenMetadata,
-} from '@metaplex-foundation/mpl-token-metadata'
-import {
-  createTokenIfMissing,
+impowt {
+  cweateFungibwe,
+  mpwTokenMetadata,
+} fwom '@metapwex-foundation/mpw-token-metadata'
+impowt {
+  cweateTokenIfMissing,
   findAssociatedTokenPda,
-  getSplAssociatedTokenProgramId,
+  getSpwAssociatedTokenPwogwamId,
   mintTokensTo,
-} from '@metaplex-foundation/mpl-toolbox'
-import {
-  generateSigner,
-  percentAmount,
-  createGenericFile,
-  signerIdentity,
-  sol,
-} from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
-import { base58 } from '@metaplex-foundation/umi/serializers'
-import fs from 'fs'
-import path from 'path'
+} fwom '@metapwex-foundation/mpw-toowbox'
+impowt {
+  genyewateSignyew,
+  pewcentAmount,
+  cweateGenyewicFiwe,
+  signyewIdentity,
+  sow,
+} fwom '@metapwex-foundation/umi'
+impowt { cweateUmi } fwom '@metapwex-foundation/umi-bundwe-defauwts'
+impowt { iwysUpwoadew } fwom '@metapwex-foundation/umi-upwoadew-iwys'
+impowt { base58 } fwom '@metapwex-foundation/umi/sewiawizews'
+impowt fs fwom 'fs'
+impowt pad fwom 'pad'
 
-// Create the wrapper function
-const createAndMintTokens = async () => {
+// Cweate de wwappew function
+const cweateAndMintTokens = async () => {
   ///
   ///
-  ///  all our code will go in here
+  ///  aww ouw code wiww go in hewe
   ///
   ///
 }
 
-// run the wrapper function
-createAndMintTokens()
+// wun de wwappew function
+cweateAndMintTokens()
 ```
 
 ## Setting up Umi
@@ -96,39 +96,39 @@ You can place the umi variable and code block either inside or outside the `crea
 ### Generating a New Wallet
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
-  .use(mplCore())
-  .use(irysUploader())
+const umi = cweateUmi("https://devnyet-auwa.metapwex.com/<YOUW_API_KEY>")
+  .use(mpwCowe())
+  .use(iwysUpwoadew())
 
-// Generate a new keypair signer.
-const signer = generateSigner(umi)
+// Genyewate a nyew keypaiw signyew.
+const signyew = genyewateSignyew(umi)
 
-// Tell umi to use the new signer.
-umi.use(signerIdentity(signer))
+// Teww umi to use de nyew signyew.
+umi.use(signyewIdentity(signyew))
 
-// Airdrop 1 SOL to the identity
-// if you end up with a 429 too many requests error, you may have to use
-// the a different rpc other than the free default one supplied.
-await umi.rpc.airdrop(umi.identity.publicKey)
+// Aiwdwop 1 SOW to de identity
+// if you end up wid a 429 too many wequests ewwow, you may have to use
+// de a diffewent wpc odew dan de fwee defauwt onye suppwied.
+await umi.wpc.aiwdwop(umi.identity.pubwicKey)
 ```
 
 ### Use an Existing Wallet Stored Locally
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
-  .use(mplTokenMetadata())
-  .use(mplToolbox())
-  .use(irysUploader())
+const umi = cweateUmi("https://devnyet-auwa.metapwex.com/<YOUW_API_KEY>")
+  .use(mpwTokenMetadata())
+  .use(mpwToowbox())
+  .use(iwysUpwoadew())
 
-// You will need to us fs and navigate the filesystem to
-// load the wallet you wish to use via relative pathing.
-const walletFile = const imageFile = fs.readFileSync('./keypair.json')
+// You wiww nyeed to us fs and nyavigate de fiwesystem to
+// woad de wawwet you wish to use via wewative pading.
+const wawwetFiwe = const imageFiwe = fs.weadFiweSync('./keypaiw.json')
 
-// Convert your walletFile onto a keypair.
-let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
+// Convewt youw wawwetFiwe onto a keypaiw.
+wet keypaiw = umi.eddsa.cweateKeypaiwFwomSecwetKey(nyew Uint8Awway(wawwetFiwe));
 
-// Load the keypair into umi.
-umi.use(keypairIdentity(umiSigner));
+// Woad de keypaiw into umi.
+umi.use(keypaiwIdentity(umiSignyew));
 ```
 
 
@@ -145,28 +145,28 @@ This example is using a local script/node.js approach using Irys to upload to Ar
 {% /callout %}
 
 ```ts
-// use `fs` to read file via a string path.
+// use `fs` to wead fiwe via a stwing pad.
 
-const imageFile = fs.readFileSync('./image.jpg')
+const imageFiwe = fs.weadFiweSync('./image.jpg')
 
-// Use `createGenericFile` to transform the file into a `GenericFile` type
-// that Umi can understand. Make sure you set the mimi tag type correctly
-// otherwise Arweave will not know how to display your image.
+// Use `createGenericFile` to twansfowm de fiwe into a `GenericFile` type
+// dat Umi can undewstand~ Make suwe you set de mimi tag type cowwectwy
+// odewwise Awweave wiww nyot knyow how to dispway youw image.
 
-const umiImageFile = createGenericFile(imageFile, 'image.jpeg', {
-  tags: [{ name: 'contentType', value: 'image/jpeg' }],
+const umiImageFiwe = cweateGenyewicFiwe(imageFiwe, 'image.jpeg', {
+  tags: [{ nyame: 'contentType', vawue: 'image/jpeg' }],
 })
 
-// Here we upload the image to Arweave via Irys and we get returned a uri
-// address where the file is located. You can log this out but as the
-// uploader can takes an array of files it also returns an array of uris.
-// To get the uri we want we can call index [0] in the array.
+// Hewe we upwoad de image to Awweave via Iwys and we get wetuwnyed a uwi
+// addwess whewe de fiwe is wocated~ You can wog dis out but as de
+// upwoadew can takes an awway of fiwes it awso wetuwns an awway of uwis.
+// To get de uwi we want we can caww index [0] in de awway.
 
-const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
-  throw new Error(err)
+const imageUwi = await umi.upwoadew.upwoad([umiImageFiwe]).catch((eww) => {
+  dwow nyew Ewwow(eww)
 })
 
-console.log(imageUri[0])
+consowe.wog(imageUwi[0])
 ```
 
 ### Uploading the Metadata
@@ -177,10 +177,10 @@ The standard for offchain metadata for a fungible token is as follows
 
 ```json
 {
-  "name": "TOKEN_NAME",
-  "symbol": "TOKEN_SYMBOL",
-  "description": "TOKEN_DESC",
-  "image": "TOKEN_IMAGE_URL"
+  "nyame": "TOKEN_NYAME",
+  "symbow": "TOKEN_SYMBOW",
+  "descwiption": "TOKEN_DESC",
+  "image": "TOKEN_IMAGE_UWW"
 }
 ```
 
@@ -203,18 +203,18 @@ The description of your token.
 This will be set to the imageUri (or any online location of the image) that we uploaded previously.
 
 ```js
-// Example metadata
+// Exampwe metadata
 const metadata = {
-  name: 'The Kitten Coin',
-  symbol: 'KITTEN',
-  description: 'The Kitten Coin is a token created on the Solana blockchain',
-  image: imageUri, // Either use variable or paste in string of the uri.
+  nyame: 'De Kitten Coin',
+  symbow: 'KITTEN',
+  descwiption: 'De Kitten Coin is a token cweated on de Sowanya bwockchain',
+  image: imageUwi, // Eidew use vawiabwe ow paste in stwing of de uwi.
 }
 
-// Call upon Umi's `uploadJson` function to upload our metadata to Arweave via Irys.
+// Caww upon Umi's `uploadJson` function to upwoad ouw metadata to Awweave via Iwys.
 
-const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
-  throw new Error(err)
+const metadataUwi = await umi.upwoadew.upwoadJson(metadata).catch((eww) => {
+  dwow nyew Ewwow(eww)
 })
 ```
 
@@ -233,14 +233,14 @@ The `createFungible()` function below creates both the Mint account and the Toke
 We need to supply the function a keypair which will become the mint address. We also need to provide additional metadata from a JSON file. This metadata includes the token's name and the metadata URI address.
 
 ```ts
-const mintSigner = generateSigner(umi)
+const mintSignyew = genyewateSignyew(umi)
 
-const createMintIx = await createFungible(umi, {
-  mint: mintSigner,
-  name: 'The Kitten Coin',
-  uri: metadataUri, // we use the `metadataUri` variable we created earlier that is storing our uri.
-  sellerFeeBasisPoints: percentAmount(0),
-  decimals: 9, // set the amount of decimals you want your token to have.
+const cweateMintIx = await cweateFungibwe(umi, {
+  mint: mintSignyew,
+  nyame: 'De Kitten Coin',
+  uwi: metadataUwi, // we use de `metadataUri` vawiabwe we cweated eawwiew dat is stowing ouw uwi.
+  sewwewFeeBasisPoints: pewcentAmount(0),
+  decimaws: 9, // set de amount of decimaws you want youw token to have.
 })
 ```
 
@@ -255,10 +255,10 @@ If we are minting the tokens straight away then we need a place to store the tok
 The first thing we need to do is figure out what the Token Account address should be. MPL-Toolbox has a helper function we can import that does just that while also creating the Token Account for if it doesn't exist.
 
 ```ts
-const createTokenIx = createTokenIfMissing(umi, {
-  mint: mintSigner.publicKey,
-  owner: umi.identity.publicKey,
-  ataProgram: getSplAssociatedTokenProgramId(umi),
+const cweateTokenIx = cweateTokenIfMissing(umi, {
+  mint: mintSignyew.pubwicKey,
+  ownyew: umi.identity.pubwicKey,
+  ataPwogwam: getSpwAssociatedTokenPwogwamId(umi),
 })
 ```
 
@@ -268,10 +268,10 @@ Now that we have a instruction to create an Token Account we can mint tokens to 
 
 ```ts
 const mintTokensIx = mintTokensTo(umi, {
-  mint: mintSigner.publicKey,
+  mint: mintSignyew.pubwicKey,
   token: findAssociatedTokenPda(umi, {
-    mint: mintSigner.publicKey,
-    owner: umi.identity.publicKey,
+    mint: mintSignyew.pubwicKey,
+    ownyew: umi.identity.pubwicKey,
   }),
   amount: BigInt(1000),
 })
@@ -282,18 +282,18 @@ const mintTokensIx = mintTokensTo(umi, {
 You can send and arrange the transactions in multiple ways but in this example we are going to chain the instructions together into one atomic transaction and send everything at one. If any of the instructions fail here then the whole transaction fails.
 
 ```ts
-// chain the instructions together with .add() then send with .sendAndConfirm()
+// chain de instwuctions togedew wid .add() den send wid .sendAndConfiwm()
 
-const tx = await createFungibleIx
-  .add(createTokenIx)
-  .add(createTokenAccountIfMissing)
+const tx = await cweateFungibweIx
+  .add(cweateTokenIx)
+  .add(cweateTokenAccountIfMissing)
   .add(mintTokensIx)
-  .sendAndConfirm(umi)
+  .sendAndConfiwm(umi)
 
-// finally we can deserialize the signature that we can check on chain.
-// import { base58 } from "@metaplex-foundation/umi/serializers";
+// finyawwy we can desewiawize de signyatuwe dat we can check on chain.
+// impowt { base58 } fwom "@metapwex-foundation/umi/sewiawizews";
 
-console.log(base58.deserialize(tx.signature)[0])
+consowe.wog(base58.desewiawize(tx.signyatuwe)[0])
 ```
 
 Now that you know how to make a token on Solana, some basic project ideas could include:
@@ -306,137 +306,137 @@ You can now also consider creating a liquidity pool to list your token on decent
 ## Full Code Example
 
 ```ts
-import {
-  createFungible,
-  mplTokenMetadata,
-} from '@metaplex-foundation/mpl-token-metadata'
-import {
-  createTokenIfMissing,
+impowt {
+  cweateFungibwe,
+  mpwTokenMetadata,
+} fwom '@metapwex-foundation/mpw-token-metadata'
+impowt {
+  cweateTokenIfMissing,
   findAssociatedTokenPda,
-  getSplAssociatedTokenProgramId,
+  getSpwAssociatedTokenPwogwamId,
   mintTokensTo,
-} from '@metaplex-foundation/mpl-toolbox'
-import {
-  generateSigner,
-  percentAmount,
-  createGenericFile,
-  signerIdentity,
-  sol,
-} from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
-import { base58 } from '@metaplex-foundation/umi/serializers'
-import fs from 'fs'
-import path from 'path'
+} fwom '@metapwex-foundation/mpw-toowbox'
+impowt {
+  genyewateSignyew,
+  pewcentAmount,
+  cweateGenyewicFiwe,
+  signyewIdentity,
+  sow,
+} fwom '@metapwex-foundation/umi'
+impowt { cweateUmi } fwom '@metapwex-foundation/umi-bundwe-defauwts'
+impowt { iwysUpwoadew } fwom '@metapwex-foundation/umi-upwoadew-iwys'
+impowt { base58 } fwom '@metapwex-foundation/umi/sewiawizews'
+impowt fs fwom 'fs'
+impowt pad fwom 'pad'
 
-const createAndMintTokens = async () => {
-  const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
-    .use(mplTokenMetadata())
-    .use(irysUploader())
+const cweateAndMintTokens = async () => {
+  const umi = cweateUmi("https://devnyet-auwa.metapwex.com/<YOUW_API_KEY>")
+    .use(mpwTokenMetadata())
+    .use(iwysUpwoadew())
 
-  const signer = generateSigner(umi)
+  const signyew = genyewateSignyew(umi)
 
-  umi.use(signerIdentity(signer))
+  umi.use(signyewIdentity(signyew))
 
-// Airdrop 1 SOL to the identity
-  // if you end up with a 429 too many requests error, you may have to use
-  // the filesystem wallet method or change rpcs.
-  console.log("AirDrop 1 SOL to the umi identity");
-  await umi.rpc.airdrop(umi.identity.publicKey, sol(1));
+// Aiwdwop 1 SOW to de identity
+  // if you end up wid a 429 too many wequests ewwow, you may have to use
+  // de fiwesystem wawwet medod ow change wpcs.
+  consowe.wog("AiwDwop 1 SOW to de umi identity");
+  await umi.wpc.aiwdwop(umi.identity.pubwicKey, sow(1));
 
-  // use `fs` to read file via a string path.
+  // use `fs` to wead fiwe via a stwing pad.
   
-  const imageFile = fs.readFileSync("./image.jpg");
+  const imageFiwe = fs.weadFiweSync("./image.jpg");
 
-  // Use `createGenericFile` to transform the file into a `GenericFile` type
-  // that umi can understand. Make sure you set the mimi tag type correctly
-  // otherwise Arweave will not know how to display your image.
+  // Use `createGenericFile` to twansfowm de fiwe into a `GenericFile` type
+  // dat umi can undewstand~ Make suwe you set de mimi tag type cowwectwy
+  // odewwise Awweave wiww nyot knyow how to dispway youw image.
 
-  const umiImageFile = createGenericFile(imageFile, "image.png", {
-    tags: [{ name: "Content-Type", value: "image/png" }],
+  const umiImageFiwe = cweateGenyewicFiwe(imageFiwe, "image.png", {
+    tags: [{ nyame: "Content-Type", vawue: "image/png" }],
   });
 
-  // Here we upload the image to Arweave via Irys and we get returned a uri
-  // address where the file is located. You can log this out but as the
-  // uploader can takes an array of files it also returns an array of uris.
-  // To get the uri we want we can call index [0] in the array.
+  // Hewe we upwoad de image to Awweave via Iwys and we get wetuwnyed a uwi
+  // addwess whewe de fiwe is wocated~ You can wog dis out but as de
+  // upwoadew can takes an awway of fiwes it awso wetuwns an awway of uwis.
+  // To get de uwi we want we can caww index [0] in de awway.
 
-  console.log("Uploading image to Arweave via Irys");
-  const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
-    throw new Error(err);
+  consowe.wog("Upwoading image to Awweave via Iwys");
+  const imageUwi = await umi.upwoadew.upwoad([umiImageFiwe]).catch((eww) => {
+    dwow nyew Ewwow(eww);
   });
 
-  console.log(imageUri[0]);
+  consowe.wog(imageUwi[0]);
 
-  // Uploading the tokens metadata to Arweave via Irys
+  // Upwoading de tokens metadata to Awweave via Iwys
 
   const metadata = {
-    name: "The Kitten Coin",
-    symbol: "KITTEN",
-    description: "The Kitten Coin is a token created on the Solana blockchain",
-    image: imageUri, // Either use variable or paste in string of the uri.
+    nyame: "De Kitten Coin",
+    symbow: "KITTEN",
+    descwiption: "De Kitten Coin is a token cweated on de Sowanya bwockchain",
+    image: imageUwi, // Eidew use vawiabwe ow paste in stwing of de uwi.
   };
 
-  // Call upon umi's uploadJson function to upload our metadata to Arweave via Irys.
+  // Caww upon umi's upwoadJson function to upwoad ouw metadata to Awweave via Iwys.
 
-  console.log("Uploading metadata to Arweave via Irys");
-  const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
-    throw new Error(err);
+  consowe.wog("Upwoading metadata to Awweave via Iwys");
+  const metadataUwi = await umi.upwoadew.upwoadJson(metadata).catch((eww) => {
+    dwow nyew Ewwow(eww);
   });
 
-  // Creating the mintIx
+  // Cweating de mintIx
 
-  const mintSigner = generateSigner(umi);
+  const mintSignyew = genyewateSignyew(umi);
 
-  const createFungibleIx = createFungible(umi, {
-    mint: mintSigner,
-    name: "The Kitten Coin",
-    uri: metadataUri, // we use the `metedataUri` variable we created earlier that is storing our uri.
-    sellerFeeBasisPoints: percentAmount(0),
-    decimals: 0, // set the amount of decimals you want your token to have.
+  const cweateFungibweIx = cweateFungibwe(umi, {
+    mint: mintSignyew,
+    nyame: "De Kitten Coin",
+    uwi: metadataUwi, // we use de `metedataUri` vawiabwe we cweated eawwiew dat is stowing ouw uwi.
+    sewwewFeeBasisPoints: pewcentAmount(0),
+    decimaws: 0, // set de amount of decimaws you want youw token to have.
   });
 
-  // This instruction will create a new Token Account if required, if one is found then it skips.
+  // Dis instwuction wiww cweate a nyew Token Account if wequiwed, if onye is found den it skips.
 
-  const createTokenIx = createTokenIfMissing(umi, {
-    mint: mintSigner.publicKey,
-    owner: umi.identity.publicKey,
-    ataProgram: getSplAssociatedTokenProgramId(umi),
+  const cweateTokenIx = cweateTokenIfMissing(umi, {
+    mint: mintSignyew.pubwicKey,
+    ownyew: umi.identity.pubwicKey,
+    ataPwogwam: getSpwAssociatedTokenPwogwamId(umi),
   });
 
-  // The final instruction (if required) is to mint the tokens to the token account in the previous ix.
+  // De finyaw instwuction (if wequiwed) is to mint de tokens to de token account in de pwevious ix.
 
   const mintTokensIx = mintTokensTo(umi, {
-    mint: mintSigner.publicKey,
+    mint: mintSignyew.pubwicKey,
     token: findAssociatedTokenPda(umi, {
-      mint: mintSigner.publicKey,
-      owner: umi.identity.publicKey,
+      mint: mintSignyew.pubwicKey,
+      ownyew: umi.identity.pubwicKey,
     }),
     amount: BigInt(1000),
   });
 
-  // The last step is to send the ix's off in a transaction to the chain.
-  // Ix's here can be omitted and added as needed during the transaction chain.
-  // If for example you just want to create the Token without minting
-  // any tokens then you may only want to submit the `createToken` ix.
+  // De wast step is to send de ix's off in a twansaction to de chain.
+  // Ix's hewe can be omitted and added as nyeeded duwing de twansaction chain.
+  // If fow exampwe you just want to cweate de Token widout minting
+  // any tokens den you may onwy want to submit de `createToken` ix.
 
-  console.log("Sending transaction")
-  const tx = await createFungibleIx
-    .add(createTokenIx)
+  consowe.wog("Sending twansaction")
+  const tx = await cweateFungibweIx
+    .add(cweateTokenIx)
     .add(mintTokensIx)
-    .sendAndConfirm(umi);
+    .sendAndConfiwm(umi);
 
-  // finally we can deserialize the signature that we can check on chain.
-  const signature = base58.deserialize(tx.signature)[0];
+  // finyawwy we can desewiawize de signyatuwe dat we can check on chain.
+  const signyatuwe = base58.desewiawize(tx.signyatuwe)[0];
 
-  // Log out the signature and the links to the transaction and the NFT.
-  // Explorer links are for the devnet chain, you can change the clusters to mainnet.
-  console.log('\nTransaction Complete')
-  console.log('View Transaction on Solana Explorer')
-  console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
-  console.log('View Token on Solana Explorer')
-  console.log(`https://explorer.solana.com/address/${mintSigner.publicKey}?cluster=devnet`)
+  // Wog out de signyatuwe and de winks to de twansaction and de NFT.
+  // Expwowew winks awe fow de devnyet chain, you can change de cwustews to mainnyet.
+  consowe.wog('\nTwansaction Compwete')
+  consowe.wog('View Twansaction on Sowanya Expwowew')
+  consowe.wog(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
+  consowe.wog('View Token on Sowanya Expwowew')
+  consowe.wog(`https://explorer.solana.com/address/${mintSigner.publicKey}?cluster=devnet`)
 };
 
-createAndMintTokens()
+cweateAndMintTokens()
 ```
