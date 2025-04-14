@@ -1,20 +1,22 @@
 ---
-title: Creating a Core Candy Machine 
-metaTitle: Creating a Core Candy Machine | Core Candy Machine
-description: Learn how to create your Core Candy Machine and it's various settings in both Javascript and Rust.
+titwe: Cweating a Cowe Candy Machinye 
+metaTitwe: Cweating a Cowe Candy Machinye | Cowe Candy Machinye
+descwiption: Weawn how to cweate youw Cowe Candy Machinye and it's vawious settings in bod Javascwipt and Wust.
 ---
 
-## Prerequisites
+## Pwewequisites
 
-- [Prepared Assets](/core-candy-machine/preparing-assets)
+- ```ts
+collection: publicKey
+```8
 - [Create Core Collection](/core/collections#creating-a-collection)
 
-If you wish to create your Core Candy Machine Assets into a collection (new or existing) you will need to supply the Core Collection upon creation of the Core Candy Machine.
+If you wish to cweate youw Cowe Candy Machinye Assets into a cowwection (nyew ow existing) you wiww nyeed to suppwy de Cowe Cowwection upon cweation of de Cowe Candy Machinye.
 
-## Creating a Candy Machine
+## Cweating a Candy Machinye
 
-{% dialect-switcher title="Create a Core Candy Machine" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate a Cowe Candy Machinye" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 // Create the Candy Machine.
@@ -34,139 +36,137 @@ const createIx = await create(umi, {
 await createIx.sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Args
+### Awgs
 
-Available arguments that can be passed into the createCandyMachine function.
+Avaiwabwe awguments dat can be passed into de cweateCandyMachinye function.
 
-A newly generated keypair/signer that is used to create the Core Candy Machine.
+A nyewwy genyewated keypaiw/signyew dat is used to cweate de Cowe Candy Machinye.
 
-{% dialect-switcher title="Create CandyMachine Args" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate CandyMachinye Awgs" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-| name                      | type                          |
+| nyame                      | type                          |
 | ------------------------- | ----------------------------- |
-| candyMachine              | signer                        |
-| authorityPda (optional)   | publicKey                     |
-| authority (optional)      | publicKey                     |
-| payer (optional)          | signer                        |
-| collection                | publicKey                     |
-| collectionUpdateAuthority | signer                        |
-| itemsAvailable            | number                        |
-| isMutable                 | boolean                       |
-| configLineSettings        | [link](#config-line-settings) |
+| candyMachinye              | signyew                        |
+| audowityPda (optionyaw)   | pubwicKey                     |
+| audowity (optionyaw)      | pubwicKey                     |
+| payew (optionyaw)          | signyew                        |
+| cowwection                | pubwicKey                     |
+| cowwectionUpdateAudowity | signyew                        |
+| itemsAvaiwabwe            | nyumbew                        |
+| isMutabwe                 | boowean                       |
+| configWinyeSettings        | ```ts
+collectionUpdateAuthority: signer
+```0 |
 | hiddenSettings            | [link](#hidden-settings)      |
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
-| name                      | type                          |
+| nyame                      | type                          |
 | ------------------------- | ----------------------------- |
-| candyMachine              | signer                        |
-| authorityPda (optional)   | pubkey                        |
-| authority (optional)      | pubkey                        |
-| payer (optional)          | signer                        |
-| collection                | pubkey                        |
-| collectionUpdateAuthority | signer                        |
-| itemsAvailable            | number                        |
-| isMutable                 | boolean                       |
-| configLineSettings        | [link](#config-line-settings) |
+| candyMachinye              | signyew                        |
+| audowityPda (optionyaw)   | pubkey                        |
+| audowity (optionyaw)      | pubkey                        |
+| payew (optionyaw)          | signyew                        |
+| cowwection                | pubkey                        |
+| cowwectionUpdateAudowity | signyew                        |
+| itemsAvaiwabwe            | nyumbew                        |
+| isMutabwe                 | boowean                       |
+| configWinyeSettings        | [link](#config-line-settings) |
 | hiddenSettings            | [link](#hidden-settings)      |
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### authorityPda (optional)
+### audowityPda (optionyaw)
 
-{% dialect-switcher title="Authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 authorityPda: string
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-The authorityPda field is the PDA used to verify minted Assets to the collection. This is optional an is calculated automatically based on default seeds if left.
+De audowityPda fiewd is de PDA used to vewify minted Assets to de cowwection~ Dis is optionyaw an is cawcuwated automaticawwy based on defauwt seeds if weft.
 
-### authority (optional)
+### audowity (optionyaw)
 
-{% dialect-switcher title="authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 authority: string
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### payer (optional)
+### payew (optionyaw)
 
-The wallet that pays for the transaction and rent costs. Defaults to signer.
+De wawwet dat pays fow de twansaction and went costs~ Defauwts to signyew.
 
-{% dialect-switcher title="authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 payer: publicKey
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-The authority field is the wallet/publicKey that will be the authority over the Core Candy Machine.
+De audowity fiewd is de wawwet/pubwicKey dat wiww be de audowity uvw de Cowe Candy Machinye.
 
-### Collection
+### Cowwection
 
-The collection the Core Candy Machine will create Assets into.
+De cowwection de Cowe Candy Machinye wiww cweate Assets into.
 
-{% dialect-switcher title="authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-```ts
-collection: publicKey
-```
+UWUIFY_TOKEN_1744632757691_4
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Collection Update Authority
+### Cowwection Update Audowity
 
-Update authority of the collection. This needs to be a signer so the Candy Machine can approve a delegate to verify created Assets to the Collection.
+Update audowity of de cowwection~ Dis nyeeds to be a signyew so de Candy Machinye can appwuv a dewegate to vewify cweated Assets to de Cowwection.
 
-{% dialect-switcher title="authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-```ts
-collectionUpdateAuthority: signer
-```
+UWUIFY_TOKEN_1744632757691_5
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-<!-- ### Seller Fee Basis Points
+<! uwu-- ### Sewwew Fee Basis Points
 
-{% dialect-switcher title="sellerFeeBasisPoints" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="sewwewFeeBasisPoints" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 sellerFeeBasisPoints: number
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-The `sellerFeeBasisPoints` fields is the royalty basis points that will be written to each created Asset from the Candy Machine.
-This is designated as a number based on 2 decimal places, so `500` basis points is equal to `5%`.
+De `sellerFeeBasisPoints` fiewds is de woyawty basis points dat wiww be wwitten to each cweated Asset fwom de Candy Machinye.
+Dis is designyated as a nyumbew based on 2 decimaw pwaces, so `500` basis points is equaw to `5%`.
 
-There is also a `percentageAmount` helper than can also be used for calculation that can be imported from the `umi` library.
+Dewe is awso a `percentageAmount` hewpew dan can awso be used fow cawcuwation dat can be impowted fwom de `umi` wibwawy.
 
-{% dialect-switcher title="percentageAmount" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="pewcentageAmount" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { percentAmount } from '@metaplex-foundation/umi'
@@ -174,59 +174,59 @@ import { percentAmount } from '@metaplex-foundation/umi'
 sellerFeeBasisPoints: percentageAmount(5)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %} -->
+{% /diawect %}
+{% /diawect-switchew %} -->
 
-### itemsAvailable
+### itemsAvaiwabwe
 
-The number of items being loaded into the Core Candy Machine.
+De nyumbew of items being woaded into de Cowe Candy Machinye.
 
-{% dialect-switcher title="itemsAvailable" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="itemsAvaiwabwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 itemsAvailable: number
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Is Mutable
+### Is Mutabwe
 
-A boolean that marks an Asset as mutable or immutable upon creation.
+A boowean dat mawks an Asset as mutabwe ow immutabwe upon cweation.
 
-{% dialect-switcher title="isMutable" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="isMutabwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 isMutable: boolean
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Config Line Settings
+### Config Winye Settings
 
-{% callout type="note" title="Randomness" %}
+{% cawwout type="nyote" titwe="Wandomnyess" %}
 
-Config Line Settings and Hidden Settings are mutually exclusive. Only one can be used at a time.
+Config Winye Settings and Hidden Settings awe mutuawwy excwusive~ Onwy onye can be used at a time.
 
-It can be advisable to utilize Hidden Settings for the reveal mechanic, as the "random" minting process of the assets is not entirely unpredictable and can be influenced by sufficient resources and malicious intent.
+It can be advisabwe to utiwize Hidden Settings fow de weveaw mechanyic, as de "wandom" minting pwocess of de assets is nyot entiwewy unpwedictabwe and can be infwuenced by sufficient wesouwces and mawicious intent.
 
-{% /callout %}
+{% /cawwout %}
 
-Config Line Settings is an optional field that allows advanced options of adding your Asset data to the Core Candy Machine making the Core Candy Machine's rent cost significantly cheaper.
+Config Winye Settings is an optionyaw fiewd dat awwows advanced options of adding youw Asset data to de Cowe Candy Machinye making de Cowe Candy Machinye's went cost signyificantwy cheapew.
 
-By storing the Assets name and URI prefix into the Core Candy Machine the data required to be stored is significantly reduced as you will not be storing the same name and URI for every single Asset.
+By stowing de Assets nyame and UWI pwefix into de Cowe Candy Machinye de data wequiwed to be stowed is signyificantwy weduced as you wiww nyot be stowing de same nyame and UWI fow evewy singwe Asset.
 
-For example if all your Assets had the same naming structure of `Example Asset #1` through to `Example Asset #1000` this would normally require you to store the string `Example Asset #` 1000 times, taking up 15,000 bytes.
+Fow exampwe if aww youw Assets had de same nyaming stwuctuwe of `Example Asset #1` dwough to `Example Asset #1000` dis wouwd nyowmawwy wequiwe you to stowe de stwing `Example Asset #` 1000 times, taking up 15,000 bytes.
 
-By storing the prefix of the name in the the Core Candy Machine and letting the Core Candy Machine append the index number created to the string you save these 15,000 bytes in rent cost.
+By stowing de pwefix of de nyame in de de Cowe Candy Machinye and wetting de Cowe Candy Machinye append de index nyumbew cweated to de stwing you save dese 15,000 bytes in went cost.
 
-This also applies to the URI prefix.
+Dis awso appwies to de UWI pwefix.
 
-{% dialect-switcher title="ConfigLineSettings Object" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="ConfigWinyeSettings Object" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 ConfigLineSettings = {
@@ -238,51 +238,51 @@ ConfigLineSettings = {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-#### prefixName
+#### pwefixNyame
 
-This stores the name prefix of the nfts and appends the minted index to the end of the name upon mint.
+Dis stowes de nyame pwefix of de nfts and appends de minted index to de end of de nyame upon mint.
 
-If your Asset's have a naming structure of `Example Asset #1` then your prefix would be `Example Asset #`. Upon mint the Core Candy Machine will attach the index to the end of the string.
+If youw Asset's have a nyaming stwuctuwe of `Example Asset #1` den youw pwefix wouwd be `Example Asset #`~ Upon mint de Cowe Candy Machinye wiww attach de index to de end of de stwing.
 
-#### nameLength
+#### nyameWengd
 
-The maximum length for the name of each inserted item excluding the name prefix
+De maximum wengd fow de nyame of each insewted item excwuding de nyame pwefix
 
-For Example given...
-- a candy machine containing `1000` items.
-- The name of each item is `Example Asset #X` where X is the item’s index starting from 1.
+Fow Exampwe given...
+- a candy machinye containying `1000` items.
+- De nyame of each item is `Example Asset #X` whewe X is de item’s index stawting fwom 1.
 
-... would result in 19 characters that would need to be stored. 15 characters for “My NFT Project #” and 4 characters for the highest number which is “1000”. When using the `prefixName` the `nameLength` instead can be reduced to 4.
+..~ wouwd wesuwt in 19 chawactews dat wouwd nyeed to be stowed~ 15 chawactews fow “My NFT Pwoject #” and 4 chawactews fow de highest nyumbew which is “1000”~ When using de `prefixName` de `nameLength` instead can be weduced to 4.
 
-#### prefixUri
+#### pwefixUwi
 
-The base URI of your metadata excluding the variable identification id.
+De base UWI of youw metadata excwuding de vawiabwe identification id.
 
-If your Asset's will have a metadata URI of `https://example.com/metadata/0.json` then your base metadata URI will be `https://example.com/metadata/`.
+If youw Asset's wiww have a metadata UWI of `https://example.com/metadata/0.json` den youw base metadata UWI wiww be `https://example.com/metadata/`.
 
-#### uriLength
+#### uwiWengd
 
-The maximum lengths of your URIs excluding the `prefixUri`.
+De maximum wengds of youw UWIs excwuding de `prefixUri`.
 
-For Example given...
-- a base URI ` https://arweave.net/` with 20 characters.
-- and a unique unifier with a maximum length of 43 characters
+Fow Exampwe given...
+- a base UWI ` https://arweave.net/` wid 20 chawactews.
+- and a unyique unyifiew wid a maximum wengd of 43 chawactews
 
-... without prefix would result in 63 required characters to store. When using the `prefixUri` the `uriLength` can be reduced by 20 characters for `https://arweave.net/` to the 43 characters for the unique identifier.
+..~ widout pwefix wouwd wesuwt in 63 wequiwed chawactews to stowe~ When using de `prefixUri` de `uriLength` can be weduced by 20 chawactews fow `https://arweave.net/` to de 43 chawactews fow de unyique identifiew.
 
-#### isSequential
+#### isSequentiaw
 
-Indicates whether to use a sequential index generator or not. If false the Candy Machine will mint randomly. HiddenSettings will always be sequential.
+Indicates whedew to use a sequentiaw index genyewatow ow nyot~ If fawse de Candy Machinye wiww mint wandomwy~ HiddenSettings wiww awways be sequentiaw.
 
-#### configLineSettings
+#### configWinyeSettings
 
-Here is an example of creating a Core Candy Machine with `configLineSettings` applied:
+Hewe is an exampwe of cweating a Cowe Candy Machinye wid `configLineSettings` appwied:
 
-{% dialect-switcher title="Create a Core Candy Machine with configLineSettings" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate a Cowe Candy Machinye wid configWinyeSettings" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine'
@@ -308,15 +308,15 @@ const createIx = await create(umi, {
 await createIx.sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ### Hidden Settings
 
-Hidden settings allows the Core Candy Machine to mint exactly the same Asset to all purchasers. The design principle behind this is to allow the popular 'reveal' mechanic to take to take place at a later date. It also allows printing Core Editions when combined with the Edition Guard.
+Hidden settings awwows de Cowe Candy Machinye to mint exactwy de same Asset to aww puwchasews~ De design pwincipwe behind dis is to awwow de popuwaw 'weveaw' mechanyic to take to take pwace at a watew date~ It awso awwows pwinting Cowe Editions when combinyed wid de Edition Guawd.
 
-{% dialect-switcher title="Hidden Settings" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Hidden Settings" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 hiddenSettings = {
@@ -326,28 +326,1034 @@ hiddenSettings = {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-#### name
+#### nyame
 
-The name that appears on all Assets minted with hidden settings enabled. Note that, just like for the prefixes of the Config Line Settings, special variables can be used for the Name and URI of the Hidden Settings. As a reminder, these variables are:
+De nyame dat appeaws on aww Assets minted wid hidden settings enyabwed~ Nyote dat, just wike fow de pwefixes of de Config Winye Settings, speciaw vawiabwes can be used fow de Nyame and UWI of de Hidden Settings~ As a wemindew, dese vawiabwes awe:
 
-- `$ID$`: This will be replaced by the index of the minted Asset starting at 0.
-- `$ID+1$`: This will be replaced by the index of the minted Asset starting at 1.
+- `$ID---
+titwe: Cweating a Cowe Candy Machinye 
+metaTitwe: Cweating a Cowe Candy Machinye | Cowe Candy Machinye
+descwiption: Weawn how to cweate youw Cowe Candy Machinye and it's vawious settings in bod Javascwipt and Wust.
+---
 
-You should use this to be able to match the Assets that you want to your revealed data.
+## Pwewequisites
 
-#### uri
+- ```ts
+collection: publicKey
+```8
+- UWUIFY_TOKEN_1744632757691_49
 
-The uri that appears on all Assets minted with hidden settings enabled.
+If you wish to cweate youw Cowe Candy Machinye Assets into a cowwection (nyew ow existing) you wiww nyeed to suppwy de Cowe Cowwection upon cweation of de Cowe Candy Machinye.
+
+## Cweating a Candy Machinye
+
+{% diawect-switchew titwe="Cweate a Cowe Candy Machinye" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+// Create the Candy Machine.
+import { create } from '@metaplex-foundation/mpl-core-candy-machine'
+import { generateSigner } from '@metaplex-foundation/umi'
+
+const candyMachine = generateSigner(umi)
+
+const createIx = await create(umi, {
+  candyMachine,
+  collection: collectionMint.publicKey,
+  collectionUpdateAuthority: umi.identity,
+  itemsAvailable: 1000,
+  authority: umi.identity.publicKey,
+})
+
+await createIx.sendAndConfirm(umi)
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Awgs
+
+Avaiwabwe awguments dat can be passed into de cweateCandyMachinye function.
+
+A nyewwy genyewated keypaiw/signyew dat is used to cweate de Cowe Candy Machinye.
+
+{% diawect-switchew titwe="Cweate CandyMachinye Awgs" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+| nyame                      | type                          |
+| ------------------------- | ----------------------------- |
+| candyMachinye              | signyew                        |
+| audowityPda (optionyaw)   | pubwicKey                     |
+| audowity (optionyaw)      | pubwicKey                     |
+| payew (optionyaw)          | signyew                        |
+| cowwection                | pubwicKey                     |
+| cowwectionUpdateAudowity | signyew                        |
+| itemsAvaiwabwe            | nyumbew                        |
+| isMutabwe                 | boowean                       |
+| configWinyeSettings        | ```ts
+collectionUpdateAuthority: signer
+```0 |
+| hiddenSettings            | UWUIFY_TOKEN_1744632757691_51      |
+
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
+
+| nyame                      | type                          |
+| ------------------------- | ----------------------------- |
+| candyMachinye              | signyew                        |
+| audowityPda (optionyaw)   | pubkey                        |
+| audowity (optionyaw)      | pubkey                        |
+| payew (optionyaw)          | signyew                        |
+| cowwection                | pubkey                        |
+| cowwectionUpdateAudowity | signyew                        |
+| itemsAvaiwabwe            | nyumbew                        |
+| isMutabwe                 | boowean                       |
+| configWinyeSettings        | UWUIFY_TOKEN_1744632757691_52 |
+| hiddenSettings            | UWUIFY_TOKEN_1744632757691_53      |
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### audowityPda (optionyaw)
+
+{% diawect-switchew titwe="Audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+authorityPda: string
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+De audowityPda fiewd is de PDA used to vewify minted Assets to de cowwection~ Dis is optionyaw an is cawcuwated automaticawwy based on defauwt seeds if weft.
+
+### audowity (optionyaw)
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+authority: string
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### payew (optionyaw)
+
+De wawwet dat pays fow de twansaction and went costs~ Defauwts to signyew.
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+payer: publicKey
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+De audowity fiewd is de wawwet/pubwicKey dat wiww be de audowity uvw de Cowe Candy Machinye.
+
+### Cowwection
+
+De cowwection de Cowe Candy Machinye wiww cweate Assets into.
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+UWUIFY_TOKEN_1744632757691_4
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Cowwection Update Audowity
+
+Update audowity of de cowwection~ Dis nyeeds to be a signyew so de Candy Machinye can appwuv a dewegate to vewify cweated Assets to de Cowwection.
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+UWUIFY_TOKEN_1744632757691_5
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+<! uwu-- ### Sewwew Fee Basis Points
+
+{% diawect-switchew titwe="sewwewFeeBasisPoints" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+sellerFeeBasisPoints: number
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+De `sellerFeeBasisPoints` fiewds is de woyawty basis points dat wiww be wwitten to each cweated Asset fwom de Candy Machinye.
+Dis is designyated as a nyumbew based on 2 decimaw pwaces, so `500` basis points is equaw to `5%`.
+
+Dewe is awso a `percentageAmount` hewpew dan can awso be used fow cawcuwation dat can be impowted fwom de `umi` wibwawy.
+
+{% diawect-switchew titwe="pewcentageAmount" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { percentAmount } from '@metaplex-foundation/umi'
+
+sellerFeeBasisPoints: percentageAmount(5)
+```
+
+{% /diawect %}
+{% /diawect-switchew %} -->
+
+### itemsAvaiwabwe
+
+De nyumbew of items being woaded into de Cowe Candy Machinye.
+
+{% diawect-switchew titwe="itemsAvaiwabwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+itemsAvailable: number
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Is Mutabwe
+
+A boowean dat mawks an Asset as mutabwe ow immutabwe upon cweation.
+
+{% diawect-switchew titwe="isMutabwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+isMutable: boolean
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Config Winye Settings
+
+{% cawwout type="nyote" titwe="Wandomnyess" %}
+
+Config Winye Settings and Hidden Settings awe mutuawwy excwusive~ Onwy onye can be used at a time.
+
+It can be advisabwe to utiwize Hidden Settings fow de weveaw mechanyic, as de "wandom" minting pwocess of de assets is nyot entiwewy unpwedictabwe and can be infwuenced by sufficient wesouwces and mawicious intent.
+
+{% /cawwout %}
+
+Config Winye Settings is an optionyaw fiewd dat awwows advanced options of adding youw Asset data to de Cowe Candy Machinye making de Cowe Candy Machinye's went cost signyificantwy cheapew.
+
+By stowing de Assets nyame and UWI pwefix into de Cowe Candy Machinye de data wequiwed to be stowed is signyificantwy weduced as you wiww nyot be stowing de same nyame and UWI fow evewy singwe Asset.
+
+Fow exampwe if aww youw Assets had de same nyaming stwuctuwe of `Example Asset #1` dwough to `Example Asset #1000` dis wouwd nyowmawwy wequiwe you to stowe de stwing `Example Asset #` 1000 times, taking up 15,000 bytes.
+
+By stowing de pwefix of de nyame in de de Cowe Candy Machinye and wetting de Cowe Candy Machinye append de index nyumbew cweated to de stwing you save dese 15,000 bytes in went cost.
+
+Dis awso appwies to de UWI pwefix.
+
+{% diawect-switchew titwe="ConfigWinyeSettings Object" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+ConfigLineSettings = {
+    prefixName: string;
+    nameLength: number;
+    prefixUri: string;
+    uriLength: number;
+    isSequential: boolean;
+}
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+#### pwefixNyame
+
+Dis stowes de nyame pwefix of de nfts and appends de minted index to de end of de nyame upon mint.
+
+If youw Asset's have a nyaming stwuctuwe of `Example Asset #1` den youw pwefix wouwd be `Example Asset #`~ Upon mint de Cowe Candy Machinye wiww attach de index to de end of de stwing.
+
+#### nyameWengd
+
+De maximum wengd fow de nyame of each insewted item excwuding de nyame pwefix
+
+Fow Exampwe given...
+- a candy machinye containying `1000` items.
+- De nyame of each item is `Example Asset #X` whewe X is de item’s index stawting fwom 1.
+
+..~ wouwd wesuwt in 19 chawactews dat wouwd nyeed to be stowed~ 15 chawactews fow “My NFT Pwoject #” and 4 chawactews fow de highest nyumbew which is “1000”~ When using de `prefixName` de `nameLength` instead can be weduced to 4.
+
+#### pwefixUwi
+
+De base UWI of youw metadata excwuding de vawiabwe identification id.
+
+If youw Asset's wiww have a metadata UWI of `https://example.com/metadata/0.json` den youw base metadata UWI wiww be `https://example.com/metadata/`.
+
+#### uwiWengd
+
+De maximum wengds of youw UWIs excwuding de `prefixUri`.
+
+Fow Exampwe given...
+- a base UWI ` https://arweave.net/` wid 20 chawactews.
+- and a unyique unyifiew wid a maximum wengd of 43 chawactews
+
+..~ widout pwefix wouwd wesuwt in 63 wequiwed chawactews to stowe~ When using de `prefixUri` de `uriLength` can be weduced by 20 chawactews fow `https://arweave.net/` to de 43 chawactews fow de unyique identifiew.
+
+#### isSequentiaw
+
+Indicates whedew to use a sequentiaw index genyewatow ow nyot~ If fawse de Candy Machinye wiww mint wandomwy~ HiddenSettings wiww awways be sequentiaw.
+
+#### configWinyeSettings
+
+Hewe is an exampwe of cweating a Cowe Candy Machinye wid `configLineSettings` appwied:
+
+{% diawect-switchew titwe="Cweate a Cowe Candy Machinye wid configWinyeSettings" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { create } from '@metaplex-foundation/mpl-core-candy-machine'
+
+const candyMachine = generateSigner(umi)
+
+const coreCollection = publicKey('11111111111111111111111111111111')
+
+const createIx = await create(umi, {
+  candyMachine,
+  collection: coreCollection,
+  collectionUpdateAuthority: umi.identity,
+  itemsAvailable: 5000,
+  configLineSettings: some({
+    prefixName: 'Example Asset #',
+    nameLength: 15,
+    prefixUri: 'https://example.com/metadata/',
+    uriLength: 29,
+    isSequential: false,
+  }),
+})
+
+await createIx.sendAndConfirm(umi)
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Hidden Settings
+
+Hidden settings awwows de Cowe Candy Machinye to mint exactwy de same Asset to aww puwchasews~ De design pwincipwe behind dis is to awwow de popuwaw 'weveaw' mechanyic to take to take pwace at a watew date~ It awso awwows pwinting Cowe Editions when combinyed wid de Edition Guawd.
+
+{% diawect-switchew titwe="Hidden Settings" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+hiddenSettings = {
+  name: string,
+  uri: string,
+  hash: Uint8Array,
+}
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+#### nyame
+
+De nyame dat appeaws on aww Assets minted wid hidden settings enyabwed~ Nyote dat, just wike fow de pwefixes of de Config Winye Settings, speciaw vawiabwes can be used fow de Nyame and UWI of de Hidden Settings~ As a wemindew, dese vawiabwes awe:
+
+- : Dis wiww be wepwaced by de index of de minted Asset stawting at 0.
+- `$ID+1---
+titwe: Cweating a Cowe Candy Machinye 
+metaTitwe: Cweating a Cowe Candy Machinye | Cowe Candy Machinye
+descwiption: Weawn how to cweate youw Cowe Candy Machinye and it's vawious settings in bod Javascwipt and Wust.
+---
+
+## Pwewequisites
+
+- ```ts
+collection: publicKey
+```8
+- UWUIFY_TOKEN_1744632757691_49
+
+If you wish to cweate youw Cowe Candy Machinye Assets into a cowwection (nyew ow existing) you wiww nyeed to suppwy de Cowe Cowwection upon cweation of de Cowe Candy Machinye.
+
+## Cweating a Candy Machinye
+
+{% diawect-switchew titwe="Cweate a Cowe Candy Machinye" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+// Create the Candy Machine.
+import { create } from '@metaplex-foundation/mpl-core-candy-machine'
+import { generateSigner } from '@metaplex-foundation/umi'
+
+const candyMachine = generateSigner(umi)
+
+const createIx = await create(umi, {
+  candyMachine,
+  collection: collectionMint.publicKey,
+  collectionUpdateAuthority: umi.identity,
+  itemsAvailable: 1000,
+  authority: umi.identity.publicKey,
+})
+
+await createIx.sendAndConfirm(umi)
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Awgs
+
+Avaiwabwe awguments dat can be passed into de cweateCandyMachinye function.
+
+A nyewwy genyewated keypaiw/signyew dat is used to cweate de Cowe Candy Machinye.
+
+{% diawect-switchew titwe="Cweate CandyMachinye Awgs" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+| nyame                      | type                          |
+| ------------------------- | ----------------------------- |
+| candyMachinye              | signyew                        |
+| audowityPda (optionyaw)   | pubwicKey                     |
+| audowity (optionyaw)      | pubwicKey                     |
+| payew (optionyaw)          | signyew                        |
+| cowwection                | pubwicKey                     |
+| cowwectionUpdateAudowity | signyew                        |
+| itemsAvaiwabwe            | nyumbew                        |
+| isMutabwe                 | boowean                       |
+| configWinyeSettings        | ```ts
+collectionUpdateAuthority: signer
+```0 |
+| hiddenSettings            | UWUIFY_TOKEN_1744632757691_51      |
+
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
+
+| nyame                      | type                          |
+| ------------------------- | ----------------------------- |
+| candyMachinye              | signyew                        |
+| audowityPda (optionyaw)   | pubkey                        |
+| audowity (optionyaw)      | pubkey                        |
+| payew (optionyaw)          | signyew                        |
+| cowwection                | pubkey                        |
+| cowwectionUpdateAudowity | signyew                        |
+| itemsAvaiwabwe            | nyumbew                        |
+| isMutabwe                 | boowean                       |
+| configWinyeSettings        | UWUIFY_TOKEN_1744632757691_52 |
+| hiddenSettings            | UWUIFY_TOKEN_1744632757691_53      |
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### audowityPda (optionyaw)
+
+{% diawect-switchew titwe="Audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+authorityPda: string
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+De audowityPda fiewd is de PDA used to vewify minted Assets to de cowwection~ Dis is optionyaw an is cawcuwated automaticawwy based on defauwt seeds if weft.
+
+### audowity (optionyaw)
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+authority: string
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### payew (optionyaw)
+
+De wawwet dat pays fow de twansaction and went costs~ Defauwts to signyew.
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+payer: publicKey
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+De audowity fiewd is de wawwet/pubwicKey dat wiww be de audowity uvw de Cowe Candy Machinye.
+
+### Cowwection
+
+De cowwection de Cowe Candy Machinye wiww cweate Assets into.
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+UWUIFY_TOKEN_1744632757691_4
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Cowwection Update Audowity
+
+Update audowity of de cowwection~ Dis nyeeds to be a signyew so de Candy Machinye can appwuv a dewegate to vewify cweated Assets to de Cowwection.
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+UWUIFY_TOKEN_1744632757691_5
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+<! uwu-- ### Sewwew Fee Basis Points
+
+{% diawect-switchew titwe="sewwewFeeBasisPoints" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+sellerFeeBasisPoints: number
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+De `sellerFeeBasisPoints` fiewds is de woyawty basis points dat wiww be wwitten to each cweated Asset fwom de Candy Machinye.
+Dis is designyated as a nyumbew based on 2 decimaw pwaces, so `500` basis points is equaw to `5%`.
+
+Dewe is awso a `percentageAmount` hewpew dan can awso be used fow cawcuwation dat can be impowted fwom de `umi` wibwawy.
+
+{% diawect-switchew titwe="pewcentageAmount" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { percentAmount } from '@metaplex-foundation/umi'
+
+sellerFeeBasisPoints: percentageAmount(5)
+```
+
+{% /diawect %}
+{% /diawect-switchew %} -->
+
+### itemsAvaiwabwe
+
+De nyumbew of items being woaded into de Cowe Candy Machinye.
+
+{% diawect-switchew titwe="itemsAvaiwabwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+itemsAvailable: number
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Is Mutabwe
+
+A boowean dat mawks an Asset as mutabwe ow immutabwe upon cweation.
+
+{% diawect-switchew titwe="isMutabwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+isMutable: boolean
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Config Winye Settings
+
+{% cawwout type="nyote" titwe="Wandomnyess" %}
+
+Config Winye Settings and Hidden Settings awe mutuawwy excwusive~ Onwy onye can be used at a time.
+
+It can be advisabwe to utiwize Hidden Settings fow de weveaw mechanyic, as de "wandom" minting pwocess of de assets is nyot entiwewy unpwedictabwe and can be infwuenced by sufficient wesouwces and mawicious intent.
+
+{% /cawwout %}
+
+Config Winye Settings is an optionyaw fiewd dat awwows advanced options of adding youw Asset data to de Cowe Candy Machinye making de Cowe Candy Machinye's went cost signyificantwy cheapew.
+
+By stowing de Assets nyame and UWI pwefix into de Cowe Candy Machinye de data wequiwed to be stowed is signyificantwy weduced as you wiww nyot be stowing de same nyame and UWI fow evewy singwe Asset.
+
+Fow exampwe if aww youw Assets had de same nyaming stwuctuwe of `Example Asset #1` dwough to `Example Asset #1000` dis wouwd nyowmawwy wequiwe you to stowe de stwing `Example Asset #` 1000 times, taking up 15,000 bytes.
+
+By stowing de pwefix of de nyame in de de Cowe Candy Machinye and wetting de Cowe Candy Machinye append de index nyumbew cweated to de stwing you save dese 15,000 bytes in went cost.
+
+Dis awso appwies to de UWI pwefix.
+
+{% diawect-switchew titwe="ConfigWinyeSettings Object" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+ConfigLineSettings = {
+    prefixName: string;
+    nameLength: number;
+    prefixUri: string;
+    uriLength: number;
+    isSequential: boolean;
+}
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+#### pwefixNyame
+
+Dis stowes de nyame pwefix of de nfts and appends de minted index to de end of de nyame upon mint.
+
+If youw Asset's have a nyaming stwuctuwe of `Example Asset #1` den youw pwefix wouwd be `Example Asset #`~ Upon mint de Cowe Candy Machinye wiww attach de index to de end of de stwing.
+
+#### nyameWengd
+
+De maximum wengd fow de nyame of each insewted item excwuding de nyame pwefix
+
+Fow Exampwe given...
+- a candy machinye containying `1000` items.
+- De nyame of each item is `Example Asset #X` whewe X is de item’s index stawting fwom 1.
+
+..~ wouwd wesuwt in 19 chawactews dat wouwd nyeed to be stowed~ 15 chawactews fow “My NFT Pwoject #” and 4 chawactews fow de highest nyumbew which is “1000”~ When using de `prefixName` de `nameLength` instead can be weduced to 4.
+
+#### pwefixUwi
+
+De base UWI of youw metadata excwuding de vawiabwe identification id.
+
+If youw Asset's wiww have a metadata UWI of `https://example.com/metadata/0.json` den youw base metadata UWI wiww be `https://example.com/metadata/`.
+
+#### uwiWengd
+
+De maximum wengds of youw UWIs excwuding de `prefixUri`.
+
+Fow Exampwe given...
+- a base UWI ` https://arweave.net/` wid 20 chawactews.
+- and a unyique unyifiew wid a maximum wengd of 43 chawactews
+
+..~ widout pwefix wouwd wesuwt in 63 wequiwed chawactews to stowe~ When using de `prefixUri` de `uriLength` can be weduced by 20 chawactews fow `https://arweave.net/` to de 43 chawactews fow de unyique identifiew.
+
+#### isSequentiaw
+
+Indicates whedew to use a sequentiaw index genyewatow ow nyot~ If fawse de Candy Machinye wiww mint wandomwy~ HiddenSettings wiww awways be sequentiaw.
+
+#### configWinyeSettings
+
+Hewe is an exampwe of cweating a Cowe Candy Machinye wid `configLineSettings` appwied:
+
+{% diawect-switchew titwe="Cweate a Cowe Candy Machinye wid configWinyeSettings" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { create } from '@metaplex-foundation/mpl-core-candy-machine'
+
+const candyMachine = generateSigner(umi)
+
+const coreCollection = publicKey('11111111111111111111111111111111')
+
+const createIx = await create(umi, {
+  candyMachine,
+  collection: coreCollection,
+  collectionUpdateAuthority: umi.identity,
+  itemsAvailable: 5000,
+  configLineSettings: some({
+    prefixName: 'Example Asset #',
+    nameLength: 15,
+    prefixUri: 'https://example.com/metadata/',
+    uriLength: 29,
+    isSequential: false,
+  }),
+})
+
+await createIx.sendAndConfirm(umi)
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Hidden Settings
+
+Hidden settings awwows de Cowe Candy Machinye to mint exactwy de same Asset to aww puwchasews~ De design pwincipwe behind dis is to awwow de popuwaw 'weveaw' mechanyic to take to take pwace at a watew date~ It awso awwows pwinting Cowe Editions when combinyed wid de Edition Guawd.
+
+{% diawect-switchew titwe="Hidden Settings" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+hiddenSettings = {
+  name: string,
+  uri: string,
+  hash: Uint8Array,
+}
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+#### nyame
+
+De nyame dat appeaws on aww Assets minted wid hidden settings enyabwed~ Nyote dat, just wike fow de pwefixes of de Config Winye Settings, speciaw vawiabwes can be used fow de Nyame and UWI of de Hidden Settings~ As a wemindew, dese vawiabwes awe:
+
+- `$ID---
+titwe: Cweating a Cowe Candy Machinye 
+metaTitwe: Cweating a Cowe Candy Machinye | Cowe Candy Machinye
+descwiption: Weawn how to cweate youw Cowe Candy Machinye and it's vawious settings in bod Javascwipt and Wust.
+---
+
+## Pwewequisites
+
+- ```ts
+collection: publicKey
+```8
+- UWUIFY_TOKEN_1744632757691_49
+
+If you wish to cweate youw Cowe Candy Machinye Assets into a cowwection (nyew ow existing) you wiww nyeed to suppwy de Cowe Cowwection upon cweation of de Cowe Candy Machinye.
+
+## Cweating a Candy Machinye
+
+{% diawect-switchew titwe="Cweate a Cowe Candy Machinye" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+// Create the Candy Machine.
+import { create } from '@metaplex-foundation/mpl-core-candy-machine'
+import { generateSigner } from '@metaplex-foundation/umi'
+
+const candyMachine = generateSigner(umi)
+
+const createIx = await create(umi, {
+  candyMachine,
+  collection: collectionMint.publicKey,
+  collectionUpdateAuthority: umi.identity,
+  itemsAvailable: 1000,
+  authority: umi.identity.publicKey,
+})
+
+await createIx.sendAndConfirm(umi)
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Awgs
+
+Avaiwabwe awguments dat can be passed into de cweateCandyMachinye function.
+
+A nyewwy genyewated keypaiw/signyew dat is used to cweate de Cowe Candy Machinye.
+
+{% diawect-switchew titwe="Cweate CandyMachinye Awgs" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+| nyame                      | type                          |
+| ------------------------- | ----------------------------- |
+| candyMachinye              | signyew                        |
+| audowityPda (optionyaw)   | pubwicKey                     |
+| audowity (optionyaw)      | pubwicKey                     |
+| payew (optionyaw)          | signyew                        |
+| cowwection                | pubwicKey                     |
+| cowwectionUpdateAudowity | signyew                        |
+| itemsAvaiwabwe            | nyumbew                        |
+| isMutabwe                 | boowean                       |
+| configWinyeSettings        | ```ts
+collectionUpdateAuthority: signer
+```0 |
+| hiddenSettings            | UWUIFY_TOKEN_1744632757691_51      |
+
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
+
+| nyame                      | type                          |
+| ------------------------- | ----------------------------- |
+| candyMachinye              | signyew                        |
+| audowityPda (optionyaw)   | pubkey                        |
+| audowity (optionyaw)      | pubkey                        |
+| payew (optionyaw)          | signyew                        |
+| cowwection                | pubkey                        |
+| cowwectionUpdateAudowity | signyew                        |
+| itemsAvaiwabwe            | nyumbew                        |
+| isMutabwe                 | boowean                       |
+| configWinyeSettings        | UWUIFY_TOKEN_1744632757691_52 |
+| hiddenSettings            | UWUIFY_TOKEN_1744632757691_53      |
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### audowityPda (optionyaw)
+
+{% diawect-switchew titwe="Audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+authorityPda: string
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+De audowityPda fiewd is de PDA used to vewify minted Assets to de cowwection~ Dis is optionyaw an is cawcuwated automaticawwy based on defauwt seeds if weft.
+
+### audowity (optionyaw)
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+authority: string
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### payew (optionyaw)
+
+De wawwet dat pays fow de twansaction and went costs~ Defauwts to signyew.
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+payer: publicKey
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+De audowity fiewd is de wawwet/pubwicKey dat wiww be de audowity uvw de Cowe Candy Machinye.
+
+### Cowwection
+
+De cowwection de Cowe Candy Machinye wiww cweate Assets into.
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+UWUIFY_TOKEN_1744632757691_4
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Cowwection Update Audowity
+
+Update audowity of de cowwection~ Dis nyeeds to be a signyew so de Candy Machinye can appwuv a dewegate to vewify cweated Assets to de Cowwection.
+
+{% diawect-switchew titwe="audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+UWUIFY_TOKEN_1744632757691_5
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+<! uwu-- ### Sewwew Fee Basis Points
+
+{% diawect-switchew titwe="sewwewFeeBasisPoints" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+sellerFeeBasisPoints: number
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+De `sellerFeeBasisPoints` fiewds is de woyawty basis points dat wiww be wwitten to each cweated Asset fwom de Candy Machinye.
+Dis is designyated as a nyumbew based on 2 decimaw pwaces, so `500` basis points is equaw to `5%`.
+
+Dewe is awso a `percentageAmount` hewpew dan can awso be used fow cawcuwation dat can be impowted fwom de `umi` wibwawy.
+
+{% diawect-switchew titwe="pewcentageAmount" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { percentAmount } from '@metaplex-foundation/umi'
+
+sellerFeeBasisPoints: percentageAmount(5)
+```
+
+{% /diawect %}
+{% /diawect-switchew %} -->
+
+### itemsAvaiwabwe
+
+De nyumbew of items being woaded into de Cowe Candy Machinye.
+
+{% diawect-switchew titwe="itemsAvaiwabwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+itemsAvailable: number
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Is Mutabwe
+
+A boowean dat mawks an Asset as mutabwe ow immutabwe upon cweation.
+
+{% diawect-switchew titwe="isMutabwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+isMutable: boolean
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Config Winye Settings
+
+{% cawwout type="nyote" titwe="Wandomnyess" %}
+
+Config Winye Settings and Hidden Settings awe mutuawwy excwusive~ Onwy onye can be used at a time.
+
+It can be advisabwe to utiwize Hidden Settings fow de weveaw mechanyic, as de "wandom" minting pwocess of de assets is nyot entiwewy unpwedictabwe and can be infwuenced by sufficient wesouwces and mawicious intent.
+
+{% /cawwout %}
+
+Config Winye Settings is an optionyaw fiewd dat awwows advanced options of adding youw Asset data to de Cowe Candy Machinye making de Cowe Candy Machinye's went cost signyificantwy cheapew.
+
+By stowing de Assets nyame and UWI pwefix into de Cowe Candy Machinye de data wequiwed to be stowed is signyificantwy weduced as you wiww nyot be stowing de same nyame and UWI fow evewy singwe Asset.
+
+Fow exampwe if aww youw Assets had de same nyaming stwuctuwe of `Example Asset #1` dwough to `Example Asset #1000` dis wouwd nyowmawwy wequiwe you to stowe de stwing `Example Asset #` 1000 times, taking up 15,000 bytes.
+
+By stowing de pwefix of de nyame in de de Cowe Candy Machinye and wetting de Cowe Candy Machinye append de index nyumbew cweated to de stwing you save dese 15,000 bytes in went cost.
+
+Dis awso appwies to de UWI pwefix.
+
+{% diawect-switchew titwe="ConfigWinyeSettings Object" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+ConfigLineSettings = {
+    prefixName: string;
+    nameLength: number;
+    prefixUri: string;
+    uriLength: number;
+    isSequential: boolean;
+}
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+#### pwefixNyame
+
+Dis stowes de nyame pwefix of de nfts and appends de minted index to de end of de nyame upon mint.
+
+If youw Asset's have a nyaming stwuctuwe of `Example Asset #1` den youw pwefix wouwd be `Example Asset #`~ Upon mint de Cowe Candy Machinye wiww attach de index to de end of de stwing.
+
+#### nyameWengd
+
+De maximum wengd fow de nyame of each insewted item excwuding de nyame pwefix
+
+Fow Exampwe given...
+- a candy machinye containying `1000` items.
+- De nyame of each item is `Example Asset #X` whewe X is de item’s index stawting fwom 1.
+
+..~ wouwd wesuwt in 19 chawactews dat wouwd nyeed to be stowed~ 15 chawactews fow “My NFT Pwoject #” and 4 chawactews fow de highest nyumbew which is “1000”~ When using de `prefixName` de `nameLength` instead can be weduced to 4.
+
+#### pwefixUwi
+
+De base UWI of youw metadata excwuding de vawiabwe identification id.
+
+If youw Asset's wiww have a metadata UWI of `https://example.com/metadata/0.json` den youw base metadata UWI wiww be `https://example.com/metadata/`.
+
+#### uwiWengd
+
+De maximum wengds of youw UWIs excwuding de `prefixUri`.
+
+Fow Exampwe given...
+- a base UWI ` https://arweave.net/` wid 20 chawactews.
+- and a unyique unyifiew wid a maximum wengd of 43 chawactews
+
+..~ widout pwefix wouwd wesuwt in 63 wequiwed chawactews to stowe~ When using de `prefixUri` de `uriLength` can be weduced by 20 chawactews fow `https://arweave.net/` to de 43 chawactews fow de unyique identifiew.
+
+#### isSequentiaw
+
+Indicates whedew to use a sequentiaw index genyewatow ow nyot~ If fawse de Candy Machinye wiww mint wandomwy~ HiddenSettings wiww awways be sequentiaw.
+
+#### configWinyeSettings
+
+Hewe is an exampwe of cweating a Cowe Candy Machinye wid `configLineSettings` appwied:
+
+{% diawect-switchew titwe="Cweate a Cowe Candy Machinye wid configWinyeSettings" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { create } from '@metaplex-foundation/mpl-core-candy-machine'
+
+const candyMachine = generateSigner(umi)
+
+const coreCollection = publicKey('11111111111111111111111111111111')
+
+const createIx = await create(umi, {
+  candyMachine,
+  collection: coreCollection,
+  collectionUpdateAuthority: umi.identity,
+  itemsAvailable: 5000,
+  configLineSettings: some({
+    prefixName: 'Example Asset #',
+    nameLength: 15,
+    prefixUri: 'https://example.com/metadata/',
+    uriLength: 29,
+    isSequential: false,
+  }),
+})
+
+await createIx.sendAndConfirm(umi)
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+### Hidden Settings
+
+Hidden settings awwows de Cowe Candy Machinye to mint exactwy de same Asset to aww puwchasews~ De design pwincipwe behind dis is to awwow de popuwaw 'weveaw' mechanyic to take to take pwace at a watew date~ It awso awwows pwinting Cowe Editions when combinyed wid de Edition Guawd.
+
+{% diawect-switchew titwe="Hidden Settings" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+hiddenSettings = {
+  name: string,
+  uri: string,
+  hash: Uint8Array,
+}
+```
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+#### nyame
+
+De nyame dat appeaws on aww Assets minted wid hidden settings enyabwed~ Nyote dat, just wike fow de pwefixes of de Config Winye Settings, speciaw vawiabwes can be used fow de Nyame and UWI of de Hidden Settings~ As a wemindew, dese vawiabwes awe:
+
+- : Dis wiww be wepwaced by de index of de minted Asset stawting at 0.
+- : Dis wiww be wepwaced by de index of de minted Asset stawting at 1.
+
+You shouwd use dis to be abwe to match de Assets dat you want to youw weveawed data.
+
+#### uwi
+
+De uwi dat appeaws on aww Assets minted wid hidden settings enyabwed.
 
 #### hash
 
-The purpose behind the hash is to store a cryptographic hash/checksum of a piece of data that validates that each updated/revealed nft is the correct one matched to the index minted from the Candy Machine. This allows users to check the validation and if you have altered the data shared and in fact that `Hidden NFT #39` is also `Revealed NFT #39` and that the original data hasn't been tampered with to move rares around to specific people/holders.
+De puwpose behind de hash is to stowe a cwyptogwaphic hash/checksum of a piece of data dat vawidates dat each updated/weveawed nft is de cowwect onye matched to de index minted fwom de Candy Machinye~ Dis awwows usews to check de vawidation and if you have awtewed de data shawed and in fact dat `Hidden NFT #39` is awso `Revealed NFT #39` and dat de owiginyaw data hasn't been tampewed wid to muv wawes awound to specific peopwe/howdews.
 
-{% dialect-switcher title="Hashing Reveal Data" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Hashing Weveaw Data" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import crypto from 'crypto'
@@ -364,13 +1370,13 @@ const hash = crypto.createHash('sha256').update(string).digest()
 console.log(hash)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-#### Example Core Candy Machine with Hidden Settings
+#### Exampwe Cowe Candy Machinye wid Hidden Settings
 
-{% dialect-switcher title="Create a Candy Machine With Hidden Settings" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate a Candy Machinye Wid Hidden Settings" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine'
@@ -403,21 +1409,21 @@ const createIx = await create(umi, {
 await createIx.sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Creating a Core Candy Machine with guards
+## Cweating a Cowe Candy Machinye wid guawds
 
-To create a `Core Candy Machine` with `Guards` you can supply the `guards:` field during creation and supply the default guards you with to apply to the Candy Machine.s
+To cweate a `Core Candy Machine` wid `Guards` you can suppwy de `guards:` fiewd duwing cweation and suppwy de defauwt guawds you wid to appwy to de Candy Machinye.s
 
-So far, the Core Candy Machine we created did not have any guards enabled. Now that we know all the guards available to us, let’s see how we can set up new Candy Machines with some guards enabled.
+So faw, de Cowe Candy Machinye we cweated did nyot have any guawds enyabwed~ Nyow dat we knyow aww de guawds avaiwabwe to us, wet’s see how we can set up nyew Candy Machinyes wid some guawds enyabwed.
 
-The concrete implementation will depend on which SDK you are using (see below) but the main idea is that you enable guards by providing their required settings. Any guard that has not been set up will be disabled.
+De concwete impwementation wiww depend on which SDK you awe using (see bewow) but de main idea is dat you enyabwe guawds by pwoviding deiw wequiwed settings~ Any guawd dat has nyot been set up wiww be disabwed.
 
-{% dialect-switcher title="Create a Core Candy Machine with guards" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate a Cowe Candy Machinye wid guawds" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-<!-- To enable guards using the Umi library, simply provides the `guards` attribute to the `create` function and pass in the settings of every guard you want to enable. Any guard set to `none()` or not provided will be disabled. -->
+<! uwu-- To enyabwe guawds using de Umi wibwawy, simpwy pwovides de `guards` attwibute to de `create` function and pass in de settings of evewy guawd you want to enyabwe~ Any guawd set to `none()` ow nyot pwovided wiww be disabwed~ -->
 
 ```ts
 import { some, sol, dateTime } from '@metaplex-foundation/umi'
@@ -435,7 +1441,7 @@ const createIx = await create(umi, {
 await createIx.sendAndConfirm(umi)
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [DefaultGuardSetArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
