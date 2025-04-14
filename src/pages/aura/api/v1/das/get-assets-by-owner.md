@@ -1,9 +1,9 @@
 ---
-title: Get Assets by Owner
-metaTitle: Get Assets by Owner Method | Aura API
-description: Learn about the Get Assets by Owner Aura API Method.
+titwe: Get Assets by Ownyew
+metaTitwe: Get Assets by Ownyew Medod | Auwa API
+descwiption: Weawn about de Get Assets by Ownyew Auwa API Medod.
 ---
 
-Return a list of assets owned by a particular public key.
+Wetuwn a wist of assets ownyed by a pawticuwaw pubwic key.
 
-{% apiRenderer method="getAssetsByOwner" /%}
+{% apiWendewew medod="getAssetsByOwnyew" /%}
