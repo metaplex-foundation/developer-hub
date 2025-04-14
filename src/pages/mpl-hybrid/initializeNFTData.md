@@ -1,33 +1,33 @@
 ---
-title: Initializing NFT Data
-metaTitle: Initializing Escrow | MPL-Hybrid
-description: Initializing MPL-Hybrid NFT Data
+titwe: Inyitiawizing NFT Data
+metaTitwe: Inyitiawizing Escwow | MPW-Hybwid
+descwiption: Inyitiawizing MPW-Hybwid NFT Data
 ---
 
-## MPL-Hybrid NFT Data Account Structure
+## MPW-Hybwid NFT Data Account Stwuctuwe
 
-Explain what data is stored and what role that data has for the user.
+Expwain what data is stowed and what wowe dat data has fow de usew.
 
 {% totem %}
-{% totem-accordion title="On Chain MPL-Hybrid NFT Data Structure" %}
+{% totem-accowdion titwe="On Chain MPW-Hybwid NFT Data Stwuctuwe" %}
 
-The onchain account structure of an MPL-Hybrid NFT Data [Link](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/nft_data.rs)
+De onchain account stwuctuwe of an MPW-Hybwid NFT Data [Link](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/nft_data.rs)
 
-| Name           | Type   | Size | Description                                      |     |
+| Nyame           | Type   | Size | Descwiption                                      |     |
 | -------------- | ------ | ---- | ------------------------------------------------ | --- |
-| authority      | Pubkey | 32   | The Authority of the Escrow                      |     |
-| token          | Pubkey | 32   | The token to be dispensed                        |     |
-| fee_location   | Pubkey | 32   | The account to send token fees to                |     |
-| name           | String | 4    | The NFT name                                     |     |
-| uri            | String | 8    | The base uri for the NFT metadata                |     |
-| max            | u64    | 8    | The max index of NFTs that append to the uri     |     |
-| min            | u64    | 8    | The minimum index of NFTs that append to the uri |     |
-| amount         | u64    | 8    | The token cost to swap                           |     |
-| fee_amount     | u64    | 8    | The token fee for capturing the NFT              |     |
-| sol_fee_amount | u64    | 8    | The sol fee for capturing the NFT                |     |
-| count          | u64    | 8    | The total number of swaps                        |     |
-| path           | u16    | 1    | The onchain/off-chain metadata update path       |     |
-| bump           | u8     | 1    | The escrow bump                                  |     |
+| audowity      | Pubkey | 32   | De Audowity of de Escwow                      |     |
+| token          | Pubkey | 32   | De token to be dispensed                        |     |
+| fee_wocation   | Pubkey | 32   | De account to send token fees to                |     |
+| nyame           | Stwing | 4    | De NFT nyame                                     |     |
+| uwi            | Stwing | 8    | De base uwi fow de NFT metadata                |     |
+| max            | u64    | 8    | De max index of NFTs dat append to de uwi     |     |
+| min            | u64    | 8    | De minyimum index of NFTs dat append to de uwi |     |
+| amount         | u64    | 8    | De token cost to swap                           |     |
+| fee_amount     | u64    | 8    | De token fee fow captuwing de NFT              |     |
+| sow_fee_amount | u64    | 8    | De sow fee fow captuwing de NFT                |     |
+| count          | u64    | 8    | De totaw nyumbew of swaps                        |     |
+| pad           | u16    | 1    | De onchain/off-chain metadata update pad       |     |
+| bump           | u8     | 1    | De escwow bump                                  |     |
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
