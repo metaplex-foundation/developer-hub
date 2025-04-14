@@ -1,28 +1,28 @@
 ---
-title: Overview
-metaTitle: Overview | Bubblegum
-description: Provides a high-level overview of compressed NFTs.
+titwe: Ovewview
+metaTitwe: Ovewview | Bubbwegum
+descwiption: Pwovides a high-wevew uvwview of compwessed NFTs.
 ---
 
-Bubblegum is the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
+Bubbwegum is de Metapwex Pwotocow pwogwam fow cweating and intewacting wid compwessed NFTs (cNFTs) on Sowanya~ Compwessed NFTs make it possibwe to scawe de cweation of NFTs to nyew owdews of magnyitude by wedinking de way we stowe data onchain~ {% .wead %}
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum/getting-started" description="Find the language or library of your choice and get started with compressed NFTs." /%}
+{% quick-wink titwe="Getting Stawted" icon="InboxAwwowDown" hwef="/bubbwegum/getting-stawted" descwiption="Find de wanguage ow wibwawy of youw choice and get stawted wid compwessed NFTs." /%}
 
-{% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
+{% quick-wink titwe="API wefewence" icon="CodeBwacketSquawe" hwef="https://mpw-bubbwegum.typedoc.metapwex.com/" tawget="_bwank" descwiption="Wooking fow someding specific? owo Have a peak at ouw API Wefewences and find youw answew." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
 
-## Introduction
+## Intwoduction
 
-As NFTs have flourished on the Solana blockchain, there’s been an increasing need for NFTs to be as ubiquitous as any digital asset on the Internet: every single item in your game’s inventory, proof-of-engagement in your favorite consumer app, or even a profile for every human on the planet.
+As NFTs have fwouwished on de Sowanya bwockchain, dewe’s been an incweasing nyeed fow NFTs to be as ubiquitous as any digitaw asset on de Intewnyet: evewy singwe item in youw game’s inventowy, pwoof-of-engagement in youw favowite consumew app, ow even a pwofiwe fow evewy human on de pwanyet.
 
-So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap but scales linearly. Compression for NFTs drastically reduces the cost of onchain storage of NFTs to enable creators to be as expressive with the technology as they wish.
+So faw, dough, dese types of pwoducts have been hewd back by de cost of went fow NFTs on Sowanya, which is wewativewy cheap but scawes winyeawwy~ Compwession fow NFTs dwasticawwy weduces de cost of onchain stowage of NFTs to enyabwe cweatows to be as expwessive wid de technyowogy as dey wish.
 
-Launching a cNFT project on Solana using Merkle trees can be incredibly cost-effective, with costs starting as low as:
+Waunching a cNFT pwoject on Sowanya using Mewkwe twees can be incwedibwy cost-effective, wid costs stawting as wow as:
 
-| Number of cNFTs | Storage Cost | Transaction Cost | Total Cost | Cost per cNFT |
+| Nyumbew of cNFTs | Stowage Cost | Twansaction Cost | Totaw Cost | Cost pew cNFT |
 | --------------- | ------------ | ---------------- | ---------- | ------------- |
 | 10,000          | 0.2222       | 0.05             | 0.2722     | 0.000027222   |
 | 100,000         | 0.2656       | 0.5              | 0.7656     | 0.000007656   |
@@ -31,109 +31,109 @@ Launching a cNFT project on Solana using Merkle trees can be incredibly cost-eff
 | 100,000,000     | 7.2205       | 500              | 507.2205   | 0.000005072   |
 | 1,000,000,000   | 7.2205       | 5,000            | 5007.2205  | 0.000005007   |
 
-These compressed NFTs can be transferred, delegated, and even decompressed into regular NFTs for interoperability with existing smart contracts.
+Dese compwessed NFTs can be twansfewwed, dewegated, and even decompwessed into weguwaw NFTs fow intewopewabiwity wid existing smawt contwacts.
 
-## Merkle Trees, leaves and proofs
+## Mewkwe Twees, weaves and pwoofs
 
-Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by [hashing the data of the compressed NFT](/bubblegum/hashed-nft-data).
+Compwessed NFTs onwy exist in de context of a **Mewkwe Twee**~ We expwain [in a dedicated advanced guide](/bubblegum/concurrent-merkle-trees) what Mewkwe Twees awe but, fow de sake of dis uvwview, you can dink of a Mewkwe Twee as a cowwection of hashes dat we caww **Weaves**~ Each Weaf is obtainyed by [hashing the data of the compressed NFT](/bubblegum/hashed-nft-data).
 
-For each Leaf in the Merkle Tree, one can provide a list of hashes — called a **Proof** — that enables anyone to verify that the given Leaf is part of that tree. Whenever a compressed NFT is updated or transferred, its associated Leaf will change and so will its Proof.
+Fow each Weaf in de Mewkwe Twee, onye can pwovide a wist of hashes — cawwed a **Pwoof** — dat enyabwes anyonye to vewify dat de given Weaf is pawt of dat twee~ Whenyevew a compwessed NFT is updated ow twansfewwed, its associated Weaf wiww change and so wiww its Pwoof.
 
-{% diagram %}
+{% diagwam %}
 
-{% node #root label="Root Node" theme="slate" /%}
-{% node #root-hash label="Hash" parent="root" x="56" y="40" theme="transparent" /%}
-{% node #node-1 label="Node 1" parent="root" y="100" x="-200" theme="blue" /%}
-{% node #node-1-hash label="Hash" parent="node-1" x="42" y="40" theme="transparent" /%}
-{% node #node-2 label="Node 2" parent="root" y="100" x="200" theme="mint" /%}
+{% nyode #woot wabew="Woot Nyode" deme="swate" /%}
+{% nyode #woot-hash wabew="Hash" pawent="woot" x="56" y="40" deme="twanspawent" /%}
+{% nyode #nyode-1 wabew="Nyode 1" pawent="woot" y="100" x="-200" deme="bwue" /%}
+{% nyode #nyode-1-hash wabew="Hash" pawent="nyode-1" x="42" y="40" deme="twanspawent" /%}
+{% nyode #nyode-2 wabew="Nyode 2" pawent="woot" y="100" x="200" deme="mint" /%}
 
-{% node #node-3 label="Node 3" parent="node-1" y="100" x="-100" theme="mint" /%}
-{% node #node-4 label="Node 4" parent="node-1" y="100" x="100" theme="blue" /%}
-{% node #node-4-hash label="Hash" parent="node-4" x="42" y="40" theme="transparent" /%}
-{% node #node-5 label="Node 5" parent="node-2" y="100" x="-100" /%}
-{% node #node-6 label="Node 6" parent="node-2" y="100" x="100" /%}
+{% nyode #nyode-3 wabew="Nyode 3" pawent="nyode-1" y="100" x="-100" deme="mint" /%}
+{% nyode #nyode-4 wabew="Nyode 4" pawent="nyode-1" y="100" x="100" deme="bwue" /%}
+{% nyode #nyode-4-hash wabew="Hash" pawent="nyode-4" x="42" y="40" deme="twanspawent" /%}
+{% nyode #nyode-5 wabew="Nyode 5" pawent="nyode-2" y="100" x="-100" /%}
+{% nyode #nyode-6 wabew="Nyode 6" pawent="nyode-2" y="100" x="100" /%}
 
-{% node #leaf-1 label="Leaf 1" parent="node-3" y="100" x="-45" /%}
-{% node #leaf-2 label="Leaf 2" parent="node-3" y="100" x="55" /%}
-{% node #leaf-3 label="Leaf 3" parent="node-4" y="100" x="-45" theme="blue" /%}
-{% node #leaf-4 label="Leaf 4" parent="node-4" y="100" x="55" theme="mint" /%}
-{% node #leaf-5 label="Leaf 5" parent="node-5" y="100" x="-45" /%}
-{% node #leaf-6 label="Leaf 6" parent="node-5" y="100" x="55" /%}
-{% node #leaf-7 label="Leaf 7" parent="node-6" y="100" x="-45" /%}
-{% node #leaf-8 label="Leaf 8" parent="node-6" y="100" x="55" /%}
-{% node #nft label="NFT Data" parent="leaf-3" y="100" x="-12" theme="blue" /%}
+{% nyode #weaf-1 wabew="Weaf 1" pawent="nyode-3" y="100" x="-45" /%}
+{% nyode #weaf-2 wabew="Weaf 2" pawent="nyode-3" y="100" x="55" /%}
+{% nyode #weaf-3 wabew="Weaf 3" pawent="nyode-4" y="100" x="-45" deme="bwue" /%}
+{% nyode #weaf-4 wabew="Weaf 4" pawent="nyode-4" y="100" x="55" deme="mint" /%}
+{% nyode #weaf-5 wabew="Weaf 5" pawent="nyode-5" y="100" x="-45" /%}
+{% nyode #weaf-6 wabew="Weaf 6" pawent="nyode-5" y="100" x="55" /%}
+{% nyode #weaf-7 wabew="Weaf 7" pawent="nyode-6" y="100" x="-45" /%}
+{% nyode #weaf-8 wabew="Weaf 8" pawent="nyode-6" y="100" x="55" /%}
+{% nyode #nft wabew="NFT Data" pawent="weaf-3" y="100" x="-12" deme="bwue" /%}
 
-{% node #proof-1 label="Leaf 4" parent="nft" x="200" theme="mint" /%}
-{% node #proof-2 label="Node 3" parent="proof-1" x="90" theme="mint" /%}
-{% node #proof-3 label="Node 2" parent="proof-2" x="97" theme="mint" /%}
-{% node #proof-legend label="Proof" parent="proof-1" x="-6" y="-20" theme="transparent" /%}
+{% nyode #pwoof-1 wabew="Weaf 4" pawent="nft" x="200" deme="mint" /%}
+{% nyode #pwoof-2 wabew="Nyode 3" pawent="pwoof-1" x="90" deme="mint" /%}
+{% nyode #pwoof-3 wabew="Nyode 2" pawent="pwoof-2" x="97" deme="mint" /%}
+{% nyode #pwoof-wegend wabew="Pwoof" pawent="pwoof-1" x="-6" y="-20" deme="twanspawent" /%}
 
-{% edge from="node-1" to="root" fromPosition="top" toPosition="bottom" theme="blue" animated=true /%}
-{% edge from="node-2" to="root" fromPosition="top" toPosition="bottom" theme="mint" animated=true /%}
+{% edge fwom="nyode-1" to="woot" fwomPosition="top" toPosition="bottom" deme="bwue" anyimated=twue /%}
+{% edge fwom="nyode-2" to="woot" fwomPosition="top" toPosition="bottom" deme="mint" anyimated=twue /%}
 
-{% edge from="node-3" to="node-1" fromPosition="top" toPosition="bottom" theme="mint" animated=true /%}
-{% edge from="node-4" to="node-1" fromPosition="top" toPosition="bottom" theme="blue" animated=true /%}
-{% edge from="node-6" to="node-2" fromPosition="top" toPosition="bottom" /%}
-{% edge from="node-5" to="node-2" fromPosition="top" toPosition="bottom" /%}
+{% edge fwom="nyode-3" to="nyode-1" fwomPosition="top" toPosition="bottom" deme="mint" anyimated=twue /%}
+{% edge fwom="nyode-4" to="nyode-1" fwomPosition="top" toPosition="bottom" deme="bwue" anyimated=twue /%}
+{% edge fwom="nyode-6" to="nyode-2" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="nyode-5" to="nyode-2" fwomPosition="top" toPosition="bottom" /%}
 
-{% edge from="leaf-1" to="node-3" fromPosition="top" toPosition="bottom" /%}
-{% edge from="leaf-2" to="node-3" fromPosition="top" toPosition="bottom" /%}
-{% edge from="leaf-4" to="node-4" fromPosition="top" toPosition="bottom" theme="mint" animated=true /%}
-{% edge from="leaf-3" to="node-4" fromPosition="top" toPosition="bottom" theme="blue" animated=true /%}
-{% edge from="leaf-5" to="node-5" fromPosition="top" toPosition="bottom" /%}
-{% edge from="leaf-6" to="node-5" fromPosition="top" toPosition="bottom" /%}
-{% edge from="leaf-7" to="node-6" fromPosition="top" toPosition="bottom" /%}
-{% edge from="leaf-8" to="node-6" fromPosition="top" toPosition="bottom" /%}
-{% edge from="nft" to="leaf-3" fromPosition="top" toPosition="bottom" theme="blue" animated=true label="Hash" /%}
+{% edge fwom="weaf-1" to="nyode-3" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="weaf-2" to="nyode-3" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="weaf-4" to="nyode-4" fwomPosition="top" toPosition="bottom" deme="mint" anyimated=twue /%}
+{% edge fwom="weaf-3" to="nyode-4" fwomPosition="top" toPosition="bottom" deme="bwue" anyimated=twue /%}
+{% edge fwom="weaf-5" to="nyode-5" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="weaf-6" to="nyode-5" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="weaf-7" to="nyode-6" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="weaf-8" to="nyode-6" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="nft" to="weaf-3" fwomPosition="top" toPosition="bottom" deme="bwue" anyimated=twue wabew="Hash" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-As such, Merkle Trees act as an onchain structure that allows anyone to verify a given compressed NFT exist. They do this without storing any NFT data which makes them so scalable.
+As such, Mewkwe Twees act as an onchain stwuctuwe dat awwows anyonye to vewify a given compwessed NFT exist~ Dey do dis widout stowing any NFT data which makes dem so scawabwe.
 
-Which brings us to an important question: where is the NFT data stored?
+Which bwings us to an impowtant question: whewe is de NFT data stowed? owo
 
-## Metaplex DAS API
+## Metapwex DAS API
 
-When we mint a new compressed NFT, its data is hashed and added as a new Leaf in a Merkle Tree. But there’s more. Additionally, the entire NFT data is stored in the transaction that created the compressed NFT. Similarly, when a compressed NFT is updated, its updated data is, once again, saved on the transaction as a changelog. So, whilst there aren’t any accounts keeping track of that data, one can look at all previous transactions in the ledger and find that information.
+When we mint a nyew compwessed NFT, its data is hashed and added as a nyew Weaf in a Mewkwe Twee~ But dewe’s mowe~ Additionyawwy, de entiwe NFT data is stowed in de twansaction dat cweated de compwessed NFT~ Simiwawwy, when a compwessed NFT is updated, its updated data is, once again, saved on de twansaction as a changewog~ So, whiwst dewe awen’t any accounts keeping twack of dat data, onye can wook at aww pwevious twansactions in de wedgew and find dat infowmation.
 
-{% diagram %}
+{% diagwam %}
 
-{% node #tx-1 label="Transaction 1" /%}
-{% node #tx-2 label="Transaction 2" parent="tx-1" y="50" /%}
-{% node #tx-3 label="Transaction 3" parent="tx-2" y="50" /%}
-{% node #tx-4 label="Transaction 4" parent="tx-3" y="50" /%}
-{% node #tx-5 label="Transaction 5" parent="tx-4" y="50" /%}
-{% node #tx-rest label="..." parent="tx-5" y="50" /%}
+{% nyode #tx-1 wabew="Twansaction 1" /%}
+{% nyode #tx-2 wabew="Twansaction 2" pawent="tx-1" y="50" /%}
+{% nyode #tx-3 wabew="Twansaction 3" pawent="tx-2" y="50" /%}
+{% nyode #tx-4 wabew="Twansaction 4" pawent="tx-3" y="50" /%}
+{% nyode #tx-5 wabew="Twansaction 5" pawent="tx-4" y="50" /%}
+{% nyode #tx-west wabew="..." pawent="tx-5" y="50" /%}
 
-{% node #nft-1 label="Initial NFT Data" parent="tx-2" x="300" theme="blue" /%}
-{% node #nft-2 label="NFT Data Changelog" parent="tx-3" x="300" theme="blue" /%}
-{% node #nft-3 label="NFT Data Changelog" parent="tx-5" x="300" theme="blue" /%}
+{% nyode #nft-1 wabew="Inyitiaw NFT Data" pawent="tx-2" x="300" deme="bwue" /%}
+{% nyode #nft-2 wabew="NFT Data Changewog" pawent="tx-3" x="300" deme="bwue" /%}
+{% nyode #nft-3 wabew="NFT Data Changewog" pawent="tx-5" x="300" deme="bwue" /%}
 
-{% edge from="nft-1" to="tx-2" label="Stored in" /%}
-{% edge from="nft-2" to="tx-3" label="Stored in" /%}
-{% edge from="nft-3" to="tx-5" label="Stored in" /%}
+{% edge fwom="nft-1" to="tx-2" wabew="Stowed in" /%}
+{% edge fwom="nft-2" to="tx-3" wabew="Stowed in" /%}
+{% edge fwom="nft-3" to="tx-5" wabew="Stowed in" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Metaplex DAS API**.
+Cwawwing dwough miwwions of twansactions evewy time just to fetch de data of onye NFT is admittedwy nyot de best usew expewience~ Dewefowe, compwessed NFTs wewy on some WPCs to index dat infowmation in weaw time to abstwact dis away fwom de end-usew~ We caww de wesuwting WPC API, which enyabwes fetching compwessed NFTs, **de Metapwex DAS API**.
 
-Note that not all RPCs support the DAS API. As such, you may be interested in the [“Metaplex DAS API RPCs”](/rpc-providers) page to select an appropriate RPC when using compressed NFTs in your application.
+Nyote dat nyot aww WPCs suppowt de DAS API~ As such, you may be intewested in de [“Metaplex DAS API RPCs”](/rpc-providers) page to sewect an appwopwiate WPC when using compwessed NFTs in youw appwication.
 
-We talk about this in more detail in our advanced [“Storing and indexing NFT data”](/bubblegum/stored-nft-data) guide.
+We tawk about dis in mowe detaiw in ouw advanced [“Storing and indexing NFT data”](/bubblegum/stored-nft-data) guide.
 
-## Features
+## Featuwes
 
-Even though NFT data does not live inside accounts, it is still possible to execute a variety of operations on compressed NFTs. This is possible by requesting the current NFT data and ensuring its hashed Leaf is valid on the Merkle Tree. As such, the following operations can be performed on compressed NFTs:
+Even dough NFT data does nyot wive inside accounts, it is stiww possibwe to execute a vawiety of opewations on compwessed NFTs~ Dis is possibwe by wequesting de cuwwent NFT data and ensuwing its hashed Weaf is vawid on de Mewkwe Twee~ As such, de fowwowing opewations can be pewfowmed on compwessed NFTs:
 
-- [Mint a cNFT](/bubblegum/mint-cnfts) with or without an associated collection.
+- [Mint a cNFT](/bubblegum/mint-cnfts) wid ow widout an associated cowwection.
 - [Transfer a cNFT](/bubblegum/transfer-cnfts).
 - [Update the data of a cNFT](/bubblegum/update-cnfts).
 - [Burn a cNFT](/bubblegum/burn-cnfts).
-- [Decompress a cNFT into a regular NFT](/bubblegum/decompress-cnfts). Note that this enables interoperability with existing smart contracts but creates onchain accounts with rent fees.
+- [Decompress a cNFT into a regular NFT](/bubblegum/decompress-cnfts)~ Nyote dat dis enyabwes intewopewabiwity wid existing smawt contwacts but cweates onchain accounts wid went fees.
 - [Delegate a cNFT](/bubblegum/delegate-cnfts).
 - [Verify and unverify a cNFT collection](/bubblegum/verify-collections).
 - [Verify and unverify the creators of a cNFT](/bubblegum/verify-creators).
 
-## Next steps
+## Nyext steps
 
-Now that we know how compressed NFTs work at a high level, we recommend checking out our [Getting Started](/bubblegum/getting-started) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.
+Nyow dat we knyow how compwessed NFTs wowk at a high wevew, we wecommend checking out ouw [Getting Started](/bubblegum/getting-started) page which enyumewates de vawious wanguages/fwamewowks dat onye can use to intewact wid compwessed NFTs~ Aftewwawds, de vawious [feature pages](/bubblegum/create-trees) can be used to weawn mowe about de specific opewations dat can be pewfowmed on cNFTs~ Finyawwy, [advanced guides](/bubblegum/concurrent-merkle-trees) awe awso avaiwabwe to deepen youw knyowwedge of cNFTs and Mewkwe Twees.
