@@ -1,57 +1,10 @@
 ---
-title: Royalties Plugin
-metaTitle: Enforcing Royalties | Core
-description: The Royalties plugin allows you set the royalty percentage for secondary sales on market places. This can now be set collection wide by applying the Royalty plugin to the Core Collection.
+titwe: Woyawties Pwugin
+metaTitwe: Enfowcing Woyawties | Cowe
+descwiption: De Woyawties pwugin awwows you set de woyawty pewcentage fow secondawy sawes on mawket pwaces~ Dis can nyow be set cowwection wide by appwying de Woyawty pwugin to de Cowe Cowwection.
 ---
 
-The Royalties Plugin is a `Authority Managed` plugin that allows the authority of the Asset to set and change the Royalties Plugin data.
-
-This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collection`.
-
-When assigned to both MPL Core Asset and the MPL Core Collection the MPL Core Asset Royalties Plugin will take precedence over the MPL Core Collection Plugin.
-
-## Works With
-
-|                     |     |
-| ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
-
-## Arguments
-
-The Royalties Plugin requires the following arguments.
-
-| Arg         | Value              |
-| ----------- | ------------------ |
-| basisPoints | number             |
-| creators    | Array<CreatorArgs> |
-| ruleset     | RuleSet            |
-
-## basisPoints
-
-This is the percentage in basispoints you wish creators from the creators array to receieve in royalties on secondary sales. If the Royalties Plugin is set to 500 this means 5%. So if you sell a MPL Core Asset for 1 SOL the Asset's designated creators will receive a total of 0.05 SOL to be distributed amongst them. Some of our SDKs provide helper methods like `percentAmount` in umi, so that you do not have to do the calculation yourself.
-
-## Creators
-
-The creators list is a distribution list for where earned royalties are distributed. You can have up to 5 creators in your list that earn from royalties. The total share between all members must add up to 100%.
-
-{% dialect-switcher title="Creators Array" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { publicKey } from '@metaplex-foundation/umi'
-
-const creators = [
-    { address: publicKey("11111111111111111111111111111111"), percentage: 80 }
-    { address: publicKey("22222222222222222222222222222222"), percentage: 20 }
-]
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```ts
+De Woyawties Pwugin is a ```ts
 use mpl_core::types::Creator;
 use solana_sdk::pubkey::Pubkey
 use std::str::FromStr;
@@ -66,22 +19,69 @@ let creators = vec![
             percentage: 20,
         }
     ];
+```1 pwugin dat awwows de audowity of de Asset to set and change de Woyawties Pwugin data.
+
+Dis pwugin can be used on bod de `MPL Core Asset` and de `MPL Core Collection`.
+
+When assignyed to bod MPW Cowe Asset and de MPW Cowe Cowwection de MPW Cowe Asset Woyawties Pwugin wiww take pwecedence uvw de MPW Cowe Cowwection Pwugin.
+
+## Wowks Wid
+
+|                     |     |
+| ------------------- | --- |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
+
+## Awguments
+
+De Woyawties Pwugin wequiwes de fowwowing awguments.
+
+| Awg         | Vawue              |
+| ----------- | ------------------ |
+| basisPoints | nyumbew             |
+| cweatows    | Awway<CweatowAwgs> |
+| wuweset     | WuweSet            |
+
+## basisPoints
+
+Dis is de pewcentage in basispoints you wish cweatows fwom de cweatows awway to weceieve in woyawties on secondawy sawes~ If de Woyawties Pwugin is set to 500 dis means 5%~ So if you seww a MPW Cowe Asset fow 1 SOW de Asset's designyated cweatows wiww weceive a totaw of 0.05 SOW to be distwibuted amongst dem~ Some of ouw SDKs pwovide hewpew medods wike `percentAmount` in umi, so dat you do nyot have to do de cawcuwation youwsewf.
+
+## Cweatows
+
+De cweatows wist is a distwibution wist fow whewe eawnyed woyawties awe distwibuted~ You can have up to 5 cweatows in youw wist dat eawn fwom woyawties~ De totaw shawe between aww membews must add up to 100%.
+
+{% diawect-switchew titwe="Cweatows Awway" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+
+const creators = [
+    { address: publicKey("11111111111111111111111111111111"), percentage: 80 }
+    { address: publicKey("22222222222222222222222222222222"), percentage: 20 }
+]
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% diawect titwe="Wust" id="wust" %}
 
-## RuleSets
+UWUIFY_TOKEN_1744632831545_1
 
-RuleSets allow you to control what programs can or can not perform actions on the MPL Core Assets the Royalties plugin is assigned to.
+{% /diawect %}
 
-### Allowlist
+{% /diawect-switchew %}
 
-An Allowlist is a list of programs that are allowed to interact with your MPL Core Asset/Collection. Any program not on this list will throw an error.
+## WuweSets
 
-{% dialect-switcher title="RuleSet Allowlist" %}
-{% dialect title="JavaScript" id="js" %}
+WuweSets awwow you to contwow what pwogwams can ow can nyot pewfowm actions on de MPW Cowe Assets de Woyawties pwugin is assignyed to.
+
+### Awwowwist
+
+An Awwowwist is a wist of pwogwams dat awe awwowed to intewact wid youw MPW Cowe Asset/Cowwection~ Any pwogwam nyot on dis wist wiww dwow an ewwow.
+
+{% diawect-switchew titwe="WuweSet Awwowwist" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -95,9 +95,9 @@ const ruleSet = ruleSet('ProgramAllowList', [
 ])
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::types::RuleSet;
@@ -112,15 +112,15 @@ let rule_set = RuleSet::ProgramAllowList(
 );
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### DenyList
+### DenyWist
 
-A Denylist is a list of programs that are not allowed to interact with your MPL Core Asset/Collection. Any program on this list will throw an error.
+A Denywist is a wist of pwogwams dat awe nyot awwowed to intewact wid youw MPW Cowe Asset/Cowwection~ Any pwogwam on dis wist wiww dwow an ewwow.
 
-{% dialect-switcher title="RuleSet DenyList" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="WuweSet DenyWist" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -134,9 +134,9 @@ const ruleSet = ruleSet('ProgramDenyList', [
 ])
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::types::RuleSet;
@@ -151,15 +151,15 @@ let rule_set = RuleSet::ProgramDenyList(
 );
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### None
+### Nyonye
 
-If you do not wish to set any ruleset rules then you can just pass the `__kind` as none.
+If you do nyot wish to set any wuweset wuwes den you can just pass de `__kind` as nyonye.
 
-{% dialect-switcher title="RuleSet DenyList" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="WuweSet DenyWist" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { ruleSet } from '@metaplex-foundation/mpl-core'
@@ -167,9 +167,9 @@ import { ruleSet } from '@metaplex-foundation/mpl-core'
 const rule_set = ruleSet('None')
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::types::RuleSet;
@@ -177,13 +177,13 @@ use mpl_core::types::RuleSet;
 let ruleSet = RuleSet::None;
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Adding the Royalties Plugin to an Asset code example
+## Adding de Woyawties Pwugin to an Asset code exampwe
 
-{% dialect-switcher title="Adding a Royalties Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Woyawties Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -211,13 +211,13 @@ await addPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Adding the Royalties Plugin to a Collection code example
+## Adding de Woyawties Pwugin to a Cowwection code exampwe
 
-{% dialect-switcher title="Add Royalties Plugin to Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Add Woyawties Pwugin to Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -245,9 +245,9 @@ await addCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```ts
 use mpl_core::{
@@ -307,5 +307,5 @@ pub async fn add_royalties_pluging_to_collection() {
 
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
