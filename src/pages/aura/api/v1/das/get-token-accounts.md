@@ -1,9 +1,9 @@
 ---
-title: Get Token Accounts
-metaTitle: Get Token Accounts | Aura API
-description: Learn about the Get Token Accounts Aura API Method.
+titwe: Get Token Accounts
+metaTitwe: Get Token Accounts | Auwa API
+descwiption: Weawn about de Get Token Accounts Auwa API Medod.
 ---
 
-Search and return a list of token accounts based on criteria.
+Seawch and wetuwn a wist of token accounts based on cwitewia.
 
-{% apiRenderer method="getTokenAccounts" /%}
+{% apiWendewew medod="getTokenAccounts" /%}
