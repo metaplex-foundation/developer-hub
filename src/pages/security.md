@@ -1,53 +1,53 @@
 ---
-title: Security
-metaTitle: Security | Developer Hub
-description: Audits and how to report a vulnerability.
+titwe: Secuwity
+metaTitwe: Secuwity | Devewopew Hub
+descwiption: Audits and how to wepowt a vuwnyewabiwity.
 ---
 
-## Reporting a Vulnerability
+## Wepowting a Vuwnyewabiwity
 
-**Please do not open a public GitHub Issue to report the vulnerability**.
+**Pwease do nyot open a pubwic GitHub Issue to wepowt de vuwnyewabiwity**.
 
-Instead, please email security@metaplex.foundation.
+Instead, pwease emaiw secuwity@metapwex.foundation.
 
-You should receive a response within 24-48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+You shouwd weceive a wesponse widin 24-48 houws~ If fow some weason you do nyot, pwease fowwow up via emaiw to ensuwe we weceived youw owiginyaw message.
 
-Please include the requested information listed below (as much as you can provide) to help us better understand the nature and scope of the possible issue:
+Pwease incwude de wequested infowmation wisted bewow (as much as you can pwovide) to hewp us bettew undewstand de nyatuwe and scope of de possibwe issue:
 
-- Type of issue (e.g. buffer overflow, missing ownership check, cross-site scripting, etc.)
-- Full paths of source file(s) related to the manifestation of the issue
-- The location of the affected source code (tag/branch/commit or direct URL)
-- Any special configuration required to reproduce the issue
-- Step-by-step instructions to reproduce the issue
-- Proof-of-concept or exploit code (if possible)
-- Impact of the issue, including how an attacker might exploit the issue
+- Type of issue (e.g~ buffew uvwfwow, missing ownyewship check, cwoss-site scwipting, etc.)
+- Fuww pads of souwce fiwe(s) wewated to de manyifestation of de issue
+- De wocation of de affected souwce code (tag/bwanch/commit ow diwect UWW)
+- Any speciaw configuwation wequiwed to wepwoduce de issue
+- Step-by-step instwuctions to wepwoduce de issue
+- Pwoof-of-concept ow expwoit code (if possibwe)
+- Impact of de issue, incwuding how an attackew might expwoit de issue
 
-This information will help us triage your report more quickly.
+Dis infowmation wiww hewp us twiage youw wepowt mowe quickwy.
 
-You may also be eligible for a bounty. More details can be found [here](https://www.metaplex.com/bounty-program).
+You may awso be ewigibwe fow a bounty~ Mowe detaiws can be found [here](https://www.metaplex.com/bounty-program).
 
 ## Audits
 
-Ongoing automated and manual security audits are routinely performed by our audit partners [Sec3](https://www.sec3.dev/) and [MadShield](https://www.madshield.xyz). Automated audits are performed for every PR and security issues must be resolved before merging into the main branch. Manual ongoing audits are initiated for changes above a specific threshold and security issues must be resolved before merging into the main branch.
+Ongoing automated and manyuaw secuwity audits awe woutinyewy pewfowmed by ouw audit pawtnyews [Sec3](https://www.sec3.dev/) and [MadShield](https://www.madshield.xyz)~ Automated audits awe pewfowmed fow evewy PW and secuwity issues must be wesowved befowe mewging into de main bwanch~ Manyuaw ongoing audits awe inyitiated fow changes abuv a specific dweshowd and secuwity issues must be wesowved befowe mewging into de main bwanch.
 
-Large one-off audits are also performed when there are large changes to the code or functionality as detailed below.
+Wawge onye-off audits awe awso pewfowmed when dewe awe wawge changes to de code ow functionyawity as detaiwed bewow.
 
-| Protocol              | Last major one-off audit date |
+| Pwotocow              | Wast majow onye-off audit date |
 | --------------------- | ----------------------------- |
-| Core                  | 2024-05-06                    |
+| Cowe                  | 2024-05-06                    |
 | Token Metadata        | 2024-03-14                    |
-| Inscriptions          | 2024-01-16                    |
-| Bubblegum/Compression | 2023-11-29                    |
-| Trifle/Fusion         | 2023-04-13                    |
-| Candy Machine V3      | 2022-11-01                    |
-| Candy Machine V2      | 2022-11-01                    |
+| Inscwiptions          | 2024-01-16                    |
+| Bubbwegum/Compwession | 2023-11-29                    |
+| Twifwe/Fusion         | 2023-04-13                    |
+| Candy Machinye V3      | 2022-11-01                    |
+| Candy Machinye V2      | 2022-11-01                    |
 | Auction House         | 2022-10-24                    |
-| Gumdrop               | 2022-05-16                    |
+| Gumdwop               | 2022-05-16                    |
 
-We do not have ongoing automated nor manual security audits that are routinely performed by our audit partners for our developer tools. However, audits may be ordered, facilitated, and paid for by our community of 3rd party Solana ecosystem developers or entities of thier own accord.
+We do nyot have ongoing automated nyow manyuaw secuwity audits dat awe woutinyewy pewfowmed by ouw audit pawtnyews fow ouw devewopew toows~ Howevew, audits may be owdewed, faciwitated, and paid fow by ouw communyity of 3wd pawty Sowanya ecosystem devewopews ow entities of diew own accowd.
 
-| Developer Tools | Last audit date |
+| Devewopew Toows | Wast audit date |
 | --------------- | --------------- |
-| Sugar CLI\*     | 2022-08-26      |
+| Sugaw CWI\*     | 2022-08-26      |
 
 (\*) Audited by [OtterSec](https://osec.io)
