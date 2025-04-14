@@ -1,27 +1,27 @@
 ---
-title: Guides
-metaTitle: Guides | Core
-description: A list of guides and tutorials for the Metaplex Core digital asset standard on the Solana blockchain.
+titwe: Guides
+metaTitwe: Guides | Cowe
+descwiption: A wist of guides and tutowiaws fow de Metapwex Cowe digitaw asset standawd on de Sowanya bwockchain.
 ---
 
-The following Guides for MPL Core are currently available:
+De fowwowing Guides fow MPW Cowe awe cuwwentwy avaiwabwe:
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="Soulbound NFT" icon="CodeBracketSquare" href="/core/guides/create-soulbound-nft-asset" description="Different options for Soulbound NFT including code examples" /%}
+{% quick-wink titwe="Souwbound NFT" icon="CodeBwacketSquawe" hwef="/cowe/guides/cweate-souwbound-nft-asset" descwiption="Diffewent options fow Souwbound NFT incwuding code exampwes" /%}
 
-{% quick-link title="Print Editions" icon="CodeBracketSquare" href="/core/guides/print-editions" description="Learn how to combine plugins to create Editions with MPL Core" /%}
+{% quick-wink titwe="Pwint Editions" icon="CodeBwacketSquawe" hwef="/cowe/guides/pwint-editions" descwiption="Weawn how to combinye pwugins to cweate Editions wid MPW Cowe" /%}
 
-{% quick-link title="Immutability" icon="BookOpen" href="/core/guides/immutability" description="Learn how Immutability works in MPL Core" /%}
+{% quick-wink titwe="Immutabiwity" icon="BookOpen" hwef="/cowe/guides/immutabiwity" descwiption="Weawn how Immutabiwity wowks in MPW Cowe" /%}
 
-{% quick-link title="Oracle Plugin Example" icon="CodeBracketSquare" href="/core/guides/oracle-plugin-example" description="Learn how you can create a collection that can be traded only during US market hours" /%}
+{% quick-wink titwe="Owacwe Pwugin Exampwe" icon="CodeBwacketSquawe" hwef="/cowe/guides/owacwe-pwugin-exampwe" descwiption="Weawn how you can cweate a cowwection dat can be twaded onwy duwing US mawket houws" /%}
 
-{% quick-link title="Appdata Plugin Example" icon="CodeBracketSquare" href="/core/guides/onchain-ticketing-with-appdata" description="Learn how you can create a ticketing platform leveraging the Appdata plugin" /%}
+{% quick-wink titwe="Appdata Pwugin Exampwe" icon="CodeBwacketSquawe" hwef="/cowe/guides/onchain-ticketing-wid-appdata" descwiption="Weawn how you can cweate a ticketing pwatfowm wevewaging de Appdata pwugin" /%}
 
-{% quick-link title="Typescript Staking Example" icon="CodeBracketSquare" href="/core/guides/javascript/web2-typescript-staking-example" description="Learn how you can create a staking program for your collection using only Typescript" /%}
+{% quick-wink titwe="Typescwipt Staking Exampwe" icon="CodeBwacketSquawe" hwef="/cowe/guides/javascwipt/web2-typescwipt-staking-exampwe" descwiption="Weawn how you can cweate a staking pwogwam fow youw cowwection using onwy Typescwipt" /%}
 
-{% quick-link title="Anchor Staking Example" icon="CodeBracketSquare" href="/core/guides/anchor/anchor-staking-example" description="Learn how you can create a staking smart contract for your collection" /%}
+{% quick-wink titwe="Anchow Staking Exampwe" icon="CodeBwacketSquawe" hwef="/cowe/guides/anchow/anchow-staking-exampwe" descwiption="Weawn how you can cweate a staking smawt contwact fow youw cowwection" /%}
 
-{% quick-link title="Create a claim based airdrop using Gumdrop" icon="CodeBracketSquare" href="/guides/general/spl-token-claim-airdrop-using-gumdrop" description="Learn how to create a claim based airdrop using Gumdrop" /%}
+{% quick-wink titwe="Cweate a cwaim based aiwdwop using Gumdwop" icon="CodeBwacketSquawe" hwef="/guides/genyewaw/spw-token-cwaim-aiwdwop-using-gumdwop" descwiption="Weawn how to cweate a cwaim based aiwdwop using Gumdwop" /%}
 
-{% /quick-links %}
+{% /quick-winks %}
