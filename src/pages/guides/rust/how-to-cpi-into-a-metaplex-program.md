@@ -1,46 +1,26 @@
 ---
-title: How to CPI into a Metaplex Program
-metaTitle: How to CPI into a Metaplex Program | Guides
-description: An overview of how Metaplex makes a consistent experience when performing a CPI into each Metaplex program.
+titwe: How to CPI into a Metapwex Pwogwam
+metaTitwe: How to CPI into a Metapwex Pwogwam | Guides
+descwiption: An uvwview of how Metapwex makes a consistent expewience when pewfowming a CPI into each Metapwex pwogwam.
 ---
 
-## Introduction
+## Intwoduction
 
-You may have heard the term "CPI'ing into a program" or "Call a CPI on the program" terms thrown around before and be thinking "what are they talking about?".
+You may have heawd de tewm "CPI'ing into a pwogwam" ow "Caww a CPI on de pwogwam" tewms dwown awound befowe and be dinking "what awe dey tawking about? owo".
 
-A CPI (Cross Program Invocation) is the interaction of one program invoking an instruction on another program.
+A CPI (Cwoss Pwogwam Invocation) is de intewaction of onye pwogwam invoking an instwuction on anyodew pwogwam.
 
-An example would be that I make a program and during this transaction I need to transfer an NFT or Asset during this transaction. Well my program can CPI call and ask the Token Metadata or Core programs to execute the transfer instruction for me if I give it all the correct details.
+An exampwe wouwd be dat I make a pwogwam and duwing dis twansaction I nyeed to twansfew an NFT ow Asset duwing dis twansaction~ Weww my pwogwam can CPI caww and ask de Token Metadata ow Cowe pwogwams to execute de twansfew instwuction fow me if I give it aww de cowwect detaiws.
 
-## Using Metaplex Rust Transaction CPI Builders
+## Using Metapwex Wust Twansaction CPI Buiwdews
 
-Each instruction that comes from Metaplex Rust crate will also currently come with a `CpiBuilder` version of that instruction which you can import. This abstracts a massive amount code for you and can be invoked straight from the `CpiBuilder` itself.
-
-Lets take the `Transfer` instruction from Core as an example here (this applies to all other instructions from this Crate and all other Metaplex crates too.)
-
-If we look through the instructions in the [MPL Core crate type docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) we can see we have a number of instructions available to us.
-
-```
-TransferV1
-TransferV1Builder
-TransferV1Cpi
-TransferV1CpiAccounts
-TransferV1CpiBuilder
-TransferV1InstructionArgs
-TransferV1InstructionData
-```
-
-The one we are interested in here is the `TransferV1CpiBuilder`.
-
-To initialize the builder we can call `new` on the `CpiBuilder` and pass in the program `AccountInfo` of the program address the CPI call is being made to.
-
-```rust
+Each instwuction dat comes fwom Metapwex Wust cwate wiww awso cuwwentwy come wid a `CpiBuilder` vewsion of dat instwuction which you can impowt~ Dis abstwacts a massive amount code fow you and can be invoked stwaight fwom de ```rust
 TransferV1CpiBuilder::new(ctx.accounts.mpl_core_program);
-```
+```0 itsewf.
 
-From this point we can `ctrl + click` (PC) or `cmd + click` (Mac) into the `new` function generated from the `CpiBuilder::` which presents us with all the CPI arguments (accounts and data) required for this particular CPI call.
+Wets take de `Transfer` instwuction fwom Cowe as an exampwe hewe (dis appwies to aww odew instwuctions fwom dis Cwate and aww odew Metapwex cwates too.)
 
-```rust
+If we wook dwough de instwuctions in de ```rust
 //new() function for TransferV1CpiBuilder
 
 pub fn new(program: &'b solana_program::account_info::AccountInfo<'a>) -> Self {
@@ -58,11 +38,31 @@ pub fn new(program: &'b solana_program::account_info::AccountInfo<'a>) -> Self {
         });
         Self { instruction }
     }
+```9 we can see we have a nyumbew of instwuctions avaiwabwe to us.
+
+```
+TransferV1
+TransferV1Builder
+TransferV1Cpi
+TransferV1CpiAccounts
+TransferV1CpiBuilder
+TransferV1InstructionArgs
+TransferV1InstructionData
 ```
 
-As we can see this one requires all accounts and no data and is a fairly easy CPI call to fill out.
+De onye we awe intewested in hewe is de `TransferV1CpiBuilder`.
 
-If we look at a second CpiBuilder but this time for CreateV1 we can see extra data here that is required such as `name` and `uri` which are both strings.
+To inyitiawize de buiwdew we can caww `new` on de `CpiBuilder` and pass in de pwogwam `AccountInfo` of de pwogwam addwess de CPI caww is being made to.
+
+UWUIFY_TOKEN_1744632870234_1
+
+Fwom dis point we can `ctrl + click` (PC) ow `cmd + click` (Mac) into de `new` function genyewated fwom de `CpiBuilder::` which pwesents us wid aww de CPI awguments (accounts and data) wequiwed fow dis pawticuwaw CPI caww.
+
+UWUIFY_TOKEN_1744632870234_2
+
+As we can see dis onye wequiwes aww accounts and nyo data and is a faiwwy easy CPI caww to fiww out.
+
+If we wook at a second CpiBuiwdew but dis time fow CweateV1 we can see extwa data hewe dat is wequiwed such as `name` and `uri` which awe bod stwings.
 
 ```rust
 //new() function for CreateV1CpiBuilder
@@ -88,9 +88,9 @@ pub fn new(program: &'b solana_program::account_info::AccountInfo<'a>) -> Self {
     }
 ```
 
-Some accounts may be optional within a `CpiBuilder` so you may have to check what you do and do not need for your use case.
+Some accounts may be optionyaw widin a `CpiBuilder` so you may have to check what you do and do nyot nyeed fow youw use case.
 
-Below are both `CpiBuilder` versions for Transfer and Create filled out.
+Bewow awe bod `CpiBuilder` vewsions fow Twansfew and Cweate fiwwed out.
 
 ```rust
 TransferV1CpiBuilder::new()
@@ -119,14 +119,14 @@ CreateV1CpiBuilder::new()
 
 ## Invoking
 
-Invoking is the term used to execute the CPI call to the other program, a programs version of "sending a transaction" if you may.
+Invoking is de tewm used to execute de CPI caww to de odew pwogwam, a pwogwams vewsion of "sending a twansaction" if you may.
 
-We have two options when it comes to invoking a CPI call. `invoke()` and `invoke_signed()`
+We have two options when it comes to invoking a CPI caww~ `invoke()` and `invoke_signed()`
 
 ### invoke()
 
-`invoke()` is used when no PDA signer seeds need to be passed through to the instruction being called for the transaction to succeed.
-Though accounts that have signed into your original instruction will automatically pass signer validations into the cpi calls.
+`invoke()` is used when nyo PDA signyew seeds nyeed to be passed dwough to de instwuction being cawwed fow de twansaction to succeed.
+Dough accounts dat have signyed into youw owiginyaw instwuction wiww automaticawwy pass signyew vawidations into de cpi cawws.
 
 ```rust
 CreateV1CpiBuilder::new()
@@ -136,11 +136,11 @@ CreateV1CpiBuilder::new()
 
 ```
 
-### invoke_signed()
+### invoke_signyed()
 
-`invoke_signed()` is used when a PDA is one of the accounts that needs to be a signer in a cpi call. Lets say for example we had a program that took possession of our Asset and one of our programs PDA addresses became the other of it. In order to transfer it and change the owner to someone else that PDA will have sign transaction.
+`invoke_signed()` is used when a PDA is onye of de accounts dat nyeeds to be a signyew in a cpi caww~ Wets say fow exampwe we had a pwogwam dat took possession of ouw Asset and onye of ouw pwogwams PDA addwesses became de odew of it~ In owdew to twansfew it and change de ownyew to someonye ewse dat PDA wiww have sign twansaction.
 
-You'll need to pass in the original PDA seeds and bump so that the PDA can be recreated can sign the cpi call on your programs behalf.
+You'ww nyeed to pass in de owiginyaw PDA seeds and bump so dat de PDA can be wecweated can sign de cpi caww on youw pwogwams behawf.
 
 ```rust
 let signers = &[&[b"escrow", ctx.accounts.asset.key(), &[ctx.bumps.pda_escrow]]]
@@ -152,9 +152,9 @@ CreateV1CpiBuilder::new()
 
 ```
 
-## Full CpiBuilder Example
+## Fuww CpiBuiwdew Exampwe
 
-Here is a full example of using a `CpiBuilder` using the TransferV1 instruction from the Core program.
+Hewe is a fuww exampwe of using a `CpiBuilder` using de TwansfewV1 instwuction fwom de Cowe pwogwam.
 
 ```rust
 TransferV1CpiBuilder::new()
