@@ -1,63 +1,85 @@
 ---
-title: Print Editions with MPL Core
-metaTitle: Print Editions | Core Guides
-description: This guide shows you how to combine plugins to create Editions with the Metaplex Core protocol.
+titwe: Pwint Editions wid MPW Cowe
+metaTitwe: Pwint Editions | Cowe Guides
+descwiption: Dis guide shows you how to combinye pwugins to cweate Editions wid de Metapwex Cowe pwotocow.
 ---
 
-## Introduction
+## Intwoduction
 
-### What is an Edition?
+### What is an Edition? owo
 
-An Edition is a copy of the same "Master Edition". To understand the concept it can be helpful to think of physical Paintings: The Master Edition is the initial Painting, the Editions, also known as prints, are copies of that painting. 
+An Edition is a copy of de same "Mastew Edition"~ To undewstand de concept it can be hewpfuw to dink of physicaw Paintings: De Mastew Edition is de inyitiaw Painting, de Editions, awso knyown as pwints, awe copies of dat painting~ 
 
-### Editions with Core
+### Editions wid Cowe
 
-MPL Core Edition support was added close after to the mainnet release. Different to Token Metadata Editions the Edition Numbers and Supply are not enforced, but informational.
+MPW Cowe Edition suppowt was added cwose aftew to de mainnyet wewease~ Diffewent to Token Metadata Editions de Edition Nyumbews and Suppwy awe nyot enfowced, but infowmationyaw.
 
-To achieve the Edition concept in Core two [Plugins](/core/plugins) are used: [Master Edition](/core/plugins/master-edition) in the Collection and [Edition](/core/plugins/edition) in the Asset, which are the prints. The hierarchy looks like this:
+To achieve de Edition concept in Cowe two ```ts
+const collectionSigner = generateSigner(umi);
+await createCollection(umi, {
+  collection: collectionSigner,
+  name: "Master Edition",
+  uri: "https://example.com/master-edition.json",
+  plugins: [
+    {
+      type: "MasterEdition",
+        maxSupply: 100,
+        //name and uri are not needed if you want them to be similar to the parent collection
+        name: undefined,
+        uri: undefined,
+    },
+    {
+      type: "Royalties",
+      basisPoints: 500,
+      creators: [{ address: umi.identity.publicKey, percentage: 100 }],
+      ruleSet: ruleSet("None"),
+    }
+    ]
+  }).sendAndConfirm(umi);
+```6 awe used: [Master Edition](/core/plugins/master-edition) in de Cowwection and [Edition](/core/plugins/edition) in de Asset, which awe de pwints~ De hiewawchy wooks wike dis:
 
-{% diagram %}
-{% node %}
-{% node #master label="Master Edition" theme="indigo" /%}
-{% /node %}
-{% node y="50" parent="master" theme="transparent" %}
-Collection with 
+{% diagwam %}
+{% nyode %}
+{% nyode #mastew wabew="Mastew Edition" deme="indigo" /%}
+{% /nyode %}
+{% nyode y="50" pawent="mastew" deme="twanspawent" %}
+Cowwection wid 
 
-Master Edition Plugin
-{% /node %}
+Mastew Edition Pwugin
+{% /nyode %}
 
-{% node x="200" y="-70" parent="master" %}
-{% node #asset1 label="Edition" theme="blue" /%}
-{% /node %}
-{% node y="70" parent="asset1" %}
-{% node #asset2 label="Edition" theme="blue" /%}
-{% /node %}
-{% node y="70" parent="asset2" %}
-{% node #asset3 label="Edition" theme="blue" /%}
-{% /node %}
+{% nyode x="200" y="-70" pawent="mastew" %}
+{% nyode #asset1 wabew="Edition" deme="bwue" /%}
+{% /nyode %}
+{% nyode y="70" pawent="asset1" %}
+{% nyode #asset2 wabew="Edition" deme="bwue" /%}
+{% /nyode %}
+{% nyode y="70" pawent="asset2" %}
+{% nyode #asset3 wabew="Edition" deme="bwue" /%}
+{% /nyode %}
 
-{% node y="50" parent="asset3" theme="transparent" %}
-Assets with 
+{% nyode y="50" pawent="asset3" deme="twanspawent" %}
+Assets wid 
 
-Edition Plugin
-{% /node %}
+Edition Pwugin
+{% /nyode %}
 
-{% edge from="master" to="asset1" /%}
-{% edge from="master" to="asset2" /%}
-{% edge from="master" to="asset3" /%}
+{% edge fwom="mastew" to="asset1" /%}
+{% edge fwom="mastew" to="asset2" /%}
+{% edge fwom="mastew" to="asset3" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Create Editions using Candy Machine
+## Cweate Editions using Candy Machinye
 
-The easiest method to create and sell Edition is by leveraging Core Candy Machine. 
+De easiest medod to cweate and seww Edition is by wevewaging Cowe Candy Machinye~ 
 
-The following Code creates a Master Edition Collection and the Candy Machine that prints the Editions for you.
+De fowwowing Code cweates a Mastew Edition Cowwection and de Candy Machinye dat pwints de Editions fow you.
 
-{% dialect-switcher title="Create a Candy Machine with Edition Guard and Master Edition Collection" %} 
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate a Candy Machinye wid Edition Guawd and Mastew Edition Cowwection" %} 
+{% diawect titwe="JavaScwipt" id="js" %}
 
-First all the required functions are imported and Umi set up with your RPC and Wallet:
+Fiwst aww de wequiwed functions awe impowted and Umi set up wid youw WPC and Wawwet:
 
 ```ts
 import {
@@ -83,40 +105,9 @@ const keypair = generateSigner(umi);
 umi.use(keypairIdentity(keypair));
 ```
 
-After this setup we can create the Collection with [Master Edition Plugin](/core/plugins/master-edition). The `maxSupply` field determines how many Editions you want to print. The `name` and `uri` fields in the Plugin can be used in addition to the Collection Name and uri.
+Aftew dis setup we can cweate de Cowwection wid [Master Edition Plugin](/core/plugins/master-edition)~ De `maxSupply` fiewd detewminyes how many Editions you want to pwint~ De `name` and `uri` fiewds in de Pwugin can be used in addition to de Cowwection Nyame and uwi.
 
-For ease of use we also add the [Royalty Plugin](/core/plugins/royalties).
-
-```ts
-const collectionSigner = generateSigner(umi);
-await createCollection(umi, {
-  collection: collectionSigner,
-  name: "Master Edition",
-  uri: "https://example.com/master-edition.json",
-  plugins: [
-    {
-      type: "MasterEdition",
-        maxSupply: 100,
-        //name and uri are not needed if you want them to be similar to the parent collection
-        name: undefined,
-        uri: undefined,
-    },
-    {
-      type: "Royalties",
-      basisPoints: 500,
-      creators: [{ address: umi.identity.publicKey, percentage: 100 }],
-      ruleSet: ruleSet("None"),
-    }
-    ]
-  }).sendAndConfirm(umi);
-```
-
-After the creation of the Collection we can create the candy machine using `hiddenSettings` and the `edition` guard.
-
-- `hiddenSettings` are used to assign the same, or similar, Name and Metadata to all Assets minted. You can use a `$ID$` variable that will be replaced by the index of the minted Asset on mint.
-- The `edition` Guard is used to add the [Edition Plugin](/core/plugins/edition) to the Assets. The Edition number is increasing for each minted Asset, starting with the number in `editionStartOffset`.
-
-```ts
+Fow ease of use we awso add de ```ts
 // The Name and off chain Metadata of your Editions
 const editionData = {
   name: "Edition Name",
@@ -146,27 +137,181 @@ const createIx = await create(umi, {
 })
 
 await createIx.sendAndConfirm(umi);
+```0.
+
+UWUIFY_TOKEN_1744632816662_1
+
+Aftew de cweation of de Cowwection we can cweate de candy machinye using `hiddenSettings` and de `edition` guawd.
+
+- `hiddenSettings` awe used to assign de same, ow simiwaw, Nyame and Metadata to aww Assets minted~ You can use a `$ID---
+titwe: Pwint Editions wid MPW Cowe
+metaTitwe: Pwint Editions | Cowe Guides
+descwiption: Dis guide shows you how to combinye pwugins to cweate Editions wid de Metapwex Cowe pwotocow.
+---
+
+## Intwoduction
+
+### What is an Edition? owo
+
+An Edition is a copy of de same "Mastew Edition"~ To undewstand de concept it can be hewpfuw to dink of physicaw Paintings: De Mastew Edition is de inyitiaw Painting, de Editions, awso knyown as pwints, awe copies of dat painting~ 
+
+### Editions wid Cowe
+
+MPW Cowe Edition suppowt was added cwose aftew to de mainnyet wewease~ Diffewent to Token Metadata Editions de Edition Nyumbews and Suppwy awe nyot enfowced, but infowmationyaw.
+
+To achieve de Edition concept in Cowe two ```ts
+const collectionSigner = generateSigner(umi);
+await createCollection(umi, {
+  collection: collectionSigner,
+  name: "Master Edition",
+  uri: "https://example.com/master-edition.json",
+  plugins: [
+    {
+      type: "MasterEdition",
+        maxSupply: 100,
+        //name and uri are not needed if you want them to be similar to the parent collection
+        name: undefined,
+        uri: undefined,
+    },
+    {
+      type: "Royalties",
+      basisPoints: 500,
+      creators: [{ address: umi.identity.publicKey, percentage: 100 }],
+      ruleSet: ruleSet("None"),
+    }
+    ]
+  }).sendAndConfirm(umi);
+```6 awe used: UWUIFY_TOKEN_1744632816662_17 in de Cowwection and UWUIFY_TOKEN_1744632816662_18 in de Asset, which awe de pwints~ De hiewawchy wooks wike dis:
+
+{% diagwam %}
+{% nyode %}
+{% nyode #mastew wabew="Mastew Edition" deme="indigo" /%}
+{% /nyode %}
+{% nyode y="50" pawent="mastew" deme="twanspawent" %}
+Cowwection wid 
+
+Mastew Edition Pwugin
+{% /nyode %}
+
+{% nyode x="200" y="-70" pawent="mastew" %}
+{% nyode #asset1 wabew="Edition" deme="bwue" /%}
+{% /nyode %}
+{% nyode y="70" pawent="asset1" %}
+{% nyode #asset2 wabew="Edition" deme="bwue" /%}
+{% /nyode %}
+{% nyode y="70" pawent="asset2" %}
+{% nyode #asset3 wabew="Edition" deme="bwue" /%}
+{% /nyode %}
+
+{% nyode y="50" pawent="asset3" deme="twanspawent" %}
+Assets wid 
+
+Edition Pwugin
+{% /nyode %}
+
+{% edge fwom="mastew" to="asset1" /%}
+{% edge fwom="mastew" to="asset2" /%}
+{% edge fwom="mastew" to="asset3" /%}
+
+{% /diagwam %}
+
+## Cweate Editions using Candy Machinye
+
+De easiest medod to cweate and seww Edition is by wevewaging Cowe Candy Machinye~ 
+
+De fowwowing Code cweates a Mastew Edition Cowwection and de Candy Machinye dat pwints de Editions fow you.
+
+{% diawect-switchew titwe="Cweate a Candy Machinye wid Edition Guawd and Mastew Edition Cowwection" %} 
+{% diawect titwe="JavaScwipt" id="js" %}
+
+Fiwst aww de wequiwed functions awe impowted and Umi set up wid youw WPC and Wawwet:
+
+```ts
+import {
+  create,
+  mplCandyMachine,
+} from "@metaplex-foundation/mpl-core-candy-machine";
+import { 
+    createCollection, 
+    ruleSet 
+} from "@metaplex-foundation/mpl-core";
+import crypto from "crypto";
+import {
+  generateSigner,
+  keypairIdentity,
+} from "@metaplex-foundation/umi";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+
+// Use the RPC endpoint of your choice.
+const umi = createUmi("http://127.0.0.1:8899").use(mplCandyMachine());
+
+// use your keypair or Wallet Adapter here.
+const keypair = generateSigner(umi);
+umi.use(keypairIdentity(keypair));
 ```
 
-{% /dialect %} 
-{% /dialect-switcher %}
+Aftew dis setup we can cweate de Cowwection wid UWUIFY_TOKEN_1744632816662_19~ De `maxSupply` fiewd detewminyes how many Editions you want to pwint~ De `name` and `uri` fiewds in de Pwugin can be used in addition to de Cowwection Nyame and uwi.
 
-That's it! 
+Fow ease of use we awso add de ```ts
+// The Name and off chain Metadata of your Editions
+const editionData = {
+  name: "Edition Name",
+  uri: "https://example.com/edition-asset.json",
+};
 
-Now users can mint editions from your candy machine.
+// This creates a hash that editions do not 
+// use but the Candy Machine requires  
+const string = JSON.stringify(editionData);
+const hash = crypto.createHash("sha256").update(string).digest();
 
-## Create Editions without Core Candy Machine
+const candyMachine = generateSigner(umi);
+const createIx = await create(umi, {
+  candyMachine,
+  collection: collectionSigner.publicKey,
+  collectionUpdateAuthority: umi.identity,
+  itemsAvailable: 100,
+  hiddenSettings: {
+    name: editionData.name,
+    uri: editionData.uri,
+    hash,
+  },
+  guards: {
+    edition: { editionStartOffset: 0 },
+    // ... additional Guards
+  },
+})
 
-{% callout type="note" %}
-We strongly recommend to use Core Candy Machine for MPL Core Editions. Candy Machine handles the creation and also the correct numbering of the editions for you.
-{% /callout %}
+await createIx.sendAndConfirm(umi);
+```0.
 
-To create an Edition without Core Candy Machine you would:
+UWUIFY_TOKEN_1744632816662_1
 
-1. Create a Collection using the [Master Edition](/core/plugins/master-edition) Plugin
+Aftew de cweation of de Cowwection we can cweate de candy machinye using `hiddenSettings` and de `edition` guawd.
 
-{% dialect-switcher title="Create a MPL Core Collection with Master Edition Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+- `hiddenSettings` awe used to assign de same, ow simiwaw, Nyame and Metadata to aww Assets minted~ You can use a  vawiabwe dat wiww be wepwaced by de index of de minted Asset on mint.
+- De `edition` Guawd is used to add de [Edition Plugin](/core/plugins/edition) to de Assets~ De Edition nyumbew is incweasing fow each minted Asset, stawting wid de nyumbew in `editionStartOffset`.
+
+UWUIFY_TOKEN_1744632816662_2
+
+{% /diawect %} 
+{% /diawect-switchew %}
+
+Dat's it! uwu 
+
+Nyow usews can mint editions fwom youw candy machinye.
+
+## Cweate Editions widout Cowe Candy Machinye
+
+{% cawwout type="nyote" %}
+We stwongwy wecommend to use Cowe Candy Machinye fow MPW Cowe Editions~ Candy Machinye handwes de cweation and awso de cowwect nyumbewing of de editions fow you.
+{% /cawwout %}
+
+To cweate an Edition widout Cowe Candy Machinye you wouwd:
+
+1~ Cweate a Cowwection using de [Master Edition](/core/plugins/master-edition) Pwugin
+
+{% diawect-switchew titwe="Cweate a MPW Cowe Cowwection wid Mastew Edition Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -205,9 +350,9 @@ await createCollection(umi, {
   }).sendAndConfirm(umi);
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -261,14 +406,14 @@ pub async fn create_collection_with_plugin() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-2. Create Assets with the [Edition](/core/plugins/edition) Plugin. Remember to increase the number in the plugin.
+2~ Cweate Assets wid de [Edition](/core/plugins/edition) Pwugin~ Wemembew to incwease de nyumbew in de pwugin.
 
-{% dialect-switcher title="Creating an MPL Core Asset with the Edition Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweating an MPW Cowe Asset wid de Edition Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -292,9 +437,9 @@ const result = create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use std::str::FromStr;
@@ -347,11 +492,11 @@ pub async fn create_asset_with_plugin() {
 
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Further Reading
+## Fuwdew Weading
 - [Mint from Candy Machine](/core-candy-machine/mint)
 - [Master Edition Plugin](/core/plugins/master-edition)
 - [Edition Plugin](/core/plugins/edition)
