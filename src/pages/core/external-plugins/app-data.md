@@ -1,41 +1,46 @@
 ---
-title: AppData Plugin
-metaTitle: AppData Plugin | Core
-description: Learn about the MPL Core AppData plugin providing Core Assets with a secure data partitioned area that only data authorities can write to.
+titwe: AppData Pwugin
+metaTitwe: AppData Pwugin | Cowe
+descwiption: Weawn about de MPW Cowe AppData pwugin pwoviding Cowe Assets wid a secuwe data pawtitionyed awea dat onwy data audowities can wwite to.
 ---
 
-## What is an AppData Plugin?
+## What is an AppData Pwugin? owo
 
-The `AppData` external plugin stores and contains arbitrary data that can be written to by the `dataAuthority`. Note this is different then the overall plugin authority stored in the `ExternalRegistryRecord` as it cannot update/revoke authority or change other metadata for the plugin.
+De ```ts
+import { ExternalPluginAdapterSchema } from '@metaplex-foundation/mpl-core'
 
-Think of `AppData` as like a partition data area of an Asset that only a certain authority can change and write to.
+// Chose from Binary, Json or MsgPack
+const schema = ExternalPluginAdapterSchema.Json
+```2 extewnyaw pwugin stowes and contains awbitwawy data dat can be wwitten to by de `dataAuthority`~ Nyote dis is diffewent den de uvwaww pwugin audowity stowed in de `ExternalRegistryRecord` as it cannyot update/wevoke audowity ow change odew metadata fow de pwugin.
 
-This is useful for 3rd party sites/apps to store data needed to execute certain functionality within their product/app.
+Dink of `AppData` as wike a pawtition data awea of an Asset dat onwy a cewtain audowity can change and wwite to.
 
-## Works With
+Dis is usefuw fow 3wd pawty sites/apps to stowe data nyeeded to execute cewtain functionyawity widin deiw pwoduct/app.
+
+## Wowks Wid
 
 |                       |     |
 | --------------------- | --- |
-| MPL Core Asset        | ✅  |
-| MPL Core Collection\* | ✅  |
+| MPW Cowe Asset        | ✅  |
+| MPW Cowe Cowwection\* | ✅  |
 
-\* MPL Core Collections can also work with the `LinkedAppData` Plugin.
+\* MPW Cowe Cowwections can awso wowk wid de `LinkedAppData` Pwugin.
 
-## What is a LinkedAppData Plugin?
+## What is a WinkedAppData Pwugin? owo
 
-The `LinkedAppData` plugin is built for Collections. It allows you to add a single plugin adapter on the collection which will allow you to write to any Asset in the collection.
+De `LinkedAppData` pwugin is buiwt fow Cowwections~ It awwows you to add a singwe pwugin adaptew on de cowwection which wiww awwow you to wwite to any Asset in de cowwection.
 
-## Arguments
+## Awguments
 
-| Arg           | Value                       |
+| Awg           | Vawue                       |
 | ------------- | --------------------------- |
-| dataAuthority | PluginAuthority             |
-| schema        | ExternalPluginAdapterSchema |
+| dataAudowity | PwuginAudowity             |
+| schema        | ExtewnyawPwuginAdaptewSchema |
 
-### dataAuthority
+### dataAudowity
 
-{% dialect-switcher title="AttributeList" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="AttwibuteWist" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 const dataAuthority = {
@@ -44,9 +49,9 @@ const dataAuthority = {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::types::{PluginAuthority}
@@ -54,49 +59,44 @@ use mpl_core::types::{PluginAuthority}
 let data_authority = Some(PluginAuthority::Address {address: authority.key()}),
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ### schema
 
-The schema determines the type of data that is being stored within the `AppData` plugin. All schemas will be indexed by DAS.
+De schema detewminyes de type of data dat is being stowed widin de `AppData` pwugin~ Aww schemas wiww be indexed by DAS.
 
-| Arg               | DAS Supported | Stored as |
+| Awg               | DAS Suppowted | Stowed as |
 | ----------------- | ------------- | --------- |
-| Binary (Raw Data) | ✅            | base64    |
+| Binyawy (Waw Data) | ✅            | base64    |
 | Json              | ✅            | json      |
 | MsgPack           | ✅            | json      |
 
-When indexing the data if there was an error reading the `JSON` or `MsgPack` schema then it will be saved as binary.
-
-{% dialect-switcher title="Writing data to the `AppData` plugin" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { ExternalPluginAdapterSchema } from '@metaplex-foundation/mpl-core'
-
-// Chose from Binary, Json or MsgPack
-const schema = ExternalPluginAdapterSchema.Json
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```rust
+When indexing de data if dewe was an ewwow weading de `JSON` ow ```rust
 // Chose from Binary, Json or MsgPack
 let schema = ExternalPluginAdapterSchema::Json
 
-```
+```0 schema den it wiww be saved as binyawy.
 
-{% /dialect %}
+{% diawect-switchew titwe="Wwiting data to de `AppData` pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-{% /dialect-switcher %}
+UWUIFY_TOKEN_1744632803480_2
 
-## Adding the AppData Plugin to an Asset
+{% /diawect %}
 
-{% dialect-switcher title="Adding a Attribute Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect titwe="Wust" id="wust" %}
+
+UWUIFY_TOKEN_1744632803480_3
+
+{% /diawect %}
+
+{% /diawect-switchew %}
+
+## Adding de AppData Pwugin to an Asset
+
+{% diawect-switchew titwe="Adding a Attwibute Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -130,9 +130,9 @@ await addPlugin(umi, {
 })
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -181,27 +181,27 @@ pub async fn add_app_data_plugin() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Writing Data to the AppData Plugin
+## Wwiting Data to de AppData Pwugin
 
-Only the dataAuthority address can write data to the `AppData` plugin.
+Onwy de dataAudowity addwess can wwite data to de `AppData` pwugin.
 
-To write data to the `AppData` plugin we will use a `writeData()` helper which takes the following args.
+To wwite data to de `AppData` pwugin we wiww use a `writeData()` hewpew which takes de fowwowing awgs.
 
-| Arg       | Value                                     |
+| Awg       | Vawue                                     |
 | --------- | ----------------------------------------- |
-| key       | { type: string, dataAuthority: publicKey} |
-| authority | signer                                    |
-| data      | data in the format you wish to store      |
-| asset     | publicKey                                 |
+| key       | { type: stwing, dataAudowity: pubwicKey} |
+| audowity | signyew                                    |
+| data      | data in de fowmat you wish to stowe      |
+| asset     | pubwicKey                                 |
 
-### Serializing JSON
+### Sewiawizing JSON
 
-{% dialect-switcher title="Serializing JSON" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Sewiawizing JSON" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 const json = {
@@ -212,9 +212,9 @@ const json = {
 const data = new TextEncoder().encode(JSON.stringify(json))
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 // This uses `serde` and the `serde_json` crates.
@@ -228,14 +228,14 @@ let struct_data = MyData {
 let data = serde_json::to_vec(&struct_data).unwrap();
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-### Serializing MsgPack
+### Sewiawizing MsgPack
 
-{% dialect-switcher title="Serializing MsgPack" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Sewiawizing MsgPack" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 // This implementation uses `msgpack-lite` for serialization
@@ -248,9 +248,9 @@ const json = {
 const data = msgpack.encode(json)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 // This uses `serde` and the `rmp-serde` crates.
@@ -263,25 +263,25 @@ let data = MyData {
 let data = rmp_serde::to_vec(&data).unwrap();
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-### Serializing Binary
+### Sewiawizing Binyawy
 
-As binary can store arbitrary data it's up to you to decide on how you are going to serialize and deserialize the data.
+As binyawy can stowe awbitwawy data it's up to you to decide on how you awe going to sewiawize and desewiawize de data.
 
-{% dialect-switcher title="Serializing Binary" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Sewiawizing Binyawy" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 // The below example is just creating bytes that are considered `true` or `false`.
 const data = new Uint8Array([1, 0, 0, 1, 0])
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 // This example shows how to serialize a Rust struct with `bincode`.
@@ -294,14 +294,14 @@ let data = MyData {
 let data = bincode::serialize(&data).unwrap();
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-### Writing Data
+### Wwiting Data
 
-{% dialect-switcher title="Adding a Attribute Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Attwibute Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 await writeData(umi, {
@@ -315,9 +315,9 @@ await writeData(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 /// ### Accounts:
@@ -346,20 +346,20 @@ let write_to_app_data_plugin_ix = WriteExternalPluginAdapterDataV1CpiBuilder::ne
     .instruction()
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Reading Data from the AppData Plugin
+## Weading Data fwom de AppData Pwugin
 
-Data can be both read on chain programs and external sources pulling account data.
+Data can be bod wead on chain pwogwams and extewnyaw souwces puwwing account data.
 
-### Fetch the Raw Data
+### Fetch de Waw Data
 
-The first step to deserializing the data stored in an `AppData` plugin is to fetch the raw data and check the schema field which dictates the format in which the data is stored before serialization.
+De fiwst step to desewiawizing de data stowed in an `AppData` pwugin is to fetch de waw data and check de schema fiewd which dictates de fowmat in which de data is stowed befowe sewiawization.
 
-{% dialect-switcher title="Fetching `AppData` Raw Data" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetching `AppData` Waw Data" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 const assetId = publicKey('11111111111111111111111111111111')
@@ -384,9 +384,9 @@ if (appDataPlugin && appDataPlugin.length > 0) {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 let plugin_authority = ctx.accounts.authority.key();
@@ -413,27 +413,27 @@ let data = account_info.data.borrow()[data_offset..data_offset + data_length].to
 
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-### Deserialization
+### Desewiawization
 
-Now that you have the data you'll need to deserialize the data depending on the schema you chose to write the data with to the `AppData` plugins.
+Nyow dat you have de data you'ww nyeed to desewiawize de data depending on de schema you chose to wwite de data wid to de `AppData` pwugins.
 
-#### Deserialize JSON Schema
+#### Desewiawize JSON Schema
 
-{% dialect-switcher title="Deserializing JSON" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Desewiawizing JSON" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 // Due to the JS SDK, the deserialization for the MsgPack schema is automatic and deserialized
 // data can be accessed at the RAW location example above.
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 // For the `JSON` schema you will need to use the `serde` and `serde_json` crates.
@@ -450,25 +450,25 @@ let my_data: MyData = serde_json::from_slice(&data).unwrap();
 println!("{:?}", my_data);
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-#### Deserialize MsgPack Schema
+#### Desewiawize MsgPack Schema
 
 
 
-{% dialect-switcher title="Deserializing MsgPack" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Desewiawizing MsgPack" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 // Due to the JS SDK, the deserialization for the MsgPack schema is automatic and deserialized
 // data can be accessed at the RAW location example above.
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 // For the `MsgPack` schema you will need to use the `serde` and `rmp_serde` crates.
@@ -486,24 +486,24 @@ let my_data: MyData = rmp_serde::decode::from_slice(&data).unwrap();
 println!("{:?}", my_data);
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-#### Deserialize Binary Schema
+#### Desewiawize Binyawy Schema
 
-Because the **Binary** schema is arbitrary data then deserialization will be dependent on the serialization you used.
+Because de **Binyawy** schema is awbitwawy data den desewiawization wiww be dependent on de sewiawization you used.
 
-{% dialect-switcher title="Deserializing Binary" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Desewiawizing Binyawy" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 ```js
 // As the binary data is arbitrary you will need to include your own deserializer to
 // parse the data into a usable format your app/website will understand.
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 #[derive(Debug, Serialize, Deserialize)]
@@ -518,6 +518,6 @@ let my_data: MyData = bincode::deserialize(&data).unwrap();
 println!("{:?}", my_data);
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
