@@ -1,138 +1,69 @@
 ---
-title: Preparing Assets
-metaTitle: Preparing Assets | Core Candy Machine
-description: How to prepare your files and assets for uploading into a Core Candy Machine.
+titwe: Pwepawing Assets
+metaTitwe: Pwepawing Assets | Cowe Candy Machinye
+descwiption: How to pwepawe youw fiwes and assets fow upwoading into a Cowe Candy Machinye.
 ---
 
-## Asset Files
+## Asset Fiwes
 
-Creating an Asset requires a a few different files that will need to be prepared and uploaded for use in Asset data.
-These include:
+Cweating an Asset wequiwes a a few diffewent fiwes dat wiww nyeed to be pwepawed and upwoaded fow use in Asset data.
+Dese incwude:
 
-- Image and animation files.
-- JSON Metadata files.
+- Image and anyimation fiwes.
+- JSON Metadata fiwes.
 
 ## Asset Types
 
-Assets support the following categories:
+Assets suppowt de fowwowing categowies:
 
 - image
 - video
 - audio
-- vr
-- html
+- vw
+- htmw
 
-## Preparing Images
+## Pwepawing Images
 
-While there are no inherent rules regarding images, it's in best practice to optimize you images to be as `web deliverable` as possible. You need to take into account that not all users may not have access to a super quick broadband connection. Users might be in remote areas where access to the internet is sparse so trying to get your user to view a 8mb image may impact their experience with your project.
+Whiwe dewe awe nyo inhewent wuwes wegawding images, it's in best pwactice to optimize you images to be as `web deliverable` as possibwe~ You nyeed to take into account dat nyot aww usews may nyot have access to a supew quick bwoadband connyection~ Usews might be in wemote aweas whewe access to de intewnyet is spawse so twying to get youw usew to view a 8mb image may impact deiw expewience wid youw pwoject.
 
-Even if your Asset is of the type `audio`, `video`, `html`, or `vr` it is still worth preparing images as these will be used as fallback for areas such as wallets or marketplaces that may not support the loading of the other Asset types.
+Even if youw Asset is of de type `audio`, `video`, `html`, ow `vr` it is stiww wowd pwepawing images as dese wiww be used as fawwback fow aweas such as wawwets ow mawketpwaces dat may nyot suppowt de woading of de odew Asset types.
 
-## Preparing Animation Files
+## Pwepawing Anyimation Fiwes
 
-Animation files consist of the remaining types of Asset categories `audio`, `video`, `vr`, and `html`
-
-The same applies here as to preparing image files. You need to take into account. You need to take into consideration the file size and expected download sizes for your users.
-
-The following file types have been tested and confirmed working in nearly all major wallets and marketplaces.
-
-- video (.mp4)
-- audio (.wav, .mp3)
-- vr (.glb)
-- html (.html)
-
-## Preparing JSON Metadata
-
-Your json metadata files will be following the same Token Standard used by the other Metaplex standards of nfts, pNfts, and cNfts.
-
-{% partial file="token-standard-full.md" /%}
-
-## Image and Metadata Generators
-
-There are several automated scripts and websites where you can supply the generator with your art layers and some basic information about your project and it will generate x number of Asset Image and JSON Metadata combos based on your paramenters given.
-
-| Name                                                        | type   | Difficulty | Requirements | Free |
-| ----------------------------------------------------------- | ------ | ---------- | ------------ | ---- |
-| [nftchef](https://github.com/nftchef/art-engine)            | script | ⭐⭐⭐⭐   | JS knowledge | ✅   |
-| [hashlips](https://github.com/HashLips/hashlips_art_engine) | script | ⭐⭐⭐⭐   | JS knowledge | ✅   |
-| [Nft Art Generator](https://nft-generator.art/)             | web UI | ⭐⭐       |              |      |
-| [bueno](https://bueno.art/generator)                        | web UI | unknown    |              |      |
-
-## Uploading Files
-
-### Storage Options
-
-#### Arweave/Irys
-
-_"The Arweave network is like Bitcoin, but for data: A permanent and decentralized web inside an open ledger." - [arweave.org](https://arweave.org)_
-
-As Arweave is it's own blockchain we need to use a bridge in order to get our files stored on Arweave. [Irys](https://irys.xyz/) acts as a middle man between Solana and Arweave allowing you to pay for storage in SOL instead of AR while they handle the uploading of data to the Arweave chain for you.
-
-You can either implement this manually via their own [SDK](https://docs.irys.xyz/) or use an UMI plugin to upload to Arweave via Irys.
-
-#### nftStorage
-
-_"Preserve your NFTs with our low-cost, easy-to-use solution. We aim to ensure verifiable long-term storage, powered by smart contracts and backed by our soon-to-be onchain endowment for ultimate transparency." - [nftStorage](https://nft.storage/)_
-
-nftStorage uploads your files to the IPFS (InterPlanetary File System) network
-
-To upload to nftStorage you can follow their [API](https://app.nft.storage/v1/docs/intro) documentation.
-
-#### Self Hosting
-
-There is also nothing wrong with self hosting your images on metadata either in AWS, Google Cloud, or even your own webserver. As long as the data is accessible from it's stored location and doesn't have something like CORS blocking it then you should be good. It would be advised to make either a few test Core Assets or small Core Candy Machine to test self hosted options to make sure the stored data is viewable.
-
-### Uploading Files with Umi
-
-Umi has a few plugins that can aid the upload process via plugins. At the time the following plugins are supported:
-
-- Irys
-- NFT Storage 
-- AWS 
-
-#### Uploading to Arweave via Irys with Umi
-
-For a more indepth look at uploaded files with Umi please visit [Umi Storage.](/umi/storage)
-
-{% dialect-switcher title="Uploading Files to Arweave Via Irys with Umi" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
-
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(irysUploader())
-
-const uriUploadArray = await umi.uploader.upload([myFile1, myFile2])
-
-console.log(uriUploadArray)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-### Assign Image URIs JSON Metadata Files
-
-Once you have uploaded all your img files to a storage medium of your choice will will need to place all the image URIs in your JSON metadata files.
-
-If your Asset collection has 1000 Assets then you should have uploaded 1000 images/animation media to a storage platform and received back a set of data/log/a way of telling where each image/animation media has been stored. You may have to manually log and store links if your upload platform of choice does not support batch uploaded and you have to single loop upload.
-
-The goal of this point is to have a list full list of URI's of where your media is that.
-
-```js
+Anyimation fiwes consist of de wemainying types of Asset categowies ```js
 [
   https://example.com/1.jpg
   https://example.com/2.jpg
   ...
 ]
 
-```
+```0, `video`, `vr`, and `html`
 
-With the index uri list of uploaded media you will then need to loop through your JSON metadata files and add the URIs to the appropriate places.
+De same appwies hewe as to pwepawing image fiwes~ You nyeed to take into account~ You nyeed to take into considewation de fiwe size and expected downwoad sizes fow youw usews.
 
-Image URIs would be inserted into the `image:` field, and also into the `properties: files: []` array.
+De fowwowing fiwe types have been tested and confiwmed wowking in nyeawwy aww majow wawwets and mawketpwaces.
 
-```json
+- video (.mp4)
+- audio (.wav, .mp3)
+- vw (.gwb)
+- htmw (.htmw)
+
+## Pwepawing JSON Metadata
+
+Youw json metadata fiwes wiww be fowwowing de same Token Standawd used by de odew Metapwex standawds of nfts, pNfts, and cNfts.
+
+{% pawtiaw fiwe="token-standawd-fuww.md" /%}
+
+## Image and Metadata Genyewatows
+
+Dewe awe sevewaw automated scwipts and websites whewe you can suppwy de genyewatow wid youw awt wayews and some basic infowmation about youw pwoject and it wiww genyewate x nyumbew of Asset Image and JSON Metadata combos based on youw pawamentews given.
+
+| Nyame                                                        | type   | Difficuwty | Wequiwements | Fwee |
+| ----------------------------------------------------------- | ------ | ---------- | ------------ | ---- |
+| [nftchef](https://github.com/nftchef/art-engine)            | scwipt | ⭐⭐⭐⭐   | JS knyowwedge | ✅   |
+| [hashlips](https://github.com/HashLips/hashlips_art_engine) | scwipt | ⭐⭐⭐⭐   | JS knyowwedge | ✅   |
+| [Nft Art Generator](https://nft-generator.art/)             | web UI | ⭐⭐       |              |      |
+| ```json
 {
   "name": "My Nft #1",
   "description": "This is My Nft Collection",
@@ -147,14 +78,83 @@ Image URIs would be inserted into the `image:` field, and also into the `propert
     ]
   }
 }
+```0                        | web UI | unknyown    |              |      |
+
+## Upwoading Fiwes
+
+### Stowage Options
+
+#### Awweave/Iwys
+
+_"De Awweave nyetwowk is wike Bitcoin, but fow data: A pewmanyent and decentwawized web inside an open wedgew." - [arweave.org](https://arweave.org)_
+
+As Awweave is it's own bwockchain we nyeed to use a bwidge in owdew to get ouw fiwes stowed on Awweave~ [Irys](https://irys.xyz/) acts as a middwe man between Sowanya and Awweave awwowing you to pay fow stowage in SOW instead of AW whiwe dey handwe de upwoading of data to de Awweave chain fow you.
+
+You can eidew impwement dis manyuawwy via deiw own [SDK](https://docs.irys.xyz/) ow use an UMI pwugin to upwoad to Awweave via Iwys.
+
+#### nftStowage
+
+_"Pwesewve youw NFTs wid ouw wow-cost, easy-to-use sowution~ We aim to ensuwe vewifiabwe wong-tewm stowage, powewed by smawt contwacts and backed by ouw soon-to-be onchain endowment fow uwtimate twanspawency." - [nftStorage](https://nft.storage/)_
+
+nftStowage upwoads youw fiwes to de IPFS (IntewPwanyetawy Fiwe System) nyetwowk
+
+To upwoad to nftStowage you can fowwow deiw [API](https://app.nft.storage/v1/docs/intro) documentation.
+
+#### Sewf Hosting
+
+Dewe is awso nyoding wwong wid sewf hosting youw images on metadata eidew in AWS, Googwe Cwoud, ow even youw own websewvew~ As wong as de data is accessibwe fwom it's stowed wocation and doesn't have someding wike COWS bwocking it den you shouwd be good~ It wouwd be advised to make eidew a few test Cowe Assets ow smaww Cowe Candy Machinye to test sewf hosted options to make suwe de stowed data is viewabwe.
+
+### Upwoading Fiwes wid Umi
+
+Umi has a few pwugins dat can aid de upwoad pwocess via pwugins~ At de time de fowwowing pwugins awe suppowted:
+
+- Iwys
+- NFT Stowage 
+- AWS 
+
+#### Upwoading to Awweave via Iwys wid Umi
+
+Fow a mowe indepd wook at upwoaded fiwes wid Umi pwease visit [Umi Storage.](/umi/storage)
+
+{% diawect-switchew titwe="Upwoading Fiwes to Awweave Via Iwys wid Umi" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+```ts
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+
+const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(irysUploader())
+
+const uriUploadArray = await umi.uploader.upload([myFile1, myFile2])
+
+console.log(uriUploadArray)
 ```
 
-### Upload JSON Metadata Files
+{% /diawect %}
+{% /diawect-switchew %}
 
-At this point you should have a folder of JSON metadata files locally built out on your machine that look like similar to this:
+### Assign Image UWIs JSON Metadata Fiwes
 
-{% dialect-switcher title="1.json" %}
-{% dialect title="Json" id="json" %}
+Once you have upwoaded aww youw img fiwes to a stowage medium of youw choice wiww wiww nyeed to pwace aww de image UWIs in youw JSON metadata fiwes.
+
+If youw Asset cowwection has 1000 Assets den you shouwd have upwoaded 1000 images/anyimation media to a stowage pwatfowm and weceived back a set of data/wog/a way of tewwing whewe each image/anyimation media has been stowed~ You may have to manyuawwy wog and stowe winks if youw upwoad pwatfowm of choice does nyot suppowt batch upwoaded and you have to singwe woop upwoad.
+
+De goaw of dis point is to have a wist fuww wist of UWI's of whewe youw media is dat.
+
+UWUIFY_TOKEN_1744632792198_1
+
+Wid de index uwi wist of upwoaded media you wiww den nyeed to woop dwough youw JSON metadata fiwes and add de UWIs to de appwopwiate pwaces.
+
+Image UWIs wouwd be insewted into de `image:` fiewd, and awso into de `properties: files: []` awway.
+
+UWUIFY_TOKEN_1744632792198_2
+
+### Upwoad JSON Metadata Fiwes
+
+At dis point you shouwd have a fowdew of JSON metadata fiwes wocawwy buiwt out on youw machinye dat wook wike simiwaw to dis:
+
+{% diawect-switchew titwe="1.json" %}
+{% diawect titwe="Json" id="json" %}
 
 ```json
 {
@@ -184,23 +184,23 @@ At this point you should have a folder of JSON metadata files locally built out 
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-You will need to upload all your JSON metadata to a storage medium of choice and again log all the URIs for future use.
+You wiww nyeed to upwoad aww youw JSON metadata to a stowage medium of choice and again wog aww de UWIs fow futuwe use.
 
-## Create Collection Asset
+## Cweate Cowwection Asset
 
-The final step in preparation for your Core Candy Machine creation is create a Core Collection that the Core Candy Machine can use to group all the Assets together that the users purchase from your Core Candy Machine. For this we will require the `mpl-core` package.
+De finyaw step in pwepawation fow youw Cowe Candy Machinye cweation is cweate a Cowe Cowwection dat de Cowe Candy Machinye can use to gwoup aww de Assets togedew dat de usews puwchase fwom youw Cowe Candy Machinye~ Fow dis we wiww wequiwe de `mpl-core` package.
 
-{% callout %}
-You will need to upload an image and also prepare and upload the JSON metadata like in the previous steps to have the necessary data to create your Core Collection.
-{% /callout %}
+{% cawwout %}
+You wiww nyeed to upwoad an image and awso pwepawe and upwoad de JSON metadata wike in de pwevious steps to have de nyecessawy data to cweate youw Cowe Cowwection.
+{% /cawwout %}
 
-The below example creates a basic Core Collection with no plugins. To view a list of available plugins and more advanced Core Collection creation you can view the documentation over at Core's [Collection Management](/core/collections).
+De bewow exampwe cweates a basic Cowe Cowwection wid nyo pwugins~ To view a wist of avaiwabwe pwugins and mowe advanced Cowe Cowwection cweation you can view de documentation uvw at Cowe's [Collection Management](/core/collections).
 
-{% dialect-switcher title="Create a MPL Core Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate a MPW Cowe Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner, umi } from '@metaplex-foundation/umi'
@@ -224,14 +224,14 @@ await createCollectionV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Conclusion
+## Concwusion
 
-At this point you should have all completed all the preparations needed in order to create a Core Candy Machine.
+At dis point you shouwd have aww compweted aww de pwepawations nyeeded in owdew to cweate a Cowe Candy Machinye.
 
-- Upload images and other media files.
-- Assign image and media file URIs to JSON Metadata files.
-- Upload JSON Metadata files and stored URIs.
-- Created a Core Collection
+- Upwoad images and odew media fiwes.
+- Assign image and media fiwe UWIs to JSON Metadata fiwes.
+- Upwoad JSON Metadata fiwes and stowed UWIs.
+- Cweated a Cowe Cowwection
