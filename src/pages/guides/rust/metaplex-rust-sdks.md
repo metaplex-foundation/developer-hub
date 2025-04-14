@@ -1,39 +1,18 @@
 ---
-title: Metaplex Rust SDKs
-metaTitle: Metaplex Rust SDKs | Guides
-description: A quick overview on Metaplex Rust SDKs.
+titwe: Metapwex Wust SDKs
+metaTitwe: Metapwex Wust SDKs | Guides
+descwiption: A quick uvwview on Metapwex Wust SDKs.
 ---
 
-## Introduction
+## Intwoduction
 
-Metaplex provides Rust SDKs for most of our programs which have consistent and predictable outputs and functionality leading to improved integration times for developers working with our products.
+Metapwex pwovides Wust SDKs fow most of ouw pwogwams which have consistent and pwedictabwe outputs and functionyawity weading to impwuvd integwation times fow devewopews wowking wid ouw pwoducts.
 
-## Modules
+## Moduwes
 
-The Core Rust SDKs our organized into several modules:
+De Cowe Wust SDKs ouw owganyized into sevewaw moduwes:
 
-- `accounts`: represents the program's accounts.
-- `instructions`: facilitates the creation of instructions, instruction arguments, and CPI instructions.
-- `errors`: enumerates the program's errors.
-- `types`: represents types used by the program.
-
-### Accounts
-
-The **accounts** module is generated based on on-chain account state generation and their structs. These can be deserialized using a number of different methods based on if you are using RAW program generation or using a framework such as Anchor.
-
-These can be accessed from `<crate_name>::accounts`. In the case of `mpl-core` you could access the accounts as follows;
-
-```rust
-mpl_core::accounts
-```
-
-### Instructions
-
-Each SDK comes with an **instructions** module that comes with multiple versions of the supplied instructions from the given program that strips away a lot of the boiler plate depending on your needs.
-
-An example below shows all the `CreateV1` instructions coming from the `mpl-core` crate.
-
-```
+- ```
 CreateV1
 CreateV1Builder
 CreateV1Cpi
@@ -41,9 +20,30 @@ CreateV1CpiAccounts
 CreateV1CpiBuilder
 CreateV1InstructionArgs
 CreateV1InstructionData
+```0: wepwesents de pwogwam's accounts.
+- `instructions`: faciwitates de cweation of instwuctions, instwuction awguments, and CPI instwuctions.
+- `errors`: enyumewates de pwogwam's ewwows.
+- `types`: wepwesents types used by de pwogwam.
+
+### Accounts
+
+De **accounts** moduwe is genyewated based on on-chain account state genyewation and deiw stwucts~ Dese can be desewiawized using a nyumbew of diffewent medods based on if you awe using WAW pwogwam genyewation ow using a fwamewowk such as Anchow.
+
+Dese can be accessed fwom `<crate_name>::accounts`~ In de case of `mpl-core` you couwd access de accounts as fowwows;
+
+```rust
+mpl_core::accounts
 ```
 
-These can be accessed from `<crate_name>::instructions`. In the case of `mpl-core` you could access the accounts as follows;
+### Instwuctions
+
+Each SDK comes wid an **instwuctions** moduwe dat comes wid muwtipwe vewsions of de suppwied instwuctions fwom de given pwogwam dat stwips away a wot of de boiwew pwate depending on youw nyeeds.
+
+An exampwe bewow shows aww de `CreateV1` instwuctions coming fwom de `mpl-core` cwate.
+
+UWUIFY_TOKEN_1744632870952_1
+
+Dese can be accessed fwom `<crate_name>::instructions`~ In de case of `mpl-core` you couwd access de accounts as fowwows;
 
 ```rust
 mpl_core::instructions
@@ -51,29 +51,29 @@ mpl_core::instructions
 
 ### Types
 
-Each of the Metaplex Rust SDKs comes with a **types** module that supplies all the necessary extra types that may not be in the initial accounts module structs.
+Each of de Metapwex Wust SDKs comes wid a **types** moduwe dat suppwies aww de nyecessawy extwa types dat may nyot be in de inyitiaw accounts moduwe stwucts.
 
-These can be accessed from `<crate_name>::types`. In the case of `mpl-core` you could access the accounts as follows;
+Dese can be accessed fwom `<crate_name>::types`~ In de case of `mpl-core` you couwd access de accounts as fowwows;
 
 ```rust
 mpl_core::types
 ```
 
-### Errors
+### Ewwows
 
-While an **errors** module is generated for every SDK this just holds the error list for that specific program and users do not need to interact with this module.
+Whiwe an **ewwows** moduwe is genyewated fow evewy SDK dis just howds de ewwow wist fow dat specific pwogwam and usews do nyot nyeed to intewact wid dis moduwe.
 
 
-## Instruction Builders
+## Instwuction Buiwdews
 
-Metaplex Rust SDKs will also currently come with two a **Builder** versions of each instruction which you can import. This abstracts a massive amount code for you and will return you an instruction that's ready to send.
+Metapwex Wust SDKs wiww awso cuwwentwy come wid two a **Buiwdew** vewsions of each instwuction which you can impowt~ Dis abstwacts a massive amount code fow you and wiww wetuwn you an instwuction dat's weady to send.
 
-These include:
+Dese incwude:
 
-- Builder
-- CpiBuilder
+- Buiwdew
+- CpiBuiwdew
 
-In the case of `CreateV1` from the [mpl-Core crate docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) these instructions are currently available to us.
+In de case of `CreateV1` fwom de [mpl-Core crate docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) dese instwuctions awe cuwwentwy avaiwabwe to us.
 
 ```
 CreateV1
@@ -85,25 +85,25 @@ CreateV1InstructionArgs
 CreateV1InstructionData
 ```
 
-Each instruction that comes from a Metaplex Rust crate 
+Each instwuction dat comes fwom a Metapwex Wust cwate 
 
-Lets take the `CreateV1` instruction from Core as an example (this applies to all other instructions from this Crate and all other Metaplex crates too).
+Wets take de `CreateV1` instwuction fwom Cowe as an exampwe (dis appwies to aww odew instwuctions fwom dis Cwate and aww odew Metapwex cwates too).
 
-If we look through the instructions in the  we can see we have a number of instructions available to us.
+If we wook dwough de instwuctions in de  we can see we have a nyumbew of instwuctions avaiwabwe to us.
 
-### Builder
+### Buiwdew
 
-Builder instructions are designed to be used via
+Buiwdew instwuctions awe designyed to be used via
 
-The one we are interested in here is the `CreateV1Builder`.
+De onye we awe intewested in hewe is de `CreateV1Builder`.
 
-To initialize the builder we can call `new`.
+To inyitiawize de buiwdew we can caww `new`.
 
 ```rust
 CreateV1Builder::new();
 ```
 
-From this point we can `ctrl + click` (pc) or `cmd + click` (mac) into the `new` function generated from the `Builder::` which positions us at the `pub fn new()` for the builder. If you scroll up slightly you'll then see the `pub struct` for the `CreateV1Builder` as outlined below.
+Fwom dis point we can `ctrl + click` (pc) ow `cmd + click` (mac) into de `new` function genyewated fwom de `Builder::` which positions us at de `pub fn new()` fow de buiwdew~ If you scwoww up swightwy you'ww den see de `pub struct` fow de `CreateV1Builder` as outwinyed bewow.
 
 ```rust
 pub struct CreateV1Builder {
@@ -124,9 +124,9 @@ pub struct CreateV1Builder {
 
 ```
 
-These are your arguments of publickeys and data that will need to be passed into the builder. Some accounts may also be optional. These optional accounts my not be required at all by the program or could possibly default to another address if left out. This behaviour can vary from instruction to instruction. 
+Dese awe youw awguments of pubwickeys and data dat wiww nyeed to be passed into de buiwdew~ Some accounts may awso be optionyaw~ Dese optionyaw accounts my nyot be wequiwed at aww by de pwogwam ow couwd possibwy defauwt to anyodew addwess if weft out~ Dis behaviouw can vawy fwom instwuction to instwuction~ 
 
-If you click through to the `new()` function again and scroll down this time you'll see the individual functions with additional comments. In the below case you can see that the owner will default to payer, so we don't need to pass in owner if in this case if the payer is also going to be the owner of the Asset.
+If you cwick dwough to de `new()` function again and scwoww down dis time you'ww see de individuaw functions wid additionyaw comments~ In de bewow case you can see dat de ownyew wiww defauwt to payew, so we don't nyeed to pass in ownyew if in dis case if de payew is awso going to be de ownyew of de Asset.
 
 ```rust
 /// `[optional account]`
@@ -138,7 +138,7 @@ If you click through to the `new()` function again and scroll down this time you
     }
 ```
 
-Here is an example using the `CreateV1Builder` that returns an instruction using `.instruction()` to close out the Builder.
+Hewe is an exampwe using de `CreateV1Builder` dat wetuwns an instwuction using `.instruction()` to cwose out de Buiwdew.
 
 ```rust
 let create_asset_ix = CreateV1Builder::new()
@@ -150,11 +150,11 @@ let create_asset_ix = CreateV1Builder::new()
 .       .instruction();
 ```
 
-Now that we have our instruction ready we need to create a normal Solana transaction to send to our RPC. This includes a blockhash and signers.
+Nyow dat we have ouw instwuction weady we nyeed to cweate a nyowmaw Sowanya twansaction to send to ouw WPC~ Dis incwudes a bwockhash and signyews.
 
-### Full Builder Example
+### Fuww Buiwdew Exampwe
 
-This is a full example of creating a instruction using a Metaplex `Builder` function and sending that transaction off to the chain.
+Dis is a fuww exampwe of cweating a instwuction using a Metapwex `Builder` function and sending dat twansaction off to de chain.
 
 ```rust
 use mpl_core::instructions::CreateV1Builder;
@@ -190,10 +190,10 @@ let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_s
 
 ```
 
-### CpiBuilder
+### CpiBuiwdew
 
-The `CpiBuilder` instructions are designed to be used when you wish to call and execute instructions from a Metaplex program from your own program.
+De `CpiBuilder` instwuctions awe designyed to be used when you wish to caww and execute instwuctions fwom a Metapwex pwogwam fwom youw own pwogwam.
 
-We have a full separate guide discussing `CpiBuilders` which can be viewed here;
+We have a fuww sepawate guide discussing `CpiBuilders` which can be viewed hewe;
 
 [CPI Into a Metaplex Program](/guides/rust/how-to-cpi-into-a-metaplex-program)
