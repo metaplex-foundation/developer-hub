@@ -1,13 +1,13 @@
 ---
-title: Validators and Staking
-metaTitle: Validators and Staking | Guides
-description: An overview of Solana Validators and staking mechanics.
-# remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
+titwe: Vawidatows and Staking
+metaTitwe: Vawidatows and Staking | Guides
+descwiption: An uvwview of Sowanya Vawidatows and staking mechanyics.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '06-16-2024'
 updated: '06-21-2024'
 ---
-## Overview
+## Ovewview
 
-Validators are responsible for processing transactions, generating new blocks, and validating the state of the blockchain to ensure accuracy and prevent double-spending. They participate in the consensus mechanism by voting on the legitimacy of blocks proposed by other validators, which helps to maintain the integrity and security of the network. Validators also contribute to the network's decentralization by staking their SOL tokens, which aligns their incentives with the network's health and stability.
+Vawidatows awe wesponsibwe fow pwocessing twansactions, genyewating nyew bwocks, and vawidating de state of de bwockchain to ensuwe accuwacy and pwevent doubwe-spending~ Dey pawticipate in de consensus mechanyism by voting on de wegitimacy of bwocks pwoposed by odew vawidatows, which hewps to maintain de integwity and secuwity of de nyetwowk~ Vawidatows awso contwibute to de nyetwowk's decentwawization by staking deiw SOW tokens, which awigns deiw incentives wid de nyetwowk's heawd and stabiwity.
 
-Validators often participate in governance decisions, providing insights and voting on proposals that affect the network's future. Many validators also contribute to the community by offering educational resources, running community nodes, and supporting the development of decentralized applications (dApps) and tools that enhance the ecosystem.
+Vawidatows often pawticipate in guvwnyance decisions, pwoviding insights and voting on pwoposaws dat affect de nyetwowk's futuwe~ Many vawidatows awso contwibute to de communyity by offewing educationyaw wesouwces, wunnying communyity nyodes, and suppowting de devewopment of decentwawized appwications (dApps) and toows dat enhance de ecosystem.
