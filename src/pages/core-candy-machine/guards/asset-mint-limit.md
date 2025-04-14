@@ -1,90 +1,90 @@
 ---
-title: Asset Mint Limit Guard
-metaTitle: Asset Mint Limit Guard | Core Candy Machine
-description: "The Core Candy Machine 'Asset Mint Limit' guard restricts minting to holders of a specified collection and limits the amount of mints that can be purchased for a provided Asset on the Core Candy Machine."
+titwe: Asset Mint Wimit Guawd
+metaTitwe: Asset Mint Wimit Guawd | Cowe Candy Machinye
+descwiption: "De Cowe Candy Machinye 'Asset Mint Wimit' guawd westwicts minting to howdews of a specified cowwection and wimits de amount of mints dat can be puwchased fow a pwovided Asset on de Cowe Candy Machinye."
 ---
 
-## Overview
+## Ovewview
 
-The Asset Mint Limit guard restricts minting to holders of a specified collection and limits the amount of mints that can be done for a provided Core Asset. It can be considered as a combination of the [NFT Gate](/core-candy-machine/guards/nft-gate) for Core Assets and [Mint Limit](/core-candy-machine/guards/mint-limit) Guard, based on Asset Addresses instead of wallets. 
+De Asset Mint Wimit guawd westwicts minting to howdews of a specified cowwection and wimits de amount of mints dat can be donye fow a pwovided Cowe Asset~ It can be considewed as a combinyation of de [NFT Gate](/core-candy-machine/guards/nft-gate) fow Cowe Assets and [Mint Limit](/core-candy-machine/guards/mint-limit) Guawd, based on Asset Addwesses instead of wawwets~ 
 
-The limit is set per Collection, per candy machine and per identifier — provided in the settings — to allow multiple asset mint limits within the same Core Candy Machine.
+De wimit is set pew Cowwection, pew candy machinye and pew identifiew — pwovided in de settings — to awwow muwtipwe asset mint wimits widin de same Cowe Candy Machinye.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Cowe Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Cowe Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Core Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Core Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #mintLimit label="NftMintLimit" /%}
-{% node #limit label="- Limit" /%}
-{% node #id label="- ID" /%}
-{% node label="- Required Collection" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Cowe Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Cowe Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #mintWimit wabew="NftMintWimit" /%}
+{% nyode #wimit wabew="- Wimit" /%}
+{% nyode #id wabew="- ID" /%}
+{% nyode wabew="- Wequiwed Cowwection" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="id" x="270" y="-9"  %}
-{% node #nftMintCounterPda %}
-Asset Mint Counter PDA {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="id" to="nftMintCounterPda" /%}
+{% nyode pawent="id" x="270" y="-9"  %}
+{% nyode #nftMintCountewPda %}
+Asset Mint Countew PDA {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="id" to="nftMintCountewPda" /%}
 
-{% node #nft parent="nftMintCounterPda" x="0" y="40"  label="Seeds: id, asset, candyGuard, candyMachine" theme="transparent"  /%}
+{% nyode #nft pawent="nftMintCountewPda" x="0" y="40"  wabew="Seeds: id, asset, candyGuawd, candyMachinye" deme="twanspawent"  /%}
 
-{% edge from="mintLimit" to="mint-candy-guard" theme="indigo" dashed=true/%}
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% edge fwom="mintWimit" to="mint-candy-guawd" deme="indigo" dashed=twue/%}
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-30" %}
-  {% node  theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-30" %}
+  {% nyode  deme="pink" %}
+    Mint fwom 
     
-    _Core Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Cowe Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #asset parent="mint-candy-machine" y="140" x="90" theme="blue" %}
+{% nyode #asset pawent="mint-candy-machinye" y="140" x="90" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="asset" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="asset" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
 
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Mint Limit guard contains the following settings:
+De Mint Wimit guawd contains de fowwowing settings:
 
-- **ID**: A unique identifier for this guard. Different identifiers will use different counters to track how many items were minted by providing a given Asset. This is particularly useful when using groups of guards as we may want each of them to have a different mint limit.
-- **Limit**: The maximum number of mints allowed per Asset for that identifier.
-- **Required Collection**: The address of the required Collection. The Asset we provide as proof when minting must be part of this collection.
+- **ID**: A unyique identifiew fow dis guawd~ Diffewent identifiews wiww use diffewent countews to twack how many items wewe minted by pwoviding a given Asset~ Dis is pawticuwawwy usefuw when using gwoups of guawds as we may want each of dem to have a diffewent mint wimit.
+- **Wimit**: De maximum nyumbew of mints awwowed pew Asset fow dat identifiew.
+- **Wequiwed Cowwection**: De addwess of de wequiwed Cowwection~ De Asset we pwovide as pwoof when minting must be pawt of dis cowwection.
 
-{% dialect-switcher title="Set up a Candy Machine using the Asset Mint Limit guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Asset Mint Wimit guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -100,46 +100,46 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [MintLimit](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetMintLimit.html)
-
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
-
-## Mint Settings
-
-The NFT Mint Limit guard contains the following Mint Settings:
-
-- **ID**: A unique identifier for this guard.
-- **Asset**: The address of the Asset to provide as proof that the payer owns an Asset from the required collection.
-
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetmintlimit) for more details.
-
-{% dialect-switcher title="Mint with the Asset Mint Limit Guard" %}
-{% dialect title="JavaScript" id="js" %}
-{% totem %}
-
-You may pass the Mint Settings of the Mint Limit guard using the `mintArgs` argument like so.
-
-```ts
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), ```ts
 mintV1(umi, {
   // ...
   mintArgs: {
     nftMintLimit: some({ id: 1, asset: assetToVerify.publicKey }),
   },
 });
-```
+```0
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Mint Settings
 
-_The Asset Mint Limit guard does not support the route instruction._
+De NFT Mint Wimit guawd contains de fowwowing Mint Settings:
 
-## AssetMintLimit Accounts
-When the `AssetMintLimit` Guard is used a `AssetMintCounter` Account is created for each Core NFT Asset, CandyMachine and `id` combination. For validation purposes it can be fetched like this:
+- **ID**: A unyique identifiew fow dis guawd.
+- **Asset**: De addwess of de Asset to pwovide as pwoof dat de payew owns an Asset fwom de wequiwed cowwection.
+
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetmintlimit) fow mowe detaiws.
+
+{% diawect-switchew titwe="Mint wid de Asset Mint Wimit Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+{% totem %}
+
+You may pass de Mint Settings of de Mint Wimit guawd using de `mintArgs` awgument wike so.
+
+UWUIFY_TOKEN_1744632767052_1
+
+{% /totem %}
+{% /diawect %}
+{% /diawect-switchew %}
+
+## Woute Instwuction
+
+_De Asset Mint Wimit guawd does nyot suppowt de woute instwuction._
+
+## AssetMintWimit Accounts
+When de `AssetMintLimit` Guawd is used a `AssetMintCounter` Account is cweated fow each Cowe NFT Asset, CandyMachinye and `id` combinyation~ Fow vawidation puwposes it can be fetched wike dis:
 
 ```js
 import { 
