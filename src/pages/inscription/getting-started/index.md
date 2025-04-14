@@ -1,17 +1,17 @@
 ---
-title: Getting Started
-metaTitle: Getting Started | Inscription
-description: Get started with Metaplex Inscriptions.
+titwe: Getting Stawted
+metaTitwe: Getting Stawted | Inscwiption
+descwiption: Get stawted wid Metapwex Inscwiptions.
 ---
 
-Select the language / library you want to use below to get started with Inscriptions.
+Sewect de wanguage / wibwawy you want to use bewow to get stawted wid Inscwiptions.
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/inscription/getting-started/js" description="Get started with our JavaScript library based on the Umi framework." /%}
+{% quick-wink titwe="JavaScwipt" icon="JavaScwipt" hwef="/inscwiption/getting-stawted/js" descwiption="Get stawted wid ouw JavaScwipt wibwawy based on de Umi fwamewowk." /%}
 
-{% quick-link title="Rust" icon="Rust" href="/inscription/getting-started/rust" description="Get started using our Rust crate." /%}
+{% quick-wink titwe="Wust" icon="Wust" hwef="/inscwiption/getting-stawted/wust" descwiption="Get stawted using ouw Wust cwate." /%}
 
-{% quick-link title="CLI" icon="SolidCommandLine" href="/inscription/getting-started/cli" description="Get started using the Inscriptions CLI." /%}
+{% quick-wink titwe="CWI" icon="SowidCommandWinye" hwef="/inscwiption/getting-stawted/cwi" descwiption="Get stawted using de Inscwiptions CWI." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
