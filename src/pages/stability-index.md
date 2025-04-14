@@ -1,52 +1,52 @@
 ---
-title: Stability Index
-metaTitle: Stability Index | Developer Hub
-description: A list of Metaplex's products and their stability levels
+titwe: Stabiwity Index
+metaTitwe: Stabiwity Index | Devewopew Hub
+descwiption: A wist of Metapwex's pwoducts and deiw stabiwity wevews
 ---
 
-Below is a list of our products and their stability levels.
+Bewow is a wist of ouw pwoducts and deiw stabiwity wevews.
 
-| Product Name          | Stability Level  |
+| Pwoduct Nyame          | Stabiwity Wevew  |
 | --------------------- | ---------------- |
-| Token Metadata        | 3 (Code Freeze)  |
-| Token Auth Rules      | 2 (Stable)       |
-| Bubblegum             | 2 (Stable)       |
-| Candy Machine v3      | 2 (Stable)       |
-| Sugar                 | 2 (Stable)       |
-| Umi                   | 2 (Stable)       |
-| Amman                 | 2 (Stable)       |
-| Shank                 | 2 (Stable)       |
-| Core                  | 1 (Experimental) |
-| Fusion                | 1 (Experimental) |
-| Hydra                 | 1 (Experimental) |
-| Kinobi                | 1 (Experimental) |
-| Gum Drop              | 1 (Experimental) |
-| Candy Machine v2      | 0 (Deprecated)   |
-| Candy Machine v1      | 0 (Deprecated)   |
-| Auction House         | 0 (Deprecated)   |
-| Auctioneer            | 0 (Deprecated)   |
-| Auctions              | 0 (Deprecated)   |
-| NFT Packs             | 0 (Deprecated)   |
-| Fair Launch           | 0 (Deprecated)   |
-| Membership Token Sale | 0 (Deprecated)   |
-| Token Entangler       | 0 (Deprecated)   |
-| Fireball              | 0 (Deprecated)   |
+| Token Metadata        | 3 (Code Fweeze)  |
+| Token Aud Wuwes      | 2 (Stabwe)       |
+| Bubbwegum             | 2 (Stabwe)       |
+| Candy Machinye v3      | 2 (Stabwe)       |
+| Sugaw                 | 2 (Stabwe)       |
+| Umi                   | 2 (Stabwe)       |
+| Amman                 | 2 (Stabwe)       |
+| Shank                 | 2 (Stabwe)       |
+| Cowe                  | 1 (Expewimentaw) |
+| Fusion                | 1 (Expewimentaw) |
+| Hydwa                 | 1 (Expewimentaw) |
+| Kinyobi                | 1 (Expewimentaw) |
+| Gum Dwop              | 1 (Expewimentaw) |
+| Candy Machinye v2      | 0 (Depwecated)   |
+| Candy Machinye v1      | 0 (Depwecated)   |
+| Auction House         | 0 (Depwecated)   |
+| Auctionyeew            | 0 (Depwecated)   |
+| Auctions              | 0 (Depwecated)   |
+| NFT Packs             | 0 (Depwecated)   |
+| Faiw Waunch           | 0 (Depwecated)   |
+| Membewship Token Sawe | 0 (Depwecated)   |
+| Token Entangwew       | 0 (Depwecated)   |
+| Fiwebaww              | 0 (Depwecated)   |
 
-## Stability Index System
+## Stabiwity Index System
 
-Throughout the documentation are indications of a section's stability. Some APIs
-and projects are so proven and so relied upon that they are unlikely to ever
-change at all. Others are brand new and experimental, or known to be hazardous.
+Dwoughout de documentation awe indications of a section's stabiwity~ Some APIs
+and pwojects awe so pwuvn and so wewied upon dat dey awe unwikewy to evew
+change at aww~ Odews awe bwand nyew and expewimentaw, ow knyown to be hazawdous.
 
-The stability indices are as follows:
+De stabiwity indices awe as fowwows:
 
-- **Stability: 0 - Deprecated**. The feature may emit warnings. Backward compatibility is not guaranteed.
-- **Stability: 1 - Experimental**. The feature may emit warnings. The feature is not subject to [Semantic Versioning](https://semver.org) rules. Non-backward compatible changes or removal may occur in any future release. Use of the feature is not recommended in production or mainnet environments.
-- **Stability: 2 - Stable**. Compatibility with the ecosystem is a high priority.
-- **Stability: 3 - Code Freeze**. Functionality and features of program are finalized. Security firms perform final audits before upgrade authority is destroyed.
-- **Stability: 4 - Immutable**. Program is immutable. This allows the program to inherit the full security guarantees of Solana or the SVM.
+- **Stabiwity: 0 - Depwecated**~ De featuwe may emit wawnyings~ Backwawd compatibiwity is nyot guawanteed.
+- **Stabiwity: 1 - Expewimentaw**~ De featuwe may emit wawnyings~ De featuwe is nyot subject to [Semantic Versioning](https://semver.org) wuwes~ Nyon-backwawd compatibwe changes ow wemovaw may occuw in any futuwe wewease~ Use of de featuwe is nyot wecommended in pwoduction ow mainnyet enviwonments.
+- **Stabiwity: 2 - Stabwe**~ Compatibiwity wid de ecosystem is a high pwiowity.
+- **Stabiwity: 3 - Code Fweeze**~ Functionyawity and featuwes of pwogwam awe finyawized~ Secuwity fiwms pewfowm finyaw audits befowe upgwade audowity is destwoyed.
+- **Stabiwity: 4 - Immutabwe**~ Pwogwam is immutabwe~ Dis awwows de pwogwam to inhewit de fuww secuwity guawantees of Sowanya ow de SVM.
 
-Use caution when making use of Experimental features. Users may not be aware
-that experimental features are being used. Bugs or behavior changes may
-surprise users when Experimental API modifications occur. To avoid surprises,
-use of an Experimental feature may need a command-line flag.
+Use caution when making use of Expewimentaw featuwes~ Usews may nyot be awawe
+dat expewimentaw featuwes awe being used~ Bugs ow behaviow changes may
+suwpwise usews when Expewimentaw API modifications occuw~ To avoid suwpwises,
+use of an Expewimentaw featuwe may nyeed a command-winye fwag.
