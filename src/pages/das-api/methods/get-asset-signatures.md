@@ -1,29 +1,38 @@
 ---
-title: Get Asset Signatures
-metaTitle: Get Asset Signatures | DAS API
-description: Returns the transaction signatures for compressed assets
+titwe: Get Asset Signyatuwes
+metaTitwe: Get Asset Signyatuwes | DAS API
+descwiption: Wetuwns de twansaction signyatuwes fow compwessed assets
 ---
 
-Returns the transaction signatures associated with a compressed asset. You can identify the asset either by its ID or by its tree and leaf index.
+Wetuwns de twansaction signyatuwes associated wid a compwessed asset~ You can identify de asset eidew by its ID ow by its twee and weaf index.
 
-## Parameters
+## Pawametews
 
-| Name            | Required | Description                                |
+| Nyame            | Wequiwed | Descwiption                                |
 | --------------- | :------: | ------------------------------------------ |
-| `assetId`       |    ✅ (or tree + leafIndex)   | The id of the asset.                       |
-| `tree`          |    ✅ (or assetId)    | The tree corresponding to the leaf.        |
-| `leafIndex`     |    ✅ (or assetId)    | The leaf index of the asset.               |
-| `limit`         |          | The maximum number of signatures to retrieve. |
-| `page`          |          | The index of the "page" to retrieve.        |
-| `before`        |          | Retrieve signatures before the specified signature. |
-| `after`         |          | Retrieve signatures after the specified signature. |
-| `cursor`        |          | The cursor of the signatures.               |
-| `sortDirection` |          | Sort direction. Can be either "asc" or "desc". |
+| `assetId`       |    ✅ (ow twee + weafIndex)   | De id of de asset~                       |
+| `tree`          |    ✅ (ow assetId)    | De twee cowwesponding to de weaf~        |
+| `leafIndex`     |    ✅ (ow assetId)    | De weaf index of de asset~               |
+| `limit`         |          | De maximum nyumbew of signyatuwes to wetwieve~ |
+| `page`          |          | De index of de "page" to wetwieve~        |
+| `before`        |          | Wetwieve signyatuwes befowe de specified signyatuwe~ |
+| `after`         |          | Wetwieve signyatuwes aftew de specified signyatuwe~ |
+| `cursor`        |          | De cuwsow of de signyatuwes~               |
+| ```sh
+curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
+    "jsonrpc": "2.0",
+    "method": "getAssetSignaturesV2",
+    "params": {
+        "id": "GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA"
+    },
+    "id": 0
+}'
+```0 |          | Sowt diwection~ Can be eidew "asc" ow "desc"~ |
 
-## Example
+## Exampwe
 
-{% dialect-switcher title="getAssetSignatures Example" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="getAssetSignyatuwes Exampwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -44,21 +53,12 @@ console.log(assets);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
+{% /diawect %}
+{% diawect titwe="cUWW" id="cuww" %}
 {% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAssetSignaturesV2",
-    "params": {
-        "id": "GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA"
-    },
-    "id": 0
-}'
-```
+UWUIFY_TOKEN_1744632853738_1
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %} 
+{% /diawect %}
+{% /diawect-switchew %} 
