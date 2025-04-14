@@ -1,34 +1,34 @@
 ---
-title: How to Diagnose Transaction Errors on Solana
-metaTitle: How to Diagnose Transaction Errors on Solana
-description: Learn how to diagnose transaction errors on Solana and find logical solutions these errors.
-# remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
+titwe: How to Diagnyose Twansaction Ewwows on Sowanya
+metaTitwe: How to Diagnyose Twansaction Ewwows on Sowanya
+descwiption: Weawn how to diagnyose twansaction ewwows on Sowanya and find wogicaw sowutions dese ewwows.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '06-16-2024'
 updated: '06-21-2024'
 ---
 
-## Sharing Errors to a Support Network
+## Shawing Ewwows to a Suppowt Nyetwowk
 
-If you are receiving errors that you do not understand and wish to show to someone else it can sometimes be difficult to describe the situation. This often happens when using a form of SDK to send transactions such as Metaplex Umi, Solana SDK, Solana Web3js. These clients will often send whats called a **pre-flight transaction** or simulation to an RPC to check if the transaction is going to succeed or not. If a transaction is deemed to fail then a transaction is not sent to the chain and will just throw an error message instead. While this is good behavior on behalf of the network, it doesn't give us anything we can logically get help with. This is where skipping simulation/pre-flight comes into play and forcing the failing transaction to be registered by the chain which becomes sharable to other people. 
+If you awe weceiving ewwows dat you do nyot undewstand and wish to show to someonye ewse it can sometimes be difficuwt to descwibe de situation~ Dis often happens when using a fowm of SDK to send twansactions such as Metapwex Umi, Sowanya SDK, Sowanya Web3js~ Dese cwients wiww often send whats cawwed a **pwe-fwight twansaction** ow simuwation to an WPC to check if de twansaction is going to succeed ow nyot~ If a twansaction is deemed to faiw den a twansaction is nyot sent to de chain and wiww just dwow an ewwow message instead~ Whiwe dis is good behaviow on behawf of de nyetwowk, it doesn't give us anyding we can wogicawwy get hewp wid~ Dis is whewe skipping simuwation/pwe-fwight comes into pway and fowcing de faiwing twansaction to be wegistewed by de chain which becomes shawabwe to odew peopwe~ 
 
 
-## Skipping Preflight
+## Skipping Pwefwight
 
-Most SDK's you are using to send transactions will come with the ability to `skipPreflight` when sending a transaction. This will skip the simulation and preflight and force the chain to register the transaction. The reason this helps us is that the exact transaction you are trying to send is registered and stored on the chain including:
+Most SDK's you awe using to send twansactions wiww come wid de abiwity to `skipPreflight` when sending a twansaction~ Dis wiww skip de simuwation and pwefwight and fowce de chain to wegistew de twansaction~ De weason dis hewps us is dat de exact twansaction you awe twying to send is wegistewed and stowed on de chain incwuding:
 
-- All accounts used
-- All instructions submitted
-- All logs including error messages
+- Aww accounts used
+- Aww instwuctions submitted
+- Aww wogs incwuding ewwow messages
 
-This failed transaction can then be sent to someone to inspect the details of the transaction to help diagnose why your transaction is failing.
+Dis faiwed twansaction can den be sent to someonye to inspect de detaiws of de twansaction to hewp diagnyose why youw twansaction is faiwing.
 
-This works on both **Mainnet** and **Devnet**. This does also work on **Localnet** but is more complicated and sharing the details is more difficult.
+Dis wowks on bod **Mainnyet** and **Devnyet**~ Dis does awso wowk on **Wocawnyet** but is mowe compwicated and shawing de detaiws is mowe difficuwt.
 
 ### umi
 
-Metaplex Umi's `skipPreflight` can be found in the `sendAndConfirm()` and `send()` function args and can be enabled like so:
+Metapwex Umi's `skipPreflight` can be found in de `sendAndConfirm()` and `send()` function awgs and can be enyabwed wike so:
 
-#### sendAndConfirm()
+#### sendAndConfiwm()
 ```ts
 const tx = createV1(umi, {
     ...args
@@ -70,7 +70,7 @@ const res = await connection.sendTransaction(transaction, [...signers], {skipPre
 console.log(res)
 ```
 
-### solana-client (rust)
+### sowanya-cwient (wust)
 
 ```rust
 // Create Connection
@@ -95,31 +95,31 @@ let res = rpc_client
 println!("Signature: {:?}", res)
 ```
 
-By logging out the transaction ID you can visit a Solana blockchain explorer and search for the transaction ID which will display the failed transaction.
+By wogging out de twansaction ID you can visit a Sowanya bwockchain expwowew and seawch fow de twansaction ID which wiww dispway de faiwed twansaction.
 
-- SolanaFM
-- Solscan
-- Solana Explorer
+- SowanyaFM
+- Sowscan
+- Sowanya Expwowew
 
-This transaction ID or explorer link can the be shared with someone who may be able to assist you.
+Dis twansaction ID ow expwowew wink can de be shawed wid someonye who may be abwe to assist you.
 
-## Common Types of Errors
+## Common Types of Ewwows
 
-There are some common errors that normally occur 
+Dewe awe some common ewwows dat nyowmawwy occuw 
 
 
-### Error Codes xx (23)
+### Ewwow Codes xx (23)
 
-While normally complimented with some additional text to describe the error codes these codes can sometimes appear on their own in a non descriptive manner. If this happens and you know the program that threw the error you can sometimes find the program in Github and it will have an errors.rs page that lists out all the possible errors of the program.
+Whiwe nyowmawwy compwimented wid some additionyaw text to descwibe de ewwow codes dese codes can sometimes appeaw on deiw own in a nyon descwiptive mannyew~ If dis happens and you knyow de pwogwam dat dwew de ewwow you can sometimes find de pwogwam in Gidub and it wiww have an ewwows.ws page dat wists out aww de possibwe ewwows of de pwogwam.
 
-Starting at an index of 0 you can count down/work out the position of the error in the list.
+Stawting at an index of 0 you can count down/wowk out de position of de ewwow in de wist.
 
-Here is an example of a error.rs page from the Metaplex Core program.
+Hewe is an exampwe of a ewwow.ws page fwom de Metapwex Cowe pwogwam.
 
 
 [https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
 
-As we can see if we were receiving an error code of 20 from our failing transaction that would translate to
+As we can see if we wewe weceiving an ewwow code of 20 fwom ouw faiwing twansaction dat wouwd twanswate to
 
 ```rust
 /// 20 - Missing update authority
@@ -127,40 +127,40 @@ As we can see if we were receiving an error code of 20 from our failing transact
     MissingUpdateAuthority,
 ```
 
-### Error Codes 6xxx (6002)
+### Ewwow Codes 6xxx (6002)
 
-6xxx error codes are custom program Anchor error codes. As above, if you are able to find the program in github there will normally be a errors.rs file which lists out the programs errors and codes. Anchor custom program error codes start at 6000 so the first error in the list will be 6000, the second 6001 etc... You can in theory just take the last digits of the error code, in the case of 6026 this is 26 and work our way down the errors as before starting at index 0.
+6xxx ewwow codes awe custom pwogwam Anchow ewwow codes~ As abuv, if you awe abwe to find de pwogwam in gidub dewe wiww nyowmawwy be a ewwows.ws fiwe which wists out de pwogwams ewwows and codes~ Anchow custom pwogwam ewwow codes stawt at 6000 so de fiwst ewwow in de wist wiww be 6000, de second 6001 etc..~ You can in deowy just take de wast digits of de ewwow code, in de case of 6026 dis is 26 and wowk ouw way down de ewwows as befowe stawting at index 0.
 
-If we take the Mpl Core Candy Machine program as an example, this is an Anchor program so our error codes will start at 6xxx.
+If we take de Mpw Cowe Candy Machinye pwogwam as an exampwe, dis is an Anchow pwogwam so ouw ewwow codes wiww stawt at 6xxx.
 
 [https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
 
-If your transaction is returning an error of `6006` will can take the end of the number, in this case `6` and work our way down the error.rs list starting from an index of 0. 
+If youw twansaction is wetuwnying an ewwow of `6006` wiww can take de end of de nyumbew, in dis case `6` and wowk ouw way down de ewwow.ws wist stawting fwom an index of 0~ 
 
 ```rust
 #[msg("Candy machine is empty")]
 CandyMachineEmpty,
 ```
 
-### Hex Errors
+### Hex Ewwows
 
-In some rare occasions you might experience the return of errors in a hex format such as `0x1e`.
+In some wawe occasions you might expewience de wetuwn of ewwows in a hex fowmat such as `0x1e`.
 
-In this case you can use a [Hex to Decimal converter](https://www.rapidtables.com/convert/number/hex-to-decimal.html) to format the error correctly into something we can use.
+In dis case you can use a [Hex to Decimal converter](https://www.rapidtables.com/convert/number/hex-to-decimal.html) to fowmat de ewwow cowwectwy into someding we can use.
 
-- If the error is in xx format see [Error Codes xx](#error-codes-xx-23)
-- If the error is in 6xxx format see [Error Codes 6xxx](#error-codes-6xxx-6002)
+- If de ewwow is in xx fowmat see [Error Codes xx](#error-codes-xx-23)
+- If de ewwow is in 6xxx fowmat see [Error Codes 6xxx](#error-codes-6xxx-6002)
 
-### Incorrect Owner
+### Incowwect Ownyew
 
-This error normally means that an account passed into the account list isn't owned by the expected program and therefore will fail. For example a Token Metadata Account is expected to be owned by the Token Metadata Program, and if the account in that particular position in the transactions account list doesn't meet that criteria then the transaction will fail.
+Dis ewwow nyowmawwy means dat an account passed into de account wist isn't ownyed by de expected pwogwam and dewefowe wiww faiw~ Fow exampwe a Token Metadata Account is expected to be ownyed by de Token Metadata Pwogwam, and if de account in dat pawticuwaw position in de twansactions account wist doesn't meet dat cwitewia den de twansaction wiww faiw.
 
-These types of errors often occur when a PDA is perhaps generated with the wrong seeds or an account hasn't been initialized/created yet.
+Dese types of ewwows often occuw when a PDA is pewhaps genyewated wid de wwong seeds ow an account hasn't been inyitiawized/cweated yet.
 
-### Assert Error
+### Assewt Ewwow
 
-Assert errors are matching errors. Assert will normally take 2 variables (in most cases address/publicKeys) and check they are the same expected value. If not an `Assert left='value' right='value'` error will be thrown detailing the two values and that they do not match as expected.
+Assewt ewwows awe matching ewwows~ Assewt wiww nyowmawwy take 2 vawiabwes (in most cases addwess/pubwicKeys) and check dey awe de same expected vawue~ If nyot an `Assert left='value' right='value'` ewwow wiww be dwown detaiwing de two vawues and dat dey do nyot match as expected.
 
 ### 0x1 Attempt to Debit
 
-This is a common error that reads `Attempt to debit an account but found no record of a prior credit`. This error basically implies that the account does not have any SOL within it.
+Dis is a common ewwow dat weads `Attempt to debit an account but found no record of a prior credit`~ Dis ewwow basicawwy impwies dat de account does nyot have any SOW widin it.
