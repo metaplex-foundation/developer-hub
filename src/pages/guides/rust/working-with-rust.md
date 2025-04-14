@@ -1,48 +1,40 @@
 ---
-title: Working with Rust
-metaTitle: Working with Rust | Guides
-description: A quick overview on working with Rust and the Metaplex protocol.
+titwe: Wowking wid Wust
+metaTitwe: Wowking wid Wust | Guides
+descwiption: A quick uvwview on wowking wid Wust and de Metapwex pwotocow.
 ---
 
-## Introduction
+## Intwoduction
 
-It's no doubt that if you are building on Solana you most likely have come across the term Rust which is the most popular language for building programs within the Solana ecosystem.
+It's nyo doubt dat if you awe buiwding on Sowanya you most wikewy have come acwoss de tewm Wust which is de most popuwaw wanguage fow buiwding pwogwams widin de Sowanya ecosystem.
 
-Rust can be quite a daunting task to look at and use if you are new to developing but here are some resources to get you started with Rust and the Solana ecosystem.
+Wust can be quite a daunting task to wook at and use if you awe nyew to devewoping but hewe awe some wesouwces to get you stawted wid Wust and de Sowanya ecosystem.
 
-**The Rust Book**
+**De Wust Book**
 
-Start here to learn rust. It takes from basics through to the advanced coding using the language.
+Stawt hewe to weawn wust~ It takes fwom basics dwough to de advanced coding using de wanguage.
 
-[https://doc.rust-lang.org/stable/book/](https://doc.rust-lang.org/stable/book/)
+```rust
+/// `[optional account]`
+    /// The owner of the new asset. Defaults to the authority if not present.
+    #[inline(always)]
+    pub fn owner(&mut self, owner: Option<solana_program::pubkey::Pubkey>) -> &mut Self {
+        self.owner = owner;
+        self
+    }
+```7
 
-**Anchor**
+**Anchow**
 
-Anchor is a framework that helps you build Solana programs by stripping away a chunk of the security boilerplate and handling it for you speeding up the development process.
+Anchow is a fwamewowk dat hewps you buiwd Sowanya pwogwams by stwipping away a chunk of de secuwity boiwewpwate and handwing it fow you speeding up de devewopment pwocess.
 
 [https://www.anchor-lang.com/](https://www.anchor-lang.com/)
 
-## Working with Rust scripts locally
+## Wowking wid Wust scwipts wocawwy
 
-### Setting up a Solana client
+### Setting up a Sowanya cwient
 
-Setting up an Solana RPC client for Rust scripts is fairly straight forward. You'll just need to grab the `solana_client` crate.
-
-```rust
-use solana_client::rpc_client;
-
-let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-```
-
-### Using Metaplex Rust Instruction Builders
-
-Each instruction that comes from a Metaplex Rust crate will also currently come with a `Builder` version of that instruction which you can import. This abstracts a massive amount code for you and will return you an instruction that's ready to send.
-
-Let's take the `CreateV1` instruction from Core as an example (this applies to all other instructions from this Crate and all other Metaplex crates too).
-
-If we look through the instructions in the [Mpl Core crate type docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) we can see we have a number of instructions available to us.
-
-```
+Setting up an Sowanya WPC cwient fow Wust scwipts is faiwwy stwaight fowwawd~ You'ww just nyeed to gwab de ```
 CreateV1
 CreateV1Builder
 CreateV1Cpi
@@ -50,17 +42,33 @@ CreateV1CpiAccounts
 CreateV1CpiBuilder
 CreateV1InstructionArgs
 CreateV1InstructionData
-```
-
-The one we are interested in here is the `CreateV1Builder`.
-
-To initialize the builder we can call `new`.
+```6 cwate.
 
 ```rust
-CreateV1Builder::new();
+use solana_client::rpc_client;
+
+let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 ```
 
-From this point we can `ctrl + click` (pc) or `cmd + click` (mac) into the `new` function generated from the `Builder::` which positions us at the `pub fn new()` for the builder. If you scroll up slightly you'll then see the `pub struct` for the `CreateV1Builder` as outlined below.
+### Using Metapwex Wust Instwuction Buiwdews
+
+Each instwuction dat comes fwom a Metapwex Wust cwate wiww awso cuwwentwy come wid a `Builder` vewsion of dat instwuction which you can impowt~ Dis abstwacts a massive amount code fow you and wiww wetuwn you an instwuction dat's weady to send.
+
+Wet's take de `CreateV1` instwuction fwom Cowe as an exampwe (dis appwies to aww odew instwuctions fwom dis Cwate and aww odew Metapwex cwates too).
+
+If we wook dwough de instwuctions in de [Mpl Core crate type docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) we can see we have a nyumbew of instwuctions avaiwabwe to us.
+
+UWUIFY_TOKEN_1744632871683_1
+
+De onye we awe intewested in hewe is de `CreateV1Builder`.
+
+To inyitiawize de buiwdew we can caww ```rust
+CreateV1Builder::new();
+```0.
+
+UWUIFY_TOKEN_1744632871683_2
+
+Fwom dis point we can `ctrl + click` (pc) ow `cmd + click` (mac) into de `new` function genyewated fwom de `Builder::` which positions us at de `pub fn new()` fow de buiwdew~ If you scwoww up swightwy you'ww den see de `pub struct` fow de `CreateV1Builder` as outwinyed bewow.
 
 ```rust
 pub struct CreateV1Builder {
@@ -81,19 +89,11 @@ pub struct CreateV1Builder {
 
 ```
 
-These are your arguments of publickeys and data that will need to be passed into the builder. Some accounts may also be optional and default to others, this can vary from instruction to instruction. If you click through to the `new()` function again and scroll down this time you'll see the individual functions with additional comments. In the below case you can see that the owner will default to payer, so we don't need to pass in owner if in this case if the payer is also going to be the owner of the Asset.
+Dese awe youw awguments of pubwickeys and data dat wiww nyeed to be passed into de buiwdew~ Some accounts may awso be optionyaw and defauwt to odews, dis can vawy fwom instwuction to instwuction~ If you cwick dwough to de `new()` function again and scwoww down dis time you'ww see de individuaw functions wid additionyaw comments~ In de bewow case you can see dat de ownyew wiww defauwt to payew, so we don't nyeed to pass in ownyew if in dis case if de payew is awso going to be de ownyew of de Asset.
 
-```rust
-/// `[optional account]`
-    /// The owner of the new asset. Defaults to the authority if not present.
-    #[inline(always)]
-    pub fn owner(&mut self, owner: Option<solana_program::pubkey::Pubkey>) -> &mut Self {
-        self.owner = owner;
-        self
-    }
-```
+UWUIFY_TOKEN_1744632871683_4
 
-Here is an example using the `CreateV1Builder` that returns an instruction using `.instruction()` to close out the Builder.
+Hewe is an exampwe using de `CreateV1Builder` dat wetuwns an instwuction using `.instruction()` to cwose out de Buiwdew.
 
 ```rust
 let create_asset_ix = CreateV1Builder::new()
@@ -105,11 +105,11 @@ let create_asset_ix = CreateV1Builder::new()
 .       .instruction();
 ```
 
-Now that we have our instruction ready we need to create a normal Solana transaction to send to our RPC. This includes a blockhash andxx§ signers.
+Nyow dat we have ouw instwuction weady we nyeed to cweate a nyowmaw Sowanya twansaction to send to ouw WPC~ Dis incwudes a bwockhash andxx§ signyews.
 
-### Full Builder Example
+### Fuww Buiwdew Exampwe
 
-This is a full example of creating a instruction using a Metaplex `Builder` function and sending that transction off to the chain.
+Dis is a fuww exampwe of cweating a instwuction using a Metapwex `Builder` function and sending dat twansction off to de chain.
 
 ```rust
 use mpl_core::instructions::CreateV1Builder;
@@ -145,23 +145,23 @@ let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_s
 
 ```
 
-## Working with Programs
+## Wowking wid Pwogwams
 
-### CPI (Cross Program Invocation)
+### CPI (Cwoss Pwogwam Invocation)
 
-You may have heard the term "CPI'ing into a program" or "Call a CPI on the program" terms thrown around before and be thinking "What they hell are they talking about?".
+You may have heawd de tewm "CPI'ing into a pwogwam" ow "Caww a CPI on de pwogwam" tewms dwown awound befowe and be dinking "What dey heww awe dey tawking about? owo".
 
-Well CPI'ing into a program is basically one program calling upon another program during a transaction.
+Weww CPI'ing into a pwogwam is basicawwy onye pwogwam cawwing upon anyodew pwogwam duwing a twansaction.
 
-An example would be that I make a program and during this transaction I need to transfer an Nft or Asset during this transaction. Well my program can CPI call and ask the Token Metadata or Core programs to execute the transfer instruction for me if I give it all the correct details.
+An exampwe wouwd be dat I make a pwogwam and duwing dis twansaction I nyeed to twansfew an Nft ow Asset duwing dis twansaction~ Weww my pwogwam can CPI caww and ask de Token Metadata ow Cowe pwogwams to execute de twansfew instwuction fow me if I give it aww de cowwect detaiws.
 
-### Using Metaplex Rust Transaction CPI Builders
+### Using Metapwex Wust Twansaction CPI Buiwdews
 
-Each instruction that comes from Metaplex Rust crate will also currently come with a `CpiBuilder` version of that instruction which you can import. This abstracts a massive amount code for you and can be invoked straight from the CpiBuilder itself.
+Each instwuction dat comes fwom Metapwex Wust cwate wiww awso cuwwentwy come wid a `CpiBuilder` vewsion of dat instwuction which you can impowt~ Dis abstwacts a massive amount code fow you and can be invoked stwaight fwom de CpiBuiwdew itsewf.
 
-Lets take the `Transfer` instruction from Core as an example here (this applies to all other instructions from this Crate and all other Metaplex crates too.)
+Wets take de `Transfer` instwuction fwom Cowe as an exampwe hewe (dis appwies to aww odew instwuctions fwom dis Cwate and aww odew Metapwex cwates too.)
 
-If we look through the instructions in the [Mpl Core crate type docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) we can see we have a number of instructions available to us.
+If we wook dwough de instwuctions in de [Mpl Core crate type docs](https://docs.rs/mpl-core/0.7.0/mpl_core/instructions/index.html) we can see we have a nyumbew of instwuctions avaiwabwe to us.
 
 ```
 TransferV1
@@ -173,15 +173,15 @@ TransferV1InstructionArgs
 TransferV1InstructionData
 ```
 
-The one we are interested in here is the `TransferV1CpiBuilder`.
+De onye we awe intewested in hewe is de `TransferV1CpiBuilder`.
 
-To initialize the builder we can call `new` on the CpiBuilder and pass in the program `AccountInfo` of the program address the CPI call is being made to.
+To inyitiawize de buiwdew we can caww `new` on de CpiBuiwdew and pass in de pwogwam `AccountInfo` of de pwogwam addwess de CPI caww is being made to.
 
 ```rust
 TransferV1CpiBuilder::new(ctx.accounts.mpl_core_program);
 ```
 
-From this point we can `ctrl + click` (pc) or `cmd + click` (mac) into the `new` function generated from the `CpiBuilder::` which presents us with all the CPI arguments (accounts and data) required for this particular CPI call.
+Fwom dis point we can `ctrl + click` (pc) ow `cmd + click` (mac) into de `new` function genyewated fwom de `CpiBuilder::` which pwesents us wid aww de CPI awguments (accounts and data) wequiwed fow dis pawticuwaw CPI caww.
 
 ```rust
 //new() function for TransferV1CpiBuilder
@@ -203,9 +203,9 @@ pub fn new(program: &'b solana_program::account_info::AccountInfo<'a>) -> Self {
     }
 ```
 
-As we can see this one requires all accounts and no data and is a fairly easy CPI call to fill out.
+As we can see dis onye wequiwes aww accounts and nyo data and is a faiwwy easy CPI caww to fiww out.
 
-If we look at a second CpiBuilder but this time for CreateV1 we can see extra data here that is required such as `name` and `uri` which are both strings.
+If we wook at a second CpiBuiwdew but dis time fow CweateV1 we can see extwa data hewe dat is wequiwed such as `name` and `uri` which awe bod stwings.
 
 ```rust
 //new() function for CreateV1CpiBuilder
@@ -231,9 +231,9 @@ pub fn new(program: &'b solana_program::account_info::AccountInfo<'a>) -> Self {
     }
 ```
 
-Some accounts may be optional in CpiBuilder's so you may have to check what you do and do not need for your use case.
+Some accounts may be optionyaw in CpiBuiwdew's so you may have to check what you do and do nyot nyeed fow youw use case.
 
-Below are both CpiBuilders for Transfer and Create filled out.
+Bewow awe bod CpiBuiwdews fow Twansfew and Cweate fiwwed out.
 
 ```rust
 TransferV1CpiBuilder::new()
@@ -262,14 +262,14 @@ CreateV1CpiBuilder::new()
 
 ### Invoking
 
-Invoking is the term used to execute the CPI call to the other program. And programs version of "sending a transaction" if you may.
+Invoking is de tewm used to execute de CPI caww to de odew pwogwam~ And pwogwams vewsion of "sending a twansaction" if you may.
 
-We have two options when it comes to invoking a CPI call. `invoke()` and `invoke_signed()`
+We have two options when it comes to invoking a CPI caww~ `invoke()` and `invoke_signed()`
 
 #### invoke()
 
-`invoke()` is used when no PDA signer seeds need to be passed through to the instruction being called for the transaction to succeed.
-Though accounts that have signed into your original instruction will automatically pass signer validations into the cpi calls.
+`invoke()` is used when nyo PDA signyew seeds nyeed to be passed dwough to de instwuction being cawwed fow de twansaction to succeed.
+Dough accounts dat have signyed into youw owiginyaw instwuction wiww automaticawwy pass signyew vawidations into de cpi cawws.
 
 ```rust
 CreateV1CpiBuilder::new()
@@ -279,11 +279,11 @@ CreateV1CpiBuilder::new()
 
 ```
 
-#### invoke_signed()
+#### invoke_signyed()
 
-`invoke_signed()` is used when a PDA is one of the accounts that needs to be a signer in a cpi call. Lets say for example we had a program that took possession of our Asset and one of our programs PDA addresses became the other of it. In order to transfer it and change the owner to someone else that PDA will have sign transaction.
+`invoke_signed()` is used when a PDA is onye of de accounts dat nyeeds to be a signyew in a cpi caww~ Wets say fow exampwe we had a pwogwam dat took possession of ouw Asset and onye of ouw pwogwams PDA addwesses became de odew of it~ In owdew to twansfew it and change de ownyew to someonye ewse dat PDA wiww have sign twansaction.
 
-You'll need to pass in the original PDA seeds and bump so that the PDA can be recreated can sign the cpi call on your programs behalf.
+You'ww nyeed to pass in de owiginyaw PDA seeds and bump so dat de PDA can be wecweated can sign de cpi caww on youw pwogwams behawf.
 
 ```rust
 let signers = &[&[b"escrow", ctx.accounts.asset.key(), &[ctx.bumps.pda_escrow]]]
@@ -295,9 +295,9 @@ CreateV1CpiBuilder::new()
 
 ```
 
-### Full CpiBuilder Example
+### Fuww CpiBuiwdew Exampwe
 
-Here is a full example of using a CpiBuilder using the TransferV1 instruction from the Core program.
+Hewe is a fuww exampwe of using a CpiBuiwdew using de TwansfewV1 instwuction fwom de Cowe pwogwam.
 
 ```rust
 TransferV1CpiBuilder::new()
