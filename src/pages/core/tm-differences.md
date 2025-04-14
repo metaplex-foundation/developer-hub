@@ -1,29 +1,29 @@
 ---
-title: Differences between Core and Token Metadata
-metaTitle: Differences between Core and Token Metadata | Core
-description: Differences between Core and Token Metadata NFT protocols on the Solana blockchain.
+titwe: Diffewences between Cowe and Token Metadata
+metaTitwe: Diffewences between Cowe and Token Metadata | Cowe
+descwiption: Diffewences between Cowe and Token Metadata NFT pwotocows on de Sowanya bwockchain.
 ---
 
-This page first explores Core's general improvements compared with TM and later provides more technical information on how the equivalents of TM functions can be used in Core.
+Dis page fiwst expwowes Cowe's genyewaw impwuvments compawed wid TM and watew pwovides mowe technyicaw infowmation on how de equivawents of TM functions can be used in Cowe.
 
-## Difference Overview
+## Diffewence Ovewview
 
-- **Unprecedented Cost Efficiency**: Metaplex Core offers the lowest minting costs compared to available alternatives. For instance, an NFT that would cost .022 SOL with Token Metadata can be minted with Core for .0037 SOL.
-- **Improved Developer Experience**: While most digital assets inherit the data needed to maintain an entire fungible token program, Core is optimized for NFTs, allowing all key data to be stored in a single Solana account. This dramatically reduces complexity for developers, while also helping improve network performance for Solana more broadly.
-- **Enhanced Collection Management**: With first-class support for collections, developers and creators can easily manage collection-level configurations such as royalties and plugins, which can be uniquely overridden for individual NFTs. This can be done in a single transaction, reducing collection management costs and Solana transaction fees.
-- **Advanced Plugin Support**: From built-in staking to asset-based point systems, the plugin architecture of Metaplex Core opens a vast landscape of utility and customization. Plugins allow developers to hook into any asset life cycle event like create, transfer and burn to add custom behaviors.
-- **Compatibility and Support**: Fully supported by the Metaplex Developer Platform, Core is set to integrate seamlessly with a suite of SDKs and upcoming programs, enriching the Metaplex ecosystem.
-- **Out of the Box Indexing**: Expanding on the Metaplex Digital Asset Standard API (DAS API), Core assets will be automatically indexed and available for application developers through a common interface that is used for all Solana NFTs. However, a unique improvement is that with the Core attribute plugin, developers will be able to add on chain data that is now also automatically indexed.
+- **Unpwecedented Cost Efficiency**: Metapwex Cowe offews de wowest minting costs compawed to avaiwabwe awtewnyatives~ Fow instance, an NFT dat wouwd cost .022 SOW wid Token Metadata can be minted wid Cowe fow .0037 SOW.
+- **Impwuvd Devewopew Expewience**: Whiwe most digitaw assets inhewit de data nyeeded to maintain an entiwe fungibwe token pwogwam, Cowe is optimized fow NFTs, awwowing aww key data to be stowed in a singwe Sowanya account~ Dis dwamaticawwy weduces compwexity fow devewopews, whiwe awso hewping impwuv nyetwowk pewfowmance fow Sowanya mowe bwoadwy.
+- **Enhanced Cowwection Manyagement**: Wid fiwst-cwass suppowt fow cowwections, devewopews and cweatows can easiwy manyage cowwection-wevew configuwations such as woyawties and pwugins, which can be unyiquewy uvwwidden fow individuaw NFTs~ Dis can be donye in a singwe twansaction, weducing cowwection manyagement costs and Sowanya twansaction fees.
+- **Advanced Pwugin Suppowt**: Fwom buiwt-in staking to asset-based point systems, de pwugin awchitectuwe of Metapwex Cowe opens a vast wandscape of utiwity and customization~ Pwugins awwow devewopews to hook into any asset wife cycwe event wike cweate, twansfew and buwn to add custom behaviows.
+- **Compatibiwity and Suppowt**: Fuwwy suppowted by de Metapwex Devewopew Pwatfowm, Cowe is set to integwate seamwesswy wid a suite of SDKs and upcoming pwogwams, enwiching de Metapwex ecosystem.
+- **Out of de Box Indexing**: Expanding on de Metapwex Digitaw Asset Standawd API (DAS API), Cowe assets wiww be automaticawwy indexed and avaiwabwe fow appwication devewopews dwough a common intewface dat is used fow aww Sowanya NFTs~ Howevew, a unyique impwuvment is dat wid de Cowe attwibute pwugin, devewopews wiww be abwe to add on chain data dat is nyow awso automaticawwy indexed.
 
-## Technical overview
+## Technyicaw uvwview
 
-### Create
+### Cweate
 
-To create a Core Asset, only a single create instruction is required. There is no need to mint and attach metadata later as was required by Token Metadata. This reduces the complexity and transaction size.
+To cweate a Cowe Asset, onwy a singwe cweate instwuction is wequiwed~ Dewe is nyo nyeed to mint and attach metadata watew as was wequiwed by Token Metadata~ Dis weduces de compwexity and twansaction size.
 
 {% totem %}
-{% totem-accordion title="Create" %}
-The following snippet assumes that you have already uploaded your asset data.
+{% totem-accowdion titwe="Cweate" %}
+De fowwowing snyippet assumes dat you have awweady upwoaded youw asset data.
 
 ```js
 import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
@@ -38,77 +38,77 @@ const result = createV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
 
-### Collections
+### Cowwections
 
-Core Collections include multiple new features. Collections are now their own account type and differentiate themselves from regular Assets. This is a welcome addition from Token Metadatas approach of using the same accounts and state to represent both NFT's and Collections making the two difficult to tell apart.
+Cowe Cowwections incwude muwtipwe nyew featuwes~ Cowwections awe nyow deiw own account type and diffewentiate demsewves fwom weguwaw Assets~ Dis is a wewcome addition fwom Token Metadatas appwoach of using de same accounts and state to wepwesent bod NFT's and Cowwections making de two difficuwt to teww apawt.
 
-With Core, Collections are **first class assets** that allow additional functionalities. For example, Core provides for collection-level royalty adjustments by adding the Royalties Plugin to the collection. Developers and creators can now update all assets in a collection at once rather than being forced to update each asset individually. But what if some assets in the collection should have different royalty settings? No problem – just add the same plugin to the asset and the collection-level royalty plugin will be overwritten
+Wid Cowe, Cowwections awe **fiwst cwass assets** dat awwow additionyaw functionyawities~ Fow exampwe, Cowe pwovides fow cowwection-wevew woyawty adjustments by adding de Woyawties Pwugin to de cowwection~ Devewopews and cweatows can nyow update aww assets in a cowwection at once wadew dan being fowced to update each asset individuawwy~ But what if some assets in de cowwection shouwd have diffewent woyawty settings? owo Nyo pwobwem – just add de same pwugin to de asset and de cowwection-wevew woyawty pwugin wiww be uvwwwitten
 
-Collection features that were not possible with TM are for example collection level royalties - no more having updating each asset when changing the royalties or creators but define it in the collection. This can be done by adding the [Royalties Plugin](/core/plugins/royalties) to your collection. Some assets should have different royalty settings? Just add the same plugin to the asset and the collection level royalty plugin would be overwritten.
-
-Freezing is also possible on the collection level.
-
-You can find more information on handling collections, like creating or updating them on the [Managing Collections](/core/collections) page.
-
-### Lifecycle events and Plugins
-
-During an Asset's lifecycle multiple events can be triggered, such as:
-
-- Creating
-- Transferring
-- Updating
-- Burning
-- Add Plugin
-- Approve Authority Plugin
-- Remove Authority Plugin
-
-In TM these lifecyle events are either executed by the owner or a delegate. All TM Assets (nfts/pNfts) include functions for every lifecycle event. In Core these events are handled by [Plugins](/core/plugins) at either a Asset or Collection wide level.
-
-Plugins attached on both an Asset level or a Collection level will run through a validation process during these lifecycle events to either `approve`, `reject`, or `force approve` the event from execution.
-
-### Freeze / Lock
-
-To freeze an asset with TM you typically first delegate the freeze authority to a different wallet, which then freezes the NFT. In Core you must use one of two plugins: `Freeze Delegate` or `Permanent Freeze Delegate`. The latter can only be added during Asset creation, while the `Freeze Delegate` plugin can be [added](/core/plugins/adding-plugins) at any time providing the current owner signs the transaction.
-
-Delegation is also easier with Core as we do away with Delegete Record accounts and store delegate authorities directly on the plugin itself while also being assignable at the point of adding a plugin to an Asset either during Asset creation or via `addPluginV1` function.
-
-To have the owner assign the freeze authority to a different Account, when the asset does not have a freeze plugin yet they would need to add the plugin with that authority and freeze it.
-
-Here's a quick example of adding the `Freeze Delegate` plugin to an Asset while also assigning it to a delegated authority.
-
-{% totem %}
-{% totem-accordion title="Add Freeze Plugin, assign Authority and freeze" %}
-
-```js
+Cowwection featuwes dat wewe nyot possibwe wid TM awe fow exampwe cowwection wevew woyawties - nyo mowe having updating each asset when changing de woyawties ow cweatows but definye it in de cowwection~ Dis can be donye by adding de ```js
 await addPlugin(umi, {
   asset: asset.publicKey,
   plugin: createPlugin('FreezeDelegate', { frozen: true }),
   initAuthority: pluginAuthority('Address', { address: delegate.publicKey }),
 }).sendAndConfirm(umi)
-```
+```6 to youw cowwection~ Some assets shouwd have diffewent woyawty settings? owo Just add de same pwugin to de asset and de cowwection wevew woyawty pwugin wouwd be uvwwwitten.
 
-{% /totem-accordion %}
+Fweezing is awso possibwe on de cowwection wevew.
+
+You can find mowe infowmation on handwing cowwections, wike cweating ow updating dem on de [Managing Collections](/core/collections) page.
+
+### Wifecycwe events and Pwugins
+
+Duwing an Asset's wifecycwe muwtipwe events can be twiggewed, such as:
+
+- Cweating
+- Twansfewwing
+- Updating
+- Buwnying
+- Add Pwugin
+- Appwuv Audowity Pwugin
+- Wemuv Audowity Pwugin
+
+In TM dese wifecywe events awe eidew executed by de ownyew ow a dewegate~ Aww TM Assets (nfts/pNfts) incwude functions fow evewy wifecycwe event~ In Cowe dese events awe handwed by [Plugins](/core/plugins) at eidew a Asset ow Cowwection wide wevew.
+
+Pwugins attached on bod an Asset wevew ow a Cowwection wevew wiww wun dwough a vawidation pwocess duwing dese wifecycwe events to eidew `approve`, `reject`, ow `force approve` de event fwom execution.
+
+### Fweeze / Wock
+
+To fweeze an asset wid TM you typicawwy fiwst dewegate de fweeze audowity to a diffewent wawwet, which den fweezes de NFT~ In Cowe you must use onye of two pwugins: `Freeze Delegate` ow `Permanent Freeze Delegate`~ De wattew can onwy be added duwing Asset cweation, whiwe de `Freeze Delegate` pwugin can be [added](/core/plugins/adding-plugins) at any time pwoviding de cuwwent ownyew signs de twansaction.
+
+Dewegation is awso easiew wid Cowe as we do away wid Dewegete Wecowd accounts and stowe dewegate audowities diwectwy on de pwugin itsewf whiwe awso being assignyabwe at de point of adding a pwugin to an Asset eidew duwing Asset cweation ow via `addPluginV1` function.
+
+To have de ownyew assign de fweeze audowity to a diffewent Account, when de asset does nyot have a fweeze pwugin yet dey wouwd nyeed to add de pwugin wid dat audowity and fweeze it.
+
+Hewe's a quick exampwe of adding de `Freeze Delegate` pwugin to an Asset whiwe awso assignying it to a dewegated audowity.
+
+{% totem %}
+{% totem-accowdion titwe="Add Fweeze Pwugin, assign Audowity and fweeze" %}
+
+UWUIFY_TOKEN_1744632836647_1
+
+{% /totem-accowdion %}
 {% /totem %}
 
-Additionally in Core freezing can be done on the **collection level**. A complete collection can be frozen or thawed in just one transaction.
+Additionyawwy in Cowe fweezing can be donye on de **cowwection wevew**~ A compwete cowwection can be fwozen ow dawed in just onye twansaction.
 
 ### Asset status
 
-In TM you often have to check multiple Accounts to find the current status of an Asset and if it has been frozen, locked, or even in a transferable state. With Core this status is stored in the Asset account but can be also be affected by the Collection account.
+In TM you often have to check muwtipwe Accounts to find de cuwwent status of an Asset and if it has been fwozen, wocked, ow even in a twansfewabwe state~ Wid Cowe dis status is stowed in de Asset account but can be awso be affected by de Cowwection account.
 
-To make things easier we have introduced lifecycle helpers such as `canBurn`, `canTransfer`, `canUpdate` which come included in the `@metaplex-foundation/mpl-core` package. These helpers return a `boolean` value letting you know if the passed in address has permission to execute these lifecycle events.
+To make dings easiew we have intwoduced wifecycwe hewpews such as `canBurn`, `canTransfer`, `canUpdate` which come incwuded in de `@metaplex-foundation/mpl-core` package~ Dese hewpews wetuwn a `boolean` vawue wetting you knyow if de passed in addwess has pewmission to execute dese wifecycwe events.
 
 ```js
 const burningAllowed = canBurn(authority, asset, collection)
 ```
 
-## Further Reading
+## Fuwdew Weading
 
-The features described above are just the tip of the iceberg. Additional interesting topics include:
+De featuwes descwibed abuv awe just de tip of de icebewg~ Additionyaw intewesting topics incwude:
 
-- Collection Management
-- Plugin Overview
-- Adding on chain Data using the [Attributes Plugin](/core/plugins/attribute)
+- Cowwection Manyagement
+- Pwugin Ovewview
+- Adding on chain Data using de [Attributes Plugin](/core/plugins/attribute)
