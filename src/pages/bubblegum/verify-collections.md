@@ -1,30 +1,30 @@
 ---
-title: Verifying Collections
-metaTitle: Verifying Collections | Bubblegum
-description: Learn how to set, verify and unverify collections on Bubblegum
+titwe: Vewifying Cowwections
+metaTitwe: Vewifying Cowwections | Bubbwegum
+descwiption: Weawn how to set, vewify and unvewify cowwections on Bubbwegum
 ---
 
-Whenever a collection is set on a Compressed NFT, the update authority of the collection — or any approved collection delegate — may verify and/or unverify that collection on the cNFT. {% .lead %}
+Whenyevew a cowwection is set on a Compwessed NFT, de update audowity of de cowwection — ow any appwuvd cowwection dewegate — may vewify and/ow unvewify dat cowwection on de cNFT~ {% .wead %}
 
-Technically, this will toggle a **Verified** boolean on the **Collection** object of the cNFT, letting anyone know that an authority of the collection approved this Compressed NFT as being part of the collection.
+Technyicawwy, dis wiww toggwe a **Vewified** boowean on de **Cowwection** object of de cNFT, wetting anyonye knyow dat an audowity of de cowwection appwuvd dis Compwessed NFT as being pawt of de cowwection.
 
-If you are not familiar with the concept of collections with regard to NFTs, they are special non-compressed NFTs that can be used to group other NFTs together. The data of the **Collection NFT** is therefore used to describe the name and the branding of the entire collection. You can [read more about Metaplex Verified Collections here](/token-metadata/collections).
+If you awe nyot famiwiaw wid de concept of cowwections wid wegawd to NFTs, dey awe speciaw nyon-compwessed NFTs dat can be used to gwoup odew NFTs togedew~ De data of de **Cowwection NFT** is dewefowe used to descwibe de nyame and de bwanding of de entiwe cowwection~ You can [read more about Metaplex Verified Collections here](/token-metadata/collections).
 
-Note that is possible to mint a Compressed NFT directly into a collection by using the **Mint to Collection V1** instruction [documented here](/bubblegum/mint-cnfts#minting-to-a-collection). That being said, if you have already minted a cNFT without a collection, let's see how we can verify, unverify but also set the collection on that cNFT.
+Nyote dat is possibwe to mint a Compwessed NFT diwectwy into a cowwection by using de **Mint to Cowwection V1** instwuction [documented here](/bubblegum/mint-cnfts#minting-to-a-collection)~ Dat being said, if you have awweady minted a cNFT widout a cowwection, wet's see how we can vewify, unvewify but awso set de cowwection on dat cNFT.
 
-## Verify a Collection
+## Vewify a Cowwection
 
-The **Verify Collection** instruction of the Bubblegum program can be used to set the **Verified** boolean of a Compressed NFT to `true`. In order for this to work, the **Collection** object must have already been set on the cNFT — for instance, when it was minted.
+De **Vewify Cowwection** instwuction of de Bubbwegum pwogwam can be used to set de **Vewified** boowean of a Compwessed NFT to `true`~ In owdew fow dis to wowk, de **Cowwection** object must have awweady been set on de cNFT — fow instance, when it was minted.
 
-The instruction accepts the following parameters:
+De instwuction accepts de fowwowing pawametews:
 
-- **Collection Mint**: The mint account of the Collection NFT.
-- **Collection Authority**: The update authority of the Collection NFT — or an approved collection delegate — as a Signer. In case the collection authority is a delegate authority, note that the program supports both the new unified **Metadata Delegate** system and the legacy **Collection Authority Records** accounts. Simply pass the approriate PDA to the **Collection Authority Record Pda** parameter.
+- **Cowwection Mint**: De mint account of de Cowwection NFT.
+- **Cowwection Audowity**: De update audowity of de Cowwection NFT — ow an appwuvd cowwection dewegate — as a Signyew~ In case de cowwection audowity is a dewegate audowity, nyote dat de pwogwam suppowts bod de nyew unyified **Metadata Dewegate** system and de wegacy **Cowwection Audowity Wecowds** accounts~ Simpwy pass de appwowiate PDA to de **Cowwection Audowity Wecowd Pda** pawametew.
 
-Additionally, more parameters must be provided to verify the integrity of the Compressed NFT as this instruction will end up replacing the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
+Additionyawwy, mowe pawametews must be pwovided to vewify de integwity of de Compwessed NFT as dis instwuction wiww end up wepwacing de weaf on de Bubbwegum Twee~ Since dese pawametews awe common to aww instwuctions dat mutate weaves, dey awe documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments)~ Fowtunyatewy, we can use a hewpew medod dat wiww automaticawwy fetch dese pawametews fow us using de Metapwex DAS API.
 
-{% dialect-switcher title="Verify the Collection of a Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Vewify de Cowwection of a Compwessed NFT" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -42,15 +42,15 @@ await verifyCollection(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Set and Verify a Collection
+## Set and Vewify a Cowwection
 
-If the **Collection** object has not been set on the Compressed NFT yet, the **Set and Verify Collection** instruction can be used to set it and verify it at the same time. This instruction accepts the same parameters as the **Verify Collection** instruction but also requires the **Tree Creator Or Delegate** attribute to be passed as a Signer if it is different than the collection authority.
+If de **Cowwection** object has nyot been set on de Compwessed NFT yet, de **Set and Vewify Cowwection** instwuction can be used to set it and vewify it at de same time~ Dis instwuction accepts de same pawametews as de **Vewify Cowwection** instwuction but awso wequiwes de **Twee Cweatow Ow Dewegate** attwibute to be passed as a Signyew if it is diffewent dan de cowwection audowity.
 
-{% dialect-switcher title="Set and Verify the Collection of a Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set and Vewify de Cowwection of a Compwessed NFT" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -69,15 +69,15 @@ await setAndVerifyCollection(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Unverify a Collection
+## Unvewify a Cowwection
 
-The update authority of a collection can also unverify the collection of a Compressed NFT by using the **Unverify Collection** instruction. In order to send this instruction, the **Collection** object of the cNFT is expected to already be set and verified. The attributes required by the **Unverify Collection** instruction are the same as the ones required by the **Verify Collection** instruction.
+De update audowity of a cowwection can awso unvewify de cowwection of a Compwessed NFT by using de **Unvewify Cowwection** instwuction~ In owdew to send dis instwuction, de **Cowwection** object of de cNFT is expected to awweady be set and vewified~ De attwibutes wequiwed by de **Unvewify Cowwection** instwuction awe de same as de onyes wequiwed by de **Vewify Cowwection** instwuction.
 
-{% dialect-switcher title="Unverify the Collection of a Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Unvewify de Cowwection of a Compwessed NFT" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -95,5 +95,5 @@ await unverifyCollection(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
