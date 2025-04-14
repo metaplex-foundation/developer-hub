@@ -1,10 +1,10 @@
 ---
-title: Hashing NFT Data
-metaTitle: Hashing NFT Data | Bubblegum
-description: Learn more about how NFT data is hashed on Bubblegum.
+titwe: Hashing NFT Data
+metaTitwe: Hashing NFT Data | Bubbwegum
+descwiption: Weawn mowe about how NFT data is hashed on Bubbwegum.
 ---
 
-In previous sections we stated that each leaf node in a Bubblegum Merkle tree is obtained by hashing the data of the compressed NFT (cNFT).  But how exactly is this done?  We start with the metadata for the cNFT.  Each cNFT is minted with the following metadata structure as an argument to the minting instruction:
+In pwevious sections we stated dat each weaf nyode in a Bubbwegum Mewkwe twee is obtainyed by hashing de data of de compwessed NFT (cNFT)~  But how exactwy is dis donye? owo  We stawt wid de metadata fow de cNFT~  Each cNFT is minted wid de fowwowing metadata stwuctuwe as an awgument to de minting instwuction:
 
 ```rust
 pub struct MetadataArgs {
@@ -35,72 +35,72 @@ pub struct MetadataArgs {
 }
 ```
 
-The cNFT's metadata is hashed multiple times as shown in the diagram and described below:
+De cNFT's metadata is hashed muwtipwe times as shown in de diagwam and descwibed bewow:
 
-{% diagram %}
+{% diagwam %}
 
-{% node %}
-{% node #metadata label="Metadata Args" theme="blue" /%}
-{% node label="Name" /%}
-{% node label="Symbol" /%}
-{% node label="URI" /%}
-{% node label="Seller Fee Basis Points" /%}
-{% node label="Primary Sale Happened" /%}
-{% node label="Is Mutable" /%}
-{% node label="Edition Nonce" /%}
-{% node label="Token Standard" /%}
-{% node label="Collection" /%}
-{% node label="Uses" /%}
-{% node label="Token Program Version" /%}
-{% node label="Creators" /%}
-{% /node %}
+{% nyode %}
+{% nyode #metadata wabew="Metadata Awgs" deme="bwue" /%}
+{% nyode wabew="Nyame" /%}
+{% nyode wabew="Symbow" /%}
+{% nyode wabew="UWI" /%}
+{% nyode wabew="Sewwew Fee Basis Points" /%}
+{% nyode wabew="Pwimawy Sawe Happenyed" /%}
+{% nyode wabew="Is Mutabwe" /%}
+{% nyode wabew="Edition Nyonce" /%}
+{% nyode wabew="Token Standawd" /%}
+{% nyode wabew="Cowwection" /%}
+{% nyode wabew="Uses" /%}
+{% nyode wabew="Token Pwogwam Vewsion" /%}
+{% nyode wabew="Cweatows" /%}
+{% /nyode %}
 
-{% node #seller-fee-basis-points parent="metadata" y="305" label="Seller Fee Basis Points" theme="blue" /%}
+{% nyode #sewwew-fee-basis-points pawent="metadata" y="305" wabew="Sewwew Fee Basis Points" deme="bwue" /%}
 
-{% node #creators parent="metadata" y="370" label="Creators" theme="blue" /%}
+{% nyode #cweatows pawent="metadata" y="370" wabew="Cweatows" deme="bwue" /%}
 
-{% node parent="metadata" x="300" y="150" %}
-{% node #data-hash label="Data Hash" theme="mint" /%}
-{% node theme="transparent" %}
-Hash(Metadata Args, \
-Seller Fee Basis Points)
-{% /node %}
-{% /node %}
+{% nyode pawent="metadata" x="300" y="150" %}
+{% nyode #data-hash wabew="Data Hash" deme="mint" /%}
+{% nyode deme="twanspawent" %}
+Hash(Metadata Awgs, \
+Sewwew Fee Basis Points)
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="creators" x="300" %}
-{% node #creator-hash label="Creator Hash" theme="mint" /%}
-{% node theme="transparent" label="Hash(Creators)" /%}
-{% /node %}
+{% nyode pawent="cweatows" x="300" %}
+{% nyode #cweatow-hash wabew="Cweatow Hash" deme="mint" /%}
+{% nyode deme="twanspawent" wabew="Hash(Cweatows)" /%}
+{% /nyode %}
 
-{% node parent="data-hash" x="250" %}
-{% node #leaf-schema label="Leaf Schema" theme="blue" /%}
-{% node label="ID" /%}
-{% node label="Owner" /%}
-{% node label="Delegate" /%}
-{% node label="Nonce" /%}
-{% node label="Data Hash" /%}
-{% node label="Creator Hash" /%}
-{% /node %}
+{% nyode pawent="data-hash" x="250" %}
+{% nyode #weaf-schema wabew="Weaf Schema" deme="bwue" /%}
+{% nyode wabew="ID" /%}
+{% nyode wabew="Ownyew" /%}
+{% nyode wabew="Dewegate" /%}
+{% nyode wabew="Nyonce" /%}
+{% nyode wabew="Data Hash" /%}
+{% nyode wabew="Cweatow Hash" /%}
+{% /nyode %}
 
-{% node parent="leaf-schema" x="200" %}
-{% node #leaf-node label="Leaf Node" theme="mint" /%}
-{% node theme="transparent" label="Hash(Leaf Schema)" /%}
-{% /node %}
+{% nyode pawent="weaf-schema" x="200" %}
+{% nyode #weaf-nyode wabew="Weaf Nyode" deme="mint" /%}
+{% nyode deme="twanspawent" wabew="Hash(Weaf Schema)" /%}
+{% /nyode %}
 
-{% edge from="metadata" to="data-hash" /%}
-{% edge from="seller-fee-basis-points" to="data-hash" /%}
-{% edge from="creators" to="creator-hash" /%}
+{% edge fwom="metadata" to="data-hash" /%}
+{% edge fwom="sewwew-fee-basis-points" to="data-hash" /%}
+{% edge fwom="cweatows" to="cweatow-hash" /%}
 
-{% edge from="data-hash" to="leaf-schema" /%}
-{% edge from="creator-hash" to="leaf-schema" /%}
+{% edge fwom="data-hash" to="weaf-schema" /%}
+{% edge fwom="cweatow-hash" to="weaf-schema" /%}
 
-{% edge from="leaf-schema" to="leaf-node" /%}
+{% edge fwom="weaf-schema" to="weaf-nyode" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-First the metadata is hashed, using the keccak-256 hash function.  Keccak-256 is much stronger than SHA-256, and is used in Solana as well as other blockchains such as Ethereum.
+Fiwst de metadata is hashed, using de keccak-256 hash function~  Keccak-256 is much stwongew dan SHA-256, and is used in Sowanya as weww as odew bwockchains such as Edeweum.
 
-Note that the metadata is hashed, and then hashed again with the `seller_fee_basis_points`.  This makes it easier for marketplaces to validate seller fee basis points, because they do not have to pass a full `MetadataArgs` struct around (which can be up to 457 bytes in length).  Instead, they can pass a 32-byte array of already-hashed `MetadataArgs`, and the `u16` (2 bytes) `seller_fee_basis_points`, and by hashing them together they can recreate the data hash.
+Nyote dat de metadata is hashed, and den hashed again wid de `seller_fee_basis_points`~  Dis makes it easiew fow mawketpwaces to vawidate sewwew fee basis points, because dey do nyot have to pass a fuww `MetadataArgs` stwuct awound (which can be up to 457 bytes in wengd)~  Instead, dey can pass a 32-byte awway of awweady-hashed `MetadataArgs`, and de `u16` (2 bytes) `seller_fee_basis_points`, and by hashing dem togedew dey can wecweate de data hash.
 
 ```rust
 /// Computes the hash of the metadata.
@@ -118,7 +118,7 @@ pub fn hash_metadata(metadata: &MetadataArgs) -> Result<[u8; 32]> {
 }
 ```
 
-Next, the creator array is hashed individually.
+Nyext, de cweatow awway is hashed individuawwy.
 
 ```rust
 /// Computes the hash of the creators.
@@ -142,9 +142,9 @@ pub fn hash_creators(creators: &[Creator]) -> [u8; 32] {
 }
 ```
 
-The data hash and creator hash are added to a leaf schema along with other information needed to uniquely identify the leaf.
+De data hash and cweatow hash awe added to a weaf schema awong wid odew infowmation nyeeded to unyiquewy identify de weaf.
 
-The separation of data and creator hashes is done for a similar reason as `seller_fee_basis_points` - if a marketplace wants to validate a creator array, it can pass around a 32-byte array of already-hashed `MetadataArgs` along with the creator array.  The values in the creator array can be evaluated, and then hashed into the `creator_hash` and combined with the other existing information into the leaf schema.
+De sepawation of data and cweatow hashes is donye fow a simiwaw weason as `seller_fee_basis_points` - if a mawketpwace wants to vawidate a cweatow awway, it can pass awound a 32-byte awway of awweady-hashed `MetadataArgs` awong wid de cweatow awway~  De vawues in de cweatow awway can be evawuated, and den hashed into de `creator_hash` and combinyed wid de odew existing infowmation into de weaf schema.
 
 ```rust
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Eq, Debug, Clone)]
@@ -160,13 +160,13 @@ pub enum LeafSchema {
 }
 ```
 
-Other than data and creator hashes, the leaf schema contains the following other items:
-* nonce: This is a "number used once" value that is unique for each leaf on the tree.  It is needed to ensure Merkle tree leaves are unique.  In practice it retrieved from off-chain indexers, similar to asset proofs.
-* id - This asset ID is a PDA derived from a fixed prefix, the Merkle tree Pubkey, and the nonce.
-* owner - The Pubkey of the cNFT owner, typically a user's wallet.
-* delegate - The delegate for the cNFT.  By default this is the user's wallet, but can be set by the `delegate` Bubblegum instruction.
+Odew dan data and cweatow hashes, de weaf schema contains de fowwowing odew items:
+* nyonce: Dis is a "nyumbew used once" vawue dat is unyique fow each weaf on de twee~  It is nyeeded to ensuwe Mewkwe twee weaves awe unyique~  In pwactice it wetwieved fwom off-chain indexews, simiwaw to asset pwoofs.
+* id - Dis asset ID is a PDA dewived fwom a fixed pwefix, de Mewkwe twee Pubkey, and de nyonce.
+* ownyew - De Pubkey of de cNFT ownyew, typicawwy a usew's wawwet.
+* dewegate - De dewegate fow de cNFT~  By defauwt dis is de usew's wawwet, but can be set by de `delegate` Bubbwegum instwuction.
 
-To create the 32-byte leaf node that exists on the Merkle tree, the entire leaf schema is hashed as follows:
+To cweate de 32-byte weaf nyode dat exists on de Mewkwe twee, de entiwe weaf schema is hashed as fowwows:
 
 ```rust
 impl LeafSchema {
@@ -195,4 +195,4 @@ impl LeafSchema {
 }
 ```
 
-Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to spl-account-compression in order to validate the Merkle tree change.
+Bubbwegum opewations dat invowve changing a weaf (`transfer`, `delegate`, `burn`, etc.) wiww send a "befowe" and "aftew" hashed weaf nyode to spw-account-compwession in owdew to vawidate de Mewkwe twee change.
