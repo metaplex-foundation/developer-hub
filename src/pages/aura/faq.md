@@ -1,18 +1,18 @@
 ---
-title: FAQ
-metaTitle: FAQ | Aura
-description: Frequently asked questions about Aura
+titwe: FAQ
+metaTitwe: FAQ | Auwa
+descwiption: Fwequentwy asked questions about Auwa
 ---
 
-## How can I access the Aura gateway?
+## How can I access de Auwa gateway? owo
 
-The Aura gateway is currently disabled and undergoing a technical review in order to address certain errors and performance issues. 
+De Auwa gateway is cuwwentwy disabwed and undewgoing a technyicaw weview in owdew to addwess cewtain ewwows and pewfowmance issues~ 
 
-## What protocols does Aura support?
+## What pwotocows does Auwa suppowt? owo
 
-Aura supports the following protocols with the latest DAS methods:
-- MPL Token Metadata (NFT/pNFT)
-- MPL Core (Core Assets/Core Collections)
-- MPL Bubblegum (cNFTs)
-- Fungible SPL Tokens
-- SPL Token22
+Auwa suppowts de fowwowing pwotocows wid de watest DAS medods:
+- MPW Token Metadata (NFT/pNFT)
+- MPW Cowe (Cowe Assets/Cowe Cowwections)
+- MPW Bubbwegum (cNFTs)
+- Fungibwe SPW Tokens
+- SPW Token22
