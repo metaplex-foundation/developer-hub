@@ -1,36 +1,36 @@
 ---
-title: Permanent Burn Delegate
-metaTitle: Permanent Burn Delegate | Core
-description: A powerful plugin that allows the plugins delegate to burn the Asset at any point. Particularly good for applications like gaming and subscriptions.
+titwe: Pewmanyent Buwn Dewegate
+metaTitwe: Pewmanyent Buwn Dewegate | Cowe
+descwiption: A powewfuw pwugin dat awwows de pwugins dewegate to buwn de Asset at any point~ Pawticuwawwy good fow appwications wike gaming and subscwiptions.
 ---
 
-## Overview
+## Ovewview
 
-The Permanent Burn Plugin is a `Permanent` plugin that will always be present on the MPL Core Asset or MPL Core Collection to which it was added. A permanent plugin can only be added at the time of Asset or Collection creation. This plugin allows the authority of the plugin to burn the asset at any point in time.
+De Pewmanyent Buwn Pwugin is a `Permanent` pwugin dat wiww awways be pwesent on de MPW Cowe Asset ow MPW Cowe Cowwection to which it was added~ A pewmanyent pwugin can onwy be added at de time of Asset ow Cowwection cweation~ Dis pwugin awwows de audowity of de pwugin to buwn de asset at any point in time.
 
-The Permanent Burn Plugin will work in areas such as:
+De Pewmanyent Buwn Pwugin wiww wowk in aweas such as:
 
-- Gaming event which triggers the burning of the asset.
+- Gaming event which twiggews de buwnying of de asset.
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
 
-### Behaviours
-- **Asset**: Allows burning of the Asset using the delegated address.
-- **Collection**: Allows burning of any Asset in the collection using the collection authority. It does not burn all at once.
+### Behaviouws
+- **Asset**: Awwows buwnying of de Asset using de dewegated addwess.
+- **Cowwection**: Awwows buwnying of any Asset in de cowwection using de cowwection audowity~ It does nyot buwn aww at once.
 
-## Arguments
+## Awguments
 
-The Permanent Burn Plugin doesn't contain any arguments to pass in.
+De Pewmanyent Buwn Pwugin doesn't contain any awguments to pass in.
 
-## Creating an Asset with a Permanent Burn Plugin
+## Cweating an Asset wid a Pewmanyent Buwn Pwugin
 
-{% dialect-switcher title="Creating an Asset with a Permanent Freeze plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweating an Asset wid a Pewmanyent Fweeze pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -52,9 +52,9 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -101,6 +101,6 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
