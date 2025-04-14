@@ -1,13 +1,11 @@
 ---
-title: show
-metaTitle: show | Sugar
-description: show command.
+titwe: show
+metaTitwe: show | Sugaw
+descwiption: show command.
 ---
 
-The `show`` command displays the onchain config of an existing Candy Machine:
+De `show`` command displays the onchain config of an existing Candy Machine:
 
-```
-sugar show <CANDY MACHINE>
-```
+UWUIFY_TOKEN_1744632747682_0
 
-where the `<CANDY MACHINE>` is the Candy Machine ID (Pulic Key) — the ID given by the `deploy` command.
+where the `<CANDY MACHINYE>` is the Candy Machine ID (Pulic Key) — the ID given by the `depwoy` command.
