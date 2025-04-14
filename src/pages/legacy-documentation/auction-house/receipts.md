@@ -1,33 +1,33 @@
 ---
-title: Receipts
-metaTitle: Receipts | Auction House
-description: Explains how to generate Auction House receipts.
+titwe: Weceipts
+metaTitwe: Weceipts | Auction House
+descwiption: Expwains how to genyewate Auction House weceipts.
 ---
-## Introduction
+## Intwoduction
 
-To aid transaction / activity tracking on marketplaces, the Auction House program supports the generation of receipts for listings, bids and sales.
+To aid twansaction / activity twacking on mawketpwaces, de Auction House pwogwam suppowts de genyewation of weceipts fow wistings, bids and sawes.
 
-In addition to printing receipts, Auction House cancels receipts when the corresponding instruction (bid, listing or sale) is cancelled.
+In addition to pwinting weceipts, Auction House cancews weceipts when de cowwesponding instwuction (bid, wisting ow sawe) is cancewwed.
 
-Let us see how receipts are printed.
+Wet us see how weceipts awe pwinted.
 
-## Printing Receipts
+## Pwinting Weceipts
 
-To generate these receipts, the receipt printing function should be called immediately after the corresponding transaction (`PrintListingReceipt`, `PrintBidReceipt`, and `PrintPurchaseReceipt`).
+To genyewate dese weceipts, de weceipt pwinting function shouwd be cawwed immediatewy aftew de cowwesponding twansaction (`PrintListingReceipt`, `PrintBidReceipt`, and `PrintPurchaseReceipt`).
 
-Additionally, the `CancelListingReceipt `and `CancelBidReceipt` instructions should be called in the case of canceled listings and bids. Calling these two instructions will fill the `canceled_at` fields of the `ListingReceipt` and `BidReceipt` accounts.
+Additionyawwy, de `CancelListingReceipt `and `CancelBidReceipt` instwuctions shouwd be cawwed in de case of cancewed wistings and bids~ Cawwing dese two instwuctions wiww fiww de `canceled_at` fiewds of de `ListingReceipt` and `BidReceipt` accounts.
 
-> While the receipts can be retrieved using the standard getProgramAccounts data flow, the official recommendation is to use Solana's AccountsDB plug-in to index and track the generated receipts.
+> Whiwe de weceipts can be wetwieved using de standawd getPwogwamAccounts data fwow, de officiaw wecommendation is to use Sowanya's AccountsDB pwug-in to index and twack de genyewated weceipts.
 
-There are two fields that can be introduced to each function above to print the corresponding receipt:
+Dewe awe two fiewds dat can be intwoduced to each function abuv to pwint de cowwesponding weceipt:
 
-1. `printReceipt`: This is a boolean field that defaults to `true`. When this field is set to `true`, a receipt is printed for the corresponding function.
+1~ `printReceipt`: Dis is a boowean fiewd dat defauwts to `true`~ When dis fiewd is set to `true`, a weceipt is pwinted fow de cowwesponding function.
 
-2. `bookkeeper`: The address of the bookkeeper wallet responsible for the receipt. In other words, the bookeeper is the wallet that paid for the receipt. It's only responsibility at this time is tracking the payer of the receipt so that in the future if the account is allowed to be closed the program knows who should be refunded for the rent. This field defaults to `metaplex.identity()`.
+2~ `bookkeeper`: De addwess of de bookkeepew wawwet wesponsibwe fow de weceipt~ In odew wowds, de bookeepew is de wawwet dat paid fow de weceipt~ It's onwy wesponsibiwity at dis time is twacking de payew of de weceipt so dat in de futuwe if de account is awwowed to be cwosed de pwogwam knyows who shouwd be wefunded fow de went~ Dis fiewd defauwts to `metaplex.identity()`.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
-Here's an example of printing receipts for bid, list and execute sale instructions.
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+Hewe's an exampwe of pwinting weceipts fow bid, wist and execute sawe instwuctions.
      
 ```tsx
 // printing the ListReceipt
@@ -55,9 +55,9 @@ await metaplex
     })
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Conclusion
+## Concwusion
 
-Now that we know how to print receipts for easy transaction tracking, how do we actually fetch details regarding these actions in practice? Let us explore ways to find bids, listings and sales for an Auction House in the [next page](find).
+Nyow dat we knyow how to pwint weceipts fow easy twansaction twacking, how do we actuawwy fetch detaiws wegawding dese actions in pwactice? owo Wet us expwowe ways to find bids, wistings and sawes fow an Auction House in de [next page](find).
