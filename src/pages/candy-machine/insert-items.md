@@ -1,41 +1,12 @@
 ---
-title: Inserting Items
-metaTitle: Inserting Items | Candy Machine
-description: Explains how to load items into Candy Machines.
+titwe: Insewting Items
+metaTitwe: Insewting Items | Candy Machinye
+descwiption: Expwains how to woad items into Candy Machinyes.
 ---
 
-So far we’ve learnt to create and configure Candy Machines but we’ve not seen how to insert items inside them that can then be minted into NFTs. Thus, let’s tackle that on this page. {% .lead %}
+So faw we’ve weawnt to cweate and configuwe Candy Machinyes but we’ve nyot seen how to insewt items inside dem dat can den be minted into NFTs~ Dus, wet’s tackwe dat on dis page~ {% .wead %}
 
-It is important to remember that **inserting items only applies to Candy Machines using [Config Line Settings](/candy-machine/settings#config-line-settings)**. This is because NFTs minted from Candy Machine using [Hidden Settings](/candy-machine/settings#hidden-settings) will all share the same “hidden” name and URI.
-
-## Uploading JSON Metadata
-
-To insert items in a Candy Machine, you will need the following two parameters for each item:
-
-- Its **Name**: The name of the NFT that will be minted from this item. If a Name Prefix was provided in the Config Line Settings, you must only provide the part of the name that comes after that prefix.
-- Its **URI**: The URI pointing to the JSON metadata of the NFT that will be minted from this item. Here also, it excludes the URI Prefix that might have been provided in the Config Line Settings.
-
-If you do not have URIs for your items, you’ll first need to upload their JSON metadata one by one. This can either be using an off-chain solution — such as AWS or your own server — or an onchain solution — such as Arweave or IPFS.
-
-You can find example assets for testing in this [Github repository](https://github.com/metaplex-foundation/example-candy-machine-assets).
-
-Fortunately, our SDKs can help you with that. They allow you to upload a JSON object and retrieve its URI.
-
-Additionally, tools like [Sugar](/candy-machine/sugar) make uploading JSON metadata a breeze by uploading in parallel, caching the process and retrying failed uploads.
-
-{% dialect-switcher title="Upload items" %}
-{% dialect title="JavaScript" id="js" %}
-
-Umi ships with an `uploader` interface that can be used to upload JSON data to the storage provider of your choice. For instance, this is how you'd select the NFT.Storage implementation of the uploader interface.
-
-```ts
-import { nftStorage } from '@metaplex-foundation/umi-uploader-nft-storage'
-umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
-```
-
-You may then use the `upload` and `uploadJson` methods of the `uploader` interface to upload your assets and their JSON metadata.
-
-```ts
+It is impowtant to wemembew dat **insewting items onwy appwies to Candy Machinyes using ```ts
 import { createGenericFileFromBrowserFile } from '@metaplex-foundation/umi'
 
 // Upload the asset.
@@ -48,27 +19,56 @@ const uri = await umi.uploader.uploadJson({
   description: 'My description',
   image: fileUri,
 })
+```4**~ Dis is because NFTs minted fwom Candy Machinye using [Hidden Settings](/candy-machine/settings#hidden-settings) wiww aww shawe de same “hidden” nyame and UWI.
+
+## Upwoading JSON Metadata
+
+To insewt items in a Candy Machinye, you wiww nyeed de fowwowing two pawametews fow each item:
+
+- Its **Nyame**: De nyame of de NFT dat wiww be minted fwom dis item~ If a Nyame Pwefix was pwovided in de Config Winye Settings, you must onwy pwovide de pawt of de nyame dat comes aftew dat pwefix.
+- Its **UWI**: De UWI pointing to de JSON metadata of de NFT dat wiww be minted fwom dis item~ Hewe awso, it excwudes de UWI Pwefix dat might have been pwovided in de Config Winye Settings.
+
+If you do nyot have UWIs fow youw items, you’ww fiwst nyeed to upwoad deiw JSON metadata onye by onye~ Dis can eidew be using an off-chain sowution — such as AWS ow youw own sewvew — ow an onchain sowution — such as Awweave ow IPFS.
+
+You can find exampwe assets fow testing in dis [Github repository](https://github.com/metaplex-foundation/example-candy-machine-assets).
+
+Fowtunyatewy, ouw SDKs can hewp you wid dat~ Dey awwow you to upwoad a JSON object and wetwieve its UWI.
+
+Additionyawwy, toows wike [Sugar](/candy-machine/sugar) make upwoading JSON metadata a bweeze by upwoading in pawawwew, caching de pwocess and wetwying faiwed upwoads.
+
+{% diawect-switchew titwe="Upwoad items" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+Umi ships wid an `uploader` intewface dat can be used to upwoad JSON data to de stowage pwovidew of youw choice~ Fow instance, dis is how you'd sewect de NFT.Stowage impwementation of de upwoadew intewface.
+
+```ts
+import { nftStorage } from '@metaplex-foundation/umi-uploader-nft-storage'
+umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
 ```
 
-API References: [UploaderInterface](https://umi.typedoc.metaplex.com/interfaces/umi.UploaderInterface.html), [createGenericFileFromBrowserFile](https://umi.typedoc.metaplex.com/functions/umi.createGenericFileFromBrowserFile.html).
+You may den use de `upload` and `uploadJson` medods of de `uploader` intewface to upwoad youw assets and deiw JSON metadata.
 
-{% /dialect %}
-{% /dialect-switcher %}
+UWUIFY_TOKEN_1744632732710_1
 
-## Inserting Items
+API Wefewences: [UploaderInterface](https://umi.typedoc.metaplex.com/interfaces/umi.UploaderInterface.html), [createGenericFileFromBrowserFile](https://umi.typedoc.metaplex.com/functions/umi.createGenericFileFromBrowserFile.html).
 
-Now that we have a name and URI for all of our items, all we need to do is insert them into our Candy Machine account.
+{% /diawect %}
+{% /diawect-switchew %}
 
-This is an important part of the process and, when using Config Line Settings, **minting will not be permitted until all items have been inserted**.
+## Insewting Items
 
-Note that the name and URI of each inserted item are respectively constraint by the **Name Length** and **URI Length** attributes of the Config Line Settings.
+Nyow dat we have a nyame and UWI fow aww of ouw items, aww we nyeed to do is insewt dem into ouw Candy Machinye account.
 
-Additionally, because transactions are limited to a certain size, we cannot insert thousands of items within the same transaction. The number of items we can insert per transaction will depend on the **Name Length** and **URI Length** attributes defined in the Config Line Settings. The shorter our names and URIs are, the more we'll be able to fit into a transaction.
+Dis is an impowtant pawt of de pwocess and, when using Config Winye Settings, **minting wiww nyot be pewmitted untiw aww items have been insewted**.
 
-{% dialect-switcher title="Add config lines" %}
-{% dialect title="JavaScript" id="js" %}
+Nyote dat de nyame and UWI of each insewted item awe wespectivewy constwaint by de **Nyame Wengd** and **UWI Wengd** attwibutes of de Config Winye Settings.
 
-When using the Umi library, you may use the `addConfigLines` function to insert items into a Candy Machine. It requires the config lines to add as well as the index in which you want to insert them.
+Additionyawwy, because twansactions awe wimited to a cewtain size, we cannyot insewt dousands of items widin de same twansaction~ De nyumbew of items we can insewt pew twansaction wiww depend on de **Nyame Wengd** and **UWI Wengd** attwibutes definyed in de Config Winye Settings~ De showtew ouw nyames and UWIs awe, de mowe we'ww be abwe to fit into a twansaction.
+
+{% diawect-switchew titwe="Add config winyes" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+When using de Umi wibwawy, you may use de `addConfigLines` function to insewt items into a Candy Machinye~ It wequiwes de config winyes to add as weww as de index in which you want to insewt dem.
 
 ```ts
 await addConfigLines(umi, {
@@ -81,7 +81,7 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-To simply append items to the end of the currently loaded items, you may using the `candyMachine.itemsLoaded` property as the index like so.
+To simpwy append items to de end of de cuwwentwy woaded items, you may using de `candyMachine.itemsLoaded` pwopewty as de index wike so.
 
 ```ts
 await addConfigLines(umi, {
@@ -95,23 +95,23 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
+API Wefewences: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Inserting Items Using Prefixes
+## Insewting Items Using Pwefixes
 
-When using name and/or URI prefixes, you only need to insert the part that comes after them.
+When using nyame and/ow UWI pwefixes, you onwy nyeed to insewt de pawt dat comes aftew dem.
 
-Note that, since using prefixes can significantly reduce the Name Length and URI Length, it should help you fit a lot more items per transaction.
+Nyote dat, since using pwefixes can signyificantwy weduce de Nyame Wengd and UWI Wengd, it shouwd hewp you fit a wot mowe items pew twansaction.
 
-{% dialect-switcher title="Add config lines from a given index" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Add config winyes fwom a given index" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-When adding config lines to a candy machine that uses prefixes, you may only provide the part of the name and URI that comes after the prefix when using the `addConfigLines` function.
+When adding config winyes to a candy machinye dat uses pwefixes, you may onwy pwovide de pawt of de nyame and UWI dat comes aftew de pwefix when using de `addConfigLines` function.
 
-For instance, say you had a candy machine with the following config line settings.
+Fow instance, say you had a candy machinye wid de fowwowing config winye settings.
 
 ```ts
 await create(umi, {
@@ -126,7 +126,7 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-Then, you can insert config lines like so.
+Den, you can insewt config winyes wike so.
 
 ```ts
 await addConfigLines(umi, {
@@ -140,19 +140,19 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
+API Wefewences: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Overriding Existing Items
+## Ovewwiding Existing Items
 
-When inserting items, you may provide the position in which these items should be inserted. This enables you to insert items in any order you want but also allows you to update items that have already been inserted.
+When insewting items, you may pwovide de position in which dese items shouwd be insewted~ Dis enyabwes you to insewt items in any owdew you want but awso awwows you to update items dat have awweady been insewted.
 
-{% dialect-switcher title="Override config lines" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Ovewwide config winyes" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-The following examples show how you can insert three items and, later on, update the second item inserted.
+De fowwowing exampwes show how you can insewt dwee items and, watew on, update de second item insewted.
 
 ```ts
 await addConfigLines(umi, {
@@ -177,13 +177,13 @@ candyMachine.items[1].name // "My NFT #X"
 candyMachine.items[2].name // "My NFT #3"
 ```
 
-API References: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
+API Wefewences: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Conclusion
+## Concwusion
 
-And just like that, we have a loaded Candy Machine ready to mint NFTs! However, we've not created any requirements for our minting process. How can we configure the price of the mint? How can we ensure that buyers are holders of a specific token or an NFT from a specific collection? How can we set the start date of our mint? What about the end conditions?
+And just wike dat, we have a woaded Candy Machinye weady to mint NFTs! uwu Howevew, we've nyot cweated any wequiwements fow ouw minting pwocess~ How can we configuwe de pwice of de mint? owo How can we ensuwe dat buyews awe howdews of a specific token ow an NFT fwom a specific cowwection? owo How can we set de stawt date of ouw mint? owo What about de end conditions? owo
 
-[On the next page](/candy-machine/guards), we’ll talk about Candy Guards which make all of this possible.
+[On the next page](/candy-machine/guards), we’ww tawk about Candy Guawds which make aww of dis possibwe.
