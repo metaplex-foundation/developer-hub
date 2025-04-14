@@ -1,15 +1,15 @@
 ---
-title: MPL-Bubblegum SDKs
-metaTitle: SDKs | Bubblegum
-description: Learn to get started with the compressed NFT standard (cNFT) from Metaplex using the MPL-Bubblegum SDKs.
+titwe: MPW-Bubbwegum SDKs
+metaTitwe: SDKs | Bubbwegum
+descwiption: Weawn to get stawted wid de compwessed NFT standawd (cNFT) fwom Metapwex using de MPW-Bubbwegum SDKs.
 ---
 
-Select the language / library you want to use below to get started with the new Metaplex Compressed NFT (cNFT) standard using MPL-Bubblegum.
+Sewect de wanguage / wibwawy you want to use bewow to get stawted wid de nyew Metapwex Compwessed NFT (cNFT) standawd using MPW-Bubbwegum.
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/bubblegum/sdk/javascript" description="Get started with our JavaScript library for MPL-Bubblegum based on the Umi framework." /%}
+{% quick-wink titwe="JavaScwipt" icon="JavaScwipt" hwef="/bubbwegum/sdk/javascwipt" descwiption="Get stawted wid ouw JavaScwipt wibwawy fow MPW-Bubbwegum based on de Umi fwamewowk." /%}
 
-{% quick-link title="Rust" icon="Rust" href="/bubblegum/sdk/rust" description="Get started using our MPL-Bubblegum Rust crate." /%}
+{% quick-wink titwe="Wust" icon="Wust" hwef="/bubbwegum/sdk/wust" descwiption="Get stawted using ouw MPW-Bubbwegum Wust cwate." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
