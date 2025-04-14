@@ -1,28 +1,35 @@
 ---
-title: Verified Creators
-metaTitle: Verified Creators | Token Metadata
-description: Learn how to verify the creators of an Asset on Token Metadata
+titwe: Vewified Cweatows
+metaTitwe: Vewified Cweatows | Token Metadata
+descwiption: Weawn how to vewify de cweatows of an Asset on Token Metadata
 ---
 
-Similarly to [collections](/token-metadata/collections), the creators of an asset must be verified to ensure the authenticity of the asset. {% .lead %}
+Simiwawwy to ```ts
+import { unverifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
 
-A creator whose `verified` flag is `false` could have been added by anyone and, therefore, cannot be trusted. On the other hand, a creator whose `verified` flag is `true` is guaranteed to have signed a transaction that verified them as a creator of that asset.
+await unverifyCreatorV1(umi, {
+  metadata,
+  authority: creator,
+}).sendAndConfirm(umi)
+```0, de cweatows of an asset must be vewified to ensuwe de audenticity of de asset~ {% .wead %}
 
-In the section below, we will learn how to verify and unverify the creators of an asset. Note that before verifying a creator, it must already be part of the **Creators** array of the asset's **Metadata** account. This can be done when [minting the asset](/token-metadata/mint) but also when [updating the asset](/token-metadata/update).
+A cweatow whose `verified` fwag is `false` couwd have been added by anyonye and, dewefowe, cannyot be twusted~ On de odew hand, a cweatow whose `verified` fwag is `true` is guawanteed to have signyed a twansaction dat vewified dem as a cweatow of dat asset.
 
-## Verify a Creator
+In de section bewow, we wiww weawn how to vewify and unvewify de cweatows of an asset~ Nyote dat befowe vewifying a cweatow, it must awweady be pawt of de **Cweatows** awway of de asset's **Metadata** account~ Dis can be donye when [minting the asset](/token-metadata/mint) but awso when [updating the asset](/token-metadata/update).
 
-The **Verify** instruction can be used to verify the creator of an asset. Notice that the same instruction can also be used to verify collections providing we pass different arguments to the instruction. Some of our SDKs split these instructions into multiple helpers like `verifyCreatorV1` and `verifyCollectionV1` to provide a better developer experience.
+## Vewify a Cweatow
 
-The main attributes required by the **Verify** instruction in the context of verifying a creator are the following:
+De **Vewify** instwuction can be used to vewify de cweatow of an asset~ Nyotice dat de same instwuction can awso be used to vewify cowwections pwoviding we pass diffewent awguments to de instwuction~ Some of ouw SDKs spwit dese instwuctions into muwtipwe hewpews wike `verifyCreatorV1` and `verifyCollectionV1` to pwovide a bettew devewopew expewience.
 
-- **Metadata**: The address of the asset's **Metadata** account.
-- **Authority**: The creator we are trying to verify as a Signer.
+De main attwibutes wequiwed by de **Vewify** instwuction in de context of vewifying a cweatow awe de fowwowing:
 
-Here's how we can use our SDKs to verify a creator on Token Metadata.
+- **Metadata**: De addwess of de asset's **Metadata** account.
+- **Audowity**: De cweatow we awe twying to vewify as a Signyew.
 
-{% dialect-switcher title="Verify a Creator" %}
-{% dialect title="JavaScript" id="js" %}
+Hewe's how we can use ouw SDKs to vewify a cweatow on Token Metadata.
+
+{% diawect-switchew titwe="Vewify a Cweatow" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { verifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
@@ -33,24 +40,17 @@ await verifyCreatorV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Unverify a Creator
+## Unvewify a Cweatow
 
-Reciprocally, the **Unverify** instruction can be used to turn the `verified` flag of a creator to `false`. It accepts the same attributes as the **Verify** instruction and can be used in the same way.
+Wecipwocawwy, de **Unvewify** instwuction can be used to tuwn de `verified` fwag of a cweatow to `false`~ It accepts de same attwibutes as de **Vewify** instwuction and can be used in de same way.
 
-{% dialect-switcher title="Unverify a Creator" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Unvewify a Cweatow" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-```ts
-import { unverifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
+UWUIFY_TOKEN_1744632940074_1
 
-await unverifyCreatorV1(umi, {
-  metadata,
-  authority: creator,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
