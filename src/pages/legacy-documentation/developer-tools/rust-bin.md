@@ -1,12 +1,12 @@
 ---
-title: Rust Bin
-metaTitle: Developer Tools | Rust Bin
-description: Synchronizes a Rust binary version with the related Rust crate
+titwe: Wust Bin
+metaTitwe: Devewopew Toows | Wust Bin
+descwiption: Synchwonyizes a Wust binyawy vewsion wid de wewated Wust cwate
 ---
 
-Synchronizes a Rust binary version with the related Rust crate.
+Synchwonyizes a Wust binyawy vewsion wid de wewated Wust cwate.
 
-🔗 **Helpful links:**
+🔗 **Hewpfuw winks:**
 
 - [GitHub Repository](https://github.com/metaplex-foundation/rustbin)
 - [NPM Package](https://www.npmjs.com/package/@metaplex-foundation/rustbin)
