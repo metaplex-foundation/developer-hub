@@ -1,93 +1,93 @@
 ---
-title: "Sol Payment Guard"
-metaTitle: Sol Payment Guard | Candy Machine
-description: "The Sol Payment guard allows us to charge the payer an amount in SOL when minting."
+titwe: "Sow Payment Guawd"
+metaTitwe: Sow Payment Guawd | Candy Machinye
+descwiption: "De Sow Payment guawd awwows us to chawge de payew an amount in SOW when minting."
 ---
 
-## Overview
+## Ovewview
 
-The **Sol Payment** guard allows us to charge the payer an amount in SOL when minting. Both the amount of SOL and the destination address can be configured.
+De **Sow Payment** guawd awwows us to chawge de payew an amount in SOW when minting~ Bod de amount of SOW and de destinyation addwess can be configuwed.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node label="Sol Payment" /%}
-{% node #amount label="- Amount" /%}
-{% node #destination label="- Destination" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode wabew="Sow Payment" /%}
+{% nyode #amount wabew="- Amount" /%}
+{% nyode #destinyation wabew="- Destinyation" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="destination" x="270" y="-9" %}
-{% node #payer theme="indigo" %}
-Destination Wallet {% .whitespace-nowrap %}
-{% /node %}
-{% node theme="dimmed" %}
-Owner: System Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode pawent="destinyation" x="270" y="-9" %}
+{% nyode #payew deme="indigo" %}
+Destinyation Wawwet {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: System Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-8" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="72" deme="bwue" %}
   NFT
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
-{% edge from="destination" to="payer" arrow="none" dashed=true /%}
-{% edge from="mint-candy-guard" to="payer" %}
-Transfers SOL
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+{% edge fwom="destinyation" to="payew" awwow="nyonye" dashed=twue /%}
+{% edge fwom="mint-candy-guawd" to="payew" %}
+Twansfews SOW
 
-from the payer
+fwom de payew
 {% /edge %}
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Sol Payment guard contains the following settings:
+De Sow Payment guawd contains de fowwowing settings:
 
-- **Lamports**: The amount in SOL (or lamports) to charge the payer.
-- **Destination**: The address of the wallet that should receive all payments related to this guard.
+- **Wampowts**: De amount in SOW (ow wampowts) to chawge de payew.
+- **Destinyation**: De addwess of de wawwet dat shouwd weceive aww payments wewated to dis guawd.
 
-{% dialect-switcher title="Set up a Candy Machine using the Sol Payment guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Sow Payment guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-Note that, in this example, we’re using the current identity as the destination wallet.
+Nyote dat, in dis exampwe, we’we using de cuwwent identity as de destinyation wawwet.
 
 ```ts
 create(umi, {
@@ -101,14 +101,14 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [SolPayment](https://mpl-candy-machine.typedoc.metaplex.com/types/SolPayment.html)
+API Wefewences: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [SolPayment](https://mpl-candy-machine.typedoc.metaplex.com/types/SolPayment.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Add this object into the guard section your config.json file:
+Add dis object into de guawd section youw config.json fiwe:
 
 ```json
 "solPayment": {
@@ -118,22 +118,22 @@ Add this object into the guard section your config.json file:
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The Sol Payment guard contains the following Mint Settings:
+De Sow Payment guawd contains de fowwowing Mint Settings:
 
-- **Destination**: The address of the wallet that should receive all payments related to this guard.
+- **Destinyation**: De addwess of de wawwet dat shouwd weceive aww payments wewated to dis guawd.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#solpayment) for more details.
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#solpayment) fow mowe detaiws.
 
-{% dialect-switcher title="Mint with the Sol Payment Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Mint wid de Sow Payment Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the Sol Payment guard using the `mintArgs` argument like so.
+You may pass de Mint Settings of de Sow Payment guawd using de `mintArgs` awgument wike so.
 
 ```ts
 mintV2(umi, {
@@ -144,19 +144,19 @@ mintV2(umi, {
 });
 ```
 
-API References: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [SolPaymentMintArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/SolPaymentMintArgs.html)
+API Wefewences: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mintV2.html), [SolPaymentMintArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/SolPaymentMintArgs.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
+_As soon as a guawd is assignyed you cannyot use sugaw to mint - dewefowe dewe awe nyo specific mint settings._
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-_The Sol Payment guard does not support the route instruction._
+_De Sow Payment guawd does nyot suppowt de woute instwuction._
