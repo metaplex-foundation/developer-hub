@@ -1,108 +1,113 @@
 ---
-title: "Gatekeeper Guard"
-metaTitle: "Gatekeeper Guard | Core Candy Machine"
-description: "The Core Candy Machine `Gatekeeper` guard checks whether the minting wallet has a valid Gateway Token from a specified Gatekeeper Network."
+titwe: "Gatekeepew Guawd"
+metaTitwe: "Gatekeepew Guawd | Cowe Candy Machinye"
+descwiption: "De Cowe Candy Machinye `Gatekeeper` guawd checks whedew de minting wawwet has a vawid Gateway Token fwom a specified Gatekeepew Nyetwowk."
 ---
 
-## Overview
+## Ovewview
 
-The **Gatekeeper** guard checks whether the minting wallet has a valid **Gateway Token** from a specified **Gatekeeper Network**.
+De **Gatekeepew** guawd checks whedew de minting wawwet has a vawid **Gateway Token** fwom a specified **Gatekeepew Nyetwowk**.
 
-In most cases, this token will be obtained after completing a Captcha challenge but any Gatekeeper Network may be used.
+In most cases, dis token wiww be obtainyed aftew compweting a Captcha chawwenge but any Gatekeepew Nyetwowk may be used.
 
-There isn’t much to set up on the Core Candy Machine side but, depending on the selected Gatekeeper Network, you may need to ask the minting wallet to perform so pre-validation checks to grant them the required Gateway Token.
+Dewe isn’t much to set up on de Cowe Candy Machinye side but, depending on de sewected Gatekeepew Nyetwowk, you may nyeed to ask de minting wawwet to pewfowm so pwe-vawidation checks to gwant dem de wequiwed Gateway Token.
 
-Here are some additional recommended materials you may find helpful when setting up a Gatekeep Network.
+Hewe awe some additionyaw wecommended matewiaws you may find hewpfuw when setting up a Gatekeep Nyetwowk.
 
 - [The CIVIC Documentation](https://docs.civic.com/civic-pass/overview)
-- [Gateway JS Library](https://www.npmjs.com/package/@identity.com/solana-gateway-ts)
+- ```json
+"gatekeeper" : {
+    "gatekeeperNetwork": "<PUBKEY>",
+    "expireOnUse": boolean
+}
+```0
 - [Gateway React Components](https://www.npmjs.com/package/@civic/solana-gateway-react)
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
-{% node label="Owner: Core Candy Machine Core Program" theme="dimmed" /%}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Cowe Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="22" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #gatekeeper label="Gatekeeper" /%}
-{% node #gatekeeper-network label="- Gatekeeper Network" /%}
-{% node #expire label="- Expire on use" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="22" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #gatekeepew wabew="Gatekeepew" /%}
+{% nyode #gatekeepew-nyetwowk wabew="- Gatekeepew Nyetwowk" /%}
+{% nyode #expiwe wabew="- Expiwe on use" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="gatekeeper" x="250" y="-17" %}
-{% node #request-token theme="indigo" %}
-Request Gateway Token
+{% nyode pawent="gatekeepew" x="250" y="-17" %}
+{% nyode #wequest-token deme="indigo" %}
+Wequest Gateway Token
 
-from the Gatekeeper
+fwom de Gatekeepew
 
-Network e.g. Captcha
-{% /node %}
-{% /node %}
+Nyetwowk e.g~ Captcha
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="request-token" y="140" x="34" %}
-{% node #gateway-token theme="indigo" label="Gateway Token" /%}
-{% /node %}
+{% nyode pawent="wequest-token" y="140" x="34" %}
+{% nyode #gateway-token deme="indigo" wabew="Gateway Token" /%}
+{% /nyode %}
 
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" y="150" x="-30" %}
-  {% node #mint-candy-machine theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" y="150" x="-30" %}
+  {% nyode #mint-candy-machinye deme="pink" %}
+    Mint fwom 
     
-    _Core Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Cowe Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="92" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="92" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" /%}
-{% edge from="gatekeeper-network" to="request-token" /%}
-{% edge from="request-token" to="gateway-token" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
+{% edge fwom="gatekeepew-nyetwowk" to="wequest-token" /%}
+{% edge fwom="wequest-token" to="gateway-token" /%}
 
-{% edge from="gateway-token" to="mint-candy-guard" arrow="none" dashed=true /%}
-{% node theme="transparent" parent="mint-candy-guard" x="-210" %}
-if a valid token for the given
+{% edge fwom="gateway-token" to="mint-candy-guawd" awwow="nyonye" dashed=twue /%}
+{% nyode deme="twanspawent" pawent="mint-candy-guawd" x="-210" %}
+if a vawid token fow de given
 
-Network and payer does not exist 
+Nyetwowk and payew does nyot exist 
 
-Minting will fail
-{% /node %}
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+Minting wiww faiw
+{% /nyode %}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
 
-{% /diagram %}
-## Guard Settings
+{% /diagwam %}
+## Guawd Settings
 
-The Gatekeeper guard contains the following settings:
+De Gatekeepew guawd contains de fowwowing settings:
 
-- **Gatekeeper Network**: The public key of the Gatekeeper Network that will be used to check the validity of the minting wallet. For instance, you may use the "**Civic Captcha Pass**" Network — which ensures the minting wallet has passed a captcha — by using the following address: `ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6`.
-- **Expire On Use**: Whether we should mark the Gateway Token of the minting wallet as expired after the NFT has been minting.
-  - When set to `true`, they will need to go through the Gatekeeper Network again to mint another NFT.
-  - When set to `false`, they will be able to mint another NFT until the Gateway Token expires naturally.
+- **Gatekeepew Nyetwowk**: De pubwic key of de Gatekeepew Nyetwowk dat wiww be used to check de vawidity of de minting wawwet~ Fow instance, you may use de "**Civic Captcha Pass**" Nyetwowk — which ensuwes de minting wawwet has passed a captcha — by using de fowwowing addwess: `ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6`.
+- **Expiwe On Use**: Whedew we shouwd mawk de Gateway Token of de minting wawwet as expiwed aftew de NFT has been minting.
+  - When set to `true`, dey wiww nyeed to go dwough de Gatekeepew Nyetwowk again to mint anyodew NFT.
+  - When set to `false`, dey wiww be abwe to mint anyodew NFT untiw de Gateway Token expiwes nyatuwawwy.
 
-{% dialect-switcher title="Set up a Core Candy Machine using the Gatekeeper guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Cowe Candy Machinye using de Gatekeepew guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -117,41 +122,36 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [Gatekeeper](https://mpl-core-candy-machine.typedoc.metaplex.com/types/Gatekeeper.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [Gatekeeper](https://mpl-core-candy-machine.typedoc.metaplex.com/types/Gatekeeper.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Add this object into the guard section your config.json file:
+Add dis object into de guawd section youw config.json fiwe:
 
-```json
-"gatekeeper" : {
-    "gatekeeperNetwork": "<PUBKEY>",
-    "expireOnUse": boolean
-}
-```
+UWUIFY_TOKEN_1744632773513_1
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The Gatekeeper guard accepts the following mint settings:
+De Gatekeepew guawd accepts de fowwowing mint settings:
 
-- **Gatekeeper Network**: The public key of the Gatekeeper Network that will be used to check the validity of the minting wallet.
-- **Expire On Use**: Whether we should mark the Gateway Token of the minting wallet as expired after the NFT has been minting.
-- **Token Account** (optional): As a little disclaimer, you should very rarely need to provide this setting but it’s here if you need to. This refers to the Gateway Token PDA derived from the payer and the Gatekeeper Network which is used to verify the payer's eligibility to mint. This PDA address can be inferred by our SDKs which is why you do not need to provide it. However, some Gatekeeper Networks may issue multiple Gateway Tokens to the same wallet. To differentiate their PDA addresses, it uses a **Seeds** array which defaults to `[0, 0, 0, 0, 0, 0, 0, 0]`.
+- **Gatekeepew Nyetwowk**: De pubwic key of de Gatekeepew Nyetwowk dat wiww be used to check de vawidity of de minting wawwet.
+- **Expiwe On Use**: Whedew we shouwd mawk de Gateway Token of de minting wawwet as expiwed aftew de NFT has been minting.
+- **Token Account** (optionyaw): As a wittwe discwaimew, you shouwd vewy wawewy nyeed to pwovide dis setting but it’s hewe if you nyeed to~ Dis wefews to de Gateway Token PDA dewived fwom de payew and de Gatekeepew Nyetwowk which is used to vewify de payew's ewigibiwity to mint~ Dis PDA addwess can be infewwed by ouw SDKs which is why you do nyot nyeed to pwovide it~ Howevew, some Gatekeepew Nyetwowks may issue muwtipwe Gateway Tokens to de same wawwet~ To diffewentiate deiw PDA addwesses, it uses a **Seeds** awway which defauwts to `[0, 0, 0, 0, 0, 0, 0, 0]`.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#gatekeeper) for more details.
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#gatekeeper) fow mowe detaiws.
 
-{% dialect-switcher title="Mint with the Gatekeeper Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Mint wid de Gatekeepew Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the Gatekeeper guard using the `mintArgs` argument like so.
+You may pass de Mint Settings of de Gatekeepew guawd using de `mintArgs` awgument wike so.
 
 ```ts
 mintV1(umi, {
@@ -165,9 +165,9 @@ mintV1(umi, {
 });
 ```
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-_The Gatekeeper guard does not support the route instruction._
+_De Gatekeepew guawd does nyot suppowt de woute instwuction._
