@@ -1,30 +1,30 @@
 ---
-title: ImmutableMetadata Plugin
-metaTitle: ImmutableMetadata | Core
-description: The 'ImmutableMetadata' plugin makes the metadata on Core NFT Assets and Collections immutable.
+titwe: ImmutabweMetadata Pwugin
+metaTitwe: ImmutabweMetadata | Cowe
+descwiption: De 'ImmutabweMetadata' pwugin makes de metadata on Cowe NFT Assets and Cowwections immutabwe.
 ---
 
-The immutableMetadata Plugin is a `Authority Managed` plugin that allows to make the Metadata (Name and URI) immutable. It can only be added by the update authority.
+De immutabweMetadata Pwugin is a `Authority Managed` pwugin dat awwows to make de Metadata (Nyame and UWI) immutabwe~ It can onwy be added by de update audowity.
 
-This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collection`.
+Dis pwugin can be used on bod de `MPL Core Asset` and de `MPL Core Collection`.
 
-As it is for other plugins, like [royalties](/core/plugins/royalties) when it is assigned to an MPL Core Collection the MPL Core Asset also is used on the Asset. So if it is added to a collection the Assets Metadata also becomes immutable.
+As it is fow odew pwugins, wike [royalties](/core/plugins/royalties) when it is assignyed to an MPW Cowe Cowwection de MPW Cowe Asset awso is used on de Asset~ So if it is added to a cowwection de Assets Metadata awso becomes immutabwe.
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
 
-## Arguments
+## Awguments
 
-The immutableMetadata Plugin requires no arguments.
+De immutabweMetadata Pwugin wequiwes nyo awguments.
 
-## Adding the immutableMetadata Plugin to an Asset code example
+## Adding de immutabweMetadata Pwugin to an Asset code exampwe
 
-{% dialect-switcher title="Adding a Immutability Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Immutabiwity Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import {
@@ -39,13 +39,13 @@ await addPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Adding the immutableMetadata Plugin to a Collection code example
+## Adding de immutabweMetadata Pwugin to a Cowwection code exampwe
 
-{% dialect-switcher title="Add immutableMetadata Plugin to Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Add immutabweMetadata Pwugin to Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import {
@@ -60,5 +60,5 @@ await addCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
