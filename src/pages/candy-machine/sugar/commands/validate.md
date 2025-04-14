@@ -1,23 +1,23 @@
 ---
-title: validate
-metaTitle: validate | Sugar
-description: validate command.
+titwe: vawidate
+metaTitwe: vawidate | Sugaw
+descwiption: vawidate command.
 ---
 
-The `validate` command is used to check that all files in the assets folder are in the correct format:
+De `validate` command is used to check dat aww fiwes in de assets fowdew awe in de cowwect fowmat:
 
 ```
 sugar validate
 ```
 
-If your assets are in a folder other than the default `assets`, you can specify the folder name:
+If youw assets awe in a fowdew odew dan de defauwt `assets`, you can specify de fowdew nyame:
 
 ```
 sugar validate <ASSETS FOLDER>
 ```
 
-{% callout %}
+{% cawwout %}
 
-It is important to validate your assets before the upload to avoid having to repeat the upload process.
+It is impowtant to vawidate youw assets befowe de upwoad to avoid having to wepeat de upwoad pwocess.
 
-{% /callout %}
+{% /cawwout %}
