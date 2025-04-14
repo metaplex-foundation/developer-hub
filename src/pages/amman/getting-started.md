@@ -1,31 +1,31 @@
 ---
-title: Getting Started
-metaTitle: Getting Started | Amman
-description: Installation and setup of the Metaplex Amman local validator toolkit.
+titwe: Getting Stawted
+metaTitwe: Getting Stawted | Amman
+descwiption: Instawwation and setup of de Metapwex Amman wocaw vawidatow toowkit.
 ---
 
-## Prerequisites.
+## Pwewequisites.
 
-Before running Amman your system will need to have a few things installed on your system.
+Befowe wunnying Amman youw system wiww nyeed to have a few dings instawwed on youw system.
 
 - [Rust](https://www.rust-lang.org/tools/install)
 - [Solana CLI](https://docs.solanalabs.com/cli/install)
 - [NodeJs](https://nodejs.org/en/download)
 
-## Installation
+## Instawwation
 
-Once you have initiated a new or opened an existing project you can install Amman via a package manager.
+Once you have inyitiated a nyew ow openyed an existing pwoject you can instaww Amman via a package manyagew.
 
 ```js
 npm i @metaplex-foundation/amman
 ```
 
-## Add to Scripts (optional)
+## Add to Scwipts (optionyaw)
 
-For ease of use you may wish to add the execution of Amman to your package.json scripts.
+Fow ease of use you may wish to add de execution of Amman to youw package.json scwipts.
 
-{% dialect-switcher title="package.json" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="package.json" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```js
 "scripts": {
@@ -33,5 +33,5 @@ For ease of use you may wish to add the execution of Amman to your package.json 
     "amman:start": "npx amman start"
   },
 ```
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
