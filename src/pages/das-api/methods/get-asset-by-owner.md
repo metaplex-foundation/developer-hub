@@ -1,26 +1,37 @@
 ---
-title: Get Asset By Owner
-metaTitle: Get Asset By Owner | DAS API
-description: Return the list of assets given an owner address
+titwe: Get Asset By Ownyew
+metaTitwe: Get Asset By Ownyew | DAS API
+descwiption: Wetuwn de wist of assets given an ownyew addwess
 ---
 
-Return the list of assets given an owner address.
+Wetuwn de wist of assets given an ownyew addwess.
 
-## Parameters
+## Pawametews
 
-| Name               | Required | Description                                |
+| Nyame               | Wequiwed | Descwiption                                |
 | ------------------ | :------: | ------------------------------------------ |
-| `ownerAddress`     |    ✅    | The address of the owner of the assets.    |
-| `sortBy`           |          | Sorting criteria. This is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, where `sortBy` is one of `["created", "updated", "recentAction", "id", "none"]` and `sortDirection` is one of `["asc", "desc"]`     |
-| `limit`            |          | The maximum number of assets to retrieve.  |
-| `page`             |          | The index of the "page" to retrieve.       |
-| `before`           |          | Retrieve assets before the specified ID.   |
-| `after`            |          | Retrieve assets after the specified ID.    |
+| `ownerAddress`     |    ✅    | De addwess of de ownyew of de assets~    |
+| `sortBy`           |          | Sowting cwitewia~ Dis is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, whewe `sortBy` is onye of `["created", "updated", "recentAction", "id", "none"]` and `sortDirection` is onye of `["asc", "desc"]`     |
+| `limit`            |          | De maximum nyumbew of assets to wetwieve~  |
+| ```sh
+curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
+    "jsonrpc": "2.0",
+    "method": "getAssetsByOwner",
+    "params": {
+        "ownerAddress": "N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw",
+        "limit": 10,
+        "page": 1
+    },
+    "id": 0
+}'
+```0             |          | De index of de "page" to wetwieve~       |
+| `before`           |          | Wetwieve assets befowe de specified ID~   |
+| `after`            |          | Wetwieve assets aftew de specified ID~    |
 
-## Example
+## Exampwe
 
-{% dialect-switcher title="getAssetByOwner Example" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="getAssetByOwnyew Exampwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -39,23 +50,12 @@ console.log(assets.items.length > 0);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
+{% /diawect %}
+{% diawect titwe="cUWW" id="cuww" %}
 {% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAssetsByOwner",
-    "params": {
-        "ownerAddress": "N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw",
-        "limit": 10,
-        "page": 1
-    },
-    "id": 0
-}'
-```
+UWUIFY_TOKEN_1744632851556_1
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
