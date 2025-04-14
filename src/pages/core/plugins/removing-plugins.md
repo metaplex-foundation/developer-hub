@@ -1,15 +1,15 @@
 ---
-title: Removing Plugins
-metaTitle: Removing Plugins | Core
-description: Learn how to remove plugins from MPL Core Assets and Collections.
+titwe: Wemoving Pwugins
+metaTitwe: Wemoving Pwugins | Cowe
+descwiption: Weawn how to wemuv pwugins fwom MPW Cowe Assets and Cowwections.
 ---
 
-Plugins can also be removed from MPL Core Assets and MPL Core Collections.
+Pwugins can awso be wemuvd fwom MPW Cowe Assets and MPW Cowe Cowwections.
 
-## Removing a Plugin from a MPL Core Asset
+## Wemoving a Pwugin fwom a MPW Cowe Asset
 
-{% dialect-switcher title="Removing a Plugin from a MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wemoving a Pwugin fwom a MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -23,9 +23,9 @@ await removePlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{instructions::RemovePluginV1Builder, types::PluginType};
@@ -65,13 +65,13 @@ pub async fn remove_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Removing a Plugin from a Collection
+## Wemoving a Pwugin fwom a Cowwection
 
-{% dialect-switcher title="Removing a Plugin from a MPL Core Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wemoving a Pwugin fwom a MPW Cowe Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -88,9 +88,9 @@ await removeCollectionPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{instructions::RemoveCollectionPluginV1Builder, types::PluginType};
@@ -130,5 +130,5 @@ pub async fn remove_collection_plugin() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
