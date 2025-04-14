@@ -1,217 +1,232 @@
 ---
-title: Allowlist Guard
-metaTitle: Allowlist Guard | Core Candy Machine
-description: "The Core Candy Machine 'Allowlist' guard guard allows you to set a list of predefined wallets that are allowed to mint from your Core Candy Machine"
+titwe: Awwowwist Guawd
+metaTitwe: Awwowwist Guawd | Cowe Candy Machinye
+descwiption: "De Cowe Candy Machinye 'Awwowwist' guawd guawd awwows you to set a wist of pwedefinyed wawwets dat awe awwowed to mint fwom youw Cowe Candy Machinye"
 ---
 
-## Overview
+## Ovewview
 
-The **Allow List** guard validates the minting wallet against a predefined list of wallets. If the minting wallet is not part of this list, minting will fail.
+De **Awwow Wist** guawd vawidates de minting wawwet against a pwedefinyed wist of wawwets~ If de minting wawwet is nyot pawt of dis wist, minting wiww faiw.
 
-Providing a big list of wallets in the settings of this guard would require a lot of storage on the blockchain and would likely need more than one transaction to insert them all. Therefore, the Allow List guard uses [**Merkle Trees**](https://en.m.wikipedia.org/wiki/Merkle_tree) to verify that the minting wallet is part of the preconfigured list of wallets.
+Pwoviding a big wist of wawwets in de settings of dis guawd wouwd wequiwe a wot of stowage on de bwockchain and wouwd wikewy nyeed mowe dan onye twansaction to insewt dem aww~ Dewefowe, de Awwow Wist guawd uses ```ts
+import { getMerkleRoot } from "@metaplex-foundation/mpl-core-candy-machine";
 
-This works by creating a binary tree of hashes where all leaves hash themselves two by two until we reach the final hash known as the **Merkle Root**. This means that if any leaf were to change, the final Merkle Root would be corrupted.
+const allowList = [
+  "Ur1CbWSGsXCdedknRbJsEk7urwAvu1uddmQv51nAnXB",
+  "GjwcWFQYzemBtpUoN5fMAP2FZviTtMRWCmrppGuTthJS",
+  "AT8nPwujHAD14cLojTcB1qdBzA1VXnT6LVGuUd6Y73Cy",
+];
 
-{% diagram %}
-{% node #hash-7 label="Hash 7" theme="brown" /%}
-{% node #merkle-root label="Merkle Root" theme="transparent" parent="hash-7" x="-90" y="8" /%}
-{% node #hash-5 label="Hash 5" parent="hash-7" y="100" x="-200" theme="orange" /%}
-{% node #hash-6 label="Hash 6" parent="hash-7" y="100" x="200" theme="orange" /%}
+create(umi, {
+  // ...
+  guards: {
+    allowList: some({ merkleRoot: getMerkleRoot(allowList) }),
+  },
+});
+```5 to vewify dat de minting wawwet is pawt of de pweconfiguwed wist of wawwets.
 
-{% node #leaves label="Leaves" parent="hash-5" y="105" x="-170" theme="transparent" /%}
-{% node #hash-1 label="Hash 1" parent="hash-5" y="100" x="-100" theme="orange" /%}
-{% node #hash-2 label="Hash 2" parent="hash-5" y="100" x="100" theme="orange" /%}
-{% node #hash-3 label="Hash 3" parent="hash-6" y="100" x="-100" theme="orange" /%}
-{% node #hash-4 label="Hash 4" parent="hash-6" y="100" x="100" theme="orange" /%}
+Dis wowks by cweating a binyawy twee of hashes whewe aww weaves hash demsewves two by two untiw we weach de finyaw hash knyown as de **Mewkwe Woot**~ Dis means dat if any weaf wewe to change, de finyaw Mewkwe Woot wouwd be cowwupted.
 
-{% node #data label="Data" parent="hash-1" y="105" x="-80" theme="transparent" /%}
-{% node #Ur1C label="Ur1C...bWSG" parent="hash-1" y="100" x="-23" /%}
-{% node #sXCd label="sXCd...edkn" parent="hash-2" y="100" x="-20" /%}
-{% node #RbJs label="RbJs...Ek7u" parent="hash-3" y="100" x="-17" /%}
-{% node #rwAv label="rwAv...u1ud" parent="hash-4" y="100" x="-16" /%}
+{% diagwam %}
+{% nyode #hash-7 wabew="Hash 7" deme="bwown" /%}
+{% nyode #mewkwe-woot wabew="Mewkwe Woot" deme="twanspawent" pawent="hash-7" x="-90" y="8" /%}
+{% nyode #hash-5 wabew="Hash 5" pawent="hash-7" y="100" x="-200" deme="owange" /%}
+{% nyode #hash-6 wabew="Hash 6" pawent="hash-7" y="100" x="200" deme="owange" /%}
 
-{% edge from="hash-5" to="hash-7" fromPosition="top" toPosition="bottom" /%}
-{% edge from="hash-6" to="hash-7" fromPosition="top" toPosition="bottom" /%}
+{% nyode #weaves wabew="Weaves" pawent="hash-5" y="105" x="-170" deme="twanspawent" /%}
+{% nyode #hash-1 wabew="Hash 1" pawent="hash-5" y="100" x="-100" deme="owange" /%}
+{% nyode #hash-2 wabew="Hash 2" pawent="hash-5" y="100" x="100" deme="owange" /%}
+{% nyode #hash-3 wabew="Hash 3" pawent="hash-6" y="100" x="-100" deme="owange" /%}
+{% nyode #hash-4 wabew="Hash 4" pawent="hash-6" y="100" x="100" deme="owange" /%}
 
-{% edge from="hash-1" to="hash-5" fromPosition="top" toPosition="bottom" /%}
-{% edge from="hash-2" to="hash-5" fromPosition="top" toPosition="bottom" /%}
-{% edge from="hash-3" to="hash-6" fromPosition="top" toPosition="bottom" /%}
-{% edge from="hash-4" to="hash-6" fromPosition="top" toPosition="bottom" /%}
+{% nyode #data wabew="Data" pawent="hash-1" y="105" x="-80" deme="twanspawent" /%}
+{% nyode #Uw1C wabew="Uw1C...bWSG" pawent="hash-1" y="100" x="-23" /%}
+{% nyode #sXCd wabew="sXCd...edkn" pawent="hash-2" y="100" x="-20" /%}
+{% nyode #WbJs wabew="WbJs...Ek7u" pawent="hash-3" y="100" x="-17" /%}
+{% nyode #wwAv wabew="wwAv...u1ud" pawent="hash-4" y="100" x="-16" /%}
 
-{% edge from="Ur1C" to="hash-1" fromPosition="top" toPosition="bottom" path="straight" /%}
-{% edge from="sXCd" to="hash-2" fromPosition="top" toPosition="bottom" path="straight" /%}
-{% edge from="RbJs" to="hash-3" fromPosition="top" toPosition="bottom" path="straight" /%}
-{% edge from="rwAv" to="hash-4" fromPosition="top" toPosition="bottom" path="straight" /%}
+{% edge fwom="hash-5" to="hash-7" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="hash-6" to="hash-7" fwomPosition="top" toPosition="bottom" /%}
 
-{% /diagram %}
+{% edge fwom="hash-1" to="hash-5" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="hash-2" to="hash-5" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="hash-3" to="hash-6" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="hash-4" to="hash-6" fwomPosition="top" toPosition="bottom" /%}
 
-To verify that a leaf is part of the tree, we simply need a list of all the intermediary hashes that allow us to go up the tree and re-compute the Merkle Root. We call this list of intermediary hashes a **Merkle Proof**. If the computed Merkle Root matches the stored Merkle Root, we can be sure that the leaf is part of the tree and therefore part of the original list.
+{% edge fwom="Uw1C" to="hash-1" fwomPosition="top" toPosition="bottom" pad="stwaight" /%}
+{% edge fwom="sXCd" to="hash-2" fwomPosition="top" toPosition="bottom" pad="stwaight" /%}
+{% edge fwom="WbJs" to="hash-3" fwomPosition="top" toPosition="bottom" pad="stwaight" /%}
+{% edge fwom="wwAv" to="hash-4" fwomPosition="top" toPosition="bottom" pad="stwaight" /%}
 
-{% diagram %}
-{% node #hash-7 label="Hash 7" theme="brown" /%}
-{% node #merkle-root label="Merkle Root" theme="transparent" parent="hash-7" x="-90" y="8" /%}
-{% node #hash-5 label="Hash 5" parent="hash-7" y="100" x="-200" theme="mint" /%}
-{% node #hash-6 label="Hash 6" parent="hash-7" y="100" x="200" theme="blue" /%}
+{% /diagwam %}
 
-{% node #legend-merkle-proof label="Merkle Proof =" theme="transparent" parent="hash-7" x="200" y="10" /%}
-{% node #legend-hash-4 label="Hash 4" parent="legend-merkle-proof" x="100" y="-7" theme="mint" /%}
-{% node #plus label="+" parent="legend-hash-4" theme="transparent" x="81" y="8" /%}
-{% node #legend-hash-5 label="Hash 5" parent="legend-hash-4" x="100" theme="mint" /%}
+To vewify dat a weaf is pawt of de twee, we simpwy nyeed a wist of aww de intewmediawy hashes dat awwow us to go up de twee and we-compute de Mewkwe Woot~ We caww dis wist of intewmediawy hashes a **Mewkwe Pwoof**~ If de computed Mewkwe Woot matches de stowed Mewkwe Woot, we can be suwe dat de weaf is pawt of de twee and dewefowe pawt of de owiginyaw wist.
 
+{% diagwam %}
+{% nyode #hash-7 wabew="Hash 7" deme="bwown" /%}
+{% nyode #mewkwe-woot wabew="Mewkwe Woot" deme="twanspawent" pawent="hash-7" x="-90" y="8" /%}
+{% nyode #hash-5 wabew="Hash 5" pawent="hash-7" y="100" x="-200" deme="mint" /%}
+{% nyode #hash-6 wabew="Hash 6" pawent="hash-7" y="100" x="200" deme="bwue" /%}
 
-{% node #leaves label="Leaves" parent="hash-5" y="105" x="-170" theme="transparent" /%}
-{% node #hash-1 label="Hash 1" parent="hash-5" y="100" x="-100" theme="orange" /%}
-{% node #hash-2 label="Hash 2" parent="hash-5" y="100" x="100" theme="orange" /%}
-{% node #hash-3 label="Hash 3" parent="hash-6" y="100" x="-100" theme="blue" /%}
-{% node #hash-4 label="Hash 4" parent="hash-6" y="100" x="100" theme="mint" /%}
-
-{% node #data label="Data" parent="hash-1" y="105" x="-80" theme="transparent" /%}
-{% node #Ur1C label="Ur1C...bWSG" parent="hash-1" y="100" x="-23" /%}
-{% node #sXCd label="sXCd...edkn" parent="hash-2" y="100" x="-20" /%}
-{% node #RbJs label="RbJs...Ek7u" parent="hash-3" y="100" x="-17" theme="blue" /%}
-{% node #rwAv label="rwAv...u1ud" parent="hash-4" y="100" x="-16" /%}
-
-{% edge from="hash-5" to="hash-7" fromPosition="top" toPosition="bottom" theme="mint" /%}
-{% edge from="hash-6" to="hash-7" fromPosition="top" toPosition="bottom" theme="blue" /%}
-
-{% edge from="hash-1" to="hash-5" fromPosition="top" toPosition="bottom" /%}
-{% edge from="hash-2" to="hash-5" fromPosition="top" toPosition="bottom" /%}
-{% edge from="hash-3" to="hash-6" fromPosition="top" toPosition="bottom" theme="blue" /%}
-{% edge from="hash-4" to="hash-6" fromPosition="top" toPosition="bottom" theme="mint" /%}
-
-{% edge from="Ur1C" to="hash-1" fromPosition="top" toPosition="bottom" path="straight" /%}
-{% edge from="sXCd" to="hash-2" fromPosition="top" toPosition="bottom" path="straight" /%}
-{% edge from="RbJs" to="hash-3" fromPosition="top" toPosition="bottom" path="straight" theme="blue" /%}
-{% edge from="rwAv" to="hash-4" fromPosition="top" toPosition="bottom" path="straight" /%}
-
-{% /diagram %}
-
-Therefore, the Allow List guard’s settings require a Merkle Root which acts as a source of truth for the preconfigured list of allowed wallets. For a wallet to prove it is on the allowed list, it must provide a valid Merkle Proof that allows the program to re-compute the Merkle Root and ensure it matches the guard’s settings.
-
-Note that our SDKs provide helpers to make it easy to create Merkle Root and Merkle Proofs for a given list of wallets.
-
-{% diagram  %}
-
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1 /%}
-{% node #allowList label="AllowList" /%}
-{% node #guardMerkleRoot label="- Merkle Root" /%}
-{% node label="..." /%}
-{% /node %}
-
-{% node parent="allowList" x="250" y="10" %}
-{% node #merkleRoot theme="slate" %}
-Merkle Root {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-
-{% node parent="merkleRoot" x="170" %}
-{% node #merkleProof theme="slate" %}
-Merkle Proof {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-
-{% node parent="merkleRoot" y="100" x="-12" %}
-{% node #walletList  %}
-List of wallets
-
-allowed to mint
-{%/node %}
-{% /node %}
-{% edge from="merkleProof" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
-{% edge from="merkleRoot" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
+{% nyode #wegend-mewkwe-pwoof wabew="Mewkwe Pwoof =" deme="twanspawent" pawent="hash-7" x="200" y="10" /%}
+{% nyode #wegend-hash-4 wabew="Hash 4" pawent="wegend-mewkwe-pwoof" x="100" y="-7" deme="mint" /%}
+{% nyode #pwus wabew="+" pawent="wegend-hash-4" deme="twanspawent" x="81" y="8" /%}
+{% nyode #wegend-hash-5 wabew="Hash 5" pawent="wegend-hash-4" x="100" deme="mint" /%}
 
 
-{% node parent="merkleProof" y="100" %}
-{% node #payer label="Payer" theme="indigo" /%}
-{% node theme="dimmed"%}
-Owner: Any Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="merkleProof" to="payer" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" path="straight" /%}
+{% nyode #weaves wabew="Weaves" pawent="hash-5" y="105" x="-170" deme="twanspawent" /%}
+{% nyode #hash-1 wabew="Hash 1" pawent="hash-5" y="100" x="-100" deme="owange" /%}
+{% nyode #hash-2 wabew="Hash 2" pawent="hash-5" y="100" x="100" deme="owange" /%}
+{% nyode #hash-3 wabew="Hash 3" pawent="hash-6" y="100" x="-100" deme="bwue" /%}
+{% nyode #hash-4 wabew="Hash 4" pawent="hash-6" y="100" x="100" deme="mint" /%}
 
-{% node parent="candy-machine" x="740" %}
-  {% node #route-validation theme="pink" %}
-    Route from the
+{% nyode #data wabew="Data" pawent="hash-1" y="105" x="-80" deme="twanspawent" /%}
+{% nyode #Uw1C wabew="Uw1C...bWSG" pawent="hash-1" y="100" x="-23" /%}
+{% nyode #sXCd wabew="sXCd...edkn" pawent="hash-2" y="100" x="-20" /%}
+{% nyode #WbJs wabew="WbJs...Ek7u" pawent="hash-3" y="100" x="-17" deme="bwue" /%}
+{% nyode #wwAv wabew="wwAv...u1ud" pawent="hash-4" y="100" x="-16" /%}
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="route-validation" y="-20" x="100" theme="transparent" %}
-  Verify Merkle Proof
-{% /node %}
+{% edge fwom="hash-5" to="hash-7" fwomPosition="top" toPosition="bottom" deme="mint" /%}
+{% edge fwom="hash-6" to="hash-7" fwomPosition="top" toPosition="bottom" deme="bwue" /%}
 
-{% node parent="route-validation" #allowList-pda y="130" x="32" %}
-{% node theme="slate" %}
-Allowlist PDA {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% edge fwom="hash-1" to="hash-5" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="hash-2" to="hash-5" fwomPosition="top" toPosition="bottom" /%}
+{% edge fwom="hash-3" to="hash-6" fwomPosition="top" toPosition="bottom" deme="bwue" /%}
+{% edge fwom="hash-4" to="hash-6" fwomPosition="top" toPosition="bottom" deme="mint" /%}
 
-{% node parent="allowList-pda" #mint-candy-guard y="90" x="-31" %}
-  {% node theme="pink" %}
-    Mint from
+{% edge fwom="Uw1C" to="hash-1" fwomPosition="top" toPosition="bottom" pad="stwaight" /%}
+{% edge fwom="sXCd" to="hash-2" fwomPosition="top" toPosition="bottom" pad="stwaight" /%}
+{% edge fwom="WbJs" to="hash-3" fwomPosition="top" toPosition="bottom" pad="stwaight" deme="bwue" /%}
+{% edge fwom="wwAv" to="hash-4" fwomPosition="top" toPosition="bottom" pad="stwaight" /%}
 
-    _Candy Guard Program_ {% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+{% /diagwam %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="110" x="-8" %}
-  {% node theme="pink" %}
-    Mint from 
+Dewefowe, de Awwow Wist guawd’s settings wequiwe a Mewkwe Woot which acts as a souwce of twud fow de pweconfiguwed wist of awwowed wawwets~ Fow a wawwet to pwuv it is on de awwowed wist, it must pwovide a vawid Mewkwe Pwoof dat awwows de pwogwam to we-compute de Mewkwe Woot and ensuwe it matches de guawd’s settings.
+
+Nyote dat ouw SDKs pwovide hewpews to make it easy to cweate Mewkwe Woot and Mewkwe Pwoofs fow a given wist of wawwets.
+
+{% diagwam  %}
+
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1 /%}
+{% nyode #awwowWist wabew="AwwowWist" /%}
+{% nyode #guawdMewkweWoot wabew="- Mewkwe Woot" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="awwowWist" x="250" y="10" %}
+{% nyode #mewkweWoot deme="swate" %}
+Mewkwe Woot {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="mewkweWoot" x="170" %}
+{% nyode #mewkwePwoof deme="swate" %}
+Mewkwe Pwoof {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="mewkweWoot" y="100" x="-12" %}
+{% nyode #wawwetWist  %}
+Wist of wawwets
+
+awwowed to mint
+{%/nyode %}
+{% /nyode %}
+{% edge fwom="mewkwePwoof" to="wawwetWist" awwow="nyonye" fwomPosition="bottom" toPosition="top" awwow="stawt" /%}
+{% edge fwom="mewkweWoot" to="wawwetWist" awwow="nyonye" fwomPosition="bottom" toPosition="top" awwow="stawt" /%}
+
+
+{% nyode pawent="mewkwePwoof" y="100" %}
+{% nyode #payew wabew="Payew" deme="indigo" /%}
+{% nyode deme="dimmed"%}
+Ownyew: Any Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="mewkwePwoof" to="payew" awwow="nyonye" fwomPosition="bottom" toPosition="top" awwow="stawt" pad="stwaight" /%}
+
+{% nyode pawent="candy-machinye" x="740" %}
+  {% nyode #woute-vawidation deme="pink" %}
+    Woute fwom de
+
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="woute-vawidation" y="-20" x="100" deme="twanspawent" %}
+  Vewify Mewkwe Pwoof
+{% /nyode %}
+
+{% nyode pawent="woute-vawidation" #awwowWist-pda y="130" x="32" %}
+{% nyode deme="swate" %}
+Awwowwist PDA {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="awwowWist-pda" #mint-candy-guawd y="90" x="-31" %}
+  {% nyode deme="pink" %}
+    Mint fwom
+
+    _Candy Guawd Pwogwam_ {% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
+
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="110" x="-8" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_ {% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="110" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_ {% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="110" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="110" x="70" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="110" x="70" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" /%}
-{% edge from="guardMerkleRoot" to="merkleRoot" arrow="start" path="straight" /%}
-{% edge from="merkleRoot" to="route-validation" arrow="none" fromPosition="top" dashed=true /%}
-{% edge from="merkleProof" to="route-validation" arrow="none" fromPosition="top" dashed=true  %}
-if the payer's Merkle Proof does not match 
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
+{% edge fwom="guawdMewkweWoot" to="mewkweWoot" awwow="stawt" pad="stwaight" /%}
+{% edge fwom="mewkweWoot" to="woute-vawidation" awwow="nyonye" fwomPosition="top" dashed=twue /%}
+{% edge fwom="mewkwePwoof" to="woute-vawidation" awwow="nyonye" fwomPosition="top" dashed=twue  %}
+if de payew's Mewkwe Pwoof does nyot match 
 
-the guard's Merkle Root validation will fail
+de guawd's Mewkwe Woot vawidation wiww faiw
 {% /edge %}
-{% edge from="candy-guard-guards" to="guards" /%}
-{% edge from="route-validation" to="allowList-pda" path="straight" /%}
-{% edge from="allowList-pda" to="mint-candy-guard" path="straight" /%}
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd-guawds" to="guawds" /%}
+{% edge fwom="woute-vawidation" to="awwowWist-pda" pad="stwaight" /%}
+{% edge fwom="awwowWist-pda" to="mint-candy-guawd" pad="stwaight" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Allow List guard contains the following settings:
+De Awwow Wist guawd contains de fowwowing settings:
 
-- **Merkle Root**: The Root of the Merkle Tree representing the allow list.
+- **Mewkwe Woot**: De Woot of de Mewkwe Twee wepwesenting de awwow wist.
 
-{% dialect-switcher title="Set up a Candy Machine using the Allowlist guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Awwowwist guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-To help us manage Merkle Trees, the Umi library provides two helper methods called `getMerkleRoot` and `getMerkleProof` that you may use like so.
+To hewp us manyage Mewkwe Twees, de Umi wibwawy pwovides two hewpew medods cawwed `getMerkleRoot` and `getMerkleProof` dat you may use wike so.
 
 ```ts
 import {
@@ -233,33 +248,18 @@ const validMerkleProof = getMerkleProof(
 const invalidMerkleProof = getMerkleProof(allowList, "invalid-address");
 ```
 
-Once we have computed the Merkle Root of our allow list, we can use it to set up the Allow List guard on our Candy Machine.
+Once we have computed de Mewkwe Woot of ouw awwow wist, we can use it to set up de Awwow Wist guawd on ouw Candy Machinye.
 
-```ts
-import { getMerkleRoot } from "@metaplex-foundation/mpl-core-candy-machine";
+UWUIFY_TOKEN_1744632763863_1
 
-const allowList = [
-  "Ur1CbWSGsXCdedknRbJsEk7urwAvu1uddmQv51nAnXB",
-  "GjwcWFQYzemBtpUoN5fMAP2FZviTtMRWCmrppGuTthJS",
-  "AT8nPwujHAD14cLojTcB1qdBzA1VXnT6LVGuUd6Y73Cy",
-];
-
-create(umi, {
-  // ...
-  guards: {
-    allowList: some({ merkleRoot: getMerkleRoot(allowList) }),
-  },
-});
-```
-
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [AllowList](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AllowList.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [AllowList](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AllowList.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Sugar does not contain a function to create manage the merkle root. When using a allowlist with sugar you would have to compute it beforehand e.g. with the previously described JavaScript function or [sol-tools](https://sol-tools.tonyboyle.io/cmv3/allow-list) and than add the merkle root hash to your config like this:
+Sugaw does nyot contain a function to cweate manyage de mewkwe woot~ When using a awwowwist wid sugaw you wouwd have to compute it befowehand e.g~ wid de pweviouswy descwibed JavaScwipt function ow [sol-tools](https://sol-tools.tonyboyle.io/cmv3/allow-list) and dan add de mewkwe woot hash to youw config wike dis:
 
 ```json
 "allowList" : {
@@ -268,24 +268,24 @@ Sugar does not contain a function to create manage the merkle root. When using a
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The Allow List guard contains the following Mint Settings:
+De Awwow Wist guawd contains de fowwowing Mint Settings:
 
-- **Merkle Root**: The Root of the Merkle Tree representing the allow list.
+- **Mewkwe Woot**: De Woot of de Mewkwe Twee wepwesenting de awwow wist.
 
-Note that, before being able to mint, **we must validate the minting wallet by providing a Merkle Proof**. See [Validate a Merkle Proof](#validate-a-merkle-proof) below for more details.
+Nyote dat, befowe being abwe to mint, **we must vawidate de minting wawwet by pwoviding a Mewkwe Pwoof**~ See [Validate a Merkle Proof](#validate-a-merkle-proof) bewow fow mowe detaiws.
 
-Also note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to add the Allow List Proof PDA to the remaining accounts of the mint instruction. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#allowlist) for more details.
+Awso nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to add de Awwow Wist Pwoof PDA to de wemainying accounts of de mint instwuction~ See de [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#allowlist) fow mowe detaiws.
 
-{% dialect-switcher title="Mint with the Allow List guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Mint wid de Awwow Wist guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the Allow List guard using the `mintArgs` argument like so.
+You may pass de Mint Settings of de Awwow Wist guawd using de `mintArgs` awgument wike so.
 
 ```ts
 import { getMerkleRoot } from "@metaplex-foundation/mpl-core-candy-machine";
@@ -304,45 +304,45 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [AllowListMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AllowListMintArgs.html)
+API Wefewences: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [AllowListMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AllowListMintArgs.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
+_As soon as a guawd is assignyed you cannyot use sugaw to mint - dewefowe dewe awe nyo specific mint settings._
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-The Allow List route instruction supports the following features.
+De Awwow Wist woute instwuction suppowts de fowwowing featuwes.
 
-### Validate a Merkle Proof
+### Vawidate a Mewkwe Pwoof
 
-_Path: `proof`_
+_Pad: `proof`_
 
-Instead of passing the Merkle Proof directly to the mint instruction, the minting wallet must perform a [Pre-Validation](/core-candy-machine/mint#minting-with-pre-validation) by using the route instruction of the Allow List guard.
+Instead of passing de Mewkwe Pwoof diwectwy to de mint instwuction, de minting wawwet must pewfowm a [Pre-Validation](/core-candy-machine/mint#minting-with-pre-validation) by using de woute instwuction of de Awwow Wist guawd.
 
-This route instruction will compute the Merkle Root from the provided Merkle Proof and, if valid, will create a new PDA account acting as proof that the minting wallet is part of the allowed list. Therefore, when minting, the Allow List guard only needs to check for the existence of this PDA account to authorize or deny minting to the wallet.
+Dis woute instwuction wiww compute de Mewkwe Woot fwom de pwovided Mewkwe Pwoof and, if vawid, wiww cweate a nyew PDA account acting as pwoof dat de minting wawwet is pawt of de awwowed wist~ Dewefowe, when minting, de Awwow Wist guawd onwy nyeeds to check fow de existence of dis PDA account to audowize ow deny minting to de wawwet.
 
-So why can’t we just verify the Merkle Proof directly within the mint instruction? That’s simply because, for big allow lists, Merkle Proofs can end up being pretty lengthy. After a certain size, it becomes impossible to include it within the mint transaction that already contains a decent amount of instructions. By separating the validation process from the minting process, we make it possible for allow lists to be as big as we need them to be.
+So why can’t we just vewify de Mewkwe Pwoof diwectwy widin de mint instwuction? owo Dat’s simpwy because, fow big awwow wists, Mewkwe Pwoofs can end up being pwetty wengdy~ Aftew a cewtain size, it becomes impossibwe to incwude it widin de mint twansaction dat awweady contains a decent amount of instwuctions~ By sepawating de vawidation pwocess fwom de minting pwocess, we make it possibwe fow awwow wists to be as big as we nyeed dem to be.
 
-This path of the route instruction accepts the following arguments:
+Dis pad of de woute instwuction accepts de fowwowing awguments:
 
-- **Path** = `proof`: Selects the path to execute in the route instruction.
-- **Merkle Root**: The Root of the Merkle Tree representing the allow list.
-- **Merkle Proof**: The list of intermediary hashes that should be used to compute the Merkle Root and verify that it matches the Merkle Root stored on the guard’s settings.
-- **Minter** (optional): The minter account as a signer if it is not the same as the payer. When provided, this account must be part of the allow list for the proof to be valid.
+- **Pad** = `proof`: Sewects de pad to execute in de woute instwuction.
+- **Mewkwe Woot**: De Woot of de Mewkwe Twee wepwesenting de awwow wist.
+- **Mewkwe Pwoof**: De wist of intewmediawy hashes dat shouwd be used to compute de Mewkwe Woot and vewify dat it matches de Mewkwe Woot stowed on de guawd’s settings.
+- **Mintew** (optionyaw): De mintew account as a signyew if it is nyot de same as de payew~ When pwovided, dis account must be pawt of de awwow wist fow de pwoof to be vawid.
 
-{% dialect-switcher title="Pre-Validate a Wallet" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Pwe-Vawidate a Wawwet" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the "Proof" Route Settings of the Allow List guard using the `routeArgs` argument like so.
+You may pass de "Pwoof" Woute Settings of de Awwow Wist guawd using de `routeArgs` awgument wike so.
 
 ```ts
 import {
@@ -368,23 +368,23 @@ await route(umi, {
 }).sendAndConfirm(umi);
 ```
 
-The `umi.identity` wallet is now allowed to mint from the Candy Machine.
+De `umi.identity` wawwet is nyow awwowed to mint fwom de Candy Machinye.
 
-API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [AllowListRouteArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AllowListRouteArgs.html)
+API Wefewences: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/route.html), [AllowListRouteArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AllowListRouteArgs.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-_Sugar can not be used to call the "Proof" Route._ 
+_Sugaw can nyot be used to caww de "Pwoof" Woute._ 
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Allowlist Accounts
-When the `Allowlist` Guard is used a `AllowListProof` Account is created after the route instruction was run. When it can be fetched the user is on the allowlist and the route was run already. For validation purposes it can be fetched like this:
+## Awwowwist Accounts
+When de `Allowlist` Guawd is used a `AllowListProof` Account is cweated aftew de woute instwuction was wun~ When it can be fetched de usew is on de awwowwist and de woute was wun awweady~ Fow vawidation puwposes it can be fetched wike dis:
 
 ```js
 import {
