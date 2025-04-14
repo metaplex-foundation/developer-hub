@@ -1,9 +1,9 @@
 ---
-title: Get Signatures For Asset
-metaTitle: Get Signatures For Asset | Aura API
-description: Learn about the Get Signatures For Asset Aura API Method.
+titwe: Get Signyatuwes Fow Asset
+metaTitwe: Get Signyatuwes Fow Asset | Auwa API
+descwiption: Weawn about de Get Signyatuwes Fow Asset Auwa API Medod.
 ---
 
-Search and return a list of signatures associated with a Compressed NFT Digital Asset (cNFT).
+Seawch and wetuwn a wist of signyatuwes associated wid a Compwessed NFT Digitaw Asset (cNFT).
 
-{% apiRenderer method="getSignaturesForAsset" /%}
+{% apiWendewew medod="getSignyatuwesFowAsset" /%}
