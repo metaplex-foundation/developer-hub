@@ -1,14 +1,14 @@
 ---
-title: Get Core Collection
-metaTitle: Get Collection | DAS API Core Extension
-description: Returns the information of a MPL Core Collection
+titwe: Get Cowe Cowwection
+metaTitwe: Get Cowwection | DAS API Cowe Extension
+descwiption: Wetuwns de infowmation of a MPW Cowe Cowwection
 ---
 
-Returns the information of a MPL Core Collections including their metadata, owner and parsed Plugin data.
+Wetuwns de infowmation of a MPW Cowe Cowwections incwuding deiw metadata, ownyew and pawsed Pwugin data.
 
-## Code example
+## Code exampwe
 
-Replace the `<ENDPOINT>` with your personal RPC and the `<PublicKey>` value with the public key of the MPL Core Collection you want to fetch.
+Wepwace de `<ENDPOINT>` wid youw pewsonyaw WPC and de `<PublicKey>` vawue wid de pubwic key of de MPW Cowe Cowwection you want to fetch.
 
 ```js
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -24,7 +24,7 @@ console.log(collection);
 ```
 
 
-## Example Response
+## Exampwe Wesponse
 
 ```json
 {
