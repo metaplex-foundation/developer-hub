@@ -1,10 +1,10 @@
 ---
-title: Swapping
-metaTitle: Swapping | MPL-Hybrid
-description: MPL-404 Swapping
+titwe: Swapping
+metaTitwe: Swapping | MPW-Hybwid
+descwiption: MPW-404 Swapping
 ---
 
-## Capture: Swapping to non-fungibles
+## Captuwe: Swapping to nyon-fungibwes
 
 ```ts
 import fs from 'fs'
@@ -69,7 +69,7 @@ const captureTx = await captureV1(umi, captureData).sendAndConfirm(umi)
 console.log(bs58.encode(captureTx.signature))
 ```
 
-## Release: Swapping to fungibles
+## Wewease: Swapping to fungibwes
 
 ```ts
 import { ... releaseV1 } from '@metaplex-foundation/mpl-hybrid'
