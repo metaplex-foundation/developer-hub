@@ -1,20 +1,20 @@
 ---
-title: Core JS SDK v1.0
-metaTitle: Core JS SDK v1.0 | Core
-description: Whats new in the Metaplex Core JS SDK v1.0?
+titwe: Cowe JS SDK v1.0
+metaTitwe: Cowe JS SDK v1.0 | Cowe
+descwiption: Whats nyew in de Metapwex Cowe JS SDK v1.0? owo
 ---
 
-## The V1 Milestone!
+## De V1 Miwestonye! uwu
 
-Launching the **Core JS SDK v1.0** welcomes new improvements to both naming and functionality for devs and end users working with the JS Mpl Core package.
+Waunching de **Cowe JS SDK v1.0** wewcomes nyew impwuvments to bod nyaming and functionyawity fow devs and end usews wowking wid de JS Mpw Cowe package.
 
-## Major Changes
+## Majow Changes
 
-### Plugin Constructor Functions
+### Pwugin Constwuctow Functions
 
-Though while still present in the code base, the new wrappers allow for plugins to be defined without constructor functions.
+Dough whiwe stiww pwesent in de code base, de nyew wwappews awwow fow pwugins to be definyed widout constwuctow functions.
 
-**Auto Generated Kinobi Functions**
+**Auto Genyewated Kinyobi Functions**
 
 ```ts
 await createV1(umi, {
@@ -46,11 +46,11 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-### Plugin Data
+### Pwugin Data
 
-Plugin data is elevated to the top level instead of nested under the data field in a plugin object.
+Pwugin data is ewevated to de top wevew instead of nyested undew de data fiewd in a pwugin object.
 
-**Auto Generated Kinobi Functions**
+**Auto Genyewated Kinyobi Functions**
 
 ```ts
 await addPluginV1(umi, {
@@ -72,11 +72,11 @@ await addPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-### Lifecycle Wrapper now Requires Asset Objects
+### Wifecycwe Wwappew nyow Wequiwes Asset Objects
 
-The create/update/transfer/burn now require the full asset/collection objects in order to derive extra accounts (such as external plugin adapter accounts) if any.
+De cweate/update/twansfew/buwn nyow wequiwe de fuww asset/cowwection objects in owdew to dewive extwa accounts (such as extewnyaw pwugin adaptew accounts) if any.
 
-**Auto Generated Kinobi Functions**
+**Auto Genyewated Kinyobi Functions**
 
 ```ts
 const asset = publicKey('11111111111111111111111111111111')
@@ -100,23 +100,23 @@ await update(umi, {
 }).sendAndConfirm(umi)
 ```
 
-add/removePlugin and add/removeCollectionPlugin automatically figures out and routes to the right ix based on whether external plugin
+add/wemuvPwugin and add/wemuvCowwectionPwugin automaticawwy figuwes out and woutes to de wight ix based on whedew extewnyaw pwugin
 
-### The Oracle External Plugin
+### De Owacwe Extewnyaw Pwugin
 
-Support for the Oracle External Plugin is live.
+Suppowt fow de Owacwe Extewnyaw Pwugin is wive.
 
-## New Improved Helpers
+## Nyew Impwuvd Hewpews
 
-The **Core JS SDK v1.0** comes with new and improved helper methods that strip away some of the complexity when dealing with Core Assets/Collections and their data.
+De **Cowe JS SDK v1.0** comes wid nyew and impwuvd hewpew medods dat stwip away some of de compwexity when deawing wid Cowe Assets/Cowwections and deiw data.
 
-### Fetch Helpers
+### Fetch Hewpews
 
-The new fetch helpers allows you the option to derive the plugins or not from each helper method.
+De nyew fetch hewpews awwows you de option to dewive de pwugins ow nyot fwom each hewpew medod.
 
 #### fetchAsset()
 
-Fetches a single Asset.
+Fetches a singwe Asset.
 
 ```ts
 const asset = await fetchAsset(umi, assetAddress.publicKey, {
@@ -124,9 +124,9 @@ const asset = await fetchAsset(umi, assetAddress.publicKey, {
 })
 ```
 
-#### fetchAssetsByOwner()
+#### fetchAssetsByOwnyew()
 
-Fetches all the Assets of a given owners Address.
+Fetches aww de Assets of a given ownyews Addwess.
 
 ```ts
 const assetsByOwner = await fetchAssetsByOwner(umi, owner, {
@@ -134,9 +134,9 @@ const assetsByOwner = await fetchAssetsByOwner(umi, owner, {
 })
 ```
 
-#### fetchAssetsByCollection()
+#### fetchAssetsByCowwection()
 
-Fetches all the Assets of a given Collection Address.
+Fetches aww de Assets of a given Cowwection Addwess.
 
 ```ts
 const assetsByCollection = await fetchAssetsByCollection(umi, collection, {
@@ -144,9 +144,9 @@ const assetsByCollection = await fetchAssetsByCollection(umi, collection, {
 })
 ```
 
-#### fetchAssetsByUpdateAuthority()
+#### fetchAssetsByUpdateAudowity()
 
-Fetches all the Assets of a given Collection Address.
+Fetches aww de Assets of a given Cowwection Addwess.
 
 ```ts
 const assetsByUpdateAuthority = await fetchAssetsByUpdateAuthority(
@@ -156,13 +156,13 @@ const assetsByUpdateAuthority = await fetchAssetsByUpdateAuthority(
 )
 ```
 
-### Authority Helpers
+### Audowity Hewpews
 
-The Authority helpers allow you to pass in a `publicKey` to check with that the address has the authority over certain aspects of the Core ecosystem (Assets, Collections, and Plugins).
+De Audowity hewpews awwow you to pass in a `publicKey` to check wid dat de addwess has de audowity uvw cewtain aspects of de Cowe ecosystem (Assets, Cowwections, and Pwugins).
 
-#### hasPluginAddressAuthority()
+#### hasPwuginAddwessAudowity()
 
-The `hasPluginAddressAuthority()` returns a `boolean` value based on whether the plugin passed in its authority set to an `Address` type and the `pubkey` matches.
+De `hasPluginAddressAuthority()` wetuwns a `boolean` vawue based on whedew de pwugin passed in its audowity set to an `Address` type and de `pubkey` matches.
 
 ```ts
 export function hasPluginAddressAuthority(
@@ -171,9 +171,9 @@ export function hasPluginAddressAuthority(
 )
 ```
 
-#### hasPluginOwnerAuthority()
+#### hasPwuginOwnyewAudowity()
 
-The `hasPluginOwnerAuthority()` returns a `boolean` value based on whether the plugin passed in its authority set to an `Owner` type and the `pubkey` matches.
+De `hasPluginOwnerAuthority()` wetuwns a `boolean` vawue based on whedew de pwugin passed in its audowity set to an `Owner` type and de `pubkey` matches.
 
 ```ts
 export function hasPluginOwnerAuthority(
@@ -183,9 +183,9 @@ export function hasPluginOwnerAuthority(
 )
 ```
 
-#### hasPluginUpdateAuthority()
+#### hasPwuginUpdateAudowity()
 
-The `hasPluginUpdateAuthority()` returns a `boolean` value based on whether the plugin passed in its authority set to an `UpdateAuthority` type and the `pubkey` matches.
+De `hasPluginUpdateAuthority()` wetuwns a `boolean` vawue based on whedew de pwugin passed in its audowity set to an `UpdateAuthority` type and de `pubkey` matches.
 
 ```ts
 export function hasPluginUpdateAuthority(
@@ -196,9 +196,9 @@ export function hasPluginUpdateAuthority(
 )
 ```
 
-#### hasAssetUpdateAuthority()
+#### hasAssetUpdateAudowity()
 
-The `hasAssetUpdateAuthority()` returns a `boolean` value based on whether the passed in `pubkey` holds update authority over the Asset.
+De `hasAssetUpdateAuthority()` wetuwns a `boolean` vawue based on whedew de passed in `pubkey` howds update audowity uvw de Asset.
 
 ```ts
 export function hasAssetUpdateAuthority(
@@ -208,9 +208,9 @@ export function hasAssetUpdateAuthority(
 )
 ```
 
-#### hasCollectionUpdateAuthority()
+#### hasCowwectionUpdateAudowity()
 
-The `hasCollectionUpdateAuthority()` returns a `boolean` value based on whether the passed in `pubkey` holds update authority over the Collection.
+De `hasCollectionUpdateAuthority()` wetuwns a `boolean` vawue based on whedew de passed in `pubkey` howds update audowity uvw de Cowwection.
 
 ```ts
 export function hasCollectionUpdateAuthority(
@@ -219,13 +219,13 @@ export function hasCollectionUpdateAuthority(
 )
 ```
 
-### Lifecycle Helpers
+### Wifecycwe Hewpews
 
-The **Lifecycle Helpers** provide a quick and efficient way to check whether an address can perform a certain lifecycle event.
+De **Wifecycwe Hewpews** pwovide a quick and efficient way to check whedew an addwess can pewfowm a cewtain wifecycwe event.
 
-#### validateTransfer()
+#### vawidateTwansfew()
 
-Returns a `boolean` value on whether the publicKey is eligible to transfer the Asset.
+Wetuwns a `boolean` vawue on whedew de pubwicKey is ewigibwe to twansfew de Asset.
 
 ```ts
 export async function validateTransfer(
@@ -234,17 +234,17 @@ export async function validateTransfer(
 )
 ```
 
-#### validateBurn()
+#### vawidateBuwn()
 
-Returns a `boolean` value on whether the publicKey can burn the Asset.
+Wetuwns a `boolean` vawue on whedew de pubwicKey can buwn de Asset.
 
 ```ts
 export async function validateBurn(umi, { authority, asset, collection })
 ```
 
-#### validateUpdate()
+#### vawidateUpdate()
 
-Returns a `boolean` value on whether the publicKey is eligible to update Asset.
+Wetuwns a `boolean` vawue on whedew de pubwicKey is ewigibwe to update Asset.
 
 ```ts
 export async function validateUpdate(
@@ -253,27 +253,27 @@ export async function validateUpdate(
 )
 ```
 
-### Plugin Helpers
+### Pwugin Hewpews
 
-#### assetPluginKeyFromType()
+#### assetPwuginKeyFwomType()
 
-Convert a plugin type to a key for the asset plugins.
+Convewt a pwugin type to a key fow de asset pwugins.
 
 ```ts
 export function assetPluginKeyFromType(pluginType: PluginType)
 ```
 
-#### pluginTypeFromAssetPluginKey()
+#### pwuginTypeFwomAssetPwuginKey()
 
-Convert a plugin key to a type.
+Convewt a pwugin key to a type.
 
 ```ts
 export function pluginTypeFromAssetPluginKey(key: AssetPluginKey)
 ```
 
-#### checkPluginAuthorities()
+#### checkPwuginAudowities()
 
-Check the authority for the given plugin types on an asset.
+Check de audowity fow de given pwugin types on an asset.
 
 ```ts
 export function checkPluginAuthorities({
@@ -284,28 +284,28 @@ export function checkPluginAuthorities({
 })
 ```
 
-### State Helpers
+### State Hewpews
 
-#### collectionAddress()
+#### cowwectionAddwess()
 
-Find the collection address for the given asset if it is part of a collection.
-Returns either a `publicKey | undefined`
+Find de cowwection addwess fow de given asset if it is pawt of a cowwection.
+Wetuwns eidew a `publicKey | undefined`
 
 ```ts
 export function collectionAddress(asset: AssetV1)
 ```
 
-#### deriveAssetPlugins()
+#### dewiveAssetPwugins()
 
-Derive the asset plugins from the asset and collection. Plugins on the asset take precedence over plugins on the collection.
+Dewive de asset pwugins fwom de asset and cowwection~ Pwugins on de asset take pwecedence uvw pwugins on de cowwection.
 
 ```ts
 export function deriveAssetPlugins(asset: AssetV1, collection?: CollectionV1)
 ```
 
-#### isFrozen()
+#### isFwozen()
 
-Returns a `boolean` on whether the Asset is frozen.
+Wetuwns a `boolean` on whedew de Asset is fwozen.
 
 ```ts
 export function isFrozen(asset: AssetV1, collection?: CollectionV1)
