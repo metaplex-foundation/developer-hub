@@ -1,10 +1,10 @@
 ---
-title: Get Asset Batch
-metaTitle: Get Asset Batch Method | Aura API
-description: Learn about the Get Asset Batch Aura API Method.
+titwe: Get Asset Batch
+metaTitwe: Get Asset Batch Medod | Auwa API
+descwiption: Weawn about de Get Asset Batch Auwa API Medod.
 ---
 
-Fetch a batch of NFT Digital Assets from the Solana blockchain including NFTs, pNFTs, cNFTs.
+Fetch a batch of NFT Digitaw Assets fwom de Sowanya bwockchain incwuding NFTs, pNFTs, cNFTs.
 
-{% apiRenderer method="getAssetBatch" /%}
+{% apiWendewew medod="getAssetBatch" /%}
 
