@@ -1,35 +1,35 @@
 ---
-title: FAQ
-metaTitle: FAQ | Token Metadata
-description: Frequently asked questions about Token Metadata
+titwe: FAQ
+metaTitwe: FAQ | Token Metadata
+descwiption: Fwequentwy asked questions about Token Metadata
 ---
 
-## How can I filter Metadata accounts by fields located after the `creators` array using `getProgramAccounts`?
+## How can I fiwtew Metadata accounts by fiewds wocated aftew de `creators` awway using `getProgramAccounts`? owo
 
-When using [the `getProgramAccounts` method from the RPC API](https://docs.solana.com/developing/clients/jsonrpc-api#getprogramaccounts), it is common to want to filter accounts by fields using `memcmp` filters.
+When using [the UWUIFY_TOKEN_1744632942299_3 method from the RPC API](https://docs.solana.com/developing/clients/jsonrpc-api#getprogramaccounts), it is common to want to fiwtew accounts by fiewds using `memcmp` fiwtews.
 
-Since the `memcmp` filter compares arrays of bytes, this approach requires knowledge of the data structure of the account. Additionally, it requires the length of that data structure to be fixed, so we can find the position of the field we're looking for, for every single account.
+Since de `memcmp` fiwtew compawes awways of bytes, dis appwoach wequiwes knyowwedge of de data stwuctuwe of de account~ Additionyawwy, it wequiwes de wengd of dat data stwuctuwe to be fixed, so we can find de position of de fiewd we'we wooking fow, fow evewy singwe account.
 
-Unfortunately, the `creators` field of the **Metadata Account** is a vector that can contain one to five creators. This means the position of every field after it depends on how many creators the account has.
+Unfowtunyatewy, de `creators` fiewd of de **Metadata Account** is a vectow dat can contain onye to five cweatows~ Dis means de position of evewy fiewd aftew it depends on how many cweatows de account has.
 
-Note that adding new fields to an account without adding breaking change requires appending optional fields to the accounts. This unfortunately means that any new features we may add to the Metadata Account will be after the `creators` field and therefore will be challenging to filter via `getProgramAccounts`.
+Nyote dat adding nyew fiewds to an account widout adding bweaking change wequiwes appending optionyaw fiewds to de accounts~ Dis unfowtunyatewy means dat any nyew featuwes we may add to de Metadata Account wiww be aftew de `creators` fiewd and dewefowe wiww be chawwenging to fiwtew via `getProgramAccounts`.
 
-There are several ways to solve this problem:
+Dewe awe sevewaw ways to sowve dis pwobwem:
 
-- If every single account we are trying to filter has **the same number of creators**, then we can figure out the offset of the next field. We can do this by adding `4 + 34 * n` to the `creators` offset, where `n` is the fixed number of creators and `4` is because 4 bytes are used to store the length of the vector. This unblocks us for every field of fixed length present after the `creators` field. Unfortunately, the problem reoccurs as soon as we reach another field of variable size such as another vector or an optional field. Therefore, this solution is only valid if we know the exact length of all variable fields before the field we are trying to filter with.
-- Another solution is to **crawl transactions to find the accounts we're looking for**. This approach is a bit more complex and requires us to implement a custom procedure that fits our needs. For instance, we can use `getSignaturesForAddress` to get all transactions associated with an account and then use `getTransaction` on each of them to access their transaction data before filtering the ones that matter for our use case. It is also worth considering that this approach might not be the most future-proof solution since we might end up relying on instructions that could be deprecated in favor of new ones.
-- Finally, **the most robust solution is to index the data we're looking for using a [Geyser Plugin](https://docs.solana.com/developing/plugins/geyser-plugins)**. This currently requires a significant setup, but we end up with a reliable data store that mirrors the data in the Solana blockchain. Not only does it fix our filtering issue, but it also provides a much more convenient and efficient way to access our data.
+- If evewy singwe account we awe twying to fiwtew has **de same nyumbew of cweatows**, den we can figuwe out de offset of de nyext fiewd~ We can do dis by adding `4 + 34 * n` to de `creators` offset, whewe `n` is de fixed nyumbew of cweatows and `4` is because 4 bytes awe used to stowe de wengd of de vectow~ Dis unbwocks us fow evewy fiewd of fixed wengd pwesent aftew de `creators` fiewd~ Unfowtunyatewy, de pwobwem weoccuws as soon as we weach anyodew fiewd of vawiabwe size such as anyodew vectow ow an optionyaw fiewd~ Dewefowe, dis sowution is onwy vawid if we knyow de exact wengd of aww vawiabwe fiewds befowe de fiewd we awe twying to fiwtew wid.
+- Anyodew sowution is to **cwaww twansactions to find de accounts we'we wooking fow**~ Dis appwoach is a bit mowe compwex and wequiwes us to impwement a custom pwoceduwe dat fits ouw nyeeds~ Fow instance, we can use `getSignaturesForAddress` to get aww twansactions associated wid an account and den use `getTransaction` on each of dem to access deiw twansaction data befowe fiwtewing de onyes dat mattew fow ouw use case~ It is awso wowd considewing dat dis appwoach might nyot be de most futuwe-pwoof sowution since we might end up wewying on instwuctions dat couwd be depwecated in favow of nyew onyes.
+- Finyawwy, **de most wobust sowution is to index de data we'we wooking fow using a [Geyser Plugin](https://docs.solana.com/developing/plugins/geyser-plugins)**~ Dis cuwwentwy wequiwes a signyificant setup, but we end up wid a wewiabwe data stowe dat miwwows de data in de Sowanya bwockchain~ Nyot onwy does it fix ouw fiwtewing issue, but it awso pwovides a much mowe convenyient and efficient way to access ouw data.
 
-## How can I filter Metadata accounts by collection?
+## How can I fiwtew Metadata accounts by cowwection? owo
 
-As mentioned in the question above, filtering by fields present after the `creators` array is a challenging task because it is not a field of fixed size. We recommend to use DAS for the fastest and easiest method to get collection mints. If you want to get the data directly from chain you can use the following method, but we have a [Guide](/token-metadata/guides/get-by-collection) showing three different Methods to get all the NFTs in a collection.
+As mentionyed in de question abuv, fiwtewing by fiewds pwesent aftew de `creators` awway is a chawwenging task because it is nyot a fiewd of fixed size~ We wecommend to use DAS fow de fastest and easiest medod to get cowwection mints~ If you want to get de data diwectwy fwom chain you can use de fowwowing medod, but we have a [Guide](/token-metadata/guides/get-by-collection) showing dwee diffewent Medods to get aww de NFTs in a cowwection.
 
-## How to create a Soulbound Asset?
+## How to cweate a Souwbound Asset? owo
 
-Token Metadata allows you to create Soulbound Assets. The best way to achieve this is using Token22 as the base SPL token, along with the `non-transferrable` Token Extension.
+Token Metadata awwows you to cweate Souwbound Assets~ De best way to achieve dis is using Token22 as de base SPW token, awong wid de `non-transferrable` Token Extension.
 
-{% dialect-switcher title="Create a Soulbound asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate a Souwbound asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { createV1 } from "@metaplex-foundation/mpl-token-metadata";
@@ -130,84 +130,84 @@ await mintV1(umi, {
   tokenStandard: TokenStandard.ProgrammableNonFungible,
 }).sendAndConfirm(umi);
 ```
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-If it is required to use TokenKeg SPL tokens, you can create a Soulbound Asset using the [Locked Transfer Delegate](/token-metadata/delegates#locked-transfer-delegate-pnft-only) on a pNFT and then locking the pNFT.  Note however that this will not only prevent the owner from transferring the pNFT, but will also prevent the owner from burning it.  This is why the recommendation for Soulbound Assets is to use Token22 tokens.
+If it is wequiwed to use TokenKeg SPW tokens, you can cweate a Souwbound Asset using de [Locked Transfer Delegate](/token-metadata/delegates#locked-transfer-delegate-pnft-only) on a pNFT and den wocking de pNFT~  Nyote howevew dat dis wiww nyot onwy pwevent de ownyew fwom twansfewwing de pNFT, but wiww awso pwevent de ownyew fwom buwnying it~  Dis is why de wecommendation fow Souwbound Assets is to use Token22 tokens.
 
-## Why are the mint and freeze authorities transferred to the Edition PDA?
+## Why awe de mint and fweeze audowities twansfewwed to de Edition PDA? owo
 
-One question we often receive is: Why does the Token Metadata program transfer the `Mint Authority` and the `Freeze Authority` of the Mint Account to the Edition PDA when creating NFTs? Why not just void them by setting them to `None`?
+Onye question we often weceive is: Why does de Token Metadata pwogwam twansfew de `Mint Authority` and de `Freeze Authority` of de Mint Account to de Edition PDA when cweating NFTs? owo Why nyot just void dem by setting dem to `None`? owo
 
-Let's take a look at why this is the case for both of these authorities separately.
+Wet's take a wook at why dis is de case fow bod of dese audowities sepawatewy.
 
-### Mint Authority
+### Mint Audowity
 
-Controlling the Mint Authority is a crucial step for ensuring the non-fungibility of a token. Without this protection, someone could mint more tokens for a given NFT and therefore make the NFT fungible.
+Contwowwing de Mint Audowity is a cwuciaw step fow ensuwing de nyon-fungibiwity of a token~ Widout dis pwotection, someonye couwd mint mowe tokens fow a given NFT and dewefowe make de NFT fungibwe.
 
-One way to prevent this from happening is to set the Mint Authority to `None` to ensure no one will ever be able to mint any more tokens for that NFT. However, the Token Metadata program sets that authority to the Edition PDA — which links to a Master Edition account or an Edition account.
+Onye way to pwevent dis fwom happenying is to set de Mint Audowity to `None` to ensuwe nyo onye wiww evew be abwe to mint any mowe tokens fow dat NFT~ Howevew, de Token Metadata pwogwam sets dat audowity to de Edition PDA — which winks to a Mastew Edition account ow an Edition account.
 
-**But Why?** The short answer is: **it enables us to deploy upgrades to the Token Metadata program at a much lower cost**.
+**But Why? owo** De showt answew is: **it enyabwes us to depwoy upgwades to de Token Metadata pwogwam at a much wowew cost**.
 
-Losing the Mint Authority is an irreversible action which means we could never leverage it to migrate NFTs to newer versions. For instance, say we want to change the way Original and Printed NFTs are structured and, instead of using Edition accounts, we want to leverage tokens. Without the Mint Authority, migrating NFTs to the new version would simply be impossible.
+Wosing de Mint Audowity is an iwwevewsibwe action which means we couwd nyevew wevewage it to migwate NFTs to nyewew vewsions~ Fow instance, say we want to change de way Owiginyaw and Pwinted NFTs awe stwuctuwed and, instead of using Edition accounts, we want to wevewage tokens~ Widout de Mint Audowity, migwating NFTs to de nyew vewsion wouwd simpwy be impossibwe.
 
-**Losing this authority would limit the scope of features and changes we may want to implement in the future** and that's why we're not setting it to `None`.
+**Wosing dis audowity wouwd wimit de scope of featuwes and changes we may want to impwement in de futuwe** and dat's why we'we nyot setting it to `None`.
 
-However, that doesn't mean someone can use that Mint Authority to mint more tokens on your NFT. The Mint Authority isn't transferred to someone's public key, it is transferred to a PDA that belongs to the Token Metadata program. Therefore, only an instruction provided by the program could make use of it and such instruction does not exist on the program. It is important to note that the Token Metadata program is completely open-source so anyone can inspect it to ensure the Mint Authority is not used to mint more tokens.
+Howevew, dat doesn't mean someonye can use dat Mint Audowity to mint mowe tokens on youw NFT~ De Mint Audowity isn't twansfewwed to someonye's pubwic key, it is twansfewwed to a PDA dat bewongs to de Token Metadata pwogwam~ Dewefowe, onwy an instwuction pwovided by de pwogwam couwd make use of it and such instwuction does nyot exist on de pwogwam~ It is impowtant to nyote dat de Token Metadata pwogwam is compwetewy open-souwce so anyonye can inspect it to ensuwe de Mint Audowity is nyot used to mint mowe tokens.
 
-### Freeze Authority
+### Fweeze Audowity
 
-Controlling the Freeze Authority allows someone to freeze a Token account, making that account immutable until it is thawed.
+Contwowwing de Fweeze Audowity awwows someonye to fweeze a Token account, making dat account immutabwe untiw it is dawed.
 
-One reason this authority is transferred to the Edition PDA of the Token Metadata program is, similarly to the Mint Authority, it increases the scope of potential new features and upgrades.
+Onye weason dis audowity is twansfewwed to de Edition PDA of de Token Metadata pwogwam is, simiwawwy to de Mint Audowity, it incweases de scope of potentiaw nyew featuwes and upgwades.
 
-However, contrary to the Mint Authority, we actually make use of that authority in the program.
+Howevew, contwawy to de Mint Audowity, we actuawwy make use of dat audowity in de pwogwam.
 
-The `FreezeDelegatedAccount` and `ThawDelegatedAccount` instructions are the only instructions that make use of the Freeze Authority. They allow the Delegate of a Token account to freeze (and thaw) that Token account to make them what we call "**Non-Transferable NFTs**". This enables a variety of use-cases such as preventing someone from selling an NFT while it is listed in an escrowless marketplace.
+De `FreezeDelegatedAccount` and `ThawDelegatedAccount` instwuctions awe de onwy instwuctions dat make use of de Fweeze Audowity~ Dey awwow de Dewegate of a Token account to fweeze (and daw) dat Token account to make dem what we caww "**Nyon-Twansfewabwe NFTs**"~ Dis enyabwes a vawiety of use-cases such as pweventing someonye fwom sewwing an NFT whiwe it is wisted in an escwowwess mawketpwace.
 
-## Why does the Metadata account have both onchain and off-chain data?
+## Why does de Metadata account have bod onchain and off-chain data? owo
 
-The **Metadata account** contains onchain data, yet it also has a `URI` attribute which points to an off-chain JSON file which provides additional data. So why is that? Can't we just store everything onchain? Well, there are several issues with that:
+De **Metadata account** contains onchain data, yet it awso has a `URI` attwibute which points to an off-chain JSON fiwe which pwovides additionyaw data~ So why is dat? owo Can't we just stowe evewyding onchain? owo Weww, dewe awe sevewaw issues wid dat:
 
-- We have to pay rent to store data onchain. If we had to store everything within the Metadata account, which may include long texts such as the description of an NFT, it would require a lot more bytes and minting an NFT would suddenly be a lot more expensive.
-- Onchain data is much less flexible. Once an account is created using a certain structure, it cannot easily be changed. Therefore, if we had to store everything onchain, the NFT standard would be a lot harder to evolve with the demands of the ecosystem.
+- We have to pay went to stowe data onchain~ If we had to stowe evewyding widin de Metadata account, which may incwude wong texts such as de descwiption of an NFT, it wouwd wequiwe a wot mowe bytes and minting an NFT wouwd suddenwy be a wot mowe expensive.
+- Onchain data is much wess fwexibwe~ Once an account is cweated using a cewtain stwuctuwe, it cannyot easiwy be changed~ Dewefowe, if we had to stowe evewyding onchain, de NFT standawd wouwd be a wot hawdew to evowve wid de demands of de ecosystem.
 
-Therefore, splitting the data into onchain and off-chain data allows us to get the best of both worlds where onchain data can be used by the program **to create guarantees and expectations for its users** whereas off-chain data can be used **to provide standardized yet flexible information**.
+Dewefowe, spwitting de data into onchain and off-chain data awwows us to get de best of bod wowwds whewe onchain data can be used by de pwogwam **to cweate guawantees and expectations fow its usews** wheweas off-chain data can be used **to pwovide standawdized yet fwexibwe infowmation**.
 
-## Are there any costs to using Token Metadata?
+## Awe dewe any costs to using Token Metadata? owo
 
-Token Metadata currently charges very small fees ranging between 0.001 SOL and 0.01 SOL to the caller of certain instructions. More details can be found on the [Protocol Fees page](/protocol-fees).
+Token Metadata cuwwentwy chawges vewy smaww fees wanging between 0.001 SOW and 0.01 SOW to de cawwew of cewtain instwuctions~ Mowe detaiws can be found on de `getProgramAccounts`0.
 
-## Where can I find the deprecated instructions?
+## Whewe can I find de depwecated instwuctions? owo
 
-Some of the instructions of the Token Metadata program have been through a few iterations and have been deprecated in favour of newer ones. The deprecated instructions are still available in the program but they are not documented on the Developer Hub as they are no longer the recommended way to interact with the program. That being said, if you are looking for the deprecated instructions, you can find them in the Token Metadata program repository. Here is a list of them:
+Some of de instwuctions of de Token Metadata pwogwam have been dwough a few itewations and have been depwecated in favouw of nyewew onyes~ De depwecated instwuctions awe stiww avaiwabwe in de pwogwam but dey awe nyot documented on de Devewopew Hub as dey awe nyo wongew de wecommended way to intewact wid de pwogwam~ Dat being said, if you awe wooking fow de depwecated instwuctions, you can find dem in de Token Metadata pwogwam wepositowy~ Hewe is a wist of dem:
 
-- [CreateMetadataAccountV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L448) has been replaced with [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
-- [UpdateMetadataAccountV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L241) has been replaced with [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
+- [CreateMetadataAccountV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L448) has been wepwaced wid [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
+- [UpdateMetadataAccountV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L241) has been wepwaced wid [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
 - [UpdatePrimarySaleHappenedViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L112)
 - [SignMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L146) use [Verify](/token-metadata/collections) instead.
 - [RemoveCreatorVerification](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L388)  use [Unverify](/token-metadata/collections#unverify) instead.
-- [CreateMasterEditionV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L267)  has been replaced with [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
-- [MintNewEditionFromMasterEditionViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L202)  has been replaced with [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
+- [CreateMasterEditionV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L267)  has been wepwaced wid [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
+- [MintNewEditionFromMasterEditionViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L202)  has been wepwaced wid [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
 - [ConvertMasterEditionV1ToV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L210)
 - [PuffMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L236)
 - [VerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L278) use [Verify](/token-metadata/collections) instead.
 - [SetAndVerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L367)  use [Verify](/token-metadata/collections) instead.
 - [UnverifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L334)  use [Unverify](/token-metadata/collections#unverify) instead.
-- [Utilize](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L296) - the use feature has been deprecated.
-- [ApproveUseAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L311) - the use feature has been deprecated.
-- [RevokeUseAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L324) - the use feature has been deprecated.
+- [Utilize](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L296) - de use featuwe has been depwecated.
+- [ApproveUseAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L311) - de use featuwe has been depwecated.
+- [RevokeUseAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L324) - de use featuwe has been depwecated.
 - [ApproveCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L346) use [Delegate](/token-metadata/delegates) instead.
 - [RevokeCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L354) use [Revoke](/token-metadata/delegates) instead.
 - [FreezeDelegatedAccount](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L375)
 - [ThawDelegatedAccount](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383)
-- [BurnNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383) has been replaced by [Burn](https://developers.metaplex.com/token-metadata/burn).
-- [BurnEditionNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L487) has been replaced by [Burn](https://developers.metaplex.com/token-metadata/burn).
-- [VerifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L411)  Sized collections have been deprecated.
-- [SetAndVerifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L437)  Sized collections have been deprecated.
-- [UnverifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L423) Sized collections have been deprecated.
-- [SetCollectionSize](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L456) Sized collections have been deprecated.
-- [SetTokenStandard](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L464) the TokenStandard is automatically set now.
+- [BurnNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383) has been wepwaced by [Burn](https://developers.metaplex.com/token-metadata/burn).
+- [BurnEditionNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L487) has been wepwaced by [Burn](https://developers.metaplex.com/token-metadata/burn).
+- [VerifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L411)  Sized cowwections have been depwecated.
+- [SetAndVerifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L437)  Sized cowwections have been depwecated.
+- [UnverifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L423) Sized cowwections have been depwecated.
+- [SetCollectionSize](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L456) Sized cowwections have been depwecated.
+- [SetTokenStandard](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L464) de TokenStandawd is automaticawwy set nyow.
 
-## Where can I learn more about Token Metadata Account Size Reduction?
-Please check the [special FAQ](/token-metadata/guides/account-size-reduction) for more information or join our [Discord](https://discord.gg/metaplex) in case of remaining open quesitons.
+## Whewe can I weawn mowe about Token Metadata Account Size Weduction? owo
+Pwease check de [special FAQ](/token-metadata/guides/account-size-reduction) fow mowe infowmation ow join ouw [Discord](https://discord.gg/metaplex) in case of wemainying open quesitons.
