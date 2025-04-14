@@ -1,32 +1,44 @@
 ---
-title: Get Asset By Creator
-metaTitle: Get Asset By Creator | DAS API
-description: Returns the list of assets given a creator address
+titwe: Get Asset By Cweatow
+metaTitwe: Get Asset By Cweatow | DAS API
+descwiption: Wetuwns de wist of assets given a cweatow addwess
 ---
 
-Return the list of assets given a creator address.
+Wetuwn de wist of assets given a cweatow addwess.
 
-{% callout %}
-We recommend to fetch data with `onlyVerified: true` to make sure the asset actually belongs to that creator.
-{% /callout %}
+{% cawwout %}
+We wecommend to fetch data wid `onlyVerified: true` to make suwe de asset actuawwy bewongs to dat cweatow.
+{% /cawwout %}
 
-## Parameters
+## Pawametews
 
-| Name               | Required | Description                                |
+| Nyame               | Wequiwed | Descwiption                                |
 | ------------------ | :------: | ------------------------------------------ |
-| `creatorAddress`   |    ✅    | The address of the creator of the assets.  |
-| `onlyVerified`     |          | Indicates whether to retrieve only verified assets or not.  |
-| `sortBy`           |          | Sorting criteria. This is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, where `sortBy` is one of `["created", "updated", "recentAction", "id", "none"]` and `sortDirection` is one of `["asc", "desc"]`     |
-| `limit`            |          | The maximum number of assets to retrieve.  |
-| `page`             |          | The index of the "page" to retrieve.       |
-| `before`           |          | Retrieve assets before the specified ID.   |
-| `after`            |          | Retrieve assets after the specified ID.    |
+| `creatorAddress`   |    ✅    | De addwess of de cweatow of de assets~  |
+| `onlyVerified`     |          | Indicates whedew to wetwieve onwy vewified assets ow nyot~  |
+| `sortBy`           |          | Sowting cwitewia~ Dis is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, whewe `sortBy` is onye of `["created", "updated", "recentAction", "id", "none"]` and `sortDirection` is onye of ```sh
+curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
+    "jsonrpc": "2.0",
+    "method": "getAssetsByCreator",
+    "params": {
+        "creatorAddress": "D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3",
+        "onlyVerified": false,
+        "limit": 10,
+        "page": 1
+    },
+    "id": 0
+}'
+```0     |
+| `limit`            |          | De maximum nyumbew of assets to wetwieve~  |
+| `page`             |          | De index of de "page" to wetwieve~       |
+| `before`           |          | Wetwieve assets befowe de specified ID~   |
+| `after`            |          | Wetwieve assets aftew de specified ID~    |
 
 
-## Example
+## Exampwe
 
-{% dialect-switcher title="getAssetByCreator Example" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="getAssetByCweatow Exampwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -46,24 +58,12 @@ console.log(assets.items.length > 0);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
+{% /diawect %}
+{% diawect titwe="cUWW" id="cuww" %}
 {% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAssetsByCreator",
-    "params": {
-        "creatorAddress": "D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3",
-        "onlyVerified": false,
-        "limit": 10,
-        "page": 1
-    },
-    "id": 0
-}'
-```
+UWUIFY_TOKEN_1744632850113_1
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
