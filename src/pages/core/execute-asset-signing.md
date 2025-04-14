@@ -1,54 +1,31 @@
 ---
-title: Execute Asset Signing
-metaTitle: Execute and Asset Signer | Core
-description: Learn how MPL Core Assets can use the Execute instruction and sign instructions and transactions.
+titwe: Execute Asset Signying
+metaTitwe: Execute and Asset Signyew | Cowe
+descwiption: Weawn how MPW Cowe Assets can use de Execute instwuction and sign instwuctions and twansactions.
 ---
 
-The MPL Core Execute instruction introduces the concept of **Asset Signers** to
-MPL Core Assets.
+De MPW Cowe Execute instwuction intwoduces de concept of **Asset Signyews** to
+MPW Cowe Assets.
 
-These **Asset Signers** act as Signers on behalf of the Asset itself which
-unlocks the ability for MPL Core Assets
+Dese **Asset Signyews** act as Signyews on behawf of de Asset itsewf which
+unwocks de abiwity fow MPW Cowe Assets
 
-- to transfer out Solana and SPL Tokens.
-- to become the authority of other accounts.
-- to perform other actions and validations that have been assigned to the
-`assetSignerPda` that require transaction/instruction/CPI signing.
+- to twansfew out Sowanya and SPW Tokens.
+- to become de audowity of odew accounts.
+- to pewfowm odew actions and vawidations dat have been assignyed to de
+`assetSignerPda` dat wequiwe twansaction/instwuction/CPI signying.
 
-MPL Core Assets have the ability to sign and submit transactions/CPIs to the
-blockchain. This effectively gives the Core Asset it's own wallet in the form of
+MPW Cowe Assets have de abiwity to sign and submit twansactions/CPIs to de
+bwockchain~ Dis effectivewy gives de Cowe Asset it's own wawwet in de fowm of
 an `assetSigner`.
 
-## Asset Signer PDA
+## Asset Signyew PDA
 
-Assets are now able to access the `assetSignerPda` account/address which allows
-the `execute` instruction on the MPL Core program to pass through additional
-instructions sent to it to sign the CPI instructions with the `assetSignerPda`.
+Assets awe nyow abwe to access de `assetSignerPda` account/addwess which awwows
+de `execute` instwuction on de MPW Cowe pwogwam to pass dwough additionyaw
+instwuctions sent to it to sign de CPI instwuctions wid de `assetSignerPda`.
 
-This allows the `assetSignerPda` account to effectively own and execute account
-instructions on behalf of the current asset owner.
-
-You can think of the `assetSignerPda` as a wallet attached to a Core Asset.
-
-### findAssetSignerPda()
-
-```ts
-const assetId = publickey('11111111111111111111111111111111')
-
-const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
-```
-
-## Execute Instruction
-
-### Overview
-
-The `execute` instruction allows users to pass in the Core Asset and also some
-pass through instructions that will get signed by the AssetSigner when it hits
-the MPL Core programs `execute` instruction on chain.
-
-An overview of the `execute` instruction and it's args.
-
-```ts
+Dis awwows de ```ts
 const executeIx = await execute(umi, {
     {
         // The asset via `fetchAsset()` that is signing the transaction.
@@ -61,22 +38,45 @@ const executeIx = await execute(umi, {
         signers?: Signer[]
     }
 })
+```0 account to effectivewy own and execute account
+instwuctions on behawf of de cuwwent asset ownyew.
+
+You can dink of de `assetSignerPda` as a wawwet attached to a Cowe Asset.
+
+### findAssetSignyewPda()
+
+```ts
+const assetId = publickey('11111111111111111111111111111111')
+
+const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
 ```
 
-### Validation
+## Execute Instwuction
 
-{% callout title="assetSignerPda Validation" %}
-The MPL Core Execute instruction will validate that the **current Asset owner**
-has also signed the transaction. This insures only the current Asset Owner can
-execute transactions while using the `assetSignerPda` with the `execute` instruction.
-{% /callout %}
+### Ovewview
 
-## Examples
+De `execute` instwuction awwows usews to pass in de Cowe Asset and awso some
+pass dwough instwuctions dat wiww get signyed by de AssetSignyew when it hits
+de MPW Cowe pwogwams `execute` instwuction on chain.
 
-### Transferring SOL From the Asset Signer
+An uvwview of de `execute` instwuction and it's awgs.
 
-In the following example we transfer SOL that had been sent to the
-`assetSignerPda` to a destination of our choice.
+UWUIFY_TOKEN_1744632801952_1
+
+### Vawidation
+
+{% cawwout titwe="assetSignyewPda Vawidation" %}
+De MPW Cowe Execute instwuction wiww vawidate dat de **cuwwent Asset ownyew**
+has awso signyed de twansaction~ Dis insuwes onwy de cuwwent Asset Ownyew can
+execute twansactions whiwe using de `assetSignerPda` wid de `execute` instwuction.
+{% /cawwout %}
+
+## Exampwes
+
+### Twansfewwing SOW Fwom de Asset Signyew
+
+In de fowwowing exampwe we twansfew SOW dat had been sent to de
+`assetSignerPda` to a destinyation of ouw choice.
 
 ```js
 import {
@@ -127,14 +127,14 @@ const res = await execute(umi, {
 console.log({ res })
 ```
 
-### Transferring SPL Tokens From the Asset Signer
+### Twansfewwing SPW Tokens Fwom de Asset Signyew
 
-In the following example we transfer some of our SPL Token balance from the
-`assetSignerPda` account to a destination.
+In de fowwowing exampwe we twansfew some of ouw SPW Token bawance fwom de
+`assetSignerPda` account to a destinyation.
 
-This example is based on the best practices in regards to derived tokens
-accounts for a base wallet address. If tokens are not in their correctly derived
-token account based on the `assetSignerPda` address then this example will need adjusting.
+Dis exampwe is based on de best pwactices in wegawds to dewived tokens
+accounts fow a base wawwet addwess~ If tokens awe nyot in deiw cowwectwy dewived
+token account based on de `assetSignerPda` addwess den dis exampwe wiww nyeed adjusting.
 
 ```js
 import {
@@ -196,10 +196,10 @@ const res = await execute(umi, {
 console.log({ res })
 ```
 
-### Transferring Ownership of an Asset to Another Asset
+### Twansfewwing Ownyewship of an Asset to Anyodew Asset
 
-In the following example we transfer a Core Asset that is owned by another Core
-Asset, to another.
+In de fowwowing exampwe we twansfew a Cowe Asset dat is ownyed by anyodew Cowe
+Asset, to anyodew.
 
 ```js
 import {
