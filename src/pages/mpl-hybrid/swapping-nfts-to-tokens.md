@@ -1,10 +1,10 @@
 ---
-title: Swapping an NFT to Tokens in MPL Hybrid
-metaTitle: Swapping an NFT to Tokens | MPL-Hybrid
-description: Learn to write a swap function so users can swap their NFT into Tokens in the MPL-Hybrid Program.
+titwe: Swapping an NFT to Tokens in MPW Hybwid
+metaTitwe: Swapping an NFT to Tokens | MPW-Hybwid
+descwiption: Weawn to wwite a swap function so usews can swap deiw NFT into Tokens in de MPW-Hybwid Pwogwam.
 ---
 
-The action of swapping Tokens in your possession to an NFT held in the escrow in the MPL-Hybrid program is called a `capture`.
+De action of swapping Tokens in youw possession to an NFT hewd in de escwow in de MPW-Hybwid pwogwam is cawwed a `capture`.
 
 
 
