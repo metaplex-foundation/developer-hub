@@ -1,13 +1,13 @@
 ---
-title: Shank
-metaTitle: Developer Tools | Shank
-description: extract IDLs from Rust Solana program code
+titwe: Shank
+metaTitwe: Devewopew Toows | Shank
+descwiption: extwact IDWs fwom Wust Sowanya pwogwam code
 ---
 
-Shank makes it possible to extract IDLs from Rust Solana program code annotated with Shank attribute macros. This IDL
-can then be fed to [Solita](solita) in order to generate low level TypeScript SDK for that particular Rust program.
+Shank makes it possibwe to extwact IDWs fwom Wust Sowanya pwogwam code annyotated wid Shank attwibute macwos~ Dis IDW
+can den be fed to [Solita](solita) in owdew to genyewate wow wevew TypeScwipt SDK fow dat pawticuwaw Wust pwogwam.
 
-🔗 **Helpful links:**
+🔗 **Hewpfuw winks:**
 
 - [GitHub Repository](https://github.com/metaplex-foundation/shank)
 - [Rust Crate](https://crates.io/crates/shank)
