@@ -1,14 +1,14 @@
 ---
-title: Not
-metaTitle: Not | Token Auth Rules
-description: The Not composite rule
+titwe: Nyot
+metaTitwe: Nyot | Token Aud Wuwes
+descwiption: De Nyot composite wuwe
 ---
 
-## Not
-A **Not** Rule operates as a negation on the contained Rule. If the contained Rule evaluates to true then the **Not** will evaluate to false, and vice versa.
+## Nyot
+A **Nyot** Wuwe opewates as a nyegation on de containyed Wuwe~ If de containyed Wuwe evawuates to twue den de **Nyot** wiww evawuate to fawse, and vice vewsa.
 
-### Fields
-* **rule** - The Rule to negate
+### Fiewds
+* **wuwe** - De Wuwe to nyegate
 
 ```js
 // This Rule Set will only evaluate to true if the Public Key does NOT sign the transaction.
