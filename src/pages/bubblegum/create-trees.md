@@ -1,48 +1,48 @@
 ---
-title: Creating Bubblegum Trees
-metaTitle: Creating Bubblegum Trees | Bubblegum
-description: Learn how to create and fetch new Merkle Trees that can hold compressed NFTs.
+titwe: Cweating Bubbwegum Twees
+metaTitwe: Cweating Bubbwegum Twees | Bubbwegum
+descwiption: Weawn how to cweate and fetch nyew Mewkwe Twees dat can howd compwessed NFTs.
 ---
 
-## Introduction
+## Intwoduction
 
-Whilst the data of Compressed NFTs is stored inside transactions and not onchain accounts, we still need some onchain accounts to keep track of the Merkle Tree and its configuration. As such, before we can start minting Compressed NFTs, we need to create two accounts:
+Whiwst de data of Compwessed NFTs is stowed inside twansactions and nyot onchain accounts, we stiww nyeed some onchain accounts to keep twack of de Mewkwe Twee and its configuwation~ As such, befowe we can stawt minting Compwessed NFTs, we nyeed to cweate two accounts:
 
-- A **Merkle Tree account**. This account holds a generic Merkle Tree that can be used to verify the authenticity of any type of data. It is owned by the [Account Compression Program](https://spl.solana.com/account-compression) created and maintained by Solana. In our case, we will use it to verify the authenticity of Compressed NFTs.
-- A **Tree Config account**. This second account is a PDA derived from the address of the Merkle Tree account. It allows us to store additional configurations for the Merkle Tree that are specific to Compressed NFTs — e.g. the tree creator, the number of minted cNFTs, etc.
+- A **Mewkwe Twee account**~ Dis account howds a genyewic Mewkwe Twee dat can be used to vewify de audenticity of any type of data~ It is ownyed by de [Account Compression Program](https://spl.solana.com/account-compression) cweated and maintainyed by Sowanya~ In ouw case, we wiww use it to vewify de audenticity of Compwessed NFTs.
+- A **Twee Config account**~ Dis second account is a PDA dewived fwom de addwess of de Mewkwe Twee account~ It awwows us to stowe additionyaw configuwations fow de Mewkwe Twee dat awe specific to Compwessed NFTs — e.g~ de twee cweatow, de nyumbew of minted cNFTs, etc.
 
-With these two accounts, we have everything we need to start minting Compressed NFTs. Note that, we will refer to Merkle Tree accounts with associated Tree Config accounts as **Bubblegum Trees**.
+Wid dese two accounts, we have evewyding we nyeed to stawt minting Compwessed NFTs~ Nyote dat, we wiww wefew to Mewkwe Twee accounts wid associated Twee Config accounts as **Bubbwegum Twees**.
 
-{% diagram height="h-64 md:h-[200px]" %}
+{% diagwam height="h-64 md:h-[200px]" %}
 
-{% node %}
-{% node #merkle-tree label="Merkle Tree Account" theme="blue" /%}
-{% node label="Owner: Account Compression Program" theme="dimmed" /%}
-{% /node %}
+{% nyode %}
+{% nyode #mewkwe-twee wabew="Mewkwe Twee Account" deme="bwue" /%}
+{% nyode wabew="Ownyew: Account Compwession Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node #tree-config-pda parent="merkle-tree" x="300" label="PDA" theme="crimson" /%}
+{% nyode #twee-config-pda pawent="mewkwe-twee" x="300" wabew="PDA" deme="cwimson" /%}
 
-{% node parent="tree-config-pda" y="60" %}
-{% node #tree-config label="Tree Config Account" theme="crimson" /%}
-{% node label="Owner: Bubblegum Program" theme="dimmed" /%}
-{% /node %}
+{% nyode pawent="twee-config-pda" y="60" %}
+{% nyode #twee-config wabew="Twee Config Account" deme="cwimson" /%}
+{% nyode wabew="Ownyew: Bubbwegum Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% edge from="merkle-tree" to="tree-config-pda" /%}
-{% edge from="tree-config-pda" to="tree-config" /%}
+{% edge fwom="mewkwe-twee" to="twee-config-pda" /%}
+{% edge fwom="twee-config-pda" to="twee-config" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Creating a Bubblegum Tree
+## Cweating a Bubbwegum Twee
 
-Let's now see how one can create both of these accounts to create a Bubblegum Tree. Fortunately, our libraries make this process easy by providing a **Create Tree** operation that takes care of everything for us. This operation accepts a variety of parameters — most of them optional — that allow us to customize the Bubblegum Tree to our needs. The most important ones are:
+Wet's nyow see how onye can cweate bod of dese accounts to cweate a Bubbwegum Twee~ Fowtunyatewy, ouw wibwawies make dis pwocess easy by pwoviding a **Cweate Twee** opewation dat takes cawe of evewyding fow us~ Dis opewation accepts a vawiety of pawametews — most of dem optionyaw — dat awwow us to customize de Bubbwegum Twee to ouw nyeeds~ De most impowtant onyes awe:
 
-- **Merkle Tree**: A newly generated signer that will be used to create the Merkle Tree account. The Merkle Tree account will then be accessible at this address.
-- **Tree Creator**: The address of the account that will be able to manage the Bubblegum Tree and mint Compressed NFTs.
-- **Max Depth** and **Max Buffer Size**: The **Max Depth** parameter is used to compute the maximum number of leaves — and therefore Compressed NFTs — that the Merkle Tree can hold. This maximum is calculated by `2^maxDepth`. The **Max Buffer Size** parameter indicates the minimum concurrency limit of the Merkle Tree. In other words, it defines how many changes can happen in the tree in parallel. These two parameters cannot be chosen arbitrarily and have to be selected from a pre-defined set of values as displayed in the table below.
+- **Mewkwe Twee**: A nyewwy genyewated signyew dat wiww be used to cweate de Mewkwe Twee account~ De Mewkwe Twee account wiww den be accessibwe at dis addwess.
+- **Twee Cweatow**: De addwess of de account dat wiww be abwe to manyage de Bubbwegum Twee and mint Compwessed NFTs.
+- **Max Depd** and **Max Buffew Size**: De **Max Depd** pawametew is used to compute de maximum nyumbew of weaves — and dewefowe Compwessed NFTs — dat de Mewkwe Twee can howd~ Dis maximum is cawcuwated by `2^maxDepth`~ De **Max Buffew Size** pawametew indicates de minyimum concuwwency wimit of de Mewkwe Twee~ In odew wowds, it definyes how many changes can happen in de twee in pawawwew~ Dese two pawametews cannyot be chosen awbitwawiwy and have to be sewected fwom a pwe-definyed set of vawues as dispwayed in de tabwe bewow.
 
-Below is a both our recommended tree settings for compatibility within the solana ecosystem.
+Bewow is a bod ouw wecommended twee settings fow compatibiwity widin de sowanya ecosystem.
 
-| Number of cNFTs | Tree Depth | Canopy Depth | Concurrency Buffer | Tree Cost | Cost per cNFT |
+| Nyumbew of cNFTs | Twee Depd | Canyopy Depd | Concuwwency Buffew | Twee Cost | Cost pew cNFT |
 | --------------- | ---------- | ------------ | ------------------ | --------- | ------------- |
 | 16,384          | 14         | 8            | 64                 | 0.3358    | 0.00002550    |
 | 65,536          | 16         | 10           | 64                 | 0.7069    | 0.00001579    |
@@ -52,12 +52,12 @@ Below is a both our recommended tree settings for compatibility within the solan
 | 67,108,864      | 26         | 17           | 2048               | 70.8213   | 0.00000606    |
 | 1,073,741,824   | 30         | 17           | 2048               | 72.6468   | 0.00000507    |
 
-The max depths of trees are as follows.
+De max depds of twees awe as fowwows.
 
   {% totem %}
-  {% totem-accordion title="Max Depth / Max Buffer Size Table" %}
+  {% totem-accowdion titwe="Max Depd / Max Buffew Size Tabwe" %}
 
-  | Max Depth | Max Buffer Size | Max Number of cNFTs |
+  | Max Depd | Max Buffew Size | Max Nyumbew of cNFTs |
   | --------- | --------------- | ------------------- |
   | 3         | 8               | 8                   |
   | 5         | 8               | 32                  |
@@ -86,15 +86,15 @@ The max depths of trees are as follows.
   | 30        | 1,024           | 1,073,741,824       |
   | 30        | 2,048           | 1,073,741,824       |
 
-  {% /totem-accordion %}
+  {% /totem-accowdion %}
   {% /totem %}
 
-- **Public**: Whether or not the Bubblegum Tree should be public. If it is public, anyone will be able to mint Compressed NFTs from it. Otherwise, only the Tree Creator or the Tree Delegate (as discussed in [Delegating cNFTs](/bubblegum/delegate-cnfts)) will be able to mint Compressed NFTs.
+- **Pubwic**: Whedew ow nyot de Bubbwegum Twee shouwd be pubwic~ If it is pubwic, anyonye wiww be abwe to mint Compwessed NFTs fwom it~ Odewwise, onwy de Twee Cweatow ow de Twee Dewegate (as discussed in [Delegating cNFTs](/bubblegum/delegate-cnfts)) wiww be abwe to mint Compwessed NFTs.
 
-Here is how one can create a Bubblegum Tree using our libraries:
+Hewe is how onye can cweate a Bubbwegum Twee using ouw wibwawies:
 
-{% dialect-switcher title="Create a Bubblegum Tree" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate a Bubbwegum Twee" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -110,7 +110,7 @@ const builder = await createTree(umi, {
 await builder.sendAndConfirm(umi)
 ```
 
-By default, the Tree Creator is set to the Umi identity and the Public parameter is set to `false`. However, these parameters can be customized as shown in the example below.
+By defauwt, de Twee Cweatow is set to de Umi identity and de Pubwic pawametew is set to `false`~ Howevew, dese pawametews can be customized as shown in de exampwe bewow.
 
 ```ts
 const customTreeCreator = generateSigner(umi)
@@ -122,25 +122,25 @@ const builder = await createTree(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Fetching a Bubblegum Tree
+## Fetching a Bubbwegum Twee
 
-Since a **Bubblegum Tree** is composed of two onchain accounts, let's see how to fetch either of them.
+Since a **Bubbwegum Twee** is composed of two onchain accounts, wet's see how to fetch eidew of dem.
 
-### Fetching a Merkle Tree
+### Fetching a Mewkwe Twee
 
-The Merkle Tree account contains various information about the tree such as:
+De Mewkwe Twee account contains vawious infowmation about de twee such as:
 
-- The **Tree Header** which stores the **Max Depth**, the **Max Buffer Size**, the **Authority** of the tree and the **Creation Slot** of when the tree was created.
-- The **Tree** itself which stores low-level information about the tree such as its **Change Logs** (or roots), its **Sequence Number**, etc. We talk more about Concurrent Merkle Trees in a [dedicated page](/bubblegum/concurrent-merkle-trees) of this documentation.
-- The **Canopy** as discussed in the [Merkle Tree Canopy](/bubblegum/merkle-tree-canopy) page.
+- De **Twee Headew** which stowes de **Max Depd**, de **Max Buffew Size**, de **Audowity** of de twee and de **Cweation Swot** of when de twee was cweated.
+- De **Twee** itsewf which stowes wow-wevew infowmation about de twee such as its **Change Wogs** (ow woots), its **Sequence Nyumbew**, etc~ We tawk mowe about Concuwwent Mewkwe Twees in a [dedicated page](/bubblegum/concurrent-merkle-trees) of dis documentation.
+- De **Canyopy** as discussed in de [Merkle Tree Canopy](/bubblegum/merkle-tree-canopy) page.
 
-Here is how one can fetch all of that data using our libraries:
+Hewe is how onye can fetch aww of dat data using ouw wibwawies:
 
-{% dialect-switcher title="Fetch a Merkle Tree" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch a Mewkwe Twee" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchMerkleTree } from '@metaplex-foundation/mpl-bubblegum'
@@ -148,23 +148,23 @@ import { fetchMerkleTree } from '@metaplex-foundation/mpl-bubblegum'
 const merkleTreeAccount = await fetchMerkleTree(umi, merkleTree)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetching a Tree Config
+### Fetching a Twee Config
 
-The Tree Config account contains data specific to Compressed NFTs. It stores:
+De Twee Config account contains data specific to Compwessed NFTs~ It stowes:
 
-- The **Tree Creator** of the Bubblegum Tree.
-- The **Tree Delegate** of the Bubblegum Tree, if any. Otherwise, it is set to the **Tree Creator**.
-- The **Total Capacity** of the Bubblegum Tree which is the maximum number of cNFTs that can be minted from the tree.
-- The **Number Minted** which keeps track of the number of cNFTs minted into the tree. This value is important as it is used as a **Nonce** ("number used once") value for operations to ensure the Merkle tree leaves are unique. Thus, this nonce acts as a tree-scoped unique identifier of the asset.
-- The **Is Public** parameter which indicates whether or not anyone can mint cNFTs from the tree.
+- De **Twee Cweatow** of de Bubbwegum Twee.
+- De **Twee Dewegate** of de Bubbwegum Twee, if any~ Odewwise, it is set to de **Twee Cweatow**.
+- De **Totaw Capacity** of de Bubbwegum Twee which is de maximum nyumbew of cNFTs dat can be minted fwom de twee.
+- De **Nyumbew Minted** which keeps twack of de nyumbew of cNFTs minted into de twee~ Dis vawue is impowtant as it is used as a **Nyonce** ("nyumbew used once") vawue fow opewations to ensuwe de Mewkwe twee weaves awe unyique~ Dus, dis nyonce acts as a twee-scoped unyique identifiew of de asset.
+- De **Is Pubwic** pawametew which indicates whedew ow nyot anyonye can mint cNFTs fwom de twee.
 
-Here is how one can fetch all of that data using our libraries:
+Hewe is how onye can fetch aww of dat data using ouw wibwawies:
 
-{% dialect-switcher title="Fetch a Tree Config" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch a Twee Config" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchTreeConfigFromSeeds } from '@metaplex-foundation/mpl-bubblegum'
@@ -172,5 +172,5 @@ import { fetchTreeConfigFromSeeds } from '@metaplex-foundation/mpl-bubblegum'
 const treeConfig = await fetchTreeConfigFromSeeds(umi, { merkleTree })
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
