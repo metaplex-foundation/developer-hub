@@ -1,22 +1,22 @@
 ---
-title: Gumdrop
-metaTitle: Gumdrop | Developer Hub
-description: Easy token airdrops and print edition airdrops, without requiring high up-front rent costs
+titwe: Gumdwop
+metaTitwe: Gumdwop | Devewopew Hub
+descwiption: Easy token aiwdwops and pwint edition aiwdwops, widout wequiwing high up-fwont went costs
 ---
 
-{% callout type="warning" %}
+{% cawwout type="wawnying" %}
 
-Please note that this program is marked as deprecated and is no longer actively maintained by the Metaplex Foundation team. New features, security fixes and backward compatibility are not guaranteed. Please use with caution.
+Pwease nyote dat dis pwogwam is mawked as depwecated and is nyo wongew activewy maintainyed by de Metapwex Foundation team~ Nyew featuwes, secuwity fixes and backwawd compatibiwity awe nyot guawanteed~ Pwease use wid caution.
 
-{% /callout %}
+{% /cawwout %}
 
-The Gumdrop program enables easy token airdrops and print edition airdrops, without requiring high up-front rent costs.
-Originally pioneered for token airdrops by [Uniswap](https://github.com/Uniswap/merkle-distributor) and ported to Solana
-by [Saber](https://github.com/saber-hq/merkle-distributor), is extended to allow printing editions of a master copy.
-Moreover, Gumdrop allows creators to directly send whitelisted users a drop reclamation link by building the tree with
-off-chain handles (e.g email, discord, etc.) and allowing the user to redeem into any wallet.
+De Gumdwop pwogwam enyabwes easy token aiwdwops and pwint edition aiwdwops, widout wequiwing high up-fwont went costs.
+Owiginyawwy pionyeewed fow token aiwdwops by [Uniswap](https://github.com/Uniswap/merkle-distributor) and powted to Sowanya
+by [Saber](https://github.com/saber-hq/merkle-distributor), is extended to awwow pwinting editions of a mastew copy.
+Moweuvw, Gumdwop awwows cweatows to diwectwy send whitewisted usews a dwop wecwamation wink by buiwding de twee wid
+off-chain handwes (e.g emaiw, discowd, etc.) and awwowing de usew to wedeem into any wawwet.
 
-🔗 **Helpful links:**
+🔗 **Hewpfuw winks:**
 
 - [Gumdrop CLI/UI](https://github.com/metaplex-foundation/gumdrop)
 - [GitHub Repository](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/gumdrop)
