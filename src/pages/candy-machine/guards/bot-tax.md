@@ -1,91 +1,91 @@
 ---
-title: Bot Tax Guard
-metaTitle: Bot Tax Guard | Candy Machine
-description: "Configurable tax to charge invalid transactions."
+titwe: Bot Tax Guawd
+metaTitwe: Bot Tax Guawd | Candy Machinye
+descwiption: "Configuwabwe tax to chawge invawid twansactions."
 ---
 
-## Overview
+## Ovewview
 
-The **Bot Tax** guard charges a penalty for invalid transactions to discourage bots from attempting to mint NFTs. This amount is usually small to hurt bots without affecting genuine mistakes from real users. All bot taxes will be transferred to the Candy Machine account so that, once minting is over, you can access these funds by deleting the Candy Machine account.
+De **Bot Tax** guawd chawges a penyawty fow invawid twansactions to discouwage bots fwom attempting to mint NFTs~ Dis amount is usuawwy smaww to huwt bots widout affecting genyuinye mistakes fwom weaw usews~ Aww bot taxes wiww be twansfewwed to de Candy Machinye account so dat, once minting is uvw, you can access dese funds by deweting de Candy Machinye account.
 
-This guard is a bit special and affects the minting behaviour of all other guards. When the Bot Tax is activated and any other guard fails to validate the mint, **the transaction will pretend to succeed**. This means no errors will be returned by the program but no NFT will be minted either. This is because the transaction must succeed for the funds to be transferred from the bot to the Candy Machine account.
+Dis guawd is a bit speciaw and affects de minting behaviouw of aww odew guawds~ When de Bot Tax is activated and any odew guawd faiws to vawidate de mint, **de twansaction wiww pwetend to succeed**~ Dis means nyo ewwows wiww be wetuwnyed by de pwogwam but nyo NFT wiww be minted eidew~ Dis is because de twansaction must succeed fow de funds to be twansfewwed fwom de bot to de Candy Machinye account.
 
-Additionally, the Bot Tax guard enables us to ensure the mint instruction was the last instruction of the transaction. This prevents bots from adding malicious instructions after the mint and returns an error to avoid paying the tax.
+Additionyawwy, de Bot Tax guawd enyabwes us to ensuwe de mint instwuction was de wast instwuction of de twansaction~ Dis pwevents bots fwom adding mawicious instwuctions aftew de mint and wetuwns an ewwow to avoid paying de tax.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="22" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1 /%}
-{% node #botTax label="botTax" /%}
-{% node #lamports label="- Lamports" /%}
-{% node #lastInstruction label="- Last Instruction" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="22" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1 /%}
+{% nyode #botTax wabew="botTax" /%}
+{% nyode #wampowts wabew="- Wampowts" /%}
+{% nyode #wastInstwuction wabew="- Wast Instwuction" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="candy-machine" x="700" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" x="700" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" y="150" x="-8" %}
-  {% node #mint-candy-machine theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" y="150" x="-8" %}
+  {% nyode #mint-candy-machinye deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="110" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="110" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="120" x="76" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="120" x="76" deme="bwue" %}
   NFT
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" /%}
-{% edge from="lamports" to="mint-candy-guard" arrow="none" dashed=true /%}
-{% node parent="lamports" y="-30" x="200" theme="transparent" %}
-If any other guard fails to validate
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
+{% edge fwom="wampowts" to="mint-candy-guawd" awwow="nyonye" dashed=twue /%}
+{% nyode pawent="wampowts" y="-30" x="200" deme="twanspawent" %}
+If any odew guawd faiws to vawidate
 
-charge this amount of SOL
-{% /node %}
-{% edge from="lastInstruction" to="mint-candy-guard" arrow="none" dashed=true %}
+chawge dis amount of SOW
+{% /nyode %}
+{% edge fwom="wastInstwuction" to="mint-candy-guawd" awwow="nyonye" dashed=twue %}
 
 {% /edge %}
-{% node parent="lastInstruction" y="15" x="200" theme="transparent" %}
-If the mint instruction is not the last
+{% nyode pawent="wastInstwuction" y="15" x="200" deme="twanspawent" %}
+If de mint instwuction is nyot de wast
 
-Instruction of the transaction minting will fail
-{% /node %}
-{% edge from="candy-guard-guards" to="guards" /%}
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+Instwuction of de twansaction minting wiww faiw
+{% /nyode %}
+{% edge fwom="candy-guawd-guawds" to="guawds" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Bot Tax guard contains the following settings:
+De Bot Tax guawd contains de fowwowing settings:
 
-- **Lamports**: The amount in SOL (or lamports) to charge for an invalid transaction. We recommend setting a fairly small amount to avoid affecting real users who made a genuine mistake. Client-side validation can also help reduce affecting real users.
-- **Last Instruction**: Whether or not we should forbid minting and charge a bot tax when the mint instruction is not the last instruction of the transaction. We recommend setting this to `true` to be better protected against bots.
+- **Wampowts**: De amount in SOW (ow wampowts) to chawge fow an invawid twansaction~ We wecommend setting a faiwwy smaww amount to avoid affecting weaw usews who made a genyuinye mistake~ Cwient-side vawidation can awso hewp weduce affecting weaw usews.
+- **Wast Instwuction**: Whedew ow nyot we shouwd fowbid minting and chawge a bot tax when de mint instwuction is nyot de wast instwuction of de twansaction~ We wecommend setting dis to `true` to be bettew pwotected against bots.
 
-{% dialect-switcher title="Set up a Candy Machine using the Bot Tax guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Bot Tax guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -100,14 +100,14 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [BotTax](https://mpl-candy-machine.typedoc.metaplex.com/types/BotTax.html)
+API Wefewences: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [BotTax](https://mpl-candy-machine.typedoc.metaplex.com/types/BotTax.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Add this object into the guard section your config.json file: 
+Add dis object into de guawd section youw config.json fiwe: 
 
 ```json
 "botTax" : {
@@ -117,13 +117,13 @@ Add this object into the guard section your config.json file:
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-_The Bot Tax guard does not need Mint Settings._
+_De Bot Tax guawd does nyot nyeed Mint Settings._
 
-## Route Instruction
+## Woute Instwuction
 
-_The Bot Tax guard does not support the route instruction._
+_De Bot Tax guawd does nyot suppowt de woute instwuction._
