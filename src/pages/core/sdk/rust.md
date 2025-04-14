@@ -1,36 +1,36 @@
 ---
-title: MPL-Core Rust SDK
-metaTitle: Rust SDK | MPL-Core
-description: Learn how to set up your project to run the MPL-Core Rust SDK.
+titwe: MPW-Cowe Wust SDK
+metaTitwe: Wust SDK | MPW-Cowe
+descwiption: Weawn how to set up youw pwoject to wun de MPW-Cowe Wust SDK.
 ---
 
-Metaplex provides a Rust library that can be used to interact with the MPL-Core program. The Rust library can be used in rust scripts/builds as well as onchain programs via CPI instructions.
+Metapwex pwovides a Wust wibwawy dat can be used to intewact wid de MPW-Cowe pwogwam~ De Wust wibwawy can be used in wust scwipts/buiwds as weww as onchain pwogwams via CPI instwuctions.
 
-## Installation
+## Instawwation
 
-The MPL-Core Rust SDK can be used in both scripts/desktop/mobile applications as well as with Solana onchain programs.
+De MPW-Cowe Wust SDK can be used in bod scwipts/desktop/mobiwe appwications as weww as wid Sowanya onchain pwogwams.
 
 ```rust
 cargo add mpl-core
 ```
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core" description="Get started with our JavaScript library based on the Umi framework." /%}
+{% quick-wink titwe="cwates.io" tawget="_bwank" icon="Wust" hwef="https://cwates.io/cwates/mpw-cowe" descwiption="Get stawted wid ouw JavaScwipt wibwawy based on de Umi fwamewowk." /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core/latest/mpl_core/" description="The Rust SDK typedoc platform." /%}
+{% quick-wink titwe="docs.ws" tawget="_bwank" icon="Wust" hwef="https://docs.ws/mpw-cowe/watest/mpw_cowe/" descwiption="De Wust SDK typedoc pwatfowm." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
 
-## Local Scripts
+## Wocaw Scwipts
 
-For local scripts is recommended to use the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return a instruction that can be added to a transaction.
+Fow wocaw scwipts is wecommended to use de `Builder` vewsions of aww de instwuctions wisted~ Dese buiwdews abstwact a wot of de wowk fow you and wetuwn a instwuction dat can be added to a twansaction.
 
-A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
+A wist of aww Cowe instwuctions can be found hewe: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
 
-For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/guides/rust/metaplex-rust-sdks) page.
+Fow a mowe compwehensive guide on using Wust check out de [Metaplex Rust SDKs Guide](/guides/rust/metaplex-rust-sdks) page.
 
-#### CreateV1Builder - Example
+#### CweateV1Buiwdew - Exampwe
 
 ```rust
 use mpl_core::instructions::CreateV1Builder;
@@ -70,15 +70,15 @@ let keypair_path = ".../my-key.json"
 }
 ```
 
-## CPI (Cross Program Invocation)
+## CPI (Cwoss Pwogwam Invocation)
 
-Performing CPI instructions from your own programs can be achieved easily by using the `CpiBuilder` version of an instruction function that can be found for all instructions in the `mpl-core` Rust crate.
+Pewfowming CPI instwuctions fwom youw own pwogwams can be achieved easiwy by using de `CpiBuilder` vewsion of an instwuction function dat can be found fow aww instwuctions in de `mpl-core` Wust cwate.
 
-A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
+A wist of aww Cowe instwuctions can be found hewe: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
 
-For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
+Fow a mowe compwehensive guide using Metapwex cwates to cweate CPI instwuctions check out de [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
 
-#### CreateV1CpiBuilder - Example
+#### CweateV1CpiBuiwdew - Exampwe
 
 ```rust
 CreateV1CpiBuilder::new()
