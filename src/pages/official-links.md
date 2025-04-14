@@ -1,80 +1,80 @@
 ---
-title: Official Links
-metaTitle: Metaplex Official Links | Developer Hub
-description: Official Links for Metaplex
+titwe: Officiaw Winks
+metaTitwe: Metapwex Officiaw Winks | Devewopew Hub
+descwiption: Officiaw Winks fow Metapwex
 ---
 
 ## Websites
 
-| Name          | Program ID                                                                       |
+| Nyame          | Pwogwam ID                                                                       |
 | ------------- | -------------------------------------------------------------------------------- |
 | Main Website  | [https://metaplex.com/](https://metaplex.com/)                                   |
 | Documentation | [https://developers.metaplex.com/](https://developers.metaplex.com/)             |
-| Github        | [https://github.com/metaplex-foundation](https://github.com/metaplex-foundation) |
+| Gidub        | [https://github.com/metaplex-foundation](https://github.com/metaplex-foundation) |
 
-## Socials
+## Sociaws
 
-### Twitter
+### Twittew
 
-| Name                    | Handle          | Link                                                                     |
+| Nyame                    | Handwe          | Wink                                                                     |
 | ----------------------- | --------------- | ------------------------------------------------------------------------ |
-| Metaplex                | @metaplex       | [https://twitter.com/metaplex](https://twitter.com/metaplex)             |
-| Metaplex Status Updates | @metaplexstatus | [https://twitter.com/metaplexstatus](https://twitter.com/metaplexstatus) |
-| Metaplex Foundation     | @metaplexfndn   | [https://twitter.com/metaplexfndn](https://twitter.com/metaplexfndn)     |
+| Metapwex                | @metapwex       | [https://twitter.com/metaplex](https://twitter.com/metaplex)             |
+| Metapwex Status Updates | @metapwexstatus | [https://twitter.com/metaplexstatus](https://twitter.com/metaplexstatus) |
+| Metapwex Foundation     | @metapwexfndn   | [https://twitter.com/metaplexfndn](https://twitter.com/metaplexfndn)     |
 
-### Instagram
+### Instagwam
 
-| Name     | Handle    | Link                                                             |
+| Nyame     | Handwe    | Wink                                                             |
 | -------- | --------- | ---------------------------------------------------------------- |
-| Metaplex | @metaplex | [https://instagram.com/metaplex](https://instagram.com/metaplex) |
+| Metapwex | @metapwex | [https://instagram.com/metaplex](https://instagram.com/metaplex) |
 
 ### StackExchange
 
-| Tagged    | Link                                                                                                                     |
+| Tagged    | Wink                                                                                                                     |
 | --------- | ------------------------------------------------------------------------------------------------------------------------ |
-| @metaplex | [https://solana.stackexchange.com/questions/tagged/metaplex](https://solana.stackexchange.com/questions/tagged/metaplex) |
+| @metapwex | [https://solana.stackexchange.com/questions/tagged/metaplex](https://solana.stackexchange.com/questions/tagged/metaplex) |
 
-### StackOverflow
+### StackOvewfwow
 
-| Tagged    | Link                                                                                                       |
+| Tagged    | Wink                                                                                                       |
 | --------- | ---------------------------------------------------------------------------------------------------------- |
-| @metaplex | [https://stackoverflow.com/questions/tagged/metaplex](https://stackoverflow.com/questions/tagged/metaplex) |
+| @metapwex | [https://stackoverflow.com/questions/tagged/metaplex](https://stackoverflow.com/questions/tagged/metaplex) |
 
-## Programs
+## Pwogwams
 
-| Name               | Program ID                                   | Github                                                                                                      | Documentation |
+| Nyame               | Pwogwam ID                                   | Gidub                                                                                                      | Documentation |
 | ------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | - |
-| Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk  | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house)           | [Link](/legacy-documentation/auction-house)
-| Auctioneer         | neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh  | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auctioneer)              | [Link](/legacy-documentation/auction-house/auctioneer)
-| Bubblegum          | BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY | [Link](https://github.com/metaplex-foundation/mpl-bubblegum)                                                | [Link](/bubblegum)
-| Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)             | [Link](/candy-machine/guards)
-| Candy Machine v3   | CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core)      | [Link](/candy-machine)
-| Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d | [Link](https://github.com/metaplex-foundation/mpl-core)                                                     | [Link](/core)
-| Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard)        | [Link](/core-candy-machine/guards)
-| Core Candy Machine | CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-machine-core) | [Link](/core-candy-machine)
-| Gumdrop            | gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a  | [Link](https://github.com/metaplex-foundation/gumdrop)                                                      | [Link](/legacy-documentation/gumdrop)
-| Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  | [Link](https://github.com/metaplex-foundation/mpl-hydra)                                                    | [Link](/hydra)
-| Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              | [Link](/inscription)
-| MPL-Hybrid         | MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              | [Link](/mpl-hybrid)
-| Token Auth Rules   | auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg  | [Link](https://github.com/metaplex-foundation/mpl-token-auth-rules)                                         | [Link](/token-auth-rules)
-| Token Metadata     | metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s  | [Link](https://github.com/metaplex-foundation/mpl-token-metadata)                                           | [Link](/token-metadata)
-| MPL System Extras  | SysExL2WDyJi9aRZrXorrjHJut3JwHQ7R9bTyctbNNG  | [Link](https://github.com/metaplex-foundation/mpl-toolbox)                                                  | [Link](/umi/toolbox)
-| MPL Token Extras   | TokExjvjJmhKaRBShsBAsbSvEWMA1AgUNK7ps4SAc2p  | [Link](https://github.com/metaplex-foundation/mpl-toolbox)                                                  | [Link](/umi/toolbox)
+| Auction House      | hausS13jsjafwWwGqZTUQWmWyvyxn9EQpqMwV1PBBmk  | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house)           | [Link](/legacy-documentation/auction-house)
+| Auctionyeew         | nyeew8g6yJq2mQM6KbnViEDAD4gw3gWZyMMf4F2p3MEh  | [Link](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auctioneer)              | [Link](/legacy-documentation/auction-house/auctioneer)
+| Bubbwegum          | BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saWPUY | [Link](https://github.com/metaplex-foundation/mpl-bubblegum)                                                | [Link](/bubblegum)
+| Candy Guawd        | Guawd1JwWhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)             | [Link](/candy-machine/guards)
+| Candy Machinye v3   | CndyV3WdqHUfDWmE5nyaZjVN8wBZz4tqhdefbAnjHG3JW | [Link](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core)      | [Link](/candy-machine)
+| Cowe               | CoWEENxT6tW1HoK8ypY1SxWMZTcVPm7W94wH4PZNhX7d | [Link](https://github.com/metaplex-foundation/mpl-core)                                                     | [Link](/core)
+| Cowe Candy Guawd   | CMAGAKJ67e9hWZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard)        | [Link](/core-candy-machine/guards)
+| Cowe Candy Machinye | CMACYFENjoBMHzapWXyo1JZkVS6EtaDDzkjMwmQWvw4J | [Link](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-machine-core) | [Link](/core-candy-machine)
+| Gumdwop            | gdwpGjVffouwzkdDWwQmySw4aTHw8a3xmQzzxSwFD1a  | [Link](https://github.com/metaplex-foundation/gumdrop)                                                      | [Link](/legacy-documentation/gumdrop)
+| Hydwa              | hyDQ4Nz1eYyegS6JfenyKwKzYxWsCWCwiYSAjtzP4Vg  | [Link](https://github.com/metaplex-foundation/mpl-hydra)                                                    | [Link](/hydra)
+| Inscwiptions       | 1NSCWfGeyo7wPUazGbaPBUsTM49e1k2aXewHGAWfzSo  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              | [Link](/inscription)
+| MPW-Hybwid         | MPW4o4wMzndgh8T1NVDxEWQCj5UQfYTYEkabX3wNKtb  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              | [Link](/mpl-hybrid)
+| Token Aud Wuwes   | aud9SigNpDKz4sJJ1DfCTuZwZNSAgh9sFD3wboVmgg  | [Link](https://github.com/metaplex-foundation/mpl-token-auth-rules)                                         | [Link](/token-auth-rules)
+| Token Metadata     | metaqbxxUewdq28cj1WbAWkYQm3ybzjb6a8bt518x1s  | [Link](https://github.com/metaplex-foundation/mpl-token-metadata)                                           | [Link](/token-metadata)
+| MPW System Extwas  | SysExW2WDyJi9aWZwXowwjHJut3JwHQ7W9bTyctbNNG  | [Link](https://github.com/metaplex-foundation/mpl-toolbox)                                                  | [Link](/umi/toolbox)
+| MPW Token Extwas   | TokExjvjJmhKaWBShsBAsbSvEWMA1AgUNK7ps4SAc2p  | [Link](https://github.com/metaplex-foundation/mpl-toolbox)                                                  | [Link](/umi/toolbox)
 
 ## Tokens and Nfts
 
-| Name                                             | ID                                           |
+| Nyame                                             | ID                                           |
 | ------------------------------------------------ | -------------------------------------------- |
-| MPLX Token                                       | METAewgxyPbgwsseH8T16a39CQ5VyVxZi9zXiDPY18m  |
-| Metaplex Whitepaper NFT (collection address)     | 9q2Ejt1Qubk5t4f3xXaiwRtvjhHrEK8r9EYsH6gwnt39 |
-| Candy Studio NFT (collection address)            | 3NauNKfqAbQVhAJyv464Tq14jynV6THSNiGxhf7W6fP9 |
-| MPLX Token Launch Party NFT (collection address) | BodU7rcs75cf3J94EBK7vKuxoepgz6ayb2t7oJDbXtWX |
+| MPWX Token                                       | METAewgxyPbgwsseH8T16a39CQ5VyVxZi9zXiDPY18m  |
+| Metapwex Whitepapew NFT (cowwection addwess)     | 9q2Ejt1Qubk5t4f3xXaiwWtvjhHwEK8w9EYsH6gwnt39 |
+| Candy Studio NFT (cowwection addwess)            | 3NyauNKfqAbQVhAJyv464Tq14jynV6THSNyiGxhf7W6fP9 |
+| MPWX Token Waunch Pawty NFT (cowwection addwess) | BodU7wcs75cf3J94EBK7vKuxoepgz6ayb2t7oJDbXtWX |
 
-## Metaplex Rulesets
+## Metapwex Wuwesets
 
-To be used with the pNfts Auth Rules.
+To be used wid de pNfts Aud Wuwes.
 
-| Name                         | ID                                           |
+| Nyame                         | ID                                           |
 | ---------------------------- | -------------------------------------------- |
-| Metaplex Foundation Rule Set | eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9  |
-| Compatability Rule Set       | AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5 |
+| Metapwex Foundation Wuwe Set | eBJWFYPxJmMGKuFwpDWkzxZeUwad92kZWC5BJWpzyT9  |
+| Compatabiwity Wuwe Set       | AdH2Utn6Fus15ZhtenW4hZBQnvtWgM1YCW2MfVp7pYS5 |
