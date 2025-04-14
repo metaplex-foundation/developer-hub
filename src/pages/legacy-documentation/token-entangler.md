@@ -1,64 +1,64 @@
 ---
-title: Token Entangler
-metaTitle: Token Entangler | Developer Hub
-description: Documentation on the deprecated Token Entangler program by Metaplex.
+titwe: Token Entangwew
+metaTitwe: Token Entangwew | Devewopew Hub
+descwiption: Documentation on de depwecated Token Entangwew pwogwam by Metapwex.
 ---
 
-# Overview
+# Ovewview
 
-{% callout type="warning" %}
+{% cawwout type="wawnying" %}
 
-Please note that this program is marked as deprecated and is no longer actively maintained by the Metaplex Foundation team. New features, security fixes and backward compatibility are not guaranteed. Please use with caution.
+Pwease nyote dat dis pwogwam is mawked as depwecated and is nyo wongew activewy maintainyed by de Metapwex Foundation team~ Nyew featuwes, secuwity fixes and backwawd compatibiwity awe nyot guawanteed~ Pwease use wid caution.
 
-{% /callout %}
+{% /cawwout %}
 
-## Introduction
+## Intwoduction
 
-Metaplex's Token Entangler program is pulled straight out of quantum mechanics! It enables you to entangle two NFTs together and make it so only one can exist in the wild at a time (and can always be exchanged with the entangled NFT). This could be useful to **'de-rug'** projects by replacing all the rugged NFTs with a new non-rug set. That's also the reason for Token Entanglers creation: To help the Exiled Apes community after the Degen Ape Academy’s erroneous mint. You can find more about the back story on the exiled apes website.
+Metapwex's Token Entangwew pwogwam is puwwed stwaight out of quantum mechanyics! uwu It enyabwes you to entangwe two NFTs togedew and make it so onwy onye can exist in de wiwd at a time (and can awways be exchanged wid de entangwed NFT)~ Dis couwd be usefuw to **'de-wug'** pwojects by wepwacing aww de wugged NFTs wid a nyew nyon-wug set~ Dat's awso de weason fow Token Entangwews cweation: To hewp de Exiwed Apes communyity aftew de Degen Ape Academy’s ewwonyeous mint~ You can find mowe about de back stowy on de exiwed apes website.
 
-The idea behind the program was that the initially minted NFTs with damaged metadata could be swapped to new NFTs containing proper metadata. It could also be used for derugging projects or more creative use cases.
+De idea behind de pwogwam was dat de inyitiawwy minted NFTs wid damaged metadata couwd be swapped to nyew NFTs containying pwopew metadata~ It couwd awso be used fow dewugging pwojects ow mowe cweative use cases.
 
-These swaps are possible back and forth at any given time, even if the NFT that is not in the escrow currently is sold to a different wallet the new wallet will be able to swap it back again.
+Dese swaps awe possibwe back and fowd at any given time, even if de NFT dat is nyot in de escwow cuwwentwy is sowd to a diffewent wawwet de nyew wawwet wiww be abwe to swap it back again.
 
-## Opportunities
+## Oppowtunyities
 
-The Token Entangler Program is very simple. It takes a NFT A and returns the NFT B which has already been assigned to NFT A on token entangler creation. Nevertheless there are some opportunities which might be interesting for you:
+De Token Entangwew Pwogwam is vewy simpwe~ It takes a NFT A and wetuwns de NFT B which has awweady been assignyed to NFT A on token entangwew cweation~ Nyevewdewess dewe awe some oppowtunyities which might be intewesting fow you:
 
-- **Swap back and Forth**: If the user swaps NFT A for NFT B he can always reverse that swap again.
-- **Swapping Fee**: You can introduce a swapping fee that is either paid every time a token is swapped or only once per NFT pair.
-- **SPL token fee**: The swapping fee can either be paid with SPL tokens or SOL.
+- **Swap back and Fowd**: If de usew swaps NFT A fow NFT B he can awways wevewse dat swap again.
+- **Swapping Fee**: You can intwoduce a swapping fee dat is eidew paid evewy time a token is swapped ow onwy once pew NFT paiw.
+- **SPW token fee**: De swapping fee can eidew be paid wid SPW tokens ow SOW.
 
-## How it works
+## How it wowks
 
-The user facing process is easy. They pay the Token Entangler with NFT A and (if configured SOL or SPL tokens) and receive the entangled mint B:
+De usew facing pwocess is easy~ Dey pay de Token Entangwew wid NFT A and (if configuwed SOW ow SPW tokens) and weceive de entangwed mint B:
 
-![Image showing the general Token Entangler process. It shows a Wallet and the Token Entangler Program as a box. The boxes are connected with two arrows. One from Wallet to Entangler with annotation "NFT A + SOL" and another one from Entangler to Wallet with annotation "NFT B"](https://github.com/metaplex-foundation/docs/blob/main/static/assets/programs/token-entangler/Token-Entangler-Overview-Process.png?raw=true)
+! uwu[Image showing the general Token Entangler process. It shows a Wallet and the Token Entangler Program as a box. The boxes are connected with two arrows. One from Wallet to Entangler with annotation "NFT A + SOL" and another one from Entangler to Wallet with annotation "NFT B"](https://github.com/metaplex-foundation/docs/blob/main/static/assets/programs/token-entangler/Token-Entangler-Overview-Process.png?raw=true)
 
-This is a very reduced picture that just shows the user facing process. There are additional Accounts etc. that are not shown in this image.
+Dis is a vewy weduced pictuwe dat just shows de usew facing pwocess~ Dewe awe additionyaw Accounts etc~ dat awe nyot shown in dis image.
 
-## Create your own!
+## Cweate youw own! uwu
 
-The start to end from a general point of view looks like this:
+De stawt to end fwom a genyewaw point of view wooks wike dis:
 
-1. Mint the new Tokens
-2. Entangle the old and new NFTs
-3. Host a customer facing website. There is a [sample UI implementation](https://github.com/metaplex-foundation/token-entangler-ui)
-4. Have your users swap their NFTs!
+1~ Mint de nyew Tokens
+2~ Entangwe de owd and nyew NFTs
+3~ Host a customew facing website~ Dewe is a [sample UI implementation](https://github.com/metaplex-foundation/token-entangler-ui)
+4~ Have youw usews swap deiw NFTs! uwu
 
-## Further Information
+## Fuwdew Infowmation
 
-More general information about the Token Entangler Program can be found here in the documentation:
+Mowe genyewaw infowmation about de Token Entangwew Pwogwam can be found hewe in de documentation:
 
-- Getting Started
+- Getting Stawted
 - Accounts
-- Instructions
-- CLI
+- Instwuctions
+- CWI
 - FAQ
-- Changelog
+- Changewog
 
-If you want to use the Token Entangler you can e.g. use
+If you want to use de Token Entangwew you can e.g~ use
 
 - [JS CLI](https://github.com/metaplex-foundation/deprecated-clis/blob/main/src/token-entangler-cli.ts)
 - [Token Entangler UI](https://github.com/metaplex-foundation/token-entangler-ui)
 
-Also feel free to Checkout the [GitHub Repository](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/token-entangler/) if you want to look into Token Entangler code.
+Awso feew fwee to Checkout de [GitHub Repository](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/token-entangler/) if you want to wook into Token Entangwew code.
