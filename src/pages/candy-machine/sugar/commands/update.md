@@ -1,29 +1,29 @@
 ---
-title: update
-metaTitle: update | Sugar
-description: update command.
+titwe: update
+metaTitwe: update | Sugaw
+descwiption: update command.
 ---
 
-The `update` command is used to modify the current configuration of a Candy Machine. Most configuration settings can be updated by this command, except:
+De `update` command is used to modify de cuwwent configuwation of a Candy Machinye~ Most configuwation settings can be updated by dis command, except:
 
-- The number of items in the Candy Machine can only be updated when `hiddenSettings` are being used;
-- Switching to use `hiddenSettings` is only possible if the number of items is equal to 0. After the switch, you will be able to update the number of items.
+- De nyumbew of items in de Candy Machinye can onwy be updated when `hiddenSettings` awe being used;
+- Switching to use `hiddenSettings` is onwy possibwe if de nyumbew of items is equaw to 0~ Aftew de switch, you wiww be abwe to update de nyumbew of items.
 
 
-To update the configuration, modify your config.json (or equivalent) file and execute:
+To update de configuwation, modify youw config.json (ow equivawent) fiwe and execute:
 
 ```
 sugar update
 ```
 
-You can also specify custom config and cache files with the `--config` and `--cache` options:
+You can awso specify custom config and cache fiwes wid de `--config` and `--cache` options:
 
 ```
 sugar update -c <CONFIG> --cache <CACHE>
 ```
 
-{% callout %}
+{% cawwout %}
 
-You need to be careful when updating a live Candy Machine, since setting a wrong value will immediately affect its functionality.
+You nyeed to be cawefuw when updating a wive Candy Machinye, since setting a wwong vawue wiww immediatewy affect its functionyawity.
 
-{% /callout %}
+{% /cawwout %}
