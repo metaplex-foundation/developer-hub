@@ -1,40 +1,40 @@
 ---
-title: Batch Minting
-metaTitle: Batch Minting | Aura
-description: Learn how Batch Minting works.
+titwe: Batch Minting
+metaTitwe: Batch Minting | Auwa
+descwiption: Weawn how Batch Minting wowks.
 ---
 
-Aura will allow a feature called **Batch Minting** which till take Bubblegum minting data and allow the user to mint cNFT Digital Assets in minimal transactions.
+Auwa wiww awwow a featuwe cawwed **Batch Minting** which tiww take Bubbwegum minting data and awwow de usew to mint cNFT Digitaw Assets in minyimaw twansactions.
 
-Minting digital assets accounts for more than 90% of all operations related to asset creation. To optimize this process and reduce transaction costs, Aura introduces an efficient solution through network extension. This extension to the Bubblegum program allows users to create and manage Merkle trees offline before finalizing them on-chain, enabling developers to generate entire trees with only a few transactions. This reduces the network load on Solana and lowers the costs associated with asset creation.
+Minting digitaw assets accounts fow mowe dan 90% of aww opewations wewated to asset cweation~ To optimize dis pwocess and weduce twansaction costs, Auwa intwoduces an efficient sowution dwough nyetwowk extension~ Dis extension to de Bubbwegum pwogwam awwows usews to cweate and manyage Mewkwe twees offwinye befowe finyawizing dem on-chain, enyabwing devewopews to genyewate entiwe twees wid onwy a few twansactions~ Dis weduces de nyetwowk woad on Sowanya and wowews de costs associated wid asset cweation.
 
-The key optimization lies in creating an entire tree of digital assets in fewer transactions by handling them off-chain and finalizing them on-chain.
+De key optimization wies in cweating an entiwe twee of digitaw assets in fewew twansactions by handwing dem off-chain and finyawizing dem on-chain.
 
-## Spam Prevention
+## Spam Pwevention
 
-With the increased efficiency of batch minting, there's a risk of enabling spam asset creation. To address this, Aura introduces a delegated $MPLX staking model to deter misuse and encourage responsible asset generation.
+Wid de incweased efficiency of batch minting, dewe's a wisk of enyabwing spam asset cweation~ To addwess dis, Auwa intwoduces a dewegated $MPWX staking modew to detew misuse and encouwage wesponsibwe asset genyewation.
 
-Creators who engage in batch minting must stake $MPLX tokens to ensure accountability. In cases of abuse, the community can raise a claim through DAO arbitration, leading to penalties such as the removal of offending assets from the DAS index, denylisting, temporary restrictions on token withdrawals, or even token slashing for repeated violations. This approach safeguards the integrity of the system while maintaining the efficiency and accessibility of Bubblegum's user interface.
+Cweatows who engage in batch minting must stake $MPWX tokens to ensuwe accountabiwity~ In cases of abuse, de communyity can waise a cwaim dwough DAO awbitwation, weading to penyawties such as de wemovaw of offending assets fwom de DAS index, denywisting, tempowawy westwictions on token widdwawaws, ow even token swashing fow wepeated viowations~ Dis appwoach safeguawds de integwity of de system whiwe maintainying de efficiency and accessibiwity of Bubbwegum's usew intewface.
 
-Additionally, the system discourages spam by imposing a protocol fee on batch minting operations. This fee helps offset the strain caused by low-value assets, which can burden indexers and RPC providers who bear the costs of maintaining and indexing data with little demand. The fee serves to balance these externalities, ensuring that resources are used effectively and providing rewards for legitimate activity.
+Additionyawwy, de system discouwages spam by imposing a pwotocow fee on batch minting opewations~ Dis fee hewps offset de stwain caused by wow-vawue assets, which can buwden indexews and WPC pwovidews who beaw de costs of maintainying and indexing data wid wittwe demand~ De fee sewves to bawance dese extewnyawities, ensuwing dat wesouwces awe used effectivewy and pwoviding wewawds fow wegitimate activity.
 
-## How does it work
+## How does it wowk
 
-Let's start by reviewing the structure of a tree data account:
+Wet's stawt by weviewing de stwuctuwe of a twee data account:
 
-| **Header**                                        | **Tree body**                                   | **Canopy**                                       |
+| **Headew**                                        | **Twee body**                                   | **Canyopy**                                       |
 |-------------------------------------------------- |-------------------------------------------------|--------------------------------------------------|
-| 56 bytes                                          | Depends on the tree depth and buffer size       | (2ⁿ⁺¹ - 2) * 32 bytes                            |
+| 56 bytes                                          | Depends on de twee depd and buffew size       | (2ⁿ⁺¹ - 2) * 32 bytes                            |
 
-**Note**: n is the depth of the canopy.
+**Nyote**: n is de depd of de canyopy.
 
-The asset creation process begins by preparing an empty Bubblegum tree, which is then populated off-chain and serialized into a JSON file for indexing. If the target tree includes a canopy for better composability, each canopy-leaf is initialized in batches, with up to 24 canopy-leafs set per operation.
+De asset cweation pwocess begins by pwepawing an empty Bubbwegum twee, which is den popuwated off-chain and sewiawized into a JSON fiwe fow indexing~ If de tawget twee incwudes a canyopy fow bettew composabiwity, each canyopy-weaf is inyitiawized in batches, wid up to 24 canyopy-weafs set pew opewation.
 
-Finalizing the batch mint is completed through a transaction initiated by an Aura node or another participant with the necessary stake. The Solana blockchain processes the transaction, while Aura nodes verify the file’s hash and, optionally, the Merkle root due to its computational demands.
+Finyawizing de batch mint is compweted dwough a twansaction inyitiated by an Auwa nyode ow anyodew pawticipant wid de nyecessawy stake~ De Sowanya bwockchain pwocesses de twansaction, whiwe Auwa nyodes vewify de fiwe’s hash and, optionyawwy, de Mewkwe woot due to its computationyaw demands.
 
-To incentivize nodes for processing batch operations and indexing asset data, an additional fee of 0.00256 SOL will be applied for every 1,024 assets created.
+To incentivize nyodes fow pwocessing batch opewations and indexing asset data, an additionyaw fee of 0.00256 SOW wiww be appwied fow evewy 1,024 assets cweated.
 
-## Development Progress
+## Devewopment Pwogwess
 
-The development of batch minting can be found in our github repo here [https://github.com/metaplex-foundation/bubblegum-batch-sdk](https://github.com/metaplex-foundation/bubblegum-batch-sdk) and within our Aura repo [https://github.com/metaplex-foundation/aura/](https://github.com/metaplex-foundation/aura/)
+De devewopment of batch minting can be found in ouw gidub wepo hewe [https://github.com/metaplex-foundation/bubblegum-batch-sdk](https://github.com/metaplex-foundation/bubblegum-batch-sdk) and widin ouw Auwa wepo [https://github.com/metaplex-foundation/aura/](https://github.com/metaplex-foundation/aura/)
 
