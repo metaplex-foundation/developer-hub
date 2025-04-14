@@ -1,15 +1,15 @@
 ---
-title: Removing External Plugin Adapters
-metaTitle: Removing External Plugin Adapters | Core
-description: Learn about Removing External Plugin Adapters from Core Assets and Collections.
+titwe: Wemoving Extewnyaw Pwugin Adaptews
+metaTitwe: Wemoving Extewnyaw Pwugin Adaptews | Cowe
+descwiption: Weawn about Wemoving Extewnyaw Pwugin Adaptews fwom Cowe Assets and Cowwections.
 ---
 
-## Remove from Asset
+## Wemuv fwom Asset
 
-{% dialect-switcher title="Remove External Plugin from Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wemuv Extewnyaw Pwugin fwom Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-To remove the External Plugin Adapter from an Asset you'll need to use the `removePlugin()` function.
+To wemuv de Extewnyaw Pwugin Adaptew fwom an Asset you'ww nyeed to use de `removePlugin()` function.
 
 ```ts
 import {publicKey } from '@metaplex-foundation/umi'
@@ -27,11 +27,11 @@ await removePlugin(umi, {
 })
 ```
 
-{% /dialect  %}
+{% /diawect  %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
-To remove the External Plugin Adapter from an Asset you'll need to use the `RemoveExternalPluginAdapterV1Builder()` function.
+To wemuv de Extewnyaw Pwugin Adaptew fwom an Asset you'ww nyeed to use de `RemoveExternalPluginAdapterV1Builder()` function.
 
 ```rust
 use mpl_core::{instructions::RemoveExternalPluginAdapterV1Builder, types::ExternalPluginAdapterKey};
@@ -72,16 +72,16 @@ pub async fn remove_external_plugin_adapter_from_asset() {
 }
 ```
 
-{% /dialect  %}
+{% /diawect  %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Remove from Collection
+## Wemuv fwom Cowwection
 
-{% dialect-switcher title="Remove External Plugin from Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wemuv Extewnyaw Pwugin fwom Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-To remove the External Plugin Adapter from a Collection you'll need to use the `removeCollectionPlugin()` function.
+To wemuv de Extewnyaw Pwugin Adaptew fwom a Cowwection you'ww nyeed to use de `removeCollectionPlugin()` function.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -99,11 +99,11 @@ removeCollectionPlugin(umi, {
 })
 ```
 
-{% /dialect  %}
+{% /diawect  %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
-To remove the External Plugin Adapter from a Collection you'll need to use the `RemoveCollectionExternalPluginAdapterV1Builder()` function.
+To wemuv de Extewnyaw Pwugin Adaptew fwom a Cowwection you'ww nyeed to use de `RemoveCollectionExternalPluginAdapterV1Builder()` function.
 
 ```rust
 
@@ -146,6 +146,6 @@ pub async fn remove_external_plugin_adapter_from_collection() {
 
 ```
 
-{% /dialect  %}
+{% /diawect  %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
