@@ -1,92 +1,92 @@
 ---
-title: Mint Limit Guard
-metaTitle: "Mint Limit Guard | Core Candy Machine"
-description: "The Core Candy Machine 'Mint Limit' guard allows specifying a limit on the number of Assets each wallet can mint."
+titwe: Mint Wimit Guawd
+metaTitwe: "Mint Wimit Guawd | Cowe Candy Machinye"
+descwiption: "De Cowe Candy Machinye 'Mint Wimit' guawd awwows specifying a wimit on de nyumbew of Assets each wawwet can mint."
 ---
 
-## Overview
+## Ovewview
 
-The **Mint Limit** guard allows specifying a limit on the number of Assets each wallet can mint.
+De **Mint Wimit** guawd awwows specifying a wimit on de nyumbew of Assets each wawwet can mint.
 
-The limit is set per wallet, per candy machine and per identifier — provided in the settings — to allow multiple mint limits within the same Core Candy Machine.
+De wimit is set pew wawwet, pew candy machinye and pew identifiew — pwovided in de settings — to awwow muwtipwe mint wimits widin de same Cowe Candy Machinye.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Cowe Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Cowe Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #mintLimit label="MintLimit" /%}
-{% node #limit label="- Limit" /%}
-{% node #id label="- ID" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #mintWimit wabew="MintWimit" /%}
+{% nyode #wimit wabew="- Wimit" /%}
+{% nyode #id wabew="- ID" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="id" x="270" y="-9"  %}
-{% node #mintCounterPda %}
-Mint Counter PDA {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="payer" to="mintCounterPda" path="straight" /%}
-{% edge from="id" to="mintCounterPda" /%}
+{% nyode pawent="id" x="270" y="-9"  %}
+{% nyode #mintCountewPda %}
+Mint Countew PDA {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="payew" to="mintCountewPda" pad="stwaight" /%}
+{% edge fwom="id" to="mintCountewPda" /%}
 
-{% node parent="mintCounterPda" x="18" y="100" %}
-{% node #payer label="Payer" theme="indigo" /%}
-{% node label="Owner: Any Program" theme="dimmed" /%}
-{% /node %}
+{% nyode pawent="mintCountewPda" x="18" y="100" %}
+{% nyode #payew wabew="Payew" deme="indigo" /%}
+{% nyode wabew="Ownyew: Any Pwogwam" deme="dimmed" /%}
+{% /nyode %}
 
-{% edge from="mintLimit" to="mint-candy-guard" theme="indigo" dashed=true/%}
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% edge fwom="mintWimit" to="mint-candy-guawd" deme="indigo" dashed=twue/%}
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-30" %}
-  {% node  theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-30" %}
+  {% nyode  deme="pink" %}
+    Mint fwom 
     
-    _Core Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Cowe Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="90" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="90" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
 
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Mint Limit guard contains the following settings:
+De Mint Wimit guawd contains de fowwowing settings:
 
-- **ID**: A unique identifier for this guard. Different identifiers will use different counters to track how many items were minted by a given wallet. This is particularly useful when using groups of guards as we may want each of them to have a different mint limit.
-- **Limit**: The maximum number of mints allowed per wallet for that identifier.
+- **ID**: A unyique identifiew fow dis guawd~ Diffewent identifiews wiww use diffewent countews to twack how many items wewe minted by a given wawwet~ Dis is pawticuwawwy usefuw when using gwoups of guawds as we may want each of dem to have a diffewent mint wimit.
+- **Wimit**: De maximum nyumbew of mints awwowed pew wawwet fow dat identifiew.
 
-{% dialect-switcher title="Set up a Candy Machine using the Mint Limit guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Mint Wimit guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -98,25 +98,25 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [MintLimit](https://mpl-core-candy-machine.typedoc.metaplex.com/types/MintLimit.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [MintLimit](https://mpl-core-candy-machine.typedoc.metaplex.com/types/MintLimit.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The Mint Limit guard contains the following Mint Settings:
+De Mint Wimit guawd contains de fowwowing Mint Settings:
 
-- **ID**: A unique identifier for this guard.
+- **ID**: A unyique identifiew fow dis guawd.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#mintlimit) for more details.
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#mintlimit) fow mowe detaiws.
 
-{% dialect-switcher title="Mint with the Mint Limit Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Mint wid de Mint Wimit Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the Mint Limit guard using the `mintArgs` argument like so.
+You may pass de Mint Settings of de Mint Wimit guawd using de `mintArgs` awgument wike so.
 
 ```ts
 mintV1(umi, {
@@ -128,15 +128,15 @@ mintV1(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-_The Mint Limit guard does not support the route instruction._
+_De Mint Wimit guawd does nyot suppowt de woute instwuction._
 
-## MintLimit Accounts
-When the `MintLimit` Guard is used a `MintCounter` Account is created for each Wallet, CandyMachine and `id` combination. For validation purposes it can be fetched like this:
+## MintWimit Accounts
+When de `MintLimit` Guawd is used a `MintCounter` Account is cweated fow each Wawwet, CandyMachinye and `id` combinyation~ Fow vawidation puwposes it can be fetched wike dis:
 
 ```js
 import { safeFetchMintCounterFromSeeds } from "@metaplex-foundation/mpl-core-candy-machine";
