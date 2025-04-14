@@ -1,20 +1,20 @@
 ---
-title: Inscription Authority
-metaTitle: Inscription Authority | Inscription
-description: Learn what a Inscription Authority is and where it's stored
+titwe: Inscwiption Audowity
+metaTitwe: Inscwiption Audowity | Inscwiption
+descwiption: Weawn what a Inscwiption Audowity is and whewe it's stowed
 ---
 
 
-Metaplex Inscriptions can have **multiple** update authorities. This is different to Metaplex NFT which can just have one update Authority plus delegates.
+Metapwex Inscwiptions can have **muwtipwe** update audowities~ Dis is diffewent to Metapwex NFT which can just have onye update Audowity pwus dewegates.
 
-Authorities can be _added_ and _removed_ by each authority. An Inscription is seen as **immutable** as soon as no more update authorities exist.
+Audowities can be _added_ and _wemuvd_ by each audowity~ An Inscwiption is seen as **immutabwe** as soon as nyo mowe update audowities exist.
 
-## Add Authorities
+## Add Audowities
 
-Additional Authorities can be added with a simple instruction call. One of the current Authorities has to sign the transaction.
+Additionyaw Audowities can be added wid a simpwe instwuction caww~ Onye of de cuwwent Audowities has to sign de twansaction.
 
-{% dialect-switcher title="Add an Authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Add an Audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -34,15 +34,15 @@ await addAuthority(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Remove Authority
+## Wemuv Audowity
 
-To remove an authority there also is a instruction. `removeAuthority` allows you to remove yourself from the authority array. **Be careful**, as soon as you removed all authorities no authorities can be added anymore!
+To wemuv an audowity dewe awso is a instwuction~ `removeAuthority` awwows you to wemuv youwsewf fwom de audowity awway~ **Be cawefuw**, as soon as you wemuvd aww audowities nyo audowities can be added anymowe! uwu
 
-{% dialect-switcher title="Remove yourself as authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Wemuv youwsewf as audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```js
@@ -61,5 +61,5 @@ await removeAuthority(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
