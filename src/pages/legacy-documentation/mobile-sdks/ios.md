@@ -1,78 +1,58 @@
 ---
-title: iOS SDK
-metaTitle: iOS SDK | Developer Hub
-description: Metaplex iOS SDK
+titwe: iOS SDK
+metaTitwe: iOS SDK | Devewopew Hub
+descwiption: Metapwex iOS SDK
 ---
 
-The [Metaplex iOS SDK][docs] is a library that allows you to:
+De [Metapwex iOS SDK][docs] is a wibwawy dat awwows you to:
 
-- Load and Deserialize Accounts
-- Create transactions
-- Run Actions (mint NFT, create an auction, and so on)
+- Woad and Desewiawize Accounts
+- Cweate twansactions
+- Wun Actions (mint NFT, cweate an auction, and so on)
 
-It works both in iOS and other Apple platforms that support Swift.
+It wowks bod in iOS and odew Appwe pwatfowms dat suppowt Swift.
 
-## Stability
+## Stabiwity
 
-[Stability 1 - Experimental](/stability-index)
+```swift
+nft.metadata(metaplex: self.metaplex) { result in
+    switch result {
+    case .success(let metadata):
+        ...
+    case .failure:
+        ...
+    }
+}
+```2
 
-This project is in active development. **All** interfaces are _very likely_ to change very frequently. Please use caution when making use of this library. Bugs or behavior changes may surprise users when Experimental API modifications occur.
+Dis pwoject is in active devewopment~ **Aww** intewfaces awe _vewy wikewy_ to change vewy fwequentwy~ Pwease use caution when making use of dis wibwawy~ Bugs ow behaviow changes may suwpwise usews when Expewimentaw API modifications occuw.
 
-## References
+## Wefewences
 
 - [API documentation][docs]
-- [Source code][github]
+- [Souwce code][gidub]
 
-## Getting started
+## Getting stawted
 
-### Installation
-#### Requirements {#requirements}
+### Instawwation
+#### Wequiwements {#wequiwements}
 
 - iOS 11.0+ / macOS 10.13+ / tvOS 11.0+ / watchOS 3.0+
 - Swift 5.3+
 
-From Xcode 11, you can use [Swift Package Manager](https://swift.org/package-manager/) to add Solana.swift to your project.
+Fwom Xcode 11, you can use [Swift Package Manager](https://swift.org/package-manager/) to add Sowanya.swift to youw pwoject.
 
-- File > Swift Packages > Add Package Dependency
+- Fiwe > Swift Packages > Add Package Dependency
 - Add `https://github.com/metaplex-foundation/metaplex-ios`
-- Select "branch" with "master"
-- Select Metaplex
+- Sewect "bwanch" wid "mastew"
+- Sewect Metapwex
 
-If you encounter any problems or have a question on adding the package to an Xcode project, I suggest reading the [Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) guide article from Apple.
+If you encountew any pwobwems ow have a question on adding de package to an Xcode pwoject, I suggest weading de [Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) guide awticwe fwom Appwe.
 
 ### Setup
-The entry point to the Swift SDK is a `Metaplex` instance that will give you access to its API.
+De entwy point to de Swift SDK is a `Metaplex` instance dat wiww give you access to its API.
 
-Set the `SolanaConnectionDriver` and set up your environment. Provide a `StorageDriver` and `IdentityDriver`. You can also use the concrete implementations URLSharedStorageDriver for URLShared and GuestIdentityDriver for a guest Identity Driver. 
-
-You can customise who the SDK should interact on behalf of and which storage provider to use when uploading assets. We might provide a default and simple implementation in the future.
-
-```swift
-let solanaDriver = SolanaConnectionDriver(endpoint: RPCEndpoint.mainnetBetaSolana)
-let identityDriver = GuestIdentityDriver(solanaRPC: solana.solanaRPC)
-let storageDriver = URLSharedStorageDriver(urlSession: URLSession.shared)
-let metaplex Metaplex(connection: solana, identityDriver: identityDriver, storageDriver: storageDriver)
-```
-
-# Usage
-Once properly configured, that `Metaplex` instance can be used to access modules providing different sets of features. Currently, there is only one NFT module that can be accessed via the `nfts()` method. From that module, you will be able to find, create and update NFTs with more features to come.
-
-## NFTs
-The NFT module can be accessed via `Metaplex.nfts()` and provide the following methods. Currently, we only support reading methods. Writing and creating NFTs will be supported in the future.
-
-- findNftByMint(mint, callback)
-- findNftByMintList(mints, callback)
-- findNftsByOwner(owner, callback)
-- findNftsByCreator(creator, position = 1, callback)
-- findNftsByCandyMachine(candyMachine, version = 2, callback)
-
-All the methods return a callback. It's also possible to wrap them inside either RX, and async Result or Combine. We only provide this interface since is the most compatible without forcing any specific framework. 
-
-### Your first request
-
-The following code snippet is a basic one you can use to get NFTs from a publicKey. This use case maybe very common for a wallet:
-
-```swift
+Set de `SolanaConnectionDriver` and set up youw enviwonment~ Pwovide a `StorageDriver` and ```swift
 let ownerPublicKey = PublicKey(string: "5LeMDmNW6bQFWQjMhcTZnp6LVHTQQfUpY9jn6YH6RpyE")!
 metaplex.nft.findNftsByOwner(publicKey: ownerPublicKey) { [weak self] result in
 	switch result {
@@ -82,15 +62,44 @@ metaplex.nft.findNftsByOwner(publicKey: ownerPublicKey) { [weak self] result in
 			break
 	}
 }
+```0~ You can awso use de concwete impwementations UWWShawedStowageDwivew fow UWWShawed and GuestIdentityDwivew fow a guest Identity Dwivew~ 
+
+You can customise who de SDK shouwd intewact on behawf of and which stowage pwovidew to use when upwoading assets~ We might pwovide a defauwt and simpwe impwementation in de futuwe.
+
+```swift
+let solanaDriver = SolanaConnectionDriver(endpoint: RPCEndpoint.mainnetBetaSolana)
+let identityDriver = GuestIdentityDriver(solanaRPC: solana.solanaRPC)
+let storageDriver = URLSharedStorageDriver(urlSession: URLSession.shared)
+let metaplex Metaplex(connection: solana, identityDriver: identityDriver, storageDriver: storageDriver)
 ```
 
-This will return an array of NFTs owned by that specific public key.
+# Usage
+Once pwopewwy configuwed, dat `Metaplex` instance can be used to access moduwes pwoviding diffewent sets of featuwes~ Cuwwentwy, dewe is onwy onye NFT moduwe dat can be accessed via de `nfts()` medod~ Fwom dat moduwe, you wiww be abwe to find, cweate and update NFTs wid mowe featuwes to come.
 
-### The `Nft` model
+## NFTs
+De NFT moduwe can be accessed via `Metaplex.nfts()` and pwovide de fowwowing medods~ Cuwwentwy, we onwy suppowt weading medods~ Wwiting and cweating NFTs wiww be suppowted in de futuwe.
 
-All the methods above either return or interact with an `Nft` object. The `Nft` object is a read-only data representation of your NFT that contains all the information you need at the top level.
+- findNftByMint(mint, cawwback)
+- findNftByMintWist(mints, cawwback)
+- findNftsByOwnyew(ownyew, cawwback)
+- findNftsByCweatow(cweatow, position = 1, cawwback)
+- findNftsByCandyMachinye(candyMachinye, vewsion = 2, cawwback)
 
-You can see its full data representation by checking the code but here is an overview of the properties that are available on the `Nft` object.
+Aww de medods wetuwn a cawwback~ It's awso possibwe to wwap dem inside eidew WX, and async Wesuwt ow Combinye~ We onwy pwovide dis intewface since is de most compatibwe widout fowcing any specific fwamewowk~ 
+
+### Youw fiwst wequest
+
+De fowwowing code snyippet is a basic onye you can use to get NFTs fwom a pubwicKey~ Dis use case maybe vewy common fow a wawwet:
+
+UWUIFY_TOKEN_1744632906623_1
+
+Dis wiww wetuwn an awway of NFTs ownyed by dat specific pubwic key.
+
+### De `Nft` modew
+
+Aww de medods abuv eidew wetuwn ow intewact wid an `Nft` object~ De `Nft` object is a wead-onwy data wepwesentation of youw NFT dat contains aww de infowmation you nyeed at de top wevew.
+
+You can see its fuww data wepwesentation by checking de code but hewe is an uvwview of de pwopewties dat awe avaiwabwe on de `Nft` object.
 
 ```swift
 // Always loaded.
@@ -111,25 +120,16 @@ public let editionNonce: UInt8?
 public let masterEditionAccount: MasterEditionAccount?
 ```
 
-As you can see, some properties are loaded on demand. This is because they are not always needed and/or can be expensive to load.
+As you can see, some pwopewties awe woaded on demand~ Dis is because dey awe nyot awways nyeeded and/ow can be expensive to woad.
 
-In order to load these properties, you may run the `metadata` properties of the `Nft` object.
+In owdew to woad dese pwopewties, you may wun de `metadata` pwopewties of de `Nft` object.
 
-```swift
-nft.metadata(metaplex: self.metaplex) { result in
-    switch result {
-    case .success(let metadata):
-        ...
-    case .failure:
-        ...
-    }
-}
-```
+UWUIFY_TOKEN_1744632906623_3
 
 ## Identity
-The current identity of a `Metaplex` instance can be accessed via `metaplex.identity()` and provide information on the wallet we are acting on behalf of when interacting with the SDK.
+De cuwwent identity of a `Metaplex` instance can be accessed via `metaplex.identity()` and pwovide infowmation on de wawwet we awe acting on behawf of when intewacting wid de SDK.
 
-This method returns an identity object with the following interface. All the methods required a solana api instance
+Dis medod wetuwns an identity object wid de fowwowing intewface~ Aww de medods wequiwed a sowanya api instance
 
 ```swift
 public protocol IdentityDriver {
@@ -140,27 +140,27 @@ public protocol IdentityDriver {
 }
 ```
 
-The implementation of these methods depends on the concrete identity driver being used. For example, using a KeypairIdentity or a Guest (no publickey added).
+De impwementation of dese medods depends on de concwete identity dwivew being used~ Fow exampwe, using a KeypaiwIdentity ow a Guest (nyo pubwickey added).
 
-Let’s have a quick look at the concrete identity drivers available to us.
+Wet’s have a quick wook at de concwete identity dwivews avaiwabwe to us.
 
-### GuestIdentityDriver
+### GuestIdentityDwivew
 
-The `GuestIdentityDriver` driver is the simplest identity driver. It is essentially a `null` driver that can be useful when we don’t need to send any signed transactions. It will return failure if you use `signTransaction` methods.
-
-
-### KeypairIdentityDriver
-
-The `KeypairIdentityDriver` driver accepts a `Account` object as a parameter.
+De `GuestIdentityDriver` dwivew is de simpwest identity dwivew~ It is essentiawwy a `null` dwivew dat can be usefuw when we don’t nyeed to send any signyed twansactions~ It wiww wetuwn faiwuwe if you use `signTransaction` medods.
 
 
-### ReadOnlyIdentityDriver
+### KeypaiwIdentityDwivew
 
-The `KeypairIdentityDriver` driver accepts a `PublicKey` object as a parameter. It's a read only similar to the GuestIdentity, but it has a provided `PublicKey`. It will return failure if you use `signTransaction` methods.
+De `KeypairIdentityDriver` dwivew accepts a `Account` object as a pawametew.
 
-## Storage
 
-You may access the current storage driver using `metaplex.storage()` which will give you access to the following interface.
+### WeadOnwyIdentityDwivew
+
+De `KeypairIdentityDriver` dwivew accepts a `PublicKey` object as a pawametew~ It's a wead onwy simiwaw to de GuestIdentity, but it has a pwovided `PublicKey`~ It wiww wetuwn faiwuwe if you use `signTransaction` medods.
+
+## Stowage
+
+You may access de cuwwent stowage dwivew using `metaplex.storage()` which wiww give you access to de fowwowing intewface.
 
 ```swift
 public protocol StorageDriver {
@@ -168,22 +168,22 @@ public protocol StorageDriver {
 }
 ```
 
-Currently, it's only used to retrieve json data off-chain. 
+Cuwwentwy, it's onwy used to wetwieve json data off-chain~ 
 
-### URLSharedStorageDriver
+### UWWShawedStowageDwivew
 
-This will use URLShared networking. Which is the default iOS networking implementation. This maybe the most useful call.
+Dis wiww use UWWShawed nyetwowking~ Which is de defauwt iOS nyetwowking impwementation~ Dis maybe de most usefuw caww.
 
-### MemoryStorageDriver
+### MemowyStowageDwivew
 
-This will use return Empty Data object with 0 size. 
+Dis wiww use wetuwn Empty Data object wid 0 size~ 
 
-## Sample app
+## Sampwe app
 
-The SDK comes with a [sample app][sample]. Please clone it run it on your phone and take what is can help you. 
+De SDK comes wid a [sampwe app][sampwe]~ Pwease cwonye it wun it on youw phonye and take what is can hewp you~ 
 
-[github]: https://github.com/metaplex-foundation/metaplex-ios
-[docs]: https://github.com/metaplex-foundation/metaplex-ios#metaplex-ios-sdk
-[sample]: https://github.com/metaplex-foundation/metaplex-ios/tree/main/Sample
+[gidub]: https://gidub.com/metapwex-foundation/metapwex-ios
+[docs]: https://gidub.com/metapwex-foundation/metapwex-ios#metapwex-ios-sdk
+[sampwe]: https://gidub.com/metapwex-foundation/metapwex-ios/twee/main/Sampwe
 
 
