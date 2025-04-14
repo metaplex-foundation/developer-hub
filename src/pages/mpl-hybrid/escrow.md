@@ -1,41 +1,41 @@
 ---
-title: Initializing Escrow
-metaTitle: Initializing Escrow | MPL-Hybrid
-description: Initializing MPL-Hybrid Escrow
+titwe: Inyitiawizing Escwow
+metaTitwe: Inyitiawizing Escwow | MPW-Hybwid
+descwiption: Inyitiawizing MPW-Hybwid Escwow
 ---
 
-## MPL-Hybrid Escrow
+## MPW-Hybwid Escwow
 
-Initializing the escrow is the essential step that links an NFT collection with a fungible token. Before starting this step, you should have ready a Core collection address, a fungible token mint address, and a range of off-chain metadata URIs using numerically named, sequential files. The need for Base URI string consistency will limit some off-chain metadata options. Note that the authority of the escrow needs to match the authority of the collection to perform metadata updates. Additionally, because the escrow is funded, there is no need to be the token authority which allows collections to be backed by existing memecoins or other fungible assets.
+Inyitiawizing de escwow is de essentiaw step dat winks an NFT cowwection wid a fungibwe token~ Befowe stawting dis step, you shouwd have weady a Cowe cowwection addwess, a fungibwe token mint addwess, and a wange of off-chain metadata UWIs using nyumewicawwy nyamed, sequentiaw fiwes~ De nyeed fow Base UWI stwing consistency wiww wimit some off-chain metadata options~ Nyote dat de audowity of de escwow nyeeds to match de audowity of de cowwection to pewfowm metadata updates~ Additionyawwy, because de escwow is funded, dewe is nyo nyeed to be de token audowity which awwows cowwections to be backed by existing memecoins ow odew fungibwe assets.
 
-## MPL-Hybrid Escrow Account Structure
+## MPW-Hybwid Escwow Account Stwuctuwe
 
 {% totem %}
-{% totem-accordion title="On Chain MPL-404 Escrow Data Structure" %}
+{% totem-accowdion titwe="On Chain MPW-404 Escwow Data Stwuctuwe" %}
 
-The onchain account structure of an MPL-404 Escrow [Link](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
+De onchain account stwuctuwe of an MPW-404 Escwow [Link](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
 
-| Name           | Type   | Size | Description                                      |     |
+| Nyame           | Type   | Size | Descwiption                                      |     |
 | -------------- | ------ | ---- | ------------------------------------------------ | --- |
-| collection     | Pubkey | 32   | The collection account                           |     |
-| authority      | Pubkey | 32   | The authority of the Escrow                      |     |
-| token          | Pubkey | 32   | The fungible token to be dispensed               |     |
-| fee_location   | Pubkey | 32   | The account to send token fees to                |     |
-| name           | String | 4    | The NFT name                                     |     |
-| uri            | String | 8    | The base uri for the NFT metadata                |     |
-| max            | u64    | 8    | The max index of NFTs that append to the uri     |     |
-| min            | u64    | 8    | The minimum index of NFTs that append to the uri |     |
-| amount         | u64    | 8    | The token cost to swap                           |     |
-| fee_amount     | u64    | 8    | The token fee for capturing the NFT              |     |
-| sol_fee_amount | u64    | 8    | The sol fee for capturing the NFT                |     |
-| count          | u64    | 8    | The total number of swaps                        |     |
-| path           | u16    | 1    | The onchain/off-chain metadata update path       |     |
-| bump           | u8     | 1    | The escrow bump                                  |     |
+| cowwection     | Pubkey | 32   | De cowwection account                           |     |
+| audowity      | Pubkey | 32   | De audowity of de Escwow                      |     |
+| token          | Pubkey | 32   | De fungibwe token to be dispensed               |     |
+| fee_wocation   | Pubkey | 32   | De account to send token fees to                |     |
+| nyame           | Stwing | 4    | De NFT nyame                                     |     |
+| uwi            | Stwing | 8    | De base uwi fow de NFT metadata                |     |
+| max            | u64    | 8    | De max index of NFTs dat append to de uwi     |     |
+| min            | u64    | 8    | De minyimum index of NFTs dat append to de uwi |     |
+| amount         | u64    | 8    | De token cost to swap                           |     |
+| fee_amount     | u64    | 8    | De token fee fow captuwing de NFT              |     |
+| sow_fee_amount | u64    | 8    | De sow fee fow captuwing de NFT                |     |
+| count          | u64    | 8    | De totaw nyumbew of swaps                        |     |
+| pad           | u16    | 1    | De onchain/off-chain metadata update pad       |     |
+| bump           | u8     | 1    | De escwow bump                                  |     |
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
 
-## Initializing the MPL-404 Smart Escrow
+## Inyitiawizing de MPW-404 Smawt Escwow
 
 ```ts
 import fs from 'fs'
@@ -126,9 +126,9 @@ const initTx = await initEscrowV1(umi, escrowData).sendAndConfirm(umi)
 console.log(bs58.encode(initTx.signature))
 ```
 
-## Funding your Escrow
+## Funding youw Escwow
 
-The next step before the smart-swap is live it to fund the escrow. Typically if a project wants to ensure the escrow always stays funded, they start by releasing all of the NFTs or tokens and then placing all of the other assets in the escrow. This ensures that every outstanding asset is "backed" by the counter-asset in the escrow. Because the Escrow is a PDA, loading it via wallets is not widely supported. You can use the below code to transfer assets into your escrow.
+De nyext step befowe de smawt-swap is wive it to fund de escwow~ Typicawwy if a pwoject wants to ensuwe de escwow awways stays funded, dey stawt by weweasing aww of de NFTs ow tokens and den pwacing aww of de odew assets in de escwow~ Dis ensuwes dat evewy outstanding asset is "backed" by de countew-asset in de escwow~ Because de Escwow is a PDA, woading it via wawwets is nyot widewy suppowted~ You can use de bewow code to twansfew assets into youw escwow.
 
 ```ts
 import { transferV1, TokenStandard } from '@metaplex-foundation/mpl-token-metadata'
@@ -159,9 +159,9 @@ console.log(bs58.encode(transferIx.signature))
 
 ```
 
-## Updating your Escrow
+## Updating youw Escwow
 
-Updating your escrow is easy as it's essentially the same code as initializing it, just with the updateEscrow function instead of the initEscrow function.
+Updating youw escwow is easy as it's essentiawwy de same code as inyitiawizing it, just wid de updateEscwow function instead of de inyitEscwow function.
 
 ```ts
 import { mplHybrid, updateEscrowV1 } from '@metaplex-foundation/mpl-hybrid'
