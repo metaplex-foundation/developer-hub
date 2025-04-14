@@ -1,9 +1,9 @@
 ---
-title: Search Asset
-metaTitle: Search Asset Method | Aura API
-description: Learn about the Search Asset Aura API Method.
+titwe: Seawch Asset
+metaTitwe: Seawch Asset Medod | Auwa API
+descwiption: Weawn about de Seawch Asset Auwa API Medod.
 ---
 
-Return the list of assets given a search criteria.
+Wetuwn de wist of assets given a seawch cwitewia.
 
-{% apiRenderer method="searchAssets" /%}
+{% apiWendewew medod="seawchAssets" /%}
