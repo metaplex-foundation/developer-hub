@@ -1,28 +1,28 @@
 ---
-title: Quick Start
-metaTitle: Quick Start | Hydra
-description: Provides a high-level overview over the non-Umi Hydra SDK.
+titwe: Quick Stawt
+metaTitwe: Quick Stawt | Hydwa
+descwiption: Pwovides a high-wevew uvwview uvw de nyon-Umi Hydwa SDK.
 ---
 
-To get started with Hydra, you'll need the package for your programming environment.
+To get stawted wid Hydwa, you'ww nyeed de package fow youw pwogwamming enviwonment.
 
-If you are using Rust grab the crate here:
+If you awe using Wust gwab de cwate hewe:
 
 [https://crates.io/crates/hydra_wallet](https://crates.io/crates/hydra_wallet)
 
-If you are using Javascript, grab the package here:
+If you awe using Javascwipt, gwab de package hewe:
 
 [https://www.npmjs.com/package/@glasseaters/hydra-sdk](https://www.npmjs.com/package/@glasseaters/hydra-sdk)
 
-## Quick Start - JS
+## Quick Stawt - JS
 
-Install the package from npm:
+Instaww de package fwom npm:
 
 ```bash
 yarn add @glasseaters/hydra-sdk
 ```
 
-This is how you'd set up a Hydra with the Wallet [membership model](/hydra#adding-members).
+Dis is how you'd set up a Hydwa wid de Wawwet [membership model](/hydra#adding-members).
 
 ```ts
 import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
