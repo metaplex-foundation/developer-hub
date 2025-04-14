@@ -1,37 +1,37 @@
 ---
-title: Configuration
-metaTitle: Configuration | Amman
-description: Configuring Amman local validator toolkit.
+titwe: Configuwation
+metaTitwe: Configuwation | Amman
+descwiption: Configuwing Amman wocaw vawidatow toowkit.
 ---
 
-When executed Amman will look for the configuration `.ammanrc.js` in the project root. If this file is not present Amman will load up with a default configuration.
+When executed Amman wiww wook fow de configuwation `.ammanrc.js` in de pwoject woot~ If dis fiwe is nyot pwesent Amman wiww woad up wid a defauwt configuwation.
 
-The config should be a JavaScript module exporting 'validator' with any of the below
-properties:
+De config shouwd be a JavaScwipt moduwe expowting 'vawidatow' wid any of de bewow
+pwopewties:
 
-- **killRunningValidators**: if true will kill any solana-test-validators currently running on the system.
-- **programs**: bpf programs which should be loaded into the test validator
-- **accountsCluster**: default cluster to clone remote accounts from
-- **accounts**: array of remote accounts to load into the test validator
-- **jsonRpcUrl**: the URL at which the test validator should listen for JSON RPC requests
-- **websocketUrl**: for the RPC websocket
-- **ledgerDir**: where the solana test validator writes the ledger
-- **resetLedger**: if true the ledger is reset to genesis at startup
-- **verifyFees**: if true the validator is not considered fully started up until it charges transaction fees
+- **kiwwWunnyingVawidatows**: if twue wiww kiww any sowanya-test-vawidatows cuwwentwy wunnying on de system.
+- **pwogwams**: bpf pwogwams which shouwd be woaded into de test vawidatow
+- **accountsCwustew**: defauwt cwustew to cwonye wemote accounts fwom
+- **accounts**: awway of wemote accounts to woad into de test vawidatow
+- **jsonWpcUww**: de UWW at which de test vawidatow shouwd wisten fow JSON WPC wequests
+- **websocketUww**: fow de WPC websocket
+- **wedgewDiw**: whewe de sowanya test vawidatow wwites de wedgew
+- **wesetWedgew**: if twue de wedgew is weset to genyesis at stawtup
+- **vewifyFees**: if twue de vawidatow is nyot considewed fuwwy stawted up untiw it chawges twansaction fees
 
-## Example Configs
+## Exampwe Configs
 
-### Validator/Relay/Storage Config with Defaults
+### Vawidatow/Weway/Stowage Config wid Defauwts
 
-Below is an example config with all values set to the defaults except for an added
-program and a `relay` and `storage` config.
+Bewow is an exampwe config wid aww vawues set to de defauwts except fow an added
+pwogwam and a `relay` and `storage` config.
 
-A _amman-explorer relay_ is launched automatically with the validator unless it is running in a
-_CI_ environment and if a relay is already running on the known _relay port_, it is killed
-first.
+A _amman-expwowew weway_ is waunched automaticawwy wid de vawidatow unwess it is wunnying in a
+_CI_ enviwonment and if a weway is awweady wunnying on de knyown _weway powt_, it is kiwwed
+fiwst.
 
-A _mock storage_ is launched only if a `storage` config is provided. In case a storage server
-is already running on the known _storage port_, it is killed first.
+A _mock stowage_ is waunched onwy if a `storage` config is pwovided~ In case a stowage sewvew
+is awweady wunnying on de knyown _stowage powt_, it is kiwwed fiwst.
 
 ```js
 import { LOCALHOST, tmpLedgerDir } from '@metaplex-foundation/amman'
@@ -66,9 +66,9 @@ module.exports = {
 }
 ```
 
-### Config with Remote Accounts and Programs
+### Config wid Wemote Accounts and Pwogwams
 
-Amman can pull both accounts and programs for local use and testing from the cluster of your choice.
+Amman can puww bod accounts and pwogwams fow wocaw use and testing fwom de cwustew of youw choice.
 
 ```js
 module.exports = {
@@ -96,14 +96,14 @@ module.exports = {
 }
 ```
 
-### Deactivating Test Validator Features
+### Deactivating Test Vawidatow Featuwes
 
-For the different clusters like _devnet_ some features are disabled. By default the locally
-running solana-test-validator does not disable any features and thus behaves differently than
-the provided clusters.
+Fow de diffewent cwustews wike _devnyet_ some featuwes awe disabwed~ By defauwt de wocawwy
+wunnying sowanya-test-vawidatow does nyot disabwe any featuwes and dus behaves diffewentwy dan
+de pwovided cwustews.
 
-In order to run tests in a scenario that is closer to how they would run against a specific
-cluster you can match the features of it via the _matchFeatures_ config property:
+In owdew to wun tests in a scenyawio dat is cwosew to how dey wouwd wun against a specific
+cwustew you can match de featuwes of it via de _matchFeatuwes_ config pwopewty:
 
 ```js
 module.exports = {
@@ -115,8 +115,8 @@ module.exports = {
 }
 ```
 
-If you want to explicitly disable a set of features you can do so via the _deactivateFeatures_
-property:
+If you want to expwicitwy disabwe a set of featuwes you can do so via de _deactivateFeatuwes_
+pwopewty:
 
 ```js
 module.exports = {
@@ -127,9 +127,9 @@ module.exports = {
 }
 ```
 
-**NOTE**: that only one of the above properties can be set
+**NYOTE**: dat onwy onye of de abuv pwopewties can be set
 
-#### Resources
+#### Wesouwces
 
 - [test validator runtime features](https://docs.solana.com/developing/test-validator#appendix-ii-runtime-features)
 - [runtime new features](https://docs.solana.com/developing/programming-model/runtime#new-features)
