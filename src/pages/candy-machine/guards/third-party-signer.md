@@ -1,91 +1,91 @@
 ---
-title: "Third Party Signer Guard"
-metaTitle: Third Party Signer Guard | Candy Machine
-description: "The Third Party Signer guard requires a predefined address to sign each mint transaction."
+titwe: "Diwd Pawty Signyew Guawd"
+metaTitwe: Diwd Pawty Signyew Guawd | Candy Machinye
+descwiption: "De Diwd Pawty Signyew guawd wequiwes a pwedefinyed addwess to sign each mint twansaction."
 ---
 
-## Overview
+## Ovewview
 
-The **Third Party Signer** guard requires a predefined address to sign each mint transaction. The signer will need to be passed within the mint settings of this guard.
+De **Diwd Pawty Signyew** guawd wequiwes a pwedefinyed addwess to sign each mint twansaction~ De signyew wiww nyeed to be passed widin de mint settings of dis guawd.
 
-This allows for more centralized mints where every single mint transaction has to go through a specific signer.
+Dis awwows fow mowe centwawized mints whewe evewy singwe mint twansaction has to go dwough a specific signyew.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node label="Third Party Signer" /%}
-{% node #guardSigner label="- Signer" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode wabew="Diwd Pawty Signyew" /%}
+{% nyode #guawdSignyew wabew="- Signyew" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="guardSigner" #signer x="270" y="-19" %}
-{% node  theme="indigo" %}
-Signer {% .whitespace-nowrap %}
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Any Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode pawent="guawdSignyew" #signyew x="270" y="-19" %}
+{% nyode  deme="indigo" %}
+Signyew {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: Any Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-8" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="72" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="72" deme="bwue" %}
   NFT
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
-{% edge from="guardSigner" to="signer" arrow="none" dashed=true /%}
-{% edge from="mint-candy-guard" to="signer" arrow="none" dashed=true  theme="pink" %}
-If this Signer Account does not
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+{% edge fwom="guawdSignyew" to="signyew" awwow="nyonye" dashed=twue /%}
+{% edge fwom="mint-candy-guawd" to="signyew" awwow="nyonye" dashed=twue  deme="pink" %}
+If dis Signyew Account does nyot
 
-sign the mint transaction
+sign de mint twansaction
 
-minting will fail
+minting wiww faiw
 {% /edge %}
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" /%}
 
-{% /diagram %}
-## Guard Settings
+{% /diagwam %}
+## Guawd Settings
 
-The Third Party Signer guard contains the following settings:
+De Diwd Pawty Signyew guawd contains de fowwowing settings:
 
-- **Signer Key**: The address of the signer that will need to sign each mint transaction.
+- **Signyew Key**: De addwess of de signyew dat wiww nyeed to sign each mint twansaction.
 
-{% dialect-switcher title="Set up a Candy Machine using the Third Pary Signer Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Diwd Pawy Signyew Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -99,14 +99,14 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [ThirdPartySigner](https://mpl-candy-machine.typedoc.metaplex.com/types/ThirdPartySigner.html)
+API Wefewences: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [ThirdPartySigner](https://mpl-candy-machine.typedoc.metaplex.com/types/ThirdPartySigner.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Add this object into the guard section your config.json file:
+Add dis object into de guawd section youw config.json fiwe:
 
 ```json
 "thirdPartySigner" : {
@@ -115,20 +115,20 @@ Add this object into the guard section your config.json file:
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The Third Party Signer guard contains the following Mint Settings:
+De Diwd Pawty Signyew guawd contains de fowwowing Mint Settings:
 
-- **Signer**: The required third-party signer. The address of this signer must match the Signer Key in the guard settings.
+- **Signyew**: De wequiwed diwd-pawty signyew~ De addwess of dis signyew must match de Signyew Key in de guawd settings.
 
-{% dialect-switcher title="Mint with the Third Party Signer Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Mint wid de Diwd Pawty Signyew Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-When minting via the Umi library, simply provide the third-party signer via the `signer` attribute like so.
+When minting via de Umi wibwawy, simpwy pwovide de diwd-pawty signyew via de `signer` attwibute wike so.
 
 ```ts
 create(umi, {
@@ -139,19 +139,19 @@ create(umi, {
 });
 ```
 
-Remember to also sign the transaction with the myConfiguredSigner keypair. 
+Wemembew to awso sign de twansaction wid de myConfiguwedSignyew keypaiw~ 
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
+_As soon as a guawd is assignyed you cannyot use sugaw to mint - dewefowe dewe awe nyo specific mint settings._
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-_The Third Party Signer guard does not support the route instruction._
+_De Diwd Pawty Signyew guawd does nyot suppowt de woute instwuction._
