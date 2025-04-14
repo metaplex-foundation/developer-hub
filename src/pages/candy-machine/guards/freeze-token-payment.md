@@ -1,94 +1,104 @@
 ---
-title: 'Freeze Token Payment Guard'
-metaTitle: Freeze Token Payment Guard | Candy Machine
-description: 'Set the price of the mint in token amount with a freeze period.'
+titwe: 'Fweeze Token Payment Guawd'
+metaTitwe: Fweeze Token Payment Guawd | Candy Machinye
+descwiption: 'Set de pwice of de mint in token amount wid a fweeze pewiod.'
 ---
 
-## Overview
+## Ovewview
 
-The **Freeze Token Payment** guard allows minting frozen NFTs by charging the payer a specific amount of tokens from a certain mint account. Frozen NFTs cannot be transferred or listed on any marketplaces until thawed.
+De **Fweeze Token Payment** guawd awwows minting fwozen NFTs by chawging de payew a specific amount of tokens fwom a cewtain mint account~ Fwozen NFTs cannyot be twansfewwed ow wisted on any mawketpwaces untiw dawed.
 
-Frozen NFTs can be thawed by anyone as long as one of the following conditions is met:
+Fwozen NFTs can be dawed by anyonye as wong as onye of de fowwowing conditions is met:
 
-- The Candy Machine has minted out.
-- The Candy Machine was deleted.
-- The configured Freeze Period — which can be a maximum of 30 days — has passed.
+- De Candy Machinye has minted out.
+- De Candy Machinye was deweted.
+- De configuwed Fweeze Pewiod — which can be a maximum of 30 days — has passed.
 
-The tokens are transferred to a "Freeze Escrow" account which must be initialized by the Candy Guard authority before minting can start. Once all Frozen NFTs have been thawed, the funds can be unlocked and transferred to the configured destination account by the Candy Guard authority.
+De tokens awe twansfewwed to a "Fweeze Escwow" account which must be inyitiawized by de Candy Guawd audowity befowe minting can stawt~ Once aww Fwozen NFTs have been dawed, de funds can be unwocked and twansfewwed to de configuwed destinyation account by de Candy Guawd audowity.
 
-You may initialize the Freeze Escrow account, thaw NFTs and unlock funds [via the route instruction](#route-instruction) of this guard.
+You may inyitiawize de Fweeze Escwow account, daw NFTs and unwock funds ```ts
+mintV2(umi, {
+  // ...
+  mintArgs: {
+    freezeTokenPayment: some({
+      mint: tokenMint.publicKey,
+      destinationAta,
+    }),
+  },
+});
+```6 of dis guawd.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node #initialize label="Initialize Freeze Escrow" theme="indigo" /%}
-{% node parent="initialize"  theme="transparent" x="-8" y="-1" %}
+{% nyode #inyitiawize wabew="Inyitiawize Fweeze Escwow" deme="indigo" /%}
+{% nyode pawent="inyitiawize"  deme="twanspawent" x="-8" y="-1" %}
 ①
-{% /node %}
-{% edge from="initialize" to="freezeEscrow-pda" path="straight" /%}
-{% node #freezeEscrow-pda label="Freeze Escrow PDA" theme="slate" parent="initialize" x="15" y="70" /%}
-{% node theme="transparent" parent="freezeEscrow-pda" x="178" y="-15"%}
-Funds are transferred
+{% /nyode %}
+{% edge fwom="inyitiawize" to="fweezeEscwow-pda" pad="stwaight" /%}
+{% nyode #fweezeEscwow-pda wabew="Fweeze Escwow PDA" deme="swate" pawent="inyitiawize" x="15" y="70" /%}
+{% nyode deme="twanspawent" pawent="fweezeEscwow-pda" x="178" y="-15"%}
+Funds awe twansfewwed
 
-to the escrow account
-{% /node %}
-{% node #mintFrozen label="Mint Frozen NFTs" theme="indigo" parent="initialize" x="250" /%}
-{% node parent="mintFrozen"  theme="transparent" x="-8" y="-1" %}
+to de escwow account
+{% /nyode %}
+{% nyode #mintFwozen wabew="Mint Fwozen NFTs" deme="indigo" pawent="inyitiawize" x="250" /%}
+{% nyode pawent="mintFwozen"  deme="twanspawent" x="-8" y="-1" %}
 ②
-{% /node %}
-{% edge from="mintFrozen" to="frozen-NFT-bg2" path="straight" /%}
-{% edge from="mintFrozen" to="freezeEscrow-pda" toPosition="right" fromPosition="bottom" /%}
-{% node #frozen-NFT-bg2 label="Frozen NFT" theme="slate" parent="frozen-NFT" x="-10" y="-10" /%}
-{% node #frozen-NFT-bg1 label="Frozen NFT" theme="slate" parent="frozen-NFT" x="-5" y="-5" /%}
-{% node #frozen-NFT label="Frozen NFT" theme="slate" parent="mintFrozen" x="33" y="120" /%}
+{% /nyode %}
+{% edge fwom="mintFwozen" to="fwozen-NFT-bg2" pad="stwaight" /%}
+{% edge fwom="mintFwozen" to="fweezeEscwow-pda" toPosition="wight" fwomPosition="bottom" /%}
+{% nyode #fwozen-NFT-bg2 wabew="Fwozen NFT" deme="swate" pawent="fwozen-NFT" x="-10" y="-10" /%}
+{% nyode #fwozen-NFT-bg1 wabew="Fwozen NFT" deme="swate" pawent="fwozen-NFT" x="-5" y="-5" /%}
+{% nyode #fwozen-NFT wabew="Fwozen NFT" deme="swate" pawent="mintFwozen" x="33" y="120" /%}
 
-{% node #clock label="🕑" theme="transparent" parent="mintFrozen" x="165" y="-30" /%}
-{% edge from="clock" to="clockDesc" arrow="none" theme="dimmed" path="straight" /%}
-{% node #clockDesc  theme="transparent" parent="clock" y="220" x="-91" %}
-_When all NFTs have been minted_
+{% nyode #cwock wabew="🕑" deme="twanspawent" pawent="mintFwozen" x="165" y="-30" /%}
+{% edge fwom="cwock" to="cwockDesc" awwow="nyonye" deme="dimmed" pad="stwaight" /%}
+{% nyode #cwockDesc  deme="twanspawent" pawent="cwock" y="220" x="-91" %}
+_When aww NFTs have been minted_
 
-_OR at the end of the freeze period._
-{% /node %}
+_OW at de end of de fweeze pewiod._
+{% /nyode %}
 
-{% edge from="frozen-NFT" to="thawed-NFT-bg2" path="straight" /%}
+{% edge fwom="fwozen-NFT" to="dawed-NFT-bg2" pad="stwaight" /%}
 
-{% node #thaw label="Thaw NFTs" theme="indigo" parent="mintFrozen" x="200" /%}
-{% node parent="thaw"  theme="transparent" x="-8" y="-1" %}
+{% nyode #daw wabew="Daw NFTs" deme="indigo" pawent="mintFwozen" x="200" /%}
+{% nyode pawent="daw"  deme="twanspawent" x="-8" y="-1" %}
 ③
-{% /node %}
-{% edge from="thaw" to="thawed-NFT-bg2" path="straight" /%}
-{% node #thawed-NFT-bg2 label="Thawed NFT" theme="slate" parent="thawed-NFT" x="-10" y="-10" /%}
-{% node #thawed-NFT-bg1 label="Thawed NFT" theme="slate" parent="thawed-NFT" x="-5" y="-5" /%}
-{% node #thawed-NFT label="Thawed NFT" theme="slate" parent="thaw" y="130" x="3" /%}
+{% /nyode %}
+{% edge fwom="daw" to="dawed-NFT-bg2" pad="stwaight" /%}
+{% nyode #dawed-NFT-bg2 wabew="Dawed NFT" deme="swate" pawent="dawed-NFT" x="-10" y="-10" /%}
+{% nyode #dawed-NFT-bg1 wabew="Dawed NFT" deme="swate" pawent="dawed-NFT" x="-5" y="-5" /%}
+{% nyode #dawed-NFT wabew="Dawed NFT" deme="swate" pawent="daw" y="130" x="3" /%}
 
 
-{% node #clock2 label="🕑" theme="transparent" parent="thaw" x="130" y="-30" /%}
-{% edge from="clock2" to="clockDesc2" arrow="none" theme="dimmed" path="straight" /%}
-{% node #clockDesc2  theme="transparent" parent="clock2" y="260" x="-91" %}
-_When all NFTs have been thawed._
-{% /node %}
+{% nyode #cwock2 wabew="🕑" deme="twanspawent" pawent="daw" x="130" y="-30" /%}
+{% edge fwom="cwock2" to="cwockDesc2" awwow="nyonye" deme="dimmed" pad="stwaight" /%}
+{% nyode #cwockDesc2  deme="twanspawent" pawent="cwock2" y="260" x="-91" %}
+_When aww NFTs have been dawed._
+{% /nyode %}
 
-{% node #unlock label="Unlock Funds" theme="indigo" parent="thaw" x="180" /%}
-{% node parent="unlock"  theme="transparent" x="-8" y="-1"%}
+{% nyode #unwock wabew="Unwock Funds" deme="indigo" pawent="daw" x="180" /%}
+{% nyode pawent="unwock"  deme="twanspawent" x="-8" y="-1"%}
 ④
-{% /node %}
-{% node #freezeEscrow-pda2 label="Freeze Escrow PDA" theme="slate" parent="unlock" x="-20" y="70" /%}
-{% edge from="freezeEscrow-pda2" to="treasury" theme="dimmed" path="straight" /%}
-{% node #treasury label="Treasury" theme="slate" parent="freezeEscrow-pda2" y="70" x="40" /%}
+{% /nyode %}
+{% nyode #fweezeEscwow-pda2 wabew="Fweeze Escwow PDA" deme="swate" pawent="unwock" x="-20" y="70" /%}
+{% edge fwom="fweezeEscwow-pda2" to="tweasuwy" deme="dimmed" pad="stwaight" /%}
+{% nyode #tweasuwy wabew="Tweasuwy" deme="swate" pawent="fweezeEscwow-pda2" y="70" x="40" /%}
 
-{% /diagram %}
-## Guard Settings
+{% /diagwam %}
+## Guawd Settings
 
-The Freeze Token Payment guard contains the following settings:
+De Fweeze Token Payment guawd contains de fowwowing settings:
 
-- **Amount**: The number of tokens to charge the payer.
-- **Mint**: The address of the mint account defining the SPL Token we want to pay with.
-- **Destination Associated Token Address (ATA)**: The address of the associated token account to eventually send the tokens to. We can get this address by finding the Associated Token Address PDA using the **Mint** attribute and the address of any wallet that should receive these tokens.
+- **Amount**: De nyumbew of tokens to chawge de payew.
+- **Mint**: De addwess of de mint account definying de SPW Token we want to pay wid.
+- **Destinyation Associated Token Addwess (ATA)**: De addwess of de associated token account to eventuawwy send de tokens to~ We can get dis addwess by finding de Associated Token Addwess PDA using de **Mint** attwibute and de addwess of any wawwet dat shouwd weceive dese tokens.
 
-{% dialect-switcher title="Set up a Candy Machine using the Freeze Token Payment guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Fweeze Token Payment guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-Here’s how we can create a Candy Machine using the Freeze Token Payment guard. Note that, in this example, we’re using Umi's identity as the destination wallet.
+Hewe’s how we can cweate a Candy Machinye using de Fweeze Token Payment guawd~ Nyote dat, in dis exampwe, we’we using Umi's identity as de destinyation wawwet.
 
 ```tsx
 import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
@@ -109,10 +119,10 @@ create(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
-Add this object into the guard section your config.json file:
+Add dis object into de guawd section youw config.json fiwe:
 
 ```json
 "freezeTokenPayment" : {
@@ -123,219 +133,45 @@ Add this object into the guard section your config.json file:
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The Freeze Token Payment guard contains the following Mint Settings:
+De Fweeze Token Payment guawd contains de fowwowing Mint Settings:
 
-- **Mint**: The address of the mint account defining the SPL Token we want to pay with.
-- **Destination Associated Token Address (ATA)**: The address of the associated token account to eventually send the tokens to.
-- **NFT Rule Set** (optional): The Rule Set of the minted NFT, if we are minting a Programmable NFT with a Rule Set.
+- **Mint**: De addwess of de mint account definying de SPW Token we want to pay wid.
+- **Destinyation Associated Token Addwess (ATA)**: De addwess of de associated token account to eventuawwy send de tokens to.
+- **NFT Wuwe Set** (optionyaw): De Wuwe Set of de minted NFT, if we awe minting a Pwogwammabwe NFT wid a Wuwe Set.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#freezetokenpayment) for more details.
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#freezetokenpayment) fow mowe detaiws.
 
-{% dialect-switcher title="Set up a Candy Machine using the Freeze Token Payment Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Fweeze Token Payment Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the Freeze Token Payment guard using the `mintArgs` argument like so.
+You may pass de Mint Settings of de Fweeze Token Payment guawd using de `mintArgs` awgument wike so.
 
-```ts
-mintV2(umi, {
-  // ...
-  mintArgs: {
-    freezeTokenPayment: some({
-      mint: tokenMint.publicKey,
-      destinationAta,
-    }),
-  },
-});
-```
+UWUIFY_TOKEN_1744632717361_2
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-_As soon as a guard is assigned you cannot use sugar to mint - therefore there are no specific mint settings._
+_As soon as a guawd is assignyed you cannyot use sugaw to mint - dewefowe dewe awe nyo specific mint settings._
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-The Freeze Token Payment route instruction supports the following features.
+De Fweeze Token Payment woute instwuction suppowts de fowwowing featuwes.
 
 - [Overview](#overview)
 - [Guard Settings](#guard-settings)
-- [Mint Settings](#mint-settings)
-- [Route Instruction](#route-instruction)
-  - [Initialize the Freeze Escrow](#initialize-the-freeze-escrow)
-  - [Thaw a Frozen NFT](#thaw-a-frozen-nft)
-  - [Unlock Funds](#unlock-funds)
-- [Stop Freezing NFTs](#stop-freezing-nfts)
-- [Freeze Escrows and Guard Groups](#freeze-escrows-and-guard-groups)
-
-### Initialize the Freeze Escrow
-
-_Path: `initialize`_
-
-When using the Freeze Token Payment guard, we must initialize the Freeze Escrow account before minting can start. This will create a PDA account derived from the Destination ATA attribute of the guard's settings.
-
-The Freeze Escrow PDA account will keep track of several parameters such as:
-
-- How many Frozen NFTs were minted through this guard.
-- When was the first Frozen NFT minted via this guard as the Freeze Period starts counting after that.
-
-When initializing this Freeze Escrow account, we must provide the following arguments to the route instruction of the guard:
-
-- **Path** = `initialize`: Selects the path to execute in the route instruction.
-- **Mint**: The address of the mint account defining the SPL Token we want to pay with.
-- **Destination Associated Token Address (ATA)**: The address of the associated token account to eventually send the tokens to.
-- **Period**: The amount of time in seconds that the Freeze Period should last. This can be a maximum of 30 days (2,592,000 seconds) and it will start from the very first Frozen NFT minted via this guard. The Freeze Period provides a safety mechanism to ensure Frozen NFTs can eventually be thawed even if the Candy Machine never mints out.
-- **Candy Guard Authority**: The authority of the Candy Guard account as a Signer.
-
-{% diagram  %}
-
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-
-{% /node %}
-{% /node %}
-
-{% node parent="candy-machine" y="100" x="22" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #guards label="Guards" theme="mint" z=1/%}
-{% node #freezeTokenPayment label="Freeze Token Payment" /%}
-{% node #amount label="Amount = 300"  /%}
-{% node #mint label="Mint"  /%}
-{% node #destination-ata label="Destination ATA" /%}
-{% node label="..." /%}
-{% /node %}
-
-{% node parent="candy-machine" x="415" %}
-  {% node #candy-guard-route theme="pink" %}
-    Route with Path {% .whitespace-nowrap %}
-    
-    = *Initialize*
-  {% /node %}
-  {% node parent="candy-guard-route" theme="pink" %}
-    Candy Machine Guard Program {% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="candy-guard-route" y="-20" x="-4" theme="transparent" %}
-  Initialize Freeze Escrow
-{% /node %}
-
-{% node #freeze-period parent="candy-guard-route" x="220" y="14" label="Freeze Period" theme="slate" /%}
-{% edge from="freeze-period" to="candy-guard-route" theme="pink" path="straight" /%}
-
-{% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
-
-
-{% edge from="candy-guard-route" to="freezeEscrow-PDA3" theme="pink" path="straight" y="-10" /%}
-
-{% node #freezeEscrow-PDA3 parent="destination-ata" x="397" y="-10" %}
-  Freeze Escrow PDA
-{% /node %}
-
-{% edge from="candy-guard" to="candy-machine" /%}
-
-{% edge from="destination-ata" to="freezeEscrow-PDA3" arrow="none" dashed=true path="straight" /%}
-
-{% edge from="candy-guard-route" to="mint-candy-machine" path="straight" /%}
-
-{% /diagram %}
-
-Last but not least, the Freeze Escrow PDA account will receive the funds of all Frozen NFTs minted through this guard.
-
-{% diagram  %}
-
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-
-{% node parent="candy-machine" y="100" x="21" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #guards label="Guards" theme="mint" z=1 /%}
-{% node #freezeTokenPayment label="Freeze Token Payment" /%}
-{% node #amount label="Amount = 300"  /%}
-{% node #mint label="Mint"  /%}
-{% node #destination-ata label="Destination ATA" /%}
-{% node label="..." /%}
-{% /node %}
-
-{% node #freezeEscrow-PDA4 parent="destination-ata" x="300" y="-8" theme="slate" %}
-  Freeze Escrow PDA
-{% /node %}
-{% edge from="destination-ata" to="freezeEscrow-PDA4" arrow="none" dashed=true path="straight" /%}
-
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Route with
-    
-    Path = *Initialize*
-  {% /node %}
-    {% node parent="candy-guard-route" theme="pink" %}
-    Candy Machine Guard Program {% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
-{% edge from="mint-candy-guard" to="freezeEscrow-PDA4" theme="pink" toPosition="top"/%}
-{% node parent="freezeEscrow-PDA4" y="-250" x="90" theme="transparent" %}
-  Transfer 300 tokens
-
-  to the Freeze Escrow's
-
-  Associated Token Address
-{% /node %}
-
-{% node parent="mint-candy-guard" y="150" x="2" %}
-  {% node #mint-candy-machine theme="pink" %}
-    Mint
-  {% /node %}
-  {% node parent="mint-candy-guard" theme="pink" %}
-    Candy Machine Core Program {% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="120" theme="transparent" %}
-  Mint Logic
-{% /node %}
-
-
-{% edge from="mint-candy-machine" to="frozen-NFT" path="straight" /%}
-{% node #frozen-NFT parent="mint-candy-machine" y="120" x="31" theme="slate" %}
-  Frozen NFT
-{% /node %}
-
-{% edge from="candy-guard" to="candy-machine" /%}
-
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
-{% /diagram %}
-
-‎
-
-{% dialect-switcher title="Initialize the Freeze Escrow" %}
-{% dialect title="JavaScript" id="js" %}
-{% totem %}
-
-In the example below, we initialize the Freeze Escrow account with a maximum Freeze Period of 15 days and we use the current identity as the Candy Guard authority.
-
-```ts
+- ```ts
 route(umi, {
   // ...
   guard: "freezeTokenPayment",
@@ -347,20 +183,184 @@ route(umi, {
     candyGuardAuthority: umi.identity,
   },
 });
-```
+```0
+- [Route Instruction](#route-instruction)
+  - [Initialize the Freeze Escrow](#initialize-the-freeze-escrow)
+  - [Thaw a Frozen NFT](#thaw-a-frozen-nft)
+  - [Unlock Funds](#unlock-funds)
+- [Stop Freezing NFTs](#stop-freezing-nfts)
+- [Freeze Escrows and Guard Groups](#freeze-escrows-and-guard-groups)
 
-{% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+### Inyitiawize de Fweeze Escwow
+
+_Pad: `initialize`_
+
+When using de Fweeze Token Payment guawd, we must inyitiawize de Fweeze Escwow account befowe minting can stawt~ Dis wiww cweate a PDA account dewived fwom de Destinyation ATA attwibute of de guawd's settings.
+
+De Fweeze Escwow PDA account wiww keep twack of sevewaw pawametews such as:
+
+- How many Fwozen NFTs wewe minted dwough dis guawd.
+- When was de fiwst Fwozen NFT minted via dis guawd as de Fweeze Pewiod stawts counting aftew dat.
+
+When inyitiawizing dis Fweeze Escwow account, we must pwovide de fowwowing awguments to de woute instwuction of de guawd:
+
+- **Pad** = `initialize`: Sewects de pad to execute in de woute instwuction.
+- **Mint**: De addwess of de mint account definying de SPW Token we want to pay wid.
+- **Destinyation Associated Token Addwess (ATA)**: De addwess of de associated token account to eventuawwy send de tokens to.
+- **Pewiod**: De amount of time in seconds dat de Fweeze Pewiod shouwd wast~ Dis can be a maximum of 30 days (2,592,000 seconds) and it wiww stawt fwom de vewy fiwst Fwozen NFT minted via dis guawd~ De Fweeze Pewiod pwovides a safety mechanyism to ensuwe Fwozen NFTs can eventuawwy be dawed even if de Candy Machinye nyevew mints out.
+- **Candy Guawd Audowity**: De audowity of de Candy Guawd account as a Signyew.
+
+{% diagwam  %}
+
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" y="100" x="22" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode #guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #fweezeTokenPayment wabew="Fweeze Token Payment" /%}
+{% nyode #amount wabew="Amount = 300"  /%}
+{% nyode #mint wabew="Mint"  /%}
+{% nyode #destinyation-ata wabew="Destinyation ATA" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" x="415" %}
+  {% nyode #candy-guawd-woute deme="pink" %}
+    Woute wid Pad {% .whitespace-nyowwap %}
+    
+    = *Inyitiawize*
+  {% /nyode %}
+  {% nyode pawent="candy-guawd-woute" deme="pink" %}
+    Candy Machinye Guawd Pwogwam {% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="candy-guawd-woute" y="-20" x="-4" deme="twanspawent" %}
+  Inyitiawize Fweeze Escwow
+{% /nyode %}
+
+{% nyode #fweeze-pewiod pawent="candy-guawd-woute" x="220" y="14" wabew="Fweeze Pewiod" deme="swate" /%}
+{% edge fwom="fweeze-pewiod" to="candy-guawd-woute" deme="pink" pad="stwaight" /%}
+
+{% edge fwom="amount" to="candy-guawd-woute" deme="pink" toPosition="weft" /%}
+
+
+{% edge fwom="candy-guawd-woute" to="fweezeEscwow-PDA3" deme="pink" pad="stwaight" y="-10" /%}
+
+{% nyode #fweezeEscwow-PDA3 pawent="destinyation-ata" x="397" y="-10" %}
+  Fweeze Escwow PDA
+{% /nyode %}
+
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
+
+{% edge fwom="destinyation-ata" to="fweezeEscwow-PDA3" awwow="nyonye" dashed=twue pad="stwaight" /%}
+
+{% edge fwom="candy-guawd-woute" to="mint-candy-machinye" pad="stwaight" /%}
+
+{% /diagwam %}
+
+Wast but nyot weast, de Fweeze Escwow PDA account wiww weceive de funds of aww Fwozen NFTs minted dwough dis guawd.
+
+{% diagwam  %}
+
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye" y="100" x="21" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode #guawds wabew="Guawds" deme="mint" z=1 /%}
+{% nyode #fweezeTokenPayment wabew="Fweeze Token Payment" /%}
+{% nyode #amount wabew="Amount = 300"  /%}
+{% nyode #mint wabew="Mint"  /%}
+{% nyode #destinyation-ata wabew="Destinyation ATA" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode #fweezeEscwow-PDA4 pawent="destinyation-ata" x="300" y="-8" deme="swate" %}
+  Fweeze Escwow PDA
+{% /nyode %}
+{% edge fwom="destinyation-ata" to="fweezeEscwow-PDA4" awwow="nyonye" dashed=twue pad="stwaight" /%}
+
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Woute wid
+    
+    Pad = *Inyitiawize*
+  {% /nyode %}
+    {% nyode pawent="candy-guawd-woute" deme="pink" %}
+    Candy Machinye Guawd Pwogwam {% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
+{% edge fwom="mint-candy-guawd" to="fweezeEscwow-PDA4" deme="pink" toPosition="top"/%}
+{% nyode pawent="fweezeEscwow-PDA4" y="-250" x="90" deme="twanspawent" %}
+  Twansfew 300 tokens
+
+  to de Fweeze Escwow's
+
+  Associated Token Addwess
+{% /nyode %}
+
+{% nyode pawent="mint-candy-guawd" y="150" x="2" %}
+  {% nyode #mint-candy-machinye deme="pink" %}
+    Mint
+  {% /nyode %}
+  {% nyode pawent="mint-candy-guawd" deme="pink" %}
+    Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="120" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
+
+
+{% edge fwom="mint-candy-machinye" to="fwozen-NFT" pad="stwaight" /%}
+{% nyode #fwozen-NFT pawent="mint-candy-machinye" y="120" x="31" deme="swate" %}
+  Fwozen NFT
+{% /nyode %}
+
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
+
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
+
+{% /diagwam %}
+
+‎
+
+{% diawect-switchew titwe="Inyitiawize de Fweeze Escwow" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-Run the following command to initialize the Freeze Escrow account
+In de exampwe bewow, we inyitiawize de Fweeze Escwow account wid a maximum Fweeze Pewiod of 15 days and we use de cuwwent identity as de Candy Guawd audowity.
+
+UWUIFY_TOKEN_1744632717361_3
+
+{% /totem %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
+{% totem %}
+
+Wun de fowwowing command to inyitiawize de Fweeze Escwow account
 
 ```sh
 sugar freeze initialize
 ```
 
-You can use the following parameters 
+You can use de fowwowing pawametews 
 
 ```
     -c, --config <CONFIG>
@@ -394,97 +394,97 @@ You can use the following parameters
             RPC Url
 ```
 
-When using a candy machine with guard groups you will have to use the `--label` parameter.
+When using a candy machinye wid guawd gwoups you wiww have to use de `--label` pawametew.
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Thaw a Frozen NFT
+### Daw a Fwozen NFT
 
-_Path: `thaw`_
+_Pad: `thaw`_
 
-Frozen NFTs can be thawed by anyone as long as one of the following conditions is met:
+Fwozen NFTs can be dawed by anyonye as wong as onye of de fowwowing conditions is met:
 
-- The Candy Machine has minted out.
-- The Candy Machine was deleted.
-- The configured Freeze Period — which can be a maximum of 30 days — has passed.
+- De Candy Machinye has minted out.
+- De Candy Machinye was deweted.
+- De configuwed Fweeze Pewiod — which can be a maximum of 30 days — has passed.
 
-Note that since the tokens in the Freeze Escrow are not transferrable until all NFTs are thawed, this creates an incentive for the treasury to thaw all NFTs as soon as possible.
+Nyote dat since de tokens in de Fweeze Escwow awe nyot twansfewwabwe untiw aww NFTs awe dawed, dis cweates an incentive fow de tweasuwy to daw aww NFTs as soon as possibwe.
 
-To thaw a Frozen NFT, we must provide the following arguments to the route instruction of the guard:
+To daw a Fwozen NFT, we must pwovide de fowwowing awguments to de woute instwuction of de guawd:
 
-- **Path** = `thaw`: Selects the path to execute in the route instruction.
-- **Mint**: The address of the mint account defining the SPL Token we want to pay with.
-- **Destination Associated Token Address (ATA)**: The address of the associated token account to eventually send the tokens to.
-- **NFT Mint**: The mint address of the Frozen NFT to thaw.
-- **NFT Owner**: The address of the owner of the Frozen NFT to thaw.
-- **NFT Token Standard**: The token standard of the Frozen NFT to thaw.
-- **NFT Rule Set** (optional): The Rule Set of the Frozen NFT to thaw, if we are thawing a Programmable NFT with a Rule Set.
+- **Pad** = `thaw`: Sewects de pad to execute in de woute instwuction.
+- **Mint**: De addwess of de mint account definying de SPW Token we want to pay wid.
+- **Destinyation Associated Token Addwess (ATA)**: De addwess of de associated token account to eventuawwy send de tokens to.
+- **NFT Mint**: De mint addwess of de Fwozen NFT to daw.
+- **NFT Ownyew**: De addwess of de ownyew of de Fwozen NFT to daw.
+- **NFT Token Standawd**: De token standawd of de Fwozen NFT to daw.
+- **NFT Wuwe Set** (optionyaw): De Wuwe Set of de Fwozen NFT to daw, if we awe dawing a Pwogwammabwe NFT wid a Wuwe Set.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-  Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+  Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="-3" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Candy Machine Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #guards label="Guards" theme="mint" z=1 /%}
-{% node #freezeTokenPayment label="Freeze Token Payment" /%}
-{% node #amount label="Amount = 300"  /%}
-{% node #mint label="Mint"  /%}
-{% node #destination-ata label="Destination ATA" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="-3" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Candy Machinye Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #guawds wabew="Guawds" deme="mint" z=1 /%}
+{% nyode #fweezeTokenPayment wabew="Fweeze Token Payment" /%}
+{% nyode #amount wabew="Amount = 300"  /%}
+{% nyode #mint wabew="Mint"  /%}
+{% nyode #destinyation-ata wabew="Destinyation ATA" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="candy-machine" x="427" y="-14" %}
-  {% node #candy-guard-route theme="pink" %}
-    Route with
+{% nyode pawent="candy-machinye" x="427" y="-14" %}
+  {% nyode #candy-guawd-woute deme="pink" %}
+    Woute wid
     
-    Path = *thaw*
-  {% /node %}
-  {% node parent="mint-candy-guard" theme="pink" %}
-    Candy Machine Core Program {% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="candy-guard-route" y="-20" x="80" theme="transparent" %}
-  Thaw a Frozen NFT
-{% /node %}
+    Pad = *daw*
+  {% /nyode %}
+  {% nyode pawent="mint-candy-guawd" deme="pink" %}
+    Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="candy-guawd-woute" y="-20" x="80" deme="twanspawent" %}
+  Daw a Fwozen NFT
+{% /nyode %}
 
-{% node #freeze-period parent="candy-guard-route" x="218" y="15" label="Freeze Escrow PDA" /%}
-{% edge from="freeze-period" to="candy-guard-route" theme="pink" path="straight" /%}
+{% nyode #fweeze-pewiod pawent="candy-guawd-woute" x="218" y="15" wabew="Fweeze Escwow PDA" /%}
+{% edge fwom="fweeze-pewiod" to="candy-guawd-woute" deme="pink" pad="stwaight" /%}
 
-{% edge from="candy-machine" to="candy-guard-route" theme="pink" /%}
-{% edge from="candy-guard" to="candy-guard-route" theme="pink" toPosition="left" /%}
-{% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
+{% edge fwom="candy-machinye" to="candy-guawd-woute" deme="pink" /%}
+{% edge fwom="candy-guawd" to="candy-guawd-woute" deme="pink" toPosition="weft" /%}
+{% edge fwom="amount" to="candy-guawd-woute" deme="pink" toPosition="weft" /%}
 
 
-{% edge from="candy-guard-route" to="freezeEscrow-PDA5" theme="pink" path="straight" /%}
+{% edge fwom="candy-guawd-woute" to="fweezeEscwow-PDA5" deme="pink" pad="stwaight" /%}
 
-{% node #frozen-NFT parent="candy-guard-route" y="-100" x="29" label="Frozen NFT" /%}
-{% edge from="frozen-NFT" to="candy-guard-route" path="straight" /%}
+{% nyode #fwozen-NFT pawent="candy-guawd-woute" y="-100" x="29" wabew="Fwozen NFT" /%}
+{% edge fwom="fwozen-NFT" to="candy-guawd-woute" pad="stwaight" /%}
 
-{% node #freezeEscrow-PDA5 parent="candy-guard-route" x="25" y="150" label="Thawed NFT" /%}
-{% edge from="candy-guard" to="candy-machine" /%}
+{% nyode #fweezeEscwow-PDA5 pawent="candy-guawd-woute" x="25" y="150" wabew="Dawed NFT" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
 
-{% edge from="candy-guard-guards" to="guards" /%}
-{% edge from="candy-guard-route" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd-guawds" to="guawds" /%}
+{% edge fwom="candy-guawd-woute" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
 ‎
 
-{% dialect-switcher title="Set up a Candy Machine using the Freeze Token Payment guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Fweeze Token Payment guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-In the example below, we thaw a Frozen NFT that belongs to the current identity.
+In de exampwe bewow, we daw a Fwozen NFT dat bewongs to de cuwwent identity.
 
 ```ts
 route(umi, {
@@ -502,17 +502,17 @@ route(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Run the following command to thaw the NFT(s):
+Wun de fowwowing command to daw de NFT(s):
 
 ```sh
 sugar freeze thaw 
 ```
 
-You can use the following parameters 
+You can use de fowwowing pawametews 
 
 ```
 ARGS:
@@ -559,114 +559,114 @@ OPTIONS:
             Indicates to create/use a cache file for mint list
 ```
 
-When using a candy machine with guard groups you will have to use the `--label` parameter.
+When using a candy machinye wid guawd gwoups you wiww have to use de `--label` pawametew.
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Unlock Funds
+### Unwock Funds
 
-_Path: `unlockFunds`_
+_Pad: `unlockFunds`_
 
-Once all Frozen NFTs have been thawed, the treasury can unlock the funds from the Freeze Escrow account. This will transfer the tokens to the configured Destination ATA address.
+Once aww Fwozen NFTs have been dawed, de tweasuwy can unwock de funds fwom de Fweeze Escwow account~ Dis wiww twansfew de tokens to de configuwed Destinyation ATA addwess.
 
-To unlock the funds, we must provide the following arguments to the route instruction of the guard:
+To unwock de funds, we must pwovide de fowwowing awguments to de woute instwuction of de guawd:
 
-- **Path** = `unlockFunds`: Selects the path to execute in the route instruction.
-- **Mint**: The address of the mint account defining the SPL Token we want to pay with.
-- **Destination Associated Token Address (ATA)**: The address of the associated token account to eventually send the tokens to.
-- **Candy Guard Authority**: The authority of the Candy Guard account as a Signer.
+- **Pad** = `unlockFunds`: Sewects de pad to execute in de woute instwuction.
+- **Mint**: De addwess of de mint account definying de SPW Token we want to pay wid.
+- **Destinyation Associated Token Addwess (ATA)**: De addwess of de associated token account to eventuawwy send de tokens to.
+- **Candy Guawd Audowity**: De audowity of de Candy Guawd account as a Signyew.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="19" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Candy Machine Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #guards label="Guards" theme="mint" z=1 /%}
-{% node #freezeTokenPayment label="Freeze Token Payment" /%}
-{% node #amount label="- Amount"  /%}
-{% node #mint label="- Mint" /%}
-{% node #destination-ata label="- Destination ATA" /%}
-{% node label="..." /%}
-{% /node %}
-{% edge from="destination-ata" to="token-account" arrow="none" dashed=true arrow="none" /%}
+{% nyode pawent="candy-machinye" y="100" x="19" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Candy Machinye Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #guawds wabew="Guawds" deme="mint" z=1 /%}
+{% nyode #fweezeTokenPayment wabew="Fweeze Token Payment" /%}
+{% nyode #amount wabew="- Amount"  /%}
+{% nyode #mint wabew="- Mint" /%}
+{% nyode #destinyation-ata wabew="- Destinyation ATA" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+{% edge fwom="destinyation-ata" to="token-account" awwow="nyonye" dashed=twue awwow="nyonye" /%}
 
-{% node parent="candy-machine" x="600" %}
-  {% node #candy-guard-route theme="pink" %}
-    Route with
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #candy-guawd-woute deme="pink" %}
+    Woute wid
     
-    Path = *unlockFunds*
-  {% /node %}
-  {% node parent="mint-candy-guard" theme="pink" %}
-    Candy Machine Guard Program {% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
+    Pad = *unwockFunds*
+  {% /nyode %}
+  {% nyode pawent="mint-candy-guawd" deme="pink" %}
+    Candy Machinye Guawd Pwogwam {% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-guard-route" y="-32" x="95" theme="transparent" %}
-  Unlock funds 
+{% nyode pawent="candy-guawd-woute" y="-32" x="95" deme="twanspawent" %}
+  Unwock funds 
   
-  from the escrow
-{% /node %}
+  fwom de escwow
+{% /nyode %}
 
-{% node #freeze-escrow parent="candy-guard-route" y="100" x="2" label="Freeze Escrow PDA" /%}
-{% edge from="freeze-escrow" to="candy-guard-route" theme="pink" path="straight" /%}
+{% nyode #fweeze-escwow pawent="candy-guawd-woute" y="100" x="2" wabew="Fweeze Escwow PDA" /%}
+{% edge fwom="fweeze-escwow" to="candy-guawd-woute" deme="pink" pad="stwaight" /%}
 
-{% edge from="guards" to="candy-guard-route" theme="pink" toPosition="top" /%}
+{% edge fwom="guawds" to="candy-guawd-woute" deme="pink" toPosition="top" /%}
 
-{% node parent="candy-guard" x="300" y="29" %}
-{% node #mint-account label="Mint Account" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Token Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="mint" to="mint-account" arrow="none" dashed=true arrow="none" /%}
-{% edge from="mint-account" to="token-account" /%}
+{% nyode pawent="candy-guawd" x="300" y="29" %}
+{% nyode #mint-account wabew="Mint Account" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Token Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="mint" to="mint-account" awwow="nyonye" dashed=twue awwow="nyonye" /%}
+{% edge fwom="mint-account" to="token-account" /%}
 
-{% node parent="mint-account" y="100" %}
-{% node #token-account theme="blue" %}
-Token Account {% .whitespace-nowrap %}
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Token Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode pawent="mint-account" y="100" %}
+{% nyode #token-account deme="bwue" %}
+Token Account {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: Token Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="token-account" y="90" x="-40" %}
-{% node #destination-wallet label="Destination Wallet" theme="indigo" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program  {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="token-account" to="destination-wallet" arrow="none" /%}
-{% edge from="candy-guard-route" to="token-account" theme="pink" /%}
-{% node parent="token-account" theme="transparent" x="210" y="-20" %}
-Transfer all funds from
+{% nyode pawent="token-account" y="90" x="-40" %}
+{% nyode #destinyation-wawwet wabew="Destinyation Wawwet" deme="indigo" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam  {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="token-account" to="destinyation-wawwet" awwow="nyonye" /%}
+{% edge fwom="candy-guawd-woute" to="token-account" deme="pink" /%}
+{% nyode pawent="token-account" deme="twanspawent" x="210" y="-20" %}
+Twansfew aww funds fwom
 
-the Freeze Escrow Account
-{% /node %}
+de Fweeze Escwow Account
+{% /nyode %}
 
-{% edge from="candy-guard" to="candy-machine" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
 
-{% edge from="candy-guard-guards" to="guards" /%}
+{% edge fwom="candy-guawd-guawds" to="guawds" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
 ‎
 
-{% dialect-switcher title="Set up a Candy Machine using the Freeze Token Payment Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Fweeze Token Payment Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-In the example below, we unlock the funds from the Freeze Escrow account using the current identity as the Candy Guard authority.
+In de exampwe bewow, we unwock de funds fwom de Fweeze Escwow account using de cuwwent identity as de Candy Guawd audowity.
 
 ```ts
 route(umi, {
@@ -680,20 +680,20 @@ route(umi, {
 })
 ```
 
-API References: [route](https://mpl-candy-machine.typedoc.metaplex.com/functions/route.html), [freezeTokenPaymentRouteArgsUnlockFunds](https://mpl-candy-machine.typedoc.metaplex.com/types/FreezeTokenPaymentRouteArgsUnlockFunds.html)
+API Wefewences: [route](https://mpl-candy-machine.typedoc.metaplex.com/functions/route.html), [freezeTokenPaymentRouteArgsUnlockFunds](https://mpl-candy-machine.typedoc.metaplex.com/types/FreezeTokenPaymentRouteArgsUnlockFunds.html)
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Run the following command to unlock the funds from the Freeze Escrow Account
+Wun de fowwowing command to unwock de funds fwom de Fweeze Escwow Account
 
 ```sh
 sugar freeze unlock-funds
 ```
 
-You can use the following parameters 
+You can use de fowwowing pawametews 
 
 ```
     -c, --config <CONFIG>
@@ -727,131 +727,131 @@ You can use the following parameters
             RPC Url
 ```
 
-When using a candy machine with guard groups you will have to use the `--label` parameter.
+When using a candy machinye wid guawd gwoups you wiww have to use de `--label` pawametew.
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Stop Freezing NFTs
+## Stop Fweezing NFTs
 
-It is possible to stop the freezing of NFTs within a Freeze Token Payment guard. In other words, new-minted NFTs will no longer be frozen but **existing Frozen NFTs will remain frozen**.
+It is possibwe to stop de fweezing of NFTs widin a Fweeze Token Payment guawd~ In odew wowds, nyew-minted NFTs wiww nyo wongew be fwozen but **existing Fwozen NFTs wiww wemain fwozen**.
 
-There are several ways of achieving this, which can be separated into two categories:
+Dewe awe sevewaw ways of achieving dis, which can be sepawated into two categowies:
 
-- ☀️ **Can Thaw**: Existing Frozen NFTs can be thawed by anyone using the `thaw` path of the route instruction.
-- ❄️ **Cannot Thaw**: Existing Frozen NFTs cannot be thawed yet and we have to wait for one "Can Thaw" condition to be met.
+- ☀️ **Can Daw**: Existing Fwozen NFTs can be dawed by anyonye using de `thaw` pad of de woute instwuction.
+- ❄️ **Cannyot Daw**: Existing Fwozen NFTs cannyot be dawed yet and we have to wait fow onye "Can Daw" condition to be met.
 
-With that in mind, here is the exhaustive list of ways to stop freezing NFTs and whether or not each of them allows thawing existing Frozen NFTs:
+Wid dat in mind, hewe is de exhaustive wist of ways to stop fweezing NFTs and whedew ow nyot each of dem awwows dawing existing Fwozen NFTs:
 
-- The Candy Machine has minted out → ☀️ **Can Thaw**.
-- The configured Freeze Period — which can be a maximum of 30 days — has passed → ☀️ **Can Thaw**.
-- The Candy Machine account was deleted → ☀️ **Can Thaw**.
-- The Candy Guard account was deleted → ❄️ **Cannot Thaw**.
-- The Freeze Token Payment guard was removed from the settings → ❄️ **Cannot Thaw**.
+- De Candy Machinye has minted out → ☀️ **Can Daw**.
+- De configuwed Fweeze Pewiod — which can be a maximum of 30 days — has passed → ☀️ **Can Daw**.
+- De Candy Machinye account was deweted → ☀️ **Can Daw**.
+- De Candy Guawd account was deweted → ❄️ **Cannyot Daw**.
+- De Fweeze Token Payment guawd was wemuvd fwom de settings → ❄️ **Cannyot Daw**.
 
-## Freeze Escrows and Guard Groups
+## Fweeze Escwows and Guawd Gwoups
 
-When using multiple Freeze Token Payment guards within various [Guard Groups](/candy-machine/guard-groups), it is important to understand the relationship between a Freeze Token Payment guard and a Freeze Escrow account.
+When using muwtipwe Fweeze Token Payment guawds widin vawious [Guard Groups](/candy-machine/guard-groups), it is impowtant to undewstand de wewationship between a Fweeze Token Payment guawd and a Fweeze Escwow account.
 
-The Freeze Escrow account is a PDA derived from a Destination address. This means that if **multiple Freeze Token Payment guards** are configured to use the **same Destination address**, they will all **share the same Freeze Escrow account**.
+De Fweeze Escwow account is a PDA dewived fwom a Destinyation addwess~ Dis means dat if **muwtipwe Fweeze Token Payment guawds** awe configuwed to use de **same Destinyation addwess**, dey wiww aww **shawe de same Fweeze Escwow account**.
 
-Therefore, they will also share the same Freeze Period and all funds will be collected by the same escrow account. This also means, we only need to call the `initialize` route instruction once per configured Destination address.This implies that the route instruction is only required once per the configured Destination address.  Same applies for `unlockFunds`. To `thaw` you can use whichever label you like provided that those shared the same escrow account.
+Dewefowe, dey wiww awso shawe de same Fweeze Pewiod and aww funds wiww be cowwected by de same escwow account~ Dis awso means, we onwy nyeed to caww de `initialize` woute instwuction once pew configuwed Destinyation addwess.Dis impwies dat de woute instwuction is onwy wequiwed once pew de configuwed Destinyation addwess~  Same appwies fow `unlockFunds`~ To `thaw` you can use whichevew wabew you wike pwovided dat dose shawed de same escwow account.
 
-It is also possible to use multiple Freeze Token Payment guards with different Destination addresses. In this case, each Freeze Token Payment guard will have its own Freeze Escrow account and its own Freeze Period.
+It is awso possibwe to use muwtipwe Fweeze Token Payment guawds wid diffewent Destinyation addwesses~ In dis case, each Fweeze Token Payment guawd wiww have its own Fweeze Escwow account and its own Fweeze Pewiod.
 
-The example below illustrates a Candy Machine with three Freeze Token Payment guards in three groups such that:
+De exampwe bewow iwwustwates a Candy Machinye wid dwee Fweeze Token Payment guawds in dwee gwoups such dat:
 
-- Groups 1 and 2 share the same Destination address and therefore the same Freeze Escrow account.
-- Group 3 has its own Destination address and therefore its own Freeze Escrow account.
+- Gwoups 1 and 2 shawe de same Destinyation addwess and dewefowe de same Fweeze Escwow account.
+- Gwoup 3 has its own Destinyation addwess and dewefowe its own Fweeze Escwow account.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="21" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node #guards label="Guard Group 1" theme="mint" /%}
-{% node #freezeTokenPayment label="Freeze Token Payment" /%}
-{% node #amount label="Amount = 300" /%}
-{% node #mint label="Mint" /%}
-{% node #destination-ata label="Destination ATA A" /%}
-{% node label="..." /%}
-{% node #guards-2 label="Guard Group 2" theme="mint" /%}
-{% node #freezeTokenPayment-2 label="Freeze Token Payment" /%}
-{% node #amount-2 label="Amount = 300" /%}
-{% node #mint-2 label="Mint" /%}
-{% node #destination-2 label="Destination ATA A" /%}
-{% node label="..." /%}
-{% node #guards-3 label="Guard Group 3" theme="mint" /%}
-{% node #freezeTokenPayment-3 label="Freeze Token Payment" /%}
-{% node #amount-3 label="Amount = 300" /%}
-{% node #mint-3 label="Mint" /%}
-{% node #destination-3 label="Destination ATA B" /%}
-{% node label="..." /%}
-{% /node %}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="21" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode #guawds wabew="Guawd Gwoup 1" deme="mint" /%}
+{% nyode #fweezeTokenPayment wabew="Fweeze Token Payment" /%}
+{% nyode #amount wabew="Amount = 300" /%}
+{% nyode #mint wabew="Mint" /%}
+{% nyode #destinyation-ata wabew="Destinyation ATA A" /%}
+{% nyode wabew="..." /%}
+{% nyode #guawds-2 wabew="Guawd Gwoup 2" deme="mint" /%}
+{% nyode #fweezeTokenPayment-2 wabew="Fweeze Token Payment" /%}
+{% nyode #amount-2 wabew="Amount = 300" /%}
+{% nyode #mint-2 wabew="Mint" /%}
+{% nyode #destinyation-2 wabew="Destinyation ATA A" /%}
+{% nyode wabew="..." /%}
+{% nyode #guawds-3 wabew="Guawd Gwoup 3" deme="mint" /%}
+{% nyode #fweezeTokenPayment-3 wabew="Fweeze Token Payment" /%}
+{% nyode #amount-3 wabew="Amount = 300" /%}
+{% nyode #mint-3 wabew="Mint" /%}
+{% nyode #destinyation-3 wabew="Destinyation ATA B" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+{% /nyode %}
 
-{% node #freezeEscrow-PDA-A parent="destination-ata" x="213" y="-23" %}
-  Freeze Escrow PDA
+{% nyode #fweezeEscwow-PDA-A pawent="destinyation-ata" x="213" y="-23" %}
+  Fweeze Escwow PDA
 
-  For Destination A
-{% /node %}
-{% edge from="destination-ata" to="freezeEscrow-PDA-A" arrow="none" dashed=true path="straight" /%}
-{% edge from="destination-2" to="freezeEscrow-PDA-A" arrow="none" dashed=true toPosition="bottom" /%}
+  Fow Destinyation A
+{% /nyode %}
+{% edge fwom="destinyation-ata" to="fweezeEscwow-PDA-A" awwow="nyonye" dashed=twue pad="stwaight" /%}
+{% edge fwom="destinyation-2" to="fweezeEscwow-PDA-A" awwow="nyonye" dashed=twue toPosition="bottom" /%}
 
-{% node parent="freezeEscrow-PDA-A" y="-125" x="-4" %}
-  {% node #route-init-a theme="pink" %}
-    Route with 
+{% nyode pawent="fweezeEscwow-PDA-A" y="-125" x="-4" %}
+  {% nyode #woute-inyit-a deme="pink" %}
+    Woute wid 
     
-    Path = *Initialize*
-  {% /node %}
-  {% node theme="pink" %}
-    Candy Machine Guard Program {% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="route-init-a" y="-20" x="50" theme="transparent" %}
-  Initialize Freeze Escrow
-{% /node %}
-{% edge from="route-init-a" to="freezeEscrow-PDA-A" theme="pink" path="straight" /%}
+    Pad = *Inyitiawize*
+  {% /nyode %}
+  {% nyode deme="pink" %}
+    Candy Machinye Guawd Pwogwam {% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="woute-inyit-a" y="-20" x="50" deme="twanspawent" %}
+  Inyitiawize Fweeze Escwow
+{% /nyode %}
+{% edge fwom="woute-inyit-a" to="fweezeEscwow-PDA-A" deme="pink" pad="stwaight" /%}
 
-{% node #freeze-period-a parent="route-init-a" x="240" y="15" theme="slate" %}
-  Freeze Period A
-{% /node %}
-{% edge from="freeze-period-a" to="route-init-a" theme="pink" path="straight" /%}
+{% nyode #fweeze-pewiod-a pawent="woute-inyit-a" x="240" y="15" deme="swate" %}
+  Fweeze Pewiod A
+{% /nyode %}
+{% edge fwom="fweeze-pewiod-a" to="woute-inyit-a" deme="pink" pad="stwaight" /%}
 
-{% node #freezeEscrow-PDA-B parent="destination-3" x="420" y="-22" %}
-  Freeze Escrow PDA
+{% nyode #fweezeEscwow-PDA-B pawent="destinyation-3" x="420" y="-22" %}
+  Fweeze Escwow PDA
 
-  For Destination B
-{% /node %}
-{% edge from="destination-3" to="freezeEscrow-PDA-B" arrow="none" dashed=true path="straight" /%}
+  Fow Destinyation B
+{% /nyode %}
+{% edge fwom="destinyation-3" to="fweezeEscwow-PDA-B" awwow="nyonye" dashed=twue pad="stwaight" /%}
 
-{% node parent="freezeEscrow-PDA-B" y="-125" x="-4" %}
-  {% node #route-init-b theme="pink" %}
-    Route with 
+{% nyode pawent="fweezeEscwow-PDA-B" y="-125" x="-4" %}
+  {% nyode #woute-inyit-b deme="pink" %}
+    Woute wid 
     
-    Path = *Initialize*
-  {% /node %}
-  {% node theme="pink" %}
-    Candy Machine Guard Program {% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="route-init-b" y="-20" x="50" theme="transparent" %}
-  Initialize Freeze Escrow
-{% /node %}
-{% edge from="route-init-b" to="freezeEscrow-PDA-B" theme="pink" path="straight" /%}
+    Pad = *Inyitiawize*
+  {% /nyode %}
+  {% nyode deme="pink" %}
+    Candy Machinye Guawd Pwogwam {% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="woute-inyit-b" y="-20" x="50" deme="twanspawent" %}
+  Inyitiawize Fweeze Escwow
+{% /nyode %}
+{% edge fwom="woute-inyit-b" to="fweezeEscwow-PDA-B" deme="pink" pad="stwaight" /%}
 
-{% node #freeze-period-b parent="route-init-b" x="240" y="15" theme="slate" %}
-  Freeze Period B
-{% /node %}
-{% edge from="freeze-period-b" to="route-init-b" theme="pink" path="straight" /%}
+{% nyode #fweeze-pewiod-b pawent="woute-inyit-b" x="240" y="15" deme="swate" %}
+  Fweeze Pewiod B
+{% /nyode %}
+{% edge fwom="fweeze-pewiod-b" to="woute-inyit-b" deme="pink" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" /%}
 
-{% /diagram %}
+{% /diagwam %}
