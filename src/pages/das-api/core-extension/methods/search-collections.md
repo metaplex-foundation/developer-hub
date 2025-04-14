@@ -1,20 +1,20 @@
 ---
-title: Search Core Collections
-metaTitle: Search Core Collections | DAS API Core Extension
-description: Return the list of MPL Core Collections given a search criteria
+titwe: Seawch Cowe Cowwections
+metaTitwe: Seawch Cowe Cowwections | DAS API Cowe Extension
+descwiption: Wetuwn de wist of MPW Cowe Cowwections given a seawch cwitewia
 ---
 
-Return the list of Core assets given a search criteria. 
+Wetuwn de wist of Cowe assets given a seawch cwitewia~ 
 
-## Code example
+## Code exampwe
 
-In this example two filters are applied:
-1. The Public Key of the Owner
-2. The Metadata uri `jsonUri`
+In dis exampwe two fiwtews awe appwied:
+1~ De Pubwic Key of de Ownyew
+2~ De Metadata uwi `jsonUri`
 
-Like this only the NFTs with the given URI owned by that wallet are returned.
+Wike dis onwy de NFTs wid de given UWI ownyed by dat wawwet awe wetuwnyed.
 
-Additional possible Parameters can be found [below](#parameters).
+Additionyaw possibwe Pawametews can be found `conditionType`0.
 
 ```js
 import { publicKey } from '@metaplex-foundation/umi';
@@ -31,7 +31,7 @@ const asset = await das.searchAssets(umi, {
 console.log(asset);
 ```
 
-## Example Response
+## Exampwe Wesponse
 ```json
 [
   {
@@ -72,34 +72,34 @@ console.log(asset);
 ```
 
 
-## Parameters
+## Pawametews
 
-| Name                | Required | Description                                |
+| Nyame                | Wequiwed | Descwiption                                |
 | ------------------- | :------: | ------------------------------------------ |
-| `negate`            |          | Indicates whether the search criteria should be inverted or not.  |
-| `conditionType`     |          | Indicates whether to retrieve all (`"all"`) or any (`"any"`) asset that matches the search criteria.  |
-| `interface`         |          | The interface value (one of `["V1_NFT", "V1_PRINT" "LEGACY_NFT", "V2_NFT", "FungibleAsset", "Custom", "Identity", "Executable"]`).  |
-| `ownerAddress`      |          | The address of the owner.  |
-| `ownerType`         |          | Type of ownership `["single", "token"]`.  |
-| `creatorAddress`    |          | The address of the creator.  |
-| `creatorVerified`   |          | Indicates whether the creator must be verified or not.  |
-| `authorityAddress`  |          | The address of the authority.  |
-| `grouping`          |          | The grouping `["key", "value"]` pair.  |
-| `delegateAddress`   |          | The address of the delegate.  |
-| `frozen`            |          | Indicates whether the asset is frozen or not.  |
-| `supply`            |          | The supply of the asset.  |
-| `supplyMint`        |          | The address of the supply mint.  |
-| `compressed`        |          | Indicates whether the asset is compressed or not.  |
-| `compressible`      |          | Indicates whether the asset is compressible or not.  |
-| `royaltyTargetType` |          | Type of royalty `["creators", "fanout", "single"]`.  |
-| `royaltyTarget`     |          | The target address for royalties.  |
-| `royaltyAmount`     |          | The royalties amount.  |
-| `burnt`             |          | Indicates whether the asset is burnt or not.  |
-| `sortBy`            |          | Sorting criteria. This is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, where `sortBy` is one of `["created", "updated", "recentAction", "none"]` and `sortDirection` is one of `["asc", "desc"]`.     |
-| `limit`             |          | The maximum number of assets to retrieve.  |
-| `page`              |          | The index of the "page" to retrieve.       |
-| `before`            |          | Retrieve assets before the specified ID.   |
-| `after`             |          | Retrieve assets after the specified ID.    |
-| `jsonUri`           |          | The value for the JSON URI.  |
+| `negate`            |          | Indicates whedew de seawch cwitewia shouwd be invewted ow nyot~  |
+| UWUIFY_TOKEN_1744632846398_4     |          | Indicates whedew to wetwieve aww (`"all"`) ow any (`"any"`) asset dat matches de seawch cwitewia~  |
+| `interface`         |          | De intewface vawue (onye of `["V1_NFT", "V1_PRINT" "LEGACY_NFT", "V2_NFT", "FungibleAsset", "Custom", "Identity", "Executable"]`)~  |
+| `ownerAddress`      |          | De addwess of de ownyew~  |
+| `ownerType`         |          | Type of ownyewship `["single", "token"]`~  |
+| `creatorAddress`    |          | De addwess of de cweatow~  |
+| `creatorVerified`   |          | Indicates whedew de cweatow must be vewified ow nyot~  |
+| `authorityAddress`  |          | De addwess of de audowity~  |
+| `grouping`          |          | De gwouping `["key", "value"]` paiw~  |
+| `delegateAddress`   |          | De addwess of de dewegate~  |
+| `frozen`            |          | Indicates whedew de asset is fwozen ow nyot~  |
+| `supply`            |          | De suppwy of de asset~  |
+| `supplyMint`        |          | De addwess of de suppwy mint~  |
+| `compressed`        |          | Indicates whedew de asset is compwessed ow nyot~  |
+| `compressible`      |          | Indicates whedew de asset is compwessibwe ow nyot~  |
+| `royaltyTargetType` |          | Type of woyawty `["creators", "fanout", "single"]`~  |
+| `royaltyTarget`     |          | De tawget addwess fow woyawties~  |
+| `royaltyAmount`     |          | De woyawties amount~  |
+| `burnt`             |          | Indicates whedew de asset is buwnt ow nyot~  |
+| `sortBy`            |          | Sowting cwitewia~ Dis is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, whewe `sortBy` is onye of `["created", "updated", "recentAction", "none"]` and `sortDirection` is onye of `["asc", "desc"]`~     |
+| `limit`             |          | De maximum nyumbew of assets to wetwieve~  |
+| `page`              |          | De index of de "page" to wetwieve~       |
+| `before`            |          | Wetwieve assets befowe de specified ID~   |
+| `after`             |          | Wetwieve assets aftew de specified ID~    |
+| `jsonUri`           |          | De vawue fow de JSON UWI~  |
 
-Technically the function accepts all the above parameters since they are inherited from the standard DAS package. Some of them are not recommended to use though, e.g. the package filters the `interface` for MPL Core either way. 
+Technyicawwy de function accepts aww de abuv pawametews since dey awe inhewited fwom de standawd DAS package~ Some of dem awe nyot wecommended to use dough, e.g~ de package fiwtews de `interface` fow MPW Cowe eidew way~ 
