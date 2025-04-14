@@ -1,43 +1,43 @@
 ---
-title: Soulbound Assets in MPL Core
-metaTitle: Soulbound Assets in MPL Core | Core Guides
-description: This Guide explores the different options for soulbound Assets in MPL Core
+titwe: Souwbound Assets in MPW Cowe
+metaTitwe: Souwbound Assets in MPW Cowe | Cowe Guides
+descwiption: Dis Guide expwowes de diffewent options fow souwbound Assets in MPW Cowe
 ---
 
 
-Soulbound NFTs are non-fungible tokens that are permanently bound to a specific wallet address and cannot be transferred to another owner. They are useful for representing achievements, credentials, or memberships that should remain tied to a specific identity.  {% .lead %}
+Souwbound NFTs awe nyon-fungibwe tokens dat awe pewmanyentwy bound to a specific wawwet addwess and cannyot be twansfewwed to anyodew ownyew~ Dey awe usefuw fow wepwesenting achievements, cwedentiaws, ow membewships dat shouwd wemain tied to a specific identity~  {% .wead %}
 
-## Overview
+## Ovewview
 
-In this guide, we'll explore how to create soulbound assets using MPL Core and the Umi Framework. Whether you're a developer looking to implement soulbound NFTs in TypeScript or just want to understand how they work, we'll cover everything from basic concepts to practical implementation. We'll examine different approaches for making assets soulbound and walk through creating your first soulbound NFT within a collection.
+In dis guide, we'ww expwowe how to cweate souwbound assets using MPW Cowe and de Umi Fwamewowk~ Whedew you'we a devewopew wooking to impwement souwbound NFTs in TypeScwipt ow just want to undewstand how dey wowk, we'ww cuvw evewyding fwom basic concepts to pwacticaw impwementation~ We'ww examinye diffewent appwoaches fow making assets souwbound and wawk dwough cweating youw fiwst souwbound NFT widin a cowwection.
 
-To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
+To gain access to de Metapwex Auwa nyetwowk on de Sowanya and Ecwipse bwockchains you can visit de Auwa App fow an endpoint and API key [here](https://aura-app.metaplex.com/).
 
-In MPL Core, there are two main approaches to create soulbound NFTs:
+In MPW Cowe, dewe awe two main appwoaches to cweate souwbound NFTs:
 
-### 1. Permanent Freeze Delegate Plugin
-- Makes assets completely non-transferrable and non-burnable
-- Can be applied at either:
-  - Individual asset level
-  - Collection level (more rent efficient)
-- Collection-level implementation allows thawing all assets in a single transaction
+### 1~ Pewmanyent Fweeze Dewegate Pwugin
+- Makes assets compwetewy nyon-twansfewwabwe and nyon-buwnyabwe
+- Can be appwied at eidew:
+  - Individuaw asset wevew
+  - Cowwection wevew (mowe went efficient)
+- Cowwection-wevew impwementation awwows dawing aww assets in a singwe twansaction
 
-### 2. Oracle Plugin
-- Makes assets non-transferrable but still burnable
-- Can also be applied at:
-  - Individual asset level  
-  - Collection level (more rent efficient)
-- Collection-level implementation allows thawing all assets in a single transaction
+### 2~ Owacwe Pwugin
+- Makes assets nyon-twansfewwabwe but stiww buwnyabwe
+- Can awso be appwied at:
+  - Individuaw asset wevew  
+  - Cowwection wevew (mowe went efficient)
+- Cowwection-wevew impwementation awwows dawing aww assets in a singwe twansaction
 
-## Creating Soulbound NFTs with the Permanent Freeze Delegate Plugin
+## Cweating Souwbound NFTs wid de Pewmanyent Fweeze Dewegate Pwugin
 
-The Permanent Freeze Delegate Plugin provides functionality to make assets non-transferrable by freezing them. When creating a soulbound asset, you would:
+De Pewmanyent Fweeze Dewegate Pwugin pwovides functionyawity to make assets nyon-twansfewwabwe by fweezing dem~ When cweating a souwbound asset, you wouwd:
 
-1. Include the Permanent Freeze plugin during asset creation
-2. Set the initial state to frozen
-3. Set the authority to None, making the frozen state permanent and immutable
+1~ Incwude de Pewmanyent Fweeze pwugin duwing asset cweation
+2~ Set de inyitiaw state to fwozen
+3~ Set de audowity to Nyonye, making de fwozen state pewmanyent and immutabwe
 
-This effectively creates a permanently soulbound asset that cannot be transferred or thawed. In the following code snippet it is shown where to add those three options:
+Dis effectivewy cweates a pewmanyentwy souwbound asset dat cannyot be twansfewwed ow dawed~ In de fowwowing code snyippet it is shown whewe to add dose dwee options:
 
 ```js
   await create(umi, {
@@ -56,11 +56,11 @@ This effectively creates a permanently soulbound asset that cannot be transferre
 ```
 
 
-### Asset-Level Implementation
-The Permanent Freeze Delegate Plugin can be attached to individual assets to make them soulbound. This provides more granular control but requires more rent and separate thaw transactions per asset in case it ever should not be soulbound anymore.
+### Asset-Wevew Impwementation
+De Pewmanyent Fweeze Dewegate Pwugin can be attached to individuaw assets to make dem souwbound~ Dis pwovides mowe gwanyuwaw contwow but wequiwes mowe went and sepawate daw twansactions pew asset in case it evew shouwd nyot be souwbound anymowe.
 
 {% totem %}
-{% totem-accordion title="Code Example" %}
+{% totem-accowdion titwe="Code Exampwe" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -158,14 +158,14 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 })();
 
 ```
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 {% /totem %}
 
-### Collection-Level Implementation
-For collections where all assets should be soulbound, applying the plugin at the collection level is more efficient. This requires less rent and enables thawing the entire collection in one transaction.
+### Cowwection-Wevew Impwementation
+Fow cowwections whewe aww assets shouwd be souwbound, appwying de pwugin at de cowwection wevew is mowe efficient~ Dis wequiwes wess went and enyabwes dawing de entiwe cowwection in onye twansaction.
 
 {% totem %}
-{% totem-accordion title="Code Example" %}
+{% totem-accowdion titwe="Code Exampwe" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -264,16 +264,16 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 })();
 
 ```
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 {% /totem %}
 
-## Creating Soulbound NFTs with the Oracle Plugin
+## Cweating Souwbound NFTs wid de Owacwe Pwugin
 
-The Oracle Plugin provides a way to approve or reject different lifecycle events for an asset. To create soulbound NFTs, we can use a special Oracle deployed by Metaplex that always rejects transfer events while still allowing other operations like burning. This differs from the Permanent Freeze Delegate Plugin approach since assets remain burnable even though they cannot be transferred.
+De Owacwe Pwugin pwovides a way to appwuv ow weject diffewent wifecycwe events fow an asset~ To cweate souwbound NFTs, we can use a speciaw Owacwe depwoyed by Metapwex dat awways wejects twansfew events whiwe stiww awwowing odew opewations wike buwnying~ Dis diffews fwom de Pewmanyent Fweeze Dewegate Pwugin appwoach since assets wemain buwnyabwe even dough dey cannyot be twansfewwed.
 
-When creating a soulbound asset using the Oracle Plugin, one would attach the plugin to the asset. This can be done on creation or afterwards. In this example we are using a [default Oracle](/core/external-plugins/oracle#default-oracles-deployed-by-metaplex) that will always reject and has been deployed by Metaplex.
+When cweating a souwbound asset using de Owacwe Pwugin, onye wouwd attach de pwugin to de asset~ Dis can be donye on cweation ow aftewwawds~ In dis exampwe we awe using a [default Oracle](/core/external-plugins/oracle#default-oracles-deployed-by-metaplex) dat wiww awways weject and has been depwoyed by Metapwex.
 
-This effectively creates a permanently soulbound asset that cannot be transferred but burned. In the following code snippet it is shown how:
+Dis effectivewy cweates a pewmanyentwy souwbound asset dat cannyot be twansfewwed but buwnyed~ In de fowwowing code snyippet it is shown how:
 
 ```js
 const ORACLE_ACCOUNT = publicKey(
@@ -303,11 +303,11 @@ await create(umi, {
 })
 ```
 
-### Asset-Level Implementation
-The Oracle Plugin can make individual assets non-transferrable while preserving the ability to burn them. This provides flexibility for cases where assets may need to be destroyed.
+### Asset-Wevew Impwementation
+De Owacwe Pwugin can make individuaw assets nyon-twansfewwabwe whiwe pwesewving de abiwity to buwn dem~ Dis pwovides fwexibiwity fow cases whewe assets may nyeed to be destwoyed.
 
 {% totem %}
-{% totem-accordion title="Code Example" %}
+{% totem-accowdion titwe="Code Exampwe" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -419,14 +419,14 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 })();
 
 ```
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 {% /totem %}
 
-### Collection-Level Implementation
-Applying the Oracle Plugin at the collection level makes all assets in the collection non-transferrable but burnable. This is more rent efficient and allows managing permissions for the entire collection at once.
+### Cowwection-Wevew Impwementation
+Appwying de Owacwe Pwugin at de cowwection wevew makes aww assets in de cowwection nyon-twansfewwabwe but buwnyabwe~ Dis is mowe went efficient and awwows manyaging pewmissions fow de entiwe cowwection at once.
 
 {% totem %}
-{% totem-accordion title="Code Example" %}
+{% totem-accowdion titwe="Code Exampwe" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -539,5 +539,5 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 })();
 
 ```
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 {% /totem %}
