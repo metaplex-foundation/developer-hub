@@ -1,111 +1,111 @@
 ---
-title: "NFT Payment Guard"
-metaTitle: "NFT Payment Guard | Core Candy Machine"
-description: "The Core Candy Machine 'NFT Payment' guard allows minting by charging the payer an NFT/pNFT from a specified NFT collection. The NFT/pNFT used as payment will be transferred to a predefined destination."
+titwe: "NFT Payment Guawd"
+metaTitwe: "NFT Payment Guawd | Cowe Candy Machinye"
+descwiption: "De Cowe Candy Machinye 'NFT Payment' guawd awwows minting by chawging de payew an NFT/pNFT fwom a specified NFT cowwection~ De NFT/pNFT used as payment wiww be twansfewwed to a pwedefinyed destinyation."
 ---
 
-## Overview
+## Ovewview
 
-The **NFT Payment** guard allows minting by charging the payer an NFT from a specified NFT collection. The NFT will be transferred to a predefined destination.
+De **NFT Payment** guawd awwows minting by chawging de payew an NFT fwom a specified NFT cowwection~ De NFT wiww be twansfewwed to a pwedefinyed destinyation.
 
-If the payer does not own an NFT from the required collection, minting will fail.
+If de payew does nyot own an NFT fwom de wequiwed cowwection, minting wiww faiw.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Core Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Core Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Cowe Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Cowe Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Core Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node label="nftPayment" /%}
-{% node #guardRequiredCollection label="- Required Collection" /%}
-{% node #guardDestinationWallet label="- Destination Wallet" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Cowe Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode wabew="nftPayment" /%}
+{% nyode #guawdWequiwedCowwection wabew="- Wequiwed Cowwection" /%}
+{% nyode #guawdDestinyationWawwet wabew="- Destinyation Wawwet" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="guardRequiredCollection" #collectionNftMint x="270" y="-100"  %}
-{% node theme="blue" %}
-Collection NFT {% .whitespace-nowrap %}
+{% nyode pawent="guawdWequiwedCowwection" #cowwectionNftMint x="270" y="-100"  %}
+{% nyode deme="bwue" %}
+Cowwection NFT {% .whitespace-nyowwap %}
 
 Mint Account
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Token Metadata Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="guardRequiredCollection" to="collectionNftMint" /%}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: Token Metadata Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="guawdWequiwedCowwection" to="cowwectionNftMint" /%}
 
-{% node parent="guardDestinationWallet" #destinationWallet x="300"  %}
-{% node theme="blue" %}
-Destination Wallet {% .whitespace-nowrap %}
-{% /node %}
-{% node theme="dimmed" %}
-Owner: System Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="guardDestinationWallet" to="destinationWallet" /%}
+{% nyode pawent="guawdDestinyationWawwet" #destinyationWawwet x="300"  %}
+{% nyode deme="bwue" %}
+Destinyation Wawwet {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: System Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="guawdDestinyationWawwet" to="destinyationWawwet" /%}
 
 
-{% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true arrow="none" %}
-Transfers 
+{% edge fwom="cowwectionNftMint" to="mint-candy-guawd" deme="indigo" dashed=twue awwow="nyonye" %}
+Twansfews 
 
-1 NFT from
+1 NFT fwom
 
-this collection
+dis cowwection
 {% /edge %}
 
-{% edge from="mint-candy-guard" to="destinationWallet" theme="indigo" %}
+{% edge fwom="mint-candy-guawd" to="destinyationWawwet" deme="indigo" %}
 {% /edge %}
-{% node parent="candy-machine" #mint-candy-guard x="600" %}
-  {% node theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" #mint-candy-guawd x="600" %}
+  {% nyode deme="pink" %}
+    Mint fwom
 
-    _Core Candy Guard Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Cowe Candy Guawd Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Core Candy Machine Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Cowe Candy Machinye Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="92" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="92" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
 
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The NFT Payment guard contains the following settings:
+De NFT Payment guawd contains de fowwowing settings:
 
-- **Required Collection**: The mint address of the required NFT Collection. The NFT we use to pay with must be part of this collection.
-- **Destination**: The address of the wallet that will receive all NFTs.
+- **Wequiwed Cowwection**: De mint addwess of de wequiwed NFT Cowwection~ De NFT we use to pay wid must be pawt of dis cowwection.
+- **Destinyation**: De addwess of de wawwet dat wiww weceive aww NFTs.
 
-{% dialect-switcher title="Set up a Candy Machine using the NFT Payment Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de NFT Payment Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -120,29 +120,29 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [NftPayment](https://mpl-core-candy-machine.typedoc.metaplex.com/types/NftPayment.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [NftPayment](https://mpl-core-candy-machine.typedoc.metaplex.com/types/NftPayment.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The NFT Payment guard contains the following Mint Settings:
+De NFT Payment guawd contains de fowwowing Mint Settings:
 
-- **Destination**: The address of the wallet that will receive all NFTs.
-- **Mint**: The mint address of the NFT to pay with. This must be part of the required collection and must belong to the minter.
-- **Token Standard**: The token standard of the NFT used to pay.
-- **Token Account** (optional): You may optionally provide the token account linking the NFT with its owner explicitly. By default, the associated token account of the payer will be used.
-- **Rule Set** (optional): The Rule Set of the NFT used to pay, if we are paying using a Programmable NFT with a Rule Set.
+- **Destinyation**: De addwess of de wawwet dat wiww weceive aww NFTs.
+- **Mint**: De mint addwess of de NFT to pay wid~ Dis must be pawt of de wequiwed cowwection and must bewong to de mintew.
+- **Token Standawd**: De token standawd of de NFT used to pay.
+- **Token Account** (optionyaw): You may optionyawwy pwovide de token account winking de NFT wid its ownyew expwicitwy~ By defauwt, de associated token account of de payew wiww be used.
+- **Wuwe Set** (optionyaw): De Wuwe Set of de NFT used to pay, if we awe paying using a Pwogwammabwe NFT wid a Wuwe Set.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftpayment) for more details.
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftpayment) fow mowe detaiws.
 
-{% dialect-switcher title="Set up a Candy Machine using the NFT Payment Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de NFT Payment Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the NFT Payment guard using the `mintArgs` argument like so.
+You may pass de Mint Settings of de NFT Payment guawd using de `mintArgs` awgument wike so.
 
 ```ts
 import { TokenStandard } from "@metaplex-foundation/mpl-token-metadata";
@@ -159,12 +159,12 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [NftPaymentMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/NftPaymentMintArgs.html)
+API Wefewences: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [NftPaymentMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/NftPaymentMintArgs.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-_The NFT Payment guard does not support the route instruction._
+_De NFT Payment guawd does nyot suppowt de woute instwuction._
