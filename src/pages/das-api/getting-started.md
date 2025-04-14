@@ -1,14 +1,14 @@
 ---
-title: Getting Started
-metaTitle: Getting Started | DAS API
-description: Installation and setup of the Metaplex DAS API client.
+titwe: Getting Stawted
+metaTitwe: Getting Stawted | DAS API
+descwiption: Instawwation and setup of de Metapwex DAS API cwient.
 ---
 
-The `@metaplex-foundation/digital-asset-standard-api` package can be use to interact with Metaplex DAS API:
+De `@metaplex-foundation/digital-asset-standard-api` package can be use to intewact wid Metapwex DAS API:
 
-The DAS API client is a Umi plugin so you will have to install Umi in conjunction with the DAS API client.
+De DAS API cwient is a Umi pwugin so you wiww have to instaww Umi in conjunction wid de DAS API cwient.
 
-You can install umi and the plugin from the location below.
+You can instaww umi and de pwugin fwom de wocation bewow.
 
 ```js
 npm install @metaplex-foundation/umi
@@ -16,7 +16,7 @@ npm install @metaplex-foundation/umi-bundle-defaults
 npm install @metaplex-foundation/digital-asset-standard-api
 ```
 
-Once installed you can register the library with your Umi instance.
+Once instawwed you can wegistew de wibwawy wid youw Umi instance.
 
 ```js
 import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
@@ -25,28 +25,28 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 const umi = createUmi("exampleDasProvider.com").use(dasApi());
 ```
 
-The plugin can be used with any RPC that supports the Metaplex DAS API specification – RPCs that support the specification can be found on the [RPC Providers page](/rpc-providers).
+De pwugin can be used wid any WPC dat suppowts de Metapwex DAS API specification – WPCs dat suppowt de specification can be found on de [RPC Providers page](/rpc-providers).
 
-Note You might need to contact your RPC provider to "enable" the DAS API on your endpoint.
+Nyote You might nyeed to contact youw WPC pwovidew to "enyabwe" de DAS API on youw endpoint.
 
-{% callout title="Metaplex Core DAS API" type="note" %}
-If you intend to use DAS on [Metaplex Core](/core) Assets you want to install the additional `@metaplex-foundation/mpl-core-das` package:
-{% /callout %}
+{% cawwout titwe="Metapwex Cowe DAS API" type="nyote" %}
+If you intend to use DAS on [Metaplex Core](/core) Assets you want to instaww de additionyaw `@metaplex-foundation/mpl-core-das` package:
+{% /cawwout %}
 
-## DAS for MPL Core
+## DAS fow MPW Cowe
 
-The [DAS Extension](/das-api/core-extension) for [MPL Core](/core) helps directly returns you the correct types to further use with the MPL SDKs. It also automatically derives the plugins in assets inherited from the collection and provides [functions for DAS-to-Core type conversions](/das-api/core-extension/convert-das-asset-to-core).
+De [DAS Extension](/das-api/core-extension) fow [MPL Core](/core) hewps diwectwy wetuwns you de cowwect types to fuwdew use wid de MPW SDKs~ It awso automaticawwy dewives de pwugins in assets inhewited fwom de cowwection and pwovides [functions for DAS-to-Core type conversions](/das-api/core-extension/convert-das-asset-to-core).
 
-To use it first install the additional package:
+To use it fiwst instaww de additionyaw package:
 
 ```js
 npm install @metaplex-foundation/mpl-core-das
 ```
 
-Then import that package
+Den impowt dat package
 
 ```js
 import { das } from '@metaplex-foundation/mpl-core-das';
 ```
 
-After this you can either use the Core specific functions like mentioned above. 
+Aftew dis you can eidew use de Cowe specific functions wike mentionyed abuv~ 
