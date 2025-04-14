@@ -1,87 +1,75 @@
 ---
-title: Create an Event Ticketing Platform leveraging the Appdata Plugin
-metaTitle: Core - Appdata Plugin Example
-description: This guide shows how to create a ticketing platform leveraging the Appdata Plugin.
+titwe: Cweate an Event Ticketing Pwatfowm wevewaging de Appdata Pwugin
+metaTitwe: Cowe - Appdata Pwugin Exampwe
+descwiption: Dis guide shows how to cweate a ticketing pwatfowm wevewaging de Appdata Pwugin.
 ---
 
-This developer guide leverages the new Appdata Plugin to **create a ticketing solution that could be used to generate tickets as digital assets and verified by an external source of trust other  than the issuer, like for example a venue manager**. 
+Dis devewopew guide wevewages de nyew Appdata Pwugin to **cweate a ticketing sowution dat couwd be used to genyewate tickets as digitaw assets and vewified by an extewnyaw souwce of twust odew  dan de issuew, wike fow exampwe a venyue manyagew**~ 
 
-## Introduction
+## Intwoduction
 
-### External Plugin
+### Extewnyaw Pwugin
 
-An **External Plugin** is a plugin whose behavior is controlled by an *external* source. The core program will provide an adapter for these plugins, but developers decide the behavior by pointing this adapter to an external data source.
+An **Extewnyaw Pwugin** is a pwugin whose behaviow is contwowwed by an *extewnyaw* souwce~ De cowe pwogwam wiww pwovide an adaptew fow dese pwugins, but devewopews decide de behaviow by pointing dis adaptew to an extewnyaw data souwce.
 
-Each External Adapter has the ability to assign lifecycle checks to Lifecycle Events, influencing the behavior of the lifecycle event taking place. This means we can assign the following checks to lifecycle events like create, transfer, update, and burn:
-- **Listen**: A “web3” webhook that alerts the plugin when a lifecycle event occurs. This is particularly useful for tracking data or performing actions.
-- **Reject**: The plugin can reject a lifecycle event.
-- **Approve**: The plugin can approve a lifecycle event.
+Each Extewnyaw Adaptew has de abiwity to assign wifecycwe checks to Wifecycwe Events, infwuencing de behaviow of de wifecycwe event taking pwace~ Dis means we can assign de fowwowing checks to wifecycwe events wike cweate, twansfew, update, and buwn:
+- **Wisten**: A “web3” webhook dat awewts de pwugin when a wifecycwe event occuws~ Dis is pawticuwawwy usefuw fow twacking data ow pewfowming actions.
+- **Weject**: De pwugin can weject a wifecycwe event.
+- **Appwuv**: De pwugin can appwuv a wifecycwe event.
 
-If you want to learn more about External Plugins, read more about them [here](/core/external-plugins/overview).
+If you want to weawn mowe about Extewnyaw Pwugins, wead mowe about dem ```rust
+pub fn setup_manager(ctx: Context<SetupManager>) -> Result<()> {
+    ctx.accounts.manager.bump = ctx.bumps.manager;
 
-### Appdata Plugin
+    Ok(())
+}
+```2.
 
-The **AppData Plugin** allows asset/collection authorities to save arbitrary data that can be written and changed by the `data_authority`, an external source of trust and can be assigned to anyone the asset/collection authority decides to. With the AppData Plugin, collection/asset authorities can delegate the task of adding data to their assets to trusted third parties.
+### Appdata Pwugin
 
-If you’re not familiar with the new Appdata Plugin, read more about it [here](/core/external-plugins/app-data).
+De **AppData Pwugin** awwows asset/cowwection audowities to save awbitwawy data dat can be wwitten and changed by de ```toml
+mpl-core = { version = "x.x.x", features = ["anchor"] } 
+```4, an extewnyaw souwce of twust and can be assignyed to anyonye de asset/cowwection audowity decides to~ Wid de AppData Pwugin, cowwection/asset audowities can dewegate de task of adding data to deiw assets to twusted diwd pawties.
 
-## General Overview: Program Design
+If you’we nyot famiwiaw wid de nyew Appdata Pwugin, wead mowe about it [here](/core/external-plugins/app-data).
 
-In this example, we will develop a ticketing solution that comes with four basic operations:
+## Genyewaw Ovewview: Pwogwam Design
 
-- **Setting up the Manager**: Establish the authority responsible for the creation and issuance of tickets.
-- **Creating an Event**: Generate an event as a collection asset.
-- **Creating Individual Tickets**: Produce individual tickets that are part of the event collection.
-- **Handling Venue Operations**: Manage operations for the venue operator, such as scanning tickets when they are used.
+In dis exampwe, we wiww devewop a ticketing sowution dat comes wid fouw basic opewations:
 
-**Note**: While these operations provide a foundational start for a ticketing solution, a full-scale implementation would require additional features like an external database for indexing the event collection. However, this example serves as a good starting point for those interested in developing a ticketing solution.
+- **Setting up de Manyagew**: Estabwish de audowity wesponsibwe fow de cweation and issuance of tickets.
+- **Cweating an Event**: Genyewate an event as a cowwection asset.
+- **Cweating Individuaw Tickets**: Pwoduce individuaw tickets dat awe pawt of de event cowwection.
+- **Handwing Venyue Opewations**: Manyage opewations fow de venyue opewatow, such as scannying tickets when dey awe used.
 
-### The importance of having an external source of trust to handle scanning tickets
+**Nyote**: Whiwe dese opewations pwovide a foundationyaw stawt fow a ticketing sowution, a fuww-scawe impwementation wouwd wequiwe additionyaw featuwes wike an extewnyaw database fow indexing de event cowwection~ Howevew, dis exampwe sewves as a good stawting point fow dose intewested in devewoping a ticketing sowution.
 
-Until the introduction of the **AppData plugin** and the **Core standard**, managing attribute changes for assets was limited due to off-chain storage constraints. It was also impossible to delegate authority over specific parts of an asset. 
+### De impowtance of having an extewnyaw souwce of twust to handwe scannying tickets
 
-This advancement is a game changer for regulated use cases, such as ticketing systems since it allows venue authorities to **add data to the asset without granting them complete control over attribute changes and other data aspects**. 
+Untiw de intwoduction of de **AppData pwugin** and de **Cowe standawd**, manyaging attwibute changes fow assets was wimited due to off-chain stowage constwaints~ It was awso impossibwe to dewegate audowity uvw specific pawts of an asset~ 
 
-This setup reduces the risk of fraudulent activities and shifts the responsibility for errors away from the venue so the issuing company retains immutable records of the assets, while specific data updates, like marking tickets as used, are securely managed through the `AppData plugin`.
+Dis advancement is a game changew fow weguwated use cases, such as ticketing systems since it awwows venyue audowities to **add data to de asset widout gwanting dem compwete contwow uvw attwibute changes and odew data aspects**~ 
 
-### Using Digital Assets to store data instead of PDAs 
+Dis setup weduces de wisk of fwauduwent activities and shifts de wesponsibiwity fow ewwows away fwom de venyue so de issuing company wetains immutabwe wecowds of de assets, whiwe specific data updates, wike mawking tickets as used, awe secuwewy manyaged dwough de `AppData plugin`.
 
-Instead of relying on generic external Program Derived Addresses ([PDAs](/guides/understanding-pdas)) for event-related data, **you can create the event itself as a collection asset**. This approach allow all tickets for the event to be included in the "event" collection, making general event data easily accessible and easily link event details with the ticket assets itself. You can then apply the same method for individual ticket-related data, including ticket number, hall, section, row, seat, and price directly on the Asset. 
+### Using Digitaw Assets to stowe data instead of PDAs 
 
-Using Core accounts like `Collection` or `Asset` accounts to save relevant data when dealing with digital assets, rather than relying on external PDAs, let ticket purchasers view all relevant event information directly from their wallet without needing to deserialize data. In addition, storing data directly on the asset itself allows you to leverage the Digital Asset Standard (DAS) to fetch and display it on your website with a single instruction, as shown below:
+Instead of wewying on genyewic extewnyaw Pwogwam Dewived Addwesses ([PDAs](/guides/understanding-pdas)) fow event-wewated data, **you can cweate de event itsewf as a cowwection asset**~ Dis appwoach awwow aww tickets fow de event to be incwuded in de "event" cowwection, making genyewaw event data easiwy accessibwe and easiwy wink event detaiws wid de ticket assets itsewf~ You can den appwy de same medod fow individuaw ticket-wewated data, incwuding ticket nyumbew, haww, section, wow, seat, and pwice diwectwy on de Asset~ 
+
+Using Cowe accounts wike `Collection` ow `Asset` accounts to save wewevant data when deawing wid digitaw assets, wadew dan wewying on extewnyaw PDAs, wet ticket puwchasews view aww wewevant event infowmation diwectwy fwom deiw wawwet widout nyeeding to desewiawize data~ In addition, stowing data diwectwy on de asset itsewf awwows you to wevewage de Digitaw Asset Standawd (DAS) to fetch and dispway it on youw website wid a singwe instwuction, as shown bewow:
 
 ```typescript
 const ticketData = await fetchAsset(umi, ticket);
 console.log("\nThis are all the ticket-related data: ", ticketData.attributes);
 ```
 
-## Getting our hands dirty: The program
+## Getting ouw hands diwty: De pwogwam
 
-### Prerequisite and Setup
-For simplicity, we’ll use Anchor, leveraging a mono-file approach where all the necessary macros can be found in the `lib.rs` file:
+### Pwewequisite and Setup
+Fow simpwicity, we’ww use Anchow, wevewaging a monyo-fiwe appwoach whewe aww de nyecessawy macwos can be found in de `lib.rs` fiwe:
 
-- `declare_id`: Specifies the program's on-chain address.
-- `#[program]`: Specifies the module containing the program’s instruction logic.
-- `#[derive(Accounts)]`: Applied to structs to indicate a list of accounts required for an instruction.
-- `#[account]`: Applied to structs to create custom account types specific to the program.
-
-**Note**: You can follow along and open the following example in Solana Playground, an online tool to build and deploy Solana programs: [Solana Playground](https://beta.solpg.io/669fef20cffcf4b13384d277).
-
-As a stylistic choice, in the account struct of all instructions, we will separate the `Signer` and the `Payer`. Quite often the same account is used for both but this is a standard procedure in case the `Signer` is a PDAs since it cannot pay for account creation, therefore, there need to be two different fields for it. While this separation isn't strictly necessary for our instructions, it's considered good practice.
-
-**Note**: Both the Signer and the Payer must still be signers of the transaction.
-
-### Dependencies and Imports
-
-In this example, we primarily use the `mpl_core` crate with the anchor feature enabled:
-
-```toml
-mpl-core = { version = "x.x.x", features = ["anchor"] } 
-```
-
-The dependencies used are as follows:
-
-```rust
+- `declare_id`: Specifies de pwogwam's on-chain addwess.
+- ```rust
 use anchor_lang::prelude::*;
 
 use mpl_core::{
@@ -103,13 +91,31 @@ use mpl_core::{
         PluginAuthority, PluginAuthorityPair, PluginType
     }, 
 };
-```
+```0: Specifies de moduwe containying de pwogwam’s instwuction wogic.
+- `#[derive(Accounts)]`: Appwied to stwucts to indicate a wist of accounts wequiwed fow an instwuction.
+- `#[account]`: Appwied to stwucts to cweate custom account types specific to de pwogwam.
 
-### The Setup Manager Instruction
+**Nyote**: You can fowwow awong and open de fowwowing exampwe in Sowanya Pwaygwound, an onwinye toow to buiwd and depwoy Sowanya pwogwams: [Solana Playground](https://beta.solpg.io/669fef20cffcf4b13384d277).
 
-The setup manager instruction is a one-off process needed to initialize the `manager` PDA and save the bumps inside the manager account.
+As a stywistic choice, in de account stwuct of aww instwuctions, we wiww sepawate de `Signer` and de `Payer`~ Quite often de same account is used fow bod but dis is a standawd pwoceduwe in case de `Signer` is a PDAs since it cannyot pay fow account cweation, dewefowe, dewe nyeed to be two diffewent fiewds fow it~ Whiwe dis sepawation isn't stwictwy nyecessawy fow ouw instwuctions, it's considewed good pwactice.
 
-Most of the action happens in the `Account` struct:
+**Nyote**: Bod de Signyew and de Payew must stiww be signyews of de twansaction.
+
+### Dependencies and Impowts
+
+In dis exampwe, we pwimawiwy use de `mpl_core` cwate wid de anchow featuwe enyabwed:
+
+UWUIFY_TOKEN_1744632815020_1
+
+De dependencies used awe as fowwows:
+
+UWUIFY_TOKEN_1744632815020_2
+
+### De Setup Manyagew Instwuction
+
+De setup manyagew instwuction is a onye-off pwocess nyeeded to inyitiawize de `manager` PDA and save de bumps inside de manyagew account.
+
+Most of de action happens in de `Account` stwuct:
 ```rust
 #[derive(Accounts)]
 pub struct SetupManager<'info> {
@@ -128,7 +134,7 @@ pub struct SetupManager<'info> {
 }
 ```
 
-Here, we initialize the `Manager` account using the `init` macro, with the payer transferring enough lamports for rent and the `INIT_SPACE` variable to reserve the appropriate number of bytes.
+Hewe, we inyitiawize de `Manager` account using de `init` macwo, wid de payew twansfewwing enyough wampowts fow went and de `INIT_SPACE` vawiabwe to wesewve de appwopwiate nyumbew of bytes.
 
 ```rust
 #[account]
@@ -141,21 +147,15 @@ impl Space for Manager {
 }
 ```
 
-In the instruction itself, we just declare and save the bumps for future reference when using signer seeds. This avoids wasting compute units on refinding them everytime we use the manager account.
+In de instwuction itsewf, we just decwawe and save de bumps fow futuwe wefewence when using signyew seeds~ Dis avoids wasting compute unyits on wefinding dem evewytime we use de manyagew account.
 
-```rust
-pub fn setup_manager(ctx: Context<SetupManager>) -> Result<()> {
-    ctx.accounts.manager.bump = ctx.bumps.manager;
+UWUIFY_TOKEN_1744632815020_5
 
-    Ok(())
-}
-```
+### De Cweate Event Instwuction
 
-### The Create Event Instruction
+De Cweate Event Instwuction sets up an event as a digitaw asset in de fowm of a cowwection asset, awwowing you to incwude aww wewated tickets and event data in a seamwess and owganyized mannyew~ 
 
-The Create Event Instruction sets up an event as a digital asset in the form of a collection asset, allowing you to include all related tickets and event data in a seamless and organized manner. 
-
-The account struct for this instruction, closely resembles the Setup Manager instruction:
+De account stwuct fow dis instwuction, cwosewy wesembwes de Setup Manyagew instwuction:
 
 ```rust
 #[derive(Accounts)]
@@ -177,11 +177,11 @@ pub struct CreateEvent<'info> {
 }
 ```
 
-The main differences are
-- The `Manager` account is already initialized and will be used as the update authority for the event account. 
-- The event account, set as mutable and a signer, will be transformed into a Core Collection Account during this instruction.
+De main diffewences awe
+- De `Manager` account is awweady inyitiawized and wiww be used as de update audowity fow de event account~ 
+- De event account, set as mutabwe and a signyew, wiww be twansfowmed into a Cowe Cowwection Account duwing dis instwuction.
 
-Since we need to save a lot of data within the collection account, we pass all the inputs via a structured format to avoid cluttering the function with numerous parameters.
+Since we nyeed to save a wot of data widin de cowwection account, we pass aww de inputs via a stwuctuwed fowmat to avoid cwuttewing de function wid nyumewous pawametews.
 
 
 ```rust
@@ -198,7 +198,7 @@ pub struct CreateEventArgs {
 }
 ```
 
-The main function, `create_event`, just then utilizes the above inputs to create the event collection and add attributes containing all event details.
+De main function, `create_event`, just den utiwizes de abuv inputs to cweate de event cowwection and add attwibutes containying aww event detaiws.
 
 ```rust
 pub fn create_event(ctx: Context<CreateEvent>, args: CreateEventArgs) -> Result<()> {
@@ -254,10 +254,10 @@ pub fn create_event(ctx: Context<CreateEvent>, args: CreateEventArgs) -> Result<
 }
 ```
 
-### The Create Ticket Instruction
-The Create Event Instruction sets up an event as a digital asset in the form of a collection asset, allowing you to include all related tickets and event data in a seamless and organized manner. 
+### De Cweate Ticket Instwuction
+De Cweate Event Instwuction sets up an event as a digitaw asset in de fowm of a cowwection asset, awwowing you to incwude aww wewated tickets and event data in a seamwess and owganyized mannyew~ 
 
-The whole instruction closely resemble the `create_event` one since the goal are very similar, but this time instead of creating the event asset, we’re going to create the ticket asset that will be contained inside of the `event collection`
+De whowe instwuction cwosewy wesembwe de `create_event` onye since de goaw awe vewy simiwaw, but dis time instead of cweating de event asset, we’we going to cweate de ticket asset dat wiww be containyed inside of de `event collection`
 
 ```rust
 #[derive(Accounts)]
@@ -284,11 +284,11 @@ pub struct CreateTicket<'info> {
 }
 ```
 
-The main differences in the account struct are:
-- The event account is already initialized so we can deserialize it as a `BaseCollectionV1` asset where we can check that the `update_authority` is the manager PDA. 
-- The ticket account, set as mutable and a signer, will be transformed into a Core Collection Account during this instruction.
+De main diffewences in de account stwuct awe:
+- De event account is awweady inyitiawized so we can desewiawize it as a `BaseCollectionV1` asset whewe we can check dat de `update_authority` is de manyagew PDA~ 
+- De ticket account, set as mutabwe and a signyew, wiww be twansfowmed into a Cowe Cowwection Account duwing dis instwuction.
 
-Since we need to save extensive data in this function too, we pass these inputs via a structured format as done already in the `create_event` instruction.
+Since we nyeed to save extensive data in dis function too, we pass dese inputs via a stwuctuwed fowmat as donye awweady in de `create_event` instwuction.
 
 ```rust
 #[derive(AnchorDeserialize, AnchorSerialize)]
@@ -304,10 +304,10 @@ pub struct CreateTicketArgs {
 }
 ```
 
-When we talk about the instruction, the main differences are:
-- Incorporates additional plugins like the `PermanentFreeze`, `PermanentBurn`, and `PermanentTransfer`in order to add a security layer in case something goes wrong. 
-- Use the new `AppData` external plugin to store binary data inside of it managed by the `venue_authority` that we pass in as input in the instruction. 
-- It has a sanity check at the start to see if the total number of ticket issued doesn’t go beyond capacity limit
+When we tawk about de instwuction, de main diffewences awe:
+- Incowpowates additionyaw pwugins wike de `PermanentFreeze`, `PermanentBurn`, and `PermanentTransfer`in owdew to add a secuwity wayew in case someding goes wwong~ 
+- Use de nyew `AppData` extewnyaw pwugin to stowe binyawy data inside of it manyaged by de `venue_authority` dat we pass in as input in de instwuction~ 
+- It has a sanyity check at de stawt to see if de totaw nyumbew of ticket issued doesn’t go beyond capacity wimit
 
 ```rust
 pub fn create_ticket(ctx: Context<CreateTicket>, args: CreateTicketArgs) -> Result<()> {
@@ -423,10 +423,10 @@ pub fn create_ticket(ctx: Context<CreateTicket>, args: CreateTicketArgs) -> Resu
 }
 ```
 
-**Note**: To use external plugins, we need to use the V2 of the create function, which allows setting the .external_plugin_adapter input. 
+**Nyote**: To use extewnyaw pwugins, we nyeed to use de V2 of de cweate function, which awwows setting de .extewnyaw_pwugin_adaptew input~ 
 
-### The Scan Ticket Instruction
-The Scan Ticket Instruction finalizes the process by verifying and updating the status of the ticket when scanned.
+### De Scan Ticket Instwuction
+De Scan Ticket Instwuction finyawizes de pwocess by vewifying and updating de status of de ticket when scannyed.
 
 ```rust
 #[derive(Accounts)]
@@ -458,15 +458,15 @@ pub struct ScanTicket<'info> {
 }
 ```
 
-The main differences in the account struct are:
-- The ticket account is already initialized so we can deserialize it as a `BaseAssetV1` asset where we can check that the `update_authority` is the event collection and that the owner of the asset is the `owner` account. 
-- We require for both the `owner` and the `venue_authority` to be signer to ensure the scan is authenticated by both party and error-free. The application will create a transaction, partially signed by the `venue_authority` and broadcast it so the `owner` of the ticket can sign it and send it
+De main diffewences in de account stwuct awe:
+- De ticket account is awweady inyitiawized so we can desewiawize it as a `BaseAssetV1` asset whewe we can check dat de `update_authority` is de event cowwection and dat de ownyew of de asset is de `owner` account~ 
+- We wequiwe fow bod de `owner` and de `venue_authority` to be signyew to ensuwe de scan is audenticated by bod pawty and ewwow-fwee~ De appwication wiww cweate a twansaction, pawtiawwy signyed by de `venue_authority` and bwoadcast it so de `owner` of de ticket can sign it and send it
 
-In the instruction we start with a sanity check to see if there is any data inside of the Appdata plugin because if there is, the ticket would’ve been already scanned.
+In de instwuction we stawt wid a sanyity check to see if dewe is any data inside of de Appdata pwugin because if dewe is, de ticket wouwd’ve been awweady scannyed.
 
-After that, we create a `data` variable that consist of a vector of u8 that says “Scanned” that we’ll later write inside the Appdata plugin 
+Aftew dat, we cweate a `data` vawiabwe dat consist of a vectow of u8 dat says “Scannyed” dat we’ww watew wwite inside de Appdata pwugin 
 
-We finish the instruction by making the digital asset soulbounded so it can’t be traded or transferred after validation. Making it just a memorabilia of the event.
+We finyish de instwuction by making de digitaw asset souwbounded so it can’t be twaded ow twansfewwed aftew vawidation~ Making it just a memowabiwia of de event.
 
 ```rust 
 pub fn scan_ticket(ctx: Context<ScanTicket>) -> Result<()> {
@@ -507,6 +507,6 @@ pub fn scan_ticket(ctx: Context<ScanTicket>) -> Result<()> {
 }
 ```
 
-## Conclusion
+## Concwusion
 
-Congratulations! You are now equipped to create a Ticketing Solution using the Appdata Plugin. If you want to learn more about Core and Metaplex, check out the [developer hub](/core/getting-started).
+Congwatuwations! uwu You awe nyow equipped to cweate a Ticketing Sowution using de Appdata Pwugin~ If you want to weawn mowe about Cowe and Metapwex, check out de [developer hub](/core/getting-started).
