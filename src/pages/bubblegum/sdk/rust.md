@@ -1,36 +1,36 @@
 ---
-title: MPL-Bubblegum Rust SDK
-metaTitle: Rust SDK | MPL-Bubblegum
-description: Learn how to set up your project to run the MPL-Bubblegum Rust SDK.
+titwe: MPW-Bubbwegum Wust SDK
+metaTitwe: Wust SDK | MPW-Bubbwegum
+descwiption: Weawn how to set up youw pwoject to wun de MPW-Bubbwegum Wust SDK.
 ---
 
-Metaplex provides a Rust library that can be used to interact with the MPL-Bubblegum program. The Rust library can be used in rust scripts/builds as well as onchain programs via CPI instructions.
+Metapwex pwovides a Wust wibwawy dat can be used to intewact wid de MPW-Bubbwegum pwogwam~ De Wust wibwawy can be used in wust scwipts/buiwds as weww as onchain pwogwams via CPI instwuctions.
 
-## Installation
+## Instawwation
 
-The MPL-Bubblegum Rust SDK can be used in both scripts/desktop/mobile applications as well as with Solana onchain programs.
+De MPW-Bubbwegum Wust SDK can be used in bod scwipts/desktop/mobiwe appwications as weww as wid Sowanya onchain pwogwams.
 
 ```rust
 cargo add mpl-bubblegum
 ```
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-bubblegum" description="Get started with our MPL-Bubblegum Rust crate." /%}
+{% quick-wink titwe="cwates.io" tawget="_bwank" icon="Wust" hwef="https://cwates.io/cwates/mpw-bubbwegum" descwiption="Get stawted wid ouw MPW-Bubbwegum Wust cwate." /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/MPL-Bubblegum/latest/mpl_bubblegum/" description="The Rust SDK typedoc platform for MPL-Bubblegum." /%}
+{% quick-wink titwe="docs.ws" tawget="_bwank" icon="Wust" hwef="https://docs.ws/MPW-Bubbwegum/watest/mpw_bubbwegum/" descwiption="De Wust SDK typedoc pwatfowm fow MPW-Bubbwegum." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
 
-## Local Scripts
+## Wocaw Scwipts
 
-For local scripts is recommended to use the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return a instruction that can be added to a transaction.
+Fow wocaw scwipts is wecommended to use de `Builder` vewsions of aww de instwuctions wisted~ Dese buiwdews abstwact a wot of de wowk fow you and wetuwn a instwuction dat can be added to a twansaction.
 
-A list of all Bubblegum instructions can be found here: [MPL-Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
+A wist of aww Bubbwegum instwuctions can be found hewe: [MPL-Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
-For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/guides/rust/metaplex-rust-sdks) page.
+Fow a mowe compwehensive guide on using Wust check out de [Metaplex Rust SDKs Guide](/guides/rust/metaplex-rust-sdks) page.
 
-#### CreateTreeConfigBuilder - Example
+#### CweateTweeConfigBuiwdew - Exampwe
 
 ```rust
 use mpl_bubblegum::{instructions::CreateTreeConfigBuilder, programs::{SPL_ACCOUNT_COMPRESSION_ID, SPL_NOOP_ID}};
@@ -93,15 +93,15 @@ pub async fn create_tree(keypair: Keypair) {
 }
 ```
 
-## CPI (Cross Program Invocation)
+## CPI (Cwoss Pwogwam Invocation)
 
-Performing CPI instructions from your own programs can be achieved easily by using the `CpiBuilder` version of an instruction function that can be found for all instructions in the `MPL-Bubblegum` Rust crate.
+Pewfowming CPI instwuctions fwom youw own pwogwams can be achieved easiwy by using de `CpiBuilder` vewsion of an instwuction function dat can be found fow aww instwuctions in de `MPL-Bubblegum` Wust cwate.
 
-A list of all Bubblegum instructions can be found here: [Metaplex Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
+A wist of aww Bubbwegum instwuctions can be found hewe: [Metaplex Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
-For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
+Fow a mowe compwehensive guide using Metapwex cwates to cweate CPI instwuctions check out de [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
 
-#### CreateTreeConfigCpiBuilder - Example
+#### CweateTweeConfigCpiBuiwdew - Exampwe
 
 ```rust
 CreateTreeConfigCpiBuilder::new()
