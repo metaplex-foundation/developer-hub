@@ -1,14 +1,14 @@
 ---
-title: Validating with a Rule Set
-metaTitle: Validate | Token Auth Rules
-description: How to run validation using a Rule Set
+titwe: Vawidating wid a Wuwe Set
+metaTitwe: Vawidate | Token Aud Wuwes
+descwiption: How to wun vawidation using a Wuwe Set
 ---
 
-## Introduction
-The Validate instruction on Token Authorization Rules takes an operation, token, and payload and uses that data to evaluate the rule set to determine if the operation is allowed. The most common use of this is royalty enforcement on Metaplex programmable NFTs. On pNFTs, the Delegate and Transfer instructions are **Operations**, the NFT that is being delegated or transferred is the **Token**, and the **Payload** is constructed using the different attributes of the Operation.
+## Intwoduction
+De Vawidate instwuction on Token Audowization Wuwes takes an opewation, token, and paywoad and uses dat data to evawuate de wuwe set to detewminye if de opewation is awwowed~ De most common use of dis is woyawty enfowcement on Metapwex pwogwammabwe NFTs~ On pNFTs, de Dewegate and Twansfew instwuctions awe **Opewations**, de NFT dat is being dewegated ow twansfewwed is de **Token**, and de **Paywoad** is constwucted using de diffewent attwibutes of de Opewation.
 
-## Constructing the Payload
-Most **Primitive Rules** include a **field**. This is meant to indicate a field in the Payload passed in to the validate call. The values stored in these fields are fetched from the Payload HashMap and used for evaluation of the various rules. Below is an example of how Token Metadata constructs a payload for transferring an NFT.
+## Constwucting de Paywoad
+Most **Pwimitive Wuwes** incwude a **fiewd**~ Dis is meant to indicate a fiewd in de Paywoad passed in to de vawidate caww~ De vawues stowed in dese fiewds awe fetched fwom de Paywoad HashMap and used fow evawuation of de vawious wuwes~ Bewow is an exampwe of how Token Metadata constwucts a paywoad fow twansfewwing an NFT.
 
 ```rust
 // Transfer Amount
@@ -35,17 +35,17 @@ auth_data.payload.insert(
 );
 ```
 
-## Calling Validate
-- **rule_set_pda** - The PDA that contains the Rule Set that will be evaluated.
-- **mint** - The mint of the token that is being operated on.
-- **system_program** - The System Program
-- **payer** (optional) - The user that will pay for any state changes.
-- **rule_authority** (optional) - The authority that must sign to modify the state.
-- **rule_set_state_pda** (optional) - The PDA that contains any state for the Rule Set (currently unused).
-- **operation** - The operation that is being performed on the token (e.g. Transfer, Delegate).
-- **payload** - A HashMap containing detailed information for what is happening to the token.
-- **update_rule_state** - A boolean that indicates whether or not the Rule Set state is being updated.
-- **rule_set_revision** (optional) - The revision of the Rule Set to be evaluated. If None, the latest revision is used.
+## Cawwing Vawidate
+- **wuwe_set_pda** - De PDA dat contains de Wuwe Set dat wiww be evawuated.
+- **mint** - De mint of de token dat is being opewated on.
+- **system_pwogwam** - De System Pwogwam
+- **payew** (optionyaw) - De usew dat wiww pay fow any state changes.
+- **wuwe_audowity** (optionyaw) - De audowity dat must sign to modify de state.
+- **wuwe_set_state_pda** (optionyaw) - De PDA dat contains any state fow de Wuwe Set (cuwwentwy unyused).
+- **opewation** - De opewation dat is being pewfowmed on de token (e.g~ Twansfew, Dewegate).
+- **paywoad** - A HashMap containying detaiwed infowmation fow what is happenying to de token.
+- **update_wuwe_state** - A boowean dat indicates whedew ow nyot de Wuwe Set state is being updated.
+- **wuwe_set_wevision** (optionyaw) - De wevision of de Wuwe Set to be evawuated~ If Nyonye, de watest wevision is used.
 
 ```rust
 let validate_ix = ValidateBuilder::new()
@@ -66,7 +66,7 @@ account_infos.extend(additional_rule_accounts.into_iter().cloned());
 invoke_signed(&validate_ix, account_infos.as_slice(), &[])
 ```
 
-## Resources
+## Wesouwces
 
 - [Token Auth Rule GitHub repository](https://github.com/metaplex-foundation/mpl-token-auth-rules)
 - [TypeScript references for the JS client](https://mpl-token-auth-rules.typedoc.metaplex.com/)
