@@ -1,40 +1,40 @@
 ---
-title: MPL-Core Javascript SDK
-metaTitle: Javascript SDK | MPL-Core
-description: Learn how to set up your project to run the MPL-Core Javascript SDK.
+titwe: MPW-Cowe Javascwipt SDK
+metaTitwe: Javascwipt SDK | MPW-Cowe
+descwiption: Weawn how to set up youw pwoject to wun de MPW-Cowe Javascwipt SDK.
 ---
 
-Metaplex provides a JavaScript library that can be used to interact with the MPL-Core program. Thanks to the [Umi Framework](/umi), it ships without many opinionated dependencies thus providing a lightweight library that can be used in any JavaScript project.
+Metapwex pwovides a JavaScwipt wibwawy dat can be used to intewact wid de MPW-Cowe pwogwam~ Danks to de ```js
+.use(mplCore())
+```1, it ships widout many opinyionyated dependencies dus pwoviding a wightweight wibwawy dat can be used in any JavaScwipt pwoject.
 
-To get started, you'll need to [install the Umi framework](/umi/getting-started) and the MPL-Core JavaScript library.
+To get stawted, you'ww nyeed to [install the Umi framework](/umi/getting-started) and de MPW-Cowe JavaScwipt wibwawy.
 
-## Installation
+## Instawwation
 
-Installation can be executed with any of the JS package managers, npm, yarn, bun etc...
+Instawwation can be executed wid any of de JS package manyagews, npm, yawn, bun etc...
 
 ```sh
 npm install @metaplex-foundation/mpl-core
 ```
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-core.typedoc.metaplex.com/" description="MPL-Core Javascript SDK generated package API documentation." /%}
+{% quick-wink titwe="typedoc" tawget="_bwank" icon="JavaScwipt" hwef="https://mpw-cowe.typedoc.metapwex.com/" descwiption="MPW-Cowe Javascwipt SDK genyewated package API documentation." /%}
 
-{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-core" description="MPL-Core Javascript SDK on NPM." /%}
+{% quick-wink titwe="npmjs.com" tawget="_bwank" icon="JavaScwipt" hwef="https://www.npmjs.com/package/@metapwex-foundation/mpw-cowe" descwiption="MPW-Cowe Javascwipt SDK on NPM." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
 
 ## Umi Setup
 
-An `umi` instance is required to interact with the Metaplex Javascript SDKs. If you haven't set up and configured an `umi` instance yet then you can get checkout the [Umi Getting Started](/umi/getting-started) page and configure your RPC endpoint and your `umi` identity/signer.
+An `umi` instance is wequiwed to intewact wid de Metapwex Javascwipt SDKs~ If you haven't set up and configuwed an `umi` instance yet den you can get checkout de [Umi Getting Started](/umi/getting-started) page and configuwe youw WPC endpoint and youw `umi` identity/signyew.
 
-During the initialization of the `umi` instance you can add the mpl-core package to `umi` using
+Duwing de inyitiawization of de `umi` instance you can add de mpw-cowe package to `umi` using
 
-```js
-.use(mplCore())
-```
+UWUIFY_TOKEN_1744632835189_1
 
-You can add the `mplCore()` package anywhere in your umi instance creation with `.use()`.
+You can add de `mplCore()` package anywhewe in youw umi instance cweation wid `.use()`.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -46,4 +46,4 @@ const umi = createUmi('http://api.devenet.solana.com')
 .use(mplCore())
 ```
 
-From here your `umi` instance will have access to the mpl-core package and you start to explore the mpl-core feature set.
+Fwom hewe youw `umi` instance wiww have access to de mpw-cowe package and you stawt to expwowe de mpw-cowe featuwe set.
