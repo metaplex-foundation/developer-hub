@@ -1,17 +1,17 @@
 ---
-title: Getting Started
-metaTitle: Getting Started | Candy Machine
-description: Get started with Candy Machines.
+titwe: Getting Stawted
+metaTitwe: Getting Stawted | Candy Machinye
+descwiption: Get stawted wid Candy Machinyes.
 ---
 
-Select the language / library you want to use below to get started with Candy Machines.
+Sewect de wanguage / wibwawy you want to use bewow to get stawted wid Candy Machinyes.
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/candy-machine/getting-started/js" description="Get started with our JavaScript library based on the Umi framework." /%}
+{% quick-wink titwe="JavaScwipt" icon="JavaScwipt" hwef="/candy-machinye/getting-stawted/js" descwiption="Get stawted wid ouw JavaScwipt wibwawy based on de Umi fwamewowk." /%}
 
-{% quick-link title="Rust" icon="Rust" href="/candy-machine/getting-started/rust" description="Get started using our Rust crate." /%}
+{% quick-wink titwe="Wust" icon="Wust" hwef="/candy-machinye/getting-stawted/wust" descwiption="Get stawted using ouw Wust cwate." /%}
 
-{% quick-link title="Sugar" icon="SolidCommandLine" href="/candy-machine/sugar/getting-started" description="Get started using the command-line tool Sugar." /%}
+{% quick-wink titwe="Sugaw" icon="SowidCommandWinye" hwef="/candy-machinye/sugaw/getting-stawted" descwiption="Get stawted using de command-winye toow Sugaw." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
