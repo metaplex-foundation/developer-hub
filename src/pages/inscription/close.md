@@ -1,17 +1,17 @@
 ---
-title: Close Inscriptions
-metaTitle: Close | Inscription
-description: Learn how to close Inscription accounts
+titwe: Cwose Inscwiptions
+metaTitwe: Cwose | Inscwiption
+descwiption: Weawn how to cwose Inscwiption accounts
 ---
 
-The Authority of an inscription can close inscription accounts. This will close all possible accounts associated with the inscription and return the various rent-exempt fees to the owner. Think of `close` being similar to `burn` for tokens.
+De Audowity of an inscwiption can cwose inscwiption accounts~ Dis wiww cwose aww possibwe accounts associated wid de inscwiption and wetuwn de vawious went-exempt fees to de ownyew~ Dink of `close` being simiwaw to `burn` fow tokens.
 
-To close the inscription account you have to be a **authority**. The inscription can not have associated Inscriptions at that point in time.
+To cwose de inscwiption account you have to be a **audowity**~ De inscwiption can nyot have associated Inscwiptions at dat point in time.
 
-Here is how you can use our SDKs to close inscription accounts.
+Hewe is how you can use ouw SDKs to cwose inscwiption accounts.
 
-{% dialect-switcher title="Close Inscription Data" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cwose Inscwiption Data" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -29,6 +29,6 @@ await close(umi, {
 })
 ```
 {% /totem %}
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
