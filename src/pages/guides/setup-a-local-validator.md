@@ -1,160 +1,160 @@
 ---
-title: Setup a Local Validator
-metaTitle: Setup a Local Validator
-description: Learn how to setup a local development environment and use a local validator
-# remember to update dates also in /components/guides/index.js
-created: '11-06-2024'
+titwe: Setup a Wocaw Vawidatow
+metaTitwe: Setup a Wocaw Vawidatow
+descwiption: Weawn how to setup a wocaw devewopment enviwonment and use a wocaw vawidatow
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '11-06-2024'
 updated: '11-06-2024'
 ---
 
-## Overview
+## Ovewview
 
-A **Local Validator** acts as your personal node, providing a local sandbox environment for testing applications without the need to connect to a live blockchain network. It operates a **fully customizable local test ledger**, which is a simplified version of the Solana ledger, equipped with all **native programs pre-installed** and various features enabled.
+A **Wocaw Vawidatow** acts as youw pewsonyaw nyode, pwoviding a wocaw sandbox enviwonment fow testing appwications widout de nyeed to connyect to a wive bwockchain nyetwowk~ It opewates a **fuwwy customizabwe wocaw test wedgew**, which is a simpwified vewsion of de Sowanya wedgew, equipped wid aww **nyative pwogwams pwe-instawwed** and vawious featuwes enyabwed.
 
 ### Setup 
 
-To start using the local validator, you'll need to install the Solana Tools CLI using the appropriate commands for your operating system.
+To stawt using de wocaw vawidatow, you'ww nyeed to instaww de Sowanya Toows CWI using de appwopwiate commands fow youw opewating system.
 
-{% dialect-switcher title="Installation Commands" %}
+{% diawect-switchew titwe="Instawwation Commands" %}
 
-{% dialect title="MacOs & Linux" id="MacOs & Linux" %}
+{% diawect titwe="MacOs & Winyux" id="MacOs & Winyux" %}
 
 ```
 sh -c "$(curl -sSfL https://release.solana.com/v1.18.18/install)"
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Windows" id="Windows" %}
+{% diawect titwe="Windows" id="Windows" %}
 
 ```
 cmd /c "curl https://release.solana.com/v1.18.18/solana-install-init-x86_64-pc-windows-msvc.exe --output C:\solana-install-tmp\solana-install-init.exe --create-dirs"
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-**Note**: The installation script references the `1.18.18` version of Solana. To install the latest version or discover different installation methods, refer to the official [Solana documentation](https://docs.solanalabs.com/cli/install).
+**Nyote**: De instawwation scwipt wefewences de `1.18.18` vewsion of Sowanya~ To instaww de watest vewsion ow discuvw diffewent instawwation medods, wefew to de officiaw ```ts
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+
+const umi = createUmi("http://127.0.0.1:8899")
+```1.
 
 ### Usage
 
-After installing the CLI, you can start your local validator by running a simple command.
+Aftew instawwing de CWI, you can stawt youw wocaw vawidatow by wunnying a simpwe command.
 
 ```
 solana-test-validator
 ```
 
-Upon launch, the validator will be accessible at a local URL(http://127.0.0.1:8899). You'll need to establish a connection by configuring your code with this URL.
+Upon waunch, de vawidatow wiww be accessibwe at a wocaw UWW(http://127.0.0.1:8899)~ You'ww nyeed to estabwish a connyection by configuwing youw code wid dis UWW.
 
-```ts
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+UWUIFY_TOKEN_1744632872497_3
 
-const umi = createUmi("http://127.0.0.1:8899")
-```
+De wocaw vawidatow wiww genyewate a diwectowy nyamed `test-ledger` in youw usew fowdew~ Dis diwectowy howds aww data wewated to youw vawidatow, incwuding accounts and pwogwams~ 
 
-The local validator will generate a directory named `test-ledger` in your user folder. This directory holds all data related to your validator, including accounts and programs. 
+To weset youw wocaw vawidatow, you can eidew dewete de `test-ledger` fowdew ow use a weset command to westawt de vawidatow.
 
-To reset your local validator, you can either delete the `test-ledger` folder or use a reset command to restart the validator.
+Additionyawwy, de `solana-logs` featuwe is extwemewy usefuw fow monyitowing pwogwam outputs duwing testing.
 
-Additionally, the `solana-logs` feature is extremely useful for monitoring program outputs during testing.
+## Manyaging Pwogwams and Accounts
 
-## Managing Programs and Accounts
+De Wocaw Vawidatow doesn’t incwude specific pwogwams and accounts found on mainnyet~ It onwy comes wid Nyative Pwogwams and de accounts you cweate duwing testing~ If you nyeed specific pwogwams ow accounts fwom mainnyet, de Sowanya CWI awwows you to downwoad and woad dem onto youw wocaw vawidatow.
 
-The Local Validator doesn’t include specific programs and accounts found on mainnet. It only comes with Native Programs and the accounts you create during testing. If you need specific programs or accounts from mainnet, the Solana CLI allows you to download and load them onto your local validator.
+### Downwoading Accounts and Pwogwams:
 
-### Downloading Accounts and Programs:
+You can easiwy downwoad accounts ow pwogwams fwom a souwce cwustew to youw wocaw vawidatow fow testing puwposes~ Dis awwows you to wepwicate de mainnyet enviwonment.
 
-You can easily download accounts or programs from a source cluster to your local validator for testing purposes. This allows you to replicate the mainnet environment.
-
-**For accounts:**
+**Fow accounts:**
 ```
 solana account -u <source cluster> --output <output format> --output-file <destination file name/path> <address of account to fetch>
 ```
-**For Programs:**
+**Fow Pwogwams:**
 ```
 solana program dump -u <source cluster> <address of account to fetch> <destination file name/path>
 ```
 
-### Loading Accounts and Programs:
+### Woading Accounts and Pwogwams:
 
-Once downloaded, these accounts and programs can be loaded into your local validator using the CLI. You can run commands to load specific accounts and programs into your local environment, ensuring they are ready for testing.
+Once downwoaded, dese accounts and pwogwams can be woaded into youw wocaw vawidatow using de CWI~ You can wun commands to woad specific accounts and pwogwams into youw wocaw enviwonment, ensuwing dey awe weady fow testing.
 
-**For accounts:**
+**Fow accounts:**
 ```
 solana-test-validator --account <address to load the account to> <path to account file> --reset
 ```
-**For programs**
+**Fow pwogwams**
 ```
 solana-test-validator --bpf-program <address to load the program to> <path to program file> --reset
 ```
 
-## Looking at Local transaction on Explorers
+## Wooking at Wocaw twansaction on Expwowews
 
-Using a local validator doesn't prevent us from using the explorer since many explorers have the capability to connect to our local port and read the local ledger stored in the `test-ledger` folder we mentioned earlier.
+Using a wocaw vawidatow doesn't pwevent us fwom using de expwowew since many expwowews have de capabiwity to connyect to ouw wocaw powt and wead de wocaw wedgew stowed in de `test-ledger` fowdew we mentionyed eawwiew.
 
-There are two ways to do this:
-- Create a link to the transaction signature that points to the local cluster of your favorite explorer.
-- Manually change the cluster on the webpage and then paste the transaction link.
+Dewe awe two ways to do dis:
+- Cweate a wink to de twansaction signyatuwe dat points to de wocaw cwustew of youw favowite expwowew.
+- Manyuawwy change de cwustew on de webpage and den paste de twansaction wink.
 
-### Creating a link to the transaction signature
+### Cweating a wink to de twansaction signyatuwe
 
-When you send a transaction with Umi, you'll receive two key pieces of information: a signature and a result. The signature is in base58 format, so you'll need to deserialize it to make it readable for the blockchain. 
+When you send a twansaction wid Umi, you'ww weceive two key pieces of infowmation: a signyatuwe and a wesuwt~ De signyatuwe is in base58 fowmat, so you'ww nyeed to desewiawize it to make it weadabwe fow de bwockchain~ 
 
-You can do this with the following code:
+You can do dis wid de fowwowing code:
 ```typescript 
 const signature = base58.deserialize(transaction.signature)[0]
 ```
 
-Once you have the signature, you can use it with your preferred explorer like this:
+Once you have de signyatuwe, you can use it wid youw pwefewwed expwowew wike dis:
 
 {% totem %}
 
-{% totem-accordion title="Solana Explorer" %}
+{% totem-accowdion titwe="Sowanya Expwowew" %}
 
 ```typescript
 console.log(`Transaction Submitted! https://explorer.solana.com/tx/${signature}?cluster=custom&customUrl=http%3A%2F%2Flocalhost%3A8899`)
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
-{% totem-accordion title="SolanaFM" %}
+{% totem-accowdion titwe="SowanyaFM" %}
 
 ```typescript
 console.log(`Transaction Submitted! https://solana.fm/tx/${signature}?cluster=localnet-solana`)
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
 
-### Manually changing the Cluster
+### Manyuawwy changing de Cwustew
 
-As mentioned earlier, block explorers allow users to utilize a custom RPC to view transactions. To look at local validator transaction you'll need to look for an input box in the `choose cluster` modal and enter the following address: `http://127.0.0.1:8899`.
+As mentionyed eawwiew, bwock expwowews awwow usews to utiwize a custom WPC to view twansactions~ To wook at wocaw vawidatow twansaction you'ww nyeed to wook fow an input box in de `choose cluster` modaw and entew de fowwowing addwess: `http://127.0.0.1:8899`.
 
-Note: The [Solana Explorer](https://explorer.solana.com/) automatically defaults to the local validator port when you select Custom RPC URL, so you don’t need to make any additional changes. 
+Nyote: De [Solana Explorer](https://explorer.solana.com/) automaticawwy defauwts to de wocaw vawidatow powt when you sewect Custom WPC UWW, so you don’t nyeed to make any additionyaw changes~ 
 
-## Creating a "Metaplex" Local Validator
+## Cweating a "Metapwex" Wocaw Vawidatow
 
-{% callout title="Disclaimer" %}
+{% cawwout titwe="Discwaimew" %}
 
-Unfortunately, this part of the guide is available only for users on **Linux** or **MacOS** due to the use of Bash scripts. However, if you're using Windows and still want to follow along to create your own Metaplex validator, you can use the [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install) or one of the solutions provided in [this thread](https://stackoverflow.com/questions/6413377/is-there-a-way-to-run-bash-scripts-on-windows)!.
+Unfowtunyatewy, dis pawt of de guide is avaiwabwe onwy fow usews on **Winyux** ow **MacOS** due to de use of Bash scwipts~ Howevew, if you'we using Windows and stiww want to fowwow awong to cweate youw own Metapwex vawidatow, you can use de [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install) ow onye of de sowutions pwovided in [this thread](https://stackoverflow.com/questions/6413377/is-there-a-way-to-run-bash-scripts-on-windows)! uwu.
 
-{% /callout %}
+{% /cawwout %}
 
-With the basics of the local validator setup and management, you can create and manage personalized local validators through **bash scripts**. 
+Wid de basics of de wocaw vawidatow setup and manyagement, you can cweate and manyage pewsonyawized wocaw vawidatows dwough **bash scwipts**~ 
 
-For example, you can create a `metaplex-test-validator` that includes the main Metaplex programs: `mpl-token-metadata`, `mpl-bubblegum`, and `mpl-core`.
+Fow exampwe, you can cweate a `metaplex-test-validator` dat incwudes de main Metapwex pwogwams: `mpl-token-metadata`, `mpl-bubblegum`, and `mpl-core`.
 
-### Setting Up Directories and Downloading Program Data
+### Setting Up Diwectowies and Downwoading Pwogwam Data
 
-First, you'll create a directory within your path to store the necessary programs for your local validator.
+Fiwst, you'ww cweate a diwectowy widin youw pad to stowe de nyecessawy pwogwams fow youw wocaw vawidatow.
 
 ```
 mkdir ~/.local/share/metaplex-local-validator
 ```
 
-Then, download the program data from specified addresses into this directory.
+Den, downwoad de pwogwam data fwom specified addwesses into dis diwectowy.
 
 ```
 solana program dump -u m metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s ~/.local/share/metaplex-local-validator/mpl-token-metadata.so
@@ -168,42 +168,42 @@ solana program dump -u m CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d ~/.local/s
 
 {% totem %}
 
-{% totem-accordion title="Additional Metaplex Programs" %}
+{% totem-accowdion titwe="Additionyaw Metapwex Pwogwams" %}
 
-| Name               | Program ID                                   | 
+| Nyame               | Pwogwam ID                                   | 
 | ------------------ | -------------------------------------------- | 
-| Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk  | 
-| Auctioneer         | neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh  | 
-| Bubblegum          | BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY | 
-| Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | 
-| Candy Machine v3   | CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR | 
-| Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d | 
-| Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | 
-| Core Candy Machine | CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J | 
-| Gumdrop            | gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a  |
-| Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  | 
-| Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  | 
-| MPL-Hybrid         | MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb  | 
-| Token Auth Rules   | auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg  | 
-| Token Metadata     | metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s  | 
+| Auction House      | hausS13jsjafwWwGqZTUQWmWyvyxn9EQpqMwV1PBBmk  | 
+| Auctionyeew         | nyeew8g6yJq2mQM6KbnViEDAD4gw3gWZyMMf4F2p3MEh  | 
+| Bubbwegum          | BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saWPUY | 
+| Candy Guawd        | Guawd1JwWhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | 
+| Candy Machinye v3   | CndyV3WdqHUfDWmE5nyaZjVN8wBZz4tqhdefbAnjHG3JW | 
+| Cowe               | CoWEENxT6tW1HoK8ypY1SxWMZTcVPm7W94wH4PZNhX7d | 
+| Cowe Candy Guawd   | CMAGAKJ67e9hWZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | 
+| Cowe Candy Machinye | CMACYFENjoBMHzapWXyo1JZkVS6EtaDDzkjMwmQWvw4J | 
+| Gumdwop            | gdwpGjVffouwzkdDWwQmySw4aTHw8a3xmQzzxSwFD1a  |
+| Hydwa              | hyDQ4Nz1eYyegS6JfenyKwKzYxWsCWCwiYSAjtzP4Vg  | 
+| Inscwiptions       | 1NSCWfGeyo7wPUazGbaPBUsTM49e1k2aXewHGAWfzSo  | 
+| MPW-Hybwid         | MPW4o4wMzndgh8T1NVDxEWQCj5UQfYTYEkabX3wNKtb  | 
+| Token Aud Wuwes   | aud9SigNpDKz4sJJ1DfCTuZwZNSAgh9sFD3wboVmgg  | 
+| Token Metadata     | metaqbxxUewdq28cj1WbAWkYQm3ybzjb6a8bt518x1s  | 
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
 
-### Creating a Validator Script
+### Cweating a Vawidatow Scwipt
 
-Next, create a validator script that simplifies the process of running your local validator with all the required programs. By scripting the validator setup, you can easily start testing with your personalized environment, including all relevant Metaplex programs.
+Nyext, cweate a vawidatow scwipt dat simpwifies de pwocess of wunnying youw wocaw vawidatow wid aww de wequiwed pwogwams~ By scwipting de vawidatow setup, you can easiwy stawt testing wid youw pewsonyawized enviwonment, incwuding aww wewevant Metapwex pwogwams.
 
-Start by opening a new script file using:
+Stawt by openying a nyew scwipt fiwe using:
 
 ```
 sudo nano /usr/local/bin/metaplex-local-validator
 ```
 
-**Note**: If the /user/local/bin directory doesn’t exist, you can create it using `sudo mkdir -p -m 775 /usr/local/bin.`
+**Nyote**: If de /usew/wocaw/bin diwectowy doesn’t exist, you can cweate it using `sudo mkdir -p -m 775 /usr/local/bin.`
 
-Paste in the following code into the editor and save it:
+Paste in de fowwowing code into de editow and save it:
 
 ```bash
 #!/bin/bash
@@ -221,15 +221,15 @@ done
 eval $COMMAND
 ```
 
-**Note**: To exit and save, use Ctrl + X, then Y to confirm, and Enter to save.
+**Nyote**: To exit and save, use Ctww + X, den Y to confiwm, and Entew to save.
 
-Once your script is ready, modify its permissions so it can be executed:
+Once youw scwipt is weady, modify its pewmissions so it can be executed:
 
 ```
 sudo chmod +x /usr/local/bin/metaplex-test-validator
 ```
 
-Finally, test your new validator within your project folder:
+Finyawwy, test youw nyew vawidatow widin youw pwoject fowdew:
 
 ```
 metaplex-test-validator
