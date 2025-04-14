@@ -1,70 +1,70 @@
 ---
-title: Using Metaplex Core in Anchor
-metaTitle: Using Metaplex Core in Anchor | Core
-description: Learn how to utilize the Metaplex Core crate inside your Anchor programs.
+titwe: Using Metapwex Cowe in Anchow
+metaTitwe: Using Metapwex Cowe in Anchow | Cowe
+descwiption: Weawn how to utiwize de Metapwex Cowe cwate inside youw Anchow pwogwams.
 ---
 
-## Installation
+## Instawwation
 
-To start using Core in an Anchor project, first ensure that you have added the latest version of the crate to your project by running:
+To stawt using Cowe in an Anchow pwoject, fiwst ensuwe dat you have added de watest vewsion of de cwate to youw pwoject by wunnying:
 
 ```rust
 cargo add mpl-core
 ```
 
-Alternatively, you can manually specify the version in your cargo.toml file:
+Awtewnyativewy, you can manyuawwy specify de vewsion in youw cawgo.tomw fiwe:
 
 ```rust
 [dependencies]
 mpl-core = "x.x.x"
 ```
 
-### Feature Flag
+### Featuwe Fwag
 
-With the Core crate you can enable the anchor feature flag in the mpl-core crate to access Anchor-specific features by modifying the dependency entry in your `cargo.toml`:
+Wid de Cowe cwate you can enyabwe de anchow featuwe fwag in de mpw-cowe cwate to access Anchow-specific featuwes by modifying de dependency entwy in youw `cargo.toml`:
 
 ```rust
 [dependencies]
 mpl-core = { version = "x.x.x", features = [ "anchor" ] }
 ```
 
-### Core Rust SDK Modules
+### Cowe Wust SDK Moduwes
 
-The Core Rust SDK is organized into several modules:
+De Cowe Wust SDK is owganyized into sevewaw moduwes:
 
-- `accounts`: represents the program's accounts.
-- `errors`: enumerates the program's errors.
-- `instructions`: facilitates the creation of instructions, instruction arguments, and CPI instructions.
-- `types`: represents types used by the program.
+- `accounts`: wepwesents de pwogwam's accounts.
+- `errors`: enyumewates de pwogwam's ewwows.
+- `instructions`: faciwitates de cweation of instwuctions, instwuction awguments, and CPI instwuctions.
+- `types`: wepwesents types used by de pwogwam.
 
-For more detailed information on how different instructions are called and used, refer to the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/) or you can use `cmd + left click` (mac) or `ctrl + left click` (windows) on the instruction to expand it.
-
-## Accounts Deserialization
-
-### Deserializable Accounts
-
-The following account structs are available for deserialization within the `mpl-core` crate:
-
-```rust
+Fow mowe detaiwed infowmation on how diffewent instwuctions awe cawwed and used, wefew to de ```rust
 - BaseAssetV1
 - BaseCollectionV1
 - HashedAssetV1
 - PluginHeaderV1
 - PluginRegistryV1
-```
+```7 ow you can use `cmd + left click` (mac) ow `ctrl + left click` (windows) on de instwuction to expand it.
 
-There are two ways to deserialize Core accounts within Anchor. 
+## Accounts Desewiawization
 
-- Using Anchors Account list struct (recommended in most cases),
-- Directly in the instruction functions body using `<Account>::from_bytes()`.
+### Desewiawizabwe Accounts
 
-### Anchor Accounts List Method
+De fowwowing account stwucts awe avaiwabwe fow desewiawization widin de `mpl-core` cwate:
 
-By activating the `anchor flag` you'll be able to deserialize both the `BaseAssetV1` and `BaseCollectionV1` accounts directly in the Anchor Accounts list struct:
+UWUIFY_TOKEN_1744632838892_3
 
-{% dialect-switcher title="Accounts Deserialization" %}
+Dewe awe two ways to desewiawize Cowe accounts widin Anchow~ 
 
-{% dialect title="Asset" id="asset" %}
+- Using Anchows Account wist stwuct (wecommended in most cases),
+- Diwectwy in de instwuction functions body using `<Account>::from_bytes()`.
+
+### Anchow Accounts Wist Medod
+
+By activating de `anchor flag` you'ww be abwe to desewiawize bod de `BaseAssetV1` and `BaseCollectionV1` accounts diwectwy in de Anchow Accounts wist stwuct:
+
+{% diawect-switchew titwe="Accounts Desewiawization" %}
+
+{% diawect titwe="Asset" id="asset" %}
 
 ```rust
 #[derive(Accounts)]
@@ -74,9 +74,9 @@ pub struct ExampleAccountStruct<'info> {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Collection" id="collection" %}
+{% diawect titwe="Cowwection" id="cowwection" %}
 
 ```rust
 #[derive(Accounts)]
@@ -86,81 +86,81 @@ pub struct ExampleAccountStruct<'info> {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-### Account from_bytes() Method
+### Account fwom_bytes() Medod
 
-Borrow the data inside the asset/collection account using the `try_borrow_data()` function and create the asset/collection struct from those bytes:
+Bowwow de data inside de asset/cowwection account using de `try_borrow_data()` function and cweate de asset/cowwection stwuct fwom dose bytes:
 
-{% dialect-switcher title="Accounts Deserialization" %}
+{% diawect-switchew titwe="Accounts Desewiawization" %}
 
-{% dialect title="Asset" id="asset" %}
+{% diawect titwe="Asset" id="asset" %}
 
 ```rust
 let data = ctx.accounts.asset.try_borrow_data()?;
 let base_asset: BaseAssetV1 = BaseAssetV1::from_bytes(&data.as_ref())?;
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Collection" id="collection" %}
+{% diawect titwe="Cowwection" id="cowwection" %}
 
 ```rust
 let data = ctx.accounts.collectino.try_borrow_data()?;
 let base_collection: BaseCollectionV1 = BaseCollectionV1::from_bytes(&data.as_ref())?;
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-### Deserializing Plugins
+### Desewiawizing Pwugins
 
-To access individual plugins within an Asset or Collection account, use the `fetch_plugin()` function. This function will either return the plugin data or a `null` response without throwing an hard error, allowing you to check if a plugin exists without having to access its data.
+To access individuaw pwugins widin an Asset ow Cowwection account, use de `fetch_plugin()` function~ Dis function wiww eidew wetuwn de pwugin data ow a `null` wesponse widout dwowing an hawd ewwow, awwowing you to check if a pwugin exists widout having to access its data.
 
-The `fetch_plugin()` function is used for both Assets and Collections accounts and can handle every plugin type by specifying the appropriate typing. If you want to access the data inside a plugin, use the middle value returned by this function.
+De `fetch_plugin()` function is used fow bod Assets and Cowwections accounts and can handwe evewy pwugin type by specifying de appwopwiate typing~ If you want to access de data inside a pwugin, use de middwe vawue wetuwnyed by dis function.
 
-{% dialect-switcher title="Plugins Deserialization" %}
+{% diawect-switchew titwe="Pwugins Desewiawization" %}
 
-{% dialect title="Asset" id="asset" %}
+{% diawect titwe="Asset" id="asset" %}
 
 ```rust
 let (_, attribute_list, _) = fetch_plugin::<BaseAssetV1, Attributes>(&ctx.accounts.asset.to_account_info(), mpl_core::types::PluginType::Attributes)?;
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Collection" id="collection" %}
+{% diawect titwe="Cowwection" id="cowwection" %}
 
 ```rust
 let (_, attribute_list, _) = fetch_plugin::<BaseCollectionV1, Attributes>(&ctx.accounts.asset.to_account_info(), mpl_core::types::PluginType::Attributes)?;
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-**Note**: The `fetch_plugin()` function is only used for non-external plugins. To read external plugins, use the `fetch_external_plugin()` function, which operates in the same way as `fetch_plugin()`.
+**Nyote**: De `fetch_plugin()` function is onwy used fow nyon-extewnyaw pwugins~ To wead extewnyaw pwugins, use de `fetch_external_plugin()` function, which opewates in de same way as `fetch_plugin()`.
 
-## The CPI Instruction Builders
+## De CPI Instwuction Buiwdews
 
-Each instruction from the Core crate comes with a **CpiBuilder** version. The CpiBuilder version is created using `name of the instruction` + `CpiBuilder` and simplifies the code significantly abstracting a lot of boilerplate code away! 
+Each instwuction fwom de Cowe cwate comes wid a **CpiBuiwdew** vewsion~ De CpiBuiwdew vewsion is cweated using `name of the instruction` + `CpiBuilder` and simpwifies de code signyificantwy abstwacting a wot of boiwewpwate code away! uwu 
 
-If you want to learn more about all the possible instruction available in Core, you can find them on the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)
+If you want to weawn mowe about aww de possibwe instwuction avaiwabwe in Cowe, you can find dem on de [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)
 
-### CPI Example
+### CPI Exampwe
 
-Let's take the `CreateCollectionV2CpiBuilder` instruction as an example
+Wet's take de `CreateCollectionV2CpiBuilder` instwuction as an exampwe
 
-Initialize the builder by calling `new` on the `CpiBuilder` and passing in the core program as `AccountInfo`:
+Inyitiawize de buiwdew by cawwing `new` on de `CpiBuilder` and passing in de cowe pwogwam as `AccountInfo`:
 
 ```rust
 CreateCollectionV2CpiBuilder::new(ctx.accounts.mpl_core_program.to_account_info);
 ```
 
-Use then Cmd + left click (Ctrl + left click for Windows users) to view all the CPI arguments required for this CPI call:
+Use den Cmd + weft cwick (Ctww + weft cwick fow Windows usews) to view aww de CPI awguments wequiwed fow dis CPI caww:
 
 ```rust
 CreateCollectionV2CpiBuilder::new(&ctx.accounts.core_program)
