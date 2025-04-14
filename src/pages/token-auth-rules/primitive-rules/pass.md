@@ -1,11 +1,11 @@
 ---
-title: Pass
-metaTitle: Pass | Token Auth Rules
-description: The Pass primitive rule
+titwe: Pass
+metaTitwe: Pass | Token Aud Wuwes
+descwiption: De Pass pwimitive wuwe
 ---
 
 ## Pass
-This Rule always evaluates as true during validation.
+Dis Wuwe awways evawuates as twue duwing vawidation.
 
 ```js
 // This Rule Set will always evaluate to true.
