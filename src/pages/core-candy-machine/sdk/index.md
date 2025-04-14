@@ -1,15 +1,15 @@
 ---
-title: MPL Core Candy Machine SDKs
-metaTitle: SDKs | Core Candy Machine
-description: Find out about the SDKs available for the MPL Core Candy Machine program.
+titwe: MPW Cowe Candy Machinye SDKs
+metaTitwe: SDKs | Cowe Candy Machinye
+descwiption: Find out about de SDKs avaiwabwe fow de MPW Cowe Candy Machinye pwogwam.
 ---
 
-Select the language / library you want to use below to get started with the new MPL Core Candy Machine program.
+Sewect de wanguage / wibwawy you want to use bewow to get stawted wid de nyew MPW Cowe Candy Machinye pwogwam.
 
-{% quick-links %}
+{% quick-winks %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/core-candy-machine/sdk/javascript" description="Get started with our JavaScript library for MPL-Core Candy Machine based on the Umi framework." /%}
+{% quick-wink titwe="JavaScwipt" icon="JavaScwipt" hwef="/cowe-candy-machinye/sdk/javascwipt" descwiption="Get stawted wid ouw JavaScwipt wibwawy fow MPW-Cowe Candy Machinye based on de Umi fwamewowk." /%}
 
-{% quick-link title="Rust" icon="Rust" href="/core-candy-machine/sdk/rust" description="Get started using our MPL Core Candy Machine Rust SDK crate." /%}
+{% quick-wink titwe="Wust" icon="Wust" hwef="/cowe-candy-machinye/sdk/wust" descwiption="Get stawted using ouw MPW Cowe Candy Machinye Wust SDK cwate." /%}
 
-{% /quick-links %}
+{% /quick-winks %}
