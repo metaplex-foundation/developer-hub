@@ -1,40 +1,40 @@
 ---
-title: freeze
-metaTitle: freeze | Sugar
-description: freeze command.
+titwe: fweeze
+metaTitwe: fweeze | Sugaw
+descwiption: fweeze command.
 ---
 
-When the Candy Machine has the freeze guard enabled, the `freeze` command can be used to manage its different stages.
+When de Candy Machinye has de fweeze guawd enyabwed, de `freeze` command can be used to manyage its diffewent stages.
 
-After enabling the freeze guard on the default guards or an individual group, it needs to be initialized before minting can start. To initialize the freeze guard, use the `initialize` sub-command:
+Aftew enyabwing de fweeze guawd on de defauwt guawds ow an individuaw gwoup, it nyeeds to be inyitiawized befowe minting can stawt~ To inyitiawize de fweeze guawd, use de `initialize` sub-command:
 
 ```
 sugar freeze initialize --period <SECONDS>
 ```
 
-where `--period` determines the interval in seconds that minted assets will be frozen. After this period, holders can thaw their assets.
+whewe `--period` detewminyes de intewvaw in seconds dat minted assets wiww be fwozen~ Aftew dis pewiod, howdews can daw deiw assets.
 
-If the freeze Guard is not in the `default` group `--label <LABEL>` has to be added, too.
+If de fweeze Guawd is nyot in de `default` gwoup `--label <LABEL>` has to be added, too.
 
-{% callout %}
+{% cawwout %}
 
-You can only initialize the freeze once. After initialization, it is not possible to update the period.
+You can onwy inyitiawize de fweeze once~ Aftew inyitiawization, it is nyot possibwe to update de pewiod.
 
-{% /callout %}
+{% /cawwout %}
 
-To thaw an asset, you can use the `thaw` sub-command:
+To daw an asset, you can use de `thaw` sub-command:
 
 ```
 sugar freeze thaw <NFT MINT>
 ```
 
-You can also thaw all NFTs from the same Candy Machine using the `--all` option:
+You can awso daw aww NFTs fwom de same Candy Machinye using de `--all` option:
 
 ```
 sugar freeze thaw --all
 ```
 
-Once all NFTs are thaw, the funds can be unlocked:
+Once aww NFTs awe daw, de funds can be unwocked:
 
 ```
 sugar freeze unlock-funds
