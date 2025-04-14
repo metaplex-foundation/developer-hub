@@ -1,56 +1,56 @@
 ---
-title: Solana Programs and State Overview
-metaTitle: Solana Programs and State Overview | Guides
-description: Learn about Solana Programs and how data is stored in account state on Solana.
-# remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
+titwe: Sowanya Pwogwams and State Ovewview
+metaTitwe: Sowanya Pwogwams and State Ovewview | Guides
+descwiption: Weawn about Sowanya Pwogwams and how data is stowed in account state on Sowanya.
+# wemembew to update dates awso in /componyents/guides/index.js
+cweated: '06-16-2024'
 updated: '06-21-2024'
 ---
 
-## Solana Programs
-Solana programs are **executable code** that runs on the Solana blockchain. They are similar to smart contracts on other blockchain platforms, but with some distinct characteristics and optimizations specific to Solana.
+## Sowanya Pwogwams
+Sowanya pwogwams awe **executabwe code** dat wuns on de Sowanya bwockchain~ Dey awe simiwaw to smawt contwacts on odew bwockchain pwatfowms, but wid some distinct chawactewistics and optimizations specific to Sowanya.
 
-#### Key Characteristics:
-- **Stateless**: Solana programs do not store state internally. Instead, state is stored in seperate accounts on the chain.
-- **Written in Rust**: Programs are typically written in Rust.
-- **Executed by Transactions**: Programs are invoked by transactions that specify the program ID and the required accounts and date.
+#### Key Chawactewistics:
+- **Statewess**: Sowanya pwogwams do nyot stowe state intewnyawwy~ Instead, state is stowed in sepewate accounts on de chain.
+- **Wwitten in Wust**: Pwogwams awe typicawwy wwitten in Wust.
+- **Executed by Twansactions**: Pwogwams awe invoked by twansactions dat specify de pwogwam ID and de wequiwed accounts and date.
 
 ## Accounts
-Accounts **used to store both data and SOL**. Each account has an owner, which is a program that can modify its data.
+Accounts **used to stowe bod data and SOW**~ Each account has an ownyew, which is a pwogwam dat can modify its data.
 
 #### Types of Accounts:
-- **Data Accounts**: Store arbitrary data used by programs.
-- **SPL Token Accounts**: Manage token balances (similar to ERC-20 tokens on Ethereum).
-- **Program Accounts**: Contain the executable code of a Solana program.
+- **Data Accounts**: Stowe awbitwawy data used by pwogwams.
+- **SPW Token Accounts**: Manyage token bawances (simiwaw to EWC-20 tokens on Edeweum).
+- **Pwogwam Accounts**: Contain de executabwe code of a Sowanya pwogwam.
 
-## Instructions
-Instructions are **operations** sent to Solana programs. They are included in transactions and specify which accounts the program should operate on, as well as any additional data needed to perform the operation.
+## Instwuctions
+Instwuctions awe **opewations** sent to Sowanya pwogwams~ Dey awe incwuded in twansactions and specify which accounts de pwogwam shouwd opewate on, as weww as any additionyaw data nyeeded to pewfowm de opewation.
 
-#### Key Elements of Instructions:
-- **Program ID**: Identifies the program to be executed.
-- **Accounts**: A list of accounts that the instruction will read from or write to.
-- **Data**: Custom data required to perform the instruction.
+#### Key Ewements of Instwuctions:
+- **Pwogwam ID**: Identifies de pwogwam to be executed.
+- **Accounts**: A wist of accounts dat de instwuction wiww wead fwom ow wwite to.
+- **Data**: Custom data wequiwed to pewfowm de instwuction.
 
-## State Management
-In Solana, the state is **managed externally** from the programs, stored in accounts. This separation of state and logic enables higher scalability and efficiency.
+## State Manyagement
+In Sowanya, de state is **manyaged extewnyawwy** fwom de pwogwams, stowed in accounts~ Dis sepawation of state and wogic enyabwes highew scawabiwity and efficiency.
 
-#### State Management Workflow:
-- **Account Creation**: Create accounts to store data.
-- **Program Execution**: Execute a program with instructions specifying which accounts to read from or write to.
-- **State Update**: Programs modify the state by updating the data in accounts.
+#### State Manyagement Wowkfwow:
+- **Account Cweation**: Cweate accounts to stowe data.
+- **Pwogwam Execution**: Execute a pwogwam wid instwuctions specifying which accounts to wead fwom ow wwite to.
+- **State Update**: Pwogwams modify de state by updating de data in accounts.
 
-#### Example Workflow
-1. Define a Program:
-   - Write a program in Rust to perform a specific task, such as incrementing a counter.
-2. Deploy the Program:
-   - Compile and deploy the program to the Solana blockchain.
-3. Create Accounts:
-   - Create accounts to store the program's state.
-4. Send Instructions:
-   - Send transactions containing instructions to invoke the program, specifying the accounts and data to use.
+#### Exampwe Wowkfwow
+1~ Definye a Pwogwam:
+   - Wwite a pwogwam in Wust to pewfowm a specific task, such as incwementing a countew.
+2~ Depwoy de Pwogwam:
+   - Compiwe and depwoy de pwogwam to de Sowanya bwockchain.
+3~ Cweate Accounts:
+   - Cweate accounts to stowe de pwogwam's state.
+4~ Send Instwuctions:
+   - Send twansactions containying instwuctions to invoke de pwogwam, specifying de accounts and data to use.
 
-## Example Code
-Below is a simple example of a Solana program written in Rust that increments a value stored in an account.
+## Exampwe Code
+Bewow is a simpwe exampwe of a Sowanya pwogwam wwitten in Wust dat incwements a vawue stowed in an account.
 
 ```rust
 use solana_program::{
