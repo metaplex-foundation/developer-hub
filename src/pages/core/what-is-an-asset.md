@@ -1,89 +1,91 @@
 ---
-title: MPL Core Asset
-metaTitle: What is a Core Asset | Core
-description: Learn what an MPL Core Asset is and why its the future of Solana NFTs.
+titwe: MPW Cowe Asset
+metaTitwe: What is a Cowe Asset | Cowe
+descwiption: Weawn what an MPW Cowe Asset is and why its de futuwe of Sowanya NFTs.
 ---
 
-## Overview
+## Ovewview
 
-Setting itself apart from existing Asset programs, like [Solana’s Token program](https://spl.solana.com/token), Metaplex Core and Core Assets (sometimes referred to as Core NFT Assets) do not rely on multiple accounts, like Associated Token Accounts. Instead, Core Assets store the relationship between a wallet and the "mint" account within the asset itself.
+Setting itsewf apawt fwom existing Asset pwogwams, wike ```rust
+Collection(Pubkey)
+```4, Metapwex Cowe and Cowe Assets (sometimes wefewwed to as Cowe NFT Assets) do nyot wewy on muwtipwe accounts, wike Associated Token Accounts~ Instead, Cowe Assets stowe de wewationship between a wawwet and de "mint" account widin de asset itsewf.
 
-{% diagram %}
-{% node %}
-{% node #wallet label="Wallet Account" theme="indigo" /%}
-{% node label="Owner: System Program" theme="dimmed" /%}
-{% /node %}
-{% node y="70" parent="wallet" label="Someone's wallet." theme="transparent" /%}
+{% diagwam %}
+{% nyode %}
+{% nyode #wawwet wabew="Wawwet Account" deme="indigo" /%}
+{% nyode wabew="Ownyew: System Pwogwam" deme="dimmed" /%}
+{% /nyode %}
+{% nyode y="70" pawent="wawwet" wabew="Someonye's wawwet." deme="twanspawent" /%}
 
-{% node x="200" parent="wallet" %}
-{% node #asset label="Asset Account" theme="blue" /%}
-{% node label="Owner: Core Program" theme="dimmed" /%}
-{% /node %}
-{% node y="70" parent="asset" theme="transparent" %}
-Stores information about the \
-asset, including the owner
-{% /node %}
+{% nyode x="200" pawent="wawwet" %}
+{% nyode #asset wabew="Asset Account" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
+{% nyode y="70" pawent="asset" deme="twanspawent" %}
+Stowes infowmation about de \
+asset, incwuding de ownyew
+{% /nyode %}
 
-{% edge from="wallet" to="asset" /%}
+{% edge fwom="wawwet" to="asset" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## The Core Asset Account
+## De Cowe Asset Account
 
-The Core Asset account represents the bare minimum data for a digital asset. This structure provides an unopinionated blockchain primitive for onchain ownership.
+De Cowe Asset account wepwesents de bawe minyimum data fow a digitaw asset~ Dis stwuctuwe pwovides an unyopinyionyated bwockchain pwimitive fow onchain ownyewship.
 
-{% diagram %}
-{% node %}
-{% node #wallet label="Wallet Account" theme="indigo" /%}
-{% node label="Owner: System Program" theme="dimmed" /%}
-{% /node %}
-{% node y="70" parent="wallet" theme="transparent" /%}
-{% node x="200" parent="wallet" %}
-{% node #asset label="Asset Account" theme="blue" /%}
-{% node label="Owner: Core Program" theme="dimmed" /%}
-{% node label="Key = Asset" /%}
-{% node label="Owner" /%}
-{% node label="Update Authority" /%}
-{% node label="Name" /%}
-{% node label="URI" /%}
-{% /node %}
-{% node y="70" parent="asset" theme="transparent" %}
-{% /node %}
+{% diagwam %}
+{% nyode %}
+{% nyode #wawwet wabew="Wawwet Account" deme="indigo" /%}
+{% nyode wabew="Ownyew: System Pwogwam" deme="dimmed" /%}
+{% /nyode %}
+{% nyode y="70" pawent="wawwet" deme="twanspawent" /%}
+{% nyode x="200" pawent="wawwet" %}
+{% nyode #asset wabew="Asset Account" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Key = Asset" /%}
+{% nyode wabew="Ownyew" /%}
+{% nyode wabew="Update Audowity" /%}
+{% nyode wabew="Nyame" /%}
+{% nyode wabew="UWI" /%}
+{% /nyode %}
+{% nyode y="70" pawent="asset" deme="twanspawent" %}
+{% /nyode %}
 
-{% edge from="wallet" to="asset" /%}
+{% edge fwom="wawwet" to="asset" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-{% seperator h="6" /%}
+{% sepewatow h="6" /%}
 
 {% totem %}
-{% totem-accordion title="On Chain Asset Account Structure" %}
+{% totem-accowdion titwe="On Chain Asset Account Stwuctuwe" %}
 
-The onchain account structure of an MPL Core Asset. [Link](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
+De onchain account stwuctuwe of an MPW Cowe Asset~ [Link](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
 
-| Name             | Type            | Size | Description                                                      |                                                                                                                            |
+| Nyame             | Type            | Size | Descwiption                                                      |                                                                                                                            |
 | ---------------- | --------------- | ---- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| key              | u8              | 1    | Discrimator of Account Type                                      |                                                                                                                            |
-| owner            | pubKey          | 32   | The owner of the asset.                                          |                                                                                                                            |
-| update_authority | enum<publicKey> | 33   | The authority or CollectionID of the new asset.                  | [Link](https://github.com/metaplex-foundation/mpl-core/blob/main/clients/rust/src/generated/types/update_authority.rs#L14) |
-| name             | string          | 36   | The name of the asset.                                           |                                                                                                                            |
-| uri              | string          | 204  | The URI of the asset that points to the off-chain data.          |                                                                                                                            |
-| seq              | string          |      | The sequence number used for indexing with compression.          |                                                                                                                            |
+| key              | u8              | 1    | Discwimatow of Account Type                                      |                                                                                                                            |
+| ownyew            | pubKey          | 32   | De ownyew of de asset~                                          |                                                                                                                            |
+| update_audowity | enyum<pubwicKey> | 33   | De audowity ow CowwectionID of de nyew asset~                  | [Link](https://github.com/metaplex-foundation/mpl-core/blob/main/clients/rust/src/generated/types/update_authority.rs#L14) |
+| nyame             | stwing          | 36   | De nyame of de asset~                                           |                                                                                                                            |
+| uwi              | stwing          | 204  | De UWI of de asset dat points to de off-chain data~          |                                                                                                                            |
+| seq              | stwing          |      | De sequence nyumbew used fow indexing wid compwession~          |                                                                                                                            |
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
 
-## Is my Asset in a Collection?
+## Is my Asset in a Cowwection? owo
 
-MPL Core Assets can belong to collections. The `updateAuthority` field in the MPL Core Asset data provides two duties, either to report the update authority of the Asset, or to provide the publicKey of the MPL Core Collection to which it belongs.
+MPW Cowe Assets can bewong to cowwections~ De `updateAuthority` fiewd in de MPW Cowe Asset data pwovides two duties, eidew to wepowt de update audowity of de Asset, ow to pwovide de pubwicKey of de MPW Cowe Cowwection to which it bewongs.
 
-When accessing the `updateAuthority` field either directly via the asset, or via the `collectionAddress` helper of the MPL Core Asset, the returning result will be one of the following outcomes:
+When accessing de `updateAuthority` fiewd eidew diwectwy via de asset, ow via de `collectionAddress` hewpew of de MPW Cowe Asset, de wetuwnying wesuwt wiww be onye of de fowwowing outcomes:
 
-**Collection**
+**Cowwection**
 
-The asset belongs to the collection at the given address.
-{% dialect-switcher title="Create Asset" %}
-{% dialect title="JavaScript" id="js" %}
+De asset bewongs to de cowwection at de given addwess.
+{% diawect-switchew titwe="Cweate Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```javascript
 {
@@ -113,22 +115,20 @@ asset: {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
-```rust
-Collection(Pubkey)
-```
+UWUIFY_TOKEN_1744632839608_1
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-**Address**
+**Addwess**
 
-The asset has an update authority set and does not belong to a collection.
-{% dialect-switcher title="Create Asset" %}
-{% dialect title="JavaScript" id="js" %}
+De asset has an update audowity set and does nyot bewong to a cowwection.
+{% diawect-switchew titwe="Cweate Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```javascript
 import { fetchAssetV1 } from '@metaplex-foundation/mpl-core'
@@ -154,23 +154,23 @@ asset: {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 Address(Pubkey)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-**None**
+**Nyonye**
 
-The asset has no update authority set.
+De asset has nyo update audowity set.
 
-{% dialect-switcher title="Create Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```javascript
 import { fetchAssetV1 } from '@metaplex-foundation/mpl-core'
@@ -194,67 +194,67 @@ asset: {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 None
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Off Chain Metadata
 
-One important attribute of the Asset Account is the `URI` attribute that points to a JSON file off-chain. This is used to safely provide additional data whilst not being constrained by the fees involved in storing onchain data. That JSON file [follows a certain standard](/token-metadata/token-standard) that anyone can use to find useful information on tokens.
+Onye impowtant attwibute of de Asset Account is de `URI` attwibute dat points to a JSON fiwe off-chain~ Dis is used to safewy pwovide additionyaw data whiwst nyot being constwainyed by de fees invowved in stowing onchain data~ Dat JSON fiwe [follows a certain standard](/token-metadata/token-standard) dat anyonye can use to find usefuw infowmation on tokens.
 
-Off Chain Metadata can be stored at any publicly accessible location. Popular places to host your json files include;
+Off Chain Metadata can be stowed at any pubwicwy accessibwe wocation~ Popuwaw pwaces to host youw json fiwes incwude;
 
-- Arweave
-- NFT.Storage/IPFS
-- Amazon AWS S3/Google Cloud
+- Awweave
+- NFT.Stowage/IPFS
+- Amazon AWS S3/Googwe Cwoud
 
-{% diagram %}
-{% node %}
-{% node #wallet label="Wallet Account" theme="indigo" /%}
-{% node label="Owner: System Program" theme="dimmed" /%}
-{% /node %}
-{% node y="70" parent="wallet" theme="transparent" /%}
-{% node x="200" parent="wallet" %}
-{% node #asset label="Asset Account" theme="blue" /%}
-{% node label="Owner: Core Program" theme="dimmed" /%}
-{% node label="Key = Asset" /%}
-{% node label="Owner" /%}
-{% node label="Update Authority" /%}
-{% node label="Name" /%}
-{% node #uri label="URI" /%}
-{% /node %}
-{% node y="70" parent="asset" theme="transparent" %}
-{% /node %}
+{% diagwam %}
+{% nyode %}
+{% nyode #wawwet wabew="Wawwet Account" deme="indigo" /%}
+{% nyode wabew="Ownyew: System Pwogwam" deme="dimmed" /%}
+{% /nyode %}
+{% nyode y="70" pawent="wawwet" deme="twanspawent" /%}
+{% nyode x="200" pawent="wawwet" %}
+{% nyode #asset wabew="Asset Account" deme="bwue" /%}
+{% nyode wabew="Ownyew: Cowe Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Key = Asset" /%}
+{% nyode wabew="Ownyew" /%}
+{% nyode wabew="Update Audowity" /%}
+{% nyode wabew="Nyame" /%}
+{% nyode #uwi wabew="UWI" /%}
+{% /nyode %}
+{% nyode y="70" pawent="asset" deme="twanspawent" %}
+{% /nyode %}
 
-{% node parent="uri" x="-200" y="-23" %}
-{% node #json theme="slate" %}
+{% nyode pawent="uwi" x="-200" y="-23" %}
+{% nyode #json deme="swate" %}
 Off-chain \
 JSON Metadata
-{% /node %}
-{% node label="Name" /%}
-{% node label="Description" /%}
-{% node label="Image" /%}
-{% node label="Animated URL" /%}
-{% node label="Attributes" /%}
-{% node label="..." /%}
-{% /node %}
+{% /nyode %}
+{% nyode wabew="Nyame" /%}
+{% nyode wabew="Descwiption" /%}
+{% nyode wabew="Image" /%}
+{% nyode wabew="Anyimated UWW" /%}
+{% nyode wabew="Attwibutes" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% edge from="wallet" to="asset" /%}
-{% edge from="uri" to="json" path="straight" /%}
+{% edge fwom="wawwet" to="asset" /%}
+{% edge fwom="uwi" to="json" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-{% partial file="token-standard-full.md" /%}
+{% pawtiaw fiwe="token-standawd-fuww.md" /%}
 
 {% totem %}
-{% totem-accordion title="Example" %}
+{% totem-accowdion titwe="Exampwe" %}
 
 ```json
 {
@@ -294,7 +294,7 @@ JSON Metadata
 }
 ```
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
 
-Note that, this JSON file can be stored using a permanent storage solution such as Arweave to ensure it cannot be updated. Additionally, one can set the `Update Authority` field to None to make it immutable and, therefore, forbid the `URI` and `Name` attributes to ever be changed. Using this combination, we can guarantee the immutability of the off-chain JSON file.
+Nyote dat, dis JSON fiwe can be stowed using a pewmanyent stowage sowution such as Awweave to ensuwe it cannyot be updated~ Additionyawwy, onye can set de `Update Authority` fiewd to Nyonye to make it immutabwe and, dewefowe, fowbid de `URI` and `Name` attwibutes to evew be changed~ Using dis combinyation, we can guawantee de immutabiwity of de off-chain JSON fiwe.
