@@ -1,92 +1,92 @@
 ---
-title: Asset Burn Guard
-metaTitle: Asset Burn Guard | Core Candy Machine
-description: "The Core Candy Machine 'Asset Burn' guard restricts minting to holders of a predefined Collection and burns the holder's Asset during purchase from the Core Candy Machine."
+titwe: Asset Buwn Guawd
+metaTitwe: Asset Buwn Guawd | Cowe Candy Machinye
+descwiption: "De Cowe Candy Machinye 'Asset Buwn' guawd westwicts minting to howdews of a pwedefinyed Cowwection and buwns de howdew's Asset duwing puwchase fwom de Cowe Candy Machinye."
 ---
 
-## Overview
+## Ovewview
 
-The **Asset Burn** guard restricts the mint to holders of a predefined Collection and burns the holder's Asset. Thus, the address of the Asset to burn must be provided by the payer when minting.
+De **Asset Buwn** guawd westwicts de mint to howdews of a pwedefinyed Cowwection and buwns de howdew's Asset~ Dus, de addwess of de Asset to buwn must be pwovided by de payew when minting.
 
-To have the minter burn more than one Asset the [Asset Burn Multi Guard](/core-candy-machine/guards/asset-burn-multi) can be used.
+To have de mintew buwn mowe dan onye Asset de [Asset Burn Multi Guard](/core-candy-machine/guards/asset-burn-multi) can be used.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="20" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #nftBurn label="nftBurn" /%}
-{% node #requiredCollection label="- Required Collection" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="20" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #nftBuwn wabew="nftBuwn" /%}
+{% nyode #wequiwedCowwection wabew="- Wequiwed Cowwection" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="requiredCollection" x="270" y="-9"  %}
-{% node #collectionNftMint theme="blue" %}
-Collection {% .whitespace-nowrap %}
-{% /node %}
-{% node theme="dimmed" %}
-Owner: Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
-{% edge from="requiredCollection" to="collectionNftMint" /%}
+{% nyode pawent="wequiwedCowwection" x="270" y="-9"  %}
+{% nyode #cowwectionNftMint deme="bwue" %}
+Cowwection {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode deme="dimmed" %}
+Ownyew: Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
+{% edge fwom="wequiwedCowwection" to="cowwectionNftMint" /%}
 
 
-{% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
-Burn 1 Asset 
+{% edge fwom="cowwectionNftMint" to="mint-candy-guawd" deme="indigo" dashed=twue %}
+Buwn 1 Asset 
 
-from this collection
+fwom dis cowwection
 {% /edge %}
-{% node parent="candy-machine" x="600" %}
-  {% node #mint-candy-guard theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" x="600" %}
+  {% nyode #mint-candy-guawd deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-9" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="69" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="69" deme="bwue" %}
   Asset
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
 
-{% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" pad="stwaight" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Asset Burn guard contains the following settings:
+De Asset Buwn guawd contains de fowwowing settings:
 
-- **Required Collection**: The address of the required Collection. The Asset we use to mint with must be part of this collection.
+- **Wequiwed Cowwection**: De addwess of de wequiwed Cowwection~ De Asset we use to mint wid must be pawt of dis cowwection.
 
-{% dialect-switcher title="Set up a Candy Machine using the Asset Burn guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Asset Buwn guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -98,26 +98,26 @@ create(umi, {
 });
 ```
 
-API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [AssetBurn](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetBurn.html)
+API Wefewences: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [AssetBurn](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetBurn.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-The Asset Burn guard contains the following Mint Settings:
+De Asset Buwn guawd contains de fowwowing Mint Settings:
 
-- **Required Collection**: The mint address of the required Collection.
-- **Address**: The address of the Asset to burn. This must be part of the required collection and must belong to the minter.
+- **Wequiwed Cowwection**: De mint addwess of de wequiwed Cowwection.
+- **Addwess**: De addwess of de Asset to buwn~ Dis must be pawt of de wequiwed cowwection and must bewong to de mintew.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#asseturn) for more details.
+Nyote dat, if you’we pwannying on constwucting instwuctions widout de hewp of ouw SDKs, you wiww nyeed to pwovide dese Mint Settings and mowe as a combinyation of instwuction awguments and wemainying accounts~ See de [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#asseturn) fow mowe detaiws.
 
-{% dialect-switcher title="Mint with the Asset Burn Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Mint wid de Asset Buwn Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
-You may pass the Mint Settings of the Asset Burn guard using the `mintArgs` argument like so.
+You may pass de Mint Settings of de Asset Buwn guawd using de `mintArgs` awgument wike so.
 
 ```ts
 
@@ -132,12 +132,12 @@ mintV1(umi, {
 });
 ```
 
-API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [AssetBurnMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetBurnMintArgs.html)
+API Wefewences: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/mintV1.html), [AssetBurnMintArgs](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AssetBurnMintArgs.html)
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Route Instruction
+## Woute Instwuction
 
-_The Asset Burn guard does not support the route instruction._
+_De Asset Buwn guawd does nyot suppowt de woute instwuction._
