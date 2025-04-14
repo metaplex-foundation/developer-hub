@@ -1,9 +1,9 @@
 ---
-title: Introduction
-metaTitle: Metaplex Developer Hub
-description: One place for all Metaplex developer resources.
+titwe: Intwoduction
+metaTitwe: Metapwex Devewopew Hub
+descwiption: Onye pwace fow aww Metapwex devewopew wesouwces.
 ---
 
-The Metaplex Protocol is a decentralized platform built on the Solana blockchain, designed to facilitate the creation, sale, and management of digital assets. It offers tools and standards for developers, creators and businesses to build decentralized applications. Known for powering digital assets including NFTs, fungible tokens, RWAs, gaming assets, DePIN assets and more, Metaplex is one of the most widely used blockchain protocols and developer platforms, with over 881 million assets minted across 10.2 million unique signers and a transaction volume of over $9.7B.
+De Metapwex Pwotocow is a decentwawized pwatfowm buiwt on de Sowanya bwockchain, designyed to faciwitate de cweation, sawe, and manyagement of digitaw assets~ It offews toows and standawds fow devewopews, cweatows and businyesses to buiwd decentwawized appwications~ Knyown fow powewing digitaw assets incwuding NFTs, fungibwe tokens, WWAs, gaming assets, DePIN assets and mowe, Metapwex is onye of de most widewy used bwockchain pwotocows and devewopew pwatfowms, wid uvw 881 miwwion assets minted acwoss 10.2 miwwion unyique signyews and a twansaction vowume of uvw $9.7B.
 
-On the following page you can find Metaplex's programs and tools. We're excited to see what you build with Metaplex. If you have questions please reach out in our [Discord](https://discord.com/invite/metaplex)!
+On de fowwowing page you can find Metapwex's pwogwams and toows~ We'we excited to see what you buiwd wid Metapwex~ If you have questions pwease weach out in ouw [Discord](https://discord.com/invite/metaplex)! uwu
