@@ -1,23 +1,23 @@
 ---
-title: Getting Started with Rust
-metaTitle: Getting Started with Rust | Guides
-description: A quick overview on how to get started with Rust in the Solana ecoSystem.
+titwe: Getting Stawted wid Wust
+metaTitwe: Getting Stawted wid Wust | Guides
+descwiption: A quick uvwview on how to get stawted wid Wust in de Sowanya ecoSystem.
 ---
 
-## Introduction
+## Intwoduction
 
-It's no doubt that if you are building on Solana you most likely have come across the term "Rust", which is the most popular language for building programs within the Solana ecosystem.
+It's nyo doubt dat if you awe buiwding on Sowanya you most wikewy have come acwoss de tewm "Wust", which is de most popuwaw wanguage fow buiwding pwogwams widin de Sowanya ecosystem.
 
-Rust can be quite a daunting task to look at and use if you are new to developing but here are some resources to get you started with Rust and the Solana ecosystem.
+Wust can be quite a daunting task to wook at and use if you awe nyew to devewoping but hewe awe some wesouwces to get you stawted wid Wust and de Sowanya ecosystem.
 
-## The Rust Book
+## De Wust Book
 
-Start here to learn Rust. It takes from basics through to the advanced coding using the language.
+Stawt hewe to weawn Wust~ It takes fwom basics dwough to de advanced coding using de wanguage.
 
 [https://doc.rust-lang.org/stable/book/](https://doc.rust-lang.org/stable/book/)
 
-## Anchor
+## Anchow
 
-Anchor is a framework that helps you build Solana programs by stripping away a chunk of the security boilerplate and handling it for you speeding up the development process.
+Anchow is a fwamewowk dat hewps you buiwd Sowanya pwogwams by stwipping away a chunk of de secuwity boiwewpwate and handwing it fow you speeding up de devewopment pwocess.
 
 [https://www.anchor-lang.com/](https://www.anchor-lang.com/)
