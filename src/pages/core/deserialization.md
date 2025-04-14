@@ -1,27 +1,27 @@
 ---
-title: Deserialization
-metaTitle: Deserialization | Core
-description: Learn about the deserialization of Asset accounts, Collection accounts and plugins using the Metaplex Core packages.
+titwe: Desewiawization
+metaTitwe: Desewiawization | Cowe
+descwiption: Weawn about de desewiawization of Asset accounts, Cowwection accounts and pwugins using de Metapwex Cowe packages.
 ---
 
-Digital assets on Core are composed of exactly **one onchain account** that contains both the base asset data and the plugin.
+Digitaw assets on Cowe awe composed of exactwy **onye onchain account** dat contains bod de base asset data and de pwugin.
 
-That means that if we want to read that data we need to learn how to deserialize it.
+Dat means dat if we want to wead dat data we nyeed to weawn how to desewiawize it.
 
-In Javascript we can deserialize both the base asset data and the plugin using a single function. In Rust we should deserialize the base asset and only the required plugins separately to avoid unnecessary compute usage and to prevent overflowing the stack.
+In Javascwipt we can desewiawize bod de base asset data and de pwugin using a singwe function~ In Wust we shouwd desewiawize de base asset and onwy de wequiwed pwugins sepawatewy to avoid unnyecessawy compute usage and to pwevent uvwfwowing de stack.
 
-## Deserializing Assets
+## Desewiawizing Assets
 
-Deserializing the `Asset` account will return information about:
+Desewiawizing de `Asset` account wiww wetuwn infowmation about:
 
-- **Owner**: The owner of the asset
-- **Update Authority**: The authority over the asset, or the collection Address if it's part of one 
-- **Name**: The Asset Name
-- **Uri**: The uri to the asset off-chain metadata. -->
+- **Ownyew**: De ownyew of de asset
+- **Update Audowity**: De audowity uvw de asset, ow de cowwection Addwess if it's pawt of onye 
+- **Nyame**: De Asset Nyame
+- **Uwi**: De uwi to de asset off-chain metadata~ -->
 
-{% dialect-switcher title="Deserialize an Asset" %}
+{% diawect-switchew titwe="Desewiawize an Asset" %}
 
-{% dialect title="JavaScript" id="js" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 ```ts
 const accountData = await umi.rpc.getAccount(
   publicKey('11111111111111111111111111111111')
@@ -33,9 +33,9 @@ const assetV1 = deserializeAssetV1(accountData)
 
 console.log({ assetData })
 ```
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 ```rust
 let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
@@ -47,9 +47,9 @@ let asset_v1 = BaseAssetV1::from_bytes(&account.data).unwrap();
 
 println!("assetV1: {:?}", asset_v1);
 ```
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Anchor" id="anchor" %}
+{% diawect titwe="Anchow" id="anchow" %}
 ```rust
 let asset = ctx.accounts.asset;
 
@@ -59,22 +59,22 @@ let asset_v1 = BaseAssetV1::from_bytes(&data.as_ref())?;
 
 println!("assetV1: {:?}", asset_v1);
 ```
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Deserializing Collections
+## Desewiawizing Cowwections
 
-Deserializing the `Collection` account will return information about:
+Desewiawizing de `Collection` account wiww wetuwn infowmation about:
 
-- **Update** Authority:	The authority over the collection and all the asset inside of it
-- **Name**:	The collection name.
-- **Uri**:	The uri to the collections off-chain metadata.
-- **Num Minted**: The number of assets minted in the collection.
-- **Current size**:	The number of assets currently in the collection.
+- **Update** Audowity:	De audowity uvw de cowwection and aww de asset inside of it
+- **Nyame**:	De cowwection nyame.
+- **Uwi**:	De uwi to de cowwections off-chain metadata.
+- **Nyum Minted**: De nyumbew of assets minted in de cowwection.
+- **Cuwwent size**:	De nyumbew of assets cuwwentwy in de cowwection.
 
-{% dialect-switcher title="Deserialize a Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Desewiawize a Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 const accountData = await umi.rpc.getAccount(
@@ -88,9 +88,9 @@ const collectionV1 = deserializeCollectionV1(accountData)
 console.log({ assetData })
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
@@ -104,9 +104,9 @@ let collection_v1 = CollectionV1::from_bytes(&account.data).unwrap();
 println!("collection_V1: {:?}", collection_v1);
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Anchor" id="anchor" %}
+{% diawect titwe="Anchow" id="anchow" %}
 
 ```rust
 let collection = ctx.accounts.collection;
@@ -118,18 +118,18 @@ let collection_v1 = BaseCollectionV1::from_bytes(&data.as_ref())?;
 println!("collection_V1: {:?}", collection_v1);
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Deserializing Plugins
+## Desewiawizing Pwugins
 
-As said before, 
-- Using **Javascript** we can deserialize the whole asset into a single variable, in this section we're going to see how we can access the specific data associated with the plugins.
-- Using **Rust** we need to deserialize specific plugin data to avoid stack violation because of the size of the account.
+As said befowe, 
+- Using **Javascwipt** we can desewiawize de whowe asset into a singwe vawiabwe, in dis section we'we going to see how we can access de specific data associated wid de pwugins.
+- Using **Wust** we nyeed to desewiawize specific pwugin data to avoid stack viowation because of de size of de account.
 
-{% dialect-switcher title="Deserialize Plugins" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Desewiawize Pwugins" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 const assetV1 = await fetchAsset(
@@ -144,9 +144,9 @@ let attributes_plugin = assetV1.attributes
 let royalties_plugin = assetV1.royalties
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 // Example of using the AccountInfo of Core Asset account to deserialize an Attributes plugin stored on the asset.
@@ -158,5 +158,5 @@ let royalties_plugin =
     fetch_plugin::<BaseCollectionV1, Royalties>(&account_info, PluginType::Royalties).unwrap();
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
