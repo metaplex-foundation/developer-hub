@@ -1,24 +1,40 @@
 ---
-title: Creating Assets
-metaTitle: Creating Assets | Core
-description: Learn how to create Core NFT Assets on using the Metaplex Core packages.
+titwe: Cweating Assets
+metaTitwe: Cweating Assets | Cowe
+descwiption: Weawn how to cweate Cowe NFT Assets on using de Metapwex Cowe packages.
 ---
 
-As discussed in the [Core overview](/core), digital assets on Core are composed of exactly one onchain account and off-chain data describing the token. On this page, we'll go over the process of minting these assets. {% .lead %}
+As discussed in de ```ts
+import { generateSigner, publicKey } from '@metaplex-foundation/umi'
+import { create } from '@metaplex-foundation/mpl-core'
 
-## The Creation Process
+const assetSigner = generateSigner(umi)
 
-1. **Upload off-chain data.** First, we must ensure our off-chain data is ready. This means we must have a JSON file stored somewhere that describes our asset. It doesn't matter how or where that JSON file is stored, as long as it's accessible via a **URI**. The off chain metadata can look similar to the [old token metadata standard](/token-metadata/token-standard#the-non-fungible-standard).
-2. **Create onchain Asset account.** Then, we must create the onchain Asset account that will hold our asset's data.
+const result = await create(umi, {
+  asset: assetSigner,
+  name: 'My Asset',
+  uri: 'https://example.com/my-asset.json',
+  //owner: publicKey('11111111111111111111111111111111'), //optional to mint into a different wallet
+}).sendAndConfirm(umi)
+```3, digitaw assets on Cowe awe composed of exactwy onye onchain account and off-chain data descwibing de token~ On dis page, we'ww go uvw de pwocess of minting dese assets~ {% .wead %}
 
-Let's dig into these steps in more detail, whilst providing concrete code examples.
+## De Cweation Pwocess
 
-## Uploading off-chain data
+1~ **Upwoad off-chain data.** Fiwst, we must ensuwe ouw off-chain data is weady~ Dis means we must have a JSON fiwe stowed somewhewe dat descwibes ouw asset~ It doesn't mattew how ow whewe dat JSON fiwe is stowed, as wong as it's accessibwe via a **UWI**~ De off chain metadata can wook simiwaw to de [old token metadata standard](/token-metadata/token-standard#the-non-fungible-standard).
+2~ **Cweate onchain Asset account.** Den, we must cweate de onchain Asset account dat wiww howd ouw asset's data.
 
-You may use any storage service (Arweave, IPFS, AWS etc...) to upload your off-chain data or simply store it on your own server. To make some of these easier for the user `Umi` has some dedicated plugins including the likes of `Irys (uploads to Arweave)` and `nftStorage (uploads to IPFS)`. Once a plugin is selected this grants the user a unified interface for you to upload your data.
+Wet's dig into dese steps in mowe detaiw, whiwst pwoviding concwete code exampwes.
 
-{% dialect-switcher title="Upload assets and JSON data" %}
-{% dialect title="JavaScript" id="js" %}
+## Upwoading off-chain data
+
+You may use any stowage sewvice (Awweave, IPFS, AWS etc...) to upwoad youw off-chain data ow simpwy stowe it on youw own sewvew~ To make some of dese easiew fow de usew ```ts
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+
+umi.use(irysUploader())
+```3 has some dedicated pwugins incwuding de wikes of `Irys (uploads to Arweave)` and `nftStorage (uploads to IPFS)`~ Once a pwugin is sewected dis gwants de usew a unyified intewface fow you to upwoad youw data.
+
+{% diawect-switchew titwe="Upwoad assets and JSON data" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -31,83 +47,67 @@ const uri = await umi.uploader.uploadJson({
 })
 ```
 
-{% totem-accordion title="Select an uploader" %}
+{% totem-accowdion titwe="Sewect an upwoadew" %}
 
-To select the Uploader of your choice using Umi, simply install the plugin provided by the Uploader.
+To sewect de Upwoadew of youw choice using Umi, simpwy instaww de pwugin pwovided by de Upwoadew.
 
-For instance, here is how we can install the Irys plugin:
+Fow instance, hewe is how we can instaww de Iwys pwugin:
 
-```ts
-import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+UWUIFY_TOKEN_1744632799646_1
 
-umi.use(irysUploader())
-```
-
-{% /totem-accordion %}
+{% /totem-accowdion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-Now that we have our **URI**, we can move on to the next step.
+Nyow dat we have ouw **UWI**, we can muv on to de nyext step.
 
-## Create an Asset
+## Cweate an Asset
 
-To create an Asset use the `createV1` instruction. The `createV1` instruction, in addition to setting the basic metadata of the Asset, encompasses the likes of adding your Asset to a collection and assigning plugins which is described a bit [later](#create-an-asset-with-plugins).
+To cweate an Asset use de `createV1` instwuction~ De `createV1` instwuction, in addition to setting de basic metadata of de Asset, encompasses de wikes of adding youw Asset to a cowwection and assignying pwugins which is descwibed a bit [later](#create-an-asset-with-plugins).
 
-Below is a simple example:
+Bewow is a simpwe exampwe:
 
 {% totem %}
-{% totem-accordion title="Technical Instruction Details" %}
-**Instruction Accounts List**
+{% totem-accowdion titwe="Technyicaw Instwuction Detaiws" %}
+**Instwuction Accounts Wist**
 
-| Accounts      | Description                                        |
+| Accounts      | Descwiption                                        |
 | ------------- | -------------------------------------------------- |
-| asset         | The address of the MPL Core Asset.                 |
-| collection    | The collection to which the Core Asset belongs to. |
-| authority     | The authority of the new asset.                    |
-| payer         | The account paying for the storage fees.           |
-| new owner     | The owner which should receive the asset.          |
-| systemProgram | The System Program account.                        |
-| logWrapper    | The SPL Noop Program.                              |
+| asset         | De addwess of de MPW Cowe Asset~                 |
+| cowwection    | De cowwection to which de Cowe Asset bewongs to~ |
+| audowity     | De audowity of de nyew asset~                    |
+| payew         | De account paying fow de stowage fees~           |
+| nyew ownyew     | De ownyew which shouwd weceive de asset~          |
+| systemPwogwam | De System Pwogwam account~                        |
+| wogWwappew    | De SPW Nyoop Pwogwam~                              |
 
-**Instruction Arguments**
+**Instwuction Awguments**
 
-| Args      | Description                                                  |
+| Awgs      | Descwiption                                                  |
 | --------- | ------------------------------------------------------------ |
-| dataState | Whether the data is stored in account state or ledger state. |
-| name      | The name of your MPL Core Asset.                             |
-| uri       | The off-chain JSON metadata URI.                             |
-| plugins   | What plugins you would like the asset to have.               |
+| dataState | Whedew de data is stowed in account state ow wedgew state~ |
+| nyame      | De nyame of youw MPW Cowe Asset~                             |
+| uwi       | De off-chain JSON metadata UWI~                             |
+| pwugins   | What pwugins you wouwd wike de asset to have~               |
 
-Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L18)
+Some of de accounts/awgs may be abstwacted out and/ow optionyaw in ouw sdks fow ease of use.
+A fuww detaiwed wook at de on chain instwuction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L18)
 
-{% /totem-accordion %}
+{% /totem-accowdion %}
 {% /totem %}
 
-{% seperator h="6" /%}
+{% sepewatow h="6" /%}
 
-{% dialect-switcher title="Create Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-```ts
-import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import { create } from '@metaplex-foundation/mpl-core'
+UWUIFY_TOKEN_1744632799646_2
 
-const assetSigner = generateSigner(umi)
+{% /diawect %}
 
-const result = await create(umi, {
-  asset: assetSigner,
-  name: 'My Asset',
-  uri: 'https://example.com/my-asset.json',
-  //owner: publicKey('11111111111111111111111111111111'), //optional to mint into a different wallet
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::instructions::CreateV1Builder;
@@ -146,9 +146,9 @@ pub async fn create_asset() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
+{% diawect titwe="Wust (CPI)" id="wust-cpi" %}
 
 ```rust
 let create_ix = CreateV1CpiBuilder::new()
@@ -166,13 +166,13 @@ let create_ix = CreateV1CpiBuilder::new()
         .invoke();
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-<!-- ### Create Asset in Ledger State
+<! uwu-- ### Cweate Asset in Wedgew State
 
-{% dialect-switcher title="Create Asset in Account State" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate Asset in Account State" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
@@ -188,9 +188,9 @@ const result = create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 {% totem %}
 
 ```rust
@@ -198,32 +198,32 @@ const result = create(umi, {
 
 ```
 
-{% totem-prose %}
+{% totem-pwose %}
 
-Note that when setting the `mint` account, it is require to specify a `bool` flag to indicate whether the account will be a signer or not – it need to be a signer if the `mint` account does not exist.
+Nyote dat when setting de `mint` account, it is wequiwe to specify a `bool` fwag to indicate whedew de account wiww be a signyew ow nyot – it nyeed to be a signyew if de `mint` account does nyot exist.
 
-{% /totem-prose %}
+{% /totem-pwose %}
 
 {% /totem %}
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
+{% diawect titwe="Wust (CPI)" id="wust-cpi" %}
 
 ```rust
 // TODO
 
 ```
 
-{% /dialect %}
-{% /dialect-switcher %} -->
+{% /diawect %}
+{% /diawect-switchew %} -->
 
-## Create an Asset into a Collection
+## Cweate an Asset into a Cowwection
 
-MPL Core Assets can be created straight into a collection if your MPL Core Collection already exists. To create a Collection Asset visit [here](/core/collections).
+MPW Cowe Assets can be cweated stwaight into a cowwection if youw MPW Cowe Cowwection awweady exists~ To cweate a Cowwection Asset visit [here](/core/collections).
 
-{% dialect-switcher title="Create Asset into Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate Asset into Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -261,8 +261,8 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::instructions::{CreateCollectionV1Builder, CreateV1Builder};
@@ -331,9 +331,9 @@ pub async fn create_asset_with_collection() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
+{% diawect titwe="Wust (CPI)" id="wust-cpi" %}
 
 ```rust
 let create_ix = CreateV1CpiBuilder::new(input.program)
@@ -351,16 +351,16 @@ let create_ix = CreateV1CpiBuilder::new(input.program)
     .invoke();
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Create an Asset with Plugins
+## Cweate an Asset wid Pwugins
 
-MPL Core Assets support the use of plugins at both the Collection and Asset levels. To create a Core Asset with a plugin you pass in the plugin type and its parameters into the `plugins` array arg during creation. The below example creates a mint with the `Freeze` plugin.
+MPW Cowe Assets suppowt de use of pwugins at bod de Cowwection and Asset wevews~ To cweate a Cowe Asset wid a pwugin you pass in de pwugin type and its pawametews into de `plugins` awway awg duwing cweation~ De bewow exampwe cweates a mint wid de `Freeze` pwugin.
 
-{% dialect-switcher title="Create Asset with Plugin" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Cweate Asset wid Pwugin" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -395,9 +395,9 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use std::str::FromStr;
@@ -455,10 +455,10 @@ pub async fn create_asset_with_plugin() {
 
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-The list of plugins includes but is not limited to:
+De wist of pwugins incwudes but is nyot wimited to:
 
 - [Burn Delegate](/core/plugins/burn-delegate)
 - [Freeze Delegate](/core/plugins/freeze-delegate)
