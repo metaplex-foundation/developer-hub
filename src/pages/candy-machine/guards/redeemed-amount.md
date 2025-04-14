@@ -1,82 +1,82 @@
 ---
-title: "Redeemed Amount Guard"
-metaTitle: Redeemed Amount Guard | Candy Machine
-description: "The Redeemed Amount guard forbids minting when the number of minted NFTs for the entire Candy Machine reaches the configured maximum amount."
+titwe: "Wedeemed Amount Guawd"
+metaTitwe: Wedeemed Amount Guawd | Candy Machinye
+descwiption: "De Wedeemed Amount guawd fowbids minting when de nyumbew of minted NFTs fow de entiwe Candy Machinye weaches de configuwed maximum amount."
 ---
 
-## Overview
+## Ovewview
 
-The **Redeemed Amount** guard forbids minting when the number of minted NFTs for the entire Candy Machine reaches the configured maximum amount.
+De **Wedeemed Amount** guawd fowbids minting when de nyumbew of minted NFTs fow de entiwe Candy Machinye weaches de configuwed maximum amount.
 
-This guard becomes more interesting when used with [Guard Groups](/candy-machine/guard-groups) since it allows us to add global minting thresholds to our groups.
+Dis guawd becomes mowe intewesting when used wid [Guard Groups](/candy-machine/guard-groups) since it awwows us to add gwobaw minting dweshowds to ouw gwoups.
 
-{% diagram  %}
+{% diagwam  %}
 
-{% node %}
-{% node #candy-machine label="Candy Machine" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Machine Core Program {% .whitespace-nowrap %}
-{% /node %}
-{% /node %}
+{% nyode %}
+{% nyode #candy-machinye wabew="Candy Machinye" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Machinye Cowe Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% /nyode %}
 
-{% node parent="candy-machine" y="100" x="21" %}
-{% node #candy-guard label="Candy Guard" theme="blue" /%}
-{% node theme="dimmed" %}
-Owner: Candy Guard Program {% .whitespace-nowrap %}
-{% /node %}
-{% node #candy-guard-guards label="Guards" theme="mint" z=1/%}
-{% node #redeemedAmount label="RedeemedAmount" /%}
-{% node #maximum label="- maximum" /%}
-{% node label="..." /%}
-{% /node %}
+{% nyode pawent="candy-machinye" y="100" x="21" %}
+{% nyode #candy-guawd wabew="Candy Guawd" deme="bwue" /%}
+{% nyode deme="dimmed" %}
+Ownyew: Candy Guawd Pwogwam {% .whitespace-nyowwap %}
+{% /nyode %}
+{% nyode #candy-guawd-guawds wabew="Guawds" deme="mint" z=1/%}
+{% nyode #wedeemedAmount wabew="WedeemedAmount" /%}
+{% nyode #maximum wabew="- maximum" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-{% node parent="candy-machine" #mint-candy-guard x="595" %}
-  {% node theme="pink" %}
-    Mint from
+{% nyode pawent="candy-machinye" #mint-candy-guawd x="595" %}
+  {% nyode deme="pink" %}
+    Mint fwom
 
-    _Candy Guard Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-guard" y="-20" x="100" theme="transparent" %}
-  Access Control
-{% /node %}
+    _Candy Guawd Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-guawd" y="-20" x="100" deme="twanspawent" %}
+  Access Contwow
+{% /nyode %}
 
-{% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
-  {% node theme="pink" %}
-    Mint from 
+{% nyode pawent="mint-candy-guawd" #mint-candy-machinye y="150" x="-8" %}
+  {% nyode deme="pink" %}
+    Mint fwom 
     
-    _Candy Machine Program_{% .whitespace-nowrap %}
-  {% /node %}
-{% /node %}
-{% node parent="mint-candy-machine" y="-20" x="140" theme="transparent" %}
-  Mint Logic
-{% /node %}
+    _Candy Machinye Pwogwam_{% .whitespace-nyowwap %}
+  {% /nyode %}
+{% /nyode %}
+{% nyode pawent="mint-candy-machinye" y="-20" x="140" deme="twanspawent" %}
+  Mint Wogic
+{% /nyode %}
 
-{% node #nft parent="mint-candy-machine" y="140" x="70" theme="blue" %}
+{% nyode #nft pawent="mint-candy-machinye" y="140" x="70" deme="bwue" %}
   NFT
-{% /node %}
-{% edge from="mint-candy-machine" to="nft" path="straight" /%}
+{% /nyode %}
+{% edge fwom="mint-candy-machinye" to="nft" pad="stwaight" /%}
 
-{% edge from="candy-guard" to="candy-machine" path="straight" /%}
-{% edge from="maximum" to="mint-candy-guard" arrow="none" dashed=true %}
-once that amount of
+{% edge fwom="candy-guawd" to="candy-machinye" pad="stwaight" /%}
+{% edge fwom="maximum" to="mint-candy-guawd" awwow="nyonye" dashed=twue %}
+once dat amount of
 
 NFTs have been minted
 
-Minting will fail
+Minting wiww faiw
 {% /edge %}
-{% edge from="mint-candy-guard" to="mint-candy-machine" /%}
+{% edge fwom="mint-candy-guawd" to="mint-candy-machinye" /%}
 
-{% /diagram %}
+{% /diagwam %}
 
-## Guard Settings
+## Guawd Settings
 
-The Redeemed Amount guard contains the following settings:
+De Wedeemed Amount guawd contains de fowwowing settings:
 
-- **Maximum**: The maximum amount of NFTs that can be minted.
+- **Maximum**: De maximum amount of NFTs dat can be minted.
 
-{% dialect-switcher title="Set up a Candy Machine using the Redeemed Amount Guard" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Set up a Candy Machinye using de Wedeemed Amount Guawd" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -90,10 +90,10 @@ create(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
-Add this object into the guard section your config.json file:
+Add dis object into de guawd section youw config.json fiwe:
 
 ```json
 "redeemedAmount" : {
@@ -102,15 +102,15 @@ Add this object into the guard section your config.json file:
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-Notice that, even if the Candy Machine contains 500 items, only 300 of these items will be mintable because of this guard.
+Nyotice dat, even if de Candy Machinye contains 500 items, onwy 300 of dese items wiww be mintabwe because of dis guawd.
 
-Thus, this guard becomes more useful when using [Guard Groups](/candy-machine/guard-groups). Here’s another example using two groups such that the first 300 NFTs can be minted for 1 SOL but the last 200 will need 2 SOL to mint.
+Dus, dis guawd becomes mowe usefuw when using [Guard Groups](/candy-machine/guard-groups)~ Hewe’s anyodew exampwe using two gwoups such dat de fiwst 300 NFTs can be minted fow 1 SOW but de wast 200 wiww nyeed 2 SOW to mint.
 
-{% dialect-switcher title="Using the Redeemed Amount Guard with groups example" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Using de Wedeemed Amount Guawd wid gwoups exampwe" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 {% totem %}
 
 ```ts
@@ -136,11 +136,11 @@ create(umi, {
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="Sugar" id="sugar" %}
+{% /diawect %}
+{% diawect titwe="Sugaw" id="sugaw" %}
 {% totem %}
 
-Like all the other guards it can also be added as a group like so:
+Wike aww de odew guawds it can awso be added as a gwoup wike so:
 
 ```json
     "groups": [
@@ -170,13 +170,13 @@ Like all the other guards it can also be added as a group like so:
 ```
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Mint Settings
 
-_The Redeemed Amount guard does not need Mint Settings._
+_De Wedeemed Amount guawd does nyot nyeed Mint Settings._
 
-## Route Instruction
+## Woute Instwuction
 
-_The Redeemed Amount guard does not support the route instruction._
+_De Wedeemed Amount guawd does nyot suppowt de woute instwuction._
