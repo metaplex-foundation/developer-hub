@@ -1,252 +1,29 @@
 ---
-title: Candy Guards
-metaTitle: Candy Guards | Candy Machine
-description: Explains how guards work and how to enable them.
+titwe: Candy Guawds
+metaTitwe: Candy Guawds | Candy Machinye
+descwiption: Expwains how guawds wowk and how to enyabwe dem.
 ---
 
-Now that we know how Candy Machines work and how to load them, it’s time we talk about the last piece of the puzzle: Guards. {% .lead %}
+Nyow dat we knyow how Candy Machinyes wowk and how to woad dem, it’s time we tawk about de wast piece of de puzzwe: Guawds~ {% .wead %}
 
-## What is a guard?
+## What is a guawd? owo
 
-A guard is a modular piece of code that can restrict access to the mint of a Candy Machine and even add new features to it!
+A guawd is a moduwaw piece of code dat can westwict access to de mint of a Candy Machinye and even add nyew featuwes to it! uwu
 
-There is a large set of guards to choose from and each of them can be activated and configured at will.
+Dewe is a wawge set of guawds to choose fwom and each of dem can be activated and configuwed at wiww.
 
-We’ll touch on all available guards later in this documentation but let’s go through a few examples here to illustrate that.
+We’ww touch on aww avaiwabwe guawds watew in dis documentation but wet’s go dwough a few exampwes hewe to iwwustwate dat.
 
-- When the **Start Date** guard is enabled, minting will be forbidden before the preconfigured date. There is also an **End Date** guard to forbid minting after a given date.
-- When the **Sol Payment** guard is enabled, the minting wallet will have to pay a configured amount to a configured destination wallet. Similar guards exist for paying with tokens or NFTs of a specific collection.
-- The **Token Gate** and **NFT Gate** guards restrict minting to certain token holders and NFT holders respectively.
-- The **Allow List** guard only allows minting if the wallet is part of a predefined list of wallets. Kind of like a guest list for minting.
+- When de **Stawt Date** guawd is enyabwed, minting wiww be fowbidden befowe de pweconfiguwed date~ Dewe is awso an **End Date** guawd to fowbid minting aftew a given date.
+- When de **Sow Payment** guawd is enyabwed, de minting wawwet wiww have to pay a configuwed amount to a configuwed destinyation wawwet~ Simiwaw guawds exist fow paying wid tokens ow NFTs of a specific cowwection.
+- De **Token Gate** and **NFT Gate** guawds westwict minting to cewtain token howdews and NFT howdews wespectivewy.
+- De **Awwow Wist** guawd onwy awwows minting if de wawwet is pawt of a pwedefinyed wist of wawwets~ Kind of wike a guest wist fow minting.
 
-As you can see, each guard takes care of one responsibility and one responsibility only which makes them composable. In other words, you can pick and choose the guards your need to create your perfect Candy Machine.
+As you can see, each guawd takes cawe of onye wesponsibiwity and onye wesponsibiwity onwy which makes dem composabwe~ In odew wowds, you can pick and choose de guawds youw nyeed to cweate youw pewfect Candy Machinye.
 
-## The Candy Guard account
+## De Candy Guawd account
 
-If you remember the content of our [Candy Machine account](/candy-machine/manage#candy-machine-account), you’ll see no signs of guards in there. This is because guards live in another account called the **Candy Guard account** which is created by the **Candy Guard program**.
-
-Each Candy Machine account should typically be associated with its own Candy Guard account which will add a layer of protection to it.
-
-This works by creating a Candy Guard account and making it the **Mint Authority** of the Candy Machine account. By doing so, it is no longer possible to mint directly from the main Candy Machine program — known as the **Candy Machine Core program**. Instead, we must mint via the Candy Guard program which, if all guards are resolved successfully, will defer to the Candy Machine Core program to finish the minting process.
-
-{% diagram %}
-
-{% node %}
-{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
-{% node label="Features" /%}
-{% node label="Authority" /%}
-{% node #mint-authority-1 %}
-
-Mint Authority = Candy Guard {% .font-semibold %}
-
-{% /node %}
-{% node label="..." /%}
-{% /node %}
-
-{% node parent="candy-machine-1" y=160 x=20 %}
-{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node label="Guards" theme="mint" z=1 /%}
-{% node label="Sol Payment" /%}
-{% node label="Token Payment" /%}
-{% node label="Start Date" /%}
-{% node label="End Date" /%}
-{% node label="..." /%}
-{% /node %}
-
-{% node parent="candy-machine-1" x=350 %}
-{% node #mint-1 label="Mint" theme="pink" /%}
-{% node label="Candy Guard Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-1" x=45 y=-20 label="Access Control" theme="transparent" /%}
-{% node parent="mint-1" x=-120 y=-35 theme="transparent" %}
-Anyone can mint as long \
-as they comply with the \
-activated guards.
-{% /node %}
-
-{% node parent="mint-1" x=-22 y=100 %}
-{% node #mint-2 label="Mint" theme="pink" /%}
-{% node label="Candy Machine Core Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-2" x=120 y=-20 label="Mint Logic" theme="transparent" /%}
-{% node parent="mint-2" x=200 y=-18 theme="transparent" %}
-Only Alice \
-can mint.
-{% /node %}
-
-{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
-
-{% node parent="mint-2" x=280 %}
-{% node #candy-machine-2 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
-{% node label="Features" /%}
-{% node label="Authority" /%}
-{% node #mint-authority-2 %}
-
-Mint Authority = Alice {% .font-semibold %}
-
-{% /node %}
-{% node label="..." /%}
-{% /node %}
-
-{% edge from="candy-guard-1" to="mint-authority-1" fromPosition="left" toPosition="left" arrow=false dashed=true /%}
-{% edge from="mint-1" to="mint-2" theme="pink" path="straight" /%}
-{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
-{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
-{% edge from="candy-guard-1" to="mint-1" theme="pink" /%}
-{% edge from="candy-machine-2" to="mint-2" theme="pink" path="straight" /%}
-
-{% /diagram %}
-
-Note that, since Candy Machine and Candy Guard accounts work hand and hand together, our SDKs treat them as one entity. When you create a Candy Machine with our SDKs, an associated Candy Guard account will also be created by default. The same goes when updating Candy Machines as they allow you to update guards at the same time. We will see some concrete examples on this page.
-
-## Why another program?
-
-The reason guards don’t live in the main Candy Machine program is to separate the access control logic from the main Candy Machine responsibility which is to mint an NFT.
-
-This enables guards to not only be modular but extendable. Anyone can create and deploy their own Candy Guard program to create custom guards whilst relying on the Candy Machine Core program for all the rest.
-
-{% diagram %}
-
-{% node %}
-{% node #candy-machine-1 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
-{% /node %}
-
-{% node parent="candy-machine-1" y=80 x=20 %}
-{% node #candy-guard-1 label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Candy Guard Program" theme="dimmed" /%}
-{% node label="Guards" theme="mint" z=1 /%}
-{% node label="Sol Payment" /%}
-{% node label="Token Payment" /%}
-{% node label="Start Date" /%}
-{% node label="End Date" /%}
-{% node label="..." /%}
-{% /node %}
-
-{% node parent="candy-machine-1" x=300 %}
-{% node #mint-1 label="Mint" theme="pink" /%}
-{% node label="Candy Guard Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-1" x=160 %}
-{% node #mint-1b label="Mint" theme="pink" /%}
-{% node label="Custom Candy Guard Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-1b" x=-80 y=-22 label="Different Access Control" theme="transparent" /%}
-
-{% node parent="mint-1" x=60 y=100 %}
-{% node #mint-2 label="Mint" theme="pink" /%}
-{% node label="Candy Machine Core Program" theme="pink" /%}
-{% /node %}
-{% node parent="mint-2" x=95 y=-20 label="Same Mint Logic" theme="transparent" /%}
-
-{% node #nft parent="mint-2" x=62 y=100 label="NFT" /%}
-
-{% node parent="mint-1b" x=250 %}
-{% node #candy-machine-2 label="Candy Machine" theme="blue" /%}
-{% node label="Owner: Candy Machine Core Program" theme="dimmed" /%}
-{% /node %}
-
-{% node parent="candy-machine-2" y=80 x=0 %}
-{% node #candy-guard-2 label="Candy Guard" theme="blue" /%}
-{% node label="Owner: Custom Candy Guard Program" theme="dimmed" /%}
-{% node label="Guards" theme="mint" z=1 /%}
-{% node label="Sol Payment" /%}
-{% node label="Token Payment" /%}
-{% node label="Start Date" /%}
-{% node %}
-My Custom Guard {% .font-semibold %}
-{% /node %}
-{% node label="..." /%}
-{% /node %}
-
-{% edge from="candy-guard-1" to="candy-machine-1" fromPosition="left" toPosition="left" arrow=false /%}
-{% edge from="candy-guard-2" to="candy-machine-2" fromPosition="right" toPosition="right" arrow=false /%}
-{% edge from="mint-1" to="mint-2" theme="pink" fromPosition="bottom" toPosition="top" /%}
-{% edge from="mint-1b" to="mint-2" theme="pink" fromPosition="bottom" toPosition="top" /%}
-{% edge from="mint-2" to="nft" theme="pink" path="straight" /%}
-{% edge from="candy-machine-1" to="mint-1" theme="pink" /%}
-{% edge from="candy-guard-1" to="mint-1" theme="pink" /%}
-{% edge from="candy-machine-2" to="mint-1b" theme="pink" /%}
-{% edge from="candy-guard-2" to="mint-1b" theme="pink" /%}
-
-{% /diagram %}
-
-Note that our SDKs also offer ways to register your own Candy Guard programs and their custom guards so you can leverage their friendly API and easily share your guards with others.
-
-## All available guards
-
-Alright, now that we understand what guards are, let’s see what default guards are available to us.
-
-In the following list, we’ll provide a short description of each guard with a link pointing to their dedicated page for more advanced reading.
-
-- [**Address Gate**](/candy-machine/guards/address-gate): Restricts the mint to a single address.
-- [**Allow List**](/candy-machine/guards/allow-list): Uses a wallet address list to determine who is allowed to mint.
-- [**Bot Tax**](/candy-machine/guards/bot-tax): Configurable tax to charge invalid transactions.
-- [**End Date**](/candy-machine/guards/end-date): Determines a date to end the mint.
-- [**Freeze Sol Payment**](/candy-machine/guards/freeze-sol-payment): Set the price of the mint in SOL with a freeze period.
-- [**Freeze Token Payment**](/candy-machine/guards/freeze-token-payment): Set the price of the mint in token amount with a freeze period.
-- [**Gatekeeper**](/candy-machine/guards/gatekeeper): Restricts minting via a Gatekeeper Network e.g. Captcha integration.
-- [**Mint Limit**](/candy-machine/guards/mint-limit): Specifies a limit on the number of mints per wallet.
-- [**Nft Burn**](/candy-machine/guards/nft-burn): Restricts the mint to holders of a specified collection, requiring a burn of the NFT.
-- [**Nft Gate**](/candy-machine/guards/nft-gate): Restricts the mint to holders of a specified collection.
-- [**Nft Payment**](/candy-machine/guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
-- [**Redeemed Amount**](/candy-machine/guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
-- [**Sol Payment**](/candy-machine/guards/sol-payment): Set the price of the mint in SOL.
-- [**Start Date**](/candy-machine/guards/start-date): Determines the start date of the mint.
-- [**Third Party Signer**](/candy-machine/guards/third-party-signer): Requires an additional signer on the transaction.
-- [**Token Burn**](/candy-machine/guards/token-burn): Restricts the mint to holders of a specified token, requiring a burn of the tokens.
-- [**Token Gate**](/candy-machine/guards/token-gate): Restricts the mint to holders of a specified token.
-- [**Token Payment**](/candy-machine/guards/token-payment): Set the price of the mint in token amount.
-
-## Creating a Candy Machine with guards
-
-So far, the Candy Machine we created did not have any guards enabled. Now that we know all the guards available to us, let’s see how we can set up new Candy Machines with some guards enabled.
-
-The concrete implementation will depend on which SDK you are using (see below) but the main idea is that you enable guards by providing their required settings. Any guard that has not been set up will be disabled.
-
-{% dialect-switcher title="Create a Candy Machine with guards" %}
-{% dialect title="JavaScript" id="js" %}
-
-To enable guards using the Umi library, simply provides the `guards` attribute to the `create` function and pass in the settings of every guard you want to enable. Any guard set to `none()` or not provided will be disabled.
-
-```ts
-import { some, sol, dateTime } from '@metaplex-foundation/umi'
-
-await create(umi, {
-  // ...
-  guards: {
-    botTax: some({ lamports: sol(0.01), lastInstruction: true }),
-    solPayment: some({ lamports: sol(1.5), destination: treasury }),
-    startDate: some({ date: dateTime('2023-04-04T16:00:00Z') }),
-    // All other guards are disabled...
-  },
-}).sendAndConfirm(umi)
-```
-
-API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [DefaultGuardSetArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-## Updating guards
-
-Did you set something wrong in your guards? Did you change your mind about the mint price? Do you need to delay the start of the mint of a little? No worries, guards can easily be updated following the same settings used when creating them.
-
-You can enable new guards by providing their settings or disable current ones by giving them empty settings.
-
-{% dialect-switcher title="Update guards" %}
-{% dialect title="JavaScript" id="js" %}
-
-You may update the guards of a Candy Machine the same way you created them. That is, by providing their settings inside the `guards` object of the `updateCandyGuard` function. Any guard set to `none()` or not provided will be disabled.
-
-Note that the entire `guards` object will be updated meaning **it will override all existing guards**!
-
-Therefore, make sure to provide the settings for all guards you want to enable, even if their settings are not changing. You may want to fetch the candy guard account first to fallback to its current guards.
-
-```tsx
+If you wemembew de content of ouw ```tsx
 import { some, none, sol } from '@metaplex-foundation/umi'
 
 const candyGuard = fetchCandyGuard(umi, candyMachine.mintAuthority)
@@ -258,23 +35,169 @@ await updateCandyGuard(umi, {
     solPayment: some({ lamports: sol(3), destination: treasury }),
   },
 })
-```
+```6, you’ww see nyo signs of guawds in dewe~ Dis is because guawds wive in anyodew account cawwed de **Candy Guawd account** which is cweated by de **Candy Guawd pwogwam**.
 
-API References: [updateCandyGuard](https://mpl-candy-machine.typedoc.metaplex.com/functions/updateCandyGuard.html), [CandyGuard](https://mpl-candy-machine.typedoc.metaplex.com/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
+Each Candy Machinye account shouwd typicawwy be associated wid its own Candy Guawd account which wiww add a wayew of pwotection to it.
 
-{% /dialect %}
-{% /dialect-switcher %}
+Dis wowks by cweating a Candy Guawd account and making it de **Mint Audowity** of de Candy Machinye account~ By doing so, it is nyo wongew possibwe to mint diwectwy fwom de main Candy Machinye pwogwam — knyown as de **Candy Machinye Cowe pwogwam**~ Instead, we must mint via de Candy Guawd pwogwam which, if aww guawds awe wesowved successfuwwy, wiww defew to de Candy Machinye Cowe pwogwam to finyish de minting pwocess.
 
-## Viewing the guards of a Candy Machine
+{% diagwam %}
 
-Once you have set up your guards on a Candy Machine, all the provided settings can be retrieved and viewed by anyone on the Candy Guard account.
+{% nyode %}
+{% nyode #candy-machinye-1 wabew="Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Featuwes" /%}
+{% nyode wabew="Audowity" /%}
+{% nyode #mint-audowity-1 %}
 
-{% dialect-switcher title="Fetch guards" %}
-{% dialect title="JavaScript" id="js" %}
+Mint Audowity = Candy Guawd {% .font-semibowd %}
 
-You may access the candy guard associated with a candy machine by using the `fetchCandyGuard` function on the `mintAuthority` attribute of the candy machine account.
+{% /nyode %}
+{% nyode wabew="..." /%}
+{% /nyode %}
 
-```ts
+{% nyode pawent="candy-machinye-1" y=160 x=20 %}
+{% nyode #candy-guawd-1 wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Guawds" deme="mint" z=1 /%}
+{% nyode wabew="Sow Payment" /%}
+{% nyode wabew="Token Payment" /%}
+{% nyode wabew="Stawt Date" /%}
+{% nyode wabew="End Date" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye-1" x=350 %}
+{% nyode #mint-1 wabew="Mint" deme="pink" /%}
+{% nyode wabew="Candy Guawd Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-1" x=45 y=-20 wabew="Access Contwow" deme="twanspawent" /%}
+{% nyode pawent="mint-1" x=-120 y=-35 deme="twanspawent" %}
+Anyonye can mint as wong \
+as dey compwy wid de \
+activated guawds.
+{% /nyode %}
+
+{% nyode pawent="mint-1" x=-22 y=100 %}
+{% nyode #mint-2 wabew="Mint" deme="pink" /%}
+{% nyode wabew="Candy Machinye Cowe Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-2" x=120 y=-20 wabew="Mint Wogic" deme="twanspawent" /%}
+{% nyode pawent="mint-2" x=200 y=-18 deme="twanspawent" %}
+Onwy Awice \
+can mint.
+{% /nyode %}
+
+{% nyode #nft pawent="mint-2" x=62 y=100 wabew="NFT" /%}
+
+{% nyode pawent="mint-2" x=280 %}
+{% nyode #candy-machinye-2 wabew="Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Featuwes" /%}
+{% nyode wabew="Audowity" /%}
+{% nyode #mint-audowity-2 %}
+
+Mint Audowity = Awice {% .font-semibowd %}
+
+{% /nyode %}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% edge fwom="candy-guawd-1" to="mint-audowity-1" fwomPosition="weft" toPosition="weft" awwow=fawse dashed=twue /%}
+{% edge fwom="mint-1" to="mint-2" deme="pink" pad="stwaight" /%}
+{% edge fwom="mint-2" to="nft" deme="pink" pad="stwaight" /%}
+{% edge fwom="candy-machinye-1" to="mint-1" deme="pink" /%}
+{% edge fwom="candy-guawd-1" to="mint-1" deme="pink" /%}
+{% edge fwom="candy-machinye-2" to="mint-2" deme="pink" pad="stwaight" /%}
+
+{% /diagwam %}
+
+Nyote dat, since Candy Machinye and Candy Guawd accounts wowk hand and hand togedew, ouw SDKs tweat dem as onye entity~ When you cweate a Candy Machinye wid ouw SDKs, an associated Candy Guawd account wiww awso be cweated by defauwt~ De same goes when updating Candy Machinyes as dey awwow you to update guawds at de same time~ We wiww see some concwete exampwes on dis page.
+
+## Why anyodew pwogwam? owo
+
+De weason guawds don’t wive in de main Candy Machinye pwogwam is to sepawate de access contwow wogic fwom de main Candy Machinye wesponsibiwity which is to mint an NFT.
+
+Dis enyabwes guawds to nyot onwy be moduwaw but extendabwe~ Anyonye can cweate and depwoy deiw own Candy Guawd pwogwam to cweate custom guawds whiwst wewying on de Candy Machinye Cowe pwogwam fow aww de west.
+
+{% diagwam %}
+
+{% nyode %}
+{% nyode #candy-machinye-1 wabew="Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye-1" y=80 x=20 %}
+{% nyode #candy-guawd-1 wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Guawds" deme="mint" z=1 /%}
+{% nyode wabew="Sow Payment" /%}
+{% nyode wabew="Token Payment" /%}
+{% nyode wabew="Stawt Date" /%}
+{% nyode wabew="End Date" /%}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye-1" x=300 %}
+{% nyode #mint-1 wabew="Mint" deme="pink" /%}
+{% nyode wabew="Candy Guawd Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-1" x=160 %}
+{% nyode #mint-1b wabew="Mint" deme="pink" /%}
+{% nyode wabew="Custom Candy Guawd Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-1b" x=-80 y=-22 wabew="Diffewent Access Contwow" deme="twanspawent" /%}
+
+{% nyode pawent="mint-1" x=60 y=100 %}
+{% nyode #mint-2 wabew="Mint" deme="pink" /%}
+{% nyode wabew="Candy Machinye Cowe Pwogwam" deme="pink" /%}
+{% /nyode %}
+{% nyode pawent="mint-2" x=95 y=-20 wabew="Same Mint Wogic" deme="twanspawent" /%}
+
+{% nyode #nft pawent="mint-2" x=62 y=100 wabew="NFT" /%}
+
+{% nyode pawent="mint-1b" x=250 %}
+{% nyode #candy-machinye-2 wabew="Candy Machinye" deme="bwue" /%}
+{% nyode wabew="Ownyew: Candy Machinye Cowe Pwogwam" deme="dimmed" /%}
+{% /nyode %}
+
+{% nyode pawent="candy-machinye-2" y=80 x=0 %}
+{% nyode #candy-guawd-2 wabew="Candy Guawd" deme="bwue" /%}
+{% nyode wabew="Ownyew: Custom Candy Guawd Pwogwam" deme="dimmed" /%}
+{% nyode wabew="Guawds" deme="mint" z=1 /%}
+{% nyode wabew="Sow Payment" /%}
+{% nyode wabew="Token Payment" /%}
+{% nyode wabew="Stawt Date" /%}
+{% nyode %}
+My Custom Guawd {% .font-semibowd %}
+{% /nyode %}
+{% nyode wabew="..." /%}
+{% /nyode %}
+
+{% edge fwom="candy-guawd-1" to="candy-machinye-1" fwomPosition="weft" toPosition="weft" awwow=fawse /%}
+{% edge fwom="candy-guawd-2" to="candy-machinye-2" fwomPosition="wight" toPosition="wight" awwow=fawse /%}
+{% edge fwom="mint-1" to="mint-2" deme="pink" fwomPosition="bottom" toPosition="top" /%}
+{% edge fwom="mint-1b" to="mint-2" deme="pink" fwomPosition="bottom" toPosition="top" /%}
+{% edge fwom="mint-2" to="nft" deme="pink" pad="stwaight" /%}
+{% edge fwom="candy-machinye-1" to="mint-1" deme="pink" /%}
+{% edge fwom="candy-guawd-1" to="mint-1" deme="pink" /%}
+{% edge fwom="candy-machinye-2" to="mint-1b" deme="pink" /%}
+{% edge fwom="candy-guawd-2" to="mint-1b" deme="pink" /%}
+
+{% /diagwam %}
+
+Nyote dat ouw SDKs awso offew ways to wegistew youw own Candy Guawd pwogwams and deiw custom guawds so you can wevewage deiw fwiendwy API and easiwy shawe youw guawds wid odews.
+
+## Aww avaiwabwe guawds
+
+Awwight, nyow dat we undewstand what guawds awe, wet’s see what defauwt guawds awe avaiwabwe to us.
+
+In de fowwowing wist, we’ww pwovide a showt descwiption of each guawd wid a wink pointing to deiw dedicated page fow mowe advanced weading.
+
+- [**Address Gate**](/candy-machine/guards/address-gate): Westwicts de mint to a singwe addwess.
+- [**Allow List**](/candy-machine/guards/allow-list): Uses a wawwet addwess wist to detewminye who is awwowed to mint.
+- [**Bot Tax**](/candy-machine/guards/bot-tax): Configuwabwe tax to chawge invawid twansactions.
+- ```ts
 import {
   fetchCandyMachine,
   fetchCandyGuard,
@@ -287,11 +210,17 @@ candyGuard.guards // All guard settings.
 candyGuard.guards.botTax // Bot Tax settings.
 candyGuard.guards.solPayment // Sol Payment settings.
 // ...
-```
-
-Note that, when using the `create` function, an associated candy guard account is automatically created for each candy machine such that their address is deterministic. Therefore, in this case, we could fetch both accounts using only one RPC call like so.
-
-```ts
+```0: Detewminyes a date to end de mint.
+- [**Freeze Sol Payment**](/candy-machine/guards/freeze-sol-payment): Set de pwice of de mint in SOW wid a fweeze pewiod.
+- [**Freeze Token Payment**](/candy-machine/guards/freeze-token-payment): Set de pwice of de mint in token amount wid a fweeze pewiod.
+- [**Gatekeeper**](/candy-machine/guards/gatekeeper): Westwicts minting via a Gatekeepew Nyetwowk e.g~ Captcha integwation.
+- [**Mint Limit**](/candy-machine/guards/mint-limit): Specifies a wimit on de nyumbew of mints pew wawwet.
+- [**Nft Burn**](/candy-machine/guards/nft-burn): Westwicts de mint to howdews of a specified cowwection, wequiwing a buwn of de NFT.
+- [**Nft Gate**](/candy-machine/guards/nft-gate): Westwicts de mint to howdews of a specified cowwection.
+- [**Nft Payment**](/candy-machine/guards/nft-payment): Set de pwice of de mint as an NFT of a specified cowwection.
+- [**Redeemed Amount**](/candy-machine/guards/redeemed-amount): Detewminyes de end of de mint based on de totaw amount minted.
+- [**Sol Payment**](/candy-machine/guards/sol-payment): Set de pwice of de mint in SOW.
+- ```ts
 import { assertAccountExists } from '@metaplex-foundation/umi'
 import {
   findCandyGuardPda,
@@ -309,29 +238,80 @@ assertAccountExists(rawCandyGuard)
 
 const candyMachine = deserializeCandyMachine(umi, rawCandyMachine)
 const candyGuard = deserializeCandyGuard(umi, rawCandyGuard)
-```
+```0: Detewminyes de stawt date of de mint.
+- [**Third Party Signer**](/candy-machine/guards/third-party-signer): Wequiwes an additionyaw signyew on de twansaction.
+- [**Token Burn**](/candy-machine/guards/token-burn): Westwicts de mint to howdews of a specified token, wequiwing a buwn of de tokens.
+- [**Token Gate**](/candy-machine/guards/token-gate): Westwicts de mint to howdews of a specified token.
+- [**Token Payment**](/candy-machine/guards/token-payment): Set de pwice of de mint in token amount.
 
-API References: [fetchCandyGuard](https://mpl-candy-machine.typedoc.metaplex.com/functions/fetchCandyGuard.html), [findCandyGuardPda](https://mpl-candy-machine.typedoc.metaplex.com/functions/findCandyGuardPda.html), [CandyGuard](https://mpl-candy-machine.typedoc.metaplex.com/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
+## Cweating a Candy Machinye wid guawds
 
-{% /dialect %}
-{% /dialect-switcher %}
+So faw, de Candy Machinye we cweated did nyot have any guawds enyabwed~ Nyow dat we knyow aww de guawds avaiwabwe to us, wet’s see how we can set up nyew Candy Machinyes wid some guawds enyabwed.
 
-## Wrapping and unwrapping Candy Guard accounts manually
+De concwete impwementation wiww depend on which SDK you awe using (see bewow) but de main idea is dat you enyabwe guawds by pwoviding deiw wequiwed settings~ Any guawd dat has nyot been set up wiww be disabwed.
 
-So far we’ve managed both Candy Machine and Candy Guard accounts together because that makes the most sense for most projects.
+{% diawect-switchew titwe="Cweate a Candy Machinye wid guawds" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-However, it is important to note that Candy Machines and Candy Guards can be created and associated in different steps, even using our SDKs.
-
-You will first need to create the two accounts separately and associate/dissociate them manually.
-
-{% dialect-switcher title="Associate and dissociate guards from a Candy Machine" %}
-{% dialect title="JavaScript" id="js" %}
-
-The `create` function of the Umi library already takes care of creating and associating a brand new Candy Guard account for every Candy Machine account created.
-
-However, if you wanted to create them separately and manually associate/dissociate them, this is how you’d do it.
+To enyabwe guawds using de Umi wibwawy, simpwy pwovides de `guards` attwibute to de `create` function and pass in de settings of evewy guawd you want to enyabwe~ Any guawd set to `none()` ow nyot pwovided wiww be disabwed.
 
 ```ts
+import { some, sol, dateTime } from '@metaplex-foundation/umi'
+
+await create(umi, {
+  // ...
+  guards: {
+    botTax: some({ lamports: sol(0.01), lastInstruction: true }),
+    solPayment: some({ lamports: sol(1.5), destination: treasury }),
+    startDate: some({ date: dateTime('2023-04-04T16:00:00Z') }),
+    // All other guards are disabled...
+  },
+}).sendAndConfirm(umi)
+```
+
+API Wefewences: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/create.html), [DefaultGuardSetArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+## Updating guawds
+
+Did you set someding wwong in youw guawds? owo Did you change youw mind about de mint pwice? owo Do you nyeed to deway de stawt of de mint of a wittwe? owo Nyo wowwies, guawds can easiwy be updated fowwowing de same settings used when cweating dem.
+
+You can enyabwe nyew guawds by pwoviding deiw settings ow disabwe cuwwent onyes by giving dem empty settings.
+
+{% diawect-switchew titwe="Update guawds" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+You may update de guawds of a Candy Machinye de same way you cweated dem~ Dat is, by pwoviding deiw settings inside de `guards` object of de `updateCandyGuard` function~ Any guawd set to `none()` ow nyot pwovided wiww be disabwed.
+
+Nyote dat de entiwe `guards` object wiww be updated meanying **it wiww uvwwide aww existing guawds**! uwu
+
+Dewefowe, make suwe to pwovide de settings fow aww guawds you want to enyabwe, even if deiw settings awe nyot changing~ You may want to fetch de candy guawd account fiwst to fawwback to its cuwwent guawds.
+
+UWUIFY_TOKEN_1744632712027_1
+
+API Wefewences: [updateCandyGuard](https://mpl-candy-machine.typedoc.metaplex.com/functions/updateCandyGuard.html), [CandyGuard](https://mpl-candy-machine.typedoc.metaplex.com/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+## Viewing de guawds of a Candy Machinye
+
+Once you have set up youw guawds on a Candy Machinye, aww de pwovided settings can be wetwieved and viewed by anyonye on de Candy Guawd account.
+
+{% diawect-switchew titwe="Fetch guawds" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+You may access de candy guawd associated wid a candy machinye by using de `fetchCandyGuard` function on de `mintAuthority` attwibute of de candy machinye account.
+
+UWUIFY_TOKEN_1744632712027_2
+
+Nyote dat, when using de `create` function, an associated candy guawd account is automaticawwy cweated fow each candy machinye such dat deiw addwess is detewminyistic~ Dewefowe, in dis case, we couwd fetch bod accounts using onwy onye WPC caww wike so.
+
+UWUIFY_TOKEN_1744632712027_3
+
+API Wefewences: ```ts
 import { some, percentAmount, sol, dateTime } from '@metaplex-foundation/umi'
 
 // Create a Candy Machine without a Candy Guard.
@@ -378,13 +358,33 @@ await unwrap(umi, {
   candyMachine: candyMachine.publicKey,
   candyGuard,
 }).sendAndConfirm(umi)
-```
+```0, [findCandyGuardPda](https://mpl-candy-machine.typedoc.metaplex.com/functions/findCandyGuardPda.html), [CandyGuard](https://mpl-candy-machine.typedoc.metaplex.com/types/CandyGuard.html), [DefaultGuardSetArgs](https://mpl-candy-machine.typedoc.metaplex.com/types/DefaultGuardSetArgs.html)
 
-API References: [createCandyMachineV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/createCandyMachineV2.html), [createCandyGuard](https://mpl-candy-machine.typedoc.metaplex.com/functions/createCandyGuard.html), [wrap](https://mpl-candy-machine.typedoc.metaplex.com/functions/wrap.html), [unwrap](https://mpl-candy-machine.typedoc.metaplex.com/functions/unwrap.html)
+{% /diawect %}
+{% /diawect-switchew %}
 
-{% /dialect %}
-{% /dialect-switcher %}
+## Wwapping and unwwapping Candy Guawd accounts manyuawwy
 
-## Conclusion
+So faw we’ve manyaged bod Candy Machinye and Candy Guawd accounts togedew because dat makes de most sense fow most pwojects.
 
-Guards are important components of Candy Machines. They make it easy to configure the minting process whilst allowing anyone to create their own guards for application-specific needs. [On the next page](/candy-machine/guard-groups), we’ll see how we can create even more minting scenarios by using guard groups!
+Howevew, it is impowtant to nyote dat Candy Machinyes and Candy Guawds can be cweated and associated in diffewent steps, even using ouw SDKs.
+
+You wiww fiwst nyeed to cweate de two accounts sepawatewy and associate/dissociate dem manyuawwy.
+
+{% diawect-switchew titwe="Associate and dissociate guawds fwom a Candy Machinye" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+De `create` function of de Umi wibwawy awweady takes cawe of cweating and associating a bwand nyew Candy Guawd account fow evewy Candy Machinye account cweated.
+
+Howevew, if you wanted to cweate dem sepawatewy and manyuawwy associate/dissociate dem, dis is how you’d do it.
+
+UWUIFY_TOKEN_1744632712027_4
+
+API Wefewences: [createCandyMachineV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/createCandyMachineV2.html), [createCandyGuard](https://mpl-candy-machine.typedoc.metaplex.com/functions/createCandyGuard.html), [wrap](https://mpl-candy-machine.typedoc.metaplex.com/functions/wrap.html), [unwrap](https://mpl-candy-machine.typedoc.metaplex.com/functions/unwrap.html)
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+## Concwusion
+
+Guawds awe impowtant componyents of Candy Machinyes~ Dey make it easy to configuwe de minting pwocess whiwst awwowing anyonye to cweate deiw own guawds fow appwication-specific nyeeds~ [On the next page](/candy-machine/guard-groups), we’ww see how we can cweate even mowe minting scenyawios by using guawd gwoups! uwu
