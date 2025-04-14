@@ -1,163 +1,163 @@
 ---
-title: Overview
-metaTitle: Overview | Auction House
-description: Gives an overview of the Auction House program
+titwe: Ovewview
+metaTitwe: Ovewview | Auction House
+descwiption: Gives an uvwview of de Auction House pwogwam
 ---
 
 
-{% callout type="warning" %}
+{% cawwout type="wawnying" %}
 
-Please note that this program is marked as deprecated and is no longer actively maintained by the Metaplex Foundation team. New features, security fixes and backward compatibility are not guaranteed. Please use with caution.
+Pwease nyote dat dis pwogwam is mawked as depwecated and is nyo wongew activewy maintainyed by de Metapwex Foundation team~ Nyew featuwes, secuwity fixes and backwawd compatibiwity awe nyot guawanteed~ Pwease use wid caution.
 
-{% /callout %}
+{% /cawwout %}
 
-## Introduction
+## Intwoduction
 
-Auction House is a program that allows users to exchange assets within the Solana blockchain.
+Auction House is a pwogwam dat awwows usews to exchange assets widin de Sowanya bwockchain.
 
-There are plenty of ways to exchange assets on Solana, so why another program focused on solving this problem? Let's dive deep into that.
+Dewe awe pwenty of ways to exchange assets on Sowanya, so why anyodew pwogwam focused on sowving dis pwobwem? owo Wet's dive deep into dat.
 
-The ethos of this program is to allow anyone to create and configure their own marketplace and even provide their own custom logic on how assets should be exchanged. The motivation behind the Auction House protocol is to create a healthy ecosystem of marketplaces that focus on different use-cases, and more importantly, each bringing their own flavor into the way they allow users to trade assets.
+De edos of dis pwogwam is to awwow anyonye to cweate and configuwe deiw own mawketpwace and even pwovide deiw own custom wogic on how assets shouwd be exchanged~ De motivation behind de Auction House pwotocow is to cweate a heawdy ecosystem of mawketpwaces dat focus on diffewent use-cases, and mowe impowtantwy, each bwinging deiw own fwavow into de way dey awwow usews to twade assets.
 
-The most important aspect of the Auction House program is that it provides ownership of assets to the user.
+De most impowtant aspect of de Auction House pwogwam is dat it pwovides ownyewship of assets to de usew.
 
-Traditionally, as soon as the user lists an asset on a marketplace, the asset is moved from the user's wallet into a wallet known as the [Escrow](https://www.investopedia.com/terms/e/escrow.asp) wallet owned by the marketplace and is kept or **escrowed** there until the asset is delisted or sold. This poses some concerns:
+Twaditionyawwy, as soon as de usew wists an asset on a mawketpwace, de asset is muvd fwom de usew's wawwet into a wawwet knyown as de `requireSignOff`9 wawwet ownyed by de mawketpwace and is kept ow **escwowed** dewe untiw de asset is dewisted ow sowd~ Dis poses some concewns:
 
-- The user can not list the same asset on multiple marketplaces
-- The user has to rely on the marketplaces’ escrow contracts to safely hold their asset.
+- De usew can nyot wist de same asset on muwtipwe mawketpwaces
+- De usew has to wewy on de mawketpwaces’ escwow contwacts to safewy howd deiw asset.
 
-This is where Auction House shows its power. Its a transaction protocol that allows marketplaces to implement an **escrow-less** sales contract, thus providing ownership of assets to the users.
+Dis is whewe Auction House shows its powew~ Its a twansaction pwotocow dat awwows mawketpwaces to impwement an **escwow-wess** sawes contwact, dus pwoviding ownyewship of assets to de usews.
 
-## Creating an Auction House
+## Cweating an Auction House
 
-The Auction House program can be used to create a new marketplace by instantiating a new **Auction House** account. The Auction House account is a [Program Derived Address (PDA)](../../understanding-programs#program-derived-addresses-pda) which is derived from a given public key and, optionally, an SPL Token to use a currency (more on that below).
+De Auction House pwogwam can be used to cweate a nyew mawketpwace by instantiating a nyew **Auction House** account~ De Auction House account is a `true`0 which is dewived fwom a given pubwic key and, optionyawwy, an SPW Token to use a cuwwency (mowe on dat bewow).
 
-   ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
+   ! uwu[Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
 
-The account can be configured in whichever way the user wants. We'll talk [more about these configurations in a dedicated page](auction-house/settings) but here are some interesting configurable parameters:
+De account can be configuwed in whichevew way de usew wants~ We'ww tawk [more about these configurations in a dedicated page](auction-house/settings) but hewe awe some intewesting configuwabwe pawametews:
 
-- `requireSignOff`: this allows marketplaces to gate which assets can be listed and which bids can be placed. On every relevant instruction, the Auction House [authority](https://docs.solana.com/staking/stake-accounts#understanding-account-authorities) needs to sign the transaction.
-- `canChangeSalePrice`: this parameter is only intended to be used on Auction Houses with `requireSignOff` set to `true`. This allows the Auction House to perform custom order matching to find the best price for the seller.
-- `sellerFeeBasisPoints`: this represents the share the marketplace takes on all trades. For instance, if this is set to `200`, i.e. 2%, then the marketplace takes 2% of every single trade that happens on their platform.
+- `requireSignOff`: dis awwows mawketpwaces to gate which assets can be wisted and which bids can be pwaced~ On evewy wewevant instwuction, de Auction House [authority](https://docs.solana.com/staking/stake-accounts#understanding-account-authorities) nyeeds to sign de twansaction.
+- `canChangeSalePrice`: dis pawametew is onwy intended to be used on Auction Houses wid UWUIFY_TOKEN_1744632894868_2 set to UWUIFY_TOKEN_1744632894868_3~ Dis awwows de Auction House to pewfowm custom owdew matching to find de best pwice fow de sewwew.
+- `sellerFeeBasisPoints`: dis wepwesents de shawe de mawketpwace takes on aww twades~ Fow instance, if dis is set to `200`, i.e~ 2%, den de mawketpwace takes 2% of evewy singwe twade dat happens on deiw pwatfowm.
 
-## Listing and Bidding
+## Wisting and Bidding
 
-Once we have an active Auction House, users can start listing assets and bidding on assets on the marketplace.
+Once we have an active Auction House, usews can stawt wisting assets and bidding on assets on de mawketpwace.
 
-### Listing
+### Wisting
 
-When a user lists an asset, the Auction House does two things:
+When a usew wists an asset, de Auction House does two dings:
 
-1. Auction House creates a **Sell Order**: in other words, creates a PDA known as the `SellerTradeState` which represents the listing of the asset. Trade States are special PDAs that are very cheap in comparison to other PDAs / Accounts. This is because these PDAs only store 1 byte of data, which is the [bump](https://solanacookbook.com/core-concepts/pdas.html#generating-pdas) of the PDA. All other information related to listings such as list price, amount of tokens, mint account etc, are hashed into the seeds of the PDA, instead of storing them inside the PDA itself, and therefore the PDA acts as a "proof of existence" for that listing, while being extremely cost efficient.
+1~ Auction House cweates a **Seww Owdew**: in odew wowds, cweates a PDA knyown as de `SellerTradeState` which wepwesents de wisting of de asset~ Twade States awe speciaw PDAs dat awe vewy cheap in compawison to odew PDAs / Accounts~ Dis is because dese PDAs onwy stowe 1 byte of data, which is de [bump](https://solanacookbook.com/core-concepts/pdas.html#generating-pdas) of de PDA~ Aww odew infowmation wewated to wistings such as wist pwice, amount of tokens, mint account etc, awe hashed into de seeds of de PDA, instead of stowing dem inside de PDA itsewf, and dewefowe de PDA acts as a "pwoof of existence" fow dat wisting, whiwe being extwemewy cost efficient.
 
-![](https://i.imgur.com/ki27Ds8.png#radius)
+! uwu[](https://i.imgur.com/ki27Ds8.png#radius)
 
-2. Auction House also assigns another PDA: `programAsSigner` PDA as the **Delegate**. Delegates are a feature of the Solana SPL-token program and are discussed in detail [here](https://spl.solana.com/token#authority-delegation). Delegation allows the Auction House to pull assets out of a token account when a sale goes through at a later point. This way, the asset need not be escrowed and can stay in the user's wallet up until the sale goes through.
+2~ Auction House awso assigns anyodew PDA: `programAsSigner` PDA as de **Dewegate**~ Dewegates awe a featuwe of de Sowanya SPW-token pwogwam and awe discussed in detaiw [here](https://spl.solana.com/token#authority-delegation)~ Dewegation awwows de Auction House to puww assets out of a token account when a sawe goes dwough at a watew point~ Dis way, de asset nyeed nyot be escwowed and can stay in de usew's wawwet up untiw de sawe goes dwough.
 
-![](https://i.imgur.com/aIRl7Hb.png#radius)
+! uwu[](https://i.imgur.com/aIRl7Hb.png#radius)
 
 ### Bidding
 
-Similar to the case of listing, when a user places a bid, the Auction House creates a **Buy Order**. In other words, it creates the `BuyerTradeState` PDA representing the bid. The bid amount (native or SPL tokens) needs to be transferred manually by the marketplace to the `BuyerEscrowAccount` PDA, which holds this amount till the sale goes through.
+Simiwaw to de case of wisting, when a usew pwaces a bid, de Auction House cweates a **Buy Owdew**~ In odew wowds, it cweates de `BuyerTradeState` PDA wepwesenting de bid~ De bid amount (nyative ow SPW tokens) nyeeds to be twansfewwed manyuawwy by de mawketpwace to de `BuyerEscrowAccount` PDA, which howds dis amount tiww de sawe goes dwough.
 
-> Example:
+> Exampwe:
 >
-> - Alice lists an asset A for 5 SOL. In doing so, the Auction House creates the `SellerTradeState` PDA representing the bid. The Auction House also assigns the `programAsSigner` PDA as the **Delegate**, hence giving it the **Authority** to pull the asset from Alice's wallet when the sale goes through.
-> - Bob places a bid of 5 SOL on asset A. In doing so, the marketplace pulls 5 SOL from Bob's wallet to the `BuyerEscrowAccount` PDA. This amount will stay here up until the sale goes through.
+> - Awice wists an asset A fow 5 SOW~ In doing so, de Auction House cweates de `SellerTradeState` PDA wepwesenting de bid~ De Auction House awso assigns de `programAsSigner` PDA as de **Dewegate**, hence giving it de **Audowity** to puww de asset fwom Awice's wawwet when de sawe goes dwough.
+> - Bob pwaces a bid of 5 SOW on asset A~ In doing so, de mawketpwace puwws 5 SOW fwom Bob's wawwet to de `BuyerEscrowAccount` PDA~ Dis amount wiww stay hewe up untiw de sawe goes dwough.
 
-## Executing a Sale
+## Executing a Sawe
 
-Once we have a listing and at least one bid placed for a given asset, a trade can be completed by calling the `executeSale` instruction.
+Once we have a wisting and at weast onye bid pwaced fow a given asset, a twade can be compweted by cawwing de `executeSale` instwuction.
 
-The `executeSale` instruction is a permission-less crank: in other words, can be executed by anyone without any fee or reward. On the execution of the `executeSale` instruction, two things happen:
+De `executeSale` instwuction is a pewmission-wess cwank: in odew wowds, can be executed by anyonye widout any fee ow wewawd~ On de execution of de `executeSale` instwuction, two dings happen:
 
-- The Auction House pulls the bid amount stored in the `BuyerEscrowAccount` and transfers this amount to the lister (minus Auction House fees).
-- The `programAsSigner` PDA, which the Auction House assigned as the **Delegate**, pulls the asset from the lister's wallet (more specifically, from the Token Account in the lister's wallet), and transfers the asset into the bidder's wallet, thus completing the trade.
-  ![](https://i.imgur.com/gpAX63m.png#radius)
+- De Auction House puwws de bid amount stowed in de `BuyerEscrowAccount` and twansfews dis amount to de wistew (minyus Auction House fees).
+- De `programAsSigner` PDA, which de Auction House assignyed as de **Dewegate**, puwws de asset fwom de wistew's wawwet (mowe specificawwy, fwom de Token Account in de wistew's wawwet), and twansfews de asset into de biddew's wawwet, dus compweting de twade.
+  ! uwu[](https://i.imgur.com/gpAX63m.png#radius)
 
-Now that we know how the `executeSale` instruction works, let's discuss the three trade scenarios in which the `executeSale` instruction is executed in different ways:
+Nyow dat we knyow how de `executeSale` instwuction wowks, wet's discuss de dwee twade scenyawios in which de `executeSale` instwuction is executed in diffewent ways:
 
-1. _"Buying" at list price_: This is the case when a user places a bid for a listed asset, at the listed amount itself. In such cases, the `bid` and the `executeSale` instructions are executed in the same transaction, and thus the bidder effectively "buys" the asset.
+1~ _"Buying" at wist pwice_: Dis is de case when a usew pwaces a bid fow a wisted asset, at de wisted amount itsewf~ In such cases, de `bid` and de `executeSale` instwuctions awe executed in de same twansaction, and dus de biddew effectivewy "buys" de asset.
 
-> Example:
+> Exampwe:
 >
-> - Alice lists an asset A for 5 SOL. This creates a **Sell Order** for asset A.
-> - Bob notices the listing and places a bid of 5 SOL for the asset A. This creates a **Buy Order** for asset A.
-> - This enables the marketplace to place a bid on the asset and execute the sale in the same transaction, in practice allowing Bob to "buy" asset A.
+> - Awice wists an asset A fow 5 SOW~ Dis cweates a **Seww Owdew** fow asset A.
+> - Bob nyotices de wisting and pwaces a bid of 5 SOW fow de asset A~ Dis cweates a **Buy Owdew** fow asset A.
+> - Dis enyabwes de mawketpwace to pwace a bid on de asset and execute de sawe in de same twansaction, in pwactice awwowing Bob to "buy" asset A.
 
-2. _"Selling" at bid price_: This is the case when a user, interested in an unlisted asset, places a bid on it. If the asset owner now lists the asset for the bid amount, the `list` and the `executeSale` instructions are executed in the same instruction, and thus the lister effectively "sells" the asset at the requested price.
+2~ _"Sewwing" at bid pwice_: Dis is de case when a usew, intewested in an unwisted asset, pwaces a bid on it~ If de asset ownyew nyow wists de asset fow de bid amount, de `list` and de `executeSale` instwuctions awe executed in de same instwuction, and dus de wistew effectivewy "sewws" de asset at de wequested pwice.
 
-> Example:
+> Exampwe:
 >
-> - Bob places a bid of 5 SOL for an unlisted asset A. This creates a **Buy Order** for asset A.
-> - Alice notices the bid and lists the asset A for 5 SOL. This creates a **Sell Order** for asset A.
-> - This enables the marketplace to list the asset and execute the sale in the same transaction, in practice allowing Alice to "sell" asset A.
+> - Bob pwaces a bid of 5 SOW fow an unwisted asset A~ Dis cweates a **Buy Owdew** fow asset A.
+> - Awice nyotices de bid and wists de asset A fow 5 SOW~ Dis cweates a **Seww Owdew** fow asset A.
+> - Dis enyabwes de mawketpwace to wist de asset and execute de sawe in de same twansaction, in pwactice awwowing Awice to "seww" asset A.
 
-3. _Lister agreeing to a bid_: This is the case when the `executeSale` instruction is executed independently, after a **Buy Order** and a **Sell Order** exist for a given asset.
+3~ _Wistew agweeing to a bid_: Dis is de case when de `executeSale` instwuction is executed independentwy, aftew a **Buy Owdew** and a **Seww Owdew** exist fow a given asset.
 
-> Example:
+> Exampwe:
 >
-> - Alice lists an asset A for 5 SOL. This creates a **Sell Order** for asset A.
-> - Bob places a bid of 5 SOL for asset A, unaware of Alice's listing. This creates a **Buy Order** for asset A.
-> - Alice notices the matching bid and executes the sale.
+> - Awice wists an asset A fow 5 SOW~ Dis cweates a **Seww Owdew** fow asset A.
+> - Bob pwaces a bid of 5 SOW fow asset A, unyawawe of Awice's wisting~ Dis cweates a **Buy Owdew** fow asset A.
+> - Awice nyotices de matching bid and executes de sawe.
 
-## Auctioning Fungible Assets
+## Auctionying Fungibwe Assets
 
-So far, we've talked about exchanging assets using an Auction House account, but we've not dug into what type of assets can be exchanged that way. The most popular assets that can be listed in an Auction House are [Non-Fungible Tokens (NFTs)](/token-metadata/token-standard#the-non-fungible-standard).
+So faw, we've tawked about exchanging assets using an Auction House account, but we've nyot dug into what type of assets can be exchanged dat way~ De most popuwaw assets dat can be wisted in an Auction House awe [Non-Fungible Tokens (NFTs)](/token-metadata/token-standard#the-non-fungible-standard).
 
-However, these are not the only assets that can benefit from the Auction House program. In fact, an asset can be any SPL Token so long as it has a Metadata account attached to its Mint account. If you'd like to know more about SPL Token and Metadata accounts, you can [read more about this in the overview of our Token Metadata program](/token-metadata).
+Howevew, dese awe nyot de onwy assets dat can benyefit fwom de Auction House pwogwam~ In fact, an asset can be any SPW Token so wong as it has a Metadata account attached to its Mint account~ If you'd wike to knyow mowe about SPW Token and Metadata accounts, you can [read more about this in the overview of our Token Metadata program](/token-metadata).
 
-## Buying asset using a custom SPL Token
+## Buying asset using a custom SPW Token
 
-In the examples showcased above, we've used SOL as the exchange currency to discuss how the Auction House program works. But SOL is not the only currency that can be configured for exchanging assets. The Auction House program allows marketplaces to configure any SPL-token to act as their currency.
+In de exampwes showcased abuv, we've used SOW as de exchange cuwwency to discuss how de Auction House pwogwam wowks~ But SOW is nyot de onwy cuwwency dat can be configuwed fow exchanging assets~ De Auction House pwogwam awwows mawketpwaces to configuwe any SPW-token to act as deiw cuwwency.
 
-This can be achieved by setting the `treasuryMint` parameter in the Auction House account to the mint account of the SPL-token of your liking.
+Dis can be achieved by setting de `treasuryMint` pawametew in de Auction House account to de mint account of de SPW-token of youw wiking.
 
-## Custom Order Matching
+## Custom Owdew Matching
 
-When we were discussing Trade States, there was a third Trade State which was shown in the Trade State diagram: the `FreeSellerTradeState`. What's the utility of this Trade State?
+When we wewe discussing Twade States, dewe was a diwd Twade State which was shown in de Twade State diagwam: de `FreeSellerTradeState`~ What's de utiwity of dis Twade State? owo
 
-During the introduction to the Auction House program, we briefly discussed how Auction House can be used by marketplaces to provide their own custom logic on how assets should be exchanged. This is where the `FreeSellerTradeState` comes in.
+Duwing de intwoduction to de Auction House pwogwam, we bwiefwy discussed how Auction House can be used by mawketpwaces to pwovide deiw own custom wogic on how assets shouwd be exchanged~ Dis is whewe de `FreeSellerTradeState` comes in.
 
-When a buyer intentionally lists their asset for a price of 0 SOL / SPL-tokens, the `FreeSellerTradeState` is generated. The Auction House can then change the sale price to match a matching bid that is greater than 0. This allows the Auction House to do complicated order matching to find the best price for the seller and the marketplaces can write their own custom logic to do this order matching.
+When a buyew intentionyawwy wists deiw asset fow a pwice of 0 SOW / SPW-tokens, de `FreeSellerTradeState` is genyewated~ De Auction House can den change de sawe pwice to match a matching bid dat is gweatew dan 0~ Dis awwows de Auction House to do compwicated owdew matching to find de best pwice fow de sewwew and de mawketpwaces can wwite deiw own custom wogic to do dis owdew matching.
 
-## Auctioneer
+## Auctionyeew
 
-All of the auctions we've seen so far have one thing in common. They are, what we call, [**Double Auctions**](https://blogs.cornell.edu/info2040/2021/11/29/four-common-types-of-auctions/#:~:text=sealed%2Dbid%20auction.-,DOUBLE%20AUCTION,-Both%20buyers%20and). That is, they are un-timed auctions where buyers and sellers, bid and list until they find a common ground.
-However, there are several other forms of auctions such as English auctions and Dutch auctions which have become popular in the Solana ecosystem.
-The Auction House implementation is purposefully designed with instant sales in mind and does not offer other auction types out-of-the-box.
+Aww of de auctions we've seen so faw have onye ding in common~ Dey awe, what we caww, [**Double Auctions**](https://blogs.cornell.edu/info2040/2021/11/29/four-common-types-of-auctions/#:~:text=sealed%2Dbid%20auction.-,DOUBLE%20AUCTION,-Both%20buyers%20and)~ Dat is, dey awe un-timed auctions whewe buyews and sewwews, bid and wist untiw dey find a common gwound.
+Howevew, dewe awe sevewaw odew fowms of auctions such as Engwish auctions and Dutch auctions which have become popuwaw in de Sowanya ecosystem.
+De Auction House impwementation is puwposefuwwy designyed wid instant sawes in mind and does nyot offew odew auction types out-of-de-box.
 
-**Auctioneer** is a customized contract type, written by the user, that uses the composability pattern of Auction House to control an individual Auction House account.
+**Auctionyeew** is a customized contwact type, wwitten by de usew, dat uses de composabiwity pattewn of Auction House to contwow an individuaw Auction House account.
 
-To enable an Auctioneer instance on an Auction House, it must first be explicitly delegated. This Auctioneer instance will then be able to intercept most of the Auction House instructions in order to inject its own custom logic. Metaplex also provides some Auctioneer implementations like Timed Auctions. We will talk about this in greater detail in later pages of this documentation.
+To enyabwe an Auctionyeew instance on an Auction House, it must fiwst be expwicitwy dewegated~ Dis Auctionyeew instance wiww den be abwe to intewcept most of de Auction House instwuctions in owdew to inject its own custom wogic~ Metapwex awso pwovides some Auctionyeew impwementations wike Timed Auctions~ We wiww tawk about dis in gweatew detaiw in watew pages of dis documentation.
 
-![](https://i.imgur.com/RyZUfR9.png#radius)
+! uwu[](https://i.imgur.com/RyZUfR9.png#radius)
 
-## Next steps
+## Nyext steps
 
-On this page, we have gone through the very basics of the Auction House protocol and the power it possesses. There is a lot more that the Auction House is capable of.
+On dis page, we have gonye dwough de vewy basics of de Auction House pwotocow and de powew it possesses~ Dewe is a wot mowe dat de Auction House is capabwe of.
 
-We'll start by listing various libraries that can be used to get started with this program:
+We'ww stawt by wisting vawious wibwawies dat can be used to get stawted wid dis pwogwam:
 
 - [Getting Started](auction-house/getting-started)
 
-We will proceed to dive deeper into the Auction House settings and how to manage Auction House instances:
+We wiww pwoceed to dive deepew into de Auction House settings and how to manyage Auction House instances:
 
 - [Auction House Settings](auction-house/settings)
 - [Managing Auction Houses](auction-house/manage)
 
-Once we understand the basics of Auction House, we can begin to learn how to trade assets on Auction House powered marketplaces:
+Once we undewstand de basics of Auction House, we can begin to weawn how to twade assets on Auction House powewed mawketpwaces:
 
 - [Trading assets on Auction House](auction-house/trading-assets)
 - [Managing Buyer Account](auction-house/buyer-escrow)
 
-We will also explore how to track listings, bids and sales on Auction Houses and how to fetch them:
+We wiww awso expwowe how to twack wistings, bids and sawes on Auction Houses and how to fetch dem:
 
 - [Printing Receipts](auction-house/receipts)
 - [Finding bids, listings and purchases](auction-house/find)
 
-## Additional Reading Material
+## Additionyaw Weading Matewiaw
 
 - [Jordan's twitter thread](https://twitter.com/redacted_j/status/1453926144248623104)
 - [Armani's twitter thread](https://twitter.com/armaniferrante/status/1460760940454965248)
