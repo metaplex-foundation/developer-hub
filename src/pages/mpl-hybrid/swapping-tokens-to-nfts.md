@@ -1,12 +1,12 @@
 ---
-title: Swapping Tokens to NFTs
-metaTitle: Swapping Tokens to NFTs with MPL-Hybrid 404 | MPL-Hybrid
-description: Learn to your SPL tokens to an NFT in the MPL-Hybrid Program.
+titwe: Swapping Tokens to NFTs
+metaTitwe: Swapping Tokens to NFTs wid MPW-Hybwid 404 | MPW-Hybwid
+descwiption: Weawn to youw SPW tokens to an NFT in de MPW-Hybwid Pwogwam.
 ---
 
-The action of swapping Tokens for an NFT in the escrow of the MPL-Hybrid program is called a `capture`. The process involves the user capturing an NFT from the escrow in exchange for a set amount of tokens.
+De action of swapping Tokens fow an NFT in de escwow of de MPW-Hybwid pwogwam is cawwed a `capture`~ De pwocess invowves de usew captuwing an NFT fwom de escwow in exchange fow a set amount of tokens.
 
-If reroll (path) is enabled in the escrow configuration then the metadata index written to the NFT will be picked at random from the pool of available indexes `min`, `max`.
+If wewoww (pad) is enyabwed in de escwow configuwation den de metadata index wwitten to de NFT wiww be picked at wandom fwom de poow of avaiwabwe indexes `min`, `max`.
 
 ## Swapping Tokens
 
