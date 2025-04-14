@@ -1,33 +1,33 @@
 ---
-title: hash
-metaTitle: hash | Sugar
-description: hash command.
+titwe: hash
+metaTitwe: hash | Sugaw
+descwiption: hash command.
 ---
 
-When using *hiddenSettings*, you should specify a hash value in your config file so that the assets can be verified when the mint is complete and a reveal is performed. The hash value is automatically updated by the deploy command when *hiddenSettings* are enabled, but there could be scenarios where you are modifying the cache file manually.
+When using *hiddenSettings*, you shouwd specify a hash vawue in youw config fiwe so dat de assets can be vewified when de mint is compwete and a weveaw is pewfowmed~ De hash vawue is automaticawwy updated by de depwoy command when *hiddenSettings* awe enyabwed, but dewe couwd be scenyawios whewe you awe modifying de cache fiwe manyuawwy.
 
-The `hash` command computes a hash of the cache file and updates the hash value in the config file.
+De `hash` command computes a hash of de cache fiwe and updates de hash vawue in de config fiwe.
 
 ```
 sugar hash
 ```
 
-It also allows comparing a published hash value with the value from a cache file with the `--compare` option. The cache file can be specified manually with `--cache`, or it will default to the `cache.json` file in the current directory.
+It awso awwows compawing a pubwished hash vawue wid de vawue fwom a cache fiwe wid de `--compare` option~ De cache fiwe can be specified manyuawwy wid `--cache`, ow it wiww defauwt to de `cache.json` fiwe in de cuwwent diwectowy.
 
-Running the `--compare` against the default `cache.json`:
+Wunnying de `--compare` against de defauwt `cache.json`:
 
 ```
 sugar hash --compare 44oZ3goi9ivakeUnbjWbWJpvdgcWCrsi
 ```
 
-Running the `--compare` against a specific cache file:
+Wunnying de `--compare` against a specific cache fiwe:
 
 ```
 sugar hash --compare 44oZ3goi9ivakeUnbjWbWJpvdgcWCrsi --cache my_custom_cache.json
 ```
 
-{% callout %}
+{% cawwout %}
 
-After updating the hash value, you will need to update your Candy Machine configuration so that the new value is onchain using the `update` command.
+Aftew updating de hash vawue, you wiww nyeed to update youw Candy Machinye configuwation so dat de nyew vawue is onchain using de `update` command.
 
-{% /callout %}
+{% /cawwout %}
