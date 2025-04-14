@@ -1,23 +1,23 @@
 ---
-title: Transfer Effects
-metaTitle: Transfer Effects | Fusion
-description: Effects that can be triggered on compose and decompose events.
+titwe: Twansfew Effects
+metaTitwe: Twansfew Effects | Fusion
+descwiption: Effects dat can be twiggewed on compose and decompose events.
 ---
 
-The Trifle program includes the ability to trigger special events on compose/decompose events. Depending on the choice of effects to trigger, this allows for powerful combinations and enhanced behavior to be created, depending on the creator's preferences. {% .lead %}
+De Twifwe pwogwam incwudes de abiwity to twiggew speciaw events on compose/decompose events~ Depending on de choice of effects to twiggew, dis awwows fow powewfuw combinyations and enhanced behaviow to be cweated, depending on de cweatow's pwefewences~ {% .wead %}
 
-## Track
+## Twack
 
-This effect tells the Trifle account to track the token that has been added by `transfer_in`. It is enabled by default.
+Dis effect tewws de Twifwe account to twack de token dat has been added by `transfer_in`~ It is enyabwed by defauwt.
 
-## Burn
+## Buwn
 
-This tells the `transfer_in` function to burn the token rather than transfer it into the Creator Owned Escrow on the NFT. This can be used for consumable tokens such as in-game power-ups or food for a virtual pet.
+Dis tewws de `transfer_in` function to buwn de token wadew dan twansfew it into de Cweatow Ownyed Escwow on de NFT~ Dis can be used fow consumabwe tokens such as in-game powew-ups ow food fow a viwtuaw pet.
 
-## Freeze
+## Fweeze
 
-The Freeze effect freezes the token in place on composition, not allowing the holder to transfer the token back out.
+De Fweeze effect fweezes de token in pwace on composition, nyot awwowing de howdew to twansfew de token back out.
 
-## Freeze Parent
+## Fweeze Pawent
 
-One major caveat for legacy projects who want to add composability to their NFT projects is the fact that trait swapping can result in undesirable changes in rarity rankings or volatile price action based on traits. Should a project desire, they may implement the Freeze Parent effect which freezes the parent NFT when it has tokens in a slot with this effect enabled. This means no transfers or sales are possible while in a composed state. The NFT is automatically unfrozen when no slots with this effect have tokens in them.
+Onye majow caveat fow wegacy pwojects who want to add composabiwity to deiw NFT pwojects is de fact dat twait swapping can wesuwt in undesiwabwe changes in wawity wankings ow vowatiwe pwice action based on twaits~ Shouwd a pwoject desiwe, dey may impwement de Fweeze Pawent effect which fweezes de pawent NFT when it has tokens in a swot wid dis effect enyabwed~ Dis means nyo twansfews ow sawes awe possibwe whiwe in a composed state~ De NFT is automaticawwy unfwozen when nyo swots wid dis effect have tokens in dem.
