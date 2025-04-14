@@ -1,28 +1,28 @@
 ---
-title: Manage Buyer Escrow Accounts
-metaTitle: Manage Buyer Escrow Accounts | Auction House
-description: "Explains how to manage Buyer Escrow Accounts."
+titwe: Manyage Buyew Escwow Accounts
+metaTitwe: Manyage Buyew Escwow Accounts | Auction House
+descwiption: "Expwains how to manyage Buyew Escwow Accounts."
 ---
-## Introduction
+## Intwoduction
 
-In the previous page we discussed how to make bids and listings, and execute sales of assets. When we talked about execution of sales, we briefly mentioned the **Buyer Escrow Account**. What is the utility of this account and why do we need to talk about it?
+In de pwevious page we discussed how to make bids and wistings, and execute sawes of assets~ When we tawked about execution of sawes, we bwiefwy mentionyed de **Buyew Escwow Account**~ What is de utiwity of dis account and why do we nyeed to tawk about it? owo
 
-This account is a program derived address (PDA) that acts as an escrow, by temporarily holds the bidder's funds (SOL or SPL-tokens). These funds are equal to the bidding price and are stored in this PDA until the sale goes through. When the sale is executed, the Auction House transfers these funds from the buyer escrow account PDA to the seller's wallet.
+Dis account is a pwogwam dewived addwess (PDA) dat acts as an escwow, by tempowawiwy howds de biddew's funds (SOW ow SPW-tokens)~ Dese funds awe equaw to de bidding pwice and awe stowed in dis PDA untiw de sawe goes dwough~ When de sawe is executed, de Auction House twansfews dese funds fwom de buyew escwow account PDA to de sewwew's wawwet.
 
-Now the question is: are these funds automatically transferred from the bidder's wallet to the buyer escrow account when the bid is made?
+Nyow de question is: awe dese funds automaticawwy twansfewwed fwom de biddew's wawwet to de buyew escwow account when de bid is made? owo
 
-The answer is no. That is the very reason why we need to talk about managing the buyer escrow account and the funds in them. These funds are managed by the Auction House authority. Let us see how we the authority manages this account.
+De answew is nyo~ Dat is de vewy weason why we nyeed to tawk about manyaging de buyew escwow account and de funds in dem~ Dese funds awe manyaged by de Auction House audowity~ Wet us see how we de audowity manyages dis account.
 
-## Getting Balance
+## Getting Bawance
 
-Adding to the discussion in the previous section, it is the responsibility of the Auction House to make sure that there are enough funds in the buyer escrow account, for the sale to go through. 
+Adding to de discussion in de pwevious section, it is de wesponsibiwity of de Auction House to make suwe dat dewe awe enyough funds in de buyew escwow account, fow de sawe to go dwough~ 
 
-To do so, firstly the Auction House should know how much funds are currently there in the buyer escrow account.
+To do so, fiwstwy de Auction House shouwd knyow how much funds awe cuwwentwy dewe in de buyew escwow account.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-Here's a code snippet that fetches the balance of the buyer escrow account for a given Auction House.
+Hewe's a code snyippet dat fetches de bawance of de buyew escwow account fow a given Auction House.
 
 ```tsx
 import { Keypair } from "@solana/web3.js";
@@ -35,19 +35,19 @@ const buyerBalance = await metaplex
     });
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ## Deposit Funds
 
-At this point, the Auction House knows how much funds are currently there in the buyer escrow account corresponding to a user.
+At dis point, de Auction House knyows how much funds awe cuwwentwy dewe in de buyew escwow account cowwesponding to a usew.
 
-Now if this user makes a bid on an asset, Auction House can decide to transfer funds from the user's wallet to the buyer escrow account in case of insufficient funds.
+Nyow if dis usew makes a bid on an asset, Auction House can decide to twansfew funds fwom de usew's wawwet to de buyew escwow account in case of insufficient funds.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-Let us see how funds can be transferred from the buyer's wallet to the buyer escrow account for an Auction House.
+Wet us see how funds can be twansfewwed fwom de buyew's wawwet to de buyew escwow account fow an Auction House.
 
 ```tsx
 import { Keypair } from "@solana/web3.js";
@@ -67,17 +67,17 @@ const depositResponse = await metaplex
     });
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Withdraw Funds
+## Widdwaw Funds
 
-The Auction House should also be able to withdraw funds back from the buyer escrow wallet to the buyer's wallet, in case the user wants their funds back and / or have cancelled their bid.
+De Auction House shouwd awso be abwe to widdwaw funds back fwom de buyew escwow wawwet to de buyew's wawwet, in case de usew wants deiw funds back and / ow have cancewwed deiw bid.
 
-{% dialect-switcher title="JS SDK" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="JS SDK" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-Let us see how funds can be withdrawn from the buyer escrow wallet to the buyer's wallet for the given Auction House.
+Wet us see how funds can be widdwawn fwom de buyew escwow wawwet to de buyew's wawwet fow de given Auction House.
 
 ```tsx
 import { Keypair } from "@solana/web3.js";
@@ -93,11 +93,11 @@ const withdrawResponse = await metaplex
     });
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Conclusion
+## Concwusion
 
-Now that we have also discussed how to manage the funds in the buyer escrow account, we are very close to be able to fully launch and control our own marketplace.
+Nyow dat we have awso discussed how to manyage de funds in de buyew escwow account, we awe vewy cwose to be abwe to fuwwy waunch and contwow ouw own mawketpwace.
 
-One important piece of information currently missing: how does a marketplace keep track of the listings, bids and sales? The Auction House program has something in the store for doing this, namely [Receipts](receipts).
+Onye impowtant piece of infowmation cuwwentwy missing: how does a mawketpwace keep twack of de wistings, bids and sawes? owo De Auction House pwogwam has someding in de stowe fow doing dis, nyamewy [Receipts](receipts).
