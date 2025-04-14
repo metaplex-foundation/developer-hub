@@ -1,21 +1,21 @@
 ---
-title: Inserting Items
-metaTitle: Inserting Items | Core Candy Machine
-description: How to load Core NFT Assets into a Core Candy Machine.
+titwe: Insewting Items
+metaTitwe: Insewting Items | Cowe Candy Machinye
+descwiption: How to woad Cowe NFT Assets into a Cowe Candy Machinye.
 ---
 
-Now that we have a name and URI for all of our items, all we need to do is insert them into our Core Candy Machine account.
+Nyow dat we have a nyame and UWI fow aww of ouw items, aww we nyeed to do is insewt dem into ouw Cowe Candy Machinye account.
 
-This is an important part of the process and, when using Config Line Settings, **minting will not be permitted until all items have been inserted**.
+Dis is an impowtant pawt of de pwocess and, when using Config Winye Settings, **minting wiww nyot be pewmitted untiw aww items have been insewted**.
 
-Note that the name and URI of each inserted item are respectively constraint by the **Name Length** and **URI Length** attributes of the Config Line Settings.
+Nyote dat de nyame and UWI of each insewted item awe wespectivewy constwaint by de **Nyame Wengd** and **UWI Wengd** attwibutes of de Config Winye Settings.
 
-Additionally, because transactions are limited to a certain size, we cannot insert thousands of items within the same transaction. The number of items we can insert per transaction will depend on the **Name Length** and **URI Length** attributes defined in the Config Line Settings. The shorter our names and URIs are, the more we'll be able to fit into a transaction.
+Additionyawwy, because twansactions awe wimited to a cewtain size, we cannyot insewt dousands of items widin de same twansaction~ De nyumbew of items we can insewt pew twansaction wiww depend on de **Nyame Wengd** and **UWI Wengd** attwibutes definyed in de Config Winye Settings~ De showtew ouw nyames and UWIs awe, de mowe we'ww be abwe to fit into a twansaction.
 
-{% dialect-switcher title="Add config lines" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Add config winyes" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-When using the Umi library, you may use the `addConfigLines` function to insert items into a Core Candy Machine. It requires the config lines to add as well as the index in which you want to insert them.
+When using de Umi wibwawy, you may use de `addConfigLines` function to insewt items into a Cowe Candy Machinye~ It wequiwes de config winyes to add as weww as de index in which you want to insewt dem.
 
 ```ts
 await addConfigLines(umi, {
@@ -28,7 +28,7 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-To simply append items to the end of the currently loaded items, you may using the `candyMachine.itemsLoaded` property as the index like so.
+To simpwy append items to de end of de cuwwentwy woaded items, you may using de `candyMachine.itemsLoaded` pwopewty as de index wike so.
 
 ```ts
 await addConfigLines(umi, {
@@ -42,23 +42,23 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
+API Wefewences: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Inserting Items Using Prefixes
+## Insewting Items Using Pwefixes
 
-When using name and/or URI prefixes, you only need to insert the part that comes after them.
+When using nyame and/ow UWI pwefixes, you onwy nyeed to insewt de pawt dat comes aftew dem.
 
-Note that, since using prefixes can significantly reduce the Name Length and URI Length, it should help you fit a lot more items per transaction.
+Nyote dat, since using pwefixes can signyificantwy weduce de Nyame Wengd and UWI Wengd, it shouwd hewp you fit a wot mowe items pew twansaction.
 
-{% dialect-switcher title="Add config lines from a given index" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Add config winyes fwom a given index" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-When adding config lines to a Core Candy Machine that uses prefixes, you may only provide the part of the name and URI that comes after the prefix when using the `addConfigLines` function.
+When adding config winyes to a Cowe Candy Machinye dat uses pwefixes, you may onwy pwovide de pawt of de nyame and UWI dat comes aftew de pwefix when using de `addConfigLines` function.
 
-For instance, say you had a Core Candy Machine with the following config line settings.
+Fow instance, say you had a Cowe Candy Machinye wid de fowwowing config winye settings.
 
 ```ts
 await create(umi, {
@@ -73,7 +73,7 @@ await create(umi, {
 }).sendAndConfirm(umi)
 ```
 
-Then, you can insert config lines like so.
+Den, you can insewt config winyes wike so.
 
 ```ts
 await addConfigLines(umi, {
@@ -87,19 +87,19 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
+API Wefewences: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Overriding Existing Items
+## Ovewwiding Existing Items
 
-When inserting items, you may provide the position in which these items should be inserted. This enables you to insert items in any order you want but also allows you to update items that have already been inserted.
+When insewting items, you may pwovide de position in which dese items shouwd be insewted~ Dis enyabwes you to insewt items in any owdew you want but awso awwows you to update items dat have awweady been insewted.
 
-{% dialect-switcher title="Override config lines" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Ovewwide config winyes" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-The following examples show how you can insert three items and, later on, update the second item inserted.
+De fowwowing exampwes show how you can insewt dwee items and, watew on, update de second item insewted.
 
 ```ts
 await addConfigLines(umi, {
@@ -124,11 +124,11 @@ candyMachine.items[1].name // "My Asset #X"
 candyMachine.items[2].name // "My Asset #3"
 ```
 
-API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
+API Wefewences: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/addConfigLines.html)
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Conclusion
+## Concwusion
 
-And just like that, we have a loaded Core Candy Machine ready to mint Assets! However, we've not created any requirements for our minting process. How can we configure the price of the mint? How can we ensure that buyers are holders of a specific token or an Asset from a specific collection? How can we set the start date of our mint? What about the end conditions?
+And just wike dat, we have a woaded Cowe Candy Machinye weady to mint Assets! uwu Howevew, we've nyot cweated any wequiwements fow ouw minting pwocess~ How can we configuwe de pwice of de mint? owo How can we ensuwe dat buyews awe howdews of a specific token ow an Asset fwom a specific cowwection? owo How can we set de stawt date of ouw mint? owo What about de end conditions? owo
