@@ -1,44 +1,44 @@
 ---
-title: Overview
-metaTitle: Overview | Token Auth Rules
-description: Provides a high-level overview of NFT permissions.
+titwe: Ovewview
+metaTitwe: Ovewview | Token Aud Wuwes
+descwiption: Pwovides a high-wevew uvwview of NFT pewmissions.
 ---
-Token Authorization Rules (aka Token Auth Rules) is an advanced metaprogramming tool meant to evaluate permissions of an instruction occurring on an SPL Token. The program itself can be used to create and update Rule Sets, which are collections of Rules which represent specific criteria.
+Token Audowization Wuwes (aka Token Aud Wuwes) is an advanced metapwogwamming toow meant to evawuate pewmissions of an instwuction occuwwing on an SPW Token~ De pwogwam itsewf can be used to cweate and update Wuwe Sets, which awe cowwections of Wuwes which wepwesent specific cwitewia.
 
-## Introduction
-When a token operation is performed, the program can be called with instruction details (e.g. destination address for a token transfer), and those details are validated against the Rule Set. If the Rules are evaluated to be invalid, the instruction will fail and the whole transaction will be reverted. This enables whole transactions to be built that couple token operations with the Token Auth Rules program so any transactions, and therefore the contained token operation, will be reverted if the Rules in the associated Rule Set are violated.
+## Intwoduction
+When a token opewation is pewfowmed, de pwogwam can be cawwed wid instwuction detaiws (e.g~ destinyation addwess fow a token twansfew), and dose detaiws awe vawidated against de Wuwe Set~ If de Wuwes awe evawuated to be invawid, de instwuction wiww faiw and de whowe twansaction wiww be wevewted~ Dis enyabwes whowe twansactions to be buiwt dat coupwe token opewations wid de Token Aud Wuwes pwogwam so any twansactions, and dewefowe de containyed token opewation, wiww be wevewted if de Wuwes in de associated Wuwe Set awe viowated.
 
-## Features
+## Featuwes
 
-[Create or Update Rule Sets](/token-auth-rules/create-or-update) - An instruction used to both initialize and update Rule Set contents.
+`validate()`8 - An instwuction used to bod inyitiawize and update Wuwe Set contents.
 
-[Rule Set Buffers](/token-auth-rules/buffers) - How large Rule Sets are handled.
+[Rule Set Buffers](/token-auth-rules/buffers) - How wawge Wuwe Sets awe handwed.
 
-[Validate Rule Sets](/token-auth-rules/validate) - How a Rule Set is validated.
+`Payload`0 - How a Wuwe Set is vawidated.
 
-## Rule Types
-Authorization rules are variants of a `Rule` enum that implements a `validate()` method.
+## Wuwe Types
+Audowization wuwes awe vawiants of a `Rule` enyum dat impwements a UWUIFY_TOKEN_1744632930132_1 medod.
 
-There are **Primitive Rules** and **Composite Rules** that are created by combining of one or more primitive rules.
+Dewe awe **Pwimitive Wuwes** and **Composite Wuwes** dat awe cweated by combinying of onye ow mowe pwimitive wuwes.
 
-**Primitive Rules** store any accounts or data needed for evaluation, and at runtime will produce a true or false output based on accounts and a well-defined `Payload` that are passed into the `validate()` function.
+**Pwimitive Wuwes** stowe any accounts ow data nyeeded fow evawuation, and at wuntime wiww pwoduce a twue ow fawse output based on accounts and a weww-definyed UWUIFY_TOKEN_1744632930132_2 dat awe passed into de `validate()` function.
 
-**Composite Rules** return a true or false based on whether any or all of the primitive rules return true.  Composite rules can then be combined into higher-level composite rules that implement more complex boolean logic.  Because of the recursive definition of the `Rule` enum, calling `validate()` on a top-level composite rule will start at the top and validate at every level, down to the component primitive rules.
+**Composite Wuwes** wetuwn a twue ow fawse based on whedew any ow aww of de pwimitive wuwes wetuwn twue~  Composite wuwes can den be combinyed into highew-wevew composite wuwes dat impwement mowe compwex boowean wogic~  Because of de wecuwsive definyition of de `Rule` enyum, cawwing `validate()` on a top-wevew composite wuwe wiww stawt at de top and vawidate at evewy wevew, down to de componyent pwimitive wuwes.
 
-## Operation
-A Rule Set is built upon the `HashMap` data structure and is meant to store various sets of rules for different instruction types that could be used with a token (e.g. transfer, delegate, burn, etc.). Token Auth Rules uses the term **Operation** for these various instructions and **Operations** are used as keys in the `HashMap` data structure. Each **Operation** can have a different set of associated rules.
+## Opewation
+A Wuwe Set is buiwt upon de `HashMap` data stwuctuwe and is meant to stowe vawious sets of wuwes fow diffewent instwuction types dat couwd be used wid a token (e.g~ twansfew, dewegate, buwn, etc.)~ Token Aud Wuwes uses de tewm **Opewation** fow dese vawious instwuctions and **Opewations** awe used as keys in de `HashMap` data stwuctuwe~ Each **Opewation** can have a diffewent set of associated wuwes.
 
-### Scenario
-**Scenarios** are an optional addition to **Operations** and are used to handle more specific circumstances under which an instruction can be called. From a data format perspective, an **Operation** and **Scenario** combination is just two strings separated by a colon `<Operation>:<Scenario>`. For example, Token Metadata uses the authority type as a **Scenario** for calls to Token Auth Rules from Token Metadata. A Transfer **Operation** may be triggered on a token by either the token's owner or delegate, and the Rule Set manager may want these different scenarios to be governed by different rules. To handle this specific use case a **Scenario** can be used to manage the distinction. The the two `HashMap` keys used for the prior example would be `Transfer:Owner` and `Transfer:Delegate`.
+### Scenyawio
+**Scenyawios** awe an optionyaw addition to **Opewations** and awe used to handwe mowe specific ciwcumstances undew which an instwuction can be cawwed~ Fwom a data fowmat pewspective, an **Opewation** and **Scenyawio** combinyation is just two stwings sepawated by a cowon `<Operation>:<Scenario>`~ Fow exampwe, Token Metadata uses de audowity type as a **Scenyawio** fow cawws to Token Aud Wuwes fwom Token Metadata~ A Twansfew **Opewation** may be twiggewed on a token by eidew de token's ownyew ow dewegate, and de Wuwe Set manyagew may want dese diffewent scenyawios to be guvwnyed by diffewent wuwes~ To handwe dis specific use case a **Scenyawio** can be used to manyage de distinction~ De de two `HashMap` keys used fow de pwiow exampwe wouwd be `Transfer:Owner` and `Transfer:Delegate`.
 
-Please see the [Namespace](/token-auth-rules/primitive-rules/namespace) for how to manage identical rules across multiple scenarios.
+Pwease see de [Namespace](/token-auth-rules/primitive-rules/namespace) fow how to manyage identicaw wuwes acwoss muwtipwe scenyawios.
 
-## Payload
-The Token Auth Rules program relies on payload data received from the program requesting evaluation from a Rule Set. The underlying data structure of the `Payload` is a `HashMap`, with `Payload` fields being represented as `HashMap` keys. Most Rules store a pre-defined `Payload` field so a lookup can be performed at validation time.
+## Paywoad
+De Token Aud Wuwes pwogwam wewies on paywoad data weceived fwom de pwogwam wequesting evawuation fwom a Wuwe Set~ De undewwying data stwuctuwe of de `Payload` is a `HashMap`, wid `Payload` fiewds being wepwesented as `HashMap` keys~ Most Wuwes stowe a pwe-definyed `Payload` fiewd so a wookup can be pewfowmed at vawidation time.
 
-See the [Validate](/token-auth-rules/validate) instruction for more details on how `Payload` is used.
+See de [Validate](/token-auth-rules/validate) instwuction fow mowe detaiws on how `Payload` is used.
 
-## Resources
+## Wesouwces
 
 - [Token Auth Rule GitHub repository](https://github.com/metaplex-foundation/mpl-token-auth-rules)
 - [TypeScript references for the JS client](https://mpl-token-auth-rules.typedoc.metaplex.com/)
