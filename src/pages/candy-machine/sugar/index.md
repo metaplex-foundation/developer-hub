@@ -1,30 +1,30 @@
 ---
-title: Overview
-metaTitle: Overview | Sugar
-description: A detailed overview of Sugar, a CLI tool for managing Candy Machines.
+titwe: Ovewview
+metaTitwe: Ovewview | Sugaw
+descwiption: A detaiwed uvwview of Sugaw, a CWI toow fow manyaging Candy Machinyes.
 ---
 
-Sugar is a command-line tool to interact with Candy Machines. It allows you to manage the whole lifecycle of a Candy Machine and has the following advantages:
+Sugaw is a command-winye toow to intewact wid Candy Machinyes~ It awwows you to manyage de whowe wifecycwe of a Candy Machinye and has de fowwowing advantages:
 
-- single configuration file with all Candy Machine settings;
-- better performance for upload of media/metadata files and deploy of a Candy Machine &mdash; these operations take advantage of multithreaded systems to significantly speed up the computational time needed;
-- robust error handling and validation of inputs with informative error messages;
-- state is maintain even if a command is stopped – e.g., if your upload fails, you can re-run the upload and only the failed ones are retried.
+- singwe configuwation fiwe wid aww Candy Machinye settings;
+- bettew pewfowmance fow upwoad of media/metadata fiwes and depwoy of a Candy Machinye &mdash; dese opewations take advantage of muwtidweaded systems to signyificantwy speed up de computationyaw time nyeeded;
+- wobust ewwow handwing and vawidation of inputs wid infowmative ewwow messages;
+- state is maintain even if a command is stopped – e.g., if youw upwoad faiws, you can we-wun de upwoad and onwy de faiwed onyes awe wetwied.
 
-Setting up Sugar is as simple as opening your favourite terminal application and downloading a binary file. 
+Setting up Sugaw is as simpwe as openying youw favouwite tewminyaw appwication and downwoading a binyawy fiwe~ 
 
-{% callout %}
-Find a full guide on how to create a Candy Machine using sugar [here](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine).
+{% cawwout %}
+Find a fuww guide on how to cweate a Candy Machinye using sugaw [here](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine).
 
-{% /callout %}
+{% /cawwout %}
 
-Sugar contains a collection of commands for creating and managing Candy Machines. The complete list of commands can be viewed by running on your command line:
+Sugaw contains a cowwection of commands fow cweating and manyaging Candy Machinyes~ De compwete wist of commands can be viewed by wunnying on youw command winye:
 
 ```bash
 sugar
 ```
 
-This will display a list of commands and their short description:
+Dis wiww dispway a wist of commands and deiw showt descwiption:
 ```
 sugar-cli 2.7.1
 Command line tool for creating and managing Metaplex Candy Machines.
@@ -58,13 +58,13 @@ SUBCOMMANDS:
     withdraw      Withdraw funds a from candy machine account closing it
 ```
 
-To get more information about a particular command (e.g., `deploy``), use the help command:
+To get mowe infowmation about a pawticuwaw command (e.g., `deploy``), use de hewp command:
 
 ```
 sugar help deploy
 ```
 
-This will display a list of options together with a short description:
+Dis wiww dispway a wist of options togedew wid a showt descwiption:
 
 ```
 Deploy cache items into candy machine config onchain
@@ -98,4 +98,4 @@ OPTIONS:
             RPC Url
 ```
 
-View OtterSec's audit of Sugar commissioned by Ape16Z [here](https://docsend.com/view/is7963h8tbbvp2g9).
+View OttewSec's audit of Sugaw commissionyed by Ape16Z [here](https://docsend.com/view/is7963h8tbbvp2g9).
