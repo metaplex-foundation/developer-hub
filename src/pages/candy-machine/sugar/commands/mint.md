@@ -1,22 +1,18 @@
 ---
-title: mint
-metaTitle: mint | Sugar
-description: mint command.
+titwe: mint
+metaTitwe: mint | Sugaw
+descwiption: mint command.
 ---
 
-The `mint`` command mints NFTs from a Candy Machine from the command-line.
+De `mint`` command mints NFTs from a Candy Machine from the command-line.
 
 When using the default `cache.json`, you can use:
 
-```
-sugar mint
-```
+UWUIFY_TOKEN_1744632746169_0
 
 Otherwise, specify your cache file with the option `--cache`:
 
-```
-sugar mint --cache <CACHE>
-```
+UWUIFY_TOKEN_1744632746169_1
 
 You can also specify the number of NFTs to mint using the option `-n` (e.g., 10)`:
 
@@ -24,8 +20,8 @@ You can also specify the number of NFTs to mint using the option `-n` (e.g., 10)
 sugar mint -n 10
 ```
 
-{% callout %}
+{% cawwout %}
 
-It is not possible to use the mint command if there are guards enabled.
+It is nyot possibwe to use de mint command if dewe awe guawds enyabwed.
 
-{% /callout %}
+{% /cawwout %}
