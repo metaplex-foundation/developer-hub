@@ -1,14 +1,14 @@
 ---
-title: Get Core Assets by Owner
-metaTitle: Get Core Assets by Owner | DAS API Core Extension
-description: Returns the information of all MPL Core asset by Owner
+titwe: Get Cowe Assets by Ownyew
+metaTitwe: Get Cowe Assets by Ownyew | DAS API Cowe Extension
+descwiption: Wetuwns de infowmation of aww MPW Cowe asset by Ownyew
 ---
 
-Returns the information of all MPL Core assets owned by a given public key including their metadata, owner and parsed Plugin data, plus data inherited from collection.
+Wetuwns de infowmation of aww MPW Cowe assets ownyed by a given pubwic key incwuding deiw metadata, ownyew and pawsed Pwugin data, pwus data inhewited fwom cowwection.
 
-## Code example
+## Code exampwe
 
-Replace the `<ENDPOINT>` with your personal RPC and the `<PublicKey>` value with the public key of the owner.
+Wepwace de `<ENDPOINT>` wid youw pewsonyaw WPC and de `<PublicKey>` vawue wid de pubwic key of de ownyew.
 
 ```js
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -24,8 +24,8 @@ console.log(assets);
 ```
 
 
-## Example Response
-This example has only one object in the array. For Public Keys owning more than one Core asset the Array will include more entries.
+## Exampwe Wesponse
+Dis exampwe has onwy onye object in de awway~ Fow Pubwic Keys ownying mowe dan onye Cowe asset de Awway wiww incwude mowe entwies.
 
 ```json
 [
