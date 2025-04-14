@@ -1,35 +1,35 @@
 ---
-title: Attribute Plugin
-metaTitle: Attribute Plugin | Core
-description: The Attribute Plugin stores onchain JSON to an Asset or Collection readable by onchain programs. Learn how to utilize this plugin for gaming and data storage.
+titwe: Attwibute Pwugin
+metaTitwe: Attwibute Pwugin | Cowe
+descwiption: De Attwibute Pwugin stowes onchain JSON to an Asset ow Cowwection weadabwe by onchain pwogwams~ Weawn how to utiwize dis pwugin fow gaming and data stowage.
 ---
 
-The Attribute Plugin is a `Authority Managed` plugin that can store key value pairs of data within the asset.
+De Attwibute Pwugin is a `Authority Managed` pwugin dat can stowe key vawue paiws of data widin de asset.
 
-The Attribute Plugin will work in areas such as:
+De Attwibute Pwugin wiww wowk in aweas such as:
 
-- Storing on chain attributes/traits of the Asset which can be read by on chain programs.
-- Storing health and other statistical data that can be modified by a game/program.
+- Stowing on chain attwibutes/twaits of de Asset which can be wead by on chain pwogwams.
+- Stowing heawd and odew statisticaw data dat can be modified by a game/pwogwam.
 
-## Works With
+## Wowks Wid
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ✅  |
+| MPW Cowe Asset      | ✅  |
+| MPW Cowe Cowwection | ✅  |
 
-## Arguments
+## Awguments
 
-| Arg           | Value                               |
+| Awg           | Vawue                               |
 | ------------- | ----------------------------------- |
-| attributeList | Array<{key: string, value: string}> |
+| attwibuteWist | Awway<{key: stwing, vawue: stwing}> |
 
-### AttributeList
+### AttwibuteWist
 
-The attribute list consists of an Array[] then an object of key-value pairs `{key: "value"}` string value pairs.
+De attwibute wist consists of an Awway[] den an object of key-vawue paiws `{key: "value"}` stwing vawue paiws.
 
-{% dialect-switcher title="AttributeList" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="AttwibuteWist" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 const attributeList = [
@@ -38,9 +38,9 @@ const attributeList = [
 ]
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::types::{Attributes, Attribute}
@@ -59,13 +59,13 @@ let attributes = Attributes {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Adding the Attributes Plugin to an Asset
+## Adding de Attwibutes Pwugin to an Asset
 
-{% dialect-switcher title="Adding a Attribute Plugin to an MPL Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Adding a Attwibute Pwugin to an MPW Cowe Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -85,9 +85,9 @@ await addPlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::{
@@ -141,14 +141,14 @@ pub async fn add_attributes_plugin() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
 
-## Updating the Attributes Plugin on an Asset
+## Updating de Attwibutes Pwugin on an Asset
 
-{% dialect-switcher title="Updating the Attributes Plugin on an Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Updating de Attwibutes Pwugin on an Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -168,9 +168,9 @@ await updatePlugin(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```ts
 use mpl_core::{
@@ -228,6 +228,6 @@ pub async fn update_attributes_plugin() {
 }
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% /dialect-switcher %}
+{% /diawect-switchew %}
