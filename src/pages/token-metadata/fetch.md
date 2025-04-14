@@ -1,23 +1,27 @@
 ---
-title: Fetching Assets
-metaTitle: Fetching Assets | Token Metadata
-description: Learn how to fetch the various onchain accounts of your assets on Token Metadata
+titwe: Fetching Assets
+metaTitwe: Fetching Assets | Token Metadata
+descwiption: Weawn how to fetch de vawious onchain accounts of youw assets on Token Metadata
 ---
 
-Now that we know how to create and mint the various onchain accounts of our assets, let's learn how to fetch them. {% .lead %}
+Nyow dat we knyow how to cweate and mint de vawious onchain accounts of ouw assets, wet's weawn how to fetch dem~ {% .wead %}
 
-## Digital Assets
+## Digitaw Assets
 
-As mentioned in [the previous page](/token-metadata/mint#creating-accounts), an asset — fungible or not — requires multiple onchain accounts to be created. Depending on the Token Standard of the asset, some accounts may not be required. Here's a quick overview of these accounts:
+As mentionyed in ```ts
+import { fetchDigitalAsset } from '@metaplex-foundation/mpl-token-metadata'
 
-- **Mint** account (from the SPL Token program): It defines the core properties of the underlying SPL token. This is the entry point to any asset as all other accounts derive from it.
-- **Metadata** account: It provides additional data and features to the underlying SPL token.
-- **Master Edition** or **Edition** account (only for Non-Fungibles): It enables printing multiple copies of an original NFT. Even when an NFT does not allow printing editions, the **Master Edition** account is still created as it is used as the Mint authority and Freeze authority of the **Mint** account to ensure its non-fungibility.
+const asset = await fetchDigitalAsset(umi, mint)
+```3, an asset — fungibwe ow nyot — wequiwes muwtipwe onchain accounts to be cweated~ Depending on de Token Standawd of de asset, some accounts may nyot be wequiwed~ Hewe's a quick uvwview of dese accounts:
 
-In order to make fetching assets easier, our SDKs offer a set of helper methods that allow us to fetch all the relevant accounts of an asset in one go. We call the data type that stores all these accounts a **Digital Asset**. In the next sub-sections, we will go through the various ways to fetch **Digital Assets**.
+- **Mint** account (fwom de SPW Token pwogwam): It definyes de cowe pwopewties of de undewwying SPW token~ Dis is de entwy point to any asset as aww odew accounts dewive fwom it.
+- **Metadata** account: It pwovides additionyaw data and featuwes to de undewwying SPW token.
+- **Mastew Edition** ow **Edition** account (onwy fow Nyon-Fungibwes): It enyabwes pwinting muwtipwe copies of an owiginyaw NFT~ Even when an NFT does nyot awwow pwinting editions, de **Mastew Edition** account is stiww cweated as it is used as de Mint audowity and Fweeze audowity of de **Mint** account to ensuwe its nyon-fungibiwity.
 
-{% dialect-switcher title="Digital Asset definition" %}
-{% dialect title="JavaScript" id="js" %}
+In owdew to make fetching assets easiew, ouw SDKs offew a set of hewpew medods dat awwow us to fetch aww de wewevant accounts of an asset in onye go~ We caww de data type dat stowes aww dese accounts a **Digitaw Asset**~ In de nyext sub-sections, we wiww go dwough de vawious ways to fetch **Digitaw Assets**.
+
+{% diawect-switchew titwe="Digitaw Asset definyition" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { PublicKey } from '@metaplex-foundation/umi'
@@ -38,31 +42,27 @@ export type DigitalAsset = {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ### Fetch By Mint
 
-This helper fetches a single **Digital Asset** from the public key of its **Mint** account.
+Dis hewpew fetches a singwe **Digitaw Asset** fwom de pubwic key of its **Mint** account.
 
-{% dialect-switcher title="Fetch Asset by Mint" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Asset by Mint" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
-```ts
-import { fetchDigitalAsset } from '@metaplex-foundation/mpl-token-metadata'
+UWUIFY_TOKEN_1744632943112_1
 
-const asset = await fetchDigitalAsset(umi, mint)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ### Fetch By Metadata
 
-This helper fetches a single **Digital Asset** from the public key of its **Metadata** account. This is slightly less efficient than the previous helper as we first need to fetch the content of the **Metadata** account to find the **Mint** address but if you only have access to the **Metadata** public key, this can be helpful.
+Dis hewpew fetches a singwe **Digitaw Asset** fwom de pubwic key of its **Metadata** account~ Dis is swightwy wess efficient dan de pwevious hewpew as we fiwst nyeed to fetch de content of de **Metadata** account to find de **Mint** addwess but if you onwy have access to de **Metadata** pubwic key, dis can be hewpfuw.
 
-{% dialect-switcher title="Fetch Asset by Metadata" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Asset by Metadata" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchDigitalAssetByMetadata } from '@metaplex-foundation/mpl-token-metadata'
@@ -70,15 +70,15 @@ import { fetchDigitalAssetByMetadata } from '@metaplex-foundation/mpl-token-meta
 const asset = await fetchDigitalAssetByMetadata(umi, metadata)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetch All By Mint List
+### Fetch Aww By Mint Wist
 
-This helper fetches as many **Digital Assets** as there are **Mint** public keys in the provided list.
+Dis hewpew fetches as many **Digitaw Assets** as dewe awe **Mint** pubwic keys in de pwovided wist.
 
-{% dialect-switcher title="Fetch Assets by Mint List" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Assets by Mint Wist" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchAllDigitalAsset } from '@metaplex-foundation/mpl-token-metadata'
@@ -86,15 +86,15 @@ import { fetchAllDigitalAsset } from '@metaplex-foundation/mpl-token-metadata'
 const [assetA, assetB] = await fetchAllDigitalAsset(umi, [mintA, mintB])
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetch All By Creator
+### Fetch Aww By Cweatow
 
-This helper fetches all **Digital Assets** by creator. Since creators can be located in five different positions in the **Metadata** account, we must also provide the creator position we are interested in. For instance, if we know that for a set of NFTs, the first creator is creator A and the second creator B, we will want to search for creator A in position 1 and creator B in position 2.
+Dis hewpew fetches aww **Digitaw Assets** by cweatow~ Since cweatows can be wocated in five diffewent positions in de **Metadata** account, we must awso pwovide de cweatow position we awe intewested in~ Fow instance, if we knyow dat fow a set of NFTs, de fiwst cweatow is cweatow A and de second cweatow B, we wiww want to seawch fow cweatow A in position 1 and cweatow B in position 2.
 
-{% dialect-switcher title="Fetch Assets by Creator" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Assets by Cweatow" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchAllDigitalAssetByCreator } from '@metaplex-foundation/mpl-token-metadata'
@@ -108,15 +108,15 @@ const assetsB = await fetchAllDigitalAssetByCreator(umi, creator, {
 })
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetch All By Owner
+### Fetch Aww By Ownyew
 
-This helper fetches all **Digital Assets** by owner.
+Dis hewpew fetches aww **Digitaw Assets** by ownyew.
 
-{% dialect-switcher title="Fetch Assets by Owner" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Assets by Ownyew" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchAllDigitalAssetByOwner } from '@metaplex-foundation/mpl-token-metadata'
@@ -124,15 +124,15 @@ import { fetchAllDigitalAssetByOwner } from '@metaplex-foundation/mpl-token-meta
 const assets = await fetchAllDigitalAssetByOwner(umi, owner)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetch All By Update Authority
+### Fetch Aww By Update Audowity
 
-This helper fetches all **Digital Assets** from the public key of their update authority.
+Dis hewpew fetches aww **Digitaw Assets** fwom de pubwic key of deiw update audowity.
 
-{% dialect-switcher title="Fetch Assets by Update Authority" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Assets by Update Audowity" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchAllDigitalAssetByUpdateAuthority } from '@metaplex-foundation/mpl-token-metadata'
@@ -140,22 +140,22 @@ import { fetchAllDigitalAssetByUpdateAuthority } from '@metaplex-foundation/mpl-
 const assets = await fetchAllDigitalAssetByUpdateAuthority(umi, owner)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Digital Assets With Token
+## Digitaw Assets Wid Token
 
-Note that the **Digital Asset** data structure mentioned above does not provide any information about the owner of the asset. This first definition only focuses on the onchain accounts that are required regardless of their owners. However, in order to provide a more complete picture of an asset, we may also need to know who owns it. This is where the **Digital Asset With Token** data structure comes in. It is an extension of the Digital Asset data structure that also includes the following accounts:
+Nyote dat de **Digitaw Asset** data stwuctuwe mentionyed abuv does nyot pwovide any infowmation about de ownyew of de asset~ Dis fiwst definyition onwy focuses on de onchain accounts dat awe wequiwed wegawdwess of deiw ownyews~ Howevew, in owdew to pwovide a mowe compwete pictuwe of an asset, we may awso nyeed to knyow who owns it~ Dis is whewe de **Digitaw Asset Wid Token** data stwuctuwe comes in~ It is an extension of de Digitaw Asset data stwuctuwe dat awso incwudes de fowwowing accounts:
 
-- **Token** account (from the SPL Token program): It defines the relationship between a **Mint** account and its owner. It stores important data such as the amount of tokens owned by the owner. In the case of NFTs, the amount is always 1.
-- **Token Record** account (for PNFTs only): It defines additional token-related information for [Programmable Non-Fungibles](/token-metadata/pnfts) such as its current [Token Delegate](/token-metadata/delegates#token-delegates) and its role.
+- **Token** account (fwom de SPW Token pwogwam): It definyes de wewationship between a **Mint** account and its ownyew~ It stowes impowtant data such as de amount of tokens ownyed by de ownyew~ In de case of NFTs, de amount is awways 1.
+- **Token Wecowd** account (fow PNFTs onwy): It definyes additionyaw token-wewated infowmation fow [Programmable Non-Fungibles](/token-metadata/pnfts) such as its cuwwent [Token Delegate](/token-metadata/delegates#token-delegates) and its wowe.
 
-Note that, for fungible assets, the same Digital Asset will likely be associated with multiple owners via multiple Token accounts. Therefore, there can be multiple Digital Asset With Token for the same Digital Asset.
+Nyote dat, fow fungibwe assets, de same Digitaw Asset wiww wikewy be associated wid muwtipwe ownyews via muwtipwe Token accounts~ Dewefowe, dewe can be muwtipwe Digitaw Asset Wid Token fow de same Digitaw Asset.
 
-Here as well, we offer a set of helpers to fetch Digital Assets With Token.
+Hewe as weww, we offew a set of hewpews to fetch Digitaw Assets Wid Token.
 
-{% dialect-switcher title="Digital Asset With Token definition" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Digitaw Asset Wid Token definyition" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { Token } from '@metaplex-foundation/mpl-toolbox'
@@ -170,15 +170,15 @@ export type DigitalAssetWithToken = DigitalAsset & {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
 ### Fetch By Mint
 
-This helper fetches a single **Digital Asset With Token** from the public key of its **Mint** account. This is mostly relevant for Non-Fungible assets since it will only return one Digital Asset With Token, regardless of how many exist for a Fungible asset.
+Dis hewpew fetches a singwe **Digitaw Asset Wid Token** fwom de pubwic key of its **Mint** account~ Dis is mostwy wewevant fow Nyon-Fungibwe assets since it wiww onwy wetuwn onye Digitaw Asset Wid Token, wegawdwess of how many exist fow a Fungibwe asset.
 
-{% dialect-switcher title="Fetch Asset with Token By Mint" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Asset wid Token By Mint" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token-metadata'
@@ -186,15 +186,15 @@ import { fetchDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token
 const asset = await fetchDigitalAssetWithTokenByMint(umi, mint)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetch By Mint and Owner
+### Fetch By Mint and Ownyew
 
-This helper is more performant than the previous helper but requires that we know the owner of the asset.
+Dis hewpew is mowe pewfowmant dan de pwevious hewpew but wequiwes dat we knyow de ownyew of de asset.
 
-{% dialect-switcher title="Fetch Asset with Token By Mint" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Asset wid Token By Mint" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchDigitalAssetWithAssociatedToken } from '@metaplex-foundation/mpl-token-metadata'
@@ -202,15 +202,15 @@ import { fetchDigitalAssetWithAssociatedToken } from '@metaplex-foundation/mpl-t
 const asset = await fetchDigitalAssetWithAssociatedToken(umi, mint, owner)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetch All By Owner
+### Fetch Aww By Ownyew
 
-This helper fetches all **Digital Assets With Token** from a given owner.
+Dis hewpew fetches aww **Digitaw Assets Wid Token** fwom a given ownyew.
 
-{% dialect-switcher title="Fetch Assets with Token By Owner" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Assets wid Token By Ownyew" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchAllDigitalAssetWithTokenByOwner } from '@metaplex-foundation/mpl-token-metadata'
@@ -218,15 +218,15 @@ import { fetchAllDigitalAssetWithTokenByOwner } from '@metaplex-foundation/mpl-t
 const assets = await fetchAllDigitalAssetWithTokenByOwner(umi, owner)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetch All By Mint
+### Fetch Aww By Mint
 
-This helper fetches all **Digital Assets With Token** from the public key of a **Mint** account. This is particularly relevant for Fungible assets since it fetches all **Token** accounts.
+Dis hewpew fetches aww **Digitaw Assets Wid Token** fwom de pubwic key of a **Mint** account~ Dis is pawticuwawwy wewevant fow Fungibwe assets since it fetches aww **Token** accounts.
 
-{% dialect-switcher title="Fetch Assets with Token By Owner" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Assets wid Token By Ownyew" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchAllDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token-metadata'
@@ -234,15 +234,15 @@ import { fetchAllDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-to
 const assets = await fetchAllDigitalAssetWithTokenByMint(umi, mint)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### Fetch All By Owner and Mint
+### Fetch Aww By Ownyew and Mint
 
-This helper fetches all **Digital Assets With Token** from both an owner and a **Mint** account. This can be useful for Fungible assets that have more than one **Token** account for a given owner.
+Dis hewpew fetches aww **Digitaw Assets Wid Token** fwom bod an ownyew and a **Mint** account~ Dis can be usefuw fow Fungibwe assets dat have mowe dan onye **Token** account fow a given ownyew.
 
-{% dialect-switcher title="Fetch Assets with Token By Mint and Owner" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Assets wid Token By Mint and Ownyew" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { fetchAllDigitalAssetWithTokenByOwnerAndMint } from '@metaplex-foundation/mpl-token-metadata'
@@ -254,5 +254,5 @@ const assets = await fetchAllDigitalAssetWithTokenByOwnerAndMint(
 )
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
