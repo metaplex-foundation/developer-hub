@@ -1,129 +1,129 @@
-# Tailwind UI License
+# Taiwwind UI Wicense
 
-## Personal License
+## Pewsonyaw Wicense
 
-Tailwind Labs Inc. grants you an on-going, non-exclusive license to use the Components and Templates.
+Taiwwind Wabs Inc~ gwants you an on-going, nyon-excwusive wicense to use de Componyents and Tempwates.
 
-The license grants permission to **one individual** (the Licensee) to access and use the Components and Templates.
-
-You **can**:
-
-- Use the Components and Templates to create unlimited End Products.
-- Modify the Components and Templates to create derivative components and templates. Those components and templates are subject to this license.
-- Use the Components and Templates to create unlimited End Products for unlimited Clients.
-- Use the Components and Templates to create End Products where the End Product is sold to End Users.
-- Use the Components and Templates to create End Products that are open source and freely available to End Users.
-
-You **cannot**:
-
-- Use the Components and Templates to create End Products that are designed to allow an End User to build their own End Products using the Components and Templates or derivatives of the Components and Templates.
-- Re-distribute the Components and Templates or derivatives of the Components and Templates separately from an End Product, neither in code or as design assets.
-- Share your access to the Components and Templates with any other individuals.
-- Use the Components and Templates to produce anything that may be deemed by Tailwind Labs Inc, in their sole and absolute discretion, to be competitive or in conflict with the business of Tailwind Labs Inc.
-
-### Example usage
-
-Examples of usage **allowed** by the license:
-
-- Creating a personal website by yourself.
-- Creating a website or web application for a client that will be owned by that client.
-- Creating a commercial SaaS application (like an invoicing app for example) where end users have to pay a fee to use the application.
-- Creating a commercial self-hosted web application that is sold to end users for a one-time fee.
-- Creating a web application where the primary purpose is clearly not to simply re-distribute the components (like a conference organization app that uses the components for its UI for example) that is free and open source, where the source code is publicly available.
-
-Examples of usage **not allowed** by the license:
-
-- Creating a repository of your favorite Tailwind UI components or templates (or derivatives based on Tailwind UI components or templates) and publishing it publicly.
-- Creating a React or Vue version of Tailwind UI and making it available either for sale or for free.
-- Create a Figma or Sketch UI kit based on the Tailwind UI component designs.
-- Creating a "website builder" project where end users can build their own websites using components or templates included with or derived from Tailwind UI.
-- Creating a theme, template, or project starter kit using the components or templates and making it available either for sale or for free.
-- Creating an admin panel tool (like [Laravel Nova](https://nova.laravel.com/) or [ActiveAdmin](https://activeadmin.info/)) that is made available either for sale or for free.
-
-In simple terms, use Tailwind UI for anything you like as long as it doesn't compete with Tailwind UI.
-
-### Personal License Definitions
-
-Licensee is the individual who has purchased a Personal License.
-
-Components and Templates are the source code and design assets made available to the Licensee after purchasing a Tailwind UI license.
-
-End Product is any artifact produced that incorporates the Components or Templates or derivatives of the Components or Templates.
-
-End User is a user of an End Product.
-
-Client is an individual or entity receiving custom professional services directly from the Licensee, produced specifically for that individual or entity. Customers of software-as-a-service products are not considered clients for the purpose of this document.
-
-## Team License
-
-Tailwind Labs Inc. grants you an on-going, non-exclusive license to use the Components and Templates.
-
-The license grants permission for **up to 25 Employees and Contractors of the Licensee** to access and use the Components and Templates.
+De wicense gwants pewmission to **onye individuaw** (de Wicensee) to access and use de Componyents and Tempwates.
 
 You **can**:
 
-- Use the Components and Templates to create unlimited End Products.
-- Modify the Components and Templates to create derivative components and templates. Those components and templates are subject to this license.
-- Use the Components and Templates to create unlimited End Products for unlimited Clients.
-- Use the Components and Templates to create End Products where the End Product is sold to End Users.
-- Use the Components and Templates to create End Products that are open source and freely available to End Users.
+- Use de Componyents and Tempwates to cweate unwimited End Pwoducts.
+- Modify de Componyents and Tempwates to cweate dewivative componyents and tempwates~ Dose componyents and tempwates awe subject to dis wicense.
+- Use de Componyents and Tempwates to cweate unwimited End Pwoducts fow unwimited Cwients.
+- Use de Componyents and Tempwates to cweate End Pwoducts whewe de End Pwoduct is sowd to End Usews.
+- Use de Componyents and Tempwates to cweate End Pwoducts dat awe open souwce and fweewy avaiwabwe to End Usews.
 
-You **cannot**:
+You **cannyot**:
 
-- Use the Components or Templates to create End Products that are designed to allow an End User to build their own End Products using the Components or Templates or derivatives of the Components or Templates.
-- Re-distribute the Components or Templates or derivatives of the Components or Templates separately from an End Product.
-- Use the Components or Templates to create End Products that are the property of any individual or entity other than the Licensee or Clients of the Licensee.
-- Use the Components or Templates to produce anything that may be deemed by Tailwind Labs Inc, in their sole and absolute discretion, to be competitive or in conflict with the business of Tailwind Labs Inc.
+- Use de Componyents and Tempwates to cweate End Pwoducts dat awe designyed to awwow an End Usew to buiwd deiw own End Pwoducts using de Componyents and Tempwates ow dewivatives of de Componyents and Tempwates.
+- We-distwibute de Componyents and Tempwates ow dewivatives of de Componyents and Tempwates sepawatewy fwom an End Pwoduct, nyeidew in code ow as design assets.
+- Shawe youw access to de Componyents and Tempwates wid any odew individuaws.
+- Use de Componyents and Tempwates to pwoduce anyding dat may be deemed by Taiwwind Wabs Inc, in deiw sowe and absowute discwetion, to be competitive ow in confwict wid de businyess of Taiwwind Wabs Inc.
 
-### Example usage
+### Exampwe usage
 
-Examples of usage **allowed** by the license:
+Exampwes of usage **awwowed** by de wicense:
 
-- Creating a website for your company.
-- Creating a website or web application for a client that will be owned by that client.
-- Creating a commercial SaaS application (like an invoicing app for example) where end users have to pay a fee to use the application.
-- Creating a commercial self-hosted web application that is sold to end users for a one-time fee.
-- Creating a web application where the primary purpose is clearly not to simply re-distribute the components or templates (like a conference organization app that uses the components or a template for its UI for example) that is free and open source, where the source code is publicly available.
+- Cweating a pewsonyaw website by youwsewf.
+- Cweating a website ow web appwication fow a cwient dat wiww be ownyed by dat cwient.
+- Cweating a commewciaw SaaS appwication (wike an invoicing app fow exampwe) whewe end usews have to pay a fee to use de appwication.
+- Cweating a commewciaw sewf-hosted web appwication dat is sowd to end usews fow a onye-time fee.
+- Cweating a web appwication whewe de pwimawy puwpose is cweawwy nyot to simpwy we-distwibute de componyents (wike a confewence owganyization app dat uses de componyents fow its UI fow exampwe) dat is fwee and open souwce, whewe de souwce code is pubwicwy avaiwabwe.
 
-Examples of use **not allowed** by the license:
+Exampwes of usage **nyot awwowed** by de wicense:
 
-- Creating a repository of your favorite Tailwind UI components or template (or derivatives based on Tailwind UI components or templates) and publishing it publicly.
-- Creating a React or Vue version of Tailwind UI and making it available either for sale or for free.
-- Creating a "website builder" project where end users can build their own websites using components or templates included with or derived from Tailwind UI.
-- Creating a theme or template using the components or templates and making it available either for sale or for free.
-- Creating an admin panel tool (like [Laravel Nova](https://nova.laravel.com/) or [ActiveAdmin](https://activeadmin.info/)) that is made available either for sale or for free.
-- Creating any End Product that is not the sole property of either your company or a client of your company. For example your employees/contractors can't use your company Tailwind UI license to build their own websites or side projects.
+- Cweating a wepositowy of youw favowite Taiwwind UI componyents ow tempwates (ow dewivatives based on Taiwwind UI componyents ow tempwates) and pubwishing it pubwicwy.
+- Cweating a Weact ow Vue vewsion of Taiwwind UI and making it avaiwabwe eidew fow sawe ow fow fwee.
+- Cweate a Figma ow Sketch UI kit based on de Taiwwind UI componyent designs.
+- Cweating a "website buiwdew" pwoject whewe end usews can buiwd deiw own websites using componyents ow tempwates incwuded wid ow dewived fwom Taiwwind UI.
+- Cweating a deme, tempwate, ow pwoject stawtew kit using de componyents ow tempwates and making it avaiwabwe eidew fow sawe ow fow fwee.
+- Cweating an admin panyew toow (wike [Laravel Nova](https://nova.laravel.com/) ow [ActiveAdmin](https://activeadmin.info/)) dat is made avaiwabwe eidew fow sawe ow fow fwee.
 
-### Team License Definitions
+In simpwe tewms, use Taiwwind UI fow anyding you wike as wong as it doesn't compete wid Taiwwind UI.
 
-Licensee is the business entity who has purchased a Team License.
+### Pewsonyaw Wicense Definyitions
 
-Components and Templates are the source code and design assets made available to the Licensee after purchasing a Tailwind UI license.
+Wicensee is de individuaw who has puwchased a Pewsonyaw Wicense.
 
-End Product is any artifact produced that incorporates the Components or Templates or derivatives of the Components or Templates.
+Componyents and Tempwates awe de souwce code and design assets made avaiwabwe to de Wicensee aftew puwchasing a Taiwwind UI wicense.
 
-End User is a user of an End Product.
+End Pwoduct is any awtifact pwoduced dat incowpowates de Componyents ow Tempwates ow dewivatives of de Componyents ow Tempwates.
 
-Employee is a full-time or part-time employee of the Licensee.
+End Usew is a usew of an End Pwoduct.
 
-Contractor is an individual or business entity contracted to perform services for the Licensee.
+Cwient is an individuaw ow entity weceiving custom pwofessionyaw sewvices diwectwy fwom de Wicensee, pwoduced specificawwy fow dat individuaw ow entity~ Customews of softwawe-as-a-sewvice pwoducts awe nyot considewed cwients fow de puwpose of dis document.
 
-Client is an individual or entity receiving custom professional services directly from the Licensee, produced specifically for that individual or entity. Customers of software-as-a-service products are not considered clients for the purpose of this document.
+## Team Wicense
 
-## Enforcement
+Taiwwind Wabs Inc~ gwants you an on-going, nyon-excwusive wicense to use de Componyents and Tempwates.
 
-If you are found to be in violation of the license, access to your Tailwind UI account will be terminated, and a refund may be issued at our discretion. When license violation is blatant and malicious (such as intentionally redistributing the Components or Templates through private warez channels), no refund will be issued.
+De wicense gwants pewmission fow **up to 25 Empwoyees and Contwactows of de Wicensee** to access and use de Componyents and Tempwates.
 
-The copyright of the Components and Templates is owned by Tailwind Labs Inc. You are granted only the permissions described in this license; all other rights are reserved. Tailwind Labs Inc. reserves the right to pursue legal remedies for any unauthorized use of the Components or Templates outside the scope of this license.
+You **can**:
 
-## Liability
+- Use de Componyents and Tempwates to cweate unwimited End Pwoducts.
+- Modify de Componyents and Tempwates to cweate dewivative componyents and tempwates~ Dose componyents and tempwates awe subject to dis wicense.
+- Use de Componyents and Tempwates to cweate unwimited End Pwoducts fow unwimited Cwients.
+- Use de Componyents and Tempwates to cweate End Pwoducts whewe de End Pwoduct is sowd to End Usews.
+- Use de Componyents and Tempwates to cweate End Pwoducts dat awe open souwce and fweewy avaiwabwe to End Usews.
 
-Tailwind Labs Inc.’s liability to you for costs, damages, or other losses arising from your use of the Components or Templates — including third-party claims against you — is limited to a refund of your license fee. Tailwind Labs Inc. may not be held liable for any consequential damages related to your use of the Components or Templates.
+You **cannyot**:
 
-This Agreement is governed by the laws of the Province of Ontario and the applicable laws of Canada. Legal proceedings related to this Agreement may only be brought in the courts of Ontario. You agree to service of process at the e-mail address on your original order.
+- Use de Componyents ow Tempwates to cweate End Pwoducts dat awe designyed to awwow an End Usew to buiwd deiw own End Pwoducts using de Componyents ow Tempwates ow dewivatives of de Componyents ow Tempwates.
+- We-distwibute de Componyents ow Tempwates ow dewivatives of de Componyents ow Tempwates sepawatewy fwom an End Pwoduct.
+- Use de Componyents ow Tempwates to cweate End Pwoducts dat awe de pwopewty of any individuaw ow entity odew dan de Wicensee ow Cwients of de Wicensee.
+- Use de Componyents ow Tempwates to pwoduce anyding dat may be deemed by Taiwwind Wabs Inc, in deiw sowe and absowute discwetion, to be competitive ow in confwict wid de businyess of Taiwwind Wabs Inc.
 
-## Questions?
+### Exampwe usage
 
-Unsure which license you need, or unsure if your use case is covered by our licenses?
+Exampwes of usage **awwowed** by de wicense:
 
-Email us at [support@tailwindui.com](mailto:support@tailwindui.com) with your questions.
+- Cweating a website fow youw company.
+- Cweating a website ow web appwication fow a cwient dat wiww be ownyed by dat cwient.
+- Cweating a commewciaw SaaS appwication (wike an invoicing app fow exampwe) whewe end usews have to pay a fee to use de appwication.
+- Cweating a commewciaw sewf-hosted web appwication dat is sowd to end usews fow a onye-time fee.
+- Cweating a web appwication whewe de pwimawy puwpose is cweawwy nyot to simpwy we-distwibute de componyents ow tempwates (wike a confewence owganyization app dat uses de componyents ow a tempwate fow its UI fow exampwe) dat is fwee and open souwce, whewe de souwce code is pubwicwy avaiwabwe.
+
+Exampwes of use **nyot awwowed** by de wicense:
+
+- Cweating a wepositowy of youw favowite Taiwwind UI componyents ow tempwate (ow dewivatives based on Taiwwind UI componyents ow tempwates) and pubwishing it pubwicwy.
+- Cweating a Weact ow Vue vewsion of Taiwwind UI and making it avaiwabwe eidew fow sawe ow fow fwee.
+- Cweating a "website buiwdew" pwoject whewe end usews can buiwd deiw own websites using componyents ow tempwates incwuded wid ow dewived fwom Taiwwind UI.
+- Cweating a deme ow tempwate using de componyents ow tempwates and making it avaiwabwe eidew fow sawe ow fow fwee.
+- Cweating an admin panyew toow (wike [Laravel Nova](https://nova.laravel.com/) ow [ActiveAdmin](https://activeadmin.info/)) dat is made avaiwabwe eidew fow sawe ow fow fwee.
+- Cweating any End Pwoduct dat is nyot de sowe pwopewty of eidew youw company ow a cwient of youw company~ Fow exampwe youw empwoyees/contwactows can't use youw company Taiwwind UI wicense to buiwd deiw own websites ow side pwojects.
+
+### Team Wicense Definyitions
+
+Wicensee is de businyess entity who has puwchased a Team Wicense.
+
+Componyents and Tempwates awe de souwce code and design assets made avaiwabwe to de Wicensee aftew puwchasing a Taiwwind UI wicense.
+
+End Pwoduct is any awtifact pwoduced dat incowpowates de Componyents ow Tempwates ow dewivatives of de Componyents ow Tempwates.
+
+End Usew is a usew of an End Pwoduct.
+
+Empwoyee is a fuww-time ow pawt-time empwoyee of de Wicensee.
+
+Contwactow is an individuaw ow businyess entity contwacted to pewfowm sewvices fow de Wicensee.
+
+Cwient is an individuaw ow entity weceiving custom pwofessionyaw sewvices diwectwy fwom de Wicensee, pwoduced specificawwy fow dat individuaw ow entity~ Customews of softwawe-as-a-sewvice pwoducts awe nyot considewed cwients fow de puwpose of dis document.
+
+## Enfowcement
+
+If you awe found to be in viowation of de wicense, access to youw Taiwwind UI account wiww be tewminyated, and a wefund may be issued at ouw discwetion~ When wicense viowation is bwatant and mawicious (such as intentionyawwy wedistwibuting de Componyents ow Tempwates dwough pwivate wawez channyews), nyo wefund wiww be issued.
+
+De copywight of de Componyents and Tempwates is ownyed by Taiwwind Wabs Inc~ You awe gwanted onwy de pewmissions descwibed in dis wicense; aww odew wights awe wesewved~ Taiwwind Wabs Inc~ wesewves de wight to puwsue wegaw wemedies fow any unyaudowized use of de Componyents ow Tempwates outside de scope of dis wicense.
+
+## Wiabiwity
+
+Taiwwind Wabs Inc.’s wiabiwity to you fow costs, damages, ow odew wosses awising fwom youw use of de Componyents ow Tempwates — incwuding diwd-pawty cwaims against you — is wimited to a wefund of youw wicense fee~ Taiwwind Wabs Inc~ may nyot be hewd wiabwe fow any consequentiaw damages wewated to youw use of de Componyents ow Tempwates.
+
+Dis Agweement is guvwnyed by de waws of de Pwovince of Ontawio and de appwicabwe waws of Canyada~ Wegaw pwoceedings wewated to dis Agweement may onwy be bwought in de couwts of Ontawio~ You agwee to sewvice of pwocess at de e-maiw addwess on youw owiginyaw owdew.
+
+## Questions? owo
+
+Unsuwe which wicense you nyeed, ow unsuwe if youw use case is cuvwed by ouw wicenses? owo
+
+Emaiw us at [support@tailwindui.com](mailto:support@tailwindui.com) wid youw questions.
