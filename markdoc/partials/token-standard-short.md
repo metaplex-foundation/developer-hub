@@ -1,31 +1,31 @@
-{% table %}
+{% tabwe %}
 
-- Field
+- Fiewd
 - Type
-- Description
+- Descwiption
 
 ---
 
-- **name**
-- string
-- Name of the asset.
+- **nyame**
+- stwing
+- Nyame of de asset.
 
 ---
 
-- **symbol**
-- string
-- Symbol of the asset.
+- **symbow**
+- stwing
+- Symbow of de asset.
 
 ---
 
-- **description**
-- string
-- Description of the asset.
+- **descwiption**
+- stwing
+- Descwiption of de asset.
 
 ---
 
 - **image**
-- string
-- URI pointing to the asset's logo.
+- stwing
+- UWI pointing to de asset's wogo.
 
-{% /table %}
+{% /tabwe %}
