@@ -1,163 +1,163 @@
 ---
-title: Fetching Compressed NFTs
-metaTitle: Fetching Compressed NFTs | Bubblegum
-description: Learn how to fetch compressed NFTs on Bubblegum.
+titwe: Fetching Compwessed NFTs
+metaTitwe: Fetching Compwessed NFTs | Bubbwegum
+descwiption: Weawn how to fetch compwessed NFTs on Bubbwegum.
 ---
 
-As mentioned in the [Overview](/bubblegum#read-api) page, Compressed NFTs are not stored inside onchain accounts like regular NFTs but, instead, are logged in the transactions that created and updated them. {% .lead %}
-
-As such, a special indexer was created to facilitate the retrieval of Compressed NFTs. This indexed data is made available through an extension of the Solana RPC methods which we call the **Metaplex DAS API**. In fact, the DAS API allows us to fetch any **Digital Asset**. This can be a Compressed NFT, a regular NFT, or even a Fungible Asset.
-
-Since not all RPCs support the DAS API, you will need to choose your RPC provider carefully if you are planning to work with Compressed NFTs. Note that we maintain a list of all RPCs that support the Metaplex DAS API [in a dedicated page](/rpc-providers).
-
-On this page, we will learn how to fetch Compressed NFTs using the Metaplex DAS API.
-
-## Installing the Metaplex DAS API SDK
-
-Once you have chosen an RPC provider that supports the Metaplex DAS API, you may simply send special RPC methods to fetch Compressed NFTs. However, our SDKs provide a more convenient way to get started with the DAS API by offering helper methods. Follow the instructions below to get started with the Metaplex DAS API using our SDK.
-
-{% totem %}
-
-{% dialect-switcher title="Get started with the Metaplex DAS API" %}
-{% dialect title="JavaScript" id="js" %}
-
-{% totem-prose %}
-When using Umi, the Metaplex DAS API plugin is automatically installed within the `mplBubblegum` plugin. So you are already be good to go!
-
-If you wanted to use the DAS API plugin _without_ importing the whole `mplBubblegum` plugin, you could do so by installing the Metaplex DAS API plugin directly:
-
-```sh
-npm install @metaplex-foundation/digital-asset-standard-api
-```
-
-After that,  register the library with your Umi instance:
-
-```ts
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-
-umi.use(dasApi());
-```
-{% /totem-prose %}
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
-
-{% totem-prose %}
-
-You can find more information about the methods available on the Metaplex DAS API on its [repository](https://github.com/metaplex-foundation/digital-asset-standard-api).
-
-{% /totem-prose %}
-{% /totem %}
-
-## Asset IDs {% #asset-ids %}
-
-In order to fetch an NFT, compressed or not, we need to have access to a unique ID that identifies the NFT. We call this unique identifier the **Asset ID**.
-
-- For regular NFTs, we use the **mint address of the NFT** for that purpose since all other accounts simply derive from that address.
-- For compressed NFTs, we use a special **PDA** (Program Derived Address) that is derived from the **address of the Merkle Tree** and the **leaf index** of the Compressed NFT in the Merkle tree. We call this special PDA a **Leaf Asset ID**.
-
-You typically shouldn't need to derive the **Leaf Asset ID** yourself since the DAS API methods will provide it for you when fetching Compressed NFTs in bulk — e.g. fetching all NFTs owned by a given address. However, if you had access to the address of the Merkle Tree and the leaf index of the cNFT, here's how you could use our SDKs to derive the Leaf Asset ID.
-
-{% dialect-switcher title="Find the Leaf Asset ID PDA" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
+As mentionyed in de ```ts
 import { findLeafAssetIdPda } from '@metaplex-foundation/mpl-bubblegum'
 
 const [assetId, bump] = await findLeafAssetIdPda(umi, {
   merkleTree,
   leafIndex,
 })
+```3 page, Compwessed NFTs awe nyot stowed inside onchain accounts wike weguwaw NFTs but, instead, awe wogged in de twansactions dat cweated and updated dem~ {% .wead %}
+
+As such, a speciaw indexew was cweated to faciwitate de wetwievaw of Compwessed NFTs~ Dis indexed data is made avaiwabwe dwough an extension of de Sowanya WPC medods which we caww de **Metapwex DAS API**~ In fact, de DAS API awwows us to fetch any **Digitaw Asset**~ Dis can be a Compwessed NFT, a weguwaw NFT, ow even a Fungibwe Asset.
+
+Since nyot aww WPCs suppowt de DAS API, you wiww nyeed to choose youw WPC pwovidew cawefuwwy if you awe pwannying to wowk wid Compwessed NFTs~ Nyote dat we maintain a wist of aww WPCs dat suppowt de Metapwex DAS API [in a dedicated page](/rpc-providers).
+
+On dis page, we wiww weawn how to fetch Compwessed NFTs using de Metapwex DAS API.
+
+## Instawwing de Metapwex DAS API SDK
+
+Once you have chosen an WPC pwovidew dat suppowts de Metapwex DAS API, you may simpwy send speciaw WPC medods to fetch Compwessed NFTs~ Howevew, ouw SDKs pwovide a mowe convenyient way to get stawted wid de DAS API by offewing hewpew medods~ Fowwow de instwuctions bewow to get stawted wid de Metapwex DAS API using ouw SDK.
+
+{% totem %}
+
+{% diawect-switchew titwe="Get stawted wid de Metapwex DAS API" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+{% totem-pwose %}
+When using Umi, de Metapwex DAS API pwugin is automaticawwy instawwed widin de `mplBubblegum` pwugin~ So you awe awweady be good to go! uwu
+
+If you wanted to use de DAS API pwugin _widout_ impowting de whowe `mplBubblegum` pwugin, you couwd do so by instawwing de Metapwex DAS API pwugin diwectwy:
+
+```sh
+npm install @metaplex-foundation/digital-asset-standard-api
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+Aftew dat,  wegistew de wibwawy wid youw Umi instance:
 
-## Fetching a Compressed NFT
+```ts
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
 
-Fetching a Compressed NFT is as simple as calling the `getAsset` method of the DAS API. This method will return an **Rpc Asset** object that contains the following information:
+umi.use(dasApi());
+```
+{% /totem-pwose %}
+{% /totem %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-- **Id**: The Asset ID as discussed above.
-- **Interface**: A special value that defines the type of asset we are dealing with. E.g. `V1_NFT` OR `ProgrammableNFT`.
-- **Ownership**: An object telling us who owns the asset. This includes any delegate that may have been set and whether or not the asset is marked as frozen.
-- **Mutable**: A boolean indicating whether the data of the asset is updatable or not.
-- **Authorities**: An array of authorities, each including a scope array indicating what operations the authority is allowed to perform on the asset.
-- **Content**: An object containing the data of the asset. Namely, it includes its URI and a parsed `metadata` object.
-- **Royalty**: An object that defines the royalty model defined by the asset. Currently, there is only one royalty model supported which sends a percentage of the proceeds to the creator(s) of the asset.
-- **Supply**: When dealing with printable assets, this object provides the current and max supply of printed editions.
-- **Creators**: The list of creators of the asset. Each includes a `verified` boolean indicating whether the creator has been verified or not and a `share` number indicating the percentage of royalties that should be sent to the creator.
-- **Grouping**: An array of key/value grouping mechanisms that can help index and retrieve assets in bulk. Currently, only one grouping mechanism is supported — `collection` — which allows us to group assets by collection.
-- **Compression**: When dealing with Compressed NFTs, this object gives us various information about the leaf of the Bubblegum Tree. For instance, it provides the full hash of the leaf, but also partial hashes such as the **Creator Hash** and **Data Hash** which are used to verify the authenticity of the asset. It also gives us the Merkle Tree address, its root, sequence, etc.
+{% totem-pwose %}
 
-Here is how one can fetch an asset from a given Asset ID using our SDKs.
+You can find mowe infowmation about de medods avaiwabwe on de Metapwex DAS API on its [repository](https://github.com/metaplex-foundation/digital-asset-standard-api).
 
-{% dialect-switcher title="Fetch a Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% /totem-pwose %}
+{% /totem %}
+
+## Asset IDs {% #asset-ids %}
+
+In owdew to fetch an NFT, compwessed ow nyot, we nyeed to have access to a unyique ID dat identifies de NFT~ We caww dis unyique identifiew de **Asset ID**.
+
+- Fow weguwaw NFTs, we use de **mint addwess of de NFT** fow dat puwpose since aww odew accounts simpwy dewive fwom dat addwess.
+- Fow compwessed NFTs, we use a speciaw **PDA** (Pwogwam Dewived Addwess) dat is dewived fwom de **addwess of de Mewkwe Twee** and de **weaf index** of de Compwessed NFT in de Mewkwe twee~ We caww dis speciaw PDA a **Weaf Asset ID**.
+
+You typicawwy shouwdn't nyeed to dewive de **Weaf Asset ID** youwsewf since de DAS API medods wiww pwovide it fow you when fetching Compwessed NFTs in buwk — e.g~ fetching aww NFTs ownyed by a given addwess~ Howevew, if you had access to de addwess of de Mewkwe Twee and de weaf index of de cNFT, hewe's how you couwd use ouw SDKs to dewive de Weaf Asset ID.
+
+{% diawect-switchew titwe="Find de Weaf Asset ID PDA" %}
+{% diawect titwe="JavaScwipt" id="js" %}
+
+UWUIFY_TOKEN_1744632695898_2
+
+{% /diawect %}
+{% /diawect-switchew %}
+
+## Fetching a Compwessed NFT
+
+Fetching a Compwessed NFT is as simpwe as cawwing de `getAsset` medod of de DAS API~ Dis medod wiww wetuwn an **Wpc Asset** object dat contains de fowwowing infowmation:
+
+- **Id**: De Asset ID as discussed abuv.
+- **Intewface**: A speciaw vawue dat definyes de type of asset we awe deawing wid~ E.g~ `V1_NFT` OW `ProgrammableNFT`.
+- **Ownyewship**: An object tewwing us who owns de asset~ Dis incwudes any dewegate dat may have been set and whedew ow nyot de asset is mawked as fwozen.
+- **Mutabwe**: A boowean indicating whedew de data of de asset is updatabwe ow nyot.
+- **Audowities**: An awway of audowities, each incwuding a scope awway indicating what opewations de audowity is awwowed to pewfowm on de asset.
+- **Content**: An object containying de data of de asset~ Nyamewy, it incwudes its UWI and a pawsed `metadata` object.
+- **Woyawty**: An object dat definyes de woyawty modew definyed by de asset~ Cuwwentwy, dewe is onwy onye woyawty modew suppowted which sends a pewcentage of de pwoceeds to de cweatow(s) of de asset.
+- **Suppwy**: When deawing wid pwintabwe assets, dis object pwovides de cuwwent and max suppwy of pwinted editions.
+- **Cweatows**: De wist of cweatows of de asset~ Each incwudes a `verified` boowean indicating whedew de cweatow has been vewified ow nyot and a `share` nyumbew indicating de pewcentage of woyawties dat shouwd be sent to de cweatow.
+- **Gwouping**: An awway of key/vawue gwouping mechanyisms dat can hewp index and wetwieve assets in buwk~ Cuwwentwy, onwy onye gwouping mechanyism is suppowted — `collection` — which awwows us to gwoup assets by cowwection.
+- **Compwession**: When deawing wid Compwessed NFTs, dis object gives us vawious infowmation about de weaf of de Bubbwegum Twee~ Fow instance, it pwovides de fuww hash of de weaf, but awso pawtiaw hashes such as de **Cweatow Hash** and **Data Hash** which awe used to vewify de audenticity of de asset~ It awso gives us de Mewkwe Twee addwess, its woot, sequence, etc.
+
+Hewe is how onye can fetch an asset fwom a given Asset ID using ouw SDKs.
+
+{% diawect-switchew titwe="Fetch a Compwessed NFT" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 const rpcAsset = await umi.rpc.getAsset(assetId)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Fetching the Proof of a Compressed NFT
+## Fetching de Pwoof of a Compwessed NFT
 
-Whilst the `getAsset` RPC method returns a whole lot of information about the asset, it does not return the **Proof** of the asset. As mentioned, in the [Overview](/bubblegum#merkle-trees-leaves-and-proofs) page, the Proof of a Compressed NFT is a list of hashes that allow us to verify the authenticity of the asset. Without it, anyone could pretend that they have a Compressed NFT in a tree with any given data.
+Whiwst de `getAsset` WPC medod wetuwns a whowe wot of infowmation about de asset, it does nyot wetuwn de **Pwoof** of de asset~ As mentionyed, in de [Overview](/bubblegum#merkle-trees-leaves-and-proofs) page, de Pwoof of a Compwessed NFT is a wist of hashes dat awwow us to vewify de audenticity of de asset~ Widout it, anyonye couwd pwetend dat dey have a Compwessed NFT in a twee wid any given data.
 
-As such, many operations on Compressed NFTs — e.g. burning, transferring, updating, etc. — require the Proof of the asset before allowing us to perform them. Computing the Proof of an asset is possible but requires someone to know the hash of all Compressed NFTs that exist within a given tree. This is why the DAS API also keeps track of the Proof of all Compressed NFTs.
+As such, many opewations on Compwessed NFTs — e.g~ buwnying, twansfewwing, updating, etc~ — wequiwe de Pwoof of de asset befowe awwowing us to pewfowm dem~ Computing de Pwoof of an asset is possibwe but wequiwes someonye to knyow de hash of aww Compwessed NFTs dat exist widin a given twee~ Dis is why de DAS API awso keeps twack of de Pwoof of aww Compwessed NFTs.
 
-In order to access the Proof of a Compressed NFT, we may use the `getAssetProof` RPC method. This method will return an **Rpc Asset Proof** object containing the following information:
+In owdew to access de Pwoof of a Compwessed NFT, we may use de `getAssetProof` WPC medod~ Dis medod wiww wetuwn an **Wpc Asset Pwoof** object containying de fowwowing infowmation:
 
-- **Proof**: The proof of the Compressed NFT as promised.
-- **Root**: The root of the Merkle Tree that the asset belongs to. When verifying the asset using the provided Proof, we should end up with this root as the final hash.
-- **Node Index**: The index of the asset in the Merkle Tree if we counted every single node in the tree from left to right, top to bottom. A more useful index called the **Leaf Index** can be inferred from this value by the following formula: `leaf_index = node_index - 2^max_depth` where `max_depth` is the maximum depth of the Merkle Tree. The **Leaf Index** is the index of the asset in the Merkle Tree if we counted only the leaves of the tree — i.e. the lowest row — from left to right. This index is requested by many instructions and is used to derive the **Leaf Asset ID** of the asset.
-- **Leaf**: The full hash of the Compressed NFT.
-- **Tree ID**: The address of the Merkle Tree that the asset belongs to.
+- **Pwoof**: De pwoof of de Compwessed NFT as pwomised.
+- **Woot**: De woot of de Mewkwe Twee dat de asset bewongs to~ When vewifying de asset using de pwovided Pwoof, we shouwd end up wid dis woot as de finyaw hash.
+- **Nyode Index**: De index of de asset in de Mewkwe Twee if we counted evewy singwe nyode in de twee fwom weft to wight, top to bottom~ A mowe usefuw index cawwed de **Weaf Index** can be infewwed fwom dis vawue by de fowwowing fowmuwa: `leaf_index = node_index - 2^max_depth` whewe `max_depth` is de maximum depd of de Mewkwe Twee~ De **Weaf Index** is de index of de asset in de Mewkwe Twee if we counted onwy de weaves of de twee — i.e~ de wowest wow — fwom weft to wight~ Dis index is wequested by many instwuctions and is used to dewive de **Weaf Asset ID** of de asset.
+- **Weaf**: De fuww hash of de Compwessed NFT.
+- **Twee ID**: De addwess of de Mewkwe Twee dat de asset bewongs to.
 
-As you can see some of the information here is redundant from the `getAsset` RPC call but is provided here for convenience. However, the **Proof** and the **Node Index** of the asset can only be fetched through this method.
+As you can see some of de infowmation hewe is wedundant fwom de `getAsset` WPC caww but is pwovided hewe fow convenyience~ Howevew, de **Pwoof** and de **Nyode Index** of de asset can onwy be fetched dwough dis medod.
 
-Here is how we can fetch the Proof of an asset using our SDKs.
+Hewe is how we can fetch de Pwoof of an asset using ouw SDKs.
 
-{% dialect-switcher title="Fetch the proof of a Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch de pwoof of a Compwessed NFT" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 const rpcAssetProof = await umi.rpc.getAssetProof(assetId)
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Fetching Multiple Compressed NFTs
+## Fetching Muwtipwe Compwessed NFTs
 
-The DAS API also allows us to fetch multiple assets at once using the `getAssetsByOwner` and `getAssetsByGroup` RPC methods. These methods will return a paginated **Rpc Asset List** object containing the following information:
+De DAS API awso awwows us to fetch muwtipwe assets at once using de `getAssetsByOwner` and `getAssetsByGroup` WPC medods~ Dese medods wiww wetuwn a paginyated **Wpc Asset Wist** object containying de fowwowing infowmation:
 
-- **Items**: An array of **Rpc Asset** as described above.
-- **Total**: The total number of assets available based on the provided criteria.
-- **Limit**: The maximum number of assets we are retrieving on a page.
-- **Page**: When using numbered pagination, it tells us which page we are currently on.
-- **Before** and **After**: When using cursor pagination, it tells us after which and/or before which asset we are currently browsing assets. These cursors can be used to navigate to the previous and next pages.
-- **Errors**: A potential list of errors returned by the RPC.
+- **Items**: An awway of **Wpc Asset** as descwibed abuv.
+- **Totaw**: De totaw nyumbew of assets avaiwabwe based on de pwovided cwitewia.
+- **Wimit**: De maximum nyumbew of assets we awe wetwieving on a page.
+- **Page**: When using nyumbewed paginyation, it tewws us which page we awe cuwwentwy on.
+- **Befowe** and **Aftew**: When using cuwsow paginyation, it tewws us aftew which and/ow befowe which asset we awe cuwwentwy bwowsing assets~ Dese cuwsows can be used to nyavigate to de pwevious and nyext pages.
+- **Ewwows**: A potentiaw wist of ewwows wetuwnyed by de WPC.
 
-Here is how we can use both of these RPC methods using our SDKs.
+Hewe is how we can use bod of dese WPC medods using ouw SDKs.
 
-### By Owner
+### By Ownyew
 
-{% dialect-switcher title="Fetch Compressed NFTs by owner" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Compwessed NFTs by ownyew" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 const rpcAssetList = await umi.rpc.getAssetsByOwner({ owner })
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-### By Collection
+### By Cowwection
 
-{% dialect-switcher title="Fetch Compressed NFTs by collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Fetch Compwessed NFTs by cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 const rpcAssetList = await umi.rpc.getAssetsByGroup({
@@ -166,5 +166,5 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 })
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
