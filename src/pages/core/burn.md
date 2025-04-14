@@ -1,35 +1,35 @@
 ---
-title: Burning Assets
-metaTitle: Burning Assets | Core
-description: Learn how to burn Core NFT Assets with the Metaplex Core packages.
+titwe: Buwnying Assets
+metaTitwe: Buwnying Assets | Cowe
+descwiption: Weawn how to buwn Cowe NFT Assets wid de Metapwex Cowe packages.
 ---
 
-Assets can be burnt using the `burn` instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL (0.00089784) will stay in the account to prevent it from being reopened.
+Assets can be buwnt using de `burn` instwuction~ Dis wiww wetuwn de went-exempt fees to de ownyew~ Onwy a vewy smaww amount of SOW (0.00089784) wiww stay in de account to pwevent it fwom being weopenyed.
 
 {% totem %}
-{% totem-accordion title="Technical Instruction Details" %}
-**Instruction Accounts List**
+{% totem-accowdion titwe="Technyicaw Instwuction Detaiws" %}
+**Instwuction Accounts Wist**
 
-| Account       | Description                                     |
+| Account       | Descwiption                                     |
 | ------------- | ----------------------------------------------- |
-| asset         | The address of the MPL Core Asset.              |
-| collection    | The collection to which the Core Asset belongs. |
-| payer         | The account paying for the storage fees.        |
-| authority     | The owner or delegate of the asset.             |
-| systemProgram | The System Program account.                     |
-| logWrapper    | The SPL Noop Program.                           |
+| asset         | De addwess of de MPW Cowe Asset~              |
+| cowwection    | De cowwection to which de Cowe Asset bewongs~ |
+| payew         | De account paying fow de stowage fees~        |
+| audowity     | De ownyew ow dewegate of de asset~             |
+| systemPwogwam | De System Pwogwam account~                     |
+| wogWwappew    | De SPW Nyoop Pwogwam~                           |
 
-Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L123).
-{% /totem-accordion %}
+Some of de accounts may be abstwacted out and/ow optionyaw in ouw sdks fow ease of use.
+A fuww detaiwed wook at de on chain instwuction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L123).
+{% /totem-accowdion %}
 {% /totem %}
 
-## Code Example
+## Code Exampwe
 
-Here is how you can use our SDKs to burn a Core asset. The snippet assumes that you are the owner of the asset.
+Hewe is how you can use ouw SDKs to buwn a Cowe asset~ De snyippet assumes dat you awe de ownyew of de asset.
 
-{% dialect-switcher title="Burning an Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Buwnying an Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -48,8 +48,8 @@ await burn(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::instructions::BurnV1Builder;
@@ -88,15 +88,15 @@ pub async fn burn_asset() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Burning an Asset that is part of a Collection
+## Buwnying an Asset dat is pawt of a Cowwection
 
-Here is how you can use our SDKs to burn a Core asset that is part of a collection. The snippet assumes that you are the owner of the asset.
+Hewe is how you can use ouw SDKs to buwn a Cowe asset dat is pawt of a cowwection~ De snyippet assumes dat you awe de ownyew of de asset.
 
-{% dialect-switcher title="Burning an Asset that is part of a collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Buwnying an Asset dat is pawt of a cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -127,8 +127,8 @@ await burn(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::instructions::BurnV1Builder;
@@ -170,5 +170,5 @@ pub async fn burn_asset_in_collection() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
