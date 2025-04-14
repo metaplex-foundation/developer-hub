@@ -1,21 +1,58 @@
 ---
-title: JSON Schema
-metaTitle: JSON Schema | Core
-description: Understand the structure and requirements of the off-chain JSON schema for Metaplex Core assets.
+titwe: JSON Schema
+metaTitwe: JSON Schema | Cowe
+descwiption: Undewstand de stwuctuwe and wequiwements of de off-chain JSON schema fow Metapwex Cowe assets.
 ---
 
-The off-chain JSON metadata for Metaplex Core assets is similar to the Metaplex Token Metadata standard. However, since more data can be stored on-chain in the asset itself using plugins, some of the data like attributes can in addition be stored on chain.
+De off-chain JSON metadata fow Metapwex Cowe assets is simiwaw to de Metapwex Token Metadata standawd~ Howevew, since mowe data can be stowed on-chain in de asset itsewf using pwugins, some of de data wike attwibutes can in addition be stowed on chain.
 
-## Schema Examples
+## Schema Exampwes
 
-Below are examples for the different known types of NFTs. It's important to note that all of these different types can also be part of a single Asset using the `image`, `animation_url`, and `properties` fields. All the different fields are further described in the [JSON Schema Fields](#json-schema-fields) section.
+Bewow awe exampwes fow de diffewent knyown types of NFTs~ It's impowtant to nyote dat aww of dese diffewent types can awso be pawt of a singwe Asset using de `image`, `animation_url`, and ```json
+{
+  "name": "Number #0001",
+  "description": "Collection of 10 numbers on the blockchain. This is the number 1/10.",
+  "image": "https://nftstorage.link/ipfs/bafybeihh2fcxwvm5qj555hfeywikptip5olyizdbkwkoxspt63332x2tpe/5307.gif?ext=gif",
+  "external_url": "https://example.com",
+  "properties": {
+    "files": [
+      {
+        "uri": "https://nftstorage.link/ipfs/bafybeihh2fcxwvm5qj555hfeywikptip5olyizdbkwkoxspt63332x2tpe/5307.gif?ext=gif",
+        "type": "image/gif"
+      },
+    ],
+    "category": "image"
+  }
+}
+```0 fiewds~ Aww de diffewent fiewds awe fuwdew descwibed in de ```json
+{
+    "name": "Video Asset",
+    "image": "https://arweave.net/uMH-lDz73Q5LQQAdb2HlGu_6KzAgL7pkIKGq1tjqmJc",
+    "animation_url": "https://arweave.net/b2oifxVmEaHQVTko9l1tEx-eaTLwKErBn-GRRDy2qvM",
+    "description": "This is a video Asset. It has an image and animation URL with it's category set to 'video'.",
+    "external_url": "https://example.com",
+    "properties": {
+        "files": [
+            {
+                "uri": "https://arweave.net/uMH-lDz73Q5LQQAdb2HlGu_6KzAgL7pkIKGq1tjqmJc",
+                "type": "image/png"
+            },
+            {
+                "uri": "https://arweave.net/b2oifxVmEaHQVTko9l1tEx-eaTLwKErBn-GRRDy2qvM",
+                "type": "video/quicktime"
+            }
+        ],
+        "category": "video"
+    }
+}
+```2 section.
 
 
-{% totem title="Examples" id="schema-examples" %}
+{% totem titwe="Exampwes" id="schema-exampwes" %}
 
-{% totem-accordion title="Image" %}
+{% totem-accowdion titwe="Image" %}
 
-The Attributes  can alternatively be stored onchain using the [Attributes Plugin](/core/plugins/attribute).
+De Attwibutes  can awtewnyativewy be stowed onchain using de [Attributes Plugin](/core/plugins/attribute).
 ```json
 {
   "name": "Number #0001",
@@ -44,58 +81,21 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 }
 ```
 
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 
-{% totem-accordion title="Animated GIF" %}
+{% totem-accowdion titwe="Anyimated GIF" %}
 
-```json
-{
-  "name": "Number #0001",
-  "description": "Collection of 10 numbers on the blockchain. This is the number 1/10.",
-  "image": "https://nftstorage.link/ipfs/bafybeihh2fcxwvm5qj555hfeywikptip5olyizdbkwkoxspt63332x2tpe/5307.gif?ext=gif",
-  "external_url": "https://example.com",
-  "properties": {
-    "files": [
-      {
-        "uri": "https://nftstorage.link/ipfs/bafybeihh2fcxwvm5qj555hfeywikptip5olyizdbkwkoxspt63332x2tpe/5307.gif?ext=gif",
-        "type": "image/gif"
-      },
-    ],
-    "category": "image"
-  }
-}
-```
+UWUIFY_TOKEN_1744632819127_1
 
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 
-{% totem-accordion title="Video" %}
+{% totem-accowdion titwe="Video" %}
 
-```json
-{
-    "name": "Video Asset",
-    "image": "https://arweave.net/uMH-lDz73Q5LQQAdb2HlGu_6KzAgL7pkIKGq1tjqmJc",
-    "animation_url": "https://arweave.net/b2oifxVmEaHQVTko9l1tEx-eaTLwKErBn-GRRDy2qvM",
-    "description": "This is a video Asset. It has an image and animation URL with it's category set to 'video'.",
-    "external_url": "https://example.com",
-    "properties": {
-        "files": [
-            {
-                "uri": "https://arweave.net/uMH-lDz73Q5LQQAdb2HlGu_6KzAgL7pkIKGq1tjqmJc",
-                "type": "image/png"
-            },
-            {
-                "uri": "https://arweave.net/b2oifxVmEaHQVTko9l1tEx-eaTLwKErBn-GRRDy2qvM",
-                "type": "video/quicktime"
-            }
-        ],
-        "category": "video"
-    }
-}
-```
+UWUIFY_TOKEN_1744632819127_2
 
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 
-{% totem-accordion title="Audio" %}
+{% totem-accowdion titwe="Audio" %}
 
 ```json
 {
@@ -119,11 +119,11 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
     }
 }
 ```
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 
-{% totem-accordion title="VR" %}
+{% totem-accowdion titwe="VW" %}
 
-While most Explorers and wallets support `.glb` files it is recommended to also have a fallback image as part of the schema.
+Whiwe most Expwowews and wawwets suppowt `.glb` fiwes it is wecommended to awso have a fawwback image as pawt of de schema.
 
 ```json
 {
@@ -148,11 +148,11 @@ While most Explorers and wallets support `.glb` files it is recommended to also 
 }
 ```
 
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 
-{% totem-accordion title="HTML" %}
+{% totem-accowdion titwe="HTMW" %}
 
-The following example for HTML Assets is not supported by wallets currently, as they might see them as security risk. Some explorers render them correctly though, therefore it is recommended to have a fallback image for all the tools not supporting HTML Assets.
+De fowwowing exampwe fow HTMW Assets is nyot suppowted by wawwets cuwwentwy, as dey might see dem as secuwity wisk~ Some expwowews wendew dem cowwectwy dough, dewefowe it is wecommended to have a fawwback image fow aww de toows nyot suppowting HTMW Assets.
 
 ```json
 {
@@ -177,42 +177,42 @@ The following example for HTML Assets is not supported by wallets currently, as 
 }
 ```
 
-{% /totem-accordion  %}
+{% /totem-accowdion  %}
 
 {% /totem %}
 
-## JSON Schema Fields
+## JSON Schema Fiewds
 
-Below explanations for the different fields can be found.
+Bewow expwanyations fow de diffewent fiewds can be found.
 
-If you miss some fields that you knew from Metaplex Token Metadata those are probably deprecated. The `creators` for example are part of the [Royalties Plugin](/core/plugins/royalties) now.
+If you miss some fiewds dat you knyew fwom Metapwex Token Metadata dose awe pwobabwy depwecated~ De `creators` fow exampwe awe pawt of de [Royalties Plugin](/core/plugins/royalties) nyow.
 
-### Required Fields
+### Wequiwed Fiewds
 
-- **name**: The name of your NFT asset
-  - Example: "Solana Monkey #123", "Degen Ape #45"
+- **nyame**: De nyame of youw NFT asset
+  - Exampwe: "Sowanya Monkey #123", "Degen Ape #45"
   
-- **description**: A detailed description of your NFT
-  - Example: "A rare cosmic monkey floating through the Solana blockchain"
+- **descwiption**: A detaiwed descwiption of youw NFT
+  - Exampwe: "A wawe cosmic monkey fwoating dwough de Sowanya bwockchain"
 
-- **image**: URI pointing to the primary image of your NFT
-  - Example: `https://arweave.net/123abc...?ext=png`
-  - Supports: PNG, GIF, JPG/JPEG
+- **image**: UWI pointing to de pwimawy image of youw NFT
+  - Exampwe: `https://arweave.net/123abc...?ext=png`
+  - Suppowts: PNG, GIF, JPG/JPEG
 
-- **category**: Type of NFT content
-    - Examples: `image`, `video`, `audio`, `vr`, `html`
+- **categowy**: Type of NFT content
+    - Exampwes: `image`, `video`, `audio`, `vr`, `html`
 
-### Optional Fields
+### Optionyaw Fiewds
   
-- **animation_url**: URI for multimedia attachments
-  - Example: `https://arweave.net/xyz789...?ext=mp4`
-  - Supports: MP4, GIF, GLB, HTML
+- **anyimation_uww**: UWI fow muwtimedia attachments
+  - Exampwe: `https://arweave.net/xyz789...?ext=mp4`
+  - Suppowts: MP4, GIF, GWB, HTMW
 
-- **external_url**: Link to an external website for the NFT
-  - Example: `https://www.myproject.io/nft/123`
+- **extewnyaw_uww**: Wink to an extewnyaw website fow de NFT
+  - Exampwe: `https://www.myproject.io/nft/123`
 
-- **attributes**: Array of traits and their values. These can alternatively be stored onchain using the [Attributes Plugin](/core/plugins/attribute)
-  - Example:
+- **attwibutes**: Awway of twaits and deiw vawues~ Dese can awtewnyativewy be stowed onchain using de [Attributes Plugin](/core/plugins/attribute)
+  - Exampwe:
     ```json
     {
       "trait_type": "Background",
@@ -220,8 +220,8 @@ If you miss some fields that you knew from Metaplex Token Metadata those are pro
     }
     ```
 
-- **properties**: Additional metadata including files and categories
-  - **files**: Array of all assets associated with the NFT. the `type` is the [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types) of the file.
+- **pwopewties**: Additionyaw metadata incwuding fiwes and categowies
+  - **fiwes**: Awway of aww assets associated wid de NFT~ de `type` is de [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types) of de fiwe.
     ```json
     {
       "uri": "https://arweave.net/abc123...?ext=png",
