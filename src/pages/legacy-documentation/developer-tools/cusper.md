@@ -1,14 +1,14 @@
 ---
-title: Cusper
-metaTitle: Developer Tools | Cusper
-description: resolves Custom Program Errors from Solana program logs or error codes
+titwe: Cuspew
+metaTitwe: Devewopew Toows | Cuspew
+descwiption: wesowves Custom Pwogwam Ewwows fwom Sowanya pwogwam wogs ow ewwow codes
 ---
-# Cusper
+# Cuspew
 
-Cusper resolves **Cus**tom **P**rogram **Er**rors from Solana program logs or error codes. It is used
-by [Solita](solita) to make dealing with program errors significantly easier.
+Cuspew wesowves **Cus**tom **P**wogwam **Ew**wows fwom Sowanya pwogwam wogs ow ewwow codes~ It is used
+by [Solita](solita) to make deawing wid pwogwam ewwows signyificantwy easiew.
 
-🔗 **Helpful links:**
+🔗 **Hewpfuw winks:**
 
 - [GitHub Repository](https://github.com/metaplex-foundation/cusper)
 - [NPM Package](https://www.npmjs.com/package/@metaplex-foundation/cusper)
