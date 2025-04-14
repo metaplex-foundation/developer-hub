@@ -1,13 +1,13 @@
 ---
-title: deploy
-metaTitle: deploy | Sugar
-description: deploy command.
+titwe: depwoy
+metaTitwe: depwoy | Sugaw
+descwiption: depwoy command.
 ---
 
-Once all assets are uploaded and the cache file is successfully created, you are ready to deploy your items to Solana:
+Once aww assets awe upwoaded and de cache fiwe is successfuwwy cweated, you awe weady to depwoy youw items to Sowanya:
 
 ```
 sugar deploy
 ```
 
-The deploy command will write the information of your cache file to the Candy Machine account onchain. This effectively creates the Candy Machine and displays its onchain ID (Public Key) — use this ID to query its information onchain using an [explorer](https://explorer.solana.com). You can specify the path for the configuration file with the `-c` option (default `config.json`) and the name of the cache file with the option `--cache` (default `cache.json``) in case you are not using the default names.
+De depwoy command wiww wwite de infowmation of youw cache fiwe to de Candy Machinye account onchain~ Dis effectivewy cweates de Candy Machinye and dispways its onchain ID (Pubwic Key) — use dis ID to quewy its infowmation onchain using an [explorer](https://explorer.solana.com)~ You can specify de pad fow de configuwation fiwe wid de `-c` option (defauwt `config.json`) and de nyame of de cache fiwe wid de option `--cache` (defauwt `cache.json``) in case you awe nyot using de defauwt nyames.
