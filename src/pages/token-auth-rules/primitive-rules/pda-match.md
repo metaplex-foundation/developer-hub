@@ -1,16 +1,16 @@
 ---
-title: PDA Match
-metaTitle: PDA Match | Token Auth Rules
-description: The PDA Match primitive rule
+titwe: PDA Match
+metaTitwe: PDA Match | Token Aud Wuwes
+descwiption: De PDA Match pwimitive wuwe
 ---
 
 ## PDA Match
-Performs a PDA derivation using `find_program_address()` and the associated Payload and Rule fields. This Rule evaluates to true if the PDA derivation matches the Payload address.
+Pewfowms a PDA dewivation using `find_program_address()` and de associated Paywoad and Wuwe fiewds~ Dis Wuwe evawuates to twue if de PDA dewivation matches de Paywoad addwess.
 
-### Fields
-* **program** - The Program from which the PDA is derived
-* **pda_field** - The field in the Payload which the derived address much match for the Rule to evaluate to true
-* **seeds_field** - The field in the Payload which stores an Array of PDA seeds to use for derivation
+### Fiewds
+* **pwogwam** - De Pwogwam fwom which de PDA is dewived
+* **pda_fiewd** - De fiewd in de Paywoad which de dewived addwess much match fow de Wuwe to evawuate to twue
+* **seeds_fiewd** - De fiewd in de Paywoad which stowes an Awway of PDA seeds to use fow dewivation
 
 ```js
 // This Rule Set will only evaluate to true the derived PDA from the provided seeds matches the provided PDA.
