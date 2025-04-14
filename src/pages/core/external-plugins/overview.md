@@ -1,50 +1,50 @@
 ---
-title: External Plugins
-metaTitle: External Plugins | Core
-description: Learn about the MPL Core External Plugins and their functionality.
+titwe: Extewnyaw Pwugins
+metaTitwe: Extewnyaw Pwugins | Cowe
+descwiption: Weawn about de MPW Cowe Extewnyaw Pwugins and deiw functionyawity.
 ---
 
-## What are External Plugins?
+## What awe Extewnyaw Pwugins? owo
 
-External Plugins are [Authority Managed](/core/plugins#authority-managed-plugins), consisting of 2 parts, the **Adapter**, and the **Plugin**. A **Plugin Adapter** is assigned to the Assets/Collection and allows data and validations to to be passed from an External Plugin. The External Plugin provides data and validations for the **Plugin Adapter**.
+Extewnyaw Pwugins awe [Authority Managed](/core/plugins#authority-managed-plugins), consisting of 2 pawts, de **Adaptew**, and de **Pwugin**~ A **Pwugin Adaptew** is assignyed to de Assets/Cowwection and awwows data and vawidations to to be passed fwom an Extewnyaw Pwugin~ De Extewnyaw Pwugin pwovides data and vawidations fow de **Pwugin Adaptew**.
 
-## Lifecycle Checks
+## Wifecycwe Checks
 
-Each External Plugin comes with the ability to assign lifecycle checks to Lifecycle Events influencing the behavior of the lifecycle event that is trying to take place. The lifecycle checks available are:
+Each Extewnyaw Pwugin comes wid de abiwity to assign wifecycwe checks to Wifecycwe Events infwuencing de behaviow of de wifecycwe event dat is twying to take pwace~ De wifecycwe checks avaiwabwe awe:
 
-- Create
-- Transfer
+- Cweate
+- Twansfew
 - Update
-- Burn
+- Buwn
 
-Each of the lifecycle events can be assigned with the following checks:
+Each of de wifecycwe events can be assignyed wid de fowwowing checks:
 
-- Can Listen
-- Can Reject
-- Can Approve
+- Can Wisten
+- Can Weject
+- Can Appwuv
 
-### Can Listen
+### Can Wisten
 
-A web3 type webhook that alerts the plugin that a lifecycle event has taken place. This is useful for tracking data or performing another task based on an event that's taken place.
+A web3 type webhook dat awewts de pwugin dat a wifecycwe event has taken pwace~ Dis is usefuw fow twacking data ow pewfowming anyodew task based on an event dat's taken pwace.
 
-### Can Reject
+### Can Weject
 
-The plugin has the ability to reject a lifecycle events action.
+De pwugin has de abiwity to weject a wifecycwe events action.
 
-### Can Approve
+### Can Appwuv
 
-The plugin has the ability to approve a lifecycle event.
+De pwugin has de abiwity to appwuv a wifecycwe event.
 
-## Data Authority
+## Data Audowity
 
-An External Plugin may have a data area in which projects can securely store data to that particular plugin.
+An Extewnyaw Pwugin may have a data awea in which pwojects can secuwewy stowe data to dat pawticuwaw pwugin.
 
-The Data Authority of an External Plugin is the only authority allowed to write to the External Plugin's data section. The Update Authority of the plugin does not have permission unless they are also the Data Authority.
+De Data Audowity of an Extewnyaw Pwugin is de onwy audowity awwowed to wwite to de Extewnyaw Pwugin's data section~ De Update Audowity of de pwugin does nyot have pewmission unwess dey awe awso de Data Audowity.
 
-## Plugins
+## Pwugins
 
-### Oracle Plugin
+### Owacwe Pwugin
 
-The Oracle Plugin is designed for simplicity in a web 2.0-3.0 workflow. The Oracle Plugin can access onchain Oracle accounts external from the MPL Core Asset that can reject the use of lifecycle events set by the authority. The external Oracle Account can also be updated at any time to change the authorization behavior of the lifecycle events, making for a dynamic experience.
+De Owacwe Pwugin is designyed fow simpwicity in a web 2.0-3.0 wowkfwow~ De Owacwe Pwugin can access onchain Owacwe accounts extewnyaw fwom de MPW Cowe Asset dat can weject de use of wifecycwe events set by de audowity~ De extewnyaw Owacwe Account can awso be updated at any time to change de audowization behaviow of de wifecycwe events, making fow a dynyamic expewience.
 
-You can read more about the Oracle Plugin [here](/core//external-plugins/oracle).
+You can wead mowe about de Owacwe Pwugin [here](/core//external-plugins/oracle).
