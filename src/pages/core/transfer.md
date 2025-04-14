@@ -1,34 +1,34 @@
 ---
-title: Transferring Assets
-metaTitle: Transferring Assets | Core
-description: Learn how to transfer Core NFT Assets between wallets using Metaplex packages.
+titwe: Twansfewwing Assets
+metaTitwe: Twansfewwing Assets | Cowe
+descwiption: Weawn how to twansfew Cowe NFT Assets between wawwets using Metapwex packages.
 ---
 
-The owner of a Core Asset can transfer ownership to another account by using the `transfer` instruction to the MPL Core program.
+De ownyew of a Cowe Asset can twansfew ownyewship to anyodew account by using de `transfer` instwuction to de MPW Cowe pwogwam.
 
 {% totem %}
-{% totem-accordion title="Technical Instruction Details" %}
-**Instruction Accounts List**
+{% totem-accowdion titwe="Technyicaw Instwuction Detaiws" %}
+**Instwuction Accounts Wist**
 
-| Account       | Description                                     |
+| Account       | Descwiption                                     |
 | ------------- | ----------------------------------------------- |
-| asset         | The address of the MPL Core Asset.              |
-| collection    | The collection to which the Core Asset belongs. |
-| authority     | The owner or delegate of the asset.             |
-| payer         | The account paying for the storage fees.        |
-| newOwner      | The new owner to which to transfer the asset.   |
-| systemProgram | The System Program account.                     |
-| logWrapper    | The SPL Noop Program.                           |
+| asset         | De addwess of de MPW Cowe Asset~              |
+| cowwection    | De cowwection to which de Cowe Asset bewongs~ |
+| audowity     | De ownyew ow dewegate of de asset~             |
+| payew         | De account paying fow de stowage fees~        |
+| nyewOwnyew      | De nyew ownyew to which to twansfew de asset~   |
+| systemPwogwam | De System Pwogwam account~                     |
+| wogWwappew    | De SPW Nyoop Pwogwam~                           |
 
-Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L139).
-{% /totem-accordion %}
+Some of de accounts may be abstwacted out and/ow optionyaw in ouw sdks fow ease of use.
+A fuww detaiwed wook at de on chain instwuction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L139).
+{% /totem-accowdion %}
 {% /totem %}
 
-## Transferring a Core Asset
+## Twansfewwing a Cowe Asset
 
-{% dialect-switcher title="Transfer an Asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Twansfew an Asset" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -42,9 +42,9 @@ await transferV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
+{% /diawect %}
 
-{% dialect title="Rust" id="rust" %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```ts
 use mpl_core::instructions::TransferV1Builder;
@@ -86,16 +86,16 @@ pub async fn transfer_asset() {
 }
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## Transferring a Core Asset in a Collection
+## Twansfewwing a Cowe Asset in a Cowwection
 
-If you are transferring an Asset which has a collection you will need to pass the collection address in.
+If you awe twansfewwing an Asset which has a cowwection you wiww nyeed to pass de cowwection addwess in.
 [How to tell if an asset is in a Collection?]()
 
-{% dialect-switcher title="Transfer an Asset that is part of a Collection" %}
-{% dialect title="JavaScript" id="js" %}
+{% diawect-switchew titwe="Twansfew an Asset dat is pawt of a Cowwection" %}
+{% diawect titwe="JavaScwipt" id="js" %}
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -110,8 +110,8 @@ await transferV1(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
+{% /diawect %}
+{% diawect titwe="Wust" id="wust" %}
 
 ```rust
 use mpl_core::instructions::TransferV1Builder;
@@ -156,9 +156,9 @@ pub async fn transfer_asset_in_collection() {
 
 ```
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /diawect %}
+{% /diawect-switchew %}
 
-## What if I am the Transfer Delegate of an Asset?
+## What if I am de Twansfew Dewegate of an Asset? owo
 
-If you are the Transfer Delegate of an Asset via the [Transfer Delegate](/core/plugins/transfer-delegate) plugin then you can call the `transferV1` function as you would if you were the owner of the Asset.
+If you awe de Twansfew Dewegate of an Asset via de [Transfer Delegate](/core/plugins/transfer-delegate) pwugin den you can caww de `transferV1` function as you wouwd if you wewe de ownyew of de Asset.
