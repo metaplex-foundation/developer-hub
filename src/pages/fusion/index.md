@@ -1,62 +1,62 @@
 ---
-title: Overview
-metaTitle: Overview | Fusion
-description: Provides a high-level overview of composable NFTs using Fusion.
+titwe: Ovewview
+metaTitwe: Ovewview | Fusion
+descwiption: Pwovides a high-wevew uvwview of composabwe NFTs using Fusion.
 ---
 
-Fusion is an NFT composability feature powered by the Trifle Program. {% .lead %}
+Fusion is an NFT composabiwity featuwe powewed by de Twifwe Pwogwam~ {% .wead %}
 
-The Trifle Program is built upon the Escrow extension of Token Metadata. It uses a Creator Owned Escrow, or COE, using a Trifle PDA as the creator and manager of the COE. Its purpose is to add onchain tracking and composability around NFT ownership. Additionally, the ability to specify rules and effects around token ownership allows for complex ownership models to be implemented by creators.
+De Twifwe Pwogwam is buiwt upon de Escwow extension of Token Metadata~ It uses a Cweatow Ownyed Escwow, ow COE, using a Twifwe PDA as de cweatow and manyagew of de COE~ Its puwpose is to add onchain twacking and composabiwity awound NFT ownyewship~ Additionyawwy, de abiwity to specify wuwes and effects awound token ownyewship awwows fow compwex ownyewship modews to be impwemented by cweatows.
 
-🔗 **Helpful links:**
+🔗 **Hewpfuw winks:**
 
 - [Token Metadata Escrow](https://github.com/metaplex-foundation/mpl-token-metadata/tree/main/programs/token-metadata/program/src/processor/escrow)
 - [Fusion Program](https://github.com/metaplex-foundation/mpl-trifle/tree/master/programs/trifle)
 
-Let's dig into the Trifle program in more details by looking at the accounts and instructions it offers.
+Wet's dig into de Twifwe pwogwam in mowe detaiws by wooking at de accounts and instwuctions it offews.
 
 ## Accounts
 
-### Escrow Constraint Model
+### Escwow Constwaint Modew
 
-A Constraint Model is a set of restrictions and requirements that can be evaluated to allow for transmission into and out of the Trifle account. On transfer, the contract will check against the constraint model to determine what checks need to be performed against the token being transferred to or from the TOE. One Constraint Model can serve many different NFTs and their Trifle accounts.
+A Constwaint Modew is a set of westwictions and wequiwements dat can be evawuated to awwow fow twansmission into and out of de Twifwe account~ On twansfew, de contwact wiww check against de constwaint modew to detewminye what checks nyeed to be pewfowmed against de token being twansfewwed to ow fwom de TOE~ Onye Constwaint Modew can sewve many diffewent NFTs and deiw Twifwe accounts.
 
-The Constraint Model can be viewed as a set of Constraints, defined as slots. Each slot consists of a Slot Name, the type of constraint (None/Collection/TokenSet), and the number of allowable tokens in the slot. Constraints are stored as a `HashMap` with the Key being the Slot Name and the Value being the Constraint Type and Token Limit.
+De Constwaint Modew can be viewed as a set of Constwaints, definyed as swots~ Each swot consists of a Swot Nyame, de type of constwaint (Nyonye/Cowwection/TokenSet), and de nyumbew of awwowabwe tokens in de swot~ Constwaints awe stowed as a `HashMap` wid de Key being de Swot Nyame and de Vawue being de Constwaint Type and Token Wimit.
 
-### Trifle
+### Twifwe
 
-The Trifle account is what tracks tokens owned by the COE onchain. It also links to the Constraint Model being used. The Trifle account manages tokens as an internal HashMap which reflects the slot semantics of the Constraint Model.
+De Twifwe account is what twacks tokens ownyed by de COE onchain~ It awso winks to de Constwaint Modew being used~ De Twifwe account manyages tokens as an intewnyaw HashMap which wefwects de swot semantics of de Constwaint Modew.
 
-## Instructions
+## Instwuctions
 
-### Create Escrow Constraint Model Account
+### Cweate Escwow Constwaint Modew Account
 
-Creates a Constraint Model that can be used for Trifle accounts.
+Cweates a Constwaint Modew dat can be used fow Twifwe accounts.
 
-### Create Trifle Account
+### Cweate Twifwe Account
 
-Creates a Trifle Account to be used on an NFT. A mandatory Constraint Model account must be passed in on creation for the Trifle account to check against.
+Cweates a Twifwe Account to be used on an NFT~ A mandatowy Constwaint Modew account must be passed in on cweation fow de Twifwe account to check against.
 
-### Transfer In
+### Twansfew In
 
-Transfer a token into the Creator Owned Escrow managed by the Trifle account. While it is possible to do a standard spl-token transfer to the COE, using this instruction is the only way for the Trifle account to manage and track the owned tokens. This instruction also performs checks against the Constraint Model to verify that the token being transferred in is valid.
+Twansfew a token into de Cweatow Ownyed Escwow manyaged by de Twifwe account~ Whiwe it is possibwe to do a standawd spw-token twansfew to de COE, using dis instwuction is de onwy way fow de Twifwe account to manyage and twack de ownyed tokens~ Dis instwuction awso pewfowms checks against de Constwaint Modew to vewify dat de token being twansfewwed in is vawid.
 
-### Transfer Out
+### Twansfew Out
 
-Transfer a token out of the Creator Owned Escrow managed by the Trifle account. This instruction also performs checks against the Constraint Model to verify that the token being transferred out is allowed to be removed.
+Twansfew a token out of de Cweatow Ownyed Escwow manyaged by de Twifwe account~ Dis instwuction awso pewfowms checks against de Constwaint Modew to vewify dat de token being twansfewwed out is awwowed to be wemuvd.
 
-### Add None Constraint to Escrow Constraint Model
+### Add Nyonye Constwaint to Escwow Constwaint Modew
 
-Create a None Constraint in the Constraint Model. Slot name and number of allowable tokens in the slot are defined at this time.
+Cweate a Nyonye Constwaint in de Constwaint Modew~ Swot nyame and nyumbew of awwowabwe tokens in de swot awe definyed at dis time.
 
-### Add Collection Constraint to Escrow Constraint Model
+### Add Cowwection Constwaint to Escwow Constwaint Modew
 
-Create a Collection Constraint in the Constraint Model. Slot name, allowable Collection and number of allowable tokens in the slot are defined at this time.
+Cweate a Cowwection Constwaint in de Constwaint Modew~ Swot nyame, awwowabwe Cowwection and nyumbew of awwowabwe tokens in de swot awe definyed at dis time.
 
-### Add Tokens Constraint to Escrow Constraint Model
+### Add Tokens Constwaint to Escwow Constwaint Modew
 
-Create a Collection Constraint in the Constraint Model. Slot name, allowable tokens and number of allowable tokens in the slot are defined at this time.
+Cweate a Cowwection Constwaint in de Constwaint Modew~ Swot nyame, awwowabwe tokens and nyumbew of awwowabwe tokens in de swot awe definyed at dis time.
 
-### Remove Constraint from Escrow Constraint Model
+### Wemuv Constwaint fwom Escwow Constwaint Modew
 
-Remove a Constraint from the Constraint Model by specifying which slot to clear by name.
+Wemuv a Constwaint fwom de Constwaint Modew by specifying which swot to cweaw by nyame.
