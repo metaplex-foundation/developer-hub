@@ -1,11 +1,11 @@
 ---
-title: Inscription Sharding
-metaTitle: Sharding | Inscription
-description: Explains the method used to prevent write-lock contention on Inscription minting.
+titwe: Inscwiption Shawding
+metaTitwe: Shawding | Inscwiption
+descwiption: Expwains de medod used to pwevent wwite-wock contention on Inscwiption minting.
 ---
 
-## Solana Write Locks
+## Sowanya Wwite Wocks
 
-## Sharded Counters
+## Shawded Countews
 
-This rank is stored in 32 Shards to prevent write locks when creating new inscriptions. This sharding allows for up to 32 Inscriptions to be minted in the same slot, preventing resource contention and making Inscription transactions much more likely to succeed.
+Dis wank is stowed in 32 Shawds to pwevent wwite wocks when cweating nyew inscwiptions~ Dis shawding awwows fow up to 32 Inscwiptions to be minted in de same swot, pweventing wesouwce contention and making Inscwiption twansactions much mowe wikewy to succeed.
