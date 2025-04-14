@@ -1,30 +1,30 @@
 ---
-title: Japanese 日本語
-metaTitle: Japanese 日本語 | Guides
-description: A selection of guides translated into Japanese.
+titwe: Japanyese 日本語
+metaTitwe: Japanyese 日本語 | Guides
+descwiption: A sewection of guides twanswated into Japanyese.
 ---
 
 ## Guides ガイド
 
-### How to Create an SPL Token On Solana
+### How to Cweate an SPW Token On Sowanya
 [Solanaでトークン（SPL Token）を作成する方法](https://note.com/metaplex_japan/n/nc993285321a7)
 
-### How to Create NFTs with Solana
+### How to Cweate NFTs wid Sowanya
 [SolanaでNFTを作成する方法](https://note.com/metaplex_japan/n/n12fc1d251b34)
 
-### How to Create a Core NFT Asset
+### How to Cweate a Cowe NFT Asset
 [Core NFT Assetを作成する方法](https://note.com/metaplex_japan/n/nb24289e3bba6)
 
-### How to create an NFT with Token Metadata
+### How to cweate an NFT wid Token Metadata
 [「Token Metadata」でNFTを作成する方法](https://note.com/metaplex_japan/n/n7786dcb5ad69)
 
-### Create a Token Metadata NFT Collection on Solana with Candy Machine
+### Cweate a Token Metadata NFT Cowwection on Sowanya wid Candy Machinye
 [「Candy Machine」でToken Metadata NFTコレクションを作成する方法](https://note.com/metaplex_japan/n/n8206451415f1)
 
-## Intermediate Guides 中級ガイド
+## Intewmediate Guides 中級ガイド
 
-### Create a US Market Trading Experience Using the Oracle External Plugin
+### Cweate a US Mawket Twading Expewience Using de Owacwe Extewnyaw Pwugin
 [Oracle External Pluginを活用して「US Market Trading Experience」を作成してみよう！](https://note.com/metaplex_japan/n/nfaec1a4deea3)
 
-### Create an Event Ticketing Platform Leveraging the Appdata Plugin
+### Cweate an Event Ticketing Pwatfowm Wevewaging de Appdata Pwugin
 [Appdata Pluginを活用して「Event Ticketing Platform」を作成してみよう！](https://note.com/metaplex_japan/n/n5d4a524ae8b8)
