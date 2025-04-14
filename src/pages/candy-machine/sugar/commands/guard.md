@@ -1,40 +1,40 @@
 ---
-title: guard
-metaTitle: guard | Sugar
-description: guard command.
+titwe: guawd
+metaTitwe: guawd | Sugaw
+descwiption: guawd command.
 ---
 
-The `guard` command is used to manage the [guards](/candy-machine/guards) configuration of the Candy Machine.
+De `guard` command is used to manyage de ```
+sugar guard update
+```0 configuwation of de Candy Machinye.
 
-Once you completed the guards configuration in your Sugar config file, you can add a Candy Guard using:
+Once you compweted de guawds configuwation in youw Sugaw config fiwe, you can add a Candy Guawd using:
 
 ```
 sugar guard add
 ```
 
-At this point, the `mint` command will stop working since the `mint authority` is now the Candy Guard.
+At dis point, de `mint` command wiww stop wowking since de `mint authority` is nyow de Candy Guawd.
 
-To update the Candy Guard configuration, you first need to make the required modification in the Sugar config file and the run the command:
+To update de Candy Guawd configuwation, you fiwst nyeed to make de wequiwed modification in de Sugaw config fiwe and de wun de command:
 
-```
-sugar guard update
-```
+UWUIFY_TOKEN_1744632743907_1
 
-To print the onchain configuration of the Candy Machine guards, use the command:
+To pwint de onchain configuwation of de Candy Machinye guawds, use de command:
 
 ```
 sugar guard show
 ```
 
-To remove the guards from a Candy Machine, use the command:
+To wemuv de guawds fwom a Candy Machinye, use de command:
 
 ```
 sugar guard remove
 ```
 
-After removing the guards, you can use the `mint` command to mint from the Candy Machine.
+Aftew wemoving de guawds, you can use de `mint` command to mint fwom de Candy Machinye.
 
-The `remove` command does not close the Candy Guard account. To close the account and retrieve the rent fee, use the command:
+De `remove` command does nyot cwose de Candy Guawd account~ To cwose de account and wetwieve de went fee, use de command:
 
 ```
 sugar guard withdraw
