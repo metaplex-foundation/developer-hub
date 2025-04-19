@@ -3,8 +3,8 @@ title: Setup a Local Validator
 metaTitle: Setup a Local Validator
 description: Learn how to setup a local development environment and use a local validator
 # remember to update dates also in /components/guides/index.js
-created: '11-06-2024'
-updated: '11-06-2024'
+created: '04-19-2025'
+updated: '04-19-2025'
 ---
 
 ## Overview
@@ -89,7 +89,7 @@ solana-test-validator --account <address to load the account to> <path to accoun
 solana-test-validator --bpf-program <address to load the program to> <path to program file> --reset
 ```
 
-## Looking at Local transaction on Explorers
+## Looking at Local Transactions on Explorers
 
 Using a local validator doesn't prevent us from using the explorer since many explorers have the capability to connect to our local port and read the local ledger stored in the `test-ledger` folder we mentioned earlier.
 
@@ -144,7 +144,7 @@ Unfortunately, this part of the guide is available only for users on **Linux** o
 
 With the basics of the local validator setup and management, you can create and manage personalized local validators through **bash scripts**. 
 
-For example, you can create a `metaplex-test-validator` that includes the main Metaplex programs: `mpl-token-metadata`, `mpl-bubblegum`, and `mpl-core`.
+For example, you can create a `metaplex-local-validator` that includes the main Metaplex programs: `mpl-token-metadata`, `mpl-bubblegum`, and `mpl-core`.
 
 ### Setting Up Directories and Downloading Program Data
 
@@ -201,7 +201,7 @@ Start by opening a new script file using:
 sudo nano /usr/local/bin/metaplex-local-validator
 ```
 
-**Note**: If the /user/local/bin directory doesn’t exist, you can create it using `sudo mkdir -p -m 775 /usr/local/bin.`
+**Note**: If the /usr/local/bin directory doesn't exist, you can create it using `sudo mkdir -p -m 775 /usr/local/bin`
 
 Paste in the following code into the editor and save it:
 
@@ -226,11 +226,11 @@ eval $COMMAND
 Once your script is ready, modify its permissions so it can be executed:
 
 ```
-sudo chmod +x /usr/local/bin/metaplex-test-validator
+sudo chmod +x /usr/local/bin/metaplex-local-validator
 ```
 
 Finally, test your new validator within your project folder:
 
 ```
-metaplex-test-validator
+metaplex-local-validator
 ```

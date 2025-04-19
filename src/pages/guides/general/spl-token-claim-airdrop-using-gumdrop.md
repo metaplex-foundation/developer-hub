@@ -53,14 +53,14 @@ Ensure you mint enough tokens to cover your entire distribution list plus some b
 
 ## Distribution Methods
 
-To distribute the proofs to the users, gumdrop supports multiple distribution methods. Wallet-based distribution is recommended for:
+To distribute the proofs to the users, Gumdrop supports multiple distribution methods. Wallet-based distribution is recommended for:
 - Better reliability
 - Simpler implementation
 - No dependency on external services
 - Direct wallet verification
 
 For wallet distribution, you'll need to either
-- Send your users a claim URL containing the required proof data, using one of the already available Discord Bots 
+- Send your users a claim URL containing the required proof data, using one of the already available Discord Bots. 
 or:
 1. Store the claim data in your database indexed by wallet address
 2. Create a frontend that fetches claim data when users connect their wallet
@@ -126,7 +126,7 @@ Users need a frontend interface to claim their tokens. You can either:
 
 1. Use the hosted version at `https://gumdrop.metaplex.com`
 
-2. Host your own interface **recommended**. You might want to use the Gumdrop frontend as a starting point and customize it to your needs. For example it can massively increase the user experience by automatically filling in the claim data for the user based on the wallet they are connected with.
+2. Host your own interface **recommended**. You might want to use the Gumdrop frontend as a starting point and customize it to your needs. For example, it can massively increase the user experience by automatically filling in the claim data for the user based on the wallet they are connected with.
 
 Before launching:
 

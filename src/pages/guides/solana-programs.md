@@ -3,17 +3,17 @@ title: Solana Programs and State Overview
 metaTitle: Solana Programs and State Overview | Guides
 description: Learn about Solana Programs and how data is stored in account state on Solana.
 # remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
-updated: '06-21-2024'
+created: '04-19-2024'
+updated: '04-19-2025'
 ---
 
 ## Solana Programs
 Solana programs are **executable code** that runs on the Solana blockchain. They are similar to smart contracts on other blockchain platforms, but with some distinct characteristics and optimizations specific to Solana.
 
 #### Key Characteristics:
-- **Stateless**: Solana programs do not store state internally. Instead, state is stored in seperate accounts on the chain.
+- **Stateless**: Solana programs do not store state internally. Instead, state is stored in separate accounts on the chain.
 - **Written in Rust**: Programs are typically written in Rust.
-- **Executed by Transactions**: Programs are invoked by transactions that specify the program ID and the required accounts and date.
+- **Executed by Transactions**: Programs are invoked by transactions that specify the program ID and the required accounts and data.
 
 ## Accounts
 Accounts **used to store both data and SOL**. Each account has an owner, which is a program that can modify its data.

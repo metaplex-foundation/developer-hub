@@ -39,7 +39,7 @@ but have your program or a PDA serve as the authority for subsequent actions.
    Program Derived Addresses (PDAs) do not possess private keys that allow them
    to sign transactions in the same way as regular keypairs, so all of their
    interactions must be managed by calling a program. While a PDA can be the
-   authority of an account, It cannot directly be used to pay rent or fees
+   authority of an account, it cannot directly be used to pay rent or fees
    without involving complicated fund movements. Having a separate payer account
    to cover rent or small storage adjustments on behalf of the PDA avoids the
    complexity of funneling funds into the PDA just to pay for minor changes.
@@ -74,7 +74,7 @@ a client that works with this pattern.
     #[derive(Accounts)]
     pub struct CreateAccount<'info> {
         /// The address of the new account
-        #[account(init, payer = player_one, space = 8 + NewAccount::MAXIMUM_SIZE)]
+        #[account(init, payer = payer, space = 8 + NewAccount::MAXIMUM_SIZE)]
         pub account: Account<'info, NewAccount>,
         
         /// The account paying for the storage fees

@@ -10,7 +10,7 @@ Metaplex provides Rust SDKs for most of our programs which have consistent and p
 
 ## Modules
 
-The Core Rust SDKs our organized into several modules:
+The Core Rust SDKs are organized into several modules:
 
 - `accounts`: represents the program's accounts.
 - `instructions`: facilitates the creation of instructions, instruction arguments, and CPI instructions.
@@ -19,7 +19,7 @@ The Core Rust SDKs our organized into several modules:
 
 ### Accounts
 
-The **accounts** module is generated based on on-chain account state generation and their structs. These can be deserialized using a number of different methods based on if you are using RAW program generation or using a framework such as Anchor.
+The **accounts** module is generated based on on-chain account structures. These can be deserialized using a number of different methods based on if you are using RAW program generation or using a framework such as Anchor.
 
 These can be accessed from `<crate_name>::accounts`. In the case of `mpl-core` you could access the accounts as follows;
 
@@ -63,10 +63,9 @@ mpl_core::types
 
 While an **errors** module is generated for every SDK this just holds the error list for that specific program and users do not need to interact with this module.
 
-
 ## Instruction Builders
 
-Metaplex Rust SDKs will also currently come with two a **Builder** versions of each instruction which you can import. This abstracts a massive amount code for you and will return you an instruction that's ready to send.
+Metaplex Rust SDKs will also currently come with two **Builder** versions of each instruction which you can import. This abstracts a massive amount code for you and will return you an instruction that's ready to send.
 
 These include:
 
@@ -85,15 +84,9 @@ CreateV1InstructionArgs
 CreateV1InstructionData
 ```
 
-Each instruction that comes from a Metaplex Rust crate 
-
-Lets take the `CreateV1` instruction from Core as an example (this applies to all other instructions from this Crate and all other Metaplex crates too).
-
-If we look through the instructions in the  we can see we have a number of instructions available to us.
-
 ### Builder
 
-Builder instructions are designed to be used via
+Builder instructions are designed to be used when you need to create instructions for client-side transactions.
 
 The one we are interested in here is the `CreateV1Builder`.
 
@@ -121,10 +114,9 @@ pub struct CreateV1Builder {
     plugins: Option<Vec<PluginAuthorityPair>>,
     __remaining_accounts: Vec<solana_program::instruction::AccountMeta>,
 }
-
 ```
 
-These are your arguments of publickeys and data that will need to be passed into the builder. Some accounts may also be optional. These optional accounts my not be required at all by the program or could possibly default to another address if left out. This behaviour can vary from instruction to instruction. 
+These are your arguments of publickeys and data that will need to be passed into the builder. Some accounts may also be optional. These optional accounts may not be required at all by the program or could possibly default to another address if left out. This behaviour can vary from instruction to instruction. 
 
 If you click through to the `new()` function again and scroll down this time you'll see the individual functions with additional comments. In the below case you can see that the owner will default to payer, so we don't need to pass in owner if in this case if the payer is also going to be the owner of the Asset.
 
@@ -147,7 +139,7 @@ let create_asset_ix = CreateV1Builder::new()
         .payer(payer.pubkey())
         .name("My Nft".into())
         .uri("https://example.com/my-nft.json".into())
-.       .instruction();
+        .instruction();
 ```
 
 Now that we have our instruction ready we need to create a normal Solana transaction to send to our RPC. This includes a blockhash and signers.
@@ -187,7 +179,6 @@ let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_s
     let res = rpc_client.send_and_confirm_transaction(&create_asset_tx).await.unwrap();
 
     println!("Signature: {:?}", res)
-
 ```
 
 ### CpiBuilder

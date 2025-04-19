@@ -20,7 +20,7 @@ It is recommended to use the available [create helper](https://developers.metapl
 
 ## Initial Setup
 
-This guide assumes that you already have an SPL token initialized for which you'd like to add metadata to. You might need to modify and move functions around to suite your needs. 
+This guide assumes that you already have an SPL token initialized for which you'd like to add metadata to. You might need to modify and move functions around to suit your needs.
 
 ## Initializing
 
@@ -91,7 +91,7 @@ You can place the Umi instantiation code inside or outside the code blocks, but 
 ### Generating a New Wallet
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
 	.use(mplTokenMetadata())
 	.use(mplToolbox());
 
@@ -103,7 +103,7 @@ umi.use(signerIdentity(signer));
 
 // Airdrop 2 SOL to the identity
 // if you end up with a 429 too many requests error, you may have to use
-// the a different rpc other than the free default one supplied.
+// a different rpc other than the free default one supplied.
 await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 ```
 
@@ -114,9 +114,9 @@ const umi = createUmi("https://api.devnet.solana.com")
 	.use(mplTokenMetadata())
 	.use(mplToolbox());
 
-// You will need to us fs and navigate the filesystem to
+// You will need to use fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
-const walletFile = const imageFile = fs.readFileSync('./keypair.json')
+const walletFile = fs.readFileSync('./keypair.json')
 
 // Convert your walletFile onto a keypair.
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
@@ -221,7 +221,7 @@ const tokenMetadata = {
 async function addMetadata() {
 	// Airdrop 2 SOL to the identity
     // if you end up with a 429 too many requests error, you may have to use
-    // the a different rpc other than the free default one supplied.
+    // a different rpc other than the free default one supplied.
     await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 
     // derive the metadata account that will store our metadata data onchain

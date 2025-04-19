@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Rust
 metaTitle: Getting Started with Rust | Guides
-description: A quick overview on how to get started with Rust in the Solana ecoSystem.
+description: A quick overview on how to get started with Rust in the Solana ecosystem.
 ---
 
 ## Introduction
