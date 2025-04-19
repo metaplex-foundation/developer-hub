@@ -3,8 +3,8 @@ title: Understanding Solana Program Derived Addresses (PDAs)
 metaTitle: Understanding Solana Program Derived Addresses | Guides
 description: Learn about Solana Program Derived Addresses (PDAs) and their use cases.
 # remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
-updated: '06-21-2024'
+created: '04-19-2024'
+updated: '04-19-2025'
 ---
 
 ## Overview

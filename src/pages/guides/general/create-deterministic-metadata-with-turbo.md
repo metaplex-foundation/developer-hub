@@ -11,7 +11,7 @@ To utilize the metadata randomization feature in the MPL-Hybrid program, the off
 
 {% callout title="What is Turbo" %}
 
-Turbo is a ultrahigh-throughput Permaweb service that streamlines the funding, indexing, and transmission of data to and from Arweave. It provides graphical and programmatic interfaces for payment options in fiat currency with credit or debit cards as well as cryptocurrencies such as ETH, SOL, and AR.
+Turbo is an ultrahigh-throughput Permaweb service that streamlines the funding, indexing, and transmission of data to and from Arweave. It provides graphical and programmatic interfaces for payment options in fiat currency with credit or debit cards as well as cryptocurrencies such as ETH, SOL, and AR.
 
 {% /callout %}
 
@@ -31,7 +31,7 @@ npm i @ardrive/turbo-sdk
 
 In this example, we will show you how to upload metadata in a deterministic way. To do so, you'll need to prepare all the assets before starting. 
 
-To generate the metadata, you can use [one of these methods](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata follow an incremental naming convention starting from 0 like this:
+To generate the metadata, you can use [one of these methods](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata following an incremental naming convention starting from 0 like this:
 
 ```
 metadata/
@@ -52,7 +52,7 @@ import { TurboFactory } from '@ardrive/turbo-sdk';
 
 // Import here the keypair.json file that you're going
 // to use to pay for the upload
-import secretKey from "/path/to/your/kepypair.json";
+import secretKey from "/path/to/your/keypair.json";
 
 const turbo = TurboFactory.authenticated({
   privateKey: bs58.encode(Uint8Array.from(secretKey)),
@@ -68,15 +68,15 @@ To gain access to the Metaplex Aura network on the Solana and Eclipse blockchain
 
 ## Upload the Metadata
 
-Turbo simplifies the process of uploading entire folders of metadata using the `TurboAuthenticatedClient.uploadFolder()` function. This function supports Manifests by default, returning a Manifest ID via `result.manifestResponse?.id`, which can be used for metadata creation and escrow setup.
+Turbo simplifies the process of uploading entire folders of metadata using the `TurboAuthenticatedClient.uploadFolder()` function. This function supports Manifests by default, returning a Manifest ID via `metadataUploadResponse.manifestResponse?.id`, which can be used for metadata creation and escrow setup.
 
-To simplify the process, this guide provides helper function called `uploadAssetsAndMetadata()` that handles the entire workflow.
+To simplify the process, this guide provides a helper function called `uploadMetadata()` that handles the entire workflow.
 
 ```javascript
 const metadataUploadResponse = await uploadMetadata(turbo);
 ```
 
-**Steps of the `uploadAssetsAndMetadata()` helper**
+**Steps of the `uploadMetadata()` helper**
 
 1. Determines how many lamports are needed for the upload by calling `calculateRequiredLamportsForUpload()`, which calculates the upload cost in Winc (Turbo’s token) and converts it to lamports using `TurboAuthenticatedClient.getWincForToken()`.
 
@@ -186,7 +186,7 @@ import path from 'path';
 import fs from 'fs';
 import BigNumber from 'bignumber.js';
 
-import secretKey from "/path/to/your/kepypair.json";
+import secretKey from "/path/to/your/keypair.json";
 
 const imageFolderPath = path.join(__dirname, './assets');
 const metadataFolderPath = path.join(__dirname, './metadata');
@@ -197,7 +197,7 @@ const metadataFolderPath = path.join(__dirname, './metadata');
         const turbo = TurboFactory.authenticated({
             privateKey: bs58.encode(Uint8Array.from(secretKey)),
             token: 'solana',
-            gatewayUrl: `https://api.devnet.solana.com`,
+            gatewayUrl: `https://devnet-aura.metaplex.com/<YOUR_API_KEY>`,
             paymentServiceConfig: { url: "https://payment.ardrive.dev" },
             uploadServiceConfig: { url: "https://upload.ardrive.dev" },
         });
@@ -213,7 +213,7 @@ async function uploadMetadata(turbo: TurboAuthenticatedClient): Promise<TurboUpl
     // Calculate and upload metadata folder
     const requiredLamportsForMetadata = await calculateRequiredLamportsForUpload(
         turbo,
-        await calculateFolderSize(metadataFolderPath)
+        calculateFolderSize(metadataFolderPath)
     );
 
     // Top up wallet if required
