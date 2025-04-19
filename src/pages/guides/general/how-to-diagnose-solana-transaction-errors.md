@@ -58,7 +58,7 @@ console.log(signature)
 
 ```ts
 // Create Connection
-const connection = new Connection("https://devnet-aura.metaplex.com/<YOUR_API_KEY>", "confirmed",);
+const connection = new Connection("https://api.devnet.solana.com", "confirmed",);
 
 // Create your transaction
 const transaction = new VersionedTransaction()
@@ -74,7 +74,7 @@ console.log(res)
 
 ```rust
 // Create Connection
-let rpc_client = rpc_client::RpcClient::new("https://devnet-aura.metaplex.com/<YOUR_API_KEY>".to_string());
+let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
 
 // Create your transaction
 let transaction = new Transaction()

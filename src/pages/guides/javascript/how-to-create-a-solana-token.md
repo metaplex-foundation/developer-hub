@@ -149,7 +149,7 @@ This example is using a local script/node.js approach using Irys to upload to Ar
 const imageFile = fs.readFileSync('./image.jpg')
 
 // Use `createGenericFile` to transform the file into a `GenericFile` type
-// that Umi can understand. Make sure you set the mimi tag type correctly
+// that Umi can understand. Make sure you set the mimetag type correctly
 // otherwise Arweave will not know how to display your image.
 
 const umiImageFile = createGenericFile(imageFile, 'image.jpeg', {
@@ -348,7 +348,7 @@ const createAndMintTokens = async () => {
   const imageFile = fs.readFileSync("./image.jpg");
 
   // Use `createGenericFile` to transform the file into a `GenericFile` type
-  // that umi can understand. Make sure you set the mimi tag type correctly
+  // that umi can understand. Make sure you set the mimetag type correctly
   // otherwise Arweave will not know how to display your image.
 
   const umiImageFile = createGenericFile(imageFile, "image.png", {

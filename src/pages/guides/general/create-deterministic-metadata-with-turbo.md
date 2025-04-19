@@ -57,7 +57,7 @@ import secretKey from "/path/to/your/keypair.json";
 const turbo = TurboFactory.authenticated({
   privateKey: bs58.encode(Uint8Array.from(secretKey)),
   token: 'solana',
-  gatewayUrl: `https://devnet-aura.metaplex.com/<YOUR_API_KEY>`,
+  gatewayUrl: `https://api.devnet.solana.com`,
   paymentServiceConfig: { url: "https://payment.ardrive.dev" },
   uploadServiceConfig: { url: "https://upload.ardrive.dev" },
 });
@@ -197,7 +197,7 @@ const metadataFolderPath = path.join(__dirname, './metadata');
         const turbo = TurboFactory.authenticated({
             privateKey: bs58.encode(Uint8Array.from(secretKey)),
             token: 'solana',
-            gatewayUrl: `https://devnet-aura.metaplex.com/<YOUR_API_KEY>`,
+            gatewayUrl: `https://api.devnet.solana.com`,
             paymentServiceConfig: { url: "https://payment.ardrive.dev" },
             uploadServiceConfig: { url: "https://upload.ardrive.dev" },
         });
