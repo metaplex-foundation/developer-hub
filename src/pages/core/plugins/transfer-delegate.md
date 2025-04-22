@@ -220,7 +220,7 @@ import { publicKey } from "@metaplex-foundation/umi";
 const assetId = publicKey("11111111111111111111111111111111");
 
 // Fetch the Asset
-const assetItem = await fetchAssetV1(umi, assetId);
+const assetItem = await fetchAsset(umi, assetId);
 
 // Fetch collection if Asset is apart of collection
 const collectionItem =
@@ -232,7 +232,7 @@ const collectionItem =
 // Transfer the Core NFT Asset
 const { signature } = await transfer(umi, {
     asset: assetItem,
-    newOwner: publicKey(""),
+    newOwner: publicKey("22222222222222222222222222222222"),
     collection: collectionItem,
   })
   .sendAndConfirm(umi);
@@ -242,7 +242,7 @@ const { signature } = await transfer(umi, {
 
 {% dialect title="Rust CPI" id="rust-cpi" %}
 ```rust
-TransferV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
+TransferV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
     .new_owner(&ctx.accounts.new_owner.to_account_info())
     .payer(&ctx.accounts.payer.to_account_info())
@@ -250,48 +250,3 @@ TransferV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .system_program(&ctx.accounts.system_program.to_account_info())
     .invoke()?;
 ```
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-```rust
-use mpl_core::instructions::TransferV1Builder;
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
-use std::str::FromStr;
-
-pub async fn transfer_asset() {
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
-    let delegate_authority = Keypair::new();
-    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
-    let new_owner = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-
-    let transfer_asset_ix = TransferV1Builder::new()
-        .asset(asset)
-        .payer(delegate_authority.pubkey())
-        .authority(Some(delegate_authority.pubkey()))
-        .new_owner(new_owner)
-        .instruction();
-
-    let signers = vec![&delegate_authority];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let transfer_asset_tx = Transaction::new_signed_with_payer(
-        &[transfer_asset_ix],
-        Some(&delegate_authority.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client
-        .send_and_confirm_transaction(&transfer_asset_tx)
-        .await
-        .unwrap();
-
-    println!("Signature: {:?}", res)
-}
-```
-{% /dialect %}
-{% /dialect-switcher %}
