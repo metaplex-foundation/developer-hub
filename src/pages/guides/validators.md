@@ -23,18 +23,6 @@ Solana uses a unique combination of Proof of Stake (PoS) and Proof of History (P
 
 This hybrid approach enables Solana to achieve high transaction throughput (up to 65,000 TPS) and low latency (400ms block times).
 
-### Validator Requirements
-
-Running a validator on Solana requires:
-
-- Hardware: High-performance servers with substantial computational power, including:
-  - CPU: 12 cores / 24 threads, 2.8GHz or faster
-  - RAM: 256GB or more
-  - Storage: 2TB or larger NVMe SSD
-  - Network: 1 Gbps or faster internet connection
-- Software: Solana validator software and supporting tools
-- SOL Tokens: To cover vote transaction fees and optional self-stake
-
 ### Validator Economics
 
 Validators earn rewards through:
