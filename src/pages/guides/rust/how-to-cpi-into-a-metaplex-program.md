@@ -104,7 +104,7 @@ TransferV1CpiBuilder::new()
 
 ```rust
 CreateV1CpiBuilder::new()
-        .asset(context.accounts,asset)
+        .asset(context.accounts.asset)
         .collection(context.accounts.collection)
         .authority(context.accounts.authority)
         .payer(context.accounts.payer)
@@ -113,7 +113,7 @@ CreateV1CpiBuilder::new()
         .system_program(context.accounts.system_program)
         .data_state(input.data_state.unwrap_or(DataState::AccountState))
         .name(args.asset_name)
-        .uri(arts.asset_uri)
+        .uri(args.asset_uri)
         .plugins(args.plugins)
 ```
 
@@ -130,7 +130,7 @@ Though accounts that have signed into your original instruction will automatical
 
 ```rust
 CreateV1CpiBuilder::new()
-        .asset(context.accounts,asset)
+        .asset(context.accounts.asset)
         ...
         .invoke()
 
@@ -138,18 +138,17 @@ CreateV1CpiBuilder::new()
 
 ### invoke_signed()
 
-`invoke_signed()` is used when a PDA is one of the accounts that needs to be a signer in a cpi call. Lets say for example we had a program that took possession of our Asset and one of our programs PDA addresses became the other of it. In order to transfer it and change the owner to someone else that PDA will have sign transaction.
+`invoke_signed()` is used when a PDA is one of the accounts that needs to be a signer in a cpi call. Lets say for example we had a program that took possession of our Asset and one of our programs PDA addresses became the owner of it. In order to transfer it and change the owner to someone else that PDA will have to sign the transaction.
 
-You'll need to pass in the original PDA seeds and bump so that the PDA can be recreated can sign the cpi call on your programs behalf.
+You'll need to pass in the original PDA seeds and bump so that the PDA can be recreated and can sign the cpi call on your programs behalf.
 
 ```rust
 let signers = &[&[b"escrow", ctx.accounts.asset.key(), &[ctx.bumps.pda_escrow]]]
 
 CreateV1CpiBuilder::new()
-        .asset(context.accounts,asset)
+        .asset(context.accounts.asset)
         ...
-        .invoke(signers)
-
+        .invoke_signed(signers)
 ```
 
 ## Full CpiBuilder Example

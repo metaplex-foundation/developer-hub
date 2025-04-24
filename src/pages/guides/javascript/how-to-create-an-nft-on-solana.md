@@ -3,15 +3,15 @@ title: How to Create an NFT On Solana
 metaTitle: How to Create an NFT On Solana | Guides
 description: Learn how to create an NFT on the Solana blockchain with Metaplex packages.
 # remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
-updated: '06-18-2024'
+created: '04-19-2024'
+updated: '04-19-2025'
 ---
 
 Metaplex provides 3 different standards for creating NFTs on the Solana blockchain including **Core**, **Token Metadata**, and **Bubblegum**. Each standard and protocol provides unique advantages for projects and spread across the wide spectrum of minting and NFT requirements for projects.
 
 ## Core Asset (Recommended)
 
-Token Metadata is a protocol within Metaplex that focuses on the metadata aspects of NFTs. This standard defines how metadata is stored, retrieved, and associated with NFTs, ensuring that NFTs have rich, meaningful, and verifiable information attached to them.
+Core is the newest and most advanced digital asset standard created by Metaplex. This standard provides optimized account structures and enhanced functionality through a powerful plugin system.
 
 #### Why Use Core:
 

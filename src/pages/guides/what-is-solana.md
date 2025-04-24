@@ -3,8 +3,8 @@ title: What is Solana?
 metaTitle: What is Solana? | Guides
 description: What is Solana and why would you want to build on it.
 # remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
-updated: '06-21-2024'
+created: '04-19-2025'
+updated: '04-19-2025'
 ---
 
 # Solana Overview
@@ -34,6 +34,32 @@ The Solana blockchain is a high-performance, decentralized blockchain platform d
 7. **Low Costs:**
    Solana offers low transaction fees, making it an attractive option for developers and users looking to build and interact with dApps and DeFi platforms without the high costs associated with other blockchains.
 
-   ## Upcoming
-   
-   In addition to what is already a performant chain Solana is advancing with new developments like Runtime v2, which aims to improve transaction processing and a simplified developer experience for everyone.
+## Solana Ecosystem
+
+Solana has grown into a vibrant ecosystem that supports a wide range of applications and use cases:
+
+1. **DeFi (Decentralized Finance):**
+   Solana hosts numerous DeFi protocols including decentralized exchanges (DEXs), lending platforms, yield farming applications, and stablecoin projects that leverage its high throughput and low fees.
+
+2. **NFTs and Digital Collectibles:**
+   The platform has become a major hub for NFT marketplaces and collections due to its ability to handle high-volume minting and trading at a fraction of the cost of other chains.
+
+3. **Web3 Gaming:**
+   Game developers are increasingly building on Solana to create on-chain gaming experiences that benefit from fast transaction confirmations and affordable gas fees.
+
+4. **Payments and Commerce:**
+   Solana's speed makes it suitable for payment applications that require near-instant settlements, enabling efficient point-of-sale systems and e-commerce solutions.
+
+5. **DAOs (Decentralized Autonomous Organizations):**
+   Many communities have established governance structures on Solana, taking advantage of its efficient voting mechanisms and token management capabilities.
+
+## Why Build on Solana?
+
+Developers choose Solana for several compelling reasons:
+
+- **Performance at Scale:** Applications can serve millions of users without performance degradation
+- **Cost Efficiency:** Low transaction fees enable micro-transactions and frequent user interactions
+- **Developer Tooling:** Rich ecosystem of SDKs, frameworks, and educational resources
+- **Composability:** Easy integration with other protocols and applications in the ecosystem
+- **Sustainability:** Lower energy consumption compared to Proof of Work blockchains
+- **Growing User Base:** Access to a rapidly expanding community of users and developers

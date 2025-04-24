@@ -3,8 +3,8 @@ title: How to Create a Solana Token
 metaTitle: How to Create a Solana Token | Guides
 description: Learn how to create an SPL Token/meme coin on the Solana blockchain with Metaplex packages.
 # remember to update dates also in /components/guides/index.js
-created: '06-16-2024'
-updated: '06-21-2024'
+created: '04-19-2024'
+updated: '04-19-2025'
 ---
 
 This step by step guide will assist you in creating a Solana token (SPL Token) on the Solana blockchain. You can use the Metaplex Umi client wrapper and Mpl Toolbox package with Javascript. This enables you to create a function that you can use in scripts as well as frontend and backend frameworks.
@@ -39,12 +39,12 @@ npm i @metaplex-foundation/mpl-token-metadata
 ```
 
 ```js
-npm i @metaplex-foundation/umi-uploader-irys;
+npm i @metaplex-foundation/umi-uploader-irys
 ```
 
 ```js
-npm i @metaplex-foundation/mpl-toolbox;
-
+npm i @metaplex-foundation/mpl-toolbox
+```
 
 ### Imports and Wrapper Function
 
@@ -122,7 +122,7 @@ const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
 
 // You will need to us fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
-const walletFile = const imageFile = fs.readFileSync('./keypair.json')
+const walletFile = fs.readFileSync('./keypair.json')
 
 // Convert your walletFile onto a keypair.
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
@@ -130,7 +130,6 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 // Load the keypair into umi.
 umi.use(keypairIdentity(umiSigner));
 ```
-
 
 ## Creating the Token
 
@@ -150,7 +149,7 @@ This example is using a local script/node.js approach using Irys to upload to Ar
 const imageFile = fs.readFileSync('./image.jpg')
 
 // Use `createGenericFile` to transform the file into a `GenericFile` type
-// that Umi can understand. Make sure you set the mimi tag type correctly
+// that Umi can understand. Make sure you set the mimetag type correctly
 // otherwise Arweave will not know how to display your image.
 
 const umiImageFile = createGenericFile(imageFile, 'image.jpeg', {
@@ -349,7 +348,7 @@ const createAndMintTokens = async () => {
   const imageFile = fs.readFileSync("./image.jpg");
 
   // Use `createGenericFile` to transform the file into a `GenericFile` type
-  // that umi can understand. Make sure you set the mimi tag type correctly
+  // that umi can understand. Make sure you set the mimetag type correctly
   // otherwise Arweave will not know how to display your image.
 
   const umiImageFile = createGenericFile(imageFile, "image.png", {
@@ -391,7 +390,7 @@ const createAndMintTokens = async () => {
   const createFungibleIx = createFungible(umi, {
     mint: mintSigner,
     name: "The Kitten Coin",
-    uri: metadataUri, // we use the `metedataUri` variable we created earlier that is storing our uri.
+    uri: metadataUri, // we use the `metadataUri` variable we created earlier that is storing our uri.
     sellerFeeBasisPoints: percentAmount(0),
     decimals: 0, // set the amount of decimals you want your token to have.
   });
