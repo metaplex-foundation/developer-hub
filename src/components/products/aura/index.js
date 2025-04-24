@@ -40,14 +40,6 @@ export const aura = {
               title: 'Reading Solana and SVM Data',
               href: '/aura/reading-solana-and-svm-data',
             },
-            {
-              title: 'Managing Compressed State',
-              href: '/aura/managing-compressed-state',
-            },
-            {
-              title: 'Batch Minting',
-              href: '/aura/batch-minting',
-            },
           ],
         },
         {
