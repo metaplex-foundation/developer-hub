@@ -7,7 +7,7 @@ import { ArchiveBoxIcon } from '@heroicons/react/24/solid';
 import { Hero } from './Hero';
 
 export const bubblegum = {
-  name: 'Bubblegum',
+  name: 'Bubblegum v1 (legacy)',
   headline: 'Compressed NFTs',
   description: 'NFTs that scale to new orders of magnitude.',
   path: 'bubblegum',
@@ -47,24 +47,6 @@ export const bubblegum = {
           ],
         },
         {
-          title: 'Bubblegum v2',
-          links: [
-            {
-              title: 'Minting Compressed NFTs (cNFTs)',
-              href: '/bubblegum/mint-cnfts',
-            },
-            { title: 'Transferring cNFTs', href: '/bubblegum/transfer-cnfts' },
-            { title: 'Updating cNFTs', href: '/bubblegum/update-cnfts' },
-            { title: 'Burning cNFTs', href: '/bubblegum/burn-cnfts' },
-            { title: 'Delegating cNFTs', href: '/bubblegum/delegate-cnfts' },
-            {
-              title: 'Verifying Collections',
-              href: '/bubblegum/verify-collections',
-            },
-            { title: 'Verifying Creators', href: '/bubblegum/verify-creators' },
-          ],
-        },
-        {
           title: 'Bubblegum v1 (legacy)',
           links: [
             {
@@ -91,16 +73,16 @@ export const bubblegum = {
           links: [
             {
               title: 'Concurrent Merkle Trees',
-              href: '/bubblegum/concurrent-merkle-trees',
+              href: '/bubblegum-v2/concurrent-merkle-trees',
             },
             {
               title: 'Storing and Indexing NFT Data',
-              href: '/bubblegum/stored-nft-data',
+              href: '/bubblegum-v2/stored-nft-data',
             },
-            { title: 'Hashing NFT Data', href: '/bubblegum/hashed-nft-data' },
+            { title: 'Hashing NFT Data', href: '/bubblegum-v2/hashed-nft-data' },
             {
               title: 'Merkle Tree Canopy',
-              href: '/bubblegum/merkle-tree-canopy',
+              href: '/bubblegum-v2/merkle-tree-canopy',
             },
           ],
         },

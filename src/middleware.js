@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
 const redirectRules = {
   '/umi': {
@@ -18,6 +18,10 @@ const redirectRules = {
     '/getting-started': '/bubblegum/sdk',
     '/getting-started/js': '/bubblegum/sdk/javascript',
     '/getting-started/rust': '/bubblegum/sdk/rust',
+    '/concurrent-merkle-trees': '/bubblegum-v2/concurrent-merkle-trees',
+    '/stored-nft-data': '/bubblegum-v2/stored-nft-data',
+    '/hashed-nft-data': '/bubblegum-v2/hashed-nft-data',
+    '/merkle-tree-canopy': '/bubblegum-v2/merkle-tree-canopy',
   },
   '/core': {
     '/getting-started': '/core/sdk',
