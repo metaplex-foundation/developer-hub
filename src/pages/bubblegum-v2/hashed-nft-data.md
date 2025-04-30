@@ -4,10 +4,10 @@ metaTitle: Hashing NFT Data | Bubblegum v2
 description: Learn more about how NFT data is hashed on Bubblegum.
 ---
 
-In previous sections we stated that each leaf node in a Bubblegum Merkle tree is obtained by hashing the data of the compressed NFT (cNFT).  But how exactly is this done?  We start with the metadata for the cNFT.  Each cNFT is minted with the following metadata structure as an argument to the minting instruction:
+In previous sections we stated that each leaf node in a Bubblegum Merkle tree is obtained by hashing the data of the compressed NFT (cNFT).  But how exactly is this done?  We start with the metadata for the cNFT.  Each cNFT of Bubblegum v2 is minted with the following metadata structure as an argument to the minting instruction, note that Bubblegum v1 uses MetadataArgs instead:
 
 ```rust
-pub struct MetadataArgs {
+pub struct MetadataArgsV2 {
     /// The name of the asset
     pub name: String,
     /// The symbol for the asset
@@ -20,18 +20,12 @@ pub struct MetadataArgs {
     pub primary_sale_happened: bool,
     /// Whether or not the data struct is mutable, default is not
     pub is_mutable: bool,
-    /// nonce for easy calculation of editions, if present
-    pub edition_nonce: Option<u8>,
-    /// Since we cannot easily change Metadata, we add the new DataV2 fields here at the end.
+    /// Token standard.  Currently only `NonFungible` is allowed.
     pub token_standard: Option<TokenStandard>,
-    /// Collection
-    pub collection: Option<Collection>,
-    /// Uses
-    pub uses: Option<Uses>,
-    /// Which token program version (currently only `TokenProgramVersion::Original`` is supported).
-    pub token_program_version: TokenProgramVersion,
-    /// The array of creators of the cNFT.
+    /// Creator array
     pub creators: Vec<Creator>,
+    /// Collection.  Note in V2 its just a `Pubkey` and is always considered verified.
+    pub collection: Option<Pubkey>,
 }
 ```
 
@@ -47,11 +41,8 @@ The cNFT's metadata is hashed multiple times as shown in the diagram and describ
 {% node label="Seller Fee Basis Points" /%}
 {% node label="Primary Sale Happened" /%}
 {% node label="Is Mutable" /%}
-{% node label="Edition Nonce" /%}
 {% node label="Token Standard" /%}
 {% node label="Collection" /%}
-{% node label="Uses" /%}
-{% node label="Token Program Version" /%}
 {% node label="Creators" /%}
 {% /node %}
 
@@ -166,7 +157,7 @@ Other than data and creator hashes, the leaf schema contains the following other
 * owner - The Pubkey of the cNFT owner, typically a user's wallet.
 * delegate - The delegate for the cNFT.  By default this is the user's wallet, but can be set by the `delegate` Bubblegum instruction.
 
-To create the 32-byte leaf node that exists on the Merkle tree, the entire leaf schema is hashed as follows:
+To create the 32-byte leaf node that exists on the Merkle tree, the entire leaf schema is hashed as follows, depending on the Schema version:
 
 ```rust
 impl LeafSchema {
@@ -189,10 +180,33 @@ impl LeafSchema {
                 creator_hash.as_ref(),
             ])
             .to_bytes(),
+            LeafSchema::V2 {
+                id,
+                owner,
+                delegate,
+                nonce,
+                data_hash,
+                creator_hash,
+                collection_hash,
+                asset_data_hash,
+                flags,
+            } => keccak::hashv(&[
+                &[self.version().to_bytes()],
+                id.as_ref(),
+                owner.as_ref(),
+                delegate.as_ref(),
+                nonce.to_le_bytes().as_ref(),
+                data_hash.as_ref(),
+                creator_hash.as_ref(),
+                collection_hash.as_ref(),
+                asset_data_hash.as_ref(),
+                &[*flags],
+            ])
+            .to_bytes(),
         };
         hashed_leaf
     }
 }
 ```
 
-Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to spl-account-compression in order to validate the Merkle tree change.
+Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to spl-account-compression or mpl-account-compression depending on the leaf schema version in order to validate the Merkle tree change.
