@@ -1,6 +1,6 @@
 ---
 title: FAQ
-metaTitle: FAQ | Bubblegum
+metaTitle: FAQ | Bubblegum v2
 description: Frequently asked questions about Bubblegum.
 ---
 
@@ -8,7 +8,7 @@ description: Frequently asked questions about Bubblegum.
 
 Bubblegum V2 is a new iteration of the Bubblegum program that introduces several improvements and new features. It is part of the known Bubblegum program but the instructions and data structures are different.
 
-With Bubblegum V2 cNFT are grouped into collections using MPL-Core Collections instead of Metaplex Token Metadata Collections. 
+With Bubblegum V2 cNFT are grouped into collections using MPL-Core Collections instead of Metaplex Token Metadata Collections. It also introduces new features like freezing, thawing, and soulbound NFTs.
 
 ## How do I find the arguments needed for operations such as transfer, delegate, burn, etc? {% #replace-leaf-instruction-arguments %}
 
@@ -45,13 +45,13 @@ import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
 const assetWithProof = await getAssetWithProof(umi, assetId, 
 // {  truncateCanopy: true } // optional to prune the proofs 
 );
-await transfer(umi, {
+await transferV2(umi, {
   ...assetWithProof,
   leafOwner: leafOwnerA, // As a signer.
   newLeafOwner: leafOwnerB.publicKey,
 }).sendAndConfirm(umi);
 
-await transfer(umi, {
+await transferV2(umi, {
   ...assetWithProof,
   leafOwner: leafOwnerA, // As a signer.
   newLeafOwner: leafOwnerB.publicKey,

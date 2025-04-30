@@ -1,6 +1,6 @@
 ---
 title: Create 1 Million NFTs on Solana
-metaTitle: Create 1 Million NFTs on Solana | Bubblegum
+metaTitle: Create 1 Million NFTs on Solana | Bubblegum v2
 description: How to Create a Compressed NFT Collection of 1 Million cNFTs on Solana using the Metaplex Bubblegum program.
 ---
 

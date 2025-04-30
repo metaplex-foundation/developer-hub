@@ -1,6 +1,6 @@
 ---
 title: Hashing NFT Data
-metaTitle: Hashing NFT Data | Bubblegum
+metaTitle: Hashing NFT Data | Bubblegum v2
 description: Learn more about how NFT data is hashed on Bubblegum.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Overview | Bubblegum v2
+metaTitle: Overview | Bubblegum v2 v2
 description: Provides a high-level overview of Bubblegum v2 and compressed NFTs.
 ---
 
@@ -120,7 +120,6 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 - [Transfer a cNFT](/bubblegum-v2/transfer-cnfts).
 - [Update the data or collection of a cNFT](/bubblegum-v2/update-cnfts).
 - [Burn a cNFT](/bubblegum-v2/burn-cnfts).
-- [Decompress a cNFT into a regular NFT](/bubblegum-v2/decompress-cnfts). Note that this enables interoperability with existing smart contracts but creates onchain accounts with rent fees.
 - [Delegate a cNFT](/bubblegum-v2/delegate-cnfts).
 - [Verify and unverify a cNFT collection](/bubblegum-v2/verify-collections).
 - [Verify and unverify the creators of a cNFT](/bubblegum-v2/verify-creators).

@@ -6,7 +6,7 @@ description: Learn how to redeem and decompress compressed NFTs on Bubblegum.
 
 {% callout type="note" title="v1 Feature" %}
 
-Decompressing to Token Metadata NFTs is only available in Bubblegum v1. We recommend to use [Bubblegum v2](/bubblegum-v2) to take advantage of other new features.
+Decompressing to Token Metadata NFTs is only available in Bubblegum v1.
 
 {% /callout %}
 

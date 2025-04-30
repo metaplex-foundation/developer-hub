@@ -1,6 +1,6 @@
 ---
 title: Updating Compressed NFTs
-metaTitle: Updating Compressed NFTs | Bubblegum
+metaTitle: Updating Compressed NFTs | Bubblegum v2
 description: Learn how to update compressed NFTs on Bubblegum
 ---
 

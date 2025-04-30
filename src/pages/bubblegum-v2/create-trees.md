@@ -1,6 +1,6 @@
 ---
 title: Creating Bubblegum Trees
-metaTitle: Creating Bubblegum Trees | Bubblegum
+metaTitle: Creating Bubblegum Trees | Bubblegum v2
 description: Learn how to create and fetch new Merkle Trees that can hold compressed NFTs.
 ---
 
@@ -8,8 +8,8 @@ description: Learn how to create and fetch new Merkle Trees that can hold compre
 
 Whilst the data of Compressed NFTs is stored inside transactions and not onchain accounts, we still need some onchain accounts to keep track of the Merkle Tree and its configuration. As such, before we can start minting Compressed NFTs, we need to create two accounts:
 
-- A **Merkle Tree account**. This account holds a generic Merkle Tree that can be used to verify the authenticity of any type of data. It is owned by the [Account Compression Program](https://spl.solana.com/account-compression) created and maintained by Solana. In our case, we will use it to verify the authenticity of Compressed NFTs.
-- A **Tree Config account**. This second account is a PDA derived from the address of the Merkle Tree account. It allows us to store additional configurations for the Merkle Tree that are specific to Compressed NFTs — e.g. the tree creator, the number of minted cNFTs, etc.
+- A **Merkle Tree v2 account**. This account holds a generic Merkle Tree that can be used to verify the authenticity of any type of data. It is owned by the [MPL Account Compression Program](https://github.com/metaplex-foundation/mpl-account-compression) forked from the [SPL Account Compression Program](https://spl.solana.com/account-compression). In our case, we will use it to verify the authenticity of Compressed NFTs.
+- A **TreeConfigV2 account**. This second account is a PDA derived from the address of the Merkle Tree account. It allows us to store additional configurations for the Merkle Tree that are specific to Compressed NFTs — e.g. the tree creator, the number of minted cNFTs, etc.
 
 With these two accounts, we have everything we need to start minting Compressed NFTs. Note that, we will refer to Merkle Tree accounts with associated Tree Config accounts as **Bubblegum Trees**.
 
@@ -89,7 +89,7 @@ The max depths of trees are as follows.
   {% /totem-accordion %}
   {% /totem %}
 
-- **Public**: Whether or not the Bubblegum Tree should be public. If it is public, anyone will be able to mint Compressed NFTs from it. Otherwise, only the Tree Creator or the Tree Delegate (as discussed in [Delegating cNFTs](/bubblegum/delegate-cnfts)) will be able to mint Compressed NFTs.
+- **Public**: Whether or not the Bubblegum Tree should be public. If it is public, anyone will be able to mint Compressed NFTs from it. Otherwise, only the Tree Creator or the Tree Delegate (as discussed in [Delegating cNFTs](/bubblegum-v2/delegate-cnfts)) will be able to mint Compressed NFTs.
 
 Here is how one can create a Bubblegum Tree using our libraries:
 
@@ -134,8 +134,8 @@ Since a **Bubblegum Tree** is composed of two onchain accounts, let's see how to
 The Merkle Tree account contains various information about the tree such as:
 
 - The **Tree Header** which stores the **Max Depth**, the **Max Buffer Size**, the **Authority** of the tree and the **Creation Slot** of when the tree was created.
-- The **Tree** itself which stores low-level information about the tree such as its **Change Logs** (or roots), its **Sequence Number**, etc. We talk more about Concurrent Merkle Trees in a [dedicated page](/bubblegum/concurrent-merkle-trees) of this documentation.
-- The **Canopy** as discussed in the [Merkle Tree Canopy](/bubblegum/merkle-tree-canopy) page.
+- The **Tree** itself which stores low-level information about the tree such as its **Change Logs** (or roots), its **Sequence Number**, etc. We talk more about Concurrent Merkle Trees in a [dedicated page](/bubblegum-v2/concurrent-merkle-trees) of this documentation.
+- The **Canopy** as discussed in the [Merkle Tree Canopy](/bubblegum-v2/merkle-tree-canopy) page.
 
 Here is how one can fetch all of that data using our libraries:
 

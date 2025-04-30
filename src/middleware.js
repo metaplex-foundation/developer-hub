@@ -22,6 +22,7 @@ const redirectRules = {
     '/stored-nft-data': '/bubblegum-v2/stored-nft-data',
     '/hashed-nft-data': '/bubblegum-v2/hashed-nft-data',
     '/merkle-tree-canopy': '/bubblegum-v2/merkle-tree-canopy',
+    '/faq': '/bubblegum-v2/faq',
   },
   '/core': {
     '/getting-started': '/core/sdk',
