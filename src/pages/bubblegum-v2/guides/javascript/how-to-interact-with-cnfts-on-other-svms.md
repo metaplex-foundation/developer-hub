@@ -1,12 +1,12 @@
 ---
 title: How to Interact with cNFTs on Other SVMs
-metaTitle: How to Interact with cNFTs on Other SVMs | Bubblegum
+metaTitle: How to Interact with cNFTs on Other SVMs | Bubblegum v2
 description: How to Interact with compressed NFTs, using the Metaplex Bubblegum program, on Solana Virtual Machine (SVM) environments other than Solana devnet and mainnet-beta.
 ---
 
 ## Overview
 
-This guide details the specific requirements for interacting with compressed NFT (cNFT) assets using JavaScript on Solana Virtual Machine (SVM) environments other than Solana's devnet and mainnet-beta. For a more comprehensive overview of creating cNFTs, see the [Create 1,000,000 NFTs on Solana with Bubblegum](/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana) guide.
+This guide details the specific requirements for interacting with compressed NFT (cNFT) assets using JavaScript on Solana Virtual Machine (SVM) environments other than Solana's devnet and mainnet-beta. For a more comprehensive overview of creating cNFTs, see the [Create 1,000,000 NFTs on Solana with Bubblegum](/bubblegum-v2/guides/javascript/how-to-create-1000000-nfts-on-solana) guide.
 
 ### Required Package
 

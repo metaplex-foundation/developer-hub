@@ -3,16 +3,16 @@ import {
   guidesSection,
   referencesSection
 } from '@/shared/sections';
-import { ArchiveBoxIcon } from '@heroicons/react/24/solid';
+import { FolderIcon } from '@heroicons/react/24/solid';
 import { Hero } from './Hero';
 
 export const bubblegumv2 = {
   name: 'Bubblegum v2',
-  headline: 'Better Compressed NFTs',
+  headline: 'Improved Compressed NFTs',
   description: 'NFTs that scale to new orders of magnitude.',
   path: 'bubblegum-v2',
   navigationMenuCatergory: 'MPL',
-  icon: <ArchiveBoxIcon />,
+  icon: <FolderIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',
   heroes: [{ path: '/bubblegum-v2', component: Hero }],
@@ -84,7 +84,7 @@ export const bubblegumv2 = {
       ],
     },
     {
-      ...guidesSection('bubblegum'),
+      ...guidesSection('bubblegum-v2'),
       navigation: [
         {
           title: 'Javascript',
@@ -102,7 +102,7 @@ export const bubblegumv2 = {
       ],
     },
     {
-      ...referencesSection('bubblegum'),
+      ...referencesSection('bubblegum-v2'),
       href: 'https://mpl-bubblegum.typedoc.metaplex.com/',
       target: '_blank'
     },
