@@ -19,8 +19,10 @@ Bubblegum v2 is the latest iteration of the Metaplex Protocol program for creati
 Bubblegum v2 builds on the foundation of the original Bubblegum program while introducing several powerful new features:
 
 - **Freeze and Thaw Functionality**: Project creators can now freeze and thaw cNFTs, providing greater control over their assets for various use cases such as preventing transfers during specific events or implementing vesting mechanics.
-- **Soulbound NFTs**: cNFTs can now be made soulbound (non-transferrable), permanently binding them to their owner's wallet. This is perfect for credentials, proof of attendance, identity verification, and more.
 - **MPL-Core Collections Integration**: Bubblegum v2 NFTs can now be added to MPL-Core collections instead of being limited to token metadata collections, allowing for greater flexibility and integration with the broader Metaplex ecosystem.
+- **Royalty Enforcement**: Since Bubblegum v2 is using [MPL-Core](https://docs.metaplex.com/core/overview) Collections, it is possible to enforce royalties on cNFTs e.g. using a `ProgramDenyList`.
+- **Soulbound NFTs**: cNFTs can now be made soulbound (non-transferrable), permanently binding them to their owner's wallet. This is perfect for credentials, proof of attendance, identity verification, and more. It requires the `PermanentFreezeDelegate` plugin to be enabled on the collection.
+- **Allow Permanent Transfer**: The permanent transfer delegate can now transfer the cNFT to a new owner without interaction of the leaf owner if the `PermanentTransferDelegate` plugin is enabled on the collection.
 
 To allow the above features to work, Bubblegum v2 introduces a new leaf schema (`LeafSchemaV2`). To learn more what leaves are used in Bubblegum v2, check out the following sections.
 
