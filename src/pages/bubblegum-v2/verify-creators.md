@@ -12,7 +12,7 @@ It is worth noting that creators can verify themselves directly when [minting th
 
 ## Verify a Creator
 
-The Bubblegum program offers a **verifyCreatorV2** instruction that must be signed by the creator we are trying to verify.
+The Bubblegum program offers a **verifyCreatorV2** instruction that must be signed by the creator we are trying to verify. The creator has to be part of the **Creators** array of the Compressed NFT already. Use the [`updateMetadataV2`](/bubblegum-v2/update-cnfts) instruction to add a creator to the **Creators** array first if it is not already part of the array.
 
 Additionally, more parameters must be provided to verify the integrity of the Compressed NFT as this instruction will end up replacing the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
@@ -24,10 +24,28 @@ Additionally, more parameters must be provided to verify the integrity of the Co
 import {
   getAssetWithProof,
   verifyCreatorV2,
+  MetadataArgsV2Args
 } from '@metaplex-foundation/mpl-bubblegum'
+import {
+  unwrapOption,
+  none,
+} from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-await verifyCreatorV2(umi, { ...assetWithProof, creator }).sendAndConfirm(umi)
+const metadata: MetadataArgsV2Args = {
+  name: assetWithProof.metadata.name,
+  uri: assetWithProof.metadata.uri,
+  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
+  collection: unwrapOption(assetWithProof.metadata.collection)
+    ? unwrapOption(assetWithProof.metadata.collection)!.key
+    : none(),
+  creators: assetWithProof.metadata.creators,
+};
+await verifyCreatorV2(umi, {
+  ...assetWithProof,
+  metadata,
+  creator: umi.identity, // Or a different signer than the umi identity
+}).sendAndConfirm(umi);
 ```
 
 {% /totem %}
@@ -45,11 +63,29 @@ Similarly to the **verifyCreatorV2** instruction, the **unverifyCreatorV2** inst
 ```ts
 import {
   getAssetWithProof,
-  unverifyCreator,
+  unverifyCreatorV2,
+  MetadataArgsV2Args
 } from '@metaplex-foundation/mpl-bubblegum'
+import {
+  unwrapOption,
+  none,
+} from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-await unverifyCreator(umi, { ...assetWithProof, creator }).sendAndConfirm(umi)
+const metadata: MetadataArgsV2Args = {
+  name: assetWithProof.metadata.name,
+  uri: assetWithProof.metadata.uri,
+  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
+  collection: unwrapOption(assetWithProof.metadata.collection)
+    ? unwrapOption(assetWithProof.metadata.collection)!.key
+    : none(),
+  creators: assetWithProof.metadata.creators,
+};
+await unverifyCreatorV2(umi, {
+  ...assetWithProof,
+  metadata,
+  creator: umi.identity, // Or a different signer than the umi identity
+}).sendAndConfirm(umi);
 ```
 
 {% /totem %}
