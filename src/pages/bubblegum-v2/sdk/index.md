@@ -1,6 +1,6 @@
 ---
 title: MPL-Bubblegum SDKs
-metaTitle: SDKs | Bubblegum v2
+metaTitle: SDKs | Bubblegum V2
 description: Learn to get started with the compressed NFT standard (cNFT) from Metaplex using the MPL-Bubblegum SDKs.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Updating Compressed NFTs
-metaTitle: Updating Compressed NFTs | Bubblegum v2
+metaTitle: Updating Compressed NFTs | Bubblegum V2
 description: Learn how to update compressed NFTs on Bubblegum.
 ---
 
@@ -30,7 +30,7 @@ await updateMetadataV2(umi, {
 
 If your cNFT does not belong to a collection then the update authority for the cNFT will be the authority of the tree that the cNFT belongs to. In this case you would **omit** the `coreCollection` arg from the update function.
 
-The authority will be inferred from the current umi identity. If the authority is different from the current umi identity, then you will either have to pass in the `authority` arg as a signer type or create a 'noopSigner' for later signing.
+The authority will be inferred from the current umi identity. If the authority is different from the current umi identity, then you will either have to pass in the `authority` arg as a signer type or create a `noopSigner` for later signing.
 
 ## Update cNFT
 

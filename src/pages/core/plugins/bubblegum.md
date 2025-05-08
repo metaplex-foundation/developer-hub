@@ -13,8 +13,8 @@ This plugin can only be used on `MPL Core Collections`.
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core Asset      | ✅  |
-| MPL Core Collection | ❌  |
+| MPL Core Asset      | ❌  |
+| MPL Core Collection | ✅  |
 
 ## Arguments
 
@@ -59,14 +59,14 @@ await createCollection(umi, {
 ```ts
 import {
   addCollectionPlugin,
-} from '@metaplex-foundation/mpl-core'
+} from '@metaplex-foundation/mpl-core';
 
 await addCollectionPlugin(umi, {
   collection: collection.publicKey,
   plugin: {
-    type: 'BubblegumV2',
+    type: "BubblegumV2",
   },
-}).sendAndConfirm(umi)
+}).sendAndConfirm(umi);
 ```
 
 {% /dialect %}

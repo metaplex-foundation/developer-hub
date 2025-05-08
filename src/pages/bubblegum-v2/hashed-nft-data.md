@@ -1,10 +1,10 @@
 ---
 title: Hashing NFT Data
-metaTitle: Hashing NFT Data | Bubblegum v2
+metaTitle: Hashing NFT Data | Bubblegum V2
 description: Learn more about how NFT data is hashed on Bubblegum.
 ---
 
-In previous sections we stated that each leaf node in a Bubblegum Merkle tree is obtained by hashing the data of the compressed NFT (cNFT).  But how exactly is this done?  We start with the metadata for the cNFT.  Each cNFT of Bubblegum v2 is minted with the following metadata structure as an argument to the minting instruction, note that Bubblegum v1 uses MetadataArgs instead:
+In previous sections we stated that each leaf node in a Bubblegum Merkle tree is obtained by hashing the data of the compressed NFT (cNFT).  But how exactly is this done?  We start with the metadata for the cNFT.  Each cNFT of Bubblegum V2 is minted with the following metadata structure as an argument to the minting instruction, note that Bubblegum v1 uses MetadataArgs instead:
 
 ```rust
 pub struct MetadataArgsV2 {

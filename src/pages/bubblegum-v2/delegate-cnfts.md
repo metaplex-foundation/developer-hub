@@ -1,6 +1,6 @@
 ---
 title: Delegating Compressed NFTs
-metaTitle: Delegating Compressed NFTs | Bubblegum v2
+metaTitle: Delegating Compressed NFTs | Bubblegum V2
 description: Learn how to delegate compressed NFTs on Bubblegum.
 ---
 
@@ -8,7 +8,7 @@ The owner of a Compressed NFT can delegate it to another account whilst keeping 
 
 This allows the delegated account — which we also refer to as the **Delegate Authority** — to perform actions on behalf of the owner. These actions are:
 
-- [Transferring the cNFT](/bubblegum-v2/transfer-cnfts). The Delegate Authority will be reset — i.e. set to the new owner — after the transfer.
+- [Transferring the cNFT](/bubblegum-v2/transfer-cnfts): The Delegate Authority will be reset — i.e. set to the new owner — after the transfer.
 - [Burning the cNFT](/bubblegum-v2/burn-cnfts).
 - [Freezing and Thawing the cNFT](/bubblegum-v2/freeze-cnfts).
 
@@ -31,7 +31,7 @@ Additionally, more parameters must be provided to verify the integrity of the Co
 {% totem %}
 
 ```ts
-import { getAssetWithProof, delegate } from '@metaplex-foundation/mpl-bubblegum'
+import { getAssetWithProof, delegate } from '@metaplex-foundation/mpl-bubblegum';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await delegate(umi, {
@@ -39,7 +39,7 @@ await delegate(umi, {
   leafOwner,
   previousLeafDelegate: leafOwner.publicKey,
   newLeafDelegate: newDelegate,
-}).sendAndConfirm(umi)
+}).sendAndConfirm(umi);
 ```
 
 {% /totem %}
@@ -55,7 +55,7 @@ To revoke an existing Delegate Authority, the owner simply needs to set themselv
 {% totem %}
 
 ```ts
-import { getAssetWithProof, delegate } from '@metaplex-foundation/mpl-bubblegum'
+import { getAssetWithProof, delegate } from '@metaplex-foundation/mpl-bubblegum';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 await delegate(umi, {
@@ -63,7 +63,7 @@ await delegate(umi, {
   leafOwner,
   previousLeafDelegate: currentDelegate,
   newLeafDelegate: leafOwner.publicKey,
-}).sendAndConfirm(umi)
+}).sendAndConfirm(umi);
 ```
 
 {% /totem %}

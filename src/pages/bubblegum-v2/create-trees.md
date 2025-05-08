@@ -1,6 +1,6 @@
 ---
 title: Creating Bubblegum Trees
-metaTitle: Creating Bubblegum Trees | Bubblegum v2
+metaTitle: Creating Bubblegum Trees | Bubblegum V2
 description: Learn how to create and fetch new Merkle Trees that can hold compressed NFTs.
 ---
 
@@ -38,9 +38,9 @@ Let's now see how one can create both of these accounts to create a Bubblegum Tr
 
 - **Merkle Tree**: A newly generated signer that will be used to create the Merkle Tree account. The Merkle Tree account will then be accessible at this address.
 - **Tree Creator**: The address of the account that will be able to manage the Bubblegum Tree and mint Compressed NFTs.
-- **Max Depth** and **Max Buffer Size**: The **Max Depth** parameter is used to compute the maximum number of leaves — and therefore Compressed NFTs — that the Merkle Tree can hold. This maximum is calculated by `2^maxDepth`. The **Max Buffer Size** parameter indicates the minimum concurrency limit of the Merkle Tree. In other words, it defines how many changes can happen in the tree in parallel. These two parameters cannot be chosen arbitrarily and have to be selected from a pre-defined set of values as displayed in the table below.
+- **Max Depth** and **Max Buffer Size**: The **Max Depth** parameter is used to compute the maximum number of leaves — and therefore Compressed NFTs — that the Merkle Tree can hold. This maximum is calculated by `2^maxDepth`. The **Max Buffer Size** parameter indicates the minimum concurrency limit of the Merkle Tree. In other words, it defines how many changes can happen in the tree in parallel. These two parameters cannot be chosen arbitrarily and have to be selected from a predefined set of values as displayed in the table below.
 
-Below is a both our recommended tree settings for compatibility within the solana ecosystem.
+Below are our recommended tree settings for compatibility within the Solana ecosystem.
 
 | Number of cNFTs | Tree Depth | Canopy Depth | Concurrency Buffer | Tree Cost | Cost per cNFT |
 | --------------- | ---------- | ------------ | ------------------ | --------- | ------------- |

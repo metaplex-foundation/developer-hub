@@ -1,6 +1,6 @@
 ---
 title: Concurrent Merkle Trees
-metaTitle: Concurrent Merkle Trees | Bubblegum v2
+metaTitle: Concurrent Merkle Trees | Bubblegum V2
 description: Learn more about Concurrent Merkle Trees and how they are used on Bubblegum.
 ---
 

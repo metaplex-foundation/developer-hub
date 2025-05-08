@@ -1,6 +1,6 @@
 ---
 title: Merkle Tree Canopy
-metaTitle: Merkle Tree Canopy | Bubblegum v2
+metaTitle: Merkle Tree Canopy | Bubblegum V2
 description: Learn more about the Merkle Tree Canopy on Bubblegum.
 ---
 

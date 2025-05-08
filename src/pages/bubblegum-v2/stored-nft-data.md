@@ -1,6 +1,6 @@
 ---
 title: Storing and Indexing NFT Data
-metaTitle: Storing and Indexing NFT Data | Bubblegum v2
+metaTitle: Storing and Indexing NFT Data | Bubblegum V2
 description: Learn more about how NFT data is stored on Bubblegum.
 ---
 

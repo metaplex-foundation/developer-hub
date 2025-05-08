@@ -1,12 +1,12 @@
 ---
 title: Minting Compressed NFTs
-metaTitle: Minting Compressed NFTs | Bubblegum v2
+metaTitle: Minting Compressed NFTs | Bubblegum V2
 description: Learn how to mint compressed NFTs on Bubblegum.
 ---
 
 In [the previous page](/bubblegum-v2/create-trees), we saw that we need a Bubblegum Tree to mint Compressed NFTs, and we saw how to create one. Now, let's see how to mint compressed NFTs from a given Bubblegum Tree. {% .lead %}
 
-The Bubblegum program offers multiple minting instructions for the different leaf schema versions. Bubblegum v2 introduces a new minting instruction called **mintV2** that is used to mint Compressed NFTs either to a given Collection or without a Collection.
+The Bubblegum program offers multiple minting instructions for the different leaf schema versions. Bubblegum V2 introduces a new minting instruction called **mintV2** that is used to mint Compressed NFTs either to a given Collection or without a Collection.
 
 ## Minting without a Collection
 
@@ -47,7 +47,7 @@ await mintV2(umi, {
 
 ## Minting to a Collection
 
-Whilst it is possible to set and verify a Collection for a Compressed NFT _after_ it was minted, Bubblegum v2 allows to mint a Compressed NFT directly to a given Collection. Bubblegum v2 uses MPL-Core Collections to group the compressed NFTs. The same **mintV2** instruction is used for that. In addition to the parameters described above, you need to pass in the core collection and sign as collection authority or delegate:
+Whilst it is possible to set and verify a Collection for a Compressed NFT _after_ it was minted, Bubblegum V2 allows to mint a Compressed NFT directly to a given Collection. Bubblegum V2 uses MPL-Core Collections to group the compressed NFTs. The same **mintV2** instruction is used for that. In addition to the parameters described above, you need to pass in the core collection and sign as collection authority or delegate:
 
 - **Collection Mint**: The Mint address of the [MPL-Core Collection NFT](/core/collections#creating-a-collection-with-plugins) to which the Compressed NFT will be added.
 - **Collection Authority**: The authority allowed to manage the given Collection NFT. This can either be the update authority of the Collection NFT or a delegated collection authority. This authority must sign the transaction regardless of whether the Bubblegum Tree is public or not.

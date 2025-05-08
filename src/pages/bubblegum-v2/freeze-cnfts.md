@@ -1,10 +1,10 @@
 ---
 title: Freezing and Thawing Compressed NFTs
-metaTitle: Freezing and Thawing Compressed NFTs | Bubblegum v2
+metaTitle: Freezing and Thawing Compressed NFTs | Bubblegum V2
 description: Learn how to freeze and thaw Compressed NFTs on Bubblegum.
 ---
 
-With Bubblegum v2, we can freeze and thaw Compressed NFTs. This is useful for various use cases, such as staking. {% .lead %}
+With Bubblegum V2, we can freeze and thaw Compressed NFTs. This is useful for various use cases, such as staking. {% .lead %}
 
 ## Freezing a Compressed NFT
 

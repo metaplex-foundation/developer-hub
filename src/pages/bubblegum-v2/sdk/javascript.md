@@ -17,7 +17,7 @@ npm install @metaplex-foundation/mpl-bubblegum
 
 {% quick-links %}
 
-{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-bubblegum.typedoc.metaplex.com/" description="MPL-Bubblegum Javascript SDK generated package API documentation." /%}
+{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-bubblegum.typedoc.metaplex.com/" description="MPL-Bubblegum JavaScript SDK generated package API documentation." /%}
 
 {% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum" description="MPL-Bubblegum Javascript SDK on NPM." /%}
 
@@ -27,7 +27,7 @@ npm install @metaplex-foundation/mpl-bubblegum
 
 If you haven't set up and configured an `umi` instance yet, then you can check out the [Umi Getting Started](/umi/getting-started) page.
 
-During the initialization of the `umi` instance you can add the MPL-Bubblegum package to `umi` using
+During the initialization of the `umi` instance, you can add the MPL-Bubblegum package to `umi` using
 
 ```js
 .use(mplBubblegum())

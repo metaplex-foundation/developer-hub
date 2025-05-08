@@ -1,6 +1,6 @@
 ---
 title: Delegating Trees
-metaTitle: Delegating Trees | Bubblegum v2
+metaTitle: Delegating Trees | Bubblegum V2
 description: Learn how to delegate Merkle Trees on Bubblegum.
 ---
 

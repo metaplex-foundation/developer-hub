@@ -1,6 +1,6 @@
 ---
 title: Burning Compressed NFTs
-metaTitle: Burning Compressed NFTs | Bubblegum v2
+metaTitle: Burning Compressed NFTs | Bubblegum V2
 description: Learn how to burn compressed NFTs on Bubblegum.
 ---
 

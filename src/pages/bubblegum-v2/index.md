@@ -1,10 +1,10 @@
 ---
 title: Overview
-metaTitle: Overview | Bubblegum v2
-description: Provides a high-level overview of Bubblegum v2 and compressed NFTs.
+metaTitle: Overview | Bubblegum V2
+description: Provides a high-level overview of Bubblegum V2 and compressed NFTs.
 ---
 
-Bubblegum v2 is the latest iteration of the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Built for large-scale operations, Bubblegum v2 preserves all the benefits of the original Bubblegum while introducing powerful new features. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
+Bubblegum V2 is the latest iteration of the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Built for large-scale operations, Bubblegum V2 preserves all the benefits of the original Bubblegum while introducing powerful new features. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
 
 {% quick-links %}
 
@@ -14,27 +14,27 @@ Bubblegum v2 is the latest iteration of the Metaplex Protocol program for creati
 
 {% /quick-links %}
 
-## What's New in Bubblegum v2
+## What's New in Bubblegum V2
 
-Bubblegum v2 builds on the foundation of the original Bubblegum program while introducing several powerful new features:
+Bubblegum V2 builds on the foundation of the original Bubblegum program while introducing several powerful new features:
 
 - **Freeze and Thaw Functionality**: Project creators can now freeze and thaw cNFTs, providing greater control over their assets for various use cases such as preventing transfers during specific events or implementing vesting mechanics.
-- **MPL-Core Collections Integration**: Bubblegum v2 NFTs can now be added to MPL-Core collections instead of being limited to token metadata collections, allowing for greater flexibility and integration with the broader Metaplex ecosystem.
-- **Royalty Enforcement**: Since Bubblegum v2 is using [MPL-Core](https://docs.metaplex.com/core/overview) Collections, it is possible to enforce royalties on cNFTs e.g. using a `ProgramDenyList`.
+- **MPL-Core Collections Integration**: Bubblegum V2 NFTs can now be added to MPL-Core collections instead of being limited to token metadata collections, allowing for greater flexibility and integration with the broader Metaplex ecosystem.
+- **Royalty Enforcement**: Since Bubblegum V2 is using [MPL-Core](https://docs.metaplex.com/core/overview) Collections, it is possible to enforce royalties on cNFTs e.g. using a `ProgramDenyList`.
 - **Soulbound NFTs**: cNFTs can now be made soulbound (non-transferrable), permanently binding them to their owner's wallet. This is perfect for credentials, proof of attendance, identity verification, and more. It requires the `PermanentFreezeDelegate` plugin to be enabled on the collection.
 - **Allow Permanent Transfer**: The permanent transfer delegate can now transfer the cNFT to a new owner without interaction of the leaf owner if the `PermanentTransferDelegate` plugin is enabled on the collection.
 
-To allow the above features to work, Bubblegum v2 introduces a new leaf schema (`LeafSchemaV2`). To learn more what leaves are used in Bubblegum v2, check out the following sections.
+To allow the above features to work, Bubblegum V2 introduces a new leaf schema (`LeafSchemaV2`). To learn more what leaves are used in Bubblegum V2, check out the following sections.
 
 ## LeafSchemaV2
 
-Bubblegum v2 introduces a new leaf schema (LeafSchemaV2) which supports the additional features while maintaining backward compatibility. This new schema allows for:
+Bubblegum V2 introduces a new leaf schema (LeafSchemaV2) which supports the additional features while maintaining backward compatibility. This new schema allows for:
 
 - Integrating with MPL-Core collections instead of traditional token metadata
 - Supporting freezing/thawing functionality
 - Enabling soulbound capabilities
 
-Projects can choose to use the original leaf Schema by using Legacy Bubblegum or the new v2 schema with Bubblegum v2 depending on their requirements.
+Projects can choose to use the original leaf Schema by using Legacy Bubblegum or the new v2 schema with Bubblegum V2 depending on their requirements.
 
 ## Merkle Trees, leaves and proofs
 
@@ -141,4 +141,4 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 
 ## Next steps
 
-Now that we know how compressed NFTs work at a high level and what's new in Bubblegum v2, we recommend checking out our [Getting Started](/bubblegum-v2/getting-started) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum-v2/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.
+Now that we know how compressed NFTs work at a high level and what's new in Bubblegum V2, we recommend checking out our [Getting Started](/bubblegum-v2/getting-started) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum-v2/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.
