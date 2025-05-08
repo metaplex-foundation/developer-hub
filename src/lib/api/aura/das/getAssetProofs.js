@@ -1,7 +1,7 @@
-const getAssetProofBatch = {
+const getAssetProofs = {
   description:
     'Get the proof of a compressed Digital Asset NFT (cNFT) by its ID',
-  method: 'getAssetProofBatch',
+  method: 'getAssetProofs',
   params: [
     {
       type: 'array',
@@ -14,4 +14,4 @@ const getAssetProofBatch = {
   ],
 }
 
-export default getAssetProofBatch
+export default getAssetProofs
