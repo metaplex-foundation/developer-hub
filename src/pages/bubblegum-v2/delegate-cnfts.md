@@ -4,7 +4,7 @@ metaTitle: Delegating Compressed NFTs | Bubblegum V2
 description: Learn how to delegate compressed NFTs on Bubblegum.
 ---
 
-The owner of a Compressed NFT can delegate it to another account whilst keeping ownership of the cNFT. {% .lead %}
+The owner of a Compressed NFT can delegate it to another account while keeping ownership of the cNFT. {% .lead %}
 
 This allows the delegated account — which we also refer to as the **Delegate Authority** — to perform actions on behalf of the owner. These actions are:
 
@@ -12,8 +12,7 @@ This allows the delegated account — which we also refer to as the **Delegate A
 - [Burning the cNFT](/bubblegum-v2/burn-cnfts).
 - [Freezing and Thawing the cNFT](/bubblegum-v2/freeze-cnfts).
 
-Each of these actions provides examples of how to use the Delegate Authority to perform them, but usually, it is simply the case of providing the **Leaf Delegate** account as a Signer instead of passing the **Leaf Owner** account as a Signer.
-
+Each of these actions provides examples of how to use the Delegate Authority to perform them. Usually, you simply provide the **Leaf Delegate** account as a Signer instead of the **Leaf Owner** account.
 Let's see how we can approve and revoke Delegate Authorities for our Compressed NFTs.
 
 ## Approving a Delegate Authority
