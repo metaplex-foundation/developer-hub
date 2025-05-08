@@ -24,7 +24,7 @@ await freezeV2(umi, {
   ...assetWithProof,
   leafOwner: umi.identity.publicKey,
   coreCollection: collectionSigner.publicKey,
-}).sendAndConfirm(umi)
+}).sendAndConfirm(umi);
 ```
 {% /totem %}
 {% /dialect %}

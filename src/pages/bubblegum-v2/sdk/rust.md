@@ -4,7 +4,7 @@ metaTitle: Rust SDK | MPL-Bubblegum
 description: Learn how to set up your project to run the MPL-Bubblegum Rust SDK.
 ---
 
-Metaplex provides a Rust library that can be used to interact with the MPL-Bubblegum program. The Rust library can be used in rust scripts/builds as well as onchain programs via CPI instructions.
+Metaplex provides a Rust library that can be used to interact with the MPL-Bubblegum program. The Rust library can be used in Rust scripts/builds as well as onchain programs via CPI instructions.
 
 ## Installation
 
@@ -86,7 +86,7 @@ pub async fn create_tree(keypair: Keypair) {
         .await
         .unwrap();
 
-    println!("Signature: {:?}", res)
+    println!("Signature: {:?}", res);
 }
 ```
 

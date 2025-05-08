@@ -1,7 +1,7 @@
 ---
 title: Verifying Creators
 metaTitle: Verifying Creators | Bubblegum v2
-description: Learn how to verify and unverify creators on Bubblegum
+description: Learn how to verify and unverify creators on Bubblegum.
 ---
 
 If a Compressed NFT has a list of creators set in its metadata, these creators can use special instructions to verify and unverify themselves on the cNFT. {% .lead %}
@@ -25,7 +25,7 @@ import {
   getAssetWithProof,
   verifyCreatorV2,
   MetadataArgsV2Args
-} from '@metaplex-foundation/mpl-bubblegum'
+} from '@metaplex-foundation/mpl-bubblegum';
 import {
   unwrapOption,
   none,

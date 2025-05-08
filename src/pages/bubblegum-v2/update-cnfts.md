@@ -28,7 +28,7 @@ await updateMetadataV2(umi, {
 
 ### Tree Authority
 
-If your cNFT does not belong to a collection then the update authority for the cNFT will be the authority of the tree that the cNFT belongs to. In this case you would **omit** the `coreCollection` arg from the update function.
+If your cNFT does not belong to a collection then the update authority for the cNFT will be the authority of the tree that the cNFT belongs to. In this case, you would **omit** the `coreCollection` arg from the update function.
 
 The authority will be inferred from the current umi identity. If the authority is different from the current umi identity, then you will either have to pass in the `authority` arg as a signer type or create a 'noopSigner' for later signing.
 
