@@ -48,6 +48,7 @@ export const bubblegumv2 = {
             },
             { title: 'Fetching cNFTs', href: '/bubblegum-v2/fetch-cnfts' },
             { title: 'Transferring cNFTs', href: '/bubblegum-v2/transfer-cnfts' },
+            { title: 'Freeze and Thaw cNFTs', href: '/bubblegum-v2/freeze-cnfts' },
             { title: 'Updating cNFTs', href: '/bubblegum-v2/update-cnfts' },
             { title: 'Burning cNFTs', href: '/bubblegum-v2/burn-cnfts' },
             {
