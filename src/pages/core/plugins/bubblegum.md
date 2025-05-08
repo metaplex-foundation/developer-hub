@@ -28,10 +28,10 @@ The `Bubblegum` Plugin requires no arguments.
 ```ts
 import {
   createCollection,
-} from '@metaplex-foundation/mpl-core'
+} from '@metaplex-foundation/mpl-core';
 import {
   generateSigner,
-} from "@metaplex-foundation/umi";
+} from '@metaplex-foundation/umi';
 
 const collectionSigner = generateSigner(umi);
 
