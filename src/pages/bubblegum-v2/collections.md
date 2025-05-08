@@ -4,94 +4,81 @@ metaTitle: Verifying Collections | Bubblegum v2
 description: Learn how to set, verify and unverify collections on Bubblegum
 ---
 
-Whenever a collection is set on a Compressed NFT, the update authority of the collection — or any approved collection delegate — may verify and/or unverify that collection on the cNFT. {% .lead %}
+A cNFT can be added to a MPL-Core Collection either on mint or later. {% .lead %}
 
-Technically, this will toggle a **Verified** boolean on the **Collection** object of the cNFT, letting anyone know that an authority of the collection approved this Compressed NFT as being part of the collection.
+If you are not familiar with the concept of collections with regard to NFTs, they are special non-compressed NFTs that can be used to group other NFTs together. The data of the **Collection NFT** is therefore used to describe the name and the branding of the entire collection. Since Bubblegum V2 it also allows additional features on collection level, like allowing freezing and thawing of cNFTs by a delegate without the need of interaction by the leaf owner. You can [read more about MPL-Core Collections here](/core/collections).
 
-If you are not familiar with the concept of collections with regard to NFTs, they are special non-compressed NFTs that can be used to group other NFTs together. The data of the **Collection NFT** is therefore used to describe the name and the branding of the entire collection. You can [read more about Metaplex Verified Collections here](/token-metadata/collections).
+Note that is possible to mint a Compressed NFT directly into a collection by using the **MintV2** instruction [documented here](/bubblegum-v2/mint-cnfts#minting-to-a-collection). That being said, if you have already minted a cNFT without a collection, let's see how we can set the collection on that cNFT. Other to bubblegum v1, which uses Metaplex Token Metadata Collections which have a "verified" boolean, Bubblegum v2 uses MPL-Core Collections which do not have that boolean.
 
-Note that is possible to mint a Compressed NFT directly into a collection by using the **Mint to Collection V1** instruction [documented here](/bubblegum-v2/mint-cnfts#minting-to-a-collection). That being said, if you have already minted a cNFT without a collection, let's see how we can verify, unverify but also set the collection on that cNFT.
+## Set the Collection of a Compressed NFT
+The **setCollectionV2** instruction can be used to set the collection of a cNFT. It can also be used to remove the collection from a cNFT or change the collection of a cNFT.
 
-## Verify a Collection
-
-The **Verify Collection** instruction of the Bubblegum program can be used to set the **Verified** boolean of a Compressed NFT to `true`. In order for this to work, the **Collection** object must have already been set on the cNFT — for instance, when it was minted.
-
-The instruction accepts the following parameters:
-
-- **Collection Mint**: The mint account of the Collection NFT.
-- **Collection Authority**: The update authority of the Collection NFT — or an approved collection delegate — as a Signer. In case the collection authority is a delegate authority, note that the program supports both the new unified **Metadata Delegate** system and the legacy **Collection Authority Records** accounts. Simply pass the approriate PDA to the **Collection Authority Record Pda** parameter.
-
-Additionally, more parameters must be provided to verify the integrity of the Compressed NFT as this instruction will end up replacing the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
-
-{% dialect-switcher title="Verify the Collection of a Compressed NFT" %}
+{% dialect-switcher title="Set the Collection of a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```ts
 import {
   getAssetWithProof,
-  verifyCollection,
+  setCollectionV2,
+  MetadataArgsV2Args
 } from '@metaplex-foundation/mpl-bubblegum'
+import {
+  unwrapOption,
+  none,
+} from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-await verifyCollection(umi, {
-  ...assetWithProof,
-  collectionMint,
-  collectionAuthority,
-}).sendAndConfirm(umi)
+    const metadata: MetadataArgsV2Args = {
+      name: assetWithProof.metadata.name,
+      uri: assetWithProof.metadata.uri,
+      sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
+      collection: none(),
+      creators: assetWithProof.metadata.creators,
+    };
+    await setCollectionV2(umi, {
+      ...assetWithProof,
+      newCollectionAuthority: newCollectionUpdateAuthority,
+      metadata,
+      newCoreCollection: newCoreCollection.publicKey,
+    }).sendAndConfirm(umi);
 ```
 
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Set and Verify a Collection
+## Remove the Collection of a Compressed NFT
+The **setCollectionV2** instruction can also be used to remove the collection from a cNFT.
 
-If the **Collection** object has not been set on the Compressed NFT yet, the **Set and Verify Collection** instruction can be used to set it and verify it at the same time. This instruction accepts the same parameters as the **Verify Collection** instruction but also requires the **Tree Creator Or Delegate** attribute to be passed as a Signer if it is different than the collection authority.
-
-{% dialect-switcher title="Set and Verify the Collection of a Compressed NFT" %}
+{% dialect-switcher title="Remove the Collection of a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```ts
 import {
   getAssetWithProof,
-  setAndVerifyCollection,
+  setCollectionV2,
+  MetadataArgsV2Args
 } from '@metaplex-foundation/mpl-bubblegum'
-
-const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-await setAndVerifyCollection(umi, {
-  ...assetWithProof,
-  treeCreatorOrDelegate,
-  collectionMint,
-  collectionAuthority,
-}).sendAndConfirm(umi)
-```
-
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
-
-## Unverify a Collection
-
-The update authority of a collection can also unverify the collection of a Compressed NFT by using the **Unverify Collection** instruction. In order to send this instruction, the **Collection** object of the cNFT is expected to already be set and verified. The attributes required by the **Unverify Collection** instruction are the same as the ones required by the **Verify Collection** instruction.
-
-{% dialect-switcher title="Unverify the Collection of a Compressed NFT" %}
-{% dialect title="JavaScript" id="js" %}
-{% totem %}
-
-```ts
 import {
-  getAssetWithProof,
-  unverifyCollection,
-} from '@metaplex-foundation/mpl-bubblegum'
+  unwrapOption,
+  none,
+} from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-await unverifyCollection(umi, {
+const metadata: MetadataArgsV2Args = {
+  name: assetWithProof.metadata.name,
+  uri: assetWithProof.metadata.uri,
+  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
+  collection: unwrapOption(assetWithProof.metadata.collection)!.key,
+  creators: assetWithProof.metadata.creators,
+};
+await setCollectionV2(umi, {
   ...assetWithProof,
-  collectionMint,
-  collectionAuthority,
-}).sendAndConfirm(umi)
+  authority: collectionAuthoritySigner,
+  metadata: metadata2,
+}).sendAndConfirm(umi);
 ```
 
 {% /totem %}
