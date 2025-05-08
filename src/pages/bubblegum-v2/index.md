@@ -22,7 +22,17 @@ Bubblegum v2 builds on the foundation of the original Bubblegum program while in
 - **Soulbound NFTs**: cNFTs can now be made soulbound (non-transferrable), permanently binding them to their owner's wallet. This is perfect for credentials, proof of attendance, identity verification, and more.
 - **MPL-Core Collections Integration**: Bubblegum v2 NFTs can now be added to MPL-Core collections instead of being limited to token metadata collections, allowing for greater flexibility and integration with the broader Metaplex ecosystem.
 
-To allow the above features to work, Bubblegum v2 introduces a new leaf schema (`LeafSchemaV2`). To learn more what leaves are used in Bubblegum v2, check out the following section.
+To allow the above features to work, Bubblegum v2 introduces a new leaf schema (`LeafSchemaV2`). To learn more what leaves are used in Bubblegum v2, check out the following sections.
+
+## LeafSchemaV2
+
+Bubblegum v2 introduces a new leaf schema (LeafSchemaV2) which supports the additional features while maintaining backward compatibility. This new schema allows for:
+
+- Integrating with MPL-Core collections instead of traditional token metadata
+- Supporting freezing/thawing functionality
+- Enabling soulbound capabilities
+
+Projects can choose to use the original leaf Schema by using Legacy Bubblegum or the new v2 schema with Bubblegum v2 depending on their requirements.
 
 ## Merkle Trees, leaves and proofs
 
@@ -123,19 +133,9 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 - [Delegate a cNFT](/bubblegum-v2/delegate-cnfts).
 - [Verify and unverify a cNFT collection](/bubblegum-v2/verify-collections).
 - [Verify and unverify the creators of a cNFT](/bubblegum-v2/verify-creators).
-- [Freeze and thaw a cNFT](/bubblegum-v2/freeze-thaw-cnfts).
-- [Make a cNFT soulbound](/bubblegum-v2/soulbound-cnfts).
+- [Freeze and thaw a cNFT](/bubblegum-v2/freeze-cnfts).
+- [Make a cNFT soulbound](/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft).
 
-
-## LeafSchemaV2
-
-Bubblegum v2 introduces a new leaf schema (LeafSchemaV2) which supports the additional features while maintaining backward compatibility. This new schema allows for:
-
-- Integrating with MPL-Core collections instead of traditional token metadata
-- Supporting freezing/thawing functionality
-- Enabling soulbound capabilities
-
-Projects can choose to use the original leaf Schema by using Legacy Bubblegum or the new v2 schema with Bubblegum v2 depending on their requirements.
 
 ## Next steps
 

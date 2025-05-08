@@ -24,7 +24,6 @@ The main parameters of the Mint V2 instruction are:
 
 {% dialect-switcher title="Mint a Compressed NFT without a Collection" %}
 {% dialect title="JavaScript" id="js" %}
-//TODO
 
 ```ts
 import { none } from '@metaplex-foundation/umi'

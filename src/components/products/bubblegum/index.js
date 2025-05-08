@@ -7,11 +7,7 @@ import { ArchiveBoxIcon } from '@heroicons/react/24/solid';
 import { Hero } from './Hero';
 
 export const bubblegum = {
-<<<<<<< HEAD
-  name: 'Legacy Bubblegum',
-=======
   name: 'Bubblegum v1 (legacy)',
->>>>>>> 534c817f1d73d1e69f71fb5c42b1023b647f4392
   headline: 'Compressed NFTs',
   description: 'NFTs that scale.',
   path: 'bubblegum',

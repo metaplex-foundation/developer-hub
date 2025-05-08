@@ -51,10 +51,6 @@ export const bubblegumv2 = {
             { title: 'Freeze and Thaw cNFTs', href: '/bubblegum-v2/freeze-cnfts' },
             { title: 'Updating cNFTs', href: '/bubblegum-v2/update-cnfts' },
             { title: 'Burning cNFTs', href: '/bubblegum-v2/burn-cnfts' },
-            {
-              title: 'Decompressing cNFTs',
-              href: '/bubblegum-v2/decompress-cnfts',
-            },
             { title: 'Delegating cNFTs', href: '/bubblegum-v2/delegate-cnfts' },
             { title: 'Delegating Trees', href: '/bubblegum-v2/delegate-trees' },
             {

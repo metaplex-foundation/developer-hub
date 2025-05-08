@@ -59,3 +59,21 @@ await thawAndRevokeV2(umi, {
   authority: delegateAuthority,
 }).sendAndConfirm(umi);
 ```
+
+## Make a cNFT Soulbound
+To make a cNFT Soulbound the cNFT has to be part of a [mpl-core collection](/core/collections) with the [`permanentFreezeDelegate`](/core/plugins/permanent-freeze-delegate) Plugin. Using the `setNonTransferableV2` instruction we can make the cNFT non-transferable.
+
+```js
+import {
+  getAssetWithProof,
+  setNonTransferableV2,
+} from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId);
+
+await setNonTransferableV2(umi, {
+    ...assetWithProof,
+    authority, // The permanent freeze delegate on collection
+    coreCollection: collection.publicKey,
+}).sendAndConfirm(umi);
+```
