@@ -55,13 +55,10 @@ pub async fn create_tree(keypair: Keypair) {
         &mpl_bubblegum::ID,
     );
 
-    let create_tree_config_ix = CreateTreeConfigBuilder::new()
+    let create_tree_config_ix = CreateTreeConfigV2Builder::new()
         .merkle_tree(merkle_tree.pubkey())
         .tree_config(tree_config.0)
         .payer(payer.pubkey())
-        .log_wrapper(SPL_NOOP_ID)
-        .compression_program(SPL_ACCOUNT_COMPRESSION_ID)
-        .system_program(system_program::ID)
         .max_depth(20)
         .max_buffer_size(1024)
         .public(false)
@@ -104,7 +101,7 @@ For a more comprehensive guide using Metaplex crates to create CPI instructions 
 #### CreateTreeConfigCpiBuilder - Example
 
 ```rust
-CreateTreeConfigCpiBuilder::new()
+CreateTreeConfigV2CpiBuilder::new()
         .merkle_tree(context.accounts.merkle_tree)
         .tree_config(context.accounts.tree_config)
         .payer(context.accounts.payer)
