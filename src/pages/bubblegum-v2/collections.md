@@ -10,6 +10,8 @@ If you are not familiar with the concept of collections with regard to NFTs, the
 
 Note that is possible to mint a Compressed NFT directly into a collection by using the **MintV2** instruction [documented here](/bubblegum-v2/mint-cnfts#minting-to-a-collection). That being said, if you have already minted a cNFT without a collection, let's see how we can set the collection on that cNFT. Other to bubblegum v1, which uses Metaplex Token Metadata Collections which have a "verified" boolean, Bubblegum v2 uses MPL-Core Collections which do not have that boolean.
 
+The MPL-Core collection has to contain the [`BubblegumV2` plugin](/core/plugins/bubblegum).
+
 ## Set the Collection of a Compressed NFT
 The **setCollectionV2** instruction can be used to set the collection of a cNFT. It can also be used to remove the collection from a cNFT or change the collection of a cNFT.
 
