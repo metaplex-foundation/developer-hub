@@ -1,7 +1,7 @@
 ---
 title: Updating Compressed NFTs
 metaTitle: Updating Compressed NFTs | Bubblegum v2
-description: Learn how to update compressed NFTs on Bubblegum
+description: Learn how to update compressed NFTs on Bubblegum.
 ---
 
 The **updateMetadataV2** instruction can be used to modify the metadata of a Compressed NFT. The Merkle root is updated to reflect the propagated hash of the data, and RPC providers who conform to the [Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api) will update their index of the cNFTs.
@@ -28,7 +28,7 @@ await updateMetadataV2(umi, {
 
 ### Tree Authority
 
-If your cNFT does not belong to a collection then the update authority for the cNFT will be the authority of the tree that the cNFT belongs too. In this case you would **omit** the `coreCollection` arg from the update function.
+If your cNFT does not belong to a collection then the update authority for the cNFT will be the authority of the tree that the cNFT belongs to. In this case you would **omit** the `coreCollection` arg from the update function.
 
 The authority will be inferred from the current umi identity. If the authority is different from the current umi identity, then you will either have to pass in the `authority` arg as a signer type or create a 'noopSigner' for later signing.
 
