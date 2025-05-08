@@ -5,6 +5,8 @@ export function Hero({ page }) {
   return (
     <BaseHero page={page} light2Off light3Off>
       <svg
+        role="img"
+        aria-labelledby="bubblegum-v2-hero-title"
         width="380"
         height="243"
         viewBox="0 0 380 243"
@@ -12,6 +14,7 @@ export function Hero({ page }) {
         xmlns="http://www.w3.org/2000/svg"
         className="w-full"
       >
+        <title id="bubblegum-v2-hero-title">Bubblegum v2 Hero Graphic</title>
         <path d="M189.5 62L289.75 94" stroke="#1794CB" strokeWidth="1.5" />
         <line
           x1="89.2048"
