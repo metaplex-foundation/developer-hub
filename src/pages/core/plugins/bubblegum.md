@@ -7,7 +7,7 @@ description: Learn how to use the Bubblegum Plugin to create Collections that ca
 The `Bubblegum` Plugin is a `Authority Managed` plugin that allows to create Collections that can be used for compressed NFTs.
 
 
-This plugin can be only be used on `MPL Core Collections`.
+This plugin can only be used on `MPL Core Collections`.
 
 ## Works With
 

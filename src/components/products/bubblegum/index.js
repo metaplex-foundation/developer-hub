@@ -42,7 +42,7 @@ export const bubblegum = {
               title: 'Creating Bubblegum Trees',
               href: '/bubblegum/create-trees',
             },
-            { title: 'Fetching cNFTs', href: '/bubblegum-v2/fetch-cnfts' },
+            { title: 'Fetching cNFTs', href: '/bubblegum/fetch-cnfts' },
             { title: 'Delegating Trees', href: '/bubblegum/delegate-trees' },
           ],
         },

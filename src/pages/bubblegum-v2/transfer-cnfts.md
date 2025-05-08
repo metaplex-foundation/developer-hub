@@ -33,7 +33,8 @@ When using JavaScript we suggest to use the `getAssetWithProof` function first t
 {% totem %}
 
 ```ts
-import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
+-import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
++import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {
   truncateCanopy: true,
@@ -52,7 +53,7 @@ await transferV2(umi, {
 {% totem-accordion title="Using a delegate" %}
 
 ```ts
-import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {
   truncateCanopy: true,

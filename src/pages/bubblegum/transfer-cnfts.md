@@ -17,7 +17,7 @@ If you encounter transaction size errors, consider using `{ truncateCanopy: true
 The instruction accepts the following parameters:
 
 - **Leaf Owner**: The current owner of the Compressed NFT
-- **Leaf Delegate**: The current owner of the Compressed NFT and its delegate authority if any. One of these must sign the transaction.
+- **Leaf Delegate**: The current owner of the Compressed NFT and its delegate authority, if any. One of these must sign the transaction.
 - **New Leaf Owner**: The address of the Compressed NFT's new owner
 - **Merkle Tree**: The address of the Bubblegum Tree
 - **Root**: The current root of the Bubblegum Tree
@@ -30,11 +30,6 @@ The instruction accepts the following parameters:
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-```ts
-import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
-
-const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-  await transferV2(umi, {
     authority: leafOwnerA,
     leafOwner: leafOwnerA.publicKey,
     newLeafOwner: leafOwnerB.publicKey,

@@ -63,7 +63,7 @@ await updateMetadataV2(umi, {
   updateArgs,
   // Optional param. If your authority is a different signer type 
   // than the current umi identity assign that signer here.
-  authority: <Signer>
+  authority: <Signer>,
   // Optional param. If cNFT belongs to a collection pass it here.
   coreCollection: publicKey("22222222222222222222222222222222"),
 }).sendAndConfirm(umi)

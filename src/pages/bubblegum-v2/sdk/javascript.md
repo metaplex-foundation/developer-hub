@@ -4,7 +4,7 @@ metaTitle: Javascript SDK | MPL-Bubblegum
 description: Learn how to set up your project to run the MPL-Bubblegum Javascript SDK.
 ---
 
-Metaplex provides a JavaScript library that can be used to interact with the MPL-Bubblegum program. Thanks to the [Umi Framework](/umi), it ships without many opinionated dependencies thus providing a lightweight library that can be used in any JavaScript project.
+Metaplex provides a JavaScript library that can be used to interact with the MPL-Bubblegum program. Thanks to the [Umi Framework](/umi), it ships without many opinionated dependencies, thus providing a lightweight library that can be used in any JavaScript project.
 
 To get started, you'll need to [install the Umi framework](/umi/getting-started) and the MPL-Bubblegum JavaScript library.
 
@@ -26,7 +26,7 @@ npm install @metaplex-foundation/mpl-bubblegum
 
 ## Umi Setup
 
-An `umi` instance is required to interact with the Metaplex Javascript SDKs. If you haven't set up and configured an `umi` instance yet then you can checkout the [Umi Getting Started](/umi/getting-started) page and configure your RPC endpoint and your `umi` identity/signer.
+If you haven't set up and configured an `umi` instance yet, then you can check out the [Umi Getting Started](/umi/getting-started) page
 
 During the initialization of the `umi` instance you can add the MPL-Bubblegum package to `umi` using
 
@@ -44,4 +44,4 @@ const umi = createUmi('http://api.devnet.solana.com')
 .use(mplBubblegum())
 ```
 
-From here your `umi` instance will have access to the MPL-Bubblegum package and you start to explore the MPL-Bubblegum feature set.
+From here, your `umi` instance will have access to the MPL-Bubblegum package, allowing you to explore its features.
