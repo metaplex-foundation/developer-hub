@@ -4,7 +4,7 @@ metaTitle: Minting Compressed NFTs | Bubblegum v2
 description: Learn how to mint compressed NFTs on Bubblegum.
 ---
 
-In [the previous page](/bubblegum-v2/create-trees), we saw that we need a Bubblegum Tree to mint Compressed NFTs and we saw how to create one. Now, let's see how to mint compressed NFTs from a given Bubblegum Tree. {% .lead %}
+In [the previous page](/bubblegum-v2/create-trees), we saw that we need a Bubblegum Tree to mint Compressed NFTs, and we saw how to create one. Now, let's see how to mint compressed NFTs from a given Bubblegum Tree. {% .lead %}
 
 The Bubblegum program offers multiple minting instructions for the different leaf schema versions. Bubblegum v2 introduces a new minting instruction called **mintV2** that is used to mint Compressed NFTs either to a given Collection or without a Collection.
 
@@ -15,7 +15,7 @@ The Bubblegum program provides a **Mint V2** instruction that enables us to mint
 The main parameters of the Mint V2 instruction are:
 
 - **Merkle Tree**: The Merkle Tree address from which the Compressed NFT will be minted.
-- **Tree Creator Or Delegate**: The authority allowed to mint from the Bubblegum Tree — this can either be the creator or the delegate of the tree. This authority must sign the transaction. In the case of a public tree, this parameter can be any authority but must still be a signer.
+- **Tree Creator Or Delegate**: The authority allowed to mint from the Bubblegum Tree — this can either be the creator or the delegate of the tree. This authority must sign the transaction. In the case of a public tree, this parameter can be any authority, but must still be a signer.
 - **Leaf Owner**: The owner of the Compressed NFT that will be minted.
 - **Leaf Delegate**: An delegate authority allowed to manage the minted cNFT, if any. Otherwise, it is set to the Leaf Owner.
 - **Collection Authority**: The authority allowed to manage the given Collection.
@@ -79,8 +79,7 @@ await mintV2(umi, {
 
 {% totem-accordion title="Create a MPL-Core Collection" %}
 
-If you do not have a Collection yet, you can create one using the []`@metaplex-foundation/mpl-core` library](https://developers.metaplex.com/core/collections#creating-a-collection-with-plugins). Keep in mind that you need to add the `BubblegumV2` Plugin to the collection, too
-
+If you do not have a Collection yet, you can create one using the [`@metaplex-foundation/mpl-core` library](https://developers.metaplex.com/core/collections#creating-a-collection-with-plugins). Keep in mind that you need to add the `BubblegumV2` Plugin to the collection, too
 ```shell
 npm install @metaplex-foundation/mpl-core
 ```
@@ -91,7 +90,7 @@ And create a Collection like so:
 import { generateSigner } from '@metaplex-foundation/umi'
 import { createCollection } from '@metaplex-foundation/mpl-core'
 
-const collectionMint = generateSigner(umi)
+const collectionSigner = generateSigner(umi)
 await createCollection(umi, {
     collection: collectionSigner,
     name: "My Collection",
@@ -102,7 +101,6 @@ await createCollection(umi, {
       },
     ],
   }).sendAndConfirm(umi)
-```
 
 {% /totem-accordion %}
 

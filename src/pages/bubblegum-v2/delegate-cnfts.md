@@ -24,7 +24,7 @@ To approve or replace a Delegate Authority, the owner must send a **Delegate** i
 - **Previous Leaf Delegate**: The previous Delegate Authority, if any. Otherwise, this should be set to the **Leaf Owner**.
 - **New Leaf Delegate**: The new Delegate Authority to approve.
 
-Additionally, more parameters must be provided to verify the integrity of the Compressed NFT since this instruction will end up replacing the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
+Additionally, more parameters must be provided to verify the integrity of the Compressed NFT as this instruction replaces the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
 {% dialect-switcher title="Delegate a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
