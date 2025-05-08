@@ -18,6 +18,7 @@ const redirectRules = {
     '/getting-started': '/bubblegum/sdk',
     '/getting-started/js': '/bubblegum/sdk/javascript',
     '/getting-started/rust': '/bubblegum/sdk/rust',
+    '/fetch-cnfts': '/bubblegum-v2/fetch-cnfts',
     '/concurrent-merkle-trees': '/bubblegum-v2/concurrent-merkle-trees',
     '/stored-nft-data': '/bubblegum-v2/stored-nft-data',
     '/hashed-nft-data': '/bubblegum-v2/hashed-nft-data',

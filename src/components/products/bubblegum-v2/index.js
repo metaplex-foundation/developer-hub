@@ -54,8 +54,8 @@ export const bubblegumv2 = {
             { title: 'Delegating cNFTs', href: '/bubblegum-v2/delegate-cnfts' },
             { title: 'Delegating Trees', href: '/bubblegum-v2/delegate-trees' },
             {
-              title: 'Verifying Collections',
-              href: '/bubblegum-v2/verify-collections',
+              title: 'Collections',
+              href: '/bubblegum-v2/collections',
             },
             { title: 'Verifying Creators', href: '/bubblegum-v2/verify-creators' },
           ],
