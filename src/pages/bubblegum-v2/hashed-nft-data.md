@@ -209,4 +209,4 @@ impl LeafSchema {
 }
 ```
 
-Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to spl-account-compression or mpl-account-compression depending on the leaf schema version in order to validate the Merkle tree change.
+Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to `spl-account-compression` or `mpl-account-compression` depending on the leaf schema version to validate the Merkle tree change.

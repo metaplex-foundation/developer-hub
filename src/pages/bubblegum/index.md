@@ -6,7 +6,7 @@ description: Provides a high-level overview of compressed NFTs.
 
 {% callout type="note" title="New Bubblegum version" %}
 
-We recommend to use [Bubblegum v2](/bubblegum-v2) to allow more flexibility and features.
+We recommend using [Bubblegum v2](/bubblegum-v2) to allow more flexibility and features.
 
 {% /callout %}
 

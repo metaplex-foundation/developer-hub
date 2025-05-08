@@ -104,8 +104,8 @@ import { createTreeV2 } from '@metaplex-foundation/mpl-bubblegum'
 const merkleTree = generateSigner(umi)
 const builder = await createTreeV2(umi, {
         merkleTree,
-        maxBufferSize: 14,
-        maxDepth: 64,
+        maxBufferSize: 64,
+        maxDepth: 14,
       })
 
 await builder.sendAndConfirm(umi)

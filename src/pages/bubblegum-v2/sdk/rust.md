@@ -24,7 +24,7 @@ cargo add mpl-bubblegum
 
 ## Local Scripts
 
-For local scripts is recommended to use the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return a instruction that can be added to a transaction.
+For local scripts, we recommend using the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return a instruction that can be added to a transaction.
 
 A list of all Bubblegum instructions can be found here: [MPL-Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
@@ -39,7 +39,7 @@ use solana_sdk::{commitment_config::CommitmentConfig, pubkey::Pubkey, signature:
 
 #[tokio::main]
 pub async fn create_tree(keypair: Keypair) {
-    let rpc_client = rpc_client::RpcClient::new("https://devnet.helius-rpc.com/?api-key=555f20ad-afaf-4a78-a889-244f281ab399".to_string());
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com/".to_string());
 
     let payer = keypair;
         
@@ -108,9 +108,9 @@ CreateTreeConfigV2CpiBuilder::new()
         .tree_creator(context.accounts.tree_creator)
         .log_wrapper(SPL_NOOP_ID)
         .compression_program(context.accounts.compression_program)
-        .system_program(context.acccounts.system_program)
+        .system_program(context.accounts.system_program)
         .max_depth(20)
-        .max_bufferisz(1024)
+        .max_buffer_size(1024)
         .public(false)
         .invoke()
 ```

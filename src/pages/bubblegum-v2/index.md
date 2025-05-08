@@ -1,6 +1,6 @@
 ---
 title: Overview
-metaTitle: Overview | Bubblegum v2 v2
+metaTitle: Overview | Bubblegum v2
 description: Provides a high-level overview of Bubblegum v2 and compressed NFTs.
 ---
 
