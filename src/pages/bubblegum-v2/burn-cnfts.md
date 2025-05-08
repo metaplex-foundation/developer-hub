@@ -4,7 +4,7 @@ metaTitle: Burning Compressed NFTs | Bubblegum v2
 description: Learn how to burn compressed NFTs on Bubblegum.
 ---
 
-The **Burn** instruction can be used to burn a Compressed NFT and, therefore, remove it from the Bubblegum Tree permanently. To authorize this operation, either the current owner or the delegate authority — if any — must sign the transaction. The instruction accepts the following parameter:
+The **burnV2** instruction can be used to burn a Compressed NFT and, therefore, remove it from the Bubblegum Tree permanently. To authorize this operation, either the current owner or the delegate authority — if any — must sign the transaction. The instruction accepts the following parameter:
 
 - **Leaf Owner** and **Leaf Delegate**: The current owner of the Compressed NFT and its delegate authority if any. One of these must sign the transaction.
 
@@ -19,10 +19,10 @@ If you encounter transaction size errors, consider using `{ truncateCanopy: true
 {% totem %}
 
 ```ts
-import { getAssetWithProof, burn } from '@metaplex-foundation/mpl-bubblegum'
+import { getAssetWithProof, burnV2 } from '@metaplex-foundation/mpl-bubblegum'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-await burn(umi, {
+await burnV2(umi, {
   ...assetWithProof,
   leafOwner: currentLeafOwner,
 }).sendAndConfirm(umi)
@@ -31,10 +31,10 @@ await burn(umi, {
 {% totem-accordion title="Using a delegate" %}
 
 ```ts
-import { getAssetWithProof, burn } from '@metaplex-foundation/mpl-bubblegum'
+import { getAssetWithProof, burnV2 } from '@metaplex-foundation/mpl-bubblegum'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-await burn(umi, {
+await burnV2(umi, {
   ...assetWithProof,
   leafDelegate: currentLeafDelegate,
 }).sendAndConfirm(umi)

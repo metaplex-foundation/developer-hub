@@ -99,14 +99,15 @@ Here is how one can create a Bubblegum Tree using our libraries:
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
-import { createTree } from '@metaplex-foundation/mpl-bubblegum'
+import { createTreeV2 } from '@metaplex-foundation/mpl-bubblegum'
 
 const merkleTree = generateSigner(umi)
-const builder = await createTree(umi, {
-  merkleTree,
-  maxDepth: 14,
-  maxBufferSize: 64,
-})
+const builder = await createTreeV2(umi, {
+        merkleTree,
+        maxBufferSize: 14,
+        maxDepth: 64,
+      })
+
 await builder.sendAndConfirm(umi)
 ```
 
@@ -114,7 +115,7 @@ By default, the Tree Creator is set to the Umi identity and the Public parameter
 
 ```ts
 const customTreeCreator = generateSigner(umi)
-const builder = await createTree(umi, {
+const builder = await createTreeV2(umi, {
   // ...
   treeCreator: customTreeCreator,
   public: true,
@@ -143,7 +144,9 @@ Here is how one can fetch all of that data using our libraries:
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { fetchMerkleTree } from '@metaplex-foundation/mpl-bubblegum'
+import {
+  fetchMerkleTree,
+} from "@metaplex-foundation/mpl-account-compression";
 
 const merkleTreeAccount = await fetchMerkleTree(umi, merkleTree)
 ```
