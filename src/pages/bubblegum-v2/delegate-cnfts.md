@@ -12,8 +12,7 @@ This allows the delegated account — which we also refer to as the **Delegate A
 - [Burning the cNFT](/bubblegum-v2/burn-cnfts).
 - [Freezing and Thawing the cNFT](/bubblegum-v2/freeze-cnfts).
 
-Each of these actions provides examples of how to use the Delegate Authority to perform them, but usually, it is simply the case of providing the **Leaf Delegate** account as a Signer instead of passing the **Leaf Owner** account as a Signer.
-
+Each of these actions provides examples of how to use the Delegate Authority to perform them. Usually, you simply provide the **Leaf Delegate** account as a Signer instead of the **Leaf Owner** account.
 Let's see how we can approve and revoke Delegate Authorities for our Compressed NFTs.
 
 ## Approving a Delegate Authority
