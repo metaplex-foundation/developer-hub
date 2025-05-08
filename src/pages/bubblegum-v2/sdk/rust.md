@@ -24,7 +24,7 @@ cargo add mpl-bubblegum
 
 ## Local Scripts
 
-For local scripts, we recommend using the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return a instruction that can be added to a transaction.
+For local scripts, we recommend using the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return an instruction that can be added to a transaction.
 
 A list of all Bubblegum instructions can be found here: [MPL-Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
