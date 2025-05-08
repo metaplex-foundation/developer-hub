@@ -80,24 +80,10 @@ export const bubblegumv2 = {
         },
       ],
     },
-    {
-      ...guidesSection('bubblegum-v2'),
-      navigation: [
-        {
-          title: 'Javascript',
-          links: [
-            {
-              title: 'How to Create a 1,000,000 NFT Collection on Solana',
-              href: '/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana',
-            },
-            {
-              title: 'How to Interact with cNFTs on Other SVMs',
-              href: '/bubblegum/guides/javascript/how-to-interact-with-cnfts-on-other-svms',
-            },
-          ],
-        },
-      ],
-    },
+    // {
+    //   ...guidesSection('bubblegum-v2'),
+    //   navigation: [],
+    // },
     {
       ...referencesSection('bubblegum-v2'),
       href: 'https://mpl-bubblegum.typedoc.metaplex.com/',
