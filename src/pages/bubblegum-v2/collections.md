@@ -6,7 +6,7 @@ description: Learn how to set, verify and unverify collections on Bubblegum
 
 A cNFT can be added to a MPL-Core Collection either on mint or later. {% .lead %}
 
-If you are not familiar with the concept of collections with regard to NFTs, they are special non-compressed NFTs that can be used to group other NFTs together. The data of the **Collection NFT** is therefore used to describe the name and the branding of the entire collection. Since Bubblegum V2 it also allows additional features on collection level, like allowing freezing and thawing of cNFTs by a delegate without the need of interaction by the leaf owner. You can [read more about MPL-Core Collections here](/core/collections).
+If you are not familiar with the concept of collections with regard to NFTs, they are special non-compressed NFTs that can be used to group other NFTs together. The data of the **Collection** is therefore used to describe the name and the branding of the entire collection. Since Bubblegum V2 it also allows additional features on collection level, like allowing freezing and thawing of cNFTs by a delegate without the need of interaction by the leaf owner. You can [read more about MPL-Core Collections here](/core/collections).
 
 Note that is possible to mint a Compressed NFT directly into a collection by using the **MintV2** instruction [documented here](/bubblegum-v2/mint-cnfts#minting-to-a-collection). That being said, if you have already minted a cNFT without a collection, let's see how we can set the collection on that cNFT. Other to bubblegum v1, which uses Metaplex Token Metadata Collections which have a "verified" boolean, Bubblegum v2 uses MPL-Core Collections which do not have that boolean.
 
