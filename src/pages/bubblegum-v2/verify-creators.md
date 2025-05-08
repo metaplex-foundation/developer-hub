@@ -12,7 +12,7 @@ It is worth noting that creators can verify themselves directly when [minting th
 
 ## Verify a Creator
 
-The Bubblegum program offers a **Verify Creator** instruction that must be signed by the creator we are trying to verify.
+The Bubblegum program offers a **verifyCreatorV2** instruction that must be signed by the creator we are trying to verify.
 
 Additionally, more parameters must be provided to verify the integrity of the Compressed NFT as this instruction will end up replacing the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
@@ -23,11 +23,11 @@ Additionally, more parameters must be provided to verify the integrity of the Co
 ```ts
 import {
   getAssetWithProof,
-  verifyCreator,
+  verifyCreatorV2,
 } from '@metaplex-foundation/mpl-bubblegum'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-await verifyCreator(umi, { ...assetWithProof, creator }).sendAndConfirm(umi)
+await verifyCreatorV2(umi, { ...assetWithProof, creator }).sendAndConfirm(umi)
 ```
 
 {% /totem %}
@@ -36,7 +36,7 @@ await verifyCreator(umi, { ...assetWithProof, creator }).sendAndConfirm(umi)
 
 ## Unverify a Creator
 
-Similarly to the **Verify Creator** instruction, the **Unverify Creator** instruction must be signed by the creator and will unverify them on the Compressed NFT.
+Similarly to the **verifyCreatorV2** instruction, the **unverifyCreatorV2** instruction must be signed by the creator and will unverify them on the Compressed NFT.
 
 {% dialect-switcher title="Unverify the Creator of a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
