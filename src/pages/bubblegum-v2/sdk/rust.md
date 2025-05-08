@@ -33,7 +33,7 @@ For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs G
 #### CreateTreeConfigBuilder - Example
 
 ```rust
-use mpl_bubblegum::{instructions::CreateTreeConfigBuilder, programs::{SPL_ACCOUNT_COMPRESSION_ID, SPL_NOOP_ID}};
+use mpl_bubblegum::{instructions::CreateTreeConfigV2Builder, programs::{SPL_ACCOUNT_COMPRESSION_ID, SPL_NOOP_ID}};
 use solana_client::{nonblocking::rpc_client, rpc_config::RpcSendTransactionConfig};
 use solana_sdk::{commitment_config::CommitmentConfig, pubkey::Pubkey, signature::Keypair, signer::Signer, system_program, transaction::Transaction};
 
