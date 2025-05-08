@@ -7,9 +7,9 @@ import { ArchiveBoxIcon } from '@heroicons/react/24/solid';
 import { Hero } from './Hero';
 
 export const bubblegum = {
-  name: 'Bubblegum',
+  name: 'Legacy Bubblegum',
   headline: 'Compressed NFTs',
-  description: 'NFTs that scale to new orders of magnitude.',
+  description: 'NFTs that scale.',
   path: 'bubblegum',
   navigationMenuCatergory: 'MPL',
   icon: <ArchiveBoxIcon />,
