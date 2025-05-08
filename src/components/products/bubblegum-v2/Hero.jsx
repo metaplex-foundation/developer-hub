@@ -1,5 +1,4 @@
-import { Hero as BaseHero } from '@/components/Hero'
-import { HeroCode } from '@/components/HeroCode'
+import { Hero as BaseHero } from '@/components/Hero';
 
 export function Hero({ page }) {
   return (
