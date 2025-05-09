@@ -82,9 +82,7 @@ await mintV2(umi, {
 
 If you do not have a Collection yet, you can create one using the [`@metaplex-foundation/mpl-core` library](https://developers.metaplex.com/core/collections#creating-a-collection-with-plugins). Keep in mind that you need to add the `BubblegumV2` Plugin to the collection, too.
 npm install @metaplex-foundation/mpl-core
-```
-
-And create a Collection like so:
+nd create a Collection like so:
 
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -101,6 +99,7 @@ await createCollection(umi, {
       },
     ],
   }).sendAndConfirm(umi)
+```
 
 {% /totem-accordion %}
 
