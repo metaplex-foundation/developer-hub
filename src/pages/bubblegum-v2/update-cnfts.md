@@ -10,11 +10,11 @@ The metadata can be updated by one of two authorities, depending on if the compr
 
 ## Update Authority
 
-There are two possible update authorities for a cNFT which are either the tree owner or the collection authority if the cNFT belongs to a collection.
+A cNFT has two possible update authorities: the tree owner, or (if it belongs to a collection) the collection authority.
 
 ### Collection Authority
 
-If your cNFT belongs to a collection then the update authority of that cNFT will be the authority of the collection. When updating the cNFT you will need to pass in a `coreCollection` arg to the update function.
+If your cNFT belongs to a collection, then the update authority of that cNFT will be the authority of the collection. When updating the cNFT you will need to pass in a `coreCollection` arg to the update function.
 
 The authority will be inferred from the current umi identity. If the authority is different from the current umi identity, then you will either have to pass in the `authority` arg as a signer type or create a `noopSigner` for later signing.
 

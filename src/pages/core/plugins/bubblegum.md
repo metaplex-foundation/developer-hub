@@ -45,7 +45,7 @@ await createCollection(umi, {
       },
     ],
   })
-```
+await createCollection(umi, { ... });
 
 {% /dialect %}
 {% /dialect-switcher %}

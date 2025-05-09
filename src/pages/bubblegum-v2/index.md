@@ -97,7 +97,7 @@ Which brings us to an important question: where is the NFT data stored?
 
 ## Metaplex DAS API
 
-When we mint a new compressed NFT, its data is hashed and added as a new Leaf in a Merkle Tree. But there's more. Additionally, the entire NFT data is stored in the transaction that created the compressed NFT. Similarly, when a compressed NFT is updated, its updated data is, once again, saved on the transaction as a changelog. So, whilst there aren't any accounts keeping track of that data, one can look at all previous transactions in the ledger and find that information.
+When we mint a new compressed NFT, its data is hashed and added as a new Leaf in a Merkle Tree. But there's more. Additionally, the entire NFT data is stored in the transaction that created the compressed NFT. Similarly, when a compressed NFT is updated, its updated data is, once again, saved on the transaction as a changelog. So, while there aren't any accounts keeping track of that data, one can look at all previous transactions in the ledger and find that information.
 
 {% diagram %}
 
