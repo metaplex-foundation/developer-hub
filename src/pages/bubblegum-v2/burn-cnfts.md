@@ -14,6 +14,10 @@ Note that, since this instruction replaces the leaf on the Bubblegum Tree, addit
 If you encounter transaction size errors, consider using `{ truncateCanopy: true }` with `getAssetWithProof`. See the [FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments) for details.
 {% /callout %}
 
+{% callout title="Collections " type="note" %}
+If the cNFT is part of a collection, the `coreCollection` parameter must be passed.
+{% /callout %}
+
 {% dialect-switcher title="Burn a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}

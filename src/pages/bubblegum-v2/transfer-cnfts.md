@@ -47,6 +47,8 @@ await transferV2(umi, {
   ...assetWithProof,
   authority: leafOwnerA,
   newLeafOwner: leafOwnerB.publicKey,
+  // If the cNFT is part of a collection, pass the core collection.
+  //coreCollection: coreCollection.publicKey, 
 }).sendAndConfirm(umi)
 ```
 
@@ -63,6 +65,8 @@ await transferV2(umi, {
   ...assetWithProof,
   authority: delegateAuthority, // <- The delegated authority signs the transaction.
   newLeafOwner: leafOwnerB.publicKey,
+  // If the cNFT is part of a collection, pass the core collection.
+  //coreCollection: coreCollection.publicKey, 
 }).sendAndConfirm(umi)
 ```
 

@@ -8,7 +8,7 @@ description: Learn how to create and fetch new Merkle Trees that can hold compre
 
 Whilst the data of Compressed NFTs is stored inside transactions and not onchain accounts, we still need some onchain accounts to keep track of the Merkle Tree and its configuration. As such, before we can start minting Compressed NFTs, we need to create two accounts:
 
-- A **Merkle Tree v2 account**. This account holds a generic Merkle Tree that can be used to verify the authenticity of any type of data. It is owned by the [MPL Account Compression Program](https://github.com/metaplex-foundation/mpl-account-compression) forked from the [SPL Account Compression Program](https://spl.solana.com/account-compression). In our case, we will use it to verify the authenticity of Compressed NFTs.
+- A **Merkle Tree account**. This account holds a generic Merkle Tree that can be used to verify the authenticity of any type of data. It is owned by the [MPL Account Compression Program](https://github.com/metaplex-foundation/mpl-account-compression) forked from the [SPL Account Compression Program](https://spl.solana.com/account-compression). In our case, we will use it to verify the authenticity of Compressed NFTs.
 - A **TreeConfigV2 account**. This second account is a PDA derived from the address of the Merkle Tree account. It allows us to store additional configurations for the Merkle Tree that are specific to Compressed NFTs — e.g. the tree creator, the number of minted cNFTs, etc.
 
 With these two accounts, we have everything we need to start minting Compressed NFTs. Note that, we will refer to Merkle Tree accounts with associated Tree Config accounts as **Bubblegum Trees**.
@@ -163,6 +163,8 @@ The Tree Config account contains data specific to Compressed NFTs. It stores:
 - The **Total Capacity** of the Bubblegum Tree which is the maximum number of cNFTs that can be minted from the tree.
 - The **Number Minted** which keeps track of the number of cNFTs minted into the tree. This value is important as it is used as a **Nonce** ("number used once") value for operations to ensure the Merkle tree leaves are unique. Thus, this nonce acts as a tree-scoped unique identifier of the asset.
 - The **Is Public** parameter which indicates whether or not anyone can mint cNFTs from the tree.
+- **Is Decompressible** is only valid for Bubblegum V1.
+- **Version** is the version of the LeafSchema that can be used. 
 
 Here is how one can fetch all of that data using our libraries:
 
