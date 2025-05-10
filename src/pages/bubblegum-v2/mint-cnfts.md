@@ -105,3 +105,31 @@ await createCollection(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+### Get Asset ID and Leaf Schema from mint transaction {% #get-leaf-schema-from-mint-transaction %}
+
+You can retrieve the leaf and determine the asset ID from the `mintV2` transaction using the `parseLeafFromMintV2Transaction` helper. This function parses the Transaction, therefore you have to make sure that it has been finalized before calling `parseLeafFromMintV2Transaction`.
+
+{% callout type="note" title="Transaction finalization" %}
+Please make sure that the transaction has been finalized before calling `parseLeafFromMintV2Transaction`.
+{% /callout %}
+
+{% dialect-switcher title="Get leaf schema from mint transaction" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import {
+    mintV2,
+    parseLeafFromMintV2Transaction
+} from "@metaplex-foundation/mpl-bubblegum";
+
+const { signature } = await mintV2(umi, {
+  // ... see details above
+}).sendAndConfirm(umi);
+
+const leaf = await parseLeafFromMintV2Transaction(umi, signature);
+const assetId = leaf.id;
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
