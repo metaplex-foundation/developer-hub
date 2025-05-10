@@ -32,10 +32,9 @@ To allow the above features to work, Bubblegum V2 introduces a new leaf schema (
 
 Bubblegum V2 introduces a new leaf schema (LeafSchemaV2) which supports the additional features while maintaining backward compatibility. This new schema allows for:
 
-- Integrating with MPL-Core collections instead of traditional token metadata
+- Integration with MPL-Core collections instead of traditional token metadata
 - Supporting freezing/thawing functionality
 - Enabling soulbound capabilities
-
 Projects can choose to use the original leaf Schema by using Legacy Bubblegum or the new v2 schema with Bubblegum V2 depending on their requirements.
 
 ## Merkle Trees, leaves and proofs

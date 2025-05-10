@@ -26,8 +26,8 @@ The main parameters of the **mintV2** instruction are:
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { none } from '@metaplex-foundation/umi'
-import { mintV2 } from '@metaplex-foundation/mpl-bubblegum'
+import { none } from '@metaplex-foundation/umi';
+import { mintV2 } from '@metaplex-foundation/mpl-bubblegum';
 
 await mintV2(umi, {
   leafOwner: umi.identity.publicKey,
@@ -39,7 +39,7 @@ await mintV2(umi, {
     collection: none(),
     creators: [],
   },
-}).sendAndConfirm(umi)
+}).sendAndConfirm(umi);
 ```
 
 {% /dialect %}
@@ -59,8 +59,8 @@ Note that the **Metadata** parameter must contain the **Collection** Public Key.
 {% totem %}
 
 ```ts
-import { some } from '@metaplex-foundation/umi'
-import { mintV2 } from '@metaplex-foundation/mpl-bubblegum'
+import { some } from '@metaplex-foundation/umi';
+import { mintV2 } from '@metaplex-foundation/mpl-bubblegum';
 
 await mintV2(umi, {
   collectionAuthority: umi.identity,
@@ -74,18 +74,18 @@ await mintV2(umi, {
     collection: some(collectionSigner.publicKey),
     creators: [],
   },
-}).sendAndConfirm(umi)
+}).sendAndConfirm(umi);
 ```
 
 {% totem-accordion title="Create a MPL-Core Collection" %}
 
 If you do not have a Collection yet, you can create one using the [`@metaplex-foundation/mpl-core` library](https://developers.metaplex.com/core/collections#creating-a-collection-with-plugins). Keep in mind that you need to add the `BubblegumV2` Plugin to the collection, too.
 npm install @metaplex-foundation/mpl-core
-nd create a Collection like so:
+And create a Collection like so:
 
 ```ts
-import { generateSigner } from '@metaplex-foundation/umi'
-import { createCollection } from '@metaplex-foundation/mpl-core'
+import { generateSigner } from '@metaplex-foundation/umi';
+import { createCollection } from '@metaplex-foundation/mpl-core';
 
 const collectionSigner = generateSigner(umi)
 await createCollection(umi, {
@@ -97,7 +97,7 @@ await createCollection(umi, {
         type: "BubblegumV2",
       },
     ],
-  }).sendAndConfirm(umi)
+  }).sendAndConfirm(umi);
 ```
 
 {% /totem-accordion %}
