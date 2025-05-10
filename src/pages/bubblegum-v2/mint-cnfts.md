@@ -16,7 +16,7 @@ The main parameters of the **mintV2** instruction are:
 
 - **Merkle Tree**: The Merkle Tree address from which the Compressed NFT will be minted.
 - **Tree Creator Or Delegate**: The authority allowed to mint from the Bubblegum Tree — this can either be the creator or the delegate of the tree. This authority must sign the transaction. In the case of a public tree, this parameter can be any authority, but must still be a signer.
-- **Leaf Owner**: The owner of the Compressed NFT that will be minted.
+- **Leaf Owner**: The owner of the Compressed NFT that will be minted. It defaults to the payer of the transaction.
 - **Leaf Delegate**: A delegate authority allowed to manage the minted cNFT, if any. Otherwise, it is set to the Leaf Owner.
 - **Collection Authority**: The authority allowed to manage the given Collection.
 - **Core Collection**: The MPL-Core Collection NFT to which the Compressed NFT will be added.

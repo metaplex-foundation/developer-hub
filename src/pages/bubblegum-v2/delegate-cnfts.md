@@ -19,7 +19,7 @@ Let's see how we can approve and revoke Delegate Authorities for our Compressed 
 
 To approve or replace a Delegate Authority, the owner must send a **Delegate** instruction. This instruction accepts the following parameters:
 
-- **Leaf Owner**: The current owner of the Compressed NFT as a Signer.
+- **Leaf Owner**: The current owner of the Compressed NFT as a Signer. It defaults to the payer of the transaction.
 - **Previous Leaf Delegate**: The previous Delegate Authority, if any. Otherwise, this should be set to the **Leaf Owner**.
 - **New Leaf Delegate**: The new Delegate Authority to approve.
 

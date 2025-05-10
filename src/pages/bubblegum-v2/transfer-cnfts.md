@@ -4,7 +4,7 @@ metaTitle: Transferring Compressed NFTs | Bubblegum v2
 description: Learn how to transfer compressed NFTs on Bubblegum
 ---
 
-The **transferV2** instruction can be used to transfer a Compressed NFT from one owner to another. To authorize the transfer, either the current owner or the delegate authority — if any — must sign the transaction.
+The **transferV2** instruction can be used to transfer a Compressed NFT from one owner to another. To authorize the transfer, either the current owner or the delegate authority — if any — must sign the transaction. The delegated authority can either be a leaf delegate or a permanent transfer delegate.
 
 Note that this instruction updates the Compressed NFT and therefore replaces the leaf on the Bubblegum Tree. This means additional parameters must be provided to verify the integrity of the Compressed NFT. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
@@ -16,8 +16,9 @@ If you encounter transaction size errors, consider using `{ truncateCanopy: true
 
 The instruction accepts the following parameters:
 
-- **Leaf Owner**: The current owner of the Compressed NFT
+- **Leaf Owner**: The current owner of the Compressed NFT. It defaults to the payer of the transaction.
 - **Leaf Delegate**: The current owner of the Compressed NFT and its delegate authority if any. One of these must sign the transaction.
+- **Authority**: An optional authority that signs the transaction. It can be the Leaf Owner or the Permanent Transfer Delegate and defaults to the `payer` of the transaction.
 - **New Leaf Owner**: The address of the Compressed NFT's new owner
 - **Merkle Tree**: The address of the Bubblegum Tree
 - **Root**: The current root of the Bubblegum Tree
@@ -67,6 +68,24 @@ await transferV2(umi, {
   newLeafOwner: leafOwnerB.publicKey,
   // If the cNFT is part of a collection, pass the core collection.
   //coreCollection: coreCollection.publicKey, 
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="Using a permanent transfer delegate" %}
+
+```ts
+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId, {
+  truncateCanopy: true,
+})
+await transferV2(umi, {
+  ...assetWithProof,
+  authority: permanentTransferDelegate, // <- The delegated authority signs the transaction.
+  newLeafOwner: leafOwnerB.publicKey,
+  coreCollection: coreCollection.publicKey, 
 }).sendAndConfirm(umi)
 ```
 
