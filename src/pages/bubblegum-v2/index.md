@@ -37,6 +37,8 @@ Bubblegum V2 introduces a new leaf schema (LeafSchemaV2) which supports the addi
 - Enabling soulbound capabilities
 Projects can choose to use the original leaf Schema by using Legacy Bubblegum or the new v2 schema with Bubblegum V2 depending on their requirements.
 
+To use the new `LeafSchemaV2`, a V2 Merkle Tree has to be used that needs to be created using the [`createTreeV2` instruction](/bubblegum-v2/create-trees). V1 Merkle Trees do not support the new leaf schema and V2 Merkle Trees are not compatible with V1 leaves.
+
 ## Merkle Trees, leaves and proofs
 
 Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum-v2/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by [hashing the data of the compressed NFT](/bubblegum-v2/hashed-nft-data).
