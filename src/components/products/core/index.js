@@ -3,9 +3,9 @@ import {
   documentationSection,
   guidesSection,
   referencesSection,
-} from '@/shared/sections'
-import { StopCircleIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
+} from '@/shared/sections';
+import { StopCircleIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const core = {
   name: 'Core',
@@ -159,6 +159,10 @@ export const core = {
             {
               title: 'AddBlocker Plugin',
               href: '/core/plugins/addBlocker',
+            },
+            {
+              title: 'Bubblegum Plugin',
+              href: '/core/plugins/bubblegum',
             },
             {
               title: 'Edition Plugin',

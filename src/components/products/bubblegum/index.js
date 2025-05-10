@@ -2,14 +2,14 @@ import {
   documentationSection,
   guidesSection,
   referencesSection
-} from '@/shared/sections'
-import { ArchiveBoxIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
+} from '@/shared/sections';
+import { ArchiveBoxIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const bubblegum = {
-  name: 'Bubblegum',
+  name: 'Bubblegum v1 (legacy)',
   headline: 'Compressed NFTs',
-  description: 'NFTs that scale to new orders of magnitude.',
+  description: 'NFTs that scale.',
   path: 'bubblegum',
   navigationMenuCatergory: 'MPL',
   icon: <ArchiveBoxIcon />,
@@ -36,17 +36,23 @@ export const bubblegum = {
           ],
         },
         {
-          title: 'Features',
+          title: 'General Features',
           links: [
             {
               title: 'Creating Bubblegum Trees',
               href: '/bubblegum/create-trees',
             },
+            { title: 'Fetching cNFTs', href: '/bubblegum/fetch-cnfts' },
+            { title: 'Delegating Trees', href: '/bubblegum/delegate-trees' },
+          ],
+        },
+        {
+          title: 'Bubblegum',
+          links: [
             {
               title: 'Minting Compressed NFTs (cNFTs)',
               href: '/bubblegum/mint-cnfts',
             },
-            { title: 'Fetching cNFTs', href: '/bubblegum/fetch-cnfts' },
             { title: 'Transferring cNFTs', href: '/bubblegum/transfer-cnfts' },
             { title: 'Updating cNFTs', href: '/bubblegum/update-cnfts' },
             { title: 'Burning cNFTs', href: '/bubblegum/burn-cnfts' },
@@ -55,7 +61,6 @@ export const bubblegum = {
               href: '/bubblegum/decompress-cnfts',
             },
             { title: 'Delegating cNFTs', href: '/bubblegum/delegate-cnfts' },
-            { title: 'Delegating Trees', href: '/bubblegum/delegate-trees' },
             {
               title: 'Verifying Collections',
               href: '/bubblegum/verify-collections',
@@ -68,16 +73,16 @@ export const bubblegum = {
           links: [
             {
               title: 'Concurrent Merkle Trees',
-              href: '/bubblegum/concurrent-merkle-trees',
+              href: '/bubblegum-v2/concurrent-merkle-trees',
             },
             {
               title: 'Storing and Indexing NFT Data',
-              href: '/bubblegum/stored-nft-data',
+              href: '/bubblegum-v2/stored-nft-data',
             },
-            { title: 'Hashing NFT Data', href: '/bubblegum/hashed-nft-data' },
+            { title: 'Hashing NFT Data', href: '/bubblegum-v2/hashed-nft-data' },
             {
               title: 'Merkle Tree Canopy',
-              href: '/bubblegum/merkle-tree-canopy',
+              href: '/bubblegum-v2/merkle-tree-canopy',
             },
           ],
         },
