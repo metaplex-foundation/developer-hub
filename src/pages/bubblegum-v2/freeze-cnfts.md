@@ -8,9 +8,9 @@ With Bubblegum V2, we can freeze and thaw Compressed NFTs. This is useful for va
 
 ## Freezing a Compressed NFT
 
-To freeze a Compressed NFT, we can use the `freezeV2` instruction. This instruction can be used like this:
+To freeze a Compressed NFT that has been delegated to a leaf delegate before, we can use the `freezeV2` instruction. If it has not been delegated yet see `delegateAndFreezeV2` below. The `freezeV2` instruction can be used like this:
 
-{% dialect-switcher title="Freeze a Compressed NFT" %}
+{% dialect-switcher title="Freeze a Compressed NFT as a leaf delegate" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 ```js
@@ -23,10 +23,30 @@ const assetWithProof = await getAssetWithProof(umi, assetId);
 await freezeV2(umi, {
   ...assetWithProof,
   leafOwner: umi.identity.publicKey,
-  coreCollection: collectionSigner.publicKey,
+  authority: leafDelegate, // this would default to the payer
+  leafDelegate: leafDelegate.publicKey,
+  // If the cNFT is part of a collection, pass the collection address.
+  //coreCollection: collectionSigner.publicKey,
 }).sendAndConfirm(umi);
 ```
 {% /totem %}
+{% totem-accordion title="as a permanent freeze delegate" %}
+```js
+import {
+  getAssetWithProof,
+  freezeV2,
+} from '@metaplex-foundation/mpl-bubblegum';
+
+const assetWithProof = await getAssetWithProof(umi, assetId);
+await freezeV2(umi, {
+  ...assetWithProof,
+  leafOwner: umi.identity.publicKey,
+  authority: permanentFreezeDelegate,
+  leafDelegate: permanentFreezeDelegate.publicKey,
+  coreCollection: collectionSigner.publicKey,
+}).sendAndConfirm(umi);
+```
+{% /totem-accordion %}
 {% /dialect %}
 {% /dialect-switcher %}
 
@@ -61,7 +81,7 @@ await delegateAndFreezeV2(umi, {
 
 To thaw a Compressed NFT, we can use the `thawV2` instruction. This instruction can be used like this:
 
-{% dialect-switcher title="Thaw a Compressed NFT" %}
+{% dialect-switcher title="Thaw a Compressed NFT as a leaf delegate" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 ```js
@@ -80,6 +100,28 @@ await thawV2(umi, {
 {% /totem %}    
 {% /dialect %}
 {% /dialect-switcher %}
+
+If the cNFT has been delegated to a permanent freeze delegate, we can thaw it like this:
+
+{% dialect-switcher title="Thaw a Compressed NFT as a permanent freeze delegate" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+```js
+import {
+  getAssetWithProof,
+  thawV2,
+} from '@metaplex-foundation/mpl-bubblegum';
+
+const assetWithProof = await getAssetWithProof(umi, assetId);
+await thawV2(umi, {
+  ...assetWithProof,
+  authority: permanentFreezeDelegate,
+}).sendAndConfirm(umi);
+```
+{% /totem %}    
+{% /dialect %}
+{% /dialect-switcher %}
+
 
 ## Thaw and Revoke a Delegate Authority
 
