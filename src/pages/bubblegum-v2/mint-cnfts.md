@@ -20,7 +20,7 @@ The main parameters of the **mintV2** instruction are:
 - **Leaf Delegate**: A delegate authority allowed to manage the minted cNFT, if any. Otherwise, it is set to the Leaf Owner.
 - **Collection Authority**: The authority allowed to manage the given Collection.
 - **Core Collection**: The MPL-Core Collection NFT to which the Compressed NFT will be added.
-- **Metadata**: The metadata of the Compressed NFT that will be minted. It contains information such as the **Name** of the NFT, its **URI**, its **Collection**, its **Creators**, etc.
+- **Metadata**: The metadata of the Compressed NFT that will be minted. It contains information such as the **Name** of the NFT, its **URI**, its **Collection**, its **Creators**, etc. In Bubblegum V2 the metadata is using `MetadataArgsV2` which excludes unneeded fields like `uses` and the `verified` flag for the collection.
 
 {% dialect-switcher title="Mint a Compressed NFT without a Collection" %}
 {% dialect title="JavaScript" id="js" %}
