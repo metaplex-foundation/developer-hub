@@ -11,7 +11,7 @@ Note that it is possible to mint a Compressed NFT directly into a collection by 
 
 The MPL-Core Collection has to contain the [`BubblegumV2` plugin](/core/plugins/bubblegum).
 
-The following sections show how to set and remove a collection from a cNFT in single-step transactions. It is also possible to do both operations in a single instruction when adding the `coreCollection` and `newCoreCollection` parameters. If both collection authorities are not the same wallet both have to sign.
+The following sections show how to set and remove a collection from a cNFT in single-step transactions. It is also possible to do both operations in a single instruction when adding the `coreCollection` and `newCoreCollection` parameters. If both collection authorities are not the same wallet, both have to sign.
 
 ## Set the Collection of a Compressed NFT
 The **setCollectionV2** instruction can be used to set the collection of a cNFT. It can also be used to remove the collection from a cNFT or change the collection of a cNFT.
