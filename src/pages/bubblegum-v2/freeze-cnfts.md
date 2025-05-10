@@ -8,7 +8,7 @@ With Bubblegum V2, we can freeze and thaw Compressed NFTs. This is useful for va
 
 ## Freezing a Compressed NFT
 
-To freeze a Compressed NFT that has been delegated to a leaf delegate before, we can use the `freezeV2` instruction. If it has not been delegated yet see `delegateAndFreezeV2` below. The `freezeV2` instruction can be used like this:
+To freeze a Compressed NFT that has been delegated to a leaf delegate before, we can use the `freezeV2` instruction. If it has not been delegated yet, see `delegateAndFreezeV2` below. The `freezeV2` instruction can be used like this:
 
 {% dialect-switcher title="Freeze a Compressed NFT as a leaf delegate" %}
 {% dialect title="JavaScript" id="js" %}
@@ -69,7 +69,7 @@ const assetWithProof = await getAssetWithProof(umi, assetId);
 await delegateAndFreezeV2(umi, {
   ...assetWithProof,
   leafOwner: umi.identity.publicKey,
-  newLeafDelegate
+  newLeafDelegate,
 }).sendAndConfirm(umi);
 
 ```

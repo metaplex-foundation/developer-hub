@@ -87,7 +87,7 @@ And create a Collection like so:
 import { generateSigner } from '@metaplex-foundation/umi';
 import { createCollection } from '@metaplex-foundation/mpl-core';
 
-const collectionSigner = generateSigner(umi)
+const collectionSigner = generateSigner(umi);
 await createCollection(umi, {
     collection: collectionSigner,
     name: "My Collection",
@@ -119,9 +119,9 @@ Please make sure that the transaction has been finalized before calling `parseLe
 
 ```ts
 import {
-    mintV2,
-    parseLeafFromMintV2Transaction
-} from "@metaplex-foundation/mpl-bubblegum";
+  mintV2,
+  parseLeafFromMintV2Transaction,
+} from '@metaplex-foundation/mpl-bubblegum';
 
 const { signature } = await mintV2(umi, {
   // ... see details above

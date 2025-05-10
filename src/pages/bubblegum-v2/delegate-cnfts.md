@@ -32,7 +32,7 @@ Additionally, more parameters must be provided to verify the integrity of the Co
 ```ts
 import { getAssetWithProof, delegate } from '@metaplex-foundation/mpl-bubblegum';
 
-const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
+const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true });
 await delegate(umi, {
   ...assetWithProof,
   leafOwner,

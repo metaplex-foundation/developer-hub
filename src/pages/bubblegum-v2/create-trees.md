@@ -172,10 +172,9 @@ Here is how one can fetch all of that data using our libraries:
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { fetchTreeConfigFromSeeds } from '@metaplex-foundation/mpl-bubblegum'
+import { fetchTreeConfigFromSeeds } from '@metaplex-foundation/mpl-bubblegum';
 
-const treeConfig = await fetchTreeConfigFromSeeds(umi, { merkleTree })
-```
+const treeConfig = await fetchTreeConfigFromSeeds(umi, { merkleTree });
 
 {% /dialect %}
 {% /dialect-switcher %}

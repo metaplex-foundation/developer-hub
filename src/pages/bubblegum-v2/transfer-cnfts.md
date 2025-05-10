@@ -34,9 +34,8 @@ When using JavaScript we suggest to use the `getAssetWithProof` function first t
 {% totem %}
 
 ```ts
--import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
-+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
-
+-import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
++import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum';
 const assetWithProof = await getAssetWithProof(umi, assetId, {
   truncateCanopy: true,
 })
