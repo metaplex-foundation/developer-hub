@@ -72,7 +72,7 @@ const { signature } = await mintV1(umi, {
   leafOwner,
   merkleTree,
   metadata,
-}).sendAndConfirm(umi, { confirm: { commitment: "confirmed" } });
+}).sendAndConfirm(umi, { confirm: { commitment: "finalized" } });
 
 const leaf: LeafSchema = await parseLeafFromMintV1Transaction(umi, signature);
 const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
