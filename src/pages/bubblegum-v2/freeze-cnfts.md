@@ -8,7 +8,7 @@ With Bubblegum V2, we can freeze and thaw Compressed NFTs. This is useful for va
 
 ## Freezing a Compressed NFT
 
-To freeze a Compressed NFT, we can use the `freezeV2` instruction. This instruction accepts the following parameters:
+To freeze a Compressed NFT, we can use the `freezeV2` instruction. This instruction can be used like this:
 
 {% dialect-switcher title="Freeze a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
@@ -17,7 +17,7 @@ To freeze a Compressed NFT, we can use the `freezeV2` instruction. This instruct
 import {
   getAssetWithProof,
   freezeV2,
-} from '@metaplex-foundation/mpl-bubblegum'
+} from '@metaplex-foundation/mpl-bubblegum';
 
 const assetWithProof = await getAssetWithProof(umi, assetId);
 await freezeV2(umi, {
@@ -30,9 +30,36 @@ await freezeV2(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## Delegate and Freeze a Compressed NFT
+
+To freeze a Compressed NFT, we can use the `delegateAndFreezeV2` instruction. This instruction can be used like this:
+
+{% dialect-switcher title="Delegate and Freeze a Compressed NFT" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+```js
+import {
+  getAssetWithProof,
+  delegateAndFreezeV2,
+} from '@metaplex-foundation/mpl-bubblegum';
+
+// newLeafDelegate should be a publicKey that will be able to thaw the cNFT later.
+
+const assetWithProof = await getAssetWithProof(umi, assetId);
+await delegateAndFreezeV2(umi, {
+  ...assetWithProof,
+  leafOwner: umi.identity.publicKey,
+  newLeafDelegate
+}).sendAndConfirm(umi);
+
+```
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
 ## Thawing a Compressed NFT
 
-To thaw a Compressed NFT, we can use the `thawV2` instruction. This instruction accepts the following parameters:
+To thaw a Compressed NFT, we can use the `thawV2` instruction. This instruction can be used like this:
 
 {% dialect-switcher title="Thaw a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
@@ -41,7 +68,7 @@ To thaw a Compressed NFT, we can use the `thawV2` instruction. This instruction 
 import {
   getAssetWithProof,
   thawV2,
-} from '@metaplex-foundation/mpl-bubblegum'
+} from '@metaplex-foundation/mpl-bubblegum';
 
 const assetWithProof = await getAssetWithProof(umi, assetId);
 // delegateAuthority should be a Signer that has been approved as a delegate authority for the cNFT.
@@ -56,7 +83,7 @@ await thawV2(umi, {
 
 ## Thaw and Revoke a Delegate Authority
 
-To thaw and revoke a Delegate Authority at the same time, we can use the `thawAndRevokeV2` instruction. This instruction accepts the following parameters:
+To thaw and revoke a Delegate Authority at the same time, we can use the `thawAndRevokeV2` instruction. This instruction can be used like this:
 
 {% dialect-switcher title="Thaw and Revoke a Delegate Authority" %}
 {% dialect title="JavaScript" id="js" %}
@@ -65,7 +92,7 @@ To thaw and revoke a Delegate Authority at the same time, we can use the `thawAn
 import {
   getAssetWithProof,
   thawAndRevokeV2,
-} from '@metaplex-foundation/mpl-bubblegum'
+} from '@metaplex-foundation/mpl-bubblegum';
 
 // delegateAuthority should be a Signer that has been approved as a delegate authority for the cNFT.
 const assetWithProof = await getAssetWithProof(umi, assetId);
@@ -88,7 +115,7 @@ To make a cNFT Soulbound the cNFT has to be part of a [mpl-core collection](/cor
 import {
   getAssetWithProof,
   setNonTransferableV2,
-} from '@metaplex-foundation/mpl-bubblegum'
+} from '@metaplex-foundation/mpl-bubblegum';
 
 const assetWithProof = await getAssetWithProof(umi, assetId);
 

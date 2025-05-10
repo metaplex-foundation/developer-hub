@@ -52,7 +52,7 @@ Below are our recommended tree settings for compatibility within the Solana ecos
 | 67,108,864      | 26         | 17           | 2048               | 70.8213   | 0.00000606    |
 | 1,073,741,824   | 30         | 17           | 2048               | 72.6468   | 0.00000507    |
 
-The max depths of trees are as follows.
+The max depths of trees are as follows:
 
   {% totem %}
   {% totem-accordion title="Max Depth / Max Buffer Size Table" %}
