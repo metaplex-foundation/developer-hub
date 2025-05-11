@@ -175,6 +175,7 @@ Here is how one can fetch all of that data using our libraries:
 import { fetchTreeConfigFromSeeds } from '@metaplex-foundation/mpl-bubblegum';
 
 const treeConfig = await fetchTreeConfigFromSeeds(umi, { merkleTree });
+```
 
 {% /dialect %}
 {% /dialect-switcher %}
