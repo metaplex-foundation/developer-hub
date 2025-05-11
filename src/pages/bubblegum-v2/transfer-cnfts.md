@@ -4,7 +4,7 @@ metaTitle: Transferring Compressed NFTs | Bubblegum v2
 description: Learn how to transfer compressed NFTs on Bubblegum
 ---
 
-The **transferV2** instruction can be used to transfer a Compressed NFT from one owner to another. To authorize the transfer, either the current owner or the delegate authority — if any — must sign the transaction. The delegated authority can either be a leaf delegate or a permanent transfer delegate.
+The **transferV2** instruction can be used to transfer a Compressed NFT from one owner to another. To authorize the transfer, either the current owner or the delegate authority — if any — must sign the transaction. The delegated authority can either be a leaf delegate or the `permanentTransferDelegate` of the collection.
 
 Note that this instruction updates the Compressed NFT and therefore replaces the leaf on the Bubblegum Tree. This means additional parameters must be provided to verify the integrity of the Compressed NFT. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
@@ -18,7 +18,7 @@ The instruction accepts the following parameters:
 
 - **Leaf Owner**: The current owner of the Compressed NFT. It defaults to the payer of the transaction.
 - **Leaf Delegate**: The current owner of the Compressed NFT and its delegate authority if any. One of these must sign the transaction.
-- **Authority**: An optional authority that signs the transaction. It can be the Leaf Owner or the Permanent Transfer Delegate and defaults to the `payer` of the transaction.
+- **Authority**: An optional authority that signs the transaction. It can be the Leaf Owner or the `permanentTransferDelegate` and defaults to the `payer` of the transaction.
 - **New Leaf Owner**: The address of the Compressed NFT's new owner
 - **Merkle Tree**: The address of the Bubblegum Tree
 - **Root**: The current root of the Bubblegum Tree
@@ -26,6 +26,7 @@ The instruction accepts the following parameters:
 - **Creator Hash**: The hash of the creators of the Compressed NFT
 - **Nonce**: The nonce of the Compressed NFT
 - **Index**: The index of the Compressed NFT
+- **Collection**: The core collection of the Compressed NFT (if the cNFT is part of a collection)
 
 When using JavaScript we suggest to use the `getAssetWithProof` function first to fetch the parameters and then pass them to the `transferV2` instruction.
 
@@ -34,8 +35,7 @@ When using JavaScript we suggest to use the `getAssetWithProof` function first t
 {% totem %}
 
 ```ts
--import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
-+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum';
+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum';
 const assetWithProof = await getAssetWithProof(umi, assetId, {
   truncateCanopy: true,
 })
