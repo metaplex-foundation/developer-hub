@@ -41,7 +41,7 @@ npm i @metaplex-foundation/umi-bundle-defaults
 ```
 
 ```js
-npm i @metaplex-foundation/mpl-toolbox;
+npm i @metaplex-foundation/mpl-toolbox
 ```
 
 ### Imports and Wrapper Function
@@ -61,7 +61,7 @@ import fs from 'fs'
 import path from 'path'
 
 const transferSplTokens = async () => {
-  const umi = createUmi('https://api.devnet.solana.com').use(mplToolbox())
+  const umi = createUmi("https://api.devnet.solana.com").use(mplToolbox())
 
   // import a wallet that has the SPL Token you want to transfer
   const walletFile = fs.readFileSync('./keypair.json')
@@ -101,7 +101,7 @@ const transferSplTokens = async () => {
   const res = await transferTokens(umi, {
     source: sourceTokenAccount,
     destination: destinationTokenAccount,
-    amount: 10000, // amount of tokens to transfer*
+    amount: 10000, // amount of tokens to transfer
   }).sendAndConfirm(umi);
 
   // Finally we can deserialize the signature that we can check on chain.

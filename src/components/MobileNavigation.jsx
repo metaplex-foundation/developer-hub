@@ -105,12 +105,12 @@ export function MobileNavigation({ page }) {
           >
             <ComputerDesktopIcon height={20} /> Programs and Tools
           </Link>
-          <Link
+          {/* <Link
             href="/aura"
             className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
           >
             <SparklesIcon height={20} /> Aura
-          </Link>
+          </Link> */}
 
           <Link
             href="/guides"

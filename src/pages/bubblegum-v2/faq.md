@@ -1,8 +1,19 @@
 ---
 title: FAQ
-metaTitle: FAQ | Bubblegum
+metaTitle: FAQ | Bubblegum V2
 description: Frequently asked questions about Bubblegum.
 ---
+
+## What is Bubblegum V2?
+
+Bubblegum V2 is a new iteration of the Bubblegum program that introduces several improvements and new features.
+It is part of the known Bubblegum program, but the instructions and data structures are different.
+With Bubblegum V2 cNFTs are grouped into collections using MPL-Core Collections instead of Metaplex Token Metadata Collections. It also introduces new features like freezing, thawing, and soulbound NFTs and additional features like:
+- **Freeze and Thaw Functionality**: Project creators can now freeze and thaw cNFTs, providing greater control over their assets for various use cases such as preventing transfers during specific events or implementing vesting mechanics.
+- **MPL-Core Collections Integration**: Bubblegum V2 NFTs can now be added to MPL-Core collections instead of being limited to token metadata collections, allowing for greater flexibility and integration with the broader Metaplex ecosystem.
+- **Royalty Enforcement**: Since Bubblegum V2 is using [MPL-Core](https://docs.metaplex.com/core/overview) Collections, it is possible to enforce royalties on cNFTs e.g. using a `ProgramDenyList`.
+- **Soulbound NFTs**: cNFTs can now be made soulbound (non-transferrable), permanently binding them to their owner's wallet. This is perfect for credentials, proof of attendance, identity verification, and more. It requires the `PermanentFreezeDelegate` plugin to be enabled on the collection.
+- **Allow Permanent Transfer**: The permanent transfer delegate can now transfer the cNFT to a new owner without interaction of the leaf owner if the `PermanentTransferDelegate` plugin is enabled on the collection.
 
 ## How do I find the arguments needed for operations such as transfer, delegate, burn, etc? {% #replace-leaf-instruction-arguments %}
 
@@ -39,13 +50,13 @@ import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
 const assetWithProof = await getAssetWithProof(umi, assetId, 
 // {  truncateCanopy: true } // optional to prune the proofs 
 );
-await transfer(umi, {
+await transferV2(umi, {
   ...assetWithProof,
   leafOwner: leafOwnerA, // As a signer.
   newLeafOwner: leafOwnerB.publicKey,
 }).sendAndConfirm(umi);
 
-await transfer(umi, {
+await transferV2(umi, {
   ...assetWithProof,
   leafOwner: leafOwnerA, // As a signer.
   newLeafOwner: leafOwnerB.publicKey,

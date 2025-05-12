@@ -207,6 +207,14 @@ isMutable: boolean
 
 ### Config Line Settings
 
+{% callout type="note" title="Randomness" %}
+
+Config Line Settings and Hidden Settings are mutually exclusive. Only one can be used at a time.
+
+It can be advisable to utilize Hidden Settings for the reveal mechanic, as the "random" minting process of the assets is not entirely unpredictable and can be influenced by sufficient resources and malicious intent.
+
+{% /callout %}
+
 Config Line Settings is an optional field that allows advanced options of adding your Asset data to the Core Candy Machine making the Core Candy Machine's rent cost significantly cheaper.
 
 By storing the Assets name and URI prefix into the Core Candy Machine the data required to be stored is significantly reduced as you will not be storing the same name and URI for every single Asset.
@@ -267,7 +275,7 @@ For Example given...
 
 #### isSequential
 
-Indicates whether to use a sequential index generator or not. If false the Candy Machine will mint randomly.
+Indicates whether to use a sequential index generator or not. If false the Candy Machine will mint randomly. HiddenSettings will always be sequential.
 
 #### configLineSettings
 

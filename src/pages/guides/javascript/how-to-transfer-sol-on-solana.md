@@ -7,7 +7,7 @@ created: '06-16-2024'
 updated: '06-24-2024'
 ---
 
-This guide walks will show you how to build a Javascript function that transfers SOL from one wallet to another on the Solana blockchain utilizing the Metaplex Umi client wrapper and MPL Toolbox package.
+This guide will show you how to build a Javascript function that transfers SOL from one wallet to another on the Solana blockchain utilizing the Metaplex Umi client wrapper and MPL Toolbox package.
 
 ## Prerequisite
 
@@ -40,7 +40,7 @@ npm i @metaplex-foundation/umi-bundle-defaults
 ```
 
 ```js
-npm i @metaplex-foundation/mpl-toolbox;
+npm i @metaplex-foundation/mpl-toolbox
 ```
 
 ### Imports and Wrapper Function
@@ -59,7 +59,7 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 
 // Create the wrapper function
-const transferSolana = async () => {
+const transfer = async () => {
   ///
   ///
   ///  all our code will go in here
@@ -68,7 +68,7 @@ const transferSolana = async () => {
 }
 
 // run the wrapper function
-transferSolana()
+transfer()
 ```
 
 ## Setting up Umi
@@ -80,9 +80,8 @@ This example is going to run through setting up Umi with a `generatedSigner()`. 
 If you wish to generate a new wallet/private key to test with you generate a new signer with `umi`.
 
 ```ts
-const umi = createUmi('https://api.devnet.solana.com')
-  .use(mplCore())
-  .use(irysUploader())
+const umi = createUmi("https://api.devnet.solana.com")
+  .use(mplToolbox())
 
 // Generate a new keypair signer.
 const signer = generateSigner(umi)
@@ -91,24 +90,26 @@ const signer = generateSigner(umi)
 umi.use(signerIdentity(signer))
 
 // This will airdrop SOL on devnet only for testing.
-await umi.rpc.airdrop(umi.identity.publickey)
+await umi.rpc.airdrop(umi.identity.publicKey)
 ```
 
 ### Use an Existing Wallet Stored Locally
 
 ```ts
-const umi = createUmi('https://api.devnet.solana.com')
+import fs from 'fs';
+
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplToolbox())
 
 // You will need to use fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
-const walletFile = const imageFile = fs.readFileSync('./keypair.json')
+const walletFile = fs.readFileSync('./keypair.json')
 
 // Convert your walletFile onto a keypair.
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 
 // Load the keypair into umi.
-umi.use(keypairIdentity(umiSigner));
+umi.use(keypairIdentity(keypair));
 ```
 
 ## Transferring Sol
@@ -139,7 +140,7 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 
 const transfer = async () => {
-  const umi = createUmi('https://api.devnet.solana.com').use(mplToolbox())
+  const umi = createUmi("https://api.devnet.solana.com").use(mplToolbox())
 
   const signer = generateSigner(umi)
 

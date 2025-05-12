@@ -26,7 +26,7 @@ There is ~15GB of state taken up with unused Token Metadata buffer space, which 
 
 ## Where can I resize my NFT?
 
-You can use our free UI at [resize.metaplex.com](https://resize.metaplex.com) to resize your eligible assets between now and April 25th, 2025.
+You can use our free UI at [resize.metaplex.com](https://resize.metaplex.com) to resize your eligible assets until the resize window closes. The resize window will remain open until the DAO decides on any pending proposals for how to handle the remaining excess SOL.
 
 Community builders such as [SolRip](https://solrip.io/) (free to use) and [Sol Incinerator](https://sol-incinerator.com/) (fee of 5% of the Resize amount) have created alternative tools to process the Resize instruction.
 

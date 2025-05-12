@@ -3,9 +3,9 @@ import {
   documentationSection,
   guidesSection,
   referencesSection,
-} from '@/shared/sections'
-import { StopCircleIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
+} from '@/shared/sections';
+import { StopCircleIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const core = {
   name: 'Core',
@@ -161,6 +161,10 @@ export const core = {
               href: '/core/plugins/addBlocker',
             },
             {
+              title: 'Bubblegum Plugin',
+              href: '/core/plugins/bubblegum',
+            },
+            {
               title: 'Edition Plugin',
               href: '/core/plugins/edition',
             },
@@ -272,6 +276,15 @@ export const core = {
             {
               title: 'Web2 typescript Staking Example',
               href: '/core/guides/javascript/web2-typescript-staking-example',
+            },
+          ],
+        },
+        {
+          title: 'Program Concepts',
+          links: [
+            {
+              title: 'Loyalty Card Concept Guide',
+              href: '/core/guides/loyalty-card-concept-guide',
             },
           ],
         },

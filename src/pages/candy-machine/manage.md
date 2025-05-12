@@ -16,6 +16,12 @@ Our SDKs push this even further and will associate every new Candy Machine accou
 
 Remember that a Candy Machine [must be associated with a Collection NFT](/candy-machine/settings#metaplex-certified-collections) and its update authority must authorize this operation. If you haven’t got a Collection NFT for your Candy Machine yet, our SDKs can help with that too.
 
+{% callout type="note" title="Randomness" %}
+
+It can be advisable to utilize [Hidden Settings](/candy-machine/settings#hidden-settings) for the reveal mechanic, as the "random" minting process of the assets is not entirely unpredictable and can be influenced by sufficient resources and malicious intent.
+
+{% /callout %}
+
 {% dialect-switcher title="Create a Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 

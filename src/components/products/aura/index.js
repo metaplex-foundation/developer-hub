@@ -7,7 +7,7 @@ export const aura = {
   headline: 'Indexing and Data Availability Network',
   description:
     'A data network that extends Solana and the Solana Virtual Machine (SVM)',
-  navigationMenuCatergory: 'Aura',
+  navigationMenuCatergory: 'Dev Tools',
   path: 'aura',
   icon: <SparklesIcon />,
   github: 'https://github.com/metaplex-foundation/aura/',
@@ -31,10 +31,6 @@ export const aura = {
               title: 'FAQ',
               href: '/aura/faq',
             },
-            {
-              title: 'Access and Pricing',
-              href: '/aura/pricing',
-            },
           ],
         },
         {
@@ -43,14 +39,6 @@ export const aura = {
             {
               title: 'Reading Solana and SVM Data',
               href: '/aura/reading-solana-and-svm-data',
-            },
-            {
-              title: 'Managing Compressed State',
-              href: '/aura/managing-compressed-state',
-            },
-            {
-              title: 'Batch Minting',
-              href: '/aura/batch-minting',
             },
           ],
         },
@@ -63,12 +51,12 @@ export const aura = {
               href: '/aura/api/v1/das/get-asset',
             },
             {
-              title: 'Get Asset Proof',
-              href: '/aura/api/v1/das/get-asset-proof',
-            },
-            {
               title: 'Get Asset Batch',
               href: '/aura/api/v1/das/get-asset-batch',
+            },
+            {
+              title: 'Get Asset Proof',
+              href: '/aura/api/v1/das/get-asset-proof',
             },
             {
               title: 'Get Asset Proof Batch',
@@ -103,16 +91,7 @@ export const aura = {
               href: '/aura/api/v1/das/search-assets',
             },
           ],
-        },
-        {
-          title: 'Guides',
-          links: [
-            {
-              title: 'Using Aura Endpoints',
-              href: '/aura/using-aura-endpoints',
-            },
-          ],
-        },
+        }
       ],
     },
   ],
