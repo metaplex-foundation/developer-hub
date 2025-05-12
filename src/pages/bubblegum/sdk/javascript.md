@@ -31,10 +31,8 @@ An `umi` instance is required to interact with the Metaplex Javascript SDKs. If 
 During the initialization of the `umi` instance you can add the MPL-Bubblegum package to `umi` using
 
 ```js
-.use(mplCore())
+.use(mplBubblegum())
 ```
-
-You can add the `mplBubblegum()` package anywhere in your umi instance creation with `umi.use(mplBubblegum())`.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'

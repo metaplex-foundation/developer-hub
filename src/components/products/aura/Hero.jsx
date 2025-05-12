@@ -1,5 +1,5 @@
-import { Hero as BaseHero } from '@/components/Hero'
-import { HeroCode } from '@/components/HeroCode'
+import { Hero as BaseHero } from '@/components/Hero';
+import { HeroCode } from '@/components/HeroCode';
 
 const codeProps = {
   tabs: [

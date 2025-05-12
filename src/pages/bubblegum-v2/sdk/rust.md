@@ -4,7 +4,7 @@ metaTitle: Rust SDK | MPL-Bubblegum
 description: Learn how to set up your project to run the MPL-Bubblegum Rust SDK.
 ---
 
-Metaplex provides a Rust library that can be used to interact with the MPL-Bubblegum program. The Rust library can be used in rust scripts/builds as well as onchain programs via CPI instructions.
+Metaplex provides a Rust library that can be used to interact with the MPL-Bubblegum program. The Rust library can be used in Rust scripts/builds as well as onchain programs via CPI instructions.
 
 ## Installation
 
@@ -24,7 +24,7 @@ cargo add mpl-bubblegum
 
 ## Local Scripts
 
-For local scripts is recommended to use the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return a instruction that can be added to a transaction.
+For local scripts, we recommend using the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return an instruction that can be added to a transaction.
 
 A list of all Bubblegum instructions can be found here: [MPL-Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
@@ -33,7 +33,7 @@ For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs G
 #### CreateTreeConfigBuilder - Example
 
 ```rust
-use mpl_bubblegum::{instructions::CreateTreeConfigBuilder, programs::{SPL_ACCOUNT_COMPRESSION_ID, SPL_NOOP_ID}};
+use mpl_bubblegum::{instructions::CreateTreeConfigV2Builder, programs::{SPL_ACCOUNT_COMPRESSION_ID, SPL_NOOP_ID}};
 use solana_client::{nonblocking::rpc_client, rpc_config::RpcSendTransactionConfig};
 use solana_sdk::{commitment_config::CommitmentConfig, pubkey::Pubkey, signature::Keypair, signer::Signer, system_program, transaction::Transaction};
 
@@ -55,13 +55,10 @@ pub async fn create_tree(keypair: Keypair) {
         &mpl_bubblegum::ID,
     );
 
-    let create_tree_config_ix = CreateTreeConfigBuilder::new()
+    let create_tree_config_ix = CreateTreeConfigV2Builder::new()
         .merkle_tree(merkle_tree.pubkey())
         .tree_config(tree_config.0)
         .payer(payer.pubkey())
-        .log_wrapper(SPL_NOOP_ID)
-        .compression_program(SPL_ACCOUNT_COMPRESSION_ID)
-        .system_program(system_program::ID)
         .max_depth(20)
         .max_buffer_size(1024)
         .public(false)
@@ -89,7 +86,7 @@ pub async fn create_tree(keypair: Keypair) {
         .await
         .unwrap();
 
-    println!("Signature: {:?}", res)
+    println!("Signature: {:?}", res);
 }
 ```
 
@@ -104,7 +101,7 @@ For a more comprehensive guide using Metaplex crates to create CPI instructions 
 #### CreateTreeConfigCpiBuilder - Example
 
 ```rust
-CreateTreeConfigCpiBuilder::new()
+CreateTreeConfigV2CpiBuilder::new()
         .merkle_tree(context.accounts.merkle_tree)
         .tree_config(context.accounts.tree_config)
         .payer(context.accounts.payer)

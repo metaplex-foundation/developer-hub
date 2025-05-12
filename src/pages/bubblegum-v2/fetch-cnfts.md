@@ -1,6 +1,6 @@
 ---
 title: Fetching Compressed NFTs
-metaTitle: Fetching Compressed NFTs | Bubblegum
+metaTitle: Fetching Compressed NFTs | Bubblegum V2
 description: Learn how to fetch compressed NFTs on Bubblegum.
 ---
 
