@@ -24,7 +24,7 @@ Bubblegum V2 builds on the foundation of the original Bubblegum program while in
 - **Soulbound NFTs**: cNFTs can now be made soulbound (non-transferrable), permanently binding them to their owner's wallet. This is perfect for credentials, proof of attendance, identity verification, and more. It requires the `PermanentFreezeDelegate` plugin to be enabled when creating the collection.
 - **Allow Permanent Transfer**: The permanent transfer delegate can now transfer the cNFT to a new owner without interaction of the leaf owner if the `PermanentTransferDelegate` plugin is enabled on the collection.
 - **Burning by Authority**: If the Collection has the `PermanentBurnDelegate` plugin enabled, the delegate could burn the NFT without the leaf owner's signature.
-- **Attributes**: Data per NFT can be added using the MPL-Core `attributes` plugin.
+- **Attributes**: Attribute Data on collection level can be added using the MPL-Core `attributes` plugin.
 
 To allow the above features to work, Bubblegum V2 introduces a new leaf schema (`LeafSchemaV2`). To learn more what leaves are used in Bubblegum V2, check out the following sections.
 
