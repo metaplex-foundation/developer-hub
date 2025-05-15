@@ -33,7 +33,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             </div>
             <JavascriptRequestRenderer
               method={api.method}
-              url={activeEndpoint.uri}
+              url={activeEndpoint}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -49,7 +49,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             </div>
             <PythonRequestRenderer
               method={api.method}
-              url={activeEndpoint.uri}
+              url={activeEndpoint}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -65,7 +65,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             </div>
             <CurlRequestRenderer
               method={api.method}
-              url={activeEndpoint.uri}
+              url={activeEndpoint}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -81,7 +81,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             </div>
             <GoRequestRenderer
               method={api.method}
-              url={activeEndpoint.uri}
+              url={activeEndpoint}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -97,7 +97,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             </div>
             <CSharpRequestRenderer
               method={api.method}
-              url={activeEndpoint.uri}
+              url={activeEndpoint}
               // headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -113,7 +113,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             </div>
             <JavaRenderer
               method={api.method}
-              url={activeEndpoint.uri}
+              url={activeEndpoint}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -129,7 +129,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             </div>
             <PhpRenderer
               method={api.method}
-              url={activeEndpoint.uri}
+              url={activeEndpoint}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -159,7 +159,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             </div>
             <RubyRenderer
               method={api.method}
-              url={activeEndpoint.uri}
+              url={activeEndpoint}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -174,7 +174,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             </div>
             <RustRequestRenderer
               method={api.method}
-              url={activeEndpoint.uri}
+              url={activeEndpoint}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
@@ -189,7 +189,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             </div>
             <SwiftRequestRenderer
               method={api.method}
-              url={activeEndpoint.uri}
+              url={activeEndpoint}
               headers={headers}
               bodyMethod={body.method}
               bodyParams={body.params}
