@@ -6,19 +6,19 @@ import { useState } from 'react'
 export const endpoints = {
   solanaMainnet: {
     name: 'Solana Mainnet',
-    uri: 'https://aura-mainnet.metaplex.com',
+    uri: 'https://api.mainnet-beta.solana.com',
     value: 'solanaMainnet',
   },
   solanaDevnet: {
     name: 'Solana Devnet',
-    uri: 'https://aura-devnet.metaplex.com',
+    uri: 'https://api.devnet.solana.com',
     value: 'solanaDevnet',
   },
   eclipseAuraMainnet: {
     name: 'Eclipse Mainnet',
-    uri: 'https://aura-eclipse-mainnet.metaplex.com',
-    value: 'eclipseAuraMainnet',
-    value: 'eclipseAuraMainnet',
+    uri: 'https://mainnetbeta-rpc.eclipse.xyz',
+    value: 'eclipseMainnet',
+    value: 'eclipseMainnet',
   },
   custom: {
     name: 'Custom',

@@ -1,8 +1,8 @@
 import {
-    changelogSection,
-    documentationSection,
-    recipesSection,
-    referencesSection,
+  changelogSection,
+  documentationSection,
+  recipesSection,
+  referencesSection,
 } from '@/shared/sections'
 import { TableCellsIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
@@ -47,7 +47,7 @@ export const das = {
           ],
         },
         {
-          title: 'Core Extension',
+          title: 'Core Extension SDK',
           links: [
             { title: 'Extension Overview', href: '/das-api/core-extension' },
             { title: 'Get Core Asset', href: '/das-api/core-extension/methods/get-asset' },

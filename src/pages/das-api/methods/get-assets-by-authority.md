@@ -1,7 +1,8 @@
 ---
-title: Get Asset By Authority
-metaTitle: Get Asset By Authority | DAS API
+title: Get Assets By Authority
+metaTitle: Get Assets By Authority | DAS API
 description: Returns the list of assets given an authority address
+tableOfContents: false
 ---
 
 Returns the list of assets given an authority address.
@@ -18,10 +19,8 @@ Returns the list of assets given an authority address.
 | `after`            |          | Retrieve assets after the specified ID.    |
 
 
-## Example
+## UMI w/ DAS SDK
 
-{% dialect-switcher title="getAssetByAuthority Example" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```js
@@ -46,22 +45,7 @@ console.log(assets.items.length > 0);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
-{% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAssetsByAuthority",
-    "params": {
-        "authorityAddress": "mRdta4rc2RtsxEUDYuvKLamMZAdW6qHcwuq866Skxxv",
-        "page": 1
-    },
-    "id": 0
-}'
-```
+## Playground
 
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% apiRenderer method="getAssetsByAuthority" /%}
