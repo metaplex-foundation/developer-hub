@@ -124,6 +124,10 @@ export const guides = {
               created: '2024-12-01',
               updated: null, // null means it's never been updated
             },
+            {
+              title: 'Serializing and Deserializing Transactions',
+              href: '/umi/guides/serializing-and-deserializing-transactions',
+            }
           ],
         },
         {
