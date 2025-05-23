@@ -6,7 +6,6 @@ import { Fence } from '../Fence'
 import Spinner from '../icons/spinner'
 import { Totem, TotemAccordion } from '../Totem'
 import ApiParameterDisplay from './apiParams'
-import { endpoints } from './endPointSelector'
 import ApiExampleSelector from './exampleSelector'
 import LanguageRenderer from './languageRenderer'
 import Responce from './responce'
@@ -18,7 +17,15 @@ const ApiComponentWrapper = (args) => {
   const [responce, setResponce] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [selectedExample, setSelectedExample] = useState(-1)
-  const [activeEndpoint, setActiveEndpoint] = useState(endpoints.solanaMainnet)
+  const [activeEndpoint, setActiveEndpoint] = useState("https://api.devnet.solana.com")
+
+  useEffect(() => {
+    // Load saved endpoint from localStorage on component mount
+    const savedEndpoint = localStorage.getItem('customEndPoint')
+    if (savedEndpoint) {
+      setActiveEndpoint(savedEndpoint)
+    }
+  }, [])
 
   const handleSetExample = (index) => {
     if (index == -1) {
@@ -38,8 +45,17 @@ const ApiComponentWrapper = (args) => {
     })
 
     setSelectedExample(index)
-    if (activeEndpoint.name !== 'Custom') {
-      setActiveEndpoint(endpoints[api.examples[index].chain])
+    
+    // Update endpoint based on example chain if available
+    if (api.examples[index].chain) {
+      const chainEndpoint = api.examples[index].chain === 'devnet' 
+        ? 'https://api.devnet.solana.com'
+        : api.examples[index].chain === 'mainnet'
+          ? 'https://api.mainnet-beta.solana.com'
+          : activeEndpoint
+      
+      setActiveEndpoint(chainEndpoint)
+      localStorage.setItem('customEndPoint', chainEndpoint)
     }
   }
 
@@ -118,19 +134,35 @@ const ApiComponentWrapper = (args) => {
     setResponce(null)
     setIsLoading(true)
 
-    const res = await fetch(activeEndpoint.uri, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    })
+    try {
+      // Validate URL
+      if (!activeEndpoint || !activeEndpoint.startsWith('http')) {
+        throw new Error('Invalid endpoint URL. Please enter a valid URL starting with http:// or https://')
+      }
 
-    const resJson = await res.json()
+      const res = await fetch(activeEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      })
 
-    setResponce(resJson)
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`)
+      }
 
-    setIsLoading(false)
+      const resJson = await res.json()
+      setResponce(resJson)
+    } catch (error) {
+      setResponce({
+        error: {
+          message: error.message || 'Failed to fetch. Please check your endpoint URL and try again.'
+        }
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
