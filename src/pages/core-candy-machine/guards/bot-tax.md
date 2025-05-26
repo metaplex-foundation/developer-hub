@@ -5,12 +5,13 @@ description: "The Core Candy Machine 'Bot Tax' guard allows you to set up a conf
 ---
 
 {% callout type="warning" %}
-Solflare currently auto-injects Lighthouse instructions into transactions, which causes the Bot Tax guard to always trigger when `lastInstruction` is set to `true`.
+Some wallets (such as Solflare, Phantom, and possibly others) currently auto-inject Lighthouse instructions into transactions. This causes the Bot Tax guard to trigger when `lastInstruction` is set to `true`.
 
-Because wallet choice is up to the user, **you cannot prevent someone from using Solflare** with your Candy Machine. If you expect users to mint using Solflare, you may want to set `lastInstruction` to `false` to avoid false positives.
+Since wallet choice is up to the user, **you cannot prevent someone from minting with Solflare or similar wallets**. If you expect users to mint using these wallets, consider setting `lastInstruction` to `false` to avoid false positives.
 
 Use the Bot Tax guard with caution.
 {% /callout %}
+
 
 ## Overview
 

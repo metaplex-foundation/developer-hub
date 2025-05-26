@@ -5,7 +5,7 @@ description: "Configurable tax to charge invalid transactions."
 ---
 
 {% callout type="warning" %}
-Solflare currently auto-injects Lighthouse instructions into transactions, which causes the Bot Tax guard to always trigger when `lastInstruction` is set to `true`.
+Wallets (such as Solflare, Phantom, and maybe others) currently auto-inject Lighthouse instructions into transactions, which causes the Bot Tax guard to always trigger when `lastInstruction` is set to `true`.
 
 Because wallet choice is up to the user, **you cannot prevent someone from using Solflare** with your Candy Machine. If you expect users to mint using Solflare, you may want to set `lastInstruction` to `false` to avoid false positives.
 
