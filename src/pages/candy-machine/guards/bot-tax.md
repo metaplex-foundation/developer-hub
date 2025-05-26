@@ -4,6 +4,14 @@ metaTitle: Bot Tax Guard | Candy Machine
 description: "Configurable tax to charge invalid transactions."
 ---
 
+{% callout type="warning" %}
+Solflare currently auto-injects Lighthouse instructions into transactions, which causes the Bot Tax guard to always trigger when `lastInstruction` is set to `true`.
+
+Because wallet choice is up to the user, **you cannot prevent someone from using Solflare** with your Candy Machine. If you expect users to mint using Solflare, you may want to set `lastInstruction` to `false` to avoid false positives.
+
+Use the Bot Tax guard with caution.
+{% /callout %}
+
 ## Overview
 
 The **Bot Tax** guard charges a penalty for invalid transactions to discourage bots from attempting to mint NFTs. This amount is usually small to hurt bots without affecting genuine mistakes from real users. All bot taxes will be transferred to the Candy Machine account so that, once minting is over, you can access these funds by deleting the Candy Machine account.
