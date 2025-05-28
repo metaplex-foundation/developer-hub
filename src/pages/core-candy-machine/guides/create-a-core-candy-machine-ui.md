@@ -167,10 +167,8 @@ const candyGuard = await safeFetchCandyGuard(umi, candyMachine.mintAuthority);
 {% dialect title="JSON" id="json-cg" %}
 
 {% totem-accordion title="Candy Guard Data" %}
-
 {% totem-prose %}
 In this Object the most important field for the UI is the `guards` object. It contains the `default` guards that are always applied. `guards.groups` contains the different [Guard Groups](/core-candy-machine/guard-groups).
-
 {% /totem-prose %}
 
 ```json
@@ -632,7 +630,7 @@ Certain Guards require specific instructions to be executed before minting can o
 
 {% callout type="note" title="Target Audience of this section" %}
 In case you are not using the `Allocation`, `FreezeSolPayment`, `FreezeTokenPayment` or `Allowlist` guard it is safe to skip this section.
-{% callout type="note" title="Configuration" %}
+{% /callout %}
 
 Some Guards need their routes executed only once for the entire Candy Machine. For these, it's not necessary to include a function in the UI but can be run upfront once through a script:
 - [Allocation](/core-candy-machine/guards/allocation)
