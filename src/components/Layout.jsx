@@ -112,6 +112,10 @@ export function Layout({ children, page }) {
         </div>
 
         {/* Table of contents. */}
+        {/* <pre>
+          {JSON.stringify(page.tableOfContents, null, 2)}
+        </pre> */}
+        {page.tableOfContents.length === 0 ? "" :
         <div
           className={clsx(
             'hidden',
@@ -120,10 +124,12 @@ export function Layout({ children, page }) {
               : 'lg:sticky lg:top-[7rem] lg:-mr-6 lg:block lg:h-[calc(100vh-7rem)] lg:flex-none lg:overflow-y-auto lg:py-16 lg:pr-6'
           )}
         >
-          <TableOfContent
+           <TableOfContent
             tableOfContents={page.tableOfContents}
           ></TableOfContent>
+          
         </div>
+}
       </div>
     </>
   )

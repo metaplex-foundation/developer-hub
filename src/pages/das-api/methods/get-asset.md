@@ -2,6 +2,7 @@
 title: Get Asset
 metaTitle: Get Asset | DAS API
 description: Returns the information of a compressed/standard asset
+tableOfContents: false
 ---
 
 Returns the information of a compressed/standard asset including metadata and owner.
@@ -12,10 +13,8 @@ Returns the information of a compressed/standard asset including metadata and ow
 | --------------- | :------: | ------------------------------------------ |
 | `id`            |    ✅    | The id of the asset.                       |
 
-## Example
+## UMI w/ DAS SDK
 
-{% dialect-switcher title="getAsset Example" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```js
@@ -31,21 +30,7 @@ console.log(asset);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
-{% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAsset",
-    "params": [
-      "8vw7tdLGE3FBjaetsJrZAarwsbc8UESsegiLyvWXxs5A"
-    ],
-    "id": 0
-}'
-```
+## Playground
 
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
+{% apiRenderer method="getAsset" /%}
