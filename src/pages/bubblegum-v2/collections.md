@@ -71,17 +71,13 @@ import {
 } from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: unwrapOption(assetWithProof.metadata.collection)!.key,
-  creators: assetWithProof.metadata.creators,
-};
-await setCollectionV2(umi, {
+
+const collection = unwrapOption(assetWithProof.metadata.collection)
+
+const signature = await setCollectionV2(umi, {
   ...assetWithProof,
   authority: collectionAuthoritySigner,
-  metadata: metadata,
+  coreCollection: collection!.key
 }).sendAndConfirm(umi);
 ```
 
