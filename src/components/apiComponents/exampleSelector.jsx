@@ -1,12 +1,15 @@
-import { Select } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import clsx from 'clsx'
+import { Select } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import clsx from 'clsx';
 
 const ApiExampleSelector = ({
   examples,
   selectedExample,
   handleSetExample,
 }) => {
+  const mainnetExamples = examples.filter((example) => example.chain === 'solanaMainnet');
+  const devnetExamples = examples.filter((example) => example.chain === 'solanaDevnet');
+
   return (
     <div className="w-full">
       <label
@@ -18,24 +21,37 @@ const ApiExampleSelector = ({
       <div className="relative flex w-full gap-2">
         <div className="relative flex h-12 w-full">
           <Select
-            onChange={(e) => handleSetExample(e.target.value)}
-            value={selectedExample}
+            onChange={(e) => {
+              const selectedName = e.target.value;
+              const index = examples.findIndex(example => example.name === selectedName);
+              handleSetExample(index);
+            }}
+            value={selectedExample === -1 ? '' : examples[selectedExample]?.name || ''}
             className={clsx(
               'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
               'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
               '*:text-black dark:text-white'
             )}
           >
-            <option value={-1}>-</option>
-            <optgroup label="Solana Mainnet">
-              {examples.map((example, index) => {
-                return (
-                  <option key={index} value={index}>
+            <option value="">-</option>
+            {mainnetExamples.length > 0 && (
+              <optgroup label="Solana Mainnet">
+                {mainnetExamples.map((example) => (
+                  <option key={example.name} value={example.name}>
                     {example.name}
                   </option>
-                )
-              })}
-            </optgroup>
+                ))}
+              </optgroup>
+            )}
+            {devnetExamples.length > 0 && (
+              <optgroup label="Solana Devnet">
+                {devnetExamples.map((example) => (
+                  <option key={example.name} value={example.name}>
+                    {example.name}
+                  </option>
+                ))}
+              </optgroup>
+            )}
           </Select>
           <ChevronDownIcon
             className="group pointer-events-none absolute right-2.5 top-4 my-auto size-4 fill-black/60 dark:fill-white"
