@@ -1,7 +1,7 @@
 const getSignaturesForAsset = {
   description:
     'Get the proof of a compressed Digital Asset NFT (cNFT) by its ID',
-  method: 'getSignaturesForAsset',
+  method: 'getAssetSignatures',
   params: [
     {
       name: 'id',
