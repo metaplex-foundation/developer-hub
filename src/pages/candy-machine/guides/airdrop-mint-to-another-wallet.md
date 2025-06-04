@@ -177,6 +177,10 @@ const RPC_ENDPOINT = "https://devnet-aura.metaplex.com/<YOUR_API_KEY>";
       uri: "https://example.com/path/to/some/json/metadata.json",
       sellerFeeBasisPoints: percentAmount(9.99, 2),
       isCollection: true,
+      collectionDetails: {
+        __kind: 'V1',
+        size: 0,
+      },
     }).sendAndConfirm(umi, {
       confirm: { commitment: "finalized" },
     });
@@ -368,6 +372,10 @@ const RPC_ENDPOINT = "ENDPOINT";
       uri: "https://example.com/path/to/some/json/metadata.json",
       sellerFeeBasisPoints: percentAmount(9.99, 2),
       isCollection: true,
+      collectionDetails: {
+        __kind: 'V1',
+        size: 0,
+      },
     }).sendAndConfirm(umi, {
       confirm: { commitment: "finalized" },
     });
