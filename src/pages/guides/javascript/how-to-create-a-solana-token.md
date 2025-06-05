@@ -122,10 +122,10 @@ const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
 
 // You will need to us fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
-const walletFile = fs.readFileSync('./keypair.json')
+const walletFile = fs.readFileSync('./keypair.json', {encoding: "utf-8"})
 
 // Convert your walletFile onto a keypair.
-let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
+let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(JSON.parse(walletFile)));
 
 // Load the keypair into umi.
 umi.use(keypairIdentity(umiSigner));
