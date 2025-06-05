@@ -25,7 +25,7 @@ export const cli = {
           links: [
             {
               title: 'Introduction',
-              href: '/cli/introduction',
+              href: '/cli',
             },
             {
               title: 'Installation',
@@ -83,17 +83,19 @@ export const cli = {
               href: '/cli/toolbox/token-transfer',
             },
             {
-              title: 'SOL Transfer',
-              href: '/cli/toolbox/sol-transfer',
+              title: 'SOL Airdrop',
+              href: '/cli/toolbox/sol-airdrop',
             },
             {
               title: 'SOL Balance',
               href: '/cli/toolbox/sol-balance',
             },
             {
-              title: 'Airdrop',
-              href: '/cli/toolbox/airdrop',
+              title: 'SOL Transfer',
+              href: '/cli/toolbox/sol-transfer',
             },
+            
+            
           ],
         },
       ],

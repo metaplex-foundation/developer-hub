@@ -87,8 +87,8 @@ If you want to contribute to the CLI or run it from source:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/metaplex-foundation/mpl-toolbox.git
-cd mpl-toolbox
+git clone https://github.com/metaplex-foundation/cli.git
+cd cli
 ```
 
 2. Install dependencies:
