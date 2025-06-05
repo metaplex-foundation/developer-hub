@@ -3,12 +3,44 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 
 const ApiExampleSelector = ({
-  examples,
+  examples = [],
   selectedExample,
   handleSetExample,
 }) => {
-  const mainnetExamples = examples.filter((example) => example.chain === 'solanaMainnet');
-  const devnetExamples = examples.filter((example) => example.chain === 'solanaDevnet');
+  if (!Array.isArray(examples)) {
+    console.error('ApiExampleSelector: examples prop must be an array');
+    return null;
+  }
+
+  const { mainnetExamples, devnetExamples } = examples.reduce(
+    (acc, example) => {
+      if (example?.chain === 'solanaMainnet') {
+        acc.mainnetExamples.push(example);
+      } else if (example?.chain === 'solanaDevnet') {
+        acc.devnetExamples.push(example);
+      }
+      return acc;
+    },
+    { mainnetExamples: [], devnetExamples: [] }
+  );
+
+  const currentExample = selectedExample >= 0 && selectedExample < examples.length 
+    ? examples[selectedExample] 
+    : null;
+
+  const handleExampleChange = (e) => {
+    const selectedName = e.target.value;
+    if (!selectedName) {
+      handleSetExample(-1);
+      return;
+    }
+
+    const example = examples.find(ex => ex.name === selectedName);
+    if (example) {
+      const index = examples.indexOf(example);
+      handleSetExample(index);
+    }
+  };
 
   return (
     <div className="w-full">
@@ -21,12 +53,8 @@ const ApiExampleSelector = ({
       <div className="relative flex w-full gap-2">
         <div className="relative flex h-12 w-full">
           <Select
-            onChange={(e) => {
-              const selectedName = e.target.value;
-              const index = examples.findIndex(example => example.name === selectedName);
-              handleSetExample(index);
-            }}
-            value={selectedExample === -1 ? '' : examples[selectedExample]?.name || ''}
+            onChange={handleExampleChange}
+            value={currentExample?.name || ''}
             className={clsx(
               'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
               'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
@@ -34,18 +62,18 @@ const ApiExampleSelector = ({
             )}
           >
             <option value="">-</option>
-            {mainnetExamples.length > 0 && (
-              <optgroup label="Solana Mainnet">
-                {mainnetExamples.map((example) => (
+            {devnetExamples.length > 0 && (
+              <optgroup label="Solana Devnet">
+                {devnetExamples.map((example) => (
                   <option key={example.name} value={example.name}>
                     {example.name}
                   </option>
                 ))}
               </optgroup>
             )}
-            {devnetExamples.length > 0 && (
-              <optgroup label="Solana Devnet">
-                {devnetExamples.map((example) => (
+            {mainnetExamples.length > 0 && (
+              <optgroup label="Solana Mainnet">
+                {mainnetExamples.map((example) => (
                   <option key={example.name} value={example.name}>
                     {example.name}
                   </option>
@@ -67,7 +95,7 @@ const ApiExampleSelector = ({
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ApiExampleSelector
+export default ApiExampleSelector;
