@@ -1,7 +1,7 @@
 const getSignaturesForAsset = {
   description:
     'Get the proof of a compressed Digital Asset NFT (cNFT) by its ID',
-  method: 'getSignaturesForAsset',
+  method: 'getAssetSignatures',
   params: [
     {
       name: 'id',
@@ -44,6 +44,16 @@ const getSignaturesForAsset = {
       body: {
         params: {
           id: 'H6GDZujkpEcxbpDgEbSbNFxNtSi3RBJPJC5GZCvzagaP',
+        },
+      },
+    },
+    {
+      name: 'Metaplex Test (cNFT V1)',
+      chain: 'solanaDevnet',
+      description: 'Get an asset by its ID',
+      body: {
+        params: {
+          id: 'E1hi4uEdfe9gai3Y1Vg5eSA8A2oxotVUWv5LtVJXxxpv',
         },
       },
     },
