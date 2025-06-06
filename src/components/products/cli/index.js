@@ -63,10 +63,10 @@ export const cli = {
             },
             {
               title: 'Update Asset',
-              href: '/cli/core/update',
+              href: '/cli/core/update-asset',
             },
             {
-              title: 'Fetch Asset',
+              title: 'Fetch Asset or Collection',
               href: '/cli/core/fetch',
             },
           ],

@@ -50,7 +50,7 @@ You should see the current version of the CLI displayed.
 
 ### 1. Create Configuration Directory
 
-The CLI will automatically create a configuration directory at `~/.mplx` on first run. This directory stores:
+The CLI will automatically create a configuration file at `~/.config/mplx` when first setting config settings. This config stores:
 - Wallet configurations
 - RPC endpoint settings
 - Explorer preferences
@@ -61,19 +61,21 @@ The CLI will automatically create a configuration directory at `~/.mplx` on firs
 #### Set up a Wallet
 ```bash
 # Create a new wallet
-mplx config wallet new --name dev1
+mplx config wallets new --name dev1
 
 # Or add an existing wallet
-mplx config wallet add dev1 /path/to/keypair.json
+mplx config wallets add <name> <path>
+mplx config wallets add dev1 /path/to/keypair.json
+
+# After adding a wallet you'll need to set it
+mplx config wallets set
 ```
+
+Further reading see 
 
 #### Configure RPC Endpoint
 ```bash
-# Add mainnet RPC
-mplx config rpc add mainnet https://api.mainnet-beta.solana.com
-
-# Add devnet RPC
-mplx config rpc add devnet https://api.devnet.solana.com
+mplx config set rpcUrl  https://api.mainnet-beta.solana.com
 ```
 
 #### Set Preferred Explorer

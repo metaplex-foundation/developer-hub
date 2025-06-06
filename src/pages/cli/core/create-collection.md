@@ -31,13 +31,13 @@ mplx core collection create --wizard
 ## Options
 
 ### Basic Options
-- `-n, --name <string>`: Collection name (required for simple creation)
-- `-u, --uri <string>`: URI of the Collection metadata (required for simple creation)
+- `--name <string>`: Collection name (required for simple creation)
+- `--uri <string>`: URI of the Collection metadata (required for simple creation)
 
 ### File-based Options
-- `-f, --files`: Flag to indicate file-based creation
-- `-i, --image <path>`: Path to image file to upload and assign to Collection
-- `-j, --json <path>`: Path to JSON metadata file
+- `--files`: Flag to indicate file-based creation
+- `--image <path>`: Path to image file to upload and assign to Collection
+- `--json <path>`: Path to JSON metadata file
 
 ### Plugin Options
 - `--plugins`: Use interactive plugin selection

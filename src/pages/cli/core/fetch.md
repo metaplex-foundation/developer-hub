@@ -15,15 +15,15 @@ mplx core fetch asset <assetId>
 ### Download Options
 ```bash
 mplx core fetch asset <assetId> --download --output ./assets
-mplx core fetch asset <assetId> --download --image-only
-mplx core fetch asset <assetId> --download --metadata-only
+mplx core fetch asset <assetId> --download --image
+mplx core fetch asset <assetId> --download --metadata
 ```
 
 ### Asset Fetch Options
-- `--download`: Download asset files to disk
+- `--download`: Download asset files to disk (can select individual files also with additional flags)
 - `--output <path>`: Directory path where to save the downloaded assets (requires --download)
-- `--image-only`: Only download the image file (requires --download)
-- `--metadata-only`: Only download the metadata file (requires --download)
+- `--image`: Download the image file (requires --download)
+- `--metadata`: Download the metadata file (requires --download)
 - `--asset`: Download the asset data file (requires --download)
 
 ## Fetch Collection
@@ -56,7 +56,7 @@ mplx core fetch asset 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --download --
 
 3. Download only the image:
 ```bash
-mplx core fetch asset 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --download --image-only
+mplx core fetch asset 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --download --image
 ```
 
 ### Fetch Collection Examples
@@ -79,7 +79,7 @@ When downloading files, the following structure will be created:
   <assetId>/
     metadata.json
     image.<extension>
-    asset.<extension> (if --asset flag is used)
+    asset.json
 ```
 
 ### Collection Fetch Output
@@ -89,6 +89,7 @@ When downloading files, the following structure will be created:
   <collectionId>/
     metadata.json
     image.<extension>
+    collection.json
 ```
 
 ## Notes
