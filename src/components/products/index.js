@@ -3,6 +3,7 @@ import { aura } from './aura';
 import { bubblegum } from './bubblegum';
 import { bubblegumv2 } from './bubblegum-v2';
 import { candyMachine } from './candyMachine';
+import { cli } from './cli';
 import { core } from './core';
 import { coreCandyMachine } from './coreCandyMachine';
 import { das } from './das-api';
@@ -44,4 +45,5 @@ export const products = [
   mplHybrid,
   guides,
   aura,
+  cli
 ].sort((a, b) => a.name.localeCompare(b.name))
