@@ -3,8 +3,6 @@ title: Wallets
 description: Manage wallet configurations
 ---
 
-# Wallet Configuration
-
 Manage wallet configurations in your CLI. You can add, list, remove, and set active wallets for different purposes.
 
 ## Basic Usage
@@ -165,5 +163,5 @@ Wallets are stored in your configuration file at `~/.mplx/config.json`:
 
 ## Related Commands
 
-- [RPCs](./rpcs) - Manage RPC endpoints
-- [Explorer](./explorer) - Set preferred blockchain explorer 
+- [RPCs](/cli/config/rpcs) - Manage RPC endpoints
+- [Explorer](/cli/config/explorer) - Set preferred blockchain explorer 

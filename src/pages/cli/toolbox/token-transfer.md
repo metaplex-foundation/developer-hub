@@ -3,8 +3,6 @@ title: Token Transfer
 description: Transfer tokens to a destination address
 ---
 
-# Token Transfer
-
 Transfer tokens from your wallet to a destination address. If the destination wallet doesn't have a token account, it will be created automatically.
 
 ## Basic Usage
@@ -63,6 +61,6 @@ If the transfer fails, the command will display an error message and throw an ex
 
 ## Related Commands
 
-- [Token Creation](./token-create) - Create new tokens
-- [Balance Check](./balance) - Check token balances
-- [SOL Transfer](./sol-transfer) - Transfer SOL between addresses 
+- [Token Creation](/cli/toolbox/token-create) - Create new tokens
+- [Balance Check](/cli/toolbox/balance) - Check token balances
+- [SOL Transfer](/cli/toolbox/sol-transfer) - Transfer SOL between addresses 

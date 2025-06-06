@@ -82,11 +82,3 @@ The command will output the following information upon successful creation:
   Core Explorer: https://core.metaplex.com/explorer/<asset_address>
 --------------------------------
 ```
-
-## Notes
-
-- When using the file-based creation method, both `--image` and `--json` flags are required
-- The wizard method provides a guided experience for creating assets, including file uploads and metadata creation
-- Plugin configuration can be done either interactively or through a JSON file
-- The command supports various file types for images and animations
-- Collection assignment is optional and can be used with any creation method

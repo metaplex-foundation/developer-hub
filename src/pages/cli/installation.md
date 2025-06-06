@@ -128,17 +128,17 @@ npm link
 
 If you encounter any issues:
 
-1. Check the [documentation](https://docs.metaplex.com)
-2. Search [GitHub issues](https://github.com/metaplex-foundation/mpl-toolbox/issues)
+1. Check the [documentation](https://developers.metaplex.com)
+2. Search [GitHub issues](https://github.com/metaplex-foundation/cli/issues)
 3. Join the [Discord community](https://discord.gg/metaplex)
 
 ## Next Steps
 
 Now that you have the CLI installed, you can:
 
-1. [Learn about the core commands](../core/create-asset)
-2. [Explore the toolbox utilities](../toolbox/token-create)
-3. [Configure your environment](../config/wallet)
+1. [Learn about the core commands](/cli/core/create-asset)
+2. [Explore the toolbox utilities](/cli/toolbox/token-create)
+3. [Configure your environment](/cli/config/wallets)
 
 ## Updating
 

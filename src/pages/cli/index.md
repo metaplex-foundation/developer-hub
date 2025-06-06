@@ -37,16 +37,16 @@ The Metaplex CLI is a powerful command-line tool that provides a comprehensive s
 
 ## Getting Started
 
-1. [Install the CLI](./installation)
+1. [Install the CLI](/cli/installation)
 2. Configure your environment:
-   - [Set up your wallet](./config/wallet)
-   - [Configure RPC endpoints](./config/rpc)
-   - [Choose your preferred explorer](./config/explorer)
+   - [Set up your wallet](/cli/config/wallets)
+   - [Configure RPC endpoints](/cli/config/rpcs)
+   - [Choose your preferred explorer](/cli/config/explorer)
 3. Start using the core commands:
-   - [Create assets](./core/create-asset)
-   - [Create collections](./core/create-collection)
-   - [Update assets](./core/update)
-   - [Fetch assets](./core/fetch)
+   - [Create assets](/cli/core/create-asset)
+   - [Create collections](/cli/core/create-collection)
+   - [Update assets](/cli/core/update-asset)
+   - [Fetch assets](/cli/core/fetch)
 
 ## Command Structure
 
@@ -71,10 +71,10 @@ Categories include:
 
 ## Support and Resources
 
-- [GitHub Repository](https://github.com/metaplex-foundation/mpl-toolbox)
-- [Documentation](https://docs.metaplex.com)
+- [GitHub Repository](https://github.com/metaplex-foundation/cli)
+- [Documentation](https://developers.metaplex.com)
 - [Discord Community](https://discord.gg/metaplex)
 
 ## Next Steps
 
-Ready to get started? Head over to the [installation guide](./installation) to set up the CLI on your system. 
+Ready to get started? Head over to the [installation guide](/cli/installation) to set up the CLI on your system. 

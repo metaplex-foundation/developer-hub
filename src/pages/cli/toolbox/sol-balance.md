@@ -3,8 +3,6 @@ title: SOL Balance
 description: Check SOL balance for a wallet address
 ---
 
-# SOL Balance
-
 Check the SOL balance for a wallet address. This command allows you to quickly verify the SOL balance of any wallet on the network.
 
 ## Basic Usage
@@ -56,6 +54,6 @@ Balance: 1.5 SOL
 
 ## Related Commands
 
-- [SOL Transfer](./sol-transfer) - Transfer SOL between addresses
-- [Token Transfer](./token-transfer) - Transfer tokens
-- [Airdrop](./airdrop) - Request SOL airdrop (devnet only) 
+- [SOL Transfer](/cli/toolbox/sol-transfer) - Transfer SOL between addresses
+- [Token Transfer](/cli/toolbox/token-transfer) - Transfer tokens
+- [Airdrop](/cli/toolbox/sol-airdrop) - Request SOL airdrop (devnet only) 

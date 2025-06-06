@@ -3,8 +3,6 @@ title: RPCs
 description: Manage RPC endpoints in your configuration
 ---
 
-# RPC Configuration
-
 Manage RPC endpoints in your configuration. You can add, list, remove, and set active RPCs for different networks.
 
 ## Basic Usage
@@ -139,5 +137,5 @@ RPCs are stored in your configuration file at `~/.mplx/config.json`:
 
 ## Related Commands
 
-- [Wallets](./wallets) - Manage wallet configurations
-- [Explorer](./explorer) - Set preferred blockchain explorer 
+- [Wallets](/cli/config/wallets) - Manage wallet configurations
+- [Explorer](/cli/config/explorer) - Set preferred blockchain explorer 
