@@ -62,5 +62,5 @@ If the transfer fails, the command will display an error message and throw an ex
 ## Related Commands
 
 - [Token Creation](/cli/toolbox/token-create) - Create new tokens
-- [Balance Check](/cli/toolbox/balance) - Check token balances
+- [Balance Check](/cli/toolbox/sol-balance) - Check token balances
 - [SOL Transfer](/cli/toolbox/sol-transfer) - Transfer SOL between addresses 
