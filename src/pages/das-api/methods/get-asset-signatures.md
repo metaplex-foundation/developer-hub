@@ -46,4 +46,4 @@ console.log(assets);
 
 ## Playground
 
-{% apiRenderer method="getSignaturesForAsset" /%}
+{% apiRenderer method="getAssetSignatures" /%}

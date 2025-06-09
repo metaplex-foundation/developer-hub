@@ -6,7 +6,7 @@ import getAssets from './das/getAssets'
 import getAssetsByCreator from './das/getAssetsByCreator'
 import getAssetsByGroup from './das/getAssetsByGroup'
 import getAssetsByOwner from './das/getAssetsByOwner'
-import getSignaturesForAsset from './das/getSignaturesForAsset'
+import getAssetSignatures from './das/getAssetSignatures'
 import getTokenAccounts from './das/getTokenAccounts'
 import searchAssets from './das/searchAssest'
 
@@ -24,7 +24,7 @@ const apiMethods = {
   getAssets: getAssets,
   getAssetProofs: getAssetProofs,
   searchAssets: searchAssets,
-  getSignaturesForAsset: getSignaturesForAsset,
+  getAssetSignatures: getAssetSignatures,
   getTokenAccounts: getTokenAccounts,
 }
 export default apiMethods

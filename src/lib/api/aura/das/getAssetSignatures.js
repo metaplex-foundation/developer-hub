@@ -1,4 +1,4 @@
-const getSignaturesForAsset = {
+const getAssetSignatures = {
   description:
     'Get the proof of a compressed Digital Asset NFT (cNFT) by its ID',
   method: 'getAssetSignatures',
@@ -176,4 +176,4 @@ const getSignaturesForAsset = {
   }
 }
 
-export default getSignaturesForAsset
+export default getAssetSignatures
