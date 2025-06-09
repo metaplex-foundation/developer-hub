@@ -1,5 +1,5 @@
 const getAssets = {
-  description: 'Get an asset by its ID',
+  description: 'Get assets by their IDs',
   method: 'getAssets',
   params: [
     {
