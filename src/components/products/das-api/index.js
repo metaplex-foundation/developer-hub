@@ -40,7 +40,7 @@ export const das = {
             { title: 'Get Assets By Creator', href: '/das-api/methods/get-assets-by-creator' },
             { title: 'Get Assets By Group', href: '/das-api/methods/get-assets-by-group' },
             { title: 'Get Assets By Owner', href: '/das-api/methods/get-assets-by-owner' },
-            { title: 'Search Asset', href: '/das-api/methods/search-assets' },
+            { title: 'Search Assets', href: '/das-api/methods/search-assets' },
           ],
         },
         {

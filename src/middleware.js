@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
 const redirectRules = {
   '/umi': {
@@ -18,6 +18,12 @@ const redirectRules = {
     '/getting-started': '/bubblegum/sdk',
     '/getting-started/js': '/bubblegum/sdk/javascript',
     '/getting-started/rust': '/bubblegum/sdk/rust',
+    '/fetch-cnfts': '/bubblegum-v2/fetch-cnfts',
+    '/concurrent-merkle-trees': '/bubblegum-v2/concurrent-merkle-trees',
+    '/stored-nft-data': '/bubblegum-v2/stored-nft-data',
+    '/hashed-nft-data': '/bubblegum-v2/hashed-nft-data',
+    '/merkle-tree-canopy': '/bubblegum-v2/merkle-tree-canopy',
+    '/faq': '/bubblegum-v2/faq',
   },
   '/core': {
     '/getting-started': '/core/sdk',
@@ -43,7 +49,6 @@ const redirectRules = {
     '/api/v1/das/get-assets-by-creator': '/das-api/methods/get-assets-by-creator',
     '/api/v1/das/get-assets-by-group': '/das-api/methods/get-assets-by-group',
     '/api/v1/das/get-signatures-for-asset': '/das-api/methods/get-asset-signatures',
-    '/api/v1/das/get-token-accounts': '/das-api/methods/get-token-accounts',
     '/api/v1/das/search-assets': '/das-api/methods/search-assets',
   },
 }
