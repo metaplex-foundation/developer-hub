@@ -111,6 +111,10 @@ await createNft(umi, {
   uri: 'https://example.com/path/to/some/json/metadata.json',
   sellerFeeBasisPoints: percentAmount(9.99, 2), // 9.99%
   isCollection: true,
+    collectionDetails: {
+    __kind: 'V1',
+    size: 0,
+  },
 }).sendAndConfirm(umi)
 
 // Pass the collection address and its authority in the settings.
