@@ -21,9 +21,13 @@ const ApiComponentWrapper = (args) => {
 
   useEffect(() => {
     // Load saved endpoint from localStorage on component mount
-    const savedEndpoint = localStorage.getItem('customEndPoint')
-    if (savedEndpoint) {
-      setActiveEndpoint(savedEndpoint)
+    try {
+      const savedEndpoint = localStorage.getItem('customEndPoint')
+      if (savedEndpoint) {
+        setActiveEndpoint(savedEndpoint)
+      }
+    } catch (error) {
+      console.warn('Failed to load endpoint from localStorage:', error)
     }
   }, [])
 
@@ -55,7 +59,11 @@ const ApiComponentWrapper = (args) => {
           : activeEndpoint
       
       setActiveEndpoint(chainEndpoint)
-      localStorage.setItem('customEndPoint', chainEndpoint)
+      try {
+        localStorage.setItem('customEndPoint', chainEndpoint)
+      } catch (error) {
+        console.warn('Failed to save endpoint to localStorage:', error)
+      }
     }
   }
 
@@ -136,7 +144,14 @@ const ApiComponentWrapper = (args) => {
 
     try {
       // Validate URL
-      if (!activeEndpoint || !activeEndpoint.startsWith('http')) {
+      // Validate URL
+      if (!activeEndpoint) {
+        throw new Error('Endpoint URL is required')
+      }
+      
+      try {
+        new URL(activeEndpoint)
+      } catch {
         throw new Error('Invalid endpoint URL. Please enter a valid URL starting with http:// or https://')
       }
 
