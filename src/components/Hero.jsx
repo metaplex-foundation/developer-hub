@@ -21,7 +21,7 @@ export function Hero({
   description = description ?? page.product.description;
   primaryCta = primaryCta ?? {
     title: 'Get started',
-    href: `/${page.product.path}/getting-started`,
+    href: `/${page.product.path}/sdk`,
   };
   secondaryCta = secondaryCta ?? (page.product.github ? {
     title: 'View on GitHub',
