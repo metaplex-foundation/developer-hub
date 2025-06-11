@@ -8,7 +8,7 @@ Bubblegum V2 is the latest iteration of the Metaplex Protocol program for creati
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum-v2/getting-started" description="Find the language or library of your choice and get started with compressed NFTs." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum-v2/sdk" description="Find the language or library of your choice and get started with compressed NFTs." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
@@ -144,4 +144,4 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 
 ## Next steps
 
-Now that we know how compressed NFTs work at a high level and what's new in Bubblegum V2, we recommend checking out our [Getting Started](/bubblegum-v2/getting-started) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum-v2/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.
+Now that we know how compressed NFTs work at a high level and what's new in Bubblegum V2, we recommend checking out our [Getting Started](/bubblegum-v2/sdk) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum-v2/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.

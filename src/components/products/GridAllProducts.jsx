@@ -1,3 +1,4 @@
+import React from 'react';
 import { Grid } from './Grid';
 import { productCategories } from './index';
 
@@ -7,7 +8,7 @@ export function MarkdocGrid() {
       {productCategories.map((item, index) => {
 
         return (
-          <>
+          <React.Fragment key={index}>
             <h2 key={index} className="mb-4 mt-8 text-2xl font-bold">
               {productCategories[index]}
             </h2>
@@ -17,7 +18,7 @@ export function MarkdocGrid() {
               menuItem={productCategories[index]}
               
             />
-          </>
+          </React.Fragment>
         )
       })}
     </div>
