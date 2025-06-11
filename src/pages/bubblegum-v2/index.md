@@ -8,7 +8,7 @@ Bubblegum V2 is the latest iteration of the Metaplex Protocol program for creati
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum-v2/getting-started" description="Find the language or library of your choice and get started with compressed NFTs." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum-v2/sdk" description="Find the language or library of your choice and get started with compressed NFTs." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
