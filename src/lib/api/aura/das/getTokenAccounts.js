@@ -11,7 +11,7 @@ const getTokenAccounts = {
       {
         name: 'owner',
       type: 'string',
-      description: 'Owner public key of the token accounts to revtrieve',
+      description: 'Owner public key of the token accounts to retrieve',
       placeholder: 'Owner public key',
     },
     {

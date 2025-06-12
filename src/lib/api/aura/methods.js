@@ -1,12 +1,12 @@
 import getAssetsByAuthority from './das/getAssestByAuthority'
 import getAsset from './das/getAsset'
-import getAssetBatch from './das/getAssetBatch'
 import getAssetProof from './das/getAssetProof'
-import getAssetProofBatch from './das/getAssetProofBatch'
+import getAssetProofs from './das/getAssetProofs'
+import getAssets from './das/getAssets'
 import getAssetsByCreator from './das/getAssetsByCreator'
 import getAssetsByGroup from './das/getAssetsByGroup'
 import getAssetsByOwner from './das/getAssetsByOwner'
-import getSignaturesForAsset from './das/getSignaturesForAsset'
+import getAssetSignatures from './das/getAssetSignatures'
 import getTokenAccounts from './das/getTokenAccounts'
 import searchAssets from './das/searchAssest'
 
@@ -21,10 +21,10 @@ const apiMethods = {
   getAssetsByCreator: getAssetsByCreator,
   getAssetsByGroup: getAssetsByGroup,
   getAssetsByOwner: getAssetsByOwner,
-  getAssetBatch: getAssetBatch,
-  getAssetProofBatch: getAssetProofBatch,
+  getAssets: getAssets,
+  getAssetProofs: getAssetProofs,
   searchAssets: searchAssets,
-  getSignaturesForAsset: getSignaturesForAsset,
+  getAssetSignatures: getAssetSignatures,
   getTokenAccounts: getTokenAccounts,
 }
 export default apiMethods

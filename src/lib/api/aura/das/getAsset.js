@@ -84,6 +84,46 @@ const getAsset = {
         },
       },
     },
+    {
+      name: 'Metaplex NFT',
+      description: 'Get an asset by its ID',
+      chain: 'solanaDevnet',
+      body: {
+        params: {
+          id: '5fkyv7J5Jf8SaTVnE94A9oVeGBbhcEh9W3nP4cXUCQb8',
+        },
+      },
+    },
+    {
+      name: 'Metaplex pNFT',
+      description: 'Get an asset by its ID',
+      chain: 'solanaDevnet',
+      body: {
+        params: {
+          id: 'D7n1eLnUJSaNfp5qmEwh2E98w3m7Eg9Hfq9n1JLggDVp',
+        },
+      },
+    },
+    {
+      name: 'Metaplex cNFT V1',
+      description: 'Get an asset by its ID',
+      chain: 'solanaDevnet',
+      body: {
+        params: {
+          id: 'E1hi4uEdfe9gai3Y1Vg5eSA8A2oxotVUWv5LtVJXxxpv',
+        },
+      },
+    },
+    {
+      name: 'Metaplex Core Asset',
+      description: 'Get an asset by its ID',
+      chain: 'solanaDevnet',
+      body: {
+        params: {
+          id: 'G9pSgJrghwBMHuxYC4iHMkm3BnDuPvkLMtz9h3u7YzF5',
+        },
+      },
+    },
   ],
   exampleResponse : {
     "jsonrpc": "2.0",
