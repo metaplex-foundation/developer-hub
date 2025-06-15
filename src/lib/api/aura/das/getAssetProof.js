@@ -1,6 +1,6 @@
 const getAssetProof = {
     description: 'Get the proof of a compressed Digital Asset NFT (cNFT) by its ID',
-    method: 'getAssetProofs',
+    method: 'getAssetProof',
     params: [
       {
         type: 'string',
