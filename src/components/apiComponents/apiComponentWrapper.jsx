@@ -143,8 +143,6 @@ const ApiComponentWrapper = (args) => {
     setIsLoading(true)
 
     try {
-      // Validate URL
-      // Validate URL
       if (!activeEndpoint) {
         throw new Error('Endpoint URL is required')
       }
