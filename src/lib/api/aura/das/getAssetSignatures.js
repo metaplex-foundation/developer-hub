@@ -1,7 +1,7 @@
-const getSignaturesForAsset = {
+const getAssetSignatures = {
   description:
-    'Get the proof of a compressed Digital Asset NFT (cNFT) by its ID',
-  method: 'getSignaturesForAsset',
+    'Get the transaction signatures for a compressed Digital Asset NFT (cNFT) by its ID',
+  method: 'getAssetSignatures',
   params: [
     {
       name: 'id',
@@ -39,11 +39,21 @@ const getSignaturesForAsset = {
   examples: [
     {
       name: 'Fetch signatures of Saga Monkes #6233 (cNFT)',
-      description: 'Fetch the signatures associated with an asset by its ID',
+      description: 'Get the transaction signatures for an asset by its ID',
       chain: "solanaMainnet",
       body: {
         params: {
           id: 'H6GDZujkpEcxbpDgEbSbNFxNtSi3RBJPJC5GZCvzagaP',
+        },
+      },
+    },
+    {
+      name: 'Metaplex Test (cNFT V1)',
+      chain: 'solanaDevnet',
+      description: 'Get the transaction signatures for an asset by its ID',
+      body: {
+        params: {
+          id: 'E1hi4uEdfe9gai3Y1Vg5eSA8A2oxotVUWv5LtVJXxxpv',
         },
       },
     },
@@ -166,4 +176,4 @@ const getSignaturesForAsset = {
   }
 }
 
-export default getSignaturesForAsset
+export default getAssetSignatures

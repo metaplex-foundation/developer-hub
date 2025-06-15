@@ -2,6 +2,7 @@
 title: Get Asset Signatures
 metaTitle: Get Asset Signatures | DAS API
 description: Returns the transaction signatures for compressed assets
+tableOfContents: false
 ---
 
 Returns the transaction signatures associated with a compressed asset. You can identify the asset either by its ID or by its tree and leaf index.
@@ -20,10 +21,8 @@ Returns the transaction signatures associated with a compressed asset. You can i
 | `cursor`        |          | The cursor of the signatures.               |
 | `sortDirection` |          | Sort direction. Can be either "asc" or "desc". |
 
-## Example
+## UMI w/ DAS SDK
 
-{% dialect-switcher title="getAssetSignatures Example" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```js
@@ -44,21 +43,7 @@ console.log(assets);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
-{% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAssetSignaturesV2",
-    "params": {
-        "id": "GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA"
-    },
-    "id": 0
-}'
-```
+## Playground
 
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %} 
+{% apiRenderer method="getAssetSignatures" /%}

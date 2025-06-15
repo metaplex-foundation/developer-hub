@@ -41,56 +41,6 @@ export const aura = {
               href: '/aura/reading-solana-and-svm-data',
             },
           ],
-        },
-        {
-          title: 'DAS Methods',
-          collapsed: true,
-          links: [
-            {
-              title: 'Get Asset',
-              href: '/aura/api/v1/das/get-asset',
-            },
-            {
-              title: 'Get Asset Batch',
-              href: '/aura/api/v1/das/get-asset-batch',
-            },
-            {
-              title: 'Get Asset Proof',
-              href: '/aura/api/v1/das/get-asset-proof',
-            },
-            {
-              title: 'Get Asset Proof Batch',
-              href: '/aura/api/v1/das/get-asset-proof-batch',
-            },
-            {
-              title: 'Get Assets by Owner',
-              href: '/aura/api/v1/das/get-assets-by-owner',
-            },
-            {
-              title: 'Get Assets by Authority',
-              href: '/aura/api/v1/das/get-assets-by-authority',
-            },
-            {
-              title: 'Get Assets By Creator',
-              href: '/aura/api/v1/das/get-assets-by-creator',
-            },
-            {
-              title: 'Get Assets By Group',
-              href: '/aura/api/v1/das/get-assets-by-group',
-            },
-            {
-              title: 'Get Signatures For Asset',
-              href: '/aura/api/v1/das/get-signatures-for-asset',
-            },
-            {
-              title: 'Get Token Accounts',
-              href: '/aura/api/v1/das/get-token-accounts',
-            },
-            {
-              title: 'Search Assets',
-              href: '/aura/api/v1/das/search-assets',
-            },
-          ],
         }
       ],
     },

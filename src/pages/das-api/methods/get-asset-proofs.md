@@ -2,6 +2,7 @@
 title: Get Asset Proofs
 metaTitle: Get Asset Proofs | DAS API
 description: Returns the merkle tree proof information for multiple compressed assets
+tableOfContents: false
 ---
 
 Returns the merkle tree proof information for multiple compressed assets. This method is used to verify the authenticity of compressed NFTs by retrieving their merkle proofs.
@@ -12,10 +13,8 @@ Returns the merkle tree proof information for multiple compressed assets. This m
 | --------------- | :------: | ------------------------------------------ |
 | `ids`           |    ✅    | An array of asset ids to get proofs for.   |
 
-## Example
+## UMI w/ DAS SDK
 
-{% dialect-switcher title="getAssetProofs Example" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 ```js
@@ -34,24 +33,8 @@ console.log(assets);
 ```
 
 {% /totem %}
-{% /dialect %}
-{% dialect title="cURL" id="curl" %}
-{% totem %}
 
-```sh
-curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
-    "jsonrpc": "2.0",
-    "method": "getAssetProofs",
-    "params": [
-      [
-        "GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA",
-        "ELDjRRs5Wb478K4h3B5bMPEhqFD8FvoET5ctHku5uiYi"
-      ]
-    ],
-    "id": 0
-}'
-```
 
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %} 
+## Playground
+
+{% apiRenderer method="getAssetProofs" /%}

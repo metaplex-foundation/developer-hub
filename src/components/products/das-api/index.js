@@ -1,8 +1,5 @@
 import {
-    changelogSection,
-    documentationSection,
-    recipesSection,
-    referencesSection,
+  documentationSection
 } from '@/shared/sections'
 import { TableCellsIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
@@ -39,15 +36,15 @@ export const das = {
             { title: 'Get Asset Proof', href: '/das-api/methods/get-asset-proof' },
             { title: 'Get Asset Proofs', href: '/das-api/methods/get-asset-proofs' },
             { title: 'Get Asset Signatures', href: '/das-api/methods/get-asset-signatures' },
-            { title: 'Get Asset By Authority', href: '/das-api/methods/get-asset-by-authority' },
-            { title: 'Get Asset By Creator', href: '/das-api/methods/get-asset-by-creator' },
-            { title: 'Get Asset By Group', href: '/das-api/methods/get-asset-by-group' },
-            { title: 'Get Asset By Owner', href: '/das-api/methods/get-asset-by-owner' },
-            { title: 'Search Asset', href: '/das-api/methods/search-assets' },
+            { title: 'Get Assets By Authority', href: '/das-api/methods/get-assets-by-authority' },
+            { title: 'Get Assets By Creator', href: '/das-api/methods/get-assets-by-creator' },
+            { title: 'Get Assets By Group', href: '/das-api/methods/get-assets-by-group' },
+            { title: 'Get Assets By Owner', href: '/das-api/methods/get-assets-by-owner' },
+            { title: 'Search Assets', href: '/das-api/methods/search-assets' },
           ],
         },
         {
-          title: 'Core Extension',
+          title: 'Core Extension SDK',
           links: [
             { title: 'Extension Overview', href: '/das-api/core-extension' },
             { title: 'Get Core Asset', href: '/das-api/core-extension/methods/get-asset' },
