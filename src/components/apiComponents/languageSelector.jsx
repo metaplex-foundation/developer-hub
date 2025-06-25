@@ -1,4 +1,4 @@
-import { Icon } from '@/components/icons'
+import { Icon } from '@/components/icons';
 
 const languages = [
   { name: 'curl', icon: 'CurlIcon' },
@@ -12,6 +12,7 @@ const languages = [
   // { name: 'swift', icon: 'SwiftIcon' },
   { name: 'rust', icon: 'RustIcon' },
   { name: 'csharp', icon: 'CSharpIcon' },
+  { name: 'umi', icon: 'SolidCodeBracketSquare' },
 ]
 
 const LanguageSelector = ({ activeLanguage, setActiveLanguage }) => {

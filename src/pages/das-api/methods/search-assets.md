@@ -36,25 +36,7 @@ Return the list of assets given a search criteria.
 | `before`            |          | Retrieve assets before the specified ID.   |
 | `after`             |          | Retrieve assets after the specified ID.    |
 | `jsonUri`           |          | The value for the JSON URI.  |
-
-## UMI w/ DAS SDK
-
-{% totem %}
-
-```js
-import { publicKey } from '@metaplex-foundation/umi';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-
-const umi = createUmi('<ENDPOINT>').use(dasApi());
-
-const assets = await umi.rpc.searchAssets({
-    owner: publicKey('N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw'),
-    jsonUri: 'https://arweave.net/c9aGs5fOk7gD4wWnSvmzeqgtfxAGRgtI1jYzvl8-IVs/chiaki-violet-azure-common.json',
-});
-console.log(assets.items.length == 1);
-```
-{% /totem %}
+| `options`           |          | Display options object. See [Display Options](/das-api/display-options) for details. |
 
 ## Playground
 

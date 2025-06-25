@@ -1,0 +1,291 @@
+---
+title: Get All Tokens in a Wallet
+metaTitle: Get Wallet Tokens | DAS API Guides
+description: Learn how to retrieve all tokens owned by a specific wallet
+---
+
+# Get All Tokens in a Wallet
+
+This guide shows you how to retrieve all tokens (NFTs, fungible tokens, and other digital assets) owned by a specific wallet address using the DAS API.
+
+## Method 1: Using Get Assets By Owner (Recommended)
+
+The `getAssetsByOwner` method is the most direct way to get all tokens owned by a wallet.
+
+### UMI Example
+
+```typescript
+import { publicKey } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+
+const umi = createUmi('<ENDPOINT>').use(dasApi())
+
+// Get all tokens owned by a wallet
+const walletTokens = await umi.rpc.getAssetsByOwner({
+  owner: publicKey('WALLET_ADDRESS'),
+  limit: 1000,
+  displayOptions: {
+    showCollectionMetadata: true,
+    showFungible: true
+  }
+})
+
+console.log(`Found ${walletTokens.items.length} tokens`)
+walletTokens.items.forEach(token => {
+  console.log(`Token: ${token.id}`)
+  console.log(`Interface: ${token.interface}`)
+  console.log(`Name: ${token.content.metadata?.name || 'Unknown'}`)
+})
+```
+
+### JavaScript Example
+
+```javascript
+const response = await fetch('https://api.mainnet-beta.solana.com', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'getAssetsByOwner',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      limit: 1000,
+      options: {
+        showCollectionMetadata: true,
+        showFungible: true
+      }
+    }
+  })
+})
+
+const data = await response.json()
+console.log(`Found ${data.result.items.length} tokens`)
+```
+
+### cURL Example
+
+```bash
+curl -X POST https://api.mainnet-beta.solana.com \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "getAssetsByOwner",
+    "params": {
+      "ownerAddress": "WALLET_ADDRESS",
+      "limit": 1000,
+      "options": {
+        "showCollectionMetadata": true,
+        "showFungible": true
+      }
+    }
+  }'
+```
+
+## Method 2: Using Search Assets with Owner Filter
+
+You can also use `searchAssets` with an owner filter for more specific queries.
+
+### UMI Example
+
+```typescript
+import { publicKey } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+
+const umi = createUmi('<ENDPOINT>').use(dasApi())
+
+// Search for all assets owned by a specific wallet
+const walletAssets = await umi.rpc.searchAssets({
+  owner: publicKey('WALLET_ADDRESS'),
+  limit: 1000,
+  displayOptions: {
+    showCollectionMetadata: true,
+    showFungible: true
+  }
+})
+
+console.log(`Found ${walletAssets.items.length} assets`)
+```
+
+## Method 3: Pagination for Large Wallets
+
+For wallets with many tokens, implement pagination to get all results:
+
+### UMI Example
+
+```typescript
+import { publicKey } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+
+const umi = createUmi('<ENDPOINT>').use(dasApi())
+
+async function getAllWalletTokens(walletAddress: string) {
+  const allTokens = []
+  let page = 1
+  let hasMore = true
+
+  while (hasMore) {
+    const response = await umi.rpc.getAssetsByOwner({
+      owner: publicKey(walletAddress),
+      limit: 1000,
+      page: page,
+      displayOptions: {
+        showCollectionMetadata: true,
+        showFungible: true
+      }
+    })
+
+    allTokens.push(...response.items)
+
+    // Check if there are more pages
+    hasMore = response.items.length === 1000
+    page++
+  }
+
+  return allTokens
+}
+
+// Usage
+const tokens = await getAllWalletTokens('WALLET_ADDRESS')
+console.log(`Total tokens: ${tokens.length}`)
+```
+
+## Method 4: Filtering by Token Type
+
+You can filter tokens by their interface type to get specific categories:
+
+### UMI Example
+
+```typescript
+import { publicKey } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+
+const umi = createUmi('<ENDPOINT>').use(dasApi())
+
+// Get only NFTs
+const nfts = await umi.rpc.searchAssets({
+  owner: publicKey('WALLET_ADDRESS'),
+  interface: 'V1_NFT',
+  limit: 1000,
+  displayOptions: {
+    showCollectionMetadata: true
+  }
+})
+
+// Get only fungible assets
+const fungibleAssets = await umi.rpc.searchAssets({
+  owner: publicKey('WALLET_ADDRESS'),
+  interface: 'FungibleAsset',
+  limit: 1000,
+  displayOptions: {
+    showFungible: true
+  }
+})
+
+console.log(`NFTs: ${nfts.items.length}`)
+console.log(`Fungible assets: ${fungibleAssets.items.length}`)
+```
+
+## Method 5: Sorting and Limiting Results
+
+You can sort results and limit the number of tokens returned:
+
+### UMI Example
+
+```typescript
+import { publicKey } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+
+const umi = createUmi('<ENDPOINT>').use(dasApi())
+
+// Get most recently created tokens
+const recentTokens = await umi.rpc.getAssetsByOwner({
+  owner: publicKey('WALLET_ADDRESS'),
+  limit: 10,
+  sortBy: {
+    sortBy: 'created',
+    sortDirection: 'desc'
+  },
+  displayOptions: {
+    showCollectionMetadata: true
+  }
+})
+
+// Get tokens sorted by ID
+const sortedTokens = await umi.rpc.getAssetsByOwner({
+  owner: publicKey('WALLET_ADDRESS'),
+  limit: 50,
+  sortBy: {
+    sortBy: 'id',
+    sortDirection: 'asc'
+  }
+})
+```
+
+## Analyzing Wallet Contents
+
+Here's how to analyze the types of tokens in a wallet:
+
+### UMI Example
+
+```typescript
+import { publicKey } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+
+const umi = createUmi('<ENDPOINT>').use(dasApi())
+
+async function analyzeWallet(walletAddress: string) {
+  const tokens = await umi.rpc.getAssetsByOwner({
+    owner: publicKey(walletAddress),
+    limit: 1000,
+    displayOptions: {
+      showCollectionMetadata: true,
+      showFungible: true
+    }
+  })
+
+  const analysis = {
+    totalTokens: tokens.items.length,
+    nfts: tokens.items.filter(t => t.interface === 'V1_NFT').length,
+    fungibleAssets: tokens.items.filter(t => t.interface === 'FungibleAsset').length,
+    programmableNfts: tokens.items.filter(t => t.interface === 'V2_NFT').length,
+    collections: new Set(tokens.items.map(t => t.grouping?.find(g => g.group_key === 'collection')?.group_value).filter(Boolean)).size
+  }
+
+  console.log('Wallet Analysis:', analysis)
+  return analysis
+}
+
+// Usage
+const analysis = await analyzeWallet('WALLET_ADDRESS')
+```
+
+## Tips and Best Practices
+
+1. **Use Display Options**: Enable `showCollectionMetadata` and `showFungible` to get complete token information.
+
+2. **Handle Pagination**: For wallets with many tokens, always implement pagination.
+
+3. **Filter by Interface**: Use the `interface` parameter to get specific token types.
+
+4. **Sort Results**: Use `sortBy` to organize results by creation date, ID, or other criteria.
+
+5. **Cache Results**: Wallet contents don't change frequently, so consider caching for better performance.
+
+6. **Rate Limiting**: Be mindful of API rate limits when making multiple requests.
+
+## Related Guides
+
+- [Get Fungible Assets by Owner](/das-api/guides/get-fungible-assets)
+- [Get NFTs by Owner](/das-api/guides/get-nfts-by-owner)
+- [Get Assets by Owner and Collection](/das-api/guides/owner-and-collection)
+- [Analyze Collection Statistics](/das-api/guides/collection-statistics) 

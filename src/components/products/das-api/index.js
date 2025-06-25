@@ -1,8 +1,8 @@
 import {
   documentationSection
-} from '@/shared/sections'
-import { TableCellsIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
+} from '@/shared/sections';
+import { TableCellsIcon } from '@heroicons/react/24/solid';
+import { Hero } from './Hero';
 
 export const das = {
   name: 'DAS API',
@@ -25,6 +25,7 @@ export const das = {
             { title: 'Overview', href: '/das-api' },
             { title: 'Getting Started', href: '/das-api/getting-started' },
             { title: 'DAS API RPC Providers', href: '/rpc-providers' },
+            { title: 'Display Options', href: '/das-api/display-options' },
           ],
         },
         {
@@ -41,6 +42,22 @@ export const das = {
             { title: 'Get Assets By Group', href: '/das-api/methods/get-assets-by-group' },
             { title: 'Get Assets By Owner', href: '/das-api/methods/get-assets-by-owner' },
             { title: 'Search Assets', href: '/das-api/methods/search-assets' },
+          ],
+        },
+        {
+          title: 'Guides',
+          links: [
+            { title: 'Guides Overview', href: '/das-api/guides' },
+            { title: 'Pagination', href: '/das-api/guides/pagination' },
+            { title: 'Get Collection NFTs', href: '/das-api/guides/get-collection-nfts' },
+            { title: 'Get NFTs by Owner', href: '/das-api/guides/get-nfts-by-owner' },
+            { title: 'Get Wallet Tokens', href: '/das-api/guides/get-wallet-tokens' },
+            { title: 'Get Fungible Assets', href: '/das-api/guides/get-fungible-assets' },
+            { title: 'Search by Criteria', href: '/das-api/guides/search-by-criteria' },
+            { title: 'Owner and Collection', href: '/das-api/guides/owner-and-collection' },
+            { title: 'Find Compressed NFTs', href: '/das-api/guides/find-compressed-nfts' },
+            { title: 'Collection Statistics', href: '/das-api/guides/collection-statistics' },
+            { title: 'Find Token Holders', href: '/das-api/guides/find-token-holders' },
           ],
         },
         {

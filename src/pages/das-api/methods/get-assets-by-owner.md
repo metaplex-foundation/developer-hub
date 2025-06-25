@@ -17,27 +17,7 @@ Return the list of assets given an owner address.
 | `page`             |          | The index of the "page" to retrieve.       |
 | `before`           |          | Retrieve assets before the specified ID.   |
 | `after`            |          | Retrieve assets after the specified ID.    |
-
-## UMI w/ DAS SDK
-
-{% totem %}
-
-```js
-import { publicKey } from '@metaplex-foundation/umi';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-
-const umi = createUmi('<ENDPOINT>').use(dasApi());
-const owner = publicKey('N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw');
-
-const assets = await umi.rpc.getAssetsByOwner({
-    owner,
-    limit: 10
-});
-console.log(assets.items.length > 0);
-```
-
-{% /totem %}
+| `options`          |          | Display options object. See [Display Options](/das-api/display-options) for details. |
 
 ## Playground
 
