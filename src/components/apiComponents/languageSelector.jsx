@@ -1,6 +1,7 @@
 import { Icon } from '@/components/icons';
 
 const languages = [
+  { name: 'umi', icon: 'SolidCodeBracketSquare' },
   { name: 'curl', icon: 'CurlIcon' },
   { name: 'javascript', icon: 'JavaScriptIcon' },
   { name: 'python', icon: 'PythonIcon' },
@@ -12,7 +13,6 @@ const languages = [
   // { name: 'swift', icon: 'SwiftIcon' },
   { name: 'rust', icon: 'RustIcon' },
   { name: 'csharp', icon: 'CSharpIcon' },
-  { name: 'umi', icon: 'SolidCodeBracketSquare' },
 ]
 
 const LanguageSelector = ({ activeLanguage, setActiveLanguage }) => {

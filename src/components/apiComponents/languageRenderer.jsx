@@ -14,7 +14,7 @@ import UmiRequestRenderer from './languageComponents/umiRequestRenderer';
 import LanguageSelector from './languageSelector';
 
 const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
-  const [activeLanguage, setActiveLanguage] = useState('javascript')
+  const [activeLanguage, setActiveLanguage] = useState('umi')
 
   function strToTitleCase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)

@@ -29,7 +29,7 @@ export const das = {
           ],
         },
         {
-          title: 'Methods',
+          title: 'Methods & Playground',
           links: [
             { title: 'Method Overview', href: '/das-api/methods' },
             { title: 'Get Asset', href: '/das-api/methods/get-asset' },
