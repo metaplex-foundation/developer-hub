@@ -12,8 +12,8 @@ This guide shows you how to find and work with compressed NFTs using the DAS API
 
 Discover compressed NFTs owned by a specific wallet:
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -47,13 +47,15 @@ console.log(`Regular NFTs: ${regularNfts.items.length}`)
 console.log(`Compressed NFTs: ${ownerCompressedNfts.items.length}`)
 console.log(`Total NFTs: ${regularNfts.items.length + ownerCompressedNfts.items.length}`)
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 2: Finding Compressed NFTs by Collection
 
 Find compressed NFTs from a specific collection:
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -76,13 +78,15 @@ const collectionCompressedNfts = await umi.rpc.searchAssets({
 
 console.log(`Found ${collectionCompressedNfts.items.length} compressed NFTs in collection`)
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 3: Finding Compressed NFTs by Creator
 
 Discover compressed NFTs created by a specific wallet:
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -116,6 +120,8 @@ console.log(`Creator's regular NFTs: ${creatorRegularNfts.items.length}`)
 console.log(`Creator's compressed NFTs: ${creatorCompressedNfts.items.length}`)
 console.log(`Creator's total NFTs: ${creatorRegularNfts.items.length + creatorCompressedNfts.items.length}`)
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Tips and Best Practices
 

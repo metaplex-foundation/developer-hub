@@ -12,8 +12,8 @@ This guide shows you how to analyze collection statistics, distribution, and own
 
 Get fundamental statistics about a collection including total assets, ownership distribution. Be creative with the results and use the data to build your own insights.
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -66,9 +66,8 @@ async function getCollectionStatistics(collectionAddress) {
 // Usage
 const stats = await getCollectionStatistics('COLLECTION_ADDRESS')
 ```
-
-### JavaScript Example
-
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
 ```javascript
 async function getCollectionStatistics(collectionAddress) {
   const response = await fetch('https://api.mainnet-beta.solana.com', {
@@ -108,6 +107,9 @@ async function getCollectionStatistics(collectionAddress) {
 // Usage
 const stats = await getCollectionStatistics('COLLECTION_ADDRESS')
 ```
+{% /totem-accordion %}
+{% /totem %}
+
 ## Common Use Cases
 
 - **Analytics Dashboards**: Display collection statistics and trends

@@ -12,8 +12,8 @@ This guide shows you how to retrieve all non-fungible tokens (NFTs) owned by a s
 
 The `getAssetsByOwner` method combined with interface filtering is the most efficient way to get NFTs owned by a specific wallet.
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -43,9 +43,8 @@ nfts.forEach(nft => {
   console.log('---')
 })
 ```
-
-### JavaScript Example
-
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
 ```javascript
 const response = await fetch('https://api.mainnet-beta.solana.com', {
   method: 'POST',
@@ -71,9 +70,8 @@ const data = await response.json()
 
 console.log(`Found ${data.result.items.length} NFTs`)
 ```
-
-### cURL Example
-
+{% /totem-accordion %}
+{% totem-accordion title="cURL Example" %}
 ```bash
 curl -X POST https://api.mainnet-beta.solana.com \
   -H "Content-Type: application/json" \
@@ -91,13 +89,15 @@ curl -X POST https://api.mainnet-beta.solana.com \
     }
   }'
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 2: Using Search Assets with Owner and Interface Filter
 
 You can use `searchAssets` to get more specific results with additional filters.
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -117,13 +117,15 @@ const ownerNfts = await umi.rpc.searchAssets({
 
 console.log(`Found ${ownerNfts.items.length} NFTs`)
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 4: Filtering NFTs by Collection
 
 You can filter NFTs by specific collections:
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -147,13 +149,15 @@ const collectionNfts = await umi.rpc.searchAssets({
 
 console.log(`Found ${collectionNfts.items.length} NFTs from this collection`)
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 5: Sorting NFTs by Various Criteria
 
 You can sort NFTs by different attributes:
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -199,6 +203,8 @@ alphabeticallySortedNfts.slice(0, 10).forEach(nft => {
   console.log(nft.content.metadata?.name)
 })
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Common Use Cases
 

@@ -12,8 +12,8 @@ This guide shows you how to use the DAS API's `searchAssets` method to find digi
 
 The `searchAssets` method supports combining multiple filters for precise asset discovery.
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -33,9 +33,8 @@ const searchResults = await umi.rpc.searchAssets({
 
 console.log(`Found ${searchResults.items.length} assets matching criteria`)
 ```
-
-### JavaScript Example
-
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
 ```javascript
 const response = await fetch('https://api.mainnet-beta.solana.com', {
   method: 'POST',
@@ -60,9 +59,8 @@ const response = await fetch('https://api.mainnet-beta.solana.com', {
 const data = await response.json()
 console.log(`Found ${data.result.items.length} assets`)
 ```
-
-### cURL Example
-
+{% /totem-accordion %}
+{% totem-accordion title="cURL Example" %}
 ```bash
 curl -X POST https://api.mainnet-beta.solana.com \
   -H "Content-Type: application/json" \
@@ -80,13 +78,15 @@ curl -X POST https://api.mainnet-beta.solana.com \
     }
   }'
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 2: Collection and Owner Search
 
 Find assets from a specific collection owned by a particular wallet:
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -109,13 +109,15 @@ const collectionAssets = await umi.rpc.searchAssets({
 
 console.log(`Found ${collectionAssets.items.length} assets from collection owned by wallet`)
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 3: Advanced Filtering with Multiple Conditions
 
 Combine various filters for complex queries, like searching for NFTs from a specific collection and owned by a specific wallet that are not frozen have a specific verified creator and are not compressed sorted by creation date in descending order including the collection metadata:
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -146,13 +148,15 @@ const complexSearch = await umi.rpc.searchAssets({
 
 console.log(`Found ${complexSearch.items.length} assets matching complex criteria`)
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 6: Search by JSON URI and Interface
 
 Find assets with specific metadata or interface types:
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -170,8 +174,9 @@ const specificUriAssets = await umi.rpc.searchAssets({
 })
 
 console.log(`Found ${specificUriAssets.items.length} assets with this metadata uri`)
-
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Tips and Best Practices
 

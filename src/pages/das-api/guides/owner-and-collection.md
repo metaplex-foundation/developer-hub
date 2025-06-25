@@ -12,8 +12,8 @@ This guide shows you how to find digital assets that belong to a specific collec
 
 The `searchAssets` method allows you to combine owner and collection filters for precise results.
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -45,9 +45,8 @@ collectionAssets.items.forEach(asset => {
   console.log('---')
 })
 ```
-
-### JavaScript Example
-
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
 ```javascript
 const response = await fetch('https://api.mainnet-beta.solana.com', {
   method: 'POST',
@@ -73,9 +72,8 @@ const response = await fetch('https://api.mainnet-beta.solana.com', {
 const data = await response.json()
 console.log(`Found ${data.result.items.length} assets from collection owned by wallet`)
 ```
-
-### cURL Example
-
+{% /totem-accordion %}
+{% totem-accordion title="cURL Example" %}
 ```bash
 curl -X POST https://api.mainnet-beta.solana.com \
   -H "Content-Type: application/json" \
@@ -94,6 +92,8 @@ curl -X POST https://api.mainnet-beta.solana.com \
     }
   }'
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Common Use Cases
 

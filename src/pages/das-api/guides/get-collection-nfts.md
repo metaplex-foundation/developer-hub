@@ -12,8 +12,8 @@ This guide shows you how to retrieve all digital assets (NFTs, tokens) that belo
 
 The `getAssetsByGroup` method is specifically designed to find assets that belong to a particular collection.
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -44,9 +44,8 @@ collectionAssets.items.forEach(asset => {
   console.log('---')
 })
 ```
-
-### JavaScript Example
-
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
 ```javascript
 const response = await fetch('https://api.mainnet-beta.solana.com', {
   method: 'POST',
@@ -72,9 +71,8 @@ const response = await fetch('https://api.mainnet-beta.solana.com', {
 const data = await response.json()
 console.log(`Found ${data.result.items.length} assets in collection`)
 ```
-
-### cURL Example
-
+{% /totem-accordion %}
+{% totem-accordion title="cURL Example" %}
 ```bash
 curl -X POST https://api.mainnet-beta.solana.com \
   -H "Content-Type: application/json" \
@@ -93,13 +91,15 @@ curl -X POST https://api.mainnet-beta.solana.com \
     }
   }'
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 2: Using Search Assets with Collection Filter
 
 You can also use `searchAssets` with a collection grouping for more specific queries. See [Search Assets by Criteria](/das-api/guides/search-by-criteria) for more information.
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -121,13 +121,15 @@ const collectionAssets = await umi.rpc.searchAssets({
 
 console.log(`Found ${collectionAssets.items.length} assets`)
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 3: Sorting Collection Assets
 
 You can sort collection assets by various criteria:
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -168,7 +170,8 @@ newestAssets.items.slice(0, 5).forEach(asset => {
   console.log(`${asset.content.metadata?.name} - Created: ${asset.content.json_uri}`)
 })
 ```
-
+{% /totem-accordion %}
+{% /totem %}
 
 ## Common Use Cases
 

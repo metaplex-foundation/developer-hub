@@ -12,8 +12,8 @@ This guide shows you how to find all wallets that hold a specific NFT in a colle
 
 The `searchAssets` method is the most efficient way to find all holders of a specific NFT in a collection.
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -39,9 +39,8 @@ holders.items.forEach(asset => {
   console.log(`Token ID: ${asset.id}`)
 })
 ```
-
-### JavaScript Example
-
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
 ```javascript
 const response = await fetch('https://api.mainnet-beta.solana.com', {
   method: 'POST',
@@ -66,9 +65,8 @@ const response = await fetch('https://api.mainnet-beta.solana.com', {
 const data = await response.json()
 console.log(`Found ${data.result.items.length} assets in collection`)
 ```
-
-### cURL Example
-
+{% /totem-accordion %}
+{% totem-accordion title="cURL Example" %}
 ```bash
 curl -X POST https://api.mainnet-beta.solana.com \
   -H "Content-Type: application/json" \
@@ -86,13 +84,15 @@ curl -X POST https://api.mainnet-beta.solana.com \
     }
   }'
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 2: Using Get Assets By Group
 
 For collection-based NFTs, you can use also `getAssetsByGroup` to find all NFTs in a collection. It is easier to use than `searchAssets` but provides less options for further filtering.
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -119,13 +119,15 @@ collectionAssets.items.forEach(asset => {
 console.log(`Found ${uniqueOwners.size} unique holders`)
 console.log('Holders:', Array.from(uniqueOwners))
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Method 3: For Individual Tokens
 
 If you want to find holders of a specific individual NFT (not part of a collection), you'll need to use the NFT's specific ID.
 
-### UMI Example
-
+{% totem %}
+{% totem-accordion title="UMI Example" %}
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -143,6 +145,8 @@ const token = await umi.rpc.getAsset({
 
 console.log(`Token ${token.id} is owned by: ${token.ownership.owner}`)
 ```
+{% /totem-accordion %}
+{% /totem %}
 
 ## Tips and Best Practices
 
