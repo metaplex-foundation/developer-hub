@@ -28,7 +28,9 @@ You may also be eligible for a bounty. More details can be found [here](https://
 
 ## Audits
 
-Ongoing automated and manual security audits are routinely performed by our audit partners [Sec3](https://www.sec3.dev/), [Accretion](https://www.accretion.fi/), and [OtterSec](https://osec.io). Automated audits are performed for every PR and security issues must be resolved before merging into the main branch. Manual ongoing audits are initiated for changes above a specific threshold and security issues must be resolved before merging into the main branch.
+Ongoing automated and manual security audits are routinely performed by our audit partners [Sec3](https://www.sec3.dev/), [Accretion](https://www.accretion.fi/), and [OtterSec](https://osec.io).
+
+Automated audits are performed for every PR and security issues must be resolved before merging into the main branch. Manual ongoing audits are initiated for changes above a specific threshold and security issues must be resolved before merging into the main branch.
 
 [OShield](https://www.oshield.xyz) (formerly MadShield) is responsible for many of our historical audits.
 
@@ -46,7 +48,7 @@ Large one-off audits are also performed when there are large changes to the code
 | Auction House         | 2022-10-24                    |
 | Gumdrop               | 2022-05-16                    |
 
-We do not have ongoing automated nor manual security audits that are routinely performed by our audit partners for our developer tools. However, audits may be ordered, facilitated, and paid for by our community of 3rd party Solana ecosystem developers or entities of thier own accord.
+We do not have ongoing automated nor manual security audits that are routinely performed by our audit partners for our developer tools. However, audits may be ordered, facilitated, and paid for by our community of 3rd party Solana ecosystem developers or entities of their own accord.
 
 | Developer Tools | Last audit date |
 | --------------- | --------------- |
