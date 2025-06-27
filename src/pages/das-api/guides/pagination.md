@@ -46,7 +46,7 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('https://api.mainnet-beta.solana.com').use(dasApi())
+const umi = createUmi('<ENDPOINT>').use(dasApi())
 
 async function getAllAssetsByPage(collectionAddress: string) {
   const limit = 1000
@@ -95,7 +95,7 @@ const collectionAssets = await getAllAssetsByPage('J1S9H3QjnRtBbbuD4HjPV6RpRhwuk
 {% totem %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const url = 'https://api.mainnet-beta.solana.com'
+const url = '<ENDPOINT>'
 
 async function getAllAssetsByPage(collectionAddress) {
   let page = 1
@@ -172,7 +172,7 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('https://api.mainnet-beta.solana.com').use(dasApi())
+const umi = createUmi('<ENDPOINT>').use(dasApi())
 
 async function getAllAssetsByCursor(collectionAddress: string) {
   const limit = 1000
@@ -207,7 +207,7 @@ async function getAllAssetsByCursor(collectionAddress: string) {
 }
 
 // Usage
-const collectionAssets = await getAllAssetsByCursor('J1S9H3QjnRtBbbuD4HjPV6RpRhwuk4zKbxsnCHuTgh9w')
+const collectionAssets = await getAllAssetsByCursor('COLLECTION_ADDRESS')
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -215,7 +215,7 @@ const collectionAssets = await getAllAssetsByCursor('J1S9H3QjnRtBbbuD4HjPV6RpRhw
 {% totem %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const url = 'https://api.mainnet-beta.solana.com'
+const url = '<ENDPOINT>'
 
 async function getAllAssetsByCursor(collectionAddress) {
   let allAssets = []
@@ -234,7 +234,8 @@ async function getAllAssetsByCursor(collectionAddress) {
         id: 'my-id',
         method: 'searchAssets',
         params: {
-          grouping: ['collection', collectionAddress],
+          groupKey: 'collection',
+          groupValue: collectionAddress,
           limit: 1000,
           cursor: cursor,
           sortBy: { sortBy: 'id', sortDirection: 'asc' },
@@ -256,7 +257,7 @@ async function getAllAssetsByCursor(collectionAddress) {
 }
 
 // Usage
-const collectionAssets = await getAllAssetsByCursor('J1S9H3QjnRtBbbuD4HjPV6RpRhwuk4zKbxsnCHuTgh9w')
+const collectionAssets = await getAllAssetsByCursor('COLLECTION_ADDRESS')
 ```
 {% /totem-accordion %}
 {% /totem %}

@@ -15,21 +15,16 @@ The `getAssetsByGroup` method is specifically designed to find assets that belon
 {% totem %}
 {% totem-accordion title="UMI Example" %}
 ```typescript
-import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
+(async () => {
 const umi = createUmi('<ENDPOINT>').use(dasApi())
 
 // Get all assets in a specific collection
 const collectionAssets = await umi.rpc.getAssetsByGroup({
   groupKey: 'collection',
-  groupValue: 'COLLECTION_ADDRESS',
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true,
-    showFungible: true
-  }
+  groupValue: '<COLLECTION_ADDRESS>'
 })
 
 console.log(`Found ${collectionAssets.items.length} assets in collection`)
@@ -43,38 +38,37 @@ collectionAssets.items.forEach(asset => {
   console.log(`Owner: ${asset.ownership.owner}`)
   console.log('---')
 })
+
+})()
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('https://api.mainnet-beta.solana.com', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'getAssetsByGroup',
-    params: {
-      groupKey: 'collection',
-      groupValue: 'COLLECTION_ADDRESS',
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true,
-        showFungible: true
+(async () => {
+const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'getAssetsByGroup',
+      params: {
+        groupKey: 'collection',
+        groupValue: '<COLLECTION_ADDRESS>'
       }
-    }
+    })
   })
-})
-
-const data = await response.json()
-console.log(`Found ${data.result.items.length} assets in collection`)
+  
+  const data = await response.json()
+  console.log(`Found ${data.result.items.length} assets in collection`)
+})()
 ```
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
 ```bash
-curl -X POST https://api.mainnet-beta.solana.com \
+curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
   -d '{
     "jsonrpc": "2.0",
@@ -82,12 +76,7 @@ curl -X POST https://api.mainnet-beta.solana.com \
     "method": "getAssetsByGroup",
     "params": {
       "groupKey": "collection",
-      "groupValue": "COLLECTION_ADDRESS",
-      "limit": 1000,
-      "options": {
-        "showCollectionMetadata": true,
-        "showFungible": true
-      }
+      "groupValue": "COLLECTION_ADDRESS"
     }
   }'
 ```
@@ -105,49 +94,53 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi('<ENDPOINT>').use(dasApi())
 
-// Search for all assets in a collection with additional filters
-const collectionAssets = await umi.rpc.searchAssets({
-  grouping: {
-    key: 'collection',
-    value: 'COLLECTION_ADDRESS'
-  },
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true,
-  }
-})
+  // Search for all assets in a collection with additional filters
+  const allCollectionNfts = await umi.rpc.searchAssets({
+    grouping: {
+      key: 'collection',
+      value: '<COLLECTION_ADDRESS>'
+    },
+    // Optional: DAS usually returns 10.000 assets
+    limit: 1000,
+    // Optional: Display collection metadata in each asset
+    displayOptions: {
+      showCollectionMetadata: true
+    }
+  });
 
-console.log(`Found ${collectionAssets.items.length} assets`)
+  console.log(`Found ${allCollectionNfts.items.length} assets`)
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      grouping: {
-        key: 'collection',
-        value: 'COLLECTION_ADDRESS'
-      },
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true,
+(async () => {
+  const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        groupKey: 'collection',
+        groupValue: '<COLLECTION_ADDRESS>',
+        limit: 1000,
+        options: {
+          showCollectionMetadata: true,
+        }
       }
-    }
+    })
   })
-})
 
-const data = await response.json()
-console.log(`Found ${data.result.items.length} assets`)
+  const data = await response.json()
+  console.log(`Found ${data.result.items.length} assets`)
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -163,104 +156,108 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi('<ENDPOINT>').use(dasApi())
 
-// Get collection assets sorted by creation date (newest first)
-const newestAssets = await umi.rpc.getAssetsByGroup({
-  groupKey: 'collection',
-  groupValue: 'COLLECTION_ADDRESS',
-  limit: 1000,
-  sortBy: {
-    sortBy: 'created',
-    sortDirection: 'desc'
-  },
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
+  // Get collection assets sorted by creation date (newest first)
+  const newestAssets = await umi.rpc.getAssetsByGroup({
+    groupKey: 'collection',
+    groupValue: 'COLLECTION_ADDRESS',
+    limit: 1000,
+    sortBy: {
+      sortBy: 'created',
+      sortDirection: 'desc'
+    },
+    displayOptions: {
+      showCollectionMetadata: true
+    }
+  })
 
-// Get collection assets sorted by name
-const nameSortedAssets = await umi.rpc.getAssetsByGroup({
-  groupKey: 'collection',
-  groupValue: 'COLLECTION_ADDRESS',
-  limit: 1000,
-  sortBy: {
-    sortBy: 'name',
-    sortDirection: 'asc'
-  },
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
+  // Get collection assets sorted by name
+  const nameSortedAssets = await umi.rpc.getAssetsByGroup({
+    groupKey: 'collection',
+    groupValue: 'COLLECTION_ADDRESS',
+    limit: 1000,
+    sortBy: {
+      sortBy: 'name',
+      sortDirection: 'asc'
+    },
+    displayOptions: {
+      showCollectionMetadata: true
+    }
+  })
 
-console.log('Newest assets first:')
-newestAssets.items.slice(0, 5).forEach(asset => {
-  console.log(`${asset.content.metadata?.name} - Created: ${asset.content.json_uri}`)
-})
+  console.log('Newest assets first:')
+  newestAssets.items.slice(0, 5).forEach(asset => {
+    console.log(`${asset.content.metadata?.name} - Created: ${asset.content.json_uri}`)
+  })
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-// Get collection assets sorted by creation date (newest first)
-const newestResponse = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'getAssetsByGroup',
-    params: {
-      groupKey: 'collection',
-      groupValue: 'COLLECTION_ADDRESS',
-      limit: 1000,
-      sortBy: {
-        sortBy: 'created',
-        sortDirection: 'desc'
-      },
-      options: {
-        showCollectionMetadata: true
+(async () => {
+  // Get collection assets sorted by creation date (newest first)
+  const newestResponse = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'getAssetsByGroup',
+      params: {
+        groupKey: 'collection',
+        groupValue: 'COLLECTION_ADDRESS',
+        limit: 1000,
+        sortBy: {
+          sortBy: 'created',
+          sortDirection: 'desc'
+        },
+        options: {
+          showCollectionMetadata: true
+        }
       }
-    }
+    })
   })
-})
 
-const newestData = await newestResponse.json()
-const newestAssets = newestData.result
+  const newestData = await newestResponse.json()
+  const newestAssets = newestData.result
 
-// Get collection assets sorted by name
-const nameResponse = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'getAssetsByGroup',
-    params: {
-      groupKey: 'collection',
-      groupValue: 'COLLECTION_ADDRESS',
-      limit: 1000,
-      sortBy: {
-        sortBy: 'name',
-        sortDirection: 'asc'
-      },
-      options: {
-        showCollectionMetadata: true
+  // Get collection assets sorted by name
+  const nameResponse = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'getAssetsByGroup',
+      params: {
+        groupKey: 'collection',
+        groupValue: 'COLLECTION_ADDRESS',
+        limit: 1000,
+        sortBy: {
+          sortBy: 'name',
+          sortDirection: 'asc'
+        },
+        options: {
+          showCollectionMetadata: true
+        }
       }
-    }
+    })
   })
-})
 
-const nameData = await nameResponse.json()
-const nameSortedAssets = nameData.result
+  const nameData = await nameResponse.json()
+  const nameSortedAssets = nameData.result
 
-console.log('Newest assets first:')
-newestAssets.items.slice(0, 5).forEach(asset => {
-  console.log(`${asset.content.metadata?.name} - Created: ${asset.content.json_uri}`)
-})
+  console.log('Newest assets first:')
+  newestAssets.items.slice(0, 5).forEach(asset => {
+    console.log(`${asset.content.metadata?.name} - Created: ${asset.content.json_uri}`)
+  })
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}

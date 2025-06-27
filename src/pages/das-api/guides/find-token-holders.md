@@ -19,56 +19,60 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi('<ENDPOINT>').use(dasApi())
 
-// Find all holders of a specific NFT in a collection
-const holders = await umi.rpc.searchAssets({
-  grouping: {
-    key: 'collection',
-    value: 'YOUR_COLLECTION_ADDRESS'
-  },
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
+  // Find all holders of a specific NFT in a collection
+  const holders = await umi.rpc.searchAssets({
+    grouping: {
+      key: 'collection',
+      value: 'YOUR_COLLECTION_ADDRESS'
+    },
+    limit: 1000,
+    displayOptions: {
+      showCollectionMetadata: true
+    }
+  })
 
-console.log(`Found ${holders.items.length} holders`)
-holders.items.forEach(asset => {
-  console.log(`Owner: ${asset.ownership.owner}`)
-  console.log(`Token ID: ${asset.id}`)
-})
+  console.log(`Found ${holders.items.length} holders`)
+  holders.items.forEach(asset => {
+    console.log(`Owner: ${asset.ownership.owner}`)
+    console.log(`Token ID: ${asset.id}`)
+  })
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('https://api.mainnet-beta.solana.com', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      groupKey: 'collection',
-      groupValue: 'YOUR_COLLECTION_ADDRESS',
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true
+(async () => {
+  const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        groupKey: 'collection',
+        groupValue: 'YOUR_COLLECTION_ADDRESS',
+        limit: 1000,
+        options: {
+          showCollectionMetadata: true
+        }
       }
-    }
+    })
   })
-})
 
-const data = await response.json()
-console.log(`Found ${data.result.items.length} assets in collection`)
+  const data = await response.json()
+  console.log(`Found ${data.result.items.length} assets in collection`)
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
 ```bash
-curl -X POST https://api.mainnet-beta.solana.com \
+curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
   -d '{
     "jsonrpc": "2.0",

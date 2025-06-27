@@ -19,56 +19,60 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi('<ENDPOINT>').use(dasApi())
 
-// Get all fungible assets owned by a wallet
-const fungibleAssets = await umi.rpc.searchAssets({
-  owner: publicKey('WALLET_ADDRESS'),
-  interface: 'FungibleAsset',
-  limit: 1000,
-  displayOptions: {
-    showFungible: true
-  }
-})
+  // Get all fungible assets owned by a wallet
+  const fungibleAssets = await umi.rpc.searchAssets({
+    owner: publicKey('WALLET_ADDRESS'),
+    interface: 'FungibleAsset',
+    limit: 1000,
+    displayOptions: {
+      showFungible: true
+    }
+  })
 
-console.log(`Found ${fungibleAssets.items.length} fungible assets`)
-fungibleAssets.items.forEach(asset => {
-  console.log(`Token: ${asset.id}`)
-  console.log(`Supply: ${asset.supply}`)
-  console.log(`Name: ${asset.content.metadata?.name || 'Unknown'}`)
-  console.log(`Symbol: ${asset.content.metadata?.symbol || 'Unknown'}`)
-})
+  console.log(`Found ${fungibleAssets.items.length} fungible assets`)
+  fungibleAssets.items.forEach(asset => {
+    console.log(`Token: ${asset.id}`)
+    console.log(`Supply: ${asset.supply}`)
+    console.log(`Name: ${asset.content.metadata?.name || 'Unknown'}`)
+    console.log(`Symbol: ${asset.content.metadata?.symbol || 'Unknown'}`)
+  })
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('https://api.mainnet-beta.solana.com', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      interface: 'FungibleAsset',
-      limit: 1000,
-      options: {
-        showFungible: true
+(async () => {
+  const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        ownerAddress: 'WALLET_ADDRESS',
+        interface: 'FungibleAsset',
+        limit: 1000,
+        options: {
+          showFungible: true
+        }
       }
-    }
+    })
   })
-})
 
-const data = await response.json()
-console.log(`Found ${data.result.items.length} fungible assets`)
+  const data = await response.json()
+  console.log(`Found ${data.result.items.length} fungible assets`)
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
 ```bash
-curl -X POST https://api.mainnet-beta.solana.com \
+curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
   -d '{
     "jsonrpc": "2.0",
@@ -98,55 +102,59 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi('<ENDPOINT>').use(dasApi())
 
-// Get all assets and filter for fungible ones
-const allAssets = await umi.rpc.getAssetsByOwner({
-  owner: publicKey('WALLET_ADDRESS'),
-  limit: 1000,
-  displayOptions: {
-    showFungible: true
-  }
-})
+  // Get all assets and filter for fungible ones
+  const allAssets = await umi.rpc.getAssetsByOwner({
+    owner: publicKey('WALLET_ADDRESS'),
+    limit: 1000,
+    displayOptions: {
+      showFungible: true
+    }
+  })
 
-// Filter for fungible assets
-const fungibleAssets = allAssets.items.filter(asset => 
-  asset.interface === 'FungibleAsset'
-)
+  // Filter for fungible assets
+  const fungibleAssets = allAssets.items.filter(asset => 
+    asset.interface === 'FungibleAsset'
+  )
 
-console.log(`Found ${fungibleAssets.length} fungible assets out of ${allAssets.items.length} total assets`)
+  console.log(`Found ${fungibleAssets.length} fungible assets out of ${allAssets.items.length} total assets`)
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'getAssetsByOwner',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      limit: 1000,
-      options: {
-        showFungible: true
+(async () => {
+  const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'getAssetsByOwner',
+      params: {
+        ownerAddress: 'WALLET_ADDRESS',
+        limit: 1000,
+        options: {
+          showFungible: true
+        }
       }
-    }
+    })
   })
-})
 
-const data = await response.json()
-const allAssets = data.result
+  const data = await response.json()
+  const allAssets = data.result
 
-// Filter for fungible assets
-const fungibleAssets = allAssets.items.filter(asset => 
-  asset.interface === 'FungibleAsset'
-)
+  // Filter for fungible assets
+  const fungibleAssets = allAssets.items.filter(asset => 
+    asset.interface === 'FungibleAsset'
+  )
 
-console.log(`Found ${fungibleAssets.length} fungible assets out of ${allAssets.items.length} total assets`)
+  console.log(`Found ${fungibleAssets.length} fungible assets out of ${allAssets.items.length} total assets`)
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -192,58 +200,60 @@ console.log(`Creator tokens: ${creatorTokens.items.length}`)
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-// Get tokens with specific supply range
-const highValueResponse = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      interface: 'FungibleAsset',
-      supply: 1000000, // Tokens with supply >= 1M
-      limit: 1000,
-      options: {
-        showFungible: true
+(async () => {
+  // Get tokens with specific supply range
+  const highValueResponse = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        ownerAddress: 'WALLET_ADDRESS',
+        interface: 'FungibleAsset',
+        supply: 1000000, // Tokens with supply >= 1M
+        limit: 1000,
+        options: {
+          showFungible: true
+        }
       }
-    }
+    })
   })
-})
 
-const highValueData = await highValueResponse.json()
-const highValueTokens = highValueData.result
+  const highValueData = await highValueResponse.json()
+  const highValueTokens = highValueData.result
 
-// Get tokens by creator
-const creatorResponse = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      interface: 'FungibleAsset',
-      creatorAddress: 'CREATOR_ADDRESS',
-      limit: 1000,
-      options: {
-        showFungible: true
+  // Get tokens by creator
+  const creatorResponse = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        ownerAddress: 'WALLET_ADDRESS',
+        interface: 'FungibleAsset',
+        creatorAddress: 'CREATOR_ADDRESS',
+        limit: 1000,
+        options: {
+          showFungible: true
+        }
       }
-    }
+    })
   })
-})
 
-const creatorData = await creatorResponse.json()
-const creatorTokens = creatorData.result
+  const creatorData = await creatorResponse.json()
+  const creatorTokens = creatorData.result
 
-console.log(`High value tokens: ${highValueTokens.items.length}`)
-console.log(`Creator tokens: ${creatorTokens.items.length}`)
+  console.log(`High value tokens: ${highValueTokens.items.length}`)
+  console.log(`Creator tokens: ${creatorTokens.items.length}`)
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}

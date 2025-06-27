@@ -67,7 +67,7 @@ console.log(`Found ${data.result.items.length} tokens`)
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
 ```bash
-curl -X POST https://api.mainnet-beta.solana.com \
+curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
   -d '{
     "jsonrpc": "2.0",

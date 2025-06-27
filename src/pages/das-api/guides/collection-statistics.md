@@ -19,111 +19,113 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi('<ENDPOINT>').use(dasApi())
 
-async function getCollectionStatistics(collectionAddress) {
-  // Get all assets in the collection
-  const collectionAssets = await umi.rpc.getAssetsByGroup({
-    groupKey: 'collection',
-    groupValue: collectionAddress,
-    limit: 1000,
-    displayOptions: {
-      showCollectionMetadata: true,
-      showFungible: true
-    }
-  })
+  async function getCollectionStatistics(collectionAddress) {
+    // Get all assets in the collection
+    const collectionAssets = await umi.rpc.getAssetsByGroup({
+      groupKey: 'collection',
+      groupValue: collectionAddress,
+      limit: 1000,
+      displayOptions: {
+        showCollectionMetadata: true
+      }
+    })
 
-  const assets = collectionAssets.items
-  
-  // Basic statistics
-  const totalAssets = assets.length
-  const uniqueOwners = new Set(assets.map(asset => asset.ownership.owner))
+    const assets = collectionAssets.items
     
-  // Ownership distribution
-  const ownershipCounts = {}
-  assets.forEach(asset => {
-    ownershipCounts[asset.ownership.owner] = (ownershipCounts[asset.ownership.owner] || 0) + 1
-  })
-  
-  // Top owners
-  const topOwners = Object.entries(ownershipCounts)
-    .sort(([,a], [,b]) => b - a)
-    .slice(0, 10)
-  
-  console.log('Collection Statistics:')
-  console.log(`Total assets: ${totalAssets}`)
-  console.log(`Unique owners: ${uniqueOwners.size}`)
-  console.log('Top 10 owners:', topOwners)
-  
-  return {
-    totalAssets,
-    uniqueOwners: uniqueOwners.size,
-    ownershipCounts,
-    topOwners
+    // Basic statistics
+    const totalAssets = assets.length
+    const uniqueOwners = new Set(assets.map(asset => asset.ownership.owner))
+      
+    // Ownership distribution
+    const ownershipCounts = {}
+    assets.forEach(asset => {
+      ownershipCounts[asset.ownership.owner] = (ownershipCounts[asset.ownership.owner] || 0) + 1
+    })
+    
+    // Top owners
+    const topOwners = Object.entries(ownershipCounts)
+      .sort(([,a], [,b]) => b - a)
+      .slice(0, 10)
+    
+    console.log('Collection Statistics:')
+    console.log(`Total assets: ${totalAssets}`)
+    console.log(`Unique owners: ${uniqueOwners.size}`)
+    console.log('Top 10 owners:', topOwners)
+    
+    return {
+      totalAssets,
+      uniqueOwners: uniqueOwners.size,
+      ownershipCounts,
+      topOwners
+    }
   }
-}
 
-// Usage
-const stats = getCollectionStatistics('COLLECTION_ADDRESS')
+  // Usage
+  const stats = await getCollectionStatistics('COLLECTION_ADDRESS')
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-async function getCollectionStatistics(collectionAddress) {
-  const response = await fetch('<ENDPOINT>', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      jsonrpc: '2.0',
-      id: 1,
-      method: 'getAssetsByGroup',
-      params: {
-        groupKey: 'collection',
-        groupValue: collectionAddress,
-        limit: 1000,
-        options: {
-          showCollectionMetadata: true,
-          showFungible: true
+(async () => {
+  async function getCollectionStatistics(collectionAddress) {
+    const response = await fetch('<ENDPOINT>', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'getAssetsByGroup',
+        params: {
+          groupKey: 'collection',
+          groupValue: collectionAddress,
+          limit: 1000,
+          options: {
+            showCollectionMetadata: true,
+          }
         }
-      }
+      })
     })
-  })
 
-  const data = await response.json()
-  const assets = data.result.items
-  
-  // Basic statistics
-  const totalAssets = assets.length
-  const uniqueOwners = new Set(assets.map(asset => asset.ownership.owner))
+    const data = await response.json()
+    const assets = data.result.items
     
-  // Ownership distribution
-  const ownershipCounts = {}
-  assets.forEach(asset => {
-    ownershipCounts[asset.ownership.owner] = (ownershipCounts[asset.ownership.owner] || 0) + 1
-  })
-  
-  // Top owners
-  const topOwners = Object.entries(ownershipCounts)
-    .sort(([,a], [,b]) => b - a)
-    .slice(0, 10)
-  
-  console.log('Collection Statistics:')
-  console.log(`Total assets: ${totalAssets}`)
-  console.log(`Unique owners: ${uniqueOwners.size}`)
-  console.log('Top 10 owners:', topOwners)
-  
-  return {
-    totalAssets,
-    uniqueOwners: uniqueOwners.size,
-    ownershipCounts,
-    topOwners
+    // Basic statistics
+    const totalAssets = assets.length
+    const uniqueOwners = new Set(assets.map(asset => asset.ownership.owner))
+      
+    // Ownership distribution
+    const ownershipCounts = {}
+    assets.forEach(asset => {
+      ownershipCounts[asset.ownership.owner] = (ownershipCounts[asset.ownership.owner] || 0) + 1
+    })
+    
+    // Top owners
+    const topOwners = Object.entries(ownershipCounts)
+      .sort(([,a], [,b]) => b - a)
+      .slice(0, 10)
+    
+    console.log('Collection Statistics:')
+    console.log(`Total assets: ${totalAssets}`)
+    console.log(`Unique owners: ${uniqueOwners.size}`)
+    console.log('Top 10 owners:', topOwners)
+    
+    return {
+      totalAssets,
+      uniqueOwners: uniqueOwners.size,
+      ownershipCounts,
+      topOwners
+    }
   }
-}
 
-// Usage
-const stats = getCollectionStatistics('COLLECTION_ADDRESS')
+  // Usage
+  const stats = await getCollectionStatistics('COLLECTION_ADDRESS')
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}

@@ -131,6 +131,8 @@ const response = await fetch('<ENDPOINT>', {
     method: 'searchAssets',
     params: {
       ownerAddress: 'WALLET_ADDRESS',
+      groupKey: 'collection',
+      groupValue: 'COLLECTION_ADDRESS',
       limit: 1000,
       options: {
         showCollectionMetadata: true,
@@ -141,7 +143,7 @@ const response = await fetch('<ENDPOINT>', {
 })
 
 const data = await response.json()
-console.log(`Found ${data.result.items.length} NFTs`)
+console.log(`Found ${data.result.items.length} NFTs from this collection`)
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -189,10 +191,8 @@ const response = await fetch('<ENDPOINT>', {
     method: 'searchAssets',
     params: {
       ownerAddress: 'WALLET_ADDRESS',
-      grouping: {
-        key: 'collection',
-        value: 'COLLECTION_ADDRESS'
-      },
+      groupKey: 'collection',
+      groupValue: 'COLLECTION_ADDRESS',
       limit: 1000,
       options: {
         showCollectionMetadata: true,

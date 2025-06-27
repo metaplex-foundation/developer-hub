@@ -19,50 +19,54 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi('<ENDPOINT>').use(dasApi())
 
-// Search for assets with multiple criteria
-const searchResults = await umi.rpc.searchAssets({
-  owner: publicKey('WALLET_ADDRESS'),
-  creator: publicKey('CREATOR_ADDRESS'),
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true,
-  }
-})
+  // Search for assets with multiple criteria
+  const searchResults = await umi.rpc.searchAssets({
+    owner: publicKey('WALLET_ADDRESS'),
+    creator: publicKey('CREATOR_ADDRESS'),
+    limit: 1000,
+    displayOptions: {
+      showCollectionMetadata: true,
+    }
+  })
 
-console.log(`Found ${searchResults.items.length} assets matching criteria`)
+  console.log(`Found ${searchResults.items.length} assets matching criteria`)
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('https://api.mainnet-beta.solana.com', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      creatorAddress: 'CREATOR_ADDRESS',
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true,
+(async () => {
+  const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        ownerAddress: 'WALLET_ADDRESS',
+        creatorAddress: 'CREATOR_ADDRESS',
+        limit: 1000,
+        options: {
+          showCollectionMetadata: true,
+        }
       }
-    }
+    })
   })
-})
 
-const data = await response.json()
-console.log(`Found ${data.result.items.length} assets`)
+  const data = await response.json()
+  console.log(`Found ${data.result.items.length} assets`)
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
 ```bash
-curl -X POST https://api.mainnet-beta.solana.com \
+curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
   -d '{
     "jsonrpc": "2.0",
@@ -92,51 +96,53 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi('<ENDPOINT>').use(dasApi())
 
-// Find assets from a specific collection owned by a wallet
-const collectionAssets = await umi.rpc.searchAssets({
-  owner: publicKey('WALLET_ADDRESS'),
-  grouping: {
-    key: 'collection',
-    value: 'COLLECTION_ADDRESS'
-  },
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
+  // Find assets from a specific collection owned by a wallet
+  const collectionAssets = await umi.rpc.searchAssets({
+    owner: publicKey('WALLET_ADDRESS'),
+    grouping: {
+      key: 'collection',
+      value: 'COLLECTION_ADDRESS'
+    },
+    limit: 1000,
+    displayOptions: {
+      showCollectionMetadata: true
+    }
+  })
 
-console.log(`Found ${collectionAssets.items.length} assets from collection owned by wallet`)
+  console.log(`Found ${collectionAssets.items.length} assets from collection owned by wallet`)
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      grouping: {
-        key: 'collection',
-        value: 'COLLECTION_ADDRESS'
-      },
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true
+(async () => {
+  const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        ownerAddress: 'WALLET_ADDRESS',
+        groupKey: 'collection',
+        groupValue: 'COLLECTION_ADDRESS',
+        limit: 1000,
+        options: {
+          showCollectionMetadata: true
+        }
       }
-    }
+    })
   })
-})
 
-const data = await response.json()
-console.log(`Found ${data.result.items.length} assets from collection owned by wallet`)
+  const data = await response.json()
+  console.log(`Found ${data.result.items.length} assets from collection owned by wallet`)
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -152,67 +158,69 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi('<ENDPOINT>').use(dasApi())
 
-// Complex search with multiple criteria
-const complexSearch = await umi.rpc.searchAssets({
-  owner: publicKey('WALLET_ADDRESS'),
-  creator: publicKey('CREATOR_ADDRESS'),
-  grouping: {
-    key: 'collection',
-    value: 'COLLECTION_ADDRESS'
-  },
-  creatorVerified: true,
-  frozen: false,
-  compressed: false,
-  limit: 1000,
-  sortBy: {
-    sortBy: 'created',
-    sortDirection: 'desc'
-  },
-  displayOptions: {
-    showCollectionMetadata: true,
-  }
-})
+  // Complex search with multiple criteria
+  const complexSearch = await umi.rpc.searchAssets({
+    owner: publicKey('WALLET_ADDRESS'),
+    creator: publicKey('CREATOR_ADDRESS'),
+    grouping: {
+      key: 'collection',
+      value: 'COLLECTION_ADDRESS'
+    },
+    creatorVerified: true,
+    frozen: false,
+    compressed: false,
+    limit: 1000,
+    sortBy: {
+      sortBy: 'created',
+      sortDirection: 'desc'
+    },
+    displayOptions: {
+      showCollectionMetadata: true,
+    }
+  })
 
-console.log(`Found ${complexSearch.items.length} assets matching complex criteria`)
+  console.log(`Found ${complexSearch.items.length} assets matching complex criteria`)
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      creatorAddress: 'CREATOR_ADDRESS',
-      grouping: {
-        key: 'collection',
-        value: 'COLLECTION_ADDRESS'
-      },
-      creatorVerified: true,
-      frozen: false,
-      compressed: false,
-      limit: 1000,
-      sortBy: {
-        sortBy: 'created',
-        sortDirection: 'desc'
-      },
-      options: {
-        showCollectionMetadata: true,
+(async () => {
+  const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        ownerAddress: 'WALLET_ADDRESS',
+        creatorAddress: 'CREATOR_ADDRESS',
+        groupKey: 'collection',
+        groupValue: 'COLLECTION_ADDRESS',
+        creatorVerified: true,
+        frozen: false,
+        compressed: false,
+        limit: 1000,
+        sortBy: {
+          sortBy: 'created',
+          sortDirection: 'desc'
+        },
+        options: {
+          showCollectionMetadata: true,
+        }
       }
-    }
+    })
   })
-})
 
-const data = await response.json()
-console.log(`Found ${data.result.items.length} assets matching complex criteria`)
+  const data = await response.json()
+  console.log(`Found ${data.result.items.length} assets matching complex criteria`)
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}
