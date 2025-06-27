@@ -110,6 +110,35 @@ const collectionAssets = await umi.rpc.searchAssets({
 console.log(`Found ${collectionAssets.items.length} assets from collection owned by wallet`)
 ```
 {% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+const response = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'searchAssets',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      grouping: {
+        key: 'collection',
+        value: 'COLLECTION_ADDRESS'
+      },
+      limit: 1000,
+      options: {
+        showCollectionMetadata: true
+      }
+    }
+  })
+})
+
+const data = await response.json()
+console.log(`Found ${data.result.items.length} assets from collection owned by wallet`)
+```
+{% /totem-accordion %}
 {% /totem %}
 
 ## Method 3: Advanced Filtering with Multiple Conditions
@@ -149,6 +178,43 @@ const complexSearch = await umi.rpc.searchAssets({
 console.log(`Found ${complexSearch.items.length} assets matching complex criteria`)
 ```
 {% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+const response = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'searchAssets',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      creatorAddress: 'CREATOR_ADDRESS',
+      grouping: {
+        key: 'collection',
+        value: 'COLLECTION_ADDRESS'
+      },
+      creatorVerified: true,
+      frozen: false,
+      compressed: false,
+      limit: 1000,
+      sortBy: {
+        sortBy: 'created',
+        sortDirection: 'desc'
+      },
+      options: {
+        showCollectionMetadata: true,
+      }
+    }
+  })
+})
+
+const data = await response.json()
+console.log(`Found ${data.result.items.length} assets matching complex criteria`)
+```
+{% /totem-accordion %}
 {% /totem %}
 
 ## Method 6: Search by JSON URI and Interface
@@ -174,6 +240,31 @@ const specificUriAssets = await umi.rpc.searchAssets({
 })
 
 console.log(`Found ${specificUriAssets.items.length} assets with this metadata uri`)
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+const response = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'searchAssets',
+    params: {
+      jsonUri: 'https://arweave.net/metadata/',
+      limit: 1000,
+      options: {
+        showCollectionMetadata: true
+      }
+    }
+  })
+})
+
+const data = await response.json()
+console.log(`Found ${data.result.items.length} assets with this metadata uri`)
 ```
 {% /totem-accordion %}
 {% /totem %}

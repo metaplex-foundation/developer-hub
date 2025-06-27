@@ -22,29 +22,65 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 (async () => {
   const umi = createUmi("<ENDPOINT>").use(dasApi());
 
-  // Find compressed NFTs owned by a specific wallet
-  const ownerCompressedNfts = await umi.rpc.searchAssets({
+  // Find all NFTs owned by a specific wallet (both compressed and regular)
+  const allOwnerNfts = await umi.rpc.searchAssets({
     owner: publicKey("WALLET_ADDRESS"),
-    compressed: true,
     limit: 1000
   });
 
-  console.log(
-    `Found ${ownerCompressedNfts.items.length} compressed NFTs owned by wallet`
+  // Filter by compression status
+  const compressedNfts = allOwnerNfts.items.filter(
+    (nft) => nft.compression?.compressed === true
+  );
+  const regularNfts = allOwnerNfts.items.filter(
+    (nft) => !nft.compression?.compressed
   );
 
-  // Compare with regular NFTs
-  const regularNfts = await umi.rpc.searchAssets({
-    owner: publicKey("WALLET_ADDRESS"),
-    compressed: false,
-    limit: 1000
+  console.log(
+    `Found ${compressedNfts.length} compressed NFTs owned by wallet`
+  );
+  console.log(`Regular NFTs: ${regularNfts.length}`);
+  console.log(`Compressed NFTs: ${compressedNfts.length}`);
+  console.log(`Total NFTs: ${allOwnerNfts.items.length}`);
+})();
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+(async () => {
+  const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        ownerAddress: 'WALLET_ADDRESS',
+        limit: 1000
+      }
+    })
   });
 
-  console.log(`Regular NFTs: ${regularNfts.items.length}`);
-  console.log(`Compressed NFTs: ${ownerCompressedNfts.items.length}`);
-  console.log(
-    `Total NFTs: ${regularNfts.items.length + ownerCompressedNfts.items.length}`
+  const data = await response.json();
+  const allOwnerNfts = data.result;
+
+  // Filter by compression status
+  const compressedNfts = allOwnerNfts.items.filter(
+    (nft) => nft.compression?.compressed === true
   );
+  const regularNfts = allOwnerNfts.items.filter(
+    (nft) => !nft.compression?.compressed
+  );
+
+  console.log(
+    `Found ${compressedNfts.length} compressed NFTs owned by wallet`
+  );
+  console.log(`Regular NFTs: ${regularNfts.length}`);
+  console.log(`Compressed NFTs: ${compressedNfts.length}`);
+  console.log(`Total NFTs: ${allOwnerNfts.items.length}`);
 })();
 ```
 {% /totem-accordion %}
@@ -61,27 +97,80 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 (async () => {
+  const umi = createUmi('<ENDPOINT>').use(dasApi())
 
-const umi = createUmi('https://mainnet.helius-rpc.com/?api-key=0aa5bfbe-0077-4414-9d87-02ffa09cc50b').use(dasApi())
+  // Find all NFTs from a specific collection (both compressed and regular)
+  const allCollectionNfts = await umi.rpc.searchAssets({
+    grouping: [
+      'collection',
+      '<COLLECTION_ADDRESS>'
+    ],
+    limit: 1000,
+    // Optional: Display collection metadata in each asset
+    displayOptions: {
+      showCollectionMetadata: true
+    }
+  });
 
-
-// Find compressed NFTs from a specific collection
-const collectionCompressedNfts = await umi.rpc.searchAssets({
-  grouping: [
-    'collection',
-    '5PA96eCFHJSFPY9SWFeRJUHrpoNF5XZL6RrE1JADXhxf'
-  ],
-  compressed: true,
-  limit: 1000,
-  // Optional: Display collection metadata in each asset
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
+  // Filter by compression status
+  const compressedNfts = allCollectionNfts.items.filter(
+    (nft) => nft.compression?.compressed === true
+  );
+  const regularNfts = allCollectionNfts.items.filter(
+    (nft) => !nft.compression?.compressed
+  );
 
   console.log(
-    `Found ${collectionCompressedNfts.items.length} compressed NFTs in collection`
+    `Found ${compressedNfts.length} compressed NFTs in collection`
   );
+  console.log(`Regular NFTs: ${regularNfts.length}`);
+  console.log(`Compressed NFTs: ${compressedNfts.length}`);
+  console.log(`Total NFTs: ${allCollectionNfts.items.length}`);
+})();
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+(async () => {
+  const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        grouping: [
+          'collection',
+          '<COLLECTION_ADDRESS>'
+        ],
+        limit: 1000,
+        options: {
+          showCollectionMetadata: true
+        }
+      }
+    })
+  });
+
+  const data = await response.json();
+  const allCollectionNfts = data.result;
+
+  // Filter by compression status
+  const compressedNfts = allCollectionNfts.items.filter(
+    (nft) => nft.compression?.compressed === true
+  );
+  const regularNfts = allCollectionNfts.items.filter(
+    (nft) => !nft.compression?.compressed
+  );
+
+  console.log(
+    `Found ${compressedNfts.length} compressed NFTs in collection`
+  );
+  console.log(`Regular NFTs: ${regularNfts.length}`);
+  console.log(`Compressed NFTs: ${compressedNfts.length}`);
+  console.log(`Total NFTs: ${allCollectionNfts.items.length}`);
 })();
 ```
 {% /totem-accordion %}
@@ -121,6 +210,47 @@ Discover compressed NFTs created by a specific wallet:
   console.log(`Creator's total NFTs: ${allCreatorNfts.items.length}`);
 })();
 
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+(async () => {
+  const response = await fetch('<ENDPOINT>', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'searchAssets',
+      params: {
+        creatorAddress: 'CREATOR_ADDRESS',
+        options: {
+          showCollectionMetadata: true,
+        }
+      }
+    })
+  });
+
+  const data = await response.json();
+  const allCreatorNfts = data.result;
+
+  // Filter by compression status
+  const compressedNfts = allCreatorNfts.items.filter(
+    (nft) => nft.compression?.compressed === true
+  );
+  const regularNfts = allCreatorNfts.items.filter(
+    (nft) => !nft.compression?.compressed
+  );
+
+  console.log(
+    `Found ${compressedNfts.length} compressed NFTs created by wallet`
+  );
+  console.log(`Creator's regular NFTs: ${regularNfts.length}`);
+  console.log(`Creator's compressed NFTs: ${compressedNfts.length}`);
+  console.log(`Creator's total NFTs: ${allCreatorNfts.items.length}`);
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}

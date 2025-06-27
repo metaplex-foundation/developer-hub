@@ -122,6 +122,34 @@ const collectionAssets = await umi.rpc.searchAssets({
 console.log(`Found ${collectionAssets.items.length} assets`)
 ```
 {% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+const response = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'searchAssets',
+    params: {
+      grouping: {
+        key: 'collection',
+        value: 'COLLECTION_ADDRESS'
+      },
+      limit: 1000,
+      options: {
+        showCollectionMetadata: true,
+      }
+    }
+  })
+})
+
+const data = await response.json()
+console.log(`Found ${data.result.items.length} assets`)
+```
+{% /totem-accordion %}
 {% /totem %}
 
 ## Method 3: Sorting Collection Assets
@@ -164,6 +192,70 @@ const nameSortedAssets = await umi.rpc.getAssetsByGroup({
     showCollectionMetadata: true
   }
 })
+
+console.log('Newest assets first:')
+newestAssets.items.slice(0, 5).forEach(asset => {
+  console.log(`${asset.content.metadata?.name} - Created: ${asset.content.json_uri}`)
+})
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+// Get collection assets sorted by creation date (newest first)
+const newestResponse = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'getAssetsByGroup',
+    params: {
+      groupKey: 'collection',
+      groupValue: 'COLLECTION_ADDRESS',
+      limit: 1000,
+      sortBy: {
+        sortBy: 'created',
+        sortDirection: 'desc'
+      },
+      options: {
+        showCollectionMetadata: true
+      }
+    }
+  })
+})
+
+const newestData = await newestResponse.json()
+const newestAssets = newestData.result
+
+// Get collection assets sorted by name
+const nameResponse = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'getAssetsByGroup',
+    params: {
+      groupKey: 'collection',
+      groupValue: 'COLLECTION_ADDRESS',
+      limit: 1000,
+      sortBy: {
+        sortBy: 'name',
+        sortDirection: 'asc'
+      },
+      options: {
+        showCollectionMetadata: true
+      }
+    }
+  })
+})
+
+const nameData = await nameResponse.json()
+const nameSortedAssets = nameData.result
 
 console.log('Newest assets first:')
 newestAssets.items.slice(0, 5).forEach(asset => {

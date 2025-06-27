@@ -118,6 +118,32 @@ const ownerNfts = await umi.rpc.searchAssets({
 console.log(`Found ${ownerNfts.items.length} NFTs`)
 ```
 {% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+const response = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'searchAssets',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      limit: 1000,
+      options: {
+        showCollectionMetadata: true,
+        showFungible: false
+      }
+    }
+  })
+})
+
+const data = await response.json()
+console.log(`Found ${data.result.items.length} NFTs`)
+```
+{% /totem-accordion %}
 {% /totem %}
 
 ## Method 4: Filtering NFTs by Collection
@@ -148,6 +174,36 @@ const collectionNfts = await umi.rpc.searchAssets({
 })
 
 console.log(`Found ${collectionNfts.items.length} NFTs from this collection`)
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+const response = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'searchAssets',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      grouping: {
+        key: 'collection',
+        value: 'COLLECTION_ADDRESS'
+      },
+      limit: 1000,
+      options: {
+        showCollectionMetadata: true,
+        showFungible: false
+      }
+    }
+  })
+})
+
+const data = await response.json()
+console.log(`Found ${data.result.items.length} NFTs from this collection`)
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -200,6 +256,75 @@ const nameSortedNfts = await umi.rpc.getAssetsByOwner({
 
 console.log('Alphabetically sorted NFTs:')
 alphabeticallySortedNfts.slice(0, 10).forEach(nft => {
+  console.log(nft.content.metadata?.name)
+})
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+// Get NFTs sorted by creation date (newest first)
+const newestResponse = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'getAssetsByOwner',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      limit: 1000,
+      sortBy: {
+        sortBy: 'created',
+        sortDirection: 'desc'
+      },
+      options: {
+        showCollectionMetadata: true,
+        showFungible: false
+      }
+    }
+  })
+})
+
+const newestData = await newestResponse.json()
+const newestNfts = newestData.result
+
+console.log('Newest NFTs first:')
+newestNfts.items.slice(0, 10).forEach(nft => {
+  console.log(`${nft.content.metadata?.name} - Created: ${nft.content.json_uri}`)
+})
+
+// Get NFTs sorted by name
+const nameResponse = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'getAssetsByOwner',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      limit: 1000,
+      sortBy: {
+        sortBy: 'name',
+        sortDirection: 'asc'
+      },
+      options: {
+        showCollectionMetadata: true,
+        showFungible: false
+      }
+    }
+  })
+})
+
+const nameData = await nameResponse.json()
+const nameSortedNfts = nameData.result
+
+console.log('Alphabetically sorted NFTs:')
+nameSortedNfts.items.slice(0, 10).forEach(nft => {
   console.log(nft.content.metadata?.name)
 })
 ```

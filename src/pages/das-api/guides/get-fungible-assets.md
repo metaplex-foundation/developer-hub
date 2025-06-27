@@ -117,6 +117,38 @@ const fungibleAssets = allAssets.items.filter(asset =>
 console.log(`Found ${fungibleAssets.length} fungible assets out of ${allAssets.items.length} total assets`)
 ```
 {% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+const response = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'getAssetsByOwner',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      limit: 1000,
+      options: {
+        showFungible: true
+      }
+    }
+  })
+})
+
+const data = await response.json()
+const allAssets = data.result
+
+// Filter for fungible assets
+const fungibleAssets = allAssets.items.filter(asset => 
+  asset.interface === 'FungibleAsset'
+)
+
+console.log(`Found ${fungibleAssets.length} fungible assets out of ${allAssets.items.length} total assets`)
+```
+{% /totem-accordion %}
 {% /totem %}
 
 ## Method 6: Filtering by Token Properties
@@ -153,6 +185,62 @@ const creatorTokens = await umi.rpc.searchAssets({
     showFungible: true
   }
 })
+
+console.log(`High value tokens: ${highValueTokens.items.length}`)
+console.log(`Creator tokens: ${creatorTokens.items.length}`)
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+// Get tokens with specific supply range
+const highValueResponse = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'searchAssets',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      interface: 'FungibleAsset',
+      supply: 1000000, // Tokens with supply >= 1M
+      limit: 1000,
+      options: {
+        showFungible: true
+      }
+    }
+  })
+})
+
+const highValueData = await highValueResponse.json()
+const highValueTokens = highValueData.result
+
+// Get tokens by creator
+const creatorResponse = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'searchAssets',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      interface: 'FungibleAsset',
+      creatorAddress: 'CREATOR_ADDRESS',
+      limit: 1000,
+      options: {
+        showFungible: true
+      }
+    }
+  })
+})
+
+const creatorData = await creatorResponse.json()
+const creatorTokens = creatorData.result
 
 console.log(`High value tokens: ${highValueTokens.items.length}`)
 console.log(`Creator tokens: ${creatorTokens.items.length}`)

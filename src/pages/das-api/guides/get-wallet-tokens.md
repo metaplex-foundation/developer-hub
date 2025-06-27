@@ -112,6 +112,32 @@ const walletAssets = await umi.rpc.searchAssets({
 console.log(`Found ${walletAssets.items.length} assets`)
 ```
 {% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+const response = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'searchAssets',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      limit: 1000,
+      options: {
+        showCollectionMetadata: true,
+        showFungible: true
+      }
+    }
+  })
+})
+
+const data = await response.json()
+console.log(`Found ${data.result.items.length} assets`)
+```
+{% /totem-accordion %}
 {% /totem %}
 
 ## Method 5: Sorting and Limiting Results
@@ -149,6 +175,60 @@ const sortedTokens = await umi.rpc.getAssetsByOwner({
     sortDirection: 'asc'
   }
 })
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+// Get most recently created tokens
+const recentResponse = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'getAssetsByOwner',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      limit: 10,
+      sortBy: {
+        sortBy: 'created',
+        sortDirection: 'desc'
+      },
+      options: {
+        showCollectionMetadata: true
+      }
+    }
+  })
+})
+
+const recentData = await recentResponse.json()
+const recentTokens = recentData.result
+
+// Get tokens sorted by ID
+const sortedResponse = await fetch('<ENDPOINT>', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'getAssetsByOwner',
+    params: {
+      ownerAddress: 'WALLET_ADDRESS',
+      limit: 50,
+      sortBy: {
+        sortBy: 'id',
+        sortDirection: 'asc'
+      }
+    }
+  })
+})
+
+const sortedData = await sortedResponse.json()
+const sortedTokens = sortedData.result
 ```
 {% /totem-accordion %}
 {% /totem %}
