@@ -57,18 +57,20 @@ Find compressed NFTs from a specific collection:
 {% totem %}
 {% totem-accordion title="UMI Example" %}
 ```typescript
-import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+
+const umi = createUmi('https://mainnet.helius-rpc.com/?api-key=0aa5bfbe-0077-4414-9d87-02ffa09cc50b').use(dasApi())
+
 
 // Find compressed NFTs from a specific collection
 const collectionCompressedNfts = await umi.rpc.searchAssets({
-  grouping: {
-    key: 'collection',
-    value: 'COLLECTION_ADDRESS'
-  },
+  grouping: [
+    'collection',
+    '5PA96eCFHJSFPY9SWFeRJUHrpoNF5XZL6RrE1JADXhxf'
+  ],
   compressed: true,
   limit: 1000,
   // Optional: Display collection metadata in each asset
@@ -77,7 +79,10 @@ const collectionCompressedNfts = await umi.rpc.searchAssets({
   }
 })
 
-console.log(`Found ${collectionCompressedNfts.items.length} compressed NFTs in collection`)
+  console.log(
+    `Found ${collectionCompressedNfts.items.length} compressed NFTs in collection`
+  );
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -89,37 +94,33 @@ Discover compressed NFTs created by a specific wallet:
 {% totem %}
 {% totem-accordion title="UMI Example" %}
 ```typescript
-import { publicKey } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+(async () => {
+  const umi = createUmi("<ENDPOINT>").use(dasApi());
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+  // Find all NFTs created by a specific wallet (both compressed and regular)
+  const allCreatorNfts = await umi.rpc.searchAssets({
+    creator: publicKey("CREATOR_ADDRESS"),
+    displayOptions: {
+      showCollectionMetadata: true,
+    },
+  });
 
-// Find compressed NFTs created by a specific wallet
-const creatorCompressedNfts = await umi.rpc.searchAssets({
-  creator: publicKey('CREATOR_ADDRESS'),
-  compressed: true,
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
+  // Filter by compression status
+  const compressedNfts = allCreatorNfts.items.filter(
+    (nft) => nft.compression?.compressed === true
+  );
+  const regularNfts = allCreatorNfts.items.filter(
+    (nft) => !nft.compression?.compressed
+  );
 
-console.log(`Found ${creatorCompressedNfts.items.length} compressed NFTs created by wallet`)
+  console.log(
+    `Found ${compressedNfts.length} compressed NFTs created by wallet`
+  );
+  console.log(`Creator's regular NFTs: ${regularNfts.length}`);
+  console.log(`Creator's compressed NFTs: ${compressedNfts.length}`);
+  console.log(`Creator's total NFTs: ${allCreatorNfts.items.length}`);
+})();
 
-// Compare with regular NFTs by same creator
-const creatorRegularNfts = await umi.rpc.searchAssets({
-  creator: publicKey('CREATOR_ADDRESS'),
-  compressed: false,
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
-
-console.log(`Creator's regular NFTs: ${creatorRegularNfts.items.length}`)
-console.log(`Creator's compressed NFTs: ${creatorCompressedNfts.items.length}`)
-console.log(`Creator's total NFTs: ${creatorRegularNfts.items.length + creatorCompressedNfts.items.length}`)
 ```
 {% /totem-accordion %}
 {% /totem %}
