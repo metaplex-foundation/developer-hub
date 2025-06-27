@@ -10,7 +10,7 @@ This guide shows you how to find all wallets that hold a specific NFT in a colle
 
 ## Method 1: Using Search Assets (Recommended)
 
-The `searchAssets` method is the most efficient way to find all holders of a specific NFT in a collection.
+The `searchAssets` method is the most efficient way to find all holders of a specific NFT in a collection. `getAssetsByGroup` is also a good option, but it is less flexible.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
@@ -98,28 +98,59 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi(
+    "<<ENDPOINT>>"
+  ).use(dasApi());
 
-// Get all assets in a collection
-const collectionAssets = await umi.rpc.getAssetsByGroup({
-  groupKey: 'collection',
-  groupValue: 'YOUR_COLLECTION_ADDRESS',
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
+  // Get all assets in a collection
+  const collectionAssets = await umi.rpc.getAssetsByGroup({
+    groupKey: "collection",
+    groupValue: "COLLECTION_ADDRESS",
+  });
 
-// Extract unique owners
-const uniqueOwners = new Set()
-collectionAssets.items.forEach(asset => {
-  uniqueOwners.add(asset.ownership.owner)
-})
+  // Extract unique owners
+  const uniqueOwners = new Set();
+  collectionAssets.items.forEach((asset) => {
+    uniqueOwners.add(asset.ownership.owner);
+  });
 
-console.log(`Found ${uniqueOwners.size} unique holders`)
-console.log('Holders:', Array.from(uniqueOwners))
+  console.log(`Found ${uniqueOwners.size} unique holders`);
+  console.log("Holders:", Array.from(uniqueOwners));
+})();
 ```
 {% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+(async () => {
+  const response = await fetch(
+    "<ENDPOINT>",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        id: 1,
+        method: "getAssetsByGroup",
+        params: {
+          groupKey: "collection",
+          groupValue: "COLLECTION_ADDRESS",
+        },
+      }),
+    }
+  );
+  const collectionAssets = await response.json();
+
+  // Extract unique owners
+  const uniqueOwners = new Set();
+  collectionAssets.result.items.forEach((asset) => {
+    uniqueOwners.add(asset.ownership.owner);
+  });
+
+  console.log(`Found ${uniqueOwners.size} unique holders`);
+  console.log("Holders:", Array.from(uniqueOwners));
+})();
+```
 {% /totem %}
 
 ## Method 3: For Individual Tokens
@@ -133,17 +164,37 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi(
+    "<ENDPOINT>"
+  ).use(dasApi());
 
-// Get a specific token
-const token = await umi.rpc.getAsset({
-  id: publicKey('SPECIFIC_TOKEN_ID'),
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
+  // Get a specific token
+  const token = await umi.rpc.getAsset({
+    assetId: publicKey("SPECIFIC_TOKEN_ID")
+  });
 
-console.log(`Token ${token.id} is owned by: ${token.ownership.owner}`)
+  console.log(`Token ${token.id} is owned by: ${token.ownership.owner}`);
+})();
+
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
+```javascript
+(async () => {
+    const response = await fetch("<ENDPOINT>", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          "jsonrpc": "2.0",
+          "id": 1,
+          "method": "getAsset",
+          "params": {
+            "id": "SPECIFIC_TOKEN_ID"
+          }
+        })
+    })
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}
