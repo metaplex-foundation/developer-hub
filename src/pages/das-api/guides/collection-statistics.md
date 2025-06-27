@@ -64,13 +64,13 @@ async function getCollectionStatistics(collectionAddress) {
 }
 
 // Usage
-const stats = await getCollectionStatistics('COLLECTION_ADDRESS')
+const stats = getCollectionStatistics('COLLECTION_ADDRESS')
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
 async function getCollectionStatistics(collectionAddress) {
-  const response = await fetch('https://api.mainnet-beta.solana.com', {
+  const response = await fetch('<ENDPOINT>', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -94,18 +94,36 @@ async function getCollectionStatistics(collectionAddress) {
   const data = await response.json()
   const assets = data.result.items
   
-  // Calculate statistics
+  // Basic statistics
   const totalAssets = assets.length
   const uniqueOwners = new Set(assets.map(asset => asset.ownership.owner))
+    
+  // Ownership distribution
+  const ownershipCounts = {}
+  assets.forEach(asset => {
+    ownershipCounts[asset.ownership.owner] = (ownershipCounts[asset.ownership.owner] || 0) + 1
+  })
   
+  // Top owners
+  const topOwners = Object.entries(ownershipCounts)
+    .sort(([,a], [,b]) => b - a)
+    .slice(0, 10)
+  
+  console.log('Collection Statistics:')
   console.log(`Total assets: ${totalAssets}`)
   console.log(`Unique owners: ${uniqueOwners.size}`)
+  console.log('Top 10 owners:', topOwners)
   
-  return { totalAssets, uniqueOwners: uniqueOwners.size }
+  return {
+    totalAssets,
+    uniqueOwners: uniqueOwners.size,
+    ownershipCounts,
+    topOwners
+  }
 }
 
 // Usage
-const stats = await getCollectionStatistics('COLLECTION_ADDRESS')
+const stats = getCollectionStatistics('COLLECTION_ADDRESS')
 ```
 {% /totem-accordion %}
 {% /totem %}
