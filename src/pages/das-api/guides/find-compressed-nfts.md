@@ -15,37 +15,37 @@ Discover compressed NFTs owned by a specific wallet:
 {% totem %}
 {% totem-accordion title="UMI Example" %}
 ```typescript
-import { publicKey } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+import { publicKey } from "@metaplex-foundation/umi"
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
+import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi("<ENDPOINT>").use(dasApi());
 
-// Find compressed NFTs owned by a specific wallet
-const ownerCompressedNfts = await umi.rpc.searchAssets({
-  owner: publicKey('WALLET_ADDRESS'),
-  compressed: true,
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
+  // Find compressed NFTs owned by a specific wallet
+  const ownerCompressedNfts = await umi.rpc.searchAssets({
+    owner: publicKey("WALLET_ADDRESS"),
+    compressed: true,
+    limit: 1000
+  });
 
-console.log(`Found ${ownerCompressedNfts.items.length} compressed NFTs owned by wallet`)
+  console.log(
+    `Found ${ownerCompressedNfts.items.length} compressed NFTs owned by wallet`
+  );
 
-// Compare with regular NFTs
-const regularNfts = await umi.rpc.searchAssets({
-  owner: publicKey('WALLET_ADDRESS'),
-  compressed: false,
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
+  // Compare with regular NFTs
+  const regularNfts = await umi.rpc.searchAssets({
+    owner: publicKey("WALLET_ADDRESS"),
+    compressed: false,
+    limit: 1000
+  });
 
-console.log(`Regular NFTs: ${regularNfts.items.length}`)
-console.log(`Compressed NFTs: ${ownerCompressedNfts.items.length}`)
-console.log(`Total NFTs: ${regularNfts.items.length + ownerCompressedNfts.items.length}`)
+  console.log(`Regular NFTs: ${regularNfts.items.length}`);
+  console.log(`Compressed NFTs: ${ownerCompressedNfts.items.length}`);
+  console.log(
+    `Total NFTs: ${regularNfts.items.length + ownerCompressedNfts.items.length}`
+  );
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -71,6 +71,7 @@ const collectionCompressedNfts = await umi.rpc.searchAssets({
   },
   compressed: true,
   limit: 1000,
+  // Optional: Display collection metadata in each asset
   displayOptions: {
     showCollectionMetadata: true
   }

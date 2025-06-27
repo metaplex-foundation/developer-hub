@@ -10,23 +10,6 @@ const UmiRequestRenderer = ({
 }) => {
   const httpBody = bodyParams
 
-  // Convert DAS API method names to UMI method names
-  const getUmiMethodName = (method) => {
-    const methodMap = {
-      'getAsset': 'getAsset',
-      'getAssets': 'getAssets',
-      'getAssetsByOwner': 'getAssetsByOwner',
-      'getAssetsByCreator': 'getAssetsByCreator',
-      'getAssetsByAuthority': 'getAssetsByAuthority',
-      'getAssetsByGroup': 'getAssetsByGroup',
-      'searchAssets': 'searchAssets',
-      'getAssetProof': 'getAssetProof',
-      'getAssetProofs': 'getAssetProofs',
-      'getAssetSignatures': 'getAssetSignatures',
-    }
-    return methodMap[method] || method
-  }
-
   // Convert display options to UMI format with proper formatting
   const convertDisplayOptions = (options) => {
     if (!options) return ''
@@ -64,8 +47,8 @@ const UmiRequestRenderer = ({
           assetParams.push(`  id: publicKey('')`)
         }
         if (params.options) {
-          const displayOpts = convertDisplayOptions(params.options)
-          if (displayOpts) assetParams.push(`  displayOptions: ${displayOpts}`)
+          const displayOptions = convertDisplayOptions(params.options)
+          if (displayOptions) assetParams.push(`  displayOptions: ${displayOptions}`)
         }
         return `{\n${assetParams.join(',\n')}\n}`
       
@@ -78,8 +61,8 @@ const UmiRequestRenderer = ({
           assetsParams.push(`  ids: []`)
         }
         if (params.options) {
-          const displayOpts = convertDisplayOptions(params.options)
-          if (displayOpts) assetsParams.push(`  displayOptions: ${displayOpts}`)
+          const displayOptions = convertDisplayOptions(params.options)
+          if (displayOptions) assetsParams.push(`  displayOptions: ${displayOptions}`)
         }
         return `{\n${assetsParams.join(',\n')}\n}`
       
@@ -95,8 +78,8 @@ const UmiRequestRenderer = ({
           ownerParams.push(`  sortBy: {\n    sortBy: '${sortBy.sortBy || 'created'}',\n    sortDirection: '${sortBy.sortDirection || 'desc'}'\n  }`)
         }
         if (params.options) {
-          const displayOpts = convertDisplayOptions(params.options)
-          if (displayOpts) ownerParams.push(`  displayOptions: ${displayOpts}`)
+          const displayOptions = convertDisplayOptions(params.options)
+          if (displayOptions) ownerParams.push(`  displayOptions: ${displayOptions}`)
         }
         return `{\n${ownerParams.join(',\n')}\n}`
       
@@ -113,8 +96,8 @@ const UmiRequestRenderer = ({
           creatorParams.push(`  sortBy: {\n    sortBy: '${sortBy.sortBy || 'created'}',\n    sortDirection: '${sortBy.sortDirection || 'desc'}'\n  }`)
         }
         if (params.options) {
-          const displayOpts = convertDisplayOptions(params.options)
-          if (displayOpts) creatorParams.push(`  displayOptions: ${displayOpts}`)
+          const displayOptions = convertDisplayOptions(params.options)
+          if (displayOptions) creatorParams.push(`  displayOptions: ${displayOptions}`)
         }
         return `{\n${creatorParams.join(',\n')}\n}`
       
@@ -130,8 +113,8 @@ const UmiRequestRenderer = ({
           authorityParams.push(`  sortBy: {\n    sortBy: '${sortBy.sortBy || 'created'}',\n    sortDirection: '${sortBy.sortDirection || 'desc'}'\n  }`)
         }
         if (params.options) {
-          const displayOpts = convertDisplayOptions(params.options)
-          if (displayOpts) authorityParams.push(`  displayOptions: ${displayOpts}`)
+          const displayOptions = convertDisplayOptions(params.options)
+          if (displayOptions) authorityParams.push(`  displayOptions: ${displayOptions}`)
         }
         return `{\n${authorityParams.join(',\n')}\n}`
       
@@ -153,8 +136,8 @@ const UmiRequestRenderer = ({
           groupParams.push(`  sortBy: {\n    sortBy: '${sortBy.sortBy || 'created'}',\n    sortDirection: '${sortBy.sortDirection || 'desc'}'\n  }`)
         }
         if (params.options) {
-          const displayOpts = convertDisplayOptions(params.options)
-          if (displayOpts) groupParams.push(`  displayOptions: ${displayOpts}`)
+          const displayOptions = convertDisplayOptions(params.options)
+          if (displayOptions) groupParams.push(`  displayOptions: ${displayOptions}`)
         }
         return `{\n${groupParams.join(',\n')}\n}`
       
@@ -164,7 +147,7 @@ const UmiRequestRenderer = ({
         if (params.creatorAddress) searchParams.push(`  creator: publicKey('${params.creatorAddress}')`)
         if (params.authorityAddress) searchParams.push(`  authority: publicKey('${params.authorityAddress}')`)
         if (params.grouping && Array.isArray(params.grouping) && params.grouping.length >= 2) {
-          searchParams.push(`  grouping: {\n    key: '${params.grouping[0]}',\n    value: '${params.grouping[1]}'\n  }`)
+          searchParams.push(`  grouping: [\n    '${params.grouping[0]}',\n    '${params.grouping[1]}'\n   ]`)
         }
         if (params.jsonUri) searchParams.push(`  jsonUri: '${params.jsonUri}'`)
         if (params.limit) searchParams.push(`  limit: ${params.limit}`)
@@ -191,8 +174,8 @@ const UmiRequestRenderer = ({
         if (params.negate !== undefined) searchParams.push(`  negate: ${params.negate}`)
         if (params.conditionType) searchParams.push(`  conditionType: '${params.conditionType}'`)
         if (params.options) {
-          const displayOpts = convertDisplayOptions(params.options)
-          if (displayOpts) searchParams.push(`  displayOptions: ${displayOpts}`)
+          const displayOptions = convertDisplayOptions(params.options)
+          if (displayOptions) searchParams.push(`  displayOptions: ${displayOptions}`)
         }
         return `{\n${searchParams.join(',\n')}\n}`
       
@@ -220,7 +203,6 @@ const UmiRequestRenderer = ({
     }
   }
 
-  const umiMethod = getUmiMethodName(bodyMethod)
   const umiParams = convertParamsToUmi(httpBody, bodyMethod)
 
   const code = `import { publicKey } from '@metaplex-foundation/umi'
@@ -229,7 +211,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 const umi = createUmi('${url}').use(dasApi())
 
-const result = await umi.rpc.${umiMethod}(${umiParams})
+const result = await umi.rpc.${bodyMethod}(${umiParams})
 console.log(result)`
 
   return (
