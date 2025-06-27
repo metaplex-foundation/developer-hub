@@ -1,6 +1,7 @@
-import { Icon } from '@/components/icons'
+import { Icon } from '@/components/icons';
 
 const languages = [
+  { name: 'umi', icon: 'SolidCodeBracketSquare' },
   { name: 'curl', icon: 'CurlIcon' },
   { name: 'javascript', icon: 'JavaScriptIcon' },
   { name: 'python', icon: 'PythonIcon' },
