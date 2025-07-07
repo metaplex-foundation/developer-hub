@@ -424,7 +424,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // 1. Validate user (rate limiting, captcha, etc.)
     const { userWallet } = req.body;
 
-
     // 2. Generate mint transaction with required guards.
     // You may need to supply additioanl guard args from front end.
     const mintTransaction = await mintV1(umi, {
@@ -436,7 +435,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           signer: backendSigner,
         },
       },
-    });
+    }).buildWithLatestBlockhash(umi);;
 
     // 3. Partially sign with backend signer
     const signedTransaction = await backendSigner.signTransaction(mintTransaction);
@@ -460,32 +459,23 @@ app.post('/api/mint', async (req, res) => {
   try {
     // 1. Validate user (rate limiting, captcha, etc.)
     const { userWallet, captchaToken } = req.body;
-    
-    if (!await validateCaptcha(captchaToken)) {
-      return res.status(400).json({ error: 'Invalid captcha' });
-    }
 
-    // 2. Check mint eligibility
-    if (!await checkMintEligibility(userWallet)) {
-      return res.status(400).json({ error: 'Mint limit exceeded' });
-    }
-
-    // 3. Generate mint transaction with required guards
+    // 2. Generate mint transaction with required guards
     const mintTransaction = await mintV1(umi, {
       candyMachine: candyMachine.publicKey,
       asset: generateSigner(umi),
-      minter: publicKey(userWallet),
+      minter: createNoopSigner(userWallet),
       mintArgs: {
         thirdPartySigner: {
           signer: backendSigner,
         },
       },
-    });
+    }).buildWithLatestBlockhash(umi);
 
-    // 4. Partially sign with backend signer
+    // 3. Partially sign with backend signer
     const signedTransaction = await backendSigner.signTransaction(mintTransaction);
     
-    // 5. Return transaction for user to complete
+    // 4. Return transaction for user to complete
     res.json({
       transaction: base64.encode(signedTransaction.serialize()),
       asset: mintTransaction.asset.publicKey.toString(),
