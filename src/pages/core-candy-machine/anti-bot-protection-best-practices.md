@@ -512,7 +512,7 @@ app.post('/api/mint', async (req, res) => {
 
 #### The Reveal Process
 
-After minting completes, implement a reveal mechanism that updates each asset's metadata from placeholder to final metadata using your secure mapping. There are two main strategies for handling the reveal process:
+After minting completes, implement a reveal mechanism that updates each asset's metadata from placeholder to final metadata using your secure mapping. There are three main strategies for handling the reveal process:
 
 ##### Strategy 1: Instant Reveal
 
@@ -531,7 +531,6 @@ With instant reveal, each NFT is updated to its final metadata immediately after
 
 **Cons:**
 - More complex backend implementation
-- Higher transaction costs (mint + reveal)
 - Requires robust error handling for failed reveals
 
 ##### Strategy 2: Event Reveal (Project-Controlled)
@@ -548,7 +547,6 @@ With event reveal, all assets remain as placeholders after minting, and the proj
 - Simpler mint process
 - Creates community-wide reveal excitement
 - Can be scheduled for optimal timing (e.g., during community events)
-- Lower immediate transaction costs
 - No user interaction required
 
 **Cons:**
@@ -583,14 +581,12 @@ With user-triggered reveal, users can reveal their own NFTs through an interacti
 **Choose Instant Reveal if:**
 - You want immediate user satisfaction
 - Your backend can handle the complexity
-- Budget allows for higher transaction costs
 - You want to avoid reveal-related support issues
 
 **Choose Event Reveal if:**
 - You want to create community-wide reveal excitement
 - You prefer simpler mint infrastructure
 - You want to control reveal timing
-- You're working with a limited budget
 - You want to schedule reveals during community events
 
 **Choose User-Triggered Reveal if:**
