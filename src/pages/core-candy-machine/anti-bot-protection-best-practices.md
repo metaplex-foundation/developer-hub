@@ -425,7 +425,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { userWallet } = req.body;
 
     // 2. Generate mint transaction with required guards.
-    // You may need to supply additioanl guard args from front end.
+    // You may need to supply additional guard args from the front end.
     const mintTransaction = await mintV1(umi, {
       candyMachine: candyMachine.publicKey,
       asset: generateSigner(umi),
