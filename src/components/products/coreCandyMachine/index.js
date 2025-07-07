@@ -37,6 +37,10 @@ export const coreCandyMachine = {
               title: 'Overview',
               href: '/core-candy-machine/overview',
             },
+            {
+              title: 'Anti-Bot Protection Best Practices',
+              href: '/core-candy-machine/anti-bot-protection-best-practices',
+            },
             { title: 'Candy Guards', href: '/core-candy-machine/guards' },
             {
               title: 'Preparing Assets',
