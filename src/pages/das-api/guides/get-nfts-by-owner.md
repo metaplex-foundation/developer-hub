@@ -50,7 +50,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
 (async () => {
-  const response = await fetch("https://api.mainnet-beta.solana.com", {
+  const response = await fetch("<ENDPOINT>", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -76,7 +76,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
 ```bash
-curl -X POST https://api.mainnet-beta.solana.com \
+curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
   -d '{
     "jsonrpc": "2.0",
