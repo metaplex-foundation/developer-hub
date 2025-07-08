@@ -20,15 +20,14 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 (async () => {
-  const umi = createUmi('<ENDPOINT>').use(dasApi())
+  const umi = createUmi(
+    "<ENDPOINT>"
+  ).use(dasApi());
 
   // Find assets from a specific collection owned by a wallet
   const collectionAssets = await umi.rpc.searchAssets({
-    owner: publicKey('WALLET_ADDRESS'),
-    grouping: {
-      key: 'collection',
-      value: 'COLLECTION_ADDRESS'
-    },
+    owner: publicKey("WALLET_ADDRESS"),
+    grouping: ["collection", "COLLECTION_ADDRESS"],
     limit: 1000,
     displayOptions: {
       showCollectionMetadata: true,
@@ -62,8 +61,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
       method: 'searchAssets',
       params: {
         ownerAddress: 'WALLET_ADDRESS',
-        groupKey: 'collection',
-        groupValue: 'COLLECTION_ADDRESS',
+        grouping: ['collection', 'COLLECTION_ADDRESS'],
         limit: 1000,
         options: {
           showCollectionMetadata: true
@@ -87,8 +85,7 @@ curl -X POST <ENDPOINT> \
     "method": "searchAssets",
     "params": {
       "ownerAddress": "WALLET_ADDRESS",
-      "groupKey": "collection",
-      "groupValue": "COLLECTION_ADDRESS",
+      "grouping": ["collection", "COLLECTION_ADDRESS"],
       "limit": 1000,
       "options": {
         "showCollectionMetadata": true
@@ -103,8 +100,7 @@ curl -X POST <ENDPOINT> \
 
 - **Collection Portfolio**: Display all assets from a specific collection owned by a user
 - **Marketplace Integration**: Show available assets from a collection in a user's wallet
-- **Collection Analytics**: Analyze holdings and value within specific collections
-- **Rarity Tools**: Identify rare assets within collections
+- **Collection Analytics**: Analyze holdings within specific collections
 - **Trading Tools**: Track collection holdings for trading strategies
 
 ## Tips and Best Practices

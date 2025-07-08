@@ -19,50 +19,54 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi(
+    "<ENDPOINT>"
+  ).use(dasApi());
 
-// Get all tokens owned by a wallet
-const walletTokens = await umi.rpc.getAssetsByOwner({
-  owner: publicKey('WALLET_ADDRESS'),
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true,
-    showFungible: true
-  }
-})
+  // Get all tokens owned by a wallet
+  const walletTokens = await umi.rpc.getAssetsByOwner({
+    owner: publicKey("WALLET_ADDRESS"),
+    displayOptions: {
+      showCollectionMetadata: true,
+      showFungible: true,
+    },
+  });
 
-console.log(`Found ${walletTokens.items.length} tokens`)
-walletTokens.items.forEach(token => {
-  console.log(`Token: ${token.id}`)
-  console.log(`Interface: ${token.interface}`)
-  console.log(`Name: ${token.content.metadata?.name || 'Unknown'}`)
-})
+  console.log(`Found ${walletTokens.items.length} tokens`);
+  walletTokens.items.forEach((token) => {
+    console.log(`Token: ${token.id}`);
+    console.log(`Interface: ${token.interface}`);
+    console.log(`Name: ${token.content.metadata?.name || "Unknown"}`);
+  });
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('https://api.mainnet-beta.solana.com', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'getAssetsByOwner',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true,
-        showFungible: true
-      }
-    }
-  })
-})
+(async () => {
+  const response = await fetch("https://api.mainnet-beta.solana.com", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "getAssetsByOwner",
+      params: {
+        ownerAddress: "WALLET_ADDRESS",
+        options: {
+          showCollectionMetadata: true,
+          showFungible: true,
+        },
+      },
+    }),
+  });
 
-const data = await response.json()
-console.log(`Found ${data.result.items.length} tokens`)
+  const data = await response.json();
+  console.log(`Found ${data.result.items.length} tokens`);
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
@@ -75,7 +79,6 @@ curl -X POST <ENDPOINT> \
     "method": "getAssetsByOwner",
     "params": {
       "ownerAddress": "WALLET_ADDRESS",
-      "limit": 1000,
       "options": {
         "showCollectionMetadata": true,
         "showFungible": true
@@ -88,7 +91,7 @@ curl -X POST <ENDPOINT> \
 
 ## Method 2: Using Search Assets with Owner Filter
 
-You can also use `searchAssets` with an owner filter for more specific queries.
+You can also use `searchAssets` with an owner filter for more specific queries. This method is not supported by all DAS API Providers.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
@@ -97,138 +100,51 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi(
+    "<ENDPOINT>"
+  ).use(dasApi());
 
-// Search for all assets owned by a specific wallet
-const walletAssets = await umi.rpc.searchAssets({
-  owner: publicKey('WALLET_ADDRESS'),
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true,
-    showFungible: true
-  }
-})
+  // Search for all assets owned by a specific wallet
+  const walletAssets = await umi.rpc.searchAssets({
+    owner: publicKey("WALLET_ADDRESS"),
+    limit: 1000,
+    displayOptions: {
+      showCollectionMetadata: true,
+      showFungible: true,
+    },
+  });
 
-console.log(`Found ${walletAssets.items.length} assets`)
+  console.log(`Found ${walletAssets.items.length} assets`);
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true,
-        showFungible: true
-      }
-    }
-  })
-})
-
-const data = await response.json()
-console.log(`Found ${data.result.items.length} assets`)
-```
-{% /totem-accordion %}
-{% /totem %}
-
-## Method 5: Sorting and Limiting Results
-
-You can sort results and limit the number of tokens returned:
-
-{% totem %}
-{% totem-accordion title="UMI Example" %}
-```typescript
-import { publicKey } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
-
-const umi = createUmi('<ENDPOINT>').use(dasApi())
-
-// Get most recently created tokens
-const recentTokens = await umi.rpc.getAssetsByOwner({
-  owner: publicKey('WALLET_ADDRESS'),
-  limit: 10,
-  sortBy: {
-    sortBy: 'created',
-    sortDirection: 'desc'
-  },
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
-
-// Get tokens sorted by ID
-const sortedTokens = await umi.rpc.getAssetsByOwner({
-  owner: publicKey('WALLET_ADDRESS'),
-  limit: 50,
-  sortBy: {
-    sortBy: 'id',
-    sortDirection: 'asc'
-  }
-})
-```
-{% /totem-accordion %}
-{% totem-accordion title="JavaScript Example" %}
-```javascript
-// Get most recently created tokens
-const recentResponse = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'getAssetsByOwner',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      limit: 10,
-      sortBy: {
-        sortBy: 'created',
-        sortDirection: 'desc'
+(async () => {
+  const response = await fetch("<ENDPOINT>", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "searchAssets",
+      params: {
+        ownerAddress: "WALLET_ADDRESS",
+        limit: 1000,
+        options: {
+          showCollectionMetadata: true,
+          showFungible: true,
+        },
       },
-      options: {
-        showCollectionMetadata: true
-      }
-    }
-  })
-})
+    }),
+  });
 
-const recentData = await recentResponse.json()
-const recentTokens = recentData.result
-
-// Get tokens sorted by ID
-const sortedResponse = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'getAssetsByOwner',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      limit: 50,
-      sortBy: {
-        sortBy: 'id',
-        sortDirection: 'asc'
-      }
-    }
-  })
-})
-
-const sortedData = await sortedResponse.json()
-const sortedTokens = sortedData.result
+  const data = await response.json();
+  console.log(`Found ${data.result.items.length} assets`);
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -239,13 +155,11 @@ const sortedTokens = sortedData.result
 
 2. **Handle [Pagination](/das-api/guides/pagination)**: For wallets with many tokens, always implement pagination.
 
-  3. **Filter by Interface**: Use the `interface` parameter to get specific token types.
+3. **Filter by Interface**: Use the `interface` parameter to get specific token types.
 
-4. **Sort Results**: Use `sortBy` to organize results by creation date, ID, or other criteria.
+4. **Cache Results**: Wallet contents don't change frequently, so consider caching for better performance.
 
-5. **Cache Results**: Wallet contents don't change frequently, so consider caching for better performance.
-
-6. **Rate Limiting**: Be mindful of API rate limits when making multiple requests.
+5. **Rate Limiting**: Be mindful of API rate limits when making multiple requests.
 
 ## Related Guides
 

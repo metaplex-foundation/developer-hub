@@ -15,60 +15,63 @@ The `getAssetsByOwner` method combined with interface filtering is the most effi
 {% totem %}
 {% totem-accordion title="UMI Example" %}
 ```typescript
-import { publicKey } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+import { publicKey } from "@metaplex-foundation/umi";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi(
+    "<ENDPOINT>"
+  ).use(dasApi());
+  console.log("umi.rpc.getAssetsByOwner");
+  // Get all NFTs owned by a specific wallet
+  const ownerNfts = await umi.rpc.getAssetsByOwner({
+    owner: publicKey("WALLET_ADDRESS"),
+  });
 
-// Get all NFTs owned by a specific wallet
-const ownerNfts = await umi.rpc.getAssetsByOwner({
-  owner: publicKey('WALLET_ADDRESS'),
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true,
-    showFungible: false // to exclude fungible tokens
-  }
-})
+  console.log(`Found ${ownerNfts.items.length} NFTs owned by this wallet`);
+  console.log(`Total assets: ${ownerNfts.total}`);
 
-
-console.log(`Found ${nfts.length} NFTs owned by this wallet`)
-console.log(`Total assets: ${ownerNfts.total}`)
-
-// Process each NFT
-nfts.forEach(nft => {
-  console.log(`NFT ID: ${nft.id}`)
-  console.log(`Name: ${nft.content.metadata?.name || 'Unknown'}`)
-  console.log(`Collection: ${nft.grouping?.find(g => g.group_key === 'collection')?.group_value || 'None'}`)
-  console.log('---')
-})
+  // Process each NFT
+  ownerNfts.items.forEach((nft) => {
+    console.log(`NFT ID: ${nft.id}`);
+    console.log(`Name: ${nft.content.metadata?.name || "Unknown"}`);
+    console.log(
+      `Collection: ${
+        nft.grouping?.find((g) => g.group_key === "collection")?.group_value ||
+        "None"
+      }`
+    );
+    console.log("---");
+  });
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('https://api.mainnet-beta.solana.com', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'getAssetsByOwner',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true,
-        showFungible: false // to exclude fungible tokens
-      }
-    }
-  })
-})
+(async () => {
+  const response = await fetch("https://api.mainnet-beta.solana.com", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "getAssetsByOwner",
+      params: {
+        ownerAddress: "WALLET_ADDRESS",
+        options: {
+          showCollectionMetadata: true,
+          showFungible: false, // to exclude fungible tokens
+        },
+      },
+    }),
+  });
 
-const data = await response.json()
-
-console.log(`Found ${data.result.items.length} NFTs`)
+  const data = await response.json();
+  console.log(`Found ${data.result.items.length} NFTs`);
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
@@ -81,7 +84,6 @@ curl -X POST https://api.mainnet-beta.solana.com \
     "method": "getAssetsByOwner",
     "params": {
       "ownerAddress": "WALLET_ADDRESS",
-      "limit": 1000,
       "options": {
         "showCollectionMetadata": true,
         "showFungible": false
@@ -94,239 +96,129 @@ curl -X POST https://api.mainnet-beta.solana.com \
 
 ## Method 2: Using Search Assets with Owner and Interface Filter
 
-You can use `searchAssets` to get more specific results with additional filters.
+You can use `searchAssets` to get more specific results with additional filters like interface to get only `MplCoreAsset`s.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
 ```typescript
-import { publicKey } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+import { publicKey } from "@metaplex-foundation/umi";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi(
+    "<ENDPOINT>"
+  ).use(dasApi());
 
-// Search for NFTs owned by a specific wallet
-const ownerNfts = await umi.rpc.searchAssets({
-  owner: publicKey('WALLET_ADDRESS'),
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true,
-    showFungible: false
-  }
-})
+  // Search for NFTs owned by a specific wallet
+  const ownerNfts = await umi.rpc.searchAssets({
+    owner: publicKey("WALLET_ADDRESS"),
+    limit: 1000,
+    interface: "MplCoreAsset",
+    displayOptions: {
+      showCollectionMetadata: true,
+    },
+  });
 
-console.log(`Found ${ownerNfts.items.length} NFTs`)
+  console.log(`Found ${ownerNfts.items.length} Core Assets`);
+})();
+
+
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      groupKey: 'collection',
-      groupValue: 'COLLECTION_ADDRESS',
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true,
-        showFungible: false
-      }
-    }
-  })
-})
+(async () => {
+  const response = await fetch("<ENDPOINT>", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "searchAssets",
+      params: {
+        ownerAddress: "WALLET_ADDRESS",
+        interface: "MplCoreAsset",
+        limit: 1000,
+        options: {
+          showCollectionMetadata: true,
+        },
+      },
+    }),
+  });
 
-const data = await response.json()
-console.log(`Found ${data.result.items.length} NFTs from this collection`)
+  const data = await response.json();
+  console.log(`Found ${data.result.items.length} Core Assets`);
+})();
 ```
 {% /totem-accordion %}
 {% /totem %}
 
 ## Method 4: Filtering NFTs by Collection
 
-You can filter NFTs by specific collections:
+You can filter NFTs by specific collections in addition to the wallet address if you are for example looking for your collection:
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
 ```typescript
-import { publicKey } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+import { publicKey } from "@metaplex-foundation/umi";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 
-const umi = createUmi('<ENDPOINT>').use(dasApi())
+(async () => {
+  const umi = createUmi(
+    "<ENDPOINT>"
+  ).use(dasApi());
 
-// Get NFTs from a specific collection owned by this wallet
-const collectionNfts = await umi.rpc.searchAssets({
-  owner: publicKey('WALLET_ADDRESS'),
-  grouping: {
-    key: 'collection',
-    value: 'COLLECTION_ADDRESS'
-  },
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true,
-    showFungible: false
-  }
-})
+  // Get NFTs from a specific collection owned by this wallet
+  const collectionNfts = await umi.rpc.searchAssets({
+    owner: publicKey("WALLET_ADDRESS"),
+    grouping: ["collection", "COLLECTION_ADDRESS"],
+    limit: 1000,
+    displayOptions: {
+      showCollectionMetadata: true,
+      showFungible: false,
+    },
+  });
 
-console.log(`Found ${collectionNfts.items.length} NFTs from this collection`)
+  console.log(`Found ${collectionNfts.items.length} NFTs from this collection`);
+})();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
-const response = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      groupKey: 'collection',
-      groupValue: 'COLLECTION_ADDRESS',
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true,
-        showFungible: false
-      }
-    }
-  })
-})
-
-const data = await response.json()
-console.log(`Found ${data.result.items.length} NFTs from this collection`)
-```
-{% /totem-accordion %}
-{% /totem %}
-
-## Method 5: Sorting NFTs by Various Criteria
-
-You can sort NFTs by different attributes:
-
-{% totem %}
-{% totem-accordion title="UMI Example" %}
-```typescript
-import { publicKey } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
-
-const umi = createUmi('<ENDPOINT>').use(dasApi())
-
-// Get NFTs sorted by creation date (newest first)
-const newestNfts = await umi.rpc.getAssetsByOwner({
-  owner: publicKey('WALLET_ADDRESS'),
-  limit: 1000,
-  sortBy: {
-    sortBy: 'created',
-    sortDirection: 'desc'
-  },
-  displayOptions: {
-    showCollectionMetadata: true,
-    showFungible: false
-  }
-})
-
-console.log('Newest NFTs first:')
-newestNfts.items.slice(0, 10).forEach(nft => {
-  console.log(`${nft.content.metadata?.name} - Created: ${nft.content.json_uri}`)
-})
-
-// Get NFTs sorted by name
-const nameSortedNfts = await umi.rpc.getAssetsByOwner({
-  owner: publicKey('WALLET_ADDRESS'),
-  limit: 1000,
-  sortBy: {
-    sortBy: 'name',
-    sortDirection: 'asc'
-  },
-  displayOptions: {
-    showCollectionMetadata: true,
-    showFungible: false
-  }
-})
-
-console.log('Alphabetically sorted NFTs:')
-alphabeticallySortedNfts.slice(0, 10).forEach(nft => {
-  console.log(nft.content.metadata?.name)
-})
-```
-{% /totem-accordion %}
-{% totem-accordion title="JavaScript Example" %}
-```javascript
-// Get NFTs sorted by creation date (newest first)
-const newestResponse = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'getAssetsByOwner',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      limit: 1000,
-      sortBy: {
-        sortBy: 'created',
-        sortDirection: 'desc'
+(async () => {
+  const response = await fetch(
+    "<ENDPOINT>",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      options: {
-        showCollectionMetadata: true,
-        showFungible: false
-      }
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        id: 1,
+        method: "searchAssets",
+        params: {
+          ownerAddress: "WALLET_ADDRESS",
+          grouping: [
+            "collection",
+            "COLLECTION_ADDRESS",
+          ],
+          options: {
+            showCollectionMetadata: true,
+          },
+        },
+      }),
     }
-  })
-})
+  );
 
-const newestData = await newestResponse.json()
-const newestNfts = newestData.result
+  const data = await response.json();
+  console.log(`Found ${data.result.items.length} NFTs from this collection in this wallet`);
+})();
 
-console.log('Newest NFTs first:')
-newestNfts.items.slice(0, 10).forEach(nft => {
-  console.log(`${nft.content.metadata?.name} - Created: ${nft.content.json_uri}`)
-})
-
-// Get NFTs sorted by name
-const nameResponse = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'getAssetsByOwner',
-    params: {
-      ownerAddress: 'WALLET_ADDRESS',
-      limit: 1000,
-      sortBy: {
-        sortBy: 'name',
-        sortDirection: 'asc'
-      },
-      options: {
-        showCollectionMetadata: true,
-        showFungible: false
-      }
-    }
-  })
-})
-
-const nameData = await nameResponse.json()
-const nameSortedNfts = nameData.result
-
-console.log('Alphabetically sorted NFTs:')
-nameSortedNfts.items.slice(0, 10).forEach(nft => {
-  console.log(nft.content.metadata?.name)
-})
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -334,14 +226,14 @@ nameSortedNfts.items.slice(0, 10).forEach(nft => {
 ## Common Use Cases
 
 - **NFT Galleries**: Display all NFTs owned by a user
-- **Portfolio Trackers**: Monitor NFT holdings and values
+- **Portfolio Trackers**: Monitor NFT holdings
 - **Marketplace Integration**: Show user's NFT inventory
 - **Collection Management**: Organize NFTs by collections
 - **Gaming Applications**: Load user's NFT game assets
 
 ## Tips and Best Practices
 
-1. **Use interface filtering** to get only NFTs (exclude fungible tokens)
+1. **Use interface filtering** to get only NFTs (e.g. exclude fungible tokens)
 2. **Implement [pagination](/das-api/guides/pagination)** for wallets with many NFTs
 3. **Cache results** to improve performance for frequent queries
 4. **Include [display options](/das-api/guides/display-options)** to get additional metadata

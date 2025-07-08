@@ -10,7 +10,9 @@ This guide shows you how to retrieve all fungible tokens (like SPL tokens, SOL, 
 
 ## Method 1: Using Search Assets with Interface Filter (Recommended)
 
-The most effective way to get fungible assets is using `searchAssets` with the `FungibleAsset` interface filter.
+The most effective way to get fungible assets is using `searchAssets` with the `FungibleToken` interface filter. It only returns fungible assets, so you don't need to filter for them.
+
+While this method is the most effective it's not supported by all DAS API Providers currently.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
@@ -23,17 +25,17 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   const umi = createUmi('<ENDPOINT>').use(dasApi())
 
   // Get all fungible assets owned by a wallet
-  const fungibleAssets = await umi.rpc.searchAssets({
+  const fungibleTokens = await umi.rpc.searchAssets({
     owner: publicKey('WALLET_ADDRESS'),
-    interface: 'FungibleAsset',
+    interface: 'FungibleToken',
     limit: 1000,
     displayOptions: {
       showFungible: true
     }
   })
 
-  console.log(`Found ${fungibleAssets.items.length} fungible assets`)
-  fungibleAssets.items.forEach(asset => {
+  console.log(`Found ${fungibleTokens.items.length} fungible assets`)
+  fungibleTokens.items.forEach(asset => {
     console.log(`Token: ${asset.id}`)
     console.log(`Supply: ${asset.supply}`)
     console.log(`Name: ${asset.content.metadata?.name || 'Unknown'}`)
@@ -56,8 +58,8 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
       method: 'searchAssets',
       params: {
         ownerAddress: 'WALLET_ADDRESS',
-        interface: 'FungibleAsset',
-        limit: 1000,
+        interface: 'FungibleToken',
+        limit: 10000,
         options: {
           showFungible: true
         }
@@ -80,8 +82,8 @@ curl -X POST <ENDPOINT> \
     "method": "searchAssets",
     "params": {
       "ownerAddress": "WALLET_ADDRESS",
-      "interface": "FungibleAsset",
-      "limit": 1000,
+      "interface": "FungibleToken",
+      "limit": 10000,
       "options": {
         "showFungible": true
       }
@@ -108,18 +110,18 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   // Get all assets and filter for fungible ones
   const allAssets = await umi.rpc.getAssetsByOwner({
     owner: publicKey('WALLET_ADDRESS'),
-    limit: 1000,
+    limit: 10000,
     displayOptions: {
       showFungible: true
     }
   })
 
   // Filter for fungible assets
-  const fungibleAssets = allAssets.items.filter(asset => 
-    asset.interface === 'FungibleAsset'
+  const FungibleTokens = allAssets.items.filter(asset => 
+    asset.interface === 'FungibleToken'
   )
 
-  console.log(`Found ${fungibleAssets.length} fungible assets out of ${allAssets.items.length} total assets`)
+  console.log(`Found ${FungibleTokens.length} fungible assets out of ${allAssets.items.length} total assets`)
 })();
 ```
 {% /totem-accordion %}
@@ -137,7 +139,6 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
       method: 'getAssetsByOwner',
       params: {
         ownerAddress: 'WALLET_ADDRESS',
-        limit: 1000,
         options: {
           showFungible: true
         }
@@ -149,11 +150,11 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   const allAssets = data.result
 
   // Filter for fungible assets
-  const fungibleAssets = allAssets.items.filter(asset => 
-    asset.interface === 'FungibleAsset'
+  const FungibleTokens = allAssets.items.filter(asset => 
+    asset.interface === 'FungibleToken'
   )
 
-  console.log(`Found ${fungibleAssets.length} fungible assets out of ${allAssets.items.length} total assets`)
+  console.log(`Found ${FungibleTokens.length} fungible assets out of ${allAssets.items.length} total assets`)
 })();
 ```
 {% /totem-accordion %}
@@ -173,9 +174,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 const umi = createUmi('<ENDPOINT>').use(dasApi())
 
 // Get tokens with specific supply range
-const highValueTokens = await umi.rpc.searchAssets({
+const tokensBySupply = await umi.rpc.searchAssets({
   owner: publicKey('WALLET_ADDRESS'),
-  interface: 'FungibleAsset',
+  interface: 'FungibleToken',
   supply: 1000000, // Tokens with supply >= 1M
   limit: 1000,
   displayOptions: {
@@ -186,7 +187,7 @@ const highValueTokens = await umi.rpc.searchAssets({
 // Get tokens by creator
 const creatorTokens = await umi.rpc.searchAssets({
   owner: publicKey('WALLET_ADDRESS'),
-  interface: 'FungibleAsset',
+  interface: 'FungibleToken',
   creatorAddress: 'CREATOR_ADDRESS',
   limit: 1000,
   displayOptions: {
@@ -194,7 +195,7 @@ const creatorTokens = await umi.rpc.searchAssets({
   }
 })
 
-console.log(`High value tokens: ${highValueTokens.items.length}`)
+console.log(`Tokens by supply: ${tokensBySupply.items.length}`)
 console.log(`Creator tokens: ${creatorTokens.items.length}`)
 ```
 {% /totem-accordion %}
@@ -202,7 +203,7 @@ console.log(`Creator tokens: ${creatorTokens.items.length}`)
 ```javascript
 (async () => {
   // Get tokens with specific supply range
-  const highValueResponse = await fetch('<ENDPOINT>', {
+  const tokensBySupplyResponse = await fetch('<ENDPOINT>', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -213,7 +214,7 @@ console.log(`Creator tokens: ${creatorTokens.items.length}`)
       method: 'searchAssets',
       params: {
         ownerAddress: 'WALLET_ADDRESS',
-        interface: 'FungibleAsset',
+        interface: 'FungibleToken',
         supply: 1000000, // Tokens with supply >= 1M
         limit: 1000,
         options: {
@@ -223,8 +224,8 @@ console.log(`Creator tokens: ${creatorTokens.items.length}`)
     })
   })
 
-  const highValueData = await highValueResponse.json()
-  const highValueTokens = highValueData.result
+  const tokensBySupplyData = await tokensBySupplyResponse.json()
+  const tokensBySupply = tokensBySupplyData.result
 
   // Get tokens by creator
   const creatorResponse = await fetch('<ENDPOINT>', {
@@ -238,7 +239,7 @@ console.log(`Creator tokens: ${creatorTokens.items.length}`)
       method: 'searchAssets',
       params: {
         ownerAddress: 'WALLET_ADDRESS',
-        interface: 'FungibleAsset',
+        interface: 'FungibleToken',
         creatorAddress: 'CREATOR_ADDRESS',
         limit: 1000,
         options: {
@@ -251,7 +252,7 @@ console.log(`Creator tokens: ${creatorTokens.items.length}`)
   const creatorData = await creatorResponse.json()
   const creatorTokens = creatorData.result
 
-  console.log(`High value tokens: ${highValueTokens.items.length}`)
+  console.log(`Tokens by supply: ${tokensBySupply.items.length}`)
   console.log(`Creator tokens: ${creatorTokens.items.length}`)
 })();
 ```

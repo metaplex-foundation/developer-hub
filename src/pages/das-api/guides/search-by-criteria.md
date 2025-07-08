@@ -10,7 +10,7 @@ This guide shows you how to use the DAS API's `searchAssets` method to find digi
 
 ## Method 1: Basic Multi-Criteria Search
 
-The `searchAssets` method supports combining multiple filters for precise asset discovery.
+The `searchAssets` method supports combining multiple filters for precise asset discovery like wallets that are owned by a specific wallet and made by a specific creator.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
@@ -20,47 +20,50 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 (async () => {
-  const umi = createUmi('<ENDPOINT>').use(dasApi())
+  const umi = createUmi(
+    "<ENDPOINT>"
+  ).use(dasApi());
 
   // Search for assets with multiple criteria
   const searchResults = await umi.rpc.searchAssets({
-    owner: publicKey('WALLET_ADDRESS'),
-    creator: publicKey('CREATOR_ADDRESS'),
+    owner: publicKey("WALLET_ADDRESS"),
+    creator: publicKey("CREATOR_ADDRESS"),
     limit: 1000,
     displayOptions: {
       showCollectionMetadata: true,
-    }
-  })
+    },
+  });
 
-  console.log(`Found ${searchResults.items.length} assets matching criteria`)
+  console.log(`Found ${searchResults.items.length} assets matching criteria`);
 })();
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 ```javascript
 (async () => {
-  const response = await fetch('<ENDPOINT>', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      jsonrpc: '2.0',
-      id: 1,
-      method: 'searchAssets',
-      params: {
-        ownerAddress: 'WALLET_ADDRESS',
-        creatorAddress: 'CREATOR_ADDRESS',
-        limit: 1000,
-        options: {
-          showCollectionMetadata: true,
-        }
-      }
-    })
-  })
+    const response = await fetch('<ENDPOINT>', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'searchAssets',
+        params: {
+          ownerAddress: 'WALLET_ADDRESS',
+          creatorAddress: 'CREATOR_ADDRESS',
+          limit: 1000,
+          options: {
+            showCollectionMetadata: true,
+          }
+        },
+      }),
+    }
+  );
 
-  const data = await response.json()
-  console.log(`Found ${data.result.items.length} assets`)
+  const data = await response.json();
+  console.log(`Found ${data.result.items.length} assets`);
 })();
 ```
 {% /totem-accordion %}
@@ -97,22 +100,30 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 (async () => {
-  const umi = createUmi('<ENDPOINT>').use(dasApi())
+  const umi = createUmi(
+    "<ENDPOINT>"
+  ).use(dasApi());
 
   // Find assets from a specific collection owned by a wallet
   const collectionAssets = await umi.rpc.searchAssets({
-    owner: publicKey('WALLET_ADDRESS'),
-    grouping: {
-      key: 'collection',
-      value: 'COLLECTION_ADDRESS'
-    },
+    owner: publicKey("WALLET_ADDRESS"),
+    grouping: ["collection", "COLLECTION_ADDRESS"],
     limit: 1000,
     displayOptions: {
-      showCollectionMetadata: true
+      showCollectionMetadata: true,
     }
   })
 
   console.log(`Found ${collectionAssets.items.length} assets from collection owned by wallet`)
+  console.log(`Total available: ${collectionAssets.total}`)
+
+  // Process each asset
+  collectionAssets.items.forEach(asset => {
+    console.log(`Asset ID: ${asset.id}`)
+    console.log(`Name: ${asset.content.metadata?.name || 'Unknown'}`)
+    console.log(`Interface: ${asset.interface}`)
+    console.log('---')
+  })
 })();
 ```
 {% /totem-accordion %}
@@ -130,8 +141,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
       method: 'searchAssets',
       params: {
         ownerAddress: 'WALLET_ADDRESS',
-        groupKey: 'collection',
-        groupValue: 'COLLECTION_ADDRESS',
+        grouping: ['collection', 'COLLECTION_ADDRESS'],
         limit: 1000,
         options: {
           showCollectionMetadata: true
@@ -159,30 +169,25 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 (async () => {
-  const umi = createUmi('<ENDPOINT>').use(dasApi())
-
-  // Complex search with multiple criteria
-  const complexSearch = await umi.rpc.searchAssets({
-    owner: publicKey('WALLET_ADDRESS'),
-    creator: publicKey('CREATOR_ADDRESS'),
-    grouping: {
-      key: 'collection',
-      value: 'COLLECTION_ADDRESS'
-    },
-    creatorVerified: true,
-    frozen: false,
-    compressed: false,
-    limit: 1000,
-    sortBy: {
-      sortBy: 'created',
-      sortDirection: 'desc'
-    },
-    displayOptions: {
-      showCollectionMetadata: true,
-    }
-  })
-
-  console.log(`Found ${complexSearch.items.length} assets matching complex criteria`)
+    const umi = createUmi(
+        "<ENDPOINT>"
+      ).use(dasApi());
+  
+    // Complex search with multiple criteria
+    const complexSearch = await umi.rpc.searchAssets({
+      owner: publicKey('WALLET_ADDRESS'),
+      creator: publicKey('CREATOR_ADDRESS'),
+      grouping: ["collection", "COLLECTION_ADDRESS"],
+      frozen: false,
+      compressed: false,
+      displayOptions: {
+        showCollectionMetadata: true,
+      }
+    })
+  
+  console.log(
+    `Found ${complexSearch.items.length} assets matching complex criteria`
+  );
 })();
 ```
 {% /totem-accordion %}
@@ -201,16 +206,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
       params: {
         ownerAddress: 'WALLET_ADDRESS',
         creatorAddress: 'CREATOR_ADDRESS',
-        groupKey: 'collection',
-        groupValue: 'COLLECTION_ADDRESS',
-        creatorVerified: true,
+        grouping: ['collection', 'COLLECTION_ADDRESS'],
         frozen: false,
         compressed: false,
-        limit: 1000,
-        sortBy: {
-          sortBy: 'created',
-          sortDirection: 'desc'
-        },
         options: {
           showCollectionMetadata: true,
         }
@@ -225,57 +223,6 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 {% /totem-accordion %}
 {% /totem %}
 
-## Method 6: Search by JSON URI and Interface
-
-Find assets with specific metadata or interface types:
-
-{% totem %}
-{% totem-accordion title="UMI Example" %}
-```typescript
-import { publicKey } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
-
-const umi = createUmi('<ENDPOINT>').use(dasApi())
-
-// Find assets with specific JSON URI pattern
-const specificUriAssets = await umi.rpc.searchAssets({
-  jsonUri: 'https://arweave.net/metadata/',
-  limit: 1000,
-  displayOptions: {
-    showCollectionMetadata: true
-  }
-})
-
-console.log(`Found ${specificUriAssets.items.length} assets with this metadata uri`)
-```
-{% /totem-accordion %}
-{% totem-accordion title="JavaScript Example" %}
-```javascript
-const response = await fetch('<ENDPOINT>', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'searchAssets',
-    params: {
-      jsonUri: 'https://arweave.net/metadata/',
-      limit: 1000,
-      options: {
-        showCollectionMetadata: true
-      }
-    }
-  })
-})
-
-const data = await response.json()
-console.log(`Found ${data.result.items.length} assets with this metadata uri`)
-```
-{% /totem-accordion %}
-{% /totem %}
 
 ## Tips and Best Practices
 
