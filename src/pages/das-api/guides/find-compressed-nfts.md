@@ -14,6 +14,7 @@ Discover compressed NFTs owned by a specific wallet:
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from "@metaplex-foundation/umi"
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
@@ -43,9 +44,11 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
   console.log(`Compressed NFTs: ${compressedNfts.length}`);
   console.log(`Total NFTs: ${allOwnerNfts.items.length}`);
 })();
+
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {
@@ -82,6 +85,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
   console.log(`Compressed NFTs: ${compressedNfts.length}`);
   console.log(`Total NFTs: ${allOwnerNfts.items.length}`);
 })();
+
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -92,6 +96,7 @@ Find compressed NFTs from a specific collection:
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
@@ -127,9 +132,11 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Compressed NFTs: ${compressedNfts.length}`);
   console.log(`Total NFTs: ${allCollectionNfts.items.length}`);
 })();
+
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {
@@ -172,6 +179,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Compressed NFTs: ${compressedNfts.length}`);
   console.log(`Total NFTs: ${allCollectionNfts.items.length}`);
 })();
+
 ```
 {% /totem-accordion %}
 {% /totem %}
@@ -182,7 +190,12 @@ Discover compressed NFTs created by a specific wallet:
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
+import { publicKey } from "@metaplex-foundation/umi"
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
+import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
+
 (async () => {
   const umi = createUmi("<ENDPOINT>").use(dasApi());
 
@@ -213,6 +226,7 @@ Discover compressed NFTs created by a specific wallet:
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {
@@ -251,6 +265,7 @@ Discover compressed NFTs created by a specific wallet:
   console.log(`Creator's compressed NFTs: ${compressedNfts.length}`);
   console.log(`Creator's total NFTs: ${allCreatorNfts.items.length}`);
 })();
+
 ```
 {% /totem-accordion %}
 {% /totem %}

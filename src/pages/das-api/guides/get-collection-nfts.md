@@ -14,6 +14,7 @@ The `getAssetsByGroup` method is specifically designed to find assets that belon
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
@@ -43,6 +44,7 @@ collectionAssets.items.forEach(asset => {
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
 const response = await fetch('<ENDPOINT>', {
@@ -89,6 +91,7 @@ You can also use `searchAssets` with a collection grouping for more specific que
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -99,10 +102,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
   // Search for all assets in a collection with additional filters
   const allCollectionNfts = await umi.rpc.searchAssets({
-    grouping: {
-      key: 'collection',
-      value: '<COLLECTION_ADDRESS>'
-    },
+    grouping: ['collection', '<COLLECTION_ADDRESS>'],
     // Optional: DAS usually returns 10.000 assets
     limit: 1000,
     // Optional: Display collection metadata in each asset
@@ -116,6 +116,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {
@@ -128,8 +129,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
       id: 1,
       method: 'searchAssets',
       params: {
-        groupKey: 'collection',
-        groupValue: '<COLLECTION_ADDRESS>',
+        grouping: ['collection', '<COLLECTION_ADDRESS>'],
         limit: 1000,
         options: {
           showCollectionMetadata: true,
@@ -151,6 +151,7 @@ You can sort collection assets by various criteria:
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -195,6 +196,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   // Get collection assets sorted by creation date (newest first)

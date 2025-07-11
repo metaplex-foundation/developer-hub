@@ -14,6 +14,7 @@ The `searchAssets` method supports combining multiple filters for precise asset 
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -39,6 +40,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
     const response = await fetch('<ENDPOINT>', {
@@ -94,6 +96,7 @@ Find assets from a specific collection owned by a particular wallet:
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -128,6 +131,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {
@@ -163,6 +167,7 @@ Combine various filters for complex queries, like searching for NFTs from a spec
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -192,6 +197,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {

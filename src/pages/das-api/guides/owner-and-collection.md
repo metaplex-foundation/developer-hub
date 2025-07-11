@@ -14,6 +14,7 @@ The `searchAssets` method allows you to combine owner and collection filters for
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -46,8 +47,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {
@@ -74,8 +77,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${data.result.items.length} assets from collection owned by wallet`)
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -93,6 +98,7 @@ curl -X POST <ENDPOINT> \
     }
   }'
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

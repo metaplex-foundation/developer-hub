@@ -14,6 +14,7 @@ The `searchAssets` method is the most efficient way to find all holders of a spe
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -43,6 +44,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {
@@ -55,8 +57,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
       id: 1,
       method: 'searchAssets',
       params: {
-        groupKey: 'collection',
-        groupValue: 'YOUR_COLLECTION_ADDRESS',
+        grouping: ['collection', 'YOUR_COLLECTION_ADDRESS'],
         limit: 1000,
         options: {
           showCollectionMetadata: true
@@ -79,8 +80,7 @@ curl -X POST <ENDPOINT> \
     "id": 1,
     "method": "searchAssets",
     "params": {
-      "groupKey": "collection",
-      "groupValue": "YOUR_COLLECTION_ADDRESS",
+      "grouping": ["collection", "YOUR_COLLECTION_ADDRESS"],
       "limit": 1000,
       "options": {
         "showCollectionMetadata": true
@@ -97,6 +97,7 @@ For collection-based NFTs, you can use also `getAssetsByGroup` to find all NFTs 
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -109,8 +110,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
   // Get all assets in a collection
   const collectionAssets = await umi.rpc.getAssetsByGroup({
-    groupKey: "collection",
-    groupValue: "COLLECTION_ADDRESS",
+    grouping: ["collection", "COLLECTION_ADDRESS"],
   });
 
   // Extract unique owners
@@ -125,6 +125,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch(
@@ -137,8 +138,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
         id: 1,
         method: "getAssetsByGroup",
         params: {
-          groupKey: "collection",
-          groupValue: "COLLECTION_ADDRESS",
+          grouping: ["collection", "COLLECTION_ADDRESS"],
         },
       }),
     }
@@ -163,6 +163,7 @@ If you want to find holders of a specific individual NFT (not part of a collecti
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -184,6 +185,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
     const response = await fetch("<ENDPOINT>", {

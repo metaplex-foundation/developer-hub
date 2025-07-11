@@ -14,6 +14,7 @@ The `getAssetsByOwner` method is the most direct way to get all tokens owned by 
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -41,8 +42,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   });
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch("<ENDPOINT>", {
@@ -68,8 +71,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${data.result.items.length} tokens`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -86,6 +91,7 @@ curl -X POST <ENDPOINT> \
     }
   }'
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -95,6 +101,7 @@ You can also use `searchAssets` with an owner filter for more specific queries. 
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -118,8 +125,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${walletAssets.items.length} assets`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch("<ENDPOINT>", {
@@ -146,6 +155,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${data.result.items.length} assets`);
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

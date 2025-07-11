@@ -41,6 +41,7 @@ Page-based pagination is the easiest method to implement and understand. It's pe
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -89,11 +90,13 @@ async function getAllAssetsByPage(collectionAddress: string) {
 // Usage
 const collectionAssets = await getAllAssetsByPage('J1S9H3QjnRtBbbuD4HjPV6RpRhwuk4zKbxsnCHuTgh9w')
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
 {% totem %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 const url = '<ENDPOINT>'
 
@@ -147,6 +150,7 @@ async function getAllAssetsByPage(collectionAddress) {
 // Usage
 const collectionAssets = await getAllAssetsByPage('J1S9H3QjnRtBbbuD4HjPV6RpRhwuk4zKbxsnCHuTgh9w')
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -167,6 +171,7 @@ For larger datasets or when performance is critical, cursor-based pagination off
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -209,11 +214,13 @@ async function getAllAssetsByCursor(collectionAddress: string) {
 // Usage
 const collectionAssets = await getAllAssetsByCursor('COLLECTION_ADDRESS')
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
 {% totem %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 const url = '<ENDPOINT>'
 
@@ -234,8 +241,7 @@ async function getAllAssetsByCursor(collectionAddress) {
         id: 'my-id',
         method: 'searchAssets',
         params: {
-          groupKey: 'collection',
-          groupValue: collectionAddress,
+          grouping: ['collection', collectionAddress],
           limit: 1000,
           cursor: cursor,
           sortBy: { sortBy: 'id', sortDirection: 'asc' },
@@ -259,6 +265,7 @@ async function getAllAssetsByCursor(collectionAddress) {
 // Usage
 const collectionAssets = await getAllAssetsByCursor('COLLECTION_ADDRESS')
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
