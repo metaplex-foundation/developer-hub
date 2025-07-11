@@ -4,7 +4,7 @@ metaTitle: Pagination | DAS API
 description: Learn how to paginate DAS API Requests efficiently
 ---
 
-# Paginating DAS API Requests
+The Digital Asset Standard (DAS) API usually has a limit of 1,000 records per request. When you need to retrieve more data, pagination becomes essential. This guide covers the available pagination methods and best practices for implementing them efficiently.
 
 The Digital Asset Standard (DAS) API usually has a limit of 1,000 records per request. When you need to retrieve more data, pagination becomes essential. This guide covers the available pagination methods and best practices for implementing them efficiently.
 

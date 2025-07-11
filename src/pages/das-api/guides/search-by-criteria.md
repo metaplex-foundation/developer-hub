@@ -163,7 +163,13 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## Method 3: Advanced Filtering with Multiple Conditions
 
-Combine various filters for complex queries, like searching for NFTs from a specific collection and owned by a specific wallet that are not frozen have a specific verified creator and are not compressed sorted by creation date in descending order including the collection metadata:
+Combine filters for complex queries. For example, find NFTs that:  
+• belong to a given collection  
+• are owned by a specific wallet  
+• are **not** frozen or compressed  
+• have a verified creator  
+• are sorted by creation date (descending)  
+and include collection metadata:
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}

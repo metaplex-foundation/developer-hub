@@ -4,7 +4,7 @@ metaTitle: Get All Tokens in a Collection | DAS API Guides
 description: Learn how to retrieve all digital assets belonging to a specific collection
 ---
 
-# Get All Tokens in a Collection
+This guide shows you how to retrieve all digital assets (NFTs, tokens) that belong to a specific collection using the DAS API. This is useful for building collection explorers, analytics dashboards, or marketplace features.
 
 This guide shows you how to retrieve all digital assets (NFTs, tokens) that belong to a specific collection using the DAS API. This is useful for building collection explorers, analytics dashboards, or marketplace features.
 
@@ -199,8 +199,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
   console.log('Newest assets first:')
   newestAssets.items.slice(0, 5).forEach(asset => {
-    console.log(`${asset.content.metadata?.name} - Created: ${asset.content.json_uri}`)
-  })
+newestAssets.items.slice(0, 5).forEach(asset => {
+  console.log(`${asset.content.metadata?.name} - ID: ${asset.id}`)
+})
 })();
 ```
 {% /totem-accordion %}
@@ -266,8 +267,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
   console.log('Newest assets first:')
   newestAssets.items.slice(0, 5).forEach(asset => {
-    console.log(`${asset.content.metadata?.name} - Created: ${asset.content.json_uri}`)
-  })
+newestAssets.items.slice(0, 5).forEach(asset => {
+  console.log(`${asset.content.metadata?.name} - ID: ${asset.id}`)
+})
 })();
 ```
 {% /totem-accordion %}
@@ -292,4 +294,4 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 - [Get Assets By Creator](/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific wallet
 - [Get All Tokens in a Wallet](/das-api/guides/get-wallet-tokens) - See everything a wallet owns
-- [Search Assets by Multiple Criteria](/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 
+- [Search Assets by Multiple Criteria](/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries

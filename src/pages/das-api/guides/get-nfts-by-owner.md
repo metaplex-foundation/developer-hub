@@ -158,9 +158,9 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 {% /totem-accordion %}
 {% /totem %}
 
-## Method 4: Filtering NFTs by Collection
+## Method 3: Filtering NFTs by Collection
 
-You can filter NFTs by specific collections in addition to the wallet address if you are for example looking for your collection:
+You can filter NFTs by specific collections in addition to the wallet address, for example, when looking for NFTs from your own collection:
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}

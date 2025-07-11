@@ -4,8 +4,6 @@ metaTitle: Find Token Holders | DAS API Guides
 description: Learn how to discover all wallets holding a particular token
 ---
 
-# Find Who Holds a Specific NFT in a Collection
-
 This guide shows you how to find all wallets that hold a specific NFT in a collection using the DAS API. This is useful for understanding token distribution, finding whale holders, or analyzing ownership patterns.
 
 ## Method 1: Using Search Assets (Recommended)
@@ -93,7 +91,7 @@ curl -X POST <ENDPOINT> \
 
 ## Method 2: Using Get Assets By Group
 
-For collection-based NFTs, you can use also `getAssetsByGroup` to find all NFTs in a collection. It is easier to use than `searchAssets` but provides less options for further filtering.
+For collection-based NFTs, you can also use `getAssetsByGroup` to find all NFTs in a collection. It is easier to use than `searchAssets` but provides fewer options for further filtering.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
@@ -158,7 +156,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 {% /totem %}
 
 ## Method 3: For Individual Tokens
-
+You can filter NFTs by specific collections in addition to the wallet address, for example, when looking for NFTs from your own collection:
 If you want to find holders of a specific individual NFT (not part of a collection), you'll need to use the NFT's specific ID.
 
 {% totem %}
@@ -219,4 +217,4 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 - [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts)
 - [Analyze Collection Statistics](/das-api/guides/collection-statistics)
-- [Track Asset Transfers](/das-api/guides/track-transfers) 
+- [Track Asset Transfers](/das-api/guides/track-transfers)

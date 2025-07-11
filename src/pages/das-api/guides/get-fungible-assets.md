@@ -12,7 +12,7 @@ This guide shows you how to retrieve all fungible tokens (like SPL tokens, SOL, 
 
 The most effective way to get fungible assets is using `searchAssets` with the `FungibleToken` interface filter. It only returns fungible assets, so you don't need to filter for them.
 
-While this method is the most effective it's not supported by all DAS API Providers currently.
+While this method is the most effective, it's not supported by all DAS API Providers currently.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
@@ -162,7 +162,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 {% /totem-accordion %}
 {% /totem %}
 
-## Method 6: Filtering by Token Properties
+## Method 3: Filtering by Token Properties
 
 You can filter fungible tokens by various properties:
 
