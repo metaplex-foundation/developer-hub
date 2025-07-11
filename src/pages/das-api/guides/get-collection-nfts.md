@@ -129,7 +129,16 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
       id: 1,
       method: 'searchAssets',
       params: {
+<<<<<<< HEAD
         grouping: ['collection', '<COLLECTION_ADDRESS>'],
+=======
+       method: 'searchAssets',
+       params: {
+         grouping: ['collection', '<COLLECTION_ADDRESS>'],
+         limit: 1000,
+         options: {
+           showCollectionMetadata: true,
+>>>>>>> 70d468640daaf6485182c94337b6ef320b1a2d0b
         limit: 1000,
         options: {
           showCollectionMetadata: true,
