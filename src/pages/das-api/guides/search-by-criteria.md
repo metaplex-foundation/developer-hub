@@ -35,6 +35,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
   console.log(`Found ${searchResults.items.length} assets matching criteria`);
 })();
+```
+{% /totem-accordion %}
+{% totem-accordion title="JavaScript Example" %}
 
 ```javascript
 (async () => {

@@ -28,7 +28,11 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
   // Get all NFTs owned by a specific wallet
   const ownerNfts = await umi.rpc.getAssetsByOwner({
     owner: publicKey("WALLET_ADDRESS"),
-    interface: "MplCoreAsset" //optional, without this you will get all assets owned by the wallet
+    interface: "MplCoreAsset", //optional, without this you will get all assets owned by the wallet
+    displayOptions: {
+      showCollectionMetadata: true,
+      showFungible: false, // to exclude fungible tokens
+    },
   });
 
   console.log(`Found ${ownerNfts.items.length} NFTs owned by this wallet`);
