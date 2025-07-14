@@ -15,6 +15,7 @@ import {
   transformDiagramTag,
   transformNodeTag,
 } from '@/components/diagrams'
+import GuideIndexComponent from '@/components/helperComponents/guideIndex'
 import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
@@ -176,6 +177,9 @@ const tags = {
       method: { type: String },
     },
     render: ApiComponentWrapper,
+  },
+  guideIndexComponent: {
+    render: GuideIndexComponent,
   },
 }
 
