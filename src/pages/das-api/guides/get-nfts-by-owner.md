@@ -8,11 +8,10 @@ description: Learn how to retrieve all non-fungible tokens owned by a specific w
 
 This guide shows you how to retrieve all non-fungible tokens (NFTs) owned by a specific wallet address using the DAS API. This is useful for building NFT galleries, portfolio trackers, or marketplace features.
 
-## Method 1: Using Get Assets By Owner with Interface Filter (Recommended)
-
-The `getAssetsByOwner` method combined with interface filtering is the most efficient way to get NFTs owned by a specific wallet.
-
-{% totem %}
+  const ownerNfts = await umi.rpc.getAssetsByOwner({
+    owner: publicKey("WALLET_ADDRESS"),
+    interface: "MplCoreAsset", // only fetch NFT assets
+  });
 {% totem-accordion title="UMI Example" %}
 
 ```typescript
@@ -158,9 +157,9 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 {% /totem-accordion %}
 {% /totem %}
 
-## Method 3: Filtering NFTs by Collection
+## Method 3 – Filter NFTs by Collection
 
-You can filter NFTs by specific collections in addition to the wallet address, for example, when looking for NFTs from your own collection:
+You can filter NFTs by specific collections in addition to the wallet address—for example when looking for NFTs from your own collection.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}

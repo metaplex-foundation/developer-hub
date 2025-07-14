@@ -42,10 +42,6 @@ Page-based pagination is the easiest method to implement and understand. It's pe
 {% totem %}
 {% totem-accordion title="UMI Example" %}
 
-```typescript
-import { publicKey } from '@metaplex-foundation/umi'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 const umi = createUmi('<ENDPOINT>').use(dasApi())
 
@@ -173,7 +169,6 @@ For larger datasets or when performance is critical, cursor-based pagination off
 {% totem-accordion title="UMI Example" %}
 
 ```typescript
-import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
@@ -314,4 +309,4 @@ Cursor-based pagination is generally the best choice for most applications as it
 
 - [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
 - [Search Assets by Criteria](/das-api/guides/search-by-criteria) - Advanced search and filtering
-- [Find Compressed NFTs](/das-api/guides/find-compressed-nfts) - Working with compressed NFTs 
+- [Find Compressed NFTs](/das-api/guides/find-compressed-nfts) - Working with compressed NFTs

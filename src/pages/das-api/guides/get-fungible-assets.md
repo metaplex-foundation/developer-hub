@@ -119,11 +119,13 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 
   // Filter for fungible assets
-  const FungibleTokens = allAssets.items.filter(asset => 
-    asset.interface === 'FungibleToken'
+  const fungibleTokens = allAssets.items.filter(
+    (asset) => asset.interface === 'FungibleToken',
   )
 
-  console.log(`Found ${FungibleTokens.length} fungible assets out of ${allAssets.items.length} total assets`)
+  console.log(
+    `Found ${fungibleTokens.length} fungible assets out of ${allAssets.items.length} total assets`,
+  )
 })();
 ```
 {% /totem-accordion %}

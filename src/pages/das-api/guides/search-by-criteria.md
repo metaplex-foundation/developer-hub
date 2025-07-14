@@ -4,13 +4,11 @@ metaTitle: Search Assets by Multiple Criteria | DAS API Guides
 description: Learn how to combine multiple filters to find specific digital assets
 ---
 
-# Search Assets by Multiple Criteria
-
 This guide shows you how to use the DAS API's `searchAssets` method to find digital assets using multiple filters and criteria. This powerful method allows you to combine various parameters to create complex queries for finding specific assets.
 
 ## Method 1: Basic Multi-Criteria Search
 
-The `searchAssets` method supports combining multiple filters for precise asset discovery like wallets that are owned by a specific wallet and made by a specific creator.
+The `searchAssets` method lets you combine multiple filters—for example, to find assets owned by a given wallet and created by a particular creator.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
@@ -37,9 +35,6 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
   console.log(`Found ${searchResults.items.length} assets matching criteria`);
 })();
-```
-{% /totem-accordion %}
-{% totem-accordion title="JavaScript Example" %}
 
 ```javascript
 (async () => {
@@ -234,8 +229,6 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ```
 {% /totem-accordion %}
 {% /totem %}
-
-
 ## Tips and Best Practices
 
 1. **Start simple**: Begin with basic criteria and add complexity gradually
@@ -257,4 +250,4 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 - [Get Assets By Creator](/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific wallet
 - [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
-- [Find Compressed NFTs](/das-api/guides/find-compressed-nfts) - Discover and work with compressed NFTs 
+- [Find Compressed NFTs](/das-api/guides/find-compressed-nfts) - Discover and work with compressed NFTs
