@@ -40,6 +40,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 
@@ -68,6 +69,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${data.result.items.length} assets in collection`)
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
 ```bash
@@ -86,6 +88,7 @@ curl -X POST <ENDPOINT> \
     }
   }'
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -121,6 +124,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log("Holders:", Array.from(uniqueOwners));
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 
@@ -153,6 +157,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log("Holders:", Array.from(uniqueOwners));
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -199,6 +204,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
     })
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

@@ -23,16 +23,19 @@ In addition to the sorting options, you can also use the `sortDirection` paramet
 
 Page-based pagination is the easiest method to implement and understand. It's perfect for beginners and most common use cases.
 
-### How it works:
+### How it works
+
 - Specify a page number and items per page
 - Navigate through results by incrementing the page number
 
-### Key parameters:
+### Key parameters
+
 - `page`: The current page number (starts at 1)
 - `limit`: Number of items per page (usually max 1,000)
 - `sortBy`: Sorting option
 
-### Considerations:
+### Considerations
+
 - Simple to implement and understand
 - Works fine for most common use cases
 - Performance may degrade with large page numbers
@@ -152,13 +155,15 @@ const collectionAssets = await getAllAssetsByPage('J1S9H3QjnRtBbbuD4HjPV6RpRhwuk
 
 For larger datasets or when performance is critical, cursor-based pagination offers better efficiency and is the recommended approach for production applications.
 
-### How it works:
+### How it works
+
 - Uses a cursor string to track position
 - Cursor value is returned with each response
 - Pass the cursor to the next request to get the next page
 - Perfect for sequential data traversal
 
-### Key parameters:
+### Key parameters
+
 - `cursor`: Position marker for the next set of results
 - `limit`: Number of items per page (max 1,000)
 - `sortBy`: Must be set to `id` for cursor-based pagination

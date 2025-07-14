@@ -48,6 +48,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
   });
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 
