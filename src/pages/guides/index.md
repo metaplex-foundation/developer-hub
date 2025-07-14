@@ -11,3 +11,5 @@ The guides in this section are **designed to help new Solana developers start th
 By incorporating a variety of learning resources, including tutorials and code samples, **the guides are designed to be accessible to new and experienced developers in the space**. The guides are regularly updated to reflect the latest developments in the Solana ecosystem.
 
 The guides are shared for educational and informational purposes only and are not to be relied upon as professional advice. All content included in these learning resources are not guaranteed to be current or error-free.
+
+{% guideIndexComponent /%}
