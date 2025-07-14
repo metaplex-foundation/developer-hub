@@ -4,8 +4,6 @@ metaTitle: Get Wallet Tokens | DAS API Guides
 description: Learn how to retrieve all tokens owned by a specific wallet
 ---
 
-# Get All Tokens in a Wallet
-
 This guide shows you how to retrieve all tokens (NFTs, fungible tokens, and other digital assets) owned by a specific wallet address using the DAS API.
 
 ## Method 1: Using Get Assets By Owner (Recommended)

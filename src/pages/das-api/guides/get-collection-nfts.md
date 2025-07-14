@@ -6,8 +6,6 @@ description: Learn how to retrieve all digital assets belonging to a specific co
 
 This guide shows you how to retrieve all digital assets (NFTs, tokens) that belong to a specific collection using the DAS API. This is useful for building collection explorers, analytics dashboards, or marketplace features.
 
-This guide shows you how to retrieve all digital assets (NFTs, tokens) that belong to a specific collection using the DAS API. This is useful for building collection explorers, analytics dashboards, or marketplace features.
-
 ## Method 1: Using Get Assets By Group (Recommended)
 
 The `getAssetsByGroup` method is specifically designed to find assets that belong to a particular collection.
@@ -93,7 +91,6 @@ You can also use `searchAssets` with a collection grouping for more specific que
 {% totem-accordion title="UMI Example" %}
 
 ```typescript
-import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
@@ -129,16 +126,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
       id: 1,
       method: 'searchAssets',
       params: {
-<<<<<<< HEAD
         grouping: ['collection', '<COLLECTION_ADDRESS>'],
-=======
-       method: 'searchAssets',
-       params: {
-         grouping: ['collection', '<COLLECTION_ADDRESS>'],
-         limit: 1000,
-         options: {
-           showCollectionMetadata: true,
->>>>>>> 70d468640daaf6485182c94337b6ef320b1a2d0b
         limit: 1000,
         options: {
           showCollectionMetadata: true,
@@ -198,7 +186,6 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 
   console.log('Newest assets first:')
-  newestAssets.items.slice(0, 5).forEach(asset => {
 newestAssets.items.slice(0, 5).forEach(asset => {
   console.log(`${asset.content.metadata?.name} - ID: ${asset.id}`)
 })
@@ -267,9 +254,8 @@ newestAssets.items.slice(0, 5).forEach(asset => {
 
   console.log('Newest assets first:')
   newestAssets.items.slice(0, 5).forEach(asset => {
-newestAssets.items.slice(0, 5).forEach(asset => {
-  console.log(`${asset.content.metadata?.name} - ID: ${asset.id}`)
-})
+    console.log(`${asset.content.metadata?.name} - ID: ${asset.id}`)
+  })
 })();
 ```
 {% /totem-accordion %}

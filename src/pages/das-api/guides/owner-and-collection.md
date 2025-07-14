@@ -8,7 +8,7 @@ description: Learn how to find digital assets from a specific collection owned b
 
 This guide shows you how to find digital assets that belong to a specific collection and are owned by a particular wallet address. This is useful for building collection-specific portfolio views, marketplace features, or analytics tools.
 
-## Method 1: Using Search Assets with Owner and Collection Grouping (Recommended)
+## Using Search Assets with Owner and Collection Grouping
 
 The `searchAssets` method allows you to combine owner and collection filters for precise results.
 

@@ -4,8 +4,6 @@ metaTitle: Get Fungible Assets | DAS API Guides
 description: Learn how to retrieve all fungible tokens owned by a specific wallet
 ---
 
-# Get Fungible Assets by Owner
-
 This guide shows you how to retrieve all fungible tokens (like SPL tokens, SOL, etc.) owned by a specific wallet address using the DAS API.
 
 ## Method 1: Using Search Assets with Interface Filter (Recommended)

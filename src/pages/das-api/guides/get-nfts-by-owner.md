@@ -10,7 +10,7 @@ This guide shows you how to retrieve all non-fungible tokens (NFTs) owned by a s
 
 ## Method 1: Using Get Assets By Owner with Interface Filter (Recommended)
 
-The `getAssetsByOwner` method combined with interface filtering is the most efficient way to get NFTs owned by a specific wallet.
+The `getAssetsByOwner` method combined with interface filtering is the most efficient way to get NFTs owned by a specific wallet, it only returns the NFTs that apply to the interface filter, e.g. `MplCoreAsset` would not return compressed NFTs.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}

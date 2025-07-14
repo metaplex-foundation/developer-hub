@@ -153,11 +153,11 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log("Holders:", Array.from(uniqueOwners));
 })();
 ```
+{% /totem-accordion %}
 {% /totem %}
 
 ## Method 3: For Individual Tokens
-You can filter NFTs by specific collections in addition to the wallet address, for example, when looking for NFTs from your own collection:
-If you want to find holders of a specific individual NFT (not part of a collection), you'll need to use the NFT's specific ID.
+If you want to find holders of a specific individual NFT (not part of a collection), you'll need to use the NFT's specific Address in `getAsset`.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
@@ -179,7 +179,6 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
   console.log(`Token ${token.id} is owned by: ${token.ownership.owner}`);
 })();
-
 ```
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
