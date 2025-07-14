@@ -9,6 +9,7 @@ Shank is a collection of Rust crates designed to extract Interface Definition La
 Shank simplifies the development workflow for Solana programs by automating the generation of IDL files, which serve as a bridge between your Rust program code and client-side SDKs.
 
 ## Quick Start
+
 1. Install Shank CLI: `cargo install shank-cli`
 2. Add Shank to your project: `shank = "0.4"`
 3. Annotate your program with `ShankAccount` and `ShankInstruction` macros
