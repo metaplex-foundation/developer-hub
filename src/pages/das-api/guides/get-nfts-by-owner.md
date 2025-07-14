@@ -28,6 +28,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
   // Get all NFTs owned by a specific wallet
   const ownerNfts = await umi.rpc.getAssetsByOwner({
     owner: publicKey("WALLET_ADDRESS"),
+    interface: "MplCoreAsset" //optional, without this you will get all assets owned by the wallet
   });
 
   console.log(`Found ${ownerNfts.items.length} NFTs owned by this wallet`);
@@ -158,9 +159,9 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 {% /totem-accordion %}
 {% /totem %}
 
-## Method 3: Filtering NFTs by Collection
+## Method 3 – Filter NFTs by Collection
 
-You can filter NFTs by specific collections in addition to the wallet address, for example, when looking for NFTs from your own collection:
+You can filter NFTs by specific collections in addition to the wallet address—for example when looking for NFTs from your own collection.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}

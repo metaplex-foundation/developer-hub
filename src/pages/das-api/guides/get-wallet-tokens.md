@@ -174,4 +174,4 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 - [Get Fungible Assets by Owner](/das-api/guides/get-fungible-assets)
 - [Get NFTs by Owner](/das-api/guides/get-nfts-by-owner)
 - [Get Assets by Owner and Collection](/das-api/guides/owner-and-collection)
-- [Analyze Collection Statistics](/das-api/guides/collection-statistics) 
+- [Analyze Collection Statistics](/das-api/guides/collection-statistics)

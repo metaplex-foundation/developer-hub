@@ -186,9 +186,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 
   console.log('Newest assets first:')
-newestAssets.items.slice(0, 5).forEach(asset => {
-  console.log(`${asset.content.metadata?.name} - ID: ${asset.id}`)
-})
+  newestAssets.items.slice(0, 5).forEach(asset => {
+    console.log(`${asset.content.metadata?.name} - ID: ${asset.id}`)
+  })
 })();
 ```
 {% /totem-accordion %}
