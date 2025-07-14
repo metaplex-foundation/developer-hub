@@ -19,20 +19,20 @@ In addition to the sorting options, you can also use the `sortDirection` paramet
 
 ## Pagination Methods
 
-### Page-Based Pagination (Recommended for Beginners)
+## Page-Based Pagination (Recommended for Beginners)
 
 Page-based pagination is the easiest method to implement and understand. It's perfect for beginners and most common use cases.
 
-#### How it works:
+### How it works:
 - Specify a page number and items per page
 - Navigate through results by incrementing the page number
 
-#### Key parameters:
+### Key parameters:
 - `page`: The current page number (starts at 1)
 - `limit`: Number of items per page (usually max 1,000)
 - `sortBy`: Sorting option
 
-#### Considerations:
+### Considerations:
 - Simple to implement and understand
 - Works fine for most common use cases
 - Performance may degrade with large page numbers
@@ -40,7 +40,7 @@ Page-based pagination is the easiest method to implement and understand. It's pe
 {% totem %}
 {% totem-accordion title="UMI Example" %}
 
-
+```typescript
 const umi = createUmi('<ENDPOINT>').use(dasApi())
 
 async function getAllAssetsByPage(collectionAddress: string) {
@@ -148,17 +148,17 @@ const collectionAssets = await getAllAssetsByPage('J1S9H3QjnRtBbbuD4HjPV6RpRhwuk
 {% /totem-accordion %}
 {% /totem %}
 
-### Cursor-Based Pagination (Recommended for Advanced Users)
+## Cursor-Based Pagination (Recommended for Advanced Users)
 
 For larger datasets or when performance is critical, cursor-based pagination offers better efficiency and is the recommended approach for production applications.
 
-#### How it works:
+### How it works:
 - Uses a cursor string to track position
 - Cursor value is returned with each response
 - Pass the cursor to the next request to get the next page
 - Perfect for sequential data traversal
 
-#### Key parameters:
+### Key parameters:
 - `cursor`: Position marker for the next set of results
 - `limit`: Number of items per page (max 1,000)
 - `sortBy`: Must be set to `id` for cursor-based pagination
@@ -272,24 +272,24 @@ const collectionAssets = await getAllAssetsByCursor('COLLECTION_ADDRESS')
 
 ## Best Practices
 
-### 1. Choose the Right Method
+### Choose the Right Method
 - **Use page-based pagination** for simple use cases and beginners
 - **Use cursor-based pagination** for production applications and large collections
 - **Use range-based pagination** for advanced querying patterns
 
-### 2. Error Handling
+### Error Handling
 - Always check for empty result sets
 - Implement retry logic for failed requests
 - Handle rate limits appropriately
 - Add safety checks to prevent infinite loops
 
-### 3. Performance Optimization
+### Performance Optimization
 - Keep track of the last processed item
 - Implement proper caching strategies, but keep in mind that data, especially proofs can change quickly
 - Use appropriate sorting methods
 - Consider implementing checkpoints for long-running operations
 
-### 4. Data Consistency
+### Data Consistency
 - Always use sorting when paginating
 - Maintain consistent sort parameters between requests
 

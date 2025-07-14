@@ -1,6 +1,6 @@
 import { Fence } from '@/components/Fence';
 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const UmiRequestRenderer = ({
   url,
@@ -10,19 +10,7 @@ const UmiRequestRenderer = ({
   bodyParams,
   id,
 }) => {
-  // ...existing implementation...
-}
 
-UmiRequestRenderer.propTypes = {
-  url: PropTypes.string.isRequired,
-  headers: PropTypes.object,
-  bodyMethod: PropTypes.string.isRequired,
-  rpcVersion: PropTypes.string,
-  bodyParams: PropTypes.object,
-  id: PropTypes.string,
-}
-
-export default UmiRequestRenderer
   const httpBody = bodyParams;
 
   // Convert display options to UMI format with proper formatting
