@@ -267,10 +267,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## Common Use Cases
 
-- **Collection Explorers**: Display all assets in a collection with filtering and sorting
-- **Marketplace Integration**: Show available assets from a specific collection
-- **Analytics Dashboards**: Track collection statistics and ownership distribution
-- **Gaming Applications**: Load all assets from a game's collection
+- **Collection Explorers**: Display all assets in a collection with filtering and sorting.
+- **Marketplace Integration**: Show available assets from a specific collection.
+- **Analytics Dashboards**: Track collection statistics and ownership distribution.
+- **Gaming Applications**: Load all assets from a game's collection.
 
 ## Tips and Best Practices
 

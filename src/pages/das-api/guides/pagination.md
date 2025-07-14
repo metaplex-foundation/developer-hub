@@ -4,7 +4,7 @@ metaTitle: Pagination | DAS API
 description: Learn how to paginate DAS API Requests efficiently
 ---
 
-The Digital Asset Standard (DAS) API usually has a limit of 1,000 records per request. When you need to retrieve more data, pagination becomes essential. This guide covers the available pagination methods and best practices for implementing them efficiently.
+The Digital Asset Standard (DAS) API usually has a limit of 10,000 records per request. When you need to retrieve more data, pagination becomes essential. This guide covers the available pagination methods and best practices for implementing them efficiently.
 
 ## Understanding Sort Options
 
@@ -31,7 +31,7 @@ Page-based pagination is the easiest method to implement and understand. It's pe
 ### Key parameters
 
 - `page`: The current page number (starts at 1)
-- `limit`: Number of items per page (usually max 1,000)
+- `limit`: Number of items per page (usually max 10,000)
 - `sortBy`: Sorting option
 
 ### Considerations
@@ -44,6 +44,9 @@ Page-based pagination is the easiest method to implement and understand. It's pe
 {% totem-accordion title="UMI Example" %}
 
 ```typescript
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+
 const umi = createUmi('<ENDPOINT>').use(dasApi())
 
 async function getAllAssetsByPage(collectionAddress: string) {
@@ -165,7 +168,7 @@ For larger datasets or when performance is critical, cursor-based pagination off
 ### Key parameters
 
 - `cursor`: Position marker for the next set of results
-- `limit`: Number of items per page (max 1,000)
+- `limit`: Number of items per page (max 10,000)
 - `sortBy`: Must be set to `id` for cursor-based pagination
 
 {% totem %}

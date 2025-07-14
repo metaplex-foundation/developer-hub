@@ -8,7 +8,7 @@ This guide shows you how to find all wallets that hold a specific NFT in a colle
 
 ## Method 1: Using Search Assets (Recommended)
 
-The `searchAssets` method is the most efficient way to find all holders of a specific NFT in a collection. `getAssetsByGroup` is also a viable option, but it provides fewer filtering capabilities.
+The `searchAssets` method is the most efficient way to find all holders of NFTs within a collection. `getAssetsByGroup` is also a viable option, but it provides fewer filtering capabilities.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
