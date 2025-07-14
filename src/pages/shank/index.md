@@ -4,10 +4,9 @@ metaTitle: Shank | Metaplex Developer Hub
 description: Extract IDLs from Rust Solana program code using attribute macros
 ---
 
-Shank is a collection of Rust crates designed to extract Interface Definition Language (IDL) from Solana program code annotated with Shank attribute macros. The extracted IDL can then be used to generate TypeScript SDKs and facilitate easier interaction with Solana programs.
+Shank is a collection of Rust crates designed to extract Interface Definition Language (IDL) from Solana program code annotated with Shank attribute macros. The extracted IDL can then be used to generate TypeScript SDKs and facilitate interaction with Solana programs.
 
 Shank simplifies the development workflow for Solana programs by automating the generation of IDL files, which serve as a bridge between your Rust program code and client-side SDKs.
-
 ## Quick Start
 
 1. Install Shank CLI: `cargo install shank-cli`
