@@ -187,74 +187,13 @@ shank idl --out-dir ./idl --crate-root ./my-program
 shank idl --out-dir ./idl --crate-root ./ --program-id MyProgram111111111111111111111111111111
 ```
 
-## Shank Macros Reference
-
-Shank provides several macros used to annotate Solana Rust programs for IDL extraction:
-
-### ShankAccount
-
-Annotates a *struct* that shank will consider an account containing de/serializable data.
-
-```rust
-#[derive(Clone, BorshSerialize, BorshDeserialize, ShankAccount)]
-pub struct Metadata {
-    pub update_authority: Pubkey,
-    pub mint: Pubkey,
-    pub primary_sale_happened: bool,
-}
-```
-
-#### Field Attributes
-
-**`#[idl_type(...)]` Attribute**
-
-This attribute allows overriding how Shank interprets a field's type when generating the IDL. Useful for:
-
-1. Fields with wrapper types that should be treated as their inner types
-2. Fields storing enum values as primitives
-3. Fields with complex types needing simpler representations
-
-Supports two formats:
-- String literal: `#[idl_type("TypeName")]`
-- Direct type: `#[idl_type(TypeName)]`
-
-```rust
-#[derive(Clone, BorshSerialize, BorshDeserialize, ShankAccount)]
-pub struct MyAccount {
-    // Field stored as u8 but representing an enum
-    #[idl_type("MyEnum")]
-    pub enum_as_byte: u8,
-
-    // Field with a wrapper type treated as a simpler type
-    #[idl_type("u64")]
-    pub wrapped_u64: CustomU64Wrapper,
-}
-```
-
-**`#[padding]` Attribute**
-
-Indicates that a field is used for padding and should be marked as such in the IDL.
-
-**Note**: The fields of a *ShankAccount* struct can reference other types as long as they are annotated with `BorshSerialize`, `BorshDeserialize`, or `ShankType`.
-
-### ShankInstruction
-
-Annotates the program *Instruction* `Enum` to include `#[account]` attributes.
-
-#### `#[account]` Attribute
-
-Configures accounts for each instruction variant. The attribute follows this format:
-
-```rust
-#[account(index, mutability?, signer?, name="account_name", desc="Account description")]
-```
-
 ## Next Steps
 
 Now that you have Shank set up and generating IDL files, you can:
 
-1. **[Generate TypeScript SDKs](https://github.com/metaplex-foundation/solita)**: Use Solita to create client SDKs
-2. **[Integration with Kinobi](/umi/kinobi)**: Use modern IDL generation tools
+1. **[Macros Reference](/shank/macros)**: Complete reference for all Shank macros and attributes
+2. **[Integration with Kinobi](/umi/kinobi)**: Generate modern TypeScript SDKs compatible with Umi (recommended)
+3. **[Solita](https://github.com/metaplex-foundation/solita)**: Generate legacy TypeScript SDKs compatible with web3.js
 
 ## Troubleshooting
 

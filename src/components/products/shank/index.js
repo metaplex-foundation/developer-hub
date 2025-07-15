@@ -28,6 +28,15 @@ export const shank = {
             },
           ],
         },
+        {
+          title: 'Reference',
+          links: [
+            {
+              title: 'Macros Reference',
+              href: '/shank/macros',
+            },
+          ],
+        },
       ],
     },
   ],
