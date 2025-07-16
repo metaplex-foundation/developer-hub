@@ -14,6 +14,7 @@ import { hydra } from './hydra';
 import { inscription } from './inscription';
 import { legacyDocumentation } from './legacyDocumentation';
 import { mplHybrid } from './mpl-hybrid';
+import { shank } from './shank';
 import { sugar } from './sugar';
 import { tokenAuthRules } from './tokenAuthRules';
 import { tokenMetadata } from './tokenMetadata';
@@ -41,6 +42,7 @@ export const products = [
   core,
   coreCandyMachine,
   legacyDocumentation,
+  shank,
   sugar,
   mplHybrid,
   guides,

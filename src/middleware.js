@@ -51,6 +51,9 @@ const redirectRules = {
     '/api/v1/das/get-signatures-for-asset': '/das-api/methods/get-asset-signatures',
     '/api/v1/das/search-assets': '/das-api/methods/search-assets',
   },
+  '/legacy-documentation': {
+    '/developer-tools/shank': '/shank',
+  },
 }
 
 export function middleware(request) {
@@ -85,5 +88,6 @@ export const config = {
     '/core-candy-machine/:path*',
     '/bubblegum/:path*',
     '/aura/:path*',
+    '/legacy-documentation/:path*',
   ],
 }
