@@ -13,7 +13,7 @@ The Freeze Execute Plugin is particularly useful for scenarios such as:
 - **Backed NFTs**: Lock NFTs that represent ownership of underlying assets (SOL, tokens) to prevent unauthorized withdrawals
 - **Escrowless asset management**: Freeze assets while they're involved in financial operations without transferring ownership
 - **Staking protocols**: Prevent asset execution during staking periods while maintaining ownership
-- **Smart contract security**: Add an additional layer of protection for assets that can execute complex operations
+- **Smart contract security**: Add a layer of protection for assets that can execute complex operations
 - **Governance controls**: Implement freezing mechanisms for assets involved in governance or voting
 - **Asset rental**: Prevent execution while assets are being rented out
 - **Collateral management**: Lock assets used as collateral in DeFi protocols
@@ -466,22 +466,22 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
   await transferSol(umi, {
     source: umi.identity,
     destination: publicKey(assetSignerPda),
-    amount: sol(0.01), // 1 SOL backing
+    amount: sol(0.01), // 0.01 SOL backing
   }).sendAndConfirm(umi);
 
-// 4. Execute operations are blocked while frozen
+  // 4. Execute operations are blocked while frozen
   // This transaction will fail:
   try {
-  await execute(umi, {
-    asset: await fetchAsset(umi, assetSigner.publicKey),
-    instructions: transferSol(umi, {
-      source: createNoopSigner(publicKey(assetSignerPda)),
-      destination: generateSigner(umi).publicKey,
-      amount: sol(0.001),
+    await execute(umi, {
+      asset: await fetchAsset(umi, assetSigner.publicKey),
+      instructions: transferSol(umi, {
+        source: createNoopSigner(publicKey(assetSignerPda)),
+        destination: generateSigner(umi).publicKey,
+        amount: sol(0.001),
       }),
     }).sendAndConfirm(umi, { send: { skipPreflight: true } });
   } catch (e) {
-    console.log('execute failed as expected', e);
+    console.log("execute failed as expected", e);
   }
 
   // 5. Unfreeze to allow withdrawals
@@ -501,6 +501,7 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
     }),
   }).sendAndConfirm(umi);
 })();
+
 ```
 
 {% /dialect %}
