@@ -140,6 +140,10 @@ export const core = {
               href: '/core/plugins/freeze-delegate',
             },
             {
+              title: 'Freeze Execute Plugin',
+              href: '/core/plugins/freeze-execute',
+            },
+            {
               title: 'Burn Delegate Plugin',
               href: '/core/plugins/burn-delegate',
             },

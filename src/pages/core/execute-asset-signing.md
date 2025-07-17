@@ -71,6 +71,17 @@ has also signed the transaction. This insures only the current Asset Owner can
 execute transactions while using the `assetSignerPda` with the `execute` instruction.
 {% /callout %}
 
+### Controlling Execute Operations
+
+The execute functionality can be controlled using the [Freeze Execute Plugin](/core/plugins/freeze-execute). This plugin allows you to freeze the execute operations on an asset, preventing any execute instructions from being processed until unfrozen.
+
+The Freeze Execute Plugin is particularly useful for:
+
+- **Backed NFTs**: Prevent withdrawal of underlying assets when needed
+- **Escrowless protocols**: Temporarily lock execute functionality during protocol operations
+- **Security measures**: Add an additional layer of protection for assets that can execute complex operations
+
+When the Freeze Execute Plugin is active and set to `frozen: true`, any attempts to use the execute instruction will be blocked until the plugin is updated to `frozen: false`.
 ## Examples
 
 ### Transferring SOL From the Asset Signer
