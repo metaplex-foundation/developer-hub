@@ -22,29 +22,7 @@ We recommend to fetch data with `onlyVerified: true` to make sure the asset actu
 | `page`             |          | The index of the "page" to retrieve.       |
 | `before`           |          | Retrieve assets before the specified ID.   |
 | `after`            |          | Retrieve assets after the specified ID.    |
-
-
-## UMI w/ DAS SDK
-
-{% totem %}
-
-```js
-import { publicKey } from '@metaplex-foundation/umi';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-
-const umi = createUmi('<ENDPOINT>').use(dasApi());
-const creator = publicKey('D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3');
-
-const assets = await umi.rpc.getAssetsByCreator({
-    creator,
-    onlyVerified: true,
-    limit: 10,
-});
-console.log(assets.items.length > 0);
-```
-
-{% /totem %}
+| `options`          |          | Display options object. See [Display Options](/das-api/display-options) for details. |
 
 ## Playground
 
