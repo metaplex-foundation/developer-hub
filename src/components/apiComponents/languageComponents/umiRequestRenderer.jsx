@@ -126,12 +126,15 @@ const UmiRequestRenderer = ({
         return `{\n${authorityParams.join(',\n')}\n}`;
       }
       case 'getAssetsByGroup': {
-        const groupParams = [];
-        if (params.grouping && Array.isArray(params.grouping) && params.grouping.length >= 2) {
-          groupParams.push(`  groupKey: '${params.grouping[0]}'`);
-          groupParams.push(`  groupValue: '${params.grouping[1]}'`);
+                const groupParams = [];
+        if (params.groupKey) {
+          groupParams.push(`  groupKey: '${params.groupKey}'`);
         } else {
           groupParams.push(`  groupKey: ''`);
+        }
+        if (params.groupValue) {
+          groupParams.push(`  groupValue: '${params.groupValue}'`);
+        } else {
           groupParams.push(`  groupValue: ''`);
         }
         if (params.limit) groupParams.push(`  limit: ${params.limit}`);
