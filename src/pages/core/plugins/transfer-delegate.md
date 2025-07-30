@@ -239,6 +239,7 @@ const { signature } = await transfer(umi, {
   })
   .sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 
 {% dialect title="Rust CPI" id="rust-cpi" %}
