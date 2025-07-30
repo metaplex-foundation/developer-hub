@@ -56,6 +56,7 @@ description: Official Links for Metaplex
 | Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  | [Link](https://github.com/metaplex-foundation/mpl-hydra)                                                    | [Link](/hydra)
 | Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              | [Link](/inscription)
 | MPL-Hybrid         | MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb  | [Link](https://github.com/metaplex-foundation/mpl-inscription)                                              | [Link](/mpl-hybrid)
+| MPL-Trifle (Fusion) | trifMWutwBxkSuatmpPVnEe7NoE3BJKgjVi8sSyoXWX | [Link](https://github.com/metaplex-foundation/mpl-trifle)                                                  | [Link](/fusion)
 | Token Auth Rules   | auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg  | [Link](https://github.com/metaplex-foundation/mpl-token-auth-rules)                                         | [Link](/token-auth-rules)
 | Token Metadata     | metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s  | [Link](https://github.com/metaplex-foundation/mpl-token-metadata)                                           | [Link](/token-metadata)
 | MPL System Extras  | SysExL2WDyJi9aRZrXorrjHJut3JwHQ7R9bTyctbNNG  | [Link](https://github.com/metaplex-foundation/mpl-toolbox)                                                  | [Link](/umi/toolbox)
