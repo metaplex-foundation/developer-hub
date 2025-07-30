@@ -238,6 +238,7 @@ const { signature } = await transfer(umi, {
     collection: collectionItem,
   })
   .sendAndConfirm(umi);
+```
 
 {% /dialect %}
 
