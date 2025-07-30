@@ -238,7 +238,7 @@ const { signature } = await transfer(umi, {
     collection: collectionItem,
   })
   .sendAndConfirm(umi);
-
+```
 {% /dialect %}
 
 {% dialect title="Rust CPI" id="rust-cpi" %}
@@ -251,3 +251,7 @@ TransferV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .system_program(&ctx.accounts.system_program.to_account_info())
     .invoke()?;
 ```
+
+{% /dialect %}`
+{% /dialect-switcher %}
+
