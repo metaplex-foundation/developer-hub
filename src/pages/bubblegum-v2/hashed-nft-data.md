@@ -71,9 +71,9 @@ Seller Fee Basis Points)
 {% node label="Nonce" /%}
 {% node label="Data Hash" /%}
 {% node label="Creator Hash" /%}
-{% node label="Collection Hash" /%}
-{% node label="Asset Data Hash" /%}
-{% node label="Flags" /%}
+{% node label="Collection Hash (new with V2)" /%}
+{% node label="Asset Data Hash (new with V2)" /%}
+{% node label="Flags (new with V2)" /%}
 {% /node %}
 
 {% node parent="leaf-schema" x="200" %}
