@@ -1,19 +1,20 @@
-import { useState } from 'react'
-import EndPointSelector from './endPointSelector'
-import CSharpRequestRenderer from './languageComponents/cSharpRenderer'
-import CurlRequestRenderer from './languageComponents/curlRequestRenderer'
-import GoRequestRenderer from './languageComponents/goRequestRenderer'
-import JavaRenderer from './languageComponents/javaRenderer'
-import JavascriptRequestRenderer from './languageComponents/javascriptRequestRenderer'
-import PhpRenderer from './languageComponents/phpRenderer'
-import PythonRequestRenderer from './languageComponents/pythonRequestRenderer'
-import RubyRenderer from './languageComponents/rubyRenderer'
-import RustRequestRenderer from './languageComponents/rustRenderer'
-import SwiftRequestRenderer from './languageComponents/swiftRenderer'
-import LanguageSelector from './languageSelector'
+import { useState } from 'react';
+import EndPointSelector from './endPointSelector';
+import CSharpRequestRenderer from './languageComponents/cSharpRenderer';
+import CurlRequestRenderer from './languageComponents/curlRequestRenderer';
+import GoRequestRenderer from './languageComponents/goRequestRenderer';
+import JavaRenderer from './languageComponents/javaRenderer';
+import JavascriptRequestRenderer from './languageComponents/javascriptRequestRenderer';
+import PhpRenderer from './languageComponents/phpRenderer';
+import PythonRequestRenderer from './languageComponents/pythonRequestRenderer';
+import RubyRenderer from './languageComponents/rubyRenderer';
+import RustRequestRenderer from './languageComponents/rustRenderer';
+import SwiftRequestRenderer from './languageComponents/swiftRenderer';
+import UmiRequestRenderer from './languageComponents/umiRequestRenderer';
+import LanguageSelector from './languageSelector';
 
 const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
-  const [activeLanguage, setActiveLanguage] = useState('javascript')
+  const [activeLanguage, setActiveLanguage] = useState('umi')
 
   function strToTitleCase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -188,6 +189,21 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <SwiftRequestRenderer
+              method={api.method}
+              url={activeEndpoint}
+              headers={headers}
+              bodyMethod={body.method}
+              bodyParams={body.params}
+            />
+          </div>
+        )
+      case 'umi':
+        return (
+          <div className="flex flex-col">
+            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+              {strToTitleCase(activeLanguage)} Request Example
+            </div>
+            <UmiRequestRenderer
               method={api.method}
               url={activeEndpoint}
               headers={headers}

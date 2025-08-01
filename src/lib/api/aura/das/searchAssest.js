@@ -48,7 +48,7 @@ const searchAssets = {
       description: 'The creator address of the asset',
     },
     {
-      name: 'createVerified',
+      name: 'creatorVerified',
       type: 'boolean',
       description: 'Indicates whether the creator must be verified or not.',
     },

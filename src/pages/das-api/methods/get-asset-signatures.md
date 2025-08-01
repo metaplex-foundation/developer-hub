@@ -21,29 +21,6 @@ Returns the transaction signatures associated with a compressed asset. You can i
 | `cursor`        |          | The cursor of the signatures.               |
 | `sortDirection` |          | Sort direction. Can be either "asc" or "desc". |
 
-## UMI w/ DAS SDK
-
-{% totem %}
-
-```js
-import { publicKey } from '@metaplex-foundation/umi';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-
-const umi = createUmi('<ENDPOINT>').use(dasApi());
-
-const assets = await umi.rpc.getAssetSignatures({
-  assetId: publicKey('GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA'),
-  // Optional parameters
-  // limit: 10,
-  // page: 1,
-  // sortDirection: 'desc',
-});
-console.log(assets);
-```
-
-{% /totem %}
-
 ## Playground
 
 {% apiRenderer method="getAssetSignatures" /%}
