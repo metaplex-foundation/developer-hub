@@ -1,7 +1,7 @@
 ---
-title: Web3.js Differences and Adapters
-metaTitle: Umi - Web3.js Differences and Adapters
-description: Difference and Adapters to make Metaplex Umi work with Solana web3js.
+title: '@solana/web3.js Differences and Adapters'
+metaTitle: 'Umi - @solana/web3.js Differences and Adapters'
+description: 'Difference and Adapters to make Metaplex Umi work with Solana web3js.'
 ---
 
 The `@solana/web3.js` library is currently widely used in the Solana ecosystem and defines its own types for `Publickeys`, `Transactions`, `Instructions`, etc. 

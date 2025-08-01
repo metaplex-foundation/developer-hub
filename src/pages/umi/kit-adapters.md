@@ -1,10 +1,10 @@
 ---
-title: @solana/kit Adapters
-metaTitle: Umi - @solana/kit Adapters
-description: Adapters to convert between Umi and @solana/kit.
+title: '@solana/kit Adapters'
+metaTitle: 'Umi - @solana/kit Adapters'
+description: 'Adapters to convert between Umi and @solana/kit.'
 ---
 
-The new `@solana/kit` library is part of Solana's modern JavaScript SDK and provides improved type safety and performance compared to `@solana/web3.js`. When working with both Umi and `@solana/kit`, you may need to convert between their respective types.
+The new [`@solana/kit`](https://github.com/anza-xyz/kit) library is part of Solana's modern JavaScript SDK and provides improved type safety and performance compared to [`@solana/web3.js`](https://github.com/solana-foundation/solana-web3.js/). When working with both Umi and `@solana/kit`, you may need to convert between their respective types.
 
 To help with this, Umi provides adapters in the [`@metaplex-foundation/umi-kit-adapters`](https://www.npmjs.com/package/@metaplex-foundation/umi-kit-adapters) package that allow you to convert types between Umi and `@solana/kit`.
 
