@@ -1,7 +1,7 @@
 ---
 title: '@solana/kit Adapters'
 metaTitle: 'Umi - @solana/kit Adapters'
-description: 'Adapters to convert between Umi and @solana/kit.'
+description: 'Adapters that convert types between Umi and @solana/kit.'
 ---
 
 The new [`@solana/kit`](https://github.com/anza-xyz/kit) library is part of Solana's modern JavaScript SDK and provides improved type safety and performance compared to [`@solana/web3.js`](https://github.com/solana-foundation/solana-web3.js/). When working with both Umi and `@solana/kit`, you may need to convert between their respective types.
@@ -16,18 +16,8 @@ Install the adapters package:
 npm i @metaplex-foundation/umi-kit-adapters
 ```
 
-After the installation the conversion functions are available to you:
+After installation, the conversion functions are available:
 
-```ts
-import { 
-  // Addresses/PublicKeys
-  fromKitAddress, toKitAddress,
-  // Keypairs
-  fromKitKeypair, toKitKeypair,
-  // Instructions
-  fromKitInstruction, toKitInstruction
-} from '@metaplex-foundation/umi-kit-adapters';
-```
 
 ## Addresses
 
