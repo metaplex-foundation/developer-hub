@@ -34,6 +34,9 @@ export const umi = {
             { title: 'Web3js Differences and Adapters', 
               href: '/umi/web3js-differences-and-adapters' 
             },
+            { title: '@solana/kit Adapters', 
+              href: '/umi/kit-adapters' 
+            },
           ],
         },
         {
