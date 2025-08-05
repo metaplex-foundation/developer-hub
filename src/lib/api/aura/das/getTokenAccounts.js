@@ -59,7 +59,7 @@ const getTokenAccounts = {
       chain: 'solanaMainnet',
       body: {
         params: {
-          mint: 'So11111111111111111111111111111111111111112',
+          mintAddress: 'So11111111111111111111111111111111111111112',
           limit: 10,
         },
       },
@@ -70,7 +70,7 @@ const getTokenAccounts = {
       chain: 'solanaMainnet',
       body: {
         params: {
-          owner: '1BWutmTvYPwDtmw9abTkS4Ssr8no61spGAvW1X6NDix',
+          ownerAddress: '1BWutmTvYPwDtmw9abTkS4Ssr8no61spGAvW1X6NDix',
           limit: 10,
         },
       },
@@ -81,7 +81,7 @@ const getTokenAccounts = {
       chain: 'solanaMainnet',
       body: {
         params: {
-          mint: 'So11111111111111111111111111111111111111112',
+          mintAddress: 'So11111111111111111111111111111111111111112',
           limit: 10,
           options: {
             showZeroBalance: true,
@@ -95,7 +95,7 @@ const getTokenAccounts = {
       chain: 'solanaDevnet',
       body: {
         params: {
-          mint: '5fkyv7J5Jf8SaTVnE94A9oVeGBbhcEh9W3nP4cXUCQb8',
+          mintAddress: '5fkyv7J5Jf8SaTVnE94A9oVeGBbhcEh9W3nP4cXUCQb8',
           limit: 5,
         },
       },
