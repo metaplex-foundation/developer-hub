@@ -187,7 +187,7 @@ Other than data, creator, collection and asset data hashes, the leaf schema cont
 * id - This asset ID is a PDA derived from a fixed prefix, the Merkle tree Pubkey, and the nonce.
 * owner - The Pubkey of the cNFT owner, typically a user's wallet.
 * delegate - The delegate for the cNFT.  By default this is the user's wallet, but can be set by the `delegate` Bubblegum instruction.
-* flags - This is a bitmask with addition information about the nfts status. Bit 0 is the frozen status on asset level (by owner) and bit 1 is the frozen status by the permanent delegate on collection level. Bit 3 is a general `nonTransferable` flag that can be reset by nobody and is used for soulbound assets.
+* flags - This is a bitmask with addition information about the nfts status. Bit 0 is the frozen status on asset level (by owner) and bit 1 is the frozen status by the permanent delegate on collection level. Both of them can be changed by the correct authority. Bit 3 is a general `nonTransferable` flag that can be reset by nobody and is used for soulbound assets. The other bits are reserved for future use.
 
 To create the 32-byte leaf node that exists on the Merkle tree, the entire leaf schema is hashed as follows, depending on the Schema version:
 
