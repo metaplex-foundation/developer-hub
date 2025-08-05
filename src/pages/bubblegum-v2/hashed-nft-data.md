@@ -64,13 +64,16 @@ Seller Fee Basis Points)
 {% /node %}
 
 {% node parent="data-hash" x="250" %}
-{% node #leaf-schema label="Leaf Schema" theme="blue" /%}
+{% node #leaf-schema label="Leaf Schema V2" theme="blue" /%}
 {% node label="ID" /%}
 {% node label="Owner" /%}
 {% node label="Delegate" /%}
 {% node label="Nonce" /%}
 {% node label="Data Hash" /%}
 {% node label="Creator Hash" /%}
+{% node label="Collection Hash (new with V2)" /%}
+{% node label="Asset Data Hash (new with V2)" /%}
+{% node label="Flags (new with V2)" /%}
 {% /node %}
 
 {% node parent="leaf-schema" x="200" %}
@@ -133,9 +136,26 @@ pub fn hash_creators(creators: &[Creator]) -> [u8; 32] {
 }
 ```
 
+Followed by the collection and asset data hash:
+
+```rust
+/// Computes the hash of the collection (or if `None` provides default) for `LeafSchemaV2`.
+pub fn hash_collection_option(collection: Option<Pubkey>) -> Result<[u8; 32]> {
+    let collection_key = collection.unwrap_or(DEFAULT_COLLECTION);
+    Ok(keccak::hashv(&[collection_key.as_ref()]).to_bytes())
+}
+
+/// Computes the hash of the asset data (or if `None` provides default) for `LeafSchemaV2`.
+pub fn hash_asset_data_option(asset_data: Option<&[u8]>) -> Result<[u8; 32]> {
+    let data = asset_data.unwrap_or(b""); // Treat None as empty data
+    Ok(keccak::hashv(&[data]).to_bytes())
+}
+
+```
+
 The data hash and creator hash are added to a leaf schema along with other information needed to uniquely identify the leaf.
 
-The separation of data and creator hashes is done for a similar reason as `seller_fee_basis_points` - if a marketplace wants to validate a creator array, it can pass around a 32-byte array of already-hashed `MetadataArgs` along with the creator array.  The values in the creator array can be evaluated, and then hashed into the `creator_hash` and combined with the other existing information into the leaf schema.
+The separation of data and creator hashes is done for a similar reason as `seller_fee_basis_points` - if a marketplace wants to validate a creator array, it can pass around a 32-byte array of already-hashed `MetadataArgs` along with the creator array.  The values in the creator array can be evaluated, and then hashed into the `creator_hash` and combined with the other existing information into the leaf schema. Bubblegum V1 uses `LeafSchemaV1` while Bubblegum V2 uses `LeafSchemaV2`.
 
 ```rust
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Eq, Debug, Clone)]
@@ -148,14 +168,27 @@ pub enum LeafSchema {
         data_hash: [u8; 32],
         creator_hash: [u8; 32],
     },
+    V2 {
+        id: Pubkey,
+        owner: Pubkey,
+        delegate: Pubkey,
+        nonce: u64,
+        data_hash: [u8; 32],
+        creator_hash: [u8; 32],
+        collection_hash: [u8; 32],
+        asset_data_hash: [u8; 32],
+        flags: u8,
+    },
 }
 ```
 
-Other than data and creator hashes, the leaf schema contains the following other items:
+Other than data, creator, collection and asset data hashes, the leaf schema contains the following other items:
+
 * nonce: This is a "number used once" value that is unique for each leaf on the tree.  It is needed to ensure Merkle tree leaves are unique.  In practice it retrieved from off-chain indexers, similar to asset proofs.
 * id - This asset ID is a PDA derived from a fixed prefix, the Merkle tree Pubkey, and the nonce.
 * owner - The Pubkey of the cNFT owner, typically a user's wallet.
 * delegate - The delegate for the cNFT.  By default this is the user's wallet, but can be set by the `delegate` Bubblegum instruction.
+* flags - This is a bitmask with addition information about the nfts status. Bit 0 is the frozen status on asset level (by owner) and bit 1 is the frozen status by the permanent delegate on collection level. Both of them can be changed by the correct authority. Bit 3 is a general `nonTransferable` flag that can be reset by nobody and is used for soulbound assets. The other bits are reserved for future use.
 
 To create the 32-byte leaf node that exists on the Merkle tree, the entire leaf schema is hashed as follows, depending on the Schema version:
 
