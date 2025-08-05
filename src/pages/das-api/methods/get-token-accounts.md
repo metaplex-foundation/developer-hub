@@ -30,42 +30,6 @@ Returns a list of token accounts filtered by owner address, mint address, or bot
 | `showUnverifiedCollections`| `false` | Include unverified collections.                |
 | `showZeroBalance`          | `false` | Include accounts with zero balance.            |
 
-## UMI w/ DAS SDK
-
-{% totem %}
-
-```js
-import { publicKey } from '@metaplex-foundation/umi';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-
-const umi = createUmi('<ENDPOINT>').use(dasApi());
-
-// Get all token accounts for a specific owner
-const ownerAddress = publicKey('8TrvJBRa6Pzb9BDadqroHhWTHxaxK8Ws8r91oZ2jxaVV');
-const accountsByOwner = await umi.rpc.getTokenAccounts({
-  ownerAddress: ownerAddress,
-});
-
-// Get all token accounts for a specific mint
-const mintAddress = publicKey('So11111111111111111111111111111111111111112');
-const accountsByMint = await umi.rpc.getTokenAccounts({
-  mintAddress: mintAddress,
-});
-
-// Get with additional options
-const accountsWithOptions = await umi.rpc.getTokenAccounts({
-  ownerAddress: ownerAddress,
-  options: {
-    showZeroBalance: true,
-    showFungible: true,
-  },
-});
-
-console.log(accountsByOwner);
-```
-
-{% /totem %}
 
 ## Response
 
@@ -86,4 +50,4 @@ The response includes:
 
 ## Playground
 
-{% apiRenderer method="getTokenAccounts" /%}
+{% apiRenderer method="getTokenAccounts" noUmi=true /%}
