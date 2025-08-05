@@ -18,18 +18,7 @@ Returns a list of token accounts filtered by owner address, mint address, or bot
 | `limit`        |    ❌    | Maximum number of token accounts to return.          |
 | `before`       |    ❌    | Return accounts before this cursor.                  |
 | `after`        |    ❌    | Return accounts after this cursor.                   |
-| `options`      |    ❌    | Additional display options (see below).              |
-
-## Options
-
-| Name                       | Default | Description                                    |
-| -------------------------- | :-----: | ---------------------------------------------- |
-| `showCollectionMetadata`   | `false` | Include collection metadata in response.       |
-| `showFungible`             | `false` | Include fungible tokens in results.           |
-| `showInscription`          | `false` | Include inscription data.                      |
-| `showUnverifiedCollections`| `false` | Include unverified collections.                |
-| `showZeroBalance`          | `false` | Include accounts with zero balance.            |
-
+| `options`      |    ❌    | Additional [display options](/das-api/display-options).              |
 
 ## Response
 

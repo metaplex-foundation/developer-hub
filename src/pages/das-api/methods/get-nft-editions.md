@@ -32,4 +32,4 @@ The response includes:
 
 ## Playground
 
-{% apiRenderer method="getNftEditions" /%}
+{% apiRenderer method="getNftEditions" noUmi=true /%}
