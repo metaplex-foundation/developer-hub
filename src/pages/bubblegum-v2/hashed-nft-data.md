@@ -183,6 +183,7 @@ pub enum LeafSchema {
 ```
 
 Other than data, creator, collection and asset data hashes, the leaf schema contains the following other items:
+
 * nonce: This is a "number used once" value that is unique for each leaf on the tree.  It is needed to ensure Merkle tree leaves are unique.  In practice it retrieved from off-chain indexers, similar to asset proofs.
 * id - This asset ID is a PDA derived from a fixed prefix, the Merkle tree Pubkey, and the nonce.
 * owner - The Pubkey of the cNFT owner, typically a user's wallet.
