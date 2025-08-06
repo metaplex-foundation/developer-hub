@@ -16,7 +16,7 @@ const { LOCALHOST, tmpLedgerDir } = require("@metaplex-foundation/amman");
 module.exports = {
   validator: {
     killRunningValidators: true,
-    accountsCluster: "https://api.devnet.solana.com	",
+    accountsCluster: "https://api.devnet.solana.com",
     accounts: [
        {
         label: "Bubblegum",
@@ -203,5 +203,5 @@ module.exports = {
     storageId: "mock-storage",
     clearOnStart: true,
   },
-};
-```
+   },
+ };
