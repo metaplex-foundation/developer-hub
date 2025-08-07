@@ -199,6 +199,79 @@ pub async fn approve_plugin_authority() {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## Updating the Freeze Delegate Plugin
+
+The Freeze Delegate Plugin can be updated to change the frozen state of the asset. This is the same as using the freeze and thaw functions shown below.
+
+{% dialect-switcher title="Update Freeze Delegate Plugin State" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { updatePlugin } from '@metaplex-foundation/mpl-core'
+
+const assetAddress = publicKey('11111111111111111111111111111111')
+
+// To freeze the asset
+await updatePlugin(umi, {
+  asset: assetAddress,
+  plugin: {
+    type: 'FreezeDelegate',
+    frozen: true, // Set to true to freeze, false to unfreeze
+  },
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::{
+    instructions::UpdatePluginV1Builder,
+    types::{FreezeDelegate, Plugin},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn update_freeze_delegate_plugin() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let update_freeze_delegate_plugin_ix = UpdatePluginV1Builder::new()
+        .asset(asset)
+        .payer(authority.pubkey())
+        .plugin(Plugin::FreezeDelegate(FreezeDelegate { 
+            frozen: true // Set to true to freeze, false to unfreeze
+        }))
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let update_freeze_delegate_plugin_tx = Transaction::new_signed_with_payer(
+        &[update_freeze_delegate_plugin_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&update_freeze_delegate_plugin_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res);
+}
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
 ### Freezing an Asset
 
 The `freezeAsset` command freezes an Asset, preventing it from being transferred or burned. This is useful for escrowless staking or marketplace listings.
