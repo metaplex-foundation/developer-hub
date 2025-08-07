@@ -203,5 +203,4 @@ module.exports = {
     storageId: "mock-storage",
     clearOnStart: true,
   },
-   },
- };
+};
