@@ -29,15 +29,14 @@ const ApiExampleSelector = ({
     : null;
 
   const handleExampleChange = (e) => {
-    const selectedName = e.target.value;
-    if (!selectedName) {
+    const selectedValue = e.target.value;
+    if (!selectedValue) {
       handleSetExample(-1);
       return;
     }
 
-    const example = examples.find(ex => ex.name === selectedName);
-    if (example) {
-      const index = examples.indexOf(example);
+    const index = parseInt(selectedValue, 10);
+    if (!isNaN(index) && index >= 0 && index < examples.length) {
       handleSetExample(index);
     }
   };
@@ -54,7 +53,7 @@ const ApiExampleSelector = ({
         <div className="relative flex h-12 w-full">
           <Select
             onChange={handleExampleChange}
-            value={currentExample?.name || ''}
+            value={selectedExample >= 0 ? selectedExample.toString() : ''}
             className={clsx(
               'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
               'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
@@ -64,20 +63,26 @@ const ApiExampleSelector = ({
             <option value="">-</option>
             {devnetExamples.length > 0 && (
               <optgroup label="Solana Devnet">
-                {devnetExamples.map((example) => (
-                  <option key={example.name} value={example.name}>
-                    {example.name}
-                  </option>
-                ))}
+                {devnetExamples.map((example) => {
+                  const originalIndex = examples.indexOf(example);
+                  return (
+                    <option key={`devnet-${originalIndex}`} value={originalIndex.toString()}>
+                      {example.name}
+                    </option>
+                  );
+                })}
               </optgroup>
             )}
             {mainnetExamples.length > 0 && (
               <optgroup label="Solana Mainnet">
-                {mainnetExamples.map((example) => (
-                  <option key={example.name} value={example.name}>
-                    {example.name}
-                  </option>
-                ))}
+                {mainnetExamples.map((example) => {
+                  const originalIndex = examples.indexOf(example);
+                  return (
+                    <option key={`mainnet-${originalIndex}`} value={originalIndex.toString()}>
+                      {example.name}
+                    </option>
+                  );
+                })}
               </optgroup>
             )}
           </Select>

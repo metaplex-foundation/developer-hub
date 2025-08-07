@@ -175,6 +175,7 @@ const tags = {
   apiRenderer: {
     attributes: {
       method: { type: String },
+      noUmi: { type: Boolean },
     },
     render: ApiComponentWrapper,
   },

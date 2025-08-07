@@ -13,8 +13,8 @@ import SwiftRequestRenderer from './languageComponents/swiftRenderer';
 import UmiRequestRenderer from './languageComponents/umiRequestRenderer';
 import LanguageSelector from './languageSelector';
 
-const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
-  const [activeLanguage, setActiveLanguage] = useState('umi')
+const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi }) => {
+  const [activeLanguage, setActiveLanguage] = useState(noUmi ? 'curl' : 'umi')
 
   function strToTitleCase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -203,13 +203,19 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
             <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
-            <UmiRequestRenderer
-              method={api.method}
-              url={activeEndpoint}
-              headers={headers}
-              bodyMethod={body.method}
-              bodyParams={body.params}
-            />
+            {noUmi ? (
+              <div className="rounded-lg bg-yellow-50 p-4 text-sm text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200">
+                This endpoint is not yet supported in the UMI-based JS SDK.
+              </div>
+            ) : (
+              <UmiRequestRenderer
+                method={api.method}
+                url={activeEndpoint}
+                headers={headers}
+                bodyMethod={body.method}
+                bodyParams={body.params}
+              />
+            )}
           </div>
         )
     }
@@ -224,6 +230,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint }) => {
       <LanguageSelector
         activeLanguage={activeLanguage}
         setActiveLanguage={(language) => setActiveLanguage(language)}
+        noUmi={noUmi}
       />
       {renderLanguage(activeLanguage)}
     </div>
