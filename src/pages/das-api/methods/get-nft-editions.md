@@ -5,6 +5,7 @@ description: Get all printable editions of a master edition NFT mint
 ---
 
 Returns all printable editions for a master edition NFT mint, including edition numbers, addresses, and supply information. You can also pass in an edition address and will receive the master edition plus the other editions that are part of the same master edition.
+
 ## Parameters
 
 | Name          | Required | Description                                        |
