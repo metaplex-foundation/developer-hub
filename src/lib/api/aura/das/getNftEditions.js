@@ -38,35 +38,21 @@ const getNftEditions = {
   examples: [
     {
       name: 'Get NFT Editions',
-      description: 'Get all editions for a (master) edition NFT',
+      description: 'Get all editions by Edition NFT Address',
       chain: 'solanaMainnet',
       body: {
         params: {
-          mintAddress: 'So11111111111111111111111111111111111111112',
-          limit: 10,
+          mintAddress: '8L1wkbHnLWxUkcAb64yT37g6v5zRLM8LVAc5y4r2Pesq',
         },
       },
     },
     {
-      name: 'Get NFT Editions with Pagination',
-      description: 'Get editions with pagination cursor',
-      chain: 'solanaMainnet',
-      body: {
-        params: {
-          mintAddress: 'So11111111111111111111111111111111111111112',
-          limit: 5,
-          page: 1,
-        },
-      },
-    },
-    {
-      name: 'Devnet Example',
-      description: 'Get NFT editions on devnet',
+      name: 'Get NFT Editions',
+      description: 'Get all editions for a Master Edition NFT',
       chain: 'solanaDevnet',
       body: {
         params: {
-          mintAddress: '5fkyv7J5Jf8SaTVnE94A9oVeGBbhcEh9W3nP4cXUCQb8',
-          limit: 10,
+          mintAddress: 'J6tXe9TY2eKwj2AYFKU8B5VYcaCPvkwckghDhWUBEQgD',
         },
       },
     },

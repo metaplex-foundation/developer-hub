@@ -54,49 +54,22 @@ const getTokenAccounts = {
   ],
   examples: [
     {
-      name: 'Get Token Accounts by Mint',
-      description: 'Get all token accounts for a specific mint',
-      chain: 'solanaMainnet',
-      body: {
-        params: {
-          mintAddress: 'So11111111111111111111111111111111111111112',
-          limit: 10,
-        },
-      },
-    },
-    {
-      name: 'Get Token Accounts by Owner',
-      description: 'Get all token accounts owned by a specific address',
-      chain: 'solanaMainnet',
-      body: {
-        params: {
-          ownerAddress: '1BWutmTvYPwDtmw9abTkS4Ssr8no61spGAvW1X6NDix',
-          limit: 10,
-        },
-      },
-    },
-    {
-      name: 'Get Token Accounts with Zero Balance',
-      description: 'Get token accounts including those with zero balance',
-      chain: 'solanaMainnet',
-      body: {
-        params: {
-          mintAddress: 'So11111111111111111111111111111111111111112',
-          limit: 10,
-          options: {
-            showZeroBalance: true,
-          },
-        },
-      },
-    },
-    {
-      name: 'Devnet Example',
-      description: 'Get token accounts on devnet',
+      name: 'Get USDC Token Accounts',
+      description: 'Get all USDC token accounts',
       chain: 'solanaDevnet',
       body: {
         params: {
-          mintAddress: '5fkyv7J5Jf8SaTVnE94A9oVeGBbhcEh9W3nP4cXUCQb8',
-          limit: 5,
+          mintAddress: '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU',
+        },
+      },
+    },
+    {
+      name: 'Get USDC Token Accounts',
+      description: 'Get all USDC token accounts',
+      chain: 'solanaMainnet',
+      body: {
+        params: {
+          mintAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
         },
       },
     },
