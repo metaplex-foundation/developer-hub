@@ -13,12 +13,12 @@ Returns a list of token accounts filtered by owner address, mint address, or bot
 | -------------- | :------: | ---------------------------------------------------- |
 | `ownerAddress` |    (only required if `mintAddress` is not provided)    | Filter by owner address.                             |
 | `mintAddress`  |    (only required if `ownerAddress` is not provided)    | Filter by mint address.                              |
-| `cursor`       |    ❌    | Cursor for pagination.                               |
-| `page`         |    ❌    | Page number for pagination.                          |
-| `limit`        |    ❌    | Maximum number of token accounts to return.          |
-| `before`       |    ❌    | Return accounts before this cursor.                  |
-| `after`        |    ❌    | Return accounts after this cursor.                   |
-| `options`      |    ❌    | Additional [display options](/das-api/display-options).              |
+| `cursor`       |         | Cursor for pagination.                               |
+| `page`         |         | Page number for pagination.                          |
+| `limit`        |         | Maximum number of token accounts to return.          |
+| `before`       |         | Return accounts before this cursor.                  |
+| `after`        |         | Return accounts after this cursor.                   |
+| `options`      |         | Additional [display options](/das-api/display-options).              |
 
 ## Response
 

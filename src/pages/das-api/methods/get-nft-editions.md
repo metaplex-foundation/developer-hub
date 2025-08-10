@@ -11,11 +11,11 @@ Returns all printable editions for a master edition NFT mint, including edition 
 | Name          | Required | Description                                        |
 | ------------- | :------: | -------------------------------------------------- |
 | `mintAddress` |    ✅    | The mint address of the master edition NFT.       |
-| `cursor`      |    ❌    | Cursor for pagination.                             |
-| `page`        |    ❌    | Page number for pagination.                        |
-| `limit`       |    ❌    | Maximum number of editions to return.              |
-| `before`      |    ❌    | Return editions before this cursor.                |
-| `after`       |    ❌    | Return editions after this cursor.                 |
+| `cursor`      |         | Cursor for pagination.                             |
+| `page`        |         | Page number for pagination.                        |
+| `limit`       |         | Maximum number of editions to return.              |
+| `before`      |         | Return editions before this cursor.                |
+| `after`       |         | Return editions after this cursor.                 |
 
 ## Response
 
