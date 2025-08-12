@@ -253,6 +253,62 @@ TransferV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .invoke()?;
 ```
 
-{% /dialect %}`
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Updating Transfer Delegate Authority
+
+Since the Transfer Delegate plugin doesn't contain plugin data to update (it's an empty object `{}`), the main "update" operation is changing the plugin authority. This allows you to delegate transfer permissions to different addresses.
+
+### Changing the Transfer Delegate Authority
+
+You can change who has transfer authority using the `approvePluginAuthority` function:
+
+{% dialect-switcher title="Update Transfer Delegate Authority" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
+
+(async () => {
+    const assetAddress = publicKey('11111111111111111111111111111111')
+    const newDelegate = publicKey('44444444444444444444444444444444')
+
+    // Change the transfer delegate to a new address
+    await approvePluginAuthority(umi, {
+    asset: assetAddress,
+    plugin: { type: 'TransferDelegate' },
+    newAuthority: { type: 'Address', address: newDelegate },
+    }).sendAndConfirm(umi)
+})();
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Revoking Transfer Delegate Authority
+
+The transfer authority can be revoked using the `revokePluginAuthority` function, returning transfer control to the asset owner.
+
+{% dialect-switcher title="Revoke Transfer Delegate Authority" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
+
+(async () => {
+    const assetAddress = publicKey('11111111111111111111111111111111')
+    const newDelegate = publicKey('44444444444444444444444444444444')
+
+    await revokePluginAuthority(umi, {
+    asset: assetAddress,
+    plugin: { type: 'TransferDelegate' },
+    }).sendAndConfirm(umi)
+})();
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
