@@ -300,7 +300,10 @@ import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
 
 (async () => {
     const assetAddress = publicKey('11111111111111111111111111111111')
-    const newDelegate = publicKey('44444444444444444444444444444444')
+(async () => {
+    const assetAddress = publicKey('11111111111111111111111111')
+
+    await revokePluginAuthority(umi, {
 
     await revokePluginAuthority(umi, {
     asset: assetAddress,
