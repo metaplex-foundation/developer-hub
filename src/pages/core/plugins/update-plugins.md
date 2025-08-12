@@ -24,10 +24,14 @@ Many plugins on MPL Core Assets and Collections can be updated after they've bee
 
 | Args   | Description                            |
 | ------ | -------------------------------------- |
-| plugin | The plugin data and type to update to. |
+| plugin | The plugin type and data to update. |
 
 Some of the accounts/args may be abstracted out and/or optional in our SDKs for ease of use.
-For detailed TypeDoc documentation, visit [MPL Core TypeDoc](https://mpl-core.typedoc.metaplex.com/functions/updatePlugin.html).
+For detailed TypeDoc documentation, see:
+- [updatePlugin](https://mpl-core.typedoc.metaplex.com/functions/updatePlugin.html)
+- [updateCollectionPlugin](https://mpl-core.typedoc.metaplex.com/functions/updateCollectionPlugin.html)
+
+Note: In the JavaScript SDK, updatePlugin expects the plugin data without a data wrapper (e.g., `{ type: 'FreezeDelegate', frozen: true }`). By contrast, addPlugin wraps data under `data` (e.g., `{ type: 'FreezeDelegate', data: { frozen: true } }`). This mirrors the shape used in createAsset/createCollection plugin lists.
 
 {% /totem-accordion %}
 {% /totem %}
@@ -291,4 +295,4 @@ Common errors when updating plugins:
 - Learn about specific plugin updates in individual plugin documentation
 - Explore [Plugin Overview](/core/plugins) for all available plugins
 - Check out [Adding Plugins](/core/plugins/adding-plugins) and [Removing Plugins](/core/plugins/removing-plugins)
-- Visit the [MPL Core TypeDoc](https://mpl-core.typedoc.metaplex.com) for detailed API documentation
+- Visit the [MPL Core TypeDoc](https://mpl-core.typedoc.metaplex.com) for detailed API documentation.
