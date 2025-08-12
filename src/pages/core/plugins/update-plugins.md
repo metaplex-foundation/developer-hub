@@ -32,22 +32,6 @@ For detailed TypeDoc documentation, visit [MPL Core TypeDoc](https://mpl-core.ty
 {% /totem-accordion %}
 {% /totem %}
 
-## Updatable Plugins Overview
-
-Here are the main plugins that support updates:
-
-| Plugin                | What Can Be Updated                                               | Authority Required        |
-| --------------------- | ----------------------------------------------------------------- | ------------------------- |
-| **Attributes**        | Key-value pairs, add/remove/modify attributes                    | Update Authority          |
-| **Royalties**         | Basis points, creator distribution, rulesets                     | Update Authority          |
-| **Update Delegate**   | Additional delegates list                                         | Update Authority          |
-| **Verified Creators** | Add/remove creators, verify/unverify signatures                  | Update Authority/Creator  |
-| **Autograph**         | Add/remove signature messages                                     | Owner/Signer             |
-| **Freeze Delegate**   | Frozen state (true/false)                                        | Freeze Authority          |
-| **Freeze Execute**    | Frozen state (true/false)                                        | Owner                     |
-| **Edition**           | Edition number (if mutable)                                       | Update Authority          |
-| **Master Edition**    | Max supply, name, URI (if mutable)                               | Update Authority          |
-
 ## Updating Plugins on Assets
 
 ### Basic Plugin Update Example
