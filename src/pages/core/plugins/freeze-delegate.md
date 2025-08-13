@@ -199,6 +199,10 @@ pub async fn approve_plugin_authority() {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## Updating the Freeze Delegate Plugin
+
+The Freeze Delegate Plugin can be updated to change the frozen state of the asset. This is the same as using the [Freezing an Asset](#freezing-an-asset) and [Thawing a Frozen Asset](#thawing-a-frozen-asset) functions shown below.
+
 ### Freezing an Asset
 
 The `freezeAsset` command freezes an Asset, preventing it from being transferred or burned. This is useful for escrowless staking or marketplace listings.

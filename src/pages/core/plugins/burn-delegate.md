@@ -30,12 +30,14 @@ The Burn Plugin doesn't contain any arguments to pass in.
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
 
-const asset = publicKey('11111111111111111111111111111111')
+(async () => {
+    const asset = publicKey('11111111111111111111111111111111')
 
-await addPlugin(umi, {
-  asset: asset,
-  plugin: { type: 'BurnDelegate' },
-}).sendAndConfirm(umi)
+    await addPlugin(umi, {
+    asset: asset,
+    plugin: { type: 'BurnDelegate' },
+    }).sendAndConfirm(umi)
+})();
 ```
 
 {% /dialect %}
@@ -81,6 +83,57 @@ pub async fn add_burn_delegate_plugin() {
 
     println!("Signature: {:?}", res)
 }
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Delegating Burn Authority
+
+The Burn Delegate plugin authority can be delegated to a different address using the `approvePluginAuthority` function. This allows you to change who can burn the Asset.
+
+{% dialect-switcher title="Delegate Burn Authority" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
+
+(async () => {
+    const assetAddress = publicKey('11111111111111111111111111111111')
+    const newDelegate = publicKey('22222222222222222222222222222222')
+
+    await approvePluginAuthority(umi, {
+    asset: assetAddress,
+    plugin: { type: 'BurnDelegate' },
+    newAuthority: { type: 'Address', address: newDelegate },
+    }).sendAndConfirm(umi)
+})();
+```
+
+{% /dialect %}
+
+{% /dialect-switcher %}
+
+## Revoking Burn Authority
+
+The burn authority can be revoked using the `revokePluginAuthority` function, returning control to the asset owner.
+
+{% dialect-switcher title="Revoke Burn Authority" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
+
+(async () => {
+    const assetAddress = publicKey('11111111111111111111111111111111')
+
+    await revokePluginAuthority(umi, {
+    asset: assetAddress,
+    plugin: { type: 'BurnDelegate' },
+    }).sendAndConfirm(umi)
+})();
 ```
 
 {% /dialect %}

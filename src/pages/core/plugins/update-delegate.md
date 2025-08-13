@@ -103,3 +103,155 @@ pub async fn add_update_delegate_plugin() {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Updating the Update Delegate Plugin
+
+The Update Delegate Plugin can be updated to modify the list of additional delegates or change the plugin authority.
+
+{% dialect-switcher title="Updating Update Delegate Plugin on Asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { updatePlugin } from '@metaplex-foundation/mpl-core'
+
+const assetAddress = publicKey('11111111111111111111111111111111')
+const newDelegate = publicKey('33333333333333333333333333333333')
+const existingDelegate = publicKey('22222222222222222222222222222222')
+
+await updatePlugin(umi, {
+  asset: assetAddress,
+  plugin: {
+    type: 'UpdateDelegate',
+    additionalDelegates: [existingDelegate, newDelegate], // Add or remove delegates
+  },
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::{
+    instructions::UpdatePluginV1Builder,
+    types::{Plugin, UpdateDelegate},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn update_update_delegate_plugin() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+    
+    let new_delegate = Pubkey::from_str("33333333333333333333333333333333").unwrap();
+    let existing_delegate = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+
+    let update_update_delegate_plugin_ix = UpdatePluginV1Builder::new()
+        .asset(asset)
+        .payer(authority.pubkey())
+        .plugin(Plugin::UpdateDelegate(UpdateDelegate {
+            additional_delegates: vec![existing_delegate, new_delegate], // Add or remove delegates
+        }))
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let update_update_delegate_plugin_tx = Transaction::new_signed_with_payer(
+        &[update_update_delegate_plugin_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&update_update_delegate_plugin_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Updating Update Delegate Plugin on Collection
+
+{% dialect-switcher title="Updating Update Delegate Plugin on Collection" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { updateCollectionPlugin } from '@metaplex-foundation/mpl-core'
+
+const collectionAddress = publicKey('11111111111111111111111111111111')
+const delegate1 = publicKey('22222222222222222222222222222222')
+const delegate2 = publicKey('33333333333333333333333333333333')
+
+await updateCollectionPlugin(umi, {
+  collection: collectionAddress,
+  plugin: {
+    type: 'UpdateDelegate',
+    additionalDelegates: [delegate1, delegate2], // Updated delegates list
+  },
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::{
+    instructions::UpdateCollectionPluginV1Builder,
+    types::{Plugin, UpdateDelegate},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn update_collection_update_delegate_plugin() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+    
+    let delegate1 = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+    let delegate2 = Pubkey::from_str("33333333333333333333333333333333").unwrap();
+
+    let update_collection_update_delegate_plugin_ix = UpdateCollectionPluginV1Builder::new()
+        .collection(collection)
+        .payer(authority.pubkey())
+        .plugin(Plugin::UpdateDelegate(UpdateDelegate {
+            additional_delegates: vec![delegate1, delegate2], // Updated delegates list
+        }))
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let update_collection_update_delegate_plugin_tx = Transaction::new_signed_with_payer(
+        &[update_collection_update_delegate_plugin_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&update_collection_update_delegate_plugin_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
