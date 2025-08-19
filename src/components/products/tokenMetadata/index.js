@@ -21,15 +21,6 @@ export const tokenMetadata = {
       ...documentationSection('token-metadata'),
       navigation: [
         {
-          title: 'Breaking Change!',
-          links: [
-            {
-              title: 'Account Size Reduction',
-              href: '/token-metadata/guides/account-size-reduction',
-            },
-          ],
-        },
-        {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/token-metadata' },
@@ -38,6 +29,10 @@ export const tokenMetadata = {
               href: '/token-metadata/getting-started',
             },
             { title: 'FAQ', href: '/token-metadata/faq' },
+            {
+              title: 'Account Size Reduction',
+              href: '/token-metadata/guides/account-size-reduction',
+            },
           ],
         },
         {
