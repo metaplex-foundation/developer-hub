@@ -124,6 +124,8 @@ import {
   update,
   fetchAsset,
   fetchCollection,
+  collectionAddress,
+  updateAuthority
 } from "@metaplex-foundation/mpl-core";
 
 const assetId = publicKey("11111111111111111111111111111111");
@@ -143,6 +145,7 @@ const updateTx = await update(umi, {
   asset,
   collection,
   newCollection: publicKey("22222222222222222222222222222222"),
+  newUpdateAuthority: updateAuthority('Collection', [newCollectionId]),
 }).sendAndConfirm(umi);
 ```
 
