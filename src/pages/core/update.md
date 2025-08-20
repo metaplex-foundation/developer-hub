@@ -141,10 +141,12 @@ if (!collectionId) {
 
 const collection = await fetchCollection(umi, collectionId);
 
+const newCollectionId = publicKey("22222222222222222222222222222222")
+
 const updateTx = await update(umi, {
   asset,
   collection,
-  newCollection: publicKey("22222222222222222222222222222222"),
+  newCollection: newCollectionId,
   newUpdateAuthority: updateAuthority('Collection', [newCollectionId]),
 }).sendAndConfirm(umi);
 ```
