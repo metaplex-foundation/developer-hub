@@ -120,6 +120,10 @@ export const core = {
               href: '/core/plugins/adding-plugins',
             },
             {
+              title: 'Updating Plugins',
+              href: '/core/plugins/update-plugins',
+            },
+            {
               title: 'Removing Plugins',
               href: '/core/plugins/removing-plugins',
             },
