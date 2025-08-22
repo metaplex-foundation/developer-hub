@@ -124,22 +124,31 @@ import {
   update,
   fetchAsset,
   fetchCollection,
-  updateAuthority,
+  collectionAddress,
+  updateAuthority
 } from "@metaplex-foundation/mpl-core";
 
 const assetId = publicKey("11111111111111111111111111111111");
+
 const asset = await fetchAsset(umi, assetId);
-const oldCollectionId = publicKey("22222222222222222222222222222222");
-const collection = await fetchCollection(umi, oldCollectionId);
-const newCollectionId = publicKey("33333333333333333333333333333333");
+
+const collectionId = collectionAddress(asset)
+
+if (!collectionId) {
+  console.log("Collection not found");
+  return;
+}
+
+const collection = await fetchCollection(umi, collectionId);
+
+const newCollectionId = publicKey("22222222222222222222222222222222")
 
 const updateTx = await update(umi, {
   asset,
-  name: "Updated Asset",
   collection,
-  newUpdateAuthority: updateAuthority("Collection", [newCollectionId]),
+  newCollection: newCollectionId,
+  newUpdateAuthority: updateAuthority('Collection', [newCollectionId]),
 }).sendAndConfirm(umi);
-
 ```
 
 {% /dialect %}
