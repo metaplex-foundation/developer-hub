@@ -34,4 +34,39 @@ export const hydra = {
       target: '_blank',
     },
   ],
+  localizedNavigation: {
+    en: {
+      headline: 'Fanout wallets',
+      description: 'Create shared wallets, split between multiple shareholders.',
+      sections: {
+        'Introduction': 'Introduction'
+      },
+      links: {
+        'Overview': 'Overview',
+        'Quick Start': 'Quick Start'
+      }
+    },
+    jp: {
+      headline: 'ファンアウトウォレット',
+      description: '複数の株主間で分割された共有ウォレットを作成。',
+      sections: {
+        'Introduction': '紹介'
+      },
+      links: {
+        'Overview': '概要',
+        'Quick Start': 'クイックスタート'
+      }
+    },
+    kr: {
+      headline: '팬아웃 지갑',
+      description: '여러 주주 간에 분할된 공유 지갑을 만드세요.',
+      sections: {
+        'Introduction': '소개'
+      },
+      links: {
+        'Overview': '개요',
+        'Quick Start': '퀵 스타트'
+      }
+    }
+  }
 }

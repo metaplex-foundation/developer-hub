@@ -97,4 +97,84 @@ export const mplHybrid = {
       ],
     },
   ],
+  localizedNavigation: {
+    en: {
+      headline: 'Hybrid Assets',
+      description: 'Framework and on-chain protocol for hybrid assets.',
+      sections: {
+        'Introduction': 'Introduction',
+        'SDK': 'SDK',
+        'UI Templates': 'UI Templates',
+        'Features': 'Features',
+        'General': 'General'
+      },
+      links: {
+        'Overview': 'Overview',
+        'Preparation': 'Preparation',
+        'FAQ': 'FAQ',
+        'Javascript SDK': 'Javascript SDK',
+        'MPL-404 Hybrid UI': 'MPL-404 Hybrid UI',
+        'Create Escrow Configuration': 'Create Escrow Configuration',
+        'Fetch Escrow Configuration': 'Fetch Escrow Configuration',
+        'Funding Escrow': 'Funding Escrow',
+        'Updating Escrow Configuration': 'Updating Escrow Configuration',
+        'Swapping NFTs to Tokens': 'Swapping NFTs to Tokens',
+        'Swapping Tokens to NFTs': 'Swapping Tokens to NFTs',
+        'Create your first Hybrid Collection': 'Create your first Hybrid Collection',
+        'MPL-404 Hybrid UI Template': 'MPL-404 Hybrid UI Template'
+      }
+    },
+    jp: {
+      headline: 'ハイブリッドアセット',
+      description: 'ハイブリッドアセット用のフレームワークとオンチェーンプロトコル。',
+      sections: {
+        'Introduction': '紹介',
+        'SDK': 'SDK',
+        'UI Templates': 'UIテンプレート',
+        'Features': '機能',
+        'General': '一般'
+      },
+      links: {
+        'Overview': '概要',
+        'Preparation': '準備',
+        'FAQ': 'よくある質問',
+        'Javascript SDK': 'JavaScript SDK',
+        'MPL-404 Hybrid UI': 'MPL-404ハイブリッドUI',
+        'Create Escrow Configuration': 'エスクロー設定の作成',
+        'Fetch Escrow Configuration': 'エスクロー設定の取得',
+        'Funding Escrow': 'エスクローの資金調達',
+        'Updating Escrow Configuration': 'エスクロー設定の更新',
+        'Swapping NFTs to Tokens': 'NFTからトークンへのスワップ',
+        'Swapping Tokens to NFTs': 'トークンからNFTへのスワップ',
+        'Create your first Hybrid Collection': '最初のハイブリッドコレクションを作成',
+        'MPL-404 Hybrid UI Template': 'MPL-404ハイブリッドUIテンプレート'
+      }
+    },
+    kr: {
+      headline: '하이브리드 에셋',
+      description: '하이브리드 에셋을 위한 프레임워크 및 온체인 프로토콜입니다.',
+      sections: {
+        'Introduction': '소개',
+        'SDK': 'SDK',
+        'UI Templates': 'UI 템플릿',
+        'Features': '기능',
+        'General': '일반'
+      },
+      links: {
+        'Overview': '개요',
+        'Preparation': '준비',
+        'FAQ': '자주 묻는 질문',
+        'Javascript SDK': 'JavaScript SDK',
+        'MPL-404 Hybrid UI': 'MPL-404 하이브리드 UI',
+        'Create Escrow Configuration': '에스크로 구성 생성',
+        'Fetch Escrow Configuration': '에스크로 구성 가져오기',
+        'Funding Escrow': '에스크로 자금 조달',
+        'Updating Escrow Configuration': '에스크로 구성 업데이트',
+        'Swapping NFTs to Tokens': 'NFT를 토큰으로 스와핑',
+        'Swapping Tokens to NFTs': '토큰을 NFT로 스와핑',
+        'Create your first Hybrid Collection': '첫 번째 하이브리드 컬렉션 만들기',
+        'MPL-404 Hybrid UI Template': 'MPL-404 하이브리드 UI 템플릿'
+      }
+    }
+  }
 }

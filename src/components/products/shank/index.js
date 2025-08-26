@@ -40,4 +40,45 @@ export const shank = {
       ],
     },
   ],
+  localizedNavigation: {
+    en: {
+      headline: 'IDL Extraction for Solana Programs',
+      description: 'Extract IDLs from Rust Solana program code using attribute macros',
+      sections: {
+        'Introduction': 'Introduction',
+        'Reference': 'Reference'
+      },
+      links: {
+        'Overview': 'Overview',
+        'Getting Started': 'Getting Started',
+        'Macros Reference': 'Macros Reference'
+      }
+    },
+    jp: {
+      headline: 'SolanaプログラムのIDL抽出',
+      description: '属性マクロを使用してRust SolanaプログラムコードからIDLを抽出',
+      sections: {
+        'Introduction': '紹介',
+        'Reference': 'リファレンス'
+      },
+      links: {
+        'Overview': '概要',
+        'Getting Started': 'はじめに',
+        'Macros Reference': 'マクロリファレンス'
+      }
+    },
+    kr: {
+      headline: 'Solana 프로그램용 IDL 추출',
+      description: '속성 매크로를 사용하여 Rust Solana 프로그램 코드에서 IDL을 추출',
+      sections: {
+        'Introduction': '소개',
+        'Reference': '참조'
+      },
+      links: {
+        'Overview': '개요',
+        'Getting Started': '시작하기',
+        'Macros Reference': '매크로 참조'
+      }
+    }
+  }
 }

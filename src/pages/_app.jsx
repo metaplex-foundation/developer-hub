@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Script from 'next/script'
 
 import { DialectProvider } from '@/components/DialectContext'
+import { LocaleProvider } from '@/contexts/LocaleContext'
 import { Layout } from '@/components/Layout'
 import { usePage } from '@/shared/usePage'
 
@@ -16,6 +17,14 @@ import { Prism } from 'prism-react-renderer'
 require('prismjs/components/prism-rust')
 
 export default function App({ Component, pageProps }) {
+  return (
+    <LocaleProvider>
+      <AppContent Component={Component} pageProps={pageProps} />
+    </LocaleProvider>
+  )
+}
+
+function AppContent({ Component, pageProps }) {
   const page = usePage(pageProps)
 
   return (
