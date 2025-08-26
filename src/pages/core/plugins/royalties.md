@@ -72,6 +72,195 @@ let creators = vec![
 
 {% /dialect-switcher %}
 
+## Updating the Royalties Plugin on an Asset
+
+The Royalties Plugin can be updated to modify basis points, creators, or rulesets for an existing Asset.
+
+{% dialect-switcher title="Update Royalties Plugin on Asset" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { updatePlugin, ruleSet } from '@metaplex-foundation/mpl-core'
+
+const assetAddress = publicKey('11111111111111111111111111111111')
+const creator1 = publicKey('11111111111111111111111111111111')
+const creator2 = publicKey('2222222222222222222222222222222')
+
+await updatePlugin(umi, {
+  asset: assetAddress,
+  plugin: {
+    type: 'Royalties',
+    basisPoints: 750, // Updated from 500 to 750 (7.5%)
+    creators: [
+      { address: creator1, percentage: 60 }, // Updated distribution
+      { address: creator2, percentage: 40 },
+    ],
+    ruleSet: ruleSet('ProgramAllowList', [
+      [
+        publicKey('66666666666666666666666666666666'), // Updated ruleset
+        publicKey('77777777777777777777777777777777'),
+      ],
+    ]),
+  },
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::{
+    instructions::UpdatePluginV1Builder,
+    types::{Creator, Plugin, Royalties, RuleSet},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn update_royalties_plugin() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let creator1 = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+    let creator2 = Pubkey::from_str("33333333333333333333333333333333").unwrap();
+
+    let update_royalties_plugin_ix = UpdatePluginV1Builder::new()
+        .asset(asset)
+        .payer(authority.pubkey())
+        .plugin(Plugin::Royalties(Royalties {
+            basis_points: 750, // Updated from 500 to 750 (7.5%)
+            creators: vec![
+                Creator {
+                    address: creator1,
+                    percentage: 60, // Updated distribution
+                },
+                Creator {
+                    address: creator2,
+                    percentage: 40,
+                },
+            ],
+            rule_set: RuleSet::None,
+        }))
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let update_royalties_plugin_tx = Transaction::new_signed_with_payer(
+        &[update_royalties_plugin_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&update_royalties_plugin_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Updating the Royalties Plugin on a Collection
+
+{% dialect-switcher title="Update Royalties Plugin on Collection" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
+
+const collectionAddress = publicKey('11111111111111111111111111111111')
+const creator1 = publicKey('11111111111111111111111111111111')
+const creator2 = publicKey('2222222222222222222222222222222')
+
+await updateCollectionPlugin(umi, {
+  collection: collectionAddress,
+  plugin: {
+    type: 'Royalties',
+    basisPoints: 600, // Updated royalty percentage
+    creators: [
+      { address: creator1, percentage: 70 }, // Updated distribution
+      { address: creator2, percentage: 30 },
+    ],
+    ruleSet: ruleSet('None'),
+  },
+}).sendAndConfirm(umi)
+```
+
+{% /dialect %}
+
+{% dialect title="Rust" id="rust" %}
+
+```rust
+use mpl_core::{
+    instructions::UpdateCollectionPluginV1Builder,
+    types::{Creator, Plugin, Royalties, RuleSet},
+};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn update_collection_royalties_plugin() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+
+    let authority = Keypair::new();
+    let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+
+    let creator1 = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+    let creator2 = Pubkey::from_str("33333333333333333333333333333333").unwrap();
+
+    let update_royalties_plugin_ix = UpdateCollectionPluginV1Builder::new()
+        .collection(collection)
+        .payer(authority.pubkey())
+        .plugin(Plugin::Royalties(Royalties {
+            basis_points: 600, // Updated royalty percentage
+            creators: vec![
+                Creator {
+                    address: creator1,
+                    percentage: 70, // Updated distribution
+                },
+                Creator {
+                    address: creator2,
+                    percentage: 30,
+                },
+            ],
+            rule_set: RuleSet::None,
+        }))
+        .instruction();
+
+    let signers = vec![&authority];
+
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+
+    let update_collection_royalties_plugin_tx = Transaction::new_signed_with_payer(
+        &[update_royalties_plugin_ix],
+        Some(&authority.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+
+    let res = rpc_client
+        .send_and_confirm_transaction(&update_collection_royalties_plugin_tx)
+        .await
+        .unwrap();
+
+    println!("Signature: {:?}", res)
+}
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
 ## RuleSets
 
 RuleSets allow you to control what programs can or can not perform actions on the MPL Core Assets the Royalties plugin is assigned to.
