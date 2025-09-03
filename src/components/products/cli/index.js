@@ -101,4 +101,57 @@ export const cli = {
       ],
     },
   ],
+  localizedNavigation: {
+    en: {
+      headline: 'MPLX CLI',
+      description: 'A CLI for the MPLX ecosystem',
+      sections: {
+        'Introduction': 'Introduction',
+        'Configuration': 'Configuration',
+        'Core Commands': 'Core Commands',
+        'Toolbox': 'Toolbox'
+      },
+      links: {
+        'Overview': 'Overview',
+        'Installation': 'Installation',
+        'Wallets': 'Wallets',
+        'RPCs': 'RPCs',
+        'Explorer': 'Explorer'
+      }
+    },
+    jp: {
+      headline: 'MPLX CLI',
+      description: 'MPLXエコシステム用のCLI',
+      sections: {
+        'Introduction': '紹介',
+        'Configuration': '設定',
+        'Core Commands': 'Coreコマンド',
+        'Toolbox': 'ツールボックス'
+      },
+      links: {
+        'Overview': '概要',
+        'Installation': 'インストール',
+        'Wallets': 'ウォレット',
+        'RPCs': 'RPC',
+        'Explorer': 'エクスプローラー'
+      }
+    },
+    kr: {
+      headline: 'MPLX CLI',
+      description: 'MPLX 에코시스템을 위한 CLI',
+      sections: {
+        'Introduction': '소개',
+        'Configuration': '구성',
+        'Core Commands': 'Core 명령어',
+        'Toolbox': '툴박스'
+      },
+      links: {
+        'Overview': '개요',
+        'Installation': '설치',
+        'Wallets': '지갑',
+        'RPCs': 'RPC',
+        'Explorer': '익스플로러'
+      }
+    }
+  }
 }
