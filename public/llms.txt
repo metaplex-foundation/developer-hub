@@ -1,0 +1,135 @@
+# Metaplex Developer Hub
+
+> The Metaplex Protocol is a decentralized platform built on the Solana blockchain, designed to facilitate the creation, sale, and management of digital assets. It offers tools and standards for developers, creators and businesses to launch tokens and NFTs on Solana and the SVM.
+
+The Metaplex Developer Hub is a documentation website that serves as the central hub for all Metaplex-related documentation including Core, Candy Machine, UMI, Token Metadata, and other MPL products. The site provides comprehensive guides, API references, and tutorials for building with Metaplex protocols.
+
+## Core MPL Programs
+
+- [Core](https://developers.metaplex.com/core): Next generation Solana NFT standard with plugin system for enhanced functionality
+- [Token Metadata](https://developers.metaplex.com/token-metadata): Digital ownership standard for creating tokens and NFTs with the SPL Token Program
+- [Bubblegum v2](https://developers.metaplex.com/bubblegum-v2): Latest version of compressed NFTs solution for scalable collections
+- [Bubblegum v1](https://developers.metaplex.com/bubblegum): Legacy compressed NFTs implementation
+- [Candy Machine](https://developers.metaplex.com/candy-machine): NFT distribution system for launching collections with configurable guards
+- [Core Candy Machine](https://developers.metaplex.com/core-candy-machine): Candy Machine implementation specifically for Core assets
+- [Token Auth Rules](https://developers.metaplex.com/token-auth-rules): Programmable authorization rules for token operations
+- [Fusion](https://developers.metaplex.com/fusion): NFT composability system for creating assets within assets
+- [Hydra](https://developers.metaplex.com/hydra): Fanout wallet system for shared wallets and revenue splitting
+- [Inscription](https://developers.metaplex.com/inscription): On-chain data inscriptions directly to Solana state
+- [MPL Hybrid](https://developers.metaplex.com/mpl-hybrid): Hybrid asset management system
+
+## Developer Framework & Tools
+
+- [UMI](https://developers.metaplex.com/umi): Modular TypeScript framework for interacting with Solana programs
+- [CLI](https://developers.metaplex.com/cli): Command-line interface for Metaplex operations and asset management
+- [DAS API](https://developers.metaplex.com/das-api): Digital Asset Standard API for querying compressed assets and metadata
+- [Shank](https://developers.metaplex.com/shank): Rust procedural macro library for generating IDL files
+- [Sugar](https://developers.metaplex.com/sugar): Command-line tool for deploying and managing Candy Machines
+- [Amman](https://developers.metaplex.com/amman): Local validator toolkit for Solana development testing
+
+## Legacy Programs
+
+- [Legacy Documentation](https://developers.metaplex.com/legacy-documentation): Documentation for deprecated Metaplex programs
+- [Auction House](https://developers.metaplex.com/legacy-documentation/auction-house): Legacy NFT marketplace protocol for Token Metadata
+- [Fixed Price Sale](https://developers.metaplex.com/legacy-documentation/fixed-price-sale): Legacy Simple fixed-price NFT sales for Token Metadata
+- [Gumdrop](https://developers.metaplex.com/legacy-documentation/gumdrop): Airdrop and distribution system
+- [Token Entangler](https://developers.metaplex.com/legacy-documentation/token-entangler): Token pairing and escrow system for Token Metadata
+
+## Comprehensive Guides
+
+### Core Program Guides
+- [How to Create a Core NFT Asset with Javascript](https://developers.metaplex.com/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript): Complete guide to creating Core assets
+- [How to Create a Core Collection with Javascript](https://developers.metaplex.com/core/guides/javascript/how-to-create-a-core-collection-with-javascript): Building Core collections
+- [How to Create a Core NFT Asset with Anchor](https://developers.metaplex.com/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor): Anchor-based Core asset creation
+- [How to Create a Core Collection with Anchor](https://developers.metaplex.com/core/guides/anchor/how-to-create-a-core-collection-with-anchor): Anchor-based Core collections
+- [Create Core Staking Using Javascript](https://developers.metaplex.com/core/guides/javascript/web2-typescript-staking-example): Core asset staking implementation
+- [Create a Staking Program in Anchor](https://developers.metaplex.com/core/guides/anchor/anchor-staking-example): Anchor staking program tutorial
+- [Soulbound Assets in MPL Core](https://developers.metaplex.com/core/guides/create-soulbound-nft-asset): Non-transferable asset implementation
+- [Print Editions with MPL Core](https://developers.metaplex.com/core/guides/print-editions): Creating asset editions
+- [Immutability in MPL Core](https://developers.metaplex.com/core/guides/immutability): Asset immutability concepts
+- [Loyalty Card Concept Guide](https://developers.metaplex.com/core/guides/loyalty-card-concept-guide): Loyalty system design patterns
+- [Create a US Market Trading Experience Using the Oracle External Plugin](https://developers.metaplex.com/core/guides/oracle-plugin-example): Oracle plugin implementation
+- [Create an Event Ticketing Platform leveraging the Appdata Plugin](https://developers.metaplex.com/core/guides/onchain-ticketing-with-appdata): AppData plugin use case
+
+### Token Metadata Guides
+- [How to Create a NFT On Solana](https://developers.metaplex.com/token-metadata/guides/javascript/create-an-nft): Complete NFT creation tutorial
+- [Get Mints in a Collection](https://developers.metaplex.com/token-metadata/guides/get-by-collection): Collection querying techniques
+- [FAQ - Token Metadata Account Size Reduction](https://developers.metaplex.com/token-metadata/guides/account-size-reduction): Optimization strategies
+- [How to Create a Token Claimer Smart Contract leveraging Merkle Tree](https://developers.metaplex.com/token-metadata/guides/anchor/token-claimer-smart-contract): Airdrop contract tutorial
+
+### Candy Machine Guides
+- [Create a Token Metadata NFT Collection on Solana with Candy Machine](https://developers.metaplex.com/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine): Full collection launch guide
+- [How to Mint NFTs to Another Wallet - Airdrop example](https://developers.metaplex.com/candy-machine/guides/mint-to-another-wallet): Targeted minting tutorial
+- [Airdrops - How to Mint NFTs to another Wallet](https://developers.metaplex.com/candy-machine/guides/airdrop-mint-to-another-wallet): Airdrop implementation
+
+### Core Candy Machine Guides
+- [Create a Core Candy Machine with Hidden Settings](https://developers.metaplex.com/core-candy-machine/guides/create-a-core-candy-machine-with-hidden-settings): Hidden metadata setup
+- [Create a Website for minting Assets from your Core Candy Machine](https://developers.metaplex.com/core-candy-machine/guides/create-a-core-candy-machine-ui): Frontend minting interface
+
+### Bubblegum (Compressed NFTs) Guides
+- [Create 1 Million NFTs on Solana](https://developers.metaplex.com/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana): Large-scale cNFT creation
+- [How to Interact with cNFTs on Other SVMs](https://developers.metaplex.com/bubblegum/guides/javascript/how-to-interact-with-cnfts-on-other-svms): Cross-chain cNFT operations
+
+### DAS API Guides
+- [Get All Tokens in a Wallet](https://developers.metaplex.com/das-api/guides/get-wallet-tokens): Wallet asset querying
+- [Get NFTs by Owner](https://developers.metaplex.com/das-api/guides/get-nfts-by-owner): Owner-based NFT retrieval
+- [Get Fungible Assets by Owner](https://developers.metaplex.com/das-api/guides/get-fungible-assets): Fungible token queries
+- [Get All Tokens in a Collection](https://developers.metaplex.com/das-api/guides/get-collection-nfts): Collection-based queries
+- [Find Who Holds a Specific Token](https://developers.metaplex.com/das-api/guides/find-token-holders): Token holder discovery
+- [Find Compressed NFTs](https://developers.metaplex.com/das-api/guides/find-compressed-nfts): cNFT discovery methods
+- [Analyze Collection Statistics](https://developers.metaplex.com/das-api/guides/collection-statistics): Collection analytics
+- [Search Assets by Multiple Criteria](https://developers.metaplex.com/das-api/guides/search-by-criteria): Advanced search techniques
+- [Paginating DAS API Requests](https://developers.metaplex.com/das-api/guides/pagination): Efficient data retrieval
+- [Get Assets by Owner and Collection](https://developers.metaplex.com/das-api/guides/owner-and-collection): Combined filtering
+
+### MPL Hybrid Guides
+- [Create your First Hybrid Collection](https://developers.metaplex.com/mpl-hybrid/guides/create-your-first-hybrid-collection): Hybrid asset creation
+- [Metaplex MPL-404 Hybrid Solana NextJs Tailwind Template](https://developers.metaplex.com/mpl-hybrid/guides/mpl-404-hybrid-ui-template): Frontend template
+
+### UMI Framework Guides
+- [Serializing, Deserializing, and sending Transactions](https://developers.metaplex.com/umi/guides/serializing-and-deserializing-transactions): Transaction handling
+- [Optimal transaction landing using Compute Units (CU) and priority fees](https://developers.metaplex.com/umi/guides/optimal-transactions-with-compute-units-and-priority-fees): Transaction optimization
+
+### Solana Foundation Guides
+- [Where Do I Start With Solana?](https://developers.metaplex.com/guides/where-do-i-start): Beginner's roadmap
+- [What is Solana?](https://developers.metaplex.com/guides/what-is-solana): Blockchain fundamentals
+- [Solana Programs and State Overview](https://developers.metaplex.com/guides/solana-programs): Program architecture
+- [Understanding Solana Program Derived Addresses (PDAs)](https://developers.metaplex.com/guides/understanding-pdas): PDA concepts
+- [Validators and Staking](https://developers.metaplex.com/guides/validators): Network validation
+- [Setup a Local Validator](https://developers.metaplex.com/guides/setup-a-local-validator): Development environment
+- [RPCs and DAS](https://developers.metaplex.com/guides/rpcs-and-das): RPC endpoint selection
+- [How to Diagnose Transaction Errors on Solana](https://developers.metaplex.com/guides/general/how-to-diagnose-solana-transaction-errors): Error troubleshooting
+- [The Payer-Authority Pattern](https://developers.metaplex.com/guides/general/payer-authority-pattern): Transaction pattern
+
+### JavaScript Development Guides
+- [How to Create an NFT On Solana](https://developers.metaplex.com/guides/javascript/how-to-create-an-nft-on-solana): Basic NFT creation
+- [How to Create a Solana Token](https://developers.metaplex.com/guides/javascript/how-to-create-a-solana-token): SPL token creation
+- [How to Add Metadata to a Solana Token](https://developers.metaplex.com/guides/javascript/how-to-add-metadata-to-spl-tokens): Token metadata
+- [How to Send and Transfer SOL on Solana](https://developers.metaplex.com/guides/javascript/how-to-transfer-sol-on-solana): SOL transfers
+- [How to Send and Transfer SPL Tokens on Solana](https://developers.metaplex.com/guides/javascript/how-to-transfer-spl-tokens-on-solana): Token transfers
+
+### Rust Development Guides
+- [Getting Started with Rust](https://developers.metaplex.com/guides/rust/getting-started-with-rust): Rust basics
+- [Working with Rust](https://developers.metaplex.com/guides/rust/working-with-rust): Advanced Rust concepts
+- [Metaplex Rust SDKs](https://developers.metaplex.com/guides/rust/metaplex-rust-sdks): SDK usage
+- [How to CPI into a Metaplex Program](https://developers.metaplex.com/guides/rust/how-to-cpi-into-a-metaplex-program): Cross-program invocation
+
+### Templates and Tools
+- [Metaplex Solana NextJs Tailwind Template](https://developers.metaplex.com/guides/templates/metaplex-nextjs-tailwind-template): Frontend template
+- [Create deterministic metadata with Turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo): Metadata optimization
+- [Create a Claimable SPL Token Airdrop](https://developers.metaplex.com/guides/general/spl-token-claim-airdrop-using-gumdrop): Gumdrop airdrop system
+
+## Developer Resources
+
+- [Understanding Programs](https://developers.metaplex.com/understanding-programs): Architecture and program interactions
+- [Developer Tools](https://developers.metaplex.com/developer-tools): SDKs, libraries, and development utilities
+- [RPC Providers](https://developers.metaplex.com/rpc-providers): Recommended Solana RPC endpoints
+- [Storage Providers](https://developers.metaplex.com/storage-providers): Off-chain storage solutions for metadata
+
+## Additional Information
+
+- [Security](https://developers.metaplex.com/security): Security best practices and audit information
+- [Protocol Fees](https://developers.metaplex.com/protocol-fees): Fee structure and economics
+- [Stability Index](https://developers.metaplex.com/stability-index): API stability classifications
+- [Official Links](https://developers.metaplex.com/official-links): Official Metaplex resources and social links
+- [Contact](https://developers.metaplex.com/contact): Support and community channels
