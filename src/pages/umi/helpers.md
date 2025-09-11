@@ -52,10 +52,6 @@ usd(1.23) // -> Amount for "USD 1.23"
 sol(1.23) // -> Amount for "1.23 SOL"
 lamports(1_230_000_000) // -> Amount for "1.23 SOL"
 
-// Helper functions to handle micro SOL amounts (15 decimal places).
-microSol(0.000001) // -> Amount for "0.000001 uSOL" (equivalent to 0.000000000001 SOL)
-microLamports(1000) // -> Amount for "1000 micro lamports" (equivalent to 0.000000001 SOL)
-
 // Helper function to create percent amounts.
 percentAmount(50.42); // -> Amount for "50.42%"
 percentAmount(50.42, 2); // -> Amount for "50.42%"
@@ -195,24 +191,4 @@ await myGpaBuilderWithFields
   .whereField('age', 42)
   .sliceField('name')
   .get();
-```
-
-## SOL Balance Tracking
-
-Umi provides utilities to track and validate SOL balance changes across transactions. These helpers are particularly useful for testing and ensuring expected balance changes occur.
-
-```ts
-// Extract SOL balance changes from a transaction.
-const balanceChanges = await getSolBalanceChanges(umi, transactionSignature);
-
-// Assert that specific balance changes occurred across multiple transactions.
-await assertSolBalanceChanges(umi, [signature1, signature2], [
-  { publicKey: account1, expectedChange: sol(-1.5) },
-  { publicKey: account2, expectedChange: sol(1.5) }
-]);
-
-// Assert balance changes with exclusive tracking (only specified accounts should change).
-await assertSolBalanceChanges(umi, [signature], expectedChanges, {
-  exclusive: true
-});
 ```
