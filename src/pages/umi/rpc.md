@@ -57,6 +57,22 @@ const transaction = await umi.rpc.getTransaction(signature);
 
 Since transactions are an important component of Solana clients, we discuss them in more detail on the [Sending transactions](/umi/transactions) documentation page.
 
+## Simulating transactions
+
+You can simulate transactions before sending them to test their behavior and estimate compute units. Umi provides enhanced simulation options:
+
+```ts
+// Basic transaction simulation
+const simulationResult = await umi.rpc.simulateTransaction(myTransaction);
+
+// Simulate with a replacement blockhash for more flexibility
+const simulationResult = await umi.rpc.simulateTransaction(myTransaction, {
+  replaceRecentBlockhash: true
+});
+```
+
+When using `replaceRecentBlockhash: true`, the simulation will replace the transaction's recent blockhash with the latest blockhash from the RPC, and therefore extending the transaction's validity period after signing it. This could also done without `replaceRecentBlockhash: true` by fetching the latest blockhash from the RPC and passing it to the transactions. Using `replaceRecentBlockhash: true` is more convenient and saves RPC requests.
+
 ## Fetching accounts
 
 The following methods can be used to fetch accounts or check for their existence:

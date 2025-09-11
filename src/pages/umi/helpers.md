@@ -25,10 +25,11 @@ type Amount<
 };
 ```
 
-Umi also provides specific versions of this `Amount` type for specific cases like SOLs and USDs.
+Umi also provides specific versions of this `Amount` type for specific cases like SOLs, micro SOLs, and USDs.
 
 ```ts
 type SolAmount = Amount<'SOL', 9>;
+type MicroSolAmount = Amount<'uSOL', 15>;
 type UsdAmount = Amount<'USD', 2>;
 type PercentAmount<D extends AmountDecimals> = Amount<'%', D>;
 ```
@@ -50,6 +51,10 @@ usd(1.23) // -> Amount for "USD 1.23"
 // Helper functions to handle SOL amounts.
 sol(1.23) // -> Amount for "1.23 SOL"
 lamports(1_230_000_000) // -> Amount for "1.23 SOL"
+
+// Helper functions to handle micro SOL amounts (15 decimal places).
+microSol(0.000001) // -> Amount for "0.000001 uSOL" (equivalent to 0.000000000001 SOL)
+microLamports(1000) // -> Amount for "1000 micro lamports" (equivalent to 0.000000001 SOL)
 
 // Helper function to create percent amounts.
 percentAmount(50.42); // -> Amount for "50.42%"
@@ -190,4 +195,24 @@ await myGpaBuilderWithFields
   .whereField('age', 42)
   .sliceField('name')
   .get();
+```
+
+## SOL Balance Tracking
+
+Umi provides utilities to track and validate SOL balance changes across transactions. These helpers are particularly useful for testing and ensuring expected balance changes occur.
+
+```ts
+// Extract SOL balance changes from a transaction.
+const balanceChanges = await getSolBalanceChanges(umi, transactionSignature);
+
+// Assert that specific balance changes occurred across multiple transactions.
+await assertSolBalanceChanges(umi, [signature1, signature2], [
+  { publicKey: account1, expectedChange: sol(-1.5) },
+  { publicKey: account2, expectedChange: sol(1.5) }
+]);
+
+// Assert balance changes with exclusive tracking (only specified accounts should change).
+await assertSolBalanceChanges(umi, [signature], expectedChanges, {
+  exclusive: true
+});
 ```
