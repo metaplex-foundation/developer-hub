@@ -25,10 +25,11 @@ type Amount<
 };
 ```
 
-Umi also provides specific versions of this `Amount` type for specific cases like SOLs and USDs.
+Umi also provides specific versions of this `Amount` type for specific cases like SOLs, micro SOLs, and USDs.
 
 ```ts
 type SolAmount = Amount<'SOL', 9>;
+type MicroSolAmount = Amount<'uSOL', 15>;
 type UsdAmount = Amount<'USD', 2>;
 type PercentAmount<D extends AmountDecimals> = Amount<'%', D>;
 ```
