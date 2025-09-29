@@ -13,7 +13,7 @@ Return the list of assets given a search criteria.
 | ------------------- | :------: | ------------------------------------------ |
 | `negate`            |          | Indicates whether the search criteria should be inverted or not.  |
 | `conditionType`     |          | Indicates whether to retrieve all (`"all"`) or any (`"any"`) asset that matches the search criteria.  |
-| `interface`         |          | The interface value (one of `["V1_NFT", "V1_PRINT" "LEGACY_NFT", "V2_NFT", "FungibleAsset", "Custom", "Identity", "Executable"]`).  |
+| `interface`         |          | The interface value (one of `["V1_NFT", "V1_PRINT", "LEGACY_NFT", "V2_NFT", "ProgrammableNFT", "FungibleAsset", "FungibleToken", "Custom", "Identity", "Executable", "MplCoreAsset", "MplCoreCollection", "MplBubblegumV2"]`).  |
 | `ownerAddress`      |          | The address of the owner.  |
 | `ownerType`         |          | Type of ownership `["single", "token"]`.  |
 | `creatorAddress`    |          | The address of the creator.  |
