@@ -83,4 +83,130 @@ After a successful plugin addition, the command will display:
   - Plugin type validation
   - Configuration validation
   - Transaction signing and confirmation
-  - Authority verification 
+  - Authority verification
+
+## Update Plugin
+
+Update existing plugins on an asset or collection.
+
+### Basic Usage
+
+```bash
+mplx core plugins update <assetId> [options]
+```
+
+### Options
+- `--wizard`: Interactive wizard mode to select and configure plugins to update
+- `--collection`: Flag to indicate if the target is a collection (default: false)
+
+### Methods
+
+#### 1. Using Wizard Mode
+```bash
+mplx core plugins update <assetId> --wizard
+```
+This will:
+1. Launch an interactive wizard to select which plugin(s) to update
+2. Guide you through the updated plugin configuration
+3. Apply the changes to the asset/collection
+
+#### 2. Using JSON File
+```bash
+mplx core plugins update <assetId> ./plugin.json
+```
+The JSON file should contain the updated plugin configuration in the following format:
+```json
+{
+  "pluginType": {
+    "property1": "updatedValue1",
+    "property2": "updatedValue2"
+  }
+}
+```
+
+### Examples
+
+#### Update Plugin on Asset
+```bash
+mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard
+```
+
+#### Update Plugin on Collection
+```bash
+mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard --collection
+```
+
+#### Update Plugin Using JSON
+```bash
+mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./updated-plugin.json
+```
+
+### Example: Update Royalties Plugin on Asset
+```bash
+# Update royalties to 10% with new creators
+mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./royalties.json
+```
+
+Where `royalties.json` contains:
+```json
+{
+  "royalties": {
+    "basisPoints": 1000,
+    "creators": [
+      {
+        "address": "creator1PublicKey",
+        "percentage": 80
+      },
+      {
+        "address": "creator2PublicKey",
+        "percentage": 20
+      }
+    ],
+    "ruleSet": "None"
+  }
+}
+```
+
+### Example: Update Attributes Plugin on Collection
+```bash
+# Update collection-level attributes
+mplx core plugins update collectionPublicKey ./attributes.json --collection
+```
+
+Where `attributes.json` contains:
+```json
+{
+  "attributes": {
+    "attributeList": [
+      {
+        "key": "Collection Type",
+        "value": "PFP"
+      },
+      {
+        "key": "Supply",
+        "value": "10000"
+      }
+    ]
+  }
+}
+```
+
+## Output (Update)
+
+After a successful plugin update, the command will display:
+```
+--------------------------------
+  Asset: <assetId>
+  Signature: <transactionSignature>
+  Explorer: <explorerUrl>
+  Core Explorer: https://core.metaplex.com/explorer/<assetId>
+--------------------------------
+```
+
+## Update Notes
+
+- The update command modifies existing plugins; use the add command to add new plugins
+- You can update multiple plugins in a single operation using JSON configuration
+- The wizard mode shows only existing plugins that can be updated
+- You must have update authority for the asset or collection
+- Plugin updates support batch operations and handle transaction size limitations automatically 
