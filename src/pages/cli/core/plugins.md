@@ -37,9 +37,11 @@ mplx core plugins add <assetId> ./plugin.json
 The JSON file should contain the plugin configuration in the following format:
 ```json
 [
-  "pluginType": {
-    "property1": "value1",
-    "property2": "value2"
+  {
+    "pluginType": {
+      "property1": "value1",
+      "property2": "value2"
+    }
   }
 ]
 ```
@@ -163,7 +165,8 @@ Where `royalties.json` contains:
 ## Output (Update)
 
 After a successful plugin update, the command will display:
-```
+
+```text
 --------------------------------
   Asset: <assetId>
   Signature: <transactionSignature>
