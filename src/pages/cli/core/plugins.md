@@ -36,12 +36,12 @@ mplx core plugins add <assetId> ./plugin.json
 ```
 The JSON file should contain the plugin configuration in the following format:
 ```json
-{
+[
   "pluginType": {
     "property1": "value1",
     "property2": "value2"
   }
-}
+]
 ```
 
 ### Examples
@@ -114,14 +114,7 @@ This will:
 ```bash
 mplx core plugins update <assetId> ./plugin.json
 ```
-The JSON file should contain the updated plugin configuration in the following format:
-```json
-{
-  "pluginType": {
-    "property1": "updatedValue1",
-    "property2": "updatedValue2"
-  }
-}
+The JSON file should contain the updated plugin configuration in the same format as the JSON file used for adding plugins.
 ```
 
 ### Examples
@@ -141,54 +134,30 @@ mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard -
 mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./updated-plugin.json
 ```
 
-### Example: Update Royalties Plugin on Asset
+### Example: Update Royalties Plugin on Collection
+
 ```bash
-# Update royalties to 10% with new creators
-mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./royalties.json
+mplx core plugins update collectionPublicKey ./royalties.json --collection
 ```
 
 Where `royalties.json` contains:
 ```json
-{
-  "royalties": {
+[
+  {
+    "type": "Royalties",
+    "authority": {
+      "type": "UpdateAuthority"
+    },
     "basisPoints": 1000,
     "creators": [
       {
-        "address": "creator1PublicKey",
-        "percentage": 80
-      },
-      {
-        "address": "creator2PublicKey",
-        "percentage": 20
+        "address": "4xbJp9sjeTEhheUDg8M1nJUomZcGmFZsjt9Gg3RQZAWp",
+        "percentage": 100
       }
     ],
-    "ruleSet": "None"
+    "ruleSet": {"type": "None"}
   }
-}
-```
-
-### Example: Update Attributes Plugin on Collection
-```bash
-# Update collection-level attributes
-mplx core plugins update collectionPublicKey ./attributes.json --collection
-```
-
-Where `attributes.json` contains:
-```json
-{
-  "attributes": {
-    "attributeList": [
-      {
-        "key": "Collection Type",
-        "value": "PFP"
-      },
-      {
-        "key": "Supply",
-        "value": "10000"
-      }
-    ]
-  }
-}
+]
 ```
 
 ## Output (Update)
@@ -202,11 +171,3 @@ After a successful plugin update, the command will display:
   Core Explorer: https://core.metaplex.com/explorer/<assetId>
 --------------------------------
 ```
-
-## Update Notes
-
-- The update command modifies existing plugins; use the add command to add new plugins
-- You can update multiple plugins in a single operation using JSON configuration
-- The wizard mode shows only existing plugins that can be updated
-- You must have update authority for the asset or collection
-- Plugin updates support batch operations and handle transaction size limitations automatically 
