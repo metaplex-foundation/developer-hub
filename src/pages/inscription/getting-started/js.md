@@ -57,7 +57,7 @@ await initializeFromMint(umi, {
       offset: 0,
     })
   )
-  .sendAndConfirm(umi)
+  .sendAndConfirm(umi, {confirm: {commitment: 'finalized'}})
 
 const inscriptionMetadata = await fetchInscriptionMetadata(
   umi,
