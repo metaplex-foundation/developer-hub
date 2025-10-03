@@ -185,6 +185,10 @@ Also note that you may send a transaction without waiting for it to be confirmed
 ```ts
 const signature = await builder.send(umi)
 ```
+Or use `sendAndConfirm()` to wait for the transaction finalization for you. To do that, add `{confirm: {commitment: 'finalized'}}` as an "options" arg.
+```ts
+const confirmResult = await builder.sendAndConfirm(umi, {confirm: {commitment: 'finalized'}})
+```
 
 ## Using address lookup tables
 
