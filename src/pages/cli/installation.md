@@ -3,8 +3,6 @@ title: Installation
 description: Install and set up the Metaplex CLI
 ---
 
-# Installation Guide
-
 This guide will help you install and set up the Metaplex CLI on your system.
 
 ## Prerequisites

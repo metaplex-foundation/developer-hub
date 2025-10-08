@@ -12,6 +12,14 @@ Note that the name and URI of each inserted item are respectively constraint by 
 
 Additionally, because transactions are limited to a certain size, we cannot insert thousands of items within the same transaction. The number of items we can insert per transaction will depend on the **Name Length** and **URI Length** attributes defined in the Config Line Settings. The shorter our names and URIs are, the more we'll be able to fit into a transaction.
 
+{% callout title="CLI Alternative" type="note" %}
+You can also insert items using the MPLX CLI, which handles batch processing automatically:
+```bash
+mplx cm insert
+```
+The CLI provides smart loading detection, progress tracking, and optimal batch sizing. See the [CLI insert command documentation](/cli/cm/insert) for more details.
+{% /callout %}
+
 {% dialect-switcher title="Add config lines" %}
 {% dialect title="JavaScript" id="js" %}
 
