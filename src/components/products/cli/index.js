@@ -69,6 +69,10 @@ export const cli = {
               title: 'Fetch Asset or Collection',
               href: '/cli/core/fetch',
             },
+            {
+              title: 'Add and Update Plugins',
+              href: '/cli/core/plugins',
+            },
           ],
         },
         {
