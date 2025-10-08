@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Search } from '@/components/Search'
 import { ThemeSelector } from '@/components/ThemeSelector'
@@ -74,6 +75,9 @@ export function Header({ page }) {
         <div className="relative flex basis-0 items-center justify-end gap-6 sm:gap-8 lg:flex-grow">
           <div className="-my-5">
             <Search />
+          </div>
+          <div className="hidden sm:block">
+            <LanguageSwitcher />
           </div>
           <ThemeSelector className="relative z-10" />
           <Link

@@ -13,4 +13,18 @@ export const sugar = {
   heroes: [{ path: '/candy-machine/sugar', component: Hero }],
   sections: [
   ],
+  localizedNavigation: {
+    en: {
+      headline: 'Create Candy Machines easily',
+      description: 'Create Candy Machines easily'
+    },
+    jp: {
+      headline: 'Candy Machineを簡単に作成',
+      description: 'Candy Machineを簡単に作成'
+    },
+    kr: {
+      headline: 'Candy Machine 쉽게 만들기',
+      description: 'Candy Machine을 쉽게 만들 수 있습니다'
+    }
+  }
 }
