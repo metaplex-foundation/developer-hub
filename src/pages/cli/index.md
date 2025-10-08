@@ -15,6 +15,12 @@ The Metaplex CLI is a powerful command-line tool that provides a comprehensive s
 - Fetch asset and collection information
 - Manage asset properties and attributes
 
+### Candy Machine Support
+- Create MPL Core Candy Machines with step-by-step guidance
+- Upload, validate, and insert assets with intelligent caching
+- Set up complex minting rules and guard groups
+- Real-time indicators for uploads, creation, and deployment
+
 ### Toolbox Utilities
 - Create and manage fungible tokens
 - Transfer SOL between addresses
@@ -42,11 +48,9 @@ The Metaplex CLI is a powerful command-line tool that provides a comprehensive s
    - [Set up your wallet](/cli/config/wallets)
    - [Configure RPC endpoints](/cli/config/rpcs)
    - [Choose your preferred explorer](/cli/config/explorer)
-3. Start using the core commands:
+3. Start using the commands:
    - [Create assets](/cli/core/create-asset)
    - [Create collections](/cli/core/create-collection)
-   - [Update assets](/cli/core/update-asset)
-   - [Fetch assets](/cli/core/fetch)
 
 ## Command Structure
 
@@ -58,6 +62,7 @@ mplx <category> <command> [options]
 
 Categories include:
 - `core`: MPL Core asset management
+- `cm`: Candy Machine operations
 - `toolbox`: Utility commands
 - `config`: Configuration management
 
@@ -75,6 +80,35 @@ Categories include:
 - [Documentation](https://developers.metaplex.com)
 - [Discord Community](https://discord.gg/metaplex)
 
+## Quick Start Examples
+
+### Create Your First Candy Machine
+
+Get started with the interactive wizard:
+```bash
+# Install and configure the CLI
+mplx config set keypair /path/to/my-wallet.json
+mplx config set rpcUrl https://api.mainnet-beta.solana.com
+
+# Create a candy machine with guided setup
+mplx cm create --wizard
+```
+
+### Create Individual Assets
+
+For single assets or custom collections:
+```bash
+# Create a collection
+mplx core create-collection
+
+# Create an asset in the collection
+mplx core create-asset
+```
+
 ## Next Steps
 
-Ready to get started? Head over to the [installation guide](/cli/installation) to set up the CLI on your system. 
+Ready to get started? Choose your path:
+
+1. **For Setup**: Visit the [installation guide](/cli/installation)  
+2. **For NFT Collections**: Start with the [candy machine wizard](/cli/cm/create)
+3. **For Individual Assets**: Begin with [asset creation](/cli/core/create-asset)
