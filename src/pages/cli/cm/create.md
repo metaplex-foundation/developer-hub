@@ -1,6 +1,6 @@
 ---
 title: "Create Candy Machine"
-metaTitle: "CLI - Create Candy Machine Command"
+metaTitle: "MPLX CLI - Create Candy Machine Command"
 description: "Create MPL Core Candy Machines using the MPLX CLI. Interactive wizard mode with validation, asset upload, and complete setup automation."
 ---
 
@@ -20,21 +20,24 @@ mplx cm create
 ```
 
 ## Prerequisite Assets
+
 Independent of the Mode (Wizard or Manual) you choose you will need your assets prepared. If you want to play around with dummy assets you can create them using `mplx cm create --template`. All the image and metadata files should be in the their own `assets` folder.
 
-*Image Files:* 
+*Image Files:*
+
 - **Formats**: PNG, JPG
 - **Naming**: Sequential (0.png, 1.png, 2.png, ...)
 
-*Metadata Files*
+*Metadata Files:*
+
 - **Format**: JSON
 - **Naming**: Matching image files (0.json, 1.json, 2.json, ...)
 - **Schema**: Standard [Metaplex Core metadata format](/core/json-schema)
 
+*Collection Files:*
 
-*Collection Files* 
 - **collection.png**: Collection image
-- **collection.json**: Collection metadata 
+- **collection.json**: Collection metadata
 
 ## Template Mode
 
@@ -45,6 +48,7 @@ mplx cm create --template
 ```
 
 This creates the following structure, but not the candy machine.
+
 ```text
 candy-machine-template/
 ├── assets/
@@ -56,6 +60,7 @@ candy-machine-template/
 ```
 
 After creating the template:
+
 1. Replace example assets with your actual files
 2. Update the configuration in `cm-config.json`
 3. Run `mplx cm create` to deploy
@@ -74,7 +79,6 @@ The wizard provides a guided, user-friendly experience with comprehensive valida
 6. Candy Machine Creation
 7. Item Insertion
 
-
 ## Manual Configuration Mode
 
 For advanced users who want full control over the configuration process.
@@ -83,7 +87,7 @@ For advanced users who want full control over the configuration process.
 
 1. **Candy machine asset directory** with proper structure
 2. **Manually created `cm-config.json`** with required configuration. See below for an example
-3. **Prepared assets** in the `assets/` directory in a structure as shown below 
+3. **Prepared assets** in the `assets/` directory in a structure as shown below
 
 ### Directory Structure
 
@@ -167,11 +171,13 @@ mplx cm create
 ### Guard Configuration
 
 **Global Guards** (`guardConfig`):
+
 - Apply to all groups and the candy machine as a whole
 - Cannot be overridden by group guards
 - Useful for universal restrictions
 
 **Guard Groups** (`groups`):
+
 - Apply only to specific groups
 - Allow different rules per minting phase
 - Group labels limited to 6 characters maximum
@@ -179,6 +185,7 @@ mplx cm create
 ### Common Guard Examples
 
 #### Basic Public Sale
+
 ```json
 {
   "guardConfig": {
@@ -195,6 +202,7 @@ mplx cm create
 ```
 
 #### Whitelist Phase
+
 ```json
 {
   "groups": [
@@ -213,8 +221,6 @@ mplx cm create
   ]
 }
 ```
-
-
 
 ### Getting Help
 

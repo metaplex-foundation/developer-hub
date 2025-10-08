@@ -19,7 +19,7 @@ mplx cm validate <path_to_asset_cache>
 mplx cm validate --onchain
 ```
 
-If the validation command shows issues, depending on the error you might want to check the issues with your assets or run the upload or insert command.   
+If the validation command shows issues, depending on the error you might want to check the issues with your assets or run the upload or insert command.
 
 ## Related Commands
 

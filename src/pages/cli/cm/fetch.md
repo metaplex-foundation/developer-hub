@@ -17,13 +17,9 @@ mplx cm fetch <candy_machine_address>
 
 ```
 
-{% callout title="Advanced Fetch Options" type="note" %}
-The fetch command supports additional flags for detailed information:
-- `--items`: Include detailed information about loaded items
-- `--json`: Output data in JSON format for programmatic processing
+The fetch command supports an additional flag for detailed information:
 
-Run `mplx cm fetch --help` for all available options.
-{% /callout %}
+- `--items`: Include detailed information about loaded items
 
 ## Related Commands
 

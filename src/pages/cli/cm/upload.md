@@ -37,11 +37,11 @@ my-candy-machine/
 2. Validation Phase: Verifies the integrity of your files, for example if all image files have matching metadata files and that the metadata is valid json.
 3. Cache Check: To identify which files were already uploaded the `asset-cache.json` file is validated.
 4. Upload: The actual upload is done.
-5. Cache Generation: The `asset-cache.json` file is generated 
+5. Cache Generation: The `asset-cache.json` file is generated
 
 ## Generated Asset Cache
 
-The `asset-cache.json` file contains detailed information about uploaded assets. Manually inspecting and using it is only recommended for advanced users. 
+The `asset-cache.json` file contains detailed information about uploaded assets. Manually inspecting and using it is only recommended for advanced users.
 
 Example:
 

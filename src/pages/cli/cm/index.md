@@ -30,18 +30,21 @@ This single command handles everything to create a candy machine: asset validati
 ## Key Features
 
 ### Interactive Wizard
+
 - **Guided Setup**: Step-by-step candy machine creation
 - **Asset Validation**: Comprehensive file and metadata validation
 - **Progress Tracking**: Real-time indicators for all operations
 - **Error Recovery**: Detailed error messages with actionable guidance
 
 ### Intelligent Asset Management
+
 - **Smart Caching**: Reuses existing uploads when possible
 - **Batch Processing**: Efficient asset upload and insertion
 - **File Validation**: Ensures proper naming and metadata format
 - **Collection Support**: Automatic collection creation
 
 ### Flexible Configuration
+
 - **Guard Support**: All Core Candy Machine guards supported
 - **Guard Groups**: Create different minting phases with distinct rules
 - **Template Generation**: Quick directory structure setup
@@ -76,6 +79,7 @@ mplx cm create --wizard
 ```
 
 **What it does:**
+
 1. Validates assets and configuration
 2. Uploads all assets with progress tracking
 3. Creates the candy machine on-chain
@@ -109,6 +113,7 @@ mplx cm validate
 The CLI supports all Core Candy Machine guards and guard groups:
 
 ### Global Guards
+
 ```json
 {
   "guardConfig": {
@@ -125,6 +130,7 @@ The CLI supports all Core Candy Machine guards and guard groups:
 ```
 
 ### Guard Groups (Minting Phases)
+
 ```json
 {
   "groups": [
@@ -176,12 +182,14 @@ For detailed guard documentation, see the [Core Candy Machine Guards](/core-cand
 ## Best Practices
 
 ### 🎯 Directory Organization
+
 - Keep each candy machine in its own directory
 - Use descriptive directory names
 - Maintain consistent asset naming (0.png, 1.png, etc.)
 - Back up your candy machine directories
 
 ### 📁 Asset Preparation
+
 - Use consistent naming (0.png, 1.png, etc.)
 - Ensure metadata JSON files match image files
 - Validate image formats (PNG, JPG supported)
@@ -189,6 +197,7 @@ For detailed guard documentation, see the [Core Candy Machine Guards](/core-cand
 - Include collection.json with a valid "name" field
 
 ### ⚙️ Configuration
+
 - Test on devnet before mainnet
 - Use the wizard for guided configuration
 - Back up configuration files
@@ -196,11 +205,11 @@ For detailed guard documentation, see the [Core Candy Machine Guards](/core-cand
 - Consider adding at least one guard or guard group
 
 ### 🚀 Deployment
+
 - Verify candy machine creation
 - Test minting functionality
 - Monitor transaction status
 - Keep explorer links for verification
-
 
 ## Related Documentation
 

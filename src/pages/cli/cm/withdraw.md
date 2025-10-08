@@ -22,13 +22,12 @@ mplx cm withdraw --address <candy_machine_address>
 ```
 
 Optional Flags that you can use:
+
 - `--address`: Specify candy machine address directly
 - `--force`: *Danger* Skip confirmation prompts (use with extreme caution)
 
+### ⚠️ Irreversible Operation
 
-## ⚠️ Important Warnings
-
-### Irreversible Operation
 - **Permanent Deletion**: The candy machine account will be permanently deleted
 - **No Recovery**: Cannot be undone or restored
 - **Data Loss**: All on-chain configuration and state will be lost
@@ -37,10 +36,12 @@ Optional Flags that you can use:
 ### 🛡️ Best Practices
 
 **Planning:**
+
 - Plan withdrawal timing carefully
 - Coordinate with team members
 
 **Execution:**
+
 - Double-check all parameters
 - Use devnet for practice
 
