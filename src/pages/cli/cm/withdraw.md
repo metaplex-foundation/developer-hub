@@ -31,7 +31,7 @@ Optional Flags that you can use:
 - **Permanent Deletion**: The candy machine account will be permanently deleted
 - **No Recovery**: Cannot be undone or restored
 - **Data Loss**: All on-chain configuration and state will be lost
-- **Item Access**: Existing minted NFTs are not affected
+- **Minted NFTs**: Existing minted NFTs are not affected
 
 ### 🛡️ Best Practices
 
