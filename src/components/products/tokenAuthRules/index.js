@@ -135,7 +135,7 @@ export const tokenAuthRules = {
         'Rule Set Buffers': 'Rule Set Buffers'
       }
     },
-    jp: {
+    ja: {
       headline: 'NFT権限',
       description: 'NFTのカスタム認証ルールを設計。',
       sections: {
@@ -163,7 +163,7 @@ export const tokenAuthRules = {
         'Rule Set Buffers': 'ルールセットバッファ'
       }
     },
-    kr: {
+    ko: {
       headline: 'NFT 권한',
       description: 'NFT에 대한 사용자 정의 인증 규칙을 설계하세요.',
       sections: {

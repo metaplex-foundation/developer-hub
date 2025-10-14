@@ -354,7 +354,7 @@ export const coreCandyMachine = {
         'Create a Core Candy Machine with Hidden Settings': 'Create a Core Candy Machine with Hidden Settings'
       }
     },
-    jp: {
+    ja: {
       headline: 'Core Assetローンチパッド',
       description: 'Solana上で次のMPL Core Assetコレクションを立ち上げましょう。',
       sections: {
@@ -385,7 +385,7 @@ export const coreCandyMachine = {
         'Create a Core Candy Machine with Hidden Settings': '隠し設定でCore Candy Machineを作成'
       }
     },
-    kr: {
+    ko: {
       headline: 'Core Asset 런치패드',
       description: '솔라나에서 다음 MPL Core Asset 컬렉션을 출시하세요.',
       sections: {

@@ -4,23 +4,23 @@ export const getLocalizedSections = (locale) => {
   const translations = {
     en: {
       documentation: 'Documentation',
-      references: 'API References', 
+      references: 'API References',
       guides: 'Guides',
       recipes: 'Recipes',
       changelog: 'Changelog'
     },
-    jp: {
+    ja: {
       documentation: 'ドキュメント',
       references: 'APIリファレンス',
-      guides: 'ガイド', 
+      guides: 'ガイド',
       recipes: 'レシピ',
       changelog: '変更履歴'
     },
-    kr: {
+    ko: {
       documentation: '문서',
       references: 'API 참조',
       guides: '가이드',
-      recipes: '레시피', 
+      recipes: '레시피',
       changelog: '변경 로그'
     }
   }

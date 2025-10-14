@@ -113,11 +113,11 @@ export const legacyDocumentation = {
       headline: 'Products from our old docs',
       description: 'A collection of documentation of older Programs and Tools which might not be used anymore or deprecated. Migrated from our old docs for documentation for completeness.'
     },
-    jp: {
+    ja: {
       headline: '旧ドキュメントの製品',
       description: '現在使用されていないか非推奨の古いプログラムやツールのドキュメントコレクション。完全性のために旧ドキュメントから移行。'
     },
-    kr: {
+    ko: {
       headline: '기존 문서의 제품',
       description: '더 이상 사용되지 않거나 사용되지 않을 수 있는 이전 프로그램 및 도구의 문서 모음입니다. 완전성을 위해 기존 문서에서 마이그레이션되었습니다.'
     }

@@ -59,7 +59,7 @@ export const aura = {
         'Reading Solana and SVM Data': 'Reading Solana and SVM Data'
       }
     },
-    jp: {
+    ja: {
       headline: 'インデックス作成・データ可用性ネットワーク',
       description: 'SolanaとSolana Virtual Machine（SVM）を拡張するデータネットワーク',
       sections: {
@@ -72,7 +72,7 @@ export const aura = {
         'Reading Solana and SVM Data': 'SolanaとSVMデータの読み取り'
       }
     },
-    kr: {
+    ko: {
       headline: '인덱싱 및 데이터 가용성 네트워크',
       description: 'Solana와 Solana Virtual Machine(SVM)을 확장하는 데이터 네트워크',
       sections: {

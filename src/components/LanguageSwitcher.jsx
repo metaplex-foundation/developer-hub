@@ -5,8 +5,8 @@ import { useLocale } from '@/contexts/LocaleContext'
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'jp', name: '日本語', flag: '🇯🇵' },
-  { code: 'kr', name: '한국어', flag: '🇰🇷' },
+  { code: 'ja', name: '日本語', flag: '🇯🇵' },
+  { code: 'ko', name: '한국어', flag: '🇰🇷' },
 ]
 
 export function LanguageSwitcher() {
@@ -30,16 +30,16 @@ export function LanguageSwitcher() {
   const getLocalizedPath = (targetLocale) => {
     if (targetLocale === 'en') {
       // For English, remove any locale prefix and return root path
-      if (pathname.startsWith('/jp')) {
-        return pathname.replace(/^\/jp/, '') || '/'
+      if (pathname.startsWith('/ja')) {
+        return pathname.replace(/^\/ja/, '') || '/'
       }
-      if (pathname.startsWith('/kr')) {
-        return pathname.replace(/^\/kr/, '') || '/'
+      if (pathname.startsWith('/ko')) {
+        return pathname.replace(/^\/ko/, '') || '/'
       }
       return pathname
     } else {
       // For other locales, add the locale prefix
-      if (pathname.startsWith('/jp') || pathname.startsWith('/kr')) {
+      if (pathname.startsWith('/ja') || pathname.startsWith('/ko')) {
         // Replace existing locale prefix
         return pathname.replace(/^\/[a-z]{2}/, `/${targetLocale}`)
       } else {

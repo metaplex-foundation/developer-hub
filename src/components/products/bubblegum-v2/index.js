@@ -123,7 +123,7 @@ export const bubblegumv2 = {
         'Merkle Tree Canopy': 'Merkle Tree Canopy'
       }
     },
-    jp: {
+    ja: {
       headline: '改良された圧縮NFT',
       description: '新たな桁のスケールを実現するNFT。',
       sections: {
@@ -155,7 +155,7 @@ export const bubblegumv2 = {
         'Merkle Tree Canopy': 'マークルツリーキャノピー'
       }
     },
-    kr: {
+    ko: {
       headline: '개선된 압축 NFT',
       description: '새로운 차원의 확장성을 제공하는 NFT입니다.',
       sections: {

@@ -229,7 +229,7 @@ export const candyMachine = {
         'Programmable NFTs': 'Programmable NFTs'
       }
     },
-    jp: {
+    ja: {
       headline: 'TM NFTローンチパッド',
       description: 'Solana上で次のNFTコレクションを立ち上げましょう。',
       sections: {
@@ -252,7 +252,7 @@ export const candyMachine = {
         'Programmable NFTs': 'プログラマブルNFT'
       }
     },
-    kr: {
+    ko: {
       headline: 'TM NFT 런치패드',
       description: '솔라나에서 다음 NFT 컬렉션을 출시하세요.',
       sections: {

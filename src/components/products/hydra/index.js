@@ -46,7 +46,7 @@ export const hydra = {
         'Quick Start': 'Quick Start'
       }
     },
-    jp: {
+    ja: {
       headline: 'ファンアウトウォレット',
       description: '複数の株主間で分割された共有ウォレットを作成。',
       sections: {
@@ -57,7 +57,7 @@ export const hydra = {
         'Quick Start': 'クイックスタート'
       }
     },
-    kr: {
+    ko: {
       headline: '팬아웃 지갑',
       description: '여러 주주 간에 분할된 공유 지갑을 만드세요.',
       sections: {

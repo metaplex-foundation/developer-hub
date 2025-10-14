@@ -80,7 +80,7 @@ export const global = {
         'Contact Us': 'Contact Us',
       }
     },
-    jp: {
+    ja: {
       headline: 'デベロッパーハブ',
       description: 'Metaplexの全開発者リソースを一箇所にまとめたハブ。',
       sections: {
@@ -105,7 +105,7 @@ export const global = {
         'Contact Us': 'お問い合わせ',
       }
     },
-    kr: {
+    ko: {
       headline: '개발자 허브',
       description: '모든 Metaplex 개발자 리소스를 한 곳에 모은 허브입니다.',
       sections: {

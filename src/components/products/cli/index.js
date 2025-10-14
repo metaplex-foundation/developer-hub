@@ -119,7 +119,7 @@ export const cli = {
         'Explorer': 'Explorer'
       }
     },
-    jp: {
+    ja: {
       headline: 'MPLX CLI',
       description: 'MPLXエコシステム用のCLI',
       sections: {
@@ -136,7 +136,7 @@ export const cli = {
         'Explorer': 'エクスプローラー'
       }
     },
-    kr: {
+    ko: {
       headline: 'MPLX CLI',
       description: 'MPLX 에코시스템을 위한 CLI',
       sections: {

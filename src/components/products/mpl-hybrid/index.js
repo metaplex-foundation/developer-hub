@@ -124,7 +124,7 @@ export const mplHybrid = {
         'MPL-404 Hybrid UI Template': 'MPL-404 Hybrid UI Template'
       }
     },
-    jp: {
+    ja: {
       headline: 'ハイブリッドアセット',
       description: 'ハイブリッドアセット用のフレームワークとオンチェーンプロトコル。',
       sections: {
@@ -150,7 +150,7 @@ export const mplHybrid = {
         'MPL-404 Hybrid UI Template': 'MPL-404ハイブリッドUIテンプレート'
       }
     },
-    kr: {
+    ko: {
       headline: '하이브리드 에셋',
       description: '하이브리드 에셋을 위한 프레임워크 및 온체인 프로토콜입니다.',
       sections: {

@@ -361,7 +361,7 @@ export const core = {
         'Appdata Plugin Example': 'Appdata Plugin Example',
       }
     },
-    jp: {
+    ja: {
       headline: '次世代NFT標準',
       description: '次世代Solana NFT標準。',
       sections: {
@@ -402,6 +402,49 @@ export const core = {
         'Print Editions': 'プリントエディション',
         'Oracle Plugin Example': 'Oracleプラグインの例',
         'Appdata Plugin Example': 'Appdataプラグインの例',
+      }
+    },
+    ko: {
+      headline: '차세대 NFT 표준',
+      description: '차세대 Solana NFT 표준.',
+      sections: {
+        'Introduction': '소개',
+        'SDK': 'SDK',
+        'Features': '기능',
+        'Plugins': '플러그인',
+        'External Plugins': '외부 플러그인',
+        'General': '일반',
+        'JavaScript': 'JavaScript',
+        'Program Concepts': '프로그램 개념',
+        'Anchor': 'Anchor',
+      },
+      links: {
+        'Overview': '개요',
+        'What is an Asset?': '에셋이란?',
+        'JSON Schema': 'JSON 스키마',
+        'Token Metadata Differences': 'Token Metadata 차이점',
+        'Ecosystem Support': '생태계 지원',
+        'Anchor': 'Anchor',
+        'FAQ': '자주 묻는 질문',
+        'Javascript SDK': 'JavaScript SDK',
+        'Rust SDK': 'Rust SDK',
+        'Creating Assets': '에셋 생성',
+        'Fetching Assets': '에셋 가져오기',
+        'Updating Assets': '에셋 업데이트',
+        'Transferring Assets': '에셋 전송',
+        'Burning Assets': '에셋 소각',
+        'Collection Management': '컬렉션 관리',
+        'Execute Asset Signing': '에셋 서명 실행',
+        'Helpers': '헬퍼',
+        'Deserializing Assets': '에셋 역직렬화',
+        'Adding Plugins': '플러그인 추가',
+        'Removing Plugins': '플러그인 제거',
+        'Delegating and Revoking Plugins': '플러그인 위임 및 취소',
+        'Immutability': '불변성',
+        'Soulbound Assets': '소울바운드 에셋',
+        'Print Editions': '프린트 에디션',
+        'Oracle Plugin Example': 'Oracle 플러그인 예제',
+        'Appdata Plugin Example': 'Appdata 플러그인 예제',
       }
     }
   }

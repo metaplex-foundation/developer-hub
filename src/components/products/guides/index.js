@@ -256,10 +256,15 @@ export const guides = {
         'CPI into a Metaplex Program': 'CPI into a Metaplex Program',
         'NextJs Template': 'NextJs Template',
         'MPL-404 Hybrid UI Template': 'MPL-404 Hybrid UI Template',
+        'Bubblegum': 'Bubblegum',
+        'Core': 'Core',
+        'Candy Machine': 'Candy Machine',
+        'Core Candy Machine': 'Core Candy Machine',
+        'MPL-Hybrid / MPL-404': 'MPL-Hybrid / MPL-404',
         'Japanese 日本語': 'Japanese 日本語'
       }
     },
-    jp: {
+    ja: {
       headline: 'Solanaブロックチェーンのガイド',
       description: 'Solanaブロックチェーンのガイド。',
       sections: {
@@ -295,10 +300,15 @@ export const guides = {
         'CPI into a Metaplex Program': 'MetaplexプログラムへのCPI',
         'NextJs Template': 'NextJSテンプレート',
         'MPL-404 Hybrid UI Template': 'MPL-404ハイブリッドUIテンプレート',
+        'Bubblegum': 'Bubblegum',
+        'Core': 'Core',
+        'Candy Machine': 'Candy Machine',
+        'Core Candy Machine': 'Core Candy Machine',
+        'MPL-Hybrid / MPL-404': 'MPL-Hybrid / MPL-404',
         'Japanese 日本語': '日本語'
       }
     },
-    kr: {
+    ko: {
       headline: 'Solana 블록체인 가이드',
       description: 'Solana 블록체인을 위한 가이드.',
       sections: {
@@ -334,6 +344,11 @@ export const guides = {
         'CPI into a Metaplex Program': 'Metaplex 프로그램으로 CPI',
         'NextJs Template': 'NextJS 템플릿',
         'MPL-404 Hybrid UI Template': 'MPL-404 하이브리드 UI 템플릿',
+        'Bubblegum': 'Bubblegum',
+        'Core': 'Core',
+        'Candy Machine': 'Candy Machine',
+        'Core Candy Machine': 'Core Candy Machine',
+        'MPL-Hybrid / MPL-404': 'MPL-Hybrid / MPL-404',
         'Japanese 日本語': '일본어 日本語'
       }
     }

@@ -54,7 +54,7 @@ export const shank = {
         'Macros Reference': 'Macros Reference'
       }
     },
-    jp: {
+    ja: {
       headline: 'SolanaプログラムのIDL抽出',
       description: '属性マクロを使用してRust SolanaプログラムコードからIDLを抽出',
       sections: {
@@ -67,7 +67,7 @@ export const shank = {
         'Macros Reference': 'マクロリファレンス'
       }
     },
-    kr: {
+    ko: {
       headline: 'Solana 프로그램용 IDL 추출',
       description: '속성 매크로를 사용하여 Rust Solana 프로그램 코드에서 IDL을 추출',
       sections: {

@@ -88,7 +88,7 @@ export const inscription = {
         'Inscription Sharding': 'Inscription Sharding'
       }
     },
-    jp: {
+    ja: {
       headline: 'Solanaに刻印されたNFT',
       description: 'Solanaステートにデータを刻印。',
       sections: {
@@ -109,7 +109,7 @@ export const inscription = {
         'Inscription Sharding': 'Inscriptionシャーディング'
       }
     },
-    kr: {
+    ko: {
       headline: 'Solana에 새겨진 NFT',
       description: 'Solana 상태에 데이터를 새기세요.',
       sections: {

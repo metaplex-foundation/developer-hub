@@ -149,7 +149,7 @@ export const bubblegum = {
         'How to Interact with cNFTs on Other SVMs': 'How to Interact with cNFTs on Other SVMs'
       }
     },
-    jp: {
+    ja: {
       headline: '圧縮NFT',
       description: 'スケールするNFT。',
       sections: {
@@ -185,7 +185,7 @@ export const bubblegum = {
         'How to Interact with cNFTs on Other SVMs': '他のSVMでcNFTと相互作用する方法'
       }
     },
-    kr: {
+    ko: {
       headline: '압축 NFT',
       description: '확장 가능한 NFT입니다.',
       sections: {

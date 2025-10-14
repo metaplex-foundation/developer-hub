@@ -23,7 +23,7 @@ export const getProductTranslation = (productKey, locale = 'en') => {
       legacyDocumentation: 'Legacy Documentation',
       guides: 'Guides'
     },
-    jp: {
+    ja: {
       core: 'Core',
       candyMachine: 'Candy Machine',
       coreCandyMachine: 'Core Candy Machine',
@@ -44,6 +44,28 @@ export const getProductTranslation = (productKey, locale = 'en') => {
       aura: 'Aura',
       legacyDocumentation: 'レガシードキュメント',
       guides: 'ガイド'
+    },
+    ko: {
+      core: 'Core',
+      candyMachine: 'Candy Machine',
+      coreCandyMachine: 'Core Candy Machine',
+      tokenMetadata: 'Token Metadata',
+      bubblegum: 'Bubblegum',
+      bubblegumV2: 'Bubblegum V2',
+      mplHybrid: 'MPL Hybrid',
+      tokenAuthRules: 'Token Auth Rules',
+      fusion: 'Fusion',
+      hydra: 'Hydra',
+      inscription: 'Inscription',
+      dasApi: 'DAS API',
+      umi: 'UMI',
+      cli: 'CLI',
+      shank: 'Shank',
+      amman: 'Amman',
+      sugar: 'Sugar',
+      aura: 'Aura',
+      legacyDocumentation: '레거시 문서',
+      guides: '가이드'
     }
   };
 

@@ -47,7 +47,7 @@ export const amman = {
         'Pre-made Configs': 'Pre-made Configs'
       }
     },
-    jp: {
+    ja: {
       headline: 'ローカルバリデーターツールキット',
       description: 'Solanaプログラムとアプリケーションをテストするためのローカルバリデーターツールキット。',
       sections: {
@@ -61,7 +61,7 @@ export const amman = {
         'Pre-made Configs': '事前作成済み設定'
       }
     },
-    kr: {
+    ko: {
       headline: '로컬 밸리데이터 툴킷',
       description: 'Solana 프로그램과 애플리케이션을 테스트하기 위한 로컬 밸리데이터 툴킷입니다.',
       sections: {

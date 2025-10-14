@@ -131,7 +131,7 @@ export const das = {
         'Type Conversion': 'Type Conversion'
       }
     },
-    jp: {
+    ja: {
       headline: 'デジタルアセットデータの取得',
       description: 'オンチェーンデジタルアセットデータにアクセスするDAS APIクライアント',
       sections: {
@@ -181,7 +181,7 @@ export const das = {
         'Type Conversion': '型変換'
       }
     },
-    kr: {
+    ko: {
       headline: '디지털 에셋 데이터 가져오기',
       description: '온체인 디지털 에셋 데이터에 접근하는 DAS API 클라이언트',
       sections: {

@@ -9,7 +9,7 @@ export function usePage(pageProps) {
   const { pathname } = useRouter()
   const { locale, t } = useLocale()
   
-  // Remove locale prefix for product matching (for /jp/core -> core)
+  // Remove locale prefix for product matching (for /ja/core -> core)
   const normalizedPathname = locale !== 'en' && pathname.startsWith(`/${locale}`)
     ? pathname.slice(`/${locale}`.length) || '/'
     : pathname

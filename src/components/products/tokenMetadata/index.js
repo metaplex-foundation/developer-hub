@@ -143,7 +143,7 @@ export const tokenMetadata = {
         'Create an NFT': 'Create an NFT',
       }
     },
-    jp: {
+    ja: {
       headline: 'デジタル所有権標準',
       description: 'SPL Token ProgramでトークンとNFTを作成',
       sections: {
@@ -177,7 +177,7 @@ export const tokenMetadata = {
         'Create an NFT': 'NFTの作成',
       }
     },
-    kr: {
+    ko: {
       headline: '디지털 소유권 표준',
       description: 'SPL Token Program으로 토큰과 NFT를 생성',
       sections: {

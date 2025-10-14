@@ -50,7 +50,7 @@ export const fusion = {
         'Transfer Effects': 'Transfer Effects'
       }
     },
-    jp: {
+    ja: {
       headline: 'NFT内のNFT',
       description: '合成可能なNFTを作成。',
       sections: {
@@ -64,7 +64,7 @@ export const fusion = {
         'Transfer Effects': '転送効果'
       }
     },
-    kr: {
+    ko: {
       headline: 'NFT 안의 NFT',
       description: '구성 가능한 NFT를 만드세요.',
       sections: {

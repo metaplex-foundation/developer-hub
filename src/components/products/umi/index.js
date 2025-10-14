@@ -160,7 +160,7 @@ export const umi = {
         'Transactions': 'Transactions'
       }
     },
-    jp: {
+    ja: {
       headline: 'クライアントラッパー',
       description: 'アプリケーション用のコアプログラムのコレクション。',
       sections: {
@@ -198,7 +198,7 @@ export const umi = {
         'Serializing and Deserializing Transactions': 'トランザクションのシリアライズとデシリアライズ'
       }
     },
-    kr: {
+    ko: {
       headline: '클라이언트 래퍼',
       description: '애플리케이션을 위한 핵심 프로그램 모음집입니다.',
       sections: {

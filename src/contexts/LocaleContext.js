@@ -2,15 +2,15 @@ import { createContext, useContext, useMemo, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import enMessages from '@/locales/en.json'
-import jpMessages from '@/locales/jp.json'
-import krMessages from '@/locales/kr.json'
+import jaMessages from '@/locales/ja.json'
+import koMessages from '@/locales/ko.json'
 
 const LocaleContext = createContext()
 
 const messages = {
   en: enMessages,
-  jp: jpMessages,
-  kr: krMessages,
+  ja: jaMessages,
+  ko: koMessages,
 }
 
 export function LocaleProvider({ children }) {
@@ -27,14 +27,14 @@ export function LocaleProvider({ children }) {
   // Detect locale from pathname, with fallback to client path for 404 pages
   const locale = useMemo(() => {
     let pathToCheck = pathname
-    
+
     // For 404 pages, use different strategies
     if (pathname === '/404') {
       pathToCheck = asPath || clientPath
     }
-    
-    if (pathToCheck.startsWith('/jp')) return 'jp'
-    if (pathToCheck.startsWith('/kr')) return 'kr'
+
+    if (pathToCheck.startsWith('/ja')) return 'ja'
+    if (pathToCheck.startsWith('/ko')) return 'ko'
     return 'en' // Default to English for root paths
   }, [pathname, asPath, clientPath])
 
