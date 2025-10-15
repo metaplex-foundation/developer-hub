@@ -1,14 +1,14 @@
 ---
-title: Core Collection n֗
-metaTitle: Collection n֗ | DAS API Core �5_�
-description: MPL Core Collection n�1��Y
+title: Core コレクションを取得
+metaTitle: コレクションを取得 | DAS API Core 拡張機能
+description: MPL Core コレクションの情報を返します
 ---
 
-����@	�U�_�鰤�����+�MPL Core Collection n�1��W~Y
+メタデータ、オーナー、および解析されたプラグインデータを含む、MPL Core コレクションの情報を返します。
 
-## ��ɋ
+## コード例
 
-`<ENDPOINT>` ��n RPC k`<PublicKey>` n$�֗W_D MPL Core Collection nl�uknM�HfO`UD
+`<ENDPOINT>`を個人のRPCに、`<PublicKey>`値を取得したいMPL Core コレクションの公開鍵に置き換えてください。
 
 ```js
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -24,7 +24,7 @@ console.log(collection);
 ```
 
 
-## ���
+## レスポンス例
 
 ```json
 {

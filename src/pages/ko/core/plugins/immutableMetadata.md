@@ -1,7 +1,7 @@
 ---
 title: ImmutableMetadata Plugin
 metaTitle: ImmutableMetadata | Core
-description: 'ImmutableMetadata' 플러그인은 Core NFT Asset과 Collection의 메타데이터를 불변으로 만듭니다.
+description: ImmutableMetadata 플러그인은 Core NFT Asset과 Collection의 메타데이터를 불변으로 만듭니다.
 ---
 
 immutableMetadata Plugin은 메타데이터(이름과 URI)를 불변으로 만들 수 있는 `Authority Managed` 플러그인입니다. 업데이트 권한에 의해서만 추가될 수 있습니다.

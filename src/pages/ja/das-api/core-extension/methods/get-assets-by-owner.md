@@ -1,14 +1,14 @@
 ---
-title: Owner k�� Core ����n֗
-metaTitle: Owner k�� Core ����n֗ | DAS API Core �5_�
-description: Owner k��Yyfn MPL Core ����n�1��Y
+title: オーナー別にCore アセットを取得
+metaTitle: オーナー別にCore アセットを取得 | DAS API Core 拡張機能
+description: オーナー別にすべてのMPL Core アセットの情報を返します
 ---
 
-�U�_l�uL@	Y�Yyfn MPL Core ����n�1�����@	�U�_�鰤�����쯷��K��U�_����+�f�W~Y
+メタデータ、オーナー、解析されたプラグインデータ、およびコレクションから継承されたデータを含む、指定された公開鍵が所有するすべてのMPL Core アセットの情報を返します。
 
-## ��ɋ
+## コード例
 
-`<ENDPOINT>` ��n RPC k`<PublicKey>` n$�@	nl�uknM�HfO`UD
+`<ENDPOINT>`を個人のRPCに、`<PublicKey>`値をオーナーの公開鍵に置き換えてください。
 
 ```js
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -24,8 +24,8 @@ console.log(assets);
 ```
 
 
-## ���
-Sn�goMk 1 dn�ָ���nL+~�fD~Ypn Core ���Ȓ@	Y�l�un4MkoU�kOn����L+~�~Y
+## レスポンス例
+この例には配列内に1つのオブジェクトのみが含まれています。複数のCore アセットを所有する公開鍵の場合、配列にはより多くのエントリが含まれます。
 
 ```json
 [

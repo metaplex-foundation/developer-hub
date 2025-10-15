@@ -1,14 +1,14 @@
 ---
-title: Get Core Asset
-metaTitle: Get Asset | DAS API Core拡張機能
-description: MPL Coreアセットの情報を返します
+title: Core アセットを取得
+metaTitle: アセットを取得 | DAS API Core 拡張機能
+description: MPL Core アセットの情報を返します
 ---
 
-MPL Coreアセットの情報（例：メタデータ、オーナー、解析されたプラグインデータ、コレクションから継承されたデータを含む）を返します。
+メタデータ、オーナー、解析されたプラグインデータ、およびコレクションから継承されたデータを含む、MPL Core アセットの情報を返します。
 
 ## コード例
 
-`<ENDPOINT>`を個人のRPCに、`<PublicKey>`の値を取得したいNFTの公開キーに置き換えてください。
+`<ENDPOINT>`を個人のRPCに、`<PublicKey>`値を取得したいNFTの公開鍵に置き換えてください。
 
 ```js
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -22,6 +22,7 @@ const assetId = publicKey('<PublicKey>');
 const asset = await das.getAsset(umi, assetId);
 console.log(asset);
 ```
+
 
 ## レスポンス例
 

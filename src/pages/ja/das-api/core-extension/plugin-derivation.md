@@ -1,13 +1,13 @@
 ---
-title: �鰤��
-metaTitle: DAS API Core �5_� - �鰤��
-description: K�g�Y�K����!�Y�
+title: プラグイン派生
+metaTitle: DAS API Core 拡張機能 - プラグイン派生
+description: 手動で派生または自動派生を無効化
 ---
 
-Core DAS �5_�o�鰤�h�U�_�鰤��Մk�gM~YS���hk!�W_�㏊kK�g�W_D4o�n��ɹ����Ly�a~Y
+Core DAS 拡張機能は、プラグインと継承されたプラグインを自動的に派生できます。これを完全に無効化したい場合、または手動で派生したい場合は、次のコードスニペットが役立つかもしれません。
 
-## �鰤��n!�
-Sn����!�W_D4oYyfn�pg!n�Fk `skipDerivePlugins` �(gM~Y:
+## プラグイン派生を無効化
+この自動派生を無効化したい場合、すべての関数で次のように `skipDerivePlugins` を使用できます：
 
 ```js
 const assetsByOwner = await das.getAssetsByOwner(umi, {
@@ -16,8 +16,8 @@ const assetsByOwner = await das.getAssetsByOwner(umi, {
 });
 ```
 
-## K��鰤��
-�Mk�쯷��֗n4mpl-core JavaScript SDK �(Wf����n�鰤�K�g�Y�Sh�gM~Y:
+## 手動プラグイン派生
+以前にコレクションを取得している場合、mpl-core JavaScript SDKを使用して、次のようにアセットのプラグインを手動で派生することもできます：
 
 ```js
 import { deriveAssetPlugins } from '@metaplex-foundation/mpl-core'

@@ -1,14 +1,14 @@
 ---
-title: Authority k�� Core ����n֗
-metaTitle: Authority k�� Core ����n֗ | DAS API Core �5_�
-description: �U�_ Authority �dYyfn MPL Core ����n�1��Y
+title: 権限別にCore アセットを取得
+metaTitle: 権限別にCore アセットを取得 | DAS API Core 拡張機能
+description: 指定された権限を持つすべてのMPL Core アセットの情報を返します
 ---
 
-�U�_ Authority �dYyfn MPL Core ����n�1�����@	�U�_�鰤�����쯷��K��U�_����+�f�W~Y
+メタデータ、オーナー、解析されたプラグインデータ、およびコレクションから継承されたデータを含む、指定された権限を持つすべてのMPL Core アセットの情報を返します。
 
-## ��ɋ
+## コード例
 
-`<ENDPOINT>` ��n RPC k`<PublicKey>` n$� NFT �֗W_D Authority nl�uknM�HfO`UD
+`<ENDPOINT>`を個人のRPCに、`<PublicKey>`値をNFTを取得したい権限の公開鍵に置き換えてください。
 
 ```js
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -23,8 +23,8 @@ console.log(assets);
 ```
 
 
-## ���
-Sn�goMk 1 dn�ָ���nL+~�fD~Ypn Core ����k�Wf Authority �dl�un4MkoU�kOn����L+~�~Y
+## レスポンス例
+この例には配列内に1つのオブジェクトのみが含まれています。複数のCore アセットに対する権限を持つ公開鍵の場合、配列にはより多くのエントリが含まれます。
 
 ```json
 [
