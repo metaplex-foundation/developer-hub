@@ -106,4 +106,90 @@ export const tokenAuthRules = {
       target: '_blank'
     },
   ],
+  localizedNavigation: {
+    en: {
+      headline: 'NFT permissions',
+      description: 'Design custom authorization rules for your NFTs.',
+      sections: {
+        'Introduction': 'Introduction',
+        'Features': 'Features',
+        'Composite Rules': 'Composite Rules',
+        'Primitive Rules': 'Primitive Rules',
+        'Advanced': 'Advanced'
+      },
+      links: {
+        'Overview': 'Overview',
+        'Metaplex Rule Sets': 'Metaplex Rule Sets',
+        'Create or Update Rule Sets': 'Create or Update Rule Sets',
+        'Validating with a Rule Set': 'Validating with a Rule Set',
+        'All': 'All',
+        'Any': 'Any',
+        'Not': 'Not',
+        'Additional Signer': 'Additional Signer',
+        'Amount': 'Amount',
+        'Namespace': 'Namespace',
+        'Pass': 'Pass',
+        'PDA Match': 'PDA Match',
+        'Program Owned': 'Program Owned',
+        'Public Key Match': 'Public Key Match',
+        'Rule Set Buffers': 'Rule Set Buffers'
+      }
+    },
+    ja: {
+      headline: 'NFT権限',
+      description: 'NFTのカスタム認証ルールを設計。',
+      sections: {
+        'Introduction': '紹介',
+        'Features': '機能',
+        'Composite Rules': 'コンポジットルール',
+        'Primitive Rules': 'プリミティブルール',
+        'Advanced': '高度な機能'
+      },
+      links: {
+        'Overview': '概要',
+        'Metaplex Rule Sets': 'Metaplexルールセット',
+        'Create or Update Rule Sets': 'ルールセットの作成・更新',
+        'Validating with a Rule Set': 'ルールセットでの検証',
+        'All': 'All（全て）',
+        'Any': 'Any（いずれか）',
+        'Not': 'Not（否定）',
+        'Additional Signer': '追加署名者',
+        'Amount': '数量',
+        'Namespace': 'ネームスペース',
+        'Pass': 'Pass（通過）',
+        'PDA Match': 'PDAマッチ',
+        'Program Owned': 'プログラム所有',
+        'Public Key Match': '公開鍵マッチ',
+        'Rule Set Buffers': 'ルールセットバッファ'
+      }
+    },
+    ko: {
+      headline: 'NFT 권한',
+      description: 'NFT에 대한 사용자 정의 인증 규칙을 설계하세요.',
+      sections: {
+        'Introduction': '소개',
+        'Features': '기능',
+        'Composite Rules': '복합 규칙',
+        'Primitive Rules': '원시 규칙',
+        'Advanced': '고급 기능'
+      },
+      links: {
+        'Overview': '개요',
+        'Metaplex Rule Sets': 'Metaplex 규칙 세트',
+        'Create or Update Rule Sets': '규칙 세트 생성 또는 업데이트',
+        'Validating with a Rule Set': '규칙 세트로 검증하기',
+        'All': 'All (모두)',
+        'Any': 'Any (임의)',
+        'Not': 'Not (부정)',
+        'Additional Signer': '추가 서명자',
+        'Amount': '수량',
+        'Namespace': '네임스페이스',
+        'Pass': 'Pass (통과)',
+        'PDA Match': 'PDA 매치',
+        'Program Owned': '프로그램 소유',
+        'Public Key Match': '공개 키 매치',
+        'Rule Set Buffers': '규칙 세트 버퍼'
+      }
+    }
+  }
 }

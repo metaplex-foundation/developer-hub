@@ -322,4 +322,99 @@ export const coreCandyMachine = {
       target: '_blank',
     },
   ],
+  localizedNavigation: {
+    en: {
+      headline: 'Core Asset launchpad',
+      description: 'Launch your next MPL Core Asset collection on Solana.',
+      sections: {
+        'Introduction': 'Introduction',
+        'SDK': 'SDK',
+        'Core Candy Machine': 'Core Candy Machine',
+        'Available Guards': 'Available Guards',
+        'Custom Guards': 'Custom Guards',
+        'General': 'General'
+      },
+      links: {
+        'Overview': 'Overview',
+        'Javascript SDK': 'Javascript SDK',
+        'Rust SDK': 'Rust SDK',
+        'Anti-Bot Protection Best Practices': 'Anti-Bot Protection Best Practices',
+        'Candy Guards': 'Candy Guards',
+        'Preparing Assets': 'Preparing Assets',
+        'Creating a Candy Machine': 'Creating a Candy Machine',
+        'Inserting Items': 'Inserting Items',
+        'Updating a Candy Machine and Guards': 'Updating a Candy Machine and Guards',
+        'Guard Groups and Phases': 'Guard Groups and Phases',
+        'Special Guard Instructions': 'Special Guard Instructions',
+        'Fetching a Candy Machine': 'Fetching a Candy Machine',
+        'Minting from a Candy Machine': 'Minting from a Candy Machine',
+        'Withdrawing a Candy Machine': 'Withdrawing a Candy Machine',
+        'Generating Client': 'Generating Client',
+        'Create a Website for minting Assets from your Core Candy Machine': 'Create a Website for minting Assets from your Core Candy Machine',
+        'Create a Core Candy Machine with Hidden Settings': 'Create a Core Candy Machine with Hidden Settings'
+      }
+    },
+    ja: {
+      headline: 'Core Assetローンチパッド',
+      description: 'Solana上で次のMPL Core Assetコレクションを立ち上げましょう。',
+      sections: {
+        'Introduction': '紹介',
+        'SDK': 'SDK',
+        'Core Candy Machine': 'Core Candy Machine',
+        'Available Guards': '利用可能なガード',
+        'Custom Guards': 'カスタムガード',
+        'General': '一般'
+      },
+      links: {
+        'Overview': '概要',
+        'Javascript SDK': 'JavaScript SDK',
+        'Rust SDK': 'Rust SDK',
+        'Anti-Bot Protection Best Practices': 'アンチボット保護のベストプラクティス',
+        'Candy Guards': 'キャンディガード',
+        'Preparing Assets': 'アセットの準備',
+        'Creating a Candy Machine': 'キャンディマシンの作成',
+        'Inserting Items': 'アイテムの挿入',
+        'Updating a Candy Machine and Guards': 'キャンディマシンとガードの更新',
+        'Guard Groups and Phases': 'ガードグループとフェーズ',
+        'Special Guard Instructions': '特別なガード命令',
+        'Fetching a Candy Machine': 'キャンディマシンの取得',
+        'Minting from a Candy Machine': 'キャンディマシンからのミント',
+        'Withdrawing a Candy Machine': 'キャンディマシンの引き出し',
+        'Generating Client': 'クライアントの生成',
+        'Create a Website for minting Assets from your Core Candy Machine': 'Core Candy MachineからアセットをミントするWebサイトの作成',
+        'Create a Core Candy Machine with Hidden Settings': '隠し設定でCore Candy Machineを作成'
+      }
+    },
+    ko: {
+      headline: 'Core Asset 런치패드',
+      description: '솔라나에서 다음 MPL Core Asset 컬렉션을 출시하세요.',
+      sections: {
+        'Introduction': '소개',
+        'SDK': 'SDK',
+        'Core Candy Machine': 'Core Candy Machine',
+        'Available Guards': '사용 가능한 가드',
+        'Custom Guards': '커스텀 가드',
+        'General': '일반'
+      },
+      links: {
+        'Overview': '개요',
+        'Javascript SDK': 'JavaScript SDK',
+        'Rust SDK': 'Rust SDK',
+        'Anti-Bot Protection Best Practices': '안티 봇 보호 베스트 프랙티스',
+        'Candy Guards': '캔디 가드',
+        'Preparing Assets': '자산 준비',
+        'Creating a Candy Machine': '캔디 머신 생성',
+        'Inserting Items': '아이템 삽입',
+        'Updating a Candy Machine and Guards': '캔디 머신 및 가드 업데이트',
+        'Guard Groups and Phases': '가드 그룹 및 단계',
+        'Special Guard Instructions': '특별 가드 명령',
+        'Fetching a Candy Machine': '캔디 머신 가져오기',
+        'Minting from a Candy Machine': '캔디 머신에서 민팅',
+        'Withdrawing a Candy Machine': '캔디 머신 인출',
+        'Generating Client': '클라이언트 생성',
+        'Create a Website for minting Assets from your Core Candy Machine': 'Core Candy Machine에서 자산을 민팅하는 웹사이트 만들기',
+        'Create a Core Candy Machine with Hidden Settings': '숨겨진 설정으로 Core Candy Machine 만들기'
+      }
+    }
+  }
 }

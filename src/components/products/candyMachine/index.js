@@ -205,4 +205,75 @@ export const candyMachine = {
       target: '_blank',
     }
   ],
+  localizedNavigation: {
+    en: {
+      headline: 'TM NFT launchpad',
+      description: 'Launch your next NFT collection on Solana.',
+      sections: {
+        'Introduction': 'Introduction',
+        'Features': 'Features', 
+        'Available Guards': 'Available Guards',
+        'Custom Guards': 'Custom Guards',
+        'Candy Machine Guides': 'Candy Machine Guides'
+      },
+      links: {
+        'Overview': 'Overview',
+        'Getting Started': 'Getting Started',
+        'Candy Machine Settings': 'Candy Machine Settings',
+        'Managing Candy Machines': 'Managing Candy Machines',
+        'Inserting Items': 'Inserting Items',
+        'Candy Guards': 'Candy Guards',
+        'Guard Groups': 'Guard Groups',
+        'Special Guard Instructions': 'Special Guard Instructions',
+        'Minting': 'Minting',
+        'Programmable NFTs': 'Programmable NFTs'
+      }
+    },
+    ja: {
+      headline: 'TM NFTローンチパッド',
+      description: 'Solana上で次のNFTコレクションを立ち上げましょう。',
+      sections: {
+        'Introduction': '紹介',
+        'Features': '機能',
+        'Available Guards': '利用可能なガード',
+        'Custom Guards': 'カスタムガード',
+        'Candy Machine Guides': 'Candy Machineガイド'
+      },
+      links: {
+        'Overview': '概要',
+        'Getting Started': 'はじめに',
+        'Candy Machine Settings': 'Candy Machine設定',
+        'Managing Candy Machines': 'Candy Machineの管理',
+        'Inserting Items': 'アイテムの挿入',
+        'Candy Guards': 'Candy Guards',
+        'Guard Groups': 'ガードグループ',
+        'Special Guard Instructions': '特別ガード指示',
+        'Minting': 'ミンティング',
+        'Programmable NFTs': 'プログラマブルNFT'
+      }
+    },
+    ko: {
+      headline: 'TM NFT 런치패드',
+      description: '솔라나에서 다음 NFT 컬렉션을 출시하세요.',
+      sections: {
+        'Introduction': '소개',
+        'Features': '기능',
+        'Available Guards': '사용 가능한 가드',
+        'Custom Guards': '커스텀 가드',
+        'Candy Machine Guides': 'Candy Machine 가이드'
+      },
+      links: {
+        'Overview': '개요',
+        'Getting Started': '시작하기',
+        'Candy Machine Settings': 'Candy Machine 설정',
+        'Managing Candy Machines': 'Candy Machine 관리',
+        'Inserting Items': '아이템 삽입',
+        'Candy Guards': 'Candy Guards',
+        'Guard Groups': '가드 그룹',
+        'Special Guard Instructions': '특별 가드 지침',
+        'Minting': '민팅',
+        'Programmable NFTs': '프로그래밍 가능한 NFT'
+      }
+    }
+  }
 }
