@@ -5,15 +5,11 @@ import Link from 'next/link'
 import { SwitcherPopover } from './products/SwitcherPopover'
 import { productCategories } from './products/index'
 import { useTranslations, useLocale } from '@/contexts/LocaleContext'
+import { getLocalizedHref } from '@/config/languages'
 
 const NavList = () => {
   const t = useTranslations('header')
   const { locale } = useLocale()
-  
-  const getLocalizedHref = (path) => {
-    if (locale === 'en') return path
-    return `/${locale}${path}`
-  }
 
   const getTranslatedCategory = (category) => {
     const categoryMap = {
@@ -29,7 +25,7 @@ const NavList = () => {
       {productCategories.map((item, index) => {
         if (item === 'Aura') {
           return (
-            <Link href={getLocalizedHref("/aura")} key={index}>
+            <Link href={getLocalizedHref("/aura", locale)} key={index}>
               <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
                 {getTranslatedCategory(item)}
               </div>
@@ -48,7 +44,7 @@ const NavList = () => {
         )
       })}
       <div className="hidden flex-col lg:flex">
-        <Link href={getLocalizedHref("/guides")}>
+        <Link href={getLocalizedHref("/guides", locale)}>
           <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
             {t('guides', 'Guides')}
           </div>

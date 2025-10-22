@@ -124,7 +124,7 @@ Mint Limitガードには以下のミント設定が含まれます：
 
 - **ID**: このガードの一意な識別子。
 
-注意：SDK の助けなしで命令を構築する予定の場合、これらのミント設定およびそれ以外を命令引数と残りのアカウントの組み合わせとして提供する必要があります。詳細については、[Candy GuardのプログラムドキュメントAtion](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#mintlimit)を参照してください。
+注意：SDK の助けなしで命令を構築する予定の場合、これらのミント設定およびそれ以外を命令引数と残りのアカウントの組み合わせとして提供する必要があります。詳細については、[Candy Guardのプログラムドキュメンテーション](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard#mintlimit)を参照してください。
 
 {% dialect-switcher title="Mint Limitガードでミントする" %}
 {% dialect title="JavaScript" id="js" %}

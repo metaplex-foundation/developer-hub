@@ -16,7 +16,7 @@ description: 公開インターフェース実装の概要
 
 | 説明 | メンテナー | リンク |
 | --- | --- | --- |
-| 内部署名者プラグイン | Metaplex | [署名者ドキュメント](/jp/umi/public-keys-and-signers#signers) |
+| 内部署名者プラグイン | Metaplex | [署名者ドキュメント](/ja/umi/public-keys-and-signers#signers) |
 | SolanaのWallet Adaptersを使用 | Metaplex | [GitHub](https://github.com/metaplex-foundation/umi/tree/main/packages/umi-signer-wallet-adapters) / [NPM](https://www.npmjs.com/package/@metaplex-foundation/umi-signer-wallet-adapters) |
 | メッセージ署名から新しい署名者を導出 | Metaplex | [GitHub](https://github.com/metaplex-foundation/umi/tree/main/packages/umi-signer-derived) / [NPM](https://www.npmjs.com/package/@metaplex-foundation/umi-signer-derived) |
 

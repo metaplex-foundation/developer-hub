@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sitemap": "node generate-sitemap.mjs"
+    "sitemap": "node generate-sitemap.mjs",
+    "validate-translations": "node scripts/validate-translations.js"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {

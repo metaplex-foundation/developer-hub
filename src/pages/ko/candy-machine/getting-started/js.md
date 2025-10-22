@@ -26,7 +26,7 @@ import { mplCandyMachine } from '@metaplex-foundation/mpl-candy-machine'
 const umi = createUmi('http://127.0.0.1:8899').use(mplCandyMachine())
 ```
 
-그런 다음 사용할 지갑을 Umi에게 알려주어야 합니다. 이는 [키페어](/kr/umi/connecting-to-umi#connecting-w-a-secret-key) 또는 [Solana 지갑 어댑터](/kr/umi/connecting-to-umi#connecting-w-wallet-adapter)일 수 있습니다.
+그런 다음 사용할 지갑을 Umi에게 알려주어야 합니다. 이는 [키페어](/ko/umi/connecting-to-umi#connecting-w-a-secret-key) 또는 [Solana 지갑 어댑터](/ko/umi/connecting-to-umi#connecting-w-wallet-adapter)일 수 있습니다.
 
 이제 [라이브러리에서 제공하는 다양한 함수](https://mpl-candy-machine.typedoc.metaplex.com/)를 사용하고 `Umi` 인스턴스를 전달하여 NFT와 상호작용할 수 있습니다. 다음은 Candy Machine 계정과 관련된 Candy Guard 계정을 가져오는 예시입니다.
 

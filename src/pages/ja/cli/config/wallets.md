@@ -163,5 +163,5 @@ mplx config wallets set dev1
 
 ## 関連コマンド
 
-- [RPCs](/jp/cli/config/rpcs) - RPCエンドポイントの管理
-- [エクスプローラー](/jp/cli/config/explorer) - 推奨ブロックチェーンエクスプローラーの設定
+- [RPCs](/ja/cli/config/rpcs) - RPCエンドポイントの管理
+- [エクスプローラー](/ja/cli/config/explorer) - 推奨ブロックチェーンエクスプローラーの設定

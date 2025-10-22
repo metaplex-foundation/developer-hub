@@ -4,9 +4,9 @@ metaTitle: JavaScript SDK | MPL-Bubblegum
 description: MPL-Bubblegum JavaScript SDK를 실행하도록 프로젝트를 설정하는 방법을 알아보세요.
 ---
 
-Metaplex는 MPL-Bubblegum 프로그램과 상호 작용하는 데 사용할 수 있는 JavaScript 라이브러리를 제공합니다. [Umi 프레임워크](/kr/umi) 덕분에 많은 의견이 있는 종속성 없이 제공되므로 모든 JavaScript 프로젝트에서 사용할 수 있는 경량 라이브러리를 제공합니다.
+Metaplex는 MPL-Bubblegum 프로그램과 상호 작용하는 데 사용할 수 있는 JavaScript 라이브러리를 제공합니다. [Umi 프레임워크](/ko/umi) 덕분에 많은 의견이 있는 종속성 없이 제공되므로 모든 JavaScript 프로젝트에서 사용할 수 있는 경량 라이브러리를 제공합니다.
 
-시작하려면 [Umi 프레임워크를 설치](/kr/umi/getting-started)하고 MPL-Bubblegum JavaScript 라이브러리를 설치해야 합니다.
+시작하려면 [Umi 프레임워크를 설치](/ko/umi/getting-started)하고 MPL-Bubblegum JavaScript 라이브러리를 설치해야 합니다.
 
 ## 설치
 
@@ -25,7 +25,7 @@ npm install @metaplex-foundation/mpl-bubblegum
 
 ## Umi 설정
 
-아직 `umi` 인스턴스를 설정하고 구성하지 않았다면 [Umi 시작하기](/kr/umi/getting-started) 페이지를 확인할 수 있습니다.
+아직 `umi` 인스턴스를 설정하고 구성하지 않았다면 [Umi 시작하기](/ko/umi/getting-started) 페이지를 확인할 수 있습니다.
 
 `umi` 인스턴스를 초기화하는 동안 다음을 사용하여 MPL-Bubblegum 패키지를 `umi`에 추가할 수 있습니다
 

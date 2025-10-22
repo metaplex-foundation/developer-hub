@@ -4,7 +4,7 @@ metaTitle: 생성, 업데이트, 가져오기 및 삭제 | Candy Machine
 description: Candy Machine을 관리하는 방법을 설명합니다.
 ---
 
-[이전 페이지](/kr/candy-machine/settings)에서 Candy Machine의 다양한 설정을 살펴보았습니다. 이제 이러한 설정을 사용하여 Candy Machine을 생성하고 업데이트하는 방법을 살펴보겠습니다. 또한 기존 Candy Machine을 가져오는 방법과 목적을 달성했을 때 삭제하는 방법에 대해서도 이야기하겠습니다. {% .lead %}
+[이전 페이지](/ko/candy-machine/settings)에서 Candy Machine의 다양한 설정을 살펴보았습니다. 이제 이러한 설정을 사용하여 Candy Machine을 생성하고 업데이트하는 방법을 살펴보겠습니다. 또한 기존 Candy Machine을 가져오는 방법과 목적을 달성했을 때 삭제하는 방법에 대해서도 이야기하겠습니다. {% .lead %}
 
 기본적으로 Candy Machine의 생성, 읽기, 업데이트 및 삭제 단계를 거쳐보겠습니다. 시작해보죠!
 
@@ -12,13 +12,13 @@ description: Candy Machine을 관리하는 방법을 설명합니다.
 
 이전 페이지에서 논의한 설정을 사용하여 새로운 Candy Machine 계정을 생성할 수 있습니다.
 
-우리의 SDK는 이를 한 단계 더 발전시켜 모든 새로운 Candy Machine 계정을 민팅 프로세스에 영향을 주는 모든 활성화된 가드를 추적하는 새로운 Candy Guard 계정과 연결합니다. 이 페이지에서는 Candy Machine 계정에 집중하지만 Candy Guard 계정과 이를 통해 할 수 있는 작업에 대해서는 [전용 페이지](/kr/candy-machine/guards)에서 다루겠습니다.
+우리의 SDK는 이를 한 단계 더 발전시켜 모든 새로운 Candy Machine 계정을 민팅 프로세스에 영향을 주는 모든 활성화된 가드를 추적하는 새로운 Candy Guard 계정과 연결합니다. 이 페이지에서는 Candy Machine 계정에 집중하지만 Candy Guard 계정과 이를 통해 할 수 있는 작업에 대해서는 [전용 페이지](/ko/candy-machine/guards)에서 다루겠습니다.
 
-Candy Machine은 [컬렉션 NFT와 연결되어야 하고](/kr/candy-machine/settings#metaplex-certified-collections) 해당 업데이트 권한이 이 작업을 승인해야 한다는 점을 기억하세요. 아직 Candy Machine용 컬렉션 NFT가 없다면 우리의 SDK가 도움을 줄 수 있습니다.
+Candy Machine은 [컬렉션 NFT와 연결되어야 하고](/ko/candy-machine/settings#metaplex-certified-collections) 해당 업데이트 권한이 이 작업을 승인해야 한다는 점을 기억하세요. 아직 Candy Machine용 컬렉션 NFT가 없다면 우리의 SDK가 도움을 줄 수 있습니다.
 
 {% callout type="note" title="무작위성" %}
 
-자산의 "무작위" 민팅 프로세스가 완전히 예측할 수 없는 것은 아니며 충분한 리소스와 악의적인 의도로 영향을 받을 수 있으므로 공개 메커니즘을 위해 [숨겨진 설정](/kr/candy-machine/settings#hidden-settings)을 활용하는 것이 바람직할 수 있습니다.
+자산의 "무작위" 민팅 프로세스가 완전히 예측할 수 없는 것은 아니며 충분한 리소스와 악의적인 의도로 영향을 받을 수 있으므로 공개 메커니즘을 위해 [숨겨진 설정](/ko/candy-machine/settings#hidden-settings)을 활용하는 것이 바람직할 수 있습니다.
 
 {% /callout %}
 
@@ -97,7 +97,7 @@ API 참조: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/cr
 
 이제 Candy Machine 계정을 생성했으므로 그 안에 어떤 데이터가 저장되는지 살펴보겠습니다.
 
-먼저 계정이 생성될 때 제공된 모든 설정을 저장하고 변경 사항을 추적합니다. 이러한 설정에 대한 자세한 내용은 [이전 페이지](/kr/candy-machine/settings)를 참조하세요.
+먼저 계정이 생성될 때 제공된 모든 설정을 저장하고 변경 사항을 추적합니다. 이러한 설정에 대한 자세한 내용은 [이전 페이지](/ko/candy-machine/settings)를 참조하세요.
 
 또한 다음 속성들을 저장합니다:
 
@@ -105,7 +105,7 @@ API 참조: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/cr
 - **Account Version**. 이 열거형은 Candy Machine의 계정 버전을 추적하는 데 사용됩니다. 사용 가능한 기능과 계정을 해석하는 방법을 결정하는 데 사용됩니다. 이는 Candy Machine 프로그램(Candy Machine Core 및 Candy Guard 프로그램 포함)의 세 번째이자 최신 반복을 의미하는 "Candy Machine V3"과 혼동하지 않도록 주의하세요.
 - **Feature Flags**. 더 많은 기능이 도입됨에 따라 프로그램의 이전 및 이후 호환성을 도와줍니다.
 
-마지막으로 Candy Machine에 삽입된 모든 아이템과 민팅 여부를 저장합니다. 이는 [**숨겨진 설정**](/kr/candy-machine/settings#hidden-settings)은 아이템을 삽입할 수 없으므로 [**구성 라인 설정**](/kr/candy-machine/settings#config-line-settings)을 사용하는 Candy Machine에만 적용됩니다. 이 섹션에는 다음 정보가 포함됩니다:
+마지막으로 Candy Machine에 삽입된 모든 아이템과 민팅 여부를 저장합니다. 이는 [**숨겨진 설정**](/ko/candy-machine/settings#hidden-settings)은 아이템을 삽입할 수 없으므로 [**구성 라인 설정**](/ko/candy-machine/settings#config-line-settings)을 사용하는 Candy Machine에만 적용됩니다. 이 섹션에는 다음 정보가 포함됩니다:
 
 - 로드된 아이템의 수.
 - 삽입되었거나 삽입될 모든 아이템의 목록. 아이템이 아직 삽입되지 않았을 때 해당 위치의 아이템 이름과 URI는 비어 있습니다.
@@ -226,7 +226,7 @@ API 참조: [setCandyMachineAuthority](https://mpl-candy-machine.typedoc.metaple
 
 ## 공유 NFT 데이터 업데이트
 
-Candy Machine의 모든 민팅된 NFT 간에 공유되는 속성도 업데이트할 수 있습니다. [이전 페이지](/kr/candy-machine/settings#settings-shared-by-all-nf-ts)에서 언급했듯이 이러한 속성은: 판매자 수수료 베이시스 포인트, 심볼, 최대 에디션 공급량, 변경 가능 여부 및 창작자입니다.
+Candy Machine의 모든 민팅된 NFT 간에 공유되는 속성도 업데이트할 수 있습니다. [이전 페이지](/ko/candy-machine/settings#settings-shared-by-all-nf-ts)에서 언급했듯이 이러한 속성은: 판매자 수수료 베이시스 포인트, 심볼, 최대 에디션 공급량, 변경 가능 여부 및 창작자입니다.
 
 첫 번째 NFT가 민팅되면 이러한 속성은 더 이상 업데이트할 수 없다는 점에 주목하세요.
 
@@ -423,4 +423,4 @@ API 참조: [deleteCandyMachine](https://mpl-candy-machine.typedoc.metaplex.com/
 
 ## 결론
 
-이제 Candy Machine을 생성, 읽기, 업데이트 및 삭제할 수 있지만 아직 아이템으로 로드하는 방법을 모릅니다. [다음 페이지](/kr/candy-machine/insert-items)에서 이를 다루어보겠습니다!
+이제 Candy Machine을 생성, 읽기, 업데이트 및 삭제할 수 있지만 아직 아이템으로 로드하는 방법을 모릅니다. [다음 페이지](/ko/candy-machine/insert-items)에서 이를 다루어보겠습니다!

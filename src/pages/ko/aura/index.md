@@ -14,4 +14,4 @@ Metaplex Aura는 Solana와 Solana Virtual Machine (SVM)을 확장하는 오픈�
 
 ## 참조 페이지
 
-- [Solana 및 SVM 데이터 읽기](/kr/aura/reading-solana-and-svm-data): Aura 네트워크는 [Metaplex Digital Asset Standard (DAS) API](/kr/das-api)를 사용하여 쿼리할 수 있는 자산 데이터의 데이터 가용성과 분산형 인덱싱을 제공합니다.
+- [Solana 및 SVM 데이터 읽기](/ko/aura/reading-solana-and-svm-data): Aura 네트워크는 [Metaplex Digital Asset Standard (DAS) API](/ko/das-api)를 사용하여 쿼리할 수 있는 자산 데이터의 데이터 가용성과 분산형 인덱싱을 제공합니다.

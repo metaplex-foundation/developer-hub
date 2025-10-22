@@ -8,8 +8,8 @@ description: Amman 로컬 검증자에 대한 고수준 개요를 제공합니�
 
 {% quick-links %}
 
-{% quick-link title="시작하기" icon="InboxArrowDown" href="/kr/amman/getting-started" description="원하는 언어나 라이브러리를 선택하고 필수 프로그램을 시작하세요." /%}
+{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/amman/getting-started" description="원하는 언어나 라이브러리를 선택하고 필수 프로그램을 시작하세요." /%}
 
-{% quick-link title="구성" icon="CodeBracketSquare" href="/kr/amman/pre-made-configs" description="시도하고 수정할 수 있는 미리 만들어진 구성 세트입니다." /%}
+{% quick-link title="구성" icon="CodeBracketSquare" href="/ko/amman/pre-made-configs" description="시도하고 수정할 수 있는 미리 만들어진 구성 세트입니다." /%}
 
 {% /quick-links %}

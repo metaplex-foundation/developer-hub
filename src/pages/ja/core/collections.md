@@ -116,7 +116,7 @@ pub async fn create_collection() {
 
 ### プラグイン付きコレクションの作成
 
-次のスニペットは、[ロイヤリティプラグイン](/jp/core/plugins/royalties)が付加されたコレクションを作成します。[こちら](/jp/core/plugins)で説明されているように、追加のプラグインをアタッチできます。
+次のスニペットは、[ロイヤリティプラグイン](/ja/core/plugins/royalties)が付加されたコレクションを作成します。[こちら](/ja/core/plugins)で説明されているように、追加のプラグインをアタッチできます。
 
 {% dialect-switcher title="プラグイン付きMPL Coreコレクションの作成" %}
 {% dialect title="JavaScript" id="js" %}

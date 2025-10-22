@@ -12,7 +12,7 @@ description: Metaplexチームへの連絡方法。
 
 ## セキュリティの問題
 
-セキュリティの問題を報告するには、[セキュリティ](/jp/security)ページのガイダンスに従ってください。
+セキュリティの問題を報告するには、[セキュリティ](/ja/security)ページのガイダンスに従ってください。
 
 [discord]: https://discord.com/invite/metaplex
 [twitter]: https://twitter.com/metaplex

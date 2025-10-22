@@ -75,9 +75,9 @@ npm i @metaplex-foundation/umi-bundle-tests
 ## Umiの基本
 
 このセクションでは、Umiを使い始めるための基本的な手順を説明します：
-- [Umiの作成とRPCへの接続](/jp/umi/getting-started#connecting-to-an-rpc)
-- [ウォレットの接続](/jp/umi/getting-started#connecting-a-wallet)
-- [プログラムとクライアントの登録](/jp/umi/getting-started#registering-programs-and-clients)
+- [Umiの作成とRPCへの接続](/ja/umi/getting-started#connecting-to-an-rpc)
+- [ウォレットの接続](/ja/umi/getting-started#connecting-a-wallet)
+- [プログラムとクライアントの登録](/ja/umi/getting-started#registering-programs-and-clients)
 
 ### RPCへの接続
 
@@ -171,7 +171,7 @@ umi.use(walletAdapterIdentity(wallet))
 
 **注意**: **Umi**インターフェースは**Signer**の2つのインスタンスを格納します：アプリケーションを使用する**identity**と、トランザクションとストレージ料金を支払う**payer**です。デフォルトでは、`signerIdentity`メソッドは**payer**属性も更新します。なぜなら、ほとんどの場合、identityもpayerであるからです。
 
-詳細については、[Umiコンテキストインターフェースの段落](/jp/umi/interfaces#the-context-interface)をご覧ください。
+詳細については、[Umiコンテキストインターフェースの段落](/ja/umi/interfaces#the-context-interface)をご覧ください。
 
 ### プログラムとクライアントの登録
 

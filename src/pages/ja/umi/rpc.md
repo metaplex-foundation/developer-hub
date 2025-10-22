@@ -55,7 +55,7 @@ const confirmResult = await umi.rpc.confirmTransaction(signature, { strategy });
 const transaction = await umi.rpc.getTransaction(signature);
 ```
 
-トランザクションはSolanaクライアントの重要なコンポーネントなので、[トランザクションの送信](/jp/umi/transactions)ドキュメントページでより詳細に説明します。
+トランザクションはSolanaクライアントの重要なコンポーネントなので、[トランザクションの送信](/ja/umi/transactions)ドキュメントページでより詳細に説明します。
 
 ## アカウントの取得
 

@@ -4,7 +4,7 @@ metaTitle: 압축된 NFT 민팅 | Bubblegum V2
 description: Bubblegum V2에서 압축된 NFT를 민팅하는 방법을 알아보세요.
 ---
 
-[이전 페이지](/kr/bubblegum-v2/create-trees)에서 압축된 NFT를 민팅하려면 Bubblegum 트리가 필요하다는 것을 보았고, 하나를 만드는 방법을 보았습니다. 이제 주어진 Bubblegum 트리에서 압축된 NFT를 민팅하는 방법을 살펴보겠습니다. {% .lead %}
+[이전 페이지](/ko/bubblegum-v2/create-trees)에서 압축된 NFT를 민팅하려면 Bubblegum 트리가 필요하다는 것을 보았고, 하나를 만드는 방법을 보았습니다. 이제 주어진 Bubblegum 트리에서 압축된 NFT를 민팅하는 방법을 살펴보겠습니다. {% .lead %}
 
 Bubblegum 프로그램은 다양한 리프 스키마 버전에 대해 여러 민팅 명령어를 제공합니다. Bubblegum V2는 주어진 컬렉션에 또는 컬렉션 없이 압축된 NFT를 민팅하는 데 사용되는 **mintV2**라는 새로운 민팅 명령어를 도입합니다.
 

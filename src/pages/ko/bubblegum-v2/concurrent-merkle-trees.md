@@ -324,6 +324,6 @@ Bubblegum 압축된 NFT의 경우 리프 노드 해시는 [리프 스키마](htt
 
 cNFT에 사용되는 온체인 머클 트리는 동일한 블록에서 여러 쓰기를 처리할 수 있어야 합니다. 트리에 새로운 cNFT를 민팅하고, cNFT를 전송하고, cNFT를 위임하고, cNFT를 소각하는 등의 여러 트랜잭션이 있을 수 있기 때문입니다. 문제는 온체인 트리에 대한 첫 번째 쓰기가 동일한 블록 내의 다른 쓰기를 위해 전송된 증명을 무효화한다는 것입니다.
 
-이에 대한 해결책은 [spl-account-compression](https://spl.solana.com/account-compression)에서 사용하는 머클 트리가 하나의 머클 루트만 저장하는 것이 아니라 이전 루트들과 이전에 수정된 리프들의 경로에 대한 [`ChangeLog`](https://github.com/solana-labs/solana-program-library/blob/master/libraries/concurrent-merkle-tree/src/changelog.rs#L9)도 저장한다는 것입니다. 새 트랜잭션이 보낸 루트와 증명이 이전 업데이트로 무효화되었더라도 프로그램이 증명을 빨리 감습니다. 사용 가능한 `ChangeLog` 수는 트리를 생성할 때 사용되는 [최대 버퍼 크기](/kr/bubblegum-v2/create-trees#creating-a-bubblegum-tree)에 의해 설정됩니다.
+이에 대한 해결책은 [spl-account-compression](https://spl.solana.com/account-compression)에서 사용하는 머클 트리가 하나의 머클 루트만 저장하는 것이 아니라 이전 루트들과 이전에 수정된 리프들의 경로에 대한 [`ChangeLog`](https://github.com/solana-labs/solana-program-library/blob/master/libraries/concurrent-merkle-tree/src/changelog.rs#L9)도 저장한다는 것입니다. 새 트랜잭션이 보낸 루트와 증명이 이전 업데이트로 무효화되었더라도 프로그램이 증명을 빨리 감습니다. 사용 가능한 `ChangeLog` 수는 트리를 생성할 때 사용되는 [최대 버퍼 크기](/ko/bubblegum-v2/create-trees#creating-a-bubblegum-tree)에 의해 설정됩니다.
 
 또한 머클 트리의 가장 오른쪽 증명이 온체인에 저장됩니다. 이를 통해 증명을 보낼 필요 없이 트리에 추가할 수 있습니다. 이것이 바로 Bubblegum이 증명 없이 새로운 cNFT를 민팅할 수 있는 방법입니다.

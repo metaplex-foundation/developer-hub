@@ -328,4 +328,4 @@ sugar guard show
 - Metaplex Candy Machine SDK - [https://developers.metaplex.com/candy-machine](https://developers.metaplex.com/candy-machine)
 
 ### 추가 읽을거리
-- [Sugar CLI 문서](/kr/candy-machine/sugar)
+- [Sugar CLI 문서](/ko/candy-machine/sugar)

@@ -12,7 +12,7 @@ tableOfContents: false
 | 名前            | 必須 | 説明                                |
 | --------------- | :------: | ------------------------------------------ |
 | `id`            |    ✅    | アセットのID。                       |
-| `options`       |          | 表示オプションオブジェクト。詳細は[表示オプション](/jp/das-api/display-options)を参照してください。 |
+| `options`       |          | 表示オプションオブジェクト。詳細は[表示オプション](/ja/das-api/display-options)を参照してください。 |
 
 ## Playground
 

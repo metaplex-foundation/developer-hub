@@ -63,6 +63,6 @@ Fusionは制約モデルアカウントの`schema`フィールドを活用して
 
 ### Trifleのセットアップ
 
-最後に、制約モデルとTrifleアカウントを[これらの手順](/jp/fusion/getting-started)に従ってセットアップする必要があります。
+最後に、制約モデルとTrifleアカウントを[これらの手順](/ja/fusion/getting-started)に従ってセットアップする必要があります。
 
 上記の手順の後、Fusion Parentは`transfer_in`または`transfer_out`操作の度に再レンダリングされるはずです。

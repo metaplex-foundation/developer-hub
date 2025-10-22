@@ -61,6 +61,6 @@ Signature: 2xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU
 
 ## 関連コマンド
 
-- [トークン作成](/jp/cli/toolbox/token-create) - 新しいトークンを作成
-- [残高確認](/jp/cli/toolbox/sol-balance) - トークン残高を確認
-- [SOL転送](/jp/cli/toolbox/sol-transfer) - アドレス間でSOLを転送
+- [トークン作成](/ja/cli/toolbox/token-create) - 新しいトークンを作成
+- [残高確認](/ja/cli/toolbox/sol-balance) - トークン残高を確認
+- [SOL転送](/ja/cli/toolbox/sol-transfer) - アドレス間でSOLを転送

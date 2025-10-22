@@ -10,28 +10,28 @@ DAS APIガイドへようこそ！これらの実践的な例は、Solana上の�
 
 ## はじめに
 
-- [DAS APIをはじめる](/jp/das-api/getting-started) - DAS APIの使用の基本を学習
-- [表示オプション](/jp/das-api/display-options) - レスポンスデータの制御方法を理解
-- [ページネーション](/jp/das-api/guides/pagination) - 大規模なデータセットを効率的にページネーションする方法を学習
+- [DAS APIをはじめる](/ja/das-api/getting-started) - DAS APIの使用の基本を学習
+- [表示オプション](/ja/das-api/display-options) - レスポンスデータの制御方法を理解
+- [ページネーション](/ja/das-api/guides/pagination) - 大規模なデータセットを効率的にページネーションする方法を学習
 
 ## 一般的な使用例
 
 ### アセット発見
-- [特定のトークンの保有者を見つける](/jp/das-api/guides/find-token-holders) - 特定のトークンを保有するすべてのウォレットを発見
-- [コレクション内のすべてのトークンを取得](/jp/das-api/guides/get-collection-nfts) - 特定のコレクションに属するすべてのアセットを取得
+- [特定のトークンの保有者を見つける](/ja/das-api/guides/find-token-holders) - 特定のトークンを保有するすべてのウォレットを発見
+- [コレクション内のすべてのトークンを取得](/ja/das-api/guides/get-collection-nfts) - 特定のコレクションに属するすべてのアセットを取得
 
 ### ウォレット分析
-- [ウォレット内のすべてのトークンを取得](/jp/das-api/guides/get-wallet-tokens) - ウォレットが所有するすべてを表示
-- [オーナー別にファンジブルアセットを取得](/jp/das-api/guides/get-fungible-assets) - ウォレット内のすべてのファンジブルトークンを見つける
-- [オーナー別にNFTを取得](/jp/das-api/guides/get-nfts-by-owner) - ウォレットからノンファンジブルトークンのみを取得
+- [ウォレット内のすべてのトークンを取得](/ja/das-api/guides/get-wallet-tokens) - ウォレットが所有するすべてを表示
+- [オーナー別にファンジブルアセットを取得](/ja/das-api/guides/get-fungible-assets) - ウォレット内のすべてのファンジブルトークンを見つける
+- [オーナー別にNFTを取得](/ja/das-api/guides/get-nfts-by-owner) - ウォレットからノンファンジブルトークンのみを取得
 
 ### 高度なクエリ
-- [複数の条件でアセットを検索](/jp/das-api/guides/search-by-criteria) - 複数のフィルターを組み合わせて特定のアセットを見つける
-- [オーナーとコレクションでアセットを取得](/jp/das-api/guides/owner-and-collection) - ウォレットが所有する特定コレクションのトークンを見つける
-- [圧縮NFTを見つける](/jp/das-api/guides/find-compressed-nfts) - 圧縮NFTとその証明を発見
+- [複数の条件でアセットを検索](/ja/das-api/guides/search-by-criteria) - 複数のフィルターを組み合わせて特定のアセットを見つける
+- [オーナーとコレクションでアセットを取得](/ja/das-api/guides/owner-and-collection) - ウォレットが所有する特定コレクションのトークンを見つける
+- [圧縮NFTを見つける](/ja/das-api/guides/find-compressed-nfts) - 圧縮NFTとその証明を発見
 
 ### コレクション管理
-- [コレクション統計の分析](/jp/das-api/guides/collection-statistics) - コレクションの分布と所有権に関するインサイトを取得
+- [コレクション統計の分析](/ja/das-api/guides/collection-statistics) - コレクションの分布と所有権に関するインサイトを取得
 
 ## コード例
 
@@ -43,7 +43,7 @@ DAS APIガイドへようこそ！これらの実践的な例は、Solana上の�
 ## ヘルプが必要ですか？
 
 お探しのものが見つからない場合は、こちらをご確認ください：
-- [APIメソッド](/jp/das-api/methods) - 完全なメソッドリファレンス
-- [Core拡張機能](/jp/das-api/core-extension) - 高度なSDK機能
+- [APIメソッド](/ja/das-api/methods) - 完全なメソッドリファレンス
+- [Core拡張機能](/ja/das-api/core-extension) - 高度なSDK機能
 - [DAS API UMI typedoc](https://digital-asset-standard-api-js-docs.vercel.app) - DAS API用のUMI typedoc
 - [GitHubリポジトリ](https://github.com/metaplex-foundation/digital-asset-standard-api) - ソースコードとイシュー

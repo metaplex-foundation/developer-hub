@@ -80,3 +80,34 @@ export const SUPPORTED_LANGUAGES = Object.keys(LANGUAGES)
 
 // Get default language
 export const DEFAULT_LANGUAGE = Object.values(LANGUAGES).find(lang => lang.isDefault)
+
+/**
+ * Get localized href for a given path and locale
+ *
+ * @param {string} path - The path to localize (can be internal or external URL)
+ * @param {string} locale - The locale code (e.g., 'en', 'ja', 'ko')
+ * @returns {string} The localized path
+ *
+ * @example
+ * getLocalizedHref('/docs', 'en') // '/docs'
+ * getLocalizedHref('/docs', 'ja') // '/ja/docs'
+ * getLocalizedHref('docs', 'ko') // '/ko/docs' (normalized with leading slash)
+ * getLocalizedHref('https://example.com', 'ja') // 'https://example.com' (external URLs unchanged)
+ */
+export function getLocalizedHref(path, locale) {
+  // Handle external URLs - don't add locale prefix
+  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('//')) {
+    return path
+  }
+
+  // Normalize internal paths to ensure leading slash
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+
+  // For English (default locale), return normalized path without locale prefix
+  if (locale === 'en') {
+    return normalizedPath
+  }
+
+  // For other locales, prefix with /{locale}
+  return `/${locale}${normalizedPath}`
+}

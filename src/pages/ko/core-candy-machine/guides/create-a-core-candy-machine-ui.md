@@ -14,7 +14,7 @@ UI 요소와 지갑 통합을 포함한 전체 웹사이트 구현을 원한다�
 
 ## 전제조건
 
-- 이미 생성된 Candy Machine. 생성 방법에 대한 자세한 정보는 [여기](https://developers.metaplex.com/kr/core-candy-machine/create)에서 찾을 수 있습니다.
+- 이미 생성된 Candy Machine. 생성 방법에 대한 자세한 정보는 [여기](https://developers.metaplex.com/ko/core-candy-machine/create)에서 찾을 수 있습니다.
 - 웹 개발과 선택한 프레임워크에 대한 기본적인 숙련도. umi와의 최고 호환성을 위해 Next JS를 권장합니다.
 
 ## 필수 패키지
@@ -37,7 +37,7 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 - Asset의 가격
 - 기타
 
-사용자에게 표시되지 않지만 백그라운드 계산에 사용되는 추가 데이터를 가져오는 것도 의미가 있을 수 있습니다. 예를 들어, [Redeemed Amount](/kr/core-candy-machine/guards/redeemed-amount) Guard를 사용할 때, 사용자가 더 민팅할 수 있는지 확인하기 위해 이미 교환된 수량을 가져올 것입니다.
+사용자에게 표시되지 않지만 백그라운드 계산에 사용되는 추가 데이터를 가져오는 것도 의미가 있을 수 있습니다. 예를 들어, [Redeemed Amount](/ko/core-candy-machine/guards/redeemed-amount) Guard를 사용할 때, 사용자가 더 민팅할 수 있는지 확인하기 위해 이미 교환된 수량을 가져올 것입니다.
 
 ### Candy Machine 데이터 가져오기
 Candy Machine 계정에는 사용 가능한 Asset과 교환된 Asset의 수와 같은 데이터가 저장됩니다. 또한 일반적으로 Candy Guard의 주소인 `mintAuthority`도 저장합니다.
@@ -149,7 +149,7 @@ const availableString = `${candyMachine.itemsAvailable - candyMachine.itemsRedee
 ```
 
 ### Candy Guard 데이터 가져오기
-Candy Guard는 민팅을 허용하기 위해 충족해야 하는 조건을 포함합니다. 예를 들어 Sol 또는 Token 지불이 발생하거나, 하나의 지갑이 민팅할 수 있는 Asset 수를 제한하는 등이 있습니다. Candy Guard에 대한 자세한 정보는 [Candy Guard 페이지](/kr/core-candy-machine/guards)에서 찾을 수 있습니다.
+Candy Guard는 민팅을 허용하기 위해 충족해야 하는 조건을 포함합니다. 예를 들어 Sol 또는 Token 지불이 발생하거나, 하나의 지갑이 민팅할 수 있는 Asset 수를 제한하는 등이 있습니다. Candy Guard에 대한 자세한 정보는 [Candy Guard 페이지](/ko/core-candy-machine/guards)에서 찾을 수 있습니다.
 
 Candy Machine 데이터와 마찬가지로 guard 계정을 가져오는 것이 필수는 아닙니다. 그렇게 하면 Candy Guard에서 SOL 가격만 업데이트하고 웹사이트의 숫자도 자동으로 업데이트하는 등 더 많은 유연성을 허용할 수 있습니다.
 
@@ -168,7 +168,7 @@ const candyGuard = await safeFetchCandyGuard(umi, candyMachine.mintAuthority);
 
 {% totem-accordion title="Candy Guard Data" %}
 {% totem-prose %}
-이 객체에서 UI에 가장 중요한 필드는 `guards` 객체입니다. 항상 적용되는 `default` guard를 포함합니다. `guards.groups`는 다른 [Guard Groups](/kr/core-candy-machine/guard-groups)를 포함합니다.
+이 객체에서 UI에 가장 중요한 필드는 `guards` 객체입니다. 항상 적용되는 `default` guard를 포함합니다. `guards.groups`는 다른 [Guard Groups](/ko/core-candy-machine/guard-groups)를 포함합니다.
 {% /totem-prose %}
 
 ```json
@@ -430,7 +430,7 @@ const candyGuard = await safeFetchCandyGuard(umi, candyMachine.mintAuthority);
 구현하려는 Guard의 선택에 따라 추가 계정을 가져와야 할 수 있습니다. 예를 들어, 지갑의 민팅 자격을 확인하고 `mintLimit` Guard를 사용하고 있다면, `mintCounter` 계정을 검색해야 합니다. 이 계정은 특정 guard 하에서 특정 지갑이 이미 민팅한 NFT 수를 기록합니다.
 
 #### `MintLimit` 계정
-[`MintLimit`](/kr/core-candy-machine/guards/mint-limit) guard가 활성화되면, 사용자 지갑에 대한 `MintCounter` 계정을 검색하는 것이 좋습니다. 이를 통해 사용자가 민팅 한도에 도달했는지 또는 여전히 추가 아이템을 민팅할 자격이 있는지 확인할 수 있습니다.
+[`MintLimit`](/ko/core-candy-machine/guards/mint-limit) guard가 활성화되면, 사용자 지갑에 대한 `MintCounter` 계정을 검색하는 것이 좋습니다. 이를 통해 사용자가 민팅 한도에 도달했는지 또는 여전히 추가 아이템을 민팅할 자격이 있는지 확인할 수 있습니다.
 
 다음 코드 조각은 `MintCounter`를 가져오는 방법을 보여줍니다. 이 예제는 Candy Machine과 Candy Guard 데이터를 이미 얻었다고 가정합니다:
 
@@ -446,7 +446,7 @@ const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
 ```
 
 #### `NftMintLimit` 계정
-`MintLimit` guard와 마찬가지로 [`NftMintLimit`](/kr/core-candy-machine/guards/nft-mint-limit) guard의 `NftMintCounter` 계정을 가져와 자격을 확인하는 것이 의미가 있을 수 있습니다.
+`MintLimit` guard와 마찬가지로 [`NftMintLimit`](/ko/core-candy-machine/guards/nft-mint-limit) guard의 `NftMintCounter` 계정을 가져와 자격을 확인하는 것이 의미가 있을 수 있습니다.
 
 다음 코드 조각은 `NftMintCounter` 계정을 가져오는 방법을 보여줍니다. 이 예제는 Candy Machine과 Candy Guard 데이터를 이미 얻었다고 가정합니다:
 
@@ -467,7 +467,7 @@ const nftMintCounter = fetchNftMintCounter(umi, pda)
 ```
 
 #### `AssetMintLimit` 계정
-`NftMintCounter` guard와 마찬가지로 [`AssetMintLimit`](/kr/core-candy-machine/guards/asset-mint-limit) guard의 `AssetMintCounter` 계정을 가져와 자격을 확인하는 것이 의미가 있을 수 있습니다.
+`NftMintCounter` guard와 마찬가지로 [`AssetMintLimit`](/ko/core-candy-machine/guards/asset-mint-limit) guard의 `AssetMintCounter` 계정을 가져와 자격을 확인하는 것이 의미가 있을 수 있습니다.
 
 다음 코드 조각은 `AssetMintCounter` 계정을 가져오는 방법을 보여줍니다. 이 예제는 Candy Machine 데이터를 이미 얻었다고 가정합니다:
 
@@ -540,7 +540,7 @@ const account = await umi.rpc.getAccount(umi.identity.publicKey);
 const solBalance = account.lamports;
 ```
 
-토큰이나 NFT를 요구하는 guard 중 하나를 사용하고 있다면 이것들도 가져오고 싶을 것입니다. 이를 위해 [DAS API](/kr/das-api/methods/get-asset-by-owner)를 사용하는 것을 권장합니다. DAS는 RPC 제공자가 유지관리하는 Token의 인덱스입니다. 이를 사용하면 하나의 호출로 모든 필요한 정보를 가져올 수 있습니다. UI에서는 반환된 객체를 사용하여 연결된 지갑이 필요한 토큰이나 NFT를 소유하고 있는지 확인할 수 있습니다.
+토큰이나 NFT를 요구하는 guard 중 하나를 사용하고 있다면 이것들도 가져오고 싶을 것입니다. 이를 위해 [DAS API](/ko/das-api/methods/get-asset-by-owner)를 사용하는 것을 권장합니다. DAS는 RPC 제공자가 유지관리하는 Token의 인덱스입니다. 이를 사용하면 하나의 호출로 모든 필요한 정보를 가져올 수 있습니다. UI에서는 반환된 객체를 사용하여 연결된 지갑이 필요한 토큰이나 NFT를 소유하고 있는지 확인할 수 있습니다.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
@@ -633,12 +633,12 @@ if (mintLimit){
 {% /callout %}
 
 일부 Guard는 전체 Candy Machine에 대해 한 번만 route를 실행하면 됩니다. 이러한 경우 UI에 함수를 포함할 필요는 없지만 스크립트를 통해 미리 한 번 실행할 수 있습니다:
-- [Allocation](/kr/core-candy-machine/guards/allocation)
-- [FreezeSolPayment](/kr/core-candy-machine/guards/freeze-sol-payment)
-- [FreezeTokenPayment](/kr/core-candy-machine/guards/freeze-token-payment)
+- [Allocation](/ko/core-candy-machine/guards/allocation)
+- [FreezeSolPayment](/ko/core-candy-machine/guards/freeze-sol-payment)
+- [FreezeTokenPayment](/ko/core-candy-machine/guards/freeze-token-payment)
 
 다른 Guard는 각 개별 지갑에 대해 route를 실행해야 합니다. 이러한 경우 민팅 트랜잭션 이전에 route 명령을 실행해야 합니다:
-- [Allowlist](/kr/core-candy-machine/guards/allow-list)
+- [Allowlist](/ko/core-candy-machine/guards/allow-list)
 
 Guard route 구현 예시로 **Allowlist** guard의 경우를 고려해보겠습니다. 이는 앞서 설명한 대로 `allowListProof`가 가져와졌고, `allowlist`가 적격한 지갑 주소의 배열을 나타낸다고 가정합니다. 다음 코드는 구현에서 이 시나리오를 처리하는 방법을 보여줍니다.
 
@@ -698,7 +698,7 @@ if (mintLimit) {
 }
 ```
 
-모든 Guard가 추가 `mintArgs`를 전달해야 하는 것은 아닙니다. 이것이 위 코드 조각에 `startDate`가 없는 이유입니다. 사용하는 guard가 `mintArgs`를 전달해야 하는지 이해하려면 [Developer Hub](/kr/core-candy-machine) Guard 페이지를 확인하는 것이 권장됩니다. "Mint Settings"이 설명되어 있으면 이 guard에 대해 `mintArgs`를 전달해야 합니다.
+모든 Guard가 추가 `mintArgs`를 전달해야 하는 것은 아닙니다. 이것이 위 코드 조각에 `startDate`가 없는 이유입니다. 사용하는 guard가 `mintArgs`를 전달해야 하는지 이해하려면 [Developer Hub](/ko/core-candy-machine) Guard 페이지를 확인하는 것이 권장됩니다. "Mint Settings"이 설명되어 있으면 이 guard에 대해 `mintArgs`를 전달해야 합니다.
 
 이제 `mintArgs`가 구축되었으므로 민팅 함수 자체를 호출하는 방법을 살펴보겠습니다. 다음 코드 조각은 위에서 설명한 대로 `candyMachine`과 `candyGuard`가 가져와졌다고 가정합니다. 기술적으로 `candyMachine`, `collection`, `candyGuard`의 publicKey와 모든 `mintArgs`는 가져오기를 원하지 않는 경우 수동으로 전달할 수도 있습니다.
 
@@ -725,7 +725,7 @@ console.log(`NFT ${nftMint.publicKey} minted!`)
 
 효율성을 위해 사용자가 단일 트랜잭션에서 여러 NFT를 민팅할 수 있도록 하고 싶을 수 있습니다. 이를 달성하는 방법은 다음과 같습니다:
 
-특정 설정에 따라 [Transaction Builders](/kr/umi/transactions#transaction-builders)를 결합하여 하나의 트랜잭션에서 여러 NFT를 민팅할 수 있도록 하는 것이 도움이 될 수 있습니다.
+특정 설정에 따라 [Transaction Builders](/ko/umi/transactions#transaction-builders)를 결합하여 하나의 트랜잭션에서 여러 NFT를 민팅할 수 있도록 하는 것이 도움이 될 수 있습니다.
 
 ```ts
 let builder = transactionBuilder()
@@ -733,7 +733,7 @@ let builder = transactionBuilder()
   .add(mintV1(...))
 ```
 
-트랜잭션에 너무 많은 `mintV1` 명령을 추가하면 `Transaction too large` 오류가 발생합니다. [`builder.fitsInOneTransaction(umi)`](/kr/umi/transactions#transaction-builders) 함수를 사용하면 트랜잭션을 보내기 전에 이를 확인할 수 있어 필요한 경우 트랜잭션을 분할할 수 있습니다. 분할이 필요한 경우 [`signAllTransactions`](/kr/umi/transactions#building-and-signing-transactions)를 사용하는 것이 권장되므로 Wallet Adapter에서 하나의 팝업만 승인하면 됩니다.
+트랜잭션에 너무 많은 `mintV1` 명령을 추가하면 `Transaction too large` 오류가 발생합니다. [`builder.fitsInOneTransaction(umi)`](/ko/umi/transactions#transaction-builders) 함수를 사용하면 트랜잭션을 보내기 전에 이를 확인할 수 있어 필요한 경우 트랜잭션을 분할할 수 있습니다. 분할이 필요한 경우 [`signAllTransactions`](/ko/umi/transactions#building-and-signing-transactions)를 사용하는 것이 권장되므로 Wallet Adapter에서 하나의 팝업만 승인하면 됩니다.
 
 ### Guard Groups
 

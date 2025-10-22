@@ -8,7 +8,7 @@ description: Candy Machine에서 민팅하는 방법과 민팅 전 요구사항�
 
 ## 기본 민팅
 
-[Candy Guards 페이지](/kr/candy-machine/guards#why-another-program)에서 언급했듯이 Candy Machine에서 NFT를 민팅하는 데 책임이 있는 두 가지 프로그램이 있습니다: NFT 민팅을 담당하는 Candy Machine Core 프로그램과 그 위에 구성 가능한 액세스 제어 계층을 추가하고 커스텀 가드를 제공하기 위해 포크될 수 있는 Candy Guard 프로그램입니다.
+[Candy Guards 페이지](/ko/candy-machine/guards#why-another-program)에서 언급했듯이 Candy Machine에서 NFT를 민팅하는 데 책임이 있는 두 가지 프로그램이 있습니다: NFT 민팅을 담당하는 Candy Machine Core 프로그램과 그 위에 구성 가능한 액세스 제어 계층을 추가하고 커스텀 가드를 제공하기 위해 포크될 수 있는 Candy Guard 프로그램입니다.
 
 따라서 Candy Machine에서 민팅하는 두 가지 방법이 있습니다:
 
@@ -237,7 +237,7 @@ API 참조: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mi
 
 {% /diagram %}
 
-[사용 가능한 각 가드](/kr/candy-machine/guards)에는 자체 문서 페이지가 있으며 해당 가드가 민팅할 때 민팅 설정을 제공해야 하는지 여부를 알려줍니다.
+[사용 가능한 각 가드](/ko/candy-machine/guards)에는 자체 문서 페이지가 있으며 해당 가드가 민팅할 때 민팅 설정을 제공해야 하는지 여부를 알려줍니다.
 
 민팅 설정이 필요하지 않은 가드만 사용하는 경우 위의 "기본 민팅" 섹션에서 설명한 것과 같은 방식으로 민팅할 수 있습니다. 그렇지 않으면 필요한 모든 가드의 민팅 설정이 포함된 추가 객체 속성을 제공해야 합니다. SDK를 사용하여 실제로 어떻게 보이는지 살펴보겠습니다.
 
@@ -456,9 +456,9 @@ API 참조: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mi
 
 ### 라우트 명령어 사용
 
-가드가 사전 검증 단계를 요구할 수 있는 한 가지 방법은 "route" 명령어를 통해 [자체 특수 명령어](/kr/candy-machine/guard-route)를 사용하는 것입니다.
+가드가 사전 검증 단계를 요구할 수 있는 한 가지 방법은 "route" 명령어를 통해 [자체 특수 명령어](/ko/candy-machine/guard-route)를 사용하는 것입니다.
 
-좋은 예는 **Allow List** 가드입니다. 이 가드를 사용할 때 route 명령어를 호출하고 유효한 머클 증명을 제공하여 우리의 지갑이 사전 정의된 지갑 목록에 속한다는 것을 검증해야 합니다. 이 route 명령어가 성공하면 해당 지갑에 대한 Allow List PDA가 생성되며, 민팅 명령어가 이를 읽어 Allow List 가드를 검증할 수 있습니다. [Allow List 가드에 대한 자세한 내용은 전용 페이지를 참조하세요](/kr/candy-machine/guards/allow-list).
+좋은 예는 **Allow List** 가드입니다. 이 가드를 사용할 때 route 명령어를 호출하고 유효한 머클 증명을 제공하여 우리의 지갑이 사전 정의된 지갑 목록에 속한다는 것을 검증해야 합니다. 이 route 명령어가 성공하면 해당 지갑에 대한 Allow List PDA가 생성되며, 민팅 명령어가 이를 읽어 Allow List 가드를 검증할 수 있습니다. [Allow List 가드에 대한 자세한 내용은 전용 페이지를 참조하세요](/ko/candy-machine/guards/allow-list).
 
 {% diagram %}
 
@@ -511,7 +511,7 @@ API 참조: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mi
 
 가드가 해당 사전 검증 단계를 수행할 수 있는 또 다른 방법은 외부 솔루션에 의존하는 것입니다.
 
-예를 들어 **Gatekeeper** 가드를 사용할 때 구성된 게이트키퍼 네트워크에 따라 Captcha 완료와 같은 도전을 수행하여 게이트웨이 토큰을 요청해야 합니다. 그러면 Gatekeeper 가드는 해당 게이트웨이 토큰의 존재를 확인하여 민팅을 검증하거나 거부합니다. [Gatekeeper 가드에 대한 자세한 내용은 전용 페이지를 참조하세요](/kr/candy-machine/guards/gatekeeper).
+예를 들어 **Gatekeeper** 가드를 사용할 때 구성된 게이트키퍼 네트워크에 따라 Captcha 완료와 같은 도전을 수행하여 게이트웨이 토큰을 요청해야 합니다. 그러면 Gatekeeper 가드는 해당 게이트웨이 토큰의 존재를 확인하여 민팅을 검증하거나 거부합니다. [Gatekeeper 가드에 대한 자세한 내용은 전용 페이지를 참조하세요](/ko/candy-machine/guards/gatekeeper).
 
 {% diagram %}
 
@@ -567,7 +567,7 @@ API 참조: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mi
 
 Candy Machine에 포함하고 싶어할 가능성이 높은 가드 중 하나는 실패한 민팅에 구성 가능한 SOL 금액을 청구하여 봇으로부터 Candy Machine을 보호하는 Bot Tax 가드입니다. 이 금액은 일반적으로 실제 사용자의 진정한 실수에는 영향을 주지 않으면서 봇을 해치기 위해 작게 설정됩니다. 모든 봇 세금은 Candy Machine 계정으로 전송되므로 민팅이 끝나면 Candy Machine 계정을 삭제하여 이 자금에 액세스할 수 있습니다.
 
-이 가드는 조금 특별하며 다른 모든 가드의 민팅 동작에 영향을 줍니다. Bot Tax가 활성화되고 다른 가드가 민팅 검증에 실패하면 **트랜잭션이 성공한 것처럼 가장합니다**. 즉, 프로그램에서 오류가 반환되지 않지만 NFT도 민팅되지 않습니다. 이는 자금이 봇에서 Candy Machine 계정으로 전송되려면 트랜잭션이 성공해야 하기 때문입니다. [Bot Tax 가드에 대한 자세한 내용은 전용 페이지를 참조하세요](/kr/candy-machine/guards/bot-tax).
+이 가드는 조금 특별하며 다른 모든 가드의 민팅 동작에 영향을 줍니다. Bot Tax가 활성화되고 다른 가드가 민팅 검증에 실패하면 **트랜잭션이 성공한 것처럼 가장합니다**. 즉, 프로그램에서 오류가 반환되지 않지만 NFT도 민팅되지 않습니다. 이는 자금이 봇에서 Candy Machine 계정으로 전송되려면 트랜잭션이 성공해야 하기 때문입니다. [Bot Tax 가드에 대한 자세한 내용은 전용 페이지를 참조하세요](/ko/candy-machine/guards/bot-tax).
 
 ## 결론
 
@@ -575,5 +575,5 @@ Candy Machine에 포함하고 싶어할 가능성이 높은 가드 중 하나는
 
 관심이 있을 수 있는 추가 읽기 자료는 다음과 같습니다:
 
-- [사용 가능한 모든 가드](/kr/candy-machine/guards): 사용할 수 있는 모든 가드를 살펴보고 필요한 것을 선별하세요.
-- [첫 번째 Candy Machine 만들기](/kr/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine): 이 가이드는 자산을 업로드하고 "[Sugar](/kr/candy-machine/sugar)"라는 CLI 도구를 사용하여 처음부터 새로운 Candy Machine을 만드는 데 도움을 줍니다.
+- [사용 가능한 모든 가드](/ko/candy-machine/guards): 사용할 수 있는 모든 가드를 살펴보고 필요한 것을 선별하세요.
+- [첫 번째 Candy Machine 만들기](/ko/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine): 이 가이드는 자산을 업로드하고 "[Sugar](/ko/candy-machine/sugar)"라는 CLI 도구를 사용하여 처음부터 새로운 Candy Machine을 만드는 데 도움을 줍니다.

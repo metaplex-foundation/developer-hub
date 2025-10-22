@@ -90,7 +90,7 @@ pub async fn fetch_asset() {
 
 ## 複数アセットの取得
 
-複数のアセットは、`getProgramAccounts`（GPA）コールを使用して取得できますが、これはRPCの観点から非常に高価で遅い場合があります。または、`Digital Asset Standard` APIを使用することもでき、これはより高速ですが[特定のRPCプロバイダー](/jp/rpc-providers)が必要です。
+複数のアセットは、`getProgramAccounts`（GPA）コールを使用して取得できますが、これはRPCの観点から非常に高価で遅い場合があります。または、`Digital Asset Standard` APIを使用することもでき、これはより高速ですが[特定のRPCプロバイダー](/ja/rpc-providers)が必要です。
 
 ### 所有者でアセットを取得
 
@@ -339,7 +339,7 @@ pub async fn fetch_assets_by_update_authority() {
 
 DASが有効なRPCを使用する場合、インデックス化されたアセットを活用して超高速の取得とデータ検索が可能になります。
 
-DASは、メタデータ、オフチェーンメタデータ、コレクションデータ、プラグイン（属性を含む）など、すべてをインデックス化します。Metaplex DAS APIについて詳しく知りたい場合は、[こちらをクリック](/jp/das-api)してください。一般的なDAS SDKに加えて、MPL Coreに直接正しいタイプを返してMPL Core SDKでさらに使用できるようにするために、[MPL Core用拡張機能](/jp/das-api/core-extension)が作成されました。また、コレクションから継承されたアセットのプラグインを自動的に派生させ、DAS-to-Coreタイプ変換のための関数を提供します。
+DASは、メタデータ、オフチェーンメタデータ、コレクションデータ、プラグイン（属性を含む）など、すべてをインデックス化します。Metaplex DAS APIについて詳しく知りたい場合は、[こちらをクリック](/ja/das-api)してください。一般的なDAS SDKに加えて、MPL Coreに直接正しいタイプを返してMPL Core SDKでさらに使用できるようにするために、[MPL Core用拡張機能](/ja/das-api/core-extension)が作成されました。また、コレクションから継承されたアセットのプラグインを自動的に派生させ、DAS-to-Coreタイプ変換のための関数を提供します。
 
 以下は、DASでMPL Core Assetを取得した際の返されるデータの例です。
 

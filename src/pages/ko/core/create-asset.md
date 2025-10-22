@@ -4,11 +4,11 @@ metaTitle: 자산 생성하기 | Core
 description: Metaplex Core 패키지를 사용하여 Core NFT 자산을 생성하는 방법을 알아보세요.
 ---
 
-[Core 개요](/kr/core)에서 논의한 바와 같이, Core의 디지털 자산은 정확히 하나의 온체인 계정과 토큰을 설명하는 오프체인 데이터로 구성됩니다. 이 페이지에서는 이러한 자산을 민팅하는 과정을 살펴보겠습니다. {% .lead %}
+[Core 개요](/ko/core)에서 논의한 바와 같이, Core의 디지털 자산은 정확히 하나의 온체인 계정과 토큰을 설명하는 오프체인 데이터로 구성됩니다. 이 페이지에서는 이러한 자산을 민팅하는 과정을 살펴보겠습니다. {% .lead %}
 
 ## 생성 과정
 
-1. **오프체인 데이터 업로드.** 먼저 오프체인 데이터가 준비되어 있는지 확인해야 합니다. 이는 자산을 설명하는 JSON 파일이 어딘가에 저장되어 있어야 함을 의미합니다. JSON 파일이 **URI**를 통해 액세스할 수 있다면 어떻게, 어디에 저장되는지는 중요하지 않습니다. 오프체인 메타데이터는 [기존 토큰 메타데이터 표준](/kr/token-metadata/token-standard#the-non-fungible-standard)과 유사하게 보일 수 있습니다.
+1. **오프체인 데이터 업로드.** 먼저 오프체인 데이터가 준비되어 있는지 확인해야 합니다. 이는 자산을 설명하는 JSON 파일이 어딘가에 저장되어 있어야 함을 의미합니다. JSON 파일이 **URI**를 통해 액세스할 수 있다면 어떻게, 어디에 저장되는지는 중요하지 않습니다. 오프체인 메타데이터는 [기존 토큰 메타데이터 표준](/ko/token-metadata/token-standard#the-non-fungible-standard)과 유사하게 보일 수 있습니다.
 2. **온체인 자산 계정 생성.** 그런 다음 자산의 데이터를 보관할 온체인 자산 계정을 생성해야 합니다.
 
 구체적인 코드 예제를 제공하면서 이러한 단계를 더 자세히 살펴보겠습니다.
@@ -171,7 +171,7 @@ let create_ix = CreateV1CpiBuilder::new()
 
 ## 컬렉션에 자산 생성
 
-MPL Core 자산은 MPL Core 컬렉션이 이미 존재하는 경우 컬렉션에 바로 생성할 수 있습니다. 컬렉션 자산을 생성하려면 [여기](/kr/core/collections)를 방문하세요.
+MPL Core 자산은 MPL Core 컬렉션이 이미 존재하는 경우 컬렉션에 바로 생성할 수 있습니다. 컬렉션 자산을 생성하려면 [여기](/ko/core/collections)를 방문하세요.
 
 {% dialect-switcher title="컬렉션에 자산 생성" %}
 {% dialect title="JavaScript" id="js" %}
@@ -412,8 +412,8 @@ pub async fn create_asset_with_plugin() {
 
 플러그인 목록에는 다음이 포함되지만 이에 국한되지 않습니다:
 
-- [소각 위임자](/kr/core/plugins/burn-delegate)
-- [동결 위임자](/kr/core/plugins/freeze-delegate)
-- [로열티](/kr/core/plugins/royalties)
-- [전송 위임자](/kr/core/plugins/transfer-delegate)
-- [업데이트 위임자](/kr/core/plugins/update-delegate)
+- [소각 위임자](/ko/core/plugins/burn-delegate)
+- [동결 위임자](/ko/core/plugins/freeze-delegate)
+- [로열티](/ko/core/plugins/royalties)
+- [전송 위임자](/ko/core/plugins/transfer-delegate)
+- [업데이트 위임자](/ko/core/plugins/update-delegate)

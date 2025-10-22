@@ -159,9 +159,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## ヒントとベストプラクティス
 
-1. **[表示オプション](/jp/das-api/guides/display-options)を使用**: `showCollectionMetadata`と`showFungible`や`showInscription`などの他のオプションを有効にして、完全なトークン情報を取得してください。
+1. **[表示オプション](/ja/das-api/guides/display-options)を使用**: `showCollectionMetadata`と`showFungible`や`showInscription`などの他のオプションを有効にして、完全なトークン情報を取得してください。
 
-2. **[ページネーション](/jp/das-api/guides/pagination)を処理**: 多くのトークンを持つウォレットの場合、常にページネーションを実装してください。
+2. **[ページネーション](/ja/das-api/guides/pagination)を処理**: 多くのトークンを持つウォレットの場合、常にページネーションを実装してください。
 
 3. **インターフェースでフィルタ**: `interface`パラメーターを使用して特定のトークンタイプを取得してください。
 
@@ -171,7 +171,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 関連ガイド
 
-- [オーナー別にファンジブルアセットを取得](/jp/das-api/guides/get-fungible-assets)
-- [オーナー別にNFTを取得](/jp/das-api/guides/get-nfts-by-owner)
-- [オーナーとコレクションでアセットを取得](/jp/das-api/guides/owner-and-collection)
-- [コレクション統計の分析](/jp/das-api/guides/collection-statistics)
+- [オーナー別にファンジブルアセットを取得](/ja/das-api/guides/get-fungible-assets)
+- [オーナー別にNFTを取得](/ja/das-api/guides/get-nfts-by-owner)
+- [オーナーとコレクションでアセットを取得](/ja/das-api/guides/owner-and-collection)
+- [コレクション統計の分析](/ja/das-api/guides/collection-statistics)

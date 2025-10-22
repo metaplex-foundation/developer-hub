@@ -10,7 +10,7 @@ Umiは、Solanaプログラム用のJavaScriptクライアントを構築・使�
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/jp/umi/getting-started" description="お好みの言語やライブラリを見つけて、基本的なプログラムを始めましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/umi/getting-started" description="お好みの言語やライブラリを見つけて、基本的なプログラムを始めましょう。" /%}
 
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://umi.typedoc.metaplex.com/" target="_blank" description="特定の何かをお探しですか？APIリファレンスをご覧になり、答えを見つけてください。" /%}
 

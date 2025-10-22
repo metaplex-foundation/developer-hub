@@ -4,9 +4,9 @@ metaTitle: NFTデータの保存とインデックス化 | Bubblegum V2
 description: BubblegumでNFTデータがどのように保存されるかについて詳しく学びます。
 ---
 
-[概要](/jp/bubblegum#read-api)で述べたように、圧縮NFT（cNFT）が作成または変更されるたびに、対応するトランザクションが台帳にオンチェーンで記録されますが、cNFTの状態データはアカウントスペースに保存されません。これがcNFTの大幅なコスト削減の理由ですが、利便性と使いやすさのために、cNFTの状態データはRPCプロバイダーによってインデックス化され、**Metaplex DAS API**を通じて利用できます。
+[概要](/ja/bubblegum#read-api)で述べたように、圧縮NFT（cNFT）が作成または変更されるたびに、対応するトランザクションが台帳にオンチェーンで記録されますが、cNFTの状態データはアカウントスペースに保存されません。これがcNFTの大幅なコスト削減の理由ですが、利便性と使いやすさのために、cNFTの状態データはRPCプロバイダーによってインデックス化され、**Metaplex DAS API**を通じて利用できます。
 
-Metaplexは、DAS APIの[参考実装](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)を作成しており、一部のRPCプロバイダーは特定の実装にこのコードの一部またはすべてを使用していますが、他のRPCプロバイダーは独自のものを作成しています。Metaplex DAS APIをサポートする他のRPCプロバイダーのリストについては、["Metaplex DAS API RPC"](/jp/rpc-providers)ページを参照してください。
+Metaplexは、DAS APIの[参考実装](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)を作成しており、一部のRPCプロバイダーは特定の実装にこのコードの一部またはすべてを使用していますが、他のRPCプロバイダーは独自のものを作成しています。Metaplex DAS APIをサポートする他のRPCプロバイダーのリストについては、["Metaplex DAS API RPC"](/ja/rpc-providers)ページを参照してください。
 
 Metaplexのリファレンス実装であるDAS APIには、以下の主要な項目が含まれています：
 * Solanaノーヴォートバリデーター - このバリデーターは、コンセンサスの下でバリデーター台帳とアカウントデータへの安全なアクセスのみを持つように構成されています。

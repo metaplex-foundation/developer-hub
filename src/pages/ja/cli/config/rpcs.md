@@ -137,5 +137,5 @@ RPCは`~/.mplx/config.json`の設定ファイルに保存されます：
 
 ## 関連コマンド
 
-- [ウォレット](/jp/cli/config/wallets) - ウォレット設定の管理
-- [エクスプローラー](/jp/cli/config/explorer) - 推奨ブロックチェーンエクスプローラーの設定
+- [ウォレット](/ja/cli/config/wallets) - ウォレット設定の管理
+- [エクスプローラー](/ja/cli/config/explorer) - 推奨ブロックチェーンエクスプローラーの設定

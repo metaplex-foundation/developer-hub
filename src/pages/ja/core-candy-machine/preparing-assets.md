@@ -92,7 +92,7 @@ Umiには、プラグインを通じてアップロードプロセスを支援�
 
 #### UMIでIrys経由でArweaveにアップロード
 
-UMIでファイルをアップロードすることについてより詳しく見るには、[Umi Storage](/jp/umi/storage)を参照してください。
+UMIでファイルをアップロードすることについてより詳しく見るには、[Umi Storage](/ja/umi/storage)を参照してください。
 
 {% dialect-switcher title="UMIでIrys経由でArweaveにファイルをアップロード" %}
 {% dialect title="JavaScript" id="js" %}
@@ -197,7 +197,7 @@ Core Candy Machine作成の準備の最後のステップは、Core Candy Machin
 Coreコレクションを作成するために必要なデータを持つために、前のステップのように画像をアップロードし、JSONメタデータを準備・アップロードする必要があります。
 {% /callout %}
 
-以下の例では、プラグインのない基本的なCoreコレクションを作成します。利用可能なプラグインのリストとより高度なCoreコレクション作成を表示するには、Coreの[Collection Management](/jp/core/collections)でドキュメントを参照してください。
+以下の例では、プラグインのない基本的なCoreコレクションを作成します。利用可能なプラグインのリストとより高度なCoreコレクション作成を表示するには、Coreの[Collection Management](/ja/core/collections)でドキュメントを参照してください。
 
 {% dialect-switcher title="MPL Coreコレクションを作成" %}
 {% dialect title="JavaScript" id="js" %}

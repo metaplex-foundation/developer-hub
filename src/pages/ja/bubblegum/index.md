@@ -6,7 +6,7 @@ description: 圧縮NFTの概要を説明します。
 
 {% callout type="note" title="新しいBubblegumバージョン" %}
 
-より多くの柔軟性と機能を可能にするために、[Bubblegum v2](/jp/bubblegum-v2)の使用をお勧めします。
+より多くの柔軟性と機能を可能にするために、[Bubblegum v2](/ja/bubblegum-v2)の使用をお勧めします。
 
 {% /callout %}
 
@@ -14,7 +14,7 @@ Bubblegumは、Solana上で圧縮NFT（cNFT）を作成し、操作するため�
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/jp/bubblegum/getting-started" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/bubblegum/getting-started" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}
 
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="特定のものをお探しですか？APIリファレンスをご覧いただき、答えを見つけてください。" /%}
 
@@ -41,7 +41,7 @@ NFTがSolanaブロックチェーン上で繁栄するにつれて、NFTがイ�
 
 ## マークルツリー、リーフ、証明
 
-圧縮NFTは、**マークルツリー**のコンテキストでのみ存在します。マークルツリーが何であるかは[専用の高度なガイド](/jp/bubblegum/concurrent-merkle-trees)で説明していますが、この概要では、マークルツリーを**リーフ**と呼ぶハッシュのコレクションと考えることができます。各リーフは、[圧縮NFTのデータをハッシュ化する](/jp/bubblegum/hashed-nft-data)ことで得られます。
+圧縮NFTは、**マークルツリー**のコンテキストでのみ存在します。マークルツリーが何であるかは[専用の高度なガイド](/ja/bubblegum/concurrent-merkle-trees)で説明していますが、この概要では、マークルツリーを**リーフ**と呼ぶハッシュのコレクションと考えることができます。各リーフは、[圧縮NFTのデータをハッシュ化する](/ja/bubblegum/hashed-nft-data)ことで得られます。
 
 マークルツリー内の各リーフに対して、**証明**と呼ばれるハッシュのリストを提供できます。これにより、誰でも与えられたリーフがそのツリーの一部であることを検証できます。圧縮NFTが更新または転送されるたびに、関連するリーフも変更され、その証明も変更されます。
 
@@ -123,23 +123,23 @@ NFTがSolanaブロックチェーン上で繁栄するにつれて、NFTがイ�
 
 1つのNFTのデータを取得するためだけに、毎回何百万ものトランザクションをクロールすることは、確実に最良のユーザー体験ではありません。したがって、圧縮NFTは、この情報をリアルタイムでインデックス化し、エンドユーザーからこれを抽象化するために一部のRPCに依存しています。圧縮NFTの取得を可能にする結果のRPC APIを**Metaplex DAS API**と呼びます。
 
-すべてのRPCがDAS APIをサポートしているわけではないことに注意してください。そのため、アプリケーションで圧縮NFTを使用する際に適切なRPCを選択するために、["Metaplex DAS API RPC"](/jp/rpc-providers)ページに興味があるかもしれません。
+すべてのRPCがDAS APIをサポートしているわけではないことに注意してください。そのため、アプリケーションで圧縮NFTを使用する際に適切なRPCを選択するために、["Metaplex DAS API RPC"](/ja/rpc-providers)ページに興味があるかもしれません。
 
-これについては、高度な["NFTデータの保存とインデックス化"](/jp/bubblegum/stored-nft-data)ガイドで詳しく説明しています。
+これについては、高度な["NFTデータの保存とインデックス化"](/ja/bubblegum/stored-nft-data)ガイドで詳しく説明しています。
 
 ## 機能
 
 NFTデータがアカウント内に存在しないにもかかわらず、圧縮NFTに対してさまざまな操作を実行することは依然として可能です。これは、現在のNFTデータをリクエストし、そのハッシュ化されたリーフがマークルツリーで有効であることを確認することで可能になります。そのため、圧縮NFTで以下の操作を実行できます：
 
-- 関連するコレクションを持つまたは持たない[cNFTのミント](/jp/bubblegum/mint-cnfts)。
-- [cNFTの転送](/jp/bubblegum/transfer-cnfts)。
-- [cNFTのデータの更新](/jp/bubblegum/update-cnfts)。
-- [cNFTのバーン](/jp/bubblegum/burn-cnfts)。
-- [cNFTを通常のNFTに解凍](/jp/bubblegum/decompress-cnfts)。これは既存のスマートコントラクトとの相互運用性を可能にしますが、レント費用付きのオンチェーンアカウントを作成することに注意してください。
-- [cNFTのデリゲート](/jp/bubblegum/delegate-cnfts)。
-- [cNFTコレクションの検証と検証解除](/jp/bubblegum/verify-collections)。
-- [cNFTの作成者の検証と検証解除](/jp/bubblegum/verify-creators)。
+- 関連するコレクションを持つまたは持たない[cNFTのミント](/ja/bubblegum/mint-cnfts)。
+- [cNFTの転送](/ja/bubblegum/transfer-cnfts)。
+- [cNFTのデータの更新](/ja/bubblegum/update-cnfts)。
+- [cNFTのバーン](/ja/bubblegum/burn-cnfts)。
+- [cNFTを通常のNFTに解凍](/ja/bubblegum/decompress-cnfts)。これは既存のスマートコントラクトとの相互運用性を可能にしますが、レント費用付きのオンチェーンアカウントを作成することに注意してください。
+- [cNFTのデリゲート](/ja/bubblegum/delegate-cnfts)。
+- [cNFTコレクションの検証と検証解除](/ja/bubblegum/verify-collections)。
+- [cNFTの作成者の検証と検証解除](/ja/bubblegum/verify-creators)。
 
 ## 次のステップ
 
-圧縮NFTが高レベルでどのように機能するかを理解したので、圧縮NFTとの相互作用に使用できるさまざまな言語/フレームワークを列挙した[はじめに](/jp/bubblegum/getting-started)ページをチェックすることをお勧めします。その後、さまざまな[機能ページ](/jp/bubblegum/create-trees)を使用して、cNFTで実行できる特定の操作について詳しく学ぶことができます。最後に、cNFTとマークルツリーの知識を深めるための[高度なガイド](/jp/bubblegum/concurrent-merkle-trees)も利用できます。
+圧縮NFTが高レベルでどのように機能するかを理解したので、圧縮NFTとの相互作用に使用できるさまざまな言語/フレームワークを列挙した[はじめに](/ja/bubblegum/getting-started)ページをチェックすることをお勧めします。その後、さまざまな[機能ページ](/ja/bubblegum/create-trees)を使用して、cNFTで実行できる特定の操作について詳しく学ぶことができます。最後に、cNFTとマークルツリーの知識を深めるための[高度なガイド](/ja/bubblegum/concurrent-merkle-trees)も利用できます。

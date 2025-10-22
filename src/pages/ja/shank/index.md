@@ -25,13 +25,13 @@ ShankはIDLファイルの生成を自動化することで、Solanaプログラ
 
 ## ドキュメント
 
-- **[はじめに](/jp/shank/getting-started)** - インストール、セットアップ、詳細な使用ガイド、包括的な例
+- **[はじめに](/ja/shank/getting-started)** - インストール、セットアップ、詳細な使用ガイド、包括的な例
 
 ## 統合
 
 ShankはMetaplexの他のツールとシームレスに統合します：
-- **[Kinobi](/jp/umi/kinobi)** - モダンなIDL生成とクライアント作成
-- **[Solita](/jp/legacy-documentation/developer-tools/solita)** - TypeScript SDK生成
+- **[Kinobi](/ja/umi/kinobi)** - モダンなIDL生成とクライアント作成
+- **[Solita](/ja/legacy-documentation/developer-tools/solita)** - TypeScript SDK生成
 
 ## リソース
 

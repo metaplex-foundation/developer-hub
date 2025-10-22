@@ -76,7 +76,7 @@ MPL-Hybridプログラムでメタデータランダム化機能を利用する�
 - ...
 - https://arweave.net/manifestID/9999.json
 
-決定論的URIの作成に慣れていない場合は、詳細な手順について[このガイド](/jp/guides/general/create-deterministic-metadata-with-turbo)に従ってください。さらに、Hybridプログラムが機能するために必要な[コレクション](/jp/core/guides/javascript/how-to-create-a-core-collection-with-javascript)と[アセット](/jp/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)の作成手順を見つけることができます。
+決定論的URIの作成に慣れていない場合は、詳細な手順について[このガイド](/ja/guides/general/create-deterministic-metadata-with-turbo)に従ってください。さらに、Hybridプログラムが機能するために必要な[コレクション](/ja/core/guides/javascript/how-to-create-a-core-collection-with-javascript)と[アセット](/ja/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)の作成手順を見つけることができます。
 
 **注意**: 現在、MPL-Hybridプログラムは提供されたmin/maxURIインデックス間の数をランダムに選択し、URIが既に使用されているかをチェックしません。そのため、スワッピングは[誕生日パラドックス](https://betterexplained.com/articles/understanding-the-birthday-paradox/)の影響を受けます。プロジェクトが十分なスワップランダム化の恩恵を受けるため、ランダムに選択できる最低250kのアセットメタデータを準備してアップロードすることをお勧めします。利用可能な潜在的アセットが多いほど良いです！
 
@@ -84,7 +84,7 @@ MPL-Hybridプログラムでメタデータランダム化機能を利用する�
 
 MPL-Hybridエスクローには、NFTのリリースを償還または支払うために使用できる関連代替可能トークンが必要です。これは、既にミントされて流通している既存のトークンでも、完全に新しいトークンでも構いません！
 
-トークンの作成に慣れていない場合は、[このガイド](/jp/guides/javascript/how-to-create-a-solana-token)に従って、Solanaで独自の代替可能トークンをミントする方法を学ぶことができます。
+トークンの作成に慣れていない場合は、[このガイド](/ja/guides/javascript/how-to-create-a-solana-token)に従って、Solanaで独自の代替可能トークンをミントする方法を学ぶことができます。
 
 ## エスクローの作成
 

@@ -23,9 +23,9 @@ Candy Guard 프로그램에 등록된 가드당 하나의 "route" 명령어만 �
 
 예를 들어, 민팅이 끝난 후에만 해동될 수 있는 동결된 NFT에 대한 지원을 추가하는 가드는 route 명령어를 사용하여 treasury escrow 계정을 초기화하고 올바른 조건 하에서 누구나 민팅된 NFT를 해동할 수 있게 할 수 있습니다. 전자의 경우 "init", 후자의 경우 "thaw"와 같은 **Path** 속성을 사용하여 이 두 기능을 구분할 수 있습니다.
 
-route 명령어를 지원하는 각 가드와 그 기본 경로에 대한 자세한 설명은 [각각의 페이지](/kr/candy-machine/guards)에서 찾을 수 있습니다.
+route 명령어를 지원하는 각 가드와 그 기본 경로에 대한 자세한 설명은 [각각의 페이지](/ko/candy-machine/guards)에서 찾을 수 있습니다.
 
-예시를 제공하여 route 명령어가 어떻게 작동하는지 설명해보겠습니다. 예를 들어 [**Allow List**](/kr/candy-machine/guards/allow-list) 가드는 민팅 지갑이 미리 구성된 지갑 목록의 일부인지 확인하기 위해 route 명령어를 지원합니다.
+예시를 제공하여 route 명령어가 어떻게 작동하는지 설명해보겠습니다. 예를 들어 [**Allow List**](/ko/candy-machine/guards/allow-list) 가드는 민팅 지갑이 미리 구성된 지갑 목록의 일부인지 확인하기 위해 route 명령어를 지원합니다.
 
 이는 [Merkle Trees](https://en.m.wikipedia.org/wiki/Merkle_tree)를 사용하여 수행되므로 허용된 지갑의 전체 목록의 해시를 생성하고 해당 해시(**Merkle Root**라고 알려진)를 가드 설정에 저장해야 합니다. 지갑이 허용 목록에 있음을 증명하려면 프로그램이 Merkle Root를 계산하고 가드의 설정과 일치하는지 확인할 수 있는 해시 목록(**Merkle Proof**라고 알려진)을 제공해야 합니다.
 
@@ -202,6 +202,6 @@ API 참조: [route](https://mpl-candy-machine.typedoc.metaplex.com/functions/rou
 
 ## 결론
 
-route 명령어는 가드가 고유한 맞춤 프로그램 로직과 함께 제공될 수 있게 하여 가드를 더욱 강력하게 만듭니다. 각 가드의 전체 기능 세트를 보려면 [사용 가능한 모든 가드](/kr/candy-machine/guards)의 전용 페이지를 확인하세요.
+route 명령어는 가드가 고유한 맞춤 프로그램 로직과 함께 제공될 수 있게 하여 가드를 더욱 강력하게 만듭니다. 각 가드의 전체 기능 세트를 보려면 [사용 가능한 모든 가드](/ko/candy-machine/guards)의 전용 페이지를 확인하세요.
 
-이제 Candy Machine과 가드 설정에 대해 알아야 할 모든 것을 알았으니 민팅에 대해 이야기할 때입니다. [다음 페이지](/kr/candy-machine/mint)에서 만나요!
+이제 Candy Machine과 가드 설정에 대해 알아야 할 모든 것을 알았으니 민팅에 대해 이야기할 때입니다. [다음 페이지](/ko/candy-machine/mint)에서 만나요!

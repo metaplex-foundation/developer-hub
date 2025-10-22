@@ -54,6 +54,6 @@ Balance: 1.5 SOL
 
 ## 関連コマンド
 
-- [SOL転送](/jp/cli/toolbox/sol-transfer) - アドレス間でSOLを転送
-- [トークン転送](/jp/cli/toolbox/token-transfer) - トークンを転送
-- [エアドロップ](/jp/cli/toolbox/sol-airdrop) - SOLエアドロップをリクエスト（devnetのみ）
+- [SOL転送](/ja/cli/toolbox/sol-transfer) - アドレス間でSOLを転送
+- [トークン転送](/ja/cli/toolbox/token-transfer) - トークンを転送
+- [エアドロップ](/ja/cli/toolbox/sol-airdrop) - SOLエアドロップをリクエスト（devnetのみ）

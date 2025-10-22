@@ -6,7 +6,7 @@ description: Core Candy Machine의 'Sol Fixed Fee' 가드는 민팅 시 결제�
 
 ## 개요
 
-**Sol Fixed Fee** 가드는 민팅 시 결제자에게 SOL 수수료를 청구할 수 있게 해줍니다. SOL 수량과 목적지 주소를 모두 구성할 수 있습니다. [Sol Payment](/kr/core-candy-machine/guards/sol-payment) Guard와 유사하게 작동합니다.
+**Sol Fixed Fee** 가드는 민팅 시 결제자에게 SOL 수수료를 청구할 수 있게 해줍니다. SOL 수량과 목적지 주소를 모두 구성할 수 있습니다. [Sol Payment](/ko/core-candy-machine/guards/sol-payment) Guard와 유사하게 작동합니다.
 
 {% diagram  %}
 

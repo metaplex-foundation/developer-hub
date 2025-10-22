@@ -229,4 +229,4 @@ SDrive는 GenesysGo Shadow Drive 위에 구축된 스토리지 앱입니다. API
 
 `guards` 설정을 사용하면 Candy Machine에서 활성화될 가드를 지정할 수 있습니다.
 
-Candy Machine은 민팅에 대한 접근 제어를 제공하는 여러 가드를 지원합니다. [가드](/kr/candy-machine/guards)는 "기본" [가드 그룹](/kr/candy-machine/guard-groups)으로 구성되거나 여러 가드 그룹에 나타날 수 있습니다.
+Candy Machine은 민팅에 대한 접근 제어를 제공하는 여러 가드를 지원합니다. [가드](/ko/candy-machine/guards)는 "기본" [가드 그룹](/ko/candy-machine/guard-groups)으로 구성되거나 여러 가드 그룹에 나타날 수 있습니다.

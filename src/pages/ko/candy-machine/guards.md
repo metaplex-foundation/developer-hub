@@ -23,7 +23,7 @@ description: 가드가 어떻게 작동하고 어떻게 활성화하는지 설�
 
 ## Candy Guard 계정
 
-[Candy Machine 계정](/kr/candy-machine/manage#candy-machine-account)의 내용을 기억해보시면, 그곳에서는 가드의 흔적을 찾을 수 없습니다. 이는 가드들이 **Candy Guard 프로그램**에 의해 생성되는 **Candy Guard 계정**이라는 별도의 계정에 저장되기 때문입니다.
+[Candy Machine 계정](/ko/candy-machine/manage#candy-machine-account)의 내용을 기억해보시면, 그곳에서는 가드의 흔적을 찾을 수 없습니다. 이는 가드들이 **Candy Guard 프로그램**에 의해 생성되는 **Candy Guard 계정**이라는 별도의 계정에 저장되기 때문입니다.
 
 각 Candy Machine 계정은 일반적으로 자체 Candy Guard 계정과 연결되어야 하며, 이는 추가적인 보호 계층을 제공합니다.
 
@@ -183,24 +183,24 @@ Candy Machine과 Candy Guard 계정이 함께 작동하므로, 저희 SDK들은 
 
 다음 목록에서는 각 가드에 대한 간단한 설명과 더 자세한 내용을 위한 전용 페이지 링크를 제공합니다.
 
-- [**Address Gate**](/kr/candy-machine/guards/address-gate): 민팅을 단일 주소로 제한합니다.
-- [**Allow List**](/kr/candy-machine/guards/allow-list): 지갑 주소 목록을 사용하여 누가 민팅할 수 있는지 결정합니다.
-- [**Bot Tax**](/kr/candy-machine/guards/bot-tax): 유효하지 않은 트랜잭션에 대해 부과할 구성 가능한 세금입니다.
-- [**End Date**](/kr/candy-machine/guards/end-date): 민팅을 종료할 날짜를 결정합니다.
-- [**Freeze Sol Payment**](/kr/candy-machine/guards/freeze-sol-payment): 동결 기간과 함께 민팅 가격을 SOL로 설정합니다.
-- [**Freeze Token Payment**](/kr/candy-machine/guards/freeze-token-payment): 동결 기간과 함께 민팅 가격을 토큰 양으로 설정합니다.
-- [**Gatekeeper**](/kr/candy-machine/guards/gatekeeper): Gatekeeper Network를 통해 민팅을 제한합니다 (예: Captcha 통합).
-- [**Mint Limit**](/kr/candy-machine/guards/mint-limit): 지갑당 민팅 수 제한을 지정합니다.
-- [**Nft Burn**](/kr/candy-machine/guards/nft-burn): 지정된 컬렉션의 보유자로 민팅을 제한하며, NFT 소각을 요구합니다.
-- [**Nft Gate**](/kr/candy-machine/guards/nft-gate): 지정된 컬렉션의 보유자로 민팅을 제한합니다.
-- [**Nft Payment**](/kr/candy-machine/guards/nft-payment): 민팅 가격을 지정된 컬렉션의 NFT로 설정합니다.
-- [**Redeemed Amount**](/kr/candy-machine/guards/redeemed-amount): 민팅된 총량을 기준으로 민팅 종료를 결정합니다.
-- [**Sol Payment**](/kr/candy-machine/guards/sol-payment): 민팅 가격을 SOL로 설정합니다.
-- [**Start Date**](/kr/candy-machine/guards/start-date): 민팅 시작 날짜를 결정합니다.
-- [**Third Party Signer**](/kr/candy-machine/guards/third-party-signer): 트랜잭션에 추가 서명자를 요구합니다.
-- [**Token Burn**](/kr/candy-machine/guards/token-burn): 지정된 토큰의 보유자로 민팅을 제한하며, 토큰 소각을 요구합니다.
-- [**Token Gate**](/kr/candy-machine/guards/token-gate): 지정된 토큰의 보유자로 민팅을 제한합니다.
-- [**Token Payment**](/kr/candy-machine/guards/token-payment): 민팅 가격을 토큰 양으로 설정합니다.
+- [**Address Gate**](/ko/candy-machine/guards/address-gate): 민팅을 단일 주소로 제한합니다.
+- [**Allow List**](/ko/candy-machine/guards/allow-list): 지갑 주소 목록을 사용하여 누가 민팅할 수 있는지 결정합니다.
+- [**Bot Tax**](/ko/candy-machine/guards/bot-tax): 유효하지 않은 트랜잭션에 대해 부과할 구성 가능한 세금입니다.
+- [**End Date**](/ko/candy-machine/guards/end-date): 민팅을 종료할 날짜를 결정합니다.
+- [**Freeze Sol Payment**](/ko/candy-machine/guards/freeze-sol-payment): 동결 기간과 함께 민팅 가격을 SOL로 설정합니다.
+- [**Freeze Token Payment**](/ko/candy-machine/guards/freeze-token-payment): 동결 기간과 함께 민팅 가격을 토큰 양으로 설정합니다.
+- [**Gatekeeper**](/ko/candy-machine/guards/gatekeeper): Gatekeeper Network를 통해 민팅을 제한합니다 (예: Captcha 통합).
+- [**Mint Limit**](/ko/candy-machine/guards/mint-limit): 지갑당 민팅 수 제한을 지정합니다.
+- [**Nft Burn**](/ko/candy-machine/guards/nft-burn): 지정된 컬렉션의 보유자로 민팅을 제한하며, NFT 소각을 요구합니다.
+- [**Nft Gate**](/ko/candy-machine/guards/nft-gate): 지정된 컬렉션의 보유자로 민팅을 제한합니다.
+- [**Nft Payment**](/ko/candy-machine/guards/nft-payment): 민팅 가격을 지정된 컬렉션의 NFT로 설정합니다.
+- [**Redeemed Amount**](/ko/candy-machine/guards/redeemed-amount): 민팅된 총량을 기준으로 민팅 종료를 결정합니다.
+- [**Sol Payment**](/ko/candy-machine/guards/sol-payment): 민팅 가격을 SOL로 설정합니다.
+- [**Start Date**](/ko/candy-machine/guards/start-date): 민팅 시작 날짜를 결정합니다.
+- [**Third Party Signer**](/ko/candy-machine/guards/third-party-signer): 트랜잭션에 추가 서명자를 요구합니다.
+- [**Token Burn**](/ko/candy-machine/guards/token-burn): 지정된 토큰의 보유자로 민팅을 제한하며, 토큰 소각을 요구합니다.
+- [**Token Gate**](/ko/candy-machine/guards/token-gate): 지정된 토큰의 보유자로 민팅을 제한합니다.
+- [**Token Payment**](/ko/candy-machine/guards/token-payment): 민팅 가격을 토큰 양으로 설정합니다.
 
 ## 가드와 함께 Candy Machine 생성하기
 
@@ -388,4 +388,4 @@ API 참조: [createCandyMachineV2](https://mpl-candy-machine.typedoc.metaplex.co
 
 ## 결론
 
-가드는 Candy Machine의 중요한 구성 요소입니다. 가드는 민팅 프로세스를 쉽게 구성할 수 있게 하며, 애플리케이션 특정 요구에 따라 누구나 자신만의 가드를 만들 수 있게 해줍니다. [다음 페이지](/kr/candy-machine/guard-groups)에서는 가드 그룹을 사용하여 훨씬 더 많은 민팅 시나리오를 만드는 방법을 살펴보겠습니다!
+가드는 Candy Machine의 중요한 구성 요소입니다. 가드는 민팅 프로세스를 쉽게 구성할 수 있게 하며, 애플리케이션 특정 요구에 따라 누구나 자신만의 가드를 만들 수 있게 해줍니다. [다음 페이지](/ko/candy-machine/guard-groups)에서는 가드 그룹을 사용하여 훨씬 더 많은 민팅 시나리오를 만드는 방법을 살펴보겠습니다!

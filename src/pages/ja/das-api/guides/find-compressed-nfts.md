@@ -272,12 +272,12 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 
 ## ヒントとベストプラクティス
 
-1. **大きな圧縮NFTコレクションには[ページネーション](/jp/das-api/guides/pagination)を使用**
+1. **大きな圧縮NFTコレクションには[ページネーション](/ja/das-api/guides/pagination)を使用**
 2. **証明が利用できない場合はエラーを適切に処理**
 3. **圧縮NFTメタデータには適切な表示オプションを使用**
 
 ## さらなる学習
 
-- [コレクション内のすべてのトークンを取得](/jp/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのアセットを取得
-- [オーナー別にNFTを取得](/jp/das-api/guides/get-nfts-by-owner) - ウォレットが所有するすべてのNFTを見つける
-- [複数の条件でアセットを検索](/jp/das-api/guides/search-by-criteria) - 高度なクエリのために複数のフィルターを組み合わせる
+- [コレクション内のすべてのトークンを取得](/ja/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのアセットを取得
+- [オーナー別にNFTを取得](/ja/das-api/guides/get-nfts-by-owner) - ウォレットが所有するすべてのNFTを見つける
+- [複数の条件でアセットを検索](/ja/das-api/guides/search-by-criteria) - 高度なクエリのために複数のフィルターを組み合わせる

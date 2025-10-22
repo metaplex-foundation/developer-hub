@@ -37,16 +37,16 @@ Metaplex CLIは、SolanaにおけるMetaplexプロトコルとやり取りする
 
 ## 始める前に
 
-1. [CLIをインストール](/jp/cli/installation)
+1. [CLIをインストール](/ja/cli/installation)
 2. 環境を設定する：
-   - [ウォレットを設定](/jp/cli/config/wallets)
-   - [RPCエンドポイントを設定](/jp/cli/config/rpcs)
-   - [推奨エクスプローラーを選択](/jp/cli/config/explorer)
+   - [ウォレットを設定](/ja/cli/config/wallets)
+   - [RPCエンドポイントを設定](/ja/cli/config/rpcs)
+   - [推奨エクスプローラーを選択](/ja/cli/config/explorer)
 3. コアコマンドの使用を開始：
-   - [アセットを作成](/jp/cli/core/create-asset)
-   - [コレクションを作成](/jp/cli/core/create-collection)
-   - [アセットを更新](/jp/cli/core/update-asset)
-   - [アセットを取得](/jp/cli/core/fetch)
+   - [アセットを作成](/ja/cli/core/create-asset)
+   - [コレクションを作成](/ja/cli/core/create-collection)
+   - [アセットを更新](/ja/cli/core/update-asset)
+   - [アセットを取得](/ja/cli/core/fetch)
 
 ## コマンド構造
 
@@ -77,4 +77,4 @@ mplx <カテゴリ> <コマンド> [オプション]
 
 ## 次のステップ
 
-始める準備はできましたか？システムにCLIを設定するために[インストールガイド](/jp/cli/installation)に向かいましょう。
+始める準備はできましたか？システムにCLIを設定するために[インストールガイド](/ja/cli/installation)に向かいましょう。

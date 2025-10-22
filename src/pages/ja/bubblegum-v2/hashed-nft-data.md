@@ -47,3 +47,5 @@ cNFTのメタデータは、図に示され以下に説明されているよう�
 {% /node %}
 
 {% node #seller-fee-basis-points parent="metadata" y="305" label="販売者手数料ベーシスポイント" theme="blue" /%}
+
+{% /diagram %}

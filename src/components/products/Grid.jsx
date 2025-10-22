@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { IconWithName } from './IconWithName';
 import { products as allProducts } from './index';
 import { useLocale } from '@/contexts/LocaleContext';
+import { getLocalizedHref } from '@/config/languages';
 
 export function Grid({
   onClick,
@@ -17,30 +18,21 @@ export function Grid({
 
   // Localize product headlines and descriptions
   const localizeProduct = (product) => {
-    if (locale === 'en' || !product.localizedNavigation) return product
+    if (locale === 'en' || !product.localizedNavigation || !product.localizedNavigation[locale]) {
+      return product
+    }
 
     const localizedProduct = { ...product }
-    const productNav = product.localizedNavigation[locale] || product.localizedNavigation['en']
-    
+    const productNav = product.localizedNavigation[locale]
+
     if (productNav.headline) {
       localizedProduct.headline = productNav.headline
     }
     if (productNav.description) {
       localizedProduct.description = productNav.description
     }
-    
-    return localizedProduct
-  }
 
-  const getLocalizedHref = (path) => {
-    // Handle external URLs - don't add locale prefix
-    if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('//')) {
-      return path
-    }
-    
-    // Handle internal paths
-    if (locale === 'en') return `/${path}`
-    return `/${locale}/${path}`
+    return localizedProduct
   }
 
   let className = `relative grid sm:grid-cols-2 grid-cols-1`
@@ -52,7 +44,7 @@ export function Grid({
         return (
           <li key={product.path || product.href}>
             <Link
-              href={getLocalizedHref(product.href || product.path)}
+              href={getLocalizedHref(product.href || product.path, locale)}
               className="block content-start rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
               onClick={onClick}
               {...(product.target && { target: product.target })}

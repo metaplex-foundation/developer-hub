@@ -116,7 +116,7 @@ pub async fn create_collection() {
 
 ### 플러그인과 함께 컬렉션 생성
 
-다음 코드는 [로열티 플러그인](/kr/core/plugins/royalties)이 연결된 컬렉션을 생성합니다. [여기](/kr/core/plugins)에 설명된 대로 추가 플러그인을 연결할 수 있습니다.
+다음 코드는 [로열티 플러그인](/ko/core/plugins/royalties)이 연결된 컬렉션을 생성합니다. [여기](/ko/core/plugins)에 설명된 대로 추가 플러그인을 연결할 수 있습니다.
 
 {% dialect-switcher title="플러그인과 함께 MPL Core 컬렉션 생성" %}
 {% dialect title="JavaScript" id="js" %}

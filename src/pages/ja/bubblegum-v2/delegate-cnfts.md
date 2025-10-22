@@ -8,9 +8,9 @@ description: Bubblegumで圧縮NFTをデリゲートする方法を学びます�
 
 これにより、デリゲートされたアカウント（**デリゲート権限**とも呼ばれます）は、所有者に代わってアクションを実行できます。これらのアクションは以下の通りです：
 
-- [cNFTの転送](/jp/bubblegum-v2/transfer-cnfts)：デリゲート権限は転送後にリセット（つまり新しい所有者に設定）されます。
-- [cNFTのバーン](/jp/bubblegum-v2/burn-cnfts)。
-- [cNFTの凍結と解凍](/jp/bubblegum-v2/freeze-cnfts)。
+- [cNFTの転送](/ja/bubblegum-v2/transfer-cnfts)：デリゲート権限は転送後にリセット（つまり新しい所有者に設定）されます。
+- [cNFTのバーン](/ja/bubblegum-v2/burn-cnfts)。
+- [cNFTの凍結と解凍](/ja/bubblegum-v2/freeze-cnfts)。
 
 これらのアクションはそれぞれ、デリゲート権限を使用してそれらを実行する方法の例を提供します。通常、**リーフ所有者**アカウントの代わりに**リーフデリゲート**アカウントを署名者として提供するだけです。
 圧縮NFTのデリゲート権限を承認・取り消しする方法を見てみましょう。
@@ -23,7 +23,7 @@ description: Bubblegumで圧縮NFTをデリゲートする方法を学びます�
 - **前のリーフデリゲート**：前のデリゲート権限（存在する場合）。そうでなければ、これは**リーフ所有者**に設定する必要があります。
 - **新しいリーフデリゲート**：承認する新しいデリゲート権限。
 
-さらに、この命令はBubblegumツリー上のリーフを置き換えるため、圧縮NFTの整合性を検証するためにより多くのパラメータを提供する必要があります。これらのパラメータはリーフを変更するすべての命令に共通であるため、[次のFAQ](/jp/bubblegum-v2/faq#replace-leaf-instruction-arguments)でドキュメント化されています。幸いなことに、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
+さらに、この命令はBubblegumツリー上のリーフを置き換えるため、圧縮NFTの整合性を検証するためにより多くのパラメータを提供する必要があります。これらのパラメータはリーフを変更するすべての命令に共通であるため、[次のFAQ](/ja/bubblegum-v2/faq#replace-leaf-instruction-arguments)でドキュメント化されています。幸いなことに、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
 
 {% dialect-switcher title="圧縮NFTのデリゲート" %}
 {% dialect title="JavaScript" id="js" %}

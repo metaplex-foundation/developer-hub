@@ -8,6 +8,6 @@ description: MPL-Hybrid Metaplex 프로그램에 사용 가능한 SDK를 확인�
 
 {% quick-links %}
 
-{% quick-link title="JavaScript SDK" icon="JavaScript" href="/kr/mpl-hybrid/sdk/javascript" description="Umi 프레임워크 기반의 MPL-Hybrid 404 JavaScript 라이브러리를 시작하세요." /%}
+{% quick-link title="JavaScript SDK" icon="JavaScript" href="/ko/mpl-hybrid/sdk/javascript" description="Umi 프레임워크 기반의 MPL-Hybrid 404 JavaScript 라이브러리를 시작하세요." /%}
 
 {% /quick-links %}

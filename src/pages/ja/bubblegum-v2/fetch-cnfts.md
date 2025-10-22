@@ -4,11 +4,11 @@ metaTitle: 圧縮NFTの取得 | Bubblegum V2
 description: Bubblegumで圧縮NFTを取得する方法を学びます。
 ---
 
-[概要](/jp/bubblegum#read-api)ページで述べたように、圧縮NFTは通常のNFTのようにオンチェーンアカウント内に保存されるのではなく、それらを作成し更新したトランザクションにログされます。 {% .lead %}
+[概要](/ja/bubblegum#read-api)ページで述べたように、圧縮NFTは通常のNFTのようにオンチェーンアカウント内に保存されるのではなく、それらを作成し更新したトランザクションにログされます。 {% .lead %}
 
 そのため、圧縮NFTの取得を容易にするために特別なインデクサーが作成されました。このインデックス化されたデータは、**Metaplex DAS API**と呼ぶSolana RPCメソッドの拡張を通じて利用できます。実際、DAS APIは任意の**デジタルアセット**を取得できます。これは圧縮NFT、通常のNFT、またはFungibleアセットでもかまいません。
 
-すべてのRPCがDAS APIをサポートしているわけではないため、圧縮NFTを扱う予定がある場合は、RPCプロバイダーを慎重に選択する必要があります。Metaplex DAS APIをサポートするすべてのRPCのリストを[専用ページ](/jp/rpc-providers)で維持していることに注意してください。
+すべてのRPCがDAS APIをサポートしているわけではないため、圧縮NFTを扱う予定がある場合は、RPCプロバイダーを慎重に選択する必要があります。Metaplex DAS APIをサポートするすべてのRPCのリストを[専用ページ](/ja/rpc-providers)で維持していることに注意してください。
 
 このページでは、Metaplex DAS APIを使用して圧縮NFTを取得する方法を学習します。
 

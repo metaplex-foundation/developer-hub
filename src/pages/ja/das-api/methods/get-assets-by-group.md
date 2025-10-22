@@ -18,7 +18,7 @@ tableOfContents: false
 | `page`             |          | 取得する「ページ」のインデックス。       |
 | `before`           |          | 指定されたIDより前のアセットを取得。   |
 | `after`            |          | 指定されたIDより後のアセットを取得。    |
-| `options`          |          | 表示オプションオブジェクト。詳細は[表示オプション](/jp/das-api/display-options)を参照してください。 |
+| `options`          |          | 表示オプションオブジェクト。詳細は[表示オプション](/ja/das-api/display-options)を参照してください。 |
 
 ## Playground
 

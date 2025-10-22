@@ -4,7 +4,7 @@ metaTitle: プラグインの追加 | Core
 description: MPL Core NFTアセットとコレクションにプラグインを追加する方法を学びます。
 ---
 
-プラグインは、MPL Core AssetとMPL Core Collectionの両方に割り当てることができます。MPL Core AssetとMPL Core Collectionは、利用可能なプラグインの似たようなリストを共有しています。それぞれでどのプラグインを使用できるかを知るには、[プラグイン概要](/jp/core/plugins)エリアを訪問してください。
+プラグインは、MPL Core AssetとMPL Core Collectionの両方に割り当てることができます。MPL Core AssetとMPL Core Collectionは、利用可能なプラグインの似たようなリストを共有しています。それぞれでどのプラグインを使用できるかを知るには、[プラグイン概要](/ja/core/plugins)エリアを訪問してください。
 
 ## Core Assetにプラグインを追加
 
@@ -13,7 +13,7 @@ description: MPL Core NFTアセットとコレクションにプラグインを�
 **Create Plugin ヘルパー**
 
 `createPlugin()`ヘルパーは、`addPlugin()`プロセス中にプラグインを割り当てることができる型付きメソッドを提供します。
-プラグインとその引数の完全なリストについては、[プラグイン概要](/jp/core/plugins)ページを参照してください。
+プラグインとその引数の完全なリストについては、[プラグイン概要](/ja/core/plugins)ページを参照してください。
 
 ### デフォルト権限でプラグインを追加
 

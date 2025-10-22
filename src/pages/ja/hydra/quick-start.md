@@ -22,7 +22,7 @@ npmからパッケージをインストールします：
 yarn add @glasseaters/hydra-sdk
 ```
 
-これは、ウォレット[メンバーシップモデル](/jp/hydra#メンバーの追加)でHydraをセットアップする方法です。
+これは、ウォレット[メンバーシップモデル](/ja/hydra#メンバーの追加)でHydraをセットアップする方法です。
 
 ```ts
 import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";

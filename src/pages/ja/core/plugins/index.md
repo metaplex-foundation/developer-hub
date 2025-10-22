@@ -30,9 +30,9 @@ Core Assetのライフサイクル中に、以下のようなイベントがト�
 
 所有者管理プラグインには以下が含まれますが、これらに限定されません：
 
-- [Transfer Delegate](/jp/core/plugins/transfer-delegate)（マーケットプレース、ゲーム）
-- [Freeze Delegate](/jp/core/plugins/freeze-delegate)（マーケットプレース、ステーキング、ゲーム）
-- [Burn Delegate](/jp/core/plugins/burn-delegate)（ゲーム）
+- [Transfer Delegate](/ja/core/plugins/transfer-delegate)（マーケットプレース、ゲーム）
+- [Freeze Delegate](/ja/core/plugins/freeze-delegate)（マーケットプレース、ステーキング、ゲーム）
+- [Burn Delegate](/ja/core/plugins/burn-delegate)（ゲーム）
 
 権限が設定されていない状態で所有者管理プラグインがアセット/コレクションに追加された場合、権限タイプは`owner`タイプにデフォルト設定されます。
 
@@ -44,9 +44,9 @@ Core Assetのライフサイクル中に、以下のようなイベントがト�
 
 権限管理プラグインには以下が含まれますが、これらに限定されません：
 
-- [Royalties](/jp/core/plugins/royalties)
-- [Update Delegate](/jp/core/plugins/update-delegate)
-- [Attribute](/jp/core/plugins/attribute)
+- [Royalties](/ja/core/plugins/royalties)
+- [Update Delegate](/ja/core/plugins/update-delegate)
+- [Attribute](/ja/core/plugins/attribute)
 
 権限引数が存在しない状態で権限管理プラグインがアセット/コレクションに追加された場合、プラグインは権限タイプ`update authority`にデフォルト設定されます。
 
@@ -56,15 +56,15 @@ Core Assetのライフサイクル中に、以下のようなイベントがト�
 
 永続プラグインには以下が含まれますが、これらに限定されません：
 
-- [Permanent Transfer Delegate](/jp/core/plugins/permanent-transfer-delegate)
-- [Permanent Freeze Delegate](/jp/core/plugins/permanent-freeze-delegate)
-- [Permanent Burn Delegate](/jp/core/plugins/permanent-burn-delegate)
+- [Permanent Transfer Delegate](/ja/core/plugins/permanent-transfer-delegate)
+- [Permanent Freeze Delegate](/ja/core/plugins/permanent-freeze-delegate)
+- [Permanent Burn Delegate](/ja/core/plugins/permanent-burn-delegate)
 
 権限が設定されていない状態で永続プラグインがアセット/コレクションに追加された場合、権限タイプは`update authority`タイプにデフォルト設定されます。
 
 ## コレクションプラグイン
 
-コレクションプラグインは、コレクションレベルで追加されるプラグインで、コレクション全体に影響を与えることができます。これは特にロイヤリティに有用で、[ロイヤリティプラグイン](/jp/core/plugins/royalties)をコレクションアセットに割り当てると、そのコレクション内のすべてのアセットがそのプラグインを参照するようになります。
+コレクションプラグインは、コレクションレベルで追加されるプラグインで、コレクション全体に影響を与えることができます。これは特にロイヤリティに有用で、[ロイヤリティプラグイン](/ja/core/plugins/royalties)をコレクションアセットに割り当てると、そのコレクション内のすべてのアセットがそのプラグインを参照するようになります。
 
 コレクションは`永続プラグイン`と`権限管理プラグイン`のみにアクセスできます。
 
@@ -83,15 +83,15 @@ MPL Core AssetとMPL Core Collection Assetの両方が同じプラグインタ�
 
 | プラグイン                                                                   | 所有者管理 | 権限管理 | 永続 |
 | ------------------------------------------------------------------------ | ---------- | -------- | ---- |
-| [Transfer Delegate](/jp/core/plugins/transfer-delegate)                  | ✅         |          |      |
-| [Freeze Delegate](/jp/core/plugins/freeze-delegate)                      | ✅         |          |      |
-| [Burn Delegate](/jp/core/plugins/burn-delegate)                          | ✅         |          |      |
-| [Royalties](/jp/core/plugins/royalties)                                  |            | ✅       |      |
-| [Update Delegate](/jp/core/plugins/update-delegate)                      |            | ✅       |      |
-| [Attribute](/jp/core/plugins/attribute)                                  |            | ✅       |      |
-| [Permanent Transfer Delegate](/jp/core/plugins/permanent-transfer-delegate) |            |          | ✅   |
-| [Permanent Freeze Delegate](/jp/core/plugins/permanent-freeze-delegate)  |            |          | ✅   |
-| [Permanent Burn Delegate](/jp/core/plugins/permanent-burn-delegate)      |            |          | ✅   |
+| [Transfer Delegate](/ja/core/plugins/transfer-delegate)                  | ✅         |          |      |
+| [Freeze Delegate](/ja/core/plugins/freeze-delegate)                      | ✅         |          |      |
+| [Burn Delegate](/ja/core/plugins/burn-delegate)                          | ✅         |          |      |
+| [Royalties](/ja/core/plugins/royalties)                                  |            | ✅       |      |
+| [Update Delegate](/ja/core/plugins/update-delegate)                      |            | ✅       |      |
+| [Attribute](/ja/core/plugins/attribute)                                  |            | ✅       |      |
+| [Permanent Transfer Delegate](/ja/core/plugins/permanent-transfer-delegate) |            |          | ✅   |
+| [Permanent Freeze Delegate](/ja/core/plugins/permanent-freeze-delegate)  |            |          | ✅   |
+| [Permanent Burn Delegate](/ja/core/plugins/permanent-burn-delegate)      |            |          | ✅   |
 
 ## プラグインとライフサイクルイベント
 

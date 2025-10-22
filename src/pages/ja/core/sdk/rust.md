@@ -28,7 +28,7 @@ cargo add mpl-core
 
 すべてのCoreインストラクションのリストはこちらで見つけることができます：[Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
 
-Rustの使用に関するより包括的なガイドについては、[Metaplex Rust SDKsガイド](/jp/guides/rust/metaplex-rust-sdks)ページをチェックしてください。
+Rustの使用に関するより包括的なガイドについては、[Metaplex Rust SDKsガイド](/ja/guides/rust/metaplex-rust-sdks)ページをチェックしてください。
 
 #### CreateV1Builder - 例
 
@@ -76,7 +76,7 @@ let keypair_path = ".../my-key.json"
 
 すべてのCoreインストラクションのリストはこちらで見つけることができます：[Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
 
-MetaplexクレートをしてCPIインストラクションを作成するための包括的なガイドについては、[Metaplexプログラムへのライブラリ](/jp/guides/rust/how-to-cpi-into-a-metaplex-program)ページをチェックしてください。
+MetaplexクレートをしてCPIインストラクションを作成するための包括的なガイドについては、[Metaplexプログラムへのライブラリ](/ja/guides/rust/how-to-cpi-into-a-metaplex-program)ページをチェックしてください。
 
 #### CreateV1CpiBuilder - 例
 

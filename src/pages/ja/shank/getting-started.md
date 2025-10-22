@@ -169,8 +169,8 @@ ShankはSolanaプログラムコードに注釈を付けるための5つの重�
 
 Shankは他のMetaplexツールとシームレスに統合します：
 
-- **[Kinobi](/jp/umi/kinobi)**: IDL生成とクライアント作成にShank JSライブラリを使用
-- **[Solita](/jp/legacy-documentation/developer-tools/solita)**: Shankで抽出されたIDLからTypeScript SDKを生成
+- **[Kinobi](/ja/umi/kinobi)**: IDL生成とクライアント作成にShank JSライブラリを使用
+- **[Solita](/ja/legacy-documentation/developer-tools/solita)**: Shankで抽出されたIDLからTypeScript SDKを生成
 
 ## CLI使用法
 
@@ -191,8 +191,8 @@ shank idl --out-dir ./idl --crate-root ./ --program-id MyProgram1111111111111111
 
 ShankをセットアップしてIDLファイルを生成できるようになったので、次のことができます：
 
-1. **[マクロリファレンス](/jp/shank/macros)**: すべてのShankマクロと属性の完全なリファレンス
-2. **[Kinobiとの統合](/jp/umi/kinobi)**: Umiと互換性のあるモダンなTypeScript SDKを生成（推奨）
+1. **[マクロリファレンス](/ja/shank/macros)**: すべてのShankマクロと属性の完全なリファレンス
+2. **[Kinobiとの統合](/ja/umi/kinobi)**: Umiと互換性のあるモダンなTypeScript SDKを生成（推奨）
 3. **[Solita](https://github.com/metaplex-foundation/solita)**: web3.jsと互換性のあるレガシーTypeScript SDKを生成
 
 ## トラブルシューティング

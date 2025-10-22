@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { products } from '@/components/products'
 import { useLocale } from '@/contexts/LocaleContext'
 import { getLocalizedSections } from '@/shared/localizedSections'
+import { getLocalizedHref } from '@/config/languages'
 
 export function usePage(pageProps) {
   const { pathname } = useRouter()
@@ -160,22 +161,14 @@ function localizeProduct(product, locale) {
   const sections = getLocalizedSections(locale)
 
   // Helper to adjust href paths for non-English locales
-  const getHref = (path) => {
-    // Don't modify external URLs
-    if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('//')) {
-      return path
-    }
-    
-    if (locale === 'en') return path
-    return `/${locale}${path}`
-  }
+  const getHref = (path) => getLocalizedHref(path, locale)
 
   // Clone the product to avoid mutating the original
   const localizedProduct = { ...product }
 
   // Localize product headline and description
-  if (product.localizedNavigation) {
-    const productNav = product.localizedNavigation[locale] || product.localizedNavigation['en']
+  if (product.localizedNavigation && product.localizedNavigation[locale]) {
+    const productNav = product.localizedNavigation[locale]
     if (productNav.headline) {
       localizedProduct.headline = productNav.headline
     }
@@ -206,14 +199,23 @@ function localizeProduct(product, locale) {
       }
 
       // Localize navigation using product-specific translations
-      if (product.localizedNavigation && section.navigation) {
-        const productNav = product.localizedNavigation[locale] || product.localizedNavigation['en']
+      if (product.localizedNavigation && product.localizedNavigation[locale] && section.navigation) {
+        const productNav = product.localizedNavigation[locale]
         localizedSection.navigation = section.navigation.map(navGroup => ({
           ...navGroup,
-          title: productNav.sections[navGroup.title] || navGroup.title,
+          title: (productNav.sections && productNav.sections[navGroup.title]) || navGroup.title,
           links: navGroup.links.map(link => ({
             ...link,
-            title: productNav.links[link.title] || link.title,
+            title: (productNav.links && productNav.links[link.title]) || link.title,
+            href: getHref(link.href)
+          }))
+        }))
+      } else if (section.navigation) {
+        // Even without translations, update hrefs for non-English locales
+        localizedSection.navigation = section.navigation.map(navGroup => ({
+          ...navGroup,
+          links: navGroup.links.map(link => ({
+            ...link,
             href: getHref(link.href)
           }))
         }))

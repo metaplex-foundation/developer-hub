@@ -61,14 +61,14 @@ console.log("Signer: ", signer.publicKey);
 umi.use(signerIdentity(signer));
 ```
 
-UMI 설정에 대한 자세한 정보는 [여기](https://developers.metaplex.com/kr/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)에서 찾을 수 있습니다.
+UMI 설정에 대한 자세한 정보는 [여기](https://developers.metaplex.com/ko/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)에서 찾을 수 있습니다.
 
 ## 공개 데이터 준비
 이제 최종 공개된 NFT의 메타데이터가 포함될 공개 데이터를 준비해보겠습니다. 이 데이터는 컬렉션의 각 NFT에 대한 이름과 URI를 포함하며 민팅 후 플레이스홀더 메타데이터를 업데이트하는 데 사용됩니다.
 이 메타데이터는 각 asset에 대해 업로드되며, 결과 URI를 사용할 것입니다.
 
 공개 데이터를 직접 업로드해야 한다는 점을 참고하세요.
-이 과정은 기본적으로 결정론적이지 않을 것입니다. 결정론적인 방식으로 수행하려면 [turbo](https://developers.metaplex.com/kr/guides/general/create-deterministic-metadata-with-turbo)를 사용할 수 있습니다.
+이 과정은 기본적으로 결정론적이지 않을 것입니다. 결정론적인 방식으로 수행하려면 [turbo](https://developers.metaplex.com/ko/guides/general/create-deterministic-metadata-with-turbo)를 사용할 수 있습니다.
 
 이 예제에서는 5개 asset의 컬렉션으로 작업할 것이므로, 공개 데이터에는 각각 개별 NFT의 이름과 URI를 나타내는 5개 객체의 배열이 포함됩니다.
 
@@ -95,7 +95,7 @@ let hash = crypto.createHash('sha256').update(string).digest()
 이제 Collection asset을 생성해보겠습니다.
 이를 위해 mpl-core 라이브러리는 해당 작업을 수행하는 데 도움이 되는 `createCollection` 메서드를 제공합니다.
 
-컬렉션에 대해 자세히 알아보려면 [여기](https://developers.metaplex.com/kr/core/collections)를 참고하세요.
+컬렉션에 대해 자세히 알아보려면 [여기](https://developers.metaplex.com/ko/core/collections)를 참고하세요.
 
 ```ts
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
@@ -148,9 +148,9 @@ console.log("Collection Details: \n", collection);
 
 이를 달성하기 위해 mpl-core-candy-machine 라이브러리의 `create` 메서드를 사용하고, `revealData`에서 플레이스홀더 이름, URI, 미리 계산된 해시로 `hiddenSettings`를 설정합니다.
 
-Core Candy Machine 생성과 guard에 대한 자세한 정보는 [여기](https://developers.metaplex.com/kr/core-candy-machine/create)에서 찾을 수 있습니다.
+Core Candy Machine 생성과 guard에 대한 자세한 정보는 [여기](https://developers.metaplex.com/ko/core-candy-machine/create)에서 찾을 수 있습니다.
 
-또한 민팅이 시작되는 시점을 결정하는 startDate guard를 구성합니다. 이는 사용 가능한 많은 guard 중 하나일 뿐이며 사용 가능한 모든 guard의 목록은 [여기](https://developers.metaplex.com/kr/candy-machine/guards)에서 찾을 수 있습니다.
+또한 민팅이 시작되는 시점을 결정하는 startDate guard를 구성합니다. 이는 사용 가능한 많은 guard 중 하나일 뿐이며 사용 가능한 모든 guard의 목록은 [여기](https://developers.metaplex.com/ko/candy-machine/guards)에서 찾을 수 있습니다.
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';

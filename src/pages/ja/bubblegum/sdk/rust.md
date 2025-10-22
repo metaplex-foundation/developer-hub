@@ -28,7 +28,7 @@ cargo add mpl-bubblegum
 
 すべてのBubblegum命令のリストはここにあります：[MPL-Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
-Rustの使用に関するより包括的なガイドについては、[Metaplex Rust SDKsガイド](/jp/guides/rust/metaplex-rust-sdks)ページをご覧ください。
+Rustの使用に関するより包括的なガイドについては、[Metaplex Rust SDKsガイド](/ja/guides/rust/metaplex-rust-sdks)ページをご覧ください。
 
 #### CreateTreeConfigBuilder - 例
 
@@ -99,7 +99,7 @@ pub async fn create_tree(keypair: Keypair) {
 
 すべてのBubblegum命令のリストはここにあります：[Metaplex Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
-Metaplexクレートを使用してCPI命令を作成するより包括的なガイドについては、[Metaplexプログラムへのcpi方法ガイド](/jp/guides/rust/how-to-cpi-into-a-metaplex-program)ページをご覧ください。
+Metaplexクレートを使用してCPI命令を作成するより包括的なガイドについては、[Metaplexプログラムへのcpi方法ガイド](/ja/guides/rust/how-to-cpi-into-a-metaplex-program)ページをご覧ください。
 
 #### CreateTreeConfigCpiBuilder - 例
 
