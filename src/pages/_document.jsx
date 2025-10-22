@@ -1,4 +1,5 @@
 import { Head, Html, Main, NextScript } from 'next/document'
+import Document from 'next/document'
 
 const themeScript = `
   let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)')
@@ -38,9 +39,28 @@ const themeScript = `
   isDarkMode.addEventListener('change', () => updateThemeWithoutTransitions())
 `
 
-export default function Document() {
-  return (
-    <Html className="antialiased [font-feature-settings:'ss01'] scrollbar" lang="en">
+class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx)
+
+    // Extract locale from the URL path
+    let locale = 'en'
+    const path = ctx.asPath || ctx.req?.url || ''
+
+    if (path.startsWith('/ja')) {
+      locale = 'ja'
+    } else if (path.startsWith('/ko')) {
+      locale = 'ko'
+    }
+
+    return { ...initialProps, locale }
+  }
+
+  render() {
+    const { locale = 'en' } = this.props
+
+    return (
+      <Html className="antialiased [font-feature-settings:'ss01'] scrollbar" lang={locale}>
       <Head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <link
@@ -70,5 +90,8 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  )
+    )
+  }
 }
+
+export default MyDocument
