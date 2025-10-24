@@ -3,6 +3,7 @@ import {
 } from '@/shared/sections';
 import { TableCellsIcon } from '@heroicons/react/24/solid';
 import { Hero } from './Hero';
+import { buildProductTranslations } from '@/config/navigation-translations';
 
 export const das = {
   name: 'DAS API',
@@ -80,4 +81,53 @@ export const das = {
       ],
     },
   ],
+  localizedNavigation: buildProductTranslations({
+    productKey: 'dasApi',
+    sectionKeys: {
+      'Introduction': 'sections.introduction',
+      'Methods & Playground': 'sections.methods',
+      'Guides': 'sections.guides',
+      'Core Extension SDK': 'sections.coreExtension'
+    },
+    linkKeys: {
+      'Overview': 'links.overview',
+      'Getting Started': 'links.gettingStarted',
+      'DAS API RPC Providers': 'links.dasApiProviders',
+      'Display Options': 'links.displayOptions',
+      'Method Overview': 'links.methodOverview',
+      'Get Asset': 'links.getAsset',
+      'Get Assets': 'links.getAssets',
+      'Get Asset Proof': 'links.getAssetProof',
+      'Get Asset Proofs': 'links.getAssetProofs',
+      'Get Asset Signatures': 'links.getAssetSignatures',
+      'Get Assets By Authority': 'links.getAssetsByAuthority',
+      'Get Assets By Creator': 'links.getAssetsByCreator',
+      'Get Assets By Group': 'links.getAssetsByGroup',
+      'Get Assets By Owner': 'links.getAssetsByOwner',
+      'Get NFT Editions': 'links.getNftEditions',
+      'Get Token Accounts': 'links.getTokenAccounts',
+      'Search Assets': 'links.searchAssets',
+      'Guides Overview': 'links.guidesOverview',
+      'Pagination': 'links.pagination',
+      'Get Collection NFTs': 'links.getCollectionNfts',
+      'Get NFTs by Owner': 'links.getNftsByOwner',
+      'Get Wallet Tokens': 'links.getWalletTokens',
+      'Get Fungible Assets': 'links.getFungibleAssets',
+      'Search by Criteria': 'links.searchByCriteria',
+      'Owner and Collection': 'links.ownerAndCollection',
+      'Find Compressed NFTs': 'links.findCompressedNfts',
+      'Collection Statistics': 'links.collectionStatistics',
+      'Find Token Holders': 'links.findTokenHolders',
+      'Extension Overview': 'links.extensionOverview',
+      'Get Core Asset': 'links.getCoreAsset',
+      'Get Core Collection': 'links.getCoreCollection',
+      'Get Core Assets By Authority': 'links.getCoreAssetsByAuthority',
+      'Get Core Assets By Collection': 'links.getCoreAssetsByCollection',
+      'Get Core Assets By Owner': 'links.getCoreAssetsByOwner',
+      'Search Core Assets': 'links.searchCoreAssets',
+      'Search Core Collections': 'links.searchCoreCollections',
+      'Plugin Derivation': 'links.pluginDerivation',
+      'Type Conversion': 'links.typeConversion'
+    }
+  })
 }

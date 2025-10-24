@@ -59,6 +59,7 @@ const redirectRules = {
 export function middleware(request) {
   const { pathname } = request.nextUrl
 
+  // Handle legacy redirects
   for (const [rootPath, rule] of Object.entries(redirectRules)) {
     if (pathname.startsWith(rootPath)) {
       if (typeof rule === 'string') {

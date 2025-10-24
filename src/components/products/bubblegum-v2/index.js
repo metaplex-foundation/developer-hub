@@ -5,6 +5,7 @@ import {
 } from '@/shared/sections';
 import { FolderIcon } from '@heroicons/react/24/solid';
 import { Hero } from './Hero';
+import { buildProductTranslations } from '@/config/navigation-translations';
 
 export const bubblegumv2 = {
   name: 'Bubblegum v2',
@@ -90,4 +91,95 @@ export const bubblegumv2 = {
       target: '_blank'
     },
   ],
+  // Hybrid approach: Keep product display (headline/desc) in product file for easy editing
+  // Use centralized keys for common navigation terms, inline for product-specific terms
+  localizedNavigation: buildProductTranslations({
+    // Product display translations - edit right here!
+    headlineTranslations: {
+      ja: '改良された圧縮NFT',
+      ko: '개선된 압축 NFT'
+    },
+    descriptionTranslations: {
+      ja: '新たな桁のスケールを実現するNFT。',
+      ko: '새로운 차원의 확장성을 제공하는 NFT입니다.'
+    },
+
+    sectionKeys: {
+      'Introduction': 'sections.introduction',  // Common - centralized
+      'SDK': 'sections.sdk',                     // Common - centralized
+      'Features': 'sections.features',           // Common - centralized
+      'Advanced': 'sections.advanced'            // Common - centralized
+    },
+    linkKeys: {
+      // Common terms - use centralized translations
+      'Overview': 'links.overview',
+      'FAQ': 'links.faq',
+      'Javascript': 'links.javascript',
+      'Rust': 'links.rust',
+      'Collections': 'links.collections',
+
+      // Bubblegum-specific terms - inline for easy editing
+      // To change these, edit right here in this file!
+      'Metaplex DAS API RPCs': {
+        ja: 'Metaplex DAS API RPC',
+        ko: 'Metaplex DAS API RPC'
+      },
+      'Creating Bubblegum Trees': {
+        ja: 'Bubblegumツリーの作成',
+        ko: 'Bubblegum 트리 생성'
+      },
+      'Minting Compressed NFTs (cNFTs)': {
+        ja: '圧縮NFT（cNFT）のミント',
+        ko: '압축 NFT(cNFT) 민팅'
+      },
+      'Fetching cNFTs': {
+        ja: 'cNFTの取得',
+        ko: 'cNFT 가져오기'
+      },
+      'Transferring cNFTs': {
+        ja: 'cNFTの転送',
+        ko: 'cNFT 전송'
+      },
+      'Freeze and Thaw cNFTs': {
+        ja: 'cNFTの凍結と解凍',
+        ko: 'cNFT 동결 및 해제'
+      },
+      'Updating cNFTs': {
+        ja: 'cNFTの更新',
+        ko: 'cNFT 업데이트'
+      },
+      'Burning cNFTs': {
+        ja: 'cNFTのバーン',
+        ko: 'cNFT 소각'
+      },
+      'Delegating cNFTs': {
+        ja: 'cNFTのデリゲート',
+        ko: 'cNFT 위임'
+      },
+      'Delegating Trees': {
+        ja: 'ツリーのデリゲート',
+        ko: '트리 위임'
+      },
+      'Verifying Creators': {
+        ja: '作成者の検証',
+        ko: '크리에이터 검증'
+      },
+      'Concurrent Merkle Trees': {
+        ja: '同時マークルツリー',
+        ko: '동시 머클 트리'
+      },
+      'Storing and Indexing NFT Data': {
+        ja: 'NFTデータの保存とインデックス化',
+        ko: 'NFT 데이터 저장 및 인덱싱'
+      },
+      'Hashing NFT Data': {
+        ja: 'NFTデータのハッシュ化',
+        ko: 'NFT 데이터 해싱'
+      },
+      'Merkle Tree Canopy': {
+        ja: 'マークルツリーキャノピー',
+        ko: '머클 트리 캐노피'
+      }
+    }
+  })
 }

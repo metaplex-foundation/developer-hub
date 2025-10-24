@@ -2,25 +2,44 @@ import { slugifyWithCounter } from '@sindresorhus/slugify'
 import { useRouter } from 'next/router'
 
 import { products } from '@/components/products'
+import { useLocale } from '@/contexts/LocaleContext'
+import { getLocalizedSections } from '@/shared/localizedSections'
+import { getLocalizedHref } from '@/config/languages'
 
 export function usePage(pageProps) {
   const { pathname } = useRouter()
-  const title = pageProps.markdoc?.frontmatter.title ?? 'Metaplex Documentation'
-  const product = getActiveProduct(pathname, pageProps)
-  const activeSection = getActiveSection(pathname, product, pageProps)
-  const activeHero = getActiveHero(pathname, product, pageProps)
+  const { locale, t } = useLocale()
+  
+  // Remove locale prefix for product matching (for /ja/core -> core)
+  const normalizedPathname = locale !== 'en' && pathname.startsWith(`/${locale}`)
+    ? pathname.slice(`/${locale}`.length) || '/'
+    : pathname
+  
+  const title = pageProps.markdoc?.frontmatter.title ?? t('meta.defaultTitle', 'Metaplex Documentation')
+  const rawProduct = getActiveProduct(normalizedPathname, pageProps)
+  const product = rawProduct ? localizeProduct(rawProduct, locale) : rawProduct
+  const activeSection = getActiveSection(normalizedPathname, product, pageProps)
+  const activeHero = getActiveHero(normalizedPathname, product, pageProps)
+
+  // Special handling for 404 pages - localize the title
+  const localizedTitle = title === 'Page Not Found' ? t('404.title') : title
+  const localizedMetaTitle = pageProps.markdoc?.frontmatter.metaTitle === 'Page Not Found | Metaplex Developer Hub' 
+    ? t('404.metaTitle') 
+    : (pageProps.markdoc?.frontmatter.metaTitle ?? localizedTitle)
 
   return {
-    title,
-    metaTitle: pageProps.markdoc?.frontmatter.metaTitle ?? title,
+    title: localizedTitle,
+    metaTitle: localizedMetaTitle,
     description: pageProps.markdoc?.frontmatter.description,
     created: pageProps.markdoc?.frontmatter.created ?? null,
     updated: pageProps.markdoc?.frontmatter.updated ?? null,
-    pathname,
+    pathname: normalizedPathname,
+    originalPathname: pathname,
+    locale,
     product,
     activeHero,
     activeSection,
-    isIndexPage: product?.path ? pathname === `/${product.path}` : false,
+    isIndexPage: product?.path ? normalizedPathname === `/${product.path}` : normalizedPathname === '/',
     tableOfContents: pageProps.markdoc?.frontmatter.tableOfContents != false && pageProps.markdoc?.content
       ? parseTableOfContents(pageProps.markdoc.content)
       : [],
@@ -135,3 +154,77 @@ function getNodeText(node) {
   }
   return text
 }
+
+function localizeProduct(product, locale) {
+  if (locale === 'en') return product
+
+  const sections = getLocalizedSections(locale)
+
+  // Helper to adjust href paths for non-English locales
+  const getHref = (path) => getLocalizedHref(path, locale)
+
+  // Clone the product to avoid mutating the original
+  const localizedProduct = { ...product }
+
+  // Localize product headline and description
+  if (product.localizedNavigation && product.localizedNavigation[locale]) {
+    const productNav = product.localizedNavigation[locale]
+    if (productNav.headline) {
+      localizedProduct.headline = productNav.headline
+    }
+    if (productNav.description) {
+      localizedProduct.description = productNav.description
+    }
+  }
+
+  // Localize sections
+  if (product.sections) {
+    localizedProduct.sections = product.sections.map(section => {
+      const localizedSection = { ...section }
+
+      // Update section title based on section id
+      if (section.id === 'documentation') {
+        localizedSection.title = sections.documentationSection().title
+      } else if (section.id === 'guides') {
+        localizedSection.title = sections.guidesSection().title
+      } else if (section.id === 'references') {
+        localizedSection.title = sections.referencesSection().title
+      } else if (section.id === 'changelog') {
+        localizedSection.title = sections.changelogSection().title
+      }
+
+      // Update href for non-English locales
+      if (section.href && locale !== 'en') {
+        localizedSection.href = getHref(section.href)
+      }
+
+      // Localize navigation using product-specific translations
+      if (product.localizedNavigation && product.localizedNavigation[locale] && section.navigation) {
+        const productNav = product.localizedNavigation[locale]
+        localizedSection.navigation = section.navigation.map(navGroup => ({
+          ...navGroup,
+          title: (productNav.sections && productNav.sections[navGroup.title]) || navGroup.title,
+          links: navGroup.links.map(link => ({
+            ...link,
+            title: (productNav.links && productNav.links[link.title]) || link.title,
+            href: getHref(link.href)
+          }))
+        }))
+      } else if (section.navigation) {
+        // Even without translations, update hrefs for non-English locales
+        localizedSection.navigation = section.navigation.map(navGroup => ({
+          ...navGroup,
+          links: navGroup.links.map(link => ({
+            ...link,
+            href: getHref(link.href)
+          }))
+        }))
+      }
+
+      return localizedSection
+    })
+  }
+
+  return localizedProduct
+}
+

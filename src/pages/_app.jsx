@@ -1,8 +1,9 @@
-import Head from 'next/head'
 import Script from 'next/script'
 
 import { DialectProvider } from '@/components/DialectContext'
+import { LocaleProvider } from '@/contexts/LocaleContext'
 import { Layout } from '@/components/Layout'
+import { SEOHead } from '@/components/SEOHead'
 import { usePage } from '@/shared/usePage'
 
 import '@/styles/extra.css'
@@ -16,33 +17,24 @@ import { Prism } from 'prism-react-renderer'
 require('prismjs/components/prism-rust')
 
 export default function App({ Component, pageProps }) {
+  return (
+    <LocaleProvider>
+      <AppContent Component={Component} pageProps={pageProps} />
+    </LocaleProvider>
+  )
+}
+
+function AppContent({ Component, pageProps }) {
   const page = usePage(pageProps)
 
   return (
     <>
-      <Head>
-        <title>{page.metaTitle}</title>
-        <meta property="og:title" content={page.metaTitle} />
-        <meta name="twitter:title" content={page.metaTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="developers.metaplex.com" />
-        <meta
-          property="og:image"
-          content="https://developers.metaplex.com/assets/social/dev-hub-preview.jpg"
-        />
-        <meta
-          name="twitter:image"
-          content="https://developers.metaplex.com/assets/social/dev-hub-preview.jpg"
-        />
-
-        {page.description && (
-          <>
-            <meta name="description" content={page.description} />
-            <meta property="og:description" content={page.description} />
-            <meta name="twitter:description" content={page.description} />
-          </>
-        )}
-      </Head>
+      <SEOHead
+        title={page.title}
+        description={page.description}
+        metaTitle={page.metaTitle}
+        locale={page.locale}
+      />
 
       <DialectProvider>
         <Layout page={page}>
