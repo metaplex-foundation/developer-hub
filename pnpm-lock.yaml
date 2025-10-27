@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@docsearch/react':
         specifier: ^3.8.0
-        version: 3.8.0(@algolia/client-search@5.19.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.17.3)
+        version: 3.8.0(@algolia/client-search@5.19.0)(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.17.3)
       '@headlessui/react':
         specifier: 2.2.0
         version: 2.2.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -22,10 +22,10 @@ importers:
         version: 1.0.9
       '@markdoc/markdoc':
         specifier: 0.3.0
-        version: 0.3.0(react@18.2.0)
+        version: 0.3.0(@types/react@18.3.26)(react@18.2.0)
       '@markdoc/next.js':
         specifier: 0.2.3
-        version: 0.2.3(@markdoc/markdoc@0.3.0(react@18.2.0))(next@13.4.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+        version: 0.2.3(@markdoc/markdoc@0.3.0(@types/react@18.3.26)(react@18.2.0))(next@13.4.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@sindresorhus/slugify':
         specifier: ^2.2.1
         version: 2.2.1
@@ -73,7 +73,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       reactflow:
         specifier: ^11.11.4
-        version: 11.11.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 11.11.4(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       tailwindcss:
         specifier: ^3.4.16
         version: 3.4.16
@@ -612,6 +612,12 @@ packages:
   '@types/mdurl@2.0.0':
     resolution: {integrity: sha512-RGdgjQUZba5p6QEFAVx2OGb8rQDL/cPRG7GiedRzMcJ1tYnUANBncjbSB1NRGwbvjcPeikRABz2nshyPk1bhWg==}
 
+  '@types/prop-types@15.7.15':
+    resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
+
+  '@types/react@18.3.26':
+    resolution: {integrity: sha512-RFA/bURkcKzx/X9oumPG9Vp3D3JUgus/d0b67KB0t5S/raciymilkOa66olh78MUI92QLbEJevO7rvqU/kjwKA==}
+
   '@typescript-eslint/parser@5.62.0':
     resolution: {integrity: sha512-VlJEV0fOQ7BExOsHYAGrgbEiZoi8D+Bl2+f6V2RrXerRSylnp+ZBHmPvaIa8cz0Ajx7WO7Z5RqfgYg7ED1nRhA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -884,6 +890,9 @@ packages:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
     hasBin: true
+
+  csstype@3.1.3:
+    resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
   d3-color@3.1.0:
     resolution: {integrity: sha512-zg/chbXyeBtMQ1LbD/WSoW2DpC3I0mpmPdW+ynRTj/x2DAWYrIY7qeZIHidozwV24m4iavr15lNwIwLxRmOxhA==}
@@ -2469,13 +2478,14 @@ snapshots:
 
   '@docsearch/css@3.8.0': {}
 
-  '@docsearch/react@3.8.0(@algolia/client-search@5.19.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.17.3)':
+  '@docsearch/react@3.8.0(@algolia/client-search@5.19.0)(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.17.3)':
     dependencies:
       '@algolia/autocomplete-core': 1.17.7(@algolia/client-search@5.19.0)(algoliasearch@5.17.1)(search-insights@2.17.3)
       '@algolia/autocomplete-preset-algolia': 1.17.7(@algolia/client-search@5.19.0)(algoliasearch@5.17.1)
       '@docsearch/css': 3.8.0
       algoliasearch: 5.17.1
     optionalDependencies:
+      '@types/react': 18.3.26
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       search-insights: 2.17.3
@@ -2604,14 +2614,15 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@markdoc/markdoc@0.3.0(react@18.2.0)':
+  '@markdoc/markdoc@0.3.0(@types/react@18.3.26)(react@18.2.0)':
     optionalDependencies:
       '@types/markdown-it': 12.2.3
+      '@types/react': 18.3.26
       react: 18.2.0
 
-  '@markdoc/next.js@0.2.3(@markdoc/markdoc@0.3.0(react@18.2.0))(next@13.4.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
+  '@markdoc/next.js@0.2.3(@markdoc/markdoc@0.3.0(@types/react@18.3.26)(react@18.2.0))(next@13.4.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@markdoc/markdoc': 0.3.0(react@18.2.0)
+      '@markdoc/markdoc': 0.3.0(@types/react@18.3.26)(react@18.2.0)
       js-yaml: 4.1.0
       next: 13.4.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
@@ -2704,29 +2715,29 @@ snapshots:
     dependencies:
       react: 18.2.0
 
-  '@reactflow/background@11.3.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@reactflow/background@11.3.14(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@reactflow/core': 11.11.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/core': 11.11.4(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classcat: 5.0.5
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.5.5(react@18.2.0)
+      zustand: 4.5.5(@types/react@18.3.26)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - immer
 
-  '@reactflow/controls@11.2.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@reactflow/controls@11.2.14(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@reactflow/core': 11.11.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/core': 11.11.4(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classcat: 5.0.5
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.5.5(react@18.2.0)
+      zustand: 4.5.5(@types/react@18.3.26)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - immer
 
-  '@reactflow/core@11.11.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@reactflow/core@11.11.4(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@types/d3': 7.4.3
       '@types/d3-drag': 3.0.7
@@ -2738,14 +2749,14 @@ snapshots:
       d3-zoom: 3.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.5.5(react@18.2.0)
+      zustand: 4.5.5(@types/react@18.3.26)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - immer
 
-  '@reactflow/minimap@11.7.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@reactflow/minimap@11.7.14(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@reactflow/core': 11.11.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/core': 11.11.4(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@types/d3-selection': 3.0.11
       '@types/d3-zoom': 3.0.8
       classcat: 5.0.5
@@ -2753,31 +2764,31 @@ snapshots:
       d3-zoom: 3.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.5.5(react@18.2.0)
+      zustand: 4.5.5(@types/react@18.3.26)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - immer
 
-  '@reactflow/node-resizer@2.2.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@reactflow/node-resizer@2.2.14(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@reactflow/core': 11.11.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/core': 11.11.4(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classcat: 5.0.5
       d3-drag: 3.0.0
       d3-selection: 3.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.5.5(react@18.2.0)
+      zustand: 4.5.5(@types/react@18.3.26)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - immer
 
-  '@reactflow/node-toolbar@1.3.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@reactflow/node-toolbar@1.3.14(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@reactflow/core': 11.11.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/core': 11.11.4(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classcat: 5.0.5
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.5.5(react@18.2.0)
+      zustand: 4.5.5(@types/react@18.3.26)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - immer
@@ -2952,6 +2963,15 @@ snapshots:
     optional: true
 
   '@types/mdurl@2.0.0':
+    optional: true
+
+  '@types/prop-types@15.7.15':
+    optional: true
+
+  '@types/react@18.3.26':
+    dependencies:
+      '@types/prop-types': 15.7.15
+      csstype: 3.1.3
     optional: true
 
   '@typescript-eslint/parser@5.62.0(eslint@8.26.0)(typescript@5.7.3)':
@@ -3277,6 +3297,9 @@ snapshots:
       which: 2.0.2
 
   cssesc@3.0.0: {}
+
+  csstype@3.1.3:
+    optional: true
 
   d3-color@3.1.0: {}
 
@@ -4407,14 +4430,14 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
-  reactflow@11.11.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  reactflow@11.11.4(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      '@reactflow/background': 11.3.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@reactflow/controls': 11.2.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@reactflow/core': 11.11.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@reactflow/minimap': 11.7.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@reactflow/node-resizer': 2.2.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@reactflow/node-toolbar': 1.3.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/background': 11.3.14(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/controls': 11.2.14(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/core': 11.11.4(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/minimap': 11.7.14(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/node-resizer': 2.2.14(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/node-toolbar': 1.3.14(@types/react@18.3.26)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -4933,8 +4956,9 @@ snapshots:
 
   zod@3.21.4: {}
 
-  zustand@4.5.5(react@18.2.0):
+  zustand@4.5.5(@types/react@18.3.26)(react@18.2.0):
     dependencies:
       use-sync-external-store: 1.2.2(react@18.2.0)
     optionalDependencies:
+      '@types/react': 18.3.26
       react: 18.2.0

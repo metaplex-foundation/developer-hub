@@ -19,6 +19,8 @@ import GuideIndexComponent from '@/components/helperComponents/guideIndex'
 import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
+import { CodeTabs, CodeTab } from '@/components/code/CodeTabs'
+import { CodeTabsImported } from '@/components/code/CodeTabsImported'
 
 const tags = {
   callout: {
@@ -181,6 +183,33 @@ const tags = {
   },
   guideIndexComponent: {
     render: GuideIndexComponent,
+  },
+  'code-tabs': {
+    render: CodeTabs,
+    attributes: {
+      defaultLanguage: { type: String, default: 'javascript' },
+      persist: { type: Boolean, default: true },
+    },
+  },
+  'code-tab': {
+    render: CodeTab,
+    attributes: {
+      language: { type: String, required: true },
+      label: { type: String },
+    },
+  },
+  'code-tabs-imported': {
+    render: CodeTabsImported,
+    selfClosing: true,
+    attributes: {
+      from: { type: String, required: true },
+      frameworks: { type: String, default: 'kit,umi,shank,anchor' },
+      defaultFramework: { type: String, default: 'umi' },
+      showLineNumbers: { type: Boolean, default: false },
+      highlightLines: { type: String, default: '' },
+      showLines: { type: String, default: '' },
+      showCopy: { type: Boolean, default: true },
+    },
   },
 }
 
