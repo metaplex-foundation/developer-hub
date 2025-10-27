@@ -34,7 +34,7 @@ export function InteractiveCodeViewer({
   let language = 'javascript'
 
   try {
-    const exampleModule = require(`@/examples/${program}/${example}`)
+    const exampleModule = require(`@/examples/${program}/${example}/index.js`)
     const exampleData = exampleModule.examples[framework]
 
     if (exampleData) {

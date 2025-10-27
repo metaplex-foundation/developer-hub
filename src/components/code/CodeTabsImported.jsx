@@ -36,13 +36,13 @@ export function CodeTabsImported({
   // with code inlined as string constants (no runtime fs operations)
   let exampleModule
   try {
-    exampleModule = require(`@/examples/${from}`)
+    exampleModule = require(`@/examples/${from}/index.js`)
   } catch (error) {
     console.error(`Failed to load example from "${from}":`, error)
     return (
       <div className="my-6 rounded-lg border-2 border-red-300 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
         <p className="font-semibold text-red-800 dark:text-red-200">
-          Error: Could not load example "{from}"
+          Error: Could not load example &quot;{from}&quot;
         </p>
         <p className="mt-2 text-sm text-red-700 dark:text-red-300">
           Make sure the file exists at: <code>src/examples/{from}/index.js</code>
@@ -58,7 +58,7 @@ export function CodeTabsImported({
     return (
       <div className="my-6 rounded-lg border-2 border-red-300 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
         <p className="font-semibold text-red-800 dark:text-red-200">
-          Error: Example module is undefined "{from}"
+          Error: Example module is undefined &quot;{from}&quot;
         </p>
       </div>
     )
@@ -70,7 +70,7 @@ export function CodeTabsImported({
     return (
       <div className="my-6 rounded-lg border-2 border-yellow-300 bg-yellow-50 p-4 dark:border-yellow-800 dark:bg-yellow-900/20">
         <p className="font-semibold text-yellow-800 dark:text-yellow-200">
-          Warning: No examples found in "{from}"
+          Warning: No examples found in &quot;{from}&quot;
         </p>
         <p className="mt-2 text-sm text-yellow-700 dark:text-yellow-300">
           Make sure the file exports an <code>examples</code> object.

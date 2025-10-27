@@ -114,7 +114,7 @@ export default function CodeViewerPage() {
   const handleCopyCode = async () => {
     // Load the current code
     try {
-      const exampleModule = require(`@/examples/${program}/${example}`)
+      const exampleModule = require(`@/examples/${program}/${example}/index.js`)
       const exampleData = exampleModule.examples[framework]
 
       let code = ''
