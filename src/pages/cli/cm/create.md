@@ -21,7 +21,7 @@ mplx cm create
 
 ## Prerequisite Assets
 
-Independent of the Mode (Wizard or Manual) you choose you will need your assets prepared. If you want to play around with dummy assets you can create them using `mplx cm create --template`. All the image and metadata files should be in the their own `assets` folder.
+Independent of the Mode (Wizard or Manual) you choose you will need your assets prepared. If you want to play around with dummy assets you can create them using `mplx cm create --template`. All the image and metadata files should be in their own `assets` folder.
 
 *Image Files:*
 
@@ -153,7 +153,14 @@ cd ./my-candy-machine
 # 2. Create candy machine using existing config
 mplx cm create
 
-# 3. after that run upload and insert
+# 3. Upload assets to storage
+mplx cm upload
+
+# 4. Insert items into candy machine
+mplx cm insert
+
+# 5. Validate setup (optional)
+mplx cm validate
 ```
 
 ## Configuration Options
