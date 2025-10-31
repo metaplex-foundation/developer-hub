@@ -49,5 +49,5 @@ mplx cm insert
 
 1. すべてのアイテムがロードされていることを確認するために**[挿入を検証](/ja/cli/cm/fetch)**
 2. キャンディマシンが機能することを確認するために**[ミントをテスト](/ja/core-candy-machine/mint)**
-3. 問題をチェックするために**[パフォーマンスを監視](/ja/cli/cm/validate)**
+3. 問題をチェックするために**[キャッシュとアセットを検証](/ja/cli/cm/validate)**
 4. 適切なガードで**[ローンチを計画](/ja/core-candy-machine/guides)**

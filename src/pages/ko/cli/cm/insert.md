@@ -49,5 +49,5 @@ mplx cm insert
 
 1. 모든 아이템이 로드되었는지 확인하기 위해 **[삽입 확인](/ko/cli/cm/fetch)**
 2. 캔디 머신이 작동하는지 확인하기 위해 **[민팅 테스트](/ko/core-candy-machine/mint)**
-3. 문제를 확인하기 위해 **[성능 모니터링](/ko/cli/cm/validate)**
+3. 문제를 확인하기 위해 **[캐시 및 자산 검증](/ko/cli/cm/validate)**
 4. 적절한 가드로 **[출시 계획](/ko/core-candy-machine/guides)**
