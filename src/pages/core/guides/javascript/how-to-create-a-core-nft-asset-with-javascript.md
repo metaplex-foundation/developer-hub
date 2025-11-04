@@ -7,7 +7,7 @@ created: '06-16-2024'
 updated: '06-18-2024'
 ---
 
-This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Javascript SDK package to create a **Core NFT Asset** using the Metaplex Core onchain program.
+This guide will demonstrate the use of the `@metaplex-foundation/mpl-core` Javascript SDK package to create a **Core NFT Asset** using the Metaplex Core onchain program.
 
 {% callout title="What is Core?" %}
 
@@ -15,14 +15,13 @@ This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Java
 
 {% /callout %}
 
-But before starting, let's talk about Assets: 
+But before starting, let's talk about Assets:
 
 {% callout title="What is an Asset?" %}
 
 Setting itself apart from existing Asset programs, like Solana’s Token program, Metaplex Core and Core NFT Assets (sometimes referred to as Core NFT Assets) do not rely on multiple accounts, like Associated Token Accounts. Instead, Core NFT Assets store the relationship between a wallet and the "mint" account within the asset itself.
 
 {% /callout %}
-
 
 ## Prerequisite
 
@@ -71,6 +70,7 @@ Here we will define all needed imports for this particular guide and create a wr
 import { create, mplCore } from '@metaplex-foundation/mpl-core'
 import {
   createGenericFile,
+  createSignerFromKeypair,
   generateSigner,
   signerIdentity,
   sol,
@@ -96,7 +96,7 @@ createNft()
 
 ## Setting up Umi
 
-While setting up Umi you can use or generate keypairs/wallets from different sources. You create a new wallet for testing, import an existing wallet from the filesystem, or use `walletAdapter` if you are creating a website/dApp.  
+While setting up Umi you can use or generate keypairs/wallets from different sources. You create a new wallet for testing, import an existing wallet from the filesystem, or use `walletAdapter` if you are creating a website/dApp.
 
 **Note**: For this example we're going to set up Umi with a `generatedSigner()` but you can find all the possible setup down below!
 
@@ -131,7 +131,7 @@ await umi.rpc.airdrop(umi.identity.publickey)
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
-    .use(
+  .use(
     irysUploader({
       // mainnet address: "https://node1.irys.xyz"
       // devnet address: "https://devnet.irys.xyz"
@@ -139,19 +139,18 @@ const umi = createUmi('https://api.devnet.solana.com')
     })
   )
 
-// Generate a new keypair signer.
-const signer = generateSigner(umi)
-
 // You will need to us fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
 const walletFile = fs.readFileSync('./keypair.json')
 
-
 // Convert your walletFile onto a keypair.
-let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
+let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile))
 
-// Load the keypair into umi.
-umi.use(keypairIdentity(umiSigner));
+// Convert your keypair into a signer
+const umiSigner = createSignerFromKeypair(umi, keypair)
+
+// Load the signer into umi.
+umi.use(signerIdentity(umiSigner))
 ```
 
 {% /totem-accordion %}
@@ -165,9 +164,9 @@ import { useWallet } from '@solana/wallet-adapter-react'
 const wallet = useWallet()
 
 const umi = createUmi('https://api.devnet.solana.com')
-.use(mplCore())
-// Register Wallet Adapter to Umi
-.use(walletAdapterIdentity(wallet))
+  .use(mplCore())
+  // Register Wallet Adapter to Umi
+  .use(walletAdapterIdentity(wallet))
 ```
 
 {% /totem-accordion %}
@@ -182,7 +181,7 @@ To display a recognisable image for your Asset in the Wallets or on the Explorer
 
 ### Uploading the Image
 
-Umi comes with downloadable storage plugins that allow you to upload to storage solutions such `Arweave`, `NftStorage`, `AWS`, and `ShdwDrive`. For this guide we're going to use the `irysUploader()` plugin which stores content on  Arweave.
+Umi comes with downloadable storage plugins that allow you to upload to storage solutions such `Arweave`, `NftStorage`, `AWS`, and `ShdwDrive`. For this guide we're going to use the `irysUploader()` plugin which stores content on Arweave.
 
 In this example we're going to use a local approach using Irys to upload to Arweave; if you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
 
@@ -193,8 +192,7 @@ import fs from 'fs'
 import path from 'path'
 
 // Create Umi and tell it to use Irys
-const umi = createUmi('https://api.devnet.solana.com')
-  .use(irysUploader())
+const umi = createUmi('https://api.devnet.solana.com').use(irysUploader())
 
 // use `fs` to read file via a string path.
 // You will need to understand the concept of pathing from a computing perspective.
@@ -298,16 +296,18 @@ const tx = await create(umi, {
 const signature = base58.deserialize(tx.signature)[0]
 ```
 
-And log out the detail as follow: 
+And log out the detail as follow:
 
 ```ts
-  // Log out the signature and the links to the transaction and the NFT.
-  console.log('\nNFT Created')
-  console.log('View Transaction on Solana Explorer')
-  console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
-  console.log('\n')
-  console.log('View NFT on Metaplex Explorer')
-  console.log(`https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`)
+// Log out the signature and the links to the transaction and the NFT.
+console.log('\nNFT Created')
+console.log('View Transaction on Solana Explorer')
+console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
+console.log('\n')
+console.log('View NFT on Metaplex Explorer')
+console.log(
+  `https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`
+)
 ```
 
 ### Additional Actions
@@ -327,22 +327,22 @@ const tx = await create(umi, {
   uri: metadataUri,
   plugins: [
     {
-      type: "PermanentFreezeDelegate",
+      type: 'PermanentFreezeDelegate',
       frozen: true,
-      authority: { type: "UpdateAuthority"}
+      authority: { type: 'UpdateAuthority' },
     },
     {
-      type: "AppData",
-      dataAuthority: { type: "UpdateAuthority"},
+      type: 'AppData',
+      dataAuthority: { type: 'UpdateAuthority' },
       schema: ExternalPluginAdapterSchema.Binary,
-    }           
-  ]
+    },
+  ],
 }).sendAndConfirm(umi)
 
 const signature = base58.deserialize(tx.signature)[0]
 ```
 
-**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
+**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use!
 
 ## Full Code Example
 
@@ -391,9 +391,7 @@ const createNft = async () => {
   // use `fs` to read file via a string path.
   // You will need to understand the concept of pathing from a computing perspective.
 
-  const imageFile = fs.readFileSync(
-    path.join('./image.png')
-  )
+  const imageFile = fs.readFileSync(path.join('./image.png'))
 
   // Use `createGenericFile` to transform the file into a `GenericFile` type
   // that umi can understand. Make sure you set the mimi tag type correctly
@@ -456,11 +454,11 @@ const createNft = async () => {
   //
 
   // We generate a signer for the NFT
-  const asset = generateSigner(umi)
+  const nftSigner = generateSigner(umi)
 
   console.log('Creating NFT...')
   const tx = await create(umi, {
-    asset,
+    asset: nftSigner,
     name: 'My NFT',
     uri: metadataUri,
   }).sendAndConfirm(umi)
@@ -474,7 +472,9 @@ const createNft = async () => {
   console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
   console.log('\n')
   console.log('View NFT on Metaplex Explorer')
-  console.log(`https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`)
+  console.log(
+    `https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`
+  )
 }
 
 createNft()
