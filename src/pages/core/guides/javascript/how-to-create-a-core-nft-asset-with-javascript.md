@@ -70,7 +70,6 @@ Here we will define all needed imports for this particular guide and create a wr
 import { create, mplCore } from '@metaplex-foundation/mpl-core'
 import {
   createGenericFile,
-  createSignerFromKeypair,
   generateSigner,
   signerIdentity,
   sol,
@@ -146,11 +145,8 @@ const walletFile = fs.readFileSync('./keypair.json')
 // Convert your walletFile onto a keypair.
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile))
 
-// Convert your keypair into a signer
-const umiSigner = createSignerFromKeypair(umi, keypair)
-
-// Load the signer into umi.
-umi.use(signerIdentity(umiSigner))
+// Load the keypair into umi.
+umi.use(keypairIdentity(keypair))
 ```
 
 {% /totem-accordion %}
@@ -454,11 +450,11 @@ const createNft = async () => {
   //
 
   // We generate a signer for the NFT
-  const nftSigner = generateSigner(umi)
+  const asset = generateSigner(umi)
 
   console.log('Creating NFT...')
   const tx = await create(umi, {
-    asset: nftSigner,
+    asset,
     name: 'My NFT',
     uri: metadataUri,
   }).sendAndConfirm(umi)
@@ -473,7 +469,7 @@ const createNft = async () => {
   console.log('\n')
   console.log('View NFT on Metaplex Explorer')
   console.log(
-    `https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`
+    `https://core.metaplex.com/explorer/${asset.publicKey}?env=devnet`
   )
 }
 
