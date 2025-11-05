@@ -301,9 +301,7 @@ console.log('View Transaction on Solana Explorer')
 console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
 console.log('\n')
 console.log('View NFT on Metaplex Explorer')
-console.log(
-  `https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`
-)
+console.log(`https://core.metaplex.com/explorer/${asset.publicKey}?env=devnet`)
 ```
 
 ### Additional Actions
