@@ -71,6 +71,7 @@ import { create, mplCore } from '@metaplex-foundation/mpl-core'
 import {
   createGenericFile,
   generateSigner,
+  keypairIdentity,
   signerIdentity,
   sol,
 } from '@metaplex-foundation/umi'
