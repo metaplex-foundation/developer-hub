@@ -259,7 +259,6 @@ Candy Machine에 Sol Payment Guard를 추가하려면 터미널에서 `sugar lau
   "ruleSet": null,
   "awsConfig": null,
   "sdriveApiKey": null,
-  "shdwStorageAccount": null,
   "pinataConfig": null,
   "hiddenSettings": null,
   "guards": null,
