@@ -61,17 +61,6 @@ therefore not the default storage option.
 
 Please visit [https://infura.io/docs/ipfs](https://infura.io/docs/ipfs) for details.
 
-### NFT.Storage
-
-[The NFT.Storage flagship product](https://nft.storage/nft-storage-flagship-product) focuses on the enduring preservation of NFTs with a low one-time fee per. First mint your NFTs, then send NFT.Storage the NFT data that they preserve in endowment-backed long-term Filecoin storage. As an NFT.Storage user, you support the platform when you choose Pinata and Lighthouse for hot storage and [use the NFT.Storage referral links here](https://nft.storage/blog/announcing-our-new-partnerships-with-pinata-and-lighthouse), helping to sustain NFT.Storage. Your NFTs will also be included in the NFT Token Checker, a tool for block explorers, marketplaces and wallets to show verification that NFT collections, tokens, and CIDs are preserved by NFT.Storage.
-
-
-[NFT.Storage Classic](https://nft.storage/nft-storage-classic) is a free service that provides hot data storage on the decentralized Filecoin network with fast retrieval through IPFS. As of June 30, 2024, NFT.Storage have officially decommissioned the NFT.Storage Classic uploads, however retrieval of existing data remains operational. For NFT data already uploaded through NFT.Storage Classic, the NFT.Storage Gateway makes the data retrievable on block explorers, marketplaces and dapps.
-
-### Shadow Drive
-
-The [GenesysGo Shadow Drive](https://shdw.genesysgo.com/shadow-infrastructure-overview/shadow-drive-overview) is a decentralized storage network designed to run in parallel to, and integrate seamlessly with, Solana. Storage fees are paid in the SPL token, SHDW, and allow immutable or mutable storage of data.
-
 [Arweave]: https://arweave.org
 [arweave price service]: https://node1.bundlr.network/price/0
 [repo]: https://github.com/metaplex-foundation/metaplex
@@ -79,4 +68,3 @@ The [GenesysGo Shadow Drive](https://shdw.genesysgo.com/shadow-infrastructure-ov
 [winstons]: https://docs.arweave.org/developers/server/http-api#ar-and-winston
 [S3]: https://aws.amazon.com/s3/
 [arweave path manifest]: https://github.com/ArweaveTeam/arweave/wiki/Path-Manifests
-[nft.storage metaplex doc]: https://nft.storage/docs/how-to/mint-solana

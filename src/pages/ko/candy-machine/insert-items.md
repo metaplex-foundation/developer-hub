@@ -26,11 +26,11 @@ Candy Machine에 아이템을 삽입하려면 각 아이템에 대해 다음 두
 {% dialect-switcher title="아이템 업로드" %}
 {% dialect title="JavaScript" id="js" %}
 
-Umi는 선택한 스토리지 제공업체에 JSON 데이터를 업로드하는 데 사용할 수 있는 `uploader` 인터페이스를 제공합니다. 예를 들어, 다음은 업로더 인터페이스의 NFT.Storage 구현을 선택하는 방법입니다.
+Umi는 선택한 스토리지 제공업체에 JSON 데이터를 업로드하는 데 사용할 수 있는 `uploader` 인터페이스를 제공합니다. 예를 들어, 다음은 업로더 인터페이스의 Irys 구현을 선택하는 방법입니다.
 
 ```ts
-import { nftStorage } from '@metaplex-foundation/umi-uploader-nft-storage'
-umi.use(nftStorageUploader({ token: 'YOUR_API_TOKEN' }))
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+umi.use(irysUploader())
 ```
 
 그런 다음 `uploader` 인터페이스의 `upload` 및 `uploadJson` 메서드를 사용하여 자산과 해당 JSON 메타데이터를 업로드할 수 있습니다.

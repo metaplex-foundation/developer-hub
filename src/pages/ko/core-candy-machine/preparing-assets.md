@@ -70,14 +70,6 @@ Arweave는 자체 블록체인이므로 파일을 Arweave에 저장하기 위해
 
 자체 [SDK](https://docs.irys.xyz/)를 통해 수동으로 구현하거나 Irys를 통해 Arweave에 업로드하는 UMI 플러그인을 사용할 수 있습니다.
 
-#### nftStorage
-
-_"저비용의 사용하기 쉬운 솔루션으로 NFT를 보존하세요. 우리는 스마트 계약으로 구동되고 궁극적인 투명성을 위한 곧 출시될 온체인 기부금으로 뒷받침되는 검증 가능한 장기 저장소를 보장하는 것을 목표로 합니다." - [nftStorage](https://nft.storage/)_
-
-nftStorage는 파일을 IPFS(InterPlanetary File System) 네트워크에 업로드합니다.
-
-nftStorage에 업로드하려면 그들의 [API](https://app.nft.storage/v1/docs/intro) 문서를 따를 수 있습니다.
-
 #### 자체 호스팅
 
 AWS, Google Cloud, 또는 자신의 웹서버에서 이미지나 메타데이터를 자체 호스팅하는 것도 전혀 문제없습니다. 저장된 위치에서 데이터에 액세스할 수 있고 CORS 같은 것이 차단하지 않는 한 괜찮습니다. 자체 호스팅 옵션을 테스트하여 저장된 데이터를 볼 수 있는지 확인하기 위해 몇 개의 테스트 Core 자산이나 소규모 Core Candy Machine을 만드는 것이 권장됩니다.
@@ -87,7 +79,6 @@ AWS, Google Cloud, 또는 자신의 웹서버에서 이미지나 메타데이터
 Umi에는 플러그인을 통해 업로드 프로세스를 도와주는 몇 가지 플러그인이 있습니다. 현재 다음 플러그인이 지원됩니다:
 
 - Irys
-- NFT Storage
 - AWS
 
 #### Umi로 Irys를 통해 Arweave에 업로드하기
