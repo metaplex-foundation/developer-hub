@@ -17,7 +17,7 @@ type RpcAccount = AccountHeader & {
 };
 ```
 
-It also defines a `MaybeRpcAccount` type that represents an `RpcAccount` that may or may exist. When the account does not exist, it keeps track of its public key so that, in a list of accounts, we know which public key was not found.
+It also defines a `MaybeRpcAccount` type that represents an `RpcAccount` that may or may not exist. When the account does not exist, it keeps track of its public key so that, in a list of accounts, we know which public key was not found.
 
 ```ts
 type MaybeRpcAccount =
