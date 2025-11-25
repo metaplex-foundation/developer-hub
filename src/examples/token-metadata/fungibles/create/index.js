@@ -15,6 +15,14 @@ const umiSections = {
   "full": "// [IMPORTS]\nimport {\n    createAndMint,\n    mplTokenMetadata,\n    TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata';\nimport {\n    generateSigner,\n    keypairIdentity,\n    percentAmount,\n    some,\n} from '@metaplex-foundation/umi';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\nimport { readFileSync } from 'fs';\n// [/IMPORTS]\n\n// [SETUP]\n// Initialize Umi with Devnet endpoint\nconst umi = createUmi('https://api.devnet.solana.com').use(mplTokenMetadata())\n\n// Load your wallet/keypair\nconst wallet = '<your wallet file path>'\nconst secretKey = JSON.parse(readFileSync(wallet, 'utf-8'))\nconst keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))\numi.use(keypairIdentity(keypair))\n\n// Generate a new mint account\nconst mint = generateSigner(umi)\n// [/SETUP]\n\n// [MAIN]\n// Create and mint the fungible token with metadata\n// The minted tokens will be sent to the umi identity address\ncreateAndMint(umi, {\n  mint,\n  name: 'My Fungible Token',\n  symbol: 'MFT',\n  uri: 'https://arweave.net/7BzVsHRrEH0ldNOCCM4_E00BiAYuJP_EQiqvcEYz3YY',\n  sellerFeeBasisPoints: percentAmount(5.5),\n  decimals: some(9),\n  tokenStandard: TokenStandard.Fungible,\n  amount: 1000,\n}).sendAndConfirm(umi)\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Fungible token created:', mint.publicKey)\n// [/OUTPUT]\n"
 }
 
+const shankSections = {
+  "imports": "",
+  "setup": "",
+  "main": "",
+  "output": "",
+  "full": "use mpl_token_metadata::{\n    instructions::CreateV1Builder,\n    types::{PrintSupply, TokenStandard},\n};\nuse solana_rpc_client::rpc_client::RpcClient;\nuse solana_sdk::{\n     message::Message,\n     transaction::Transaction,\n};\n\n// 1. client is a reference to the initialized RpcClient\n// 2. every account is specified by their pubkey\n\nlet client = ...;\n\nlet create_ix = CreateV1Builder::new()\n    .metadata(metadata)\n    .mint(mint.pubkey(), true)\n    .authority(payer.pubkey())\n    .payer(payer.pubkey())\n    .update_authority(payer.pubkey(), false)\n    .name(String::from(\"My Fungible Token\"))\n    .uri(String::from(\"https://arweave.net/7BzVsHRrEH0ldNOCCM4_E00BiAYuJP_EQiqvcEYz3YY\"))\n    .symbol(String::from(\"MFT\"))\n    .seller_fee_basis_points(550)\n    .token_standard(TokenStandard::Fungible)\n    .print_supply(PrintSupply::Zero)\n    .instruction();\n\nlet message = Message::new(\n    &[create_ix],\n    Some(&payer.pubkey()),\n);\n\nlet blockhash = client.get_latest_blockhash()?;\nlet mut tx = Transaction::new(&[mint, payer], message, blockhash);\nclient.send_and_confirm_transaction(&tx)?;"
+}
+
 export const metadata = {
   title: "Create a Fungible Token",
   description: "Create a fungible token with metadata using Token Metadata",
@@ -27,6 +35,13 @@ export const examples = {
     language: 'javascript',
     code: umiSections.full,
     sections: umiSections,
+  },
+
+  shank: {
+    framework: 'Shank',
+    language: 'rust',
+    code: shankSections.full,
+    sections: shankSections,
   },
 
 }
