@@ -1,4 +1,6 @@
 // [IMPORTS]
+// To install all the required packages use the following command
+// npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
 import {
     createAndMint,
     mplTokenMetadata,
