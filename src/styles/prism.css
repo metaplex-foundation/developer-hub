@@ -6,6 +6,23 @@ pre[class*='language-'] {
   padding: 1rem;
 }
 
+/* Hero code blocks have their own container styling */
+.hero-code pre[class*='language-'],
+.dark .hero-code pre[class*='language-'],
+.hero-code .dark pre[class*='language-'] {
+  color: theme('colors.slate.50');
+  background-color: transparent !important;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-code code {
+  margin: 0;
+  padding: 0;
+}
+
 /* Light mode code blocks */
 @media (prefers-color-scheme: light) {
   pre[class*='language-'] {

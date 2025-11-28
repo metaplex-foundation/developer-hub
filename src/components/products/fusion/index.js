@@ -14,6 +14,7 @@ export const fusion = {
   github: 'https://github.com/metaplex-foundation/mpl-trifle',
   className: 'accent-amber',
   heroes: [{ path: '/fusion', component: Hero }],
+  deprecated: true,
   sections: [
     {
       ...documentationSection('fusion'),

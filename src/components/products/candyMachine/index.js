@@ -16,6 +16,7 @@ export const candyMachine = {
   github: 'https://github.com/metaplex-foundation/mpl-candy-machine',
   className: 'accent-pink',
   heroes: [{ path: '/candy-machine', component: Hero }],
+  deprecated: true,
   sections: [
     {
       ...documentationSection('candy-machine'),

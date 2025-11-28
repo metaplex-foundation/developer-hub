@@ -49,7 +49,7 @@ export function Search({iconOnly}) {
         className={`flex ${iconOnly ? "": "p-2 max-w-4xl w-full justify-start items-center "}`}
         onClick={onOpen}
       >
-        <SearchIcon className="h-7 w-7 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 lg:group-hover:fill-slate-400" />
+        <SearchIcon className="h-5 w-5 flex-none fill-slate-400 hover:fill-slate-300 transition-colors" />
         
         {/* <span className="sr-only lg:not-sr-only lg:ml-2 lg:text-slate-500 lg:dark:text-slate-400">
           Search docs

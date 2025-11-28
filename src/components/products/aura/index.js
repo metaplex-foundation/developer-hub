@@ -16,6 +16,7 @@ export const aura = {
     disabled: true,
   },
   heroes: [{ path: '/aura', component: Hero }],
+  deprecated: true,
   sections: [
     {
       ...documentationSection('aura'),

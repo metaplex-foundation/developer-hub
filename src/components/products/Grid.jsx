@@ -1,8 +1,11 @@
+import { getLocalizedHref } from '@/config/languages';
+import { useLocale } from '@/contexts/LocaleContext';
 import Link from 'next/link';
+import { nftMenuCategory, tokenMenuCategory } from '../NavList';
 import { IconWithName } from './IconWithName';
 import { products as allProducts } from './index';
-import { useLocale } from '@/contexts/LocaleContext';
-import { getLocalizedHref } from '@/config/languages';
+
+
 
 export function Grid({
   onClick,
@@ -14,6 +17,14 @@ export function Grid({
   const { locale } = useLocale()
   const products = allProducts.filter(
     (product) => menuItem === product.navigationMenuCatergory
+  )
+
+  const tokenMenuItems = tokenMenuCategory.filter(
+    (item) => menuItem === item.navigationMenuCatergory
+  )
+
+  const nftMenuItems = nftMenuCategory.filter(
+    (item) => menuItem === item.navigationMenuCatergory
   )
 
   // Localize product headlines and descriptions
@@ -35,21 +46,57 @@ export function Grid({
     return localizedProduct
   }
 
-  let className = `relative grid sm:grid-cols-2 grid-cols-1`
+  let className = `relative grid ${numCols || 'sm:grid-cols-2 grid-cols-1 '}`
 
   return (
     <ul className={className} {...props}>
       {products.map((product) => {
+        if (product.deprecated) {
+          return null
+        }
         const localizedProduct = localizeProduct(product)
         return (
           <li key={product.path || product.href}>
             <Link
               href={getLocalizedHref(product.href || product.path, locale)}
-              className="block content-start rounded-lg p-3 hover:bg-slate-50 hover:dark:bg-slate-700"
+              className="block content-start rounded-lg p-3 hover:bg-neutral-800"
               onClick={onClick}
               {...(product.target && { target: product.target })}
             >
               {IconWithName({ product: localizedProduct, description: true })}
+            </Link>
+          </li>
+        )
+      })}
+      {tokenMenuItems.map((item) => {
+        return (
+          <li key={item.href}>
+            <Link href={getLocalizedHref(item.href, locale)} className="block content-start rounded-lg p-3 hover:bg-neutral-800" onClick={onClick}>
+              
+              <div className="ml-4 flex flex-1 flex-col justify-center text-left">
+                <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
+                  {item.name}
+                </div>
+                <div className="mt-1 text-sm leading-none text-slate-500 dark:text-slate-400">
+                  {item.description}
+                </div>
+              </div>
+            </Link>
+          </li>
+        )
+      })}
+      {nftMenuItems.map((item) => {
+        return (
+          <li key={item.href}>
+            <Link href={getLocalizedHref(item.href, locale)} className="block content-start rounded-lg p-3 hover:bg-neutral-800" onClick={onClick}>
+              <div className="ml-4 flex flex-1 flex-col justify-center text-left">
+                <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
+                  {item.name}
+                </div>
+                <div className="mt-1 text-sm leading-none text-slate-500 dark:text-slate-400">
+                  {item.description}
+                </div>
+              </div>
             </Link>
           </li>
         )

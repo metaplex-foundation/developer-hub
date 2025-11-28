@@ -17,8 +17,22 @@ export function Navigation({ product, navigation, className }) {
 
   return (
     <nav className={clsx('text-base lg:text-sm', className)}>
+      {product?.name && (
+        <div className="mb-8">
+          <Link
+            href={`/${product.path}`}
+            className="font-display text-lg font-bold text-slate-900 hover:text-accent-500 dark:text-white dark:hover:text-accent-400"
+          >
+            {product.name}
+          </Link>
+          {product.headline && (
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              {product.headline}
+            </p>
+          )}
+        </div>
+      )}
       <ul role="list" className="space-y-9">
-        
         {navigation.map((section) => (
           <li key={`${product.name}-${section.title}`}>
             <h2 className="font-display font-medium text-slate-900 dark:text-white">
