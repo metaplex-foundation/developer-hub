@@ -11,6 +11,7 @@ export const sugar = {
   github: 'https://github.com/metaplex-foundation/sugar',
   className: 'accent-sky',
   heroes: [{ path: '/candy-machine/sugar', component: Hero }],
+  deprecated: true,
   sections: [
   ],
   localizedNavigation: {

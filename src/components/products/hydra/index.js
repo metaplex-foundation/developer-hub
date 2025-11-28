@@ -15,6 +15,7 @@ export const hydra = {
   github: 'https://github.com/metaplex-foundation/mpl-hydra',
   className: 'accent-amber',
   heroes: [{ path: '/hydra', component: Hero }],
+  deprecated: true,
   sections: [
     {
       ...documentationSection('hydra'),

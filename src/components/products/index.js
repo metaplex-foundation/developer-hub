@@ -18,16 +18,20 @@ import { shank } from './shank';
 import { sugar } from './sugar';
 import { tokenAuthRules } from './tokenAuthRules';
 import { tokenMetadata } from './tokenMetadata';
+import { tokens } from './tokens';
 import { umi } from './umi';
 
 export const productCategories = [
-  // 'Aura', 
+  // 'Aura',
+  'Tokens',
+  'NFTs',
   'MPL', 
   'Dev Tools'
 ]
 
 export const products = [
   global,
+  tokens,
   tokenMetadata,
   core,
   bubblegumv2,

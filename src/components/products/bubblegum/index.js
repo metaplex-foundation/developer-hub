@@ -16,6 +16,7 @@ export const bubblegum = {
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',
   heroes: [{ path: '/bubblegum', component: Hero }],
+  deprecated: true,
   sections: [
     {
       ...documentationSection('bubblegum'),

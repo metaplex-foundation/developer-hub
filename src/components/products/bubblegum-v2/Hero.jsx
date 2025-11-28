@@ -2,7 +2,7 @@ import { Hero as BaseHero } from '@/components/Hero';
 
 export function Hero({ page }) {
   return (
-    <BaseHero page={page} light2Off light3Off>
+    <BaseHero page={page}>
       <svg
         role="img"
         aria-labelledby="bubblegum-v2-hero-title"

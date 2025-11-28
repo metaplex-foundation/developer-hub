@@ -33,6 +33,26 @@ const nodes = {
       language: {
         type: String,
       },
+      showLineNumbers: {
+        type: Boolean,
+        default: false,
+      },
+      highlightLines: {
+        type: String,
+        default: '',
+      },
+      showLines: {
+        type: String,
+        default: '',
+      },
+      title: {
+        type: String,
+        default: '',
+      },
+      showCopy: {
+        type: Boolean,
+        default: true,
+      },
     },
   },
 }
