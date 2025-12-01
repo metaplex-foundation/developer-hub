@@ -28,24 +28,22 @@ export function LanguageSwitcher() {
   }, [])
 
   const getLocalizedPath = (targetLocale) => {
+    // First, normalize the pathname by removing any locale prefix (/en, /ja, /ko)
+    let normalizedPath = pathname
+    if (pathname.startsWith('/en/') || pathname === '/en') {
+      normalizedPath = pathname.slice('/en'.length) || '/'
+    } else if (pathname.startsWith('/ja/') || pathname === '/ja') {
+      normalizedPath = pathname.slice('/ja'.length) || '/'
+    } else if (pathname.startsWith('/ko/') || pathname === '/ko') {
+      normalizedPath = pathname.slice('/ko'.length) || '/'
+    }
+
     if (targetLocale === 'en') {
-      // For English, remove any locale prefix and return root path
-      if (pathname.startsWith('/ja')) {
-        return pathname.replace(/^\/ja/, '') || '/'
-      }
-      if (pathname.startsWith('/ko')) {
-        return pathname.replace(/^\/ko/, '') || '/'
-      }
-      return pathname
+      // For English, return the normalized path (root URL)
+      return normalizedPath
     } else {
       // For other locales, add the locale prefix
-      if (pathname.startsWith('/ja') || pathname.startsWith('/ko')) {
-        // Replace existing locale prefix
-        return pathname.replace(/^\/[a-z]{2}/, `/${targetLocale}`)
-      } else {
-        // Add locale prefix to English path
-        return `/${targetLocale}${pathname === '/' ? '' : pathname}`
-      }
+      return `/${targetLocale}${normalizedPath === '/' ? '' : normalizedPath}`
     }
   }
 

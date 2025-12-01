@@ -12,7 +12,7 @@ export const bubblegumv2 = {
   headline: 'Improved Compressed NFTs',
   description: 'NFTs that scale to new orders of magnitude.',
   path: 'bubblegum-v2',
-  navigationMenuCatergory: 'MPL',
+  navigationMenuCatergory: 'Programs',
   icon: <FolderIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',

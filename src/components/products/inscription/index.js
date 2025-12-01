@@ -11,7 +11,7 @@ export const inscription = {
   description: 'Inscribe Data to Solana state.',
   path: 'inscription',
   icon: <PencilSquareIcon />,
-  navigationMenuCatergory: 'MPL',
+  navigationMenuCatergory: 'Programs',
   github: 'https://github.com/metaplex-foundation/mpl-inscription',
   className: 'accent-green',
   heroes: [{ path: '/inscription', component: Hero }],

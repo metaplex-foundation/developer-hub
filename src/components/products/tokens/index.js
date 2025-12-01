@@ -33,6 +33,10 @@ export const tokens = {
               href: '/tokens/create-a-token',
             },
             {
+              title: 'Read Token Data',
+              href: '/tokens/read-token',
+            },
+            {
               title: 'Mint Tokens',
               href: '/tokens/mint-tokens',
             },

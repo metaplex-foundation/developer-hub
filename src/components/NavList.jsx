@@ -1,9 +1,8 @@
 'use client'
 
-import { getLocalizedHref } from '@/config/languages'
+import Link from 'next/link'
 import { useLocale, useTranslations } from '@/contexts/LocaleContext'
 import { Popover } from '@headlessui/react'
-import Link from 'next/link'
 import { SwitcherPopover } from './products/SwitcherPopover'
 import { productCategories } from './products/index'
 
@@ -94,9 +93,8 @@ const NavList = () => {
 
   const getTranslatedCategory = (category) => {
     const categoryMap = {
-      'MPL': t('mpl', 'MPL'),
+      'Programs': t('programs', 'Programs'),
       'Dev Tools': t('devTools', 'Dev Tools'),
-      'Aura': t('aura', 'Aura')
     }
     return categoryMap[category] || category
   }
@@ -129,14 +127,13 @@ const NavList = () => {
         )
       })}
 
-
-      {/* <div className="hidden flex-col lg:flex">
-        <Link href={getLocalizedHref("/guides", locale)}>
+      <div className="hidden flex-col lg:flex">
+        <Link href="/code-viewer">
           <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
-            {t('guides', 'Guides')}
+            Playground
           </div>
         </Link>
-      </div> */}
+      </div>
     </div>
   )
 }

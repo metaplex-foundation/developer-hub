@@ -9,7 +9,6 @@ import { Search } from '@/components/Search'
 import { categoryToColor, IconWithName } from '@/components/products/IconWithName'
 import { Sections } from '@/components/products/Sections'
 import NavList from './NavList'
-import { Logo } from './products/global/Logo'
 
 export function Header({ page }) {
   let [isScrolled, setIsScrolled] = useState(false)
@@ -47,17 +46,11 @@ export function Header({ page }) {
                 ),
                 className: 'h-8 w-8 sm:hidden',
               })}
-              <div className="flex">
-                <Logo className="h-8 w-8" />
-                <div className="ml-4 flex flex-1 flex-col justify-center text-left">
-                  <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
-                    Metaplex
-                  </div>
-                  <div className="mt-1 text-sm leading-none text-slate-500 dark:text-slate-400">
-                    Developer Hub
-                  </div>
-                </div>
-              </div>
+              <img
+                src="/metaplex-logo-white.png"
+                alt="Metaplex"
+                className="h-4 w-auto"
+              />
             </Link>
           </div>
           <div className="flex flex-col lg:hidden">

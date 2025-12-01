@@ -37,10 +37,10 @@ const ProductPreview = ({ productPreviewActions, accent, title, description }) =
   return (
     <div className={`${accent}`}>
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <h2 className="mb-8 text-center text-2xl font-bold text-slate-900 dark:text-white">
+        <h2 className="mb-2 text-2xl font-bold text-white">
           {title}
         </h2>
-        <p className="mb-8 text-center text-sm text-slate-600 dark:text-slate-400">
+        <p className="mb-8 text-sm text-neutral-400">
           {description}
         </p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">

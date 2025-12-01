@@ -11,7 +11,7 @@ export const bubblegum = {
   headline: 'Compressed NFTs',
   description: 'NFTs that scale.',
   path: 'bubblegum',
-  navigationMenuCatergory: 'MPL',
+  navigationMenuCatergory: 'Programs',
   icon: <ArchiveBoxIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',

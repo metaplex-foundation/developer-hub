@@ -8,7 +8,14 @@ const PROGRAMS = {
     label: 'MPL Core',
     examples: ['create-asset', 'transfer-asset', 'update-asset', 'burn-asset'],
   },
-  // Can add more programs later
+  'token-metadata': {
+    label: 'Token Metadata',
+    examples: ['create-nft', 'update-nft', 'transfer-nft', 'burn-nft'],
+  },
+  bubblegum: {
+    label: 'Bubblegum (cNFTs)',
+    examples: ['create-tree', 'mint-cnft', 'transfer-cnft', 'burn-cnft'],
+  },
 }
 
 export default function CodeViewerPage() {
@@ -226,36 +233,36 @@ export default function CodeViewerPage() {
   return (
     <>
       <Head>
-        <title>Code Viewer - Metaplex Developers</title>
-        <meta name="description" content="Quick code finder with annotations and sharing to help others understand Metaplex examples" />
+        <title>Playground - Metaplex Developers</title>
+        <meta name="description" content="Interactive code examples with annotations and sharing to help others understand Metaplex programs" />
       </Head>
 
-      <div className="min-h-screen bg-white dark:bg-[#0F1419]">
+      <div className="min-h-screen bg-white dark:bg-neutral-900">
         {/* Header */}
-        <div className="border-b border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-[#0F1419]">
-          <div className="mx-auto px-6 py-4">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Code Viewer
+        <div className="border-b border-slate-200 dark:border-slate-700">
+          <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <h1 className="text-2xl font-bold text-white">
+              Playground
             </h1>
-            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-              Quick code finder with annotations and sharing to help others understand Metaplex examples.
+            <p className="mt-2 text-sm text-neutral-400">
+              Interactive code examples with annotations and sharing to help others understand Metaplex programs.
             </p>
           </div>
         </div>
 
         {/* Controls */}
-        <div className="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-[#0F1419]">
-          <div className="mx-auto px-6 py-4">
+        <div className="border-b border-slate-200 dark:border-slate-700">
+          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap items-center gap-4">
               {/* Program Selector */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">
+                <label className="block text-xs font-medium text-neutral-400">
                   Program
                 </label>
                 <select
                   value={program}
                   onChange={(e) => handleProgramChange(e.target.value)}
-                  className="mt-1 block rounded-md border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-700 dark:bg-[#1A1F2E] dark:text-white"
+                  className="mt-1 block rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
                 >
                   {Object.entries(PROGRAMS).map(([key, { label }]) => (
                     <option key={key} value={key}>{label}</option>
@@ -265,13 +272,13 @@ export default function CodeViewerPage() {
 
               {/* Example Selector */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">
+                <label className="block text-xs font-medium text-neutral-400">
                   Example
                 </label>
                 <select
                   value={example}
                   onChange={(e) => handleExampleChange(e.target.value)}
-                  className="mt-1 block rounded-md border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-700 dark:bg-[#1A1F2E] dark:text-white"
+                  className="mt-1 block rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
                 >
                   {availableExamples.map((ex) => (
                     <option key={ex} value={ex}>{ex}</option>
@@ -281,13 +288,13 @@ export default function CodeViewerPage() {
 
               {/* Framework Selector */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">
+                <label className="block text-xs font-medium text-neutral-400">
                   Framework
                 </label>
                 <select
                   value={framework}
                   onChange={(e) => handleFrameworkChange(e.target.value)}
-                  className="mt-1 block rounded-md border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-700 dark:bg-[#1A1F2E] dark:text-white"
+                  className="mt-1 block rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
                 >
                   <option value="kit">Kit (JS)</option>
                   <option value="umi">Umi (JS)</option>
@@ -300,14 +307,14 @@ export default function CodeViewerPage() {
               <div className="ml-auto flex items-center gap-3">
                 {/* Display mode toggle */}
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-medium text-gray-700 dark:text-gray-300">View:</span>
-                  <div className="flex items-center rounded-md bg-gray-200/50 p-0.5 dark:bg-gray-700/50">
+                  <span className="text-xs font-medium text-neutral-400">View:</span>
+                  <div className="flex items-center rounded-md bg-slate-800 p-0.5">
                     <button
                       onClick={() => setDisplayMode('snippet')}
                       className={`rounded px-2.5 py-1 text-xs font-medium transition-all ${
                         displayMode === 'snippet'
-                          ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-800 dark:text-gray-100'
-                          : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
+                          ? 'bg-slate-700 text-white shadow-sm'
+                          : 'text-neutral-400 hover:text-white'
                       }`}
                     >
                       Snippet
@@ -316,8 +323,8 @@ export default function CodeViewerPage() {
                       onClick={() => setDisplayMode('full')}
                       className={`rounded px-2.5 py-1 text-xs font-medium transition-all ${
                         displayMode === 'full'
-                          ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-800 dark:text-gray-100'
-                          : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
+                          ? 'bg-slate-700 text-white shadow-sm'
+                          : 'text-neutral-400 hover:text-white'
                       }`}
                     >
                       Full
@@ -327,35 +334,31 @@ export default function CodeViewerPage() {
 
                 <button
                   onClick={handleClearAll}
-                  className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+                  className="rounded-md border border-slate-700 bg-slate-800 px-4 py-2 text-sm font-medium text-neutral-400 transition-colors hover:border-red-500 hover:text-red-500"
                   title="Clear all highlights and comments"
                 >
-                  Clear All
+                  Clear
                 </button>
                 <button
                   onClick={handleCopyCode}
-                  className="rounded-md bg-gray-600 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600"
+                  className="rounded-md border border-slate-700 bg-slate-800 px-4 py-2 text-sm font-medium text-neutral-400 transition-colors hover:border-slate-600 hover:text-white"
                 >
                   Copy Code
                 </button>
                 <button
                   onClick={handleShare}
-                  className="rounded-md bg-accent-600 px-4 py-2 text-sm font-medium text-white hover:bg-accent-700 dark:bg-accent-500 dark:hover:bg-accent-600"
+                  className="rounded-md bg-accent-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-600"
                 >
                   Share
                 </button>
               </div>
             </div>
 
-            {/* Instructions */}
-            <div className="mt-4 text-xs text-gray-600 dark:text-gray-400">
-              <strong>How to use:</strong> Click line numbers to highlight. Click on highlighted lines again to add/edit comments.
-            </div>
           </div>
         </div>
 
         {/* Code Viewer */}
-        <div className="mx-auto px-6 py-6">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <InteractiveCodeViewer
             program={program}
             example={example}

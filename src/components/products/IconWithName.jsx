@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const categoryToColor = new Map([
-  ['MPL', '#BEF264'],
+  ['Programs', '#BEF264'],
   ['Aura', '#F0ABFC'],
   ['Dev Tools', '#7DEDFC'],
 ])

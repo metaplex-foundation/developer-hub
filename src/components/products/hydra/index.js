@@ -10,7 +10,7 @@ export const hydra = {
   headline: 'Fanout wallets',
   description: 'Create shared wallets, split between multiple shareholders.',
   path: 'hydra',
-  navigationMenuCatergory: 'MPL',
+  navigationMenuCatergory: 'Programs',
   icon: <ArrowsPointingOutIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-hydra',
   className: 'accent-amber',

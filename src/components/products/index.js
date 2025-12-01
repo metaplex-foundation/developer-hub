@@ -25,7 +25,7 @@ export const productCategories = [
   // 'Aura',
   'Tokens',
   'NFTs',
-  'MPL', 
+  'Programs',
   'Dev Tools'
 ]
 

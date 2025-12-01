@@ -10,7 +10,7 @@ export const tokenMetadata = {
   name: 'Token Metadata',
   headline: 'Digital ownership standard',
   description: 'Create tokens and NFTs with the SPL Token Program',
-  navigationMenuCatergory: 'MPL',
+  navigationMenuCatergory: 'Programs',
   path: 'token-metadata',
   icon: <EllipsisHorizontalCircleIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',

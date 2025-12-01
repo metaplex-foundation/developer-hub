@@ -59,6 +59,13 @@ const redirectRules = {
 export function middleware(request) {
   const { pathname } = request.nextUrl
 
+  // Redirect /en/* paths to root /* for backwards compatibility
+  // This ensures users visiting /en/core are redirected to /core
+  if (pathname === '/en' || pathname.startsWith('/en/')) {
+    const newPath = pathname === '/en' ? '/' : pathname.slice('/en'.length)
+    return NextResponse.redirect(new URL(newPath, request.url), 308)
+  }
+
   // Handle legacy redirects
   for (const [rootPath, rule] of Object.entries(redirectRules)) {
     if (pathname.startsWith(rootPath)) {
@@ -76,19 +83,24 @@ export function middleware(request) {
     }
   }
 
+  // Rewrite root paths to /en/* for English content
+  // Skip paths that start with /ja, /ko, /en, /_next, /api, or contain a file extension
+  if (!pathname.startsWith('/ja') &&
+      !pathname.startsWith('/ko') &&
+      !pathname.startsWith('/_next') &&
+      !pathname.startsWith('/api') &&
+      !pathname.includes('.')) {
+    const url = request.nextUrl.clone()
+    url.pathname = `/en${pathname}`
+    return NextResponse.rewrite(url)
+  }
+
   return NextResponse.next()
 }
 
 export const config = {
   matcher: [
-    '/umi/:path*',
-    '/toolbox/:path*',
-    '/core/:path*',
-    '/mpl-hybrid/:path*',
-    '/guides/javascript/how-to-create-an-spl-token-on-solana',
-    '/core-candy-machine/:path*',
-    '/bubblegum/:path*',
-    '/aura/:path*',
-    '/legacy-documentation/:path*',
+    // Match all paths except static files, _next, and api
+    '/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)',
   ],
 }

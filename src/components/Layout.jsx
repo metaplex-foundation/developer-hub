@@ -15,6 +15,7 @@ import { useLightense } from '@/shared/useLightense'
 import ProductPreview from '@/components/productPreview'
 export function Layout({ children, page }) {
   const isHomePage = page.pathname === '/'
+  const isCodeViewer = page.pathname === '/code-viewer'
   const hasNavigation = !!page.activeSection?.navigation
   const Hero = page.activeHero
   useLightense()
@@ -52,11 +53,11 @@ export function Layout({ children, page }) {
           description="Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs."
         />
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-2xl font-bold text-white">MPL Programs</h2>
+          <h2 className="mb-2 text-2xl font-bold text-white">Programs</h2>
           <p className="mb-8 text-sm text-neutral-400">
-            Metaplex Program Library - on-chain programs for creating and managing digital assets on Solana.
+            On-chain programs for creating and managing digital assets on Solana.
           </p>
-          <Grid menuItem="MPL" numCols="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
+          <Grid menuItem="Programs" numCols="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
         </div>
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <h2 className="mb-2 text-2xl font-bold text-white">Developer Tools</h2>
@@ -98,7 +99,7 @@ export function Layout({ children, page }) {
             )}
           >
             <article>
-              {(page.title || page.activeSection?.navigationGroup) && (
+              {!isCodeViewer && (page.title || page.activeSection?.navigationGroup) && (
                 <header className="mb-9 space-y-1">
                   {page.activeSection?.navigationGroup && (
                     <p className="font-display text-sm font-medium text-accent-500">

@@ -10,7 +10,7 @@ export const candyMachine = {
   name: 'Candy Machine',
   headline: 'TM NFT launchpad',
   description: 'Launch your next NFT collection on Solana.',
-  navigationMenuCatergory: 'MPL',
+  navigationMenuCatergory: 'Programs',
   path: 'candy-machine',
   icon: <Square2StackIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-candy-machine',

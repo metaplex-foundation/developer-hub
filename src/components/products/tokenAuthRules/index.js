@@ -9,7 +9,7 @@ export const tokenAuthRules = {
   name: 'Token Auth Rules',
   headline: 'NFT permissions',
   description: 'Design custom authorization rules for your NFTs.',
-  navigationMenuCatergory: 'MPL',
+  navigationMenuCatergory: 'Programs',
   path: 'token-auth-rules',
   icon: <LockOpenIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-auth-rules',

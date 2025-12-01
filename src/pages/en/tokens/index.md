@@ -15,6 +15,7 @@ Fungible tokens are interchangeable digital assets where each unit is identical 
 This section provides beginner-friendly guides for common token operations:
 
 - **[Create a Token](/tokens/create-a-token)** - Create a new fungible token with custom metadata
+- **[Read Token Data](/tokens/read-token)** - Fetch token information from the blockchain or DAS API
 - **[Mint Tokens](/tokens/mint-tokens)** - Mint additional tokens to increase supply
 - **[Transfer Tokens](/tokens/transfer-a-token)** - Transfer tokens between wallets
 - **[Update Token Metadata](/tokens/update-token)** - Update token name, symbol, or image
