@@ -21,7 +21,7 @@ export function CodeTabsWithContext({
   examples,
   defaultLanguage = 'javascript',
   persist = true,
-  showLineNumbers = false,
+  showLineNumbers = true,
   highlightLines = '',
   showLines = '',
   showCopy = true

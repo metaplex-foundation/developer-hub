@@ -48,7 +48,7 @@ function parseLineRange(rangeStr) {
 export function Fence({
   children,
   language,
-  showLineNumbers = false,
+  showLineNumbers = true,
   highlightLines = '',
   showLines = '',
   title = '',

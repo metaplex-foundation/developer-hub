@@ -26,7 +26,7 @@ export function CodeTabsImported({
   from,
   frameworks = 'kit,umi,shank,anchor',
   defaultFramework = 'umi',
-  showLineNumbers = false,
+  showLineNumbers = true,
   highlightLines = '',
   showLines = '',
   showCopy = true

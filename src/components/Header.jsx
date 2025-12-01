@@ -49,7 +49,7 @@ export function Header({ page }) {
               <img
                 src="/metaplex-logo-white.png"
                 alt="Metaplex"
-                className="h-4 w-auto"
+                className="h-4 w-auto no-lightense"
               />
             </Link>
           </div>
