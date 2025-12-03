@@ -15,6 +15,14 @@ const umiSections = {
   "full": "// [IMPORTS]\n// To install all the required packages use the following command\n// npm install @metaplex-foundation/mpl-toolbox @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults\nimport {\n    createTokenIfMissing,\n    findAssociatedTokenPda,\n    transferTokens,\n} from '@metaplex-foundation/mpl-toolbox';\nimport {\n    keypairIdentity,\n    publicKey,\n    transactionBuilder,\n} from '@metaplex-foundation/umi';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\nimport { readFileSync } from 'fs';\n  // [/IMPORTS]\n  \n  // [SETUP]\n  // Initialize Umi with Devnet endpoint\n  const umi = createUmi('https://api.devnet.solana.com')\n  \n  // Load your wallet/keypair\n  const wallet = '<your wallet file path>'\n  const secretKey = JSON.parse(readFileSync(wallet, 'utf-8'))\n  const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))\n  umi.use(keypairIdentity(keypair))\n  \n  // Your token mint address and destination wallet\n  const mintAddress = publicKey('<your token mint address>')\n  const destinationAddress = publicKey('<destination wallet address>')\n  // [/SETUP]\n  \n  // [MAIN]\n  // Find the source token account (your account)\n  const sourceTokenAccount = findAssociatedTokenPda(umi, {\n  mint: mintAddress,\n  owner: umi.identity.publicKey,\n  })\n  \n  // Find the destination token account\n  const destinationTokenAccount = findAssociatedTokenPda(umi, {\n  mint: mintAddress,\n  owner: destinationAddress,\n  })\n  \n  // Create the destination token account if it doesn't exist\n  transactionBuilder()\n    .add(createTokenIfMissing(umi, {\n      mint: mintAddress,\n      owner: destinationAddress,\n    }))\n    // Transfer 100 tokens\n    .add(\n      transferTokens(umi, {\n      source: sourceTokenAccount,\n      destination: destinationTokenAccount,\n      amount: 100,\n    }))\n    .sendAndConfirm(umi)\n  // [/MAIN]\n  \n  // [OUTPUT]\n  console.log('Transferred 100 tokens')\n  console.log('From:', sourceTokenAccount)\n  console.log('To:', destinationTokenAccount)\n  // [/OUTPUT]\n  "
 }
 
+const cliSections = {
+  "imports": "",
+  "setup": "",
+  "main": "",
+  "output": "",
+  "full": "# Transfer Tokens using the Metaplex CLI\n\n# Transfer tokens to a destination address\n# Arguments: <mintAddress> <amount> <destination>\nmplx toolbox token transfer <mintAddress> <amount> <destinationAddress>\n\n# Example: Transfer 100 tokens (with 9 decimals = 100_000_000_000 basis points)\nmplx toolbox token transfer 7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU 100000000000 9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM\n"
+}
+
 export const metadata = {
   title: "Transfer Fungible Tokens",
   description: "Transfer fungible tokens between wallets",
@@ -29,4 +37,10 @@ export const examples = {
     sections: umiSections,
   },
 
+  cli: {
+    framework: 'CLI',
+    language: 'bash',
+    code: cliSections.full,
+    sections: cliSections,
+  },
 }

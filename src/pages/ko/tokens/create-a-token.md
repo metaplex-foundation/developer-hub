@@ -20,7 +20,7 @@ Token Metadata 프로그램을 사용하여 Solana에서 메타데이터가 있�
 
 다음 코드는 완전히 실행 가능한 예제입니다. 아래에 커스터마이징할 수 있는 파라미터가 표시됩니다. 토큰 생성 세부 사항에 대해서는 [Token Metadata 프로그램](/token-metadata/mint#minting-tokens) 페이지에서 자세히 알아볼 수 있습니다.
 
-{% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi" /%}
+{% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi,cli" /%}
 
 ## 파라미터
 

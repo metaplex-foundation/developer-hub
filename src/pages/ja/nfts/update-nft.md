@@ -12,7 +12,7 @@ updated: '03-12-2025'
 
 以下のセクションでは、完全なコード例と変更が必要なパラメータを確認できます。NFTの更新の詳細については、[Coreドキュメント](/core/update)をご覧ください。
 
-{% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
+{% code-tabs-imported from="core/update-asset" frameworks="umi,cli" /%}
 
 ## パラメータ
 

@@ -18,13 +18,18 @@ const examplesDir = path.join(__dirname, '../src/examples')
  * Parse code file and extract sections marked with [SECTION] comments
  * Supports: [IMPORTS], [SETUP], [MAIN], [OUTPUT]
  */
-function parseCodeSections(code) {
+function parseCodeSections(code, isShell = false) {
   const sections = {
     imports: '',
     setup: '',
     main: '',
     output: '',
     full: code, // Always include full code
+  }
+
+  // For shell files, we don't parse sections - just use the full code
+  if (isShell) {
+    return sections
   }
 
   // Extract each section
@@ -46,19 +51,20 @@ function processExampleDirectory(dir) {
 
   // Check if this directory has native files
   const nativeFiles = {
-    kit: path.join(dir, 'kit.js'),
-    umi: path.join(dir, 'umi.js'),
-    shank: path.join(dir, 'shank.rs'),
-    anchor: path.join(dir, 'anchor.rs'),
+    kit: { path: path.join(dir, 'kit.js'), isShell: false },
+    umi: { path: path.join(dir, 'umi.js'), isShell: false },
+    shank: { path: path.join(dir, 'shank.rs'), isShell: false },
+    anchor: { path: path.join(dir, 'anchor.rs'), isShell: false },
+    cli: { path: path.join(dir, 'cli.sh'), isShell: true },
   }
 
   const existingFiles = {}
   let hasNativeFiles = false
 
-  for (const [key, filePath] of Object.entries(nativeFiles)) {
-    if (fs.existsSync(filePath)) {
-      const code = fs.readFileSync(filePath, 'utf-8')
-      existingFiles[key] = parseCodeSections(code)
+  for (const [key, fileInfo] of Object.entries(nativeFiles)) {
+    if (fs.existsSync(fileInfo.path)) {
+      const code = fs.readFileSync(fileInfo.path, 'utf-8')
+      existingFiles[key] = parseCodeSections(code, fileInfo.isShell)
       hasNativeFiles = true
     }
   }
@@ -162,6 +168,16 @@ function processExampleDirectory(dir) {
     lines.push('    code: anchorSections.full,')
     lines.push('    sections: anchorSections,')
     lines.push('  },')
+    lines.push('')
+  }
+
+  if (existingFiles.cli) {
+    lines.push('  cli: {')
+    lines.push("    framework: 'CLI',")
+    lines.push("    language: 'bash',")
+    lines.push('    code: cliSections.full,')
+    lines.push('    sections: cliSections,')
+    lines.push('  },')
   }
 
   lines.push('}')
@@ -182,7 +198,7 @@ function walkDirectory(dir) {
     if (entry.isDirectory()) {
       // Check if this directory has an index.js or native files
       const hasIndexOrNative = fs.readdirSync(fullPath).some(file =>
-        file === 'index.js' || file.endsWith('.js') || file.endsWith('.rs')
+        file === 'index.js' || file.endsWith('.js') || file.endsWith('.rs') || file.endsWith('.sh')
       )
 
       if (hasIndexOrNative) {

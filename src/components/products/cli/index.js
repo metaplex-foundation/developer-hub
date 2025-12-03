@@ -66,6 +66,10 @@ export const cli = {
               href: '/cli/core/update-asset',
             },
             {
+              title: 'Burn Asset',
+              href: '/cli/core/burn-asset',
+            },
+            {
               title: 'Fetch Asset or Collection',
               href: '/cli/core/fetch',
             },

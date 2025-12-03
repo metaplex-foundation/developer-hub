@@ -23,6 +23,14 @@ const shankSections = {
   "full": "use mpl_token_metadata::{\n    instructions::CreateV1Builder,\n    types::{PrintSupply, TokenStandard},\n};\nuse solana_rpc_client::rpc_client::RpcClient;\nuse solana_sdk::{\n     message::Message,\n     transaction::Transaction,\n};\n\n// 1. client is a reference to the initialized RpcClient\n// 2. every account is specified by their pubkey\n\nlet client = ...;\n\nlet create_ix = CreateV1Builder::new()\n    .metadata(metadata)\n    .mint(mint.pubkey(), true)\n    .authority(payer.pubkey())\n    .payer(payer.pubkey())\n    .update_authority(payer.pubkey(), false)\n    .name(String::from(\"My Fungible Token\"))\n    .uri(String::from(\"https://arweave.net/7BzVsHRrEH0ldNOCCM4_E00BiAYuJP_EQiqvcEYz3YY\"))\n    .symbol(String::from(\"MFT\"))\n    .seller_fee_basis_points(550)\n    .token_standard(TokenStandard::Fungible)\n    .print_supply(PrintSupply::Zero)\n    .instruction();\n\nlet message = Message::new(\n    &[create_ix],\n    Some(&payer.pubkey()),\n);\n\nlet blockhash = client.get_latest_blockhash()?;\nlet mut tx = Transaction::new(&[mint, payer], message, blockhash);\nclient.send_and_confirm_transaction(&tx)?;"
 }
 
+const cliSections = {
+  "imports": "",
+  "setup": "",
+  "main": "",
+  "output": "",
+  "full": "# Create a Fungible Token using the Metaplex CLI\n\n# Interactive wizard mode (recommended)\nmplx toolbox token create --wizard\n\n# Basic token creation\nmplx toolbox token create --name \"My Token\" --symbol \"TOKEN\" --mint-amount 1000000\n\n# Full token creation with all options\nmplx toolbox token create \\\n  --name \"My Token\" \\\n  --symbol \"MYT\" \\\n  --description \"A fungible token on Solana\" \\\n  --image \"./token-image.png\" \\\n  --decimals 9 \\\n  --mint-amount 1000000\n"
+}
+
 export const metadata = {
   title: "Create a Fungible Token",
   description: "Create a fungible token with metadata using Token Metadata",
@@ -44,4 +52,10 @@ export const examples = {
     sections: shankSections,
   },
 
+  cli: {
+    framework: 'CLI',
+    language: 'bash',
+    code: cliSections.full,
+    sections: cliSections,
+  },
 }

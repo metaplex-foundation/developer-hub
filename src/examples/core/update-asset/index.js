@@ -39,6 +39,14 @@ const anchorSections = {
   "full": "// [IMPORTS]\nuse anchor_lang::prelude::*;\n// [/IMPORTS]\n\n// [MAIN]\ndeclare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\n\n#[program]\npub mod update_asset {\n    use super::*;\n\n    // Update an existing NFT asset's metadata\n    pub fn update(\n        ctx: Context<UpdateAsset>,\n        new_name: String,\n        new_uri: String,\n    ) -> Result<()> {\n        let asset = &mut ctx.accounts.asset;\n\n        // Verify owner\n        require!(\n            asset.owner == ctx.accounts.owner.key(),\n            ErrorCode::Unauthorized\n        );\n\n        // Update metadata\n        asset.name = new_name;\n        asset.uri = new_uri;\n\n        msg!(\"Asset updated: {}\", asset.key());\n        Ok(())\n    }\n}\n\n#[derive(Accounts)]\npub struct UpdateAsset<'info> {\n    #[account(mut)]\n    pub asset: Account<'info, Asset>,\n    pub owner: Signer<'info>,\n}\n\n#[account]\npub struct Asset {\n    pub name: String,\n    pub uri: String,\n    pub owner: Pubkey,\n}\n\n#[error_code]\npub enum ErrorCode {\n    #[msg(\"Unauthorized: You are not the owner of this asset\")]\n    Unauthorized,\n}\n// [/MAIN]\n"
 }
 
+const cliSections = {
+  "imports": "",
+  "setup": "",
+  "main": "",
+  "output": "",
+  "full": "# Update an NFT using the Metaplex CLI\n\n# Update name and URI\nmplx core asset update <assetId> --name \"Updated NFT\" --uri \"https://example.com/new-metadata.json\"\n\n# Update with new image\nmplx core asset update <assetId> --image \"./new-image.png\"\n\n# Update with JSON metadata file\nmplx core asset update <assetId> --json \"./metadata.json\"\n\n# Update with both JSON and image\nmplx core asset update <assetId> --json \"./metadata.json\" --image \"./new-image.png\"\n"
+}
+
 export const metadata = {
   title: "update-asset",
   description: "",
@@ -72,5 +80,12 @@ export const examples = {
     language: 'rust',
     code: anchorSections.full,
     sections: anchorSections,
+  },
+
+  cli: {
+    framework: 'CLI',
+    language: 'bash',
+    code: cliSections.full,
+    sections: cliSections,
   },
 }

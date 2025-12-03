@@ -12,7 +12,7 @@ NFT를 영구적으로 삭제하고 렌트 비용을 회수합니다. {% .lead %
 
 다음 섹션에서 전체 코드 예제와 변경이 필요할 수 있는 파라미터를 확인할 수 있습니다. NFT 소각에 대한 자세한 내용은 [Core 문서](/core/burn)를 참조하세요.
 
-{% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
+{% code-tabs-imported from="core/burn-asset" frameworks="umi,cli" /%}
 
 ## 파라미터
 

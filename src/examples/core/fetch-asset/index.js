@@ -10,9 +10,17 @@
 const umiSections = {
   "imports": "import { fetchAsset, fetchCollection, mplCore } from '@metaplex-foundation/mpl-core';\nimport { publicKey } from '@metaplex-foundation/umi';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';",
   "setup": "// Initialize UMI\nconst umi = createUmi('https://api.devnet.solana.com')\n  .use(mplCore())",
-  "main": "// Fetch a Core Asset from the blockchain\nconst assetAddress = publicKey('AssetAddressHere...')\nconst asset = await fetchAsset(umi, assetAddress)\n\n// Fetch a Core Collection from the blockchain\nconst collectionAddress = publicKey('CollectionAddressHere...')\nconst collection = await fetchCollection(umi, collectionAddress)",
+  "main": "// Fetch a Core Asset\nconst assetAddress = publicKey('AssetAddressHere...')\nconst asset = await fetchAsset(umi, assetAddress)\n\n// Fetch a Core Collection\nconst collectionAddress = publicKey('CollectionAddressHere...')\nconst collection = await fetchCollection(umi, collectionAddress)",
   "output": "console.log('Asset fetched:', asset)\nconsole.log('Name:', asset.name)\nconsole.log('Owner:', asset.owner)\nconsole.log('URI:', asset.uri)\n\nconsole.log('\\nCollection fetched:', collection)\nconsole.log('Name:', collection.name)\nconsole.log('URI:', collection.uri)",
-  "full": "// [IMPORTS]\nimport { fetchAsset, fetchCollection, mplCore } from '@metaplex-foundation/mpl-core';\nimport { publicKey } from '@metaplex-foundation/umi';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\n// [/IMPORTS]\n\n// [SETUP]\n// Initialize UMI\nconst umi = createUmi('https://api.devnet.solana.com')\n  .use(mplCore())\n\n// [/SETUP]\n\n// [MAIN]\n// Fetch a Core Asset from the blockchain\nconst assetAddress = publicKey('AssetAddressHere...')\nconst asset = await fetchAsset(umi, assetAddress)\n\n// Fetch a Core Collection from the blockchain\nconst collectionAddress = publicKey('CollectionAddressHere...')\nconst collection = await fetchCollection(umi, collectionAddress)\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Asset fetched:', asset)\nconsole.log('Name:', asset.name)\nconsole.log('Owner:', asset.owner)\nconsole.log('URI:', asset.uri)\n\nconsole.log('\\nCollection fetched:', collection)\nconsole.log('Name:', collection.name)\nconsole.log('URI:', collection.uri)\n// [/OUTPUT]\n"
+  "full": "// [IMPORTS]\nimport { fetchAsset, fetchCollection, mplCore } from '@metaplex-foundation/mpl-core';\nimport { publicKey } from '@metaplex-foundation/umi';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\n// [/IMPORTS]\n\n// [SETUP]\n// Initialize UMI\nconst umi = createUmi('https://api.devnet.solana.com')\n  .use(mplCore())\n\n// [/SETUP]\n\n// [MAIN]\n// Fetch a Core Asset\nconst assetAddress = publicKey('AssetAddressHere...')\nconst asset = await fetchAsset(umi, assetAddress)\n\n// Fetch a Core Collection\nconst collectionAddress = publicKey('CollectionAddressHere...')\nconst collection = await fetchCollection(umi, collectionAddress)\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Asset fetched:', asset)\nconsole.log('Name:', asset.name)\nconsole.log('Owner:', asset.owner)\nconsole.log('URI:', asset.uri)\n\nconsole.log('\\nCollection fetched:', collection)\nconsole.log('Name:', collection.name)\nconsole.log('URI:', collection.uri)\n// [/OUTPUT]\n"
+}
+
+const cliSections = {
+  "imports": "",
+  "setup": "",
+  "main": "",
+  "output": "",
+  "full": "# Fetch an NFT using the Metaplex CLI\n\n# Fetch asset by ID\nmplx core fetch asset <assetId>\n\n# Download all files to a directory\nmplx core fetch asset <assetId> --download --output ./assets\n\n# Download only the image\nmplx core fetch asset <assetId> --download --image\n\n# Download only the metadata\nmplx core fetch asset <assetId> --download --metadata\n"
 }
 
 export const metadata = {
@@ -29,4 +37,10 @@ export const examples = {
     sections: umiSections,
   },
 
+  cli: {
+    framework: 'CLI',
+    language: 'bash',
+    code: cliSections.full,
+    sections: cliSections,
+  },
 }

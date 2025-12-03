@@ -19,7 +19,7 @@ Metaplex Coreを使用して、Solana上でNFTを作成します。 {% .lead %}
 
 以下のコードは完全に実行可能な例です。カスタマイズ可能なパラメータを以下に示します。NFT作成の詳細については、[Coreドキュメント](/core)をご覧ください。
 
-{% code-tabs-imported from="core/create-asset" frameworks="umi" /%}
+{% code-tabs-imported from="core/create-asset" frameworks="umi,cli" /%}
 
 ## オンチェーンパラメータ
 

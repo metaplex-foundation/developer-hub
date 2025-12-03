@@ -73,4 +73,5 @@ export const examples = {
     code: anchorSections.full,
     sections: anchorSections,
   },
+
 }

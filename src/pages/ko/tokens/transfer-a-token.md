@@ -12,7 +12,7 @@ Solana 블록체인에서 지갑 간 대체 가능 토큰(SPL 토큰)을 전송�
 
 다음 섹션에서 전체 코드 예제와 변경이 필요할 수 있는 파라미터를 확인할 수 있습니다. 토큰 전송 세부 사항에 대해서는 [Token Metadata 프로그램](/token-metadata) 페이지를 참조하세요.
 
-{% code-tabs-imported from="token-metadata/fungibles/transfer" frameworks="umi" /%}
+{% code-tabs-imported from="token-metadata/fungibles/transfer" frameworks="umi,cli" /%}
 
 ## 파라미터
 

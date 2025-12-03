@@ -12,7 +12,7 @@ Solana 블록체인에서 NFT 데이터를 가져옵니다. {% .lead %}
 
 다음 섹션에서 전체 코드 예제와 변경이 필요할 수 있는 파라미터를 확인할 수 있습니다. NFT와 컬렉션 가져오기에 대한 자세한 내용은 [Core 문서](/core/fetch)를 참조하세요.
 
-{% code-tabs-imported from="core/fetch-asset" frameworks="umi" /%}
+{% code-tabs-imported from="core/fetch-asset" frameworks="umi,cli" /%}
 
 ## 파라미터
 

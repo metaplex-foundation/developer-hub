@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -8,6 +9,14 @@ import Badge from './products/Badge'
 export function Navigation({ product, navigation, className }) {
   let router = useRouter()
   const { locale } = useLocale()
+  const [currentPath, setCurrentPath] = useState('')
+
+  // Update currentPath after hydration when router is ready
+  useEffect(() => {
+    if (router.isReady) {
+      setCurrentPath(router.asPath.split('?')[0].split('#')[0].replace(/\/$/, '') || '/')
+    }
+  }, [router.isReady, router.asPath])
 
   const isRecent = (date) => {
     const guideDate = new Date(date)
@@ -21,6 +30,12 @@ export function Navigation({ product, navigation, className }) {
   // Normalize path by removing trailing slashes and query/hash
   const normalizePath = (path) => {
     return path.split('?')[0].split('#')[0].replace(/\/$/, '') || '/'
+  }
+
+  // Check if a link is active
+  const isLinkActive = (linkHref) => {
+    if (!currentPath) return false
+    return normalizePath(linkHref) === currentPath
   }
 
   return (
@@ -52,9 +67,7 @@ export function Navigation({ product, navigation, className }) {
             >
               {section.links.map((link) => {
                 // link.href is already localized by localizeProduct() in usePage.js
-                const currentPath = normalizePath(router.asPath)
-                const linkPath = normalizePath(link.href)
-                const isActive = linkPath === currentPath
+                const isActive = isLinkActive(link.href)
 
                 return (
                   <li key={`${link.title}-${link.href}`} className="relative">

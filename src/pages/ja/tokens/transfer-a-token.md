@@ -12,7 +12,7 @@ Solanaブロックチェーン上でウォレット間でファンジブルト�
 
 以下のセクションでは、完全なコード例と変更が必要なパラメータを確認できます。トークン転送の詳細については、[Token Metadataプログラム](/token-metadata)ページをご覧ください。
 
-{% code-tabs-imported from="token-metadata/fungibles/transfer" frameworks="umi" /%}
+{% code-tabs-imported from="token-metadata/fungibles/transfer" frameworks="umi,cli" /%}
 
 ## パラメータ
 

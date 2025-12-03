@@ -20,7 +20,7 @@ This guide shows you how to create and mint a fungible token with:
 
 The following code is a fully runnable example. Below the parameters that you might want to customize are shown. You can learn more about token creation details in the [Token Metadata program](/token-metadata/mint#minting-tokens) pages.
 
-{% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi" /%}
+{% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi,cli" /%}
 
 ## Parameters
 

@@ -39,6 +39,14 @@ const anchorSections = {
   "full": "// [IMPORTS]\nuse anchor_lang::prelude::*;\n// [/IMPORTS]\n\n// [MAIN]\ndeclare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\n\n#[program]\npub mod burn_asset {\n    use super::*;\n\n    // Permanently destroy/burn an NFT asset\n    pub fn burn(ctx: Context<BurnAsset>) -> Result<()> {\n        let asset = &mut ctx.accounts.asset;\n\n        // Verify owner\n        require!(\n            asset.owner == ctx.accounts.owner.key(),\n            ErrorCode::Unauthorized\n        );\n\n        // Close the account to burn the asset\n        msg!(\"Asset burned: {}\", asset.key());\n        Ok(())\n    }\n}\n\n#[derive(Accounts)]\npub struct BurnAsset<'info> {\n    #[account(mut, close = owner)]\n    pub asset: Account<'info, Asset>,\n    pub owner: Signer<'info>,\n}\n\n#[account]\npub struct Asset {\n    pub name: String,\n    pub uri: String,\n    pub owner: Pubkey,\n}\n\n#[error_code]\npub enum ErrorCode {\n    #[msg(\"Unauthorized: You are not the owner of this asset\")]\n    Unauthorized,\n}\n// [/MAIN]\n"
 }
 
+const cliSections = {
+  "imports": "",
+  "setup": "",
+  "main": "",
+  "output": "",
+  "full": "# Burn an NFT using the Metaplex CLI\n\n# Burn a single asset by its mint address\nmplx core asset burn <assetId>\n\n# Burn an asset from that is part of a collection\nmplx core asset burn <assetId> --collection <collectionId>\n\n"
+}
+
 export const metadata = {
   title: "burn-asset",
   description: "",
@@ -72,5 +80,12 @@ export const examples = {
     language: 'rust',
     code: anchorSections.full,
     sections: anchorSections,
+  },
+
+  cli: {
+    framework: 'CLI',
+    language: 'bash',
+    code: cliSections.full,
+    sections: cliSections,
   },
 }

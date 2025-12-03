@@ -19,7 +19,7 @@ This guide shows you how to create an NFT with:
 
 The following code is a fully runnable example. Below the parameters that you might want to customize are shown. You can learn more about NFT creation details in the [Core documentation](/core).
 
-{% code-tabs-imported from="core/create-asset" frameworks="umi" /%}
+{% code-tabs-imported from="core/create-asset" frameworks="umi,cli" /%}
 
 ## On-Chain Parameters
 

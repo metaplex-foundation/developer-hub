@@ -157,7 +157,11 @@ export function CodeTabsWithContext({
                 aria-controls={`code-panel-${tab.tabId}`}
                 id={`tab-${tab.tabId}`}
               >
-                {tab.label || `${tab.framework} (${tab.language === 'javascript' ? 'JS' : 'RS'})`}
+                {tab.label || (
+                  tab.language === 'bash' || tab.language === 'shell'
+                    ? tab.framework
+                    : `${tab.framework} (${tab.language === 'javascript' ? 'JS' : 'RS'})`
+                )}
               </button>
             )
           })}

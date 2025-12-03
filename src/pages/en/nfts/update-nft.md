@@ -12,7 +12,7 @@ Update your NFT's name and metadata as the update authority. {% .lead %}
 
 In the following section you can find a full code example and the parameters that you might need to change. You can learn more about updating NFTs in the [Core documentation](/core/update).
 
-{% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
+{% code-tabs-imported from="core/update-asset" frameworks="umi,cli" /%}
 
 ## Parameters
 

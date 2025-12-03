@@ -39,6 +39,14 @@ const anchorSections = {
   "full": "// [IMPORTS]\nuse anchor_lang::prelude::*;\n// [/IMPORTS]\n\n// [MAIN]\ndeclare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\n\n#[program]\npub mod create_asset {\n    use super::*;\n\n    // Create a new NFT asset\n    pub fn create(\n        ctx: Context<CreateAsset>,\n        name: String,\n        uri: String\n    ) -> Result<()> {\n        let asset = &mut ctx.accounts.asset;\n        asset.name = name;\n        asset.uri = uri;\n        asset.owner = ctx.accounts.owner.key();\n\n        msg!(\"Asset created: {}\", asset.key());\n        Ok(())\n    }\n}\n\n#[derive(Accounts)]\npub struct CreateAsset<'info> {\n    #[account(init, payer = owner, space = 8 + 200)]\n    pub asset: Account<'info, Asset>,\n    #[account(mut)]\n    pub owner: Signer<'info>,\n    pub system_program: Program<'info, System>,\n}\n\n#[account]\npub struct Asset {\n    pub name: String,\n    pub uri: String,\n    pub owner: Pubkey,\n}\n// [/MAIN]\n"
 }
 
+const cliSections = {
+  "imports": "",
+  "setup": "",
+  "main": "",
+  "output": "",
+  "full": "# Create an NFT using the Metaplex CLI\n\n# Interactive wizard mode (recommended)\nmplx core asset create --wizard\n\n# Simple creation with name and URI\nmplx core asset create --name \"My NFT\" --uri \"https://example.com/metadata.json\"\n\n# Create with files (image + metadata)\nmplx core asset create --files --image \"./my-nft.png\" --json \"./metadata.json\"\n"
+}
+
 export const metadata = {
   title: "Create an Asset",
   description: "Basic example of creating an NFT asset with Core",
@@ -72,5 +80,12 @@ export const examples = {
     language: 'rust',
     code: anchorSections.full,
     sections: anchorSections,
+  },
+
+  cli: {
+    framework: 'CLI',
+    language: 'bash',
+    code: cliSections.full,
+    sections: cliSections,
   },
 }
