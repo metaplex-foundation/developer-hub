@@ -51,9 +51,9 @@ export function Navigation({ product, navigation, className }) {
               className="mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200"
             >
               {section.links.map((link) => {
-                const localizedHref = getLocalizedHref(link.href, locale)
+                // link.href is already localized by localizeProduct() in usePage.js
                 const currentPath = normalizePath(router.asPath)
-                const linkPath = normalizePath(localizedHref)
+                const linkPath = normalizePath(link.href)
                 const isActive = linkPath === currentPath
 
                 return (
