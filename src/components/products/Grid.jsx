@@ -89,6 +89,7 @@ export function Grid({
         return (
           <li key={item.href}>
             <Link href={getLocalizedHref(item.href, locale)} className="block content-start rounded-lg p-3 hover:bg-neutral-800" onClick={onClick}>
+
               <div className="ml-4 flex flex-1 flex-col justify-center text-left">
                 <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
                   {item.name}

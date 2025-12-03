@@ -14,6 +14,7 @@ import { hydra } from './hydra';
 import { inscription } from './inscription';
 import { legacyDocumentation } from './legacyDocumentation';
 import { mplHybrid } from './mpl-hybrid';
+import { nfts } from './nfts';
 import { shank } from './shank';
 import { sugar } from './sugar';
 import { tokenAuthRules } from './tokenAuthRules';
@@ -32,6 +33,7 @@ export const productCategories = [
 export const products = [
   global,
   tokens,
+  nfts,
   tokenMetadata,
   core,
   bubblegumv2,

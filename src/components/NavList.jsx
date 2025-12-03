@@ -1,10 +1,10 @@
 'use client'
 
-import Link from 'next/link'
-import { useLocale, useTranslations } from '@/contexts/LocaleContext'
-import { Popover } from '@headlessui/react'
-import { SwitcherPopover } from './products/SwitcherPopover'
-import { productCategories } from './products/index'
+import { useLocale, useTranslations } from '@/contexts/LocaleContext';
+import { Popover } from '@headlessui/react';
+import Link from 'next/link';
+import { SwitcherPopover } from './products/SwitcherPopover';
+import { productCategories } from './products/index';
 
 const createATokenMenuItem = {
   name: 'Create A Token',
@@ -54,35 +54,35 @@ export const nftMenuCategory = [
     headline: 'Create NFT data on chain using Metaplex SDKs.',
     description: 'Create NFT data on chain using Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
-    href: '/#',
+    href: '/nfts/create-nft',
   },
   {
     name: 'Read A NFT',
     headline: 'Read NFT data on chain using DAS and Metaplex SDKs.',
     description: 'Read NFT data on chain using DAS and Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
-    href: '/#',
+    href: '/nfts/fetch-nft',
   },
   {
     name: 'Update A NFT',
     headline: 'Update NFT data on chain using DAS and Metaplex SDKs.',
     description: 'Update NFT data on chain using DAS and Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
-    href: '/#',
+    href: '/nfts/update-nft',
   },
   {
     name: 'Burn A NFT',
     headline: 'Burn NFT data on chain using DAS and Metaplex SDKs.',
     description: 'Burn NFT data on chain using DAS and Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
-    href: '/#',
+    href: '/nfts/transfer-nft',
   },
   {
     name: 'Transfer A NFT',
     headline: 'Transfer NFT data on chain using Metaplex SDKs.',
     description: 'Transfer NFT data on chain using Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
-    href: '/#',
+    href: '/nfts/burn-nft',
   },
 ]
 
