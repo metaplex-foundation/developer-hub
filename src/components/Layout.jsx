@@ -5,14 +5,23 @@ import Link from 'next/link'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Navigation } from '@/components/Navigation'
-import { nftMenuCategory, tokenMenuCategory } from '@/components/NavList'
 import { Prose } from '@/components/Prose'
 import { TableOfContent } from '@/components/TableOfContent'
-import { Grid } from '@/components/products/Grid'
+import { ProductCardGrid } from '@/components/products/ProductCardGrid'
+import { productCategories } from '@/components/products/index'
 import { useAccentClass } from '@/shared/useAccentClass'
 import { useLightense } from '@/shared/useLightense'
 
-import ProductPreview from '@/components/productPreview'
+function getCategoryDescription(category) {
+  const descriptions = {
+    'Tokens': 'Create, read, update, burn, and transfer tokens on the Solana blockchain using Metaplex SDKs.',
+    'NFTs': 'Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs.',
+    'Smart Contracts': 'On-chain programs for creating and managing digital assets on Solana.',
+    'Dev Tools': 'Tools and utilities to help you build with Metaplex programs.',
+  };
+  return descriptions[category] || '';
+}
+
 export function Layout({ children, page }) {
   const isHomePage = page.pathname === '/'
   const isCodeViewer = page.pathname === '/code-viewer'
@@ -36,36 +45,22 @@ export function Layout({ children, page }) {
 
       
 
-      {Hero && <Hero page={page} />}
+      {/* {Hero && <Hero page={page} />} */}
 
       {isHomePage && (
         <>
-        <ProductPreview
-          productPreviewActions={tokenMenuCategory}
-          accent={page.product.accent}
-          title="Tokens"
-          description="Create, read, update, burn, and transfer tokens on the Solana blockchain using Metaplex SDKs."
-        />
-        <ProductPreview
-          productPreviewActions={nftMenuCategory}
-          accent={page.product.accent}
-          title="NFTs"
-          description="Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs."
-        />
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-2xl font-bold text-white">Smart Contracts</h2>
-          <p className="mb-8 text-sm text-neutral-400">
-            On-chain programs for creating and managing digital assets on Solana.
-          </p>
-          <Grid menuItem="Smart Contracts" numCols="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
-        </div>
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-2xl font-bold text-white">Developer Tools</h2>
-          <p className="mb-8 text-sm text-neutral-400">
-            Tools and utilities to help you build with Metaplex programs.
-          </p>
-          <Grid menuItem="Dev Tools" numCols="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
-        </div>
+          <div className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-bold text-white">Developers</h1>
+          </div>
+          {productCategories.map((category) => (
+            <div key={category} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+              <h2 className="mb-2 text-2xl font-bold text-white">{category}</h2>
+              <p className="mb-8 text-sm text-neutral-400">
+                {getCategoryDescription(category)}
+              </p>
+              <ProductCardGrid category={category} />
+            </div>
+          ))}
         </>
       )}
 

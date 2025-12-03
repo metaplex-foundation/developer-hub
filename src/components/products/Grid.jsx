@@ -2,7 +2,6 @@ import { getLocalizedHref } from '@/config/languages';
 import { useLocale } from '@/contexts/LocaleContext';
 import Link from 'next/link';
 import { nftMenuCategory, tokenMenuCategory } from '../NavList';
-import { IconWithName } from './IconWithName';
 import { products as allProducts } from './index';
 
 
@@ -63,7 +62,14 @@ export function Grid({
               onClick={onClick}
               {...(product.target && { target: product.target })}
             >
-              {IconWithName({ product: localizedProduct, description: true })}
+              <div className="flex flex-1 flex-col justify-center text-left">
+                <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
+                  {localizedProduct.name}
+                </div>
+                <div className="mt-1 text-sm leading-none text-slate-500 dark:text-slate-400">
+                  {localizedProduct.headline || localizedProduct.description}
+                </div>
+              </div>
             </Link>
           </li>
         )
@@ -72,8 +78,7 @@ export function Grid({
         return (
           <li key={item.href}>
             <Link href={getLocalizedHref(item.href, locale)} className="block content-start rounded-lg p-3 hover:bg-neutral-800" onClick={onClick}>
-              
-              <div className="ml-4 flex flex-1 flex-col justify-center text-left">
+              <div className="flex flex-1 flex-col justify-center text-left">
                 <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
                   {item.name}
                 </div>
@@ -89,8 +94,7 @@ export function Grid({
         return (
           <li key={item.href}>
             <Link href={getLocalizedHref(item.href, locale)} className="block content-start rounded-lg p-3 hover:bg-neutral-800" onClick={onClick}>
-
-              <div className="ml-4 flex flex-1 flex-col justify-center text-left">
+              <div className="flex flex-1 flex-col justify-center text-left">
                 <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
                   {item.name}
                 </div>

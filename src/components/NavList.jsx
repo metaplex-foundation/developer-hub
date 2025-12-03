@@ -117,6 +117,29 @@ const NavList = () => {
         </Link>
       </div> */}
       {productCategories.map((item, index) => {
+        // For Tokens and NFTs, use direct links instead of dropdowns
+        if (item === 'Tokens') {
+          return (
+            <div className="hidden flex-col lg:flex" key={index}>
+              <Link href="/tokens">
+                <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
+                  {getTranslatedCategory(item)}
+                </div>
+              </Link>
+            </div>
+          )
+        }
+        if (item === 'NFTs') {
+          return (
+            <div className="hidden flex-col lg:flex" key={index}>
+              <Link href="/nfts">
+                <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
+                  {getTranslatedCategory(item)}
+                </div>
+              </Link>
+            </div>
+          )
+        }
         return (
           <div className="hidden flex-col lg:flex" key={index}>
             <SwitcherPopover menuItem={productCategories[index]}>

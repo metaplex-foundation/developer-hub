@@ -21,7 +21,7 @@ export function SwitcherPopover({ children, menuItem, ...props }) {
                 <h2 className="text-2xl font-bold text-white">{menuItem}</h2>
                 <p className='text-sm text-slate-500'>Learn about the Metaplex MPL programs to create and manage Token and NFT projects.</p>
               </div>
-              <div className="m-auto w-full overflow-hidden p-4 shadow-xl max-w-[1200px]  ">
+              <div className="m-auto w-full overflow-hidden p-4 max-w-[1200px]">
                 <Grid
                   onClick={close}
                   menuItem={menuItem}
