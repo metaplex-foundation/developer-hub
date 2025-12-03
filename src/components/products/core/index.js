@@ -11,46 +11,46 @@ export const core = {
   name: 'Core',
   headline: 'Next gen NFT standard',
   description: 'Next generation Solana NFT standard.',
-  navigationMenuCatergory: 'Programs',
-  path: 'core',
+  navigationMenuCatergory: 'Smart Contracts',
+  path: 'smart-contracts/core',
   icon: <StopCircleIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-core',
   className: 'accent-green',
-  heroes: [{ path: '/core', component: Hero }],
+  heroes: [{ path: '/smart-contracts/core', component: Hero }],
   sections: [
     {
-      ...documentationSection('core'),
+      ...documentationSection('smart-contracts/core'),
       navigation: [
         {
           title: 'Introduction',
           links: [
             {
               title: 'Overview',
-              href: '/core',
+              href: '/smart-contracts/core',
             },
             {
               title: 'What is an Asset?',
-              href: '/core/what-is-an-asset',
+              href: '/smart-contracts/core/what-is-an-asset',
             },
             {
               title: 'JSON Schema',
-              href: '/core/json-schema',
+              href: '/smart-contracts/core/json-schema',
             },
             {
               title: 'Token Metadata Differences',
-              href: '/core/tm-differences',
+              href: '/smart-contracts/core/tm-differences',
             },
             {
               title: 'Ecosystem Support',
-              href: '/core/ecosystem-support',
+              href: '/smart-contracts/core/ecosystem-support',
             },
             {
               title: 'Anchor',
-              href: '/core/using-core-in-anchor',
+              href: '/smart-contracts/core/using-core-in-anchor',
             },
             {
               title: 'FAQ',
-              href: '/core/faq',
+              href: '/smart-contracts/core/faq',
             },
           ],
         },
@@ -59,11 +59,11 @@ export const core = {
           links: [
             {
               title: 'Javascript SDK',
-              href: '/core/sdk/javascript',
+              href: '/smart-contracts/core/sdk/javascript',
             },
             {
               title: 'Rust SDK',
-              href: '/core/sdk/rust',
+              href: '/smart-contracts/core/sdk/rust',
             },
           ],
         },
@@ -72,39 +72,39 @@ export const core = {
           links: [
             {
               title: 'Creating Assets',
-              href: '/core/create-asset',
+              href: '/smart-contracts/core/create-asset',
             },
             {
               title: 'Fetching Assets',
-              href: '/core/fetch',
+              href: '/smart-contracts/core/fetch',
             },
             {
               title: 'Updating Assets',
-              href: '/core/update',
+              href: '/smart-contracts/core/update',
             },
             {
               title: 'Transferring Assets',
-              href: '/core/transfer',
+              href: '/smart-contracts/core/transfer',
             },
             {
               title: 'Burning Assets',
-              href: '/core/burn',
+              href: '/smart-contracts/core/burn',
             },
             {
               title: 'Collection Management',
-              href: '/core/collections',
+              href: '/smart-contracts/core/collections',
             },
             {
               title: 'Execute Asset Signing',
-              href: '/core/execute-asset-signing',
+              href: '/smart-contracts/core/execute-asset-signing',
             },
             {
               title: 'Helpers',
-              href: '/core/helpers',
+              href: '/smart-contracts/core/helpers',
             },
             {
               title: 'Deserializing Assets',
-              href: '/core/deserialization',
+              href: '/smart-contracts/core/deserialization',
             },
           ],
         },
@@ -113,123 +113,123 @@ export const core = {
           links: [
             {
               title: 'Overview',
-              href: '/core/plugins',
+              href: '/smart-contracts/core/plugins',
             },
             {
               title: 'Adding Plugins',
-              href: '/core/plugins/adding-plugins',
+              href: '/smart-contracts/core/plugins/adding-plugins',
             },
             {
               title: 'Updating Plugins',
-              href: '/core/plugins/update-plugins',
+              href: '/smart-contracts/core/plugins/update-plugins',
             },
             {
               title: 'Removing Plugins',
-              href: '/core/plugins/removing-plugins',
+              href: '/smart-contracts/core/plugins/removing-plugins',
             },
             {
               title: 'Delegating and Revoking Plugins',
-              href: '/core/plugins/delegating-and-revoking-plugins',
+              href: '/smart-contracts/core/plugins/delegating-and-revoking-plugins',
             },
             {
               title: 'Autograph Plugin',
-              href: '/core/plugins/autograph',
+              href: '/smart-contracts/core/plugins/autograph',
             },
             {
               title: 'Transfer Delegate Plugin',
-              href: '/core/plugins/transfer-delegate',
+              href: '/smart-contracts/core/plugins/transfer-delegate',
             },
             {
               title: 'Freeze Delegate Plugin',
-              href: '/core/plugins/freeze-delegate',
+              href: '/smart-contracts/core/plugins/freeze-delegate',
             },
             {
               title: 'Freeze Execute Plugin',
-              href: '/core/plugins/freeze-execute',
+              href: '/smart-contracts/core/plugins/freeze-execute',
             },
             {
               title: 'Burn Delegate Plugin',
-              href: '/core/plugins/burn-delegate',
+              href: '/smart-contracts/core/plugins/burn-delegate',
             },
             {
               title: 'Royalties Plugin',
-              href: '/core/plugins/royalties',
+              href: '/smart-contracts/core/plugins/royalties',
             },
             {
               title: 'Update Delegate Plugin',
-              href: '/core/plugins/update-delegate',
+              href: '/smart-contracts/core/plugins/update-delegate',
               updated: '06-19-2024',
             },
             {
               title: 'Attribute Plugin',
-              href: '/core/plugins/attribute',
+              href: '/smart-contracts/core/plugins/attribute',
             },
             {
               title: 'AddBlocker Plugin',
-              href: '/core/plugins/addBlocker',
+              href: '/smart-contracts/core/plugins/addBlocker',
             },
             {
               title: 'Bubblegum Plugin',
-              href: '/core/plugins/bubblegum',
+              href: '/smart-contracts/core/plugins/bubblegum',
             },
             {
               title: 'Edition Plugin',
-              href: '/core/plugins/edition',
+              href: '/smart-contracts/core/plugins/edition',
             },
             {
               title: 'Immutable Metadata Plugin',
-              href: '/core/plugins/immutableMetadata',
+              href: '/smart-contracts/core/plugins/immutableMetadata',
             },
             {
               title: 'Master Edition Plugin',
-              href: '/core/plugins/master-edition',
+              href: '/smart-contracts/core/plugins/master-edition',
             },
             {
               title: 'Permanent Transfer Plugin',
-              href: '/core/plugins/permanent-transfer-delegate',
+              href: '/smart-contracts/core/plugins/permanent-transfer-delegate',
             },
             {
               title: 'Permanent Freeze Delegate Plugin',
-              href: '/core/plugins/permanent-freeze-delegate',
+              href: '/smart-contracts/core/plugins/permanent-freeze-delegate',
             },
             {
               title: 'Permanent Burn Delegate Plugin',
-              href: '/core/plugins/permanent-burn-delegate',
+              href: '/smart-contracts/core/plugins/permanent-burn-delegate',
             },
             {
               title: 'Verified Creators Plugin',
-              href: '/core/plugins/verified-creators',
+              href: '/smart-contracts/core/plugins/verified-creators',
             },
           ],
         },
         {
           title: 'External Plugins',
           links: [
-            { title: 'Overview', href: '/core/external-plugins/overview' },
+            { title: 'Overview', href: '/smart-contracts/core/external-plugins/overview' },
             {
               title: 'Adding External Plugin Adapters',
-              href: '/core/external-plugins/adding-external-plugins',
+              href: '/smart-contracts/core/external-plugins/adding-external-plugins',
             },
             {
               title: 'Removing External Plugin Adapters',
-              href: '/core/external-plugins/removing-external-plugins',
+              href: '/smart-contracts/core/external-plugins/removing-external-plugins',
             },
 
             // {
             //   title: 'Removing External Plugins',
-            //   href: '/core/plugins/removing-plugins',
+            //   href: '/smart-contracts/core/plugins/removing-plugins',
             // },
             // {
             //   title: 'Delegating and Revoking External Plugins',
-            //   href: '/core/plugins/delegating-and-revoking-plugins',
+            //   href: '/smart-contracts/core/plugins/delegating-and-revoking-plugins',
             // },
             {
               title: 'Oracle Plugin',
-              href: '/core/external-plugins/oracle',
+              href: '/smart-contracts/core/external-plugins/oracle',
             },
             {
               title: 'AppData Plugin',
-              href: '/core/external-plugins/app-data',
+              href: '/smart-contracts/core/external-plugins/app-data',
               created: '2024-06-19',
             },
           ],
@@ -237,36 +237,36 @@ export const core = {
       ],
     },
     {
-      ...guidesSection('core'),
+      ...guidesSection('smart-contracts/core'),
       navigation: [
         {
           title: 'General',
           links: [
             {
               title: 'Overview',
-              href: '/core/guides',
+              href: '/smart-contracts/core/guides',
             },
             {
               title: 'Immutability',
-              href: '/core/guides/immutability',
+              href: '/smart-contracts/core/guides/immutability',
             },
             {
               title: 'Soulbound Assets',
-              href: '/core/guides/create-soulbound-nft-asset',
+              href: '/smart-contracts/core/guides/create-soulbound-nft-asset',
               created: '2024-12-06',
               updated: null, // null means it's never been updated
             },
             {
               title: 'Print Editions',
-              href: '/core/guides/print-editions',
+              href: '/smart-contracts/core/guides/print-editions',
             },
             {
               title: 'Oracle Plugin Example',
-              href: '/core/guides/oracle-plugin-example',
+              href: '/smart-contracts/core/guides/oracle-plugin-example',
             },
             {
               title: 'Appdata Plugin Example',
-              href: '/core/guides/onchain-ticketing-with-appdata',
+              href: '/smart-contracts/core/guides/onchain-ticketing-with-appdata',
             },
           ],
         },
@@ -275,15 +275,15 @@ export const core = {
           links: [
             {
               title: 'How to Create a Core Asset with Javascript',
-              href: '/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript',
+              href: '/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript',
             },
             {
               title: 'How to Create a Core Collection with JavaScript',
-              href: '/core/guides/javascript/how-to-create-a-core-collection-with-javascript',
+              href: '/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript',
             },
             {
               title: 'Web2 typescript Staking Example',
-              href: '/core/guides/javascript/web2-typescript-staking-example',
+              href: '/smart-contracts/core/guides/javascript/web2-typescript-staking-example',
             },
           ],
         },
@@ -292,7 +292,7 @@ export const core = {
           links: [
             {
               title: 'Loyalty Card Concept Guide',
-              href: '/core/guides/loyalty-card-concept-guide',
+              href: '/smart-contracts/core/guides/loyalty-card-concept-guide',
             },
           ],
         },
@@ -301,22 +301,22 @@ export const core = {
           links: [
             {
               title: 'How to Create a Core Asset with Anchor',
-              href: '/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor',
+              href: '/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor',
             },
             {
               title: 'How to Create a Core Collection with Anchor',
-              href: '/core/guides/anchor/how-to-create-a-core-collection-with-anchor',
+              href: '/smart-contracts/core/guides/anchor/how-to-create-a-core-collection-with-anchor',
             },
             {
               title: 'Anchor Staking Example',
-              href: '/core/guides/anchor/anchor-staking-example',
+              href: '/smart-contracts/core/guides/anchor/anchor-staking-example',
             },
           ],
         },
       ],
     },
     {
-      ...referencesSection('core'),
+      ...referencesSection('smart-contracts/core'),
       href: `https://mpl-core.typedoc.metaplex.com/`,
       target: '_blank',
     },

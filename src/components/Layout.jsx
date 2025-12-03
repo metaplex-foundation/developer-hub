@@ -53,11 +53,11 @@ export function Layout({ children, page }) {
           description="Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs."
         />
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-2xl font-bold text-white">Programs</h2>
+          <h2 className="mb-2 text-2xl font-bold text-white">Smart Contracts</h2>
           <p className="mb-8 text-sm text-neutral-400">
             On-chain programs for creating and managing digital assets on Solana.
           </p>
-          <Grid menuItem="Programs" numCols="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
+          <Grid menuItem="Smart Contracts" numCols="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
         </div>
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <h2 className="mb-2 text-2xl font-bold text-white">Developer Tools</h2>

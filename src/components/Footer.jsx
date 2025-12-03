@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { GitHubIcon, DiscordIcon, XIcon } from '@/components/icons/SocialIcons'
-import { Logo } from './products/global/Logo'
 
 export function Footer() {
   return (
@@ -10,15 +9,11 @@ export function Footer() {
           {/* Logo and copyright */}
           <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-3">
-              <Logo className="h-8 w-8" />
-              <div className="flex flex-col">
-                <span className="text-sm font-medium text-white">
-                  Metaplex
-                </span>
-                <span className="text-xs text-neutral-400">
-                  Developer Hub
-                </span>
-              </div>
+              <img
+                src="/metaplex-logo-white.png"
+                alt="Metaplex"
+                className="h-4 w-auto"
+              />
             </Link>
             <p className="text-sm text-neutral-400">
               &copy; {new Date().getFullYear()} Metaplex Foundation.

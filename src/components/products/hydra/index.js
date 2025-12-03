@@ -9,28 +9,28 @@ export const hydra = {
   name: 'Hydra',
   headline: 'Fanout wallets',
   description: 'Create shared wallets, split between multiple shareholders.',
-  path: 'hydra',
-  navigationMenuCatergory: 'Programs',
+  path: 'smart-contracts/hydra',
+  navigationMenuCatergory: 'Smart Contracts',
   icon: <ArrowsPointingOutIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-hydra',
   className: 'accent-amber',
-  heroes: [{ path: '/hydra', component: Hero }],
+  heroes: [{ path: '/smart-contracts/hydra', component: Hero }],
   deprecated: true,
   sections: [
     {
-      ...documentationSection('hydra'),
+      ...documentationSection('smart-contracts/hydra'),
       navigation: [
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/hydra' },
-            { title: 'Quick Start', href: '/hydra/quick-start' },
+            { title: 'Overview', href: '/smart-contracts/hydra' },
+            { title: 'Quick Start', href: '/smart-contracts/hydra/quick-start' },
           ],
         },
       ],
     },
     {
-      ...referencesSection('hydra'),
+      ...referencesSection('smart-contracts/hydra'),
       href: `https://mpl-hydra.typedoc.metaplex.com/`,
       target: '_blank',
     },

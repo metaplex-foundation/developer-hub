@@ -8,6 +8,7 @@ import { core } from './core';
 import { coreCandyMachine } from './coreCandyMachine';
 import { das } from './das-api';
 import { fusion } from './fusion';
+import { genesis } from './genesis';
 import { global } from './global';
 import { guides } from './guides';
 import { hydra } from './hydra';
@@ -26,7 +27,7 @@ export const productCategories = [
   // 'Aura',
   'Tokens',
   'NFTs',
-  'Programs',
+  'Smart Contracts',
   'Dev Tools'
 ]
 
@@ -42,6 +43,7 @@ export const products = [
   mplHybrid,
   tokenAuthRules,
   fusion,
+  genesis,
   hydra,
   inscription,
   bubblegum,

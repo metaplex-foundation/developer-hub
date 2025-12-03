@@ -94,6 +94,7 @@ const NavList = () => {
   const getTranslatedCategory = (category) => {
     const categoryMap = {
       'Programs': t('programs', 'Programs'),
+      'Smart Contracts': t('smartContracts', 'Smart Contracts'),
       'Dev Tools': t('devTools', 'Dev Tools'),
     }
     return categoryMap[category] || category
@@ -127,13 +128,13 @@ const NavList = () => {
         )
       })}
 
-      <div className="hidden flex-col lg:flex">
+      {/* <div className="hidden flex-col lg:flex">
         <Link href="/code-viewer">
           <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
             Playground
           </div>
         </Link>
-      </div>
+      </div> */}
     </div>
   )
 }

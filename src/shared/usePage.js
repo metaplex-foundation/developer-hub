@@ -51,11 +51,14 @@ export function usePage(pageProps) {
 }
 
 function getActiveProduct(pathname, pageProps) {
-  const pathnameFirstSegment = pathname.replace(/^\/|\/$/, '').split('/')?.[0]
+  const normalizedPathname = pathname.replace(/^\/|\/$/, '')
   const foundProduct = products.find((product) => {
     const defaultIsPageFromProduct = () => {
       if (product.isFallbackProduct) return false
-      return product.path === pathnameFirstSegment
+      // Support nested paths like 'smart-contracts/core'
+      // Check if pathname starts with product.path
+      return normalizedPathname === product.path ||
+             normalizedPathname.startsWith(`${product.path}/`)
     }
     return product.isPageFromProduct
       ? product.isPageFromProduct({ pathname, product, pageProps })
