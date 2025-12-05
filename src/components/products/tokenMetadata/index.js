@@ -16,6 +16,9 @@ export const tokenMetadata = {
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',
   className: 'accent-green',
   heroes: [{ path: '/smart-contracts/token-metadata', component: Hero }],
+  protocolFees: {
+    create: { solana: '0.01 SOL', eclipse: '0.000103088 ETH' },
+  },
   sections: [
     {
       ...documentationSection('smart-contracts/token-metadata'),

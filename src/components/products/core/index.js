@@ -17,6 +17,10 @@ export const core = {
   github: 'https://github.com/metaplex-foundation/mpl-core',
   className: 'accent-green',
   heroes: [{ path: '/smart-contracts/core', component: Hero }],
+  protocolFees: {
+    create: { solana: '0.0015 SOL', eclipse: '0.00001822 ETH' },
+    execute: { solana: '0.00004872 SOL', eclipse: '0.000000476 ETH' },
+  },
   sections: [
     {
       ...documentationSection('smart-contracts/core'),

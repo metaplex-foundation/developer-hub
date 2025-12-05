@@ -10,6 +10,8 @@ We recommend using [Bubblegum v2](/bubblegum-v2) to allow more flexibility and f
 
 {% /callout %}
 
+{% protocol-fees program="bubblegum" /%}
+
 Bubblegum is the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
 
 {% quick-links %}

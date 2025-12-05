@@ -17,6 +17,10 @@ export const bubblegumv2 = {
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',
   heroes: [{ path: '/smart-contracts/bubblegum-v2', component: Hero }],
+  protocolFees: {
+    create: { solana: '0.00009 SOL', eclipse: '0.0000009 ETH' },
+    transfer: { solana: '0.000006 SOL', eclipse: '0.00000006 ETH' },
+  },
   sections: [
     {
       ...documentationSection('smart-contracts/bubblegum-v2'),
