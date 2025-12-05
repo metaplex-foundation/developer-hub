@@ -18,8 +18,18 @@ export const core = {
   className: 'accent-green',
   heroes: [{ path: '/smart-contracts/core', component: Hero }],
   protocolFees: {
-    create: { solana: '0.0015 SOL', eclipse: '0.00001822 ETH' },
-    execute: { solana: '0.00004872 SOL', eclipse: '0.000000476 ETH' },
+    create: {
+      solana: '0.0015 SOL',
+      eclipse: '0.00001822 ETH',
+      payer: 'Collector',
+      notes: 'Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions.',
+    },
+    execute: {
+      solana: '0.00004872 SOL',
+      eclipse: '0.000000476 ETH',
+      payer: 'Owner',
+      notes: 'Typically paid by the current owner the Core NFT Asset that is calling the execute instruction.',
+    },
   },
   sections: [
     {

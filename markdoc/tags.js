@@ -217,6 +217,7 @@ const tags = {
     selfClosing: true,
     attributes: {
       program: { type: String, required: true },
+      showTitle: { type: Boolean, default: true },
     },
   },
 }

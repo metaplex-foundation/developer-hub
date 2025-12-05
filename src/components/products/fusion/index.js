@@ -15,9 +15,24 @@ export const fusion = {
   className: 'accent-amber',
   heroes: [{ path: '/smart-contracts/fusion', component: Hero }],
   protocolFees: {
-    combine: { solana: '0.002 SOL', eclipse: null },
-    split: { solana: '0.002 SOL', eclipse: null },
-    editConstraint: { solana: '0.01 SOL', eclipse: null },
+    combine: {
+      solana: '0.002 SOL',
+      eclipse: null,
+      payer: 'Collector',
+      notes: null,
+    },
+    split: {
+      solana: '0.002 SOL',
+      eclipse: null,
+      payer: 'Collector',
+      notes: null,
+    },
+    editConstraint: {
+      solana: '0.01 SOL',
+      eclipse: null,
+      payer: 'Creator',
+      notes: null,
+    },
   },
   deprecated: true,
   sections: [

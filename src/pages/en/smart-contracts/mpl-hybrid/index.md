@@ -7,7 +7,7 @@ description: Provides a high-level overview of the framework and onchain protoco
 **MPL-404** is a new model for digital assets, web3 games, and onchain communities. At the core of the model is a swap program (**mpl-hybrid**) that trades a fixed number of fungible assets for a non-fungible asset and vice versa. The swap is a dual escrow system, ensuring that all available non-fungible assets are backed by escrowed fungibles and vice versa.
 
 {% callout %}
-Please note that certain MPL-Hybrid instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+Please note that certain MPL-Hybrid instructions will require protocol fees.
 {% /callout %}
 
 {% protocol-fees program="mpl-hybrid" /%}

@@ -17,7 +17,12 @@ export const mplHybrid = {
   className: 'accent-green',
   heroes: [{ path: '/smart-contracts/mpl-hybrid', component: Hero }],
   protocolFees: {
-    swap: { solana: '0.005 SOL', eclipse: '0.005 ETH' },
+    swap: {
+      solana: '0.005 SOL',
+      eclipse: '0.005 ETH',
+      payer: 'Collector',
+      notes: 'Paid by the individual who swaps tokens and NFTs.',
+    },
   },
   sections: [
     {

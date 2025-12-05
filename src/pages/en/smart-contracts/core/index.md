@@ -7,7 +7,7 @@ description: Provides a high-level overview of the new Solana NFT Asset standard
 Metaplex Core ("Core") sheds the complexity and technical debt of previous standards and provides a clean and simple core spec for digital assets. This next generation Solana NFT standard uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets. {% .lead %}
 
 {% callout %}
-Please note that certain Core instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+Please note that certain Core instructions will require protocol fees.
 {% /callout %}
 
 {% protocol-fees program="core" /%}

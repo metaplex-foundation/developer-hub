@@ -17,7 +17,12 @@ export const bubblegum = {
   className: 'accent-green',
   heroes: [{ path: '/smart-contracts/bubblegum', component: Hero }],
   protocolFees: {
-    create: { solana: 'Free', eclipse: 'Free' },
+    create: {
+      solana: 'Free',
+      eclipse: 'Free',
+      payer: null,
+      notes: null,
+    },
   },
   deprecated: true,
   sections: [
