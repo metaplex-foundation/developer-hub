@@ -16,6 +16,14 @@ export const mplHybrid = {
   github: 'https://github.com/metaplex-foundation/mpl-hybrid',
   className: 'accent-green',
   heroes: [{ path: '/smart-contracts/mpl-hybrid', component: Hero }],
+  protocolFees: {
+    swap: {
+      solana: '0.005 SOL',
+      eclipse: '0.005 ETH',
+      payer: 'Collector',
+      notes: 'Paid by the individual who swaps tokens and NFTs.',
+    },
+  },
   sections: [
     {
       ...documentationSection('smart-contracts/mpl-hybrid'),

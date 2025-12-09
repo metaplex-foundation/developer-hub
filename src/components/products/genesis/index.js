@@ -31,19 +31,46 @@ export const genesis = {
           ],
         },
         {
-          title: 'Features',
+          title: 'SDK',
           links: [
             {
-              title: 'Vault Deposits',
-              href: '/smart-contracts/genesis/vault-deposits',
+              title: 'JavaScript SDK',
+              href: '/smart-contracts/genesis/sdk/javascript',
+            },
+          ],
+        },
+        {
+          title: 'Launch Types',
+          links: [
+            {
+              title: 'Launch Pools',
+              href: '/smart-contracts/genesis/launch-pools',
+            },
+            {
+              title: 'Presales',
+              href: '/smart-contracts/genesis/presales',
             },
             {
               title: 'Bonding Curves',
               href: '/smart-contracts/genesis/bonding-curves',
             },
+          ],
+        },
+        {
+          title: 'Graduation',
+          links: [
             {
-              title: 'Raydium Graduation',
+              title: 'Raydium CPMM',
               href: '/smart-contracts/genesis/raydium-graduation',
+            },
+          ],
+        },
+        {
+          title: 'Integrations',
+          links: [
+            {
+              title: 'Aggregation API',
+              href: '/smart-contracts/genesis/aggregation',
             },
           ],
         },
@@ -64,14 +91,20 @@ export const genesis = {
       description: 'A smart contract for launching tokens on Solana via presale launches, launch pools, and bonding curves.',
       sections: {
         'Introduction': 'Introduction',
-        'Features': 'Features',
+        'SDK': 'SDK',
+        'Launch Types': 'Launch Types',
+        'Graduation': 'Graduation',
+        'Integrations': 'Integrations',
       },
       links: {
         'Overview': 'Overview',
         'Getting Started': 'Getting Started',
-        'Vault Deposits': 'Vault Deposits',
+        'JavaScript SDK': 'JavaScript SDK',
+        'Launch Pools': 'Launch Pools',
+        'Presales': 'Presales',
         'Bonding Curves': 'Bonding Curves',
-        'Raydium Graduation': 'Raydium Graduation',
+        'Raydium CPMM': 'Raydium CPMM',
+        'Aggregation API': 'Aggregation API',
       },
     },
     ja: {
@@ -79,14 +112,20 @@ export const genesis = {
       description: 'プレセールローンチ、ローンチプール、ボンディングカーブを通じてSolana上でトークンをローンチするためのスマートコントラクト',
       sections: {
         'Introduction': '紹介',
-        'Features': '機能',
+        'SDK': 'SDK',
+        'Launch Types': 'ローンチタイプ',
+        'Graduation': '卒業',
+        'Integrations': 'インテグレーション',
       },
       links: {
         'Overview': '概要',
         'Getting Started': 'はじめに',
-        'Vault Deposits': 'ボールト入金',
+        'JavaScript SDK': 'JavaScript SDK',
+        'Launch Pools': 'ローンチプール',
+        'Presales': 'プレセール',
         'Bonding Curves': 'ボンディングカーブ',
-        'Raydium Graduation': 'Raydium卒業',
+        'Raydium CPMM': 'Raydium CPMM',
+        'Aggregation API': 'アグリゲーションAPI',
       },
     },
     ko: {
@@ -94,14 +133,20 @@ export const genesis = {
       description: '프리세일 런치, 런치 풀, 본딩 커브를 통해 Solana에서 토큰을 런치하기 위한 스마트 컨트랙트',
       sections: {
         'Introduction': '소개',
-        'Features': '기능',
+        'SDK': 'SDK',
+        'Launch Types': '런치 유형',
+        'Graduation': '졸업',
+        'Integrations': '통합',
       },
       links: {
         'Overview': '개요',
         'Getting Started': '시작하기',
-        'Vault Deposits': '볼트 입금',
+        'JavaScript SDK': 'JavaScript SDK',
+        'Launch Pools': '런치 풀',
+        'Presales': '프리세일',
         'Bonding Curves': '본딩 커브',
-        'Raydium Graduation': 'Raydium 졸업',
+        'Raydium CPMM': 'Raydium CPMM',
+        'Aggregation API': '애그리게이션 API',
       },
     },
   },

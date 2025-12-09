@@ -14,6 +14,26 @@ export const fusion = {
   github: 'https://github.com/metaplex-foundation/mpl-trifle',
   className: 'accent-amber',
   heroes: [{ path: '/smart-contracts/fusion', component: Hero }],
+  protocolFees: {
+    combine: {
+      solana: '0.002 SOL',
+      eclipse: null,
+      payer: 'Collector',
+      notes: null,
+    },
+    split: {
+      solana: '0.002 SOL',
+      eclipse: null,
+      payer: 'Collector',
+      notes: null,
+    },
+    editConstraint: {
+      solana: '0.01 SOL',
+      eclipse: null,
+      payer: 'Creator',
+      notes: null,
+    },
+  },
   deprecated: true,
   sections: [
     {

@@ -7,8 +7,10 @@ description: Provides a high-level overview of composable NFTs using Fusion.
 Fusion is an NFT composability feature powered by the Trifle Program. {% .lead %}
 
 {% callout %}
-Please note that certain Fusion (Trifle) instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+Please note that certain Fusion (Trifle) instructions will require protocol fees.
 {% /callout %}
+
+{% protocol-fees program="fusion" /%}
 
 The Trifle Program is built upon the Escrow extension of Token Metadata. It uses a Creator Owned Escrow, or COE, using a Trifle PDA as the creator and manager of the COE. Its purpose is to add onchain tracking and composability around NFT ownership. Additionally, the ability to specify rules and effects around token ownership allows for complex ownership models to be implemented by creators.
 

@@ -16,6 +16,14 @@ export const bubblegum = {
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',
   heroes: [{ path: '/smart-contracts/bubblegum', component: Hero }],
+  protocolFees: {
+    create: {
+      solana: 'Free',
+      eclipse: 'Free',
+      payer: null,
+      notes: null,
+    },
+  },
   deprecated: true,
   sections: [
     {

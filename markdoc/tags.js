@@ -1,4 +1,5 @@
 import { Callout } from '@/components/Callout'
+import { ProtocolFees } from '@/components/ProtocolFees'
 import {
   Dialect,
   DialectSwitcher,
@@ -205,10 +206,18 @@ const tags = {
       from: { type: String, required: true },
       frameworks: { type: String, default: 'kit,umi,shank,anchor' },
       defaultFramework: { type: String, default: 'umi' },
-      showLineNumbers: { type: Boolean, default: false },
+      showLineNumbers: { type: Boolean, default: true },
       highlightLines: { type: String, default: '' },
       showLines: { type: String, default: '' },
       showCopy: { type: Boolean, default: true },
+    },
+  },
+  'protocol-fees': {
+    render: ProtocolFees,
+    selfClosing: true,
+    attributes: {
+      program: { type: String, required: true },
+      showTitle: { type: Boolean, default: true },
     },
   },
 }
