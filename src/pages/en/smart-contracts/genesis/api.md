@@ -1,10 +1,10 @@
 ---
-title: Aggregation API
-metaTitle: Genesis - Aggregation API
+title: API
+metaTitle: Genesis - API
 description: Public API for querying Genesis launch data by genesis address or token mint.
 ---
 
-# Aggregation API
+# Genesis API
 
 The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application.
 
