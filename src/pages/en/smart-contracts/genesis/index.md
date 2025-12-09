@@ -17,7 +17,7 @@ Genesis supports multiple launch mechanisms that can be combined to create custo
 - **Launch Pools**: Token distribution where users deposit during a window and receive tokens proportional to their share
 - **Presales**: Collect deposits from users before trading begins, then distribute tokens based on custom criteria
 
-### Example Use Case: Token Launch
+### Example Use Case: Launch Pool
 
 A project wants to launch a token where:
 1. Users deposit SOL during a launch pool period
@@ -47,6 +47,10 @@ Buckets are modular components that define how tokens flow in and out of your la
 
 **Outflow Buckets** receive tokens or quote tokens:
 - **Unlocked Bucket**: Receives quote tokens via end behaviors for team/treasury claims
+
+{% callout type="note" %}
+More bucket types coming soon.
+{% /callout %}
 
 Each bucket has configurable time conditions that control when it's active, and behaviors that execute when conditions are met.
 
@@ -101,7 +105,29 @@ Claim Period: Users claim tokens
 ```
 Team claims SOL from unlocked bucket
         ↓
-(Optional) Revoke mint/freeze authorities
+Revoke mint/freeze authorities
+```
+
+## Revoking Authorities
+
+After your launch is complete, you should revoke the mint and freeze authorities on your token. This signals to holders and rug checkers that no additional tokens can be minted and tokens cannot be frozen.
+
+{% callout type="warning" %}
+**Authority revocation is irreversible.** Once revoked, you can never mint additional tokens or freeze token accounts. Only do this when you're certain the token launch is complete.
+{% /callout %}
+
+```typescript
+import { revokeMintAuthorityV2, revokeFreezeAuthorityV2 } from '@metaplex-foundation/genesis';
+
+// Revoke mint authority - no more tokens can ever be minted
+await revokeMintAuthorityV2(umi, {
+  baseMint: baseMint.publicKey,
+}).sendAndConfirm(umi);
+
+// Revoke freeze authority - tokens can never be frozen
+await revokeFreezeAuthorityV2(umi, {
+  baseMint: baseMint.publicKey,
+}).sendAndConfirm(umi);
 ```
 
 ## Key Features
@@ -120,10 +146,6 @@ Automated actions that execute when a bucket's end condition is met:
 
 {% callout type="warning" %}
 **Finalization is Permanent**: Once you finalize a Genesis Account, you cannot add more buckets. Make sure your configuration is complete before finalizing.
-{% /callout %}
-
-{% callout type="warning" %}
-**Authority Revocation is Irreversible**: Revoking mint or freeze authority is permanent. Only do this when you're certain the token launch is complete.
 {% /callout %}
 
 ## Next Steps

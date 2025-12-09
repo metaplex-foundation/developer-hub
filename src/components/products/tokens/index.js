@@ -33,6 +33,14 @@ export const tokens = {
               href: '/tokens/create-a-token',
             },
             {
+              title: 'Launch a Token',
+              href: '/tokens/launch-token',
+            },
+            {
+              title: 'Aggregate Token Launches',
+              href: '/smart-contracts/genesis/aggregation',
+            },
+            {
               title: 'Read Token Data',
               href: '/tokens/read-token',
             },
