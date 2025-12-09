@@ -4,8 +4,6 @@ metaTitle: Genesis - Raydium Graduation
 description: Learn how to graduate your bonding curve to a Raydium CPMM pool.
 ---
 
-# Raydium Graduation
-
 After your bonding curve period ends, you can "graduate" to a Raydium Constant Product Market Maker (CPMM) pool. This transition moves your token from the Genesis bonding curve to permanent decentralized exchange liquidity on Raydium.
 
 ## Why Graduate to Raydium?

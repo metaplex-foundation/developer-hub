@@ -4,8 +4,6 @@ metaTitle: Genesis - Getting Started
 description: Learn the fundamentals of launching a token with Genesis on Solana.
 ---
 
-# Getting Started
-
 This guide introduces the core concepts and workflow for launching a token with Genesis. You'll learn how to initialize a Genesis Account, understand the bucket system, and finalize your launch configuration.
 
 ## Prerequisites
@@ -32,8 +30,8 @@ Every Genesis token launch follows the same fundamental flow:
 4. Active Period
    └── Users participate based on your bucket configuration
 
-5. Graduate to DEX
-   └── Transition to permanent liquidity on Raydium
+5. Transition
+   └── Execute end behaviors (e.g., send funds to outflow buckets)
 ```
 
 ## Step 1: Initialize a Genesis Account
@@ -100,34 +98,25 @@ Collect quote tokens (SOL) from users:
 
 | Bucket Type | Use Case |
 |-------------|----------|
-| **Vault** | Presales and pre-deposits before trading |
-| **Bonding Curve** | Automated price discovery with buy/sell trading |
-| **Launch Pool** | Gamified distribution with rankings |
+| **Launch Pool** | Deposit window with proportional distribution |
+| **Presale** | Pre-deposit collection before token distribution |
 
 ### Outflow Buckets
-Receive tokens and liquidity for DEX creation:
+Receive tokens or quote tokens via end behaviors:
 
 | Bucket Type | Use Case |
 |-------------|----------|
-| **Raydium CPMM** | Graduate to permanent Raydium liquidity |
+| **Unlocked Bucket** | Receives funds for team/treasury claims |
 
 ### Choose Your Launch Type
 
-Each launch type guide includes complete setup instructions for both the inflow bucket and Raydium graduation:
-
 {% callout type="note" %}
-**[Launch Pools](/smart-contracts/genesis/launch-pools)** - Gamified launches where user rankings determine token allocation. Users deposit during a window, then your backend processes deposits in ranked order.
+**[Launch Pools](/smart-contracts/genesis/launch-pools)** - Users deposit during a window and receive tokens proportional to their share of total deposits.
 {% /callout %}
 
 {% callout type="note" %}
-**[Presales](/smart-contracts/genesis/presales)** - Collect commitments before trading begins. Users deposit SOL, then deposits are swapped to the bonding curve based on your criteria.
+**[Presales](/smart-contracts/genesis/presales)** - Collect commitments before trading begins, then distribute tokens based on custom criteria.
 {% /callout %}
-
-{% callout type="note" %}
-**[Bonding Curves](/smart-contracts/genesis/bonding-curves)** - Immediate trading with automatic price discovery. Users can buy and sell freely, with price adjusting based on supply and demand.
-{% /callout %}
-
-For details on graduating to Raydium after your launch, see [Raydium Graduation](/smart-contracts/genesis/raydium-graduation).
 
 ## Step 3: Finalize
 
@@ -159,8 +148,7 @@ After finalization:
 
 Choose your launch type and follow the detailed guide:
 
-1. **[Launch Pools](/smart-contracts/genesis/launch-pools)** - Gamified token distribution with rankings
+1. **[Launch Pools](/smart-contracts/genesis/launch-pools)** - Token distribution with deposit windows
 2. **[Presales](/smart-contracts/genesis/presales)** - Pre-deposit collection before trading
-3. **[Bonding Curves](/smart-contracts/genesis/bonding-curves)** - Immediate trading with price discovery
 
-Each guide includes complete setup code, user operations, and backend management.
+Each guide includes complete setup code, user operations, and configuration.

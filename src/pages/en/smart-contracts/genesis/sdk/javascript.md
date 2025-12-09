@@ -4,8 +4,6 @@ metaTitle: JavaScript SDK | Genesis
 description: Learn how to install and configure the Genesis JavaScript SDK for token launches on Solana.
 ---
 
-# JavaScript SDK
-
 Metaplex provides a JavaScript library for interacting with the Genesis program. Built on the [Umi Framework](/umi), it ships as a lightweight library that can be used in any JavaScript or TypeScript project.
 
 {% quick-links %}
@@ -188,7 +186,7 @@ console.log('Transaction signature:', result.signature);
 
 With your Umi instance configured with the Genesis Token Launch program, you're ready to start building. Explore the Genesis features:
 
-- **[Launch Pools](/smart-contracts/genesis/launch-pools)** - Gamified token distribution with rankings
+- **[Launch Pools](/smart-contracts/genesis/launch-pools)** - Token distribution with deposit windows
 - **[Presales](/smart-contracts/genesis/presales)** - Pre-deposit collection before trading
 - **[Bonding Curves](/smart-contracts/genesis/bonding-curves)** - Immediate trading with automatic price discovery
 - **[Raydium Graduation](/smart-contracts/genesis/raydium-graduation)** - Graduate to permanent DEX liquidity

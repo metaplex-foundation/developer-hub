@@ -4,8 +4,6 @@ metaTitle: Genesis - Vault Deposits
 description: Learn how to set up vault deposits for pre-sale token launches with Genesis.
 ---
 
-# Vault Deposits
-
 A Vault is an "inflow" bucket that collects quote tokens (typically SOL) from users during a pre-deposit or presale phase. It acts as a holding area where users commit funds before the main trading phase begins.
 
 ## Why Use a Vault?

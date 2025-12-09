@@ -50,19 +50,6 @@ export const genesis = {
               title: 'Presales',
               href: '/smart-contracts/genesis/presales',
             },
-            {
-              title: 'Bonding Curves',
-              href: '/smart-contracts/genesis/bonding-curves',
-            },
-          ],
-        },
-        {
-          title: 'Graduation',
-          links: [
-            {
-              title: 'Raydium CPMM',
-              href: '/smart-contracts/genesis/raydium-graduation',
-            },
           ],
         },
         {
@@ -93,7 +80,6 @@ export const genesis = {
         'Introduction': 'Introduction',
         'SDK': 'SDK',
         'Launch Types': 'Launch Types',
-        'Graduation': 'Graduation',
         'Integrations': 'Integrations',
       },
       links: {
@@ -102,8 +88,6 @@ export const genesis = {
         'JavaScript SDK': 'JavaScript SDK',
         'Launch Pools': 'Launch Pools',
         'Presales': 'Presales',
-        'Bonding Curves': 'Bonding Curves',
-        'Raydium CPMM': 'Raydium CPMM',
         'Aggregation API': 'Aggregation API',
       },
     },
@@ -114,7 +98,6 @@ export const genesis = {
         'Introduction': '紹介',
         'SDK': 'SDK',
         'Launch Types': 'ローンチタイプ',
-        'Graduation': '卒業',
         'Integrations': 'インテグレーション',
       },
       links: {
@@ -123,8 +106,6 @@ export const genesis = {
         'JavaScript SDK': 'JavaScript SDK',
         'Launch Pools': 'ローンチプール',
         'Presales': 'プレセール',
-        'Bonding Curves': 'ボンディングカーブ',
-        'Raydium CPMM': 'Raydium CPMM',
         'Aggregation API': 'アグリゲーションAPI',
       },
     },
@@ -135,7 +116,6 @@ export const genesis = {
         'Introduction': '소개',
         'SDK': 'SDK',
         'Launch Types': '런치 유형',
-        'Graduation': '졸업',
         'Integrations': '통합',
       },
       links: {
@@ -144,8 +124,6 @@ export const genesis = {
         'JavaScript SDK': 'JavaScript SDK',
         'Launch Pools': '런치 풀',
         'Presales': '프리세일',
-        'Bonding Curves': '본딩 커브',
-        'Raydium CPMM': 'Raydium CPMM',
         'Aggregation API': '애그리게이션 API',
       },
     },

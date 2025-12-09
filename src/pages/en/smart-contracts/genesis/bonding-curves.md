@@ -4,8 +4,6 @@ metaTitle: Genesis - Bonding Curves
 description: Learn how to set up and use bonding curves for token launches with Genesis.
 ---
 
-# Bonding Curves
-
 A bonding curve is an automated market maker (AMM) that creates a mathematical relationship between a token's price and its supply. As users buy tokens, the price increases; as they sell, it decreases. This creates automatic price discovery without needing traditional order books or market makers.
 
 Genesis uses a **constant product bonding curve**, the same mathematical model used by Uniswap and Raydium. This provides predictable pricing, guaranteed liquidity, and protection against manipulation.

@@ -1,12 +1,10 @@
 ---
 title: Launch Pools
 metaTitle: Genesis - Launch Pools
-description: Gamified token distribution with user rankings and controlled allocation.
+description: Token distribution where users deposit during a window and receive tokens proportionally.
 ---
 
-# Launch Pools
-
-Launch Pools enable gamified token launches where users deposit during a window, and token allocation is determined by deposit weight. All depositors receive tokens proportional to their share of total deposits.
+Launch Pools enable token launches where users deposit during a window, and token allocation is determined by deposit weight. All depositors receive tokens proportional to their share of total deposits.
 
 ## Overview
 

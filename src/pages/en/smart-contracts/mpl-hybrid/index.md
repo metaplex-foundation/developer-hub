@@ -10,8 +10,6 @@ description: Provides a high-level overview of the framework and onchain protoco
 Please note that certain MPL-Hybrid instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
 {% /callout %}
 
-{% protocol-fees program="mpl-hybrid" /%}
-
 ## Swapping
 
 The ability to freely move between fungible and non-fungible assets in a predictable way allows this new asset class (often called **hybrids**) to take advantage of the best aspects of both asset types. **Non-fungible assets can now benefit from the liquidity, distribution, and DeFi opportunities** associated with fungible assets. Conversely, fungible assets can now benefit from the improved utility, collectability, and identity that come from the non-fungible world.

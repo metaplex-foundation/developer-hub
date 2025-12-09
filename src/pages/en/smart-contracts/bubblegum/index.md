@@ -10,9 +10,11 @@ We recommend using [Bubblegum v2](/bubblegum-v2) to allow more flexibility and f
 
 {% /callout %}
 
-Bubblegum is the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
+{% callout %}
+Please note that certain Bubblegum instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+{% /callout %}
 
-{% protocol-fees program="bubblegum" /%}
+Bubblegum is the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
 
 {% quick-links %}
 
@@ -24,7 +26,7 @@ Bubblegum is the Metaplex Protocol program for creating and interacting with co
 
 ## Introduction
 
-As NFTs have flourished on the Solana blockchain, there’s been an increasing need for NFTs to be as ubiquitous as any digital asset on the Internet: every single item in your game’s inventory, proof-of-engagement in your favorite consumer app, or even a profile for every human on the planet.
+As NFTs have flourished on the Solana blockchain, there's been an increasing need for NFTs to be as ubiquitous as any digital asset on the Internet: every single item in your game's inventory, proof-of-engagement in your favorite consumer app, or even a profile for every human on the planet.
 
 So far, though, these types of products have been held back by the cost of rent for NFTs on Solana, which is relatively cheap but scales linearly. Compression for NFTs drastically reduces the cost of onchain storage of NFTs to enable creators to be as expressive with the technology as they wish.
 
@@ -102,7 +104,7 @@ Which brings us to an important question: where is the NFT data stored?
 
 ## Metaplex DAS API
 
-When we mint a new compressed NFT, its data is hashed and added as a new Leaf in a Merkle Tree. But there’s more. Additionally, the entire NFT data is stored in the transaction that created the compressed NFT. Similarly, when a compressed NFT is updated, its updated data is, once again, saved on the transaction as a changelog. So, whilst there aren’t any accounts keeping track of that data, one can look at all previous transactions in the ledger and find that information.
+When we mint a new compressed NFT, its data is hashed and added as a new Leaf in a Merkle Tree. But there's more. Additionally, the entire NFT data is stored in the transaction that created the compressed NFT. Similarly, when a compressed NFT is updated, its updated data is, once again, saved on the transaction as a changelog. So, whilst there aren't any accounts keeping track of that data, one can look at all previous transactions in the ledger and find that information.
 
 {% diagram %}
 
@@ -125,9 +127,9 @@ When we mint a new compressed NFT, its data is hashed and added as a new Leaf in
 
 Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Metaplex DAS API**.
 
-Note that not all RPCs support the DAS API. As such, you may be interested in the [“Metaplex DAS API RPCs”](/rpc-providers) page to select an appropriate RPC when using compressed NFTs in your application.
+Note that not all RPCs support the DAS API. As such, you may be interested in the ["Metaplex DAS API RPCs"](/rpc-providers) page to select an appropriate RPC when using compressed NFTs in your application.
 
-We talk about this in more detail in our advanced [“Storing and indexing NFT data”](/bubblegum/stored-nft-data) guide.
+We talk about this in more detail in our advanced ["Storing and indexing NFT data"](/bubblegum/stored-nft-data) guide.
 
 ## Features
 

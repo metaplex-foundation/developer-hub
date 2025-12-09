@@ -10,8 +10,6 @@ Bubblegum V2 is the latest iteration of the Metaplex Protocol program for creati
 Please note that certain Bubblegum V2 instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
 {% /callout %}
 
-{% protocol-fees program="bubblegum-v2" /%}
-
 {% quick-links %}
 
 {% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum-v2/sdk" description="Find the language or library of your choice and get started with compressed NFTs." /%}

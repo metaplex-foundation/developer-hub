@@ -10,8 +10,6 @@ The Token Metadata program is a fundamental program when dealing NFTs and Fungib
 Please note that certain Token Metadata instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
 {% /callout %}
 
-{% protocol-fees program="token-metadata" /%}
-
 {% quick-links %}
 
 {% quick-link title="Getting Started" icon="InboxArrowDown" href="/token-metadata/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}

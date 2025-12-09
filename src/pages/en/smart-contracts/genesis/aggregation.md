@@ -4,8 +4,6 @@ metaTitle: Genesis - Aggregation API
 description: Public API for querying Genesis launch data by genesis address or token mint.
 ---
 
-# Aggregation API
-
 The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application.
 
 {% callout type="note" %}
@@ -123,7 +121,9 @@ Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only h
 | `429` | Rate limit exceeded |
 | `500` | Internal server error |
 
-## TypeScript Types
+## Types & Examples
+
+### TypeScript
 
 ```ts
 interface Launch {
@@ -182,7 +182,7 @@ const { data }: LaunchResponse = await response.json();
 console.log(data.baseToken.name); // "My Token"
 ```
 
-## Rust Types
+### Rust
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -275,3 +275,61 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## Fetching On-Chain State (JavaScript SDK)
+
+In addition to the HTTP API, you can fetch launch state directly from the blockchain using the Genesis JavaScript SDK. This is useful for getting real-time data like deposit totals and time conditions.
+
+### Bucket State
+
+```typescript
+import { fetchLaunchPoolBucketV2 } from '@metaplex-foundation/genesis';
+
+const bucket = await fetchLaunchPoolBucketV2(umi, launchPoolBucket);
+
+console.log('Total deposits:', bucket.quoteTokenDepositTotal);
+console.log('Deposit count:', bucket.depositCount);
+console.log('Claim count:', bucket.claimCount);
+console.log('Token allocation:', bucket.bucket.baseTokenAllocation);
+```
+
+### Time Conditions
+
+Each bucket has four time conditions that control the launch phases:
+
+```typescript
+const bucket = await fetchLaunchPoolBucketV2(umi, launchPoolBucket);
+
+// Deposit window
+const depositStart = bucket.depositStartCondition.time;
+const depositEnd = bucket.depositEndCondition.time;
+
+// Claim window
+const claimStart = bucket.claimStartCondition.time;
+const claimEnd = bucket.claimEndCondition.time;
+
+console.log('Deposit starts:', new Date(Number(depositStart) * 1000));
+console.log('Deposit ends:', new Date(Number(depositEnd) * 1000));
+console.log('Claims start:', new Date(Number(claimStart) * 1000));
+console.log('Claims end:', new Date(Number(claimEnd) * 1000));
+```
+
+### Deposit State
+
+```typescript
+import {
+  fetchLaunchPoolDepositV2,
+  safeFetchLaunchPoolDepositV2,
+} from '@metaplex-foundation/genesis';
+
+// Throws if not found
+const deposit = await fetchLaunchPoolDepositV2(umi, depositPda);
+
+// Returns null if not found
+const maybeDeposit = await safeFetchLaunchPoolDepositV2(umi, depositPda);
+
+if (deposit) {
+  console.log('Amount:', deposit.amountQuoteToken);
+  console.log('Claimed:', deposit.claimed);
+}
+```
