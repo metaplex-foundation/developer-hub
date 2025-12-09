@@ -12,7 +12,7 @@ updated: '11-28-2025'
 
 以下のセクションでは、完全なコード例と変更が必要なパラメータを確認できます。これはToken Metadataプログラムを使用してオンチェーンメタデータを更新します。
 
-{% code-tabs-imported from="token-metadata/fungibles/update" frameworks="umi" /%}
+{% code-tabs-imported from="token-metadata/fungibles/update" frameworks="umi,cli" /%}
 
 ## パラメータ
 

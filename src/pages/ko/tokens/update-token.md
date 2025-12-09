@@ -12,7 +12,7 @@ updated: '11-28-2025'
 
 다음 섹션에서 전체 코드 예제와 변경이 필요할 수 있는 파라미터를 확인할 수 있습니다. Token Metadata 프로그램을 사용하여 온체인 메타데이터를 업데이트합니다.
 
-{% code-tabs-imported from="token-metadata/fungibles/update" frameworks="umi" /%}
+{% code-tabs-imported from="token-metadata/fungibles/update" frameworks="umi,cli" /%}
 
 ## 파라미터
 

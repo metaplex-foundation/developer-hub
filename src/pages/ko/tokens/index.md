@@ -31,6 +31,24 @@ Metaplex SDK를 사용하여 Solana에서 대체 가능 토큰(SPL 토큰)을 �
 
 ## 빠른 시작
 
+### CLI 사용하기 (빠른 작업에 권장)
+
+Metaplex CLI를 설치하여 토큰을 빠르게 생성하고 관리합니다:
+
+```bash
+npm install -g @metaplex-foundation/cli
+```
+
+첫 번째 토큰을 생성합니다:
+
+```bash
+mplx toolbox tm create --wizard --keypair <지갑 파일 경로> --rpc-url <RPC URL>
+```
+
+자세한 내용은 [CLI 문서](/dev-tools/cli)를 참조하세요.
+
+### JavaScript/TypeScript 사용하기
+
 필요한 패키지를 설치합니다:
 
 ```bash
@@ -43,5 +61,6 @@ npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/mpl-too
 
 더 고급 토큰 기능에 대해서는 다음을 확인하세요:
 
+- [Metaplex CLI](/dev-tools/cli) - 토큰 작업을 위한 커맨드라인 도구
 - [Token Metadata 프로그램](/token-metadata) - Token Metadata 프로그램 전체 문서
 - [MPL Toolbox](https://github.com/metaplex-foundation/mpl-toolbox) - 저수준 토큰 작업

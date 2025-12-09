@@ -31,6 +31,24 @@ Metaplex SDKを使用して、Solana上でファンジブルトークン（SPL�
 
 ## クイックスタート
 
+### CLIを使用する（簡単なタスクにおすすめ）
+
+Metaplex CLIをインストールして、トークンの作成と管理を素早く行います：
+
+```bash
+npm install -g @metaplex-foundation/cli
+```
+
+最初のトークンを作成します：
+
+```bash
+mplx toolbox tm create --wizard --keypair <ウォレットファイルへのパス> --rpc-url <RPC URL>
+```
+
+詳細については、[CLIドキュメント](/dev-tools/cli)をご覧ください。
+
+### JavaScript/TypeScriptを使用する
+
 必要なパッケージをインストールします：
 
 ```bash
@@ -43,5 +61,6 @@ npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/mpl-too
 
 より高度なトークン機能については、以下をご覧ください：
 
+- [Metaplex CLI](/dev-tools/cli) - トークン操作のためのコマンドラインツール
 - [Token Metadataプログラム](/token-metadata) - Token Metadataプログラムの完全なドキュメント
 - [MPL Toolbox](https://github.com/metaplex-foundation/mpl-toolbox) - 低レベルトークン操作
