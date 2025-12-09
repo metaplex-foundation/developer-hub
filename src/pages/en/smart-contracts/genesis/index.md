@@ -167,9 +167,14 @@ When graduating from a bonding curve to Raydium, Genesis calculates the exact to
 
 ## Next Steps
 
-Ready to build your token launch? Start with these guides:
+Ready to build your token launch? Start here:
 
-- [Getting Started](/smart-contracts/genesis/getting-started) - Install the SDK and initialize your first Genesis Account
-- [Vault Deposits](/smart-contracts/genesis/vault-deposits) - Set up pre-deposits and backend-controlled swaps
-- [Bonding Curves](/smart-contracts/genesis/bonding-curves) - Configure automatic price discovery
+- [Getting Started](/smart-contracts/genesis/getting-started) - Understand the launch flow and initialize your first Genesis Account
+- [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) - Install and configure the SDK
+
+Then choose your launch type:
+
+- [Launch Pools](/smart-contracts/genesis/launch-pools) - Gamified distribution with rankings
+- [Presales](/smart-contracts/genesis/presales) - Pre-deposits before trading begins
+- [Bonding Curves](/smart-contracts/genesis/bonding-curves) - Immediate trading with automatic price discovery
 - [Raydium Graduation](/smart-contracts/genesis/raydium-graduation) - Graduate to permanent DEX liquidity
