@@ -7,7 +7,7 @@ description: Provides a high-level overview of Bubblegum V2 and compressed NFTs.
 Bubblegum V2 is the latest iteration of the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Built for large-scale operations, Bubblegum V2 preserves all the benefits of the original Bubblegum while introducing powerful new features. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
 
 {% callout %}
-Please note that certain Bubblegum V2 instructions will require protocol fees.
+Please note that certain Bubblegum V2 instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
 {% /callout %}
 
 {% protocol-fees program="bubblegum-v2" /%}

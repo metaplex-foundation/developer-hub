@@ -7,7 +7,7 @@ description: Provides a high-level overview of the Solana NFT standard.
 The Token Metadata program is a fundamental program when dealing NFTs and Fungible assets on the Solana blockchain. In this overview, we explain what this program does and how we can leverage its various features at a high level. {% .lead %}
 
 {% callout %}
-Please note that certain Token Metadata instructions will require protocol fees.
+Please note that certain Token Metadata instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
 {% /callout %}
 
 {% protocol-fees program="token-metadata" /%}

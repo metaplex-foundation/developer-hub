@@ -6,6 +6,12 @@ description: SolanaのNFT標準の高レベル概要を提供します。
 
 Token Metadataプログラムは、SolanaブロックチェーンでNFTやFungible アセットを扱う際の基盤となるプログラムです。この概要では、このプログラムが何を行い、その様々な機能を高レベルでどのように活用できるかを説明します。 {% .lead %}
 
+{% callout %}
+Please note that certain Token Metadata instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+{% /callout %}
+
+{% protocol-fees program="token-metadata" /%}
+
 {% quick-links %}
 
 {% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/token-metadata/getting-started" description="お好みの言語またはライブラリを選択し、Solanaでデジタルアセットの開発を始めましょう。" /%}

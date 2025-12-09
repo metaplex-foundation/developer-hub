@@ -6,6 +6,12 @@ description: Fusionを使用したコンポーザブルNFTの高レベル概要�
 
 FusionはTrifleプログラムによって支えられたNFTコンポーザビリティ機能です。 {% .lead %}
 
+{% callout %}
+Please note that certain Fusion (Trifle) instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+{% /callout %}
+
+{% protocol-fees program="fusion" /%}
+
 TrifleプログラムはToken Metadataのエスクロー拡張機能上に構築されています。これは、TrifleのPDAをCOEのクリエイターおよびマネージャーとして使用したCreator Owned Escrow（COE）を使用しています。その目的は、NFT所有権の周辺にオンチェーンでの追跡とコンポーザビリティを追加することです。さらに、トークン所有権に関してルールと効果を指定する能力により、クリエイターが複雑な所有権モデルを実装することができます。
 
 🔗 **役立つリンク:**

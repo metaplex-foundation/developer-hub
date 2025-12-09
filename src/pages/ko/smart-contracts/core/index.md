@@ -6,6 +6,12 @@ description: Metaplex에서 만든 Core라는 새로운 Solana NFT 자산 표준
 
 Metaplex Core("Core")는 이전 표준의 복잡성과 기술적 부채를 제거하고 디지털 자산을 위한 깔끔하고 간단한 핵심 사양을 제공합니다. 이 차세대 Solana NFT 표준은 단일 계정 설계를 사용하여 민팅 비용을 줄이고 다른 대안과 비교하여 Solana 네트워크 부하를 개선합니다. 또한 개발자가 자산의 동작과 기능을 수정할 수 있도록 하는 유연한 플러그인 시스템을 가지고 있습니다. {% .lead %}
 
+{% callout %}
+Please note that certain Core instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+{% /callout %}
+
+{% protocol-fees program="core" /%}
+
 [https://core.metaplex.com/](https://core.metaplex.com/)에서 Core의 기능을 직접 체험해보고 자산을 민팅해보세요!
 
 {% quick-links %}

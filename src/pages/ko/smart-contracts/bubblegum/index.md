@@ -12,6 +12,8 @@ description: 압축 NFT에 대한 개략적인 개요를 제공합니다.
 
 Bubblegum은 Solana에서 압축 NFT(cNFT)를 생성하고 상호작용하기 위한 Metaplex Protocol 프로그램입니다. 압축 NFT는 온체인 데이터 저장 방식을 재고함으로써 NFT 생성을 새로운 차원으로 확장할 수 있게 합니다. {% .lead %}
 
+{% protocol-fees program="bubblegum" /%}
+
 {% quick-links %}
 
 {% quick-link title="시작하기" icon="InboxArrowDown" href="/bubblegum/getting-started" description="원하는 언어나 라이브러리를 찾아 압축 NFT를 시작하세요." /%}

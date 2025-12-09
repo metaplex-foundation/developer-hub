@@ -6,6 +6,12 @@ description: Metaplexが作成した「Core」と呼ばれる新しいSolana NFT
 
 Metaplex Core（「Core」）は、従来の標準の複雑さと技術的負債を取り除き、デジタルアセットのためのクリーンでシンプルなコア仕様を提供します。この次世代Solana NFT標準は単一アカウント設計を使用し、代替品と比較してミントコストを削減し、Solanaネットワークの負荷を改善します。また、開発者がアセットの動作と機能を変更できる柔軟なプラグインシステムも備えています。 {% .lead %}
 
+{% callout %}
+Please note that certain Core instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+{% /callout %}
+
+{% protocol-fees program="core" /%}
+
 [https://core.metaplex.com/](https://core.metaplex.com/)でCoreの機能を試して、自分でアセットをミントしてみてください！
 
 {% quick-links %}

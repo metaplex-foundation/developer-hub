@@ -6,6 +6,12 @@ description: Bubblegum V2と圧縮NFTの概要を説明します。
 
 Bubblegum V2は、Solana上で圧縮NFT（cNFT）を作成し、操作するための最新のMetaplexプロトコルプログラムです。大規模運用向けに構築されたBubblegum V2は、オリジナルのBubblegumの利点をすべて保持しながら、新しい強力な機能を導入しています。圧縮NFTは、オンチェーンでのデータ保存方法を再考することで、NFT作成を新しい規模のレベルまでスケールさせることを可能にします。 {% .lead %}
 
+{% callout %}
+Please note that certain Bubblegum V2 instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+{% /callout %}
+
+{% protocol-fees program="bubblegum-v2" /%}
+
 {% quick-links %}
 
 {% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/bubblegum-v2/sdk" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}

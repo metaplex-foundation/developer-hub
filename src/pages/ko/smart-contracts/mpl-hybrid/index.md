@@ -6,6 +6,12 @@ description: 하이브리드 자산을 위한 프레임워크 및 온체인 프�
 
 **MPL-404**는 디지털 자산, web3 게임, 온체인 커뮤니티를 위한 새로운 모델입니다. 이 모델의 핵심은 고정된 수의 대체 가능한 자산을 대체 불가능한 자산과 거래하고 그 반대로도 거래하는 스왑 프로그램(**mpl-hybrid**)입니다. 스왑은 이중 에스크로 시스템으로, 사용 가능한 모든 대체 불가능한 자산이 에스크로된 대체 가능한 자산으로 뒷받침되고 그 반대도 마찬가지임을 보장합니다.
 
+{% callout %}
+Please note that certain MPL-Hybrid instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+{% /callout %}
+
+{% protocol-fees program="mpl-hybrid" /%}
+
 ## 스와핑
 
 예측 가능한 방식으로 대체 가능한 자산과 대체 불가능한 자산 사이를 자유롭게 이동할 수 있는 능력은 이 새로운 자산 클래스(**하이브리드**라고 불림)가 두 자산 유형의 최고의 특성을 활용할 수 있게 합니다. **대체 불가능한 자산은 이제 대체 가능한 자산과 관련된 유동성, 배포 및 DeFi 기회의 이점을 누릴 수 있습니다**. 반대로, 대체 가능한 자산은 이제 대체 불가능한 세계에서 오는 향상된 유틸리티, 수집성 및 정체성의 이점을 누릴 수 있습니다.

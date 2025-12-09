@@ -12,6 +12,8 @@ description: 圧縮NFTの概要を説明します。
 
 Bubblegumは、Solana上で圧縮NFT（cNFT）を作成し、操作するためのMetaplexプロトコルプログラムです。圧縮NFTは、オンチェーンでのデータ保存方法を再考することで、NFT作成を新しい規模のレベルまでスケールさせることを可能にします。 {% .lead %}
 
+{% protocol-fees program="bubblegum" /%}
+
 {% quick-links %}
 
 {% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/bubblegum/getting-started" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}

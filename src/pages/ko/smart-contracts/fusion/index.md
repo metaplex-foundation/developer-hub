@@ -6,6 +6,12 @@ description: Fusion을 사용하여 합성 가능한 NFT에 대한 고수준 개
 
 Fusion은 Trifle 프로그램으로 구동되는 NFT 합성 기능입니다. {% .lead %}
 
+{% callout %}
+Please note that certain Fusion (Trifle) instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+{% /callout %}
+
+{% protocol-fees program="fusion" /%}
+
 Trifle 프로그램은 Token Metadata의 Escrow 확장 위에 구축되었습니다. Trifle PDA를 생성자이자 관리자로 사용하는 Creator Owned Escrow(COE)를 사용합니다. 그 목적은 NFT 소유권 주변에 온체인 추적 및 합성 기능을 추가하는 것입니다. 또한 토큰 소유권 주변의 규칙과 효과를 지정하는 능력을 통해 복잡한 소유권 모델을 생성자가 구현할 수 있습니다.
 
 🔗 **도움이 되는 링크:**

@@ -6,6 +6,12 @@ description: ハイブリッドアセットのフレームワークおよびオ�
 
 **MPL-404**は、デジタルアセット、web3ゲーム、オンチェーンコミュニティのための新しいモデルです。このモデルの中核は、固定数の代替可能アセット（Fungible Token）と非代替可能アセット（NFT）を相互に交換するスワッププログラム（**mpl-hybrid**）です。このスワップはデュアルエスクローシステムであり、利用可能なすべての非代替可能アセットがエスクローされた代替可能アセットによって裏付けられ、その逆も保証されます。
 
+{% callout %}
+Please note that certain MPL-Hybrid instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+{% /callout %}
+
+{% protocol-fees program="mpl-hybrid" /%}
+
 ## スワッピング
 
 代替可能アセットと非代替可能アセットを予測可能な方法で自由に移動できることにより、この新しいアセットクラス（しばしば**ハイブリッド**と呼ばれる）は両方のアセットタイプの最良の側面を活用できます。**非代替可能アセットは、代替可能アセットに関連する流動性、配信、DeFi機会の恩恵を受けることができるようになります。**逆に、代替可能アセットは、非代替可能な世界からもたらされる向上したユーティリティ、収集可能性、アイデンティティの恩恵を受けることができるようになります。

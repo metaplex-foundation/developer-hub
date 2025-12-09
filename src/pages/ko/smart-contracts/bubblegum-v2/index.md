@@ -6,6 +6,12 @@ description: Bubblegum V2와 압축된 NFT에 대한 고수준 개요를 제공�
 
 Bubblegum V2는 Solana에서 압축된 NFT(cNFT)를 생성하고 상호 작용하기 위한 Metaplex Protocol 프로그램의 최신 반복입니다. 대규모 운영을 위해 구축된 Bubblegum V2는 원본 Bubblegum의 모든 장점을 유지하면서 강력한 새 기능을 도입합니다. 압축된 NFT는 온체인에서 데이터를 저장하는 방식을 재고함으로써 NFT 생성을 새로운 규모로 확장할 수 있게 합니다. {% .lead %}
 
+{% callout %}
+Please note that certain Bubblegum V2 instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
+{% /callout %}
+
+{% protocol-fees program="bubblegum-v2" /%}
+
 {% quick-links %}
 
 {% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/bubblegum-v2/sdk" description="원하는 언어나 라이브러리를 찾아 압축된 NFT를 시작하세요." /%}
