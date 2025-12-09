@@ -15,12 +15,28 @@ const umiSections = {
   "full": "// [IMPORTS]\nimport { fetchAsset, fetchCollection, mplCore } from '@metaplex-foundation/mpl-core';\nimport { publicKey } from '@metaplex-foundation/umi';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\n// [/IMPORTS]\n\n// [SETUP]\n// Initialize UMI\nconst umi = createUmi('https://api.devnet.solana.com')\n  .use(mplCore())\n\n// [/SETUP]\n\n// [MAIN]\n// Fetch a Core Asset\nconst assetAddress = publicKey('AssetAddressHere...')\nconst asset = await fetchAsset(umi, assetAddress)\n\n// Fetch a Core Collection\nconst collectionAddress = publicKey('CollectionAddressHere...')\nconst collection = await fetchCollection(umi, collectionAddress)\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Asset fetched:', asset)\nconsole.log('Name:', asset.name)\nconsole.log('Owner:', asset.owner)\nconsole.log('URI:', asset.uri)\n\nconsole.log('\\nCollection fetched:', collection)\nconsole.log('Name:', collection.name)\nconsole.log('URI:', collection.uri)\n// [/OUTPUT]\n"
 }
 
+const dasSections = {
+  "imports": "// npm install @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/digital-asset-standard-api\nimport { publicKey } from '@metaplex-foundation/umi'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { dasApi } from '@metaplex-foundation/digital-asset-standard-api'",
+  "setup": "// Initialize Umi with a DAS-enabled RPC endpoint\nconst umi = createUmi('https://api.devnet.solana.com').use(dasApi())\n\n// The address of the NFT you want to fetch\nconst assetAddress = publicKey('YOUR_NFT_ADDRESS')",
+  "main": "// Fetch the asset using DAS API\nconst asset = await umi.rpc.getAsset(assetAddress)",
+  "output": "console.log('Asset ID:', asset.id)\nconsole.log('Name:', asset.content.metadata?.name)\nconsole.log('Description:', asset.content.metadata?.description)\nconsole.log('Image:', asset.content.links?.image)\nconsole.log('Owner:', asset.ownership.owner)\nconsole.log('Interface:', asset.interface)",
+  "full": "// [IMPORTS]\n// npm install @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/digital-asset-standard-api\nimport { publicKey } from '@metaplex-foundation/umi'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { dasApi } from '@metaplex-foundation/digital-asset-standard-api'\n// [/IMPORTS]\n\n// [SETUP]\n// Initialize Umi with a DAS-enabled RPC endpoint\nconst umi = createUmi('https://api.devnet.solana.com').use(dasApi())\n\n// The address of the NFT you want to fetch\nconst assetAddress = publicKey('YOUR_NFT_ADDRESS')\n// [/SETUP]\n\n// [MAIN]\n// Fetch the asset using DAS API\nconst asset = await umi.rpc.getAsset(assetAddress)\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Asset ID:', asset.id)\nconsole.log('Name:', asset.content.metadata?.name)\nconsole.log('Description:', asset.content.metadata?.description)\nconsole.log('Image:', asset.content.links?.image)\nconsole.log('Owner:', asset.ownership.owner)\nconsole.log('Interface:', asset.interface)\n// [/OUTPUT]\n"
+}
+
 const cliSections = {
   "imports": "",
   "setup": "",
   "main": "",
   "output": "",
   "full": "# Fetch an NFT using the Metaplex CLI\n\n# Fetch asset by ID\nmplx core fetch asset <assetId>\n\n# Download all files to a directory\nmplx core fetch asset <assetId> --download --output ./assets\n\n# Download only the image\nmplx core fetch asset <assetId> --download --image\n\n# Download only the metadata\nmplx core fetch asset <assetId> --download --metadata\n"
+}
+
+const curlSections = {
+  "imports": "",
+  "setup": "",
+  "main": "",
+  "output": "",
+  "full": "# Fetch an NFT using the DAS API\ncurl -X POST https://api.devnet.solana.com \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"getAsset\",\n    \"params\": {\n      \"id\": \"YOUR_NFT_ADDRESS\"\n    }\n  }'\n"
 }
 
 export const metadata = {
@@ -37,10 +53,24 @@ export const examples = {
     sections: umiSections,
   },
 
+  das: {
+    framework: 'DAS',
+    language: 'javascript',
+    code: dasSections.full,
+    sections: dasSections,
+  },
+
   cli: {
     framework: 'CLI',
     language: 'bash',
     code: cliSections.full,
     sections: cliSections,
+  },
+
+  curl: {
+    framework: 'cURL',
+    language: 'bash',
+    code: curlSections.full,
+    sections: curlSections,
   },
 }

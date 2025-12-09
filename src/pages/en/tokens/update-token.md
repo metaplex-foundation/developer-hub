@@ -12,7 +12,7 @@ Update the metadata of your fungible token to change its name, symbol, image, or
 
 In the following section you can find a full code example and the parameters that you might have to change. This uses the Token Metadata program to update on-chain metadata.
 
-{% code-tabs-imported from="token-metadata/fungibles/update" frameworks="umi" /%}
+{% code-tabs-imported from="token-metadata/fungibles/update" frameworks="umi,cli" /%}
 
 ## Parameters
 

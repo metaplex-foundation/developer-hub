@@ -12,7 +12,7 @@ Mint additional fungible tokens to increase the circulating supply of your token
 
 In the following section you can find a full code example and the parameters that you might have to change. This assumes you already have a fungible token created and want to mint more tokens.
 
-{% code-tabs-imported from="token-metadata/fungibles/mint" frameworks="umi" /%}
+{% code-tabs-imported from="token-metadata/fungibles/mint" frameworks="umi, cli" /%}
 
 ## Parameters
 
@@ -26,7 +26,7 @@ Customize these parameters for your mint operation:
 
 ## How It Works
 
-The minting process involves three steps:
+The minting process involves three steps, that you may or may not have to execute manually, depending on the tool you are using. The following steps are focusing on umi:
 
 1. **Find destination token account** - Locate the recipient's token account using `findAssociatedTokenPda`
 2. **Create token account if needed** - Use `createTokenIfMissing` to ensure the recipient has a token account
@@ -34,20 +34,11 @@ The minting process involves three steps:
 
 ## Requirements
 
-To mint additional tokens, you must:
+To mint additional tokens, you must **be the mint authority** - Only the wallet designated as the mint authority can mint new tokens
 
-- **Be the mint authority** - Only the wallet designated as the mint authority can mint new tokens
-- **Have a mutable token** - The token must not have had its mint authority revoked
-
-## Common Use Cases
-
-- **Token distributions** - Distribute tokens to users or investors
-- **Rewards programs** - Mint tokens as rewards for users
-- **Liquidity provision** - Create tokens for liquidity pools
-- **Airdrops** - Mint tokens to multiple wallets
 
 ## Important Notes
 
-- The `amount` should account for decimals (e.g., for 9 decimals, minting 1 token requires `amount: 1_000_000_000`)
+- Depending on the tool you are using, you may or may not have to account for decimals. The `amount` should account for decimals (e.g., for 9 decimals, minting 1 token requires `amount: 1_000_000_000`)
 - You can mint to any wallet address—the token account will be created if it doesn't exist
 - Only the mint authority can mint new tokens

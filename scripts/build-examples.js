@@ -53,9 +53,11 @@ function processExampleDirectory(dir) {
   const nativeFiles = {
     kit: { path: path.join(dir, 'kit.js'), isShell: false },
     umi: { path: path.join(dir, 'umi.js'), isShell: false },
+    das: { path: path.join(dir, 'das.js'), isShell: false },
     shank: { path: path.join(dir, 'shank.rs'), isShell: false },
     anchor: { path: path.join(dir, 'anchor.rs'), isShell: false },
     cli: { path: path.join(dir, 'cli.sh'), isShell: true },
+    curl: { path: path.join(dir, 'curl.sh'), isShell: true },
   }
 
   const existingFiles = {}
@@ -151,6 +153,16 @@ function processExampleDirectory(dir) {
     lines.push('')
   }
 
+  if (existingFiles.das) {
+    lines.push('  das: {')
+    lines.push("    framework: 'DAS',")
+    lines.push("    language: 'javascript',")
+    lines.push('    code: dasSections.full,')
+    lines.push('    sections: dasSections,')
+    lines.push('  },')
+    lines.push('')
+  }
+
   if (existingFiles.shank) {
     lines.push('  shank: {')
     lines.push("    framework: 'Shank',")
@@ -177,6 +189,16 @@ function processExampleDirectory(dir) {
     lines.push("    language: 'bash',")
     lines.push('    code: cliSections.full,')
     lines.push('    sections: cliSections,')
+    lines.push('  },')
+    lines.push('')
+  }
+
+  if (existingFiles.curl) {
+    lines.push('  curl: {')
+    lines.push("    framework: 'cURL',")
+    lines.push("    language: 'bash',")
+    lines.push('    code: curlSections.full,')
+    lines.push('    sections: curlSections,')
     lines.push('  },')
   }
 

@@ -1,26 +1,29 @@
 // [IMPORTS]
-// To install all the required packages use the following command
-// npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
+// npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/mpl-toolbox @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
 import {
-    createAndMint,
-    mplTokenMetadata,
-    TokenStandard,
-} from '@metaplex-foundation/mpl-token-metadata';
+  createFungible,
+  mplTokenMetadata,
+} from '@metaplex-foundation/mpl-token-metadata'
 import {
-    generateSigner,
-    keypairIdentity,
-    percentAmount,
-    some,
-} from '@metaplex-foundation/umi';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { readFileSync } from 'fs';
+  createTokenIfMissing,
+  findAssociatedTokenPda,
+  mintTokensTo,
+} from '@metaplex-foundation/mpl-toolbox'
+import {
+  generateSigner,
+  keypairIdentity,
+  percentAmount,
+  some,
+} from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { readFileSync } from 'fs'
 // [/IMPORTS]
 
 // [SETUP]
-// Initialize Umi with Devnet endpoint
+// Initialize Umi with your RPC endpoint
 const umi = createUmi('https://api.devnet.solana.com').use(mplTokenMetadata())
 
-// Load your wallet/keypair
+// Load your wallet keypair
 const wallet = '<your wallet file path>'
 const secretKey = JSON.parse(readFileSync(wallet, 'utf-8'))
 const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))
@@ -31,20 +34,36 @@ const mint = generateSigner(umi)
 // [/SETUP]
 
 // [MAIN]
-// Create and mint the fungible token with metadata
-// The minted tokens will be sent to the umi identity address
-createAndMint(umi, {
+// Step 1: Create the fungible token with metadata
+await createFungible(umi, {
   mint,
   name: 'My Fungible Token',
   symbol: 'MFT',
-  uri: 'https://arweave.net/7BzVsHRrEH0ldNOCCM4_E00BiAYuJP_EQiqvcEYz3YY',
-  sellerFeeBasisPoints: percentAmount(5.5),
+  uri: 'https://example.com/my-token-metadata.json',
+  sellerFeeBasisPoints: percentAmount(0),
   decimals: some(9),
-  tokenStandard: TokenStandard.Fungible,
-  amount: 1000,
 }).sendAndConfirm(umi)
+
+// Step 2: Mint initial supply to your wallet
+await createTokenIfMissing(umi, {
+  mint: mint.publicKey,
+  owner: umi.identity.publicKey,
+})
+  .add(
+    mintTokensTo(umi, {
+      mint: mint.publicKey,
+      token: findAssociatedTokenPda(umi, {
+        mint: mint.publicKey,
+        owner: umi.identity.publicKey,
+      }),
+      amount: 1_000_000_000_000_000, // 1,000,000 tokens with 9 decimals
+    })
+  )
+  .sendAndConfirm(umi)
 // [/MAIN]
 
 // [OUTPUT]
-console.log('Fungible token created:', mint.publicKey)
+console.log('Token created:', mint.publicKey)
+console.log('Metadata and mint account initialized')
+console.log('Initial supply minted to:', umi.identity.publicKey)
 // [/OUTPUT]

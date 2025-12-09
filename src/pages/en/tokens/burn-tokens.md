@@ -36,7 +36,6 @@ Common use cases for burning tokens include:
 
 - **Reducing supply** - Decrease total circulating supply
 - **Deflationary mechanics** - Implement tokenomics that reduce supply over time
-- **Closing positions** - Remove tokens when they're no longer needed
 - **Error correction** - Remove tokens minted by mistake
 
 ## Important Notes

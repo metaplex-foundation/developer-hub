@@ -33,7 +33,7 @@ export function CodeTabsWithContext({
     index,
   }))
 
-  // Find default tab index
+  // Find default tab index - default to first tab (index 0) if no match
   const defaultIndex = Math.max(
     0,
     tabsWithIds.findIndex(t => t.language === defaultLanguage)
@@ -158,9 +158,11 @@ export function CodeTabsWithContext({
                 id={`tab-${tab.tabId}`}
               >
                 {tab.label || (
-                  tab.language === 'bash' || tab.language === 'shell'
-                    ? tab.framework
-                    : `${tab.framework} (${tab.language === 'javascript' ? 'JS' : 'RS'})`
+                  tab.framework.toLowerCase() === 'curl'
+                    ? 'DAS (cURL)'
+                    : tab.language === 'bash' || tab.language === 'shell'
+                      ? tab.framework
+                      : `${tab.framework} (${tab.language === 'javascript' ? 'JS' : 'RS'})`
                 )}
               </button>
             )

@@ -31,6 +31,24 @@ Before getting started, make sure you have:
 
 ## Quick Start
 
+### Using the CLI (Recommended for Quick Tasks)
+
+Install the Metaplex CLI for a quick way to create and manage tokens:
+
+```bash
+npm install -g @metaplex-foundation/cli
+```
+
+Then create your first token:
+
+```bash
+mplx toolbox tm create --wizard --keypair <path to your wallet file> --rpc-url <your RPC URL>
+```
+
+For more details, see the [CLI documentation](/dev-tools/cli).
+
+### Using JavaScript/TypeScript
+
 Install the required packages:
 
 ```bash
@@ -43,5 +61,6 @@ Then follow the [Create a Token](/tokens/create-a-token) guide to create your fi
 
 For more advanced token functionality, check out:
 
+- [Metaplex CLI](/dev-tools/cli) - Command-line tool for token operations
 - [Token Metadata Program](/token-metadata) - Full documentation for the Token Metadata program
 - [MPL Toolbox](https://github.com/metaplex-foundation/mpl-toolbox) - Low-level token operations

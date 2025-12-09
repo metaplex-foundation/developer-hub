@@ -8,11 +8,19 @@
  */
 
 const umiSections = {
-  "imports": "// To install all the required packages use the following command\n// npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults\nimport {\n    mplTokenMetadata,\n    updateV1,\n} from '@metaplex-foundation/mpl-token-metadata';\nimport {\n    keypairIdentity,\n    publicKey,\n} from '@metaplex-foundation/umi';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\nimport { readFileSync } from 'fs';",
-  "setup": "// Initialize Umi with Devnet endpoint\nconst umi = createUmi('https://api.devnet.solana.com').use(mplTokenMetadata())\n\n// Load your wallet/keypair\nconst wallet = '<your wallet file path>'\nconst secretKey = JSON.parse(readFileSync(wallet, 'utf-8'))\nconst keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))\numi.use(keypairIdentity(keypair))\n\n// Your token mint address\nconst mintAddress = publicKey('<your token mint address>')",
-  "main": "// Update the fungible token metadata\nawait updateV1(umi, {\n  mint: mintAddress,\n  data: {\n    name: 'Updated Token Name',\n    symbol: 'UTN',\n    uri: 'https://arweave.net/new-metadata-uri',\n    sellerFeeBasisPoints: 0,\n    creators: null,\n  },\n}).sendAndConfirm(umi)",
-  "output": "console.log('Token metadata updated')\nconsole.log('Mint:', mintAddress)",
-  "full": "// [IMPORTS]\n// To install all the required packages use the following command\n// npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults\nimport {\n    mplTokenMetadata,\n    updateV1,\n} from '@metaplex-foundation/mpl-token-metadata';\nimport {\n    keypairIdentity,\n    publicKey,\n} from '@metaplex-foundation/umi';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\nimport { readFileSync } from 'fs';\n// [/IMPORTS]\n\n// [SETUP]\n// Initialize Umi with Devnet endpoint\nconst umi = createUmi('https://api.devnet.solana.com').use(mplTokenMetadata())\n\n// Load your wallet/keypair\nconst wallet = '<your wallet file path>'\nconst secretKey = JSON.parse(readFileSync(wallet, 'utf-8'))\nconst keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))\numi.use(keypairIdentity(keypair))\n\n// Your token mint address\nconst mintAddress = publicKey('<your token mint address>')\n// [/SETUP]\n\n// [MAIN]\n// Update the fungible token metadata\nawait updateV1(umi, {\n  mint: mintAddress,\n  data: {\n    name: 'Updated Token Name',\n    symbol: 'UTN',\n    uri: 'https://arweave.net/new-metadata-uri',\n    sellerFeeBasisPoints: 0,\n    creators: null,\n  },\n}).sendAndConfirm(umi)\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Token metadata updated')\nconsole.log('Mint:', mintAddress)\n// [/OUTPUT]\n"
+  "imports": "// npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults\nimport {\n  fetchDigitalAsset,\n  mplTokenMetadata,\n  updateV1,\n} from '@metaplex-foundation/mpl-token-metadata'\nimport {\n  keypairIdentity,\n  publicKey,\n} from '@metaplex-foundation/umi'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { readFileSync } from 'fs'",
+  "setup": "// Initialize Umi with your RPC endpoint\nconst umi = createUmi('https://api.devnet.solana.com').use(mplTokenMetadata())\n\n// Load your wallet keypair (must be the update authority)\nconst wallet = '<your wallet file path>'\nconst secretKey = JSON.parse(readFileSync(wallet, 'utf-8'))\nconst keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))\numi.use(keypairIdentity(keypair))\n\n// Your token mint address\nconst mintAddress = publicKey('<your token mint address>')",
+  "main": "// Fetch existing token data\nconst asset = await fetchDigitalAsset(umi, mintAddress)\n\n// Update the token metadata (name, symbol, and URI)\nawait updateV1(umi, {\n  mint: mintAddress,\n  authority: umi.identity,\n  data: {\n    ...asset.metadata,\n    name: 'Updated Token Name',\n    symbol: 'UTN',\n    uri: 'https://example.com/updated-metadata.json',\n  },\n}).sendAndConfirm(umi)",
+  "output": "console.log('Token metadata updated successfully')\nconsole.log('Mint:', mintAddress)\nconsole.log('New name:', 'Updated Token Name')\nconsole.log('New URI:', 'https://example.com/updated-metadata.json')",
+  "full": "// [IMPORTS]\n// npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults\nimport {\n  fetchDigitalAsset,\n  mplTokenMetadata,\n  updateV1,\n} from '@metaplex-foundation/mpl-token-metadata'\nimport {\n  keypairIdentity,\n  publicKey,\n} from '@metaplex-foundation/umi'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { readFileSync } from 'fs'\n// [/IMPORTS]\n\n// [SETUP]\n// Initialize Umi with your RPC endpoint\nconst umi = createUmi('https://api.devnet.solana.com').use(mplTokenMetadata())\n\n// Load your wallet keypair (must be the update authority)\nconst wallet = '<your wallet file path>'\nconst secretKey = JSON.parse(readFileSync(wallet, 'utf-8'))\nconst keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))\numi.use(keypairIdentity(keypair))\n\n// Your token mint address\nconst mintAddress = publicKey('<your token mint address>')\n// [/SETUP]\n\n// [MAIN]\n// Fetch existing token data\nconst asset = await fetchDigitalAsset(umi, mintAddress)\n\n// Update the token metadata (name, symbol, and URI)\nawait updateV1(umi, {\n  mint: mintAddress,\n  authority: umi.identity,\n  data: {\n    ...asset.metadata,\n    name: 'Updated Token Name',\n    symbol: 'UTN',\n    uri: 'https://example.com/updated-metadata.json',\n  },\n}).sendAndConfirm(umi)\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Token metadata updated successfully')\nconsole.log('Mint:', mintAddress)\nconsole.log('New name:', 'Updated Token Name')\nconsole.log('New URI:', 'https://example.com/updated-metadata.json')\n// [/OUTPUT]\n"
+}
+
+const cliSections = {
+  "imports": "",
+  "setup": "",
+  "main": "",
+  "output": "",
+  "full": "# Update Token Metadata using the Metaplex CLI\n\n# Interactive editor mode (opens metadata JSON in your default editor)\nmplx toolbox token update <MINT_ADDRESS> --editor\n\n# Update specific fields via flags\nmplx toolbox token update <MINT_ADDRESS> --name \"New Token Name\"\nmplx toolbox token update <MINT_ADDRESS> --symbol \"NEW\"\nmplx toolbox token update <MINT_ADDRESS> --description \"Updated description\"\n\n# Update with new image\nmplx toolbox token update <MINT_ADDRESS> --image ./new-image.png\n\n# Update multiple fields at once\nmplx toolbox token update <MINT_ADDRESS> \\\n  --name \"Updated Token\" \\\n  --symbol \"UPD\" \\\n  --description \"An updated token description\" \\\n  --image ./updated-image.png\n\n# Note: You must be the update authority to update token metadata\n# Note: --editor flag cannot be combined with other update flags\n"
 }
 
 export const metadata = {
@@ -27,6 +35,13 @@ export const examples = {
     language: 'javascript',
     code: umiSections.full,
     sections: umiSections,
+  },
+
+  cli: {
+    framework: 'CLI',
+    language: 'bash',
+    code: cliSections.full,
+    sections: cliSections,
   },
 
 }

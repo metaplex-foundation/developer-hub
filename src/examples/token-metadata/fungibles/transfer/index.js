@@ -20,7 +20,7 @@ const cliSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "# Transfer Tokens using the Metaplex CLI\n\n# Transfer tokens to a destination address\n# Arguments: <mintAddress> <amount> <destination>\nmplx toolbox token transfer <mintAddress> <amount> <destinationAddress>\n\n# Example: Transfer 100 tokens (with 9 decimals = 100_000_000_000 basis points)\nmplx toolbox token transfer 7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU 100000000000 9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM\n"
+  "full": "# Transfer Tokens using the Metaplex CLI\n\n# Usage: mplx toolbox token transfer <MINT_ADDRESS> <AMOUNT> <DESTINATION>\nmplx toolbox token transfer <MINT_ADDRESS> <AMOUNT> <DESTINATION_ADDRESS>\n\n# Example: Transfer 100 tokens (0 decimals)\nmplx toolbox token transfer 7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU 100 9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM\n\n# Example: Transfer 100 tokens (9 decimals)\n# Amount is in smallest units: 100 * 10^9 = 100000000000\nmplx toolbox token transfer 7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU 100000000000 9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM\n\n# Note: If the destination doesn't have a token account, it will be created automatically\n"
 }
 
 export const metadata = {
@@ -43,4 +43,5 @@ export const examples = {
     code: cliSections.full,
     sections: cliSections,
   },
+
 }
