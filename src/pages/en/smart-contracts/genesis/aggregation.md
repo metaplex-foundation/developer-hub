@@ -7,7 +7,7 @@ description: Public API for querying Genesis launch data by genesis address or t
 The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application.
 
 {% callout type="note" %}
-The API is public with a rate limit of 60 requests per minute. No authentication is required.
+The API is public with rate limits. No authentication is required.
 {% /callout %}
 
 ## Base URL

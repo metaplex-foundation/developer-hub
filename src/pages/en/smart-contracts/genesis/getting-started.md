@@ -99,7 +99,7 @@ Collect quote tokens (SOL) from users:
 | Bucket Type | Use Case |
 |-------------|----------|
 | **Launch Pool** | Deposit window with proportional distribution |
-| **Presale** | Pre-deposit collection before token distribution |
+| **Priced Sale** | Pre-deposit collection before token distribution |
 
 ### Outflow Buckets
 Receive tokens or quote tokens via end behaviors:
@@ -111,11 +111,11 @@ Receive tokens or quote tokens via end behaviors:
 ### Choose Your Launch Type
 
 {% callout type="note" %}
-**[Launch Pools](/smart-contracts/genesis/launch-pools)** - Users deposit during a window and receive tokens proportional to their share of total deposits.
+**[Launch Pool](/smart-contracts/genesis/launch-pool)** - Users deposit during a window and receive tokens proportional to their share of total deposits.
 {% /callout %}
 
 {% callout type="note" %}
-**[Presales](/smart-contracts/genesis/presales)** - Collect commitments before trading begins, then distribute tokens based on custom criteria.
+**[Priced Sale](/smart-contracts/genesis/priced-sale)** - Collect commitments before trading begins, then distribute tokens based on custom criteria.
 {% /callout %}
 
 ## Step 3: Finalize
@@ -148,7 +148,7 @@ After finalization:
 
 Choose your launch type and follow the detailed guide:
 
-1. **[Launch Pools](/smart-contracts/genesis/launch-pools)** - Token distribution with deposit windows
-2. **[Presales](/smart-contracts/genesis/presales)** - Pre-deposit collection before trading
+1. **[Launch Pool](/smart-contracts/genesis/launch-pool)** - Token distribution with deposit windows
+2. **[Priced Sale](/smart-contracts/genesis/priced-sale)** - Pre-deposit collection before trading
 
 Each guide includes complete setup code, user operations, and configuration.

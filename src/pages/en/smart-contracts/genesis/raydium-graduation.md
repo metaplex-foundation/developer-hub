@@ -467,4 +467,4 @@ Let `deriveRaydiumPDAsV2` handle token ordering automatically. Don't manually sp
 
 - Review the [Overview](/smart-contracts/genesis) for the complete Genesis flow
 - Learn about [Bonding Curves](/smart-contracts/genesis/bonding-curves)
-- Explore [Vault Deposits](/smart-contracts/genesis/vault-deposits) for presale functionality
+- Explore [Vault Deposits](/smart-contracts/genesis/vault-deposits) for priced sale functionality

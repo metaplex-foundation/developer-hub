@@ -1,18 +1,14 @@
 ---
-title: Presales
-metaTitle: Genesis - Presales
+title: Priced Sale
+metaTitle: Genesis - Priced Sale
 description: Collect deposits from users before token distribution with controlled allocation.
 ---
 
-{% callout type="warning" %}
-This documentation is coming soon.
-{% /callout %}
-
 ## Overview
 
-Presales enable pre-deposit token launches where:
+Priced Sale enables pre-deposit token launches where:
 
-- Users commit SOL during a presale window
+- Users commit SOL during a priced sale window
 - Deposits are collected before any token distribution occurs
 - Your backend controls how and when tokens are distributed
 
@@ -22,4 +18,8 @@ Presales enable pre-deposit token launches where:
 - **Fundraising rounds**: Collect funds with controlled distribution
 - **Fair launches**: Gather all deposits first, then distribute tokens based on custom criteria
 
-In the meantime, see the [Overview](/smart-contracts/genesis) for general Genesis concepts or explore [Launch Pools](/smart-contracts/genesis/launch-pools) for an alternative launch mechanism.
+See the [Overview](/smart-contracts/genesis) for general Genesis concepts or explore [Launch Pool](/smart-contracts/genesis/launch-pool) for an alternative launch mechanism.
+
+{% callout type="note" %}
+More detailed documentation is coming soon.
+{% /callout %}

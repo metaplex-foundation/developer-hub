@@ -4,7 +4,7 @@ metaTitle: Genesis - Vault Deposits
 description: Learn how to set up vault deposits for pre-sale token launches with Genesis.
 ---
 
-A Vault is an "inflow" bucket that collects quote tokens (typically SOL) from users during a pre-deposit or presale phase. It acts as a holding area where users commit funds before the main trading phase begins.
+A Vault is an "inflow" bucket that collects quote tokens (typically SOL) from users during a pre-deposit or priced sale phase. It acts as a holding area where users commit funds before the main trading phase begins.
 
 ## Why Use a Vault?
 
@@ -12,7 +12,7 @@ Vaults enable powerful token launch mechanics that aren't possible with bonding 
 
 - **Gamified Launches**: Rank users based on in-game performance, social engagement, or other criteria, then process their deposits in order
 - **Fair Launch Mechanics**: Collect all deposits first, then distribute tokens fairly based on custom logic
-- **Presale Functionality**: Allow early supporters to commit funds before public trading
+- **Priced Sale Functionality**: Allow early supporters to commit funds before public trading
 - **Controlled Distribution**: Your backend decides who gets swapped first, letting high-priority users get better prices on the bonding curve
 
 ### How It Works

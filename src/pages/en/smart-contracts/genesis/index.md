@@ -1,21 +1,20 @@
 ---
 title: Overview
 metaTitle: Genesis - Overview
-description: A smart contract for launching tokens on Solana via presale launches and launch pools.
+description: A smart contract for launching tokens on Solana via priced sale launches and launch pools.
 ---
 
-Genesis is a Metaplex smart contract that provides a flexible framework for **Token Generation Events (TGEs)** on the Solana blockchain. Whether you're launching a new token with a presale or building a custom token distribution system, Genesis provides the on-chain infrastructure to make it happen.
-
-{% callout type="note" %}
-Genesis is currently undergoing a security audit.
-{% /callout %}
+Genesis is a Metaplex smart contract that provides a flexible framework for **Token Generation Events (TGEs)** on the Solana blockchain. Whether you're launching a new token with a priced sale or building a custom token distribution system, Genesis provides the on-chain infrastructure to make it happen.
 
 ## What Can You Build with Genesis?
 
 Genesis supports multiple launch mechanisms that can be combined to create custom token launch experiences:
 
-- **Launch Pools**: Token distribution where users deposit during a window and receive tokens proportional to their share
-- **Presales**: Collect deposits from users before trading begins, then distribute tokens based on custom criteria
+| Mechanism | Description | Benefits |
+|-----------|-------------|----------|
+| **Priced Sale** | Fixed price token sale | Fixed price reduces complexity and speculation. First-come, first-served dynamics encourage early participation. More predictable outcome with accurate demand forecasting. Caps and wallet gates can be implemented if desired. |
+| **Launch Pool** | No fixed price–final price is implied by total deposits at close | Organic price discovery via no cap. Allows full ecosystem participation via no gate. Time-based launch pool prevents sniping and front-running with more open/accessible access. Caps and wallet gates can be implemented if desired. |
+| **Auction** | Time-based auction where users bid for a specific quantity of tokens at a specific price. Bids can be public or private. All winners receive tokens at the clearing price. | Promotes price discovery especially among whales/funds. Can be gated/ungated. |
 
 ### Example Use Case: Launch Pool
 
@@ -47,10 +46,6 @@ Buckets are modular components that define how tokens flow in and out of your la
 
 **Outflow Buckets** receive tokens or quote tokens:
 - **Unlocked Bucket**: Receives quote tokens via end behaviors for team/treasury claims
-
-{% callout type="note" %}
-More bucket types coming soon.
-{% /callout %}
 
 Each bucket has configurable time conditions that control when it's active, and behaviors that execute when conditions are met.
 
@@ -110,7 +105,7 @@ Revoke mint/freeze authorities
 
 ## Revoking Authorities
 
-After your launch is complete, you should revoke the mint and freeze authorities on your token. This signals to holders and rug checkers that no additional tokens can be minted and tokens cannot be frozen.
+After your launch is complete, you can revoke the mint and freeze authorities on your token. This signals to holders and rug checkers that no additional tokens can be minted and tokens cannot be frozen.
 
 {% callout type="warning" %}
 **Authority revocation is irreversible.** Once revoked, you can never mint additional tokens or freeze token accounts. Only do this when you're certain the token launch is complete.
@@ -157,5 +152,5 @@ Ready to build your token launch? Start here:
 
 Then choose your launch type:
 
-- [Launch Pools](/smart-contracts/genesis/launch-pools) - Token distribution with deposit windows
-- [Presales](/smart-contracts/genesis/presales) - Pre-deposits before trading begins
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - Token distribution with deposit windows
+- [Priced Sale](/smart-contracts/genesis/priced-sale) - Pre-deposits before trading begins

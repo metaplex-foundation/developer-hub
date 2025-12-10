@@ -1,10 +1,16 @@
 ---
-title: Launch Pools
-metaTitle: Genesis - Launch Pools
+title: Launch Pool
+metaTitle: Genesis - Launch Pool
 description: Token distribution where users deposit during a window and receive tokens proportionally.
 ---
 
-Launch Pools enable token launches where users deposit during a window, and token allocation is determined by deposit weight. All depositors receive tokens proportional to their share of total deposits.
+Launch Pools are a token launch mechanism designed for organic price discovery and limited sniping or front running. Users make deposits during a specified window and receive tokens proportional to their share of total deposits when the window closes.
+
+Here's how they work:
+
+1. A specific quantity of tokens is allocated to the Launch Pool contract. The Launch Pool remains open for a set period of time.
+2. While the Launch Pool remains open, users can deposit SOL into it or withdraw their SOL from it (subject to a withdrawal fee).
+3. When the Launch Pool ends, tokens are distributed proportionally based on each user's share of the total deposits.
 
 ## Overview
 
@@ -13,6 +19,14 @@ The Launch Pool lifecycle:
 1. **Deposit Period** - Users deposit SOL during a defined window
 2. **Transition** - End behaviors execute (e.g., send collected SOL to another bucket)
 3. **Claim Period** - Users claim tokens proportional to their deposit weight
+
+## Fees
+
+- **User Deposit fee**: 2% of deposit amount
+- **User Withdrawal fee**: 2% of withdrawal amount
+- **Graduation fee**: 5% of the total deposits at the end of the Deposit Period
+
+Deposit Fee Example: A user deposit of 10 SOL results in 9.8 SOL credited to the user's deposit account.
 
 ## Setting Up a Launch Pool
 
@@ -310,13 +324,6 @@ Use `TimeAbsolute` for specific timestamps:
 }
 ```
 
-## Fees
-
-- **Deposit fee**: 2% of deposit amount
-- **Withdrawal fee**: 2% of withdrawal amount
-
-Example: A 10 SOL deposit results in 9.8 SOL credited to the user's deposit account.
-
 ## Fetching State
 
 ### Bucket State
@@ -354,5 +361,6 @@ if (deposit) {
 
 ## Next Steps
 
-- [Presales](/smart-contracts/genesis/presales) - Pre-deposit collection before trading
+- [Priced Sale](/smart-contracts/genesis/priced-sale) - Pre-deposit collection before trading
 - [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API
+- [Launch Pool](https://github.com/metaplex-foundation/mpl-genesis/tree/main/clients/js/examples/launch-pool) - Example implementation on GitHub
