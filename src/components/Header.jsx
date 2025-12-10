@@ -8,6 +8,7 @@ import { Search } from '@/components/Search'
 // import { ThemeSelector } from '@/components/ThemeSelector'
 import { categoryToColor, IconWithName } from '@/components/products/IconWithName'
 import { Sections } from '@/components/products/Sections'
+import { DiscordIcon } from '@/components/icons/SocialIcons'
 import NavList from './NavList'
 
 export function Header({ page }) {
@@ -66,6 +67,14 @@ export function Header({ page }) {
         
 
         <div className="relative flex basis-0 items-center justify-end gap-4 sm:gap-6 lg:flex-grow">
+          <Link
+            href="https://discord.com/invite/metaplex"
+            target="_blank"
+            className="hidden items-center gap-2 whitespace-nowrap rounded-lg bg-[#5865F2] px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-[#4752C4] md:flex"
+          >
+            <DiscordIcon className="h-4 w-4 fill-current" />
+            Developer Support
+          </Link>
           <Search iconOnly />
           <LanguageSwitcher />
           {/* <ThemeSelector className="relative z-10" /> */}
