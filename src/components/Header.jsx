@@ -73,7 +73,7 @@ export function Header({ page }) {
             className="hidden items-center gap-2 whitespace-nowrap rounded-lg bg-[#5865F2] px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-[#4752C4] md:flex"
           >
             <DiscordIcon className="h-4 w-4 fill-current" />
-            Developer Support
+            Dev Support
           </Link>
           <Search iconOnly />
           <LanguageSwitcher />
