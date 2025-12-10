@@ -24,7 +24,6 @@ export const bubblegum = {
       notes: null,
     },
   },
-  deprecated: true,
   sections: [
     {
       ...documentationSection('smart-contracts/bubblegum'),
