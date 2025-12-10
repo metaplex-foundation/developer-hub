@@ -259,8 +259,6 @@ Candy MachineにSol Payment Guardを追加するには、ターミナルで`suga
   "ruleSet": null,
   "awsConfig": null,
   "sdriveApiKey": null,
-  "nftStorageAuthToken": null,
-  "shdwStorageAccount": null,
   "pinataConfig": null,
   "hiddenSettings": null,
   "guards": null,

@@ -80,6 +80,39 @@ export const cli = {
           ],
         },
         {
+          title: 'Candy Machine Commands',
+          links: [
+            {
+              title: 'Overview',
+              href: '/cli/cm',
+            },
+            {
+              title: 'Create Candy Machine',
+              href: '/cli/cm/create',
+            },
+            {
+              title: 'Upload Assets',
+              href: '/cli/cm/upload',
+            },
+            {
+              title: 'Insert Items',
+              href: '/cli/cm/insert',
+            },
+            {
+              title: 'Validate Cache',
+              href: '/cli/cm/validate',
+            },
+            {
+              title: 'Fetch Information',
+              href: '/cli/cm/fetch',
+            },
+            {
+              title: 'Withdraw',
+              href: '/cli/cm/withdraw',
+            },
+          ],
+        },
+        {
           title: 'Toolbox',
           links: [
             {

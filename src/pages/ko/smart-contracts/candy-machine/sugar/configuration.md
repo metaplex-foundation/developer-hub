@@ -30,8 +30,6 @@ Sugar는 에셋을 업로드하고 Candy Machine을 구성하기 위해 JSON 구
   "hiddenSettings": null,
   "uploadMethod": "bundlr",
   "awsConfig": null,
-  "nftStorageAuthToken": null,
-  "shdwStorageAccount": null,
   "pinataConfig": null,
   "sdriveApiKey": null,
   "guards": {
@@ -139,24 +137,20 @@ Sugar는 다양한 스토리지 공급자를 지원하며, 사용할 공급자�
 
 | 설정 | 옵션 | 허용되는 값 | 설명               |
 | ------- | ------- | --------------- | ------------------------- |
-| uploadMethod |   |  | 이미지와 메타데이터를 업로드할 스토리지 구성 |  
+| uploadMethod |   |  | 이미지와 메타데이터를 업로드할 스토리지 구성 |
 |  |   | "bundlr" |  [Bundlr](https://bundlr.network)을 사용하여 Arweave에 업로드하고 SOL로 결제 (메인넷과 데브넷 모두에서 작동; 데브넷에서는 7일 동안만 파일이 저장됨)
 |  |   | "aws" | Amazon Web Services (AWS)에 업로드 |
-|  |   | "nftStorage" | [NFT.Storage](https://nft.storage)에 업로드 (모든 네트워크에서 작동) |
-|  |   | "shdw" | GenesysGo [Shadow Drive](https://docs.shadow.cloud)에 업로드 (메인넷에서만 작동)
 |  |   | "pinata" | [Pinata](https://www.pinata.cloud)에 업로드 (모든 네트워크에서 작동; 무료 및 계층화된 구독) |
 |  |   | "sdrive" | [SDrive Cloud Storage](https://sdrive.app)를 사용하여 Shadow Drive에 업로드 |
 |awsConfig | | | *("aws"가 사용될 때 필수)* |
 | | bucket | String | AWS 버킷 이름
 | | profile | String | 자격 증명 파일에서 사용할 AWS 프로필 이름 |
 | | directory | String | 항목을 업로드할 버킷 내의 디렉터리. 빈 문자열은 버킷 루트 디렉터리에 파일을 업로드함을 의미. |
-| nftStorageAuthToken | | String | NFT.Storage API 키 *("nftStorage"가 사용될 때 필수)* |
 | pinataConfig | | | *("pinata"가 사용될 때 필수)* |
 | | JWT | String | JWT 인증 토큰 |
 | | apiGateway | String | Pinata API에 연결할 URL |
 | | apiContent | String | 에셋 링크 생성의 기반으로 사용할 URL |
 | | parallelLimit | Integer | 동시 업로드 수; 속도 제한을 피하기 위해 이 설정 사용 |
-| shadowStorageAccount | | String | Shadow Drive 스토리지 pubkey *("shdw"가 사용될 때 필수)* |
 | sdriveApiKey | | String | SDrive API 키 *("sdrive"가 사용될 때 필수)* |
 
 특정 업로드 방법 설정:
@@ -186,11 +180,6 @@ region=<REGION>
 `profile` 값을 사용하면 자격 증명 파일에서 읽을 프로필을 지정할 수 있습니다. `directory` 값은 파일이 업로드될 버킷 내 디렉터리의 이름으로, 서로 다른 디렉터리로 구분된 단일 버킷에 여러 candy machine 또는 컬렉션을 가질 수 있게 합니다. 이를 빈 문자열로 두면 파일이 버킷의 루트에 업로드됩니다. (선택사항인) `domain`을 사용하면 AWS에서 데이터를 제공할 커스텀 도메인을 지정할 수 있습니다 — 예를 들어, 도메인을 `https://mydomain.com`으로 사용하면 `https://mydomain.com/0.json` 형식의 파일 링크를 생성합니다. 도메인을 지정하지 않으면 기본 AWS S3 도메인(`https://<BUCKET_NAME>.s3.amazonaws.com`)이 사용됩니다.
 
 {% /totem-accordion %}
-{% totem-accordion title="NFT.Storage" %}
-
-NFT.Storage는 공개 IPFS 네트워크에 데이터를 업로드하는 인기 있는 서비스입니다. API 키(토큰)를 얻기 위해 계정을 등록해야 하며, 이는 구성 파일에서 `"nftStorageAuthToken"`으로 지정해야 합니다.
-
-{% /totem-accordion %}
 {% totem-accordion title="Pinata" %}
 
 `"pinata"` 방법은 파일을 Pinata 스토리지에 업로드합니다. 구성 파일의 `"pinataConfig"` 하에 `jwt`, `apiGateway`, `contentGateway` 및 `parallelLimit` 값을 지정해야 합니다:
@@ -203,17 +192,6 @@ NFT.Storage는 공개 IPFS 네트워크에 데이터를 업로드하는 인기 �
 {% callout %}
 
 공개 게이트웨이는 프로덕션에서 사용하기 위한 것이 아닙니다 — 심하게 속도 제한이 있고 속도를 위해 설계되지 않았으므로 테스트에 사용하기에 좋습니다.
-
-{% /callout %}
-
-{% /totem-accordion %}
-{% totem-accordion title="Shadow Drive" %}
-
-Shadow Drive는 Solana 블록체인을 위해 특별히 구축된 분산 스토리지 네트워크입니다. Shadow Drive에 데이터를 업로드하려면 먼저 스토리지 계정을 생성해야 합니다. 이는 [Shadow Drive CLI](https://docs.shadow.cloud/build)를 사용하여 수행할 수 있습니다. 스토리지 계정을 생성한 후 구성 파일에서 `"shdwStorageAccount"` 속성을 사용하여 해당 pubkey 주소를 지정하세요.
-
-{% callout %}
-
-Shadow Drive 업로드 방법은 `mainnet-beta`에서만 사용할 수 있습니다.
 
 {% /callout %}
 

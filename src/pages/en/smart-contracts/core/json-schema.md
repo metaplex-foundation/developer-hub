@@ -52,12 +52,12 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 {
   "name": "Number #0001",
   "description": "Collection of 10 numbers on the blockchain. This is the number 1/10.",
-  "image": "https://nftstorage.link/ipfs/bafybeihh2fcxwvm5qj555hfeywikptip5olyizdbkwkoxspt63332x2tpe/5307.gif?ext=gif",
+  "image": "https://arweave.net/example",
   "external_url": "https://example.com",
   "properties": {
     "files": [
       {
-        "uri": "https://nftstorage.link/ipfs/bafybeihh2fcxwvm5qj555hfeywikptip5olyizdbkwkoxspt63332x2tpe/5307.gif?ext=gif",
+        "uri": "https://arweave.net/example",
         "type": "image/gif"
       },
     ],

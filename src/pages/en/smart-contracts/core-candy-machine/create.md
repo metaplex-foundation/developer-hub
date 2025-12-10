@@ -13,6 +13,14 @@ If you wish to create your Core Candy Machine Assets into a collection (new or e
 
 ## Creating a Candy Machine
 
+{% callout title="CLI Alternative" type="note" %}
+You can also create Core Candy Machines using the MPLX CLI with an interactive wizard:
+```bash
+mplx cm create --wizard
+```
+This provides step-by-step guidance, asset validation, and automatic deployment. See the [CLI Candy Machine documentation](/cli/cm) for detailed instructions.
+{% /callout %}
+
 {% dialect-switcher title="Create a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
 

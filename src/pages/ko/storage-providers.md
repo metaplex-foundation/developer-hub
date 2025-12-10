@@ -38,17 +38,6 @@ NFT는 영원히 살아가며 구매, 판매, 보유 및 즐기도록 만들어�
 
 자세한 내용은 [https://infura.io/docs/ipfs](https://infura.io/docs/ipfs)를 방문하십시오.
 
-### NFT.Storage
-
-[NFT.Storage 플래그십 제품](https://nft.storage/nft-storage-flagship-product)은 낮은 일회성 수수료로 NFT의 영구적인 보존에 중점을 둡니다. 먼저 NFT를 민팅한 다음 NFT.Storage에 기부금 지원 장기 Filecoin 스토리지에 보존하는 NFT 데이터를 보내십시오. NFT.Storage 사용자로서 핫 스토리지를 위해 Pinata와 Lighthouse를 선택하고 [여기 NFT.Storage 추천 링크를 사용](https://nft.storage/blog/announcing-our-new-partnerships-with-pinata-and-lighthouse)할 때 플랫폼을 지원하여 NFT.Storage를 유지하는 데 도움을 줍니다. NFT는 또한 블록 탐색기, 마켓플레이스 및 지갑이 NFT 컬렉션, 토큰 및 CID가 NFT.Storage에 의해 보존된다는 확인을 표시하는 도구인 NFT Token Checker에 포함됩니다.
-
-
-[NFT.Storage Classic](https://nft.storage/nft-storage-classic)은 IPFS를 통한 빠른 검색과 함께 탈중앙화된 Filecoin 네트워크에서 핫 데이터 스토리지를 제공하는 무료 서비스입니다. 2024년 6월 30일부터 NFT.Storage는 NFT.Storage Classic 업로드를 공식적으로 해체했지만 기존 데이터의 검색은 계속 작동합니다. NFT.Storage Classic을 통해 이미 업로드된 NFT 데이터의 경우 NFT.Storage Gateway는 블록 탐색기, 마켓플레이스 및 dapp에서 데이터를 검색할 수 있도록 합니다.
-
-### Shadow Drive
-
-[GenesysGo Shadow Drive](https://shdw.genesysgo.com/shadow-infrastructure-overview/shadow-drive-overview)는 Solana와 병렬로 실행되고 원활하게 통합되도록 설계된 탈중앙화 스토리지 네트워크입니다. 스토리지 수수료는 SPL 토큰인 SHDW로 지불되며 불변 또는 가변 데이터 스토리지를 허용합니다.
-
 [Arweave]: https://arweave.org
 [arweave price service]: https://node1.bundlr.network/price/0
 [repo]: https://github.com/metaplex-foundation/metaplex

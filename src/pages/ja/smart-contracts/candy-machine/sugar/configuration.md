@@ -30,8 +30,6 @@ Sugarは、アセットをアップロードしてCandy Machineを設定する�
   "hiddenSettings": null,
   "uploadMethod": "bundlr",
   "awsConfig": null,
-  "nftStorageAuthToken": null,
-  "shdwStorageAccount": null,
   "pinataConfig": null,
   "sdriveApiKey": null,
   "guards": {
@@ -142,21 +140,17 @@ Sugarは様々なストレージプロバイダーをサポートしています
 | uploadMethod |   |  | 画像とメタデータをアップロードするストレージを設定 |  
 |  |   | "bundlr" |  [Bundlr](https://bundlr.network)を使用してArweaveにアップロード、支払いはSOLで行われます（mainnetとdevnetの両方で動作；devnetではファイルは7日間のみ保存）
 |  |   | "aws" | Amazon Web Services（AWS）にアップロード |
-|  |   | "nftStorage" | [NFT.Storage](https://nft.storage)にアップロード（すべてのネットワークで動作） |
-|  |   | "shdw" | GenesysGo [Shadow Drive](https://docs.shadow.cloud)にアップロード（mainnetのみで動作）
 |  |   | "pinata" | [Pinata](https://www.pinata.cloud)にアップロード（すべてのネットワークで動作；無料および階層サブスクリプション） |
 |  |   | "sdrive" | [SDrive Cloud Storage](https://sdrive.app)を使用してShadow Driveにアップロード |
 |awsConfig | | | *（"aws"が使用される場合に必須）* |
 | | bucket | String | AWSバケット名
 | | profile | String | 資格情報ファイル名から使用するAWSプロファイル |
 | | directory | String | アイテムをアップロードするバケット内のディレクトリ。空文字列はバケットのルートディレクトリにファイルをアップロードすることを意味します。 |
-| nftStorageAuthToken | | String | NFT.Storage API Key *（"nftStorage"が使用される場合に必須）* |
 | pinataConfig | | | *（"pinata"が使用される場合に必須）* |
 | | JWT | String | JWT認証トークン |
 | | apiGateway | String | Pinata APIに接続するURL |
 | | apiContent | String | アセットリンクを作成するためのベースとして使用するURL |
 | | parallelLimit | Integer | 同時アップロード数；この設定を使用してレート制限を回避 |
-| shadowStorageAccount | | String | Shadow Driveストレージ公開鍵 *（"shdw"が使用される場合に必須）* |
 | sdriveApiKey | | String | SDrive APIキー *（"sdrive"が使用される場合に必須）* |
 
 特定のアップロード方法の設定：
@@ -186,11 +180,6 @@ region=<REGION>
 `profile`値により、資格情報ファイルから読み取るプロファイルを指定できます。`directory`値は、ファイルがアップロードされるバケット内のディレクトリの名前で、単一のバケット内に異なるディレクトリで分離された複数のCandy Machineやコレクションを持つことができます。これを空文字列のままにしておくと、ファイルはバケットのルートにアップロードされます。（オプションの）`domain`を使用すると、AWSからデータを提供するためのカスタムドメインを指定できます — 例：ドメインを`https://mydomain.com`として使用すると、`https://mydomain.com/0.json`の形式でファイルへのリンクが作成されます。ドメインを指定しない場合、デフォルトのAWS S3ドメインが使用されます（`https://<BUCKET_NAME>.s3.amazonaws.com`）。
 
 {% /totem-accordion %}
-{% totem-accordion title="NFT.Storage" %}
-
-NFT.Storageは、パブリックIPFSネットワーク上にデータをアップロードする人気のサービスです。APIキー（トークン）を取得するためにアカウントを登録する必要があり、これを設定ファイルの`"nftStorageAuthToken"`で指定する必要があります。
-
-{% /totem-accordion %}
 {% totem-accordion title="Pinata" %}
 
 `"pinata"`方法はファイルをPinataストレージにアップロードします。設定ファイルの`"pinataConfig"`の下で`jwt`、`apiGateway`、`contentGateway`、`parallelLimit`の値を指定する必要があります：
@@ -203,17 +192,6 @@ NFT.Storageは、パブリックIPFSネットワーク上にデータをアッ�
 {% callout %}
 
 パブリックゲートウェイは本番環境での使用を意図していません — テスト用には適していますが、大幅にレート制限されており、スピード向けに設計されていません。
-
-{% /callout %}
-
-{% /totem-accordion %}
-{% totem-accordion title="Shadow Drive" %}
-
-Shadow DriveはSolanaブロックチェーン専用に構築された分散ストレージネットワークです。Shadow Driveにデータをアップロードするには、まずストレージアカウントを作成する必要があります。これは[Shadow Drive CLI](https://docs.shadow.cloud/build)を使用して行うことができます。ストレージアカウントを作成した後、設定ファイルで`"shdwStorageAccount"`プロパティを使用してそのpubkeyアドレスを指定します。
-
-{% callout %}
-
-Shadow Driveアップロード方法は`mainnet-beta`でのみ利用可能です。
 
 {% /callout %}
 
