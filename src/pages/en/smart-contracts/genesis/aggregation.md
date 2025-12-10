@@ -7,7 +7,7 @@ description: Public API for querying Genesis launch data by genesis address or t
 The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application.
 
 {% callout type="note" %}
-The API is public with rate limits. No authentication is required.
+The API is public with a rate limit of 60 requests per minute. No authentication is required.
 {% /callout %}
 
 ## Base URL
@@ -31,8 +31,8 @@ GET /launches/{genesis_pubkey}
 
 **Example Request:**
 
-```
-GET https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
+```bash
+curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
 ```
 
 **Response:**
@@ -69,6 +69,12 @@ GET /tokens/{mint}
 ```
 
 Returns all launches for a token. The response is identical except `launches` is an array.
+
+**Example Request:**
+
+```bash
+curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+```
 
 **Response:**
 
@@ -108,7 +114,6 @@ Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only h
 ```json
 {
   "error": {
-    "code": 404,
     "message": "Launch not found"
   }
 }
@@ -141,9 +146,9 @@ interface BaseToken {
 }
 
 interface Socials {
-  x: string;
-  telegram: string;
-  discord: string;
+  x?: string;
+  telegram?: string;
+  discord?: string;
 }
 
 interface LaunchResponse {
@@ -166,7 +171,6 @@ interface TokenResponse {
 
 interface ErrorResponse {
   error: {
-    code: number;
     message: string;
   };
 }
@@ -208,9 +212,9 @@ pub struct BaseToken {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Socials {
-    pub x: String,
-    pub telegram: String,
-    pub discord: String,
+    pub x: Option<String>,
+    pub telegram: Option<String>,
+    pub discord: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -243,7 +247,6 @@ pub struct TokenResponse {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ApiError {
-    pub code: u16,
     pub message: String,
 }
 

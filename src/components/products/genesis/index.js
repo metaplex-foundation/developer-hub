@@ -6,7 +6,7 @@ export const genesis = {
   name: 'Genesis',
   headline: 'Token Launch Platform',
   description:
-    'A smart contract for launching tokens on Solana via presale launches, launch pools, and bonding curves.',
+    'A smart contract for launching tokens on Solana via launch pools and presales.',
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/genesis',
   icon: <SparklesIcon />,
@@ -75,7 +75,7 @@ export const genesis = {
   localizedNavigation: {
     en: {
       headline: 'Token Launch Platform',
-      description: 'A smart contract for launching tokens on Solana via presale launches, launch pools, and bonding curves.',
+      description: 'A smart contract for launching tokens on Solana via launch pools and presales.',
       sections: {
         'Introduction': 'Introduction',
         'SDK': 'SDK',
@@ -93,7 +93,7 @@ export const genesis = {
     },
     ja: {
       headline: 'トークンローンチプラットフォーム',
-      description: 'プレセールローンチ、ローンチプール、ボンディングカーブを通じてSolana上でトークンをローンチするためのスマートコントラクト',
+      description: 'ローンチプールとプレセールを通じてSolana上でトークンをローンチするためのスマートコントラクト',
       sections: {
         'Introduction': '紹介',
         'SDK': 'SDK',
@@ -111,7 +111,7 @@ export const genesis = {
     },
     ko: {
       headline: '토큰 런치 플랫폼',
-      description: '프리세일 런치, 런치 풀, 본딩 커브를 통해 Solana에서 토큰을 런치하기 위한 스마트 컨트랙트',
+      description: '런치 풀과 프리세일을 통해 Solana에서 토큰을 런치하기 위한 스마트 컨트랙트',
       sections: {
         'Introduction': '소개',
         'SDK': 'SDK',

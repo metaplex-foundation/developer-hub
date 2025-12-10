@@ -131,7 +131,7 @@ await addUnlockedBucketV2(umi, {
 
 ### 3. Finalize the Genesis Account
 
-Once all buckets are configured, finalize to activate the launch:
+Once all buckets are configured, finalize the launch configuration:
 
 ```typescript
 import { finalizeV2 } from '@metaplex-foundation/genesis';
@@ -354,6 +354,5 @@ if (deposit) {
 
 ## Next Steps
 
-- [Raydium Graduation](/smart-contracts/genesis/raydium-graduation) - Graduate to permanent DEX liquidity
-- [Presales](/smart-contracts/genesis/presales) - Alternative launch type with vault deposits
-- [Bonding Curves](/smart-contracts/genesis/bonding-curves) - Dynamic pricing launch type
+- [Presales](/smart-contracts/genesis/presales) - Pre-deposit collection before trading
+- [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API

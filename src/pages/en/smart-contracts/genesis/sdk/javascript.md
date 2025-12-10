@@ -127,9 +127,8 @@ import {
 import {
   genesis,
   initializeV2,
-  addVaultBucketV2,
-  addConstantProductBondingCurveBucketV2,
-  addRaydiumCpmmBucketV2,
+  addLaunchPoolBucketV2,
+  addUnlockedBucketV2,
   finalizeV2,
   findGenesisAccountV2Pda,
 } from '@metaplex-foundation/genesis';
@@ -184,9 +183,7 @@ console.log('Transaction signature:', result.signature);
 
 ## Next Steps
 
-With your Umi instance configured with the Genesis Token Launch program, you're ready to start building. Explore the Genesis features:
+With your Umi instance configured with the Genesis program, you're ready to start building. Explore the Genesis features:
 
 - **[Launch Pools](/smart-contracts/genesis/launch-pools)** - Token distribution with deposit windows
 - **[Presales](/smart-contracts/genesis/presales)** - Pre-deposit collection before trading
-- **[Bonding Curves](/smart-contracts/genesis/bonding-curves)** - Immediate trading with automatic price discovery
-- **[Raydium Graduation](/smart-contracts/genesis/raydium-graduation)** - Graduate to permanent DEX liquidity
