@@ -187,3 +187,4 @@ With your Umi instance configured with the Genesis program, you're ready to star
 
 - **[Launch Pool](/smart-contracts/genesis/launch-pool)** - Token distribution with deposit windows
 - **[Priced Sale](/smart-contracts/genesis/priced-sale)** - Pre-deposit collection before trading
+- **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** - Time-based auction with uniform clearing price

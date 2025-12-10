@@ -1,12 +1,12 @@
 ---
-title: Auction
-metaTitle: Genesis - Auction
+title: Uniform Price Auction
+metaTitle: Genesis - Uniform Price Auction
 description: Time-based auction mechanism for token launches with uniform clearing price.
 ---
 
 ## Overview
 
-Auction enables time-based token launches where:
+Uniform Price Auction enables time-based token launches where:
 
 - Users bid for a specific quantity of tokens at a specific price
 - Bids can be public or private

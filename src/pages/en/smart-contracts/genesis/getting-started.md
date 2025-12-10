@@ -150,5 +150,6 @@ Choose your launch type and follow the detailed guide:
 
 1. **[Launch Pool](/smart-contracts/genesis/launch-pool)** - Token distribution with deposit windows
 2. **[Priced Sale](/smart-contracts/genesis/priced-sale)** - Pre-deposit collection before trading
+3. **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** - Time-based auction with uniform clearing price
 
 Each guide includes complete setup code, user operations, and configuration.

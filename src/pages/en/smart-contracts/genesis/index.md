@@ -14,7 +14,7 @@ Genesis supports multiple launch mechanisms that can be combined to create custo
 |-----------|-------------|----------|
 | **Priced Sale** | Fixed price token sale | Fixed price reduces complexity and speculation. First-come, first-served dynamics encourage early participation. More predictable outcome with accurate demand forecasting. Caps and wallet gates can be implemented if desired. |
 | **Launch Pool** | No fixed price–final price is implied by total deposits at close | Organic price discovery via no cap. Allows full ecosystem participation via no gate. Time-based launch pool prevents sniping and front-running with more open/accessible access. Caps and wallet gates can be implemented if desired. |
-| **Auction** | Time-based auction where users bid for a specific quantity of tokens at a specific price. Bids can be public or private. All winners receive tokens at the clearing price. | Promotes price discovery especially among whales/funds. Can be gated/ungated. |
+| **Uniform Price Auction** | Time-based auction where users bid for a specific quantity of tokens at a specific price. Bids can be public or private. All winners receive tokens at the clearing price. | Promotes price discovery especially among whales/funds. Can be gated/ungated. |
 
 ### Example Use Case: Launch Pool
 
@@ -154,3 +154,4 @@ Then choose your launch type:
 
 - [Launch Pool](/smart-contracts/genesis/launch-pool) - Token distribution with deposit windows
 - [Priced Sale](/smart-contracts/genesis/priced-sale) - Pre-deposits before trading begins
+- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Time-based auction with uniform clearing price
