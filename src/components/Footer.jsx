@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { GitHubIcon, DiscordIcon, XIcon } from '@/components/icons/SocialIcons'
+import { DiscordIcon, GitHubIcon, XIcon } from '@/components/icons/SocialIcons';
+import Link from 'next/link';
 
 export function Footer() {
   return (
@@ -34,10 +34,10 @@ export function Footer() {
                 Official Links
               </Link>
               <Link
-                href="/stability-index"
+                href="/smart-contracts/security"
                 className="hover:text-neutral-200 transition-colors"
               >
-                Stability Index
+                Security
               </Link>
               <Link
                 href="/protocol-fees"

@@ -14,7 +14,7 @@ It works both in iOS and other Apple platforms that support Swift.
 
 ## Stability
 
-[Stability 1 - Experimental](/stability-index)
+[Stability 1 - Experimental](/smart-contracts/security)
 
 This project is in active development. **All** interfaces are _very likely_ to change very frequently. Please use caution when making use of this library. Bugs or behavior changes may surprise users when Experimental API modifications occur.
 

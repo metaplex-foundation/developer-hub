@@ -27,6 +27,13 @@ const devToolsRedirects = [
   'aura',
 ];
 
+// Standalone page redirects to new locations
+const standaloneRedirects = {
+  '/stability-index': '/smart-contracts/security',
+  '/ja/stability-index': '/ja/smart-contracts/security',
+  '/ko/stability-index': '/ko/smart-contracts/security',
+}
+
 const redirectRules = {
   // Legacy UMI redirects - these specific sub-paths redirect to new destinations
   '/umi': {
@@ -128,6 +135,11 @@ export function middleware(request) {
   if (pathname === '/en' || pathname.startsWith('/en/')) {
     const newPath = pathname === '/en' ? '/' : pathname.slice('/en'.length)
     return NextResponse.redirect(new URL(newPath, request.url), 308)
+  }
+
+  // Handle standalone page redirects first
+  if (standaloneRedirects[pathname]) {
+    return NextResponse.redirect(new URL(standaloneRedirects[pathname], request.url), 308)
   }
 
   // Handle legacy redirects FIRST (specific sub-path redirects)

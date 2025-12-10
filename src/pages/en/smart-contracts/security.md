@@ -16,6 +16,7 @@ Below is a list of our products and their stability levels.
 | Umi                   | 2 (Stable)       |
 | Amman                 | 2 (Stable)       |
 | Shank                 | 2 (Stable)       |
+| Genesis               | 1 (Experimental) |
 | Core                  | 1 (Experimental) |
 | Fusion                | 1 (Experimental) |
 | Hydra                 | 1 (Experimental) |
