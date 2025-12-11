@@ -116,3 +116,12 @@ function getCategoryDescription(category) {
   };
   return descriptions[category] || '';
 }
+
+// Markdoc wrapper for use in markdown files
+export function MarkdocProductCardGrid({ category }) {
+  return (
+    <div className="not-prose">
+      <ProductCardGrid category={category} />
+    </div>
+  );
+}

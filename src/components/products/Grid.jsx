@@ -110,10 +110,10 @@ export function Grid({
   )
 }
 
-export function MarkdocGrid() {
+export function MarkdocGrid({ category }) {
   return (
     <div className="not-prose">
-      <Grid withoutFallback />
+      <Grid withoutFallback menuItem={category} />
     </div>
   )
 }

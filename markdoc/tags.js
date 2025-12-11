@@ -20,6 +20,7 @@ import GuideIndexComponent from '@/components/helperComponents/guideIndex'
 import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
+import { MarkdocProductCardGrid } from '@/components/products/ProductCardGrid'
 import { CodeTabs, CodeTab } from '@/components/code/CodeTabs'
 import { CodeTabsImported } from '@/components/code/CodeTabsImported'
 
@@ -69,6 +70,16 @@ const tags = {
   'product-grid': {
     selfClosing: true,
     render: ProductGrid,
+    attributes: {
+      category: { type: String },
+    },
+  },
+  'product-card-grid': {
+    selfClosing: true,
+    render: MarkdocProductCardGrid,
+    attributes: {
+      category: { type: String, required: true },
+    },
   },
   'all-product-grid': {
     selfClosing: true,

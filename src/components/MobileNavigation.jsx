@@ -100,17 +100,29 @@ export function MobileNavigation({ page }) {
             <HomeIcon height={20} /> Home
           </Link>
           <Link
-            href="/programs-and-tools"
+            href="/tokens"
             className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
           >
-            <ComputerDesktopIcon height={20} /> Programs and Tools
+            <SparklesIcon height={20} /> Tokens
           </Link>
-          {/* <Link
-            href="/aura"
+          <Link
+            href="/nfts"
             className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
           >
-            <SparklesIcon height={20} /> Aura
-          </Link> */}
+            <SparklesIcon height={20} /> NFTs
+          </Link>
+          <Link
+            href="/smart-contracts"
+            className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
+          >
+            <ComputerDesktopIcon height={20} /> Smart Contracts
+          </Link>
+          <Link
+            href="/dev-tools"
+            className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
+          >
+            <ComputerDesktopIcon height={20} /> Dev Tools
+          </Link>
 
           <Link
             href="/guides"
