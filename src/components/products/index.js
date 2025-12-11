@@ -8,26 +8,33 @@ import { core } from './core';
 import { coreCandyMachine } from './coreCandyMachine';
 import { das } from './das-api';
 import { fusion } from './fusion';
+import { genesis } from './genesis';
 import { global } from './global';
 import { guides } from './guides';
 import { hydra } from './hydra';
 import { inscription } from './inscription';
 import { legacyDocumentation } from './legacyDocumentation';
 import { mplHybrid } from './mpl-hybrid';
+import { nfts } from './nfts';
 import { shank } from './shank';
 import { sugar } from './sugar';
 import { tokenAuthRules } from './tokenAuthRules';
 import { tokenMetadata } from './tokenMetadata';
+import { tokens } from './tokens';
 import { umi } from './umi';
 
 export const productCategories = [
-  // 'Aura', 
-  'MPL', 
+  // 'Aura',
+  'Tokens',
+  'NFTs',
+  'Smart Contracts',
   'Dev Tools'
 ]
 
 export const products = [
   global,
+  tokens,
+  nfts,
   tokenMetadata,
   core,
   bubblegumv2,
@@ -36,6 +43,7 @@ export const products = [
   mplHybrid,
   tokenAuthRules,
   fusion,
+  genesis,
   hydra,
   inscription,
   bubblegum,

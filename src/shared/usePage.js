@@ -10,10 +10,14 @@ export function usePage(pageProps) {
   const { pathname } = useRouter()
   const { locale, t } = useLocale()
   
-  // Remove locale prefix for product matching (for /ja/core -> core)
-  const normalizedPathname = locale !== 'en' && pathname.startsWith(`/${locale}`)
-    ? pathname.slice(`/${locale}`.length) || '/'
-    : pathname
+  // Remove locale prefix for product matching (for /ja/core -> core, /en/core -> core)
+  // Note: For English, the pathname may be /en/* due to Next.js rewrites
+  let normalizedPathname = pathname
+  if (pathname.startsWith('/en/') || pathname === '/en') {
+    normalizedPathname = pathname.slice('/en'.length) || '/'
+  } else if (locale !== 'en' && pathname.startsWith(`/${locale}`)) {
+    normalizedPathname = pathname.slice(`/${locale}`.length) || '/'
+  }
   
   const title = pageProps.markdoc?.frontmatter.title ?? t('meta.defaultTitle', 'Metaplex Documentation')
   const rawProduct = getActiveProduct(normalizedPathname, pageProps)
@@ -47,11 +51,14 @@ export function usePage(pageProps) {
 }
 
 function getActiveProduct(pathname, pageProps) {
-  const pathnameFirstSegment = pathname.replace(/^\/|\/$/, '').split('/')?.[0]
+  const normalizedPathname = pathname.replace(/^\/|\/$/, '')
   const foundProduct = products.find((product) => {
     const defaultIsPageFromProduct = () => {
       if (product.isFallbackProduct) return false
-      return product.path === pathnameFirstSegment
+      // Support nested paths like 'smart-contracts/core'
+      // Check if pathname starts with product.path
+      return normalizedPathname === product.path ||
+             normalizedPathname.startsWith(`${product.path}/`)
     }
     return product.isPageFromProduct
       ? product.isPageFromProduct({ pathname, product, pageProps })

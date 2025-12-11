@@ -11,53 +11,53 @@ export const umi = {
   headline: 'Client wrapper',
   description: 'A collection of core programs for your applications.',
   navigationMenuCatergory: 'Dev Tools',
-  path: 'umi',
+  path: 'dev-tools/umi',
   icon: <CodeBracketSquareIcon />,
   github: 'https://github.com/metaplex-foundation/umi',
   className: 'accent-pink',
-  heroes: [{ path: '/umi', component: Hero }],
+  heroes: [{ path: '/dev-tools/umi', component: Hero }],
   sections: [
     {
-      ...documentationSection('umi'),
+      ...documentationSection('dev-tools/umi'),
       navigation: [
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/umi' },
+            { title: 'Overview', href: '/dev-tools/umi' },
             { 
               title: 'Getting Started', 
-              href: '/umi/getting-started' },
+              href: '/dev-tools/umi/getting-started' },
             {
               title: 'Metaplex Umi Plugins',
-              href: '/umi/metaplex-umi-plugins',
+              href: '/dev-tools/umi/metaplex-umi-plugins',
             },
             { title: 'Web3js Differences and Adapters', 
-              href: '/umi/web3js-differences-and-adapters' 
+              href: '/dev-tools/umi/web3js-differences-and-adapters' 
             },
             { title: '@solana/kit Adapters', 
-              href: '/umi/kit-adapters' 
+              href: '/dev-tools/umi/kit-adapters' 
             },
           ],
         },
         {
           title: 'Features',
           links: [
-            { title: 'Accounts', href: '/umi/accounts' },
-            { title: 'Helpers', href: '/umi/helpers' },
-            { title: 'HTTP Requests', href: '/umi/http-requests' },
-            { title: 'Interfaces', href: '/umi/interfaces' },
-            { title: 'Implementations', href: '/umi/implementations' },
-            { title: 'Kinobi', href: '/umi/kinobi' },
-            { title: 'Plugins', href: '/umi/plugins' },
-            { title: 'Programs', href: '/umi/programs' },
+            { title: 'Accounts', href: '/dev-tools/umi/accounts' },
+            { title: 'Helpers', href: '/dev-tools/umi/helpers' },
+            { title: 'HTTP Requests', href: '/dev-tools/umi/http-requests' },
+            { title: 'Interfaces', href: '/dev-tools/umi/interfaces' },
+            { title: 'Implementations', href: '/dev-tools/umi/implementations' },
+            { title: 'Kinobi', href: '/dev-tools/umi/kinobi' },
+            { title: 'Plugins', href: '/dev-tools/umi/plugins' },
+            { title: 'Programs', href: '/dev-tools/umi/programs' },
             {
               title: 'PublicKeys and Signers',
-              href: '/umi/public-keys-and-signers',
+              href: '/dev-tools/umi/public-keys-and-signers',
             },
-            { title: 'RPC', href: '/umi/rpc' },
-            { title: 'Serializers', href: '/umi/serializers' },
-            { title: 'Storage', href: '/umi/storage' },
-            { title: 'Transactions', href: '/umi/transactions' },
+            { title: 'RPC', href: '/dev-tools/umi/rpc' },
+            { title: 'Serializers', href: '/dev-tools/umi/serializers' },
+            { title: 'Storage', href: '/dev-tools/umi/storage' },
+            { title: 'Transactions', href: '/dev-tools/umi/transactions' },
           ],
         },
         {
@@ -65,48 +65,48 @@ export const umi = {
           links: [
             { 
               title: 'Overview', 
-              href: '/umi/toolbox' 
+              href: '/dev-tools/umi/toolbox' 
             },
             { 
               title: 'Create Account', 
-              href: '/umi/toolbox/create-account' },
+              href: '/dev-tools/umi/toolbox/create-account' },
             {
               title: 'Transfer Sol',
-              href: '/umi/toolbox/transfer-sol',
+              href: '/dev-tools/umi/toolbox/transfer-sol',
             },
             {
               title: 'Token Managment',
-              href: '/umi/toolbox/token-managment',
+              href: '/dev-tools/umi/toolbox/token-managment',
             },
             { 
               title: 'Priority Fees and Compute Managment', 
-              href: '/umi/toolbox/priority-fees-and-compute-managment' },
+              href: '/dev-tools/umi/toolbox/priority-fees-and-compute-managment' },
             {
               title: 'Address Lookup Table',
-              href: '/umi/toolbox/address-lookup-table',
+              href: '/dev-tools/umi/toolbox/address-lookup-table',
             },
             { 
               title: 'Transaction Memo', 
-              href: '/umi/toolbox/transaction-memo' },
+              href: '/dev-tools/umi/toolbox/transaction-memo' },
           ],
         },
       ],
     },
     {
-      ...guidesSection('umi'),
+      ...guidesSection('dev-tools/umi'),
       navigation: [
         {
           title: 'Guides',
           links: [
             {
               title: 'Optimal transaction landing',
-              href: '/umi/guides/optimal-transactions-with-compute-units-and-priority-fees',
+              href: '/dev-tools/umi/guides/optimal-transactions-with-compute-units-and-priority-fees',
               created: '2024-12-01',
               updated: null, // null means it's never been updated
             },
             {
               title: 'Serializing and Deserializing Transactions',
-              href: '/umi/guides/serializing-and-deserializing-transactions',
+              href: '/dev-tools/umi/guides/serializing-and-deserializing-transactions',
               created: '2024-08-04',
               updated: null, // null means it's never been updated
             },
@@ -115,7 +115,7 @@ export const umi = {
       ],
     },
     {
-      ...referencesSection('umi'),
+      ...referencesSection('dev-tools/umi'),
       href: `https://umi.typedoc.metaplex.com/`,
       target: '_blank',
     },

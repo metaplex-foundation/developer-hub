@@ -8,28 +8,28 @@ export const cli = {
   description:
     'A CLI for the MPLX ecosystem',
   navigationMenuCatergory: 'Dev Tools',
-  path: 'cli',
+  path: 'dev-tools/cli',
   icon: <CommandLineIcon />,
   github: 'https://github.com/metaplex-foundation/cli/',
   className: 'accent-green',
   primaryCta: {
     disabled: false,
   },
-  heroes: [{ path: '/cli', component: Hero }],
+  heroes: [{ path: '/dev-tools/cli', component: Hero }],
   sections: [
     {
-      ...documentationSection('cli'),
+      ...documentationSection('dev-tools/cli'),
       navigation: [
         {
           title: 'Getting Started',
           links: [
             {
               title: 'Introduction',
-              href: '/cli',
+              href: '/dev-tools/cli',
             },
             {
               title: 'Installation',
-              href: '/cli/installation',
+              href: '/dev-tools/cli/installation',
             },
           ],
         },
@@ -38,15 +38,15 @@ export const cli = {
           links: [
             {
               title: 'Wallets',
-              href: '/cli/config/wallets',
+              href: '/dev-tools/cli/config/wallets',
             },
             {
               title: 'RPCs',
-              href: '/cli/config/rpcs',
+              href: '/dev-tools/cli/config/rpcs',
             },
             {
               title: 'Explorer',
-              href: '/cli/config/explorer',
+              href: '/dev-tools/cli/config/explorer',
             },
           ],
         },
@@ -55,23 +55,27 @@ export const cli = {
           links: [
             {
               title: 'Create Asset',
-              href: '/cli/core/create-asset',
+              href: '/dev-tools/cli/core/create-asset',
             },
             {
               title: 'Create Collection',
-              href: '/cli/core/create-collection',
+              href: '/dev-tools/cli/core/create-collection',
             },
             {
               title: 'Update Asset',
-              href: '/cli/core/update-asset',
+              href: '/dev-tools/cli/core/update-asset',
+            },
+            {
+              title: 'Burn Asset',
+              href: '/dev-tools/cli/core/burn-asset',
             },
             {
               title: 'Fetch Asset or Collection',
-              href: '/cli/core/fetch',
+              href: '/dev-tools/cli/core/fetch',
             },
             {
               title: 'Add and Update Plugins',
-              href: '/cli/core/plugins',
+              href: '/dev-tools/cli/core/plugins',
             },
           ],
         },
@@ -113,23 +117,23 @@ export const cli = {
           links: [
             {
               title: 'Token Creation',
-              href: '/cli/toolbox/token-create',
+              href: '/dev-tools/cli/toolbox/token-create',
             },
             {
               title: 'Token Transfer',
-              href: '/cli/toolbox/token-transfer',
+              href: '/dev-tools/cli/toolbox/token-transfer',
             },
             {
               title: 'SOL Airdrop',
-              href: '/cli/toolbox/sol-airdrop',
+              href: '/dev-tools/cli/toolbox/sol-airdrop',
             },
             {
               title: 'SOL Balance',
-              href: '/cli/toolbox/sol-balance',
+              href: '/dev-tools/cli/toolbox/sol-balance',
             },
             {
               title: 'SOL Transfer',
-              href: '/cli/toolbox/sol-transfer',
+              href: '/dev-tools/cli/toolbox/sol-transfer',
             },
             
             

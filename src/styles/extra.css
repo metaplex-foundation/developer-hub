@@ -12,8 +12,8 @@
 
 
 html {
-  overflow-y: overlay;
-  scrollbar-gutter: stable;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .loader {

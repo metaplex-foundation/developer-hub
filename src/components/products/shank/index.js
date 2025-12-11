@@ -8,23 +8,23 @@ export const shank = {
   name: 'Shank',
   headline: 'IDL Extraction for Solana Programs',
   description: 'Extract IDLs from Rust Solana program code using attribute macros',
-  path: 'shank',
+  path: 'dev-tools/shank',
   icon: <MapIcon />,
   navigationMenuCatergory: 'Dev Tools',
   github: 'https://github.com/metaplex-foundation/shank',
   className: 'accent-orange',
-  heroes: [{ path: '/shank', component: Hero }],
+  heroes: [{ path: '/dev-tools/shank', component: Hero }],
   sections: [
     {
-      ...documentationSection('shank'),
+      ...documentationSection('dev-tools/shank'),
       navigation: [
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/shank' },
+            { title: 'Overview', href: '/dev-tools/shank' },
             {
               title: 'Getting Started',
-              href: '/shank/getting-started',
+              href: '/dev-tools/shank/getting-started',
             },
           ],
         },
@@ -33,7 +33,7 @@ export const shank = {
           links: [
             {
               title: 'Macros Reference',
-              href: '/shank/macros',
+              href: '/dev-tools/shank/macros',
             },
           ],
         },

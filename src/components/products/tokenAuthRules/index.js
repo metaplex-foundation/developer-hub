@@ -9,23 +9,24 @@ export const tokenAuthRules = {
   name: 'Token Auth Rules',
   headline: 'NFT permissions',
   description: 'Design custom authorization rules for your NFTs.',
-  navigationMenuCatergory: 'MPL',
-  path: 'token-auth-rules',
+  navigationMenuCatergory: 'Smart Contracts',
+  path: 'smart-contracts/token-auth-rules',
   icon: <LockOpenIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-auth-rules',
   className: 'accent-green',
-  heroes: [{ path: '/token-auth-rules', component: Hero }],
+  heroes: [{ path: '/smart-contracts/token-auth-rules', component: Hero }],
+  deprecated: true,
   sections: [
     {
-      ...documentationSection('token-auth-rules'),
+      ...documentationSection('smart-contracts/token-auth-rules'),
       navigation: [
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/token-auth-rules' },
+            { title: 'Overview', href: '/smart-contracts/token-auth-rules' },
             {
               title: 'Metaplex Rule Sets',
-              href: '/token-auth-rules/mplx-rule-sets',
+              href: '/smart-contracts/token-auth-rules/mplx-rule-sets',
             },
           ],
         },
@@ -34,11 +35,11 @@ export const tokenAuthRules = {
           links: [
             {
               title: 'Create or Update Rule Sets',
-              href: '/token-auth-rules/create-or-update',
+              href: '/smart-contracts/token-auth-rules/create-or-update',
             },
             {
               title: 'Validating with a Rule Set',
-              href: '/token-auth-rules/validate',
+              href: '/smart-contracts/token-auth-rules/validate',
             },
           ],
         },
@@ -47,15 +48,15 @@ export const tokenAuthRules = {
           links: [
             {
               title: 'All',
-              href: '/token-auth-rules/composite-rules/all',
+              href: '/smart-contracts/token-auth-rules/composite-rules/all',
             },
             {
               title: 'Any',
-              href: '/token-auth-rules/composite-rules/any',
+              href: '/smart-contracts/token-auth-rules/composite-rules/any',
             },
             {
               title: 'Not',
-              href: '/token-auth-rules/composite-rules/not',
+              href: '/smart-contracts/token-auth-rules/composite-rules/not',
             },
           ],
         },
@@ -64,44 +65,44 @@ export const tokenAuthRules = {
           links: [
             {
               title: 'Additional Signer',
-              href: '/token-auth-rules/primitive-rules/additional-signer',
+              href: '/smart-contracts/token-auth-rules/primitive-rules/additional-signer',
             },
             {
               title: 'Amount',
-              href: '/token-auth-rules/primitive-rules/amount',
+              href: '/smart-contracts/token-auth-rules/primitive-rules/amount',
             },
             {
               title: 'Namespace',
-              href: '/token-auth-rules/primitive-rules/namespace',
+              href: '/smart-contracts/token-auth-rules/primitive-rules/namespace',
             },
             {
               title: 'Pass',
-              href: '/token-auth-rules/primitive-rules/pass',
+              href: '/smart-contracts/token-auth-rules/primitive-rules/pass',
             },
             {
               title: 'PDA Match',
-              href: '/token-auth-rules/primitive-rules/pda-match',
+              href: '/smart-contracts/token-auth-rules/primitive-rules/pda-match',
             },
             {
               title: 'Program Owned',
-              href: '/token-auth-rules/primitive-rules/program-owned',
+              href: '/smart-contracts/token-auth-rules/primitive-rules/program-owned',
             },
             {
               title: 'Public Key Match',
-              href: '/token-auth-rules/primitive-rules/pubkey-match',
+              href: '/smart-contracts/token-auth-rules/primitive-rules/pubkey-match',
             },
           ],
         },
         {
           title: 'Advanced',
           links: [
-            { title: 'Rule Set Buffers', href: '/token-auth-rules/buffers' },
+            { title: 'Rule Set Buffers', href: '/smart-contracts/token-auth-rules/buffers' },
           ],
         },
       ],
     },
     {
-      ...referencesSection('token-auth-rules'),
+      ...referencesSection('smart-contracts/token-auth-rules'),
       href: 'https://mpl-token-auth-rules.typedoc.metaplex.com/',
       target: '_blank'
     },
