@@ -43,7 +43,11 @@
     "mpl": "MPL",
     "devTools": "개발 도구",
     "guides": "가이드",
-    "aura": "Aura"
+    "aura": "Aura",
+    "home": "홈",
+    "tokens": "토큰",
+    "nfts": "NFT",
+    "smartContracts": "스마트 계약"
   },
   "meta": {
     "defaultTitle": "Metaplex 개발자 허브",

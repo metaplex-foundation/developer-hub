@@ -1,12 +1,12 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Search } from '@/components/Search'
 // import { ThemeSelector } from '@/components/ThemeSelector'
-import { categoryToColor, IconWithName } from '@/components/products/IconWithName'
+import { IconWithName } from '@/components/products/IconWithName'
 import { Sections } from '@/components/products/Sections'
 import { DiscordIcon } from '@/components/icons/SocialIcons'
 import NavList from './NavList'
@@ -39,27 +39,14 @@ export function Header({ page }) {
           <MobileNavigation page={page} />
         </div>
         <div className="relative flex flex-grow basis-0 items-center gap-12">
-          <div className="hidden flex-col lg:flex">
+          <div className="flex flex-col">
             <Link href={`/`}>
-              {React.cloneElement(page.product.icon, {
-                color: categoryToColor.get(
-                  page.product.navigationMenuCatergory
-                ),
-                className: 'h-8 w-8 sm:hidden',
-              })}
               <img
                 src="/metaplex-logo-white.png"
                 alt="Metaplex"
                 className="h-4 w-auto no-lightense"
               />
             </Link>
-          </div>
-          <div className="flex flex-col lg:hidden">
-            <IconWithName
-              product={page.product}
-              className="flex"
-              description={false}
-            />
           </div>
           <NavList />
         </div>

@@ -43,7 +43,11 @@
     "mpl": "MPL",
     "devTools": "開発ツール",
     "guides": "ガイド",
-    "aura": "Aura"
+    "aura": "Aura",
+    "home": "ホーム",
+    "tokens": "トークン",
+    "nfts": "NFT",
+    "smartContracts": "スマートコントラクト"
   },
   "meta": {
     "defaultTitle": "Metaplexドキュメント",
