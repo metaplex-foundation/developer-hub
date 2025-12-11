@@ -136,14 +136,6 @@ async function main() {
     bucketIndex: 0,
   });
 
-  const defaultSchedule = {
-    slopeBps: 0n,
-    interceptBps: 0n,
-    maxBps: 0n,
-    startTime: 0n,
-    endTime: 0n,
-  };
-
   await addLaunchPoolBucketV2(umi, {
     genesisAccount,
     baseMint: baseMint.publicKey,
@@ -172,9 +164,6 @@ async function main() {
       time: claimEnd,
       triggeredTimestamp: 0n,
     },
-    depositPenalty: defaultSchedule,
-    withdrawPenalty: defaultSchedule,
-    bonusSchedule: defaultSchedule,
     minimumDepositAmount: null,
     endBehaviors: [
       {
