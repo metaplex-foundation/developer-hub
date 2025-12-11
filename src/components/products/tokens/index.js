@@ -1,6 +1,7 @@
 import { documentationSection } from '@/shared/sections'
 import { SparklesIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
+import { buildProductTranslations } from '@/config/navigation-translations'
 
 export const tokens = {
   name: 'Tokens',
@@ -65,4 +66,29 @@ export const tokens = {
       ],
     },
   ],
+  localizedNavigation: buildProductTranslations({
+    headlineTranslations: {
+      ja: '代替可能トークン',
+      ko: '대체 가능 토큰'
+    },
+    descriptionTranslations: {
+      ja: 'Solana上で代替可能トークンを作成・管理します。',
+      ko: 'Solana에서 대체 가능 토큰을 생성하고 관리합니다.'
+    },
+    sectionKeys: {
+      'Introduction': 'sections.introduction',
+      'Getting Started': { ja: 'はじめに', ko: '시작하기' }
+    },
+    linkKeys: {
+      'Overview': 'links.overview',
+      'Create a Token': { ja: 'トークンの作成', ko: '토큰 생성' },
+      'Launch a Token': { ja: 'トークンのローンチ', ko: '토큰 런칭' },
+      'Aggregate Token Launches': { ja: 'トークンローンチの集約', ko: '토큰 런칭 집계' },
+      'Read Token Data': { ja: 'トークンデータの読み取り', ko: '토큰 데이터 읽기' },
+      'Mint Tokens': { ja: 'トークンのミント', ko: '토큰 민팅' },
+      'Transfer Tokens': { ja: 'トークンの転送', ko: '토큰 전송' },
+      'Update Token Metadata': { ja: 'トークンメタデータの更新', ko: '토큰 메타데이터 업데이트' },
+      'Burn Tokens': { ja: 'トークンのバーン', ko: '토큰 소각' }
+    }
+  })
 }

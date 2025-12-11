@@ -1,14 +1,21 @@
+'use client'
+
 import { DiscordIcon, GitHubIcon, XIcon } from '@/components/icons/SocialIcons';
+import { useLocale, useTranslations } from '@/contexts/LocaleContext';
+import { getLocalizedHref } from '@/config/languages';
 import Link from 'next/link';
 
 export function Footer() {
+  const t = useTranslations('footer')
+  const { locale } = useLocale()
+
   return (
     <footer className="border-t border-neutral-800 bg-neutral-900">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Logo and copyright */}
           <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3">
+            <Link href={getLocalizedHref('/', locale)} className="flex items-center gap-3">
               <img
                 src="/metaplex-logo-white.png"
                 alt="Metaplex"
@@ -17,39 +24,33 @@ export function Footer() {
             </Link>
             <p className="text-sm text-neutral-400">
               &copy; {new Date().getFullYear()} Metaplex Foundation.
-              <br />All rights reserved.
+              <br />{t('allRightsReserved', 'All rights reserved.')}
             </p>
           </div>
 
           {/* Resources */}
           <div className="flex flex-col gap-3">
             <h3 className="text-sm font-semibold text-white">
-              Resources
+              {t('resources', 'Resources')}
             </h3>
             <div className="flex flex-col gap-2 text-sm text-neutral-400">
               <Link
-                href="/official-links"
+                href={getLocalizedHref('/official-links', locale)}
                 className="hover:text-neutral-200 transition-colors"
               >
-                Official Links
+                {t('officialLinks', 'Official Links')}
               </Link>
               <Link
-                href="/smart-contracts/security"
+                href={getLocalizedHref('/smart-contracts/security', locale)}
                 className="hover:text-neutral-200 transition-colors"
               >
-                Security
+                {t('security', 'Security')}
               </Link>
               <Link
-                href="/protocol-fees"
+                href={getLocalizedHref('/protocol-fees', locale)}
                 className="hover:text-neutral-200 transition-colors"
               >
-                Protocol Fees
-              </Link>
-              <Link
-                href="/security"
-                className="hover:text-neutral-200 transition-colors"
-              >
-                Security
+                {t('protocolFees', 'Protocol Fees')}
               </Link>
             </div>
           </div>
@@ -57,7 +58,7 @@ export function Footer() {
           {/* Legal */}
           <div className="flex flex-col gap-3">
             <h3 className="text-sm font-semibold text-white">
-              Legal
+              {t('legal', 'Legal')}
             </h3>
             <div className="flex flex-col gap-2 text-sm text-neutral-400">
               <Link
@@ -65,14 +66,14 @@ export function Footer() {
                 target="_blank"
                 className="hover:text-neutral-200 transition-colors"
               >
-                Terms & Conditions
+                {t('termsAndConditions', 'Terms & Conditions')}
               </Link>
               <Link
                 href="https://www.metaplex.com/privacy-policy"
                 target="_blank"
                 className="hover:text-neutral-200 transition-colors"
               >
-                Privacy Policy
+                {t('privacyPolicy', 'Privacy Policy')}
               </Link>
             </div>
           </div>
@@ -80,7 +81,7 @@ export function Footer() {
           {/* Social */}
           <div className="flex flex-col gap-3">
             <h3 className="text-sm font-semibold text-white">
-              Connect
+              {t('connect', 'Connect')}
             </h3>
             <div className="flex items-center gap-4">
               <Link

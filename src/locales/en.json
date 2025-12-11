@@ -43,7 +43,11 @@
     "mpl": "MPL",
     "devTools": "Dev Tools",
     "guides": "Guides",
-    "aura": "Aura"
+    "aura": "Aura",
+    "tokens": "Tokens",
+    "nfts": "NFTs",
+    "smartContracts": "Smart Contracts",
+    "programs": "Programs"
   },
   "meta": {
     "defaultTitle": "Metaplex Documentation",
@@ -59,5 +63,16 @@
     "description": "We couldn't find this page in the Metaplex Developer Hub.",
     "message": "We couldn't find this page in the Metaplex Developer Hub.",
     "callToAction": "Select a product below to get started."
+  },
+  "footer": {
+    "allRightsReserved": "All rights reserved.",
+    "resources": "Resources",
+    "officialLinks": "Official Links",
+    "security": "Security",
+    "protocolFees": "Protocol Fees",
+    "legal": "Legal",
+    "termsAndConditions": "Terms & Conditions",
+    "privacyPolicy": "Privacy Policy",
+    "connect": "Connect"
   }
 }
