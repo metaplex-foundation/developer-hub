@@ -1,5 +1,65 @@
 pre[class*='language-'] {
   color: theme('colors.slate.50');
+  background-color: theme('colors.slate.900');
+  border: 1px solid theme('colors.slate.800');
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Hero code blocks have their own container styling */
+.hero-code pre[class*='language-'],
+.dark .hero-code pre[class*='language-'],
+.hero-code .dark pre[class*='language-'] {
+  color: theme('colors.slate.50');
+  background-color: transparent !important;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-code code {
+  margin: 0;
+  padding: 0;
+}
+
+/* Light mode code blocks */
+@media (prefers-color-scheme: light) {
+  pre[class*='language-'] {
+    color: theme('colors.slate.900');
+    background-color: theme('colors.slate.50');
+    border: 1px solid theme('colors.slate.200');
+  }
+}
+
+/* Explicit dark mode class support */
+.dark pre[class*='language-'] {
+  color: theme('colors.slate.50');
+  background-color: theme('colors.slate.900');
+  border: 1px solid theme('colors.slate.800');
+}
+
+/* Code blocks inside CodeTabs - remove border and rounded corners (parent has them) */
+.code-tabs pre[class*='language-'] {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+}
+
+/* Ensure proper background in tabs */
+.code-tabs pre[class*='language-'] {
+  background-color: theme('colors.slate.900');
+}
+
+.code-tabs .dark pre[class*='language-'],
+.dark .code-tabs pre[class*='language-'] {
+  background-color: theme('colors.slate.900');
+}
+
+@media (prefers-color-scheme: light) {
+  .code-tabs pre[class*='language-'] {
+    background-color: theme('colors.slate.50');
+  }
 }
 
 .token.tag,

@@ -35,7 +35,8 @@ export function LocaleProvider({ children }) {
 
     if (pathToCheck.startsWith('/ja')) return 'ja'
     if (pathToCheck.startsWith('/ko')) return 'ko'
-    return 'en' // Default to English for root paths
+    // /en prefix is used internally due to rewrites, but still English
+    return 'en' // Default to English for root paths and /en/* paths
   }, [pathname, asPath, clientPath])
 
   // Get messages for current locale, fallback to English

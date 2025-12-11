@@ -9,26 +9,26 @@ export const inscription = {
   name: 'Inscription',
   headline: 'NFT inscribed on Solana',
   description: 'Inscribe Data to Solana state.',
-  path: 'inscription',
+  path: 'smart-contracts/inscription',
   icon: <PencilSquareIcon />,
-  navigationMenuCatergory: 'MPL',
+  navigationMenuCatergory: 'Smart Contracts',
   github: 'https://github.com/metaplex-foundation/mpl-inscription',
   className: 'accent-green',
-  heroes: [{ path: '/inscription', component: Hero }],
+  heroes: [{ path: '/smart-contracts/inscription', component: Hero }],
   sections: [
     {
-      ...documentationSection('inscription'),
+      ...documentationSection('smart-contracts/inscription'),
       navigation: [
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/inscription' },
+            { title: 'Overview', href: '/smart-contracts/inscription' },
             {
               title: 'Getting Started',
-              href: '/inscription/getting-started',
+              href: '/smart-contracts/inscription/getting-started',
               // Subpages: /js /rust, etc.
             },
-            { title: 'FAQ', href: '/inscription/faq' },
+            { title: 'FAQ', href: '/smart-contracts/inscription/faq' },
           ],
         },
         {
@@ -36,13 +36,13 @@ export const inscription = {
           links: [
             {
               title: 'Initialize',
-              href: '/inscription/initialize',
+              href: '/smart-contracts/inscription/initialize',
             },
-            { title: 'Write Data', href: '/inscription/write' },
-            { title: 'Fetch', href: '/inscription/fetch' },
-            { title: 'Clear Data', href: '/inscription/clear' },
-            { title: 'Close', href: '/inscription/close' },
-            { title: 'Authority', href: '/inscription/authority' },
+            { title: 'Write Data', href: '/smart-contracts/inscription/write' },
+            { title: 'Fetch', href: '/smart-contracts/inscription/fetch' },
+            { title: 'Clear Data', href: '/smart-contracts/inscription/clear' },
+            { title: 'Close', href: '/smart-contracts/inscription/close' },
+            { title: 'Authority', href: '/smart-contracts/inscription/authority' },
           ],
         },
         {
@@ -50,18 +50,18 @@ export const inscription = {
           links: [
             {
               title: 'Inscription Sharding',
-              href: '/inscription/sharding',
+              href: '/smart-contracts/inscription/sharding',
             },
             // {
             //   title: 'Parallel Writes',
-            //   href: '/inscription/parallel-writes',
+            //   href: '/smart-contracts/inscription/parallel-writes',
             // },
           ],
         },
       ],
     },
     {
-      ...referencesSection('inscription'),
+      ...referencesSection('smart-contracts/inscription'),
       href: `https://mpl-inscription.typedoc.metaplex.com/`,
       target: '_blank',
     },

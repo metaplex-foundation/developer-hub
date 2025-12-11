@@ -8,28 +8,49 @@ export const fusion = {
   name: 'Fusion',
   headline: 'NFTs inside NFTs',
   description: 'Create composable NFTs.',
-  navigationMenuCatergory: 'MPL',
-  path: 'fusion',
+  navigationMenuCatergory: 'Smart Contracts',
+  path: 'smart-contracts/fusion',
   icon: <CircleStackIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-trifle',
   className: 'accent-amber',
-  heroes: [{ path: '/fusion', component: Hero }],
+  heroes: [{ path: '/smart-contracts/fusion', component: Hero }],
+  protocolFees: {
+    combine: {
+      solana: '0.002 SOL',
+      eclipse: null,
+      payer: 'Collector',
+      notes: null,
+    },
+    split: {
+      solana: '0.002 SOL',
+      eclipse: null,
+      payer: 'Collector',
+      notes: null,
+    },
+    editConstraint: {
+      solana: '0.01 SOL',
+      eclipse: null,
+      payer: 'Creator',
+      notes: null,
+    },
+  },
+  deprecated: true,
   sections: [
     {
-      ...documentationSection('fusion'),
+      ...documentationSection('smart-contracts/fusion'),
       navigation: [
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/fusion' },
-            { title: 'Getting Started', href: '/fusion/getting-started' },
+            { title: 'Overview', href: '/smart-contracts/fusion' },
+            { title: 'Getting Started', href: '/smart-contracts/fusion/getting-started' },
           ],
         },
         {
           title: 'Features',
           links: [
-            { title: 'Constraint Types', href: '/fusion/constraint-types' },
-            { title: 'Transfer Effects', href: '/fusion/transfer-effects' },
+            { title: 'Constraint Types', href: '/smart-contracts/fusion/constraint-types' },
+            { title: 'Transfer Effects', href: '/smart-contracts/fusion/transfer-effects' },
           ],
         },
       ],

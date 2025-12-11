@@ -130,6 +130,6 @@ The Metaplex Developer Hub is a documentation website that serves as the central
 
 - [Security](https://developers.metaplex.com/security): Security best practices and audit information
 - [Protocol Fees](https://developers.metaplex.com/protocol-fees): Fee structure and economics
-- [Stability Index](https://developers.metaplex.com/stability-index): API stability classifications
+- [Stability Index](https://developers.metaplex.com/smart-contracts/security): API stability classifications
 - [Official Links](https://developers.metaplex.com/official-links): Official Metaplex resources and social links
 - [Contact](https://developers.metaplex.com/contact): Support and community channels
