@@ -43,7 +43,11 @@
     "mpl": "MPL",
     "devTools": "開発ツール",
     "guides": "ガイド",
-    "aura": "Aura"
+    "aura": "Aura",
+    "tokens": "トークン",
+    "nfts": "NFT",
+    "smartContracts": "スマートコントラクト",
+    "programs": "プログラム"
   },
   "meta": {
     "defaultTitle": "Metaplexドキュメント",
@@ -59,5 +63,16 @@
     "description": "Metaplex Developer Hubでこのページが見つかりませんでした。",
     "message": "Metaplex Developer Hubでこのページが見つかりませんでした。",
     "callToAction": "下記から製品を選択して始めましょう。"
+  },
+  "footer": {
+    "allRightsReserved": "全著作権所有。",
+    "resources": "リソース",
+    "officialLinks": "公式リンク",
+    "security": "セキュリティ",
+    "protocolFees": "プロトコル手数料",
+    "legal": "法的情報",
+    "termsAndConditions": "利用規約",
+    "privacyPolicy": "プライバシーポリシー",
+    "connect": "つながる"
   }
 }

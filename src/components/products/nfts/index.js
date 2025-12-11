@@ -1,6 +1,7 @@
 import { documentationSection } from '@/shared/sections';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 import { Hero } from './Hero';
+import { buildProductTranslations } from '@/config/navigation-translations';
 
 export const nfts = {
   name: 'NFTs',
@@ -53,4 +54,26 @@ export const nfts = {
       ],
     },
   ],
+  localizedNavigation: buildProductTranslations({
+    headlineTranslations: {
+      ja: '非代替性トークン',
+      ko: '대체 불가능 토큰'
+    },
+    descriptionTranslations: {
+      ja: 'Metaplex Coreを使用してSolana上でNFTを作成・管理します。',
+      ko: 'Metaplex Core를 사용하여 Solana에서 NFT를 생성하고 관리합니다.'
+    },
+    sectionKeys: {
+      'Introduction': 'sections.introduction',
+      'Getting Started': { ja: 'はじめに', ko: '시작하기' }
+    },
+    linkKeys: {
+      'Overview': 'links.overview',
+      'Create an NFT': { ja: 'NFTの作成', ko: 'NFT 생성' },
+      'Fetch an NFT': { ja: 'NFTの取得', ko: 'NFT 가져오기' },
+      'Update an NFT': { ja: 'NFTの更新', ko: 'NFT 업데이트' },
+      'Transfer an NFT': { ja: 'NFTの転送', ko: 'NFT 전송' },
+      'Burn an NFT': { ja: 'NFTのバーン', ko: 'NFT 소각' }
+    }
+  })
 }

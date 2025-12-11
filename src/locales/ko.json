@@ -43,7 +43,11 @@
     "mpl": "MPL",
     "devTools": "개발 도구",
     "guides": "가이드",
-    "aura": "Aura"
+    "aura": "Aura",
+    "tokens": "토큰",
+    "nfts": "NFT",
+    "smartContracts": "스마트 컨트랙트",
+    "programs": "프로그램"
   },
   "meta": {
     "defaultTitle": "Metaplex 개발자 허브",
@@ -59,5 +63,16 @@
     "description": "Metaplex Developer Hub에서 이 페이지를 찾을 수 없었습니다.",
     "message": "Metaplex Developer Hub에서 이 페이지를 찾을 수 없었습니다.",
     "callToAction": "아래에서 제품을 선택하여 시작하세요."
+  },
+  "footer": {
+    "allRightsReserved": "모든 권리 보유.",
+    "resources": "리소스",
+    "officialLinks": "공식 링크",
+    "security": "보안",
+    "protocolFees": "프로토콜 수수료",
+    "legal": "법적 정보",
+    "termsAndConditions": "이용약관",
+    "privacyPolicy": "개인정보 처리방침",
+    "connect": "연결"
   }
 }
