@@ -1,5 +1,5 @@
 import { documentationSection } from '@/shared/sections'
-import { CurrencyDollarIcon } from '@heroicons/react/24/solid'
+import { SparklesIcon } from '@heroicons/react/24/solid'
 import { Hero } from './Hero'
 
 export const tokens = {
@@ -8,7 +8,7 @@ export const tokens = {
   description: 'Create and manage fungible tokens on Solana.',
   navigationMenuCatergory: undefined,
   path: 'tokens',
-  icon: <CurrencyDollarIcon />,
+  icon: <SparklesIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',
   className: 'accent-amber',
   heroes: [{ path: '/tokens', component: Hero }],
