@@ -1,6 +1,7 @@
 'use client'
 
 import { useLocale, useTranslations } from '@/contexts/LocaleContext';
+import { getLocalizedHref } from '@/config/languages';
 import { Popover } from '@headlessui/react';
 import Link from 'next/link';
 import { SwitcherPopover } from './products/SwitcherPopover';
@@ -101,6 +102,8 @@ const NavList = () => {
 
   const getTranslatedCategory = (category) => {
     const categoryMap = {
+      'Tokens': t('tokens', 'Tokens'),
+      'NFTs': t('nfts', 'NFTs'),
       'Programs': t('programs', 'Programs'),
       'Smart Contracts': t('smartContracts', 'Smart Contracts'),
       'Dev Tools': t('devTools', 'Dev Tools'),
@@ -137,7 +140,7 @@ const NavList = () => {
         if (path) {
           return (
             <div className="hidden flex-col lg:flex" key={index}>
-              <Link href={path}>
+              <Link href={getLocalizedHref(path, locale)}>
                 <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
                   {getTranslatedCategory(item)}
                 </div>
