@@ -1,4 +1,5 @@
 import { Callout } from '@/components/Callout'
+import { ProtocolFees } from '@/components/ProtocolFees'
 import {
   Dialect,
   DialectSwitcher,
@@ -19,6 +20,9 @@ import GuideIndexComponent from '@/components/helperComponents/guideIndex'
 import { PackagesUsed } from '@/components/helperComponents/packagesUsed'
 import { MarkdocGrid as ProductGrid } from '@/components/products/Grid'
 import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllProducts'
+import { MarkdocProductCardGrid } from '@/components/products/ProductCardGrid'
+import { CodeTabs, CodeTab } from '@/components/code/CodeTabs'
+import { CodeTabsImported } from '@/components/code/CodeTabsImported'
 
 const tags = {
   callout: {
@@ -66,6 +70,16 @@ const tags = {
   'product-grid': {
     selfClosing: true,
     render: ProductGrid,
+    attributes: {
+      category: { type: String },
+    },
+  },
+  'product-card-grid': {
+    selfClosing: true,
+    render: MarkdocProductCardGrid,
+    attributes: {
+      category: { type: String, required: true },
+    },
   },
   'all-product-grid': {
     selfClosing: true,
@@ -181,6 +195,41 @@ const tags = {
   },
   guideIndexComponent: {
     render: GuideIndexComponent,
+  },
+  'code-tabs': {
+    render: CodeTabs,
+    attributes: {
+      defaultLanguage: { type: String, default: 'javascript' },
+      persist: { type: Boolean, default: true },
+    },
+  },
+  'code-tab': {
+    render: CodeTab,
+    attributes: {
+      language: { type: String, required: true },
+      label: { type: String },
+    },
+  },
+  'code-tabs-imported': {
+    render: CodeTabsImported,
+    selfClosing: true,
+    attributes: {
+      from: { type: String, required: true },
+      frameworks: { type: String, default: 'kit,umi,shank,anchor' },
+      defaultFramework: { type: String, default: 'umi' },
+      showLineNumbers: { type: Boolean, default: true },
+      highlightLines: { type: String, default: '' },
+      showLines: { type: String, default: '' },
+      showCopy: { type: Boolean, default: true },
+    },
+  },
+  'protocol-fees': {
+    render: ProtocolFees,
+    selfClosing: true,
+    attributes: {
+      program: { type: String, required: true },
+      showTitle: { type: Boolean, default: true },
+    },
   },
 }
 

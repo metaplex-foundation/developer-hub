@@ -9,7 +9,9 @@ import {
   BookOpenIcon,
   ChevronLeftIcon,
   ComputerDesktopIcon,
+  DocumentTextIcon,
   HomeIcon,
+  PhotoIcon,
   SparklesIcon,
 } from '@heroicons/react/20/solid'
 import { IconWithName } from './products/IconWithName'
@@ -80,7 +82,7 @@ export function MobileNavigation({ page }) {
         className="bg-netural-900/50 fixed inset-0 z-50 flex items-start overflow-y-auto pr-10 backdrop-blur lg:hidden"
         aria-label="Navigation"
       >
-        <Dialog.Panel className="min-h-full w-full max-w-sm border-r border-slate-600 bg-white px-4 pb-12 pt-5 dark:bg-neutral-900 sm:px-6">
+        <Dialog.Panel className="min-h-full w-full max-w-sm border-r border-slate-600 bg-neutral-900 px-4 pb-12 pt-5 sm:px-6">
           <div className="flex items-center">
             <button
               type="button"
@@ -95,31 +97,43 @@ export function MobileNavigation({ page }) {
           </div>
           <Link
             href="/"
-            className="mt-12 flex items-center gap-2 text-slate-900 dark:text-white"
+            className="mt-12 flex items-center gap-2 text-white"
           >
             <HomeIcon height={20} /> Home
           </Link>
           <Link
-            href="/programs-and-tools"
-            className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
+            href="/tokens"
+            className="mt-4 flex items-center gap-2 text-white"
           >
-            <ComputerDesktopIcon height={20} /> Programs and Tools
+            <SparklesIcon height={20} /> Tokens
           </Link>
-          {/* <Link
-            href="/aura"
-            className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
+          <Link
+            href="/nfts"
+            className="mt-4 flex items-center gap-2 text-white"
           >
-            <SparklesIcon height={20} /> Aura
-          </Link> */}
+            <PhotoIcon height={20} /> NFTs
+          </Link>
+          <Link
+            href="/smart-contracts"
+            className="mt-4 flex items-center gap-2 text-white"
+          >
+            <DocumentTextIcon height={20} /> Smart Contracts
+          </Link>
+          <Link
+            href="/dev-tools"
+            className="mt-4 flex items-center gap-2 text-white"
+          >
+            <ComputerDesktopIcon height={20} /> Dev Tools
+          </Link>
 
           <Link
             href="/guides"
-            className="mt-4 flex items-center gap-2 text-slate-900 dark:text-white"
+            className="mt-4 flex items-center gap-2 text-white"
           >
             <BookOpenIcon height={20} /> Guides
           </Link>
 
-          <div className="mt-8 text-2xl font-bold text-black dark:text-white">
+          <div className="mt-8 text-2xl font-bold text-white">
             {page.product.name}
           </div>
 

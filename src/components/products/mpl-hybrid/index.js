@@ -10,34 +10,42 @@ export const mplHybrid = {
   name: 'MPL-Hybrid',
   headline: 'Hybrid Assets',
   description: 'Framework and on-chain protocol for hybrid assets.',
-  navigationMenuCatergory: 'MPL',
-  path: 'mpl-hybrid',
+  navigationMenuCatergory: 'Smart Contracts',
+  path: 'smart-contracts/mpl-hybrid',
   icon: <ArrowsRightLeftIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-hybrid',
   className: 'accent-green',
-  heroes: [{ path: '/mpl-hybrid', component: Hero }],
+  heroes: [{ path: '/smart-contracts/mpl-hybrid', component: Hero }],
+  protocolFees: {
+    swap: {
+      solana: '0.005 SOL',
+      eclipse: '0.005 ETH',
+      payer: 'Collector',
+      notes: 'Paid by the individual who swaps tokens and NFTs.',
+    },
+  },
   sections: [
     {
-      ...documentationSection('mpl-hybrid'),
+      ...documentationSection('smart-contracts/mpl-hybrid'),
       navigation: [
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/mpl-hybrid' },
-            { title: 'Preparation', href: '/mpl-hybrid/preparation' },
-            { title: 'FAQ', href: '/mpl-hybrid/faq' },
+            { title: 'Overview', href: '/smart-contracts/mpl-hybrid' },
+            { title: 'Preparation', href: '/smart-contracts/mpl-hybrid/preparation' },
+            { title: 'FAQ', href: '/smart-contracts/mpl-hybrid/faq' },
           ],
         },
         {
           title: 'SDK',
           links: [
-            { title: 'Javascript SDK', href: '/mpl-hybrid/sdk/javascript' },
+            { title: 'Javascript SDK', href: '/smart-contracts/mpl-hybrid/sdk/javascript' },
           ],
         },
         {
           title: 'UI Templates',
           links: [
-            { title: 'MPL-404 Hybrid UI', href: '/mpl-hybrid/guides/mpl-404-hybrid-ui-template', created: '2024-12-16' },
+            { title: 'MPL-404 Hybrid UI', href: '/smart-contracts/mpl-hybrid/guides/mpl-404-hybrid-ui-template', created: '2024-12-16' },
           ],
         },
         {
@@ -45,51 +53,51 @@ export const mplHybrid = {
           links: [
             {
               title: 'Create Escrow Configuration',
-              href: '/mpl-hybrid/create-escrow',
+              href: '/smart-contracts/mpl-hybrid/create-escrow',
             },
             {
               title: 'Fetch Escrow Configuration',
-              href: '/mpl-hybrid/fetch-escrow',
+              href: '/smart-contracts/mpl-hybrid/fetch-escrow',
             },
-            { title: 'Funding Escrow', href: '/mpl-hybrid/funding-escrow' },
+            { title: 'Funding Escrow', href: '/smart-contracts/mpl-hybrid/funding-escrow' },
             {
               title: 'Updating Escrow Configuration',
-              href: '/mpl-hybrid/update-escrow',
+              href: '/smart-contracts/mpl-hybrid/update-escrow',
             },
             {
               title: 'Swapping NFTs to Tokens',
-              href: '/mpl-hybrid/swapping-nfts-to-tokens',
+              href: '/smart-contracts/mpl-hybrid/swapping-nfts-to-tokens',
             },
             {
               title: 'Swapping Tokens to NFTs',
-              href: '/mpl-hybrid/swapping-tokens-to-nfts',
+              href: '/smart-contracts/mpl-hybrid/swapping-tokens-to-nfts',
             },
           ],
         },
       ],
     },
     {
-      ...referencesSection('mpl-hybrid'),
+      ...referencesSection('smart-contracts/mpl-hybrid'),
       href: 'https://mpl-hybrid.typedoc.metaplex.com/',
       target: '_blank',
     },
     {
-      ...guidesSection('mpl-hybrid'),
+      ...guidesSection('smart-contracts/mpl-hybrid'),
       navigation: [
         {
           title: 'General',
           links: [
             {
               title: 'Overview',
-              href: '/mpl-hybrid/guides',
+              href: '/smart-contracts/mpl-hybrid/guides',
             },
             {
               title: 'Create your first Hybrid Collection',
-              href: '/mpl-hybrid/guides/create-your-first-hybrid-collection',
+              href: '/smart-contracts/mpl-hybrid/guides/create-your-first-hybrid-collection',
             },
             {
               title: 'MPL-404 Hybrid UI Template',
-              href: '/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
+              href: '/smart-contracts/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
               created: '2024-12-16',
             },
           ],

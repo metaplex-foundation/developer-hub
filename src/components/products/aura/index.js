@@ -8,28 +8,29 @@ export const aura = {
   description:
     'A data network that extends Solana and the Solana Virtual Machine (SVM)',
   navigationMenuCatergory: 'Dev Tools',
-  path: 'aura',
+  path: 'dev-tools/aura',
   icon: <SparklesIcon />,
   github: 'https://github.com/metaplex-foundation/aura/',
   className: 'accent-pink',
   primaryCta: {
     disabled: true,
   },
-  heroes: [{ path: '/aura', component: Hero }],
+  heroes: [{ path: '/dev-tools/aura', component: Hero }],
+  deprecated: true,
   sections: [
     {
-      ...documentationSection('aura'),
+      ...documentationSection('dev-tools/aura'),
       navigation: [
         {
           title: 'Introduction',
           links: [
             {
               title: 'Overview',
-              href: '/aura',
+              href: '/dev-tools/aura',
             },
             {
               title: 'FAQ',
-              href: '/aura/faq',
+              href: '/dev-tools/aura/faq',
             },
           ],
         },
@@ -38,7 +39,7 @@ export const aura = {
           links: [
             {
               title: 'Reading Solana and SVM Data',
-              href: '/aura/reading-solana-and-svm-data',
+              href: '/dev-tools/aura/reading-solana-and-svm-data',
             },
           ],
         }

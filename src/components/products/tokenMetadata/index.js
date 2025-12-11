@@ -10,28 +10,36 @@ export const tokenMetadata = {
   name: 'Token Metadata',
   headline: 'Digital ownership standard',
   description: 'Create tokens and NFTs with the SPL Token Program',
-  navigationMenuCatergory: 'MPL',
-  path: 'token-metadata',
+  navigationMenuCatergory: 'Smart Contracts',
+  path: 'smart-contracts/token-metadata',
   icon: <EllipsisHorizontalCircleIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',
   className: 'accent-green',
-  heroes: [{ path: '/token-metadata', component: Hero }],
+  heroes: [{ path: '/smart-contracts/token-metadata', component: Hero }],
+  protocolFees: {
+    create: {
+      solana: '0.01 SOL',
+      eclipse: '0.000103088 ETH',
+      payer: 'Collector',
+      notes: 'Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs). Includes all instructions that "create" an NFT including ones that create print editions.',
+    },
+  },
   sections: [
     {
-      ...documentationSection('token-metadata'),
+      ...documentationSection('smart-contracts/token-metadata'),
       navigation: [
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/token-metadata' },
+            { title: 'Overview', href: '/smart-contracts/token-metadata' },
             {
               title: 'Getting Started',
-              href: '/token-metadata/getting-started',
+              href: '/smart-contracts/token-metadata/getting-started',
             },
-            { title: 'FAQ', href: '/token-metadata/faq' },
+            { title: 'FAQ', href: '/smart-contracts/token-metadata/faq' },
             {
               title: 'Account Size Reduction',
-              href: '/token-metadata/guides/account-size-reduction',
+              href: '/smart-contracts/token-metadata/guides/account-size-reduction',
             },
           ],
         },
@@ -40,45 +48,45 @@ export const tokenMetadata = {
           links: [
             {
               title: 'Token Standards (Assets)',
-              href: '/token-metadata/token-standard',
+              href: '/smart-contracts/token-metadata/token-standard',
             },
-            { title: 'Minting Assets', href: '/token-metadata/mint' },
-            { title: 'Fetching Assets', href: '/token-metadata/fetch' },
-            { title: 'Updating Assets', href: '/token-metadata/update' },
-            { title: 'Transferring Assets', href: '/token-metadata/transfer' },
-            { title: 'Burning Assets', href: '/token-metadata/burn' },
-            { title: 'Printed Editions', href: '/token-metadata/print' }, // Include "Definitions" content.
+            { title: 'Minting Assets', href: '/smart-contracts/token-metadata/mint' },
+            { title: 'Fetching Assets', href: '/smart-contracts/token-metadata/fetch' },
+            { title: 'Updating Assets', href: '/smart-contracts/token-metadata/update' },
+            { title: 'Transferring Assets', href: '/smart-contracts/token-metadata/transfer' },
+            { title: 'Burning Assets', href: '/smart-contracts/token-metadata/burn' },
+            { title: 'Printed Editions', href: '/smart-contracts/token-metadata/print' }, // Include "Definitions" content.
             {
               title: 'Verified Collections',
-              href: '/token-metadata/collections',
+              href: '/smart-contracts/token-metadata/collections',
             },
-            { title: 'Verified Creators', href: '/token-metadata/creators' },
+            { title: 'Verified Creators', href: '/smart-contracts/token-metadata/creators' },
             {
               title: 'Delegated Authorities',
-              href: '/token-metadata/delegates',
+              href: '/smart-contracts/token-metadata/delegates',
             }, // Delegate + Revoke + Delegated transfer and burn.
-            { title: 'Locking Assets', href: '/token-metadata/lock' },
-            { title: 'Programmable NFTs (pNFTs)', href: '/token-metadata/pnfts' },
-            { title: 'NFT Escrow', href: '/token-metadata/escrow' },
-            { title: 'SPL Token-2022', href: '/token-metadata/token-2022' },
+            { title: 'Locking Assets', href: '/smart-contracts/token-metadata/lock' },
+            { title: 'Programmable NFTs (pNFTs)', href: '/smart-contracts/token-metadata/pnfts' },
+            { title: 'NFT Escrow', href: '/smart-contracts/token-metadata/escrow' },
+            { title: 'SPL Token-2022', href: '/smart-contracts/token-metadata/token-2022' },
           ],
         },
       ],
     },
     {
-      ...guidesSection('token-metadata'),
+      ...guidesSection('smart-contracts/token-metadata'),
       navigation: [
         {
           title: 'Guides',
           links: [
-            { title: 'Overview', href: '/token-metadata/guides' },
+            { title: 'Overview', href: '/smart-contracts/token-metadata/guides' },
             {
               title: 'Get Mints by Collection',
-              href: '/token-metadata/guides/get-by-collection',
+              href: '/smart-contracts/token-metadata/guides/get-by-collection',
             },
             {
               title: 'Account Size Reduction',
-              href: '/token-metadata/guides/account-size-reduction',
+              href: '/smart-contracts/token-metadata/guides/account-size-reduction',
             },
             {
               title: 'Create a claim based airdrop using Gumdrop',
@@ -86,7 +94,7 @@ export const tokenMetadata = {
             },
             {
               title: 'Token Claimer (Airdrop) Smart Contract',
-              href: '/token-metadata/guides/anchor/token-claimer-smart-contract',
+              href: '/smart-contracts/token-metadata/guides/anchor/token-claimer-smart-contract',
             },
           ],
         },
@@ -95,14 +103,14 @@ export const tokenMetadata = {
           links: [
             {
               title: 'Create an NFT',
-              href: '/token-metadata/guides/javascript/create-an-nft',
+              href: '/smart-contracts/token-metadata/guides/javascript/create-an-nft',
             },
           ],
         },
       ],
     },
     {
-      ...referencesSection('token-metadata'),
+      ...referencesSection('smart-contracts/token-metadata'),
       href: `https://mpl-token-metadata-js-docs.vercel.app/`,
       target: '_blank',
     },

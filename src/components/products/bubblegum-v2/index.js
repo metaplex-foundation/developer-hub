@@ -11,29 +11,43 @@ export const bubblegumv2 = {
   name: 'Bubblegum v2',
   headline: 'Improved Compressed NFTs',
   description: 'NFTs that scale to new orders of magnitude.',
-  path: 'bubblegum-v2',
-  navigationMenuCatergory: 'MPL',
+  path: 'smart-contracts/bubblegum-v2',
+  navigationMenuCatergory: 'Smart Contracts',
   icon: <FolderIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',
-  heroes: [{ path: '/bubblegum-v2', component: Hero }],
+  heroes: [{ path: '/smart-contracts/bubblegum-v2', component: Hero }],
+  protocolFees: {
+    create: {
+      solana: '0.00009 SOL',
+      eclipse: '0.0000009 ETH',
+      payer: 'Minter',
+      notes: 'Paid by the minter.',
+    },
+    transfer: {
+      solana: '0.000006 SOL',
+      eclipse: '0.00000006 ETH',
+      payer: 'Collector',
+      notes: 'Paid by the owner.',
+    },
+  },
   sections: [
     {
-      ...documentationSection('bubblegum'),
+      ...documentationSection('smart-contracts/bubblegum-v2'),
       navigation: [
         {
           title: 'Introduction',
           links: [
-            { title: 'Overview', href: '/bubblegum-v2' },
+            { title: 'Overview', href: '/smart-contracts/bubblegum-v2' },
             { title: 'Metaplex DAS API RPCs', href: '/rpc-providers' },
-            { title: 'FAQ', href: '/bubblegum-v2/faq' },
+            { title: 'FAQ', href: '/smart-contracts/bubblegum-v2/faq' },
           ],
         },
         {
           title: 'SDK',
           links: [
-            { title: 'Javascript', href: '/bubblegum-v2/sdk/javascript' },
-            { title: 'Rust', href: '/bubblegum-v2/sdk/rust' },
+            { title: 'Javascript', href: '/smart-contracts/bubblegum-v2/sdk/javascript' },
+            { title: 'Rust', href: '/smart-contracts/bubblegum-v2/sdk/rust' },
           ],
         },
         {
@@ -41,24 +55,24 @@ export const bubblegumv2 = {
           links: [
             {
               title: 'Creating Bubblegum Trees',
-              href: '/bubblegum-v2/create-trees',
+              href: '/smart-contracts/bubblegum-v2/create-trees',
             },
             {
               title: 'Minting Compressed NFTs (cNFTs)',
-              href: '/bubblegum-v2/mint-cnfts',
+              href: '/smart-contracts/bubblegum-v2/mint-cnfts',
             },
-            { title: 'Fetching cNFTs', href: '/bubblegum-v2/fetch-cnfts' },
-            { title: 'Transferring cNFTs', href: '/bubblegum-v2/transfer-cnfts' },
-            { title: 'Freeze and Thaw cNFTs', href: '/bubblegum-v2/freeze-cnfts' },
-            { title: 'Updating cNFTs', href: '/bubblegum-v2/update-cnfts' },
-            { title: 'Burning cNFTs', href: '/bubblegum-v2/burn-cnfts' },
-            { title: 'Delegating cNFTs', href: '/bubblegum-v2/delegate-cnfts' },
-            { title: 'Delegating Trees', href: '/bubblegum-v2/delegate-trees' },
+            { title: 'Fetching cNFTs', href: '/smart-contracts/bubblegum-v2/fetch-cnfts' },
+            { title: 'Transferring cNFTs', href: '/smart-contracts/bubblegum-v2/transfer-cnfts' },
+            { title: 'Freeze and Thaw cNFTs', href: '/smart-contracts/bubblegum-v2/freeze-cnfts' },
+            { title: 'Updating cNFTs', href: '/smart-contracts/bubblegum-v2/update-cnfts' },
+            { title: 'Burning cNFTs', href: '/smart-contracts/bubblegum-v2/burn-cnfts' },
+            { title: 'Delegating cNFTs', href: '/smart-contracts/bubblegum-v2/delegate-cnfts' },
+            { title: 'Delegating Trees', href: '/smart-contracts/bubblegum-v2/delegate-trees' },
             {
               title: 'Collections',
-              href: '/bubblegum-v2/collections',
+              href: '/smart-contracts/bubblegum-v2/collections',
             },
-            { title: 'Verifying Creators', href: '/bubblegum-v2/verify-creators' },
+            { title: 'Verifying Creators', href: '/smart-contracts/bubblegum-v2/verify-creators' },
           ],
         },
         {
@@ -66,16 +80,16 @@ export const bubblegumv2 = {
           links: [
             {
               title: 'Concurrent Merkle Trees',
-              href: '/bubblegum-v2/concurrent-merkle-trees',
+              href: '/smart-contracts/bubblegum-v2/concurrent-merkle-trees',
             },
             {
               title: 'Storing and Indexing NFT Data',
-              href: '/bubblegum-v2/stored-nft-data',
+              href: '/smart-contracts/bubblegum-v2/stored-nft-data',
             },
-            { title: 'Hashing NFT Data', href: '/bubblegum-v2/hashed-nft-data' },
+            { title: 'Hashing NFT Data', href: '/smart-contracts/bubblegum-v2/hashed-nft-data' },
             {
               title: 'Merkle Tree Canopy',
-              href: '/bubblegum-v2/merkle-tree-canopy',
+              href: '/smart-contracts/bubblegum-v2/merkle-tree-canopy',
             },
           ],
         },
@@ -86,7 +100,7 @@ export const bubblegumv2 = {
     //   navigation: [],
     // },
     {
-      ...referencesSection('bubblegum-v2'),
+      ...referencesSection('smart-contracts/bubblegum-v2'),
       href: 'https://mpl-bubblegum.typedoc.metaplex.com/',
       target: '_blank'
     },
