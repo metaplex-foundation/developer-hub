@@ -14,6 +14,7 @@ Metaplex SDK를 사용하여 Solana에서 대체 가능 토큰(SPL 토큰)을 �
 
 이 섹션에서는 일반적인 토큰 작업에 대한 초보자 친화적인 가이드를 제공합니다:
 
+- **[토큰 출시하기](/tokens/launch-token)** - 커스텀 메타데이터로 새 대체 가능 토큰 생성
 - **[토큰 생성하기](/tokens/create-a-token)** - 커스텀 메타데이터로 새 대체 가능 토큰 생성
 - **[토큰 데이터 읽기](/tokens/read-token)** - 블록체인 또는 DAS API에서 토큰 정보 조회
 - **[토큰 발행하기](/tokens/mint-tokens)** - 추가 토큰을 발행하여 공급량 증가

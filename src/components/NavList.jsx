@@ -46,7 +46,15 @@ const transferATokenMenuItem = {
   href: '/tokens/transfer-a-token',
 }
 
-export const tokenMenuCategory = [createATokenMenuItem, mintTokensMenuItem, transferATokenMenuItem, updateATokenMenuItem, burnATokenMenuItem]
+const launchTokenMenuItem = {
+  name: 'Launch Token',
+  headline: 'Launch a token with Metaplex Genesis.',
+  description: 'Launch a token using Genesis Launch Pools, where users deposit SOL during a window and receive tokens proportional to their share of total deposits.',
+  navigationMenuCatergory: 'Tokens',
+  href: '/tokens/launch-token',
+}
+
+export const tokenMenuCategory = [launchTokenMenuItem, createATokenMenuItem, mintTokensMenuItem, transferATokenMenuItem, updateATokenMenuItem, burnATokenMenuItem]
 
 export const nftMenuCategory = [
   {

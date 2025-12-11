@@ -1,31 +1,31 @@
 ---
-title: Launch a Token
-metaTitle: Launch a Token | Tokens
-description: End-to-end guide for launching a token with Genesis Launch Pools on Solana.
+title: 토큰 출시하기
+metaTitle: 토큰 출시하기 | 토큰
+description: Solana에서 Genesis Launch Pools를 사용하여 토큰을 출시하는 전체 가이드입니다.
 ---
 
-Launch a token using [Genesis](/smart-contracts/genesis) Launch Pools, where users deposit SOL during a window and receive tokens proportional to their share of total deposits. {% .lead %}
+[Genesis](/smart-contracts/genesis) Launch Pools를 사용하여 토큰을 출시합니다. 사용자는 설정한 기간 동안 SOL을 예치하고, 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다. {% .lead %}
 
-## Overview
+## 개요
 
-A Launch Pool token launch has three phases:
+Launch Pool 토큰 출시에는 세 가지 단계가 있습니다:
 
-1. **Setup** (you run once) - Create the token, configure the launch, and activate it
-2. **Deposit Period** (users interact) - Users deposit SOL during the window you configured
-3. **Post-Launch** (you + users) - Execute the transition, users claim tokens, you revoke authorities
+1. **설정** (한 번 실행) - 토큰을 생성하고, 출시를 구성하고, 활성화합니다
+2. **예치 기간** (사용자 참여) - 설정한 기간 동안 사용자가 SOL을 예치합니다
+3. **출시 후** (당신 + 사용자) - 전환을 실행하고, 사용자가 토큰을 청구하고, 권한을 철회합니다
 
-This guide walks you through creating **four separate scripts** that you'll run at different stages:
+이 가이드에서는 서로 다른 단계에서 실행할 **4개의 별도 스크립트**를 만드는 방법을 안내합니다:
 
-| Script | When to Run | Purpose |
+| 스크립트 | 실행 시점 | 목적 |
 |--------|-------------|---------|
-| `launch.ts` | Once, to start | Creates your token and activates the launch |
-| `transition.ts` | After deposits close | Moves collected SOL to your unlocked bucket |
-| `claim.ts` | After transition | Users run this to claim their tokens |
-| `revoke.ts` | When launch is complete | Permanently removes mint/freeze authorities |
+| `launch.ts` | 한 번, 시작 시 | 토큰을 생성하고 출시를 활성화 |
+| `transition.ts` | 예치 종료 후 | 수집된 SOL을 잠금 해제 버킷으로 이동 |
+| `claim.ts` | 전환 후 | 사용자가 토큰을 청구하기 위해 실행 |
+| `revoke.ts` | 출시 완료 시 | 민트/동결 권한을 영구적으로 제거 |
 
-## Prerequisites
+## 사전 요구 사항
 
-Create a new project and install dependencies:
+새 프로젝트를 만들고 종속성을 설치합니다:
 
 ```bash
 mkdir my-token-launch
@@ -34,15 +34,15 @@ npm init -y
 npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox
 ```
 
-## The Complete Launch Script
+## 전체 출시 스크립트
 
-Below is a complete, runnable script. Each section is commented to explain what it does. You'll run this script **once** to set up your launch.
+아래는 완전하고 실행 가능한 스크립트입니다. 각 섹션에는 설명하는 주석이 있습니다. 이 스크립트를 **한 번** 실행하여 출시를 설정합니다.
 
-{% callout type="warning" title="Keypair Required" %}
-You need a Solana keypair file on your machine to sign transactions. This is typically your Solana CLI wallet located at `~/.config/solana/id.json`. Update the `walletFile` path in the script to point to your keypair file. Make sure this wallet has SOL for transaction fees.
+{% callout type="warning" title="키페어 필요" %}
+트랜잭션에 서명하려면 머신에 Solana 키페어 파일이 필요합니다. 이것은 일반적으로 `~/.config/solana/id.json`에 있는 Solana CLI 지갑입니다. 스크립트의 `walletFile` 경로를 키페어 파일을 가리키도록 업데이트하세요. 이 지갑에 트랜잭션 수수료를 위한 SOL이 있는지 확인하세요.
 {% /callout %}
 
-Create a file called `launch.ts`:
+`launch.ts`라는 파일을 만듭니다:
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -60,35 +60,35 @@ import { generateSigner, publicKey, keypairIdentity } from '@metaplex-foundation
 
 async function main() {
   // ============================================
-  // SETUP: Configure your connection and wallet
+  // 설정: 연결 및 지갑 구성
   // ============================================
 
   const umi = createUmi('https://api.devnet.solana.com')
     .use(mplGenesis());
 
-  // Load your wallet keypair from a file on your machine
-  // This is typically your Solana CLI wallet at ~/.config/solana/id.json
-  // Or use any keypair file you have access to
-  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
+  // 머신의 파일에서 지갑 키페어 로드
+  // 이것은 일반적으로 ~/.config/solana/id.json에 있는 Solana CLI 지갑입니다
+  // 또는 액세스할 수 있는 모든 키페어 파일 사용
+  const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트
   const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
   // ============================================
-  // CONFIGURATION: Customize these values
+  // 구성: 이 값들을 커스터마이즈
   // ============================================
 
-  // Token details
+  // 토큰 세부 정보
   const TOKEN_NAME = 'My Token';
   const TOKEN_SYMBOL = 'MTK';
-  const TOKEN_URI = 'https://example.com/metadata.json'; // Your metadata JSON URL
-  const TOTAL_SUPPLY = 1_000_000_000_000n; // 1 trillion tokens (adjust as needed)
+  const TOKEN_URI = 'https://example.com/metadata.json'; // 메타데이터 JSON URL
+  const TOTAL_SUPPLY = 1_000_000_000_000n; // 1조 토큰 (필요에 따라 조정)
 
-  // Timing (in seconds from now)
-  const DEPOSIT_DURATION = 24 * 60 * 60; // 24 hours
-  const CLAIM_DURATION = 7 * 24 * 60 * 60; // 7 days
+  // 타이밍 (현재부터 초 단위)
+  const DEPOSIT_DURATION = 24 * 60 * 60; // 24시간
+  const CLAIM_DURATION = 7 * 24 * 60 * 60; // 7일
 
-  // Calculate timestamps
+  // 타임스탬프 계산
   const now = BigInt(Math.floor(Date.now() / 1000));
   const depositStart = now;
   const depositEnd = now + BigInt(DEPOSIT_DURATION);
@@ -96,9 +96,9 @@ async function main() {
   const claimEnd = claimStart + BigInt(CLAIM_DURATION);
 
   // ============================================
-  // STEP 1: Create your token
+  // 1단계: 토큰 생성
   // ============================================
-  console.log('Step 1: Creating token...');
+  console.log('1단계: 토큰 생성 중...');
 
   const baseMint = generateSigner(umi);
 
@@ -116,15 +116,15 @@ async function main() {
     symbol: TOKEN_SYMBOL,
   }).sendAndConfirm(umi);
 
-  console.log('✓ Token created!');
-  console.log('  Token mint:', baseMint.publicKey);
-  console.log('  Genesis account:', genesisAccount);
+  console.log('✓ 토큰 생성 완료!');
+  console.log('  토큰 민트:', baseMint.publicKey);
+  console.log('  Genesis 계정:', genesisAccount);
 
   // ============================================
-  // STEP 2: Add Launch Pool bucket
-  // This is where users will deposit SOL
+  // 2단계: Launch Pool 버킷 추가
+  // 사용자가 SOL을 예치하는 곳
   // ============================================
-  console.log('\nStep 2: Adding Launch Pool bucket...');
+  console.log('\n2단계: Launch Pool 버킷 추가 중...');
 
   const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, {
     genesisAccount,
@@ -181,20 +181,20 @@ async function main() {
         __kind: 'SendQuoteTokenPercentage',
         padding: Array(4).fill(0),
         destinationBucket: publicKey(unlockedBucket),
-        percentageBps: 10000, // 100% of collected SOL goes to unlocked bucket
+        percentageBps: 10000, // 수집된 SOL의 100%가 잠금 해제 버킷으로
         processed: false,
       },
     ],
   }).sendAndConfirm(umi);
 
-  console.log('✓ Launch Pool bucket added!');
-  console.log('  Bucket address:', launchPoolBucket);
+  console.log('✓ Launch Pool 버킷 추가 완료!');
+  console.log('  버킷 주소:', launchPoolBucket);
 
   // ============================================
-  // STEP 3: Add Unlocked bucket
-  // This receives the collected SOL for your team
+  // 3단계: 잠금 해제 버킷 추가
+  // 수집된 SOL이 팀에게 전송되는 곳
   // ============================================
-  console.log('\nStep 3: Adding Unlocked bucket...');
+  console.log('\n3단계: 잠금 해제 버킷 추가 중...');
 
   const backendSigner = generateSigner(umi);
 
@@ -218,65 +218,65 @@ async function main() {
     backendSigner: { signer: backendSigner.publicKey },
   }).sendAndConfirm(umi);
 
-  console.log('✓ Unlocked bucket added!');
-  console.log('  Bucket address:', unlockedBucket);
+  console.log('✓ 잠금 해제 버킷 추가 완료!');
+  console.log('  버킷 주소:', unlockedBucket);
 
   // ============================================
-  // STEP 4: Finalize - activates the launch
-  // After this, no more changes can be made
+  // 4단계: 마무리 - 출시 활성화
+  // 이후에는 더 이상 변경할 수 없음
   // ============================================
-  console.log('\nStep 4: Finalizing...');
+  console.log('\n4단계: 마무리 중...');
 
   await finalizeV2(umi, {
     baseMint: baseMint.publicKey,
     genesisAccount,
   }).sendAndConfirm(umi);
 
-  console.log('✓ Launch is now ACTIVE!');
+  console.log('✓ 출시가 활성화되었습니다!');
 
   // ============================================
-  // SUMMARY: Save these addresses!
+  // 요약: 이 주소들을 저장하세요!
   // ============================================
   console.log('\n========================================');
-  console.log('LAUNCH COMPLETE - SAVE THESE ADDRESSES:');
+  console.log('출시 완료 - 이 주소들을 저장하세요:');
   console.log('========================================');
-  console.log('Token mint:', baseMint.publicKey);
-  console.log('Genesis account:', genesisAccount);
-  console.log('Launch Pool bucket:', launchPoolBucket);
-  console.log('Unlocked bucket:', unlockedBucket);
+  console.log('토큰 민트:', baseMint.publicKey);
+  console.log('Genesis 계정:', genesisAccount);
+  console.log('Launch Pool 버킷:', launchPoolBucket);
+  console.log('잠금 해제 버킷:', unlockedBucket);
   console.log('');
-  console.log('TIMING:');
-  console.log('Deposits open:', new Date(Number(depositStart) * 1000).toISOString());
-  console.log('Deposits close:', new Date(Number(depositEnd) * 1000).toISOString());
-  console.log('Claims open:', new Date(Number(claimStart) * 1000).toISOString());
-  console.log('Claims close:', new Date(Number(claimEnd) * 1000).toISOString());
+  console.log('타이밍:');
+  console.log('예치 시작:', new Date(Number(depositStart) * 1000).toISOString());
+  console.log('예치 종료:', new Date(Number(depositEnd) * 1000).toISOString());
+  console.log('청구 시작:', new Date(Number(claimStart) * 1000).toISOString());
+  console.log('청구 종료:', new Date(Number(claimEnd) * 1000).toISOString());
 }
 
 main().catch(console.error);
 ```
 
-Run the script:
+스크립트 실행:
 
 ```bash
 npx ts-node launch.ts
 ```
 
-**Save the addresses that are printed!** You'll need them for the next steps.
+**출력된 주소를 저장하세요!** 다음 단계에서 필요합니다.
 
-## What Happens Next
+## 다음에 일어나는 일
 
-After running the launch script, your launch is live. Here's what happens during each phase:
+출시 스크립트를 실행하면 출시가 라이브됩니다. 각 단계에서 일어나는 일은 다음과 같습니다:
 
-### During the Deposit Period
+### 예치 기간 동안
 
-Users deposit SOL using your frontend or directly via the SDK. Each deposit:
-- Has a 2% fee applied
-- Is tracked in a deposit PDA
-- Can be partially or fully withdrawn (with 2% fee)
+사용자는 프론트엔드 또는 SDK를 직접 사용하여 SOL을 예치합니다. 각 예치:
+- 2% 수수료가 적용됩니다
+- 예치 PDA에서 추적됩니다
+- 부분적으로 또는 전체적으로 출금 가능 (2% 수수료 포함)
 
-### After Deposits Close
+### 예치 종료 후
 
-Once the deposit period ends, you need to run the **transition** to move the collected SOL to the unlocked bucket. Create a file called `transition.ts`:
+예치 기간이 끝나면 수집된 SOL을 잠금 해제 버킷으로 이동하기 위해 **전환**을 실행해야 합니다. `transition.ts`라는 파일을 만듭니다:
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -292,13 +292,13 @@ async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
     .use(mplGenesis());
 
-  // Load your wallet keypair (same wallet used for launch)
-  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
+  // 지갑 키페어 로드 (출시에 사용한 것과 동일한 지갑)
+  const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트
   const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // Fill in the addresses printed by your launch script
+  // 출시 스크립트에서 출력된 주소를 입력
   const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
   const launchPoolBucket = publicKey('YOUR_LAUNCH_POOL_BUCKET');
@@ -309,7 +309,7 @@ async function main() {
     mint: WRAPPED_SOL_MINT,
   });
 
-  console.log('Executing transition...');
+  console.log('전환 실행 중...');
 
   await transitionV2(umi, {
     genesisAccount,
@@ -330,27 +330,27 @@ async function main() {
     ])
     .sendAndConfirm(umi);
 
-  console.log('✓ Transition complete! SOL moved to unlocked bucket.');
+  console.log('✓ 전환 완료! SOL이 잠금 해제 버킷으로 이동했습니다.');
 }
 
 main().catch(console.error);
 ```
 
-Run after the deposit period ends:
+예치 기간 종료 후 실행:
 
 ```bash
 npx ts-node transition.ts
 ```
 
-### Users Claim Tokens
+### 사용자가 토큰 청구
 
-After the transition, users can claim their tokens. Each user receives tokens proportional to their share of total deposits:
+전환 후 사용자는 토큰을 청구할 수 있습니다. 각 사용자는 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다:
 
 ```
 userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 ```
 
-Users can claim via your frontend or using this script (create `claim.ts`):
+사용자는 프론트엔드 또는 이 스크립트를 사용하여 청구할 수 있습니다 (`claim.ts` 생성):
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -364,18 +364,18 @@ async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
     .use(mplGenesis());
 
-  // Load the user's wallet keypair (whoever deposited SOL)
-  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
+  // 사용자의 지갑 키페어 로드 (SOL을 예치한 사람)
+  const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트
   const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // Fill in the addresses from the launch
+  // 출시에서 가져온 주소 입력
   const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
   const launchPoolBucket = publicKey('YOUR_LAUNCH_POOL_BUCKET');
 
-  console.log('Claiming tokens...');
+  console.log('토큰 청구 중...');
 
   await claimLaunchPoolV2(umi, {
     genesisAccount,
@@ -384,21 +384,21 @@ async function main() {
     recipient: umi.identity.publicKey,
   }).sendAndConfirm(umi);
 
-  console.log('✓ Tokens claimed!');
+  console.log('✓ 토큰 청구 완료!');
 }
 
 main().catch(console.error);
 ```
 
-### Finalize: Revoke Authorities
+### 마무리: 권한 철회
 
-After the launch is complete, revoke mint and freeze authorities. This signals to holders that no additional tokens can ever be minted.
+출시가 완료되면 민트 및 동결 권한을 철회합니다. 이는 보유자에게 추가 토큰을 발행할 수 없음을 알립니다.
 
 {% callout type="warning" %}
-**This is irreversible.** Once revoked, you can never mint additional tokens or freeze accounts. Only do this when you're certain the launch is complete.
+**이것은 되돌릴 수 없습니다.** 한 번 철회하면 추가 토큰을 발행하거나 계정을 동결할 수 없습니다. 출시가 완료되었다고 확신할 때만 이 작업을 수행하세요.
 {% /callout %}
 
-Create `revoke.ts`:
+`revoke.ts` 생성:
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -413,35 +413,35 @@ async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
     .use(mplGenesis());
 
-  // Load your wallet keypair (same wallet used for launch)
-  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
+  // 지갑 키페어 로드 (출시에 사용한 것과 동일한 지갑)
+  const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트
   const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // Fill in your token mint address from the launch
+  // 출시에서 가져온 토큰 민트 주소 입력
   const baseMint = publicKey('YOUR_TOKEN_MINT');
 
-  console.log('Revoking mint authority...');
+  console.log('민트 권한 철회 중...');
   await revokeMintAuthorityV2(umi, {
     baseMint,
   }).sendAndConfirm(umi);
-  console.log('✓ Mint authority revoked');
+  console.log('✓ 민트 권한 철회 완료');
 
-  console.log('Revoking freeze authority...');
+  console.log('동결 권한 철회 중...');
   await revokeFreezeAuthorityV2(umi, {
     baseMint,
   }).sendAndConfirm(umi);
-  console.log('✓ Freeze authority revoked');
+  console.log('✓ 동결 권한 철회 완료');
 
-  console.log('\n✓ Launch complete! Token is fully decentralized.');
+  console.log('\n✓ 출시 완료! 토큰이 완전히 탈중앙화되었습니다.');
 }
 
 main().catch(console.error);
 ```
 
-## Next Steps
+## 다음 단계
 
-- [Genesis Overview](/smart-contracts/genesis) - Learn more about Genesis concepts
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Detailed Launch Pool documentation
-- [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API
+- [Genesis 개요](/smart-contracts/genesis) - Genesis 개념에 대해 더 알아보기
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - 상세한 Launch Pool 문서
+- [Aggregation API](/smart-contracts/genesis/aggregation) - API를 통해 출시 데이터 쿼리
