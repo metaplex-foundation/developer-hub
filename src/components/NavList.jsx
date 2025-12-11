@@ -13,6 +13,10 @@ const createATokenMenuItem = {
   description: 'Create a fungible token with metadata on Solana.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/create-a-token',
+  localizedNavigation: {
+    ja: { name: 'トークンを作成', headline: 'Metaplex SDKを使用してオンチェーンでトークンデータを作成します。' },
+    ko: { name: '토큰 생성', headline: 'Metaplex SDK를 사용하여 온체인에서 토큰 데이터를 생성합니다.' },
+  },
 }
 
 const mintTokensMenuItem = {
@@ -21,6 +25,10 @@ const mintTokensMenuItem = {
   description: 'Mint additional fungible tokens to a wallet.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/mint-tokens',
+  localizedNavigation: {
+    ja: { name: 'トークンを発行', headline: 'Metaplex SDKを使用して追加のトークンを発行します。' },
+    ko: { name: '토큰 발행', headline: 'Metaplex SDK를 사용하여 추가 토큰을 발행합니다.' },
+  },
 }
 
 const updateATokenMenuItem = {
@@ -29,6 +37,10 @@ const updateATokenMenuItem = {
   description: 'Update the metadata of a fungible token.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/update-token',
+  localizedNavigation: {
+    ja: { name: 'トークンを更新', headline: 'Metaplex SDKを使用してトークンメタデータを更新します。' },
+    ko: { name: '토큰 업데이트', headline: 'Metaplex SDK를 사용하여 토큰 메타데이터를 업데이트합니다.' },
+  },
 }
 
 const burnATokenMenuItem = {
@@ -37,6 +49,10 @@ const burnATokenMenuItem = {
   description: 'Burn fungible tokens to remove them from circulation.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/burn-tokens',
+  localizedNavigation: {
+    ja: { name: 'トークンをバーン', headline: 'Metaplex SDKを使用してトークンをバーンします。' },
+    ko: { name: '토큰 소각', headline: 'Metaplex SDK를 사용하여 토큰을 소각합니다.' },
+  },
 }
 
 const transferATokenMenuItem = {
@@ -45,6 +61,10 @@ const transferATokenMenuItem = {
   description: 'Transfer fungible tokens between wallets.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/transfer-a-token',
+  localizedNavigation: {
+    ja: { name: 'トークンを転送', headline: 'Metaplex SDKを使用してトークンを転送します。' },
+    ko: { name: '토큰 전송', headline: 'Metaplex SDK를 사용하여 토큰을 전송합니다.' },
+  },
 }
 
 const launchTokenMenuItem = {
@@ -53,6 +73,10 @@ const launchTokenMenuItem = {
   description: 'Launch a token using Genesis Launch Pools, where users deposit SOL during a window and receive tokens proportional to their share of total deposits.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/launch-token',
+  localizedNavigation: {
+    ja: { name: 'トークンをローンチ', headline: 'Metaplex Genesisでトークンをローンチします。' },
+    ko: { name: '토큰 런칭', headline: 'Metaplex Genesis로 토큰을 런칭합니다.' },
+  },
 }
 
 export const tokenMenuCategory = [launchTokenMenuItem, createATokenMenuItem, mintTokensMenuItem, transferATokenMenuItem, updateATokenMenuItem, burnATokenMenuItem]
@@ -64,6 +88,10 @@ export const nftMenuCategory = [
     description: 'Create NFT data on chain using Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
     href: '/nfts/create-nft',
+    localizedNavigation: {
+      ja: { name: 'NFTを作成', headline: 'Metaplex SDKを使用してオンチェーンでNFTデータを作成します。' },
+      ko: { name: 'NFT 생성', headline: 'Metaplex SDK를 사용하여 온체인에서 NFT 데이터를 생성합니다.' },
+    },
   },
   {
     name: 'Read A NFT',
@@ -71,6 +99,10 @@ export const nftMenuCategory = [
     description: 'Read NFT data on chain using DAS and Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
     href: '/nfts/fetch-nft',
+    localizedNavigation: {
+      ja: { name: 'NFTを読み取る', headline: 'DASとMetaplex SDKを使用してオンチェーンのNFTデータを読み取ります。' },
+      ko: { name: 'NFT 조회', headline: 'DAS와 Metaplex SDK를 사용하여 온체인 NFT 데이터를 조회합니다.' },
+    },
   },
   {
     name: 'Update A NFT',
@@ -78,6 +110,10 @@ export const nftMenuCategory = [
     description: 'Update NFT data on chain using DAS and Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
     href: '/nfts/update-nft',
+    localizedNavigation: {
+      ja: { name: 'NFTを更新', headline: 'DASとMetaplex SDKを使用してオンチェーンのNFTデータを更新します。' },
+      ko: { name: 'NFT 업데이트', headline: 'DAS와 Metaplex SDK를 사용하여 온체인 NFT 데이터를 업데이트합니다.' },
+    },
   },
   {
     name: 'Burn A NFT',
@@ -85,6 +121,10 @@ export const nftMenuCategory = [
     description: 'Burn NFT data on chain using DAS and Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
     href: '/nfts/transfer-nft',
+    localizedNavigation: {
+      ja: { name: 'NFTをバーン', headline: 'DASとMetaplex SDKを使用してオンチェーンのNFTデータをバーンします。' },
+      ko: { name: 'NFT 소각', headline: 'DAS와 Metaplex SDK를 사용하여 온체인 NFT 데이터를 소각합니다.' },
+    },
   },
   {
     name: 'Transfer A NFT',
@@ -92,6 +132,10 @@ export const nftMenuCategory = [
     description: 'Transfer NFT data on chain using Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
     href: '/nfts/burn-nft',
+    localizedNavigation: {
+      ja: { name: 'NFTを転送', headline: 'Metaplex SDKを使用してオンチェーンのNFTデータを転送します。' },
+      ko: { name: 'NFT 전송', headline: 'Metaplex SDK를 사용하여 온체인 NFT 데이터를 전송합니다.' },
+    },
   },
 ]
 
@@ -112,7 +156,7 @@ const NavList = () => {
   }
 
   return (
-    <div className="hidden cursor-pointer  gap-8 lg:flex">
+    <div className="hidden cursor-pointer gap-6 lg:flex">
       {/* <div className="hidden flex-col lg:flex">
         <Link href={getLocalizedHref("/#", locale)}>
           <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
@@ -141,7 +185,7 @@ const NavList = () => {
           return (
             <div className="hidden flex-col lg:flex" key={index}>
               <Link href={getLocalizedHref(path, locale)}>
-                <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
+                <div className="-mx-3 -my-2 whitespace-nowrap rounded-lg px-3 py-2 text-black dark:text-white">
                   {getTranslatedCategory(item)}
                 </div>
               </Link>
@@ -153,7 +197,7 @@ const NavList = () => {
         return (
           <div className="hidden flex-col lg:flex" key={index}>
             <SwitcherPopover menuItem={productCategories[index]}>
-              <Popover.Button className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
+              <Popover.Button className="-mx-3 -my-2 whitespace-nowrap rounded-lg px-3 py-2 text-black dark:text-white">
                 {getTranslatedCategory(item)}
               </Popover.Button>
             </SwitcherPopover>

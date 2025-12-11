@@ -10,9 +10,12 @@ import { IconWithName } from '@/components/products/IconWithName'
 import { Sections } from '@/components/products/Sections'
 import { DiscordIcon } from '@/components/icons/SocialIcons'
 import NavList from './NavList'
+import { useLocale } from '@/contexts/LocaleContext'
+import { getLocalizedHref } from '@/config/languages'
 
 export function Header({ page }) {
   let [isScrolled, setIsScrolled] = useState(false)
+  const { locale } = useLocale()
 
   useEffect(() => {
     function onScroll() {
@@ -39,8 +42,8 @@ export function Header({ page }) {
           <MobileNavigation page={page} />
         </div>
         <div className="relative flex flex-grow basis-0 items-center gap-12">
-          <div className="flex flex-col">
-            <Link href={`/`}>
+          <div className="flex flex-shrink-0 flex-col">
+            <Link href={getLocalizedHref('/', locale)}>
               <img
                 src="/metaplex-logo-white.png"
                 alt="Metaplex"
