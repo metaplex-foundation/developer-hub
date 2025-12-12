@@ -197,7 +197,7 @@ export function CodeTabsWithContext({
             displayCode = parts.join('\n\n')
             // Fallback: if sections are empty but full code exists, use that
             // (needed for CLI/bash examples that don't have sectioned code)
-            if (!displayCode && tab.code) {
+            if ((!displayCode || !displayCode.trim()) && tab.code) {
               displayCode = tab.code
             }
           } else {
