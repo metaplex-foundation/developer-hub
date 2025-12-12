@@ -39,6 +39,7 @@ import {
   addLaunchPoolBucketV2,
   findLaunchPoolBucketV2Pda,
   findUnlockedBucketV2Pda,
+  NOT_TRIGGERED_TIMESTAMP,
 } from '@metaplex-foundation/genesis';
 import { publicKey } from '@metaplex-foundation/umi';
 
@@ -69,25 +70,25 @@ await addLaunchPoolBucketV2(umi, {
     __kind: 'TimeAbsolute',
     padding: Array(47).fill(0),
     time: depositStart,
-    triggeredTimestamp: 0n,
+    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
   },
   depositEndCondition: {
     __kind: 'TimeAbsolute',
     padding: Array(47).fill(0),
     time: depositEnd,
-    triggeredTimestamp: 0n,
+    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
   },
   claimStartCondition: {
     __kind: 'TimeAbsolute',
     padding: Array(47).fill(0),
     time: claimStart,
-    triggeredTimestamp: 0n,
+    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
   },
   claimEndCondition: {
     __kind: 'TimeAbsolute',
     padding: Array(47).fill(0),
     time: claimEnd,
-    triggeredTimestamp: 0n,
+    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
   },
   minimumDepositAmount: null,
   // Send 100% of collected SOL to unlocked bucket after deposits end
@@ -119,13 +120,13 @@ await addUnlockedBucketV2(umi, {
     __kind: 'TimeAbsolute',
     padding: Array(47).fill(0),
     time: claimStart,
-    triggeredTimestamp: 0n,
+    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
   },
   claimEndCondition: {
     __kind: 'TimeAbsolute',
     padding: Array(47).fill(0),
     time: claimEnd,
-    triggeredTimestamp: 0n,
+    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
   },
   backendSigner: { signer: backendSigner.publicKey },
 }).sendAndConfirm(umi);
@@ -308,7 +309,7 @@ Use `TimeAbsolute` for specific timestamps:
   __kind: 'TimeAbsolute',
   padding: Array(47).fill(0),
   time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 1 hour from now
-  triggeredTimestamp: 0n,
+  triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
 }
 ```
 

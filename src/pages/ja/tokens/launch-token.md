@@ -55,6 +55,7 @@ import {
   addLaunchPoolBucketV2,
   addUnlockedBucketV2,
   finalizeV2,
+  NOT_TRIGGERED_TIMESTAMP,
 } from '@metaplex-foundation/genesis';
 import { generateSigner, publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
@@ -144,25 +145,25 @@ async function main() {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: depositStart,
-      triggeredTimestamp: 0n,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
     },
     depositEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: depositEnd,
-      triggeredTimestamp: 0n,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
     },
     claimStartCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimStart,
-      triggeredTimestamp: 0n,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
     },
     claimEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimEnd,
-      triggeredTimestamp: 0n,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
     },
     minimumDepositAmount: null,
     endBehaviors: [
@@ -196,13 +197,13 @@ async function main() {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimStart,
-      triggeredTimestamp: 0n,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
     },
     claimEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimEnd,
-      triggeredTimestamp: 0n,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
     },
     backendSigner: { signer: backendSigner.publicKey },
   }).sendAndConfirm(umi);
