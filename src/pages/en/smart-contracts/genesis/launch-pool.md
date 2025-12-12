@@ -61,15 +61,6 @@ const depositEnd = now + 86400n; // 24 hours
 const claimStart = depositEnd + 1n;
 const claimEnd = claimStart + 604800n; // 1 week claim window
 
-// Default schedule (no penalties/bonuses)
-const defaultSchedule = {
-  slopeBps: 0n,
-  interceptBps: 0n,
-  maxBps: 0n,
-  startTime: 0n,
-  endTime: 0n,
-};
-
 await addLaunchPoolBucketV2(umi, {
   genesisAccount,
   baseMint: baseMint.publicKey,
@@ -98,9 +89,6 @@ await addLaunchPoolBucketV2(umi, {
     time: claimEnd,
     triggeredTimestamp: 0n,
   },
-  depositPenalty: defaultSchedule,
-  withdrawPenalty: defaultSchedule,
-  bonusSchedule: defaultSchedule,
   minimumDepositAmount: null,
   // Send 100% of collected SOL to unlocked bucket after deposits end
   endBehaviors: [
