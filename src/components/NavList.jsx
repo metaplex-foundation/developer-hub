@@ -120,7 +120,7 @@ export const nftMenuCategory = [
     headline: 'Burn NFT data on chain using DAS and Metaplex SDKs.',
     description: 'Burn NFT data on chain using DAS and Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
-    href: '/nfts/transfer-nft',
+    href: '/nfts/burn-nft',
     localizedNavigation: {
       ja: { name: 'NFTをバーン', headline: 'DASとMetaplex SDKを使用してオンチェーンのNFTデータをバーンします。' },
       ko: { name: 'NFT 소각', headline: 'DAS와 Metaplex SDK를 사용하여 온체인 NFT 데이터를 소각합니다.' },
@@ -131,7 +131,7 @@ export const nftMenuCategory = [
     headline: 'Transfer NFT data on chain using Metaplex SDKs.',
     description: 'Transfer NFT data on chain using Metaplex SDKs.',
     navigationMenuCatergory: 'NFTs',
-    href: '/nfts/burn-nft',
+    href: '/nfts/transfer-nft',
     localizedNavigation: {
       ja: { name: 'NFTを転送', headline: 'Metaplex SDKを使用してオンチェーンのNFTデータを転送します。' },
       ko: { name: 'NFT 전송', headline: 'Metaplex SDK를 사용하여 온체인 NFT 데이터를 전송합니다.' },
