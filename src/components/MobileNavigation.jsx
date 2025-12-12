@@ -5,16 +5,16 @@ import { useEffect, useState } from 'react'
 
 import { Navigation } from '@/components/Navigation'
 import { Sections } from '@/components/products/Sections'
+import { useLocale, useTranslations } from '@/contexts/LocaleContext'
+import { getLocalizedHref } from '@/config/languages'
 import {
   BookOpenIcon,
-  ChevronLeftIcon,
   ComputerDesktopIcon,
   DocumentTextIcon,
   HomeIcon,
   PhotoIcon,
   SparklesIcon,
 } from '@heroicons/react/20/solid'
-import { IconWithName } from './products/IconWithName'
 
 function MenuIcon(props) {
   return (
@@ -49,6 +49,8 @@ function CloseIcon(props) {
 export function MobileNavigation({ page }) {
   let router = useRouter()
   let [isOpen, setIsOpen] = useState(false)
+  const t = useTranslations('header')
+  const { locale } = useLocale()
 
   useEffect(() => {
     if (!isOpen) return
@@ -91,64 +93,75 @@ export function MobileNavigation({ page }) {
             >
               <CloseIcon className="h-6 w-6 stroke-slate-500" />
             </button>
-            <Link href="/" className="ml-6" aria-label="Home page">
-              <IconWithName product={page.product} />
+            <Link href={getLocalizedHref('/', locale)} className="ml-6" aria-label="Home page">
+              <img
+                src="/metaplex-logo-white.png"
+                alt="Metaplex"
+                className="h-4 w-auto"
+              />
             </Link>
           </div>
           <Link
-            href="/"
+            href={getLocalizedHref('/', locale)}
             className="mt-12 flex items-center gap-2 text-white"
           >
-            <HomeIcon height={20} /> Home
+            <HomeIcon height={20} /> {t('home', 'Home')}
           </Link>
           <Link
-            href="/tokens"
+            href={getLocalizedHref('/tokens', locale)}
             className="mt-4 flex items-center gap-2 text-white"
           >
-            <SparklesIcon height={20} /> Tokens
+            <SparklesIcon height={20} /> {t('tokens', 'Tokens')}
           </Link>
           <Link
-            href="/nfts"
+            href={getLocalizedHref('/nfts', locale)}
             className="mt-4 flex items-center gap-2 text-white"
           >
-            <PhotoIcon height={20} /> NFTs
+            <PhotoIcon height={20} /> {t('nfts', 'NFTs')}
           </Link>
           <Link
-            href="/smart-contracts"
+            href={getLocalizedHref('/smart-contracts', locale)}
             className="mt-4 flex items-center gap-2 text-white"
           >
-            <DocumentTextIcon height={20} /> Smart Contracts
+            <DocumentTextIcon height={20} /> {t('smartContracts', 'Smart Contracts')}
           </Link>
           <Link
-            href="/dev-tools"
+            href={getLocalizedHref('/dev-tools', locale)}
             className="mt-4 flex items-center gap-2 text-white"
           >
-            <ComputerDesktopIcon height={20} /> Dev Tools
+            <ComputerDesktopIcon height={20} /> {t('devTools', 'Dev Tools')}
           </Link>
 
           <Link
-            href="/guides"
+            href={getLocalizedHref('/guides', locale)}
             className="mt-4 flex items-center gap-2 text-white"
           >
-            <BookOpenIcon height={20} /> Guides
+            <BookOpenIcon height={20} /> {t('guides', 'Guides')}
           </Link>
 
-          <div className="mt-8 text-2xl font-bold text-white">
-            {page.product.name}
-          </div>
+          {/* Only show product-specific navigation when not on the global/home pages */}
+          {!page.product.isFallbackProduct && (
+            <>
+              <hr className="mt-8 border-neutral-700" />
+              <div className="mt-6 text-xl font-bold text-white">
+                {page.product.name}
+              </div>
 
-          {page.product.sections && page.product.sections.length > 1 && (
-            <Sections
-              className="-ml-2 mt-6 flex flex-col gap-2"
-              sections={page.product.sections}
-              activeSectionId={page.activeSection?.id}
-            />
+              {page.product.sections && page.product.sections.length > 1 && (
+                <Sections
+                  className="-ml-2 mt-4 flex flex-col gap-2"
+                  sections={page.product.sections}
+                  activeSectionId={page.activeSection?.id}
+                />
+              )}
+              <Navigation
+                product={page.product}
+                navigation={page.activeSection?.navigation ?? []}
+                className="mt-6 px-1"
+                hideProductHeader
+              />
+            </>
           )}
-          <Navigation
-            product={page.product}
-            navigation={page.activeSection?.navigation ?? []}
-            className="mt-12 px-1"
-          />
         </Dialog.Panel>
       </Dialog>
     </>

@@ -1,5 +1,6 @@
 import { Hero as BaseHero } from '@/components/Hero'
 import { HeroCode } from '@/components/HeroCode'
+import { useTranslations } from '@/contexts/LocaleContext'
 
 const codeProps = {
   tabs: [
@@ -21,11 +22,14 @@ await createFungible(umi, {
 }
 
 export function Hero({ page }) {
+  const t = useTranslations('homepage')
+
   return (
     <BaseHero
       page={page}
-      title="Developer Hub"
-      primaryCta={{ title: 'Browse our Products', href: '/programs-and-tools' }}
+      title={t('title', 'Developer Hub')}
+      description={t('description', 'One place for all Metaplex developer resources.')}
+      primaryCta={{ title: t('browseProducts', 'Browse our Products'), href: '/programs-and-tools' }}
     >
       <HeroCode {...codeProps} />
     </BaseHero>

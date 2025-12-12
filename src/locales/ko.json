@@ -1,4 +1,23 @@
 {
+  "homepage": {
+    "title": "개발자 허브",
+    "description": "모든 Metaplex 개발자 리소스를 한 곳에서.",
+    "browseProducts": "제품 둘러보기",
+    "viewOnGithub": "GitHub에서 보기",
+    "learnMore": "자세히 알아보기",
+    "categories": {
+      "tokens": "토큰",
+      "nfts": "NFT",
+      "smartContracts": "스마트 컨트랙트",
+      "devTools": "개발 도구"
+    },
+    "categoryDescriptions": {
+      "tokens": "Metaplex SDK를 사용하여 솔라나 블록체인에서 토큰을 생성, 조회, 업데이트, 소각 및 전송하세요.",
+      "nfts": "Metaplex SDK를 사용하여 솔라나 블록체인에서 NFT를 생성, 조회, 업데이트, 소각 및 전송하세요.",
+      "smartContracts": "솔라나에서 디지털 자산을 생성하고 관리하기 위한 온체인 프로그램.",
+      "devTools": "Metaplex 프로그램으로 개발을 도와주는 도구 및 유틸리티."
+    }
+  },
   "navigation": {
     "core": "Core",
     "candyMachine": "Candy Machine", 
@@ -44,6 +63,7 @@
     "devTools": "개발 도구",
     "guides": "가이드",
     "aura": "Aura",
+    "home": "홈",
     "tokens": "토큰",
     "nfts": "NFT",
     "smartContracts": "스마트 컨트랙트",

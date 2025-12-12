@@ -1,4 +1,23 @@
 {
+  "homepage": {
+    "title": "Developer Hub",
+    "description": "One place for all Metaplex developer resources.",
+    "browseProducts": "Browse our Products",
+    "viewOnGithub": "View on GitHub",
+    "learnMore": "Learn more",
+    "categories": {
+      "tokens": "Tokens",
+      "nfts": "NFTs",
+      "smartContracts": "Smart Contracts",
+      "devTools": "Dev Tools"
+    },
+    "categoryDescriptions": {
+      "tokens": "Create, read, update, burn, and transfer tokens on the Solana blockchain using Metaplex SDKs.",
+      "nfts": "Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs.",
+      "smartContracts": "On-chain programs for creating and managing digital assets on Solana.",
+      "devTools": "Tools and utilities to help you build with Metaplex programs."
+    }
+  },
   "navigation": {
     "core": "Core",
     "candyMachine": "Candy Machine", 

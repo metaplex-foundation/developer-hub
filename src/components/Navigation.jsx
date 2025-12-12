@@ -6,7 +6,7 @@ import { useLocale } from '@/contexts/LocaleContext'
 import { getLocalizedHref } from '@/config/languages'
 import Badge from './products/Badge'
 
-export function Navigation({ product, navigation, className }) {
+export function Navigation({ product, navigation, className, hideProductHeader = false }) {
   let router = useRouter()
   const { locale } = useLocale()
   const [currentPath, setCurrentPath] = useState('')
@@ -40,7 +40,7 @@ export function Navigation({ product, navigation, className }) {
 
   return (
     <nav className={clsx('text-base lg:text-sm', className)}>
-      {product?.name && (
+      {!hideProductHeader && product?.name && (
         <div className="mb-8">
           <Link
             href={getLocalizedHref(`/${product.path}`, locale)}

@@ -11,22 +11,14 @@ import { ProductCardGrid } from '@/components/products/ProductCardGrid'
 import { productCategories } from '@/components/products/index'
 import { useAccentClass } from '@/shared/useAccentClass'
 import { useLightense } from '@/shared/useLightense'
-
-function getCategoryDescription(category) {
-  const descriptions = {
-    'Tokens': 'Create, read, update, burn, and transfer tokens on the Solana blockchain using Metaplex SDKs.',
-    'NFTs': 'Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs.',
-    'Smart Contracts': 'On-chain programs for creating and managing digital assets on Solana.',
-    'Dev Tools': 'Tools and utilities to help you build with Metaplex programs.',
-  };
-  return descriptions[category] || '';
-}
+import { useTranslations } from '@/contexts/LocaleContext'
 
 export function Layout({ children, page }) {
   const isHomePage = page.pathname === '/'
   const isCodeViewer = page.pathname === '/code-viewer'
   const hasNavigation = !!page.activeSection?.navigation
   const Hero = page.activeHero
+  const t = useTranslations('homepage')
   useLightense()
   useAccentClass(page.product)
   if (
@@ -39,22 +31,50 @@ export function Layout({ children, page }) {
     )
   }
 
+  const getCategoryName = (category) => {
+    const categoryKeys = {
+      'Tokens': 'tokens',
+      'NFTs': 'nfts',
+      'Smart Contracts': 'smartContracts',
+      'Dev Tools': 'devTools',
+    };
+    const key = categoryKeys[category];
+    return key ? t(`categories.${key}`, category) : category;
+  };
+
+  const getCategoryDescription = (category) => {
+    const categoryKeys = {
+      'Tokens': 'tokens',
+      'NFTs': 'nfts',
+      'Smart Contracts': 'smartContracts',
+      'Dev Tools': 'devTools',
+    };
+    const key = categoryKeys[category];
+    const defaultDescriptions = {
+      'Tokens': 'Create, read, update, burn, and transfer tokens on the Solana blockchain using Metaplex SDKs.',
+      'NFTs': 'Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs.',
+      'Smart Contracts': 'On-chain programs for creating and managing digital assets on Solana.',
+      'Dev Tools': 'Tools and utilities to help you build with Metaplex programs.',
+    };
+    return key ? t(`categoryDescriptions.${key}`, defaultDescriptions[category] || '') : '';
+  };
+
   return (
     <div className="min-h-screen">
       <Header page={page} />
 
-      
+
 
       {/* {Hero && <Hero page={page} />} */}
 
       {isHomePage && (
         <>
           <div className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
-            <h1 className="text-4xl font-bold text-white">Developers</h1>
+            <h1 className="text-4xl font-bold text-white">{t('title', 'Developer Hub')}</h1>
           </div>
           {productCategories.map((category) => (
             <div key={category} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-              <h2 className="mb-2 text-2xl font-bold text-white">{category}</h2>
+              <h2 className="mb-2 text-2xl font-bold text-white">{getCategoryName(category)}</h2>
               <p className="mb-8 text-sm text-neutral-400">
                 {getCategoryDescription(category)}
               </p>

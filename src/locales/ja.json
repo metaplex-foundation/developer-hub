@@ -1,4 +1,23 @@
 {
+  "homepage": {
+    "title": "デベロッパーハブ",
+    "description": "すべてのMetaplex開発者リソースを一箇所に。",
+    "browseProducts": "製品を見る",
+    "viewOnGithub": "GitHubで見る",
+    "learnMore": "詳しく見る",
+    "categories": {
+      "tokens": "トークン",
+      "nfts": "NFT",
+      "smartContracts": "スマートコントラクト",
+      "devTools": "開発ツール"
+    },
+    "categoryDescriptions": {
+      "tokens": "Metaplex SDKを使用して、Solanaブロックチェーン上でトークンの作成、読み取り、更新、バーン、転送を行います。",
+      "nfts": "Metaplex SDKを使用して、Solanaブロックチェーン上でNFTの作成、読み取り、更新、バーン、転送を行います。",
+      "smartContracts": "Solana上でデジタルアセットを作成・管理するためのオンチェーンプログラム。",
+      "devTools": "Metaplexプログラムでの開発を支援するツールとユーティリティ。"
+    }
+  },
   "navigation": {
     "core": "Core",
     "candyMachine": "Candy Machine", 
@@ -44,6 +63,7 @@
     "devTools": "開発ツール",
     "guides": "ガイド",
     "aura": "Aura",
+    "home": "ホーム",
     "tokens": "トークン",
     "nfts": "NFT",
     "smartContracts": "スマートコントラクト",

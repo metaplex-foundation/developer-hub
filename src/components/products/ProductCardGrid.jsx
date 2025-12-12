@@ -1,10 +1,10 @@
 import { getLocalizedHref } from '@/config/languages';
-import { useLocale } from '@/contexts/LocaleContext';
+import { useLocale, useTranslations } from '@/contexts/LocaleContext';
 import Link from 'next/link';
 import { nftMenuCategory, tokenMenuCategory } from '../NavList';
 import { products as allProducts, productCategories } from './index';
 
-const ProductCard = ({ item, locale }) => {
+const ProductCard = ({ item, locale, learnMoreText }) => {
   const href = getLocalizedHref(item.href || `/${item.path}`, locale);
 
   return (
@@ -20,7 +20,7 @@ const ProductCard = ({ item, locale }) => {
         {item.headline || item.description}
       </p>
       <span className="mt-4 inline-flex items-center text-sm font-medium text-accent-600 dark:text-accent-400">
-        Learn more
+        {learnMoreText}
         <svg
           className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
           fill="none"
@@ -41,6 +41,7 @@ const ProductCard = ({ item, locale }) => {
 
 export function ProductCardGrid({ category }) {
   const { locale } = useLocale();
+  const t = useTranslations('homepage');
 
   // Get items based on category
   let items = [];
@@ -56,7 +57,7 @@ export function ProductCardGrid({ category }) {
     );
   }
 
-  // Localize product headlines and descriptions
+  // Localize product names, headlines and descriptions
   const localizeItem = (item) => {
     if (locale === 'en' || !item.localizedNavigation || !item.localizedNavigation[locale]) {
       return item;
@@ -65,6 +66,9 @@ export function ProductCardGrid({ category }) {
     const localizedItem = { ...item };
     const itemNav = item.localizedNavigation[locale];
 
+    if (itemNav.name) {
+      localizedItem.name = itemNav.name;
+    }
     if (itemNav.headline) {
       localizedItem.headline = itemNav.headline;
     }
@@ -75,6 +79,8 @@ export function ProductCardGrid({ category }) {
     return localizedItem;
   };
 
+  const learnMoreText = t('learnMore', 'Learn more');
+
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
       {items.map((item) => {
@@ -84,6 +90,7 @@ export function ProductCardGrid({ category }) {
             key={item.path || item.href}
             item={localizedItem}
             locale={locale}
+            learnMoreText={learnMoreText}
           />
         );
       })}
@@ -92,11 +99,41 @@ export function ProductCardGrid({ category }) {
 }
 
 export function AllProductCardGrids() {
+  const t = useTranslations('homepage');
+
+  const getCategoryName = (category) => {
+    const categoryKeys = {
+      'Tokens': 'tokens',
+      'NFTs': 'nfts',
+      'Smart Contracts': 'smartContracts',
+      'Dev Tools': 'devTools',
+    };
+    const key = categoryKeys[category];
+    return key ? t(`categories.${key}`, category) : category;
+  };
+
+  const getCategoryDescription = (category) => {
+    const categoryKeys = {
+      'Tokens': 'tokens',
+      'NFTs': 'nfts',
+      'Smart Contracts': 'smartContracts',
+      'Dev Tools': 'devTools',
+    };
+    const key = categoryKeys[category];
+    const defaultDescriptions = {
+      'Tokens': 'Create, read, update, burn, and transfer tokens on the Solana blockchain using Metaplex SDKs.',
+      'NFTs': 'Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs.',
+      'Smart Contracts': 'On-chain programs for creating and managing digital assets on Solana.',
+      'Dev Tools': 'Tools and utilities to help you build with Metaplex programs.',
+    };
+    return key ? t(`categoryDescriptions.${key}`, defaultDescriptions[category] || '') : '';
+  };
+
   return (
     <div className="not-prose">
       {productCategories.map((category) => (
         <div key={category} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-2xl font-bold text-white">{category}</h2>
+          <h2 className="mb-2 text-2xl font-bold text-white">{getCategoryName(category)}</h2>
           <p className="mb-8 text-sm text-neutral-400">
             {getCategoryDescription(category)}
           </p>
@@ -105,16 +142,6 @@ export function AllProductCardGrids() {
       ))}
     </div>
   );
-}
-
-function getCategoryDescription(category) {
-  const descriptions = {
-    'Tokens': 'Create, read, update, burn, and transfer tokens on the Solana blockchain using Metaplex SDKs.',
-    'NFTs': 'Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs.',
-    'Smart Contracts': 'On-chain programs for creating and managing digital assets on Solana.',
-    'Dev Tools': 'Tools and utilities to help you build with Metaplex programs.',
-  };
-  return descriptions[category] || '';
 }
 
 // Markdoc wrapper for use in markdown files
