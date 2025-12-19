@@ -42,6 +42,12 @@ Composable NFT fees for combine, split, and constraint editing operations.
 
 {% protocol-fees program="fusion" showTitle=false /%}
 
+## Genesis
+
+Token launch platform fees for Launch Pool operations. These are percentage-based fees applied to deposits, withdrawals, and graduation.
+
+{% protocol-fees program="genesis" showTitle=false /%}
+
 ## FAQs
 
 ### Will the fee amounts change over time?

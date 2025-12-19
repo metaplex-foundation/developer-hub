@@ -19,7 +19,6 @@ export const tokenMetadata = {
   protocolFees: {
     create: {
       solana: '0.01 SOL',
-      eclipse: '0.000103088 ETH',
       payer: 'Collector',
       notes: 'Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs). Includes all instructions that "create" an NFT including ones that create print editions.',
     },

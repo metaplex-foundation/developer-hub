@@ -19,7 +19,6 @@ export const mplHybrid = {
   protocolFees: {
     swap: {
       solana: '0.005 SOL',
-      eclipse: '0.005 ETH',
       payer: 'Collector',
       notes: 'Paid by the individual who swaps tokens and NFTs.',
     },
