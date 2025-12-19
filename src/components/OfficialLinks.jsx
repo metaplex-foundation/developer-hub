@@ -58,7 +58,7 @@ const tokensAndNfts = [
 
 const rulesets = [
   { name: 'Metaplex Foundation Rule Set', id: 'eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9' },
-  { name: 'Compatability Rule Set', id: 'AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5' },
+  { name: 'Compatibility Rule Set', id: 'AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5' },
 ]
 
 function TableWrapper({ children }) {
