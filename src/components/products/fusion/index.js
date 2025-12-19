@@ -17,19 +17,16 @@ export const fusion = {
   protocolFees: {
     combine: {
       solana: '0.002 SOL',
-      eclipse: null,
       payer: 'Collector',
       notes: null,
     },
     split: {
       solana: '0.002 SOL',
-      eclipse: null,
       payer: 'Collector',
       notes: null,
     },
     editConstraint: {
       solana: '0.01 SOL',
-      eclipse: null,
       payer: 'Creator',
       notes: null,
     },

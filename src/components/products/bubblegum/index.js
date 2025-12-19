@@ -19,7 +19,6 @@ export const bubblegum = {
   protocolFees: {
     create: {
       solana: 'Free',
-      eclipse: 'Free',
       payer: null,
       notes: null,
     },

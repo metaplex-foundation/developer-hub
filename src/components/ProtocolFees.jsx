@@ -39,11 +39,6 @@ export function ProtocolFees({ program, showTitle = true }) {
 
   const fees = Object.entries(product.protocolFees)
 
-  // Check if any fee has Eclipse data
-  const hasEclipseFees = fees.some(
-    ([, fee]) => fee && typeof fee === 'object' && fee.eclipse !== null
-  )
-
   return (
     <div className="my-6">
       {showTitle && (
@@ -67,23 +62,13 @@ export function ProtocolFees({ program, showTitle = true }) {
               >
                 Solana
               </th>
-              {hasEclipseFees && (
-                <th
-                  scope="col"
-                  className="px-4 py-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-100"
-                >
-                  Eclipse
-                </th>
-              )}
             </tr>
           </thead>
           <tbody className="divide-y divide-neutral-200 bg-white dark:divide-neutral-700 dark:bg-neutral-900">
             {fees.map(([type, fee]) => {
-              // Handle both old format (string) and new format (object with solana/eclipse)
+              // Handle both old format (string) and new format (object with solana)
               const solanaFee =
                 typeof fee === 'string' ? fee : fee?.solana || '-'
-              const eclipseFee =
-                typeof fee === 'object' ? fee?.eclipse || '-' : '-'
 
               return (
                 <tr key={type}>
@@ -93,11 +78,6 @@ export function ProtocolFees({ program, showTitle = true }) {
                   <td className="whitespace-nowrap px-4 py-3 text-sm font-mono text-neutral-900 dark:text-neutral-100">
                     {solanaFee}
                   </td>
-                  {hasEclipseFees && (
-                    <td className="whitespace-nowrap px-4 py-3 text-sm font-mono text-neutral-900 dark:text-neutral-100">
-                      {eclipseFee}
-                    </td>
-                  )}
                 </tr>
               )
             })}
