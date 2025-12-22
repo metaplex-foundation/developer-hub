@@ -1,0 +1,98 @@
+{
+  "homepage": {
+    "title": "开发者中心",
+    "description": "Metaplex开发者资源一站式平台。",
+    "browseProducts": "浏览产品",
+    "viewOnGithub": "在GitHub上查看",
+    "learnMore": "了解更多",
+    "categories": {
+      "tokens": "代币",
+      "nfts": "NFT",
+      "smartContracts": "智能合约",
+      "devTools": "开发工具"
+    },
+    "categoryDescriptions": {
+      "tokens": "使用Metaplex SDK在Solana区块链上创建、读取、更新、销毁和转移代币。",
+      "nfts": "使用Metaplex SDK在Solana区块链上创建、读取、更新、销毁和转移NFT。",
+      "smartContracts": "用于在Solana上创建和管理数字资产的链上程序。",
+      "devTools": "帮助您使用Metaplex程序进行开发的工具和实用程序。"
+    }
+  },
+  "navigation": {
+    "core": "Core",
+    "candyMachine": "Candy Machine",
+    "coreCandyMachine": "Core Candy Machine",
+    "tokenMetadata": "Token Metadata",
+    "bubblegum": "Bubblegum",
+    "bubblegumV2": "Bubblegum V2",
+    "mplHybrid": "MPL Hybrid",
+    "tokenAuthRules": "Token Auth Rules",
+    "fusion": "Fusion",
+    "hydra": "Hydra",
+    "inscription": "Inscription",
+    "dasApi": "DAS API",
+    "umi": "UMI",
+    "cli": "CLI",
+    "shank": "Shank",
+    "amman": "Amman",
+    "sugar": "Sugar",
+    "aura": "Aura",
+    "legacyDocumentation": "旧版文档",
+    "guides": "指南"
+  },
+  "sections": {
+    "documentation": "文档",
+    "guides": "指南",
+    "references": "参考文档",
+    "changelog": "更新日志"
+  },
+  "ui": {
+    "getStarted": "开始使用",
+    "learnMore": "了解更多",
+    "readDocs": "阅读文档",
+    "viewGuides": "查看指南",
+    "github": "GitHub",
+    "search": "搜索",
+    "searchPlaceholder": "搜索文档...",
+    "onThisPage": "本页目录",
+    "previousPage": "上一页",
+    "nextPage": "下一页"
+  },
+  "header": {
+    "mpl": "MPL",
+    "devTools": "开发工具",
+    "guides": "指南",
+    "aura": "Aura",
+    "home": "首页",
+    "tokens": "代币",
+    "nfts": "NFT",
+    "smartContracts": "智能合约",
+    "programs": "程序"
+  },
+  "meta": {
+    "defaultTitle": "Metaplex文档",
+    "defaultDescription": "Metaplex开发完整指南。",
+    "coreDescription": "下一代Solana NFT标准。",
+    "candyMachineDescription": "在Solana上创建和管理NFT发行的最简单方式。",
+    "umiDescription": "面向JavaScript客户端的Solana框架。",
+    "guidesDescription": "帮助您在Metaplex上进行开发的分步教程。"
+  },
+  "404": {
+    "title": "404 - 页面未找到",
+    "metaTitle": "404 - 页面未找到 | Metaplex开发者中心",
+    "description": "在Metaplex开发者中心找不到此页面。",
+    "message": "在Metaplex开发者中心找不到此页面。",
+    "callToAction": "请从下方选择一个产品开始。"
+  },
+  "footer": {
+    "allRightsReserved": "保留所有权利。",
+    "resources": "资源",
+    "officialLinks": "官方链接",
+    "security": "安全",
+    "protocolFees": "协议费用",
+    "legal": "法律信息",
+    "termsAndConditions": "条款与条件",
+    "privacyPolicy": "隐私政策",
+    "connect": "联系我们"
+  }
+}
