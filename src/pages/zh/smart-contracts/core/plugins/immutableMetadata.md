@@ -1,7 +1,7 @@
 ---
 title: ImmutableMetadata 插件
 metaTitle: ImmutableMetadata | Core
-description: 'ImmutableMetadata' 插件使 Core NFT 资产和集合上的元数据不可变。
+description: "'ImmutableMetadata' 插件使 Core NFT 资产和集合上的元数据不可变。"
 ---
 
 immutableMetadata 插件是一个`权限管理`插件，允许使元数据（名称和 URI）不可变。它只能由更新权限添加。

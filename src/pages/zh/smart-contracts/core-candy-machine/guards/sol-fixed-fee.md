@@ -1,7 +1,7 @@
 ---
 title: SOL 固定费用守卫
 metaTitle: SOL 固定费用守卫 | Core Candy Machine
-description: Core Candy Machine 的 'Sol Fixed Fee' 守卫在铸造时向付款人收取一定数量的 SOL
+description: "Core Candy Machine 的 'Sol Fixed Fee' 守卫在铸造时向付款人收取一定数量的 SOL"
 ---
 
 ## 概述
