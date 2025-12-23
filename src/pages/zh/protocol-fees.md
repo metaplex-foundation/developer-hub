@@ -6,43 +6,57 @@ description: Metaplex产品链上费用详情。
 
 Metaplex协议目前包含以下费用：
 
-{% totem %}
-{% totem-accordion title="Solana" test="test" defaultOpen="true" %}
-| 指令 | 程序 | 通常支付者 | 金额 (SOL) | 备注 |
-| --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create | Bubblegum v2 | 铸造者 | 0.00009 | 铸造者支付 |
-| Transfer | Bubblegum v2 | 收藏者 | 0.000006 | 所有者支付 |
-| Create | Core | 收藏者 | 0.0015 | 铸造者支付（通常是铸造新发行NFT的个人收藏者）。包括所有"创建"NFT的指令，如创建打印版本。 |
-| Execute | Core | 所有者 | 0.00004872 | 通常由调用执行指令的Core NFT资产的当前所有者支付。 |
-| Create | Token Metadata | 收藏者 | 0.01 | 铸造者支付（通常是铸造新发行NFT的个人收藏者）。或者，创作者可以考虑使用Core（下一代NFT）或Bubblegum（压缩NFT）以获得最大的可组合性和更低的铸造成本。包括所有"创建"NFT的指令，如创建打印版本。 |
-| Create | Bubblegum | - | 免费 |
-| Swap | MPL-Hybrid | 收藏者 | 0.005 | 由交换代币和NFT的个人支付。 |
-| Combine | Fusion (Trifle) | 收藏者 | 0.002 | |
-| Split | Fusion (Trifle) | 收藏者 | 0.002 | |
-| Edit constraint | Fusion (Trifle) | 创作者 | 0.01 | |
-{% /totem-accordion %}
-{% totem-accordion title="Eclipse" %}
-| 指令 | 程序 | 通常支付者 | 金额 (ETH) | 备注 |
-| --------------- | --------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create | Bubblegum v2 | 铸造者 | 0.0000009 |  |
-| Transfer | Bubblegum v2 | 收藏者 | 0.00000006 |  |
-| Create | Core | 收藏者 | 0.00001822 | 铸造者支付（通常是铸造新发行NFT的个人收藏者）。包括所有"创建"NFT的指令，如创建打印版本。 |
-| Execute | Core | 所有者 | 0.000000476 | 通常由调用执行指令的Core NFT资产的当前所有者支付。 |
-| Create | Token Metadata | 收藏者 | 0.000103088 | 铸造者支付（通常是铸造新发行NFT的个人收藏者）。或者，创作者可以考虑使用Core（下一代NFT）或Bubblegum（压缩NFT）以获得最大的可组合性和更低的铸造成本。包括所有"创建"NFT的指令，如创建打印版本。 |
-| Create | Bubblegum | - | 免费 |
-| Swap | MPL-Hybrid | 收藏者 | 0.005 | 由交换代币和NFT的个人支付。 |
-{% /totem-accordion %}
-{% /totem %}
+## Core
+
+由铸造者支付，通常是铸造新发行NFT的个人收藏者。包括所有"创建"NFT的指令，包括创建打印版本的指令。
+
+{% protocol-fees program="core" showTitle=false /%}
+
+## Bubblegum v2
+
+具有改进功能和灵活性的压缩NFT。
+
+{% protocol-fees program="bubblegum-v2" showTitle=false /%}
+
+## Token Metadata
+
+由铸造者支付，通常是铸造新发行NFT的个人收藏者。或者，创作者可以考虑使用Core（下一代NFT）以获得最大的可组合性和更低的铸造成本，或使用Bubblegum（压缩NFT）。
+
+{% protocol-fees program="token-metadata" showTitle=false /%}
+
+## Bubblegum v1（旧版）
+
+原始的压缩NFT程序。
+
+{% protocol-fees program="bubblegum" showTitle=false /%}
+
+## MPL-Hybrid
+
+由交换代币和NFT的个人支付。
+
+{% protocol-fees program="mpl-hybrid" showTitle=false /%}
+
+## Fusion（Trifle）
+
+可组合NFT费用，用于合并、拆分和约束编辑操作。
+
+{% protocol-fees program="fusion" showTitle=false /%}
+
+## Genesis
+
+代币发行平台费用，用于Launch Pool操作。这些是按百分比收取的费用，适用于存款、取款和毕业。
+
+{% protocol-fees program="genesis" showTitle=false /%}
 
 ## 常见问题
 
 ### 费用金额会随时间变化吗？
 
-Metaplex基金会持续监控社区对费用的反馈，并可能随时间调整费用金额。我们的目标是保持费用最小化，以促进协议的增长和使用。
+Metaplex基金会持续监控社区对费用的反馈，并可能随时间调整费用金额。我们的目标是保持费用最小化干扰，以促进协议的增长和使用。
 
 ### 如果我通过Candy Machine发行10,000个NFT合集，作为创作者，Token Metadata或Core费用是多少？
 
-对于标准的10,000个NFT发行，创建费用分摊到从Candy Machine铸造的收藏者身上，因此创作者的Token Metadata或Core费用为0 SOL。
+对于标准的10,000个NFT发行，创作者的Token Metadata或Core费用为0 SOL，因为创建费用分摊到从Candy Machine铸造的收藏者身上。
 
 ### Metaplex协议费用如何使用？
 
