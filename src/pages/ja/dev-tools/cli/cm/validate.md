@@ -23,14 +23,14 @@ mplx cm validate --onchain
 
 ## 関連コマンド
 
-- [`mplx cm upload`](/ja/cli/cm/upload) - アセットをアップロードしてキャッシュを作成
-- [`mplx cm create`](/ja/cli/cm/create) - キャンディマシンを作成
-- [`mplx cm insert`](/ja/cli/cm/insert) - 検証されたアセットを挿入
-- [`mplx cm fetch`](/ja/cli/cm/fetch) - キャンディマシンのステータスを確認
+- [`mplx cm upload`](/ja/dev-tools/cli/cm/upload) - アセットをアップロードしてキャッシュを作成
+- [`mplx cm create`](/ja/dev-tools/cli/cm/create) - キャンディマシンを作成
+- [`mplx cm insert`](/ja/dev-tools/cli/cm/insert) - 検証されたアセットを挿入
+- [`mplx cm fetch`](/ja/dev-tools/cli/cm/fetch) - キャンディマシンのステータスを確認
 
 ## 次のステップ
 
-1. 検証中に見つかった**[問題を修正](/ja/cli/cm/upload)**
-2. キャッシュが有効な場合は**[キャンディマシンを作成](/ja/cli/cm/create)**
-3. アセットをロードするために**[アイテムを挿入](/ja/cli/cm/insert)**
-4. 成功を確認するために**[デプロイを監視](/ja/cli/cm/fetch)**
+1. 検証中に見つかった**[問題を修正](/ja/dev-tools/cli/cm/upload)**
+2. キャッシュが有効な場合は**[キャンディマシンを作成](/ja/dev-tools/cli/cm/create)**
+3. アセットをロードするために**[アイテムを挿入](/ja/dev-tools/cli/cm/insert)**
+4. 成功を確認するために**[デプロイを監視](/ja/dev-tools/cli/cm/fetch)**

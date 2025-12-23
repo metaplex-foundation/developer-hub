@@ -4,9 +4,9 @@ metaTitle: Javascript SDK | MPL-Hybrid
 description: 了解如何设置您的项目以运行MPL-Hybrid Javascript SDK。
 ---
 
-Metaplex提供了一个JavaScript库，可用于与MPL-Hybrid 404程序交互。得益于[Umi框架](/zh/umi)，它不需要许多固定的依赖项，因此提供了一个可在任何JavaScript项目中使用的轻量级库。
+Metaplex提供了一个JavaScript库，可用于与MPL-Hybrid 404程序交互。得益于[Umi框架](/zh/dev-tools/umi)，它不需要许多固定的依赖项，因此提供了一个可在任何JavaScript项目中使用的轻量级库。
 
-要开始，您需要[安装Umi框架](/zh/umi/getting-started)和MPL-Hybrid JavaScript库。
+要开始，您需要[安装Umi框架](/zh/dev-tools/umi/getting-started)和MPL-Hybrid JavaScript库。
 
 ## 安装
 
@@ -19,7 +19,7 @@ npm install @metaplex-foundation/mpl-hybrid
 ## Umi设置
 
 
-需要一个`umi`实例来与Metaplex Javascript SDK交互。如果您尚未设置和配置`umi`实例，可以查看[Umi入门指南](/zh/umi/getting-started)页面。
+需要一个`umi`实例来与Metaplex Javascript SDK交互。如果您尚未设置和配置`umi`实例，可以查看[Umi入门指南](/zh/dev-tools/umi/getting-started)页面。
 
 
 在初始化`umi`实例期间，您可以使用以下方式将mpl-hybrid包添加到`umi`

@@ -4,9 +4,9 @@ metaTitle: Javascript SDK | MPL Core Candy Machine
 description: 了解如何设置您的项目以运行 MPL Core Candy Machine Javascript SDK。
 ---
 
-Metaplex 提供了一个可用于与 MPL Core Candy Machine 程序交互的 JavaScript 库。得益于 [Umi 框架](/zh/umi),它在没有许多自以为是的依赖项的情况下提供,因此提供了一个可在任何 JavaScript 项目中使用的轻量级库。
+Metaplex 提供了一个可用于与 MPL Core Candy Machine 程序交互的 JavaScript 库。得益于 [Umi 框架](/zh/dev-tools/umi),它在没有许多自以为是的依赖项的情况下提供,因此提供了一个可在任何 JavaScript 项目中使用的轻量级库。
 
-要开始使用,您需要[安装 Umi 框架](/zh/umi/getting-started)和 MPL-Core JavaScript 库。
+要开始使用,您需要[安装 Umi 框架](/zh/dev-tools/umi/getting-started)和 MPL-Core JavaScript 库。
 
 ## 安装
 
@@ -26,7 +26,7 @@ npm install @metaplex-foundation/mpl-core-candy-machine
 
 ## Umi 设置
 
-与 Metaplex Javascript SDK 交互需要一个 `umi` 实例。如果您还没有设置和配置 `umi` 实例,那么您可以查看 [Umi 入门](/zh/umi/getting-started)页面并配置您的 RPC 端点和您的 `umi` 身份/签名者。
+与 Metaplex Javascript SDK 交互需要一个 `umi` 实例。如果您还没有设置和配置 `umi` 实例,那么您可以查看 [Umi 入门](/zh/dev-tools/umi/getting-started)页面并配置您的 RPC 端点和您的 `umi` 身份/签名者。
 
 在 `umi` 实例的初始化期间,您可以使用以下方式将 mpl-core 包添加到 `umi`:
 

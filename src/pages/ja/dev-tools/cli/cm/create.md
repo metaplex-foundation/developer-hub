@@ -32,7 +32,7 @@ mplx cm create
 
 - **フォーマット**: JSON
 - **命名**: 画像ファイルと一致 (0.json、1.json、2.json、...)
-- **スキーマ**: 標準[Metaplex Coreメタデータフォーマット](/ja/core/json-schema)
+- **スキーマ**: 標準[Metaplex Coreメタデータフォーマット](/ja/smart-contracts/core/json-schema)
 
 *コレクションファイル:*
 
@@ -236,14 +236,14 @@ mplx cm validate
 
 ## 関連コマンド
 
-- [`mplx cm upload`](/ja/cli/cm/upload) - アセットをストレージにアップロード
-- [`mplx cm insert`](/ja/cli/cm/insert) - アイテムをキャンディマシンに挿入
-- [`mplx cm validate`](/ja/cli/cm/validate) - アセットキャッシュを検証
-- [`mplx cm fetch`](/ja/cli/cm/fetch) - キャンディマシン情報を表示
+- [`mplx cm upload`](/ja/dev-tools/cli/cm/upload) - アセットをストレージにアップロード
+- [`mplx cm insert`](/ja/dev-tools/cli/cm/insert) - アイテムをキャンディマシンに挿入
+- [`mplx cm validate`](/ja/dev-tools/cli/cm/validate) - アセットキャッシュを検証
+- [`mplx cm fetch`](/ja/dev-tools/cli/cm/fetch) - キャンディマシン情報を表示
 
 ## 次のステップ
 
-1. 手動で作成した場合は**[アセットをアップロード](/ja/cli/cm/upload)**
-2. アセットをキャンディマシンにロードするために**[アイテムを挿入](/ja/cli/cm/insert)**
-3. すべてが機能することを確認するために**[セットアップを検証](/ja/cli/cm/validate)**
-4. 高度な設定については**[ガードについて学ぶ](/ja/core-candy-machine/guards)**
+1. 手動で作成した場合は**[アセットをアップロード](/ja/dev-tools/cli/cm/upload)**
+2. アセットをキャンディマシンにロードするために**[アイテムを挿入](/ja/dev-tools/cli/cm/insert)**
+3. すべてが機能することを確認するために**[セットアップを検証](/ja/dev-tools/cli/cm/validate)**
+4. 高度な設定については**[ガードについて学ぶ](/ja/smart-contracts/core-candy-machine/guards)**

@@ -83,7 +83,7 @@ import { base58 } from '@metaplex-foundation/umi/serializers';
 
 **Umi 是一个用于构建和使用 Solana 程序 JavaScript 客户端的模块化框架**。它提供了一个零依赖库，定义了一组核心接口，使库能够独立于特定实现运行。
 
-_有关更多信息，您可以在[这里](/zh/umi/getting-started)找到概述_
+_有关更多信息，您可以在[这里](/zh/dev-tools/umi/getting-started)找到概述_
 
 **此示例的基本 Umi 设置如下**：
 ```typescript

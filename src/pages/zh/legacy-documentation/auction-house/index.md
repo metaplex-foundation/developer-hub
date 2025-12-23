@@ -104,7 +104,7 @@ description: 提供拍卖行程序的概述
 
 ## 拍卖可替代资产
 
-到目前为止,我们已经讨论了使用拍卖行账户交换资产,但我们还没有深入探讨可以以这种方式交换哪些类型的资产。可以在拍卖行中列出的最流行资产是[非同质化代币(NFT)](/zh/token-metadata/token-standard#the-non-fungible-standard)。
+到目前为止,我们已经讨论了使用拍卖行账户交换资产,但我们还没有深入探讨可以以这种方式交换哪些类型的资产。可以在拍卖行中列出的最流行资产是[非同质化代币(NFT)](/zh/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)。
 
 然而,这些并不是唯一可以从拍卖行程序中受益的资产。实际上,资产可以是任何 SPL 代币,只要它的铸造账户附有元数据账户。如果您想了解更多关于 SPL 代币和元数据账户的信息,您可以[在我们的代币元数据程序概述中阅读更多相关内容](/zh/token-metadata)。
 

@@ -20,7 +20,7 @@ Core 是 Metaplex 创建的最新最先进的数字资产标准。该标准通�
 - 插件：Core 提供了一个先进的插件系统，允许 Core 资产和集合存储额外的状态、提供生命周期验证和增强的动态体验。这里的可能性是无穷无尽的！
 - 成本：虽然不如 Bubblegum 便宜，但由于优化的账户结构，Core 的创建和铸造成本**明显低于** Token Metadata。
 
-[使用 Core 创建 NFT](/zh/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+[使用 Core 创建 NFT](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
 
 ## Token Metadata NFT/pNFT
 
@@ -32,7 +32,7 @@ Token Metadata 是开启一切的 Solana NFT 标准。Token Metadata 于 2021 �
 - 生态系统支持：NFT 和 pNFT 受到 Solana 范围内的市场和钱包的支持，例如 MagicEden、Tensor、Phantom、Solflare 等等。
 - 基于 SPL 代币：Token Metadata NFT/pNFT 基于 Solana 的 SPL 代币程序。
 
-[使用 Token Metadata 创建 NFT/pNFT](/zh/token-metadata/guides/javascript/create-an-nft)
+[使用 Token Metadata 创建 NFT/pNFT](/zh/smart-contracts/token-metadata/guides/javascript/create-an-nft)
 
 ## Bubblegum cNFT
 
@@ -43,4 +43,4 @@ Token Metadata 是开启一切的 Solana NFT 标准。Token Metadata 于 2021 �
 - 部署便宜：作为基于 Merkle 树的产品，树的部署成本很低，如果需要可以存储数百万个 NFT。
 - 大规模空投：一旦创建了树，空投 cNFT 的成本接近不存在，因为树的存储已经支付。
 
-[使用 Bubblegum 在 Solana 上创建 1,000,000 个 NFT](/zh/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)
+[使用 Bubblegum 在 Solana 上创建 1,000,000 个 NFT](/zh/smart-contracts/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)

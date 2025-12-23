@@ -246,4 +246,4 @@ mplx cm validate
 1. **[上传资产](/zh/dev-tools/cli/cm/upload)** 如果手动创建
 2. **[插入项目](/zh/dev-tools/cli/cm/insert)** 将资产加载到 candy machine
 3. **[验证您的设置](/zh/dev-tools/cli/cm/validate)** 确保一切正常
-4. **[了解守卫](/zh/core-candy-machine/guards)** 进行高级配置
+4. **[了解守卫](/zh/smart-contracts/core-candy-machine/guards)** 进行高级配置

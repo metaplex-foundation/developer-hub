@@ -60,7 +60,7 @@ description: Core Candy Machineプログラムとその機能セットの概要�
 - `name`: アセットの名前。
 - `uri`: アセットの[JSONメタデータ](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard)を指すURI。これは、JSONメタデータが既にオンチェーン（例：Arweave、IPFS）またはオフチェーン（例：AWS、独自サーバー）ストレージプロバイダーを介してアップロードされていることを意味します。SugarやJS SDKなどのCandy Machine作成ツールは、これを支援するヘルパーを提供します。
 
-その他のパラメータはアセット間で共有されるため、繰り返しを避けるためにCandy Machineの設定に直接保持されます。詳細は[アイテムの挿入](/ja/core-candy-machine/insert-items)を参照してください。
+その他のパラメータはアセット間で共有されるため、繰り返しを避けるためにCandy Machineの設定に直接保持されます。詳細は[アイテムの挿入](/ja/smart-contracts/core-candy-machine/insert-items)を参照してください。
 
 この時点では、実際のアセットはまだ作成されていないことに注意してください。我々は単に、ミント時に**オンデマンドでアセットを作成する**ために必要なすべてのデータをCandy Machineに読み込んでいるだけです。これが次のステップにつながります。
 
@@ -101,9 +101,9 @@ description: Core Candy Machineプログラムとその機能セットの概要�
 {% edge from="mint-3" to="nft-3" path="bezier" /%}
 {% /diagram %}
 
-Candy Machineがロードされ、事前設定されたすべての条件が満たされると、ユーザーはそこからアセットをミントできるようになります。アセットがSolanaブロックチェーン上に作成されるのはこの時点のみです。なお、ミント前に一部のユーザーはCaptchaの実行やMerkle Proofの送信など、追加の検証手順を実行する必要がある場合があります。詳細は[ミント](/ja/core-candy-machine/mint)を参照してください。
+Candy Machineがロードされ、事前設定されたすべての条件が満たされると、ユーザーはそこからアセットをミントできるようになります。アセットがSolanaブロックチェーン上に作成されるのはこの時点のみです。なお、ミント前に一部のユーザーはCaptchaの実行やMerkle Proofの送信など、追加の検証手順を実行する必要がある場合があります。詳細は[ミント](/ja/smart-contracts/core-candy-machine/mint)を参照してください。
 
-Candy Machineからすべてのアセットがミントされると、その目的を果たし、安全に削除してブロックチェーン上のストレージスペースを解放し、レントを回収できます。詳細は[Candy Machineの引き出し](/ja/core-candy-machine/withdrawing-a-candy-machine)を参照してください。
+Candy Machineからすべてのアセットがミントされると、その目的を果たし、安全に削除してブロックチェーン上のストレージスペースを解放し、レントを回収できます。詳細は[Candy Machineの引き出し](/ja/smart-contracts/core-candy-machine/withdrawing-a-candy-machine)を参照してください。
 
 {% diagram %}
 {% node #action-1 label="4. 削除" theme="pink" /%}
@@ -146,7 +146,7 @@ MPL Core Assetのオンチェーンアカウント構造。[リンク](https://g
 
 Core Candy Machineがどのように機能するかを理解したところで、クリエイターがCore Candy Machineのミントプロセスを保護・カスタマイズするさまざまな方法について掘り下げてみましょう。
 
-クリエイターは「**ガード**」と呼ばれるものを使用して、Core Candy Machineにさまざまな機能を追加できます。Metaplex Core Candy Machineには、**Candy Guard**と呼ばれる追加のSolanaプログラムが付属しており、[**合計23のデフォルトガード**](/ja/core-candy-machine/guards)が含まれています。追加プログラムを使用することで、高度な開発者はデフォルトのCandy Guardプログラムをフォークして独自のカスタムガードを作成しながら、メインのCandy Machineプログラムに依存し続けることができます。
+クリエイターは「**ガード**」と呼ばれるものを使用して、Core Candy Machineにさまざまな機能を追加できます。Metaplex Core Candy Machineには、**Candy Guard**と呼ばれる追加のSolanaプログラムが付属しており、[**合計23のデフォルトガード**](/ja/smart-contracts/core-candy-machine/guards)が含まれています。追加プログラムを使用することで、高度な開発者はデフォルトのCandy Guardプログラムをフォークして独自のカスタムガードを作成しながら、メインのCandy Machineプログラムに依存し続けることができます。
 
 各ガードは自由に有効化・設定できるため、クリエイターは必要な機能を選択できます。すべてのガードを無効にすることは、誰でもいつでも無料でNFTをミントできるようにすることに相当しますが、これはおそらく望ましいことではありません。より現実的な例を作成するために、いくつかのガードを見てみましょう。
 
@@ -206,5 +206,5 @@ SOLが不足 {% .text-xs %} \
 {% edge from="mint-4" to="fail-4" path="bezier" /%}
 {% /diagram %}
 
-ご覧のように、23以上のデフォルトガードとカスタムガードを作成する能力により、クリエイターは重要な機能を厳選し、完璧なCandy Machineを構成できます。これは非常に強力な機能であり、多くのページを割いて説明しています。ガードについて詳しく知るための最適な出発点は、[Candy Guards](/ja/core-candy-machine/guards)ページです。
+ご覧のように、23以上のデフォルトガードとカスタムガードを作成する能力により、クリエイターは重要な機能を厳選し、完璧なCandy Machineを構成できます。これは非常に強力な機能であり、多くのページを割いて説明しています。ガードについて詳しく知るための最適な出発点は、[Candy Guards](/ja/smart-contracts/core-candy-machine/guards)ページです。
 最新の変更を文書化します。

@@ -315,7 +315,7 @@ pub fn crank_oracle(ctx: Context<CrankOracle>) -> Result<()> {
 
 这个旅程的最后一部分将是创建一个集合并将其指向 Oracle 账户，这样我们包含在该集合中的每个资产都将遵循自定义 Oracle 规则！
 
-让我们首先设置您的环境以使用 Umi。（Umi 是一个用于构建和使用 Solana 程序 JavaScript 客户端的模块化框架。在[这里](/zh/umi/getting-started)了解更多）
+让我们首先设置您的环境以使用 Umi。（Umi 是一个用于构建和使用 Solana 程序 JavaScript 客户端的模块化框架。在[这里](/zh/dev-tools/umi/getting-started)了解更多）
 
 ```ts
 import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'

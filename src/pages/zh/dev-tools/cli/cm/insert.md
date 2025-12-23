@@ -48,6 +48,6 @@ mplx cm insert
 ## 下一步
 
 1. **[验证插入](/zh/dev-tools/cli/cm/fetch)** 确认所有项目都已加载
-2. **[测试铸造](/zh/core-candy-machine/mint)** 确保 candy machine 正常工作
+2. **[测试铸造](/zh/smart-contracts/core-candy-machine/mint)** 确保 candy machine 正常工作
 3. **[监控性能](/zh/dev-tools/cli/cm/validate)** 检查问题
-4. **[计划您的启动](/zh/core-candy-machine/guides)** 使用适当的守卫
+4. **[计划您的启动](/zh/smart-contracts/core-candy-machine/guides)** 使用适当的守卫

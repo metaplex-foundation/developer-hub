@@ -8,8 +8,8 @@ description: Metaplexの新しいデジタルアセット標準であるCoreを�
 
 {% quick-links %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/ja/core/sdk/javascript" description="Umiフレームワークに基づくMPL-Core用JavaScriptライブラリをはじめましょう。" /%}
+{% quick-link title="JavaScript" icon="JavaScript" href="/ja/smart-contracts/core/sdk/javascript" description="Umiフレームワークに基づくMPL-Core用JavaScriptライブラリをはじめましょう。" /%}
 
-{% quick-link title="Rust" icon="Rust" href="/ja/core/sdk/rust" description="MPL-Core Rustクレートの使用をはじめましょう。" /%}
+{% quick-link title="Rust" icon="Rust" href="/ja/smart-contracts/core/sdk/rust" description="MPL-Core Rustクレートの使用をはじめましょう。" /%}
 
 {% /quick-links %}

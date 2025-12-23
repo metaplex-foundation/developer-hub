@@ -177,7 +177,7 @@ CLI 支持所有 Core Candy Machine 守卫:
 
 **冻结守卫**: `freezeSolPayment`、`freezeTokenPayment`
 
-有关详细的守卫文档,请参阅 [Core Candy Machine 守卫](/zh/core-candy-machine/guards)参考。
+有关详细的守卫文档,请参阅 [Core Candy Machine 守卫](/zh/smart-contracts/core-candy-machine/guards)参考。
 
 ## 最佳实践
 
@@ -213,8 +213,8 @@ CLI 支持所有 Core Candy Machine 守卫:
 
 ## 相关文档
 
-- [Core Candy Machine 概述](/zh/core-candy-machine) - 了解 MPL Core Candy Machine
-- [Core Candy Machine 守卫](/zh/core-candy-machine/guards) - 完整守卫参考
+- [Core Candy Machine 概述](/zh/smart-contracts/core-candy-machine) - 了解 MPL Core Candy Machine
+- [Core Candy Machine 守卫](/zh/smart-contracts/core-candy-machine/guards) - 完整守卫参考
 - [CLI 安装](/zh/dev-tools/cli/installation) - 设置 MPLX CLI
 - [CLI 配置](/zh/dev-tools/cli/config/wallets) - 钱包和 RPC 设置
 
@@ -222,5 +222,5 @@ CLI 支持所有 Core Candy Machine 守卫:
 
 1. **[安装 CLI](/zh/dev-tools/cli/installation)** 如果您还没有安装
 2. **[创建您的第一个 candy machine](/zh/dev-tools/cli/cm/create)** 使用向导
-3. **[探索守卫配置](/zh/core-candy-machine/guards)** 以获得高级铸造规则
-4. **[了解守卫组](/zh/core-candy-machine/guard-groups)** 用于分阶段启动
+3. **[探索守卫配置](/zh/smart-contracts/core-candy-machine/guards)** 以获得高级铸造规则
+4. **[了解守卫组](/zh/smart-contracts/core-candy-machine/guard-groups)** 用于分阶段启动

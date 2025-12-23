@@ -10,7 +10,7 @@ Solanaでのトークンの使用が進化するにつれて、単純に「Fungi
 
 コンセンサスでは、これらは標準NFTと同じビューでウォレットに保存されるか、独自のビューで保存されるが「標準の」FungibleなSPLトークン（USDCなど）とは分離されるべきだということのようです。これらのトークンは、剣や木の切れ端などのFungibleなアイテムをサポートするためにゲームコンテキストで人気になっていますが、USDCなどの典型的なFungible SPLトークンとは別のリーグにあります。
 
-## [トークン標準フィールド](/ja/token-metadata/token-standard#the-token-standard-field)
+## [トークン標準フィールド](/ja/smart-contracts/token-metadata/token-standard#the-token-standard-field)
 
 この特定の用途をサポートするだけでなく、将来的に他のトークンタイプへの拡張を可能にする十分な広さを持つ標準にするために、Metadataアカウントの`Token Standard`列挙型を使用してトークンのFungibility性を追跡します。このフィールドは特定のJSON標準にマップされ、トークンタイプを客観的に区別するために使用されます。
 

@@ -60,7 +60,7 @@ description: Core Candy Machine 程序及其功能集概述,帮助您创建铸�
 - `name`: 资产的名称。
 - `uri`: 指向资产 [JSON 元数据](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard) 的 URI。这意味着 JSON 元数据已经通过链上(例如 Arweave、IPFS)或链下(例如 AWS、您自己的服务器)存储提供商上传。您可以使用的工具来创建 Candy Machine,如 Sugar 或 JS SDK 提供了帮助程序来完成此操作。
 
-所有其他参数在资产之间共享,因此直接保存在 Candy Machine 的设置中以避免重复。有关更多详细信息,请参阅[插入物品](/zh/core-candy-machine/insert-items)。
+所有其他参数在资产之间共享,因此直接保存在 Candy Machine 的设置中以避免重复。有关更多详细信息,请参阅[插入物品](/zh/smart-contracts/core-candy-machine/insert-items)。
 
 请注意,此时还没有创建真正的资产。我们只是将 Candy Machine 加载了它在铸造时**按需创建资产**所需的所有数据。这就引出了下一步。
 
@@ -101,9 +101,9 @@ description: Core Candy Machine 程序及其功能集概述,帮助您创建铸�
 {% edge from="mint-3" to="nft-3" path="bezier" /%}
 {% /diagram %}
 
-一旦 Candy Machine 被加载并且所有预配置的条件都满足,用户就可以开始从中铸造资产。只有在这个时候,资产才会在 Solana 区块链上创建。请注意,在铸造之前,一些用户可能需要执行额外的验证步骤 — 例如完成验证码或发送 Merkle 证明。有关更多详细信息,请参阅[铸造](/zh/core-candy-machine/mint)。
+一旦 Candy Machine 被加载并且所有预配置的条件都满足,用户就可以开始从中铸造资产。只有在这个时候,资产才会在 Solana 区块链上创建。请注意,在铸造之前,一些用户可能需要执行额外的验证步骤 — 例如完成验证码或发送 Merkle 证明。有关更多详细信息,请参阅[铸造](/zh/smart-contracts/core-candy-machine/mint)。
 
-一旦所有资产都从 Candy Machine 铸造完毕,它就完成了它的使命,可以安全地删除以释放区块链上的一些存储空间并收回一些租金。有关更多详细信息,请参阅[提取 Candy Machine](/zh/core-candy-machine/withdrawing-a-candy-machine)。
+一旦所有资产都从 Candy Machine 铸造完毕,它就完成了它的使命,可以安全地删除以释放区块链上的一些存储空间并收回一些租金。有关更多详细信息,请参阅[提取 Candy Machine](/zh/smart-contracts/core-candy-machine/withdrawing-a-candy-machine)。
 
 {% diagram %}
 {% node #action-1 label="4. 删除" theme="pink" /%}
@@ -146,7 +146,7 @@ MPL Core 资产的链上账户结构。[链接](https://github.com/metaplex-foun
 
 现在我们了解了 Core Candy Machine 的工作原理,让我们深入了解创作者可以保护和定制其 Core Candy Machine 铸造流程的各种方式。
 
-创作者可以使用我们所谓的"**守卫**"来为其 Core Candy Machine 添加各种功能。Metaplex Core Candy Machine 附带一个名为 **Candy Guard** 的额外 Solana 程序,该程序附带[**总共 23 个默认守卫**](/zh/core-candy-machine/guards)。通过使用额外的程序,它允许高级开发人员分叉默认的 Candy Guard 程序以创建自己的自定义守卫,同时仍然能够依赖主 Candy Machine 程序。
+创作者可以使用我们所谓的"**守卫**"来为其 Core Candy Machine 添加各种功能。Metaplex Core Candy Machine 附带一个名为 **Candy Guard** 的额外 Solana 程序,该程序附带[**总共 23 个默认守卫**](/zh/smart-contracts/core-candy-machine/guards)。通过使用额外的程序,它允许高级开发人员分叉默认的 Candy Guard 程序以创建自己的自定义守卫,同时仍然能够依赖主 Candy Machine 程序。
 
 每个守卫都可以根据需要启用和配置,因此创作者可以挑选他们需要的功能。禁用所有守卫将等同于允许任何人随时免费铸造我们的 NFT,这可能不是我们想要的。所以让我们看一些守卫来创建一个更现实的例子。
 
@@ -206,5 +206,5 @@ SOL 不足 {% .text-xs %} \
 {% edge from="mint-4" to="fail-4" path="bezier" /%}
 {% /diagram %}
 
-如您所见,有超过 23 个默认守卫和创建自定义守卫的能力,它使创作者能够挑选对他们重要的功能并组合他们完美的 Candy Machine。这是一个如此强大的功能,我们已经为此专门撰写了许多页面。了解守卫的最佳起点是 [Candy 守卫](/zh/core-candy-machine/guards)页面。
+如您所见,有超过 23 个默认守卫和创建自定义守卫的能力,它使创作者能够挑选对他们重要的功能并组合他们完美的 Candy Machine。这是一个如此强大的功能,我们已经为此专门撰写了许多页面。了解守卫的最佳起点是 [Candy 守卫](/zh/smart-contracts/core-candy-machine/guards)页面。
 记录最新的变化。

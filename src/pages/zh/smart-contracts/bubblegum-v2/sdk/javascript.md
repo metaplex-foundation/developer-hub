@@ -4,9 +4,9 @@ metaTitle: JavaScript SDK | MPL-Bubblegum
 description: 了解如何设置您的项目以运行MPL-Bubblegum JavaScript SDK。
 ---
 
-Metaplex提供了一个JavaScript库，可用于与MPL-Bubblegum程序交互。得益于[Umi框架](/zh/umi)，它不需要许多固定的依赖项，因此提供了一个可在任何JavaScript项目中使用的轻量级库。
+Metaplex提供了一个JavaScript库，可用于与MPL-Bubblegum程序交互。得益于[Umi框架](/zh/dev-tools/umi)，它不需要许多固定的依赖项，因此提供了一个可在任何JavaScript项目中使用的轻量级库。
 
-要开始，您需要[安装Umi框架](/zh/umi/getting-started)和MPL-Bubblegum JavaScript库。
+要开始，您需要[安装Umi框架](/zh/dev-tools/umi/getting-started)和MPL-Bubblegum JavaScript库。
 
 ## 安装
 
@@ -25,7 +25,7 @@ npm install @metaplex-foundation/mpl-bubblegum
 
 ## Umi设置
 
-如果您尚未设置和配置`umi`实例，可以查看[Umi入门](/zh/umi/getting-started)页面。
+如果您尚未设置和配置`umi`实例，可以查看[Umi入门](/zh/dev-tools/umi/getting-started)页面。
 
 在初始化`umi`实例期间，您可以使用以下方式将MPL-Bubblegum包添加到`umi`
 

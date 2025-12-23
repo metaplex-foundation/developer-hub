@@ -20,12 +20,12 @@ mplx cm create --wizard
 
 | コマンド | 目的 | 主要機能 |
 |---------|---------|--------------|
-| [`create`](/ja/cli/cm/create) | 新しいキャンディマシンを作成 | インタラクティブウィザード、テンプレート生成、手動設定 |
-| [`upload`](/ja/cli/cm/upload) | アセットをストレージにアップロード | インテリジェントキャッシング、進行状況追跡、検証 |
-| [`insert`](/ja/cli/cm/insert) | キャンディマシンにアイテムを挿入 | スマートロード検出、バッチ処理 |
-| [`validate`](/ja/cli/cm/validate) | アセットキャッシュを検証 | 包括的な検証、エラー報告 |
-| [`fetch`](/ja/cli/cm/fetch) | キャンディマシン情報を取得 | 設定、ガード設定、ステータスの表示 |
-| [`withdraw`](/ja/cli/cm/withdraw) | 引き出しと削除 | クリーンな引き出し、残高回復 |
+| [`create`](/ja/dev-tools/cli/cm/create) | 新しいキャンディマシンを作成 | インタラクティブウィザード、テンプレート生成、手動設定 |
+| [`upload`](/ja/dev-tools/cli/cm/upload) | アセットをストレージにアップロード | インテリジェントキャッシング、進行状況追跡、検証 |
+| [`insert`](/ja/dev-tools/cli/cm/insert) | キャンディマシンにアイテムを挿入 | スマートロード検出、バッチ処理 |
+| [`validate`](/ja/dev-tools/cli/cm/validate) | アセットキャッシュを検証 | 包括的な検証、エラー報告 |
+| [`fetch`](/ja/dev-tools/cli/cm/fetch) | キャンディマシン情報を取得 | 設定、ガード設定、ステータスの表示 |
+| [`withdraw`](/ja/dev-tools/cli/cm/withdraw) | 引き出しと削除 | クリーンな引き出し、残高回復 |
 
 ## 主要機能
 
@@ -177,7 +177,7 @@ CLIはすべてのCore Candy Machineガードをサポートしています:
 
 **フリーズガード**: `freezeSolPayment`、`freezeTokenPayment`
 
-詳細なガードドキュメントについては、[Core Candy Machineガード](/ja/core-candy-machine/guards)リファレンスを参照してください。
+詳細なガードドキュメントについては、[Core Candy Machineガード](/ja/smart-contracts/core-candy-machine/guards)リファレンスを参照してください。
 
 ## ベストプラクティス
 
@@ -213,14 +213,14 @@ CLIはすべてのCore Candy Machineガードをサポートしています:
 
 ## 関連ドキュメント
 
-- [Core Candy Machine概要](/ja/core-candy-machine) - MPL Core Candy Machinesの理解
-- [Core Candy Machineガード](/ja/core-candy-machine/guards) - 完全なガードリファレンス
-- [CLIインストール](/ja/cli/installation) - MPLX CLIのセットアップ
-- [CLI設定](/ja/cli/config/wallets) - ウォレットとRPCのセットアップ
+- [Core Candy Machine概要](/ja/smart-contracts/core-candy-machine) - MPL Core Candy Machinesの理解
+- [Core Candy Machineガード](/ja/smart-contracts/core-candy-machine/guards) - 完全なガードリファレンス
+- [CLIインストール](/ja/dev-tools/cli/installation) - MPLX CLIのセットアップ
+- [CLI設定](/ja/dev-tools/cli/config/wallets) - ウォレットとRPCのセットアップ
 
 ## 次のステップ
 
-1. まだの場合は**[CLIをインストール](/ja/cli/installation)**
-2. ウィザードを使用して**[最初のキャンディマシンを作成](/ja/cli/cm/create)**
-3. 高度なミントルールのために**[ガード設定を探索](/ja/core-candy-machine/guards)**
-4. 段階的なローンチのために**[ガードグループについて学ぶ](/ja/core-candy-machine/guard-groups)**
+1. まだの場合は**[CLIをインストール](/ja/dev-tools/cli/installation)**
+2. ウィザードを使用して**[最初のキャンディマシンを作成](/ja/dev-tools/cli/cm/create)**
+3. 高度なミントルールのために**[ガード設定を探索](/ja/smart-contracts/core-candy-machine/guards)**
+4. 段階的なローンチのために**[ガードグループについて学ぶ](/ja/smart-contracts/core-candy-machine/guard-groups)**

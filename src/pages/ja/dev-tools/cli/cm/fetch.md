@@ -23,7 +23,7 @@ fetchコマンドは詳細情報用の追加フラグをサポートしていま
 
 ## 関連コマンド
 
-- [`mplx cm create`](/ja/cli/cm/create) - 取得するキャンディマシンを作成
-- [`mplx cm insert`](/ja/cli/cm/insert) - アイテムをロード (アイテム数に影響)
-- [`mplx cm validate`](/ja/cli/cm/validate) - キャッシュとオンチェーンデータを検証
-- [`mplx cm withdraw`](/ja/cli/cm/withdraw) - ステータス確認後にクリーンアップ
+- [`mplx cm create`](/ja/dev-tools/cli/cm/create) - 取得するキャンディマシンを作成
+- [`mplx cm insert`](/ja/dev-tools/cli/cm/insert) - アイテムをロード (アイテム数に影響)
+- [`mplx cm validate`](/ja/dev-tools/cli/cm/validate) - キャッシュとオンチェーンデータを検証
+- [`mplx cm withdraw`](/ja/dev-tools/cli/cm/withdraw) - ステータス確認後にクリーンアップ

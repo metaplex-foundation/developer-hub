@@ -12,7 +12,7 @@ Token Metadata 程序是在 Solana 区块链上处理 NFT 和同质化资产时�
 
 {% quick-links %}
 
-{% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/token-metadata/getting-started" description="选择您喜欢的语言或库,开始在 Solana 上使用数字资产。" /%}
+{% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/smart-contracts/token-metadata/getting-started" description="选择您喜欢的语言或库,开始在 Solana 上使用数字资产。" /%}
 
 {% quick-link title="API 参考" icon="CodeBracketSquare" href="https://mpl-token-metadata.typedoc.metaplex.com/" target="_blank" description="正在寻找特定内容?查看我们的 API 参考文档并找到您的答案。" /%}
 
@@ -112,7 +112,7 @@ supply and its authorities.
 
 ## JSON 标准
 
-元数据账户的一个重要属性是 `URI` 属性,它指向链外的 JSON 文件。这用于安全地提供额外数据,同时不受链上数据存储费用的限制。该 JSON 文件[遵循特定标准](/zh/token-metadata/token-standard),任何人都可以使用它来查找代币的有用信息。
+元数据账户的一个重要属性是 `URI` 属性,它指向链外的 JSON 文件。这用于安全地提供额外数据,同时不受链上数据存储费用的限制。该 JSON 文件[遵循特定标准](/zh/smart-contracts/token-metadata/token-standard),任何人都可以使用它来查找代币的有用信息。
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -225,7 +225,7 @@ JSON Metadata
 
 此外,Token Metadata 程序为 NFT 提供了另一个专门的账户,称为**主版本账户**。该账户也是从 Mint 账户派生的 PDA。
 
-在创建此账户之前,Token Metadata 程序将确保满足上面列出的非同质化代币的特殊特征。但是,值得注意的是,它不会使铸造权限失效,而是将铸造权限和冻结权限都转移到主版本 PDA,以确保没有人可以在不通过 Token Metadata 程序的情况下铸造或冻结代币。您可以[在常见问题解答中阅读有关为何做出此决定的更多信息](/zh/token-metadata/faq#why-are-the-mint-and-freeze-authorities-transferred-to-the-edition-pda)。
+在创建此账户之前,Token Metadata 程序将确保满足上面列出的非同质化代币的特殊特征。但是,值得注意的是,它不会使铸造权限失效,而是将铸造权限和冻结权限都转移到主版本 PDA,以确保没有人可以在不通过 Token Metadata 程序的情况下铸造或冻结代币。您可以[在常见问题解答中阅读有关为何做出此决定的更多信息](/zh/smart-contracts/token-metadata/faq#why-are-the-mint-and-freeze-authorities-transferred-to-the-edition-pda)。
 
 因此,**主版本账户的存在充当了该 Mint 账户的非同质化证明**。
 
@@ -360,7 +360,7 @@ JSON Metadata
 - `Fungible`:Mint 账户是同质化的,并且有多个小数位。这更有可能是用作去中心化货币的代币。
 - `ProgrammableNonFungible`:一种特殊的 `NonFungible` 代币,始终处于冻结状态以强制执行自定义授权规则。有关更多信息,请参阅下一节。
 
-您可以[在此处阅读有关这些标准的更多信息](/zh/token-metadata/token-standard)。
+您可以[在此处阅读有关这些标准的更多信息](/zh/smart-contracts/token-metadata/token-standard)。
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -440,7 +440,7 @@ JSON Metadata
 
 然后由创作者定义自定义的特定于操作的授权规则,这些规则将由 Token Metadata 程序强制执行。这些在特殊的 **RuleSet** 账户中定义,该账户附加到元数据账户。这样的 RuleSet 的一个例子可以是尊重版税的程序地址的允许列表。RuleSet 是名为 [Token Auth Rules](/zh/token-auth-rules) 的新 Metaplex 程序的一部分。
 
-您可以[在此处阅读有关可编程 NFT 的更多信息](/zh/token-metadata/pnfts)。
+您可以[在此处阅读有关可编程 NFT 的更多信息](/zh/smart-contracts/token-metadata/pnfts)。
 
 {% diagram %}
 {% node %}
@@ -486,15 +486,15 @@ JSON Metadata
 
 本文档的其他页面旨在进一步记录它,并在各自的页面中解释重要功能。
 
-- [代币标准(资产)](/zh/token-metadata/token-standard)
-- [铸造资产](/zh/token-metadata/mint)
-- [更新资产](/zh/token-metadata/update)
-- [转移资产](/zh/token-metadata/transfer)
-- [销毁资产](/zh/token-metadata/burn)
-- [打印版本](/zh/token-metadata/print)
-- [已验证的集合](/zh/token-metadata/collections)
-- [已验证的创作者](/zh/token-metadata/creators)
-- [委托权限](/zh/token-metadata/delegates)
-- [锁定资产](/zh/token-metadata/lock)
-- [可编程 NFT](/zh/token-metadata/pnfts)
-- [NFT 托管](/zh/token-metadata/escrow)
+- [代币标准(资产)](/zh/smart-contracts/token-metadata/token-standard)
+- [铸造资产](/zh/smart-contracts/token-metadata/mint)
+- [更新资产](/zh/smart-contracts/token-metadata/update)
+- [转移资产](/zh/smart-contracts/token-metadata/transfer)
+- [销毁资产](/zh/smart-contracts/token-metadata/burn)
+- [打印版本](/zh/smart-contracts/token-metadata/print)
+- [已验证的集合](/zh/smart-contracts/token-metadata/collections)
+- [已验证的创作者](/zh/smart-contracts/token-metadata/creators)
+- [委托权限](/zh/smart-contracts/token-metadata/delegates)
+- [锁定资产](/zh/smart-contracts/token-metadata/lock)
+- [可编程 NFT](/zh/smart-contracts/token-metadata/pnfts)
+- [NFT 托管](/zh/smart-contracts/token-metadata/escrow)

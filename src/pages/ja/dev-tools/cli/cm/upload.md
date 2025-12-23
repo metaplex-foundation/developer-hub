@@ -74,14 +74,14 @@ my-candy-machine/
 
 ## 関連コマンド
 
-- [`mplx cm create`](/ja/cli/cm/create) - キャンディマシンを作成 (自動的にアップロード可能)
-- [`mplx cm validate`](/ja/cli/cm/validate) - アップロードされたアセットを検証
-- [`mplx cm insert`](/ja/cli/cm/insert) - アップロードされたアセットをキャンディマシンに挿入
-- [`mplx cm fetch`](/ja/cli/cm/fetch) - キャンディマシンとアセット情報を表示
+- [`mplx cm create`](/ja/dev-tools/cli/cm/create) - キャンディマシンを作成 (自動的にアップロード可能)
+- [`mplx cm validate`](/ja/dev-tools/cli/cm/validate) - アップロードされたアセットを検証
+- [`mplx cm insert`](/ja/dev-tools/cli/cm/insert) - アップロードされたアセットをキャンディマシンに挿入
+- [`mplx cm fetch`](/ja/dev-tools/cli/cm/fetch) - キャンディマシンとアセット情報を表示
 
 ## 次のステップ
 
-1. すべてが正しくアップロードされたことを確認するために**[アップロードを検証](/ja/cli/cm/validate)**
-2. アップロードされたアセットを使用して**[キャンディマシンを作成](/ja/cli/cm/create)**
-3. アセットをキャンディマシンにロードするために**[アイテムを挿入](/ja/cli/cm/insert)**
-4. すべてが機能していることを確認するために**[セットアップを監視](/ja/cli/cm/fetch)**
+1. すべてが正しくアップロードされたことを確認するために**[アップロードを検証](/ja/dev-tools/cli/cm/validate)**
+2. アップロードされたアセットを使用して**[キャンディマシンを作成](/ja/dev-tools/cli/cm/create)**
+3. アセットをキャンディマシンにロードするために**[アイテムを挿入](/ja/dev-tools/cli/cm/insert)**
+4. すべてが機能していることを確認するために**[セットアップを監視](/ja/dev-tools/cli/cm/fetch)**

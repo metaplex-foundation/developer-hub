@@ -4,7 +4,7 @@ metaTitle: JavaScript SDK | Genesis
 description: 学习如何安装和配置Genesis JavaScript SDK以在Solana上发行代币。
 ---
 
-Metaplex提供了一个用于与Genesis程序交互的JavaScript库。它基于[Umi框架](/zh/umi)构建，作为轻量级库发布，可在任何JavaScript或TypeScript项目中使用。
+Metaplex提供了一个用于与Genesis程序交互的JavaScript库。它基于[Umi框架](/zh/dev-tools/umi)构建，作为轻量级库发布，可在任何JavaScript或TypeScript项目中使用。
 
 {% quick-links %}
 
@@ -41,7 +41,7 @@ npm install \
 
 ## Umi设置
 
-Genesis SDK构建在[Umi](/zh/umi)之上，这是Metaplex的Solana JavaScript框架。如果您尚未设置Umi，请查看[Umi快速开始](/zh/umi/getting-started)指南。
+Genesis SDK构建在[Umi](/zh/dev-tools/umi)之上，这是Metaplex的Solana JavaScript框架。如果您尚未设置Umi，请查看[Umi快速开始](/zh/dev-tools/umi/getting-started)指南。
 
 ### 基本配置
 

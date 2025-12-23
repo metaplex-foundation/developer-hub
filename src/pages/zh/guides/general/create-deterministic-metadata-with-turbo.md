@@ -31,7 +31,7 @@ npm i @ardrive/turbo-sdk
 
 在此示例中，我们将向您展示如何以确定性方式上传元数据。为此，您需要在开始之前准备好所有资产。
 
-要生成元数据，您可以使用[这些方法之一](/zh/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators)并按照从 0 开始的增量命名约定保存元数据，如下所示：
+要生成元数据，您可以使用[这些方法之一](/zh/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators)并按照从 0 开始的增量命名约定保存元数据，如下所示：
 
 ```
 metadata/
@@ -41,7 +41,7 @@ metadata/
 ├─ ...
 ```
 
-**注意**：创建元数据时，请确保遵循正确的 [NFT JSON 架构](/zh/token-metadata/token-standard#the-non-fungible-standard)！
+**注意**：创建元数据时，请确保遵循正确的 [NFT JSON 架构](/zh/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)！
 
 ## 设置 Turbo
 

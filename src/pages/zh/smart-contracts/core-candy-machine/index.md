@@ -9,9 +9,9 @@ Metaplex 协议的 **Candy Machine** 是 Solana 上用于公平 NFT 集合发布
 这个名称指的是通过机械曲柄分发糖果的自动售货机。在这种情况下,糖果是 NFT,支付方式是 SOL 或 SPL 代币。
 
 {% quick-links %}
-{% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/core-candy-machine/getting-started" description="找到您选择的语言或库,开始使用 Candy Machine。" /%}
+{% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/smart-contracts/core-candy-machine/getting-started" description="找到您选择的语言或库,开始使用 Candy Machine。" /%}
 
-{% quick-link title="CLI 命令" icon="CommandLine" href="/zh/cli/cm" description="使用 Metaplex CLI 通过交互式向导创建和管理 Candy Machine。" /%}
+{% quick-link title="CLI 命令" icon="CommandLine" href="/zh/dev-tools/cli/cm" description="使用 Metaplex CLI 通过交互式向导创建和管理 Candy Machine。" /%}
 
 {% quick-link title="API 参考" icon="JavaScript" href="https://mpl-core-candy-machine.typedoc.metaplex.com/" target="_blank" description="查看 Javascript API 文档。" /%}
 

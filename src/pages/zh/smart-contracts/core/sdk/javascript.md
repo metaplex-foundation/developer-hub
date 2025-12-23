@@ -4,9 +4,9 @@ metaTitle: Javascript SDK | MPL-Core
 description: 了解如何设置您的项目以运行 MPL-Core Javascript SDK。
 ---
 
-Metaplex 提供了一个可用于与 MPL-Core 程序交互的 JavaScript 库。得益于 [Umi 框架](/zh/umi)，它不附带很多固定依赖，因此提供了一个可在任何 JavaScript 项目中使用的轻量级库。
+Metaplex 提供了一个可用于与 MPL-Core 程序交互的 JavaScript 库。得益于 [Umi 框架](/zh/dev-tools/umi)，它不附带很多固定依赖，因此提供了一个可在任何 JavaScript 项目中使用的轻量级库。
 
-要开始使用，您需要[安装 Umi 框架](/zh/umi/getting-started)和 MPL-Core JavaScript 库。
+要开始使用，您需要[安装 Umi 框架](/zh/dev-tools/umi/getting-started)和 MPL-Core JavaScript 库。
 
 ## 安装
 
@@ -26,7 +26,7 @@ npm install @metaplex-foundation/mpl-core
 
 ## Umi 设置
 
-与 Metaplex Javascript SDK 交互需要一个 `umi` 实例。如果您尚未设置和配置 `umi` 实例，则可以查看 [Umi 快速入门](/zh/umi/getting-started)页面并配置您的 RPC 端点和 `umi` 身份/签名者。
+与 Metaplex Javascript SDK 交互需要一个 `umi` 实例。如果您尚未设置和配置 `umi` 实例，则可以查看 [Umi 快速入门](/zh/dev-tools/umi/getting-started)页面并配置您的 RPC 端点和 `umi` 身份/签名者。
 
 在 `umi` 实例初始化期间，您可以使用以下方式将 mpl-core 包添加到 `umi`：
 

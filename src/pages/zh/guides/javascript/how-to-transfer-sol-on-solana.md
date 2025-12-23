@@ -73,7 +73,7 @@ transfer()
 
 ## 设置 Umi
 
-此示例将演示如何使用 `generatedSigner()` 设置 Umi。如果您希望以不同的方式设置钱包或签名者，可以查看 [**连接到 Umi**](/zh/umi/connecting-to-umi) 指南。
+此示例将演示如何使用 `generatedSigner()` 设置 Umi。如果您希望以不同的方式设置钱包或签名者，可以查看 [**连接到 Umi**](/zh/dev-tools/umi/connecting-to-umi) 指南。
 
 ### 生成新钱包
 

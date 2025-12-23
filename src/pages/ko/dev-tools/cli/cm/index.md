@@ -20,12 +20,12 @@ mplx cm create --wizard
 
 | 명령어 | 목적 | 주요 기능 |
 |---------|---------|--------------|
-| [`create`](/ko/cli/cm/create) | 새 캔디 머신 생성 | 대화형 마법사, 템플릿 생성, 수동 구성 |
-| [`upload`](/ko/cli/cm/upload) | 스토리지에 자산 업로드 | 지능형 캐싱, 진행 상황 추적, 검증 |
-| [`insert`](/ko/cli/cm/insert) | 캔디 머신에 아이템 삽입 | 스마트 로딩 감지, 배치 처리 |
-| [`validate`](/ko/cli/cm/validate) | 자산 캐시 검증 | 포괄적인 검증, 오류 보고 |
-| [`fetch`](/ko/cli/cm/fetch) | 캔디 머신 정보 가져오기 | 구성, 가드 설정, 상태 표시 |
-| [`withdraw`](/ko/cli/cm/withdraw) | 인출 및 삭제 | 깔끔한 인출, 잔액 회복 |
+| [`create`](/ko/dev-tools/cli/cm/create) | 새 캔디 머신 생성 | 대화형 마법사, 템플릿 생성, 수동 구성 |
+| [`upload`](/ko/dev-tools/cli/cm/upload) | 스토리지에 자산 업로드 | 지능형 캐싱, 진행 상황 추적, 검증 |
+| [`insert`](/ko/dev-tools/cli/cm/insert) | 캔디 머신에 아이템 삽입 | 스마트 로딩 감지, 배치 처리 |
+| [`validate`](/ko/dev-tools/cli/cm/validate) | 자산 캐시 검증 | 포괄적인 검증, 오류 보고 |
+| [`fetch`](/ko/dev-tools/cli/cm/fetch) | 캔디 머신 정보 가져오기 | 구성, 가드 설정, 상태 표시 |
+| [`withdraw`](/ko/dev-tools/cli/cm/withdraw) | 인출 및 삭제 | 깔끔한 인출, 잔액 회복 |
 
 ## 주요 기능
 
@@ -177,7 +177,7 @@ CLI는 모든 Core Candy Machine 가드를 지원합니다:
 
 **동결 가드**: `freezeSolPayment`, `freezeTokenPayment`
 
-자세한 가드 문서는 [Core Candy Machine 가드](/ko/core-candy-machine/guards) 참조를 확인하세요.
+자세한 가드 문서는 [Core Candy Machine 가드](/ko/smart-contracts/core-candy-machine/guards) 참조를 확인하세요.
 
 ## 모범 사례
 
@@ -213,14 +213,14 @@ CLI는 모든 Core Candy Machine 가드를 지원합니다:
 
 ## 관련 문서
 
-- [Core Candy Machine 개요](/ko/core-candy-machine) - MPL Core 캔디 머신 이해
-- [Core Candy Machine 가드](/ko/core-candy-machine/guards) - 완전한 가드 참조
-- [CLI 설치](/ko/cli/installation) - MPLX CLI 설정
-- [CLI 구성](/ko/cli/config/wallets) - 지갑 및 RPC 설정
+- [Core Candy Machine 개요](/ko/smart-contracts/core-candy-machine) - MPL Core 캔디 머신 이해
+- [Core Candy Machine 가드](/ko/smart-contracts/core-candy-machine/guards) - 완전한 가드 참조
+- [CLI 설치](/ko/dev-tools/cli/installation) - MPLX CLI 설정
+- [CLI 구성](/ko/dev-tools/cli/config/wallets) - 지갑 및 RPC 설정
 
 ## 다음 단계
 
-1. 아직 설치하지 않았다면 **[CLI 설치](/ko/cli/installation)**
-2. 마법사를 사용하여 **[첫 번째 캔디 머신 생성](/ko/cli/cm/create)**
-3. 고급 민팅 규칙을 위한 **[가드 구성 탐색](/ko/core-candy-machine/guards)**
-4. 단계별 출시를 위한 **[가드 그룹에 대해 배우기](/ko/core-candy-machine/guard-groups)**
+1. 아직 설치하지 않았다면 **[CLI 설치](/ko/dev-tools/cli/installation)**
+2. 마법사를 사용하여 **[첫 번째 캔디 머신 생성](/ko/dev-tools/cli/cm/create)**
+3. 고급 민팅 규칙을 위한 **[가드 구성 탐색](/ko/smart-contracts/core-candy-machine/guards)**
+4. 단계별 출시를 위한 **[가드 그룹에 대해 배우기](/ko/smart-contracts/core-candy-machine/guard-groups)**

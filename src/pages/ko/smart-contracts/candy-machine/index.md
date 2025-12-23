@@ -12,12 +12,12 @@ Metaplex Protocol **Candy Machine**은 Solana에서 공정한 NFT 컬렉션 출�
 
 {% quick-links %}
 
-{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/candy-machine/getting-started" description="원하는 언어나 라이브러리를 찾고 Candy Machine으로 시작하세요." /%}
+{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/smart-contracts/candy-machine/getting-started" description="원하는 언어나 라이브러리를 찾고 Candy Machine으로 시작하세요." /%}
 {% quick-link title="API 참조" icon="CodeBracketSquare" href="https://mpl-candy-machine.typedoc.metaplex.com/" target="_blank" description="특정한 내용을 찾고 있나요? 여기에 있습니다." /%}
 {% /quick-links %}
 
 {% callout %}
-이 문서는 Metaplex Token Metadata NFT를 민팅하는 데 사용할 수 있는 Candy Machine V3을 참조합니다. Core Asset을 생성하려면 [Core Candy Machine](/ko/core-candy-machine)을 참조하세요.
+이 문서는 Metaplex Token Metadata NFT를 민팅하는 데 사용할 수 있는 Candy Machine V3을 참조합니다. Core Asset을 생성하려면 [Core Candy Machine](/ko/smart-contracts/core-candy-machine)을 참조하세요.
 {% /callout %}
 
 ## 소개
@@ -49,7 +49,7 @@ Metaplex Protocol **Candy Machine**은 Solana에서 공정한 NFT 컬렉션 출�
 {% edge from="action" to="candy-machine" path="straight" /%}
 {% /diagram %}
 
-생성된 Candy Machine은 자체 설정을 추적하여 모든 NFT가 어떻게 민팅되어야 하는지 이해할 수 있도록 도와줍니다. 예를 들어, 이 Candy Machine에서 민팅된 모든 NFT에 할당될 `creators` 매개변수가 있습니다. 다음 페이지에서 일부 코드 예제를 포함하여 Candy Machine을 생성하고 구성하는 방법에 대한 더 자세한 내용을 확인할 수 있습니다: [Candy Machine 설정](/ko/candy-machine/settings) 및 [Candy Machine 관리](/ko/candy-machine/manage).
+생성된 Candy Machine은 자체 설정을 추적하여 모든 NFT가 어떻게 민팅되어야 하는지 이해할 수 있도록 도와줍니다. 예를 들어, 이 Candy Machine에서 민팅된 모든 NFT에 할당될 `creators` 매개변수가 있습니다. 다음 페이지에서 일부 코드 예제를 포함하여 Candy Machine을 생성하고 구성하는 방법에 대한 더 자세한 내용을 확인할 수 있습니다: [Candy Machine 설정](/ko/smart-contracts/candy-machine/settings) 및 [Candy Machine 관리](/ko/smart-contracts/candy-machine/manage).
 
 그러나 우리는 여전히 해당 Candy Machine에서 어떤 NFT가 민팅되어야 하는지 모릅니다. 다시 말해, Candy Machine이 로드되지 않았습니다. 따라서 다음 단계는 Candy Machine에 아이템을 삽입하는 것입니다.
 
@@ -76,7 +76,7 @@ Metaplex Protocol **Candy Machine**은 Solana에서 공정한 NFT 컬렉션 출�
 - `name`: NFT의 이름.
 - `uri`: NFT의 [JSON 메타데이터](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard)를 가리키는 URI. 이는 JSON 메타데이터가 이미 온체인(예: Arweave, IPFS) 또는 오프체인(예: AWS, 자체 서버) 스토리지 제공업체를 통해 업로드되었음을 의미합니다.
 
-다른 모든 매개변수는 모든 NFT 간에 공유되므로 중복을 피하기 위해 Candy Machine의 설정에 직접 보관됩니다. 자세한 내용은 [아이템 삽입](/ko/candy-machine/insert-items)을 참조하세요.
+다른 모든 매개변수는 모든 NFT 간에 공유되므로 중복을 피하기 위해 Candy Machine의 설정에 직접 보관됩니다. 자세한 내용은 [아이템 삽입](/ko/smart-contracts/candy-machine/insert-items)을 참조하세요.
 
 이 시점에서 실제 NFT는 아직 생성되지 않았다는 점에 주목하세요. 우리는 단순히 민팅 시 **온디맨드로 NFT를 생성**하는 데 필요한 모든 데이터로 Candy Machine을 로드하고 있습니다. 이것이 다음 단계로 이어집니다.
 
@@ -117,9 +117,9 @@ Metaplex Protocol **Candy Machine**은 Solana에서 공정한 NFT 컬렉션 출�
 {% edge from="mint-3" to="nft-3" path="bezier" /%}
 {% /diagram %}
 
-Candy Machine이 로드되고 모든 사전 구성된 조건이 충족되면 사용자가 NFT 민팅을 시작할 수 있습니다. 이 시점에서만 Solana 블록체인에 NFT가 생성됩니다. 민팅 전에 일부 사용자는 Captcha 수행이나 머클 증명 전송과 같은 추가 검증 단계를 수행해야 할 수 있습니다. 자세한 내용은 [민팅](/ko/candy-machine/mint)을 참조하세요.
+Candy Machine이 로드되고 모든 사전 구성된 조건이 충족되면 사용자가 NFT 민팅을 시작할 수 있습니다. 이 시점에서만 Solana 블록체인에 NFT가 생성됩니다. 민팅 전에 일부 사용자는 Captcha 수행이나 머클 증명 전송과 같은 추가 검증 단계를 수행해야 할 수 있습니다. 자세한 내용은 [민팅](/ko/smart-contracts/candy-machine/mint)을 참조하세요.
 
-Candy Machine에서 모든 NFT가 민팅되면 목적을 달성했으므로 안전하게 삭제하여 블록체인에서 일부 저장 공간을 해제하고 일부 임대료를 회수할 수 있습니다. 자세한 내용은 [Candy Machine 관리](/ko/candy-machine/manage)를 참조하세요.
+Candy Machine에서 모든 NFT가 민팅되면 목적을 달성했으므로 안전하게 삭제하여 블록체인에서 일부 저장 공간을 해제하고 일부 임대료를 회수할 수 있습니다. 자세한 내용은 [Candy Machine 관리](/ko/smart-contracts/candy-machine/manage)를 참조하세요.
 
 {% diagram %}
 {% node #action-1 label="4. 삭제" theme="pink" /%}
@@ -141,7 +141,7 @@ Candy Machine에서 모든 NFT가 민팅되면 목적을 달성했으므로 안�
 
 이제 Candy Machine이 어떻게 작동하는지 이해했으므로 창작자가 Candy Machine의 민팅 프로세스를 보호하고 사용자 정의할 수 있는 다양한 방법을 살펴보겠습니다.
 
-창작자는 "**가드**"를 사용하여 Candy Machine에 다양한 기능을 추가할 수 있습니다. Metaplex Candy Machine은 [**총 21개의 기본 가드**](/ko/candy-machine/guards)와 함께 제공되는 **Candy Guard**라는 추가 Solana 프로그램과 함께 제공됩니다. 추가 프로그램을 사용함으로써 고급 개발자가 기본 Candy Guard 프로그램을 포크하여 자체 커스텀 가드를 만들면서도 여전히 메인 Candy Machine 프로그램을 사용할 수 있습니다.
+창작자는 "**가드**"를 사용하여 Candy Machine에 다양한 기능을 추가할 수 있습니다. Metaplex Candy Machine은 [**총 21개의 기본 가드**](/ko/smart-contracts/candy-machine/guards)와 함께 제공되는 **Candy Guard**라는 추가 Solana 프로그램과 함께 제공됩니다. 추가 프로그램을 사용함으로써 고급 개발자가 기본 Candy Guard 프로그램을 포크하여 자체 커스텀 가드를 만들면서도 여전히 메인 Candy Machine 프로그램을 사용할 수 있습니다.
 
 각 가드는 원하는 대로 활성화하고 구성할 수 있으므로 창작자가 필요한 기능을 선택할 수 있습니다. 모든 가드를 비활성화하는 것은 누구나 언제든지 무료로 NFT를 민팅할 수 있도록 허용하는 것과 같으며, 이는 우리가 원하는 것이 아닐 것입니다. 따라서 더 현실적인 예제를 만들기 위해 몇 가지 가드를 살펴보겠습니다.
 
@@ -201,18 +201,18 @@ SOL 부족 {% .text-xs %} \
 {% edge from="mint-4" to="fail-4" path="bezier" /%}
 {% /diagram %}
 
-보시다시피, 21개 이상의 기본 가드와 커스텀 가드를 생성할 수 있는 기능을 통해 창작자는 중요한 기능을 선별하고 완벽한 Candy Machine을 구성할 수 있습니다. 이는 매우 강력한 기능이므로 많은 페이지를 할애했습니다. 가드에 대해 더 자세히 알아보기 위한 최고의 시작점은 [Candy Guards](/ko/candy-machine/guards) 페이지입니다.
+보시다시피, 21개 이상의 기본 가드와 커스텀 가드를 생성할 수 있는 기능을 통해 창작자는 중요한 기능을 선별하고 완벽한 Candy Machine을 구성할 수 있습니다. 이는 매우 강력한 기능이므로 많은 페이지를 할애했습니다. 가드에 대해 더 자세히 알아보기 위한 최고의 시작점은 [Candy Guards](/ko/smart-contracts/candy-machine/guards) 페이지입니다.
 
 ## 다음 단계
 
 이것이 Candy Machine의 좋은 개요를 제공하지만, 발견하고 배울 것이 훨씬 더 많습니다. 이 Candy Machine 문서의 다른 페이지에서 기대할 수 있는 내용은 다음과 같습니다.
 
-- [시작하기](/ko/candy-machine/getting-started). Candy Machine을 관리하는 데 사용할 수 있는 다양한 라이브러리와 SDK를 나열합니다.
-- [Candy Machine 설정](/ko/candy-machine/settings). Candy Machine 설정을 매우 자세히 설명합니다.
-- [Candy Machine 관리](/ko/candy-machine/manage). Candy Machine을 관리하는 방법을 설명합니다.
-- [아이템 삽입](/ko/candy-machine/insert-items). Candy Machine에 아이템을 로드하는 방법을 설명합니다.
-- [Candy Guards](/ko/candy-machine/guards). 가드가 작동하는 방식과 활성화하는 방법을 설명합니다.
-- [가드 그룹](/ko/candy-machine/guard-groups). 여러 가드 그룹을 구성하는 방법을 설명합니다.
-- [특수 가드 명령어](/ko/candy-machine/guard-route). 가드별 명령어를 실행하는 방법을 설명합니다.
-- [민팅](/ko/candy-machine/mint). Candy Machine에서 민팅하는 방법과 민팅 전 요구사항을 처리하는 방법을 설명합니다.
-- [참조](/ko/candy-machine/references). Candy Machine과 관련된 API 참조를 나열합니다.
+- [시작하기](/ko/smart-contracts/candy-machine/getting-started). Candy Machine을 관리하는 데 사용할 수 있는 다양한 라이브러리와 SDK를 나열합니다.
+- [Candy Machine 설정](/ko/smart-contracts/candy-machine/settings). Candy Machine 설정을 매우 자세히 설명합니다.
+- [Candy Machine 관리](/ko/smart-contracts/candy-machine/manage). Candy Machine을 관리하는 방법을 설명합니다.
+- [아이템 삽입](/ko/smart-contracts/candy-machine/insert-items). Candy Machine에 아이템을 로드하는 방법을 설명합니다.
+- [Candy Guards](/ko/smart-contracts/candy-machine/guards). 가드가 작동하는 방식과 활성화하는 방법을 설명합니다.
+- [가드 그룹](/ko/smart-contracts/candy-machine/guard-groups). 여러 가드 그룹을 구성하는 방법을 설명합니다.
+- [특수 가드 명령어](/ko/smart-contracts/candy-machine/guard-route). 가드별 명령어를 실행하는 방법을 설명합니다.
+- [민팅](/ko/smart-contracts/candy-machine/mint). Candy Machine에서 민팅하는 방법과 민팅 전 요구사항을 처리하는 방법을 설명합니다.
+- [참조](/ko/smart-contracts/candy-machine/references). Candy Machine과 관련된 API 참조를 나열합니다.
