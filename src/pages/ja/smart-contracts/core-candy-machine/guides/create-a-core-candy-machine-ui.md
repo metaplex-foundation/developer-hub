@@ -540,7 +540,7 @@ const account = await umi.rpc.getAccount(umi.identity.publicKey);
 const solBalance = account.lamports;
 ```
 
-TokenまたはNFTを必要とするguardのいずれかを使用している場合は、それらも取得することをお勧めします。このためには[DAS API](/das-api/methods/get-asset-by-owner)を使用することをお勧めします。DASは、RPCプロバイダーによって維持されるTokenのインデックスです。これを使用すると、すべての必要な情報を1回の呼び出しで取得できます。UIでは、返されたオブジェクトを使用して、接続されたウォレットが必要なトークンまたはNFTを所有しているかどうかを確認できます。
+TokenまたはNFTを必要とするguardのいずれかを使用している場合は、それらも取得することをお勧めします。このためには[DAS API](/das-api/methods/get-assets-by-owner)を使用することをお勧めします。DASは、RPCプロバイダーによって維持されるTokenのインデックスです。これを使用すると、すべての必要な情報を1回の呼び出しで取得できます。UIでは、返されたオブジェクトを使用して、接続されたウォレットが必要なトークンまたはNFTを所有しているかどうかを確認できます。
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';

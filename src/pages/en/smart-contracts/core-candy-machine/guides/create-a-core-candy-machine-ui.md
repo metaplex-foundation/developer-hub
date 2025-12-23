@@ -540,7 +540,7 @@ const account = await umi.rpc.getAccount(umi.identity.publicKey);
 const solBalance = account.lamports;
 ```
 
-If you are using one of the guards that require tokens or NFTs you may want to fetch those, too. We recommend to use [DAS API](/das-api/methods/get-asset-by-owner) for this. DAS is an index of Tokens maintained by your RPC Provider. Using this allows to fetch all the required information with one call. In the UI you can then use the returned object to verify if the connected wallet owns the required tokens or NFTs.
+If you are using one of the guards that require tokens or NFTs you may want to fetch those, too. We recommend to use [DAS API](/das-api/methods/get-assets-by-owner) for this. DAS is an index of Tokens maintained by your RPC Provider. Using this allows to fetch all the required information with one call. In the UI you can then use the returned object to verify if the connected wallet owns the required tokens or NFTs.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';

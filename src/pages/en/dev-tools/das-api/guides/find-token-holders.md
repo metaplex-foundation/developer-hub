@@ -222,4 +222,3 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 - [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts)
 - [Analyze Collection Statistics](/das-api/guides/collection-statistics)
-- [Track Asset Transfers](/das-api/guides/track-transfers)
