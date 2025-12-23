@@ -74,14 +74,14 @@ my-candy-machine/
 
 ## 관련 명령어
 
-- [`mplx cm create`](/ko/cli/cm/create) - 캔디 머신 생성 (자동으로 업로드 가능)
-- [`mplx cm validate`](/ko/cli/cm/validate) - 업로드된 자산 검증
-- [`mplx cm insert`](/ko/cli/cm/insert) - 업로드된 자산을 캔디 머신에 삽입
-- [`mplx cm fetch`](/ko/cli/cm/fetch) - 캔디 머신 및 자산 정보 보기
+- [`mplx cm create`](/ko/dev-tools/cli/cm/create) - 캔디 머신 생성 (자동으로 업로드 가능)
+- [`mplx cm validate`](/ko/dev-tools/cli/cm/validate) - 업로드된 자산 검증
+- [`mplx cm insert`](/ko/dev-tools/cli/cm/insert) - 업로드된 자산을 캔디 머신에 삽입
+- [`mplx cm fetch`](/ko/dev-tools/cli/cm/fetch) - 캔디 머신 및 자산 정보 보기
 
 ## 다음 단계
 
-1. 모든 것이 올바르게 업로드되었는지 확인하기 위해 **[업로드 검증](/ko/cli/cm/validate)**
-2. 업로드된 자산을 사용하여 **[캔디 머신 생성](/ko/cli/cm/create)**
-3. 캔디 머신에 자산을 로드하기 위해 **[아이템 삽입](/ko/cli/cm/insert)**
-4. 모든 것이 작동하는지 확인하기 위해 **[설정 모니터링](/ko/cli/cm/fetch)**
+1. 모든 것이 올바르게 업로드되었는지 확인하기 위해 **[업로드 검증](/ko/dev-tools/cli/cm/validate)**
+2. 업로드된 자산을 사용하여 **[캔디 머신 생성](/ko/dev-tools/cli/cm/create)**
+3. 캔디 머신에 자산을 로드하기 위해 **[아이템 삽입](/ko/dev-tools/cli/cm/insert)**
+4. 모든 것이 작동하는지 확인하기 위해 **[설정 모니터링](/ko/dev-tools/cli/cm/fetch)**

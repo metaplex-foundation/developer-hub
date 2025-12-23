@@ -330,7 +330,7 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 
 ## 関連Inscriptionアカウント
 
-[Metaplex JSON標準](/ja/token-metadata/token-standard)には、JSONスキーマのfilesプロパティを介してトークンに関連ファイルをリンクするオプションが含まれています。Inscription programは、PDAの力を使用して追加データを関連付ける新しい方法を導入します！PDAはInscriptionと**アソシエーションタグ**から派生されており、高価なJSON逆シリアル化と解析を必要とせず、追加の刻印されたデータをプログラムで導出する方法になります。
+[Metaplex JSON標準](/ja/smart-contracts/token-metadata/token-standard)には、JSONスキーマのfilesプロパティを介してトークンに関連ファイルをリンクするオプションが含まれています。Inscription programは、PDAの力を使用して追加データを関連付ける新しい方法を導入します！PDAはInscriptionと**アソシエーションタグ**から派生されており、高価なJSON逆シリアル化と解析を必要とせず、追加の刻印されたデータをプログラムで導出する方法になります。
 
 ## Inscription Gateway
 

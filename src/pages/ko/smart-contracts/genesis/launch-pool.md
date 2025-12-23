@@ -364,4 +364,4 @@ if (deposit) {
 
 - [Priced Sale](/smart-contracts/genesis/priced-sale) - 거래 전 사전 예치 수집
 - [어그리게이션 API](/smart-contracts/genesis/aggregation) - API를 통한 런칭 데이터 조회
-- [Launch Pool](https://github.com/metaplex-foundation/mpl-genesis/tree/main/clients/js/examples/launch-pool) - GitHub의 예제 구현
+- [Launch Pool](https://github.com/metaplex-foundation/genesis/tree/main/clients/js/examples/launch-pool) - GitHub의 예제 구현

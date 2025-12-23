@@ -26,7 +26,7 @@ import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata'
 const umi = createUmi('http://127.0.0.1:8899').use(mplTokenMetadata())
 ```
 
-次に、どのウォレットを使用するかをUmiに伝える必要があります。これは[キーペア](/ja/umi/connecting-to-umi#connecting-w-a-secret-key)または[solana wallet adapter](/ja/umi/connecting-to-umi#connecting-w-wallet-adapter)のいずれかです。
+次に、どのウォレットを使用するかをUmiに伝える必要があります。これは[キーペア](/ja/dev-tools/umi/connecting-to-umi#connecting-w-a-secret-key)または[solana wallet adapter](/ja/dev-tools/umi/connecting-to-umi#connecting-w-wallet-adapter)のいずれかです。
 
 以上です。これで、[ライブラリが提供する様々な関数](https://mpl-token-metadata.typedoc.metaplex.com/)を使用し、それらに`Umi`インスタンスを渡すことでNFTとやり取りできます。NFTを作成し、そのすべてのオンチェーンアカウントのデータを取得する例は次のとおりです。
 

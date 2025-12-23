@@ -191,6 +191,34 @@ export const tokenAuthRules = {
         'Public Key Match': '공개 키 매치',
         'Rule Set Buffers': '규칙 세트 버퍼'
       }
+    },
+    zh: {
+      headline: 'NFT权限',
+      description: '为您的NFT设计自定义授权规则。',
+      sections: {
+        'Introduction': '简介',
+        'Features': '功能',
+        'Composite Rules': '复合规则',
+        'Primitive Rules': '原始规则',
+        'Advanced': '高级'
+      },
+      links: {
+        'Overview': '概述',
+        'Metaplex Rule Sets': 'Metaplex规则集',
+        'Create or Update Rule Sets': '创建或更新规则集',
+        'Validating with a Rule Set': '使用规则集验证',
+        'All': 'All（全部）',
+        'Any': 'Any（任意）',
+        'Not': 'Not（非）',
+        'Additional Signer': '额外签名者',
+        'Amount': '数量',
+        'Namespace': '命名空间',
+        'Pass': 'Pass（通过）',
+        'PDA Match': 'PDA匹配',
+        'Program Owned': '程序所有',
+        'Public Key Match': '公钥匹配',
+        'Rule Set Buffers': '规则集缓冲区'
+      }
     }
   }
 }

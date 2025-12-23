@@ -68,6 +68,17 @@ export const hydra = {
         'Overview': '개요',
         'Quick Start': '퀵 스타트'
       }
+    },
+    zh: {
+      headline: '扇出钱包',
+      description: '创建在多个股东之间分割的共享钱包。',
+      sections: {
+        'Introduction': '简介'
+      },
+      links: {
+        'Overview': '概述',
+        'Quick Start': '快速开始'
+      }
     }
   }
 }

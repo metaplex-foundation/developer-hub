@@ -83,6 +83,22 @@ export const global = {
         'Storage Providers': '스토리지 제공업체',
         'Community Guides': '커뮤니티 가이드',
       }
+    },
+    zh: {
+      headline: '开发者中心',
+      description: '所有Metaplex开发者资源的集中地。',
+      sections: {
+        'Getting Started': '快速入门',
+        'Resources': '资源',
+      },
+      links: {
+        'Programs and Tools': '程序和工具',
+        'Understanding Programs': '理解程序',
+        'Developer Tools': '开发者工具',
+        'RPC Providers': 'RPC提供商',
+        'Storage Providers': '存储提供商',
+        'Community Guides': '社区指南',
+      }
     }
   }
 }

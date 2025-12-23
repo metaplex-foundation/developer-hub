@@ -136,9 +136,9 @@ npm link
 
 CLIがインストールされたので、以下のことができます：
 
-1. [コアコマンドについて学ぶ](/ja/cli/core/create-asset)
-2. [ツールボックスユーティリティを探索](/ja/cli/toolbox/token-create)
-3. [環境を設定する](/ja/cli/config/wallets)
+1. [コアコマンドについて学ぶ](/ja/dev-tools/cli/core/create-asset)
+2. [ツールボックスユーティリティを探索](/ja/dev-tools/cli/toolbox/token-create)
+3. [環境を設定する](/ja/dev-tools/cli/config/wallets)
 
 ## 更新
 

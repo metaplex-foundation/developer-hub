@@ -9,7 +9,7 @@ description: Token Metadataでアセットをコレクションに安全にラ�
 この機能は以下の利点を提供します：
 
 - 追加のオンチェーン呼び出しを行うことなく、任意のNFTがどのコレクションに属しているかを簡単に識別できます。
-- 特定のコレクションに属するすべてのNFTを見つけることが可能です（[方法についてはガイドをご覧ください](/ja/token-metadata/guides/get-by-collection)）。
+- 特定のコレクションに属するすべてのNFTを見つけることが可能です（[方法についてはガイドをご覧ください](/ja/smart-contracts/token-metadata/guides/get-by-collection)）。
 - コレクションのメタデータ（名前、説明、画像など）を簡単に管理できます。
 
 ## コレクションはNFTです
@@ -415,7 +415,7 @@ NFTに`Collection`属性が設定されると、Collection NFTの権限がToken 
 
 - **Metadata**: NFTのMetadataアカウントのアドレス。これは、コレクション内で検証したいNFTです。
 - **Collection Mint**: Collection NFTのMintアカウントのアドレス。これは、NFTのMetadataアカウントに既に設定されているが、まだ検証されていないCollection NFTです。
-- **Authority**: 署名者としてのCollection NFTの権限。これは、Collection NFTのUpdate Authorityまたは適切な役割を持つ承認された委任先である可能性があります（「[委任された権限](/ja/token-metadata/delegates)」ページを参照）。
+- **Authority**: 署名者としてのCollection NFTの権限。これは、Collection NFTのUpdate Authorityまたは適切な役割を持つ承認された委任先である可能性があります（「[委任された権限](/ja/smart-contracts/token-metadata/delegates)」ページを参照）。
 
 以下は、Token MetadataでCollection NFTを検証するためのSDKの使用方法です。
 

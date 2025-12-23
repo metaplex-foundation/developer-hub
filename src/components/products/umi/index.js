@@ -235,6 +235,44 @@ export const umi = {
         'Optimal transaction landing': '최적의 트랜잭션 착지',
         'Serializing and Deserializing Transactions': '트랜잭션 직렬화 및 역직렬화'
       }
+    },
+    zh: {
+      headline: '客户端包装器',
+      description: '用于您的应用程序的核心程序集合。',
+      sections: {
+        'Introduction': '简介',
+        'Features': '功能',
+        'Toolbox': '工具箱',
+        'Guides': '指南'
+      },
+      links: {
+        'Overview': '概述',
+        'Getting Started': '快速入门',
+        'Metaplex Umi Plugins': 'Metaplex Umi插件',
+        'Web3js Differences and Adapters': 'Web3js差异和适配器',
+        '@solana/kit Adapters': '@solana/kit适配器',
+        'Accounts': '账户',
+        'Helpers': '辅助函数',
+        'HTTP Requests': 'HTTP请求',
+        'Interfaces': '接口',
+        'Implementations': '实现',
+        'Kinobi': 'Kinobi',
+        'Plugins': '插件',
+        'Programs': '程序',
+        'PublicKeys and Signers': '公钥和签名者',
+        'RPC': 'RPC',
+        'Serializers': '序列化器',
+        'Storage': '存储',
+        'Transactions': '交易',
+        'Create Account': '创建账户',
+        'Transfer Sol': '转账Sol',
+        'Token Managment': '代币管理',
+        'Priority Fees and Compute Managment': '优先费用和计算管理',
+        'Address Lookup Table': '地址查找表',
+        'Transaction Memo': '交易备注',
+        'Optimal transaction landing': '最优交易落地',
+        'Serializing and Deserializing Transactions': '交易的序列化和反序列化'
+      }
     }
   }
 }

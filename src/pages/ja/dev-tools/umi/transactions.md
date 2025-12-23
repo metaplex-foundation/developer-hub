@@ -127,7 +127,7 @@ const transaction = builder.build(umi)
 const transaction = await builder.buildWithLatestBlockhash(umi)
 ```
 
-この時点で、構築されたトランザクションを使用し、`getSigners`メソッドを通してビルダーからすべての重複除去された署名者を取得して署名することができます（詳細については[トランザクションの署名](/ja/umi/public-keys-and-signers#signing-transactions)を参照してください）。しかし、Umiはそれを行ってくれる`buildAndSign`メソッドを提供します。`buildAndSign`を使用する際、最新のブロックハッシュは、それがビルダーで設定されていない場合にのみ使用されます。
+この時点で、構築されたトランザクションを使用し、`getSigners`メソッドを通してビルダーからすべての重複除去された署名者を取得して署名することができます（詳細については[トランザクションの署名](/ja/dev-tools/umi/public-keys-and-signers#signing-transactions)を参照してください）。しかし、Umiはそれを行ってくれる`buildAndSign`メソッドを提供します。`buildAndSign`を使用する際、最新のブロックハッシュは、それがビルダーで設定されていない場合にのみ使用されます。
 
 ```ts
 const signedTransaction = await builder.buildAndSign(umi)

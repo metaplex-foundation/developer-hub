@@ -8,7 +8,7 @@ description: Core Candy Machineからミントして、ユーザーがCore NFT�
 
 ## 基本的なミント
 
-[Candy Guardsページ](/ja/core-candy-machine/guards#なぜ別のプログラムなのか)で言及したように、Candy MachineからNFTをミントする責任を持つ2つのプログラムがあります：NFTのミントを担当するCandy Machine Coreプログラムと、その上に設定可能なアクセス制御層を追加し、カスタムガードを提供するためにフォークできるCandy Guardプログラムです。
+[Candy Guardsページ](/ja/smart-contracts/core-candy-machine/guards#なぜ別のプログラムなのか)で言及したように、Candy MachineからNFTをミントする責任を持つ2つのプログラムがあります：NFTのミントを担当するCandy Machine Coreプログラムと、その上に設定可能なアクセス制御層を追加し、カスタムガードを提供するためにフォークできるCandy Guardプログラムです。
 
 そのため、Candy Machineからミントする方法は2つあります：
 
@@ -199,7 +199,7 @@ Mint Settingsを必要とするガードの良い例は**NFT Payment**ガード�
 
 {% /diagram %}
 
-[利用可能な各ガード](/ja/core-candy-machine/guards)には独自のドキュメントページがあり、そのガードがミント時にMint Settingsの提供を期待するかどうかを教えてくれます。
+[利用可能な各ガード](/ja/smart-contracts/core-candy-machine/guards)には独自のドキュメントページがあり、そのガードがミント時にMint Settingsの提供を期待するかどうかを教えてくれます。
 
 Mint Settingsを必要としないガードのみを使用する場合、上記の「基本的なミント」セクションで説明したのと同じ方法でミントできます。そうでなければ、それらを必要とするすべてのガードのMint Settingsを含む追加のオブジェクト属性を提供する必要があります。SDKを使用して実際にどのように見えるかを見てみましょう。
 
@@ -424,9 +424,9 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 
 ### Route命令の使用
 
-ガードが事前検証ステップを要求できる一つの方法は、「route」命令を通じて[独自の特別な命令](/ja/core-candy-machine/guard-route)を使用することです。
+ガードが事前検証ステップを要求できる一つの方法は、「route」命令を通じて[独自の特別な命令](/ja/smart-contracts/core-candy-machine/guard-route)を使用することです。
 
-その良い例は**Allow List**ガードです。このガードを使用する場合、route命令を呼び出し、有効なMerkle Proofを提供することで、ウォレットが事前定義されたウォレットリストに属することを確認する必要があります。このroute命令が成功すると、そのウォレット用のAllow List PDAが作成され、mint命令がAllow Listガードを検証するために読み取ることができます。[Allow Listガードについて専用ページで詳しく読むことができます](/ja/core-candy-machine/guards/allow-list)。
+その良い例は**Allow List**ガードです。このガードを使用する場合、route命令を呼び出し、有効なMerkle Proofを提供することで、ウォレットが事前定義されたウォレットリストに属することを確認する必要があります。このroute命令が成功すると、そのウォレット用のAllow List PDAが作成され、mint命令がAllow Listガードを検証するために読み取ることができます。[Allow Listガードについて専用ページで詳しく読むことができます](/ja/smart-contracts/core-candy-machine/guards/allow-list)。
 
 {% diagram %}
 
@@ -479,7 +479,7 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 
 ガードがその事前検証ステップを実行するもう一つの方法は、外部ソリューションに依存することです。
 
-例えば、**Gatekeeper**ガードを使用する場合、設定されたGatekeeper Networkに応じてチャレンジ（Captchaの完了など）を実行することでGateway Tokenをリクエストする必要があります。Gatekeeperガードは、ミントを検証または拒否するために、そのようなGateway Tokenの存在をチェックします。[Gatekeeperガードについて専用ページで詳しく学ぶことができます](/ja/core-candy-machine/guards/gatekeeper)。
+例えば、**Gatekeeper**ガードを使用する場合、設定されたGatekeeper Networkに応じてチャレンジ（Captchaの完了など）を実行することでGateway Tokenをリクエストする必要があります。Gatekeeperガードは、ミントを検証または拒否するために、そのようなGateway Tokenの存在をチェックします。[Gatekeeperガードについて専用ページで詳しく学ぶことができます](/ja/smart-contracts/core-candy-machine/guards/gatekeeper)。
 
 {% diagram %}
 
@@ -535,7 +535,7 @@ Gateway Tokenをリクエスト \
 
 Core Candy Machineに含めたいであろう一つのガードは、失敗したミントに設定可能なSOL量を課金することでCore Candy Machineをボットから守るBot Taxガードです。この金額は通常、実際のユーザーからの本物の間違いに影響を与えることなくボットを傷つけるために小さく設定されます。すべてのボット税はCore Candy Machineアカウントに転送されるため、ミント完了後にCore Candy Machineアカウントを削除してこれらの資金にアクセスできます。
 
-このガードは少し特別で、他のすべてのガードのミント動作に影響を与えます。Bot Taxが有効化され、他のガードのミント検証が失敗した場合、**トランザクションは成功したふりをします**。これは、プログラムからエラーが返されませんが、NFTもミントされないことを意味します。これは、ボットからCore Candy Machineアカウントに資金を転送するためにトランザクションが成功する必要があるためです。[Bot Taxガードについて専用ページで詳しく学ぶことができます](/ja/core-candy-machine/guards/bot-tax)。
+このガードは少し特別で、他のすべてのガードのミント動作に影響を与えます。Bot Taxが有効化され、他のガードのミント検証が失敗した場合、**トランザクションは成功したふりをします**。これは、プログラムからエラーが返されませんが、NFTもミントされないことを意味します。これは、ボットからCore Candy Machineアカウントに資金を転送するためにトランザクションが成功する必要があるためです。[Bot Taxガードについて専用ページで詳しく学ぶことができます](/ja/smart-contracts/core-candy-machine/guards/bot-tax)。
 
 ## まとめ
 
@@ -543,4 +543,4 @@ Core Candy Machineに含めたいであろう一つのガードは、失敗し�
 
 興味があるかもしれない追加の読み物リソースは次のとおりです：
 
-- [利用可能なすべてのガード](/ja/core-candy-machine/guards)：必要なガードを厳選できるよう、利用可能なすべてのガードを確認してください。
+- [利用可能なすべてのガード](/ja/smart-contracts/core-candy-machine/guards)：必要なガードを厳選できるよう、利用可能なすべてのガードを確認してください。

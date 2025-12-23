@@ -4,16 +4,16 @@ metaTitle: アセットのロック | Token Metadata
 description: Token Metadataでアセットをロック/フリーズする方法を学習します
 ---
 
-「[委任された権限](/ja/token-metadata/delegates#token-delegates)」ページで述べられているように、特定の委任はアセットをロックおよびロック解除でき、所有者がそれらを転送またはバーンすることを防ぐことができます。ロックされたアセットはまた、所有者が委任の権限を取り消すことも禁止します。このロック機能により、エスクローアカウントなしでは機能しない様々なユーティリティの使用例（ステーキングなど）が可能になります。 {% .lead %}
+「[委任された権限](/ja/smart-contracts/token-metadata/delegates#token-delegates)」ページで述べられているように、特定の委任はアセットをロックおよびロック解除でき、所有者がそれらを転送またはバーンすることを防ぐことができます。ロックされたアセットはまた、所有者が委任の権限を取り消すことも禁止します。このロック機能により、エスクローアカウントなしでは機能しない様々なユーティリティの使用例（ステーキングなど）が可能になります。 {% .lead %}
 
 以下の表で、アセットのロックをサポートするすべてのToken委任をリストします。これらの各委任の詳細と、それらを承認/取り消す方法については、それぞれのセクションで学ぶことができます。
 
 | 委任                                                                                | ロック/ロック解除 | 転送 | バーン | 対象              |
 | ----------------------------------------------------------------------------------- | ----------------- | ---- | ------ | ---------------- |
-| [Standard](/ja/token-metadata/delegates#standard-delegate)                         | ✅                | ✅   | ✅     | pNFT以外すべて   |
-| [Locked Transfer](/ja/token-metadata/delegates#locked-transfer-delegate-pnft-only) | ✅                | ✅   | ❌     | pNFTのみ         |
-| [Utility](/ja/token-metadata/delegates#utility-delegate-pnft-only)                 | ✅                | ❌   | ✅     | pNFTのみ         |
-| [Staking](/ja/token-metadata/delegates#staking-delegate-pnft-only)                 | ✅                | ❌   | ❌     | pNFTのみ         |
+| [Standard](/ja/smart-contracts/token-metadata/delegates#standard-delegate)                         | ✅                | ✅   | ✅     | pNFT以外すべて   |
+| [Locked Transfer](/ja/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only) | ✅                | ✅   | ❌     | pNFTのみ         |
+| [Utility](/ja/smart-contracts/token-metadata/delegates#utility-delegate-pnft-only)                 | ✅                | ❌   | ✅     | pNFTのみ         |
+| [Staking](/ja/smart-contracts/token-metadata/delegates#staking-delegate-pnft-only)                 | ✅                | ❌   | ❌     | pNFTのみ         |
 
 アセットに承認されたToken委任があると仮定して、委任がそれをロックおよびロック解除する方法を見てみましょう。
 

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import enMessages from '@/locales/en.json'
 import jaMessages from '@/locales/ja.json'
 import koMessages from '@/locales/ko.json'
+import zhMessages from '@/locales/zh.json'
 
 const LocaleContext = createContext()
 
@@ -11,6 +12,7 @@ const messages = {
   en: enMessages,
   ja: jaMessages,
   ko: koMessages,
+  zh: zhMessages,
 }
 
 export function LocaleProvider({ children }) {
@@ -35,6 +37,7 @@ export function LocaleProvider({ children }) {
 
     if (pathToCheck.startsWith('/ja')) return 'ja'
     if (pathToCheck.startsWith('/ko')) return 'ko'
+    if (pathToCheck.startsWith('/zh')) return 'zh'
     // /en prefix is used internally due to rewrites, but still English
     return 'en' // Default to English for root paths and /en/* paths
   }, [pathname, asPath, clientPath])

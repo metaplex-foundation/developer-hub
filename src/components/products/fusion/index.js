@@ -95,6 +95,20 @@ export const fusion = {
         'Constraint Types': '제약 유형',
         'Transfer Effects': '전송 효과'
       }
+    },
+    zh: {
+      headline: 'NFT中的NFT',
+      description: '创建可组合的NFT。',
+      sections: {
+        'Introduction': '简介',
+        'Features': '功能'
+      },
+      links: {
+        'Overview': '概述',
+        'Getting Started': '快速入门',
+        'Constraint Types': '约束类型',
+        'Transfer Effects': '转移效果'
+      }
     }
   }
 }

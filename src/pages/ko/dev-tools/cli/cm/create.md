@@ -32,7 +32,7 @@ mplx cm create
 
 - **형식**: JSON
 - **이름 지정**: 이미지 파일과 일치 (0.json, 1.json, 2.json, ...)
-- **스키마**: 표준 [Metaplex Core 메타데이터 형식](/ko/core/json-schema)
+- **스키마**: 표준 [Metaplex Core 메타데이터 형식](/ko/smart-contracts/core/json-schema)
 
 *컬렉션 파일:*
 
@@ -236,14 +236,14 @@ mplx cm validate
 
 ## 관련 명령어
 
-- [`mplx cm upload`](/ko/cli/cm/upload) - 스토리지에 자산 업로드
-- [`mplx cm insert`](/ko/cli/cm/insert) - 캔디 머신에 아이템 삽입
-- [`mplx cm validate`](/ko/cli/cm/validate) - 자산 캐시 검증
-- [`mplx cm fetch`](/ko/cli/cm/fetch) - 캔디 머신 정보 보기
+- [`mplx cm upload`](/ko/dev-tools/cli/cm/upload) - 스토리지에 자산 업로드
+- [`mplx cm insert`](/ko/dev-tools/cli/cm/insert) - 캔디 머신에 아이템 삽입
+- [`mplx cm validate`](/ko/dev-tools/cli/cm/validate) - 자산 캐시 검증
+- [`mplx cm fetch`](/ko/dev-tools/cli/cm/fetch) - 캔디 머신 정보 보기
 
 ## 다음 단계
 
-1. 수동으로 생성한 경우 **[자산 업로드](/ko/cli/cm/upload)**
-2. 캔디 머신에 자산을 로드하기 위해 **[아이템 삽입](/ko/cli/cm/insert)**
-3. 모든 것이 작동하는지 확인하기 위해 **[설정 검증](/ko/cli/cm/validate)**
-4. 고급 구성을 위해 **[가드에 대해 배우기](/ko/core-candy-machine/guards)**
+1. 수동으로 생성한 경우 **[자산 업로드](/ko/dev-tools/cli/cm/upload)**
+2. 캔디 머신에 자산을 로드하기 위해 **[아이템 삽입](/ko/dev-tools/cli/cm/insert)**
+3. 모든 것이 작동하는지 확인하기 위해 **[설정 검증](/ko/dev-tools/cli/cm/validate)**
+4. 고급 구성을 위해 **[가드에 대해 배우기](/ko/smart-contracts/core-candy-machine/guards)**

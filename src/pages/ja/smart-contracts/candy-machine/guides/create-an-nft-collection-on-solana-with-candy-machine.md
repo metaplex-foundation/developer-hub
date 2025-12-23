@@ -326,4 +326,4 @@ sugar guard show
 - Metaplex Candy Machine SDK - [https://developers.metaplex.com/candy-machine](https://developers.metaplex.com/candy-machine)
 
 ### さらなる読み物
-- [Sugar CLIドキュメント](/ja/candy-machine/sugar)
+- [Sugar CLIドキュメント](/ja/smart-contracts/candy-machine/sugar)

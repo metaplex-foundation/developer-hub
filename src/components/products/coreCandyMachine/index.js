@@ -415,6 +415,37 @@ export const coreCandyMachine = {
         'Create a Website for minting Assets from your Core Candy Machine': 'Core Candy Machine에서 자산을 민팅하는 웹사이트 만들기',
         'Create a Core Candy Machine with Hidden Settings': '숨겨진 설정으로 Core Candy Machine 만들기'
       }
+    },
+    zh: {
+      headline: 'Core资产发行平台',
+      description: '在Solana上发行您的下一个MPL Core资产合集。',
+      sections: {
+        'Introduction': '简介',
+        'SDK': 'SDK',
+        'Core Candy Machine': 'Core Candy Machine',
+        'Available Guards': '可用守卫',
+        'Custom Guards': '自定义守卫',
+        'General': '通用'
+      },
+      links: {
+        'Overview': '概述',
+        'Javascript SDK': 'JavaScript SDK',
+        'Rust SDK': 'Rust SDK',
+        'Anti-Bot Protection Best Practices': '防机器人保护最佳实践',
+        'Candy Guards': 'Candy守卫',
+        'Preparing Assets': '准备资产',
+        'Creating a Candy Machine': '创建Candy Machine',
+        'Inserting Items': '插入项目',
+        'Updating a Candy Machine and Guards': '更新Candy Machine和守卫',
+        'Guard Groups and Phases': '守卫组和阶段',
+        'Special Guard Instructions': '特殊守卫指令',
+        'Fetching a Candy Machine': '获取Candy Machine',
+        'Minting from a Candy Machine': '从Candy Machine铸造',
+        'Withdrawing a Candy Machine': '提取Candy Machine',
+        'Generating Client': '生成客户端',
+        'Create a Website for minting Assets from your Core Candy Machine': '创建用于从Core Candy Machine铸造资产的网站',
+        'Create a Core Candy Machine with Hidden Settings': '创建带有隐藏设置的Core Candy Machine'
+      }
     }
   }
 }

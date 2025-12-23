@@ -23,9 +23,9 @@ Candy Guardプログラムで登録されたガードごとに一つの「Route�
 
 例えば、ミントが終了した後にのみ解除できるFrozen NFTのサポートを追加するガードは、Route命令を使用してトレジャリーエスクローアカウントを初期化し、適切な条件の下で誰でもミントされたNFTを解除できるようにすることができます。前者には「init」、後者には「thaw」と等しい**Path**属性を使用してこれら2つの機能を区別できます。
 
-Route命令をサポートする各ガードのRoute命令とその基盤となるパスの詳細な説明は、[それぞれのページ](/ja/core-candy-machine/guards)で見つけることができます。
+Route命令をサポートする各ガードのRoute命令とその基盤となるパスの詳細な説明は、[それぞれのページ](/ja/smart-contracts/core-candy-machine/guards)で見つけることができます。
 
-例を提供してRoute命令がどのように機能するかを説明してみましょう。[**Allow List**](/ja/core-candy-machine/guards/allow-list)ガードは、ミントするウォレットが事前設定されたウォレットリストの一部であることを検証するためにRoute命令をサポートしています。
+例を提供してRoute命令がどのように機能するかを説明してみましょう。[**Allow List**](/ja/smart-contracts/core-candy-machine/guards/allow-list)ガードは、ミントするウォレットが事前設定されたウォレットリストの一部であることを検証するためにRoute命令をサポートしています。
 
 [Merkle Tree](https://en.m.wikipedia.org/wiki/Merkle_tree)を使用してこれを行います。つまり、許可されたウォレットの全リストのハッシュを作成し、そのハッシュ（**Merkle Root**として知られる）をガード設定に保存する必要があります。ウォレットが許可リストに載っていることを証明するには、プログラムがMerkle Rootを計算してガードの設定と一致することを確認できるハッシュのリスト（**Merkle Proof**として知られる）を提供する必要があります。
 
@@ -203,6 +203,6 @@ APIリファレンス: [route](https://mpl-core-candy-machine.typedoc.metaplex.c
 
 ## まとめ
 
-Route命令により、ガードは独自のカスタムプログラムロジックを含むことができるため、さらに強力になります。各ガードの完全な機能セットを確認するために、[利用可能なすべてのガード](/ja/core-candy-machine/guards)の専用ページをチェックしてください。
+Route命令により、ガードは独自のカスタムプログラムロジックを含むことができるため、さらに強力になります。各ガードの完全な機能セットを確認するために、[利用可能なすべてのガード](/ja/smart-contracts/core-candy-machine/guards)の専用ページをチェックしてください。
 
-Core Candy Machineとそのガードの設定について知るべきことをすべて知ったところで、ミントについて話す時が来ました。[次のページ](/ja/core-candy-machine/mint)でお会いしましょう！[取得](/ja/core-candy-machine/fetching-a-candy-machine)についても読みたいかもしれません。
+Core Candy Machineとそのガードの設定について知るべきことをすべて知ったところで、ミントについて話す時が来ました。[次のページ](/ja/smart-contracts/core-candy-machine/mint)でお会いしましょう！[取得](/ja/smart-contracts/core-candy-machine/fetching-a-candy-machine)についても読みたいかもしれません。

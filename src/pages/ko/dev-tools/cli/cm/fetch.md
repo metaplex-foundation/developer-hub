@@ -23,7 +23,7 @@ fetch 명령어는 자세한 정보를 위한 추가 플래그를 지원합니�
 
 ## 관련 명령어
 
-- [`mplx cm create`](/ko/cli/cm/create) - 가져올 캔디 머신 생성
-- [`mplx cm insert`](/ko/cli/cm/insert) - 아이템 로드 (아이템 수에 영향)
-- [`mplx cm validate`](/ko/cli/cm/validate) - 캐시와 온체인 데이터 검증
-- [`mplx cm withdraw`](/ko/cli/cm/withdraw) - 상태 확인 후 정리
+- [`mplx cm create`](/ko/dev-tools/cli/cm/create) - 가져올 캔디 머신 생성
+- [`mplx cm insert`](/ko/dev-tools/cli/cm/insert) - 아이템 로드 (아이템 수에 영향)
+- [`mplx cm validate`](/ko/dev-tools/cli/cm/validate) - 캐시와 온체인 데이터 검증
+- [`mplx cm withdraw`](/ko/dev-tools/cli/cm/withdraw) - 상태 확인 후 정리

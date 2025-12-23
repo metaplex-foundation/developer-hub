@@ -4,13 +4,13 @@ metaTitle: 가드 그룹 | Candy Machine
 description: 여러 가드 그룹을 구성하는 방법을 설명합니다.
 ---
 
-[이전 페이지](/ko/candy-machine/guards)에서 가드를 소개하고 이를 사용하여 Candy Machine의 접근 제어를 정의했습니다. 가드를 사용하여 민팅당 1 SOL의 결제를 추가하고 특정 날짜 이후에 민팅이 시작되도록 할 수 있음을 보았습니다. 하지만 두 번째 날짜 이후에 2 SOL을 청구하고 싶다면 어떨까요? 특정 토큰 보유자가 무료로 또는 할인된 가격으로 민팅할 수 있도록 하고 싶다면 어떨까요? {% .lead %}
+[이전 페이지](/ko/smart-contracts/candy-machine/guards)에서 가드를 소개하고 이를 사용하여 Candy Machine의 접근 제어를 정의했습니다. 가드를 사용하여 민팅당 1 SOL의 결제를 추가하고 특정 날짜 이후에 민팅이 시작되도록 할 수 있음을 보았습니다. 하지만 두 번째 날짜 이후에 2 SOL을 청구하고 싶다면 어떨까요? 특정 토큰 보유자가 무료로 또는 할인된 가격으로 민팅할 수 있도록 하고 싶다면 어떨까요? {% .lead %}
 
 각각 고유한 요구 사항을 가진 여러 가드 세트를 정의할 수 있다면 어떨까요? 이러한 이유로 **가드 그룹**을 만들었습니다!
 
 ## 그룹은 어떻게 작동하나요?
 
-활성화하려는 가드의 설정을 제공하여 [Candy Machine에 가드를 설정할 수 있는 방법](/ko/candy-machine/guards#creating-a-candy-machine-with-guards)을 기억하시나요? 가드 그룹도 같은 방식으로 작동하지만, 식별을 위해 고유한 **레이블**을 제공해야 합니다.
+활성화하려는 가드의 설정을 제공하여 [Candy Machine에 가드를 설정할 수 있는 방법](/ko/smart-contracts/candy-machine/guards#creating-a-candy-machine-with-guards)을 기억하시나요? 가드 그룹도 같은 방식으로 작동하지만, 식별을 위해 고유한 **레이블**을 제공해야 합니다.
 
 따라서 각 가드 그룹은 다음과 같은 속성을 가집니다:
 
@@ -171,7 +171,7 @@ API 참조: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/cr
 
 위의 예시에서 두 그룹 모두에 동일한 **Bot Tax** 가드를 제공해야 했음에 주목하세요. 이는 Candy Machine에 설정된 글로벌 **가드**를 활용하여 단순화할 수 있습니다.
 
-가드 그룹을 사용할 때, [이전 페이지](/ko/candy-machine/guards)에서 설명한 Candy Machine의 글로벌 가드는 **기본 가드 역할**을 합니다! 즉, 그룹에서 명시적으로 활성화하여 덮어쓰지 않는 한 그룹은 글로벌 가드와 동일한 가드 설정을 기본값으로 사용합니다.
+가드 그룹을 사용할 때, [이전 페이지](/ko/smart-contracts/candy-machine/guards)에서 설명한 Candy Machine의 글로벌 가드는 **기본 가드 역할**을 합니다! 즉, 그룹에서 명시적으로 활성화하여 덮어쓰지 않는 한 그룹은 글로벌 가드와 동일한 가드 설정을 기본값으로 사용합니다.
 
 간단한 요약입니다:
 
@@ -348,4 +348,4 @@ API 참조: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/cr
 
 가드 그룹은 우리의 요구에 맞춘 순차적 그리고/또는 병렬 민팅 워크플로를 정의할 수 있게 하여 Candy Machine에 완전히 새로운 차원을 제공합니다.
 
-[다음 페이지](/ko/candy-machine/guard-route)에서는 가드에 대한 또 다른 흥미로운 기능인 가드 명령어를 살펴보겠습니다!
+[다음 페이지](/ko/smart-contracts/candy-machine/guard-route)에서는 가드에 대한 또 다른 흥미로운 기능인 가드 명령어를 살펴보겠습니다!

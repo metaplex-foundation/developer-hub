@@ -4,7 +4,7 @@ metaTitle: プログラマブルNFT | Candy Machine
 description: Candy MachineからプログラマブルNFTをミントする方法を説明します。
 ---
 
-Token Metadataのバージョン`1.7`では、特にクリエイターがセカンダリセールでロイヤルティを執行できる[プログラマブルNFTと呼ばれる新しいアセットクラス](/ja/token-metadata/pnfts)が導入されました。
+Token Metadataのバージョン`1.7`では、特にクリエイターがセカンダリセールでロイヤルティを執行できる[プログラマブルNFTと呼ばれる新しいアセットクラス](/ja/smart-contracts/token-metadata/pnfts)が導入されました。
 
 Candy Machine Coreのバージョン`1.0`とCandy Guardのバージョン`1.0`以降、**Candy MachineからプログラマブルNFTをミント**することが可能になり、既存のCandy Machineのトークン標準を更新することもできます。
 
@@ -18,7 +18,7 @@ Candy Machine Coreのバージョン`1.0`とCandy Guardのバージョン`1.0`�
 
 さらに、`collectionDelegateRecord`アカウントは、Token Metadataの新しい[メタデータ委譲記録](https://docs.rs/mpl-token-metadata/latest/mpl_token_metadata/accounts/struct.MetadataDelegateRecord.html)を参照するようになります。
 
-詳細については、このドキュメントの「[Candy Machineの作成](/ja/candy-machine/manage#create-candy-machines)」セクションを読むことをお勧めしますが、プログラマブルNFTをミントする新しいCandy Machineを作成するためにSDKを使用する方法の例を以下に示します。
+詳細については、このドキュメントの「[Candy Machineの作成](/ja/smart-contracts/candy-machine/manage#create-candy-machines)」セクションを読むことをお勧めしますが、プログラマブルNFTをミントする新しいCandy Machineを作成するためにSDKを使用する方法の例を以下に示します。
 
 {% dialect-switcher title="新しいPNFT Candy Machineの作成" %}
 {% dialect title="JavaScript" id="js" %}
@@ -43,7 +43,7 @@ APIリファレンス: [create](https://mpl-candy-machine.typedoc.metaplex.com/f
 
 新しい`setTokenStandard`命令を使用して、既存のCandy Machineのトークン標準を更新することが可能です。Candy Machine `V1`でこの命令を呼び出すと、Candy Machineも`V2`にアップグレードし、トークン標準をアカウントデータに保存します。
 
-詳細については、このドキュメントの「[トークン標準の更新](/ja/candy-machine/manage#update-token-standard)」セクションを読むことをお勧めしますが、既存のCandy Machineのトークン標準をプログラマブルNFTに更新するためにSDKを使用する方法の例を以下に示します。
+詳細については、このドキュメントの「[トークン標準の更新](/ja/smart-contracts/candy-machine/manage#update-token-standard)」セクションを読むことをお勧めしますが、既存のCandy Machineのトークン標準をプログラマブルNFTに更新するためにSDKを使用する方法の例を以下に示します。
 
 {% dialect-switcher title="Candy Machineのトークン標準の変更" %}
 {% dialect title="JavaScript" id="js" %}
@@ -67,7 +67,7 @@ APIリファレンス: [setTokenStandard](https://mpl-candy-machine.typedoc.meta
 
 さらに、プログラマブルNFTと互換性のあるコレクションの設定をサポートするために、新しい`setCollectionV2`命令が追加されました。この命令は通常のNFTでも動作し、`setCollection`命令を非推奨にします。
 
-ここでも、詳細についてはこのドキュメントの「[コレクションの更新](/ja/candy-machine/manage#update-collection)」セクションで読むことができます。
+ここでも、詳細についてはこのドキュメントの「[コレクションの更新](/ja/smart-contracts/candy-machine/manage#update-collection)」セクションで読むことができます。
 
 {% dialect-switcher title="Candy Machineのコレクションの更新" %}
 {% dialect title="JavaScript" id="js" %}
@@ -93,7 +93,7 @@ APIリファレンス: [setCollectionV2](https://mpl-candy-machine.typedoc.metap
 
 Candy Machine CoreとCandy Guardプログラムの両方の`mint`命令は、プログラマブルNFTのミントをサポートするように更新されました。この新しい命令は`mintV2`と呼ばれ、`mint`命令に似ていますが、追加のアカウントが渡される必要があります。ここでも、新しい`mintV2`命令は通常のNFTをミントするために使用でき、したがって既存の`mint`命令を非推奨にします。
 
-「[ミント](/ja/candy-machine/mint)」ページ全体が新しい`mintV2`命令を使用するように更新されましたが、プログラマブルNFTでの使用方法の簡単な例を以下に示します。
+「[ミント](/ja/smart-contracts/candy-machine/mint)」ページ全体が新しい`mintV2`命令を使用するように更新されましたが、プログラマブルNFTでの使用方法の簡単な例を以下に示します。
 
 {% dialect-switcher title="Candy Machineからのミント" %}
 {% dialect title="JavaScript" id="js" %}
@@ -133,6 +133,6 @@ Candy Guardプログラムが提供するガードのいくつかは、プログ
 
 プログラマブルNFTとCandy Machineに関する以下のリソースが役立つ場合があります：
 
-- [プログラマブルNFTガイド](/ja/token-metadata/pnfts)
+- [プログラマブルNFTガイド](/ja/smart-contracts/token-metadata/pnfts)
 - [Candy Machine Coreプログラム](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core)
 - [Candy Guardプログラム](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)

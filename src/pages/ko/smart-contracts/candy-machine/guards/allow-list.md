@@ -325,7 +325,7 @@ Allow List route 명령어는 다음 기능을 지원합니다.
 
 _Path: `proof`_
 
-민팅 명령어에 직접 Merkle Proof를 전달하는 대신, 민팅 지갑은 Allow List 가드의 route 명령어를 사용하여 [사전 검증](/ko/candy-machine/mint#minting-with-pre-validation)을 수행해야 합니다.
+민팅 명령어에 직접 Merkle Proof를 전달하는 대신, 민팅 지갑은 Allow List 가드의 route 명령어를 사용하여 [사전 검증](/ko/smart-contracts/candy-machine/mint#minting-with-pre-validation)을 수행해야 합니다.
 
 이 route 명령어는 제공된 Merkle Proof로부터 Merkle Root를 계산하고, 유효한 경우 민팅 지갑이 허용 목록의 일부임을 증명하는 새로운 PDA 계정을 생성합니다. 따라서 민팅할 때 Allow List 가드는 지갑에 대한 민팅을 승인하거나 거부하기 위해 이 PDA 계정의 존재만 확인하면 됩니다.
 

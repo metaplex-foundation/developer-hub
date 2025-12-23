@@ -171,7 +171,7 @@ let create_ix = CreateV1CpiBuilder::new()
 
 ## コレクション内でのアセット作成
 
-MPL Core Assetは、MPL Core Collectionが既に存在する場合、コレクションに直接作成できます。Collection Assetを作成するには[こちら](/ja/core/collections)をご覧ください。
+MPL Core Assetは、MPL Core Collectionが既に存在する場合、コレクションに直接作成できます。Collection Assetを作成するには[こちら](/ja/smart-contracts/core/collections)をご覧ください。
 
 {% dialect-switcher title="コレクション内でのアセット作成" %}
 {% dialect title="JavaScript" id="js" %}
@@ -411,8 +411,8 @@ pub async fn create_asset_with_plugin() {
 
 プラグインのリストには以下が含まれますが、これらに限定されません：
 
-- [Burn Delegate](/ja/core/plugins/burn-delegate)
-- [Freeze Delegate](/ja/core/plugins/freeze-delegate)  
-- [Royalties](/ja/core/plugins/royalties)
-- [Transfer Delegate](/ja/core/plugins/transfer-delegate)
-- [Update Delegate](/ja/core/plugins/update-delegate)
+- [Burn Delegate](/ja/smart-contracts/core/plugins/burn-delegate)
+- [Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate)  
+- [Royalties](/ja/smart-contracts/core/plugins/royalties)
+- [Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate)
+- [Update Delegate](/ja/smart-contracts/core/plugins/update-delegate)

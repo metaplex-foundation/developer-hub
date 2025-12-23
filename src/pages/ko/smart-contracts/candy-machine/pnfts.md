@@ -4,7 +4,7 @@ metaTitle: 프로그래밍 가능한 NFT | Candy Machine
 description: candy machine에서 프로그래밍 가능한 NFT를 민팅하는 방법을 설명합니다.
 ---
 
-Token Metadata의 버전 `1.7`에서 [프로그래밍 가능한 NFT라고 불리는 새로운 에셋 클래스](/ko/token-metadata/pnfts)가 도입되어 다른 기능들 중에서도 창작자가 2차 판매에 대한 로열티를 강제할 수 있게 되었습니다.
+Token Metadata의 버전 `1.7`에서 [프로그래밍 가능한 NFT라고 불리는 새로운 에셋 클래스](/ko/smart-contracts/token-metadata/pnfts)가 도입되어 다른 기능들 중에서도 창작자가 2차 판매에 대한 로열티를 강제할 수 있게 되었습니다.
 
 Candy Machine Core의 버전 `1.0`과 Candy Guard의 버전 `1.0`부터 **candy machine에서 프로그래밍 가능한 NFT를 민팅**할 수 있게 되었고 기존 candy machine의 토큰 표준을 업데이트하는 것도 가능해졌습니다.
 
@@ -18,7 +18,7 @@ Candy Machine Core의 버전 `1.0`과 Candy Guard의 버전 `1.0`부터 **candy 
 
 추가적으로, `collectionDelegateRecord` 계정은 이제 Token Metadata의 새로운 [Metadata Delegate Record](https://docs.rs/mpl-token-metadata/latest/mpl_token_metadata/accounts/struct.MetadataDelegateRecord.html)를 참조해야 합니다.
 
-자세한 내용은 이 문서의 "[Candy Machine 생성](/ko/candy-machine/manage#create-candy-machines)" 섹션을 읽어보실 수 있지만, 프로그래밍 가능한 NFT를 민팅하는 새로운 Candy Machine을 생성하기 위해 SDK를 사용하는 방법에 대한 몇 가지 예시가 있습니다.
+자세한 내용은 이 문서의 "[Candy Machine 생성](/ko/smart-contracts/candy-machine/manage#create-candy-machines)" 섹션을 읽어보실 수 있지만, 프로그래밍 가능한 NFT를 민팅하는 새로운 Candy Machine을 생성하기 위해 SDK를 사용하는 방법에 대한 몇 가지 예시가 있습니다.
 
 {% dialect-switcher title="새로운 PNFT Candy Machine 생성" %}
 {% dialect title="JavaScript" id="js" %}
@@ -43,7 +43,7 @@ API 참조: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/cr
 
 새로운 `setTokenStandard` 명령어를 통해 기존 Candy Machine의 토큰 표준을 업데이트하는 것이 가능합니다. Candy Machine `V1`에서 이 명령어를 호출하면 Candy Machine을 `V2`로 업그레이드하고 토큰 표준을 계정 데이터에 저장합니다.
 
-자세한 내용은 이 문서의 "[토큰 표준 업데이트](/ko/candy-machine/manage#update-token-standard)" 섹션을 읽어보실 수 있지만, 기존 Candy Machine의 토큰 표준을 프로그래밍 가능한 NFT로 업데이트하기 위해 SDK를 사용하는 방법에 대한 몇 가지 예시가 있습니다.
+자세한 내용은 이 문서의 "[토큰 표준 업데이트](/ko/smart-contracts/candy-machine/manage#update-token-standard)" 섹션을 읽어보실 수 있지만, 기존 Candy Machine의 토큰 표준을 프로그래밍 가능한 NFT로 업데이트하기 위해 SDK를 사용하는 방법에 대한 몇 가지 예시가 있습니다.
 
 {% dialect-switcher title="Candy Machine의 토큰 표준 변경" %}
 {% dialect title="JavaScript" id="js" %}
@@ -67,7 +67,7 @@ API 참조: [setTokenStandard](https://mpl-candy-machine.typedoc.metaplex.com/fu
 
 추가로, 프로그래밍 가능한 NFT와 호환되는 컬렉션 설정을 지원하기 위해 새로운 `setCollectionV2` 명령어가 추가되었습니다. 이 명령어는 일반 NFT와도 작동하며 `setCollection` 명령어를 대체합니다.
 
-여기서도 이 문서의 "[컬렉션 업데이트](/ko/candy-machine/manage#update-collection)" 섹션에서 더 자세히 읽어볼 수 있습니다.
+여기서도 이 문서의 "[컬렉션 업데이트](/ko/smart-contracts/candy-machine/manage#update-collection)" 섹션에서 더 자세히 읽어볼 수 있습니다.
 
 {% dialect-switcher title="Candy Machine의 컬렉션 업데이트" %}
 {% dialect title="JavaScript" id="js" %}
@@ -93,7 +93,7 @@ API 참조: [setCollectionV2](https://mpl-candy-machine.typedoc.metaplex.com/fun
 
 Candy Machine Core와 Candy Guard 프로그램 모두의 `mint` 명령어가 프로그래밍 가능한 NFT 민팅을 지원하도록 업데이트되었습니다. 이 새로운 명령어는 `mintV2`라고 불리며 `mint` 명령어와 유사하지만 추가 계정들이 전달되어야 합니다. 여기서도 새로운 `mintV2` 명령어는 일반 NFT를 민팅하는 데 사용할 수 있으므로 기존 `mint` 명령어들을 대체합니다.
 
-전체 "[민팅](/ko/candy-machine/mint)" 페이지가 새로운 `mintV2` 명령어를 사용하도록 업데이트되었지만 프로그래밍 가능한 NFT와 함께 사용하는 방법에 대한 간단한 예시가 있습니다.
+전체 "[민팅](/ko/smart-contracts/candy-machine/mint)" 페이지가 새로운 `mintV2` 명령어를 사용하도록 업데이트되었지만 프로그래밍 가능한 NFT와 함께 사용하는 방법에 대한 간단한 예시가 있습니다.
 
 {% dialect-switcher title="Candy Machine에서 민팅" %}
 {% dialect title="JavaScript" id="js" %}
@@ -133,6 +133,6 @@ Candy Guard 프로그램에서 제공하는 일부 가드도 프로그래밍 가
 
 프로그래밍 가능한 NFT와 Candy Machine에 대한 다음 리소스들이 유용할 수 있습니다:
 
-- [프로그래밍 가능한 NFT 가이드](/ko/token-metadata/pnfts)
+- [프로그래밍 가능한 NFT 가이드](/ko/smart-contracts/token-metadata/pnfts)
 - [Candy Machine Core Program](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core)
 - [Candy Guard Program](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)

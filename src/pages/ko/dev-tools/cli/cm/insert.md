@@ -40,14 +40,14 @@ mplx cm insert
 
 ## 관련 명령어
 
-- [`mplx cm upload`](/ko/cli/cm/upload) - 자산 업로드 (삽입 전 필요)
-- [`mplx cm create`](/ko/cli/cm/create) - 캔디 머신 생성 (삽입 전 필요)
-- [`mplx cm validate`](/ko/cli/cm/validate) - 캐시 및 업로드 검증
-- [`mplx cm fetch`](/ko/cli/cm/fetch) - 삽입 상태 확인
+- [`mplx cm upload`](/ko/dev-tools/cli/cm/upload) - 자산 업로드 (삽입 전 필요)
+- [`mplx cm create`](/ko/dev-tools/cli/cm/create) - 캔디 머신 생성 (삽입 전 필요)
+- [`mplx cm validate`](/ko/dev-tools/cli/cm/validate) - 캐시 및 업로드 검증
+- [`mplx cm fetch`](/ko/dev-tools/cli/cm/fetch) - 삽입 상태 확인
 
 ## 다음 단계
 
-1. 모든 아이템이 로드되었는지 확인하기 위해 **[삽입 확인](/ko/cli/cm/fetch)**
-2. 캔디 머신이 작동하는지 확인하기 위해 **[민팅 테스트](/ko/core-candy-machine/mint)**
-3. 문제를 확인하기 위해 **[캐시 및 자산 검증](/ko/cli/cm/validate)**
-4. 적절한 가드로 **[출시 계획](/ko/core-candy-machine/guides)**
+1. 모든 아이템이 로드되었는지 확인하기 위해 **[삽입 확인](/ko/dev-tools/cli/cm/fetch)**
+2. 캔디 머신이 작동하는지 확인하기 위해 **[민팅 테스트](/ko/smart-contracts/core-candy-machine/mint)**
+3. 문제를 확인하기 위해 **[캐시 및 자산 검증](/ko/dev-tools/cli/cm/validate)**
+4. 적절한 가드로 **[출시 계획](/ko/smart-contracts/core-candy-machine/guides)**

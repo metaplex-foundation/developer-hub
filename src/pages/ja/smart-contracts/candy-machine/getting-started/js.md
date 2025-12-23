@@ -26,7 +26,7 @@ import { mplCandyMachine } from '@metaplex-foundation/mpl-candy-machine'
 const umi = createUmi('http://127.0.0.1:8899').use(mplCandyMachine())
 ```
 
-次に、使用するウォレットをUmiに伝える必要があります。これは[キーペア](/ja/umi/connecting-to-umi#connecting-w-a-secret-key)または[Solanaウォレットアダプター](/ja/umi/connecting-to-umi#connecting-w-wallet-adapter)のいずれかです。
+次に、使用するウォレットをUmiに伝える必要があります。これは[キーペア](/ja/dev-tools/umi/connecting-to-umi#connecting-w-a-secret-key)または[Solanaウォレットアダプター](/ja/dev-tools/umi/connecting-to-umi#connecting-w-wallet-adapter)のいずれかです。
 
 これで完了です。[ライブラリが提供するさまざまな関数](https://mpl-candy-machine.typedoc.metaplex.com/)を使用し、`Umi`インスタンスを渡すことでNFTと相互作用できるようになりました。以下は、キャンディマシンアカウントとそれに関連するキャンディガードアカウントを取得する例です。
 

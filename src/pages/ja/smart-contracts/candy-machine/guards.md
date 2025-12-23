@@ -23,7 +23,7 @@ description: ガードの動作と有効化方法を説明します。
 
 ## キャンディガードアカウント
 
-[キャンディマシンアカウント](/ja/candy-machine/manage#candy-machine-account)の内容を覚えている場合、そこにガードの兆候はありません。これは、ガードが**キャンディガードプログラム**によって作成される**キャンディガードアカウント**と呼ばれる別のアカウントに存在するためです。
+[キャンディマシンアカウント](/ja/smart-contracts/candy-machine/manage#candy-machine-account)の内容を覚えている場合、そこにガードの兆候はありません。これは、ガードが**キャンディガードプログラム**によって作成される**キャンディガードアカウント**と呼ばれる別のアカウントに存在するためです。
 
 各キャンディマシンアカウントは通常、保護レイヤーを追加する独自のキャンディガードアカウントと関連付けられるべきです。
 
@@ -182,24 +182,24 @@ SDKは、独自のキャンディガードプログラムとそのカスタム�
 
 以下のリストでは、各ガードの簡単な説明と、より高度な読み物のための専用ページへのリンクを提供します。
 
-- [**アドレスゲート**](/ja/candy-machine/guards/address-gate): ミントを単一のアドレスに制限します。
-- [**許可リスト**](/ja/candy-machine/guards/allow-list): ウォレットアドレスリストを使用して誰がミントを許可されているかを決定します。
-- [**ボット税**](/ja/candy-machine/guards/bot-tax): 無効なトランザクションに請求する設定可能な税。
-- [**終了日**](/ja/candy-machine/guards/end-date): ミントを終了する日付を決定します。
-- [**フリーズSOL支払い**](/ja/candy-machine/guards/freeze-sol-payment): フリーズ期間付きでミントの価格をSOLで設定します。
-- [**フリーズトークン支払い**](/ja/candy-machine/guards/freeze-token-payment): フリーズ期間付きでミントの価格をトークン量で設定します。
-- [**ゲートキーパー**](/ja/candy-machine/guards/gatekeeper): ゲートキーパーネットワーク経由でミントを制限します（例：Captcha統合）。
-- [**ミント制限**](/ja/candy-machine/guards/mint-limit): ウォレットごとのミント数の制限を指定します。
-- [**NFTバーン**](/ja/candy-machine/guards/nft-burn): ミントを指定されたコレクションの保有者に制限し、NFTのバーンを要求します。
-- [**NFTゲート**](/ja/candy-machine/guards/nft-gate): ミントを指定されたコレクションの保有者に制限します。
-- [**NFT支払い**](/ja/candy-machine/guards/nft-payment): ミントの価格を指定されたコレクションのNFTとして設定します。
-- [**引き換え済み量**](/ja/candy-machine/guards/redeemed-amount): 総ミント量に基づいてミントの終了を決定します。
-- [**SOL支払い**](/ja/candy-machine/guards/sol-payment): ミントの価格をSOLで設定します。
-- [**開始日**](/ja/candy-machine/guards/start-date): ミントの開始日を決定します。
-- [**サードパーティ署名者**](/ja/candy-machine/guards/third-party-signer): トランザクションに追加の署名者を要求します。
-- [**トークンバーン**](/ja/candy-machine/guards/token-burn): ミントを指定されたトークンの保有者に制限し、トークンのバーンを要求します。
-- [**トークンゲート**](/ja/candy-machine/guards/token-gate): ミントを指定されたトークンの保有者に制限します。
-- [**トークン支払い**](/ja/candy-machine/guards/token-payment): ミントの価格をトークン量で設定します。
+- [**アドレスゲート**](/ja/smart-contracts/candy-machine/guards/address-gate): ミントを単一のアドレスに制限します。
+- [**許可リスト**](/ja/smart-contracts/candy-machine/guards/allow-list): ウォレットアドレスリストを使用して誰がミントを許可されているかを決定します。
+- [**ボット税**](/ja/smart-contracts/candy-machine/guards/bot-tax): 無効なトランザクションに請求する設定可能な税。
+- [**終了日**](/ja/smart-contracts/candy-machine/guards/end-date): ミントを終了する日付を決定します。
+- [**フリーズSOL支払い**](/ja/smart-contracts/candy-machine/guards/freeze-sol-payment): フリーズ期間付きでミントの価格をSOLで設定します。
+- [**フリーズトークン支払い**](/ja/smart-contracts/candy-machine/guards/freeze-token-payment): フリーズ期間付きでミントの価格をトークン量で設定します。
+- [**ゲートキーパー**](/ja/smart-contracts/candy-machine/guards/gatekeeper): ゲートキーパーネットワーク経由でミントを制限します（例：Captcha統合）。
+- [**ミント制限**](/ja/smart-contracts/candy-machine/guards/mint-limit): ウォレットごとのミント数の制限を指定します。
+- [**NFTバーン**](/ja/smart-contracts/candy-machine/guards/nft-burn): ミントを指定されたコレクションの保有者に制限し、NFTのバーンを要求します。
+- [**NFTゲート**](/ja/smart-contracts/candy-machine/guards/nft-gate): ミントを指定されたコレクションの保有者に制限します。
+- [**NFT支払い**](/ja/smart-contracts/candy-machine/guards/nft-payment): ミントの価格を指定されたコレクションのNFTとして設定します。
+- [**引き換え済み量**](/ja/smart-contracts/candy-machine/guards/redeemed-amount): 総ミント量に基づいてミントの終了を決定します。
+- [**SOL支払い**](/ja/smart-contracts/candy-machine/guards/sol-payment): ミントの価格をSOLで設定します。
+- [**開始日**](/ja/smart-contracts/candy-machine/guards/start-date): ミントの開始日を決定します。
+- [**サードパーティ署名者**](/ja/smart-contracts/candy-machine/guards/third-party-signer): トランザクションに追加の署名者を要求します。
+- [**トークンバーン**](/ja/smart-contracts/candy-machine/guards/token-burn): ミントを指定されたトークンの保有者に制限し、トークンのバーンを要求します。
+- [**トークンゲート**](/ja/smart-contracts/candy-machine/guards/token-gate): ミントを指定されたトークンの保有者に制限します。
+- [**トークン支払い**](/ja/smart-contracts/candy-machine/guards/token-payment): ミントの価格をトークン量で設定します。
 
 ## ガード付きキャンディマシンの作成
 
@@ -387,4 +387,4 @@ APIリファレンス: [createCandyMachineV2](https://mpl-candy-machine.typedoc.
 
 ## まとめ
 
-ガードはキャンディマシンの重要なコンポーネントです。ミントプロセスの設定を簡単にしながら、誰でもアプリケーション固有のニーズに対して独自のガードを作成できます。[次のページ](/ja/candy-machine/guard-groups)では、ガードグループを使用してさらに多くのミントシナリオを作成する方法を見てみましょう！
+ガードはキャンディマシンの重要なコンポーネントです。ミントプロセスの設定を簡単にしながら、誰でもアプリケーション固有のニーズに対して独自のガードを作成できます。[次のページ](/ja/smart-contracts/candy-machine/guard-groups)では、ガードグループを使用してさらに多くのミントシナリオを作成する方法を見てみましょう！

@@ -6,7 +6,7 @@ description: "Core Candy Machine의 'NFT Mint Limit' 가드는 지정된 NFT/pNF
 
 ## 개요
 
-NFT Mint Limit 가드는 지정된 NFT 컬렉션 보유자로 민팅을 제한하고 제공된 Token Metadata NFT에 대해 수행할 수 있는 민트 수를 제한합니다. 이는 지갑 대신 NFT 주소를 기반으로 한 [NFT Gate](/ko/core-candy-machine/guards/nft-gate)와 [Mint Limit](/ko/core-candy-machine/guards/mint-limit) Guard의 조합으로 간주할 수 있습니다.
+NFT Mint Limit 가드는 지정된 NFT 컬렉션 보유자로 민팅을 제한하고 제공된 Token Metadata NFT에 대해 수행할 수 있는 민트 수를 제한합니다. 이는 지갑 대신 NFT 주소를 기반으로 한 [NFT Gate](/ko/smart-contracts/core-candy-machine/guards/nft-gate)와 [Mint Limit](/ko/smart-contracts/core-candy-machine/guards/mint-limit) Guard의 조합으로 간주할 수 있습니다.
 
 제한은 NFT 컬렉션별, Candy Machine별, 그리고 설정에서 제공되는 식별자별로 설정되어 동일한 Core Candy Machine 내에서 여러 NFT 민트 제한을 허용합니다.
 

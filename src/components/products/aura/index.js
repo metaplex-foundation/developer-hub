@@ -85,6 +85,19 @@ export const aura = {
         'FAQ': '자주 묻는 질문',
         'Reading Solana and SVM Data': 'Solana 및 SVM 데이터 읽기'
       }
+    },
+    zh: {
+      headline: '索引和数据可用性网络',
+      description: '扩展Solana和Solana虚拟机（SVM）的数据网络',
+      sections: {
+        'Introduction': '简介',
+        'Features': '功能'
+      },
+      links: {
+        'Overview': '概述',
+        'FAQ': '常见问题',
+        'Reading Solana and SVM Data': '读取Solana和SVM数据'
+      }
     }
   }
 }

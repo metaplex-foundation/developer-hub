@@ -6,7 +6,7 @@ description: Solanaのdevnetおよびmainnet-beta以外のSolana Virtual Machine
 
 ## 概要
 
-このガイドでは、Solanaのdevnetおよびmainnet-beta以外のSolana Virtual Machine（SVM）環境でJavaScriptを使用して圧縮NFT（cNFT）アセットとやりとりするための特定の要件について詳しく説明します。cNFTの作成のより包括的な概要については、[BubblegumでSolanaで100万個のNFTを作成する](/ja/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)ガイドを参照してください。
+このガイドでは、Solanaのdevnetおよびmainnet-beta以外のSolana Virtual Machine（SVM）環境でJavaScriptを使用して圧縮NFT（cNFT）アセットとやりとりするための特定の要件について詳しく説明します。cNFTの作成のより包括的な概要については、[BubblegumでSolanaで100万個のNFTを作成する](/ja/smart-contracts/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)ガイドを参照してください。
 
 ### 必要なパッケージ
 

@@ -6,8 +6,8 @@ description: 404スワップを可能にするMPL 404 Hybridエスクローア�
 
 ## 前提条件
 
-- MPL Coreコレクション - [リンク](/ja/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
-- コレクションにミントされたCore NFTアセット - [リンク](/ja/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+- MPL Coreコレクション - [リンク](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
+- コレクションにミントされたCore NFTアセット - [リンク](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
 - 必要なトークン量で作成されたSPLトークン。 - [リンク](/ja/guides/javascript/how-to-create-a-solana-token)
 - 一貫したゲートウェイ/uriでの連続メタデータJSONファイルのオンラインストレージ。
 

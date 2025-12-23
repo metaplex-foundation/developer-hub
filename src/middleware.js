@@ -32,6 +32,7 @@ const standaloneRedirects = {
   '/stability-index': '/smart-contracts/security',
   '/ja/stability-index': '/ja/smart-contracts/security',
   '/ko/stability-index': '/ko/smart-contracts/security',
+  '/zh/stability-index': '/zh/smart-contracts/security',
 }
 
 const redirectRules = {
@@ -182,9 +183,10 @@ export function middleware(request) {
   }
 
   // Rewrite root paths to /en/* for English content
-  // Skip paths that start with /ja, /ko, /en, /_next, /api, or contain a file extension
+  // Skip paths that start with /ja, /ko, /zh, /en, /_next, /api, or contain a file extension
   if (!pathname.startsWith('/ja') &&
       !pathname.startsWith('/ko') &&
+      !pathname.startsWith('/zh') &&
       !pathname.startsWith('/_next') &&
       !pathname.startsWith('/api') &&
       !pathname.includes('.')) {

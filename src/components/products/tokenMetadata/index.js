@@ -217,6 +217,40 @@ export const tokenMetadata = {
         'Token Claimer (Airdrop) Smart Contract': '토큰 클레이머 (에어드롭) 스마트 컨트랙트',
         'Create an NFT': 'NFT 생성',
       }
+    },
+    zh: {
+      headline: '数字所有权标准',
+      description: '使用SPL Token程序创建代币和NFT',
+      sections: {
+        'Introduction': '简介',
+        'Features': '功能',
+        'Guides': '指南',
+        'Javascript': 'JavaScript',
+      },
+      links: {
+        'Overview': '概述',
+        'Getting Started': '快速入门',
+        'FAQ': '常见问题',
+        'Account Size Reduction': '账户大小缩减',
+        'Token Standards (Assets)': '代币标准（资产）',
+        'Minting Assets': '铸造资产',
+        'Fetching Assets': '获取资产',
+        'Updating Assets': '更新资产',
+        'Transferring Assets': '转移资产',
+        'Burning Assets': '销毁资产',
+        'Printed Editions': '打印版本',
+        'Verified Collections': '已验证合集',
+        'Verified Creators': '已验证创作者',
+        'Delegated Authorities': '委托权限',
+        'Locking Assets': '锁定资产',
+        'Programmable NFTs (pNFTs)': '可编程NFT（pNFT）',
+        'NFT Escrow': 'NFT托管',
+        'SPL Token-2022': 'SPL Token-2022',
+        'Get Mints by Collection': '按合集获取Mint',
+        'Create a claim based airdrop using Gumdrop': '使用Gumdrop创建基于领取的空投',
+        'Token Claimer (Airdrop) Smart Contract': '代币领取器（空投）智能合约',
+        'Create an NFT': '创建NFT',
+      }
     }
   }
 }

@@ -4,11 +4,11 @@ metaTitle: 検証済み作成者 | Token Metadata
 description: Token Metadataでアセットの作成者を検証する方法を学習します
 ---
 
-[コレクション](/ja/token-metadata/collections)と同様に、アセットの真正性を確保するために、アセットの作成者を検証する必要があります。 {% .lead %}
+[コレクション](/ja/smart-contracts/token-metadata/collections)と同様に、アセットの真正性を確保するために、アセットの作成者を検証する必要があります。 {% .lead %}
 
 `verified`フラグが`false`の作成者は誰でも追加できるため、信頼できません。一方、`verified`フラグが`true`の作成者は、そのアセットの作成者として自分を検証するトランザクションに署名したことが保証されています。
 
-以下のセクションでは、アセットの作成者を検証および未検証にする方法を学びます。作成者を検証する前に、それは既にアセットの**Metadata**アカウントの**Creators**配列の一部である必要があることに注意してください。これは[アセットをミント](/ja/token-metadata/mint)するときに行うことができますが、[アセットを更新](/ja/token-metadata/update)するときにも行うことができます。
+以下のセクションでは、アセットの作成者を検証および未検証にする方法を学びます。作成者を検証する前に、それは既にアセットの**Metadata**アカウントの**Creators**配列の一部である必要があることに注意してください。これは[アセットをミント](/ja/smart-contracts/token-metadata/mint)するときに行うことができますが、[アセットを更新](/ja/smart-contracts/token-metadata/update)するときにも行うことができます。
 
 ## 作成者の検証
 

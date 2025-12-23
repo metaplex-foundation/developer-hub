@@ -4,7 +4,7 @@ metaTitle: Metaplex Umiプラグイン | Umi
 description: Metaplexが構築したUmiプラグインの概要。
 ---
 
-MetaplexプログラムはKinobiを介して生成され、Umiを通してプラグインとして動作し実行されます。Metaplexライブラリの各プログラムは、Solanaエコシステム内で異なる用途と目的を持っています。Umiで使用できるより多くのプラグインを[インターフェース実装ページ](/ja/umi/implementations)で見つけることができます！
+MetaplexプログラムはKinobiを介して生成され、Umiを通してプラグインとして動作し実行されます。Metaplexライブラリの各プログラムは、Solanaエコシステム内で異なる用途と目的を持っています。Umiで使用できるより多くのプラグインを[インターフェース実装ページ](/ja/dev-tools/umi/implementations)で見つけることができます！
 
 ## [Bubblegum (cNFT)](/ja/bubblegum)
 

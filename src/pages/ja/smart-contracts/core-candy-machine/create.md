@@ -6,8 +6,8 @@ description: JavaScriptとRustの両方でCore Candy Machineとその様々な�
 
 ## 前提条件
 
-- [アセットの準備](/ja/core-candy-machine/preparing-assets)
-- [Coreコレクションの作成](/ja/core/collections#コレクションの作成)
+- [アセットの準備](/ja/smart-contracts/core-candy-machine/preparing-assets)
+- [Coreコレクションの作成](/ja/smart-contracts/core/collections#コレクションの作成)
 
 Core Candy Machineアセットをコレクション（新規または既存）に作成したい場合は、Core Candy Machineの作成時にCoreコレクションを提供する必要があります。
 

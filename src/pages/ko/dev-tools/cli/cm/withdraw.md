@@ -47,7 +47,7 @@ mplx cm withdraw --address <candy_machine_address>
 
 ## 관련 명령어
 
-- [`mplx cm fetch`](/ko/cli/cm/fetch) - 인출 전 상태 확인
-- [`mplx cm create`](/ko/cli/cm/create) - 새 캔디 머신 생성
-- [`mplx cm validate`](/ko/cli/cm/validate) - 인출 전 검증
+- [`mplx cm fetch`](/ko/dev-tools/cli/cm/fetch) - 인출 전 상태 확인
+- [`mplx cm create`](/ko/dev-tools/cli/cm/create) - 새 캔디 머신 생성
+- [`mplx cm validate`](/ko/dev-tools/cli/cm/validate) - 인출 전 검증
 - [`solana balance`](https://docs.solana.com/cli) - 회수된 잔액 확인
