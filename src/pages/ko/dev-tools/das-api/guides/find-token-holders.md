@@ -222,4 +222,3 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 - [컬렉션의 모든 토큰 가져오기](/das-api/guides/get-collection-nfts)
 - [컬렉션 통계 분석](/das-api/guides/collection-statistics)
-- [자산 전송 추적](/das-api/guides/track-transfers)

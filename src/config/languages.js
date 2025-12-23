@@ -56,10 +56,17 @@ export function generateAlternateUrls(pathname) {
 
   // Normalize pathname (remove any existing language prefix)
   let normalizedPath = pathname
-  for (const lang of Object.values(LANGUAGES)) {
-    if (lang.urlPath && pathname.startsWith(lang.urlPath)) {
-      normalizedPath = pathname.slice(lang.urlPath.length) || '/'
-      break
+
+  // Handle /en prefix specially since English urlPath is empty but pages are stored at /en/*
+  if (pathname === '/en' || pathname.startsWith('/en/')) {
+    normalizedPath = pathname === '/en' ? '/' : pathname.slice('/en'.length)
+  } else {
+    // Handle other language prefixes (/ja, /ko)
+    for (const lang of Object.values(LANGUAGES)) {
+      if (lang.urlPath && pathname.startsWith(lang.urlPath)) {
+        normalizedPath = pathname.slice(lang.urlPath.length) || '/'
+        break
+      }
     }
   }
 

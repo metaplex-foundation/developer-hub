@@ -222,4 +222,3 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 - [コレクション内のすべてのトークンを取得](/ja/das-api/guides/get-collection-nfts)
 - [コレクション統計の分析](/ja/das-api/guides/collection-statistics)
-- [アセット転送の追跡](/ja/das-api/guides/track-transfers)
