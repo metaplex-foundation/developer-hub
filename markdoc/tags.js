@@ -1,5 +1,7 @@
 import { Callout } from '@/components/Callout'
+import { OfficialLinks } from '@/components/OfficialLinks'
 import { ProtocolFees } from '@/components/ProtocolFees'
+import { StabilityIndex } from '@/components/StabilityIndex'
 import {
   Dialect,
   DialectSwitcher,
@@ -230,6 +232,17 @@ const tags = {
       program: { type: String, required: true },
       showTitle: { type: Boolean, default: true },
     },
+  },
+  'stability-index': {
+    render: StabilityIndex,
+    selfClosing: true,
+    attributes: {
+      level: { type: Number },
+    },
+  },
+  'official-links': {
+    render: OfficialLinks,
+    selfClosing: true,
   },
 }
 
