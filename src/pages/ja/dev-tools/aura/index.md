@@ -14,4 +14,4 @@ Metaplex Auraは、SolanaとSolana Virtual Machine（SVM）を拡張するオー
 
 ## 参考ページ
 
-- [SolanaとSVMデータの読み取り](/ja/aura/reading-solana-and-svm-data): Auraネットワークはアセットデータのデータ可用性と分散型インデックス化を提供し、[Metaplex Digital Asset Standard（DAS）API](/ja/das-api)を使用してクエリできます。
+- [SolanaとSVMデータの読み取り](/ja/dev-tools/aura/reading-solana-and-svm-data): Auraネットワークはアセットデータのデータ可用性と分散型インデックス化を提供し、[Metaplex Digital Asset Standard（DAS）API](/ja/dev-tools/das-api)を使用してクエリできます。

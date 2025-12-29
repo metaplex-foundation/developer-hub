@@ -242,14 +242,14 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 ## ヒントとベストプラクティス
 
 1. **インターフェースフィルタリングを使用する** NFTのみを取得(例: fungibleトークンを除外)
-2. **[ページネーション](/ja/das-api/guides/pagination)を実装する** 多数のNFTを持つウォレット用
+2. **[ページネーション](/ja/dev-tools/das-api/guides/pagination)を実装する** 多数のNFTを持つウォレット用
 3. **結果をキャッシュする** 頻繁なクエリのパフォーマンスを向上
-4. **[表示オプション](/ja/das-api/guides/display-options)を含める** 追加のメタデータを取得
+4. **[表示オプション](/ja/dev-tools/das-api/guides/display-options)を含める** 追加のメタデータを取得
 5. **結果をソートする** 意味のある方法でデータを提示
 6. **コレクション別にフィルタリングする** 特定のNFTタイプに焦点を当てる
 
 ## 関連情報
 
-- [クリエーター別のAsset取得](/ja/das-api/methods/get-assets-by-creator) - 特定のアドレスによって作成されたすべてのトークンを発見
-- [コレクション内のすべてのトークン取得](/ja/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのassetを取得
-- [複数の基準によるAsset検索](/ja/das-api/guides/search-by-criteria) - 高度なクエリのために複数のフィルターを組み合わせる
+- [クリエーター別のAsset取得](/ja/dev-tools/das-api/methods/get-assets-by-creator) - 特定のアドレスによって作成されたすべてのトークンを発見
+- [コレクション内のすべてのトークン取得](/ja/dev-tools/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのassetを取得
+- [複数の基準によるAsset検索](/ja/dev-tools/das-api/guides/search-by-criteria) - 高度なクエリのために複数のフィルターを組み合わせる

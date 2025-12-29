@@ -114,7 +114,7 @@ Mintアカウントにより多くのデータを付加することで、**Token
 
 ## JSON標準
 
-Metadataアカウントの重要な属性の1つは、オフチェーンのJSONファイルを指す`URI`属性です。これは、オンチェーンデータの保存に関わる費用の制約を受けることなく、安全に追加のデータを提供するために使用されます。そのJSONファイルは、誰でもトークンの有用な情報を見つけるために使用できる[特定の標準](/ja/token-metadata/token-standard)に従います。
+Metadataアカウントの重要な属性の1つは、オフチェーンのJSONファイルを指す`URI`属性です。これは、オンチェーンデータの保存に関わる費用の制約を受けることなく、安全に追加のデータを提供するために使用されます。そのJSONファイルは、誰でもトークンの有用な情報を見つけるために使用できる[特定の標準](/ja/smart-contracts/token-metadata/token-standard)に従います。
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -227,7 +227,7 @@ JSONメタデータ
 
 さらに、Token Metadataプログラムは、NFT専用の**Master Editionアカウント**と呼ばれる別のアカウントを提供します。このアカウントもMintアカウントから派生されるPDAです。
 
-このアカウントを作成する前に、Token Metadataプログラムは上記の非Fungibleトークンの特殊な特性が満たされていることを確認します。ただし、Mint Authorityを無効にする代わりに、Mint AuthorityとFreeze AuthorityをMaster Edition PDAに転送し、Token Metadataプログラムを通さずに誰もトークンをミントまたはフリーズできないようにすることは注目に値します。[なぜこの決定が行われたかについてはFAQで詳しく読むことができます](/ja/token-metadata/faq#why-are-the-mint-and-freeze-authorities-transferred-to-the-edition-pda)。
+このアカウントを作成する前に、Token Metadataプログラムは上記の非Fungibleトークンの特殊な特性が満たされていることを確認します。ただし、Mint Authorityを無効にする代わりに、Mint AuthorityとFreeze AuthorityをMaster Edition PDAに転送し、Token Metadataプログラムを通さずに誰もトークンをミントまたはフリーズできないようにすることは注目に値します。[なぜこの決定が行われたかについてはFAQで詳しく読むことができます](/ja/smart-contracts/token-metadata/faq#why-are-the-mint-and-freeze-authorities-transferred-to-the-edition-pda)。
 
 したがって、**Master Editionアカウントの存在は、そのMintアカウントの非Fungibility性の証明として機能します**。
 
@@ -362,7 +362,7 @@ NFTがToken Metadataプログラムの最大のユースケースですが、こ
 - `Fungible`: MintアカウントはFungibleであり、小数点以下が1以上です。これは分散型通貨として使用されるトークンである可能性が高いでしょう。
 - `ProgrammableNonFungible`: カスタム認可ルールを強制するために常時フリーズされる特殊な`NonFungible`トークンです。詳細については次のセクションをご覧ください。
 
-[これらの標準についてはこちらで詳しく読むことができます](/ja/token-metadata/token-standard)。
+[これらの標準についてはこちらで詳しく読むことができます](/ja/smart-contracts/token-metadata/token-standard)。
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -442,7 +442,7 @@ Token MetadataプログラムはSolana Tokenプログラムの上に構築され
 
 次に、Token Metadataプログラムによって強制されるカスタムオペレーション固有の認可ルールを定義するのはクリエイター次第です。これらは、Metadataアカウントに付加される特別な**RuleSet**アカウントで定義されます。そのようなRuleSetの例は、ロイヤルティを尊重するプログラムアドレスの許可リストです。RuleSetは、[Token Auth Rules](/ja/token-auth-rules)と呼ばれる新しいMetaplexプログラムの一部です。
 
-[プログラマブルNFTについてはこちらで詳しく読むことができます](/ja/token-metadata/pnfts)。
+[プログラマブルNFTについてはこちらで詳しく読むことができます](/ja/smart-contracts/token-metadata/pnfts)。
 
 {% diagram %}
 {% node %}
@@ -488,15 +488,15 @@ Token MetadataプログラムはSolana Tokenプログラムの上に構築され
 
 このドキュメンテーションの他のページは、さらに詳しくドキュメント化し、重要な機能をそれぞれ個別のページで説明することを目的としています。
 
-- [トークン標準（アセット）](/ja/token-metadata/token-standard)
-- [アセットのミント](/ja/token-metadata/mint)
-- [アセットの更新](/ja/token-metadata/update)
-- [アセットの転送](/ja/token-metadata/transfer)
-- [アセットのバーン](/ja/token-metadata/burn)
-- [印刷エディション](/ja/token-metadata/print)
-- [検証済みコレクション](/ja/token-metadata/collections)
-- [検証済み作成者](/ja/token-metadata/creators)
-- [委任された権限](/ja/token-metadata/delegates)
-- [アセットのロック](/ja/token-metadata/lock)
-- [プログラマブルNFT](/ja/token-metadata/pnfts)
-- [NFTエスクロー](/ja/token-metadata/escrow)
+- [トークン標準（アセット）](/ja/smart-contracts/token-metadata/token-standard)
+- [アセットのミント](/ja/smart-contracts/token-metadata/mint)
+- [アセットの更新](/ja/smart-contracts/token-metadata/update)
+- [アセットの転送](/ja/smart-contracts/token-metadata/transfer)
+- [アセットのバーン](/ja/smart-contracts/token-metadata/burn)
+- [印刷エディション](/ja/smart-contracts/token-metadata/print)
+- [検証済みコレクション](/ja/smart-contracts/token-metadata/collections)
+- [検証済み作成者](/ja/smart-contracts/token-metadata/creators)
+- [委任された権限](/ja/smart-contracts/token-metadata/delegates)
+- [アセットのロック](/ja/smart-contracts/token-metadata/lock)
+- [プログラマブルNFT](/ja/smart-contracts/token-metadata/pnfts)
+- [NFTエスクロー](/ja/smart-contracts/token-metadata/escrow)

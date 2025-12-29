@@ -19,17 +19,17 @@ Coreは現在、アセットミントあたり呼び出し者に0.0015 SOLの非
 
 ## ソウルバウンドアセットを作成するには？
 
-Core標準では、ソウルバウンドアセットを作成できます。これを実現するには、[Permanent Freeze Delegate](/ja/core/plugins/permanent-freeze-delegate)プラグインまたは[Oracle Plugin](/ja/core/external-plugins/oracle)のいずれかを使用できます。
+Core標準では、ソウルバウンドアセットを作成できます。これを実現するには、[Permanent Freeze Delegate](/ja/smart-contracts/core/plugins/permanent-freeze-delegate)プラグインまたは[Oracle Plugin](/ja/smart-contracts/core/external-plugins/oracle)のいずれかを使用できます。
 
-詳しくは[ソウルバウンドアセットガイド](/ja/core/guides/create-soulbound-nft-asset)をご覧ください！
+詳しくは[ソウルバウンドアセットガイド](/ja/smart-contracts/core/guides/create-soulbound-nft-asset)をご覧ください！
 
 ## アセットを不変に設定するには？
 
-Coreには複数レベルの「不変性」があります。詳細情報と実装方法については、[このガイド](/ja/core/guides/immutability)で確認できます。
+Coreには複数レベルの「不変性」があります。詳細情報と実装方法については、[このガイド](/ja/smart-contracts/core/guides/immutability)で確認できます。
 
 ## Metaplex Token MetadataとCoreの違いは何ですか？
 
-CoreはNFT専用に設計された完全に新しい標準であるため、いくつかの注目すべき違いがあります。例えば、Coreはより安価で、より少ないコンピュートユニットが必要で、開発者の視点からより扱いやすいはずです。詳細については[違い](/ja/core/tm-differences)ページをご覧ください。
+CoreはNFT専用に設計された完全に新しい標準であるため、いくつかの注目すべき違いがあります。例えば、Coreはより安価で、より少ないコンピュートユニットが必要で、開発者の視点からより扱いやすいはずです。詳細については[違い](/ja/smart-contracts/core/tm-differences)ページをご覧ください。
 
 ## Coreはエディションをサポートしていますか？
-はい！[Edition](/ja/core/plugins/edition)と[Master Edition](/ja/core/plugins/master-edition)プラグインを使用します。詳細については、[「エディションの印刷方法」ガイド](/ja/core/guides/print-editions)で確認できます。
+はい！[Edition](/ja/smart-contracts/core/plugins/edition)と[Master Edition](/ja/smart-contracts/core/plugins/master-edition)プラグインを使用します。詳細については、[「エディションの印刷方法」ガイド](/ja/smart-contracts/core/guides/print-editions)で確認できます。

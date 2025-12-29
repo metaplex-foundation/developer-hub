@@ -35,7 +35,7 @@ const umi = createUmi("exampleDasProvider.com").use(dasApi());
 
 ## MPL Core用のDAS
 
-[MPL Core](/ja/core)用の[DAS拡張機能](/ja/das-api/core-extension)は、MPL SDKでさらに使用するための正しいタイプを直接返すのに役立ちます。また、コレクションから継承されたアセット内のプラグインを自動的に派生し、[DAS-to-Core型変換のための機能](/ja/das-api/core-extension/convert-das-asset-to-core)を提供します。
+[MPL Core](/ja/core)用の[DAS拡張機能](/ja/dev-tools/das-api/core-extension)は、MPL SDKでさらに使用するための正しいタイプを直接返すのに役立ちます。また、コレクションから継承されたアセット内のプラグインを自動的に派生し、[DAS-to-Core型変換のための機能](/ja/dev-tools/das-api/core-extension/convert-das-asset-to-core)を提供します。
 
 使用するには、まず追加パッケージをインストールしてください：
 

@@ -76,7 +76,7 @@ MPL-Hybridプログラムでメタデータランダム化機能を利用する�
 - ...
 - https://arweave.net/manifestID/9999.json
 
-決定論的URIの作成に慣れていない場合は、詳細な手順について[このガイド](/ja/guides/general/create-deterministic-metadata-with-turbo)に従ってください。さらに、Hybridプログラムが機能するために必要な[コレクション](/ja/core/guides/javascript/how-to-create-a-core-collection-with-javascript)と[アセット](/ja/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)の作成手順を見つけることができます。
+決定論的URIの作成に慣れていない場合は、詳細な手順について[このガイド](/ja/guides/general/create-deterministic-metadata-with-turbo)に従ってください。さらに、Hybridプログラムが機能するために必要な[コレクション](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)と[アセット](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)の作成手順を見つけることができます。
 
 **注意**: 現在、MPL-Hybridプログラムは提供されたmin/maxURIインデックス間の数をランダムに選択し、URIが既に使用されているかをチェックしません。そのため、スワッピングは[誕生日パラドックス](https://betterexplained.com/articles/understanding-the-birthday-paradox/)の影響を受けます。プロジェクトが十分なスワップランダム化の恩恵を受けるため、ランダムに選択できる最低250kのアセットメタデータを準備してアップロードすることをお勧めします。利用可能な潜在的アセットが多いほど良いです！
 

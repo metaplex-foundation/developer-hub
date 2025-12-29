@@ -36,7 +36,7 @@ tableOfContents: false
 | `before`            |          | 指定されたIDより前のアセットを取得。   |
 | `after`             |          | 指定されたIDより後のアセットを取得。    |
 | `jsonUri`           |          | JSON URIの値。  |
-| `options`           |          | 表示オプションオブジェクト。詳細は[表示オプション](/ja/das-api/display-options)を参照してください。 |
+| `options`           |          | 表示オプションオブジェクト。詳細は[表示オプション](/ja/dev-tools/das-api/display-options)を参照してください。 |
 
 ## Playground
 

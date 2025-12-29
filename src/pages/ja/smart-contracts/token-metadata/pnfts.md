@@ -18,7 +18,7 @@ Token MetadataプログラムはSPL Tokenプログラムの上に構築されて
 
 - **pNFTのTokenアカウントは、pNFTが委任されているかどうかに関係なく、SPL Tokenプログラムで常にフリーズされています**。これにより、誰もSPL Tokenプログラムと直接やり取りしてToken Metadataプログラムをバイパスできないことが保証されます。
 - pNFTのTokenアカウントで操作が実行されるたびに、Token Metadataプログラムは**アカウントを解凍し、操作を実行し、再度アカウントをフリーズします**。これはすべて同じ命令で**アトミック**に発生します。このようにして、SPL Tokenプログラムで実行可能なすべての操作はpNFTでも利用できますが、常にToken Metadataプログラムを通じて実行されます。
-- [Token委任](/ja/token-metadata/delegates#token-delegates)がpNFTに設定されると、情報は**Token Record**アカウントに保存されます。pNFTはSPL Tokenプログラムで常にフリーズされているため、pNFTが実際にロックされているかどうかを追跡するのはToken Recordアカウントの責任です。
+- [Token委任](/ja/smart-contracts/token-metadata/delegates#token-delegates)がpNFTに設定されると、情報は**Token Record**アカウントに保存されます。pNFTはSPL Tokenプログラムで常にフリーズされているため、pNFTが実際にロックされているかどうかを追跡するのはToken Recordアカウントの責任です。
 - pNFTに影響を与えるすべての単一操作がToken Metadataプログラムを通過する必要があるため、これらの操作に認証ルールを強制できるボトルネックが作成されました。これらのルールは、**Token Auth Rules**プログラムによって管理される**Rule Set**アカウントで定義されます。
 
 本質的に、これによりpNFTは以下の能力を持ちます：
@@ -34,7 +34,7 @@ Token MetadataプログラムはSPL Tokenプログラムの上に構築されて
 
 この新しい委任システムの情報は、pNFTのMintアカウントとTokenアカウントの両方から派生する特別な**Token Record** PDAに保存されます。新しい委任権限がpNFTに割り当てられると、Token MetadataプログラムはTokenアカウントとToken Recordアカウントの両方でその情報を同期します。
 
-これらの委任については、[委任された権限ページの「Token委任」セクション](/ja/token-metadata/delegates#token-delegates)でより詳しく説明します。
+これらの委任については、[委任された権限ページの「Token委任」セクション](/ja/smart-contracts/token-metadata/delegates#token-delegates)でより詳しく説明します。
 
 {% diagram %}
 {% node %}

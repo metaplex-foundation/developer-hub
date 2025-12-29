@@ -330,7 +330,7 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 
 ## 関連Inscriptionアカウント
 
-[Metaplex JSON標準](/ja/token-metadata/token-standard)には、JSONスキーマのfilesプロパティを介してトークンに関連ファイルをリンクするオプションが含まれています。Inscription programは、PDAの力を使用して追加データを関連付ける新しい方法を導入します！PDAはInscriptionと**アソシエーションタグ**から派生されており、高価なJSON逆シリアル化と解析を必要とせず、追加の刻印されたデータをプログラムで導出する方法になります。
+[Metaplex JSON標準](/ja/smart-contracts/token-metadata/token-standard)には、JSONスキーマのfilesプロパティを介してトークンに関連ファイルをリンクするオプションが含まれています。Inscription programは、PDAの力を使用して追加データを関連付ける新しい方法を導入します！PDAはInscriptionと**アソシエーションタグ**から派生されており、高価なJSON逆シリアル化と解析を必要とせず、追加の刻印されたデータをプログラムで導出する方法になります。
 
 ## Inscription Gateway
 
@@ -340,7 +340,7 @@ Metaplexがホストする以下のURL構造のゲートウェイを使用でき
 
 ## Inscriptionランク
 
-Inscriptionランクは、各inscriptionの一意の番号です。この番号は、作成時の総Inscription数に基づく、存在するすべてのMetaplex Inscriptionの連続的でグローバルなランキングを表します。Inscriptionランクは、[Inscription Sharding](/ja/inscription/sharding)でさらに説明されている並列化されたカウンターを通じて管理されます。
+Inscriptionランクは、各inscriptionの一意の番号です。この番号は、作成時の総Inscription数に基づく、存在するすべてのMetaplex Inscriptionの連続的でグローバルなランキングを表します。Inscriptionランクは、[Inscription Sharding](/ja/smart-contracts/inscription/sharding)でさらに説明されている並列化されたカウンターを通じて管理されます。
 
 あなたのInscriptionの`inscriptionRank`を見つけるには、`inscriptionMetadata`アカウントを取得し、`inscriptionRank` `bigint`を読み取る必要があります：
 
@@ -415,10 +415,10 @@ shards.forEach((shard) => {
 
 このドキュメントの他のページでは、さらに詳しく文書化し、重要な機能を個別のページで説明することを目的としています。
 
-- [Initialize](/ja/inscription/initialize)
-- [Write](/ja/inscription/write)
-- [Fetch](/ja/inscription/fetch)
-- [Clear](/ja/inscription/clear)
-- [close](/ja/inscription/close)
-- [Authorities](/ja/inscription/authority)
+- [Initialize](/ja/smart-contracts/inscription/initialize)
+- [Write](/ja/smart-contracts/inscription/write)
+- [Fetch](/ja/smart-contracts/inscription/fetch)
+- [Clear](/ja/smart-contracts/inscription/clear)
+- [close](/ja/smart-contracts/inscription/close)
+- [Authorities](/ja/smart-contracts/inscription/authority)
 - [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway)

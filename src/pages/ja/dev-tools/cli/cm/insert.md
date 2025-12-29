@@ -40,14 +40,14 @@ mplx cm insert
 
 ## 関連コマンド
 
-- [`mplx cm upload`](/ja/cli/cm/upload) - アセットをアップロード (挿入前に必要)
-- [`mplx cm create`](/ja/cli/cm/create) - キャンディマシンを作成 (挿入前に必要)
-- [`mplx cm validate`](/ja/cli/cm/validate) - キャッシュとアップロードを検証
-- [`mplx cm fetch`](/ja/cli/cm/fetch) - 挿入ステータスを確認
+- [`mplx cm upload`](/ja/dev-tools/cli/cm/upload) - アセットをアップロード (挿入前に必要)
+- [`mplx cm create`](/ja/dev-tools/cli/cm/create) - キャンディマシンを作成 (挿入前に必要)
+- [`mplx cm validate`](/ja/dev-tools/cli/cm/validate) - キャッシュとアップロードを検証
+- [`mplx cm fetch`](/ja/dev-tools/cli/cm/fetch) - 挿入ステータスを確認
 
 ## 次のステップ
 
-1. すべてのアイテムがロードされていることを確認するために**[挿入を検証](/ja/cli/cm/fetch)**
-2. キャンディマシンが機能することを確認するために**[ミントをテスト](/ja/core-candy-machine/mint)**
-3. 問題をチェックするために**[キャッシュとアセットを検証](/ja/cli/cm/validate)**
-4. 適切なガードで**[ローンチを計画](/ja/core-candy-machine/guides)**
+1. すべてのアイテムがロードされていることを確認するために**[挿入を検証](/ja/dev-tools/cli/cm/fetch)**
+2. キャンディマシンが機能することを確認するために**[ミントをテスト](/ja/smart-contracts/core-candy-machine/mint)**
+3. 問題をチェックするために**[キャッシュとアセットを検証](/ja/dev-tools/cli/cm/validate)**
+4. 適切なガードで**[ローンチを計画](/ja/smart-contracts/core-candy-machine/guides)**

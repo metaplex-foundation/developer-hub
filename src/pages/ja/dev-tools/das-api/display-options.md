@@ -82,13 +82,13 @@ const assets = await umi.rpc.searchAssets({
 
 以下のDAS APIメソッドは表示オプション付きの`options`パラメータをサポートします：
 
-- [Get Asset](/ja/das-api/methods/get-asset)
-- [Get Assets](/ja/das-api/methods/get-assets)
-- [Get Assets By Owner](/ja/das-api/methods/get-assets-by-owner)
-- [Get Assets By Creator](/ja/das-api/methods/get-assets-by-creator)
-- [Get Assets By Authority](/ja/das-api/methods/get-assets-by-authority)
-- [Get Assets By Group](/ja/das-api/methods/get-assets-by-group)
-- [Search Assets](/ja/das-api/methods/search-assets)
+- [Get Asset](/ja/dev-tools/das-api/methods/get-asset)
+- [Get Assets](/ja/dev-tools/das-api/methods/get-assets)
+- [Get Assets By Owner](/ja/dev-tools/das-api/methods/get-assets-by-owner)
+- [Get Assets By Creator](/ja/dev-tools/das-api/methods/get-assets-by-creator)
+- [Get Assets By Authority](/ja/dev-tools/das-api/methods/get-assets-by-authority)
+- [Get Assets By Group](/ja/dev-tools/das-api/methods/get-assets-by-group)
+- [Search Assets](/ja/dev-tools/das-api/methods/search-assets)
 
 ## パフォーマンスに関する考慮事項
 

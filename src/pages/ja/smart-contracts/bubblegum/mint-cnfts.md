@@ -4,10 +4,10 @@ metaTitle: 圧縮NFTのミント | Bubblegum
 description: Bubblegumで圧縮NFTをミントする方法を学びます。
 ---
 {% callout title="Bubblegum v2" type="note" %}
-このページはBubblegum v1に固有です。拡張された機能セットについては、Bubblegum v2の使用をお勧めします。Bubblegum v2を使用している場合は、詳細について[Bubblegum v2](/ja/bubblegum-v2/mint-cnfts)のドキュメントを参照してください。
+このページはBubblegum v1に固有です。拡張された機能セットについては、Bubblegum v2の使用をお勧めします。Bubblegum v2を使用している場合は、詳細について[Bubblegum v2](/ja/smart-contracts/bubblegum-v2/mint-cnfts)のドキュメントを参照してください。
 {% /callout %}
 
-[前のページ](/ja/bubblegum/create-trees)では、圧縮NFTをミントするためにBubblegum Treeが必要であり、その作成方法を見てきました。今度は、指定されたBubblegum Treeから圧縮NFTをミントする方法を見てみましょう。 {% .lead %}
+[前のページ](/ja/smart-contracts/bubblegum/create-trees)では、圧縮NFTをミントするためにBubblegum Treeが必要であり、その作成方法を見てきました。今度は、指定されたBubblegum Treeから圧縮NFTをミントする方法を見てみましょう。 {% .lead %}
 
 BubblegumプログラムはTwo つのミント命令を提供します。1つはNFTをコレクションに関連付けずにミントするもの、もう1つはNFTを指定されたコレクションにミントするものです。後者は単にいくつかの追加パラメータが必要なだけなので、まず前者から見てみましょう。
 

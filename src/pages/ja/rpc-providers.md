@@ -28,11 +28,11 @@ RPCノードの機能をいくつか定義し、次にいくつかのオプシ�
 
 ## Metaplex DAS API
 
-RPCのもう一つの区別する特徴は、[Metaplex DAS API](/ja/das-api)をサポートしているかどうかです。Metaplex Digital Asset Standard (DAS) APIは、Solana上のデジタル資産と相互作用するための統一されたインターフェースを表し、標準（Token Metadata）と圧縮（Bubblegum）の両方の資産をサポートしています。APIは、RPCが資産データを提供するために実装する一連のメソッドを定義しています。
+RPCのもう一つの区別する特徴は、[Metaplex DAS API](/ja/dev-tools/das-api)をサポートしているかどうかです。Metaplex Digital Asset Standard (DAS) APIは、Solana上のデジタル資産と相互作用するための統一されたインターフェースを表し、標準（Token Metadata）と圧縮（Bubblegum）の両方の資産をサポートしています。APIは、RPCが資産データを提供するために実装する一連のメソッドを定義しています。
 
 開発者にとって、DAS APIはcNFTと相互作用するために必要ですが、TMアセットとの作業をより簡単で高速にすることもできます。チェーンから読み取る際には、ユーザーエクスペリエンスを可能な限り高速にするために、DASサポートを持つRPCノードを使用することを強くお勧めします。
 
-DAS APIの詳細については、[専用セクション](/ja/das-api)で詳しく知ることができます。
+DAS APIの詳細については、[専用セクション](/ja/dev-tools/das-api)で詳しく知ることができます。
 
 ## Metaplex Aura
 
@@ -43,7 +43,7 @@ Auraは、ユーザーにデジタル資産データの効率的で分散され�
 - **ライトクライアントサポート**: ノードオペレーターが、Coreアセットや特定のBubblegumツリーなど、特定のプロトコルやサブプロトコルにインデックスを作成できるようにします。ライトクライアントは、完全なSolanaノードまたはGeyserプラグインを実行することなく、代わりにAuraネットワークからアップデートを受信して動作できます。これにより、完全なSolanaノードの維持と比較してインフラストラクチャコストを大幅に削減できます。
 - **Digital Asset Standard API**: SVM（Solana Virtual Machine）上のデジタル資産データにアクセスするための主要インターフェースであるDAS APIを完全に実装します。
 
-AuraのインデックスIIng機能について詳しくは、[専用セクション](/ja/aura/reading-solana-and-svm-data)で学習してください。
+AuraのインデックスIIng機能について詳しくは、[専用セクション](/ja/dev-tools/aura/reading-solana-and-svm-data)で学習してください。
 
 ## アーカイブと非アーカイブノード
 

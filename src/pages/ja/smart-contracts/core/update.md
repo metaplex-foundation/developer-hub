@@ -156,7 +156,7 @@ const updateTx = await update(umi, {
 
 ## Core Assetデータを不変にする
 
-以下は、SDKを使用してCore Assetを完全に不変にする方法です。[不変性ガイド](/ja/core/guides/immutability)で説明されているように、不変性には異なるレベルがあることに注意してください。
+以下は、SDKを使用してCore Assetを完全に不変にする方法です。[不変性ガイド](/ja/smart-contracts/core/guides/immutability)で説明されているように、不変性には異なるレベルがあることに注意してください。
 
 {% callout type="warning" title="重要" %}
 

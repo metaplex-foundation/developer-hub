@@ -47,7 +47,7 @@ mplx cm withdraw --address <candy_machine_address>
 
 ## 関連コマンド
 
-- [`mplx cm fetch`](/ja/cli/cm/fetch) - 引き出し前にステータスを確認
-- [`mplx cm create`](/ja/cli/cm/create) - 新しいキャンディマシンを作成
-- [`mplx cm validate`](/ja/cli/cm/validate) - 引き出し前に検証
+- [`mplx cm fetch`](/ja/dev-tools/cli/cm/fetch) - 引き出し前にステータスを確認
+- [`mplx cm create`](/ja/dev-tools/cli/cm/create) - 新しいキャンディマシンを作成
+- [`mplx cm validate`](/ja/dev-tools/cli/cm/validate) - 引き出し前に検証
 - [`solana balance`](https://docs.solana.com/cli) - 回収された残高を確認
