@@ -140,7 +140,7 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 - [Update the data or collection of a cNFT](/bubblegum-v2/update-cnfts).
 - [Burn a cNFT](/bubblegum-v2/burn-cnfts).
 - [Delegate a cNFT](/bubblegum-v2/delegate-cnfts).
-- [Verify and unverify a cNFT collection](/bubblegum-v2/verify-collections).
+- [Verify and unverify a cNFT collection](/bubblegum-v2/collections).
 - [Verify and unverify the creators of a cNFT](/bubblegum-v2/verify-creators).
 - [Freeze and thaw a cNFT](/bubblegum-v2/freeze-cnfts).
 - [Make a cNFT soulbound](/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft).

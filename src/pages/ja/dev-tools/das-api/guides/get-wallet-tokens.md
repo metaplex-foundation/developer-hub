@@ -159,7 +159,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## ヒントとベストプラクティス
 
-1. **[表示オプション](/ja/dev-tools/das-api/guides/display-options)を使用**: `showCollectionMetadata`と`showFungible`や`showInscription`などの他のオプションを有効にして、完全なトークン情報を取得してください。
+1. **[表示オプション](/ja/dev-tools/das-api/display-options)を使用**: `showCollectionMetadata`と`showFungible`や`showInscription`などの他のオプションを有効にして、完全なトークン情報を取得してください。
 
 2. **[ページネーション](/ja/dev-tools/das-api/guides/pagination)を処理**: 多くのトークンを持つウォレットの場合、常にページネーションを実装してください。
 

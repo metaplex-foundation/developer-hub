@@ -212,7 +212,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 1. **Handle [Pagination](/das-api/guides/pagination)**: For large collections, always implement pagination to get all results.
 
-2. **Use [Display Options](/das-api/guides/display-options)**: Enable `showCollectionMetadata` to get additional collection information.
+2. **Use [Display Options](/das-api/display-options)**: Enable `showCollectionMetadata` to get additional collection information.
 
 3. **Cache Results**: Where NFT holder data doesn't change frequently, consider caching results for better performance.
 

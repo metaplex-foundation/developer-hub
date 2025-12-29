@@ -112,7 +112,7 @@ curl -X POST <ENDPOINT> \
 ## Tips and Best Practices
 
 1. **Use [Pagination](/das-api/guides/pagination)** for large datasets
-2. **Include [Display Options](/das-api/guides/display-options)** to get additional metadata
+2. **Include [Display Options](/das-api/display-options)** to get additional metadata
 3. **Sort results** to present data in meaningful ways
 4. **Handle empty results** gracefully when collections are empty
 5. **Verify collection addresses** before querying

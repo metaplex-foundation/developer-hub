@@ -315,7 +315,7 @@ The second part of the instruction checks if is_within_15_minutes_of_market_open
 
 Last part of this journey will be to create a collection and point it to the Oracle account so every asset we include in that collection will follow the custom Oracle rule!  
 
-Let's start by setting up your environment to use Umi. (Umi is a modular framework for building and using JavaScript clients for Solana programs. Learn more [here](../../umi/getting-started))
+Let's start by setting up your environment to use Umi. (Umi is a modular framework for building and using JavaScript clients for Solana programs. Learn more [here](/dev-tools/umi/getting-started))
 
 ```ts
 import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'

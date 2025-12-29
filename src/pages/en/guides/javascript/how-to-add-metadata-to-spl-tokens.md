@@ -84,7 +84,7 @@ addMetadata();
 
 ## Setting up Umi
 
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer differently you can check out the [**Connecting to Umi**](/umi/connecting-to-umi) guide.
+This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer differently you can check out the [**Connecting to Umi**](/umi/getting-started) guide.
 
 You can place the Umi instantiation code inside or outside the code blocks, but to reduce code duplication, we will keep it outside.
 

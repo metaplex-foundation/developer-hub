@@ -239,7 +239,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 3. **Cache results**: Store frequently accessed search results
 4. **Combine filters wisely**: Too many filters may return no results
 5. **Handle empty results**: Always check for empty result sets, but keep in mind that some assets may be hidden or not indexed yet
-6. **Use [Display Options](/das-api/guides/display-options)**: Include relevant display options for your use case
+6. **Use [Display Options](/das-api/display-options)**: Include relevant display options for your use case
 7. **Sort results**: Use sorting to present data in meaningful ways
 8. **Test queries**: Verify your search criteria with known data
 

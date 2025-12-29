@@ -75,7 +75,7 @@ Token Metadata NFTへの解凍は、Bubblegum v1でのみ利用可能です。
 
 解凍プロセスの最初のステップを開始するために、圧縮NFTの所有者は**Redeem**命令を送信し、トランザクションに署名する必要があります。これにより、解凍プロセスの次のステップで使用されるcNFT用のVoucherアカウントが作成されます。
 
-この命令はBubblegum TreeからリーフKを削除することに注意してください。したがって、削除する圧縮NFTの整合性を検証するために追加のパラメータを提供する必要があります。これらのパラメータはリーフを変更するすべての命令に共通であるため、[以下のFAQ](/ja/smart-contracts/bubblegum/faq#replace-leaf-instruction-arguments)に文書化されています。幸い、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
+この命令はBubblegum TreeからリーフKを削除することに注意してください。したがって、削除する圧縮NFTの整合性を検証するために追加のパラメータを提供する必要があります。これらのパラメータはリーフを変更するすべての命令に共通であるため、[以下のFAQ](/ja/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)に文書化されています。幸い、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
 
 {% dialect-switcher title="圧縮NFTの償還" %}
 {% dialect title="JavaScript" id="js" %}

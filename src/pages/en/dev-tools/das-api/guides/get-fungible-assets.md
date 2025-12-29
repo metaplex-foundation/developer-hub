@@ -264,7 +264,7 @@ console.log(`Creator tokens: ${creatorTokens.items.length}`)
 ## Tips and Best Practices
 
 1. **Use Interface Filter**: see [Search Assets by Criteria](/das-api/guides/search-by-criteria) for more information.
-2. **Enable Show Fungible**: Use `showFungible: true` in display options to get complete token information as shown in [Display Options](/das-api/guides/display-options).
+2. **Enable Show Fungible**: Use `showFungible: true` in display options to get complete token information as shown in [Display Options](/das-api/display-options).
 3. **Consider Decimals**: Check the `decimals` field to properly format token amounts.
 4. **Cache Results**: Token balances change frequently, but token metadata is relatively stable.
 

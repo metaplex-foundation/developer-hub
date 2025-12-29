@@ -32,7 +32,7 @@ export const bubblegum = {
           links: [
             { title: 'Overview', href: '/smart-contracts/bubblegum' },
             { title: 'Metaplex DAS API RPCs', href: '/rpc-providers' },
-            { title: 'FAQ', href: '/smart-contracts/bubblegum/faq' },
+            { title: 'FAQ', href: '/smart-contracts/bubblegum-v2/faq' },
           ],
         },
         {
@@ -49,7 +49,7 @@ export const bubblegum = {
               title: 'Creating Bubblegum Trees',
               href: '/smart-contracts/bubblegum/create-trees',
             },
-            { title: 'Fetching cNFTs', href: '/smart-contracts/bubblegum/fetch-cnfts' },
+            { title: 'Fetching cNFTs', href: '/smart-contracts/bubblegum-v2/fetch-cnfts' },
             { title: 'Delegating Trees', href: '/smart-contracts/bubblegum/delegate-trees' },
           ],
         },

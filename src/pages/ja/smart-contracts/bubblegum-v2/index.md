@@ -143,7 +143,7 @@ NFTデータがアカウント内に存在しないにもかかわらず、圧�
 - [cNFTのデータまたはコレクションの更新](/ja/smart-contracts/bubblegum-v2/update-cnfts)。
 - [cNFTのバーン](/ja/smart-contracts/bubblegum-v2/burn-cnfts)。
 - [cNFTのデリゲート](/ja/smart-contracts/bubblegum-v2/delegate-cnfts)。
-- [cNFTコレクションの検証と検証解除](/ja/smart-contracts/bubblegum-v2/verify-collections)。
+- [cNFTコレクションの検証と検証解除](/ja/smart-contracts/bubblegum-v2/collections)。
 - [cNFTの作成者の検証と検証解除](/ja/smart-contracts/bubblegum-v2/verify-creators)。
 - [cNFTの凍結と解凍](/ja/smart-contracts/bubblegum-v2/freeze-cnfts)。
 - [cNFTをソウルバウンドにする](/ja/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft)。

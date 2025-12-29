@@ -212,7 +212,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 1. **[ページネーション](/ja/dev-tools/das-api/guides/pagination)を処理**: 大きなコレクションの場合、すべての結果を取得するために常にページネーションを実装してください。
 
-2. **[表示オプション](/ja/dev-tools/das-api/guides/display-options)を使用**: `showCollectionMetadata`を有効にして追加のコレクション情報を取得してください。
+2. **[表示オプション](/ja/dev-tools/das-api/display-options)を使用**: `showCollectionMetadata`を有効にして追加のコレクション情報を取得してください。
 
 3. **結果をキャッシュ**: NFT保有者データが頻繁に変更されない場合は、パフォーマンス向上のために結果をキャッシュすることを検討してください。
 

@@ -89,7 +89,7 @@ createAndMintTokens()
 
 ## Umiのセットアップ
 
-この例では、`generatedSigner()`を使用してUmiをセットアップします。ウォレットや署名者を異なる方法でセットアップしたい場合は、[**Umiへの接続**](/umi/connecting-to-umi)ガイドをご確認ください。
+この例では、`generatedSigner()`を使用してUmiをセットアップします。ウォレットや署名者を異なる方法でセットアップしたい場合は、[**Umiへの接続**](/ja/dev-tools/umi/getting-started)ガイドをご確認ください。
 
 umi変数とコードブロックは`createAndMintTokens()`関数の内外のどちらにでも配置できます。重要なのは、`umi`変数が`createAndMintTokens()`関数自体からアクセス可能であることです。
 

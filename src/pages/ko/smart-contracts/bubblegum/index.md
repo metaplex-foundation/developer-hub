@@ -16,7 +16,7 @@ Bubblegum은 Solana에서 압축 NFT(cNFT)를 생성하고 상호작용하기 �
 
 {% quick-links %}
 
-{% quick-link title="시작하기" icon="InboxArrowDown" href="/bubblegum/getting-started" description="원하는 언어나 라이브러리를 찾아 압축 NFT를 시작하세요." /%}
+{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/smart-contracts/bubblegum/sdk" description="원하는 언어나 라이브러리를 찾아 압축 NFT를 시작하세요." /%}
 
 {% quick-link title="API 레퍼런스" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="특정한 것을 찾고 계신가요? API 레퍼런스를 확인하고 답을 찾으세요." /%}
 
@@ -43,7 +43,7 @@ Merkle 트리를 사용하여 Solana에서 cNFT 프로젝트를 출시하는 것
 
 ## Merkle 트리, 리프 및 증명
 
-압축 NFT는 **Merkle 트리**의 맥락에서만 존재합니다. Merkle 트리가 무엇인지 [전용 고급 가이드](/bubblegum/concurrent-merkle-trees)에서 설명하지만, 이 개요에서는 Merkle 트리를 **리프**라고 부르는 해시 모음으로 생각할 수 있습니다. 각 리프는 [압축 NFT의 데이터를 해싱](/bubblegum/hashed-nft-data)하여 얻습니다.
+압축 NFT는 **Merkle 트리**의 맥락에서만 존재합니다. Merkle 트리가 무엇인지 [전용 고급 가이드](/bubblegum-v2/concurrent-merkle-trees)에서 설명하지만, 이 개요에서는 Merkle 트리를 **리프**라고 부르는 해시 모음으로 생각할 수 있습니다. 각 리프는 [압축 NFT의 데이터를 해싱](/bubblegum-v2/hashed-nft-data)하여 얻습니다.
 
 Merkle 트리의 각 리프에 대해, 주어진 리프가 해당 트리의 일부인지 확인할 수 있는 해시 목록(이를 **증명**이라고 함)을 제공할 수 있습니다. 압축 NFT가 업데이트되거나 전송될 때마다, 관련된 리프와 그 증명이 변경됩니다.
 
@@ -127,7 +127,7 @@ Merkle 트리의 각 리프에 대해, 주어진 리프가 해당 트리의 일�
 
 모든 RPC가 DAS API를 지원하는 것은 아닙니다. 따라서 애플리케이션에서 압축 NFT를 사용할 때 적절한 RPC를 선택하기 위해 ["Metaplex DAS API RPCs"](/rpc-providers) 페이지를 참조하는 것이 좋습니다.
 
-이에 대해서는 고급 ["NFT 데이터 저장 및 인덱싱"](/bubblegum/stored-nft-data) 가이드에서 더 자세히 다룹니다.
+이에 대해서는 고급 ["NFT 데이터 저장 및 인덱싱"](/bubblegum-v2/stored-nft-data) 가이드에서 더 자세히 다룹니다.
 
 ## 기능
 
@@ -144,4 +144,4 @@ NFT 데이터가 계정 내부에 존재하지 않더라도 압축 NFT에 대해
 
 ## 다음 단계
 
-이제 압축 NFT가 어떻게 작동하는지 높은 수준에서 알게 되었으므로, 압축 NFT와 상호작용하는 데 사용할 수 있는 다양한 언어/프레임워크를 열거하는 [시작하기](/bubblegum/getting-started) 페이지를 확인하는 것이 좋습니다. 그 후, 다양한 [기능 페이지](/bubblegum/create-trees)를 사용하여 cNFT에서 수행할 수 있는 특정 작업에 대해 자세히 알아볼 수 있습니다. 마지막으로, [고급 가이드](/bubblegum/concurrent-merkle-trees)도 cNFT와 Merkle 트리에 대한 지식을 심화시킬 수 있습니다.
+이제 압축 NFT가 어떻게 작동하는지 높은 수준에서 알게 되었으므로, 압축 NFT와 상호작용하는 데 사용할 수 있는 다양한 언어/프레임워크를 열거하는 [시작하기](/bubblegum/getting-started) 페이지를 확인하는 것이 좋습니다. 그 후, 다양한 [기능 페이지](/bubblegum/create-trees)를 사용하여 cNFT에서 수행할 수 있는 특정 작업에 대해 자세히 알아볼 수 있습니다. 마지막으로, [고급 가이드](/bubblegum-v2/concurrent-merkle-trees)도 cNFT와 Merkle 트리에 대한 지식을 심화시킬 수 있습니다.

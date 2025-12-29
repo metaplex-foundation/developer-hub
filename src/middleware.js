@@ -125,6 +125,12 @@ const redirectRules = {
   '/legacy-documentation': {
     '/developer-tools/shank': '/dev-tools/shank',
   },
+  '/ja/legacy-documentation': {
+    '/developer-tools/shank': '/ja/dev-tools/shank',
+  },
+  '/ko/legacy-documentation': {
+    '/developer-tools/shank': '/ko/dev-tools/shank',
+  },
 }
 
 export function middleware(request) {

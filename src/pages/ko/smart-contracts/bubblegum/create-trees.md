@@ -134,8 +134,8 @@ const builder = await createTree(umi, {
 Merkle 트리 계정에는 다음과 같은 트리에 대한 다양한 정보가 포함되어 있습니다:
 
 - **최대 깊이**, **최대 버퍼 크기**, 트리의 **권한** 및 트리가 생성된 **생성 슬롯**을 저장하는 **트리 헤더**.
-- **변경 로그**(또는 루트), **시퀀스 번호** 등과 같은 트리에 대한 저수준 정보를 저장하는 **트리** 자체. 이 문서의 [전용 페이지](/bubblegum/concurrent-merkle-trees)에서 동시 Merkle 트리에 대해 더 자세히 다룹니다.
-- [Merkle 트리 캐노피](/bubblegum/merkle-tree-canopy) 페이지에서 논의된 **캐노피**.
+- **변경 로그**(또는 루트), **시퀀스 번호** 등과 같은 트리에 대한 저수준 정보를 저장하는 **트리** 자체. 이 문서의 [전용 페이지](/bubblegum-v2/concurrent-merkle-trees)에서 동시 Merkle 트리에 대해 더 자세히 다룹니다.
+- [Merkle 트리 캐노피](/bubblegum-v2/merkle-tree-canopy) 페이지에서 논의된 **캐노피**.
 
 다음은 라이브러리를 사용하여 모든 데이터를 가져오는 방법입니다:
 

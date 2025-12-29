@@ -26,7 +26,7 @@ import { mplInscription } from '@metaplex-foundation/mpl-inscription'
 const umi = createUmi('http://127.0.0.1:8899').use(mplInscription())
 ```
 
-Then you want to tell Umi which wallet to use. This can either be a [keypair](/umi/connecting-to-umi#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/connecting-to-umi#connecting-w-wallet-adapter).
+Then you want to tell Umi which wallet to use. This can either be a [keypair](/umi/getting-started#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/getting-started#connecting-w-wallet-adapter).
 
 That's it, you can now interact with Inscriptions by using [the various functions provided by the library](https://mpl-inscription.typedoc.metaplex.com/) and passing your `Umi` instance to them. Here's an example of how to mint a simple inscription with a small JSON file attached, fetching the data of the inscription and printing the inscription Rank.
 

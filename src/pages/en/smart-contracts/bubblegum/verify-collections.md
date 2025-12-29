@@ -21,7 +21,7 @@ The instruction accepts the following parameters:
 - **Collection Mint**: The mint account of the Collection NFT.
 - **Collection Authority**: The update authority of the Collection NFT — or an approved collection delegate — as a Signer. In case the collection authority is a delegate authority, note that the program supports both the new unified **Metadata Delegate** system and the legacy **Collection Authority Records** accounts. Simply pass the approriate PDA to the **Collection Authority Record Pda** parameter.
 
-Additionally, more parameters must be provided to verify the integrity of the Compressed NFT as this instruction will end up replacing the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
+Additionally, more parameters must be provided to verify the integrity of the Compressed NFT as this instruction will end up replacing the leaf on the Bubblegum Tree. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
 {% dialect-switcher title="Verify the Collection of a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}

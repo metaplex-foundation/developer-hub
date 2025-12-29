@@ -89,7 +89,7 @@ createAndMintTokens()
 
 ## Umi 설정
 
-이 예시는 `generatedSigner()`로 Umi를 설정하는 과정을 다룹니다. 지갑이나 서명자를 다른 방식으로 설정하려면 [**Connecting to Umi**](/umi/connecting-to-umi) 가이드를 확인할 수 있습니다.
+이 예시는 `generatedSigner()`로 Umi를 설정하는 과정을 다룹니다. 지갑이나 서명자를 다른 방식으로 설정하려면 [**Connecting to Umi**](/ko/dev-tools/umi/getting-started) 가이드를 확인할 수 있습니다.
 
 umi 변수와 코드 블록을 `createAndMintTokens()` 함수 내부나 외부에 배치할 수 있습니다. 중요한 것은 `umi` 변수가 `createAndMintTokens()` 함수 자체에서 접근 가능하다는 것입니다.
 

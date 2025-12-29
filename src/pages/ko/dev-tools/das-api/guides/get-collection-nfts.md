@@ -276,7 +276,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 1. **대규모 컬렉션의 경우 [페이지네이션](/das-api/guides/pagination) 사용** - 속도 제한 방지
 2. **가능한 경우 결과 캐싱** - 성능 향상
-3. **추가 메타데이터를 얻으려면 [표시 옵션](/das-api/guides/display-options) 포함**
+3. **추가 메타데이터를 얻으려면 [표시 옵션](/das-api/display-options) 포함**
 4. **의미 있는 방식으로 데이터를 제시하기 위해 결과 정렬**
 5. **컬렉션 주소가 유효하지 않을 때 오류를 적절히 처리**
 

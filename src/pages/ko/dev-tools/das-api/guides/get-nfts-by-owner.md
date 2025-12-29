@@ -244,7 +244,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 1. **인터페이스 필터링 사용** - NFT만 가져오기 (예: 대체 가능 토큰 제외)
 2. **NFT가 많은 지갑의 경우 [페이지네이션](/das-api/guides/pagination) 구현**
 3. **빈번한 쿼리의 성능 향상을 위해 결과 캐싱**
-4. **추가 메타데이터를 얻으려면 [표시 옵션](/das-api/guides/display-options) 포함**
+4. **추가 메타데이터를 얻으려면 [표시 옵션](/das-api/display-options) 포함**
 5. **의미 있는 방식으로 데이터를 제시하기 위해 결과 정렬**
 6. **특정 NFT 유형에 집중하기 위해 컬렉션별 필터링**
 

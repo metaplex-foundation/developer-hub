@@ -89,7 +89,7 @@ createAndMintTokens()
 
 ## Setting up Umi
 
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer in a different way you can check out the [**Connecting to Umi**](/umi/connecting-to-umi) guide.
+This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer in a different way you can check out the [**Connecting to Umi**](/umi/getting-started) guide.
 
 You can place the umi variable and code block either inside or outside the `createAndMintTokens()` function. All that matters is that your `umi` variable is accessible from the `createAndMintTokens()` function itself.
 

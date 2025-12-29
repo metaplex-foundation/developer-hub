@@ -21,7 +21,7 @@ Bubblegum 프로그램의 **컬렉션 검증** 명령을 사용하여 압축 NFT
 - **컬렉션 민트**: 컬렉션 NFT의 민트 계정입니다.
 - **컬렉션 권한**: 컬렉션 NFT의 업데이트 권한 또는 승인된 컬렉션 위임자(서명자). 컬렉션 권한이 위임 권한인 경우 프로그램은 새로운 통합 **메타데이터 위임자** 시스템과 레거시 **컬렉션 권한 레코드** 계정을 모두 지원합니다. 적절한 PDA를 **컬렉션 권한 레코드 PDA** 매개변수에 전달하기만 하면 됩니다.
 
-또한 이 명령은 결국 Bubblegum 트리의 리프를 교체하므로 압축 NFT의 무결성을 확인하기 위해 더 많은 매개변수를 제공해야 합니다. 이러한 매개변수는 리프를 변경하는 모든 명령에 공통적이므로 [다음 FAQ](/bubblegum/faq#replace-leaf-instruction-arguments)에 문서화되어 있습니다. 다행히도 Metaplex DAS API를 사용하여 이러한 매개변수를 자동으로 가져오는 헬퍼 메서드를 사용할 수 있습니다.
+또한 이 명령은 결국 Bubblegum 트리의 리프를 교체하므로 압축 NFT의 무결성을 확인하기 위해 더 많은 매개변수를 제공해야 합니다. 이러한 매개변수는 리프를 변경하는 모든 명령에 공통적이므로 [다음 FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments)에 문서화되어 있습니다. 다행히도 Metaplex DAS API를 사용하여 이러한 매개변수를 자동으로 가져오는 헬퍼 메서드를 사용할 수 있습니다.
 
 {% dialect-switcher title="압축 NFT의 컬렉션 검증" %}
 {% dialect title="JavaScript" id="js" %}

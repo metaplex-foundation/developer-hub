@@ -159,7 +159,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 팁과 모범 사례
 
-1. **[표시 옵션](/das-api/guides/display-options) 사용**: 완전한 토큰 정보를 얻으려면 `showCollectionMetadata` 및 `showFungible` 또는 `showInscription`과 같은 다른 옵션을 활성화합니다.
+1. **[표시 옵션](/das-api/display-options) 사용**: 완전한 토큰 정보를 얻으려면 `showCollectionMetadata` 및 `showFungible` 또는 `showInscription`과 같은 다른 옵션을 활성화합니다.
 
 2. **[페이지네이션](/das-api/guides/pagination) 처리**: 토큰이 많은 지갑의 경우 항상 페이지네이션을 구현합니다.
 

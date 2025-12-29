@@ -25,7 +25,7 @@ const bubblegumV1Guides = {
         jp: 'Solanaで100万NFTを作成する方法',
         kr: 'Solana에서 100만 NFT 만들기'
       },
-      path: '/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana',
+      path: '/smart-contracts/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana',
       tags: [GuideTags.js, GuideTags.nfts],
     },
     {
@@ -34,7 +34,7 @@ const bubblegumV1Guides = {
         jp: '他のSVMでcNFTと相互作用する方法',
         kr: '다른 SVM에서 cNFT와 상호작용하는 방법'
       },
-      path: '/bubblegum/guides/javascript/how-to-interact-with-cnfts-on-other-svms',
+      path: '/smart-contracts/bubblegum/guides/javascript/how-to-interact-with-cnfts-on-other-svms',
       tags: [GuideTags.js, GuideTags.nfts],
     },
   ],
@@ -62,7 +62,7 @@ const candyMachineGuides = {
         jp: '他のウォレットへのエアドロップミント',
         kr: '다른 지갑으로 에어드롭 민팅'
       },
-      path: '/candy-machine/guides/airdrop-mint-to-another-wallet',
+      path: '/smart-contracts/candy-machine/guides/airdrop-mint-to-another-wallet',
       tags: [GuideTags.airdrop, GuideTags.nfts],
     },
     {
@@ -71,7 +71,7 @@ const candyMachineGuides = {
         jp: 'キャンディマシンでSolanaにNFTコレクションを作成',
         kr: '캔디 머신으로 Solana에서 NFT 컬렉션 만들기'
       },
-      path: '/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine',
+      path: '/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine',
       tags: [GuideTags.nfts],
     },
   ],
@@ -90,7 +90,7 @@ const coreGuides = {
         jp: '不変NFT',
         kr: '불변 NFT'
       },
-      path: '/core/guides/immutability',
+      path: '/smart-contracts/core/guides/immutability',
       tags: [GuideTags.nfts],
     },
     {
@@ -99,7 +99,7 @@ const coreGuides = {
         jp: 'ソウルバウンドNFTアセットの作成',
         kr: '소울바운드 NFT 자산 생성'
       },
-      path: '/core/guides/create-soulbound-nft-asset',
+      path: '/smart-contracts/core/guides/create-soulbound-nft-asset',
       tags: [GuideTags.nfts],
     },
     {
@@ -108,7 +108,7 @@ const coreGuides = {
         jp: '印刷エディション',
         kr: '인쇄 에디션'
       },
-      path: '/core/guides/print-editions',
+      path: '/smart-contracts/core/guides/print-editions',
       tags: [GuideTags.nfts],
     },
     {
@@ -117,7 +117,7 @@ const coreGuides = {
         jp: 'Oracleプラグインの例',
         kr: 'Oracle 플러그인 예제'
       },
-      path: '/core/guides/oracle-plugin-example',
+      path: '/smart-contracts/core/guides/oracle-plugin-example',
       tags: [GuideTags.nfts],
     },
     {
@@ -126,7 +126,7 @@ const coreGuides = {
         jp: 'AppDataを使用したオンチェーンチケット',
         kr: 'AppData를 사용한 온체인 티켓팅'
       },
-      path: '/core/guides/onchain-ticketing-with-appdata',
+      path: '/smart-contracts/core/guides/onchain-ticketing-with-appdata',
       tags: [GuideTags.nfts],
     },
     {
@@ -135,7 +135,7 @@ const coreGuides = {
         jp: 'JavaScriptでCore NFTアセットを作成する方法',
         kr: 'JavaScript로 Core NFT 자산 생성하는 방법'
       },
-      path: '/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript',
+      path: '/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript',
       tags: [GuideTags.nfts, GuideTags.js],
     },
     {
@@ -144,7 +144,7 @@ const coreGuides = {
         jp: 'JavaScriptでCoreコレクションを作成する方法',
         kr: 'JavaScript로 Core 컬렉션 생성하는 방법'
       },
-      path: '/core/guides/javascript/how-to-create-a-core-collection-with-javascript',
+      path: '/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript',
       tags: [GuideTags.nfts, GuideTags.js],
     },
     {
@@ -153,7 +153,7 @@ const coreGuides = {
         jp: 'Web2 TypeScriptステーキングの例',
         kr: 'Web2 TypeScript 스테이킹 예제'
       },
-      path: '/core/guides/web2-typescript-staking-example',
+      path: '/smart-contracts/core/guides/javascript/web2-typescript-staking-example',
       tags: [GuideTags.nfts, GuideTags.js],
     },
     {
@@ -162,7 +162,7 @@ const coreGuides = {
         jp: 'ロイヤリティカードコンセプトガイド',
         kr: '로얄티 카드 컨셉트 가이드'
       },
-      path: '/core/guides/loyalty-card-concept-guide',
+      path: '/smart-contracts/core/guides/loyalty-card-concept-guide',
       tags: [GuideTags.nfts],
     },
     {
@@ -171,7 +171,7 @@ const coreGuides = {
         jp: 'AnchorでCore NFTアセットを作成する方法',
         kr: 'Anchor로 Core NFT 자산 생성하는 방법'
       },
-      path: '/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor',
+      path: '/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor',
       tags: [GuideTags.nfts, GuideTags.anchor, GuideTags.rust],
     },
     {
@@ -180,7 +180,7 @@ const coreGuides = {
         jp: 'AnchorでCoreコレクションを作成する方法',
         kr: 'Anchor로 Core 컬렉션 생성하는 방법'
       },
-      path: '/core/guides/anchor/how-to-create-a-core-collection-with-anchor',
+      path: '/smart-contracts/core/guides/anchor/how-to-create-a-core-collection-with-anchor',
       tags: [GuideTags.nfts, GuideTags.anchor, GuideTags.rust],
     },
     {
@@ -189,7 +189,7 @@ const coreGuides = {
         jp: 'Anchorステーキングの例',
         kr: 'Anchor 스테이킹 예제'
       },
-      path: '/core/guides/anchor/anchor-staking-example',
+      path: '/smart-contracts/core/guides/anchor/anchor-staking-example',
       tags: [GuideTags.nfts, GuideTags.anchor, GuideTags.rust],
     },
   ],
@@ -208,7 +208,7 @@ const coreCandyMachineGuides = {
         jp: 'CoreキャンディマシンUIの作成',
         kr: 'Core 캔디 머신 UI 만들기'
       },
-      path: '/core-candy-machine/guides/create-a-core-candy-machine-ui',
+      path: '/smart-contracts/core-candy-machine/guides/create-a-core-candy-machine-ui',
       tags: [GuideTags.nfts, GuideTags.js],
     },
     {
@@ -217,7 +217,7 @@ const coreCandyMachineGuides = {
         jp: '非表示設定でCoreキャンディマシンを作成',
         kr: '숨겨진 설정으로 Core 캔디 머신 만들기'
       },
-      path: '/core-candy-machine/guides/create-a-core-candy-machine-with-hidden-settings',
+      path: '/smart-contracts/core-candy-machine/guides/create-a-core-candy-machine-with-hidden-settings',
       tags: [GuideTags.nfts],
     },
   ],
@@ -277,7 +277,7 @@ const tokenMetadataGuides = {
         jp: 'コレクションでNFTを取得',
         kr: '컬렉션별 NFT 가져오기'
       },
-      path: '/token-metadata/guides/get-by-collection',
+      path: '/smart-contracts/token-metadata/guides/get-by-collection',
       tags: [GuideTags.nfts],
     },
     {
@@ -286,7 +286,7 @@ const tokenMetadataGuides = {
         jp: 'アカウントサイズ削減',
         kr: '계정 크기 축소'
       },
-      path: '/token-metadata/guides/account-size-reduction',
+      path: '/smart-contracts/token-metadata/guides/account-size-reduction',
       tags: [GuideTags.nfts],
     },
     {
@@ -304,7 +304,7 @@ const tokenMetadataGuides = {
         jp: 'トークンクレーマースマートコントラクト',
         kr: '토큰 클레이머 스마트 컨트렉트'
       },
-      path: '/token-metadata/guides/anchor/token-claimer-smart-contract',
+      path: '/smart-contracts/token-metadata/guides/anchor/token-claimer-smart-contract',
       tags: [GuideTags.tokens, GuideTags.anchor, GuideTags.rust],
     },
     {
@@ -313,7 +313,7 @@ const tokenMetadataGuides = {
         jp: 'NFTの作成',
         kr: 'NFT 생성'
       },
-      path: '/token-metadata/guides/javascript/create-an-nft',
+      path: '/smart-contracts/token-metadata/guides/javascript/create-an-nft',
       tags: [GuideTags.tokens, GuideTags.js],
     },
   ],
@@ -332,7 +332,7 @@ const umiGuides = {
         jp: 'コンピュートユニットとプライオリティ手数料を使用した最適なトランザクション',
         kr: '컴퓨트 유닛과 우선순위 수수료를 사용한 최적 트랜잭션'
       },
-      path: '/umi/guides/optimal-transactions-with-compute-units-and-priority-fees',
+      path: '/dev-tools/umi/guides/optimal-transactions-with-compute-units-and-priority-fees',
       tags: [GuideTags.js],
     },
     {
@@ -341,7 +341,7 @@ const umiGuides = {
         jp: 'トランザクションのシリアライズとデシリアライズ',
         kr: '트랜잭션 직렬화 및 역직렬화'
       },
-      path: '/umi/guides/serializing-and-deserializing-transactions',
+      path: '/dev-tools/umi/guides/serializing-and-deserializing-transactions',
       tags: [GuideTags.js],
     },
   ],

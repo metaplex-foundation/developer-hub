@@ -159,7 +159,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## Tips and Best Practices
 
-1. **Use [Display Options](/das-api/guides/display-options)**: Enable `showCollectionMetadata` and `showFungible` or other options like `showInscription` to get complete token information.
+1. **Use [Display Options](/das-api/display-options)**: Enable `showCollectionMetadata` and `showFungible` or other options like `showInscription` to get complete token information.
 
 2. **Handle [Pagination](/das-api/guides/pagination)**: For wallets with many tokens, always implement pagination.
 

@@ -25,7 +25,7 @@ import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata'
 // 선택한 RPC 엔드포인트를 사용하세요.
 const umi = createUmi('http://127.0.0.1:8899').use(mplTokenMetadata())
 ```
-그런 다음 Umi에게 사용할 지갑을 알려주고 싶을 것입니다. 이는 [키페어](/umi/connecting-to-umi#connecting-w-a-secret-key) 또는 [솔라나 지갑 어댑터](/umi/connecting-to-umi#connecting-w-wallet-adapter)일 수 있습니다.
+그런 다음 Umi에게 사용할 지갑을 알려주고 싶을 것입니다. 이는 [키페어](/ko/dev-tools/umi/getting-started#connecting-w-a-secret-key) 또는 [솔라나 지갑 어댑터](/ko/dev-tools/umi/getting-started#connecting-w-wallet-adapter)일 수 있습니다.
 
 그게 다입니다. 이제 [라이브러리에서 제공하는 다양한 함수](https://mpl-token-metadata.typedoc.metaplex.com/)를 사용하고 `Umi` 인스턴스를 전달하여 NFT와 상호작용할 수 있습니다. 다음은 NFT를 생성하고 모든 온체인 계정의 데이터를 가져오는 예제입니다.
 

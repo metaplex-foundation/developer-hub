@@ -9,7 +9,7 @@ The Metaplex Protocol **Candy Machine** is the leading minting and distribution 
 The name refers to the vending machines that dispense candy for coins via a mechanical crank. In this case the candy are NFTs and the payment is SOL or a SPL token.
 
 {% quick-links %}
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/core-candy-machine/getting-started" description="Find the language or library of your choice and get started with Candy Machines." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/core-candy-machine/sdk" description="Find the language or library of your choice and get started with Candy Machines." /%}
 
 {% quick-link title="CLI Commands" icon="CommandLine" href="/cli/cm" description="Create and manage candy machines using the Metaplex CLI with interactive wizard." /%}
 

@@ -315,7 +315,7 @@ pub fn crank_oracle(ctx: Context<CrankOracle>) -> Result<()> {
 
 이 여정의 마지막 부분은 컬렉션을 생성하고 Oracle 계정을 가리키도록 하여 해당 컬렉션에 포함하는 모든 자산이 사용자 정의 Oracle 규칙을 따르도록 하는 것입니다!
 
-Umi를 사용하도록 환경을 설정하는 것부터 시작해보겠습니다. (Umi는 Solana 프로그램용 JavaScript 클라이언트를 구축하고 사용하기 위한 모듈식 프레임워크입니다. [여기](../../umi/getting-started)에서 더 알아보세요)
+Umi를 사용하도록 환경을 설정하는 것부터 시작해보겠습니다. (Umi는 Solana 프로그램용 JavaScript 클라이언트를 구축하고 사용하기 위한 모듈식 프레임워크입니다. [여기](/ko/dev-tools/umi/getting-started)에서 더 알아보세요)
 
 ```ts
 import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'

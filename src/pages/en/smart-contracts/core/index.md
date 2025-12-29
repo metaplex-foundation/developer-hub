@@ -14,7 +14,7 @@ Come try out Core's features over at [https://core.metaplex.com/](https://core.m
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/core/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/core/sdk" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-core.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 

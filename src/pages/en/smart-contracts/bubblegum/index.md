@@ -18,7 +18,7 @@ Bubblegum is the Metaplex Protocol program for creating and interacting with com
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum/getting-started" description="Find the language or library of your choice and get started with compressed NFTs." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum/sdk" description="Find the language or library of your choice and get started with compressed NFTs." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
@@ -45,7 +45,7 @@ These compressed NFTs can be transferred, delegated, and even decompressed into 
 
 ## Merkle Trees, leaves and proofs
 
-Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by [hashing the data of the compressed NFT](/bubblegum/hashed-nft-data).
+Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum-v2/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by [hashing the data of the compressed NFT](/bubblegum-v2/hashed-nft-data).
 
 For each Leaf in the Merkle Tree, one can provide a list of hashes — called a **Proof** — that enables anyone to verify that the given Leaf is part of that tree. Whenever a compressed NFT is updated or transferred, its associated Leaf will change and so will its Proof.
 
@@ -129,7 +129,7 @@ Crawling through millions of transactions every time just to fetch the data of o
 
 Note that not all RPCs support the DAS API. As such, you may be interested in the ["Metaplex DAS API RPCs"](/rpc-providers) page to select an appropriate RPC when using compressed NFTs in your application.
 
-We talk about this in more detail in our advanced ["Storing and indexing NFT data"](/bubblegum/stored-nft-data) guide.
+We talk about this in more detail in our advanced ["Storing and indexing NFT data"](/bubblegum-v2/stored-nft-data) guide.
 
 ## Features
 
@@ -146,4 +146,4 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 
 ## Next steps
 
-Now that we know how compressed NFTs work at a high level, we recommend checking out our [Getting Started](/bubblegum/getting-started) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.
+Now that we know how compressed NFTs work at a high level, we recommend checking out our [Getting Started](/bubblegum/getting-started) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.

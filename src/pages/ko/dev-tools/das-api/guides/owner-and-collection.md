@@ -112,7 +112,7 @@ curl -X POST <ENDPOINT> \
 ## 팁과 모범 사례
 
 1. **대규모 데이터셋의 경우 [페이지네이션](/das-api/guides/pagination) 사용**
-2. **추가 메타데이터를 얻으려면 [표시 옵션](/das-api/guides/display-options) 포함**
+2. **추가 메타데이터를 얻으려면 [표시 옵션](/das-api/display-options) 포함**
 3. **의미 있는 방식으로 데이터를 제시하기 위해 결과 정렬**
 4. **컬렉션이 비어있을 때 빈 결과를 적절히 처리**
 5. **쿼리 전에 컬렉션 주소 확인**

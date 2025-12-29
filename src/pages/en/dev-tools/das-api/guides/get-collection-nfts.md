@@ -276,7 +276,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 1. **Use [pagination](/das-api/guides/pagination)** for large collections to avoid rate limits
 2. **Cache results** when possible to improve performance
-3. **Include [display options](/das-api/guides/display-options)** to get additional metadata
+3. **Include [display options](/das-api/display-options)** to get additional metadata
 4. **Sort results** to present data in meaningful ways
 5. **Handle errors** gracefully when collection addresses are invalid
 

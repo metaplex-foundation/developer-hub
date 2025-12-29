@@ -84,7 +84,7 @@ addMetadata();
 
 ## Umi 설정
 
-이 예시는 `generatedSigner()`로 Umi를 설정하는 과정을 다룹니다. 지갑이나 서명자를 다르게 설정하려면 [**Connecting to Umi**](/umi/connecting-to-umi) 가이드를 확인할 수 있습니다.
+이 예시는 `generatedSigner()`로 Umi를 설정하는 과정을 다룹니다. 지갑이나 서명자를 다르게 설정하려면 [**Connecting to Umi**](/ko/dev-tools/umi/getting-started) 가이드를 확인할 수 있습니다.
 
 코드 블록 내부나 외부에 Umi 인스턴스화 코드를 배치할 수 있지만, 코드 중복을 줄이기 위해 외부에 유지하겠습니다.
 

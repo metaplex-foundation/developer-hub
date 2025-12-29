@@ -9,7 +9,7 @@ Metaplex Protocol **Candy Machine**은 Solana에서 공정한 NFT 컬렉션 출�
 이 이름은 기계식 크랭크를 통해 동전을 넣고 사탕을 뽑는 자판기에서 따온 것입니다. 이 경우 사탕은 NFT이고 지불 수단은 SOL 또는 SPL 토큰입니다.
 
 {% quick-links %}
-{% quick-link title="시작하기" icon="InboxArrowDown" href="/core-candy-machine/getting-started" description="원하는 언어나 라이브러리를 선택하고 Candy Machine을 시작하세요." /%}
+{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/smart-contracts/core-candy-machine/sdk" description="원하는 언어나 라이브러리를 선택하고 Candy Machine을 시작하세요." /%}
 
 
 {% quick-link title="API 레퍼런스" icon="JavaScript" href="https://mpl-core-candy-machine.typedoc.metaplex.com/" target="_blank" description="Javascript API 문서를 확인하세요." /%}

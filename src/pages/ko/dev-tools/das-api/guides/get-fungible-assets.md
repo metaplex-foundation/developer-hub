@@ -264,7 +264,7 @@ console.log(`크리에이터 토큰: ${creatorTokens.items.length}`)
 ## 팁과 모범 사례
 
 1. **인터페이스 필터 사용**: 자세한 내용은 [조건별 자산 검색](/das-api/guides/search-by-criteria)을 참조하세요.
-2. **대체 가능 표시 활성화**: [표시 옵션](/das-api/guides/display-options)에 표시된 대로 완전한 토큰 정보를 얻으려면 표시 옵션에서 `showFungible: true`를 사용합니다.
+2. **대체 가능 표시 활성화**: [표시 옵션](/das-api/display-options)에 표시된 대로 완전한 토큰 정보를 얻으려면 표시 옵션에서 `showFungible: true`를 사용합니다.
 3. **소수점 고려**: 토큰 금액을 올바르게 포맷하려면 `decimals` 필드를 확인합니다.
 4. **결과 캐싱**: 토큰 잔액은 자주 변경되지만 토큰 메타데이터는 비교적 안정적입니다.
 
