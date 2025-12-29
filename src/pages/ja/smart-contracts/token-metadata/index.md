@@ -440,7 +440,7 @@ Token MetadataプログラムはSolana Tokenプログラムの上に構築され
 
 **プログラマブルNFT**は、この問題を解決するために導入されました。これらは、**基礎となるトークンアカウントを常時フリーズ状態に保つ**新しい_オプトイン_トークン標準です。そうすることで、Token Metadataプログラムを通さずに誰もプログラマブルNFTを転送、ロック、またはバーンできません。
 
-次に、Token Metadataプログラムによって強制されるカスタムオペレーション固有の認可ルールを定義するのはクリエイター次第です。これらは、Metadataアカウントに付加される特別な**RuleSet**アカウントで定義されます。そのようなRuleSetの例は、ロイヤルティを尊重するプログラムアドレスの許可リストです。RuleSetは、[Token Auth Rules](/ja/token-auth-rules)と呼ばれる新しいMetaplexプログラムの一部です。
+次に、Token Metadataプログラムによって強制されるカスタムオペレーション固有の認可ルールを定義するのはクリエイター次第です。これらは、Metadataアカウントに付加される特別な**RuleSet**アカウントで定義されます。そのようなRuleSetの例は、ロイヤルティを尊重するプログラムアドレスの許可リストです。RuleSetは、[Token Auth Rules](/ja/smart-contracts/token-auth-rules)と呼ばれる新しいMetaplexプログラムの一部です。
 
 [プログラマブルNFTについてはこちらで詳しく読むことができます](/ja/smart-contracts/token-metadata/pnfts)。
 

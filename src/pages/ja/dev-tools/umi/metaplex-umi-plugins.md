@@ -51,7 +51,7 @@ Coreは単一アカウント設計を使用する次世代Solana NFT標準で、
 
 - 圧縮NFTを含む高速データ取得
 
-## [Inscriptions](/ja/inscription)
+## [Inscriptions](/ja/smart-contracts/inscription)
 
 Metaplex Inscriptionプログラムは、ブロックチェーンをデータストレージの方法として使用し、Solanaに直接データを書き込むことを可能にします。Inscriptionプログラムは、このデータストレージをオプションでNFTにリンクすることも可能です。この概要では、このプログラムの動作方法と、さまざまな機能を高レベルで活用する方法について説明します。
 
@@ -75,7 +75,7 @@ Token MetadataはNFTとpNFTの作成と管理を扱うMetaplexプログラムで
 - コレクション管理
 
 
-## [Toolbox](/ja/toolbox)
+## [Toolbox](/ja/dev-tools/umi/toolbox)
 
 Mpl Toolboxには、分散アプリケーションを立ち上げて実行するために必要なSolanaとMetaplexプログラムが多数含まれています。
 

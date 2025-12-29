@@ -4,7 +4,7 @@ metaTitle: プログラマブルNFT（pNFT）| Token Metadata
 description: Token MetadataのプログラマブルNFT（pNFT）について詳しく学習します
 ---
 
-[概要ページ](/ja/token-metadata#pnfts)で述べられているように、プログラマブルNFT（pNFT）は、作成者が特定の操作にカスタムルールを定義し、サードパーティの権限により細かく委任できる新しいアセット標準です。 {% .lead %}
+[概要ページ](/ja/smart-contracts/token-metadata#pnfts)で述べられているように、プログラマブルNFT（pNFT）は、作成者が特定の操作にカスタムルールを定義し、サードパーティの権限により細かく委任できる新しいアセット標準です。 {% .lead %}
 
 ## Token Metadataのバイパスの廃止
 

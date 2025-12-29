@@ -14,7 +14,7 @@ Please note that certain Bubblegum V2 instructions will require protocol fees. P
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/bubblegum-v2/sdk" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/bubblegum-v2/sdk" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}
 
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="特定のものをお探しですか？APIリファレンスをご覧いただき、答えを見つけてください。" /%}
 
