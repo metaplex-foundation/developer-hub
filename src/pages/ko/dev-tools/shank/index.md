@@ -25,12 +25,12 @@ Shank는 Rust 프로그램 코드와 클라이언트 측 SDK 사이의 다리 �
 
 ## 문서
 
-- **[시작하기](/ko/shank/getting-started)** - 설치, 설정, 상세한 사용법 안내 및 포괄적인 예제
+- **[시작하기](/ko/dev-tools/shank/getting-started)** - 설치, 설정, 상세한 사용법 안내 및 포괄적인 예제
 
 ## 통합
 
 Shank는 다른 Metaplex 도구들과 원활하게 통합됩니다:
-- **[Kinobi](/ko/umi/kinobi)** - 현대적인 IDL 생성 및 클라이언트 생성
+- **[Kinobi](/ko/dev-tools/umi/kinobi)** - 현대적인 IDL 생성 및 클라이언트 생성
 - **[Solita](/ko/legacy-documentation/developer-tools/solita)** - TypeScript SDK 생성
 
 ## 리소스

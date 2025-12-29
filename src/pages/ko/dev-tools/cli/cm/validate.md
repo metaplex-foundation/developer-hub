@@ -23,14 +23,14 @@ mplx cm validate --onchain
 
 ## 관련 명령어
 
-- [`mplx cm upload`](/ko/cli/cm/upload) - 자산 업로드 및 캐시 생성
-- [`mplx cm create`](/ko/cli/cm/create) - 캔디 머신 생성
-- [`mplx cm insert`](/ko/cli/cm/insert) - 검증된 자산 삽입
-- [`mplx cm fetch`](/ko/cli/cm/fetch) - 캔디 머신 상태 확인
+- [`mplx cm upload`](/ko/dev-tools/cli/cm/upload) - 자산 업로드 및 캐시 생성
+- [`mplx cm create`](/ko/dev-tools/cli/cm/create) - 캔디 머신 생성
+- [`mplx cm insert`](/ko/dev-tools/cli/cm/insert) - 검증된 자산 삽입
+- [`mplx cm fetch`](/ko/dev-tools/cli/cm/fetch) - 캔디 머신 상태 확인
 
 ## 다음 단계
 
-1. 검증 중 발견된 **[문제 수정](/ko/cli/cm/upload)**
-2. 캐시가 유효한 경우 **[캔디 머신 생성](/ko/cli/cm/create)**
-3. 자산을 로드하기 위해 **[아이템 삽입](/ko/cli/cm/insert)**
-4. 성공을 확인하기 위해 **[배포 모니터링](/ko/cli/cm/fetch)**
+1. 검증 중 발견된 **[문제 수정](/ko/dev-tools/cli/cm/upload)**
+2. 캐시가 유효한 경우 **[캔디 머신 생성](/ko/dev-tools/cli/cm/create)**
+3. 자산을 로드하기 위해 **[아이템 삽입](/ko/dev-tools/cli/cm/insert)**
+4. 성공을 확인하기 위해 **[배포 모니터링](/ko/dev-tools/cli/cm/fetch)**

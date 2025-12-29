@@ -26,7 +26,7 @@ description: Candy Machineから別のウォレットアドレスにNFTをミン
 別のウォレットへNFTをミントすることは、エアドロップ、景品配布、または複数の受信者にNFTを配布する際に特に有用です。このガイドでは、Candy Machineから異なるウォレットアドレスにNFTをミントするプロセスを案内します。ミントプロセスを開始する人がミントコストを負担することに注意することが重要です。したがって、受信者が自分でNFTを請求する方がしばしばコスト効率的です。
 
 {% callout type="note" title="重要な考慮事項" %}
-- 別のウォレットへのミントは高額になる可能性があります。代わりに[allowlist](/ja/candy-machine/guards/allow-list)や[NFT Gate](/ja/candy-machine/guards/nft-gate) Guardを使用した請求メカニズムを検討することをお勧めします。
+- 別のウォレットへのミントは高額になる可能性があります。代わりに[allowlist](/ja/smart-contracts/candy-machine/guards/allow-list)や[NFT Gate](/ja/smart-contracts/candy-machine/guards/nft-gate) Guardを使用した請求メカニズムを検討することをお勧めします。
 - ガードありとガードなしのCandy Machineで利用可能な異なるツールがあります。ガードなしでのミントは通常より簡単です。
 {% /callout %}
 
@@ -40,7 +40,7 @@ Sugar CLIは、他のウォレットにNFTをミントするための2つの主�
 1. `sugar mint`：*1つ*の特定のウォレットにミント
 2. `sugar airdrop`：*複数*のウォレットにミント
 
-Sugarを通じてミントを許可する前提条件は、**ガードが添付されていない**Candy Machineを作成することです。Sugarを使用してCandy Machineを作成するには、[この](https://developers.metaplex.com/ja/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)ガイドの最初のステップに従ってください。Candy Machineにガードが添付されている場合、`sugar guard remove`を使用してガードを削除できます。
+Sugarを通じてミントを許可する前提条件は、**ガードが添付されていない**Candy Machineを作成することです。Sugarを使用してCandy Machineを作成するには、[この](/ja/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)ガイドの最初のステップに従ってください。Candy Machineにガードが添付されている場合、`sugar guard remove`を使用してガードを削除できます。
 
 ### `sugar mint`を使用した単一受信者ミント
 

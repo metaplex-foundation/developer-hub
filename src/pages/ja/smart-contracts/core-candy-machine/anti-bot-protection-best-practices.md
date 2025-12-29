@@ -95,7 +95,7 @@ await securelyStoreUris(uploadedUris);
 - **カスタムソリューション**：ランダムID生成で独自のアップロードサービスを構築
 
 {% callout %}
-**UMIアップローダー機能についてのより詳細な情報については、[UMI Storage Documentation](/ja/umi/storage)を参照してください。**
+**UMIアップローダー機能についてのより詳細な情報については、[UMI Storage Documentation](/ja/dev-tools/umi/storage)を参照してください。**
 {% /callout %}
 
 #### プレースホルダーメタデータの作成
@@ -599,7 +599,7 @@ app.post('/api/mint', async (req, res) => {
 
 ##### 実装リファレンス
 
-実際のアセット更新実装については、UMIを使用してアセットメタデータ、名前、URIを更新する方法を説明する[Core Asset Update documentation](/ja/core/update)を参照してください。
+実際のアセット更新実装については、UMIを使用してアセットメタデータ、名前、URIを更新する方法を説明する[Core Asset Update documentation](/ja/smart-contracts/core/update)を参照してください。
 
 リビールプロセスは、セキュアマッピングを使用してどの最終メタデータURIが各ミントされたアセットに対応するかを決定し、その後Coreのアップデートファンクションaﾘﾃｨーｷﾍﾅｱｾｯﾄを更新します。
 

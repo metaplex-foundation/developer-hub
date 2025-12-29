@@ -147,7 +147,7 @@ await thawAndRevokeV2(umi, {
 {% /dialect-switcher %}
 
 ## cNFT를 소울바운드로 만들기
-cNFT를 소울바운드로 만들려면 cNFT가 [`permanentFreezeDelegate`](/ko/core/plugins/permanent-freeze-delegate) 플러그인이 있는 [mpl-core 컬렉션](/ko/core/collections)의 일부여야 합니다. `setNonTransferableV2` 명령어를 사용하여 cNFT를 양도 불가능하게 만들 수 있습니다.
+cNFT를 소울바운드로 만들려면 cNFT가 [`permanentFreezeDelegate`](/ko/smart-contracts/core/plugins/permanent-freeze-delegate) 플러그인이 있는 [mpl-core 컬렉션](/ko/smart-contracts/core/collections)의 일부여야 합니다. `setNonTransferableV2` 명령어를 사용하여 cNFT를 양도 불가능하게 만들 수 있습니다.
 
 {% dialect-switcher title="cNFT를 소울바운드로 만들기" %}
 {% dialect title="JavaScript" id="js" %}

@@ -181,6 +181,27 @@ export function middleware(request) {
     }
   }
 
+  // Handle Japanese and Korean path migration redirects
+  // Redirect /ja/core/* to /ja/smart-contracts/core/*, /ko/umi/* to /ko/dev-tools/umi/*, etc.
+  for (const lang of ['ja', 'ko']) {
+    if (pathname.startsWith(`/${lang}/`)) {
+      // Smart contract redirects for localized paths
+      for (const product of smartContractRedirects) {
+        if (pathname === `/${lang}/${product}` || pathname.startsWith(`/${lang}/${product}/`)) {
+          const newPath = pathname.replace(`/${lang}/${product}`, `/${lang}/smart-contracts/${product}`)
+          return NextResponse.redirect(new URL(newPath, request.url), 308)
+        }
+      }
+      // Dev tools redirects for localized paths
+      for (const product of devToolsRedirects) {
+        if (pathname === `/${lang}/${product}` || pathname.startsWith(`/${lang}/${product}/`)) {
+          const newPath = pathname.replace(`/${lang}/${product}`, `/${lang}/dev-tools/${product}`)
+          return NextResponse.redirect(new URL(newPath, request.url), 308)
+        }
+      }
+    }
+  }
+
   // Rewrite root paths to /en/* for English content
   // Skip paths that start with /ja, /ko, /en, /_next, /api, or contain a file extension
   if (!pathname.startsWith('/ja') &&

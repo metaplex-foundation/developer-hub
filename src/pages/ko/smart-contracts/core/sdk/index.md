@@ -8,8 +8,8 @@ description: Solana 블록체인에서 NFT와 디지털 자산에 대한 간단�
 
 {% quick-links %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/ko/core/sdk/javascript" description="Umi 프레임워크를 기반으로 한 MPL-Core용 JavaScript 라이브러리를 시작해보세요." /%}
+{% quick-link title="JavaScript" icon="JavaScript" href="/ko/smart-contracts/core/sdk/javascript" description="Umi 프레임워크를 기반으로 한 MPL-Core용 JavaScript 라이브러리를 시작해보세요." /%}
 
-{% quick-link title="Rust" icon="Rust" href="/ko/core/sdk/rust" description="MPL-Core Rust crate 사용을 시작해보세요." /%}
+{% quick-link title="Rust" icon="Rust" href="/ko/smart-contracts/core/sdk/rust" description="MPL-Core Rust crate 사용을 시작해보세요." /%}
 
 {% /quick-links %}
