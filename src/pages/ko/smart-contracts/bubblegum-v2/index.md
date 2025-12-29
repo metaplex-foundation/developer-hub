@@ -26,7 +26,7 @@ Bubblegum V2는 원본 Bubblegum 프로그램의 기반 위에 구축되면서 �
 
 - **동결 및 해동 기능**: 두 가지 유형의 동결/해동이 가능합니다: 1) cNFT 소유자는 자산 수준 제어를 위해 리프 위임자에게 동결 권한을 위임할 수 있어 특정 이벤트 중 전송을 방지하거나 베스팅 메커니즘을 구현하는 등 다양한 사용 사례에 유연성을 제공합니다. 2) 컬렉션 생성 시 `PermanentFreezeDelegate` 플러그인이 활성화된 경우, 프로젝트 제작자는 컬렉션 전체 제어를 위해 영구 동결 위임자를 통해 cNFT를 동결하고 해동할 수 있습니다
 - **MPL-Core 컬렉션 통합**: Bubblegum V2 NFT는 이제 토큰 메타데이터 컬렉션에 제한되지 않고 MPL-Core 컬렉션에 추가될 수 있어 더 넓은 Metaplex 생태계와의 유연성과 통합을 제공합니다.
-- **로열티 강제**: Bubblegum V2는 [MPL-Core](https://docs.metaplex.com/core/overview) 컬렉션을 사용하므로 `ProgramDenyList`를 사용하여 cNFT에 로열티를 강제할 수 있습니다.
+- **로열티 강제**: Bubblegum V2는 [MPL-Core](/smart-contracts/core) 컬렉션을 사용하므로 `ProgramDenyList`를 사용하여 cNFT에 로열티를 강제할 수 있습니다.
 - **소울바운드 NFT**: cNFT는 이제 소울바운드(양도 불가능)로 만들 수 있어 소유자의 지갑에 영구적으로 바인딩됩니다. 이는 자격증명, 참석 증명, 신원 확인 등에 완벽합니다. 컬렉션 생성 시 `PermanentFreezeDelegate` 플러그인이 활성화되어야 합니다.
 - **영구 전송 허용**: 컬렉션에서 `PermanentTransferDelegate` 플러그인이 활성화된 경우 영구 전송 위임자는 리프 소유자의 상호 작용 없이 cNFT를 새 소유자에게 전송할 수 있습니다.
 - **권한에 의한 소각**: 컬렉션에 `PermanentBurnDelegate` 플러그인이 활성화된 경우, 위임자는 리프 소유자의 서명 없이 NFT를 소각할 수 있습니다.

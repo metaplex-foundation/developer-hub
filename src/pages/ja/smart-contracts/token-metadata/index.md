@@ -14,7 +14,7 @@ Please note that certain Token Metadata instructions will require protocol fees.
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/token-metadata/getting-started" description="お好みの言語またはライブラリを選択し、Solanaでデジタルアセットの開発を始めましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/token-metadata/getting-started" description="お好みの言語またはライブラリを選択し、Solanaでデジタルアセットの開発を始めましょう。" /%}
 
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-token-metadata.typedoc.metaplex.com/" target="_blank" description="何か特定のものをお探しですか？APIリファレンスをご覧になり、回答を見つけてください。" /%}
 

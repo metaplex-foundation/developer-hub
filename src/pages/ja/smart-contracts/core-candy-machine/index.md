@@ -9,7 +9,7 @@ Metaplexプロトコルの**Candy Machine**は、Solanaにおける公平なNFT�
 この名前は、機械式クランクを使ってコインと引き換えにキャンディを配布する自動販売機に由来しています。この場合、キャンディはNFTであり、支払いはSOLまたはSPLトークンです。
 
 {% quick-links %}
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/core-candy-machine/getting-started" description="お好みの言語やライブラリを選択して、Candy Machinesを始めましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/core-candy-machine/getting-started" description="お好みの言語やライブラリを選択して、Candy Machinesを始めましょう。" /%}
 
 
 {% quick-link title="APIリファレンス" icon="JavaScript" href="https://mpl-core-candy-machine.typedoc.metaplex.com/" target="_blank" description="JavaScript API ドキュメントを確認してください。" /%}
@@ -19,6 +19,6 @@ Metaplexプロトコルの**Candy Machine**は、Solanaにおける公平なNFT�
 {% /quick-links %}
 
 {% callout %}
-このドキュメントは、Core Candy Machineとして知られるCandy Machineの最新バージョンについて説明しています。これは[Core](/ja/core)アセットのミントを可能にします。Metaplex Token MetadataのNFTをミントしたい場合は、[代わりにCandy Machine V3を参照してください](https://developers.metaplex.com/candy-machine/)。
+このドキュメントは、Core Candy Machineとして知られるCandy Machineの最新バージョンについて説明しています。これは[Core](/ja/smart-contracts/core)アセットのミントを可能にします。Metaplex Token MetadataのNFTをミントしたい場合は、[代わりにCandy Machine V3を参照してください](https://developers.metaplex.com/candy-machine/)。
 {% /callout %}
 

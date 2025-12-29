@@ -6,7 +6,7 @@ description: Metaplexの開発者ツールの概要。
 
 オンチェーンプログラムに加えて、Metaplexは独自のSolanaプログラムを作成・維持するために使用できる様々な開発者ツールを提供しています。
 
-- [**Umi**](/ja/umi): Solanaクライアントを構築するためのJavaScriptフレームワーク。
+- [**Umi**](/ja/dev-tools/umi): Solanaクライアントを構築するためのJavaScriptフレームワーク。
 - [**Kinobi**](https://github.com/metaplex-foundation/kinobi): プログラムクライアントを生成できるIDL仕様のスーパーセット。
 - [**Shank**](https://github.com/metaplex-foundation/shank): バニラSolanaプログラムがIDLを生成するのに役立つマクロセット。
 - [**Amman**](/ja/amman): 開発用のローカルバリデータの設定に役立つライブラリ。

@@ -13,12 +13,12 @@ MetaplexプロトコルのキャンディマシンはSolanaでの公平なNFTコ
 {% quick-links %}
 
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/candy-machine/getting-started" description="お好みの言語またはライブラリを見つけて、キャンディマシンを始めましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/candy-machine/getting-started" description="お好みの言語またはライブラリを見つけて、キャンディマシンを始めましょう。" /%}
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-candy-machine.typedoc.metaplex.com/" target="_blank" description="何か特定のものをお探しですか？私たちがサポートします。" /%}
 {% /quick-links %}
 
 {% callout %}
-このドキュメントはキャンディマシンV3を参照しており、MetaplexトークンメタデータNFTをミントするために使用できます。代わりにコアアセットを作成したい場合は、[コアキャンディマシン](/ja/core-candy-machine)をご覧ください。
+このドキュメントはキャンディマシンV3を参照しており、MetaplexトークンメタデータNFTをミントするために使用できます。代わりにコアアセットを作成したい場合は、[コアキャンディマシン](/ja/smart-contracts/core-candy-machine)をご覧ください。
 {% /callout %}
 
 ## はじめに

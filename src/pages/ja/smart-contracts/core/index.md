@@ -16,11 +16,11 @@ Please note that certain Core instructions will require protocol fees. Please re
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/core/getting-started" description="お好みの言語またはライブラリを選択し、Solanaでデジタルアセットをはじめましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/core/getting-started" description="お好みの言語またはライブラリを選択し、Solanaでデジタルアセットをはじめましょう。" /%}
 
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-core.typedoc.metaplex.com/" target="_blank" description="何か特定のものをお探しですか？APIリファレンスをご覧いただき、答えを見つけてください。" /%}
 
-{% quick-link title="MPL Token Metadataとの違いの概要" icon="AcademicCap" href="/ja/core/tm-differences" description="Token Metadataに慣れていて、新機能や動作の変更の概要を見たいですか？" /%}
+{% quick-link title="MPL Token Metadataとの違いの概要" icon="AcademicCap" href="/ja/smart-contracts/core/tm-differences" description="Token Metadataに慣れていて、新機能や動作の変更の概要を見たいですか？" /%}
 
 {% quick-link title="UIで自分で試してみよう！" icon="Beaker" href="https://core.metaplex.com/" target="_blank" description="使いやすいWebサイトを使ってCore自分で試してみてください！" /%}
 

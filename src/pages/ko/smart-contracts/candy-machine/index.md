@@ -12,7 +12,7 @@ Metaplex Protocol **Candy Machine**은 Solana에서 공정한 NFT 컬렉션 출�
 
 {% quick-links %}
 
-{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/candy-machine/getting-started" description="원하는 언어나 라이브러리를 찾고 Candy Machine으로 시작하세요." /%}
+{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/smart-contracts/candy-machine/getting-started" description="원하는 언어나 라이브러리를 찾고 Candy Machine으로 시작하세요." /%}
 {% quick-link title="API 참조" icon="CodeBracketSquare" href="https://mpl-candy-machine.typedoc.metaplex.com/" target="_blank" description="특정한 내용을 찾고 있나요? 여기에 있습니다." /%}
 {% /quick-links %}
 

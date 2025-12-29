@@ -30,12 +30,12 @@ const umi = createUmi("exampleDasProvider.com").use(dasApi());
 注意：エンドポイントでDAS APIを「有効化」するためにRPCプロバイダーに連絡する必要がある場合があります。
 
 {% callout title="Metaplex Core DAS API" type="note" %}
-[Metaplex Core](/ja/core)アセットでDASを使用する予定の場合、追加の`@metaplex-foundation/mpl-core-das`パッケージをインストールしてください：
+[Metaplex Core](/ja/smart-contracts/core)アセットでDASを使用する予定の場合、追加の`@metaplex-foundation/mpl-core-das`パッケージをインストールしてください：
 {% /callout %}
 
 ## MPL Core用のDAS
 
-[MPL Core](/ja/core)用の[DAS拡張機能](/ja/dev-tools/das-api/core-extension)は、MPL SDKでさらに使用するための正しいタイプを直接返すのに役立ちます。また、コレクションから継承されたアセット内のプラグインを自動的に派生し、[DAS-to-Core型変換のための機能](/ja/dev-tools/das-api/core-extension/convert-das-asset-to-core)を提供します。
+[MPL Core](/ja/smart-contracts/core)用の[DAS拡張機能](/ja/dev-tools/das-api/core-extension)は、MPL SDKでさらに使用するための正しいタイプを直接返すのに役立ちます。また、コレクションから継承されたアセット内のプラグインを自動的に派生し、[DAS-to-Core型変換のための機能](/ja/dev-tools/das-api/core-extension/convert-das-asset-to-core)を提供します。
 
 使用するには、まず追加パッケージをインストールしてください：
 

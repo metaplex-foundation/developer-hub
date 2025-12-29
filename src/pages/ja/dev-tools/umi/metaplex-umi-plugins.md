@@ -19,7 +19,7 @@ BubblegumはSolanaブロックチェーン上でcNFT（圧縮NFT）の作成と�
 - デリゲーション
 - コレクション管理
 
-## [Candy Machine](/ja/candy-machine)
+## [Candy Machine](/ja/smart-contracts/candy-machine)
 
 Candy Machineは「販売」NFTおよびpNFTドロップの設定を可能にするMetaplexプログラムです。ユーザーはあなたのcandy machineから購入し、内部にあるランダムなNFT/pNFTを入手できます。
 
@@ -28,7 +28,7 @@ Candy Machineは「販売」NFTおよびpNFTドロップの設定を可能にす
 - NFTのミンティング
 - NFTの販売
 
-## [Core](/ja/core)
+## [Core](/ja/smart-contracts/core)
 
 Coreは単一アカウント設計を使用する次世代Solana NFT標準で、代替手段と比較してミンティングコストを削減し、Solanaネットワークの負荷を改善します。また、開発者がアセットの動作と機能を変更できる柔軟なプラグインシステムも持っています。
 

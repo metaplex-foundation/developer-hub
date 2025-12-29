@@ -4,7 +4,7 @@ metaTitle: Javascript SDK | MPL Core Candy Machine
 description: MPL Core Candy Machine Javascript SDK를 실행하도록 프로젝트를 설정하는 방법을 알아보세요.
 ---
 
-Metaplex는 MPL Core Candy Machine 프로그램과 상호작용하는 데 사용할 수 있는 JavaScript 라이브러리를 제공합니다. [Umi Framework](/ko/umi) 덕분에 많은 독선적인 종속성 없이 제공되어 모든 JavaScript 프로젝트에서 사용할 수 있는 경량 라이브러리를 제공합니다.
+Metaplex는 MPL Core Candy Machine 프로그램과 상호작용하는 데 사용할 수 있는 JavaScript 라이브러리를 제공합니다. [Umi Framework](/ko/dev-tools/umi) 덕분에 많은 독선적인 종속성 없이 제공되어 모든 JavaScript 프로젝트에서 사용할 수 있는 경량 라이브러리를 제공합니다.
 
 시작하려면 [Umi framework를 설치](/ko/dev-tools/umi/getting-started)하고 MPL-Core JavaScript 라이브러리를 설치해야 합니다.
 

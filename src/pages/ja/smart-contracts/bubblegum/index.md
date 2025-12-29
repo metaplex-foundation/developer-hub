@@ -16,7 +16,7 @@ Bubblegumは、Solana上で圧縮NFT（cNFT）を作成し、操作するため�
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/bubblegum/getting-started" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/bubblegum/getting-started" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}
 
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="特定のものをお探しですか？APIリファレンスをご覧いただき、答えを見つけてください。" /%}
 
