@@ -87,7 +87,7 @@ createNft()
 ### 새 지갑 생성
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplTokenMetadata())
   .use(
     irysUploader({
@@ -110,7 +110,7 @@ await umi.rpc.airdrop(umi.identity.publickey)
 ### 기존 지갑 사용
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplTokenMetadata())
   .use(
     irysUploader({
@@ -345,7 +345,7 @@ const createNft = async () => {
   // ** Umi 설정 **
   //
 
-  const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+  const umi = createUmi("https://api.devnet.solana.com")
     .use(mplTokenMetadata())
   .use(
     irysUploader({
@@ -468,4 +468,4 @@ createNft()
 
 ## 다음 단계는?
 
-이 가이드는 기본 NFT를 생성하는 데 도움이 되었습니다. 여기서부터 [Token Metadata 프로그램](/token-metadata)으로 이동하여 컬렉션 생성하기, 새 NFT를 컬렉션에 추가하기, NFT로 수행할 수 있는 다양한 다른 상호작용과 같은 것들을 확인할 수 있습니다.
+이 가이드는 기본 NFT를 생성하는 데 도움이 되었습니다. 여기서부터 [Token Metadata 프로그램](/ko/smart-contracts/token-metadata)으로 이동하여 컬렉션 생성하기, 새 NFT를 컬렉션에 추가하기, NFT로 수행할 수 있는 다양한 다른 상호작용과 같은 것들을 확인할 수 있습니다.

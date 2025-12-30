@@ -73,7 +73,7 @@ execute transactions while using the `assetSignerPda` with the `execute` instruc
 
 ### Controlling Execute Operations
 
-The execute functionality can be controlled using the [Freeze Execute Plugin](/core/plugins/freeze-execute). This plugin allows you to freeze the execute operations on an asset, preventing any execute instructions from being processed until unfrozen.
+The execute functionality can be controlled using the [Freeze Execute Plugin](/smart-contracts/core/plugins/freeze-execute). This plugin allows you to freeze the execute operations on an asset, preventing any execute instructions from being processed until unfrozen.
 
 The Freeze Execute Plugin is particularly useful for:
 

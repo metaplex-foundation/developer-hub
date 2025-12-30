@@ -11,7 +11,6 @@ description: 이 가이드는 MPL Core에서 소울바운드 자산을 위한 �
 
 이 가이드에서는 MPL Core와 Umi 프레임워크를 사용하여 소울바운드 자산을 생성하는 방법을 탐구합니다. TypeScript로 소울바운드 NFT를 구현하려는 개발자이거나 단순히 작동 방식을 이해하고 싶다면, 기본 개념부터 실제 구현까지 모든 것을 다룰 것입니다. 자산을 소울바운드로 만드는 다양한 접근 방식을 살펴보고 컬렉션 내에서 첫 번째 소울바운드 NFT를 생성하는 과정을 안내합니다.
 
-Solana 및 Eclipse 블록체인에서 Metaplex Aura 네트워크에 액세스하려면 [여기](https://aura-app.metaplex.com/)에서 Aura 앱을 방문하여 엔드포인트와 API 키를 얻을 수 있습니다.
 
 MPL Core에서는 소울바운드 NFT를 생성하는 두 가지 주요 접근 방식이 있습니다:
 
@@ -85,7 +84,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // 1단계: devnet RPC 엔드포인트로 Umi 초기화
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // 2단계: 테스트 지갑 생성 및 자금 조달
@@ -190,7 +189,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // 1단계: devnet RPC 엔드포인트로 Umi 초기화
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // 2단계: 테스트 지갑 생성 및 자금 조달
@@ -271,7 +270,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 
 Oracle 플러그인은 자산의 다양한 라이프사이클 이벤트를 승인하거나 거부하는 방법을 제공합니다. 소울바운드 NFT를 생성하기 위해, 소각과 같은 다른 작업은 여전히 허용하면서 전송 이벤트를 항상 거부하는 Metaplex에서 배포한 특별한 Oracle을 사용할 수 있습니다. 이는 자산이 전송될 수 없더라도 여전히 소각 가능하므로 Permanent Freeze Delegate 플러그인 접근 방식과 다릅니다.
 
-Oracle 플러그인을 사용하여 소울바운드 자산을 생성할 때, 플러그인을 자산에 연결합니다. 이는 생성 시 또는 이후에 수행할 수 있습니다. 이 예제에서는 항상 거부하고 Metaplex에서 배포한 [기본 Oracle](/core/external-plugins/oracle#default-oracles-deployed-by-metaplex)을 사용합니다.
+Oracle 플러그인을 사용하여 소울바운드 자산을 생성할 때, 플러그인을 자산에 연결합니다. 이는 생성 시 또는 이후에 수행할 수 있습니다. 이 예제에서는 항상 거부하고 Metaplex에서 배포한 [기본 Oracle](/ko/smart-contracts/core/external-plugins/oracle#default-oracles-deployed-by-metaplex)을 사용합니다.
 
 이것은 전송될 수 없지만 소각될 수 있는 영구적으로 소울바운드된 자산을 효과적으로 생성합니다. 다음 코드 스니펫에서 방법을 보여줍니다:
 
@@ -339,7 +338,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // 1단계: devnet RPC 엔드포인트로 Umi 초기화
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // 2단계: 테스트 지갑 생성 및 자금 조달
@@ -458,7 +457,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // 1단계: devnet RPC 엔드포인트로 Umi 초기화
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // 2단계: 테스트 지갑 생성 및 자금 조달

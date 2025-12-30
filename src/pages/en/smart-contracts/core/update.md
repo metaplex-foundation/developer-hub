@@ -156,7 +156,7 @@ const updateTx = await update(umi, {
 
 ## Making a Core Asset Data Immutable
 
-Here is how you can use our SDKs to make a Core Asset fully immutable. Be aware that there are different levels of immutability described in the [immutability Guide](/core/guides/immutability).
+Here is how you can use our SDKs to make a Core Asset fully immutable. Be aware that there are different levels of immutability described in the [immutability Guide](/smart-contracts/core/guides/immutability).
 
 {% callout type="warning" title="Important" %}
 

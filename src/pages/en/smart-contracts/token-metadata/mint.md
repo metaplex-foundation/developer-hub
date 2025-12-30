@@ -4,7 +4,7 @@ metaTitle: Minting Assets | Token Metadata
 description: Learn how to mint NFTs, SFTs and Programmable NFTs (a.k.a. Assets) on Token Metadata
 ---
 
-As we discussed in the [Token Metadata overview](/token-metadata), digital assets on Solana are composed of several onchain accounts and off-chain data describing the token. On this page, we'll go over the process of minting these assets. {% .lead %}
+As we discussed in the [Token Metadata overview](/smart-contracts/token-metadata), digital assets on Solana are composed of several onchain accounts and off-chain data describing the token. On this page, we'll go over the process of minting these assets. {% .lead %}
 
 ## The minting process
 

@@ -159,9 +159,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 팁과 모범 사례
 
-1. **[표시 옵션](/das-api/guides/display-options) 사용**: 완전한 토큰 정보를 얻으려면 `showCollectionMetadata` 및 `showFungible` 또는 `showInscription`과 같은 다른 옵션을 활성화합니다.
+1. **[표시 옵션](/ko/dev-tools/das-api/display-options) 사용**: 완전한 토큰 정보를 얻으려면 `showCollectionMetadata` 및 `showFungible` 또는 `showInscription`과 같은 다른 옵션을 활성화합니다.
 
-2. **[페이지네이션](/das-api/guides/pagination) 처리**: 토큰이 많은 지갑의 경우 항상 페이지네이션을 구현합니다.
+2. **[페이지네이션](/ko/dev-tools/das-api/guides/pagination) 처리**: 토큰이 많은 지갑의 경우 항상 페이지네이션을 구현합니다.
 
 3. **인터페이스로 필터링**: 특정 토큰 유형을 가져오려면 `interface` 매개변수를 사용합니다.
 
@@ -171,7 +171,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 관련 가이드
 
-- [소유자별 대체 가능 자산 가져오기](/das-api/guides/get-fungible-assets)
-- [소유자별 NFT 가져오기](/das-api/guides/get-nfts-by-owner)
-- [소유자 및 컬렉션별 자산 가져오기](/das-api/guides/owner-and-collection)
-- [컬렉션 통계 분석](/das-api/guides/collection-statistics)
+- [소유자별 대체 가능 자산 가져오기](/ko/dev-tools/das-api/guides/get-fungible-assets)
+- [소유자별 NFT 가져오기](/ko/dev-tools/das-api/guides/get-nfts-by-owner)
+- [소유자 및 컬렉션별 자산 가져오기](/ko/dev-tools/das-api/guides/owner-and-collection)
+- [컬렉션 통계 분석](/ko/dev-tools/das-api/guides/collection-statistics)

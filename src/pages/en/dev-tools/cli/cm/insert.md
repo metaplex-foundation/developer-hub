@@ -40,14 +40,14 @@ mplx cm insert
 
 ## Related Commands
 
-- [`mplx cm upload`](/cli/cm/upload) - Upload assets (required before insert)
-- [`mplx cm create`](/cli/cm/create) - Create candy machine (required before insert)
-- [`mplx cm validate`](/cli/cm/validate) - Validate cache and uploads
-- [`mplx cm fetch`](/cli/cm/fetch) - Verify insertion status
+- [`mplx cm upload`](/dev-tools/cli/cm/upload) - Upload assets (required before insert)
+- [`mplx cm create`](/dev-tools/cli/cm/create) - Create candy machine (required before insert)
+- [`mplx cm validate`](/dev-tools/cli/cm/validate) - Validate cache and uploads
+- [`mplx cm fetch`](/dev-tools/cli/cm/fetch) - Verify insertion status
 
 ## Next Steps
 
-1. **[Verify insertion](/cli/cm/fetch)** to confirm all items are loaded
-2. **[Test minting](/core-candy-machine/mint)** to ensure candy machine works
-3. **[Monitor performance](/cli/cm/validate)** to check for issues
-4. **[Plan your launch](/core-candy-machine/guides)** with appropriate guards
+1. **[Verify insertion](/dev-tools/cli/cm/fetch)** to confirm all items are loaded
+2. **[Test minting](/smart-contracts/core-candy-machine/mint)** to ensure candy machine works
+3. **[Monitor performance](/dev-tools/cli/cm/validate)** to check for issues
+4. **[Plan your launch](/smart-contracts/core-candy-machine/guides)** with appropriate guards

@@ -10,7 +10,7 @@ Fetch NFT data from the Solana blockchain. {% .lead %}
 
 ## Fetch an NFT or a Collection
 
-In the following section you can find a full code example and the parameters that you might need to change. You can learn more about fetching NFTs and collections in the [Core documentation](/core/fetch).
+In the following section you can find a full code example and the parameters that you might need to change. You can learn more about fetching NFTs and collections in the [Core documentation](/smart-contracts/core/fetch).
 
 {% code-tabs-imported from="core/fetch-asset" frameworks="umi,cli,das,curl" /%}
 

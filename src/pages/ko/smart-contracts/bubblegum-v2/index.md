@@ -143,7 +143,7 @@ NFT 데이터가 계정 내에 있지 않더라도 압축된 NFT에서 다양한
 - [cNFT의 데이터나 컬렉션을 업데이트](/ko/smart-contracts/bubblegum-v2/update-cnfts)합니다.
 - [cNFT를 소각](/ko/smart-contracts/bubblegum-v2/burn-cnfts)합니다.
 - [cNFT를 위임](/ko/smart-contracts/bubblegum-v2/delegate-cnfts)합니다.
-- [cNFT 컬렉션을 확인하고 확인 해제](/ko/smart-contracts/bubblegum-v2/verify-collections)합니다.
+- [cNFT 컬렉션을 확인하고 확인 해제](/ko/smart-contracts/bubblegum-v2/collections)합니다.
 - [cNFT의 제작자를 확인하고 확인 해제](/ko/smart-contracts/bubblegum-v2/verify-creators)합니다.
 - [cNFT를 동결하고 해동](/ko/smart-contracts/bubblegum-v2/freeze-cnfts)합니다.
 - [cNFT를 소울바운드로 만듭니다](/ko/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft).

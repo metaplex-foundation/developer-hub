@@ -17,13 +17,13 @@ Each External Adapter has the ability to assign lifecycle checks to Lifecycle Ev
 - **Reject**: The plugin can reject a lifecycle event.
 - **Approve**: The plugin can approve a lifecycle event.
 
-If you want to learn more about External Plugins, read more about them [here](/core/external-plugins/overview).
+If you want to learn more about External Plugins, read more about them [here](/smart-contracts/core/external-plugins/overview).
 
 ### Oracle Plugin
 
 The **Oracle Plugin** leverages the capability of external plugins to save data that an external authority can update by accessing **onchain data** accounts external to the Core asset, allowing assets to dynamically reject lifecycle events set by the asset authority. The external Oracle account can also be updated at any time to change the authorization behavior of the lifecycle events, providing a flexible and dynamic experience.
 
-If you want to learn more about the Oracle Plugin, read more about it [here](/core/external-plugins/oracle).
+If you want to learn more about the Oracle Plugin, read more about it [here](/smart-contracts/core/external-plugins/oracle).
 
 ## Starting off: Understanding the Protocol behind the Idea
 
@@ -315,7 +315,7 @@ The second part of the instruction checks if is_within_15_minutes_of_market_open
 
 Last part of this journey will be to create a collection and point it to the Oracle account so every asset we include in that collection will follow the custom Oracle rule!  
 
-Let's start by setting up your environment to use Umi. (Umi is a modular framework for building and using JavaScript clients for Solana programs. Learn more [here](../../umi/getting-started))
+Let's start by setting up your environment to use Umi. (Umi is a modular framework for building and using JavaScript clients for Solana programs. Learn more [here](/dev-tools/umi/getting-started))
 
 ```ts
 import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'
@@ -370,4 +370,4 @@ console.log(signature);
 
 ## Conclusion
 
-Congratulations! You are now equipped to create an NFT collection that trades only during US market hours using the Oracle Plugin. If you want to learn more about Core and Metaplex, check out the [developer hub](/core/getting-started).
+Congratulations! You are now equipped to create an NFT collection that trades only during US market hours using the Oracle Plugin. If you want to learn more about Core and Metaplex, check out the [developer hub](/smart-contracts/core/getting-started).

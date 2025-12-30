@@ -313,6 +313,6 @@ Cursor-based pagination is generally the best choice for most applications as it
 
 ## Further Reading
 
-- [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
-- [Search Assets by Criteria](/das-api/guides/search-by-criteria) - Advanced search and filtering
-- [Find Compressed NFTs](/das-api/guides/find-compressed-nfts) - Working with compressed NFTs
+- [Get All Tokens in a Collection](/dev-tools/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
+- [Search Assets by Criteria](/dev-tools/das-api/guides/search-by-criteria) - Advanced search and filtering
+- [Find Compressed NFTs](/dev-tools/das-api/guides/find-compressed-nfts) - Working with compressed NFTs

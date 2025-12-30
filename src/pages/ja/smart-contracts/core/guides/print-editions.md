@@ -14,9 +14,9 @@ Editionは同一の「Master Edition」の複製（プリント）です。物�
 
 MPL Coreではメインネットリリース直後にEditionのサポートが追加されました。Token MetadataのEditionと異なり、Edition番号や供給量は強制されず、情報的な位置づけです。
 
-CoreでEdition概念を実現するには2つの[プラグイン](/core/plugins)を使います。
-- コレクション側に[Master Edition](/core/plugins/master-edition)
-- アセット側に[Edition](/core/plugins/edition)
+CoreでEdition概念を実現するには2つの[プラグイン](/ja/smart-contracts/core/plugins)を使います。
+- コレクション側に[Master Edition](/ja/smart-contracts/core/plugins/master-edition)
+- アセット側に[Edition](/ja/smart-contracts/core/plugins/edition)
 
 階層イメージは次の通りです。
 
@@ -78,7 +78,7 @@ const keypair = generateSigner(umi)
 umi.use(keypairIdentity(keypair))
 ```
 
-次に、[Master Editionプラグイン](/core/plugins/master-edition)付きでコレクションを作成します。`maxSupply`はプリント数、`name`/`uri`は必要に応じて上書きできます。ここでは使い勝手のため[Royaltyプラグイン](/core/plugins/royalties)も追加します。
+次に、[Master Editionプラグイン](/ja/smart-contracts/core/plugins/master-edition)付きでコレクションを作成します。`maxSupply`はプリント数、`name`/`uri`は必要に応じて上書きできます。ここでは使い勝手のため[Royaltyプラグイン](/ja/smart-contracts/core/plugins/royalties)も追加します。
 
 ```ts
 const collectionSigner = generateSigner(umi)
@@ -107,7 +107,7 @@ await createCollection(umi, {
 続いて、`hiddenSettings`と`edition`ガードを使ってCandy Machineを作成します。
 
 - `hiddenSettings`: ミントされる全アセットに同一（あるいは類似）のName/Metadataを適用します。`$ID$`でミント順の番号を差し込み可能です。
-- `edition`ガード: 各アセットに[Editionプラグイン](/core/plugins/edition)を追加します。番号は`editionStartOffset`から始まり、ミントごとに増加します。
+- `edition`ガード: 各アセットに[Editionプラグイン](/ja/smart-contracts/core/plugins/edition)を追加します。番号は`editionStartOffset`から始まり、ミントごとに増加します。
 
 ```ts
 // 各EditionのNameとオフチェーンMetadata
@@ -153,7 +153,7 @@ MPL CoreのEditionではCore Candy Machineの利用を強く推奨します。�
 
 Core Candy Machineを使わずにEditionを作る場合は次の手順です。
 
-1. [Master Edition](/core/plugins/master-edition)プラグイン付きでコレクションを作成
+1. [Master Edition](/ja/smart-contracts/core/plugins/master-edition)プラグイン付きでコレクションを作成
 
 {% dialect-switcher title="Master Editionプラグイン付きでMPL Coreコレクションを作成" %}
 {% dialect title="JavaScript" id="js" %}
@@ -203,7 +203,7 @@ await createCollection(umi, {
 
 {% /dialect-switcher %}
 
-2. アセットに[Edition](/core/plugins/edition)プラグインを付与（番号は都度インクリメント）
+2. アセットに[Edition](/ja/smart-contracts/core/plugins/edition)プラグインを付与（番号は都度インクリメント）
 
 {% dialect-switcher title="Editionプラグイン付きMPL Coreアセットの作成" %}
 {% dialect title="JavaScript" id="js" %}
@@ -242,6 +242,6 @@ const result = create(umi, {
 
 ## 参考
 - [Candy Machineからミント](/core-candy-machine/mint)
-- [Master Editionプラグイン](/core/plugins/master-edition)
-- [Editionプラグイン](/core/plugins/edition)
+- [Master Editionプラグイン](/ja/smart-contracts/core/plugins/master-edition)
+- [Editionプラグイン](/ja/smart-contracts/core/plugins/edition)
 

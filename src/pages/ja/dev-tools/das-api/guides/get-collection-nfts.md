@@ -80,7 +80,7 @@ const response = await fetch('<ENDPOINT>', {
 
 1. **大きなコレクションには[ページネーション](/ja/dev-tools/das-api/guides/pagination)を使用**してレート制限を回避
 2. **可能な場合は結果をキャッシュ**してパフォーマンスを向上
-3. **追加のメタデータを取得するために[表示オプション](/ja/dev-tools/das-api/guides/display-options)を含める**
+3. **追加のメタデータを取得するために[表示オプション](/ja/dev-tools/das-api/display-options)を含める**
 4. **意味のある方法でデータを表示するため結果をソート**
 5. **コレクションアドレスが無効な場合はエラーを適切に処理**
 

@@ -4,7 +4,7 @@ metaTitle: 자산 민팅 | Token Metadata
 description: Token Metadata에서 NFT, SFT 및 프로그래머블 NFT(자산)를 민팅하는 방법을 알아보세요
 ---
 
-[Token Metadata 개요](/token-metadata)에서 논의했듯이, Solana의 디지털 자산은 토큰을 설명하는 여러 온체인 계정과 오프체인 데이터로 구성됩니다. 이 페이지에서는 이러한 자산을 민팅하는 과정을 살펴보겠습니다. {% .lead %}
+[Token Metadata 개요](/ko/smart-contracts/token-metadata)에서 논의했듯이, Solana의 디지털 자산은 토큰을 설명하는 여러 온체인 계정과 오프체인 데이터로 구성됩니다. 이 페이지에서는 이러한 자산을 민팅하는 과정을 살펴보겠습니다. {% .lead %}
 
 ## 민팅 과정
 

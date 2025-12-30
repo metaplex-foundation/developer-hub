@@ -21,7 +21,7 @@ BubblegumプログラムのbusineCollectionV**Verify Collection**命令を使用
 - **Collection Mint**: Collection NFTのmintアカウント。
 - **Collection Authority**: Collection NFTのupdate authority — または承認されたコレクションdelegate — をSignerとして。コレクション権限がdelegate権限の場合、プログラムは新しい統合された**Metadata Delegate**システムとレガシーの**Collection Authority Records**アカウントの両方をサポートすることに注意してください。適切なPDAを**Collection Authority Record Pda**パラメータに渡すだけです。
 
-さらに、この命令はBubblegum Tree上のリーフを置き換えることになるため、圧縮NFTの整合性を検証するためにより多くのパラメータを提供する必要があります。これらのパラメータはリーフを変更するすべての命令に共通であるため、[以下のFAQ](/ja/smart-contracts/bubblegum/faq#replace-leaf-instruction-arguments)に文書化されています。幸い、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
+さらに、この命令はBubblegum Tree上のリーフを置き換えることになるため、圧縮NFTの整合性を検証するためにより多くのパラメータを提供する必要があります。これらのパラメータはリーフを変更するすべての命令に共通であるため、[以下のFAQ](/ja/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)に文書化されています。幸い、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
 
 {% dialect-switcher title="圧縮NFTのコレクションの検証" %}
 {% dialect title="JavaScript" id="js" %}

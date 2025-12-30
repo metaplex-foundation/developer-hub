@@ -161,4 +161,4 @@ pub async fn transfer_asset_in_collection() {
 
 ## What if I am the Transfer Delegate of an Asset?
 
-If you are the Transfer Delegate of an Asset via the [Transfer Delegate](/core/plugins/transfer-delegate) plugin then you can call the `transferV1` function as you would if you were the owner of the Asset.
+If you are the Transfer Delegate of an Asset via the [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) plugin then you can call the `transferV1` function as you would if you were the owner of the Asset.

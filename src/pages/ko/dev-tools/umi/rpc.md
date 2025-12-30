@@ -55,7 +55,7 @@ const confirmResult = await umi.rpc.confirmTransaction(signature, { strategy });
 const transaction = await umi.rpc.getTransaction(signature);
 ```
 
-트랜잭션은 Solana 클라이언트의 중요한 구성 요소이므로 [트랜잭션 전송](/umi/transactions) 문서 페이지에서 더 자세히 다룹니다.
+트랜잭션은 Solana 클라이언트의 중요한 구성 요소이므로 [트랜잭션 전송](/ko/dev-tools/umi/transactions) 문서 페이지에서 더 자세히 다룹니다.
 
 ## 계정 가져오기
 

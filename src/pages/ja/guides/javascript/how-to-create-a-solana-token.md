@@ -89,14 +89,14 @@ createAndMintTokens()
 
 ## Umiのセットアップ
 
-この例では、`generatedSigner()`を使用してUmiをセットアップします。ウォレットや署名者を異なる方法でセットアップしたい場合は、[**Umiへの接続**](/umi/connecting-to-umi)ガイドをご確認ください。
+この例では、`generatedSigner()`を使用してUmiをセットアップします。ウォレットや署名者を異なる方法でセットアップしたい場合は、[**Umiへの接続**](/ja/dev-tools/umi/getting-started)ガイドをご確認ください。
 
 umi変数とコードブロックは`createAndMintTokens()`関数の内外のどちらにでも配置できます。重要なのは、`umi`変数が`createAndMintTokens()`関数自体からアクセス可能であることです。
 
 ### 新しいウォレットの生成
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplCore())
   .use(irysUploader())
 
@@ -115,7 +115,7 @@ await umi.rpc.airdrop(umi.identity.publicKey)
 ### ローカルに保存されている既存のウォレットを使用
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplTokenMetadata())
   .use(mplToolbox())
   .use(irysUploader())
@@ -331,7 +331,7 @@ import fs from 'fs'
 import path from 'path'
 
 const createAndMintTokens = async () => {
-  const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+  const umi = createUmi("https://api.devnet.solana.com")
     .use(mplTokenMetadata())
     .use(irysUploader())
 

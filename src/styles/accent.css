@@ -90,19 +90,4 @@
     --quick-links-hover-border: theme('colors.amber.400'),
       theme('colors.yellow.300'), theme('colors.orange.400');
   }
-  .accent-aura {
-    --color-accent-50: theme('colors.purple.50');
-    --color-accent-100: theme('colors.purple.100');
-    --color-accent-200: theme('colors.purple.200');
-    --color-accent-300: theme('colors.purple.300');
-    --color-accent-400: theme('colors.purple.400');
-    --color-accent-500: theme('colors.purple.500');
-    --color-accent-600: theme('colors.purple.600');
-    --color-accent-700: theme('colors.purple.700');
-    --color-accent-800: theme('colors.purple.800');
-    --color-accent-900: theme('colors.purple.900');
-    --quick-links-hover-bg: var(--color-accent-50);
-    --quick-links-hover-border: theme('colors.purple.400'),
-      theme('colors.fuchsia.400'), theme('colors.pink.400');
-  }
 }

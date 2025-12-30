@@ -55,7 +55,7 @@ _以下のセクションは、このページにリストされているすべ�
 ```ts
 const useUmiStore = create<UmiState>()((set) => ({
   // ここに独自のRPCを追加してください
-  umi: createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(
+  umi: createUmi("https://api.devnet.solana.com").use(
     signerIdentity(
       createNoopSigner(publicKey('11111111111111111111111111111111'))
     )
@@ -117,7 +117,7 @@ Umiヘルパーは、異なるシナリオで呼び出すことができるい�
 
 この関数はまた、提供された場合に`blockhash`、`send`、`confirm`全体でコミットメントレベルを提供し、ロックします。値が渡されない場合、デフォルトで`confirmed`のコミットメントレベルが使用されます。
 
-チェーン上で失敗したトランザクションをデバッグする必要がある場合に有効にできる`skipPreflight`フラグもあります。トランザクションエラーの詳細については、このガイド[SolanaでのトランザクションエラーDiagnosisの方法](/guides/general/how-to-diagnose-solana-transaction-errors)を参照してください。
+チェーン上で失敗したトランザクションをデバッグする必要がある場合に有効にできる`skipPreflight`フラグもあります。トランザクションエラーの詳細については、このガイド[SolanaでのトランザクションエラーDiagnosisの方法](/ja/guides/general/how-to-diagnose-solana-transaction-errors)を参照してください。
 
 `sendAndConfirmWalletAdapter()`は、`setComputeUnitPrice`命令を通じて優先手数料に対応しています。これらは状況に応じて検討し、調整または削除される必要があります。
 

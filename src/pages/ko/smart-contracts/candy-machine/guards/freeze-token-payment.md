@@ -751,7 +751,7 @@ Freeze Token Payment 가드 내에서 NFT 동결을 중지할 수 있습니다. 
 
 ## Freeze Escrow와 가드 그룹
 
-다양한 [가드 그룹](/candy-machine/guard-groups) 내에서 여러 Freeze Token Payment 가드를 사용할 때 Freeze Token Payment 가드와 Freeze Escrow 계정 간의 관계를 이해하는 것이 중요합니다.
+다양한 [가드 그룹](/ko/smart-contracts/candy-machine/guard-groups) 내에서 여러 Freeze Token Payment 가드를 사용할 때 Freeze Token Payment 가드와 Freeze Escrow 계정 간의 관계를 이해하는 것이 중요합니다.
 
 Freeze Escrow 계정은 Destination 주소에서 파생된 PDA입니다. 즉, **여러 Freeze Token Payment 가드**가 **동일한 Destination 주소**를 사용하도록 구성되면 모두 **동일한 Freeze Escrow 계정을 공유**합니다.
 

@@ -10,7 +10,7 @@ Solanaブロックチェーンからnftデータを取得します。 {% .lead %
 
 ## NFTまたはコレクションを取得する
 
-以下のセクションでは、完全なコード例と変更が必要なパラメータを確認できます。NFTとコレクションの取得の詳細については、[Coreドキュメント](/core/fetch)をご覧ください。
+以下のセクションでは、完全なコード例と変更が必要なパラメータを確認できます。NFTとコレクションの取得の詳細については、[Coreドキュメント](/ja/smart-contracts/core/fetch)をご覧ください。
 
 {% code-tabs-imported from="core/fetch-asset" frameworks="umi,cli,das,curl" /%}
 

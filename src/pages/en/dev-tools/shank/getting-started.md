@@ -169,7 +169,7 @@ Shank provides five essential derive macros for annotating your Solana program c
 
 Shank integrates seamlessly with other Metaplex tools:
 
-- **[Kinobi](/umi/kinobi)**: Uses Shank JS library for IDL generation and client creation
+- **[Kinobi](/dev-tools/umi/kinobi)**: Uses Shank JS library for IDL generation and client creation
 - **[Solita](/legacy-documentation/developer-tools/solita)**: Generates TypeScript SDKs from Shank-extracted IDLs
 
 ## CLI Usage
@@ -191,8 +191,8 @@ shank idl --out-dir ./idl --crate-root ./ --program-id MyProgram1111111111111111
 
 Now that you have Shank set up and generating IDL files, you can:
 
-1. **[Macros Reference](/shank/macros)**: Complete reference for all Shank macros and attributes
-2. **[Integration with Kinobi](/umi/kinobi)**: Generate modern TypeScript SDKs compatible with Umi (recommended)
+1. **[Macros Reference](/dev-tools/shank/macros)**: Complete reference for all Shank macros and attributes
+2. **[Integration with Kinobi](/dev-tools/umi/kinobi)**: Generate modern TypeScript SDKs compatible with Umi (recommended)
 3. **[Solita](https://github.com/metaplex-foundation/solita)**: Generate legacy TypeScript SDKs compatible with web3.js
 
 ## Troubleshooting

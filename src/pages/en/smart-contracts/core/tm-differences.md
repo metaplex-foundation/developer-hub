@@ -47,11 +47,11 @@ Core Collections include multiple new features. Collections are now their own ac
 
 With Core, Collections are **first class assets** that allow additional functionalities. For example, Core provides for collection-level royalty adjustments by adding the Royalties Plugin to the collection. Developers and creators can now update all assets in a collection at once rather than being forced to update each asset individually. But what if some assets in the collection should have different royalty settings? No problem – just add the same plugin to the asset and the collection-level royalty plugin will be overwritten
 
-Collection features that were not possible with TM are for example collection level royalties - no more having updating each asset when changing the royalties or creators but define it in the collection. This can be done by adding the [Royalties Plugin](/core/plugins/royalties) to your collection. Some assets should have different royalty settings? Just add the same plugin to the asset and the collection level royalty plugin would be overwritten.
+Collection features that were not possible with TM are for example collection level royalties - no more having updating each asset when changing the royalties or creators but define it in the collection. This can be done by adding the [Royalties Plugin](/smart-contracts/core/plugins/royalties) to your collection. Some assets should have different royalty settings? Just add the same plugin to the asset and the collection level royalty plugin would be overwritten.
 
 Freezing is also possible on the collection level.
 
-You can find more information on handling collections, like creating or updating them on the [Managing Collections](/core/collections) page.
+You can find more information on handling collections, like creating or updating them on the [Managing Collections](/smart-contracts/core/collections) page.
 
 ### Lifecycle events and Plugins
 
@@ -65,13 +65,13 @@ During an Asset's lifecycle multiple events can be triggered, such as:
 - Approve Authority Plugin
 - Remove Authority Plugin
 
-In TM these lifecyle events are either executed by the owner or a delegate. All TM Assets (nfts/pNfts) include functions for every lifecycle event. In Core these events are handled by [Plugins](/core/plugins) at either a Asset or Collection wide level.
+In TM these lifecyle events are either executed by the owner or a delegate. All TM Assets (nfts/pNfts) include functions for every lifecycle event. In Core these events are handled by [Plugins](/smart-contracts/core/plugins) at either a Asset or Collection wide level.
 
 Plugins attached on both an Asset level or a Collection level will run through a validation process during these lifecycle events to either `approve`, `reject`, or `force approve` the event from execution.
 
 ### Freeze / Lock
 
-To freeze an asset with TM you typically first delegate the freeze authority to a different wallet, which then freezes the NFT. In Core you must use one of two plugins: `Freeze Delegate` or `Permanent Freeze Delegate`. The latter can only be added during Asset creation, while the `Freeze Delegate` plugin can be [added](/core/plugins/adding-plugins) at any time providing the current owner signs the transaction.
+To freeze an asset with TM you typically first delegate the freeze authority to a different wallet, which then freezes the NFT. In Core you must use one of two plugins: `Freeze Delegate` or `Permanent Freeze Delegate`. The latter can only be added during Asset creation, while the `Freeze Delegate` plugin can be [added](/smart-contracts/core/plugins/adding-plugins) at any time providing the current owner signs the transaction.
 
 Delegation is also easier with Core as we do away with Delegete Record accounts and store delegate authorities directly on the plugin itself while also being assignable at the point of adding a plugin to an Asset either during Asset creation or via `addPluginV1` function.
 
@@ -111,4 +111,4 @@ The features described above are just the tip of the iceberg. Additional interes
 
 - Collection Management
 - Plugin Overview
-- Adding on chain Data using the [Attributes Plugin](/core/plugins/attribute)
+- Adding on chain Data using the [Attributes Plugin](/smart-contracts/core/plugins/attribute)

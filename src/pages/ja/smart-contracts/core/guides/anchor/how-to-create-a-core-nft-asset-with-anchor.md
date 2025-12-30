@@ -107,7 +107,7 @@ pub fn create_core_asset(ctx: Context<CreateAsset>, args: CreateAssetArgs) -> Re
 }
 ```
 
-プラグイン/外部プラグインの追加も`plugins`/`external_plugin_adapters`で可能です（詳細は[プラグイン](/core/plugins)）。
+プラグイン/外部プラグインの追加も`plugins`/`external_plugin_adapters`で可能です（詳細は[プラグイン](/ja/smart-contracts/core/plugins)）。
 
 ## クライアント（テスト）
 

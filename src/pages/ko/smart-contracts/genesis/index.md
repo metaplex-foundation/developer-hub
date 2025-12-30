@@ -147,11 +147,11 @@ await revokeFreezeAuthorityV2(umi, {
 
 토큰 런칭을 구축할 준비가 되셨나요? 여기서 시작하세요:
 
-- [시작하기](/smart-contracts/genesis/getting-started) - 런칭 흐름을 이해하고 첫 번째 Genesis 계정 초기화
-- [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) - SDK 설치 및 구성
+- [시작하기](/ko/smart-contracts/genesis/getting-started) - 런칭 흐름을 이해하고 첫 번째 Genesis 계정 초기화
+- [JavaScript SDK](/ko/smart-contracts/genesis/sdk/javascript) - SDK 설치 및 구성
 
 그런 다음 런칭 유형을 선택하세요:
 
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - 예치 기간이 있는 토큰 배포
-- [Priced Sale](/smart-contracts/genesis/priced-sale) - 거래 시작 전 사전 예치
-- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - 균일 청산 가격의 시간 기반 경매
+- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 예치 기간이 있는 토큰 배포
+- [Priced Sale](/ko/smart-contracts/genesis/priced-sale) - 거래 시작 전 사전 예치
+- [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - 균일 청산 가격의 시간 기반 경매

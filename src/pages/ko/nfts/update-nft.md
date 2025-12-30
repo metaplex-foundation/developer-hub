@@ -10,7 +10,7 @@ updated: '03-12-2025'
 
 ## NFT 업데이트하기
 
-다음 섹션에서 전체 코드 예제와 변경이 필요할 수 있는 파라미터를 확인할 수 있습니다. NFT 업데이트에 대한 자세한 내용은 [Core 문서](/core/update)를 참조하세요.
+다음 섹션에서 전체 코드 예제와 변경이 필요할 수 있는 파라미터를 확인할 수 있습니다. NFT 업데이트에 대한 자세한 내용은 [Core 문서](/ko/smart-contracts/core/update)를 참조하세요.
 
 {% code-tabs-imported from="core/update-asset" frameworks="umi,cli" /%}
 

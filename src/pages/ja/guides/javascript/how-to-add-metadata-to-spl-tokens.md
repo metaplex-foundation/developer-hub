@@ -84,7 +84,7 @@ addMetadata();
 
 ## Umiのセットアップ
 
-この例では、`generatedSigner()`を使用してUmiをセットアップします。ウォレットや署名者を異なる方法で設定したい場合は、[**Umiへの接続**](/umi/connecting-to-umi)ガイドをご確認ください。
+この例では、`generatedSigner()`を使用してUmiをセットアップします。ウォレットや署名者を異なる方法で設定したい場合は、[**Umiへの接続**](/ja/dev-tools/umi/getting-started)ガイドをご確認ください。
 
 Umiのインスタンス化コードはコードブロック内外のどちらに置いても構いませんが、コードの重複を減らすため、外側に配置します。
 
@@ -251,4 +251,4 @@ addMetadata();
 
 ## 次のステップ
 
-このガイドでは、Solanaトークンにメタデータを追加する方法を学習しました。ここから[Token Metadataプログラム](/token-metadata)に進んで、ワンステップでトークンの初期化とメタデータの追加を行うヘルパー関数、Non Fungibleの操作、Token Metadataプログラムとの様々な相互作用方法をチェックできます。
+このガイドでは、Solanaトークンにメタデータを追加する方法を学習しました。ここから[Token Metadataプログラム](/ja/smart-contracts/token-metadata)に進んで、ワンステップでトークンの初期化とメタデータの追加を行うヘルパー関数、Non Fungibleの操作、Token Metadataプログラムとの様々な相互作用方法をチェックできます。

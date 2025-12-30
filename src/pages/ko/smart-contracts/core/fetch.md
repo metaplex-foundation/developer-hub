@@ -339,7 +339,7 @@ pub async fn fetch_assets_by_update_authority() {
 
 DAS가 활성화된 RPC를 사용하면 색인된 Assets를 활용하여 매우 빠른 조회 및 데이터 검색을 할 수 있습니다.
 
-DAS는 메타데이터, 오프체인 메타데이터, 컬렉션 데이터, 플러그인(Attributes 포함) 등 모든 것을 색인합니다. Metaplex DAS API에 대해 자세히 알아보려면 [여기를 클릭하세요](/das-api). 일반 DAS SDK 외에도 MPL Core SDK와 직접 사용할 수 있는 올바른 타입을 반환하는 [MPL Core용 확장](/das-api/core-extension)이 만들어졌습니다. 또한 컬렉션에서 상속된 자산의 플러그인을 자동으로 도출하고 DAS-to-Core 타입 변환을 위한 함수를 제공합니다.
+DAS는 메타데이터, 오프체인 메타데이터, 컬렉션 데이터, 플러그인(Attributes 포함) 등 모든 것을 색인합니다. Metaplex DAS API에 대해 자세히 알아보려면 [여기를 클릭하세요](/ko/dev-tools/das-api). 일반 DAS SDK 외에도 MPL Core SDK와 직접 사용할 수 있는 올바른 타입을 반환하는 [MPL Core용 확장](/ko/dev-tools/das-api/core-extension)이 만들어졌습니다. 또한 컬렉션에서 상속된 자산의 플러그인을 자동으로 도출하고 DAS-to-Core 타입 변환을 위한 함수를 제공합니다.
 
 다음은 DAS로 MPL Core Asset을 조회한 반환 데이터의 예시입니다.
 

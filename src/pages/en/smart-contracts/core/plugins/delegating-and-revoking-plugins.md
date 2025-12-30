@@ -99,7 +99,7 @@ Revoking an Authority on a plugin results in different behaviours depending on t
 - The Update Authority of an Asset can revoke a delegate which thens sets the pluginAuthority type to `UpdateAuthority`.
 - The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `UpdateAuthority`.
 
-A list of plugins and their types can be viewed on the [Plugins Overview](/core/plugins) page.
+A list of plugins and their types can be viewed on the [Plugins Overview](/smart-contracts/core/plugins) page.
 
 {% dialect-switcher title="Revoking a Plugin Authority" %}
 {% dialect title="JavaScript" id="js" %}

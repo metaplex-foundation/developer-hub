@@ -4,11 +4,11 @@ metaTitle: 검증된 크리에이터 | Token Metadata
 description: Token Metadata에서 자산의 크리에이터를 검증하는 방법을 알아보세요
 ---
 
-[컬렉션](/token-metadata/collections)과 마찬가지로, 자산의 크리에이터는 자산의 진정성을 보장하기 위해 검증되어야 합니다. {% .lead %}
+[컬렉션](/ko/smart-contracts/token-metadata/collections)과 마찬가지로, 자산의 크리에이터는 자산의 진정성을 보장하기 위해 검증되어야 합니다. {% .lead %}
 
 `verified` 플래그가 `false`인 크리에이터는 누구에 의해서든 추가될 수 있으므로 신뢰할 수 없습니다. 반면에 `verified` 플래그가 `true`인 크리에이터는 해당 자산의 크리에이터로서 자신을 검증하는 트랜잭션에 서명했음이 보장됩니다.
 
-아래 섹션에서는 자산의 크리에이터를 검증하고 검증을 해제하는 방법을 알아보겠습니다. 크리에이터를 검증하기 전에, 해당 크리에이터는 이미 자산의 **Metadata** 계정의 **Creators** 배열의 일부여야 한다는 점에 주목하세요. 이는 [자산을 민팅할 때](/token-metadata/mint) 수행할 수 있지만 [자산을 업데이트할 때](/token-metadata/update)도 수행할 수 있습니다.
+아래 섹션에서는 자산의 크리에이터를 검증하고 검증을 해제하는 방법을 알아보겠습니다. 크리에이터를 검증하기 전에, 해당 크리에이터는 이미 자산의 **Metadata** 계정의 **Creators** 배열의 일부여야 한다는 점에 주목하세요. 이는 [자산을 민팅할 때](/ko/smart-contracts/token-metadata/mint) 수행할 수 있지만 [자산을 업데이트할 때](/ko/smart-contracts/token-metadata/update)도 수행할 수 있습니다.
 
 ## 크리에이터 검증
 

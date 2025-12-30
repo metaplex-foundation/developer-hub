@@ -6,7 +6,7 @@ description: "Core Candy Machineの「Asset Mint Limit」ガードは、指定�
 
 ## 概要
 
-Asset Mint Limitガードは、指定されたコレクションの保有者へのミントを制限し、提供されたCore Assetに対して実行できるミントの量を制限します。これは、Core Assetsの[NFT Gate](/core-candy-machine/guards/nft-gate)と[Mint Limit](/core-candy-machine/guards/mint-limit)ガードの組み合わせと考えることができ、ウォレットアドレスの代わりにAssetアドレスに基づいています。
+Asset Mint Limitガードは、指定されたコレクションの保有者へのミントを制限し、提供されたCore Assetに対して実行できるミントの量を制限します。これは、Core Assetsの[NFT Gate](/ja/smart-contracts/core-candy-machine/guards/nft-gate)と[Mint Limit](/ja/smart-contracts/core-candy-machine/guards/mint-limit)ガードの組み合わせと考えることができ、ウォレットアドレスの代わりにAssetアドレスに基づいています。
 
 制限は、コレクションごと、Candy Machineごと、設定で提供される識別子ごとに設定され、同じCore Candy Machine内で複数のアセットミント制限を許可します。
 

@@ -48,6 +48,6 @@ DAS APIを使用して、ウォレットアドレスが所有するすべての�
 
 ## 関連ガイド
 
-- [トークンを作成する](/tokens/create-a-token)
-- [DAS API概要](/das-api)
-- [所有者別のファンジブルアセットを取得](/das-api/guides/get-fungible-assets)
+- [トークンを作成する](/ja/tokens/create-a-token)
+- [DAS API概要](/ja/dev-tools/das-api)
+- [所有者別のファンジブルアセットを取得](/ja/dev-tools/das-api/guides/get-fungible-assets)

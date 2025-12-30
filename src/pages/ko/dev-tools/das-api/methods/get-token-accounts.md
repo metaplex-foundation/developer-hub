@@ -18,7 +18,7 @@ tableOfContents: false
 | `limit`        |         | 반환할 최대 토큰 계정 수입니다.          |
 | `before`       |         | 이 커서 이전의 계정을 반환합니다.                  |
 | `after`        |         | 이 커서 이후의 계정을 반환합니다.                   |
-| `options`      |         | 추가 [표시 옵션](/das-api/display-options)입니다.              |
+| `options`      |         | 추가 [표시 옵션](/ko/dev-tools/das-api/display-options)입니다.              |
 
 ## 응답
 

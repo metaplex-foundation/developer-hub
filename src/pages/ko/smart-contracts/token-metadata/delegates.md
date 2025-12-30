@@ -469,7 +469,7 @@ await updateAsDataItemDelegateV2(umi, {
 
 ### Programmable Config 위임자
 
-- Programmable Config 위임자는 [프로그래머블 대체 불가능한 토큰](/token-metadata/pnfts)에만 관련이 있습니다.
+- Programmable Config 위임자는 [프로그래머블 대체 불가능한 토큰](/ko/smart-contracts/token-metadata/pnfts)에만 관련이 있습니다.
 - 위임자 권한은 Metadata 계정의 `programmableConfigs` 속성을 업데이트할 수 있지만 그 외에는 아무것도 할 수 없습니다. 이는 PNFT의 `ruleSet`을 업데이트할 수 있다는 의미입니다.
 - 컬렉션 NFT에 적용될 때, 위임자 권한은 해당 컬렉션 내의 항목에 대해 동일한 업데이트를 수행할 수 있습니다.
 
@@ -552,7 +552,7 @@ await updateAsProgrammableConfigDelegateV2(umi, {
 
 ### Programmable Config Item 위임자
 
-- Programmable Config 위임자는 [프로그래머블 대체 불가능한 토큰](/token-metadata/pnfts)에만 관련이 있습니다.
+- Programmable Config 위임자는 [프로그래머블 대체 불가능한 토큰](/ko/smart-contracts/token-metadata/pnfts)에만 관련이 있습니다.
 - 위임자 권한은 Metadata 계정의 `programmableConfigs` 속성을 업데이트할 수 있지만 그 외에는 아무것도 할 수 없습니다. 이는 PNFT의 `ruleSet`을 업데이트할 수 있다는 의미입니다.
 - 자산이 컬렉션 NFT인 경우에도, Programmable Config 위임자와 달리 Programmable Config Item 위임자는 해당 컬렉션의 항목에 영향을 줄 수 없습니다.
 
@@ -617,7 +617,7 @@ await updateAsProgrammableConfigItemDelegateV2(umi, {
 
 토큰 위임자는 토큰 수준에서 작동하는 위임자입니다. 이는 SPL Token 프로그램의 Token 계정에 직접 저장되는 spl-token 위임자를 의미합니다. 따라서 토큰 위임자는 위임자가 소유자를 대신하여 **토큰을 전송하고 소각**할 수 있게 해주지만 **토큰을 잠그고 잠금 해제**하여 소유자가 전송, 소각하거나 심지어 위임자를 취소하는 것을 방지할 수도 있습니다. 이러한 위임자는 에스크로 없는 마켓플레이스, 스테이킹, 자산 대출 등과 같은 애플리케이션에 중요합니다.
 
-SPL Token 프로그램에서 제공하는 위임자 유형은 하나뿐이지만, [프로그래머블 NFT](/token-metadata/pnfts)(PNFT)는 Token Metadata 프로그램이 케이스별로 선택할 수 있는 더 세분화된 위임자를 제공할 수 있게 해주었습니다. 이는 PNFT가 SPL Token 프로그램에서 항상 동결되어 있어 그 위에 위임자 시스템을 구축할 수 있기 때문입니다.
+SPL Token 프로그램에서 제공하는 위임자 유형은 하나뿐이지만, [프로그래머블 NFT](/ko/smart-contracts/token-metadata/pnfts)(PNFT)는 Token Metadata 프로그램이 케이스별로 선택할 수 있는 더 세분화된 위임자를 제공할 수 있게 해주었습니다. 이는 PNFT가 SPL Token 프로그램에서 항상 동결되어 있어 그 위에 위임자 시스템을 구축할 수 있기 때문입니다.
 
 우리는 **Token Record** PDA라고 하는 PNFT 전용 계정에 해당 위임자 시스템을 저장합니다 — 시드는 `["metadata", program id, mint id, "token_record", token account id]`입니다. SPL Token 프로그램에서도 위임된 권한을 동기화하지만 토큰은 항상 동결되어 있습니다. Token Record 계정이 자산이 실제로 잠겨 있는지 여부를 추적하는 것은 Token Record 계정의 책임입니다.
 

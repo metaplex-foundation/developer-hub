@@ -10,7 +10,7 @@ Transfer NFT ownership between wallets on Solana. {% .lead %}
 
 ## Transfer an NFT
 
-In the following section you can find a full code example and the parameters that you might need to change. You can learn more about transferring NFTs in the [Core documentation](/core/transfer).
+In the following section you can find a full code example and the parameters that you might need to change. You can learn more about transferring NFTs in the [Core documentation](/smart-contracts/core/transfer).
 
 {% code-tabs-imported from="core/transfer-asset" frameworks="umi" /%}
 

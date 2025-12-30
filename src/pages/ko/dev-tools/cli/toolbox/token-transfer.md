@@ -61,6 +61,6 @@ Signature: 2xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU
 
 ## 관련 명령어
 
-- [토큰 생성](/cli/toolbox/token-create) - 새 토큰 생성
-- [잔액 확인](/cli/toolbox/sol-balance) - 토큰 잔액 확인
-- [SOL 전송](/cli/toolbox/sol-transfer) - 주소 간 SOL 전송
+- [토큰 생성](/ko/dev-tools/cli/toolbox/token-create) - 새 토큰 생성
+- [잔액 확인](/ko/dev-tools/cli/toolbox/sol-balance) - 토큰 잔액 확인
+- [SOL 전송](/ko/dev-tools/cli/toolbox/sol-transfer) - 주소 간 SOL 전송

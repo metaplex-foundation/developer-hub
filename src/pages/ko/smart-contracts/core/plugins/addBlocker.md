@@ -10,7 +10,7 @@ description: Metaplex Core 패키지를 사용하여 Core NFT 애셋 및 컬렉�
 
 이 플러그인은 `MPL Core 애셋`과 `MPL Core 컬렉션` 모두에서 사용할 수 있습니다.
 
-[royalties](/core/plugins/royalties)와 같은 다른 플러그인과 마찬가지로, MPL Core 컬렉션에 할당되면 MPL Core 애셋에서도 사용됩니다. 따라서 컬렉션에 추가되면 애셋에도 더 이상 플러그인을 추가할 수 없습니다.
+[royalties](/ko/smart-contracts/core/plugins/royalties)와 같은 다른 플러그인과 마찬가지로, MPL Core 컬렉션에 할당되면 MPL Core 애셋에서도 사용됩니다. 따라서 컬렉션에 추가되면 애셋에도 더 이상 플러그인을 추가할 수 없습니다.
 
 ## 호환성
 

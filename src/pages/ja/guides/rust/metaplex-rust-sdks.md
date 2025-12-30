@@ -187,4 +187,4 @@ let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_s
 
 `CpiBuilders`について議論する完全な別のガイドがあり、こちらで見ることができます：
 
-[Metaplexプログラムへのメンテナンス](/guides/rust/how-to-cpi-into-a-metaplex-program)
+[Metaplexプログラムへのメンテナンス](/ja/guides/rust/how-to-cpi-into-a-metaplex-program)

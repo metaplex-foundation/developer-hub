@@ -16,10 +16,10 @@ description: FreezeDelegateとAttributeプラグインを用いて、Metaplex Co
 - Attributeプラグイン
 
 ### Freeze Delegate
-オーナー管理型。委任者が凍結/解凍でき、譲渡を防ぎます（凍結中は取り消し不可）。詳細は[Freeze Delegate](/core/plugins/freeze-delegate)。
+オーナー管理型。委任者が凍結/解凍でき、譲渡を防ぎます（凍結中は取り消し不可）。詳細は[Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate)。
 
 ### Attribute
-権限管理型。オンチェーンで属性を保持できます（`AttributeList`は文字列のkey/value配列）。詳細は[Attribute](/core/plugins/attribute)。
+権限管理型。オンチェーンで属性を保持できます（`AttributeList`は文字列のkey/value配列）。詳細は[Attribute](/ja/smart-contracts/core/plugins/attribute)。
 
 ### ロジック
 ステーキングに必要最低限の2命令を実装します。

@@ -6,7 +6,7 @@ description: 圧縮NFTの概要を説明します。
 
 {% callout type="note" title="新しいBubblegumバージョン" %}
 
-より多くの柔軟性と機能を可能にするために、[Bubblegum v2](/ja/bubblegum-v2)の使用をお勧めします。
+より多くの柔軟性と機能を可能にするために、[Bubblegum v2](/ja/smart-contracts/bubblegum-v2)の使用をお勧めします。
 
 {% /callout %}
 
@@ -16,7 +16,7 @@ Bubblegumは、Solana上で圧縮NFT（cNFT）を作成し、操作するため�
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/bubblegum/getting-started" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/bubblegum/sdk" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}
 
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="特定のものをお探しですか？APIリファレンスをご覧いただき、答えを見つけてください。" /%}
 
@@ -43,7 +43,7 @@ NFTがSolanaブロックチェーン上で繁栄するにつれて、NFTがイ�
 
 ## マークルツリー、リーフ、証明
 
-圧縮NFTは、**マークルツリー**のコンテキストでのみ存在します。マークルツリーが何であるかは[専用の高度なガイド](/ja/smart-contracts/bubblegum/concurrent-merkle-trees)で説明していますが、この概要では、マークルツリーを**リーフ**と呼ぶハッシュのコレクションと考えることができます。各リーフは、[圧縮NFTのデータをハッシュ化する](/ja/smart-contracts/bubblegum/hashed-nft-data)ことで得られます。
+圧縮NFTは、**マークルツリー**のコンテキストでのみ存在します。マークルツリーが何であるかは[専用の高度なガイド](/ja/smart-contracts/bubblegum-v2/concurrent-merkle-trees)で説明していますが、この概要では、マークルツリーを**リーフ**と呼ぶハッシュのコレクションと考えることができます。各リーフは、[圧縮NFTのデータをハッシュ化する](/ja/smart-contracts/bubblegum-v2/hashed-nft-data)ことで得られます。
 
 マークルツリー内の各リーフに対して、**証明**と呼ばれるハッシュのリストを提供できます。これにより、誰でも与えられたリーフがそのツリーの一部であることを検証できます。圧縮NFTが更新または転送されるたびに、関連するリーフも変更され、その証明も変更されます。
 
@@ -127,7 +127,7 @@ NFTがSolanaブロックチェーン上で繁栄するにつれて、NFTがイ�
 
 すべてのRPCがDAS APIをサポートしているわけではないことに注意してください。そのため、アプリケーションで圧縮NFTを使用する際に適切なRPCを選択するために、["Metaplex DAS API RPC"](/ja/rpc-providers)ページに興味があるかもしれません。
 
-これについては、高度な["NFTデータの保存とインデックス化"](/ja/smart-contracts/bubblegum/stored-nft-data)ガイドで詳しく説明しています。
+これについては、高度な["NFTデータの保存とインデックス化"](/ja/smart-contracts/bubblegum-v2/stored-nft-data)ガイドで詳しく説明しています。
 
 ## 機能
 
@@ -144,4 +144,4 @@ NFTデータがアカウント内に存在しないにもかかわらず、圧�
 
 ## 次のステップ
 
-圧縮NFTが高レベルでどのように機能するかを理解したので、圧縮NFTとの相互作用に使用できるさまざまな言語/フレームワークを列挙した[はじめに](/ja/smart-contracts/bubblegum/getting-started)ページをチェックすることをお勧めします。その後、さまざまな[機能ページ](/ja/smart-contracts/bubblegum/create-trees)を使用して、cNFTで実行できる特定の操作について詳しく学ぶことができます。最後に、cNFTとマークルツリーの知識を深めるための[高度なガイド](/ja/smart-contracts/bubblegum/concurrent-merkle-trees)も利用できます。
+圧縮NFTが高レベルでどのように機能するかを理解したので、圧縮NFTとの相互作用に使用できるさまざまな言語/フレームワークを列挙した[はじめに](/ja/smart-contracts/bubblegum/getting-started)ページをチェックすることをお勧めします。その後、さまざまな[機能ページ](/ja/smart-contracts/bubblegum/create-trees)を使用して、cNFTで実行できる特定の操作について詳しく学ぶことができます。最後に、cNFTとマークルツリーの知識を深めるための[高度なガイド](/ja/smart-contracts/bubblegum-v2/concurrent-merkle-trees)も利用できます。

@@ -14,7 +14,7 @@ description: Bubblegumで作成者を検証および検証解除する方法を�
 
 Bubblegumプログラムは、検証しようとしている作成者によって署名される必要がある**Verify Creator**命令を提供します。
 
-さらに、この命令はBubblegum Tree上のリーフを置き換えることになるため、圧縮NFTの整合性を検証するためにより多くのパラメータを提供する必要があります。これらのパラメータはリーフを変更するすべての命令に共通であるため、[以下のFAQ](/ja/smart-contracts/bubblegum/faq#replace-leaf-instruction-arguments)に文書化されています。幸い、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
+さらに、この命令はBubblegum Tree上のリーフを置き換えることになるため、圧縮NFTの整合性を検証するためにより多くのパラメータを提供する必要があります。これらのパラメータはリーフを変更するすべての命令に共通であるため、[以下のFAQ](/ja/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)に文書化されています。幸い、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
 
 {% dialect-switcher title="圧縮NFTの作成者の検証" %}
 {% dialect title="JavaScript" id="js" %}

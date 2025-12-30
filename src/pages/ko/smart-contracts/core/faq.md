@@ -19,18 +19,18 @@ Core는 현재 호출자에게 Asset 민팅당 0.0015 SOL의 매우 적은 수�
 
 ## Soulbound Asset을 어떻게 만드나요?
 
-Core 표준을 사용하면 Soulbound Asset을 만들 수 있습니다. 이를 달성하려면 [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate) 플러그인이나 [Oracle Plugin](/core/external-plugins/oracle)을 사용할 수 있습니다.
+Core 표준을 사용하면 Soulbound Asset을 만들 수 있습니다. 이를 달성하려면 [Permanent Freeze Delegate](/ko/smart-contracts/core/plugins/permanent-freeze-delegate) 플러그인이나 [Oracle Plugin](/ko/smart-contracts/core/external-plugins/oracle)을 사용할 수 있습니다.
 
-자세한 내용은 [Soulbound Assets 가이드](/core/guides/create-soulbound-nft-asset)를 확인하세요!
+자세한 내용은 [Soulbound Assets 가이드](/ko/smart-contracts/core/guides/create-soulbound-nft-asset)를 확인하세요!
 
 ## Asset을 불변으로 설정하는 방법은?
 
-Core에는 여러 수준의 "불변성"이 있습니다. 자세한 정보와 구현 방법은 [이 가이드](/core/guides/immutability)에서 확인할 수 있습니다.
+Core에는 여러 수준의 "불변성"이 있습니다. 자세한 정보와 구현 방법은 [이 가이드](/ko/smart-contracts/core/guides/immutability)에서 확인할 수 있습니다.
 
 ## Metaplex Token Metadata와 Core의 차이점은 무엇인가요?
 
-Core는 NFT를 위해 특별히 설계된 완전히 새로운 표준이므로 몇 가지 주목할 만한 차이점이 있습니다. 예를 들어 Core는 더 저렴하고 더 적은 Compute Units를 필요로 하며 개발자 관점에서 더 쉽게 작업할 수 있어야 합니다. 자세한 내용은 [차이점](/core/tm-differences) 페이지를 참조하세요.
+Core는 NFT를 위해 특별히 설계된 완전히 새로운 표준이므로 몇 가지 주목할 만한 차이점이 있습니다. 예를 들어 Core는 더 저렴하고 더 적은 Compute Units를 필요로 하며 개발자 관점에서 더 쉽게 작업할 수 있어야 합니다. 자세한 내용은 [차이점](/ko/smart-contracts/core/tm-differences) 페이지를 참조하세요.
 
 ## Core가 Editions를 지원하나요?
 
-네! [Edition](/core/plugins/edition)과 [Master Edition](/core/plugins/master-edition) 플러그인을 사용하면 됩니다. ["Editions 인쇄 방법" 가이드](/core/guides/print-editions)에서 자세한 정보를 확인할 수 있습니다.
+네! [Edition](/ko/smart-contracts/core/plugins/edition)과 [Master Edition](/ko/smart-contracts/core/plugins/master-edition) 플러그인을 사용하면 됩니다. ["Editions 인쇄 방법" 가이드](/ko/smart-contracts/core/guides/print-editions)에서 자세한 정보를 확인할 수 있습니다.

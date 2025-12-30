@@ -116,7 +116,7 @@ pub async fn create_collection() {
 
 ### Creating a Collection with Plugins
 
-The following snippet creates a collection with the [Royalties Plugin](/core/plugins/royalties) attached. You can attach additional plugins as described [here](/core/plugins).
+The following snippet creates a collection with the [Royalties Plugin](/smart-contracts/core/plugins/royalties) attached. You can attach additional plugins as described [here](/smart-contracts/core/plugins).
 
 {% dialect-switcher title="Create a MPL Core Collection with Plugin" %}
 {% dialect title="JavaScript" id="js" %}

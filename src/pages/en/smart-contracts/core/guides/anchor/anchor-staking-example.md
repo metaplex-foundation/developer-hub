@@ -28,7 +28,7 @@ This plugin allows the **delegate to freeze and thaw the asset, preventing trans
 
 **Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
 
-_Learn more about it [here](/core/plugins/freeze-delegate)_
+_Learn more about it [here](/smart-contracts/core/plugins/freeze-delegate)_
 
 ### The Attribute Plugin
 
@@ -38,7 +38,7 @@ This plugin allows for **data storage directly on the assets, functioning as on-
 
 **This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
 
-_Learn more about it [here](/core/plugins/attribute)_
+_Learn more about it [here](/smart-contracts/core/plugins/attribute)_
 
 ### The Smart Contract Logic
 
@@ -60,7 +60,7 @@ Now that we understand the logic behind our smart contract, **it’s time to div
 
 Before writing our smart contracts, let's look at what crate we need and what function from them to make sure our smart contract works! 
 
-In this example, we primarily use the mpl_core crate with the [anchor](/core/using-core-in-anchor) feature enabled:
+In this example, we primarily use the mpl_core crate with the [anchor](/smart-contracts/core/using-core-in-anchor) feature enabled:
 
 ```toml
 mpl-core = { version = "x.x.x", features = ["anchor"] } 
@@ -92,7 +92,7 @@ In the account struct of all instructions, we will separate the Signer and the P
 
 For this example we use the anchor flag from the mpl-core crate to directly deserialize the Asset and Collection account from the account struct and put some constraint on that
 
-_Learn more about it [here](/core/using-core-in-anchor)_
+_Learn more about it [here](/smart-contracts/core/using-core-in-anchor)_
 
 We're going to use a single account struct, `Stake`, for both the `stake` and `unstake` instructions since they use the same accounts and same constraints.
 
@@ -534,4 +534,4 @@ pub fn unstake(ctx: Context<Unstake>) -> Result<()> {
 
 ## Conclusion
 
-Congratulations! You are now equipped to create a staking solution for your NFT collection! If you want to learn more about Core and Metaplex, check out the [developer hub](/core/getting-started).
+Congratulations! You are now equipped to create a staking solution for your NFT collection! If you want to learn more about Core and Metaplex, check out the [developer hub](/smart-contracts/core/getting-started).

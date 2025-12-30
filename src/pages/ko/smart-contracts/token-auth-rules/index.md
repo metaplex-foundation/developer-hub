@@ -10,11 +10,11 @@ Token Authorization Rules (또는 Token Auth Rules)는 SPL Token에서 발생하
 
 ## 기능
 
-[Create or Update Rule Sets](/token-auth-rules/create-or-update) - Rule Set 내용을 초기화하고 업데이트하는 데 사용되는 명령입니다.
+[Create or Update Rule Sets](/ko/smart-contracts/token-auth-rules/create-or-update) - Rule Set 내용을 초기화하고 업데이트하는 데 사용되는 명령입니다.
 
-[Rule Set Buffers](/token-auth-rules/buffers) - 큰 Rule Sets이 처리되는 방법입니다.
+[Rule Set Buffers](/ko/smart-contracts/token-auth-rules/buffers) - 큰 Rule Sets이 처리되는 방법입니다.
 
-[Validate Rule Sets](/token-auth-rules/validate) - Rule Set이 검증되는 방법입니다.
+[Validate Rule Sets](/ko/smart-contracts/token-auth-rules/validate) - Rule Set이 검증되는 방법입니다.
 
 ## Rule 유형
 인증 rules는 `validate()` 메서드를 구현하는 `Rule` 열거형의 변형입니다.
@@ -31,12 +31,12 @@ Rule Set은 `HashMap` 데이터 구조를 기반으로 구축되며 토큰과 �
 ### Scenario
 **Scenarios**는 **Operations**에 대한 선택적 추가 사항이며 명령이 호출될 수 있는 더 구체적인 상황을 처리하는 데 사용됩니다. 데이터 형식 관점에서 **Operation**과 **Scenario** 조합은 콜론으로 구분된 두 개의 문자열 `<Operation>:<Scenario>`입니다. 예를 들어, Token Metadata는 Token Metadata에서 Token Auth Rules로의 호출에 대한 **Scenario**로 권한 유형을 사용합니다. Transfer **Operation**은 토큰의 소유자 또는 위임자에 의해 토큰에서 트리거될 수 있으며, Rule Set 관리자는 이러한 다른 시나리오가 다른 규칙에 의해 관리되기를 원할 수 있습니다. 이 특정 사용 사례를 처리하기 위해 **Scenario**를 사용하여 구분을 관리할 수 있습니다. 앞의 예에서 사용되는 두 `HashMap` 키는 `Transfer:Owner`와 `Transfer:Delegate`입니다.
 
-여러 시나리오에서 동일한 규칙을 관리하는 방법에 대해서는 [Namespace](/token-auth-rules/primitive-rules/namespace)를 참조하십시오.
+여러 시나리오에서 동일한 규칙을 관리하는 방법에 대해서는 [Namespace](/ko/smart-contracts/token-auth-rules/primitive-rules/namespace)를 참조하십시오.
 
 ## Payload
 Token Auth Rules 프로그램은 Rule Set에서 평가를 요청하는 프로그램으로부터 받은 페이로드 데이터에 의존합니다. `Payload`의 기본 데이터 구조는 `HashMap`이며, `Payload` 필드는 `HashMap` 키로 표현됩니다. 대부분의 Rules는 검증 시간에 조회를 수행할 수 있도록 미리 정의된 `Payload` 필드를 저장합니다.
 
-`Payload`가 사용되는 방법에 대한 자세한 내용은 [Validate](/token-auth-rules/validate) 명령을 참조하십시오.
+`Payload`가 사용되는 방법에 대한 자세한 내용은 [Validate](/ko/smart-contracts/token-auth-rules/validate) 명령을 참조하십시오.
 
 ## 리소스
 

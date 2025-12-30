@@ -26,7 +26,7 @@ description: Candy Machine에서 다른 지갑 주소로 NFT를 민팅하는 방
 다른 지갑으로 NFT를 민팅하는 것은 에어드롭, 경품 또는 여러 수신자에게 NFT를 배포하는 데 특히 유용할 수 있습니다. 이 가이드는 Candy Machine에서 다른 지갑 주소로 NFT를 민팅하는 과정을 안내합니다. 민팅 프로세스를 시작하는 사람이 민팅 비용을 부담한다는 점에 유의해야 합니다. 따라서 수신자가 직접 NFT를 클레임하도록 하는 것이 종종 더 비용 효율적입니다.
 
 {% callout type="note" title="중요한 고려사항" %}
-- 다른 지갑으로 민팅하는 것은 비용이 많이 들 수 있습니다. [allowlist](/candy-machine/guards/allow-list) 또는 [NFT Gate](/candy-machine/guards/nft-gate) 가드를 사용하는 것과 같은 클레임 메커니즘을 사용하는 것을 고려할 수 있습니다.
+- 다른 지갑으로 민팅하는 것은 비용이 많이 들 수 있습니다. [allowlist](/ko/smart-contracts/candy-machine/guards/allow-list) 또는 [NFT Gate](/ko/smart-contracts/candy-machine/guards/nft-gate) 가드를 사용하는 것과 같은 클레임 메커니즘을 사용하는 것을 고려할 수 있습니다.
 - 가드가 있는 Candy Machine과 가드가 없는 Candy Machine에는 다른 도구를 사용할 수 있습니다. 가드 없이 민팅하는 것이 일반적으로 더 쉽습니다.
 {% /callout %}
 
@@ -83,7 +83,6 @@ Typescript를 사용하여 다른 지갑으로 민팅할 때 Candy Machine이 �
 ### 가드 없이 민팅
 가드가 없는 Candy Machine의 경우 `mintFromCandyMachineV2`를 사용하세요. 이 함수를 사용하면 수신자를 `nftOwner`로 직접 지정할 수 있습니다.
 
-Solana 및 Eclipse 블록체인에서 Metaplex Aura 네트워크에 액세스하려면 [여기](https://aura-app.metaplex.com/)에서 엔드포인트 및 API 키에 대한 Aura 앱을 방문할 수 있습니다.
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -145,7 +144,7 @@ import {
 
 // 구성
 const RECIPIENT_ADDRESS = "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV";
-const RPC_ENDPOINT = "https://devnet-aura.metaplex.com/<YOUR_API_KEY>";
+const RPC_ENDPOINT = "https://api.devnet.solana.com";
 
 (async () => {
   try {

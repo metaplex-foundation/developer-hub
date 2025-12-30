@@ -112,7 +112,7 @@ curl -X POST <ENDPOINT> \
 ## ヒントとベストプラクティス
 
 1. **[ページネーション](/ja/dev-tools/das-api/guides/pagination)を使用する** 大規模なデータセット用
-2. **[表示オプション](/ja/dev-tools/das-api/guides/display-options)を含める** 追加のメタデータを取得
+2. **[表示オプション](/ja/dev-tools/das-api/display-options)を含める** 追加のメタデータを取得
 3. **結果をソートする** 意味のある方法でデータを提示
 4. **空の結果を適切に処理する** コレクションが空の場合
 5. **コレクションアドレスを検証する** クエリ前に

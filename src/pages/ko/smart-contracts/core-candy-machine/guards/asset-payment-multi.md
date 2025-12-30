@@ -10,7 +10,7 @@ description: "Core Candy Machine에서 특정 컬렉션의 다른 Core Asset(들
 
 지불자가 필수 컬렉션의 Asset을 소유하지 않은 경우 민팅이 실패합니다.
 
-이 가드는 [Asset Payment Guard](/core-candy-machine/guards/asset-payment)와 유사하지만 지불에 하나 이상의 asset을 받을 수 있습니다.
+이 가드는 [Asset Payment Guard](/ko/smart-contracts/core-candy-machine/guards/asset-payment)와 유사하지만 지불에 하나 이상의 asset을 받을 수 있습니다.
 
 {% diagram  %}
 

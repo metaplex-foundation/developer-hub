@@ -24,7 +24,7 @@ description: 이 가이드는 FreezeDelegate와 Attribute 플러그인을 활용
 
 **이 플러그인 사용은 가벼워서**, 자산을 동결/해동하는 것은 플러그인 데이터의 불린 값을 변경하는 것만 포함합니다(유일한 인수는 Frozen: bool).
 
-_[여기](/core/plugins/freeze-delegate)에서 더 자세히 알아보세요_
+_[여기](/ko/smart-contracts/core/plugins/freeze-delegate)에서 더 자세히 알아보세요_
 
 ### Attribute 플러그인
 
@@ -34,7 +34,7 @@ _[여기](/core/plugins/freeze-delegate)에서 더 자세히 알아보세요_
 
 **이 플러그인은 AttributeList 필드를 받아들이며**, 이는 키와 값 쌍의 배열로 구성되고 둘 다 문자열입니다.
 
-_[여기](/core/plugins/attribute)에서 더 자세히 알아보세요_
+_[여기](/ko/smart-contracts/core/plugins/attribute)에서 더 자세히 알아보세요_
 
 ### 프로그램 로직
 
@@ -83,7 +83,7 @@ import { base58 } from '@metaplex-foundation/umi/serializers';
 
 **Umi는 Solana 프로그램용 JavaScript 클라이언트를 구축하고 사용하기 위한 모듈식 프레임워크**입니다. 핵심 인터페이스 세트를 정의하는 의존성 없는 라이브러리를 제공하여 라이브러리가 특정 구현과 독립적으로 작동할 수 있게 합니다.
 
-_더 자세한 정보는 [여기](/umi/getting-started)에서 개요를 찾을 수 있습니다_
+_더 자세한 정보는 [여기](/ko/dev-tools/umi/getting-started)에서 개요를 찾을 수 있습니다_
 
 **이 예제의 기본 Umi 설정은 다음과 같습니다**:
 ```typescript
@@ -537,4 +537,4 @@ tx = await transactionBuilder().add(
 
 ## 결론
 
-축하합니다! 이제 NFT 컬렉션을 위한 스테이킹 솔루션을 생성할 수 있는 장비를 갖추었습니다! Core와 Metaplex에 대해 더 자세히 알고 싶다면 [개발자 허브](/core/getting-started)를 확인하세요.
+축하합니다! 이제 NFT 컬렉션을 위한 스테이킹 솔루션을 생성할 수 있는 장비를 갖추었습니다! Core와 Metaplex에 대해 더 자세히 알고 싶다면 [개발자 허브](/ko/smart-contracts/core/getting-started)를 확인하세요.

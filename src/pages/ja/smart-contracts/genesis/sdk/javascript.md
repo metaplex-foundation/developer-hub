@@ -41,7 +41,7 @@ npm install \
 
 ## Umiセットアップ
 
-Genesis SDKは、MetaplexのSolana用JavaScriptフレームワークである[Umi](/umi)上に構築されています。Umiをまだセットアップしていない場合は、[Umiはじめに](/umi/getting-started)ガイドを確認してください。
+Genesis SDKは、MetaplexのSolana用JavaScriptフレームワークである[Umi](/ja/dev-tools/umi)上に構築されています。Umiをまだセットアップしていない場合は、[Umiはじめに](/ja/dev-tools/umi/getting-started)ガイドを確認してください。
 
 ### 基本設定
 
@@ -185,6 +185,6 @@ console.log('トランザクション署名:', result.signature);
 
 GenesisプログラムでUmiインスタンスが設定されたら、構築を開始する準備ができました。Genesis機能を探索してください：
 
-- **[Launch Pool](/smart-contracts/genesis/launch-pool)** - 預金期間付きのトークン配布
-- **[Priced Sale](/smart-contracts/genesis/priced-sale)** - 取引前の事前預金収集
-- **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** - 均一クリアリング価格の時間ベースオークション
+- **[Launch Pool](/ja/smart-contracts/genesis/launch-pool)** - 預金期間付きのトークン配布
+- **[Priced Sale](/ja/smart-contracts/genesis/priced-sale)** - 取引前の事前預金収集
+- **[Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction)** - 均一クリアリング価格の時間ベースオークション

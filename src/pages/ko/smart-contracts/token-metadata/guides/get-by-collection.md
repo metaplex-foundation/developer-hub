@@ -4,7 +4,7 @@ metaTitle: 컬렉션의 민트 가져오기 | Token Metadata 가이드
 description: 컬렉션의 모든 민트를 가져오는 방법에 대한 가이드.
 ---
 
-Metaplex Token Metadata는 [온체인 컬렉션](/token-metadata/collections)을 가지고 있어 온체인 표준의 부재로 인해 커뮤니티에서 사용하는 다양한 주관적이고 잠재적으로 충돌하는 휴리스틱 대신 NFT 컬렉션을 객관적으로 식별할 수 있습니다.
+Metaplex Token Metadata는 [온체인 컬렉션](/ko/smart-contracts/token-metadata/collections)을 가지고 있어 온체인 표준의 부재로 인해 커뮤니티에서 사용하는 다양한 주관적이고 잠재적으로 충돌하는 휴리스틱 대신 NFT 컬렉션을 객관적으로 식별할 수 있습니다.
 
 사양 설계는 주어진 NFT를 찾아보고 그것이 컬렉션에 속하는지, 그렇다면 어떤 컬렉션인지를 메타데이터 계정에서 컬렉션 필드를 간단히 읽음으로써 결정하는 것을 매우 쉽게 만듭니다. 온체인 `Metadata` 구조체는 선택적 `Collection` 구조체를 포함하며, 이는 속해 있는 컬렉션의 SPL 토큰 민트의 Pubkey인 `key` 필드를 가집니다.
 
@@ -36,7 +36,7 @@ pub struct Collection {
 }
 ```
 
-그러나 컬렉션 민트 주소가 주어졌을 때, 해당 특정 컬렉션에 속하는 모든 NFT를 찾는 것은 체인에서 직접 읽을 때 상당히 더 어렵습니다. [DAS](/das-api)를 사용하는 하나의 우수한 방법과 체인에서 직접 데이터를 가져오는 두 가지 기본 접근법이 있습니다.
+그러나 컬렉션 민트 주소가 주어졌을 때, 해당 특정 컬렉션에 속하는 모든 NFT를 찾는 것은 체인에서 직접 읽을 때 상당히 더 어렵습니다. [DAS](/ko/dev-tools/das-api)를 사용하는 하나의 우수한 방법과 체인에서 직접 데이터를 가져오는 두 가지 기본 접근법이 있습니다.
 
 ## DAS API
 DAS를 사용하여 민트를 가져오는 것은 [이를 지원하는 RPC 공급자](/rpc-providers#metaplex-das-api)를 사용할 때 우수한 방법입니다.
@@ -88,7 +88,7 @@ curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json'
 {% /dialect %}
 {% /dialect-switcher %}
 
-DAS에서 더 많은 메서드와 데이터를 가져오고 필터링할 수 있는 추가 메서드는 [DAS 문서](/das-api)에서 찾을 수 있습니다.
+DAS에서 더 많은 메서드와 데이터를 가져오고 필터링할 수 있는 추가 메서드는 [DAS 문서](/ko/dev-tools/das-api)에서 찾을 수 있습니다.
 
 ## 미리 계산된 오프셋을 사용한 GetProgramAccounts
 

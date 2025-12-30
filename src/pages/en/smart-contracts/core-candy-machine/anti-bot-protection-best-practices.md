@@ -95,7 +95,7 @@ await securelyStoreUris(uploadedUris);
 - **Custom Solutions**: Build your own upload service with random ID generation
 
 {% callout %}
-**For more detailed information about UMI uploader capabilities, see the [UMI Storage Documentation](/umi/storage).**
+**For more detailed information about UMI uploader capabilities, see the [UMI Storage Documentation](/dev-tools/umi/storage).**
 {% /callout %}
 
 #### Creating Placeholder Metadata
@@ -599,7 +599,7 @@ All three strategies provide the same security benefits - the key differences ar
 
 ##### Implementation Reference
 
-For the actual asset update implementation, refer to the [Core Asset Update documentation](/core/update) which covers how to update asset metadata, names, and URIs using UMI.
+For the actual asset update implementation, refer to the [Core Asset Update documentation](/smart-contracts/core/update) which covers how to update asset metadata, names, and URIs using UMI.
 
 The reveal process uses your secure mapping to determine which final metadata URI corresponds to each minted asset, then updates the asset using Core's update functionality.
 

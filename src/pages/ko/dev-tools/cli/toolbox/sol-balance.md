@@ -54,6 +54,6 @@ Balance: 1.5 SOL
 
 ## 관련 명령어
 
-- [SOL 전송](/cli/toolbox/sol-transfer) - 주소 간 SOL 전송
-- [토큰 전송](/cli/toolbox/token-transfer) - 토큰 전송
-- [에어드롭](/cli/toolbox/sol-airdrop) - SOL 에어드롭 요청 (devnet만)
+- [SOL 전송](/ko/dev-tools/cli/toolbox/sol-transfer) - 주소 간 SOL 전송
+- [토큰 전송](/ko/dev-tools/cli/toolbox/token-transfer) - 토큰 전송
+- [에어드롭](/ko/dev-tools/cli/toolbox/sol-airdrop) - SOL 에어드롭 요청 (devnet만)

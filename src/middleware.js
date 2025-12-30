@@ -24,7 +24,6 @@ const devToolsRedirects = [
   'amman',
   'shank',
   'das-api',
-  'aura',
 ];
 
 // Standalone page redirects to new locations
@@ -124,6 +123,12 @@ const redirectRules = {
   // Legacy documentation redirects
   '/legacy-documentation': {
     '/developer-tools/shank': '/dev-tools/shank',
+  },
+  '/ja/legacy-documentation': {
+    '/developer-tools/shank': '/ja/dev-tools/shank',
+  },
+  '/ko/legacy-documentation': {
+    '/developer-tools/shank': '/ko/dev-tools/shank',
   },
 }
 

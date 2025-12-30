@@ -10,7 +10,7 @@ description: Metaplex Coreを使って、Core NFTアセットおよびコレク�
 
 このプラグインは`MPL Core Asset`と`MPL Core Collection`の両方で使用できます。
 
-[Royalties](/core/plugins/royalties)など他プラグイン同様、コレクションに割り当てるとアセットにも影響します。したがって、コレクションに追加した場合は、そのコレクション内のアセットへも新規プラグインを追加できなくなります。
+[Royalties](/ja/smart-contracts/core/plugins/royalties)など他プラグイン同様、コレクションに割り当てるとアセットにも影響します。したがって、コレクションに追加した場合は、そのコレクション内のアセットへも新規プラグインを追加できなくなります。
 
 ## 対応状況
 

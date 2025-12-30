@@ -18,7 +18,7 @@ Uniform Price Auctionは以下のような時間ベースのトークンロー�
 - **大口投資家/ファンド参加**：構造化されたオークション形式が大規模参加者にアピール
 - **制御されたアクセス**：要件に応じてゲートまたは非ゲート可能
 
-一般的なGenesisの概念は[概要](/smart-contracts/genesis)を参照するか、代替のローンチメカニズムである[Launch Pool](/smart-contracts/genesis/launch-pool)をご覧ください。
+一般的なGenesisの概念は[概要](/smart-contracts/genesis)を参照するか、代替のローンチメカニズムである[Launch Pool](/ja/smart-contracts/genesis/launch-pool)をご覧ください。
 
 {% callout type="note" %}
 より詳細なドキュメントは近日公開予定です。

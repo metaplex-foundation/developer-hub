@@ -264,7 +264,7 @@ console.log(`クリエータートークン: ${creatorTokens.items.length}`)
 ## ヒントとベストプラクティス
 
 1. **インターフェースフィルターを使用する**: 詳細については[基準によるAsset検索](/ja/dev-tools/das-api/guides/search-by-criteria)を参照してください。
-2. **Show Fungibleを有効化する**: [表示オプション](/ja/dev-tools/das-api/guides/display-options)に示されているように、display optionsで`showFungible: true`を使用して完全なトークン情報を取得します。
+2. **Show Fungibleを有効化する**: [表示オプション](/ja/dev-tools/das-api/display-options)に示されているように、display optionsで`showFungible: true`を使用して完全なトークン情報を取得します。
 3. **小数点を考慮する**: トークン量を適切にフォーマットするために`decimals`フィールドを確認してください。
 4. **結果をキャッシュする**: トークン残高は頻繁に変更されますが、トークンメタデータは比較的安定しています。
 

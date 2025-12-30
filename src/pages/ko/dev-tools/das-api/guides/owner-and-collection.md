@@ -111,14 +111,14 @@ curl -X POST <ENDPOINT> \
 
 ## 팁과 모범 사례
 
-1. **대규모 데이터셋의 경우 [페이지네이션](/das-api/guides/pagination) 사용**
-2. **추가 메타데이터를 얻으려면 [표시 옵션](/das-api/guides/display-options) 포함**
+1. **대규모 데이터셋의 경우 [페이지네이션](/ko/dev-tools/das-api/guides/pagination) 사용**
+2. **추가 메타데이터를 얻으려면 [표시 옵션](/ko/dev-tools/das-api/display-options) 포함**
 3. **의미 있는 방식으로 데이터를 제시하기 위해 결과 정렬**
 4. **컬렉션이 비어있을 때 빈 결과를 적절히 처리**
 5. **쿼리 전에 컬렉션 주소 확인**
 
 ## 더 읽어보기
 
-- [컬렉션의 모든 토큰 가져오기](/das-api/guides/get-collection-nfts) - 특정 컬렉션의 모든 자산 가져오기
-- [소유자별 NFT 가져오기](/das-api/guides/get-nfts-by-owner) - 지갑이 소유한 모든 NFT 찾기
-- [여러 조건으로 자산 검색](/das-api/guides/search-by-criteria) - 고급 쿼리를 위해 여러 필터 결합
+- [컬렉션의 모든 토큰 가져오기](/ko/dev-tools/das-api/guides/get-collection-nfts) - 특정 컬렉션의 모든 자산 가져오기
+- [소유자별 NFT 가져오기](/ko/dev-tools/das-api/guides/get-nfts-by-owner) - 지갑이 소유한 모든 NFT 찾기
+- [여러 조건으로 자산 검색](/ko/dev-tools/das-api/guides/search-by-criteria) - 고급 쿼리를 위해 여러 필터 결합

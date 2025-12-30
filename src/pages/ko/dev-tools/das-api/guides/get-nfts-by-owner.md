@@ -242,14 +242,14 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 ## 팁과 모범 사례
 
 1. **인터페이스 필터링 사용** - NFT만 가져오기 (예: 대체 가능 토큰 제외)
-2. **NFT가 많은 지갑의 경우 [페이지네이션](/das-api/guides/pagination) 구현**
+2. **NFT가 많은 지갑의 경우 [페이지네이션](/ko/dev-tools/das-api/guides/pagination) 구현**
 3. **빈번한 쿼리의 성능 향상을 위해 결과 캐싱**
-4. **추가 메타데이터를 얻으려면 [표시 옵션](/das-api/guides/display-options) 포함**
+4. **추가 메타데이터를 얻으려면 [표시 옵션](/ko/dev-tools/das-api/display-options) 포함**
 5. **의미 있는 방식으로 데이터를 제시하기 위해 결과 정렬**
 6. **특정 NFT 유형에 집중하기 위해 컬렉션별 필터링**
 
 ## 더 읽어보기
 
-- [크리에이터별 자산 가져오기](/das-api/methods/get-assets-by-creator) - 특정 주소가 생성한 모든 토큰 검색
-- [컬렉션의 모든 토큰 가져오기](/das-api/guides/get-collection-nfts) - 특정 컬렉션의 모든 자산 가져오기
-- [여러 조건으로 자산 검색](/das-api/guides/search-by-criteria) - 고급 쿼리를 위해 여러 필터 결합
+- [크리에이터별 자산 가져오기](/ko/dev-tools/das-api/methods/get-assets-by-creator) - 특정 주소가 생성한 모든 토큰 검색
+- [컬렉션의 모든 토큰 가져오기](/ko/dev-tools/das-api/guides/get-collection-nfts) - 특정 컬렉션의 모든 자산 가져오기
+- [여러 조건으로 자산 검색](/ko/dev-tools/das-api/guides/search-by-criteria) - 고급 쿼리를 위해 여러 필터 결합

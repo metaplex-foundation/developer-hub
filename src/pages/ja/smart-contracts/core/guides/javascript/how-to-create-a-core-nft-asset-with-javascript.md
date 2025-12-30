@@ -72,7 +72,7 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 ```
 
 ## 追加機能
-`plugins`でプラグイン/外部プラグインを同時追加可能（例: PermanentFreezeDelegate / AppData）。詳細は[プラグイン](/core/plugins)。
+`plugins`でプラグイン/外部プラグインを同時追加可能（例: PermanentFreezeDelegate / AppData）。詳細は[プラグイン](/ja/smart-contracts/core/plugins)。
 
 ## フルコード
 ```ts

@@ -78,7 +78,6 @@ Typescriptを使用して別のウォレットにミントする場合、Candy M
 ### ガードなしでのミント
 ガードなしのCandy Machineの場合、`mintFromCandyMachineV2`を使用します。この関数では、受信者を`nftOwner`として直接指定できます。
 
-SolanaとEclipseブロックチェーンでMetaplex Auraネットワークにアクセスするには、エンドポイントとAPIキーのためにAura Appを[こちら](https://aura-app.metaplex.com/)で訪問できます。
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -148,7 +147,7 @@ import {
 
 // 設定
 const RECIPIENT_ADDRESS = "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV";
-const RPC_ENDPOINT = "https://devnet-aura.metaplex.com/<YOUR_API_KEY>";
+const RPC_ENDPOINT = "https://api.devnet.solana.com";
 
 (async () => {
   try {

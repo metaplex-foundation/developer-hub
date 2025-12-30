@@ -244,7 +244,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 1. **インターフェースフィルタリングを使用する** NFTのみを取得(例: fungibleトークンを除外)
 2. **[ページネーション](/ja/dev-tools/das-api/guides/pagination)を実装する** 多数のNFTを持つウォレット用
 3. **結果をキャッシュする** 頻繁なクエリのパフォーマンスを向上
-4. **[表示オプション](/ja/dev-tools/das-api/guides/display-options)を含める** 追加のメタデータを取得
+4. **[表示オプション](/ja/dev-tools/das-api/display-options)を含める** 追加のメタデータを取得
 5. **結果をソートする** 意味のある方法でデータを提示
 6. **コレクション別にフィルタリングする** 特定のNFTタイプに焦点を当てる
 

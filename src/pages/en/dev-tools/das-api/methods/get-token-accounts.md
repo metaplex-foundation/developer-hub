@@ -18,7 +18,7 @@ Returns a list of token accounts filtered by owner address, mint address, or bot
 | `limit`        |         | Maximum number of token accounts to return.          |
 | `before`       |         | Return accounts before this cursor.                  |
 | `after`        |         | Return accounts after this cursor.                   |
-| `options`      |         | Additional [display options](/das-api/display-options).              |
+| `options`      |         | Additional [display options](/dev-tools/das-api/display-options).              |
 
 ## Response
 

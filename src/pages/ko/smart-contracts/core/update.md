@@ -156,7 +156,7 @@ const updateTx = await update(umi, {
 
 ## Core Asset 데이터를 불변으로 만들기
 
-다음은 SDK를 사용하여 Core Asset을 완전히 불변으로 만드는 방법입니다. [불변성 가이드](/core/guides/immutability)에 설명된 다양한 수준의 불변성이 있다는 점에 주의하세요.
+다음은 SDK를 사용하여 Core Asset을 완전히 불변으로 만드는 방법입니다. [불변성 가이드](/ko/smart-contracts/core/guides/immutability)에 설명된 다양한 수준의 불변성이 있다는 점에 주의하세요.
 
 {% callout type="warning" title="중요" %}
 

@@ -6,9 +6,9 @@ description: 404 스왑을 가능하게 하는 MPL 404 하이브리드 에스크
 
 ## 전제 조건
 
-- MPL Core 컬렉션 - [링크](/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
-- 컬렉션에 민팅된 Core NFT 자산 - [링크](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
-- 필요한 토큰 수량으로 생성된 SPL 토큰 - [링크](/guides/javascript/how-to-create-a-solana-token)
+- MPL Core 컬렉션 - [링크](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
+- 컬렉션에 민팅된 Core NFT 자산 - [링크](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+- 필요한 토큰 수량으로 생성된 SPL 토큰 - [링크](/ko/guides/javascript/how-to-create-a-solana-token)
 - 일관된 게이트웨이/URI에서의 순차적 메타데이터 JSON 파일의 온라인 저장소.
 
 에스크로 초기화는 NFT 컬렉션과 대체 가능한 토큰을 연결하는 필수 단계입니다. 이 단계를 시작하기 전에 Core 컬렉션 주소, 대체 가능한 토큰 민트 주소, 숫자로 명명된 순차적 파일을 사용하는 오프체인 메타데이터 URI 범위를 준비해야 합니다. Base URI 문자열 일관성의 필요성으로 인해 일부 오프체인 메타데이터 옵션이 제한됩니다. 에스크로의 권한은 메타데이터 업데이트를 수행하기 위해 컬렉션의 권한과 일치해야 합니다. 또한 에스크로가 자금을 지원받기 때문에 토큰 권한이 될 필요가 없어 컬렉션이 기존 밈코인이나 다른 대체 가능한 자산으로 뒷받침될 수 있습니다.

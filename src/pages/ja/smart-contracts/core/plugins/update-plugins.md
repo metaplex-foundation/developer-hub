@@ -293,6 +293,6 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 ## 次のステップ
 
 - 個別のプラグインドキュメントで特定のプラグイン更新について学ぶ
-- 利用可能なすべてのプラグインは[プラグイン概要](/core/plugins)を参照
-- [プラグインの追加](/core/plugins/adding-plugins)と[プラグインの削除](/core/plugins/removing-plugins)を確認
+- 利用可能なすべてのプラグインは[プラグイン概要](/ja/smart-contracts/core/plugins)を参照
+- [プラグインの追加](/ja/smart-contracts/core/plugins/adding-plugins)と[プラグインの削除](/ja/smart-contracts/core/plugins/removing-plugins)を確認
 - 詳細なAPIドキュメントは[MPL Core TypeDoc](https://mpl-core.typedoc.metaplex.com)をご覧ください

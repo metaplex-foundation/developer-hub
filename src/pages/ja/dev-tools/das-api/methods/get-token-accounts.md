@@ -18,7 +18,7 @@ tableOfContents: false
 | `limit`        |         | 返すトークンアカウントの最大数。          |
 | `before`       |         | このカーソルより前のアカウントを返す。                  |
 | `after`        |         | このカーソルより後のアカウントを返す。                   |
-| `options`      |         | 追加の[表示オプション](/das-api/display-options)。              |
+| `options`      |         | 追加の[表示オプション](/ja/dev-tools/das-api/display-options)。              |
 
 ## レスポンス
 

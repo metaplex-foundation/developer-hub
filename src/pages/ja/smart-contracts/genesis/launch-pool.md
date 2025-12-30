@@ -30,7 +30,7 @@ Launch Poolのライフサイクル：
 
 ## Launch Poolのセットアップ
 
-このガイドは、すでにGenesisアカウントを初期化していることを前提としています。初期化手順は[はじめに](/smart-contracts/genesis/getting-started)を参照してください。
+このガイドは、すでにGenesisアカウントを初期化していることを前提としています。初期化手順は[はじめに](/ja/smart-contracts/genesis/getting-started)を参照してください。
 
 ### 1. Launch Poolバケットの追加
 
@@ -362,6 +362,6 @@ if (deposit) {
 
 ## 次のステップ
 
-- [Priced Sale](/smart-contracts/genesis/priced-sale) - 取引前の事前預金収集
-- [アグリゲーションAPI](/smart-contracts/genesis/aggregation) - APIを通じたローンチデータの照会
+- [Priced Sale](/ja/smart-contracts/genesis/priced-sale) - 取引前の事前預金収集
+- [アグリゲーションAPI](/ja/smart-contracts/genesis/aggregation) - APIを通じたローンチデータの照会
 - [Launch Pool](https://github.com/metaplex-foundation/mpl-genesis/tree/main/clients/js/examples/launch-pool) - GitHubのサンプル実装

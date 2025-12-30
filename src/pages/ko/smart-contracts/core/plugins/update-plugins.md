@@ -293,6 +293,6 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 ## 다음 단계
 
 - 개별 플러그인 문서에서 특정 플러그인 업데이트에 대해 알아보기
-- 사용 가능한 모든 플러그인은 [플러그인 개요](/core/plugins) 참조
-- [플러그인 추가](/core/plugins/adding-plugins) 및 [플러그인 제거](/core/plugins/removing-plugins) 확인
+- 사용 가능한 모든 플러그인은 [플러그인 개요](/ko/smart-contracts/core/plugins) 참조
+- [플러그인 추가](/ko/smart-contracts/core/plugins/adding-plugins) 및 [플러그인 제거](/ko/smart-contracts/core/plugins/removing-plugins) 확인
 - 자세한 API 문서는 [MPL Core TypeDoc](https://mpl-core.typedoc.metaplex.com) 방문

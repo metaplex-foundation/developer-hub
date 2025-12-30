@@ -12,7 +12,7 @@ Returns the information of a compressed/standard asset including metadata and ow
 | Name            | Required | Description                                |
 | --------------- | :------: | ------------------------------------------ |
 | `id`            |    ✅    | The id of the asset.                       |
-| `options`       |          | Display options object. See [Display Options](/das-api/display-options) for details. |
+| `options`       |          | Display options object. See [Display Options](/dev-tools/das-api/display-options) for details. |
 
 ## Playground
 

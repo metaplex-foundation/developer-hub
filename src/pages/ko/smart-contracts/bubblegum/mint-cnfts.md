@@ -4,10 +4,10 @@ metaTitle: 압축 NFT 발행 | Bubblegum
 description: Bubblegum에서 압축 NFT를 발행하는 방법을 알아봅니다.
 ---
 {% callout title="Bubblegum v2" type="note" %}
-이 페이지는 Bubblegum v1에 특정합니다. 향상된 기능 세트를 위해 Bubblegum v2 사용을 권장합니다. Bubblegum v2로 작업하는 경우 자세한 내용은 [Bubblegum v2](/bubblegum-v2/mint-cnfts) 문서를 참조하세요.
+이 페이지는 Bubblegum v1에 특정합니다. 향상된 기능 세트를 위해 Bubblegum v2 사용을 권장합니다. Bubblegum v2로 작업하는 경우 자세한 내용은 [Bubblegum v2](/ko/smart-contracts/bubblegum-v2/mint-cnfts) 문서를 참조하세요.
 {% /callout %}
 
-[이전 페이지](/bubblegum/create-trees)에서 압축 NFT를 발행하려면 Bubblegum 트리가 필요하다는 것을 확인했고 트리를 생성하는 방법을 살펴봤습니다. 이제 주어진 Bubblegum 트리에서 압축 NFT를 발행하는 방법을 살펴보겠습니다. {% .lead %}
+[이전 페이지](/ko/smart-contracts/bubblegum/create-trees)에서 압축 NFT를 발행하려면 Bubblegum 트리가 필요하다는 것을 확인했고 트리를 생성하는 방법을 살펴봤습니다. 이제 주어진 Bubblegum 트리에서 압축 NFT를 발행하는 방법을 살펴보겠습니다. {% .lead %}
 
 Bubblegum 프로그램은 두 가지 발행 명령을 제공합니다. 하나는 컬렉션과 연결하지 않고 NFT를 발행하고, 다른 하나는 주어진 컬렉션에 NFT를 발행합니다. 후자는 단순히 몇 가지 매개변수가 더 필요하므로 전자부터 살펴보겠습니다.
 

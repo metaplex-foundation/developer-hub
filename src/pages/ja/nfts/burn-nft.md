@@ -10,7 +10,7 @@ NFTを永久に破棄してレント手数料を回収します。 {% .lead %}
 
 ## NFTをバーンする
 
-以下のセクションでは、完全なコード例と変更が必要なパラメータを確認できます。NFTのバーンの詳細については、[Coreドキュメント](/core/burn)をご覧ください。
+以下のセクションでは、完全なコード例と変更が必要なパラメータを確認できます。NFTのバーンの詳細については、[Coreドキュメント](/ja/smart-contracts/core/burn)をご覧ください。
 
 {% code-tabs-imported from="core/burn-asset" frameworks="umi,cli" /%}
 
