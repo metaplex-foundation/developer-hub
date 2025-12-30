@@ -87,7 +87,7 @@ createNft()
 ### 新しいウォレットの生成
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplTokenMetadata())
   .use(
     irysUploader({
@@ -110,7 +110,7 @@ await umi.rpc.airdrop(umi.identity.publickey)
 ### 既存のウォレットを使用
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplTokenMetadata())
   .use(
     irysUploader({
@@ -346,7 +346,7 @@ const createNft = async () => {
   // ** Umiのセットアップ **
   //
 
-  const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+  const umi = createUmi("https://api.devnet.solana.com")
     .use(mplTokenMetadata())
   .use(
     irysUploader({

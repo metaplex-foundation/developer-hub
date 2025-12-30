@@ -10,7 +10,7 @@ Solana上でウォレット間でNFTの所有権を転送します。 {% .lead %
 
 ## NFTを転送する
 
-以下のセクションでは、完全なコード例と変更が必要なパラメータを確認できます。NFTの転送の詳細については、[Coreドキュメント](/core/transfer)をご覧ください。
+以下のセクションでは、完全なコード例と変更が必要なパラメータを確認できます。NFTの転送の詳細については、[Coreドキュメント](/ja/smart-contracts/core/transfer)をご覧ください。
 
 {% code-tabs-imported from="core/transfer-asset" frameworks="umi" /%}
 

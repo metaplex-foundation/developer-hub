@@ -8,7 +8,7 @@ immutableMetadataプラグインは「権限管理型（Authority Managed）」�
 
 このプラグインは`MPL Core Asset`と`MPL Core Collection`の両方で使用できます。
 
-[Royalties](/core/plugins/royalties)など他プラグイン同様、コレクションに割り当てるとアセットにも影響します。したがって、コレクションへ追加すると、アセットのメタデータも不変になります。
+[Royalties](/ja/smart-contracts/core/plugins/royalties)など他プラグイン同様、コレクションに割り当てるとアセットにも影響します。したがって、コレクションへ追加すると、アセットのメタデータも不変になります。
 
 ## 対応状況
 

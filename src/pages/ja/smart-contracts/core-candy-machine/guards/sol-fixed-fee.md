@@ -6,7 +6,7 @@ description: Core Candy Machineの「Sol Fixed Fee」ガードは、ミント時
 
 ## 概要
 
-**Sol Fixed Fee**ガードは、ミント時に支払者にSOLでの金額を請求できます。SOLの金額と宛先アドレスの両方を設定できます。[Sol Payment](/core-candy-machine/guards/sol-payment)ガードと同様に機能します。
+**Sol Fixed Fee**ガードは、ミント時に支払者にSOLでの金額を請求できます。SOLの金額と宛先アドレスの両方を設定できます。[Sol Payment](/ja/smart-contracts/core-candy-machine/guards/sol-payment)ガードと同様に機能します。
 
 {% diagram  %}
 

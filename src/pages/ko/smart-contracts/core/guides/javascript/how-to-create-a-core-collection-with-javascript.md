@@ -332,7 +332,7 @@ const tx = await createCollection(umi, {
 const signature = base58.deserialize(tx.signature)[0]
 ```
 
-**참고**: 사용할 필드와 플러그인이 확실하지 않다면 [문서](/core/plugins)를 참조하세요!
+**참고**: 사용할 필드와 플러그인이 확실하지 않다면 [문서](/ko/smart-contracts/core/plugins)를 참조하세요!
 
 ## 전체 코드 예제
 

@@ -10,7 +10,7 @@ The **Asset Payment Multi** guard allows minting by charging the payer one or mo
 
 If the payer does not own an Asset from the required collection, minting will fail.
 
-The guard is similar to the [Asset Payment Guard](/core-candy-machine/guards/asset-payment) but can accept more than one asset to pay with.
+The guard is similar to the [Asset Payment Guard](/smart-contracts/core-candy-machine/guards/asset-payment) but can accept more than one asset to pay with.
 
 {% diagram  %}
 

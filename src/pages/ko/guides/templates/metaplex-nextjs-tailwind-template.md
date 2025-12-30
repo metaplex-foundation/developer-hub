@@ -55,7 +55,7 @@ _다음 섹션들은 이 페이지에 나열된 모든 템플릿이 공유하는
 ```ts
 const useUmiStore = create<UmiState>()((set) => ({
   // 여기에 자신의 RPC를 추가하세요.
-  umi: createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(
+  umi: createUmi("https://api.devnet.solana.com").use(
     signerIdentity(
       createNoopSigner(publicKey('11111111111111111111111111111111'))
     )
@@ -117,7 +117,7 @@ Umi 헬퍼는 다양한 시나리오에서 호출할 수 있는 여러 영역으
 
 이 함수는 또한 제공된 경우 `blockhash`, `send`, `confirm`에 걸쳐 커밋먼트 레벨을 제공하고 고정합니다. 기본적으로 값이 전달되지 않으면 `confirmed`의 커밋먼트 레벨이 사용됩니다.
 
-체인에서 실패한 트랜잭션을 디버그해야 하는 경우 활성화할 수 있는 `skipPreflight` 플래그도 있습니다. 트랜잭션 오류에 대한 자세한 정보는 이 가이드를 참조할 수 있습니다 [Solana에서 트랜잭션 오류를 진단하는 방법](/guides/general/how-to-diagnose-solana-transaction-errors).
+체인에서 실패한 트랜잭션을 디버그해야 하는 경우 활성화할 수 있는 `skipPreflight` 플래그도 있습니다. 트랜잭션 오류에 대한 자세한 정보는 이 가이드를 참조할 수 있습니다 [Solana에서 트랜잭션 오류를 진단하는 방법](/ko/guides/general/how-to-diagnose-solana-transaction-errors).
 
 `sendAndConfirmWalletAdapter()`는 `setComputeUnitPrice` 명령어를 통해 우선순위 수수료를 위한 준비가 되어 있습니다. 이들은 상황에 따라 검토하고 조정하거나 제거해야 합니다.
 

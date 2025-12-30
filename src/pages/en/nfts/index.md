@@ -42,6 +42,6 @@ Then follow the [Create an NFT](/nfts/create-nft) guide to create your first NFT
 
 For more advanced NFT functionality, check out:
 
-- [Core Documentation](/core) - Full documentation for Metaplex Core
-- [Core Plugins](/core/plugins) - Extend NFT functionality with plugins
-- [Core Collections](/core/collections) - Organize NFTs into collections
+- [Core Documentation](/smart-contracts/core) - Full documentation for Metaplex Core
+- [Core Plugins](/smart-contracts/core/plugins) - Extend NFT functionality with plugins
+- [Core Collections](/smart-contracts/core/collections) - Organize NFTs into collections

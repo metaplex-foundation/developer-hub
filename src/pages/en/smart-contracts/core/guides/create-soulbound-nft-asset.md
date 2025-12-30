@@ -11,7 +11,6 @@ Soulbound NFTs are non-fungible tokens that are permanently bound to a specific 
 
 In this guide, we'll explore how to create soulbound assets using MPL Core and the Umi Framework. Whether you're a developer looking to implement soulbound NFTs in TypeScript or just want to understand how they work, we'll cover everything from basic concepts to practical implementation. We'll examine different approaches for making assets soulbound and walk through creating your first soulbound NFT within a collection.
 
-To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
 
 In MPL Core, there are two main approaches to create soulbound NFTs:
 
@@ -85,7 +84,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // Step 2: Create and fund a test wallet
@@ -190,7 +189,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // Step 2: Create and fund a test wallet
@@ -271,7 +270,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 
 The Oracle Plugin provides a way to approve or reject different lifecycle events for an asset. To create soulbound NFTs, we can use a special Oracle deployed by Metaplex that always rejects transfer events while still allowing other operations like burning. This differs from the Permanent Freeze Delegate Plugin approach since assets remain burnable even though they cannot be transferred.
 
-When creating a soulbound asset using the Oracle Plugin, one would attach the plugin to the asset. This can be done on creation or afterwards. In this example we are using a [default Oracle](/core/external-plugins/oracle#default-oracles-deployed-by-metaplex) that will always reject and has been deployed by Metaplex.
+When creating a soulbound asset using the Oracle Plugin, one would attach the plugin to the asset. This can be done on creation or afterwards. In this example we are using a [default Oracle](/smart-contracts/core/external-plugins/oracle#default-oracles-deployed-by-metaplex) that will always reject and has been deployed by Metaplex.
 
 This effectively creates a permanently soulbound asset that cannot be transferred but burned. In the following code snippet it is shown how:
 
@@ -339,7 +338,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // Step 2: Create and fund a test wallet
@@ -458,7 +457,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // Step 2: Create and fund a test wallet

@@ -76,7 +76,7 @@ Manifest는 여러 트랜잭션을 단일 기본 트랜잭션 ID 하에 연결�
 - ...
 - https://arweave.net/manifestID/9999.json
 
-결정론적 URI 생성에 익숙하지 않다면, 자세한 안내를 위해 [이 가이드](/guides/general/create-deterministic-metadata-with-turbo)를 따를 수 있습니다. 또한 Hybrid 프로그램이 작동하는 데 필요한 [컬렉션](/core/guides/javascript/how-to-create-a-core-collection-with-javascript)과 [자산](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript) 생성에 대한 지침도 찾을 수 있습니다.
+결정론적 URI 생성에 익숙하지 않다면, 자세한 안내를 위해 [이 가이드](/ko/guides/general/create-deterministic-metadata-with-turbo)를 따를 수 있습니다. 또한 Hybrid 프로그램이 작동하는 데 필요한 [컬렉션](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)과 [자산](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript) 생성에 대한 지침도 찾을 수 있습니다.
 
 **참고**: 현재 MPL-Hybrid 프로그램은 제공된 최소 및 최대 URI 인덱스 사이에서 무작위로 숫자를 선택하며 URI가 이미 사용되었는지 확인하지 않습니다. 따라서 스왑은 [생일 역설](https://betterexplained.com/articles/understanding-the-birthday-paradox/)의 영향을 받습니다. 프로젝트가 충분한 스왑 무작위화의 혜택을 받으려면, 무작위로 선택할 수 있는 최소 25만 개의 자산 메타데이터를 준비하고 업로드하는 것을 권장합니다. 사용 가능한 잠재적 자산이 많을수록 좋습니다!
 
@@ -84,7 +84,7 @@ Manifest는 여러 트랜잭션을 단일 기본 트랜잭션 ID 하에 연결�
 
 MPL-Hybrid 에스크로는 NFT의 해제를 상환하거나 지불하는 데 사용할 수 있는 관련 대체 가능한 토큰이 필요합니다. 이는 이미 민팅되어 유통되고 있는 기존 토큰이거나 완전히 새로운 토큰일 수 있습니다!
 
-토큰 생성에 익숙하지 않다면, Solana에서 자신만의 대체 가능한 토큰을 민팅하는 방법을 학습하기 위해 [이 가이드](/guides/javascript/how-to-create-a-solana-token)를 따를 수 있습니다.
+토큰 생성에 익숙하지 않다면, Solana에서 자신만의 대체 가능한 토큰을 민팅하는 방법을 학습하기 위해 [이 가이드](/ko/guides/javascript/how-to-create-a-solana-token)를 따를 수 있습니다.
 
 ## 에스크로 만들기
 

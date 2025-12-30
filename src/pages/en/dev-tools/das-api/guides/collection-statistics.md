@@ -140,7 +140,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## Tips and Best Practices
 
-1. **[Use pagination](/das-api/guides/pagination)** for large collections to get complete data
+1. **[Use pagination](/dev-tools/das-api/guides/pagination)** for large collections to get complete data
 2. **Cache results** to improve performance for frequent queries
 3. **Handle edge cases** like missing metadata or attributes
 4. **Normalize data** for consistent analysis across collections
@@ -148,6 +148,6 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## Further Reading
 
-- [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
-- [Find Compressed NFTs](/das-api/guides/find-compressed-nfts) - Discover and work with compressed NFTs
-- [Search Assets by Multiple Criteria](/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 
+- [Get All Tokens in a Collection](/dev-tools/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
+- [Find Compressed NFTs](/dev-tools/das-api/guides/find-compressed-nfts) - Discover and work with compressed NFTs
+- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 

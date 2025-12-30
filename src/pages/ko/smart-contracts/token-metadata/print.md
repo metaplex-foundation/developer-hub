@@ -85,7 +85,7 @@ description: Token Metadata에서 NFT 에디션을 출력하는 방법을 알아
 
 ## Master Edition NFT 설정하기
 
-출력 가능한 NFT를 만들려면, Token Metadata 프로그램의 [**Create** 명령어](/token-metadata/mint#creating-accounts)의 **Print Supply** 속성을 구성해야 합니다. 이는 이전 섹션에서 본 것처럼 **Master Edition** 계정의 **Max Supply** 속성을 구성할 것입니다. 이 속성은 다음과 같을 수 있습니다:
+출력 가능한 NFT를 만들려면, Token Metadata 프로그램의 [**Create** 명령어](/ko/smart-contracts/token-metadata/mint#creating-accounts)의 **Print Supply** 속성을 구성해야 합니다. 이는 이전 섹션에서 본 것처럼 **Master Edition** 계정의 **Max Supply** 속성을 구성할 것입니다. 이 속성은 다음과 같을 수 있습니다:
 
 - `Zero`: NFT는 출력할 수 없습니다.
 - `Limited(x)`: NFT는 출력 가능하며 `x` 에디션의 고정된 공급량을 갖습니다.

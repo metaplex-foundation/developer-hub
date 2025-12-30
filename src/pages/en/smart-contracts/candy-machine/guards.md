@@ -23,7 +23,7 @@ As you can see, each guard takes care of one responsibility and one responsibili
 
 ## The Candy Guard account
 
-If you remember the content of our [Candy Machine account](/candy-machine/manage#candy-machine-account), you’ll see no signs of guards in there. This is because guards live in another account called the **Candy Guard account** which is created by the **Candy Guard program**.
+If you remember the content of our [Candy Machine account](/smart-contracts/candy-machine/manage#candy-machine-account), you’ll see no signs of guards in there. This is because guards live in another account called the **Candy Guard account** which is created by the **Candy Guard program**.
 
 Each Candy Machine account should typically be associated with its own Candy Guard account which will add a layer of protection to it.
 
@@ -182,24 +182,24 @@ Alright, now that we understand what guards are, let’s see what default guards
 
 In the following list, we’ll provide a short description of each guard with a link pointing to their dedicated page for more advanced reading.
 
-- [**Address Gate**](/candy-machine/guards/address-gate): Restricts the mint to a single address.
-- [**Allow List**](/candy-machine/guards/allow-list): Uses a wallet address list to determine who is allowed to mint.
-- [**Bot Tax**](/candy-machine/guards/bot-tax): Configurable tax to charge invalid transactions.
-- [**End Date**](/candy-machine/guards/end-date): Determines a date to end the mint.
-- [**Freeze Sol Payment**](/candy-machine/guards/freeze-sol-payment): Set the price of the mint in SOL with a freeze period.
-- [**Freeze Token Payment**](/candy-machine/guards/freeze-token-payment): Set the price of the mint in token amount with a freeze period.
-- [**Gatekeeper**](/candy-machine/guards/gatekeeper): Restricts minting via a Gatekeeper Network e.g. Captcha integration.
-- [**Mint Limit**](/candy-machine/guards/mint-limit): Specifies a limit on the number of mints per wallet.
-- [**Nft Burn**](/candy-machine/guards/nft-burn): Restricts the mint to holders of a specified collection, requiring a burn of the NFT.
-- [**Nft Gate**](/candy-machine/guards/nft-gate): Restricts the mint to holders of a specified collection.
-- [**Nft Payment**](/candy-machine/guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
-- [**Redeemed Amount**](/candy-machine/guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
-- [**Sol Payment**](/candy-machine/guards/sol-payment): Set the price of the mint in SOL.
-- [**Start Date**](/candy-machine/guards/start-date): Determines the start date of the mint.
-- [**Third Party Signer**](/candy-machine/guards/third-party-signer): Requires an additional signer on the transaction.
-- [**Token Burn**](/candy-machine/guards/token-burn): Restricts the mint to holders of a specified token, requiring a burn of the tokens.
-- [**Token Gate**](/candy-machine/guards/token-gate): Restricts the mint to holders of a specified token.
-- [**Token Payment**](/candy-machine/guards/token-payment): Set the price of the mint in token amount.
+- [**Address Gate**](/smart-contracts/candy-machine/guards/address-gate): Restricts the mint to a single address.
+- [**Allow List**](/smart-contracts/candy-machine/guards/allow-list): Uses a wallet address list to determine who is allowed to mint.
+- [**Bot Tax**](/smart-contracts/candy-machine/guards/bot-tax): Configurable tax to charge invalid transactions.
+- [**End Date**](/smart-contracts/candy-machine/guards/end-date): Determines a date to end the mint.
+- [**Freeze Sol Payment**](/smart-contracts/candy-machine/guards/freeze-sol-payment): Set the price of the mint in SOL with a freeze period.
+- [**Freeze Token Payment**](/smart-contracts/candy-machine/guards/freeze-token-payment): Set the price of the mint in token amount with a freeze period.
+- [**Gatekeeper**](/smart-contracts/candy-machine/guards/gatekeeper): Restricts minting via a Gatekeeper Network e.g. Captcha integration.
+- [**Mint Limit**](/smart-contracts/candy-machine/guards/mint-limit): Specifies a limit on the number of mints per wallet.
+- [**Nft Burn**](/smart-contracts/candy-machine/guards/nft-burn): Restricts the mint to holders of a specified collection, requiring a burn of the NFT.
+- [**Nft Gate**](/smart-contracts/candy-machine/guards/nft-gate): Restricts the mint to holders of a specified collection.
+- [**Nft Payment**](/smart-contracts/candy-machine/guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
+- [**Redeemed Amount**](/smart-contracts/candy-machine/guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
+- [**Sol Payment**](/smart-contracts/candy-machine/guards/sol-payment): Set the price of the mint in SOL.
+- [**Start Date**](/smart-contracts/candy-machine/guards/start-date): Determines the start date of the mint.
+- [**Third Party Signer**](/smart-contracts/candy-machine/guards/third-party-signer): Requires an additional signer on the transaction.
+- [**Token Burn**](/smart-contracts/candy-machine/guards/token-burn): Restricts the mint to holders of a specified token, requiring a burn of the tokens.
+- [**Token Gate**](/smart-contracts/candy-machine/guards/token-gate): Restricts the mint to holders of a specified token.
+- [**Token Payment**](/smart-contracts/candy-machine/guards/token-payment): Set the price of the mint in token amount.
 
 ## Creating a Candy Machine with guards
 
@@ -387,4 +387,4 @@ API References: [createCandyMachineV2](https://mpl-candy-machine.typedoc.metaple
 
 ## Conclusion
 
-Guards are important components of Candy Machines. They make it easy to configure the minting process whilst allowing anyone to create their own guards for application-specific needs. [On the next page](/candy-machine/guard-groups), we’ll see how we can create even more minting scenarios by using guard groups!
+Guards are important components of Candy Machines. They make it easy to configure the minting process whilst allowing anyone to create their own guards for application-specific needs. [On the next page](/smart-contracts/candy-machine/guard-groups), we’ll see how we can create even more minting scenarios by using guard groups!

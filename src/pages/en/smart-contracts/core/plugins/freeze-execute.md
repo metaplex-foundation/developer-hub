@@ -415,7 +415,7 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 - **Authority constraints**: If authority is delegated to someone else, the original owner cannot unfreeze until authority is revoked
 - The plugin cannot be removed when frozen
 - Authority cannot be reassigned when frozen
-- The plugin works with the [Execute instruction](/core/execute-asset-signing) system
+- The plugin works with the [Execute instruction](/smart-contracts/core/execute-asset-signing) system
 
 
 

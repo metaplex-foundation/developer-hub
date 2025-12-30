@@ -207,7 +207,7 @@ None
 
 ## Off Chain Metadata
 
-One important attribute of the Asset Account is the `URI` attribute that points to a JSON file off-chain. This is used to safely provide additional data whilst not being constrained by the fees involved in storing onchain data. That JSON file [follows a certain standard](/token-metadata/token-standard) that anyone can use to find useful information on tokens.
+One important attribute of the Asset Account is the `URI` attribute that points to a JSON file off-chain. This is used to safely provide additional data whilst not being constrained by the fees involved in storing onchain data. That JSON file [follows a certain standard](/smart-contracts/token-metadata/token-standard) that anyone can use to find useful information on tokens.
 
 Off Chain Metadata can be stored at any publicly accessible location. Popular places to host your json files include;
 

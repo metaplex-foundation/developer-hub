@@ -6,7 +6,7 @@ description: 圧縮NFTの概要を説明します。
 
 {% callout type="note" title="新しいBubblegumバージョン" %}
 
-より多くの柔軟性と機能を可能にするために、[Bubblegum v2](/ja/bubblegum-v2)の使用をお勧めします。
+より多くの柔軟性と機能を可能にするために、[Bubblegum v2](/ja/smart-contracts/bubblegum-v2)の使用をお勧めします。
 
 {% /callout %}
 

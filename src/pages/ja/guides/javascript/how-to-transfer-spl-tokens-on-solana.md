@@ -9,7 +9,7 @@ updated: '06-24-2024'
 
 このガイドでは、Metaplex UmiクライアントラッパーとMPL Toolboxパッケージを利用してSolanaブロックチェーン上でSPLトークンを送信・転送するJavaScript関数を構築する方法を紹介します。
 
-このガイドでは、転送するためのSPLトークンがウォレット内にある必要があります。ウォレット内にない場合は、誰かに転送してもらうか、他の[SPLトークン作成ガイド](/guides/javascript/how-to-create-an-spl-token-on-solana)に従う必要があります。
+このガイドでは、転送するためのSPLトークンがウォレット内にある必要があります。ウォレット内にない場合は、誰かに転送してもらうか、他の[SPLトークン作成ガイド](/ja/guides/javascript/how-to-create-an-spl-token-on-solana)に従う必要があります。
 
 ## 前提条件
 

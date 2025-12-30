@@ -36,8 +36,7 @@ After setting up your environment, let's start by setting up umi.
 While setting up Umi, you can create new wallets for testing, import wallets from you filesystem or even use `walletAdapter` with a UI/frontend.
 For this example, we will be creating a Keypair from a json file (wallet.json) containing a secret key.
 
-We will be using the devnet Aura endpoint.
-To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
+We will be using the Solana Devnet endpoint.
 
 ```ts
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -45,8 +44,8 @@ import { generateSigner, some, none, createSignerFromKeypair, signerIdentity, tr
 import { mplCandyMachine as mplCoreCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
 import * as fs from 'fs';
 
-// We will be using Solana Devnet from the Metaplex Aura data network as the endpoint while also loading the `mplCoreCandyMachine()` plugin.
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+// We will be using Solana Devnet as the endpoint while also loading the `mplCoreCandyMachine()` plugin.
+const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCoreCandyMachine());
 
 // Let's create a Keypair from our wallet json file that contains a secret key, and create a signer based on the created keypair

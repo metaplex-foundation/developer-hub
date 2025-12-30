@@ -8,7 +8,7 @@ The update authority of an asset can update its **Metadata** account using the *
 
 ## Updatable Fields
 
-Note that certain delegated authorities can also update the **Metadata** account of assets as discussed in the "[Delegated Authorities](/token-metadata/delegates)" page.
+Note that certain delegated authorities can also update the **Metadata** account of assets as discussed in the "[Delegated Authorities](/smart-contracts/token-metadata/delegates)" page.
 
 Below is an explanation of all the individual fields available for update in the `UpdateV1` instruction.
 
@@ -95,7 +95,7 @@ is_mutable: Option<bool>,
 
 ### Collection
 
-This attribute enables us to set or clear the collection of the asset. Note that when setting a new collection, the verified boolean must be set to false and [verified using another instruction](/token-metadata/collections).
+This attribute enables us to set or clear the collection of the asset. Note that when setting a new collection, the verified boolean must be set to false and [verified using another instruction](/smart-contracts/token-metadata/collections).
 
 #### Setting A Collection
 
@@ -169,7 +169,7 @@ new_update_authority: Option<PubKey>,
 
 ### Programable RuleSets
 
-This attribute enables us to set or clear the rule set of the asset. This is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
+This attribute enables us to set or clear the rule set of the asset. This is only relevant for [Programmable Non-Fungibles](/smart-contracts/token-metadata/pnfts).
 
 {% dialect-switcher title="Programable RuleSets" %}
 {% dialect title="JavaScript" id="js" %}

@@ -6,8 +6,8 @@ description: JavaScript와 Rust에서 Core Candy Machine과 다양한 설정을 
 
 ## 전제 조건
 
-- [자산 준비](/core-candy-machine/preparing-assets)
-- [Core 컬렉션 생성](/core/collections#creating-a-collection)
+- [자산 준비](/ko/smart-contracts/core-candy-machine/preparing-assets)
+- [Core 컬렉션 생성](/ko/smart-contracts/core/collections#creating-a-collection)
 
 Core Candy Machine 자산을 컬렉션(신규 또는 기존)으로 생성하려면 Core Candy Machine 생성 시 Core 컬렉션을 제공해야 합니다.
 

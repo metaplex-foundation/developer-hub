@@ -262,6 +262,6 @@ Freeze Token Paymentガード内でのNFTのフリーズを停止することが
 
 ## Freeze EscrowsとGuard Groups
 
-様々な[Guard Groups](/candy-machine/guard-groups)内で複数のFreeze Token Paymentガードを使用する場合、Freeze Token PaymentガードとFreeze Escrowアカウント間の関係を理解することが重要です。
+様々な[Guard Groups](/ja/smart-contracts/candy-machine/guard-groups)内で複数のFreeze Token Paymentガードを使用する場合、Freeze Token PaymentガードとFreeze Escrowアカウント間の関係を理解することが重要です。
 
 Freeze EscrowアカウントはDestinationアドレスから派生したPDAです。これは、**複数のFreeze Token Paymentガード**が**同じDestinationアドレス**を使用するよう設定されている場合、すべて**同じFreeze Escrowアカウントを共有**することを意味します。

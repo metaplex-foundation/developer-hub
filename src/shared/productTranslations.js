@@ -19,7 +19,6 @@ export const getProductTranslation = (productKey, locale = 'en') => {
       shank: 'Shank',
       amman: 'Amman',
       sugar: 'Sugar',
-      aura: 'Aura',
       legacyDocumentation: 'Legacy Documentation',
       guides: 'Guides'
     },
@@ -41,7 +40,6 @@ export const getProductTranslation = (productKey, locale = 'en') => {
       shank: 'Shank',
       amman: 'Amman',
       sugar: 'Sugar',
-      aura: 'Aura',
       legacyDocumentation: 'レガシードキュメント',
       guides: 'ガイド'
     },
@@ -63,7 +61,6 @@ export const getProductTranslation = (productKey, locale = 'en') => {
       shank: 'Shank',
       amman: 'Amman',
       sugar: 'Sugar',
-      aura: 'Aura',
       legacyDocumentation: '레거시 문서',
       guides: '가이드'
     }

@@ -96,7 +96,7 @@ pub async fn delegate_plugin_authority() {
 - アセットのアップデート権限者は、委任を取り消してプラグイン権限タイプを`UpdateAuthority`へ戻せます。
 - 委任されたアドレス自身も、自分の委任を取り消して`UpdateAuthority`へ戻せます。
 
-各プラグインの種類は[Plugins概要](/core/plugins)で確認できます。
+各プラグインの種類は[Plugins概要](/ja/smart-contracts/core/plugins)で確認できます。
 
 {% dialect-switcher title="プラグイン権限の取り消し" %}
 {% dialect title="JavaScript" id="js" %}

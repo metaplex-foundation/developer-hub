@@ -44,8 +44,7 @@ Candy Machine 계정에는 사용 가능한 Asset과 교환된 Asset의 수와 �
 
 Candy Machine을 가져오려면, 다음과 같이 `fetchCandyMachine` 함수를 사용할 수 있습니다:
 
-Metaplex Aura Devnet 엔드포인트를 사용할 것입니다.
-Solana와 Eclipse 블록체인에서 Metaplex Aura 네트워크에 액세스하려면 엔드포인트와 API 키를 위해 Aura 앱을 방문할 수 있습니다 [여기](https://aura-app.metaplex.com/).
+Solana Devnet 엔드포인트를 사용할 것입니다.
 
 ```ts
 import {
@@ -55,8 +54,8 @@ import {
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 
 // 다음 두 줄은 이전에 umi를 설정하지 않은 경우에만 필요합니다
-// Aura 데이터 네트워크에서 Solana Devnet을 엔드포인트로 사용합니다
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+// Solana Devnet을 엔드포인트로 사용합니다
+const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCandyMachine());
 
 const candyMachineId = "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9";

@@ -6,8 +6,8 @@ description: Learn to create the MPL 404 Hybrid Escrow account that makes 404 sw
 
 ## Prerequisites
 
-- A MPL Core Collection - [Link](/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
-- Core NFT Assets Minted to the Collection - [Link](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+- A MPL Core Collection - [Link](/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
+- Core NFT Assets Minted to the Collection - [Link](/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
 - An SPL Token created with required token amount. - [Link](/guides/javascript/how-to-create-a-solana-token)
 - An online storage of sequential metadata JSON files at a consistent gateway/uri.
 

@@ -15,7 +15,7 @@ Metaplex Core assets의 오프체인 JSON 메타데이터는 Metaplex Token Meta
 
 {% totem-accordion title="Image" %}
 
-속성은 [Attributes Plugin](/core/plugins/attribute)을 사용하여 대안적으로 온체인에 저장될 수 있습니다.
+속성은 [Attributes Plugin](/ko/smart-contracts/core/plugins/attribute)을 사용하여 대안적으로 온체인에 저장될 수 있습니다.
 ```json
 {
   "name": "Number #0001",
@@ -185,7 +185,7 @@ HTML Assets에 대한 다음 예시는 보안 위험으로 인해 현재 지갑�
 
 다음은 다양한 필드에 대한 설명입니다.
 
-Metaplex Token Metadata에서 알던 일부 필드가 누락되어 있다면 아마도 더 이상 사용되지 않는 것입니다. 예를 들어 `creators`는 이제 [Royalties Plugin](/core/plugins/royalties)의 일부입니다.
+Metaplex Token Metadata에서 알던 일부 필드가 누락되어 있다면 아마도 더 이상 사용되지 않는 것입니다. 예를 들어 `creators`는 이제 [Royalties Plugin](/ko/smart-contracts/core/plugins/royalties)의 일부입니다.
 
 ### 필수 필드
 
@@ -211,7 +211,7 @@ Metaplex Token Metadata에서 알던 일부 필드가 누락되어 있다면 아
 - **external_url**: NFT의 외부 웹사이트 링크
   - 예시: `https://www.myproject.io/nft/123`
 
-- **attributes**: 특성과 그 값의 배열. 이들은 [Attributes Plugin](/core/plugins/attribute)을 사용하여 대안적으로 온체인에 저장될 수 있습니다
+- **attributes**: 특성과 그 값의 배열. 이들은 [Attributes Plugin](/ko/smart-contracts/core/plugins/attribute)을 사용하여 대안적으로 온체인에 저장될 수 있습니다
   - 예시:
     ```json
     {

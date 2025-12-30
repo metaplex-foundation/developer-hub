@@ -313,6 +313,6 @@ const collectionAssets = await getAllAssetsByCursor('COLLECTION_ADDRESS')
 
 ## 추가 자료
 
-- [컬렉션의 모든 토큰 가져오기](/das-api/guides/get-collection-nfts) - 특정 컬렉션에서 모든 자산 검색
-- [기준별 자산 검색](/das-api/guides/search-by-criteria) - 고급 검색 및 필터링
-- [압축된 NFT 찾기](/das-api/guides/find-compressed-nfts) - 압축된 NFT 작업
+- [컬렉션의 모든 토큰 가져오기](/ko/dev-tools/das-api/guides/get-collection-nfts) - 특정 컬렉션에서 모든 자산 검색
+- [기준별 자산 검색](/ko/dev-tools/das-api/guides/search-by-criteria) - 고급 검색 및 필터링
+- [압축된 NFT 찾기](/ko/dev-tools/das-api/guides/find-compressed-nfts) - 압축된 NFT 작업

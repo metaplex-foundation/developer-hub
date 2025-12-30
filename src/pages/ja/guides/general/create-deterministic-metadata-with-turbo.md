@@ -31,7 +31,7 @@ npm i @ardrive/turbo-sdk
 
 この例では、決定論的な方法でメタデータをアップロードする方法を示します。そのためには、開始前にすべてのアセットを準備する必要があります。
 
-メタデータを生成するには、[これらの方法のいずれか](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators)を使用し、0から始まる増分命名規則に従ってメタデータを保存します：
+メタデータを生成するには、[これらの方法のいずれか](/ja/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators)を使用し、0から始まる増分命名規則に従ってメタデータを保存します：
 
 ```
 metadata/
@@ -41,7 +41,7 @@ metadata/
 ├─ ...
 ```
 
-**注意**: メタデータを作成する際は、[NFTの適切なJSONスキーマ](/token-metadata/token-standard#the-non-fungible-standard)に従うことを確認してください！
+**注意**: メタデータを作成する際は、[NFTの適切なJSONスキーマ](/ja/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)に従うことを確認してください！
 
 ## Turboのセットアップ
 
@@ -64,7 +64,6 @@ const turbo = TurboFactory.authenticated({
 ```
 
 **注意**: この例では、devnetで動作するように環境を設定したいため、`gatewayUrl`、`paymentServiceConfig`、`uploadServiceConfig`を明示的に提供しています。メインネットでの使用では、これらのフィールドを空のままにすることができ、Turboはデフォルトでメインネットのエンドポイントを使用します。
-SolanaとEclipseブロックチェーンでMetaplex Auraネットワークにアクセスするには、[こちら](https://aura-app.metaplex.com/)のAura AppでエンドポイントとAPIキーを取得できます。
 
 ## メタデータのアップロード
 

@@ -735,7 +735,7 @@ pub async fn add_oracle_plugin_to_collection() {
 {% /dialect-switcher %}
 
 ## Default Oracles deployed by Metaplex
-In some rare cases like [Soulbound NFT](/core/guides/create-soulbound-nft-asset) it might be useful to have Oracles that always Deny or Approve a lifecycle event. For those the following Oracles have been deployed and can be used by anyone:
+In some rare cases like [Soulbound NFT](/smart-contracts/core/guides/create-soulbound-nft-asset) it might be useful to have Oracles that always Deny or Approve a lifecycle event. For those the following Oracles have been deployed and can be used by anyone:
 
 - **Transfer Oracle**: Always denies transferring. `AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
 

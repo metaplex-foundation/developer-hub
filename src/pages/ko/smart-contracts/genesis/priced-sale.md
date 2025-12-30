@@ -18,7 +18,7 @@ Priced Sale은 다음과 같은 사전 예치 토큰 런칭을 가능하게 합�
 - **펀딩 라운드**: 통제된 배포로 자금 수집
 - **공정 런칭**: 먼저 모든 예치금을 수집한 다음 맞춤 기준에 따라 토큰 배포
 
-일반적인 Genesis 개념은 [개요](/smart-contracts/genesis)를 참조하거나 대안적인 런칭 메커니즘인 [Launch Pool](/smart-contracts/genesis/launch-pool)을 살펴보세요.
+일반적인 Genesis 개념은 [개요](/ko/smart-contracts/genesis)를 참조하거나 대안적인 런칭 메커니즘인 [Launch Pool](/ko/smart-contracts/genesis/launch-pool)을 살펴보세요.
 
 {% callout type="note" %}
 더 자세한 문서가 곧 제공될 예정입니다.

@@ -4,7 +4,7 @@ metaTitle: Programmable NFTs | Candy Machine
 description: Explains how to mint Programmable NFTs from candy machines.
 ---
 
-Version `1.7` of Token Metadata introduced a [new type of asset class called Programmable NFTs](/token-metadata/pnfts) allowing, amongst other things, creators to enforce royalties on secondary sales.
+Version `1.7` of Token Metadata introduced a [new type of asset class called Programmable NFTs](/smart-contracts/token-metadata/pnfts) allowing, amongst other things, creators to enforce royalties on secondary sales.
 
 Since version `1.0` of Candy Machine Core and version `1.0` of Candy Guard, it is now possible to **mint Programmable NFTs from candy machines** and even update the token standard of existing candy machines.
 
@@ -18,7 +18,7 @@ Also, note that some optional accounts may be required depending on the token st
 
 Additionally, the `collectionDelegateRecord` account should now refer to the new [Metadata Delegate Record](https://docs.rs/mpl-token-metadata/latest/mpl_token_metadata/accounts/struct.MetadataDelegateRecord.html) from Token Metadata.
 
-You may want to read the "[Create Candy Machines](/candy-machine/manage#create-candy-machines)" section of this documentation for more details but here are some examples on how to use our SDKs to create a new Candy Machine that mints Programmable NFTs.
+You may want to read the "[Create Candy Machines](/smart-contracts/candy-machine/manage#create-candy-machines)" section of this documentation for more details but here are some examples on how to use our SDKs to create a new Candy Machine that mints Programmable NFTs.
 
 {% dialect-switcher title="Create a new PNFT Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
@@ -43,7 +43,7 @@ API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/function
 
 It is possible to update the token standard of existing Candy Machines via the new `setTokenStandard` instruction. When calling this instruction on a Candy Machine `V1`, it will also upgrade the Candy Machine to `V2` and store the token standard in the account data.
 
-You may want to read the "[Update Token Standard](/candy-machine/manage#update-token-standard)" section of this documentation for more details but here are some examples on how to use our SDKs to update the token standard of an existing Candy Machine to Programmable NFTs.
+You may want to read the "[Update Token Standard](/smart-contracts/candy-machine/manage#update-token-standard)" section of this documentation for more details but here are some examples on how to use our SDKs to update the token standard of an existing Candy Machine to Programmable NFTs.
 
 {% dialect-switcher title="Change the Token Standard of a Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
@@ -67,7 +67,7 @@ API References: [setTokenStandard](https://mpl-candy-machine.typedoc.metaplex.co
 
 Additionally, a new `setCollectionV2` instruction has been added to support setting a collection that is compatible with Programmable NFTs. This instruction also works with regular NFTs and deprecates the `setCollection` instruction.
 
-Here as well, you can read more about it in the "[Update Collection](/candy-machine/manage#update-collection)" section of this documentation.
+Here as well, you can read more about it in the "[Update Collection](/smart-contracts/candy-machine/manage#update-collection)" section of this documentation.
 
 {% dialect-switcher title="Update the collection of your Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
@@ -93,7 +93,7 @@ API References: [setCollectionV2](https://mpl-candy-machine.typedoc.metaplex.com
 
 The `mint` instruction of both the Candy Machine Core and the Candy Guard programs has been updated to support minting Programmable NFTs. This new instruction is called `mintV2` and it is similar to the `mint` instruction, but requires additional accounts to be passed in. Here as well, the new `mintV2` instructions can be used to mint regular NFTs and, therefore, they deprecate the existing `mint` instructions.
 
-The entire "[Minting](/candy-machine/mint)" page has been updated to use the new `mintV2` instructions but here's a quick example of how to use them with Programmable NFTs.
+The entire "[Minting](/smart-contracts/candy-machine/mint)" page has been updated to use the new `mintV2` instructions but here's a quick example of how to use them with Programmable NFTs.
 
 {% dialect-switcher title="Mint from your Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
@@ -133,6 +133,6 @@ The guards affected by these changes are:
 
 You may find the following resources about Programmable NFTs and Candy Machines useful:
 
-- [Programmable NFTs Guide](/token-metadata/pnfts)
+- [Programmable NFTs Guide](/smart-contracts/token-metadata/pnfts)
 - [Candy Machine Core Program](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core)
 - [Candy Guard Program](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)

@@ -4,7 +4,7 @@ metaTitle: Master Edition Plugin | Core
 description: MPL Core Master Edition Plugin에 대해 알아보세요.
 ---
 
-Master Edition Plugin은 Core Collection과 함께 사용되어 [Editions](/core/plugins/edition)를 그룹화하고, 출처를 제공하며, 최대 에디션 공급량을 저장하는 `Authority Managed` 플러그인입니다. Edition Plugin과 함께 이러한 Edition들은 [Metaplex Token Metadata의 Edition 개념](/token-metadata/print)과 비교할 수 있습니다.
+Master Edition Plugin은 Core Collection과 함께 사용되어 [Editions](/ko/smart-contracts/core/plugins/edition)를 그룹화하고, 출처를 제공하며, 최대 에디션 공급량을 저장하는 `Authority Managed` 플러그인입니다. Edition Plugin과 함께 이러한 Edition들은 [Metaplex Token Metadata의 Edition 개념](/token-metadata/print)과 비교할 수 있습니다.
 
 Master Edition Plugin은 다음과 같은 영역에서 작동합니다:
 

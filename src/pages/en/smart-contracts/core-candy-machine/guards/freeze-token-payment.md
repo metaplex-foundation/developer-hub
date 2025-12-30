@@ -576,7 +576,7 @@ With that in mind, here is the exhaustive list of ways to stop freezing Assets a
 
 ## Freeze Escrows and Guard Groups
 
-When using multiple Freeze Token Payment guards within various [Guard Groups](/core-candy-machine/guard-groups), it is important to understand the relationship between a Freeze Token Payment guard and a Freeze Escrow account.
+When using multiple Freeze Token Payment guards within various [Guard Groups](/smart-contracts/core-candy-machine/guard-groups), it is important to understand the relationship between a Freeze Token Payment guard and a Freeze Escrow account.
 
 The Freeze Escrow account is a PDA derived from a Destination address. This means that if **multiple Freeze Token Payment guards** are configured to use the **same Destination address**, they will all **share the same Freeze Escrow account**.
 

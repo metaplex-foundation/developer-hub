@@ -14,13 +14,13 @@ Metaplex SDKを使用して、Solana上でファンジブルトークン（SPL�
 
 このセクションでは、一般的なトークン操作について初心者向けのガイドを提供します：
 
-- **[トークンをローンチする](/tokens/launch-token)** - カスタムメタデータを持つ新しいファンジブルトークンを作成
-- **[トークンを作成する](/tokens/create-a-token)** - カスタムメタデータを持つ新しいファンジブルトークンを作成
-- **[トークンデータを読み取る](/tokens/read-token)** - ブロックチェーンまたはDAS APIからトークン情報を取得
-- **[トークンをミントする](/tokens/mint-tokens)** - 追加のトークンをミントして供給量を増加
-- **[トークンを転送する](/tokens/transfer-a-token)** - ウォレット間でトークンを転送
-- **[トークンメタデータを更新する](/tokens/update-token)** - トークンの名前、シンボル、または画像を更新
-- **[トークンをバーンする](/tokens/burn-tokens)** - 流通からトークンを永久に削除
+- **[トークンをローンチする](/ja/tokens/launch-token)** - カスタムメタデータを持つ新しいファンジブルトークンを作成
+- **[トークンを作成する](/ja/tokens/create-a-token)** - カスタムメタデータを持つ新しいファンジブルトークンを作成
+- **[トークンデータを読み取る](/ja/tokens/read-token)** - ブロックチェーンまたはDAS APIからトークン情報を取得
+- **[トークンをミントする](/ja/tokens/mint-tokens)** - 追加のトークンをミントして供給量を増加
+- **[トークンを転送する](/ja/tokens/transfer-a-token)** - ウォレット間でトークンを転送
+- **[トークンメタデータを更新する](/ja/tokens/update-token)** - トークンの名前、シンボル、または画像を更新
+- **[トークンをバーンする](/ja/tokens/burn-tokens)** - 流通からトークンを永久に削除
 
 ## 前提条件
 
@@ -46,7 +46,7 @@ npm install -g @metaplex-foundation/cli
 mplx toolbox tm create --wizard --keypair <ウォレットファイルへのパス> --rpc-url <RPC URL>
 ```
 
-詳細については、[CLIドキュメント](/dev-tools/cli)をご覧ください。
+詳細については、[CLIドキュメント](/ja/dev-tools/cli)をご覧ください。
 
 ### JavaScript/TypeScriptを使用する
 
@@ -56,12 +56,12 @@ mplx toolbox tm create --wizard --keypair <ウォレットファイルへのパ�
 npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/mpl-toolbox @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
 ```
 
-その後、[トークンを作成する](/tokens/create-a-token)ガイドに従って、最初のファンジブルトークンを作成してください。
+その後、[トークンを作成する](/ja/tokens/create-a-token)ガイドに従って、最初のファンジブルトークンを作成してください。
 
 ## さらに詳しく
 
 より高度なトークン機能については、以下をご覧ください：
 
-- [Metaplex CLI](/dev-tools/cli) - トークン操作のためのコマンドラインツール
-- [Token Metadataプログラム](/token-metadata) - Token Metadataプログラムの完全なドキュメント
+- [Metaplex CLI](/ja/dev-tools/cli) - トークン操作のためのコマンドラインツール
+- [Token Metadataプログラム](/ja/smart-contracts/token-metadata) - Token Metadataプログラムの完全なドキュメント
 - [MPL Toolbox](https://github.com/metaplex-foundation/mpl-toolbox) - 低レベルトークン操作

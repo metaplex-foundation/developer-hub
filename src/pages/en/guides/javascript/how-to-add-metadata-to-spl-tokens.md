@@ -84,7 +84,7 @@ addMetadata();
 
 ## Setting up Umi
 
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer differently you can check out the [**Connecting to Umi**](/umi/getting-started) guide.
+This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer differently you can check out the [**Connecting to Umi**](/dev-tools/umi/getting-started) guide.
 
 You can place the Umi instantiation code inside or outside the code blocks, but to reduce code duplication, we will keep it outside.
 
@@ -251,4 +251,4 @@ addMetadata();
 
 ## What's Next?
 
-This guide helped you to add metadata to a Solana Token, from here you can head over to the [Token Metadata Program](/token-metadata) and check out helper functions that initialize and add metadata to your token in one step, working with non-fungibles and other various ways to interact with the Token Metadata program.
+This guide helped you to add metadata to a Solana Token, from here you can head over to the [Token Metadata Program](/smart-contracts/token-metadata) and check out helper functions that initialize and add metadata to your token in one step, working with non-fungibles and other various ways to interact with the Token Metadata program.

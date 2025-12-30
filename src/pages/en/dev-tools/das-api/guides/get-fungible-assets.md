@@ -263,14 +263,14 @@ console.log(`Creator tokens: ${creatorTokens.items.length}`)
 
 ## Tips and Best Practices
 
-1. **Use Interface Filter**: see [Search Assets by Criteria](/das-api/guides/search-by-criteria) for more information.
-2. **Enable Show Fungible**: Use `showFungible: true` in display options to get complete token information as shown in [Display Options](/das-api/display-options).
+1. **Use Interface Filter**: see [Search Assets by Criteria](/dev-tools/das-api/guides/search-by-criteria) for more information.
+2. **Enable Show Fungible**: Use `showFungible: true` in display options to get complete token information as shown in [Display Options](/dev-tools/das-api/display-options).
 3. **Consider Decimals**: Check the `decimals` field to properly format token amounts.
 4. **Cache Results**: Token balances change frequently, but token metadata is relatively stable.
 
 ## Related Guides
 
-- [Get All Tokens in a Wallet](/das-api/guides/get-wallet-tokens)
-- [Get NFTs by Owner](/das-api/guides/get-nfts-by-owner)
-- [Search Assets by Multiple Criteria](/das-api/guides/search-by-criteria)
-- [Analyze Collection Statistics](/das-api/guides/collection-statistics) 
+- [Get All Tokens in a Wallet](/dev-tools/das-api/guides/get-wallet-tokens)
+- [Get NFTs by Owner](/dev-tools/das-api/guides/get-nfts-by-owner)
+- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria)
+- [Analyze Collection Statistics](/dev-tools/das-api/guides/collection-statistics) 

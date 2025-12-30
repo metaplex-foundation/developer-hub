@@ -20,7 +20,7 @@ CoreはMetaplexによって作成された最新で最も先進的なデジタ�
 - プラグイン：Coreは、Core AssetsとCollectionsが追加の状態を保存し、ライフサイクル検証を提供し、拡張された動的体験を提供することを可能にする先進的なプラグインシステムを提供します。ここでの可能性は無限です！
 - コスト：Bubblegumほど安価ではありませんが、Coreは最適化されたアカウント構造のため、Token Metadataと比較して作成とミントが**大幅に安価**です。
 
-[CoreでNFTを作成](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+[CoreでNFTを作成](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
 
 ## Token Metadata NFT/pNFT
 
@@ -32,7 +32,7 @@ Token Metadataは、すべてを始めたSolana NFT標準です。2021年に作�
 - エコシステムサポート：NFTとpNFTは、MagicEden、Tensor、Phantom、SolflareなどのマーケットプレイスとウォレットによってSolana全体でサポートされています。
 - SPLトークンベース：Token Metadata NFTs/pNFTsは、SolanaのSPLトークンプログラムに基づいています。
 
-[Token MetadataでNFT/pNFTを作成](/token-metadata/guides/javascript/create-an-nft)
+[Token MetadataでNFT/pNFTを作成](/ja/smart-contracts/token-metadata/guides/javascript/create-an-nft)
 
 ## Bubblegum cNFT
 
@@ -43,4 +43,4 @@ Token Metadataは、すべてを始めたSolana NFT標準です。2021年に作�
 - デプロイが安価：マークル木ベースの製品であるため、木のデプロイが安価で、必要に応じて数百万のNFTを保存できます。
 - 大量エアドロップ：木が作成されると、木のストレージの代金は既に支払われているため、cNFTのエアドロップコストはほぼゼロに近くなります。
 
-[BubblegumでSolanaに1,000,000個のNFTを作成](/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)
+[BubblegumでSolanaに1,000,000個のNFTを作成](/ja/smart-contracts/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)

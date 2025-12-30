@@ -49,5 +49,5 @@ Retrieve all fungible tokens owned by a wallet address using the DAS API.
 ## Related Guides
 
 - [Create a Token](/tokens/create-a-token)
-- [DAS API Overview](/das-api)
-- [Get Fungible Assets by Owner](/das-api/guides/get-fungible-assets)
+- [DAS API Overview](/dev-tools/das-api)
+- [Get Fungible Assets by Owner](/dev-tools/das-api/guides/get-fungible-assets)

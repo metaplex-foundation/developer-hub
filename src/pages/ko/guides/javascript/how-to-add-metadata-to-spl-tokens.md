@@ -251,4 +251,4 @@ addMetadata();
 
 ## 다음 단계는?
 
-이 가이드는 Solana 토큰에 메타데이터를 추가하는 데 도움을 주었습니다. 여기서 [Token Metadata Program](/token-metadata)로 이동하여 한 번에 토큰을 초기화하고 메타데이터를 추가하는 헬퍼 함수, non-fungible 작업 및 Token Metadata 프로그램과 상호작용하는 다양한 방법을 확인할 수 있습니다.
+이 가이드는 Solana 토큰에 메타데이터를 추가하는 데 도움을 주었습니다. 여기서 [Token Metadata Program](/ko/smart-contracts/token-metadata)로 이동하여 한 번에 토큰을 초기화하고 메타데이터를 추가하는 헬퍼 함수, non-fungible 작업 및 Token Metadata 프로그램과 상호작용하는 다양한 방법을 확인할 수 있습니다.

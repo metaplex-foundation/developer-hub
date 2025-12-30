@@ -111,14 +111,14 @@ curl -X POST <ENDPOINT> \
 
 ## Tips and Best Practices
 
-1. **Use [Pagination](/das-api/guides/pagination)** for large datasets
-2. **Include [Display Options](/das-api/display-options)** to get additional metadata
+1. **Use [Pagination](/dev-tools/das-api/guides/pagination)** for large datasets
+2. **Include [Display Options](/dev-tools/das-api/display-options)** to get additional metadata
 3. **Sort results** to present data in meaningful ways
 4. **Handle empty results** gracefully when collections are empty
 5. **Verify collection addresses** before querying
 
 ## Further Reading
 
-- [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
-- [Get NFTs by Owner](/das-api/guides/get-nfts-by-owner) - Find all NFTs owned by a wallet
-- [Search Assets by Multiple Criteria](/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 
+- [Get All Tokens in a Collection](/dev-tools/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
+- [Get NFTs by Owner](/dev-tools/das-api/guides/get-nfts-by-owner) - Find all NFTs owned by a wallet
+- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 

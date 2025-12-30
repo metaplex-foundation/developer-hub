@@ -30,9 +30,9 @@ Owner managed plugins are plugins that can only be added to an Core Asset if the
 
 Owner Managed Plugins include but are not limited to:
 
-- [Transfer Delegate](/core/plugins/transfer-delegate) (market places, games)
-- [Freeze Delegate](/core/plugins/freeze-delegate) (market places, staking, games)
-- [Burn Delegate](/core/plugins/burn-delegate) (games)
+- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) (market places, games)
+- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) (market places, staking, games)
+- [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) (games)
 
 If an Owner Managed plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `owner`.
 
@@ -44,9 +44,9 @@ Authority managed plugins are plugins that the authority of the MPL Core Asset o
 
 Authority manages plugins include but are not limited to:
 
-- [Royalties](/core/plugins/royalties)
-- [Update Delegate](/core/plugins/update-delegate)
-- [Attribute](/core/plugins/attribute)
+- [Royalties](/smart-contracts/core/plugins/royalties)
+- [Update Delegate](/smart-contracts/core/plugins/update-delegate)
+- [Attribute](/smart-contracts/core/plugins/attribute)
 
 If an Authority Managed plugin is added to an Asset/Collection without an authority argument present then the plugin will default to the authority type of `update authority`.
 
@@ -56,15 +56,15 @@ If an Authority Managed plugin is added to an Asset/Collection without an author
 
 Permanent Plugins include but are not limited to:
 
-- [Permanent Transfer Delegate](/core/plugins/permanent-transfer-delegate)
-- [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate)
-- [Permanent Burn Delegate](/core/plugins/permanent-burn-delegate)
+- [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate)
+- [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)
+- [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)
 
 If an Permanent Plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `update authority`.
 
 ## Collection Plugins
 
-Collection Plugins are plugins that are added at the collection level can have a collection-wide effect. This is particularly useful for royalties because you can assign the [royalties plugin](/core/plugins/royalties) to the Collection Asset and all Assets in that collection will now reference that plugin.
+Collection Plugins are plugins that are added at the collection level can have a collection-wide effect. This is particularly useful for royalties because you can assign the [royalties plugin](/smart-contracts/core/plugins/royalties) to the Collection Asset and all Assets in that collection will now reference that plugin.
 
 Collections only have access to `Permanent Plugins` and `Authority Managed Plugins`.
 
@@ -83,15 +83,15 @@ In the above case, regular MPL Core Asset sales from the collection will retain 
 
 | Plugin                                                                   | Owner Managed | Authority Managed | Permanent |
 | ------------------------------------------------------------------------ | ------------- | ----------------- | --------- |
-| [Transfer Delegate](/core/plugins/transfer-delegate)                     | ✅            |                   |           |
-| [Freeze Delegate](/core/plugins/freeze-delegate)                         | ✅            |                   |           |
-| [Burn Delegate](/core/plugins/burn-delegate)                             | ✅            |                   |           |
-| [Royalties](/core/plugins/royalties)                                     |               | ✅                |           |
-| [Update Delegate](/core/plugins/update-delegate)                         |               | ✅                |           |
-| [Attribute](/core/plugins/attribute)                                     |               | ✅                |           |
-| [Permanent Transfer Delegate](/core/plugins/permanent-transfer-delegate) |               |                   | ✅        |
-| [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate)     |               |                   | ✅        |
-| [Permanent Burn Delegate](/core/plugins/permanent-burn-delegate)         |               |                   | ✅        |
+| [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate)                     | ✅            |                   |           |
+| [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate)                         | ✅            |                   |           |
+| [Burn Delegate](/smart-contracts/core/plugins/burn-delegate)                             | ✅            |                   |           |
+| [Royalties](/smart-contracts/core/plugins/royalties)                                     |               | ✅                |           |
+| [Update Delegate](/smart-contracts/core/plugins/update-delegate)                         |               | ✅                |           |
+| [Attribute](/smart-contracts/core/plugins/attribute)                                     |               | ✅                |           |
+| [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate) |               |                   | ✅        |
+| [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)     |               |                   | ✅        |
+| [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)         |               |                   | ✅        |
 
 ## Plugins and Lifecycle Events
 

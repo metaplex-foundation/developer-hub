@@ -19,17 +19,17 @@ Core currently charges a very small fee of 0.0015 SOL per Asset mint to the call
 
 ## How to create a Soulbound Asset?
 
-The Core Standard allows you to create Soulbound Assets. To achieve this either the [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate) plugin or the [Oracle Plugin](/core/external-plugins/oracle) can be used. 
+The Core Standard allows you to create Soulbound Assets. To achieve this either the [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) plugin or the [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) can be used. 
 
-To learn more check out the [Soulbound Assets Guide](/core/guides/create-soulbound-nft-asset)!
+To learn more check out the [Soulbound Assets Guide](/smart-contracts/core/guides/create-soulbound-nft-asset)!
 
 ## How to set an Asset to be Immutable?
 
-There are multiple levels of "immutability" in Core. You can find more information and how to implement it in [this guide](/core/guides/immutability).
+There are multiple levels of "immutability" in Core. You can find more information and how to implement it in [this guide](/smart-contracts/core/guides/immutability).
 
 ## What are the differences between Metaplex Token Metadata and Core?
 
-Core is an entirely new standard designed specifically for NFTs, hence there are several notable differences. For example Core is cheaper, requires less Compute Units and should be easier to work with from a developer perspective. Have a look at the [differences](/core/tm-differences) page for details.
+Core is an entirely new standard designed specifically for NFTs, hence there are several notable differences. For example Core is cheaper, requires less Compute Units and should be easier to work with from a developer perspective. Have a look at the [differences](/smart-contracts/core/tm-differences) page for details.
 
 ## Does Core Support Editions?
-Yes! Using the [Edition](/core/plugins/edition) and [Master Edition](/core/plugins/master-edition) Plugins. You can find more information in the ["How to print Editions" Guide](/core/guides/print-editions).
+Yes! Using the [Edition](/smart-contracts/core/plugins/edition) and [Master Edition](/smart-contracts/core/plugins/master-edition) Plugins. You can find more information in the ["How to print Editions" Guide](/smart-contracts/core/guides/print-editions).

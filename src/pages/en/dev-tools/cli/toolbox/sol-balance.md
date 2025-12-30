@@ -54,6 +54,6 @@ Balance: 1.5 SOL
 
 ## Related Commands
 
-- [SOL Transfer](/cli/toolbox/sol-transfer) - Transfer SOL between addresses
-- [Token Transfer](/cli/toolbox/token-transfer) - Transfer tokens
-- [Airdrop](/cli/toolbox/sol-airdrop) - Request SOL airdrop (devnet only) 
+- [SOL Transfer](/dev-tools/cli/toolbox/sol-transfer) - Transfer SOL between addresses
+- [Token Transfer](/dev-tools/cli/toolbox/token-transfer) - Transfer tokens
+- [Airdrop](/dev-tools/cli/toolbox/sol-airdrop) - Request SOL airdrop (devnet only) 

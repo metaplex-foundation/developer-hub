@@ -101,7 +101,7 @@ pub fn create_core_collection(ctx: Context<CreateCollection>, args: CreateCollec
 }
 ```
 
-プラグイン/外部プラグインもベクタで組み立てて渡せます。詳細は[プラグイン](/core/plugins)参照。
+プラグイン/外部プラグインもベクタで組み立てて渡せます。詳細は[プラグイン](/ja/smart-contracts/core/plugins)参照。
 
 ## クライアント（テスト）
 

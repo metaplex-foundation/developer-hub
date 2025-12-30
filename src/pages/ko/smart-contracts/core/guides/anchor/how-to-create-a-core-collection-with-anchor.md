@@ -111,7 +111,7 @@ pub struct CreateCollectionArgs {
 
 이 `CreateCollectionArgs` 구조체에서 **name** 및 **uri** 필드가 입력으로 제공되며, 이는 **Core 컬렉션**을 생성하는 데 사용되는 `CreateCollectionV2CpiBuilder` 명령어의 인수 역할을 합니다.
 
-**참고**: 이것은 Anchor 중심 가이드이므로 여기서 Uri를 생성하는 방법은 포함하지 않습니다. 확실하지 않다면 [이 예제](/core/guides/javascript/how-to-create-a-core-collection-with-javascript#creating-the-metadata-for-the-collection)를 참조하세요.
+**참고**: 이것은 Anchor 중심 가이드이므로 여기서 Uri를 생성하는 방법은 포함하지 않습니다. 확실하지 않다면 [이 예제](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript#creating-the-metadata-for-the-collection)를 참조하세요.
 
 ### Account 구조체 생성
 
@@ -254,7 +254,7 @@ CreateCollectionV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info
   .invoke()?;
 ```
 
-**참고**: 사용할 필드와 플러그인에 대해 확실하지 않다면 [문서](/core/plugins)를 참조하세요!
+**참고**: 사용할 필드와 플러그인에 대해 확실하지 않다면 [문서](/ko/smart-contracts/core/plugins)를 참조하세요!
 
 ## 클라이언트
 

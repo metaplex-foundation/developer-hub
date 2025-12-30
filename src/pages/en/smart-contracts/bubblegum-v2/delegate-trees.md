@@ -6,7 +6,7 @@ description: Learn how to delegate Merkle Trees on Bubblegum.
 
 Similarly to how the owner of a Compressed NFT can approve a Delegate Authority, the creator of a Bubblegum Tree can also approve another account to perform actions on their behalf. {% .lead %}
 
-Once a Delegate Authority is approved for a Bubblegum Tree, it will be able to [mint Compressed NFTs](/bubblegum-v2/mint-cnfts) on behalf of the creator. Note that this is only relevant for private trees, since anyone can mint on public trees.
+Once a Delegate Authority is approved for a Bubblegum Tree, it will be able to [mint Compressed NFTs](/smart-contracts/bubblegum-v2/mint-cnfts) on behalf of the creator. Note that this is only relevant for private trees, since anyone can mint on public trees.
 
 ## Approving a Delegate Authority for a Tree
 

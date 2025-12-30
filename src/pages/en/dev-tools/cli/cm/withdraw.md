@@ -47,7 +47,7 @@ Optional Flags that you can use:
 
 ## Related Commands
 
-- [`mplx cm fetch`](/cli/cm/fetch) - Check status before withdrawal
-- [`mplx cm create`](/cli/cm/create) - Create new candy machines
-- [`mplx cm validate`](/cli/cm/validate) - Validate before withdrawal
+- [`mplx cm fetch`](/dev-tools/cli/cm/fetch) - Check status before withdrawal
+- [`mplx cm create`](/dev-tools/cli/cm/create) - Create new candy machines
+- [`mplx cm validate`](/dev-tools/cli/cm/validate) - Validate before withdrawal
 - [`solana balance`](https://docs.solana.com/cli) - Check recovered balance

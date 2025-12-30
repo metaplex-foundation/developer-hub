@@ -17,7 +17,7 @@ Returns the list of assets given an authority address.
 | `page`             |          | The index of the "page" to retrieve.       |
 | `before`           |          | Retrieve assets before the specified ID.   |
 | `after`            |          | Retrieve assets after the specified ID.    |
-| `options`          |          | Display options object. See [Display Options](/das-api/display-options) for details. |
+| `options`          |          | Display options object. See [Display Options](/dev-tools/das-api/display-options) for details. |
 
 ## Playground
 

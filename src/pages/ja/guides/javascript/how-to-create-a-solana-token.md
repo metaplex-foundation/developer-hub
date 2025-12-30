@@ -96,7 +96,7 @@ umi変数とコードブロックは`createAndMintTokens()`関数の内外のど
 ### 新しいウォレットの生成
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplCore())
   .use(irysUploader())
 
@@ -115,7 +115,7 @@ await umi.rpc.airdrop(umi.identity.publicKey)
 ### ローカルに保存されている既存のウォレットを使用
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplTokenMetadata())
   .use(mplToolbox())
   .use(irysUploader())
@@ -331,7 +331,7 @@ import fs from 'fs'
 import path from 'path'
 
 const createAndMintTokens = async () => {
-  const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+  const umi = createUmi("https://api.devnet.solana.com")
     .use(mplTokenMetadata())
     .use(irysUploader())
 

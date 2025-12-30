@@ -4,7 +4,7 @@ metaTitle: guard | Sugar
 description: guardコマンド。
 ---
 
-`guard`コマンドは、Candy Machineの[ガード](/candy-machine/guards)設定を管理するために使用されます。
+`guard`コマンドは、Candy Machineの[ガード](/ja/smart-contracts/candy-machine/guards)設定を管理するために使用されます。
 
 Sugar設定ファイルでガード設定を完了したら、以下を使用してCandy Guardを追加できます：
 

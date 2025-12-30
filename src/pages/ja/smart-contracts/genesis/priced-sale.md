@@ -18,7 +18,7 @@ Priced Saleは以下のような事前預金トークンローンチを可能に
 - **ファンディングラウンド**：制御された配布で資金を収集
 - **フェアローンチ**：まずすべての預金を集めてから、カスタム基準に基づいてトークンを配布
 
-一般的なGenesisの概念は[概要](/smart-contracts/genesis)を参照するか、代替のローンチメカニズムである[Launch Pool](/smart-contracts/genesis/launch-pool)をご覧ください。
+一般的なGenesisの概念は[概要](/smart-contracts/genesis)を参照するか、代替のローンチメカニズムである[Launch Pool](/ja/smart-contracts/genesis/launch-pool)をご覧ください。
 
 {% callout type="note" %}
 より詳細なドキュメントは近日公開予定です。

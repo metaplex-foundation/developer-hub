@@ -242,14 +242,14 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 ## Tips and Best Practices
 
 1. **Use interface filtering** to get only NFTs (e.g. exclude fungible tokens)
-2. **Implement [pagination](/das-api/guides/pagination)** for wallets with many NFTs
+2. **Implement [pagination](/dev-tools/das-api/guides/pagination)** for wallets with many NFTs
 3. **Cache results** to improve performance for frequent queries
-4. **Include [display options](/das-api/display-options)** to get additional metadata
+4. **Include [display options](/dev-tools/das-api/display-options)** to get additional metadata
 5. **Sort results** to present data in meaningful ways
 6. **Filter by collections** to focus on specific NFT types
 
 ## Further Reading
 
-- [Get Assets By Creator](/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific address
-- [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
-- [Search Assets by Multiple Criteria](/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 
+- [Get Assets By Creator](/dev-tools/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific address
+- [Get All Tokens in a Collection](/dev-tools/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
+- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 

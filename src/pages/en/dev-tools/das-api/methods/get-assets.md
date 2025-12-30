@@ -12,7 +12,7 @@ Returns the information of multiple compressed/standard assets including their m
 | Name  | Required | Description            |
 | ----- | :------: | ---------------------- |
 | `ids` |    ✅    | An array of asset ids. |
-| `options` |          | Display options object. See [Display Options](/das-api/display-options) for details. |
+| `options` |          | Display options object. See [Display Options](/dev-tools/das-api/display-options) for details. |
 
 ## Playground
 

@@ -4,16 +4,16 @@ metaTitle: Locking Assets | Token Metadata
 description: Learn how to lock/freeze Assets on Token Metadata
 ---
 
-As mentioned in the "[Delegate Authorities](/token-metadata/delegates#token-delegates)" page, certain delegates can lock and unlock assets, preventing their owners from transferring or burning them. A locked asset also forbids the owner from revoking the delegate's authority. This locking mechanism enables various utility use cases — such as staking — that would otherwise require an escrow account to function. {% .lead %}
+As mentioned in the "[Delegate Authorities](/smart-contracts/token-metadata/delegates#token-delegates)" page, certain delegates can lock and unlock assets, preventing their owners from transferring or burning them. A locked asset also forbids the owner from revoking the delegate's authority. This locking mechanism enables various utility use cases — such as staking — that would otherwise require an escrow account to function. {% .lead %}
 
 In the table below, we list all the Token Delegates that support locking assets. You can learn more about each of these delegates and how to approve/revoke them in their respective sections.
 
 | Delegate                                                                        | Lock/Unlock | Transfer | Burn | For              |
 | ------------------------------------------------------------------------------- | ----------- | -------- | ---- | ---------------- |
-| [Standard](/token-metadata/delegates#standard-delegate)                         | ✅          | ✅       | ✅   | All except pNFTs |
-| [Locked Transfer](/token-metadata/delegates#locked-transfer-delegate-pnft-only) | ✅          | ✅       | ❌   | pNFTs only       |
-| [Utility](/token-metadata/delegates#utility-delegate-pnft-only)                 | ✅          | ❌       | ✅   | pNFTs only       |
-| [Staking](/token-metadata/delegates#staking-delegate-pnft-only)                 | ✅          | ❌       | ❌   | pNFTs only       |
+| [Standard](/smart-contracts/token-metadata/delegates#standard-delegate)                         | ✅          | ✅       | ✅   | All except pNFTs |
+| [Locked Transfer](/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only) | ✅          | ✅       | ❌   | pNFTs only       |
+| [Utility](/smart-contracts/token-metadata/delegates#utility-delegate-pnft-only)                 | ✅          | ❌       | ✅   | pNFTs only       |
+| [Staking](/smart-contracts/token-metadata/delegates#staking-delegate-pnft-only)                 | ✅          | ❌       | ❌   | pNFTs only       |
 
 Assuming we have an approved Token Delegate on an asset, let's now see how the delegate can lock and unlock it.
 

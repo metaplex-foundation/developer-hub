@@ -43,14 +43,14 @@ The Metaplex CLI is a powerful command-line tool that provides a comprehensive s
 
 ## Getting Started
 
-1. [Install the CLI](/cli/installation)
+1. [Install the CLI](/dev-tools/cli/installation)
 2. Configure your environment:
-   - [Set up your wallet](/cli/config/wallets)
-   - [Configure RPC endpoints](/cli/config/rpcs)
-   - [Choose your preferred explorer](/cli/config/explorer)
+   - [Set up your wallet](/dev-tools/cli/config/wallets)
+   - [Configure RPC endpoints](/dev-tools/cli/config/rpcs)
+   - [Choose your preferred explorer](/dev-tools/cli/config/explorer)
 3. Start using the commands:
-   - [Create assets](/cli/core/create-asset)
-   - [Create collections](/cli/core/create-collection)
+   - [Create assets](/dev-tools/cli/core/create-asset)
+   - [Create collections](/dev-tools/cli/core/create-collection)
 
 ## Command Structure
 
@@ -109,6 +109,6 @@ mplx core create-asset
 
 Ready to get started? Choose your path:
 
-1. **For Setup**: Visit the [installation guide](/cli/installation)  
-2. **For NFT Collections**: Start with the [candy machine wizard](/cli/cm/create)
-3. **For Individual Assets**: Begin with [asset creation](/cli/core/create-asset)
+1. **For Setup**: Visit the [installation guide](/dev-tools/cli/installation)  
+2. **For NFT Collections**: Start with the [candy machine wizard](/dev-tools/cli/cm/create)
+3. **For Individual Assets**: Begin with [asset creation](/dev-tools/cli/core/create-asset)

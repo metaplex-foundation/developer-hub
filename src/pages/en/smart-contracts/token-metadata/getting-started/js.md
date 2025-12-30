@@ -25,7 +25,7 @@ import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata'
 // Use the RPC endpoint of your choice.
 const umi = createUmi('http://127.0.0.1:8899').use(mplTokenMetadata())
 ```
-Then you want to tell Umi which wallet to use. This can either be a [keypair](/umi/getting-started#connecting-w-a-secret-key) or the [solana wallet adapter](/umi/getting-started#connecting-w-wallet-adapter).
+Then you want to tell Umi which wallet to use. This can either be a [keypair](/dev-tools/umi/getting-started#connecting-w-a-secret-key) or the [solana wallet adapter](/dev-tools/umi/getting-started#connecting-w-wallet-adapter).
 
 That's it, you can now interact with NFTs by using [the various functions provided by the library](https://mpl-token-metadata.typedoc.metaplex.com/) and passing your `Umi` instance to them. Here's an example of creating an NFT and fetching the data of all of its onchain accounts.
 

@@ -28,22 +28,11 @@ We will proceed to define some capabilities of RPC nodes and then present you wi
 
 ## Metaplex DAS API
 
-Another distinguishing feature of RPCs is if they support the [Metaplex DAS API](/das-api). The Metaplex Digital Asset Standard (DAS) API represents a unified interface for interacting with digital assets on Solana, supporting both standard (Token Metadata) and compressed (Bubblegum) assets. The API defines a set of methods that RPCs implement in order to provide asset data.
+Another distinguishing feature of RPCs is if they support the [Metaplex DAS API](/dev-tools/das-api). The Metaplex Digital Asset Standard (DAS) API represents a unified interface for interacting with digital assets on Solana, supporting both standard (Token Metadata) and compressed (Bubblegum) assets. The API defines a set of methods that RPCs implement in order to provide asset data.
 
 For Developers the DAS API is required to interact with cNFTs, but it can also make working with TM Assets easier and faster. When reading from chain we therefore highly recommend using RPC nodes with DAS Support to make the user experience as fast as possible. 
 
-You can find out more about the DAS API in a [dedicated section](/das-api).
-
-## Metaplex Aura
-
-Aura is a Solana Network Extension that can provide users with efficient, decentralized, and comprehensive indexing of digital asset data. Its main features include:
-
-- **Automated Synchronization**: Ensures data integrity by enabling nodes to assist one another during periods of high load, maintaining consistency across the network.
-- **Integrated Media CDN**: Enhances media delivery, speeding up load times for digital assets displayed on web pages.
-- **Support for Light Clients**: Enables node operators to index specific protocols or sub-protocols, such as Core assets or a particular Bubblegum tree. Light clients can operate without running a full Solana node or Geyser plugin, instead receiving updates from the Aura network. This reduces infrastructure costs significantly compared to maintaining a full Solana node.
-- **Digital Asset Standard API**: Fully implements the DAS API, the main interface for accessing digital asset data on the Solana Virtual Machine (SVM).
-
-Learn more about Aura's indexing features in the [dedicated section](/aura/reading-solana-and-svm-data).
+You can find out more about the DAS API in a [dedicated section](/dev-tools/das-api).
 
 ## Archive and Nonarchive Nodes
 
@@ -58,10 +47,6 @@ The following section includes multiple RPC providers.
 {% callout type="note" %}
 These lists are in alphabetical order. Please choose the RPC provider that best suits your project's needs. If we are missing a provider, let us know in our discord or submit a PR.
 {% /callout %}
-
-### RPCs with Aura Support
-- [Mainnet Aura](http://aura-mainnet.metaplex.com)
-- [Devnet Aura](http://aura-devnet.metaplex.com)
 
 ### RPCs with DAS Support
 - [Extrnode](https://docs.extrnode.com/das_api/)

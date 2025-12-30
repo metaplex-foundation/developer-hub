@@ -4,7 +4,7 @@ metaTitle: Fetching Compressed NFTs | Bubblegum V2
 description: Learn how to fetch compressed NFTs on Bubblegum.
 ---
 
-As mentioned in the [Overview](/bubblegum#read-api) page, Compressed NFTs are not stored inside onchain accounts like regular NFTs but, instead, are logged in the transactions that created and updated them. {% .lead %}
+As mentioned in the [Overview](/smart-contracts/bubblegum#read-api) page, Compressed NFTs are not stored inside onchain accounts like regular NFTs but, instead, are logged in the transactions that created and updated them. {% .lead %}
 
 As such, a special indexer was created to facilitate the retrieval of Compressed NFTs. This indexed data is made available through an extension of the Solana RPC methods which we call the **Metaplex DAS API**. In fact, the DAS API allows us to fetch any **Digital Asset**. This can be a Compressed NFT, a regular NFT, or even a Fungible Asset.
 
@@ -103,7 +103,7 @@ const rpcAsset = await umi.rpc.getAsset(assetId)
 
 ## Fetching the Proof of a Compressed NFT
 
-Whilst the `getAsset` RPC method returns a whole lot of information about the asset, it does not return the **Proof** of the asset. As mentioned, in the [Overview](/bubblegum#merkle-trees-leaves-and-proofs) page, the Proof of a Compressed NFT is a list of hashes that allow us to verify the authenticity of the asset. Without it, anyone could pretend that they have a Compressed NFT in a tree with any given data.
+Whilst the `getAsset` RPC method returns a whole lot of information about the asset, it does not return the **Proof** of the asset. As mentioned, in the [Overview](/smart-contracts/bubblegum#merkle-trees-leaves-and-proofs) page, the Proof of a Compressed NFT is a list of hashes that allow us to verify the authenticity of the asset. Without it, anyone could pretend that they have a Compressed NFT in a tree with any given data.
 
 As such, many operations on Compressed NFTs — e.g. burning, transferring, updating, etc. — require the Proof of the asset before allowing us to perform them. Computing the Proof of an asset is possible but requires someone to know the hash of all Compressed NFTs that exist within a given tree. This is why the DAS API also keeps track of the Proof of all Compressed NFTs.
 

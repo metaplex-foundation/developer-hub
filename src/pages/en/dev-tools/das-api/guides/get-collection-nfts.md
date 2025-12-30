@@ -87,7 +87,7 @@ curl -X POST <ENDPOINT> \
 
 ## Method 2: Using Search Assets with Collection Filter
 
-You can also use `searchAssets` with a collection grouping for more specific queries. See [Search Assets by Criteria](/das-api/guides/search-by-criteria) for more information.
+You can also use `searchAssets` with a collection grouping for more specific queries. See [Search Assets by Criteria](/dev-tools/das-api/guides/search-by-criteria) for more information.
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
@@ -274,14 +274,14 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## Tips and Best Practices
 
-1. **Use [pagination](/das-api/guides/pagination)** for large collections to avoid rate limits
+1. **Use [pagination](/dev-tools/das-api/guides/pagination)** for large collections to avoid rate limits
 2. **Cache results** when possible to improve performance
-3. **Include [display options](/das-api/display-options)** to get additional metadata
+3. **Include [display options](/dev-tools/das-api/display-options)** to get additional metadata
 4. **Sort results** to present data in meaningful ways
 5. **Handle errors** gracefully when collection addresses are invalid
 
 ## Next Steps
 
-- [Get Assets By Creator](/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific wallet
-- [Get All Tokens in a Wallet](/das-api/guides/get-wallet-tokens) - See everything a wallet owns
-- [Search Assets by Multiple Criteria](/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries
+- [Get Assets By Creator](/dev-tools/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific wallet
+- [Get All Tokens in a Wallet](/dev-tools/das-api/guides/get-wallet-tokens) - See everything a wallet owns
+- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries

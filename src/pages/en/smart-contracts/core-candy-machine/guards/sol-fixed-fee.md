@@ -6,7 +6,7 @@ description: The Core Candy Machine 'Sol Fixed Fee' guard charges the payer an a
 
 ## Overview
 
-The **Sol Fixed Fee** guard allows us to charge the payer an amount in SOL when minting. Both the amount of SOL and the destination address can be configured. It works similar to the [Sol Payment](/core-candy-machine/guards/sol-payment) Guard.
+The **Sol Fixed Fee** guard allows us to charge the payer an amount in SOL when minting. Both the amount of SOL and the destination address can be configured. It works similar to the [Sol Payment](/smart-contracts/core-candy-machine/guards/sol-payment) Guard.
 
 {% diagram  %}
 

@@ -251,4 +251,4 @@ addMetadata();
 
 ## 次のステップ
 
-このガイドでは、Solanaトークンにメタデータを追加する方法を学習しました。ここから[Token Metadataプログラム](/token-metadata)に進んで、ワンステップでトークンの初期化とメタデータの追加を行うヘルパー関数、Non Fungibleの操作、Token Metadataプログラムとの様々な相互作用方法をチェックできます。
+このガイドでは、Solanaトークンにメタデータを追加する方法を学習しました。ここから[Token Metadataプログラム](/ja/smart-contracts/token-metadata)に進んで、ワンステップでトークンの初期化とメタデータの追加を行うヘルパー関数、Non Fungibleの操作、Token Metadataプログラムとの様々な相互作用方法をチェックできます。

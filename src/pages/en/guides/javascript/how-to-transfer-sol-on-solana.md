@@ -73,7 +73,7 @@ transfer()
 
 ## Setting up Umi
 
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer in a different way you can check out the [**Connecting to Umi**](/umi/getting-started) guide.
+This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to set up a wallet or signer in a different way you can check out the [**Getting Started with Umi**](/dev-tools/umi/getting-started) guide.
 
 ### Generating a New Wallet
 

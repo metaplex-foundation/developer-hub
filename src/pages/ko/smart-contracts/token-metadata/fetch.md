@@ -8,7 +8,7 @@ description: Token Metadata에서 자산의 다양한 온체인 계정을 가져
 
 ## 디지털 자산
 
-[이전 페이지](/token-metadata/mint#creating-accounts)에서 언급했듯이, 대체 가능하거나 그렇지 않은 자산은 여러 온체인 계정을 생성해야 합니다. 자산의 토큰 표준에 따라 일부 계정은 필요하지 않을 수 있습니다. 다음은 이러한 계정에 대한 간단한 개요입니다:
+[이전 페이지](/ko/smart-contracts/token-metadata/mint#creating-accounts)에서 언급했듯이, 대체 가능하거나 그렇지 않은 자산은 여러 온체인 계정을 생성해야 합니다. 자산의 토큰 표준에 따라 일부 계정은 필요하지 않을 수 있습니다. 다음은 이러한 계정에 대한 간단한 개요입니다:
 
 - **Mint** 계정 (SPL Token 프로그램에서): 기본 SPL 토큰의 핵심 속성을 정의합니다. 다른 모든 계정이 이로부터 파생되므로 모든 자산의 진입점입니다.
 - **Metadata** 계정: 기본 SPL 토큰에 추가 데이터와 기능을 제공합니다.
@@ -148,7 +148,7 @@ const assets = await fetchAllDigitalAssetByUpdateAuthority(umi, owner)
 위에서 언급한 **디지털 자산** 데이터 구조는 자산의 소유자에 대한 정보를 제공하지 않는다는 점에 주목하세요. 이 첫 번째 정의는 소유자와 관계없이 필요한 온체인 계정에만 초점을 맞춥니다. 그러나 자산의 더 완전한 그림을 제공하기 위해서는 누가 소유하고 있는지도 알아야 할 수 있습니다. 이것이 바로 **토큰이 있는 디지털 자산** 데이터 구조가 나오는 곳입니다. 이는 다음 계정도 포함하는 디지털 자산 데이터 구조의 확장입니다:
 
 - **Token** 계정 (SPL Token 프로그램에서): **Mint** 계정과 그 소유자 간의 관계를 정의합니다. 소유자가 소유한 토큰의 양과 같은 중요한 데이터를 저장합니다. NFT의 경우 양은 항상 1입니다.
-- **Token Record** 계정 (PNFT만): 현재 [토큰 위임자](/token-metadata/delegates#token-delegates)와 그 역할과 같은 [프로그래머블 대체 불가능한 토큰](/token-metadata/pnfts)에 대한 추가 토큰 관련 정보를 정의합니다.
+- **Token Record** 계정 (PNFT만): 현재 [토큰 위임자](/ko/smart-contracts/token-metadata/delegates#token-delegates)와 그 역할과 같은 [프로그래머블 대체 불가능한 토큰](/ko/smart-contracts/token-metadata/pnfts)에 대한 추가 토큰 관련 정보를 정의합니다.
 
 대체 가능한 자산의 경우, 동일한 디지털 자산이 여러 토큰 계정을 통해 여러 소유자와 연결될 가능성이 높다는 점에 주목하세요. 따라서 동일한 디지털 자산에 대해 여러 토큰이 있는 디지털 자산이 있을 수 있습니다.
 

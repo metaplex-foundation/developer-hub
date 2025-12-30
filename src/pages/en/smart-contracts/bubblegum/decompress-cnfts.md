@@ -75,7 +75,7 @@ Decompressing a Compressed NFT is a two-step process initiated by the owner of t
 
 To initiate the first step of the decompression process, the owner of the Compressed NFT must send a **Redeem** instruction and sign the transaction. This will create a Voucher account for the cNFT that will be used in the next step of the decompression process.
 
-Note that this instruction removes a leaf from the Bubblegum Tree. Therefore, additional parameters must be provided to verify the integrity of the Compressed NFT to remove. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
+Note that this instruction removes a leaf from the Bubblegum Tree. Therefore, additional parameters must be provided to verify the integrity of the Compressed NFT to remove. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
 {% dialect-switcher title="Redeem a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}

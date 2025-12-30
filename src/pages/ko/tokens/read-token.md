@@ -48,6 +48,6 @@ DAS API를 사용하여 지갑 주소가 소유한 모든 대체 가능 토큰�
 
 ## 관련 가이드
 
-- [토큰 생성하기](/tokens/create-a-token)
-- [DAS API 개요](/das-api)
-- [소유자별 대체 가능 자산 가져오기](/das-api/guides/get-fungible-assets)
+- [토큰 생성하기](/ko/tokens/create-a-token)
+- [DAS API 개요](/ko/dev-tools/das-api)
+- [소유자별 대체 가능 자산 가져오기](/ko/dev-tools/das-api/guides/get-fungible-assets)

@@ -161,4 +161,4 @@ pub async fn transfer_asset_in_collection() {
 
 ## Asset의 전송 위임자인 경우는 어떻게 하나요?
 
-[전송 위임자](/core/plugins/transfer-delegate) 플러그인을 통해 Asset의 전송 위임자라면, Asset의 소유자인 것처럼 `transferV1` 함수를 호출할 수 있습니다.
+[전송 위임자](/ko/smart-contracts/core/plugins/transfer-delegate) 플러그인을 통해 Asset의 전송 위임자라면, Asset의 소유자인 것처럼 `transferV1` 함수를 호출할 수 있습니다.

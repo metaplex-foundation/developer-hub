@@ -26,7 +26,7 @@ This guide explains how to mint NFTs from a Candy Machine to different wallet ad
 Minting NFTs to another wallet can be particularly useful for airdrops, giveaways, or distributing NFTs to multiple recipients. This guide will walk you through the process of minting NFTs from a Candy Machine to a different wallet address. It is important to note that the person initiating the minting process will bear the minting cost. Therefore, it is often more cost-effective to have the recipient claim the NFT themselves.
 
 {% callout type="note" title="Important Consideration" %}
-- Minting to another wallet can be expensive. You might want to consider using a claim mechanic instead, e.g. using [allowlist](/candy-machine/guards/allow-list) or the [NFT Gate](/candy-machine/guards/nft-gate) Guard. 
+- Minting to another wallet can be expensive. You might want to consider using a claim mechanic instead, e.g. using [allowlist](/smart-contracts/candy-machine/guards/allow-list) or the [NFT Gate](/smart-contracts/candy-machine/guards/nft-gate) Guard. 
 - There are different tools available for Candy Machines with or without guards. Minting without guards is generally easier.
 {% /callout %}
 
@@ -84,7 +84,6 @@ When minting to another wallet using Typescript, there are two main approaches d
 ### Mint without Guards
 For Candy Machines without guards, use `mintFromCandyMachineV2`. This function allows you to directly specify the recipient as the `nftOwner`.
 
-To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -146,7 +145,7 @@ import {
 
 // Configuration
 const RECIPIENT_ADDRESS = "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV";
-const RPC_ENDPOINT = "https://devnet-aura.metaplex.com/<YOUR_API_KEY>";
+const RPC_ENDPOINT = "https://api.devnet.solana.com";
 
 (async () => {
   try {

@@ -14,11 +14,11 @@ Metaplex Coreを使用して、Solana上でNFT（非代替性トークン）を�
 
 このセクションでは、一般的なNFT操作について初心者向けのガイドを提供します：
 
-- **[NFTを作成する](/nfts/create-nft)** - カスタムメタデータを持つ新しいNFTを作成
-- **[NFTを取得する](/nfts/fetch-nft)** - ブロックチェーンからNFTデータを取得
-- **[NFTを更新する](/nfts/update-nft)** - NFTの名前やメタデータを更新
-- **[NFTを転送する](/nfts/transfer-nft)** - ウォレット間でNFTの所有権を転送
-- **[NFTをバーンする](/nfts/burn-nft)** - NFTを永久に破棄
+- **[NFTを作成する](/ja/nfts/create-nft)** - カスタムメタデータを持つ新しいNFTを作成
+- **[NFTを取得する](/ja/nfts/fetch-nft)** - ブロックチェーンからNFTデータを取得
+- **[NFTを更新する](/ja/nfts/update-nft)** - NFTの名前やメタデータを更新
+- **[NFTを転送する](/ja/nfts/transfer-nft)** - ウォレット間でNFTの所有権を転送
+- **[NFTをバーンする](/ja/nfts/burn-nft)** - NFTを永久に破棄
 
 ## 前提条件
 
@@ -36,12 +36,12 @@ Metaplex Coreを使用して、Solana上でNFT（非代替性トークン）を�
 npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
 ```
 
-その後、[NFTを作成する](/nfts/create-nft)ガイドに従って、Metaplex Coreで最初のNFTを作成してください。
+その後、[NFTを作成する](/ja/nfts/create-nft)ガイドに従って、Metaplex Coreで最初のNFTを作成してください。
 
 ## さらに詳しく
 
 より高度なNFT機能については、以下をご覧ください：
 
-- [Coreドキュメント](/core) - Metaplex Coreの完全なドキュメント
-- [Coreプラグイン](/core/plugins) - プラグインでNFT機能を拡張
-- [Coreコレクション](/core/collections) - NFTをコレクションに整理
+- [Coreドキュメント](/ja/smart-contracts/core) - Metaplex Coreの完全なドキュメント
+- [Coreプラグイン](/ja/smart-contracts/core/plugins) - プラグインでNFT機能を拡張
+- [Coreコレクション](/ja/smart-contracts/core/collections) - NFTをコレクションに整理

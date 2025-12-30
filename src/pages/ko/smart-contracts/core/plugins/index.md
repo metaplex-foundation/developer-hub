@@ -30,9 +30,9 @@ Core 애셋의 라이프사이클 동안 다음과 같은 여러 이벤트가 �
 
 소유자 관리 플러그인에는 다음이 포함되지만 이에 국한되지 않습니다:
 
-- [Transfer Delegate](/core/plugins/transfer-delegate) (마켓플레이스, 게임)
-- [Freeze Delegate](/core/plugins/freeze-delegate) (마켓플레이스, 스테이킹, 게임)
-- [Burn Delegate](/core/plugins/burn-delegate) (게임)
+- [Transfer Delegate](/ko/smart-contracts/core/plugins/transfer-delegate) (마켓플레이스, 게임)
+- [Freeze Delegate](/ko/smart-contracts/core/plugins/freeze-delegate) (마켓플레이스, 스테이킹, 게임)
+- [Burn Delegate](/ko/smart-contracts/core/plugins/burn-delegate) (게임)
 
 소유자 관리 플러그인이 권한 설정 없이 애셋/컬렉션에 추가되면 권한 타입이 `owner`로 기본 설정됩니다.
 
@@ -44,9 +44,9 @@ Core 애셋의 라이프사이클 동안 다음과 같은 여러 이벤트가 �
 
 권한 관리 플러그인에는 다음이 포함되지만 이에 국한되지 않습니다:
 
-- [Royalties](/core/plugins/royalties)
-- [Update Delegate](/core/plugins/update-delegate)
-- [Attribute](/core/plugins/attribute)
+- [Royalties](/ko/smart-contracts/core/plugins/royalties)
+- [Update Delegate](/ko/smart-contracts/core/plugins/update-delegate)
+- [Attribute](/ko/smart-contracts/core/plugins/attribute)
 
 권한 관리 플러그인이 권한 인수 없이 애셋/컬렉션에 추가되면 플러그인은 `update authority` 권한 타입으로 기본 설정됩니다.
 
@@ -56,15 +56,15 @@ Core 애셋의 라이프사이클 동안 다음과 같은 여러 이벤트가 �
 
 영구 플러그인에는 다음이 포함되지만 이에 국한되지 않습니다:
 
-- [Permanent Transfer Delegate](/core/plugins/permanent-transfer-delegate)
-- [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate)
-- [Permanent Burn Delegate](/core/plugins/permanent-burn-delegate)
+- [Permanent Transfer Delegate](/ko/smart-contracts/core/plugins/permanent-transfer-delegate)
+- [Permanent Freeze Delegate](/ko/smart-contracts/core/plugins/permanent-freeze-delegate)
+- [Permanent Burn Delegate](/ko/smart-contracts/core/plugins/permanent-burn-delegate)
 
 영구 플러그인이 권한 설정 없이 애셋/컬렉션에 추가되면 권한 타입이 `update authority`로 기본 설정됩니다.
 
 ## 컬렉션 플러그인
 
-컬렉션 플러그인은 컬렉션 레벨에서 추가되는 플러그인으로 컬렉션 전체에 영향을 미칠 수 있습니다. 이는 특히 로열티에 유용합니다. [royalties plugin](/core/plugins/royalties)을 컬렉션 애셋에 할당하면 해당 컬렉션의 모든 애셋이 해당 플러그인을 참조하게 됩니다.
+컬렉션 플러그인은 컬렉션 레벨에서 추가되는 플러그인으로 컬렉션 전체에 영향을 미칠 수 있습니다. 이는 특히 로열티에 유용합니다. [royalties plugin](/ko/smart-contracts/core/plugins/royalties)을 컬렉션 애셋에 할당하면 해당 컬렉션의 모든 애셋이 해당 플러그인을 참조하게 됩니다.
 
 컬렉션은 `영구 플러그인`과 `권한 관리 플러그인`에만 액세스할 수 있습니다.
 
@@ -83,15 +83,15 @@ MPL Core 애셋과 MPL Core 컬렉션 애셋이 모두 동일한 플러그인 �
 
 | Plugin                                                                   | Owner Managed | Authority Managed | Permanent |
 | ------------------------------------------------------------------------ | ------------- | ----------------- | --------- |
-| [Transfer Delegate](/core/plugins/transfer-delegate)                     | ✅            |                   |           |
-| [Freeze Delegate](/core/plugins/freeze-delegate)                         | ✅            |                   |           |
-| [Burn Delegate](/core/plugins/burn-delegate)                             | ✅            |                   |           |
-| [Royalties](/core/plugins/royalties)                                     |               | ✅                |           |
-| [Update Delegate](/core/plugins/update-delegate)                         |               | ✅                |           |
-| [Attribute](/core/plugins/attribute)                                     |               | ✅                |           |
-| [Permanent Transfer Delegate](/core/plugins/permanent-transfer-delegate) |               |                   | ✅        |
-| [Permanent Freeze Delegate](/core/plugins/permanent-freeze-delegate)     |               |                   | ✅        |
-| [Permanent Burn Delegate](/core/plugins/permanent-burn-delegate)         |               |                   | ✅        |
+| [Transfer Delegate](/ko/smart-contracts/core/plugins/transfer-delegate)                     | ✅            |                   |           |
+| [Freeze Delegate](/ko/smart-contracts/core/plugins/freeze-delegate)                         | ✅            |                   |           |
+| [Burn Delegate](/ko/smart-contracts/core/plugins/burn-delegate)                             | ✅            |                   |           |
+| [Royalties](/ko/smart-contracts/core/plugins/royalties)                                     |               | ✅                |           |
+| [Update Delegate](/ko/smart-contracts/core/plugins/update-delegate)                         |               | ✅                |           |
+| [Attribute](/ko/smart-contracts/core/plugins/attribute)                                     |               | ✅                |           |
+| [Permanent Transfer Delegate](/ko/smart-contracts/core/plugins/permanent-transfer-delegate) |               |                   | ✅        |
+| [Permanent Freeze Delegate](/ko/smart-contracts/core/plugins/permanent-freeze-delegate)     |               |                   | ✅        |
+| [Permanent Burn Delegate](/ko/smart-contracts/core/plugins/permanent-burn-delegate)         |               |                   | ✅        |
 
 ## 플러그인과 라이프사이클 이벤트
 

@@ -6,7 +6,7 @@ description: Learn about the MPL Core External Plugins and their functionality.
 
 ## What are External Plugins?
 
-External Plugins are [Authority Managed](/core/plugins#authority-managed-plugins), consisting of 2 parts, the **Adapter**, and the **Plugin**. A **Plugin Adapter** is assigned to the Assets/Collection and allows data and validations to to be passed from an External Plugin. The External Plugin provides data and validations for the **Plugin Adapter**.
+External Plugins are [Authority Managed](/smart-contracts/core/plugins#authority-managed-plugins), consisting of 2 parts, the **Adapter**, and the **Plugin**. A **Plugin Adapter** is assigned to the Assets/Collection and allows data and validations to to be passed from an External Plugin. The External Plugin provides data and validations for the **Plugin Adapter**.
 
 ## Lifecycle Checks
 
@@ -47,4 +47,4 @@ The Data Authority of an External Plugin is the only authority allowed to write 
 
 The Oracle Plugin is designed for simplicity in a web 2.0-3.0 workflow. The Oracle Plugin can access onchain Oracle accounts external from the MPL Core Asset that can reject the use of lifecycle events set by the authority. The external Oracle Account can also be updated at any time to change the authorization behavior of the lifecycle events, making for a dynamic experience.
 
-You can read more about the Oracle Plugin [here](/core//external-plugins/oracle).
+You can read more about the Oracle Plugin [here](/smart-contracts/core//external-plugins/oracle).

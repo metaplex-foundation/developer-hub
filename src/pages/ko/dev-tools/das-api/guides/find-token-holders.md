@@ -210,9 +210,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 팁과 모범 사례
 
-1. **[페이지네이션](/das-api/guides/pagination) 처리**: 대규모 컬렉션의 경우 항상 페이지네이션을 구현하여 모든 결과를 가져옵니다.
+1. **[페이지네이션](/ko/dev-tools/das-api/guides/pagination) 처리**: 대규모 컬렉션의 경우 항상 페이지네이션을 구현하여 모든 결과를 가져옵니다.
 
-2. **[표시 옵션](/das-api/display-options) 사용**: `showCollectionMetadata`를 활성화하여 추가 컬렉션 정보를 가져옵니다.
+2. **[표시 옵션](/ko/dev-tools/das-api/display-options) 사용**: `showCollectionMetadata`를 활성화하여 추가 컬렉션 정보를 가져옵니다.
 
 3. **결과 캐싱**: NFT 보유자 데이터가 자주 변경되지 않는 경우 결과를 캐싱하여 더 나은 성능을 얻습니다.
 
@@ -220,5 +220,5 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 관련 가이드
 
-- [컬렉션의 모든 토큰 가져오기](/das-api/guides/get-collection-nfts)
-- [컬렉션 통계 분석](/das-api/guides/collection-statistics)
+- [컬렉션의 모든 토큰 가져오기](/ko/dev-tools/das-api/guides/get-collection-nfts)
+- [컬렉션 통계 분석](/ko/dev-tools/das-api/guides/collection-statistics)

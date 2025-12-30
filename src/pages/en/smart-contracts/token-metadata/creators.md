@@ -4,11 +4,11 @@ metaTitle: Verified Creators | Token Metadata
 description: Learn how to verify the creators of an Asset on Token Metadata
 ---
 
-Similarly to [collections](/token-metadata/collections), the creators of an asset must be verified to ensure the authenticity of the asset. {% .lead %}
+Similarly to [collections](/smart-contracts/token-metadata/collections), the creators of an asset must be verified to ensure the authenticity of the asset. {% .lead %}
 
 A creator whose `verified` flag is `false` could have been added by anyone and, therefore, cannot be trusted. On the other hand, a creator whose `verified` flag is `true` is guaranteed to have signed a transaction that verified them as a creator of that asset.
 
-In the section below, we will learn how to verify and unverify the creators of an asset. Note that before verifying a creator, it must already be part of the **Creators** array of the asset's **Metadata** account. This can be done when [minting the asset](/token-metadata/mint) but also when [updating the asset](/token-metadata/update).
+In the section below, we will learn how to verify and unverify the creators of an asset. Note that before verifying a creator, it must already be part of the **Creators** array of the asset's **Metadata** account. This can be done when [minting the asset](/smart-contracts/token-metadata/mint) but also when [updating the asset](/smart-contracts/token-metadata/update).
 
 ## Verify a Creator
 

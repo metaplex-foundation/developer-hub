@@ -556,7 +556,7 @@ Freeze Sol Payment ガード内で Asset の凍結を停止することが可能
 
 ## Freeze Escrow とガードグループ
 
-様々な[ガードグループ](/core-candy-machine/guard-groups)内で複数の Freeze Sol Payment ガードを使用する場合、Freeze Sol Payment ガードと Freeze Escrow アカウントの関係を理解することが重要です。
+様々な[ガードグループ](/ja/smart-contracts/core-candy-machine/guard-groups)内で複数の Freeze Sol Payment ガードを使用する場合、Freeze Sol Payment ガードと Freeze Escrow アカウントの関係を理解することが重要です。
 
 Freeze Escrow アカウントは Destination アドレスから派生した PDA です。つまり、**複数の Freeze Sol Payment ガード**が**同じ Destination アドレス**を使用するように設定されている場合、それらはすべて**同じ Freeze Escrow アカウントを共有**します。
 

@@ -137,5 +137,5 @@ RPC는 `~/.mplx/config.json`의 구성 파일에 저장됩니다:
 
 ## 관련 명령어
 
-- [지갑](/cli/config/wallets) - 지갑 구성 관리
-- [탐색기](/cli/config/explorer) - 선호하는 블록체인 탐색기 설정
+- [지갑](/ko/dev-tools/cli/config/wallets) - 지갑 구성 관리
+- [탐색기](/ko/dev-tools/cli/config/explorer) - 선호하는 블록체인 탐색기 설정

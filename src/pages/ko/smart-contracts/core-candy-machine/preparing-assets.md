@@ -83,7 +83,7 @@ Umi에는 플러그인을 통해 업로드 프로세스를 도와주는 몇 가�
 
 #### Umi로 Irys를 통해 Arweave에 업로드하기
 
-Umi로 파일을 업로드하는 것에 대한 더 자세한 내용은 [Umi Storage](/umi/storage)를 방문하세요.
+Umi로 파일을 업로드하는 것에 대한 더 자세한 내용은 [Umi Storage](/ko/dev-tools/umi/storage)를 방문하세요.
 
 {% dialect-switcher title="Umi로 Irys를 통해 Arweave에 파일 업로드하기" %}
 {% dialect title="JavaScript" id="js" %}
@@ -92,7 +92,7 @@ Umi로 파일을 업로드하는 것에 대한 더 자세한 내용은 [Umi Stor
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(irysUploader())
+const umi = createUmi("https://api.devnet.solana.com").use(irysUploader())
 
 const uriUploadArray = await umi.uploader.upload([myFile1, myFile2])
 
@@ -188,7 +188,7 @@ Core Candy Machine 생성을 위한 준비의 마지막 단계는 Core Candy Mac
 Core Collection을 생성하는 데 필요한 데이터를 갖기 위해 이전 단계와 같이 이미지를 업로드하고 JSON 메타데이터를 준비하고 업로드해야 합니다.
 {% /callout %}
 
-아래 예제는 플러그인이 없는 기본 Core Collection을 생성합니다. 사용 가능한 플러그인 목록과 더 고급 Core Collection 생성을 보려면 Core의 [Collection Management](/core/collections)에서 문서를 볼 수 있습니다.
+아래 예제는 플러그인이 없는 기본 Core Collection을 생성합니다. 사용 가능한 플러그인 목록과 더 고급 Core Collection 생성을 보려면 Core의 [Collection Management](/ko/smart-contracts/core/collections)에서 문서를 볼 수 있습니다.
 
 {% dialect-switcher title="MPL Core Collection 생성하기" %}
 {% dialect title="JavaScript" id="js" %}

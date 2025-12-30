@@ -24,7 +24,6 @@ const devToolsRedirects = [
   'amman',
   'shank',
   'das-api',
-  'aura',
 ];
 
 // Standalone page redirects to new locations

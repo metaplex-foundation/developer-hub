@@ -36,8 +36,7 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 Umiをセットアップする際、テスト用に新しいウォレットを作成したり、ファイルシステムからウォレットをインポートしたり、UI/フロントエンドで`walletAdapter`を使用したりすることもできます。
 この例では、秘密鍵を含むjsonファイル(wallet.json)からKeypairを作成します。
 
-devnet Auraエンドポイントを使用します。
-SolanaおよびEclipseブロックチェーン上のMetaplex Auraネットワークへのアクセスは、[こちら](https://aura-app.metaplex.com/)のAura AppでエンドポイントとAPIキーを入手できます。
+Solana Devnetエンドポイントを使用します。
 
 ```ts
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -45,8 +44,8 @@ import { generateSigner, some, none, createSignerFromKeypair, signerIdentity, tr
 import { mplCandyMachine as mplCoreCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
 import * as fs from 'fs';
 
-// Metaplex AuraデータネットワークからSolana Devnetをエンドポイントとして使用し、`mplCoreCandyMachine()`プラグインも読み込みます。
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+// Solana Devnetをエンドポイントとして使用し、`mplCoreCandyMachine()`プラグインも読み込みます。
+const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCoreCandyMachine());
 
 // 秘密鍵を含むwallet jsonファイルからKeypairを作成し、作成されたkeypairに基づいて署名者を作成しましょう

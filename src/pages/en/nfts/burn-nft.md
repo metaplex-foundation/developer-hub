@@ -10,7 +10,7 @@ Permanently destroy an NFT and reclaim rent fees. {% .lead %}
 
 ## Burn an NFT
 
-In the following section you can find a full code example and the parameters that you might need to change. You can learn more about burning NFTs in the [Core documentation](/core/burn).
+In the following section you can find a full code example and the parameters that you might need to change. You can learn more about burning NFTs in the [Core documentation](/smart-contracts/core/burn).
 
 {% code-tabs-imported from="core/burn-asset" frameworks="umi,cli" /%}
 

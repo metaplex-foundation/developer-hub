@@ -89,7 +89,7 @@ The max depths of trees are as follows.
   {% /totem-accordion %}
   {% /totem %}
 
-- **Public**: Whether or not the Bubblegum Tree should be public. If it is public, anyone will be able to mint Compressed NFTs from it. Otherwise, only the Tree Creator or the Tree Delegate (as discussed in [Delegating cNFTs](/bubblegum/delegate-cnfts)) will be able to mint Compressed NFTs.
+- **Public**: Whether or not the Bubblegum Tree should be public. If it is public, anyone will be able to mint Compressed NFTs from it. Otherwise, only the Tree Creator or the Tree Delegate (as discussed in [Delegating cNFTs](/smart-contracts/bubblegum/delegate-cnfts)) will be able to mint Compressed NFTs.
 
 Here is how one can create a Bubblegum Tree using our libraries:
 
@@ -134,8 +134,8 @@ Since a **Bubblegum Tree** is composed of two onchain accounts, let's see how to
 The Merkle Tree account contains various information about the tree such as:
 
 - The **Tree Header** which stores the **Max Depth**, the **Max Buffer Size**, the **Authority** of the tree and the **Creation Slot** of when the tree was created.
-- The **Tree** itself which stores low-level information about the tree such as its **Change Logs** (or roots), its **Sequence Number**, etc. We talk more about Concurrent Merkle Trees in a [dedicated page](/bubblegum-v2/concurrent-merkle-trees) of this documentation.
-- The **Canopy** as discussed in the [Merkle Tree Canopy](/bubblegum-v2/merkle-tree-canopy) page.
+- The **Tree** itself which stores low-level information about the tree such as its **Change Logs** (or roots), its **Sequence Number**, etc. We talk more about Concurrent Merkle Trees in a [dedicated page](/smart-contracts/bubblegum-v2/concurrent-merkle-trees) of this documentation.
+- The **Canopy** as discussed in the [Merkle Tree Canopy](/smart-contracts/bubblegum-v2/merkle-tree-canopy) page.
 
 Here is how one can fetch all of that data using our libraries:
 

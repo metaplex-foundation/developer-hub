@@ -8,9 +8,9 @@ description: Bubblegum에서 컬렉션을 설정, 검증 및 검증 취소하는
 
 기술적으로 이는 cNFT의 **컬렉션** 객체에서 **검증됨** 부울을 토글하여 컬렉션 권한이 이 압축 NFT가 컬렉션의 일부라는 것을 승인했음을 누구에게나 알립니다.
 
-NFT와 관련된 컬렉션 개념에 익숙하지 않은 경우, 컬렉션은 다른 NFT를 그룹화하는 데 사용할 수 있는 특수 비압축 NFT입니다. 따라서 **컬렉션 NFT**의 데이터는 전체 컬렉션의 이름과 브랜딩을 설명하는 데 사용됩니다. [여기에서 Metaplex 검증된 컬렉션에 대해 자세히 알아볼 수 있습니다](/token-metadata/collections).
+NFT와 관련된 컬렉션 개념에 익숙하지 않은 경우, 컬렉션은 다른 NFT를 그룹화하는 데 사용할 수 있는 특수 비압축 NFT입니다. 따라서 **컬렉션 NFT**의 데이터는 전체 컬렉션의 이름과 브랜딩을 설명하는 데 사용됩니다. [여기에서 Metaplex 검증된 컬렉션에 대해 자세히 알아볼 수 있습니다](/ko/smart-contracts/token-metadata/collections).
 
-[여기에 문서화된](/bubblegum/mint-cnfts#minting-to-a-collection) **컬렉션에 민트 V1** 명령을 사용하여 압축 NFT를 컬렉션에 직접 발행할 수 있습니다. 그러나 컬렉션 없이 cNFT를 이미 발행한 경우, 해당 cNFT에서 컬렉션을 검증, 검증 취소 및 설정하는 방법을 살펴보겠습니다.
+[여기에 문서화된](/ko/smart-contracts/bubblegum/mint-cnfts#minting-to-a-collection) **컬렉션에 민트 V1** 명령을 사용하여 압축 NFT를 컬렉션에 직접 발행할 수 있습니다. 그러나 컬렉션 없이 cNFT를 이미 발행한 경우, 해당 cNFT에서 컬렉션을 검증, 검증 취소 및 설정하는 방법을 살펴보겠습니다.
 
 ## 컬렉션 검증
 
@@ -21,7 +21,7 @@ Bubblegum 프로그램의 **컬렉션 검증** 명령을 사용하여 압축 NFT
 - **컬렉션 민트**: 컬렉션 NFT의 민트 계정입니다.
 - **컬렉션 권한**: 컬렉션 NFT의 업데이트 권한 또는 승인된 컬렉션 위임자(서명자). 컬렉션 권한이 위임 권한인 경우 프로그램은 새로운 통합 **메타데이터 위임자** 시스템과 레거시 **컬렉션 권한 레코드** 계정을 모두 지원합니다. 적절한 PDA를 **컬렉션 권한 레코드 PDA** 매개변수에 전달하기만 하면 됩니다.
 
-또한 이 명령은 결국 Bubblegum 트리의 리프를 교체하므로 압축 NFT의 무결성을 확인하기 위해 더 많은 매개변수를 제공해야 합니다. 이러한 매개변수는 리프를 변경하는 모든 명령에 공통적이므로 [다음 FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments)에 문서화되어 있습니다. 다행히도 Metaplex DAS API를 사용하여 이러한 매개변수를 자동으로 가져오는 헬퍼 메서드를 사용할 수 있습니다.
+또한 이 명령은 결국 Bubblegum 트리의 리프를 교체하므로 압축 NFT의 무결성을 확인하기 위해 더 많은 매개변수를 제공해야 합니다. 이러한 매개변수는 리프를 변경하는 모든 명령에 공통적이므로 [다음 FAQ](/ko/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)에 문서화되어 있습니다. 다행히도 Metaplex DAS API를 사용하여 이러한 매개변수를 자동으로 가져오는 헬퍼 메서드를 사용할 수 있습니다.
 
 {% dialect-switcher title="압축 NFT의 컬렉션 검증" %}
 {% dialect title="JavaScript" id="js" %}

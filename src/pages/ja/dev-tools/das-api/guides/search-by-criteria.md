@@ -235,22 +235,22 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ## ヒントとベストプラクティス
 
 1. **シンプルに始める**: 基本的な条件から始めて、徐々に複雑さを追加します
-2. **[ページネーション](/das-api/guides/pagination)を使用する**: 大きな結果セットの場合は、適切なページネーションを実装します
+2. **[ページネーション](/ja/dev-tools/das-api/guides/pagination)を使用する**: 大きな結果セットの場合は、適切なページネーションを実装します
 3. **結果をキャッシュする**: 頻繁にアクセスされる検索結果を保存します
 4. **フィルターを賢く組み合わせる**: フィルターが多すぎると結果が返されない場合があります
 5. **空の結果を処理する**: 常に空の結果セットをチェックしますが、一部のアセットは非表示またはまだインデックス化されていない可能性があることに注意してください
-6. **[表示オプション](/das-api/display-options)を使用する**: ユースケースに関連する表示オプションを含めます
+6. **[表示オプション](/ja/dev-tools/das-api/display-options)を使用する**: ユースケースに関連する表示オプションを含めます
 7. **結果を並べ替える**: データを意味のある方法で表示するために並べ替えを使用します
 8. **クエリをテストする**: 既知のデータで検索条件を検証します
 
 ## 次のステップ
 
-- [コレクション内のすべてのトークンを取得する](/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのアセットを取得します
-- [オーナーごとに NFT を取得する](/das-api/guides/get-nfts-by-owner) - ウォレットが所有するすべての NFT を検索します
-- [クリエイターごとにアセットを取得する](/das-api/methods/get-assets-by-creator) - 特定のウォレットによって作成されたすべてのトークンを発見します
+- [コレクション内のすべてのトークンを取得する](/ja/dev-tools/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのアセットを取得します
+- [オーナーごとに NFT を取得する](/ja/dev-tools/das-api/guides/get-nfts-by-owner) - ウォレットが所有するすべての NFT を検索します
+- [クリエイターごとにアセットを取得する](/ja/dev-tools/das-api/methods/get-assets-by-creator) - 特定のウォレットによって作成されたすべてのトークンを発見します
 
 ## さらに読む
 
-- [クリエイターごとにアセットを取得する](/das-api/methods/get-assets-by-creator) - 特定のウォレットによって作成されたすべてのトークンを発見します
-- [コレクション内のすべてのトークンを取得する](/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのアセットを取得します
-- [圧縮された NFT を見つける](/das-api/guides/find-compressed-nfts) - 圧縮された NFT を発見して操作します
+- [クリエイターごとにアセットを取得する](/ja/dev-tools/das-api/methods/get-assets-by-creator) - 特定のウォレットによって作成されたすべてのトークンを発見します
+- [コレクション内のすべてのトークンを取得する](/ja/dev-tools/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのアセットを取得します
+- [圧縮された NFT を見つける](/ja/dev-tools/das-api/guides/find-compressed-nfts) - 圧縮された NFT を発見して操作します

@@ -4,7 +4,7 @@ metaTitle: guard | Sugar
 description: guard command.
 ---
 
-The `guard` command is used to manage the [guards](/candy-machine/guards) configuration of the Candy Machine.
+The `guard` command is used to manage the [guards](/smart-contracts/candy-machine/guards) configuration of the Candy Machine.
 
 Once you completed the guards configuration in your Sugar config file, you can add a Candy Guard using:
 

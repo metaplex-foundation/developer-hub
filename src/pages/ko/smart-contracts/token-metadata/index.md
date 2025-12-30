@@ -114,7 +114,7 @@ Mint 계정에 더 많은 데이터를 첨부함으로써, **Token Metadata 프�
 
 ## JSON 표준
 
-Metadata 계정의 중요한 속성 중 하나는 오프체인 JSON 파일을 가리키는 `URI` 속성입니다. 이는 온체인 데이터 저장과 관련된 수수료에 제약을 받지 않으면서 안전하게 추가 데이터를 제공하는 데 사용됩니다. 이 JSON 파일은 [특정 표준](/token-metadata/token-standard)을 따르며 누구나 토큰에 대한 유용한 정보를 찾는 데 사용할 수 있습니다.
+Metadata 계정의 중요한 속성 중 하나는 오프체인 JSON 파일을 가리키는 `URI` 속성입니다. 이는 온체인 데이터 저장과 관련된 수수료에 제약을 받지 않으면서 안전하게 추가 데이터를 제공하는 데 사용됩니다. 이 JSON 파일은 [특정 표준](/ko/smart-contracts/token-metadata/token-standard)을 따르며 누구나 토큰에 대한 유용한 정보를 찾는 데 사용할 수 있습니다.
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -227,7 +227,7 @@ JSON 메타데이터
 
 또한 Token Metadata 프로그램은 NFT를 위해 특별히 **Master Edition 계정**이라는 또 다른 계정을 제공합니다. 이 계정도 Mint 계정에서 파생된 PDA입니다.
 
-이 계정을 생성하기 전에, Token Metadata 프로그램은 위에 나열된 대체 불가능한 토큰의 특별한 특성이 충족되는지 확인합니다. 그러나 주목할 점은 Mint Authority를 무효화하는 대신, Token Metadata 프로그램을 거치지 않고는 누구도 토큰을 민트하거나 동결할 수 없도록 보장하기 위해 Mint Authority와 Freeze Authority를 모두 Master Edition PDA로 이전한다는 것입니다. [이 결정이 내려진 이유에 대해 FAQ에서 더 자세히 읽을 수 있습니다](/token-metadata/faq#why-are-the-mint-and-freeze-authorities-transferred-to-the-edition-pda).
+이 계정을 생성하기 전에, Token Metadata 프로그램은 위에 나열된 대체 불가능한 토큰의 특별한 특성이 충족되는지 확인합니다. 그러나 주목할 점은 Mint Authority를 무효화하는 대신, Token Metadata 프로그램을 거치지 않고는 누구도 토큰을 민트하거나 동결할 수 없도록 보장하기 위해 Mint Authority와 Freeze Authority를 모두 Master Edition PDA로 이전한다는 것입니다. [이 결정이 내려진 이유에 대해 FAQ에서 더 자세히 읽을 수 있습니다](/ko/smart-contracts/token-metadata/faq#why-are-the-mint-and-freeze-authorities-transferred-to-the-edition-pda).
 
 따라서 **Master Edition 계정의 존재는 해당 Mint 계정에 대한 대체 불가능성의 증거 역할을 합니다**.
 
@@ -362,7 +362,7 @@ NFT가 Token Metadata 프로그램의 가장 큰 사용 사례이지만, 이 프
 - `Fungible`: Mint 계정은 대체 가능하며 소수점 자리가 1개 이상입니다. 이는 분산 통화로 사용될 가능성이 높은 토큰입니다.
 - `ProgrammableNonFungible`: 맞춤형 승인 규칙을 적용하기 위해 항상 동결되어 있는 특별한 `NonFungible` 토큰입니다. 자세한 내용은 다음 섹션을 참조하세요.
 
-[이러한 표준에 대해 여기서 더 자세히 읽을 수 있습니다](/token-metadata/token-standard).
+[이러한 표준에 대해 여기서 더 자세히 읽을 수 있습니다](/ko/smart-contracts/token-metadata/token-standard).
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -442,7 +442,7 @@ Token Metadata 프로그램이 Solana Token 프로그램 위에 구축되기 때
 
 그런 다음 크리에이터가 Token Metadata 프로그램에 의해 적용될 맞춤형 작업별 승인 규칙을 정의하는 것은 크리에이터의 몫입니다. 이들은 Metadata 계정에 첨부된 특별한 **RuleSet** 계정에 정의됩니다. 이러한 RuleSet의 예로는 로열티를 존중하는 프로그램 주소의 허용 목록이 있을 수 있습니다. RuleSet은 [Token Auth Rules](/token-auth-rules)라는 새로운 Metaplex 프로그램의 일부입니다.
 
-[프로그래머블 NFT에 대해 여기서 더 자세히 읽을 수 있습니다](/token-metadata/pnfts).
+[프로그래머블 NFT에 대해 여기서 더 자세히 읽을 수 있습니다](/ko/smart-contracts/token-metadata/pnfts).
 
 {% diagram %}
 {% node %}
@@ -488,15 +488,15 @@ Token Metadata 프로그램이 Solana Token 프로그램 위에 구축되기 때
 
 이 문서의 다른 페이지들은 이를 더 자세히 문서화하고 중요한 기능들을 각각의 개별 페이지에서 설명하는 것을 목표로 합니다.
 
-- [토큰 표준 (자산)](/token-metadata/token-standard)
-- [자산 민팅](/token-metadata/mint)
-- [자산 업데이트](/token-metadata/update)
-- [자산 전송](/token-metadata/transfer)
-- [자산 소각](/token-metadata/burn)
-- [인쇄된 에디션](/token-metadata/print)
-- [검증된 컬렉션](/token-metadata/collections)
-- [검증된 크리에이터](/token-metadata/creators)
-- [위임된 권한](/token-metadata/delegates)
-- [자산 잠금](/token-metadata/lock)
-- [프로그래머블 NFT](/token-metadata/pnfts)
-- [NFT 에스크로](/token-metadata/escrow)
+- [토큰 표준 (자산)](/ko/smart-contracts/token-metadata/token-standard)
+- [자산 민팅](/ko/smart-contracts/token-metadata/mint)
+- [자산 업데이트](/ko/smart-contracts/token-metadata/update)
+- [자산 전송](/ko/smart-contracts/token-metadata/transfer)
+- [자산 소각](/ko/smart-contracts/token-metadata/burn)
+- [인쇄된 에디션](/ko/smart-contracts/token-metadata/print)
+- [검증된 컬렉션](/ko/smart-contracts/token-metadata/collections)
+- [검증된 크리에이터](/ko/smart-contracts/token-metadata/creators)
+- [위임된 권한](/ko/smart-contracts/token-metadata/delegates)
+- [자산 잠금](/ko/smart-contracts/token-metadata/lock)
+- [프로그래머블 NFT](/ko/smart-contracts/token-metadata/pnfts)
+- [NFT 에스크로](/ko/smart-contracts/token-metadata/escrow)

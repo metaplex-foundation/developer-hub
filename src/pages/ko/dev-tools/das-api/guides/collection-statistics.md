@@ -140,7 +140,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 팁과 모범 사례
 
-1. **[페이지네이션 사용](/das-api/guides/pagination)** - 대규모 컬렉션의 경우 완전한 데이터를 얻기 위해 페이지네이션 사용
+1. **[페이지네이션 사용](/ko/dev-tools/das-api/guides/pagination)** - 대규모 컬렉션의 경우 완전한 데이터를 얻기 위해 페이지네이션 사용
 2. **결과 캐싱** - 빈번한 쿼리의 성능 향상을 위해 결과 캐싱
 3. **엣지 케이스 처리** - 누락된 메타데이터나 속성 처리
 4. **데이터 정규화** - 컬렉션 간 일관된 분석을 위한 데이터 정규화
@@ -148,6 +148,6 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 더 읽어보기
 
-- [컬렉션의 모든 토큰 가져오기](/das-api/guides/get-collection-nfts) - 특정 컬렉션의 모든 자산 가져오기
-- [압축 NFT 찾기](/das-api/guides/find-compressed-nfts) - 압축 NFT 검색 및 작업
-- [여러 조건으로 자산 검색](/das-api/guides/search-by-criteria) - 고급 쿼리를 위해 여러 필터 결합
+- [컬렉션의 모든 토큰 가져오기](/ko/dev-tools/das-api/guides/get-collection-nfts) - 특정 컬렉션의 모든 자산 가져오기
+- [압축 NFT 찾기](/ko/dev-tools/das-api/guides/find-compressed-nfts) - 압축 NFT 검색 및 작업
+- [여러 조건으로 자산 검색](/ko/dev-tools/das-api/guides/search-by-criteria) - 고급 쿼리를 위해 여러 필터 결합

@@ -14,7 +14,7 @@ An Edition is a copy of the same "Master Edition". To understand the concept it 
 
 MPL Core Edition support was added close after to the mainnet release. Different to Token Metadata Editions the Edition Numbers and Supply are not enforced, but informational.
 
-To achieve the Edition concept in Core two [Plugins](/core/plugins) are used: [Master Edition](/core/plugins/master-edition) in the Collection and [Edition](/core/plugins/edition) in the Asset, which are the prints. The hierarchy looks like this:
+To achieve the Edition concept in Core two [Plugins](/smart-contracts/core/plugins) are used: [Master Edition](/smart-contracts/core/plugins/master-edition) in the Collection and [Edition](/smart-contracts/core/plugins/edition) in the Asset, which are the prints. The hierarchy looks like this:
 
 {% diagram %}
 {% node %}
@@ -83,9 +83,9 @@ const keypair = generateSigner(umi);
 umi.use(keypairIdentity(keypair));
 ```
 
-After this setup we can create the Collection with [Master Edition Plugin](/core/plugins/master-edition). The `maxSupply` field determines how many Editions you want to print. The `name` and `uri` fields in the Plugin can be used in addition to the Collection Name and uri.
+After this setup we can create the Collection with [Master Edition Plugin](/smart-contracts/core/plugins/master-edition). The `maxSupply` field determines how many Editions you want to print. The `name` and `uri` fields in the Plugin can be used in addition to the Collection Name and uri.
 
-For ease of use we also add the [Royalty Plugin](/core/plugins/royalties).
+For ease of use we also add the [Royalty Plugin](/smart-contracts/core/plugins/royalties).
 
 ```ts
 const collectionSigner = generateSigner(umi);
@@ -114,7 +114,7 @@ await createCollection(umi, {
 After the creation of the Collection we can create the candy machine using `hiddenSettings` and the `edition` guard.
 
 - `hiddenSettings` are used to assign the same, or similar, Name and Metadata to all Assets minted. You can use a `$ID$` variable that will be replaced by the index of the minted Asset on mint.
-- The `edition` Guard is used to add the [Edition Plugin](/core/plugins/edition) to the Assets. The Edition number is increasing for each minted Asset, starting with the number in `editionStartOffset`.
+- The `edition` Guard is used to add the [Edition Plugin](/smart-contracts/core/plugins/edition) to the Assets. The Edition number is increasing for each minted Asset, starting with the number in `editionStartOffset`.
 
 ```ts
 // The Name and off chain Metadata of your Editions
@@ -163,7 +163,7 @@ We strongly recommend to use Core Candy Machine for MPL Core Editions. Candy Mac
 
 To create an Edition without Core Candy Machine you would:
 
-1. Create a Collection using the [Master Edition](/core/plugins/master-edition) Plugin
+1. Create a Collection using the [Master Edition](/smart-contracts/core/plugins/master-edition) Plugin
 
 {% dialect-switcher title="Create a MPL Core Collection with Master Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
@@ -265,7 +265,7 @@ pub async fn create_collection_with_plugin() {
 
 {% /dialect-switcher %}
 
-2. Create Assets with the [Edition](/core/plugins/edition) Plugin. Remember to increase the number in the plugin.
+2. Create Assets with the [Edition](/smart-contracts/core/plugins/edition) Plugin. Remember to increase the number in the plugin.
 
 {% dialect-switcher title="Creating an MPL Core Asset with the Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
@@ -353,5 +353,5 @@ pub async fn create_asset_with_plugin() {
 
 ## Further Reading
 - [Mint from Candy Machine](/core-candy-machine/mint)
-- [Master Edition Plugin](/core/plugins/master-edition)
-- [Edition Plugin](/core/plugins/edition)
+- [Master Edition Plugin](/smart-contracts/core/plugins/master-edition)
+- [Edition Plugin](/smart-contracts/core/plugins/edition)

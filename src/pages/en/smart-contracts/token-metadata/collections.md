@@ -9,7 +9,7 @@ Certified Collections enables NFTs – and tokens in general — **to be grouped
 This feature provides the following advantages:
 
 - Easy to identify which collection any given NFT belongs to without making additional onchain calls.
-- Possible to find all NFTs that belong to a given collection ([Check the Guide to see how](/token-metadata/guides/get-by-collection)).
+- Possible to find all NFTs that belong to a given collection ([Check the Guide to see how](/smart-contracts/token-metadata/guides/get-by-collection)).
 - Easy to manage the collection metadata such as its name, description and image.
 
 ## Collections are NFTs
@@ -415,7 +415,7 @@ Once the `Collection` attribute is set on an NFT, an authority of the Collection
 
 - **Metadata**: The address of the NFT's Metadata account. This is the NFT we want to verify inside the collection.
 - **Collection Mint**: The address of the Collection NFT's Mint account. This is the Collection NFT that is already set on the Metadata account of the NFT but not yet verified.
-- **Authority**: The authority of the Collection NFT as a Signer. This can be the Update Authority of the Collection NFT or an approved delegate with the appropriate role (See "[Delegated Authority](/token-metadata/delegates)" page).
+- **Authority**: The authority of the Collection NFT as a Signer. This can be the Update Authority of the Collection NFT or an approved delegate with the appropriate role (See "[Delegated Authority](/smart-contracts/token-metadata/delegates)" page).
 
 Here is how you can use our SDKs to verify a Collection NFT on Token Metadata.
 

@@ -6,7 +6,7 @@ description: Explains how to load items into Candy Machines.
 
 So far we’ve learnt to create and configure Candy Machines but we’ve not seen how to insert items inside them that can then be minted into NFTs. Thus, let’s tackle that on this page. {% .lead %}
 
-It is important to remember that **inserting items only applies to Candy Machines using [Config Line Settings](/candy-machine/settings#config-line-settings)**. This is because NFTs minted from Candy Machine using [Hidden Settings](/candy-machine/settings#hidden-settings) will all share the same “hidden” name and URI.
+It is important to remember that **inserting items only applies to Candy Machines using [Config Line Settings](/smart-contracts/candy-machine/settings#config-line-settings)**. This is because NFTs minted from Candy Machine using [Hidden Settings](/smart-contracts/candy-machine/settings#hidden-settings) will all share the same “hidden” name and URI.
 
 ## Uploading JSON Metadata
 
@@ -21,7 +21,7 @@ You can find example assets for testing in this [Github repository](https://gith
 
 Fortunately, our SDKs can help you with that. They allow you to upload a JSON object and retrieve its URI.
 
-Additionally, tools like [Sugar](/candy-machine/sugar) make uploading JSON metadata a breeze by uploading in parallel, caching the process and retrying failed uploads.
+Additionally, tools like [Sugar](/smart-contracts/candy-machine/sugar) make uploading JSON metadata a breeze by uploading in parallel, caching the process and retrying failed uploads.
 
 {% dialect-switcher title="Upload items" %}
 {% dialect title="JavaScript" id="js" %}
@@ -186,4 +186,4 @@ API References: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/
 
 And just like that, we have a loaded Candy Machine ready to mint NFTs! However, we've not created any requirements for our minting process. How can we configure the price of the mint? How can we ensure that buyers are holders of a specific token or an NFT from a specific collection? How can we set the start date of our mint? What about the end conditions?
 
-[On the next page](/candy-machine/guards), we’ll talk about Candy Guards which make all of this possible.
+[On the next page](/smart-contracts/candy-machine/guards), we’ll talk about Candy Guards which make all of this possible.
