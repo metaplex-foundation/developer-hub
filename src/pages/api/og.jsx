@@ -3,31 +3,27 @@ import { ImageResponse } from '@vercel/og'
 
 export const config = {
   runtime: 'edge',
-  unstable_allowDynamic: [
-    '/node_modules/.pnpm/@vercel+og**',
-    '/node_modules/@vercel/og/**',
-  ],
 }
 
 // Product colors matching the site theme
 const productColors = {
-  core: { bg: '#22c55e', text: '#000000' },           // green-500
-  'candy-machine': { bg: '#ec4899', text: '#FFFFFF' }, // pink-500
+  core: { bg: '#22c55e', text: '#000000' },
+  'candy-machine': { bg: '#ec4899', text: '#FFFFFF' },
   'core-candy-machine': { bg: '#ec4899', text: '#FFFFFF' },
-  bubblegum: { bg: '#0ea5e9', text: '#000000' },      // sky-500
+  bubblegum: { bg: '#0ea5e9', text: '#000000' },
   'bubblegum-v2': { bg: '#0ea5e9', text: '#000000' },
-  umi: { bg: '#8b5cf6', text: '#FFFFFF' },            // violet-500
-  'token-metadata': { bg: '#f59e0b', text: '#000000' }, // amber-500
-  'mpl-hybrid': { bg: '#ef4444', text: '#FFFFFF' },   // red-500
-  'das-api': { bg: '#14b8a6', text: '#000000' },      // teal-500
-  cli: { bg: '#10b981', text: '#000000' },            // emerald-500
-  guides: { bg: '#22c55e', text: '#000000' },         // green-500
+  umi: { bg: '#8b5cf6', text: '#FFFFFF' },
+  'token-metadata': { bg: '#f59e0b', text: '#000000' },
+  'mpl-hybrid': { bg: '#ef4444', text: '#FFFFFF' },
+  'das-api': { bg: '#14b8a6', text: '#000000' },
+  cli: { bg: '#10b981', text: '#000000' },
+  guides: { bg: '#22c55e', text: '#000000' },
   default: { bg: '#FFFFFF', text: '#000000' },
 }
 
 export default async function handler(req) {
   try {
-    const { searchParams, origin } = new URL(req.url)
+    const { searchParams } = new URL(req.url)
 
     // Get params from URL
     const title = searchParams.get('title') || 'Metaplex Developer Hub'
@@ -38,7 +34,6 @@ export default async function handler(req) {
     const colors = productColors[product.toLowerCase()] || productColors.default
 
     // Fetch the logo image
-    // Use production URL for logo to ensure it's always accessible
     const logoUrl = 'https://developers.metaplex.com/metaplex-logo-white.png'
     const logoData = await fetch(logoUrl).then((res) => res.arrayBuffer())
 
