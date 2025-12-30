@@ -72,7 +72,14 @@ export function generateAlternateUrls(pathname) {
 
   // Generate alternate URLs for each language
   for (const lang of Object.values(LANGUAGES)) {
-    const url = lang.urlPath ? `${lang.urlPath}${normalizedPath}` : normalizedPath
+    // For the homepage, don't append trailing slash to language paths
+    // e.g., /ja instead of /ja/ to avoid 308 redirects
+    let url
+    if (normalizedPath === '/') {
+      url = lang.urlPath || '/'
+    } else {
+      url = lang.urlPath ? `${lang.urlPath}${normalizedPath}` : normalizedPath
+    }
     alternates.push({
       hreflang: lang.code,
       url: url,
