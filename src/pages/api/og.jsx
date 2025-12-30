@@ -1,10 +1,6 @@
 /* eslint-disable @next/next/no-img-element, jsx-a11y/alt-text */
 import { ImageResponse } from '@vercel/og'
 
-export const config = {
-  runtime: 'edge',
-}
-
 // Product colors matching the site theme
 const productColors = {
   core: { bg: '#22c55e', text: '#000000' },
