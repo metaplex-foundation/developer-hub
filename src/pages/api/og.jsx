@@ -33,7 +33,8 @@ export default async function handler(req) {
     const colors = productColors[product.toLowerCase()] || productColors.default
 
     // Fetch the logo image
-    const logoUrl = `${origin}/metaplex-logo-white.png`
+    // Use production URL for logo to ensure it's always accessible
+    const logoUrl = 'https://developers.metaplex.com/metaplex-logo-white.png'
     const logoData = await fetch(logoUrl).then((res) => res.arrayBuffer())
 
     // Format product name for display
