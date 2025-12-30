@@ -18,16 +18,14 @@ const productColors = {
 }
 
 export default async function handler(req) {
+  console.log('OG handler started')
   try {
     // Get params from query (Node.js runtime uses req.query)
     const { title = 'Metaplex Developer Hub', description = 'Build the future of digital assets on Solana', product = '' } = req.query
+    console.log('Params:', { title, description, product })
 
     // Get product color scheme
     const colors = productColors[product.toLowerCase()] || productColors.default
-
-    // Fetch the logo image
-    const logoUrl = 'https://developers.metaplex.com/metaplex-logo-white.png'
-    const logoData = await fetch(logoUrl).then((res) => res.arrayBuffer())
 
     // Format product name for display
     const productDisplay = product
@@ -37,6 +35,13 @@ export default async function handler(req) {
           .join(' ')
       : ''
 
+    // Fetch logo image
+    console.log('Fetching logo...')
+    const logoUrl = 'https://developers.metaplex.com/metaplex-logo-white.png'
+    const logoData = await fetch(logoUrl).then((res) => res.arrayBuffer())
+    console.log('Logo fetched, size:', logoData.byteLength)
+
+    console.log('Creating ImageResponse...')
     return new ImageResponse(
       (
         <div
