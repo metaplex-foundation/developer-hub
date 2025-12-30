@@ -1,6 +1,6 @@
 ---
 title: Solanaでのトランザクションエラーの診断方法
-metaTitle: Solanaでのトランザクションエラーの診断方法
+metaTitle: Solanaでのトランザクションエラーの診断方法 | Metaplex Guides
 description: Solanaでトランザクションエラーを診断し、これらのエラーに対する論理的な解決策を見つける方法を学習します。
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

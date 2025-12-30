@@ -1,5 +1,6 @@
 ---
 title: 탐색기 구성
+metaTitle: 탐색기 구성 | Metaplex CLI
 description: 선호하는 블록체인 탐색기 설정
 ---
 

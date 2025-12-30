@@ -1,5 +1,6 @@
 ---
 title: はじめに
+metaTitle: はじめに | Metaplex CLI
 description: Metaplex CLIへようこそ
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: コレクションの作成
+metaTitle: コレクションの作成 | Metaplex CLI
 description: 異なる方法を使用してMPLコアコレクションを作成
 ---
 

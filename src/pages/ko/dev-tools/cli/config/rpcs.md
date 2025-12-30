@@ -1,5 +1,6 @@
 ---
 title: RPC
+metaTitle: RPC | Metaplex CLI
 description: 구성에서 RPC 엔드포인트 관리
 ---
 

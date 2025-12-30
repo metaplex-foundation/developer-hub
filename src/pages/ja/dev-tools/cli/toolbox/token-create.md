@@ -1,5 +1,6 @@
 ---
 title: トークンの作成
+metaTitle: トークンの作成 | Metaplex CLI
 description: Solanaで新しい代替可能トークンを作成
 ---
 

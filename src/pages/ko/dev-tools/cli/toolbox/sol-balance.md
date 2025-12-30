@@ -1,5 +1,6 @@
 ---
 title: SOL 잔액
+metaTitle: SOL 잔액 | Metaplex CLI
 description: 지갑 주소의 SOL 잔액 확인
 ---
 

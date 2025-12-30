@@ -1,6 +1,6 @@
 ---
 title: How to Diagnose Transaction Errors on Solana
-metaTitle: How to Diagnose Transaction Errors on Solana
+metaTitle: How to Diagnose Transaction Errors on Solana | Metaplex Guides
 description: Learn how to diagnose transaction errors on Solana and find logical solutions for these errors.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

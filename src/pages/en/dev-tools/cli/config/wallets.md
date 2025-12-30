@@ -1,5 +1,6 @@
 ---
 title: Wallets
+metaTitle: Wallets | Metaplex CLI
 description: Manage wallet configurations
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Update Asset
+metaTitle: Update Asset | Metaplex CLI
 description: Update MPL Core Asset metadata and properties
 ---
 
