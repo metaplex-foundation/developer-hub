@@ -1,7 +1,7 @@
 ---
 title: 圧縮NFTの更新
 metaTitle: 圧縮NFTの更新 | Bubblegum V2
-description: Bubblegumで圧縮NFTを更新する方法を学びます。
+description: Bubblegum V2で圧縮NFTを更新する方法を学びます。
 ---
 
 **updateMetadataV2**命令は、圧縮NFTのメタデータを変更するために使用できます。マークルルートは、データの伝播されたハッシュを反映するように更新され、[Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)に準拠するRPCプロバイダーは、cNFTのインデックスを更新します。
