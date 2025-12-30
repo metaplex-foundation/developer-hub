@@ -1,5 +1,6 @@
 ---
 title: RPCs
+metaTitle: RPCs | Metaplex CLI
 description: Manage RPC endpoints in your configuration
 ---
 

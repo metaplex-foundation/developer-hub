@@ -1,5 +1,6 @@
 ---
 title: SOL Balance
+metaTitle: SOL Balance | Metaplex CLI
 description: Check SOL balance for a wallet address
 ---
 

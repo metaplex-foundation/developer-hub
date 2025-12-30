@@ -1,6 +1,6 @@
 ---
 title: 로컬 검증자 설정
-metaTitle: 로컬 검증자 설정
+metaTitle: 로컬 검증자 설정 | Metaplex Guides
 description: 로컬 개발 환경을 설정하고 로컬 검증자를 사용하는 방법을 배웁니다
 # remember to update dates also in /components/guides/index.js
 created: '04-19-2025'

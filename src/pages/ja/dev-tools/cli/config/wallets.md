@@ -1,5 +1,6 @@
 ---
 title: ウォレット
+metaTitle: ウォレット | Metaplex CLI
 description: ウォレット設定の管理
 ---
 

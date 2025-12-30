@@ -1,6 +1,6 @@
 ---
 title: Setup a Local Validator
-metaTitle: Setup a Local Validator
+metaTitle: Setup a Local Validator | Metaplex Guides
 description: Learn how to setup a local development environment and use a local validator
 # remember to update dates also in /components/guides/index.js
 created: '04-19-2025'

@@ -1,5 +1,6 @@
 ---
 title: プラグイン
+metaTitle: プラグイン | Metaplex CLI
 description: MPLコアアセットとコレクションプラグインの管理
 ---
 

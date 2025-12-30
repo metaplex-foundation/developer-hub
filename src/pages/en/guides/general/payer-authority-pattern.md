@@ -1,6 +1,6 @@
 ---
 title: The Payer-Authority Pattern
-metaTitle: The Payer-Authority Pattern
+metaTitle: The Payer-Authority Pattern | Metaplex Guides
 description: A common programming pattern for Solana instructions using a separate authority and payer.
 # remember to update dates also in /components/guides/index.js
 created: '12-30-2024'

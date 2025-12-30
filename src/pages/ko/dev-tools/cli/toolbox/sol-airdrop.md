@@ -1,5 +1,6 @@
 ---
 title: SOL 에어드롭
+metaTitle: SOL 에어드롭 | Metaplex CLI
 description: 지정된 주소로 SOL 에어드롭
 ---
 

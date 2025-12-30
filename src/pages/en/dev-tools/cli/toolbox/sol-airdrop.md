@@ -1,5 +1,6 @@
 ---
 title: SOL Airdrop
+metaTitle: SOL Airdrop | Metaplex CLI
 description: Airdrop SOL to a specified address
 ---
 

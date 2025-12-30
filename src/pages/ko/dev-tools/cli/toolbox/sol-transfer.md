@@ -1,5 +1,6 @@
 ---
 title: SOL 전송
+metaTitle: SOL 전송 | Metaplex CLI
 description: 지정된 주소로 SOL 전송
 ---
 

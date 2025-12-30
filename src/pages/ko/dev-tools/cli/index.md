@@ -1,5 +1,6 @@
 ---
 title: 소개
+metaTitle: 소개 | Metaplex CLI
 description: Metaplex CLI에 오신 것을 환영합니다
 ---
 

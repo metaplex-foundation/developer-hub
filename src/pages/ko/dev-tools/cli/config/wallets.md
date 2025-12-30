@@ -1,5 +1,6 @@
 ---
 title: 지갑
+metaTitle: 지갑 | Metaplex CLI
 description: 지갑 구성 관리
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: SOL転送
+metaTitle: SOL転送 | Metaplex CLI
 description: 指定されたアドレスにSOLを転送
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Token Transfer
+metaTitle: Token Transfer | Metaplex CLI
 description: Transfer tokens to a destination address
 ---
 

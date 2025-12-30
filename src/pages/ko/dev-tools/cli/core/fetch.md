@@ -1,5 +1,6 @@
 ---
 title: 자산 또는 컬렉션 가져오기
+metaTitle: 자산 또는 컬렉션 가져오기 | Metaplex CLI
 description: 민트 주소로 MPL Core 자산 또는 컬렉션 가져오기
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: 토큰 전송
+metaTitle: 토큰 전송 | Metaplex CLI
 description: 대상 주소로 토큰 전송
 ---
 

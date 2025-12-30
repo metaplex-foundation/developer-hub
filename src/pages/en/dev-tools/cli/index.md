@@ -1,5 +1,6 @@
 ---
 title: Introduction
+metaTitle: Introduction | Metaplex CLI
 description: Welcome to the Metaplex CLI
 ---
 

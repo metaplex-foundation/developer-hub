@@ -1,5 +1,6 @@
 ---
 title: 설치
+metaTitle: 설치 | Metaplex CLI
 description: Metaplex CLI 설치 및 설정
 ---
 
