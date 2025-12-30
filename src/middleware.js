@@ -31,6 +31,11 @@ const standaloneRedirects = {
   '/stability-index': '/smart-contracts/security',
   '/ja/stability-index': '/ja/smart-contracts/security',
   '/ko/stability-index': '/ko/smart-contracts/security',
+  // Legacy page redirects
+  '/community-guides': '/guides',
+  '/contact': '/',
+  '/developer-tools': '/dev-tools',
+  '/programs-and-tools': '/smart-contracts',
 }
 
 const redirectRules = {
@@ -53,6 +58,44 @@ const redirectRules = {
   '/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
       '/guides/javascript/how-to-create-a-solana-token',
+  },
+  // Japanese guide redirects
+  '/ja/guides': {
+    '/javascript/how-to-create-an-spl-token-on-solana':
+      '/ja/guides/javascript/how-to-create-a-solana-token',
+  },
+  // Korean guide redirects
+  '/ko/guides': {
+    '/javascript/how-to-create-an-spl-token-on-solana':
+      '/ko/guides/javascript/how-to-create-a-solana-token',
+  },
+  // Japanese smart-contracts redirects
+  '/ja/smart-contracts/bubblegum': {
+    '/getting-started': '/ja/smart-contracts/bubblegum/sdk',
+    '/getting-started/js': '/ja/smart-contracts/bubblegum/sdk/javascript',
+    '/getting-started/rust': '/ja/smart-contracts/bubblegum/sdk/rust',
+  },
+  '/ja/smart-contracts/core': {
+    '/getting-started': '/ja/smart-contracts/core/sdk',
+  },
+  '/ja/smart-contracts/core-candy-machine': {
+    '/getting-started': '/ja/smart-contracts/core-candy-machine/sdk',
+    '/getting-started/js': '/ja/smart-contracts/core-candy-machine/sdk/javascript',
+    '/getting-started/rust': '/ja/smart-contracts/core-candy-machine/sdk/rust',
+  },
+  // Korean smart-contracts redirects
+  '/ko/smart-contracts/bubblegum': {
+    '/getting-started': '/ko/smart-contracts/bubblegum/sdk',
+    '/getting-started/js': '/ko/smart-contracts/bubblegum/sdk/javascript',
+    '/getting-started/rust': '/ko/smart-contracts/bubblegum/sdk/rust',
+  },
+  '/ko/smart-contracts/core': {
+    '/getting-started': '/ko/smart-contracts/core/sdk',
+  },
+  '/ko/smart-contracts/core-candy-machine': {
+    '/getting-started': '/ko/smart-contracts/core-candy-machine/sdk',
+    '/getting-started/js': '/ko/smart-contracts/core-candy-machine/sdk/javascript',
+    '/getting-started/rust': '/ko/smart-contracts/core-candy-machine/sdk/rust',
   },
   // Legacy redirects - old paths (a) redirect to old destinations (b)
   // The smart contract redirects will then redirect (b) to new paths (c)
