@@ -1,7 +1,12 @@
-import { ImageResponse } from 'next/og'
+/* eslint-disable @next/next/no-img-element, jsx-a11y/alt-text */
+import { ImageResponse } from '@vercel/og'
 
 export const config = {
   runtime: 'edge',
+  unstable_allowDynamic: [
+    '/node_modules/.pnpm/@vercel+og**',
+    '/node_modules/@vercel/og/**',
+  ],
 }
 
 // Product colors matching the site theme
