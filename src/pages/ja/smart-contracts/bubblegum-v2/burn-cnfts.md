@@ -1,7 +1,7 @@
 ---
 title: 圧縮NFTのバーン
 metaTitle: 圧縮NFTのバーン | Bubblegum V2
-description: Bubblegumで圧縮NFTをバーンする方法を学びます。
+description: Bubblegum V2で圧縮NFTをバーンする方法を学びます。
 ---
 
 **burnV2**命令は、圧縮NFTをバーンし、Bubblegumツリーから永続的に削除するために使用できます。この操作を認証するには、現在の所有者またはデリゲート権限（存在する場合）がトランザクションに署名する必要があります。命令は以下のパラメータを受け入れます：

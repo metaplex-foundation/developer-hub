@@ -1,7 +1,7 @@
 ---
 title: 圧縮NFTの転送
 metaTitle: 圧縮NFTの転送 | Bubblegum v2
-description: Bubblegumで圧縮NFTを転送する方法を学びます。
+description: Bubblegum V2で圧縮NFTを転送する方法を学びます。
 ---
 
 **transferV2**命令は、圧縮NFTをある所有者から別の所有者に転送するために使用できます。転送を認証するには、現在の所有者またはデリゲート権限（存在する場合）がトランザクションに署名する必要があります。デリゲート権限は、リーフデリゲートまたはコレクションの`permanentTransferDelegate`のいずれかです。
