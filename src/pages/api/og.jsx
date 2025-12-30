@@ -17,12 +17,12 @@ const productColors = {
   default: { bg: '#FFFFFF', text: '#000000' },
 }
 
-export default async function handler(req) {
-  console.log('OG handler started')
+export default async function handler(req, res) {
   try {
-    // Get params from query (Node.js runtime uses req.query)
-    const { title = 'Metaplex Developer Hub', description = 'Build the future of digital assets on Solana', product = '' } = req.query
-    console.log('Params:', { title, description, product })
+    // Get params from query (Node.js runtime)
+    const title = req.query.title || 'Metaplex Developer Hub'
+    const description = req.query.description || 'Build the future of digital assets on Solana'
+    const product = req.query.product || ''
 
     // Get product color scheme
     const colors = productColors[product.toLowerCase()] || productColors.default
@@ -36,13 +36,11 @@ export default async function handler(req) {
       : ''
 
     // Fetch logo image
-    console.log('Fetching logo...')
     const logoUrl = 'https://developers.metaplex.com/metaplex-logo-white.png'
-    const logoData = await fetch(logoUrl).then((res) => res.arrayBuffer())
-    console.log('Logo fetched, size:', logoData.byteLength)
+    const logoData = await fetch(logoUrl).then((r) => r.arrayBuffer())
 
-    console.log('Creating ImageResponse...')
-    return new ImageResponse(
+    // Create ImageResponse
+    const imageResponse = new ImageResponse(
       (
         <div
           style={{
@@ -184,8 +182,14 @@ export default async function handler(req) {
         height: 630,
       }
     )
+
+    // Convert to buffer and send via res (Pages Router Node.js pattern)
+    const buffer = await imageResponse.arrayBuffer()
+    res.setHeader('Content-Type', 'image/png')
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+    res.status(200).send(Buffer.from(buffer))
   } catch (e) {
     console.error('OG Image generation error:', e)
-    return new Response('Failed to generate image', { status: 500 })
+    res.status(500).send('Failed to generate image')
   }
 }
