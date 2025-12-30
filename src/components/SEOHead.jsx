@@ -24,6 +24,19 @@ import { LANGUAGES, generateAlternateUrls } from '@/config/languages'
 const SITE_URL = 'https://developers.metaplex.com'
 
 /**
+ * Get the base URL for the current environment
+ * Uses Vercel's automatic URL for preview deployments
+ */
+function getBaseUrl() {
+  // For preview deployments on Vercel
+  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  }
+  // For production
+  return SITE_URL
+}
+
+/**
  * Generate dynamic OG image URL
  * Uses the /api/og endpoint to create dynamic social preview images
  */
@@ -32,7 +45,7 @@ function generateOGImageUrl(title, description, product) {
   if (title) params.set('title', title)
   if (description) params.set('description', description)
   if (product) params.set('product', product)
-  return `${SITE_URL}/api/og?${params.toString()}`
+  return `${getBaseUrl()}/api/og?${params.toString()}`
 }
 
 /**
