@@ -19,12 +19,8 @@ const productColors = {
 
 export default async function handler(req) {
   try {
-    const { searchParams } = new URL(req.url)
-
-    // Get params from URL
-    const title = searchParams.get('title') || 'Metaplex Developer Hub'
-    const description = searchParams.get('description') || 'Build the future of digital assets on Solana'
-    const product = searchParams.get('product') || ''
+    // Get params from query (Node.js runtime uses req.query)
+    const { title = 'Metaplex Developer Hub', description = 'Build the future of digital assets on Solana', product = '' } = req.query
 
     // Get product color scheme
     const colors = productColors[product.toLowerCase()] || productColors.default
