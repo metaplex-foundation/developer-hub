@@ -28,6 +28,10 @@ const SITE_URL = 'https://developers.metaplex.com'
  * Uses Vercel's automatic URL for preview deployments
  */
 function getBaseUrl() {
+  // For local development
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:3000'
+  }
   // For preview deployments on Vercel
   if (process.env.NEXT_PUBLIC_VERCEL_URL) {
     return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
@@ -95,7 +99,9 @@ export function SEOHead({ title, description, metaTitle, locale = 'en', product:
   const finalMetaTitle = metaTitle || title
 
   // Determine product from prop or pathname
-  const product = productProp || extractProductFromPath(pathname)
+  // productProp comes as 'smart-contracts/core' or 'dev-tools/cli', extract the last segment
+  const rawProduct = productProp || extractProductFromPath(pathname)
+  const product = rawProduct?.includes('/') ? rawProduct.split('/').pop() : rawProduct
 
   // Generate dynamic OG image URL
   const ogImageUrl = generateOGImageUrl(title, description, product)

@@ -145,18 +145,13 @@ export default async function handler(req, res) {
               borderTop: '1px solid #525252',
             }}
           >
-            {/* Product badge */}
+            {/* Product name */}
             {productDisplay ? (
               <div
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  backgroundColor: colors.bg,
-                  color: colors.text,
-                  padding: '10px 20px',
-                  borderRadius: 6,
-                  fontSize: 18,
+                  fontSize: 36,
                   fontWeight: 600,
+                  color: '#FFFFFF',
                 }}
               >
                 {productDisplay}
