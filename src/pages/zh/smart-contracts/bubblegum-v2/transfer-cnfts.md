@@ -6,10 +6,10 @@ description: 了解如何在Bubblegum上转移压缩NFT。
 
 **transferV2**指令可用于将压缩NFT从一个所有者转移到另一个。要授权转移，当前所有者或委托权限（如果有）必须签署交易。委托权限可以是叶子委托人或集合的`permanentTransferDelegate`。
 
-请注意，此指令更新压缩NFT，因此会替换Bubblegum树上的叶子。这意味着必须提供额外的参数来验证压缩NFT的完整性。由于这些参数对于所有改变叶子的指令都是通用的，它们在[以下FAQ](/zh/bubblegum-v2/faq#replace-leaf-instruction-arguments)中有记录。幸运的是，我们可以使用辅助方法，该方法将使用Metaplex DAS API自动为我们获取这些参数。
+请注意，此指令更新压缩NFT，因此会替换Bubblegum树上的叶子。这意味着必须提供额外的参数来验证压缩NFT的完整性。由于这些参数对于所有改变叶子的指令都是通用的，它们在[以下FAQ](/zh/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)中有记录。幸运的是，我们可以使用辅助方法，该方法将使用Metaplex DAS API自动为我们获取这些参数。
 
 {% callout title="交易大小" type="note" %}
-如果遇到交易大小错误，请考虑在`getAssetWithProof`中使用`{ truncateCanopy: true }`。详见[FAQ](/zh/bubblegum-v2/faq#replace-leaf-instruction-arguments)。
+如果遇到交易大小错误，请考虑在`getAssetWithProof`中使用`{ truncateCanopy: true }`。详见[FAQ](/zh/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)。
 {% /callout %}
 
 ## 转移Bubblegum V2压缩NFT

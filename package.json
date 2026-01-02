@@ -21,6 +21,7 @@
     "@markdoc/next.js": "0.2.3",
     "@sindresorhus/slugify": "^2.2.1",
     "@tailwindcss/typography": "^0.5.15",
+    "@vercel/og": "^0.8.6",
     "autoprefixer": "^10.4.20",
     "clsx": "^1.2.1",
     "focus-visible": "^5.2.1",

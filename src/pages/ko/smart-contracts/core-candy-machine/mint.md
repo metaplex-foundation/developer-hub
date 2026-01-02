@@ -8,7 +8,7 @@ description: 사용자가 Core NFT 자산을 구매할 수 있도록 Core Candy 
 
 ## 기본 민팅
 
-[Candy Guards 페이지](/core-candy-machine/guards#why-another-program)에서 언급했듯이, Candy Machine에서 NFT를 민팅하는 데 책임지는 두 개의 프로그램이 있습니다: NFT 민팅을 담당하는 Candy Machine Core 프로그램과 그 위에 구성 가능한 접근 제어 레이어를 추가하여 커스텀 가드를 제공하기 위해 포크될 수 있는 Candy Guard 프로그램입니다.
+[Candy Guards 페이지](/ko/smart-contracts/core-candy-machine/guards#why-another-program)에서 언급했듯이, Candy Machine에서 NFT를 민팅하는 데 책임지는 두 개의 프로그램이 있습니다: NFT 민팅을 담당하는 Candy Machine Core 프로그램과 그 위에 구성 가능한 접근 제어 레이어를 추가하여 커스텀 가드를 제공하기 위해 포크될 수 있는 Candy Guard 프로그램입니다.
 
 따라서 Candy Machine에서 민팅하는 두 가지 방법이 있습니다:
 
@@ -198,7 +198,7 @@ API 참조: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functio
 
 {% /diagram %}
 
-[사용 가능한 각 가드](/core-candy-machine/guards)는 자체 문서 페이지를 가지고 있으며 해당 가드가 민팅 시 민팅 설정을 제공해야 하는지 여부를 알려줍니다.
+[사용 가능한 각 가드](/ko/smart-contracts/core-candy-machine/guards)는 자체 문서 페이지를 가지고 있으며 해당 가드가 민팅 시 민팅 설정을 제공해야 하는지 여부를 알려줍니다.
 
 민팅 설정이 필요하지 않은 가드만 사용한다면 위의 "기본 민팅" 섹션에서 설명한 것과 동일한 방식으로 민팅할 수 있습니다. 그렇지 않으면 모든 가드의 민팅 설정을 포함하는 추가 객체 속성을 제공해야 합니다. SDK를 사용하여 실제로 어떻게 보이는지 살펴보겠습니다.
 
@@ -423,9 +423,9 @@ API 참조: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functio
 
 ### route 지시 사용하기
 
-가드가 사전 검증 단계를 요구할 수 있는 한 가지 방법은 "route" 지시를 통해 [자체 특별 지시](/core-candy-machine/guard-route)를 사용하는 것입니다.
+가드가 사전 검증 단계를 요구할 수 있는 한 가지 방법은 "route" 지시를 통해 [자체 특별 지시](/ko/smart-contracts/core-candy-machine/guard-route)를 사용하는 것입니다.
 
-좋은 예는 **Allow List** 가드입니다. 이 가드를 사용할 때 route 지시를 호출하고 유효한 Merkle Proof를 제공하여 지갑이 미리 정의된 지갑 목록에 속하는지 확인해야 합니다. 이 route 지시가 성공하면 해당 지갑에 대한 Allow List PDA를 생성하고 민팅 지시가 이를 읽어 Allow List 가드를 검증할 수 있습니다. [Allow List 가드에 대한 자세한 내용은 전용 페이지에서 확인할 수 있습니다](/core-candy-machine/guards/allow-list).
+좋은 예는 **Allow List** 가드입니다. 이 가드를 사용할 때 route 지시를 호출하고 유효한 Merkle Proof를 제공하여 지갑이 미리 정의된 지갑 목록에 속하는지 확인해야 합니다. 이 route 지시가 성공하면 해당 지갑에 대한 Allow List PDA를 생성하고 민팅 지시가 이를 읽어 Allow List 가드를 검증할 수 있습니다. [Allow List 가드에 대한 자세한 내용은 전용 페이지에서 확인할 수 있습니다](/ko/smart-contracts/core-candy-machine/guards/allow-list).
 
 {% diagram %}
 
@@ -478,7 +478,7 @@ API 참조: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functio
 
 가드가 사전 검증 단계를 수행할 수 있는 또 다른 방법은 외부 솔루션에 의존하는 것입니다.
 
-예를 들어, **Gatekeeper** 가드를 사용할 때 구성된 Gatekeeper Network에 따라 Captcha 완성과 같은 도전을 수행하여 Gateway Token을 요청해야 합니다. 그러면 Gatekeeper 가드가 그러한 Gateway Token의 존재를 확인하여 민팅을 검증하거나 거부합니다. [Gatekeeper 가드에 대한 자세한 내용은 전용 페이지에서 확인할 수 있습니다](/core-candy-machine/guards/gatekeeper).
+예를 들어, **Gatekeeper** 가드를 사용할 때 구성된 Gatekeeper Network에 따라 Captcha 완성과 같은 도전을 수행하여 Gateway Token을 요청해야 합니다. 그러면 Gatekeeper 가드가 그러한 Gateway Token의 존재를 확인하여 민팅을 검증하거나 거부합니다. [Gatekeeper 가드에 대한 자세한 내용은 전용 페이지에서 확인할 수 있습니다](/ko/smart-contracts/core-candy-machine/guards/gatekeeper).
 
 {% diagram %}
 
@@ -534,7 +534,7 @@ Gateway Token을 요청합니다.
 
 Core Candy Machine에 포함하고 싶을 가드 중 하나는 실패한 민팅에 구성 가능한 SOL 금액을 청구하여 봇으로부터 Core Candy Machine을 보호하는 Bot Tax 가드일 것입니다. 이 금액은 일반적으로 실제 사용자의 진짜 실수에 영향을 주지 않으면서 봇을 해치기 위해 적게 설정됩니다. 모든 봇 세금은 Core Candy Machine 계정으로 전송되므로 민팅이 끝나면 Core Candy Machine 계정을 삭제하여 이 자금에 액세스할 수 있습니다.
 
-이 가드는 약간 특별하며 다른 모든 가드의 민팅 동작에 영향을 줍니다. Bot Tax가 활성화되고 다른 가드가 민팅 검증에 실패하면 **트랜잭션이 성공한 것처럼 가장합니다**. 이는 프로그램에서 오류가 반환되지 않지만 NFT도 민팅되지 않는다는 의미입니다. 이는 봇에서 Core Candy Machine 계정으로 자금이 전송되려면 트랜잭션이 성공해야 하기 때문입니다. [Bot Tax 가드에 대한 자세한 내용은 전용 페이지에서 확인할 수 있습니다](/core-candy-machine/guards/bot-tax).
+이 가드는 약간 특별하며 다른 모든 가드의 민팅 동작에 영향을 줍니다. Bot Tax가 활성화되고 다른 가드가 민팅 검증에 실패하면 **트랜잭션이 성공한 것처럼 가장합니다**. 이는 프로그램에서 오류가 반환되지 않지만 NFT도 민팅되지 않는다는 의미입니다. 이는 봇에서 Core Candy Machine 계정으로 자금이 전송되려면 트랜잭션이 성공해야 하기 때문입니다. [Bot Tax 가드에 대한 자세한 내용은 전용 페이지에서 확인할 수 있습니다](/ko/smart-contracts/core-candy-machine/guards/bot-tax).
 
 ## 결론
 
@@ -542,4 +542,4 @@ Core Candy Machine에 포함하고 싶을 가드 중 하나는 실패한 민팅�
 
 다음은 관심을 가질 만한 추가 읽기 자료입니다:
 
-- [사용 가능한 모든 가드](/core-candy-machine/guards): 사용 가능한 모든 가드를 살펴보고 필요한 것들을 선별하세요.
+- [사용 가능한 모든 가드](/ko/smart-contracts/core-candy-machine/guards): 사용 가능한 모든 가드를 살펴보고 필요한 것들을 선별하세요.

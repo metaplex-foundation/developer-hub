@@ -83,7 +83,7 @@ Umi has a few plugins that can aid the upload process via plugins. At the time t
 
 #### Uploading to Arweave via Irys with Umi
 
-For a more indepth look at uploaded files with Umi please visit [Umi Storage.](/umi/storage)
+For a more indepth look at uploaded files with Umi please visit [Umi Storage.](/dev-tools/umi/storage)
 
 {% dialect-switcher title="Uploading Files to Arweave Via Irys with Umi" %}
 {% dialect title="JavaScript" id="js" %}
@@ -92,7 +92,7 @@ For a more indepth look at uploaded files with Umi please visit [Umi Storage.](/
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(irysUploader())
+const umi = createUmi("https://api.devnet.solana.com").use(irysUploader())
 
 const uriUploadArray = await umi.uploader.upload([myFile1, myFile2])
 
@@ -188,7 +188,7 @@ The final step in preparation for your Core Candy Machine creation is create a C
 You will need to upload an image and also prepare and upload the JSON metadata like in the previous steps to have the necessary data to create your Core Collection.
 {% /callout %}
 
-The below example creates a basic Core Collection with no plugins. To view a list of available plugins and more advanced Core Collection creation you can view the documentation over at Core's [Collection Management](/core/collections).
+The below example creates a basic Core Collection with no plugins. To view a list of available plugins and more advanced Core Collection creation you can view the documentation over at Core's [Collection Management](/smart-contracts/core/collections).
 
 {% dialect-switcher title="Create a MPL Core Collection" %}
 {% dialect title="JavaScript" id="js" %}

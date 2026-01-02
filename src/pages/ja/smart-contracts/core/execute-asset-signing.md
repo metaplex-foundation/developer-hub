@@ -61,7 +61,7 @@ MPL CoreのExecute命令は「現在のアセット所有者」もトランザ�
 
 ### Execute操作の制御
 
-実行機能は[Freeze Executeプラグイン](/core/plugins/freeze-execute)で制御できます。このプラグインにより、アセット上の実行操作を凍結し、凍結解除されるまで任意のExecute命令が処理されないようにできます。
+実行機能は[Freeze Executeプラグイン](/ja/smart-contracts/core/plugins/freeze-execute)で制御できます。このプラグインにより、アセット上の実行操作を凍結し、凍結解除されるまで任意のExecute命令が処理されないようにできます。
 
 Freeze Executeプラグインが特に有用なケース:
 

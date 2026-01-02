@@ -75,7 +75,7 @@ description: 了解如何在Bubblegum上赎回和解压压缩NFT。
 
 要启动解压过程的第一步，压缩NFT的所有者必须发送**Redeem**指令并签署交易。这将为cNFT创建一个凭证账户，用于解压过程的下一步。
 
-请注意，此指令会从Bubblegum树中移除叶子。因此，必须提供额外的参数来验证要移除的压缩NFT的完整性。由于这些参数对所有更改叶子的指令是通用的，它们在[以下FAQ](/zh/bubblegum/faq#replace-leaf-instruction-arguments)中有记录。幸运的是，我们可以使用辅助方法，它将使用Metaplex DAS API自动为我们获取这些参数。
+请注意，此指令会从Bubblegum树中移除叶子。因此，必须提供额外的参数来验证要移除的压缩NFT的完整性。由于这些参数对所有更改叶子的指令是通用的，它们在[以下FAQ](/zh/smart-contracts/bubblegum/faq#replace-leaf-instruction-arguments)中有记录。幸运的是，我们可以使用辅助方法，它将使用Metaplex DAS API自动为我们获取这些参数。
 
 {% dialect-switcher title="赎回压缩NFT" %}
 {% dialect title="JavaScript" id="js" %}

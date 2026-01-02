@@ -325,7 +325,7 @@ Allow List route 指令支持以下功能。
 
 _路径：`proof`_
 
-铸造钱包必须通过使用 Allow List 守卫的 route 指令执行[预验证](/zh/candy-machine/mint#minting-with-pre-validation)，而不是直接将 Merkle 证明传递给铸造指令。
+铸造钱包必须通过使用 Allow List 守卫的 route 指令执行[预验证](/zh/smart-contracts/candy-machine/mint#minting-with-pre-validation)，而不是直接将 Merkle 证明传递给铸造指令。
 
 此 route 指令将从提供的 Merkle 证明计算 Merkle 根，如果有效，将创建一个新的 PDA 账户作为铸造钱包属于允许列表的证明。因此，在铸造时，Allow List 守卫只需要检查此 PDA 账户的存在即可授权或拒绝钱包铸造。
 

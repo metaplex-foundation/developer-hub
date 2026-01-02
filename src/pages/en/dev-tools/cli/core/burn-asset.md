@@ -1,5 +1,6 @@
 ---
 title: Burn Asset
+metaTitle: Burn Asset | Metaplex CLI
 description: Burn MPL Core Assets using the Metaplex CLI
 ---
 

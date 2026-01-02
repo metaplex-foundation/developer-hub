@@ -16,7 +16,7 @@ Please note that certain Core instructions will require protocol fees. Please re
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/core/getting-started" description="お好みの言語またはライブラリを選択し、Solanaでデジタルアセットをはじめましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/core/sdk" description="お好みの言語またはライブラリを選択し、Solanaでデジタルアセットをはじめましょう。" /%}
 
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-core.typedoc.metaplex.com/" target="_blank" description="何か特定のものをお探しですか？APIリファレンスをご覧いただき、答えを見つけてください。" /%}
 

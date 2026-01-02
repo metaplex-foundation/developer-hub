@@ -36,8 +36,7 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 在设置 Umi 时，您可以创建新钱包进行测试，从文件系统导入钱包，甚至使用带有 UI/前端的 `walletAdapter`。
 在此示例中，我们将从包含密钥的 json 文件（wallet.json）创建密钥对。
 
-我们将使用 devnet Aura 端点。
-要获得 Solana 和 Eclipse 区块链上 Metaplex Aura 网络的访问权限，您可以访问 [Aura App](https://aura-app.metaplex.com/) 获取端点和 API 密钥。
+我们将使用 Solana Devnet 端点。
 
 ```ts
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -45,8 +44,8 @@ import { generateSigner, some, none, createSignerFromKeypair, signerIdentity, tr
 import { mplCandyMachine as mplCoreCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
 import * as fs from 'fs';
 
-// 我们将使用来自 Metaplex Aura 数据网络的 Solana Devnet 作为端点，同时加载 `mplCoreCandyMachine()` 插件。
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+// 我们将使用 Solana Devnet 作为端点，同时加载 `mplCoreCandyMachine()` 插件。
+const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCoreCandyMachine());
 
 // 让我们从包含密钥的钱包 json 文件创建密钥对，并基于创建的密钥对创建签名者

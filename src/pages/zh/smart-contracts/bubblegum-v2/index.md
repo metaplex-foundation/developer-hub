@@ -12,7 +12,7 @@ Bubblegum V2是Metaplex协议程序的最新迭代，用于在Solana上创建和
 
 {% quick-links %}
 
-{% quick-link title="快速开始" icon="InboxArrowDown" href="/zh/bubblegum-v2/sdk" description="找到您选择的语言或库，开始使用压缩NFT。" /%}
+{% quick-link title="快速开始" icon="InboxArrowDown" href="/zh/smart-contracts/bubblegum-v2/sdk" description="找到您选择的语言或库，开始使用压缩NFT。" /%}
 
 {% quick-link title="API参考" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="寻找特定内容？查看我们的API参考并找到您的答案。" /%}
 
@@ -41,11 +41,11 @@ Bubblegum V2引入了新的叶子模式（LeafSchemaV2），它支持额外的�
 - 启用灵魂绑定功能
 项目可以根据需求选择使用旧版Bubblegum的原始叶子Schema或使用Bubblegum V2的新v2模式。
 
-要使用新的`LeafSchemaV2`，必须使用需要通过[`createTreeV2`指令](/zh/bubblegum-v2/create-trees)创建的V2默克尔树。V1默克尔树不支持新的叶子模式，V2默克尔树与V1叶子不兼容。
+要使用新的`LeafSchemaV2`，必须使用需要通过[`createTreeV2`指令](/zh/smart-contracts/bubblegum-v2/create-trees)创建的V2默克尔树。V1默克尔树不支持新的叶子模式，V2默克尔树与V1叶子不兼容。
 
 ## 默克尔树、叶子和证明
 
-压缩NFT仅存在于**默克尔树**的上下文中。我们在[专门的高级指南](/zh/bubblegum-v2/concurrent-merkle-trees)中解释了什么是默克尔树，但就本概述而言，您可以将默克尔树视为我们称为**叶子**的哈希集合。每个叶子是通过[哈希压缩NFT的数据](/zh/bubblegum-v2/hashed-nft-data)获得的。
+压缩NFT仅存在于**默克尔树**的上下文中。我们在[专门的高级指南](/zh/smart-contracts/bubblegum-v2/concurrent-merkle-trees)中解释了什么是默克尔树，但就本概述而言，您可以将默克尔树视为我们称为**叶子**的哈希集合。每个叶子是通过[哈希压缩NFT的数据](/zh/smart-contracts/bubblegum-v2/hashed-nft-data)获得的。
 
 对于默克尔树中的每个叶子，可以提供一个哈希列表——称为**证明**——使任何人都能验证给定的叶子是该树的一部分。每当压缩NFT被更新或转移时，其关联的叶子将改变，其证明也会改变。
 
@@ -129,23 +129,23 @@ Bubblegum V2引入了新的叶子模式（LeafSchemaV2），它支持额外的�
 
 请注意，并非所有RPC都支持DAS API。因此，在应用程序中使用压缩NFT时，您可能对["Metaplex DAS API RPC"](/zh/rpc-providers)页面感兴趣，以选择适当的RPC。
 
-我们在高级["存储和索引NFT数据"](/zh/bubblegum-v2/stored-nft-data)指南中更详细地讨论了这一点。
+我们在高级["存储和索引NFT数据"](/zh/smart-contracts/bubblegum-v2/stored-nft-data)指南中更详细地讨论了这一点。
 
 ## 功能
 
 尽管NFT数据不存储在账户中，但仍然可以对压缩NFT执行各种操作。这是通过请求当前NFT数据并确保其哈希叶子在默克尔树上有效来实现的。因此，可以对压缩NFT执行以下操作：
 
-- [铸造cNFT](/zh/bubblegum-v2/mint-cnfts)，带或不带关联集合。
-- [转移cNFT](/zh/bubblegum-v2/transfer-cnfts)。
-- [更新cNFT的数据或集合](/zh/bubblegum-v2/update-cnfts)。
-- [销毁cNFT](/zh/bubblegum-v2/burn-cnfts)。
-- [委托cNFT](/zh/bubblegum-v2/delegate-cnfts)。
-- [验证和取消验证cNFT集合](/zh/bubblegum-v2/verify-collections)。
-- [验证和取消验证cNFT的创作者](/zh/bubblegum-v2/verify-creators)。
-- [冻结和解冻cNFT](/zh/bubblegum-v2/freeze-cnfts)。
-- [使cNFT成为灵魂绑定](/zh/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft)。
+- [铸造cNFT](/zh/smart-contracts/bubblegum-v2/mint-cnfts)，带或不带关联集合。
+- [转移cNFT](/zh/smart-contracts/bubblegum-v2/transfer-cnfts)。
+- [更新cNFT的数据或集合](/zh/smart-contracts/bubblegum-v2/update-cnfts)。
+- [销毁cNFT](/zh/smart-contracts/bubblegum-v2/burn-cnfts)。
+- [委托cNFT](/zh/smart-contracts/bubblegum-v2/delegate-cnfts)。
+- [验证和取消验证cNFT集合](/zh/smart-contracts/bubblegum-v2/verify-collections)。
+- [验证和取消验证cNFT的创作者](/zh/smart-contracts/bubblegum-v2/verify-creators)。
+- [冻结和解冻cNFT](/zh/smart-contracts/bubblegum-v2/freeze-cnfts)。
+- [使cNFT成为灵魂绑定](/zh/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft)。
 
 
 ## 下一步
 
-现在我们从高层次了解了压缩NFT的工作原理以及Bubblegum V2的新功能，我们建议查看我们的[快速开始](/zh/bubblegum-v2/sdk)页面，其中列举了可用于与压缩NFT交互的各种语言/框架。之后，可以使用各种[功能页面](/zh/bubblegum-v2/create-trees)了解更多关于可在cNFT上执行的特定操作。最后，还提供[高级指南](/zh/bubblegum-v2/concurrent-merkle-trees)以加深您对cNFT和默克尔树的了解。
+现在我们从高层次了解了压缩NFT的工作原理以及Bubblegum V2的新功能，我们建议查看我们的[快速开始](/zh/smart-contracts/bubblegum-v2/sdk)页面，其中列举了可用于与压缩NFT交互的各种语言/框架。之后，可以使用各种[功能页面](/zh/smart-contracts/bubblegum-v2/create-trees)了解更多关于可在cNFT上执行的特定操作。最后，还提供[高级指南](/zh/smart-contracts/bubblegum-v2/concurrent-merkle-trees)以加深您对cNFT和默克尔树的了解。

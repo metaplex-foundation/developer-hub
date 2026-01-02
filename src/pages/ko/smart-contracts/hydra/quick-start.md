@@ -22,7 +22,7 @@ npm에서 패키지를 설치하세요:
 yarn add @glasseaters/hydra-sdk
 ```
 
-다음은 지갑 [멤버십 모델](/hydra#adding-members)로 Hydra를 설정하는 방법입니다.
+다음은 지갑 [멤버십 모델](/ko/smart-contracts/hydra#adding-members)로 Hydra를 설정하는 방법입니다.
 
 ```ts
 import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";

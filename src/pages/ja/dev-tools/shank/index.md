@@ -25,7 +25,7 @@ ShankはIDLファイルの生成を自動化することで、Solanaプログラ
 
 ## ドキュメント
 
-- **[はじめに](/ja/shank/getting-started)** - インストール、セットアップ、詳細な使用ガイド、包括的な例
+- **[はじめに](/ja/dev-tools/shank/getting-started)** - インストール、セットアップ、詳細な使用ガイド、包括的な例
 
 ## 統合
 

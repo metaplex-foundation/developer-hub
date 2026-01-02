@@ -272,12 +272,12 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 
 ## Tips and Best Practices
 
-1. **Use [pagination](/das-api/guides/pagination)** for large compressed NFT collections
+1. **Use [pagination](/dev-tools/das-api/guides/pagination)** for large compressed NFT collections
 2. **Handle errors gracefully** when proofs are unavailable
 3. **Use appropriate display options** for compressed NFT metadata
 
 ## Further Reading
 
-- [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
-- [Get NFTs by Owner](/das-api/guides/get-nfts-by-owner) - Find all NFTs owned by a wallet
-- [Search Assets by Multiple Criteria](/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 
+- [Get All Tokens in a Collection](/dev-tools/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
+- [Get NFTs by Owner](/dev-tools/das-api/guides/get-nfts-by-owner) - Find all NFTs owned by a wallet
+- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 

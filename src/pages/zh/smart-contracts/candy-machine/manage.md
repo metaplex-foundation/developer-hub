@@ -4,7 +4,7 @@ metaTitle: 创建、更新、获取和删除 | Candy Machine
 description: 解释如何管理 Candy Machine。
 ---
 
-在[上一页](/zh/candy-machine/settings)中，我们介绍了 Candy Machine 的各种设置。现在，让我们看看如何使用这些设置来创建和更新 Candy Machine。我们还将讨论如何获取现有的 Candy Machine 以及在其完成使命后如何删除它。{% .lead %}
+在[上一页](/zh/smart-contracts/candy-machine/settings)中，我们介绍了 Candy Machine 的各种设置。现在，让我们看看如何使用这些设置来创建和更新 Candy Machine。我们还将讨论如何获取现有的 Candy Machine 以及在其完成使命后如何删除它。{% .lead %}
 
 本质上，我们将介绍 Candy Machine 的创建、读取、更新和删除步骤。让我们开始吧！
 
@@ -12,13 +12,13 @@ description: 解释如何管理 Candy Machine。
 
 您可以使用上一页讨论的设置来创建一个全新的 Candy Machine 账户。
 
-我们的 SDK 进一步推动了这一点，将每个新的 Candy Machine 账户与一个新的 Candy Guard 账户关联，该账户跟踪影响铸造过程的所有已激活的守卫。在本页中，我们将重点关注 Candy Machine 账户，但我们将在[专门的页面](/zh/candy-machine/guards)中深入探讨 Candy Guard 账户以及我们可以用它们做什么。
+我们的 SDK 进一步推动了这一点，将每个新的 Candy Machine 账户与一个新的 Candy Guard 账户关联，该账户跟踪影响铸造过程的所有已激活的守卫。在本页中，我们将重点关注 Candy Machine 账户，但我们将在[专门的页面](/zh/smart-contracts/candy-machine/guards)中深入探讨 Candy Guard 账户以及我们可以用它们做什么。
 
-请记住，Candy Machine [必须与一个 Collection NFT 关联](/zh/candy-machine/settings#metaplex-certified-collections)，其更新权限必须授权此操作。如果您还没有为 Candy Machine 准备 Collection NFT，我们的 SDK 也可以帮助您。
+请记住，Candy Machine [必须与一个 Collection NFT 关联](/zh/smart-contracts/candy-machine/settings#metaplex-certified-collections)，其更新权限必须授权此操作。如果您还没有为 Candy Machine 准备 Collection NFT，我们的 SDK 也可以帮助您。
 
 {% callout type="note" title="随机性" %}
 
-建议使用[隐藏设置](/zh/candy-machine/settings#hidden-settings)来实现揭示机制，因为资产的"随机"铸造过程并不完全不可预测，可以被足够的资源和恶意行为影响。
+建议使用[隐藏设置](/zh/smart-contracts/candy-machine/settings#hidden-settings)来实现揭示机制，因为资产的"随机"铸造过程并不完全不可预测，可以被足够的资源和恶意行为影响。
 
 {% /callout %}
 
@@ -97,7 +97,7 @@ API 参考：[create](https://mpl-candy-machine.typedoc.metaplex.com/functions/c
 
 现在我们已经创建了 Candy Machine 账户，让我们看看里面存储了什么数据。
 
-首先，它存储了创建账户时提供的所有设置，并跟踪任何更改。有关这些设置的更多详情，请参阅[上一页](/zh/candy-machine/settings)。
+首先，它存储了创建账户时提供的所有设置，并跟踪任何更改。有关这些设置的更多详情，请参阅[上一页](/zh/smart-contracts/candy-machine/settings)。
 
 此外，它还存储以下属性：
 
@@ -105,7 +105,7 @@ API 参考：[create](https://mpl-candy-machine.typedoc.metaplex.com/functions/c
 - **Account Version（账户版本）**。此枚举用于跟踪 Candy Machine 的账户版本。它用于确定哪些功能可用以及应如何解释账户。请注意，这不要与"Candy Machine V3"混淆，后者指的是 Candy Machine 程序的第三个也是最新的迭代（包括 Candy Machine Core 和 Candy Guard 程序）。
 - **Feature Flags（功能标志）**。这有助于程序在引入更多功能时实现向后和向前兼容。
 
-最后，它存储插入到 Candy Machine 中的所有项目以及它们是否已被铸造。这仅适用于使用[**Config Line Settings**](/zh/candy-machine/settings#config-line-settings)的 Candy Machine，因为[**Hidden Settings**](/zh/candy-machine/settings#hidden-settings)不允许您插入任何项目。此部分包含以下信息：
+最后，它存储插入到 Candy Machine 中的所有项目以及它们是否已被铸造。这仅适用于使用[**Config Line Settings**](/zh/smart-contracts/candy-machine/settings#config-line-settings)的 Candy Machine，因为[**Hidden Settings**](/zh/smart-contracts/candy-machine/settings#hidden-settings)不允许您插入任何项目。此部分包含以下信息：
 
 - 已加载的项目数量。
 - 已插入或将要插入的所有项目的列表。当项目尚未插入时，该位置的项目名称和 URI 为空。
@@ -226,7 +226,7 @@ API 参考：[setCandyMachineAuthority](https://mpl-candy-machine.typedoc.metapl
 
 ## 更新共享 NFT 数据
 
-您还可以更新 Candy Machine 所有铸造 NFT 之间共享的属性。如[上一页](/zh/candy-machine/settings#settings-shared-by-all-nf-ts)所述，这些是：Seller Fee Basis Points（卖家费用基点）、Symbol（符号）、Max Edition Supply（最大版本供应量）、Is Mutable（是否可变）和 Creators（创作者）。
+您还可以更新 Candy Machine 所有铸造 NFT 之间共享的属性。如[上一页](/zh/smart-contracts/candy-machine/settings#settings-shared-by-all-nf-ts)所述，这些是：Seller Fee Basis Points（卖家费用基点）、Symbol（符号）、Max Edition Supply（最大版本供应量）、Is Mutable（是否可变）和 Creators（创作者）。
 
 请注意，一旦第一个 NFT 被铸造，这些属性将不再可更新。
 
@@ -423,4 +423,4 @@ API 参考：[deleteCandyMachine](https://mpl-candy-machine.typedoc.metaplex.com
 
 ## 结论
 
-我们现在可以创建、读取、更新和删除 Candy Machine，但我们仍然不知道如何向它们加载项目。让我们在[下一页](/zh/candy-machine/insert-items)中解决这个问题！
+我们现在可以创建、读取、更新和删除 Candy Machine，但我们仍然不知道如何向它们加载项目。让我们在[下一页](/zh/smart-contracts/candy-machine/insert-items)中解决这个问题！

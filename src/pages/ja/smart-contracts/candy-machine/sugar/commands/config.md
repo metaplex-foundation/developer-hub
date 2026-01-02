@@ -6,7 +6,7 @@ description: configコマンド。
 
 `config`コマンドを使用してCandy Machineの設定を管理できます。デフォルトでは、SugarはCandy Machine設定を読み込むために現在のディレクトリの`config.json`ファイルを探します – 設定ファイル名は、それを必要とするすべてのコマンドで`-c`または`--config`オプションで指定できます。
 
-これらの[指示](/candy-machine/sugar/configuration)に従って手動でこのファイルを作成するか、config createコマンドを使用できます：
+これらの[指示](/ja/smart-contracts/candy-machine/sugar/configuration)に従って手動でこのファイルを作成するか、config createコマンドを使用できます：
 
 ```
 sugar config create

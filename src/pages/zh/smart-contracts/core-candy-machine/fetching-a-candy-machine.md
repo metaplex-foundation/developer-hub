@@ -14,8 +14,8 @@ import { fetchCandyMachine, mplCandyMachine as mplCoreCandyMachine } from "@meta
 import { publicKey } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 
-const mainnet = "https://mainnet-aura.metaplex.com/<YOUR_API_KEY>"
-const devnet = "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+const mainnet = "https://api.mainnet-beta.solana.com"
+const devnet = "https://api.devnet.solana.com"
 
 const umi = createUmi(mainnet)
 .use(mplCoreCandyMachine())

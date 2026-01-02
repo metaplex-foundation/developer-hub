@@ -1,5 +1,6 @@
 ---
 title: Wallets
+metaTitle: Wallets | Metaplex CLI
 description: Manage wallet configurations
 ---
 
@@ -163,5 +164,5 @@ Wallets are stored in your configuration file at `~/.mplx/config.json`:
 
 ## Related Commands
 
-- [RPCs](/cli/config/rpcs) - Manage RPC endpoints
-- [Explorer](/cli/config/explorer) - Set preferred blockchain explorer 
+- [RPCs](/dev-tools/cli/config/rpcs) - Manage RPC endpoints
+- [Explorer](/dev-tools/cli/config/explorer) - Set preferred blockchain explorer 

@@ -6,7 +6,7 @@ description: 解释如何将项目加载到Candy Machine中。
 
 到目前为止,我们已经学会了创建和配置Candy Machine,但我们还没有看到如何向其中插入可以铸造成NFT的项目。因此,让我们在本页面上解决这个问题。{% .lead %}
 
-重要的是要记住,**插入项目仅适用于使用[Config Line Settings](/zh/candy-machine/settings#config-line-settings)的Candy Machine**。这是因为使用[Hidden Settings](/zh/candy-machine/settings#hidden-settings)从Candy Machine铸造的NFT都将共享相同的"隐藏"名称和URI。
+重要的是要记住,**插入项目仅适用于使用[Config Line Settings](/zh/smart-contracts/candy-machine/settings#config-line-settings)的Candy Machine**。这是因为使用[Hidden Settings](/zh/smart-contracts/candy-machine/settings#hidden-settings)从Candy Machine铸造的NFT都将共享相同的"隐藏"名称和URI。
 
 ## 上传JSON元数据
 
@@ -21,7 +21,7 @@ description: 解释如何将项目加载到Candy Machine中。
 
 幸运的是,我们的SDK可以帮助您。它们允许您上传JSON对象并检索其URI。
 
-此外,[Sugar](/zh/candy-machine/sugar)等工具通过并行上传、缓存过程和重试失败的上传,使上传JSON元数据变得轻而易举。
+此外,[Sugar](/zh/smart-contracts/candy-machine/sugar)等工具通过并行上传、缓存过程和重试失败的上传,使上传JSON元数据变得轻而易举。
 
 {% dialect-switcher title="上传项目" %}
 {% dialect title="JavaScript" id="js" %}
@@ -186,4 +186,4 @@ API参考:[addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/functi
 
 就这样,我们有了一个已加载的Candy Machine,准备铸造NFT!但是,我们还没有为铸造过程创建任何要求。我们如何配置铸造的价格?我们如何确保买家是特定代币或来自特定集合的NFT的持有者?我们如何设置铸造的开始日期?结束条件呢?
 
-[在下一页](/zh/candy-machine/guards)上,我们将讨论使所有这些成为可能的Candy Guard。
+[在下一页](/zh/smart-contracts/candy-machine/guards)上,我们将讨论使所有这些成为可能的Candy Guard。

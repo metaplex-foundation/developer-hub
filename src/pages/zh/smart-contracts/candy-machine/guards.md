@@ -23,7 +23,7 @@ guard是一段模块化代码,可以限制对Candy Machine铸造的访问,甚至
 
 ## Candy Guard账户
 
-如果您还记得我们的[Candy Machine账户](/zh/candy-machine/manage#candy-machine-account)的内容,您会发现其中没有guard的迹象。这是因为guard存在于另一个账户中,称为**Candy Guard账户**,该账户由**Candy Guard程序**创建。
+如果您还记得我们的[Candy Machine账户](/zh/smart-contracts/candy-machine/manage#candy-machine-account)的内容,您会发现其中没有guard的迹象。这是因为guard存在于另一个账户中,称为**Candy Guard账户**,该账户由**Candy Guard程序**创建。
 
 每个Candy Machine账户通常应该与其自己的Candy Guard账户相关联,这将为其添加一层保护。
 
@@ -182,24 +182,24 @@ guard不存在于主Candy Machine程序中的原因是为了将访问控制逻�
 
 在以下列表中,我们将提供每个guard的简短描述,并提供指向其专用页面的链接以进行更高级的阅读。
 
-- [**Address Gate**](/zh/candy-machine/guards/address-gate):将铸造限制为单个地址。
-- [**Allow List**](/zh/candy-machine/guards/allow-list):使用钱包地址列表确定谁被允许铸造。
-- [**Bot Tax**](/zh/candy-machine/guards/bot-tax):可配置的税收以对无效交易收费。
-- [**End Date**](/zh/candy-machine/guards/end-date):确定铸造的结束日期。
-- [**Freeze Sol Payment**](/zh/candy-machine/guards/freeze-sol-payment):以SOL设置铸造价格并设置冻结期。
-- [**Freeze Token Payment**](/zh/candy-machine/guards/freeze-token-payment):以代币金额设置铸造价格并设置冻结期。
-- [**Gatekeeper**](/zh/candy-machine/guards/gatekeeper):通过Gatekeeper网络限制铸造,例如验证码集成。
-- [**Mint Limit**](/zh/candy-machine/guards/mint-limit):指定每个钱包的铸造数量限制。
-- [**Nft Burn**](/zh/candy-machine/guards/nft-burn):将铸造限制为指定集合的持有者,需要销毁NFT。
-- [**Nft Gate**](/zh/candy-machine/guards/nft-gate):将铸造限制为指定集合的持有者。
-- [**Nft Payment**](/zh/candy-machine/guards/nft-payment):将铸造价格设置为指定集合的NFT。
-- [**Redeemed Amount**](/zh/candy-machine/guards/redeemed-amount):根据铸造的总量确定铸造的结束。
-- [**Sol Payment**](/zh/candy-machine/guards/sol-payment):以SOL设置铸造价格。
-- [**Start Date**](/zh/candy-machine/guards/start-date):确定铸造的开始日期。
-- [**Third Party Signer**](/zh/candy-machine/guards/third-party-signer):在交易上需要额外的签名者。
-- [**Token Burn**](/zh/candy-machine/guards/token-burn):将铸造限制为指定代币的持有者,需要销毁代币。
-- [**Token Gate**](/zh/candy-machine/guards/token-gate):将铸造限制为指定代币的持有者。
-- [**Token Payment**](/zh/candy-machine/guards/token-payment):以代币金额设置铸造价格。
+- [**Address Gate**](/zh/smart-contracts/candy-machine/guards/address-gate):将铸造限制为单个地址。
+- [**Allow List**](/zh/smart-contracts/candy-machine/guards/allow-list):使用钱包地址列表确定谁被允许铸造。
+- [**Bot Tax**](/zh/smart-contracts/candy-machine/guards/bot-tax):可配置的税收以对无效交易收费。
+- [**End Date**](/zh/smart-contracts/candy-machine/guards/end-date):确定铸造的结束日期。
+- [**Freeze Sol Payment**](/zh/smart-contracts/candy-machine/guards/freeze-sol-payment):以SOL设置铸造价格并设置冻结期。
+- [**Freeze Token Payment**](/zh/smart-contracts/candy-machine/guards/freeze-token-payment):以代币金额设置铸造价格并设置冻结期。
+- [**Gatekeeper**](/zh/smart-contracts/candy-machine/guards/gatekeeper):通过Gatekeeper网络限制铸造,例如验证码集成。
+- [**Mint Limit**](/zh/smart-contracts/candy-machine/guards/mint-limit):指定每个钱包的铸造数量限制。
+- [**Nft Burn**](/zh/smart-contracts/candy-machine/guards/nft-burn):将铸造限制为指定集合的持有者,需要销毁NFT。
+- [**Nft Gate**](/zh/smart-contracts/candy-machine/guards/nft-gate):将铸造限制为指定集合的持有者。
+- [**Nft Payment**](/zh/smart-contracts/candy-machine/guards/nft-payment):将铸造价格设置为指定集合的NFT。
+- [**Redeemed Amount**](/zh/smart-contracts/candy-machine/guards/redeemed-amount):根据铸造的总量确定铸造的结束。
+- [**Sol Payment**](/zh/smart-contracts/candy-machine/guards/sol-payment):以SOL设置铸造价格。
+- [**Start Date**](/zh/smart-contracts/candy-machine/guards/start-date):确定铸造的开始日期。
+- [**Third Party Signer**](/zh/smart-contracts/candy-machine/guards/third-party-signer):在交易上需要额外的签名者。
+- [**Token Burn**](/zh/smart-contracts/candy-machine/guards/token-burn):将铸造限制为指定代币的持有者,需要销毁代币。
+- [**Token Gate**](/zh/smart-contracts/candy-machine/guards/token-gate):将铸造限制为指定代币的持有者。
+- [**Token Payment**](/zh/smart-contracts/candy-machine/guards/token-payment):以代币金额设置铸造价格。
 
 ## 使用guard创建Candy Machine
 
@@ -387,4 +387,4 @@ API参考:[createCandyMachineV2](https://mpl-candy-machine.typedoc.metaplex.com/
 
 ## 结论
 
-Guard是Candy Machine的重要组成部分。它们使配置铸造过程变得容易,同时允许任何人为特定于应用程序的需求创建自己的guard。[在下一页](/zh/candy-machine/guard-groups)上,我们将看到如何通过使用guard组创建更多铸造场景!
+Guard是Candy Machine的重要组成部分。它们使配置铸造过程变得容易,同时允许任何人为特定于应用程序的需求创建自己的guard。[在下一页](/zh/smart-contracts/candy-machine/guard-groups)上,我们将看到如何通过使用guard组创建更多铸造场景!

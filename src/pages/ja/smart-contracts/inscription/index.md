@@ -8,7 +8,7 @@ Metaplex Inscription Programを使用すると、ブロックチェーンをデ�
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/inscription/getting-started" description="お好みの言語やライブラリを選択して、SolanaでデジタルアセットのOSセットを開始しましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/inscription/getting-started" description="お好みの言語やライブラリを選択して、SolanaでデジタルアセットのOSセットを開始しましょう。" /%}
 
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-inscription.typedoc.metaplex.com/" target="_blank" description="何か特定のものを探していますか？APIリファレンスをご覧いただき、答えを見つけてください。" /%}
 
@@ -340,7 +340,7 @@ Metaplexがホストする以下のURL構造のゲートウェイを使用でき
 
 ## Inscriptionランク
 
-Inscriptionランクは、各inscriptionの一意の番号です。この番号は、作成時の総Inscription数に基づく、存在するすべてのMetaplex Inscriptionの連続的でグローバルなランキングを表します。Inscriptionランクは、[Inscription Sharding](/ja/inscription/sharding)でさらに説明されている並列化されたカウンターを通じて管理されます。
+Inscriptionランクは、各inscriptionの一意の番号です。この番号は、作成時の総Inscription数に基づく、存在するすべてのMetaplex Inscriptionの連続的でグローバルなランキングを表します。Inscriptionランクは、[Inscription Sharding](/ja/smart-contracts/inscription/sharding)でさらに説明されている並列化されたカウンターを通じて管理されます。
 
 あなたのInscriptionの`inscriptionRank`を見つけるには、`inscriptionMetadata`アカウントを取得し、`inscriptionRank` `bigint`を読み取る必要があります：
 
@@ -415,10 +415,10 @@ shards.forEach((shard) => {
 
 このドキュメントの他のページでは、さらに詳しく文書化し、重要な機能を個別のページで説明することを目的としています。
 
-- [Initialize](/ja/inscription/initialize)
-- [Write](/ja/inscription/write)
-- [Fetch](/ja/inscription/fetch)
-- [Clear](/ja/inscription/clear)
-- [close](/ja/inscription/close)
-- [Authorities](/ja/inscription/authority)
+- [Initialize](/ja/smart-contracts/inscription/initialize)
+- [Write](/ja/smart-contracts/inscription/write)
+- [Fetch](/ja/smart-contracts/inscription/fetch)
+- [Clear](/ja/smart-contracts/inscription/clear)
+- [close](/ja/smart-contracts/inscription/close)
+- [Authorities](/ja/smart-contracts/inscription/authority)
 - [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway)

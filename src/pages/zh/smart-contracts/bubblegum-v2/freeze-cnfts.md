@@ -148,7 +148,7 @@ await thawAndRevokeV2(umi, {
 {% /dialect-switcher %}
 
 ## 使cNFT成为灵魂绑定
-要使cNFT成为灵魂绑定，cNFT必须是带有[`permanentFreezeDelegate`](/zh/core/plugins/permanent-freeze-delegate)插件的[mpl-core集合](/zh/core/collections)的一部分。使用`setNonTransferableV2`指令，我们可以使cNFT不可转让。
+要使cNFT成为灵魂绑定，cNFT必须是带有[`permanentFreezeDelegate`](/zh/smart-contracts/core/plugins/permanent-freeze-delegate)插件的[mpl-core集合](/zh/smart-contracts/core/collections)的一部分。使用`setNonTransferableV2`指令，我们可以使cNFT不可转让。
 
 {% dialect-switcher title="使cNFT成为灵魂绑定" %}
 {% dialect title="JavaScript" id="js" %}

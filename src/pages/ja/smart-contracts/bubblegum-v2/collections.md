@@ -7,7 +7,7 @@ description: Bubblegumでコレクションの設定、検証、検証解除を�
 cNFTは、ミント時または後でMPL-Coreコレクションに追加できます。 {% .lead %}
 
 NFTに関するコレクションの概念に馴染みがない場合、これらは他のNFTをグループ化するために使用できる特別な非圧縮NFTです。したがって、**コレクション**のデータは、コレクション全体の名前とブランディングを説明するために使用されます。Bubblegum V2以降、リーフ所有者による相互作用の必要なしに、デリゲートがcNFTを凍結・解凍できるなど、コレクションレベルでの追加機能も可能になります。[MPL-Coreコレクションについてはこちらで詳しく読むことができます](/ja/smart-contracts/core/collections)。
-[ここでドキュメント化されている](/ja/bubblegum-v2/mint-cnfts#minting-to-a-collection)**MintV2**命令を使用して、圧縮NFTを直接コレクションにミントすることが可能であることに注意してください。とはいえ、コレクションなしでcNFTをすでにミントしている場合、そのcNFTにコレクションを設定する方法を見てみましょう。「verified」ブール値を持つMetaplex Token Metadataコレクションを使用するBubblegum v1とは異なり、Bubblegum V2はそのブール値を持たないMPL-Coreコレクションを使用します。
+[ここでドキュメント化されている](/ja/smart-contracts/bubblegum-v2/mint-cnfts#minting-to-a-collection)**MintV2**命令を使用して、圧縮NFTを直接コレクションにミントすることが可能であることに注意してください。とはいえ、コレクションなしでcNFTをすでにミントしている場合、そのcNFTにコレクションを設定する方法を見てみましょう。「verified」ブール値を持つMetaplex Token Metadataコレクションを使用するBubblegum v1とは異なり、Bubblegum V2はそのブール値を持たないMPL-Coreコレクションを使用します。
 
 MPL-Coreコレクションは[`BubblegumV2`プラグイン](/ja/smart-contracts/core/plugins/bubblegum)を含む必要があります。
 

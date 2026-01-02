@@ -4,9 +4,9 @@ metaTitle: Javascript SDK | MPL-Hybrid
 description: Learn how to set up your project to run the MPL-Hybrid Javascript SDK.
 ---
 
-Metaplex provides a JavaScript library that can be used to interact with the MPL-Hybrid 404 program. Thanks to the [Umi Framework](/umi), it ships without many opinionated dependencies thus providing a lightweight library that can be used in any JavaScript project.
+Metaplex provides a JavaScript library that can be used to interact with the MPL-Hybrid 404 program. Thanks to the [Umi Framework](/dev-tools/umi), it ships without many opinionated dependencies thus providing a lightweight library that can be used in any JavaScript project.
 
-To get started, you'll need to [install the Umi framework](/umi/getting-started) and the MPL-Hybrid JavaScript library.
+To get started, you'll need to [install the Umi framework](/dev-tools/umi/getting-started) and the MPL-Hybrid JavaScript library.
 
 ## Installation
 
@@ -19,7 +19,7 @@ npm install @metaplex-foundation/mpl-hybrid
 ## Umi Setup
 
 
-An `umi` instance is required to interact with the Metaplex Javascript SDKs. If you haven't set up and configured an `umi` instance yet then you can get checkout the [Umi Getting Started](/umi/getting-started) page.
+An `umi` instance is required to interact with the Metaplex Javascript SDKs. If you haven't set up and configured an `umi` instance yet then you can get checkout the [Umi Getting Started](/dev-tools/umi/getting-started) page.
 
 
 During the initialization of the `umi` instance you can add the mpl-hybrid package to `umi` using

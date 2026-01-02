@@ -1,5 +1,6 @@
 ---
 title: SOL残高
+metaTitle: SOL残高 | Metaplex CLI
 description: ウォレットアドレスのSOL残高を確認
 ---
 

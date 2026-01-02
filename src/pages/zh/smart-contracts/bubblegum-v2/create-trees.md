@@ -89,7 +89,7 @@ description: 了解如何创建和获取可以容纳压缩NFT的新默克尔树�
   {% /totem-accordion %}
   {% /totem %}
 
-- **公开**：Bubblegum树是否应该公开。如果是公开的，任何人都可以从中铸造压缩NFT。否则，只有树创建者或树委托人（如[委托cNFT](/zh/bubblegum-v2/delegate-cnfts)中讨论的）才能铸造压缩NFT。
+- **公开**：Bubblegum树是否应该公开。如果是公开的，任何人都可以从中铸造压缩NFT。否则，只有树创建者或树委托人（如[委托cNFT](/zh/smart-contracts/bubblegum-v2/delegate-cnfts)中讨论的）才能铸造压缩NFT。
 
 以下是如何使用我们的库创建Bubblegum树：
 
@@ -135,8 +135,8 @@ const builder = await createTreeV2(umi, {
 默克尔树账户包含关于树的各种信息，例如：
 
 - **树头**，存储**最大深度**、**最大缓冲区大小**、树的**权限**以及树创建时的**创建Slot**。
-- **树**本身，存储关于树的低级信息，例如其**更改日志**（或根）、其**序列号**等。我们在本文档的[专门页面](/zh/bubblegum-v2/concurrent-merkle-trees)中更多地讨论并发默克尔树。
-- **树冠**，如[默克尔树树冠](/zh/bubblegum-v2/merkle-tree-canopy)页面中讨论的。
+- **树**本身，存储关于树的低级信息，例如其**更改日志**（或根）、其**序列号**等。我们在本文档的[专门页面](/zh/smart-contracts/bubblegum-v2/concurrent-merkle-trees)中更多地讨论并发默克尔树。
+- **树冠**，如[默克尔树树冠](/zh/smart-contracts/bubblegum-v2/merkle-tree-canopy)页面中讨论的。
 
 以下是如何使用我们的库获取所有这些数据：
 

@@ -4,10 +4,10 @@ metaTitle: 铸造压缩NFT | Bubblegum
 description: 了解如何在Bubblegum上铸造压缩NFT。
 ---
 {% callout title="Bubblegum v2" type="note" %}
-本页面特定于Bubblegum v1。如需增强的功能集，我们建议使用Bubblegum v2。如果您正在使用Bubblegum v2，请查阅[Bubblegum v2](/zh/bubblegum-v2/mint-cnfts)文档以获取更多详细信息。
+本页面特定于Bubblegum v1。如需增强的功能集，我们建议使用Bubblegum v2。如果您正在使用Bubblegum v2，请查阅[Bubblegum v2](/zh/smart-contracts/bubblegum-v2/mint-cnfts)文档以获取更多详细信息。
 {% /callout %}
 
-在[上一页](/zh/bubblegum/create-trees)中，我们看到需要Bubblegum树来铸造压缩NFT，并且我们看到了如何创建一个。现在，让我们看看如何从给定的Bubblegum树铸造压缩NFT。{% .lead %}
+在[上一页](/zh/smart-contracts/bubblegum/create-trees)中，我们看到需要Bubblegum树来铸造压缩NFT，并且我们看到了如何创建一个。现在，让我们看看如何从给定的Bubblegum树铸造压缩NFT。{% .lead %}
 
 Bubblegum程序提供两个铸造指令。一个在不关联集合的情况下铸造NFT，另一个将NFT铸造到给定集合。让我们先看前者，因为后者只需要几个额外的参数。
 

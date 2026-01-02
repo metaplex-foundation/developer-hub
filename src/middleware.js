@@ -24,7 +24,6 @@ const devToolsRedirects = [
   'amman',
   'shank',
   'das-api',
-  'aura',
 ];
 
 // Standalone page redirects to new locations
@@ -33,6 +32,11 @@ const standaloneRedirects = {
   '/ja/stability-index': '/ja/smart-contracts/security',
   '/ko/stability-index': '/ko/smart-contracts/security',
   '/zh/stability-index': '/zh/smart-contracts/security',
+  // Legacy page redirects
+  '/community-guides': '/guides',
+  '/contact': '/',
+  '/developer-tools': '/dev-tools',
+  '/programs-and-tools': '/smart-contracts',
 }
 
 const redirectRules = {
@@ -55,6 +59,66 @@ const redirectRules = {
   '/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
       '/guides/javascript/how-to-create-a-solana-token',
+  },
+  // Japanese guide redirects
+  '/ja/guides': {
+    '/javascript/how-to-create-an-spl-token-on-solana':
+      '/ja/guides/javascript/how-to-create-a-solana-token',
+  },
+  // Korean guide redirects
+  '/ko/guides': {
+    '/javascript/how-to-create-an-spl-token-on-solana':
+      '/ko/guides/javascript/how-to-create-a-solana-token',
+  },
+  // Japanese smart-contracts redirects
+  '/ja/smart-contracts/bubblegum': {
+    '/getting-started': '/ja/smart-contracts/bubblegum/sdk',
+    '/getting-started/js': '/ja/smart-contracts/bubblegum/sdk/javascript',
+    '/getting-started/rust': '/ja/smart-contracts/bubblegum/sdk/rust',
+  },
+  '/ja/smart-contracts/core': {
+    '/getting-started': '/ja/smart-contracts/core/sdk',
+  },
+  '/ja/smart-contracts/core-candy-machine': {
+    '/getting-started': '/ja/smart-contracts/core-candy-machine/sdk',
+    '/getting-started/js': '/ja/smart-contracts/core-candy-machine/sdk/javascript',
+    '/getting-started/rust': '/ja/smart-contracts/core-candy-machine/sdk/rust',
+  },
+  // Korean smart-contracts redirects
+  '/ko/smart-contracts/bubblegum': {
+    '/getting-started': '/ko/smart-contracts/bubblegum/sdk',
+    '/getting-started/js': '/ko/smart-contracts/bubblegum/sdk/javascript',
+    '/getting-started/rust': '/ko/smart-contracts/bubblegum/sdk/rust',
+  },
+  '/ko/smart-contracts/core': {
+    '/getting-started': '/ko/smart-contracts/core/sdk',
+  },
+  '/ko/smart-contracts/core-candy-machine': {
+    '/getting-started': '/ko/smart-contracts/core-candy-machine/sdk',
+    '/getting-started/js': '/ko/smart-contracts/core-candy-machine/sdk/javascript',
+    '/getting-started/rust': '/ko/smart-contracts/core-candy-machine/sdk/rust',
+  },
+  // Chinese guide redirects
+  '/zh/guides': {
+    '/javascript/how-to-create-an-spl-token-on-solana':
+      '/zh/guides/javascript/how-to-create-a-solana-token',
+  },
+  // Chinese smart-contracts redirects
+  '/zh/smart-contracts/bubblegum': {
+    '/getting-started': '/zh/smart-contracts/bubblegum/sdk',
+    '/getting-started/js': '/zh/smart-contracts/bubblegum/sdk/javascript',
+    '/getting-started/rust': '/zh/smart-contracts/bubblegum/sdk/rust',
+  },
+  '/zh/smart-contracts/core': {
+    '/getting-started': '/zh/smart-contracts/core/sdk',
+  },
+  '/zh/smart-contracts/core-candy-machine': {
+    '/getting-started': '/zh/smart-contracts/core-candy-machine/sdk',
+    '/getting-started/js': '/zh/smart-contracts/core-candy-machine/sdk/javascript',
+    '/getting-started/rust': '/zh/smart-contracts/core-candy-machine/sdk/rust',
+  },
+  '/zh/legacy-documentation': {
+    '/developer-tools/shank': '/zh/dev-tools/shank',
   },
   // Legacy redirects - old paths (a) redirect to old destinations (b)
   // The smart contract redirects will then redirect (b) to new paths (c)
@@ -126,6 +190,12 @@ const redirectRules = {
   '/legacy-documentation': {
     '/developer-tools/shank': '/dev-tools/shank',
   },
+  '/ja/legacy-documentation': {
+    '/developer-tools/shank': '/ja/dev-tools/shank',
+  },
+  '/ko/legacy-documentation': {
+    '/developer-tools/shank': '/ko/dev-tools/shank',
+  },
 }
 
 export function middleware(request) {
@@ -179,6 +249,27 @@ export function middleware(request) {
     if (pathname === `/${product}` || pathname.startsWith(`/${product}/`)) {
       const newPath = pathname.replace(`/${product}`, `/dev-tools/${product}`)
       return NextResponse.redirect(new URL(newPath, request.url), 308)
+    }
+  }
+
+  // Handle Japanese, Korean, and Chinese path migration redirects
+  // Redirect /ja/core/* to /ja/smart-contracts/core/*, /ko/umi/* to /ko/dev-tools/umi/*, etc.
+  for (const lang of ['ja', 'ko', 'zh']) {
+    if (pathname.startsWith(`/${lang}/`)) {
+      // Smart contract redirects for localized paths
+      for (const product of smartContractRedirects) {
+        if (pathname === `/${lang}/${product}` || pathname.startsWith(`/${lang}/${product}/`)) {
+          const newPath = pathname.replace(`/${lang}/${product}`, `/${lang}/smart-contracts/${product}`)
+          return NextResponse.redirect(new URL(newPath, request.url), 308)
+        }
+      }
+      // Dev tools redirects for localized paths
+      for (const product of devToolsRedirects) {
+        if (pathname === `/${lang}/${product}` || pathname.startsWith(`/${lang}/${product}/`)) {
+          const newPath = pathname.replace(`/${lang}/${product}`, `/${lang}/dev-tools/${product}`)
+          return NextResponse.redirect(new URL(newPath, request.url), 308)
+        }
+      }
     }
   }
 

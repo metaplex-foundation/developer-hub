@@ -4,7 +4,7 @@ metaTitle: NFT 데이터 저장 및 인덱싱 | Bubblegum V2
 description: Bubblegum에서 NFT 데이터가 저장되는 방식에 대해 자세히 알아보세요.
 ---
 
-[개요](/ko/bubblegum#read-api)에서 언급했듯이 압축된 NFT(cNFT)가 생성되거나 수정될 때마다 해당 트랜잭션이 원장에 온체인으로 기록되지만 cNFT 상태 데이터는 계정 공간에 저장되지 않습니다. 이는 cNFT의 엄청난 비용 절약의 이유이지만 편의성과 유용성을 위해 cNFT 상태 데이터는 RPC 제공업체에 의해 인덱싱되고 **Metaplex DAS API**를 통해 사용할 수 있습니다.
+[개요](/ko/smart-contracts/bubblegum#read-api)에서 언급했듯이 압축된 NFT(cNFT)가 생성되거나 수정될 때마다 해당 트랜잭션이 원장에 온체인으로 기록되지만 cNFT 상태 데이터는 계정 공간에 저장되지 않습니다. 이는 cNFT의 엄청난 비용 절약의 이유이지만 편의성과 유용성을 위해 cNFT 상태 데이터는 RPC 제공업체에 의해 인덱싱되고 **Metaplex DAS API**를 통해 사용할 수 있습니다.
 
 Metaplex는 DAS API의 [참조 구현](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)을 만들었으며, 일부 RPC 제공업체는 특정 구현을 위해 이 코드의 일부 또는 전부를 사용하는 반면 다른 RPC 제공업체는 자체적으로 작성했습니다. Metaplex DAS API를 지원하는 다른 RPC 제공업체 목록은 ["Metaplex DAS API RPC"](/ko/rpc-providers) 페이지를 참조하세요.
 

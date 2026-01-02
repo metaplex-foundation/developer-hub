@@ -159,9 +159,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## Tips and Best Practices
 
-1. **Use [Display Options](/das-api/guides/display-options)**: Enable `showCollectionMetadata` and `showFungible` or other options like `showInscription` to get complete token information.
+1. **Use [Display Options](/dev-tools/das-api/display-options)**: Enable `showCollectionMetadata` and `showFungible` or other options like `showInscription` to get complete token information.
 
-2. **Handle [Pagination](/das-api/guides/pagination)**: For wallets with many tokens, always implement pagination.
+2. **Handle [Pagination](/dev-tools/das-api/guides/pagination)**: For wallets with many tokens, always implement pagination.
 
 3. **Filter by Interface**: Use the `interface` parameter to get specific token types.
 
@@ -171,7 +171,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## Related Guides
 
-- [Get Fungible Assets by Owner](/das-api/guides/get-fungible-assets)
-- [Get NFTs by Owner](/das-api/guides/get-nfts-by-owner)
-- [Get Assets by Owner and Collection](/das-api/guides/owner-and-collection)
-- [Analyze Collection Statistics](/das-api/guides/collection-statistics)
+- [Get Fungible Assets by Owner](/dev-tools/das-api/guides/get-fungible-assets)
+- [Get NFTs by Owner](/dev-tools/das-api/guides/get-nfts-by-owner)
+- [Get Assets by Owner and Collection](/dev-tools/das-api/guides/owner-and-collection)
+- [Analyze Collection Statistics](/dev-tools/das-api/guides/collection-statistics)

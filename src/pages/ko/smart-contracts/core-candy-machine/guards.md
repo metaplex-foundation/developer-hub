@@ -10,7 +10,7 @@ description: 코어 캔디 머신에 사용할 수 있는 다양한 유형의 �
 
 선택할 수 있는 가드 세트가 광범위하며, 각 가드는 필요에 따라 활성화하고 구성할 수 있습니다.
 
-이 문서의 뒷부분에서 [사용 가능한 모든 가드](/core-candy-machine/guards)에 대해 다루겠지만, 먼저 몇 가지 예시를 통해 이를 설명해보겠습니다.
+이 문서의 뒷부분에서 [사용 가능한 모든 가드](/ko/smart-contracts/core-candy-machine/guards)에 대해 다루겠지만, 먼저 몇 가지 예시를 통해 이를 설명해보겠습니다.
 
 - **시작 날짜** 가드가 활성화되면 사전 구성된 날짜 이전에는 민팅이 금지됩니다. 특정 날짜 이후의 민팅을 금지하는 **종료 날짜** 가드도 있습니다.
 - **SOL 결제** 가드가 활성화되면 민팅 지갑은 구성된 대상 지갑에 구성된 금액을 지불해야 합니다. 특정 컬렉션의 토큰이나 NFT로 지불하는 유사한 가드도 존재합니다.
@@ -178,36 +178,36 @@ My Custom Guard {% .font-semibold %}
 
 다음 목록에서 각 가드에 대한 간단한 설명을 제공하며, 보다 자세한 내용을 위한 전용 페이지 링크를 포함합니다.
 
-- [**Address Gate**](/core-candy-machine/guards/address-gate): 민팅을 단일 주소로 제한합니다.
-- [**Allocation**](/core-candy-machine/guards/allocation): 각 가드 그룹이 민팅할 수 있는 NFT 수에 제한을 지정할 수 있습니다.
-- [**Allow List**](/core-candy-machine/guards/allow-list): 지갑 주소 목록을 사용하여 누가 민팅할 수 있는지 결정합니다.
-- [**Asset Burn Multi**](/core-candy-machine/guards/asset-burn-multi): 지정된 컬렉션의 보유자로 민팅을 제한하며, 하나 이상의 코어 자산을 소각해야 합니다.
-- [**Asset Burn**](/core-candy-machine/guards/asset-burn): 지정된 컬렉션의 보유자로 민팅을 제한하며, 단일 코어 자산을 소각해야 합니다.
-- [**Asset Gate**](/core-candy-machine/guards/asset-gate): 지정된 컬렉션의 보유자로 민팅을 제한합니다.
-- [**Asset Mint Limit**](/core-candy-machine/guards/asset-mint-limit): 지정된 컬렉션의 보유자로 민팅을 제한하고, 제공된 코어 자산에 대해 실행할 수 있는 민팅 수를 제한합니다.
-- [**Asset Payment Multi**](/core-candy-machine/guards/asset-payment-multi): 민팅 가격을 지정된 컬렉션의 여러 코어 자산으로 설정합니다.
-- [**Asset Payment**](/core-candy-machine/guards/asset-payment): 민팅 가격을 지정된 컬렉션의 코어 자산으로 설정합니다.
-- [**Bot Tax**](/core-candy-machine/guards/bot-tax): 유효하지 않은 트랜잭션에 부과할 구성 가능한 세금입니다.
-- [**Edition**](/core-candy-machine/guards/edition): 민팅된 코어 자산에 에디션 플러그인을 추가합니다. 자세한 내용은 [프린트 에디션](/core/guides/print-editions) 가이드를 참조하세요.
-- [**End Date**](/core-candy-machine/guards/end-date): 민팅 종료 날짜를 결정합니다.
-- [**Freeze Sol Payment**](/core-candy-machine/guards/freeze-sol-payment): 동결 기간과 함께 SOL로 민팅 가격을 설정합니다.
-- [**Freeze Token Payment**](/core-candy-machine/guards/freeze-token-payment): 동결 기간과 함께 토큰 금액으로 민팅 가격을 설정합니다.
-- [**Gatekeeper**](/core-candy-machine/guards/gatekeeper): 게이트키퍼 네트워크(예: 캡차 통합)를 통해 민팅을 제한합니다.
-- [**Mint Limit**](/core-candy-machine/guards/mint-limit): 지갑당 민팅 수에 제한을 지정합니다.
-- [**Nft Burn**](/core-candy-machine/guards/nft-burn): 지정된 컬렉션의 보유자로 민팅을 제한하며, NFT를 소각해야 합니다.
-- [**Nft Gate**](/core-candy-machine/guards/nft-gate): 지정된 컬렉션의 보유자로 민팅을 제한합니다.
-- [**Nft Payment**](/core-candy-machine/guards/nft-payment): 민팅 가격을 지정된 컬렉션의 NFT로 설정합니다.
-- [**Program Gate**](/core-candy-machine/guards/program-gate): 민팅 트랜잭션에 포함될 수 있는 프로그램을 제한합니다.
-- [**Redeemed Amount**](/core-candy-machine/guards/redeemed-amount): 총 민팅된 수량에 따라 민팅 종료를 결정합니다.
-- [**Sol Fixed fee**](/core-candy-machine/guards/sol-fixed-fee): 고정 가격으로 SOL로 민팅 가격을 설정합니다. [Sol Payment](/core-candy-machine/guards/sol-payment) 가드와 유사합니다.
-- [**Sol Payment**](/core-candy-machine/guards/sol-payment): SOL로 민팅 가격을 설정합니다.
-- [**Start Date**](/core-candy-machine/guards/start-date): 민팅 시작 날짜를 결정합니다.
-- [**Third Party Signer**](/core-candy-machine/guards/third-party-signer): 트랜잭션에 추가 서명자가 필요합니다.
-- [**Token Burn**](/core-candy-machine/guards/token-burn): 지정된 토큰의 보유자로 민팅을 제한하며, 토큰을 소각해야 합니다.
-- [**Token Gate**](/core-candy-machine/guards/token-gate): 지정된 토큰의 보유자로 민팅을 제한합니다.
-- [**Token Payment**](/core-candy-machine/guards/token-payment): 토큰 금액으로 민팅 가격을 설정합니다.
-- [**Token22 Payment**](/core-candy-machine/guards/token2022-payment): 토큰22(토큰 확장) 금액으로 민팅 가격을 설정합니다.
-- [**Vanity Mint**](/core-candy-machine/guards/vanity-mint): 새로운 민트 주소가 특정 패턴과 일치할 것을 기대하여 민팅을 제한합니다.
+- [**Address Gate**](/ko/smart-contracts/core-candy-machine/guards/address-gate): 민팅을 단일 주소로 제한합니다.
+- [**Allocation**](/ko/smart-contracts/core-candy-machine/guards/allocation): 각 가드 그룹이 민팅할 수 있는 NFT 수에 제한을 지정할 수 있습니다.
+- [**Allow List**](/ko/smart-contracts/core-candy-machine/guards/allow-list): 지갑 주소 목록을 사용하여 누가 민팅할 수 있는지 결정합니다.
+- [**Asset Burn Multi**](/ko/smart-contracts/core-candy-machine/guards/asset-burn-multi): 지정된 컬렉션의 보유자로 민팅을 제한하며, 하나 이상의 코어 자산을 소각해야 합니다.
+- [**Asset Burn**](/ko/smart-contracts/core-candy-machine/guards/asset-burn): 지정된 컬렉션의 보유자로 민팅을 제한하며, 단일 코어 자산을 소각해야 합니다.
+- [**Asset Gate**](/ko/smart-contracts/core-candy-machine/guards/asset-gate): 지정된 컬렉션의 보유자로 민팅을 제한합니다.
+- [**Asset Mint Limit**](/ko/smart-contracts/core-candy-machine/guards/asset-mint-limit): 지정된 컬렉션의 보유자로 민팅을 제한하고, 제공된 코어 자산에 대해 실행할 수 있는 민팅 수를 제한합니다.
+- [**Asset Payment Multi**](/ko/smart-contracts/core-candy-machine/guards/asset-payment-multi): 민팅 가격을 지정된 컬렉션의 여러 코어 자산으로 설정합니다.
+- [**Asset Payment**](/ko/smart-contracts/core-candy-machine/guards/asset-payment): 민팅 가격을 지정된 컬렉션의 코어 자산으로 설정합니다.
+- [**Bot Tax**](/ko/smart-contracts/core-candy-machine/guards/bot-tax): 유효하지 않은 트랜잭션에 부과할 구성 가능한 세금입니다.
+- [**Edition**](/ko/smart-contracts/core-candy-machine/guards/edition): 민팅된 코어 자산에 에디션 플러그인을 추가합니다. 자세한 내용은 [프린트 에디션](/ko/smart-contracts/core/guides/print-editions) 가이드를 참조하세요.
+- [**End Date**](/ko/smart-contracts/core-candy-machine/guards/end-date): 민팅 종료 날짜를 결정합니다.
+- [**Freeze Sol Payment**](/ko/smart-contracts/core-candy-machine/guards/freeze-sol-payment): 동결 기간과 함께 SOL로 민팅 가격을 설정합니다.
+- [**Freeze Token Payment**](/ko/smart-contracts/core-candy-machine/guards/freeze-token-payment): 동결 기간과 함께 토큰 금액으로 민팅 가격을 설정합니다.
+- [**Gatekeeper**](/ko/smart-contracts/core-candy-machine/guards/gatekeeper): 게이트키퍼 네트워크(예: 캡차 통합)를 통해 민팅을 제한합니다.
+- [**Mint Limit**](/ko/smart-contracts/core-candy-machine/guards/mint-limit): 지갑당 민팅 수에 제한을 지정합니다.
+- [**Nft Burn**](/ko/smart-contracts/core-candy-machine/guards/nft-burn): 지정된 컬렉션의 보유자로 민팅을 제한하며, NFT를 소각해야 합니다.
+- [**Nft Gate**](/ko/smart-contracts/core-candy-machine/guards/nft-gate): 지정된 컬렉션의 보유자로 민팅을 제한합니다.
+- [**Nft Payment**](/ko/smart-contracts/core-candy-machine/guards/nft-payment): 민팅 가격을 지정된 컬렉션의 NFT로 설정합니다.
+- [**Program Gate**](/ko/smart-contracts/core-candy-machine/guards/program-gate): 민팅 트랜잭션에 포함될 수 있는 프로그램을 제한합니다.
+- [**Redeemed Amount**](/ko/smart-contracts/core-candy-machine/guards/redeemed-amount): 총 민팅된 수량에 따라 민팅 종료를 결정합니다.
+- [**Sol Fixed fee**](/ko/smart-contracts/core-candy-machine/guards/sol-fixed-fee): 고정 가격으로 SOL로 민팅 가격을 설정합니다. [Sol Payment](/ko/smart-contracts/core-candy-machine/guards/sol-payment) 가드와 유사합니다.
+- [**Sol Payment**](/ko/smart-contracts/core-candy-machine/guards/sol-payment): SOL로 민팅 가격을 설정합니다.
+- [**Start Date**](/ko/smart-contracts/core-candy-machine/guards/start-date): 민팅 시작 날짜를 결정합니다.
+- [**Third Party Signer**](/ko/smart-contracts/core-candy-machine/guards/third-party-signer): 트랜잭션에 추가 서명자가 필요합니다.
+- [**Token Burn**](/ko/smart-contracts/core-candy-machine/guards/token-burn): 지정된 토큰의 보유자로 민팅을 제한하며, 토큰을 소각해야 합니다.
+- [**Token Gate**](/ko/smart-contracts/core-candy-machine/guards/token-gate): 지정된 토큰의 보유자로 민팅을 제한합니다.
+- [**Token Payment**](/ko/smart-contracts/core-candy-machine/guards/token-payment): 토큰 금액으로 민팅 가격을 설정합니다.
+- [**Token22 Payment**](/ko/smart-contracts/core-candy-machine/guards/token2022-payment): 토큰22(토큰 확장) 금액으로 민팅 가격을 설정합니다.
+- [**Vanity Mint**](/ko/smart-contracts/core-candy-machine/guards/vanity-mint): 새로운 민트 주소가 특정 패턴과 일치할 것을 기대하여 민팅을 제한합니다.
 
 ## 결론
 

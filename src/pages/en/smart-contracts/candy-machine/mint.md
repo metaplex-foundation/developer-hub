@@ -8,7 +8,7 @@ So far, we’ve learned how to create and maintain Candy Machines. We’ve seen 
 
 ## Basic Minting
 
-As mentioned [in the Candy Guards page](/candy-machine/guards#why-another-program), there are two programs responsible for minting NFTs from Candy Machines: The Candy Machine Core program — responsible for minting the NFT — and the Candy Guard program which adds a configurable Access Control layer on top of it and can be forked to offer custom guards.
+As mentioned [in the Candy Guards page](/smart-contracts/candy-machine/guards#why-another-program), there are two programs responsible for minting NFTs from Candy Machines: The Candy Machine Core program — responsible for minting the NFT — and the Candy Guard program which adds a configurable Access Control layer on top of it and can be forked to offer custom guards.
 
 As such, there are two ways to mint from a Candy Machine:
 
@@ -238,7 +238,7 @@ A good example of a guard that requires Mint Settings is the **NFT Payment** gua
 
 {% /diagram %}
 
-[Each available guard](/candy-machine/guards) contains its own documentation page and it will tell you whether or not that guard expects Mint Settings to be provided when minting.
+[Each available guard](/smart-contracts/candy-machine/guards) contains its own documentation page and it will tell you whether or not that guard expects Mint Settings to be provided when minting.
 
 If you were to only use guards that do not require Mint Settings, you may mint in the same way described by the “Basic Minting” section above. Otherwise, you’ll need to provide an additional object attribute containing the Mint Settings of all guards that require them. Let’s have a look at what that looks like in practice using our SDKs.
 
@@ -457,9 +457,9 @@ It is important to note that some guards may require additional verification ste
 
 ### Using the route instruction
 
-One way guards can require a pre-validation step is by using [their own special instruction](/candy-machine/guard-route) via the “route” instruction.
+One way guards can require a pre-validation step is by using [their own special instruction](/smart-contracts/candy-machine/guard-route) via the “route” instruction.
 
-A good example of that is the **Allow List** guard. When using this guard, we must verify that our wallet belongs to a predefined list of wallets by calling the route instruction and providing a valid Merkle Proof. If this route instruction is successful, it will create an Allow List PDA for that wallet which the mint instruction can then read to validate the Allow List guard. [You can read more about the Allow List guard on its dedicated page](/candy-machine/guards/allow-list).
+A good example of that is the **Allow List** guard. When using this guard, we must verify that our wallet belongs to a predefined list of wallets by calling the route instruction and providing a valid Merkle Proof. If this route instruction is successful, it will create an Allow List PDA for that wallet which the mint instruction can then read to validate the Allow List guard. [You can read more about the Allow List guard on its dedicated page](/smart-contracts/candy-machine/guards/allow-list).
 
 {% diagram %}
 
@@ -512,7 +512,7 @@ A good example of that is the **Allow List** guard. When using this guard, we mu
 
 Another way guards may perform that pre-validation step is by relying on an external solution.
 
-For instance, when using the **Gatekeeper** guard, we must request a Gateway Token by performing a challenge — such as completing a Captcha — which depends on the configured Gatekeeper Network. The Gatekeeper guard will then check for the existence of such Gateway Token to either validate or reject the mint. [You can learn more about the Gatekeeper guard on its dedicated page](/candy-machine/guards/gatekeeper).
+For instance, when using the **Gatekeeper** guard, we must request a Gateway Token by performing a challenge — such as completing a Captcha — which depends on the configured Gatekeeper Network. The Gatekeeper guard will then check for the existence of such Gateway Token to either validate or reject the mint. [You can learn more about the Gatekeeper guard on its dedicated page](/smart-contracts/candy-machine/guards/gatekeeper).
 
 {% diagram %}
 
@@ -568,7 +568,7 @@ Network, e.g. Captcha.
 
 One guard you’ll likely want to include in your Candy Machine is the Box Tax guard which protects your Candy Machine against bots by charging failed mints a configurable amount of SOL. This amount is usually small to hurt bots without affecting genuine mistakes from real users. All bot taxes will be transferred to the Candy Machine account so that, once minting is over, you can access these funds by deleting the Candy Machine account.
 
-This guard is a bit special and affects the minting behaviour of all other guards. When the Bot Tax is activated and any other guard fails to validate the mint, **the transaction will pretend to succeed**. This means no errors will be returned by the program but no NFT will be minted either. This is because the transaction must succeed for the funds to be transferred from the bot to the Candy Machine account. [You can learn more about the Bot Tax guard on its dedicated page](/candy-machine/guards/bot-tax).
+This guard is a bit special and affects the minting behaviour of all other guards. When the Bot Tax is activated and any other guard fails to validate the mint, **the transaction will pretend to succeed**. This means no errors will be returned by the program but no NFT will be minted either. This is because the transaction must succeed for the funds to be transferred from the bot to the Candy Machine account. [You can learn more about the Bot Tax guard on its dedicated page](/smart-contracts/candy-machine/guards/bot-tax).
 
 ## Conclusion
 
@@ -576,5 +576,5 @@ Congratulations, you now know how Candy Machines work from A to Z!
 
 Here are some additional reading resources you might be interested in:
 
-- [All Available Guards](/candy-machine/guards): Have a look through all the guards available to you so you can cherry-pick the ones you need.
-- [Create Your First Candy Machine](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine): This How-To guide helps you upload your assets and create a new Candy Machine from scratch using a CLI tool called “[Sugar](/candy-machine/sugar)”.
+- [All Available Guards](/smart-contracts/candy-machine/guards): Have a look through all the guards available to you so you can cherry-pick the ones you need.
+- [Create Your First Candy Machine](/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine): This How-To guide helps you upload your assets and create a new Candy Machine from scratch using a CLI tool called “[Sugar](/smart-contracts/candy-machine/sugar)”.

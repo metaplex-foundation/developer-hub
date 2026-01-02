@@ -112,7 +112,7 @@ pub struct CreateAssetArgs {
 
 In this `CreateAssetArgs` struct, the **name** and **uri** fields are provided as inputs, which will serve as arguments for the `CreateV2CpiBuilder` instruction used to create the **Core NFT Asset**.
 
-**Note**: Since this is an Anchor focused guide, we're not going to include here how to create the Uri. If you aren't sure how to do it, refer to [this example](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#creating-the-metadata-for-the-asset)
+**Note**: Since this is an Anchor focused guide, we're not going to include here how to create the Uri. If you aren't sure how to do it, refer to [this example](/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#creating-the-metadata-for-the-asset)
 
 ### Creating the Account Struct
 
@@ -286,7 +286,7 @@ CreateV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
   .invoke()?;
 ```
 
-**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
+**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use! 
 
 ## The Client
 

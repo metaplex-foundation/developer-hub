@@ -6,7 +6,7 @@ description: "Core Candy Machineの「NFT Mint Limit」ガードは、指定さ�
 
 ## 概要
 
-NFT Mint Limitガードは、指定されたNFTコレクションの保有者へのミントを制限し、提供されたToken Metadata NFTに対して実行できるミントの量を制限します。これは、ウォレットの代わりにNFTアドレスに基づいた[NFT Gate](/core-candy-machine/guards/nft-gate)と[Mint Limit](/core-candy-machine/guards/mint-limit)ガードの組み合わせと考えることができます。
+NFT Mint Limitガードは、指定されたNFTコレクションの保有者へのミントを制限し、提供されたToken Metadata NFTに対して実行できるミントの量を制限します。これは、ウォレットの代わりにNFTアドレスに基づいた[NFT Gate](/ja/smart-contracts/core-candy-machine/guards/nft-gate)と[Mint Limit](/ja/smart-contracts/core-candy-machine/guards/mint-limit)ガードの組み合わせと考えることができます。
 
 制限は、NFTコレクションごと、Candy Machineごと、設定で提供される識別子ごとに設定され、同じCore Candy Machine内で複数のNFTミント制限を許可します。
 

@@ -9,7 +9,7 @@ description: Token Metadata에서 자산을 컬렉션으로 안전하게 그룹�
 이 기능은 다음과 같은 장점을 제공합니다:
 
 - 추가적인 온체인 호출 없이 주어진 NFT가 어느 컬렉션에 속하는지 쉽게 식별할 수 있습니다.
-- 주어진 컬렉션에 속하는 모든 NFT를 찾을 수 있습니다 ([방법을 보려면 가이드를 확인하세요](/token-metadata/guides/get-by-collection)).
+- 주어진 컬렉션에 속하는 모든 NFT를 찾을 수 있습니다 ([방법을 보려면 가이드를 확인하세요](/ko/smart-contracts/token-metadata/guides/get-by-collection)).
 - 컬렉션의 이름, 설명, 이미지와 같은 컬렉션 메타데이터를 쉽게 관리할 수 있습니다.
 
 ## 컬렉션은 NFT입니다
@@ -415,7 +415,7 @@ NFT에 `Collection` 속성이 설정되면, 컬렉션 NFT의 권한은 Token Met
 
 - **Metadata**: NFT의 Metadata 계정 주소. 이는 컬렉션 내에서 검증하고자 하는 NFT입니다.
 - **Collection Mint**: 컬렉션 NFT의 Mint 계정 주소. 이는 NFT의 Metadata 계정에 이미 설정되어 있지만 아직 검증되지 않은 컬렉션 NFT입니다.
-- **Authority**: 서명자로서의 컬렉션 NFT의 권한. 이는 컬렉션 NFT의 업데이트 권한이거나 적절한 역할을 가진 승인된 위임자일 수 있습니다 ("[위임된 권한](/token-metadata/delegates)" 페이지 참조).
+- **Authority**: 서명자로서의 컬렉션 NFT의 권한. 이는 컬렉션 NFT의 업데이트 권한이거나 적절한 역할을 가진 승인된 위임자일 수 있습니다 ("[위임된 권한](/ko/smart-contracts/token-metadata/delegates)" 페이지 참조).
 
 다음은 Token Metadata에서 컬렉션 NFT를 검증하기 위해 우리의 SDK를 사용하는 방법입니다.
 

@@ -14,7 +14,7 @@ SugarはCandy Machineと対話するためのコマンドラインツールで�
 Sugarのセットアップは、お気に入りのターミナルアプリケーションを開いてバイナリファイルをダウンロードするだけです。
 
 {% callout %}
-Sugarを使用してCandy Machineを作成する完全なガイドは[こちら](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)をご覧ください。
+Sugarを使用してCandy Machineを作成する完全なガイドは[こちら](/ja/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)をご覧ください。
 
 {% /callout %}
 

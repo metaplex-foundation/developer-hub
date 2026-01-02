@@ -1,5 +1,6 @@
 ---
 title: SOL Balance
+metaTitle: SOL Balance | Metaplex CLI
 description: Check SOL balance for a wallet address
 ---
 
@@ -54,6 +55,6 @@ Balance: 1.5 SOL
 
 ## Related Commands
 
-- [SOL Transfer](/cli/toolbox/sol-transfer) - Transfer SOL between addresses
-- [Token Transfer](/cli/toolbox/token-transfer) - Transfer tokens
-- [Airdrop](/cli/toolbox/sol-airdrop) - Request SOL airdrop (devnet only) 
+- [SOL Transfer](/dev-tools/cli/toolbox/sol-transfer) - Transfer SOL between addresses
+- [Token Transfer](/dev-tools/cli/toolbox/token-transfer) - Transfer tokens
+- [Airdrop](/dev-tools/cli/toolbox/sol-airdrop) - Request SOL airdrop (devnet only) 

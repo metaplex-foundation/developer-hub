@@ -76,7 +76,7 @@ npm i @metaplex-foundation/mpl-token-metadata
 - ...
 - https://arweave.net/manifestID/9999.json
 
-如果您不熟悉创建确定性URI，可以按照[本指南](/zh/guides/general/create-deterministic-metadata-with-turbo)获取详细步骤。此外，您可以在此处找到有关创建[集合](/zh/core/guides/javascript/how-to-create-a-core-collection-with-javascript)和Hybrid程序所需[资产](/zh/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)的说明。
+如果您不熟悉创建确定性URI，可以按照[本指南](/zh/guides/general/create-deterministic-metadata-with-turbo)获取详细步骤。此外，您可以在此处找到有关创建[集合](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)和Hybrid程序所需[资产](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)的说明。
 
 **注意**：目前，MPL-Hybrid程序在提供的最小和最大URI索引之间随机选择一个数字，不检查URI是否已被使用。因此，交换会受到[生日悖论](https://betterexplained.com/articles/understanding-the-birthday-paradox/)的影响。为了让项目受益于足够的交换随机化，我们建议准备和上传至少25万个可随机选择的资产元数据。可用的潜在资产越多越好！
 

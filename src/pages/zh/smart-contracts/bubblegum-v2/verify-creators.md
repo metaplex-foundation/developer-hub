@@ -8,13 +8,13 @@ description: 了解如何在Bubblegum上验证和取消验证创作者。
 
 这些指令将在cNFT的**创作者**数组的适当项目上切换**已验证**布尔值。该布尔值很重要，因为它允许钱包和市场等应用程序知道哪些创作者是真实的，哪些不是。
 
-值得注意的是，创作者可以在[铸造压缩NFT](/zh/bubblegum-v2/mint-cnfts)时通过签署铸造交易直接验证自己。也就是说，现在让我们看看创作者如何在现有的压缩NFT上验证或取消验证自己。
+值得注意的是，创作者可以在[铸造压缩NFT](/zh/smart-contracts/bubblegum-v2/mint-cnfts)时通过签署铸造交易直接验证自己。也就是说，现在让我们看看创作者如何在现有的压缩NFT上验证或取消验证自己。
 
 ## 验证创作者
 
-Bubblegum程序提供**verifyCreatorV2**指令，必须由我们试图验证的创作者签名。创作者必须已经是压缩NFT的**创作者**数组的一部分。如果创作者尚未在数组中，请先使用[`updateMetadataV2`](/zh/bubblegum-v2/update-cnfts)指令将创作者添加到**创作者**数组。
+Bubblegum程序提供**verifyCreatorV2**指令，必须由我们试图验证的创作者签名。创作者必须已经是压缩NFT的**创作者**数组的一部分。如果创作者尚未在数组中，请先使用[`updateMetadataV2`](/zh/smart-contracts/bubblegum-v2/update-cnfts)指令将创作者添加到**创作者**数组。
 
-此外，由于此指令将替换Bubblegum树上的叶子，因此必须提供更多参数来验证压缩NFT的完整性。由于这些参数对于所有改变叶子的指令都是通用的，它们在[以下FAQ](/zh/bubblegum-v2/faq#replace-leaf-instruction-arguments)中有记录。幸运的是，我们可以使用辅助方法，该方法将使用Metaplex DAS API自动为我们获取这些参数。
+此外，由于此指令将替换Bubblegum树上的叶子，因此必须提供更多参数来验证压缩NFT的完整性。由于这些参数对于所有改变叶子的指令都是通用的，它们在[以下FAQ](/zh/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)中有记录。幸运的是，我们可以使用辅助方法，该方法将使用Metaplex DAS API自动为我们获取这些参数。
 
 {% dialect-switcher title="验证压缩NFT的创作者" %}
 {% dialect title="JavaScript" id="js" %}

@@ -55,7 +55,7 @@ In this example the RPC url is hardcoded into the `umiStore` umi state under `sr
 ```ts
 const useUmiStore = create<UmiState>()((set) => ({
   // Add your own RPC here.
-  umi: createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(
+  umi: createUmi("https://api.devnet.solana.com").use(
     signerIdentity(
       createNoopSigner(publicKey('11111111111111111111111111111111'))
     )

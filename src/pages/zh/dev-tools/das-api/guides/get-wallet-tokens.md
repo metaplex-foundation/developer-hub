@@ -159,9 +159,9 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 提示和最佳实践
 
-1. **使用[显示选项](/zh/das-api/guides/display-options)**：启用 `showCollectionMetadata` 和 `showFungible` 或其他选项如 `showInscription` 以获取完整的代币信息。
+1. **使用[显示选项](/zh/dev-tools/das-api/guides/display-options)**：启用 `showCollectionMetadata` 和 `showFungible` 或其他选项如 `showInscription` 以获取完整的代币信息。
 
-2. **处理[分页](/zh/das-api/guides/pagination)**：对于拥有大量代币的钱包，始终实现分页。
+2. **处理[分页](/zh/dev-tools/das-api/guides/pagination)**：对于拥有大量代币的钱包，始终实现分页。
 
 3. **按接口过滤**：使用 `interface` 参数获取特定代币类型。
 
@@ -171,7 +171,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 相关指南
 
-- [按所有者获取同质化资产](/zh/das-api/guides/get-fungible-assets)
-- [按所有者获取 NFT](/zh/das-api/guides/get-nfts-by-owner)
-- [按所有者和集合获取资产](/zh/das-api/guides/owner-and-collection)
-- [分析集合统计数据](/zh/das-api/guides/collection-statistics)
+- [按所有者获取同质化资产](/zh/dev-tools/das-api/guides/get-fungible-assets)
+- [按所有者获取 NFT](/zh/dev-tools/das-api/guides/get-nfts-by-owner)
+- [按所有者和集合获取资产](/zh/dev-tools/das-api/guides/owner-and-collection)
+- [分析集合统计数据](/zh/dev-tools/das-api/guides/collection-statistics)

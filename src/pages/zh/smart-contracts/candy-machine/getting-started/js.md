@@ -26,7 +26,7 @@ import { mplCandyMachine } from '@metaplex-foundation/mpl-candy-machine'
 const umi = createUmi('http://127.0.0.1:8899').use(mplCandyMachine())
 ```
 
-然后您需要告诉 Umi 使用哪个钱包。这可以是[密钥对](/zh/umi/connecting-to-umi#connecting-w-a-secret-key)或 [solana wallet adapter](/zh/umi/connecting-to-umi#connecting-w-wallet-adapter)。
+然后您需要告诉 Umi 使用哪个钱包。这可以是[密钥对](/zh/dev-tools/umi/connecting-to-umi#connecting-w-a-secret-key)或 [solana wallet adapter](/zh/dev-tools/umi/connecting-to-umi#connecting-w-wallet-adapter)。
 
 就是这样，您现在可以通过使用[库提供的各种函数](https://mpl-candy-machine.typedoc.metaplex.com/)并将 `Umi` 实例传递给它们来与 NFT 进行交互。以下是获取 candy machine 账户及其关联的 candy guard 账户的示例。
 

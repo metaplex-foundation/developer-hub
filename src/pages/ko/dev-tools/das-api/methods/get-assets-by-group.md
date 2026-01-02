@@ -18,7 +18,7 @@ tableOfContents: false
 | `page`             |          | 검색할 "페이지"의 인덱스입니다.       |
 | `before`           |          | 지정된 ID 이전의 자산을 검색합니다.   |
 | `after`            |          | 지정된 ID 이후의 자산을 검색합니다.    |
-| `options`          |          | 표시 옵션 객체입니다. 자세한 내용은 [표시 옵션](/das-api/display-options)을 참조하세요. |
+| `options`          |          | 표시 옵션 객체입니다. 자세한 내용은 [표시 옵션](/ko/dev-tools/das-api/display-options)을 참조하세요. |
 
 ## Playground
 

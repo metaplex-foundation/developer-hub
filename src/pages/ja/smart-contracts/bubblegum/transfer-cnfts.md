@@ -9,10 +9,10 @@ description: Bubblegumで圧縮NFTを転送する方法を学びます。
 - **Leaf Owner**と**Leaf Delegate**: 圧縮NFTの現在の所有者とそのdelegate権限（存在する場合）。これらのいずれかがトランザクションに署名する必要があります。
 - **New Leaf Owner**: 圧縮NFTの新しい所有者のアドレス。
 
-この命令は圧縮NFTを更新するため、Bubblegum Tree上のリーフを置き換えることに注意してください。これは、圧縮NFTの整合性を検証するために追加のパラメータを提供する必要があることを意味します。これらのパラメータはリーフを変更するすべての命令に共通であるため、[以下のFAQ](/ja/smart-contracts/bubblegum/faq#replace-leaf-instruction-arguments)に文書化されています。幸い、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
+この命令は圧縮NFTを更新するため、Bubblegum Tree上のリーフを置き換えることに注意してください。これは、圧縮NFTの整合性を検証するために追加のパラメータを提供する必要があることを意味します。これらのパラメータはリーフを変更するすべての命令に共通であるため、[以下のFAQ](/ja/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)に文書化されています。幸い、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
 
 {% callout title="トランザクションサイズ" type="note" %}
-トランザクションサイズエラーが発生した場合は、`getAssetWithProof`で`{ truncateCanopy: true }`の使用を検討してください。詳細については[FAQ](/ja/smart-contracts/bubblegum/faq#replace-leaf-instruction-arguments)を参照してください。
+トランザクションサイズエラーが発生した場合は、`getAssetWithProof`で`{ truncateCanopy: true }`の使用を検討してください。詳細については[FAQ](/ja/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)を参照してください。
 {% /callout %}
 
 {% dialect-switcher title="圧縮NFTの転送" %}

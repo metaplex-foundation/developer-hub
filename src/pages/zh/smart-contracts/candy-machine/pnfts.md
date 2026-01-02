@@ -4,7 +4,7 @@ metaTitle: 可编程 NFT | Candy Machine
 description: 解释如何从 candy machine 铸造可编程 NFT。
 ---
 
-Token Metadata 的版本 `1.7` 引入了[一种称为可编程 NFT 的新资产类别](/zh/token-metadata/pnfts)，允许创作者在二级销售中强制执行版税等功能。
+Token Metadata 的版本 `1.7` 引入了[一种称为可编程 NFT 的新资产类别](/zh/smart-contracts/token-metadata/pnfts)，允许创作者在二级销售中强制执行版税等功能。
 
 从 Candy Machine Core 的版本 `1.0` 和 Candy Guard 的版本 `1.0` 开始，现在可以**从 candy machine 铸造可编程 NFT**，甚至可以更新现有 candy machine 的代币标准。
 
@@ -18,7 +18,7 @@ Candy Machine Core 程序添加了一个名为 `initializeV2` 的新指令。此
 
 此外，`collectionDelegateRecord` 账户现在应该引用 Token Metadata 中的新 [Metadata Delegate Record](https://docs.rs/mpl-token-metadata/latest/mpl_token_metadata/accounts/struct.MetadataDelegateRecord.html)。
 
-您可能想阅读本文档的"[创建 Candy Machine](/zh/candy-machine/manage#create-candy-machines)"部分以获取更多详细信息，但以下是如何使用我们的 SDK 创建铸造可编程 NFT 的新 Candy Machine 的一些示例。
+您可能想阅读本文档的"[创建 Candy Machine](/zh/smart-contracts/candy-machine/manage#create-candy-machines)"部分以获取更多详细信息，但以下是如何使用我们的 SDK 创建铸造可编程 NFT 的新 Candy Machine 的一些示例。
 
 {% dialect-switcher title="创建新的 PNFT Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
@@ -43,7 +43,7 @@ API 参考：[create](https://mpl-candy-machine.typedoc.metaplex.com/functions/c
 
 可以通过新的 `setTokenStandard` 指令更新现有 Candy Machine 的代币标准。在 Candy Machine `V1` 上调用此指令时，它还将把 Candy Machine 升级到 `V2` 并将代币标准存储在账户数据中。
 
-您可能想阅读本文档的"[更新代币标准](/zh/candy-machine/manage#update-token-standard)"部分以获取更多详细信息，但以下是如何使用我们的 SDK 将现有 Candy Machine 的代币标准更新为可编程 NFT 的一些示例。
+您可能想阅读本文档的"[更新代币标准](/zh/smart-contracts/candy-machine/manage#update-token-standard)"部分以获取更多详细信息，但以下是如何使用我们的 SDK 将现有 Candy Machine 的代币标准更新为可编程 NFT 的一些示例。
 
 {% dialect-switcher title="更改 Candy Machine 的代币标准" %}
 {% dialect title="JavaScript" id="js" %}
@@ -67,7 +67,7 @@ API 参考：[setTokenStandard](https://mpl-candy-machine.typedoc.metaplex.com/f
 
 此外，添加了一个新的 `setCollectionV2` 指令以支持设置与可编程 NFT 兼容的集合。此指令也适用于常规 NFT，并弃用 `setCollection` 指令。
 
-这里也是一样，您可以在本文档的"[更新集合](/zh/candy-machine/manage#update-collection)"部分阅读更多信息。
+这里也是一样，您可以在本文档的"[更新集合](/zh/smart-contracts/candy-machine/manage#update-collection)"部分阅读更多信息。
 
 {% dialect-switcher title="更新 Candy Machine 的集合" %}
 {% dialect title="JavaScript" id="js" %}
@@ -93,7 +93,7 @@ API 参考：[setCollectionV2](https://mpl-candy-machine.typedoc.metaplex.com/fu
 
 Candy Machine Core 和 Candy Guard 程序的 `mint` 指令已更新以支持铸造可编程 NFT。这个新指令称为 `mintV2`，它类似于 `mint` 指令，但需要传入额外的账户。这里也是一样，新的 `mintV2` 指令可用于铸造常规 NFT，因此它们弃用了现有的 `mint` 指令。
 
-整个"[铸造](/zh/candy-machine/mint)"页面已更新为使用新的 `mintV2` 指令，但以下是如何将它们与可编程 NFT 一起使用的快速示例。
+整个"[铸造](/zh/smart-contracts/candy-machine/mint)"页面已更新为使用新的 `mintV2` 指令，但以下是如何将它们与可编程 NFT 一起使用的快速示例。
 
 {% dialect-switcher title="从您的 Candy Machine 铸造" %}
 {% dialect title="JavaScript" id="js" %}
@@ -133,6 +133,6 @@ API 参考：[mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/m
 
 您可能会发现以下关于可编程 NFT 和 Candy Machine 的资源很有用：
 
-- [可编程 NFT 指南](/zh/token-metadata/pnfts)
+- [可编程 NFT 指南](/zh/smart-contracts/token-metadata/pnfts)
 - [Candy Machine Core 程序](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core)
 - [Candy Guard 程序](https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard)

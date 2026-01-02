@@ -40,7 +40,7 @@ Sugar CLIは、他のウォレットにNFTをミントするための2つの主�
 1. `sugar mint`：*1つ*の特定のウォレットにミント
 2. `sugar airdrop`：*複数*のウォレットにミント
 
-Sugarを通じてミントを許可する前提条件は、**ガードが添付されていない**Candy Machineを作成することです。Sugarを使用してCandy Machineを作成するには、[この](https://developers.metaplex.com/ja/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)ガイドの最初のステップに従ってください。Candy Machineにガードが添付されている場合、`sugar guard remove`を使用してガードを削除できます。
+Sugarを通じてミントを許可する前提条件は、**ガードが添付されていない**Candy Machineを作成することです。Sugarを使用してCandy Machineを作成するには、[この](/ja/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)ガイドの最初のステップに従ってください。Candy Machineにガードが添付されている場合、`sugar guard remove`を使用してガードを削除できます。
 
 ### `sugar mint`を使用した単一受信者ミント
 
@@ -87,7 +87,6 @@ Typescriptを使用して別のウォレットにミントする場合、Candy M
 
 ガードなしのCandy Machineの場合、`mintFromCandyMachineV2`を使用します。この関数では、受信者を`nftOwner`として直接指定できます。
 
-SolanaとEclipseブロックチェーンでMetaplex Auraネットワークにアクセスするには、エンドポイントとAPIキーのためにAura Appを[こちら](https://aura-app.metaplex.com/)で訪問できます。
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -149,7 +148,7 @@ import {
 
 // 設定
 const RECIPIENT_ADDRESS = "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV";
-const RPC_ENDPOINT = "https://devnet-aura.metaplex.com/<YOUR_API_KEY>";
+const RPC_ENDPOINT = "https://api.devnet.solana.com";
 
 (async () => {
   try {

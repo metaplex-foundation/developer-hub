@@ -1,5 +1,6 @@
 ---
 title: Installation
+metaTitle: Installation | Metaplex CLI
 description: Install and set up the Metaplex CLI
 ---
 
@@ -134,9 +135,9 @@ If you encounter any issues:
 
 Now that you have the CLI installed, you can:
 
-1. [Learn about the core commands](/cli/core/create-asset)
-2. [Explore the toolbox utilities](/cli/toolbox/token-create)
-3. [Configure your environment](/cli/config/wallets)
+1. [Learn about the core commands](/dev-tools/cli/core/create-asset)
+2. [Explore the toolbox utilities](/dev-tools/cli/toolbox/token-create)
+3. [Configure your environment](/dev-tools/cli/config/wallets)
 
 ## Updating
 

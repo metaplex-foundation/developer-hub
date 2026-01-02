@@ -74,14 +74,14 @@ Example:
 
 ## Related Commands
 
-- [`mplx cm create`](/cli/cm/create) - Create candy machine (can upload automatically)
-- [`mplx cm validate`](/cli/cm/validate) - Validate uploaded assets
-- [`mplx cm insert`](/cli/cm/insert) - Insert uploaded assets into candy machine
-- [`mplx cm fetch`](/cli/cm/fetch) - View candy machine and asset information
+- [`mplx cm create`](/dev-tools/cli/cm/create) - Create candy machine (can upload automatically)
+- [`mplx cm validate`](/dev-tools/cli/cm/validate) - Validate uploaded assets
+- [`mplx cm insert`](/dev-tools/cli/cm/insert) - Insert uploaded assets into candy machine
+- [`mplx cm fetch`](/dev-tools/cli/cm/fetch) - View candy machine and asset information
 
 ## Next Steps
 
-1. **[Validate your uploads](/cli/cm/validate)** to ensure everything uploaded correctly
-2. **[Create your candy machine](/cli/cm/create)** using the uploaded assets
-3. **[Insert items](/cli/cm/insert)** to load assets into the candy machine
-4. **[Monitor your setup](/cli/cm/fetch)** to verify everything is working
+1. **[Validate your uploads](/dev-tools/cli/cm/validate)** to ensure everything uploaded correctly
+2. **[Create your candy machine](/dev-tools/cli/cm/create)** using the uploaded assets
+3. **[Insert items](/dev-tools/cli/cm/insert)** to load assets into the candy machine
+4. **[Monitor your setup](/dev-tools/cli/cm/fetch)** to verify everything is working

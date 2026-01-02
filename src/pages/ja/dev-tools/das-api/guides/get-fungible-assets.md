@@ -263,14 +263,14 @@ console.log(`クリエータートークン: ${creatorTokens.items.length}`)
 
 ## ヒントとベストプラクティス
 
-1. **インターフェースフィルターを使用する**: 詳細については[基準によるAsset検索](/ja/das-api/guides/search-by-criteria)を参照してください。
-2. **Show Fungibleを有効化する**: [表示オプション](/ja/das-api/guides/display-options)に示されているように、display optionsで`showFungible: true`を使用して完全なトークン情報を取得します。
+1. **インターフェースフィルターを使用する**: 詳細については[基準によるAsset検索](/ja/dev-tools/das-api/guides/search-by-criteria)を参照してください。
+2. **Show Fungibleを有効化する**: [表示オプション](/ja/dev-tools/das-api/display-options)に示されているように、display optionsで`showFungible: true`を使用して完全なトークン情報を取得します。
 3. **小数点を考慮する**: トークン量を適切にフォーマットするために`decimals`フィールドを確認してください。
 4. **結果をキャッシュする**: トークン残高は頻繁に変更されますが、トークンメタデータは比較的安定しています。
 
 ## 関連ガイド
 
-- [ウォレット内のすべてのトークンを取得](/ja/das-api/guides/get-wallet-tokens)
-- [オーナー別のNFT取得](/ja/das-api/guides/get-nfts-by-owner)
-- [複数の基準によるAsset検索](/ja/das-api/guides/search-by-criteria)
-- [コレクション統計の分析](/ja/das-api/guides/collection-statistics)
+- [ウォレット内のすべてのトークンを取得](/ja/dev-tools/das-api/guides/get-wallet-tokens)
+- [オーナー別のNFT取得](/ja/dev-tools/das-api/guides/get-nfts-by-owner)
+- [複数の基準によるAsset検索](/ja/dev-tools/das-api/guides/search-by-criteria)
+- [コレクション統計の分析](/ja/dev-tools/das-api/guides/collection-statistics)

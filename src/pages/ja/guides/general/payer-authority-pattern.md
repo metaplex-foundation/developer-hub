@@ -1,6 +1,6 @@
 ---
 title: ペイヤー・オーソリティ パターン
-metaTitle: ペイヤー・オーソリティ パターン
+metaTitle: ペイヤー・オーソリティ パターン | Metaplex Guides
 description: 別々のオーソリティとペイヤーを使用するSolana命令の一般的なプログラミングパターン。
 # remember to update dates also in /components/guides/index.js
 created: '12-30-2024'

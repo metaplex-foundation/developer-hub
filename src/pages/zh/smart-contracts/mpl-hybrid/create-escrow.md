@@ -6,8 +6,8 @@ description: 学习创建使404交换成为可能的MPL 404混合托管账户。
 
 ## 先决条件
 
-- MPL Core集合 - [链接](/zh/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
-- 铸造到集合的Core NFT资产 - [链接](/zh/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+- MPL Core集合 - [链接](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
+- 铸造到集合的Core NFT资产 - [链接](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
 - 创建具有所需代币数量的SPL代币 - [链接](/zh/guides/javascript/how-to-create-a-solana-token)
 - 在一致的网关/uri上在线存储顺序元数据JSON文件。
 

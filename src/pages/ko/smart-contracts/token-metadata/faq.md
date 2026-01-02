@@ -22,7 +22,7 @@ description: Token Metadata에 대한 자주 묻는 질문
 
 ## 컬렉션별로 메타데이터 계정을 필터링하는 방법은?
 
-위 질문에서 언급했듯이, `creators` 배열 이후에 있는 필드로 필터링하는 것은 고정 크기 필드가 아니기 때문에 어려운 작업입니다. 컬렉션 민트를 얻는 가장 빠르고 쉬운 방법으로 DAS를 사용하는 것을 권장합니다. 체인에서 직접 데이터를 가져오고 싶다면 다음 방법을 사용할 수 있지만, 컬렉션의 모든 NFT를 가져오는 세 가지 다른 방법을 보여주는 [가이드](/token-metadata/guides/get-by-collection)가 있습니다.
+위 질문에서 언급했듯이, `creators` 배열 이후에 있는 필드로 필터링하는 것은 고정 크기 필드가 아니기 때문에 어려운 작업입니다. 컬렉션 민트를 얻는 가장 빠르고 쉬운 방법으로 DAS를 사용하는 것을 권장합니다. 체인에서 직접 데이터를 가져오고 싶다면 다음 방법을 사용할 수 있지만, 컬렉션의 모든 NFT를 가져오는 세 가지 다른 방법을 보여주는 [가이드](/ko/smart-contracts/token-metadata/guides/get-by-collection)가 있습니다.
 
 ## 소울바운드 자산을 만드는 방법은?
 
@@ -133,7 +133,7 @@ await mintV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-TokenKeg SPL 토큰을 사용해야 하는 경우, pNFT에서 [Locked Transfer 위임자](/token-metadata/delegates#locked-transfer-delegate-pnft-only)를 사용한 다음 pNFT를 잠가서 소울바운드 자산을 만들 수 있습니다. 그러나 이는 소유자가 pNFT를 전송하는 것을 방지할 뿐만 아니라 소유자가 소각하는 것도 방지한다는 점에 주목하세요. 이것이 소울바운드 자산에 Token22 토큰을 사용하는 것을 권장하는 이유입니다.
+TokenKeg SPL 토큰을 사용해야 하는 경우, pNFT에서 [Locked Transfer 위임자](/ko/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)를 사용한 다음 pNFT를 잠가서 소울바운드 자산을 만들 수 있습니다. 그러나 이는 소유자가 pNFT를 전송하는 것을 방지할 뿐만 아니라 소유자가 소각하는 것도 방지한다는 점에 주목하세요. 이것이 소울바운드 자산에 Token22 토큰을 사용하는 것을 권장하는 이유입니다.
 
 ## 민트 및 동결 권한이 Edition PDA로 이전되는 이유는?
 
@@ -182,23 +182,23 @@ Token Metadata는 현재 특정 명령어 호출자에게 0.001 SOL에서 0.01 S
 
 Token Metadata 프로그램의 일부 명령어는 몇 번의 반복을 거쳐 새로운 것들을 위해 폐기되었습니다. 폐기된 명령어는 여전히 프로그램에서 사용할 수 있지만 더 이상 프로그램과 상호 작용하는 권장 방법이 아니므로 Developer Hub에서 문서화되지 않습니다. 그렇긴 하지만, 폐기된 명령어를 찾고 있다면 Token Metadata 프로그램 저장소에서 찾을 수 있습니다. 다음은 그 목록입니다:
 
-- [CreateMetadataAccountV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L448)는 [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts)로 대체되었습니다.
-- [UpdateMetadataAccountV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L241)는 [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts)로 대체되었습니다.
+- [CreateMetadataAccountV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L448)는 [CreateV1](/ko/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts)로 대체되었습니다.
+- [UpdateMetadataAccountV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L241)는 [CreateV1](/ko/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts)로 대체되었습니다.
 - [UpdatePrimarySaleHappenedViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L112)
-- [SignMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L146) 대신 [Verify](/token-metadata/collections)를 사용하세요.
-- [RemoveCreatorVerification](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L388) 대신 [Unverify](/token-metadata/collections#unverify)를 사용하세요.
-- [CreateMasterEditionV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L267)는 [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts)로 대체되었습니다.
-- [MintNewEditionFromMasterEditionViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L202)는 [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts)로 대체되었습니다.
+- [SignMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L146) 대신 [Verify](/ko/smart-contracts/token-metadata/collections)를 사용하세요.
+- [RemoveCreatorVerification](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L388) 대신 [Unverify](/ko/smart-contracts/token-metadata/collections#unverify)를 사용하세요.
+- [CreateMasterEditionV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L267)는 [CreateV1](/ko/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts)로 대체되었습니다.
+- [MintNewEditionFromMasterEditionViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L202)는 [CreateV1](/ko/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts)로 대체되었습니다.
 - [ConvertMasterEditionV1ToV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L210)
 - [PuffMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L236)
-- [VerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L278) 대신 [Verify](/token-metadata/collections)를 사용하세요.
-- [SetAndVerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L367) 대신 [Verify](/token-metadata/collections)를 사용하세요.
-- [UnverifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L334) 대신 [Unverify](/token-metadata/collections#unverify)를 사용하세요.
+- [VerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L278) 대신 [Verify](/ko/smart-contracts/token-metadata/collections)를 사용하세요.
+- [SetAndVerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L367) 대신 [Verify](/ko/smart-contracts/token-metadata/collections)를 사용하세요.
+- [UnverifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L334) 대신 [Unverify](/ko/smart-contracts/token-metadata/collections#unverify)를 사용하세요.
 - [Utilize](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L296) - 사용 기능이 폐기되었습니다.
 - [ApproveUseAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L311) - 사용 기능이 폐기되었습니다.
 - [RevokeUseAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L324) - 사용 기능이 폐기되었습니다.
-- [ApproveCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L346) 대신 [Delegate](/token-metadata/delegates)를 사용하세요.
-- [RevokeCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L354) 대신 [Revoke](/token-metadata/delegates)를 사용하세요.
+- [ApproveCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L346) 대신 [Delegate](/ko/smart-contracts/token-metadata/delegates)를 사용하세요.
+- [RevokeCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L354) 대신 [Revoke](/ko/smart-contracts/token-metadata/delegates)를 사용하세요.
 - [FreezeDelegatedAccount](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L375)
 - [ThawDelegatedAccount](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383)
 - [BurnNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383)는 [Burn](https://developers.metaplex.com/token-metadata/burn)으로 대체되었습니다.
@@ -210,4 +210,4 @@ Token Metadata 프로그램의 일부 명령어는 몇 번의 반복을 거쳐 �
 - [SetTokenStandard](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L464) 토큰 표준이 이제 자동으로 설정됩니다.
 
 ## Token Metadata 계정 크기 감소에 대해 어디서 더 자세히 알 수 있나요?
-더 많은 정보는 [특별 FAQ](/token-metadata/guides/account-size-reduction)를 확인하거나 남은 질문이 있는 경우 [Discord](https://discord.gg/metaplex)에 참여하세요.
+더 많은 정보는 [특별 FAQ](/ko/smart-contracts/token-metadata/guides/account-size-reduction)를 확인하거나 남은 질문이 있는 경우 [Discord](https://discord.gg/metaplex)에 참여하세요.

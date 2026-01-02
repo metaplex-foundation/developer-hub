@@ -10,11 +10,11 @@ Token Authorization Rules（Token Auth Rulesとも呼ばれる）は、SPLトー
 
 ## 機能
 
-[ルールセットの作成または更新](/ja/token-auth-rules/create-or-update) - ルールセットの内容を初期化および更新するために使用される命令。
+[ルールセットの作成または更新](/ja/smart-contracts/token-auth-rules/create-or-update) - ルールセットの内容を初期化および更新するために使用される命令。
 
-[ルールセットバッファ](/ja/token-auth-rules/buffers) - 大きなルールセットの処理方法。
+[ルールセットバッファ](/ja/smart-contracts/token-auth-rules/buffers) - 大きなルールセットの処理方法。
 
-[ルールセットの検証](/ja/token-auth-rules/validate) - ルールセットの検証方法。
+[ルールセットの検証](/ja/smart-contracts/token-auth-rules/validate) - ルールセットの検証方法。
 
 ## ルールタイプ
 認可ルールは、`validate()`メソッドを実装する`Rule`列挙型のバリアントです。
@@ -31,12 +31,12 @@ Token Authorization Rules（Token Auth Rulesとも呼ばれる）は、SPLトー
 ### シナリオ
 **シナリオ**は**オペレーション**への任意の追加であり、命令が呼び出される可能性のあるより具体的な状況を処理するために使用されます。データ形式の観点から、**オペレーション**と**シナリオ**の組み合わせは、コロン`<Operation>:<Scenario>`で区切られた2つの文字列です。例えば、Token Metadataは、Token MetadataからToken Auth Rulesへの呼び出しで権限タイプを**シナリオ**として使用します。Transfer**オペレーション**は、トークンの所有者またはデリゲートのどちらかによってトークン上でトリガーされる可能性があり、ルールセットマネージャーはこれらの異なるシナリオを異なるルールで管理したい場合があります。この特定の使用例を処理するために、**シナリオ**を使用して区別を管理できます。前の例で使用される2つの`HashMap`キーは、`Transfer:Owner`と`Transfer:Delegate`になります。
 
-複数のシナリオ間で同一のルールを管理する方法については、[Namespace](/ja/token-auth-rules/primitive-rules/namespace)をご覧ください。
+複数のシナリオ間で同一のルールを管理する方法については、[Namespace](/ja/smart-contracts/token-auth-rules/primitive-rules/namespace)をご覧ください。
 
 ## ペイロード
 Token Auth Rulesプログラムは、ルールセットからの評価を要求するプログラムから受信されるペイロードデータに依存します。`Payload`の基礎データ構造は`HashMap`であり、`Payload`フィールドは`HashMap`キーとして表現されます。ほとんどのルールは、検証時にルックアップが実行できるように事前定義された`Payload`フィールドを格納します。
 
-`Payload`の使用方法の詳細については、[Validate](/ja/token-auth-rules/validate)命令をご覧ください。
+`Payload`の使用方法の詳細については、[Validate](/ja/smart-contracts/token-auth-rules/validate)命令をご覧ください。
 
 ## リソース
 

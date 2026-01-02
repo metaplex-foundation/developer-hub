@@ -25,7 +25,7 @@ import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata'
 // Use the RPC endpoint of your choice.
 const umi = createUmi('http://127.0.0.1:8899').use(mplTokenMetadata())
 ```
-然后,您需要告诉 Umi 使用哪个钱包。这可以是[密钥对](/zh/umi/connecting-to-umi#connecting-w-a-secret-key)或 [solana 钱包适配器](/zh/umi/connecting-to-umi#connecting-w-wallet-adapter)。
+然后,您需要告诉 Umi 使用哪个钱包。这可以是[密钥对](/zh/dev-tools/umi/connecting-to-umi#connecting-w-a-secret-key)或 [solana 钱包适配器](/zh/dev-tools/umi/connecting-to-umi#connecting-w-wallet-adapter)。
 
 就是这样,您现在可以通过使用[库提供的各种函数](https://mpl-token-metadata.typedoc.metaplex.com/)并将您的 `Umi` 实例传递给它们来与 NFT 交互。以下是创建 NFT 并获取其所有链上账户数据的示例。
 

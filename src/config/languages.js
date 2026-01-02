@@ -63,16 +63,30 @@ export function generateAlternateUrls(pathname) {
 
   // Normalize pathname (remove any existing language prefix)
   let normalizedPath = pathname
-  for (const lang of Object.values(LANGUAGES)) {
-    if (lang.urlPath && pathname.startsWith(lang.urlPath)) {
-      normalizedPath = pathname.slice(lang.urlPath.length) || '/'
-      break
+
+  // Handle /en prefix specially since English urlPath is empty but pages are stored at /en/*
+  if (pathname === '/en' || pathname.startsWith('/en/')) {
+    normalizedPath = pathname === '/en' ? '/' : pathname.slice('/en'.length)
+  } else {
+    // Handle other language prefixes (/ja, /ko)
+    for (const lang of Object.values(LANGUAGES)) {
+      if (lang.urlPath && pathname.startsWith(lang.urlPath)) {
+        normalizedPath = pathname.slice(lang.urlPath.length) || '/'
+        break
+      }
     }
   }
 
   // Generate alternate URLs for each language
   for (const lang of Object.values(LANGUAGES)) {
-    const url = lang.urlPath ? `${lang.urlPath}${normalizedPath}` : normalizedPath
+    // For the homepage, don't append trailing slash to language paths
+    // e.g., /ja instead of /ja/ to avoid 308 redirects
+    let url
+    if (normalizedPath === '/') {
+      url = lang.urlPath || '/'
+    } else {
+      url = lang.urlPath ? `${lang.urlPath}${normalizedPath}` : normalizedPath
+    }
     alternates.push({
       hreflang: lang.code,
       url: url,

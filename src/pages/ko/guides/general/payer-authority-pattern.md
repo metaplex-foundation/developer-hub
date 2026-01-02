@@ -1,6 +1,6 @@
 ---
 title: 지불자-권한 패턴
-metaTitle: 지불자-권한 패턴
+metaTitle: 지불자-권한 패턴 | Metaplex Guides
 description: 별도의 권한자와 지불자를 사용하는 Solana 명령어의 일반적인 프로그래밍 패턴입니다.
 # remember to update dates also in /components/guides/index.js
 created: '12-30-2024'

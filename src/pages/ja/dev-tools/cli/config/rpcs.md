@@ -1,5 +1,6 @@
 ---
 title: RPCs
+metaTitle: RPCs | Metaplex CLI
 description: 設定内のRPCエンドポイントの管理
 ---
 

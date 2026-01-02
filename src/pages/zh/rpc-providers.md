@@ -28,22 +28,11 @@ https://api.devnet.solana.com
 
 ## Metaplex DAS API
 
-RPC的另一个区别特征是是否支持[Metaplex DAS API](/zh/das-api)。Metaplex数字资产标准（DAS）API代表了在Solana上与数字资产交互的统一接口，支持标准（Token Metadata）和压缩（Bubblegum）资产。API定义了一组方法，供RPC实现以提供资产数据。
+RPC的另一个区别特征是是否支持[Metaplex DAS API](/zh/dev-tools/das-api)。Metaplex数字资产标准（DAS）API代表了在Solana上与数字资产交互的统一接口，支持标准（Token Metadata）和压缩（Bubblegum）资产。API定义了一组方法，供RPC实现以提供资产数据。
 
 对于开发者来说，DAS API对于与cNFT交互是必要的，但它也可以使与TM资产的工作更简单、更快速。在从链上读取时，强烈建议使用支持DAS的RPC节点，以尽可能提供最快的用户体验。
 
-您可以在[专门的部分](/zh/das-api)了解更多关于DAS API的信息。
-
-## Metaplex Aura
-
-Aura是一个Solana网络扩展，可以为用户提供高效、分布式和全面的数字资产数据索引。主要功能包括：
-
-- **自动同步**：允许节点在高负载时相互协助，保持网络一致性，确保数据完整性。
-- **集成媒体CDN**：增强媒体交付，加快网页上显示的数字资产加载时间。
-- **轻客户端支持**：允许节点运营商为特定协议或子协议建立索引，如Core资产或特定的Bubblegum树。轻客户端可以运行而无需完整的Solana节点或Geyser插件，而是从Aura网络接收更新。这可以大大降低基础设施成本，相比维护完整的Solana节点。
-- **数字资产标准API**：完整实现DAS API，这是访问SVM（Solana虚拟机）上数字资产数据的主要接口。
-
-在[专门的部分](/zh/aura/reading-solana-and-svm-data)了解更多关于Aura的索引功能。
+您可以在[专门的部分](/zh/dev-tools/das-api)了解更多关于DAS API的信息。
 
 ## 归档节点和非归档节点
 
@@ -58,10 +47,6 @@ Aura是一个Solana网络扩展，可以为用户提供高效、分布式和全�
 {% callout type="note" %}
 这些列表按字母顺序排列。选择最适合您项目需求的RPC提供商。如果有遗漏的提供商，请在Discord上告诉我们或提交PR。
 {% /callout %}
-
-### 支持Aura的RPC
-- [Mainnet Aura](http://aura-mainnet.metaplex.com)
-- [Devnet Aura](http://aura-devnet.metaplex.com)
 
 ### 支持DAS的RPC
 - [Extrnode](https://docs.extrnode.com/das_api/)

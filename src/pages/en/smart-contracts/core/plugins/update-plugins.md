@@ -293,6 +293,6 @@ Common errors when updating plugins:
 ## Next Steps
 
 - Learn about specific plugin updates in individual plugin documentation
-- Explore [Plugin Overview](/core/plugins) for all available plugins
-- Check out [Adding Plugins](/core/plugins/adding-plugins) and [Removing Plugins](/core/plugins/removing-plugins)
+- Explore [Plugin Overview](/smart-contracts/core/plugins) for all available plugins
+- Check out [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) and [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)
 - Visit the [MPL Core TypeDoc](https://mpl-core.typedoc.metaplex.com) for detailed API documentation.

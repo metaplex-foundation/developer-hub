@@ -36,7 +36,7 @@ Return the list of assets given a search criteria.
 | `before`            |          | Retrieve assets before the specified ID.   |
 | `after`             |          | Retrieve assets after the specified ID.    |
 | `jsonUri`           |          | The value for the JSON URI.  |
-| `options`           |          | Display options object. See [Display Options](/das-api/display-options) for details. |
+| `options`           |          | Display options object. See [Display Options](/dev-tools/das-api/display-options) for details. |
 
 ## Playground
 

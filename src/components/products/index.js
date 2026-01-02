@@ -1,5 +1,4 @@
 import { amman } from './amman';
-import { aura } from './aura';
 import { bubblegum } from './bubblegum';
 import { bubblegumv2 } from './bubblegum-v2';
 import { candyMachine } from './candyMachine';
@@ -24,7 +23,6 @@ import { tokens } from './tokens';
 import { umi } from './umi';
 
 export const productCategories = [
-  // 'Aura',
   'Tokens',
   'NFTs',
   'Smart Contracts',
@@ -53,7 +51,6 @@ export const products = [
   shank,
   amman,
   sugar,
-  aura,
   legacyDocumentation,
   guides,
 ]

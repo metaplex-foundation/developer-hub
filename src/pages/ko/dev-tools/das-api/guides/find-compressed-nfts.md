@@ -272,12 +272,12 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 
 ## 팁과 모범 사례
 
-1. **대규모 압축 NFT 컬렉션에는 [페이지네이션](/das-api/guides/pagination) 사용**
+1. **대규모 압축 NFT 컬렉션에는 [페이지네이션](/ko/dev-tools/das-api/guides/pagination) 사용**
 2. **증명을 사용할 수 없을 때 오류를 적절히 처리**
 3. **압축 NFT 메타데이터에 적절한 표시 옵션 사용**
 
 ## 더 읽어보기
 
-- [컬렉션의 모든 토큰 가져오기](/das-api/guides/get-collection-nfts) - 특정 컬렉션의 모든 자산 가져오기
-- [소유자별 NFT 가져오기](/das-api/guides/get-nfts-by-owner) - 지갑이 소유한 모든 NFT 찾기
-- [여러 조건으로 자산 검색](/das-api/guides/search-by-criteria) - 고급 쿼리를 위해 여러 필터 결합
+- [컬렉션의 모든 토큰 가져오기](/ko/dev-tools/das-api/guides/get-collection-nfts) - 특정 컬렉션의 모든 자산 가져오기
+- [소유자별 NFT 가져오기](/ko/dev-tools/das-api/guides/get-nfts-by-owner) - 지갑이 소유한 모든 NFT 찾기
+- [여러 조건으로 자산 검색](/ko/dev-tools/das-api/guides/search-by-criteria) - 고급 쿼리를 위해 여러 필터 결합

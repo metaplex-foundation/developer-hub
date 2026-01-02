@@ -43,8 +43,7 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 
 要获取 Candy Machine，可以使用如下所示的 `fetchCandyMachine` 函数：
 
-我们将使用 Metaplex Aura Devnet 端点。
-要获得 Solana 和 Eclipse 区块链上 Metaplex Aura 网络的访问权限，您可以访问 [Aura App](https://aura-app.metaplex.com/) 获取端点和 API 密钥。
+我们将使用 Solana Devnet 端点。
 
 ```ts
 import {
@@ -54,8 +53,8 @@ import {
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 
 // 仅当您之前未设置 umi 时才需要以下两行
-// 我们将使用来自 Aura 数据网络的 Solana Devnet 作为端点
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+// 我们将使用 Solana Devnet 作为端点
+const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCandyMachine());
 
 const candyMachineId = "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9";

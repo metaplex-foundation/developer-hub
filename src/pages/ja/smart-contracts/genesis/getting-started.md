@@ -11,7 +11,7 @@ description: Genesisを使用してSolanaでトークンをローンチする基
 開始する前に、以下を準備してください：
 - Node.js 16+がインストール済み
 - トランザクション手数料用のSOLを持つSolanaウォレット
-- Genesis SDKのインストールと設定完了（[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)を参照）
+- Genesis SDKのインストールと設定完了（[JavaScript SDK](/ja/smart-contracts/genesis/sdk/javascript)を参照）
 
 ## Genesisローンチフロー
 
@@ -111,11 +111,11 @@ const ONE_BILLION = 1_000_000_000_000_000_000n; // 1,000,000,000トークン
 ### ローンチタイプの選択
 
 {% callout type="note" %}
-**[Launch Pool](/smart-contracts/genesis/launch-pool)** - ユーザーが期間中に預金し、総預金額に対する比率に応じてトークンを受け取ります。
+**[Launch Pool](/ja/smart-contracts/genesis/launch-pool)** - ユーザーが期間中に預金し、総預金額に対する比率に応じてトークンを受け取ります。
 {% /callout %}
 
 {% callout type="note" %}
-**[Priced Sale](/smart-contracts/genesis/priced-sale)** - 取引開始前にコミットメントを収集し、カスタム基準に基づいてトークンを配布します。
+**[Priced Sale](/ja/smart-contracts/genesis/priced-sale)** - 取引開始前にコミットメントを収集し、カスタム基準に基づいてトークンを配布します。
 {% /callout %}
 
 ## ステップ3：確定
@@ -148,8 +148,8 @@ console.log('Genesisアカウント確定！');
 
 ローンチタイプを選択し、詳細ガイドに従ってください：
 
-1. **[Launch Pool](/smart-contracts/genesis/launch-pool)** - 預金期間付きのトークン配布
-2. **[Priced Sale](/smart-contracts/genesis/priced-sale)** - 取引前の事前預金収集
-3. **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** - 均一クリアリング価格の時間ベースオークション
+1. **[Launch Pool](/ja/smart-contracts/genesis/launch-pool)** - 預金期間付きのトークン配布
+2. **[Priced Sale](/ja/smart-contracts/genesis/priced-sale)** - 取引前の事前預金収集
+3. **[Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction)** - 均一クリアリング価格の時間ベースオークション
 
 各ガイドには完全なセットアップコード、ユーザー操作、構成が含まれています。

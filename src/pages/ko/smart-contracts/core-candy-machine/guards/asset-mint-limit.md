@@ -6,7 +6,7 @@ description: "Core Candy Machine의 'Asset Mint Limit' 가드는 지정된 컬�
 
 ## 개요
 
-Asset Mint Limit 가드는 지정된 컬렉션의 보유자로 민팅을 제한하고 제공된 Core Asset에 대해 수행할 수 있는 민팅 수량을 제한합니다. 이는 Asset 주소 기반의 [NFT Gate](/core-candy-machine/guards/nft-gate) for Core Assets과 [Mint Limit](/core-candy-machine/guards/mint-limit) 가드의 조합으로 볼 수 있습니다.
+Asset Mint Limit 가드는 지정된 컬렉션의 보유자로 민팅을 제한하고 제공된 Core Asset에 대해 수행할 수 있는 민팅 수량을 제한합니다. 이는 Asset 주소 기반의 [NFT Gate](/ko/smart-contracts/core-candy-machine/guards/nft-gate) for Core Assets과 [Mint Limit](/ko/smart-contracts/core-candy-machine/guards/mint-limit) 가드의 조합으로 볼 수 있습니다.
 
 제한은 컬렉션별, 캔디 머신별, 그리고 설정에서 제공된 식별자별로 설정되어 동일한 Core Candy Machine 내에서 여러 개의 asset mint limit을 허용합니다.
 

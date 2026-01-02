@@ -6,7 +6,7 @@ description: 如何在Solana devnet和mainnet-beta以外的Solana虚拟机(SVM)�
 
 ## 概述
 
-本指南详细介绍了在Solana devnet和mainnet-beta以外的Solana虚拟机（SVM）环境中使用JavaScript与压缩NFT（cNFT）资产交互的具体要求。有关创建cNFT的更全面概述，请参阅[使用Bubblegum在Solana上创建1,000,000个NFT](/zh/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)指南。
+本指南详细介绍了在Solana devnet和mainnet-beta以外的Solana虚拟机（SVM）环境中使用JavaScript与压缩NFT（cNFT）资产交互的具体要求。有关创建cNFT的更全面概述，请参阅[使用Bubblegum在Solana上创建1,000,000个NFT](/zh/smart-contracts/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)指南。
 
 ### 所需包
 

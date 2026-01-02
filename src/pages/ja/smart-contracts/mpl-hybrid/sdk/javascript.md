@@ -4,7 +4,7 @@ metaTitle: Javascript SDK | MPL-Hybrid
 description: MPL-Hybrid Javascript SDKを実行するためのプロジェクト設定方法を学びましょう。
 ---
 
-MetaplexはMPL-Hybrid 404プログラムとやり取りするために使用できるJavaScriptライブラリを提供しています。[Umiフレームワーク](/ja/umi)のおかげで、多くの意見的な依存関係なしで出荷されるため、任意のJavaScriptプロジェクトで使用できる軽量なライブラリを提供します。
+MetaplexはMPL-Hybrid 404プログラムとやり取りするために使用できるJavaScriptライブラリを提供しています。[Umiフレームワーク](/ja/dev-tools/umi)のおかげで、多くの意見的な依存関係なしで出荷されるため、任意のJavaScriptプロジェクトで使用できる軽量なライブラリを提供します。
 
 開始するには、[Umiフレームワークをインストール](/ja/dev-tools/umi/getting-started)し、MPL-Hybrid JavaScriptライブラリをインストールする必要があります。
 

@@ -99,7 +99,7 @@ pub async fn delegate_plugin_authority() {
 - 애셋의 업데이트 권한은 위임자를 해제할 수 있으며, 그러면 pluginAuthority 타입이 `UpdateAuthority`로 설정됩니다.
 - 플러그인의 위임된 권한은 스스로를 해제할 수 있으며, 그러면 플러그인 권한 타입이 `UpdateAuthority`로 설정됩니다.
 
-플러그인 목록과 해당 타입은 [플러그인 개요](/core/plugins) 페이지에서 볼 수 있습니다.
+플러그인 목록과 해당 타입은 [플러그인 개요](/ko/smart-contracts/core/plugins) 페이지에서 볼 수 있습니다.
 
 {% dialect-switcher title="플러그인 권한 해제" %}
 {% dialect title="JavaScript" id="js" %}

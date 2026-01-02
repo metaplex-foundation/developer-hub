@@ -9,7 +9,7 @@ updated: '06-24-2024'
 
 이 가이드는 Metaplex Umi 클라이언트 래퍼와 MPL Toolbox 패키지를 활용하여 Solana 블록체인에서 SPL 토큰을 전송하는 Javascript 함수를 구축하는 방법을 보여줍니다.
 
-이 가이드를 위해서는 전송할 SPL 토큰이 지갑에 있어야 하므로, 지갑에 없는 경우 누군가에게 전송받거나 다른 [SPL 토큰 생성 가이드](/guides/javascript/how-to-create-an-spl-token-on-solana)를 따라야 합니다.
+이 가이드를 위해서는 전송할 SPL 토큰이 지갑에 있어야 하므로, 지갑에 없는 경우 누군가에게 전송받거나 다른 [SPL 토큰 생성 가이드](/ko/guides/javascript/how-to-create-an-spl-token-on-solana)를 따라야 합니다.
 
 ## 전제조건
 

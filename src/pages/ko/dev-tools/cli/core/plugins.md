@@ -1,5 +1,6 @@
 ---
 title: 플러그인
+metaTitle: 플러그인 | Metaplex CLI
 description: MPL Core 자산 및 컬렉션 플러그인 관리
 ---
 

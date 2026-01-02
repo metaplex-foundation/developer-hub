@@ -4,7 +4,7 @@ metaTitle: guard | Sugar
 description: guard 명령어.
 ---
 
-`guard` 명령은 Candy Machine의 [가드](/candy-machine/guards) 구성을 관리하는 데 사용됩니다.
+`guard` 명령은 Candy Machine의 [가드](/ko/smart-contracts/candy-machine/guards) 구성을 관리하는 데 사용됩니다.
 
 Sugar 구성 파일에서 가드 구성을 완료하면 다음을 사용하여 Candy Guard를 추가할 수 있습니다:
 

@@ -17,13 +17,13 @@ Each External Adapter has the ability to assign lifecycle checks to Lifecycle Ev
 - **Reject**: The plugin can reject a lifecycle event.
 - **Approve**: The plugin can approve a lifecycle event.
 
-If you want to learn more about External Plugins, read more about them [here](/core/external-plugins/overview).
+If you want to learn more about External Plugins, read more about them [here](/smart-contracts/core/external-plugins/overview).
 
 ### Appdata Plugin
 
 The **AppData Plugin** allows asset/collection authorities to save arbitrary data that can be written and changed by the `data_authority`, an external source of trust and can be assigned to anyone the asset/collection authority decides to. With the AppData Plugin, collection/asset authorities can delegate the task of adding data to their assets to trusted third parties.
 
-If you’re not familiar with the new Appdata Plugin, read more about it [here](/core/external-plugins/app-data).
+If you’re not familiar with the new Appdata Plugin, read more about it [here](/smart-contracts/core/external-plugins/app-data).
 
 ## General Overview: Program Design
 
@@ -509,4 +509,4 @@ pub fn scan_ticket(ctx: Context<ScanTicket>) -> Result<()> {
 
 ## Conclusion
 
-Congratulations! You are now equipped to create a Ticketing Solution using the Appdata Plugin. If you want to learn more about Core and Metaplex, check out the [developer hub](/core/getting-started).
+Congratulations! You are now equipped to create a Ticketing Solution using the Appdata Plugin. If you want to learn more about Core and Metaplex, check out the [developer hub](/smart-contracts/core/getting-started).

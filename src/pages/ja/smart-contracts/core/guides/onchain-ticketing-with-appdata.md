@@ -10,11 +10,11 @@ description: AppDataプラグインを活用して、チケット発行と検証
 
 ### 外部プラグイン
 
-外部プラグインは、挙動を外部要因で制御するプラグインです。Coreはアダプターを提供し、開発者は外部データソース（オンチェーン/オフチェーン）を指定します。ライフサイクルイベント（create/transfer/update/burn）に対して、Listen/Reject/Approveの各チェックを割り当てられます。概要は[こちら](/core/external-plugins/overview)。
+外部プラグインは、挙動を外部要因で制御するプラグインです。Coreはアダプターを提供し、開発者は外部データソース（オンチェーン/オフチェーン）を指定します。ライフサイクルイベント（create/transfer/update/burn）に対して、Listen/Reject/Approveの各チェックを割り当てられます。概要は[こちら](/ja/smart-contracts/core/external-plugins/overview)。
 
 ### AppDataプラグイン
 
-AppDataプラグインは、`data_authority`により任意データの書き込みを委譲できます。これにより、コレクション/アセット権限者は、信頼する第三者に対しデータ追加・更新を委任可能です。詳細は[こちら](/core/external-plugins/app-data)。
+AppDataプラグインは、`data_authority`により任意データの書き込みを委譲できます。これにより、コレクション/アセット権限者は、信頼する第三者に対しデータ追加・更新を委任可能です。詳細は[こちら](/ja/smart-contracts/core/external-plugins/app-data)。
 
 ## 全体設計
 

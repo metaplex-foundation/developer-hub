@@ -313,6 +313,6 @@ const collectionAssets = await getAllAssetsByCursor('COLLECTION_ADDRESS')
 
 ## 延伸阅读
 
-- [获取集合中的所有代币](/zh/das-api/guides/get-collection-nfts) - 从特定集合检索所有资产
-- [按条件搜索资产](/zh/das-api/guides/search-by-criteria) - 高级搜索和过滤
-- [查找压缩 NFT](/zh/das-api/guides/find-compressed-nfts) - 使用压缩 NFT
+- [获取集合中的所有代币](/zh/dev-tools/das-api/guides/get-collection-nfts) - 从特定集合检索所有资产
+- [按条件搜索资产](/zh/dev-tools/das-api/guides/search-by-criteria) - 高级搜索和过滤
+- [查找压缩 NFT](/zh/dev-tools/das-api/guides/find-compressed-nfts) - 使用压缩 NFT

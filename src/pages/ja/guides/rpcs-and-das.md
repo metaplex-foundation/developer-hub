@@ -86,7 +86,7 @@ DASには、ブロックチェーンに送信される特定のライフサイ�
 
 Metaplex DASの詳細については、以下のページを参照してください：
 
-- [Metaplex DAS API](/das-api)
+- [Metaplex DAS API](/ja/dev-tools/das-api)
 - [Metaplex DAS API Github](https://github.com/metaplex-foundation/digital-asset-standard-api)
 - [Metaplex Digital Asset RPC Infrastructure Github](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)
 

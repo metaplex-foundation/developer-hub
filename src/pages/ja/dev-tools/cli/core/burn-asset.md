@@ -1,5 +1,6 @@
 ---
 title: アセットをバーン
+metaTitle: アセットをバーン | Metaplex CLI
 description: Metaplex CLIを使用してMPL Coreアセットをバーンする
 ---
 

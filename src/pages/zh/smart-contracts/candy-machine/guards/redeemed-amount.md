@@ -8,7 +8,7 @@ description: "Redeemed Amount 守卫在整个 Candy Machine 铸造的 NFT 数量
 
 **Redeemed Amount** 守卫在整个 Candy Machine 铸造的 NFT 数量达到配置的最大数量时禁止铸造。
 
-当与[守卫组](/zh/candy-machine/guard-groups)一起使用时，此守卫变得更有趣，因为它允许我们向我们的组添加全局铸造阈值。
+当与[守卫组](/zh/smart-contracts/candy-machine/guard-groups)一起使用时，此守卫变得更有趣，因为它允许我们向我们的组添加全局铸造阈值。
 
 {% diagram  %}
 
@@ -107,7 +107,7 @@ create(umi, {
 
 请注意，即使 Candy Machine 包含 500 个项目，由于此守卫，只有 300 个项目可以铸造。
 
-因此，当使用[守卫组](/zh/candy-machine/guard-groups)时，此守卫变得更有用。以下是使用两个组的另一个示例，前 300 个 NFT 可以以 1 SOL 的价格铸造，但最后 200 个需要 2 SOL 才能铸造。
+因此，当使用[守卫组](/zh/smart-contracts/candy-machine/guard-groups)时，此守卫变得更有用。以下是使用两个组的另一个示例，前 300 个 NFT 可以以 1 SOL 的价格铸造，但最后 200 个需要 2 SOL 才能铸造。
 
 {% dialect-switcher title="使用带有组的 Redeemed Amount 守卫示例" %}
 {% dialect title="JavaScript" id="js" %}

@@ -11,8 +11,6 @@ description: 本指南探讨 MPL Core 中灵魂绑定资产的不同选项
 
 在本指南中，我们将探讨如何使用 MPL Core 和 Umi 框架创建灵魂绑定资产。无论您是希望在 TypeScript 中实现灵魂绑定 NFT 的开发者，还是只想了解它们的工作原理，我们都将涵盖从基本概念到实际实现的所有内容。我们将检查使资产灵魂绑定的不同方法，并逐步在集合中创建您的第一个灵魂绑定 NFT。
 
-要访问 Solana 和 Eclipse 区块链上的 Metaplex Aura 网络，您可以访问 Aura 应用获取端点和 API 密钥 [这里](https://aura-app.metaplex.com/)。
-
 在 MPL Core 中，有两种主要方法来创建灵魂绑定 NFT：
 
 ### 1. Permanent Freeze Delegate 插件
@@ -85,7 +83,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // 步骤 1：使用 devnet RPC 端点初始化 Umi
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // 步骤 2：创建并为测试钱包注资
@@ -190,7 +188,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // 步骤 1：使用 devnet RPC 端点初始化 Umi
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // 步骤 2：创建并为测试钱包注资
@@ -339,7 +337,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // 步骤 1：使用 devnet RPC 端点初始化 Umi
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // 步骤 2：创建并为测试钱包注资
@@ -458,7 +456,7 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
 (async () => {
   // 步骤 1：使用 devnet RPC 端点初始化 Umi
   const umi = createUmi(
-    "https://devnet-aura.metaplex.com/<YOUR_API_KEY>"
+    "https://api.devnet.solana.com"
   ).use(mplCore());
 
   // 步骤 2：创建并为测试钱包注资

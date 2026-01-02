@@ -19,6 +19,6 @@ Metaplex 协议的 **Candy Machine** 是 Solana 上用于公平 NFT 集合发布
 {% /quick-links %}
 
 {% callout %}
-本文档指的是 Candy Machine 的最新版本,称为 Core Candy Machine。它允许铸造 [Core](/zh/core) 资产。如果您想铸造 Metaplex Token Metadata NFT,[请参考 Candy Machine V3](https://developers.metaplex.com/candy-machine/)。
+本文档指的是 Candy Machine 的最新版本,称为 Core Candy Machine。它允许铸造 [Core](/zh/smart-contracts/core) 资产。如果您想铸造 Metaplex Token Metadata NFT,[请参考 Candy Machine V3](https://developers.metaplex.com/candy-machine/)。
 {% /callout %}
 

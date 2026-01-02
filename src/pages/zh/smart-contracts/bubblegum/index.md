@@ -6,7 +6,7 @@ description: 提供压缩NFT的高级概述。
 
 {% callout type="note" title="新Bubblegum版本" %}
 
-我们建议使用[Bubblegum v2](/zh/bubblegum-v2)以获得更多灵活性和功能。
+我们建议使用[Bubblegum v2](/zh/smart-contracts/bubblegum-v2)以获得更多灵活性和功能。
 
 {% /callout %}
 

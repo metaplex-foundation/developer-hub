@@ -4,7 +4,7 @@ metaTitle: 플러그인 추가하기 | Core
 description: MPL Core NFT 애셋 및 컬렉션에 플러그인을 추가하는 방법을 알아보세요.
 ---
 
-플러그인은 MPL Core 애셋과 MPL Core 컬렉션 모두에 할당될 수 있습니다. MPL Core 애셋과 MPL Core 컬렉션은 모두 사용 가능한 플러그인의 유사한 목록을 공유합니다. 각각에서 사용할 수 있는 플러그인을 확인하려면 [플러그인 개요](/core/plugins) 영역을 방문하세요.
+플러그인은 MPL Core 애셋과 MPL Core 컬렉션 모두에 할당될 수 있습니다. MPL Core 애셋과 MPL Core 컬렉션은 모두 사용 가능한 플러그인의 유사한 목록을 공유합니다. 각각에서 사용할 수 있는 플러그인을 확인하려면 [플러그인 개요](/ko/smart-contracts/core/plugins) 영역을 방문하세요.
 
 ## Core 애셋에 플러그인 추가하기
 
@@ -13,7 +13,7 @@ description: MPL Core NFT 애셋 및 컬렉션에 플러그인을 추가하는 �
 **Create Plugin Helper**
 
 `createPlugin()` 헬퍼는 `addPlugin()` 과정에서 플러그인을 할당할 수 있는 타입화된 메서드를 제공합니다.
-플러그인의 전체 목록과 해당 인수는 [플러그인 개요](/core/plugins) 페이지를 참조하세요.
+플러그인의 전체 목록과 해당 인수는 [플러그인 개요](/ko/smart-contracts/core/plugins) 페이지를 참조하세요.
 
 ### 기본 권한으로 플러그인 추가하기
 

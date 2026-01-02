@@ -55,7 +55,7 @@ _以下部分涵盖此页面上列出的所有模板共享的常见功能。此�
 ```ts
 const useUmiStore = create<UmiState>()((set) => ({
   // Add your own RPC here.
-  umi: createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(
+  umi: createUmi("https://api.devnet.solana.com").use(
     signerIdentity(
       createNoopSigner(publicKey('11111111111111111111111111111111'))
     )

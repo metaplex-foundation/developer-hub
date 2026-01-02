@@ -78,7 +78,6 @@ Typescript를 사용하여 다른 지갑으로 민팅할 때 Candy Machine이 �
 ### 가드 없이 민팅
 가드가 없는 Candy Machine의 경우 `mintFromCandyMachineV2`를 사용하세요. 이 함수를 사용하면 수신자를 `nftOwner`로 직접 지정할 수 있습니다.
 
-Solana 및 Eclipse 블록체인에서 Metaplex Aura 네트워크에 액세스하려면 [여기](https://aura-app.metaplex.com/)에서 엔드포인트 및 API 키에 대한 Aura 앱을 방문할 수 있습니다.
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -148,7 +147,7 @@ import {
 
 // 구성
 const RECIPIENT_ADDRESS = "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV";
-const RPC_ENDPOINT = "https://devnet-aura.metaplex.com/<YOUR_API_KEY>";
+const RPC_ENDPOINT = "https://api.devnet.solana.com";
 
 (async () => {
   try {

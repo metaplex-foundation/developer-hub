@@ -75,7 +75,7 @@ Token Metadata NFT로의 압축 해제는 Bubblegum v1에서만 사용할 수 �
 
 압축 해제 프로세스의 첫 번째 단계를 시작하려면 압축 NFT의 소유자가 **상환** 명령을 보내고 트랜잭션에 서명해야 합니다. 이렇게 하면 다음 압축 해제 프로세스 단계에서 사용할 cNFT에 대한 바우처 계정이 생성됩니다.
 
-이 명령은 Bubblegum 트리에서 리프를 제거합니다. 따라서 제거할 압축 NFT의 무결성을 확인하기 위해 추가 매개변수를 제공해야 합니다. 이러한 매개변수는 리프를 변경하는 모든 명령에 공통적이므로 [다음 FAQ](/bubblegum/faq#replace-leaf-instruction-arguments)에 문서화되어 있습니다. 다행히도 Metaplex DAS API를 사용하여 이러한 매개변수를 자동으로 가져오는 헬퍼 메서드를 사용할 수 있습니다.
+이 명령은 Bubblegum 트리에서 리프를 제거합니다. 따라서 제거할 압축 NFT의 무결성을 확인하기 위해 추가 매개변수를 제공해야 합니다. 이러한 매개변수는 리프를 변경하는 모든 명령에 공통적이므로 [다음 FAQ](/ko/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)에 문서화되어 있습니다. 다행히도 Metaplex DAS API를 사용하여 이러한 매개변수를 자동으로 가져오는 헬퍼 메서드를 사용할 수 있습니다.
 
 {% dialect-switcher title="압축 NFT 상환" %}
 {% dialect title="JavaScript" id="js" %}

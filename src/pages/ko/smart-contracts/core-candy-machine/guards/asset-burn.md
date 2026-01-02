@@ -8,7 +8,7 @@ description: "코어 캔디 머신의 '자산 소각' 가드는 미리 정의된
 
 **자산 소각** 가드는 미리 정의된 컬렉션의 보유자로 민팅을 제한하고 보유자의 자산을 소각합니다. 따라서 민팅할 때 지불자가 소각할 자산의 주소를 제공해야 합니다.
 
-민터가 하나 이상의 자산을 소각하게 하려면 [자산 소각 멀티 가드](/core-candy-machine/guards/asset-burn-multi)를 사용할 수 있습니다.
+민터가 하나 이상의 자산을 소각하게 하려면 [자산 소각 멀티 가드](/ko/smart-contracts/core-candy-machine/guards/asset-burn-multi)를 사용할 수 있습니다.
 
 {% diagram  %}
 

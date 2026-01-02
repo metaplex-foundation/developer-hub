@@ -14,7 +14,7 @@ Metaplex CoreアセットのオフチェーンJSONメタデータは、Metaplex 
 
 {% totem-accordion title="画像（Image）" %}
 
-Attributesは[Attributesプラグイン](/core/plugins/attribute)を使ってオンチェーンに保存することもできます。
+Attributesは[Attributesプラグイン](/ja/smart-contracts/core/plugins/attribute)を使ってオンチェーンに保存することもできます。
 ```json
 {
   "name": "Number #0001",
@@ -184,7 +184,7 @@ Attributesは[Attributesプラグイン](/core/plugins/attribute)を使ってオ
 
 各フィールドの説明です。
 
-Metaplex Token Metadataで存在した一部のフィールドはCoreでは廃止されている可能性があります。たとえば`creators`は現在[Royaltiesプラグイン](/core/plugins/royalties)の一部です。
+Metaplex Token Metadataで存在した一部のフィールドはCoreでは廃止されている可能性があります。たとえば`creators`は現在[Royaltiesプラグイン](/ja/smart-contracts/core/plugins/royalties)の一部です。
 
 ### 必須フィールド
 
@@ -210,7 +210,7 @@ Metaplex Token Metadataで存在した一部のフィールドはCoreでは廃�
 - **external_url**: NFTの外部Webサイトリンク
   - 例: `https://www.myproject.io/nft/123`
 
-- **attributes**: 特徴と値の配列。これは[Attributesプラグイン](/core/plugins/attribute)を使ってオンチェーンに保存することも可能です。
+- **attributes**: 特徴と値の配列。これは[Attributesプラグイン](/ja/smart-contracts/core/plugins/attribute)を使ってオンチェーンに保存することも可能です。
   - 例:
     ```json
     {

@@ -140,7 +140,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## ヒントとベストプラクティス
 
-1. **[ページネーションを使用](/ja/das-api/guides/pagination)** 大きなコレクションの完全なデータを取得するため
+1. **[ページネーションを使用](/ja/dev-tools/das-api/guides/pagination)** 大きなコレクションの完全なデータを取得するため
 2. **結果をキャッシュ** 頻繁なクエリのパフォーマンスを向上させるため
 3. **エッジケースを処理** メタデータや属性が欠落している場合に対処
 4. **データを正規化** コレクション間での一貫した分析のため
@@ -148,6 +148,6 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## さらなる学習
 
-- [コレクション内のすべてのトークンを取得](/ja/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのアセットを取得
-- [圧縮NFTを見つける](/ja/das-api/guides/find-compressed-nfts) - 圧縮NFTを発見して操作
-- [複数の条件でアセットを検索](/ja/das-api/guides/search-by-criteria) - 高度なクエリのために複数のフィルターを組み合わせ
+- [コレクション内のすべてのトークンを取得](/ja/dev-tools/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのアセットを取得
+- [圧縮NFTを見つける](/ja/dev-tools/das-api/guides/find-compressed-nfts) - 圧縮NFTを発見して操作
+- [複数の条件でアセットを検索](/ja/dev-tools/das-api/guides/search-by-criteria) - 高度なクエリのために複数のフィルターを組み合わせ

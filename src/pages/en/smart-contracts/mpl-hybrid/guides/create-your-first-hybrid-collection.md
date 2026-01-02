@@ -76,7 +76,7 @@ Manifest allows multiple transactions to be linked under a single base transacti
 - ...
 - https://arweave.net/manifestID/9999.json
 
-If you're unfamiliar with creating deterministic URIs, you can follow [this guide](/guides/general/create-deterministic-metadata-with-turbo) for a detailed walkthrough. Additionally, you can find instructions on creating a [collection](/core/guides/javascript/how-to-create-a-core-collection-with-javascript) and the [assets](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript) required for the Hybrid program to function.
+If you're unfamiliar with creating deterministic URIs, you can follow [this guide](/guides/general/create-deterministic-metadata-with-turbo) for a detailed walkthrough. Additionally, you can find instructions on creating a [collection](/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript) and the [assets](/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript) required for the Hybrid program to function.
 
 **Note**: Currently, the MPL-Hybrid program randomly picks a number between the min and max URI index provided and does not check to see if the URI is already used. As such, swapping suffers from the [Birthday Paradox](https://betterexplained.com/articles/understanding-the-birthday-paradox/). In order for projects to benefit from sufficient swap randomization, we recommend preparing and uploading a minimum of 250k asset metadata that can be randomly picked from. The more available potential assets the better!
 

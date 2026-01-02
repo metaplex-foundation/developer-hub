@@ -1,15 +1,15 @@
 ---
 title: Transferring Compressed NFTs
 metaTitle: Transferring Compressed NFTs | Bubblegum v2
-description: Learn how to transfer compressed NFTs on Bubblegum
+description: Learn how to transfer compressed NFTs using Bubblegum V2.
 ---
 
 The **transferV2** instruction can be used to transfer a Compressed NFT from one owner to another. To authorize the transfer, either the current owner or the delegate authority — if any — must sign the transaction. The delegated authority can either be a leaf delegate or the `permanentTransferDelegate` of the collection.
 
-Note that this instruction updates the Compressed NFT and therefore replaces the leaf on the Bubblegum Tree. This means additional parameters must be provided to verify the integrity of the Compressed NFT. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
+Note that this instruction updates the Compressed NFT and therefore replaces the leaf on the Bubblegum Tree. This means additional parameters must be provided to verify the integrity of the Compressed NFT. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
 {% callout title="Transaction size" type="note" %}
-If you encounter transaction size errors, consider using `{ truncateCanopy: true }` with `getAssetWithProof`. See the [FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments) for details.
+If you encounter transaction size errors, consider using `{ truncateCanopy: true }` with `getAssetWithProof`. See the [FAQ](/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments) for details.
 {% /callout %}
 
 ## Transfer a Bubblegum V2 Compressed NFT

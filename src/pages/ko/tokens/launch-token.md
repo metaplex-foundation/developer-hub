@@ -4,7 +4,7 @@ metaTitle: 토큰 출시하기 | 토큰
 description: Solana에서 Genesis Launch Pools를 사용하여 토큰을 출시하는 전체 가이드입니다.
 ---
 
-[Genesis](/smart-contracts/genesis) Launch Pools를 사용하여 토큰을 출시합니다. 사용자는 설정한 기간 동안 SOL을 예치하고, 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다. {% .lead %}
+[Genesis](/ko/smart-contracts/genesis) Launch Pools를 사용하여 토큰을 출시합니다. 사용자는 설정한 기간 동안 SOL을 예치하고, 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다. {% .lead %}
 
 ## 개요
 
@@ -432,6 +432,6 @@ main().catch(console.error);
 
 ## 다음 단계
 
-- [Genesis 개요](/smart-contracts/genesis) - Genesis 개념에 대해 더 알아보기
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - 상세한 Launch Pool 문서
-- [Aggregation API](/smart-contracts/genesis/aggregation) - API를 통해 출시 데이터 쿼리
+- [Genesis 개요](/ko/smart-contracts/genesis) - Genesis 개념에 대해 더 알아보기
+- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 상세한 Launch Pool 문서
+- [Aggregation API](/ko/smart-contracts/genesis/aggregation) - API를 통해 출시 데이터 쿼리

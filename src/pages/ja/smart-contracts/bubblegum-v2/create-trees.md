@@ -1,7 +1,7 @@
 ---
 title: Bubblegumツリーの作成
 metaTitle: Bubblegumツリーの作成 | Bubblegum V2
-description: 圧縮NFTを保持できる新しいマークルツリーの作成と取得方法を学びます。
+description: Bubblegum V2で圧縮NFT用のマークルツリーを作成・取得する方法を学びます。
 ---
 
 ## はじめに

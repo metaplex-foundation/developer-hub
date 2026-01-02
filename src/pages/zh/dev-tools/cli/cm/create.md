@@ -32,7 +32,7 @@ mplx cm create
 
 - **格式**: JSON
 - **命名**: 匹配图像文件(0.json、1.json、2.json、...)
-- **架构**: 标准 [Metaplex Core 元数据格式](/zh/core/json-schema)
+- **架构**: 标准 [Metaplex Core 元数据格式](/zh/smart-contracts/core/json-schema)
 
 *集合文件:*
 

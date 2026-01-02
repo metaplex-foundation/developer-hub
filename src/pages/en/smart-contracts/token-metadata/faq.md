@@ -22,7 +22,7 @@ There are several ways to solve this problem:
 
 ## How can I filter Metadata accounts by collection?
 
-As mentioned in the question above, filtering by fields present after the `creators` array is a challenging task because it is not a field of fixed size. We recommend to use DAS for the fastest and easiest method to get collection mints. If you want to get the data directly from chain you can use the following method, but we have a [Guide](/token-metadata/guides/get-by-collection) showing three different Methods to get all the NFTs in a collection.
+As mentioned in the question above, filtering by fields present after the `creators` array is a challenging task because it is not a field of fixed size. We recommend to use DAS for the fastest and easiest method to get collection mints. If you want to get the data directly from chain you can use the following method, but we have a [Guide](/smart-contracts/token-metadata/guides/get-by-collection) showing three different Methods to get all the NFTs in a collection.
 
 ## How to create a Soulbound Asset?
 
@@ -133,7 +133,7 @@ await mintV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-If it is required to use TokenKeg SPL tokens, you can create a Soulbound Asset using the [Locked Transfer Delegate](/token-metadata/delegates#locked-transfer-delegate-pnft-only) on a pNFT and then locking the pNFT.  Note however that this will not only prevent the owner from transferring the pNFT, but will also prevent the owner from burning it.  This is why the recommendation for Soulbound Assets is to use Token22 tokens.
+If it is required to use TokenKeg SPL tokens, you can create a Soulbound Asset using the [Locked Transfer Delegate](/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only) on a pNFT and then locking the pNFT.  Note however that this will not only prevent the owner from transferring the pNFT, but will also prevent the owner from burning it.  This is why the recommendation for Soulbound Assets is to use Token22 tokens.
 
 ## Why are the mint and freeze authorities transferred to the Edition PDA?
 
@@ -182,23 +182,23 @@ Token Metadata currently charges very small fees ranging between 0.001 SOL and 0
 
 Some of the instructions of the Token Metadata program have been through a few iterations and have been deprecated in favour of newer ones. The deprecated instructions are still available in the program but they are not documented on the Developer Hub as they are no longer the recommended way to interact with the program. That being said, if you are looking for the deprecated instructions, you can find them in the Token Metadata program repository. Here is a list of them:
 
-- [CreateMetadataAccountV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L448) has been replaced with [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
-- [UpdateMetadataAccountV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L241) has been replaced with [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
+- [CreateMetadataAccountV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L448) has been replaced with [CreateV1](/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts).
+- [UpdateMetadataAccountV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L241) has been replaced with [CreateV1](/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts).
 - [UpdatePrimarySaleHappenedViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L112)
-- [SignMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L146) use [Verify](/token-metadata/collections) instead.
-- [RemoveCreatorVerification](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L388)  use [Unverify](/token-metadata/collections#unverify) instead.
-- [CreateMasterEditionV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L267)  has been replaced with [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
-- [MintNewEditionFromMasterEditionViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L202)  has been replaced with [CreateV1](/token-metadata/mint#creating-mint-and-metadata-accounts).
+- [SignMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L146) use [Verify](/smart-contracts/token-metadata/collections) instead.
+- [RemoveCreatorVerification](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L388)  use [Unverify](/smart-contracts/token-metadata/collections#unverify) instead.
+- [CreateMasterEditionV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L267)  has been replaced with [CreateV1](/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts).
+- [MintNewEditionFromMasterEditionViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L202)  has been replaced with [CreateV1](/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts).
 - [ConvertMasterEditionV1ToV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L210)
 - [PuffMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L236)
-- [VerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L278) use [Verify](/token-metadata/collections) instead.
-- [SetAndVerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L367)  use [Verify](/token-metadata/collections) instead.
-- [UnverifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L334)  use [Unverify](/token-metadata/collections#unverify) instead.
+- [VerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L278) use [Verify](/smart-contracts/token-metadata/collections) instead.
+- [SetAndVerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L367)  use [Verify](/smart-contracts/token-metadata/collections) instead.
+- [UnverifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L334)  use [Unverify](/smart-contracts/token-metadata/collections#unverify) instead.
 - [Utilize](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L296) - the use feature has been deprecated.
 - [ApproveUseAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L311) - the use feature has been deprecated.
 - [RevokeUseAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L324) - the use feature has been deprecated.
-- [ApproveCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L346) use [Delegate](/token-metadata/delegates) instead.
-- [RevokeCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L354) use [Revoke](/token-metadata/delegates) instead.
+- [ApproveCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L346) use [Delegate](/smart-contracts/token-metadata/delegates) instead.
+- [RevokeCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L354) use [Revoke](/smart-contracts/token-metadata/delegates) instead.
 - [FreezeDelegatedAccount](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L375)
 - [ThawDelegatedAccount](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383)
 - [BurnNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383) has been replaced by [Burn](https://developers.metaplex.com/token-metadata/burn).
@@ -210,4 +210,4 @@ Some of the instructions of the Token Metadata program have been through a few i
 - [SetTokenStandard](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L464) the TokenStandard is automatically set now.
 
 ## Where can I learn more about Token Metadata Account Size Reduction?
-Please check the [special FAQ](/token-metadata/guides/account-size-reduction) for more information or join our [Discord](https://discord.gg/metaplex) in case of remaining open quesitons.
+Please check the [special FAQ](/smart-contracts/token-metadata/guides/account-size-reduction) for more information or join our [Discord](https://discord.gg/metaplex) in case of remaining open quesitons.

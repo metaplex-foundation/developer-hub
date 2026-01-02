@@ -1,5 +1,6 @@
 ---
 title: 토큰 생성
+metaTitle: 토큰 생성 | Metaplex CLI
 description: Solana에서 새 대체 가능 토큰 생성
 ---
 

@@ -4,7 +4,7 @@ metaTitle: 프로그래머블 NFT (pNFT) | Token Metadata
 description: Token Metadata의 프로그래머블 NFT(일명 pNFT)에 대해 자세히 알아보세요
 ---
 
-[개요 페이지](/token-metadata#pnfts)에서 언급했듯이, 프로그래머블 NFT(pNFT)는 크리에이터가 특정 작업에 대한 사용자 정의 규칙을 정의하고 서드파티 권한에 보다 세분화된 권한을 위임할 수 있도록 하는 새로운 자산 표준입니다. {% .lead %}
+[개요 페이지](/ko/smart-contracts/token-metadata#pnfts)에서 언급했듯이, 프로그래머블 NFT(pNFT)는 크리에이터가 특정 작업에 대한 사용자 정의 규칙을 정의하고 서드파티 권한에 보다 세분화된 권한을 위임할 수 있도록 하는 새로운 자산 표준입니다. {% .lead %}
 
 ## Token Metadata 우회 방지
 
@@ -18,7 +18,7 @@ Token Metadata 프로그램은 SPL Token 프로그램 위에 구축되어 있기
 
 - **pNFT의 Token 계정은 SPL Token 프로그램에서 항상 동결됩니다.** pNFT가 위임되었는지 여부에 관계없이 말입니다. 이는 아무도 SPL Token 프로그램과 직접 상호작용하여 Token Metadata 프로그램을 우회할 수 없도록 보장합니다.
 - pNFT의 Token 계정에서 작업이 수행될 때마다, Token Metadata 프로그램은 **계정을 해동하고, 작업을 수행한 다음, 계정을 다시 동결합니다**. 이 모든 것이 동일한 명령어에서 **원자적으로** 발생합니다. 이렇게 하면 SPL Token 프로그램에서 수행할 수 있는 모든 작업이 pNFT에서도 여전히 사용 가능하지만, 항상 Token Metadata 프로그램을 통해 수행됩니다.
-- pNFT에 [Token Delegate](/token-metadata/delegates#token-delegates)가 설정되면, 정보는 **Token Record** 계정에 저장됩니다. pNFT는 SPL Token 프로그램에서 항상 동결되어 있기 때문에, pNFT가 실제로 잠겨있는지 여부를 추적하는 것은 Token Record 계정의 책임입니다.
+- pNFT에 [Token Delegate](/ko/smart-contracts/token-metadata/delegates#token-delegates)가 설정되면, 정보는 **Token Record** 계정에 저장됩니다. pNFT는 SPL Token 프로그램에서 항상 동결되어 있기 때문에, pNFT가 실제로 잠겨있는지 여부를 추적하는 것은 Token Record 계정의 책임입니다.
 - pNFT에 영향을 미치는 모든 단일 작업이 Token Metadata 프로그램을 거쳐야 하므로, 우리는 이러한 작업에 대한 인증 규칙을 시행할 수 있는 병목 지점을 만들었습니다. 이러한 규칙은 **Token Auth Rules** 프로그램이 관리하는 **Rule Set** 계정에 정의됩니다.
 
 본질적으로, 이는 pNFT에 다음과 같은 능력을 제공합니다:
@@ -34,7 +34,7 @@ Token Metadata 프로그램은 SPL Token 프로그램 위에 구축되어 있기
 
 이 새로운 위임자 시스템에 대한 정보는 pNFT의 Mint 계정과 Token 계정 모두에서 파생된 특별한 **Token Record** PDA에 저장됩니다. 새로운 위임자 권한이 pNFT에 할당되면, Token Metadata 프로그램은 Token 계정과 Token Record 계정 모두에서 해당 정보를 동기화합니다.
 
-이러한 위임자에 대해서는 [위임된 권한 페이지의 "Token Delegates" 섹션](/token-metadata/delegates#token-delegates)에서 더 자세히 논의합니다.
+이러한 위임자에 대해서는 [위임된 권한 페이지의 "Token Delegates" 섹션](/ko/smart-contracts/token-metadata/delegates#token-delegates)에서 더 자세히 논의합니다.
 
 {% diagram %}
 {% node %}
@@ -153,15 +153,15 @@ pNFT의 경우, 다음 작업들이 지원됩니다:
 | 작업                         | 설명                                                                                                                                                                           |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Transfer:Owner`             | pNFT 소유자가 시작한 전송                                                                                                                                           |
-| `Transfer:SaleDelegate`      | [Sale delegate](/token-metadata/delegates#sale-delegate-pnft-only)가 시작한 전송                                                                                            |
-| `Transfer:TransferDelegate`  | [Transfer](/token-metadata/delegates#transfer-delegate-pnft-only) 또는 [Locked Transfer](/token-metadata/delegates#locked-transfer-delegate-pnft-only) delegate가 시작한 전송 |
+| `Transfer:SaleDelegate`      | [Sale delegate](/ko/smart-contracts/token-metadata/delegates#sale-delegate-pnft-only)가 시작한 전송                                                                                            |
+| `Transfer:TransferDelegate`  | [Transfer](/ko/smart-contracts/token-metadata/delegates#transfer-delegate-pnft-only) 또는 [Locked Transfer](/ko/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only) delegate가 시작한 전송 |
 | `Transfer:MigrationDelegate` | Migration delegate가 시작한 전송 (pNFT 마이그레이션 기간 동안 사용된 레거시 delegate)                                                                                    |
 | `Transfer:WalletToWallet`    | 지갑 간 전송 (현재 사용되지 않음)                                                                                                                                       |
-| `Delegate:Sale`              | [Sale delegate](/token-metadata/delegates#sale-delegate-pnft-only) 승인                                                                                                          |
-| `Delegate:Transfer`          | [Transfer delegate](/token-metadata/delegates#transfer-delegate-pnft-only) 승인                                                                                                  |
-| `Delegate:LockedTransfer`    | [Locked Transfer delegate](/token-metadata/delegates#locked-transfer-delegate-pnft-only) 승인                                                                                    |
-| `Delegate:Utility`           | [Utility delegate](/token-metadata/delegates#utility-delegate-pnft-only) 승인                                                                                                    |
-| `Delegate:Staking`           | [Staking delegate](/token-metadata/delegates#staking-delegate-pnft-only) 승인                                                                                                    |
+| `Delegate:Sale`              | [Sale delegate](/ko/smart-contracts/token-metadata/delegates#sale-delegate-pnft-only) 승인                                                                                                          |
+| `Delegate:Transfer`          | [Transfer delegate](/ko/smart-contracts/token-metadata/delegates#transfer-delegate-pnft-only) 승인                                                                                                  |
+| `Delegate:LockedTransfer`    | [Locked Transfer delegate](/ko/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only) 승인                                                                                    |
+| `Delegate:Utility`           | [Utility delegate](/ko/smart-contracts/token-metadata/delegates#utility-delegate-pnft-only) 승인                                                                                                    |
+| `Delegate:Staking`           | [Staking delegate](/ko/smart-contracts/token-metadata/delegates#staking-delegate-pnft-only) 승인                                                                                                    |
 
 크리에이터는 이러한 작업 중 어느 것에든 사용자 정의 **Rule**을 할당할 수 있습니다. 해당 작업이 수행될 때, Token Metadata 프로그램은 작업이 진행되도록 허용하기 전에 규칙이 유효한지 확인합니다. 사용 가능한 규칙은 Token Auth Rules 프로그램에 의해 직접 문서화되지만, 두 가지 유형의 규칙이 있다는 것을 주목할 가치가 있습니다:
 

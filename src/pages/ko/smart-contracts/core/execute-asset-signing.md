@@ -61,7 +61,7 @@ MPL Core Execute 명령어는 **현재 자산 소유자**도 트랜잭션에 서
 
 ### Execute 작업 제어
 
-execute 기능은 [Freeze Execute Plugin](/core/plugins/freeze-execute)을 사용하여 제어할 수 있습니다. 이 플러그인을 사용하면 자산의 execute 작업을 동결하여 동결이 해제될 때까지 모든 execute 명령어 처리를 방지할 수 있습니다.
+execute 기능은 [Freeze Execute Plugin](/ko/smart-contracts/core/plugins/freeze-execute)을 사용하여 제어할 수 있습니다. 이 플러그인을 사용하면 자산의 execute 작업을 동결하여 동결이 해제될 때까지 모든 execute 명령어 처리를 방지할 수 있습니다.
 
 Freeze Execute Plugin은 특히 다음과 같은 경우에 유용합니다:
 

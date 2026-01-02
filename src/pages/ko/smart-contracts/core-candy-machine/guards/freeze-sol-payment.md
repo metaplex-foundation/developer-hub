@@ -556,7 +556,7 @@ Freeze Sol Payment 가드 내에서 Asset의 동결을 중단하는 것이 가�
 
 ## Freeze Escrow와 가드 그룹
 
-다양한 [가드 그룹](/core-candy-machine/guard-groups) 내에서 여러 Freeze Sol Payment 가드를 사용할 때는 Freeze Sol Payment 가드와 Freeze Escrow 계정 간의 관계를 이해하는 것이 중요합니다.
+다양한 [가드 그룹](/ko/smart-contracts/core-candy-machine/guard-groups) 내에서 여러 Freeze Sol Payment 가드를 사용할 때는 Freeze Sol Payment 가드와 Freeze Escrow 계정 간의 관계를 이해하는 것이 중요합니다.
 
 Freeze Escrow 계정은 Destination 주소에서 파생된 PDA입니다. 이는 **여러 Freeze Sol Payment 가드**가 **같은 Destination 주소**를 사용하도록 구성된 경우, 모두 **같은 Freeze Escrow 계정을 공유**한다는 의미입니다.
 

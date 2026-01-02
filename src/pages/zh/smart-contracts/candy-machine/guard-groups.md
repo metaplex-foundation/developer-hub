@@ -4,13 +4,13 @@ metaTitle: Guard组 | Candy Machine
 description: 解释如何配置多组guard。
 ---
 
-在[上一页](/zh/candy-machine/guards)中,我们介绍了guard并使用它们来定义Candy Machine的访问控制。我们已经看到,使用guard,我们可以例如添加每次铸造1 SOL的付款,并确保铸造在特定日期后开始。但是,如果我们还想在第二个日期后收取2 SOL怎么办?如果我们想允许某些代币持有者免费或以折扣价铸造怎么办?{% .lead %}
+在[上一页](/zh/smart-contracts/candy-machine/guards)中,我们介绍了guard并使用它们来定义Candy Machine的访问控制。我们已经看到,使用guard,我们可以例如添加每次铸造1 SOL的付款,并确保铸造在特定日期后开始。但是,如果我们还想在第二个日期后收取2 SOL怎么办?如果我们想允许某些代币持有者免费或以折扣价铸造怎么办?{% .lead %}
 
 如果我们可以定义多组guard,每组都有自己的要求,会怎么样?为此,我们创建了**Guard组**!
 
 ## 组如何工作?
 
-还记得[我们如何在任何Candy Machine上设置guard](/zh/candy-machine/guards#creating-a-candy-machine-with-guards)吗?只需提供我们想要启用的guard的设置即可。Guard组的工作方式相同,只是您还必须给它们一个唯一的**标签**来识别它们。
+还记得[我们如何在任何Candy Machine上设置guard](/zh/smart-contracts/candy-machine/guards#creating-a-candy-machine-with-guards)吗?只需提供我们想要启用的guard的设置即可。Guard组的工作方式相同,只是您还必须给它们一个唯一的**标签**来识别它们。
 
 因此,每个Guard组具有以下属性:
 
@@ -171,7 +171,7 @@ API参考:[create](https://mpl-candy-machine.typedoc.metaplex.com/functions/crea
 
 请注意,在上面的示例中,我们必须向两个组都提供相同的**Bot Tax** guard。这可以通过利用在Candy Machine上设置的全局**Guard**来简化。
 
-使用Guard组时,Candy Machine的全局Guard——如[上一页](/zh/candy-machine/guards)所解释的——**充当默认guard**!这意味着组将默认使用与全局guard相同的guard设置,除非它们通过在组中明确启用它们来覆盖它们。
+使用Guard组时,Candy Machine的全局Guard——如[上一页](/zh/smart-contracts/candy-machine/guards)所解释的——**充当默认guard**!这意味着组将默认使用与全局guard相同的guard设置,除非它们通过在组中明确启用它们来覆盖它们。
 
 以下是快速回顾:
 
@@ -348,4 +348,4 @@ API参考:[create](https://mpl-candy-machine.typedoc.metaplex.com/functions/crea
 
 Guard组为我们的Candy Machine带来了全新的维度,允许我们定义适合我们需求的顺序和/或并行铸造工作流程。
 
-在[下一页](/zh/candy-machine/guard-route)上,我们将看到另一个关于guard的令人兴奋的功能:Guard指令!
+在[下一页](/zh/smart-contracts/candy-machine/guard-route)上,我们将看到另一个关于guard的令人兴奋的功能:Guard指令!

@@ -92,7 +92,7 @@ Umi 有几个可以通过插件帮助上传过程的插件。目前支持以下�
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>").use(irysUploader())
+const umi = createUmi("https://api.devnet.solana.com").use(irysUploader())
 
 const uriUploadArray = await umi.uploader.upload([myFile1, myFile2])
 

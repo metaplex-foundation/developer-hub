@@ -82,13 +82,13 @@ const assets = await umi.rpc.searchAssets({
 
 The following DAS API methods support the `options` parameter with display options:
 
-- [Get Asset](/das-api/methods/get-asset)
-- [Get Assets](/das-api/methods/get-assets)
-- [Get Assets By Owner](/das-api/methods/get-assets-by-owner)
-- [Get Assets By Creator](/das-api/methods/get-assets-by-creator)
-- [Get Assets By Authority](/das-api/methods/get-assets-by-authority)
-- [Get Assets By Group](/das-api/methods/get-assets-by-group)
-- [Search Assets](/das-api/methods/search-assets)
+- [Get Asset](/dev-tools/das-api/methods/get-asset)
+- [Get Assets](/dev-tools/das-api/methods/get-assets)
+- [Get Assets By Owner](/dev-tools/das-api/methods/get-assets-by-owner)
+- [Get Assets By Creator](/dev-tools/das-api/methods/get-assets-by-creator)
+- [Get Assets By Authority](/dev-tools/das-api/methods/get-assets-by-authority)
+- [Get Assets By Group](/dev-tools/das-api/methods/get-assets-by-group)
+- [Search Assets](/dev-tools/das-api/methods/search-assets)
 
 ## Performance Considerations
 

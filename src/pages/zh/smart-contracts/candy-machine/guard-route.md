@@ -23,9 +23,9 @@ Candy Guard程序附带一个名为**"Route"指令**的特殊指令。
 
 例如,添加对冻结NFT支持的guard——只有在铸造结束后才能解冻——可以使用其route指令来初始化国库托管账户,并允许任何人在正确条件下解冻铸造的NFT。我们可以通过使用**Path**属性来区分这两个功能,前者等于"init",后者等于"thaw"。
 
-您将在支持它的每个guard的[各自页面](/zh/candy-machine/guards)上找到route指令及其底层路径的详细说明。
+您将在支持它的每个guard的[各自页面](/zh/smart-contracts/candy-machine/guards)上找到route指令及其底层路径的详细说明。
 
-让我们花一分钟通过提供一个示例来说明route指令的工作原理。例如,[**Allow List**](/zh/candy-machine/guards/allow-list) guard支持route指令,以验证铸造钱包是否属于预配置的钱包列表。
+让我们花一分钟通过提供一个示例来说明route指令的工作原理。例如,[**Allow List**](/zh/smart-contracts/candy-machine/guards/allow-list) guard支持route指令,以验证铸造钱包是否属于预配置的钱包列表。
 
 它使用[Merkle树](https://en.m.wikipedia.org/wiki/Merkle_tree)来实现这一点,这意味着我们需要创建整个允许钱包列表的哈希,并将该哈希(称为**Merkle根**)存储在guard设置中。为了证明钱包在允许列表中,它必须提供一个哈希列表(称为**Merkle证明**),允许程序计算Merkle根并确保它与guard的设置匹配。
 
@@ -203,6 +203,6 @@ API参考:[route](https://mpl-candy-machine.typedoc.metaplex.com/functions/route
 
 ## 结论
 
-route指令通过允许guard附带自己的自定义程序逻辑,使guard变得更加强大。查看[所有可用guard](/zh/candy-machine/guards)的专用页面,了解每个guard的完整功能集。
+route指令通过允许guard附带自己的自定义程序逻辑,使guard变得更加强大。查看[所有可用guard](/zh/smart-contracts/candy-machine/guards)的专用页面,了解每个guard的完整功能集。
 
-现在我们知道了关于设置Candy Machine及其guard的所有内容,是时候谈论铸造了。在[下一页](/zh/candy-machine/mint)见!
+现在我们知道了关于设置Candy Machine及其guard的所有内容,是时候谈论铸造了。在[下一页](/zh/smart-contracts/candy-machine/mint)见!

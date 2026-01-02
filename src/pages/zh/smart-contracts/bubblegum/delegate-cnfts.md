@@ -8,8 +8,8 @@ description: 了解如何在Bubblegum上委托压缩NFT。
 
 这允许被委托的账户——我们也称之为**委托权限**——代表所有者执行操作。这些操作包括：
 
-- [转移cNFT](/zh/bubblegum/transfer-cnfts)。转移后委托权限将被重置——即设置为新所有者。
-- [销毁cNFT](/zh/bubblegum/burn-cnfts)。
+- [转移cNFT](/zh/smart-contracts/bubblegum/transfer-cnfts)。转移后委托权限将被重置——即设置为新所有者。
+- [销毁cNFT](/zh/smart-contracts/bubblegum/burn-cnfts)。
 
 每个操作都提供了如何使用委托权限执行它们的示例，但通常只需将**叶子委托**账户作为签名者提供，而不是将**叶子所有者**账户作为签名者传递。
 
@@ -23,7 +23,7 @@ description: 了解如何在Bubblegum上委托压缩NFT。
 - **先前叶子委托**：先前的委托权限（如果有）。否则，应设置为**叶子所有者**。
 - **新叶子委托**：要批准的新委托权限。
 
-此外，由于此指令将最终替换Bubblegum树上的叶子，因此必须提供更多参数来验证压缩NFT的完整性。由于这些参数对所有更改叶子的指令是通用的，它们在[以下FAQ](/zh/bubblegum/faq#replace-leaf-instruction-arguments)中有记录。幸运的是，我们可以使用辅助方法，它将使用Metaplex DAS API自动为我们获取这些参数。
+此外，由于此指令将最终替换Bubblegum树上的叶子，因此必须提供更多参数来验证压缩NFT的完整性。由于这些参数对所有更改叶子的指令是通用的，它们在[以下FAQ](/zh/smart-contracts/bubblegum/faq#replace-leaf-instruction-arguments)中有记录。幸运的是，我们可以使用辅助方法，它将使用Metaplex DAS API自动为我们获取这些参数。
 
 {% dialect-switcher title="委托压缩NFT" %}
 {% dialect title="JavaScript" id="js" %}

@@ -4,7 +4,7 @@ metaTitle: 铸造压缩NFT | Bubblegum V2
 description: 了解如何在Bubblegum V2上铸造压缩NFT。
 ---
 
-在[上一页](/zh/bubblegum-v2/create-trees)中，我们看到需要一个Bubblegum树来铸造压缩NFT，以及如何创建一个。现在，让我们看看如何从给定的Bubblegum树铸造压缩NFT。{% .lead %}
+在[上一页](/zh/smart-contracts/bubblegum-v2/create-trees)中，我们看到需要一个Bubblegum树来铸造压缩NFT，以及如何创建一个。现在，让我们看看如何从给定的Bubblegum树铸造压缩NFT。{% .lead %}
 
 Bubblegum程序为不同的叶子模式版本提供多个铸造指令。Bubblegum V2引入了一个新的铸造指令，名为**mintV2**，用于将压缩NFT铸造到给定的集合或不带集合。
 

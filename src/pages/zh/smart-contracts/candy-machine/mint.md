@@ -8,7 +8,7 @@ description: 解释如何从 Candy Machine 铸造以及如何处理预铸造要�
 
 ## 基本铸造
 
-如[在 Candy Guards 页面中所述](/zh/candy-machine/guards#why-another-program)，有两个程序负责从 Candy Machine 铸造 NFT：Candy Machine Core 程序——负责铸造 NFT——以及 Candy Guard 程序，它在其上添加了一个可配置的访问控制层，可以分叉以提供自定义守卫。
+如[在 Candy Guards 页面中所述](/zh/smart-contracts/candy-machine/guards#why-another-program)，有两个程序负责从 Candy Machine 铸造 NFT：Candy Machine Core 程序——负责铸造 NFT——以及 Candy Guard 程序，它在其上添加了一个可配置的访问控制层，可以分叉以提供自定义守卫。
 
 因此，有两种方式从 Candy Machine 铸造：
 
@@ -238,7 +238,7 @@ API 参考：[mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/m
 
 {% /diagram %}
 
-[每个可用的守卫](/zh/candy-machine/guards)都有自己的文档页面，它会告诉您该守卫是否需要在铸造时提供铸造设置。
+[每个可用的守卫](/zh/smart-contracts/candy-machine/guards)都有自己的文档页面，它会告诉您该守卫是否需要在铸造时提供铸造设置。
 
 如果您只使用不需要铸造设置的守卫，您可以按照上面"基本铸造"部分描述的方式进行铸造。否则，您需要提供一个额外的对象属性，其中包含所有需要铸造设置的守卫的铸造设置。让我们看看使用我们的 SDK 在实践中是什么样子的。
 
@@ -457,9 +457,9 @@ API 参考：[mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/m
 
 ### 使用 route 指令
 
-守卫要求预验证步骤的一种方式是通过"route"指令使用[它们自己的特殊指令](/zh/candy-machine/guard-route)。
+守卫要求预验证步骤的一种方式是通过"route"指令使用[它们自己的特殊指令](/zh/smart-contracts/candy-machine/guard-route)。
 
-一个很好的例子是 **Allow List** 守卫。使用此守卫时，我们必须通过调用 route 指令并提供有效的 Merkle 证明来验证我们的钱包属于预定义的钱包列表。如果此 route 指令成功，它将为该钱包创建一个 Allow List PDA，然后铸造指令可以读取该 PDA 来验证 Allow List 守卫。[您可以在其专用页面上阅读更多关于 Allow List 守卫的信息](/zh/candy-machine/guards/allow-list)。
+一个很好的例子是 **Allow List** 守卫。使用此守卫时，我们必须通过调用 route 指令并提供有效的 Merkle 证明来验证我们的钱包属于预定义的钱包列表。如果此 route 指令成功，它将为该钱包创建一个 Allow List PDA，然后铸造指令可以读取该 PDA 来验证 Allow List 守卫。[您可以在其专用页面上阅读更多关于 Allow List 守卫的信息](/zh/smart-contracts/candy-machine/guards/allow-list)。
 
 {% diagram %}
 
@@ -512,7 +512,7 @@ API 参考：[mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/m
 
 守卫执行预验证步骤的另一种方式是依赖外部解决方案。
 
-例如，使用 **Gatekeeper** 守卫时，我们必须通过执行挑战（如完成验证码）来请求 Gateway Token，这取决于配置的 Gatekeeper Network。然后 Gatekeeper 守卫将检查此类 Gateway Token 的存在以验证或拒绝铸造。[您可以在其专用页面上了解更多关于 Gatekeeper 守卫的信息](/zh/candy-machine/guards/gatekeeper)。
+例如，使用 **Gatekeeper** 守卫时，我们必须通过执行挑战（如完成验证码）来请求 Gateway Token，这取决于配置的 Gatekeeper Network。然后 Gatekeeper 守卫将检查此类 Gateway Token 的存在以验证或拒绝铸造。[您可以在其专用页面上了解更多关于 Gatekeeper 守卫的信息](/zh/smart-contracts/candy-machine/guards/gatekeeper)。
 
 {% diagram %}
 
@@ -568,7 +568,7 @@ Network 请求 Gateway Token，\
 
 您可能希望在 Candy Machine 中包含的一个守卫是 Bot Tax 守卫，它通过向失败的铸造收取可配置数量的 SOL 来保护您的 Candy Machine 免受机器人攻击。这个数量通常很小，足以伤害机器人而不会影响真实用户的真正错误。所有机器人税将转移到 Candy Machine 账户，以便在铸造结束后，您可以通过删除 Candy Machine 账户来访问这些资金。
 
-这个守卫有点特殊，会影响所有其他守卫的铸造行为。当 Bot Tax 被激活并且任何其他守卫验证铸造失败时，**交易将假装成功**。这意味着程序不会返回错误，但也不会铸造 NFT。这是因为交易必须成功才能将资金从机器人转移到 Candy Machine 账户。[您可以在其专用页面上了解更多关于 Bot Tax 守卫的信息](/zh/candy-machine/guards/bot-tax)。
+这个守卫有点特殊，会影响所有其他守卫的铸造行为。当 Bot Tax 被激活并且任何其他守卫验证铸造失败时，**交易将假装成功**。这意味着程序不会返回错误，但也不会铸造 NFT。这是因为交易必须成功才能将资金从机器人转移到 Candy Machine 账户。[您可以在其专用页面上了解更多关于 Bot Tax 守卫的信息](/zh/smart-contracts/candy-machine/guards/bot-tax)。
 
 ## 结论
 
@@ -576,5 +576,5 @@ Network 请求 Gateway Token，\
 
 以下是您可能感兴趣的一些额外阅读资源：
 
-- [所有可用守卫](/zh/candy-machine/guards)：浏览所有可用的守卫，以便您可以挑选所需的守卫。
-- [创建您的第一个 Candy Machine](/zh/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)：此操作指南帮助您上传资产并使用名为"[Sugar](/zh/candy-machine/sugar)"的 CLI 工具从头创建新的 Candy Machine。
+- [所有可用守卫](/zh/smart-contracts/candy-machine/guards)：浏览所有可用的守卫，以便您可以挑选所需的守卫。
+- [创建您的第一个 Candy Machine](/zh/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)：此操作指南帮助您上传资产并使用名为"[Sugar](/zh/smart-contracts/candy-machine/sugar)"的 CLI 工具从头创建新的 Candy Machine。

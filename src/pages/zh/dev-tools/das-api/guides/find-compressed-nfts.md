@@ -272,12 +272,12 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 
 ## 提示和最佳实践
 
-1. **使用[分页](/zh/das-api/guides/pagination)** 处理大型压缩 NFT 集合
+1. **使用[分页](/zh/dev-tools/das-api/guides/pagination)** 处理大型压缩 NFT 集合
 2. **优雅地处理错误** 当证明不可用时
 3. **使用适当的显示选项** 获取压缩 NFT 元数据
 
 ## 延伸阅读
 
-- [获取集合中的所有代币](/zh/das-api/guides/get-collection-nfts) - 从特定集合检索所有资产
-- [按所有者获取 NFT](/zh/das-api/guides/get-nfts-by-owner) - 查找钱包拥有的所有 NFT
-- [按多条件搜索资产](/zh/das-api/guides/search-by-criteria) - 组合多个过滤器进行高级查询
+- [获取集合中的所有代币](/zh/dev-tools/das-api/guides/get-collection-nfts) - 从特定集合检索所有资产
+- [按所有者获取 NFT](/zh/dev-tools/das-api/guides/get-nfts-by-owner) - 查找钱包拥有的所有 NFT
+- [按多条件搜索资产](/zh/dev-tools/das-api/guides/search-by-criteria) - 组合多个过滤器进行高级查询

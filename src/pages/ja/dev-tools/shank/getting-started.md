@@ -191,7 +191,7 @@ shank idl --out-dir ./idl --crate-root ./ --program-id MyProgram1111111111111111
 
 ShankをセットアップしてIDLファイルを生成できるようになったので、次のことができます：
 
-1. **[マクロリファレンス](/ja/shank/macros)**: すべてのShankマクロと属性の完全なリファレンス
+1. **[マクロリファレンス](/ja/dev-tools/shank/macros)**: すべてのShankマクロと属性の完全なリファレンス
 2. **[Kinobiとの統合](/ja/dev-tools/umi/kinobi)**: Umiと互換性のあるモダンなTypeScript SDKを生成（推奨）
 3. **[Solita](https://github.com/metaplex-foundation/solita)**: web3.jsと互換性のあるレガシーTypeScript SDKを生成
 

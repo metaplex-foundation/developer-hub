@@ -44,8 +44,7 @@ Candy Machine 계정에는 사용 가능한 Asset과 교환된 Asset의 수와 �
 
 Candy Machine을 가져오려면, 다음과 같이 `fetchCandyMachine` 함수를 사용할 수 있습니다:
 
-Metaplex Aura Devnet 엔드포인트를 사용할 것입니다.
-Solana와 Eclipse 블록체인에서 Metaplex Aura 네트워크에 액세스하려면 엔드포인트와 API 키를 위해 Aura 앱을 방문할 수 있습니다 [여기](https://aura-app.metaplex.com/).
+Solana Devnet 엔드포인트를 사용할 것입니다.
 
 ```ts
 import {
@@ -55,8 +54,8 @@ import {
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 
 // 다음 두 줄은 이전에 umi를 설정하지 않은 경우에만 필요합니다
-// Aura 데이터 네트워크에서 Solana Devnet을 엔드포인트로 사용합니다
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+// Solana Devnet을 엔드포인트로 사용합니다
+const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCandyMachine());
 
 const candyMachineId = "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9";
@@ -540,7 +539,7 @@ const account = await umi.rpc.getAccount(umi.identity.publicKey);
 const solBalance = account.lamports;
 ```
 
-토큰이나 NFT를 요구하는 guard 중 하나를 사용하고 있다면 이것들도 가져오고 싶을 것입니다. 이를 위해 [DAS API](/ko/das-api/methods/get-asset-by-owner)를 사용하는 것을 권장합니다. DAS는 RPC 제공자가 유지관리하는 Token의 인덱스입니다. 이를 사용하면 하나의 호출로 모든 필요한 정보를 가져올 수 있습니다. UI에서는 반환된 객체를 사용하여 연결된 지갑이 필요한 토큰이나 NFT를 소유하고 있는지 확인할 수 있습니다.
+토큰이나 NFT를 요구하는 guard 중 하나를 사용하고 있다면 이것들도 가져오고 싶을 것입니다. 이를 위해 [DAS API](/ko/dev-tools/das-api/methods/get-assets-by-owner)를 사용하는 것을 권장합니다. DAS는 RPC 제공자가 유지관리하는 Token의 인덱스입니다. 이를 사용하면 하나의 호출로 모든 필요한 정보를 가져올 수 있습니다. UI에서는 반환된 객체를 사용하여 연결된 지갑이 필요한 토큰이나 NFT를 소유하고 있는지 확인할 수 있습니다.
 
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';

@@ -24,7 +24,7 @@ This plugin allows the **delegate to freeze and thaw the asset, preventing trans
 
 **Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
 
-_Learn more about it [here](/core/plugins/freeze-delegate)_
+_Learn more about it [here](/smart-contracts/core/plugins/freeze-delegate)_
 
 ### The Attribute Plugin
 
@@ -34,7 +34,7 @@ This plugin allows for **data storage directly on the assets, functioning as onc
 
 **This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
 
-_Learn more about it [here](/core/plugins/attribute)_
+_Learn more about it [here](/smart-contracts/core/plugins/attribute)_
 
 ### The program Logic
 
@@ -83,7 +83,7 @@ In this guide, we’ll use both **Umi** and the **Core SDK** to create all neces
 
 **Umi is a modular framework for building and using JavaScript clients for Solana programs**. It provides a zero-dependency library that defines a set of core interfaces, enabling libraries to operate independently of specific implementations. 
 
-_For more information, you can find an overview [here](/umi/getting-started)_
+_For more information, you can find an overview [here](/dev-tools/umi/getting-started)_
 
 **The basic Umi setup for this example will look like this**:
 ```typescript
@@ -537,4 +537,4 @@ tx = await transactionBuilder().add(
 
 ## Conclusion
 
-Congratulations! You are now equipped to create a staking solution for your NFT collection! If you want to learn more about Core and Metaplex, check out the [developer hub](/core/getting-started).
+Congratulations! You are now equipped to create a staking solution for your NFT collection! If you want to learn more about Core and Metaplex, check out the [developer hub](/smart-contracts/core/getting-started).

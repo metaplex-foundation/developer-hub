@@ -22,7 +22,7 @@ Returns all printable editions for a master edition NFT mint—including edition
 The response includes:
 
 - `editions` - Array of edition objects containing:
-  - `edition_address` - The address of the [edition account](/token-metadata#printing-editions)
+  - `edition_address` - The address of the [edition account](/smart-contracts/token-metadata#printing-editions)
   - `edition_number` - The edition number (1, 2, 3, etc.)
   - `mint_address` - The mint address of the edition
 - `master_edition_address` - Address of the master edition account

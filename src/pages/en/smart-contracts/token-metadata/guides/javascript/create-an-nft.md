@@ -87,7 +87,7 @@ This example is going to run through setting up Umi with a `generatedSigner()`. 
 ### Generating a New Wallet
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplTokenMetadata())
   .use(
     irysUploader({
@@ -110,7 +110,7 @@ await umi.rpc.airdrop(umi.identity.publickey)
 ### Use an Existing Wallet
 
 ```ts
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+const umi = createUmi("https://api.devnet.solana.com")
   .use(mplTokenMetadata())
   .use(
     irysUploader({
@@ -345,7 +345,7 @@ const createNft = async () => {
   // ** Setting Up Umi **
   //
 
-  const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+  const umi = createUmi("https://api.devnet.solana.com")
     .use(mplTokenMetadata())
   .use(
     irysUploader({
@@ -468,4 +468,4 @@ createNft()
 
 ## What's Next?
 
-This guide helped you to create a basic NFT, from here you can head over to the [Token Metadata Program](/token-metadata) and check out things like creating a collection and adding your new NFT into a collection and the various other interactions you can perform with your NFT.
+This guide helped you to create a basic NFT, from here you can head over to the [Token Metadata Program](/smart-contracts/token-metadata) and check out things like creating a collection and adding your new NFT into a collection and the various other interactions you can perform with your NFT.

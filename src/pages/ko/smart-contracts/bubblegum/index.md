@@ -6,7 +6,7 @@ description: 압축 NFT에 대한 개략적인 개요를 제공합니다.
 
 {% callout type="note" title="새로운 Bubblegum 버전" %}
 
-더 많은 유연성과 기능을 위해 [Bubblegum v2](/bubblegum-v2) 사용을 권장합니다.
+더 많은 유연성과 기능을 위해 [Bubblegum v2](/ko/smart-contracts/bubblegum-v2) 사용을 권장합니다.
 
 {% /callout %}
 
@@ -16,7 +16,7 @@ Bubblegum은 Solana에서 압축 NFT(cNFT)를 생성하고 상호작용하기 �
 
 {% quick-links %}
 
-{% quick-link title="시작하기" icon="InboxArrowDown" href="/bubblegum/getting-started" description="원하는 언어나 라이브러리를 찾아 압축 NFT를 시작하세요." /%}
+{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/smart-contracts/bubblegum/sdk" description="원하는 언어나 라이브러리를 찾아 압축 NFT를 시작하세요." /%}
 
 {% quick-link title="API 레퍼런스" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="특정한 것을 찾고 계신가요? API 레퍼런스를 확인하고 답을 찾으세요." /%}
 
@@ -43,7 +43,7 @@ Merkle 트리를 사용하여 Solana에서 cNFT 프로젝트를 출시하는 것
 
 ## Merkle 트리, 리프 및 증명
 
-압축 NFT는 **Merkle 트리**의 맥락에서만 존재합니다. Merkle 트리가 무엇인지 [전용 고급 가이드](/bubblegum/concurrent-merkle-trees)에서 설명하지만, 이 개요에서는 Merkle 트리를 **리프**라고 부르는 해시 모음으로 생각할 수 있습니다. 각 리프는 [압축 NFT의 데이터를 해싱](/bubblegum/hashed-nft-data)하여 얻습니다.
+압축 NFT는 **Merkle 트리**의 맥락에서만 존재합니다. Merkle 트리가 무엇인지 [전용 고급 가이드](/ko/smart-contracts/bubblegum-v2/concurrent-merkle-trees)에서 설명하지만, 이 개요에서는 Merkle 트리를 **리프**라고 부르는 해시 모음으로 생각할 수 있습니다. 각 리프는 [압축 NFT의 데이터를 해싱](/ko/smart-contracts/bubblegum-v2/hashed-nft-data)하여 얻습니다.
 
 Merkle 트리의 각 리프에 대해, 주어진 리프가 해당 트리의 일부인지 확인할 수 있는 해시 목록(이를 **증명**이라고 함)을 제공할 수 있습니다. 압축 NFT가 업데이트되거나 전송될 때마다, 관련된 리프와 그 증명이 변경됩니다.
 
@@ -125,23 +125,23 @@ Merkle 트리의 각 리프에 대해, 주어진 리프가 해당 트리의 일�
 
 하나의 NFT 데이터를 가져오기 위해 매번 수백만 개의 트랜잭션을 탐색하는 것은 최상의 사용자 경험이 아닙니다. 따라서 압축 NFT는 최종 사용자로부터 이를 추상화하기 위해 실시간으로 해당 정보를 인덱싱하는 일부 RPC에 의존합니다. 압축 NFT를 가져올 수 있게 하는 결과 RPC API를 **Metaplex DAS API**라고 부릅니다.
 
-모든 RPC가 DAS API를 지원하는 것은 아닙니다. 따라서 애플리케이션에서 압축 NFT를 사용할 때 적절한 RPC를 선택하기 위해 ["Metaplex DAS API RPCs"](/rpc-providers) 페이지를 참조하는 것이 좋습니다.
+모든 RPC가 DAS API를 지원하는 것은 아닙니다. 따라서 애플리케이션에서 압축 NFT를 사용할 때 적절한 RPC를 선택하기 위해 ["Metaplex DAS API RPCs"](/ko/rpc-providers) 페이지를 참조하는 것이 좋습니다.
 
-이에 대해서는 고급 ["NFT 데이터 저장 및 인덱싱"](/bubblegum/stored-nft-data) 가이드에서 더 자세히 다룹니다.
+이에 대해서는 고급 ["NFT 데이터 저장 및 인덱싱"](/ko/smart-contracts/bubblegum-v2/stored-nft-data) 가이드에서 더 자세히 다룹니다.
 
 ## 기능
 
 NFT 데이터가 계정 내부에 존재하지 않더라도 압축 NFT에 대해 다양한 작업을 수행할 수 있습니다. 이는 현재 NFT 데이터를 요청하고 해싱된 리프가 Merkle 트리에서 유효한지 확인함으로써 가능합니다. 따라서 압축 NFT에서 다음 작업을 수행할 수 있습니다:
 
-- 관련 컬렉션이 있거나 없는 [cNFT 발행](/bubblegum/mint-cnfts).
-- [cNFT 전송](/bubblegum/transfer-cnfts).
-- [cNFT 데이터 업데이트](/bubblegum/update-cnfts).
-- [cNFT 소각](/bubblegum/burn-cnfts).
-- [cNFT를 일반 NFT로 압축 해제](/bubblegum/decompress-cnfts). 이는 기존 스마트 컨트랙트와의 상호 운용성을 가능하게 하지만 렌트 수수료가 있는 온체인 계정을 생성합니다.
-- [cNFT 위임](/bubblegum/delegate-cnfts).
-- [cNFT 컬렉션 검증 및 검증 취소](/bubblegum/verify-collections).
-- [cNFT 크리에이터 검증 및 검증 취소](/bubblegum/verify-creators).
+- 관련 컬렉션이 있거나 없는 [cNFT 발행](/ko/smart-contracts/bubblegum/mint-cnfts).
+- [cNFT 전송](/ko/smart-contracts/bubblegum/transfer-cnfts).
+- [cNFT 데이터 업데이트](/ko/smart-contracts/bubblegum/update-cnfts).
+- [cNFT 소각](/ko/smart-contracts/bubblegum/burn-cnfts).
+- [cNFT를 일반 NFT로 압축 해제](/ko/smart-contracts/bubblegum/decompress-cnfts). 이는 기존 스마트 컨트랙트와의 상호 운용성을 가능하게 하지만 렌트 수수료가 있는 온체인 계정을 생성합니다.
+- [cNFT 위임](/ko/smart-contracts/bubblegum/delegate-cnfts).
+- [cNFT 컬렉션 검증 및 검증 취소](/ko/smart-contracts/bubblegum/verify-collections).
+- [cNFT 크리에이터 검증 및 검증 취소](/ko/smart-contracts/bubblegum/verify-creators).
 
 ## 다음 단계
 
-이제 압축 NFT가 어떻게 작동하는지 높은 수준에서 알게 되었으므로, 압축 NFT와 상호작용하는 데 사용할 수 있는 다양한 언어/프레임워크를 열거하는 [시작하기](/bubblegum/getting-started) 페이지를 확인하는 것이 좋습니다. 그 후, 다양한 [기능 페이지](/bubblegum/create-trees)를 사용하여 cNFT에서 수행할 수 있는 특정 작업에 대해 자세히 알아볼 수 있습니다. 마지막으로, [고급 가이드](/bubblegum/concurrent-merkle-trees)도 cNFT와 Merkle 트리에 대한 지식을 심화시킬 수 있습니다.
+이제 압축 NFT가 어떻게 작동하는지 높은 수준에서 알게 되었으므로, 압축 NFT와 상호작용하는 데 사용할 수 있는 다양한 언어/프레임워크를 열거하는 [시작하기](/ko/smart-contracts/bubblegum/getting-started) 페이지를 확인하는 것이 좋습니다. 그 후, 다양한 [기능 페이지](/ko/smart-contracts/bubblegum/create-trees)를 사용하여 cNFT에서 수행할 수 있는 특정 작업에 대해 자세히 알아볼 수 있습니다. 마지막으로, [고급 가이드](/ko/smart-contracts/bubblegum-v2/concurrent-merkle-trees)도 cNFT와 Merkle 트리에 대한 지식을 심화시킬 수 있습니다.

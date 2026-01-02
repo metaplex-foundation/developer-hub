@@ -251,4 +251,4 @@ addMetadata();
 
 ## 下一步是什么？
 
-本指南帮助您向 Solana 代币添加元数据，从这里您可以前往 [Token Metadata 程序](/zh/token-metadata) 并查看在一步中初始化并向您的代币添加元数据的辅助函数，使用非同质化代币以及与 Token Metadata 程序交互的各种其他方式。
+本指南帮助您向 Solana 代币添加元数据，从这里您可以前往 [Token Metadata 程序](/zh/smart-contracts/token-metadata) 并查看在一步中初始化并向您的代币添加元数据的辅助函数，使用非同质化代币以及与 Token Metadata 程序交互的各种其他方式。

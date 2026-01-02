@@ -86,7 +86,7 @@ DAS는 블록체인에 전송되는 특정 생명주기 지시사항 중에 데�
 
 Metaplex DAS에 대해 더 알아보려면 다음 페이지를 방문하세요:
 
-- [Metaplex DAS API](/das-api)
+- [Metaplex DAS API](/ko/dev-tools/das-api)
 - [Metaplex DAS API Github](https://github.com/metaplex-foundation/digital-asset-standard-api)
 - [Metaplex Digital Asset RPC Infrastructure Github](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)
 

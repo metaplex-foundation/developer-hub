@@ -60,7 +60,7 @@ description: Core Candy Machine 프로그램과 민팅 경험을 만드는 데 �
 - `name`: 자산의 이름입니다.
 - `uri`: 자산의 [JSON 메타데이터](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard)를 가리키는 URI입니다. 이는 JSON 메타데이터가 이미 온체인(예: Arweave, IPFS) 또는 오프체인(예: AWS, 자체 서버) 스토리지 제공업체를 통해 업로드되었음을 의미합니다. Sugar나 JS SDK와 같이 Candy Machine을 생성하는 데 사용할 수 있는 도구들이 이를 위한 헬퍼를 제공합니다.
 
-다른 모든 매개변수는 자산 간에 공유되므로 반복을 피하기 위해 Candy Machine의 설정에 직접 보관됩니다. 자세한 내용은 [아이템 삽입](/core-candy-machine/insert-items)을 참조하세요.
+다른 모든 매개변수는 자산 간에 공유되므로 반복을 피하기 위해 Candy Machine의 설정에 직접 보관됩니다. 자세한 내용은 [아이템 삽입](/ko/smart-contracts/core-candy-machine/insert-items)을 참조하세요.
 
 이 시점에서는 아직 실제 자산이 생성되지 않았다는 점에 주목하세요. 단순히 민팅 시간에 **온디맨드로 자산을 생성**하는 데 필요한 모든 데이터로 Candy Machine을 로드하고 있을 뿐입니다. 이것이 다음 단계로 이어집니다.
 
@@ -101,9 +101,9 @@ description: Core Candy Machine 프로그램과 민팅 경험을 만드는 데 �
 {% edge from="mint-3" to="nft-3" path="bezier" /%}
 {% /diagram %}
 
-Candy Machine이 로드되고 모든 사전 구성된 조건이 충족되면 사용자는 이를 통해 자산을 민팅하기 시작할 수 있습니다. 자산이 Solana 블록체인에 생성되는 것은 바로 이 시점입니다. 민팅하기 전에 일부 사용자는 Captcha를 수행하거나 Merkle Proof를 전송하는 등의 추가 검증 단계를 수행해야 할 수도 있습니다. 자세한 내용은 [민팅](/core-candy-machine/mint)을 참조하세요.
+Candy Machine이 로드되고 모든 사전 구성된 조건이 충족되면 사용자는 이를 통해 자산을 민팅하기 시작할 수 있습니다. 자산이 Solana 블록체인에 생성되는 것은 바로 이 시점입니다. 민팅하기 전에 일부 사용자는 Captcha를 수행하거나 Merkle Proof를 전송하는 등의 추가 검증 단계를 수행해야 할 수도 있습니다. 자세한 내용은 [민팅](/ko/smart-contracts/core-candy-machine/mint)을 참조하세요.
 
-Candy Machine에서 모든 자산이 민팅되면 그 목적을 다했으므로 안전하게 삭제하여 블록체인의 일부 저장 공간을 확보하고 일부 임대료를 회수할 수 있습니다. 자세한 내용은 [Candy Machine 철회](/core-candy-machine/withdrawing-a-candy-machine)를 참조하세요.
+Candy Machine에서 모든 자산이 민팅되면 그 목적을 다했으므로 안전하게 삭제하여 블록체인의 일부 저장 공간을 확보하고 일부 임대료를 회수할 수 있습니다. 자세한 내용은 [Candy Machine 철회](/ko/smart-contracts/core-candy-machine/withdrawing-a-candy-machine)를 참조하세요.
 
 {% diagram %}
 {% node #action-1 label="4. 삭제" theme="pink" /%}
@@ -146,7 +146,7 @@ MPL Core 자산의 온체인 계정 구조입니다. [링크](https://github.com
 
 이제 Core Candy Machine이 어떻게 작동하는지 이해했으니, 창작자가 Core Candy Machine의 민팅 프로세스를 보호하고 사용자 정의할 수 있는 다양한 방법을 살펴보겠습니다.
 
-창작자는 "**Guards**"라고 부르는 것을 사용하여 Core Candy Machine에 다양한 기능을 추가할 수 있습니다. Metaplex Core Candy Machine은 [**총 23개의 기본 가드**](/core-candy-machine/guards)와 함께 제공되는 **Candy Guard**라는 추가 Solana 프로그램을 제공합니다. 추가 프로그램을 사용함으로써, 고급 개발자들이 기본 Candy Guard 프로그램을 포크하여 자신만의 커스텀 가드를 생성하면서도 여전히 메인 Candy Machine 프로그램에 의존할 수 있도록 합니다.
+창작자는 "**Guards**"라고 부르는 것을 사용하여 Core Candy Machine에 다양한 기능을 추가할 수 있습니다. Metaplex Core Candy Machine은 [**총 23개의 기본 가드**](/ko/smart-contracts/core-candy-machine/guards)와 함께 제공되는 **Candy Guard**라는 추가 Solana 프로그램을 제공합니다. 추가 프로그램을 사용함으로써, 고급 개발자들이 기본 Candy Guard 프로그램을 포크하여 자신만의 커스텀 가드를 생성하면서도 여전히 메인 Candy Machine 프로그램에 의존할 수 있도록 합니다.
 
 각 가드는 원하는 대로 활성화하고 구성할 수 있으므로 창작자는 필요한 기능을 선택할 수 있습니다. 모든 가드를 비활성화하는 것은 누구나 언제든지 무료로 NFT를 민팅할 수 있도록 허용하는 것과 같으며, 이는 우리가 원하는 것이 아닐 수 있습니다. 그러니 몇 가지 가드를 살펴보고 더 현실적인 예를 만들어보겠습니다.
 
@@ -206,5 +206,5 @@ SOL 부족 {% .text-xs %} \
 {% edge from="mint-4" to="fail-4" path="bezier" /%}
 {% /diagram %}
 
-보시다시피, 23개 이상의 기본 가드와 커스텀 가드 생성 기능을 통해 창작자는 자신에게 중요한 기능을 선별하고 완벽한 Candy Machine을 구성할 수 있습니다. 이는 너무나 강력한 기능이어서 많은 페이지를 할애했습니다. 가드에 대해 더 알아보기 위한 최고의 시작점은 [Candy Guards](/core-candy-machine/guards) 페이지입니다.
+보시다시피, 23개 이상의 기본 가드와 커스텀 가드 생성 기능을 통해 창작자는 자신에게 중요한 기능을 선별하고 완벽한 Candy Machine을 구성할 수 있습니다. 이는 너무나 강력한 기능이어서 많은 페이지를 할애했습니다. 가드에 대해 더 알아보기 위한 최고의 시작점은 [Candy Guards](/ko/smart-contracts/core-candy-machine/guards) 페이지입니다.
 최신 변경 사항을 문서화합니다.

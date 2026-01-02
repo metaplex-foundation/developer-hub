@@ -41,7 +41,7 @@ npm install \
 
 ## Umi Setup
 
-The Genesis SDK is built on top of [Umi](/umi), Metaplex's JavaScript framework for Solana. If you haven't set up Umi yet, check out the [Umi Getting Started](/umi/getting-started) guide.
+The Genesis SDK is built on top of [Umi](/dev-tools/umi), Metaplex's JavaScript framework for Solana. If you haven't set up Umi yet, check out the [Umi Getting Started](/dev-tools/umi/getting-started) guide.
 
 ### Basic Configuration
 

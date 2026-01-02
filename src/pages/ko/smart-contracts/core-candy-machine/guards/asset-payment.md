@@ -10,7 +10,7 @@ description: "Core Candy Machine의 'Asset Payment' 가드는 Core Candy Machine
 
 지불자가 필수 컬렉션의 Asset을 소유하지 않은 경우 민팅이 실패합니다.
 
-민팅자가 하나 이상의 Asset을 지불하게 하려면 [Asset Payment Multi Guard](/core-candy-machine/guards/asset-payment-multi)를 사용할 수 있습니다.
+민팅자가 하나 이상의 Asset을 지불하게 하려면 [Asset Payment Multi Guard](/ko/smart-contracts/core-candy-machine/guards/asset-payment-multi)를 사용할 수 있습니다.
 
 {% diagram  %}
 

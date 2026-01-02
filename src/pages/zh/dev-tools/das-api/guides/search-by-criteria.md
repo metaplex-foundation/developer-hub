@@ -235,22 +235,22 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ## 提示和最佳实践
 
 1. **从简单开始**：从基本条件开始，逐步增加复杂性
-2. **使用[分页](/zh/das-api/guides/pagination)**：对于大结果集，实现适当的分页
+2. **使用[分页](/zh/dev-tools/das-api/guides/pagination)**：对于大结果集，实现适当的分页
 3. **缓存结果**：存储频繁访问的搜索结果
 4. **明智地组合过滤器**：过多的过滤器可能导致没有结果
 5. **处理空结果**：始终检查空结果集，但请记住某些资产可能被隐藏或尚未索引
-6. **使用[显示选项](/zh/das-api/guides/display-options)**：根据您的用例包含相关的显示选项
+6. **使用[显示选项](/zh/dev-tools/das-api/guides/display-options)**：根据您的用例包含相关的显示选项
 7. **对结果进行排序**：使用排序以有意义的方式呈现数据
 8. **测试查询**：使用已知数据验证您的搜索条件
 
 ## 后续步骤
 
-- [获取集合中的所有代币](/zh/das-api/guides/get-collection-nfts) - 从特定集合检索所有资产
-- [按所有者获取 NFT](/zh/das-api/guides/get-nfts-by-owner) - 查找钱包拥有的所有 NFT
-- [按创建者获取资产](/zh/das-api/methods/get-assets-by-creator) - 发现特定钱包创建的所有代币
+- [获取集合中的所有代币](/zh/dev-tools/das-api/guides/get-collection-nfts) - 从特定集合检索所有资产
+- [按所有者获取 NFT](/zh/dev-tools/das-api/guides/get-nfts-by-owner) - 查找钱包拥有的所有 NFT
+- [按创建者获取资产](/zh/dev-tools/das-api/methods/get-assets-by-creator) - 发现特定钱包创建的所有代币
 
 ## 延伸阅读
 
-- [按创建者获取资产](/zh/das-api/methods/get-assets-by-creator) - 发现特定钱包创建的所有代币
-- [获取集合中的所有代币](/zh/das-api/guides/get-collection-nfts) - 从特定集合检索所有资产
-- [查找压缩 NFT](/zh/das-api/guides/find-compressed-nfts) - 发现和使用压缩 NFT
+- [按创建者获取资产](/zh/dev-tools/das-api/methods/get-assets-by-creator) - 发现特定钱包创建的所有代币
+- [获取集合中的所有代币](/zh/dev-tools/das-api/guides/get-collection-nfts) - 从特定集合检索所有资产
+- [查找压缩 NFT](/zh/dev-tools/das-api/guides/find-compressed-nfts) - 发现和使用压缩 NFT

@@ -6,8 +6,8 @@ description: Learn how to create your Core Candy Machine and it's various settin
 
 ## Prerequisites
 
-- [Prepared Assets](/core-candy-machine/preparing-assets)
-- [Create Core Collection](/core/collections#creating-a-collection)
+- [Prepared Assets](/smart-contracts/core-candy-machine/preparing-assets)
+- [Create Core Collection](/smart-contracts/core/collections#creating-a-collection)
 
 If you wish to create your Core Candy Machine Assets into a collection (new or existing) you will need to supply the Core Collection upon creation of the Core Candy Machine.
 
@@ -18,7 +18,7 @@ You can also create Core Candy Machines using the MPLX CLI with an interactive w
 ```bash
 mplx cm create --wizard
 ```
-This provides step-by-step guidance, asset validation, and automatic deployment. See the [CLI Candy Machine documentation](/cli/cm) for detailed instructions.
+This provides step-by-step guidance, asset validation, and automatic deployment. See the [CLI Candy Machine documentation](/dev-tools/cli/cm) for detailed instructions.
 {% /callout %}
 
 {% dialect-switcher title="Create a Core Candy Machine" %}

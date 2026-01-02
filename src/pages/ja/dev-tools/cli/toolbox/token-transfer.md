@@ -1,5 +1,6 @@
 ---
 title: トークン転送
+metaTitle: トークン転送 | Metaplex CLI
 description: 宛先アドレスにトークンを転送
 ---
 

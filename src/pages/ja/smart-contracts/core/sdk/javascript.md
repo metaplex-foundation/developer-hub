@@ -4,7 +4,7 @@ metaTitle: Javascript SDK | MPL-Core
 description: MPL-Core Javascript SDKを実行するためのプロジェクトのセットアップ方法を学びます。
 ---
 
-MetaplexはMPL-Coreプログラムとやり取りするために使用できるJavaScriptライブラリを提供しています。[Umiフレームワーク](/ja/umi)のおかげで、多くの強制的な依存関係なしに配布されるため、任意のJavaScriptプロジェクトで使用できる軽量なライブラリを提供します。
+MetaplexはMPL-Coreプログラムとやり取りするために使用できるJavaScriptライブラリを提供しています。[Umiフレームワーク](/ja/dev-tools/umi)のおかげで、多くの強制的な依存関係なしに配布されるため、任意のJavaScriptプロジェクトで使用できる軽量なライブラリを提供します。
 
 はじめに、[Umiフレームワークをインストール](/ja/dev-tools/umi/getting-started)し、MPL-Core JavaScriptライブラリをインストールする必要があります。
 

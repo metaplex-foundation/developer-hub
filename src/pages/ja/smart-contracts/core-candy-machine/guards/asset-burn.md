@@ -8,7 +8,7 @@ description: "Core Candy Machineの「Asset Burn」ガードは、事前定義�
 
 **Asset Burn**ガードは、事前定義されたコレクションの保有者へのミントを制限し、保有者のアセットをバーンします。したがって、バーンするアセットのアドレスは、ミント時に支払者によって提供される必要があります。
 
-複数のアセットをバーンする場合は、[Asset Burn Multiガード](/core-candy-machine/guards/asset-burn-multi)を使用できます。
+複数のアセットをバーンする場合は、[Asset Burn Multiガード](/ja/smart-contracts/core-candy-machine/guards/asset-burn-multi)を使用できます。
 
 {% diagram  %}
 

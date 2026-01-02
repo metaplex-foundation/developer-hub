@@ -36,7 +36,6 @@
     "shank": "Shank",
     "amman": "Amman",
     "sugar": "Sugar",
-    "aura": "Aura",
     "legacyDocumentation": "Legacy Documentation",
     "guides": "Guides"
   },
@@ -62,7 +61,6 @@
     "mpl": "MPL",
     "devTools": "Dev Tools",
     "guides": "Guides",
-    "aura": "Aura",
     "tokens": "Tokens",
     "nfts": "NFTs",
     "smartContracts": "Smart Contracts",

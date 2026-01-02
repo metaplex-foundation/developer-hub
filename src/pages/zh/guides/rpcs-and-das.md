@@ -86,7 +86,7 @@ DAS 能够在将某些生命周期指令发送到区块链期间同步数据的�
 
 要了解有关 Metaplex DAS 的更多信息，您可以访问以下页面：
 
-- [Metaplex DAS API](/zh/das-api)
+- [Metaplex DAS API](/zh/dev-tools/das-api)
 - [Metaplex DAS API Github](https://github.com/metaplex-foundation/digital-asset-standard-api)
 - [Metaplex Digital Asset RPC Infrastructure Github](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)
 

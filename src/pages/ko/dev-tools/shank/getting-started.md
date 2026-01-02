@@ -191,7 +191,7 @@ shank idl --out-dir ./idl --crate-root ./ --program-id MyProgram1111111111111111
 
 이제 Shank가 설정되고 IDL 파일을 생성하고 있으므로, 다음을 수행할 수 있습니다:
 
-1. **[매크로 참조](/ko/shank/macros)**: 모든 Shank 매크로 및 속성에 대한 완전한 참조
+1. **[매크로 참조](/ko/dev-tools/shank/macros)**: 모든 Shank 매크로 및 속성에 대한 완전한 참조
 2. **[Kinobi와의 통합](/ko/dev-tools/umi/kinobi)**: Umi와 호환되는 현대적인 TypeScript SDK 생성 (권장)
 3. **[Solita](https://github.com/metaplex-foundation/solita)**: web3.js와 호환되는 레거시 TypeScript SDK 생성
 

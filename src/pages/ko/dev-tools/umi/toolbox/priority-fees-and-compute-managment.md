@@ -35,5 +35,5 @@ await transactionBuilder()
 ```
 
 {% callout title="유닛과 마이크로람포트 계산 방법 가이드" type="note" %}
-`microLamports`와 `units`에 대한 적절한 숫자를 선택할 수 있도록 계산에 사용할 수 있는 다양한 RPC 호출을 안내하는 [간단한 가이드](/umi/guides/optimal-transactions-with-compute-units-and-priority-fees)가 작성되었습니다.
+`microLamports`와 `units`에 대한 적절한 숫자를 선택할 수 있도록 계산에 사용할 수 있는 다양한 RPC 호출을 안내하는 [간단한 가이드](/ko/dev-tools/umi/guides/optimal-transactions-with-compute-units-and-priority-fees)가 작성되었습니다.
 {% /callout %}

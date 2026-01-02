@@ -1,5 +1,6 @@
 ---
 title: アセットの作成
+metaTitle: アセットの作成 | Metaplex CLI
 description: 異なる方法を使用してMPLコアアセットを作成
 ---
 

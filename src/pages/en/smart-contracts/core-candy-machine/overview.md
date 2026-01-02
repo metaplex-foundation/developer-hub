@@ -60,7 +60,7 @@ Each item is composed of two parameters:
 - A `name`: The name of the Asset.
 - A `uri`: The URI pointing to the [JSON metadata](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard) of the Asset. This implies that the JSON metadata has already been uploaded via either an onchain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider. The tools that you can use to create the Candy Machine, like Sugar or the JS SDK offer helpers to do so.
 
-All other parameters are shared between Assets and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/core-candy-machine/insert-items) for more details.
+All other parameters are shared between Assets and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/smart-contracts/core-candy-machine/insert-items) for more details.
 
 Notice how, at this point, no real Assets have been created yet. We are simply loading the Candy Machine with all the data it needs to **create Assets on-demand**, at mint time. Which brings us to the next step.
 
@@ -101,9 +101,9 @@ Notice how, at this point, no real Assets have been created yet. We are simply l
 {% edge from="mint-3" to="nft-3" path="bezier" /%}
 {% /diagram %}
 
-Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting Assets from it. It’s only at this point that an Asset is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/core-candy-machine/mint) for more details.
+Once the Candy Machine is loaded and all pre-configured conditions are met, users can start minting Assets from it. It’s only at this point that an Asset is created on the Solana blockchain. Note that, before minting, some users may need to perform additional verification steps — such as doing a Captcha or sending a Merkle Proof. See [Minting](/smart-contracts/core-candy-machine/mint) for more details.
 
-Once all Assets have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Withdrawing a Candy Machine](/core-candy-machine/withdrawing-a-candy-machine) for more details.
+Once all Assets have been minted from a Candy Machine, it has served its purpose and can safely be deleted to free some storage space on the blockchain and claim some rent back. See [Withdrawing a Candy Machine](/smart-contracts/core-candy-machine/withdrawing-a-candy-machine) for more details.
 
 {% diagram %}
 {% node #action-1 label="4. Delete" theme="pink" /%}
@@ -146,7 +146,7 @@ The onchain account structure of an MPL Core Asset. [Link](https://github.com/me
 
 Now that we understand how Core Candy Machines work, let’s dig into the various ways creators can protect and customize the mint process of their Core Candy Machine.
 
-Creators can use what we call “**Guards**” to add various features to their Core Candy Machine. The Metaplex Core Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 23 default guards**](/core-candy-machine/guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
+Creators can use what we call “**Guards**” to add various features to their Core Candy Machine. The Metaplex Core Candy Machine ships with an additional Solana Program called **Candy Guard** that ships with [**a total of 23 default guards**](/smart-contracts/core-candy-machine/guards). By using an additional program, it allows advanced developers to fork the default Candy Guard program to create their own custom guards whilst still being able to rely on the main Candy Machine program.
 
 Each guard can be enabled and configured at will so creators can pick and choose the features they need. Disabling all guards would be equivalent to allowing anyone to mint our NFTs for free at any time, which is likely not what we want. So let’s have a look at a few guards to create a more realistic example.
 
@@ -206,5 +206,5 @@ Bot tax charged
 {% edge from="mint-4" to="fail-4" path="bezier" /%}
 {% /diagram %}
 
-As you can see, with more than 23 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/core-candy-machine/guards) page.
+As you can see, with more than 23 default guards and the ability to create custom guards, it enables creators to cherry-pick the features that matters to them and compose their perfect Candy Machine. This is such a powerful feature that we’ve dedicated many pages to it. The best place to start to know more about guards is the [Candy Guards](/smart-contracts/core-candy-machine/guards) page.
 Documents the latest changes.

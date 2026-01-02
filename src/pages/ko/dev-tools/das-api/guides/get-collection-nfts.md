@@ -87,7 +87,7 @@ curl -X POST <ENDPOINT> \
 
 ## 방법 2: 컬렉션 필터로 검색 자산 사용
 
-더 구체적인 쿼리를 위해 컬렉션 그룹화와 함께 `searchAssets`를 사용할 수도 있습니다. 자세한 내용은 [조건별 자산 검색](/das-api/guides/search-by-criteria)을 참조하세요.
+더 구체적인 쿼리를 위해 컬렉션 그룹화와 함께 `searchAssets`를 사용할 수도 있습니다. 자세한 내용은 [조건별 자산 검색](/ko/dev-tools/das-api/guides/search-by-criteria)을 참조하세요.
 
 {% totem %}
 {% totem-accordion title="UMI 예제" %}
@@ -274,14 +274,14 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 팁과 모범 사례
 
-1. **대규모 컬렉션의 경우 [페이지네이션](/das-api/guides/pagination) 사용** - 속도 제한 방지
+1. **대규모 컬렉션의 경우 [페이지네이션](/ko/dev-tools/das-api/guides/pagination) 사용** - 속도 제한 방지
 2. **가능한 경우 결과 캐싱** - 성능 향상
-3. **추가 메타데이터를 얻으려면 [표시 옵션](/das-api/guides/display-options) 포함**
+3. **추가 메타데이터를 얻으려면 [표시 옵션](/ko/dev-tools/das-api/display-options) 포함**
 4. **의미 있는 방식으로 데이터를 제시하기 위해 결과 정렬**
 5. **컬렉션 주소가 유효하지 않을 때 오류를 적절히 처리**
 
 ## 다음 단계
 
-- [크리에이터별 자산 가져오기](/das-api/methods/get-assets-by-creator) - 특정 지갑이 생성한 모든 토큰 검색
-- [지갑의 모든 토큰 가져오기](/das-api/guides/get-wallet-tokens) - 지갑이 소유한 모든 것 보기
-- [여러 조건으로 자산 검색](/das-api/guides/search-by-criteria) - 고급 쿼리를 위해 여러 필터 결합
+- [크리에이터별 자산 가져오기](/ko/dev-tools/das-api/methods/get-assets-by-creator) - 특정 지갑이 생성한 모든 토큰 검색
+- [지갑의 모든 토큰 가져오기](/ko/dev-tools/das-api/guides/get-wallet-tokens) - 지갑이 소유한 모든 것 보기
+- [여러 조건으로 자산 검색](/ko/dev-tools/das-api/guides/search-by-criteria) - 고급 쿼리를 위해 여러 필터 결합

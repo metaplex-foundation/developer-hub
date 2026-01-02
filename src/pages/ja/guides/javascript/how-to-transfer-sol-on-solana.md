@@ -73,7 +73,7 @@ transfer()
 
 ## Umiのセットアップ
 
-この例では、`generatedSigner()`を使用してUmiをセットアップします。ウォレットや署名者を異なる方法でセットアップしたい場合は、[**Umiへの接続**](/umi/connecting-to-umi)ガイドをご確認ください。
+この例では、`generatedSigner()`を使用してUmiをセットアップします。ウォレットや署名者を異なる方法でセットアップしたい場合は、[**Umiへの接続**](/ja/dev-tools/umi/getting-started)ガイドをご確認ください。
 
 ### 新しいウォレットの生成
 

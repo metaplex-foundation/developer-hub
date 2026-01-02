@@ -104,7 +104,7 @@ Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하
 
 ## 대체 가능한 자산 경매
 
-지금까지 Auction House 계정을 사용하여 자산을 교환하는 것에 대해 이야기했지만, 어떤 유형의 자산을 그런 방식으로 교환할 수 있는지에 대해서는 자세히 다루지 않았습니다. Auction House에 목록에 게시할 수 있는 가장 인기 있는 자산은 [Non-Fungible Tokens (NFT)](/token-metadata/token-standard#the-non-fungible-standard)입니다.
+지금까지 Auction House 계정을 사용하여 자산을 교환하는 것에 대해 이야기했지만, 어떤 유형의 자산을 그런 방식으로 교환할 수 있는지에 대해서는 자세히 다루지 않았습니다. Auction House에 목록에 게시할 수 있는 가장 인기 있는 자산은 [Non-Fungible Tokens (NFT)](/ko/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)입니다.
 
 그러나 이것이 Auction House 프로그램의 혜택을 받을 수 있는 유일한 자산은 아닙니다. 사실, 자산은 민트 계정에 메타데이터 계정이 첨부되어 있는 한 모든 SPL 토큰이 될 수 있습니다. SPL 토큰 및 메타데이터 계정에 대해 자세히 알고 싶다면 [토큰 메타데이터 프로그램의 개요에서 자세히 읽을 수 있습니다](/token-metadata).
 

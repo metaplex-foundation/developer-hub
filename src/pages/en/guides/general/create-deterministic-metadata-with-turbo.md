@@ -31,7 +31,7 @@ npm i @ardrive/turbo-sdk
 
 In this example, we will show you how to upload metadata in a deterministic way. To do so, you'll need to prepare all the assets before starting. 
 
-To generate the metadata, you can use [one of these methods](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata following an incremental naming convention starting from 0 like this:
+To generate the metadata, you can use [one of these methods](/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata following an incremental naming convention starting from 0 like this:
 
 ```
 metadata/
@@ -41,7 +41,7 @@ metadata/
 ├─ ...
 ```
 
-**Note**: When creating the metadata, make sure to follow the proper [JSON schema for NFTs](/token-metadata/token-standard#the-non-fungible-standard)!
+**Note**: When creating the metadata, make sure to follow the proper [JSON schema for NFTs](/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)!
 
 ## Setting up Turbo 
 
@@ -64,7 +64,6 @@ const turbo = TurboFactory.authenticated({
 ```
 
 **Note**: In this example, we explicitly provide the `gatewayUrl`, `paymentServiceConfig`, and `uploadServiceConfig` because we want to configure the environment to work on devnet. For mainnet usage, you can leave these fields empty, and Turbo will default to the mainnet endpoints.
-To gain access to the Metaplex Aura network on the Solana and Eclipse blockchains you can visit the Aura App for an endpoint and API key [here](https://aura-app.metaplex.com/).
 
 ## Upload the Metadata
 

@@ -4,7 +4,7 @@ metaTitle: 圧縮NFTのミント | Bubblegum
 description: Bubblegumで圧縮NFTをミントする方法を学びます。
 ---
 {% callout title="Bubblegum v2" type="note" %}
-このページはBubblegum v1に固有です。拡張された機能セットについては、Bubblegum v2の使用をお勧めします。Bubblegum v2を使用している場合は、詳細について[Bubblegum v2](/ja/bubblegum-v2/mint-cnfts)のドキュメントを参照してください。
+このページはBubblegum v1に固有です。拡張された機能セットについては、Bubblegum v2の使用をお勧めします。Bubblegum v2を使用している場合は、詳細について[Bubblegum v2](/ja/smart-contracts/bubblegum-v2/mint-cnfts)のドキュメントを参照してください。
 {% /callout %}
 
 [前のページ](/ja/smart-contracts/bubblegum/create-trees)では、圧縮NFTをミントするためにBubblegum Treeが必要であり、その作成方法を見てきました。今度は、指定されたBubblegum Treeから圧縮NFTをミントする方法を見てみましょう。 {% .lead %}
@@ -86,7 +86,7 @@ const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
 
 圧縮NFTがミントされた_後に_コレクションを設定および検証することは可能ですが、Bubblegumプログラムは圧縮NFTを指定されたコレクションに直接ミントする便利な命令を提供します。BubblegumはMetaplex Token MetadataコレクションNFTを使用して圧縮NFTをグループ化します。この命令は**MintToCollectionV1**と呼ばれ、**MintV1**命令と同じパラメータを使用しますが、以下のパラメータが追加されます：
 
-- **Collection Mint**: 圧縮NFTが属する[Token Metadata Collection NFT](https://developers.metaplex.com/ja/smart-contracts/token-metadata/collections#creating-collection-nfts)のミントアドレス。
+- **Collection Mint**: 圧縮NFTが属する[Token Metadata Collection NFT](/ja/smart-contracts/token-metadata/collections#creating-collection-nfts)のミントアドレス。
 - **Collection Authority**: 指定されたCollection NFTを管理することが許可された権限。これは、Collection NFTのupdate authorityまたは委任されたコレクション権限のいずれかです。Bubblegum Treeが公開されているかどうかに関係なく、この権限はトランザクションに署名する必要があります。
 - **Collection Authority Record Pda**: 委任されたコレクション権限を使用する場合、権限がCollection NFTを管理することが許可されていることを確認するために、Delegate Record PDAを提供する必要があります。これは、新しい「Metadata Delegate」PDAまたはレガシーの「Collection Authority Record」PDAのいずれかを使用できます。
 

@@ -421,7 +421,7 @@ await addCollectionPlugin(umi, {
 
 ## Metaplexが提供するデフォルトOracle
 
-まれに、[ソウルバウンドNFT](/core/guides/create-soulbound-nft-asset)のように常に特定のイベントを拒否/承認するOracleが有用なケースがあります。そのために、次のOracleがデプロイされ、誰でも利用できます。
+まれに、[ソウルバウンドNFT](/ja/smart-contracts/core/guides/create-soulbound-nft-asset)のように常に特定のイベントを拒否/承認するOracleが有用なケースがあります。そのために、次のOracleがデプロイされ、誰でも利用できます。
 
 - **Transfer Oracle**: 移転を常に拒否。`AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
 - **Update Oracle**: 更新を常に拒否。`6cKyMV4toCVCEtvh6Sh5RQ1fevynvBDByaQP4ufz1Zj6`

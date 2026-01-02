@@ -1,10 +1,10 @@
 ---
 title: MPL-Bubblegum JavaScript SDK
 metaTitle: JavaScript SDK | MPL-Bubblegum
-description: MPL-Bubblegum JavaScript SDKを実行するためのプロジェクト設定方法を学びます。
+description: MPL-Bubblegum V2 JavaScript SDKを実行するためのプロジェクト設定方法を学びます。
 ---
 
-MetaplexはMPL-Bubblegumプログラムとの相互作用に使用できるJavaScriptライブラリを提供しています。[Umiフレームワーク](/ja/umi)のおかげで、多くの固有の依存関係なしに配布され、任意のJavaScriptプロジェクトで使用できる軽量なライブラリを提供します。
+MetaplexはMPL-Bubblegumプログラムとの相互作用に使用できるJavaScriptライブラリを提供しています。[Umiフレームワーク](/ja/dev-tools/umi)のおかげで、多くの固有の依存関係なしに配布され、任意のJavaScriptプロジェクトで使用できる軽量なライブラリを提供します。
 
 開始するには、[Umiフレームワークをインストール](/ja/dev-tools/umi/getting-started)し、MPL-Bubblegum JavaScriptライブラリをインストールする必要があります。
 

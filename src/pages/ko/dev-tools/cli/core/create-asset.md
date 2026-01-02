@@ -1,5 +1,6 @@
 ---
 title: 자산 생성
+metaTitle: 자산 생성 | Metaplex CLI
 description: 다양한 방법을 사용하여 MPL Core 자산 생성
 ---
 

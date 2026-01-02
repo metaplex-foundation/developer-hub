@@ -83,8 +83,6 @@ sugar airdrop --candy-machine 11111111111111111111111111111111
 ### 无守卫铸造
 对于没有守卫的 Candy Machine，使用 `mintFromCandyMachineV2`。此函数允许您直接将接收者指定为 `nftOwner`。
 
-要访问 Solana 和 Eclipse 区块链上的 Metaplex Aura 网络，您可以访问 [Aura App](https://aura-app.metaplex.com/) 获取端点和 API 密钥。
-
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
 
@@ -145,7 +143,7 @@ import {
 
 // 配置
 const RECIPIENT_ADDRESS = "Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV";
-const RPC_ENDPOINT = "https://devnet-aura.metaplex.com/<YOUR_API_KEY>";
+const RPC_ENDPOINT = "https://api.devnet.solana.com";
 
 (async () => {
   try {

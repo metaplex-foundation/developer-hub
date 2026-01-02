@@ -85,7 +85,7 @@ Whenever a new printed edition is created from a printable NFT, a few things hap
 
 ## Setting up a Master Edition NFT
 
-To create a printable NFT, we need to configure the **Print Supply** attribute of [the **Create** instruction](/token-metadata/mint#creating-accounts) of the Token Metadata program. This will configure the **Max Supply** attribute of the **Master Edition** account as seen in the previous section. This attribute can be:
+To create a printable NFT, we need to configure the **Print Supply** attribute of [the **Create** instruction](/smart-contracts/token-metadata/mint#creating-accounts) of the Token Metadata program. This will configure the **Max Supply** attribute of the **Master Edition** account as seen in the previous section. This attribute can be:
 
 - `Zero`: The NFT is not printable.
 - `Limited(x)`: The NFT is printable and has a fixed supply of `x` editions.

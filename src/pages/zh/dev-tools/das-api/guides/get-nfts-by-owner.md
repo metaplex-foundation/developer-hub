@@ -242,14 +242,14 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 ## 提示和最佳实践
 
 1. **使用接口过滤** 只获取 NFT（例如排除同质化代币）
-2. **实现[分页](/zh/das-api/guides/pagination)** 处理拥有大量 NFT 的钱包
+2. **实现[分页](/zh/dev-tools/das-api/guides/pagination)** 处理拥有大量 NFT 的钱包
 3. **缓存结果** 以提高频繁查询的性能
-4. **包含[显示选项](/zh/das-api/guides/display-options)** 以获取额外的元数据
+4. **包含[显示选项](/zh/dev-tools/das-api/guides/display-options)** 以获取额外的元数据
 5. **对结果进行排序** 以有意义的方式呈现数据
 6. **按集合过滤** 以关注特定 NFT 类型
 
 ## 延伸阅读
 
-- [按创建者获取资产](/zh/das-api/methods/get-assets-by-creator) - 发现特定地址创建的所有代币
-- [获取集合中的所有代币](/zh/das-api/guides/get-collection-nfts) - 从特定集合检索所有资产
-- [按多条件搜索资产](/zh/das-api/guides/search-by-criteria) - 组合多个过滤器进行高级查询
+- [按创建者获取资产](/zh/dev-tools/das-api/methods/get-assets-by-creator) - 发现特定地址创建的所有代币
+- [获取集合中的所有代币](/zh/dev-tools/das-api/guides/get-collection-nfts) - 从特定集合检索所有资产
+- [按多条件搜索资产](/zh/dev-tools/das-api/guides/search-by-criteria) - 组合多个过滤器进行高级查询

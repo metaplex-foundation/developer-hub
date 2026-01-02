@@ -438,7 +438,7 @@ JSON Metadata
 
 **可编程 NFT** 的引入是为了解决这个问题。它们是一种新的_可选_代币标准,**始终保持底层代币账户冻结**。这样,没有人可以在不通过 Token Metadata 程序的情况下转移、锁定或销毁可编程 NFT。
 
-然后由创作者定义自定义的特定于操作的授权规则,这些规则将由 Token Metadata 程序强制执行。这些在特殊的 **RuleSet** 账户中定义,该账户附加到元数据账户。这样的 RuleSet 的一个例子可以是尊重版税的程序地址的允许列表。RuleSet 是名为 [Token Auth Rules](/zh/token-auth-rules) 的新 Metaplex 程序的一部分。
+然后由创作者定义自定义的特定于操作的授权规则,这些规则将由 Token Metadata 程序强制执行。这些在特殊的 **RuleSet** 账户中定义,该账户附加到元数据账户。这样的 RuleSet 的一个例子可以是尊重版税的程序地址的允许列表。RuleSet 是名为 [Token Auth Rules](/zh/smart-contracts/token-auth-rules) 的新 Metaplex 程序的一部分。
 
 您可以[在此处阅读有关可编程 NFT 的更多信息](/zh/smart-contracts/token-metadata/pnfts)。
 

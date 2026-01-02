@@ -64,7 +64,6 @@ const turbo = TurboFactory.authenticated({
 ```
 
 **注意**：在此示例中，我们明确提供 `gatewayUrl`、`paymentServiceConfig` 和 `uploadServiceConfig`，因为我们想要配置环境以在 devnet 上工作。对于主网使用，您可以将这些字段留空，Turbo 将默认为主网端点。
-要访问 Solana 和 Eclipse 区块链上的 Metaplex Aura 网络，您可以访问 Aura App 获取端点和 API 密钥 [这里](https://aura-app.metaplex.com/)。
 
 ## 上传元数据
 

@@ -78,14 +78,14 @@ const response = await fetch('<ENDPOINT>', {
 
 ## ヒントとベストプラクティス
 
-1. **大きなコレクションには[ページネーション](/ja/das-api/guides/pagination)を使用**してレート制限を回避
+1. **大きなコレクションには[ページネーション](/ja/dev-tools/das-api/guides/pagination)を使用**してレート制限を回避
 2. **可能な場合は結果をキャッシュ**してパフォーマンスを向上
-3. **追加のメタデータを取得するために[表示オプション](/ja/das-api/guides/display-options)を含める**
+3. **追加のメタデータを取得するために[表示オプション](/ja/dev-tools/das-api/display-options)を含める**
 4. **意味のある方法でデータを表示するため結果をソート**
 5. **コレクションアドレスが無効な場合はエラーを適切に処理**
 
 ## 次のステップ
 
-- [クリエイター別にアセットを取得](/ja/das-api/methods/get-assets-by-creator) - 特定のウォレットによって作成されたすべてのトークンを発見
-- [ウォレット内のすべてのトークンを取得](/ja/das-api/guides/get-wallet-tokens) - ウォレットが所有するすべてを確認
-- [複数の条件でアセットを検索](/ja/das-api/guides/search-by-criteria) - 高度なクエリのために複数のフィルターを組み合わせる
+- [クリエイター別にアセットを取得](/ja/dev-tools/das-api/methods/get-assets-by-creator) - 特定のウォレットによって作成されたすべてのトークンを発見
+- [ウォレット内のすべてのトークンを取得](/ja/dev-tools/das-api/guides/get-wallet-tokens) - ウォレットが所有するすべてを確認
+- [複数の条件でアセットを検索](/ja/dev-tools/das-api/guides/search-by-criteria) - 高度なクエリのために複数のフィルターを組み合わせる

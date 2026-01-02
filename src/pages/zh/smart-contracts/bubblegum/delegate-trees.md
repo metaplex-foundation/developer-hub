@@ -6,7 +6,7 @@ description: 了解如何在Bubblegum上委托默克尔树。
 
 与压缩NFT的所有者可以批准委托权限类似，Bubblegum树的创建者也可以批准另一个账户代表他们执行操作。{% .lead %}
 
-一旦Bubblegum树的委托权限被批准，它将能够代表创建者[铸造压缩NFT](/zh/bubblegum/mint-cnfts)。请注意，这仅与私有树相关，因为任何人都可以在公开树上铸造。
+一旦Bubblegum树的委托权限被批准，它将能够代表创建者[铸造压缩NFT](/zh/smart-contracts/bubblegum/mint-cnfts)。请注意，这仅与私有树相关，因为任何人都可以在公开树上铸造。
 
 ## 批准树的委托权限
 

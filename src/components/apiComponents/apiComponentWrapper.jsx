@@ -1,6 +1,6 @@
 'use client'
 
-import apiMethods from '@/lib/api/aura/methods'
+import apiMethods from '@/lib/api/das/methods'
 import { useEffect, useState } from 'react'
 import { Fence } from '../Fence'
 import Spinner from '../icons/spinner'
