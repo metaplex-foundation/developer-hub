@@ -14,11 +14,11 @@ description: 学习如何使用Metaplex Core在Solana上创建和管理NFT。
 
 本节提供常见NFT操作的入门指南：
 
-- **[创建NFT](/nfts/create-nft)** - 创建具有自定义元数据的新NFT
-- **[获取NFT](/nfts/fetch-nft)** - 从区块链检索NFT数据
-- **[更新NFT](/nfts/update-nft)** - 更新NFT的名称和元数据
-- **[转移NFT](/nfts/transfer-nft)** - 在钱包之间转移NFT所有权
-- **[销毁NFT](/nfts/burn-nft)** - 永久销毁NFT
+- **[创建NFT](/zh/nfts/create-nft)** - 创建具有自定义元数据的新NFT
+- **[获取NFT](/zh/nfts/fetch-nft)** - 从区块链检索NFT数据
+- **[更新NFT](/zh/nfts/update-nft)** - 更新NFT的名称和元数据
+- **[转移NFT](/zh/nfts/transfer-nft)** - 在钱包之间转移NFT所有权
+- **[销毁NFT](/zh/nfts/burn-nft)** - 永久销毁NFT
 
 ## 前提条件
 
@@ -36,12 +36,12 @@ description: 学习如何使用Metaplex Core在Solana上创建和管理NFT。
 npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
 ```
 
-然后按照[创建NFT](/nfts/create-nft)指南使用Metaplex Core创建您的第一个NFT。
+然后按照[创建NFT](/zh/nfts/create-nft)指南使用Metaplex Core创建您的第一个NFT。
 
 ## 深入了解
 
 有关更高级的NFT功能，请参阅：
 
-- [Core文档](/core) - Metaplex Core完整文档
-- [Core插件](/core/plugins) - 使用插件扩展NFT功能
-- [Core收藏集](/core/collections) - 将NFT组织成收藏集
+- [Core文档](/zh/smart-contracts/core) - Metaplex Core完整文档
+- [Core插件](/zh/smart-contracts/core/plugins) - 使用插件扩展NFT功能
+- [Core收藏集](/zh/smart-contracts/core/collections) - 将NFT组织成收藏集

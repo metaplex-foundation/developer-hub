@@ -140,7 +140,7 @@ Bubblegum V2引入了新的叶子模式（LeafSchemaV2），它支持额外的�
 - [更新cNFT的数据或集合](/zh/smart-contracts/bubblegum-v2/update-cnfts)。
 - [销毁cNFT](/zh/smart-contracts/bubblegum-v2/burn-cnfts)。
 - [委托cNFT](/zh/smart-contracts/bubblegum-v2/delegate-cnfts)。
-- [验证和取消验证cNFT集合](/zh/smart-contracts/bubblegum-v2/verify-collections)。
+- [验证和取消验证cNFT集合](/zh/smart-contracts/bubblegum-v2/collections)。
 - [验证和取消验证cNFT的创作者](/zh/smart-contracts/bubblegum-v2/verify-creators)。
 - [冻结和解冻cNFT](/zh/smart-contracts/bubblegum-v2/freeze-cnfts)。
 - [使cNFT成为灵魂绑定](/zh/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft)。

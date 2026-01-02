@@ -244,7 +244,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 1. **使用接口过滤** 只获取 NFT（例如排除同质化代币）
 2. **实现[分页](/zh/dev-tools/das-api/guides/pagination)** 处理拥有大量 NFT 的钱包
 3. **缓存结果** 以提高频繁查询的性能
-4. **包含[显示选项](/zh/dev-tools/das-api/guides/display-options)** 以获取额外的元数据
+4. **包含[显示选项](/zh/dev-tools/das-api/display-options)** 以获取额外的元数据
 5. **对结果进行排序** 以有意义的方式呈现数据
 6. **按集合过滤** 以关注特定 NFT 类型
 

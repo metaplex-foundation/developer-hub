@@ -4,7 +4,7 @@ metaTitle: 可编程 NFT (pNFTs) | Token Metadata
 description: 了解更多关于 Token Metadata 上的可编程 NFT（即 pNFTs）
 ---
 
-如[概述页面](/token-metadata#pnfts)所述，可编程 NFT (pNFTs) 是一种新的资产标准，允许创作者在特定操作上定义自定义规则，并更精细地委托给第三方权限。{% .lead %}
+如[概述页面](/zh/smart-contracts/token-metadata#pnfts)所述，可编程 NFT (pNFTs) 是一种新的资产标准，允许创作者在特定操作上定义自定义规则，并更精细地委托给第三方权限。{% .lead %}
 
 ## 不再绕过 Token Metadata
 
@@ -18,7 +18,7 @@ description: 了解更多关于 Token Metadata 上的可编程 NFT（即 pNFTs�
 
 - **pNFT 的 Token 账户在 SPL Token 程序上始终是冻结的**，无论 pNFT 是否被委托。这确保没有人可以通过直接与 SPL Token 程序交互来绕过 Token Metadata 程序。
 - 每当在 pNFT 的 Token 账户上执行操作时，Token Metadata 程序会**解冻账户、执行操作，然后再次冻结账户**。所有这些都在同一指令中**原子性地**发生。这样，所有可以在 SPL Token 程序上进行的操作对 pNFTs 仍然可用，但它们始终通过 Token Metadata 程序执行。
-- 当在 pNFT 上设置 [Token 委托](/token-metadata/delegates#token-delegates) 时，信息存储在 **Token Record** 账户中。由于 pNFTs 在 SPL Token 程序上始终是冻结的，Token Record 账户负责跟踪 pNFT 是否真正被锁定。
+- 当在 pNFT 上设置 [Token 委托](/zh/smart-contracts/token-metadata/delegates#token-delegates) 时，信息存储在 **Token Record** 账户中。由于 pNFTs 在 SPL Token 程序上始终是冻结的，Token Record 账户负责跟踪 pNFT 是否真正被锁定。
 - 因为每个影响 pNFT 的操作都必须通过 Token Metadata 程序，我们创建了一个瓶颈，允许我们为这些操作强制执行授权规则。这些规则在由 **Token Auth Rules** 程序管理的 **Rule Set** 账户中定义。
 
 本质上，这赋予了 pNFTs 以下能力：
@@ -34,7 +34,7 @@ description: 了解更多关于 Token Metadata 上的可编程 NFT（即 pNFTs�
 
 这个新委托系统的信息存储在一个特殊的 **Token Record** PDA 上，该 PDA 从 pNFT 的 Mint 和 Token 账户派生。当新的委托权限被分配给 pNFT 时，Token Metadata 程序会在 Token 账户和 Token Record 账户上同步该信息。
 
-我们在[委托权限页面的"Token 委托"部分](/token-metadata/delegates#token-delegates)中更详细地讨论这些委托。
+我们在[委托权限页面的"Token 委托"部分](/zh/smart-contracts/token-metadata/delegates#token-delegates)中更详细地讨论这些委托。
 
 {% diagram %}
 {% node %}
@@ -147,22 +147,22 @@ const = authorizationData: { payload: ... },
 
 ## 在任何操作上强制执行规则
 
-可编程 NFT 最重要的功能之一是它们能够在任何影响它们的操作上强制执行一组规则。整个授权层由另一个名为 [Token Auth Rules](/token-auth-rules) 的 Metaplex 程序提供。虽然该程序用于使 pNFTs 可编程，但它是一个通用程序，可用于为任何用例创建和验证授权规则。
+可编程 NFT 最重要的功能之一是它们能够在任何影响它们的操作上强制执行一组规则。整个授权层由另一个名为 [Token Auth Rules](/zh/smart-contracts/token-auth-rules) 的 Metaplex 程序提供。虽然该程序用于使 pNFTs 可编程，但它是一个通用程序，可用于为任何用例创建和验证授权规则。
 
 对于 pNFTs，支持以下操作：
 
 | 操作                          | 描述                                                                                                                                                                                    |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Transfer:Owner`              | 由 pNFT 所有者发起的转移                                                                                                                                                                |
-| `Transfer:SaleDelegate`       | 由[销售委托](/token-metadata/delegates#sale-delegate-pnft-only)发起的转移                                                                                                               |
-| `Transfer:TransferDelegate`   | 由[转移](/token-metadata/delegates#transfer-delegate-pnft-only)或[锁定转移](/token-metadata/delegates#locked-transfer-delegate-pnft-only)委托发起的转移                                 |
+| `Transfer:SaleDelegate`       | 由[销售委托](/zh/smart-contracts/token-metadata/delegates#sale-delegate-pnft-only)发起的转移                                                                                                               |
+| `Transfer:TransferDelegate`   | 由[转移](/zh/smart-contracts/token-metadata/delegates#transfer-delegate-pnft-only)或[锁定转移](/zh/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)委托发起的转移                                 |
 | `Transfer:MigrationDelegate`  | 由迁移委托（pNFT 迁移期间使用的旧委托）发起的转移                                                                                                                                        |
 | `Transfer:WalletToWallet`     | 钱包之间的转移（目前未使用）                                                                                                                                                            |
-| `Delegate:Sale`               | 批准[销售委托](/token-metadata/delegates#sale-delegate-pnft-only)                                                                                                                       |
-| `Delegate:Transfer`           | 批准[转移委托](/token-metadata/delegates#transfer-delegate-pnft-only)                                                                                                                   |
-| `Delegate:LockedTransfer`     | 批准[锁定转移委托](/token-metadata/delegates#locked-transfer-delegate-pnft-only)                                                                                                        |
-| `Delegate:Utility`            | 批准[实用委托](/token-metadata/delegates#utility-delegate-pnft-only)                                                                                                                    |
-| `Delegate:Staking`            | 批准[质押委托](/token-metadata/delegates#staking-delegate-pnft-only)                                                                                                                    |
+| `Delegate:Sale`               | 批准[销售委托](/zh/smart-contracts/token-metadata/delegates#sale-delegate-pnft-only)                                                                                                                       |
+| `Delegate:Transfer`           | 批准[转移委托](/zh/smart-contracts/token-metadata/delegates#transfer-delegate-pnft-only)                                                                                                                   |
+| `Delegate:LockedTransfer`     | 批准[锁定转移委托](/zh/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)                                                                                                        |
+| `Delegate:Utility`            | 批准[实用委托](/zh/smart-contracts/token-metadata/delegates#utility-delegate-pnft-only)                                                                                                                    |
+| `Delegate:Staking`            | 批准[质押委托](/zh/smart-contracts/token-metadata/delegates#staking-delegate-pnft-only)                                                                                                                    |
 
 创作者可以为任何这些操作分配自定义**规则**。当执行该操作时，Token Metadata 程序将在允许操作执行之前确保规则有效。可用规则由 Token Auth Rules 程序直接记录，但值得注意的是有两种类型的规则：
 

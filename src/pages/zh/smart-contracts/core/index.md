@@ -7,7 +7,7 @@ description: 提供由 Metaplex 创建的新 Solana NFT 资产标准 Core 的高
 Metaplex Core（"Core"）摒弃了以往标准的复杂性和技术债务，为数字资产提供了一个简洁明了的核心规范。这个下一代 Solana NFT 标准使用单账户设计，与其他方案相比，降低了铸造成本并改善了 Solana 网络负载。它还具有灵活的插件系统，允许开发者修改资产的行为和功能。{% .lead %}
 
 {% callout %}
-请注意，某些 Core 指令将需要支付协议费用。请查看[协议费用](/protocol-fees)页面以获取最新信息。
+请注意，某些 Core 指令将需要支付协议费用。请查看[协议费用](/zh/protocol-fees)页面以获取最新信息。
 {% /callout %}
 
 来 [https://core.metaplex.com/](https://core.metaplex.com/) 试用 Core 的功能，亲自铸造一个资产吧！
@@ -35,8 +35,8 @@ Metaplex Core 是 Metaplex 协议中的新 NFT 标准。与其他标准（包括
 - **一流的集合支持**：资产可以组合成[集合](/zh/smart-contracts/core/collections)。虽然 Token Metadata 也可以实现这一点，但在 Core 中，集合是独立的资产类别，现在允许以下附加功能：
 - **集合级操作**：Core 允许用户在集合级别对所有资产进行更改。例如，所有集合资产可以通过单个交易同时被冻结或更改其版税详情！
 - **高级插件支持**：从内置质押到基于资产的积分系统，Metaplex Core 的插件架构开辟了广阔的实用性和定制化前景。插件允许开发者通过挂钩到任何资产生命周期事件（如创建、转移和销毁）来添加自定义行为。您可以向资产添加插件，例如委托权限或添加由 DAS 自动索引的链上属性：
-- **开箱即用的索引**：许多[支持 DAS 的 RPC 提供商](/rpc-providers)已经支持 Core。
+- **开箱即用的索引**：许多[支持 DAS 的 RPC 提供商](/zh/rpc-providers)已经支持 Core。
 
 ## 后续步骤
 
-既然我们已经在高层次上介绍了 Metaplex Core 是什么，我们建议查看我们的[入门指南](/core/getting-started)页面，该页面列举了可以用来与 Core 资产交互的各种语言/框架。您可能还想查看[与 MPL Token Metadata 的差异](/zh/smart-contracts/core/tm-differences)页面。之后，可以使用各种功能页面来了解有关可以对 cNFT 执行的特定操作的更多信息。
+既然我们已经在高层次上介绍了 Metaplex Core 是什么，我们建议查看我们的[入门指南](/zh/smart-contracts/core/sdk)页面，该页面列举了可以用来与 Core 资产交互的各种语言/框架。您可能还想查看[与 MPL Token Metadata 的差异](/zh/smart-contracts/core/tm-differences)页面。之后，可以使用各种功能页面来了解有关可以对 cNFT 执行的特定操作的更多信息。

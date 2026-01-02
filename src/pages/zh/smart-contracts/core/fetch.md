@@ -90,7 +90,7 @@ pub async fn fetch_asset() {
 
 ## 获取多个资产
 
-可以使用 `getProgramAccounts` (GPA) 调用获取多个资产，这在 RPC 方面可能相当昂贵且缓慢，或者使用 `Digital Asset Standard` API，它更快但需要[特定的 RPC 提供商](/rpc-providers)。
+可以使用 `getProgramAccounts` (GPA) 调用获取多个资产，这在 RPC 方面可能相当昂贵且缓慢，或者使用 `Digital Asset Standard` API，它更快但需要[特定的 RPC 提供商](/zh/rpc-providers)。
 
 ### 按所有者获取资产
 
@@ -339,7 +339,7 @@ pub async fn fetch_assets_by_update_authority() {
 
 如果您使用启用 DAS 的 RPC，您将能够利用索引资产进行快速获取和数据检索。
 
-DAS 将索引从元数据、链外元数据、集合数据、插件（包括属性）等所有内容。要了解有关 Metaplex DAS API 的更多信息，您可以[点击这里](/das-api)。除了通用 DAS SDK 之外，还创建了 [MPL Core 扩展](/das-api/core-extension)，可直接返回正确的类型以进一步与 MPL Core SDK 一起使用。它还会自动派生从集合继承的资产中的插件，并提供 DAS 到 Core 类型转换的函数。
+DAS 将索引从元数据、链外元数据、集合数据、插件（包括属性）等所有内容。要了解有关 Metaplex DAS API 的更多信息，您可以[点击这里](/zh/dev-tools/das-api)。除了通用 DAS SDK 之外，还创建了 [MPL Core 扩展](/zh/dev-tools/das-api/core-extension)，可直接返回正确的类型以进一步与 MPL Core SDK 一起使用。它还会自动派生从集合继承的资产中的插件，并提供 DAS 到 Core 类型转换的函数。
 
 以下是使用 DAS 获取 MPL Core 资产返回数据的示例。
 

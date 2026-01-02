@@ -159,7 +159,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 ## 提示和最佳实践
 
-1. **使用[显示选项](/zh/dev-tools/das-api/guides/display-options)**：启用 `showCollectionMetadata` 和 `showFungible` 或其他选项如 `showInscription` 以获取完整的代币信息。
+1. **使用[显示选项](/zh/dev-tools/das-api/display-options)**：启用 `showCollectionMetadata` 和 `showFungible` 或其他选项如 `showInscription` 以获取完整的代币信息。
 
 2. **处理[分页](/zh/dev-tools/das-api/guides/pagination)**：对于拥有大量代币的钱包，始终实现分页。
 

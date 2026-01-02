@@ -6,7 +6,7 @@ description: 了解如何在 Token Metadata 上转移资产
 
 资产所有者可以通过向 Token Metadata 程序发送 **Transfer** 指令将其转移到另一个账户。此指令接受以下属性：
 
-- **Authority**：授权转移的签名者。通常这是资产的所有者，但请注意，某些委托权限也可以代表所有者转移资产，如"[委托权限](/token-metadata/delegates)"页面中所述。
+- **Authority**：授权转移的签名者。通常这是资产的所有者，但请注意，某些委托权限也可以代表所有者转移资产，如"[委托权限](/zh/smart-contracts/token-metadata/delegates)"页面中所述。
 - **Token Owner**：资产当前所有者的公钥。
 - **Destination Owner**：资产新所有者的公钥。
 - **Token Standard**：正在转移的资产的标准。此指令适用于所有代币标准，以提供统一的资产转移接口。话虽如此，值得注意的是，非可编程资产可以直接使用 SPL Token 程序的 **Transfer** 指令进行转移。

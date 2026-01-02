@@ -10,7 +10,7 @@ updated: '03-12-2025'
 
 ## 转移NFT
 
-在以下部分，您可以看到完整的代码示例以及需要更改的参数。有关转移NFT的更多详情，请参阅[Core文档](/core/transfer)。
+在以下部分，您可以看到完整的代码示例以及需要更改的参数。有关转移NFT的更多详情，请参阅[Core文档](/zh/smart-contracts/core/transfer)。
 
 {% code-tabs-imported from="core/transfer-asset" frameworks="umi" /%}
 

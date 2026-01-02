@@ -48,6 +48,6 @@ updated: '11-28-2025'
 
 ## 相关指南
 
-- [创建代币](/tokens/create-a-token)
-- [DAS API概述](/das-api)
-- [按所有者获取同质化资产](/das-api/guides/get-fungible-assets)
+- [创建代币](/zh/tokens/create-a-token)
+- [DAS API概述](/zh/dev-tools/das-api)
+- [按所有者获取同质化资产](/zh/dev-tools/das-api/guides/get-fungible-assets)

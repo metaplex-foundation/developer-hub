@@ -276,7 +276,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 1. **使用[分页](/zh/dev-tools/das-api/guides/pagination)** 处理大型集合以避免速率限制
 2. **在可能时缓存结果** 以提高性能
-3. **包含[显示选项](/zh/dev-tools/das-api/guides/display-options)** 以获取额外的元数据
+3. **包含[显示选项](/zh/dev-tools/das-api/display-options)** 以获取额外的元数据
 4. **对结果进行排序** 以有意义的方式呈现数据
 5. **优雅地处理错误** 当集合地址无效时
 

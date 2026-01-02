@@ -22,7 +22,7 @@ description: 提供非Umi Hydra SDK的高级概述。
 yarn add @glasseaters/hydra-sdk
 ```
 
-以下是使用钱包[成员模型](/zh/hydra#添加成员)设置Hydra的方法。
+以下是使用钱包[成员模型](/zh/smart-contracts/hydra#添加成员)设置Hydra的方法。
 
 ```ts
 import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";

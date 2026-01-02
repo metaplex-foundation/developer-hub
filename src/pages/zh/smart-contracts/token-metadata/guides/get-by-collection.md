@@ -4,7 +4,7 @@ metaTitle: 获取集合中的 Mint | Token Metadata 指南
 description: 如何获取集合中所有 mint 的指南。
 ---
 
-Metaplex Token Metadata 具有[链上集合](/token-metadata/collections)功能，允许客观识别 NFT 集合，而不是社区在缺乏链上标准时采用的各种主观且可能相互冲突的启发式方法。
+Metaplex Token Metadata 具有[链上集合](/zh/smart-contracts/token-metadata/collections)功能，允许客观识别 NFT 集合，而不是社区在缺乏链上标准时采用的各种主观且可能相互冲突的启发式方法。
 
 规范设计使得查找任何给定 NFT 并确定它是否属于某个集合以及属于哪个集合变得非常容易，只需从 metadata 账户读取 Collection 字段即可。链上 `Metadata` 结构包含一个可选的 `Collection` 结构，其中有一个 `key` 字段，即它所属集合的 SPL token mint 的 Pubkey。
 
@@ -36,10 +36,10 @@ pub struct Collection {
 }
 ```
 
-然而，给定一个集合 mint 地址，在直接从链上读取时，找到属于该特定集合的所有 NFT 要困难得多。使用 [DAS](/das-api) 有一种更优越的方法，还有两种直接从链上获取数据的基本方法。
+然而，给定一个集合 mint 地址，在直接从链上读取时，找到属于该特定集合的所有 NFT 要困难得多。使用 [DAS](/zh/dev-tools/das-api) 有一种更优越的方法，还有两种直接从链上获取数据的基本方法。
 
 ## DAS API
-当使用[支持它的 RPC 提供商](/rpc-providers#metaplex-das-api)时，使用 DAS 获取 mint 是更优越的方法。
+当使用[支持它的 RPC 提供商](/zh/rpc-providers#metaplex-das-api)时，使用 DAS 获取 mint 是更优越的方法。
 
 {% dialect-switcher title="getAssetByGroup 示例" %}
 {% dialect title="JavaScript" id="js" %}
@@ -88,7 +88,7 @@ curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json'
 {% /dialect %}
 {% /dialect-switcher %}
 
-您可以在我们的 [DAS 文档](/das-api)中找到更多关于 DAS 的方法和允许获取和过滤数据的其他方法
+您可以在我们的 [DAS 文档](/zh/dev-tools/das-api)中找到更多关于 DAS 的方法和允许获取和过滤数据的其他方法
 
 ## 使用预计算偏移量的 GetProgramAccounts
 

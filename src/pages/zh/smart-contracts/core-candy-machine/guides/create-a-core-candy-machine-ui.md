@@ -35,7 +35,7 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 - 资产价格
 - 等等
 
-获取不显示给用户但用于后台计算的额外数据也是有意义的。例如，在使用 [Redeemed Amount](/core-candy-machine/guards/redeemed-amount) 守卫时，您需要获取已兑换的数量以查看用户是否被允许铸造更多。
+获取不显示给用户但用于后台计算的额外数据也是有意义的。例如，在使用 [Redeemed Amount](/zh/smart-contracts/core-candy-machine/guards/redeemed-amount) 守卫时，您需要获取已兑换的数量以查看用户是否被允许铸造更多。
 
 ### 获取 Candy Machine 数据
 
@@ -78,7 +78,7 @@ const availableString = `${candyMachine.itemsAvailable - candyMachine.itemsRedee
 
 ### 获取 Candy Guard 数据
 
-Candy Guard 包含必须满足才能允许铸造的条件。例如，发生 Sol 或代币支付、限制一个钱包允许铸造的资产数量等等。您可以在 [Candy Guard 页面](/core-candy-machine/guards)找到有关 Candy Guards 的更多信息。
+Candy Guard 包含必须满足才能允许铸造的条件。例如，发生 Sol 或代币支付、限制一个钱包允许铸造的资产数量等等。您可以在 [Candy Guard 页面](/zh/smart-contracts/core-candy-machine/guards)找到有关 Candy Guards 的更多信息。
 
 ```ts
 import { safeFetchCandyGuard } from "@metaplex-foundation/mpl-core-candy-machine";
@@ -196,7 +196,7 @@ console.log(`NFT ${nftMint.publicKey} 已铸造！`)
 
 ### 在一个交易中铸造多个 NFT
 
-为了效率，您可能希望允许用户在单个交易中铸造多个 NFT。通过组合 [Transaction Builders](/umi/transactions#transaction-builders) 可以实现这一点：
+为了效率，您可能希望允许用户在单个交易中铸造多个 NFT。通过组合 [Transaction Builders](/zh/dev-tools/umi/transactions#transaction-builders) 可以实现这一点：
 
 ```ts
 let builder = transactionBuilder()
@@ -204,7 +204,7 @@ let builder = transactionBuilder()
   .add(mintV1(...))
 ```
 
-如果您在交易中添加太多 `mintV1` 指令，您将收到 `Transaction too large` 错误。函数 [`builder.fitsInOneTransaction(umi)`](/umi/transactions#transaction-builders) 允许在发送前检查，以便在需要时拆分交易。
+如果您在交易中添加太多 `mintV1` 指令，您将收到 `Transaction too large` 错误。函数 [`builder.fitsInOneTransaction(umi)`](/zh/dev-tools/umi/transactions#transaction-builders) 允许在发送前检查，以便在需要时拆分交易。
 
 ### 守卫组
 

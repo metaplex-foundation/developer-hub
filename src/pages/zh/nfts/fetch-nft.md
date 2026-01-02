@@ -10,7 +10,7 @@ updated: '03-12-2025'
 
 ## 获取NFT或收藏集
 
-在以下部分，您可以看到完整的代码示例以及需要更改的参数。有关获取NFT和收藏集的更多详情，请参阅[Core文档](/core/fetch)。
+在以下部分，您可以看到完整的代码示例以及需要更改的参数。有关获取NFT和收藏集的更多详情，请参阅[Core文档](/zh/smart-contracts/core/fetch)。
 
 {% code-tabs-imported from="core/fetch-asset" frameworks="umi,cli,das,curl" /%}
 

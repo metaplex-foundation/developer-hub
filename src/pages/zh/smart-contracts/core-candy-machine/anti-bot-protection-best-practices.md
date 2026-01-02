@@ -95,7 +95,7 @@ await securelyStoreUris(uploadedUris);
 - **自定义解决方案**：使用随机 ID 生成构建自己的上传服务
 
 {% callout %}
-**有关 UMI uploader 功能的更多详细信息，请参阅 [UMI 存储文档](/umi/storage)。**
+**有关 UMI uploader 功能的更多详细信息，请参阅 [UMI 存储文档](/zh/dev-tools/umi/storage)。**
 {% /callout %}
 
 #### 创建占位符元数据

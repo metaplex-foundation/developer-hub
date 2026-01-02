@@ -4,7 +4,7 @@ metaTitle: 发行代币 | 代币
 description: 使用Solana上的Genesis Launch Pools发行代币的端到端指南。
 ---
 
-使用[Genesis](/smart-contracts/genesis) Launch Pools发行代币。用户在您设定的期间内存入SOL，并按其在总存款中的份额比例获得代币。 {% .lead %}
+使用[Genesis](/zh/smart-contracts/genesis) Launch Pools发行代币。用户在您设定的期间内存入SOL，并按其在总存款中的份额比例获得代币。 {% .lead %}
 
 ## 概述
 
@@ -168,6 +168,6 @@ userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 
 ## 后续步骤
 
-- [Genesis概述](/smart-contracts/genesis) - 了解更多关于Genesis概念
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Launch Pool的详细文档
-- [聚合API](/smart-contracts/genesis/aggregation) - 使用API查询发行数据
+- [Genesis概述](/zh/smart-contracts/genesis) - 了解更多关于Genesis概念
+- [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - Launch Pool的详细文档
+- [聚合API](/zh/smart-contracts/genesis/aggregation) - 使用API查询发行数据

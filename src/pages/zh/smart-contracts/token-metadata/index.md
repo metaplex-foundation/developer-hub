@@ -22,7 +22,7 @@ Token Metadata 程序是在 Solana 区块链上处理 NFT 和同质化资产时�
 
 Token Metadata 程序是在 Solana 区块链上处理 NFT 时最重要的程序之一。其主要目标是**为 Solana 上的[同质化](https://en.wikipedia.org/wiki/Fungibility)或非同质化[代币](https://spl.solana.com/token)附加额外数据**。
 
-它使用从 Mint 账户地址_派生_的[程序派生地址](/zh/understanding-programs/#program-derived-addresses-pda)(PDA)来实现这一点。如果您不熟悉 [Solana 的 Token 程序](https://spl.solana.com/token),_Mint 账户_负责存储代币的全局信息,_Token 账户_存储钱包与 Mint 账户之间的关系。
+它使用从 Mint 账户地址_派生_的[程序派生地址](/zh/understanding-programs#program-derived-addresses-pda)(PDA)来实现这一点。如果您不熟悉 [Solana 的 Token 程序](https://spl.solana.com/token),_Mint 账户_负责存储代币的全局信息,_Token 账户_存储钱包与 Mint 账户之间的关系。
 
 {% diagram %}
 {% node %}

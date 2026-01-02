@@ -10,7 +10,7 @@ updated: '11-25-2025'
 
 ## 转移代币
 
-在以下部分，您可以看到完整的代码示例以及需要更改的参数。有关代币转移的更多详情，请参阅[Token Metadata程序](/token-metadata)页面。
+在以下部分，您可以看到完整的代码示例以及需要更改的参数。有关代币转移的更多详情，请参阅[Token Metadata程序](/zh/smart-contracts/token-metadata)页面。
 
 {% code-tabs-imported from="token-metadata/fungibles/transfer" frameworks="umi,cli" /%}
 

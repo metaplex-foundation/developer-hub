@@ -18,7 +18,7 @@ Bubblegum是Metaplex协议程序，用于在Solana上创建和交互压缩NFT（
 
 {% quick-links %}
 
-{% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/smart-contracts/bubblegum/getting-started" description="选择您偏好的语言或库，开始使用压缩NFT。" /%}
+{% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/smart-contracts/bubblegum/sdk" description="选择您偏好的语言或库，开始使用压缩NFT。" /%}
 
 {% quick-link title="API参考" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="正在寻找特定内容？查看我们的API参考找到您的答案。" /%}
 
@@ -45,7 +45,7 @@ Bubblegum是Metaplex协议程序，用于在Solana上创建和交互压缩NFT（
 
 ## 默克尔树、叶子和证明
 
-压缩NFT仅存在于**默克尔树**的上下文中。我们在[专门的高级指南](/zh/smart-contracts/bubblegum/concurrent-merkle-trees)中解释了什么是默克尔树，但就本概述而言，您可以将默克尔树视为我们称之为**叶子**的哈希集合。每个叶子都是通过[对压缩NFT的数据进行哈希](/zh/smart-contracts/bubblegum/hashed-nft-data)获得的。
+压缩NFT仅存在于**默克尔树**的上下文中。我们在[专门的高级指南](/zh/smart-contracts/bubblegum-v2/concurrent-merkle-trees)中解释了什么是默克尔树，但就本概述而言，您可以将默克尔树视为我们称之为**叶子**的哈希集合。每个叶子都是通过[对压缩NFT的数据进行哈希](/zh/smart-contracts/bubblegum-v2/stored-nft-data)获得的。
 
 对于默克尔树中的每个叶子，都可以提供一个哈希列表——称为**证明**——使任何人都能验证给定的叶子是该树的一部分。每当压缩NFT被更新或转移时，其关联的叶子将改变，其证明也会改变。
 
@@ -129,7 +129,7 @@ Bubblegum是Metaplex协议程序，用于在Solana上创建和交互压缩NFT（
 
 请注意，并非所有RPC都支持DAS API。因此，在应用程序中使用压缩NFT时，您可能对["Metaplex DAS API RPC"](/zh/rpc-providers)页面感兴趣，以选择合适的RPC。
 
-我们在高级["存储和索引NFT数据"](/zh/smart-contracts/bubblegum/stored-nft-data)指南中更详细地讨论了这一点。
+我们在高级["存储和索引NFT数据"](/zh/smart-contracts/bubblegum-v2/stored-nft-data)指南中更详细地讨论了这一点。
 
 ## 功能
 
@@ -146,4 +146,4 @@ Bubblegum是Metaplex协议程序，用于在Solana上创建和交互压缩NFT（
 
 ## 后续步骤
 
-现在我们了解了压缩NFT在高层次上是如何工作的，我们建议查看我们的[入门指南](/zh/smart-contracts/bubblegum/getting-started)页面，其中列举了可用于与压缩NFT交互的各种语言/框架。之后，可以使用各种[功能页面](/zh/smart-contracts/bubblegum/create-trees)了解更多关于可以在cNFT上执行的特定操作。最后，还提供了[高级指南](/zh/smart-contracts/bubblegum/concurrent-merkle-trees)来加深您对cNFT和默克尔树的了解。
+现在我们了解了压缩NFT在高层次上是如何工作的，我们建议查看我们的[入门指南](/zh/smart-contracts/bubblegum/sdk)页面，其中列举了可用于与压缩NFT交互的各种语言/框架。之后，可以使用各种[功能页面](/zh/smart-contracts/bubblegum/create-trees)了解更多关于可以在cNFT上执行的特定操作。最后，还提供了[高级指南](/zh/smart-contracts/bubblegum-v2/concurrent-merkle-trees)来加深您对cNFT和默克尔树的了解。

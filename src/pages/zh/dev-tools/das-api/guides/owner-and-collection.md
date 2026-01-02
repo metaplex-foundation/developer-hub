@@ -112,7 +112,7 @@ curl -X POST <ENDPOINT> \
 ## 提示和最佳实践
 
 1. **使用[分页](/zh/dev-tools/das-api/guides/pagination)** 处理大型数据集
-2. **包含[显示选项](/zh/dev-tools/das-api/guides/display-options)** 以获取额外的元数据
+2. **包含[显示选项](/zh/dev-tools/das-api/display-options)** 以获取额外的元数据
 3. **对结果进行排序** 以有意义的方式呈现数据
 4. **优雅地处理空结果** 当集合为空时
 5. **在查询前验证集合地址**

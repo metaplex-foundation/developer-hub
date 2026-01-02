@@ -8,7 +8,7 @@ description: 了解如何在 Token Metadata 上更新资产
 
 ## 可更新字段
 
-请注意，某些委托权限也可以更新资产的 **Metadata** 账户，如"[委托权限](/token-metadata/delegates)"页面中所述。
+请注意，某些委托权限也可以更新资产的 **Metadata** 账户，如"[委托权限](/zh/smart-contracts/token-metadata/delegates)"页面中所述。
 
 以下是 `UpdateV1` 指令中所有可更新的单独字段的说明。
 
@@ -95,7 +95,7 @@ is_mutable: Option<bool>,
 
 ### Collection
 
-此属性使我们能够设置或清除资产的集合。请注意，在设置新集合时，verified 布尔值必须设置为 false，并[使用另一个指令进行验证](/token-metadata/collections)。
+此属性使我们能够设置或清除资产的集合。请注意，在设置新集合时，verified 布尔值必须设置为 false，并[使用另一个指令进行验证](/zh/smart-contracts/token-metadata/collections)。
 
 #### 设置集合
 
@@ -169,7 +169,7 @@ new_update_authority: Option<PubKey>,
 
 ### Programable RuleSets
 
-此属性使我们能够设置或清除资产的规则集。这仅与[可编程非同质化代币](/token-metadata/pnfts)相关。
+此属性使我们能够设置或清除资产的规则集。这仅与[可编程非同质化代币](/zh/smart-contracts/token-metadata/pnfts)相关。
 
 {% dialect-switcher title="Programable RuleSets" %}
 {% dialect title="JavaScript" id="js" %}

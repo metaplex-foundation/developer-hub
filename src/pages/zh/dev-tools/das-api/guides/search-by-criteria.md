@@ -239,7 +239,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 3. **缓存结果**：存储频繁访问的搜索结果
 4. **明智地组合过滤器**：过多的过滤器可能导致没有结果
 5. **处理空结果**：始终检查空结果集，但请记住某些资产可能被隐藏或尚未索引
-6. **使用[显示选项](/zh/dev-tools/das-api/guides/display-options)**：根据您的用例包含相关的显示选项
+6. **使用[显示选项](/zh/dev-tools/das-api/display-options)**：根据您的用例包含相关的显示选项
 7. **对结果进行排序**：使用排序以有意义的方式呈现数据
 8. **测试查询**：使用已知数据验证您的搜索条件
 

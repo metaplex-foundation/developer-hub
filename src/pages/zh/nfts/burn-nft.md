@@ -10,7 +10,7 @@ updated: '03-12-2025'
 
 ## 销毁NFT
 
-在以下部分，您可以看到完整的代码示例以及需要更改的参数。有关销毁NFT的更多详情，请参阅[Core文档](/core/burn)。
+在以下部分，您可以看到完整的代码示例以及需要更改的参数。有关销毁NFT的更多详情，请参阅[Core文档](/zh/smart-contracts/core/burn)。
 
 {% code-tabs-imported from="core/burn-asset" frameworks="umi,cli" /%}
 

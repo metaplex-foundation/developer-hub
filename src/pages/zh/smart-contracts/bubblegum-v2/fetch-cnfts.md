@@ -4,7 +4,7 @@ metaTitle: 获取压缩NFT | Bubblegum V2
 description: 了解如何在Bubblegum上获取压缩NFT。
 ---
 
-如[概述](/zh/bubblegum#read-api)页面所述，压缩NFT不像普通NFT那样存储在链上账户中，而是记录在创建和更新它们的交易中。{% .lead %}
+如[概述](/zh/smart-contracts/bubblegum#read-api)页面所述，压缩NFT不像普通NFT那样存储在链上账户中，而是记录在创建和更新它们的交易中。{% .lead %}
 
 因此，创建了一个特殊的索引器来便于检索压缩NFT。这些索引数据通过Solana RPC方法的扩展提供，我们称之为**Metaplex DAS API**。实际上，DAS API允许我们获取任何**数字资产**。这可以是压缩NFT、普通NFT，甚至是同质化资产。
 
@@ -103,7 +103,7 @@ const rpcAsset = await umi.rpc.getAsset(assetId)
 
 ## 获取压缩NFT的证明
 
-虽然`getAsset` RPC方法返回了大量关于资产的信息，但它不返回资产的**证明**。如[概述](/zh/bubblegum#merkle-trees-leaves-and-proofs)页面所述，压缩NFT的证明是一个哈希列表，允许我们验证资产的真实性。没有它，任何人都可以假装他们在树中拥有具有任何给定数据的压缩NFT。
+虽然`getAsset` RPC方法返回了大量关于资产的信息，但它不返回资产的**证明**。如[概述](/zh/smart-contracts/bubblegum#merkle-trees-leaves-and-proofs)页面所述，压缩NFT的证明是一个哈希列表，允许我们验证资产的真实性。没有它，任何人都可以假装他们在树中拥有具有任何给定数据的压缩NFT。
 
 因此，对压缩NFT的许多操作——例如销毁、转移、更新等——在允许我们执行之前需要资产的证明。计算资产的证明是可能的，但需要某人知道给定树中存在的所有压缩NFT的哈希。这就是为什么DAS API也跟踪所有压缩NFT的证明。
 

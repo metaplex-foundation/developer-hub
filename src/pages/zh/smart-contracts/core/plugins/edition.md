@@ -4,7 +4,7 @@ metaTitle: 版本插件 | Core
 description: 了解 MPL Core 版本插件。
 ---
 
-版本插件是一个`权限管理`插件，它在资产中存储版本号。与即将添加的主版本插件一起，这些版本可以与 [Metaplex Token Metadata 中的版本概念](/token-metadata/print)相比较。
+版本插件是一个`权限管理`插件，它在资产中存储版本号。与即将添加的主版本插件一起，这些版本可以与 [Metaplex Token Metadata 中的版本概念](/zh/smart-contracts/token-metadata/print)相比较。
 
 版本插件适用于以下领域：
 

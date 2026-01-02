@@ -21,7 +21,7 @@ Bubblegum程序的**Verify Collection**指令可用于将压缩NFT的**已验证
 - **集合铸造**：集合NFT的铸造账户。
 - **集合权限**：作为签名者的集合NFT的更新权限——或已批准的集合委托。如果集合权限是委托权限，请注意程序同时支持新的统一**元数据委托**系统和旧的**集合权限记录**账户。只需将适当的PDA传递给**集合权限记录PDA**参数。
 
-此外，由于此指令将最终替换Bubblegum树上的叶子，因此必须提供更多参数来验证压缩NFT的完整性。由于这些参数对所有更改叶子的指令是通用的，它们在[以下FAQ](/zh/smart-contracts/bubblegum/faq#replace-leaf-instruction-arguments)中有记录。幸运的是，我们可以使用辅助方法，它将使用Metaplex DAS API自动为我们获取这些参数。
+此外，由于此指令将最终替换Bubblegum树上的叶子，因此必须提供更多参数来验证压缩NFT的完整性。由于这些参数对所有更改叶子的指令是通用的，它们在[以下FAQ](/zh/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)中有记录。幸运的是，我们可以使用辅助方法，它将使用Metaplex DAS API自动为我们获取这些参数。
 
 {% dialect-switcher title="验证压缩NFT的集合" %}
 {% dialect title="JavaScript" id="js" %}

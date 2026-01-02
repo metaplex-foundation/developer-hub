@@ -4,7 +4,7 @@ metaTitle: 主版本插件 | Core
 description: 了解 MPL Core 主版本插件。
 ---
 
-主版本插件是一个`权限管理`插件，与 Core 集合一起使用来分组[版本](/zh/smart-contracts/core/plugins/edition)、提供来源证明并存储最大版本供应量。与版本插件一起，这些版本可以与 [Metaplex Token Metadata 中的版本概念](/token-metadata/print)相比较。
+主版本插件是一个`权限管理`插件，与 Core 集合一起使用来分组[版本](/zh/smart-contracts/core/plugins/edition)、提供来源证明并存储最大版本供应量。与版本插件一起，这些版本可以与 [Metaplex Token Metadata 中的版本概念](/zh/smart-contracts/token-metadata/print)相比较。
 
 主版本插件适用于以下领域：
 

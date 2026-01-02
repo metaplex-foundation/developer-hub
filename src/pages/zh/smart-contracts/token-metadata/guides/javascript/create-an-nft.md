@@ -468,4 +468,4 @@ createNft()
 
 ## 下一步是什么？
 
-本指南帮助您创建了一个基本的 NFT，从这里您可以前往 [Token Metadata 程序](/token-metadata) 查看创建集合并将您的新 NFT 添加到集合中的内容，以及您可以使用 NFT 执行的各种其他交互。
+本指南帮助您创建了一个基本的 NFT，从这里您可以前往 [Token Metadata 程序](/zh/smart-contracts/token-metadata) 查看创建集合并将您的新 NFT 添加到集合中的内容，以及您可以使用 NFT 执行的各种其他交互。

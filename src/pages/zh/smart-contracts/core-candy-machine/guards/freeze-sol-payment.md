@@ -241,7 +241,7 @@ API 参考：[route](https://mpl-core-candy-machine.typedoc.metaplex.com/functio
 
 ## 冻结托管和守卫组
 
-在各种[守卫组](/core-candy-machine/guard-groups)中使用多个冻结 SOL 支付守卫时，了解冻结 SOL 支付守卫和冻结托管账户之间的关系很重要。
+在各种[守卫组](/zh/smart-contracts/core-candy-machine/guard-groups)中使用多个冻结 SOL 支付守卫时，了解冻结 SOL 支付守卫和冻结托管账户之间的关系很重要。
 
 冻结托管账户是从目标地址派生的 PDA。这意味着如果**多个冻结 SOL 支付守卫**配置为使用**相同的目标地址**，它们将都**共享同一个冻结托管账户**。
 

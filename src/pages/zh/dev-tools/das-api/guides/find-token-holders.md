@@ -213,7 +213,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 1. **处理[分页](/zh/dev-tools/das-api/guides/pagination)**：对于大型集合，始终实现分页以获取所有结果。
 
-2. **使用[显示选项](/zh/dev-tools/das-api/guides/display-options)**：启用 `showCollectionMetadata` 以获取额外的集合信息。
+2. **使用[显示选项](/zh/dev-tools/das-api/display-options)**：启用 `showCollectionMetadata` 以获取额外的集合信息。
 
 3. **缓存结果**：当 NFT 持有者数据不频繁变化时，考虑缓存结果以提高性能。
 
@@ -223,4 +223,3 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 - [获取集合中的所有代币](/zh/dev-tools/das-api/guides/get-collection-nfts)
 - [分析集合统计数据](/zh/dev-tools/das-api/guides/collection-statistics)
-- [追踪资产转移](/zh/dev-tools/das-api/guides/track-transfers)

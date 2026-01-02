@@ -508,4 +508,4 @@ pub fn scan_ticket(ctx: Context<ScanTicket>) -> Result<()> {
 
 ## 结论
 
-恭喜！您现在已经具备使用 AppData 插件创建票务解决方案的能力。如果您想了解更多关于 Core 和 Metaplex 的信息，请查看[开发者中心](/zh/smart-contracts/core/getting-started)。
+恭喜！您现在已经具备使用 AppData 插件创建票务解决方案的能力。如果您想了解更多关于 Core 和 Metaplex 的信息，请查看[开发者中心](/zh/smart-contracts/core/sdk)。

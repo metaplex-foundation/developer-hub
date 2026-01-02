@@ -10,7 +10,7 @@ updated: '03-12-2025'
 
 ## 更新NFT
 
-在以下部分，您可以看到完整的代码示例以及需要更改的参数。有关更新NFT的更多详情，请参阅[Core文档](/core/update)。
+在以下部分，您可以看到完整的代码示例以及需要更改的参数。有关更新NFT的更多详情，请参阅[Core文档](/zh/smart-contracts/core/update)。
 
 {% code-tabs-imported from="core/update-asset" frameworks="umi,cli" /%}
 

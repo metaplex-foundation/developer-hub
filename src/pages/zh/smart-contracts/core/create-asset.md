@@ -8,7 +8,7 @@ description: 了解如何使用 Metaplex Core 包在 Solana 上创建 Core NFT �
 
 ## 创建过程
 
-1. **上传链外数据。** 首先，我们必须确保链外数据已准备就绪。这意味着我们必须有一个存储在某处的 JSON 文件来描述我们的资产。无论该 JSON 文件如何存储或存储在哪里都无关紧要，只要它可以通过 **URI** 访问。链外元数据可以类似于[旧的代币元数据标准](/token-metadata/token-standard#the-non-fungible-standard)。
+1. **上传链外数据。** 首先，我们必须确保链外数据已准备就绪。这意味着我们必须有一个存储在某处的 JSON 文件来描述我们的资产。无论该 JSON 文件如何存储或存储在哪里都无关紧要，只要它可以通过 **URI** 访问。链外元数据可以类似于[旧的代币元数据标准](/zh/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)。
 2. **创建链上资产账户。** 然后，我们必须创建将保存我们资产数据的链上资产账户。
 
 让我们更详细地深入研究这些步骤，同时提供具体的代码示例。

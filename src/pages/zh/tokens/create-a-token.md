@@ -18,7 +18,7 @@ updated: '11-25-2025'
 
 ## 创建代币
 
-以下代码是一个完整可运行的示例。可自定义的参数如下所示。有关代币创建的更多详情，请参阅[Token Metadata程序](/token-metadata/mint#minting-tokens)页面。
+以下代码是一个完整可运行的示例。可自定义的参数如下所示。有关代币创建的更多详情，请参阅[Token Metadata程序](/zh/smart-contracts/token-metadata/mint#minting-tokens)页面。
 
 {% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi,cli" /%}
 
@@ -37,7 +37,7 @@ updated: '11-25-2025'
 
 ## 元数据和图像
 
-`uri`必须指向至少包含以下信息的JSON文件。更多详情可在[Token Metadata标准页面](/token-metadata/token-standard#the-fungible-standard)找到。您需要将JSON和图像URL上传到可公开访问的位置。我们建议使用Web3存储提供商，如Arweave。如果您想在代码中完成此操作，请按照此[指南](/guides/general/create-deterministic-metadata-with-turbo)操作。
+`uri`必须指向至少包含以下信息的JSON文件。更多详情可在[Token Metadata标准页面](/zh/smart-contracts/token-metadata/token-standard#the-fungible-standard)找到。您需要将JSON和图像URL上传到可公开访问的位置。我们建议使用Web3存储提供商，如Arweave。如果您想在代码中完成此操作，请按照此[指南](/zh/guides/general/create-deterministic-metadata-with-turbo)操作。
 
 ```json
 {

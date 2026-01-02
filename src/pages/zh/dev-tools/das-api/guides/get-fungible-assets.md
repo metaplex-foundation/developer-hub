@@ -264,7 +264,7 @@ console.log(`创建者代币: ${creatorTokens.items.length}`)
 ## 提示和最佳实践
 
 1. **使用接口过滤器**：有关更多信息，请参阅[按条件搜索资产](/zh/dev-tools/das-api/guides/search-by-criteria)。
-2. **启用显示同质化选项**：在显示选项中使用 `showFungible: true` 以获取完整的代币信息，如[显示选项](/zh/dev-tools/das-api/guides/display-options)所示。
+2. **启用显示同质化选项**：在显示选项中使用 `showFungible: true` 以获取完整的代币信息，如[显示选项](/zh/dev-tools/das-api/display-options)所示。
 3. **考虑小数位**：检查 `decimals` 字段以正确格式化代币金额。
 4. **缓存结果**：代币余额经常变化，但代币元数据相对稳定。
 

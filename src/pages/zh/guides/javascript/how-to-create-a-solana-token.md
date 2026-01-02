@@ -89,7 +89,7 @@ createAndMintTokens()
 
 ## 设置 Umi
 
-此示例将演示如何使用 `generatedSigner()` 设置 Umi。如果您希望以不同的方式设置钱包或签名者，可以查看 [**连接到 Umi**](/zh/dev-tools/umi/connecting-to-umi) 指南。
+此示例将演示如何使用 `generatedSigner()` 设置 Umi。如果您希望以不同的方式设置钱包或签名者，可以查看 [**连接到 Umi**](/zh/dev-tools/umi/getting-started) 指南。
 
 您可以将 umi 变量和代码块放在 `createAndMintTokens()` 函数内部或外部。重要的是您的 `umi` 变量可以从 `createAndMintTokens()` 函数本身访问。
 

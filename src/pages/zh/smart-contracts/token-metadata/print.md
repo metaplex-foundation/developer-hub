@@ -85,7 +85,7 @@ description: 了解如何在 Token Metadata 上打印 NFT 版本
 
 ## 设置 Master Edition NFT
 
-要创建可打印的 NFT，我们需要配置 Token Metadata 程序 [**Create** 指令](/token-metadata/mint#creating-accounts)的 **Print Supply** 属性。这将如上一节所示配置 **Master Edition** 账户的 **Max Supply** 属性。此属性可以是：
+要创建可打印的 NFT，我们需要配置 Token Metadata 程序 [**Create** 指令](/zh/smart-contracts/token-metadata/mint#creating-accounts)的 **Print Supply** 属性。这将如上一节所示配置 **Master Edition** 账户的 **Max Supply** 属性。此属性可以是：
 
 - `Zero`：NFT 不可打印。
 - `Limited(x)`：NFT 是可打印的，并且有 `x` 个版本的固定供应量。

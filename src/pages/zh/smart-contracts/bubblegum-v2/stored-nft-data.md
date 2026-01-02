@@ -4,7 +4,7 @@ metaTitle: 存储和索引NFT数据 | Bubblegum V2
 description: 了解更多关于Bubblegum上NFT数据如何存储的信息。
 ---
 
-如[概述](/zh/bubblegum#read-api)中所述，每当创建或修改压缩NFT（cNFT）时，相应的交易会记录在分类账上，但cNFT状态数据不存储在账户空间中。这是cNFT大幅节省成本的原因，但为了方便和可用性，cNFT状态数据由RPC提供商索引，并可通过**Metaplex DAS API**获取。
+如[概述](/zh/smart-contracts/bubblegum#read-api)中所述，每当创建或修改压缩NFT（cNFT）时，相应的交易会记录在分类账上，但cNFT状态数据不存储在账户空间中。这是cNFT大幅节省成本的原因，但为了方便和可用性，cNFT状态数据由RPC提供商索引，并可通过**Metaplex DAS API**获取。
 
 Metaplex创建了DAS API的[参考实现](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)，一些RPC提供商使用部分或全部此代码用于其特定实现，而其他RPC提供商则编写了自己的实现。请参阅["Metaplex DAS API RPC"](/zh/rpc-providers)页面获取支持Metaplex DAS API的其他RPC提供商列表。
 

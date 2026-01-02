@@ -14,13 +14,13 @@ description: 学习如何使用Metaplex SDK在Solana上创建和管理同质化�
 
 本节提供常见代币操作的入门指南：
 
-- **[发行代币](/tokens/launch-token)** - 创建具有自定义元数据的新同质化代币
-- **[创建代币](/tokens/create-a-token)** - 创建具有自定义元数据的新同质化代币
-- **[读取代币数据](/tokens/read-token)** - 从区块链或DAS API获取代币信息
-- **[铸造代币](/tokens/mint-tokens)** - 铸造更多代币以增加供应量
-- **[转移代币](/tokens/transfer-a-token)** - 在钱包之间转移代币
-- **[更新代币元数据](/tokens/update-token)** - 更新代币的名称、符号或图像
-- **[销毁代币](/tokens/burn-tokens)** - 从流通中永久移除代币
+- **[发行代币](/zh/tokens/launch-token)** - 创建具有自定义元数据的新同质化代币
+- **[创建代币](/zh/tokens/create-a-token)** - 创建具有自定义元数据的新同质化代币
+- **[读取代币数据](/zh/tokens/read-token)** - 从区块链或DAS API获取代币信息
+- **[铸造代币](/zh/tokens/mint-tokens)** - 铸造更多代币以增加供应量
+- **[转移代币](/zh/tokens/transfer-a-token)** - 在钱包之间转移代币
+- **[更新代币元数据](/zh/tokens/update-token)** - 更新代币的名称、符号或图像
+- **[销毁代币](/zh/tokens/burn-tokens)** - 从流通中永久移除代币
 
 ## 前提条件
 
@@ -46,7 +46,7 @@ npm install -g @metaplex-foundation/cli
 mplx toolbox tm create --wizard --keypair <钱包文件路径> --rpc-url <RPC URL>
 ```
 
-有关更多详情，请参阅[CLI文档](/dev-tools/cli)。
+有关更多详情，请参阅[CLI文档](/zh/dev-tools/cli)。
 
 ### 使用JavaScript/TypeScript
 
@@ -56,12 +56,12 @@ mplx toolbox tm create --wizard --keypair <钱包文件路径> --rpc-url <RPC UR
 npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/mpl-toolbox @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
 ```
 
-然后按照[创建代币](/tokens/create-a-token)指南创建您的第一个同质化代币。
+然后按照[创建代币](/zh/tokens/create-a-token)指南创建您的第一个同质化代币。
 
 ## 深入了解
 
 有关更高级的代币功能，请参阅：
 
-- [Metaplex CLI](/dev-tools/cli) - 代币操作的命令行工具
-- [Token Metadata程序](/token-metadata) - Token Metadata程序完整文档
+- [Metaplex CLI](/zh/dev-tools/cli) - 代币操作的命令行工具
+- [Token Metadata程序](/zh/smart-contracts/token-metadata) - Token Metadata程序完整文档
 - [MPL Toolbox](https://github.com/metaplex-foundation/mpl-toolbox) - 低级代币操作

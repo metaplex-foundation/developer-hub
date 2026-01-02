@@ -10,7 +10,7 @@ description: Token Metadata 支持的各种代币标准概述
 
 共识似乎是这些代币应该与标准 NFT 一起存储在钱包的同一视图中，或者在它们自己的视图中但与"标准"同质化 SPL 代币（如 USDC）分开。这些代币在游戏环境中变得流行，用于支持同质化物品，如某种剑或一块木头等，但它们与 USDC 等典型的同质化 SPL 代币属于不同的类别。
 
-## [代币标准字段](/token-metadata/token-standard#the-token-standard-field)
+## [代币标准字段](/zh/smart-contracts/token-metadata/token-standard#the-token-standard-field)
 
 为了支持这个特定用例，同时使标准足够广泛以允许将来扩展到其他代币类型，我们使用 Metadata 账户上的 `Token Standard` 枚举来跟踪代币的同质性。此字段映射到特定的 JSON 标准，用于客观区分代币类型。
 

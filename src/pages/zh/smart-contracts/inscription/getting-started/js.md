@@ -26,7 +26,7 @@ import { mplInscription } from '@metaplex-foundation/mpl-inscription'
 const umi = createUmi('http://127.0.0.1:8899').use(mplInscription())
 ```
 
-然后您需要告诉Umi使用哪个钱包。这可以是[密钥对](/zh/dev-tools/umi/connecting-to-umi#使用密钥连接)或[solana钱包适配器](/zh/dev-tools/umi/connecting-to-umi#使用钱包适配器连接)。
+然后您需要告诉Umi使用哪个钱包。这可以是[密钥对](/zh/dev-tools/umi/getting-started#使用密钥连接)或[solana钱包适配器](/zh/dev-tools/umi/getting-started#使用钱包适配器连接)。
 
 就是这样，您现在可以通过使用[库提供的各种函数](https://mpl-inscription.typedoc.metaplex.com/)并将您的`Umi`实例传递给它们来与Inscriptions交互。以下是如何铸造一个带有小JSON文件附加的简单inscription，获取inscription的数据并打印inscription排名的示例。
 
