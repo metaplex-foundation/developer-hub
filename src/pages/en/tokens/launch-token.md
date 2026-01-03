@@ -1,7 +1,7 @@
 ---
-title: Launch a Token
-metaTitle: Launch a Token | Tokens
-description: End-to-end guide for launching a token with Genesis Launch Pools on Solana.
+title: Launch a Token on Solana
+metaTitle: How to Launch a Token on Solana | TGE & Fair Launch Guide | Metaplex
+description: Complete guide to launching a token generation event (TGE) on Solana. Create fair token launches using Genesis Launch Pools with step-by-step TypeScript code.
 ---
 
 Launch a token using [Genesis](/smart-contracts/genesis) Launch Pools, where users deposit SOL during a window and receive tokens proportional to their share of total deposits. {% .lead %}

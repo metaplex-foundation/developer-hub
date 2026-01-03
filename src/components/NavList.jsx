@@ -69,13 +69,13 @@ const transferATokenMenuItem = {
 
 const launchTokenMenuItem = {
   name: 'Launch Token',
-  headline: 'Launch a token with Metaplex Genesis.',
-  description: 'Launch a token using Genesis Launch Pools, where users deposit SOL during a window and receive tokens proportional to their share of total deposits.',
+  headline: 'Run a TGE or fair launch on Solana.',
+  description: 'Launch a token generation event (TGE) on Solana using Genesis Launch Pools. Users deposit SOL during a window and receive tokens proportional to their share.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/launch-token',
   localizedNavigation: {
-    ja: { name: 'トークンをローンチ', headline: 'Metaplex Genesisでトークンをローンチします。' },
-    ko: { name: '토큰 런칭', headline: 'Metaplex Genesis로 토큰을 런칭합니다.' },
+    ja: { name: 'トークンをローンチ', headline: 'SolanaでTGEまたはフェアローンチを実行します。' },
+    ko: { name: '토큰 런칭', headline: 'Solana에서 TGE 또는 페어 런칭을 실행합니다.' },
   },
 }
 

@@ -1,7 +1,7 @@
 ---
-title: 概要
-metaTitle: Genesis - 概要
-description: Solanaでの価格販売ローンチとローンチプールを通じたトークンローンチのためのスマートコントラクト。
+title: Genesis - Solanaトークンローンチスマートコントラクト
+metaTitle: Genesis | Solana TGE・トークンローンチプラットフォーム | フェアローンチ | Metaplex
+description: Genesisスマートコントラクトでsolanaトークンをローンチ。トークン生成イベント（TGE）、フェアローンチ、ICO、価格販売、ローンチプールをオンチェーンで構築。
 ---
 
 Genesisは、Solanaブロックチェーン上で**トークン生成イベント（TGE）**のための柔軟なフレームワークを提供するMetaplexスマートコントラクトです。価格販売で新しいトークンをローンチする場合でも、カスタムトークン配布システムを構築する場合でも、Genesisはそれを実現するためのオンチェーンインフラストラクチャを提供します。
