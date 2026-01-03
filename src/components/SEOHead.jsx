@@ -32,11 +32,16 @@ function getBaseUrl() {
   if (process.env.NODE_ENV === 'development') {
     return 'http://localhost:3000'
   }
-  // For preview deployments on Vercel
-  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  // Requires "Automatically expose System Environment Variables" enabled in Vercel settings
+  // For production on Vercel - use the project's production URL
+  if (process.env.VERCEL_ENV === 'production') {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   }
-  // For production
+  // For preview deployments on Vercel - use preview URL for testing
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`
+  }
+  // Fallback to hardcoded production URL
   return SITE_URL
 }
 
