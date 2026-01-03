@@ -83,7 +83,7 @@ export function Footer() {
             <h3 className="text-sm font-semibold text-white">
               {t('connect', 'Connect')}
             </h3>
-            <div className="flex items-center gap-4">
+            <nav aria-label="Social media" className="flex items-center gap-4">
               <Link
                 href="https://github.com/metaplex-foundation"
                 className="group"
@@ -108,7 +108,7 @@ export function Footer() {
               >
                 <XIcon className="h-5 w-5 fill-neutral-400 transition-colors group-hover:fill-neutral-200" />
               </Link>
-            </div>
+            </nav>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 ---
 title: 설치
-metaTitle: 설치 | Sugar
+metaTitle: Sugar 설치 가이드 - Candy Machine CLI 설정 | Metaplex Docs
 description: Sugar 설치 가이드.
 ---
 

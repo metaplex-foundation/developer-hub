@@ -1,6 +1,6 @@
 ---
 title: 개요
-metaTitle: 개요 | Tool
+metaTitle: MPL Toolbox - Solana 네이티브 프로그램 기능 | Metaplex Docs
 description: Solana의 네이티브 프로그램을 위한 필수 기능 세트를 제공하여 Umi를 보완하도록 설계된 패키지.
 ---
 

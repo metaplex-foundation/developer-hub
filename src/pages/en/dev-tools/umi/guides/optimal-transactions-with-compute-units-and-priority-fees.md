@@ -1,6 +1,6 @@
 ---
 title: Optimal transaction landing using Compute Units (CU) and priority fees
-metaTitle: Umi - Optimal transaction landing using Compute Units (CU) and priority fees
+metaTitle: Optimize Transactions with Compute Units & Fees | Umi
 description: Learn how to optimize your Solana transactions by calculating and setting appropriate Compute Units (CU) and priority fees.
 created: '12-02-2024'
 updated: '12-02-2024'

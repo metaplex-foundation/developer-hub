@@ -1,6 +1,6 @@
 ---
 title: 設定
-metaTitle: 設定 | Amman
+metaTitle: Amman 設定ガイド - ローカルバリデーター構成 | Metaplex Docs
 description: Ammanローカルバリデータツールキットの設定。
 ---
 

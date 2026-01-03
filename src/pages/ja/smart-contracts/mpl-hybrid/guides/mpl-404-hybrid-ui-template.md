@@ -7,7 +7,7 @@ created: 2024-12-16
 
 Metaplex MPL-404 Hybrid UIテンプレートは、開発者とユーザーに開発の出発点を提供するために構築されています。このテンプレートには、`.env`の例ファイル、機能的なUIコンポーネント、ハイブリッドコレクションのフロントエンドUIを作成する際の開発を促進するトランザクション呼び出しが事前設定されています。
 
-{% image src="/images/hybrid-ui-template-image.jpg" classes="m-auto" /%}
+{% image src="/images/hybrid-ui-template-image.jpg" alt="MPL-404 Hybrid UIテンプレートのスクリーンショット" classes="m-auto" /%}
 
 ## 機能
 
@@ -22,7 +22,7 @@ Metaplex MPL-404 Hybrid UIテンプレートは、開発者とユーザーに開
 
 このUIテンプレートは、ベースとなるMetaplex UIテンプレートを使用して作成されています。追加のドキュメントは以下で見つけることができます
 
-ベーステンプレートGithubリポジトリ - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+[View Base Template on GitHub](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ## インストール
 
@@ -30,7 +30,7 @@ Metaplex MPL-404 Hybrid UIテンプレートは、開発者とユーザーに開
 git clone https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn.git
 ```
 
-Githubリポジトリ - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+[View on GitHub](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
 
 
 ## セットアップ
@@ -85,4 +85,4 @@ const useUmiStore = create<UmiState>()((set) => ({
 
 このテンプレートが構築されているヘルパーと機能を理解するために、ベーステンプレートのドキュメントをさらに読むことをお勧めします
 
-Githubリポジトリ - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+[View on GitHub](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)

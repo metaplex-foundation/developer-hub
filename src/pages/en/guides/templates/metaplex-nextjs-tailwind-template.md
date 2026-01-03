@@ -6,7 +6,7 @@ description: A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana Wall
 
 Downloadable and reusable templates that utilize Nextjs and Tailwind for the front end framework while also being preinstalled with Metaplex Umi, Solana WalletAdapter, and Zustand global store for ease of use.
 
-{% image src="/images/metaplex-next-js-template.png" classes="m-auto" /%}
+{% image src="/images/metaplex-next-js-template.png" alt="Metaplex NextJS Tailwind Template screenshot showing the starter template interface" classes="m-auto" /%}
 
 ## Features
 
@@ -28,7 +28,7 @@ We currently have a number of templates available for Next JS with slightly diff
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template.git
 ```
 
-Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+[View on GitHub](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ### Tailwind + Shadcn
 
@@ -36,7 +36,7 @@ Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-t
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template.git
 ```
 
-Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
+[View on GitHub](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
 
 _The following sections cover common features shared by all templates listed on this page. Template-specific features are not included here; please refer to the respective GitHub repositories for detailed documentation on individual templates._
 

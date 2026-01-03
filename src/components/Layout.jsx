@@ -60,7 +60,7 @@ export function Layout({ children, page }) {
   };
 
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       <Header page={page} />
 
 
@@ -73,13 +73,13 @@ export function Layout({ children, page }) {
             <h1 className="text-4xl font-bold text-white">{t('title', 'Developer Hub')}</h1>
           </div>
           {productCategories.map((category) => (
-            <div key={category} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <section key={category} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
               <h2 className="mb-2 text-2xl font-bold text-white">{getCategoryName(category)}</h2>
               <p className="mb-8 text-sm text-neutral-400">
                 {getCategoryDescription(category)}
               </p>
               <ProductCardGrid category={category} />
-            </div>
+            </section>
           ))}
         </>
       )}
@@ -92,7 +92,7 @@ export function Layout({ children, page }) {
         >
           {/* Navigation. */}
           {hasNavigation && !page.product.isFallbackProduct && (
-            <div className="hidden lg:relative lg:block lg:flex-none scrollbar">
+            <aside className="hidden lg:relative lg:block lg:flex-none scrollbar">
               <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
               <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
               <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" />
@@ -103,7 +103,7 @@ export function Layout({ children, page }) {
                   className="w-64 pr-8 xl:w-72 xl:pr-16"
                 />
               </div>
-            </div>
+            </aside>
           )}
 
           {/* Content. */}
@@ -170,7 +170,7 @@ export function Layout({ children, page }) {
 
           {/* Table of contents. */}
           {page.tableOfContents.length > 0 && !page.product.isFallbackProduct && (
-            <div
+            <aside
               className={clsx(
                 'hidden',
                 hasNavigation
@@ -179,12 +179,12 @@ export function Layout({ children, page }) {
               )}
             >
               <TableOfContent tableOfContents={page.tableOfContents} />
-            </div>
+            </aside>
           )}
         </div>
       )}
 
       <Footer />
-    </div>
+    </main>
   )
 }

@@ -1,6 +1,6 @@
 ---
 title: Create a Website for minting Assets from your Core Candy Machine
-metaTitle: Create a Website for minting Assets from your Core Candy Machine | Core Candy Machine
+metaTitle: Build a Minting Website for Core Candy Machine | Metaplex
 description: How to create an UI to interact with your Candy Machine minting Program on Solana.
 ---
 
@@ -14,7 +14,7 @@ If you're looking for guidance on general web development practices or how to us
 
 ## Prerequisites
 
-- An already created Candy Machine. Find more info on how to create one [here](https://developers.metaplex.com/core-candy-machine/create).
+- An already created Candy Machine. Find more info on how to create one in [the Core Candy Machine documentation](https://developers.metaplex.com/core-candy-machine/create).
 - Basic familiarity with web development and your chosen framework. We recommend Next JS for easiest compatibility to umi.
 
 ## Required Packages

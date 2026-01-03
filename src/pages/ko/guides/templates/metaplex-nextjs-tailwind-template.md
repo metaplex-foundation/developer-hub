@@ -6,7 +6,7 @@ description: Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter 및 Zustand를
 
 프론트엔드 프레임워크로 Nextjs와 Tailwind를 활용하고 사용 편의성을 위해 Metaplex Umi, Solana WalletAdapter, Zustand 전역 스토어가 미리 설치된 다운로드 가능하고 재사용 가능한 템플릿입니다.
 
-{% image src="/images/metaplex-next-js-template.png" classes="m-auto" /%}
+{% image src="/images/metaplex-next-js-template.png" alt="Metaplex NextJS Tailwind 템플릿 스크린샷" classes="m-auto" /%}
 
 ## 기능
 
@@ -28,7 +28,7 @@ description: Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter 및 Zustand를
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template.git
 ```
 
-Github 저장소 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+[View on GitHub](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ### Tailwind + Shadcn
 
@@ -36,7 +36,7 @@ Github 저장소 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailw
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template.git
 ```
 
-Github 저장소 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
+[View on GitHub](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
 
 _다음 섹션들은 이 페이지에 나열된 모든 템플릿이 공유하는 공통 기능을 다룹니다. 템플릿별 기능은 여기에 포함되지 않습니다; 개별 템플릿에 대한 자세한 문서는 각각의 GitHub 저장소를 참조하세요._
 

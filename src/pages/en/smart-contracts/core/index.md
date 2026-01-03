@@ -10,7 +10,7 @@ Metaplex Core ("Core") sheds the complexity and technical debt of previous stand
 Please note that certain Core instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
 {% /callout %}
 
-Come try out Core's features over at [https://core.metaplex.com/](https://core.metaplex.com/) and mint an Asset yourself!
+Come try out Core's features over at [core.metaplex.com](https://core.metaplex.com/) and mint an Asset yourself!
 
 {% quick-links %}
 

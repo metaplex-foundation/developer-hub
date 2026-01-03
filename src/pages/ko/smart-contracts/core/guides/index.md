@@ -1,6 +1,6 @@
 ---
 title: 가이드
-metaTitle: 가이드 | Core
+metaTitle: Metaplex Core 가이드 - NFT 개발 튜토리얼 | Metaplex Docs
 description: Solana 블록체인 상의 Metaplex Core 디지털 자산 표준을 위한 가이드 및 튜토리얼 목록입니다.
 ---
 

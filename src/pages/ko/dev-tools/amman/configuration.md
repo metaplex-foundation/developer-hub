@@ -1,6 +1,6 @@
 ---
 title: 구성
-metaTitle: 구성 | Amman
+metaTitle: Amman 구성 가이드 - 로컬 검증자 설정 | Metaplex Docs
 description: Amman 로컬 검증자 도구 키트 구성하기.
 ---
 

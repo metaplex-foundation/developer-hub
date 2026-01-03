@@ -8,11 +8,11 @@ Hydraを始めるには、プログラミング環境用のパッケージが必
 
 Rustを使用している場合は、こちらでcrateを入手してください：
 
-[https://crates.io/crates/hydra_wallet](https://crates.io/crates/hydra_wallet)
+[hydra_wallet on crates.io](https://crates.io/crates/hydra_wallet)
 
 Javascriptを使用している場合は、こちらでパッケージを入手してください：
 
-[https://www.npmjs.com/package/@glasseaters/hydra-sdk](https://www.npmjs.com/package/@glasseaters/hydra-sdk)
+[@glasseaters/hydra-sdk on npm](https://www.npmjs.com/package/@glasseaters/hydra-sdk)
 
 ## クイックスタート - JS
 

@@ -1,6 +1,6 @@
 ---
 title: FAQ
-metaTitle: FAQ | Core
+metaTitle: Metaplex Core FAQ - よくある質問と回答 | Metaplex Docs
 description: Metaplex Coreプロトコルに関するよくある質問。
 ---
 

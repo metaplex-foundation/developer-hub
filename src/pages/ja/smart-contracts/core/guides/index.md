@@ -1,6 +1,6 @@
 ---
 title: ガイド
-metaTitle: ガイド | Core
+metaTitle: Metaplex Core ガイド - NFT開発チュートリアル | Metaplex Docs
 description: SolanaブロックチェーンのMetaplex Coreデジタルアセット標準のガイドとチュートリアルのリスト。
 ---
 

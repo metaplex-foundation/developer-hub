@@ -1,6 +1,6 @@
 ---
 title: FAQ
-metaTitle: FAQ | Core
+metaTitle: Metaplex Core FAQ - 자주 묻는 질문과 답변 | Metaplex Docs
 description: Metaplex Core 프로토콜에 대한 자주 묻는 질문.
 ---
 

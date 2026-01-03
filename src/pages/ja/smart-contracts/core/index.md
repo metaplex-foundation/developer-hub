@@ -1,6 +1,6 @@
 ---
 title: 概要
-metaTitle: 概要 | Core
+metaTitle: Metaplex Core - 次世代Solana NFT標準 | Metaplex Docs
 description: Metaplexが作成した「Core」と呼ばれる新しいSolana NFTアセット標準の概要を提供します。
 ---
 
@@ -12,7 +12,7 @@ Please note that certain Core instructions will require protocol fees. Please re
 
 {% protocol-fees program="core" /%}
 
-[https://core.metaplex.com/](https://core.metaplex.com/)でCoreの機能を試して、自分でアセットをミントしてみてください！
+[core.metaplex.com](https://core.metaplex.com/)でCoreの機能を試して、自分でアセットをミントしてみてください！
 
 {% quick-links %}
 

@@ -1,6 +1,6 @@
 ---
 title: 개요
-metaTitle: 개요 | Core
+metaTitle: Metaplex Core - 차세대 Solana NFT 표준 | Metaplex Docs
 description: Metaplex에서 만든 Core라는 새로운 Solana NFT 자산 표준의 개략적인 개요를 제공합니다.
 ---
 
@@ -12,7 +12,7 @@ Please note that certain Core instructions will require protocol fees. Please re
 
 {% protocol-fees program="core" /%}
 
-[https://core.metaplex.com/](https://core.metaplex.com/)에서 Core의 기능을 직접 체험해보고 자산을 민팅해보세요!
+[core.metaplex.com](https://core.metaplex.com/)에서 Core의 기능을 직접 체험해보고 자산을 민팅해보세요!
 
 {% quick-links %}
 

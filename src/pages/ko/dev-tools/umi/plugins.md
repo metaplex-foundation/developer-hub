@@ -1,6 +1,6 @@
 ---
 title: Umi 플러그인
-metaTitle: 플러그인 | Umi
+metaTitle: Umi 플러그인 - Solana 개발 확장 가이드 | Metaplex Docs
 description: Metaplex Umi의 플러그인
 ---
 Umi는 작은 무의존성 프레임워크이지만 플러그인으로 확장되도록 설계되었습니다. 플러그인을 통해 인터페이스와 상호작용하거나 인터페이스 구현을 교체할 뿐만 아니라 Umi 자체에 새로운 기능을 추가할 수 있습니다.

@@ -220,7 +220,7 @@ Note that when setting the `mint` account, it is require to specify a `bool` fla
 
 ## Create an Asset into a Collection
 
-MPL Core Assets can be created straight into a collection if your MPL Core Collection already exists. To create a Collection Asset visit [here](/smart-contracts/core/collections).
+MPL Core Assets can be created straight into a collection if your MPL Core Collection already exists. To create a Collection Asset, visit [the Collections documentation](/smart-contracts/core/collections).
 
 {% dialect-switcher title="Create Asset into Collection" %}
 {% dialect title="JavaScript" id="js" %}

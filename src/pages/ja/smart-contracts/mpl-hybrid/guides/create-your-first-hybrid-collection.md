@@ -152,7 +152,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 
 {% /totem %}
 
-**注意**: `walletAdapter`セクションは、`walletAdapter`を既にインストールして設定していることを前提として、Umiに接続するために必要なコードのみを提供しています。包括的なガイドについては、[これ](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)を参照してください
+**注意**: `walletAdapter`セクションは、`walletAdapter`を既にインストールして設定していることを前提として、Umiに接続するために必要なコードのみを提供しています。包括的なガイドについては、[Wallet Adapterセットアップガイド](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)を参照してください
 
 ### パラメータの設定
 

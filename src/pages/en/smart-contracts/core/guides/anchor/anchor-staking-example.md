@@ -28,7 +28,7 @@ This plugin allows the **delegate to freeze and thaw the asset, preventing trans
 
 **Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
 
-_Learn more about it [here](/smart-contracts/core/plugins/freeze-delegate)_
+_Learn more about it in [the Freeze Delegate Plugin documentation](/smart-contracts/core/plugins/freeze-delegate)_
 
 ### The Attribute Plugin
 
@@ -38,7 +38,7 @@ This plugin allows for **data storage directly on the assets, functioning as on-
 
 **This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
 
-_Learn more about it [here](/smart-contracts/core/plugins/attribute)_
+_Learn more about it in [the Attribute Plugin documentation](/smart-contracts/core/plugins/attribute)_
 
 ### The Smart Contract Logic
 
@@ -92,7 +92,7 @@ In the account struct of all instructions, we will separate the Signer and the P
 
 For this example we use the anchor flag from the mpl-core crate to directly deserialize the Asset and Collection account from the account struct and put some constraint on that
 
-_Learn more about it [here](/smart-contracts/core/using-core-in-anchor)_
+_Learn more about it in [the Using Core in Anchor guide](/smart-contracts/core/using-core-in-anchor)_
 
 We're going to use a single account struct, `Stake`, for both the `stake` and `unstake` instructions since they use the same accounts and same constraints.
 

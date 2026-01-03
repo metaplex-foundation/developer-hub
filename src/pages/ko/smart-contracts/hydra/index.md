@@ -1,6 +1,6 @@
 ---
 title: 개요
-metaTitle: 개요 | Hydra
+metaTitle: Hydra 팬아웃 지갑 - 수익 분배 시스템 | Metaplex Docs
 description: Hydra 지갑의 고수준 개요를 제공합니다.
 ---
 

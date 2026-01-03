@@ -1,6 +1,6 @@
 ---
 title: 시작하기
-metaTitle: 시작하기 | Umi
+metaTitle: Umi 시작하기 - Solana JavaScript 개발 가이드 | Metaplex Docs
 description: Solana를 위한 Javascript 프레임워크.
 ---
 
@@ -99,7 +99,7 @@ const umi = createUmi('<RPC-Endpoint>', '<Commitment-Level>')
 
 Umi를 설정할 때 트랜잭션을 전송하기 위해 지갑을 사용하거나 생성해야 합니다. 이를 위해 테스트용 **새 지갑을 생성**하거나, 파일 시스템에서 **기존 지갑을 가져오거나**, 웹 기반 dApp용 **walletAdapter를 사용**할 수 있습니다.
 
-**참고**: `walletAdapter` 섹션은 이미 `walletAdapter`를 설치하고 설정했다고 가정하고 Umi에 연결하는 데 필요한 코드만 제공합니다. 포괄적인 가이드는 [이것](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)을 참조하세요.
+**참고**: `walletAdapter` 섹션은 이미 `walletAdapter`를 설치하고 설정했다고 가정하고 Umi에 연결하는 데 필요한 코드만 제공합니다. 포괄적인 가이드는 [Wallet Adapter 설정 가이드](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)를 참조하세요.
 
 {% totem %}
 

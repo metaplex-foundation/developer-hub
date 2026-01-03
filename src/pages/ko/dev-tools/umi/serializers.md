@@ -1,6 +1,6 @@
 ---
 title: 직렬화기
-metaTitle: 직렬화기 | Umi
+metaTitle: Umi 직렬화기 - 데이터 직렬화 가이드 | Metaplex Docs
 description: Metaplex Umi의 직렬화기와 역직렬화기
 ---
 블록체인에 데이터를 전송하거나 읽을 때 직렬화는 프로세스의 큰 부분을 차지합니다. 직렬화 로직은 프로그램마다 다를 수 있으며, Borsh 직렬화가 Solana 프로그램에서 가장 인기 있는 선택이지만 유일한 선택은 아닙니다.

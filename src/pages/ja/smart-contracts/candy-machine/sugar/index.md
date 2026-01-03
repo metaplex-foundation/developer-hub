@@ -1,6 +1,6 @@
 ---
 title: 概要
-metaTitle: 概要 | Sugar
+metaTitle: Sugar CLI - Candy Machine管理ツール概要 | Metaplex Docs
 description: Candy Machineを管理するCLIツールSugarの詳細な概要。
 ---
 

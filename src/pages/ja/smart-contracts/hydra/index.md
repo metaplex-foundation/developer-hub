@@ -1,6 +1,6 @@
 ---
 title: 概要
-metaTitle: 概要 | Hydra
+metaTitle: Hydra ファンアウトウォレット - 収益分配システム | Metaplex Docs
 description: Hydraウォレットの高レベルな概要を提供します。
 ---
 

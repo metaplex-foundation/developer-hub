@@ -147,7 +147,7 @@ export function OfficialLinks() {
                 <tr key={link.name}>
                   <Td>{link.name}</Td>
                   <Td>
-                    <Link href={link.url}>{link.url}</Link>
+                    <Link href={link.url}>{t('visitSite', 'Visit Site')}</Link>
                   </Td>
                 </tr>
               ))}
@@ -176,7 +176,7 @@ export function OfficialLinks() {
                   <Td>{link.name}</Td>
                   <Td className="font-mono">{link.handle}</Td>
                   <Td>
-                    <Link href={link.url}>{link.url}</Link>
+                    <Link href={link.url}>{t('viewProfile', 'View Profile')}</Link>
                   </Td>
                 </tr>
               ))}
@@ -205,7 +205,7 @@ export function OfficialLinks() {
                   <Td>{link.name}</Td>
                   <Td className="font-mono">{link.handle}</Td>
                   <Td>
-                    <Link href={link.url}>{link.url}</Link>
+                    <Link href={link.url}>{t('viewProfile', 'View Profile')}</Link>
                   </Td>
                 </tr>
               ))}
@@ -232,7 +232,7 @@ export function OfficialLinks() {
                 <tr key={link.tagged}>
                   <Td className="font-mono">{link.tagged}</Td>
                   <Td>
-                    <Link href={link.url}>{link.url}</Link>
+                    <Link href={link.url}>{t('viewQuestions', 'View Questions')}</Link>
                   </Td>
                 </tr>
               ))}
@@ -259,7 +259,7 @@ export function OfficialLinks() {
                 <tr key={link.tagged}>
                   <Td className="font-mono">{link.tagged}</Td>
                   <Td>
-                    <Link href={link.url}>{link.url}</Link>
+                    <Link href={link.url}>{t('viewQuestions', 'View Questions')}</Link>
                   </Td>
                 </tr>
               ))}
@@ -289,14 +289,14 @@ export function OfficialLinks() {
                   <Td className="whitespace-nowrap">{program.name}</Td>
                   <Td className="font-mono text-xs">{program.programId}</Td>
                   <Td>
-                    <Link href={program.github}>{t('link', 'Link')}</Link>
+                    <Link href={program.github}>{t('viewOnGithub', 'View on GitHub')}</Link>
                   </Td>
                   <Td>
                     <NextLink
                       href={localePath(program.docs)}
                       className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                     >
-                      {t('link', 'Link')}
+                      {t('viewDocs', 'View Docs')}
                     </NextLink>
                   </Td>
                 </tr>

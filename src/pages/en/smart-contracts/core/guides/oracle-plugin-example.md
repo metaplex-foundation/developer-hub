@@ -1,6 +1,6 @@
 ---
 title: Create a US Market Trading Experience Using the Oracle External Plugin
-metaTitle: Create a US Market Trading Experience Using the Oracle External Plugin | Core Guides
+metaTitle: US Market Hours Trading with Oracle Plugin | Core
 description: This guide shows how to limit your Core Collection trades and sales during open US market hours.
 ---
 
@@ -17,13 +17,13 @@ Each External Adapter has the ability to assign lifecycle checks to Lifecycle Ev
 - **Reject**: The plugin can reject a lifecycle event.
 - **Approve**: The plugin can approve a lifecycle event.
 
-If you want to learn more about External Plugins, read more about them [here](/smart-contracts/core/external-plugins/overview).
+If you want to learn more about External Plugins, read more about them in [the External Plugins Overview](/smart-contracts/core/external-plugins/overview).
 
 ### Oracle Plugin
 
 The **Oracle Plugin** leverages the capability of external plugins to save data that an external authority can update by accessing **onchain data** accounts external to the Core asset, allowing assets to dynamically reject lifecycle events set by the asset authority. The external Oracle account can also be updated at any time to change the authorization behavior of the lifecycle events, providing a flexible and dynamic experience.
 
-If you want to learn more about the Oracle Plugin, read more about it [here](/smart-contracts/core/external-plugins/oracle).
+If you want to learn more about the Oracle Plugin, read more about it in [the Oracle Plugin documentation](/smart-contracts/core/external-plugins/oracle).
 
 ## Starting off: Understanding the Protocol behind the Idea
 
@@ -57,7 +57,7 @@ Now that the logic behind our protocol is clear, it’s time to dive into the co
 
 ### Anchor Overview
 
-In this guide, we'll use the Anchor framework, but you can also implement it using a native program. Learn more about the Anchor framework [here](https://www.anchor-lang.com/).
+In this guide, we'll use the Anchor framework, but you can also implement it using a native program. Learn more about the Anchor framework at [the Anchor website](https://www.anchor-lang.com/).
 
 For simplicity, we'll use a mono-file approach, with helpers, state, accounts, and instructions all in lib.rs instead of the usual separation.
 
@@ -134,10 +134,10 @@ impl Space for Oracle {
 Let's discuss some of the choices made in creating this struct:
 - There is no admin field because once initialized, it’s going to be permissionless, allowing anyone to interact with it.
 - The validation field is positioned first to leverage the native way of setting up the offset to search for on the NFT with just the discriminator size (8 bytes), avoiding the need for a custom offset on the Oracle Plugin config.
-- We save the bump for both the Oracle PDA and the Oracle Vault PDA to avoid deriving bumps every time we include this accounts in the instruction. This is a standard in Solana Development and it helps saving Compute Usage. Read more about it [here](https://solana.stackexchange.com/questions/12200/why-do-i-need-to-store-the-bump-inside-the-pda)
+- We save the bump for both the Oracle PDA and the Oracle Vault PDA to avoid deriving bumps every time we include this accounts in the instruction. This is a standard in Solana Development and it helps saving Compute Usage. Read more about it in [this Solana StackExchange discussion](https://solana.stackexchange.com/questions/12200/why-do-i-need-to-store-the-bump-inside-the-pda)
 
 Regarding space calculation, we use the Space implementation for Anchor directly, creating a constant called `INIT_SPACE` to reference when creating the PDA and storing enough SOL for rent exemption.  
-The only unusual aspect is that the OracleValidation struct from mpl-core needs to have a size of 5 bytes. The rest of the space calculation is standard. Learn more about calculating space [here](https://book.anchor-lang.com/anchor_references/space.html).
+The only unusual aspect is that the OracleValidation struct from mpl-core needs to have a size of 5 bytes. The rest of the space calculation is standard. Learn more about calculating space in [the Anchor Space Reference](https://book.anchor-lang.com/anchor_references/space.html).
 
 ### Accounts
 
@@ -315,7 +315,7 @@ The second part of the instruction checks if is_within_15_minutes_of_market_open
 
 Last part of this journey will be to create a collection and point it to the Oracle account so every asset we include in that collection will follow the custom Oracle rule!  
 
-Let's start by setting up your environment to use Umi. (Umi is a modular framework for building and using JavaScript clients for Solana programs. Learn more [here](/dev-tools/umi/getting-started))
+Let's start by setting up your environment to use Umi. (Umi is a modular framework for building and using JavaScript clients for Solana programs. Learn more in [the Umi documentation](/dev-tools/umi/getting-started))
 
 ```ts
 import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'

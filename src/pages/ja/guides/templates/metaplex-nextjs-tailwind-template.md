@@ -6,7 +6,7 @@ description: Nextjs、Tailwind、Metaplex Umi、Solana WalletAdapter、および
 
 Nextjsとは、使いやすくするために Metaplex Umi、Solana WalletAdapter、およびZustandグローバルストアがプリインストールされながら、フロントエンドフレームワークにNextjsとTailwindを利用したダウンロード可能で再利用可能なテンプレート。
 
-{% image src="/images/metaplex-next-js-template.png" classes="m-auto" /%}
+{% image src="/images/metaplex-next-js-template.png" alt="Metaplex NextJS Tailwindテンプレートのスクリーンショット" classes="m-auto" /%}
 
 ## 機能
 
@@ -28,7 +28,7 @@ Nextjsとは、使いやすくするために Metaplex Umi、Solana WalletAdapte
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template.git
 ```
 
-Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+[View on GitHub](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ### Tailwind + Shadcn
 
@@ -36,7 +36,7 @@ Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-t
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template.git
 ```
 
-Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
+[View on GitHub](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
 
 _以下のセクションは、このページにリストされているすべてのテンプレートで共有される共通機能をカバーしています。テンプレート固有の機能はここに含まれていません。個々のテンプレートの詳細なドキュメントについては、それぞれのGitHubリポジトリを参照してください。_
 

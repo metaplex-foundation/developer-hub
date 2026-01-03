@@ -1,6 +1,6 @@
 ---
 title: 概要
-metaTitle: 概要 | ツール
+metaTitle: MPL Toolbox - Solana Native Programs機能 | Metaplex Docs
 description: SolanaのNative Programに必要な機能のセットを提供することで、Umiを補完するように設計されたパッケージ。
 ---
 

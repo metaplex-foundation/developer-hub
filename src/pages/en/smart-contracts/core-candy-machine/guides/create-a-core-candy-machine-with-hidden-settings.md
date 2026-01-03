@@ -59,7 +59,7 @@ console.log("Signer: ", signer.publicKey);
 umi.use(signerIdentity(signer));
 ```
 
-You can find more details about setting up UMI [here](https://developers.metaplex.com/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)
+You can find more details about setting up UMI in [the UMI Setup Guide](https://developers.metaplex.com/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)
 
 ## Prepare Reveal Data
 Now, let’s prepare the reveal data, which will include the metadata for the final revealed NFTs. This data contains the name and URI for each NFT in the collection and will be used to update the placeholder metadata after minting.
@@ -93,7 +93,7 @@ let hash = crypto.createHash('sha256').update(string).digest()
 Let's now create a Collection asset. 
 For that, the mpl-core library provides a `createCollection` method will help us performing that action
 
-You can learn more about collections [here](https://developers.metaplex.com/core/collections)
+You can learn more about collections in [the Core Collections documentation](https://developers.metaplex.com/core/collections)
 
 ```ts
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
@@ -146,9 +146,9 @@ Next step is to create our Core Candy Machine with the Hidden Settings.
 
 To achieve that, we will use the `create` method from the mpl-core-candy-machine library, and we will set the `hiddenSettings` with the placeholder name, URI, and pre-calculated hash from the `revealData`
 
-More details on the Core Candy Machine creation and guards can be found [here](https://developers.metaplex.com/core-candy-machine/create).
+More details on the Core Candy Machine creation and guards can be found in [the Core Candy Machine documentation](https://developers.metaplex.com/core-candy-machine/create).
 
-Additionally, we’ll configure a startDate guard, which determines when minting begins. This is only one of the many guards available and you can find the list of all available guards [here](https://developers.metaplex.com/candy-machine/guards).
+Additionally, we'll configure a startDate guard, which determines when minting begins. This is only one of the many guards available and you can find the list of all available guards in [the Candy Machine Guards documentation](https://developers.metaplex.com/candy-machine/guards).
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';

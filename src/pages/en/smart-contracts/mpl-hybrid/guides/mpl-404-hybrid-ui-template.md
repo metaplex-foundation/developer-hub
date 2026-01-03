@@ -7,7 +7,7 @@ created: 2024-12-16
 
 The Metaplex MPL-404 Hybrid UI Template has been built to give developers and users a development starting point. The template comes preset up with `.env` example files, functional UI components and transaction calls to springboard your development while creating a front end UI for your Hybrid Collection.
 
-{% image src="/images/hybrid-ui-template-image.jpg" classes="m-auto" /%}
+{% image src="/images/hybrid-ui-template-image.jpg" alt="MPL-404 Hybrid UI Template screenshot showing the swap interface" classes="m-auto" /%}
 
 ## Features
 
@@ -22,7 +22,7 @@ The Metaplex MPL-404 Hybrid UI Template has been built to give developers and us
 
 This UI Template is created using the base Metaplex UI Template. Aditional documentation can be found at the following
 
-Base Template Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+[View Base Template on GitHub](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ## Installation
 
@@ -30,7 +30,7 @@ Base Template Github Repo - [https://github.com/metaplex-foundation/metaplex-nex
 git clone https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn.git
 ```
 
-Github Repo - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+[View on GitHub](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
 
 
 ## Setup
@@ -85,4 +85,4 @@ const useUmiStore = create<UmiState>()((set) => ({
 
 It is recommended to further read the documentation for the base template to understand the helpers and functionality this template is built with
 
-Github Repo - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+[View on GitHub](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
