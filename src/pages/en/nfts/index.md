@@ -1,47 +1,44 @@
 ---
-title: NFTs
-metaTitle: NFTs | Metaplex
-description: Learn how to create and manage NFTs on Solana using Metaplex Core.
+title: Solana NFTs
+metaTitle: Create NFTs on Solana | Metaplex Core | Digital Collectibles | Metaplex
+description: Create, manage, and trade NFTs on Solana using Metaplex Core. Build digital collectibles, art, and gaming assets with the most efficient NFT standard.
+tableOfContents: false
 ---
 
 Create and manage NFTs (non-fungible tokens) on Solana using Metaplex Core. {% .lead %}
 
-## Overview
+{% product-card-grid category="NFTs" /%}
 
-Non-fungible tokens (NFTs) are unique digital assets that represent ownership of items like art, collectibles, and in-game items. Metaplex Core provides a modern, efficient way to create and manage NFTs on Solana with a single account design that reduces costs and improves performance.
+## NFT Creation on Solana
 
-## What You Can Do
+Metaplex provides the industry-standard infrastructure for creating NFTs on Solana. With Metaplex Core, you get a modern, efficient NFT standard that reduces costs and improves performance compared to legacy solutions.
 
-This section provides beginner-friendly guides for common NFT operations:
+### What Are NFTs?
 
-- **[Create an NFT](/nfts/create-nft)** - Create a new NFT with custom metadata
-- **[Fetch an NFT](/nfts/fetch-nft)** - Retrieve NFT data from the blockchain
-- **[Update an NFT](/nfts/update-nft)** - Update NFT name or metadata
-- **[Transfer an NFT](/nfts/transfer-nft)** - Transfer NFT ownership between wallets
-- **[Burn an NFT](/nfts/burn-nft)** - Permanently destroy an NFT
+Non-fungible tokens (NFTs) are unique digital assets stored on the blockchain that represent ownership of items like:
 
-## Prerequisites
+- **Digital Art** - One-of-one artworks and limited edition pieces
+- **Collectibles** - Trading cards, profile pictures (PFPs), and memorabilia
+- **Gaming Assets** - In-game items, characters, and equipment
+- **Music & Media** - Albums, videos, and exclusive content
+- **Domain Names** - Blockchain-based naming services
 
-Before getting started, make sure you have:
+### Why Metaplex Core?
 
-- Node.js 16+ installed
-- A Solana wallet with some SOL for transaction fees
-- Basic JavaScript/TypeScript knowledge
+Metaplex Core is the next generation NFT standard on Solana, offering significant advantages:
 
-## Quick Start
+- **Single Account Design** - One account per NFT instead of multiple, reducing rent costs by up to 80%
+- **Plugin Architecture** - Extend functionality with royalties, freeze authority, attributes, and more
+- **Collection Support** - Organize NFTs into verified collections
+- **Efficient Transfers** - Faster and cheaper transfers than legacy standards
+- **Full Compatibility** - Works with all major Solana wallets and marketplaces
 
-Install the required packages:
+### Getting Started
 
-```bash
-npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
-```
+New to NFT creation? Start with these guides:
 
-Then follow the [Create an NFT](/nfts/create-nft) guide to create your first NFT with Metaplex Core.
+1. **[Create an NFT](/nfts/create-nft)** - Mint your first NFT with metadata
+2. **[Fetch an NFT](/nfts/fetch-nft)** - Read NFT data from the blockchain
+3. **[Transfer an NFT](/nfts/transfer-nft)** - Send NFTs between wallets
 
-## Learn More
-
-For more advanced NFT functionality, check out:
-
-- [Core Documentation](/smart-contracts/core) - Full documentation for Metaplex Core
-- [Core Plugins](/smart-contracts/core/plugins) - Extend NFT functionality with plugins
-- [Core Collections](/smart-contracts/core/collections) - Organize NFTs into collections
+For advanced NFT features, see the [Core smart contract documentation](/smart-contracts/core).

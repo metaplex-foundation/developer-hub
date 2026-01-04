@@ -12,10 +12,10 @@
       "devTools": "Dev Tools"
     },
     "categoryDescriptions": {
-      "tokens": "Create, read, update, burn, and transfer tokens on the Solana blockchain using Metaplex SDKs.",
-      "nfts": "Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs.",
-      "smartContracts": "On-chain programs for creating and managing digital assets on Solana.",
-      "devTools": "Tools and utilities to help you build with Metaplex programs."
+      "tokens": "Create and launch tokens on Solana. Run token generation events (TGE), fair launches, and manage fungible tokens.",
+      "nfts": "Create, manage, and trade NFTs on Solana using Metaplex Core and other NFT standards.",
+      "smartContracts": "Production-ready on-chain programs for NFTs, tokens, and digital assets on Solana.",
+      "devTools": "SDKs, CLIs, and APIs to build, test, and deploy digital asset applications on Solana."
     }
   },
   "navigation": {

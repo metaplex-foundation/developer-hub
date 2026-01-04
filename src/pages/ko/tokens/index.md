@@ -1,67 +1,41 @@
 ---
-title: 대체 가능 토큰
-metaTitle: 대체 가능 토큰 | Metaplex
-description: Metaplex SDK를 사용하여 Solana에서 대체 가능 토큰을 생성하고 관리하는 방법을 알아보세요.
+title: Solana 토큰
+metaTitle: Solana에서 토큰 생성 및 런칭 | 토큰 생성 이벤트 (TGE) | Metaplex
+description: Solana에서 대체 가능 토큰을 생성, 런칭, 관리하세요. Metaplex Genesis와 SDK를 사용하여 토큰 생성 이벤트(TGE), 페어 런칭, 토큰 세일을 구축합니다.
+tableOfContents: false
 ---
 
-Metaplex SDK를 사용하여 Solana에서 대체 가능 토큰(SPL 토큰)을 생성하고 관리합니다. {% .lead %}
+Metaplex SDK를 사용하여 Solana에서 대체 가능 토큰을 생성, 런칭, 관리합니다. {% .lead %}
 
-## 개요
+{% product-card-grid category="Tokens" /%}
 
-대체 가능 토큰은 각 단위가 다른 단위와 동일한 교환 가능한 디지털 자산입니다. 일반적인 예로는 암호화폐, 로열티 포인트, 게임 내 화폐 등이 있습니다. Solana에서 대체 가능 토큰은 SPL Token 프로그램을 사용하여 생성되며, 메타데이터는 Token Metadata 프로그램에서 관리됩니다.
+## Solana에서 토큰 런칭 및 생성
 
-## 할 수 있는 것
+Metaplex는 Solana에서 토큰을 런칭하기 위한 완전한 인프라를 제공합니다. 간단한 SPL 토큰 생성부터 전체 토큰 생성 이벤트(TGE) 진행까지, 토큰 생성에서 페어 런칭 배포까지 모든 것을 처리합니다.
 
-이 섹션에서는 일반적인 토큰 작업에 대한 초보자 친화적인 가이드를 제공합니다:
+### 토큰 생성 이벤트 (TGE)
 
-- **[토큰 출시하기](/ko/tokens/launch-token)** - 커스텀 메타데이터로 새 대체 가능 토큰 생성
-- **[토큰 생성하기](/ko/tokens/create-a-token)** - 커스텀 메타데이터로 새 대체 가능 토큰 생성
-- **[토큰 데이터 읽기](/ko/tokens/read-token)** - 블록체인 또는 DAS API에서 토큰 정보 조회
-- **[토큰 발행하기](/ko/tokens/mint-tokens)** - 추가 토큰을 발행하여 공급량 증가
-- **[토큰 전송하기](/ko/tokens/transfer-a-token)** - 지갑 간 토큰 전송
-- **[토큰 메타데이터 업데이트하기](/ko/tokens/update-token)** - 토큰 이름, 심볼 또는 이미지 업데이트
-- **[토큰 소각하기](/ko/tokens/burn-tokens)** - 유통에서 토큰을 영구 삭제
+토큰 생성 이벤트는 새로운 암호화폐 토큰을 생성하고 배포하는 과정입니다. Solana에서 Metaplex Genesis는 여러 런칭 메커니즘으로 TGE를 실행할 수 있는 스마트 컨트랙트 인프라를 제공합니다:
 
-## 사전 요구 사항
+- **런칭 풀** - 사용자가 일정 기간 동안 SOL을 예치하고, 예치 비율에 따라 토큰을 받습니다. 유기적인 가격 발견이 가능하고 스나이핑을 방지합니다.
+- **프라이스드 세일** - 선택적 캡과 지갑 게이트가 있는 고정 가격 토큰 판매. 선착순 방식으로 예측 가능한 결과를 제공합니다.
+- **균일 가격 경매** - 모든 낙찰자가 청산 가격으로 토큰을 받는 시간 기반 경매.
 
-시작하기 전에 다음을 확인하세요:
+### Metaplex로 Solana에서 런칭해야 하는 이유
 
-- Node.js 16 이상 설치
-- 트랜잭션 수수료를 위한 SOL이 있는 Solana 지갑
-- JavaScript/TypeScript 기본 지식
+Solana의 높은 처리량과 낮은 트랜잭션 비용은 토큰 런칭에 이상적입니다. Metaplex Genesis와 함께하면:
 
-## 빠른 시작
+- **온체인 투명성** - 모든 런칭 메커니즘이 온체인에서 검증 가능
+- **공정한 배포** - 시간 기반 윈도우가 프론트러닝과 봇 조작 방지
+- **유연한 구성** - 예치 기간, 클레임 윈도우, 배포 규칙 커스터마이징
+- **내장 메타데이터** - 토큰이 첫날부터 풍부한 메타데이터(이름, 심볼, 이미지) 포함
 
-### CLI 사용하기 (빠른 작업에 권장)
+### 시작하기
 
-Metaplex CLI를 설치하여 토큰을 빠르게 생성하고 관리합니다:
+토큰 생성이 처음이신가요? 다음 가이드로 시작하세요:
 
-```bash
-npm install -g @metaplex-foundation/cli
-```
+1. **[토큰 생성하기](/ko/tokens/create-a-token)** - 메타데이터가 있는 기본 SPL 토큰 생성
+2. **[토큰 런칭하기](/ko/tokens/launch-token)** - Genesis Launch Pools로 전체 토큰 런칭 실행
+3. **[토큰 발행하기](/ko/tokens/mint-tokens)** - 토큰에 추가 공급량 발행
 
-첫 번째 토큰을 생성합니다:
-
-```bash
-mplx toolbox tm create --wizard --keypair <지갑 파일 경로> --rpc-url <RPC URL>
-```
-
-자세한 내용은 [CLI 문서](/ko/dev-tools/cli)를 참조하세요.
-
-### JavaScript/TypeScript 사용하기
-
-필요한 패키지를 설치합니다:
-
-```bash
-npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/mpl-toolbox @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
-```
-
-그런 다음 [토큰 생성하기](/ko/tokens/create-a-token) 가이드를 따라 첫 번째 대체 가능 토큰을 생성하세요.
-
-## 더 알아보기
-
-더 고급 토큰 기능에 대해서는 다음을 확인하세요:
-
-- [Metaplex CLI](/ko/dev-tools/cli) - 토큰 작업을 위한 커맨드라인 도구
-- [Token Metadata 프로그램](/token-metadata) - Token Metadata 프로그램 전체 문서
-- [MPL Toolbox](https://github.com/metaplex-foundation/mpl-toolbox) - 저수준 토큰 작업
+고급 런칭 구성은 [Genesis 스마트 컨트랙트 문서](/ko/smart-contracts/genesis)를 참조하세요.

@@ -1,67 +1,41 @@
 ---
-title: ファンジブルトークン
-metaTitle: ファンジブルトークン | Metaplex
-description: Metaplex SDKを使用してSolana上でファンジブルトークンを作成・管理する方法を学びます。
+title: Solanaトークン
+metaTitle: Solanaでトークンを作成・ローンチ | トークン生成イベント (TGE) | Metaplex
+description: Solana上でファンジブルトークンを作成、ローンチ、管理。Metaplex GenesisとSDKを使用してトークン生成イベント（TGE）、フェアローンチ、トークンセールを構築。
+tableOfContents: false
 ---
 
-Metaplex SDKを使用して、Solana上でファンジブルトークン（SPLトークン）を作成・管理します。 {% .lead %}
+Metaplex SDKを使用して、Solana上でファンジブルトークンを作成、ローンチ、管理します。 {% .lead %}
 
-## 概要
+{% product-card-grid category="Tokens" /%}
 
-ファンジブルトークンは、各ユニットが他のユニットと同一の交換可能なデジタル資産です。一般的な例には、暗号通貨、ロイヤリティポイント、ゲーム内通貨などがあります。Solanaでは、ファンジブルトークンはSPL Tokenプログラムを使用して作成され、メタデータはToken Metadataプログラムによって管理されます。
+## Solanaでのトークンローンチと作成
 
-## できること
+Metaplexは、Solanaでトークンをローンチするための完全なインフラストラクチャを提供します。シンプルなSPLトークンの作成から、フルスケールのトークン生成イベント（TGE）の実施まで、トークン作成からフェアローンチ配布までのすべてを当社のツールが処理します。
 
-このセクションでは、一般的なトークン操作について初心者向けのガイドを提供します：
+### トークン生成イベント（TGE）
 
-- **[トークンをローンチする](/ja/tokens/launch-token)** - カスタムメタデータを持つ新しいファンジブルトークンを作成
-- **[トークンを作成する](/ja/tokens/create-a-token)** - カスタムメタデータを持つ新しいファンジブルトークンを作成
-- **[トークンデータを読み取る](/ja/tokens/read-token)** - ブロックチェーンまたはDAS APIからトークン情報を取得
-- **[トークンをミントする](/ja/tokens/mint-tokens)** - 追加のトークンをミントして供給量を増加
-- **[トークンを転送する](/ja/tokens/transfer-a-token)** - ウォレット間でトークンを転送
-- **[トークンメタデータを更新する](/ja/tokens/update-token)** - トークンの名前、シンボル、または画像を更新
-- **[トークンをバーンする](/ja/tokens/burn-tokens)** - 流通からトークンを永久に削除
+トークン生成イベントは、新しい暗号通貨トークンを作成し配布するプロセスです。Solanaでは、Metaplex Genesisが複数のローンチメカニズムでTGEを実行するためのスマートコントラクトインフラストラクチャを提供します：
 
-## 前提条件
+- **ローンチプール** - ユーザーがウィンドウ期間中にSOLを預け入れ、そのシェアに比例してトークンを受け取ります。これにより有機的な価格発見が可能になり、スナイピングを防止します。
+- **プライスドセール** - オプションのキャップとウォレットゲートを備えた固定価格トークンセール。先着順のダイナミクスで予測可能な結果を実現。
+- **ユニフォームプライスオークション** - すべての落札者がクリアリング価格でトークンを受け取る時間ベースのオークション。
 
-始める前に、以下を確認してください：
+### なぜMetaplexでSolanaにローンチするのか？
 
-- Node.js 16以上がインストールされていること
-- トランザクション手数料用のSOLを持つSolanaウォレット
-- JavaScript/TypeScriptの基本的な知識
+Solanaの高スループットと低トランザクションコストは、トークンローンチに最適です。Metaplex Genesisと組み合わせることで：
 
-## クイックスタート
+- **オンチェーンの透明性** - すべてのローンチメカニクスはオンチェーンで検証可能
+- **公平な分配** - 時間ベースのウィンドウがフロントランニングとボットの操作を防止
+- **柔軟な設定** - デポジット期間、クレーム期間、分配ルールをカスタマイズ
+- **組み込みメタデータ** - トークンは初日からリッチなメタデータ（名前、シンボル、画像）を含む
 
-### CLIを使用する（簡単なタスクにおすすめ）
+### はじめに
 
-Metaplex CLIをインストールして、トークンの作成と管理を素早く行います：
+トークン作成が初めてですか？以下のガイドから始めましょう：
 
-```bash
-npm install -g @metaplex-foundation/cli
-```
+1. **[トークンを作成する](/ja/tokens/create-a-token)** - メタデータ付きの基本的なSPLトークンを作成
+2. **[トークンをローンチする](/ja/tokens/launch-token)** - Genesis Launch Poolsでフルトークンローンチを実行
+3. **[トークンをミントする](/ja/tokens/mint-tokens)** - トークンに追加供給をミント
 
-最初のトークンを作成します：
-
-```bash
-mplx toolbox tm create --wizard --keypair <ウォレットファイルへのパス> --rpc-url <RPC URL>
-```
-
-詳細については、[CLIドキュメント](/ja/dev-tools/cli)をご覧ください。
-
-### JavaScript/TypeScriptを使用する
-
-必要なパッケージをインストールします：
-
-```bash
-npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/mpl-toolbox @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
-```
-
-その後、[トークンを作成する](/ja/tokens/create-a-token)ガイドに従って、最初のファンジブルトークンを作成してください。
-
-## さらに詳しく
-
-より高度なトークン機能については、以下をご覧ください：
-
-- [Metaplex CLI](/ja/dev-tools/cli) - トークン操作のためのコマンドラインツール
-- [Token Metadataプログラム](/ja/smart-contracts/token-metadata) - Token Metadataプログラムの完全なドキュメント
-- [MPL Toolbox](https://github.com/metaplex-foundation/mpl-toolbox) - 低レベルトークン操作
+高度なローンチ設定については、[Genesisスマートコントラクトドキュメント](/ja/smart-contracts/genesis)をご覧ください。

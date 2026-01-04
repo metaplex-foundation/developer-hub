@@ -1,67 +1,41 @@
 ---
-title: Fungible Tokens
-metaTitle: Fungible Tokens | Metaplex
-description: Learn how to create and manage fungible tokens on Solana using Metaplex SDKs.
+title: Solana Tokens
+metaTitle: Create & Launch Tokens on Solana | Token Generation Event (TGE) | Metaplex
+description: Create, launch, and manage fungible tokens on Solana. Build token generation events (TGE), fair launches, and token sales using Metaplex Genesis and SDKs.
+tableOfContents: false
 ---
 
-Create and manage fungible tokens (SPL tokens) on Solana using Metaplex SDKs. {% .lead %}
+Create, launch, and manage fungible tokens on Solana using Metaplex SDKs. {% .lead %}
 
-## Overview
+{% product-card-grid category="Tokens" /%}
 
-Fungible tokens are interchangeable digital assets where each unit is identical to another. Common examples include cryptocurrencies, loyalty points, and in-game currencies. On Solana, fungible tokens are created using the SPL Token program with metadata managed by the Token Metadata program.
+## Token Launch & Creation on Solana
 
-## What You Can Do
+Metaplex provides the complete infrastructure for launching tokens on Solana. Whether you're creating a simple SPL token or orchestrating a full token generation event (TGE), our tools handle everything from token creation to fair launch distribution.
 
-This section provides beginner-friendly guides for common token operations:
+### Token Generation Events (TGE)
 
-- **[Launch a Token](/tokens/launch-token)** - Create a new fungible token with custom metadata
-- **[Create a Token](/tokens/create-a-token)** - Create a new fungible token with custom metadata
-- **[Read Token Data](/tokens/read-token)** - Fetch token information from the blockchain or DAS API
-- **[Mint Tokens](/tokens/mint-tokens)** - Mint additional tokens to increase supply
-- **[Transfer Tokens](/tokens/transfer-a-token)** - Transfer tokens between wallets
-- **[Update Token Metadata](/tokens/update-token)** - Update token name, symbol, or image
-- **[Burn Tokens](/tokens/burn-tokens)** - Permanently remove tokens from circulation
+A Token Generation Event is the process of creating and distributing a new cryptocurrency token. On Solana, Metaplex Genesis provides the smart contract infrastructure for running TGEs with multiple launch mechanisms:
 
-## Prerequisites
+- **Launch Pools** - Users deposit SOL during a window and receive tokens proportional to their share. This creates organic price discovery and prevents sniping.
+- **Priced Sales** - Fixed-price token sales with optional caps and wallet gates. Predictable outcomes with first-come, first-served dynamics.
+- **Uniform Price Auctions** - Time-based auctions where all winners receive tokens at the clearing price.
 
-Before getting started, make sure you have:
+### Why Launch on Solana with Metaplex?
 
-- Node.js 16+ installed
-- A Solana wallet with some SOL for transaction fees
-- Basic JavaScript/TypeScript knowledge
+Solana's high throughput and low transaction costs make it ideal for token launches. Combined with Metaplex Genesis, you get:
 
-## Quick Start
+- **On-chain transparency** - All launch mechanics are verifiable on-chain
+- **Fair distribution** - Time-based windows prevent front-running and bot manipulation
+- **Flexible configuration** - Customize deposit periods, claim windows, and distribution rules
+- **Built-in metadata** - Tokens include rich metadata (name, symbol, image) from day one
 
-### Using the CLI (Recommended for Quick Tasks)
+### Getting Started
 
-Install the Metaplex CLI for a quick way to create and manage tokens:
+New to token creation? Start with these guides:
 
-```bash
-npm install -g @metaplex-foundation/cli
-```
+1. **[Create a Token](/tokens/create-a-token)** - Create a basic SPL token with metadata
+2. **[Launch a Token](/tokens/launch-token)** - Run a full token launch with Genesis Launch Pools
+3. **[Mint Tokens](/tokens/mint-tokens)** - Mint additional supply to your token
 
-Then create your first token:
-
-```bash
-mplx toolbox tm create --wizard --keypair <path to your wallet file> --rpc-url <your RPC URL>
-```
-
-For more details, see the [CLI documentation](/dev-tools/cli).
-
-### Using JavaScript/TypeScript
-
-Install the required packages:
-
-```bash
-npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/mpl-toolbox @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
-```
-
-Then follow the [Create a Token](/tokens/create-a-token) guide to create your first fungible token.
-
-## Learn More
-
-For more advanced token functionality, check out:
-
-- [Metaplex CLI](/dev-tools/cli) - Command-line tool for token operations
-- [Token Metadata Program](/token-metadata) - Full documentation for the Token Metadata program
-- [MPL Toolbox](https://github.com/metaplex-foundation/mpl-toolbox) - Low-level token operations
+For advanced launch configurations, see the [Genesis smart contract documentation](/smart-contracts/genesis).

@@ -12,10 +12,10 @@
       "devTools": "개발 도구"
     },
     "categoryDescriptions": {
-      "tokens": "Metaplex SDK를 사용하여 솔라나 블록체인에서 토큰을 생성, 조회, 업데이트, 소각 및 전송하세요.",
-      "nfts": "Metaplex SDK를 사용하여 솔라나 블록체인에서 NFT를 생성, 조회, 업데이트, 소각 및 전송하세요.",
-      "smartContracts": "솔라나에서 디지털 자산을 생성하고 관리하기 위한 온체인 프로그램.",
-      "devTools": "Metaplex 프로그램으로 개발을 도와주는 도구 및 유틸리티."
+      "tokens": "Solana에서 토큰을 생성하고 런칭하세요. 토큰 생성 이벤트(TGE), 페어 런칭, 대체 가능 토큰 관리.",
+      "nfts": "Metaplex Core 및 기타 NFT 표준을 사용하여 Solana에서 NFT를 생성, 관리, 거래하세요.",
+      "smartContracts": "Solana의 NFT, 토큰, 디지털 자산을 위한 프로덕션 레디 온체인 프로그램.",
+      "devTools": "Solana에서 디지털 자산 애플리케이션을 구축, 테스트, 배포하기 위한 SDK, CLI, API."
     }
   },
   "navigation": {

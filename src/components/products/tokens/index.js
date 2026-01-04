@@ -16,6 +16,12 @@ export const tokens = {
   sections: [
     {
       ...documentationSection('tokens'),
+      // Don't show navigation on the index page (like smart-contracts and dev-tools)
+      isFallbackSection: false,
+      isPageFromSection: ({ pathname }) => {
+        // Match subpages but not the exact index
+        return pathname.startsWith('/tokens/') && pathname !== '/tokens'
+      },
       navigation: [
         {
           title: 'Introduction',

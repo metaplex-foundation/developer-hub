@@ -1,7 +1,7 @@
 ---
-title: トークンをローンチする
-metaTitle: トークンをローンチする | トークン
-description: SolanaでGenesis Launch Poolsを使用してトークンをローンチするためのエンドツーエンドガイド。
+title: Solanaでトークンをローンチする
+metaTitle: Solanaでトークンをローンチする方法 | TGE・フェアローンチガイド | Metaplex
+description: Solanaでトークン生成イベント（TGE）をローンチする完全ガイド。Genesis Launch Poolsを使用したフェアトークンローンチをステップバイステップのTypeScriptコードで作成。
 ---
 
 [Genesis](/ja/smart-contracts/genesis) Launch Poolsを使用してトークンをローンチします。ユーザーは設定した期間中にSOLを預け入れ、総預入額に対する自分のシェアに比例してトークンを受け取ります。 {% .lead %}
