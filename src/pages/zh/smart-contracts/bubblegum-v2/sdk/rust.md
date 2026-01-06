@@ -1,7 +1,7 @@
 ---
-title: MPL-Bubblegum Rust SDK
-metaTitle: Rust SDK | MPL-Bubblegum
-description: 了解如何设置您的项目以运行MPL-Bubblegum Rust SDK。
+title: MPL-Bubblegum V2 Rust SDK
+metaTitle: Rust SDK | MPL-Bubblegum V2
+description: 了解如何设置您的项目以运行MPL-Bubblegum V2 Rust SDK。
 ---
 
 Metaplex提供了一个Rust库，可用于与MPL-Bubblegum程序交互。Rust库可用于Rust脚本/构建以及通过CPI指令的链上程序。

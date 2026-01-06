@@ -28,10 +28,6 @@ const devToolsRedirects = [
 
 // Standalone page redirects to new locations
 const standaloneRedirects = {
-  '/stability-index': '/smart-contracts/security',
-  '/ja/stability-index': '/ja/smart-contracts/security',
-  '/ko/stability-index': '/ko/smart-contracts/security',
-  '/zh/stability-index': '/zh/smart-contracts/security',
   // Legacy page redirects
   '/community-guides': '/guides',
   '/contact': '/',

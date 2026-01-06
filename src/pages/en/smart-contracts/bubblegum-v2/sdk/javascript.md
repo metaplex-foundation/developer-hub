@@ -1,6 +1,6 @@
 ---
-title: MPL-Bubblegum JavaScript SDK
-metaTitle: JavaScript SDK | MPL-Bubblegum
+title: MPL-Bubblegum V2 JavaScript SDK
+metaTitle: JavaScript SDK | MPL-Bubblegum V2
 description: Learn how to set up your project to run the MPL-Bubblegum V2 JavaScript SDK.
 ---
 

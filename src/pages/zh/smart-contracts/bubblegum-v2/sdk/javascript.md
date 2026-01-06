@@ -1,7 +1,7 @@
 ---
-title: MPL-Bubblegum JavaScript SDK
-metaTitle: JavaScript SDK | MPL-Bubblegum
-description: 了解如何设置您的项目以运行MPL-Bubblegum JavaScript SDK。
+title: MPL-Bubblegum V2 JavaScript SDK
+metaTitle: JavaScript SDK | MPL-Bubblegum V2
+description: 了解如何设置您的项目以运行MPL-Bubblegum V2 JavaScript SDK。
 ---
 
 Metaplex提供了一个JavaScript库，可用于与MPL-Bubblegum程序交互。得益于[Umi框架](/zh/dev-tools/umi)，它不需要许多固定的依赖项，因此提供了一个可在任何JavaScript项目中使用的轻量级库。
