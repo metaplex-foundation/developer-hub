@@ -74,6 +74,20 @@ export const amman = {
         'Configuration': '설정',
         'Pre-made Configs': '미리 만들어진 설정'
       }
+    },
+    zh: {
+      headline: '本地验证器工具包',
+      description: '用于测试Solana程序和应用的本地验证器工具包。',
+      sections: {
+        'Introduction': '简介'
+      },
+      links: {
+        'Overview': '概述',
+        'Getting Started': '快速入门',
+        'CLI Commands': 'CLI命令',
+        'Configuration': '配置',
+        'Pre-made Configs': '预置配置'
+      }
     }
   }
 }

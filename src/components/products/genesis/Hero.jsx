@@ -6,7 +6,7 @@ const codeProps = {
     { name: 'createLaunch.ts', isActive: true },
   ],
   language: 'typescript',
-  code: `import { createLaunch } from '@metaplex-foundation/mpl-genesis';
+  code: `import { createLaunch } from '@metaplex-foundation/genesis';
 
 const launch = await createLaunch(umi, {
   name: 'My Token Launch',

@@ -22,7 +22,8 @@ export function usePage(pageProps) {
   const title = pageProps.markdoc?.frontmatter.title ?? t('meta.defaultTitle', 'Metaplex Documentation')
   const rawProduct = getActiveProduct(normalizedPathname, pageProps)
   const product = rawProduct ? localizeProduct(rawProduct, locale) : rawProduct
-  const activeSection = getActiveSection(normalizedPathname, product, pageProps)
+  // Pass both normalized pathname (for section matching) and original pathname (for link matching after localization)
+  const activeSection = getActiveSection(normalizedPathname, product, pageProps, pathname)
   const activeHero = getActiveHero(normalizedPathname, product, pageProps)
 
   // Special handling for 404 pages - localize the title
@@ -83,7 +84,7 @@ function getActiveHero(pathname, product, pageProps) {
   )
 }
 
-function getActiveSection(pathname, product, pageProps) {
+function getActiveSection(pathname, product, pageProps, originalPathname) {
   if (!product?.sections) return undefined
 
   // Find active section.
@@ -107,13 +108,18 @@ function getActiveSection(pathname, product, pageProps) {
       : undefined
 
   // Add navigation helpers.
+  // For non-English locales, links are localized with locale prefix, so use originalPathname
+  // For English, links don't have /en/ prefix, so use normalized pathname
   if (activeSection && activeSection.navigation) {
     const allLinks = activeSection.navigation.flatMap((group) => group.links)
-    const linkIndex = allLinks.findIndex((link) => link.href === pathname)
+    // Check if links have locale prefix by looking at first link
+    const linksHaveLocalePrefix = allLinks.length > 0 && allLinks[0].href.match(/^\/(?:ja|ko|zh)\//)
+    const linkPathname = linksHaveLocalePrefix ? originalPathname : pathname
+    const linkIndex = allLinks.findIndex((link) => link.href === linkPathname)
     activeSection.previousPage = allLinks[linkIndex - 1]
     activeSection.nextPage = allLinks[linkIndex + 1]
     activeSection.navigationGroup = activeSection.navigation.find((group) =>
-      group.links.find((link) => link.href === pathname)
+      group.links.find((link) => link.href === linkPathname)
     )
   }
 

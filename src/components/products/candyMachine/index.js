@@ -275,6 +275,29 @@ export const candyMachine = {
         'Minting': '민팅',
         'Programmable NFTs': '프로그래밍 가능한 NFT'
       }
+    },
+    zh: {
+      headline: 'TM NFT发行平台',
+      description: '在Solana上发行您的下一个NFT合集。',
+      sections: {
+        'Introduction': '简介',
+        'Features': '功能',
+        'Available Guards': '可用守卫',
+        'Custom Guards': '自定义守卫',
+        'Candy Machine Guides': 'Candy Machine指南'
+      },
+      links: {
+        'Overview': '概述',
+        'Getting Started': '快速入门',
+        'Candy Machine Settings': 'Candy Machine设置',
+        'Managing Candy Machines': '管理Candy Machine',
+        'Inserting Items': '插入项目',
+        'Candy Guards': 'Candy Guards',
+        'Guard Groups': '守卫组',
+        'Special Guard Instructions': '特殊守卫指令',
+        'Minting': '铸造',
+        'Programmable NFTs': '可编程NFT'
+      }
     }
   }
 }

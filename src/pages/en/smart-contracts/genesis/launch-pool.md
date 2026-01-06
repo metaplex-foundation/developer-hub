@@ -352,4 +352,4 @@ if (deposit) {
 
 - [Priced Sale](/smart-contracts/genesis/priced-sale) - Pre-deposit collection before trading
 - [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API
-- [Launch Pool](https://github.com/metaplex-foundation/mpl-genesis/tree/main/clients/js/examples/launch-pool) - Example implementation on GitHub
+- [Launch Pool](https://github.com/metaplex-foundation/genesis/tree/main/clients/js/examples/launch-pool) - Example implementation on GitHub
