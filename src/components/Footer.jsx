@@ -52,6 +52,12 @@ export function Footer() {
               >
                 {t('protocolFees', 'Protocol Fees')}
               </Link>
+              <Link
+                href={getLocalizedHref('/stability-index', locale)}
+                className="hover:text-neutral-200 transition-colors"
+              >
+                {t('stabilityIndex', 'Stability Index')}
+              </Link>
             </div>
           </div>
 

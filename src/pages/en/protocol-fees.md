@@ -6,6 +6,12 @@ description: A details of the onchain fees for Metaplex's products.
 
 The Metaplex Protocol currently includes the following fees:
 
+## Genesis
+
+Token launch platform fees for Launch Pool operations. These are percentage-based fees applied to deposits, withdrawals, and graduation.
+
+{% protocol-fees program="genesis" showTitle=false /%}
+
 ## Core
 
 Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions.
@@ -41,12 +47,6 @@ Paid by the individual who swaps tokens and NFTs.
 Composable NFT fees for combine, split, and constraint editing operations.
 
 {% protocol-fees program="fusion" showTitle=false /%}
-
-## Genesis
-
-Token launch platform fees for Launch Pool operations. These are percentage-based fees applied to deposits, withdrawals, and graduation.
-
-{% protocol-fees program="genesis" showTitle=false /%}
 
 ## FAQs
 

@@ -6,6 +6,12 @@ description: Metaplexプロダクトのオンチェーン手数料の詳細。
 
 Metaplexプロトコルには現在、以下の手数料が含まれています：
 
+## Genesis
+
+ローンチプール操作のためのトークンローンチプラットフォーム手数料。これらは入金、出金、卒業に適用されるパーセンテージベースの手数料です。
+
+{% protocol-fees program="genesis" showTitle=false /%}
+
 ## Core
 
 ミンターが支払います（通常は新しいドロップをミントする個々のコレクターです）。プリントエディションを作成するものなど、NFTを「作成」するすべてのインストラクションが含まれます。
@@ -41,12 +47,6 @@ Metaplexプロトコルには現在、以下の手数料が含まれています
 結合、分割、制約編集操作のためのコンポーザブルNFT手数料。
 
 {% protocol-fees program="fusion" showTitle=false /%}
-
-## Genesis
-
-ローンチプール操作のためのトークンローンチプラットフォーム手数料。これらは入金、出金、卒業に適用されるパーセンテージベースの手数料です。
-
-{% protocol-fees program="genesis" showTitle=false /%}
 
 ## よくある質問
 
