@@ -16,6 +16,7 @@ const createATokenMenuItem = {
   localizedNavigation: {
     ja: { name: 'トークンを作成', headline: 'Metaplex SDKを使用してオンチェーンでトークンデータを作成します。' },
     ko: { name: '토큰 생성', headline: 'Metaplex SDK를 사용하여 온체인에서 토큰 데이터를 생성합니다.' },
+    zh: { name: '创建代币', headline: '使用Metaplex SDK在链上创建代币数据。' },
   },
 }
 
@@ -28,6 +29,7 @@ const mintTokensMenuItem = {
   localizedNavigation: {
     ja: { name: 'トークンを発行', headline: 'Metaplex SDKを使用して追加のトークンを発行します。' },
     ko: { name: '토큰 발행', headline: 'Metaplex SDK를 사용하여 추가 토큰을 발행합니다.' },
+    zh: { name: '铸造代币', headline: '使用Metaplex SDK铸造额外的代币。' },
   },
 }
 
@@ -40,6 +42,7 @@ const updateATokenMenuItem = {
   localizedNavigation: {
     ja: { name: 'トークンを更新', headline: 'Metaplex SDKを使用してトークンメタデータを更新します。' },
     ko: { name: '토큰 업데이트', headline: 'Metaplex SDK를 사용하여 토큰 메타데이터를 업데이트합니다.' },
+    zh: { name: '更新代币', headline: '使用Metaplex SDK更新代币元数据。' },
   },
 }
 
@@ -52,6 +55,7 @@ const burnATokenMenuItem = {
   localizedNavigation: {
     ja: { name: 'トークンをバーン', headline: 'Metaplex SDKを使用してトークンをバーンします。' },
     ko: { name: '토큰 소각', headline: 'Metaplex SDK를 사용하여 토큰을 소각합니다.' },
+    zh: { name: '销毁代币', headline: '使用Metaplex SDK销毁代币。' },
   },
 }
 
@@ -64,6 +68,7 @@ const transferATokenMenuItem = {
   localizedNavigation: {
     ja: { name: 'トークンを転送', headline: 'Metaplex SDKを使用してトークンを転送します。' },
     ko: { name: '토큰 전송', headline: 'Metaplex SDK를 사용하여 토큰을 전송합니다.' },
+    zh: { name: '转移代币', headline: '使用Metaplex SDK转移代币。' },
   },
 }
 
@@ -76,6 +81,7 @@ const launchTokenMenuItem = {
   localizedNavigation: {
     ja: { name: 'トークンをローンチ', headline: 'Metaplex Genesisでトークンをローンチします。' },
     ko: { name: '토큰 런칭', headline: 'Metaplex Genesis로 토큰을 런칭합니다.' },
+    zh: { name: '发行代币', headline: '使用Metaplex Genesis发行代币。' },
   },
 }
 
@@ -91,6 +97,7 @@ export const nftMenuCategory = [
     localizedNavigation: {
       ja: { name: 'NFTを作成', headline: 'Metaplex SDKを使用してオンチェーンでNFTデータを作成します。' },
       ko: { name: 'NFT 생성', headline: 'Metaplex SDK를 사용하여 온체인에서 NFT 데이터를 생성합니다.' },
+      zh: { name: '创建NFT', headline: '使用Metaplex SDK在链上创建NFT数据。' },
     },
   },
   {
@@ -102,6 +109,7 @@ export const nftMenuCategory = [
     localizedNavigation: {
       ja: { name: 'NFTを読み取る', headline: 'DASとMetaplex SDKを使用してオンチェーンのNFTデータを読み取ります。' },
       ko: { name: 'NFT 조회', headline: 'DAS와 Metaplex SDK를 사용하여 온체인 NFT 데이터를 조회합니다.' },
+      zh: { name: '读取NFT', headline: '使用DAS和Metaplex SDK读取链上NFT数据。' },
     },
   },
   {
@@ -113,6 +121,7 @@ export const nftMenuCategory = [
     localizedNavigation: {
       ja: { name: 'NFTを更新', headline: 'DASとMetaplex SDKを使用してオンチェーンのNFTデータを更新します。' },
       ko: { name: 'NFT 업데이트', headline: 'DAS와 Metaplex SDK를 사용하여 온체인 NFT 데이터를 업데이트합니다.' },
+      zh: { name: '更新NFT', headline: '使用DAS和Metaplex SDK更新链上NFT数据。' },
     },
   },
   {
@@ -124,6 +133,7 @@ export const nftMenuCategory = [
     localizedNavigation: {
       ja: { name: 'NFTをバーン', headline: 'DASとMetaplex SDKを使用してオンチェーンのNFTデータをバーンします。' },
       ko: { name: 'NFT 소각', headline: 'DAS와 Metaplex SDK를 사용하여 온체인 NFT 데이터를 소각합니다.' },
+      zh: { name: '销毁NFT', headline: '使用DAS和Metaplex SDK销毁链上NFT数据。' },
     },
   },
   {
@@ -135,6 +145,7 @@ export const nftMenuCategory = [
     localizedNavigation: {
       ja: { name: 'NFTを転送', headline: 'Metaplex SDKを使用してオンチェーンのNFTデータを転送します。' },
       ko: { name: 'NFT 전송', headline: 'Metaplex SDK를 사용하여 온체인 NFT 데이터를 전송합니다.' },
+      zh: { name: '转移NFT', headline: '使用Metaplex SDK转移链上NFT数据。' },
     },
   },
 ]
