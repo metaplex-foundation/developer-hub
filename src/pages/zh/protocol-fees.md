@@ -6,6 +6,12 @@ description: Metaplex产品链上费用详情。
 
 Metaplex协议目前包含以下费用：
 
+## Genesis
+
+代币发行平台费用，用于Launch Pool操作。这些是按百分比收取的费用，适用于存款、取款和毕业。
+
+{% protocol-fees program="genesis" showTitle=false /%}
+
 ## Core
 
 由铸造者支付，通常是铸造新发行NFT的个人收藏者。包括所有"创建"NFT的指令，包括创建打印版本的指令。
@@ -42,21 +48,11 @@ Metaplex协议目前包含以下费用：
 
 {% protocol-fees program="fusion" showTitle=false /%}
 
-## Genesis
-
-代币发行平台费用，用于Launch Pool操作。这些是按百分比收取的费用，适用于存款、取款和毕业。
-
-{% protocol-fees program="genesis" showTitle=false /%}
-
 ## 常见问题
 
 ### 费用金额会随时间变化吗？
 
 Metaplex基金会持续监控社区对费用的反馈，并可能随时间调整费用金额。我们的目标是保持费用最小化干扰，以促进协议的增长和使用。
-
-### 如果我通过Candy Machine发行10,000个NFT合集，作为创作者，Token Metadata或Core费用是多少？
-
-对于标准的10,000个NFT发行，创作者的Token Metadata或Core费用为0 SOL，因为创建费用分摊到从Candy Machine铸造的收藏者身上。
 
 ### Metaplex协议费用如何使用？
 

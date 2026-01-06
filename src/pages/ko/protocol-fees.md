@@ -6,6 +6,12 @@ description: Metaplex 제품의 온체인 수수료 세부 정보.
 
 Metaplex 프로토콜은 현재 다음 수수료를 포함합니다:
 
+## Genesis
+
+Launch Pool 작업을 위한 토큰 런치 플랫폼 수수료. 입금, 출금 및 졸업에 적용되는 백분율 기반 수수료입니다.
+
+{% protocol-fees program="genesis" showTitle=false /%}
+
 ## Core
 
 민터가 지불하며, 일반적으로 새로운 드롭을 민팅하는 개별 컬렉터입니다. 프린트 에디션을 생성하는 것을 포함하여 NFT를 "생성"하는 모든 인스트럭션을 포함합니다.
@@ -42,21 +48,11 @@ Metaplex 프로토콜은 현재 다음 수수료를 포함합니다:
 
 {% protocol-fees program="fusion" showTitle=false /%}
 
-## Genesis
-
-Launch Pool 작업을 위한 토큰 런치 플랫폼 수수료. 입금, 출금 및 졸업에 적용되는 백분율 기반 수수료입니다.
-
-{% protocol-fees program="genesis" showTitle=false /%}
-
 ## FAQ
 
 ### 수수료 금액이 시간이 지나면 변경되나요?
 
 Metaplex Foundation은 수수료와 관련된 커뮤니티 피드백을 지속적으로 모니터링하며 시간이 지남에 따라 수수료 금액을 변경할 수 있습니다. 우리의 목표는 수수료가 최소한의 방해가 되고 프로토콜의 성장과 사용을 촉진하는 것입니다.
-
-### 크리에이터로서 Candy Machine을 통해 10k NFT 컬렉션을 출시하는 데 Token Metadata 또는 core 수수료가 얼마나 드나요?
-
-Create 수수료는 Candy Machine에서 민팅하는 컬렉터들에게 분산되므로, 크리에이터는 표준 10k NFT 드롭에 대해 Token Metadata 또는 Core 수수료로 0 SOL이 발생합니다.
 
 ### Metaplex 프로토콜 수수료는 어떻게 사용되나요?
 
