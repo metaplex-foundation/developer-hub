@@ -54,10 +54,6 @@ Composable NFT fees for combine, split, and constraint editing operations.
 
 The Metaplex Foundation is constantly monitoring community feedback related to the fees and may change the fee amounts over time. Our goal is for fees to be minimally disruptive and promote the growth and usage of the protocol.
 
-### How much will it cost me, as a creator, in Token Metadata or core fees to launch a 10k NFT collection through Candy Machine?
-
-Creators will incur 0 SOL in Token Metadata or Core fees for a standard 10k NFT drop since the Create fees are spread amongst the collectors who are minting from the Candy Machine.
-
 ### How are Metaplex Protocol Fees Used?
 
 All protocol fees are used to further the objectives of the Metaplex Foundation, which is a non-profit organization established to foster the research, development and adoption of the Metaplex ecosystem. This includes providing incentives and assistance to the Metaplex community for the continued development, security, governance, and administration of the Metaplex Protocol and Metaplex DAO.

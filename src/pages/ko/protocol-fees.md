@@ -54,10 +54,6 @@ Launch Pool 작업을 위한 토큰 런치 플랫폼 수수료. 입금, 출금 �
 
 Metaplex Foundation은 수수료와 관련된 커뮤니티 피드백을 지속적으로 모니터링하며 시간이 지남에 따라 수수료 금액을 변경할 수 있습니다. 우리의 목표는 수수료가 최소한의 방해가 되고 프로토콜의 성장과 사용을 촉진하는 것입니다.
 
-### 크리에이터로서 Candy Machine을 통해 10k NFT 컬렉션을 출시하는 데 Token Metadata 또는 core 수수료가 얼마나 드나요?
-
-Create 수수료는 Candy Machine에서 민팅하는 컬렉터들에게 분산되므로, 크리에이터는 표준 10k NFT 드롭에 대해 Token Metadata 또는 Core 수수료로 0 SOL이 발생합니다.
-
 ### Metaplex 프로토콜 수수료는 어떻게 사용되나요?
 
 모든 프로토콜 수수료는 Metaplex 생태계의 연구, 개발 및 채택을 촉진하기 위해 설립된 비영리 조직인 Metaplex Foundation의 목표를 더욱 발전시키는 데 사용됩니다. 여기에는 Metaplex 프로토콜과 Metaplex DAO의 지속적인 개발, 보안, 거버넌스 및 관리를 위해 Metaplex 커뮤니티에 인센티브와 지원을 제공하는 것이 포함됩니다.
