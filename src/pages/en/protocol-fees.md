@@ -1,7 +1,7 @@
 ---
 title: Protocol Fees
 metaTitle: Protocol Fees | Developer Hub
-description: A details of the onchain fees for Metaplex's products.
+description: Details of the onchain fees for Metaplex's products.
 ---
 
 The Metaplex Protocol currently includes the following fees:
