@@ -1,6 +1,6 @@
 ---
 title: 序列化器
-metaTitle: 序列化器 | Umi
+metaTitle: Umi 序列化器 - 数据序列化和反序列化指南 | Metaplex
 description: Metaplex Umi 中的序列化器和反序列化器
 ---
 无论我们是向区块链发送数据还是从中读取数据，序列化都是过程中的重要组成部分。序列化逻辑可能因程序而异，虽然 Borsh 序列化是 Solana 程序最流行的选择，但它并不是唯一的选择。

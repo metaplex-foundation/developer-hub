@@ -1,6 +1,6 @@
 ---
 title: 收据
-metaTitle: 收据 | 拍卖行
+metaTitle: 拍卖行收据生成指南 | Metaplex Auction House
 description: 解释如何生成拍卖行收据。
 ---
 ## 简介

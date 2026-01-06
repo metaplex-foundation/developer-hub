@@ -1,6 +1,6 @@
 ---
 title: Umi 插件
-metaTitle: 插件 | Umi
+metaTitle: Umi 插件系统 - 创建和使用插件指南 | Metaplex
 description: Metaplex Umi 中的插件
 ---
 虽然 Umi 是一个小型零依赖框架，但它被设计为可通过插件扩展。插件不仅允许我们与其接口交互或更换其接口实现，还可以向 Umi 本身添加新功能。

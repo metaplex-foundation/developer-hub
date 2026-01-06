@@ -1,6 +1,6 @@
 ---
 title: 查找出价、列表和销售
-metaTitle: 查找 | 拍卖行
+metaTitle: 查找出价、列表和销售 | Metaplex Auction House
 description: "解释如何查找出价、列表和销售。"
 ---
 ## 简介

@@ -1,6 +1,6 @@
 ---
 title: 概述
-metaTitle: 概述 | Hydra
+metaTitle: Hydra 扇出钱包概述 | Metaplex Solana
 description: 提供Hydra钱包的高级概述。
 ---
 

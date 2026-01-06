@@ -1,6 +1,6 @@
 ---
 title: 概述
-metaTitle: 概述 | Sugar
+metaTitle: Sugar CLI 工具概述 | Metaplex Candy Machine
 description: Sugar 的详细概述，一个用于管理 Candy Machine 的 CLI 工具。
 ---
 
