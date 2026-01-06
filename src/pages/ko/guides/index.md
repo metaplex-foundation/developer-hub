@@ -4,7 +4,7 @@ metaTitle: Metaplex Solana 가이드 | 가이드
 description: Solana 블록체인에 대한 Metaplex의 가이드.
 ---
 
-![image info](./assets/banners/touch-screen.jpg)
+![Metaplex Solana Guides Banner](/assets/banners/touch-screen.jpg)
 
 이 섹션의 가이드는 **새로운 Solana 개발자들이 여정을 시작할 수 있도록 도와주도록 설계되었으며**, 단계별 지침과 실행 가능한 실제 예제를 제공합니다. 이러한 가이드는 점진적으로 개발자를 Solana 생태계에 소개하는 구조화된 학습 경로를 통해 핵심 개념을 가르치는 데 중점을 둡니다. 블록체인과 Solana의 고유한 기능에 대한 기본 사항부터 프로그램 개발 및 최적화 기술과 같은 고급 주제까지 모든 것을 다룹니다.
 
