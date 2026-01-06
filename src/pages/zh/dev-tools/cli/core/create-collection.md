@@ -1,5 +1,6 @@
 ---
 title: 创建集合
+metaTitle: 创建集合 | Metaplex CLI
 description: 使用不同方法创建 MPL Core 集合
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: 浏览器配置
+metaTitle: 浏览器配置 | Metaplex CLI
 description: 设置您首选的区块链浏览器
 ---
 
