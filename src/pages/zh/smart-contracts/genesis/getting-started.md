@@ -99,7 +99,7 @@ const ONE_BILLION = 1_000_000_000_000_000_000n; // 10亿代币
 | 桶类型 | 用例 |
 |-------------|----------|
 | **发行池** | 带比例分配的存款窗口 |
-| **定价销售** | 代币分配前的预存款收集 |
+| **预售** | 固定价格代币销售 |
 
 ### 流出桶
 通过结束行为接收代币或报价代币：
@@ -115,7 +115,7 @@ const ONE_BILLION = 1_000_000_000_000_000_000n; // 10亿代币
 {% /callout %}
 
 {% callout type="note" %}
-**[定价销售](/zh/smart-contracts/genesis/priced-sale)** - 在交易开始前收集承诺，然后根据自定义标准分配代币。
+**[预售](/zh/smart-contracts/genesis/presale)** - 固定价格代币销售，用户存入SOL并以预定汇率获得代币。
 {% /callout %}
 
 ## 步骤3：最终确定
@@ -149,7 +149,7 @@ console.log('Genesis账户已最终确定！');
 选择您的发行类型并遵循详细指南：
 
 1. **[发行池](/zh/smart-contracts/genesis/launch-pool)** - 带存款窗口的代币分配
-2. **[定价销售](/zh/smart-contracts/genesis/priced-sale)** - 交易前的预存款收集
+2. **[预售](/zh/smart-contracts/genesis/presale)** - 固定价格代币销售
 3. **[统一价格拍卖](/zh/smart-contracts/genesis/uniform-price-auction)** - 具有统一清算价格的基于时间的拍卖
 
 每个指南都包含完整的设置代码、用户操作和配置。

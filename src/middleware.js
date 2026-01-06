@@ -37,6 +37,11 @@ const standaloneRedirects = {
   '/contact': '/',
   '/developer-tools': '/dev-tools',
   '/programs-and-tools': '/smart-contracts',
+  // Genesis priced-sale renamed to presale
+  '/smart-contracts/genesis/priced-sale': '/smart-contracts/genesis/presale',
+  '/ja/smart-contracts/genesis/priced-sale': '/ja/smart-contracts/genesis/presale',
+  '/ko/smart-contracts/genesis/priced-sale': '/ko/smart-contracts/genesis/presale',
+  '/zh/smart-contracts/genesis/priced-sale': '/zh/smart-contracts/genesis/presale',
 }
 
 const redirectRules = {

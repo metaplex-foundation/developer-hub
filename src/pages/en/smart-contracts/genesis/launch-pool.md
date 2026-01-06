@@ -350,6 +350,6 @@ if (deposit) {
 
 ## Next Steps
 
-- [Priced Sale](/smart-contracts/genesis/priced-sale) - Pre-deposit collection before trading
+- [Presale](/smart-contracts/genesis/presale) - Pre-deposit collection before trading
 - [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API
 - [Launch Pool](https://github.com/metaplex-foundation/genesis/tree/main/clients/js/examples/launch-pool) - Example implementation on GitHub
