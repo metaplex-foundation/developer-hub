@@ -111,7 +111,7 @@ pub struct CreateCollectionArgs {
 
 In this `CreateCollectionArgs` struct, the **name** and **uri** fields are provided as inputs, which will serve as arguments for the `CreateCollectionV2CpiBuilder` instruction used to create the **Core Collection**.
 
-**Note**: Since this is an Anchor focused guide, we're not going to include here how to create the Uri. If you aren't sure how to do it, refer to [this example](/core/guides/javascript/how-to-create-a-core-collection-with-javascript#creating-the-metadata-for-the-collection)
+**Note**: Since this is an Anchor focused guide, we're not going to include here how to create the Uri. If you aren't sure how to do it, refer to [this example](/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript#creating-the-metadata-for-the-collection)
 
 ### Creating the Account Struct
 
@@ -254,7 +254,7 @@ CreateCollectionV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info
   .invoke()?;
 ```
 
-**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
+**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use! 
 
 ## The Client
 

@@ -11,7 +11,7 @@ description: Genesis를 사용하여 Solana에서 토큰을 런칭하는 기본 
 시작하기 전에 다음을 준비하세요:
 - Node.js 16+ 설치
 - 트랜잭션 수수료를 위한 SOL이 있는 Solana 지갑
-- Genesis SDK 설치 및 구성 완료 ([JavaScript SDK](/smart-contracts/genesis/sdk/javascript) 참조)
+- Genesis SDK 설치 및 구성 완료 ([JavaScript SDK](/ko/smart-contracts/genesis/sdk/javascript) 참조)
 
 ## Genesis 런칭 흐름
 
@@ -111,11 +111,11 @@ const ONE_BILLION = 1_000_000_000_000_000_000n; // 1,000,000,000 토큰
 ### 런칭 유형 선택
 
 {% callout type="note" %}
-**[Launch Pool](/smart-contracts/genesis/launch-pool)** - 사용자가 기간 동안 예치하고 총 예치금 대비 비율에 따라 토큰을 받습니다.
+**[Launch Pool](/ko/smart-contracts/genesis/launch-pool)** - 사용자가 기간 동안 예치하고 총 예치금 대비 비율에 따라 토큰을 받습니다.
 {% /callout %}
 
 {% callout type="note" %}
-**[Priced Sale](/smart-contracts/genesis/priced-sale)** - 거래 시작 전에 약정을 수집한 다음 맞춤 기준에 따라 토큰을 배포합니다.
+**[Priced Sale](/ko/smart-contracts/genesis/priced-sale)** - 거래 시작 전에 약정을 수집한 다음 맞춤 기준에 따라 토큰을 배포합니다.
 {% /callout %}
 
 ## 3단계: 확정
@@ -148,8 +148,8 @@ console.log('Genesis 계정 확정됨!');
 
 런칭 유형을 선택하고 상세 가이드를 따르세요:
 
-1. **[Launch Pool](/smart-contracts/genesis/launch-pool)** - 예치 기간이 있는 토큰 배포
-2. **[Priced Sale](/smart-contracts/genesis/priced-sale)** - 거래 전 사전 예치 수집
-3. **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** - 균일 청산 가격의 시간 기반 경매
+1. **[Launch Pool](/ko/smart-contracts/genesis/launch-pool)** - 예치 기간이 있는 토큰 배포
+2. **[Priced Sale](/ko/smart-contracts/genesis/priced-sale)** - 거래 전 사전 예치 수집
+3. **[Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction)** - 균일 청산 가격의 시간 기반 경매
 
 각 가이드에는 완전한 설정 코드, 사용자 작업 및 구성이 포함되어 있습니다.

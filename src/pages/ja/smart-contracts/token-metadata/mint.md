@@ -4,7 +4,7 @@ metaTitle: アセットのミント | Token Metadata
 description: Token MetadataでNFT、SFT、プログラマブルNFT（別名アセット）をミントする方法を学びます
 ---
 
-[Token Metadata概要](/ja/token-metadata)で説明したように、Solanaのデジタルアセットはいくつかのオンチェーンアカウントとトークンを説明するオフチェーンデータで構成されています。このページでは、これらのアセットをミントするプロセスについて説明します。 {% .lead %}
+[Token Metadata概要](/ja/smart-contracts/token-metadata)で説明したように、Solanaのデジタルアセットはいくつかのオンチェーンアカウントとトークンを説明するオフチェーンデータで構成されています。このページでは、これらのアセットをミントするプロセスについて説明します。 {% .lead %}
 
 ## ミントプロセス
 

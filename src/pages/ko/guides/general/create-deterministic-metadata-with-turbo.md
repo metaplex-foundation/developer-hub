@@ -31,7 +31,7 @@ npm i @ardrive/turbo-sdk
 
 이 예시에서는 결정적인 방식으로 메타데이터를 업로드하는 방법을 보여드립니다. 이를 위해서는 시작하기 전에 모든 자산을 준비해야 합니다.
 
-메타데이터를 생성하려면 [이러한 방법 중 하나](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators)를 사용하고 다음과 같이 0부터 시작하는 순차적 명명 규칙에 따라 메타데이터를 저장할 수 있습니다:
+메타데이터를 생성하려면 [이러한 방법 중 하나](/ko/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators)를 사용하고 다음과 같이 0부터 시작하는 순차적 명명 규칙에 따라 메타데이터를 저장할 수 있습니다:
 
 ```
 metadata/
@@ -41,7 +41,7 @@ metadata/
 ├─ ...
 ```
 
-**참고**: 메타데이터를 생성할 때 [NFT용 적절한 JSON 스키마](/token-metadata/token-standard#the-non-fungible-standard)를 따라야 합니다!
+**참고**: 메타데이터를 생성할 때 [NFT용 적절한 JSON 스키마](/ko/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)를 따라야 합니다!
 
 ## Turbo 설정하기
 
@@ -64,7 +64,6 @@ const turbo = TurboFactory.authenticated({
 ```
 
 **참고**: 이 예시에서는 devnet에서 작동하도록 환경을 구성하기 위해 `gatewayUrl`, `paymentServiceConfig`, `uploadServiceConfig`를 명시적으로 제공합니다. 메인넷 사용의 경우 이러한 필드를 비워두면 Turbo가 기본적으로 메인넷 엔드포인트를 사용합니다.
-Solana와 Eclipse 블록체인의 Metaplex Aura 네트워크에 액세스하려면 [여기](https://aura-app.metaplex.com/)의 Aura App을 방문하여 엔드포인트와 API 키를 받으세요.
 
 ## 메타데이터 업로드
 

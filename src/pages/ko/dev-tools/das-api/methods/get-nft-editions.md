@@ -22,7 +22,7 @@ description: 마스터 에디션 NFT 민트의 모든 인쇄 가능한 에디션
 응답에는 다음이 포함됩니다:
 
 - `editions` - 다음을 포함하는 에디션 객체 배열:
-  - `edition_address` - [에디션 계정](/token-metadata#printing-editions)의 주소
+  - `edition_address` - [에디션 계정](/ko/smart-contracts/token-metadata#printing-editions)의 주소
   - `edition_number` - 에디션 번호(1, 2, 3 등)
   - `mint_address` - 에디션의 민트 주소
 - `master_edition_address` - 마스터 에디션 계정의 주소

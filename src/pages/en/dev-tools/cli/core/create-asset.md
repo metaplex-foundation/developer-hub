@@ -1,5 +1,6 @@
 ---
 title: Create Asset
+metaTitle: Create Asset | Metaplex CLI
 description: Create an MPL Core Asset using different methods
 ---
 

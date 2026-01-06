@@ -34,6 +34,7 @@ function AppContent({ Component, pageProps }) {
         description={page.description}
         metaTitle={page.metaTitle}
         locale={page.locale}
+        product={page.product?.path}
       />
 
       <DialectProvider>

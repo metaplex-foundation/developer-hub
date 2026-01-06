@@ -75,9 +75,9 @@ npm i @metaplex-foundation/umi-bundle-tests
 ## Umi Basics
 
 In this section, we'll cover the essential steps to get started with Umi:
-- [Creating Umi and Connecting to an RPC](/umi/getting-started#connecting-to-an-rpc)
-- [Connecting a Wallet](/umi/getting-started#connecting-a-wallet)
-- [Registering Programs and Clients](/umi/getting-started#registering-programs-and-clients)
+- [Creating Umi and Connecting to an RPC](/dev-tools/umi/getting-started#connecting-to-an-rpc)
+- [Connecting a Wallet](/dev-tools/umi/getting-started#connecting-a-wallet)
+- [Registering Programs and Clients](/dev-tools/umi/getting-started#registering-programs-and-clients)
 
 ### Connecting to an RPC
 
@@ -171,7 +171,7 @@ umi.use(walletAdapterIdentity(wallet))
 
 **Note**: The **Umi** interface stores two instances of **Signer**: The **identity** using the app and the **payer** paying for transaction and storage fees. By default, the `signerIdentity` method will also update the **payer** attribute since, in most cases, the identity is also the payer. 
 
-If you want to learn more, go to the [Umi Context Interfaces Paragraph](/umi/interfaces#the-context-interface) 
+If you want to learn more, go to the [Umi Context Interfaces Paragraph](/dev-tools/umi/interfaces#the-context-interface) 
 
 ### Registering Programs and Clients
 

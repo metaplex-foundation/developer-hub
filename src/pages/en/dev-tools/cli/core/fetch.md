@@ -1,5 +1,6 @@
 ---
 title: Fetch Asset or Collection
+metaTitle: Fetch Asset or Collection | Metaplex CLI
 description: Fetch MPL Core Assets or Collections by their mint address
 ---
 

@@ -23,7 +23,7 @@ The fetch command supports an additional flag for detailed information:
 
 ## Related Commands
 
-- [`mplx cm create`](/cli/cm/create) - Create the candy machine to fetch
-- [`mplx cm insert`](/cli/cm/insert) - Load items (affects item counts)
-- [`mplx cm validate`](/cli/cm/validate) - Validate cache vs on-chain data
-- [`mplx cm withdraw`](/cli/cm/withdraw) - Clean up after checking status
+- [`mplx cm create`](/dev-tools/cli/cm/create) - Create the candy machine to fetch
+- [`mplx cm insert`](/dev-tools/cli/cm/insert) - Load items (affects item counts)
+- [`mplx cm validate`](/dev-tools/cli/cm/validate) - Validate cache vs on-chain data
+- [`mplx cm withdraw`](/dev-tools/cli/cm/withdraw) - Clean up after checking status

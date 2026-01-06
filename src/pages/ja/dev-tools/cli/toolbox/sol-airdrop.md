@@ -1,5 +1,6 @@
 ---
 title: SOLエアドロップ
+metaTitle: SOLエアドロップ | Metaplex CLI
 description: 指定されたアドレスにSOLをエアドロップ
 ---
 

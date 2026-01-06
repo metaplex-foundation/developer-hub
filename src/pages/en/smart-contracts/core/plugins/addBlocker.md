@@ -10,7 +10,7 @@ The **exception** to this are user managed plugins for assets like the transfer 
 
 This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collection`.
 
-As it is for other plugins, like [royalties](/core/plugins/royalties) when it is assigned to an MPL Core Collection the MPL Core Asset also is used on the Asset. So if it is added to a collection plugins cannot be added to asset anymore, too.
+As it is for other plugins, like [royalties](/smart-contracts/core/plugins/royalties) when it is assigned to an MPL Core Collection the MPL Core Asset also is used on the Asset. So if it is added to a collection plugins cannot be added to asset anymore, too.
 
 ## Works With
 

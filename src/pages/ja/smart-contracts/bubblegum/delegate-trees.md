@@ -6,7 +6,7 @@ description: BubblegumでMerkle Treesをdelegateする方法を学びます。
 
 圧縮NFTの所有者がDelegate Authorityを承認できるのと同様に、Bubblegum Treeの作成者も他のアカウントに代理でアクションを実行することを承認できます。 {% .lead %}
 
-Bubblegum TreeにDelegate Authorityが承認されると、作成者に代わって[圧縮NFTをミント](/ja/bubblegum/mint-cnfts)できるようになります。これはプライベートtreeにのみ関連することに注意してください。なぜなら、パブリックtreeでは誰でもミントできるからです。
+Bubblegum TreeにDelegate Authorityが承認されると、作成者に代わって[圧縮NFTをミント](/ja/smart-contracts/bubblegum/mint-cnfts)できるようになります。これはプライベートtreeにのみ関連することに注意してください。なぜなら、パブリックtreeでは誰でもミントできるからです。
 
 ## TreeのDelegate Authorityの承認
 

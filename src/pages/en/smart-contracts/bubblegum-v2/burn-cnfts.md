@@ -1,17 +1,17 @@
 ---
 title: Burning Compressed NFTs
 metaTitle: Burning Compressed NFTs | Bubblegum V2
-description: Learn how to burn compressed NFTs on Bubblegum.
+description: Learn how to burn compressed NFTs using Bubblegum V2.
 ---
 
 The **burnV2** instruction can be used to burn a Compressed NFT and, therefore, remove it from the Bubblegum Tree permanently. To authorize this operation, either the current owner or the delegate authority — if any — must sign the transaction. The instruction accepts the following parameter:
 
 - **Leaf Owner**, **Leaf Delegate**, or **Permanent Burn Delegate**: The current owner of the Compressed NFT, its delegate authority, if any, or the permanent burn delegate of the collection. If the asset is part of a collection, the `coreCollection` parameter must be passed. One of these must sign the transaction.
 
-Note that, since this instruction replaces the leaf on the Bubblegum Tree, additional parameters must be provided to verify the integrity of the Compressed NFT before it can be burned. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
+Note that, since this instruction replaces the leaf on the Bubblegum Tree, additional parameters must be provided to verify the integrity of the Compressed NFT before it can be burned. Since these parameters are common to all instructions that mutate leaves, they are documented [in the following FAQ](/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments). Fortunately, we can use a helper method that will automatically fetch these parameters for us using the Metaplex DAS API.
 
 {% callout title="Transaction size" type="note" %}
-If you encounter transaction size errors, consider using `{ truncateCanopy: true }` with `getAssetWithProof`. See the [FAQ](/bubblegum-v2/faq#replace-leaf-instruction-arguments) for details.
+If you encounter transaction size errors, consider using `{ truncateCanopy: true }` with `getAssetWithProof`. See the [FAQ](/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments) for details.
 {% /callout %}
 
 {% callout title="Collections" type="note" %}

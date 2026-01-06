@@ -35,7 +35,7 @@ const candyMachineSettings = {
 
 A big chunk of the Candy Machine settings is used to define the NFTs that will be minted from them. This is because many of the NFT attributes will be the same for all minted NFTs. Therefore, instead of having to repeat these attributes every time we load an item in the Candy Machine, we set them up once on the Candy Machine settings.
 
-Note that the only attributes that can distinguish one minted NFT from another are the **Name** of the NFT and the **URI** pointing to its JSON metadata. See [Inserting Items](/candy-machine/insert-items) for more information.
+Note that the only attributes that can distinguish one minted NFT from another are the **Name** of the NFT and the **URI** pointing to its JSON metadata. See [Inserting Items](/smart-contracts/candy-machine/insert-items) for more information.
 
 Here is the list of attributes shared between all minted NFTs.
 
@@ -44,7 +44,7 @@ Here is the list of attributes shared between all minted NFTs.
 - **Max Edition Supply**: The maximum number of editions that can be printed from the minted NFTs. For most use cases, you will want to set this to `0` to prevent minted NFTs to be printed multiple times. Note that you cannot set this to `null` which means unlimited editions are not supported in Candy Machines.
 - **Is Mutable**: Whether the minted NFTs should be mutable or not. We recommend setting this to `true` unless you have a specific reason. You can always make NFTs immutable in the future but you cannot make immutable NFTs mutable ever again.
 - **Creators**: A list of creators that should be set on minted NFTs. It includes their address and their shares of the royalties in percent — i.e. `5` is `5%`. Note that the Candy Machine address will always be set as the first creator of all minted NFTs and will automatically be verified. This makes it possible for anyone to verify that an NFT was minted from a trusted Candy Machine. All other provided creators will be set after that and will need to be verified manually by these creators.
-- **Token Standard**: The [token standard](/token-metadata/token-standard) to use on minted NFTs. So far only two token standards are supported: "[NonFungible](/token-metadata/token-standard#the-non-fungible-standard))" and "[ProgrammableNonFungible](/token-metadata/token-standard#the-programmable-non-fungible-standard)". Note that this is only available for Candy Machines whose _account version_ is 2 and above.
+- **Token Standard**: The [token standard](/smart-contracts/token-metadata/token-standard) to use on minted NFTs. So far only two token standards are supported: "[NonFungible](/smart-contracts/token-metadata/token-standard#the-non-fungible-standard))" and "[ProgrammableNonFungible](/smart-contracts/token-metadata/token-standard#the-programmable-non-fungible-standard)". Note that this is only available for Candy Machines whose _account version_ is 2 and above.
 - **Rule Set**: If a candy machine uses the "ProgrammableNonFungible" token standard, it can provide an explicit rule set that will be assigned to every minted programmable NFT. If no rule set is provided, it will default to using the rule set on the collection NFT, if any. Otherwise programmable NFTs will be minted without a rule set. Note that this is only available for Candy Machines whose _account version_ is 2 and above.
 
 {% dialect-switcher title="Set up shared NFT settings" %}
@@ -82,7 +82,7 @@ const candyMachineSettings = {
 
 ## Metaplex Certified Collections
 
-Each Candy Machine must be associated with a special NFT known as a [Metaplex Certified Collection (MCC)](/token-metadata/collections). This **Collection NFT** enables minted NFTs to be grouped together
+Each Candy Machine must be associated with a special NFT known as a [Metaplex Certified Collection (MCC)](/smart-contracts/token-metadata/collections). This **Collection NFT** enables minted NFTs to be grouped together
 and for that information to be verified onchain.
 
 To ensure no one else can use your Collection NFT on their Candy Machine, the **Collection's Update Authority** is required to sign any transaction that changes the Collection on a Candy Machine. As a result, the Candy Machine can safely verify the Collection of all minted NFTs automatically.
@@ -297,8 +297,8 @@ const candyMachineSettings = {
 
 As mentioned in the introduction, this page focuses on the main Candy Machine settings but there is a lot more you can configure on a Candy Machine by using guards.
 
-Since this is a vast subject with a lot of available default guards to explain, we’ve dedicated an entire section of this documentation to it. The best place to start is the [Candy Guards](/candy-machine/guards) page.
+Since this is a vast subject with a lot of available default guards to explain, we’ve dedicated an entire section of this documentation to it. The best place to start is the [Candy Guards](/smart-contracts/candy-machine/guards) page.
 
 ## Conclusion
 
-Now that we know about how the main Candy Machine settings, on [the next page](/candy-machine/manage), we’ll see how we can use them to create and update our own Candy Machines.
+Now that we know about how the main Candy Machine settings, on [the next page](/smart-contracts/candy-machine/manage), we’ll see how we can use them to create and update our own Candy Machines.

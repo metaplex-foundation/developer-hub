@@ -127,7 +127,7 @@ const transaction = builder.build(umi)
 const transaction = await builder.buildWithLatestBlockhash(umi)
 ```
 
-이 시점에서 빌드된 트랜잭션을 사용하고 `getSigners` 메서드를 통해 빌더에서 모든 중복 제거된 서명자를 가져와서 서명할 수 있습니다(자세한 내용은 [트랜잭션 서명](/umi/public-keys-and-signers#signing-transactions) 참조). 그러나 Umi는 이를 대신 수행할 수 있는 `buildAndSign` 메서드를 제공합니다. `buildAndSign`을 사용할 때 빌더에 설정되지 않은 경우에만 최신 블록해시가 사용됩니다.
+이 시점에서 빌드된 트랜잭션을 사용하고 `getSigners` 메서드를 통해 빌더에서 모든 중복 제거된 서명자를 가져와서 서명할 수 있습니다(자세한 내용은 [트랜잭션 서명](/ko/dev-tools/umi/public-keys-and-signers#signing-transactions) 참조). 그러나 Umi는 이를 대신 수행할 수 있는 `buildAndSign` 메서드를 제공합니다. `buildAndSign`을 사용할 때 빌더에 설정되지 않은 경우에만 최신 블록해시가 사용됩니다.
 
 ```ts
 const signedTransaction = await builder.buildAndSign(umi)

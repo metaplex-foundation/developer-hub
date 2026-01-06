@@ -30,12 +30,12 @@ The plugin can be used with any RPC that supports the Metaplex DAS API specifica
 Note You might need to contact your RPC provider to "enable" the DAS API on your endpoint.
 
 {% callout title="Metaplex Core DAS API" type="note" %}
-If you intend to use DAS on [Metaplex Core](/core) Assets you want to install the additional `@metaplex-foundation/mpl-core-das` package:
+If you intend to use DAS on [Metaplex Core](/smart-contracts/core) Assets you want to install the additional `@metaplex-foundation/mpl-core-das` package:
 {% /callout %}
 
 ## DAS for MPL Core
 
-The [DAS Extension](/das-api/core-extension) for [MPL Core](/core) helps directly returns you the correct types to further use with the MPL SDKs. It also automatically derives the plugins in assets inherited from the collection and provides [functions for DAS-to-Core type conversions](/das-api/core-extension/convert-das-asset-to-core).
+The [DAS Extension](/dev-tools/das-api/core-extension) for [MPL Core](/smart-contracts/core) helps directly returns you the correct types to further use with the MPL SDKs. It also automatically derives the plugins in assets inherited from the collection and provides [functions for DAS-to-Core type conversions](/dev-tools/das-api/core-extension/convert-das-asset-to-core).
 
 To use it first install the additional package:
 

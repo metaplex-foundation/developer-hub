@@ -325,7 +325,7 @@ The Allow List route instruction supports the following features.
 
 _Path: `proof`_
 
-Instead of passing the Merkle Proof directly to the mint instruction, the minting wallet must perform a [Pre-Validation](/core-candy-machine/mint#minting-with-pre-validation) by using the route instruction of the Allow List guard.
+Instead of passing the Merkle Proof directly to the mint instruction, the minting wallet must perform a [Pre-Validation](/smart-contracts/core-candy-machine/mint#minting-with-pre-validation) by using the route instruction of the Allow List guard.
 
 This route instruction will compute the Merkle Root from the provided Merkle Proof and, if valid, will create a new PDA account acting as proof that the minting wallet is part of the allowed list. Therefore, when minting, the Allow List guard only needs to check for the existence of this PDA account to authorize or deny minting to the wallet.
 

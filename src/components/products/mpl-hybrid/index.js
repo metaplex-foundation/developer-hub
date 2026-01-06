@@ -19,7 +19,6 @@ export const mplHybrid = {
   protocolFees: {
     swap: {
       solana: '0.005 SOL',
-      eclipse: '0.005 ETH',
       payer: 'Collector',
       notes: 'Paid by the individual who swaps tokens and NFTs.',
     },
@@ -182,6 +181,32 @@ export const mplHybrid = {
         'Swapping Tokens to NFTs': '토큰을 NFT로 스와핑',
         'Create your first Hybrid Collection': '첫 번째 하이브리드 컬렉션 만들기',
         'MPL-404 Hybrid UI Template': 'MPL-404 하이브리드 UI 템플릿'
+      }
+    },
+    zh: {
+      headline: '混合资产',
+      description: '用于混合资产的框架和链上协议。',
+      sections: {
+        'Introduction': '简介',
+        'SDK': 'SDK',
+        'UI Templates': 'UI模板',
+        'Features': '功能',
+        'General': '通用'
+      },
+      links: {
+        'Overview': '概述',
+        'Preparation': '准备',
+        'FAQ': '常见问题',
+        'Javascript SDK': 'JavaScript SDK',
+        'MPL-404 Hybrid UI': 'MPL-404混合UI',
+        'Create Escrow Configuration': '创建托管配置',
+        'Fetch Escrow Configuration': '获取托管配置',
+        'Funding Escrow': '托管资金',
+        'Updating Escrow Configuration': '更新托管配置',
+        'Swapping NFTs to Tokens': '将NFT交换为代币',
+        'Swapping Tokens to NFTs': '将代币交换为NFT',
+        'Create your first Hybrid Collection': '创建您的第一个混合合集',
+        'MPL-404 Hybrid UI Template': 'MPL-404混合UI模板'
       }
     }
   }

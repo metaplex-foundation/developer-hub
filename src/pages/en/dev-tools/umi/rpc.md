@@ -55,7 +55,7 @@ const confirmResult = await umi.rpc.confirmTransaction(signature, { strategy });
 const transaction = await umi.rpc.getTransaction(signature);
 ```
 
-Since transactions are an important component of Solana clients, we discuss them in more detail on the [Sending transactions](/umi/transactions) documentation page.
+Since transactions are an important component of Solana clients, we discuss them in more detail on the [Sending transactions](/dev-tools/umi/transactions) documentation page.
 
 ## Simulating transactions
 

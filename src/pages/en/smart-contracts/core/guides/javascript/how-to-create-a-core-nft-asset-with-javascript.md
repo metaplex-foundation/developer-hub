@@ -342,7 +342,7 @@ const tx = await create(umi, {
 const signature = base58.deserialize(tx.signature)[0]
 ```
 
-**Note**: Refer to the [documentation](/core/plugins) if you're not sure on what fields and plugin to use! 
+**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use! 
 
 ## Full Code Example
 

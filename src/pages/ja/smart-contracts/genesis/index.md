@@ -147,11 +147,11 @@ await revokeFreezeAuthorityV2(umi, {
 
 トークンローンチを構築する準備はできましたか？ここから始めましょう：
 
-- [はじめに](/smart-contracts/genesis/getting-started) - ローンチフローを理解し、最初のGenesisアカウントを初期化
-- [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) - SDKのインストールと設定
+- [はじめに](/ja/smart-contracts/genesis/getting-started) - ローンチフローを理解し、最初のGenesisアカウントを初期化
+- [JavaScript SDK](/ja/smart-contracts/genesis/sdk/javascript) - SDKのインストールと設定
 
 次に、ローンチタイプを選択してください：
 
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - 預金期間付きのトークン配布
-- [Priced Sale](/smart-contracts/genesis/priced-sale) - 取引開始前の事前預金
-- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - 均一クリアリング価格の時間ベースオークション
+- [Launch Pool](/ja/smart-contracts/genesis/launch-pool) - 預金期間付きのトークン配布
+- [Priced Sale](/ja/smart-contracts/genesis/priced-sale) - 取引開始前の事前預金
+- [Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction) - 均一クリアリング価格の時間ベースオークション

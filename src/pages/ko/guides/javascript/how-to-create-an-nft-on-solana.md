@@ -20,7 +20,7 @@ Core는 Metaplex가 개발한 가장 새롭고 진보된 디지털 자산 표준
 - 플러그인: Core는 Core Assets과 Collections이 추가 상태를 저장하고, 라이프사이클 검증을 제공하며, 향상된 동적 경험을 제공할 수 있게 하는 고급 플러그인 시스템을 제공합니다. 여기서 가능성은 무한합니다!
 - 비용: Bubblegum만큼 저렴하지는 않지만, Core는 최적화된 계정 구조로 인해 Token Metadata에 비해 생성과 민팅이 **훨씬 저렴**합니다.
 
-[Core로 NFT 생성하기](/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+[Core로 NFT 생성하기](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
 
 ## Token Metadata NFT/pNFT
 
@@ -32,7 +32,7 @@ Token Metadata는 모든 것을 시작한 Solana NFT 표준입니다. 2021년에
 - 생태계 지원: NFT와 pNFT는 MagicEden, Tensor, Phantom, Solflare 등과 같은 마켓플레이스와 지갑에서 Solana 전체적으로 지원됩니다.
 - SPL 토큰 기반: Token Metadata NFT/pNFT는 Solana의 SPL 토큰 프로그램을 기반으로 합니다.
 
-[Token Metadata로 NFT/pNFT 생성하기](/token-metadata/guides/javascript/create-an-nft)
+[Token Metadata로 NFT/pNFT 생성하기](/ko/smart-contracts/token-metadata/guides/javascript/create-an-nft)
 
 ## Bubblegum cNFT
 
@@ -43,4 +43,4 @@ Token Metadata는 모든 것을 시작한 Solana NFT 표준입니다. 2021년에
 - 저렴한 배포: 머클 트리 기반 제품인 트리는 필요시 수백만 개의 NFT를 저장할 수 있으면서도 배포가 저렴합니다.
 - 대량 에어드롭: 트리가 생성되면 트리의 저장소에 대한 비용이 이미 지불되었으므로 cNFT 에어드롭 비용은 거의 존재하지 않습니다.
 
-[Bubblegum으로 Solana에서 1,000,000개의 NFT 생성하기](/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)
+[Bubblegum으로 Solana에서 1,000,000개의 NFT 생성하기](/ko/smart-contracts/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana)

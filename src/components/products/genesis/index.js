@@ -10,9 +10,26 @@ export const genesis = {
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/genesis',
   icon: <SparklesIcon />,
-  github: 'https://github.com/metaplex-foundation/mpl-genesis',
+  github: 'https://github.com/metaplex-foundation/genesis',
   className: 'accent-pink',
   heroes: [{ path: '/smart-contracts/genesis', component: Hero }],
+  protocolFees: {
+    deposit: {
+      solana: '2%',
+      payer: 'User',
+      notes: 'Fee applied to deposits into Launch Pools.',
+    },
+    withdraw: {
+      solana: '2%',
+      payer: 'User',
+      notes: 'Fee applied to withdrawals from Launch Pools during the deposit period.',
+    },
+    graduation: {
+      solana: '5%',
+      payer: 'Launch Pool',
+      notes: 'Fee applied to total deposits at the end of the Deposit Period.',
+    },
+  },
   sections: [
     {
       ...documentationSection('smart-contracts/genesis'),
@@ -67,14 +84,14 @@ export const genesis = {
         },
       ],
     },
-    {
+   /* {
       ...guidesSection('smart-contracts/genesis'),
       navigation: [],
     },
     {
       ...referencesSection('smart-contracts/genesis'),
       navigation: [],
-    },
+    },*/ 
   ],
   localizedNavigation: {
     en: {
@@ -132,6 +149,25 @@ export const genesis = {
         'Priced Sale': '프라이스드 세일',
         'Uniform Price Auction': '균일가 경매',
         'Aggregation API': '애그리게이션 API',
+      },
+    },
+    zh: {
+      headline: '代币发行平台',
+      description: '用于通过发行池和定价销售在Solana上发行代币的智能合约',
+      sections: {
+        'Introduction': '简介',
+        'SDK': 'SDK',
+        'Launch Types': '发行类型',
+        'Integrations': '集成',
+      },
+      links: {
+        'Overview': '概述',
+        'Getting Started': '快速入门',
+        'JavaScript SDK': 'JavaScript SDK',
+        'Launch Pool': '发行池',
+        'Priced Sale': '定价销售',
+        'Uniform Price Auction': '统一价格拍卖',
+        'Aggregation API': '聚合API',
       },
     },
   },

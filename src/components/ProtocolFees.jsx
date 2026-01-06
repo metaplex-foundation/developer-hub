@@ -1,4 +1,7 @@
+'use client'
+
 import { products } from '@/components/products'
+import { useTranslations } from '@/contexts/LocaleContext'
 
 function formatFeeType(key) {
   // Convert camelCase to Title Case with spaces
@@ -9,6 +12,8 @@ function formatFeeType(key) {
 }
 
 export function ProtocolFees({ program, showTitle = true }) {
+  const t = useTranslations('protocolFees')
+
   // Find the product by path, path segment, or name
   const product = products.find(
     (p) =>
@@ -21,7 +26,7 @@ export function ProtocolFees({ program, showTitle = true }) {
     return (
       <div className="my-4 rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
         <p className="text-sm text-red-700 dark:text-red-400">
-          Product &quot;{program}&quot; not found.
+          {t('productNotFound', 'Product not found')}: &quot;{program}&quot;
         </p>
       </div>
     )
@@ -31,7 +36,7 @@ export function ProtocolFees({ program, showTitle = true }) {
     return (
       <div className="my-4 rounded-lg border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-700 dark:bg-neutral-800">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          No protocol fees defined for {product.name}.
+          {t('noFeesDefinedFor', 'No protocol fees defined for')} {product.name}.
         </p>
       </div>
     )
@@ -39,16 +44,11 @@ export function ProtocolFees({ program, showTitle = true }) {
 
   const fees = Object.entries(product.protocolFees)
 
-  // Check if any fee has Eclipse data
-  const hasEclipseFees = fees.some(
-    ([, fee]) => fee && typeof fee === 'object' && fee.eclipse !== null
-  )
-
   return (
     <div className="my-6">
       {showTitle && (
         <h3 className="mb-3 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-          Protocol Fees
+          {t('title', 'Protocol Fees')}
         </h3>
       )}
       <div className="overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700">
@@ -59,31 +59,21 @@ export function ProtocolFees({ program, showTitle = true }) {
                 scope="col"
                 className="px-4 py-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-100"
               >
-                Instruction
+                {t('instruction', 'Instruction')}
               </th>
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-100"
               >
-                Solana
+                {t('solana', 'Solana')}
               </th>
-              {hasEclipseFees && (
-                <th
-                  scope="col"
-                  className="px-4 py-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-100"
-                >
-                  Eclipse
-                </th>
-              )}
             </tr>
           </thead>
           <tbody className="divide-y divide-neutral-200 bg-white dark:divide-neutral-700 dark:bg-neutral-900">
             {fees.map(([type, fee]) => {
-              // Handle both old format (string) and new format (object with solana/eclipse)
+              // Handle both old format (string) and new format (object with solana)
               const solanaFee =
                 typeof fee === 'string' ? fee : fee?.solana || '-'
-              const eclipseFee =
-                typeof fee === 'object' ? fee?.eclipse || '-' : '-'
 
               return (
                 <tr key={type}>
@@ -93,11 +83,6 @@ export function ProtocolFees({ program, showTitle = true }) {
                   <td className="whitespace-nowrap px-4 py-3 text-sm font-mono text-neutral-900 dark:text-neutral-100">
                     {solanaFee}
                   </td>
-                  {hasEclipseFees && (
-                    <td className="whitespace-nowrap px-4 py-3 text-sm font-mono text-neutral-900 dark:text-neutral-100">
-                      {eclipseFee}
-                    </td>
-                  )}
                 </tr>
               )
             })}

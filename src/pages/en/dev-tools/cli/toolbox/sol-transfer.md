@@ -1,5 +1,6 @@
 ---
 title: SOL Transfer
+metaTitle: SOL Transfer | Metaplex CLI
 description: Transfer SOL to a specified address
 ---
 

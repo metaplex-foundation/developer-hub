@@ -37,8 +37,7 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 Umi를 설정하는 동안 테스트용 새 지갑을 생성하거나, 파일시스템에서 지갑을 가져오거나, UI/프론트엔드에서 `walletAdapter`를 사용할 수도 있습니다.
 이 예제에서는 비밀 키가 포함된 json 파일(wallet.json)에서 Keypair를 생성하겠습니다.
 
-devnet Aura 엔드포인트를 사용할 것입니다.
-Solana와 Eclipse 블록체인에서 Metaplex Aura 네트워크에 액세스하려면 엔드포인트와 API 키를 위해 Aura 앱을 방문할 수 있습니다 [여기](https://aura-app.metaplex.com/).
+Solana Devnet 엔드포인트를 사용할 것입니다.
 
 ```ts
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -46,8 +45,8 @@ import { generateSigner, some, none, createSignerFromKeypair, signerIdentity, tr
 import { mplCandyMachine as mplCoreCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
 import * as fs from 'fs';
 
-// `mplCoreCandyMachine()` 플러그인을 로드하면서 Metaplex Aura 데이터 네트워크의 Solana Devnet을 엔드포인트로 사용합니다.
-const umi = createUmi("https://devnet-aura.metaplex.com/<YOUR_API_KEY>")
+// `mplCoreCandyMachine()` 플러그인을 로드하면서 Solana Devnet을 엔드포인트로 사용합니다.
+const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCoreCandyMachine());
 
 // 비밀 키가 포함된 wallet json 파일에서 Keypair를 생성하고, 생성된 키페어를 기반으로 서명자를 생성합니다.
@@ -61,7 +60,7 @@ console.log("Signer: ", signer.publicKey);
 umi.use(signerIdentity(signer));
 ```
 
-UMI 설정에 대한 자세한 정보는 [여기](https://developers.metaplex.com/ko/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)에서 찾을 수 있습니다.
+UMI 설정에 대한 자세한 정보는 [여기](https://developers.metaplex.com/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)에서 찾을 수 있습니다.
 
 ## 공개 데이터 준비
 이제 최종 공개된 NFT의 메타데이터가 포함될 공개 데이터를 준비해보겠습니다. 이 데이터는 컬렉션의 각 NFT에 대한 이름과 URI를 포함하며 민팅 후 플레이스홀더 메타데이터를 업데이트하는 데 사용됩니다.
@@ -95,7 +94,7 @@ let hash = crypto.createHash('sha256').update(string).digest()
 이제 Collection asset을 생성해보겠습니다.
 이를 위해 mpl-core 라이브러리는 해당 작업을 수행하는 데 도움이 되는 `createCollection` 메서드를 제공합니다.
 
-컬렉션에 대해 자세히 알아보려면 [여기](https://developers.metaplex.com/ko/core/collections)를 참고하세요.
+컬렉션에 대해 자세히 알아보려면 [여기](https://developers.metaplex.com/ko/smart-contracts/core/collections)를 참고하세요.
 
 ```ts
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
@@ -148,9 +147,9 @@ console.log("Collection Details: \n", collection);
 
 이를 달성하기 위해 mpl-core-candy-machine 라이브러리의 `create` 메서드를 사용하고, `revealData`에서 플레이스홀더 이름, URI, 미리 계산된 해시로 `hiddenSettings`를 설정합니다.
 
-Core Candy Machine 생성과 guard에 대한 자세한 정보는 [여기](https://developers.metaplex.com/ko/core-candy-machine/create)에서 찾을 수 있습니다.
+Core Candy Machine 생성과 guard에 대한 자세한 정보는 [여기](https://developers.metaplex.com/ko/smart-contracts/core-candy-machine/create)에서 찾을 수 있습니다.
 
-또한 민팅이 시작되는 시점을 결정하는 startDate guard를 구성합니다. 이는 사용 가능한 많은 guard 중 하나일 뿐이며 사용 가능한 모든 guard의 목록은 [여기](https://developers.metaplex.com/ko/candy-machine/guards)에서 찾을 수 있습니다.
+또한 민팅이 시작되는 시점을 결정하는 startDate guard를 구성합니다. 이는 사용 가능한 많은 guard 중 하나일 뿐이며 사용 가능한 모든 guard의 목록은 [여기](https://developers.metaplex.com/ko/smart-contracts/candy-machine/guards)에서 찾을 수 있습니다.
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';

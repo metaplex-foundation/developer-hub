@@ -17,11 +17,11 @@ description: コレクションの取引・販売を米国市場の開場時間�
 - Reject: イベントを拒否
 - Approve: イベントを承認
 
-詳細は[外部プラグインの概要](/core/external-plugins/overview)を参照してください。
+詳細は[外部プラグインの概要](/ja/smart-contracts/core/external-plugins/overview)を参照してください。
 
 ### Oracleプラグイン
 
-Oracleプラグインは、外部のオンチェーンアカウント（Oracle）に保存されたデータを参照し、資産のライフサイクルイベントを動的に拒否/許可できます。Oracleアカウントの内容を更新することで、後から挙動を切り替え可能です。詳細は[Oracleプラグイン](/core/external-plugins/oracle)を参照してください。
+Oracleプラグインは、外部のオンチェーンアカウント（Oracle）に保存されたデータを参照し、資産のライフサイクルイベントを動的に拒否/許可できます。Oracleアカウントの内容を更新することで、後から挙動を切り替え可能です。詳細は[Oracleプラグイン](/ja/smart-contracts/core/external-plugins/oracle)を参照してください。
 
 ## 設計の考え方
 
@@ -96,5 +96,5 @@ await createCollection(umi, {
 
 ## まとめ
 
-Oracleプラグインを使えば、市場時間など外部要因に基づく柔軟なトレード制御が可能です。CoreやMetaplexについては[Developer Hub](/core/getting-started)も参照ください。
+Oracleプラグインを使えば、市場時間など外部要因に基づく柔軟なトレード制御が可能です。CoreやMetaplexについては[Developer Hub](/ja/smart-contracts/core/getting-started)も参照ください。
 

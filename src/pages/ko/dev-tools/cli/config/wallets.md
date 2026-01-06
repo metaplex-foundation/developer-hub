@@ -1,5 +1,6 @@
 ---
 title: 지갑
+metaTitle: 지갑 | Metaplex CLI
 description: 지갑 구성 관리
 ---
 
@@ -163,5 +164,5 @@ mplx config wallets set dev1
 
 ## 관련 명령어
 
-- [RPC](/cli/config/rpcs) - RPC 엔드포인트 관리
-- [탐색기](/cli/config/explorer) - 선호하는 블록체인 탐색기 설정
+- [RPC](/ko/dev-tools/cli/config/rpcs) - RPC 엔드포인트 관리
+- [탐색기](/ko/dev-tools/cli/config/explorer) - 선호하는 블록체인 탐색기 설정

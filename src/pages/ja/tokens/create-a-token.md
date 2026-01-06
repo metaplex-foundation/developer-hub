@@ -18,7 +18,7 @@ Token Metadataプログラムを使用して、Solana上でメタデータ付き
 
 ## トークンを作成する
 
-以下のコードは完全に実行可能な例です。カスタマイズ可能なパラメータを以下に示します。トークン作成の詳細については、[Token Metadataプログラム](/token-metadata/mint#minting-tokens)ページをご覧ください。
+以下のコードは完全に実行可能な例です。カスタマイズ可能なパラメータを以下に示します。トークン作成の詳細については、[Token Metadataプログラム](/ja/smart-contracts/token-metadata/mint#minting-tokens)ページをご覧ください。
 
 {% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi,cli" /%}
 
@@ -37,7 +37,7 @@ Token Metadataプログラムを使用して、Solana上でメタデータ付き
 
 ## メタデータと画像
 
-`uri`は少なくとも以下の情報を含むJSONファイルを指す必要があります。詳細は[Token Metadata標準ページ](/token-metadata/token-standard#the-fungible-standard)で確認できます。JSONと画像URLをどこからでもアクセスできるようにアップロードする必要があります。ArweaveなどのWeb3ストレージプロバイダーの使用をお勧めします。コードで行う場合は、この[ガイド](/guides/general/create-deterministic-metadata-with-turbo)に従ってください。
+`uri`は少なくとも以下の情報を含むJSONファイルを指す必要があります。詳細は[Token Metadata標準ページ](/ja/smart-contracts/token-metadata/token-standard#the-fungible-standard)で確認できます。JSONと画像URLをどこからでもアクセスできるようにアップロードする必要があります。ArweaveなどのWeb3ストレージプロバイダーの使用をお勧めします。コードで行う場合は、この[ガイド](/ja/guides/general/create-deterministic-metadata-with-turbo)に従ってください。
 
 ```json
 {

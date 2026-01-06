@@ -17,7 +17,7 @@ You can also insert items using the MPLX CLI, which handles batch processing aut
 ```bash
 mplx cm insert
 ```
-The CLI provides smart loading detection, progress tracking, and optimal batch sizing. See the [CLI insert command documentation](/cli/cm/insert) for more details.
+The CLI provides smart loading detection, progress tracking, and optimal batch sizing. See the [CLI insert command documentation](/dev-tools/cli/cm/insert) for more details.
 {% /callout %}
 
 {% dialect-switcher title="Add config lines" %}

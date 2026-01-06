@@ -469,7 +469,7 @@ await updateAsDataItemDelegateV2(umi, {
 
 ### Programmable Config Delegate
 
-- The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
+- The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/smart-contracts/token-metadata/pnfts).
 - The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the PNFT.
 - When applied to a Collection NFT, the Delegate Authority can perform the same updates on the items inside that Collection.
 
@@ -552,7 +552,7 @@ await updateAsProgrammableConfigDelegateV2(umi, {
 
 ### Programmable Config Item Delegate
 
-- The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/token-metadata/pnfts).
+- The Programmable Config Delegate is only relevant for [Programmable Non-Fungibles](/smart-contracts/token-metadata/pnfts).
 - The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the PNFT.
 - Even if the asset is a Collection NFT, and contrary to the Programmable Config Delegate, the Programmable Config Item Delegate cannot affect the items of that collection.
 
@@ -617,7 +617,7 @@ await updateAsProgrammableConfigItemDelegateV2(umi, {
 
 Token Delegates are delegates that operate at the Token level. This means they are spl-token delegates that are stored directly on the Token account of the SPL Token program. As such Token Delegates allow delegates to **transfer and burn tokens** on behalf of the owner but also **lock and unlock tokens** to prevent the owner from transferring, burning or even revoking the delegate. These delegates are crucial for applications like escrowless marketplaces, staking, asset loans, etc.
 
-Whilst there is only one type of delegate offered by the SPL Token program, [Programmable NFTs](/token-metadata/pnfts) (PNFTs) allowed the Token Metadata program to provide more granular delegates that can be selected on a per-case basis. This is because PNFTs are always frozen on the SPL Token program which means we can build a delegate system on top of it.
+Whilst there is only one type of delegate offered by the SPL Token program, [Programmable NFTs](/smart-contracts/token-metadata/pnfts) (PNFTs) allowed the Token Metadata program to provide more granular delegates that can be selected on a per-case basis. This is because PNFTs are always frozen on the SPL Token program which means we can build a delegate system on top of it.
 
 We store that delegate system on a PNFT-specific account called the **Token Record** PDA — whose seeds are `["metadata", program id, mint id, "token_record", token account id]`. We synchronise the delegated authority on the SPL Token program as well but the tokens are always frozen. It is the responsibility of the Token Record account to keep track of whether the asset is really locked or not.
 

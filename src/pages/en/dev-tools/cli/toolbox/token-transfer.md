@@ -1,5 +1,6 @@
 ---
 title: Token Transfer
+metaTitle: Token Transfer | Metaplex CLI
 description: Transfer tokens to a destination address
 ---
 
@@ -61,6 +62,6 @@ If the transfer fails, the command will display an error message and throw an ex
 
 ## Related Commands
 
-- [Token Creation](/cli/toolbox/token-create) - Create new tokens
-- [Balance Check](/cli/toolbox/sol-balance) - Check token balances
-- [SOL Transfer](/cli/toolbox/sol-transfer) - Transfer SOL between addresses 
+- [Token Creation](/dev-tools/cli/toolbox/token-create) - Create new tokens
+- [Balance Check](/dev-tools/cli/toolbox/sol-balance) - Check token balances
+- [SOL Transfer](/dev-tools/cli/toolbox/sol-transfer) - Transfer SOL between addresses 

@@ -32,7 +32,7 @@ Independent of the Mode (Wizard or Manual) you choose you will need your assets 
 
 - **Format**: JSON
 - **Naming**: Matching image files (0.json, 1.json, 2.json, ...)
-- **Schema**: Standard [Metaplex Core metadata format](/core/json-schema)
+- **Schema**: Standard [Metaplex Core metadata format](/smart-contracts/core/json-schema)
 
 *Collection Files:*
 
@@ -236,14 +236,14 @@ mplx cm validate
 
 ## Related Commands
 
-- [`mplx cm upload`](/cli/cm/upload) - Upload assets to storage
-- [`mplx cm insert`](/cli/cm/insert) - Insert items into candy machine
-- [`mplx cm validate`](/cli/cm/validate) - Validate asset cache
-- [`mplx cm fetch`](/cli/cm/fetch) - View candy machine information
+- [`mplx cm upload`](/dev-tools/cli/cm/upload) - Upload assets to storage
+- [`mplx cm insert`](/dev-tools/cli/cm/insert) - Insert items into candy machine
+- [`mplx cm validate`](/dev-tools/cli/cm/validate) - Validate asset cache
+- [`mplx cm fetch`](/dev-tools/cli/cm/fetch) - View candy machine information
 
 ## Next Steps
 
-1. **[Upload assets](/cli/cm/upload)** if created manually
-2. **[Insert items](/cli/cm/insert)** to load assets into candy machine
-3. **[Validate your setup](/cli/cm/validate)** to ensure everything works
-4. **[Learn about guards](/core-candy-machine/guards)** for advanced configuration
+1. **[Upload assets](/dev-tools/cli/cm/upload)** if created manually
+2. **[Insert items](/dev-tools/cli/cm/insert)** to load assets into candy machine
+3. **[Validate your setup](/dev-tools/cli/cm/validate)** to ensure everything works
+4. **[Learn about guards](/smart-contracts/core-candy-machine/guards)** for advanced configuration

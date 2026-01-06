@@ -16,7 +16,7 @@ description: 공개 인터페이스 구현 개요
 
 | 설명 | 관리자 | 링크 |
 | --- | --- | --- |
-| 내부 Signer 플러그인 | Metaplex | [Signers 문서](/umi/public-keys-and-signers#signers) |
+| 내부 Signer 플러그인 | Metaplex | [Signers 문서](/ko/dev-tools/umi/public-keys-and-signers#signers) |
 | Solana의 Wallet Adapters 사용 | Metaplex | [GitHub](https://github.com/metaplex-foundation/umi/tree/main/packages/umi-signer-wallet-adapters) / [NPM](https://www.npmjs.com/package/@metaplex-foundation/umi-signer-wallet-adapters) |
 | 메시지 서명에서 새 Signers 도출 | Metaplex | [GitHub](https://github.com/metaplex-foundation/umi/tree/main/packages/umi-signer-derived) / [NPM](https://www.npmjs.com/package/@metaplex-foundation/umi-signer-derived) |
 

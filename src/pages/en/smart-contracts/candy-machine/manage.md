@@ -4,7 +4,7 @@ metaTitle: Create, Update, Fetch and Delete | Candy Machine
 description: Explains how to manage Candy Machines.
 ---
 
-On [the previous page](/candy-machine/settings), we went through the various settings of a Candy Machine. So now, let’s see how we can use these settings to create and update Candy Machines. We’ll also talk about how to fetch an existing Candy Machine and how to delete it when it has served its purpose. {% .lead %}
+On [the previous page](/smart-contracts/candy-machine/settings), we went through the various settings of a Candy Machine. So now, let’s see how we can use these settings to create and update Candy Machines. We’ll also talk about how to fetch an existing Candy Machine and how to delete it when it has served its purpose. {% .lead %}
 
 Essentially, we’ll be going through the Create, Read, Update and Delete steps of a Candy Machine. Let’s go!
 
@@ -12,13 +12,13 @@ Essentially, we’ll be going through the Create, Read, Update and Delete steps 
 
 You may use the settings discussed on the previous page to create a brand-new Candy Machine account.
 
-Our SDKs push this even further and will associate every new Candy Machine account with a new Candy Guard account which keeps track of all activated guards affecting the minting process. On this page, we will focus on the Candy Machine account but we’ll dig into Candy Guard accounts and what we can do with them on [dedicated pages](/candy-machine/guards).
+Our SDKs push this even further and will associate every new Candy Machine account with a new Candy Guard account which keeps track of all activated guards affecting the minting process. On this page, we will focus on the Candy Machine account but we’ll dig into Candy Guard accounts and what we can do with them on [dedicated pages](/smart-contracts/candy-machine/guards).
 
-Remember that a Candy Machine [must be associated with a Collection NFT](/candy-machine/settings#metaplex-certified-collections) and its update authority must authorize this operation. If you haven’t got a Collection NFT for your Candy Machine yet, our SDKs can help with that too.
+Remember that a Candy Machine [must be associated with a Collection NFT](/smart-contracts/candy-machine/settings#metaplex-certified-collections) and its update authority must authorize this operation. If you haven’t got a Collection NFT for your Candy Machine yet, our SDKs can help with that too.
 
 {% callout type="note" title="Randomness" %}
 
-It can be advisable to utilize [Hidden Settings](/candy-machine/settings#hidden-settings) for the reveal mechanic, as the "random" minting process of the assets is not entirely unpredictable and can be influenced by sufficient resources and malicious intent.
+It can be advisable to utilize [Hidden Settings](/smart-contracts/candy-machine/settings#hidden-settings) for the reveal mechanic, as the "random" minting process of the assets is not entirely unpredictable and can be influenced by sufficient resources and malicious intent.
 
 {% /callout %}
 
@@ -97,7 +97,7 @@ API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/function
 
 Now that we’ve created the Candy Machine account, let’s see what data is stored inside it.
 
-First of all, it stores all the settings provided when the account was created and keeps track of any changes. See the [previous page](/candy-machine/settings) for more details on these settings.
+First of all, it stores all the settings provided when the account was created and keeps track of any changes. See the [previous page](/smart-contracts/candy-machine/settings) for more details on these settings.
 
 Additionally, it stores the following attributes:
 
@@ -105,7 +105,7 @@ Additionally, it stores the following attributes:
 - **Account Version**. This enum is used to keep track of the account version of the Candy Machine. It is used to determine which features are available and how the account should be interpreted. Note that this is not to be confused with "Candy Machine V3" which refers to the third and latest iteration of the Candy Machine programs (including the Candy Machine Core and Candy Guard programs).
 - **Feature Flags**. This helps the program with backward and forward compatibility as more features get introduced.
 
-Finally, it stores all items inserted in the Candy Machine and whether or not they have been minted. This only applies for Candy Machine using [**Config Line Settings**](/candy-machine/settings#config-line-settings) since [**Hidden Settings**](/candy-machine/settings#hidden-settings) don’t allow you to insert any items. This section contains the following information:
+Finally, it stores all items inserted in the Candy Machine and whether or not they have been minted. This only applies for Candy Machine using [**Config Line Settings**](/smart-contracts/candy-machine/settings#config-line-settings) since [**Hidden Settings**](/smart-contracts/candy-machine/settings#hidden-settings) don’t allow you to insert any items. This section contains the following information:
 
 - The number of items that have been loaded.
 - A list of all items that have been or will be inserted. When an item is not inserted yet, the name and URI of the item at that position are empty.
@@ -226,7 +226,7 @@ API References: [setCandyMachineAuthority](https://mpl-candy-machine.typedoc.met
 
 ## Update Shared NFT Data
 
-You may also update the attributes shared between all minted NFTs of a Candy Machine. As mentioned in [the previous page](/candy-machine/settings#settings-shared-by-all-nf-ts), these are: Seller Fee Basis Points, Symbol, Max Edition Supply, Is Mutable and Creators.
+You may also update the attributes shared between all minted NFTs of a Candy Machine. As mentioned in [the previous page](/smart-contracts/candy-machine/settings#settings-shared-by-all-nf-ts), these are: Seller Fee Basis Points, Symbol, Max Edition Supply, Is Mutable and Creators.
 
 Note that once the first NFT has been minted, these attributes can no longer be updated.
 
@@ -423,4 +423,4 @@ API References: [deleteCandyMachine](https://mpl-candy-machine.typedoc.metaplex.
 
 ## Conclusion
 
-We can now create, read, update and delete Candy Machines but we still don’t know how to load them with items. Let’s tackle this on [the next page](/candy-machine/insert-items)!
+We can now create, read, update and delete Candy Machines but we still don’t know how to load them with items. Let’s tackle this on [the next page](/smart-contracts/candy-machine/insert-items)!

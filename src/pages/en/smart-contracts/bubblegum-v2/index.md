@@ -12,7 +12,7 @@ Please note that certain Bubblegum V2 instructions will require protocol fees. P
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum-v2/sdk" description="Find the language or library of your choice and get started with compressed NFTs." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/smart-contracts/bubblegum-v2/sdk" description="Find the language or library of your choice and get started with compressed NFTs." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
@@ -24,7 +24,7 @@ Bubblegum V2 builds on the foundation of the original Bubblegum program while in
 
 - **Freeze and Thaw Functionality**: Two types of freeze/thaw are available: 1) cNFT owners can delegate freeze authority to a leaf delegate for asset-level control, providing flexibility for various use cases such as preventing transfers during specific events or implementing vesting mechanics.  2) If the `PermanentFreezeDelegate` plugin is enabled on collection creation, project creators can freeze and thaw cNFTs via the permanent freeze delegate for collection-wide control
 - **MPL-Core Collections Integration**: Bubblegum V2 NFTs can now be added to MPL-Core collections instead of being limited to token metadata collections, allowing for greater flexibility and integration with the broader Metaplex ecosystem.
-- **Royalty Enforcement**: Since Bubblegum V2 is using [MPL-Core](https://docs.metaplex.com/core/overview) Collections, it is possible to enforce royalties on cNFTs e.g. using a `ProgramDenyList`.
+- **Royalty Enforcement**: Since Bubblegum V2 is using [MPL-Core](/smart-contracts/core) Collections, it is possible to enforce royalties on cNFTs e.g. using a `ProgramDenyList`.
 - **Soulbound NFTs**: cNFTs can now be made soulbound (non-transferrable), permanently binding them to their owner's wallet. This is perfect for credentials, proof of attendance, identity verification, and more. It requires the `PermanentFreezeDelegate` plugin to be enabled when creating the collection.
 - **Allow Permanent Transfer**: The permanent transfer delegate can now transfer the cNFT to a new owner without interaction of the leaf owner if the `PermanentTransferDelegate` plugin is enabled on the collection.
 - **Burning by Authority**: If the Collection has the `PermanentBurnDelegate` plugin enabled, the delegate could burn the NFT without the leaf owner's signature.
@@ -41,11 +41,11 @@ Bubblegum V2 introduces a new leaf schema (LeafSchemaV2) which supports the addi
 - Enabling soulbound capabilities
 Projects can choose to use the original leaf Schema by using Legacy Bubblegum or the new v2 schema with Bubblegum V2 depending on their requirements.
 
-To use the new `LeafSchemaV2`, a V2 Merkle Tree has to be used that needs to be created using the [`createTreeV2` instruction](/bubblegum-v2/create-trees). V1 Merkle Trees do not support the new leaf schema and V2 Merkle Trees are not compatible with V1 leaves.
+To use the new `LeafSchemaV2`, a V2 Merkle Tree has to be used that needs to be created using the [`createTreeV2` instruction](/smart-contracts/bubblegum-v2/create-trees). V1 Merkle Trees do not support the new leaf schema and V2 Merkle Trees are not compatible with V1 leaves.
 
 ## Merkle Trees, leaves and proofs
 
-Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum-v2/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by [hashing the data of the compressed NFT](/bubblegum-v2/hashed-nft-data).
+Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/smart-contracts/bubblegum-v2/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by [hashing the data of the compressed NFT](/smart-contracts/bubblegum-v2/hashed-nft-data).
 
 For each Leaf in the Merkle Tree, one can provide a list of hashes — called a **Proof** — that enables anyone to verify that the given Leaf is part of that tree. Whenever a compressed NFT is updated or transferred, its associated Leaf will change and so will its Proof.
 
@@ -129,23 +129,23 @@ Crawling through millions of transactions every time just to fetch the data of o
 
 Note that not all RPCs support the DAS API. As such, you may be interested in the ["Metaplex DAS API RPCs"](/rpc-providers) page to select an appropriate RPC when using compressed NFTs in your application.
 
-We talk about this in more detail in our advanced ["Storing and indexing NFT data"](/bubblegum-v2/stored-nft-data) guide.
+We talk about this in more detail in our advanced ["Storing and indexing NFT data"](/smart-contracts/bubblegum-v2/stored-nft-data) guide.
 
 ## Features
 
 Even though NFT data does not live inside accounts, it is still possible to execute a variety of operations on compressed NFTs. This is possible by requesting the current NFT data and ensuring its hashed Leaf is valid on the Merkle Tree. As such, the following operations can be performed on compressed NFTs:
 
-- [Mint a cNFT](/bubblegum-v2/mint-cnfts) with or without an associated collection.
-- [Transfer a cNFT](/bubblegum-v2/transfer-cnfts).
-- [Update the data or collection of a cNFT](/bubblegum-v2/update-cnfts).
-- [Burn a cNFT](/bubblegum-v2/burn-cnfts).
-- [Delegate a cNFT](/bubblegum-v2/delegate-cnfts).
-- [Verify and unverify a cNFT collection](/bubblegum-v2/verify-collections).
-- [Verify and unverify the creators of a cNFT](/bubblegum-v2/verify-creators).
-- [Freeze and thaw a cNFT](/bubblegum-v2/freeze-cnfts).
-- [Make a cNFT soulbound](/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft).
+- [Mint a cNFT](/smart-contracts/bubblegum-v2/mint-cnfts) with or without an associated collection.
+- [Transfer a cNFT](/smart-contracts/bubblegum-v2/transfer-cnfts).
+- [Update the data or collection of a cNFT](/smart-contracts/bubblegum-v2/update-cnfts).
+- [Burn a cNFT](/smart-contracts/bubblegum-v2/burn-cnfts).
+- [Delegate a cNFT](/smart-contracts/bubblegum-v2/delegate-cnfts).
+- [Verify and unverify a cNFT collection](/smart-contracts/bubblegum-v2/collections).
+- [Verify and unverify the creators of a cNFT](/smart-contracts/bubblegum-v2/verify-creators).
+- [Freeze and thaw a cNFT](/smart-contracts/bubblegum-v2/freeze-cnfts).
+- [Make a cNFT soulbound](/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft).
 
 
 ## Next steps
 
-Now that we know how compressed NFTs work at a high level and what's new in Bubblegum V2, we recommend checking out our [Getting Started](/bubblegum-v2/sdk) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum-v2/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.
+Now that we know how compressed NFTs work at a high level and what's new in Bubblegum V2, we recommend checking out our [Getting Started](/smart-contracts/bubblegum-v2/sdk) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/smart-contracts/bubblegum-v2/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/smart-contracts/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.

@@ -12,14 +12,14 @@ Metaplex Digital Asset Standard (DAS) APIは、Solana上のデジタルアセッ
 このAPIは、アセットデータを提供するためにRPCが実装する一連のメソッドを定義します。大部分の場合、データはMetaplex Digital Asset RPCインフラストラクチャを使用してインデックス化されます。
 
 ## Core拡張機能
-一般的なDAS SDKに加えて、[MPL Core](/ja/core)用の拡張機能が作成されており、MPL Core SDKでさらに使用するための正しいタイプを直接返します。また、コレクションから継承されたアセット内のプラグインを自動的に派生し、[DAS-to-Core型変換](/ja/das-api/core-extension/convert-das-asset-to-core)のための機能を提供します。
+一般的なDAS SDKに加えて、[MPL Core](/ja/smart-contracts/core)用の拡張機能が作成されており、MPL Core SDKでさらに使用するための正しいタイプを直接返します。また、コレクションから継承されたアセット内のプラグインを自動的に派生し、[DAS-to-Core型変換](/ja/dev-tools/das-api/core-extension/convert-das-asset-to-core)のための機能を提供します。
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/das-api/getting-started" description="お好みの言語やライブラリを見つけて、基本的なプログラムの開始方法を学習します。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/dev-tools/das-api/getting-started" description="お好みの言語やライブラリを見つけて、基本的なプログラムの開始方法を学習します。" /%}
 
-{% quick-link title="メソッド" icon="CodeBracketSquare" href="/ja/das-api/methods" description="データ取得のためのDAS APIメソッド。" /%}
+{% quick-link title="メソッド" icon="CodeBracketSquare" href="/ja/dev-tools/das-api/methods" description="データ取得のためのDAS APIメソッド。" /%}
 
-{% quick-link title="MPL Core拡張機能" icon="CodeBracketSquare" href="/ja/das-api/core-extension" description="MPL Coreアセットを簡単に取得・解析する" /%}
+{% quick-link title="MPL Core拡張機能" icon="CodeBracketSquare" href="/ja/dev-tools/das-api/core-extension" description="MPL Coreアセットを簡単に取得・解析する" /%}
 
 {% /quick-links %}

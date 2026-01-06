@@ -1,5 +1,6 @@
 ---
 title: Plugins
+metaTitle: Plugins | Metaplex CLI
 description: Manage MPL Core Asset and Collection plugins
 ---
 

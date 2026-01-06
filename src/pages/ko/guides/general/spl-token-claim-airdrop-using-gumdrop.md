@@ -45,7 +45,7 @@ yarn install
 
 ## SPL 토큰 생성
 
-먼저 배포될 SPL 토큰을 생성하세요. [우리 가이드](/guides/javascript/how-to-create-a-solana-token)를 따르거나 [sol-tools.io](https://sol-tools.io/token-tools/create-token)와 같은 도구를 사용할 수 있습니다.
+먼저 배포될 SPL 토큰을 생성하세요. [우리 가이드](/ko/guides/javascript/how-to-create-a-solana-token)를 따르거나 [sol-tools.io](https://sol-tools.io/token-tools/create-token)와 같은 도구를 사용할 수 있습니다.
 
 {% callout type="note" title="토큰 양" %}
 전체 배포 목록을 커버할 수 있는 충분한 토큰과 테스트를 위한 여분을 발행했는지 확인하세요.

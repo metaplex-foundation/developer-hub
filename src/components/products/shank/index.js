@@ -79,6 +79,19 @@ export const shank = {
         'Getting Started': '시작하기',
         'Macros Reference': '매크로 참조'
       }
+    },
+    zh: {
+      headline: 'Solana程序IDL提取',
+      description: '使用属性宏从Rust Solana程序代码中提取IDL',
+      sections: {
+        'Introduction': '简介',
+        'Reference': '参考'
+      },
+      links: {
+        'Overview': '概述',
+        'Getting Started': '快速入门',
+        'Macros Reference': '宏参考'
+      }
     }
   }
 }

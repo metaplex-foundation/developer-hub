@@ -14,13 +14,13 @@ Metaplex SDK를 사용하여 Solana에서 대체 가능 토큰(SPL 토큰)을 �
 
 이 섹션에서는 일반적인 토큰 작업에 대한 초보자 친화적인 가이드를 제공합니다:
 
-- **[토큰 출시하기](/tokens/launch-token)** - 커스텀 메타데이터로 새 대체 가능 토큰 생성
-- **[토큰 생성하기](/tokens/create-a-token)** - 커스텀 메타데이터로 새 대체 가능 토큰 생성
-- **[토큰 데이터 읽기](/tokens/read-token)** - 블록체인 또는 DAS API에서 토큰 정보 조회
-- **[토큰 발행하기](/tokens/mint-tokens)** - 추가 토큰을 발행하여 공급량 증가
-- **[토큰 전송하기](/tokens/transfer-a-token)** - 지갑 간 토큰 전송
-- **[토큰 메타데이터 업데이트하기](/tokens/update-token)** - 토큰 이름, 심볼 또는 이미지 업데이트
-- **[토큰 소각하기](/tokens/burn-tokens)** - 유통에서 토큰을 영구 삭제
+- **[토큰 출시하기](/ko/tokens/launch-token)** - 커스텀 메타데이터로 새 대체 가능 토큰 생성
+- **[토큰 생성하기](/ko/tokens/create-a-token)** - 커스텀 메타데이터로 새 대체 가능 토큰 생성
+- **[토큰 데이터 읽기](/ko/tokens/read-token)** - 블록체인 또는 DAS API에서 토큰 정보 조회
+- **[토큰 발행하기](/ko/tokens/mint-tokens)** - 추가 토큰을 발행하여 공급량 증가
+- **[토큰 전송하기](/ko/tokens/transfer-a-token)** - 지갑 간 토큰 전송
+- **[토큰 메타데이터 업데이트하기](/ko/tokens/update-token)** - 토큰 이름, 심볼 또는 이미지 업데이트
+- **[토큰 소각하기](/ko/tokens/burn-tokens)** - 유통에서 토큰을 영구 삭제
 
 ## 사전 요구 사항
 
@@ -46,7 +46,7 @@ npm install -g @metaplex-foundation/cli
 mplx toolbox tm create --wizard --keypair <지갑 파일 경로> --rpc-url <RPC URL>
 ```
 
-자세한 내용은 [CLI 문서](/dev-tools/cli)를 참조하세요.
+자세한 내용은 [CLI 문서](/ko/dev-tools/cli)를 참조하세요.
 
 ### JavaScript/TypeScript 사용하기
 
@@ -56,12 +56,12 @@ mplx toolbox tm create --wizard --keypair <지갑 파일 경로> --rpc-url <RPC 
 npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/mpl-toolbox @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults
 ```
 
-그런 다음 [토큰 생성하기](/tokens/create-a-token) 가이드를 따라 첫 번째 대체 가능 토큰을 생성하세요.
+그런 다음 [토큰 생성하기](/ko/tokens/create-a-token) 가이드를 따라 첫 번째 대체 가능 토큰을 생성하세요.
 
 ## 더 알아보기
 
 더 고급 토큰 기능에 대해서는 다음을 확인하세요:
 
-- [Metaplex CLI](/dev-tools/cli) - 토큰 작업을 위한 커맨드라인 도구
+- [Metaplex CLI](/ko/dev-tools/cli) - 토큰 작업을 위한 커맨드라인 도구
 - [Token Metadata 프로그램](/token-metadata) - Token Metadata 프로그램 전체 문서
 - [MPL Toolbox](https://github.com/metaplex-foundation/mpl-toolbox) - 저수준 토큰 작업

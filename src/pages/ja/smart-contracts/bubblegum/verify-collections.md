@@ -8,9 +8,9 @@ description: Bubblegumでコレクションの設定、検証、および検証�
 
 技術的には、これはcNFTの**Collection**オブジェクトの**Verified**ブール値を切り替えることになり、コレクションの権限がこの圧縮NFTをコレクションの一部として承認したことを誰もが知ることができます。
 
-NFTに関するコレクションの概念に馴染みがない場合、それらは他のNFTをグループ化するために使用できる特別な非圧縮NFTです。**Collection NFT**のデータは、コレクション全体の名前とブランディングを記述するために使用されます。[Metaplex Verified Collectionsについて詳しく読むことができます](/ja/token-metadata/collections)。
+NFTに関するコレクションの概念に馴染みがない場合、それらは他のNFTをグループ化するために使用できる特別な非圧縮NFTです。**Collection NFT**のデータは、コレクション全体の名前とブランディングを記述するために使用されます。[Metaplex Verified Collectionsについて詳しく読むことができます](/ja/smart-contracts/token-metadata/collections)。
 
-**Mint to Collection V1**命令を使用して圧縮NFTを直接コレクションにミントすることが可能であることに注意してください（[ここに文書化されています](/ja/bubblegum/mint-cnfts#minting-to-a-collection)）。とはいえ、コレクションなしでcNFTを既にミントしている場合は、そのcNFTのコレクションを検証、検証解除、および設定する方法を見てみましょう。
+**Mint to Collection V1**命令を使用して圧縮NFTを直接コレクションにミントすることが可能であることに注意してください（[ここに文書化されています](/ja/smart-contracts/bubblegum/mint-cnfts#minting-to-a-collection)）。とはいえ、コレクションなしでcNFTを既にミントしている場合は、そのcNFTのコレクションを検証、検証解除、および設定する方法を見てみましょう。
 
 ## コレクションの検証
 
@@ -21,7 +21,7 @@ BubblegumプログラムのbusineCollectionV**Verify Collection**命令を使用
 - **Collection Mint**: Collection NFTのmintアカウント。
 - **Collection Authority**: Collection NFTのupdate authority — または承認されたコレクションdelegate — をSignerとして。コレクション権限がdelegate権限の場合、プログラムは新しい統合された**Metadata Delegate**システムとレガシーの**Collection Authority Records**アカウントの両方をサポートすることに注意してください。適切なPDAを**Collection Authority Record Pda**パラメータに渡すだけです。
 
-さらに、この命令はBubblegum Tree上のリーフを置き換えることになるため、圧縮NFTの整合性を検証するためにより多くのパラメータを提供する必要があります。これらのパラメータはリーフを変更するすべての命令に共通であるため、[以下のFAQ](/ja/bubblegum/faq#replace-leaf-instruction-arguments)に文書化されています。幸い、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
+さらに、この命令はBubblegum Tree上のリーフを置き換えることになるため、圧縮NFTの整合性を検証するためにより多くのパラメータを提供する必要があります。これらのパラメータはリーフを変更するすべての命令に共通であるため、[以下のFAQ](/ja/smart-contracts/bubblegum-v2/faq#replace-leaf-instruction-arguments)に文書化されています。幸い、Metaplex DAS APIを使用してこれらのパラメータを自動的に取得するヘルパーメソッドを使用できます。
 
 {% dialect-switcher title="圧縮NFTのコレクションの検証" %}
 {% dialect title="JavaScript" id="js" %}

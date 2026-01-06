@@ -20,13 +20,11 @@ export const core = {
   protocolFees: {
     create: {
       solana: '0.0015 SOL',
-      eclipse: '0.00001822 ETH',
       payer: 'Collector',
       notes: 'Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions.',
     },
     execute: {
       solana: '0.00004872 SOL',
-      eclipse: '0.000000476 ETH',
       payer: 'Owner',
       notes: 'Typically paid by the current owner the Core NFT Asset that is calling the execute instruction.',
     },
@@ -463,6 +461,49 @@ export const core = {
         'Print Editions': '프린트 에디션',
         'Oracle Plugin Example': 'Oracle 플러그인 예제',
         'Appdata Plugin Example': 'Appdata 플러그인 예제',
+      }
+    },
+    zh: {
+      headline: '下一代NFT标准',
+      description: '下一代Solana NFT标准。',
+      sections: {
+        'Introduction': '简介',
+        'SDK': 'SDK',
+        'Features': '功能',
+        'Plugins': '插件',
+        'External Plugins': '外部插件',
+        'General': '通用',
+        'JavaScript': 'JavaScript',
+        'Program Concepts': '程序概念',
+        'Anchor': 'Anchor',
+      },
+      links: {
+        'Overview': '概述',
+        'What is an Asset?': '什么是资产？',
+        'JSON Schema': 'JSON模式',
+        'Token Metadata Differences': 'Token Metadata差异',
+        'Ecosystem Support': '生态系统支持',
+        'Anchor': 'Anchor',
+        'FAQ': '常见问题',
+        'Javascript SDK': 'JavaScript SDK',
+        'Rust SDK': 'Rust SDK',
+        'Creating Assets': '创建资产',
+        'Fetching Assets': '获取资产',
+        'Updating Assets': '更新资产',
+        'Transferring Assets': '转移资产',
+        'Burning Assets': '销毁资产',
+        'Collection Management': '合集管理',
+        'Execute Asset Signing': '执行资产签名',
+        'Helpers': '辅助函数',
+        'Deserializing Assets': '反序列化资产',
+        'Adding Plugins': '添加插件',
+        'Removing Plugins': '移除插件',
+        'Delegating and Revoking Plugins': '委托和撤销插件',
+        'Immutability': '不可变性',
+        'Soulbound Assets': '灵魂绑定资产',
+        'Print Editions': '打印版本',
+        'Oracle Plugin Example': 'Oracle插件示例',
+        'Appdata Plugin Example': 'Appdata插件示例',
       }
     }
   }

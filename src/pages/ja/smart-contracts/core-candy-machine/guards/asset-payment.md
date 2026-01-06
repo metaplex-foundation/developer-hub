@@ -10,7 +10,7 @@ description: "Core Candy Machineの「Asset Payment」ガードは、Core Candy 
 
 支払者が必要なコレクションからアセットを所有していない場合、ミントは失敗します。
 
-複数のアセットで支払う場合は、[Asset Payment Multiガード](/core-candy-machine/guards/asset-payment-multi)を使用できます。
+複数のアセットで支払う場合は、[Asset Payment Multiガード](/ja/smart-contracts/core-candy-machine/guards/asset-payment-multi)を使用できます。
 
 {% diagram  %}
 

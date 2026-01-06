@@ -734,7 +734,7 @@ pub async fn add_oracle_plugin_to_collection() {
 {% /dialect-switcher %}
 
 ## Metaplex에서 배포한 기본 오라클
-[소울바운드 NFT](/core/guides/create-soulbound-nft-asset)와 같은 드문 경우에 라이프사이클 이벤트를 항상 거부하거나 승인하는 오라클이 유용할 수 있습니다. 이를 위해 다음 오라클들이 배포되어 있으며 누구나 사용할 수 있습니다:
+[소울바운드 NFT](/ko/smart-contracts/core/guides/create-soulbound-nft-asset)와 같은 드문 경우에 라이프사이클 이벤트를 항상 거부하거나 승인하는 오라클이 유용할 수 있습니다. 이를 위해 다음 오라클들이 배포되어 있으며 누구나 사용할 수 있습니다:
 
 - **Transfer Oracle**: 항상 전송을 거부합니다. `AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
 

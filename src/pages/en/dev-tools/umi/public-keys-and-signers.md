@@ -10,7 +10,7 @@ The [EdDSA interface](https://umi.typedoc.metaplex.com/interfaces/umi.EddsaInter
 Let's tackle this on a per-use case basis.
 
 {% callout type="note" %}
-Looking for a snippet to use the Wallet Adapter or a Filesystem wallet? Check out the [Getting Started Page](/umi/getting-started)!
+Looking for a snippet to use the Wallet Adapter or a Filesystem wallet? Check out the [Getting Started Page](/dev-tools/umi/getting-started)!
 {% /callout %}
 
 ## Public keys

@@ -6,7 +6,7 @@ description: Candy Machine에 아이템을 로드하는 방법을 설명합니�
 
 지금까지 Candy Machine을 생성하고 구성하는 방법을 배웠지만 NFT로 민팅할 수 있는 아이템을 내부에 삽입하는 방법을 보지 못했습니다. 따라서 이 페이지에서 이를 다루어보겠습니다. {% .lead %}
 
-**아이템 삽입은 [구성 라인 설정](/ko/candy-machine/settings#config-line-settings)을 사용하는 Candy Machine에만 적용됩니다**라는 점을 기억하는 것이 중요합니다. 이는 [숨겨진 설정](/ko/candy-machine/settings#hidden-settings)을 사용하는 Candy Machine에서 민팅된 NFT가 모두 동일한 "숨겨진" 이름과 URI를 공유하기 때문입니다.
+**아이템 삽입은 [구성 라인 설정](/ko/smart-contracts/candy-machine/settings#config-line-settings)을 사용하는 Candy Machine에만 적용됩니다**라는 점을 기억하는 것이 중요합니다. 이는 [숨겨진 설정](/ko/smart-contracts/candy-machine/settings#hidden-settings)을 사용하는 Candy Machine에서 민팅된 NFT가 모두 동일한 "숨겨진" 이름과 URI를 공유하기 때문입니다.
 
 ## JSON 메타데이터 업로드
 
@@ -21,7 +21,7 @@ Candy Machine에 아이템을 삽입하려면 각 아이템에 대해 다음 두
 
 다행히 우리의 SDK가 도움을 줄 수 있습니다. JSON 객체를 업로드하고 해당 URI를 검색할 수 있게 해줍니다.
 
-또한 [Sugar](/ko/candy-machine/sugar)와 같은 도구는 병렬 업로드, 프로세스 캐싱 및 실패한 업로드 재시도를 통해 JSON 메타데이터 업로드를 아주 쉽게 만들어 줍니다.
+또한 [Sugar](/ko/smart-contracts/candy-machine/sugar)와 같은 도구는 병렬 업로드, 프로세스 캐싱 및 실패한 업로드 재시도를 통해 JSON 메타데이터 업로드를 아주 쉽게 만들어 줍니다.
 
 {% dialect-switcher title="아이템 업로드" %}
 {% dialect title="JavaScript" id="js" %}
@@ -186,4 +186,4 @@ API 참조: [addConfigLines](https://mpl-candy-machine.typedoc.metaplex.com/func
 
 바로 이렇게 NFT를 민팅할 준비가 된 로드된 Candy Machine이 완성되었습니다! 그러나 아직 민팅 프로세스에 대한 요구사항을 만들지 않았습니다. 민팅의 가격을 어떻게 구성할 수 있을까요? 구매자가 특정 토큰의 보유자이거나 특정 컬렉션의 NFT 보유자인지 어떻게 확인할 수 있을까요? 민팅의 시작 날짜를 어떻게 설정할까요? 종료 조건은 어떨까요?
 
-[다음 페이지](/ko/candy-machine/guards)에서는 이 모든 것을 가능하게 하는 Candy Guard에 대해 이야기하겠습니다.
+[다음 페이지](/ko/smart-contracts/candy-machine/guards)에서는 이 모든 것을 가능하게 하는 Candy Guard에 대해 이야기하겠습니다.

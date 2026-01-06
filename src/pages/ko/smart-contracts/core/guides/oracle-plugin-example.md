@@ -17,13 +17,13 @@ description: 이 가이드는 미국 시장 개장 시간 동안 Core 컬렉션 
 - **Reject**: 플러그인이 라이프사이클 이벤트를 거부할 수 있습니다.
 - **Approve**: 플러그인이 라이프사이클 이벤트를 승인할 수 있습니다.
 
-외부 플러그인에 대해 더 자세히 알고 싶다면 [여기](/core/external-plugins/overview)에서 더 읽어보세요.
+외부 플러그인에 대해 더 자세히 알고 싶다면 [여기](/ko/smart-contracts/core/external-plugins/overview)에서 더 읽어보세요.
 
 ### Oracle 플러그인
 
 **Oracle 플러그인**은 외부 플러그인의 기능을 활용하여 외부 권한이 Core 자산 외부의 **온체인 데이터** 계정에 접근하여 업데이트할 수 있는 데이터를 저장하며, 자산이 자산 권한에 의해 설정된 라이프사이클 이벤트를 동적으로 거부할 수 있게 합니다. 외부 Oracle 계정은 언제든지 업데이트되어 라이프사이클 이벤트의 권한 부여 동작을 변경할 수 있어 유연하고 동적인 경험을 제공합니다.
 
-Oracle 플러그인에 대해 더 자세히 알고 싶다면 [여기](/core/external-plugins/oracle)에서 더 읽어보세요.
+Oracle 플러그인에 대해 더 자세히 알고 싶다면 [여기](/ko/smart-contracts/core/external-plugins/oracle)에서 더 읽어보세요.
 
 ## 시작하기: 아이디어 뒤의 프로토콜 이해하기
 
@@ -315,7 +315,7 @@ pub fn crank_oracle(ctx: Context<CrankOracle>) -> Result<()> {
 
 이 여정의 마지막 부분은 컬렉션을 생성하고 Oracle 계정을 가리키도록 하여 해당 컬렉션에 포함하는 모든 자산이 사용자 정의 Oracle 규칙을 따르도록 하는 것입니다!
 
-Umi를 사용하도록 환경을 설정하는 것부터 시작해보겠습니다. (Umi는 Solana 프로그램용 JavaScript 클라이언트를 구축하고 사용하기 위한 모듈식 프레임워크입니다. [여기](../../umi/getting-started)에서 더 알아보세요)
+Umi를 사용하도록 환경을 설정하는 것부터 시작해보겠습니다. (Umi는 Solana 프로그램용 JavaScript 클라이언트를 구축하고 사용하기 위한 모듈식 프레임워크입니다. [여기](/ko/dev-tools/umi/getting-started)에서 더 알아보세요)
 
 ```ts
 import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'
@@ -370,4 +370,4 @@ console.log(signature);
 
 ## 결론
 
-축하합니다! 이제 Oracle 플러그인을 사용하여 미국 시장 시간 동안에만 거래되는 NFT 컬렉션을 생성할 수 있는 장비를 갖추었습니다. Core와 Metaplex에 대해 더 자세히 알고 싶다면 [개발자 허브](/core/getting-started)를 확인하세요.
+축하합니다! 이제 Oracle 플러그인을 사용하여 미국 시장 시간 동안에만 거래되는 NFT 컬렉션을 생성할 수 있는 장비를 갖추었습니다. Core와 Metaplex에 대해 더 자세히 알고 싶다면 [개발자 허브](/ko/smart-contracts/core/getting-started)를 확인하세요.

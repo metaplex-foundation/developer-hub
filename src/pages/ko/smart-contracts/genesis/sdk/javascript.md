@@ -12,7 +12,7 @@ Metaplex는 Genesis 프로그램과 상호작용하기 위한 JavaScript 라이�
 
 {% quick-link title="NPM 패키지" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="NPM의 Genesis JavaScript SDK." /%}
 
-{% quick-link title="GitHub" target="_blank" icon="GitHub" href="https://github.com/metaplex-foundation/mpl-genesis" description="Genesis 프로그램 및 SDK 소스 코드." /%}
+{% quick-link title="GitHub" target="_blank" icon="GitHub" href="https://github.com/metaplex-foundation/genesis" description="Genesis 프로그램 및 SDK 소스 코드." /%}
 
 {% /quick-links %}
 
@@ -41,7 +41,7 @@ npm install \
 
 ## Umi 설정
 
-Genesis SDK는 Metaplex의 Solana용 JavaScript 프레임워크인 [Umi](/umi) 위에 구축되었습니다. Umi를 아직 설정하지 않았다면 [Umi 시작하기](/umi/getting-started) 가이드를 확인하세요.
+Genesis SDK는 Metaplex의 Solana용 JavaScript 프레임워크인 [Umi](/ko/dev-tools/umi) 위에 구축되었습니다. Umi를 아직 설정하지 않았다면 [Umi 시작하기](/ko/dev-tools/umi/getting-started) 가이드를 확인하세요.
 
 ### 기본 구성
 
@@ -185,6 +185,6 @@ console.log('트랜잭션 서명:', result.signature);
 
 Genesis 프로그램으로 Umi 인스턴스가 구성되면 빌드를 시작할 준비가 됩니다. Genesis 기능을 살펴보세요:
 
-- **[Launch Pool](/smart-contracts/genesis/launch-pool)** - 예치 기간이 있는 토큰 배포
-- **[Priced Sale](/smart-contracts/genesis/priced-sale)** - 거래 전 사전 예치 수집
-- **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** - 균일 청산 가격의 시간 기반 경매
+- **[Launch Pool](/ko/smart-contracts/genesis/launch-pool)** - 예치 기간이 있는 토큰 배포
+- **[Priced Sale](/ko/smart-contracts/genesis/priced-sale)** - 거래 전 사전 예치 수집
+- **[Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction)** - 균일 청산 가격의 시간 기반 경매

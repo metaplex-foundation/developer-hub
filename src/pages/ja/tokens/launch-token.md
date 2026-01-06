@@ -4,7 +4,7 @@ metaTitle: トークンをローンチする | トークン
 description: SolanaでGenesis Launch Poolsを使用してトークンをローンチするためのエンドツーエンドガイド。
 ---
 
-[Genesis](/smart-contracts/genesis) Launch Poolsを使用してトークンをローンチします。ユーザーは設定した期間中にSOLを預け入れ、総預入額に対する自分のシェアに比例してトークンを受け取ります。 {% .lead %}
+[Genesis](/ja/smart-contracts/genesis) Launch Poolsを使用してトークンをローンチします。ユーザーは設定した期間中にSOLを預け入れ、総預入額に対する自分のシェアに比例してトークンを受け取ります。 {% .lead %}
 
 ## 概要
 
@@ -432,6 +432,6 @@ main().catch(console.error);
 
 ## 次のステップ
 
-- [Genesis概要](/smart-contracts/genesis) - Genesisのコンセプトについて詳しく学ぶ
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Launch Poolの詳細ドキュメント
-- [Aggregation API](/smart-contracts/genesis/aggregation) - APIでローンチデータをクエリ
+- [Genesis概要](/ja/smart-contracts/genesis) - Genesisのコンセプトについて詳しく学ぶ
+- [Launch Pool](/ja/smart-contracts/genesis/launch-pool) - Launch Poolの詳細ドキュメント
+- [Aggregation API](/ja/smart-contracts/genesis/aggregation) - APIでローンチデータをクエリ

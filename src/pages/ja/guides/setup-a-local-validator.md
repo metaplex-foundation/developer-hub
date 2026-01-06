@@ -1,6 +1,6 @@
 ---
 title: ローカルバリデータのセットアップ
-metaTitle: ローカルバリデータのセットアップ
+metaTitle: ローカルバリデータのセットアップ | Metaplex Guides
 description: ローカル開発環境の設定とローカルバリデータの使用方法を学習します。
 # remember to update dates also in /components/guides/index.js
 created: '04-19-2025'

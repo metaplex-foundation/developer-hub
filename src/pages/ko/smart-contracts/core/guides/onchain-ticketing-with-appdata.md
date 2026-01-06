@@ -17,13 +17,13 @@ description: 이 가이드는 Appdata 플러그인을 활용한 티켓팅 플랫
 - **Reject**: 플러그인이 라이프사이클 이벤트를 거부할 수 있습니다.
 - **Approve**: 플러그인이 라이프사이클 이벤트를 승인할 수 있습니다.
 
-외부 플러그인에 대해 더 자세히 알고 싶다면 [여기](/core/external-plugins/overview)에서 더 읽어보세요.
+외부 플러그인에 대해 더 자세히 알고 싶다면 [여기](/ko/smart-contracts/core/external-plugins/overview)에서 더 읽어보세요.
 
 ### Appdata 플러그인
 
 **AppData 플러그인**은 자산/컬렉션 권한이 `data_authority`에 의해 작성되고 변경될 수 있는 임의의 데이터를 저장할 수 있게 해주며, 이는 외부 신뢰 소스이고 자산/컬렉션 권한이 결정하는 누구에게든 할당될 수 있습니다. AppData 플러그인을 통해 컬렉션/자산 권한은 신뢰할 수 있는 제3자에게 자산에 데이터를 추가하는 작업을 위임할 수 있습니다.
 
-새로운 Appdata 플러그인에 익숙하지 않다면 [여기](/core/external-plugins/app-data)에서 더 읽어보세요.
+새로운 Appdata 플러그인에 익숙하지 않다면 [여기](/ko/smart-contracts/core/external-plugins/app-data)에서 더 읽어보세요.
 
 ## 일반 개요: 프로그램 설계
 
@@ -509,4 +509,4 @@ pub fn scan_ticket(ctx: Context<ScanTicket>) -> Result<()> {
 
 ## 결론
 
-축하합니다! 이제 Appdata 플러그인을 사용하여 티켓팅 솔루션을 생성할 수 있는 장비를 갖추었습니다. Core와 Metaplex에 대해 더 자세히 알고 싶다면 [개발자 허브](/core/getting-started)를 확인하세요.
+축하합니다! 이제 Appdata 플러그인을 사용하여 티켓팅 솔루션을 생성할 수 있는 장비를 갖추었습니다. Core와 Metaplex에 대해 더 자세히 알고 싶다면 [개발자 허브](/ko/smart-contracts/core/getting-started)를 확인하세요.

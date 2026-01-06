@@ -17,19 +17,16 @@ export const fusion = {
   protocolFees: {
     combine: {
       solana: '0.002 SOL',
-      eclipse: null,
       payer: 'Collector',
       notes: null,
     },
     split: {
       solana: '0.002 SOL',
-      eclipse: null,
       payer: 'Collector',
       notes: null,
     },
     editConstraint: {
       solana: '0.01 SOL',
-      eclipse: null,
       payer: 'Creator',
       notes: null,
     },
@@ -97,6 +94,20 @@ export const fusion = {
         'Getting Started': '시작하기',
         'Constraint Types': '제약 유형',
         'Transfer Effects': '전송 효과'
+      }
+    },
+    zh: {
+      headline: 'NFT中的NFT',
+      description: '创建可组合的NFT。',
+      sections: {
+        'Introduction': '简介',
+        'Features': '功能'
+      },
+      links: {
+        'Overview': '概述',
+        'Getting Started': '快速入门',
+        'Constraint Types': '约束类型',
+        'Transfer Effects': '转移效果'
       }
     }
   }

@@ -8,7 +8,7 @@ description: "Core Candy Machine의 'Redeemed Amount' 가드는 전체 Core Cand
 
 **Redeemed Amount** 가드는 전체 Core Candy Machine에 대해 민팅된 Asset 수가 구성된 최대 수에 도달하면 민팅을 금지합니다.
 
-이 가드는 그룹에 전역 민팅 임계값을 추가할 수 있게 해주므로 [Guard Groups](/ko/core-candy-machine/guard-groups)와 함께 사용할 때 더욱 흥미로워집니다.
+이 가드는 그룹에 전역 민팅 임계값을 추가할 수 있게 해주므로 [Guard Groups](/ko/smart-contracts/core-candy-machine/guard-groups)와 함께 사용할 때 더욱 흥미로워집니다.
 
 {% diagram  %}
 
@@ -95,7 +95,7 @@ create(umi, {
 
 Candy Machine에 500개의 아이템이 포함되어 있더라도 이 가드 때문에 이 아이템 중 300개만 민팅 가능하다는 점에 주목하세요.
 
-따라서 이 가드는 [Guard Groups](/ko/core-candy-machine/guard-groups)를 사용할 때 더욱 유용해집니다. 다음은 처음 300개의 Asset은 1 SOL로 민팅할 수 있지만 마지막 200개는 민팅하는 데 2 SOL이 필요하도록 두 개의 그룹을 사용하는 또 다른 예시입니다.
+따라서 이 가드는 [Guard Groups](/ko/smart-contracts/core-candy-machine/guard-groups)를 사용할 때 더욱 유용해집니다. 다음은 처음 300개의 Asset은 1 SOL로 민팅할 수 있지만 마지막 200개는 민팅하는 데 2 SOL이 필요하도록 두 개의 그룹을 사용하는 또 다른 예시입니다.
 
 {% dialect-switcher title="그룹 예시와 함께 Redeemed Amount Guard 사용하기" %}
 {% dialect title="JavaScript" id="js" %}

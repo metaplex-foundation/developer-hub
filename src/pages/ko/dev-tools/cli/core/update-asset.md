@@ -1,5 +1,6 @@
 ---
 title: 자산 업데이트
+metaTitle: 자산 업데이트 | Metaplex CLI
 description: MPL Core 자산 메타데이터 및 속성 업데이트
 ---
 

@@ -8,7 +8,7 @@ As discussed in the [Core overview](/core), digital assets on Core are composed 
 
 ## The Creation Process
 
-1. **Upload off-chain data.** First, we must ensure our off-chain data is ready. This means we must have a JSON file stored somewhere that describes our asset. It doesn't matter how or where that JSON file is stored, as long as it's accessible via a **URI**. The off chain metadata can look similar to the [old token metadata standard](/token-metadata/token-standard#the-non-fungible-standard).
+1. **Upload off-chain data.** First, we must ensure our off-chain data is ready. This means we must have a JSON file stored somewhere that describes our asset. It doesn't matter how or where that JSON file is stored, as long as it's accessible via a **URI**. The off chain metadata can look similar to the [old token metadata standard](/smart-contracts/token-metadata/token-standard#the-non-fungible-standard).
 2. **Create onchain Asset account.** Then, we must create the onchain Asset account that will hold our asset's data.
 
 Let's dig into these steps in more detail, whilst providing concrete code examples.
@@ -220,7 +220,7 @@ Note that when setting the `mint` account, it is require to specify a `bool` fla
 
 ## Create an Asset into a Collection
 
-MPL Core Assets can be created straight into a collection if your MPL Core Collection already exists. To create a Collection Asset visit [here](/core/collections).
+MPL Core Assets can be created straight into a collection if your MPL Core Collection already exists. To create a Collection Asset visit [here](/smart-contracts/core/collections).
 
 {% dialect-switcher title="Create Asset into Collection" %}
 {% dialect title="JavaScript" id="js" %}
@@ -460,8 +460,8 @@ pub async fn create_asset_with_plugin() {
 
 The list of plugins includes but is not limited to:
 
-- [Burn Delegate](/core/plugins/burn-delegate)
-- [Freeze Delegate](/core/plugins/freeze-delegate)
-- [Royalties](/core/plugins/royalties)
-- [Transfer Delegate](/core/plugins/transfer-delegate)
-- [Update Delegate](/core/plugins/update-delegate)
+- [Burn Delegate](/smart-contracts/core/plugins/burn-delegate)
+- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate)
+- [Royalties](/smart-contracts/core/plugins/royalties)
+- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate)
+- [Update Delegate](/smart-contracts/core/plugins/update-delegate)

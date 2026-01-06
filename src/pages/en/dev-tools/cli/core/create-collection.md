@@ -1,5 +1,6 @@
 ---
 title: Create Collection
+metaTitle: Create Collection | Metaplex CLI
 description: Create an MPL Core Collection using different methods
 ---
 

@@ -35,7 +35,7 @@ const candyMachineSettings = {
 
 Candy Machine 설정의 큰 부분은 해당 Candy Machine에서 민팅될 NFT를 정의하는 데 사용됩니다. 이는 많은 NFT 속성이 모든 민팅된 NFT에 대해 동일하기 때문입니다. 따라서 Candy Machine에 아이템을 로드할 때마다 이러한 속성을 반복해야 하는 대신 Candy Machine 설정에서 한 번 설정합니다.
 
-민팅된 NFT를 서로 구별할 수 있는 유일한 속성은 NFT의 **이름**과 JSON 메타데이터를 가리키는 **URI**라는 점에 주목하세요. 자세한 내용은 [아이템 삽입](/ko/candy-machine/insert-items)을 참조하세요.
+민팅된 NFT를 서로 구별할 수 있는 유일한 속성은 NFT의 **이름**과 JSON 메타데이터를 가리키는 **URI**라는 점에 주목하세요. 자세한 내용은 [아이템 삽입](/ko/smart-contracts/candy-machine/insert-items)을 참조하세요.
 
 다음은 모든 민팅된 NFT 간에 공유되는 속성 목록입니다.
 
@@ -44,7 +44,7 @@ Candy Machine 설정의 큰 부분은 해당 Candy Machine에서 민팅될 NFT�
 - **최대 에디션 공급량**: 민팅된 NFT에서 인쇄할 수 있는 최대 에디션 수. 대부분의 사용 사례에서는 민팅된 NFT가 여러 번 인쇄되는 것을 방지하기 위해 이를 `0`으로 설정하려고 할 것입니다. 이를 `null`로 설정할 수 없다는 점에 주목하세요. 즉, Candy Machine에서는 무제한 에디션이 지원되지 않습니다.
 - **변경 가능**: 민팅된 NFT가 변경 가능해야 하는지 여부. 특별한 이유가 없다면 이를 `true`로 설정하는 것을 권장합니다. 나중에 NFT를 불변으로 만들 수는 있지만 불변 NFT를 다시 변경 가능하게 만들 수는 없습니다.
 - **창작자**: 민팅된 NFT에 설정되어야 하는 창작자 목록. 여기에는 주소와 로열티의 백분율 지분이 포함됩니다 — 즉, `5`는 `5%`입니다. Candy Machine 주소는 항상 모든 민팅된 NFT의 첫 번째 창작자로 설정되고 자동으로 검증됩니다. 이를 통해 누구나 NFT가 신뢰할 수 있는 Candy Machine에서 민팅되었음을 확인할 수 있습니다. 제공된 다른 모든 창작자는 그 이후에 설정되며 해당 창작자가 수동으로 검증해야 합니다.
-- **토큰 표준**: 민팅된 NFT에 사용할 [토큰 표준](/ko/token-metadata/token-standard). 지금까지 두 가지 토큰 표준만 지원됩니다: "[NonFungible](/ko/token-metadata/token-standard#the-non-fungible-standard)" 및 "[ProgrammableNonFungible](/ko/token-metadata/token-standard#the-programmable-non-fungible-standard)". 이는 _계정 버전_이 2 이상인 Candy Machine에서만 사용할 수 있습니다.
+- **토큰 표준**: 민팅된 NFT에 사용할 [토큰 표준](/ko/smart-contracts/token-metadata/token-standard). 지금까지 두 가지 토큰 표준만 지원됩니다: "[NonFungible](/ko/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)" 및 "[ProgrammableNonFungible](/ko/smart-contracts/token-metadata/token-standard#the-programmable-non-fungible-standard)". 이는 _계정 버전_이 2 이상인 Candy Machine에서만 사용할 수 있습니다.
 - **규칙 세트**: Candy Machine이 "ProgrammableNonFungible" 토큰 표준을 사용하는 경우, 모든 민팅된 프로그래머블 NFT에 할당될 명시적 규칙 세트를 제공할 수 있습니다. 규칙 세트가 제공되지 않으면 컬렉션 NFT의 규칙 세트를 기본으로 사용합니다(있는 경우). 그렇지 않으면 프로그래머블 NFT는 규칙 세트 없이 민팅됩니다. 이는 _계정 버전_이 2 이상인 Candy Machine에서만 사용할 수 있습니다.
 
 {% dialect-switcher title="공유 NFT 설정" %}
@@ -82,7 +82,7 @@ const candyMachineSettings = {
 
 ## Metaplex 인증 컬렉션
 
-각 Candy Machine은 [Metaplex 인증 컬렉션(MCC)](/ko/token-metadata/collections)으로 알려진 특별한 NFT와 연결되어야 합니다. 이 **컬렉션 NFT**는 민팅된 NFT를 함께 그룹화하고 해당 정보가 온체인에서 검증될 수 있도록 합니다.
+각 Candy Machine은 [Metaplex 인증 컬렉션(MCC)](/ko/smart-contracts/token-metadata/collections)으로 알려진 특별한 NFT와 연결되어야 합니다. 이 **컬렉션 NFT**는 민팅된 NFT를 함께 그룹화하고 해당 정보가 온체인에서 검증될 수 있도록 합니다.
 
 다른 사람이 자신의 Candy Machine에서 귀하의 컬렉션 NFT를 사용할 수 없도록 하기 위해 **컬렉션의 업데이트 권한**이 Candy Machine의 컬렉션을 변경하는 모든 트랜잭션에 서명해야 합니다. 결과적으로 Candy Machine은 모든 민팅된 NFT의 컬렉션을 자동으로 안전하게 검증할 수 있습니다.
 
@@ -295,8 +295,8 @@ const candyMachineSettings = {
 
 소개에서 언급했듯이 이 페이지는 주요 Candy Machine 설정에 중점을 두지만 가드를 사용하여 Candy Machine에서 구성할 수 있는 것이 훨씬 더 많습니다.
 
-이는 설명할 많은 사용 가능한 기본 가드가 있는 광범위한 주제이므로 이 문서의 전체 섹션을 할애했습니다. 시작하기 가장 좋은 곳은 [Candy Guards](/ko/candy-machine/guards) 페이지입니다.
+이는 설명할 많은 사용 가능한 기본 가드가 있는 광범위한 주제이므로 이 문서의 전체 섹션을 할애했습니다. 시작하기 가장 좋은 곳은 [Candy Guards](/ko/smart-contracts/candy-machine/guards) 페이지입니다.
 
 ## 결론
 
-이제 주요 Candy Machine 설정에 대해 알았으므로 [다음 페이지](/ko/candy-machine/manage)에서 자체 Candy Machine을 생성하고 업데이트하는 방법을 살펴보겠습니다.
+이제 주요 Candy Machine 설정에 대해 알았으므로 [다음 페이지](/ko/smart-contracts/candy-machine/manage)에서 자체 Candy Machine을 생성하고 업데이트하는 방법을 살펴보겠습니다.

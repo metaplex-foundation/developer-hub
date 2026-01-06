@@ -19,7 +19,6 @@ export const bubblegum = {
   protocolFees: {
     create: {
       solana: 'Free',
-      eclipse: 'Free',
       payer: null,
       notes: null,
     },
@@ -33,7 +32,7 @@ export const bubblegum = {
           links: [
             { title: 'Overview', href: '/smart-contracts/bubblegum' },
             { title: 'Metaplex DAS API RPCs', href: '/rpc-providers' },
-            { title: 'FAQ', href: '/smart-contracts/bubblegum/faq' },
+            { title: 'FAQ', href: '/smart-contracts/bubblegum-v2/faq' },
           ],
         },
         {
@@ -50,7 +49,7 @@ export const bubblegum = {
               title: 'Creating Bubblegum Trees',
               href: '/smart-contracts/bubblegum/create-trees',
             },
-            { title: 'Fetching cNFTs', href: '/smart-contracts/bubblegum/fetch-cnfts' },
+            { title: 'Fetching cNFTs', href: '/smart-contracts/bubblegum-v2/fetch-cnfts' },
             { title: 'Delegating Trees', href: '/smart-contracts/bubblegum/delegate-trees' },
           ],
         },
@@ -227,6 +226,42 @@ export const bubblegum = {
         'Merkle Tree Canopy': '머클 트리 캐노피',
         'How to Create a 1,000,000 NFT Collection on Solana': 'Solana에서 100만 NFT 컬렉션 만들기',
         'How to Interact with cNFTs on Other SVMs': '다른 SVM에서 cNFT와 상호작용하기'
+      }
+    },
+    zh: {
+      headline: '压缩NFT',
+      description: '可扩展的NFT。',
+      sections: {
+        'Introduction': '简介',
+        'SDK': 'SDK',
+        'General Features': '通用功能',
+        'Bubblegum': 'Bubblegum',
+        'Advanced': '高级',
+        'Javascript': 'JavaScript'
+      },
+      links: {
+        'Overview': '概述',
+        'Metaplex DAS API RPCs': 'Metaplex DAS API RPC',
+        'FAQ': '常见问题',
+        'Javascript': 'JavaScript',
+        'Rust': 'Rust',
+        'Creating Bubblegum Trees': '创建Bubblegum树',
+        'Fetching cNFTs': '获取cNFT',
+        'Delegating Trees': '委托树',
+        'Minting Compressed NFTs (cNFTs)': '铸造压缩NFT（cNFT）',
+        'Transferring cNFTs': '转移cNFT',
+        'Updating cNFTs': '更新cNFT',
+        'Burning cNFTs': '销毁cNFT',
+        'Decompressing cNFTs': '解压cNFT',
+        'Delegating cNFTs': '委托cNFT',
+        'Verifying Collections': '验证合集',
+        'Verifying Creators': '验证创作者',
+        'Concurrent Merkle Trees': '并发Merkle树',
+        'Storing and Indexing NFT Data': '存储和索引NFT数据',
+        'Hashing NFT Data': '哈希NFT数据',
+        'Merkle Tree Canopy': 'Merkle树冠层',
+        'How to Create a 1,000,000 NFT Collection on Solana': '如何在Solana上创建100万个NFT合集',
+        'How to Interact with cNFTs on Other SVMs': '如何在其他SVM上与cNFT交互'
       }
     }
   }

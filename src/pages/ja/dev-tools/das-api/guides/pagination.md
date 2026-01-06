@@ -203,6 +203,6 @@ const collectionAssets = await getAllAssetsByCursor('COLLECTION_ADDRESS')
 
 ## さらなる学習
 
-- [コレクション内のすべてのトークンを取得](/ja/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのアセットを取得
-- [条件でアセットを検索](/ja/das-api/guides/search-by-criteria) - 高度な検索とフィルタリング
-- [圧縮NFTを見つける](/ja/das-api/guides/find-compressed-nfts) - 圧縮NFTの操作
+- [コレクション内のすべてのトークンを取得](/ja/dev-tools/das-api/guides/get-collection-nfts) - 特定のコレクションからすべてのアセットを取得
+- [条件でアセットを検索](/ja/dev-tools/das-api/guides/search-by-criteria) - 高度な検索とフィルタリング
+- [圧縮NFTを見つける](/ja/dev-tools/das-api/guides/find-compressed-nfts) - 圧縮NFTの操作

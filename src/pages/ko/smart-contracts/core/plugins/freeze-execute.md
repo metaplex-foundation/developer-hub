@@ -415,7 +415,7 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 - **권한 제약**: 권한이 다른 사람에게 위임된 경우, 원래 소유자는 권한이 철회될 때까지 동결을 해제할 수 없습니다
 - 동결된 상태에서는 플러그인을 제거할 수 없습니다
 - 동결된 상태에서는 권한을 재할당할 수 없습니다
-- 이 플러그인은 [Execute instruction](/core/execute-asset-signing) 시스템과 함께 작동합니다
+- 이 플러그인은 [Execute instruction](/ko/smart-contracts/core/execute-asset-signing) 시스템과 함께 작동합니다
 
 
 

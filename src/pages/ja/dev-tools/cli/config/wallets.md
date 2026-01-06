@@ -1,5 +1,6 @@
 ---
 title: ウォレット
+metaTitle: ウォレット | Metaplex CLI
 description: ウォレット設定の管理
 ---
 
@@ -163,5 +164,5 @@ mplx config wallets set dev1
 
 ## 関連コマンド
 
-- [RPCs](/ja/cli/config/rpcs) - RPCエンドポイントの管理
-- [エクスプローラー](/ja/cli/config/explorer) - 推奨ブロックチェーンエクスプローラーの設定
+- [RPCs](/ja/dev-tools/cli/config/rpcs) - RPCエンドポイントの管理
+- [エクスプローラー](/ja/dev-tools/cli/config/explorer) - 推奨ブロックチェーンエクスプローラーの設定

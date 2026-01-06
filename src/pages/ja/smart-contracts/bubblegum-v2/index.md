@@ -14,7 +14,7 @@ Please note that certain Bubblegum V2 instructions will require protocol fees. P
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/bubblegum-v2/sdk" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/bubblegum-v2/sdk" description="お好みの言語またはライブラリを見つけて、圧縮NFTを開始しましょう。" /%}
 
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="特定のものをお探しですか？APIリファレンスをご覧いただき、答えを見つけてください。" /%}
 
@@ -26,7 +26,7 @@ Bubblegum V2は、オリジナルのBubblegumプログラムの基盤の上に�
 
 - **凍結・解凍機能**: 2種類の凍結/解凍が利用可能：1) cNFT所有者は、アセットレベルの制御のためにフリーズ権限をリーフデリゲートに委任でき、特定のイベント中の転送を防ぐことや権利確定メカニズムの実装など、さまざまなユースケースに柔軟性を提供します。2) コレクション作成時に`PermanentFreezeDelegate`プラグインが有効になっている場合、プロジェクト作成者は永続フリーズデリゲートを通じてcNFTを凍結・解凍でき、コレクション全体の制御が可能です
 - **MPL-Coreコレクション統合**: Bubblegum V2 NFTは、トークンメタデータコレクションに限定されることなく、MPL-Coreコレクションに追加できるようになり、より大きなMetaplexエコシステムとの柔軟性と統合を可能にします。
-- **ロイヤリティ強制**: Bubblegum V2は[MPL-Core](https://docs.metaplex.com/ja/core/overview)コレクションを使用しているため、`ProgramDenyList`などを使用してcNFTにロイヤリティを強制することが可能です。
+- **ロイヤリティ強制**: Bubblegum V2は[MPL-Core](/ja/smart-contracts/core)コレクションを使用しているため、`ProgramDenyList`などを使用してcNFTにロイヤリティを強制することが可能です。
 - **ソウルバウンドNFT**: cNFTをソウルバウンド（転送不可）にすることが可能になり、所有者のウォレットに永続的に紐づけられます。これは資格、出席証明、身元確認などに最適です。コレクション作成時に`PermanentFreezeDelegate`プラグインを有効にする必要があります。
 - **永続転送の許可**: コレクションで`PermanentTransferDelegate`プラグインが有効になっている場合、永続転送デリゲートはリーフ所有者の相互作用なしにcNFTを新しい所有者に転送できます。
 - **権限によるバーン**: コレクションに`PermanentBurnDelegate`プラグインが有効になっている場合、デリゲートはリーフ所有者の署名なしにNFTをバーンできます。
@@ -44,11 +44,11 @@ Bubblegum V2は、後方互換性を維持しながら追加機能をサポー�
 
 プロジェクトは、要件に応じて、Legacy Bubblegumを使用したオリジナルのリーフスキーマまたはBubblegum V2を使用した新しいv2スキーマを選択できます。
 
-新しい`LeafSchemaV2`を使用するには、[`createTreeV2`命令](/ja/bubblegum-v2/create-trees)を使用して作成する必要があるV2マークルツリーを使用する必要があります。V1マークルツリーは新しいリーフスキーマをサポートせず、V2マークルツリーはV1リーフと互換性がありません。
+新しい`LeafSchemaV2`を使用するには、[`createTreeV2`命令](/ja/smart-contracts/bubblegum-v2/create-trees)を使用して作成する必要があるV2マークルツリーを使用する必要があります。V1マークルツリーは新しいリーフスキーマをサポートせず、V2マークルツリーはV1リーフと互換性がありません。
 
 ## マークルツリー、リーフ、証明
 
-圧縮NFTは、**マークルツリー**のコンテキストでのみ存在します。マークルツリーが何であるかは[専用の高度なガイド](/ja/bubblegum-v2/concurrent-merkle-trees)で説明していますが、この概要では、マークルツリーを**リーフ**と呼ぶハッシュのコレクションと考えることができます。各リーフは、[圧縮NFTのデータをハッシュ化する](/ja/bubblegum-v2/hashed-nft-data)ことで得られます。
+圧縮NFTは、**マークルツリー**のコンテキストでのみ存在します。マークルツリーが何であるかは[専用の高度なガイド](/ja/smart-contracts/bubblegum-v2/concurrent-merkle-trees)で説明していますが、この概要では、マークルツリーを**リーフ**と呼ぶハッシュのコレクションと考えることができます。各リーフは、[圧縮NFTのデータをハッシュ化する](/ja/smart-contracts/bubblegum-v2/hashed-nft-data)ことで得られます。
 
 マークルツリー内の各リーフに対して、**証明**と呼ばれるハッシュのリストを提供できます。これにより、誰でも与えられたリーフがそのツリーの一部であることを検証できます。圧縮NFTが更新または転送されるたびに、関連するリーフも変更され、その証明も変更されます。
 
@@ -132,22 +132,22 @@ Bubblegum V2は、後方互換性を維持しながら追加機能をサポー�
 
 すべてのRPCがDAS APIをサポートしているわけではないことに注意してください。そのため、アプリケーションで圧縮NFTを使用する際に適切なRPCを選択するために、["Metaplex DAS API RPC"](/ja/rpc-providers)ページに興味があるかもしれません。
 
-これについては、高度な["NFTデータの保存とインデックス化"](/ja/bubblegum-v2/stored-nft-data)ガイドで詳しく説明しています。
+これについては、高度な["NFTデータの保存とインデックス化"](/ja/smart-contracts/bubblegum-v2/stored-nft-data)ガイドで詳しく説明しています。
 
 ## 機能
 
 NFTデータがアカウント内に存在しないにもかかわらず、圧縮NFTに対してさまざまな操作を実行することは依然として可能です。これは、現在のNFTデータをリクエストし、そのハッシュ化されたリーフがマークルツリーで有効であることを確認することで可能になります。そのため、圧縮NFTで以下の操作を実行できます：
 
-- 関連するコレクションを持つまたは持たない[cNFTのミント](/ja/bubblegum-v2/mint-cnfts)。
-- [cNFTの転送](/ja/bubblegum-v2/transfer-cnfts)。
-- [cNFTのデータまたはコレクションの更新](/ja/bubblegum-v2/update-cnfts)。
-- [cNFTのバーン](/ja/bubblegum-v2/burn-cnfts)。
-- [cNFTのデリゲート](/ja/bubblegum-v2/delegate-cnfts)。
-- [cNFTコレクションの検証と検証解除](/ja/bubblegum-v2/verify-collections)。
-- [cNFTの作成者の検証と検証解除](/ja/bubblegum-v2/verify-creators)。
-- [cNFTの凍結と解凍](/ja/bubblegum-v2/freeze-cnfts)。
-- [cNFTをソウルバウンドにする](/ja/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft)。
+- 関連するコレクションを持つまたは持たない[cNFTのミント](/ja/smart-contracts/bubblegum-v2/mint-cnfts)。
+- [cNFTの転送](/ja/smart-contracts/bubblegum-v2/transfer-cnfts)。
+- [cNFTのデータまたはコレクションの更新](/ja/smart-contracts/bubblegum-v2/update-cnfts)。
+- [cNFTのバーン](/ja/smart-contracts/bubblegum-v2/burn-cnfts)。
+- [cNFTのデリゲート](/ja/smart-contracts/bubblegum-v2/delegate-cnfts)。
+- [cNFTコレクションの検証と検証解除](/ja/smart-contracts/bubblegum-v2/collections)。
+- [cNFTの作成者の検証と検証解除](/ja/smart-contracts/bubblegum-v2/verify-creators)。
+- [cNFTの凍結と解凍](/ja/smart-contracts/bubblegum-v2/freeze-cnfts)。
+- [cNFTをソウルバウンドにする](/ja/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft)。
 
 ## 次のステップ
 
-圧縮NFTが高レベルでどのように機能し、Bubblegum V2の新機能について理解したので、圧縮NFTとの相互作用に使用できるさまざまな言語/フレームワークを列挙した[はじめに](/ja/bubblegum-v2/sdk)ページをチェックすることをお勧めします。その後、さまざまな[機能ページ](/ja/bubblegum-v2/create-trees)を使用して、cNFTで実行できる特定の操作について詳しく学ぶことができます。最後に、cNFTとマークルツリーの知識を深めるための[高度なガイド](/ja/bubblegum-v2/concurrent-merkle-trees)も利用できます。
+圧縮NFTが高レベルでどのように機能し、Bubblegum V2の新機能について理解したので、圧縮NFTとの相互作用に使用できるさまざまな言語/フレームワークを列挙した[はじめに](/ja/smart-contracts/bubblegum-v2/sdk)ページをチェックすることをお勧めします。その後、さまざまな[機能ページ](/ja/smart-contracts/bubblegum-v2/create-trees)を使用して、cNFTで実行できる特定の操作について詳しく学ぶことができます。最後に、cNFTとマークルツリーの知識を深めるための[高度なガイド](/ja/smart-contracts/bubblegum-v2/concurrent-merkle-trees)も利用できます。

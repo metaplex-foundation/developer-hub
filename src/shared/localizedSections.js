@@ -22,6 +22,13 @@ export const getLocalizedSections = (locale) => {
       guides: '가이드',
       recipes: '레시피',
       changelog: '변경 로그'
+    },
+    zh: {
+      documentation: '文档',
+      references: 'API参考',
+      guides: '指南',
+      recipes: '示例',
+      changelog: '更新日志'
     }
   }
 

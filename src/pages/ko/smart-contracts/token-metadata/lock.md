@@ -4,16 +4,16 @@ metaTitle: 자산 잠금 | Token Metadata
 description: Token Metadata에서 자산을 잠금/동결하는 방법을 알아보세요
 ---
 
-"[위임된 권한](/token-metadata/delegates#token-delegates)" 페이지에서 언급했듯이, 특정 위임자는 자산을 잠그고 잠금 해제할 수 있어 소유자가 자산을 전송하거나 소각하는 것을 방지할 수 있습니다. 잠긴 자산은 또한 소유자가 위임자의 권한을 취소하는 것을 금지합니다. 이 잠금 메커니즘은 에스크로 계정 없이는 작동할 수 없는 스테이킹과 같은 다양한 유틸리티 사용 사례를 가능하게 합니다. {% .lead %}
+"[위임된 권한](/ko/smart-contracts/token-metadata/delegates#token-delegates)" 페이지에서 언급했듯이, 특정 위임자는 자산을 잠그고 잠금 해제할 수 있어 소유자가 자산을 전송하거나 소각하는 것을 방지할 수 있습니다. 잠긴 자산은 또한 소유자가 위임자의 권한을 취소하는 것을 금지합니다. 이 잠금 메커니즘은 에스크로 계정 없이는 작동할 수 없는 스테이킹과 같은 다양한 유틸리티 사용 사례를 가능하게 합니다. {% .lead %}
 
 아래 표에서는 자산 잠금을 지원하는 모든 토큰 위임자를 나열합니다. 이러한 각 위임자에 대해 자세히 알아보고 승인/취소하는 방법은 해당 섹션에서 확인할 수 있습니다.
 
 | 위임자                                                                        | 잠금/잠금 해제 | 전송 | 소각 | 대상              |
 | ------------------------------------------------------------------------------- | ----------- | -------- | ---- | ---------------- |
-| [Standard](/token-metadata/delegates#standard-delegate)                         | ✅          | ✅       | ✅   | pNFT를 제외한 모든 것 |
-| [Locked Transfer](/token-metadata/delegates#locked-transfer-delegate-pnft-only) | ✅          | ✅       | ❌   | pNFT만       |
-| [Utility](/token-metadata/delegates#utility-delegate-pnft-only)                 | ✅          | ❌       | ✅   | pNFT만       |
-| [Staking](/token-metadata/delegates#staking-delegate-pnft-only)                 | ✅          | ❌       | ❌   | pNFT만       |
+| [Standard](/ko/smart-contracts/token-metadata/delegates#standard-delegate)                         | ✅          | ✅       | ✅   | pNFT를 제외한 모든 것 |
+| [Locked Transfer](/ko/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only) | ✅          | ✅       | ❌   | pNFT만       |
+| [Utility](/ko/smart-contracts/token-metadata/delegates#utility-delegate-pnft-only)                 | ✅          | ❌       | ✅   | pNFT만       |
+| [Staking](/ko/smart-contracts/token-metadata/delegates#staking-delegate-pnft-only)                 | ✅          | ❌       | ❌   | pNFT만       |
 
 자산에 승인된 토큰 위임자가 있다고 가정하고, 이제 위임자가 자산을 잠그고 잠금 해제하는 방법을 살펴보겠습니다.
 

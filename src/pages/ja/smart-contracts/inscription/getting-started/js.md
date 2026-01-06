@@ -26,7 +26,7 @@ import { mplInscription } from '@metaplex-foundation/mpl-inscription'
 const umi = createUmi('http://127.0.0.1:8899').use(mplInscription())
 ```
 
-次に、どのウォレットを使用するかをUmiに伝えます。これは[キーペア](/ja/umi/connecting-to-umi#connecting-w-a-secret-key)または[solana wallet adapter](/ja/umi/connecting-to-umi#connecting-w-wallet-adapter)のいずれかにできます。
+次に、どのウォレットを使用するかをUmiに伝えます。これは[キーペア](/ja/dev-tools/umi/getting-started#connecting-w-a-secret-key)または[solana wallet adapter](/ja/dev-tools/umi/getting-started#connecting-w-wallet-adapter)のいずれかにできます。
 
 これで、[ライブラリが提供するさまざまな関数](https://mpl-inscription.typedoc.metaplex.com/)を使用し、`Umi`インスタンスを渡すことでInscriptionと相互作用できます。以下は、小さなJSONファイルが添付されたシンプルなinscriptionをミントし、inscriptionのデータを取得してinscriptionランクを印刷する例です。
 

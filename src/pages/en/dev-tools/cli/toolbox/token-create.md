@@ -1,5 +1,6 @@
 ---
 title: Create Token
+metaTitle: Create Token | Metaplex CLI
 description: Create a new fungible token on Solana
 ---
 

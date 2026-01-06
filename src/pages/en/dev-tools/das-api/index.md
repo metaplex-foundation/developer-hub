@@ -12,7 +12,7 @@ The Metaplex Digital Asset Standard (DAS) API represents a unified interface for
 The API defines a set of methods that RPCs implement in order to provide asset data. In the majority of cases, the data is indexed using Metaplex Digital Asset RPC infrastructure.
 
 ## Core Extension
-In addition to the general DAS SDK an extension for [MPL Core](/core) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for [DAS-to-Core type conversions](/das-api/core-extension/convert-das-asset-to-core).  
+In addition to the general DAS SDK an extension for [MPL Core](/smart-contracts/core) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for [DAS-to-Core type conversions](/dev-tools/das-api/core-extension/convert-das-asset-to-core).  
 
 {% quick-links %}
 

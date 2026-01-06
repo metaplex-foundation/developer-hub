@@ -8,7 +8,7 @@ immutableMetadata Plugin은 메타데이터(이름과 URI)를 불변으로 만�
 
 이 플러그인은 `MPL Core Asset`과 `MPL Core Collection` 모두에서 사용할 수 있습니다.
 
-[royalties](/core/plugins/royalties)와 같은 다른 플러그인과 마찬가지로 MPL Core Collection에 할당되면 Asset에서도 사용됩니다. 따라서 컬렉션에 추가되면 Asset의 메타데이터도 불변이 됩니다.
+[royalties](/ko/smart-contracts/core/plugins/royalties)와 같은 다른 플러그인과 마찬가지로 MPL Core Collection에 할당되면 Asset에서도 사용됩니다. 따라서 컬렉션에 추가되면 Asset의 메타데이터도 불변이 됩니다.
 
 ## Works With
 

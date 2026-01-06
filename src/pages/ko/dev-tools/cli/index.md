@@ -1,5 +1,6 @@
 ---
 title: 소개
+metaTitle: 소개 | Metaplex CLI
 description: Metaplex CLI에 오신 것을 환영합니다
 ---
 
@@ -37,16 +38,16 @@ Metaplex CLI는 Solana에서 Metaplex 프로토콜과 상호작용하기 위한 
 
 ## 시작하기
 
-1. [CLI 설치](/ko/cli/installation)
+1. [CLI 설치](/ko/dev-tools/cli/installation)
 2. 환경 구성:
-   - [지갑 설정](/ko/cli/config/wallets)
-   - [RPC 엔드포인트 구성](/ko/cli/config/rpcs)
-   - [선호하는 탐색기 선택](/ko/cli/config/explorer)
+   - [지갑 설정](/ko/dev-tools/cli/config/wallets)
+   - [RPC 엔드포인트 구성](/ko/dev-tools/cli/config/rpcs)
+   - [선호하는 탐색기 선택](/ko/dev-tools/cli/config/explorer)
 3. 핵심 명령 사용 시작:
-   - [자산 생성](/ko/cli/core/create-asset)
-   - [컬렉션 생성](/ko/cli/core/create-collection)
-   - [자산 업데이트](/ko/cli/core/update-asset)
-   - [자산 가져오기](/ko/cli/core/fetch)
+   - [자산 생성](/ko/dev-tools/cli/core/create-asset)
+   - [컬렉션 생성](/ko/dev-tools/cli/core/create-collection)
+   - [자산 업데이트](/ko/dev-tools/cli/core/update-asset)
+   - [자산 가져오기](/ko/dev-tools/cli/core/fetch)
 
 ## 명령 구조
 
@@ -77,4 +78,4 @@ mplx <category> <command> [options]
 
 ## 다음 단계
 
-시작할 준비가 되셨나요? [설치 가이드](/ko/cli/installation)로 이동하여 시스템에 CLI를 설정하세요.
+시작할 준비가 되셨나요? [설치 가이드](/ko/dev-tools/cli/installation)로 이동하여 시스템에 CLI를 설정하세요.

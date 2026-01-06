@@ -1,5 +1,6 @@
 ---
 title: 설치
+metaTitle: 설치 | Metaplex CLI
 description: Metaplex CLI 설치 및 설정
 ---
 
@@ -136,9 +137,9 @@ npm link
 
 이제 CLI가 설치되었으므로 다음을 수행할 수 있습니다:
 
-1. [핵심 명령에 대해 알아보기](/ko/cli/core/create-asset)
-2. [도구상자 유틸리티 탐색](/ko/cli/toolbox/token-create)
-3. [환경 구성](/ko/cli/config/wallets)
+1. [핵심 명령에 대해 알아보기](/ko/dev-tools/cli/core/create-asset)
+2. [도구상자 유틸리티 탐색](/ko/dev-tools/cli/toolbox/token-create)
+3. [환경 구성](/ko/dev-tools/cli/config/wallets)
 
 ## 업데이트
 

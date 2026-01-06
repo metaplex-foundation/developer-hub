@@ -1,6 +1,6 @@
 ---
 title: Solana 트랜잭션 오류를 진단하는 방법
-metaTitle: Solana 트랜잭션 오류를 진단하는 방법
+metaTitle: Solana 트랜잭션 오류를 진단하는 방법 | Metaplex Guides
 description: Solana에서 트랜잭션 오류를 진단하고 이러한 오류에 대한 논리적 해결책을 찾는 방법을 알아보세요.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

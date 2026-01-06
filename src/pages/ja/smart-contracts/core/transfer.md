@@ -161,4 +161,4 @@ pub async fn transfer_asset_in_collection() {
 
 ## アセットの Transfer Delegate である場合はどうなりますか？
 
-[Transfer Delegate](/ja/core/plugins/transfer-delegate)プラグインを介してアセットのTransfer Delegateである場合、アセットの所有者であるかのように`transferV1`関数を呼び出すことができます。
+[Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate)プラグインを介してアセットのTransfer Delegateである場合、アセットの所有者であるかのように`transferV1`関数を呼び出すことができます。

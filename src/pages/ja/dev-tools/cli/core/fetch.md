@@ -1,5 +1,6 @@
 ---
 title: アセットまたはコレクションの取得
+metaTitle: アセットまたはコレクションの取得 | Metaplex CLI
 description: ミントアドレスによるMPLコアアセットまたはコレクションの取得
 ---
 

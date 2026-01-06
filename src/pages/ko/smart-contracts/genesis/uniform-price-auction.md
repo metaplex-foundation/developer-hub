@@ -18,7 +18,7 @@ Uniform Price Auction은 다음과 같은 시간 기반 토큰 런칭을 가능�
 - **대규모 투자자/펀드 참여**: 구조화된 경매 형식이 대규모 참여자에게 어필
 - **통제된 접근**: 요구사항에 따라 게이트 또는 비게이트 가능
 
-일반적인 Genesis 개념은 [개요](/smart-contracts/genesis)를 참조하거나 대안적인 런칭 메커니즘인 [Launch Pool](/smart-contracts/genesis/launch-pool)을 살펴보세요.
+일반적인 Genesis 개념은 [개요](/ko/smart-contracts/genesis)를 참조하거나 대안적인 런칭 메커니즘인 [Launch Pool](/ko/smart-contracts/genesis/launch-pool)을 살펴보세요.
 
 {% callout type="note" %}
 더 자세한 문서가 곧 제공될 예정입니다.

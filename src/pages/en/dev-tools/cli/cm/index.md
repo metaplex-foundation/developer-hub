@@ -20,12 +20,12 @@ This single command handles everything to create a candy machine: asset validati
 
 | Command | Purpose | Key Features |
 |---------|---------|--------------|
-| [`create`](/cli/cm/create) | Create a new candy machine | Interactive wizard, template generation, manual config |
-| [`upload`](/cli/cm/upload) | Upload assets to storage | Intelligent caching, progress tracking, validation |
-| [`insert`](/cli/cm/insert) | Insert items into candy machine | Smart loading detection, batch processing |
-| [`validate`](/cli/cm/validate) | Validate asset cache | Comprehensive validation, error reporting |
-| [`fetch`](/cli/cm/fetch) | Fetch candy machine info | Display configuration, guard settings, status |
-| [`withdraw`](/cli/cm/withdraw) | Withdraw and delete | Clean withdrawal, balance recovery |
+| [`create`](/dev-tools/cli/cm/create) | Create a new candy machine | Interactive wizard, template generation, manual config |
+| [`upload`](/dev-tools/cli/cm/upload) | Upload assets to storage | Intelligent caching, progress tracking, validation |
+| [`insert`](/dev-tools/cli/cm/insert) | Insert items into candy machine | Smart loading detection, batch processing |
+| [`validate`](/dev-tools/cli/cm/validate) | Validate asset cache | Comprehensive validation, error reporting |
+| [`fetch`](/dev-tools/cli/cm/fetch) | Fetch candy machine info | Display configuration, guard settings, status |
+| [`withdraw`](/dev-tools/cli/cm/withdraw) | Withdraw and delete | Clean withdrawal, balance recovery |
 
 ## Key Features
 
@@ -177,7 +177,7 @@ The CLI supports all Core Candy Machine guards:
 
 **Freeze Guards**: `freezeSolPayment`, `freezeTokenPayment`
 
-For detailed guard documentation, see the [Core Candy Machine Guards](/core-candy-machine/guards) reference.
+For detailed guard documentation, see the [Core Candy Machine Guards](/smart-contracts/core-candy-machine/guards) reference.
 
 ## Best Practices
 
@@ -213,14 +213,14 @@ For detailed guard documentation, see the [Core Candy Machine Guards](/core-cand
 
 ## Related Documentation
 
-- [Core Candy Machine Overview](/core-candy-machine) - Understanding MPL Core Candy Machines
-- [Core Candy Machine Guards](/core-candy-machine/guards) - Complete guard reference
-- [CLI Installation](/cli/installation) - Setting up the MPLX CLI
-- [CLI Configuration](/cli/config/wallets) - Wallet and RPC setup
+- [Core Candy Machine Overview](/smart-contracts/core-candy-machine) - Understanding MPL Core Candy Machines
+- [Core Candy Machine Guards](/smart-contracts/core-candy-machine/guards) - Complete guard reference
+- [CLI Installation](/dev-tools/cli/installation) - Setting up the MPLX CLI
+- [CLI Configuration](/dev-tools/cli/config/wallets) - Wallet and RPC setup
 
 ## Next Steps
 
-1. **[Install the CLI](/cli/installation)** if you haven't already
-2. **[Create your first candy machine](/cli/cm/create)** using the wizard
-3. **[Explore guard configuration](/core-candy-machine/guards)** for advanced minting rules
-4. **[Learn about guard groups](/core-candy-machine/guard-groups)** for phased launches
+1. **[Install the CLI](/dev-tools/cli/installation)** if you haven't already
+2. **[Create your first candy machine](/dev-tools/cli/cm/create)** using the wizard
+3. **[Explore guard configuration](/smart-contracts/core-candy-machine/guards)** for advanced minting rules
+4. **[Learn about guard groups](/smart-contracts/core-candy-machine/guard-groups)** for phased launches

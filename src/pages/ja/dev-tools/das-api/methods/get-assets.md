@@ -12,7 +12,7 @@ tableOfContents: false
 | 名前  | 必須 | 説明            |
 | ----- | :------: | ---------------------- |
 | `ids` |    ✅    | アセットIDの配列。 |
-| `options` |          | 表示オプションオブジェクト。詳細は[表示オプション](/das-api/display-options)を参照してください。 |
+| `options` |          | 表示オプションオブジェクト。詳細は[表示オプション](/ja/dev-tools/das-api/display-options)を参照してください。 |
 
 ## プレイグラウンド
 

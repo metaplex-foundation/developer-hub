@@ -6,7 +6,7 @@ description: Solana devnet 및 mainnet-beta 이외의 Solana Virtual Machine(SVM
 
 ## 개요
 
-이 가이드는 Solana의 devnet 및 mainnet-beta 이외의 Solana Virtual Machine(SVM) 환경에서 JavaScript를 사용하여 압축 NFT(cNFT) 자산과 상호 작용하기 위한 특정 요구 사항을 자세히 설명합니다. cNFT 생성에 대한 보다 포괄적인 개요는 [Bubblegum으로 Solana에서 100만 개의 NFT 생성](/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana) 가이드를 참조하세요.
+이 가이드는 Solana의 devnet 및 mainnet-beta 이외의 Solana Virtual Machine(SVM) 환경에서 JavaScript를 사용하여 압축 NFT(cNFT) 자산과 상호 작용하기 위한 특정 요구 사항을 자세히 설명합니다. cNFT 생성에 대한 보다 포괄적인 개요는 [Bubblegum으로 Solana에서 100만 개의 NFT 생성](/ko/smart-contracts/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana) 가이드를 참조하세요.
 
 ### 필수 패키지
 

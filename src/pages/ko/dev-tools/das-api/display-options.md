@@ -82,13 +82,13 @@ const assets = await umi.rpc.searchAssets({
 
 다음 DAS API 메서드는 표시 옵션과 함께 `options` 매개변수를 지원합니다:
 
-- [Get Asset](/das-api/methods/get-asset)
-- [Get Assets](/das-api/methods/get-assets)
-- [Get Assets By Owner](/das-api/methods/get-assets-by-owner)
-- [Get Assets By Creator](/das-api/methods/get-assets-by-creator)
-- [Get Assets By Authority](/das-api/methods/get-assets-by-authority)
-- [Get Assets By Group](/das-api/methods/get-assets-by-group)
-- [Search Assets](/das-api/methods/search-assets)
+- [Get Asset](/ko/dev-tools/das-api/methods/get-asset)
+- [Get Assets](/ko/dev-tools/das-api/methods/get-assets)
+- [Get Assets By Owner](/ko/dev-tools/das-api/methods/get-assets-by-owner)
+- [Get Assets By Creator](/ko/dev-tools/das-api/methods/get-assets-by-creator)
+- [Get Assets By Authority](/ko/dev-tools/das-api/methods/get-assets-by-authority)
+- [Get Assets By Group](/ko/dev-tools/das-api/methods/get-assets-by-group)
+- [Search Assets](/ko/dev-tools/das-api/methods/search-assets)
 
 ## 성능 고려사항
 

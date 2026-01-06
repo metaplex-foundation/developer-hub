@@ -14,10 +14,10 @@ description: FreezeDelegateとAttributeプラグインを活用し、バック�
 - Attributeプラグイン
 
 ### Freeze Delegate
-オーナー管理型で、委任者が凍結/解凍できます。凍結中は取り消せません。軽量で、`frozen: bool`の切り替えのみ。詳細は[Freeze Delegate](/core/plugins/freeze-delegate)。
+オーナー管理型で、委任者が凍結/解凍できます。凍結中は取り消せません。軽量で、`frozen: bool`の切り替えのみ。詳細は[Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate)。
 
 ### Attribute
-権限管理型で、オンチェーン属性（key/value）を保持します。詳細は[Attribute](/core/plugins/attribute)。
+権限管理型で、オンチェーン属性（key/value）を保持します。詳細は[Attribute](/ja/smart-contracts/core/plugins/attribute)。
 
 ### ロジック
 本例では2命令のみ:

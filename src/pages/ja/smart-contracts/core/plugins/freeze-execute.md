@@ -415,7 +415,7 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 - 権限を他者に委任中は、元のオーナーは権限が戻るまで解凍できません
 - 凍結中はプラグインを削除できません
 - 凍結中は権限の再割り当てはできません
-- このプラグインは[Execute命令](/core/execute-asset-signing)と連携します
+- このプラグインは[Execute命令](/ja/smart-contracts/core/execute-asset-signing)と連携します
 
 ## ユースケース例: バックドNFT
 

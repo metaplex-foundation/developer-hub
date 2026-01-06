@@ -10,11 +10,11 @@ When a token operation is performed, the program can be called with instruction 
 
 ## Features
 
-[Create or Update Rule Sets](/token-auth-rules/create-or-update) - An instruction used to both initialize and update Rule Set contents.
+[Create or Update Rule Sets](/smart-contracts/token-auth-rules/create-or-update) - An instruction used to both initialize and update Rule Set contents.
 
-[Rule Set Buffers](/token-auth-rules/buffers) - How large Rule Sets are handled.
+[Rule Set Buffers](/smart-contracts/token-auth-rules/buffers) - How large Rule Sets are handled.
 
-[Validate Rule Sets](/token-auth-rules/validate) - How a Rule Set is validated.
+[Validate Rule Sets](/smart-contracts/token-auth-rules/validate) - How a Rule Set is validated.
 
 ## Rule Types
 Authorization rules are variants of a `Rule` enum that implements a `validate()` method.
@@ -31,12 +31,12 @@ A Rule Set is built upon the `HashMap` data structure and is meant to store vari
 ### Scenario
 **Scenarios** are an optional addition to **Operations** and are used to handle more specific circumstances under which an instruction can be called. From a data format perspective, an **Operation** and **Scenario** combination is just two strings separated by a colon `<Operation>:<Scenario>`. For example, Token Metadata uses the authority type as a **Scenario** for calls to Token Auth Rules from Token Metadata. A Transfer **Operation** may be triggered on a token by either the token's owner or delegate, and the Rule Set manager may want these different scenarios to be governed by different rules. To handle this specific use case a **Scenario** can be used to manage the distinction. The the two `HashMap` keys used for the prior example would be `Transfer:Owner` and `Transfer:Delegate`.
 
-Please see the [Namespace](/token-auth-rules/primitive-rules/namespace) for how to manage identical rules across multiple scenarios.
+Please see the [Namespace](/smart-contracts/token-auth-rules/primitive-rules/namespace) for how to manage identical rules across multiple scenarios.
 
 ## Payload
 The Token Auth Rules program relies on payload data received from the program requesting evaluation from a Rule Set. The underlying data structure of the `Payload` is a `HashMap`, with `Payload` fields being represented as `HashMap` keys. Most Rules store a pre-defined `Payload` field so a lookup can be performed at validation time.
 
-See the [Validate](/token-auth-rules/validate) instruction for more details on how `Payload` is used.
+See the [Validate](/smart-contracts/token-auth-rules/validate) instruction for more details on how `Payload` is used.
 
 ## Resources
 

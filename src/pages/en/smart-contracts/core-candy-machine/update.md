@@ -59,8 +59,8 @@ data =  {
 }
 ```
 
-- [ConfigLineSettingsArgs](/core-candy-machine/create#config-line-settings)
-- [HiddenSettingsArgs](/core-candy-machine/create#hidden-settings)
+- [ConfigLineSettingsArgs](/smart-contracts/core-candy-machine/create#config-line-settings)
+- [HiddenSettingsArgs](/smart-contracts/core-candy-machine/create#hidden-settings)
 
 {% /dialect %}
 {% /dialect-switcher %}

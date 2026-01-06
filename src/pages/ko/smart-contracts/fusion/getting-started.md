@@ -63,6 +63,6 @@ Fusion은 Constraint Model 계정의 `schema` 필드를 활용하여 속성을 �
 
 ### Trifle 설정
 
-마지막으로, Constraint Model과 Trifle 계정은 [이 지침들](/fusion/getting-started)에 따라 설정되어야 합니다.
+마지막으로, Constraint Model과 Trifle 계정은 [이 지침들](/ko/smart-contracts/fusion/getting-started)에 따라 설정되어야 합니다.
 
 위의 단계들 이후, Fusion Parent는 모든 `transfer_in` 또는 `transfer_out` 작업 후에 다시 렌더링되어야 합니다.

@@ -6,7 +6,7 @@ description: Provides a high-level overview of compressed NFTs.
 
 {% callout type="note" title="New Bubblegum version" %}
 
-We recommend using [Bubblegum v2](/bubblegum-v2) to allow more flexibility and features.
+We recommend using [Bubblegum v2](/smart-contracts/bubblegum-v2) to allow more flexibility and features.
 
 {% /callout %}
 
@@ -18,7 +18,7 @@ Bubblegum is the Metaplex Protocol program for creating and interacting with com
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum/getting-started" description="Find the language or library of your choice and get started with compressed NFTs." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum/sdk" description="Find the language or library of your choice and get started with compressed NFTs." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
@@ -45,7 +45,7 @@ These compressed NFTs can be transferred, delegated, and even decompressed into 
 
 ## Merkle Trees, leaves and proofs
 
-Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/bubblegum/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by [hashing the data of the compressed NFT](/bubblegum/hashed-nft-data).
+Compressed NFTs only exist in the context of a **Merkle Tree**. We explain [in a dedicated advanced guide](/smart-contracts/bubblegum-v2/concurrent-merkle-trees) what Merkle Trees are but, for the sake of this overview, you can think of a Merkle Tree as a collection of hashes that we call **Leaves**. Each Leaf is obtained by [hashing the data of the compressed NFT](/smart-contracts/bubblegum-v2/hashed-nft-data).
 
 For each Leaf in the Merkle Tree, one can provide a list of hashes — called a **Proof** — that enables anyone to verify that the given Leaf is part of that tree. Whenever a compressed NFT is updated or transferred, its associated Leaf will change and so will its Proof.
 
@@ -129,21 +129,21 @@ Crawling through millions of transactions every time just to fetch the data of o
 
 Note that not all RPCs support the DAS API. As such, you may be interested in the ["Metaplex DAS API RPCs"](/rpc-providers) page to select an appropriate RPC when using compressed NFTs in your application.
 
-We talk about this in more detail in our advanced ["Storing and indexing NFT data"](/bubblegum/stored-nft-data) guide.
+We talk about this in more detail in our advanced ["Storing and indexing NFT data"](/smart-contracts/bubblegum-v2/stored-nft-data) guide.
 
 ## Features
 
 Even though NFT data does not live inside accounts, it is still possible to execute a variety of operations on compressed NFTs. This is possible by requesting the current NFT data and ensuring its hashed Leaf is valid on the Merkle Tree. As such, the following operations can be performed on compressed NFTs:
 
-- [Mint a cNFT](/bubblegum/mint-cnfts) with or without an associated collection.
-- [Transfer a cNFT](/bubblegum/transfer-cnfts).
-- [Update the data of a cNFT](/bubblegum/update-cnfts).
-- [Burn a cNFT](/bubblegum/burn-cnfts).
-- [Decompress a cNFT into a regular NFT](/bubblegum/decompress-cnfts). Note that this enables interoperability with existing smart contracts but creates onchain accounts with rent fees.
-- [Delegate a cNFT](/bubblegum/delegate-cnfts).
-- [Verify and unverify a cNFT collection](/bubblegum/verify-collections).
-- [Verify and unverify the creators of a cNFT](/bubblegum/verify-creators).
+- [Mint a cNFT](/smart-contracts/bubblegum/mint-cnfts) with or without an associated collection.
+- [Transfer a cNFT](/smart-contracts/bubblegum/transfer-cnfts).
+- [Update the data of a cNFT](/smart-contracts/bubblegum/update-cnfts).
+- [Burn a cNFT](/smart-contracts/bubblegum/burn-cnfts).
+- [Decompress a cNFT into a regular NFT](/smart-contracts/bubblegum/decompress-cnfts). Note that this enables interoperability with existing smart contracts but creates onchain accounts with rent fees.
+- [Delegate a cNFT](/smart-contracts/bubblegum/delegate-cnfts).
+- [Verify and unverify a cNFT collection](/smart-contracts/bubblegum/verify-collections).
+- [Verify and unverify the creators of a cNFT](/smart-contracts/bubblegum/verify-creators).
 
 ## Next steps
 
-Now that we know how compressed NFTs work at a high level, we recommend checking out our [Getting Started](/bubblegum/getting-started) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/bubblegum/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/bubblegum/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.
+Now that we know how compressed NFTs work at a high level, we recommend checking out our [Getting Started](/smart-contracts/bubblegum/getting-started) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterward, the various [feature pages](/smart-contracts/bubblegum/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/smart-contracts/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.

@@ -4,7 +4,7 @@ metaTitle: Get Mints in a Collection | Token Metadata Guides
 description: How-to guide to get all mints in a collection.
 ---
 
-Metaplex Token Metadata has [onchain collections](/token-metadata/collections) to allow objective identifying of NFT collections instead of various subjective and potentially conflicting heuristics employed by the community in absence of an onchain standard. 
+Metaplex Token Metadata has [onchain collections](/smart-contracts/token-metadata/collections) to allow objective identifying of NFT collections instead of various subjective and potentially conflicting heuristics employed by the community in absence of an onchain standard. 
 
 The specification design makes it very easy to look up any given NFT and determine if it is in a collection and if so, which collection, by simply reading the Collection fields from the metadata account. The onchain `Metadata` struct contains an option `Collection` struct which has a `key` field which is the Pubkey of the SPL token mint of the collection it belongs to.
 
@@ -36,7 +36,7 @@ pub struct Collection {
 }
 ```
 
-However, given a collection mint address, finding all NFTs that belong to that particular collection is significantly more difficult when reading directly from chain. There is one superior method using [DAS](/das-api) and two basic approaches to get the data from chain directly.
+However, given a collection mint address, finding all NFTs that belong to that particular collection is significantly more difficult when reading directly from chain. There is one superior method using [DAS](/dev-tools/das-api) and two basic approaches to get the data from chain directly.
 
 ## DAS API
 Fetching the mints using DAS is the superior method when using a [RPC Provider that supports it](/rpc-providers#metaplex-das-api).
@@ -88,7 +88,7 @@ curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json'
 {% /dialect %}
 {% /dialect-switcher %}
 
-You can find more methods on DAS and additional Methods that allows fetching and filtering data in our [DAS Documentation](/das-api)
+You can find more methods on DAS and additional Methods that allows fetching and filtering data in our [DAS Documentation](/dev-tools/das-api)
 
 ## GetProgramAccounts with PreCalculated Offsets
 

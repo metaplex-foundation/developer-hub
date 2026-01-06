@@ -8,8 +8,8 @@ MPL-Bubblegum을 사용하여 새로운 Metaplex 압축된 NFT(cNFT) 표준을 �
 
 {% quick-links %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/ko/bubblegum-v2/sdk/javascript" description="Umi 프레임워크를 기반으로 한 MPL-Bubblegum JavaScript 라이브러리로 시작하세요." /%}
+{% quick-link title="JavaScript" icon="JavaScript" href="/ko/smart-contracts/bubblegum-v2/sdk/javascript" description="Umi 프레임워크를 기반으로 한 MPL-Bubblegum JavaScript 라이브러리로 시작하세요." /%}
 
-{% quick-link title="Rust" icon="Rust" href="/ko/bubblegum-v2/sdk/rust" description="MPL-Bubblegum Rust 크레이트를 사용하여 시작하세요." /%}
+{% quick-link title="Rust" icon="Rust" href="/ko/smart-contracts/bubblegum-v2/sdk/rust" description="MPL-Bubblegum Rust 크레이트를 사용하여 시작하세요." /%}
 
 {% /quick-links %}

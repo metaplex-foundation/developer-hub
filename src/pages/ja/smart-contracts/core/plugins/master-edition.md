@@ -4,7 +4,7 @@ metaTitle: Master Editionプラグイン | Core
 description: MPL Core Master Editionプラグインについて学びます。
 ---
 
-Master Editionプラグインは「権限管理型（Authority Managed）」プラグインで、Coreコレクションと共に使用し、[Edition](/core/plugins/edition)のグルーピング、来歴（Provenance）の提供、最大エディション供給量の保存を行います。Editionプラグインと組み合わせることで、[Metaplex Token MetadataにおけるEditionの概念](/token-metadata/print)に相当する表現が可能です。
+Master Editionプラグインは「権限管理型（Authority Managed）」プラグインで、Coreコレクションと共に使用し、[Edition](/ja/smart-contracts/core/plugins/edition)のグルーピング、来歴（Provenance）の提供、最大エディション供給量の保存を行います。Editionプラグインと組み合わせることで、[Metaplex Token MetadataにおけるEditionの概念](/token-metadata/print)に相当する表現が可能です。
 
 主な用途:
 

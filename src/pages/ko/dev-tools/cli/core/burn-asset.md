@@ -1,5 +1,6 @@
 ---
 title: 에셋 소각
+metaTitle: 에셋 소각 | Metaplex CLI
 description: Metaplex CLI를 사용하여 MPL Core 에셋 소각하기
 ---
 

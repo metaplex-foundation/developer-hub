@@ -148,7 +148,7 @@ await thawAndRevokeV2(umi, {
 {% /dialect-switcher %}
 
 ## Make a cNFT Soulbound
-To make a cNFT Soulbound the cNFT has to be part of a [mpl-core collection](/core/collections) with the [`permanentFreezeDelegate`](/core/plugins/permanent-freeze-delegate) Plugin. Using the `setNonTransferableV2` instruction, we can make the cNFT non-transferable.
+To make a cNFT Soulbound the cNFT has to be part of a [mpl-core collection](/smart-contracts/core/collections) with the [`permanentFreezeDelegate`](/smart-contracts/core/plugins/permanent-freeze-delegate) Plugin. Using the `setNonTransferableV2` instruction, we can make the cNFT non-transferable.
 
 {% dialect-switcher title="Make a cNFT Soulbound" %}
 {% dialect title="JavaScript" id="js" %}

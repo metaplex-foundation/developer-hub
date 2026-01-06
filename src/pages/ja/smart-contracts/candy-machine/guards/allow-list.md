@@ -325,7 +325,7 @@ Allow Listルート命令は以下の機能をサポートします。
 
 _パス: `proof`_
 
-Merkle Proofをミント命令に直接渡すのではなく、ミントウォレットはAllow Listガードのルート命令を使用して[事前検証](/candy-machine/mint#minting-with-pre-validation)を実行する必要があります。
+Merkle Proofをミント命令に直接渡すのではなく、ミントウォレットはAllow Listガードのルート命令を使用して[事前検証](/ja/smart-contracts/candy-machine/mint#minting-with-pre-validation)を実行する必要があります。
 
 このルート命令は、提供されたMerkle ProofからMerkle Rootを計算し、有効である場合、ミントウォレットが許可リストの一部であることの証明として機能する新しいPDAアカウントを作成します。したがって、ミント時には、Allow ListガードはこのPDAアカウントの存在のみをチェックして、ウォレットへのミントを承認または拒否します。
 

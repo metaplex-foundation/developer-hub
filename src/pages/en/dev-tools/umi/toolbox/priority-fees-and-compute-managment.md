@@ -35,5 +35,5 @@ await transactionBuilder()
 ```
 
 {% callout title="Guide how to calculate units and microLamports" type="note" %}
-To be able to choose proper numbers for `microLamports` and `units` there was a [small guide](/umi/guides/optimal-transactions-with-compute-units-and-priority-fees) created that walks through different RPC calls that can be used for calculation.
+To be able to choose proper numbers for `microLamports` and `units` there was a [small guide](/dev-tools/umi/guides/optimal-transactions-with-compute-units-and-priority-fees) created that walks through different RPC calls that can be used for calculation.
 {% /callout %}

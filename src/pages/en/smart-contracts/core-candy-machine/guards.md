@@ -10,7 +10,7 @@ A guard is a modular piece of code that can restrict access to the mint of a Cor
 
 There is a large set of guards to choose from and each of them can be activated and configured at will.
 
-We’ll touch on [all available guards](/core-candy-machine/guards) later in this documentation but let’s go through a few examples here to illustrate that.
+We’ll touch on [all available guards](/smart-contracts/core-candy-machine/guards) later in this documentation but let’s go through a few examples here to illustrate that.
 
 - When the **Start Date** guard is enabled, minting will be forbidden before the preconfigured date. There is also an **End Date** guard to forbid minting after a given date.
 - When the **Sol Payment** guard is enabled, the minting wallet will have to pay a configured amount to a configured destination wallet. Similar guards exist for paying with tokens or NFTs of a specific collection.
@@ -178,36 +178,36 @@ Alright, now that we understand what guards are, let’s see what default guards
 
 In the following list, we’ll provide a short description of each guard with a link pointing to their dedicated page for more advanced reading.
 
-- [**Address Gate**](/core-candy-machine/guards/address-gate): Restricts the mint to a single address.
-- [**Allocation**](/core-candy-machine/guards/allocation): Allows specifying a limit on the number of NFTs each guard group can mint.
-- [**Allow List**](/core-candy-machine/guards/allow-list): Uses a wallet address list to determine who is allowed to mint.
-- [**Asset Burn Multi**](/core-candy-machine/guards/asset-burn-multi): Restricts the mint to holders of a specified collection, requiring a burn of one or more core assets.
-- [**Asset Burn**](/core-candy-machine/guards/asset-burn): Restricts the mint to holders of a specified collection, requiring a burn of a single core asset.
-- [**Asset Gate**](/core-candy-machine/guards/asset-gate): Restricts the mint to holders of a specified collection.
-- [**Asset Mint Limit**](/core-candy-machine/guards/asset-mint-limit): Restricts minting to holders of a specified collection and limits the number of mints that can be executed for a provided Core Asset.
-- [**Asset Payment Multi**](/core-candy-machine/guards/asset-payment-multi): Set the price of the mint as multiple Core Assets of a specified collection.
-- [**Asset Payment**](/core-candy-machine/guards/asset-payment): Set the price of the mint as a Core Asset of a specified collection.
-- [**Bot Tax**](/core-candy-machine/guards/bot-tax): Configurable tax to charge invalid transactions.
-- [**Edition**](/core-candy-machine/guards/edition): Adds the Edition Plugin to the minted Core Asset. See the [Print Editions](/core/guides/print-editions) guide for more information.
-- [**End Date**](/core-candy-machine/guards/end-date): Determines a date to end the mint.
-- [**Freeze Sol Payment**](/core-candy-machine/guards/freeze-sol-payment): Set the price of the mint in SOL with a freeze period.
-- [**Freeze Token Payment**](/core-candy-machine/guards/freeze-token-payment): Set the price of the mint in token amount with a freeze period.
-- [**Gatekeeper**](/core-candy-machine/guards/gatekeeper): Restricts minting via a Gatekeeper Network e.g. Captcha integration.
-- [**Mint Limit**](/core-candy-machine/guards/mint-limit): Specifies a limit on the number of mints per wallet.
-- [**Nft Burn**](/core-candy-machine/guards/nft-burn): Restricts the mint to holders of a specified collection, requiring a burn of the NFT.
-- [**Nft Gate**](/core-candy-machine/guards/nft-gate): Restricts the mint to holders of a specified collection.
-- [**Nft Payment**](/core-candy-machine/guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
-- [**Program Gate**](/core-candy-machine/guards/program-gate): Restricts the programs that can be in a mint transaction
-- [**Redeemed Amount**](/core-candy-machine/guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
-- [**Sol Fixed fee**](/core-candy-machine/guards/sol-fixed-fee): Set the price of the mint in SOL with a fixed price. Similar to the [Sol Payment](/core-candy-machine/guards/sol-payment) guard.
-- [**Sol Payment**](/core-candy-machine/guards/sol-payment): Set the price of the mint in SOL.
-- [**Start Date**](/core-candy-machine/guards/start-date): Determines the start date of the mint.
-- [**Third Party Signer**](/core-candy-machine/guards/third-party-signer): Requires an additional signer on the transaction.
-- [**Token Burn**](/core-candy-machine/guards/token-burn): Restricts the mint to holders of a specified token, requiring a burn of the tokens.
-- [**Token Gate**](/core-candy-machine/guards/token-gate): Restricts the mint to holders of a specified token.
-- [**Token Payment**](/core-candy-machine/guards/token-payment): Set the price of the mint in token amount.
-- [**Token22 Payment**](/core-candy-machine/guards/token2022-payment): Set the price of the mint in token22 (token extension) amount.
-- [**Vanity Mint**](/core-candy-machine/guards/vanity-mint): Restricts the mint to by expecting the new mint address to match a specific pattern.
+- [**Address Gate**](/smart-contracts/core-candy-machine/guards/address-gate): Restricts the mint to a single address.
+- [**Allocation**](/smart-contracts/core-candy-machine/guards/allocation): Allows specifying a limit on the number of NFTs each guard group can mint.
+- [**Allow List**](/smart-contracts/core-candy-machine/guards/allow-list): Uses a wallet address list to determine who is allowed to mint.
+- [**Asset Burn Multi**](/smart-contracts/core-candy-machine/guards/asset-burn-multi): Restricts the mint to holders of a specified collection, requiring a burn of one or more core assets.
+- [**Asset Burn**](/smart-contracts/core-candy-machine/guards/asset-burn): Restricts the mint to holders of a specified collection, requiring a burn of a single core asset.
+- [**Asset Gate**](/smart-contracts/core-candy-machine/guards/asset-gate): Restricts the mint to holders of a specified collection.
+- [**Asset Mint Limit**](/smart-contracts/core-candy-machine/guards/asset-mint-limit): Restricts minting to holders of a specified collection and limits the number of mints that can be executed for a provided Core Asset.
+- [**Asset Payment Multi**](/smart-contracts/core-candy-machine/guards/asset-payment-multi): Set the price of the mint as multiple Core Assets of a specified collection.
+- [**Asset Payment**](/smart-contracts/core-candy-machine/guards/asset-payment): Set the price of the mint as a Core Asset of a specified collection.
+- [**Bot Tax**](/smart-contracts/core-candy-machine/guards/bot-tax): Configurable tax to charge invalid transactions.
+- [**Edition**](/smart-contracts/core-candy-machine/guards/edition): Adds the Edition Plugin to the minted Core Asset. See the [Print Editions](/smart-contracts/core/guides/print-editions) guide for more information.
+- [**End Date**](/smart-contracts/core-candy-machine/guards/end-date): Determines a date to end the mint.
+- [**Freeze Sol Payment**](/smart-contracts/core-candy-machine/guards/freeze-sol-payment): Set the price of the mint in SOL with a freeze period.
+- [**Freeze Token Payment**](/smart-contracts/core-candy-machine/guards/freeze-token-payment): Set the price of the mint in token amount with a freeze period.
+- [**Gatekeeper**](/smart-contracts/core-candy-machine/guards/gatekeeper): Restricts minting via a Gatekeeper Network e.g. Captcha integration.
+- [**Mint Limit**](/smart-contracts/core-candy-machine/guards/mint-limit): Specifies a limit on the number of mints per wallet.
+- [**Nft Burn**](/smart-contracts/core-candy-machine/guards/nft-burn): Restricts the mint to holders of a specified collection, requiring a burn of the NFT.
+- [**Nft Gate**](/smart-contracts/core-candy-machine/guards/nft-gate): Restricts the mint to holders of a specified collection.
+- [**Nft Payment**](/smart-contracts/core-candy-machine/guards/nft-payment): Set the price of the mint as an NFT of a specified collection.
+- [**Program Gate**](/smart-contracts/core-candy-machine/guards/program-gate): Restricts the programs that can be in a mint transaction
+- [**Redeemed Amount**](/smart-contracts/core-candy-machine/guards/redeemed-amount): Determines the end of the mint based on the total amount minted.
+- [**Sol Fixed fee**](/smart-contracts/core-candy-machine/guards/sol-fixed-fee): Set the price of the mint in SOL with a fixed price. Similar to the [Sol Payment](/smart-contracts/core-candy-machine/guards/sol-payment) guard.
+- [**Sol Payment**](/smart-contracts/core-candy-machine/guards/sol-payment): Set the price of the mint in SOL.
+- [**Start Date**](/smart-contracts/core-candy-machine/guards/start-date): Determines the start date of the mint.
+- [**Third Party Signer**](/smart-contracts/core-candy-machine/guards/third-party-signer): Requires an additional signer on the transaction.
+- [**Token Burn**](/smart-contracts/core-candy-machine/guards/token-burn): Restricts the mint to holders of a specified token, requiring a burn of the tokens.
+- [**Token Gate**](/smart-contracts/core-candy-machine/guards/token-gate): Restricts the mint to holders of a specified token.
+- [**Token Payment**](/smart-contracts/core-candy-machine/guards/token-payment): Set the price of the mint in token amount.
+- [**Token22 Payment**](/smart-contracts/core-candy-machine/guards/token2022-payment): Set the price of the mint in token22 (token extension) amount.
+- [**Vanity Mint**](/smart-contracts/core-candy-machine/guards/vanity-mint): Restricts the mint to by expecting the new mint address to match a specific pattern.
 
 ## Conclusion
 

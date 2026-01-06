@@ -1,7 +1,7 @@
 ---
 title: MPL-Bubblegum Rust SDK
 metaTitle: Rust SDK | MPL-Bubblegum
-description: MPL-Bubblegum Rust SDKを実行するためのプロジェクト設定方法を学びます。
+description: MPL-Bubblegum V2 Rust SDKを実行するためのプロジェクト設定方法を学びます。
 ---
 
 MetaplexはMPL-Bubblegumプログラムとの相互作用に使用できるRustライブラリを提供しています。Rustライブラリは、Rustスクリプト/ビルドや、CPI命令を介したオンチェーンプログラムで使用できます。

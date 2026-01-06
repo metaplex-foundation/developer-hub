@@ -11,7 +11,7 @@ Bubblegum V2は、いくつかの改良と新機能を導入するBubblegumプ�
 Bubblegum V2では、cNFTはMetaplex Token Metadataコレクションの代わりにMPL-Coreコレクションを使用してコレクションにグループ化されます。また、凍結、解凍、ソウルバウンドNFTなどの新機能と以下のような追加機能も導入しています：
 - **凍結・解凍機能**: プロジェクト作成者は、特定のイベント中の転送を防ぐことや権利確定メカニズムの実装など、さまざまなユースケースでアセットをより詳細に制御するためにcNFTを凍結・解凍できるようになりました。
 - **MPL-Coreコレクション統合**: Bubblegum V2 NFTは、トークンメタデータコレクションに限定されることなく、MPL-Coreコレクションに追加できるようになり、より大きなMetaplexエコシステムとの柔軟性と統合を可能にします。
-- **ロイヤリティ強制**: Bubblegum V2は[MPL-Core](https://docs.metaplex.com/ja/core/overview)コレクションを使用しているため、`ProgramDenyList`などを使用してcNFTにロイヤリティを強制することが可能です。
+- **ロイヤリティ強制**: Bubblegum V2は[MPL-Core](/ja/smart-contracts/core)コレクションを使用しているため、`ProgramDenyList`などを使用してcNFTにロイヤリティを強制することが可能です。
 - **ソウルバウンドNFT**: cNFTをソウルバウンド（転送不可）にすることが可能になり、所有者のウォレットに永続的に紐づけられます。これは資格、出席証明、身元確認などに最適です。コレクションで`PermanentFreezeDelegate`プラグインを有効にする必要があります。
 - **永続転送の許可**: コレクションで`PermanentTransferDelegate`プラグインが有効になっている場合、永続転送デリゲートはリーフ所有者の相互作用なしにcNFTを新しい所有者に転送できます。
 

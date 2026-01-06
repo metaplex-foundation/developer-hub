@@ -10,7 +10,6 @@ description: MPL Coreでソウルバウンド資産を作成するための選�
 
 このガイドでは、MPL CoreとUmi Frameworkを使ってソウルバウンド資産を作る方法を紹介します。TypeScriptで実装したい開発者にも、仕組みを理解したい方にも役立つよう、基本概念から実装までをカバーします。資産をソウルバウンド化する複数のアプローチを比較し、コレクション内で最初のソウルバウンドNFTを作る手順を示します。
 
-Solana/Eclipse上のMetaplex Auraネットワークを利用する場合は、[Aura App](https://aura-app.metaplex.com/)からエンドポイントとAPIキーを取得できます。
 
 MPL CoreでソウルバウンドNFTを作る主な方法は2つあります。
 
@@ -82,7 +81,7 @@ Permanent Freeze Delegateは、アセットを凍結して非譲渡にします�
 
 Oracleプラグインは、外部のオンチェーンOracleアカウントの値によりライフサイクルイベント（例: transfer）を承認/拒否します。ソウルバウンド化では、譲渡を常時拒否するOracleを使うことで「譲渡不可／Burn可能」を実現します。
 
-Metaplexが提供する[デフォルトOracle](/core/external-plugins/oracle#default-oracles-deployed-by-metaplex)を使えば、すぐに開始できます。
+Metaplexが提供する[デフォルトOracle](/ja/smart-contracts/core/external-plugins/oracle#default-oracles-deployed-by-metaplex)を使えば、すぐに開始できます。
 
 ```js
 const ORACLE_ACCOUNT = publicKey(

@@ -4,7 +4,7 @@ metaTitle: 압축된 NFT 가져오기 | Bubblegum V2
 description: Bubblegum에서 압축된 NFT를 가져오는 방법을 알아보세요.
 ---
 
-[개요](/ko/bubblegum#read-api) 페이지에서 언급했듯이 압축된 NFT는 일반 NFT처럼 온체인 계정 내에 저장되지 않고 대신 이를 생성하고 업데이트한 트랜잭션에 기록됩니다. {% .lead %}
+[개요](/ko/smart-contracts/bubblegum#read-api) 페이지에서 언급했듯이 압축된 NFT는 일반 NFT처럼 온체인 계정 내에 저장되지 않고 대신 이를 생성하고 업데이트한 트랜잭션에 기록됩니다. {% .lead %}
 
 따라서 압축된 NFT의 검색을 용이하게 하기 위해 특별한 인덱서가 생성되었습니다. 이 인덱스된 데이터는 **Metaplex DAS API**라고 하는 Solana RPC 메서드의 확장을 통해 사용할 수 있습니다. 실제로 DAS API를 통해 모든 **디지털 자산**을 가져올 수 있습니다. 이는 압축된 NFT, 일반 NFT, 또는 심지어 대체 가능한 자산일 수 있습니다.
 
@@ -103,7 +103,7 @@ const rpcAsset = await umi.rpc.getAsset(assetId)
 
 ## 압축된 NFT의 증명 가져오기
 
-`getAsset` RPC 메서드가 자산에 대한 많은 정보를 반환하지만 자산의 **증명**은 반환하지 않습니다. [개요](/ko/bubblegum#merkle-trees-leaves-and-proofs) 페이지에서 언급했듯이 압축된 NFT의 증명은 자산의 진위를 확인할 수 있는 해시 목록입니다. 이것 없이는 누구나 주어진 데이터로 트리에 압축된 NFT를 가지고 있다고 가장할 수 있습니다.
+`getAsset` RPC 메서드가 자산에 대한 많은 정보를 반환하지만 자산의 **증명**은 반환하지 않습니다. [개요](/ko/smart-contracts/bubblegum#merkle-trees-leaves-and-proofs) 페이지에서 언급했듯이 압축된 NFT의 증명은 자산의 진위를 확인할 수 있는 해시 목록입니다. 이것 없이는 누구나 주어진 데이터로 트리에 압축된 NFT를 가지고 있다고 가장할 수 있습니다.
 
 따라서 압축된 NFT의 많은 작업(예: 소각, 전송, 업데이트 등)은 이를 수행하기 전에 자산의 증명을 요구합니다. 자산의 증명을 계산하는 것은 가능하지만 누군가가 주어진 트리 내에 존재하는 모든 압축된 NFT의 해시를 알아야 합니다. 이것이 DAS API가 모든 압축된 NFT의 증명도 추적하는 이유입니다.
 

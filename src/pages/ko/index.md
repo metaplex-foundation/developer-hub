@@ -10,16 +10,16 @@ description: Metaplex 기반 개발을 위한 완전한 가이드.
 
 ## 제품
 
-- [Core](/ko/core) - 차세대 솔라나 NFT 표준
-- [Candy Machine](/ko/candy-machine) - NFT 드롭 생성 및 관리
-- [UMI](/ko/umi) - JavaScript 클라이언트를 위한 솔라나 프레임워크
+- [Core](/ko/smart-contracts/core) - 차세대 솔라나 NFT 표준
+- [Candy Machine](/ko/smart-contracts/candy-machine) - NFT 드롭 생성 및 관리
+- [UMI](/ko/dev-tools/umi) - JavaScript 클라이언트를 위한 솔라나 프레임워크
 - [가이드](/ko/guides) - 단계별 튜토리얼
 
 ## 인기 가이드
 
-- [솔라나에서 NFT 만드는 방법](/ko/guides/how-to-create-an-nft)
-- [Candy Machine으로 NFT 컬렉션 만들기](/ko/guides/create-nft-collection-candy-machine)
-- [Core NFT 에셋 만드는 방법](/ko/guides/how-to-create-core-asset)
+- [솔라나에서 NFT 만드는 방법](/ko/guides/javascript/how-to-create-an-nft-on-solana)
+- [Candy Machine으로 NFT 컬렉션 만들기](/ko/smart-contracts/candy-machine)
+- [Core NFT 에셋 만드는 방법](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
 
 ## 시작하기
 

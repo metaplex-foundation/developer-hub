@@ -45,7 +45,7 @@ yarn install
 
 ## SPLトークンの作成
 
-まず、配布されるSPLトークンを作成します。[私たちのガイド](/guides/javascript/how-to-create-a-solana-token)に従うか、[sol-tools.io](https://sol-tools.io/token-tools/create-token)などのツールを使用できます。
+まず、配布されるSPLトークンを作成します。[私たちのガイド](/ja/guides/javascript/how-to-create-a-solana-token)に従うか、[sol-tools.io](https://sol-tools.io/token-tools/create-token)などのツールを使用できます。
 
 {% callout type="note" title="トークン数量" %}
 配布リスト全体をカバーするのに十分なトークンと、テスト用のバッファを必ず作成してください。

@@ -1,5 +1,6 @@
 ---
 title: Explorer Configuration
+metaTitle: Explorer Configuration | Metaplex CLI
 description: Set your preferred blockchain explorer
 ---
 

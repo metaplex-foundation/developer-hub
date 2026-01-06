@@ -10,7 +10,7 @@ description: Metaplex Umi에서 공개 키와 서명자
 사용 사례별로 이를 다뤄보겠습니다.
 
 {% callout type="note" %}
-Wallet Adapter나 파일시스템 지갑을 사용하는 스니펫을 찾고 계신가요? [시작하기 페이지](/umi/getting-started)를 확인해보세요!
+Wallet Adapter나 파일시스템 지갑을 사용하는 스니펫을 찾고 계신가요? [시작하기 페이지](/ko/dev-tools/umi/getting-started)를 확인해보세요!
 {% /callout %}
 
 ## 공개 키

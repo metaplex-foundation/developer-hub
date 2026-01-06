@@ -20,13 +20,11 @@ export const bubblegumv2 = {
   protocolFees: {
     create: {
       solana: '0.00009 SOL',
-      eclipse: '0.0000009 ETH',
       payer: 'Minter',
       notes: 'Paid by the minter.',
     },
     transfer: {
       solana: '0.000006 SOL',
-      eclipse: '0.00000006 ETH',
       payer: 'Collector',
       notes: 'Paid by the owner.',
     },
@@ -111,11 +109,13 @@ export const bubblegumv2 = {
     // Product display translations - edit right here!
     headlineTranslations: {
       ja: '改良された圧縮NFT',
-      ko: '개선된 압축 NFT'
+      ko: '개선된 압축 NFT',
+      zh: '改进的压缩NFT'
     },
     descriptionTranslations: {
       ja: '新たな桁のスケールを実現するNFT。',
-      ko: '새로운 차원의 확장성을 제공하는 NFT입니다.'
+      ko: '새로운 차원의 확장성을 제공하는 NFT입니다.',
+      zh: '可扩展到新数量级的NFT。'
     },
 
     sectionKeys: {
@@ -136,63 +136,78 @@ export const bubblegumv2 = {
       // To change these, edit right here in this file!
       'Metaplex DAS API RPCs': {
         ja: 'Metaplex DAS API RPC',
-        ko: 'Metaplex DAS API RPC'
+        ko: 'Metaplex DAS API RPC',
+        zh: 'Metaplex DAS API RPC'
       },
       'Creating Bubblegum Trees': {
         ja: 'Bubblegumツリーの作成',
-        ko: 'Bubblegum 트리 생성'
+        ko: 'Bubblegum 트리 생성',
+        zh: '创建Bubblegum树'
       },
       'Minting Compressed NFTs (cNFTs)': {
         ja: '圧縮NFT（cNFT）のミント',
-        ko: '압축 NFT(cNFT) 민팅'
+        ko: '압축 NFT(cNFT) 민팅',
+        zh: '铸造压缩NFT（cNFT）'
       },
       'Fetching cNFTs': {
         ja: 'cNFTの取得',
-        ko: 'cNFT 가져오기'
+        ko: 'cNFT 가져오기',
+        zh: '获取cNFT'
       },
       'Transferring cNFTs': {
         ja: 'cNFTの転送',
-        ko: 'cNFT 전송'
+        ko: 'cNFT 전송',
+        zh: '转移cNFT'
       },
       'Freeze and Thaw cNFTs': {
         ja: 'cNFTの凍結と解凍',
-        ko: 'cNFT 동결 및 해제'
+        ko: 'cNFT 동결 및 해제',
+        zh: '冻结和解冻cNFT'
       },
       'Updating cNFTs': {
         ja: 'cNFTの更新',
-        ko: 'cNFT 업데이트'
+        ko: 'cNFT 업데이트',
+        zh: '更新cNFT'
       },
       'Burning cNFTs': {
         ja: 'cNFTのバーン',
-        ko: 'cNFT 소각'
+        ko: 'cNFT 소각',
+        zh: '销毁cNFT'
       },
       'Delegating cNFTs': {
         ja: 'cNFTのデリゲート',
-        ko: 'cNFT 위임'
+        ko: 'cNFT 위임',
+        zh: '委托cNFT'
       },
       'Delegating Trees': {
         ja: 'ツリーのデリゲート',
-        ko: '트리 위임'
+        ko: '트리 위임',
+        zh: '委托树'
       },
       'Verifying Creators': {
         ja: '作成者の検証',
-        ko: '크리에이터 검증'
+        ko: '크리에이터 검증',
+        zh: '验证创作者'
       },
       'Concurrent Merkle Trees': {
         ja: '同時マークルツリー',
-        ko: '동시 머클 트리'
+        ko: '동시 머클 트리',
+        zh: '并发Merkle树'
       },
       'Storing and Indexing NFT Data': {
         ja: 'NFTデータの保存とインデックス化',
-        ko: 'NFT 데이터 저장 및 인덱싱'
+        ko: 'NFT 데이터 저장 및 인덱싱',
+        zh: '存储和索引NFT数据'
       },
       'Hashing NFT Data': {
         ja: 'NFTデータのハッシュ化',
-        ko: 'NFT 데이터 해싱'
+        ko: 'NFT 데이터 해싱',
+        zh: '哈希NFT数据'
       },
       'Merkle Tree Canopy': {
         ja: 'マークルツリーキャノピー',
-        ko: '머클 트리 캐노피'
+        ko: '머클 트리 캐노피',
+        zh: 'Merkle树冠层'
       }
     }
   })

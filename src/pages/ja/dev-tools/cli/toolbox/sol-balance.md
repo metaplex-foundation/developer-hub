@@ -1,5 +1,6 @@
 ---
 title: SOL残高
+metaTitle: SOL残高 | Metaplex CLI
 description: ウォレットアドレスのSOL残高を確認
 ---
 
@@ -54,6 +55,6 @@ Balance: 1.5 SOL
 
 ## 関連コマンド
 
-- [SOL転送](/ja/cli/toolbox/sol-transfer) - アドレス間でSOLを転送
-- [トークン転送](/ja/cli/toolbox/token-transfer) - トークンを転送
-- [エアドロップ](/ja/cli/toolbox/sol-airdrop) - SOLエアドロップをリクエスト（devnetのみ）
+- [SOL転送](/ja/dev-tools/cli/toolbox/sol-transfer) - アドレス間でSOLを転送
+- [トークン転送](/ja/dev-tools/cli/toolbox/token-transfer) - トークンを転送
+- [エアドロップ](/ja/dev-tools/cli/toolbox/sol-airdrop) - SOLエアドロップをリクエスト（devnetのみ）

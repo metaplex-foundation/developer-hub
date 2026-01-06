@@ -10,7 +10,7 @@ Solana에서 토큰 사용이 발전함에 따라, 단순히 "대체 가능" 토
 
 일반적인 합의는 이러한 토큰들이 표준 NFT와 같은 뷰에서 지갑에 저장되거나, 자체 뷰에서 저장되지만 "표준" 대체 가능 SPL 토큰과는 분리되어야 한다는 것입니다. 이러한 토큰들은 검의 종류나 나무 조각과 같은 대체 가능한 아이템을 지원하는 게임 컨텍스트에서 인기를 얻고 있지만, USDC와 같은 일반적인 대체 가능 SPL 토큰과는 다른 리그에 있습니다.
 
-## [토큰 표준 필드](/token-metadata/token-standard#the-token-standard-field)
+## [토큰 표준 필드](/ko/smart-contracts/token-metadata/token-standard#the-token-standard-field)
 
 이 특정 사용 사례를 지원하지만 미래의 다른 토큰 유형으로의 확장을 허용할 만큼 표준을 충분히 광범위하게 만들기 위해, 우리는 Metadata 계정의 `Token Standard` 열거형을 사용하여 토큰의 대체 가능성을 추적합니다. 이 필드는 특정 JSON 표준에 매핑되며 토큰 유형을 객관적으로 구분하는 데 사용됩니다.
 

@@ -112,7 +112,7 @@ By attaching more data to the Mint Account, **the Token Metadata program is able
 
 ## A JSON standard
 
-One important attribute of the Metadata Account is the `URI` attribute that points to a JSON file off-chain. This is used to safely provide additional data whilst not being constrained by the fees involved in storing onchain data. That JSON file [follows a certain standard](/token-metadata/token-standard) that anyone can use to find useful information on tokens.
+One important attribute of the Metadata Account is the `URI` attribute that points to a JSON file off-chain. This is used to safely provide additional data whilst not being constrained by the fees involved in storing onchain data. That JSON file [follows a certain standard](/smart-contracts/token-metadata/token-standard) that anyone can use to find useful information on tokens.
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -225,7 +225,7 @@ In this particular yet popular case, the goal of the Metadata Account is to prov
 
 Additionally, the Token Metadata program offers another account specifically for NFTs called the **Master Edition Account**. This account is also a PDA derived from the Mint Account.
 
-Before creating this account, the Token Metadata program will ensure the special characteristics of Non-Fungible Tokens listed above are met. However, it is worth noting that, instead of voiding the Mint Authority, it will transfer both the Mint Authority and the Freeze Authority to the Master Edition PDA to ensure no one can mint or freeze tokens without going through the Token Metadata program. You can [read more about why this decision was made in the FAQ](/token-metadata/faq#why-are-the-mint-and-freeze-authorities-transferred-to-the-edition-pda).
+Before creating this account, the Token Metadata program will ensure the special characteristics of Non-Fungible Tokens listed above are met. However, it is worth noting that, instead of voiding the Mint Authority, it will transfer both the Mint Authority and the Freeze Authority to the Master Edition PDA to ensure no one can mint or freeze tokens without going through the Token Metadata program. You can [read more about why this decision was made in the FAQ](/smart-contracts/token-metadata/faq#why-are-the-mint-and-freeze-authorities-transferred-to-the-edition-pda).
 
 Thus, **the existence of the Master Edition account acts as proof of Non-Fungibility** for that Mint Account.
 
@@ -360,7 +360,7 @@ To safely identify the fungibility of a token — and, thus, the standard that w
 - `Fungible`: The Mint account is Fungible and has more than one decimal place. This is more likely going to be a token used as a decentralised currency.
 - `ProgrammableNonFungible`: A special `NonFungible` token that is frozen at all times to enforce custom authorization rules. See the next section for more information.
 
-You can [read more about these standards here](/token-metadata/token-standard).
+You can [read more about these standards here](/smart-contracts/token-metadata/token-standard).
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -440,7 +440,7 @@ A good example of why this can be problematic is that Token Metadata cannot enfo
 
 It is then up to the creators to define custom operation-specific authorization rules that will be enforced by the Token Metadata program. These are defined in a special **RuleSet** account which is attached to the Metadata account. An example of such RuleSet could be an allowlist of program addresses that honor royalties. RuleSets are part of a new Metaplex program called [Token Auth Rules](/token-auth-rules).
 
-You can [read more about Programmable NFTs here](/token-metadata/pnfts).
+You can [read more about Programmable NFTs here](/smart-contracts/token-metadata/pnfts).
 
 {% diagram %}
 {% node %}
@@ -486,15 +486,15 @@ Whilst this provides a good overview of the Token Metadata program and what it h
 
 The other pages of this documentation aim to document it further and explain significant features in their own individual pages.
 
-- [Token Standards (Assets)](/token-metadata/token-standard)
-- [Minting Assets](/token-metadata/mint)
-- [Updating Assets](/token-metadata/update)
-- [Transferring Assets](/token-metadata/transfer)
-- [Burning Assets](/token-metadata/burn)
-- [Printed Editions](/token-metadata/print)
-- [Verified Collections](/token-metadata/collections)
-- [Verified Creators](/token-metadata/creators)
-- [Delegated Authorities](/token-metadata/delegates)
-- [Locking Assets](/token-metadata/lock)
-- [Programmable NFTs](/token-metadata/pnfts)
-- [NFT Escrow](/token-metadata/escrow)
+- [Token Standards (Assets)](/smart-contracts/token-metadata/token-standard)
+- [Minting Assets](/smart-contracts/token-metadata/mint)
+- [Updating Assets](/smart-contracts/token-metadata/update)
+- [Transferring Assets](/smart-contracts/token-metadata/transfer)
+- [Burning Assets](/smart-contracts/token-metadata/burn)
+- [Printed Editions](/smart-contracts/token-metadata/print)
+- [Verified Collections](/smart-contracts/token-metadata/collections)
+- [Verified Creators](/smart-contracts/token-metadata/creators)
+- [Delegated Authorities](/smart-contracts/token-metadata/delegates)
+- [Locking Assets](/smart-contracts/token-metadata/lock)
+- [Programmable NFTs](/smart-contracts/token-metadata/pnfts)
+- [NFT Escrow](/smart-contracts/token-metadata/escrow)

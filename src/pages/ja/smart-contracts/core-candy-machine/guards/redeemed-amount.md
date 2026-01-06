@@ -8,7 +8,7 @@ description: "Core Candy Machineの「Redeemed Amount」ガードは、Core Cand
 
 **Redeemed Amount**ガードは、Core Candy Machine全体でミントされたアセットの数が設定された最大量に達したときにミントを禁止します。
 
-このガードは、[ガードグループ](/core-candy-machine/guard-groups)と一緒に使用するとより面白くなります。グループにグローバルなミントしきい値を追加できるためです。
+このガードは、[ガードグループ](/ja/smart-contracts/core-candy-machine/guard-groups)と一緒に使用するとより面白くなります。グループにグローバルなミントしきい値を追加できるためです。
 
 {% diagram  %}
 
@@ -95,7 +95,7 @@ create(umi, {
 
 Candy Machineに500アイテムが含まれていても、このガードのために300アイテムしかミント可能にならないことに注意してください。
 
-したがって、このガードは[ガードグループ](/core-candy-machine/guard-groups)を使用する際により便利になります。以下は、2つのグループを使用した別の例で、最初の300アセットは1 SOLでミントできますが、最後の200は2 SOLが必要です。
+したがって、このガードは[ガードグループ](/ja/smart-contracts/core-candy-machine/guard-groups)を使用する際により便利になります。以下は、2つのグループを使用した別の例で、最初の300アセットは1 SOLでミントできますが、最後の200は2 SOLが必要です。
 
 {% dialect-switcher title="グループを使用したRedeemed Amountガードの例" %}
 {% dialect title="JavaScript" id="js" %}

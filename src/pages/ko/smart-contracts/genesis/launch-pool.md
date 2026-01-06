@@ -30,7 +30,7 @@ Launch Pool 생명주기:
 
 ## Launch Pool 설정
 
-이 가이드는 이미 Genesis 계정을 초기화했다고 가정합니다. 초기화 단계는 [시작하기](/smart-contracts/genesis/getting-started)를 참조하세요.
+이 가이드는 이미 Genesis 계정을 초기화했다고 가정합니다. 초기화 단계는 [시작하기](/ko/smart-contracts/genesis/getting-started)를 참조하세요.
 
 ### 1. Launch Pool 버킷 추가
 
@@ -362,6 +362,6 @@ if (deposit) {
 
 ## 다음 단계
 
-- [Priced Sale](/smart-contracts/genesis/priced-sale) - 거래 전 사전 예치 수집
-- [어그리게이션 API](/smart-contracts/genesis/aggregation) - API를 통한 런칭 데이터 조회
+- [Priced Sale](/ko/smart-contracts/genesis/priced-sale) - 거래 전 사전 예치 수집
+- [어그리게이션 API](/ko/smart-contracts/genesis/aggregation) - API를 통한 런칭 데이터 조회
 - [Launch Pool](https://github.com/metaplex-foundation/mpl-genesis/tree/main/clients/js/examples/launch-pool) - GitHub의 예제 구현

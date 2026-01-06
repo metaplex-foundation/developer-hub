@@ -1,5 +1,6 @@
 ---
 title: アセットの更新
+metaTitle: アセットの更新 | Metaplex CLI
 description: MPLコアアセットのメタデータとプロパティの更新
 ---
 

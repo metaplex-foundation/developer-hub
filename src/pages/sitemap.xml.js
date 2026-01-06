@@ -15,7 +15,12 @@ export async function getServerSideProps({ res }) {
   const json = JSON.parse(fs.readFileSync(directoryPath, 'utf8'))
 
   const staticRoutes = json.dataRoutes.map((route) => {
-    return route.page
+    let url = route.page
+    // Strip /en prefix from English routes since they redirect to root paths
+    if (url === '/en' || url.startsWith('/en/')) {
+      url = url === '/en' ? '/' : url.slice('/en'.length)
+    }
+    return url
   })
 
   // Generate the sitemap XML

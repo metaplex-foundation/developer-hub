@@ -8,7 +8,7 @@ description: "Redeemed Amountガードは、Candy Machine全体のミントさ�
 
 **Redeemed Amount**ガードは、Candy Machine全体のミントされたNFT数が設定された最大量に達した場合、ミントを禁止します。
 
-このガードは、グループにグローバルミント閾値を追加することを可能にするため、[Guard Groups](/candy-machine/guard-groups)と組み合わせて使用すると更に興味深くなります。
+このガードは、グループにグローバルミント閾値を追加することを可能にするため、[Guard Groups](/ja/smart-contracts/candy-machine/guard-groups)と組み合わせて使用すると更に興味深くなります。
 
 {% diagram  %}
 
@@ -107,7 +107,7 @@ config.jsonファイルのガードセクションに以下のオブジェクト
 
 Candy Machineに500個のアイテムが含まれていても、このガードのため300個のアイテムのみがミント可能になることに注意してください。
 
-したがって、このガードは[Guard Groups](/candy-machine/guard-groups)を使用するときにより有用になります。最初の300個のNFTは1 SOLでミントできるが、最後の200個は2 SOLが必要になる2つのグループを使用した別の例を以下に示します。
+したがって、このガードは[Guard Groups](/ja/smart-contracts/candy-machine/guard-groups)を使用するときにより有用になります。最初の300個のNFTは1 SOLでミントできるが、最後の200個は2 SOLが必要になる2つのグループを使用した別の例を以下に示します。
 
 {% dialect-switcher title="グループでRedeemed Amountガードを使用する例" %}
 {% dialect title="JavaScript" id="js" %}

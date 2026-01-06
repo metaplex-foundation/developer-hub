@@ -10,7 +10,7 @@ Solana에서 지갑 간 NFT 소유권을 전송합니다. {% .lead %}
 
 ## NFT 전송하기
 
-다음 섹션에서 전체 코드 예제와 변경이 필요할 수 있는 파라미터를 확인할 수 있습니다. NFT 전송에 대한 자세한 내용은 [Core 문서](/core/transfer)를 참조하세요.
+다음 섹션에서 전체 코드 예제와 변경이 필요할 수 있는 파라미터를 확인할 수 있습니다. NFT 전송에 대한 자세한 내용은 [Core 문서](/ko/smart-contracts/core/transfer)를 참조하세요.
 
 {% code-tabs-imported from="core/transfer-asset" frameworks="umi" /%}
 

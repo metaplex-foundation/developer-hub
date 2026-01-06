@@ -8,7 +8,7 @@ The immutableMetadata Plugin is a `Authority Managed` plugin that allows to make
 
 This plugin can be used on both the `MPL Core Asset` and the `MPL Core Collection`.
 
-As it is for other plugins, like [royalties](/core/plugins/royalties) when it is assigned to an MPL Core Collection the MPL Core Asset also is used on the Asset. So if it is added to a collection the Assets Metadata also becomes immutable.
+As it is for other plugins, like [royalties](/smart-contracts/core/plugins/royalties) when it is assigned to an MPL Core Collection the MPL Core Asset also is used on the Asset. So if it is added to a collection the Assets Metadata also becomes immutable.
 
 ## Works With
 

@@ -25,12 +25,12 @@ Shank simplifies the development workflow for Solana programs by automating the 
 
 ## Documentation
 
-- **[Getting Started](/shank/getting-started)** - Installation, setup, detailed usage guide, and comprehensive examples
+- **[Getting Started](/dev-tools/shank/getting-started)** - Installation, setup, detailed usage guide, and comprehensive examples
 
 ## Integration
 
 Shank integrates seamlessly with other Metaplex tools:
-- **[Kinobi](/umi/kinobi)** - Modern IDL generation and client creation
+- **[Kinobi](/dev-tools/umi/kinobi)** - Modern IDL generation and client creation
 - **[Solita](/legacy-documentation/developer-tools/solita)** - TypeScript SDK generation
 
 ## Resources

@@ -1,5 +1,6 @@
 ---
 title: エクスプローラー設定
+metaTitle: エクスプローラー設定 | Metaplex CLI
 description: 推奨ブロックチェーンエクスプローラーを設定
 ---
 

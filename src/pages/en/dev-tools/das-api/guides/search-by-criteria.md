@@ -235,22 +235,22 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 ## Tips and Best Practices
 
 1. **Start simple**: Begin with basic criteria and add complexity gradually
-2. **Use [Pagination](/das-api/guides/pagination)**: For large result sets, implement proper pagination
+2. **Use [Pagination](/dev-tools/das-api/guides/pagination)**: For large result sets, implement proper pagination
 3. **Cache results**: Store frequently accessed search results
 4. **Combine filters wisely**: Too many filters may return no results
 5. **Handle empty results**: Always check for empty result sets, but keep in mind that some assets may be hidden or not indexed yet
-6. **Use [Display Options](/das-api/guides/display-options)**: Include relevant display options for your use case
+6. **Use [Display Options](/dev-tools/das-api/display-options)**: Include relevant display options for your use case
 7. **Sort results**: Use sorting to present data in meaningful ways
 8. **Test queries**: Verify your search criteria with known data
 
 ## Next Steps
 
-- [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
-- [Get NFTs by Owner](/das-api/guides/get-nfts-by-owner) - Find all NFTs owned by a wallet
-- [Get Assets By Creator](/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific wallet
+- [Get All Tokens in a Collection](/dev-tools/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
+- [Get NFTs by Owner](/dev-tools/das-api/guides/get-nfts-by-owner) - Find all NFTs owned by a wallet
+- [Get Assets By Creator](/dev-tools/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific wallet
 
 ## Further Reading
 
-- [Get Assets By Creator](/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific wallet
-- [Get All Tokens in a Collection](/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
-- [Find Compressed NFTs](/das-api/guides/find-compressed-nfts) - Discover and work with compressed NFTs
+- [Get Assets By Creator](/dev-tools/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific wallet
+- [Get All Tokens in a Collection](/dev-tools/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
+- [Find Compressed NFTs](/dev-tools/das-api/guides/find-compressed-nfts) - Discover and work with compressed NFTs

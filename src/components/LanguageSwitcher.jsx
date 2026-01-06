@@ -7,6 +7,7 @@ const languages = [
   { code: 'en', label: 'EN', name: 'English' },
   { code: 'ja', label: 'JA', name: '日本語' },
   { code: 'ko', label: 'KO', name: '한국어' },
+  { code: 'zh', label: 'ZH', name: '中文' },
 ]
 
 export function LanguageSwitcher() {
@@ -28,7 +29,7 @@ export function LanguageSwitcher() {
   }, [])
 
   const getLocalizedPath = (targetLocale) => {
-    // First, normalize the pathname by removing any locale prefix (/en, /ja, /ko)
+    // First, normalize the pathname by removing any locale prefix (/en, /ja, /ko, /zh)
     let normalizedPath = pathname
     if (pathname.startsWith('/en/') || pathname === '/en') {
       normalizedPath = pathname.slice('/en'.length) || '/'
@@ -36,6 +37,8 @@ export function LanguageSwitcher() {
       normalizedPath = pathname.slice('/ja'.length) || '/'
     } else if (pathname.startsWith('/ko/') || pathname === '/ko') {
       normalizedPath = pathname.slice('/ko'.length) || '/'
+    } else if (pathname.startsWith('/zh/') || pathname === '/zh') {
+      normalizedPath = pathname.slice('/zh'.length) || '/'
     }
 
     if (targetLocale === 'en') {
