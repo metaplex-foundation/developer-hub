@@ -193,6 +193,42 @@ export const cli = {
         'RPCs': 'RPC',
         'Explorer': '익스플로러'
       }
+    },
+    zh: {
+      headline: 'MPLX CLI',
+      description: 'MPLX生态系统的命令行工具',
+      sections: {
+        'Getting Started': '快速入门',
+        'Configuration': '配置',
+        'Core Commands': 'Core命令',
+        'Candy Machine Commands': 'Candy Machine命令',
+        'Toolbox': '工具箱'
+      },
+      links: {
+        'Introduction': '简介',
+        'Installation': '安装',
+        'Wallets': '钱包',
+        'RPCs': 'RPC',
+        'Explorer': '浏览器',
+        'Create Asset': '创建资产',
+        'Create Collection': '创建合集',
+        'Update Asset': '更新资产',
+        'Burn Asset': '销毁资产',
+        'Fetch Asset or Collection': '获取资产或合集',
+        'Add and Update Plugins': '添加和更新插件',
+        'Overview': '概述',
+        'Create Candy Machine': '创建Candy Machine',
+        'Upload Assets': '上传资产',
+        'Insert Items': '插入项目',
+        'Validate Cache': '验证缓存',
+        'Fetch Information': '获取信息',
+        'Withdraw': '提取',
+        'Token Creation': '创建代币',
+        'Token Transfer': '转移代币',
+        'SOL Airdrop': 'SOL空投',
+        'SOL Balance': 'SOL余额',
+        'SOL Transfer': 'SOL转账'
+      }
     }
   }
 }

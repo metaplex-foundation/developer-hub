@@ -30,6 +30,13 @@ export const LANGUAGES = {
     nativeName: '한국어',
     isDefault: false,
   },
+  zh: {
+    code: 'zh',           // ISO 639-1 language code
+    urlPath: '/zh',       // URL path prefix
+    name: 'Chinese',
+    nativeName: '中文',
+    isDefault: false,
+  },
 }
 
 // Helper to get language config by URL path

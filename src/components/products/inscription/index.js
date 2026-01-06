@@ -129,6 +129,27 @@ export const inscription = {
         'Authority': '권한',
         'Inscription Sharding': 'Inscription 샤딩'
       }
+    },
+    zh: {
+      headline: '铭刻在Solana上的NFT',
+      description: '将数据铭刻到Solana状态。',
+      sections: {
+        'Introduction': '简介',
+        'Features': '功能',
+        'Advanced': '高级'
+      },
+      links: {
+        'Overview': '概述',
+        'Getting Started': '快速入门',
+        'FAQ': '常见问题',
+        'Initialize': '初始化',
+        'Write Data': '写入数据',
+        'Fetch': '获取',
+        'Clear Data': '清除数据',
+        'Close': '关闭',
+        'Authority': '权限',
+        'Inscription Sharding': 'Inscription分片'
+      }
     }
   }
 }

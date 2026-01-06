@@ -200,6 +200,39 @@ export const legacyDocumentation = {
         'Android SDK': 'Android SDK',
         'iOS SDK': 'iOS SDK',
       }
+    },
+    zh: {
+      headline: '旧文档产品',
+      description: '可能不再使用或已弃用的旧程序和工具文档集合。为完整性从旧文档迁移而来。',
+      sections: {
+        'Auction House': 'Auction House',
+        'Developer Tools': '开发者工具',
+        'Fixed Price Sale': 'Fixed Price Sale',
+        'Gumdrop': 'Gumdrop',
+        'Mobile SDKs': '移动SDK',
+        'Token Entangler': 'Token Entangler',
+      },
+      links: {
+        'Overview': '概述',
+        'Getting Started': '快速入门',
+        'Auction House Settings': 'Auction House设置',
+        'Managing Auction Houses': '管理Auction House',
+        'Trading Assets': '交易资产',
+        'Managing Buyer Escrow Account': '管理买家托管账户',
+        'Auction House Receipts': 'Auction House收据',
+        'Finding Bids, listings, sales': '查找出价、列表、销售',
+        'How to manage Auction House using CLI': '如何使用CLI管理Auction House',
+        'Timed Auctions with Auctioneers': '使用Auctioneers进行定时拍卖',
+        'FAQ': '常见问题',
+        'Solita': 'Solita',
+        'Shank': 'Shank',
+        'Beet': 'Beet',
+        'Cusper': 'Cusper',
+        'Rust Bin': 'Rust Bin',
+        'Introduction': '简介',
+        'Android SDK': 'Android SDK',
+        'iOS SDK': 'iOS SDK',
+      }
     }
   }
 }
