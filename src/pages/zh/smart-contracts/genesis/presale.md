@@ -35,7 +35,7 @@ description: 固定价格代币销售，用户存入SOL并以预定汇率获得�
 {% totem %}
 {% totem-accordion title="查看完整设置脚本" %}
 
-这展示了如何设置带有开始和结束日期的预售。您还可以添加最小存款金额、最大存款金额或后端签名者。要构建面向用户的应用，请参见[用户指南](/smart-contracts/genesis/presale/user-guide)。
+这展示了如何设置带有开始和结束日期的预售。您还可以添加最小存款金额、最大存款金额或后端签名者。要构建面向用户的应用，请参见[用户操作](#用户操作)。
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
