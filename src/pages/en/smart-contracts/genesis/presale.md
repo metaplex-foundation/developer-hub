@@ -35,7 +35,7 @@ A fee is applied to user deposits. See [Protocol Fees](/protocol-fees) for more 
 {% totem %}
 {% totem-accordion title="View complete setup Script" %}
 
-This shows how to setup a Presale with Start and End Dates. You can also add a minimum deposit amount and a maximum deposit amount or a backend signer. To build the user facing app, see [User Operations](#user-operations).
+This shows how to setup a Presale with Start and End Dates. You can also add a minimum deposit amount and a maximum deposit amount or a backend signer. To build the user-facing app, see [User Operations](#user-operations).
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';

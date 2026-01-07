@@ -34,7 +34,7 @@ tokens = deposit / price
 - 10 SOL 예치로 100,000 토큰을 받음
 
 {% callout type="note" %}
-코드 예제와 모든 구성 옵션을 포함한 전체 문서는 [영어 버전](/smart-contracts/genesis/presale)을 참조하세요.
+코드 예제와 모든 구성 옵션을 포함한 전체 문서는 [영어 버전](/ko/smart-contracts/genesis/presale)을 참조하세요.
 {% /callout %}
 
 ## 사용 사례
@@ -52,4 +52,4 @@ tokens = deposit / price
 | 초과 청약 | 불가능 | 모든 예치금 수락 |
 | 가격 발견 | 없음 (사전 설정) | 유기적 |
 
-일반적인 Genesis 개념은 [개요](/smart-contracts/genesis)를 참조하거나 대안적인 런칭 메커니즘인 [Launch Pool](/smart-contracts/genesis/launch-pool)을 살펴보세요.
+일반적인 Genesis 개념은 [개요](/ko/smart-contracts/genesis)를 참조하거나 대안적인 런칭 메커니즘인 [Launch Pool](/ko/smart-contracts/genesis/launch-pool)을 살펴보세요.
