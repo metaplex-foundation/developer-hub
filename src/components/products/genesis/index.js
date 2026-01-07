@@ -14,20 +14,34 @@ export const genesis = {
   className: 'accent-pink',
   heroes: [{ path: '/smart-contracts/genesis', component: Hero }],
   protocolFees: {
-    deposit: {
-      solana: '2%',
-      payer: 'User',
-      notes: 'Fee applied to deposits into Launch Pools.',
+    launchPool: {
+      deposit: {
+        solana: '2%',
+        payer: 'User',
+        notes: 'Fee applied to deposits into Launch Pools.',
+      },
+      withdraw: {
+        solana: '2%',
+        payer: 'User',
+        notes: 'Fee applied to withdrawals from Launch Pools during the deposit period.',
+      },
+      graduation: {
+        solana: '5%',
+        payer: 'Launch Pool',
+        notes: 'Fee applied to total deposits at the end of the Deposit Period.',
+      },
     },
-    withdraw: {
-      solana: '2%',
-      payer: 'User',
-      notes: 'Fee applied to withdrawals from Launch Pools during the deposit period.',
-    },
-    graduation: {
-      solana: '5%',
-      payer: 'Launch Pool',
-      notes: 'Fee applied to total deposits at the end of the Deposit Period.',
+    presale: {
+      deposit: {
+        solana: '?%',
+        payer: 'User',
+        notes: 'Fee applied to deposits into Presales.',
+      },
+      withdraw: {
+        solana: '?%',
+        payer: 'User',
+        notes: 'Fee applied to withdrawals from Presales during the deposit period.',
+      },
     },
   },
   sections: [

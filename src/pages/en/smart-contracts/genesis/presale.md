@@ -28,7 +28,7 @@ For example, if you allocate 1,000,000 tokens with a 100 SOL cap:
 
 ### Fees
 
-A fee is applied to user deposits. See [Protocol Fees](/protocol-fees) for more details.
+{% protocol-fees program="genesis" config="presale" showTitle=false /%}
 
 ## Quick Start
 

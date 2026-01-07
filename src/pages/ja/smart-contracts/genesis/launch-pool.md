@@ -22,9 +22,7 @@ Launch Poolのライフサイクル：
 
 ## 手数料
 
-- **ユーザー預金手数料**：預金額の2%
-- **ユーザー出金手数料**：出金額の2%
-- **グラデュエーション手数料**：預金期間終了時の総預金額の5%
+{% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
 預金手数料の例：10 SOLの預金で9.8 SOLがユーザーの預金アカウントに計上されます。
 

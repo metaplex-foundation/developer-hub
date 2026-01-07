@@ -22,9 +22,7 @@ Launch Pool 생명주기:
 
 ## 수수료
 
-- **사용자 예치 수수료**: 예치 금액의 2%
-- **사용자 출금 수수료**: 출금 금액의 2%
-- **졸업 수수료**: 예치 기간 종료 시 총 예치금의 5%
+{% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
 예치 수수료 예시: 10 SOL 예치 시 9.8 SOL이 사용자의 예치 계정에 적립됩니다.
 
