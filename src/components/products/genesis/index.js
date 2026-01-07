@@ -33,14 +33,14 @@ export const genesis = {
     },
     presale: {
       deposit: {
-        solana: '?%',
+        solana: '2%',
         payer: 'User',
         notes: 'Fee applied to deposits into Presales.',
       },
-      withdraw: {
-        solana: '?%',
-        payer: 'User',
-        notes: 'Fee applied to withdrawals from Presales during the deposit period.',
+      graduation: {
+        solana: '5%',
+        payer: 'Presale',
+        notes: 'Fee applied to total deposits at the end of the Deposit Period.',
       },
     },
   },
