@@ -1,10 +1,10 @@
 ---
 title: Overview
 metaTitle: Genesis - Overview
-description: A smart contract for launching tokens on Solana via priced sale launches and launch pools.
+description: A smart contract for launching tokens on Solana via presale launches and launch pools.
 ---
 
-Genesis is a Metaplex smart contract that provides a flexible framework for **Token Generation Events (TGEs)** on the Solana blockchain. Whether you're launching a new token with a priced sale or building a custom token distribution system, Genesis provides the on-chain infrastructure to make it happen.
+Genesis is a Metaplex smart contract that provides a flexible framework for **Token Generation Events (TGEs)** on the Solana blockchain. Whether you're launching a new token with a presale or building a custom token distribution system, Genesis provides the on-chain infrastructure to make it happen.
 
 ## What Can You Build with Genesis?
 
@@ -12,7 +12,7 @@ Genesis supports multiple launch mechanisms that can be combined to create custo
 
 | Mechanism | Description | Benefits |
 |-----------|-------------|----------|
-| **Priced Sale** | Fixed price token sale | Fixed price reduces complexity and speculation. First-come, first-served dynamics encourage early participation. More predictable outcome with accurate demand forecasting. Caps and wallet gates can be implemented if desired. |
+| **Presale** | Fixed price token sale | Fixed price reduces complexity and speculation. First-come, first-served dynamics encourage early participation. More predictable outcome with accurate demand forecasting. Caps and wallet gates can be implemented if desired. |
 | **Launch Pool** | No fixed price–final price is implied by total deposits at close | Organic price discovery via no cap. Allows full ecosystem participation via no gate. Time-based launch pool prevents sniping and front-running with more open/accessible access. Caps and wallet gates can be implemented if desired. |
 | **Uniform Price Auction** | Time-based auction where users bid for a specific quantity of tokens at a specific price. Bids can be public or private. All winners receive tokens at the clearing price. | Promotes price discovery especially among whales/funds. Can be gated/ungated. |
 
@@ -152,6 +152,6 @@ Ready to build your token launch? Start here:
 
 Then choose your launch type:
 
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Token distribution with deposit windows
-- [Priced Sale](/smart-contracts/genesis/priced-sale) - Pre-deposits before trading begins
-- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Time-based auction with uniform clearing price
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - Best when you want organic price discovery and to accept all deposits regardless of amount
+- [Presale](/smart-contracts/genesis/presale) - Best when you want a fixed, known price per token and have a specific funding target
+- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Best for price discovery among larger participants with bid-based allocation

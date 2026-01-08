@@ -8,9 +8,13 @@ The Metaplex Protocol currently includes the following fees:
 
 ## Genesis
 
-Token launch platform fees for Launch Pool operations. These are percentage-based fees applied to deposits, withdrawals, and graduation.
+Token launch platform fees for different operations. 
 
-{% protocol-fees program="genesis" showTitle=false /%}
+### Launch Pool
+{% protocol-fees program="genesis" showTitle=false config="launchPool" /%}
+
+### Presale
+{% protocol-fees program="genesis" showTitle=false config="presale" /%}
 
 ## Core
 

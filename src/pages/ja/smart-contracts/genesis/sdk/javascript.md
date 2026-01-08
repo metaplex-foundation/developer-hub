@@ -186,5 +186,5 @@ console.log('トランザクション署名:', result.signature);
 GenesisプログラムでUmiインスタンスが設定されたら、構築を開始する準備ができました。Genesis機能を探索してください：
 
 - **[Launch Pool](/ja/smart-contracts/genesis/launch-pool)** - 預金期間付きのトークン配布
-- **[Priced Sale](/ja/smart-contracts/genesis/priced-sale)** - 取引前の事前預金収集
+- **[Presale](/ja/smart-contracts/genesis/presale)** - 固定価格トークン販売
 - **[Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction)** - 均一クリアリング価格の時間ベースオークション

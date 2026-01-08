@@ -99,7 +99,7 @@ const ONE_BILLION = 1_000_000_000_000_000_000n; // 1,000,000,000 토큰
 | 버킷 유형 | 사용 사례 |
 |-------------|----------|
 | **Launch Pool** | 비례 배분이 있는 예치 기간 |
-| **Priced Sale** | 토큰 배포 전 사전 예치 수집 |
+| **Presale** | 고정 가격 토큰 판매 |
 
 ### 유출 버킷
 종료 동작을 통해 토큰 또는 기준 토큰을 받습니다:
@@ -115,7 +115,7 @@ const ONE_BILLION = 1_000_000_000_000_000_000n; // 1,000,000,000 토큰
 {% /callout %}
 
 {% callout type="note" %}
-**[Priced Sale](/ko/smart-contracts/genesis/priced-sale)** - 거래 시작 전에 약정을 수집한 다음 맞춤 기준에 따라 토큰을 배포합니다.
+**[Presale](/ko/smart-contracts/genesis/presale)** - 고정 가격 토큰 판매. 사용자가 SOL을 예치하고 미리 정해진 비율로 토큰을 받습니다.
 {% /callout %}
 
 ## 3단계: 확정
@@ -149,7 +149,7 @@ console.log('Genesis 계정 확정됨!');
 런칭 유형을 선택하고 상세 가이드를 따르세요:
 
 1. **[Launch Pool](/ko/smart-contracts/genesis/launch-pool)** - 예치 기간이 있는 토큰 배포
-2. **[Priced Sale](/ko/smart-contracts/genesis/priced-sale)** - 거래 전 사전 예치 수집
+2. **[Presale](/ko/smart-contracts/genesis/presale)** - 고정 가격 토큰 판매
 3. **[Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction)** - 균일 청산 가격의 시간 기반 경매
 
 각 가이드에는 완전한 설정 코드, 사용자 작업 및 구성이 포함되어 있습니다.

@@ -22,9 +22,7 @@ description: 用户在窗口期间存款并按比例获得代币的代币分配�
 
 ## 费用
 
-- **用户存款费**：存款金额的2%
-- **用户提取费**：提取金额的2%
-- **毕业费**：存款期结束时总存款的5%
+{% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
 存款费示例：用户存入10 SOL，结果是9.8 SOL计入用户的存款账户。
 
@@ -350,6 +348,6 @@ if (deposit) {
 
 ## 后续步骤
 
-- [定价销售](/zh/smart-contracts/genesis/priced-sale) - 交易前的预存款收集
+- [预售](/zh/smart-contracts/genesis/presale) - 固定价格代币销售
 - [聚合API](/zh/smart-contracts/genesis/aggregation) - 通过API查询发行数据
 - [发行池](https://github.com/metaplex-foundation/genesis/tree/main/clients/js/examples/launch-pool) - GitHub上的示例实现

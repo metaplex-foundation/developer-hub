@@ -22,9 +22,7 @@ The Launch Pool lifecycle:
 
 ## Fees
 
-- **User Deposit fee**: 2% of deposit amount
-- **User Withdrawal fee**: 2% of withdrawal amount
-- **Graduation fee**: 5% of the total deposits at the end of the Deposit Period
+{% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
 Deposit Fee Example: A user deposit of 10 SOL results in 9.8 SOL credited to the user's deposit account.
 
@@ -350,6 +348,6 @@ if (deposit) {
 
 ## Next Steps
 
-- [Priced Sale](/smart-contracts/genesis/priced-sale) - Pre-deposit collection before trading
+- [Presale](/smart-contracts/genesis/presale) - Pre-deposit collection before trading
 - [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API
 - [Launch Pool](https://github.com/metaplex-foundation/genesis/tree/main/clients/js/examples/launch-pool) - Example implementation on GitHub

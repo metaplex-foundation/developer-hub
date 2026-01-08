@@ -47,7 +47,7 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   initializeV2,
   findGenesisAccountV2Pda,
   findLaunchPoolBucketV2Pda,
@@ -65,7 +65,7 @@ async function main() {
   // ============================================
 
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // 머신의 파일에서 지갑 키페어 로드
   // 이것은 일반적으로 ~/.config/solana/id.json에 있는 Solana CLI 지갑입니다
@@ -271,7 +271,7 @@ npx ts-node launch.ts
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   transitionV2,
   WRAPPED_SOL_MINT,
 } from '@metaplex-foundation/genesis';
@@ -280,7 +280,7 @@ import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // 지갑 키페어 로드 (출시에 사용한 것과 동일한 지갑)
   const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트
@@ -345,14 +345,14 @@ userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   claimLaunchPoolV2,
 } from '@metaplex-foundation/genesis';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // 사용자의 지갑 키페어 로드 (SOL을 예치한 사람)
   const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트
@@ -393,7 +393,7 @@ main().catch(console.error);
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   revokeMintAuthorityV2,
   revokeFreezeAuthorityV2,
 } from '@metaplex-foundation/genesis';
@@ -401,7 +401,7 @@ import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // 지갑 키페어 로드 (출시에 사용한 것과 동일한 지갑)
   const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트

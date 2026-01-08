@@ -99,7 +99,7 @@ const ONE_BILLION = 1_000_000_000_000_000_000n; // 1,000,000,000トークン
 | バケットタイプ | ユースケース |
 |-------------|----------|
 | **Launch Pool** | 比例配分付きの預金期間 |
-| **Priced Sale** | トークン配布前の事前預金収集 |
+| **Presale** | 固定価格トークン販売 |
 
 ### アウトフローバケット
 終了動作を通じてトークンまたはクォートトークンを受け取ります：
@@ -115,7 +115,7 @@ const ONE_BILLION = 1_000_000_000_000_000_000n; // 1,000,000,000トークン
 {% /callout %}
 
 {% callout type="note" %}
-**[Priced Sale](/ja/smart-contracts/genesis/priced-sale)** - 取引開始前にコミットメントを収集し、カスタム基準に基づいてトークンを配布します。
+**[Presale](/ja/smart-contracts/genesis/presale)** - 固定価格トークン販売。ユーザーがSOLを預金し、事前に決められたレートでトークンを受け取ります。
 {% /callout %}
 
 ## ステップ3：確定
@@ -149,7 +149,7 @@ console.log('Genesisアカウント確定！');
 ローンチタイプを選択し、詳細ガイドに従ってください：
 
 1. **[Launch Pool](/ja/smart-contracts/genesis/launch-pool)** - 預金期間付きのトークン配布
-2. **[Priced Sale](/ja/smart-contracts/genesis/priced-sale)** - 取引前の事前預金収集
+2. **[Presale](/ja/smart-contracts/genesis/presale)** - 固定価格トークン販売
 3. **[Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction)** - 均一クリアリング価格の時間ベースオークション
 
 各ガイドには完全なセットアップコード、ユーザー操作、構成が含まれています。

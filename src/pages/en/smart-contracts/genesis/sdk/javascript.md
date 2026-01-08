@@ -186,5 +186,5 @@ console.log('Transaction signature:', result.signature);
 With your Umi instance configured with the Genesis program, you're ready to start building. Explore the Genesis features:
 
 - **[Launch Pool](/smart-contracts/genesis/launch-pool)** - Token distribution with deposit windows
-- **[Priced Sale](/smart-contracts/genesis/priced-sale)** - Pre-deposit collection before trading
+- **[Presale](/smart-contracts/genesis/presale)** - Pre-deposit collection before trading
 - **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** - Time-based auction with uniform clearing price

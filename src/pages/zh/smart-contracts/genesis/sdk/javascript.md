@@ -186,5 +186,5 @@ console.log('交易签名:', result.signature);
 配置好带有Genesis程序的Umi实例后，您就可以开始构建了。探索Genesis功能：
 
 - **[发行池](/zh/smart-contracts/genesis/launch-pool)** - 带存款窗口的代币分配
-- **[定价销售](/zh/smart-contracts/genesis/priced-sale)** - 交易前的预存款收集
+- **[预售](/zh/smart-contracts/genesis/presale)** - 固定价格代币销售
 - **[统一价格拍卖](/zh/smart-contracts/genesis/uniform-price-auction)** - 具有统一清算价格的基于时间的拍卖
