@@ -1,6 +1,6 @@
 ---
 title: 获取账户
-metaTitle: 获取账户 | Umi
+metaTitle: 使用 Umi 获取账户 - Solana 账户数据获取指南 | Metaplex
 description: 如何使用 Umi 获取账户
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: 安装
-metaTitle: 安装 | Sugar
+metaTitle: Sugar CLI 安装指南 | Metaplex Candy Machine
 description: Sugar 安装指南。
 ---
 

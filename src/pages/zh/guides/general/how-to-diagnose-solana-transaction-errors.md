@@ -1,6 +1,6 @@
 ---
 title: 如何诊断 Solana 上的交易错误
-metaTitle: 如何诊断 Solana 上的交易错误
+metaTitle: 如何诊断 Solana 上的交易错误 | Metaplex Guides
 description: 了解如何诊断 Solana 上的交易错误并为这些错误找到合理的解决方案。
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'

@@ -1,6 +1,6 @@
 ---
-title: MPL-Bubblegum JavaScript SDK
-metaTitle: JavaScript SDK | MPL-Bubblegum
+title: MPL-Bubblegum V2 JavaScript SDK
+metaTitle: JavaScript SDK | MPL-Bubblegum V2
 description: MPL-Bubblegum V2 JavaScript SDKを実行するためのプロジェクト設定方法を学びます。
 ---
 

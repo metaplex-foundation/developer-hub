@@ -1,5 +1,6 @@
 ---
 title: 简介
+metaTitle: 简介 | Metaplex CLI
 description: 欢迎使用 Metaplex CLI
 ---
 

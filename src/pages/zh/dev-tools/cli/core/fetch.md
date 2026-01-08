@@ -1,5 +1,6 @@
 ---
 title: 获取资产或集合
+metaTitle: 获取资产或集合 | Metaplex CLI
 description: 通过铸币地址获取 MPL Core 资产或集合
 ---
 

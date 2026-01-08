@@ -1,5 +1,6 @@
 ---
 title: 代币转账
+metaTitle: 代币转账 | Metaplex CLI
 description: 将代币转账到目标地址
 ---
 

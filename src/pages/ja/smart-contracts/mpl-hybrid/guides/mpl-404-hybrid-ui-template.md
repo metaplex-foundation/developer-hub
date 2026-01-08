@@ -7,7 +7,7 @@ created: 2024-12-16
 
 Metaplex MPL-404 Hybrid UIテンプレートは、開発者とユーザーに開発の出発点を提供するために構築されています。このテンプレートには、`.env`の例ファイル、機能的なUIコンポーネント、ハイブリッドコレクションのフロントエンドUIを作成する際の開発を促進するトランザクション呼び出しが事前設定されています。
 
-{% image src="/images/hybrid-ui-template-image.jpg" classes="m-auto" /%}
+{% image src="/images/hybrid-ui-template-image.jpg" alt="MPL-404 Hybrid UI Template Screenshot" classes="m-auto" /%}
 
 ## 機能
 

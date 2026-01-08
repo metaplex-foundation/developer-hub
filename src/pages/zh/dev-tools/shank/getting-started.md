@@ -1,6 +1,6 @@
 ---
 title: Shank 入门
-metaTitle: 入门 | Shank
+metaTitle: Shank 入门指南 | Metaplex 开发者工具
 description: 学习如何安装和设置 Shank 从 Rust Solana 程序中提取 IDL
 ---
 

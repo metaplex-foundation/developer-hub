@@ -1,6 +1,6 @@
 ---
 title: 指南
-metaTitle: 指南 | Core
+metaTitle: Metaplex Core 开发指南与教程 | Solana NFT
 description: Solana 区块链上 Metaplex Core 数字资产标准的指南和教程列表。
 ---
 

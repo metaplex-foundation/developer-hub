@@ -1,5 +1,6 @@
 ---
 title: SOL 转账
+metaTitle: SOL 转账 | Metaplex CLI
 description: 向指定地址转账 SOL
 ---
 

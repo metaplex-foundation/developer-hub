@@ -6,7 +6,7 @@ description: Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter 및 Zustand를
 
 프론트엔드 프레임워크로 Nextjs와 Tailwind를 활용하고 사용 편의성을 위해 Metaplex Umi, Solana WalletAdapter, Zustand 전역 스토어가 미리 설치된 다운로드 가능하고 재사용 가능한 템플릿입니다.
 
-{% image src="/images/metaplex-next-js-template.png" classes="m-auto" /%}
+{% image src="/images/metaplex-next-js-template.png" alt="Metaplex Next.js Tailwind Template Screenshot" classes="m-auto" /%}
 
 ## 기능
 

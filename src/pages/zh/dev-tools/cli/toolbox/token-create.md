@@ -1,5 +1,6 @@
 ---
 title: 创建代币
+metaTitle: 创建代币 | Metaplex CLI
 description: 在 Solana 上创建新的同质化代币
 ---
 

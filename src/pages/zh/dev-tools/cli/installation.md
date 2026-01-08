@@ -1,5 +1,6 @@
 ---
 title: 安装
+metaTitle: 安装 | Metaplex CLI
 description: 安装和设置 Metaplex CLI
 ---
 

@@ -7,7 +7,7 @@ created: 2024-12-16
 
 Metaplex MPL-404混合UI模板旨在为开发者和用户提供开发起点。该模板预设了`.env`示例文件、功能性UI组件和交易调用，为您在创建混合集合前端UI时提供开发跳板。
 
-{% image src="/images/hybrid-ui-template-image.jpg" classes="m-auto" /%}
+{% image src="/images/hybrid-ui-template-image.jpg" alt="MPL-404 Hybrid UI Template Screenshot" classes="m-auto" /%}
 
 ## 功能
 

@@ -1,5 +1,6 @@
 ---
 title: 销毁资产
+metaTitle: 销毁资产 | Metaplex CLI
 description: 使用 Metaplex CLI 销毁 MPL Core 资产
 ---
 

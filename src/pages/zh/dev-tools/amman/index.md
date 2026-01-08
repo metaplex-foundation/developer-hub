@@ -1,6 +1,6 @@
 ---
 title: 概述
-metaTitle: 概述 | Amman
+metaTitle: Amman 本地验证器概述 | Metaplex 开发者工具
 description: 提供 Amman 本地验证器的高层概述。
 ---
 

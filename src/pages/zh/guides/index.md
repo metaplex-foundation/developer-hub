@@ -4,7 +4,7 @@ metaTitle: Metaplex Solana 指南 | 指南
 description: Metaplex 关于 Solana 区块链的指南。
 ---
 
-![image info](./assets/banners/touch-screen.jpg)
+![Metaplex Solana Guides Banner](/assets/banners/touch-screen.jpg)
 
 本节中的指南**旨在通过提供可执行的分步说明和实际示例，帮助新的 Solana 开发者开始他们的旅程**。这些指南专注于通过结构化的学习路径教授关键概念，逐步向开发者介绍 Solana 生态系统。它们涵盖了从区块链基础知识和 Solana 独特功能到程序开发和优化技术等高级主题的所有内容。
 

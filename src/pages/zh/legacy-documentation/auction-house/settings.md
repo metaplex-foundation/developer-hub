@@ -1,6 +1,6 @@
 ---
 title: 设置
-metaTitle: 设置 | 拍卖行
+metaTitle: 拍卖行设置详解 | Metaplex Auction House
 description: 详细解释拍卖行设置。
 ---
 

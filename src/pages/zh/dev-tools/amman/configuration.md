@@ -1,6 +1,6 @@
 ---
 title: 配置
-metaTitle: 配置 | Amman
+metaTitle: Amman 配置指南 | Metaplex 开发者工具
 description: 配置 Amman 本地验证器工具包。
 ---
 

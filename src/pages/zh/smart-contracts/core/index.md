@@ -1,6 +1,6 @@
 ---
 title: 概述
-metaTitle: 概述 | Core
+metaTitle: Metaplex Core NFT 标准概述 | Solana 数字资产
 description: 提供由 Metaplex 创建的新 Solana NFT 资产标准 Core 的高级概述。
 ---
 

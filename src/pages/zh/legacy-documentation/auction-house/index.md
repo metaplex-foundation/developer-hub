@@ -1,6 +1,6 @@
 ---
 title: 概述
-metaTitle: 概述 | 拍卖行
+metaTitle: 拍卖行概述 | Metaplex Auction House
 description: 提供拍卖行程序的概述
 ---
 

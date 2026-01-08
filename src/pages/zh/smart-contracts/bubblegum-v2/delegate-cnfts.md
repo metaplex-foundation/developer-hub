@@ -1,7 +1,7 @@
 ---
 title: 委托压缩NFT
 metaTitle: 委托压缩NFT | Bubblegum V2
-description: 了解如何在Bubblegum上委托压缩NFT。
+description: 了解如何在Bubblegum V2上委托压缩NFT。
 ---
 
 压缩NFT的所有者可以将其委托给另一个账户，同时保持cNFT的所有权。{% .lead %}

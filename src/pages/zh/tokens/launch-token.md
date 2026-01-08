@@ -1,6 +1,6 @@
 ---
 title: 发行代币
-metaTitle: 发行代币 | 代币
+metaTitle: 使用 Genesis 发行代币指南 | Metaplex Solana
 description: 使用Solana上的Genesis Launch Pools发行代币的端到端指南。
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 委托树
 metaTitle: 委托树 | Bubblegum V2
-description: 了解如何在Bubblegum上委托默克尔树。
+description: 了解如何在Bubblegum V2上委托默克尔树。
 ---
 
 与压缩NFT的所有者可以批准委托权限类似，Bubblegum树的创建者也可以批准另一个账户代表他们执行操作。{% .lead %}

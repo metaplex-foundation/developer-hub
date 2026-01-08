@@ -1,7 +1,7 @@
 ---
 title: 销毁压缩NFT
 metaTitle: 销毁压缩NFT | Bubblegum V2
-description: 了解如何在Bubblegum上销毁压缩NFT。
+description: 了解如何在Bubblegum V2上销毁压缩NFT。
 ---
 
 **burnV2**指令可用于销毁压缩NFT，因此将其从Bubblegum树中永久移除。要授权此操作，当前所有者或委托权限（如果有）必须签署交易。该指令接受以下参数：

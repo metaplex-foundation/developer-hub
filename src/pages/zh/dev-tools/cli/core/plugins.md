@@ -1,5 +1,6 @@
 ---
 title: 插件
+metaTitle: 插件 | Metaplex CLI
 description: 管理 MPL Core 资产和集合插件
 ---
 
