@@ -31,13 +31,13 @@ export function Header({ page }) {
   return (
     <header
       className={clsx(
-        'sticky top-0 z-50 bg-white shadow-md shadow-neutral-900/5 transition duration-500 dark:shadow-none',
+        'sticky top-0 z-50 bg-background shadow-md shadow-foreground/5 transition duration-500 dark:shadow-none',
         isScrolled
-          ? 'dark:bg-neutral-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-neutral-900/75'
+          ? 'dark:bg-background/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-background/75'
           : 'dark:bg-transparent'
       )}
     >
-      <div className="flex flex-wrap items-center justify-between border-b border-neutral-600 px-4 py-5 sm:px-6 lg:px-8">
+      <div className="flex flex-wrap items-center justify-between border-b border-border px-4 py-5 sm:px-6 lg:px-8">
         <div className="mr-6 flex lg:hidden">
           <MobileNavigation page={page} />
         </div>
@@ -60,7 +60,7 @@ export function Header({ page }) {
           <Link
             href="https://discord.com/invite/metaplex"
             target="_blank"
-            className="hidden items-center gap-2 whitespace-nowrap rounded-lg bg-[#5865F2] px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-[#4752C4] md:flex"
+            className="hidden items-center gap-2 whitespace-nowrap rounded-lg bg-accent-400 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-accent-500 md:flex"
           >
             <DiscordIcon className="h-4 w-4 fill-current" />
             Dev Support

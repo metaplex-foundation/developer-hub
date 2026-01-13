@@ -44,12 +44,12 @@ export function Navigation({ product, navigation, className, hideProductHeader =
         <div className="mb-8">
           <Link
             href={getLocalizedHref(`/${product.path}`, locale)}
-            className="font-display text-lg font-bold text-slate-900 hover:text-accent-500 dark:text-white dark:hover:text-accent-400"
+            className="font-display text-lg font-bold text-foreground hover:text-accent-400"
           >
             {product.name}
           </Link>
           {product.headline && (
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            <p className="mt-1 text-sm text-muted-foreground">
               {product.headline}
             </p>
           )}
@@ -58,12 +58,12 @@ export function Navigation({ product, navigation, className, hideProductHeader =
       <ul role="list" className="space-y-9">
         {navigation.map((section) => (
           <li key={`${product.name}-${section.title}`}>
-            <h2 className="font-display font-medium text-slate-900 dark:text-white">
+            <h2 className="font-display font-medium text-foreground">
               {section.title}
             </h2>
             <ul
               role="list"
-              className="mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200"
+              className="mt-2 space-y-2 border-l border-sidebar-border lg:mt-4 lg:space-y-4"
             >
               {section.links.map((link) => {
                 // link.href is already localized by localizeProduct() in usePage.js
@@ -76,8 +76,8 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                       className={clsx(
                         'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2 before:rounded',
                         isActive
-                          ? 'font-semibold text-accent-500 before:bg-accent-500'
-                          : 'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300'
+                          ? 'font-semibold text-accent-400 before:bg-accent-400'
+                          : 'text-muted-foreground before:hidden before:bg-accent-400 hover:text-foreground hover:before:block'
                       )}
                     >
                       {link.title}{' '}

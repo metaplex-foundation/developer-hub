@@ -60,7 +60,7 @@ export function Layout({ children, page }) {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Header page={page} />
 
 
@@ -70,12 +70,12 @@ export function Layout({ children, page }) {
       {isHomePage && (
         <>
           <div className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
-            <h1 className="text-4xl font-bold text-white">{t('title', 'Developer Hub')}</h1>
+            <h1 className="text-4xl font-bold text-foreground">{t('title', 'Developer Hub')}</h1>
           </div>
           {productCategories.map((category) => (
             <div key={category} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-              <h2 className="mb-2 text-2xl font-bold text-white">{getCategoryName(category)}</h2>
-              <p className="mb-8 text-sm text-neutral-400">
+              <h2 className="mb-2 text-2xl font-bold text-foreground">{getCategoryName(category)}</h2>
+              <p className="mb-8 text-sm text-muted-foreground">
                 {getCategoryDescription(category)}
               </p>
               <ProductCardGrid category={category} />
@@ -93,9 +93,9 @@ export function Layout({ children, page }) {
           {/* Navigation. */}
           {hasNavigation && !page.product.isFallbackProduct && (
             <div className="hidden lg:relative lg:block lg:flex-none scrollbar">
-              <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
-              <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
-              <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" />
+              <div className="absolute inset-y-0 right-0 w-[50vw] bg-sidebar dark:hidden" />
+              <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-border dark:block" />
+              <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-border dark:block" />
               <div className="sticky top-[133px] -ml-0.5 h-[calc(100vh-133px)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
                 <Navigation
                   product={page.product}
@@ -117,12 +117,12 @@ export function Layout({ children, page }) {
               {!isCodeViewer && (page.title || page.activeSection?.navigationGroup) && (
                 <header className="mb-9 space-y-1">
                   {page.activeSection?.navigationGroup && (
-                    <p className="font-display text-sm font-medium text-accent-500">
+                    <p className="font-display text-sm font-medium text-accent-400">
                       {page.activeSection.navigationGroup.title}
                     </p>
                   )}
                   {page.title && (
-                    <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
+                    <h1 className="font-display text-3xl tracking-tight text-foreground">
                       {page.title}
                     </h1>
                   )}
@@ -131,16 +131,16 @@ export function Layout({ children, page }) {
               <Prose className="break-words">{children}</Prose>
             </article>
             {!page.product.isFallbackProduct && (
-            <dl className="mt-12 flex border-t border-slate-200 pt-6 dark:border-slate-800">
+            <dl className="mt-12 flex border-t border-border pt-6">
               {page.activeSection?.previousPage && (
                 <div>
-                  <dt className="font-display text-sm font-medium text-slate-900 dark:text-white">
+                  <dt className="font-display text-sm font-medium text-foreground">
                     Previous
                   </dt>
                   <dd className="mt-1">
                     <Link
                       href={page.activeSection.previousPage.href}
-                      className="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+                      className="text-base font-semibold text-muted-foreground hover:text-foreground"
                     >
                       <span aria-hidden="true">&larr;</span>{' '}
                       {page.activeSection.previousPage.title}
@@ -150,13 +150,13 @@ export function Layout({ children, page }) {
               )}
               {page.activeSection?.nextPage && (
                 <div className="ml-auto text-right">
-                  <dt className="font-display text-sm font-medium text-slate-900 dark:text-white">
+                  <dt className="font-display text-sm font-medium text-foreground">
                     Next
                   </dt>
                   <dd className="mt-1">
                     <Link
                       href={page.activeSection.nextPage.href}
-                      className="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+                      className="text-base font-semibold text-muted-foreground hover:text-foreground"
                     >
                       {page.activeSection.nextPage.title}{' '}
                       <span aria-hidden="true">&rarr;</span>
