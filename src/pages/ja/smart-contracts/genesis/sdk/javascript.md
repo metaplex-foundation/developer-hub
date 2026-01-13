@@ -12,8 +12,6 @@ MetaplexはGenesisプログラムと対話するためのJavaScriptライブラ�
 
 {% quick-link title="NPMパッケージ" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="NPMのGenesis JavaScript SDK。" /%}
 
-{% quick-link title="GitHub" target="_blank" icon="GitHub" href="https://github.com/metaplex-foundation/genesis" description="GenesisプログラムとSDKのソースコード。" /%}
-
 {% /quick-links %}
 
 ## インストール

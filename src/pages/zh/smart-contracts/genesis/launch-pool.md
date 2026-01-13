@@ -350,4 +350,3 @@ if (deposit) {
 
 - [预售](/zh/smart-contracts/genesis/presale) - 固定价格代币销售
 - [聚合API](/zh/smart-contracts/genesis/aggregation) - 通过API查询发行数据
-- [发行池](https://github.com/metaplex-foundation/genesis/tree/main/clients/js/examples/launch-pool) - GitHub上的示例实现

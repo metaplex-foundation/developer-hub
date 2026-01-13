@@ -12,8 +12,6 @@ Metaplex提供了一个用于与Genesis程序交互的JavaScript库。它基于[
 
 {% quick-link title="NPM包" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="NPM上的Genesis JavaScript SDK。" /%}
 
-{% quick-link title="GitHub" target="_blank" icon="GitHub" href="https://github.com/metaplex-foundation/genesis" description="Genesis程序和SDK源代码。" /%}
-
 {% /quick-links %}
 
 ## 安装

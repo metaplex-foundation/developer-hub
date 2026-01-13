@@ -362,4 +362,3 @@ if (deposit) {
 
 - [Presale](/ja/smart-contracts/genesis/presale) - 固定価格トークン販売
 - [アグリゲーションAPI](/ja/smart-contracts/genesis/aggregation) - APIを通じたローンチデータの照会
-- [Launch Pool](https://github.com/metaplex-foundation/genesis/tree/main/clients/js/examples/launch-pool) - GitHubのサンプル実装

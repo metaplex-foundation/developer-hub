@@ -12,8 +12,6 @@ Metaplex provides a JavaScript library for interacting with the Genesis program.
 
 {% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="Genesis JavaScript SDK on NPM." /%}
 
-{% quick-link title="GitHub" target="_blank" icon="GitHub" href="https://github.com/metaplex-foundation/genesis" description="Genesis program and SDK source code." /%}
-
 {% /quick-links %}
 
 ## Installation

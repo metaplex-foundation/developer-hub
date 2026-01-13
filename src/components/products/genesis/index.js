@@ -10,7 +10,6 @@ export const genesis = {
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/genesis',
   icon: <SparklesIcon />,
-  github: 'https://github.com/metaplex-foundation/genesis',
   className: 'accent-pink',
   heroes: [{ path: '/smart-contracts/genesis', component: Hero }],
   protocolFees: {
