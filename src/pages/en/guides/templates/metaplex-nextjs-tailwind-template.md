@@ -6,7 +6,7 @@ description: A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana Wall
 
 Downloadable and reusable templates that utilize Nextjs and Tailwind for the front end framework while also being preinstalled with Metaplex Umi, Solana WalletAdapter, and Zustand global store for ease of use.
 
-{% image src="/images/metaplex-next-js-template.png" classes="m-auto" /%}
+{% image src="/images/metaplex-next-js-template.png" alt="Metaplex Next.js Tailwind Template Screenshot" classes="m-auto" /%}
 
 ## Features
 

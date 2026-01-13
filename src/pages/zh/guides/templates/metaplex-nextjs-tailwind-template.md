@@ -6,7 +6,7 @@ description: 使用 Nextjs、Tailwind、Metaplex Umi、Solana WalletAdapter 和 
 
 可下载和可重复使用的模板，利用 Nextjs 和 Tailwind 作为前端框架，同时预装了 Metaplex Umi、Solana WalletAdapter 和 Zustand 全局存储以方便使用。
 
-{% image src="/images/metaplex-next-js-template.png" classes="m-auto" /%}
+{% image src="/images/metaplex-next-js-template.png" alt="Metaplex Next.js Tailwind Template Screenshot" classes="m-auto" /%}
 
 ## 特性
 

@@ -1,6 +1,6 @@
 ---
 title: 常见问题
-metaTitle: 常见问题 | 拍卖行
+metaTitle: 拍卖行常见问题解答 | Metaplex Auction House
 description: "拍卖行的常见问题"
 ---
 

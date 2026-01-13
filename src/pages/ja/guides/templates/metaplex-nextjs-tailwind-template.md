@@ -6,7 +6,7 @@ description: Nextjs、Tailwind、Metaplex Umi、Solana WalletAdapter、および
 
 Nextjsとは、使いやすくするために Metaplex Umi、Solana WalletAdapter、およびZustandグローバルストアがプリインストールされながら、フロントエンドフレームワークにNextjsとTailwindを利用したダウンロード可能で再利用可能なテンプレート。
 
-{% image src="/images/metaplex-next-js-template.png" classes="m-auto" /%}
+{% image src="/images/metaplex-next-js-template.png" alt="Metaplex Next.js Tailwind Template Screenshot" classes="m-auto" /%}
 
 ## 機能
 

@@ -1,5 +1,6 @@
 ---
 title: 更新资产
+metaTitle: 更新资产 | Metaplex CLI
 description: 更新 MPL Core 资产元数据和属性
 ---
 

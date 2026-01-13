@@ -1,5 +1,6 @@
 ---
 title: SOL 空投
+metaTitle: SOL 空投 | Metaplex CLI
 description: 向指定地址空投 SOL
 ---
 

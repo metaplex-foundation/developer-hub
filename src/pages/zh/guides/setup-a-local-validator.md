@@ -1,6 +1,6 @@
 ---
 title: 设置本地验证者
-metaTitle: 设置本地验证者
+metaTitle: 设置本地验证者 | Metaplex Guides
 description: 了解如何设置本地开发环境并使用本地验证者
 # remember to update dates also in /components/guides/index.js
 created: '04-19-2025'

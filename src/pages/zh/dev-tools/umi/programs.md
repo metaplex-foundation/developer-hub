@@ -1,6 +1,6 @@
 ---
 title: 注册程序
-metaTitle: 注册程序 | Umi
+metaTitle: Umi 程序注册 - Solana 程序管理指南 | Metaplex
 description: 向 Metaplex Umi 注册程序
 ---
 为了创建与 Solana 程序交互的客户端，了解您的集群中哪些程序可用以及它们在哪个地址非常重要。Umi 提供了一个 `ProgramRepositoryInterface`，作为您客户端的一个大型程序注册表。

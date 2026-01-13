@@ -1,6 +1,6 @@
 ---
-title: MPL-Bubblegum Rust SDK
-metaTitle: Rust SDK | MPL-Bubblegum
+title: MPL-Bubblegum V2 Rust SDK
+metaTitle: Rust SDK | MPL-Bubblegum V2
 description: Learn how to set up your project to run the MPL-Bubblegum V2 Rust SDK.
 ---
 

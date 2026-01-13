@@ -1,5 +1,6 @@
 ---
 title: RPC
+metaTitle: RPC | Metaplex CLI
 description: 在配置中管理 RPC 端点
 ---
 
