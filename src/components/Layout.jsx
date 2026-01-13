@@ -16,6 +16,9 @@ import { useTranslations } from '@/contexts/LocaleContext'
 export function Layout({ children, page }) {
   const isHomePage = page.pathname === '/'
   const isCodeViewer = page.pathname === '/code-viewer'
+  const isCategoryIndexPage = ['/tokens', '/nfts', '/smart-contracts', '/dev-tools'].some(
+    path => page.pathname === path || page.pathname.match(new RegExp(`^/(en|ja|ko|zh)${path}$`))
+  )
   const hasNavigation = !!page.activeSection?.navigation
   const Hero = page.activeHero
   const t = useTranslations('homepage')
@@ -81,10 +84,22 @@ export function Layout({ children, page }) {
         </>
       )}
 
-      {!isHomePage && (
+      {isCategoryIndexPage && (
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-12">
+          {page.title && (
+            <h2 className="mb-2 text-2xl font-bold text-white">{page.title}</h2>
+          )}
+          {page.description && (
+            <p className="mb-8 text-sm text-neutral-400">{page.description}</p>
+          )}
+          <Prose className="break-words">{children}</Prose>
+        </div>
+      )}
+
+      {!isHomePage && !isCategoryIndexPage && (
         <div
           className={clsx(
-            'relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12'
+            'relative mx-auto flex max-w-[1800px] justify-center sm:px-2 lg:px-8 xl:px-12'
           )}
         >
           {/* Navigation. */}
