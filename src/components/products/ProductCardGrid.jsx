@@ -10,16 +10,16 @@ const ProductCard = ({ item, locale, learnMoreText }) => {
   return (
     <Link
       href={href}
-      className="group relative flex flex-col rounded-xl border border-slate-700 bg-slate-800/50 p-6 transition-all duration-200 hover:border-accent-500 hover:bg-slate-800"
+      className="group relative flex flex-col rounded-lg border border-border bg-transparent p-6 transition-all duration-200 hover:border-accent-400"
       {...(item.target && { target: item.target })}
     >
-      <h3 className="text-lg font-semibold text-slate-900 group-hover:text-accent-600 dark:text-white dark:group-hover:text-accent-400">
+      <h3 className="text-lg font-semibold text-card-foreground group-hover:text-accent-400">
         {item.name}
       </h3>
-      <p className="mt-2 flex-1 text-sm text-slate-600 dark:text-slate-400">
+      <p className="mt-2 flex-1 text-sm text-muted-foreground">
         {item.headline || item.description}
       </p>
-      <span className="mt-4 inline-flex items-center text-sm font-medium text-accent-600 dark:text-accent-400">
+      <span className="mt-4 inline-flex items-center text-sm font-medium text-accent-400">
         {learnMoreText}
         <svg
           className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
@@ -133,8 +133,8 @@ export function AllProductCardGrids() {
     <div className="not-prose">
       {productCategories.map((category) => (
         <div key={category} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-2xl font-bold text-white">{getCategoryName(category)}</h2>
-          <p className="mb-8 text-sm text-neutral-400">
+          <h2 className="mb-2 text-2xl font-bold text-foreground">{getCategoryName(category)}</h2>
+          <p className="mb-8 text-sm text-muted-foreground">
             {getCategoryDescription(category)}
           </p>
           <ProductCardGrid category={category} />

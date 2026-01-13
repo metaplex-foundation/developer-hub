@@ -65,7 +65,7 @@ export function TableOfContent({ tableOfContents }) {
         <>
           <h2
             id="on-this-page-title"
-            className="font-display text-sm font-medium text-slate-900 dark:text-white"
+            className="font-display text-sm font-medium text-foreground"
           >
             On this page
           </h2>
@@ -77,8 +77,8 @@ export function TableOfContent({ tableOfContents }) {
                     href={`#${section.id}`}
                     className={clsx(
                       isActive(section)
-                        ? 'text-accent-500'
-                        : 'font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300'
+                        ? 'text-accent-400'
+                        : 'font-normal text-muted-foreground hover:text-foreground'
                     )}
                   >
                     {section.title}
@@ -87,7 +87,7 @@ export function TableOfContent({ tableOfContents }) {
                 {section.children.length > 0 && (
                   <ol
                     role="list"
-                    className="mt-2 space-y-3 pl-5 text-slate-500 dark:text-slate-400"
+                    className="mt-2 space-y-3 pl-5 text-muted-foreground"
                   >
                     {section.children.map((subSection) => (
                       <li key={subSection.id}>
@@ -95,8 +95,8 @@ export function TableOfContent({ tableOfContents }) {
                           href={`#${subSection.id}`}
                           className={
                             isActive(subSection)
-                              ? 'text-accent-500'
-                              : 'hover:text-slate-600 dark:hover:text-slate-300'
+                              ? 'text-accent-400'
+                              : 'hover:text-foreground'
                           }
                         >
                           {subSection.title}
