@@ -149,7 +149,7 @@ console.log("Collection Details: \n", collection);
 
 Core Candy Machine 생성과 guard에 대한 자세한 정보는 [여기](https://developers.metaplex.com/ko/smart-contracts/core-candy-machine/create)에서 찾을 수 있습니다.
 
-또한 민팅이 시작되는 시점을 결정하는 startDate guard를 구성합니다. 이는 사용 가능한 많은 guard 중 하나일 뿐이며 사용 가능한 모든 guard의 목록은 [여기](https://developers.metaplex.com/ko/candy-machine/guards)에서 찾을 수 있습니다.
+또한 민팅이 시작되는 시점을 결정하는 startDate guard를 구성합니다. 이는 사용 가능한 많은 guard 중 하나일 뿐이며 사용 가능한 모든 guard의 목록은 [여기](https://developers.metaplex.com/ko/smart-contracts/candy-machine/guards)에서 찾을 수 있습니다.
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';

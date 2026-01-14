@@ -88,6 +88,7 @@
     "officialLinks": "公式リンク",
     "security": "セキュリティ",
     "protocolFees": "プロトコル手数料",
+    "stabilityIndex": "安定性インデックス",
     "legal": "法的情報",
     "termsAndConditions": "利用規約",
     "privacyPolicy": "プライバシーポリシー",
@@ -137,8 +138,6 @@
     "faqTitle": "よくある質問",
     "faqFeesChangeQuestion": "手数料の金額は時間の経過とともに変更されますか？",
     "faqFeesChangeAnswer": "Metaplex Foundationは手数料に関するコミュニティのフィードバックを継続的に監視しており、時間の経過とともに手数料の金額を変更する可能性があります。私たちの目標は、手数料を最小限に抑制し、プロトコルの成長と使用を促進することです。",
-    "faqCreatorCostQuestion": "Candy Machineを通じて1万個のNFTコレクションを立ち上げる場合、クリエイターとしてToken MetadataまたはCoreの手数料としてどのくらいの費用がかかりますか？",
-    "faqCreatorCostAnswer": "標準的な1万個のNFTドロップでは、作成手数料はCandy Machineからミントするコレクター間に分散されるため、クリエイターはToken MetadataまたはCoreの手数料として0 SOLを負担します。",
     "faqHowUsedQuestion": "Metaplexプロトコル手数料はどのように使用されますか？",
     "faqHowUsedAnswer": "すべてのプロトコル手数料は、Metaplexエコシステムの研究、開発、採用を促進するために設立された非営利組織であるMetaplex Foundationの目的を推進するために使用されます。これには、MetaplexプロトコルとMetaplex DAOの継続的な開発、セキュリティ、ガバナンス、管理のためのMetaplexコミュニティへのインセンティブと支援の提供が含まれます。",
     "faqHowUsedAnswer2": "現在、プロトコル手数料の50%が$MPLXに変換され、Metaplex DAOトレジャリーに拠出されます。残りの50%は、Metaplexエコシステムの長期的で持続可能な開発を支援するためにMetaplex Foundationによって確保されます。"

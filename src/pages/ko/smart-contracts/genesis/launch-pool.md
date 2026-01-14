@@ -22,9 +22,7 @@ Launch Pool 생명주기:
 
 ## 수수료
 
-- **사용자 예치 수수료**: 예치 금액의 2%
-- **사용자 출금 수수료**: 출금 금액의 2%
-- **졸업 수수료**: 예치 기간 종료 시 총 예치금의 5%
+{% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
 예치 수수료 예시: 10 SOL 예치 시 9.8 SOL이 사용자의 예치 계정에 적립됩니다.
 
@@ -362,6 +360,5 @@ if (deposit) {
 
 ## 다음 단계
 
-- [Priced Sale](/ko/smart-contracts/genesis/priced-sale) - 거래 전 사전 예치 수집
+- [Presale](/ko/smart-contracts/genesis/presale) - 고정 가격 토큰 판매
 - [어그리게이션 API](/ko/smart-contracts/genesis/aggregation) - API를 통한 런칭 데이터 조회
-- [Launch Pool](https://github.com/metaplex-foundation/mpl-genesis/tree/main/clients/js/examples/launch-pool) - GitHub의 예제 구현

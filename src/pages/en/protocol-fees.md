@@ -1,10 +1,20 @@
 ---
 title: Protocol Fees
 metaTitle: Protocol Fees | Developer Hub
-description: A details of the onchain fees for Metaplex's products.
+description: Details of the onchain fees for Metaplex's products.
 ---
 
 The Metaplex Protocol currently includes the following fees:
+
+## Genesis
+
+Token launch platform fees for different operations. 
+
+### Launch Pool
+{% protocol-fees program="genesis" showTitle=false config="launchPool" /%}
+
+### Presale
+{% protocol-fees program="genesis" showTitle=false config="presale" /%}
 
 ## Core
 
@@ -42,21 +52,11 @@ Composable NFT fees for combine, split, and constraint editing operations.
 
 {% protocol-fees program="fusion" showTitle=false /%}
 
-## Genesis
-
-Token launch platform fees for Launch Pool operations. These are percentage-based fees applied to deposits, withdrawals, and graduation.
-
-{% protocol-fees program="genesis" showTitle=false /%}
-
 ## FAQs
 
 ### Will the fee amounts change over time?
 
 The Metaplex Foundation is constantly monitoring community feedback related to the fees and may change the fee amounts over time. Our goal is for fees to be minimally disruptive and promote the growth and usage of the protocol.
-
-### How much will it cost me, as a creator, in Token Metadata or core fees to launch a 10k NFT collection through Candy Machine?
-
-Creators will incur 0 SOL in Token Metadata or Core fees for a standard 10k NFT drop since the Create fees are spread amongst the collectors who are minting from the Candy Machine.
 
 ### How are Metaplex Protocol Fees Used?
 

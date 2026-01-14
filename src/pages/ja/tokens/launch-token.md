@@ -47,7 +47,7 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   initializeV2,
   findGenesisAccountV2Pda,
   findLaunchPoolBucketV2Pda,
@@ -65,7 +65,7 @@ async function main() {
   // ============================================
 
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // マシン上のファイルからウォレットキーペアを読み込み
   // これは通常、~/.config/solana/id.jsonにあるSolana CLIウォレットです
@@ -271,7 +271,7 @@ npx ts-node launch.ts
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   transitionV2,
   WRAPPED_SOL_MINT,
 } from '@metaplex-foundation/genesis';
@@ -280,7 +280,7 @@ import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // ウォレットキーペアを読み込み（ローンチで使用したのと同じウォレット）
   const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新
@@ -345,14 +345,14 @@ userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   claimLaunchPoolV2,
 } from '@metaplex-foundation/genesis';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // ユーザーのウォレットキーペアを読み込み（SOLを預け入れた人）
   const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新
@@ -393,7 +393,7 @@ main().catch(console.error);
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   revokeMintAuthorityV2,
   revokeFreezeAuthorityV2,
 } from '@metaplex-foundation/genesis';
@@ -401,7 +401,7 @@ import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // ウォレットキーペアを読み込み（ローンチで使用したのと同じウォレット）
   const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新

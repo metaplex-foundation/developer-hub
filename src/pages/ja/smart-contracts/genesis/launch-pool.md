@@ -22,9 +22,7 @@ Launch Poolのライフサイクル：
 
 ## 手数料
 
-- **ユーザー預金手数料**：預金額の2%
-- **ユーザー出金手数料**：出金額の2%
-- **グラデュエーション手数料**：預金期間終了時の総預金額の5%
+{% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
 預金手数料の例：10 SOLの預金で9.8 SOLがユーザーの預金アカウントに計上されます。
 
@@ -362,6 +360,5 @@ if (deposit) {
 
 ## 次のステップ
 
-- [Priced Sale](/ja/smart-contracts/genesis/priced-sale) - 取引前の事前預金収集
+- [Presale](/ja/smart-contracts/genesis/presale) - 固定価格トークン販売
 - [アグリゲーションAPI](/ja/smart-contracts/genesis/aggregation) - APIを通じたローンチデータの照会
-- [Launch Pool](https://github.com/metaplex-foundation/mpl-genesis/tree/main/clients/js/examples/launch-pool) - GitHubのサンプル実装

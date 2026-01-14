@@ -12,8 +12,6 @@ Metaplex는 Genesis 프로그램과 상호작용하기 위한 JavaScript 라이�
 
 {% quick-link title="NPM 패키지" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="NPM의 Genesis JavaScript SDK." /%}
 
-{% quick-link title="GitHub" target="_blank" icon="GitHub" href="https://github.com/metaplex-foundation/mpl-genesis" description="Genesis 프로그램 및 SDK 소스 코드." /%}
-
 {% /quick-links %}
 
 ## 설치
@@ -186,5 +184,5 @@ console.log('트랜잭션 서명:', result.signature);
 Genesis 프로그램으로 Umi 인스턴스가 구성되면 빌드를 시작할 준비가 됩니다. Genesis 기능을 살펴보세요:
 
 - **[Launch Pool](/ko/smart-contracts/genesis/launch-pool)** - 예치 기간이 있는 토큰 배포
-- **[Priced Sale](/ko/smart-contracts/genesis/priced-sale)** - 거래 전 사전 예치 수집
+- **[Presale](/ko/smart-contracts/genesis/presale)** - 고정 가격 토큰 판매
 - **[Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction)** - 균일 청산 가격의 시간 기반 경매

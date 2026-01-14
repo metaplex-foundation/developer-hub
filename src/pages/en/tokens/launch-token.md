@@ -47,7 +47,7 @@ Create a file called `launch.ts`:
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   initializeV2,
   findGenesisAccountV2Pda,
   findLaunchPoolBucketV2Pda,
@@ -65,7 +65,7 @@ async function main() {
   // ============================================
 
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // Load your wallet keypair from a file on your machine
   // This is typically your Solana CLI wallet at ~/.config/solana/id.json
@@ -260,9 +260,9 @@ After running the launch script, your launch is live. Here's what happens during
 ### During the Deposit Period
 
 Users deposit SOL using your frontend or directly via the SDK. Each deposit:
-- Has a 2% fee applied
+- Has a fee applied
 - Is tracked in a deposit PDA
-- Can be partially or fully withdrawn (with 2% fee)
+- Can be partially or fully withdrawn (with fee)
 
 ### After Deposits Close
 
@@ -271,7 +271,7 @@ Once the deposit period ends, you need to run the **transition** to move the col
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   transitionV2,
   WRAPPED_SOL_MINT,
 } from '@metaplex-foundation/genesis';
@@ -280,7 +280,7 @@ import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // Load your wallet keypair (same wallet used for launch)
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
@@ -345,14 +345,14 @@ Users can claim via your frontend or using this script (create `claim.ts`):
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   claimLaunchPoolV2,
 } from '@metaplex-foundation/genesis';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // Load the user's wallet keypair (whoever deposited SOL)
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
@@ -393,7 +393,7 @@ Create `revoke.ts`:
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
-  mplGenesis,
+  genesis,
   revokeMintAuthorityV2,
   revokeFreezeAuthorityV2,
 } from '@metaplex-foundation/genesis';
@@ -401,7 +401,7 @@ import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
-    .use(mplGenesis());
+    .use(genesis());
 
   // Load your wallet keypair (same wallet used for launch)
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
