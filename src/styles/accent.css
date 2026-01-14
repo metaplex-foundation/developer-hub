@@ -1,40 +1,6 @@
 /* Unified accent colors - neutral gray tones from design system */
 :root {
-  /* Neutral accent scale - subtle gray with slight blue tint */
-  --color-accent-50: hsl(240, 4.8%, 97%);
-  --color-accent-100: hsl(240, 4.8%, 94%);
-  --color-accent-200: hsl(240, 4.8%, 86%);
-  --color-accent-300: hsl(240, 4.8%, 74%);
-  --color-accent-400: hsl(240, 4.8%, 63%);
-  --color-accent-500: hsl(240, 4.8%, 53%);
-  --color-accent-600: hsl(240, 4.8%, 45%);
-  --color-accent-700: hsl(240, 4.8%, 38%);
-  --color-accent-800: hsl(240, 4.8%, 31%);
-  --color-accent-900: hsl(240, 4.8%, 24%);
-  --quick-links-hover-bg: hsl(240, 3.7%, 10%);
-  --quick-links-hover-border: hsl(240, 4.8%, 53%), hsl(240, 4.8%, 45%),
-    hsl(240, 4.8%, 63%);
-}
-
-/* All accent classes now use the same neutral gray */
-@layer components {
-  .accent-sky,
-  .accent-green,
-  .accent-emerald,
-  .accent-pink,
-  .accent-amber {
-    --color-accent-50: hsl(240, 4.8%, 97%);
-    --color-accent-100: hsl(240, 4.8%, 94%);
-    --color-accent-200: hsl(240, 4.8%, 86%);
-    --color-accent-300: hsl(240, 4.8%, 74%);
-    --color-accent-400: hsl(240, 4.8%, 63%);
-    --color-accent-500: hsl(240, 4.8%, 53%);
-    --color-accent-600: hsl(240, 4.8%, 45%);
-    --color-accent-700: hsl(240, 4.8%, 38%);
-    --color-accent-800: hsl(240, 4.8%, 31%);
-    --color-accent-900: hsl(240, 4.8%, 24%);
-    --quick-links-hover-bg: hsl(240, 3.7%, 10%);
-    --quick-links-hover-border: hsl(240, 4.8%, 53%), hsl(240, 4.8%, 45%),
-      hsl(240, 4.8%, 63%);
-  }
+  /* Quick links component styling */
+  --quick-links-hover-bg: hsl(0, 0%, 10%);
+  --quick-links-hover-border: hsl(0, 0%, 53%), hsl(0, 0%, 45%), hsl(0, 0%, 63%);
 }
