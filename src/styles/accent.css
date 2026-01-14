@@ -1,40 +1,40 @@
-/* Unified accent colors - matches primary button color from design system */
+/* Unified accent colors - neutral gray tones from design system */
 :root {
-  /* Light mode accents - slightly muted versions of primary blue */
-  --color-accent-50: hsl(228, 87%, 97%);
-  --color-accent-100: hsl(228, 87%, 94%);
-  --color-accent-200: hsl(228, 87%, 86%);
-  --color-accent-300: hsl(228, 87%, 74%);
-  --color-accent-400: hsl(228, 87%, 63%);
-  --color-accent-500: hsl(228, 87%, 53%);
-  --color-accent-600: hsl(228, 87%, 45%);
-  --color-accent-700: hsl(228, 87%, 38%);
-  --color-accent-800: hsl(228, 87%, 31%);
-  --color-accent-900: hsl(228, 87%, 24%);
-  --quick-links-hover-bg: hsl(228, 87%, 10%);
-  --quick-links-hover-border: hsl(228, 87%, 53%), hsl(228, 87%, 45%),
-    hsl(228, 87%, 63%);
+  /* Neutral accent scale - subtle gray with slight blue tint */
+  --color-accent-50: hsl(240, 4.8%, 97%);
+  --color-accent-100: hsl(240, 4.8%, 94%);
+  --color-accent-200: hsl(240, 4.8%, 86%);
+  --color-accent-300: hsl(240, 4.8%, 74%);
+  --color-accent-400: hsl(240, 4.8%, 63%);
+  --color-accent-500: hsl(240, 4.8%, 53%);
+  --color-accent-600: hsl(240, 4.8%, 45%);
+  --color-accent-700: hsl(240, 4.8%, 38%);
+  --color-accent-800: hsl(240, 4.8%, 31%);
+  --color-accent-900: hsl(240, 4.8%, 24%);
+  --quick-links-hover-bg: hsl(240, 3.7%, 10%);
+  --quick-links-hover-border: hsl(240, 4.8%, 53%), hsl(240, 4.8%, 45%),
+    hsl(240, 4.8%, 63%);
 }
 
-/* All accent classes now use the same unified primary blue */
+/* All accent classes now use the same neutral gray */
 @layer components {
   .accent-sky,
   .accent-green,
   .accent-emerald,
   .accent-pink,
   .accent-amber {
-    --color-accent-50: hsl(228, 87%, 97%);
-    --color-accent-100: hsl(228, 87%, 94%);
-    --color-accent-200: hsl(228, 87%, 86%);
-    --color-accent-300: hsl(228, 87%, 74%);
-    --color-accent-400: hsl(228, 87%, 63%);
-    --color-accent-500: hsl(228, 87%, 53%);
-    --color-accent-600: hsl(228, 87%, 45%);
-    --color-accent-700: hsl(228, 87%, 38%);
-    --color-accent-800: hsl(228, 87%, 31%);
-    --color-accent-900: hsl(228, 87%, 24%);
-    --quick-links-hover-bg: hsl(228, 87%, 10%);
-    --quick-links-hover-border: hsl(228, 87%, 53%), hsl(228, 87%, 45%),
-      hsl(228, 87%, 63%);
+    --color-accent-50: hsl(240, 4.8%, 97%);
+    --color-accent-100: hsl(240, 4.8%, 94%);
+    --color-accent-200: hsl(240, 4.8%, 86%);
+    --color-accent-300: hsl(240, 4.8%, 74%);
+    --color-accent-400: hsl(240, 4.8%, 63%);
+    --color-accent-500: hsl(240, 4.8%, 53%);
+    --color-accent-600: hsl(240, 4.8%, 45%);
+    --color-accent-700: hsl(240, 4.8%, 38%);
+    --color-accent-800: hsl(240, 4.8%, 31%);
+    --color-accent-900: hsl(240, 4.8%, 24%);
+    --quick-links-hover-bg: hsl(240, 3.7%, 10%);
+    --quick-links-hover-border: hsl(240, 4.8%, 53%), hsl(240, 4.8%, 45%),
+      hsl(240, 4.8%, 63%);
   }
 }
