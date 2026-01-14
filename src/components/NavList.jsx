@@ -74,8 +74,8 @@ const transferATokenMenuItem = {
 
 const launchTokenMenuItem = {
   name: 'Launch Token',
-  headline: 'Launch a token with Metaplex Genesis.',
-  description: 'Launch a token using Genesis Launch Pools, where users deposit SOL during a window and receive tokens proportional to their share of total deposits.',
+  headline: 'Run a TGE or fair launch on Solana.',
+  description: 'Launch a token generation event (TGE) on Solana using Genesis Launch Pools. Users deposit SOL during a window and receive tokens proportional to their share.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/launch-token',
   localizedNavigation: {

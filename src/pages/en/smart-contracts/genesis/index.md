@@ -1,7 +1,7 @@
 ---
-title: Overview
-metaTitle: Genesis - Overview
-description: A smart contract for launching tokens on Solana via presale launches and launch pools.
+title: Genesis - Solana Token Launch Smart Contract
+metaTitle: Genesis | Solana TGE & Token Launch Platform | Fair Launch | Metaplex
+description: Launch tokens on Solana with Genesis smart contract. Build token generation events (TGE), fair launches, ICOs, priced sales, and launch pools on-chain.
 ---
 
 Genesis is a Metaplex smart contract that provides a flexible framework for **Token Generation Events (TGEs)** on the Solana blockchain. Whether you're launching a new token with a presale or building a custom token distribution system, Genesis provides the on-chain infrastructure to make it happen.

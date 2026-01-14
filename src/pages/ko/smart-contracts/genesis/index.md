@@ -1,7 +1,7 @@
 ---
-title: 개요
-metaTitle: Genesis - 개요
-description: Solana에서 프리세일과 런치 풀을 통해 토큰을 런칭하기 위한 스마트 컨트랙트입니다.
+title: Genesis - Solana 토큰 런칭 스마트 컨트랙트
+metaTitle: Genesis | Solana TGE & 토큰 런칭 플랫폼 | 페어 런칭 | Metaplex
+description: Genesis 스마트 컨트랙트로 Solana 토큰을 런칭하세요. 토큰 생성 이벤트(TGE), 페어 런칭, ICO, 프라이스드 세일, 런칭 풀을 온체인에서 구축합니다.
 ---
 
 Genesis는 Solana 블록체인에서 **토큰 생성 이벤트(TGE)**를 위한 유연한 프레임워크를 제공하는 Metaplex 스마트 컨트랙트입니다. 프리세일로 새 토큰을 런칭하거나 맞춤형 토큰 배포 시스템을 구축할 때, Genesis는 이를 실현할 수 있는 온체인 인프라를 제공합니다.

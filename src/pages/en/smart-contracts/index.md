@@ -1,9 +1,8 @@
 ---
-title: Smart Contracts
-metaTitle: Smart Contracts | Metaplex
-description: On-chain programs for creating and managing digital assets on Solana.
+title: Solana Smart Contracts
+metaTitle: Solana Smart Contracts & Programs | NFT & Token Infrastructure | Metaplex
+description: Production-ready Solana smart contracts for NFTs, tokens, and digital assets. Build with Core, Token Metadata, Candy Machine, Genesis, and more.
+tableOfContents: false
 ---
-
-On-chain programs for creating and managing digital assets on Solana. {% .lead %}
 
 {% product-card-grid category="Smart Contracts" /%}

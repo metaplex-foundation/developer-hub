@@ -1,9 +1,8 @@
 ---
-title: 開発ツール
-metaTitle: 開発ツール | Metaplex
-description: Metaplexプログラムでの開発を支援するツールとユーティリティ。
+title: Solana開発ツール
+metaTitle: Solana開発ツール | CLI、SDK、NFT・トークン用API | Metaplex
+description: Solana開発のための開発者ツール。NFT、トークン、デジタルアセット用のCLIツール、TypeScript SDK、API、ユーティリティ。
+tableOfContents: false
 ---
-
-Metaplexプログラムでの開発を支援するツールとユーティリティ。 {% .lead %}
 
 {% product-card-grid category="Dev Tools" /%}

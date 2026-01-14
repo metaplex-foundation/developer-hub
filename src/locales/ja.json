@@ -12,10 +12,10 @@
       "devTools": "開発ツール"
     },
     "categoryDescriptions": {
-      "tokens": "Metaplex SDKを使用して、Solanaブロックチェーン上でトークンの作成、読み取り、更新、バーン、転送を行います。",
-      "nfts": "Metaplex SDKを使用して、Solanaブロックチェーン上でNFTの作成、読み取り、更新、バーン、転送を行います。",
-      "smartContracts": "Solana上でデジタルアセットを作成・管理するためのオンチェーンプログラム。",
-      "devTools": "Metaplexプログラムでの開発を支援するツールとユーティリティ。"
+      "tokens": "Solanaでトークンを作成・ローンチ。トークン生成イベント（TGE）、フェアローンチ、ファンジブルトークン管理。",
+      "nfts": "Metaplex Coreやその他のNFT標準を使用してSolana上でNFTを作成、管理、取引。",
+      "smartContracts": "Solana上のNFT、トークン、デジタルアセット向けの本番環境対応オンチェーンプログラム。",
+      "devTools": "Solana上でデジタルアセットアプリケーションを構築、テスト、デプロイするためのSDK、CLI、API。"
     }
   },
   "navigation": {
