@@ -46,6 +46,7 @@ export const genesis = {
   sections: [
     {
       ...documentationSection('smart-contracts/genesis'),
+      title: '',
       navigation: [
         {
           title: 'Introduction',
@@ -97,14 +98,11 @@ export const genesis = {
         },
       ],
     },
-   /* {
-      ...guidesSection('smart-contracts/genesis'),
-      navigation: [],
-    },
     {
       ...referencesSection('smart-contracts/genesis'),
-      navigation: [],
-    },*/ 
+      href: `https://mpl-genesis.typedoc.metaplex.com/`,
+      target: '_blank',
+    }, 
   ],
   localizedNavigation: {
     en: {

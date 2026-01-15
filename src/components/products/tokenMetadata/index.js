@@ -1,7 +1,6 @@
 import {
   documentationSection,
   guidesSection,
-  referencesSection
 } from '@/shared/sections';
 import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/solid';
 import { Hero } from './Hero';
@@ -109,8 +108,17 @@ export const tokenMetadata = {
       ],
     },
     {
-      ...referencesSection('smart-contracts/token-metadata'),
-      href: `https://mpl-token-metadata-js-docs.vercel.app/`,
+      id: 'references-umi',
+      title: 'umi API Reference',
+      icon: 'SolidCodeBracketSquare',
+      href: 'https://mpl-token-metadata-js-docs.vercel.app/',
+      target: '_blank',
+    },
+    {
+      id: 'references-kit',
+      title: '@solana/kit API Reference',
+      icon: 'SolidCodeBracketSquare',
+      href: 'https://mpl-token-metadata-kit.typedoc.metaplex.com/',
       target: '_blank',
     },
 
