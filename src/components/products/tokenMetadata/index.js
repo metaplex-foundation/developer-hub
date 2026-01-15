@@ -116,7 +116,7 @@ export const tokenMetadata = {
     },
     {
       id: 'references-kit',
-      title: '@solana/kit Kit API Reference',
+      title: '@solana/kit API Reference',
       icon: 'SolidCodeBracketSquare',
       href: 'https://mpl-token-metadata-kit.typedoc.metaplex.com/',
       target: '_blank',
