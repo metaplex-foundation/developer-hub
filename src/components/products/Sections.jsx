@@ -5,7 +5,7 @@ import { Icon } from '@/components/icons'
 export function Sections({ sections, activeSectionId, className, props }) {
   return (
     <div className={clsx(className, 'flex')} {...props}>
-      {sections.map((section) => {
+      {sections.filter((section) => section.title).map((section) => {
         const isExternal = typeof section.href === 'string' && section.href.startsWith('http')
         const content = (
           <>
