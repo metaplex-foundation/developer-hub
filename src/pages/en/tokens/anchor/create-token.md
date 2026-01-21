@@ -1,6 +1,6 @@
 ---
 title: How to Create a Token with Rust and Anchor
-metaTitle: How to Create a Token with Rust and Anchor | Tokens Guides
+metaTitle: Create a Token with Anchor | Solana Tokens
 description: Learn how to create an SPL token with metadata on Solana using Rust, the Anchor framework, and Metaplex Token Metadata.
 created: '01-18-2026'
 updated: null

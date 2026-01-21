@@ -74,7 +74,7 @@ export const tokens = {
           links: [
             {
               title: 'Create a Token with Anchor',
-              href: '/tokens/guides/anchor-token-guide',
+              href: '/tokens/anchor/create-token',
             },
           ],
         },

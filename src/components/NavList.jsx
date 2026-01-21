@@ -59,6 +59,19 @@ const burnATokenMenuItem = {
   },
 }
 
+const anchorCreateTokenMenuItem = {
+  name: 'Create Token with Anchor',
+  headline: 'Create a token using Rust and Anchor framework.',
+  description: 'Build an SPL token with metadata using Anchor and Metaplex Token Metadata CPI.',
+  navigationMenuCatergory: 'Tokens',
+  href: '/tokens/anchor/create-token',
+  localizedNavigation: {
+    ja: { name: 'Anchorでトークンを作成', headline: 'RustとAnchorフレームワークを使用してトークンを作成します。' },
+    ko: { name: 'Anchor로 토큰 생성', headline: 'Rust와 Anchor 프레임워크를 사용하여 토큰을 생성합니다.' },
+    zh: { name: '使用Anchor创建代币', headline: '使用Rust和Anchor框架创建代币。' },
+  },
+}
+
 const transferATokenMenuItem = {
   name: 'Transfer Tokens',
   headline: 'Transfer tokens using Metaplex SDKs.',
@@ -86,6 +99,8 @@ const launchTokenMenuItem = {
 }
 
 export const tokenMenuCategory = [launchTokenMenuItem, createATokenMenuItem, mintTokensMenuItem, transferATokenMenuItem, updateATokenMenuItem, burnATokenMenuItem]
+
+export const anchorTokenMenuCategory = [anchorCreateTokenMenuItem]
 
 export const nftMenuCategory = [
   {

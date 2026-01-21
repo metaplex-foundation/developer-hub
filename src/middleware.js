@@ -41,6 +41,10 @@ const standaloneRedirects = {
 }
 
 const redirectRules = {
+  // Tokens guide URL restructure
+  '/tokens': {
+    '/guides/anchor-token-guide': '/tokens/anchor/create-token',
+  },
   // Legacy UMI redirects - these specific sub-paths redirect to new destinations
   '/umi': {
     '/web3js-adapters': '/dev-tools/umi/web3js-differences-and-adapters',
