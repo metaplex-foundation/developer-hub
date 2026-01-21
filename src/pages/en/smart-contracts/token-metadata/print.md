@@ -93,25 +93,7 @@ To create a printable NFT, we need to configure the **Print Supply** attribute o
 
 Here is how you can use our SDKs to create a printable NFT.
 
-{% dialect-switcher title="Create the Master Edition NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { percentAmount, generateSigner } from '@metaplex-foundation/umi'
-import { createNft, printSupply } from '@metaplex-foundation/mpl-token-metadata'
-
-const mint = generateSigner(umi)
-await createNft(umi, {
-  mint,
-  name: 'My Master Edition NFT',
-  uri: 'https://example.com/my-nft.json',
-  sellerFeeBasisPoints: percentAmount(5.5),
-  printSupply: printSupply('Limited', [100]), // Or printSupply('Unlimited')
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/create-master-edition" frameworks="umi,kit" /%}
 
 ## Printing Editions from the Master Edition NFT
 
@@ -126,31 +108,4 @@ Once we have a printable NFT that has not reached its **Max Supply**, we can pri
 
 Here is how you can use our SDKs to print a new edition from a printable NFT.
 
-{% dialect-switcher title="Create the Master Edition NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner } from '@metaplex-foundation/umi'
-import {
-  printV1,
-  fetchMasterEditionFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-// (Optional) Fetch the master edition account to mint the next edition number.
-const masterEdition = await fetchMasterEditionFromSeeds(umi, {
-  mint: masterEditionMint,
-})
-
-const editionMint = generateSigner(umi)
-await printV1(umi, {
-  masterTokenAccountOwner: originalOwner,
-  masterEditionMint,
-  editionMint,
-  editionTokenAccountOwner: ownerOfThePrintedEdition,
-  editionNumber: masterEdition.supply + 1n,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/print-edition" frameworks="umi,kit" /%}

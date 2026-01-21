@@ -7,6 +7,14 @@
  * Edit the native .js and .rs files, then run: node scripts/build-examples.js
  */
 
+const kitSections = {
+  "imports": "import {\n  getUpdateV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';",
+  "setup": "// Assuming rpc, rpcSubscriptions, sendAndConfirm, and authority are set up\n// See getting-started for full setup\n\nconst mintAddress = 'YOUR_TOKEN_MINT_ADDRESS'; // Your fungible token mint",
+  "main": "// Update the fungible token metadata\nconst updateIx = await getUpdateV1InstructionAsync({\n  mint: mintAddress,\n  authority,\n  payer: authority,\n  // Specify fields to update (creators must be explicitly set, use null to keep existing)\n  data: {\n    name: 'Updated Token Name',\n    symbol: 'UTN',\n    uri: 'https://example.com/updated-metadata.json',\n    sellerFeeBasisPoints: 0,\n    creators: null, // Keep existing creators\n  },\n});\n\nawait sendAndConfirm([updateIx], [authority]);",
+  "output": "console.log('Token metadata updated successfully');\nconsole.log('Mint:', mintAddress);\nconsole.log('New name:', 'Updated Token Name');",
+  "full": "// [IMPORTS]\nimport {\n  getUpdateV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';\n// [/IMPORTS]\n\n// [SETUP]\n// Assuming rpc, rpcSubscriptions, sendAndConfirm, and authority are set up\n// See getting-started for full setup\n\nconst mintAddress = 'YOUR_TOKEN_MINT_ADDRESS'; // Your fungible token mint\n// [/SETUP]\n\n// [MAIN]\n// Update the fungible token metadata\nconst updateIx = await getUpdateV1InstructionAsync({\n  mint: mintAddress,\n  authority,\n  payer: authority,\n  // Specify fields to update (creators must be explicitly set, use null to keep existing)\n  data: {\n    name: 'Updated Token Name',\n    symbol: 'UTN',\n    uri: 'https://example.com/updated-metadata.json',\n    sellerFeeBasisPoints: 0,\n    creators: null, // Keep existing creators\n  },\n});\n\nawait sendAndConfirm([updateIx], [authority]);\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Token metadata updated successfully');\nconsole.log('Mint:', mintAddress);\nconsole.log('New name:', 'Updated Token Name');\n// [/OUTPUT]\n"
+}
+
 const umiSections = {
   "imports": "// npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults\nimport {\n  fetchDigitalAsset,\n  mplTokenMetadata,\n  updateV1,\n} from '@metaplex-foundation/mpl-token-metadata'\nimport {\n  keypairIdentity,\n  publicKey,\n} from '@metaplex-foundation/umi'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { readFileSync } from 'fs'",
   "setup": "// Initialize Umi with your RPC endpoint\nconst umi = createUmi('https://api.devnet.solana.com').use(mplTokenMetadata())\n\n// Load your wallet keypair (must be the update authority)\nconst wallet = '<your wallet file path>'\nconst secretKey = JSON.parse(readFileSync(wallet, 'utf-8'))\nconst keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))\numi.use(keypairIdentity(keypair))\n\n// Your token mint address\nconst mintAddress = publicKey('<your token mint address>')",
@@ -30,6 +38,13 @@ export const metadata = {
 }
 
 export const examples = {
+  kit: {
+    framework: 'Kit',
+    language: 'javascript',
+    code: kitSections.full,
+    sections: kitSections,
+  },
+
   umi: {
     framework: 'Umi',
     language: 'javascript',

@@ -18,7 +18,7 @@ Let's dig into these steps in more detail, whilst providing concrete code exampl
 
 ## Uploading off-chain data
 
-You may use any service to upload your off-chain data or simply store it on your own server but it is worth noting that some of our SDKs can help with that. They use a plugin system that allows you to select the uploader of your choice and offer a unified interface for you to upload your data.
+You may use any service to upload your off-chain data or simply store it on your own server but it is worth noting that the Umi SDK can help with that. It uses a plugin system that allows you to select the uploader of your choice and offers a unified interface for you to upload your data.
 
 {% dialect-switcher title="Upload assets and JSON data" %}
 {% dialect title="JavaScript" id="js" %}
@@ -145,115 +145,11 @@ This instruction accepts a variety of parameters and our SDKs do their best to p
 `createV1` is a helper function that can initialize the Mint Account and create the Metadata Account. If the mint exists already it will only create the metadata Account. If you are looking for how to use [`createMetadataAccountV3`](https://mpl-token-metadata-js-docs.vercel.app/functions/createMetadataAccountV3.html) you should be using this function instead.
 {% /callout %}
 
-{% dialect-switcher title="Create onchain Accounts" %}
-{% dialect title="JavaScript - Umi" id="js-umi" %}
+{% code-tabs-imported from="token-metadata/create-accounts" frameworks="umi,kit,shank" /%}
 
-```ts
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import {
-  createV1,
-  TokenStandard,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const mint = generateSigner(umi)
-await createV1(umi, {
-  mint,
-  authority,
-  name: 'My NFT',
-  uri,
-  sellerFeeBasisPoints: percentAmount(5.5),
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-
-{% dialect title="Rust Script" id="rust-script" %}
-{% totem %}
-
-```rust
-use mpl_token_metadata::{
-    instructions::CreateV1Builder,
-    types::{PrintSupply, TokenStandard},
-};
-use solana_rpc_client::rpc_client::RpcClient;
-use solana_sdk::{
-     message::Message,
-     transaction::Transaction,
-};
-
-// 1. client is a reference to the initialized RpcClient
-// 2. every account is specified by their pubkey
-
-let client = ...;
-
-let create_ix = CreateV1Builder::new()
-    .metadata(metadata)
-    .master_edition(Some(master_edition))
-    .mint(mint.pubkey(), true)
-    .authority(payer.pubkey())
-    .payer(payer.pubkey())
-    .update_authority(payer.pubkey(), false)
-    .name(String::from("My NFT"))
-    .uri(uri)
-    .seller_fee_basis_points(550)
-    .token_standard(TokenStandard::NonFungible)
-    .print_supply(PrintSupply::Zero)
-    .instruction();
-
-let message = Message::new(
-    &[create_ix],
-    Some(&payer.pubkey()),
-);
-
-let blockhash = client.get_latest_blockhash()?;
-let mut tx = Transaction::new(&[mint, payer], message, blockhash);
-client.send_and_confirm_transaction(&tx)?;
-```
-
-{% totem-prose %}
-
-Note that when setting the `mint` account, it is required to specify a `bool` flag to indicate whether the account will be a signer or not – it needs to be a signer if the `mint` account does not exist.
-
-{% /totem-prose %}
-
-{% /totem %}
-
-{% /dialect %}
-
-{% dialect title="Rust MPL SDK - CPI" id="rust-cpi" %}
-
-```rust
-use mpl_token_metadata::{
-    accounts::Metadata,
-    instructions::CreateV1CpiBuilder,
-    types::{PrintSupply, TokenStandard},
-};
-
-// 1. every account is specified by a reference to their AccountInfo
-
-let create_cpi = CreateV1CpiBuilder::new(token_metadata_program_info)
-    .metadata(metadata_info)
-    .mint(mint_info, true)
-    .authority(payer_info)
-    .payer(payer_info)
-    .update_authority(update_authority_info, false)
-    .master_edition(Some(master_edition_info))
-    .system_program(system_program_info)
-    .sysvar_instructions(sysvar_instructions_info)
-    .spl_token_program(spl_token_program_info)
-    .token_standard(TokenStandard::NonFungible)
-    .name(String::from("My NFT"))
-    .uri(uri)
-    .seller_fee_basis_points(550)
-    .token_standard(TokenStandard::NonFungible)
-    .print_supply(PrintSupply::Zero);
-
-create_cpi.invoke();
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% callout type="note" %}
+Note that when setting the `mint` account in Rust, it is required to specify a `bool` flag to indicate whether the account will be a signer or not – it needs to be a signer if the `mint` account does not exist.
+{% /callout %}
 
 ## Minting Tokens
 
@@ -267,102 +163,18 @@ We can use the **Mint V1** instruction of the Token Metadata program to achieve 
 - **Amount**: The number of tokens to mint. For Non-Fungible assets, this may only be 1.
 - **Token Standard**: The Token Standard of the asset (**required for our JavaScript SDK**). The program does not require this argument but our SDK do so they can provide adequate default values for most of the other parameters.
 
-{% dialect-switcher title="Mint Tokens" %}
-{% dialect title="JavaScript" id="js" %}
+{% code-tabs-imported from="token-metadata/mint-tokens" frameworks="umi,kit,shank" /%}
 
-```ts
-import { mintV1, TokenStandard } from '@metaplex-foundation/mpl-token-metadata'
-
-await mintV1(umi, {
-  mint: mint.publicKey,
-  authority,
-  amount: 1,
-  tokenOwner,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-{% totem %}
-
-```rust
-use mpl_token_metadata::instructions::MintV1Builder;
-use solana_rpc_client::rpc_client::RpcClient;
-use solana_sdk::{
-     message::Message,
-     transaction::Transaction,
-};
-
-// 1. client is a reference to the initialized RpcClient
-// 2. every account is specified by their pubkey
-
-let client = ...;
-
-let mint_ix = MintV1Builder::new()
-    .token(token)
-    .token_owner(Some(token_owner))
-    .metadata(metadata)
-    .master_edition(Some(master_edition))
-    .mint(mint)
-    .authority(update_authority)
-    .payer(payer)
-    .amount(1)
-    .instruction();
-
-let message = Message::new(
-    &[mint_ix],
-    Some(&payer.pubkey()),
-);
-
-let blockhash = client.get_latest_blockhash()?;
-let mut tx = Transaction::new(&[update_authority, payer], message, blockhash);
-client.send_and_confirm_transaction(&tx)?;
-```
-
-{% totem-prose %}
-
+{% callout type="note" %}
 We are setting the `master_edition` since it is required to mint a `NonFungible`; the `token_owner` is required if the `token` account does not exist and one will be initialized.
-
-{% /totem-prose %}
-
-{% /totem %}
-{% /dialect %}
-
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
-
-```rust
-use mpl_token_metadata::instructions::MintV1CpiBuilder;
-
-// 1. every account is specified by a reference to their AccountInfo
-
-let mint_cpi = MintV1CpiBuilder::new(token_metadata_program_info)
-    .token(token_info)
-    .token_owner(Some(token_owner_info))
-    .metadata(metadata_info)
-    .master_edition(Some(master_edition_info))
-    .mint(mint_info)
-    .payer(payer_info)
-    .authority(update_authority_info)
-    .system_program(system_program_info)
-    .sysvar_instructions(sysvar_instructions_info)
-    .spl_token_program(spl_token_program_info)
-    .spl_ata_program(spl_ata_program_info)
-    .amount(1);
-
-mint_cpi.invoke();
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% /callout %}
 
 ## Create Helpers
 
 Since creating digital assets is such an important part of Token Metadata, our SDKs provide helper methods to make the process easier. Namely, these helper methods combine the **Create V1** and **Mint V1** instructions together in different ways, depending on the Token Standard we want to create.
 
 {% dialect-switcher title="Create helpers" %}
-{% dialect title="JavaScript" id="js" %}
+{% dialect title="Umi SDK" id="umi" %}
 
 {% totem-accordion title="Create a NonFungible" %}
 
@@ -376,8 +188,6 @@ await createNft(umi, {
   name: 'My NFT',
   uri: 'https://example.com/my-nft.json',
   sellerFeeBasisPoints: percentAmount(5.5),
-  // optional if you directly want to add to a collection. Need to verify later.
-  // collection: some({ key: collectionMint.publicKey, verified: false }),
 }).sendAndConfirm(umi)
 ```
 
@@ -395,7 +205,7 @@ await createFungible(umi, {
   name: 'My Fungible',
   uri: 'https://example.com/my-fungible.json',
   sellerFeeBasisPoints: percentAmount(5.5),
-  decimals: some(7), // for 0 decimals use some(0)
+  decimals: some(9),
 }).sendAndConfirm(umi)
 ```
 
@@ -413,7 +223,7 @@ await createFungibleAsset(umi, {
   name: 'My Fungible Asset',
   uri: 'https://example.com/my-fungible-asset.json',
   sellerFeeBasisPoints: percentAmount(5.5),
-  decimals: some(7) // for 0 decimals use some(0)
+  decimals: some(0),
 }).sendAndConfirm(umi)
 ```
 
@@ -431,8 +241,6 @@ await createProgrammableNft(umi, {
   name: 'My Programmable NFT',
   uri: 'https://example.com/my-programmable-nft.json',
   sellerFeeBasisPoints: percentAmount(5.5),
-  // optional if you directly want to add to a collection. Need to verify later.
-  // collection: some({ key: collectionMint.publicKey, verified: false }),
 }).sendAndConfirm(umi)
 ```
 
@@ -440,7 +248,99 @@ await createProgrammableNft(umi, {
 
 {% /dialect %}
 
-{% dialect title="Rust" id="rust" %}
-<!-- Rust helper examples are not provided in this version of the documentation -->
+{% dialect title="Kit SDK" id="kit" %}
+
+{% totem-accordion title="Create a NonFungible" %}
+
+```ts
+import { generateKeyPairSigner } from '@solana/signers'
+import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit'
+
+const mint = await generateKeyPairSigner()
+const [createIx, mintIx] = await createNft({
+  mint,
+  authority,
+  payer: authority,
+  name: 'My NFT',
+  uri: 'https://example.com/my-nft.json',
+  sellerFeeBasisPoints: 550, // 5.5%
+  tokenOwner: authority.address,
+})
+
+await sendAndConfirm([createIx, mintIx], [mint, authority])
+```
+
+{% /totem-accordion  %}
+
+{% totem-accordion title="Create a Fungible" %}
+
+```ts
+import { generateKeyPairSigner } from '@solana/signers'
+import { createFungible } from '@metaplex-foundation/mpl-token-metadata-kit'
+
+const mint = await generateKeyPairSigner()
+const createAndMintIx = await createFungible({
+  mint,
+  authority,
+  payer: authority,
+  name: 'My Fungible',
+  uri: 'https://example.com/my-fungible.json',
+  sellerFeeBasisPoints: 0,
+  decimals: 9,
+  tokenOwner: authority.address,
+  amount: 1_000_000_000n, // initial supply
+})
+
+await sendAndConfirm([createAndMintIx], [mint, authority])
+```
+
+{% /totem-accordion  %}
+
+{% totem-accordion title="Create a FungibleAsset" %}
+
+```ts
+import { generateKeyPairSigner } from '@solana/signers'
+import { createFungibleAsset } from '@metaplex-foundation/mpl-token-metadata-kit'
+
+const mint = await generateKeyPairSigner()
+const createAndMintIx = await createFungibleAsset({
+  mint,
+  authority,
+  payer: authority,
+  name: 'My Fungible Asset',
+  uri: 'https://example.com/my-fungible-asset.json',
+  sellerFeeBasisPoints: 0,
+  decimals: 0,
+  tokenOwner: authority.address,
+  amount: 1000n, // initial supply
+})
+
+await sendAndConfirm([createAndMintIx], [mint, authority])
+```
+
+{% /totem-accordion  %}
+
+{% totem-accordion title="Create a ProgrammableNonFungible" %}
+
+```ts
+import { generateKeyPairSigner } from '@solana/signers'
+import { createProgrammableNft } from '@metaplex-foundation/mpl-token-metadata-kit'
+
+const mint = await generateKeyPairSigner()
+const [createIx, mintIx] = await createProgrammableNft({
+  mint,
+  authority,
+  payer: authority,
+  name: 'My Programmable NFT',
+  uri: 'https://example.com/my-programmable-nft.json',
+  sellerFeeBasisPoints: 550, // 5.5%
+  tokenOwner: authority.address,
+})
+
+await sendAndConfirm([createIx, mintIx], [mint, authority])
+```
+
+{% /totem-accordion  %}
+
 {% /dialect %}
 {% /dialect-switcher %}

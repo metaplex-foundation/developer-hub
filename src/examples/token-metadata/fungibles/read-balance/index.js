@@ -7,6 +7,14 @@
  * Edit the native .js and .rs files, then run: node scripts/build-examples.js
  */
 
+const kitSections = {
+  "imports": "import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-token-metadata-kit';\nimport { getAccount } from '@solana/spl-token';",
+  "setup": "// Assuming rpc is set up\n// See getting-started for full setup\n\nconst mintAddress = 'YOUR_TOKEN_MINT_ADDRESS'; // Your fungible token mint\nconst walletAddress = 'WALLET_ADDRESS'; // Wallet to check balance for",
+  "main": "// Find the Associated Token Account address\nconst [tokenAccount] = await findAssociatedTokenPda({\n  mint: mintAddress,\n  owner: walletAddress,\n});\n\n// Fetch the token account data using SPL Token\nconst tokenData = await getAccount(rpc, tokenAccount);",
+  "output": "console.log('Token Balance:', tokenData.amount);\nconsole.log('Mint:', tokenData.mint);\nconsole.log('Owner:', tokenData.owner);",
+  "full": "// [IMPORTS]\nimport { findAssociatedTokenPda } from '@metaplex-foundation/mpl-token-metadata-kit';\nimport { getAccount } from '@solana/spl-token';\n// [/IMPORTS]\n\n// [SETUP]\n// Assuming rpc is set up\n// See getting-started for full setup\n\nconst mintAddress = 'YOUR_TOKEN_MINT_ADDRESS'; // Your fungible token mint\nconst walletAddress = 'WALLET_ADDRESS'; // Wallet to check balance for\n// [/SETUP]\n\n// [MAIN]\n// Find the Associated Token Account address\nconst [tokenAccount] = await findAssociatedTokenPda({\n  mint: mintAddress,\n  owner: walletAddress,\n});\n\n// Fetch the token account data using SPL Token\nconst tokenData = await getAccount(rpc, tokenAccount);\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Token Balance:', tokenData.amount);\nconsole.log('Mint:', tokenData.mint);\nconsole.log('Owner:', tokenData.owner);\n// [/OUTPUT]\n"
+}
+
 const umiSections = {
   "imports": "// npm install @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox\nimport { publicKey } from '@metaplex-foundation/umi'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport {\n  findAssociatedTokenPda,\n  fetchToken\n} from '@metaplex-foundation/mpl-toolbox'",
   "setup": "const umi = createUmi('https://api.devnet.solana.com')\n\nconst mintAddress = publicKey('YOUR_TOKEN_MINT_ADDRESS')\nconst walletAddress = publicKey('WALLET_ADDRESS')",
@@ -28,7 +36,7 @@ const curlSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "# Get token balance for a wallet using DAS searchAssets\n# Returns all fungible tokens - filter by mint address in response\ncurl -X POST https://api.devnet.solana.com \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"searchAssets\",\n    \"params\": {\n      \"ownerAddress\": \"WALLET_ADDRESS\",\n      \"interface\": \"FungibleToken\",\n      \"limit\": 1000,\n      \"options\": {\n        \"showFungible\": true\n      }\n    }\n  }'\n# Find YOUR_TOKEN_MINT_ADDRESS in the response items\n# Balance is in token_info.balance, decimals in token_info.decimals\n"
+  "full": "# Get token balance for a wallet using DAS searchAssets\n# Returns all fungible tokens - filter by mint address in response\ncurl -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"searchAssets\",\n    \"params\": {\n      \"ownerAddress\": \"<Wallet Address>\",\n      \"interface\": \"FungibleToken\",\n      \"options\": {\n        \"showFungible\": true\n      }\n    }\n  }' \\\n  https://api.devnet.solana.com"
 }
 
 export const metadata = {
@@ -38,6 +46,13 @@ export const metadata = {
 }
 
 export const examples = {
+  kit: {
+    framework: 'Kit',
+    language: 'javascript',
+    code: kitSections.full,
+    sections: kitSections,
+  },
+
   umi: {
     framework: 'Umi',
     language: 'javascript',
