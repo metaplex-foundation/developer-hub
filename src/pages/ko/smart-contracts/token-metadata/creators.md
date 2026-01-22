@@ -21,36 +21,10 @@ description: Token Metadata에서 자산의 크리에이터를 검증하는 방�
 
 다음은 Token Metadata에서 크리에이터를 검증하기 위해 우리의 SDK를 사용하는 방법입니다.
 
-{% dialect-switcher title="크리에이터 검증" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { verifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await verifyCreatorV1(umi, {
-  metadata,
-  authority: creator,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/verify-creator" frameworks="umi,kit" /%}
 
 ## 크리에이터 검증 해제
 
 상호적으로, **Unverify** 명령어를 사용하여 크리에이터의 `verified` 플래그를 `false`로 바꿀 수 있습니다. 이는 **Verify** 명령어와 동일한 속성을 받으며 같은 방식으로 사용할 수 있습니다.
 
-{% dialect-switcher title="크리에이터 검증 해제" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { unverifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unverifyCreatorV1(umi, {
-  metadata,
-  authority: creator,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unverify-creator" frameworks="umi,kit" /%}

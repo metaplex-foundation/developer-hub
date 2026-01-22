@@ -27,60 +27,11 @@ description: Token Metadataでアセットをロック/フリーズする方法�
 - **Authority**: ロックを承認する署名者。これは委任された権限である必要があります。
 - **Token Standard**: ロックされるアセットの標準。Token Metadataプログラムは明示的にこの引数を必要としませんが、SDKが他のほとんどのパラメーターに適切なデフォルト値を提供できるようにするために必要です。
 
-{% dialect-switcher title="Lock an asset" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/lock-nft" frameworks="umi,kit" /%}
 
 ### pNFT
 
-```ts
-import {
-  fetchDigitalAssetWithAssociatedToken,
-  lockV1,
-  TokenStandard,
-} from "@metaplex-foundation/mpl-token-metadata";
-import { publicKey } from "@metaplex-foundation/umi";
-
-// pNFT AssetのMint ID
-const mintId = publicKey("11111111111111111111111111111111");
-
-// Token Accountsを持つpNFT Assetを取得
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-  umi,
-  mintId,
-  umi.identity.publicKey
-);
-
-// ロック命令を送信
-const { signature } = await lockV1(umi, {
-  // pNFT AssetのMint ID
-  mint: mintId,
-  // Update AuthorityまたはDelegate Authority
-  authority: umi.identity,
-  // Token Standard
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  // pNFT Assetの所有者
-  tokenOwner: assetWithToken.token.owner,
-  // pNFT AssetのToken Account
-  token: assetWithToken.token.publicKey,
-  // pNFT AssetのToken Record
-  tokenRecord: assetWithToken.tokenRecord?.publicKey,
-}).sendAndConfirm(umi);
-
-console.log("Signature: ", base58.deserialize(signature));
-```
+{% code-tabs-imported from="token-metadata/lock-pnft" frameworks="umi,kit" /%}
 
 ## アセットのロック解除
 
@@ -88,60 +39,8 @@ console.log("Signature: ", base58.deserialize(signature));
 
 相互に、委任はToken Metadataプログラムの**Unlock**命令を使用してアセットをロック解除できます。この命令は**Lock**命令と同じ属性を受け取り、同じ方法で使用できます。
 
-{% dialect-switcher title="Unlock an NFT Asset" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unlock-nft" frameworks="umi,kit" /%}
 
 ### pNFT
 
-{% dialect-switcher title="Unlock a pNFT Asset" %}
-{% dialect title="JavaScript" id="js" %}
-```ts
-import {
-    fetchDigitalAssetWithAssociatedToken,
-    TokenStandard,
-    unlockV1
-} from "@metaplex-foundation/mpl-token-metadata";
-import { publicKey } from "@metaplex-foundation/umi";
-import { base58 } from "@metaplex-foundation/umi/serializers";
-
-// AssetのMint pNFT ID
-const mintId = publicKey("11111111111111111111111111111111");
-
-// mintトークンアカウントを取得
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-  umi,
-  mintId,
-  umi.identity.publicKey
-);
-
-// ロック解除命令を送信
-const { signature } = await unlockV1(umi, {
-  // pNFT AssetのMint ID
-  mint: mintId,
-  // Update AuthorityまたはDelegate Authority
-  authority: umi.identity,
-  // Token Standard
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  // pNFT Assetsの所有者
-  tokenOwner: assetWithToken.token.owner,
-  // pNFT AssetのToken Account
-  token: assetWithToken.token.publicKey,
-  // pNFT AssetのToken Record
-  tokenRecord: assetWithToken.tokenRecord?.publicKey,
-}).sendAndConfirm(umi);
-
-console.log("Signature: ", base58.deserialize(signature));
-```
+{% code-tabs-imported from="token-metadata/unlock-pnft" frameworks="umi,kit" /%}

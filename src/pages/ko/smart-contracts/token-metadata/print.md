@@ -93,25 +93,7 @@ description: Token Metadata에서 NFT 에디션을 출력하는 방법을 알아
 
 다음은 SDK를 사용하여 출력 가능한 NFT를 만드는 방법입니다.
 
-{% dialect-switcher title="Master Edition NFT 생성" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { percentAmount, generateSigner } from '@metaplex-foundation/umi'
-import { createNft, printSupply } from '@metaplex-foundation/mpl-token-metadata'
-
-const mint = generateSigner(umi)
-await createNft(umi, {
-  mint,
-  name: 'My Master Edition NFT',
-  uri: 'https://example.com/my-nft.json',
-  sellerFeeBasisPoints: percentAmount(5.5),
-  printSupply: printSupply('Limited', [100]), // 또는 printSupply('Unlimited')
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/create-master-edition" frameworks="umi,kit" /%}
 
 ## Master Edition NFT에서 에디션 출력하기
 
@@ -120,37 +102,10 @@ await createNft(umi, {
 - **Master Edition Mint**: 출력 가능한 NFT의 Mint 계정 주소.
 - **Edition Mint**: 새로운 에디션 NFT의 Mint 계정 주소. 이는 계정이 존재하지 않으면 명령어에 의해 생성될 것이므로 일반적으로 새로 생성된 Signer입니다.
 - **Master Token Account Owner**: 출력 가능한 NFT의 소유자를 Signer로. 출력 가능한 NFT의 소유자만이 그것으로부터 새로운 에디션을 출력할 수 있습니다.
-- **Edition Token Account Owner**: 새로운 에디션 NFT의 소유자 주소
+- **Edition Token Account Owner**: 새로운 에디션 NFT의 소유자 주소.
 - **Edition Number**: 출력할 새로운 에디션 NFT의 에디션 번호. 이는 일반적으로 **Master Edition** 계정의 현재 **Supply**에 1을 더한 값입니다.
 - **Token Standard**: 출력 가능한 NFT의 토큰 표준. 이는 `NonFungible` 또는 `ProgrammableNonFungible`일 수 있습니다.
 
 다음은 SDK를 사용하여 출력 가능한 NFT에서 새로운 에디션을 출력하는 방법입니다.
 
-{% dialect-switcher title="Master Edition NFT 생성" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner } from '@metaplex-foundation/umi'
-import {
-  printV1,
-  fetchMasterEditionFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-// (선택사항) 다음 에디션 번호를 민팅하기 위해 마스터 에디션 계정을 가져옵니다.
-const masterEdition = await fetchMasterEditionFromSeeds(umi, {
-  mint: masterEditionMint,
-})
-
-const editionMint = generateSigner(umi)
-await printV1(umi, {
-  masterTokenAccountOwner: originalOwner,
-  masterEditionMint,
-  editionMint,
-  editionTokenAccountOwner: ownerOfThePrintedEdition,
-  editionNumber: masterEdition.supply + 1n,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/print-edition" frameworks="umi,kit" /%}

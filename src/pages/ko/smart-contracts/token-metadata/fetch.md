@@ -17,7 +17,7 @@ description: Token Metadata에서 자산의 다양한 온체인 계정을 가져
 자산 가져오기를 더 쉽게 만들기 위해, 우리의 SDK는 한 번에 자산의 모든 관련 계정을 가져올 수 있는 헬퍼 메서드 세트를 제공합니다. 이러한 모든 계정을 저장하는 데이터 타입을 **디지털 자산**이라고 부릅니다. 다음 하위 섹션에서는 **디지털 자산**을 가져오는 다양한 방법을 살펴보겠습니다.
 
 {% dialect-switcher title="디지털 자산 정의" %}
-{% dialect title="JavaScript" id="js" %}
+{% dialect title="Umi" id="umi" %}
 
 ```ts
 import { PublicKey } from '@metaplex-foundation/umi'
@@ -39,109 +39,78 @@ export type DigitalAsset = {
 ```
 
 {% /dialect %}
+
+{% dialect title="Kit" id="kit" %}
+
+```ts
+import type { Address } from '@solana/addresses'
+import type { Mint } from '@solana-program/token'
+import type {
+  Metadata,
+  MasterEdition,
+  Edition,
+} from '@metaplex-foundation/mpl-token-metadata-kit'
+
+export type DigitalAsset<TMint extends string = string> = {
+  address: Address<TMint>
+  mint: Mint
+  metadata: Metadata
+  edition?:
+    | ({ isOriginal: true } & MasterEdition)
+    | ({ isOriginal: false } & Edition)
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ### Mint로 가져오기
 
 이 헬퍼는 **Mint** 계정의 공개 키에서 단일 **디지털 자산**을 가져옵니다.
 
-{% dialect-switcher title="Mint로 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { fetchDigitalAsset } from '@metaplex-foundation/mpl-token-metadata'
-
-const asset = await fetchDigitalAsset(umi, mint)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-asset" frameworks="umi,kit" /%}
 
 ### Metadata로 가져오기
 
 이 헬퍼는 **Metadata** 계정의 공개 키에서 단일 **디지털 자산**을 가져옵니다. **Mint** 주소를 찾기 위해 먼저 **Metadata** 계정의 내용을 가져와야 하므로 이전 헬퍼보다 약간 덜 효율적이지만, **Metadata** 공개 키에만 액세스할 수 있는 경우 유용할 수 있습니다.
 
-{% dialect-switcher title="Metadata로 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { fetchDigitalAssetByMetadata } from '@metaplex-foundation/mpl-token-metadata'
-
-const asset = await fetchDigitalAssetByMetadata(umi, metadata)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-by-metadata" frameworks="umi,kit" /%}
 
 ### Mint 목록으로 모두 가져오기
 
 이 헬퍼는 제공된 목록의 **Mint** 공개 키만큼 **디지털 자산**을 가져옵니다.
 
-{% dialect-switcher title="Mint 목록으로 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { fetchAllDigitalAsset } from '@metaplex-foundation/mpl-token-metadata'
-
-const [assetA, assetB] = await fetchAllDigitalAsset(umi, [mintA, mintB])
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-by-mint-list" frameworks="umi,kit" /%}
 
 ### 크리에이터로 모두 가져오기
 
 이 헬퍼는 크리에이터별로 모든 **디지털 자산**을 가져옵니다. 크리에이터는 **Metadata** 계정의 5개 다른 위치에 있을 수 있으므로, 관심 있는 크리에이터 위치도 제공해야 합니다. 예를 들어, NFT 세트에서 첫 번째 크리에이터가 크리에이터 A이고 두 번째 크리에이터가 B라는 것을 알고 있다면, 위치 1에서 크리에이터 A를, 위치 2에서 크리에이터 B를 검색하려고 할 것입니다.
 
-{% dialect-switcher title="크리에이터로 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+이 헬퍼는 계정을 필터링하기 위한 RPC 호출이 필요하며 Umi SDK에서 사용할 수 있습니다. Kit SDK의 경우 효율적인 쿼리를 위해 DAS(Digital Asset Standard) API 프로바이더 사용을 고려하세요.
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetByCreator } from '@metaplex-foundation/mpl-token-metadata'
-
-// 크리에이터가 Creator 배열에서 첫 번째인 자산.
-const assetsA = await fetchAllDigitalAssetByCreator(umi, creator)
-
-// 크리에이터가 Creator 배열에서 두 번째인 자산.
-const assetsB = await fetchAllDigitalAssetByCreator(umi, creator, {
-  position: 2,
-})
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-by-creator" frameworks="umi" /%}
 
 ### 소유자로 모두 가져오기
 
 이 헬퍼는 소유자별로 모든 **디지털 자산**을 가져옵니다.
 
-{% dialect-switcher title="소유자로 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+이 헬퍼는 계정을 필터링하기 위한 RPC 호출이 필요하며 Umi SDK에서 사용할 수 있습니다. Kit SDK의 경우 효율적인 쿼리를 위해 DAS(Digital Asset Standard) API 프로바이더 사용을 고려하세요.
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetByOwner } from '@metaplex-foundation/mpl-token-metadata'
-
-const assets = await fetchAllDigitalAssetByOwner(umi, owner)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-by-owner" frameworks="umi" /%}
 
 ### 업데이트 권한으로 모두 가져오기
 
 이 헬퍼는 업데이트 권한의 공개 키에서 모든 **디지털 자산**을 가져옵니다.
 
-{% dialect-switcher title="업데이트 권한으로 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+이 헬퍼는 계정을 필터링하기 위한 RPC 호출이 필요하며 Umi SDK에서 사용할 수 있습니다. Kit SDK의 경우 효율적인 쿼리를 위해 DAS(Digital Asset Standard) API 프로바이더 사용을 고려하세요.
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetByUpdateAuthority } from '@metaplex-foundation/mpl-token-metadata'
-
-const assets = await fetchAllDigitalAssetByUpdateAuthority(umi, owner)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-by-update-authority" frameworks="umi" /%}
 
 ## 토큰이 있는 디지털 자산
 
@@ -155,7 +124,7 @@ const assets = await fetchAllDigitalAssetByUpdateAuthority(umi, owner)
 여기서도 토큰이 있는 디지털 자산을 가져오는 헬퍼 세트를 제공합니다.
 
 {% dialect-switcher title="토큰이 있는 디지털 자산 정의" %}
-{% dialect title="JavaScript" id="js" %}
+{% dialect title="Umi" id="umi" %}
 
 ```ts
 import { Token } from '@metaplex-foundation/mpl-toolbox'
@@ -171,88 +140,67 @@ export type DigitalAssetWithToken = DigitalAsset & {
 ```
 
 {% /dialect %}
+
+{% dialect title="Kit" id="kit" %}
+
+```ts
+import type { Token } from '@solana-program/token'
+import type {
+  DigitalAsset,
+  TokenRecord,
+} from '@metaplex-foundation/mpl-token-metadata-kit'
+
+export type DigitalAssetWithToken<TMint extends string = string> = DigitalAsset<TMint> & {
+  token: Token
+  tokenRecord?: TokenRecord
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ### Mint로 가져오기
 
 이 헬퍼는 **Mint** 계정의 공개 키에서 단일 **토큰이 있는 디지털 자산**을 가져옵니다. 이는 대체 가능한 자산에 대해 얼마나 많이 존재하는지에 관계없이 하나의 토큰이 있는 디지털 자산만 반환하므로 주로 대체 불가능한 자산과 관련이 있습니다.
 
-{% dialect-switcher title="Mint로 토큰이 있는 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+Kit SDK는 토큰 주소 또는 소유자를 알고 있어야 합니다. 소유자를 알고 있다면 아래의 "Mint와 소유자로 가져오기" 헬퍼를 사용하세요.
+{% /callout %}
 
-```ts
-import { fetchDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token-metadata'
-
-const asset = await fetchDigitalAssetWithTokenByMint(umi, mint)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-with-token-by-mint" frameworks="umi" /%}
 
 ### Mint와 소유자로 가져오기
 
 이 헬퍼는 이전 헬퍼보다 더 성능이 좋지만 자산의 소유자를 알고 있어야 합니다.
 
-{% dialect-switcher title="Mint로 토큰이 있는 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { fetchDigitalAssetWithAssociatedToken } from '@metaplex-foundation/mpl-token-metadata'
-
-const asset = await fetchDigitalAssetWithAssociatedToken(umi, mint, owner)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-with-token-by-owner" frameworks="umi,kit" /%}
 
 ### 소유자로 모두 가져오기
 
 이 헬퍼는 주어진 소유자로부터 모든 **토큰이 있는 디지털 자산**을 가져옵니다.
 
-{% dialect-switcher title="소유자로 토큰이 있는 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+이 헬퍼는 계정을 필터링하기 위한 RPC 호출이 필요하며 Umi SDK에서 사용할 수 있습니다. Kit SDK의 경우 효율적인 쿼리를 위해 DAS(Digital Asset Standard) API 프로바이더 사용을 고려하세요.
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetWithTokenByOwner } from '@metaplex-foundation/mpl-token-metadata'
-
-const assets = await fetchAllDigitalAssetWithTokenByOwner(umi, owner)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-with-token-by-owner" frameworks="umi" /%}
 
 ### Mint로 모두 가져오기
 
 이 헬퍼는 **Mint** 계정의 공개 키에서 모든 **토큰이 있는 디지털 자산**을 가져옵니다. 이는 모든 **토큰** 계정을 가져오므로 대체 가능한 자산에 특히 관련이 있습니다.
 
-{% dialect-switcher title="소유자로 토큰이 있는 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+이 헬퍼는 계정을 필터링하기 위한 RPC 호출이 필요하며 Umi SDK에서 사용할 수 있습니다. Kit SDK의 경우 효율적인 쿼리를 위해 DAS(Digital Asset Standard) API 프로바이더 사용을 고려하세요.
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token-metadata'
-
-const assets = await fetchAllDigitalAssetWithTokenByMint(umi, mint)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-with-token-by-mint" frameworks="umi" /%}
 
 ### 소유자와 Mint로 모두 가져오기
 
 이 헬퍼는 소유자와 **Mint** 계정 모두에서 모든 **토큰이 있는 디지털 자산**을 가져옵니다. 이는 주어진 소유자에 대해 하나 이상의 **토큰** 계정을 가진 대체 가능한 자산에 유용할 수 있습니다.
 
-{% dialect-switcher title="Mint와 소유자로 토큰이 있는 자산 가져오기" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+이 헬퍼는 계정을 필터링하기 위한 RPC 호출이 필요하며 Umi SDK에서 사용할 수 있습니다. Kit SDK의 경우 효율적인 쿼리를 위해 DAS(Digital Asset Standard) API 프로바이더 사용을 고려하세요.
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetWithTokenByOwnerAndMint } from '@metaplex-foundation/mpl-token-metadata'
-
-const assets = await fetchAllDigitalAssetWithTokenByOwnerAndMint(
-  umi,
-  owner,
-  mint
-)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-with-token-by-owner-and-mint" frameworks="umi" /%}

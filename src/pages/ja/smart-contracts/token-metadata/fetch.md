@@ -17,7 +17,7 @@ description: Token Metadataでアセットの様々なオンチェーンアカ�
 アセットの取得を簡単にするために、私たちのSDKは、アセットのすべての関連アカウントを一度に取得することを可能にする一連のヘルパーメソッドを提供しています。これらすべてのアカウントを保存するデータ型を**デジタルアセット**と呼びます。次のサブセクションでは、**デジタルアセット**を取得する様々な方法について説明します。
 
 {% dialect-switcher title="デジタルアセットの定義" %}
-{% dialect title="JavaScript" id="js" %}
+{% dialect title="Umi" id="umi" %}
 
 ```ts
 import { PublicKey } from '@metaplex-foundation/umi'
@@ -39,109 +39,78 @@ export type DigitalAsset = {
 ```
 
 {% /dialect %}
+
+{% dialect title="Kit" id="kit" %}
+
+```ts
+import type { Address } from '@solana/addresses'
+import type { Mint } from '@solana-program/token'
+import type {
+  Metadata,
+  MasterEdition,
+  Edition,
+} from '@metaplex-foundation/mpl-token-metadata-kit'
+
+export type DigitalAsset<TMint extends string = string> = {
+  address: Address<TMint>
+  mint: Mint
+  metadata: Metadata
+  edition?:
+    | ({ isOriginal: true } & MasterEdition)
+    | ({ isOriginal: false } & Edition)
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ### Mintによる取得
 
 このヘルパーは、**Mint**アカウントの公開キーから単一の**デジタルアセット**を取得します。
 
-{% dialect-switcher title="Mintでアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { fetchDigitalAsset } from '@metaplex-foundation/mpl-token-metadata'
-
-const asset = await fetchDigitalAsset(umi, mint)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-asset" frameworks="umi,kit" /%}
 
 ### Metadataによる取得
 
 このヘルパーは、**Metadata**アカウントの公開キーから単一の**デジタルアセット**を取得します。**Mint**アドレスを見つけるために最初に**Metadata**アカウントの内容を取得する必要があるため、前のヘルパーよりわずかに効率が劣りますが、**Metadata**公開キーのみにアクセスできる場合、これは役立ちます。
 
-{% dialect-switcher title="Metadataでアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { fetchDigitalAssetByMetadata } from '@metaplex-foundation/mpl-token-metadata'
-
-const asset = await fetchDigitalAssetByMetadata(umi, metadata)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-by-metadata" frameworks="umi,kit" /%}
 
 ### Mintリストによるすべての取得
 
 このヘルパーは、提供されたリスト内の**Mint**公開キーの数だけの**デジタルアセット**を取得します。
 
-{% dialect-switcher title="Mintリストでアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { fetchAllDigitalAsset } from '@metaplex-foundation/mpl-token-metadata'
-
-const [assetA, assetB] = await fetchAllDigitalAsset(umi, [mintA, mintB])
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-by-mint-list" frameworks="umi,kit" /%}
 
 ### 作成者によるすべての取得
 
 このヘルパーは、作成者によってすべての**デジタルアセット**を取得します。作成者は**Metadata**アカウント内の5つの異なる位置にある可能性があるため、関心のある作成者の位置も提供する必要があります。例えば、NFTのセットで最初の作成者が作成者A、2番目の作成者がBであることがわかっている場合、位置1で作成者A、位置2で作成者Bを検索したいと思うでしょう。
 
-{% dialect-switcher title="作成者でアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+このヘルパーはアカウントをフィルタリングするためのRPC呼び出しが必要であり、Umi SDKで利用可能です。Kit SDKの場合は、効率的なクエリのためにDAS（Digital Asset Standard）APIプロバイダーの使用を検討してください。
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetByCreator } from '@metaplex-foundation/mpl-token-metadata'
-
-// 作成者が創作者配列の最初にあるアセット。
-const assetsA = await fetchAllDigitalAssetByCreator(umi, creator)
-
-// 作成者が創作者配列の2番目にあるアセット。
-const assetsB = await fetchAllDigitalAssetByCreator(umi, creator, {
-  position: 2,
-})
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-by-creator" frameworks="umi" /%}
 
 ### 所有者によるすべての取得
 
 このヘルパーは、所有者によってすべての**デジタルアセット**を取得します。
 
-{% dialect-switcher title="所有者でアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+このヘルパーはアカウントをフィルタリングするためのRPC呼び出しが必要であり、Umi SDKで利用可能です。Kit SDKの場合は、効率的なクエリのためにDAS（Digital Asset Standard）APIプロバイダーの使用を検討してください。
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetByOwner } from '@metaplex-foundation/mpl-token-metadata'
-
-const assets = await fetchAllDigitalAssetByOwner(umi, owner)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-by-owner" frameworks="umi" /%}
 
 ### 更新権限によるすべての取得
 
 このヘルパーは、更新権限の公開キーからすべての**デジタルアセット**を取得します。
 
-{% dialect-switcher title="更新権限でアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+このヘルパーはアカウントをフィルタリングするためのRPC呼び出しが必要であり、Umi SDKで利用可能です。Kit SDKの場合は、効率的なクエリのためにDAS（Digital Asset Standard）APIプロバイダーの使用を検討してください。
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetByUpdateAuthority } from '@metaplex-foundation/mpl-token-metadata'
-
-const assets = await fetchAllDigitalAssetByUpdateAuthority(umi, owner)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-by-update-authority" frameworks="umi" /%}
 
 ## トークン付きデジタルアセット
 
@@ -155,7 +124,7 @@ Fungibleアセットの場合、同じデジタルアセットは複数のToken�
 ここでも、トークン付きデジタルアセットを取得するための一連のヘルパーを提供します。
 
 {% dialect-switcher title="トークン付きデジタルアセットの定義" %}
-{% dialect title="JavaScript" id="js" %}
+{% dialect title="Umi" id="umi" %}
 
 ```ts
 import { Token } from '@metaplex-foundation/mpl-toolbox'
@@ -171,88 +140,67 @@ export type DigitalAssetWithToken = DigitalAsset & {
 ```
 
 {% /dialect %}
+
+{% dialect title="Kit" id="kit" %}
+
+```ts
+import type { Token } from '@solana-program/token'
+import type {
+  DigitalAsset,
+  TokenRecord,
+} from '@metaplex-foundation/mpl-token-metadata-kit'
+
+export type DigitalAssetWithToken<TMint extends string = string> = DigitalAsset<TMint> & {
+  token: Token
+  tokenRecord?: TokenRecord
+}
+```
+
+{% /dialect %}
 {% /dialect-switcher %}
 
 ### Mintによる取得
 
 このヘルパーは、**Mint**アカウントの公開キーから単一の**トークン付きデジタルアセット**を取得します。これは主に非Fungibleアセットに関連しています。Fungibleアセットにいくつ存在するかに関係なく、1つのトークン付きデジタルアセットのみを返すからです。
 
-{% dialect-switcher title="Mintでトークン付きアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+Kit SDKはトークンアドレスまたは所有者のいずれかを知っている必要があります。所有者がわかっている場合は、以下の「Mintと所有者による取得」ヘルパーを使用してください。
+{% /callout %}
 
-```ts
-import { fetchDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token-metadata'
-
-const asset = await fetchDigitalAssetWithTokenByMint(umi, mint)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-with-token-by-mint" frameworks="umi" /%}
 
 ### Mintと所有者による取得
 
 このヘルパーは前のヘルパーよりもパフォーマンスが良いですが、アセットの所有者を知っている必要があります。
 
-{% dialect-switcher title="Mintでトークン付きアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { fetchDigitalAssetWithAssociatedToken } from '@metaplex-foundation/mpl-token-metadata'
-
-const asset = await fetchDigitalAssetWithAssociatedToken(umi, mint, owner)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-with-token-by-owner" frameworks="umi,kit" /%}
 
 ### 所有者によるすべての取得
 
 このヘルパーは、指定された所有者からすべての**トークン付きデジタルアセット**を取得します。
 
-{% dialect-switcher title="所有者でトークン付きアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+このヘルパーはアカウントをフィルタリングするためのRPC呼び出しが必要であり、Umi SDKで利用可能です。Kit SDKの場合は、効率的なクエリのためにDAS（Digital Asset Standard）APIプロバイダーの使用を検討してください。
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetWithTokenByOwner } from '@metaplex-foundation/mpl-token-metadata'
-
-const assets = await fetchAllDigitalAssetWithTokenByOwner(umi, owner)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-with-token-by-owner" frameworks="umi" /%}
 
 ### Mintによるすべての取得
 
 このヘルパーは、**Mint**アカウントの公開キーからすべての**トークン付きデジタルアセット**を取得します。これはすべての**Token**アカウントを取得するため、Fungibleアセットに特に関連しています。
 
-{% dialect-switcher title="所有者でトークン付きアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+このヘルパーはアカウントをフィルタリングするためのRPC呼び出しが必要であり、Umi SDKで利用可能です。Kit SDKの場合は、効率的なクエリのためにDAS（Digital Asset Standard）APIプロバイダーの使用を検討してください。
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token-metadata'
-
-const assets = await fetchAllDigitalAssetWithTokenByMint(umi, mint)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-with-token-by-mint" frameworks="umi" /%}
 
 ### 所有者とMintによるすべての取得
 
 このヘルパーは、所有者と**Mint**アカウントの両方からすべての**トークン付きデジタルアセット**を取得します。これは、指定された所有者に対して複数の**Token**アカウントを持つFungibleアセットに役立ちます。
 
-{% dialect-switcher title="MintとOwnerでトークン付きアセットを取得" %}
-{% dialect title="JavaScript" id="js" %}
+{% callout %}
+このヘルパーはアカウントをフィルタリングするためのRPC呼び出しが必要であり、Umi SDKで利用可能です。Kit SDKの場合は、効率的なクエリのためにDAS（Digital Asset Standard）APIプロバイダーの使用を検討してください。
+{% /callout %}
 
-```ts
-import { fetchAllDigitalAssetWithTokenByOwnerAndMint } from '@metaplex-foundation/mpl-token-metadata'
-
-const assets = await fetchAllDigitalAssetWithTokenByOwnerAndMint(
-  umi,
-  owner,
-  mint
-)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/fetch-all-with-token-by-owner-and-mint" frameworks="umi" /%}

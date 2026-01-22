@@ -21,36 +21,10 @@ description: 了解如何在 Token Metadata 上验证资产的创作者
 
 以下是我们如何使用 SDK 在 Token Metadata 上验证创作者。
 
-{% dialect-switcher title="验证创作者" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { verifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await verifyCreatorV1(umi, {
-  metadata,
-  authority: creator,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/verify-creator" frameworks="umi,kit" /%}
 
 ## 取消验证创作者
 
 相反，**取消验证**指令可用于将创作者的 `verified` 标志转为 `false`。它接受与**验证**指令相同的属性，并且可以以相同的方式使用。
 
-{% dialect-switcher title="取消验证创作者" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { unverifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unverifyCreatorV1(umi, {
-  metadata,
-  authority: creator,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unverify-creator" frameworks="umi,kit" /%}

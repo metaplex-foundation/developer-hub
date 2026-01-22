@@ -27,19 +27,19 @@ description: 了解如何在 Token Metadata 上打印 NFT 版本
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
-{% node #wallet label="钱包账户" theme="indigo" /%}
-{% node label="所有者: System Program" theme="dimmed" /%}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
 {% /node %}
 
 {% node x="200" parent="wallet" %}
-{% node #token label="Token 账户" theme="blue" /%}
-{% node label="所有者: Token Program" theme="dimmed" /%}
+{% node #token label="Token Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
 {% node label="Amount = 1" /%}
 {% /node %}
 
 {% node x="200" parent="token" %}
-{% node #mint label="Mint 账户" theme="blue" /%}
-{% node label="所有者: Token Program" theme="dimmed" /%}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
 {% node #mint-authority label="Mint Authority = Edition" /%}
 {% node label="Supply = 1" /%}
 {% node label="Decimals = 0" /%}
@@ -49,23 +49,23 @@ description: 了解如何在 Token Metadata 上打印 NFT 版本
 {% node #metadata-pda parent="mint" x="-10" y="-80" label="PDA" theme="crimson" /%}
 
 {% node parent="metadata-pda" x="-280" %}
-{% node #metadata label="Metadata 账户" theme="crimson" /%}
-{% node label="所有者: Token Metadata Program" theme="dimmed" /%}
+{% node #metadata label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
 {% /node %}
 
 {% node #master-edition-pda parent="mint" x="-10" y="-220" label="PDA" theme="crimson" /%}
 
 {% node parent="master-edition-pda" x="-280" %}
-{% node #master-edition label="Master Edition 账户" theme="crimson" /%}
-{% node label="所有者: Token edition Program" theme="dimmed" /%}
+{% node #master-edition label="Master Edition Account" theme="crimson" /%}
+{% node label="Owner: Token edition Program" theme="dimmed" /%}
 {% node label="Key = MasterEditionV2" /%}
 {% node label="Supply" /%}
 {% node label="Max Supply" theme="orange" z=1 /%}
 {% /node %}
 
 {% node parent="master-edition" y="-140" %}
-{% node #edition label="Edition 账户" theme="crimson" /%}
-{% node label="所有者: Token edition Program" theme="dimmed" /%}
+{% node #edition label="Edition Account" theme="crimson" /%}
+{% node label="Owner: Token edition Program" theme="dimmed" /%}
 {% node label="Key = EditionV1" /%}
 {% node #edition-parent label="Parent" /%}
 {% node label="Edition" /%}
@@ -77,7 +77,7 @@ description: 了解如何在 Token Metadata 上打印 NFT 版本
 {% edge from="mint" to="master-edition-pda" /%}
 {% edge from="metadata-pda" to="metadata" path="straight" /%}
 {% edge from="master-edition-pda" to="master-edition" path="straight" /%}
-{% edge from="master-edition-pda" to="edition" fromPosition="left" label="或" /%}
+{% edge from="master-edition-pda" to="edition" fromPosition="left" label="OR" /%}
 {% edge from="mint-authority" to="master-edition-pda" dashed=true arrow="none" fromPosition="right" toPosition="right" /%}
 {% edge from="freeze-authority" to="master-edition-pda" dashed=true arrow="none" fromPosition="right" toPosition="right" /%}
 {% edge from="edition-parent" to="master-edition" dashed=true arrow="none" fromPosition="left" toPosition="left" /%}
@@ -93,25 +93,7 @@ description: 了解如何在 Token Metadata 上打印 NFT 版本
 
 以下是如何使用我们的 SDK 创建可打印 NFT。
 
-{% dialect-switcher title="创建 Master Edition NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { percentAmount, generateSigner } from '@metaplex-foundation/umi'
-import { createNft, printSupply } from '@metaplex-foundation/mpl-token-metadata'
-
-const mint = generateSigner(umi)
-await createNft(umi, {
-  mint,
-  name: 'My Master Edition NFT',
-  uri: 'https://example.com/my-nft.json',
-  sellerFeeBasisPoints: percentAmount(5.5),
-  printSupply: printSupply('Limited', [100]), // 或 printSupply('Unlimited')
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/create-master-edition" frameworks="umi,kit" /%}
 
 ## 从 Master Edition NFT 打印版本
 
@@ -126,31 +108,4 @@ await createNft(umi, {
 
 以下是如何使用我们的 SDK 从可打印 NFT 打印新版本。
 
-{% dialect-switcher title="创建 Master Edition NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner } from '@metaplex-foundation/umi'
-import {
-  printV1,
-  fetchMasterEditionFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-// （可选）获取 master edition 账户以铸造下一个版本号。
-const masterEdition = await fetchMasterEditionFromSeeds(umi, {
-  mint: masterEditionMint,
-})
-
-const editionMint = generateSigner(umi)
-await printV1(umi, {
-  masterTokenAccountOwner: originalOwner,
-  masterEditionMint,
-  editionMint,
-  editionTokenAccountOwner: ownerOfThePrintedEdition,
-  editionNumber: masterEdition.supply + 1n,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/print-edition" frameworks="umi,kit" /%}

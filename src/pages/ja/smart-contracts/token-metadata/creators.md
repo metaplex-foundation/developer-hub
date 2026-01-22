@@ -21,36 +21,10 @@ description: Token Metadataでアセットの作成者を検証する方法を�
 
 以下は、Token Metadataで作成者を検証するためのSDKの使用方法です。
 
-{% dialect-switcher title="Verify a Creator" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { verifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await verifyCreatorV1(umi, {
-  metadata,
-  authority: creator,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/verify-creator" frameworks="umi,kit" /%}
 
 ## 作成者の未検証
 
 相互に、**Unverify**命令を使用して、作成者の`verified`フラグを`false`に変更できます。**Verify**命令と同じ属性を受け取り、同じ方法で使用できます。
 
-{% dialect-switcher title="Unverify a Creator" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { unverifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unverifyCreatorV1(umi, {
-  metadata,
-  authority: creator,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unverify-creator" frameworks="umi,kit" /%}

@@ -79,7 +79,7 @@ primary_sale_happened: Option<bool>,
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-isMutable: false
+isMutable: true
 ```
 
 {% /dialect %}
@@ -95,16 +95,51 @@ is_mutable: Option<bool>,
 
 ### Collection
 
-アセットがどのコレクションに属するかを示すオプションのオブジェクト。コレクションは、キー（コレクションNFTのmintアドレス）と検証済みフラグを含みます。
+この属性により、アセットのコレクションを設定またはクリアできます。新しいコレクションを設定する場合、verifiedブール値はfalseに設定し、[別の命令を使用して検証する](/ja/smart-contracts/token-metadata/collections)必要があることに注意してください。
 
-{% dialect-switcher title="Collection" %}
+#### コレクションの設定
+
+{% dialect-switcher title="Setting A Collection" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-collection: {
-  key: collectionMintAddress,
-  verified: false, // 更新時は常にfalseに設定されます
-}
+collection: collectionToggle('Set', [
+  {
+    key: publicKey('11111111111111111111111111111111'),
+    verified: false,
+  },
+])
+```
+
+{% /dialect %}
+
+{% dialect title="Rust - anchor-spl 0.31.0" id="rust-anchor" %}
+
+```rust
+collection: Some( Collection {
+  key: PubKey,
+  verified: Boolean,
+}),
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+#### コレクションのクリア
+
+{% dialect-switcher title="Clearing a Collection" %}
+{% dialect title="JavaScript" id="js" %}
+
+```ts
+collection: collectionToggle("Clear"),
+```
+
+{% /dialect %}
+
+{% dialect title="Rust - anchor-spl 0.31.0" id="rust-anchor" %}
+
+```rust
+collection: None,
 ```
 
 {% /dialect %}
@@ -112,74 +147,62 @@ collection: {
 
 ### New Update Authority
 
-アセットの新しい更新権限。これは、更新権限を別のアカウントに転送するために使用されます。
+`newUpdateAuthority`フィールドを渡すことで、新しい更新権限をアセットに割り当てることができます。
 
 {% dialect-switcher title="New Update Authority" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-newUpdateAuthority: newAuthorityPublicKey
+newUpdateAuthority: publicKey('1111111111111111111111111111111')
+```
+
+{% /dialect %}
+
+{% dialect title="Rust - anchor-spl 0.31.0" id="rust-anchor" %}
+
+```rust
+new_update_authority: Option<PubKey>,
 ```
 
 {% /dialect %}
 {% /dialect-switcher %}
 
-## アセットの更新例
+### Programable RuleSets
 
-{% dialect-switcher title="Update an Asset" %}
+この属性により、アセットのルールセットを設定またはクリアできます。これは[Programmable Non-Fungibles](/ja/smart-contracts/token-metadata/pnfts)にのみ関連します。
+
+{% dialect-switcher title="Programable RuleSets" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
-import { updateV1 } from '@metaplex-foundation/mpl-token-metadata'
+ruleSet: publicKey('1111111111111111111111111111111')
+```
 
-await updateV1(umi, {
-  mint,
-  authority: updateAuthority,
-  data: {
-    name: '更新されたNFT名',
-    symbol: 'UNFT',
-    uri: 'https://updated-uri.com/metadata.json',
-    sellerFeeBasisPoints: 750, // 7.5%
-  },
-  primarySaleHappened: true,
-  isMutable: true,
-}).sendAndConfirm(umi)
+{% /dialect %}
+
+{% dialect title="Rust - anchor-spl 0.31.0" id="rust-anchor" %}
+
+```rust
+// Rust anchor-spl SDKでは利用できません
 ```
 
 {% /dialect %}
 {% /dialect-switcher %}
 
-## プログラマブルNFTの更新
+以下は、SDKを使用してToken Metadataでアセットを更新する方法です。
 
-プログラマブルNFT（pNFT）の場合、追加の考慮事項があります：
+## 更新権限としての更新
 
-{% dialect-switcher title="Update a pNFT" %}
-{% dialect title="JavaScript" id="js" %}
+### NFTアセット
 
-```ts
-import { 
-  updateV1,
-  fetchDigitalAsset,
-  TokenStandard 
-} from '@metaplex-foundation/mpl-token-metadata'
+この例では、アセットの更新権限としてNFTアセットを更新する方法を示します。
 
-// pNFTのデータを取得
-const asset = await fetchDigitalAsset(umi, mint)
+{% code-tabs-imported from="token-metadata/update-nft" frameworks="umi,kit,anchor" /%}
 
-await updateV1(umi, {
-  mint,
-  authority: updateAuthority,
-  data: {
-    name: '更新されたpNFT名',
-    symbol: 'UPNFT',
-    uri: 'https://updated-pnft-uri.com/metadata.json',
-    sellerFeeBasisPoints: 1000, // 10%
-  },
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  // pNFTは認証ルールを持つ場合があります
-  authorizationRules: asset.metadata.programmableConfig?.ruleSet,
-}).sendAndConfirm(umi)
-```
+### pNFTアセット
 
-{% /dialect %}
-{% /dialect-switcher %}
+この例では、アセットの更新権限としてProgrammable NFT（pNFT）アセットを更新する方法を示します。
+
+`pNFTs`は、命令が機能するために追加のアカウントを渡す必要がある場合があります。これらには、tokenAccount、tokenRecord、authorizationRules、authorizationRulesProgramが含まれます。
+
+{% code-tabs-imported from="token-metadata/update-pnft" frameworks="umi,kit,anchor" /%}
