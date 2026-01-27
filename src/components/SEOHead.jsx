@@ -11,6 +11,7 @@ import { LANGUAGES, generateAlternateUrls } from '@/config/languages'
  * - Twitter Card tags
  * - Canonical URLs
  * - hreflang tags for internationalization
+ * - JSON-LD structured data (Organization, WebSite, BreadcrumbList, TechArticle)
  *
  * Usage:
  * <SEOHead
@@ -22,6 +23,7 @@ import { LANGUAGES, generateAlternateUrls } from '@/config/languages'
  */
 
 const SITE_URL = 'https://developers.metaplex.com'
+const LOGO_URL = `${SITE_URL}/metaplex-logo-white.png`
 
 /**
  * Get the base URL for the current environment
@@ -96,7 +98,195 @@ function extractProductFromPath(pathname) {
   return segments[0] || null
 }
 
-export function SEOHead({ title, description, metaTitle, locale = 'en', product: productProp }) {
+/**
+ * Generate Organization schema (site-wide)
+ */
+function generateOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Metaplex',
+    url: SITE_URL,
+    logo: LOGO_URL,
+    sameAs: [
+      'https://twitter.com/metaplex',
+      'https://github.com/metaplex-foundation',
+      'https://discord.gg/metaplex',
+    ],
+  }
+}
+
+/**
+ * Generate WebSite schema (site-wide, no SearchAction since search is modal-only)
+ */
+function generateWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Metaplex Developer Hub',
+    url: SITE_URL,
+  }
+}
+
+/**
+ * Generate BreadcrumbList schema based on page hierarchy
+ */
+function generateBreadcrumbSchema(pathname, productName, productPath, sectionTitle, navigationGroup, title) {
+  const items = [
+    { name: 'Home', url: SITE_URL },
+  ]
+
+  // Build breadcrumb path based on URL structure
+  const pathSegments = pathname.split('/').filter(Boolean)
+
+  // Handle category paths like smart-contracts/ or dev-tools/
+  if (pathSegments.length > 0) {
+    const firstSegment = pathSegments[0]
+
+    // Check for category prefixes
+    if (firstSegment === 'smart-contracts') {
+      items.push({ name: 'Smart Contracts', url: `${SITE_URL}/smart-contracts` })
+    } else if (firstSegment === 'dev-tools') {
+      items.push({ name: 'Dev Tools', url: `${SITE_URL}/dev-tools` })
+    } else if (firstSegment === 'guides') {
+      items.push({ name: 'Guides', url: `${SITE_URL}/guides` })
+    } else if (firstSegment === 'legacy-documentation') {
+      items.push({ name: 'Legacy Documentation', url: `${SITE_URL}/legacy-documentation` })
+    }
+  }
+
+  // Add product if available and not already in path
+  if (productName && productPath) {
+    const productUrl = `${SITE_URL}/${productPath}`
+    // Avoid duplicate entries
+    if (!items.some(item => item.url === productUrl)) {
+      items.push({ name: productName, url: productUrl })
+    }
+  }
+
+  // Add section (Documentation, Guides, References) if different from product
+  if (sectionTitle && sectionTitle !== productName && sectionTitle !== 'Documentation') {
+    // Section URLs typically follow product path
+    if (productPath && sectionTitle === 'Guides') {
+      items.push({ name: sectionTitle, url: `${SITE_URL}/${productPath}/guides` })
+    }
+  }
+
+  // Add navigation group if available (e.g., "Introduction", "Features", "Plugins")
+  if (navigationGroup && navigationGroup !== title && navigationGroup !== sectionTitle) {
+    // Navigation groups don't typically have their own URL, so we skip adding a URL
+    // But we can still include them in the breadcrumb for context
+  }
+
+  // Add current page title (last item, no URL per schema.org spec)
+  if (title && title !== productName && items.length > 0) {
+    items.push({ name: title })
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      ...(item.url ? { item: item.url } : {}),
+    })),
+  }
+}
+
+/**
+ * Generate TechArticle schema for documentation pages
+ */
+function generateTechArticleSchema(title, description, canonicalUrl, locale, created, updated) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: title,
+    url: canonicalUrl,
+    inLanguage: locale,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'Metaplex',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Metaplex',
+      logo: {
+        '@type': 'ImageObject',
+        url: LOGO_URL,
+      },
+    },
+  }
+
+  if (description) {
+    schema.description = description
+  }
+
+  if (created) {
+    schema.datePublished = created
+  }
+
+  if (updated) {
+    schema.dateModified = updated
+  } else if (created) {
+    schema.dateModified = created
+  }
+
+  return schema
+}
+
+/**
+ * Generate all JSON-LD schemas for a page
+ */
+function generateJsonLdSchemas({
+  isHomePage,
+  title,
+  description,
+  canonicalUrl,
+  locale,
+  productName,
+  productPath,
+  sectionTitle,
+  navigationGroup,
+  pathname,
+  created,
+  updated,
+}) {
+  const schemas = []
+
+  // Site-wide schemas only on homepage
+  if (isHomePage) {
+    schemas.push(generateOrganizationSchema())
+    schemas.push(generateWebSiteSchema())
+  }
+
+  // Per-page schemas
+  if (!isHomePage && title) {
+    schemas.push(generateBreadcrumbSchema(pathname, productName, productPath, sectionTitle, navigationGroup, title))
+    schemas.push(generateTechArticleSchema(title, description, canonicalUrl, locale, created, updated))
+  }
+
+  return schemas
+}
+
+export function SEOHead({
+  title,
+  description,
+  metaTitle,
+  locale = 'en',
+  product: productProp,
+  productName,
+  navigationGroup,
+  sectionTitle,
+  created,
+  updated,
+  isHomePage = false,
+}) {
   const router = useRouter()
   const { pathname } = router
 
@@ -135,6 +325,22 @@ export function SEOHead({ title, description, metaTitle, locale = 'en', product:
 
   // Generate alternate URLs for hreflang
   const alternateUrls = generateAlternateUrls(pathname)
+
+  // Generate JSON-LD structured data
+  const jsonLdSchemas = generateJsonLdSchemas({
+    isHomePage,
+    title,
+    description,
+    canonicalUrl,
+    locale,
+    productName,
+    productPath: productProp,
+    sectionTitle,
+    navigationGroup,
+    pathname: normalizedPath,
+    created,
+    updated,
+  })
 
   return (
     <Head>
@@ -189,6 +395,15 @@ export function SEOHead({ title, description, metaTitle, locale = 'en', product:
       {description && <meta name="twitter:description" content={description} />}
       <meta name="twitter:image" content={ogImageUrl} />
       <meta property="twitter:domain" content="developers.metaplex.com" />
+
+      {/* JSON-LD Structured Data */}
+      {jsonLdSchemas.map((schema, index) => (
+        <script
+          key={`json-ld-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
     </Head>
   )
 }
