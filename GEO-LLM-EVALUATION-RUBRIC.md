@@ -4,6 +4,25 @@ Use this rubric to evaluate documentation pages for Generative Engine Optimizati
 
 ---
 
+## Quick Reference
+
+**Jump to:** [Dimensions](#evaluation-dimensions) · [Scoring Summary](#scoring-summary) · [Checklist](#template-checklist) · [Example](#example-evaluation)
+
+| # | Dimension | Weight | Key Question |
+|---|-----------|--------|--------------|
+| 1 | [Structural Clarity](#1-structural-clarity) | High | Is the H2/H3 hierarchy logical and predictable? |
+| 2 | [Definition Quality](#2-definition-quality) | High | Does Summary answer "what does this do?" clearly? |
+| 3 | [Extractability](#3-extractability) | High | Are code blocks titled and tables used for data? |
+| 4 | [Constraint Coverage](#4-constraint-coverage) | Medium-High | Is Out of Scope explicit? |
+| 5 | [Anti-Hallucination](#5-anti-hallucination) | High | Are versions explicit and terms disambiguated? |
+| 6 | [Authority Signals](#6-authority-signals) | Medium | Is there maintainer/date/version attribution? |
+| 7 | [Quick Reference Density](#7-quick-reference-density) | Medium-High | Are program IDs, PDAs, deps in tables? |
+| 8 | [FAQ Quality](#8-faq-quality) | Medium | Are there 6+ real questions with costs/comparisons? |
+| 9 | [Glossary](#9-glossary) | Medium | Is there a table with 8+ term definitions? |
+| 10 | [Human UX](#10-human-ux) | Medium | Is there Quick Start + jump links + callouts? |
+
+---
+
 ## Evaluation Dimensions
 
 ### 1. Structural Clarity (Weight: High)
@@ -23,7 +42,6 @@ Use this rubric to evaluate documentation pages for Generative Engine Optimizati
 **Example structure (10/10):**
 ```
 ## Summary
-## AI Summary
 ## Out of Scope
 ## Quick Start
 ## Prerequisites
@@ -41,8 +59,7 @@ Use this rubric to evaluate documentation pages for Generative Engine Optimizati
 
 **What to look for:**
 - Clear, declarative one-sentence definitions
-- Summary section that answers "what does this do?"
-- AI Summary with bullet points for LLM extraction
+- Summary section that answers "what does this do?" (prose + bullet points)
 - Terminology callouts for disambiguation
 
 **Scoring:**
@@ -54,9 +71,9 @@ Use this rubric to evaluate documentation pages for Generative Engine Optimizati
 **Required elements:**
 ```markdown
 ## Summary
+
 [1-2 sentence declarative summary of what this guide accomplishes]
 
-## AI Summary
 - [Bullet point 1: Core action]
 - [Bullet point 2: Technologies used]
 - [Bullet point 3: Version/compatibility]
@@ -344,8 +361,7 @@ Use this checklist when creating new documentation:
 - [ ] Frontmatter with title, metaTitle, description
 - [ ] Lead paragraph with bold key terms
 - [ ] "What You'll Build" callout
-- [ ] Summary (1-2 sentences)
-- [ ] AI Summary (4 bullets)
+- [ ] Summary (1-2 sentences + 4 bullet points)
 - [ ] Out of Scope (comma-separated list)
 - [ ] Quick Start with jump links
 - [ ] Prerequisites
@@ -385,7 +401,7 @@ Use this checklist when creating new documentation:
 | Dimension | Score | Notes |
 |-----------|-------|-------|
 | Structural Clarity | 10/10 | Clear H2/H3 hierarchy, logical flow from setup → program → client → errors → reference |
-| Definition Quality | 10/10 | Summary, AI Summary, and Terminology callout provide clean declarative definitions |
+| Definition Quality | 10/10 | Summary (prose + bullets) and Terminology callout provide clean declarative definitions |
 | Extractability | 10/10 | Code blocks with titles, tables for program IDs, PDA seeds in both TS/Rust |
 | Constraint Coverage | 10/10 | Out of Scope section + Notes section clearly bound what this does/doesn't do |
 | Anti-Hallucination | 9.5/10 | Explicit out-of-scope, terminology disambiguation, tested versions. Minor: could add "do not confuse with Token-2022" |
@@ -398,7 +414,7 @@ Use this checklist when creating new documentation:
 **Overall GEO Score: 9.8/10**
 
 **Strengths:**
-- Compressed intro - Summary + AI Summary + Out of Scope in ~10 lines
+- Compressed intro - Summary + Out of Scope in ~10 lines
 - Jump links - Humans can skip to code immediately
 - Dual PDA derivation - TypeScript and Rust in dialect switcher
 - BN overflow fix - Safe arithmetic for LLM copy/paste

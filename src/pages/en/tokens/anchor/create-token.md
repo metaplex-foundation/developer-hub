@@ -22,8 +22,6 @@ A single Anchor instruction that:
 
 Create a **fungible SPL token** on Solana with **Anchor (Rust)**, mint an initial supply, and attach **Metaplex Token Metadata** (name, symbol, URI) via CPI.
 
-## AI Summary
-
 - One instruction: init **mint + ATA + metadata**, then mint supply
 - Uses: SPL Token + Metaplex Token Metadata CPI
 - Tested: Anchor 0.32.1, Solana Agave 3.1.6
