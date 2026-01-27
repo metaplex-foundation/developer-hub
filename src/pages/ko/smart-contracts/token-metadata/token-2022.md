@@ -10,161 +10,18 @@ Token-2022 민트 계정에 메타데이터 정보 추가를 지원하기 위해
 
 {% totem %}
 
-{% dialect-switcher title="Create 및 Mint에서 토큰 프로그램 지정" %}
-{% dialect title="JavaScript" id="js" %}
-
 {% totem-accordion title="메타데이터 생성" %}
 
-```ts
-import {
-  generateSigner,
-  percentAmount,
-  publicKey,
-  PublicKey,
-} from '@metaplex-foundation/umi'
-import {
-  createV1,
-  TokenStandard,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const SPL_TOKEN_2022_PROGRAM_ID: PublicKey = publicKey(
-  'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
-)
-
-const mint = generateSigner(umi)
-await createV1(umi, {
-  mint,
-  authority,
-  name: 'My NFT',
-  uri,
-  sellerFeeBasisPoints: percentAmount(5.5),
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
+{% code-tabs-imported from="token-metadata/token-2022-create" frameworks="umi,kit,shank" /%}
 
 {% /totem-accordion  %}
 
 {% totem-accordion title="토큰 민팅" %}
 
-```ts
-import { mintV1, TokenStandard } from '@metaplex-foundation/mpl-token-metadata'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-
-const SPL_TOKEN_2022_PROGRAM_ID: PublicKey = publicKey(
-  'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
-)
-
-const token = findAssociatedTokenPda(umi, {
-  mint: mint.publicKey,
-  owner: umi.identity.publicKey,
-  tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
-})
-
-await mintV1(umi, {
-  mint: mint.publicKey,
-  token,
-  authority,
-  amount: 1,
-  tokenOwner,
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
+{% code-tabs-imported from="token-metadata/token-2022-mint" frameworks="umi,kit,shank" /%}
 
 {% /totem-accordion  %}
 
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-{% totem-accordion title="메타데이터 생성" %}
-
-```rust
-use mpl_token_metadata::{
-    instructions::CreateV1Builder,
-    types::{PrintSupply, TokenStandard},
-};
-use solana_rpc_client::rpc_client::RpcClient;
-use solana_sdk::{
-     message::Message,
-     transaction::Transaction,
-};
-
-// 1. client는 초기화된 RpcClient에 대한 참조입니다
-// 2. 모든 계정은 pubkey로 지정됩니다
-
-let client = ...;
-
-let create_ix = CreateV1Builder::new()
-    .metadata(metadata)
-    .master_edition(Some(master_edition))
-    .mint(mint.pubkey(), true)
-    .authority(payer.pubkey())
-    .payer(payer.pubkey())
-    .update_authority(payer.pubkey(), false)
-    .spl_token_program(spl_token_2022::id())
-    .name(String::from("My NFT"))
-    .uri(uri)
-    .seller_fee_basis_points(550)
-    .token_standard(TokenStandard::NonFungible)
-    .print_supply(PrintSupply::Zero)
-    .instruction();
-
-let message = Message::new(
-    &[create_ix],
-    Some(&payer.pubkey()),
-);
-
-let blockhash = client.get_latest_blockhash()?;
-let mut tx = Transaction::new(&[mint, payer], message, blockhash);
-client.send_and_confirm_transaction(&tx)?;
-```
-
-{% /totem-accordion  %}
-
-{% totem-accordion title="토큰 민팅" %}
-
-```rust
-use mpl_token_metadata::instructions::MintV1Builder;
-use solana_rpc_client::rpc_client::RpcClient;
-use solana_sdk::{
-     message::Message,
-     transaction::Transaction,
-};
-
-// 1. client는 초기화된 RpcClient에 대한 참조입니다
-// 2. 모든 계정은 pubkey로 지정됩니다
-
-let client = ...;
-
-let mint_ix = MintV1Builder::new()
-    .token(token)
-    .token_owner(Some(token_owner))
-    .metadata(metadata)
-    .master_edition(Some(master_edition))
-    .mint(mint)
-    .authority(update_authority)
-    .payer(payer)
-    .spl_token_program(spl_token_2022::id())
-    .amount(1)
-    .instruction();
-
-let message = Message::new(
-    &[mint_ix],
-    Some(&payer.pubkey()),
-);
-
-let blockhash = client.get_latest_blockhash()?;
-let mut tx = Transaction::new(&[update_authority, payer], message, blockhash);
-client.send_and_confirm_transaction(&tx)?;
-```
-
-{% /totem-accordion  %}
-
-{% /dialect %}
-
-{% /dialect-switcher %}
 {% totem-prose %}
 
 민트 계정의 토큰 프로그램은 계정의 `owner` 속성을 확인하여 결정할 수 있습니다.

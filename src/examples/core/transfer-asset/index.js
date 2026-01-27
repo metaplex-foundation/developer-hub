@@ -7,14 +7,6 @@
  * Edit the native .js and .rs files, then run: node scripts/build-examples.js
  */
 
-const kitSections = {
-  "imports": "import { transfer } from '@metaplex-kit/core'",
-  "setup": "",
-  "main": "// Transfer an existing NFT asset to a new owner\nconst signature = await transfer({\n  asset: assetAddress,\n  newOwner: recipientPublicKey,\n})",
-  "output": "console.log('Asset transferred:', signature)",
-  "full": "// [IMPORTS]\nimport { transfer } from '@metaplex-kit/core'\n// [/IMPORTS]\n\n// [MAIN]\n// Transfer an existing NFT asset to a new owner\nconst signature = await transfer({\n  asset: assetAddress,\n  newOwner: recipientPublicKey,\n})\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Asset transferred:', signature)\n// [/OUTPUT]\n"
-}
-
 const umiSections = {
   "imports": "import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { transfer } from '@metaplex-foundation/mpl-core'\nimport { mplCore } from '@metaplex-foundation/mpl-core'\nimport { publicKey } from '@metaplex-foundation/umi'",
   "setup": "// Initialize UMI\nconst umi = createUmi('https://api.devnet.solana.com')\n  .use(mplCore())",
@@ -46,13 +38,6 @@ export const metadata = {
 }
 
 export const examples = {
-  kit: {
-    framework: 'Kit',
-    language: 'javascript',
-    code: kitSections.full,
-    sections: kitSections,
-  },
-
   umi: {
     framework: 'Umi',
     language: 'javascript',

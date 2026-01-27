@@ -88,65 +88,33 @@ pNFT는 대부분의 작업에서 추가 계정이 필요하며, 여기에는 `t
 
 메타데이터 계정, 토큰 계정, 토큰 레코드 계정과 같은 데이터를 반환하는 `fetchDigitalAssetWithAssociatedToken` 함수로 필요한 모든 계정을 가져올 수 있습니다.
 
-```ts
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-    // Umi 인스턴스
-    umi,
-    // Mint ID
-    publicKey("11111111111111111111111111111111"),
-    // 소유자
-    publicKey("22222222222222222222222222222222")
-);
-```
+{% code-tabs-imported from="token-metadata/pnft-fetch-with-token" frameworks="umi,kit" /%}
 
 #### Token Record PDA
 
 pNFT 자산이 저장된 지갑의 `mintId`와 `tokenAccount`로 `tokenRecord` 계정의 PDA 주소를 생성합니다.
 
-```ts
-const tokenRecordPda = findTokenRecordPda(umi, {
-    // pNFT mint ID
-    mint: publicKey("11111111111111111111111111111111")s,
-    // Token Account
-    token: publicKey("22222222222222222222222222222222"),
-});
-```
+{% code-tabs-imported from="token-metadata/pnft-find-token-record-pda" frameworks="umi,kit" /%}
 
 ### RuleSet
 
-`metadata` 계정 데이터가 사용 가능한 경우, `unwrap`을 사용하여 메타데이터 계정의 `programableConfig` 필드를 확인할 수 있습니다.
+`metadata` 계정 데이터가 사용 가능한 경우, 메타데이터 계정의 `programmableConfig` 필드를 확인하여 룰셋을 가져올 수 있습니다.
 
-```ts
-const ruleSet = unwrapOptionRecursively(assetWithToken.metadata.programmableConfig)?.ruleSet
-```
+{% code-tabs-imported from="token-metadata/pnft-get-ruleset" frameworks="umi,kit" /%}
 
 ### Authorization Rules Program
 
-pNFT 자산에 `ruleSet`이 설정되어 있는 경우, `ruleSet`을 검증할 수 있도록 **Authorization Rules Program ID**를 전달해야 합니다. 이 ID를 얻는 방법은 두 가지가 있습니다. `mpl-token-auth-rules` npm 패키지에서 가져오거나 ID를 수동으로 붙여넣는 것입니다.
+pNFT 자산에 `ruleSet`이 설정되어 있는 경우, `ruleSet`을 검증할 수 있도록 **Authorization Rules Program ID**를 전달해야 합니다.
 
-#### mpl-token-auth-rules
-
-```ts
-const authorizationRulesProgram = getMplTokenAuthRulesProgramId(umi)
-```
-또는
-
-#### Program Address
-```ts
-const authorizationRulesProgram = pubicKey("auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg")
-```
+{% code-tabs-imported from="token-metadata/pnft-auth-rules-program" frameworks="umi,kit" /%}
 
 ### Authorization Data
 
-검증을 위해 추가 데이터가 필요한 `ruleSet`이 pNFT 자산에 있는 경우 여기에 전달합니다.
-
-```ts
-const = authorizationData: { payload: ... },
-```
+검증을 위해 추가 데이터가 필요한 `ruleSet`이 pNFT 자산에 있는 경우 명령어 매개변수에서 `authorizationData: { payload: ... }`로 전달합니다.
 
 ## 모든 작업에 대한 규칙 시행
 
-프로그래머블 NFT의 가장 중요한 기능 중 하나는 자산에 영향을 미치는 모든 작업에 대해 규칙 세트를 시행할 수 있는 능력입니다. 전체 인증 레이어는 [Token Auth Rules](/token-auth-rules)라고 불리는 또 다른 Metaplex 프로그램에서 제공됩니다. 그 프로그램이 pNFT를 프로그래머블하게 만드는 데 사용되지만, 모든 사용 사례에 대한 인증 규칙을 생성하고 검증하는 데 사용할 수 있는 일반적인 프로그램입니다.
+프로그래머블 NFT의 가장 중요한 기능 중 하나는 자산에 영향을 미치는 모든 작업에 대해 규칙 세트를 시행할 수 있는 능력입니다. 전체 인증 레이어는 [Token Auth Rules](/ko/smart-contracts/token-auth-rules)라고 불리는 또 다른 Metaplex 프로그램에서 제공됩니다. 그 프로그램이 pNFT를 프로그래머블하게 만드는 데 사용되지만, 모든 사용 사례에 대한 인증 규칙을 생성하고 검증하는 데 사용할 수 있는 일반적인 프로그램입니다.
 
 pNFT의 경우, 다음 작업들이 지원됩니다:
 

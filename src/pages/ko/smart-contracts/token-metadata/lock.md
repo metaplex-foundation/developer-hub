@@ -27,60 +27,11 @@ description: Token Metadata에서 자산을 잠금/동결하는 방법을 알아
 - **Authority**: 잠금을 승인하는 서명자. 이는 위임된 권한이어야 합니다.
 - **Token Standard**: 잠기는 자산의 표준. Token Metadata 프로그램은 명시적으로 이 인수를 필요로 하지 않지만 우리의 SDK는 다른 대부분의 매개변수에 대해 적절한 기본값을 제공할 수 있도록 필요로 합니다.
 
-{% dialect-switcher title="자산 잠금" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/lock-nft" frameworks="umi,kit" /%}
 
 ### pNFT
 
-```ts
-import {
-  fetchDigitalAssetWithAssociatedToken,
-  lockV1,
-  TokenStandard,
-} from "@metaplex-foundation/mpl-token-metadata";
-import { publicKey } from "@metaplex-foundation/umi";
-
-// pNFT 자산의 Mint ID
-const mintId = publicKey("11111111111111111111111111111111");
-
-// 토큰 계정과 함께 pNFT 자산 가져오기
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-  umi,
-  mintId,
-  umi.identity.publicKey
-);
-
-// 잠금 명령어 전송
-const { signature } = await lockV1(umi, {
-  // pNFT 자산의 Mint ID
-  mint: mintId,
-  // 업데이트 권한 또는 위임자 권한
-  authority: umi.identity,
-  // 토큰 표준
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  // pNFT 자산의 소유자
-  tokenOwner: assetWithToken.token.owner,
-  // pNFT 자산의 토큰 계정
-  token: assetWithToken.token.publicKey,
-  // pNFT 자산의 토큰 레코드
-  tokenRecord: assetWithToken.tokenRecord?.publicKey,
-}).sendAndConfirm(umi);
-
-console.log("Signature: ", base58.deserialize(signature));
-```
+{% code-tabs-imported from="token-metadata/lock-pnft" frameworks="umi,kit" /%}
 
 ## 자산 잠금 해제
 
@@ -88,62 +39,8 @@ console.log("Signature: ", base58.deserialize(signature));
 
 상호적으로, 위임자는 Token Metadata 프로그램의 **Unlock** 명령어를 사용하여 자산을 잠금 해제할 수 있습니다. 이 명령어는 **Lock** 명령어와 동일한 속성을 받으며 같은 방식으로 사용할 수 있습니다.
 
-{% dialect-switcher title="NFT 자산 잠금 해제" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unlock-nft" frameworks="umi,kit" /%}
 
 ### pNFT
 
-{% dialect-switcher title="pNFT 자산 잠금 해제" %}
-{% dialect title="JavaScript" id="js" %}
-```ts
-import {
-    fetchDigitalAssetWithAssociatedToken,
-    TokenStandard,
-    unlockV1
-} from "@metaplex-foundation/mpl-token-metadata";
-import { publicKey } from "@metaplex-foundation/umi";
-import { base58 } from "@metaplex-foundation/umi/serializers";
-
-// pNFT 자산의 Mint ID
-const mintId = publicKey("11111111111111111111111111111111");
-
-// 민트 토큰 계정 가져오기
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-  umi,
-  mintId,
-  umi.identity.publicKey
-);
-
-// 잠금 해제 명령어 전송
-const { signature } = await unlockV1(umi, {
-  // pNFT 자산의 Mint ID
-  mint: mintId,
-  // 업데이트 권한 또는 위임자 권한
-  authority: umi.identity,
-  // 토큰 표준
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  // pNFT 자산의 소유자
-  tokenOwner: assetWithToken.token.owner,
-  // pNFT 자산의 토큰 계정
-  token: assetWithToken.token.publicKey,
-  // pNFT 자산의 토큰 레코드
-  tokenRecord: assetWithToken.tokenRecord?.publicKey,
-}).sendAndConfirm(umi);
-
-console.log("Signature: ", base58.deserialize(signature));
-```
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unlock-pnft" frameworks="umi,kit" /%}

@@ -20,7 +20,7 @@ const curlSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "# Get all fungible tokens owned by a wallet using searchAssets\n# Using interface: \"FungibleToken\" filters server-side (more efficient)\ncurl -X POST https://api.devnet.solana.com \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"searchAssets\",\n    \"params\": {\n      \"ownerAddress\": \"WALLET_ADDRESS\",\n      \"interface\": \"FungibleToken\",\n      \"limit\": 1000,\n      \"options\": {\n        \"showFungible\": true\n      }\n    }\n  }'\n"
+  "full": "# Get all fungible tokens owned by a wallet using searchAssets\n# Using interface: \"FungibleToken\" filters server-side (more efficient)\ncurl -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"searchAssets\",\n    \"params\": {\n      \"ownerAddress\": \"GfK2Xz6pzQp1sC1FvxePKnikZA7iyaCSVXZykixLjem5\",\n      \"interface\": \"FungibleToken\",\n      \"options\": {\n        \"showFungible\": true\n      }\n    }\n  }' \\\n  https://api.devnet.solana.com"
 }
 
 export const metadata = {

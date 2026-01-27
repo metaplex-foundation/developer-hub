@@ -7,14 +7,6 @@
  * Edit the native .js and .rs files, then run: node scripts/build-examples.js
  */
 
-const kitSections = {
-  "imports": "import { update } from '@metaplex-foundation/mpl-core-kit'",
-  "setup": "const client = createClient()",
-  "main": "// Update an existing NFT asset's metadata\nconst result = await update({\n  asset: assetAddress,\n  name: 'Updated NFT Name',\n  uri: 'https://updated-example.com/metadata.json',\n})",
-  "output": "console.log('Asset updated:', result)",
-  "full": "// [IMPORTS]\nimport { update } from '@metaplex-foundation/mpl-core-kit'\n// [/IMPORTS]\n\n// [SETUP]\nconst client = createClient()\n// [/SETUP]\n\n// [MAIN]\n// Update an existing NFT asset's metadata\nconst result = await update({\n  asset: assetAddress,\n  name: 'Updated NFT Name',\n  uri: 'https://updated-example.com/metadata.json',\n})\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Asset updated:', result)\n// [/OUTPUT]\n"
-}
-
 const umiSections = {
   "imports": "import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { update } from '@metaplex-foundation/mpl-core'\nimport { mplCore } from '@metaplex-foundation/mpl-core'\nimport { publicKey } from '@metaplex-foundation/umi'",
   "setup": "const umi = createUmi('https://api.devnet.solana.com').use(mplCore())\nconst assetAddress = publicKey('AssetAddressHere...')",
@@ -54,13 +46,6 @@ export const metadata = {
 }
 
 export const examples = {
-  kit: {
-    framework: 'Kit',
-    language: 'javascript',
-    code: kitSections.full,
-    sections: kitSections,
-  },
-
   umi: {
     framework: 'Umi',
     language: 'javascript',

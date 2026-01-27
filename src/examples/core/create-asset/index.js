@@ -7,14 +7,6 @@
  * Edit the native .js and .rs files, then run: node scripts/build-examples.js
  */
 
-const kitSections = {
-  "imports": "import { create } from '@metaplex-kit/core'",
-  "setup": "// Initialize client\nconst client = createClient()",
-  "main": "// Create a new NFT asset\nconst asset = await create({\n  name: 'My NFT',\n  uri: 'https://example.com/metadata.json'\n})",
-  "output": "console.log('Asset created:', asset.publicKey)",
-  "full": "// [IMPORTS]\nimport { create } from '@metaplex-kit/core'\n// [/IMPORTS]\n\n// [SETUP]\n// Initialize client\nconst client = createClient()\n// [/SETUP]\n\n// [MAIN]\n// Create a new NFT asset\nconst asset = await create({\n  name: 'My NFT',\n  uri: 'https://example.com/metadata.json'\n})\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Asset created:', asset.publicKey)\n// [/OUTPUT]\n"
-}
-
 const umiSections = {
   "imports": "import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { create } from '@metaplex-foundation/mpl-core'\nimport { mplCore } from '@metaplex-foundation/mpl-core'",
   "setup": "// Initialize UMI\nconst umi = createUmi('https://api.devnet.solana.com')\n  .use(mplCore())",
@@ -54,13 +46,6 @@ export const metadata = {
 }
 
 export const examples = {
-  kit: {
-    framework: 'Kit',
-    language: 'javascript',
-    code: kitSections.full,
-    sections: kitSections,
-  },
-
   umi: {
     framework: 'Umi',
     language: 'javascript',

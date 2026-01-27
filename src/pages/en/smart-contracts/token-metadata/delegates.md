@@ -96,58 +96,21 @@ Let's go through each of these Metadata delegates in a bit more detail and provi
   - `isMutable`: toggles to `false` to make the asset immutable.
   - `tokenStandard`: can set the token standard if the asset was created before it was mandatory to set it.
 
-{% dialect-switcher title="Work with Authority Item delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateAuthorityItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateAuthorityItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: authorityItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-authority-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeAuthorityItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeAuthorityItemV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: authorityItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-authority-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated update" %}
-
-```ts
-import { updateAsAuthorityItemDelegateV2 } from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsAuthorityItemDelegateV2(umi, {
-  mint,
-  authority: authorityItemDelegate,
-  newUpdateAuthority,
-  isMutable: false,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-authority-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Collection Delegate
 
@@ -156,173 +119,54 @@ await updateAsAuthorityItemDelegateV2(umi, {
   - It can verify and unverify that Collection NFT on the item. It can only do this if the Collection NFT is already set on the item. Otherwise, there is no way of knowing that the item is part of the delegated Collection NFT.
   - It can clear the Collection NFT from the item.
 
-{% dialect-switcher title="Work with Collection delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateCollectionV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: collectionDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeCollectionV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: collectionDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Update collection on delegated asset" %}
-
-```ts
-import {
-  updateAsCollectionDelegateV2,
-  collectionToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsCollectionDelegateV2(umi, {
-  mint,
-  authority: collectionDelegate,
-  collection: collectionToggle('Set', [
-    { key: collectionMint, verified: false },
-  ]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Clear collection on item" %}
-
-```ts
-import {
-  updateAsCollectionDelegateV2,
-  collectionToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsCollectionDelegateV2(umi, {
-  mint,
-  delegateMint: collectionMint,
-  authority: collectionDelegate,
-  collection: collectionToggle('Clear'),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-clear" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Verify collection on item" %}
-
-```ts
-import {
-  verifyCollectionV1,
-  findMetadataPda,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await verifyCollectionV1(umi, {
-  metadata: findMetadataPda(umi, { mint }),
-  collectionMint,
-  authority: collectionDelegate,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-verify" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Unverify collection on item" %}
-
-```ts
-import {
-  unverifyCollectionV1,
-  findMetadataPda,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await unverifyCollectionV1(umi, {
-  metadata: findMetadataPda(umi, { mint }),
-  collectionMint,
-  authority: collectionDelegate,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-unverify" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Collection Item Delegate
 
 - The Delegate Authority can update a sub-set of the asset. It can set the `collection` attribute of the Metadata account.
 - Even if the asset is a Collection NFT, and contrary to the Collection Delegate, the Collection Item Delegate cannot affect the items of that collection.
 
-{% dialect-switcher title="Work with Collection Item delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateCollectionItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateCollectionItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: collectionItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeCollectionItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeCollectionItemV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: collectionItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated update" %}
-
-```ts
-import { updateAsCollectionItemDelegateV2 } from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsCollectionItemDelegateV2(umi, {
-  mint,
-  authority: collectionItemDelegate,
-  collection: collectionToggle('Set', [
-    { key: collectionMint, verified: false },
-  ]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Data Delegate
 
@@ -330,80 +174,25 @@ await updateAsCollectionItemDelegateV2(umi, {
 - Note that when updating the `creators` array inside the `data` object, it can only add and/or remove unverified creators.
 - When applied to a Collection NFT, the Delegate Authority can perform the same updates on the items inside that Collection.
 
-{% dialect-switcher title="Work with Data delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateDataV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateDataV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: dataDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeDataV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeDataV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: dataDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated update" %}
-
-```ts
-import {
-  updateAsDataDelegateV2,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateAsDataDelegateV2(umi, {
-  mint,
-  authority: dataDelegate,
-  data: { ...initialMetadata, name: 'Updated Name' },
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated update on item" %}
-
-```ts
-import {
-  updateAsDataDelegateV2,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateAsDataDelegateV2(umi, {
-  mint,
-  delegateMint: collectionMint,
-  authority: dataDelegate,
-  data: { ...initialMetadata, name: 'Updated Name' },
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-update-item" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Data Item Delegate
 
@@ -411,61 +200,21 @@ await updateAsDataDelegateV2(umi, {
 - Note that when updating the `creators` array inside the `data` object, it can only add and/or remove unverified creators.
 - Even if the asset is a Collection NFT, and contrary to the Data Delegate, the Data Item Delegate cannot affect the items of that collection.
 
-{% dialect-switcher title="Work with Data Item delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateDataItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateDataItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: dataItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeDataItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeDataItemV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: dataItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated update" %}
-
-```ts
-import {
-  updateAsDataItemDelegateV2,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateAsDataItemDelegateV2(umi, {
-  mint,
-  authority: dataItemDelegate,
-  data: { ...initialMetadata, name: 'Updated Name' },
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Programmable Config Delegate
 
@@ -473,82 +222,25 @@ await updateAsDataItemDelegateV2(umi, {
 - The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the PNFT.
 - When applied to a Collection NFT, the Delegate Authority can perform the same updates on the items inside that Collection.
 
-{% dialect-switcher title="Work with Programmable Config delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateProgrammableConfigV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateProgrammableConfigV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: programmableConfigDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeProgrammableConfigV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeProgrammableConfigV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: programmableConfigDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated update" %}
-
-```ts
-import {
-  updateAsAuthorityItemDelegateV2,
-  ruleSetToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-
-await updateAsProgrammableConfigDelegateV2(umi, {
-  mint,
-  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
-  authority: programmableConfigDelegate,
-  ruleSet: ruleSetToggle('Set', [ruleSet]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated update on item" %}
-
-```ts
-import {
-  updateAsAuthorityItemDelegateV2,
-  ruleSetToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-
-await updateAsProgrammableConfigDelegateV2(umi, {
-  mint,
-  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
-  delegateMint: collectionMint,
-  authority: programmableConfigDelegate,
-  ruleSet: ruleSetToggle('Set', [ruleSet]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-update-item" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Programmable Config Item Delegate
 
@@ -556,62 +248,21 @@ await updateAsProgrammableConfigDelegateV2(umi, {
 - The Delegate Authority can update the `programmableConfigs` attribute of the Metadata account but nothing else. This means it can update the `ruleSet` of the PNFT.
 - Even if the asset is a Collection NFT, and contrary to the Programmable Config Delegate, the Programmable Config Item Delegate cannot affect the items of that collection.
 
-{% dialect-switcher title="Work with Programmable Config Item delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateProgrammableConfigItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateProgrammableConfigItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: programmableConfigItemDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeProgrammableConfigItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeProgrammableConfigItemV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: programmableConfigItemDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated update" %}
-
-```ts
-import {
-  updateAsProgrammableConfigItemDelegateV2,
-  ruleSetToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-
-await updateAsProgrammableConfigItemDelegateV2(umi, {
-  mint,
-  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
-  authority: programmableConfigItemDelegate,
-  ruleSet: ruleSetToggle('Set', [ruleSet]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ## Token Delegates
 
@@ -721,104 +372,33 @@ Here are some key properties of the Standard Delegate:
 - The Delegate Authority can lock the asset — also known as "freezing" the asset on the Token program. Until the Delegate Authority unlocks (or "thaw") the asset, the owner cannot transfer it, burn it, or revoke the Delegate Authority. This is specific to the Standard Delegate and cannot be done with a native spl-token delegate.
 - When used with fungible assets, an amount greater than 1 can be provided to specify the number of tokens to delegate to the Delegate Authority.
 
-{% dialect-switcher title="Work with Standard delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateStandardV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateStandardV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeStandardV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeStandardV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated transfer" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated burn" %}
-
-```ts
-import { burnV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await burnV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenOwner: currentOwner,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-burn" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Lock (freeze)" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Unlock (thaw)" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Sale Delegate (PNFT only)
 
@@ -826,61 +406,21 @@ await unlockV1(umi, {
 - The Delegate Authority can transfer the PNFT to any address. Doing so will revoke the Delegate Authority.
 - As long as a Sale Delegate is set on a PNFT, the PNFT enters a special Token State called `Listed`. The `Listed` Token State is a softer variation of the `Locked` Token State. During that time, the owner cannot transfer or burn the PNFT. However, the owner can revoke the Sale Delegate at any time, which will remove the `Listed` Token State and make the PNFT transferable and burnable again.
 
-{% dialect-switcher title="Work with Sale delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateSaleV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateSaleV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: saleDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-sale-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeSaleV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeSaleV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: saleDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-sale-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated transfer" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: saleDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-sale-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Transfer Delegate (PNFT only)
 
@@ -888,61 +428,21 @@ await transferV1(umi, {
 - The Delegate Authority can transfer the PNFT to any address. Doing so will revoke the Delegate Authority.
 - Contrary to the Sale Delegate, when a Transfer Delegate is set, the owner can still transfer and burn the PNFT.
 
-{% dialect-switcher title="Work with Transfer delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: transferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-transfer-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: transferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-transfer-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated transfer" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: transferDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-transfer-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Locked Transfer Delegate (PNFT only)
 
@@ -950,89 +450,29 @@ await transferV1(umi, {
 - The Delegate Authority can lock the PNFT. Until the Delegate Authority unlocks the PNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
 - The Delegate Authority can transfer the PNFT to any address. Doing so will revoke the Delegate Authority and unlock the PNFT if it was locked.
 
-{% dialect-switcher title="Work with Locked Transfer delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateLockedTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateLockedTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeLockedTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeLockedTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated transfer" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: lockedTransferDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Lock" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Unlock" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Utility Delegate (PNFT only)
 
@@ -1040,161 +480,54 @@ await unlockV1(umi, {
 - The Delegate Authority can lock the PNFT. Until the Delegate Authority unlocks the PNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
 - The Delegate Authority can burn the PNFT.
 
-{% dialect-switcher title="Work with Utility delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateUtilityV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateUtilityV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeUtilityV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeUtilityV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Delegated burn" %}
-
-```ts
-import { burnV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await burnV1(umi, {
-  mint,
-  authority: utilityDelegate,
-  tokenOwner: currentOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-burn" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Lock" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Unlock" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Staking Delegate (PNFT only)
 
 - This delegate only works with Programmable Non-Fungibles.
 - The Delegate Authority can lock the PNFT. Until the Delegate Authority unlocks the PNFT, the owner cannot transfer it, burn it, or revoke the Delegate Authority.
 
-{% dialect-switcher title="Work with Staking delegates" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="Approve" %}
-
-```ts
-import { delegateStakingV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateStakingV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Revoke" %}
-
-```ts
-import { revokeStakingV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeStakingV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Lock" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="Unlock" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ## Legacy Delegates
 

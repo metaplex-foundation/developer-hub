@@ -15,89 +15,16 @@ description: Token Metadataでアセットを転送する方法を学習しま�
 
 ## NFTの転送
 
-{% dialect-switcher title="Transfer an NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: currentOwner,
-  tokenOwner: currentOwner.publicKey,
-  destinationOwner: newOwner.publicKey,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/transfer-nft" frameworks="umi,kit" /%}
 
 ## pNFTの転送
 
-以下のコードは、pNFTを新しい所有者に転送する例です。
+プログラマブルNFT（pNFT）は、転送中に処理する必要がある追加の認証ルールを持つ場合があります。命令は自動的にToken Recordアカウントを処理します。
 
-{% dialect-switcher title="Transfer a pNFT" %}
-{% dialect title="JavaScript" id="js" %}
+{% code-tabs-imported from="token-metadata/transfer-pnft" frameworks="umi,kit" /%}
 
-```ts
-import { getMplTokenAuthRulesProgramId } from "@metaplex-foundation/mpl-candy-machine";
-import {
-  fetchDigitalAssetWithAssociatedToken,
-  findTokenRecordPda,
-  TokenStandard,
-  transferV1,
-} from "@metaplex-foundation/mpl-token-metadata";
-import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
-import { publicKey, unwrapOptionRecursively } from "@metaplex-foundation/umi";
-import { base58 } from "@metaplex-foundation/umi/serializers";
+### 高度なpNFT転送
 
-// NFT Asset Mint ID
-const mintId = publicKey("11111111111111111111111111111111");
+複雑な認証ルールを持つpNFTの場合、追加のパラメータを提供する必要がある場合があります。
 
-// Token Accountを持つpNFT Assetを取得
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-  umi,
-  mintId,
-  umi.identity.publicKey
-);
-
-// 宛先ウォレット
-const destinationAddress = publicKey(
-  "22222222222222222222222222222222"
-);
-
-// 宛先ウォレットのToken Accountを計算
-const destinationTokenAccount = findAssociatedTokenPda(umi, {
-  mint: mintId,
-  owner: destinationAddress,
-});
-
-// 宛先ウォレットのToken Record Accountを計算
-const destinationTokenRecord = findTokenRecordPda(umi, {
-  mint: mintId,
-  token: destinationTokenAccount[0],
-});
-
-// pNFTを転送
-const { signature } = await transferV1(umi, {
-  mint: mintId,
-  destinationOwner: destinationAddress,
-  destinationTokenRecord: destinationTokenRecord,
-  tokenRecord: assetWithToken.tokenRecord?.publicKey,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  // pNFTアセットに認証ルールがあるかチェック
-  authorizationRules:
-    unwrapOptionRecursively(assetWithToken.metadata.programmableConfig)
-      ?.ruleSet || undefined,
-  // 認証ルールプログラムID
-  authorizationRulesProgram: getMplTokenAuthRulesProgramId(umi),
-  // 一部のpNFTは設定されている場合に認証データが必要な場合があります
-  authorizationData: undefined,
-}).sendAndConfirm(umi);
-
-console.log("Signature: ", base58.deserialize(signature));
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/transfer-pnft-advanced" frameworks="umi,kit" /%}

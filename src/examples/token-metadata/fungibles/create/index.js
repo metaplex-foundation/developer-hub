@@ -7,6 +7,14 @@
  * Edit the native .js and .rs files, then run: node scripts/build-examples.js
  */
 
+const kitSections = {
+  "imports": "import { generateKeyPairSigner } from '@solana/signers';\nimport { createFungible } from '@metaplex-foundation/mpl-token-metadata-kit';",
+  "setup": "// Assuming rpc, rpcSubscriptions, and sendAndConfirmInstructions are set up\n// See getting-started for full setup\n\nconst mint = await generateKeyPairSigner();\nconst authority = await generateKeyPairSigner(); // Your wallet",
+  "main": "// Create a fungible token with metadata and mint initial supply\nconst createAndMintIx = await createFungible({\n  mint,\n  authority,\n  payer: authority,\n  name: 'My Fungible Token',\n  symbol: 'MFT',\n  uri: 'https://example.com/my-token-metadata.json',\n  sellerFeeBasisPoints: 0,\n  decimals: 9,\n  tokenOwner: authority.address,\n  amount: 1_000_000_000_000_000n, // 1,000,000 tokens with 9 decimals\n});\n\n// Send the instruction (createFungible returns a single combined instruction)\nawait sendAndConfirmInstructions([createAndMintIx], [mint, authority]);",
+  "output": "console.log('Fungible token created:', mint.address);\nconsole.log('Initial supply minted to:', authority.address);",
+  "full": "// [IMPORTS]\nimport { generateKeyPairSigner } from '@solana/signers';\nimport { createFungible } from '@metaplex-foundation/mpl-token-metadata-kit';\n// [/IMPORTS]\n\n// [SETUP]\n// Assuming rpc, rpcSubscriptions, and sendAndConfirmInstructions are set up\n// See getting-started for full setup\n\nconst mint = await generateKeyPairSigner();\nconst authority = await generateKeyPairSigner(); // Your wallet\n// [/SETUP]\n\n// [MAIN]\n// Create a fungible token with metadata and mint initial supply\nconst createAndMintIx = await createFungible({\n  mint,\n  authority,\n  payer: authority,\n  name: 'My Fungible Token',\n  symbol: 'MFT',\n  uri: 'https://example.com/my-token-metadata.json',\n  sellerFeeBasisPoints: 0,\n  decimals: 9,\n  tokenOwner: authority.address,\n  amount: 1_000_000_000_000_000n, // 1,000,000 tokens with 9 decimals\n});\n\n// Send the instruction (createFungible returns a single combined instruction)\nawait sendAndConfirmInstructions([createAndMintIx], [mint, authority]);\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Fungible token created:', mint.address);\nconsole.log('Initial supply minted to:', authority.address);\n// [/OUTPUT]\n"
+}
+
 const umiSections = {
   "imports": "// npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/mpl-toolbox @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults\nimport {\n  createFungible,\n  mplTokenMetadata,\n} from '@metaplex-foundation/mpl-token-metadata'\nimport {\n  createTokenIfMissing,\n  findAssociatedTokenPda,\n  mintTokensTo,\n} from '@metaplex-foundation/mpl-toolbox'\nimport {\n  generateSigner,\n  keypairIdentity,\n  percentAmount,\n  some,\n} from '@metaplex-foundation/umi'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { readFileSync } from 'fs'",
   "setup": "// Initialize Umi with your RPC endpoint\nconst umi = createUmi('https://api.devnet.solana.com').use(mplTokenMetadata())\n\n// Load your wallet keypair\nconst wallet = '<your wallet file path>'\nconst secretKey = JSON.parse(readFileSync(wallet, 'utf-8'))\nconst keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))\numi.use(keypairIdentity(keypair))\n\n// Generate a new mint account\nconst mint = generateSigner(umi)",
@@ -38,6 +46,13 @@ export const metadata = {
 }
 
 export const examples = {
+  kit: {
+    framework: 'Kit',
+    language: 'javascript',
+    code: kitSections.full,
+    sections: kitSections,
+  },
+
   umi: {
     framework: 'Umi',
     language: 'javascript',

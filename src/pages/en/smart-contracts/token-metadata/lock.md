@@ -27,60 +27,11 @@ To lock an asset, the delegate may use the **Lock** instruction of the Token Met
 - **Authority**: The signer that authorizes the lock. This must be the delegated authority.
 - **Token Standard**: The standard of the asset being locked. Note that the Token Metadata program does not explicitly require this argument but our SDKs do so they can provide adequate default values for most of the other parameters.
 
-{% dialect-switcher title="Lock an asset" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/lock-nft" frameworks="umi,kit" /%}
 
 ### pNFT
 
-```ts
-import {
-  fetchDigitalAssetWithAssociatedToken,
-  lockV1,
-  TokenStandard,
-} from "@metaplex-foundation/mpl-token-metadata";
-import { publicKey } from "@metaplex-foundation/umi";
-
-// Mint ID of the pNFT Asset
-const mintId = publicKey("11111111111111111111111111111111");
-
-// Fetch pNFT Asset with Token Accounts
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-  umi,
-  mintId,
-  umi.identity.publicKey
-);
-
-// Send lock instruction
-const { signature } = await lockV1(umi, {
-  // Mint ID of the pNFT Asset
-  mint: mintId,
-  // Update Authority or Delegate Authority
-  authority: umi.identity,
-  // Token Standard
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  // Owner of the pNFT Asset
-  tokenOwner: assetWithToken.token.owner,
-  // Token Account of the pNFT Asset
-  token: assetWithToken.token.publicKey,
-  // Token Record of the pNFT Asset
-  tokenRecord: assetWithToken.tokenRecord?.publicKey,
-}).sendAndConfirm(umi);
-
-console.log("Signature: ", base58.deserialize(signature));
-```
+{% code-tabs-imported from="token-metadata/lock-pnft" frameworks="umi,kit" /%}
 
 ## Unlock an Asset
 
@@ -88,60 +39,8 @@ console.log("Signature: ", base58.deserialize(signature));
 
 Reciprocally, the delegate may use the **Unlock** instruction of the Token Metadata program to unlock an asset. This instruction accepts the same attributes as the **Lock** instruction and can be used in the same way.
 
-{% dialect-switcher title="Unlock an NFT Asset" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unlock-nft" frameworks="umi,kit" /%}
 
 ### pNFT
 
-{% dialect-switcher title="Unlock a pNFT Asset" %}
-{% dialect title="JavaScript" id="js" %}
-```ts
-import {
-    fetchDigitalAssetWithAssociatedToken,
-    TokenStandard,
-    unlockV1
-} from "@metaplex-foundation/mpl-token-metadata";
-import { publicKey } from "@metaplex-foundation/umi";
-import { base58 } from "@metaplex-foundation/umi/serializers";
-
-// Mint pNFT ID of the Asset
-const mintId = publicKey("11111111111111111111111111111111");
-
-// Fetch the mint token accounts
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-  umi,
-  mintId,
-  umi.identity.publicKey
-);
-
-// Send unlock instruction
-const { signature } = await unlockV1(umi, {
-  // Mint ID of the pNFT Asset
-  mint: mintId,
-  // Update Authority or Delegate Authority
-  authority: umi.identity,
-  // Token Standard
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  // Owner of the pNFT Assets
-  tokenOwner: assetWithToken.token.owner,
-  // Token Account of the pNFT Asset
-  token: assetWithToken.token.publicKey,
-  // Token Record of the pNFT Asset
-  tokenRecord: assetWithToken.tokenRecord?.publicKey,
-}).sendAndConfirm(umi);
-
-console.log("Signature: ", base58.deserialize(signature));
-```
+{% code-tabs-imported from="token-metadata/unlock-pnft" frameworks="umi,kit" /%}

@@ -36,7 +36,7 @@ const curlSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "# Fetch an NFT using the DAS API\ncurl -X POST https://api.devnet.solana.com \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"getAsset\",\n    \"params\": {\n      \"id\": \"YOUR_NFT_ADDRESS\"\n    }\n  }'\n"
+  "full": "# Fetch an NFT using the DAS API\ncurl -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"getAsset\",\n    \"params\": {\n      \"id\": \"<NFT Mint Address>\"\n    }\n  }' \\\n  https://api.devnet.solana.com"
 }
 
 export const metadata = {

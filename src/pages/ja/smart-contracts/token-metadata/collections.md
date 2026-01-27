@@ -193,25 +193,7 @@ Collection
 
 Collection NFTの作成は、通常のNFTの作成と非常に似ています。唯一の違いは、前のセクションで見た通り、`CollectionDetails`フィールドを設定する必要があることです。一部のSDKでは、NFTを作成する際に`isCollection`属性を要求することでこれをカプセル化しています。
 
-{% dialect-switcher title="Create a Collection NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import { createNft } from '@metaplex-foundation/mpl-token-metadata'
-
-const collectionMint = generateSigner(umi)
-await createNft(umi, {
-  mint: collectionMint,
-  name: 'My Collection',
-  uri: 'https://example.com/my-collection.json',
-  sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
-  isCollection: true,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/create-collection" frameworks="umi,kit" /%}
 
 ## ネストされたCollection NFT
 
@@ -419,50 +401,10 @@ NFTに`Collection`属性が設定されると、Collection NFTの権限がToken 
 
 以下は、Token MetadataでCollection NFTを検証するためのSDKの使用方法です。
 
-{% dialect-switcher title="Verify a Collection NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { publicKey } from "@metaplex-foundation/umi";
-import { verifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
-
-// 後で使用するmetadata PDAを最初に見つける
-const metadata = findMetadataPda(umi, { 
-  mint: publicKey("...")
-});
-
-await verifyCollectionV1(umi, {
-  metadata,
-  collectionMint,
-  authority: collectionAuthority,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/verify-collection" frameworks="umi,kit" /%}
 
 ### 未検証
 
 相互に、Collection NFTの権限は、そのコレクションの一部である任意のNFTを未検証にすることができます。これは、Token Metadataプログラムに**Unverify**命令を送信することで行われ、その属性は**Verify**命令と同じです。
 
-{% dialect-switcher title="Unverify a Collection NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { publicKey } from "@metaplex-foundation/umi";
-import { unverifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
-
-// 後で使用するmetadata PDAを最初に見つける
-const metadata = findMetadataPda(umi, { 
-  mint: publicKey("...")
-});
-
-await unverifyCollectionV1(umi, {
-  metadata,
-  collectionMint,
-  authority: collectionAuthority,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unverify-collection" frameworks="umi,kit" /%}

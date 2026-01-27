@@ -20,7 +20,7 @@ updated: '11-25-2025'
 
 以下代码是一个完整可运行的示例。可自定义的参数如下所示。有关代币创建的更多详情，请参阅[Token Metadata程序](/zh/smart-contracts/token-metadata/mint#minting-tokens)页面。
 
-{% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi,cli" /%}
+{% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi,kit,cli" /%}
 
 ## 参数
 

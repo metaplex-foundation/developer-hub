@@ -7,6 +7,14 @@
  * Edit the native .js and .rs files, then run: node scripts/build-examples.js
  */
 
+const kitSections = {
+  "imports": "import { fetchDigitalAsset } from '@metaplex-foundation/mpl-token-metadata-kit';",
+  "setup": "// Assuming rpc is set up\n// See getting-started for full setup\n\nconst mintAddress = 'YOUR_TOKEN_MINT_ADDRESS'; // Your fungible token mint",
+  "main": "// Fetch the fungible token's metadata\nconst asset = await fetchDigitalAsset(rpc, mintAddress);",
+  "output": "console.log('Token Name:', asset.metadata.name);\nconsole.log('Token Symbol:', asset.metadata.symbol);\nconsole.log('Token URI:', asset.metadata.uri);\nconsole.log('Decimals:', asset.mint.decimals);\nconsole.log('Supply:', asset.mint.supply);",
+  "full": "// [IMPORTS]\nimport { fetchDigitalAsset } from '@metaplex-foundation/mpl-token-metadata-kit';\n// [/IMPORTS]\n\n// [SETUP]\n// Assuming rpc is set up\n// See getting-started for full setup\n\nconst mintAddress = 'YOUR_TOKEN_MINT_ADDRESS'; // Your fungible token mint\n// [/SETUP]\n\n// [MAIN]\n// Fetch the fungible token's metadata\nconst asset = await fetchDigitalAsset(rpc, mintAddress);\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Token Name:', asset.metadata.name);\nconsole.log('Token Symbol:', asset.metadata.symbol);\nconsole.log('Token URI:', asset.metadata.uri);\nconsole.log('Decimals:', asset.mint.decimals);\nconsole.log('Supply:', asset.mint.supply);\n// [/OUTPUT]\n"
+}
+
 const umiSections = {
   "imports": "// npm install @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults\nimport { publicKey } from '@metaplex-foundation/umi'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport {\n  fetchDigitalAsset,\n  mplTokenMetadata\n} from '@metaplex-foundation/mpl-token-metadata'",
   "setup": "// Initialize Umi with your RPC endpoint\nconst umi = createUmi('https://api.devnet.solana.com').use(mplTokenMetadata())\n\n// The mint address of the token you want to fetch\nconst mintAddress = publicKey('YOUR_TOKEN_MINT_ADDRESS')",
@@ -28,7 +36,7 @@ const curlSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "# Get a single token by mint address\ncurl -X POST https://api.devnet.solana.com \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"getAsset\",\n    \"params\": {\n      \"id\": \"YOUR_TOKEN_MINT_ADDRESS\",\n      \"displayOptions\": {\n        \"showFungible\": true\n      }\n    }\n  }'\n\n"
+  "full": "curl -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"getAsset\",\n    \"params\": {\n      \"id\": \"<Mint Address>\"\n    }\n  }' \\\n  https://api.devnet.solana.com"
 }
 
 export const metadata = {
@@ -38,6 +46,13 @@ export const metadata = {
 }
 
 export const examples = {
+  kit: {
+    framework: 'Kit',
+    language: 'javascript',
+    code: kitSections.full,
+    sections: kitSections,
+  },
+
   umi: {
     framework: 'Umi',
     language: 'javascript',

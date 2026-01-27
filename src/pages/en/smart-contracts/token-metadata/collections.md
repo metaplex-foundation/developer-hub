@@ -193,25 +193,7 @@ With no collection
 
 Creating a Collection NFT is very similar to creating a Regular NFT. The only difference is that we must set the `CollectionDetails` field as seen in the previous section. Some of our SDKs encapsulate this by requesting a `isCollection` attribute when creating an NFT.
 
-{% dialect-switcher title="Create a Collection NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import { createNft } from '@metaplex-foundation/mpl-token-metadata'
-
-const collectionMint = generateSigner(umi)
-await createNft(umi, {
-  mint: collectionMint,
-  name: 'My Collection',
-  uri: 'https://example.com/my-collection.json',
-  sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
-  isCollection: true,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/create-collection" frameworks="umi,kit" /%}
 
 ## Nested Collection NFTs
 
@@ -419,50 +401,10 @@ Once the `Collection` attribute is set on an NFT, an authority of the Collection
 
 Here is how you can use our SDKs to verify a Collection NFT on Token Metadata.
 
-{% dialect-switcher title="Verify a Collection NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { publicKey } from "@metaplex-foundation/umi";
-import { verifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
-
-// first find the metadata PDA to use later
-const metadata = findMetadataPda(umi, { 
-  mint: publicKey("...")
-});
-
-await verifyCollectionV1(umi, {
-  metadata,
-  collectionMint,
-  authority: collectionAuthority,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/verify-collection" frameworks="umi,kit" /%}
 
 ### Unverify
 
 Reciprocally, the authority of a Collection NFT can unverify any NFTs that are part of its collection. This is done by sending an **Unverify** instruction to the Token Metadata program whose attributes are the same as the **Verify** instruction.
 
-{% dialect-switcher title="Unverify a Collection NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { publicKey } from "@metaplex-foundation/umi";
-import { unverifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
-
-// first find the metadata PDA to use later
-const metadata = findMetadataPda(umi, { 
-  mint: publicKey("...")
-});
-
-await unverifyCollectionV1(umi, {
-  metadata,
-  collectionMint,
-  authority: collectionAuthority,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unverify-collection" frameworks="umi,kit" /%}

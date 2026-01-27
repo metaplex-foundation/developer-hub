@@ -83,101 +83,29 @@ description: Token MetadataでNFTエディションを印刷する方法を学�
 {% edge from="edition-parent" to="master-edition" dashed=true arrow="none" fromPosition="left" toPosition="left" /%}
 {% /diagram %}
 
-## 印刷可能NFTの作成
+## Master Edition NFTの設定
 
-印刷可能NFTを作成するには、通常のNFTを作成するときと同様のプロセスに従いますが、**maxSupply**属性を設定します。
+印刷可能なNFTを作成するには、Token Metadataプログラムの[**Create**命令](/ja/smart-contracts/token-metadata/mint#creating-accounts)の**Print Supply**属性を設定する必要があります。これにより、前のセクションで見たように**Master Edition**アカウントの**Max Supply**属性が設定されます。この属性は以下のいずれかになります：
 
-{% dialect-switcher title="Create a Printable NFT" %}
-{% dialect title="JavaScript" id="js" %}
+- `Zero`: NFTは印刷不可能です。
+- `Limited(x)`: NFTは印刷可能で、`x`エディションの固定供給量を持ちます。
+- `Unlimited`: NFTは印刷可能で、無制限の供給量を持ちます。
 
-```ts
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import { createNft } from '@metaplex-foundation/mpl-token-metadata'
+SDKを使用して印刷可能なNFTを作成する方法を以下に示します。
 
-const mint = generateSigner(umi)
-await createNft(umi, {
-  mint,
-  name: 'My Printable NFT',
-  uri: 'https://example.com/my-printable-nft.json',
-  sellerFeeBasisPoints: percentAmount(5.5),
-  maxSupply: 10, // 10エディションの最大供給量
-  // または無制限供給の場合は maxSupply: null
-}).sendAndConfirm(umi)
-```
+{% code-tabs-imported from="token-metadata/create-master-edition" frameworks="umi,kit" /%}
 
-{% /dialect %}
-{% /dialect-switcher %}
+## Master Edition NFTからのエディション印刷
 
-## エディションの印刷
+**Max Supply**に達していない印刷可能なNFTがあれば、そこから新しいエディションを印刷できます。これはToken Metadataプログラムの**Print**命令を呼び出すことで行われます。この命令は以下の属性を受け入れます：
 
-印刷可能NFTが作成されると、所有者（または適切な権限）はそこからエディションを印刷できます。
+- **Master Edition Mint**: 印刷可能なNFTのMintアカウントのアドレス。
+- **Edition Mint**: 新しいエディションNFTのMintアカウントのアドレス。これは通常、アカウントが存在しない場合は命令によって作成されるため、新しく生成されたSignerです。
+- **Master Token Account Owner**: Signerとしての印刷可能なNFTの所有者。印刷可能なNFTの所有者のみが、そこから新しいエディションを印刷できます。
+- **Edition Token Account Owner**: 新しいエディションNFTの所有者のアドレス。
+- **Edition Number**: 印刷する新しいエディションNFTのエディション番号。これは通常、**Master Edition**アカウントの現在の**Supply**に1を加えた値です。
+- **Token Standard**: 印刷可能なNFTのトークン標準。`NonFungible`または`ProgrammableNonFungible`です。
 
-{% dialect-switcher title="Print an Edition" %}
-{% dialect title="JavaScript" id="js" %}
+SDKを使用して印刷可能なNFTから新しいエディションを印刷する方法を以下に示します。
 
-```ts
-import { 
-  generateSigner,
-  publicKey 
-} from '@metaplex-foundation/umi'
-import { printV2 } from '@metaplex-foundation/mpl-token-metadata'
-
-// 新しいエディション用のMint
-const editionMint = generateSigner(umi)
-
-// 元の印刷可能NFTのMintアドレス
-const originalMint = publicKey('...')
-
-await printV2(umi, {
-  masterTokenAccountOwner: umi.identity,
-  masterEditionMint: originalMint,
-  editionMint,
-  editionTokenAccountOwner: umi.identity,
-  editionNumber: 1, // エディション番号（1から開始）
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-## プログラマブルNFTエディション
-
-プログラマブルNFTのエディションを印刷する場合、追加の考慮事項があります：
-
-{% dialect-switcher title="Print pNFT Edition" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import {
-  generateSigner,
-  publicKey,
-  unwrapOptionRecursively
-} from '@metaplex-foundation/umi'
-import { 
-  printV2,
-  fetchDigitalAsset,
-  TokenStandard
-} from '@metaplex-foundation/mpl-token-metadata'
-
-// 元のpNFTのデータを取得
-const originalMint = publicKey('...')
-const originalAsset = await fetchDigitalAsset(umi, originalMint)
-
-const editionMint = generateSigner(umi)
-
-await printV2(umi, {
-  masterTokenAccountOwner: umi.identity,
-  masterEditionMint: originalMint,
-  editionMint,
-  editionTokenAccountOwner: umi.identity,
-  editionNumber: 1,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  // 認証ルールがある場合
-  authorizationRules: unwrapOptionRecursively(
-    originalAsset.metadata.programmableConfig
-  )?.ruleSet,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/print-edition" frameworks="umi,kit" /%}

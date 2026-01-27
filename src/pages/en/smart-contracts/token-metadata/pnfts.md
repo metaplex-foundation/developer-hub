@@ -89,61 +89,29 @@ An alternative is generate the token record PDA address using the mint ID and th
 
 You can fetch all accounts needed with the `fetchDigitalAssetWithAssociatedToken` function which returns data such as the pNFT metadata account, the token account, and the token record account.
 
-```ts
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-    // Umi instance
-    umi,
-    // Mint ID
-    publicKey("11111111111111111111111111111111"),
-    // Owner
-    publicKey("22222222222222222222222222222222")
-);
-```
+{% code-tabs-imported from="token-metadata/pnft-fetch-with-token" frameworks="umi,kit" /%}
 
 #### Token Record PDA
 
-Generates the PDA address for the `tokenRecord` account with the `mintId` and `tokenAccount` of the wallet the pNFT asset is stored in.  
+Generates the PDA address for the `tokenRecord` account with the `mintId` and `tokenAccount` of the wallet the pNFT asset is stored in.
 
-```ts
-const tokenRecordPda = findTokenRecordPda(umi, {
-    // pNFT mint ID
-    mint: publicKey("11111111111111111111111111111111")s,
-    // Token Account
-    token: publicKey("22222222222222222222222222222222"),
-});
-```
+{% code-tabs-imported from="token-metadata/pnft-find-token-record-pda" frameworks="umi,kit" /%}
 
 ### RuleSet
 
-If you have the `metadata` account data available you will be able to use an `unwrap` to check for the `programableConfig` field on the metadata account.
+If you have the `metadata` account data available you can check for the `programmableConfig` field on the metadata account to get the rule set.
 
-```ts
-const ruleSet = unwrapOptionRecursively(assetWithToken.metadata.programmableConfig)?.ruleSet
-```
+{% code-tabs-imported from="token-metadata/pnft-get-ruleset" frameworks="umi,kit" /%}
 
 ### Authorization Rules Program
 
-If you have a `ruleSet` set on your pNFT Asset you will need to pass in the **Authorization Rules Program ID** so the `ruleSet` can be validated. There are two was to get this ID, either from the `mpl-token-auth-rules` npm package or by manually pasting in the ID.
+If you have a `ruleSet` set on your pNFT Asset you will need to pass in the **Authorization Rules Program ID** so the `ruleSet` can be validated.
 
-#### mpl-token-auth-rules
-
-```ts
-const authorizationRulesProgram = getMplTokenAuthRulesProgramId(umi)
-```
-or
-
-#### Program Address
-```ts
-const authorizationRulesProgram = pubicKey("auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg")
-```
+{% code-tabs-imported from="token-metadata/pnft-auth-rules-program" frameworks="umi,kit" /%}
 
 ### Authorization Data
 
-If you have a `ruleSet` on your pNFT Asset that requires additional data for validation you would pass it in here.
-
-```ts
-const = authorizationData: { payload: ... },
-```
+If you have a `ruleSet` on your pNFT Asset that requires additional data for validation you would pass it in as `authorizationData: { payload: ... }` in the instruction parameters.
 
 ## Enforcing rules on any operation
 
