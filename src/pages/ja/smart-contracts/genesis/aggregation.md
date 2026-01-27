@@ -16,6 +16,25 @@ APIはレート制限付きのパブリックAPIです。認証は不要です�
 https://api.metaplex.com/v1
 ```
 
+## ネットワーク選択
+
+デフォルトでは、APIはSolanaメインネットからデータを返します。代わりにdevnetのローンチを照会するには、`network`クエリパラメータを追加します：
+
+```
+?network=solana-devnet
+```
+
+**例：**
+
+```bash
+# メインネット（デフォルト）
+curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
+
+# Devnet
+curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN?network=solana-devnet"
+```
+
+
 ## ユースケース
 
 - **`/launches/{genesis_pubkey}`** - オンチェーンイベントやトランザクションログからのgenesisアドレスがある場合に使用します。

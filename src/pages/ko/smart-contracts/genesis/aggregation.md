@@ -16,6 +16,24 @@ API는 레이트 리밋이 있는 공개 API입니다. 인증이 필요하지 �
 https://api.metaplex.com/v1
 ```
 
+## 네트워크 선택
+
+기본적으로 API는 Solana 메인넷에서 데이터를 반환합니다. devnet 런칭을 조회하려면 `network` 쿼리 파라미터를 추가하세요:
+
+```
+?network=solana-devnet
+```
+
+**예시:**
+
+```bash
+# 메인넷 (기본값)
+curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
+
+# Devnet
+curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN?network=solana-devnet"
+```
+
 ## 사용 사례
 
 - **`/launches/{genesis_pubkey}`** - 온체인 이벤트나 트랜잭션 로그에서 얻은 genesis 주소가 있을 때 사용합니다.
