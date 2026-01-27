@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/generate-llms-txt.mjs && next build",
     "start": "next start",
     "lint": "next lint",
     "sitemap": "node generate-sitemap.mjs",
     "validate-translations": "node scripts/validate-translations.js",
-    "build-examples": "node scripts/build-examples.js"
+    "build-examples": "node scripts/build-examples.js",
+    "generate-llms": "node scripts/generate-llms-txt.mjs"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {

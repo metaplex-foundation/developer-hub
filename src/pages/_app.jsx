@@ -35,6 +35,12 @@ function AppContent({ Component, pageProps }) {
         metaTitle={page.metaTitle}
         locale={page.locale}
         product={page.product?.path}
+        productName={page.product?.name}
+        navigationGroup={page.activeSection?.navigationGroup?.title}
+        sectionTitle={page.activeSection?.title}
+        created={page.created}
+        updated={page.updated}
+        isHomePage={page.pathname === '/'}
       />
 
       <DialectProvider>
