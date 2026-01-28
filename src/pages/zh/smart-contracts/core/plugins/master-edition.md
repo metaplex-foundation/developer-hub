@@ -1,22 +1,47 @@
 ---
-title: 主版本插件
-metaTitle: 主版本插件 | Core
-description: 了解 MPL Core 主版本插件。
+title: Master Edition插件
+metaTitle: Master Edition插件 | Metaplex Core
+description: 使用Master Edition插件将版本资产分组到集合中。存储印刷系列和限量版的最大供应量和版本元数据。
 ---
 
-主版本插件是一个`权限管理`插件，与 Core 集合一起使用来分组[版本](/zh/smart-contracts/core/plugins/edition)、提供来源证明并存储最大版本供应量。与版本插件一起，这些版本可以与 [Metaplex Token Metadata 中的版本概念](/zh/smart-contracts/token-metadata/print)相比较。
+**Master Edition插件**将编号的版本资产分组到集合中。存储最大供应量、版本名称和URI，以创建"限量100份"等印刷系列。 {% .lead %}
 
-主版本插件适用于以下领域：
+{% callout title="学习内容" %}
 
-- 版本分组
-- 提供来源证明
+- 向集合添加Master Edition
+- 配置最大供应量和元数据
+- 将Edition资产组合在一起
+- 了解印刷工作流程
 
-{% callout type="note" title="预期用途" %}
+{% /callout %}
 
-我们建议
+## 概述
 
-- 使用主版本插件对版本进行分组
-- 使用带有版本守卫的 Candy Machine 自动处理编号。
+**Master Edition**插件是一个用于集合的权限管理插件，用于将[Edition](/zh/smart-contracts/core/plugins/edition)资产分组在一起。存储最大供应量和可选的版本特定元数据。
+
+- 权限管理（更新权限控制）
+- 仅适用于集合（不适用于资产）
+- 值仅供参考，不强制执行
+- 与Candy Machine一起使用以自动创建版本
+
+## 范围外
+
+供应量强制执行（使用Candy Machine守卫）、单个版本号（在资产上使用Edition插件）和自动铸造。
+
+## 快速开始
+
+**跳转到：** [创建集合](#creating-a-collection-with-the-master-edition-plugin) · [更新插件](#update-the-master-edition-plugin)
+
+1. 创建带有Master Edition插件和最大供应量的集合
+2. 铸造带有Edition插件的资产（编号1、2、3...）
+3. 根据需要更新最大供应量或元数据
+
+{% callout type="note" title="推荐用法" %}
+
+建议：
+
+- 使用Master Edition插件对版本进行分组
+- 使用带有Edition Guard的Candy Machine自动处理编号
 
 {% /callout %}
 
@@ -24,22 +49,22 @@ description: 了解 MPL Core 主版本插件。
 
 |                     |     |
 | ------------------- | --- |
-| MPL Core 资产      | ❌  |
-| MPL Core 集合 | ✅  |
+| MPL Core Asset      | ❌  |
+| MPL Core Collection | ✅  |
 
 ## 参数
 
-| 参数       | 值                | 用途                                                                         |
-| --------- | -------------------- | ------------------------------------------------------------------------------- |
-| maxSupply | Option<number> (u32) | 指示将存在的最大印刷品数量。可选以允许开放版本 |
-| name      | Option<String>       | 版本的名称（如果与集合名称不同）                      |
-| uri       | Option<String>       | 版本的 URI（如果与集合 URI 不同）                       |
+| 参数      | 值                   | 用途                                                         |
+| --------- | -------------------- | ----------------------------------------------------------- |
+| maxSupply | Option<number> (u32) | 指示最大印刷数量。可选以允许开放版本 |
+| name      | Option<String>       | 版本名称（如果与集合名称不同）                   |
+| uri       | Option<String>       | 版本的URI（如果与集合URI不同）                   |
 
-这些值可以由权限随时更改。它们纯粹是信息性的，不会被强制执行。
+这些值可以由权限者随时更改。它们纯粹是信息性的，不强制执行。
 
-## 使用主版本插件创建集合
+## 创建带有Master Edition插件的集合
 
-{% dialect-switcher title="使用主版本插件创建 MPL Core 集合" %}
+{% dialect-switcher title="创建带有Master Edition插件的MPL Core集合" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -121,11 +146,11 @@ pub async fn create_collection_with_plugin() {
 
 {% /dialect-switcher %}
 
-## 更新主版本插件
+## 更新Master Edition插件
 
-如果主版本插件是可变的，它可以像其他集合插件一样更新：
+如果Master Edition插件是可变的，可以像其他集合插件一样进行更新：
 
-{% dialect-switcher title="更新主版本插件" %}
+{% dialect-switcher title="更新Master Edition插件" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -152,3 +177,74 @@ _即将推出_
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## 常见错误
+
+### `Cannot add to Asset`
+
+Master Edition仅适用于集合，不适用于单个资产。对于资产，请使用Edition插件。
+
+### `Authority mismatch`
+
+只有更新权限才能添加或更新Master Edition插件。
+
+## 注意事项
+
+- 所有值（maxSupply、name、uri）仅供参考，不强制执行
+- 使用Candy Machine守卫来强制执行实际供应量限制
+- name/uri为版本特定品牌覆盖集合元数据
+- 权限者可随时更新
+
+## 快速参考
+
+### 参数
+
+| 参数 | 类型 | 必需 | 描述 |
+|----------|------|----------|-------------|
+| `maxSupply` | `Option<u32>` | 否 | 最大版本数（开放版本为null） |
+| `name` | `Option<String>` | 否 | 版本特定名称 |
+| `uri` | `Option<String>` | 否 | 版本特定元数据URI |
+
+### 版本设置模式
+
+| 步骤 | 操作 | 插件 |
+|------|--------|--------|
+| 1 | 创建集合 | Master Edition（最大供应量） |
+| 2 | 铸造资产 | Edition（编号1、2、3...） |
+| 3 | 验证 | 检查版本号和供应量 |
+
+## 常见问题
+
+### Master Edition是否强制执行最大供应量？
+
+否。`maxSupply`仅供参考。要在铸造时实际强制供应量限制，请使用带有适当守卫的Candy Machine。
+
+### Master Edition的name/uri与集合的name/uri有什么区别？
+
+Master Edition的name/uri可以提供与基础集合不同的版本特定元数据。例如，集合可能是"抽象艺术系列"，而Master Edition名称可以是"2024年限量印刷版"。
+
+### 我可以创建开放版本（无限供应）吗？
+
+可以。将`maxSupply`设置为`null`或完全省略。这表示没有定义限制的开放版本。
+
+### 我需要同时使用Master Edition和Edition插件吗？
+
+为了正确的印刷跟踪，是的。Master Edition应用于集合（分组和供应信息），Edition应用于每个资产（单个编号）。它们协同工作。
+
+### 我可以将Master Edition添加到现有集合吗？
+
+可以，与资产上的Edition插件不同，Master Edition可以使用`addCollectionPlugin`添加到现有集合。
+
+## 术语表
+
+| 术语 | 定义 |
+|------|------------|
+| **Master Edition** | 对版本进行分组并存储供应量的集合插件 |
+| **Edition** | 存储单个版本号的资产插件 |
+| **Open Edition** | 没有最大供应量限制的版本系列 |
+| **Provenance** | 来源和所有权历史记录 |
+| **maxSupply** | 最大版本数（信息性） |
+
+---
+
+*由Metaplex Foundation维护 · 2026年1月最后验证 · 适用于@metaplex-foundation/mpl-core*

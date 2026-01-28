@@ -1,15 +1,66 @@
 ---
 title: Attribute Plugin
-metaTitle: Attribute Plugin | Core
-description: The Attribute Plugin stores onchain JSON to an Asset or Collection readable by onchain programs. Learn how to utilize this plugin for gaming and data storage.
+metaTitle: Attribute Plugin | Metaplex Core
+description: Store on-chain key-value data on Core NFT Assets. Use the Attributes plugin for game stats, traits, and any data that needs to be readable by on-chain programs.
 ---
 
-The Attribute Plugin is a `Authority Managed` plugin that can store key value pairs of data within the asset.
+The **Attributes Plugin** stores key-value pairs directly on-chain within Core Assets or Collections. Perfect for game stats, traits, and any data that on-chain programs need to read. {% .lead %}
 
-The Attribute Plugin will work in areas such as:
+{% callout title="What You'll Learn" %}
 
-- Storing on chain attributes/traits of the Asset which can be read by on chain programs.
-- Storing health and other statistical data that can be modified by a game/program.
+- Add on-chain attributes to Assets and Collections
+- Store and update key-value pairs
+- Read attributes from on-chain programs
+- Use cases: game stats, traits, access levels
+
+{% /callout %}
+
+## Summary
+
+The **Attributes Plugin** is an Authority Managed plugin that stores key-value string pairs on-chain. Unlike off-chain metadata, these attributes are readable by Solana programs and indexed by DAS.
+
+- Store any string key-value pairs on-chain
+- Readable by on-chain programs via CPI
+- Automatically indexed by DAS for fast queries
+- Mutable by the update authority
+
+## Out of Scope
+
+Off-chain metadata attributes (stored in JSON at URI), complex data types (only strings supported), and immutable attributes (all attributes are mutable).
+
+## Quick Start
+
+**Jump to:** [Add to Asset](#adding-the-attributes-plugin-to-an-asset) · [Update Attributes](#updating-the-attributes-plugin-on-an-asset)
+
+1. Add the Attributes plugin: `addPlugin(umi, { asset, plugin: { type: 'Attributes', attributeList: [...] } })`
+2. Each attribute is a `{ key: string, value: string }` pair
+3. Update anytime with `updatePlugin()`
+4. Query via DAS or fetch on-chain
+
+{% callout type="note" title="On-Chain vs Off-Chain Attributes" %}
+
+| Feature | On-Chain (this plugin) | Off-Chain (JSON metadata) |
+|---------|------------------------|---------------------------|
+| Storage location | Solana account | Arweave/IPFS |
+| Readable by programs | ✅ Yes (CPI) | ❌ No |
+| Indexed by DAS | ✅ Yes | ✅ Yes |
+| Mutable | ✅ Yes | Depends on storage |
+| Cost | Rent (recoverable) | Upload cost (one-time) |
+| Best for | Dynamic data, game stats | Static traits, images |
+
+**Use on-chain attributes** when programs need to read the data or it changes frequently.
+**Use off-chain metadata** for static traits and image references.
+
+{% /callout %}
+
+## Common Use Cases
+
+- **Game character stats**: Health, XP, level, class - data that changes during gameplay
+- **Access control**: Tier, role, permissions - data programs check for authorization
+- **Dynamic traits**: Evolving NFTs where traits change based on actions
+- **Staking state**: Track staking status, rewards earned, time staked
+- **Achievement tracking**: Badges, milestones, completion status
+- **Rental/lending**: Track rental periods, borrower info, return dates
 
 ## Works With
 
@@ -231,3 +282,99 @@ pub async fn update_attributes_plugin() {
 {% /dialect %}
 
 {% /dialect-switcher %}
+
+## Common Errors
+
+### `Authority mismatch`
+
+Only the plugin authority (usually update authority) can add or update attributes. Verify you're signing with the correct keypair.
+
+### `String too long`
+
+Attribute keys and values are limited in size. Keep them concise.
+
+## Notes
+
+- Authority Managed: update authority can add/update without owner signature
+- All values are strings - convert numbers/booleans as needed
+- Updating replaces the entire attribute list (no partial updates)
+- Attributes increase account size and rent cost
+- DAS indexes attributes for fast queries
+
+## Quick Reference
+
+### Minimum Code
+
+```ts {% title="minimal-attributes.ts" %}
+import { addPlugin } from '@metaplex-foundation/mpl-core'
+
+await addPlugin(umi, {
+  asset: assetAddress,
+  plugin: {
+    type: 'Attributes',
+    attributeList: [
+      { key: 'level', value: '5' },
+      { key: 'class', value: 'warrior' },
+    ],
+  },
+}).sendAndConfirm(umi)
+```
+
+### Common Attribute Patterns
+
+| Use Case | Example Keys |
+|----------|--------------|
+| Game character | `level`, `health`, `xp`, `class` |
+| Access control | `tier`, `access_level`, `role` |
+| Traits | `background`, `eyes`, `rarity` |
+| State | `staked`, `listed`, `locked` |
+
+## FAQ
+
+### What's the difference between on-chain attributes and off-chain metadata attributes?
+
+On-chain attributes (this plugin) are stored on Solana and readable by programs. Off-chain attributes (in JSON at URI) are stored on Arweave/IPFS and only readable by clients.
+
+### Can on-chain programs read these attributes?
+
+Yes. Use CPI to fetch the Asset account and deserialize the Attributes plugin data.
+
+### Are attributes indexed by DAS?
+
+Yes. DAS automatically indexes attribute key-value pairs for fast queries.
+
+### Can I store numbers or booleans?
+
+Values are strings only. Convert as needed: `{ key: 'level', value: '5' }`, `{ key: 'active', value: 'true' }`.
+
+### How do I update a single attribute?
+
+You can't update individual attributes. Fetch the current list, modify it, and update with the full new list.
+
+### What's the size limit for attributes?
+
+There's no hard limit, but larger attribute lists increase rent cost. Keep data concise.
+
+### Can the owner update attributes?
+
+No. The Attributes plugin is Authority Managed, so only the update authority can modify it (not the owner).
+
+## Related Plugins
+
+- [Update Delegate](/smart-contracts/core/plugins/update-delegate) - Grant others permission to update attributes
+- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - Lock name/URI (attributes remain mutable)
+- [AddBlocker](/smart-contracts/core/plugins/addBlocker) - Prevent adding new plugins
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Attributes Plugin** | Authority Managed plugin storing on-chain key-value pairs |
+| **attributeList** | Array of `{ key, value }` objects |
+| **Authority Managed** | Plugin type controlled by update authority |
+| **On-chain Data** | Data stored directly in Solana account (readable by programs) |
+| **DAS** | Digital Asset Standard API that indexes attributes |
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

@@ -1,8 +1,40 @@
 ---
 title: Adding External Plugins
-metaTitle: Adding External Plugins | Core
-description: Learn how to add external plugins to MPL Core Assets and Collections.
+metaTitle: Adding External Plugins | Metaplex Core
+description: Learn how to add Oracle and AppData plugins to Core Assets and Collections. Code examples for JavaScript and Rust.
 ---
+
+This guide shows how to **add External Plugins** (Oracle, AppData) to Core Assets and Collections. Add at creation time or to existing Assets/Collections. {% .lead %}
+
+{% callout title="What You'll Learn" %}
+
+- Add external plugins during Asset/Collection creation
+- Add external plugins to existing Assets/Collections
+- Configure Oracle lifecycle checks
+- Set up AppData with data authorities
+
+{% /callout %}
+
+## Summary
+
+Add external plugins using `create()` with the `plugins` array, or `addPlugin()` for existing Assets. Collections use `createCollection()` and `addCollectionPlugin()`.
+
+- Add at creation: include in `plugins` array
+- Add to existing: use `addPlugin()` / `addCollectionPlugin()`
+- Requires update authority signature
+- Configure lifecycle checks for Oracle plugins
+
+## Out of Scope
+
+Removing external plugins (see [Removing External Plugins](/smart-contracts/core/external-plugins/removing-external-plugins)), updating plugin data, and built-in plugins (see [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)).
+
+## Quick Start
+
+**Jump to:** [Create Asset with Plugin](#creating-a-core-asset-with-an-external-plugin) · [Add to Existing Asset](#adding-a-external-plugin-to-a-core-asset) · [Create Collection with Plugin](#creating-a-core-collection-with-an-external-plugin)
+
+1. Prepare your Oracle account or AppData configuration
+2. Add plugin at creation or via `addPlugin()`
+3. Configure lifecycle checks (Oracle) or data authority (AppData)
 
 ## Assets
 
@@ -372,3 +404,49 @@ pub async fn add_oracle_plugin_to_collection() {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Common Errors
+
+### `Authority mismatch`
+
+Only the update authority can add external plugins. Verify you're signing with the correct keypair.
+
+### `Plugin already exists`
+
+An external plugin with the same key already exists. Remove it first or update it instead.
+
+### `Invalid Oracle account`
+
+The Oracle base address is invalid or the account doesn't exist.
+
+## Notes
+
+- External plugins are Authority Managed (update authority controls)
+- Oracle plugins require an existing Oracle account
+- AppData plugins need a Data Authority for write permissions
+- Collection plugins don't automatically apply to existing Assets
+
+## FAQ
+
+### Can I add multiple external plugins to one Asset?
+
+Yes. You can add multiple Oracle and/or AppData plugins to a single Asset.
+
+### Do I need to create the Oracle account first?
+
+Yes. The Oracle account must exist before adding an Oracle plugin adapter.
+
+### What's the difference between adding at creation vs adding later?
+
+No functional difference. Adding at creation is more efficient (one transaction). Adding later requires a separate transaction.
+
+## Related Operations
+
+- [Removing External Plugins](/smart-contracts/core/external-plugins/removing-external-plugins) - Remove external plugins
+- [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
+- [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) - Oracle configuration details
+- [AppData Plugin](/smart-contracts/core/external-plugins/app-data) - AppData configuration details
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

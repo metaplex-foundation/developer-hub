@@ -1,8 +1,40 @@
 ---
 title: Delegating and Revoking Plugins
-metaTitle: Delegating and Revoking Plugins | Core
-description: Learn how to delegate and revoke plugin authorities to MPL Core Assets and Collections.
+metaTitle: Delegating and Revoking Plugin Authority | Metaplex Core
+description: Learn how to delegate and revoke plugin authorities on Core Assets. Change who controls plugins and make plugin data immutable.
 ---
+
+This guide shows how to **delegate and revoke plugin authorities** on Core Assets. Transfer control of plugins to other addresses or make plugin data permanently immutable. {% .lead %}
+
+{% callout title="What You'll Learn" %}
+
+- Delegate plugin authority to another address
+- Revoke delegated authority
+- Understand revocation behavior for different plugin types
+- Make plugin data immutable
+
+{% /callout %}
+
+## Summary
+
+Delegate plugin authority using `approvePluginAuthority()` and revoke with `revokePluginAuthority()`. Different plugin types have different revocation behaviors.
+
+- **Owner Managed**: Revokes back to `Owner` authority
+- **Authority Managed**: Revokes back to `UpdateAuthority`
+- Set authority to `None` to make plugin immutable
+- Owner Managed plugins auto-revoke on Asset transfer
+
+## Out of Scope
+
+Plugin removal (see [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)), adding plugins (see [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)), and permanent plugin authority changes.
+
+## Quick Start
+
+**Jump to:** [Delegate Authority](#delegating-an-authority) · [Revoke Authority](#revoking-an-authority) · [Make Immutable](#making-plugin-data-immutable)
+
+1. Call `approvePluginAuthority()` with the new authority address
+2. To revoke: call `revokePluginAuthority()`
+3. To make immutable: set authority to `None`
 
 ## Delegating an Authority
 
@@ -242,3 +274,83 @@ pub async fn make_plugin_data_immutable() {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Common Errors
+
+### `Authority mismatch`
+
+You don't have permission to delegate or revoke this plugin. Only the current authority can delegate; only owner/authority can revoke.
+
+### `Plugin not found`
+
+The Asset/Collection doesn't have this plugin type attached.
+
+### `Cannot revoke None authority`
+
+A plugin with `None` authority is immutable. There's no authority to revoke.
+
+## Notes
+
+- Delegation transfers control but doesn't remove the original authority's ability to revoke
+- Setting authority to `None` is permanent and irreversible
+- Owner Managed plugins auto-revoke when the Asset transfers to a new owner
+- Revocation returns authority to the default type (Owner or UpdateAuthority)
+
+## Quick Reference
+
+### Revocation Behavior by Plugin Type
+
+| Plugin Type | Revokes To |
+|-------------|------------|
+| Owner Managed | `Owner` authority |
+| Authority Managed | `UpdateAuthority` |
+
+### Who Can Delegate/Revoke
+
+| Action | Owner Managed | Authority Managed |
+|--------|---------------|-------------------|
+| Delegate | Owner | Update Authority |
+| Revoke | Owner or Delegate | Update Authority or Delegate |
+
+## FAQ
+
+### What's the difference between revoking and removing a plugin?
+
+Revoking only changes who controls the plugin—the plugin and its data remain. Removing deletes the plugin entirely.
+
+### Can I delegate to multiple addresses?
+
+No. Each plugin has only one authority at a time. Delegating to a new address replaces the previous authority.
+
+### What happens to delegated plugins when I transfer an Asset?
+
+Owner Managed plugins automatically revoke back to `Owner` authority. Authority Managed plugins remain unchanged.
+
+### Can I undo setting authority to None?
+
+No. Setting authority to `None` makes the plugin permanently immutable. This cannot be reversed.
+
+### Can a delegate revoke themselves?
+
+Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
+
+## Related Operations
+
+- [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) - Add plugins to Assets/Collections
+- [Removing Plugins](/smart-contracts/core/plugins/removing-plugins) - Delete plugins entirely
+- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
+- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Delegate** | Address given temporary control of a plugin |
+| **Revoke** | Remove delegated authority, returning to default |
+| **None Authority** | Special authority type making plugin immutable |
+| **Auto-revoke** | Automatic revocation of Owner Managed plugins on transfer |
+| **Plugin Authority** | Current address with control over a plugin |
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

@@ -1,29 +1,61 @@
 ---
-title: プラグインの追加
-metaTitle: プラグインの追加 | Core
-description: MPL Core NFTアセットとコレクションにプラグインを追加する方法を学びます。
+title: Pluginの追加
+metaTitle: Core AssetへのPluginの追加 | Metaplex Core
+description: Core NFT AssetとCollectionにPluginを追加する方法を学びます。Plugin権限を設定し、作成時または作成後にPluginデータを構成します。
 ---
 
-プラグインは、MPL Core AssetとMPL Core Collectionの両方に割り当てることができます。MPL Core AssetとMPL Core Collectionは、利用可能なプラグインの似たようなリストを共有しています。それぞれでどのプラグインを使用できるかを知るには、[プラグイン概要](/ja/smart-contracts/core/plugins)エリアを訪問してください。
+このガイドでは、Core AssetとCollectionに**Pluginを追加する**方法を説明します。Pluginはロイヤリティ、フリーズ、属性、委任権限などの機能を追加します。 {% .lead %}
 
-## Core Assetにプラグインを追加
+{% callout title="学習内容" %}
 
-プラグインは、プラグインに対する権限を割り当てる機能をサポートしています。`initAuthority`引数が提供されると、これは権限を希望するプラグイン権限タイプに設定します。割り当てられない場合、プラグインのデフォルト権限タイプが割り当てられます（次のセクション）。
+- 既存のAssetとCollectionにPluginを追加
+- デフォルトとカスタムのPlugin権限を設定
+- 追加時にPluginデータを構成
+- 権限タイプの違いを理解
 
-**Create Plugin ヘルパー**
+{% /callout %}
 
-`createPlugin()`ヘルパーは、`addPlugin()`プロセス中にプラグインを割り当てることができる型付きメソッドを提供します。
-プラグインとその引数の完全なリストについては、[プラグイン概要](/ja/smart-contracts/core/plugins)ページを参照してください。
+## 概要
 
-### デフォルト権限でプラグインを追加
+`addPlugin()`を使用してAssetに、`addCollectionPlugin()`を使用してCollectionにPluginを追加します。各Pluginにはデフォルトの権限タイプがありますが、オーバーライドできます。
 
-プラグインの権限を指定せずにアセットまたはコレクションにプラグインを追加すると、権限はそのプラグインのデフォルト権限タイプに設定されます。
+- **所有者管理**Pluginはデフォルトで`Owner`権限
+- **権限管理**Pluginはデフォルトで`UpdateAuthority`
+- **永続**Pluginは作成時にのみ追加可能
+- カスタム権限は`authority`パラメータで設定可能
 
-- 所有者管理プラグインは、プラグイン権限タイプ`Owner`にデフォルト設定されます。
-- 権限管理プラグインは、プラグイン権限タイプ`UpdateAuthority`にデフォルト設定されます。
-- 永続プラグインは、プラグイン権限タイプ`UpdateAuthority`にデフォルト設定されます
+## 対象外
 
-{% dialect-switcher title="デフォルト権限でプラグインを追加" %}
+永続Plugin（作成時に追加が必要）、Pluginの削除（[Pluginの削除](/ja/smart-contracts/core/plugins/removing-plugins)を参照）、Pluginの更新（[Pluginの更新](/ja/smart-contracts/core/plugins/update-plugins)を参照）は対象外です。
+
+## クイックスタート
+
+**ジャンプ：** [Assetに追加](#core-assetにpluginを追加) · [Collectionに追加](#collectionにpluginを追加) · [カスタム権限](#割り当てられた権限でpluginを追加)
+
+1. [Plugin概要](/ja/smart-contracts/core/plugins)からPluginを選択
+2. AssetアドレスとPlugin設定で`addPlugin()`を呼び出す
+3. Pluginは即座に有効化
+
+PluginはMPL Core AssetとMPL Core Collectionの両方に割り当てることができます。MPL Core AssetとMPL Core Collectionは、利用可能なPluginの似たようなリストを共有しています。それぞれでどのPluginを使用できるかを知るには、[Plugin概要](/ja/smart-contracts/core/plugins)エリアを訪問してください。
+
+## Core AssetにPluginを追加
+
+Pluginは、Pluginに対する権限を割り当てる機能をサポートしています。`initAuthority`引数が提供されると、これは権限を希望するPlugin権限タイプに設定します。割り当てられない場合、Pluginのデフォルト権限タイプが割り当てられます（次のセクション）。
+
+**Create Pluginヘルパー**
+
+`createPlugin()`ヘルパーは、`addPlugin()`プロセス中にPluginを割り当てることができる型付きメソッドを提供します。
+Pluginとその引数の完全なリストについては、[Plugin概要](/ja/smart-contracts/core/plugins)ページを参照してください。
+
+### デフォルト権限でPluginを追加
+
+Pluginの権限を指定せずにAssetまたはCollectionにPluginを追加すると、権限はそのPluginのデフォルト権限タイプに設定されます。
+
+- 所有者管理Pluginは、Plugin権限タイプ`Owner`にデフォルト設定されます。
+- 権限管理Pluginは、Plugin権限タイプ`UpdateAuthority`にデフォルト設定されます。
+- 永続Pluginは、Plugin権限タイプ`UpdateAuthority`にデフォルト設定されます
+
+{% dialect-switcher title="デフォルト権限でPluginを追加" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -88,9 +120,9 @@ pub async fn add_plugin() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### 割り当てられた権限でプラグインを追加
+### 割り当てられた権限でPluginを追加
 
-プラグインの権限を設定するのに役立つ権限ヘルパーがいくつかあります。
+Pluginの権限を設定するのに役立つ権限ヘルパーがいくつかあります。
 
 **Address**
 
@@ -107,7 +139,7 @@ await addPlugin(umi, {
   }).sendAndConfirm(umi);
 ```
 
-これは、プラグインの権限を特定のアドレスに設定します。
+これは、Pluginの権限を特定のアドレスに設定します。
 
 **Owner**
 
@@ -123,8 +155,8 @@ await addPlugin(umi, {
   }).sendAndConfirm(umi);
 ```
 
-これは、プラグインの権限を`Owner`タイプに設定します。
-アセットの現在の所有者がこのプラグインにアクセスできるようになります。
+これは、Pluginの権限を`Owner`タイプに設定します。
+Assetの現在の所有者がこのPluginにアクセスできるようになります。
 
 **UpdateAuthority**
 
@@ -140,8 +172,8 @@ await addPlugin(umi, {
   }).sendAndConfirm(umi);
 ```
 
-これは、プラグインの権限を`UpdateAuthority`タイプに設定します。
-アセットの現在の更新権限がこのプラグインにアクセスできるようになります。
+これは、Pluginの権限を`UpdateAuthority`タイプに設定します。
+Assetの現在の更新権限がこのPluginにアクセスできるようになります。
 
 **None**
 
@@ -157,10 +189,10 @@ await addPlugin(umi, {
   }).sendAndConfirm(umi);
 ```
 
-これは、プラグインの権限を`None`タイプに設定します。
-プラグインのデータがある場合、この時点で不変になります。
+これは、Pluginの権限を`None`タイプに設定します。
+Pluginのデータがある場合、この時点で不変になります。
 
-{% dialect-switcher title="割り当てられた権限でプラグインを追加" %}
+{% dialect-switcher title="割り当てられた権限でPluginを追加" %}
 {% dialect title="Rust" id="rust" %}
 
 ```rust
@@ -238,13 +270,13 @@ await addPlugin(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## コレクションにプラグインを追加
+## CollectionにPluginを追加
 
-Coreコレクションにプラグインを追加することは、Core Assetに追加することと似ています。作成時および`addCollectionV1`インストラクションを使用してプラグインを追加できます。コレクションは`権限プラグイン`と`永続プラグイン`のみにアクセスできます。
+Core CollectionにPluginを追加することは、Core Assetに追加することと似ています。作成時および`addCollectionV1`インストラクションを使用してPluginを追加できます。Collectionは`権限Plugin`と`永続Plugin`のみにアクセスできます。
 
-### デフォルト権限でコレクションプラグインを追加
+### デフォルト権限でCollection Pluginを追加
 
-{% dialect-switcher title="デフォルト権限でコレクションプラグインを追加" %}
+{% dialect-switcher title="デフォルト権限でCollection Pluginを追加" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -321,9 +353,9 @@ pub async fn add_plugin_to_collection() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### 割り当てられた権限でコレクションプラグインを追加
+### 割り当てられた権限でCollection Pluginを追加
 
-{% dialect-switcher title="アセットのバーン" %}
+{% dialect-switcher title="Assetのバーン" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```ts
@@ -400,3 +432,81 @@ pub async fn add_plugin_to_collection_with_authority() {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## 一般的なエラー
+
+### `Authority mismatch`
+
+このPluginを追加する権限がありません。所有者管理Pluginには所有者の署名が必要です。権限管理Pluginには更新権限が必要です。
+
+### `Plugin already exists`
+
+Asset/Collectionには既にこのPluginタイプがあります。代わりに`updatePlugin`を使用して変更してください。
+
+### `Cannot add permanent plugin`
+
+永続Pluginは作成時にのみ追加できます。既存のAsset/Collectionには追加できません。
+
+## 注意事項
+
+- 所有者管理Pluginは追加に**所有者の署名**が必要
+- 権限管理Pluginは追加に**更新権限の署名**が必要
+- 永続Pluginは**作成時**にのみ追加可能
+- Pluginを追加するとアカウントサイズとレントが増加
+
+## クイックリファレンス
+
+### デフォルト権限タイプ
+
+| Pluginタイプ | デフォルト権限 |
+|-------------|-------------------|
+| 所有者管理 | `Owner` |
+| 権限管理 | `UpdateAuthority` |
+| 永続 | `UpdateAuthority` |
+
+### 権限オプション
+
+| 権限タイプ | 説明 |
+|----------------|-------------|
+| `Owner` | 現在のAsset所有者 |
+| `UpdateAuthority` | 現在の更新権限 |
+| `Address` | 特定の公開鍵 |
+| `None` | 不変（誰も更新不可） |
+
+## FAQ
+
+### 1つのトランザクションで複数のPluginを追加できますか？
+
+はい、Asset作成時に可能です。既存のAssetの場合、各`addPlugin`呼び出しは別々のトランザクションです。
+
+### 権限をNoneに設定するとどうなりますか？
+
+Pluginは不変になります。誰も更新や削除ができなくなります。
+
+### 更新権限として所有者管理Pluginを追加できますか？
+
+いいえ。所有者管理Pluginは、誰が署名するかに関係なく、追加には常に所有者の署名が必要です。
+
+### 永続Pluginを追加できないのはなぜですか？
+
+永続PluginはAsset/Collection作成時にのみ追加できます。既存のアカウントには追加できません。
+
+## 関連操作
+
+- [Pluginの削除](/ja/smart-contracts/core/plugins/removing-plugins) - Asset/CollectionからPluginを削除
+- [Pluginの委任](/ja/smart-contracts/core/plugins/delegating-and-revoking-plugins) - Plugin権限の変更
+- [Pluginの更新](/ja/smart-contracts/core/plugins/update-plugins) - Pluginデータの変更
+- [Plugin概要](/ja/smart-contracts/core/plugins) - 利用可能なPluginの完全なリスト
+
+## 用語集
+
+| 用語 | 定義 |
+|------|------------|
+| **所有者管理** | 追加に所有者の署名が必要なPlugin |
+| **権限管理** | 更新権限が追加できるPlugin |
+| **永続** | 作成時にのみ追加可能なPlugin |
+| **initAuthority** | カスタムPlugin権限を設定するパラメータ |
+
+---
+
+*Metaplex Foundationによって管理 · 最終確認2026年1月 · @metaplex-foundation/mpl-coreに適用*

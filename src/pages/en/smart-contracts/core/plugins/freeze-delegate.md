@@ -1,22 +1,66 @@
 ---
 title: Freeze Delegate
-metaTitle: Freeze Delegate Plugin | Core
-description: Learn about the MPL Core Asset Freeze Delegate Plugin. The 'Freeze Delegate' can freeze the Core NFT Asset which will block lifecycle events such as transfer, and burn.
+metaTitle: Freeze Delegate Plugin | Metaplex Core
+description: Learn how to freeze Core NFT Assets to block transfers and burns. Use the Freeze Delegate plugin for escrowless staking, marketplace listings, and game item locking.
 ---
 
-## Overview
+The **Freeze Delegate Plugin** allows you to freeze Core Assets, blocking transfers and burns while the asset remains in the owner's wallet. Perfect for escrowless staking, marketplace listings, and game mechanics. {% .lead %}
 
-The Freeze Plugin is a `Owner Managed` plugin that freezes the Asset disallowing transfer. The authority of the plugin can revoke themselves or unfreeze at any time.
+{% callout title="What You'll Learn" %}
 
-The Freeze Plugin will work in areas such as:
+- Add the Freeze Delegate plugin to an Asset
+- Freeze and thaw Assets
+- Delegate freeze authority to another address
+- Use cases: staking, listings, game locking
 
-- Escrowless staking: Freeze NFTs while they are staked in a protocol without needing to transfer them to an escrow account
-- Escrowless listing of an NFT on a marketplace: List NFTs for sale without transferring them to the marketplace's escrow
-- Game item locking: Temporarily lock in-game items while they are being used in gameplay
-- Rental marketplaces: Lock NFTs while they are being rented out to users
-- Governance participation: Lock governance tokens while participating in voting or proposals
-- Collateral management: Lock NFTs being used as collateral in lending protocols
-- Tournament participation: Lock NFTs while they are being used in tournaments or competitions
+{% /callout %}
+
+## Summary
+
+The **Freeze Delegate** is an Owner Managed plugin that freezes Assets in place. When frozen, the Asset cannot be transferred or burned until thawed by the freeze authority.
+
+- Freeze Assets without transferring to escrow
+- Delegate freeze authority to a program or other wallet
+- Authority is revoked on transfer (for non-permanent version)
+- Use [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) for irrevocable freezing
+
+## Out of Scope
+
+Collection-level freezing (use Asset-level only), permanent freezing (see Permanent Freeze Delegate), and Token Metadata freeze authority (different system).
+
+## Quick Start
+
+**Jump to:** [Add Plugin](#add-freeze-delegate-plugin-to-an-asset) · [Delegate Authority](#delegate-the-freeze-authority) · [Freeze](#freezing-an-asset) · [Thaw](#thawing-a-frozen-asset)
+
+1. Add the Freeze Delegate plugin: `addPlugin(umi, { asset, plugin: { type: 'FreezeDelegate', data: { frozen: true } } })`
+2. The Asset is now frozen and cannot be transferred
+3. Thaw when ready: update the plugin with `frozen: false`
+4. Authority is revoked on transfer
+
+{% callout type="note" title="When to Use Freeze vs Permanent Freeze" %}
+
+| Use Case | Freeze Delegate | Permanent Freeze Delegate |
+|----------|-----------------|---------------------------|
+| Marketplace listings | ✅ Best choice | ❌ Overkill |
+| Escrowless staking | ✅ Best choice | ✅ Also works |
+| Soulbound tokens | ❌ Revokes on transfer | ✅ Best choice |
+| Collection-wide freeze | ❌ Assets only | ✅ Supports Collections |
+| Rental protocols | ✅ Best choice | ✅ Also works |
+
+**Choose Freeze Delegate** when authority should reset on ownership change.
+**Choose [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)** when authority must persist forever.
+
+{% /callout %}
+
+## Common Use Cases
+
+- **Escrowless staking**: Freeze NFTs while staked without transferring to escrow
+- **Marketplace listings**: Lock NFTs for sale without escrow accounts
+- **Game item locking**: Temporarily lock items during gameplay
+- **Rental protocols**: Lock NFTs while rented out
+- **Governance**: Lock tokens during voting periods
+- **Collateral**: Lock NFTs used as lending collateral
+- **Tournaments**: Lock NFTs during competition participation
 
 ## Works With
 
@@ -24,6 +68,8 @@ The Freeze Plugin will work in areas such as:
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
+
+For collection-level freezing, use [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) instead.
 
 ## Arguments
 
@@ -377,3 +423,92 @@ pub async fn thaw_freeze_delegate_plugin() {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Common Errors
+
+### `Asset is frozen`
+
+You tried to transfer or burn a frozen Asset. The freeze authority must thaw it first.
+
+### `Authority mismatch`
+
+Only the freeze delegate authority can freeze/thaw the Asset. Check who has the plugin authority.
+
+### `Plugin not found`
+
+The Asset doesn't have a Freeze Delegate plugin. Add it first with `addPlugin`.
+
+## Notes
+
+- Owner Managed: requires owner signature to add
+- Authority is automatically revoked when the Asset transfers
+- Frozen Assets can still be updated (metadata changes allowed)
+- Use Permanent Freeze Delegate if you need the authority to persist after transfer
+- Freezing is immediate - no confirmation period
+
+## Quick Reference
+
+### Freeze States
+
+| State | Can Transfer | Can Burn | Can Update |
+|-------|--------------|----------|------------|
+| Unfrozen | Yes | Yes | Yes |
+| Frozen | No | No | Yes |
+
+### Authority Behavior
+
+| Event | Authority Result |
+|-------|------------------|
+| Asset transfers | Authority revoked |
+| Plugin removed | Authority gone |
+| Thaw | Authority retained |
+
+## FAQ
+
+### Can I freeze an Asset I don't own?
+
+No. The Freeze Delegate is Owner Managed, so only the owner can add it. After adding, you can delegate authority to another address.
+
+### What's the difference between Freeze Delegate and Permanent Freeze Delegate?
+
+Freeze Delegate authority is revoked on transfer. Permanent Freeze Delegate authority persists forever and can only be added at creation time.
+
+### Can a frozen Asset be burned?
+
+No. Frozen Assets block both transfers and burns. Thaw the Asset first if you want to burn it.
+
+### Can I freeze an entire Collection at once?
+
+Not with the regular Freeze Delegate (Assets only). Use [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) on the Collection instead - it supports collection-level freezing and will freeze all Assets in that Collection at once. Note that Permanent Freeze Delegate can only be added at Collection creation time.
+
+### Does freezing affect metadata updates?
+
+No. The Asset owner or update authority can still update metadata (name, URI) while frozen. Only transfers and burns are blocked.
+
+### How do I implement escrowless staking?
+
+1. Add Freeze Delegate plugin with your staking program as authority
+2. When user stakes: freeze the Asset
+3. When user unstakes: thaw the Asset
+4. The NFT never leaves the user's wallet
+
+## Related Plugins
+
+- [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) - Irrevocable freeze authority, supports Collections
+- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - Allow delegate to transfer Assets
+- [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - Allow delegate to burn Assets
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Freeze Delegate** | Owner Managed plugin that blocks transfers and burns |
+| **Frozen** | Asset state where transfers and burns are blocked |
+| **Thaw** | Unfreezing an Asset to allow transfers again |
+| **Delegate Authority** | The account authorized to freeze/thaw the Asset |
+| **Escrowless** | Staking/listing without transferring to a holding account |
+| **Owner Managed** | Plugin type requiring owner signature to add |
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

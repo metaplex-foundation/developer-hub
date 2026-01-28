@@ -1,8 +1,23 @@
 ---
-title: MPL Coreアセット
-metaTitle: Coreアセットとは | Core
-description: MPL Coreアセットとは何か、そしてなぜそれがSolana NFTの未来なのかを学びます。
+title: MPL Core Asset
+metaTitle: Core Assetとは | Metaplex Core
+description: SolanaでCore Assetとは何かを学びます。単一アカウントNFTモデル、アカウント構造、コレクションメンバーシップ、オフチェーンメタデータを理解します。
 ---
+
+このページでは、**Core Assetとは何か**、そして従来のSolana NFTとどのように異なるかを説明します。アカウント構造、コレクションの関係、メタデータの保存について理解します。 {% .lead %}
+
+{% callout title="主要概念" %}
+
+- **単一アカウントモデル**: Core AssetはAssetアカウント自体内に所有権を保存します
+- **トークンアカウント不要**: SPLトークンとは異なり、CoreはAssociated Token Accountを必要としません
+- **コレクションメンバーシップ**: AssetはupdateAuthorityフィールドを介してコレクションに属することができます
+- **オフチェーンメタデータ**: URIはArweave/IPFSに保存されたJSONメタデータを指します
+
+{% /callout %}
+
+## 概要
+
+Core Assetは、NFTを表す単一のSolanaアカウントです。Token Metadata（3つ以上のアカウントを必要とする）とは異なり、Coreは1つのアカウントにすべての重要なデータを保存します：所有者、名前、URI、Update Authority。これにより、Core Assetは約80%安価で、扱いやすくなります。
 
 ## 概要
 
@@ -16,7 +31,7 @@ description: MPL Coreアセットとは何か、そしてなぜそれがSolana N
 {% node y="70" parent="wallet" label="誰かのウォレット" theme="transparent" /%}
 
 {% node x="200" parent="wallet" %}
-{% node #asset label="アセットアカウント" theme="blue" /%}
+{% node #asset label="Assetアカウント" theme="blue" /%}
 {% node label="Owner: Core Program" theme="dimmed" /%}
 {% /node %}
 {% node y="70" parent="asset" theme="transparent" %}
@@ -39,7 +54,7 @@ Core Assetアカウントは、デジタルアセットに必要な最小限の�
 {% /node %}
 {% node y="70" parent="wallet" theme="transparent" /%}
 {% node x="200" parent="wallet" %}
-{% node #asset label="アセットアカウント" theme="blue" /%}
+{% node #asset label="Assetアカウント" theme="blue" /%}
 {% node label="Owner: Core Program" theme="dimmed" /%}
 {% node label="Key = Asset" /%}
 {% node label="Owner" /%}
@@ -57,7 +72,7 @@ Core Assetアカウントは、デジタルアセットに必要な最小限の�
 {% seperator h="6" /%}
 
 {% totem %}
-{% totem-accordion title="オンチェーンアセットアカウント構造" %}
+{% totem-accordion title="オンチェーンAssetアカウント構造" %}
 
 MPL Core Assetのオンチェーンアカウント構造。[リンク](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
 
@@ -73,16 +88,16 @@ MPL Core Assetのオンチェーンアカウント構造。[リンク](https://g
 {% /totem-accordion %}
 {% /totem %}
 
-## 私のアセットはコレクションに含まれていますか？
+## 私のAssetはコレクションに含まれていますか？
 
-MPL Core Assetはコレクションに属することができます。MPL Core Assetデータの`updateAuthority`フィールドは、アセットの更新権限を報告するか、それが属するMPL Core CollectionのpublicKeyを提供するかの2つの役割を提供します。
+MPL Core Assetはコレクションに属することができます。MPL Core Assetデータの`updateAuthority`フィールドは、アセットのUpdate Authorityを報告するか、それが属するMPL Core CollectionのpublicKeyを提供するかの2つの役割を提供します。
 
 `updateAuthority`フィールドに直接アクセスするか、MPL Core Assetの`collectionAddress`ヘルパーを介してアクセスする場合、返される結果は以下のいずれかの結果になります：
 
 **Collection**
 
 アセットは指定されたアドレスのコレクションに属しています。
-{% dialect-switcher title="アセットの作成" %}
+{% dialect-switcher title="Assetの作成" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```javascript
@@ -126,8 +141,8 @@ Collection(Pubkey)
 
 **Address**
 
-アセットには更新権限が設定されており、コレクションには属していません。
-{% dialect-switcher title="アセットの作成" %}
+アセットにはUpdate Authorityが設定されており、コレクションには属していません。
+{% dialect-switcher title="Assetの作成" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```javascript
@@ -167,9 +182,9 @@ Address(Pubkey)
 
 **None**
 
-アセットには更新権限が設定されていません。
+アセットにはUpdate Authorityが設定されていません。
 
-{% dialect-switcher title="アセットの作成" %}
+{% dialect-switcher title="Assetの作成" %}
 {% dialect title="JavaScript" id="js" %}
 
 ```javascript
@@ -207,7 +222,7 @@ None
 
 ## オフチェーンメタデータ
 
-アセットアカウントの重要な属性の1つは、オフチェーンのJSONファイルを指す`URI`属性です。これは、オンチェーンデータの保存に関わる手数料に制約されることなく、追加データを安全に提供するために使用されます。そのJSONファイルは、[特定の標準](/token-metadata/token-standard)に従っており、誰でもトークンに関する有用な情報を見つけることができます。
+Assetアカウントの重要な属性の1つは、オフチェーンのJSONファイルを指す`URI`属性です。これは、オンチェーンデータの保存に関わる手数料に制約されることなく、追加データを安全に提供するために使用されます。そのJSONファイルは、[特定の標準](/ja/smart-contracts/token-metadata/token-standard)に従っており、誰でもトークンに関する有用な情報を見つけることができます。
 
 オフチェーンメタデータは、公的にアクセス可能な任意の場所に保存できます。JSONファイルをホストする人気の場所には以下が含まれます：
 
@@ -222,7 +237,7 @@ None
 {% /node %}
 {% node y="70" parent="wallet" theme="transparent" /%}
 {% node x="200" parent="wallet" %}
-{% node #asset label="アセットアカウント" theme="blue" /%}
+{% node #asset label="Assetアカウント" theme="blue" /%}
 {% node label="Owner: Core Program" theme="dimmed" /%}
 {% node label="Key = Asset" /%}
 {% node label="Owner" /%}
@@ -298,3 +313,41 @@ JSONメタデータ
 {% /totem %}
 
 注意として、このJSONファイルは更新できないように永続的なストレージソリューション（Arweaveなど）を使用して保存できます。さらに、`Update Authority`フィールドをNoneに設定して不変にし、`URI`と`Name`属性が変更されることを禁止できます。この組み合わせを使用することで、オフチェーンJSONファイルの不変性を保証できます。
+
+## FAQ
+
+### CoreはToken Metadata NFTとどのように異なりますか？
+
+Token Metadataは3つ以上のアカウント（ミント、メタデータ、トークンアカウント）を必要とします。Coreは所有者とメタデータを一緒に保存する単一のアカウントを使用します。これにより、Coreは約80%安価で、作成が高速です。
+
+### オンチェーンとオフチェーンにはどのようなデータが保存されますか？
+
+**オンチェーン**: 所有者、名前、URI、Update Authority、プラグイン。**オフチェーン**（URIで）: 説明、画像、属性、アニメーションURL、その他の拡張メタデータ。
+
+### Token Metadata NFTをCoreに変換できますか？
+
+直接はできません。CoreとToken Metadataは別々の標準です。古いNFTをバーンして新しいCore Assetをミントする必要があります。このプロセスを支援する移行ツールがいくつかあります。
+
+### Coreは既存のNFTマーケットプレイスと互換性がありますか？
+
+ほとんどの主要なSolanaマーケットプレイスはCore Assetをサポートしています。互換性のあるプラットフォームの現在のリストについては、[エコシステムサポート](/ja/smart-contracts/core/ecosystem-support)を確認してください。
+
+### オフチェーンメタデータがオフラインになったらどうなりますか？
+
+Assetは名前とURIと共にオンチェーンに存在し続けますが、画像/属性にはアクセスできなくなります。これを防ぐために永続的なストレージ（Arweave、ピンニング付きIPFS）を使用してください。
+
+## 用語集
+
+| 用語 | 定義 |
+|------|------------|
+| **Asset** | NFTを表す単一のCoreアカウント |
+| **Owner** | 現在Assetを所有しているウォレット |
+| **Update Authority** | Assetメタデータを変更する権限を持つアカウント |
+| **URI** | オフチェーンJSONメタデータを指すURL |
+| **Collection** | 関連するAssetをグループ化するCoreアカウント |
+| **Key** | アカウントタイプを識別するアカウント識別子 |
+| **seq** | 圧縮インデックス化に使用されるシーケンス番号 |
+
+---
+
+*Metaplex Foundationによって管理・2026年1月最終確認・@metaplex-foundation/mpl-coreに適用*

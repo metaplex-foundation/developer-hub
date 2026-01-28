@@ -1,8 +1,41 @@
 ---
 title: Using Metaplex Core in Anchor
-metaTitle: Using Metaplex Core in Anchor | Core
-description: Learn how to utilize the Metaplex Core crate inside your Anchor programs.
+metaTitle: Using Metaplex Core in Anchor | Metaplex Core
+description: Integrate Metaplex Core into Anchor programs. Learn CPI calls, account deserialization, and plugin access for on-chain NFT operations.
 ---
+
+Build **on-chain programs** that interact with Core Assets using Anchor. This guide covers installation, account deserialization, plugin access, and CPI patterns. {% .lead %}
+
+{% callout title="What You'll Learn" %}
+
+- Install and configure mpl-core in Anchor projects
+- Deserialize Core Assets and Collections in your programs
+- Access plugin data (Attributes, Freeze, etc.)
+- Make CPI calls to create, transfer, and manage Assets
+
+{% /callout %}
+
+## Summary
+
+The `mpl-core` Rust crate provides everything needed to interact with Core from Anchor programs. Enable the `anchor` feature flag for native Anchor account deserialization.
+
+- Add `mpl-core` with `features = ["anchor"]`
+- Deserialize Assets/Collections in Accounts structs
+- Use `fetch_plugin()` to read plugin data
+- CPI builders simplify instruction calls
+
+## Out of Scope
+
+Client-side JavaScript SDK (see [JavaScript SDK](/smart-contracts/core/sdk/javascript)), standalone Rust clients (see [Rust SDK](/smart-contracts/core/sdk/rust)), and creating Core Assets from clients.
+
+## Quick Start
+
+**Jump to:** [Installation](#installation) · [Account Deserialization](#accounts-deserialization) · [Plugin Access](#deserializing-plugins) · [CPI Examples](#the-cpi-instruction-builders)
+
+1. Add `mpl-core = { version = "x.x.x", features = ["anchor"] }` to Cargo.toml
+2. Deserialize Assets with `Account<'info, BaseAssetV1>`
+3. Access plugins with `fetch_plugin::<BaseAssetV1, PluginType>()`
+4. Make CPI calls with `CreateV2CpiBuilder`, `TransferV1CpiBuilder`, etc.
 
 ## Installation
 
@@ -171,4 +204,88 @@ CreateCollectionV2CpiBuilder::new(&ctx.accounts.core_program)
     .uri("https://test.com".to_string())
     .invoke()?;
 ```
+
+## Common Errors
+
+### `AccountNotInitialized`
+
+The Asset or Collection account doesn't exist or hasn't been created yet.
+
+### `PluginNotFound`
+
+The plugin you're trying to fetch doesn't exist on the Asset. Check with `fetch_plugin()` which returns `None` safely.
+
+### `InvalidAuthority`
+
+The signer doesn't have permission for this operation. Verify the correct authority is signing.
+
+## Notes
+
+- Always enable `features = ["anchor"]` for native deserialization
+- Use `fetch_plugin()` for built-in plugins, `fetch_external_plugin()` for external
+- CPI builders abstract away account ordering complexity
+- Check [docs.rs/mpl-core](https://docs.rs/mpl-core/) for complete API reference
+
+## Quick Reference
+
+### Common CPI Builders
+
+| Operation | CPI Builder |
+|-----------|-------------|
+| Create Asset | `CreateV2CpiBuilder` |
+| Create Collection | `CreateCollectionV2CpiBuilder` |
+| Transfer Asset | `TransferV1CpiBuilder` |
+| Burn Asset | `BurnV1CpiBuilder` |
+| Update Asset | `UpdateV1CpiBuilder` |
+| Add Plugin | `AddPluginV1CpiBuilder` |
+| Update Plugin | `UpdatePluginV1CpiBuilder` |
+
+### Account Types
+
+| Account | Struct |
+|---------|--------|
+| Asset | `BaseAssetV1` |
+| Collection | `BaseCollectionV1` |
+| Hashed Asset | `HashedAssetV1` |
+| Plugin Header | `PluginHeaderV1` |
+| Plugin Registry | `PluginRegistryV1` |
+
+## FAQ
+
+### Do I need the anchor feature flag?
+
+Yes, for direct deserialization in Accounts structs. Without it, use `from_bytes()` manually.
+
+### How do I check if a plugin exists?
+
+Use `fetch_plugin()` which returns `Option` - it won't throw an error if the plugin doesn't exist.
+
+### Can I access external plugins (Oracle, AppData)?
+
+Yes. Use `fetch_external_plugin()` instead of `fetch_plugin()` with the appropriate key.
+
+### Where can I find all available instructions?
+
+See the [mpl-core docs.rs instructions module](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html).
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **CPI** | Cross-Program Invocation - calling one program from another |
+| **CpiBuilder** | Helper struct for constructing CPI calls |
+| **BaseAssetV1** | Core Asset account struct for deserialization |
+| **fetch_plugin()** | Function to read plugin data from accounts |
+| **anchor feature** | Cargo feature enabling Anchor-native deserialization |
+
+## Related Pages
+
+- [Anchor Staking Example](/smart-contracts/core/guides/anchor/anchor-staking-example) - Complete staking program
+- [Create Asset with Anchor](/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - Step-by-step guide
+- [Rust SDK](/smart-contracts/core/sdk/rust) - Standalone Rust client usage
+- [mpl-core docs.rs](https://docs.rs/mpl-core/) - Complete API reference
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*
 

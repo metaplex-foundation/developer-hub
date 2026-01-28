@@ -1,8 +1,47 @@
 ---
 title: Managing Collections
-metaTitle: Verified Collections | Core
-description: Learn how to manage Core Collections of Assets such as adding and removing to the collection with the Metaplex Core packages.
+metaTitle: Core Collections | Metaplex Core
+description: Learn how to create and manage Core Collections on Solana. Group NFT Assets together, set collection-level royalties, and manage collection metadata.
 ---
+
+This guide shows how to **create and manage Core Collections** on Solana using the Metaplex Core SDK. Collections group related Assets together under a shared identity with collection-level metadata and plugins. {% .lead %}
+
+{% callout title="What You'll Learn" %}
+
+- Create a Collection with name, URI, and optional plugins
+- Add Assets to Collections at creation time
+- Fetch and update Collection metadata
+- Manage collection-level plugins (royalties, etc.)
+
+{% /callout %}
+
+## Summary
+
+A **Collection** is a Core account that groups related Assets together. It stores collection metadata (name, image, description) and can hold plugins that apply to all Assets in the collection.
+
+- Collections act as the "front cover" for a group of Assets
+- Assets reference their Collection via the `collection` field
+- Collection plugins (like Royalties) can apply to all member Assets
+- Creating a Collection costs ~0.0015 SOL
+
+## Out of Scope
+
+Token Metadata Collections (use mpl-token-metadata), compressed NFT collections (use Bubblegum), and migrating existing collections to Core.
+
+## Quick Start
+
+**Jump to:** [Create Collection](#creating-a-simple-collection) · [With Plugins](#creating-a-collection-with-plugins) · [Fetch](#fetch-a-collection) · [Update](#updating-a-collection)
+
+1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
+2. Upload collection metadata JSON to get a URI
+3. Call `createCollection(umi, { collection, name, uri })`
+4. Pass collection address when creating Assets
+
+## Prerequisites
+
+- **Umi** configured with a signer and RPC connection
+- **SOL** for transaction fees (~0.002 SOL per collection)
+- **Metadata JSON** uploaded to Arweave/IPFS with collection image
 
 ## What are Collections?
 
@@ -53,66 +92,7 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 
 The following snippet creates a simple collection without Plugins or anything special.
 
-{% dialect-switcher title="Create a MPL Core Collection" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner } from '@metaplex-foundation/umi'
-import { createCollection } from '@metaplex-foundation/mpl-core'
-
-const collectionSigner = generateSigner(umi)
-
-await createCollection(umi, {
-  collection: collectionSigner,
-  name: 'My Collection',
-  uri: 'https://example.com/my-collection.json',
-})
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```rust
-use mpl_core::instructions::CreateCollectionV1Builder;
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
-
-pub async fn create_collection() {
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
-    let payer = Keypair::new();
-    let collection = Keypair::new();
-
-    let create_collection_ix = CreateCollectionV1Builder::new()
-        .collection(collection.pubkey())
-        .payer(payer.pubkey())
-        .name("My Collection".into())
-        .uri("https://example.com/my-collection.json".into())
-        .instruction();
-
-    let signers = vec![&collection, &payer];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let create_collection_tx = Transaction::new_signed_with_payer(
-        &[create_collection_ix],
-        Some(&payer.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client
-        .send_and_confirm_transaction(&create_collection_tx)
-        .await
-        .unwrap();
-
-    println!("Signature: {:?}", res)
-}
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="core/create-collection" frameworks="umi" /%}
 
 ### Creating a Collection with Plugins
 
@@ -465,3 +445,96 @@ pub async fn update_collection_plugin() {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Common Errors
+
+### `Collection account already exists`
+
+The collection keypair was already used. Generate a new signer:
+
+```ts
+const collectionSigner = generateSigner(umi) // Must be unique
+```
+
+### `Authority mismatch`
+
+You're not the update authority of the collection. Check the collection's `updateAuthority` field matches your signer.
+
+### `Insufficient funds`
+
+Your payer wallet needs ~0.002 SOL. Fund it with:
+
+```bash
+solana airdrop 1 <WALLET_ADDRESS> --url devnet
+```
+
+## Notes
+
+- The `collection` parameter must be a **new keypair** when creating
+- Collection plugins are inherited by Assets unless overridden at the Asset level
+- Use `fetchCollection` to verify collection state after creation
+- The `numMinted` counter tracks total Assets ever created (not current size)
+
+## Quick Reference
+
+### Program ID
+
+| Network | Address |
+|---------|---------|
+| Mainnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
+| Devnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
+
+### Minimum Code
+
+```ts {% title="minimal-collection.ts" %}
+import { generateSigner } from '@metaplex-foundation/umi'
+import { createCollection } from '@metaplex-foundation/mpl-core'
+
+const collection = generateSigner(umi)
+await createCollection(umi, { collection, name: 'My Collection', uri: 'https://...' }).sendAndConfirm(umi)
+```
+
+### Cost Breakdown
+
+| Item | Cost |
+|------|------|
+| Collection account rent | ~0.0015 SOL |
+| Transaction fee | ~0.000005 SOL |
+| **Total** | **~0.002 SOL** |
+
+## FAQ
+
+### What's the difference between a Collection and an Asset?
+
+A Collection is a container that groups Assets together. It has its own metadata (name, image) but cannot be owned or transferred like an Asset. Assets are the actual NFTs that users own.
+
+### Can I add an existing Asset to a Collection?
+
+Yes, use the `update` instruction with the `newCollection` parameter. The Asset's update authority must have permission to add it to the target Collection.
+
+### Do I need a Collection for my NFTs?
+
+No. Assets can exist standalone without a Collection. However, Collections enable collection-level royalties, easier discoverability, and batch operations.
+
+### Can I remove an Asset from a Collection?
+
+Yes, use the `update` instruction to change the Asset's collection. You need the appropriate authority on both the Asset and Collection.
+
+### What happens if I delete a Collection?
+
+Collections cannot be deleted while they contain Assets. Remove all Assets first, then the Collection account can be closed.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Collection** | A Core account that groups related Assets under shared metadata |
+| **Update Authority** | The account that can modify Collection metadata and plugins |
+| **numMinted** | Counter tracking total Assets ever created in the Collection |
+| **currentSize** | Number of Assets currently in the Collection |
+| **Collection Plugin** | A plugin attached to the Collection (e.g., Royalties) |
+| **URI** | URL pointing to off-chain JSON metadata for the Collection |
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

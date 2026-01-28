@@ -1,14 +1,49 @@
 ---
 title: Core와 Token Metadata의 차이점
-metaTitle: Core와 Token Metadata의 차이점 | Core
-description: Solana 블록체인에서 Core와 Token Metadata NFT 프로토콜의 차이점.
+metaTitle: Core vs Token Metadata | Metaplex Core
+description: Metaplex Core와 Token Metadata NFT 표준을 비교합니다. 무엇이 바뀌었는지, 무엇이 새로운지, TM에서 Core로 멘탈 모델을 마이그레이션하는 방법을 알아봅니다.
 ---
 
-이 페이지는 먼저 TM과 비교한 Core의 일반적인 개선 사항을 탐색하고, 나중에 TM 함수의 동등한 기능이 Core에서 어떻게 사용될 수 있는지에 대한 더 기술적인 정보를 제공합니다.
+**Token Metadata**에서 오셨나요? 이 가이드는 Core에서 무엇이 다른지, 왜 더 좋은지, TM 지식을 Core 개념으로 변환하는 방법을 설명합니다. {% .lead %}
+
+{% callout title="주요 차이점" %}
+
+- **단일 계정** vs 3개 이상의 계정 (민트, 메타데이터, 토큰 계정)
+- **80% 낮은 비용**: 민트당 ~0.0037 SOL vs 0.022 SOL
+- 위임자와 동결 권한 대신 **플러그인**
+- 컬렉션 수준 작업이 있는 **일급 컬렉션**
+- **Associated Token Account** 불필요
+
+{% /callout %}
+
+## 요약
+
+Core는 Token Metadata의 다중 계정 모델을 단일 계정 설계로 대체합니다. 생성, 동결, 위임, 컬렉션 관리 모든 것이 더 간단합니다. 플러그인 시스템은 TM의 분산된 위임자 유형을 통합되고 확장 가능한 아키텍처로 대체합니다.
+
+| 기능 | Token Metadata | Core |
+|---------|---------------|------|
+| NFT당 계정 | 3개 이상 (민트, 메타데이터, ATA) | 1개 |
+| 민트 비용 | ~0.022 SOL | ~0.0037 SOL |
+| 동결 메커니즘 | 위임자 + 동결 권한 | Freeze Delegate 플러그인 |
+| 컬렉션 로열티 | Asset별 업데이트 | 컬렉션 수준 플러그인 |
+| 온체인 속성 | 없음 | Attributes 플러그인 있음 |
+
+## 범위 외
+
+마이그레이션 스크립트 (곧 제공), pNFT 특정 기능, 대체 가능 토큰 처리 (SPL Token 사용).
+
+## 빠른 시작
+
+**바로가기:** [비용 비교](#차이점-개요) · [컬렉션](#컬렉션) · [동결/잠금](#동결--잠금) · [생명 주기 이벤트](#생명-주기-이벤트와-플러그인)
+
+새로 시작하는 경우 Core를 사용하세요. 마이그레이션하는 경우 주요 멘탈 전환은:
+1. 세 개가 아닌 하나의 계정
+2. 위임자가 아닌 플러그인
+3. 컬렉션 수준 작업이 네이티브
 
 ## 차이점 개요
 
-- **전례없는 비용 효율성**: Metaplex Core는 사용 가능한 대안과 비교하여 가장 낮은 민팅 비용을 제공합니다. 예를 들어, Token Metadata로 .022 SOL이 드는 NFT를 Core로는 .0037 SOL에 민팅할 수 있습니다.
+- **전례없는 비용 효율성**: Metaplex Core는 사용 가능한 대안과 비교하여 가장 낮은 민팅 비용을 제공합니다. 예를 들어, Token Metadata로 0.022 SOL이 드는 NFT를 Core로는 0.0037 SOL에 민팅할 수 있습니다.
 - **개선된 개발자 경험**: 대부분의 디지털 자산이 전체 대체 가능한 토큰 프로그램을 유지하는 데 필요한 데이터를 상속받는 반면, Core는 NFT에 최적화되어 모든 핵심 데이터를 단일 Solana 계정에 저장할 수 있습니다. 이는 개발자의 복잡성을 극적으로 줄이고 Solana의 네트워크 성능 향상에도 도움이 됩니다.
 - **향상된 컬렉션 관리**: 컬렉션에 대한 일급 지원으로, 개발자와 창작자는 로열티 및 플러그인과 같은 컬렉션 수준 구성을 쉽게 관리할 수 있으며, 이는 개별 NFT에 대해 고유하게 재정의될 수 있습니다. 이는 단일 트랜잭션으로 수행될 수 있어 컬렉션 관리 비용과 Solana 트랜잭션 수수료를 줄입니다.
 - **고급 플러그인 지원**: 내장 스테이킹부터 자산 기반 포인트 시스템까지, Metaplex Core의 플러그인 아키텍처는 유틸리티와 커스터마이제이션의 방대한 영역을 열어줍니다. 플러그인을 통해 개발자는 생성, 전송, 소각과 같은 자산 생명 주기 이벤트에 후크를 걸어 커스텀 동작을 추가할 수 있습니다.
@@ -105,10 +140,73 @@ TM에서는 자산의 현재 상태와 동결, 잠금 또는 전송 가능한 �
 const burningAllowed = canBurn(authority, asset, collection)
 ```
 
+## 빠른 참조
+
+### TM 개념 → Core 동등물
+
+| Token Metadata | Core 동등물 |
+|----------------|-----------------|
+| Mint 계정 | Asset 계정 |
+| Metadata 계정 | Asset 계정 (통합) |
+| Associated Token Account | 불필요 |
+| 동결 권한 | Freeze Delegate 플러그인 |
+| Update Authority | Update Authority (동일) |
+| 위임자 | Transfer/Burn/Update Delegate 플러그인 |
+| 컬렉션 검증됨 | 컬렉션 멤버십 (자동) |
+| 창작자 배열 | Verified Creators 플러그인 |
+| Uses/유틸리티 | 플러그인 (커스텀 로직) |
+
+### 일반적인 작업
+
+| 작업 | Token Metadata | Core |
+|-----------|---------------|------|
+| NFT 생성 | `createV1()` (다중 계정) | `create()` (단일 계정) |
+| 동결 | 위임 후 동결 | Freeze Delegate 플러그인 추가 |
+| 메타데이터 업데이트 | `updateV1()` | `update()` |
+| 전송 | SPL Token 전송 | `transfer()` |
+| 소각 | `burnV1()` | `burn()` |
+
+## FAQ
+
+### 새 프로젝트에 Core와 Token Metadata 중 어떤 것을 사용해야 하나요?
+
+모든 새 프로젝트에 Core를 사용하세요. 더 저렴하고, 간단하며, 더 나은 기능이 있습니다. Token Metadata는 레거시입니다.
+
+### 기존 TM NFT를 Core로 마이그레이션할 수 있나요?
+
+자동으로는 안 됩니다. Core Assets는 다른 온체인 계정입니다. 마이그레이션은 TM NFT를 소각하고 새 Core Assets를 민팅해야 합니다.
+
+### pNFT는 어떻게 되었나요?
+
+Core의 로열티 강제는 허용/거부 목록 지원이 있는 Royalties 플러그인을 통해 내장되어 있습니다. 별도의 "프로그래머블" 변형이 필요 없습니다.
+
+### 아직 Associated Token Account가 필요한가요?
+
+아니오. Core Assets는 ATA를 사용하지 않습니다. 소유권은 Asset 계정에 직접 저장됩니다.
+
+### Core에서 창작자를 어떻게 검증하나요?
+
+[Verified Creators 플러그인](/ko/smart-contracts/core/plugins/verified-creators)을 사용하세요. TM의 창작자 배열과 유사하게 작동하지만 옵트인입니다.
+
 ## 추가 읽기
 
 위에서 설명한 기능들은 빙산의 일각에 불과합니다. 추가로 흥미로운 주제들은 다음과 같습니다:
 
-- 컬렉션 관리
-- 플러그인 개요
+- [컬렉션 관리](/ko/smart-contracts/core/collections)
+- [플러그인 개요](/ko/smart-contracts/core/plugins)
 - [속성 플러그인](/ko/smart-contracts/core/plugins/attribute)을 사용한 온체인 데이터 추가
+- [Assets 생성하기](/ko/smart-contracts/core/create-asset)
+
+## 용어집
+
+| 용어 | 정의 |
+|------|------------|
+| **Token Metadata (TM)** | 다중 계정을 사용하는 레거시 Metaplex NFT 표준 |
+| **Core** | 단일 계정 설계의 새로운 Metaplex NFT 표준 |
+| **플러그인** | Core Assets에 추가되는 모듈형 기능 |
+| **ATA** | Associated Token Account (Core에서 불필요) |
+| **pNFT** | TM의 프로그래머블 NFT (로열티 강제가 Core에 내장) |
+
+---
+
+*Metaplex Foundation에서 관리 · 2026년 1월 최종 확인 · @metaplex-foundation/mpl-core에 적용*
