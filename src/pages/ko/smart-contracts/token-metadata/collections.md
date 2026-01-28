@@ -193,25 +193,7 @@ Collection
 
 컬렉션 NFT 생성은 일반 NFT 생성과 매우 유사합니다. 유일한 차이점은 이전 섹션에서 본 것처럼 `CollectionDetails` 필드를 설정해야 한다는 것입니다. 일부 SDK는 NFT를 생성할 때 `isCollection` 속성을 요청하여 이를 캡슐화합니다.
 
-{% dialect-switcher title="컬렉션 NFT 생성" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import { createNft } from '@metaplex-foundation/mpl-token-metadata'
-
-const collectionMint = generateSigner(umi)
-await createNft(umi, {
-  mint: collectionMint,
-  name: 'My Collection',
-  uri: 'https://example.com/my-collection.json',
-  sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
-  isCollection: true,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/create-collection" frameworks="umi,kit" /%}
 
 ## 중첩된 컬렉션 NFT
 
@@ -419,50 +401,10 @@ NFT에 `Collection` 속성이 설정되면, 컬렉션 NFT의 권한은 Token Met
 
 다음은 Token Metadata에서 컬렉션 NFT를 검증하기 위해 우리의 SDK를 사용하는 방법입니다.
 
-{% dialect-switcher title="컬렉션 NFT 검증" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { publicKey } from "@metaplex-foundation/umi";
-import { verifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
-
-// 먼저 나중에 사용할 메타데이터 PDA 찾기
-const metadata = findMetadataPda(umi, {
-  mint: publicKey("...")
-});
-
-await verifyCollectionV1(umi, {
-  metadata,
-  collectionMint,
-  authority: collectionAuthority,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/verify-collection" frameworks="umi,kit" /%}
 
 ### 검증 해제
 
 상호적으로, 컬렉션 NFT의 권한은 자신의 컬렉션에 속한 모든 NFT의 검증을 해제할 수 있습니다. 이는 **Verify** 명령어와 동일한 속성을 가진 **Unverify** 명령어를 Token Metadata 프로그램에 보내는 것으로 수행됩니다.
 
-{% dialect-switcher title="컬렉션 NFT 검증 해제" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { publicKey } from "@metaplex-foundation/umi";
-import { unverifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
-
-// 먼저 나중에 사용할 메타데이터 PDA 찾기
-const metadata = findMetadataPda(umi, {
-  mint: publicKey("...")
-});
-
-await unverifyCollectionV1(umi, {
-  metadata,
-  collectionMint,
-  authority: collectionAuthority,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unverify-collection" frameworks="umi,kit" /%}

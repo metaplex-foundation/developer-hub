@@ -1,55 +1,70 @@
 ---
 title: 使用 JavaScript 入门
-metaTitle: JavaScript SDK | Token Metadata
+metaTitle: JavaScript SDKs | Token Metadata
 description: 使用 Metaplex Token Metadata JavaScript SDK 开始使用 NFT。
 ---
 
-Metaplex 提供了一个可用于与 NFT 交互的 JavaScript 库。借助 [Umi 框架](https://github.com/metaplex-foundation/umi),它没有许多固执己见的依赖项,因此提供了一个可在任何 JavaScript 项目中使用的轻量级库。
+Metaplex 提供了两个用于与 Token Metadata NFT 交互的 JavaScript SDK。两者都提供对 Token Metadata 功能的完整访问 - 根据您的项目架构进行选择。 {% .lead %}
 
-首先,您需要[安装 Umi 框架](https://github.com/metaplex-foundation/umi/blob/main/docs/installation.md)和 Token Metadata JavaScript 库。
+## 选择您的 SDK
 
-```sh
-npm install \
-  @metaplex-foundation/umi \
-  @metaplex-foundation/umi-bundle-defaults \
-  @solana/web3.js@1 \
-  @metaplex-foundation/mpl-token-metadata
-```
+{% quick-links %}
 
-接下来,您可以像这样创建您的 `Umi` 实例并安装 `mplTokenMetadata` 插件。
+{% quick-link title="Umi SDK" icon="JavaScript" href="/zh/smart-contracts/token-metadata/getting-started/umi" description="基于 Umi 框架构建，具有流畅的 API。适合使用 Umi 的项目。" /%}
+
+{% quick-link title="Kit SDK" icon="JavaScript" href="/zh/smart-contracts/token-metadata/getting-started/kit" description="基于 @solana/kit 构建，具有函数式指令构建器。适合新项目。" /%}
+
+{% /quick-links %}
+
+## 比较
+
+| 功能 | Umi SDK | Kit SDK |
+| ------- | ------- | ------- |
+| 包 | `@metaplex-foundation/mpl-token-metadata` | `@metaplex-foundation/mpl-token-metadata-kit` |
+| 基础 | Umi 框架 | @solana/kit |
+| 交易构建 | 使用 `.sendAndConfirm()` 的流畅 API | 使用指令构建器的函数式 |
+| 钱包处理 | 内置身份系统 | 标准 @solana/signers |
+| 适用于 | 已经使用 Umi 的项目 | 使用 @solana/kit 的新项目 |
+
+## 快速示例
+
+{% dialect-switcher title="创建 NFT" %}
+{% dialect title="Umi SDK" id="umi" %}
 
 ```ts
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata'
+import { generateSigner, percentAmount } from '@metaplex-foundation/umi';
+import { createNft } from '@metaplex-foundation/mpl-token-metadata';
 
-// Use the RPC endpoint of your choice.
-const umi = createUmi('http://127.0.0.1:8899').use(mplTokenMetadata())
-```
-然后,您需要告诉 Umi 使用哪个钱包。这可以是[密钥对](/zh/dev-tools/umi/getting-started#connecting-w-a-secret-key)或 [solana 钱包适配器](/zh/dev-tools/umi/getting-started#connecting-w-wallet-adapter)。
-
-就是这样,您现在可以通过使用[库提供的各种函数](https://mpl-token-metadata.typedoc.metaplex.com/)并将您的 `Umi` 实例传递给它们来与 NFT 交互。以下是创建 NFT 并获取其所有链上账户数据的示例。
-
-```ts
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import {
-  createNft,
-  fetchDigitalAsset,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const mint = generateSigner(umi)
+const mint = generateSigner(umi);
 await createNft(umi, {
   mint,
   name: 'My NFT',
   uri: 'https://example.com/my-nft.json',
   sellerFeeBasisPoints: percentAmount(5.5),
-}).sendAndConfirm(umi)
-
-const asset = await fetchDigitalAsset(umi, mint.publicKey)
+}).sendAndConfirm(umi);
 ```
 
-🔗 **有用的链接:**
+{% /dialect %}
+{% dialect title="Kit SDK" id="kit" %}
 
-- [Umi 框架](https://github.com/metaplex-foundation/umi)
-- [GitHub 仓库](https://github.com/metaplex-foundation/mpl-token-metadata)
-- [NPM 包](https://www.npmjs.com/package/@metaplex-foundation/mpl-token-metadata)
-- [API 参考](https://mpl-token-metadata.typedoc.metaplex.com/)
+```ts
+import { generateKeyPairSigner } from '@solana/signers';
+import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit';
+
+const mint = await generateKeyPairSigner();
+const [createIx, mintIx] = await createNft({
+  mint,
+  authority,
+  payer: authority,
+  name: 'My NFT',
+  uri: 'https://example.com/my-nft.json',
+  sellerFeeBasisPoints: 550,
+  tokenOwner: authority.address,
+});
+await sendAndConfirm([createIx, mintIx], [mint, authority]);
+```
+
+{% /dialect %}
+{% /dialect-switcher %}
+
+请参阅各个页面了解完整的设置说明和更多示例。

@@ -1,0 +1,39 @@
+// [IMPORTS]
+import {
+  getLockV1InstructionAsync,
+  fetchDigitalAssetWithAssociatedToken,
+  TokenStandard,
+} from '@metaplex-foundation/mpl-token-metadata-kit';
+// [/IMPORTS]
+
+// [SETUP]
+// Assuming rpc, rpcSubscriptions, sendAndConfirm, and authority (delegate) are set up
+
+const mintAddress = 'mintAddress...'; // The pNFT mint address
+// [/SETUP]
+
+// [MAIN]
+// Fetch pNFT Asset with Token Accounts
+const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
+  rpc,
+  mintAddress,
+  authority.address
+);
+
+// Lock a pNFT - requires approved delegate authority
+const lockIx = await getLockV1InstructionAsync({
+  mint: mintAddress,
+  authority,
+  payer: authority,
+  tokenOwner: assetWithToken.token.owner,
+  token: assetWithToken.token.address,
+  tokenRecord: assetWithToken.tokenRecord?.address,
+  tokenStandard: TokenStandard.ProgrammableNonFungible,
+});
+
+await sendAndConfirm([lockIx], [authority]);
+// [/MAIN]
+
+// [OUTPUT]
+console.log('pNFT locked');
+// [/OUTPUT]

@@ -20,7 +20,7 @@ Token Metadataプログラムを使用して、Solana上でメタデータ付き
 
 以下のコードは完全に実行可能な例です。カスタマイズ可能なパラメータを以下に示します。トークン作成の詳細については、[Token Metadataプログラム](/ja/smart-contracts/token-metadata/mint#minting-tokens)ページをご覧ください。
 
-{% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi,cli" /%}
+{% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi,kit,cli" /%}
 
 ## パラメータ
 

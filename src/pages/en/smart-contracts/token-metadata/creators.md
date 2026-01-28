@@ -21,36 +21,10 @@ The main attributes required by the **Verify** instruction in the context of ver
 
 Here's how we can use our SDKs to verify a creator on Token Metadata.
 
-{% dialect-switcher title="Verify a Creator" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { verifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await verifyCreatorV1(umi, {
-  metadata,
-  authority: creator,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/verify-creator" frameworks="umi,kit" /%}
 
 ## Unverify a Creator
 
 Reciprocally, the **Unverify** instruction can be used to turn the `verified` flag of a creator to `false`. It accepts the same attributes as the **Verify** instruction and can be used in the same way.
 
-{% dialect-switcher title="Unverify a Creator" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { unverifyCreatorV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unverifyCreatorV1(umi, {
-  metadata,
-  authority: creator,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unverify-creator" frameworks="umi,kit" /%}

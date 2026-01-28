@@ -26,112 +26,19 @@ description: Token Metadata에 대한 자주 묻는 질문
 
 ## 소울바운드 자산을 만드는 방법은?
 
+{% callout type="note" %}
+새로운 프로젝트의 경우, 더 간단하고 효율적인 접근 방식을 제공하는 [Metaplex Core](/smart-contracts/core)를 소울바운드 NFT에 사용하는 것을 권장합니다. 자세한 내용은 [소울바운드 NFT 자산 생성 가이드](/smart-contracts/core/guides/create-soulbound-nft-asset)를 참조하세요.
+{% /callout %}
+
 Token Metadata를 사용하여 소울바운드 자산을 만들 수 있습니다. 이를 달성하는 가장 좋은 방법은 `non-transferrable` 토큰 확장과 함께 Token22를 기본 SPL 토큰으로 사용하는 것입니다.
 
-{% dialect-switcher title="소울바운드 자산 생성" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem %}
+{% totem-accordion title="코드 예제 보기" %}
 
-```ts
-import { createV1 } from "@metaplex-foundation/mpl-token-metadata";
-import { createAccount } from '@metaplex-foundation/mpl-toolbox';
-import {
-  ExtensionType,
-  createInitializeMintInstruction,
-  getMintLen,
-  createInitializeNonTransferableMintInstruction,
-} from '@solana/spl-token';
-import {
-  fromWeb3JsInstruction,
-  toWeb3JsPublicKey,
-} from '@metaplex-foundation/umi-web3js-adapters';
+{% code-tabs-imported from="token-metadata/soulbound" frameworks="umi,kit" /%}
 
-const SPL_TOKEN_2022_PROGRAM_ID: PublicKey = publicKey(
-  'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
-);
-
-const umi = await createUmi();
-const mint = generateSigner(umi);
-
-const extensions = [ExtensionType.NonTransferable];
-const space = getMintLen(extensions);
-const lamports = await umi.rpc.getRent(space);
-
-// 민트 계정을 생성합니다.
-const createAccountIx = createAccount(umi, {
-  payer: umi.identity,
-  newAccount: mint,
-  lamports,
-  space,
-  programId: SPL_TOKEN_2022_PROGRAM_ID,
-}).getInstructions();
-
-// 전송 불가능한 확장을 초기화합니다.
-const createInitNonTransferableMintIx =
-  createInitializeNonTransferableMintInstruction(
-    toWeb3JsPublicKey(mint.publicKey),
-    toWeb3JsPublicKey(SPL_TOKEN_2022_PROGRAM_ID)
-  );
-
-// 민트를 초기화합니다.
-const createInitMintIx = createInitializeMintInstruction(
-  toWeb3JsPublicKey(mint.publicKey),
-  0,
-  toWeb3JsPublicKey(umi.identity.publicKey),
-  toWeb3JsPublicKey(umi.identity.publicKey),
-  toWeb3JsPublicKey(SPL_TOKEN_2022_PROGRAM_ID)
-);
-
-// Token22 명령어로 트랜잭션을 생성합니다.
-const blockhash = await umi.rpc.getLatestBlockhash();
-const tx = umi.transactions.create({
-  version: 0,
-  instructions: [
-    ...createAccountIx,
-    fromWeb3JsInstruction(createInitNonTransferableMintIx),
-    fromWeb3JsInstruction(createInitMintIx),
-  ],
-  payer: umi.identity.publicKey,
-  blockhash: blockhash.blockhash,
-});
-
-// 트랜잭션에 서명, 전송 및 확인합니다.
-let signedTx = await mint.signTransaction(tx);
-signedTx = await umi.identity.signTransaction(signedTx);
-const signature = await umi.rpc.sendTransaction(signedTx);
-await umi.rpc.confirmTransaction(signature, {
-  strategy: { type: 'blockhash', ...blockhash },
-  commitment: 'confirmed',
-});
-
-// Token Metadata 계정을 생성합니다.
-await createV1(umi, {
-  mint,
-  name: 'My Programmable NFT',
-  uri: 'https://example.com/my-programmable-nft.json',
-  sellerFeeBasisPoints: percentAmount(5.5),
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-}).sendAndConfirm(umi);
-
-// 토큰 PDA를 유도합니다.
-const token = findAssociatedTokenPda(umi, {
-  mint: mint.publicKey,
-  owner: umi.identity.publicKey,
-  tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
-});
-
-// 토큰을 민팅합니다.
-await mintV1(umi, {
-  mint: mint.publicKey,
-  token,
-  tokenOwner: umi.identity.publicKey,
-  amount: 1,
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi);
-```
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem-accordion %}
+{% /totem %}
 
 TokenKeg SPL 토큰을 사용해야 하는 경우, pNFT에서 [Locked Transfer 위임자](/ko/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)를 사용한 다음 pNFT를 잠가서 소울바운드 자산을 만들 수 있습니다. 그러나 이는 소유자가 pNFT를 전송하는 것을 방지할 뿐만 아니라 소유자가 소각하는 것도 방지한다는 점에 주목하세요. 이것이 소울바운드 자산에 Token22 토큰을 사용하는 것을 권장하는 이유입니다.
 

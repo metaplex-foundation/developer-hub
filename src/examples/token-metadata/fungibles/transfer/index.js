@@ -7,6 +7,14 @@
  * Edit the native .js and .rs files, then run: node scripts/build-examples.js
  */
 
+const kitSections = {
+  "imports": "import {\n  getTransferV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';",
+  "setup": "// Assuming rpc, rpcSubscriptions, sendAndConfirm, and authority are set up\n// See getting-started for full setup\n\nconst mintAddress = 'YOUR_TOKEN_MINT_ADDRESS'; // Your fungible token mint\nconst destinationOwner = 'DESTINATION_WALLET_ADDRESS'; // Wallet to receive tokens",
+  "main": "// Transfer fungible tokens to another wallet\nconst transferIx = await getTransferV1InstructionAsync({\n  mint: mintAddress,\n  tokenOwner: authority.address,\n  destinationOwner,\n  authority,\n  payer: authority,\n  amount: 100n, // Amount to transfer (accounting for decimals)\n  tokenStandard: TokenStandard.Fungible,\n});\n\nawait sendAndConfirm([transferIx], [authority]);",
+  "output": "console.log('Transferred tokens');\nconsole.log('From:', authority.address);\nconsole.log('To:', destinationOwner);",
+  "full": "// [IMPORTS]\nimport {\n  getTransferV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';\n// [/IMPORTS]\n\n// [SETUP]\n// Assuming rpc, rpcSubscriptions, sendAndConfirm, and authority are set up\n// See getting-started for full setup\n\nconst mintAddress = 'YOUR_TOKEN_MINT_ADDRESS'; // Your fungible token mint\nconst destinationOwner = 'DESTINATION_WALLET_ADDRESS'; // Wallet to receive tokens\n// [/SETUP]\n\n// [MAIN]\n// Transfer fungible tokens to another wallet\nconst transferIx = await getTransferV1InstructionAsync({\n  mint: mintAddress,\n  tokenOwner: authority.address,\n  destinationOwner,\n  authority,\n  payer: authority,\n  amount: 100n, // Amount to transfer (accounting for decimals)\n  tokenStandard: TokenStandard.Fungible,\n});\n\nawait sendAndConfirm([transferIx], [authority]);\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Transferred tokens');\nconsole.log('From:', authority.address);\nconsole.log('To:', destinationOwner);\n// [/OUTPUT]\n"
+}
+
 const umiSections = {
   "imports": "// To install all the required packages use the following command\r\n// npm install @metaplex-foundation/mpl-toolbox @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults\r\nimport {\r\n    createTokenIfMissing,\r\n    findAssociatedTokenPda,\r\n    transferTokens,\r\n} from '@metaplex-foundation/mpl-toolbox';\r\nimport {\r\n    keypairIdentity,\r\n    publicKey,\r\n    transactionBuilder,\r\n} from '@metaplex-foundation/umi';\r\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\r\nimport { readFileSync } from 'fs';",
   "setup": "// Initialize Umi with Devnet endpoint\r\n  const umi = createUmi('https://api.devnet.solana.com')\r\n  \r\n  // Load your wallet/keypair\r\n  const wallet = '<your wallet file path>'\r\n  const secretKey = JSON.parse(readFileSync(wallet, 'utf-8'))\r\n  const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))\r\n  umi.use(keypairIdentity(keypair))\r\n  \r\n  // Your token mint address and destination wallet\r\n  const mintAddress = publicKey('<your token mint address>')\r\n  const destinationAddress = publicKey('<destination wallet address>')",
@@ -30,6 +38,13 @@ export const metadata = {
 }
 
 export const examples = {
+  kit: {
+    framework: 'Kit',
+    language: 'javascript',
+    code: kitSections.full,
+    sections: kitSections,
+  },
+
   umi: {
     framework: 'Umi',
     language: 'javascript',

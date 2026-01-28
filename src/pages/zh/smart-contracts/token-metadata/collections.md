@@ -193,25 +193,7 @@ With no collection
 
 创建集合 NFT 与创建普通 NFT 非常相似。唯一的区别是我们必须设置上一节中看到的 `CollectionDetails` 字段。我们的一些 SDK 通过在创建 NFT 时请求 `isCollection` 属性来封装此功能。
 
-{% dialect-switcher title="创建集合 NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import { createNft } from '@metaplex-foundation/mpl-token-metadata'
-
-const collectionMint = generateSigner(umi)
-await createNft(umi, {
-  mint: collectionMint,
-  name: 'My Collection',
-  uri: 'https://example.com/my-collection.json',
-  sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
-  isCollection: true,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/create-collection" frameworks="umi,kit" /%}
 
 ## 嵌套集合 NFT
 
@@ -419,50 +401,10 @@ to be part of this collection.
 
 以下是如何使用我们的 SDK 在 Token Metadata 上验证集合 NFT。
 
-{% dialect-switcher title="验证集合 NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { publicKey } from "@metaplex-foundation/umi";
-import { verifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
-
-// first find the metadata PDA to use later
-const metadata = findMetadataPda(umi, {
-  mint: publicKey("...")
-});
-
-await verifyCollectionV1(umi, {
-  metadata,
-  collectionMint,
-  authority: collectionAuthority,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/verify-collection" frameworks="umi,kit" /%}
 
 ### 取消验证
 
 相反，集合 NFT 的权限可以取消验证属于其集合的任何 NFT。这是通过向 Token Metadata 程序发送**取消验证**指令来完成的，其属性与**验证**指令相同。
 
-{% dialect-switcher title="取消验证集合 NFT" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { publicKey } from "@metaplex-foundation/umi";
-import { unverifyCollectionV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
-
-// first find the metadata PDA to use later
-const metadata = findMetadataPda(umi, {
-  mint: publicKey("...")
-});
-
-await unverifyCollectionV1(umi, {
-  metadata,
-  collectionMint,
-  authority: collectionAuthority,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="token-metadata/unverify-collection" frameworks="umi,kit" /%}

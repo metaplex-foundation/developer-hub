@@ -46,13 +46,6 @@ export const metadata = {
 }
 
 export const examples = {
-  kit: {
-    framework: 'Kit',
-    language: 'javascript',
-    code: kitSections.full,
-    sections: kitSections,
-  },
-
   umi: {
     framework: 'Umi',
     language: 'javascript',

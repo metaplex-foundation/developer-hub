@@ -26,112 +26,21 @@ description: Token Metadataについてよく聞かれる質問
 
 ## Soulbound Assetを作成するにはどうすればよいですか？
 
+{% callout type="note" %}
+新しいプロジェクトでは、よりシンプルで効率的なアプローチを提供する[Metaplex Core](/smart-contracts/core)をSoulbound NFTに使用することをお勧めします。詳細については、[Soulbound NFT Assetの作成ガイド](/smart-contracts/core/guides/create-soulbound-nft-asset)をご覧ください。
+{% /callout %}
+
 Token Metadataでは、Soulbound Assetを作成できます。これを達成する最良の方法は、`non-transferrable` Token拡張機能とともに、基本SPLトークンとしてToken22を使用することです。
 
-{% dialect-switcher title="Create a Soulbound asset" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem %}
+{% totem-accordion title="コード例を表示" %}
 
-```ts
-import { createV1 } from "@metaplex-foundation/mpl-token-metadata";
-import { createAccount } from '@metaplex-foundation/mpl-toolbox';
-import {
-  ExtensionType,
-  createInitializeMintInstruction,
-  getMintLen,
-  createInitializeNonTransferableMintInstruction,
-} from '@solana/spl-token';
-import {
-  fromWeb3JsInstruction,
-  toWeb3JsPublicKey,
-} from '@metaplex-foundation/umi-web3js-adapters';
+{% code-tabs-imported from="token-metadata/soulbound" frameworks="umi,kit" /%}
 
-const SPL_TOKEN_2022_PROGRAM_ID: PublicKey = publicKey(
-  'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
-);
+{% /totem-accordion %}
+{% /totem %}
 
-const umi = await createUmi();
-const mint = generateSigner(umi);
-
-const extensions = [ExtensionType.NonTransferable];
-const space = getMintLen(extensions);
-const lamports = await umi.rpc.getRent(space);
-
-// Mintアカウントを作成
-const createAccountIx = createAccount(umi, {
-  payer: umi.identity,
-  newAccount: mint,
-  lamports,
-  space,
-  programId: SPL_TOKEN_2022_PROGRAM_ID,
-}).getInstructions();
-
-// 転送不可拡張機能を初期化
-const createInitNonTransferableMintIx =
-  createInitializeNonTransferableMintInstruction(
-    toWeb3JsPublicKey(mint.publicKey),
-    toWeb3JsPublicKey(SPL_TOKEN_2022_PROGRAM_ID)
-  );
-
-// Mintを初期化
-const createInitMintIx = createInitializeMintInstruction(
-  toWeb3JsPublicKey(mint.publicKey),
-  0,
-  toWeb3JsPublicKey(umi.identity.publicKey),
-  toWeb3JsPublicKey(umi.identity.publicKey),
-  toWeb3JsPublicKey(SPL_TOKEN_2022_PROGRAM_ID)
-);
-
-// Token22命令でトランザクションを作成
-const blockhash = await umi.rpc.getLatestBlockhash();
-const tx = umi.transactions.create({
-  version: 0,
-  instructions: [
-    ...createAccountIx,
-    fromWeb3JsInstruction(createInitNonTransferableMintIx),
-    fromWeb3JsInstruction(createInitMintIx),
-  ],
-  payer: umi.identity.publicKey,
-  blockhash: blockhash.blockhash,
-});
-
-// トランザクションに署名、送信、確認
-let signedTx = await mint.signTransaction(tx);
-signedTx = await umi.identity.signTransaction(signedTx);
-const signature = await umi.rpc.sendTransaction(signedTx);
-await umi.rpc.confirmTransaction(signature, {
-  strategy: { type: 'blockhash', ...blockhash },
-  commitment: 'confirmed',
-});
-
-// Token Metadataアカウントを作成
-await createV1(umi, {
-  mint,
-  name: 'My Soulbound NFT',
-  uri: 'https://example.com/my-soulbound-nft.json',
-  sellerFeeBasisPoints: percentAmount(5.5),
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-}).sendAndConfirm(umi);
-
-// Token PDAを導出
-const token = findAssociatedTokenPda(umi, {
-  mint: mint.publicKey,
-  owner: umi.identity.publicKey,
-  tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
-});
-
-// トークンをミント
-await mintV1(umi, {
-  mint: mint.publicKey,
-  token,
-  tokenOwner: umi.identity.publicKey,
-  amount: 1,
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-}).sendAndConfirm(umi);
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+TokenKeg SPLトークンを使用する必要がある場合は、pNFTの[Locked Transfer Delegate](/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)を使用してSoulbound Assetを作成し、そのpNFTをロックすることができます。ただし、これにより所有者がpNFTを転送するだけでなく、バーンすることもできなくなることに注意してください。これが、Soulbound AssetにはToken22トークンの使用を推奨する理由です。
 
 ## Mint AuthorityとFreeze AuthorityがEdition PDAに転送されるのはなぜですか？
 

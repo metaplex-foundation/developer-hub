@@ -96,58 +96,21 @@ Token Metadata가 제공하는 위임자는 **메타데이터 위임자**와 **�
   - `isMutable`: 자산을 불변으로 만들기 위해 `false`로 토글합니다.
   - `tokenStandard`: 자산이 설정이 필수가 되기 전에 생성된 경우 토큰 표준을 설정할 수 있습니다.
 
-{% dialect-switcher title="Authority Item 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateAuthorityItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateAuthorityItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: authorityItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-authority-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeAuthorityItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeAuthorityItemV1(umi, {
-  mint,
-  authority: updateAuthority, // 또는 위임자 권한을 서명자로 전달하여 자기 취소.
-  delegate: authorityItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-authority-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 업데이트" %}
-
-```ts
-import { updateAsAuthorityItemDelegateV2 } from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsAuthorityItemDelegateV2(umi, {
-  mint,
-  authority: authorityItemDelegate,
-  newUpdateAuthority,
-  isMutable: false,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-authority-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Collection 위임자
 
@@ -156,173 +119,54 @@ await updateAsAuthorityItemDelegateV2(umi, {
   - 항목에서 해당 컬렉션 NFT를 검증하고 검증 해제할 수 있습니다. 컬렉션 NFT가 이미 항목에 설정되어 있는 경우에만 이를 수행할 수 있습니다. 그렇지 않으면 항목이 위임된 컬렉션 NFT의 일부인지 알 수 있는 방법이 없습니다.
   - 항목에서 컬렉션 NFT를 지울 수 있습니다.
 
-{% dialect-switcher title="Collection 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateCollectionV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: collectionDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeCollectionV1(umi, {
-  mint,
-  authority: updateAuthority, // 또는 위임자 권한을 서명자로 전달하여 자기 취소.
-  delegate: collectionDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 자산의 컬렉션 업데이트" %}
-
-```ts
-import {
-  updateAsCollectionDelegateV2,
-  collectionToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsCollectionDelegateV2(umi, {
-  mint,
-  authority: collectionDelegate,
-  collection: collectionToggle('Set', [
-    { key: collectionMint, verified: false },
-  ]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="항목의 컬렉션 지우기" %}
-
-```ts
-import {
-  updateAsCollectionDelegateV2,
-  collectionToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsCollectionDelegateV2(umi, {
-  mint,
-  delegateMint: collectionMint,
-  authority: collectionDelegate,
-  collection: collectionToggle('Clear'),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-clear" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="항목의 컬렉션 검증" %}
-
-```ts
-import {
-  verifyCollectionV1,
-  findMetadataPda,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await verifyCollectionV1(umi, {
-  metadata: findMetadataPda(umi, { mint }),
-  collectionMint,
-  authority: collectionDelegate,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-verify" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="항목의 컬렉션 검증 해제" %}
-
-```ts
-import {
-  unverifyCollectionV1,
-  findMetadataPda,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await unverifyCollectionV1(umi, {
-  metadata: findMetadataPda(umi, { mint }),
-  collectionMint,
-  authority: collectionDelegate,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-unverify" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Collection Item 위임자
 
 - 위임자 권한은 자산의 하위 집합을 업데이트할 수 있습니다. Metadata 계정의 `collection` 속성을 설정할 수 있습니다.
 - 자산이 컬렉션 NFT인 경우에도, Collection 위임자와 달리 Collection Item 위임자는 해당 컬렉션의 항목에 영향을 줄 수 없습니다.
 
-{% dialect-switcher title="Collection Item 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateCollectionItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateCollectionItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: collectionItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeCollectionItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeCollectionItemV1(umi, {
-  mint,
-  authority: updateAuthority, // 또는 위임자 권한을 서명자로 전달하여 자기 취소.
-  delegate: collectionItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 업데이트" %}
-
-```ts
-import { updateAsCollectionItemDelegateV2 } from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsCollectionItemDelegateV2(umi, {
-  mint,
-  authority: collectionItemDelegate,
-  collection: collectionToggle('Set', [
-    { key: collectionMint, verified: false },
-  ]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Data 위임자
 
@@ -330,80 +174,25 @@ await updateAsCollectionItemDelegateV2(umi, {
 - `data` 객체 내의 `creators` 배열을 업데이트할 때는 검증되지 않은 크리에이터만 추가 및/또는 제거할 수 있다는 점에 주목하세요.
 - 컬렉션 NFT에 적용될 때, 위임자 권한은 해당 컬렉션 내의 항목에 대해 동일한 업데이트를 수행할 수 있습니다.
 
-{% dialect-switcher title="Data 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateDataV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateDataV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: dataDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeDataV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeDataV1(umi, {
-  mint,
-  authority: updateAuthority, // 또는 위임자 권한을 서명자로 전달하여 자기 취소.
-  delegate: dataDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 업데이트" %}
-
-```ts
-import {
-  updateAsDataDelegateV2,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateAsDataDelegateV2(umi, {
-  mint,
-  authority: dataDelegate,
-  data: { ...initialMetadata, name: 'Updated Name' },
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="항목의 위임된 업데이트" %}
-
-```ts
-import {
-  updateAsDataDelegateV2,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateAsDataDelegateV2(umi, {
-  mint,
-  delegateMint: collectionMint,
-  authority: dataDelegate,
-  data: { ...initialMetadata, name: 'Updated Name' },
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-update-item" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Data Item 위임자
 
@@ -411,61 +200,21 @@ await updateAsDataDelegateV2(umi, {
 - `data` 객체 내의 `creators` 배열을 업데이트할 때는 검증되지 않은 크리에이터만 추가 및/또는 제거할 수 있다는 점에 주목하세요.
 - 자산이 컬렉션 NFT인 경우에도, Data 위임자와 달리 Data Item 위임자는 해당 컬렉션의 항목에 영향을 줄 수 없습니다.
 
-{% dialect-switcher title="Data Item 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateDataItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateDataItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: dataItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeDataItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeDataItemV1(umi, {
-  mint,
-  authority: updateAuthority, // 또는 위임자 권한을 서명자로 전달하여 자기 취소.
-  delegate: dataItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 업데이트" %}
-
-```ts
-import {
-  updateAsDataItemDelegateV2,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateAsDataItemDelegateV2(umi, {
-  mint,
-  authority: dataItemDelegate,
-  data: { ...initialMetadata, name: 'Updated Name' },
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Programmable Config 위임자
 
@@ -473,82 +222,25 @@ await updateAsDataItemDelegateV2(umi, {
 - 위임자 권한은 Metadata 계정의 `programmableConfigs` 속성을 업데이트할 수 있지만 그 외에는 아무것도 할 수 없습니다. 이는 PNFT의 `ruleSet`을 업데이트할 수 있다는 의미입니다.
 - 컬렉션 NFT에 적용될 때, 위임자 권한은 해당 컬렉션 내의 항목에 대해 동일한 업데이트를 수행할 수 있습니다.
 
-{% dialect-switcher title="Programmable Config 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateProgrammableConfigV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateProgrammableConfigV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: programmableConfigDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeProgrammableConfigV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeProgrammableConfigV1(umi, {
-  mint,
-  authority: updateAuthority, // 또는 위임자 권한을 서명자로 전달하여 자기 취소.
-  delegate: programmableConfigDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 업데이트" %}
-
-```ts
-import {
-  updateAsAuthorityItemDelegateV2,
-  ruleSetToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-
-await updateAsProgrammableConfigDelegateV2(umi, {
-  mint,
-  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
-  authority: programmableConfigDelegate,
-  ruleSet: ruleSetToggle('Set', [ruleSet]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="항목의 위임된 업데이트" %}
-
-```ts
-import {
-  updateAsAuthorityItemDelegateV2,
-  ruleSetToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-
-await updateAsProgrammableConfigDelegateV2(umi, {
-  mint,
-  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
-  delegateMint: collectionMint,
-  authority: programmableConfigDelegate,
-  ruleSet: ruleSetToggle('Set', [ruleSet]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-update-item" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Programmable Config Item 위임자
 
@@ -556,62 +248,21 @@ await updateAsProgrammableConfigDelegateV2(umi, {
 - 위임자 권한은 Metadata 계정의 `programmableConfigs` 속성을 업데이트할 수 있지만 그 외에는 아무것도 할 수 없습니다. 이는 PNFT의 `ruleSet`을 업데이트할 수 있다는 의미입니다.
 - 자산이 컬렉션 NFT인 경우에도, Programmable Config 위임자와 달리 Programmable Config Item 위임자는 해당 컬렉션의 항목에 영향을 줄 수 없습니다.
 
-{% dialect-switcher title="Programmable Config Item 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateProgrammableConfigItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateProgrammableConfigItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: programmableConfigItemDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeProgrammableConfigItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeProgrammableConfigItemV1(umi, {
-  mint,
-  authority: updateAuthority, // 또는 위임자 권한을 서명자로 전달하여 자기 취소.
-  delegate: programmableConfigItemDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 업데이트" %}
-
-```ts
-import {
-  updateAsProgrammableConfigItemDelegateV2,
-  ruleSetToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-
-await updateAsProgrammableConfigItemDelegateV2(umi, {
-  mint,
-  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
-  authority: programmableConfigItemDelegate,
-  ruleSet: ruleSetToggle('Set', [ruleSet]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ## 토큰 위임자
 
@@ -627,7 +278,7 @@ SPL Token 프로그램에서 제공하는 위임자 유형은 하나뿐이지만
 {% node label="Owner: System Program" theme="dimmed" /%}
 {% /node %}
 
-{% node parent="wallet-1" x=-10 y=-25 label="대체 불가능한 토큰 및 반-대체 가능한 토큰" theme="transparent" /%}
+{% node parent="wallet-1" x=-10 y=-25 label="Non-Fungibles and Semi-Fungibles" theme="transparent" /%}
 
 {% node x="200" parent="wallet-1" %}
 {% node #token-1 label="Token Account" theme="blue" /%}
@@ -646,7 +297,7 @@ SPL Token 프로그램에서 제공하는 위임자 유형은 하나뿐이지만
 {% node label="Owner: System Program" theme="dimmed" /%}
 {% /node %}
 
-{% node parent="wallet-2" x=-10 y=-25 label="프로그래머블 대체 불가능한 토큰" theme="transparent" /%}
+{% node parent="wallet-2" x=-10 y=-25 label="Programmable Non-Fungibles" theme="transparent" /%}
 
 {% node #token-2-wrapper x="200" parent="wallet-2" %}
 {% node #token-2 label="Token Account" theme="blue" /%}
@@ -696,14 +347,14 @@ SPL Token 프로그램에서 제공하는 위임자 유형은 하나뿐이지만
 
 서로 다른 행동 범위를 가진 6가지 다른 유형의 토큰 위임자가 존재합니다. 다음은 토큰 위임자의 다양한 유형을 요약한 표입니다:
 
-| 위임자        | 잠금/잠금 해제 | 전송 | 소각 | 대상              | 참고                                                      |
-| --------------- | ----------- | -------- | ---- | ---------------- | --------------------------------------------------------- |
-| Standard        | ✅          | ✅       | ✅   | PNFT를 제외한 모든 것 |                                                           |
-| Sale            | ❌          | ✅       | ❌   | PNFT만       | 소유자가 위임자를 취소할 때까지 전송/소각할 수 없음 |
-| Transfer        | ❌          | ✅       | ❌   | PNFT만       | 위임자가 설정되어도 소유자가 전송/소각할 수 있음       |
-| Locked Transfer | ✅          | ✅       | ❌   | PNFT만       |                                                           |
-| Utility         | ✅          | ❌       | ✅   | PNFT만       |                                                           |
-| Staking         | ✅          | ❌       | ❌   | PNFT만       |                                                           |
+| 위임자          | 잠금/잠금 해제 | 전송 | 소각 | 대상              | 참고                                                      |
+| --------------- | -------------- | ---- | ---- | ---------------- | --------------------------------------------------------- |
+| Standard        | ✅             | ✅   | ✅   | PNFT를 제외한 모든 것 |                                                           |
+| Sale            | ❌             | ✅   | ❌   | PNFT만           | 소유자가 위임자를 취소할 때까지 전송/소각할 수 없음 |
+| Transfer        | ❌             | ✅   | ❌   | PNFT만           | 위임자가 설정되어도 소유자가 전송/소각할 수 있음       |
+| Locked Transfer | ✅             | ✅   | ❌   | PNFT만           |                                                           |
+| Utility         | ✅             | ❌   | ✅   | PNFT만           |                                                           |
+| Staking         | ✅             | ❌   | ❌   | PNFT만           |                                                           |
 
 **Standard** 위임자는 spl-token 위임자에 단순히 위임해야 하므로 다른 PNFT 전용 위임자보다 훨씬 더 많은 권한을 가진다는 점에 주목하세요. 그러나 다른 위임자들은 더 세분화되어 더 구체적인 사용 사례에서 사용할 수 있습니다. 예를 들어, **Sale** 위임자는 위임자가 설정되어 있는 한 소유자가 소각하거나 전송하는 것을 금지하므로 마켓플레이스에서 자산을 상장하는 데 완벽합니다.
 
@@ -721,104 +372,33 @@ Standard 위임자의 주요 속성은 다음과 같습니다:
 - 위임자 권한은 자산을 잠글 수 있습니다 — Token 프로그램에서 자산을 "동결"하는 것으로도 알려져 있습니다. 위임자 권한이 자산을 잠금 해제(또는 "해동")할 때까지, 소유자는 자산을 전송하거나 소각하거나 위임자 권한을 취소할 수 없습니다. 이는 Standard 위임자에 특화된 것으로 네이티브 spl-token 위임자로는 할 수 없습니다.
 - 대체 가능한 자산과 함께 사용할 때, 위임자 권한에 위임할 토큰 수를 지정하기 위해 1보다 큰 양을 제공할 수 있습니다.
 
-{% dialect-switcher title="Standard 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateStandardV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateStandardV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeStandardV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeStandardV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 전송" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 소각" %}
-
-```ts
-import { burnV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await burnV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenOwner: currentOwner,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-burn" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="잠금 (동결)" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="잠금 해제 (해동)" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Sale 위임자 (PNFT만)
 
@@ -826,61 +406,21 @@ await unlockV1(umi, {
 - 위임자 권한은 PNFT를 어떤 주소로든 전송할 수 있습니다. 그렇게 하면 위임자 권한이 취소됩니다.
 - PNFT에 Sale 위임자가 설정되어 있는 한, PNFT는 `Listed`라는 특별한 토큰 상태에 들어갑니다. `Listed` 토큰 상태는 `Locked` 토큰 상태의 더 부드러운 변형입니다. 그 시간 동안 소유자는 PNFT를 전송하거나 소각할 수 없습니다. 그러나 소유자는 언제든지 Sale 위임자를 취소할 수 있으며, 이는 `Listed` 토큰 상태를 제거하고 PNFT를 다시 전송 및 소각 가능하게 만듭니다.
 
-{% dialect-switcher title="Sale 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateSaleV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateSaleV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: saleDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-sale-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeSaleV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeSaleV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: saleDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-sale-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 전송" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: saleDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-sale-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Transfer 위임자 (PNFT만)
 
@@ -888,61 +428,21 @@ await transferV1(umi, {
 - 위임자 권한은 PNFT를 어떤 주소로든 전송할 수 있습니다. 그렇게 하면 위임자 권한이 취소됩니다.
 - Sale 위임자와 달리, Transfer 위임자가 설정되어 있을 때도 소유자는 여전히 PNFT를 전송하고 소각할 수 있습니다.
 
-{% dialect-switcher title="Transfer 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: transferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-transfer-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: transferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-transfer-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 전송" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: transferDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-transfer-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Locked Transfer 위임자 (PNFT만)
 
@@ -950,89 +450,29 @@ await transferV1(umi, {
 - 위임자 권한은 PNFT를 잠글 수 있습니다. 위임자 권한이 PNFT를 잠금 해제할 때까지, 소유자는 PNFT를 전송하거나 소각하거나 위임자 권한을 취소할 수 없습니다.
 - 위임자 권한은 PNFT를 어떤 주소로든 전송할 수 있습니다. 그렇게 하면 위임자 권한이 취소되고 잠겨 있었다면 PNFT가 잠금 해제됩니다.
 
-{% dialect-switcher title="Locked Transfer 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateLockedTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateLockedTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeLockedTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeLockedTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 전송" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: lockedTransferDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="잠금" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="잠금 해제" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Utility 위임자 (PNFT만)
 
@@ -1040,161 +480,54 @@ await unlockV1(umi, {
 - 위임자 권한은 PNFT를 잠글 수 있습니다. 위임자 권한이 PNFT를 잠금 해제할 때까지, 소유자는 PNFT를 전송하거나 소각하거나 위임자 권한을 취소할 수 없습니다.
 - 위임자 권한은 PNFT를 소각할 수 있습니다.
 
-{% dialect-switcher title="Utility 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateUtilityV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateUtilityV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeUtilityV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeUtilityV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="위임된 소각" %}
-
-```ts
-import { burnV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await burnV1(umi, {
-  mint,
-  authority: utilityDelegate,
-  tokenOwner: currentOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-burn" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="잠금" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="잠금 해제" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Staking 위임자 (PNFT만)
 
 - 이 위임자는 프로그래머블 대체 불가능한 토큰에서만 작동합니다.
 - 위임자 권한은 PNFT를 잠글 수 있습니다. 위임자 권한이 PNFT를 잠금 해제할 때까지, 소유자는 PNFT를 전송하거나 소각하거나 위임자 권한을 취소할 수 없습니다.
 
-{% dialect-switcher title="Staking 위임자 작업" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="승인" %}
-
-```ts
-import { delegateStakingV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateStakingV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="취소" %}
-
-```ts
-import { revokeStakingV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeStakingV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="잠금" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="잠금 해제" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ## 레거시 위임자
 
