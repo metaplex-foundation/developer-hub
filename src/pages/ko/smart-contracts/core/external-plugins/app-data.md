@@ -1,8 +1,41 @@
 ---
 title: AppData 플러그인
-metaTitle: AppData 플러그인 | Core
-description: Core Asset에 데이터 권한만이 쓸 수 있는 안전한 데이터 분할 영역을 제공하는 MPL Core AppData 플러그인에 대해 알아보세요.
+metaTitle: AppData 플러그인 | Metaplex Core
+description: AppData 플러그인으로 Core NFT에 임의 데이터를 저장하세요. 제3자 앱, 게임 상태 또는 커스텀 메타데이터를 위한 안전하고 분할된 저장소를 만드세요.
 ---
+
+**AppData 플러그인**은 Core Assets에 안전하고 분할된 데이터 저장소를 제공합니다. 제3자 애플리케이션이 데이터 권한에 의해 제어되는 독점 쓰기 액세스로 임의 데이터(JSON, MsgPack 또는 바이너리)를 저장하고 읽을 수 있습니다. {% .lead %}
+
+{% callout title="배울 내용" %}
+
+- Assets와 Collections에 AppData 추가
+- 안전한 쓰기를 위한 데이터 권한 구성
+- 데이터 스키마 선택(JSON, MsgPack, Binary)
+- 온체인과 오프체인에서 데이터 읽기 및 쓰기
+
+{% /callout %}
+
+## 요약
+
+**AppData** 플러그인은 제어된 쓰기 액세스로 Assets에 임의 데이터를 저장합니다. 데이터 권한만 플러그인의 데이터 섹션에 쓸 수 있어 안전한 제3자 통합이 가능합니다.
+
+- JSON, MsgPack 또는 Binary 데이터 저장
+- 데이터 권한이 독점 쓰기 권한 보유
+- DAS에 의해 자동 인덱싱(JSON/MsgPack)
+- 컬렉션 전체 쓰기를 위한 LinkedAppData 변형
+
+## 범위 외 내용
+
+Oracle 검증([Oracle 플러그인](/ko/smart-contracts/core/external-plugins/oracle) 참조), 온체인 속성([속성 플러그인](/ko/smart-contracts/core/plugins/attribute) 참조), 오프체인 메타데이터 저장.
+
+## 빠른 시작
+
+**바로가기:** [Asset에 추가](#asset에-appdata-플러그인-추가하기) · [데이터 쓰기](#appdata-플러그인에-데이터-쓰기) · [데이터 읽기](#appdata-플러그인에서-데이터-읽기)
+
+1. 데이터 권한 주소와 함께 AppData 플러그인 추가
+2. 스키마 선택: JSON, MsgPack 또는 Binary
+3. `writeData()`로 데이터 쓰기(데이터 권한으로 서명 필요)
+4. DAS 또는 직접 계정 조회로 데이터 읽기
 
 ## AppData 플러그인이란?
 
@@ -519,3 +552,85 @@ println!("{:?}", my_data);
 {% /dialect %}
 
 {% /dialect-switcher %}
+
+## 일반적인 오류
+
+### `Authority mismatch`
+
+데이터 권한만 데이터를 쓸 수 있습니다. 올바른 키페어로 서명하고 있는지 확인하세요.
+
+### `Data too large`
+
+데이터가 계정 크기 제한을 초과합니다. 데이터를 압축하거나 여러 플러그인으로 분할하는 것을 고려하세요.
+
+### `Invalid schema`
+
+데이터가 선언된 스키마와 일치하지 않습니다. JSON이 유효하거나 MsgPack이 올바르게 인코딩되었는지 확인하세요.
+
+## 참고 사항
+
+- 데이터 권한은 플러그인 권한과 별개
+- DAS 인덱싱을 위해 JSON 또는 MsgPack 선택
+- 커스텀 직렬화 형식에는 Binary 스키마 사용
+- LinkedAppData는 Collection의 모든 Asset에 쓰기 가능
+
+## 빠른 참조
+
+### 스키마 비교
+
+| 스키마 | DAS 인덱싱 | 최적 용도 |
+|--------|-------------|----------|
+| JSON | ✅ JSON으로 | 인간 가독성, 웹 앱 |
+| MsgPack | ✅ JSON으로 | 컴팩트, 타입 데이터 |
+| Binary | ✅ base64로 | 커스텀 형식, 최대 효율성 |
+
+### AppData vs 속성 플러그인
+
+| 기능 | AppData | 속성 |
+|---------|---------|------------|
+| 쓰기 권한 | 데이터 권한만 | 업데이트 권한 |
+| 데이터 형식 | 모든 형식(JSON, MsgPack, Binary) | 키-값 문자열 |
+| 제3자 친화적 | ✅ 예 | ❌ 업데이트 권한 필요 |
+| DAS 인덱싱 | ✅ 예 | ✅ 예 |
+
+## FAQ
+
+### AppData와 속성 플러그인의 차이점은 무엇인가요?
+
+속성은 업데이트 권한이 제어하는 키-값 문자열을 저장합니다. AppData는 별도의 데이터 권한이 제어하는 임의 데이터를 저장하여 제3자 애플리케이션에 이상적입니다.
+
+### 하나의 Asset에 여러 AppData 플러그인을 가질 수 있나요?
+
+네. 각 AppData 플러그인은 다른 데이터 권한을 가질 수 있어 여러 제3자 앱이 동일한 Asset에 데이터를 저장할 수 있습니다.
+
+### 기존 AppData를 어떻게 업데이트하나요?
+
+새 데이터로 `writeData()`를 호출하세요. 기존 데이터가 완전히 대체됩니다 - 부분 업데이트는 없습니다.
+
+### AppData가 DAS에 의해 인덱싱되나요?
+
+네. JSON과 MsgPack 스키마는 자동으로 역직렬화되어 인덱싱됩니다. Binary는 base64로 저장됩니다.
+
+### LinkedAppData란 무엇인가요?
+
+LinkedAppData는 Collection에 추가되어 데이터 권한이 각 Asset에 개별적으로 AppData를 추가하지 않고도 해당 Collection의 모든 Asset에 쓸 수 있게 합니다.
+
+## 용어집
+
+| 용어 | 정의 |
+|------|------------|
+| **AppData** | Assets에 임의 데이터를 저장하기 위한 외부 플러그인 |
+| **데이터 권한** | 독점 쓰기 권한을 가진 주소 |
+| **LinkedAppData** | 모든 Asset에 쓰기 위한 컬렉션 수준 변형 |
+| **스키마** | 데이터 형식: JSON, MsgPack 또는 Binary |
+| **writeData()** | AppData 플러그인에 데이터를 쓰는 함수 |
+
+## 관련 페이지
+
+- [외부 플러그인 개요](/ko/smart-contracts/core/external-plugins/overview) - 외부 플러그인 이해하기
+- [Oracle 플러그인](/ko/smart-contracts/core/external-plugins/oracle) - 데이터 저장 대신 검증
+- [속성 플러그인](/ko/smart-contracts/core/plugins/attribute) - 내장 키-값 저장소
+
+---
+
+*Metaplex Foundation 관리 · 2026년 1월 최종 검증 · @metaplex-foundation/mpl-core 적용*

@@ -1,17 +1,41 @@
 ---
 title: Oracle Plugin
-metaTitle: Oracle Plugin | Core
-description: Learn about the Oracle Plugin and Oracle accounts and how they interact with the lifecycle events of Core NFT Assets.
+metaTitle: Oracle Plugin | Metaplex Core
+description: Add custom validation logic to Core NFTs with Oracle plugins. Control transfers, burns, and updates based on external account state and custom rules.
 ---
 
-<!-- The Oracle Plugin is a `External Plugin` that is used with Core Assets and Collections that provides the ability to `reject` the lifecycle events of:
+The **Oracle Plugin** connects Core Assets to external Oracle accounts for custom validation logic. Reject transfers, burns, or updates based on time, price, ownership, or any custom rule you implement. {% .lead %}
 
-- Create
-- Transfer
-- Update
-- Burn
+{% callout title="What You'll Learn" %}
 
-When adding a Oracle Plugin to an Asset or Collection the Oracle Plugin Adapter stores and references an Oracle Account external to the Mpl Core Asset. This external account will then be referenced and called upon to decide if lifecycle events can take place on the asset at that given point in time. -->
+- Create Oracle accounts for validation
+- Configure lifecycle checks (reject transfers, updates, burns)
+- Use PDA-based Oracle addressing
+- Deploy time-based and condition-based restrictions
+
+{% /callout %}
+
+## Summary
+
+The **Oracle Plugin** validates lifecycle events against external Oracle accounts. The Oracle account stores validation results that the Core program reads to approve or reject operations.
+
+- Can reject create, transfer, burn, and update events
+- Oracle account is external to the Asset (you control it)
+- Dynamic: update the Oracle account to change behavior
+- Supports PDA derivation for per-asset or per-owner oracles
+
+## Out of Scope
+
+AppData storage (see [AppData Plugin](/smart-contracts/core/external-plugins/app-data)), built-in freeze behavior (see [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate)), and off-chain oracles.
+
+## Quick Start
+
+**Jump to:** [Oracle Account Structure](#on-chain-oracle-account-structure) · [Create with Oracle](#creating-an-asset-with-the-oracle-plugin) · [Add to Asset](#adding-an-oracle-plugin-to-an-asset) · [Default Oracles](#default-oracles-deployed-by-metaplex)
+
+1. Deploy an Oracle account with validation rules
+2. Add Oracle plugin adapter to Asset/Collection
+3. Configure lifecycle checks (which events to validate)
+4. Update Oracle account to change validation behavior dynamically
 
 ## What is an Oracle Plugin?
 
@@ -761,3 +785,67 @@ In some rare cases like [Soulbound NFT](/smart-contracts/core/guides/create-soul
 - Add the Oracle Plugin Adapter to Asset specifying the lifecycle events you wish to have rejection validation over.
 - Dev writes Anchor program that can write to the Oracle Account that derive the same PRECONFIGURED_ASSET accounts
 - Dev writes web2 script that watches prices on a marketplace, AND with known hashlist of Assets with the 'Red Hat' trait red updates and writes to the relevant Oracle Accounts.
+
+## Common Errors
+
+### `Oracle validation failed`
+
+The Oracle account returned a rejection. Check your Oracle account state and validation logic.
+
+### `Oracle account not found`
+
+The Oracle account address is invalid or doesn't exist. Verify the base address and any PDA derivation.
+
+### `Invalid results offset`
+
+The ValidationResultsOffset doesn't match your Oracle account structure. Use `Anchor` for Anchor programs, `NoOffset` for raw accounts.
+
+## Notes
+
+- Oracle accounts are external—you deploy and maintain them
+- Validation is read-only: Core reads the Oracle, doesn't write to it
+- Use cron jobs or event listeners to update Oracle state dynamically
+- PDA derivation allows per-asset, per-owner, or per-collection oracles
+
+## FAQ
+
+### Can Oracle plugins approve transfers, or only reject?
+
+Oracle plugins can only reject or pass. They cannot force-approve transfers that other plugins reject.
+
+### How do I create time-based transfer restrictions?
+
+Deploy an Oracle account and use a cron job to update the validation result at specific times. See Example 1 above.
+
+### Can I use one Oracle for multiple Assets?
+
+Yes. Use a static base address for a single Oracle, or use PDA derivation with `PreconfiguredCollection` for collection-wide validation.
+
+### What's the difference between Oracle and Freeze Delegate?
+
+Freeze Delegate is built-in and binary (frozen/unfrozen). Oracle allows custom logic—time-based, price-based, or any condition you implement.
+
+### Do I need to write a Solana program for Oracle?
+
+Yes. The Oracle account must be a Solana account with the correct structure. You can use Anchor or native Rust. See the [Oracle Plugin Example](/smart-contracts/core/guides/oracle-plugin-example) guide.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Oracle Account** | External Solana account storing validation results |
+| **Oracle Adapter** | Plugin component attached to Asset referencing the Oracle |
+| **ValidationResultsOffset** | Byte offset to locate validation data in Oracle account |
+| **ExtraAccount** | PDA derivation configuration for dynamic Oracle addressing |
+| **Lifecycle Check** | Configuration specifying which events the Oracle validates |
+
+## Related Pages
+
+- [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
+- [AppData Plugin](/smart-contracts/core/external-plugins/app-data) - Data storage instead of validation
+- [Oracle Plugin Example](/smart-contracts/core/guides/oracle-plugin-example) - Complete implementation guide
+- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Built-in freeze alternative
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

@@ -1,8 +1,41 @@
 ---
 title: Anchor에서 Metaplex Core 사용하기
-metaTitle: Anchor에서 Metaplex Core 사용하기 | Core
-description: Anchor 프로그램 내에서 Metaplex Core crate를 활용하는 방법을 알아보세요.
+metaTitle: Anchor에서 Metaplex Core 사용하기 | Metaplex Core
+description: Metaplex Core를 Anchor 프로그램에 통합합니다. 온체인 NFT 작업을 위한 CPI 호출, 계정 역직렬화, 플러그인 액세스를 배웁니다.
 ---
+
+Anchor를 사용하여 Core Assets와 상호작용하는 **온체인 프로그램**을 구축합니다. 이 가이드는 설치, 계정 역직렬화, 플러그인 액세스, CPI 패턴을 다룹니다. {% .lead %}
+
+{% callout title="학습 내용" %}
+
+- Anchor 프로젝트에서 mpl-core 설치 및 구성
+- 프로그램에서 Core Assets와 Collections 역직렬화
+- 플러그인 데이터 (Attributes, Freeze 등) 액세스
+- Assets를 생성, 전송, 관리하기 위한 CPI 호출
+
+{% /callout %}
+
+## 요약
+
+`mpl-core` Rust crate는 Anchor 프로그램에서 Core와 상호작용하는 데 필요한 모든 것을 제공합니다. 네이티브 Anchor 계정 역직렬화를 위해 `anchor` 기능 플래그를 활성화하세요.
+
+- `features = ["anchor"]`로 `mpl-core` 추가
+- Accounts 구조체에서 Assets/Collections 역직렬화
+- 플러그인 데이터를 읽기 위해 `fetch_plugin()` 사용
+- CPI 빌더가 명령어 호출을 단순화
+
+## 범위 외
+
+클라이언트 사이드 JavaScript SDK ([JavaScript SDK](/ko/smart-contracts/core/sdk/javascript) 참조), 독립형 Rust 클라이언트 ([Rust SDK](/ko/smart-contracts/core/sdk/rust) 참조), 클라이언트에서 Core Assets 생성.
+
+## 빠른 시작
+
+**바로가기:** [설치](#설치) · [계정 역직렬화](#계정-역직렬화) · [플러그인 액세스](#플러그인-역직렬화) · [CPI 예시](#cpi-명령어-빌더)
+
+1. Cargo.toml에 `mpl-core = { version = "x.x.x", features = ["anchor"] }` 추가
+2. `Account<'info, BaseAssetV1>`로 Assets 역직렬화
+3. `fetch_plugin::<BaseAssetV1, PluginType>()`로 플러그인 액세스
+4. `CreateV2CpiBuilder`, `TransferV1CpiBuilder` 등으로 CPI 호출
 
 ## 설치
 
@@ -171,3 +204,87 @@ CreateCollectionV2CpiBuilder::new(&ctx.accounts.core_program)
     .uri("https://test.com".to_string())
     .invoke()?;
 ```
+
+## 일반적인 오류
+
+### `AccountNotInitialized`
+
+Asset 또는 Collection 계정이 존재하지 않거나 아직 생성되지 않았습니다.
+
+### `PluginNotFound`
+
+가져오려는 플러그인이 Asset에 존재하지 않습니다. `fetch_plugin()`으로 확인하세요. 안전하게 `None`을 반환합니다.
+
+### `InvalidAuthority`
+
+서명자에게 이 작업에 대한 권한이 없습니다. 올바른 권한이 서명하고 있는지 확인하세요.
+
+## 참고 사항
+
+- 네이티브 역직렬화를 위해 항상 `features = ["anchor"]` 활성화
+- 내장 플러그인에는 `fetch_plugin()`, 외부 플러그인에는 `fetch_external_plugin()` 사용
+- CPI 빌더는 계정 순서 복잡성을 추상화
+- 전체 API 참조는 [docs.rs/mpl-core](https://docs.rs/mpl-core/) 확인
+
+## 빠른 참조
+
+### 일반적인 CPI 빌더
+
+| 작업 | CPI 빌더 |
+|-----------|-------------|
+| Asset 생성 | `CreateV2CpiBuilder` |
+| Collection 생성 | `CreateCollectionV2CpiBuilder` |
+| Asset 전송 | `TransferV1CpiBuilder` |
+| Asset 소각 | `BurnV1CpiBuilder` |
+| Asset 업데이트 | `UpdateV1CpiBuilder` |
+| 플러그인 추가 | `AddPluginV1CpiBuilder` |
+| 플러그인 업데이트 | `UpdatePluginV1CpiBuilder` |
+
+### 계정 타입
+
+| 계정 | 구조체 |
+|---------|--------|
+| Asset | `BaseAssetV1` |
+| Collection | `BaseCollectionV1` |
+| Hashed Asset | `HashedAssetV1` |
+| Plugin Header | `PluginHeaderV1` |
+| Plugin Registry | `PluginRegistryV1` |
+
+## FAQ
+
+### anchor 기능 플래그가 필요한가요?
+
+예, Accounts 구조체에서 직접 역직렬화하려면 필요합니다. 없으면 수동으로 `from_bytes()`를 사용하세요.
+
+### 플러그인이 존재하는지 어떻게 확인하나요?
+
+`fetch_plugin()`을 사용하세요. `Option`을 반환하므로 플러그인이 존재하지 않으면 오류를 throw하지 않습니다.
+
+### 외부 플러그인 (Oracle, AppData)에 액세스할 수 있나요?
+
+예. `fetch_plugin()` 대신 적절한 키로 `fetch_external_plugin()`을 사용하세요.
+
+### 사용 가능한 모든 명령어는 어디서 찾을 수 있나요?
+
+[mpl-core docs.rs instructions 모듈](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)을 참조하세요.
+
+## 용어집
+
+| 용어 | 정의 |
+|------|------------|
+| **CPI** | Cross-Program Invocation - 한 프로그램에서 다른 프로그램 호출 |
+| **CpiBuilder** | CPI 호출을 구성하기 위한 헬퍼 구조체 |
+| **BaseAssetV1** | 역직렬화를 위한 Core Asset 계정 구조체 |
+| **fetch_plugin()** | 계정에서 플러그인 데이터를 읽는 함수 |
+| **anchor feature** | Anchor 네이티브 역직렬화를 활성화하는 Cargo 기능 |
+
+## 관련 페이지
+
+- [Anchor 스테이킹 예시](/ko/smart-contracts/core/guides/anchor/anchor-staking-example) - 완전한 스테이킹 프로그램
+- [Anchor로 Core Asset 생성](/ko/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - 단계별 가이드
+- [Rust SDK](/ko/smart-contracts/core/sdk/rust) - 독립형 Rust 클라이언트 사용
+- [mpl-core docs.rs](https://docs.rs/mpl-core/) - 전체 API 참조
+
+---
+
+*Metaplex Foundation에서 관리 · 2026년 1월 최종 확인 · @metaplex-foundation/mpl-core에 적용*

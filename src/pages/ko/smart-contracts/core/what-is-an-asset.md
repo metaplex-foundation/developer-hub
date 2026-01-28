@@ -1,8 +1,23 @@
 ---
 title: MPL Core 자산
-metaTitle: Core 자산이란 무엇인가 | Core
-description: MPL Core 자산이 무엇이며 왜 Solana NFT의 미래인지 알아보세요.
+metaTitle: Core 자산이란 무엇인가 | Metaplex Core
+description: Solana에서 Core Asset이 무엇인지 알아보세요. 단일 계정 NFT 모델, 계정 구조, 컬렉션 멤버십, 오프체인 메타데이터를 이해합니다.
 ---
+
+이 페이지는 **Core Asset이 무엇인지** 그리고 전통적인 Solana NFT와 어떻게 다른지 설명합니다. 계정 구조, 컬렉션 관계, 메타데이터 저장에 대해 이해합니다. {% .lead %}
+
+{% callout title="주요 개념" %}
+
+- **단일 계정 모델**: Core Assets는 Asset 계정 자체 내에 소유권을 저장합니다
+- **토큰 계정 불필요**: SPL 토큰과 달리 Core는 Associated Token Account가 필요하지 않습니다
+- **컬렉션 멤버십**: Assets는 updateAuthority 필드를 통해 컬렉션에 속할 수 있습니다
+- **오프체인 메타데이터**: URI는 Arweave/IPFS에 저장된 JSON 메타데이터를 가리킵니다
+
+{% /callout %}
+
+## 요약
+
+Core Asset은 NFT를 나타내는 단일 Solana 계정입니다. Token Metadata (3개 이상의 계정 필요)와 달리 Core는 하나의 계정에 모든 필수 데이터를 저장합니다: 소유자, 이름, URI, Update Authority. 이로 인해 Core Assets는 약 80% 더 저렴하고 작업하기 쉽습니다.
 
 ## 개요
 
@@ -41,10 +56,10 @@ Core 자산 계정은 디지털 자산을 위한 최소한의 데이터를 나�
 {% node x="200" parent="wallet" %}
 {% node #asset label="자산 계정" theme="blue" /%}
 {% node label="소유자: Core 프로그램" theme="dimmed" /%}
-{% node label="키 = 자산" /%}
-{% node label="소유자" /%}
-{% node label="업데이트 권한" /%}
-{% node label="이름" /%}
+{% node label="Key = Asset" /%}
+{% node label="Owner" /%}
+{% node label="Update Authority" /%}
+{% node label="Name" /%}
 {% node label="URI" /%}
 {% /node %}
 {% node y="70" parent="asset" theme="transparent" %}
@@ -73,9 +88,9 @@ MPL Core 자산의 온체인 계정 구조입니다. [링크](https://github.com
 {% /totem-accordion %}
 {% /totem %}
 
-## 내 자산이 컬렉션에 속해 있나요?
+## 내 Asset이 컬렉션에 속해 있나요?
 
-MPL Core 자산은 컬렉션에 속할 수 있습니다. MPL Core 자산 데이터의 `updateAuthority` 필드는 두 가지 역할을 제공합니다. 자산의 업데이트 권한을 보고하거나 자산이 속한 MPL Core 컬렉션의 publicKey를 제공합니다.
+MPL Core 자산은 컬렉션에 속할 수 있습니다. MPL Core 자산 데이터의 `updateAuthority` 필드는 두 가지 역할을 제공합니다. 자산의 Update Authority를 보고하거나 자산이 속한 MPL Core 컬렉션의 publicKey를 제공합니다.
 
 자산을 통해 직접 또는 MPL Core 자산의 `collectionAddress` 헬퍼를 통해 `updateAuthority` 필드에 액세스할 때, 반환되는 결과는 다음 결과 중 하나가 됩니다:
 
@@ -126,7 +141,7 @@ Collection(Pubkey)
 
 **주소**
 
-자산에 업데이트 권한이 설정되어 있고 컬렉션에 속하지 않습니다.
+자산에 Update Authority가 설정되어 있고 컬렉션에 속하지 않습니다.
 {% dialect-switcher title="자산 생성" %}
 {% dialect title="JavaScript" id="js" %}
 
@@ -167,7 +182,7 @@ Address(Pubkey)
 
 **없음**
 
-자산에 업데이트 권한이 설정되지 않았습니다.
+자산에 Update Authority가 설정되지 않았습니다.
 
 {% dialect-switcher title="자산 생성" %}
 {% dialect title="JavaScript" id="js" %}
@@ -224,10 +239,10 @@ None
 {% node x="200" parent="wallet" %}
 {% node #asset label="자산 계정" theme="blue" /%}
 {% node label="소유자: Core 프로그램" theme="dimmed" /%}
-{% node label="키 = 자산" /%}
-{% node label="소유자" /%}
-{% node label="업데이트 권한" /%}
-{% node label="이름" /%}
+{% node label="Key = Asset" /%}
+{% node label="Owner" /%}
+{% node label="Update Authority" /%}
+{% node label="Name" /%}
 {% node #uri label="URI" /%}
 {% /node %}
 {% node y="70" parent="asset" theme="transparent" %}
@@ -297,4 +312,42 @@ JSON 메타데이터
 {% /totem-accordion %}
 {% /totem %}
 
-이 JSON 파일은 업데이트할 수 없도록 Arweave와 같은 영구 저장 솔루션을 사용하여 저장할 수 있습니다. 또한 `업데이트 권한` 필드를 None으로 설정하여 불변으로 만들고, 따라서 `URI`와 `Name` 속성이 변경되는 것을 금지할 수 있습니다. 이 조합을 사용하여 오프체인 JSON 파일의 불변성을 보장할 수 있습니다.
+이 JSON 파일은 업데이트할 수 없도록 Arweave와 같은 영구 저장 솔루션을 사용하여 저장할 수 있습니다. 또한 `Update Authority` 필드를 None으로 설정하여 불변으로 만들고, 따라서 `URI`와 `Name` 속성이 변경되는 것을 금지할 수 있습니다. 이 조합을 사용하여 오프체인 JSON 파일의 불변성을 보장할 수 있습니다.
+
+## FAQ
+
+### Core는 Token Metadata NFT와 어떻게 다른가요?
+
+Token Metadata는 3개 이상의 계정 (민트, 메타데이터, 토큰 계정)이 필요합니다. Core는 소유자와 메타데이터를 함께 저장하는 단일 계정을 사용합니다. 이로 인해 Core는 약 80% 더 저렴하고 생성이 빠릅니다.
+
+### 온체인과 오프체인에 어떤 데이터가 저장되나요?
+
+**온체인**: 소유자, 이름, URI, Update Authority, 플러그인. **오프체인** (URI에서): 설명, 이미지, 속성, 애니메이션 URL, 기타 확장 메타데이터.
+
+### Token Metadata NFT를 Core로 변환할 수 있나요?
+
+직접은 안 됩니다. Core와 Token Metadata는 별도의 표준입니다. 이전 NFT를 소각하고 새 Core Asset을 민팅해야 합니다. 이 프로세스를 돕는 일부 마이그레이션 도구가 있습니다.
+
+### Core는 기존 NFT 마켓플레이스와 호환되나요?
+
+대부분의 주요 Solana 마켓플레이스는 Core Assets를 지원합니다. 호환되는 플랫폼의 현재 목록은 [에코시스템 지원](/ko/smart-contracts/core/ecosystem-support)을 확인하세요.
+
+### 오프체인 메타데이터가 오프라인이 되면 어떻게 되나요?
+
+Asset은 이름과 URI와 함께 온체인에 계속 존재하지만 이미지/속성에 액세스할 수 없습니다. 이를 방지하려면 영구 저장소 (Arweave, 피닝이 있는 IPFS)를 사용하세요.
+
+## 용어집
+
+| 용어 | 정의 |
+|------|------------|
+| **Asset** | NFT를 나타내는 단일 Core 계정 |
+| **Owner** | 현재 Asset을 소유한 지갑 |
+| **Update Authority** | Asset 메타데이터를 수정할 권한이 있는 계정 |
+| **URI** | 오프체인 JSON 메타데이터를 가리키는 URL |
+| **Collection** | 관련 Assets를 그룹화하는 Core 계정 |
+| **Key** | 계정 유형을 식별하는 계정 구분자 |
+| **seq** | 압축 인덱싱에 사용되는 시퀀스 번호 |
+
+---
+
+*Metaplex Foundation에서 관리 · 2026년 1월 최종 확인 · @metaplex-foundation/mpl-core에 적용*

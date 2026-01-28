@@ -1,8 +1,40 @@
 ---
 title: Removing Plugins
-metaTitle: Removing Plugins | Core
-description: Learn how to remove plugins from MPL Core Assets and Collections.
+metaTitle: Removing Plugins | Metaplex Core
+description: Learn how to remove plugins from Core NFT Assets and Collections. Remove functionality and recover rent from plugin accounts.
 ---
+
+This guide shows how to **remove plugins** from Core Assets and Collections. Removing a plugin deletes its data and functionality. {% .lead %}
+
+{% callout title="What You'll Learn" %}
+
+- Remove plugins from Assets
+- Remove plugins from Collections
+- Understand authority requirements for removal
+- Recover rent from removed plugins
+
+{% /callout %}
+
+## Summary
+
+Remove plugins using `removePlugin()` for Assets or `removeCollectionPlugin()` for Collections. Only the plugin authority can remove a plugin.
+
+- Specify the plugin type to remove
+- Plugin data is deleted
+- Rent is recovered
+- Permanent plugins cannot be removed
+
+## Out of Scope
+
+Permanent plugin removal (not possible), plugin updates (see [Updating Plugins](/smart-contracts/core/plugins/update-plugins)), and authority changes (see [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins)).
+
+## Quick Start
+
+**Jump to:** [Remove from Asset](#removing-a-plugin-from-a-mpl-core-asset) · [Remove from Collection](#removing-a-plugin-from-a-collection)
+
+1. Identify the plugin type to remove
+2. Call `removePlugin()` with the Asset and plugin type
+3. Plugin is removed immediately
 
 Plugins can also be removed from MPL Core Assets and MPL Core Collections.
 
@@ -132,3 +164,77 @@ pub async fn remove_collection_plugin() {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Common Errors
+
+### `Authority mismatch`
+
+You don't have permission to remove this plugin. Check who has authority over the plugin.
+
+### `Plugin not found`
+
+The Asset/Collection doesn't have this plugin type attached.
+
+### `Cannot remove permanent plugin`
+
+Permanent plugins cannot be removed after creation. They are permanently attached.
+
+## Notes
+
+- Removing a plugin deletes all its data
+- Rent from the removed plugin is recovered
+- Only the plugin authority can remove a plugin
+- Permanent plugins can never be removed
+
+## Quick Reference
+
+### Removal Authority Requirements
+
+| Plugin Type | Who Can Remove |
+|-------------|----------------|
+| Owner Managed | Owner or delegate |
+| Authority Managed | Update authority or delegate |
+| Permanent | Cannot be removed |
+
+## FAQ
+
+### Can I recover the data after removing a plugin?
+
+No. Removing a plugin permanently deletes all its data. Make sure to back up any important data before removal.
+
+### What happens to the rent when I remove a plugin?
+
+The rent that was used to store the plugin data is recovered and returned to the payer.
+
+### Can I remove a plugin someone else delegated to me?
+
+Yes, if you're the delegated authority for that plugin, you can remove it.
+
+### Why can't I remove a Permanent plugin?
+
+Permanent plugins are designed to be immutable and cannot be removed after creation. This is by design for use cases that require guaranteed permanence.
+
+### Can I remove a plugin from a Collection and its Assets at once?
+
+No. Collection plugins and Asset plugins are managed separately. Removing a Collection plugin only affects the Collection, not its Assets.
+
+## Related Operations
+
+- [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) - Add plugins to Assets/Collections
+- [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins) - Change plugin authorities
+- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
+- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Plugin Authority** | Address with permission to manage the plugin |
+| **Permanent Plugin** | Plugin that cannot be removed after creation |
+| **Rent** | SOL deposited to store account data on Solana |
+| **Owner Managed** | Plugin where owner controls removal |
+| **Authority Managed** | Plugin where update authority controls removal |
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

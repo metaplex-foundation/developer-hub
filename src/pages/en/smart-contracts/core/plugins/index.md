@@ -1,8 +1,40 @@
 ---
 title: Plugins Overview
-metaTitle: Asset Plugins Overview | Core
-description: The new Metaplex Core digital asset standard provides new ways to interact with your Assets by the way of plugins. Plugins can be added to Assets to change behaviors or store data further enhancing NFTs and Digital Assets on the Solana blockchain.
+metaTitle: Core Plugins Overview | Metaplex Core
+description: Learn about Metaplex Core plugins - modular extensions that add behaviors like royalties, freezing, burning, and on-chain attributes to NFT Assets and Collections.
 ---
+
+This page explains the **Core Plugin system** - modular extensions that add behaviors and data storage to Core Assets and Collections. Plugins hook into lifecycle events to enforce rules or store on-chain data. {% .lead %}
+
+{% callout title="What You'll Learn" %}
+
+- What plugins are and how they work
+- Types of plugins: Owner Managed, Authority Managed, Permanent
+- How plugins affect lifecycle events (create, transfer, burn)
+- Plugin priority between Assets and Collections
+
+{% /callout %}
+
+## Summary
+
+**Plugins** are on-chain extensions that add functionality to Core Assets or Collections. They can store data (like attributes), enforce rules (like royalties), or delegate permissions (like freeze/transfer authority).
+
+- **Owner Managed**: Require owner signature to add (Transfer, Freeze, Burn Delegate)
+- **Authority Managed**: Can be added by update authority (Royalties, Attributes, Update Delegate)
+- **Permanent**: Can only be added at creation time (Permanent Transfer/Freeze/Burn Delegate)
+
+## Out of Scope
+
+Creating custom plugins (only built-in plugins are supported), Token Metadata plugins (different system), and off-chain plugin data storage.
+
+## Quick Start
+
+**Jump to:** [Plugin Types](#types-of-plugins) · [Plugin Table](#plugin-table) · [Lifecycle Events](#plugins-and-lifecycle-events) · [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)
+
+1. Choose a plugin based on your use case (royalties, freezing, attributes, etc.)
+2. Add the plugin using `addPlugin()` or at Asset/Collection creation
+3. Plugins automatically hook into lifecycle events
+4. Query plugin data via DAS or on-chain fetch
 
 ## Lifecycles
 
@@ -202,3 +234,56 @@ Approve currently has no plugin conditions or validations.
 {% totem %}
 Revoke currently has no plugin conditions or validations.
 {% /totem %}
+
+## Common Use Cases
+
+| Use Case | Recommended Plugin |
+|----------|-------------------|
+| Enforce creator royalties | [Royalties](/smart-contracts/core/plugins/royalties) |
+| Escrowless staking | [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) |
+| Marketplace listings | [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) + [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) |
+| On-chain game stats | [Attributes](/smart-contracts/core/plugins/attribute) |
+| Allow third-party burns | [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) |
+| Permanent staking program | [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) |
+
+## FAQ
+
+### Can I add plugins after an Asset is created?
+
+Yes, except for Permanent plugins. Owner Managed plugins require owner signature; Authority Managed plugins require update authority signature.
+
+### What happens to plugins when an Asset is transferred?
+
+Owner Managed plugins (Transfer, Freeze, Burn Delegate) have their authority automatically revoked on transfer. Authority Managed and Permanent plugins persist.
+
+### Can an Asset have the same plugin as its Collection?
+
+Yes. When both have the same plugin type, the Asset-level plugin takes precedence over the Collection-level plugin.
+
+### How do I remove a plugin?
+
+Use the `removePlugin` instruction. Only the plugin authority can remove it. See [Removing Plugins](/smart-contracts/core/plugins/removing-plugins).
+
+### Can I create custom plugins?
+
+No. Only built-in plugins are supported. The plugin system is not extensible by third parties.
+
+### Do plugins cost extra SOL?
+
+Adding plugins increases account size, which increases rent. The cost is minimal (~0.001 SOL per plugin depending on data size).
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Plugin** | A modular extension adding behavior or data to an Asset/Collection |
+| **Owner Managed** | Plugin type requiring owner signature to add |
+| **Authority Managed** | Plugin type that update authority can add |
+| **Permanent** | Plugin type that can only be added at creation |
+| **Lifecycle Event** | An action (create, transfer, burn) that plugins can validate |
+| **Force Approve** | Permanent plugin validation that overrides other rejections |
+| **Plugin Authority** | The account authorized to update or remove a plugin |
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

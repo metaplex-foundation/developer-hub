@@ -1,8 +1,41 @@
 ---
 title: AppData Plugin
-metaTitle: AppData Plugin | Core
-description: Learn about the MPL Core AppData plugin providing Core Assets with a secure data partitioned area that only data authorities can write to.
+metaTitle: AppData Plugin | Metaplex Core
+description: Store arbitrary data on Core NFTs with the AppData plugin. Create secure, partitioned storage for third-party apps, game state, or custom metadata.
 ---
+
+The **AppData Plugin** provides secure, partitioned data storage on Core Assets. Third-party applications can store and read arbitrary data (JSON, MsgPack, or binary) with exclusive write access controlled by a Data Authority. {% .lead %}
+
+{% callout title="What You'll Learn" %}
+
+- Add AppData to Assets and Collections
+- Configure Data Authorities for secure writes
+- Choose data schemas (JSON, MsgPack, Binary)
+- Read and write data from on-chain and off-chain
+
+{% /callout %}
+
+## Summary
+
+The **AppData** plugin stores arbitrary data on Assets with controlled write access. Only the Data Authority can write to the plugin's data section, enabling secure third-party integrations.
+
+- Store JSON, MsgPack, or Binary data
+- Data Authority has exclusive write permission
+- Automatically indexed by DAS (JSON/MsgPack)
+- LinkedAppData variant for collection-wide writes
+
+## Out of Scope
+
+Oracle validation (see [Oracle Plugin](/smart-contracts/core/external-plugins/oracle)), on-chain attributes (see [Attributes Plugin](/smart-contracts/core/plugins/attribute)), and off-chain metadata storage.
+
+## Quick Start
+
+**Jump to:** [Add to Asset](#adding-the-appdata-plugin-to-an-asset) · [Write Data](#writing-data-to-the-appdata-plugin) · [Read Data](#reading-data-from-the-appdata-plugin)
+
+1. Add AppData plugin with a Data Authority address
+2. Choose schema: JSON, MsgPack, or Binary
+3. Write data using `writeData()` (must sign as Data Authority)
+4. Read data via DAS or direct account fetch
 
 ## What is an AppData Plugin?
 
@@ -521,3 +554,86 @@ println!("{:?}", my_data);
 {% /dialect %}
 
 {% /dialect-switcher %}
+
+## Common Errors
+
+### `Authority mismatch`
+
+Only the Data Authority can write data. Verify you're signing with the correct keypair.
+
+### `Data too large`
+
+The data exceeds account size limits. Consider compressing or splitting data across multiple plugins.
+
+### `Invalid schema`
+
+The data doesn't match the declared schema. Ensure JSON is valid or MsgPack is properly encoded.
+
+## Notes
+
+- Data Authority is separate from plugin authority
+- Choose JSON or MsgPack for DAS indexing
+- Binary schema for custom serialization formats
+- LinkedAppData allows writing to any Asset in a Collection
+
+## Quick Reference
+
+### Schema Comparison
+
+| Schema | DAS Indexed | Best For |
+|--------|-------------|----------|
+| JSON | ✅ As JSON | Human-readable, web apps |
+| MsgPack | ✅ As JSON | Compact, typed data |
+| Binary | ✅ As base64 | Custom formats, max efficiency |
+
+### AppData vs Attributes Plugin
+
+| Feature | AppData | Attributes |
+|---------|---------|------------|
+| Write permission | Data Authority only | Update Authority |
+| Data format | Any (JSON, MsgPack, Binary) | Key-value strings |
+| Third-party friendly | ✅ Yes | ❌ Requires update authority |
+| DAS indexing | ✅ Yes | ✅ Yes |
+
+## FAQ
+
+### What's the difference between AppData and the Attributes plugin?
+
+Attributes stores key-value strings controlled by the update authority. AppData stores arbitrary data controlled by a separate Data Authority, making it ideal for third-party applications.
+
+### Can I have multiple AppData plugins on one Asset?
+
+Yes. Each AppData plugin can have a different Data Authority, allowing multiple third-party apps to store data on the same Asset.
+
+### How do I update existing AppData?
+
+Call `writeData()` with the new data. This replaces the existing data entirely—there's no partial update.
+
+### Is AppData indexed by DAS?
+
+Yes. JSON and MsgPack schemas are automatically deserialized and indexed. Binary is stored as base64.
+
+### What is LinkedAppData?
+
+LinkedAppData is added to a Collection and allows the Data Authority to write to any Asset in that Collection without adding AppData to each Asset individually.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **AppData** | External plugin for storing arbitrary data on Assets |
+| **Data Authority** | Address with exclusive write permission |
+| **LinkedAppData** | Collection-level variant for writing to any Asset |
+| **Schema** | Data format: JSON, MsgPack, or Binary |
+| **writeData()** | Function to write data to AppData plugin |
+
+## Related Pages
+
+- [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
+- [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) - Validation instead of data storage
+- [Attributes Plugin](/smart-contracts/core/plugins/attribute) - Built-in key-value storage
+- [On-chain Ticketing Guide](/smart-contracts/core/guides/onchain-ticketing-with-appdata) - AppData example
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

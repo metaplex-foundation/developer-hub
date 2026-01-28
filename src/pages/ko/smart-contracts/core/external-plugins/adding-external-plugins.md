@@ -1,10 +1,42 @@
 ---
 title: 외부 플러그인 추가하기
-metaTitle: 외부 플러그인 추가하기 | Core
-description: MPL Core Asset과 Collection에 외부 플러그인을 추가하는 방법을 알아보세요.
+metaTitle: 외부 플러그인 추가하기 | Metaplex Core
+description: Core Assets와 Collections에 Oracle 및 AppData 플러그인을 추가하는 방법을 알아보세요. JavaScript와 Rust 코드 예제 포함.
 ---
 
-## Asset
+이 가이드는 Core Assets와 Collections에 **외부 플러그인**(Oracle, AppData)을 추가하는 방법을 보여줍니다. 생성 시 또는 기존 Assets/Collections에 추가할 수 있습니다. {% .lead %}
+
+{% callout title="배울 내용" %}
+
+- Asset/Collection 생성 시 외부 플러그인 추가
+- 기존 Assets/Collections에 외부 플러그인 추가
+- Oracle 라이프사이클 검사 구성
+- 데이터 권한으로 AppData 설정
+
+{% /callout %}
+
+## 요약
+
+외부 플러그인은 `create()`의 `plugins` 배열을 사용하거나 기존 Assets에 `addPlugin()`을 사용하여 추가합니다. Collections는 `createCollection()`과 `addCollectionPlugin()`을 사용합니다.
+
+- 생성 시 추가: `plugins` 배열에 포함
+- 기존에 추가: `addPlugin()` / `addCollectionPlugin()` 사용
+- 업데이트 권한 서명 필요
+- Oracle 플러그인의 라이프사이클 검사 구성
+
+## 범위 외 내용
+
+외부 플러그인 제거([외부 플러그인 제거하기](/ko/smart-contracts/core/external-plugins/removing-external-plugins) 참조), 플러그인 데이터 업데이트, 내장 플러그인([플러그인 추가하기](/ko/smart-contracts/core/plugins/adding-plugins) 참조).
+
+## 빠른 시작
+
+**바로가기:** [플러그인과 함께 Asset 생성](#외부-플러그인과-함께-core-asset-생성하기) · [기존 Asset에 추가](#core-asset에-외부-플러그인-추가하기) · [플러그인과 함께 Collection 생성](#외부-플러그인과-함께-core-collection-생성하기)
+
+1. Oracle 계정 또는 AppData 구성 준비
+2. 생성 시 또는 `addPlugin()`을 통해 플러그인 추가
+3. 라이프사이클 검사(Oracle) 또는 데이터 권한(AppData) 구성
+
+## Assets
 
 ### 외부 플러그인과 함께 Core Asset 생성하기
 
@@ -188,7 +220,7 @@ addPlugin(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Collection
+## Collections
 
 ### 외부 플러그인과 함께 Core Collection 생성하기
 
@@ -372,3 +404,49 @@ pub async fn add_oracle_plugin_to_collection() {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## 일반적인 오류
+
+### `Authority mismatch`
+
+업데이트 권한만 외부 플러그인을 추가할 수 있습니다. 올바른 키페어로 서명하고 있는지 확인하세요.
+
+### `Plugin already exists`
+
+동일한 키를 가진 외부 플러그인이 이미 존재합니다. 먼저 제거하거나 대신 업데이트하세요.
+
+### `Invalid Oracle account`
+
+Oracle 기본 주소가 유효하지 않거나 계정이 존재하지 않습니다.
+
+## 참고 사항
+
+- 외부 플러그인은 권한 관리됨(업데이트 권한이 제어)
+- Oracle 플러그인은 기존 Oracle 계정 필요
+- AppData 플러그인은 쓰기 권한을 위한 데이터 권한 필요
+- Collection 플러그인은 기존 Assets에 자동으로 적용되지 않음
+
+## FAQ
+
+### 하나의 Asset에 여러 외부 플러그인을 추가할 수 있나요?
+
+네. 단일 Asset에 여러 Oracle 및/또는 AppData 플러그인을 추가할 수 있습니다.
+
+### Oracle 계정을 먼저 생성해야 하나요?
+
+네. Oracle 플러그인 어댑터를 추가하기 전에 Oracle 계정이 존재해야 합니다.
+
+### 생성 시 추가와 나중에 추가의 차이점은 무엇인가요?
+
+기능적 차이는 없습니다. 생성 시 추가가 더 효율적입니다(하나의 트랜잭션). 나중에 추가하면 별도의 트랜잭션이 필요합니다.
+
+## 관련 작업
+
+- [외부 플러그인 제거하기](/ko/smart-contracts/core/external-plugins/removing-external-plugins) - 외부 플러그인 제거
+- [외부 플러그인 개요](/ko/smart-contracts/core/external-plugins/overview) - 외부 플러그인 이해하기
+- [Oracle 플러그인](/ko/smart-contracts/core/external-plugins/oracle) - Oracle 구성 세부사항
+- [AppData 플러그인](/ko/smart-contracts/core/external-plugins/app-data) - AppData 구성 세부사항
+
+---
+
+*Metaplex Foundation 관리 · 2026년 1월 최종 검증 · @metaplex-foundation/mpl-core 적용*

@@ -1,8 +1,41 @@
 ---
 title: AppData 插件
-metaTitle: AppData 插件 | Core
-description: 了解 MPL Core AppData 插件，它为 Core Assets 提供一个安全的分区数据区域，只有数据权限才能写入。
+metaTitle: AppData 插件 | Metaplex Core
+description: 使用 AppData 插件在 Core NFT 上存储任意数据。为第三方应用、游戏状态或自定义元数据创建安全的分区存储。
 ---
+
+**AppData 插件**为 Core Assets 提供安全的分区数据存储。第三方应用可以通过数据权限控制的独占写入访问来存储和读取任意数据（JSON、MsgPack 或 Binary）。{% .lead %}
+
+{% callout title="您将学到" %}
+
+- 向 Assets 和 Collections 添加 AppData
+- 配置数据权限以实现安全写入
+- 选择数据模式（JSON、MsgPack、Binary）
+- 从链上和链下读写数据
+
+{% /callout %}
+
+## 摘要
+
+**AppData** 插件以受控的写入访问在 Assets 上存储任意数据。只有数据权限可以写入插件的数据部分，从而实现安全的第三方集成。
+
+- 存储 JSON、MsgPack 或 Binary 数据
+- 数据权限拥有独占写入权限
+- 由 DAS 自动索引（JSON/MsgPack）
+- LinkedAppData 变体用于集合范围的写入
+
+## 超出范围
+
+Oracle 验证（参见 [Oracle 插件](/zh/smart-contracts/core/external-plugins/oracle)）、链上属性（参见[属性插件](/zh/smart-contracts/core/plugins/attribute)）和链下元数据存储。
+
+## 快速开始
+
+**跳转到：** [添加到 Asset](#向-asset-添加-appdata-插件) · [写入数据](#向-appdata-插件写入数据) · [读取数据](#从-appdata-插件读取数据)
+
+1. 添加带有数据权限地址的 AppData 插件
+2. 选择模式：JSON、MsgPack 或 Binary
+3. 使用 `writeData()` 写入数据（必须以数据权限签名）
+4. 通过 DAS 或直接账户获取读取数据
 
 ## 什么是 AppData 插件？
 
@@ -519,3 +552,85 @@ println!("{:?}", my_data);
 {% /dialect %}
 
 {% /dialect-switcher %}
+
+## 常见错误
+
+### `Authority mismatch`
+
+只有数据权限可以写入数据。验证您使用的是正确的密钥对签名。
+
+### `Data too large`
+
+数据超过账户大小限制。考虑压缩或将数据拆分到多个插件。
+
+### `Invalid schema`
+
+数据与声明的模式不匹配。确保 JSON 有效或 MsgPack 正确编码。
+
+## 注意事项
+
+- 数据权限与插件权限分开
+- 选择 JSON 或 MsgPack 以进行 DAS 索引
+- Binary 模式用于自定义序列化格式
+- LinkedAppData 允许写入 Collection 中的任何 Asset
+
+## 快速参考
+
+### 模式比较
+
+| 模式 | DAS 索引 | 最适合 |
+|--------|-------------|----------|
+| JSON | ✅ 作为 JSON | 人类可读、Web 应用 |
+| MsgPack | ✅ 作为 JSON | 紧凑、类型化数据 |
+| Binary | ✅ 作为 base64 | 自定义格式、最大效率 |
+
+### AppData vs 属性插件
+
+| 功能 | AppData | 属性 |
+|---------|---------|------------|
+| 写入权限 | 仅数据权限 | 更新权限 |
+| 数据格式 | 任意（JSON、MsgPack、Binary） | 键值字符串 |
+| 第三方友好 | ✅ 是 | ❌ 需要更新权限 |
+| DAS 索引 | ✅ 是 | ✅ 是 |
+
+## FAQ
+
+### AppData 和属性插件有什么区别？
+
+属性存储由更新权限控制的键值字符串。AppData 存储由单独数据权限控制的任意数据，非常适合第三方应用。
+
+### 我可以在一个 Asset 上有多个 AppData 插件吗？
+
+可以。每个 AppData 插件可以有不同的数据权限，允许多个第三方应用在同一 Asset 上存储数据。
+
+### 如何更新现有的 AppData？
+
+使用新数据调用 `writeData()`。这会完全替换现有数据——没有部分更新。
+
+### AppData 会被 DAS 索引吗？
+
+会。JSON 和 MsgPack 模式会自动反序列化和索引。Binary 作为 base64 存储。
+
+### 什么是 LinkedAppData？
+
+LinkedAppData 添加到 Collection，允许数据权限写入该 Collection 中的任何 Asset，而无需单独向每个 Asset 添加 AppData。
+
+## 术语表
+
+| 术语 | 定义 |
+|------|------------|
+| **AppData** | 用于在 Assets 上存储任意数据的外部插件 |
+| **数据权限** | 具有独占写入权限的地址 |
+| **LinkedAppData** | 用于写入任何 Asset 的集合级变体 |
+| **Schema** | 数据格式：JSON、MsgPack 或 Binary |
+| **writeData()** | 向 AppData 插件写入数据的函数 |
+
+## 相关页面
+
+- [外部插件概述](/zh/smart-contracts/core/external-plugins/overview) - 理解外部插件
+- [Oracle 插件](/zh/smart-contracts/core/external-plugins/oracle) - 验证而非数据存储
+- [属性插件](/zh/smart-contracts/core/plugins/attribute) - 内置键值存储
+
+---
+
+*由 Metaplex Foundation 维护 · 最后验证于 2026 年 1 月 · 适用于 @metaplex-foundation/mpl-core*

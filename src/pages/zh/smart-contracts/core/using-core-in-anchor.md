@@ -1,8 +1,41 @@
 ---
 title: 在 Anchor 中使用 Metaplex Core
-metaTitle: 在 Anchor 中使用 Metaplex Core | Core
-description: 了解如何在您的 Anchor 程序中使用 Metaplex Core crate。
+metaTitle: 在 Anchor 中使用 Metaplex Core | Metaplex Core
+description: 将 Metaplex Core 集成到 Anchor 程序中。学习用于链上 NFT 操作的 CPI 调用、账户反序列化和插件访问。
 ---
+
+使用 Anchor 构建与 Core Assets 交互的**链上程序**。本指南涵盖安装、账户反序列化、插件访问和 CPI 模式。 {% .lead %}
+
+{% callout title="您将学到" %}
+
+- 在 Anchor 项目中安装和配置 mpl-core
+- 在程序中反序列化 Core Assets 和 Collections
+- 访问插件数据（Attributes、Freeze 等）
+- 进行 CPI 调用以创建、转移和管理 Assets
+
+{% /callout %}
+
+## 摘要
+
+`mpl-core` Rust crate 提供了从 Anchor 程序与 Core 交互所需的一切。启用 `anchor` feature flag 以获得原生 Anchor 账户反序列化。
+
+- 使用 `features = ["anchor"]` 添加 `mpl-core`
+- 在 Accounts 结构体中反序列化 Assets/Collections
+- 使用 `fetch_plugin()` 读取插件数据
+- CPI 构建器简化指令调用
+
+## 范围外
+
+客户端 JavaScript SDK（参见 [JavaScript SDK](/zh/smart-contracts/core/sdk/javascript)）、独立 Rust 客户端（参见 [Rust SDK](/zh/smart-contracts/core/sdk/rust)）、从客户端创建 Core Assets。
+
+## 快速开始
+
+**跳转至：** [安装](#安装) · [账户反序列化](#账户反序列化) · [插件访问](#反序列化插件) · [CPI 示例](#cpi-指令构建器)
+
+1. 在 Cargo.toml 中添加 `mpl-core = { version = "x.x.x", features = ["anchor"] }`
+2. 使用 `Account<'info, BaseAssetV1>` 反序列化 Assets
+3. 使用 `fetch_plugin::<BaseAssetV1, PluginType>()` 访问插件
+4. 使用 `CreateV2CpiBuilder`、`TransferV1CpiBuilder` 等进行 CPI 调用
 
 ## 安装
 
@@ -32,12 +65,12 @@ mpl-core = { version = "x.x.x", features = [ "anchor" ] }
 
 Core Rust SDK 被组织成几个模块：
 
-- `accounts`：表示程序的账户。
-- `errors`：枚举程序的错误。
-- `instructions`：简化指令、指令参数和 CPI 指令的创建。
-- `types`：表示程序使用的类型。
+- `accounts`：表示程序的账户
+- `errors`：枚举程序的错误
+- `instructions`：简化指令、指令参数和 CPI 指令的创建
+- `types`：表示程序使用的类型
 
-有关如何调用和使用不同指令的更多详细信息，请参阅 [mpl-core docs.rs 网站](https://docs.rs/mpl-core/0.7.2/mpl_core/)，或者您可以使用 `cmd + 左键点击`（mac）或 `ctrl + 左键点击`（windows）展开指令。
+有关如何调用和使用不同指令的更多详细信息，请参阅 [mpl-core docs.rs 网站](https://docs.rs/mpl-core/0.7.2/mpl_core/)，或者您可以使用 `Cmd + 左键点击`（Mac）或 `Ctrl + 左键点击`（Windows）展开指令。
 
 ## 账户反序列化
 
@@ -55,8 +88,8 @@ Core Rust SDK 被组织成几个模块：
 
 在 Anchor 中反序列化 Core 账户有两种方式：
 
-- 使用 Anchor 的 Account 列表结构（大多数情况下推荐），
-- 直接在指令函数体中使用 `<Account>::from_bytes()`。
+- 使用 Anchor 的 Account 列表结构（大多数情况下推荐）
+- 直接在指令函数体中使用 `<Account>::from_bytes()`
 
 ### Anchor Accounts List 方法
 
@@ -171,3 +204,87 @@ CreateCollectionV2CpiBuilder::new(&ctx.accounts.core_program)
     .uri("https://test.com".to_string())
     .invoke()?;
 ```
+
+## 常见错误
+
+### `AccountNotInitialized`
+
+Asset 或 Collection 账户不存在或尚未创建。
+
+### `PluginNotFound`
+
+您尝试获取的插件在 Asset 上不存在。使用 `fetch_plugin()` 检查，它会安全地返回 `None`。
+
+### `InvalidAuthority`
+
+签名者没有此操作的权限。验证正确的权限正在签名。
+
+## 注意事项
+
+- 始终启用 `features = ["anchor"]` 以获得原生反序列化
+- 对内置插件使用 `fetch_plugin()`，对外部插件使用 `fetch_external_plugin()`
+- CPI 构建器抽象了账户排序的复杂性
+- 查看 [docs.rs/mpl-core](https://docs.rs/mpl-core/) 获取完整的 API 参考
+
+## 快速参考
+
+### 常见 CPI 构建器
+
+| 操作 | CPI 构建器 |
+|-----------|-------------|
+| 创建 Asset | `CreateV2CpiBuilder` |
+| 创建 Collection | `CreateCollectionV2CpiBuilder` |
+| 转移 Asset | `TransferV1CpiBuilder` |
+| 销毁 Asset | `BurnV1CpiBuilder` |
+| 更新 Asset | `UpdateV1CpiBuilder` |
+| 添加插件 | `AddPluginV1CpiBuilder` |
+| 更新插件 | `UpdatePluginV1CpiBuilder` |
+
+### 账户类型
+
+| 账户 | 结构体 |
+|---------|--------|
+| Asset | `BaseAssetV1` |
+| Collection | `BaseCollectionV1` |
+| Hashed Asset | `HashedAssetV1` |
+| Plugin Header | `PluginHeaderV1` |
+| Plugin Registry | `PluginRegistryV1` |
+
+## 常见问题
+
+### 需要 anchor feature flag 吗？
+
+是的，在 Accounts 结构体中直接反序列化需要它。没有它，需要手动使用 `from_bytes()`。
+
+### 如何检查插件是否存在？
+
+使用 `fetch_plugin()`，它返回 `Option` - 如果插件不存在不会抛出错误。
+
+### 可以访问外部插件（Oracle、AppData）吗？
+
+可以。使用 `fetch_external_plugin()` 代替 `fetch_plugin()`，并使用适当的键。
+
+### 在哪里可以找到所有可用的指令？
+
+参见 [mpl-core docs.rs instructions 模块](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)。
+
+## 术语表
+
+| 术语 | 定义 |
+|------|------------|
+| **CPI** | Cross-Program Invocation - 从一个程序调用另一个程序 |
+| **CpiBuilder** | 用于构造 CPI 调用的帮助结构体 |
+| **BaseAssetV1** | 用于反序列化的 Core Asset 账户结构体 |
+| **fetch_plugin()** | 从账户读取插件数据的函数 |
+| **anchor feature** | 启用 Anchor 原生反序列化的 Cargo feature |
+
+## 相关页面
+
+- [Anchor 质押示例](/zh/smart-contracts/core/guides/anchor/anchor-staking-example) - 完整的质押程序
+- [使用 Anchor 创建 Core Asset](/zh/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - 分步指南
+- [Rust SDK](/zh/smart-contracts/core/sdk/rust) - 独立 Rust 客户端使用
+- [mpl-core docs.rs](https://docs.rs/mpl-core/) - 完整 API 参考
+
+---
+
+*由 Metaplex Foundation 维护 · 2026年1月最后验证 · 适用于 @metaplex-foundation/mpl-core*

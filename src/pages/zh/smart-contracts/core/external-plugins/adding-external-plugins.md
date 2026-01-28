@@ -1,8 +1,40 @@
 ---
 title: 添加外部插件
-metaTitle: 添加外部插件 | Core
-description: 了解如何向 MPL Core Assets 和 Collections 添加外部插件。
+metaTitle: 添加外部插件 | Metaplex Core
+description: 了解如何向 Core Assets 和 Collections 添加 Oracle 和 AppData 插件。包含 JavaScript 和 Rust 代码示例。
 ---
+
+本指南展示如何向 Core Assets 和 Collections 添加**外部插件**（Oracle、AppData）。可在创建时添加或添加到现有 Assets/Collections。{% .lead %}
+
+{% callout title="您将学到" %}
+
+- 在 Asset/Collection 创建时添加外部插件
+- 向现有 Assets/Collections 添加外部插件
+- 配置 Oracle 生命周期检查
+- 使用数据权限设置 AppData
+
+{% /callout %}
+
+## 摘要
+
+使用 `create()` 的 `plugins` 数组添加外部插件，或使用 `addPlugin()` 添加到现有 Assets。Collections 使用 `createCollection()` 和 `addCollectionPlugin()`。
+
+- 创建时添加：包含在 `plugins` 数组中
+- 添加到现有：使用 `addPlugin()` / `addCollectionPlugin()`
+- 需要更新权限签名
+- 为 Oracle 插件配置生命周期检查
+
+## 超出范围
+
+移除外部插件（参见[移除外部插件](/zh/smart-contracts/core/external-plugins/removing-external-plugins)）、更新插件数据和内置插件（参见[添加插件](/zh/smart-contracts/core/plugins/adding-plugins)）。
+
+## 快速开始
+
+**跳转到：** [创建带插件的 Asset](#创建带有外部插件的-core-asset) · [添加到现有 Asset](#向-core-asset-添加外部插件) · [创建带插件的 Collection](#创建带有外部插件的-core-collection)
+
+1. 准备您的 Oracle 账户或 AppData 配置
+2. 在创建时或通过 `addPlugin()` 添加插件
+3. 配置生命周期检查（Oracle）或数据权限（AppData）
 
 ## Assets
 
@@ -82,7 +114,7 @@ pub async fn create_asset_with_oracle_plugin() {
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
 
     let create_asset_with_burn_transfer_delegate_plugin_tx = Transaction::new_signed_with_payer(
-        &[create_asset_with_burn_transfer_delegate_plugin_ix],
+        &[create_asset_with_oracle_plugin_ix],
         Some(&payer.pubkey()),
         &signers,
         last_blockhash,
@@ -372,3 +404,49 @@ pub async fn add_oracle_plugin_to_collection() {
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## 常见错误
+
+### `Authority mismatch`
+
+只有更新权限可以添加外部插件。验证您使用的是正确的密钥对签名。
+
+### `Plugin already exists`
+
+具有相同键的外部插件已存在。请先移除或改为更新。
+
+### `Invalid Oracle account`
+
+Oracle 基地址无效或账户不存在。
+
+## 注意事项
+
+- 外部插件由权限管理（更新权限控制）
+- Oracle 插件需要现有的 Oracle 账户
+- AppData 插件需要数据权限才能写入
+- Collection 插件不会自动应用到现有 Assets
+
+## FAQ
+
+### 我可以向一个 Asset 添加多个外部插件吗？
+
+可以。您可以向单个 Asset 添加多个 Oracle 和/或 AppData 插件。
+
+### 我需要先创建 Oracle 账户吗？
+
+是的。在添加 Oracle 插件适配器之前，Oracle 账户必须存在。
+
+### 创建时添加和之后添加有什么区别？
+
+功能上没有区别。创建时添加更高效（一个交易）。之后添加需要单独的交易。
+
+## 相关操作
+
+- [移除外部插件](/zh/smart-contracts/core/external-plugins/removing-external-plugins) - 移除外部插件
+- [外部插件概述](/zh/smart-contracts/core/external-plugins/overview) - 理解外部插件
+- [Oracle 插件](/zh/smart-contracts/core/external-plugins/oracle) - Oracle 配置详情
+- [AppData 插件](/zh/smart-contracts/core/external-plugins/app-data) - AppData 配置详情
+
+---
+
+*由 Metaplex Foundation 维护 · 最后验证于 2026 年 1 月 · 适用于 @metaplex-foundation/mpl-core*

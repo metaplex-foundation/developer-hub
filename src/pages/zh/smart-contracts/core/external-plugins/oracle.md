@@ -1,8 +1,41 @@
 ---
 title: Oracle 插件
-metaTitle: Oracle 插件 | Core
-description: 了解 Oracle 插件和 Oracle 账户以及它们如何与 Core NFT Assets 的生命周期事件交互。
+metaTitle: Oracle 插件 | Metaplex Core
+description: 使用外部验证构建动态 NFT 行为。Oracle 插件根据自定义条件拒绝 Asset 转移、更新、销毁和创建。
 ---
+
+**Oracle 插件**为 Core Assets 和 Collections 添加外部链上验证。通过引用由权限控制的单独 Oracle 账户，根据自定义条件拒绝生命周期事件（转移、更新、销毁、创建）。{% .lead %}
+
+{% callout title="您将学到" %}
+
+- 向 Assets/Collections 添加 Oracle 插件
+- 配置 Oracle 账户结构和偏移量
+- 设置生命周期检查（转移/更新/销毁/创建）
+- 使用 PDA 进行动态验证
+
+{% /callout %}
+
+## 摘要
+
+**Oracle** 插件引用外部账户来验证生命周期事件。当发生生命周期事件（转移、更新、销毁、创建）时，MPL Core 程序加载 Oracle 账户并检查批准/拒绝状态。
+
+- 通过外部验证拒绝生命周期事件
+- Oracle 账户可随时更新（动态行为）
+- 基于 PDA 的配置支持按 Asset/Owner/Collection 验证
+- 适用于灵魂绑定 NFT、条件转移等
+
+## 超出范围
+
+AppData 存储（参见 [AppData 插件](/zh/smart-contracts/core/external-plugins/app-data)）、内置插件验证（参见[插件概述](/zh/smart-contracts/core/plugins)）和链下验证逻辑。
+
+## 快速开始
+
+**跳转到：** [添加到 Asset](#向-asset-添加-oracle-插件) · [添加到 Collection](#向-collection-添加-oracle-插件) · [默认 Oracles](#metaplex-部署的默认-oracles)
+
+1. 创建具有适当结构的 Oracle 账户（外部）
+2. 向 Asset/Collection 添加 Oracle 插件适配器
+3. 配置生命周期检查和结果偏移量
+4. 更新 Oracle 账户以动态更改验证
 
 ## 什么是 Oracle 插件？
 
@@ -641,3 +674,62 @@ pub async fn add_oracle_plugin_to_collection() {
 - 向 Asset 添加 Oracle 插件适配器，指定您希望进行拒绝验证的生命周期事件。
 - 开发者编写可以写入 Oracle 账户的 Anchor 程序，派生相同的 PRECONFIGURED_ASSET 账户。
 - 开发者编写 web2 脚本，监控市场上的价格，并使用已知的具有"Red Hat"特征的 Assets 哈希列表更新并写入相关的 Oracle 账户。
+
+## 常见错误
+
+### `Oracle account not found`
+
+Oracle 基地址不存在或没有正确的结构。
+
+### `Invalid validation offset`
+
+在指定的偏移量处找不到 OracleValidation 结构。对于 Anchor 程序使用 `Anchor` 偏移量。
+
+### `Lifecycle check rejected`
+
+Oracle 账户为该生命周期事件返回 `Rejected`。
+
+## 注意事项
+
+- Oracles 只能拒绝，不能批准
+- 更新 Oracle 账户会立即更改验证
+- PreconfiguredAsset/Owner/Collection 支持按 Asset 验证
+- Metaplex 部署的默认 Oracles 支持灵魂绑定 NFT
+
+## FAQ
+
+### Oracle 可以批准创建/转移/更新/销毁吗？
+
+不能。Oracles **只能拒绝**。这是有意的安全设计——外部账户不能单方面批准生命周期事件。
+
+### Oracle 账户在哪里创建？
+
+Oracle 账户在 MPL Core 外部创建——通常在自定义 Anchor 程序中。它们必须遵循正确的 `OracleValidation` 结构。
+
+### 我可以对不同的 Assets 进行不同的验证吗？
+
+可以。使用 `PreconfiguredAsset`、`PreconfiguredOwner` 或 `CustomPda` 为每个 Asset 的验证派生唯一的 Oracle 账户。
+
+### 如何创建灵魂绑定 NFT？
+
+使用 Metaplex 的默认 Transfer Oracle (`AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`) 始终拒绝转移。
+
+## 术语表
+
+| 术语 | 定义 |
+|------|------------|
+| **Oracle** | 存储验证状态的外部链上账户 |
+| **ValidationResultsOffset** | Oracle 账户中数据开始的位置（NoOffset、Anchor、Custom） |
+| **ExternalCheckResult** | Rejected、Approved 或 Pass 验证结果 |
+| **ExtraAccount** | 用于动态 Oracle 地址的 PDA 配置 |
+| **生命周期事件** | 可验证的操作：create、transfer、update、burn |
+
+## 相关页面
+
+- [外部插件概述](/zh/smart-contracts/core/external-plugins/overview) - 理解外部插件
+- [AppData 插件](/zh/smart-contracts/core/external-plugins/app-data) - 数据存储而非验证
+- [创建灵魂绑定 NFT](/zh/smart-contracts/core/guides/create-soulbound-nft-asset) - 使用 Oracle 实现不可转移代币
+
+---
+
+*由 Metaplex Foundation 维护 · 最后验证于 2026 年 1 月 · 适用于 @metaplex-foundation/mpl-core*

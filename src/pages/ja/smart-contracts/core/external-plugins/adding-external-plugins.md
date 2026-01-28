@@ -1,12 +1,44 @@
 ---
 title: 外部プラグインの追加
-metaTitle: 外部プラグインの追加 | Core
-description: MPL Coreのアセット/コレクションへ外部プラグインを追加する方法を学びます。
+metaTitle: 外部プラグインの追加 | Metaplex Core
+description: Core Assets と Collections に Oracle や AppData プラグインを追加する方法を学びます。JavaScript と Rust のコード例を掲載。
 ---
 
-## アセット
+このガイドでは、Core Assets と Collections に**外部プラグイン**（Oracle、AppData）を追加する方法を説明します。作成時に追加するか、既存の Assets/Collections に追加できます。{% .lead %}
 
-### 外部プラグイン付きでCoreアセットを作成
+{% callout title="学習内容" %}
+
+- Asset/Collection 作成時に外部プラグインを追加する
+- 既存の Assets/Collections に外部プラグインを追加する
+- Oracle のライフサイクルチェックを設定する
+- データ権限付きの AppData を設定する
+
+{% /callout %}
+
+## 概要
+
+外部プラグインは `create()` で `plugins` 配列を使用するか、既存の Assets には `addPlugin()` を使用して追加します。Collections は `createCollection()` と `addCollectionPlugin()` を使用します。
+
+- 作成時に追加: `plugins` 配列に含める
+- 既存に追加: `addPlugin()` / `addCollectionPlugin()` を使用
+- 更新権限の署名が必要
+- Oracle プラグインのライフサイクルチェックを設定
+
+## 対象外
+
+外部プラグインの削除（[外部プラグインの削除](/ja/smart-contracts/core/external-plugins/removing-external-plugins)を参照）、プラグインデータの更新、ビルトインプラグイン（[プラグインの追加](/ja/smart-contracts/core/plugins/adding-plugins)を参照）。
+
+## クイックスタート
+
+**ジャンプ先:** [プラグイン付きアセット作成](#creating-a-core-asset-with-an-external-plugin) · [既存アセットに追加](#adding-a-external-plugin-to-a-core-asset) · [プラグイン付きコレクション作成](#creating-a-core-collection-with-an-external-plugin)
+
+1. Oracle アカウントまたは AppData 設定を準備
+2. 作成時または `addPlugin()` でプラグインを追加
+3. ライフサイクルチェック（Oracle）またはデータ権限（AppData）を設定
+
+## Assets
+
+### Creating a Core Asset with an External Plugin
 
 {% dialect-switcher title="外部プラグイン付きアセットの作成" %}
 {% dialect title="JavaScript" id="js" %}
@@ -100,7 +132,7 @@ pub async fn create_asset_with_oracle_plugin() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### 既存アセットへ外部プラグインを追加
+### Adding a External Plugin to a Core Asset
 
 {% dialect-switcher title="権限を伴うプラグイン追加" %}
 {% dialect title="Rust" id="rust" %}
@@ -188,9 +220,9 @@ addPlugin(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## コレクション
+## Collections
 
-### 外部プラグイン付きでCoreコレクションを作成
+### Creating a Core Collection with an External Plugin
 
 {% dialect-switcher title="コレクションへの外部プラグイン追加" %}
 {% dialect title="JavaScript" id="js" %}
@@ -286,7 +318,7 @@ pub async fn create_collection_with_oracle_plugin() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### 既存コレクションへ外部プラグインを追加
+### Adding a External Plugin to a Collection
 
 {% dialect-switcher title="コレクションへの追加" %}
 {% dialect title="JavaScript" id="js" %}
@@ -373,3 +405,48 @@ pub async fn add_oracle_plugin_to_collection() {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## よくあるエラー
+
+### `Authority mismatch`
+
+外部プラグインを追加できるのは更新権限のみです。正しいキーペアで署名していることを確認してください。
+
+### `Plugin already exists`
+
+同じキーを持つ外部プラグインが既に存在します。先に削除するか、代わりに更新してください。
+
+### `Invalid Oracle account`
+
+Oracle のベースアドレスが無効か、アカウントが存在しません。
+
+## 注意事項
+
+- 外部プラグインは権限管理型（更新権限が制御）
+- Oracle プラグインには既存の Oracle アカウントが必要
+- AppData プラグインには書き込み権限用のデータ権限が必要
+- コレクションプラグインは既存の Assets に自動的に適用されない
+
+## FAQ
+
+### 1つの Asset に複数の外部プラグインを追加できますか？
+
+はい。1つの Asset に複数の Oracle や AppData プラグインを追加できます。
+
+### Oracle アカウントを先に作成する必要がありますか？
+
+はい。Oracle プラグインアダプターを追加する前に、Oracle アカウントが存在している必要があります。
+
+### 作成時の追加と後から追加する違いは？
+
+機能的な違いはありません。作成時の追加はより効率的です（1つのトランザクション）。後から追加する場合は別のトランザクションが必要です。
+
+## 関連操作
+
+- [外部プラグインの削除](/ja/smart-contracts/core/external-plugins/removing-external-plugins) - 外部プラグインを削除
+- [外部プラグイン概要](/ja/smart-contracts/core/external-plugins/overview) - 外部プラグインの理解
+- [Oracle プラグイン](/ja/smart-contracts/core/external-plugins/oracle) - Oracle 設定の詳細
+- [AppData プラグイン](/ja/smart-contracts/core/external-plugins/app-data) - AppData 設定の詳細
+
+---
+
+*Metaplex Foundation によって管理 - 最終確認 2026年1月 - @metaplex-foundation/mpl-core に適用*

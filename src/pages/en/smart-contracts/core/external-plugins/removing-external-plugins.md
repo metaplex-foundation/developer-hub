@@ -1,8 +1,40 @@
 ---
-title: Removing External Plugin Adapters
-metaTitle: Removing External Plugin Adapters | Core
-description: Learn about Removing External Plugin Adapters from Core Assets and Collections.
+title: Removing External Plugins
+metaTitle: Removing External Plugins | Metaplex Core
+description: Learn how to remove Oracle and AppData plugins from Core Assets and Collections. Code examples for JavaScript and Rust.
 ---
+
+This guide shows how to **remove External Plugins** from Core Assets and Collections. Remove Oracle or AppData plugins when they're no longer needed. {% .lead %}
+
+{% callout title="What You'll Learn" %}
+
+- Remove external plugins from Assets
+- Remove external plugins from Collections
+- Understand authority requirements
+- Recover rent from removed plugins
+
+{% /callout %}
+
+## Summary
+
+Remove external plugins using `removePlugin()` for Assets or `removeCollectionPlugin()` for Collections. Only the plugin authority can remove external plugins.
+
+- Specify the plugin type and base address
+- Plugin data is deleted
+- Rent is recovered
+- Requires plugin authority signature
+
+## Out of Scope
+
+Adding external plugins (see [Adding External Plugins](/smart-contracts/core/external-plugins/adding-external-plugins)), updating plugin data, and removing built-in plugins (see [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)).
+
+## Quick Start
+
+**Jump to:** [Remove from Asset](#remove-from-asset) · [Remove from Collection](#remove-from-collection)
+
+1. Identify the plugin type and base address to remove
+2. Call `removePlugin()` with the plugin key
+3. Plugin is removed immediately, rent recovered
 
 ## Remove from Asset
 
@@ -143,9 +175,49 @@ pub async fn remove_external_plugin_adapter_from_collection() {
 
     println!("Signature: {:?}", res)
 }
-
 ```
 
 {% /dialect  %}
 
 {% /dialect-switcher %}
+
+## Common Errors
+
+### `Authority mismatch`
+
+Only the plugin authority can remove external plugins. Verify you're signing with the correct keypair.
+
+### `Plugin not found`
+
+No external plugin with the specified key exists on this Asset/Collection.
+
+## Notes
+
+- Removing a plugin deletes all its data
+- Rent is recovered and returned to the payer
+- Only the plugin authority can remove (usually update authority)
+- The external Oracle/AppData account is NOT deleted—only the adapter
+
+## FAQ
+
+### Does removing an Oracle plugin delete the Oracle account?
+
+No. Only the plugin adapter on the Asset is removed. The external Oracle account remains and can be reused.
+
+### Can I recover AppData before removing?
+
+Yes. Read the AppData using `fetchAsset()` before removing the plugin if you need to preserve the data.
+
+### What happens to the rent?
+
+The rent from the plugin adapter is recovered and returned to the transaction payer.
+
+## Related Operations
+
+- [Adding External Plugins](/smart-contracts/core/external-plugins/adding-external-plugins) - Add external plugins
+- [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
+- [Removing Plugins](/smart-contracts/core/plugins/removing-plugins) - Remove built-in plugins
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

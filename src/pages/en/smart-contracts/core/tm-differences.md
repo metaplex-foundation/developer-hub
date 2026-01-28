@@ -1,10 +1,45 @@
 ---
 title: Differences between Core and Token Metadata
-metaTitle: Differences between Core and Token Metadata | Core
-description: Differences between Core and Token Metadata NFT protocols on the Solana blockchain.
+metaTitle: Core vs Token Metadata | Metaplex Core
+description: Compare Metaplex Core and Token Metadata NFT standards. Learn what changed, what's new, and how to migrate your mental model from TM to Core.
 ---
 
-This page first explores Core's general improvements compared with TM and later provides more technical information on how the equivalents of TM functions can be used in Core.
+Coming from **Token Metadata**? This guide explains what's different in Core, why it's better, and how to translate your TM knowledge to Core concepts. {% .lead %}
+
+{% callout title="Key Differences" %}
+
+- **Single account** vs 3+ accounts (mint, metadata, token account)
+- **80% lower costs**: ~0.0037 SOL vs 0.022 SOL per mint
+- **Plugins** instead of delegates and freeze authorities
+- **Collections are first-class** with collection-level operations
+- **No Associated Token Accounts** needed
+
+{% /callout %}
+
+## Summary
+
+Core replaces Token Metadata's multi-account model with a single-account design. Everything is simpler: creating, freezing, delegating, and managing collections. The plugin system replaces TM's scattered delegate types with a unified, extensible architecture.
+
+| Feature | Token Metadata | Core |
+|---------|---------------|------|
+| Accounts per NFT | 3+ (mint, metadata, ATA) | 1 |
+| Mint cost | ~0.022 SOL | ~0.0037 SOL |
+| Freeze mechanism | Delegate + freeze authority | Freeze Delegate plugin |
+| Collection royalties | Per-asset updates | Collection-level plugin |
+| On-chain attributes | ❌ | ✅ Attributes plugin |
+
+## Out of Scope
+
+Migration scripts (coming soon), pNFT-specific features, and fungible token handling (use SPL Token).
+
+## Quick Start
+
+**Jump to:** [Cost Comparison](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze--lock) · [Lifecycle Events](#lifecycle-events-and-plugins)
+
+If you're starting fresh, use Core. If migrating, the key mental shifts are:
+1. One account, not three
+2. Plugins, not delegates
+3. Collection-level operations are native
 
 ## Difference Overview
 
@@ -105,10 +140,73 @@ To make things easier we have introduced lifecycle helpers such as `canBurn`, `c
 const burningAllowed = canBurn(authority, asset, collection)
 ```
 
+## Quick Reference
+
+### TM Concept → Core Equivalent
+
+| Token Metadata | Core Equivalent |
+|----------------|-----------------|
+| Mint account | Asset account |
+| Metadata account | Asset account (combined) |
+| Associated Token Account | Not needed |
+| Freeze authority | Freeze Delegate plugin |
+| Update authority | Update authority (same) |
+| Delegate | Transfer/Burn/Update Delegate plugins |
+| Collection verified | Collection membership (automatic) |
+| Creators array | Verified Creators plugin |
+| Uses/utility | Plugins (custom logic) |
+
+### Common Operations
+
+| Operation | Token Metadata | Core |
+|-----------|---------------|------|
+| Create NFT | `createV1()` (multiple accounts) | `create()` (single account) |
+| Freeze | Delegate then freeze | Add Freeze Delegate plugin |
+| Update metadata | `updateV1()` | `update()` |
+| Transfer | SPL Token transfer | `transfer()` |
+| Burn | `burnV1()` | `burn()` |
+
+## FAQ
+
+### Should I use Core or Token Metadata for new projects?
+
+Use Core for all new projects. It's cheaper, simpler, and has better features. Token Metadata is legacy.
+
+### Can I migrate existing TM NFTs to Core?
+
+Not automatically. Core Assets are different on-chain accounts. Migration would require burning TM NFTs and minting new Core Assets.
+
+### What happened to pNFTs?
+
+Core's royalty enforcement is built-in via the Royalties plugin with allowlist/denylist support. No separate "programmable" variant needed.
+
+### Do I still need Associated Token Accounts?
+
+No. Core Assets don't use ATAs. Ownership is stored directly in the Asset account.
+
+### How do I verify creators in Core?
+
+Use the [Verified Creators plugin](/smart-contracts/core/plugins/verified-creators). It works similarly to TM's creator array but is opt-in.
+
 ## Further Reading
 
 The features described above are just the tip of the iceberg. Additional interesting topics include:
 
-- Collection Management
-- Plugin Overview
-- Adding on chain Data using the [Attributes Plugin](/smart-contracts/core/plugins/attribute)
+- [Collection Management](/smart-contracts/core/collections)
+- [Plugin Overview](/smart-contracts/core/plugins)
+- Adding on-chain data using the [Attributes Plugin](/smart-contracts/core/plugins/attribute)
+- [Creating Assets](/smart-contracts/core/create-asset)
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Token Metadata (TM)** | Legacy Metaplex NFT standard using multiple accounts |
+| **Core** | New Metaplex NFT standard with single-account design |
+| **Plugin** | Modular functionality added to Core Assets |
+| **ATA** | Associated Token Account (not needed in Core) |
+| **pNFT** | Programmable NFT in TM (royalty enforcement built into Core) |
+
+---
+
+*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to @metaplex-foundation/mpl-core*

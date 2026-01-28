@@ -1,8 +1,41 @@
 ---
 title: 오라클 플러그인
-metaTitle: 오라클 플러그인 | Core
-description: 오라클 플러그인과 오라클 계정, 그리고 이들이 Core NFT Asset의 라이프사이클 이벤트와 어떻게 상호작용하는지 알아보세요.
+metaTitle: 오라클 플러그인 | Metaplex Core
+description: 외부 검증으로 동적 NFT 행동을 구축하세요. Oracle 플러그인은 사용자 정의 조건에 따라 Asset 전송, 업데이트, 소각 및 생성을 거부합니다.
 ---
+
+**Oracle 플러그인**은 Core Assets와 Collections에 외부 온체인 검증을 추가합니다. 권한에 의해 제어되는 별도의 Oracle 계정을 참조하여 사용자 정의 조건에 따라 라이프사이클 이벤트(전송, 업데이트, 소각, 생성)를 거부합니다. {% .lead %}
+
+{% callout title="배울 내용" %}
+
+- Assets/Collections에 Oracle 플러그인 추가
+- Oracle 계정 구조와 오프셋 구성
+- 라이프사이클 검사 설정(전송/업데이트/소각/생성)
+- 동적 검증을 위한 PDA 사용
+
+{% /callout %}
+
+## 요약
+
+**Oracle** 플러그인은 외부 계정을 참조하여 라이프사이클 이벤트를 검증합니다. 라이프사이클 이벤트(전송, 업데이트, 소각, 생성)가 발생하면 MPL Core 프로그램이 Oracle 계정을 로드하고 승인/거부 상태를 확인합니다.
+
+- 외부 검증을 통해 라이프사이클 이벤트 거부
+- Oracle 계정은 언제든지 업데이트 가능(동적 행동)
+- PDA 기반 구성으로 Asset/Owner/Collection별 검증 지원
+- 소울바운드 NFT, 조건부 전송 등에 적합
+
+## 범위 외 내용
+
+AppData 저장([AppData 플러그인](/ko/smart-contracts/core/external-plugins/app-data) 참조), 내장 플러그인 검증([플러그인 개요](/ko/smart-contracts/core/plugins) 참조), 오프체인 검증 로직.
+
+## 빠른 시작
+
+**바로가기:** [Asset에 추가](#asset에-오라클-플러그인-추가하기) · [Collection에 추가](#collection에-오라클-플러그인-추가하기) · [기본 Oracles](#metaplex에서-배포한-기본-오라클)
+
+1. 적절한 구조로 Oracle 계정 생성(외부에서)
+2. Oracle 플러그인 어댑터를 Asset/Collection에 추가
+3. 라이프사이클 검사와 결과 오프셋 구성
+4. Oracle 계정을 업데이트하여 동적으로 검증 변경
 
 <!-- 오라클 플러그인은 Core Asset과 Collection에서 사용되는 `외부 플러그인`으로 다음의 라이프사이클 이벤트를 `거부`하는 기능을 제공합니다:
 
@@ -760,3 +793,62 @@ pub async fn add_oracle_plugin_to_collection() {
 - 거부 검증을 원하는 라이프사이클 이벤트를 지정하여 Asset에 오라클 플러그인 어댑터를 추가합니다.
 - 개발자는 동일한 PRECONFIGURED_ASSET 계정을 도출할 수 있는 오라클 계정에 쓸 수 있는 Anchor 프로그램을 작성합니다.
 - 개발자는 마켓플레이스의 가격을 감시하고, '빨간 모자' 특성을 가진 Asset의 알려진 해시리스트와 함께 관련 오라클 계정을 업데이트하고 쓰는 web2 스크립트를 작성합니다.
+
+## 일반적인 오류
+
+### `Oracle account not found`
+
+Oracle 기본 주소가 존재하지 않거나 올바른 구조를 가지고 있지 않습니다.
+
+### `Invalid validation offset`
+
+지정된 오프셋에서 OracleValidation 구조체를 찾을 수 없습니다. Anchor 프로그램에는 `Anchor` 오프셋을 사용하세요.
+
+### `Lifecycle check rejected`
+
+Oracle 계정이 해당 라이프사이클 이벤트에 대해 `Rejected`를 반환합니다.
+
+## 참고 사항
+
+- Oracle은 승인이 아닌 거부만 가능
+- Oracle 계정 업데이트로 검증이 즉시 변경됨
+- PreconfiguredAsset/Owner/Collection으로 Asset별 검증 가능
+- Metaplex가 배포한 기본 Oracle로 소울바운드 NFT 구현 가능
+
+## FAQ
+
+### Oracle이 생성/전송/업데이트/소각을 승인할 수 있나요?
+
+아니요. Oracle은 **거부만** 가능합니다. 이는 의도적인 보안 설계입니다 - 외부 계정이 독단적으로 라이프사이클 이벤트를 승인할 수 없습니다.
+
+### Oracle 계정은 어디서 생성하나요?
+
+Oracle 계정은 MPL Core 외부에서 생성합니다 - 일반적으로 커스텀 Anchor 프로그램에서 생성합니다. 적절한 `OracleValidation` 구조를 따라야 합니다.
+
+### 다른 Assets에 대해 다른 검증을 할 수 있나요?
+
+네. `PreconfiguredAsset`, `PreconfiguredOwner` 또는 `CustomPda`를 사용하여 Asset별 검증을 위한 고유한 Oracle 계정을 도출할 수 있습니다.
+
+### 소울바운드 NFT는 어떻게 만드나요?
+
+Metaplex의 기본 Transfer Oracle(`AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`)을 사용하여 항상 전송을 거부하세요.
+
+## 용어집
+
+| 용어 | 정의 |
+|------|------------|
+| **Oracle** | 검증 상태를 저장하는 외부 온체인 계정 |
+| **ValidationResultsOffset** | Oracle 계정에서 데이터가 시작되는 위치(NoOffset, Anchor, Custom) |
+| **ExternalCheckResult** | Rejected, Approved 또는 Pass 검증 결과 |
+| **ExtraAccount** | 동적 Oracle 주소를 위한 PDA 구성 |
+| **라이프사이클 이벤트** | 검증 가능한 동작: create, transfer, update, burn |
+
+## 관련 페이지
+
+- [외부 플러그인 개요](/ko/smart-contracts/core/external-plugins/overview) - 외부 플러그인 이해하기
+- [AppData 플러그인](/ko/smart-contracts/core/external-plugins/app-data) - 검증 대신 데이터 저장
+- [소울바운드 NFT 만들기](/ko/smart-contracts/core/guides/create-soulbound-nft-asset) - Oracle을 사용한 전송 불가 토큰
+
+---
+
+*Metaplex Foundation 관리 · 2026년 1월 최종 검증 · @metaplex-foundation/mpl-core 적용*
