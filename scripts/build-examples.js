@@ -50,10 +50,21 @@ function processExampleDirectory(dir) {
   const indexPath = path.join(dir, 'index.js')
 
   // Check if this directory has native files
+  // For kit/umi/das, prefer .ts files over .js files
+  const kitPath = fs.existsSync(path.join(dir, 'kit.ts'))
+    ? path.join(dir, 'kit.ts')
+    : path.join(dir, 'kit.js')
+  const umiPath = fs.existsSync(path.join(dir, 'umi.ts'))
+    ? path.join(dir, 'umi.ts')
+    : path.join(dir, 'umi.js')
+  const dasPath = fs.existsSync(path.join(dir, 'das.ts'))
+    ? path.join(dir, 'das.ts')
+    : path.join(dir, 'das.js')
+
   const nativeFiles = {
-    kit: { path: path.join(dir, 'kit.js'), isShell: false },
-    umi: { path: path.join(dir, 'umi.js'), isShell: false },
-    das: { path: path.join(dir, 'das.js'), isShell: false },
+    kit: { path: kitPath, isShell: false, isTs: kitPath.endsWith('.ts') },
+    umi: { path: umiPath, isShell: false, isTs: umiPath.endsWith('.ts') },
+    das: { path: dasPath, isShell: false, isTs: dasPath.endsWith('.ts') },
     shank: { path: path.join(dir, 'shank.rs'), isShell: false },
     anchor: { path: path.join(dir, 'anchor.rs'), isShell: false },
     cli: { path: path.join(dir, 'cli.sh'), isShell: true },
@@ -67,6 +78,9 @@ function processExampleDirectory(dir) {
     if (fs.existsSync(fileInfo.path)) {
       const code = fs.readFileSync(fileInfo.path, 'utf-8')
       existingFiles[key] = parseCodeSections(code, fileInfo.isShell)
+      if (fileInfo.isTs) {
+        existingFiles[key].isTs = true
+      }
       hasNativeFiles = true
     }
   }
@@ -134,9 +148,10 @@ function processExampleDirectory(dir) {
   lines.push('export const examples = {')
 
   if (existingFiles.kit) {
+    const kitLang = existingFiles.kit.isTs ? 'typescript' : 'javascript'
     lines.push('  kit: {')
     lines.push("    framework: 'Kit',")
-    lines.push("    language: 'javascript',")
+    lines.push(`    language: '${kitLang}',`)
     lines.push('    code: kitSections.full,')
     lines.push('    sections: kitSections,')
     lines.push('  },')
@@ -144,9 +159,10 @@ function processExampleDirectory(dir) {
   }
 
   if (existingFiles.umi) {
+    const umiLang = existingFiles.umi.isTs ? 'typescript' : 'javascript'
     lines.push('  umi: {')
     lines.push("    framework: 'Umi',")
-    lines.push("    language: 'javascript',")
+    lines.push(`    language: '${umiLang}',`)
     lines.push('    code: umiSections.full,')
     lines.push('    sections: umiSections,')
     lines.push('  },')
@@ -154,9 +170,10 @@ function processExampleDirectory(dir) {
   }
 
   if (existingFiles.das) {
+    const dasLang = existingFiles.das.isTs ? 'typescript' : 'javascript'
     lines.push('  das: {')
     lines.push("    framework: 'DAS',")
-    lines.push("    language: 'javascript',")
+    lines.push(`    language: '${dasLang}',`)
     lines.push('    code: dasSections.full,')
     lines.push('    sections: dasSections,')
     lines.push('  },')
@@ -220,7 +237,7 @@ function walkDirectory(dir) {
     if (entry.isDirectory()) {
       // Check if this directory has an index.js or native files
       const hasIndexOrNative = fs.readdirSync(fullPath).some(file =>
-        file === 'index.js' || file.endsWith('.js') || file.endsWith('.rs') || file.endsWith('.sh')
+        file === 'index.js' || file.endsWith('.js') || file.endsWith('.ts') || file.endsWith('.rs') || file.endsWith('.sh')
       )
 
       if (hasIndexOrNative) {
