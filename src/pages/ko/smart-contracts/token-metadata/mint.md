@@ -253,7 +253,7 @@ await createProgrammableNft(umi, {
 {% totem-accordion title="NonFungible 생성" %}
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers'
+import { generateKeyPairSigner } from '@solana/kit'
 import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit'
 
 const mint = await generateKeyPairSigner()
@@ -275,7 +275,7 @@ await sendAndConfirm([createIx, mintIx], [mint, authority])
 {% totem-accordion title="Fungible 생성" %}
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers'
+import { generateKeyPairSigner } from '@solana/kit'
 import { createFungible } from '@metaplex-foundation/mpl-token-metadata-kit'
 
 const mint = await generateKeyPairSigner()
@@ -299,7 +299,7 @@ await sendAndConfirm([createAndMintIx], [mint, authority])
 {% totem-accordion title="FungibleAsset 생성" %}
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers'
+import { generateKeyPairSigner } from '@solana/kit'
 import { createFungibleAsset } from '@metaplex-foundation/mpl-token-metadata-kit'
 
 const mint = await generateKeyPairSigner()
@@ -323,7 +323,7 @@ await sendAndConfirm([createAndMintIx], [mint, authority])
 {% totem-accordion title="ProgrammableNonFungible 생성" %}
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers'
+import { generateKeyPairSigner } from '@solana/kit'
 import { createProgrammableNft } from '@metaplex-foundation/mpl-token-metadata-kit'
 
 const mint = await generateKeyPairSigner()

@@ -17,9 +17,7 @@ npm install \
 ## 설정
 
 ```ts
-import { createSolanaRpc } from '@solana/rpc';
-import { createSolanaRpcSubscriptions } from '@solana/rpc-subscriptions';
-import { generateKeyPairSigner } from '@solana/signers';
+import { createSolanaRpc, createSolanaRpcSubscriptions, generateKeyPairSigner } from '@solana/kit';
 
 // RPC 연결 생성
 const rpc = createSolanaRpc('https://api.devnet.solana.com');
@@ -34,42 +32,49 @@ const authority = await generateKeyPairSigner();
 Kit SDK는 `@solana/kit`를 사용하여 전송하는 인스트럭션을 반환합니다:
 
 ```ts
-import { pipe } from '@solana/functional';
 import {
   appendTransactionMessageInstructions,
+  assertIsTransactionWithinSizeLimit,
+  compileTransaction,
   createTransactionMessage,
+  getSignatureFromTransaction,
+  type Instruction,
+  type KeyPairSigner,
+  pipe,
+  sendAndConfirmTransactionFactory,
   setTransactionMessageFeePayer,
   setTransactionMessageLifetimeUsingBlockhash,
-} from '@solana/transaction-messages';
-import {
-  compileTransaction,
   signTransaction,
-  sendAndConfirmTransactionFactory,
 } from '@solana/kit';
 
-async function sendAndConfirm(instructions, signers) {
+async function sendAndConfirm(instructions: Instruction[], signers: KeyPairSigner[]) {
   const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();
+  if (signers.length === 0) {
+    throw new Error('At least one signer is required for fee payer.');
+  }
 
-  const transactionMessage = pipe(
+  const transaction = pipe(
     createTransactionMessage({ version: 0 }),
     (tx) => setTransactionMessageFeePayer(signers[0].address, tx),
     (tx) => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, tx),
-    (tx) => appendTransactionMessageInstructions(instructions, tx)
+    (tx) => appendTransactionMessageInstructions(instructions, tx),
+    (tx) => compileTransaction(tx),
   );
 
-  const transaction = compileTransaction(transactionMessage);
   const keyPairs = signers.map((s) => s.keyPair);
   const signedTransaction = await signTransaction(keyPairs, transaction);
 
   const sendAndConfirmTx = sendAndConfirmTransactionFactory({ rpc, rpcSubscriptions });
+  assertIsTransactionWithinSizeLimit(signedTransaction);
   await sendAndConfirmTx(signedTransaction, { commitment: 'confirmed' });
+  return getSignatureFromTransaction(signedTransaction)
 }
 ```
 
 ## NFT 생성
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit';
 
 // 키페어 생성
@@ -88,9 +93,10 @@ const [createIx, mintIx] = await createNft({
 });
 
 // 트랜잭션 전송
-await sendAndConfirm([createIx, mintIx], [mint, authority]);
+const sx = await sendAndConfirm([createIx, mintIx], [mint, authority]);
 
 console.log('NFT created:', mint.address);
+console.log('Signature:', sx);
 ```
 
 ## NFT 조회

@@ -1,5 +1,5 @@
 // [IMPORTS]
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import { createNft, PrintSupply } from '@metaplex-foundation/mpl-token-metadata-kit';
 // [/IMPORTS]
 

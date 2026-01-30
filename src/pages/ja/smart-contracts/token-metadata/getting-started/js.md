@@ -48,7 +48,7 @@ await createNft(umi, {
 {% dialect title="Kit SDK" id="kit" %}
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit';
 
 const mint = await generateKeyPairSigner();
