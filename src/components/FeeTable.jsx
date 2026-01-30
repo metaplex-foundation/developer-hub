@@ -1,4 +1,12 @@
 import { products } from '@/components/products'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 export function FeeTable({ product: productKey }) {
   const product = products.find((p) => p.name.toLowerCase() === productKey?.toLowerCase())
@@ -10,42 +18,26 @@ export function FeeTable({ product: productKey }) {
 
   return (
     <div className="not-prose my-8">
-      <table className="w-full text-left text-sm">
-        <thead className="border-b border-slate-200 dark:border-slate-700">
-          <tr>
-            <th className="py-3 pr-4 font-semibold text-slate-900 dark:text-white">
-              Instruction
-            </th>
-            <th className="py-3 pr-4 font-semibold text-slate-900 dark:text-white">
-              Payer
-            </th>
-            <th className="py-3 pr-4 font-semibold text-slate-900 dark:text-white">
-              Amount
-            </th>
-            <th className="py-3 font-semibold text-slate-900 dark:text-white">
-              Notes
-            </th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Instruction</TableHead>
+            <TableHead>Payer</TableHead>
+            <TableHead>Amount</TableHead>
+            <TableHead>Notes</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {fees.map((fee, index) => (
-            <tr key={index}>
-              <td className="py-3 pr-4 font-mono text-sm text-slate-700 dark:text-slate-300">
-                {fee.instruction}
-              </td>
-              <td className="py-3 pr-4 text-slate-600 dark:text-slate-400">
-                {fee.payer}
-              </td>
-              <td className="py-3 pr-4 font-mono text-slate-600 dark:text-slate-400">
-                {fee.amount}
-              </td>
-              <td className="py-3 text-slate-600 dark:text-slate-400">
-                {fee.notes || '-'}
-              </td>
-            </tr>
+            <TableRow key={index}>
+              <TableCell className="font-mono">{fee.instruction}</TableCell>
+              <TableCell>{fee.payer}</TableCell>
+              <TableCell className="font-mono">{fee.amount}</TableCell>
+              <TableCell>{fee.notes || '-'}</TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   )
 }

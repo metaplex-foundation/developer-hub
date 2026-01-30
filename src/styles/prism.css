@@ -1,5 +1,5 @@
 pre[class*='language-'] {
-  color: hsl(var(--foreground));
+  color: hsl(var(--card-foreground));
   background-color: hsl(var(--card));
   border: 1px solid hsl(var(--border));
   border-radius: 0.5rem;
@@ -8,7 +8,7 @@ pre[class*='language-'] {
 
 /* Hero code blocks have their own container styling */
 .hero-code pre[class*='language-'] {
-  color: hsl(var(--foreground));
+  color: hsl(var(--card-foreground));
   background-color: transparent !important;
   border: none;
   border-radius: 0;

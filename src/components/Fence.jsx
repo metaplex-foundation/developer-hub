@@ -110,7 +110,7 @@ export function Fence({
                       key={lineIndex}
                       className={clsx(
                         'table-row',
-                        isHighlighted && 'bg-yellow-100/10 dark:bg-yellow-500/10'
+                        isHighlighted && 'bg-primary/10'
                       )}
                     >
                       {/* Line number column */}

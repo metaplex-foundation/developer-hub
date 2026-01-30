@@ -19,7 +19,7 @@ export function QuickLink({ title, description, href, target, icon }) {
           icon={icon}
           className="h-8 w-8 group-hover:text-primary"
         />
-        <h2 className="mt-4 font-display text-base text-foreground">
+        <h2 className="mt-4 font-display text-base text-card-foreground">
           <Link href={href} target={target}>
             <span className="absolute -inset-px rounded-xl" />
             {title}
