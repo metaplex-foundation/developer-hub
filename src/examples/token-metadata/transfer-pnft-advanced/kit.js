@@ -26,7 +26,10 @@ const transferIx = await getTransferV1InstructionAsync({
   // Auth rules are resolved automatically when available
 });
 
-await sendAndConfirm([transferIx], [authority]);
+await sendAndConfirm({
+  instructions: [transferIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

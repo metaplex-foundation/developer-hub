@@ -21,7 +21,10 @@ const unlockIx = await getUnlockV1InstructionAsync({
   tokenStandard: TokenStandard.ProgrammableNonFungible,
 });
 
-await sendAndConfirm([unlockIx], [stakingDelegate]);
+await sendAndConfirm({
+  instructions: [unlockIx],
+  payer: stakingDelegate,
+});
 // [/MAIN]
 
 // [OUTPUT]

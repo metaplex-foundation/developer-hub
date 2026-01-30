@@ -25,7 +25,10 @@ const updateIx = await getUpdateAsDataDelegateV2InstructionAsync({
   },
 });
 
-await sendAndConfirm([updateIx], [dataDelegate]);
+await sendAndConfirm({
+  instructions: [updateIx],
+  payer: dataDelegate,
+});
 // [/MAIN]
 
 // [OUTPUT]

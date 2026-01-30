@@ -1,18 +1,18 @@
 // [IMPORTS]
-import { createSolanaRpc } from '@solana/rpc';
-import { createSolanaRpcSubscriptions } from '@solana/rpc-subscriptions';
-import { generateKeyPairSigner } from '@solana/signers';
-import { pipe } from '@solana/functional';
 import {
   appendTransactionMessageInstructions,
+  createSolanaRpc,
+  createSolanaRpcSubscriptions,
   createTransactionMessage,
+  generateKeyPairSigner,
+  getSignatureFromTransaction,
+  type Instruction,
+  type TransactionSigner,
+  pipe,
+  sendAndConfirmTransactionFactory,
   setTransactionMessageFeePayer,
   setTransactionMessageLifetimeUsingBlockhash,
-} from '@solana/transaction-messages';
-import {
-  compileTransaction,
-  signTransaction,
-  sendAndConfirmTransactionFactory,
+  signTransactionMessageWithSigners,
 } from '@solana/kit';
 import {
   createNft,
@@ -30,22 +30,28 @@ const authority = await generateKeyPairSigner();
 const mint = await generateKeyPairSigner();
 
 // Helper function to send and confirm transactions
-async function sendAndConfirm(instructions, signers) {
+// Works with any signer type - signers are automatically extracted from instruction accounts
+async function sendAndConfirm(options: {
+  instructions: Instruction[];
+  payer: TransactionSigner;
+}) {
+  const { instructions, payer } = options;
   const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();
 
   const transactionMessage = pipe(
     createTransactionMessage({ version: 0 }),
-    (tx) => setTransactionMessageFeePayer(signers[0].address, tx),
+    (tx) => setTransactionMessageFeePayer(payer.address, tx),
     (tx) => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, tx),
-    (tx) => appendTransactionMessageInstructions(instructions, tx)
+    (tx) => appendTransactionMessageInstructions(instructions, tx),
   );
 
-  const transaction = compileTransaction(transactionMessage);
-  const keyPairs = signers.map((s) => s.keyPair);
-  const signedTransaction = await signTransaction(keyPairs, transaction);
+  // Sign with all signers attached to instruction accounts
+  const signedTransaction = await signTransactionMessageWithSigners(transactionMessage);
 
   const sendAndConfirmTx = sendAndConfirmTransactionFactory({ rpc, rpcSubscriptions });
   await sendAndConfirmTx(signedTransaction, { commitment: 'confirmed' });
+
+  return getSignatureFromTransaction(signedTransaction);
 }
 // [/SETUP]
 
@@ -62,7 +68,10 @@ const [createIx, mintIx] = await createNft({
 });
 
 // Send transaction
-await sendAndConfirm([createIx, mintIx], [mint, authority]);
+const sx = await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 
 // Fetch the NFT data
 const asset = await fetchDigitalAsset(rpc, mint.address);
@@ -71,6 +80,7 @@ const asset = await fetchDigitalAsset(rpc, mint.address);
 // [OUTPUT]
 console.log('NFT created successfully!');
 console.log('Mint address:', mint.address);
+console.log('Signature:', sx);
 console.log('Name:', asset.metadata.name);
 console.log('URI:', asset.metadata.uri);
 // [/OUTPUT]

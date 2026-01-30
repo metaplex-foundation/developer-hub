@@ -28,7 +28,10 @@ const updateIx = await getUpdateV1InstructionAsync({
   },
 });
 
-await sendAndConfirm([updateIx], [authority]);
+await sendAndConfirm({
+  instructions: [updateIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

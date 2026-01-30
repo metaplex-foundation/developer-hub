@@ -21,7 +21,10 @@ const unlockIx = await getUnlockV1InstructionAsync({
   tokenStandard: TokenStandard.ProgrammableNonFungible,
 });
 
-await sendAndConfirm([unlockIx], [utilityDelegate]);
+await sendAndConfirm({
+  instructions: [unlockIx],
+  payer: utilityDelegate,
+});
 // [/MAIN]
 
 // [OUTPUT]

@@ -24,7 +24,10 @@ const verifyIx = await getVerifyCollectionV1InstructionAsync({
   payer: collectionAuthority,
 });
 
-await sendAndConfirm([verifyIx], [collectionAuthority]);
+await sendAndConfirm({
+  instructions: [verifyIx],
+  payer: collectionAuthority,
+});
 // [/MAIN]
 
 // [OUTPUT]

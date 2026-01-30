@@ -17,9 +17,7 @@ npm install \
 ## Setup
 
 ```ts
-import { createSolanaRpc } from '@solana/rpc';
-import { createSolanaRpcSubscriptions } from '@solana/rpc-subscriptions';
-import { generateKeyPairSigner } from '@solana/signers';
+import { createSolanaRpc, createSolanaRpcSubscriptions, generateKeyPairSigner } from '@solana/kit';
 
 // Create RPC connection
 const rpc = createSolanaRpc('https://api.devnet.solana.com');
@@ -31,45 +29,50 @@ const authority = await generateKeyPairSigner();
 
 ### Transaction Helper
 
-The Kit SDK returns instructions that you send using `@solana/kit`:
+The Kit SDK returns instructions with signers already attached to the relevant accounts. This allows you to use `signTransactionMessageWithSigners` which automatically extracts and uses these signers:
 
 ```ts
-import { pipe } from '@solana/functional';
 import {
   appendTransactionMessageInstructions,
   createTransactionMessage,
+  getSignatureFromTransaction,
+  type Instruction,
+  type TransactionSigner,
+  pipe,
+  sendAndConfirmTransactionFactory,
   setTransactionMessageFeePayer,
   setTransactionMessageLifetimeUsingBlockhash,
-} from '@solana/transaction-messages';
-import {
-  compileTransaction,
-  signTransaction,
-  sendAndConfirmTransactionFactory,
+  signTransactionMessageWithSigners,
 } from '@solana/kit';
 
-async function sendAndConfirm(instructions, signers) {
+async function sendAndConfirm(options: {
+  instructions: Instruction[];
+  payer: TransactionSigner;
+}) {
+  const { instructions, payer } = options;
   const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();
 
   const transactionMessage = pipe(
     createTransactionMessage({ version: 0 }),
-    (tx) => setTransactionMessageFeePayer(signers[0].address, tx),
+    (tx) => setTransactionMessageFeePayer(payer.address, tx),
     (tx) => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, tx),
-    (tx) => appendTransactionMessageInstructions(instructions, tx)
+    (tx) => appendTransactionMessageInstructions(instructions, tx),
   );
 
-  const transaction = compileTransaction(transactionMessage);
-  const keyPairs = signers.map((s) => s.keyPair);
-  const signedTransaction = await signTransaction(keyPairs, transaction);
+  // Sign with all signers attached to instruction accounts
+  const signedTransaction = await signTransactionMessageWithSigners(transactionMessage);
 
   const sendAndConfirmTx = sendAndConfirmTransactionFactory({ rpc, rpcSubscriptions });
   await sendAndConfirmTx(signedTransaction, { commitment: 'confirmed' });
+
+  return getSignatureFromTransaction(signedTransaction);
 }
 ```
 
 ## Creating an NFT
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit';
 
 // Generate keypairs
@@ -88,9 +91,13 @@ const [createIx, mintIx] = await createNft({
 });
 
 // Send transaction
-await sendAndConfirm([createIx, mintIx], [mint, authority]);
+const sx = await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 
 console.log('NFT created:', mint.address);
+console.log('Signature:', sx);
 ```
 
 ## Fetching an NFT

@@ -253,7 +253,7 @@ await createProgrammableNft(umi, {
 {% totem-accordion title="Create a NonFungible" %}
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers'
+import { generateKeyPairSigner } from '@solana/kit'
 import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit'
 
 const mint = await generateKeyPairSigner()
@@ -267,7 +267,10 @@ const [createIx, mintIx] = await createNft({
   tokenOwner: authority.address,
 })
 
-await sendAndConfirm([createIx, mintIx], [mint, authority])
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+})
 ```
 
 {% /totem-accordion  %}
@@ -275,7 +278,7 @@ await sendAndConfirm([createIx, mintIx], [mint, authority])
 {% totem-accordion title="Create a Fungible" %}
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers'
+import { generateKeyPairSigner } from '@solana/kit'
 import { createFungible } from '@metaplex-foundation/mpl-token-metadata-kit'
 
 const mint = await generateKeyPairSigner()
@@ -291,7 +294,10 @@ const createAndMintIx = await createFungible({
   amount: 1_000_000_000n, // initial supply
 })
 
-await sendAndConfirm([createAndMintIx], [mint, authority])
+await sendAndConfirm({
+  instructions: [createAndMintIx],
+  payer: authority,
+})
 ```
 
 {% /totem-accordion  %}
@@ -299,7 +305,7 @@ await sendAndConfirm([createAndMintIx], [mint, authority])
 {% totem-accordion title="Create a FungibleAsset" %}
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers'
+import { generateKeyPairSigner } from '@solana/kit'
 import { createFungibleAsset } from '@metaplex-foundation/mpl-token-metadata-kit'
 
 const mint = await generateKeyPairSigner()
@@ -315,7 +321,10 @@ const createAndMintIx = await createFungibleAsset({
   amount: 1000n, // initial supply
 })
 
-await sendAndConfirm([createAndMintIx], [mint, authority])
+await sendAndConfirm({
+  instructions: [createAndMintIx],
+  payer: authority,
+})
 ```
 
 {% /totem-accordion  %}
@@ -323,7 +332,7 @@ await sendAndConfirm([createAndMintIx], [mint, authority])
 {% totem-accordion title="Create a ProgrammableNonFungible" %}
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers'
+import { generateKeyPairSigner } from '@solana/kit'
 import { createProgrammableNft } from '@metaplex-foundation/mpl-token-metadata-kit'
 
 const mint = await generateKeyPairSigner()
@@ -337,7 +346,10 @@ const [createIx, mintIx] = await createProgrammableNft({
   tokenOwner: authority.address,
 })
 
-await sendAndConfirm([createIx, mintIx], [mint, authority])
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+})
 ```
 
 {% /totem-accordion  %}

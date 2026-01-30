@@ -1,5 +1,5 @@
 // [IMPORTS]
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import { createNft, PrintSupply } from '@metaplex-foundation/mpl-token-metadata-kit';
 // [/IMPORTS]
 
@@ -22,7 +22,10 @@ const [createIx, mintIx] = await createNft({
   printSupply: PrintSupply.Limited(100), // Or PrintSupply.Unlimited
 });
 
-await sendAndConfirm([createIx, mintIx], [mint, authority]);
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

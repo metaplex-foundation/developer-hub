@@ -1,5 +1,5 @@
 // [IMPORTS]
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import {
   getPrintV1InstructionAsync,
   fetchMasterEdition,
@@ -32,7 +32,10 @@ const printIx = await getPrintV1InstructionAsync({
   payer: originalOwner,
 });
 
-await sendAndConfirm([printIx], [editionMint, originalOwner]);
+await sendAndConfirm({
+  instructions: [printIx],
+  payer: originalOwner,
+});
 // [/MAIN]
 
 // [OUTPUT]

@@ -1,5 +1,5 @@
 // [IMPORTS]
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import { createProgrammableNft } from '@metaplex-foundation/mpl-token-metadata-kit';
 // [/IMPORTS]
 
@@ -25,7 +25,10 @@ const [createIx, mintIx] = await createProgrammableNft({
 });
 
 // Send both instructions in one transaction
-await sendAndConfirmInstructions([createIx, mintIx], [mint, authority]);
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

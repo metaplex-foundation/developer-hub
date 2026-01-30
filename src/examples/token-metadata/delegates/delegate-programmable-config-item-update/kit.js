@@ -21,7 +21,10 @@ const updateIx = await getUpdateAsProgrammableConfigItemDelegateV2InstructionAsy
   ruleSet: { __kind: 'Set', fields: [ruleSet] },
 });
 
-await sendAndConfirm([updateIx], [programmableConfigItemDelegate]);
+await sendAndConfirm({
+  instructions: [updateIx],
+  payer: programmableConfigItemDelegate,
+});
 // [/MAIN]
 
 // [OUTPUT]

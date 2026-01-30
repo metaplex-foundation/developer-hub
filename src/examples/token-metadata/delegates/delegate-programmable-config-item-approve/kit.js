@@ -19,7 +19,10 @@ const delegateIx = await getDelegateProgrammableConfigItemV1InstructionAsync({
   tokenStandard: TokenStandard.ProgrammableNonFungible,
 });
 
-await sendAndConfirm([delegateIx], [updateAuthority]);
+await sendAndConfirm({
+  instructions: [delegateIx],
+  payer: updateAuthority,
+});
 // [/MAIN]
 
 // [OUTPUT]

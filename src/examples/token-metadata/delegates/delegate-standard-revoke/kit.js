@@ -22,7 +22,10 @@ const revokeIx = await getRevokeStandardV1InstructionAsync({
   tokenStandard: TokenStandard.NonFungible,
 });
 
-await sendAndConfirm([revokeIx], [owner]);
+await sendAndConfirm({
+  instructions: [revokeIx],
+  payer: owner,
+});
 // [/MAIN]
 
 // [OUTPUT]

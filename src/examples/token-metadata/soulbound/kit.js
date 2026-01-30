@@ -1,5 +1,5 @@
 // [IMPORTS]
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import {
   ExtensionType,
   createInitializeMintInstruction,
@@ -89,7 +89,10 @@ const mintTokenIx = await getMintV1InstructionAsync({
 });
 
 // Send metadata and mint instructions
-await sendAndConfirm([createMetadataIx, mintTokenIx], [mint, authority]);
+await sendAndConfirm({
+  instructions: [createMetadataIx, mintTokenIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

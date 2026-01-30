@@ -48,7 +48,7 @@ await createNft(umi, {
 {% dialect title="Kit SDK" id="kit" %}
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit';
 
 const mint = await generateKeyPairSigner();
@@ -61,7 +61,10 @@ const [createIx, mintIx] = await createNft({
   sellerFeeBasisPoints: 550,
   tokenOwner: authority.address,
 });
-await sendAndConfirm([createIx, mintIx], [mint, authority]);
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 ```
 
 {% /dialect %}

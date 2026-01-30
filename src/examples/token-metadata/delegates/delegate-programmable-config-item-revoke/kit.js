@@ -19,7 +19,10 @@ const revokeIx = await getRevokeProgrammableConfigItemV1InstructionAsync({
   tokenStandard: TokenStandard.ProgrammableNonFungible,
 });
 
-await sendAndConfirm([revokeIx], [updateAuthority]);
+await sendAndConfirm({
+  instructions: [revokeIx],
+  payer: updateAuthority,
+});
 // [/MAIN]
 
 // [OUTPUT]

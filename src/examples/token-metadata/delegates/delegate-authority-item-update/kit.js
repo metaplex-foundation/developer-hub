@@ -21,7 +21,10 @@ const updateIx = await getUpdateAsAuthorityItemDelegateV2InstructionAsync({
   isMutable: false,
 });
 
-await sendAndConfirm([updateIx], [authorityItemDelegate]);
+await sendAndConfirm({
+  instructions: [updateIx],
+  payer: authorityItemDelegate,
+});
 // [/MAIN]
 
 // [OUTPUT]

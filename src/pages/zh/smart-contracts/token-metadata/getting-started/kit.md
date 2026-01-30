@@ -17,9 +17,7 @@ npm install \
 ## 设置
 
 ```ts
-import { createSolanaRpc } from '@solana/rpc';
-import { createSolanaRpcSubscriptions } from '@solana/rpc-subscriptions';
-import { generateKeyPairSigner } from '@solana/signers';
+import { createSolanaRpc, createSolanaRpcSubscriptions, generateKeyPairSigner } from '@solana/kit';
 
 // 创建 RPC 连接
 const rpc = createSolanaRpc('https://api.devnet.solana.com');
@@ -31,45 +29,50 @@ const authority = await generateKeyPairSigner();
 
 ### 交易助手
 
-Kit SDK 返回使用 `@solana/kit` 发送的指令：
+Kit SDK 返回的指令已将签名者附加到相关账户上。这允许您使用 `signTransactionMessageWithSigners`，它会自动提取并使用这些签名者：
 
 ```ts
-import { pipe } from '@solana/functional';
 import {
   appendTransactionMessageInstructions,
   createTransactionMessage,
+  getSignatureFromTransaction,
+  type Instruction,
+  type TransactionSigner,
+  pipe,
+  sendAndConfirmTransactionFactory,
   setTransactionMessageFeePayer,
   setTransactionMessageLifetimeUsingBlockhash,
-} from '@solana/transaction-messages';
-import {
-  compileTransaction,
-  signTransaction,
-  sendAndConfirmTransactionFactory,
+  signTransactionMessageWithSigners,
 } from '@solana/kit';
 
-async function sendAndConfirm(instructions, signers) {
+async function sendAndConfirm(options: {
+  instructions: Instruction[];
+  payer: TransactionSigner;
+}) {
+  const { instructions, payer } = options;
   const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();
 
   const transactionMessage = pipe(
     createTransactionMessage({ version: 0 }),
-    (tx) => setTransactionMessageFeePayer(signers[0].address, tx),
+    (tx) => setTransactionMessageFeePayer(payer.address, tx),
     (tx) => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, tx),
-    (tx) => appendTransactionMessageInstructions(instructions, tx)
+    (tx) => appendTransactionMessageInstructions(instructions, tx),
   );
 
-  const transaction = compileTransaction(transactionMessage);
-  const keyPairs = signers.map((s) => s.keyPair);
-  const signedTransaction = await signTransaction(keyPairs, transaction);
+  // 使用附加到指令账户的所有签名者进行签名
+  const signedTransaction = await signTransactionMessageWithSigners(transactionMessage);
 
   const sendAndConfirmTx = sendAndConfirmTransactionFactory({ rpc, rpcSubscriptions });
   await sendAndConfirmTx(signedTransaction, { commitment: 'confirmed' });
+
+  return getSignatureFromTransaction(signedTransaction);
 }
 ```
 
 ## 创建 NFT
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit';
 
 // 生成密钥对
@@ -88,9 +91,13 @@ const [createIx, mintIx] = await createNft({
 });
 
 // 发送交易
-await sendAndConfirm([createIx, mintIx], [mint, authority]);
+const sx = await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 
 console.log('NFT created:', mint.address);
+console.log('Signature:', sx);
 ```
 
 ## 获取 NFT

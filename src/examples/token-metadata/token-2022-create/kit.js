@@ -1,5 +1,5 @@
 // [IMPORTS]
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import {
   getCreateV1InstructionAsync,
   TokenStandard,
@@ -26,7 +26,10 @@ const createIx = await getCreateV1InstructionAsync({
   tokenStandard: TokenStandard.NonFungible,
 });
 
-await sendAndConfirm([createIx], [mint, authority]);
+await sendAndConfirm({
+  instructions: [createIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

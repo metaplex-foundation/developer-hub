@@ -31,7 +31,10 @@ const unlockIx = await getUnlockV1InstructionAsync({
   tokenStandard: TokenStandard.ProgrammableNonFungible,
 });
 
-await sendAndConfirm([unlockIx], [authority]);
+await sendAndConfirm({
+  instructions: [unlockIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

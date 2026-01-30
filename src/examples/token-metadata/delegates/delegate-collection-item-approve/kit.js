@@ -19,7 +19,10 @@ const delegateIx = await getDelegateCollectionItemV1InstructionAsync({
   tokenStandard: TokenStandard.NonFungible,
 });
 
-await sendAndConfirm([delegateIx], [updateAuthority]);
+await sendAndConfirm({
+  instructions: [delegateIx],
+  payer: updateAuthority,
+});
 // [/MAIN]
 
 // [OUTPUT]

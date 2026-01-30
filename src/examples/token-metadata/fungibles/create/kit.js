@@ -1,5 +1,5 @@
 // [IMPORTS]
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import { createFungible } from '@metaplex-foundation/mpl-token-metadata-kit';
 // [/IMPORTS]
 
@@ -27,7 +27,10 @@ const createAndMintIx = await createFungible({
 });
 
 // Send the instruction (createFungible returns a single combined instruction)
-await sendAndConfirmInstructions([createAndMintIx], [mint, authority]);
+await sendAndConfirm({
+  instructions: [createAndMintIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

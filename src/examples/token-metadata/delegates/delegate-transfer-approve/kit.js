@@ -22,7 +22,10 @@ const delegateIx = await getDelegateTransferV1InstructionAsync({
   tokenStandard: TokenStandard.ProgrammableNonFungible,
 });
 
-await sendAndConfirm([delegateIx], [owner]);
+await sendAndConfirm({
+  instructions: [delegateIx],
+  payer: owner,
+});
 // [/MAIN]
 
 // [OUTPUT]

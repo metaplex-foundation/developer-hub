@@ -21,7 +21,10 @@ const updateIx = await getUpdateAsCollectionDelegateV2InstructionAsync({
   },
 });
 
-await sendAndConfirm([updateIx], [collectionDelegate]);
+await sendAndConfirm({
+  instructions: [updateIx],
+  payer: collectionDelegate,
+});
 // [/MAIN]
 
 // [OUTPUT]

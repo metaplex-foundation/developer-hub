@@ -22,7 +22,10 @@ const burnIx = await getBurnV1InstructionAsync({
   tokenStandard: TokenStandard.NonFungible,
 });
 
-await sendAndConfirm([burnIx], [authority]);
+await sendAndConfirm({
+  instructions: [burnIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

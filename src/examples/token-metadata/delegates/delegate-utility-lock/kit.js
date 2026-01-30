@@ -21,7 +21,10 @@ const lockIx = await getLockV1InstructionAsync({
   tokenStandard: TokenStandard.ProgrammableNonFungible,
 });
 
-await sendAndConfirm([lockIx], [utilityDelegate]);
+await sendAndConfirm({
+  instructions: [lockIx],
+  payer: utilityDelegate,
+});
 // [/MAIN]
 
 // [OUTPUT]

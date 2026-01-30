@@ -10,9 +10,9 @@
 const kitSections = {
   "imports": "import { address } from '@solana/addresses';\nimport {\n  getDelegateDataV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';",
   "setup": "const mint = address('mintAddress...');\nconst dataDelegate = address('delegateAddress...');",
-  "main": "const delegateIx = await getDelegateDataV1InstructionAsync({\n  mint,\n  authority: updateAuthority,\n  delegate: dataDelegate,\n  tokenStandard: TokenStandard.NonFungible,\n});\n\nawait sendAndConfirm([delegateIx], [updateAuthority]);",
+  "main": "const delegateIx = await getDelegateDataV1InstructionAsync({\n  mint,\n  authority: updateAuthority,\n  delegate: dataDelegate,\n  tokenStandard: TokenStandard.NonFungible,\n});\n\nawait sendAndConfirm({\n  instructions: [delegateIx],\n  payer: updateAuthority,\n});",
   "output": "console.log('Data delegate approved');",
-  "full": "// [IMPORTS]\nimport { address } from '@solana/addresses';\nimport {\n  getDelegateDataV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';\n// [/IMPORTS]\n\n// [SETUP]\nconst mint = address('mintAddress...');\nconst dataDelegate = address('delegateAddress...');\n// [/SETUP]\n\n// [MAIN]\nconst delegateIx = await getDelegateDataV1InstructionAsync({\n  mint,\n  authority: updateAuthority,\n  delegate: dataDelegate,\n  tokenStandard: TokenStandard.NonFungible,\n});\n\nawait sendAndConfirm([delegateIx], [updateAuthority]);\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Data delegate approved');\n// [/OUTPUT]\n"
+  "full": "// [IMPORTS]\nimport { address } from '@solana/addresses';\nimport {\n  getDelegateDataV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';\n// [/IMPORTS]\n\n// [SETUP]\nconst mint = address('mintAddress...');\nconst dataDelegate = address('delegateAddress...');\n// [/SETUP]\n\n// [MAIN]\nconst delegateIx = await getDelegateDataV1InstructionAsync({\n  mint,\n  authority: updateAuthority,\n  delegate: dataDelegate,\n  tokenStandard: TokenStandard.NonFungible,\n});\n\nawait sendAndConfirm({\n  instructions: [delegateIx],\n  payer: updateAuthority,\n});\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Data delegate approved');\n// [/OUTPUT]\n"
 }
 
 const umiSections = {

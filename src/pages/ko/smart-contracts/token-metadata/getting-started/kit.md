@@ -17,9 +17,7 @@ npm install \
 ## 설정
 
 ```ts
-import { createSolanaRpc } from '@solana/rpc';
-import { createSolanaRpcSubscriptions } from '@solana/rpc-subscriptions';
-import { generateKeyPairSigner } from '@solana/signers';
+import { createSolanaRpc, createSolanaRpcSubscriptions, generateKeyPairSigner } from '@solana/kit';
 
 // RPC 연결 생성
 const rpc = createSolanaRpc('https://api.devnet.solana.com');
@@ -31,45 +29,50 @@ const authority = await generateKeyPairSigner();
 
 ### 트랜잭션 헬퍼
 
-Kit SDK는 `@solana/kit`를 사용하여 전송하는 인스트럭션을 반환합니다:
+Kit SDK는 관련 계정에 서명자가 이미 첨부된 인스트럭션을 반환합니다. 이를 통해 `signTransactionMessageWithSigners`를 사용할 수 있으며, 이 함수는 자동으로 서명자를 추출하여 사용합니다:
 
 ```ts
-import { pipe } from '@solana/functional';
 import {
   appendTransactionMessageInstructions,
   createTransactionMessage,
+  getSignatureFromTransaction,
+  type Instruction,
+  type TransactionSigner,
+  pipe,
+  sendAndConfirmTransactionFactory,
   setTransactionMessageFeePayer,
   setTransactionMessageLifetimeUsingBlockhash,
-} from '@solana/transaction-messages';
-import {
-  compileTransaction,
-  signTransaction,
-  sendAndConfirmTransactionFactory,
+  signTransactionMessageWithSigners,
 } from '@solana/kit';
 
-async function sendAndConfirm(instructions, signers) {
+async function sendAndConfirm(options: {
+  instructions: Instruction[];
+  payer: TransactionSigner;
+}) {
+  const { instructions, payer } = options;
   const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();
 
   const transactionMessage = pipe(
     createTransactionMessage({ version: 0 }),
-    (tx) => setTransactionMessageFeePayer(signers[0].address, tx),
+    (tx) => setTransactionMessageFeePayer(payer.address, tx),
     (tx) => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, tx),
-    (tx) => appendTransactionMessageInstructions(instructions, tx)
+    (tx) => appendTransactionMessageInstructions(instructions, tx),
   );
 
-  const transaction = compileTransaction(transactionMessage);
-  const keyPairs = signers.map((s) => s.keyPair);
-  const signedTransaction = await signTransaction(keyPairs, transaction);
+  // 인스트럭션 계정에 첨부된 모든 서명자로 서명
+  const signedTransaction = await signTransactionMessageWithSigners(transactionMessage);
 
   const sendAndConfirmTx = sendAndConfirmTransactionFactory({ rpc, rpcSubscriptions });
   await sendAndConfirmTx(signedTransaction, { commitment: 'confirmed' });
+
+  return getSignatureFromTransaction(signedTransaction);
 }
 ```
 
 ## NFT 생성
 
 ```ts
-import { generateKeyPairSigner } from '@solana/signers';
+import { generateKeyPairSigner } from '@solana/kit';
 import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit';
 
 // 키페어 생성
@@ -88,9 +91,13 @@ const [createIx, mintIx] = await createNft({
 });
 
 // 트랜잭션 전송
-await sendAndConfirm([createIx, mintIx], [mint, authority]);
+const sx = await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 
 console.log('NFT created:', mint.address);
+console.log('Signature:', sx);
 ```
 
 ## NFT 조회
