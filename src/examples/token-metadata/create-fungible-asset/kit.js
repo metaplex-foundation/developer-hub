@@ -22,7 +22,10 @@ const createIx = await createFungibleAsset({
   // decimals: 0, // Optional: FungibleAssets typically have 0 decimals
 });
 
-await sendAndConfirm([createIx], [mint, authority]);
+await sendAndConfirm({
+  instructions: [createIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

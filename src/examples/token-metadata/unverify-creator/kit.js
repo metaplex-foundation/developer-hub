@@ -21,7 +21,10 @@ const unverifyIx = getUnverifyCreatorV1Instruction({
   authority: creator,
 });
 
-await sendAndConfirm([unverifyIx], [creator]);
+await sendAndConfirm({
+  instructions: [unverifyIx],
+  payer: creator,
+});
 // [/MAIN]
 
 // [OUTPUT]

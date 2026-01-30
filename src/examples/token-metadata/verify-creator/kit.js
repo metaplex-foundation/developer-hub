@@ -21,7 +21,10 @@ const verifyIx = getVerifyCreatorV1Instruction({
   authority: creator,
 });
 
-await sendAndConfirm([verifyIx], [creator]);
+await sendAndConfirm({
+  instructions: [verifyIx],
+  payer: creator,
+});
 // [/MAIN]
 
 // [OUTPUT]

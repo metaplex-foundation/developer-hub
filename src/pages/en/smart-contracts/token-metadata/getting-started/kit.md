@@ -29,45 +29,43 @@ const authority = await generateKeyPairSigner();
 
 ### Transaction Helper
 
-The Kit SDK returns instructions that you send using `@solana/kit`:
+The Kit SDK returns instructions with signers already attached to the relevant accounts. This allows you to use `signTransactionMessageWithSigners` which automatically extracts and uses these signers:
 
 ```ts
 import {
   appendTransactionMessageInstructions,
-  assertIsTransactionWithinSizeLimit,
-  compileTransaction,
   createTransactionMessage,
   getSignatureFromTransaction,
   type Instruction,
-  type KeyPairSigner,
+  type TransactionSigner,
   pipe,
   sendAndConfirmTransactionFactory,
   setTransactionMessageFeePayer,
   setTransactionMessageLifetimeUsingBlockhash,
-  signTransaction,
+  signTransactionMessageWithSigners,
 } from '@solana/kit';
 
-async function sendAndConfirm(instructions: Instruction[], signers: KeyPairSigner[]) {
+async function sendAndConfirm(options: {
+  instructions: Instruction[];
+  payer: TransactionSigner;
+}) {
+  const { instructions, payer } = options;
   const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();
-  if (signers.length === 0) {
-    throw new Error('At least one signer is required for fee payer.');
-  }
 
-  const transaction = pipe(
+  const transactionMessage = pipe(
     createTransactionMessage({ version: 0 }),
-    (tx) => setTransactionMessageFeePayer(signers[0].address, tx),
+    (tx) => setTransactionMessageFeePayer(payer.address, tx),
     (tx) => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, tx),
     (tx) => appendTransactionMessageInstructions(instructions, tx),
-    (tx) => compileTransaction(tx),
   );
 
-  const keyPairs = signers.map((s) => s.keyPair);
-  const signedTransaction = await signTransaction(keyPairs, transaction);
+  // Sign with all signers attached to instruction accounts
+  const signedTransaction = await signTransactionMessageWithSigners(transactionMessage);
 
   const sendAndConfirmTx = sendAndConfirmTransactionFactory({ rpc, rpcSubscriptions });
-  assertIsTransactionWithinSizeLimit(signedTransaction);
   await sendAndConfirmTx(signedTransaction, { commitment: 'confirmed' });
-  return getSignatureFromTransaction(signedTransaction)
+
+  return getSignatureFromTransaction(signedTransaction);
 }
 ```
 
@@ -93,7 +91,10 @@ const [createIx, mintIx] = await createNft({
 });
 
 // Send transaction
-const sx = await sendAndConfirm([createIx, mintIx], [mint, authority]);
+const sx = await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 
 console.log('NFT created:', mint.address);
 console.log('Signature:', sx);

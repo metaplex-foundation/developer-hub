@@ -10,9 +10,9 @@
 const kitSections = {
   "imports": "import { address } from '@solana/addresses';\nimport {\n  getLockV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';",
   "setup": "const mint = address('mintAddress...');",
-  "main": "const lockIx = await getLockV1InstructionAsync({\n  mint,\n  authority: lockedTransferDelegate,\n  tokenStandard: TokenStandard.ProgrammableNonFungible,\n});\n\nawait sendAndConfirm([lockIx], [lockedTransferDelegate]);",
+  "main": "const lockIx = await getLockV1InstructionAsync({\n  mint,\n  authority: lockedTransferDelegate,\n  tokenStandard: TokenStandard.ProgrammableNonFungible,\n});\n\nawait sendAndConfirm({\n  instructions: [lockIx],\n  payer: lockedTransferDelegate,\n});",
   "output": "console.log('pNFT locked via Locked Transfer delegate');",
-  "full": "// [IMPORTS]\nimport { address } from '@solana/addresses';\nimport {\n  getLockV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';\n// [/IMPORTS]\n\n// [SETUP]\nconst mint = address('mintAddress...');\n// [/SETUP]\n\n// [MAIN]\nconst lockIx = await getLockV1InstructionAsync({\n  mint,\n  authority: lockedTransferDelegate,\n  tokenStandard: TokenStandard.ProgrammableNonFungible,\n});\n\nawait sendAndConfirm([lockIx], [lockedTransferDelegate]);\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('pNFT locked via Locked Transfer delegate');\n// [/OUTPUT]\n"
+  "full": "// [IMPORTS]\nimport { address } from '@solana/addresses';\nimport {\n  getLockV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';\n// [/IMPORTS]\n\n// [SETUP]\nconst mint = address('mintAddress...');\n// [/SETUP]\n\n// [MAIN]\nconst lockIx = await getLockV1InstructionAsync({\n  mint,\n  authority: lockedTransferDelegate,\n  tokenStandard: TokenStandard.ProgrammableNonFungible,\n});\n\nawait sendAndConfirm({\n  instructions: [lockIx],\n  payer: lockedTransferDelegate,\n});\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('pNFT locked via Locked Transfer delegate');\n// [/OUTPUT]\n"
 }
 
 const umiSections = {

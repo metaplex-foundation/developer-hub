@@ -19,7 +19,10 @@ const unverifyIx = await getUnverifyCollectionV1InstructionAsync({
   authority: collectionDelegate,
 });
 
-await sendAndConfirm([unverifyIx], [collectionDelegate]);
+await sendAndConfirm({
+  instructions: [unverifyIx],
+  payer: collectionDelegate,
+});
 // [/MAIN]
 
 // [OUTPUT]

@@ -22,7 +22,10 @@ const [createIx, mintIx] = await createNft({
   isCollection: true,
 });
 
-await sendAndConfirm([createIx, mintIx], [collectionMint, authority]);
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

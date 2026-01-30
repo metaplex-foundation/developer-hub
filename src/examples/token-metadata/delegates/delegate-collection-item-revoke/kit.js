@@ -19,7 +19,10 @@ const revokeIx = await getRevokeCollectionItemV1InstructionAsync({
   tokenStandard: TokenStandard.NonFungible,
 });
 
-await sendAndConfirm([revokeIx], [updateAuthority]);
+await sendAndConfirm({
+  instructions: [revokeIx],
+  payer: updateAuthority,
+});
 // [/MAIN]
 
 // [OUTPUT]

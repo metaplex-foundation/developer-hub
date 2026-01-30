@@ -25,7 +25,10 @@ const mintIx = await getMintV1InstructionAsync({
   tokenStandard: TokenStandard.Fungible,
 });
 
-await sendAndConfirm([mintIx], [authority]);
+await sendAndConfirm({
+  instructions: [mintIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

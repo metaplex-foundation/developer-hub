@@ -10,9 +10,9 @@
 const kitSections = {
   "imports": "import { address } from '@solana/addresses';\nimport {\n  getUnlockV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';",
   "setup": "const mint = address('mintAddress...');",
-  "main": "const unlockIx = await getUnlockV1InstructionAsync({\n  mint,\n  authority: lockedTransferDelegate,\n  tokenStandard: TokenStandard.ProgrammableNonFungible,\n});\n\nawait sendAndConfirm([unlockIx], [lockedTransferDelegate]);",
+  "main": "const unlockIx = await getUnlockV1InstructionAsync({\n  mint,\n  authority: lockedTransferDelegate,\n  tokenStandard: TokenStandard.ProgrammableNonFungible,\n});\n\nawait sendAndConfirm({\n  instructions: [unlockIx],\n  payer: lockedTransferDelegate,\n});",
   "output": "console.log('pNFT unlocked via Locked Transfer delegate');",
-  "full": "// [IMPORTS]\nimport { address } from '@solana/addresses';\nimport {\n  getUnlockV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';\n// [/IMPORTS]\n\n// [SETUP]\nconst mint = address('mintAddress...');\n// [/SETUP]\n\n// [MAIN]\nconst unlockIx = await getUnlockV1InstructionAsync({\n  mint,\n  authority: lockedTransferDelegate,\n  tokenStandard: TokenStandard.ProgrammableNonFungible,\n});\n\nawait sendAndConfirm([unlockIx], [lockedTransferDelegate]);\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('pNFT unlocked via Locked Transfer delegate');\n// [/OUTPUT]\n"
+  "full": "// [IMPORTS]\nimport { address } from '@solana/addresses';\nimport {\n  getUnlockV1InstructionAsync,\n  TokenStandard,\n} from '@metaplex-foundation/mpl-token-metadata-kit';\n// [/IMPORTS]\n\n// [SETUP]\nconst mint = address('mintAddress...');\n// [/SETUP]\n\n// [MAIN]\nconst unlockIx = await getUnlockV1InstructionAsync({\n  mint,\n  authority: lockedTransferDelegate,\n  tokenStandard: TokenStandard.ProgrammableNonFungible,\n});\n\nawait sendAndConfirm({\n  instructions: [unlockIx],\n  payer: lockedTransferDelegate,\n});\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('pNFT unlocked via Locked Transfer delegate');\n// [/OUTPUT]\n"
 }
 
 const umiSections = {

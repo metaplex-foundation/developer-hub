@@ -25,7 +25,10 @@ const [createIx, mintIx] = await createProgrammableNft({
 });
 
 // Send both instructions in one transaction
-await sendAndConfirmInstructions([createIx, mintIx], [mint, authority]);
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

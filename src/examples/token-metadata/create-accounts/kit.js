@@ -27,7 +27,10 @@ const createIx = await getCreateV1InstructionAsync({
 });
 
 // Send the transaction
-await sendAndConfirm([createIx], [mint, authority]);
+await sendAndConfirm({
+  instructions: [createIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

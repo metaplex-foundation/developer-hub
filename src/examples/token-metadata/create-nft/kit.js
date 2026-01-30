@@ -26,7 +26,10 @@ const [createIx, mintIx] = await createNft({
 });
 
 // Send both instructions in one transaction
-await sendAndConfirmInstructions([createIx, mintIx], [mint, authority]);
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 // [/MAIN]
 
 // [OUTPUT]

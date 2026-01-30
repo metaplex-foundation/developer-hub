@@ -24,7 +24,10 @@ const transferIx = await getTransferV1InstructionAsync({
   tokenStandard: TokenStandard.ProgrammableNonFungible,
 });
 
-await sendAndConfirm([transferIx], [saleDelegate]);
+await sendAndConfirm({
+  instructions: [transferIx],
+  payer: saleDelegate,
+});
 // [/MAIN]
 
 // [OUTPUT]

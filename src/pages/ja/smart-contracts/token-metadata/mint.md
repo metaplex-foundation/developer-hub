@@ -267,7 +267,10 @@ const [createIx, mintIx] = await createNft({
   tokenOwner: authority.address,
 })
 
-await sendAndConfirm([createIx, mintIx], [mint, authority])
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+})
 ```
 
 {% /totem-accordion  %}
@@ -291,7 +294,10 @@ const createAndMintIx = await createFungible({
   amount: 1_000_000_000n, // initial supply
 })
 
-await sendAndConfirm([createAndMintIx], [mint, authority])
+await sendAndConfirm({
+  instructions: [createAndMintIx],
+  payer: authority,
+})
 ```
 
 {% /totem-accordion  %}
@@ -315,7 +321,10 @@ const createAndMintIx = await createFungibleAsset({
   amount: 1000n, // initial supply
 })
 
-await sendAndConfirm([createAndMintIx], [mint, authority])
+await sendAndConfirm({
+  instructions: [createAndMintIx],
+  payer: authority,
+})
 ```
 
 {% /totem-accordion  %}
@@ -337,7 +346,10 @@ const [createIx, mintIx] = await createProgrammableNft({
   tokenOwner: authority.address,
 })
 
-await sendAndConfirm([createIx, mintIx], [mint, authority])
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+})
 ```
 
 {% /totem-accordion  %}

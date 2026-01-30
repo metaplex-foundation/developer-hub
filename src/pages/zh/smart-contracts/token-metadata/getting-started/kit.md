@@ -29,45 +29,43 @@ const authority = await generateKeyPairSigner();
 
 ### 交易助手
 
-Kit SDK 返回使用 `@solana/kit` 发送的指令：
+Kit SDK 返回的指令已将签名者附加到相关账户上。这允许您使用 `signTransactionMessageWithSigners`，它会自动提取并使用这些签名者：
 
 ```ts
 import {
   appendTransactionMessageInstructions,
-  assertIsTransactionWithinSizeLimit,
-  compileTransaction,
   createTransactionMessage,
   getSignatureFromTransaction,
   type Instruction,
-  type KeyPairSigner,
+  type TransactionSigner,
   pipe,
   sendAndConfirmTransactionFactory,
   setTransactionMessageFeePayer,
   setTransactionMessageLifetimeUsingBlockhash,
-  signTransaction,
+  signTransactionMessageWithSigners,
 } from '@solana/kit';
 
-async function sendAndConfirm(instructions: Instruction[], signers: KeyPairSigner[]) {
+async function sendAndConfirm(options: {
+  instructions: Instruction[];
+  payer: TransactionSigner;
+}) {
+  const { instructions, payer } = options;
   const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();
-  if (signers.length === 0) {
-    throw new Error('At least one signer is required for fee payer.');
-  }
 
-  const transaction = pipe(
+  const transactionMessage = pipe(
     createTransactionMessage({ version: 0 }),
-    (tx) => setTransactionMessageFeePayer(signers[0].address, tx),
+    (tx) => setTransactionMessageFeePayer(payer.address, tx),
     (tx) => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, tx),
     (tx) => appendTransactionMessageInstructions(instructions, tx),
-    (tx) => compileTransaction(tx),
   );
 
-  const keyPairs = signers.map((s) => s.keyPair);
-  const signedTransaction = await signTransaction(keyPairs, transaction);
+  // 使用附加到指令账户的所有签名者进行签名
+  const signedTransaction = await signTransactionMessageWithSigners(transactionMessage);
 
   const sendAndConfirmTx = sendAndConfirmTransactionFactory({ rpc, rpcSubscriptions });
-  assertIsTransactionWithinSizeLimit(signedTransaction);
   await sendAndConfirmTx(signedTransaction, { commitment: 'confirmed' });
-  return getSignatureFromTransaction(signedTransaction)
+
+  return getSignatureFromTransaction(signedTransaction);
 }
 ```
 
@@ -93,7 +91,10 @@ const [createIx, mintIx] = await createNft({
 });
 
 // 发送交易
-const sx = await sendAndConfirm([createIx, mintIx], [mint, authority]);
+const sx = await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 
 console.log('NFT created:', mint.address);
 console.log('Signature:', sx);

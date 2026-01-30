@@ -18,7 +18,10 @@ const updateIx = await getUpdateAsCollectionDelegateV2InstructionAsync({
   collection: { __kind: 'Clear' },
 });
 
-await sendAndConfirm([updateIx], [collectionDelegate]);
+await sendAndConfirm({
+  instructions: [updateIx],
+  payer: collectionDelegate,
+});
 // [/MAIN]
 
 // [OUTPUT]

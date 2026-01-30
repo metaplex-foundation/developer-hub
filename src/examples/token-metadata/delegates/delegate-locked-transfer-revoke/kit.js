@@ -20,7 +20,10 @@ const revokeIx = await getRevokeLockedTransferV1InstructionAsync({
   tokenStandard: TokenStandard.ProgrammableNonFungible,
 });
 
-await sendAndConfirm([revokeIx], [owner]);
+await sendAndConfirm({
+  instructions: [revokeIx],
+  payer: owner,
+});
 // [/MAIN]
 
 // [OUTPUT]

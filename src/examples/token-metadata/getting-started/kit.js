@@ -1,20 +1,18 @@
 // [IMPORTS]
 import {
   appendTransactionMessageInstructions,
-  assertIsTransactionWithinSizeLimit,
-  compileTransaction,
   createSolanaRpc,
   createSolanaRpcSubscriptions,
   createTransactionMessage,
   generateKeyPairSigner,
   getSignatureFromTransaction,
   type Instruction,
-  type KeyPairSigner,
+  type TransactionSigner,
   pipe,
   sendAndConfirmTransactionFactory,
   setTransactionMessageFeePayer,
   setTransactionMessageLifetimeUsingBlockhash,
-  signTransaction,
+  signTransactionMessageWithSigners,
 } from '@solana/kit';
 import {
   createNft,
@@ -32,26 +30,27 @@ const authority = await generateKeyPairSigner();
 const mint = await generateKeyPairSigner();
 
 // Helper function to send and confirm transactions
-async function sendAndConfirm(instructions: Instruction[], signers: KeyPairSigner[]) {
+// Works with any signer type - signers are automatically extracted from instruction accounts
+async function sendAndConfirm(options: {
+  instructions: Instruction[];
+  payer: TransactionSigner;
+}) {
+  const { instructions, payer } = options;
   const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();
-  if (signers.length === 0) {
-    throw new Error('At least one signer is required for fee payer.');
-  }
 
-  const transaction = pipe(
+  const transactionMessage = pipe(
     createTransactionMessage({ version: 0 }),
-    (tx) => setTransactionMessageFeePayer(signers[0].address, tx),
+    (tx) => setTransactionMessageFeePayer(payer.address, tx),
     (tx) => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, tx),
     (tx) => appendTransactionMessageInstructions(instructions, tx),
-    (tx) => compileTransaction(tx),
   );
 
-  const keyPairs = signers.map((s) => s.keyPair);
-  const signedTransaction = await signTransaction(keyPairs, transaction);
+  // Sign with all signers attached to instruction accounts
+  const signedTransaction = await signTransactionMessageWithSigners(transactionMessage);
 
   const sendAndConfirmTx = sendAndConfirmTransactionFactory({ rpc, rpcSubscriptions });
-  assertIsTransactionWithinSizeLimit(signedTransaction);
   await sendAndConfirmTx(signedTransaction, { commitment: 'confirmed' });
+
   return getSignatureFromTransaction(signedTransaction);
 }
 // [/SETUP]
@@ -69,7 +68,10 @@ const [createIx, mintIx] = await createNft({
 });
 
 // Send transaction
-const sx = await sendAndConfirm([createIx, mintIx], [mint, authority]);
+const sx = await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+});
 
 // Fetch the NFT data
 const asset = await fetchDigitalAsset(rpc, mint.address);
