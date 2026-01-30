@@ -75,14 +75,14 @@ export function CopyWithContext({ sections, language, showToggle = true, display
     <div className="flex items-center gap-2">
       {/* Toggle between display modes - styled as segmented control */}
       {showToggle && hasContext && (
-        <div className="flex items-center rounded-md bg-slate-200/50 p-0.5 dark:bg-slate-700/50">
+        <div className="flex items-center rounded-md bg-muted p-0.5">
           <button
             onClick={() => onDisplayModeChange('main')}
             className={clsx(
               'rounded px-2.5 py-1 text-xs font-medium transition-all',
               displayMode === 'main'
-                ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-800 dark:text-slate-100'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
+                ? 'bg-card text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
             )}
           >
             Snippet
@@ -92,8 +92,8 @@ export function CopyWithContext({ sections, language, showToggle = true, display
             className={clsx(
               'rounded px-2.5 py-1 text-xs font-medium transition-all',
               displayMode === 'full'
-                ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-800 dark:text-slate-100'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
+                ? 'bg-card text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
             )}
           >
             Full
@@ -108,7 +108,7 @@ export function CopyWithContext({ sections, language, showToggle = true, display
           'flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all',
           copied
             ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
-            : 'bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-700 dark:hover:bg-slate-600'
+            : 'bg-foreground text-background hover:bg-foreground/90'
         )}
         title={displayMode === 'full' ? 'Copy with imports and setup' : 'Copy snippet only'}
       >

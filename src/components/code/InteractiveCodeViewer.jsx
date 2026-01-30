@@ -47,11 +47,11 @@ export function InteractiveCodeViewer({
 
   if (!code) {
     return (
-      <div className="rounded-lg border-2 border-yellow-300 bg-yellow-50 p-6 dark:border-yellow-800 dark:bg-yellow-900/20">
-        <p className="font-semibold text-yellow-800 dark:text-yellow-200">
+      <div className="rounded-lg border-2 border-amber-300 bg-amber-50 p-6 dark:border-amber-800 dark:bg-amber-900/20">
+        <p className="font-semibold text-amber-800 dark:text-amber-200">
           Example not found
         </p>
-        <p className="mt-2 text-sm text-yellow-700 dark:text-yellow-300">
+        <p className="mt-2 text-sm text-amber-700 dark:text-amber-300">
           Could not load: {program}/{example}/{framework}
         </p>
       </div>
@@ -67,9 +67,9 @@ export function InteractiveCodeViewer({
         theme={undefined}
       >
         {({ className, style, tokens, getTokenProps }) => (
-          <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-[#0F1419]">
+          <div className="relative overflow-hidden rounded-lg border border-border bg-card">
             <pre
-              className={clsx(className, 'relative m-0 overflow-auto bg-white p-4 dark:bg-[#0F1419]')}
+              className={clsx(className, 'relative m-0 overflow-auto bg-card p-4')}
               style={style}
             >
               <code className="block">
@@ -80,7 +80,7 @@ export function InteractiveCodeViewer({
                     <div key={lineIndex} className="table-row">
                       {/* Line number */}
                       <span
-                        className="table-cell select-none pr-4 text-right font-mono text-sm text-gray-500 dark:text-gray-600"
+                        className="table-cell select-none pr-4 text-right font-mono text-sm text-muted-foreground"
                         style={{ minWidth: '3em', paddingTop: '2px', paddingBottom: '2px' }}
                       >
                         {lineNumber}

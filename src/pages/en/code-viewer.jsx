@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import { InteractiveCodeViewer } from '@/components/code/InteractiveCodeViewer'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
 
 const PROGRAMS = {
   core: {
@@ -63,106 +67,72 @@ export default function CodeViewerPage() {
         <meta name="description" content="Interactive code examples for Metaplex programs" />
       </Head>
 
-      <div className="min-h-screen bg-white dark:bg-neutral-900">
-        {/* Header */}
-        <div className="border-b border-slate-200 dark:border-slate-700">
-          <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-            <h1 className="text-2xl font-bold text-white">
-              Playground
-            </h1>
-            <p className="mt-2 text-sm text-neutral-400">
-              Interactive code examples for Metaplex programs.
-            </p>
-          </div>
-        </div>
-
+      <div className="min-h-screen bg-background">
         {/* Controls */}
-        <div className="border-b border-slate-200 dark:border-slate-700">
+        <div className="border-b border-border">
           <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-end gap-4">
               {/* Program Selector */}
-              <div>
-                <label className="block text-xs font-medium text-neutral-400">
-                  Program
-                </label>
-                <select
-                  value={program}
-                  onChange={(e) => handleProgramChange(e.target.value)}
-                  className="mt-1 block rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
-                >
-                  {Object.entries(PROGRAMS).map(([key, { label }]) => (
-                    <option key={key} value={key}>{label}</option>
-                  ))}
-                </select>
+              <div className="space-y-1.5">
+                <Label className="text-xs">Program</Label>
+                <Select value={program} onValueChange={handleProgramChange}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(PROGRAMS).map(([key, { label }]) => (
+                      <SelectItem key={key} value={key}>{label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Example Selector */}
-              <div>
-                <label className="block text-xs font-medium text-neutral-400">
-                  Example
-                </label>
-                <select
-                  value={example}
-                  onChange={(e) => setExample(e.target.value)}
-                  className="mt-1 block rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
-                >
-                  {availableExamples.map((ex) => (
-                    <option key={ex} value={ex}>{ex}</option>
-                  ))}
-                </select>
+              <div className="space-y-1.5">
+                <Label className="text-xs">Example</Label>
+                <Select value={example} onValueChange={setExample}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {availableExamples.map((ex) => (
+                      <SelectItem key={ex} value={ex}>{ex}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Framework Selector */}
-              <div>
-                <label className="block text-xs font-medium text-neutral-400">
-                  Framework
-                </label>
-                <select
-                  value={framework}
-                  onChange={(e) => setFramework(e.target.value)}
-                  className="mt-1 block rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
-                >
-                  <option value="kit">Kit (JS)</option>
-                  <option value="umi">Umi (JS)</option>
-                  <option value="shank">Shank (Rust)</option>
-                  <option value="anchor">Anchor (Rust)</option>
-                </select>
+              <div className="space-y-1.5">
+                <Label className="text-xs">Framework</Label>
+                <Select value={framework} onValueChange={setFramework}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="kit">Kit (JS)</SelectItem>
+                    <SelectItem value="umi">Umi (JS)</SelectItem>
+                    <SelectItem value="shank">Shank (Rust)</SelectItem>
+                    <SelectItem value="anchor">Anchor (Rust)</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Display Mode and Copy Button */}
               <div className="ml-auto flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-medium text-neutral-400">View:</span>
-                  <div className="flex items-center rounded-md bg-slate-800 p-0.5">
-                    <button
-                      onClick={() => setDisplayMode('snippet')}
-                      className={`rounded px-2.5 py-1 text-xs font-medium transition-all ${
-                        displayMode === 'snippet'
-                          ? 'bg-slate-700 text-white shadow-sm'
-                          : 'text-neutral-400 hover:text-white'
-                      }`}
-                    >
-                      Snippet
-                    </button>
-                    <button
-                      onClick={() => setDisplayMode('full')}
-                      className={`rounded px-2.5 py-1 text-xs font-medium transition-all ${
-                        displayMode === 'full'
-                          ? 'bg-slate-700 text-white shadow-sm'
-                          : 'text-neutral-400 hover:text-white'
-                      }`}
-                    >
-                      Full
-                    </button>
-                  </div>
-                </div>
-
-                <button
-                  onClick={handleCopyCode}
-                  className="rounded-md border border-slate-700 bg-slate-800 px-4 py-2 text-sm font-medium text-neutral-400 transition-colors hover:border-slate-600 hover:text-white"
+                <ToggleGroup
+                  type="single"
+                  value={displayMode}
+                  onValueChange={(value) => value && setDisplayMode(value)}
+                  size="sm"
                 >
+                  <ToggleGroupItem value="snippet">Snippet</ToggleGroupItem>
+                  <ToggleGroupItem value="full">Full</ToggleGroupItem>
+                </ToggleGroup>
+
+                <Button variant="outline" onClick={handleCopyCode}>
                   Copy Code
-                </button>
+                </Button>
               </div>
             </div>
           </div>

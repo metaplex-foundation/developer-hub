@@ -6,12 +6,12 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Search } from '@/components/Search'
 // import { ThemeSelector } from '@/components/ThemeSelector'
+import { DiscordIcon } from '@/components/icons/SocialIcons'
 import { IconWithName } from '@/components/products/IconWithName'
 import { Sections } from '@/components/products/Sections'
-import { DiscordIcon } from '@/components/icons/SocialIcons'
-import NavList from './NavList'
-import { useLocale } from '@/contexts/LocaleContext'
 import { getLocalizedHref } from '@/config/languages'
+import { useLocale } from '@/contexts/LocaleContext'
+import NavList from './NavList'
 
 export function Header({ page }) {
   let [isScrolled, setIsScrolled] = useState(false)
@@ -31,7 +31,7 @@ export function Header({ page }) {
   return (
     <header
       className={clsx(
-        'sticky top-0 z-50 bg-background shadow-md shadow-foreground/5 transition duration-500 dark:shadow-none',
+        'sticky top-0 z-50 bg-background shadow-foreground/5 transition duration-500 dark:shadow-none',
         isScrolled
           ? 'dark:bg-background/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-background/75'
           : 'dark:bg-transparent'
@@ -60,7 +60,7 @@ export function Header({ page }) {
           <Link
             href="https://discord.com/invite/metaplex"
             target="_blank"
-            className="hidden items-center gap-2 whitespace-nowrap rounded-lg bg-accent-400 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-accent-500 md:flex"
+            className="hidden items-center gap-2 whitespace-nowrap rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 md:flex"
           >
             <DiscordIcon className="h-4 w-4 fill-current" />
             Dev Support

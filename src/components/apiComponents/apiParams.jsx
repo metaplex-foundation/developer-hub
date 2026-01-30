@@ -5,6 +5,14 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import { PluginsIcon } from '../icons/dual-tone/PluginsIcon'
 
+const inputClassName = "block w-full rounded-md border border-border bg-card px-2 py-1 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:pointer-events-none disabled:opacity-50"
+
+const selectClassName = clsx(
+  'block w-full appearance-none rounded-lg border border-border bg-card px-3 py-1.5 text-sm/6 text-foreground',
+  'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-primary/25',
+  '*:text-foreground'
+)
+
 // Recursive component for rendering nested parameters
 const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
   let content
@@ -15,7 +23,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
         <input
           name={param.name}
           type="text"
-          className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
+          className={inputClassName}
           placeholder={param.placeholder}
           onChange={(e) => setParam(path, e.target.value)}
           value={value || ''}
@@ -28,7 +36,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
         <input
           name={param.name}
           type="number"
-          className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
+          className={inputClassName}
           placeholder={param.value}
           onChange={(e) => setParam(path, Number.parseInt(e.target.value))}
           value={value || ''}
@@ -58,7 +66,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
           {param.value.map((item, index) => (
             <div key={index} className="flex gap-2">
               <input
-                className="block w-full rounded-md border border-gray-200 px-2 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
+                className={inputClassName}
                 placeholder={param.placeHolder}
                 onChange={(e) => {
                   const newValue = param.value
@@ -68,7 +76,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
                 value={item}
               />
               <TrashIcon
-                className=" h-6 w-6 cursor-pointer self-center text-gray-500 dark:text-neutral-400"
+                className="h-6 w-6 cursor-pointer self-center text-muted-foreground"
                 onClick={() => {
                   const newValue = param.value
                   newValue.splice(index, 1)
@@ -78,7 +86,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
             </div>
           ))}
           <PlusIcon
-            className=" h-6 w-6 cursor-pointer self-end text-gray-500 dark:text-neutral-400"
+            className="h-6 w-6 cursor-pointer self-end text-muted-foreground"
             onClick={() => {
               // add item to array
               const newValue = param.value
@@ -97,18 +105,14 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
             onChange={(e) =>
               setParam(path, e.target.value === 'true' ? true : false)
             }
-            className={clsx(
-              'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
-              'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
-              '*:text-black dark:text-white'
-            )}
+            className={selectClassName}
           >
             {!param.required && <option value={''} />}
             <option value="true">true</option>
             <option value="false">false</option>
           </Select>
           <ChevronDownIcon
-            className="group pointer-events-none absolute right-2.5 top-3 my-auto size-4 fill-black/60 dark:fill-white"
+            className="group pointer-events-none absolute right-2.5 top-3 my-auto size-4 fill-muted-foreground"
             aria-hidden="true"
           />
         </div>
@@ -119,11 +123,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
         <div className="relative flex h-10 w-full">
           <Select
             onChange={(e) => setParam(path, e.target.value)}
-            className={clsx(
-              'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
-              'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
-              '*:text-black dark:text-white'
-            )}
+            className={selectClassName}
           >
             {!param.required && <option value={''} />}
             {param.value.map((choice, index) => {
@@ -135,7 +135,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
             })}
           </Select>
           <ChevronDownIcon
-            className="group pointer-events-none absolute right-2.5 top-3 my-auto size-4 fill-black/60 dark:fill-white"
+            className="group pointer-events-none absolute right-2.5 top-3 my-auto size-4 fill-muted-foreground"
             aria-hidden="true"
           />
         </div>
@@ -147,7 +147,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
           <input
             name={`${param.name}-key`}
             type="text"
-            className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
+            className={inputClassName}
             placeholder={'key'}
             onChange={(e) => {
               const newValue = [e.target.value, value ? value[1] : '']
@@ -158,7 +158,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
           <input
             name={`${param.name}-value`}
             type="text"
-            className="block w-full rounded-md border border-gray-200 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900/50 dark:text-neutral-300 dark:placeholder-neutral-500"
+            className={inputClassName}
             placeholder={'value'}
             onChange={(e) => {
               const newValue = [value ? value[0] : '', e.target.value]
@@ -177,14 +177,14 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
   return (
     <div
       className={`${
-        !subValue && 'border-t border-gray-200 py-2 dark:border-neutral-700/50'
+        !subValue && 'border-t border-border py-2'
       } ${param.type === 'object' ? '' : 'flex flex-col gap-2'}`}
     >
       <div className="px-3">
-        <label className="text-sm font-medium text-black dark:text-white">
+        <label className="text-sm font-medium text-foreground">
           {param.name}
         </label>
-        <span className="ml-2 inline-block text-xs text-gray-500 dark:text-neutral-400">
+        <span className="ml-2 inline-block text-xs text-muted-foreground">
           {param.type}
         </span>
         {param.required && (
@@ -193,7 +193,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
           </span>
         )}
       </div>
-      <div className="px-3 text-xs italic">{param.description}</div>
+      <div className="px-3 text-xs italic text-muted-foreground">{param.description}</div>
       <div className="px-3 pb-2">{content}</div>
     </div>
   )
@@ -201,8 +201,8 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
 
 const ApiParameterDisplay = ({ params, setParam, body }) => {
   return (
-    <div className="flex w-full flex-col gap-4 rounded-xl border border-gray-200 bg-white py-4 pb-0 dark:border-neutral-700/50 dark:bg-neutral-800/50">
-      <div className="px-3 text-xs font-semibold uppercase text-gray-500 dark:text-neutral-300">
+    <div className="flex w-full flex-col gap-4 rounded-xl border border-border bg-card py-4 pb-0">
+      <div className="px-3 text-xs font-semibold uppercase text-muted-foreground">
         Body Params
       </div>
       <div className="flex flex-col">

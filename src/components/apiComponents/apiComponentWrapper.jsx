@@ -198,7 +198,7 @@ const ApiComponentWrapper = (args) => {
             }}
           />
           <button
-            className="block min-w-[150px] rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500 2xl:hidden"
+            className="block min-w-[150px] rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:pointer-events-none disabled:opacity-50 2xl:hidden"
             onClick={handleTryItOut}
           >
             {isLoading ? <Spinner className="h-6 w-6" /> : 'Try it out'}
@@ -222,7 +222,7 @@ const ApiComponentWrapper = (args) => {
             noUmi={args.noUmi}
           />
           <button
-            className="hidden min-w-[150px] items-center justify-center rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500 2xl:flex"
+            className="hidden min-w-[150px] items-center justify-center rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:pointer-events-none disabled:opacity-50 2xl:flex"
             onClick={handleTryItOut}
           >
             {isLoading ? <Spinner className="h-6 w-6" /> : 'Try it out'}
@@ -233,7 +233,7 @@ const ApiComponentWrapper = (args) => {
 
       {api.exampleResponse && (
         <>
-          <hr className="my-8 border-gray-200 dark:border-neutral-700" />
+          <hr className="my-8 border-border" />
           <Totem className="w-full">
             <TotemAccordion title="Example Response">
               <Fence className="w-full" language="python">

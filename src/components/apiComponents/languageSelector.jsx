@@ -18,7 +18,7 @@ const languages = [
 const LanguageSelector = ({ activeLanguage, setActiveLanguage, noUmi }) => {
   return (
     <div className="scrollbar flex flex-col gap-2">
-      <div className="text-sm font-medium text-gray-800 dark:text-neutral-400">
+      <div className="text-sm font-medium text-muted-foreground">
         Language
       </div>
       <div className="flex overflow-auto">
@@ -27,9 +27,9 @@ const LanguageSelector = ({ activeLanguage, setActiveLanguage, noUmi }) => {
           return (
             <button
               key={language.name}
-              className={`-ms-px inline-flex min-w-16 flex-col items-center justify-center gap-1 border border-gray-200 px-10 py-2 text-xs font-medium text-gray-800 shadow-sm transition-colors first:ms-0 first:rounded-s-lg last:rounded-e-lg hover:bg-gray-50 focus:z-10 focus:bg-accent-300 focus:outline-none focus:ring-1 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 ${
+              className={`-ms-px inline-flex min-w-16 flex-col items-center justify-center gap-1 border border-border bg-card px-10 py-2 text-xs font-medium text-foreground shadow-sm transition-colors first:ms-0 first:rounded-s-lg last:rounded-e-lg hover:bg-muted focus:z-10 focus:bg-primary focus:outline-none focus:ring-1 disabled:pointer-events-none disabled:opacity-50 ${
                 activeLanguage === language.name
-                  ? 'bg-accent-300 text-black hover:bg-accent-300 dark:bg-accent-300 dark:text-black dark:hover:bg-accent-300'
+                  ? 'bg-primary text-primary-foreground hover:bg-primary'
                   : ''
               } ${isUmiDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
               onClick={() => !isUmiDisabled && setActiveLanguage(language.name)}
@@ -40,7 +40,7 @@ const LanguageSelector = ({ activeLanguage, setActiveLanguage, noUmi }) => {
               <div className="flex flex-col items-center">
                 <span>{language.name}</span>
                 {isUmiDisabled && (
-                  <span className="text-xs text-gray-500 dark:text-neutral-500">Coming Soon</span>
+                  <span className="text-xs text-muted-foreground">Coming Soon</span>
                 )}
               </div>
             </button>

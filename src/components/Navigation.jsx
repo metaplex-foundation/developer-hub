@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
+import { getLocalizedHref } from '@/config/languages'
+import { useLocale } from '@/contexts/LocaleContext'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useLocale } from '@/contexts/LocaleContext'
-import { getLocalizedHref } from '@/config/languages'
+import { useEffect, useState } from 'react'
 import Badge from './products/Badge'
 
 export function Navigation({ product, navigation, className, hideProductHeader = false }) {
@@ -39,12 +39,12 @@ export function Navigation({ product, navigation, className, hideProductHeader =
   }
 
   return (
-    <nav className={clsx('text-base lg:text-sm', className)}>
+    <nav className={clsx('text-base lg:text-sm text-muted-foreground', className)}>
       {!hideProductHeader && product?.name && (
         <div className="mb-8">
           <Link
             href={getLocalizedHref(`/${product.path}`, locale)}
-            className="font-display text-lg font-bold text-foreground hover:text-accent-400"
+            className="font-display text-lg font-bold text-foreground hover:text-primary"
           >
             {product.name}
           </Link>
@@ -76,8 +76,8 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                       className={clsx(
                         'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2 before:rounded',
                         isActive
-                          ? 'font-semibold text-accent-400 before:bg-accent-400'
-                          : 'text-muted-foreground before:hidden before:bg-accent-400 hover:text-foreground hover:before:block'
+                          ? 'font-semibold text-primary before:bg-primary'
+                          : 'text-muted-foreground before:hidden before:bg-primary hover:text-foreground hover:before:block'
                       )}
                     >
                       {link.title}{' '}

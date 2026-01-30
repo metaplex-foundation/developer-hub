@@ -9,9 +9,9 @@ import { Prose } from '@/components/Prose'
 import { TableOfContent } from '@/components/TableOfContent'
 import { ProductCardGrid } from '@/components/products/ProductCardGrid'
 import { productCategories } from '@/components/products/index'
+import { useTranslations } from '@/contexts/LocaleContext'
 import { useAccentClass } from '@/shared/useAccentClass'
 import { useLightense } from '@/shared/useLightense'
-import { useTranslations } from '@/contexts/LocaleContext'
 
 export function Layout({ children, page }) {
   const isHomePage = page.pathname === '/'

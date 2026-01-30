@@ -56,7 +56,7 @@ export function LanguageSwitcher() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 px-2 py-1 text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300 transition-colors"
+        className="flex items-center gap-1 px-2 py-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
         aria-label="Select language"
       >
         <span>{currentLanguage?.label}</span>
@@ -71,20 +71,20 @@ export function LanguageSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-1 min-w-[120px] bg-white dark:bg-slate-800 rounded-md shadow-lg border border-slate-200 dark:border-slate-700 py-1 z-50">
+        <div className="absolute right-0 top-full mt-1 min-w-[120px] bg-popover rounded-md shadow-lg border border-border py-1 z-50">
           {languages.map((lang) => (
             <Link
               key={lang.code}
               href={getLocalizedPath(lang.code)}
               onClick={() => setIsOpen(false)}
-              className={`flex items-center justify-between px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors ${
+              className={`flex items-center justify-between px-3 py-2 text-sm hover:bg-muted transition-colors ${
                 locale === lang.code
-                  ? 'text-accent-500 font-medium'
-                  : 'text-slate-700 dark:text-slate-300'
+                  ? 'text-primary font-medium'
+                  : 'text-popover-foreground'
               }`}
             >
               <span>{lang.name}</span>
-              <span className="text-xs text-slate-400">{lang.label}</span>
+              <span className="text-xs text-muted-foreground">{lang.label}</span>
             </Link>
           ))}
         </div>
