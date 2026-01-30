@@ -26,112 +26,19 @@ description: 关于 Token Metadata 的常见问题
 
 ## 如何创建灵魂绑定资产?
 
+{% callout type="note" %}
+对于新项目,我们建议使用 [Metaplex Core](/smart-contracts/core) 来创建灵魂绑定 NFT,因为它提供了更简单、更高效的方法。详情请参阅[创建灵魂绑定 NFT 资产指南](/smart-contracts/core/guides/create-soulbound-nft-asset)。
+{% /callout %}
+
 Token Metadata 允许您创建灵魂绑定资产。实现这一点的最佳方法是使用 Token22 作为基础 SPL 代币,以及 `non-transferrable` 代币扩展。
 
-{% dialect-switcher title="创建灵魂绑定资产" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem %}
+{% totem-accordion title="显示代码示例" %}
 
-```ts
-import { createV1 } from "@metaplex-foundation/mpl-token-metadata";
-import { createAccount } from '@metaplex-foundation/mpl-toolbox';
-import {
-  ExtensionType,
-  createInitializeMintInstruction,
-  getMintLen,
-  createInitializeNonTransferableMintInstruction,
-} from '@solana/spl-token';
-import {
-  fromWeb3JsInstruction,
-  toWeb3JsPublicKey,
-} from '@metaplex-foundation/umi-web3js-adapters';
+{% code-tabs-imported from="token-metadata/soulbound" frameworks="umi,kit" /%}
 
-const SPL_TOKEN_2022_PROGRAM_ID: PublicKey = publicKey(
-  'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
-);
-
-const umi = await createUmi();
-const mint = generateSigner(umi);
-
-const extensions = [ExtensionType.NonTransferable];
-const space = getMintLen(extensions);
-const lamports = await umi.rpc.getRent(space);
-
-// Create the mint account.
-const createAccountIx = createAccount(umi, {
-  payer: umi.identity,
-  newAccount: mint,
-  lamports,
-  space,
-  programId: SPL_TOKEN_2022_PROGRAM_ID,
-}).getInstructions();
-
-// Initialize the non-transferable extension.
-const createInitNonTransferableMintIx =
-  createInitializeNonTransferableMintInstruction(
-    toWeb3JsPublicKey(mint.publicKey),
-    toWeb3JsPublicKey(SPL_TOKEN_2022_PROGRAM_ID)
-  );
-
-// Initialize the mint.
-const createInitMintIx = createInitializeMintInstruction(
-  toWeb3JsPublicKey(mint.publicKey),
-  0,
-  toWeb3JsPublicKey(umi.identity.publicKey),
-  toWeb3JsPublicKey(umi.identity.publicKey),
-  toWeb3JsPublicKey(SPL_TOKEN_2022_PROGRAM_ID)
-);
-
-// Create the transaction with the Token22 instructions.
-const blockhash = await umi.rpc.getLatestBlockhash();
-const tx = umi.transactions.create({
-  version: 0,
-  instructions: [
-    ...createAccountIx,
-    fromWeb3JsInstruction(createInitNonTransferableMintIx),
-    fromWeb3JsInstruction(createInitMintIx),
-  ],
-  payer: umi.identity.publicKey,
-  blockhash: blockhash.blockhash,
-});
-
-// Sign, send, and confirm the transaction.
-let signedTx = await mint.signTransaction(tx);
-signedTx = await umi.identity.signTransaction(signedTx);
-const signature = await umi.rpc.sendTransaction(signedTx);
-await umi.rpc.confirmTransaction(signature, {
-  strategy: { type: 'blockhash', ...blockhash },
-  commitment: 'confirmed',
-});
-
-// Create the Token Metadata accounts.
-await createV1(umi, {
-  mint,
-  name: 'My Programmable NFT',
-  uri: 'https://example.com/my-programmable-nft.json',
-  sellerFeeBasisPoints: percentAmount(5.5),
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-}).sendAndConfirm(umi);
-
-// Derive the token PDA.
-const token = findAssociatedTokenPda(umi, {
-  mint: mint.publicKey,
-  owner: umi.identity.publicKey,
-  tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
-});
-
-// Mint the token.
-await mintV1(umi, {
-  mint: mint.publicKey,
-  token,
-  tokenOwner: umi.identity.publicKey,
-  amount: 1,
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi);
-```
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem-accordion %}
+{% /totem %}
 
 如果需要使用 TokenKeg SPL 代币,您可以在 pNFT 上使用[锁定转移委托](/zh/smart-contracts/token-metadata/delegates#locked-transfer-委托仅限-pnft)创建灵魂绑定资产,然后锁定 pNFT。但请注意,这不仅会阻止所有者转移 pNFT,还会阻止所有者销毁它。这就是为什么对于灵魂绑定资产的建议是使用 Token22 代币。
 

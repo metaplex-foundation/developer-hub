@@ -10,119 +10,169 @@ Token-2022 Mintアカウントにメタデータ情報を追加することを�
 
 {% totem %}
 
-{% dialect-switcher title="Specifying token program on Create and Mint" %}
-{% dialect title="JavaScript" id="js" %}
+{% totem-accordion title="Metadataの作成" %}
 
-{% totem-accordion title="Create Metadata" %}
-
-```ts
-import {
-  generateSigner,
-  percentAmount,
-  publicKey,
-  PublicKey,
-} from '@metaplex-foundation/umi'
-import {
-  createV1,
-  TokenStandard,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const SPL_TOKEN_2022_PROGRAM_ID: PublicKey = publicKey(
-  'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
-)
-
-const mint = generateSigner(umi)
-await createV1(umi, {
-  mint,
-  authority,
-  name: 'My NFT',
-  uri,
-  sellerFeeBasisPoints: percentAmount(5.5),
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
+{% code-tabs-imported from="token-metadata/token-2022-create" frameworks="umi,kit,shank" /%}
 
 {% /totem-accordion  %}
 
-{% totem-accordion title="Mint a token" %}
+{% totem-accordion title="トークンのミント" %}
 
-```ts
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-import { mintV1 } from '@metaplex-foundation/mpl-token-metadata'
+{% code-tabs-imported from="token-metadata/token-2022-mint" frameworks="umi,kit,shank" /%}
 
-// Token-2022用のassociated token accountを見つける
-const token = findAssociatedTokenPda(umi, {
-  mint: mint.publicKey,
-  owner: umi.identity.publicKey,
-  tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
-})
+{% /totem-accordion  %}
 
-await mintV1(umi, {
-  mint: mint.publicKey,
-  token,
-  tokenOwner: umi.identity.publicKey,
-  amount: 1,
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-}).sendAndConfirm(umi)
-```
+{% totem-prose %}
 
-{% /totem-accordion %}
+Mintアカウントのトークンプログラムは、アカウントの`owner`プロパティを確認することで判別できます。
 
-{% /dialect %}
-{% /dialect-switcher %}
+{% /totem-prose %}
 
 {% /totem %}
 
-## Token-2022拡張機能
+`Burn`、`Delegate`、`Lock`、`Print`、`Revoke`、`Transfer`、`Unlock`、`Unverify`、`Update`、`Verify`などの他の命令にも同様のアプローチを使用できます。これらの命令はSPL Token-2022のMintおよびTokenアカウントを検証できます。トークンプログラムを必要とする命令（例：`Delegate`）では、対応するトークンプログラムを使用する必要があります：MintおよびTokenアカウントがToken-2022からのものである場合、`Delegate`命令は正しいトークンプログラムが指定されているかを検証します。
 
-SPL Token-2022プログラムは、従来のSPL Tokenプログラムにはない追加機能を提供する様々な拡張機能をサポートしています：
+{% callout %}
+デフォルトでは、`Create`および`Mint`は、これらのアカウントが存在しない場合、SPL Token MintおよびTokenアカウントを作成します。Token-2022アカウントを使用するには、使用するトークンプログラムとしてSPL Token-2022を指定する必要があります。
+{% /callout %}
 
-### 転送不可拡張機能
+## サポートされる拡張機能
 
-転送不可拡張機能により、作成者はSoulbound Token（転送不可能なトークン）を作成できます：
+Token-2022はいくつかの拡張機能を提供していますが、拡張機能の大部分はfungibleトークンに焦点を当てています。例えば、`confidential transfer`は転送されるトークンの量を隠すために使用できます。これは、異なる転送間で量が変化する可能性があるためfungibleに関連しますが、供給量が常に`1`で小数点が常に`0`であるnon-fungibleトークンには適用されません。したがって、non-fungibleトークンの転送量は常に`1`になります。
 
-```ts
-import {
-  ExtensionType,
-  createInitializeMintInstruction,
-  getMintLen,
-  createInitializeNonTransferableMintInstruction,
-} from '@solana/spl-token';
+Token Metadataは、`Token Standard`に基づいてMintおよびTokenアカウントに存在できる拡張機能のタイプに制限を適用します。fungibleアセット（`Fungible`および`FungibleAsset`標準）の場合、制限は設定されません - 唯一の制限はメタデータ情報を提供するプログラムに関するものです。non-fungibleアセット（`NonFungible`および`ProgrammableNonFungible`標準）の場合、Token Metadataはどの拡張機能が有効になっているかを検証し、使用できる拡張機能のセットを制限します。
 
-// 転送不可拡張機能付きでToken-2022 Mintを作成
-const extensions = [ExtensionType.NonTransferable];
-const space = getMintLen(extensions);
+### Mintアカウント拡張機能
 
-// Mintアカウント作成および初期化の手順が必要です
-```
+これらはSPL Token-2022のMintアカウントで有効にできる拡張機能です。
 
-### その他の拡張機能
+- `confidential transfers`: 転送中に量を隠します。
 
-Token-2022は以下を含む多くの他の拡張機能をサポートしています：
+  | アセット | Fungible | Non-Fungible                                           |
+  | -------- | -------- | ------------------------------------------------------ |
+  | 許可     | ✅       | ❌                                                     |
+  | 詳細     | --       | non-fungibleは供給量が`1`であるため適用されません       |
 
-- **Interest Bearing**: 時間の経過とともに利息を蓄積するトークン
-- **Transfer Fee**: 転送に手数料を課すトークン  
-- **Close Authority**: Mintアカウントを閉じる権限
-- **Permanent Delegate**: 永続的な委任権限
-- **Transfer Hook**: 転送時にカスタムロジックを実行
+---
 
-## Token-2022とToken Metadataの統合
+- `transfer fees`: 転送される量から派生する転送手数料を設定できます。
 
-Token Metadataを使用する際、Token-2022のサポートは主に`splTokenProgram`パラメーターを指定することで実現されます：
+  | アセット | Fungible | Non-Fungible                                           |
+  | -------- | -------- | ------------------------------------------------------ |
+  | 許可     | ✅       | ❌                                                     |
+  | 詳細     | --       | non-fungibleは供給量が`1`であるため適用されません       |
 
-```ts
-// 通常のSPL Token（デフォルト）
-await createV1(umi, {
-  // ... 他のパラメーター
-  // splTokenProgram は指定しない（デフォルト値を使用）
-})
+---
 
-// SPL Token-2022
-await createV1(umi, {
-  // ... 他のパラメーター
-  splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
-})
-```
+- `closing mint`: 供給量が`0`に達したときにMintアカウントを閉じることができます。
 
-この統合により、開発者はToken-2022の拡張機能を活用しながら、Token Metadataの豊富なメタデータおよびNFT機能を使用できます。
+| アセット | Fungible                                              | Non-Fungible                                                         |
+| -------- | ----------------------------------------------------- | -------------------------------------------------------------------- |
+| 許可     | ✅                                                    | ❌                                                                   |
+| 詳細     | 閉じる権限として`Metadata`アカウントを指定する必要があります | 作成者が同じMintとMetadataアカウントのグループを再作成する可能性があります |
+
+---
+
+- `interest-bearing tokens`: トークンのUI量の表示方法を変更できます。
+
+  | アセット | Fungible | Non-Fungible                                           |
+  | -------- | -------- | ------------------------------------------------------ |
+  | 許可     | ✅       | ❌                                                     |
+  | 詳細     | --       | non-fungibleは供給量が`1`であるため適用されません       |
+
+---
+
+- `non-transferable tokens`: 他のアドレスに移動できない「ソウルバウンド」トークンを許可します。
+
+  | アセット | Fungible | Non-Fungible |
+  | -------- | -------- | ------------ |
+  | 許可     | ✅       | ✅           |
+  | 詳細     | --       | --           |
+
+---
+
+- `permanent delegate`: Mintの任意のTokenアカウントに永続的なアカウント委任を指定できます。
+
+  | アセット | Fungible | Non-Fungible                  |
+  | -------- | -------- | ----------------------------- |
+  | 許可     | ✅       | ❌                            |
+  | 詳細     | --       | これは所有権の概念を変えます   |
+
+---
+
+- `transfer hook`: 転送中にサードパーティプログラムを呼び出すことができます。
+
+  | アセット | Fungible | Non-Fungible                                |
+  | -------- | -------- | ------------------------------------------- |
+  | 許可     | ✅       | ❌                                          |
+  | 詳細     | --       | Token Metadataが転送のロジックを指定します   |
+
+---
+
+- `metadata pointer`: 正規のメタデータを記述するアドレスを追加できます。
+
+  | アセット | Fungible                         | Non-Fungible                     |
+  | -------- | -------------------------------- | -------------------------------- |
+  | 許可     | ✅                               | ✅                               |
+  | 詳細     | `Metadata`アドレスを指す必要があります | `Metadata`アドレスを指す必要があります |
+
+---
+
+- `metadata`: Mintアカウントに直接メタデータを追加できます。
+
+  | アセット | Fungible                                     | Non-Fungible                                 |
+  | -------- | -------------------------------------------- | -------------------------------------------- |
+  | 許可     | ❌                                           | ❌                                           |
+  | 詳細     | メタデータ情報はToken Metadataによって追加されます | メタデータ情報はToken Metadataによって追加されます |
+
+---
+
+### Tokenアカウント拡張機能
+
+これらはSPL Token-2022のTokenアカウントで有効にできる拡張機能です。
+
+- `memo required`: 転送時にメモを要求します。
+
+  | アセット | Fungible | Non-Fungible |
+  | -------- | -------- | ------------ |
+  | 許可     | ✅       | ❌           |
+  | 詳細     | --       | 適用されません |
+
+---
+
+- `immutable ownership`: Tokenアカウントの所有権を変更する機能を無効にします。
+
+  | アセット | Fungible | Non-Fungible |
+  | -------- | -------- | ------------ |
+  | 許可     | ✅       | ✅           |
+  | 詳細     | --       | --           |
+
+---
+
+- `default account state`: デフォルトのTokenアカウント状態を設定できます。
+
+  | アセット | Fungible | Non-Fungible                            |
+  | -------- | -------- | --------------------------------------- |
+  | 許可     | ✅       | ❌                                      |
+  | 詳細     | --       | Token Metadataがアカウント状態を検証します |
+
+---
+
+- `CPI guard`: クロスプログラム呼び出し内での特定のアクション（例：転送）を防止します。
+
+  | アセット | Fungible | Non-Fungible                                |
+  | -------- | -------- | ------------------------------------------- |
+  | 許可     | ✅       | ❌                                          |
+  | 詳細     | --       | Token Metadataが転送のロジックを指定します   |
+
+---
+
+{% callout %}
+各拡張機能の包括的な概要は、SPL Token-2022プログラムの[ドキュメント](https://spl.solana.com/token-2022)で確認できます。
+{% /callout %}
+
+### デフォルト拡張機能
+
+Mintアカウントが存在しない場合、`Create`命令が1つを初期化します。使用されているトークンプログラムがSPL Token-2022の場合、Mintは`closing mint`と`metadata pointer`の両方の拡張機能で初期化されます。
+
+Associated Token Accounts（ATA）はデフォルトで常に`immutable ownership`拡張機能で初期化されます。

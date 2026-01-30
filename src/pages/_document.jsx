@@ -28,7 +28,7 @@ class MyDocument extends Document {
     const { locale = 'en' } = this.props
 
     return (
-      <Html className="antialiased [font-feature-settings:'ss01'] scrollbar" lang={locale}>
+      <Html className="antialiased [font-feature-settings:'ss01'] scrollbar overflow-y-scroll" lang={locale}>
       <Head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <link

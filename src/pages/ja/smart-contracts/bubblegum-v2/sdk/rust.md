@@ -1,6 +1,6 @@
 ---
-title: MPL-Bubblegum Rust SDK
-metaTitle: Rust SDK | MPL-Bubblegum
+title: MPL-Bubblegum V2 Rust SDK
+metaTitle: Rust SDK | MPL-Bubblegum V2
 description: MPL-Bubblegum V2 Rust SDKを実行するためのプロジェクト設定方法を学びます。
 ---
 

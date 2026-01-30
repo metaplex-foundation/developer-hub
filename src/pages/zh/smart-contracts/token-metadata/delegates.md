@@ -96,58 +96,21 @@ Token Metadata 提供的委托可以分为两类：**元数据委托**和**代�
   - `isMutable`：切换为 `false` 使资产不可变。
   - `tokenStandard`：如果资产是在强制设置之前创建的，可以设置代币标准。
 
-{% dialect-switcher title="使用 Authority Item 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateAuthorityItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateAuthorityItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: authorityItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-authority-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeAuthorityItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeAuthorityItemV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: authorityItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-authority-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托更新" %}
-
-```ts
-import { updateAsAuthorityItemDelegateV2 } from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsAuthorityItemDelegateV2(umi, {
-  mint,
-  authority: authorityItemDelegate,
-  newUpdateAuthority,
-  isMutable: false,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-authority-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Collection 委托
 
@@ -156,173 +119,54 @@ await updateAsAuthorityItemDelegateV2(umi, {
   - 它可以在项目上验证和取消验证该集合 NFT。只有当集合 NFT 已经在项目上设置时才能执行此操作。否则，无法知道该项目是否属于委托的集合 NFT。
   - 它可以从项目中清除集合 NFT。
 
-{% dialect-switcher title="使用 Collection 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateCollectionV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: collectionDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeCollectionV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: collectionDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="更新委托资产上的集合" %}
-
-```ts
-import {
-  updateAsCollectionDelegateV2,
-  collectionToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsCollectionDelegateV2(umi, {
-  mint,
-  authority: collectionDelegate,
-  collection: collectionToggle('Set', [
-    { key: collectionMint, verified: false },
-  ]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="清除项目上的集合" %}
-
-```ts
-import {
-  updateAsCollectionDelegateV2,
-  collectionToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsCollectionDelegateV2(umi, {
-  mint,
-  delegateMint: collectionMint,
-  authority: collectionDelegate,
-  collection: collectionToggle('Clear'),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-clear" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="验证项目上的集合" %}
-
-```ts
-import {
-  verifyCollectionV1,
-  findMetadataPda,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await verifyCollectionV1(umi, {
-  metadata: findMetadataPda(umi, { mint }),
-  collectionMint,
-  authority: collectionDelegate,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-verify" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="取消验证项目上的集合" %}
-
-```ts
-import {
-  unverifyCollectionV1,
-  findMetadataPda,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-await unverifyCollectionV1(umi, {
-  metadata: findMetadataPda(umi, { mint }),
-  collectionMint,
-  authority: collectionDelegate,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-unverify" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Collection Item 委托
 
 - 委托权限可以更新资产的一个子集。它可以设置元数据账户的 `collection` 属性。
 - 即使资产是集合 NFT，与集合委托相反，集合项委托也不能影响该集合的项目。
 
-{% dialect-switcher title="使用 Collection Item 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateCollectionItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateCollectionItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: collectionItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeCollectionItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeCollectionItemV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: collectionItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托更新" %}
-
-```ts
-import { updateAsCollectionItemDelegateV2 } from '@metaplex-foundation/mpl-token-metadata'
-
-await updateAsCollectionItemDelegateV2(umi, {
-  mint,
-  authority: collectionItemDelegate,
-  collection: collectionToggle('Set', [
-    { key: collectionMint, verified: false },
-  ]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-collection-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Data 委托
 
@@ -330,80 +174,25 @@ await updateAsCollectionItemDelegateV2(umi, {
 - 请注意，当更新 `data` 对象中的 `creators` 数组时，它只能添加和/或删除未验证的创作者。
 - 当应用于集合 NFT 时，委托权限可以对该集合中的项目执行相同的更新。
 
-{% dialect-switcher title="使用 Data 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateDataV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateDataV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: dataDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeDataV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeDataV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: dataDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托更新" %}
-
-```ts
-import {
-  updateAsDataDelegateV2,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateAsDataDelegateV2(umi, {
-  mint,
-  authority: dataDelegate,
-  data: { ...initialMetadata, name: 'Updated Name' },
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="对项目执行委托更新" %}
-
-```ts
-import {
-  updateAsDataDelegateV2,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateAsDataDelegateV2(umi, {
-  mint,
-  delegateMint: collectionMint,
-  authority: dataDelegate,
-  data: { ...initialMetadata, name: 'Updated Name' },
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-update-item" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Data Item 委托
 
@@ -411,61 +200,21 @@ await updateAsDataDelegateV2(umi, {
 - 请注意，当更新 `data` 对象中的 `creators` 数组时，它只能添加和/或删除未验证的创作者。
 - 即使资产是集合 NFT，与数据委托相反，数据项委托也不能影响该集合的项目。
 
-{% dialect-switcher title="使用 Data Item 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateDataItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateDataItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: dataItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeDataItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeDataItemV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: dataItemDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托更新" %}
-
-```ts
-import {
-  updateAsDataItemDelegateV2,
-  fetchMetadataFromSeeds,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const initialMetadata = await fetchMetadataFromSeeds(umi, { mint })
-await updateAsDataItemDelegateV2(umi, {
-  mint,
-  authority: dataItemDelegate,
-  data: { ...initialMetadata, name: 'Updated Name' },
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-data-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Programmable Config 委托
 
@@ -473,82 +222,25 @@ await updateAsDataItemDelegateV2(umi, {
 - 委托权限可以更新元数据账户的 `programmableConfigs` 属性，但不能更新其他内容。这意味着它可以更新 PNFT 的 `ruleSet`。
 - 当应用于集合 NFT 时，委托权限可以对该集合中的项目执行相同的更新。
 
-{% dialect-switcher title="使用 Programmable Config 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateProgrammableConfigV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateProgrammableConfigV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: programmableConfigDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeProgrammableConfigV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeProgrammableConfigV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: programmableConfigDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托更新" %}
-
-```ts
-import {
-  updateAsAuthorityItemDelegateV2,
-  ruleSetToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-
-await updateAsProgrammableConfigDelegateV2(umi, {
-  mint,
-  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
-  authority: programmableConfigDelegate,
-  ruleSet: ruleSetToggle('Set', [ruleSet]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="对项目执行委托更新" %}
-
-```ts
-import {
-  updateAsAuthorityItemDelegateV2,
-  ruleSetToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-
-await updateAsProgrammableConfigDelegateV2(umi, {
-  mint,
-  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
-  delegateMint: collectionMint,
-  authority: programmableConfigDelegate,
-  ruleSet: ruleSetToggle('Set', [ruleSet]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-update-item" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Programmable Config Item 委托
 
@@ -556,62 +248,21 @@ await updateAsProgrammableConfigDelegateV2(umi, {
 - 委托权限可以更新元数据账户的 `programmableConfigs` 属性，但不能更新其他内容。这意味着它可以更新 PNFT 的 `ruleSet`。
 - 即使资产是集合 NFT，与可编程配置委托相反，可编程配置项委托也不能影响该集合的项目。
 
-{% dialect-switcher title="使用 Programmable Config Item 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateProgrammableConfigItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateProgrammableConfigItemV1(umi, {
-  mint,
-  authority: updateAuthority,
-  delegate: programmableConfigItemDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-item-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeProgrammableConfigItemV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeProgrammableConfigItemV1(umi, {
-  mint,
-  authority: updateAuthority, // Or pass the delegate authority as a Signer to self-revoke.
-  delegate: programmableConfigItemDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-item-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托更新" %}
-
-```ts
-import {
-  updateAsProgrammableConfigItemDelegateV2,
-  ruleSetToggle,
-} from '@metaplex-foundation/mpl-token-metadata'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
-
-await updateAsProgrammableConfigItemDelegateV2(umi, {
-  mint,
-  token: findAssociatedTokenPda(umi, { mint, owner: assetOwner }),
-  authority: programmableConfigItemDelegate,
-  ruleSet: ruleSetToggle('Set', [ruleSet]),
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-programmable-config-item-update" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ## 代币委托
 
@@ -721,166 +372,55 @@ await updateAsProgrammableConfigItemDelegateV2(umi, {
 - 委托权限可以锁定资产——也称为在 Token 程序上"冻结"资产。在委托权限解锁（或"解冻"）资产之前，所有者无法转移它、销毁它或撤销委托权限。这是标准委托特有的，在原生 spl-token 委托中无法完成。
 - 当与同质化资产一起使用时，可以提供大于 1 的金额来指定要委托给委托权限的代币数量。
 
-{% dialect-switcher title="使用 Standard 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateStandardV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateStandardV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeStandardV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeStandardV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托转移" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托销毁" %}
-
-```ts
-import { burnV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await burnV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenOwner: currentOwner,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-burn" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="锁定（冻结）" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="解锁（解冻）" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: standardDelegate,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-standard-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Sale 委托（仅限 PNFT）
 
 - 此委托仅适用于可编程非同质化代币。
 - 委托权限可以将 PNFT 转移到任何地址。这样做将撤销委托权限。
-- 只要在 PNFT 上设置了销售委托，PNFT 就会进入称为 `Listed` 的特殊代币状态。`Listed` 代币状态是 `Locked` 代币状态的较软变体。在此期间，所有者无法转移或销毁 PNFT。但是,所有者可以随时撤销销售委托，这将删除 `Listed` 代币状态，并使 PNFT 再次可转移和可销毁。
+- 只要在 PNFT 上设置了销售委托，PNFT 就会进入称为 `Listed` 的特殊代币状态。`Listed` 代币状态是 `Locked` 代币状态的较软变体。在此期间，所有者无法转移或销毁 PNFT。但是，所有者可以随时撤销销售委托，这将删除 `Listed` 代币状态，并使 PNFT 再次可转移和可销毁。
 
-{% dialect-switcher title="使用 Sale 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateSaleV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateSaleV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: saleDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-sale-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeSaleV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeSaleV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: saleDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-sale-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托转移" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: saleDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-sale-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Transfer 委托（仅限 PNFT）
 
@@ -888,61 +428,21 @@ await transferV1(umi, {
 - 委托权限可以将 PNFT 转移到任何地址。这样做将撤销委托权限。
 - 与销售委托相反，当设置了转移委托时，所有者仍然可以转移和销毁 PNFT。
 
-{% dialect-switcher title="使用 Transfer 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: transferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-transfer-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: transferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-transfer-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托转移" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: transferDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-transfer-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Locked Transfer 委托（仅限 PNFT）
 
@@ -950,89 +450,29 @@ await transferV1(umi, {
 - 委托权限可以锁定 PNFT。在委托权限解锁 PNFT 之前，所有者无法转移它、销毁它或撤销委托权限。
 - 委托权限可以将 PNFT 转移到任何地址。这样做将撤销委托权限，如果它被锁定，还会解锁 PNFT。
 
-{% dialect-switcher title="使用 Locked Transfer 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateLockedTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateLockedTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeLockedTransferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeLockedTransferV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托转移" %}
-
-```ts
-import { transferV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await transferV1(umi, {
-  mint,
-  authority: lockedTransferDelegate,
-  tokenOwner: currentOwner,
-  destinationOwner: newOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-transfer" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="锁定" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="解锁" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: lockedTransferDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-locked-transfer-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Utility 委托（仅限 PNFT）
 
@@ -1040,161 +480,54 @@ await unlockV1(umi, {
 - 委托权限可以锁定 PNFT。在委托权限解锁 PNFT 之前，所有者无法转移它、销毁它或撤销委托权限。
 - 委托权限可以销毁 PNFT。
 
-{% dialect-switcher title="使用 Utility 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateUtilityV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateUtilityV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeUtilityV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeUtilityV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="委托销毁" %}
-
-```ts
-import { burnV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await burnV1(umi, {
-  mint,
-  authority: utilityDelegate,
-  tokenOwner: currentOwner,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-burn" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="锁定" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="解锁" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: utilityDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-utility-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ### Staking 委托（仅限 PNFT）
 
 - 此委托仅适用于可编程非同质化代币。
 - 委托权限可以锁定 PNFT。在委托权限解锁 PNFT 之前，所有者无法转移它、销毁它或撤销委托权限。
 
-{% dialect-switcher title="使用 Staking 委托" %}
-{% dialect title="JavaScript" id="js" %}
 {% totem %}
 
 {% totem-accordion title="批准" %}
-
-```ts
-import { delegateStakingV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await delegateStakingV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-approve" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="撤销" %}
-
-```ts
-import { revokeStakingV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await revokeStakingV1(umi, {
-  mint,
-  tokenOwner: owner.publicKey,
-  authority: owner,
-  delegate: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-revoke" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="锁定" %}
-
-```ts
-import { lockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await lockV1(umi, {
-  mint,
-  authority: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-lock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% totem-accordion title="解锁" %}
-
-```ts
-import { unlockV1 } from '@metaplex-foundation/mpl-token-metadata'
-
-await unlockV1(umi, {
-  mint,
-  authority: stakingDelegate,
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
-
+{% code-tabs-imported from="token-metadata/delegates/delegate-staking-unlock" frameworks="umi,kit" /%}
 {% /totem-accordion %}
 
 {% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
 
 ## 旧版委托
 

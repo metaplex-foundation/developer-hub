@@ -16,6 +16,25 @@ API是公开的，有速率限制。无需认证。
 https://api.metaplex.com/v1
 ```
 
+## 网络选择
+
+默认情况下，API返回Solana主网的数据。要查询devnet发行，请添加`network`查询参数：
+
+```
+?network=solana-devnet
+```
+
+**示例：**
+
+```bash
+# 主网（默认）
+curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
+
+# Devnet
+curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN?network=solana-devnet"
+```
+
+
 ## 用例
 
 - **`/launches/{genesis_pubkey}`** - 当您有genesis地址时使用，例如来自链上事件或交易日志。

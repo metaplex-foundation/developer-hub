@@ -1,7 +1,7 @@
 import { getLocalizedHref } from '@/config/languages'
 import { useLocale, useTranslations } from '@/contexts/LocaleContext'
 import Link from 'next/link'
-import { nftMenuCategory, tokenMenuCategory } from '../NavList'
+import { anchorTokenMenuCategory, nftMenuCategory, tokenMenuCategory } from '../NavList'
 import { Card, CardContent } from '../ui/card'
 import { products as allProducts, productCategories } from './index'
 
@@ -54,7 +54,9 @@ export function ProductCardGrid({ category }) {
   if (category === 'Tokens') {
     items = tokenMenuCategory
   } else if (category === 'NFTs') {
-    items = nftMenuCategory
+    items = nftMenuCategory;
+  } else if (category === 'Anchor') {
+    items = anchorTokenMenuCategory;
   } else {
     // For Smart Contracts and Dev Tools, use products
     items = allProducts.filter(

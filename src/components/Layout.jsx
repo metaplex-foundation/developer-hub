@@ -16,6 +16,9 @@ import { useLightense } from '@/shared/useLightense'
 export function Layout({ children, page }) {
   const isHomePage = page.pathname === '/'
   const isCodeViewer = page.pathname === '/code-viewer'
+  const isCategoryIndexPage = ['/tokens', '/nfts', '/smart-contracts', '/dev-tools'].some(
+    path => page.pathname === path || page.pathname.match(new RegExp(`^/(en|ja|ko|zh)${path}$`))
+  )
   const hasNavigation = !!page.activeSection?.navigation
   const Hero = page.activeHero
   const t = useTranslations('homepage')
@@ -51,10 +54,10 @@ export function Layout({ children, page }) {
     };
     const key = categoryKeys[category];
     const defaultDescriptions = {
-      'Tokens': 'Create, read, update, burn, and transfer tokens on the Solana blockchain using Metaplex SDKs.',
-      'NFTs': 'Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs.',
-      'Smart Contracts': 'On-chain programs for creating and managing digital assets on Solana.',
-      'Dev Tools': 'Tools and utilities to help you build with Metaplex programs.',
+      'Tokens': 'Create and launch tokens on Solana. Run token generation events (TGE), fair launches, and manage fungible tokens.',
+      'NFTs': 'Create, manage, and trade NFTs on Solana using Metaplex Core and other NFT standards.',
+      'Smart Contracts': 'Production-ready on-chain programs for NFTs, tokens, and digital assets on Solana.',
+      'Dev Tools': 'SDKs, CLIs, and APIs to build, test, and deploy digital asset applications on Solana.',
     };
     return key ? t(`categoryDescriptions.${key}`, defaultDescriptions[category] || '') : '';
   };
@@ -69,11 +72,8 @@ export function Layout({ children, page }) {
 
       {isHomePage && (
         <>
-          <div className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
-            <h1 className="text-4xl font-bold text-foreground">{t('title', 'Developer Hub')}</h1>
-          </div>
-          {productCategories.map((category) => (
-            <div key={category} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          {productCategories.map((category, index) => (
+            <div key={category} className={clsx("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8", index === 0 ? "pt-12 pb-12" : "py-12")}>
               <h2 className="mb-2 text-2xl font-bold text-foreground">{getCategoryName(category)}</h2>
               <p className="mb-8 text-sm text-muted-foreground">
                 {getCategoryDescription(category)}
@@ -84,10 +84,22 @@ export function Layout({ children, page }) {
         </>
       )}
 
-      {!isHomePage && (
+      {isCategoryIndexPage && (
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-12">
+          {page.title && (
+            <h2 className="mb-2 text-2xl font-bold text-foreground">{page.title}</h2>
+          )}
+          {page.description && (
+            <p className="mb-8 text-sm text-muted-foreground">{page.description}</p>
+          )}
+          <Prose className="break-words">{children}</Prose>
+        </div>
+      )}
+
+      {!isHomePage && !isCategoryIndexPage && (
         <div
           className={clsx(
-            'relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12'
+            'relative mx-auto flex max-w-[1800px] justify-center sm:px-2 lg:px-8 xl:px-12'
           )}
         >
           {/* Navigation. */}
@@ -130,7 +142,7 @@ export function Layout({ children, page }) {
               )}
               <Prose className="break-words">{children}</Prose>
             </article>
-            {!page.product.isFallbackProduct && (
+            {!page.product.isFallbackProduct && (page.activeSection?.previousPage || page.activeSection?.nextPage) && (
             <dl className="mt-12 flex border-t border-border pt-6">
               {page.activeSection?.previousPage && (
                 <div>

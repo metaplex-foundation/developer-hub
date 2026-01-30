@@ -10,7 +10,7 @@ description: 了解更多关于 Token Metadata 上的可编程 NFT（即 pNFTs�
 
 由于 Token Metadata 程序构建在 SPL Token 程序之上，任何所有者或 spl-token 委托都可以直接与 SPL Token 程序交互，并在转移和销毁等关键操作上绕过 Token Metadata 程序。虽然这在程序之间创建了良好的可组合性模式，但这也意味着 Token Metadata 程序无法代表创作者强制执行任何规则。
 
-为什么这可能是问题的一个很好的例子是 Token Metadata 无法强制执行二次销售版税。尽管版税百分比存储在 **Metadata** 账户上，但执行转移的用户或程序可以决定是否要遵守它。我们在[下面的部分](#用例版税强制执行)中详细讨论了这一点以及 pNFTs 如何解决这个问题。
+为什么这可能是问题的一个很好的例子是 Token Metadata 无法强制执行二次销售版税。尽管版税百分比存储在 **Metadata** 账户上，但执行转移的用户或程序可以决定是否要遵守它。我们在[下面的部分](#use-case-royalty-enforcement)中详细讨论了这一点以及 pNFTs 如何解决这个问题。
 
 可编程 NFT 的引入是为了以灵活的方式解决这个问题，**允许创作者自定义其资产的授权层**。
 
@@ -38,26 +38,26 @@ description: 了解更多关于 Token Metadata 上的可编程 NFT（即 pNFTs�
 
 {% diagram %}
 {% node %}
-{% node #wallet label="钱包账户" theme="indigo" /%}
-{% node label="所有者: System Program" theme="dimmed" /%}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
 {% /node %}
 
 {% node #token-wrapper x="200" parent="wallet" %}
-{% node #token label="Token 账户" theme="blue" /%}
-{% node label="所有者: Token Program" theme="dimmed" /%}
-{% node label="委托权限" theme="orange" z=1 /%}
+{% node #token label="Token Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% node label="Delegate Authority" theme="orange" z=1 /%}
 {% /node %}
 
 {% node #mint-wrapper x="200" parent="token" %}
-{% node #mint label="Mint 账户" theme="blue" /%}
-{% node label="所有者: Token Program" theme="dimmed" /%}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
 {% /node %}
 
 {% node #token-record-pda parent="mint" x="0" y="120" label="PDA" theme="crimson" /%}
 
 {% node parent="token-record-pda" x="-240" %}
-{% node #token-record label="Token Record 账户" theme="crimson" /%}
-{% node label="所有者: Token Metadata Program" theme="dimmed" /%}
+{% node #token-record label="Token Record Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
 {% node label="Key = TokenRecord" /%}
 {% node label="Bump" /%}
 {% node label="State" /%}
@@ -89,61 +89,29 @@ pNFTs 在大多数操作中需要附加账户，包括 `tokenRecord`、`authoriz
 
 您可以使用 `fetchDigitalAssetWithAssociatedToken` 函数获取所有需要的账户，它返回 pNFT metadata 账户、token 账户和 token record 账户等数据。
 
-```ts
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-    // Umi 实例
-    umi,
-    // Mint ID
-    publicKey("11111111111111111111111111111111"),
-    // 所有者
-    publicKey("22222222222222222222222222222222")
-);
-```
+{% code-tabs-imported from="token-metadata/pnft-fetch-with-token" frameworks="umi,kit" /%}
 
 #### Token Record PDA
 
 使用 `mintId` 和存储 pNFT 资产的钱包的 `tokenAccount` 生成 `tokenRecord` 账户的 PDA 地址。
 
-```ts
-const tokenRecordPda = findTokenRecordPda(umi, {
-    // pNFT mint ID
-    mint: publicKey("11111111111111111111111111111111")s,
-    // Token 账户
-    token: publicKey("22222222222222222222222222222222"),
-});
-```
+{% code-tabs-imported from="token-metadata/pnft-find-token-record-pda" frameworks="umi,kit" /%}
 
 ### RuleSet
 
-如果您有可用的 `metadata` 账户数据，您可以使用 `unwrap` 来检查 metadata 账户上的 `programableConfig` 字段。
+如果您有可用的 `metadata` 账户数据，您可以检查 metadata 账户上的 `programmableConfig` 字段来获取规则集。
 
-```ts
-const ruleSet = unwrapOptionRecursively(assetWithToken.metadata.programmableConfig)?.ruleSet
-```
+{% code-tabs-imported from="token-metadata/pnft-get-ruleset" frameworks="umi,kit" /%}
 
 ### Authorization Rules 程序
 
-如果您的 pNFT 资产上设置了 `ruleSet`，您需要传入 **Authorization Rules Program ID** 以便验证 `ruleSet`。有两种方法可以获取此 ID，一种是从 `mpl-token-auth-rules` npm 包获取，另一种是手动粘贴 ID。
+如果您的 pNFT 资产上设置了 `ruleSet`，您需要传入 **Authorization Rules Program ID** 以便验证 `ruleSet`。
 
-#### mpl-token-auth-rules
-
-```ts
-const authorizationRulesProgram = getMplTokenAuthRulesProgramId(umi)
-```
-或
-
-#### 程序地址
-```ts
-const authorizationRulesProgram = pubicKey("auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg")
-```
+{% code-tabs-imported from="token-metadata/pnft-auth-rules-program" frameworks="umi,kit" /%}
 
 ### Authorization Data
 
-如果您的 pNFT 资产上有需要额外数据进行验证的 `ruleSet`，您需要在此处传入。
-
-```ts
-const = authorizationData: { payload: ... },
-```
+如果您的 pNFT 资产上有需要额外数据进行验证的 `ruleSet`，您可以在指令参数中将其作为 `authorizationData: { payload: ... }` 传入。
 
 ## 在任何操作上强制执行规则
 
@@ -154,15 +122,15 @@ const = authorizationData: { payload: ... },
 | 操作                          | 描述                                                                                                                                                                                    |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Transfer:Owner`              | 由 pNFT 所有者发起的转移                                                                                                                                                                |
-| `Transfer:SaleDelegate`       | 由[销售委托](/zh/smart-contracts/token-metadata/delegates#sale-delegate-pnft-only)发起的转移                                                                                                               |
-| `Transfer:TransferDelegate`   | 由[转移](/zh/smart-contracts/token-metadata/delegates#transfer-delegate-pnft-only)或[锁定转移](/zh/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)委托发起的转移                                 |
+| `Transfer:SaleDelegate`       | 由[销售委托](/zh/smart-contracts/token-metadata/delegates#sale-delegate-pnft-only)发起的转移                                                                                            |
+| `Transfer:TransferDelegate`   | 由[转移](/zh/smart-contracts/token-metadata/delegates#transfer-delegate-pnft-only)或[锁定转移](/zh/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)委托发起的转移 |
 | `Transfer:MigrationDelegate`  | 由迁移委托（pNFT 迁移期间使用的旧委托）发起的转移                                                                                                                                        |
 | `Transfer:WalletToWallet`     | 钱包之间的转移（目前未使用）                                                                                                                                                            |
-| `Delegate:Sale`               | 批准[销售委托](/zh/smart-contracts/token-metadata/delegates#sale-delegate-pnft-only)                                                                                                                       |
-| `Delegate:Transfer`           | 批准[转移委托](/zh/smart-contracts/token-metadata/delegates#transfer-delegate-pnft-only)                                                                                                                   |
-| `Delegate:LockedTransfer`     | 批准[锁定转移委托](/zh/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)                                                                                                        |
-| `Delegate:Utility`            | 批准[实用委托](/zh/smart-contracts/token-metadata/delegates#utility-delegate-pnft-only)                                                                                                                    |
-| `Delegate:Staking`            | 批准[质押委托](/zh/smart-contracts/token-metadata/delegates#staking-delegate-pnft-only)                                                                                                                    |
+| `Delegate:Sale`               | 批准[销售委托](/zh/smart-contracts/token-metadata/delegates#sale-delegate-pnft-only)                                                                                                    |
+| `Delegate:Transfer`           | 批准[转移委托](/zh/smart-contracts/token-metadata/delegates#transfer-delegate-pnft-only)                                                                                                |
+| `Delegate:LockedTransfer`     | 批准[锁定转移委托](/zh/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)                                                                                     |
+| `Delegate:Utility`            | 批准[实用委托](/zh/smart-contracts/token-metadata/delegates#utility-delegate-pnft-only)                                                                                                 |
+| `Delegate:Staking`            | 批准[质押委托](/zh/smart-contracts/token-metadata/delegates#staking-delegate-pnft-only)                                                                                                 |
 
 创作者可以为任何这些操作分配自定义**规则**。当执行该操作时，Token Metadata 程序将在允许操作执行之前确保规则有效。可用规则由 Token Auth Rules 程序直接记录，但值得注意的是有两种类型的规则：
 
@@ -173,25 +141,25 @@ const = authorizationData: { payload: ... },
 
 {% diagram %}
 {% node %}
-{% node #wallet label="钱包账户" theme="indigo" /%}
-{% node label="所有者: System Program" theme="dimmed" /%}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
 {% /node %}
 
 {% node #token-wrapper x="200" parent="wallet" %}
-{% node #token label="Token 账户" theme="blue" /%}
-{% node label="所有者: Token Program" theme="dimmed" /%}
+{% node #token label="Token Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
 {% /node %}
 
 {% node #mint-wrapper x="200" parent="token" %}
-{% node #mint label="Mint 账户" theme="blue" /%}
-{% node label="所有者: Token Program" theme="dimmed" /%}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
 {% /node %}
 
 {% node #token-record-pda parent="mint" x="41" y="120" label="PDA" theme="crimson" /%}
 
 {% node parent="token-record-pda" x="-240" %}
-{% node #token-record label="Token Record 账户" theme="crimson" /%}
-{% node label="所有者: Token Metadata Program" theme="dimmed" /%}
+{% node #token-record label="Token Record Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
 {% node label="..." /%}
 {% node #ruleset-revision label="Rule Set Revision" theme="orange" z=1 /%}
 {% /node %}
@@ -199,15 +167,15 @@ const = authorizationData: { payload: ... },
 {% node #metadata-pda parent="mint" x="41" y="-80" label="PDA" theme="crimson" /%}
 
 {% node parent="metadata-pda" x="-240" y="-80" %}
-{% node #metadata label="Metadata 账户" theme="crimson" /%}
-{% node label="所有者: Token Metadata Program" theme="dimmed" /%}
+{% node #metadata label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
 {% node label="..." /%}
 {% node #programmable-configs label="Programmable Configs" theme="orange" z=1 /%}
 {% /node %}
 
 {% node parent="metadata" x="-260" %}
-{% node #ruleset label="Rule Set 账户" theme="crimson" /%}
-{% node label="所有者: Token Auth Rules Program" theme="dimmed" /%}
+{% node #ruleset label="Rule Set Account" theme="crimson" /%}
+{% node label="Owner: Token Auth Rules Program" theme="dimmed" /%}
 {% node label="Header" /%}
 {% node label="Rule Set Revision 0" /%}
 {% node #ruleset-revision-1 label="Rule Set Revision 1" /%}

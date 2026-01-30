@@ -16,6 +16,12 @@ export const tokens = {
   sections: [
     {
       ...documentationSection('tokens'),
+      // Don't show navigation on the index page (like smart-contracts and dev-tools)
+      isFallbackSection: false,
+      isPageFromSection: ({ pathname }) => {
+        // Match subpages but not the exact index
+        return pathname.startsWith('/tokens/') && pathname !== '/tokens'
+      },
       navigation: [
         {
           title: 'Introduction',
@@ -63,6 +69,15 @@ export const tokens = {
             },
           ],
         },
+        {
+          title: 'Anchor',
+          links: [
+            {
+              title: 'Create a Token with Anchor',
+              href: '/tokens/anchor/create-token',
+            },
+          ],
+        },
       ],
     },
   ],
@@ -79,7 +94,8 @@ export const tokens = {
     },
     sectionKeys: {
       'Introduction': 'sections.introduction',
-      'Getting Started': { ja: 'はじめに', ko: '시작하기', zh: '快速入门' }
+      'Getting Started': { ja: 'はじめに', ko: '시작하기', zh: '快速入门' },
+      'Anchor': { ja: 'Anchor', ko: 'Anchor', zh: 'Anchor' }
     },
     linkKeys: {
       'Overview': 'links.overview',
@@ -90,7 +106,8 @@ export const tokens = {
       'Mint Tokens': { ja: 'トークンのミント', ko: '토큰 민팅', zh: '铸造代币' },
       'Transfer Tokens': { ja: 'トークンの転送', ko: '토큰 전송', zh: '转移代币' },
       'Update Token Metadata': { ja: 'トークンメタデータの更新', ko: '토큰 메타데이터 업데이트', zh: '更新代币元数据' },
-      'Burn Tokens': { ja: 'トークンのバーン', ko: '토큰 소각', zh: '销毁代币' }
+      'Burn Tokens': { ja: 'トークンのバーン', ko: '토큰 소각', zh: '销毁代币' },
+      'Create a Token with Anchor': { ja: 'Anchorでトークンを作成', ko: 'Anchor로 토큰 생성', zh: '使用Anchor创建代币' }
     }
   })
 }

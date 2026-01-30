@@ -18,7 +18,7 @@ description: Token Metadata에서 NFT, SFT 및 프로그래머블 NFT(자산)를
 
 ## 오프체인 데이터 업로드
 
-오프체인 데이터를 업로드하기 위해 어떤 서비스든 사용하거나 단순히 자신의 서버에 저장할 수 있지만, 우리 SDK 중 일부가 이를 도울 수 있다는 점에 주목할 가치가 있습니다. 이들은 선택한 업로더를 선택할 수 있게 해주고 데이터를 업로드하기 위한 통합된 인터페이스를 제공하는 플러그인 시스템을 사용합니다.
+오프체인 데이터를 업로드하기 위해 어떤 서비스든 사용하거나 단순히 자신의 서버에 저장할 수 있지만, Umi SDK가 이를 도울 수 있다는 점에 주목할 가치가 있습니다. 이는 선택한 업로더를 선택할 수 있게 해주고 데이터를 업로드하기 위한 통합된 인터페이스를 제공하는 플러그인 시스템을 사용합니다.
 
 {% dialect-switcher title="자산 및 JSON 데이터 업로드" %}
 {% dialect title="JavaScript" id="js" %}
@@ -145,115 +145,11 @@ umi.use(irysUploader())
 `createV1`는 Mint 계정을 초기화하고 Metadata 계정을 생성할 수 있는 헬퍼 함수입니다. mint가 이미 존재하는 경우 메타데이터 계정만 생성합니다. [`createMetadataAccountV3`](https://mpl-token-metadata-js-docs.vercel.app/functions/createMetadataAccountV3.html) 사용 방법을 찾고 있다면 대신 이 함수를 사용해야 합니다.
 {% /callout %}
 
-{% dialect-switcher title="온체인 계정 생성" %}
-{% dialect title="JavaScript - Umi" id="js-umi" %}
+{% code-tabs-imported from="token-metadata/create-accounts" frameworks="umi,kit,shank" /%}
 
-```ts
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import {
-  createV1,
-  TokenStandard,
-} from '@metaplex-foundation/mpl-token-metadata'
-
-const mint = generateSigner(umi)
-await createV1(umi, {
-  mint,
-  authority,
-  name: 'My NFT',
-  uri,
-  sellerFeeBasisPoints: percentAmount(5.5),
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-
-{% dialect title="Rust Script" id="rust-script" %}
-{% totem %}
-
-```rust
-use mpl_token_metadata::{
-    instructions::CreateV1Builder,
-    types::{PrintSupply, TokenStandard},
-};
-use solana_rpc_client::rpc_client::RpcClient;
-use solana_sdk::{
-     message::Message,
-     transaction::Transaction,
-};
-
-// 1. client는 초기화된 RpcClient에 대한 참조입니다
-// 2. 모든 계정은 그들의 공개키로 지정됩니다
-
-let client = ...;
-
-let create_ix = CreateV1Builder::new()
-    .metadata(metadata)
-    .master_edition(Some(master_edition))
-    .mint(mint.pubkey(), true)
-    .authority(payer.pubkey())
-    .payer(payer.pubkey())
-    .update_authority(payer.pubkey(), false)
-    .name(String::from("My NFT"))
-    .uri(uri)
-    .seller_fee_basis_points(550)
-    .token_standard(TokenStandard::NonFungible)
-    .print_supply(PrintSupply::Zero)
-    .instruction();
-
-let message = Message::new(
-    &[create_ix],
-    Some(&payer.pubkey()),
-);
-
-let blockhash = client.get_latest_blockhash()?;
-let mut tx = Transaction::new(&[mint, payer], message, blockhash);
-client.send_and_confirm_transaction(&tx)?;
-```
-
-{% totem-prose %}
-
-`mint` 계정을 설정할 때, 계정이 서명자인지 여부를 나타내는 `bool` 플래그를 지정해야 한다는 점에 주목하세요 – `mint` 계정이 존재하지 않는 경우 서명자여야 합니다.
-
-{% /totem-prose %}
-
-{% /totem %}
-
-{% /dialect %}
-
-{% dialect title="Rust MPL SDK - CPI" id="rust-cpi" %}
-
-```rust
-use mpl_token_metadata::{
-    accounts::Metadata,
-    instructions::CreateV1CpiBuilder,
-    types::{PrintSupply, TokenStandard},
-};
-
-// 1. 모든 계정은 그들의 AccountInfo에 대한 참조로 지정됩니다
-
-let create_cpi = CreateV1CpiBuilder::new(token_metadata_program_info)
-    .metadata(metadata_info)
-    .mint(mint_info, true)
-    .authority(payer_info)
-    .payer(payer_info)
-    .update_authority(update_authority_info, false)
-    .master_edition(Some(master_edition_info))
-    .system_program(system_program_info)
-    .sysvar_instructions(sysvar_instructions_info)
-    .spl_token_program(spl_token_program_info)
-    .token_standard(TokenStandard::NonFungible)
-    .name(String::from("My NFT"))
-    .uri(uri)
-    .seller_fee_basis_points(550)
-    .token_standard(TokenStandard::NonFungible)
-    .print_supply(PrintSupply::Zero);
-
-create_cpi.invoke();
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% callout type="note" %}
+Rust에서 `mint` 계정을 설정할 때, 계정이 서명자인지 여부를 나타내는 `bool` 플래그를 지정해야 한다는 점에 주목하세요 – `mint` 계정이 존재하지 않는 경우 서명자여야 합니다.
+{% /callout %}
 
 ## 토큰 민팅
 
@@ -267,102 +163,18 @@ create_cpi.invoke();
 - **Amount**: 민팅할 토큰의 수. 대체 불가능한 자산의 경우, 이는 1만 가능합니다.
 - **Token Standard**: 자산의 토큰 표준(**JavaScript SDK에 필요**). 프로그램은 이 인수를 필요로 하지 않지만 우리의 SDK는 다른 대부분의 매개변수에 대해 적절한 기본값을 제공할 수 있도록 필요로 합니다.
 
-{% dialect-switcher title="토큰 민팅" %}
-{% dialect title="JavaScript" id="js" %}
+{% code-tabs-imported from="token-metadata/mint-tokens" frameworks="umi,kit,shank" /%}
 
-```ts
-import { mintV1, TokenStandard } from '@metaplex-foundation/mpl-token-metadata'
-
-await mintV1(umi, {
-  mint: mint.publicKey,
-  authority,
-  amount: 1,
-  tokenOwner,
-  tokenStandard: TokenStandard.NonFungible,
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-{% totem %}
-
-```rust
-use mpl_token_metadata::instructions::MintV1Builder;
-use solana_rpc_client::rpc_client::RpcClient;
-use solana_sdk::{
-     message::Message,
-     transaction::Transaction,
-};
-
-// 1. client는 초기화된 RpcClient에 대한 참조입니다
-// 2. 모든 계정은 그들의 공개키로 지정됩니다
-
-let client = ...;
-
-let mint_ix = MintV1Builder::new()
-    .token(token)
-    .token_owner(Some(token_owner))
-    .metadata(metadata)
-    .master_edition(Some(master_edition))
-    .mint(mint)
-    .authority(update_authority)
-    .payer(payer)
-    .amount(1)
-    .instruction();
-
-let message = Message::new(
-    &[mint_ix],
-    Some(&payer.pubkey()),
-);
-
-let blockhash = client.get_latest_blockhash()?;
-let mut tx = Transaction::new(&[update_authority, payer], message, blockhash);
-client.send_and_confirm_transaction(&tx)?;
-```
-
-{% totem-prose %}
-
+{% callout type="note" %}
 `NonFungible`을 민팅하는 데 필요하므로 `master_edition`을 설정하고 있습니다; `token` 계정이 존재하지 않고 하나가 초기화될 경우 `token_owner`가 필요합니다.
-
-{% /totem-prose %}
-
-{% /totem %}
-{% /dialect %}
-
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
-
-```rust
-use mpl_token_metadata::instructions::MintV1CpiBuilder;
-
-// 1. 모든 계정은 그들의 AccountInfo에 대한 참조로 지정됩니다
-
-let mint_cpi = MintV1CpiBuilder::new(token_metadata_program_info)
-    .token(token_info)
-    .token_owner(Some(token_owner_info))
-    .metadata(metadata_info)
-    .master_edition(Some(master_edition_info))
-    .mint(mint_info)
-    .payer(payer_info)
-    .authority(update_authority_info)
-    .system_program(system_program_info)
-    .sysvar_instructions(sysvar_instructions_info)
-    .spl_token_program(spl_token_program_info)
-    .spl_ata_program(spl_ata_program_info)
-    .amount(1);
-
-mint_cpi.invoke();
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
+{% /callout %}
 
 ## 생성 헬퍼
 
 디지털 자산 생성이 Token Metadata의 중요한 부분이므로, 우리의 SDK는 프로세스를 더 쉽게 만들기 위한 헬퍼 메서드를 제공합니다. 즉, 이러한 헬퍼 메서드는 생성하려는 토큰 표준에 따라 **Create V1**과 **Mint V1** 명령어를 다양한 방식으로 결합합니다.
 
 {% dialect-switcher title="생성 헬퍼" %}
-{% dialect title="JavaScript" id="js" %}
+{% dialect title="Umi SDK" id="umi" %}
 
 {% totem-accordion title="NonFungible 생성" %}
 
@@ -376,8 +188,6 @@ await createNft(umi, {
   name: 'My NFT',
   uri: 'https://example.com/my-nft.json',
   sellerFeeBasisPoints: percentAmount(5.5),
-  // 직접 컬렉션에 추가하고 싶다면 선택적. 나중에 검증이 필요.
-  // collection: some({ key: collectionMint.publicKey, verified: false }),
 }).sendAndConfirm(umi)
 ```
 
@@ -395,7 +205,7 @@ await createFungible(umi, {
   name: 'My Fungible',
   uri: 'https://example.com/my-fungible.json',
   sellerFeeBasisPoints: percentAmount(5.5),
-  decimals: some(7), // 0 소수점의 경우 some(0) 사용
+  decimals: some(9),
 }).sendAndConfirm(umi)
 ```
 
@@ -413,7 +223,7 @@ await createFungibleAsset(umi, {
   name: 'My Fungible Asset',
   uri: 'https://example.com/my-fungible-asset.json',
   sellerFeeBasisPoints: percentAmount(5.5),
-  decimals: some(7) // 0 소수점의 경우 some(0) 사용
+  decimals: some(0),
 }).sendAndConfirm(umi)
 ```
 
@@ -431,8 +241,6 @@ await createProgrammableNft(umi, {
   name: 'My Programmable NFT',
   uri: 'https://example.com/my-programmable-nft.json',
   sellerFeeBasisPoints: percentAmount(5.5),
-  // 직접 컬렉션에 추가하고 싶다면 선택적. 나중에 검증이 필요.
-  // collection: some({ key: collectionMint.publicKey, verified: false }),
 }).sendAndConfirm(umi)
 ```
 
@@ -440,7 +248,111 @@ await createProgrammableNft(umi, {
 
 {% /dialect %}
 
-{% dialect title="Rust" id="rust" %}
-<!-- 이 버전의 문서에서는 Rust 헬퍼 예제가 제공되지 않습니다 -->
+{% dialect title="Kit SDK" id="kit" %}
+
+{% totem-accordion title="NonFungible 생성" %}
+
+```ts
+import { generateKeyPairSigner } from '@solana/kit'
+import { createNft } from '@metaplex-foundation/mpl-token-metadata-kit'
+
+const mint = await generateKeyPairSigner()
+const [createIx, mintIx] = await createNft({
+  mint,
+  authority,
+  payer: authority,
+  name: 'My NFT',
+  uri: 'https://example.com/my-nft.json',
+  sellerFeeBasisPoints: 550, // 5.5%
+  tokenOwner: authority.address,
+})
+
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+})
+```
+
+{% /totem-accordion  %}
+
+{% totem-accordion title="Fungible 생성" %}
+
+```ts
+import { generateKeyPairSigner } from '@solana/kit'
+import { createFungible } from '@metaplex-foundation/mpl-token-metadata-kit'
+
+const mint = await generateKeyPairSigner()
+const createAndMintIx = await createFungible({
+  mint,
+  authority,
+  payer: authority,
+  name: 'My Fungible',
+  uri: 'https://example.com/my-fungible.json',
+  sellerFeeBasisPoints: 0,
+  decimals: 9,
+  tokenOwner: authority.address,
+  amount: 1_000_000_000n, // initial supply
+})
+
+await sendAndConfirm({
+  instructions: [createAndMintIx],
+  payer: authority,
+})
+```
+
+{% /totem-accordion  %}
+
+{% totem-accordion title="FungibleAsset 생성" %}
+
+```ts
+import { generateKeyPairSigner } from '@solana/kit'
+import { createFungibleAsset } from '@metaplex-foundation/mpl-token-metadata-kit'
+
+const mint = await generateKeyPairSigner()
+const createAndMintIx = await createFungibleAsset({
+  mint,
+  authority,
+  payer: authority,
+  name: 'My Fungible Asset',
+  uri: 'https://example.com/my-fungible-asset.json',
+  sellerFeeBasisPoints: 0,
+  decimals: 0,
+  tokenOwner: authority.address,
+  amount: 1000n, // initial supply
+})
+
+await sendAndConfirm({
+  instructions: [createAndMintIx],
+  payer: authority,
+})
+```
+
+{% /totem-accordion  %}
+
+{% totem-accordion title="ProgrammableNonFungible 생성" %}
+
+```ts
+import { generateKeyPairSigner } from '@solana/kit'
+import { createProgrammableNft } from '@metaplex-foundation/mpl-token-metadata-kit'
+
+const mint = await generateKeyPairSigner()
+const [createIx, mintIx] = await createProgrammableNft({
+  mint,
+  authority,
+  payer: authority,
+  name: 'My Programmable NFT',
+  uri: 'https://example.com/my-programmable-nft.json',
+  sellerFeeBasisPoints: 550, // 5.5%
+  tokenOwner: authority.address,
+})
+
+await sendAndConfirm({
+  instructions: [createIx, mintIx],
+  payer: authority,
+})
+```
+
+{% /totem-accordion  %}
+
 {% /dialect %}
 {% /dialect-switcher %}

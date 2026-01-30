@@ -1,6 +1,6 @@
 ---
 title: 付款人-权限模式
-metaTitle: 付款人-权限模式
+metaTitle: 付款人-权限模式 | Metaplex Guides
 description: Solana 指令使用单独的权限和付款人的常见编程模式。
 # remember to update dates also in /components/guides/index.js
 created: '12-30-2024'

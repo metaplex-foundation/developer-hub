@@ -101,6 +101,16 @@ URL redirects are handled in `src/middleware.js` for:
 4. Shared utilities in `src/shared/`
 5. Static assets in `public/`
 
+## Code Examples
+
+The `src/examples/` directory contains code examples used in the documentation.
+
+**Important:** The `index.js` files in example directories are auto-generated. Do not edit them directly.
+
+- Edit the source files (`kit.js`, `umi.js`, etc.) instead
+- Run `node scripts/build-examples.js` to regenerate all `index.js` files
+- The script parses `[IMPORTS]`, `[SETUP]`, `[MAIN]`, `[OUTPUT]` sections from source files
+
 ## Important Notes
 
 - Uses pnpm workspaces - always use `pnpm` not `npm`

@@ -31,13 +31,13 @@ export function Header({ page }) {
   return (
     <header
       className={clsx(
-        'sticky top-0 z-50 bg-background shadow-foreground/5 transition duration-500 dark:shadow-none',
+        'sticky top-0 z-50 border-b border-border bg-background shadow-foreground/5 transition duration-500 dark:shadow-none',
         isScrolled
           ? 'dark:bg-background/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-background/75'
           : 'dark:bg-transparent'
       )}
     >
-      <div className="flex flex-wrap items-center justify-between border-b border-border px-4 py-5 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-between px-4 py-5 sm:px-6 lg:px-8 xl:px-12">
         <div className="mr-6 flex lg:hidden">
           <MobileNavigation page={page} />
         </div>
@@ -54,7 +54,7 @@ export function Header({ page }) {
           <NavList />
         </div>
 
-        
+
 
         <div className="relative flex basis-0 items-center justify-end gap-4 sm:gap-6 lg:flex-grow">
           <Link
@@ -74,7 +74,7 @@ export function Header({ page }) {
       {!page.product.isJsxPage &&
         page.product.sections &&
         page.product.sections.length > 1 && (
-          <div className="hidden justify-center px-8 py-2 md:flex">
+          <div className="mx-auto hidden max-w-[1800px] justify-center px-8 py-2 md:flex xl:px-12">
             <IconWithName
               product={page.product}
               className="hidden items-center lg:flex"

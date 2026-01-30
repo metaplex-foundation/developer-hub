@@ -88,74 +88,116 @@ pNFTはほとんどの操作で追加のアカウントを必要とし、これ�
 
 `fetchDigitalAssetWithAssociatedToken`関数を使用してすべてのアカウントを取得できます。これはpNFT metadataアカウント、token account、token recordアカウントなどのデータを返します。
 
-```ts
-const assetWithToken = await fetchDigitalAssetWithAssociatedToken(
-    // Umiインスタンス
-    umi,
-    // Mint ID
-    publicKey("11111111111111111111111111111111"),
-    // 所有者
-    publicKey("22222222222222222222222222222222")
-);
-```
+{% code-tabs-imported from="token-metadata/pnft-fetch-with-token" frameworks="umi,kit" /%}
 
 #### Token Record PDA
 
-代替として、`findTokenRecordPda`関数を使用してtoken record PDAを生成できます：
+`mintId`とpNFTアセットが保存されているウォレットの`tokenAccount`を使用して、`tokenRecord`アカウントのPDAアドレスを生成します。
 
-```ts
-import { findTokenRecordPda } from '@metaplex-foundation/mpl-token-metadata'
+{% code-tabs-imported from="token-metadata/pnft-find-token-record-pda" frameworks="umi,kit" /%}
 
-const tokenRecord = findTokenRecordPda(umi, {
-    mint: publicKey("11111111111111111111111111111111"),
-    token: tokenAccountPublicKey,
-})
-```
+### RuleSet
 
-## pNFTの作成
+`metadata`アカウントデータが利用可能な場合、metadataアカウントの`programmableConfig`フィールドを確認してルールセットを取得できます。
 
-プログラマブルNFTを作成するには、`tokenStandard`を`ProgrammableNonFungible`に設定します：
+{% code-tabs-imported from="token-metadata/pnft-get-ruleset" frameworks="umi,kit" /%}
 
-{% dialect-switcher title="Create a pNFT" %}
-{% dialect title="JavaScript" id="js" %}
+### Authorization Rules Program
 
-```ts
-import { 
-    generateSigner,
-    percentAmount 
-} from '@metaplex-foundation/umi'
-import { 
-    createV1,
-    TokenStandard 
-} from '@metaplex-foundation/mpl-token-metadata'
+pNFTアセットに`ruleSet`が設定されている場合、`ruleSet`を検証できるように**Authorization Rules Program ID**を渡す必要があります。
 
-const mint = generateSigner(umi)
-await createV1(umi, {
-  mint,
-  name: 'My Programmable NFT',
-  uri: 'https://example.com/my-pnft.json',
-  sellerFeeBasisPoints: percentAmount(5.5),
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-}).sendAndConfirm(umi)
-```
+{% code-tabs-imported from="token-metadata/pnft-auth-rules-program" frameworks="umi,kit" /%}
 
-{% /dialect %}
-{% /dialect-switcher %}
+### Authorization Data
+
+検証に追加データが必要な`ruleSet`がpNFTアセットにある場合、命令パラメータで`authorizationData: { payload: ... }`として渡します。
+
+## あらゆる操作へのルール強制
+
+プログラマブルNFTの最も重要な機能の1つは、それらに影響を与えるあらゆる操作に一連のルールを強制できる能力です。認証層全体は、[Token Auth Rules](/ja/smart-contracts/token-auth-rules)と呼ばれる別のMetaplexプログラムによって提供されます。このプログラムはpNFTをプログラマブルにするために使用されますが、あらゆる用途の認証ルールを作成および検証するために使用できる汎用プログラムです。
+
+pNFTの場合、以下の操作がサポートされています：
+
+| 操作                          | 説明                                                                                                                                                                                    |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Transfer:Owner`              | pNFTの所有者によって開始された転送                                                                                                                                                      |
+| `Transfer:SaleDelegate`       | [Sale委任](/ja/smart-contracts/token-metadata/delegates#sale-delegate-pnft-only)によって開始された転送                                                                                  |
+| `Transfer:TransferDelegate`   | [Transfer](/ja/smart-contracts/token-metadata/delegates#transfer-delegate-pnft-only)または[Locked Transfer](/ja/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)委任によって開始された転送 |
+| `Transfer:MigrationDelegate`  | Migration委任によって開始された転送（pNFT移行期間中に使用されたレガシー委任）                                                                                                          |
+| `Transfer:WalletToWallet`     | ウォレット間の転送（現在未使用）                                                                                                                                                        |
+| `Delegate:Sale`               | [Sale委任](/ja/smart-contracts/token-metadata/delegates#sale-delegate-pnft-only)の承認                                                                                                  |
+| `Delegate:Transfer`           | [Transfer委任](/ja/smart-contracts/token-metadata/delegates#transfer-delegate-pnft-only)の承認                                                                                          |
+| `Delegate:LockedTransfer`     | [Locked Transfer委任](/ja/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)の承認                                                                            |
+| `Delegate:Utility`            | [Utility委任](/ja/smart-contracts/token-metadata/delegates#utility-delegate-pnft-only)の承認                                                                                            |
+| `Delegate:Staking`            | [Staking委任](/ja/smart-contracts/token-metadata/delegates#staking-delegate-pnft-only)の承認                                                                                            |
+
+作成者はこれらの操作のいずれかにカスタム**ルール**を割り当てることができます。その操作が実行されると、Token Metadataプログラムは操作を許可する前にルールが有効であることを確認します。利用可能なルールはToken Auth Rulesプログラムによって直接文書化されていますが、2種類のルールがあることに注意する価値があります：
+
+- **プリミティブルール**：これらのルールは操作が許可されているかどうかを明示的に示します。例：`PubkeyMatch`ルールは、指定されたフィールドの公開鍵が指定された公開鍵と一致する場合にのみパスします。`ProgramOwnedList`は、指定されたフィールドのアカウントを所有するプログラムが指定されたプログラムリストの一部である場合にのみパスします。`Pass`ルールは常にパスします。など。
+- **複合ルール**：これらのルールは複数のルールを集約して、より複雑な認証ロジックを作成します。例：`All`ルールは、含まれるすべてのルールがパスする場合にのみパスします。`Any`ルールは、含まれるルールの少なくとも1つがパスする場合にのみパスします。`Not`ルールは、含まれるルールがパスしない場合にのみパスします。など。
+
+操作のすべてのルールが定義されたら、Token Auth Rulesプログラムの**Rule Set**アカウントに保存できます。このRule Setに変更が必要な場合、新しい**Rule Set Revision**がRule Setアカウントに追加されます。これにより、特定のリビジョン内に現在ロックされているpNFTが、最新のリビジョンに移行する前にロック解除できることが保証されます。
+
+{% diagram %}
+{% node %}
+{% node #wallet label="Wallet Account" theme="indigo" /%}
+{% node label="Owner: System Program" theme="dimmed" /%}
+{% /node %}
+
+{% node #token-wrapper x="200" parent="wallet" %}
+{% node #token label="Token Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% /node %}
+
+{% node #mint-wrapper x="200" parent="token" %}
+{% node #mint label="Mint Account" theme="blue" /%}
+{% node label="Owner: Token Program" theme="dimmed" /%}
+{% /node %}
+
+{% node #token-record-pda parent="mint" x="41" y="120" label="PDA" theme="crimson" /%}
+
+{% node parent="token-record-pda" x="-240" %}
+{% node #token-record label="Token Record Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% node label="..." /%}
+{% node #ruleset-revision label="Rule Set Revision" theme="orange" z=1 /%}
+{% /node %}
+
+{% node #metadata-pda parent="mint" x="41" y="-80" label="PDA" theme="crimson" /%}
+
+{% node parent="metadata-pda" x="-240" y="-80" %}
+{% node #metadata label="Metadata Account" theme="crimson" /%}
+{% node label="Owner: Token Metadata Program" theme="dimmed" /%}
+{% node label="..." /%}
+{% node #programmable-configs label="Programmable Configs" theme="orange" z=1 /%}
+{% /node %}
+
+{% node parent="metadata" x="-260" %}
+{% node #ruleset label="Rule Set Account" theme="crimson" /%}
+{% node label="Owner: Token Auth Rules Program" theme="dimmed" /%}
+{% node label="Header" /%}
+{% node label="Rule Set Revision 0" /%}
+{% node #ruleset-revision-1 label="Rule Set Revision 1" /%}
+{% node label="..." /%}
+{% /node %}
+
+{% edge from="wallet" to="token" /%}
+{% edge from="mint" to="token" /%}
+{% edge from="mint" to="metadata-pda" path="straight" /%}
+{% edge from="metadata-pda" to="metadata" fromPosition="top" /%}
+{% edge from="token-wrapper" to="token-record-pda" /%}
+{% edge from="mint-wrapper" to="token-record-pda" path="straight" /%}
+{% edge from="token-record-pda" to="token-record" path="straight" /%}
+{% edge from="programmable-configs" to="ruleset" dashed=true arrow="none" animated=true /%}
+{% edge from="ruleset-revision" to="ruleset-revision-1" dashed=true arrow="none" animated=true toPosition="left" /%}
+{% /diagram %}
 
 ## 使用例：ロイヤルティの強制
 
-pNFTの主要な使用例の1つは、セカンダリセールでのロイヤルティの強制です。pNFTでは、すべての転送がToken Metadataプログラムを通過する必要があるため、作成者はロイヤルティ支払いを強制するルールを設定できます：
+pNFTについてより理解できたところで、pNFTで解決できる具体的な使用例を見てみましょう：ロイヤルティの強制。
 
-```ts
-// ロイヤルティを強制するルールセットを持つpNFTを作成
-await createV1(umi, {
-  mint,
-  name: 'Royalty Enforced NFT',
-  uri: 'https://example.com/royalty-nft.json',
-  sellerFeeBasisPoints: percentAmount(10), // 10%ロイヤルティ
-  tokenStandard: TokenStandard.ProgrammableNonFungible,
-  ruleSet: royaltyRuleSet, // ロイヤルティを強制するルールセット
-}).sendAndConfirm(umi)
-```
+上記で述べたように、pNFTがなければ、誰でもSPL Tokenプログラムと直接やり取りすることで、**Metadata**アカウントに保存されているロイヤルティパーセンテージをバイパスできます。これは、作成者がアセットとやり取りするユーザーやプログラムの善意に依存しなければならないことを意味します。
 
-これにより、pNFTが転送されるたびに、ロイヤルティが適切に支払われることが保証されます。
+しかし、pNFTを使用すれば、作成者は**ロイヤルティを強制しないプログラムがアセットの転送を実行することを禁止する** **Rule Set**を設計できます。ニーズに応じて、許可リストまたは拒否リストを作成するためにルールの組み合わせを使用できます。
+
+さらに、Rule Setは複数のpNFT間で共有および再利用できるため、作成者は**コミュニティRule Set**を作成および共有して、ロイヤルティのサポートを停止するプログラムが、そのようなコミュニティRule Setを使用するすべてのpNFTとのやり取りから即座に禁止されるようにできます。これは、プログラムがロイヤルティをサポートする強力なインセンティブを作成します。そうしなければ、多数のアセットとのやり取りから禁止されることになるからです。

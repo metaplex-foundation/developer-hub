@@ -1,7 +1,7 @@
 ---
-title: 토큰 출시하기
-metaTitle: 토큰 출시하기 | 토큰
-description: Solana에서 Genesis Launch Pools를 사용하여 토큰을 출시하는 전체 가이드입니다.
+title: Solana에서 토큰 런칭하기
+metaTitle: Solana에서 토큰 런칭하는 방법 | TGE & 페어 런칭 가이드 | Metaplex
+description: Solana에서 토큰 생성 이벤트(TGE)를 런칭하는 완전 가이드. Genesis Launch Pools를 사용한 페어 토큰 런칭을 단계별 TypeScript 코드로 생성합니다.
 ---
 
 [Genesis](/ko/smart-contracts/genesis) Launch Pools를 사용하여 토큰을 출시합니다. 사용자는 설정한 기간 동안 SOL을 예치하고, 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다. {% .lead %}

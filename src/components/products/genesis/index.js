@@ -10,7 +10,6 @@ export const genesis = {
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/genesis',
   icon: <SparklesIcon />,
-  github: 'https://github.com/metaplex-foundation/genesis',
   className: 'accent-pink',
   heroes: [{ path: '/smart-contracts/genesis', component: Hero }],
   protocolFees: {
@@ -47,6 +46,7 @@ export const genesis = {
   sections: [
     {
       ...documentationSection('smart-contracts/genesis'),
+      title: '',
       navigation: [
         {
           title: 'Introduction',
@@ -98,14 +98,11 @@ export const genesis = {
         },
       ],
     },
-   /* {
-      ...guidesSection('smart-contracts/genesis'),
-      navigation: [],
-    },
     {
       ...referencesSection('smart-contracts/genesis'),
-      navigation: [],
-    },*/ 
+      href: `https://mpl-genesis.typedoc.metaplex.com/`,
+      target: '_blank',
+    }, 
   ],
   localizedNavigation: {
     en: {

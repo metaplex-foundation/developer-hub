@@ -1,5 +1,6 @@
 ---
 title: SOL 余额
+metaTitle: SOL 余额 | Metaplex CLI
 description: 检查钱包地址的 SOL 余额
 ---
 

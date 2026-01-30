@@ -1,5 +1,6 @@
 ---
 title: 钱包
+metaTitle: 钱包 | Metaplex CLI
 description: 管理钱包配置
 ---
 

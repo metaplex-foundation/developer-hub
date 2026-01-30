@@ -1,5 +1,6 @@
 ---
 title: 创建资产
+metaTitle: 创建资产 | Metaplex CLI
 description: 使用不同方法创建 MPL Core 资产
 ---
 

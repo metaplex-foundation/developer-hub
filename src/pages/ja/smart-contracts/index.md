@@ -1,9 +1,8 @@
 ---
-title: スマートコントラクト
-metaTitle: スマートコントラクト | Metaplex
-description: Solana上でデジタルアセットを作成・管理するためのオンチェーンプログラム。
+title: Solanaスマートコントラクト
+metaTitle: Solanaスマートコントラクト＆プログラム | NFT・トークンインフラ | Metaplex
+description: NFT、トークン、デジタルアセット向けの本番環境対応Solanaスマートコントラクト。Core、Token Metadata、Candy Machine、Genesisなどで構築。
+tableOfContents: false
 ---
-
-Solana上でデジタルアセットを作成・管理するためのオンチェーンプログラム。 {% .lead %}
 
 {% product-card-grid category="Smart Contracts" /%}

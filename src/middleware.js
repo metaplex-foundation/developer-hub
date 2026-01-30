@@ -28,10 +28,6 @@ const devToolsRedirects = [
 
 // Standalone page redirects to new locations
 const standaloneRedirects = {
-  '/stability-index': '/smart-contracts/security',
-  '/ja/stability-index': '/ja/smart-contracts/security',
-  '/ko/stability-index': '/ko/smart-contracts/security',
-  '/zh/stability-index': '/zh/smart-contracts/security',
   // Legacy page redirects
   '/community-guides': '/guides',
   '/contact': '/',
@@ -45,6 +41,10 @@ const standaloneRedirects = {
 }
 
 const redirectRules = {
+  // Tokens guide URL restructure
+  '/tokens': {
+    '/guides/anchor-token-guide': '/tokens/anchor/create-token',
+  },
   // Legacy UMI redirects - these specific sub-paths redirect to new destinations
   '/umi': {
     '/web3js-adapters': '/dev-tools/umi/web3js-differences-and-adapters',

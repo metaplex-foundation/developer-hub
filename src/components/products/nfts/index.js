@@ -16,6 +16,12 @@ export const nfts = {
   sections: [
     {
       ...documentationSection('nfts'),
+      // Don't show navigation on the index page (like smart-contracts and dev-tools)
+      isFallbackSection: false,
+      isPageFromSection: ({ pathname }) => {
+        // Match subpages but not the exact index
+        return pathname.startsWith('/nfts/') && pathname !== '/nfts'
+      },
       navigation: [
         {
           title: 'Introduction',

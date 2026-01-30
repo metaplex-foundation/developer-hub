@@ -16,6 +16,24 @@ The API is public with rate limits. No authentication is required.
 https://api.metaplex.com/v1
 ```
 
+## Network Selection
+
+By default, the API returns data from Solana mainnet. To query devnet launches instead, add the `network` query parameter:
+
+```
+?network=solana-devnet
+```
+
+**Example:**
+
+```bash
+# Mainnet (default)
+curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
+
+# Devnet
+curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN?network=solana-devnet"
+```
+
 ## Use Cases
 
 - **`/launches/{genesis_pubkey}`** - Use when you have a genesis address, such as from an on-chain event or transaction log.
