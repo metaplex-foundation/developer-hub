@@ -7,8 +7,6 @@ import { MobileNavigation } from '@/components/MobileNavigation'
 import { Search } from '@/components/Search'
 // import { ThemeSelector } from '@/components/ThemeSelector'
 import { DiscordIcon } from '@/components/icons/SocialIcons'
-import { IconWithName } from '@/components/products/IconWithName'
-import { Sections } from '@/components/products/Sections'
 import { getLocalizedHref } from '@/config/languages'
 import { useLocale } from '@/contexts/LocaleContext'
 import NavList from './NavList'
@@ -71,22 +69,6 @@ export function Header({ page }) {
         </div>
       </div>
 
-      {!page.product.isJsxPage &&
-        page.product.sections &&
-        page.product.sections.length > 1 && (
-          <div className="mx-auto hidden max-w-[1800px] justify-center px-8 py-2 md:flex xl:px-12">
-            <IconWithName
-              product={page.product}
-              className="hidden items-center lg:flex"
-            />
-
-            <Sections
-              className="flex gap-6 px-2 py-2 text-sm sm:px-4 lg:px-6 "
-              sections={page.product.sections}
-              activeSectionId={page.activeSection?.id}
-            />
-          </div>
-        )}
     </header>
   )
 }

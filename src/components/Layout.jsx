@@ -99,20 +99,19 @@ export function Layout({ children, page }) {
       {!isHomePage && !isCategoryIndexPage && (
         <div
           className={clsx(
-            'relative mx-auto flex max-w-[1800px] justify-center sm:px-2 lg:px-8 xl:px-12'
+            'relative mx-auto flex max-w-[1800px] sm:px-2 lg:px-8 xl:px-12'
           )}
         >
           {/* Navigation. */}
           {hasNavigation && !page.product.isFallbackProduct && (
-            <div className="hidden lg:relative lg:block lg:flex-none scrollbar">
-              <div className="absolute inset-y-0 right-0 w-[50vw] bg-sidebar dark:hidden" />
-              <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-border dark:block" />
-              <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-border dark:block" />
-              <div className="sticky top-[133px] -ml-0.5 h-[calc(100vh-133px)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
+            <div className="hidden lg:relative lg:block lg:flex-none scrollbar border-r border-border">
+              <div className="sticky top-[73px] -ml-0.5 h-[calc(100vh-73px)] overflow-y-auto overflow-x-hidden py-8 pl-0.5">
                 <Navigation
                   product={page.product}
                   navigation={page.activeSection.navigation}
-                  className="w-64 pr-8 xl:w-72 xl:pr-16"
+                  sections={page.product.sections}
+                  activeSectionId={page.activeSection?.id}
+                  className="w-56 pr-8 xl:w-64 xl:pr-12"
                 />
               </div>
             </div>
@@ -121,7 +120,7 @@ export function Layout({ children, page }) {
           {/* Content. */}
           <div
             className={clsx(
-              'min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-[1200px]',
+              'min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-3xl xl:max-w-4xl mx-auto',
               hasNavigation ? 'lg:pl-8 lg:pr-0 xl:px-16' : 'lg:pl-0 lg:pr-16'
             )}
           >

@@ -5,8 +5,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Badge from './products/Badge'
+import { Sections } from './products/Sections'
 
-export function Navigation({ product, navigation, className, hideProductHeader = false }) {
+export function Navigation({ product, navigation, className, hideProductHeader = false, sections, activeSectionId }) {
   let router = useRouter()
   const { locale } = useLocale()
   const [currentPath, setCurrentPath] = useState('')
@@ -41,7 +42,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
   return (
     <nav className={clsx('text-base lg:text-sm text-muted-foreground', className)}>
       {!hideProductHeader && product?.name && (
-        <div className="mb-8">
+        <div className="mb-6">
           <Link
             href={getLocalizedHref(`/${product.path}`, locale)}
             className="font-display text-lg font-bold text-foreground hover:text-primary"
@@ -54,6 +55,14 @@ export function Navigation({ product, navigation, className, hideProductHeader =
             </p>
           )}
         </div>
+      )}
+      {/* Section tabs (Documentation, Guides, API References) */}
+      {sections && sections.length > 1 && (
+        <Sections
+          className="mb-8 flex flex-col gap-1"
+          sections={sections}
+          activeSectionId={activeSectionId}
+        />
       )}
       <ul role="list" className="space-y-9">
         {navigation.map((section) => (
