@@ -138,6 +138,16 @@ export function Layout({ children, page }) {
                       {page.title}
                     </h1>
                   )}
+                  {page.updated && (
+                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                      Last updated{' '}
+                      {new Date(page.updated).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </p>
+                  )}
                 </header>
               )}
               <Prose className="break-words">{children}</Prose>
