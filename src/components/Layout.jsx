@@ -129,7 +129,7 @@ export function Layout({ children, page }) {
               {!isCodeViewer && (page.title || page.activeSection?.navigationGroup) && (
                 <header className="mb-9 space-y-1">
                   {page.activeSection?.navigationGroup && (
-                    <p className="font-display text-sm font-medium text-accent-400">
+                    <p className="font-display text-sm font-medium text-primary">
                       {page.activeSection.navigationGroup.title}
                     </p>
                   )}
