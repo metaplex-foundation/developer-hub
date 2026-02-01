@@ -1,188 +1,380 @@
 ---
 title: JavaScript SDK
-metaTitle: JavaScript SDK | Genesis
-description: Learn how to install and configure the Genesis JavaScript SDK for token launches on Solana.
+metaTitle: JavaScript SDK | Genesis | Metaplex
+description: API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - Genesis SDK
+  - JavaScript SDK
+  - TypeScript SDK
+  - token launch SDK
+  - Umi framework
+  - Genesis API reference
+about:
+  - SDK installation
+  - API reference
+  - Genesis instructions
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What is Umi and why is it required?
+    a: Umi is Metaplex's JavaScript framework for Solana. It provides a consistent interface for building transactions, managing signers, and interacting with Metaplex programs.
+  - q: Can I use the Genesis SDK in a browser?
+    a: Yes. The SDK works in both Node.js and browser environments. For browsers, use a wallet adapter for signing instead of keypair files.
+  - q: What's the difference between fetch and safeFetch?
+    a: fetch throws an error if the account doesn't exist. safeFetch returns null instead, useful for checking if an account exists without error handling.
+  - q: How do I handle transaction errors?
+    a: Wrap sendAndConfirm calls in try/catch blocks. Common errors include insufficient funds, already-initialized accounts, and time condition violations.
 ---
 
-Metaplex provides a JavaScript library for interacting with the Genesis program. Built on the [Umi Framework](/umi), it ships as a lightweight library that can be used in any JavaScript or TypeScript project.
+API reference for the Genesis JavaScript SDK. For complete tutorials, see [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale). {% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="API Reference" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="Genesis JavaScript SDK generated API documentation." /%}
+{% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
 
-{% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="Genesis JavaScript SDK on NPM." /%}
+{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="Auto-generated API docs" /%}
 
 {% /quick-links %}
 
 ## Installation
 
-Install the Genesis SDK along with the required Metaplex and Solana dependencies:
-
 ```bash
-npm install \
-  @metaplex-foundation/genesis \
-  @metaplex-foundation/umi \
-  @metaplex-foundation/umi-bundle-defaults \
-  @metaplex-foundation/mpl-toolbox \
+npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
+  @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox \
   @metaplex-foundation/mpl-token-metadata
 ```
 
-### Package Overview
-
-| Package | Purpose |
-|---------|---------|
-| `@metaplex-foundation/genesis` | Core Genesis SDK with all instructions and helpers |
-| `@metaplex-foundation/umi` | Metaplex's Solana framework for building transactions |
-| `@metaplex-foundation/umi-bundle-defaults` | Default Umi plugins and configuration |
-| `@metaplex-foundation/mpl-toolbox` | Utilities for working with SPL tokens |
-| `@metaplex-foundation/mpl-token-metadata` | Token metadata program integration |
-
-## Umi Setup
-
-The Genesis SDK is built on top of [Umi](/dev-tools/umi), Metaplex's JavaScript framework for Solana. If you haven't set up Umi yet, check out the [Umi Getting Started](/dev-tools/umi/getting-started) guide.
-
-### Basic Configuration
+## Setup
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { genesis } from '@metaplex-foundation/genesis';
 import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata';
 
-// Create and configure Umi instance
 const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(genesis())
   .use(mplTokenMetadata());
 ```
 
-The `genesis()` plugin registers all Genesis instructions and account deserializers with Umi. The `mplTokenMetadata()` plugin is required because Genesis creates tokens with metadata.
+For complete implementation examples, see [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale).
 
-### Development vs Production
+---
+
+## Instructions Reference
+
+### Core
+
+| Function | Description |
+|----------|-------------|
+| [initializeV2()](#initialize-v2) | Create Genesis Account and mint token |
+| [finalizeV2()](#finalize-v2) | Lock configuration, activate launch |
+
+### Buckets
+
+| Function | Description |
+|----------|-------------|
+| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | Add proportional distribution bucket |
+| [addPresaleBucketV2()](#add-presale-bucket-v2) | Add fixed-price sale bucket |
+| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | Add treasury/recipient bucket |
+
+### Launch Pool Operations
+
+| Function | Description |
+|----------|-------------|
+| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Deposit SOL into Launch Pool |
+| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | Withdraw SOL (during deposit period) |
+| [claimLaunchPoolV2()](#claim-launch-pool-v2) | Claim tokens (after deposit period) |
+
+### Presale Operations
+
+| Function | Description |
+|----------|-------------|
+| [depositPresaleV2()](#deposit-presale-v2) | Deposit SOL into Presale |
+| [claimPresaleV2()](#claim-presale-v2) | Claim tokens (after deposit period) |
+
+### Admin
+
+| Function | Description |
+|----------|-------------|
+| [transitionV2()](#transition-v2) | Execute end behaviors |
+| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | Permanently revoke mint authority |
+| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | Permanently revoke freeze authority |
+
+---
+
+## Function Signatures
+
+### initializeV2
 
 ```typescript
-// Development: Use devnet
-const umi = createUmi('https://api.devnet.solana.com')
-  .use(genesis())
-  .use(mplTokenMetadata());
-
-// Production: Use mainnet with a reliable RPC
-const umi = createUmi('https://your-rpc-provider.com')
-  .use(genesis())
-  .use(mplTokenMetadata());
+await initializeV2(umi, {
+  baseMint,           // Signer - new token keypair
+  quoteMint,          // PublicKey - deposit token (wSOL)
+  fundingMode,        // number - use 0
+  totalSupplyBaseToken, // bigint - supply with decimals
+  name,               // string - token name
+  symbol,             // string - token symbol
+  uri,                // string - metadata URI
+}).sendAndConfirm(umi);
 ```
 
-## Setting Up Signers
-
-Genesis operations require signers for transaction authorization. For backend operations, you'll typically use a keypair loaded from an environment variable.
-
-### Creating a Signer from Secret Key
+### finalizeV2
 
 ```typescript
-import {
-  createSignerFromKeypair,
-  signerIdentity,
-  type Signer,
-  type Umi,
-} from '@metaplex-foundation/umi';
-
-// Helper to create a signer from a JSON-encoded secret key
-const createSignerFromSecretKeyString = (
-  umi: Umi,
-  secretKeyString: string
-): Signer => {
-  const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
-  const keypair = umi.eddsa.createKeypairFromSecretKey(secretKey);
-  return createSignerFromKeypair(umi, keypair);
-};
-
-// Load your backend signer from environment
-const backendSigner = createSignerFromSecretKeyString(
-  umi,
-  process.env.BACKEND_KEYPAIR!
-);
-
-// Set as the default identity for transactions
-umi.use(signerIdentity(backendSigner));
+await finalizeV2(umi, {
+  baseMint,           // PublicKey
+  genesisAccount,     // PublicKey
+}).sendAndConfirm(umi);
 ```
 
-{% callout type="warning" %}
-**Security Note**: Never commit keypairs to version control. Use environment variables, AWS KMS, GCP Secret Manager, or hardware wallets for production deployments.
-{% /callout %}
-
-### Complete Setup Example
-
-Here's a complete setup with all the imports you'll need:
+### addLaunchPoolBucketV2
 
 ```typescript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import {
-  createSignerFromKeypair,
-  generateSigner,
-  signerIdentity,
-  publicKey,
-  type Signer,
-  type Umi,
-} from '@metaplex-foundation/umi';
-import {
-  genesis,
-  initializeV2,
-  addLaunchPoolBucketV2,
-  addUnlockedBucketV2,
-  finalizeV2,
-  findGenesisAccountV2Pda,
-} from '@metaplex-foundation/genesis';
-import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata';
-
-// Initialize Umi
-const umi = createUmi('https://api.mainnet-beta.solana.com')
-  .use(genesis())
-  .use(mplTokenMetadata());
-
-// Set up backend signer
-const createSignerFromSecretKeyString = (umi: Umi, secretKeyString: string): Signer => {
-  const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
-  const keypair = umi.eddsa.createKeypairFromSecretKey(secretKey);
-  return createSignerFromKeypair(umi, keypair);
-};
-
-const backendSigner = createSignerFromSecretKeyString(umi, process.env.BACKEND_KEYPAIR!);
-umi.use(signerIdentity(backendSigner));
-
-console.log('Umi configured with backend signer:', backendSigner.publicKey);
+await addLaunchPoolBucketV2(umi, {
+  genesisAccount,           // PublicKey
+  baseMint,                 // PublicKey
+  baseTokenAllocation,      // bigint - tokens for this bucket
+  depositStartCondition,    // TimeCondition
+  depositEndCondition,      // TimeCondition
+  claimStartCondition,      // TimeCondition
+  claimEndCondition,        // TimeCondition
+  minimumDepositAmount,     // bigint | null
+  endBehaviors,             // EndBehavior[]
+}).sendAndConfirm(umi);
 ```
 
-## Error Handling
+### addPresaleBucketV2
 
 ```typescript
-try {
-  await initializeV2(umi, { ... }).sendAndConfirm(umi);
-  console.log('Success!');
-} catch (error) {
-  if (error.message.includes('insufficient funds')) {
-    console.error('Not enough SOL for transaction fees');
-  } else if (error.message.includes('already initialized')) {
-    console.error('Genesis Account already exists');
-  } else {
-    console.error('Transaction failed:', error);
-  }
+await addPresaleBucketV2(umi, {
+  genesisAccount,           // PublicKey
+  baseMint,                 // PublicKey
+  baseTokenAllocation,      // bigint
+  allocationQuoteTokenCap,  // bigint - SOL cap (sets price)
+  depositStartCondition,    // TimeCondition
+  depositEndCondition,      // TimeCondition
+  claimStartCondition,      // TimeCondition
+  claimEndCondition,        // TimeCondition
+  minimumDepositAmount,     // bigint | null
+  depositLimit,             // bigint | null - max per user
+  endBehaviors,             // EndBehavior[]
+}).sendAndConfirm(umi);
+```
+
+### addUnlockedBucketV2
+
+```typescript
+await addUnlockedBucketV2(umi, {
+  genesisAccount,       // PublicKey
+  baseMint,             // PublicKey
+  baseTokenAllocation,  // bigint - usually 0n
+  recipient,            // PublicKey - who can claim
+  claimStartCondition,  // TimeCondition
+  claimEndCondition,    // TimeCondition
+  backendSigner,        // { signer: PublicKey } | null
+}).sendAndConfirm(umi);
+```
+
+### depositLaunchPoolV2
+
+```typescript
+await depositLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  amountQuoteToken,   // bigint - lamports
+}).sendAndConfirm(umi);
+```
+
+### depositPresaleV2
+
+```typescript
+await depositPresaleV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  amountQuoteToken,   // bigint - lamports
+}).sendAndConfirm(umi);
+```
+
+### withdrawLaunchPoolV2
+
+```typescript
+await withdrawLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  amountQuoteToken,   // bigint - lamports
+}).sendAndConfirm(umi);
+```
+
+### claimLaunchPoolV2
+
+```typescript
+await claimLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  recipient,          // PublicKey
+}).sendAndConfirm(umi);
+```
+
+### claimPresaleV2
+
+```typescript
+await claimPresaleV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  recipient,          // PublicKey
+}).sendAndConfirm(umi);
+```
+
+### transitionV2
+
+```typescript
+await transitionV2(umi, {
+  genesisAccount,     // PublicKey
+  primaryBucket,      // PublicKey
+  baseMint,           // PublicKey
+})
+  .addRemainingAccounts([/* destination accounts */])
+  .sendAndConfirm(umi);
+```
+
+### revokeMintAuthorityV2
+
+```typescript
+await revokeMintAuthorityV2(umi, {
+  baseMint,           // PublicKey
+}).sendAndConfirm(umi);
+```
+
+### revokeFreezeAuthorityV2
+
+```typescript
+await revokeFreezeAuthorityV2(umi, {
+  baseMint,           // PublicKey
+}).sendAndConfirm(umi);
+```
+
+---
+
+## PDA Helpers
+
+| Function | Seeds |
+|----------|-------|
+| findGenesisAccountV2Pda() | `baseMint`, `genesisIndex` |
+| findLaunchPoolBucketV2Pda() | `genesisAccount`, `bucketIndex` |
+| findPresaleBucketV2Pda() | `genesisAccount`, `bucketIndex` |
+| findUnlockedBucketV2Pda() | `genesisAccount`, `bucketIndex` |
+| findLaunchPoolDepositV2Pda() | `bucket`, `recipient` |
+| findPresaleDepositV2Pda() | `bucket`, `recipient` |
+
+```typescript
+const [genesisAccountPda] = findGenesisAccountV2Pda(umi, { baseMint: mint.publicKey, genesisIndex: 0 });
+const [bucketPda] = findLaunchPoolBucketV2Pda(umi, { genesisAccount: genesisAccountPda, bucketIndex: 0 });
+const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipient: wallet });
+```
+
+---
+
+## Fetch Functions
+
+| Function | Returns |
+|----------|---------|
+| fetchLaunchPoolBucketV2() | Bucket state (throws if missing) |
+| safeFetchLaunchPoolBucketV2() | Bucket state or `null` |
+| fetchPresaleBucketV2() | Bucket state (throws if missing) |
+| safeFetchPresaleBucketV2() | Bucket state or `null` |
+| fetchLaunchPoolDepositV2() | Deposit state (throws if missing) |
+| safeFetchLaunchPoolDepositV2() | Deposit state or `null` |
+| fetchPresaleDepositV2() | Deposit state (throws if missing) |
+| safeFetchPresaleDepositV2() | Deposit state or `null` |
+
+```typescript
+const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
+const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
+```
+
+**Bucket state fields:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
+
+**Deposit state fields:** `amountQuoteToken`, `claimed`
+
+---
+
+## Types
+
+### TimeCondition
+
+```typescript
+{
+  __kind: 'TimeAbsolute',
+  padding: Array(47).fill(0),
+  time: bigint,                    // Unix timestamp (seconds)
+  triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
 }
 ```
 
-## Transaction Confirmation
+### EndBehavior
 
 ```typescript
-// Wait for finalized confirmation (most secure)
-const result = await initializeV2(umi, { ... })
-  .sendAndConfirm(umi, {
-    confirm: { commitment: 'finalized' }
-  });
-
-console.log('Transaction signature:', result.signature);
+{
+  __kind: 'SendQuoteTokenPercentage',
+  padding: Array(4).fill(0),
+  destinationBucket: PublicKey,
+  percentageBps: number,           // 10000 = 100%
+  processed: false,
+}
 ```
+
+---
+
+## Constants
+
+| Constant | Value |
+|----------|-------|
+| `WRAPPED_SOL_MINT` | `So11111111111111111111111111111111111111112` |
+| `NOT_TRIGGERED_TIMESTAMP` | Use in time conditions |
+
+---
+
+## Common Errors
+
+| Error | Cause |
+|-------|-------|
+| `insufficient funds` | Not enough SOL for fees |
+| `already initialized` | Genesis Account exists |
+| `already finalized` | Cannot modify after finalization |
+| `deposit period not active` | Outside deposit window |
+| `claim period not active` | Outside claim window |
+
+---
+
+## FAQ
+
+### What is Umi and why is it required?
+Umi is Metaplex's JavaScript framework for Solana. It provides a consistent interface for building transactions, managing signers, and interacting with Metaplex programs.
+
+### Can I use the Genesis SDK in a browser?
+Yes. The SDK works in both Node.js and browser environments. For browsers, use a wallet adapter for signing instead of keypair files.
+
+### What's the difference between fetch and safeFetch?
+`fetch` throws an error if the account doesn't exist. `safeFetch` returns `null` instead, useful for checking if an account exists.
+
+### How do I handle transaction errors?
+Wrap `sendAndConfirm` calls in try/catch blocks. Check error messages for specific failure reasons.
+
+---
 
 ## Next Steps
 
-With your Umi instance configured with the Genesis program, you're ready to start building. Explore the Genesis features:
+For complete implementation tutorials:
 
-- **[Launch Pool](/smart-contracts/genesis/launch-pool)** - Token distribution with deposit windows
-- **[Presale](/smart-contracts/genesis/presale)** - Pre-deposit collection before trading
-- **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** - Time-based auction with uniform clearing price
+- [Getting Started](/smart-contracts/genesis/getting-started) - Setup and first launch
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - Proportional distribution
+- [Presale](/smart-contracts/genesis/presale) - Fixed-price sales
