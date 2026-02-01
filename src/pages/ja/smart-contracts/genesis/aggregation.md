@@ -1,60 +1,102 @@
 ---
-title: アグリゲーションAPI
-metaTitle: Genesis - アグリゲーションAPI
-description: genesisアドレスまたはトークンミントでGenesisローンチデータを照会するパブリックAPI。
+title: Aggregation API
+metaTitle: Genesis - Aggregation API | Launch Data | Metaplex
+description: Public API for querying Genesis launch data by genesis address or token mint. Includes on-chain state fetching.
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - Genesis API
+  - aggregation API
+  - launch data
+  - token queries
+  - on-chain state
+about:
+  - API integration
+  - Data aggregation
+  - Launch information
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: What's the difference between the API and on-chain fetching?
+    a: The API returns aggregated metadata (socials, images). On-chain fetching via the SDK returns real-time state like deposit totals and time conditions.
+  - q: How do I get real-time deposit totals?
+    a: Use fetchLaunchPoolBucketV2 or fetchPresaleBucketV2 from the Genesis SDK to read current on-chain state.
+  - q: Can I query time conditions for a bucket?
+    a: Yes. Fetch the bucket account and access depositStartCondition, depositEndCondition, claimStartCondition, and claimEndCondition.
+  - q: How do I check if a user has deposited?
+    a: Use safeFetchLaunchPoolDepositV2 or safeFetchPresaleDepositV2 with the deposit PDA. It returns null if no deposit exists.
 ---
 
-Genesis APIにより、アグリゲーターやアプリケーションはGenesisトークンローンチからのデータを照会できます。これらのエンドポイントを使用して、アプリケーションにローンチ情報、トークンメタデータ、ソーシャルリンクを表示してください。
+The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application. {% .lead %}
 
-{% callout type="note" %}
-APIはレート制限付きのパブリックAPIです。認証は不要です。
+{% callout title="What You'll Learn" %}
+This reference covers:
+- HTTP API endpoints for launch metadata
+- On-chain state fetching with the JavaScript SDK
+- TypeScript and Rust type definitions
+- Real-time bucket and deposit state
 {% /callout %}
 
-## ベースURL
+## Summary
+
+Access Genesis data through the HTTP API for metadata or the SDK for real-time on-chain state.
+
+- HTTP API returns launch info, token metadata, socials
+- SDK provides real-time state: deposits, counts, time conditions
+- No authentication required for HTTP API
+- On-chain fetching requires Umi and the Genesis SDK
+
+{% callout type="note" %}
+The API is public with rate limits. No authentication is required.
+{% /callout %}
+
+## Base URL
 
 ```
 https://api.metaplex.com/v1
 ```
 
-## ネットワーク選択
+## Network Selection
 
-デフォルトでは、APIはSolanaメインネットからデータを返します。代わりにdevnetのローンチを照会するには、`network`クエリパラメータを追加します：
+By default, the API returns data from Solana mainnet. To query devnet launches instead, add the `network` query parameter:
 
 ```
 ?network=solana-devnet
 ```
 
-**例：**
+**Example:**
 
 ```bash
-# メインネット（デフォルト）
+# Mainnet (default)
 curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
 
 # Devnet
 curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN?network=solana-devnet"
 ```
 
+## Use Cases
 
-## ユースケース
+- **`/launches/{genesis_pubkey}`** - Use when you have a genesis address, such as from an on-chain event or transaction log.
+- **`/tokens/{mint}`** - Use when you only know the token mint address. Returns all launches associated with that token (a token can have multiple launch campaigns).
 
-- **`/launches/{genesis_pubkey}`** - オンチェーンイベントやトランザクションログからのgenesisアドレスがある場合に使用します。
-- **`/tokens/{mint}`** - トークンミントアドレスのみを知っている場合に使用します。そのトークンに関連するすべてのローンチを返します（トークンは複数のローンチキャンペーンを持つことができます）。
+## Endpoints
 
-## エンドポイント
-
-### Genesisアドレスでローンチを取得
+### Get Launch by Genesis Address
 
 ```
 GET /launches/{genesis_pubkey}
 ```
 
-**リクエスト例:**
+**Example Request:**
 
 ```bash
 curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
 ```
 
-**レスポンス:**
+**Response:**
 
 ```json
 {
@@ -69,7 +111,7 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
       "name": "My Token",
       "symbol": "MTK",
       "image": "https://example.com/token-image.png",
-      "description": "サンプルエコシステムのためのコミュニティ主導トークン。"
+      "description": "A community-driven token for the example ecosystem."
     },
     "website": "https://example.com",
     "socials": {
@@ -81,21 +123,21 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
 }
 ```
 
-### トークンミントでローンチを取得
+### Get Launches by Token Mint
 
 ```
 GET /tokens/{mint}
 ```
 
-トークンのすべてのローンチを返します。`launches`が配列であることを除き、レスポンスは同一です。
+Returns all launches for a token. The response is identical except `launches` is an array.
 
-**リクエスト例:**
+**Example Request:**
 
 ```bash
 curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
 ```
 
-**レスポンス:**
+**Response:**
 
 ```json
 {
@@ -112,7 +154,7 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
       "name": "My Token",
       "symbol": "MTK",
       "image": "https://example.com/token-image.png",
-      "description": "サンプルエコシステムのためのコミュニティ主導トークン。"
+      "description": "A community-driven token for the example ecosystem."
     },
     "website": "https://example.com",
     "socials": {
@@ -125,10 +167,10 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
 ```
 
 {% callout type="note" %}
-genesis pubkeyを見つけるにはインデックス作成または`getProgramAccounts`が必要です。トークンミントのみの場合は、代わりに`/tokens`エンドポイントを使用してください。
+Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only have a token mint, use the `/tokens` endpoint instead.
 {% /callout %}
 
-## エラー
+## Errors
 
 ```json
 {
@@ -138,14 +180,14 @@ genesis pubkeyを見つけるにはインデックス作成または`getProgramA
 }
 ```
 
-| コード | 説明 |
+| Code | Description |
 | --- | --- |
-| `400` | 不正なリクエスト - 無効なパラメータ |
-| `404` | ローンチまたはトークンが見つからない |
-| `429` | レート制限超過 |
-| `500` | 内部サーバーエラー |
+| `400` | Bad request - invalid parameters |
+| `404` | Launch or token not found |
+| `429` | Rate limit exceeded |
+| `500` | Internal server error |
 
-## 型と例
+## Types & Examples
 
 ### TypeScript
 
@@ -195,7 +237,7 @@ interface ErrorResponse {
 }
 ```
 
-**例:**
+**Example:**
 
 ```ts
 const response = await fetch(
@@ -275,7 +317,7 @@ pub struct ErrorResponse {
 }
 ```
 
-**例:**
+**Example:**
 
 ```rust
 let response: LaunchResponse = reqwest::get(
@@ -289,7 +331,7 @@ println!("{}", response.data.base_token.name); // "My Token"
 ```
 
 {% callout type="note" %}
-`Cargo.toml`に以下の依存関係を追加してください：
+Add these dependencies to your `Cargo.toml`:
 ```toml
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
@@ -298,45 +340,45 @@ serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
 
-## オンチェーン状態の取得（JavaScript SDK）
+## Fetching On-Chain State (JavaScript SDK)
 
-HTTP APIに加えて、Genesis JavaScript SDKを使用してブロックチェーンから直接ローンチ状態を取得できます。これは預金総額や時間条件などのリアルタイムデータを取得するのに便利です。
+In addition to the HTTP API, you can fetch launch state directly from the blockchain using the Genesis JavaScript SDK. This is useful for getting real-time data like deposit totals and time conditions.
 
-### バケット状態
+### Bucket State
 
 ```typescript
 import { fetchLaunchPoolBucketV2 } from '@metaplex-foundation/genesis';
 
 const bucket = await fetchLaunchPoolBucketV2(umi, launchPoolBucket);
 
-console.log('総預金額:', bucket.quoteTokenDepositTotal);
-console.log('預金回数:', bucket.depositCount);
-console.log('請求回数:', bucket.claimCount);
-console.log('トークン割り当て:', bucket.bucket.baseTokenAllocation);
+console.log('Total deposits:', bucket.quoteTokenDepositTotal);
+console.log('Deposit count:', bucket.depositCount);
+console.log('Claim count:', bucket.claimCount);
+console.log('Token allocation:', bucket.bucket.baseTokenAllocation);
 ```
 
-### 時間条件
+### Time Conditions
 
-各バケットにはローンチフェーズを制御する4つの時間条件があります：
+Each bucket has four time conditions that control the launch phases:
 
 ```typescript
 const bucket = await fetchLaunchPoolBucketV2(umi, launchPoolBucket);
 
-// 預金期間
+// Deposit window
 const depositStart = bucket.depositStartCondition.time;
 const depositEnd = bucket.depositEndCondition.time;
 
-// 請求期間
+// Claim window
 const claimStart = bucket.claimStartCondition.time;
 const claimEnd = bucket.claimEndCondition.time;
 
-console.log('預金開始:', new Date(Number(depositStart) * 1000));
-console.log('預金終了:', new Date(Number(depositEnd) * 1000));
-console.log('請求開始:', new Date(Number(claimStart) * 1000));
-console.log('請求終了:', new Date(Number(claimEnd) * 1000));
+console.log('Deposit starts:', new Date(Number(depositStart) * 1000));
+console.log('Deposit ends:', new Date(Number(depositEnd) * 1000));
+console.log('Claims start:', new Date(Number(claimStart) * 1000));
+console.log('Claims end:', new Date(Number(claimEnd) * 1000));
 ```
 
-### 預金状態
+### Deposit State
 
 ```typescript
 import {
@@ -344,14 +386,44 @@ import {
   safeFetchLaunchPoolDepositV2,
 } from '@metaplex-foundation/genesis';
 
-// 見つからない場合はエラーをスロー
+// Throws if not found
 const deposit = await fetchLaunchPoolDepositV2(umi, depositPda);
 
-// 見つからない場合はnullを返す
+// Returns null if not found
 const maybeDeposit = await safeFetchLaunchPoolDepositV2(umi, depositPda);
 
 if (deposit) {
-  console.log('金額:', deposit.amountQuoteToken);
-  console.log('請求済み:', deposit.claimed);
+  console.log('Amount:', deposit.amountQuoteToken);
+  console.log('Claimed:', deposit.claimed);
 }
 ```
+
+## FAQ
+
+### What's the difference between the API and on-chain fetching?
+The API returns aggregated metadata (socials, images). On-chain fetching via the SDK returns real-time state like deposit totals and time conditions.
+
+### How do I get real-time deposit totals?
+Use `fetchLaunchPoolBucketV2` or `fetchPresaleBucketV2` from the Genesis SDK to read current on-chain state.
+
+### Can I query time conditions for a bucket?
+Yes. Fetch the bucket account and access `depositStartCondition`, `depositEndCondition`, `claimStartCondition`, and `claimEndCondition`.
+
+### How do I check if a user has deposited?
+Use `safeFetchLaunchPoolDepositV2` or `safeFetchPresaleDepositV2` with the deposit PDA. It returns null if no deposit exists.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Aggregation** | Collecting and normalizing data from multiple sources |
+| **Bucket State** | Current on-chain data including deposit totals and counts |
+| **Time Condition** | Unix timestamp controlling when a phase starts or ends |
+| **Deposit PDA** | Program-derived address storing a user's deposit record |
+| **safeFetch** | Fetch variant that returns null instead of throwing on missing accounts |
+
+## Next Steps
+
+- [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) - Full SDK setup and configuration
+- [API Reference](/smart-contracts/genesis/api) - HTTP API endpoint details
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - Proportional distribution setup

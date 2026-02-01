@@ -1,157 +1,161 @@
 ---
-title: Genesis - Solanaトークンローンチスマートコントラクト
-metaTitle: Genesis | Solana TGE・トークンローンチプラットフォーム | フェアローンチ | Metaplex
-description: Genesisスマートコントラクトでsolanaトークンをローンチ。トークン生成イベント（TGE）、フェアローンチ、ICO、価格販売、ローンチプールをオンチェーンで構築。
+title: Genesis - Solana Token Launch Smart Contract
+metaTitle: Genesis | Solana TGE & Token Launch Platform | Fair Launch | Metaplex
+description: Launch tokens on Solana with Genesis smart contract. Build token generation events (TGE), fair launches, ICOs, priced sales, and launch pools on-chain.
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - token launch
+  - TGE
+  - token generation event
+  - fair launch
+  - ICO
+  - launch pool
+  - presale
+  - Solana token
+about:
+  - Token launches
+  - Genesis protocol
+  - Fair distribution
+proficiencyLevel: Beginner
+faqs:
+  - q: What is Genesis?
+    a: Genesis is a Metaplex smart contract for Token Generation Events (TGE) on Solana. It provides on-chain infrastructure for presales, launch pools, and auctions.
+  - q: What launch mechanisms does Genesis support?
+    a: Genesis supports three mechanisms - Presale (fixed price), Launch Pool (proportional distribution with price discovery), and Uniform Price Auction (bid-based with clearing price).
+  - q: How much does it cost to use Genesis?
+    a: Genesis charges a 2% protocol fee on deposits. There are no upfront costs - you only pay Solana transaction fees plus the protocol fee on funds raised.
+  - q: Can I revoke token authorities after launch?
+    a: Yes. Genesis provides instructions to revoke mint and freeze authorities, signaling to holders that no additional tokens can be minted.
+  - q: What's the difference between Launch Pool and Presale?
+    a: Presale has a fixed price set upfront. Launch Pool discovers price organically based on total deposits - more deposits means higher implied price per token.
 ---
 
-Genesisは、Solanaブロックチェーン上で**トークン生成イベント（TGE）**のための柔軟なフレームワークを提供するMetaplexスマートコントラクトです。プリセールで新しいトークンをローンチする場合でも、カスタムトークン配布システムを構築する場合でも、Genesisはそれを実現するためのオンチェーンインフラストラクチャを提供します。
+**Genesis** is a Metaplex smart contract for **Token Generation Events (TGE)** on Solana. Build presales, launch pools, and auctions with on-chain coordination for token creation, distribution, and fund collection. {% .lead %}
 
-## Genesisで何が作れますか？
-
-Genesisは、カスタムトークンローンチ体験を作成するために組み合わせることができる複数のローンチメカニズムをサポートしています：
-
-| メカニズム | 説明 | メリット |
-|-----------|-------------|----------|
-| **Presale** | 固定価格トークン販売 | 固定価格により複雑さと投機を軽減。先着順方式により早期参加を促進。正確な需要予測でより予測可能な結果。希望に応じてキャップとウォレットゲートを実装可能。 |
-| **Launch Pool** | 固定価格なし–終了時の総預金額で最終価格が決定 | キャップなしで自然な価格発見。ゲートなしでエコシステム全体の参加を許可。時間ベースのローンチプールでスナイピングとフロントランニングを防止し、よりオープン/アクセス可能なアクセスを提供。希望に応じてキャップとウォレットゲートを実装可能。 |
-| **Uniform Price Auction** | ユーザーが特定の価格で特定数量のトークンに入札する時間ベースのオークション。入札は公開または非公開可能。すべての落札者はクリアリング価格でトークンを受け取ります。 | 特に大口投資家/ファンド間での価格発見を促進。ゲート/非ゲート可能。 |
-
-### ユースケース例：Launch Pool
-
-プロジェクトが以下のようなトークンをローンチしたいとします：
-1. ユーザーがローンチプール期間中にSOLを預金
-2. 預金期間終了後、トークンが預金額に比例して配布
-3. 収集されたSOLはチームが請求できるようにアンロックバケットに送信
-
-Genesisはこの全フローを単一の統合されたオンチェーンシステムで可能にします。
-
-## コアコンセプト
-
-### Genesisアカウント
-
-Genesisアカウントはトークンローンチの中央調整者です。Genesisアカウントを初期化すると、以下が作成されます：
-
-- メタデータ（名前、シンボル、URI）を持つ新しいSPLトークン
-- 発行されたすべてのトークンを保持するマスターアカウント
-- トークン配布方法を制御する「バケット」を追加するための基盤
-
-Genesisアカウントをトークンローンチの「頭脳」と考えてください—トークン供給を管理し、すべての異なる配布メカニズムを調整します。
-
-### バケット
-
-バケットはローンチ中のトークンフローを定義するモジュラーコンポーネントです。2種類あります：
-
-**インフローバケット**はユーザーからクォートトークン（通常SOL）を収集します：
-- **Launch Pool Bucket**：期間中に預金を収集し、トークンを比例配分
-
-**アウトフローバケット**はトークンまたはクォートトークンを受け取ります：
-- **Unlocked Bucket**：チーム/財務の請求のために終了動作を通じてクォートトークンを受け取る
-
-各バケットには、アクティブ化のタイミングを制御する設定可能な時間条件と、条件が満たされたときに実行される動作があります。
-
-### トークンフロー
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     Genesisアカウント                        │
-│                   (全トークンを保持)                         │
-└─────────────────────────────────────────────────────────────┘
-                            │
-                ┌───────────┴───────────┐
-                ▼                       ▼
-         ┌─────────────┐         ┌─────────────┐
-         │ Launch Pool │────────▶│  Unlocked   │
-         │   Bucket    │         │   Bucket    │
-         │   (預金)    │         │   (財務)    │
-         └─────────────┘         └─────────────┘
-                │                       │
-                ▼                       ▼
-           ユーザーが                  チームが
-           SOLを預金                  SOLを請求
-```
-
-## 一般的なローンチフロー
-
-トークンローンチの一般的な進行方法は以下の通りです：
-
-### 1. セットアップフェーズ
-```
-Genesisアカウントの初期化
-        ↓
-インフローバケットの追加（例：Launch Pool）
-        ↓
-アウトフローバケットの追加（例：財務用Unlocked Bucket）
-        ↓
-Genesisアカウントの確定
-```
-
-### 2. アクティブフェーズ
-```
-預金期間：ユーザーがSOLを預金
-        ↓
-預金期間終了
-        ↓
-トランジション：終了動作の実行（アンロックバケットにSOLを送信）
-        ↓
-請求期間：ユーザーがトークンを請求
-```
-
-### 3. ローンチ後
-```
-チームがアンロックバケットからSOLを請求
-        ↓
-ミント/フリーズ権限の取り消し
-```
-
-## 権限の取り消し
-
-ローンチが完了したら、トークンのミントおよびフリーズ権限を取り消すことができます。これは保有者やラグチェッカーに、追加のトークンを発行できず、トークンをフリーズできないことを示します。
-
-{% callout type="warning" %}
-**権限の取り消しは不可逆です。** 一度取り消すと、追加のトークンを発行したりトークンアカウントをフリーズしたりすることはできません。トークンローンチが完了したことを確信してから行ってください。
+{% callout title="Choose Your Path" %}
+- **New to Genesis?** Start with [Getting Started](/smart-contracts/genesis/getting-started) to understand the flow
+- **Ready to build?** Jump to [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale)
+- **Need SDK reference?** See [JavaScript SDK](/smart-contracts/genesis/sdk/javascript)
 {% /callout %}
 
-```typescript
-import { revokeMintAuthorityV2, revokeFreezeAuthorityV2 } from '@metaplex-foundation/genesis';
+## What is Genesis?
 
-// ミント権限の取り消し - 今後トークンは発行不可
-await revokeMintAuthorityV2(umi, {
-  baseMint: baseMint.publicKey,
-}).sendAndConfirm(umi);
+Genesis provides on-chain infrastructure for launching tokens on Solana. It handles:
 
-// フリーズ権限の取り消し - トークンは絶対にフリーズ不可
-await revokeFreezeAuthorityV2(umi, {
-  baseMint: baseMint.publicKey,
-}).sendAndConfirm(umi);
-```
+- **Token creation** with metadata (name, symbol, image)
+- **Fund collection** from participants (SOL deposits)
+- **Distribution** based on your chosen mechanism
+- **Time coordination** for deposit and claim windows
 
-## 主な機能
+Think of Genesis as a smart contract that sits between you (the launcher) and your participants, ensuring fair, transparent, and automated token distribution.
 
-### 時間ベースの条件
-すべてのバケットには絶対タイムスタンプに基づく設定可能な開始・終了条件があります。これにより以下が可能になります：
-- 正確なローンチ時間のスケジュール
-- 時間フェーズの作成（預金期間、請求期間など）
-- 精密なタイミングでの複数バケットの調整
+## Launch Mechanisms
 
-### 終了動作
-バケットの終了条件が満たされたときに実行される自動化されたアクション：
-- **SendQuoteTokenPercentage**：収集されたSOLの一定割合を別のバケットに転送
+Genesis supports three mechanisms that can be combined:
 
-## セキュリティ上の考慮事項
+| Mechanism | Price | Distribution | Best For |
+|-----------|-------|--------------|----------|
+| **[Launch Pool](/smart-contracts/genesis/launch-pool)** | Discovered at close | Proportional to deposit | Fair launches, community tokens |
+| **[Presale](/smart-contracts/genesis/presale)** | Fixed upfront | First-come-first-served | Predictable raises, known valuation |
+| **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** | Clearing price | Highest bidders win | Large raises, institutional interest |
 
-{% callout type="warning" %}
-**確定は永続的です**：Genesisアカウントを確定すると、それ以上バケットを追加できません。確定する前に構成が完了していることを確認してください。
-{% /callout %}
+### Which Should I Use?
 
-## 次のステップ
+**Launch Pool** - You want organic price discovery and fair distribution. Everyone who deposits gets tokens proportional to their share. No one gets sniped.
 
-トークンローンチを構築する準備はできましたか？ここから始めましょう：
+**Presale** - You know your valuation and want predictable pricing. Set a fixed price and let participants buy until the cap is reached.
 
-- [はじめに](/ja/smart-contracts/genesis/getting-started) - ローンチフローを理解し、最初のGenesisアカウントを初期化
-- [JavaScript SDK](/ja/smart-contracts/genesis/sdk/javascript) - SDKのインストールと設定
+**Auction** - You want competitive bidding from larger participants. Best for established projects with institutional interest.
 
-次に、ローンチタイプを選択してください：
+## Core Concepts
 
-- [Launch Pool](/ja/smart-contracts/genesis/launch-pool) - 預金期間付きのトークン配布
-- [Presale](/ja/smart-contracts/genesis/presale) - 固定価格トークン販売
-- [Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction) - 均一クリアリング価格の時間ベースオークション
+### Genesis Account
+
+The central coordinator for your launch. When you initialize a Genesis Account, it:
+
+- Creates your SPL token with metadata
+- Mints the total supply to escrow
+- Provides the foundation for adding distribution buckets
+
+### Buckets
+
+Modular components that define how tokens and funds flow:
+
+| Type | Purpose | Examples |
+|------|---------|----------|
+| **Inflow** | Collect SOL from users | Launch Pool, Presale |
+| **Outflow** | Receive funds for team/treasury | Unlocked Bucket |
+
+### Time Conditions
+
+Every bucket has time windows that control when actions are allowed:
+
+- **Deposit window** - When users can deposit SOL
+- **Claim window** - When users can claim tokens
+
+## Protocol Fees
+
+| Action | Fee |
+|--------|-----|
+| Deposit | 2% of deposit amount |
+| Withdraw | 2% of withdrawal amount |
+| Claim | Transaction fee only |
+
+No upfront costs. You only pay fees on funds raised.
+
+## Program Information
+
+| Network | Program ID |
+|---------|------------|
+| Mainnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
+| Devnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
+
+## Security
+
+After your launch completes, revoke token authorities to signal that no additional tokens can be minted:
+
+- **Mint authority** - Revoke to prevent new token minting
+- **Freeze authority** - Revoke to prevent token freezing
+
+See [Getting Started](/smart-contracts/genesis/getting-started) for details on authority management.
+
+## FAQ
+
+### What is Genesis?
+Genesis is a Metaplex smart contract for Token Generation Events (TGE) on Solana. It provides on-chain infrastructure for presales, launch pools, and auctions with coordinated token creation and distribution.
+
+### What launch mechanisms does Genesis support?
+Genesis supports three mechanisms: **Launch Pool** (proportional distribution with price discovery), **Presale** (fixed price), and **Uniform Price Auction** (bid-based with clearing price).
+
+### How much does it cost to use Genesis?
+Genesis charges a 2% protocol fee on deposits. There are no upfront costs—you only pay Solana transaction fees plus the protocol fee on funds raised.
+
+### Can I revoke token authorities after launch?
+Yes. Genesis provides `revokeMintAuthorityV2` and `revokeFreezeAuthorityV2` instructions to permanently revoke authorities.
+
+### What's the difference between Launch Pool and Presale?
+**Presale** has a fixed price set upfront. **Launch Pool** discovers price organically—more deposits means higher implied price per token, with proportional distribution to all participants.
+
+### Can I combine multiple launch mechanisms?
+Yes. Genesis uses a bucket system where you can add multiple inflow buckets and configure outflow buckets for treasury or vesting.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Genesis Account** | Central coordinator that creates the token and manages all buckets |
+| **Bucket** | Modular component that defines token/SOL flow |
+| **Inflow Bucket** | Bucket that collects SOL from users |
+| **Outflow Bucket** | Bucket that receives funds via end behaviors |
+| **Launch Pool** | Deposit-based distribution where price is discovered at close |
+| **Presale** | Fixed-price sale at a predetermined rate |
+| **Quote Token** | The token users deposit (usually wSOL) |
+| **Base Token** | The token being launched and distributed |
+
+## Next Steps
+
+1. **[Getting Started](/smart-contracts/genesis/getting-started)** - Understand the Genesis flow
+2. **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - Installation and setup
+3. **[Launch Pool](/smart-contracts/genesis/launch-pool)** - Build a proportional distribution launch
+4. **[Presale](/smart-contracts/genesis/presale)** - Build a fixed-price sale

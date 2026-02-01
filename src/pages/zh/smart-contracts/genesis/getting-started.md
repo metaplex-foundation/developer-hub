@@ -1,155 +1,265 @@
 ---
-title: 快速开始
-metaTitle: Genesis - 快速开始
-description: 学习使用Genesis在Solana上发行代币的基础知识。
+title: Getting Started
+metaTitle: Genesis - Getting Started | Token Launch Flow
+description: Understand the Genesis token launch flow. Learn the steps from initialization to distribution and how to plan your launch.
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - Genesis tutorial
+  - token launch flow
+  - Genesis setup
+  - TGE steps
+  - launch planning
+about:
+  - Genesis flow
+  - Launch lifecycle
+  - Token distribution
+proficiencyLevel: Beginner
+faqs:
+  - q: What does initializing a Genesis Account create?
+    a: It creates a new SPL token with metadata, a master coordination account, and holds the total token supply in escrow for distribution.
+  - q: Can I add more buckets after finalizing?
+    a: No. Finalization is permanent. You cannot add more buckets or change configurations after finalizing.
+  - q: What's the difference between inflow and outflow buckets?
+    a: Inflow buckets collect SOL from users (Launch Pool, Presale). Outflow buckets receive tokens or SOL for team/treasury claims.
+  - q: When does the launch become active?
+    a: After finalization, the launch activates based on your bucket time conditions (start timestamps).
+  - q: How do I calculate token supply with decimals?
+    a: Multiply your desired supply by 10^decimals. For 1 million tokens with 9 decimals, use 1,000,000,000,000,000.
 ---
 
-本指南介绍使用Genesis发行代币的核心概念和工作流程。您将学习如何初始化Genesis账户、了解桶系统以及最终确定您的发行配置。
+Understand the Genesis token launch flow before building. This guide explains each step from initialization to distribution, helping you plan your launch. {% .lead %}
 
-## 前提条件
-
-在开始之前，请确保您具备：
-- 安装了Node.js 16+
-- 拥有用于支付交易费用的SOL的Solana钱包
-- 已安装和配置Genesis SDK（参见[JavaScript SDK](/zh/smart-contracts/genesis/sdk/javascript)）
-
-## Genesis发行流程
-
-每个Genesis代币发行都遵循相同的基本流程：
-
-```
-1. 初始化Genesis账户
-   └── 创建您的代币和主协调账户
-
-2. 添加桶
-   └── 配置代币如何分配（您的发行类型）
-
-3. 最终确定
-   └── 锁定配置并激活发行
-
-4. 活动期
-   └── 用户根据您的桶配置参与
-
-5. 转换
-   └── 执行结束行为（例如将资金发送到流出桶）
-```
-
-## 步骤1：初始化Genesis账户
-
-Genesis账户是您代币发行的基础。初始化会创建：
-- 带有元数据的新SPL代币
-- 协调所有分配桶的主账户
-- 托管中持有的总代币供应量
-
-```typescript
-import {
-  findGenesisAccountV2Pda,
-  initializeV2,
-} from '@metaplex-foundation/genesis';
-import { generateSigner, publicKey } from '@metaplex-foundation/umi';
-
-// 为您的代币生成新的铸币密钥对
-const baseMint = generateSigner(umi);
-
-// wSOL是标准报价代币
-const WSOL_MINT = publicKey('So11111111111111111111111111111111111111112');
-
-// 派生Genesis账户PDA
-const [genesisAccount] = findGenesisAccountV2Pda(umi, {
-  baseMint: baseMint.publicKey,
-  genesisIndex: 0,  // 对于您的第一个活动使用0
-});
-
-// 初始化Genesis账户
-await initializeV2(umi, {
-  baseMint,
-  quoteMint: WSOL_MINT,
-  fundingMode: 0,
-  totalSupplyBaseToken: 1_000_000_000_000_000n,  // 100万代币（9位小数）
-  name: 'My Token',
-  symbol: 'MTK',
-  uri: 'https://example.com/metadata.json',
-}).sendAndConfirm(umi);
-
-console.log('Genesis账户已创建:', genesisAccount);
-console.log('代币铸币:', baseMint.publicKey);
-```
-
-### 理解代币供应量
-
-指定`totalSupplyBaseToken`时，请考虑小数位。SPL代币通常使用9位小数：
-
-```typescript
-const ONE_TOKEN = 1_000_000_000n;           // 1个代币
-const ONE_MILLION = 1_000_000_000_000_000n; // 100万代币
-const ONE_BILLION = 1_000_000_000_000_000_000n; // 10亿代币
-```
-
-{% callout type="note" %}
-`totalSupplyBaseToken`应等于所有桶分配的总和。在初始化之前规划您跨桶的代币分配。
+{% callout title="Ready to Build?" %}
+Once you understand the flow:
+- **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - Installation and function reference
+- **[Launch Pool](/smart-contracts/genesis/launch-pool)** - Complete tutorial for proportional distribution
+- **[Presale](/smart-contracts/genesis/presale)** - Complete tutorial for fixed-price sales
 {% /callout %}
 
-## 步骤2：添加桶
+## The Genesis Flow
 
-桶是定义发行期间代币如何流动的模块化组件。有两个类别：
+Every Genesis launch follows this lifecycle:
 
-### 流入桶
-从用户收集报价代币（SOL）：
-
-| 桶类型 | 用例 |
-|-------------|----------|
-| **发行池** | 带比例分配的存款窗口 |
-| **预售** | 固定价格代币销售 |
-
-### 流出桶
-通过结束行为接收代币或报价代币：
-
-| 桶类型 | 用例 |
-|-------------|----------|
-| **解锁桶** | 接收资金供团队/财库领取 |
-
-### 选择您的发行类型
-
-{% callout type="note" %}
-**[发行池](/zh/smart-contracts/genesis/launch-pool)** - 用户在窗口期间存款，并根据其在总存款中的份额比例获得代币。
-{% /callout %}
-
-{% callout type="note" %}
-**[预售](/zh/smart-contracts/genesis/presale)** - 固定价格代币销售，用户存入SOL并以预定汇率获得代币。
-{% /callout %}
-
-## 步骤3：最终确定
-
-配置所有桶后，最终确定Genesis账户以锁定配置：
-
-```typescript
-import { finalizeV2 } from '@metaplex-foundation/genesis';
-
-await finalizeV2(umi, {
-  baseMint: baseMint.publicKey,
-}).sendAndConfirm(umi);
-
-console.log('Genesis账户已最终确定！');
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  1. INITIALIZE                                                   │
+│     Create Genesis Account → Mint token → Hold supply in escrow │
+└─────────────────────────────────────────────────────────────────┘
+                                 ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  2. ADD BUCKETS                                                  │
+│     Configure distribution (Launch Pool, Presale, Treasury)     │
+└─────────────────────────────────────────────────────────────────┘
+                                 ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  3. FINALIZE                                                     │
+│     Lock configuration → Activate time conditions               │
+└─────────────────────────────────────────────────────────────────┘
+                                 ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  4. DEPOSIT PERIOD                                               │
+│     Users deposit SOL based on bucket type                      │
+└─────────────────────────────────────────────────────────────────┘
+                                 ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  5. TRANSITION                                                   │
+│     Execute end behaviors → Route funds to treasury             │
+└─────────────────────────────────────────────────────────────────┘
+                                 ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  6. CLAIM PERIOD                                                 │
+│     Users claim tokens → Team claims raised funds               │
+└─────────────────────────────────────────────────────────────────┘
+                                 ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  7. POST-LAUNCH (Optional)                                       │
+│     Revoke mint/freeze authorities for security                 │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### 最终确定的作用
+## Step 1: Initialize
 
-最终确定后：
-- 不能再添加更多桶
-- 桶配置被锁定
-- 发行根据您的时间条件变为活动状态
-- 用户可以开始参与
+**What happens:** You create a Genesis Account which mints your token and holds the entire supply in escrow.
+
+**You provide:**
+- Token metadata (name, symbol, URI)
+- Total supply (with decimals)
+- Quote token (usually wSOL)
+
+**Result:** A new SPL token exists, controlled by the Genesis Account until distribution.
+
+### Token Supply Planning
+
+SPL tokens use 9 decimals by default:
+
+| Desired Supply | With 9 Decimals |
+|----------------|-----------------|
+| 1 token | 1,000,000,000 |
+| 1,000 tokens | 1,000,000,000,000 |
+| 1 million tokens | 1,000,000,000,000,000 |
+| 1 billion tokens | 1,000,000,000,000,000,000 |
+
+**Important:** Your total supply must equal the sum of all bucket allocations.
+
+## Step 2: Add Buckets
+
+**What happens:** You configure how tokens will be distributed by adding buckets.
+
+### Bucket Types
+
+| Bucket | Type | Purpose |
+|--------|------|---------|
+| **Launch Pool** | Inflow | Proportional distribution based on deposits |
+| **Presale** | Inflow | Fixed-price sale up to a cap |
+| **Unlocked** | Outflow | Treasury that receives raised funds |
+
+### Example Configuration
+
+A typical launch uses:
+
+1. **Inflow bucket** (Launch Pool OR Presale) - Collects SOL from participants
+2. **Outflow bucket** (Unlocked) - Receives collected SOL for team/treasury
+
+```
+Token Allocation Example (1 million tokens):
+├── Launch Pool: 800,000 tokens (80%)
+└── Unlocked:    200,000 tokens (20% team allocation)
+
+Fund Flow:
+Users deposit SOL → Launch Pool → End Behavior → Unlocked Bucket → Team claims
+```
+
+### Time Conditions
+
+Each bucket has four time conditions:
+
+| Condition | Controls |
+|-----------|----------|
+| Deposit Start | When users can begin depositing |
+| Deposit End | When deposits close |
+| Claim Start | When users can claim tokens |
+| Claim End | When claims close |
+
+Use Unix timestamps (seconds, not milliseconds).
+
+## Step 3: Finalize
+
+**What happens:** Configuration locks permanently. The launch activates based on time conditions.
+
+### Before vs After Finalization
+
+| Before | After |
+|--------|-------|
+| Can add buckets | No more buckets |
+| Can modify settings | Settings locked |
+| Launch inactive | Launch active (per time conditions) |
 
 {% callout type="warning" %}
-**最终确定是不可逆的。** 在最终确定之前，请仔细检查所有桶配置、时间条件和代币分配。
+**Finalization is irreversible.** Triple-check your bucket allocations, time conditions, and end behaviors before finalizing.
 {% /callout %}
 
-## 后续步骤
+## Step 4: Deposit Period
 
-选择您的发行类型并遵循详细指南：
+**What happens:** Users deposit SOL into your inflow bucket(s).
 
-1. **[发行池](/zh/smart-contracts/genesis/launch-pool)** - 带存款窗口的代币分配
-2. **[预售](/zh/smart-contracts/genesis/presale)** - 固定价格代币销售
-3. **[统一价格拍卖](/zh/smart-contracts/genesis/uniform-price-auction)** - 具有统一清算价格的基于时间的拍卖
+- **Launch Pool:** Users deposit SOL, can withdraw with 2% fee
+- **Presale:** Users deposit SOL at fixed price, up to cap
 
-每个指南都包含完整的设置代码、用户操作和配置。
+A 2% protocol fee applies to all deposits.
+
+## Step 5: Transition
+
+**What happens:** After deposits close, execute end behaviors to route funds.
+
+Common end behavior: Send 100% of collected SOL to the Unlocked bucket (treasury).
+
+You can split funds across multiple destinations:
+- 80% to treasury
+- 20% to liquidity pool bucket
+
+## Step 6: Claim Period
+
+**What happens:**
+- Users claim tokens based on their deposit
+- Team claims raised SOL from the Unlocked bucket
+
+### Token Distribution
+
+**Launch Pool:** `userTokens = (userDeposit / totalDeposits) × bucketAllocation`
+
+**Presale:** `userTokens = userDeposit / pricePerToken`
+
+## Step 7: Post-Launch (Optional)
+
+**What happens:** Revoke token authorities for security.
+
+- **Mint authority** - Revoke so no more tokens can ever be minted
+- **Freeze authority** - Revoke so tokens can never be frozen
+
+This signals to holders and rug checkers that the token supply is fixed.
+
+{% callout type="warning" %}
+Authority revocation is irreversible. Only do this when your launch is complete.
+{% /callout %}
+
+## Common Errors
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `already finalized` | Trying to modify after finalize | Create new Genesis Account |
+| `invalid total supply` | Bucket allocations don't match supply | Ensure allocations sum to total |
+| `time conditions overlap` | Conflicting timestamps | Use sequential time windows |
+| `deposit period not active` | Outside deposit window | Check timestamps |
+
+## Planning Checklist
+
+Before you start building:
+
+- [ ] Decide on launch mechanism (Launch Pool vs Presale)
+- [ ] Calculate total token supply with decimals
+- [ ] Plan bucket allocations (must sum to total supply)
+- [ ] Set time windows (deposit start/end, claim start/end)
+- [ ] Decide end behaviors (where do funds go?)
+- [ ] Prepare token metadata (name, symbol, image URI)
+
+## FAQ
+
+### What does initializing a Genesis Account create?
+It creates a new SPL token with metadata, a master coordination account (the Genesis Account PDA), and mints the total supply to be held in escrow for distribution.
+
+### Can I add more buckets after finalizing?
+No. Finalization is permanent. You cannot add more buckets or change configurations. Plan your complete bucket structure before finalizing.
+
+### What's the difference between inflow and outflow buckets?
+**Inflow buckets** collect SOL from users (Launch Pool, Presale). **Outflow buckets** receive tokens or SOL via end behaviors—typically an Unlocked Bucket for team/treasury claims.
+
+### When does the launch become active?
+After finalization, the launch activates based on your bucket time conditions. Users can participate when the current time is within a bucket's deposit window.
+
+### How do I calculate token supply with decimals?
+Multiply your desired supply by 10^decimals. For 1 million tokens with 9 decimals: 1,000,000 × 1,000,000,000 = 1,000,000,000,000,000.
+
+### Can I use a token other than SOL for deposits?
+Yes. Set `quoteMint` to any SPL token. However, wSOL is standard for SOL-denominated launches.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Genesis Account** | PDA that coordinates the launch and holds tokens |
+| **Inflow Bucket** | Bucket that collects deposits from users |
+| **Outflow Bucket** | Bucket that receives funds via end behaviors |
+| **Finalize** | Lock configuration and activate the launch |
+| **Time Condition** | Unix timestamp controlling bucket phases |
+| **End Behavior** | Automated action when deposit period ends |
+| **Transition** | Instruction that executes end behaviors |
+| **Quote Token** | Token users deposit (usually wSOL) |
+
+## Next Steps
+
+Ready to build? Choose your launch type:
+
+1. **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - Install and configure
+2. **[Launch Pool Tutorial](/smart-contracts/genesis/launch-pool)** - Proportional distribution
+3. **[Presale Tutorial](/smart-contracts/genesis/presale)** - Fixed-price sale

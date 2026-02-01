@@ -1,41 +1,84 @@
 ---
 title: API
-metaTitle: Genesis - API
-description: genesisアドレスまたはトークンミントでGenesisローンチデータを照会するパブリックAPI。
+metaTitle: Genesis - API | Launch Data API | Metaplex
+description: Public API for querying Genesis launch data by genesis address or token mint. No authentication required.
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - Genesis API
+  - launch data API
+  - token metadata API
+  - aggregator API
+  - REST API
+about:
+  - API reference
+  - Data aggregation
+  - Launch queries
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Is authentication required?
+    a: No. The Genesis API is public with rate limits. No API key or authentication is needed.
+  - q: Which endpoint should I use if I only have a token mint?
+    a: Use /tokens/{mint} to get all launches for a token. Use /launches/{genesis_pubkey} if you have the genesis address.
+  - q: What are the rate limits?
+    a: Rate limits apply to prevent abuse. If you receive a 429 response, reduce your request frequency.
+  - q: Can a token have multiple launches?
+    a: Yes. The /tokens endpoint returns an array of launches because tokens can have multiple campaigns.
 ---
 
-Genesis APIにより、アグリゲーターやアプリケーションはGenesisトークンローンチからのデータを照会できます。これらのエンドポイントを使用して、アプリケーションにローンチ情報、トークンメタデータ、ソーシャルリンクを表示してください。
+The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application. {% .lead %}
 
-{% callout type="note" %}
-APIはレート制限付きのパブリックAPIです。認証は不要です。
+{% callout title="What You'll Learn" %}
+This reference covers:
+- Available endpoints and their use cases
+- Request/response formats with examples
+- TypeScript and Rust type definitions
+- Error handling
 {% /callout %}
 
-## ベースURL
+## Summary
+
+The Genesis API provides read-only access to launch data. Query by genesis address or token mint.
+
+- Public API with rate limits (no authentication)
+- Returns launch info, token metadata, and social links
+- TypeScript and Rust types provided
+- Standard REST error codes
+
+{% callout type="note" %}
+The API is public with rate limits. No authentication is required.
+{% /callout %}
+
+## Base URL
 
 ```
 https://api.metaplex.com/v1
 ```
 
-## ユースケース
+## Use Cases
 
-- **`/launches/{genesis_pubkey}`** - オンチェーンイベントやトランザクションログからのgenesisアドレスがある場合に使用します。
-- **`/tokens/{mint}`** - トークンミントアドレスのみを知っている場合に使用します。そのトークンに関連するすべてのローンチを返します（トークンは複数のローンチキャンペーンを持つことができます）。
+- **`/launches/{genesis_pubkey}`** - Use when you have a genesis address, such as from an on-chain event or transaction log.
+- **`/tokens/{mint}`** - Use when you only know the token mint address. Returns all launches associated with that token (a token can have multiple launch campaigns).
 
-## エンドポイント
+## Endpoints
 
-### Genesisアドレスでローンチを取得
+### Get Launch by Genesis Address
 
 ```
 GET /launches/{genesis_pubkey}
 ```
 
-**リクエスト例:**
+**Example Request:**
 
 ```
 GET https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
 ```
 
-**レスポンス:**
+**Response:**
 
 ```json
 {
@@ -50,7 +93,7 @@ GET https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSf
       "name": "My Token",
       "symbol": "MTK",
       "image": "https://example.com/token-image.png",
-      "description": "サンプルエコシステムのためのコミュニティ主導トークン。"
+      "description": "A community-driven token for the example ecosystem."
     },
     "website": "https://example.com",
     "socials": {
@@ -62,15 +105,15 @@ GET https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSf
 }
 ```
 
-### トークンミントでローンチを取得
+### Get Launches by Token Mint
 
 ```
 GET /tokens/{mint}
 ```
 
-トークンのすべてのローンチを返します。`launches`が配列であることを除き、レスポンスは同一です。
+Returns all launches for a token. The response is identical except `launches` is an array.
 
-**レスポンス:**
+**Response:**
 
 ```json
 {
@@ -87,7 +130,7 @@ GET /tokens/{mint}
       "name": "My Token",
       "symbol": "MTK",
       "image": "https://example.com/token-image.png",
-      "description": "サンプルエコシステムのためのコミュニティ主導トークン。"
+      "description": "A community-driven token for the example ecosystem."
     },
     "website": "https://example.com",
     "socials": {
@@ -100,10 +143,10 @@ GET /tokens/{mint}
 ```
 
 {% callout type="note" %}
-genesis pubkeyを見つけるにはインデックス作成または`getProgramAccounts`が必要です。トークンミントのみの場合は、代わりに`/tokens`エンドポイントを使用してください。
+Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only have a token mint, use the `/tokens` endpoint instead.
 {% /callout %}
 
-## エラー
+## Errors
 
 ```json
 {
@@ -114,14 +157,14 @@ genesis pubkeyを見つけるにはインデックス作成または`getProgramA
 }
 ```
 
-| コード | 説明 |
+| Code | Description |
 | --- | --- |
-| `400` | 不正なリクエスト - 無効なパラメータ |
-| `404` | ローンチまたはトークンが見つからない |
-| `429` | レート制限超過 |
-| `500` | 内部サーバーエラー |
+| `400` | Bad request - invalid parameters |
+| `404` | Launch or token not found |
+| `429` | Rate limit exceeded |
+| `500` | Internal server error |
 
-## TypeScript型
+## TypeScript Types
 
 ```ts
 interface Launch {
@@ -170,7 +213,7 @@ interface ErrorResponse {
 }
 ```
 
-**例:**
+**Example:**
 
 ```ts
 const response = await fetch(
@@ -180,7 +223,7 @@ const { data }: LaunchResponse = await response.json();
 console.log(data.baseToken.name); // "My Token"
 ```
 
-## Rust型
+## Rust Types
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -251,7 +294,7 @@ pub struct ErrorResponse {
 }
 ```
 
-**例:**
+**Example:**
 
 ```rust
 let response: LaunchResponse = reqwest::get(
@@ -265,7 +308,7 @@ println!("{}", response.data.base_token.name); // "My Token"
 ```
 
 {% callout type="note" %}
-`Cargo.toml`に以下の依存関係を追加してください：
+Add these dependencies to your `Cargo.toml`:
 ```toml
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
@@ -273,3 +316,33 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## FAQ
+
+### Is authentication required?
+No. The Genesis API is public with rate limits. No API key or authentication is needed.
+
+### Which endpoint should I use if I only have a token mint?
+Use `/tokens/{mint}` to get all launches for a token. Use `/launches/{genesis_pubkey}` if you have the genesis address.
+
+### What are the rate limits?
+Rate limits apply to prevent abuse. If you receive a 429 response, reduce your request frequency.
+
+### Can a token have multiple launches?
+Yes. The `/tokens` endpoint returns an array of launches because tokens can have multiple campaigns (using different `genesisIndex` values).
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Genesis Address** | The PDA identifying a specific launch campaign |
+| **Base Token** | The token being launched |
+| **Launch Page** | The URL where users can participate in the launch |
+| **Launch Type** | The mechanism used (launchpool, presale, auction) |
+| **Socials** | Social media links associated with the token |
+
+## Next Steps
+
+- [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) - Programmatic access to Genesis
+- [Aggregation API](/smart-contracts/genesis/aggregation) - Additional API details and on-chain fetching
+- [Getting Started](/smart-contracts/genesis/getting-started) - Launch your own token

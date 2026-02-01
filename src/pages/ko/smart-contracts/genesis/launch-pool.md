@@ -1,36 +1,300 @@
 ---
 title: Launch Pool
-metaTitle: Genesis - Launch Pool
-description: 사용자가 기간 동안 예치하고 비례적으로 토큰을 받는 토큰 배포 방식입니다.
+metaTitle: Genesis - Launch Pool | Fair Token Distribution | Metaplex
+description: Token distribution where users deposit during a window and receive tokens proportionally. Organic price discovery with anti-sniping design.
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - launch pool
+  - token distribution
+  - fair launch
+  - proportional distribution
+  - deposit window
+  - price discovery
+about:
+  - Launch pools
+  - Price discovery
+  - Token distribution
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Initialize a Genesis Account with your token
+  - Add a Launch Pool bucket with deposit window configuration
+  - Add an Unlocked bucket to receive collected funds
+  - Finalize and let users deposit during the window
+howToTools:
+  - Node.js
+  - Umi framework
+  - Genesis SDK
+faqs:
+  - q: How is the token price determined in a Launch Pool?
+    a: The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
+  - q: Can users withdraw their deposits?
+    a: Yes, users can withdraw during the deposit period. A 2% withdrawal fee applies to discourage gaming the system.
+  - q: What happens if I deposit multiple times?
+    a: Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
+  - q: When can users claim their tokens?
+    a: After the deposit period ends and the claim window opens (defined by claimStartCondition). The transition must be executed first to process end behaviors.
+  - q: What's the difference between Launch Pool and Presale?
+    a: Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
 ---
 
-Launch Pool은 자연스러운 가격 발견과 제한된 스나이핑 또는 프론트러닝을 위해 설계된 토큰 런칭 메커니즘입니다. 사용자는 지정된 기간 동안 예치하고, 기간이 종료되면 총 예치금에서 자신의 비율에 비례하여 토큰을 받습니다.
+**Launch Pools** provide organic price discovery for token launches. Users deposit during a window and receive tokens proportional to their share of total deposits—no sniping, no front-running, fair distribution for everyone. {% .lead %}
 
-작동 방식:
+{% callout title="What You'll Learn" %}
+This guide covers:
+- How Launch Pool pricing and distribution works
+- Setting up deposit and claim windows
+- Configuring end behaviors for fund collection
+- User operations: deposit, withdraw, and claim
+{% /callout %}
 
-1. 특정 수량의 토큰이 Launch Pool 컨트랙트에 할당됩니다. Launch Pool은 정해진 기간 동안 열려 있습니다.
-2. Launch Pool이 열려 있는 동안 사용자는 SOL을 예치하거나 출금할 수 있습니다 (출금 수수료 적용).
-3. Launch Pool이 종료되면 각 사용자의 총 예치금 대비 비율에 따라 토큰이 배포됩니다.
+## Summary
 
-## 개요
+Launch Pools accept deposits during a defined window, then distribute tokens proportionally. The final token price is determined by total deposits divided by token allocation.
 
-Launch Pool 생명주기:
+- Users deposit SOL during the deposit window (2% fee applies)
+- Withdrawals allowed during deposit period (2% fee)
+- Token distribution is proportional to deposit share
+- End behaviors route collected SOL to treasury buckets
 
-1. **예치 기간** - 사용자가 정해진 기간 동안 SOL 예치
-2. **전환** - 종료 동작 실행 (예: 수집된 SOL을 다른 버킷으로 전송)
-3. **청구 기간** - 사용자가 예치 비중에 비례하여 토큰 청구
+## Out of Scope
 
-## 수수료
+Fixed-price sales (see [Presale](/smart-contracts/genesis/presale)), bid-based auctions (see [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)), and liquidity pool creation (use Raydium/Orca).
+
+## Quick Start
+
+{% totem %}
+{% totem-accordion title="View complete setup script" %}
+
+This shows how to set up a Launch Pool with deposit and claim windows. To build the user-facing app, see [User Operations](#user-operations).
+
+```typescript
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
+import {
+  genesis,
+  initializeV2,
+  findGenesisAccountV2Pda,
+  addLaunchPoolBucketV2,
+  findLaunchPoolBucketV2Pda,
+  addUnlockedBucketV2,
+  findUnlockedBucketV2Pda,
+  finalizeV2,
+  NOT_TRIGGERED_TIMESTAMP,
+} from '@metaplex-foundation/genesis';
+import { generateSigner, publicKey } from '@metaplex-foundation/umi';
+
+async function setupLaunchPool() {
+  const umi = createUmi('https://api.mainnet-beta.solana.com')
+    .use(mplToolbox())
+    .use(genesis());
+
+  // umi.use(keypairIdentity(yourKeypair));
+
+  const baseMint = generateSigner(umi);
+  const backendSigner = generateSigner(umi);
+  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
+
+  // 1. Initialize
+  const [genesisAccount] = findGenesisAccountV2Pda(umi, {
+    baseMint: baseMint.publicKey,
+    genesisIndex: 0,
+  });
+
+  await initializeV2(umi, {
+    baseMint,
+    fundingMode: 0,
+    totalSupplyBaseToken: TOTAL_SUPPLY,
+    name: 'My Token',
+    symbol: 'MTK',
+    uri: 'https://example.com/metadata.json',
+  }).sendAndConfirm(umi);
+
+  // 2. Define timing
+  const now = BigInt(Math.floor(Date.now() / 1000));
+  const depositStart = now + 60n;
+  const depositEnd = now + 86400n; // 24 hours
+  const claimStart = depositEnd + 1n;
+  const claimEnd = claimStart + 604800n; // 1 week
+
+  // 3. Derive bucket PDAs
+  const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
+  const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
+
+  // 4. Add Launch Pool bucket
+  await addLaunchPoolBucketV2(umi, {
+    genesisAccount,
+    baseMint: baseMint.publicKey,
+    baseTokenAllocation: TOTAL_SUPPLY,
+    depositStartCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: depositStart,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    depositEndCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: depositEnd,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    claimStartCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: claimStart,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    claimEndCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: claimEnd,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    minimumDepositAmount: null,
+    endBehaviors: [
+      {
+        __kind: 'SendQuoteTokenPercentage',
+        padding: Array(4).fill(0),
+        destinationBucket: publicKey(unlockedBucket),
+        percentageBps: 10000, // 100%
+        processed: false,
+      },
+    ],
+  }).sendAndConfirm(umi);
+
+  // 5. Add Unlocked bucket (receives SOL after transition)
+  await addUnlockedBucketV2(umi, {
+    genesisAccount,
+    baseMint: baseMint.publicKey,
+    baseTokenAllocation: 0n,
+    recipient: umi.identity.publicKey,
+    claimStartCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: claimStart,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    claimEndCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: claimEnd,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    backendSigner: { signer: backendSigner.publicKey },
+  }).sendAndConfirm(umi);
+
+  // 6. Finalize
+  await finalizeV2(umi, {
+    baseMint: baseMint.publicKey,
+    genesisAccount,
+  }).sendAndConfirm(umi);
+
+  console.log('Launch Pool active!');
+  console.log('Token:', baseMint.publicKey);
+  console.log('Genesis:', genesisAccount);
+}
+
+setupLaunchPool().catch(console.error);
+```
+
+{% /totem-accordion %}
+{% /totem %}
+
+## How It Works
+
+1. A specific quantity of tokens is allocated to the Launch Pool bucket
+2. Users deposit SOL during the deposit window (withdrawals allowed with fee)
+3. When the window closes, tokens distribute proportionally based on deposit share
+
+### Price Discovery
+
+The token price emerges from total deposits:
+
+```
+tokenPrice = totalDeposits / tokenAllocation
+userTokens = (userDeposit / totalDeposits) * tokenAllocation
+```
+
+**Example:** 1,000,000 tokens allocated, 100 SOL total deposits = 0.0001 SOL per token
+
+### Lifecycle
+
+1. **Deposit Period** - Users deposit SOL during a defined window
+2. **Transition** - End behaviors execute (e.g., send collected SOL to another bucket)
+3. **Claim Period** - Users claim tokens proportional to their deposit weight
+
+## Fees
 
 {% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
-예치 수수료 예시: 10 SOL 예치 시 9.8 SOL이 사용자의 예치 계정에 적립됩니다.
+Deposit Fee Example: A user deposit of 10 SOL results in 9.8 SOL credited to the user's deposit account.
 
-## Launch Pool 설정
+## Setup Guide
 
-이 가이드는 이미 Genesis 계정을 초기화했다고 가정합니다. 초기화 단계는 [시작하기](/ko/smart-contracts/genesis/getting-started)를 참조하세요.
+### Prerequisites
 
-### 1. Launch Pool 버킷 추가
+{% totem %}
+
+```bash
+npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox
+```
+
+{% /totem %}
+
+### 1. Initialize the Genesis Account
+
+The Genesis Account creates your token and coordinates all distribution buckets.
+
+{% totem %}
+
+```typescript
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
+import {
+  genesis,
+  initializeV2,
+  findGenesisAccountV2Pda,
+} from '@metaplex-foundation/genesis';
+import { generateSigner, keypairIdentity } from '@metaplex-foundation/umi';
+
+const umi = createUmi('https://api.mainnet-beta.solana.com')
+  .use(mplToolbox())
+  .use(genesis());
+
+// umi.use(keypairIdentity(yourKeypair));
+
+const baseMint = generateSigner(umi);
+const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
+
+const [genesisAccount] = findGenesisAccountV2Pda(umi, {
+  baseMint: baseMint.publicKey,
+  genesisIndex: 0,
+});
+
+await initializeV2(umi, {
+  baseMint,
+  fundingMode: 0,
+  totalSupplyBaseToken: TOTAL_SUPPLY,
+  name: 'My Token',
+  symbol: 'MTK',
+  uri: 'https://example.com/metadata.json',
+}).sendAndConfirm(umi);
+```
+
+{% /totem %}
+
+{% callout type="note" %}
+The `totalSupplyBaseToken` should equal the sum of all bucket allocations.
+{% /callout %}
+
+### 2. Add the Launch Pool Bucket
+
+The Launch Pool bucket collects deposits and distributes tokens proportionally. Configure timing here.
+
+{% totem %}
 
 ```typescript
 import {
@@ -41,38 +305,21 @@ import {
 } from '@metaplex-foundation/genesis';
 import { publicKey } from '@metaplex-foundation/umi';
 
-// 버킷 PDA 유도
-const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, {
-  genesisAccount,
-  bucketIndex: 0,
-});
+const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
+const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
 
-// 선택사항: 런칭 후 기준 토큰을 받을 잠금 해제 버킷
-const [unlockedBucket] = findUnlockedBucketV2Pda(umi, {
-  genesisAccount,
-  bucketIndex: 0,
-});
-
-// 타이밍 정의
 const now = BigInt(Math.floor(Date.now() / 1000));
 const depositStart = now;
-const depositEnd = now + 86400n; // 24시간
+const depositEnd = now + 86400n; // 24 hours
 const claimStart = depositEnd + 1n;
-const claimEnd = claimStart + 604800n; // 1주일 청구 기간
-
-// 기본 스케줄 (페널티/보너스 없음)
-const defaultSchedule = {
-  slopeBps: 0n,
-  interceptBps: 0n,
-  maxBps: 0n,
-  startTime: 0n,
-  endTime: 0n,
-};
+const claimEnd = claimStart + 604800n; // 1 week
 
 await addLaunchPoolBucketV2(umi, {
   genesisAccount,
   baseMint: baseMint.publicKey,
-  baseTokenAllocation: 1_000_000_000_000n, // 이 버킷용 토큰
+  baseTokenAllocation: TOTAL_SUPPLY,
+
+  // Timing
   depositStartCondition: {
     __kind: 'TimeAbsolute',
     padding: Array(47).fill(0),
@@ -97,34 +344,41 @@ await addLaunchPoolBucketV2(umi, {
     time: claimEnd,
     triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
   },
-  depositPenalty: defaultSchedule,
-  withdrawPenalty: defaultSchedule,
-  bonusSchedule: defaultSchedule,
-  minimumDepositAmount: null,
-  // 예치 종료 후 수집된 SOL의 100%를 잠금 해제 버킷으로 전송
+
+  // Optional: Minimum deposit
+  minimumDepositAmount: null, // or { amount: sol(0.1).basisPoints }
+
+  // Where collected SOL goes after transition
   endBehaviors: [
     {
       __kind: 'SendQuoteTokenPercentage',
       padding: Array(4).fill(0),
       destinationBucket: publicKey(unlockedBucket),
-      percentageBps: 10000, // 베이시스 포인트로 100%
+      percentageBps: 10000, // 100%
       processed: false,
     },
   ],
 }).sendAndConfirm(umi);
 ```
 
-### 2. 잠금 해제 버킷 추가 (선택사항)
+{% /totem %}
 
-Launch Pool이 `SendQuoteTokenPercentage`를 사용하여 수집된 SOL을 전달하는 경우 목적지 버킷이 필요합니다:
+### 3. Add the Unlocked Bucket
+
+The Unlocked bucket receives SOL from the Launch Pool after the transition.
+
+{% totem %}
 
 ```typescript
 import { addUnlockedBucketV2 } from '@metaplex-foundation/genesis';
+import { generateSigner } from '@metaplex-foundation/umi';
+
+const backendSigner = generateSigner(umi);
 
 await addUnlockedBucketV2(umi, {
   genesisAccount,
   baseMint: baseMint.publicKey,
-  baseTokenAllocation: 0n, // 기본 토큰 없음, 기준 토큰만 수령
+  baseTokenAllocation: 0n,
   recipient: umi.identity.publicKey,
   claimStartCondition: {
     __kind: 'TimeAbsolute',
@@ -142,9 +396,13 @@ await addUnlockedBucketV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
-### 3. Genesis 계정 확정
+{% /totem %}
 
-모든 버킷이 구성되면 런칭 구성을 확정합니다:
+### 4. Finalize
+
+Once all buckets are configured, finalize to activate the launch. This is irreversible.
+
+{% totem %}
 
 ```typescript
 import { finalizeV2 } from '@metaplex-foundation/genesis';
@@ -155,60 +413,107 @@ await finalizeV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
-## 사용자 작업
+{% /totem %}
 
-### 예치
+## User Operations
 
-사용자는 예치 기간 동안 wSOL을 예치합니다. 예치에는 2% 수수료가 적용됩니다.
+### Wrapping SOL
+
+Users must wrap SOL to wSOL before depositing.
+
+{% totem %}
+
+```typescript
+import {
+  findAssociatedTokenPda,
+  createTokenIfMissing,
+  transferSol,
+  syncNative,
+} from '@metaplex-foundation/mpl-toolbox';
+import { WRAPPED_SOL_MINT } from '@metaplex-foundation/genesis';
+import { publicKey, sol } from '@metaplex-foundation/umi';
+
+const userWsolAccount = findAssociatedTokenPda(umi, {
+  owner: umi.identity.publicKey,
+  mint: WRAPPED_SOL_MINT,
+});
+
+await createTokenIfMissing(umi, {
+  mint: WRAPPED_SOL_MINT,
+  owner: umi.identity.publicKey,
+  token: userWsolAccount,
+})
+  .add(
+    transferSol(umi, {
+      destination: publicKey(userWsolAccount),
+      amount: sol(10),
+    })
+  )
+  .add(syncNative(umi, { account: userWsolAccount }))
+  .sendAndConfirm(umi);
+```
+
+{% /totem %}
+
+### Depositing
+
+{% totem %}
 
 ```typescript
 import {
   depositLaunchPoolV2,
   findLaunchPoolDepositV2Pda,
+  fetchLaunchPoolDepositV2,
 } from '@metaplex-foundation/genesis';
-
-const depositAmount = 10_000_000_000n; // 램포트 단위로 10 SOL
+import { sol } from '@metaplex-foundation/umi';
 
 await depositLaunchPoolV2(umi, {
   genesisAccount,
   bucket: launchPoolBucket,
   baseMint: baseMint.publicKey,
-  amountQuoteToken: depositAmount,
+  amountQuoteToken: sol(10).basisPoints,
 }).sendAndConfirm(umi);
 
-// 예치 확인
+// Verify
 const [depositPda] = findLaunchPoolDepositV2Pda(umi, {
   bucket: launchPoolBucket,
   recipient: umi.identity.publicKey,
 });
-
 const deposit = await fetchLaunchPoolDepositV2(umi, depositPda);
-console.log('예치됨 (2% 수수료 후):', deposit.amountQuoteToken);
+console.log('Deposited (after fee):', deposit.amountQuoteToken);
 ```
 
-동일 사용자의 여러 예치는 단일 예치 계정에 누적됩니다.
+{% /totem %}
 
-### 출금
+Multiple deposits from the same user accumulate into a single deposit account.
 
-사용자는 예치 기간 동안 출금할 수 있습니다. 출금에는 2% 수수료가 적용됩니다.
+### Withdrawing
+
+Users can withdraw during the deposit period. A 2% fee applies.
+
+{% totem %}
 
 ```typescript
 import { withdrawLaunchPoolV2 } from '@metaplex-foundation/genesis';
+import { sol } from '@metaplex-foundation/umi';
 
-// 부분 출금
 await withdrawLaunchPoolV2(umi, {
   genesisAccount,
   bucket: launchPoolBucket,
   baseMint: baseMint.publicKey,
-  amountQuoteToken: 3_000_000_000n, // 3 SOL
+  amountQuoteToken: sol(3).basisPoints,
 }).sendAndConfirm(umi);
 ```
 
-사용자가 전체 잔액을 출금하면 예치 PDA가 닫힙니다.
+{% /totem %}
 
-### 토큰 청구
+If a user withdraws their entire balance, the deposit PDA is closed.
 
-예치 기간이 종료되고 청구가 시작되면 사용자는 예치 비중에 비례하여 토큰을 청구합니다:
+### Claiming Tokens
+
+After the deposit period ends and claims open:
+
+{% totem %}
 
 ```typescript
 import { claimLaunchPoolV2 } from '@metaplex-foundation/genesis';
@@ -221,20 +526,23 @@ await claimLaunchPoolV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
-토큰 할당 공식:
-```
-userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation
-```
+{% /totem %}
 
-## 전환 실행
+Token allocation: `userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation`
 
-예치 기간 종료 후 전환을 실행하여 종료 동작을 처리합니다:
+## Admin Operations
+
+### Executing the Transition
+
+After deposits close, execute the transition to move collected SOL to the unlocked bucket.
+
+{% totem %}
 
 ```typescript
 import { transitionV2, WRAPPED_SOL_MINT } from '@metaplex-foundation/genesis';
 import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
+import { publicKey } from '@metaplex-foundation/umi';
 
-// 목적지 버킷의 기준 토큰 계정 가져오기
 const unlockedBucketQuoteTokenAccount = findAssociatedTokenPda(umi, {
   owner: unlockedBucket,
   mint: WRAPPED_SOL_MINT,
@@ -246,27 +554,51 @@ await transitionV2(umi, {
   baseMint: baseMint.publicKey,
 })
   .addRemainingAccounts([
-    {
-      pubkey: unlockedBucket,
-      isSigner: false,
-      isWritable: true,
-    },
-    {
-      pubkey: publicKey(unlockedBucketQuoteTokenAccount),
-      isSigner: false,
-      isWritable: true,
-    },
+    { pubkey: unlockedBucket, isSigner: false, isWritable: true },
+    { pubkey: publicKey(unlockedBucketQuoteTokenAccount), isSigner: false, isWritable: true },
   ])
   .sendAndConfirm(umi);
 ```
 
-## 종료 동작
+{% /totem %}
 
-종료 동작은 예치 기간 후 수집된 기준 토큰에 어떤 일이 일어나는지 정의합니다:
+**Why this matters:** Without transition, collected SOL stays locked in the Launch Pool bucket. Users can still claim tokens, but the team cannot access the raised funds.
 
-### SendQuoteTokenPercentage
+## Reference
 
-수집된 SOL의 일정 비율을 다른 버킷으로 전송:
+### Time Conditions
+
+Four conditions control Launch Pool timing:
+
+| Condition | Purpose |
+|-----------|---------|
+| `depositStartCondition` | When deposits open |
+| `depositEndCondition` | When deposits close |
+| `claimStartCondition` | When claims open |
+| `claimEndCondition` | When claims close |
+
+Use `TimeAbsolute` with a Unix timestamp:
+
+{% totem %}
+
+```typescript
+import { NOT_TRIGGERED_TIMESTAMP } from '@metaplex-foundation/genesis';
+
+const condition = {
+  __kind: 'TimeAbsolute',
+  padding: Array(47).fill(0),
+  time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 1 hour from now
+  triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+};
+```
+
+{% /totem %}
+
+### End Behaviors
+
+Define what happens to collected SOL after the deposit period:
+
+{% totem %}
 
 ```typescript
 endBehaviors: [
@@ -274,13 +606,17 @@ endBehaviors: [
     __kind: 'SendQuoteTokenPercentage',
     padding: Array(4).fill(0),
     destinationBucket: publicKey(unlockedBucket),
-    percentageBps: 10000, // 100% = 10000 bps
+    percentageBps: 10000, // 100% = 10000 basis points
     processed: false,
   },
 ]
 ```
 
-여러 버킷으로 자금을 분할할 수 있습니다:
+{% /totem %}
+
+You can split funds across multiple buckets:
+
+{% totem %}
 
 ```typescript
 endBehaviors: [
@@ -301,64 +637,84 @@ endBehaviors: [
 ]
 ```
 
-## 시간 조건
+{% /totem %}
 
-Launch Pool 타이밍은 4가지 조건으로 제어됩니다:
+### Fetching State
 
-| 조건 | 설명 |
-|-----------|-------------|
-| `depositStartCondition` | 사용자가 예치를 시작할 수 있는 시점 |
-| `depositEndCondition` | 예치가 종료되는 시점 |
-| `claimStartCondition` | 사용자가 토큰 청구를 시작할 수 있는 시점 |
-| `claimEndCondition` | 청구가 종료되는 시점 |
+**Bucket state:**
 
-특정 타임스탬프에 `TimeAbsolute` 사용:
-
-```typescript
-{
-  __kind: 'TimeAbsolute',
-  padding: Array(47).fill(0),
-  time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 지금부터 1시간 후
-  triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-}
-```
-
-## 상태 조회
-
-### 버킷 상태
+{% totem %}
 
 ```typescript
 import { fetchLaunchPoolBucketV2 } from '@metaplex-foundation/genesis';
 
 const bucket = await fetchLaunchPoolBucketV2(umi, launchPoolBucket);
-
-console.log('총 예치금:', bucket.quoteTokenDepositTotal);
-console.log('예치 횟수:', bucket.depositCount);
-console.log('청구 횟수:', bucket.claimCount);
-console.log('토큰 할당량:', bucket.bucket.baseTokenAllocation);
+console.log('Total deposits:', bucket.quoteTokenDepositTotal);
+console.log('Deposit count:', bucket.depositCount);
+console.log('Claim count:', bucket.claimCount);
+console.log('Token allocation:', bucket.bucket.baseTokenAllocation);
 ```
 
-### 예치 상태
+{% /totem %}
+
+**Deposit state:**
+
+{% totem %}
 
 ```typescript
-import {
-  fetchLaunchPoolDepositV2,
-  safeFetchLaunchPoolDepositV2,
-} from '@metaplex-foundation/genesis';
+import { fetchLaunchPoolDepositV2, safeFetchLaunchPoolDepositV2 } from '@metaplex-foundation/genesis';
 
-// 찾지 못하면 에러 발생
-const deposit = await fetchLaunchPoolDepositV2(umi, depositPda);
-
-// 찾지 못하면 null 반환
-const maybeDeposit = await safeFetchLaunchPoolDepositV2(umi, depositPda);
+const deposit = await fetchLaunchPoolDepositV2(umi, depositPda); // throws if not found
+const maybeDeposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // returns null
 
 if (deposit) {
-  console.log('금액:', deposit.amountQuoteToken);
-  console.log('청구됨:', deposit.claimed);
+  console.log('Amount deposited:', deposit.amountQuoteToken);
+  console.log('Claimed:', deposit.claimed);
 }
 ```
 
-## 다음 단계
+{% /totem %}
 
-- [Presale](/ko/smart-contracts/genesis/presale) - 고정 가격 토큰 판매
-- [어그리게이션 API](/ko/smart-contracts/genesis/aggregation) - API를 통한 런칭 데이터 조회
+## Notes
+
+- The 2% protocol fee applies to both deposits and withdrawals
+- Multiple deposits from the same user accumulate in one deposit account
+- If a user withdraws their entire balance, the deposit PDA closes
+- Transitions must be executed after deposits close for end behaviors to process
+- Users must have wSOL (wrapped SOL) to deposit
+
+## FAQ
+
+### How is the token price determined in a Launch Pool?
+The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
+
+### Can users withdraw their deposits?
+Yes, users can withdraw during the deposit period. A 2% withdrawal fee applies to discourage gaming the system.
+
+### What happens if I deposit multiple times?
+Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
+
+### When can users claim their tokens?
+After the deposit period ends and the claim window opens (defined by `claimStartCondition`). The transition must be executed first to process end behaviors.
+
+### What's the difference between Launch Pool and Presale?
+Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Launch Pool** | Deposit-based distribution where price is discovered at close |
+| **Deposit Window** | Time period when users can deposit and withdraw SOL |
+| **Claim Window** | Time period when users can claim their proportional tokens |
+| **End Behavior** | Automated action executed after deposit period ends |
+| **Transition** | Instruction that processes end behaviors and routes funds |
+| **Proportional Distribution** | Token allocation based on user's share of total deposits |
+| **Quote Token** | The token users deposit (usually wSOL) |
+| **Base Token** | The token being distributed |
+
+## Next Steps
+
+- [Presale](/smart-contracts/genesis/presale) - Fixed-price token sales
+- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based allocation
+- [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API

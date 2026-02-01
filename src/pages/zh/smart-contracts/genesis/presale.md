@@ -1,41 +1,99 @@
 ---
-title: 预售
-metaTitle: Genesis - 预售
-description: 固定价格代币销售，用户存入SOL并以预定汇率获得代币。
+title: Presale
+metaTitle: Genesis - Presale | Fixed-Price Token Sale | Metaplex
+description: Fixed-price token sale where users deposit SOL and receive tokens at a predetermined rate. Set your price upfront with controlled distribution.
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - presale
+  - fixed price sale
+  - token presale
+  - ICO
+  - token sale
+  - fixed pricing
+about:
+  - Presale mechanics
+  - Fixed pricing
+  - Token sales
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Initialize a Genesis Account with your token allocation
+  - Add a Presale bucket with price and cap configuration
+  - Add an Unlocked bucket for collected funds
+  - Finalize and open the presale for deposits
+howToTools:
+  - Node.js
+  - Umi framework
+  - Genesis SDK
+faqs:
+  - q: How is the token price calculated in a Presale?
+    a: Price equals SOL cap divided by token allocation. For 1,000,000 tokens with a 100 SOL cap, the price is 0.0001 SOL per token.
+  - q: What happens if the SOL cap isn't reached?
+    a: Users still receive tokens proportional to their deposits. If only 50 SOL is deposited against a 100 SOL cap, depositors receive 50% of allocated tokens.
+  - q: Can I set deposit limits per user?
+    a: Yes. Use minimumDepositAmount for minimum per-transaction limits and depositLimit for maximum total deposit per user.
+  - q: What's the difference between Presale and Launch Pool?
+    a: Presale has a fixed price determined by token allocation and SOL cap. Launch Pool discovers price organically based on total deposits.
+  - q: When should I use Presale vs Launch Pool?
+    a: Use Presale when you want predictable pricing and know exactly how much you want to raise. Use Launch Pool for organic price discovery.
 ---
 
-预售是一种代币发行机制，代币以固定的预定价格出售。与发行池的最终价格取决于总存款不同，预售让您可以预先设定每个代币的确切价格。{% .lead %}
+**Presales** offer fixed-price token distribution. Set your token price upfront based on allocation and SOL cap—users know exactly what they're getting, and you know exactly what you'll raise. {% .lead %}
 
-## 工作原理
+{% callout title="What You'll Learn" %}
+This guide covers:
+- How Presale pricing works (allocation + cap = price)
+- Setting up deposit windows and claim periods
+- Configuring deposit limits and cooldowns
+- User operations: wrap SOL, deposit, and claim
+{% /callout %}
 
-1. 您将代币分配到预售，并设置SOL上限来确定固定价格
-2. 用户在存款窗口期间以固定汇率存入SOL
-3. 存款期结束后，您执行转换以转移资金
-4. 用户根据其存款金额领取代币
+## Summary
 
-### 价格计算
+Presales sell tokens at a predetermined price. The price is calculated from the token allocation and SOL cap you configure.
 
-代币价格由分配代币与SOL上限的比率决定：
+- Fixed price = SOL cap / token allocation
+- Users deposit SOL during the deposit window (2% fee applies)
+- First-come-first-served up to the SOL cap
+- Optional: minimum/maximum deposit limits, cooldowns, backend authorization
+
+## Out of Scope
+
+Organic price discovery (see [Launch Pool](/smart-contracts/genesis/launch-pool)), bid-based auctions (see [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)), and vesting schedules.
+
+## How It Works
+
+1. You allocate tokens to the Presale with a SOL cap that determines the fixed price
+2. Users deposit SOL during the deposit window at the fixed rate
+3. After the deposit period ends, you execute the transition to move funds
+4. Users claim their tokens based on their deposit amount
+
+### Price Calculation
+
+The token price is determined by the ratio of allocated tokens to the SOL cap:
 
 ```
-价格 = allocationQuoteTokenCap / baseTokenAllocation
-代币数量 = 存款 / 价格
+price = allocationQuoteTokenCap / baseTokenAllocation
+tokens = deposit / price
 ```
 
-例如，如果您分配1,000,000个代币，SOL上限为100：
-- 价格 = 100 SOL / 1,000,000 代币 = 0.0001 SOL每代币
-- 10 SOL存款获得100,000个代币
+For example, if you allocate 1,000,000 tokens with a 100 SOL cap:
+- Price = 100 SOL / 1,000,000 tokens = 0.0001 SOL per token
+- A 10 SOL deposit receives 100,000 tokens
 
-### 费用
+### Fees
 
-用户存款会收取费用。详情请参见[协议费用](/protocol-fees)。
+{% protocol-fees program="genesis" config="presale" showTitle=false /%}
 
-## 快速开始
+## Quick Start
 
 {% totem %}
-{% totem-accordion title="查看完整设置脚本" %}
+{% totem-accordion title="View complete setup Script" %}
 
-这展示了如何设置带有开始和结束日期的预售。您还可以添加最小存款金额、最大存款金额或后端签名者。要构建面向用户的应用，请参见[用户操作](#用户操作)。
+This shows how to setup a Presale with Start and End Dates. You can also add a minimum deposit amount and a maximum deposit amount or a backend signer. To build the user-facing app, see [User Operations](#user-operations).
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -62,9 +120,9 @@ async function setupPresale() {
 
   const baseMint = generateSigner(umi);
   const backendSigner = generateSigner(umi);
-  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 100万代币（9位小数）
+  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
 
-  // 1. 初始化
+  // 1. Initialize
   const [genesisAccount] = findGenesisAccountV2Pda(umi, {
     baseMint: baseMint.publicKey,
     genesisIndex: 0,
@@ -79,23 +137,23 @@ async function setupPresale() {
     uri: 'https://example.com/metadata.json',
   }).sendAndConfirm(umi);
 
-  // 2. 定义时间
+  // 2. Define timing
   const now = BigInt(Math.floor(Date.now() / 1000));
   const depositStart = now + 60n;
   const depositEnd = now + 86400n;
   const claimStart = depositEnd + 1n;
   const claimEnd = claimStart + 604800n;
 
-  // 3. 派生桶PDA
+  // 3. Derive bucket PDAs
   const [presaleBucket] = findPresaleBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
   const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
 
-  // 4. 添加预售桶
+  // 4. Add Presale bucket
   await addPresaleBucketV2(umi, {
     genesisAccount,
     baseMint: baseMint.publicKey,
     baseTokenAllocation: TOTAL_SUPPLY,
-    allocationQuoteTokenCap: sol(100).basisPoints, // 100 SOL上限
+    allocationQuoteTokenCap: sol(100).basisPoints, // 100 SOL cap
     depositStartCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
@@ -132,7 +190,7 @@ async function setupPresale() {
     ],
   }).sendAndConfirm(umi);
 
-  // 5. 添加解锁桶（转换后接收SOL）
+  // 5. Add Unlocked bucket (receives SOL after transition)
   await addUnlockedBucketV2(umi, {
     genesisAccount,
     baseMint: baseMint.publicKey,
@@ -153,14 +211,14 @@ async function setupPresale() {
     backendSigner: { signer: backendSigner.publicKey },
   }).sendAndConfirm(umi);
 
-  // 6. 最终确定
+  // 6. Finalize
   await finalizeV2(umi, {
     baseMint: baseMint.publicKey,
     genesisAccount,
   }).sendAndConfirm(umi);
 
-  console.log('预售已激活！');
-  console.log('代币:', baseMint.publicKey);
+  console.log('Presale active!');
+  console.log('Token:', baseMint.publicKey);
   console.log('Genesis:', genesisAccount);
 }
 
@@ -170,9 +228,9 @@ setupPresale().catch(console.error);
 {% /totem-accordion %}
 {% /totem %}
 
-## 设置指南
+## Setup Guide
 
-### 前置条件
+### Prerequisites
 
 {% totem %}
 
@@ -182,9 +240,9 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 
 {% /totem %}
 
-### 1. 初始化Genesis账户
+### 1. Initialize the Genesis Account
 
-Genesis账户创建您的代币并协调所有分配桶。
+The Genesis Account creates your token and coordinates all distribution buckets.
 
 {% totem %}
 
@@ -205,7 +263,7 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 // umi.use(keypairIdentity(yourKeypair));
 
 const baseMint = generateSigner(umi);
-const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 100万代币（9位小数）
+const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
 
 const [genesisAccount] = findGenesisAccountV2Pda(umi, {
   baseMint: baseMint.publicKey,
@@ -225,12 +283,12 @@ await initializeV2(umi, {
 {% /totem %}
 
 {% callout type="note" %}
-`totalSupplyBaseToken`应等于所有桶分配的总和。
+The `totalSupplyBaseToken` should equal the sum of all bucket allocations.
 {% /callout %}
 
-### 2. 添加预售桶
+### 2. Add the Presale Bucket
 
-预售桶收集存款并分配代币。在此处配置时间和可选限制。
+The Presale bucket collects deposits and distributes tokens. Configure timing and optional limits here.
 
 {% totem %}
 
@@ -248,17 +306,17 @@ const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIn
 
 const now = BigInt(Math.floor(Date.now() / 1000));
 const depositStart = now;
-const depositEnd = now + 86400n; // 24小时
+const depositEnd = now + 86400n; // 24 hours
 const claimStart = depositEnd + 1n;
-const claimEnd = claimStart + 604800n; // 1周
+const claimEnd = claimStart + 604800n; // 1 week
 
 await addPresaleBucketV2(umi, {
   genesisAccount,
   baseMint: baseMint.publicKey,
   baseTokenAllocation: TOTAL_SUPPLY,
-  allocationQuoteTokenCap: 100_000_000_000n, // 100 SOL上限（设定价格）
+  allocationQuoteTokenCap: 100_000_000_000n, // 100 SOL cap (sets price)
 
-  // 时间
+  // Timing
   depositStartCondition: {
     __kind: 'TimeAbsolute',
     padding: Array(47).fill(0),
@@ -284,11 +342,11 @@ await addPresaleBucketV2(umi, {
     triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
   },
 
-  // 可选：存款限制
-  minimumDepositAmount: null, // 或 { amount: sol(0.1).basisPoints }
-  depositLimit: null, // 或 { limit: sol(10).basisPoints }
+  // Optional: Deposit limits
+  minimumDepositAmount: null, // or { amount: sol(0.1).basisPoints }
+  depositLimit: null, // or { limit: sol(10).basisPoints }
 
-  // 转换后收集的SOL去向
+  // Where collected SOL goes after transition
   endBehaviors: [
     {
       __kind: 'SendQuoteTokenPercentage',
@@ -303,9 +361,9 @@ await addPresaleBucketV2(umi, {
 
 {% /totem %}
 
-### 3. 添加解锁桶
+### 3. Add the Unlocked Bucket
 
-解锁桶在转换后接收来自预售的SOL。
+The Unlocked bucket receives SOL from the Presale after the transition.
 
 {% totem %}
 
@@ -338,9 +396,9 @@ await addUnlockedBucketV2(umi, {
 
 {% /totem %}
 
-### 4. 最终确定
+### 4. Finalize
 
-配置完所有桶后，最终确定以激活预售。这是不可逆的。
+Once all buckets are configured, finalize to activate the presale. This is irreversible.
 
 {% totem %}
 
@@ -355,11 +413,11 @@ await finalizeV2(umi, {
 
 {% /totem %}
 
-## 用户操作
+## User Operations
 
-### 包装SOL
+### Wrapping SOL
 
-用户必须在存款前将SOL包装为wSOL。
+Users must wrap SOL to wSOL before depositing.
 
 {% totem %}
 
@@ -395,7 +453,7 @@ await createTokenIfMissing(umi, {
 
 {% /totem %}
 
-### 存款
+### Depositing
 
 {% totem %}
 
@@ -414,22 +472,22 @@ await depositPresaleV2(umi, {
   amountQuoteToken: sol(1).basisPoints,
 }).sendAndConfirm(umi);
 
-// 验证
+// Verify
 const [depositPda] = findPresaleDepositV2Pda(umi, {
   bucket: presaleBucket,
   recipient: umi.identity.publicKey,
 });
 const deposit = await fetchPresaleDepositV2(umi, depositPda);
-console.log('已存入（扣除费用后）:', deposit.amountQuoteToken);
+console.log('Deposited (after fee):', deposit.amountQuoteToken);
 ```
 
 {% /totem %}
 
-同一用户的多次存款会累积到单个存款账户中。
+Multiple deposits from the same user accumulate into a single deposit account.
 
-### 领取代币
+### Claiming Tokens
 
-存款期结束且领取开放后：
+After the deposit period ends and claims open:
 
 {% totem %}
 
@@ -446,13 +504,13 @@ await claimPresaleV2(umi, {
 
 {% /totem %}
 
-代币分配公式：`用户代币 = (用户存款 / allocationQuoteTokenCap) * baseTokenAllocation`
+Token allocation: `userTokens = (userDeposit / allocationQuoteTokenCap) * baseTokenAllocation`
 
-## 管理员操作
+## Admin Operations
 
-### 执行转换
+### Executing the Transition
 
-存款关闭后，执行转换以将收集的SOL移至解锁桶。
+After deposits close, execute the transition to move collected SOL to the unlocked bucket.
 
 {% totem %}
 
@@ -480,34 +538,34 @@ await transitionV2(umi, {
 
 {% /totem %}
 
-**重要性：** 如果不执行转换，收集的SOL将保留在预售桶中。用户仍然可以领取代币，但团队无法访问筹集的资金。
+**Why this matters:** Without transition, collected SOL stays locked in the Presale bucket. Users can still claim tokens, but the team cannot access the raised funds.
 
-## 参考
+## Reference
 
-### 配置选项
+### Configuration Options
 
-这些选项在创建预售桶时设置：
+These options are set when creating the Presale bucket:
 
-| 选项 | 描述 | 示例 |
+| Option | Description | Example |
 |--------|-------------|---------|
-| `minimumDepositAmount` | 每笔交易的最低存款 | `{ amount: sol(0.1).basisPoints }` |
-| `depositLimit` | 每用户最大总存款 | `{ limit: sol(10).basisPoints }` |
-| `depositCooldown` | 存款间隔时间 | `{ seconds: 60n }` |
-| `perCooldownDepositLimit` | 每个冷却期的最大存款 | `{ amount: sol(1).basisPoints }` |
-| `backendSigner` | 要求后端授权 | `{ signer: publicKey }` |
+| `minimumDepositAmount` | Minimum deposit per transaction | `{ amount: sol(0.1).basisPoints }` |
+| `depositLimit` | Maximum total deposit per user | `{ limit: sol(10).basisPoints }` |
+| `depositCooldown` | Time between deposits | `{ seconds: 60n }` |
+| `perCooldownDepositLimit` | Max deposit per cooldown period | `{ amount: sol(1).basisPoints }` |
+| `backendSigner` | Require backend authorization | `{ signer: publicKey }` |
 
-### 时间条件
+### Time Conditions
 
-四个条件控制预售时间：
+Four conditions control presale timing:
 
-| 条件 | 用途 |
+| Condition | Purpose |
 |-----------|---------|
-| `depositStartCondition` | 存款开始时间 |
-| `depositEndCondition` | 存款关闭时间 |
-| `claimStartCondition` | 领取开始时间 |
-| `claimEndCondition` | 领取关闭时间 |
+| `depositStartCondition` | When deposits open |
+| `depositEndCondition` | When deposits close |
+| `claimStartCondition` | When claims open |
+| `claimEndCondition` | When claims close |
 
-使用带有Unix时间戳的`TimeAbsolute`：
+Use `TimeAbsolute` with a Unix timestamp:
 
 {% totem %}
 
@@ -517,16 +575,16 @@ import { NOT_TRIGGERED_TIMESTAMP } from '@metaplex-foundation/genesis';
 const condition = {
   __kind: 'TimeAbsolute',
   padding: Array(47).fill(0),
-  time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 从现在起1小时
+  time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 1 hour from now
   triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
 };
 ```
 
 {% /totem %}
 
-### 结束行为
+### End Behaviors
 
-定义存款期后收集的SOL会发生什么：
+Define what happens to collected SOL after the deposit period:
 
 {% totem %}
 
@@ -536,7 +594,7 @@ endBehaviors: [
     __kind: 'SendQuoteTokenPercentage',
     padding: Array(4).fill(0),
     destinationBucket: publicKey(unlockedBucket),
-    percentageBps: 10000, // 100% = 10000基点
+    percentageBps: 10000, // 100% = 10000 basis points
     processed: false,
   },
 ]
@@ -544,9 +602,9 @@ endBehaviors: [
 
 {% /totem %}
 
-### 获取状态
+### Fetching State
 
-**桶状态：**
+**Bucket state:**
 
 {% totem %}
 
@@ -554,35 +612,73 @@ endBehaviors: [
 import { fetchPresaleBucketV2 } from '@metaplex-foundation/genesis';
 
 const bucket = await fetchPresaleBucketV2(umi, presaleBucket);
-console.log('总存款:', bucket.quoteTokenDepositTotal);
-console.log('存款数量:', bucket.depositCount);
-console.log('代币分配:', bucket.bucket.baseTokenAllocation);
-console.log('SOL上限:', bucket.allocationQuoteTokenCap);
+console.log('Total deposits:', bucket.quoteTokenDepositTotal);
+console.log('Deposit count:', bucket.depositCount);
+console.log('Token allocation:', bucket.bucket.baseTokenAllocation);
+console.log('SOL cap:', bucket.allocationQuoteTokenCap);
 ```
 
 {% /totem %}
 
-**存款状态：**
+**Deposit state:**
 
 {% totem %}
 
 ```typescript
 import { fetchPresaleDepositV2, safeFetchPresaleDepositV2 } from '@metaplex-foundation/genesis';
 
-const deposit = await fetchPresaleDepositV2(umi, depositPda); // 未找到则抛出异常
-const maybeDeposit = await safeFetchPresaleDepositV2(umi, depositPda); // 返回null
+const deposit = await fetchPresaleDepositV2(umi, depositPda); // throws if not found
+const maybeDeposit = await safeFetchPresaleDepositV2(umi, depositPda); // returns null
 
 if (deposit) {
-  console.log('已存入金额:', deposit.amountQuoteToken);
-  console.log('已领取金额:', deposit.amountClaimed);
-  console.log('完全领取:', deposit.claimed);
+  console.log('Amount deposited:', deposit.amountQuoteToken);
+  console.log('Amount claimed:', deposit.amountClaimed);
+  console.log('Fully claimed:', deposit.claimed);
 }
 ```
 
 {% /totem %}
 
-## 后续步骤
+## Notes
 
-- [发行池](/zh/smart-contracts/genesis/launch-pool) - 具有有机价格发现的替代方案
-- [聚合API](/zh/smart-contracts/genesis/aggregation) - 通过API查询发行数据
-- [快速开始](/zh/smart-contracts/genesis/getting-started) - Genesis基础知识
+- The 2% protocol fee applies to deposits
+- Users must wrap SOL to wSOL before depositing
+- Multiple deposits from the same user accumulate in one deposit account
+- The transition must be executed after deposits close for the team to access funds
+- Finalization is permanent—double-check all configuration before calling `finalizeV2`
+
+## FAQ
+
+### How is the token price calculated in a Presale?
+Price equals SOL cap divided by token allocation. For 1,000,000 tokens with a 100 SOL cap, the price is 0.0001 SOL per token.
+
+### What happens if the SOL cap isn't reached?
+Users still receive tokens proportional to their deposits. If only 50 SOL is deposited against a 100 SOL cap, depositors receive 50% of allocated tokens.
+
+### Can I set deposit limits per user?
+Yes. Use `minimumDepositAmount` for minimum per-transaction limits and `depositLimit` for maximum total deposit per user.
+
+### What's the difference between Presale and Launch Pool?
+Presale has a fixed price determined by token allocation and SOL cap. Launch Pool discovers price organically based on total deposits.
+
+### When should I use Presale vs Launch Pool?
+Use Presale when you want predictable pricing and know exactly how much you want to raise. Use Launch Pool for organic price discovery.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Presale** | Fixed-price token sale with predetermined rate |
+| **SOL Cap** | Maximum SOL the presale will accept (determines price) |
+| **Token Allocation** | Number of tokens available in the presale |
+| **Deposit Limit** | Maximum total deposit allowed per user |
+| **Minimum Deposit** | Minimum amount required per deposit transaction |
+| **Cooldown** | Time users must wait between deposits |
+| **End Behavior** | Automated action after deposit period ends |
+| **Transition** | Instruction that processes end behaviors |
+
+## Next Steps
+
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - Organic price discovery
+- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based allocation
+- [Getting Started](/smart-contracts/genesis/getting-started) - Genesis fundamentals
