@@ -3,6 +3,41 @@ title: Updating Assets
 metaTitle: Updating Assets | Metaplex Core
 description: Learn how to update Core NFT Asset metadata on Solana. Change name, URI, collection membership, and make assets immutable using the Metaplex Core SDK.
 updated: '01-31-2026'
+keywords:
+  - update NFT
+  - change metadata
+  - NFT metadata
+  - mpl-core update
+  - immutable NFT
+about:
+  - NFT metadata
+  - Update authority
+  - Asset immutability
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
+  - Fetch the Asset to get current state
+  - Call update(umi, { asset, name, uri }) with new values
+  - Verify changes with fetchAsset()
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+faqs:
+  - q: Can I undo making an Asset immutable?
+    a: No. Setting the update authority to None is permanent. The Asset's name, URI, and collection membership are frozen forever.
+  - q: How do I update only the name without changing the URI?
+    a: Pass only the fields you want to change. Omit uri to keep the current value.
+  - q: What's the difference between updating and transferring?
+    a: Update changes the Asset's metadata (name, URI). Transfer changes ownership. They're separate operations with different authority requirements.
+  - q: Can a delegate update an Asset?
+    a: Yes, if they have been assigned as an Update Delegate via the Update Delegate plugin.
+  - q: Does updating cost SOL?
+    a: Updates are free unless the new data is larger than the current account size. The transaction fee (~0.000005 SOL) still applies.
 ---
 This guide shows how to **update Core Asset metadata** on Solana using the Metaplex Core SDK. Modify the name, URI, or collection membership of Assets you control. {% .lead %}
 {% callout title="What You'll Learn" %}

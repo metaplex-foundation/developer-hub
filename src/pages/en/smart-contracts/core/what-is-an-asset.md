@@ -3,6 +3,32 @@ title: MPL Core Asset
 metaTitle: What is a Core Asset | Metaplex Core
 description: Learn what a Core Asset is on Solana. Understand the single-account NFT model, account structure, collection membership, and off-chain metadata.
 updated: '01-31-2026'
+keywords:
+  - Core Asset
+  - NFT account
+  - single-account NFT
+  - asset structure
+  - off-chain metadata
+about:
+  - NFT architecture
+  - Account structure
+  - Metadata storage
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: How is Core different from Token Metadata NFTs?
+    a: Token Metadata requires 3+ accounts (mint, metadata, token account). Core uses a single account storing owner and metadata together, making it ~80% cheaper and faster.
+  - q: What data is stored on-chain vs off-chain?
+    a: On-chain stores owner, name, URI, update authority, and plugins. Off-chain (at the URI) stores description, image, attributes, animation URL, and extended metadata.
+  - q: Can I convert a Token Metadata NFT to Core?
+    a: Not directly. They are separate standards. You would need to burn the old NFT and mint a new Core Asset. Migration tools exist to help.
+  - q: Is Core compatible with existing NFT marketplaces?
+    a: Most major Solana marketplaces support Core Assets. Check Ecosystem Support for the current list.
+  - q: What happens if off-chain metadata goes offline?
+    a: The Asset still exists on-chain with name and URI, but image/attributes won't load. Use permanent storage like Arweave or pinned IPFS.
 ---
 This page explains **what a Core Asset is** and how it differs from traditional Solana NFTs. Understand the account structure, collection relationships, and metadata storage. {% .lead %}
 {% callout title="Key Concepts" %}

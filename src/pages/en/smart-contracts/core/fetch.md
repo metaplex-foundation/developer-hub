@@ -3,6 +3,42 @@ title: Fetching Assets
 metaTitle: Fetching Assets | Metaplex Core
 description: Learn how to fetch Core NFT Assets and Collections on Solana. Retrieve single assets, query by owner or collection, and use the DAS API for fast indexed queries.
 updated: '01-31-2026'
+keywords:
+  - fetch NFT
+  - query NFT
+  - DAS API
+  - get NFT by owner
+  - mpl-core fetch
+about:
+  - NFT queries
+  - DAS API
+  - Asset retrieval
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
+  - Configure Umi with your RPC endpoint
+  - Call fetchAsset(umi, publicKey) with the Asset address
+  - Access Asset properties like name, uri, owner, plugins
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+  - DAS-enabled RPC (optional)
+faqs:
+  - q: Should I use GPA or DAS for fetching multiple Assets?
+    a: Use DAS whenever possible. GPA queries scan all program accounts and can be slow and expensive on mainnet. DAS provides indexed queries that are faster and include off-chain metadata.
+  - q: How do I fetch an Asset's off-chain metadata?
+    a: The uri field contains the metadata URL. Fetch it separately with a standard HTTP request after getting the Asset.
+  - q: Can I fetch Assets across multiple Collections?
+    a: Not in a single query. Fetch each Collection's Assets separately and combine the results, or use DAS with custom filters.
+  - q: Why is skipDerivePlugins useful?
+    a: By default, fetchAsset derives Collection-level plugins onto the Asset. Setting skipDerivePlugins to true skips this step, returning only Asset-level plugins for faster fetches.
+  - q: How do I paginate large result sets?
+    a: GPA functions don't support built-in pagination. For large collections, use DAS which supports page and limit parameters, or implement client-side pagination.
 ---
 This guide shows how to **fetch Core Assets and Collections** from the Solana blockchain using the Metaplex Core SDK. Retrieve individual Assets, query by owner or collection, or use DAS for indexed queries. {% .lead %}
 {% callout title="What You'll Learn" %}

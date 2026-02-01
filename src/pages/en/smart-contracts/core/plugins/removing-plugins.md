@@ -3,6 +3,30 @@ title: Removing Plugins
 metaTitle: Removing Plugins | Metaplex Core
 description: Learn how to remove plugins from Core NFT Assets and Collections. Remove functionality and recover rent from plugin accounts.
 updated: '01-31-2026'
+keywords:
+  - remove plugin
+  - removePlugin
+  - delete plugin
+  - recover rent
+about:
+  - Removing plugins
+  - Rent recovery
+  - Plugin management
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Can I recover the data after removing a plugin?
+    a: No. Removing a plugin permanently deletes all its data. Make sure to back up any important data before removal.
+  - q: What happens to the rent when I remove a plugin?
+    a: The rent that was used to store the plugin data is recovered and returned to the payer.
+  - q: Can I remove a plugin someone else delegated to me?
+    a: Yes, if you're the delegated authority for that plugin, you can remove it.
+  - q: Why can't I remove a Permanent plugin?
+    a: Permanent plugins are designed to be immutable and cannot be removed after creation. This is by design for use cases that require guaranteed permanence.
+  - q: Can I remove a plugin from a Collection and its Assets at once?
+    a: No. Collection plugins and Asset plugins are managed separately. Removing a Collection plugin only affects the Collection, not its Assets.
 ---
 This guide shows how to **remove plugins** from Core Assets and Collections. Removing a plugin deletes its data and functionality. {% .lead %}
 {% callout title="What You'll Learn" %}

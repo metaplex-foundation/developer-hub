@@ -3,6 +3,27 @@ title: Using Metaplex Core in Anchor
 metaTitle: Using Metaplex Core in Anchor | Metaplex Core
 description: Integrate Metaplex Core into Anchor programs. Learn CPI calls, account deserialization, and plugin access for on-chain NFT operations.
 updated: '01-31-2026'
+keywords:
+  - Core Anchor
+  - mpl-core CPI
+  - Anchor NFT
+  - on-chain Core
+about:
+  - Anchor integration
+  - CPI patterns
+  - On-chain development
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+faqs:
+  - q: Do I need the anchor feature flag?
+    a: Yes, for direct deserialization in Accounts structs. Without it, use from_bytes() manually.
+  - q: How do I check if a plugin exists?
+    a: Use fetch_plugin() which returns Option - it won't throw an error if the plugin doesn't exist.
+  - q: Can I access external plugins (Oracle, AppData)?
+    a: Yes. Use fetch_external_plugin() instead of fetch_plugin() with the appropriate key.
+  - q: Where can I find all available instructions?
+    a: See the mpl-core docs.rs instructions module for the complete API reference.
 ---
 Build **on-chain programs** that interact with Core Assets using Anchor. This guide covers installation, account deserialization, plugin access, and CPI patterns. {% .lead %}
 {% callout title="What You'll Learn" %}

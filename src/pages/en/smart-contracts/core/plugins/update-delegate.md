@@ -3,6 +3,30 @@ title: Update Delegate Plugin
 metaTitle: Update Delegate Plugin | Metaplex Core
 description: Delegate update authority to third parties for Core NFT Assets and Collections. Allow others to modify metadata without transferring ownership.
 updated: '01-31-2026'
+keywords:
+  - update delegate
+  - delegate update authority
+  - metadata permissions
+  - third-party updates
+about:
+  - Update delegation
+  - Metadata permissions
+  - Authority management
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What can additional delegates do?
+    a: Almost everything the update authority can do - update metadata, add/remove plugins, etc. They cannot change the root update authority, modify the additional delegates list, or change the Update Delegate plugin authority.
+  - q: Can additional delegates add more delegates?
+    a: No. Only the root update authority (or plugin authority) can add or remove additional delegates.
+  - q: How do I remove myself as an additional delegate?
+    a: Additional delegates can remove themselves from the list by updating the plugin without their address in the additionalDelegates array.
+  - q: Is there a limit to additional delegates?
+    a: There's no hard limit, but more delegates increase account size and rent. Keep the list reasonable.
+  - q: Does Update Delegate work on Collections?
+    a: Yes. Adding Update Delegate to a Collection allows delegates to update collection metadata and collection-level plugins.
 ---
 The **Update Delegate Plugin** allows you to grant update permissions to additional addresses. Useful when third parties need to modify Asset metadata without being the primary update authority. {% .lead %}
 {% callout title="What You'll Learn" %}

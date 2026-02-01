@@ -3,6 +3,31 @@ title: AppData Plugin
 metaTitle: AppData Plugin | Metaplex Core
 description: Store arbitrary data on Core NFTs with the AppData plugin. Create secure, partitioned storage for third-party apps, game state, or custom metadata.
 updated: '01-31-2026'
+keywords:
+  - AppData plugin
+  - NFT data storage
+  - game state
+  - on-chain storage
+about:
+  - Data storage
+  - Third-party integration
+  - Custom metadata
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: What's the difference between AppData and the Attributes plugin?
+    a: Attributes stores key-value strings controlled by the update authority. AppData stores arbitrary data controlled by a separate Data Authority, making it ideal for third-party applications.
+  - q: Can I have multiple AppData plugins on one Asset?
+    a: Yes. Each AppData plugin can have a different Data Authority, allowing multiple third-party apps to store data on the same Asset.
+  - q: How do I update existing AppData?
+    a: Call writeData() with the new data. This replaces the existing data entirely - there's no partial update.
+  - q: Is AppData indexed by DAS?
+    a: Yes. JSON and MsgPack schemas are automatically deserialized and indexed. Binary is stored as base64.
+  - q: What is LinkedAppData?
+    a: LinkedAppData is added to a Collection and allows the Data Authority to write to any Asset in that Collection without adding AppData to each Asset individually.
 ---
 The **AppData Plugin** provides secure, partitioned data storage on Core Assets. Third-party applications can store and read arbitrary data (JSON, MsgPack, or binary) with exclusive write access controlled by a Data Authority. {% .lead %}
 {% callout title="What You'll Learn" %}

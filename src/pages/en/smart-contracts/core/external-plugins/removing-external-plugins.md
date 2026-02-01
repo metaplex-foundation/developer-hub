@@ -3,6 +3,26 @@ title: Removing External Plugins
 metaTitle: Removing External Plugins | Metaplex Core
 description: Learn how to remove Oracle and AppData plugins from Core Assets and Collections. Code examples for JavaScript and Rust.
 updated: '01-31-2026'
+keywords:
+  - remove external plugin
+  - remove Oracle
+  - remove AppData
+  - delete plugin
+about:
+  - External plugin removal
+  - Cleanup procedures
+  - Authority requirements
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Does removing an Oracle plugin delete the Oracle account?
+    a: No. Only the plugin adapter on the Asset is removed. The external Oracle account remains and can be reused.
+  - q: Can I recover AppData before removing?
+    a: Yes. Read the AppData using fetchAsset() before removing the plugin if you need to preserve the data.
+  - q: What happens to the rent?
+    a: The rent from the plugin adapter is recovered and returned to the transaction payer.
 ---
 This guide shows how to **remove External Plugins** from Core Assets and Collections. Remove Oracle or AppData plugins when they're no longer needed. {% .lead %}
 {% callout title="What You'll Learn" %}

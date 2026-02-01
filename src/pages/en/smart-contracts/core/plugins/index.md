@@ -3,6 +3,34 @@ title: Plugins Overview
 metaTitle: Core Plugins Overview | Metaplex Core
 description: Learn about Metaplex Core plugins - modular extensions that add behaviors like royalties, freezing, burning, and on-chain attributes to NFT Assets and Collections.
 updated: '01-31-2026'
+keywords:
+  - Core plugins
+  - NFT plugins
+  - plugin system
+  - royalties plugin
+  - freeze plugin
+about:
+  - Plugin architecture
+  - NFT extensions
+  - Lifecycle events
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Can I add plugins after an Asset is created?
+    a: Yes, except for Permanent plugins. Owner Managed plugins require owner signature; Authority Managed plugins require update authority signature.
+  - q: What happens to plugins when an Asset is transferred?
+    a: Owner Managed plugins (Transfer, Freeze, Burn Delegate) have their authority automatically revoked on transfer. Authority Managed and Permanent plugins persist.
+  - q: Can an Asset have the same plugin as its Collection?
+    a: Yes. When both have the same plugin type, the Asset-level plugin takes precedence over the Collection-level plugin.
+  - q: How do I remove a plugin?
+    a: Use the removePlugin instruction. Only the plugin authority can remove it.
+  - q: Can I create custom plugins?
+    a: No. Only built-in plugins are supported. The plugin system is not extensible by third parties.
+  - q: Do plugins cost extra SOL?
+    a: Adding plugins increases account size, which increases rent. The cost is minimal (~0.001 SOL per plugin depending on data size).
 ---
 This page explains the **Core Plugin system** - modular extensions that add behaviors and data storage to Core Assets and Collections. Plugins hook into lifecycle events to enforce rules or store on-chain data. {% .lead %}
 {% callout title="What You'll Learn" %}

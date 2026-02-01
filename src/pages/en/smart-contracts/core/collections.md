@@ -3,6 +3,41 @@ title: Managing Collections
 metaTitle: Core Collections | Metaplex Core
 description: Learn how to create and manage Core Collections on Solana. Group NFT Assets together, set collection-level royalties, and manage collection metadata.
 updated: '01-31-2026'
+keywords:
+  - NFT collection
+  - create collection
+  - collection metadata
+  - mpl-core collection
+  - group NFTs
+about:
+  - NFT collections
+  - Collection management
+  - Collection plugins
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
+  - Upload collection metadata JSON to get a URI
+  - Call createCollection(umi, { collection, name, uri })
+  - Pass collection address when creating Assets
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+faqs:
+  - q: What's the difference between a Collection and an Asset?
+    a: A Collection is a container that groups Assets together. It has its own metadata but cannot be owned or transferred like an Asset. Assets are the actual NFTs that users own.
+  - q: Can I add an existing Asset to a Collection?
+    a: Yes, use the update instruction with the newCollection parameter. The Asset's update authority must have permission to add it to the target Collection.
+  - q: Do I need a Collection for my NFTs?
+    a: No. Assets can exist standalone without a Collection. However, Collections enable collection-level royalties, easier discoverability, and batch operations.
+  - q: Can I remove an Asset from a Collection?
+    a: Yes, use the update instruction to change the Asset's collection. You need the appropriate authority on both the Asset and Collection.
+  - q: What happens if I delete a Collection?
+    a: Collections cannot be deleted while they contain Assets. Remove all Assets first, then the Collection account can be closed.
 ---
 This guide shows how to **create and manage Core Collections** on Solana using the Metaplex Core SDK. Collections group related Assets together under a shared identity with collection-level metadata and plugins. {% .lead %}
 {% callout title="What You'll Learn" %}

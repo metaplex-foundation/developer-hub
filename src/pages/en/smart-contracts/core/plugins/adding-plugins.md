@@ -3,6 +3,28 @@ title: Adding Plugins
 metaTitle: Adding Plugins to Core Assets | Metaplex Core
 description: Learn how to add plugins to Core NFT Assets and Collections. Set plugin authorities and configure plugin data at creation or after.
 updated: '01-31-2026'
+keywords:
+  - add plugin
+  - addPlugin
+  - plugin authority
+  - configure plugin
+about:
+  - Adding plugins
+  - Plugin configuration
+  - Authority management
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Can I add multiple plugins in one transaction?
+    a: Yes, when creating an Asset. For existing Assets, each addPlugin call is a separate transaction.
+  - q: What happens if I set authority to None?
+    a: The plugin becomes immutable. No one can update or remove it.
+  - q: Can I add Owner Managed plugins as the update authority?
+    a: No. Owner Managed plugins always require the owner's signature to add, regardless of who signs.
+  - q: Why can't I add a Permanent plugin?
+    a: Permanent plugins can only be added during Asset/Collection creation. They cannot be added to existing accounts.
 ---
 This guide shows how to **add plugins** to Core Assets and Collections. Plugins add functionality like royalties, freezing, attributes, and delegate permissions. {% .lead %}
 {% callout title="What You'll Learn" %}

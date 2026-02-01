@@ -3,6 +3,16 @@ title: JSON Schema
 metaTitle: JSON Schema | Core
 description: Understand the structure and requirements of the off-chain JSON schema for Metaplex Core assets.
 updated: '01-31-2026'
+keywords:
+  - NFT metadata
+  - JSON schema
+  - off-chain metadata
+  - metadata standard
+about:
+  - Metadata structure
+  - JSON format
+  - Off-chain data
+proficiencyLevel: Beginner
 ---
 The off-chain JSON metadata for Metaplex Core assets is similar to the Metaplex Token Metadata standard. However, since more data can be stored on-chain in the asset itself using plugins, some of the data like attributes can in addition be stored on chain.
 ## Schema Examples

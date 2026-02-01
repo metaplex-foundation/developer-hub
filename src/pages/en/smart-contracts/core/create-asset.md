@@ -3,6 +3,42 @@ title: Creating Assets
 metaTitle: Creating Assets | Metaplex Core
 description: Learn how to create Core NFT Assets on Solana using JavaScript or Rust. Includes uploading metadata, minting into collections, and adding plugins.
 updated: '01-31-2026'
+keywords:
+  - create NFT
+  - mint NFT
+  - Solana NFT
+  - mpl-core create
+  - upload metadata
+about:
+  - NFT minting
+  - Metadata upload
+  - Asset creation
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
+  - Upload metadata JSON to Arweave or IPFS to get a URI
+  - Call create(umi, { asset, name, uri }) with your metadata URI
+  - Verify the Asset on core.metaplex.com
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+  - Arweave or IPFS for storage
+faqs:
+  - q: What's the difference between Core Assets and Token Metadata NFTs?
+    a: Core Assets use a single account and cost ~80% less. Token Metadata uses 3+ accounts (mint, metadata, token). Core is recommended for new projects.
+  - q: Can I create multiple assets in one transaction?
+    a: No. Each create instruction creates one asset. For bulk minting, use Core Candy Machine or batch transactions.
+  - q: Do I need to create a Collection first?
+    a: No. Assets can exist without a Collection. However, Collections enable collection-level royalties and operations.
+  - q: How do I mint to a different wallet?
+    a: Pass the owner parameter in the create function with the recipient's address.
+  - q: What metadata format should I use?
+    a: Use the standard NFT metadata format with name, description, image, and optional attributes array. See the JSON Schema documentation.
 ---
 This guide shows how to **create a Core Asset** (NFT) on Solana using the Metaplex Core SDK. You'll upload off-chain metadata, create the on-chain Asset account, and optionally add it to a Collection or attach plugins. {% .lead %}
 {% callout title="What You'll Build" %}

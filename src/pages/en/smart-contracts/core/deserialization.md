@@ -3,6 +3,20 @@ title: Deserialization
 metaTitle: Deserialization | Core
 description: Learn about the deserialization of Asset accounts, Collection accounts and plugins using the Metaplex Core packages.
 updated: '01-31-2026'
+keywords:
+  - deserialize asset
+  - read asset data
+  - account parsing
+  - plugin deserialization
+about:
+  - Account deserialization
+  - Data parsing
+  - Plugin reading
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
 ---
 Digital assets on Core are composed of exactly **one onchain account** that contains both the base asset data and the plugin.
 That means that if we want to read that data we need to learn how to deserialize it.

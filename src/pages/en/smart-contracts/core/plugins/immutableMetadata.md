@@ -3,6 +3,30 @@ title: ImmutableMetadata Plugin
 metaTitle: ImmutableMetadata Plugin | Metaplex Core
 description: Make Core NFT Asset and Collection metadata permanently immutable. Lock the name and URI to prevent any future changes.
 updated: '01-31-2026'
+keywords:
+  - immutable metadata
+  - lock metadata
+  - permanent NFT
+  - provenance
+about:
+  - Metadata immutability
+  - Provenance protection
+  - Data locking
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Can I undo adding ImmutableMetadata?
+    a: No. Once added, the ImmutableMetadata plugin cannot be removed. The metadata is permanently locked. This is by design for provenance guarantees.
+  - q: What exactly becomes immutable?
+    a: The Asset or Collection's name and uri fields. Other plugin data is not affected - use authority None on individual plugins to make their data immutable.
+  - q: If I add this to a Collection, are existing Assets affected?
+    a: Yes. When ImmutableMetadata is on a Collection, all Assets in that Collection inherit the immutability. Their metadata cannot be changed.
+  - q: Can I add this during Asset creation?
+    a: Yes. You can add ImmutableMetadata during create() to ensure the metadata is locked from the start.
+  - q: Why would I want immutable metadata?
+    a: Immutable metadata provides permanent provenance - collectors know the NFT's name and associated metadata URI can never be changed, preventing rug-pulls.
 ---
 The **ImmutableMetadata Plugin** permanently locks the name and URI of Assets or Collections. Once added, the metadata cannot be changed by anyone, ensuring permanent provenance. {% .lead %}
 {% callout title="What You'll Learn" %}

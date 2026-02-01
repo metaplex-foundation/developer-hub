@@ -3,6 +3,43 @@ title: Transferring Assets
 metaTitle: Transferring Assets | Metaplex Core
 description: Learn how to transfer Core NFT Assets between wallets on Solana. Send NFTs to other users, handle collection transfers, and use transfer delegates.
 updated: '01-31-2026'
+keywords:
+  - transfer NFT
+  - send NFT
+  - NFT ownership
+  - mpl-core transfer
+  - transfer delegate
+about:
+  - NFT transfers
+  - Ownership change
+  - Transfer delegates
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
+  - Fetch the Asset to verify ownership and collection membership
+  - Call transfer(umi, { asset, newOwner }) with the recipient address
+  - Verify with fetchAsset() that ownership changed
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+faqs:
+  - q: How do I know if an Asset is in a Collection?
+    a: Fetch the Asset and check its updateAuthority. If the type is 'Collection', pass the address as the collection parameter.
+  - q: Can I transfer to myself?
+    a: Yes. Transferring to your own address is valid and useful for consolidating wallets or testing.
+  - q: What happens to the Transfer Delegate after a transfer?
+    a: The Transfer Delegate plugin is automatically revoked when the transfer completes. The new owner must assign a new delegate if needed.
+  - q: Can I cancel a transfer?
+    a: No. Transfers are atomic - once the transaction confirms, ownership has changed. There's no pending state to cancel.
+  - q: Can I transfer multiple Assets at once?
+    a: Not in a single instruction. You can batch multiple transfer instructions in one transaction, but each Asset requires its own transfer call.
+  - q: Does transferring change the update authority?
+    a: No. Transfer only changes ownership. The update authority remains the same unless explicitly changed via the update instruction.
 ---
 This guide shows how to **transfer Core Assets** between wallets on Solana using the Metaplex Core SDK. Send NFTs to other users with a single instruction. {% .lead %}
 {% callout title="What You'll Learn" %}

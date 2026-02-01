@@ -2,10 +2,33 @@
 title: How to Create a Core NFT Asset with Javascript
 metaTitle: How to Create a Core NFT Asset with Javascript | Core Guides
 description: Learn how to create a Core NFT Asset on the Solana blockchain with the Metaplex Core javascript package.
----
-# remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '01-31-2026'
+keywords:
+  - create NFT JavaScript
+  - mpl-core JavaScript
+  - mint NFT tutorial
+  - Solana NFT JavaScript
+about:
+  - JavaScript NFT creation
+  - Umi framework
+  - Step-by-step tutorial
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Set up a new Node.js project and install dependencies
+  - Configure Umi with your wallet and RPC endpoint
+  - Upload your image and metadata to decentralized storage
+  - Create the Asset using the create() function
+  - Verify the Asset was created successfully
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+  - Irys or IPFS for storage
+---
 This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Javascript SDK package to create a **Core NFT Asset** using the Metaplex Core onchain program.
 {% callout title="What is Core?" %}
 **Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.

@@ -3,6 +3,16 @@ title: Ecosystem Support
 metaTitle: Ecosystem Support | Core
 description: Learn about the Metaplex Core Ecosystem and which websites/apps/dApps support Metaplex Core.
 updated: '01-31-2026'
+keywords:
+  - Core marketplace
+  - Core wallet support
+  - Core ecosystem
+  - supported platforms
+about:
+  - Marketplace support
+  - Wallet compatibility
+  - Ecosystem integrations
+proficiencyLevel: Beginner
 ---
 The table below includes the Core integration status of many of the major marketplaces, wallets, explorers, RPC providers, and other dapps across the ecosystem.
 Metaplex also offers a free, open-source UI for creating, transferring and viewing Core digital assets at [https://core.metaplex.com/](https://core.metaplex.com/).

@@ -3,6 +3,29 @@ title: Create a US Market Trading Experience Using the Oracle External Plugin
 metaTitle: Create a US Market Trading Experience Using the Oracle External Plugin | Core Guides
 description: This guide shows how to limit your Core Collection trades and sales during open US market hours.
 updated: '01-31-2026'
+keywords:
+  - Oracle plugin
+  - trading restrictions
+  - market hours
+  - transfer validation
+about:
+  - Oracle implementation
+  - Trading restrictions
+  - Time-based rules
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+  - JavaScript
+howToSteps:
+  - Create a Solana program with Initialize Oracle and Crank Oracle instructions
+  - Deploy the Oracle program and initialize an Oracle account
+  - Create a Collection with Oracle plugin pointing to the Oracle account
+  - Set up a cron job to update Oracle state based on market hours
+howToTools:
+  - Anchor framework
+  - mpl-core SDK
+  - Solana CLI
+  - Cron scheduler
 ---
 This developer guide leverages the new Oracle Plugin to **create an NFT collection that can only be traded during US market hours**.
 ## Introduction

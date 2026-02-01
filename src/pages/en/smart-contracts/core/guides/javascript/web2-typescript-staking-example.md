@@ -3,6 +3,29 @@ title: Create Core Staking Using Javascript
 metaTitle: Create Core Staking Using Javascript | Core Guides
 description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking platform using web2 practices with a backend server.
 updated: '01-31-2026'
+keywords:
+  - NFT staking
+  - TypeScript staking
+  - freeze delegate
+  - web2 staking
+about:
+  - Staking mechanics
+  - Backend integration
+  - Plugin usage
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Set up a TypeScript backend with Umi and your authority keypair
+  - Add Freeze Delegate and Attribute plugins to staking Assets
+  - Create stake endpoint that freezes Asset and writes staking timestamp
+  - Create unstake endpoint that thaws Asset and calculates staking duration
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+  - Express or similar backend
 ---
 This developer guide demonstrates how to create a staking program for your collection using only TypeScript, leveraging the attribute plugin and freeze delegate. **This approach eliminates the need for a smart contract** to track staking time and manage staking/unstaking, making it more accessible for Web2 developer.
 ## Starting off: Understanding the Logic behind the program

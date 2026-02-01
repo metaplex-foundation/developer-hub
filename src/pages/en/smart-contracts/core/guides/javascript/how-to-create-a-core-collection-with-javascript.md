@@ -2,10 +2,33 @@
 title: How to Create a Core Collection with Javascript
 metaTitle: How to Create a Core Collection with Javascript | Core Guides
 description: Learn how to create a Core Collection on Solana with the Metaplex Core javascript package.
----
-# remember to update dates also in /components/guides/index.js
 created: '08-21-2024'
 updated: '01-31-2026'
+keywords:
+  - create collection JavaScript
+  - NFT collection tutorial
+  - mpl-core collection
+  - Solana collection
+about:
+  - Collection creation
+  - JavaScript tutorial
+  - Umi framework
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Set up a new Node.js project and install dependencies
+  - Configure Umi with your wallet and RPC endpoint
+  - Upload collection image and metadata
+  - Create the Collection using createCollection()
+  - Verify the Collection was created successfully
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+  - Irys or IPFS for storage
+---
 This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Javascript sdk package to create a **Core Collection** using the Metaplex Core onchain program.
 {% callout title="What is Core?" %}
 **Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.

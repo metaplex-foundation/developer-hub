@@ -3,6 +3,30 @@ title: Verified Creator Plugin
 metaTitle: Verified Creator Plugin | Metaplex Core
 description: Add verified creator signatures to Core NFT Assets and Collections. Prove creatorship without affecting royalty distribution.
 updated: '01-31-2026'
+keywords:
+  - verified creator
+  - creator signature
+  - prove authorship
+  - creator verification
+about:
+  - Creator verification
+  - Signature proof
+  - Authorship
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: How is this different from the Token Metadata creator array?
+    a: In Token Metadata, the creator array was used for royalty distribution. In Core, Verified Creators is purely for proof of creatorship - use the Royalties plugin for royalty distribution.
+  - q: Can the update authority verify a creator?
+    a: No. Each creator must verify themselves by signing the transaction. This ensures authentic proof of creatorship.
+  - q: Why can't I remove a verified creator?
+    a: To remove a verified creator, they must first unverify themselves. This prevents unauthorized removal of verified creators.
+  - q: Do Assets automatically get the Collection's verified creators?
+    a: Yes. Assets inherit the creators array from their Collection. Individual Assets can also have their own Verified Creators plugin with different creators.
+  - q: Can I use this for co-creator attribution?
+    a: Yes. This is a common use case - multiple creators can all verify their involvement in creating an Asset or Collection.
 ---
 The **Verified Creators Plugin** stores a list of verified creator signatures on Assets or Collections. Prove creatorship publicly without affecting royalty distribution. {% .lead %}
 {% callout title="What You'll Learn" %}

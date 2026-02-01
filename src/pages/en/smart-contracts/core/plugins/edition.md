@@ -3,6 +3,30 @@ title: Edition Plugin
 metaTitle: Edition Plugin | Metaplex Core
 description: Add edition numbers to Core NFT Assets for prints and limited runs. Track edition numbers like 1/100 for collectible series.
 updated: '01-31-2026'
+keywords:
+  - NFT edition
+  - edition number
+  - limited edition
+  - print series
+about:
+  - Edition numbering
+  - Limited runs
+  - Print series
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Is the edition number enforced to be unique?
+    a: No. The edition number is informational only. Creators are responsible for ensuring unique numbers. Use Candy Machine with the Edition Guard for automatic sequential numbering.
+  - q: Can I add the Edition plugin to an existing Asset?
+    a: No. The Edition plugin must be added during Asset creation. Plan ahead if you need edition numbers.
+  - q: How do I create a 1 of 100 style edition?
+    a: Add the Edition plugin to Assets with numbers 1-100 and add the Master Edition plugin to the Collection with maxSupply of 100.
+  - q: Can I change the edition number after creation?
+    a: Yes, if the plugin authority is not set to None. The update authority can modify the number using updatePlugin.
+  - q: What's the difference between Edition and Master Edition?
+    a: Edition stores the individual number on an Asset. Master Edition stores collection-level data (max supply, edition name/URI) on a Collection.
 ---
 The **Edition Plugin** stores an edition number on individual Assets. Use it to create numbered prints like "1 of 100" for collectible series and limited editions. {% .lead %}
 {% callout title="What You'll Learn" %}

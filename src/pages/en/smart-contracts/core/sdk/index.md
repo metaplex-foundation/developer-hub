@@ -3,6 +3,19 @@ title: MPL-Core SDKs
 metaTitle: Getting Started | Core
 description: Get started with the new Digital Asset Standard from Metaplex, Core. Core provides a simplicity first approach to NFTs and Digital Assets on the Solana blockchain.
 updated: '01-31-2026'
+keywords:
+  - Core SDK
+  - mpl-core SDK
+  - NFT SDK
+  - Solana NFT library
+about:
+  - SDK installation
+  - Getting started
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
 ---
 Select the language / library you want to use below to get started with the new Metaplex Core Standard.
 {% quick-links %}

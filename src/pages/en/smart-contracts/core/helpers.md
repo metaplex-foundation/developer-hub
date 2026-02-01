@@ -3,6 +3,20 @@ title: Helpers
 metaTitle: Helpers | Core
 description: Learn about the Core helper functions such as validation helpers, fetch helpers, plugin helpers, and more.
 updated: '01-31-2026'
+keywords:
+  - Core helpers
+  - fetch helpers
+  - plugin helpers
+  - validation helpers
+  - mpl-core utilities
+about:
+  - Helper functions
+  - SDK utilities
+  - Validation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
 {% callout type="note" title="JS Helper Functions" %}
 The following helper functions are for the JS client.

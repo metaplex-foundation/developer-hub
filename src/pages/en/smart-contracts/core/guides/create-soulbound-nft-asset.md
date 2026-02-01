@@ -3,6 +3,28 @@ title: Soulbound Assets in MPL Core
 metaTitle: Soulbound Assets in MPL Core | Core Guides
 description: This Guide explores the different options for soulbound Assets in MPL Core
 updated: '01-31-2026'
+keywords:
+  - soulbound NFT
+  - non-transferable NFT
+  - bound token
+  - SBT
+about:
+  - Soulbound tokens
+  - Non-transferable NFTs
+  - Identity tokens
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Choose between Permanent Freeze Delegate or Oracle Plugin approach
+  - Create a Collection with the soulbound plugin at collection level
+  - Add the plugin with frozen state set to true and authority to None
+  - Mint Assets into the Collection - they inherit soulbound behavior
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
 ---
 Soulbound NFTs are non-fungible tokens that are permanently bound to a specific wallet address and cannot be transferred to another owner. They are useful for representing achievements, credentials, or memberships that should remain tied to a specific identity.  {% .lead %}
 ## Overview

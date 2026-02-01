@@ -3,6 +3,31 @@ title: Oracle Plugin
 metaTitle: Oracle Plugin | Metaplex Core
 description: Add custom validation logic to Core NFTs with Oracle plugins. Control transfers, burns, and updates based on external account state and custom rules.
 updated: '01-31-2026'
+keywords:
+  - Oracle plugin
+  - custom validation
+  - transfer restrictions
+  - time-based rules
+about:
+  - Custom validation
+  - Lifecycle controls
+  - External accounts
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Can Oracle plugins approve transfers, or only reject?
+    a: Oracle plugins can only reject or pass. They cannot force-approve transfers that other plugins reject.
+  - q: How do I create time-based transfer restrictions?
+    a: Deploy an Oracle account and use a cron job to update the validation result at specific times.
+  - q: Can I use one Oracle for multiple Assets?
+    a: Yes. Use a static base address for a single Oracle, or use PDA derivation with PreconfiguredCollection for collection-wide validation.
+  - q: What's the difference between Oracle and Freeze Delegate?
+    a: Freeze Delegate is built-in and binary (frozen/unfrozen). Oracle allows custom logic - time-based, price-based, or any condition you implement.
+  - q: Do I need to write a Solana program for Oracle?
+    a: Yes. The Oracle account must be a Solana account with the correct structure. You can use Anchor or native Rust.
 ---
 The **Oracle Plugin** connects Core Assets to external Oracle accounts for custom validation logic. Reject transfers, burns, or updates based on time, price, ownership, or any custom rule you implement. {% .lead %}
 {% callout title="What You'll Learn" %}

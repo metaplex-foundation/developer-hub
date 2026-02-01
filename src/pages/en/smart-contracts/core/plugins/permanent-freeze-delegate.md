@@ -3,6 +3,28 @@ title: Permanent Freeze Delegate
 metaTitle: Permanent Freeze Delegate | Metaplex Core
 description: Create soulbound NFTs and freeze entire Collections with the Permanent Freeze Delegate plugin. Irrevocable freeze authority that persists forever.
 updated: '01-31-2026'
+keywords:
+  - soulbound NFT
+  - permanent freeze
+  - non-transferable NFT
+  - collection freeze
+about:
+  - Soulbound tokens
+  - Permanent plugins
+  - Collection freezing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: How do I create a soulbound (non-transferable) token?
+    a: Create the Asset with PermanentFreezeDelegate, set frozen to true, and set authority to None. The Asset can never be unfrozen or transferred.
+  - q: What's the difference between Freeze Delegate and Permanent Freeze Delegate?
+    a: Regular Freeze Delegate authority is revoked on transfer and only works on Assets. Permanent Freeze Delegate persists forever, works on Collections, and uses forceApprove.
+  - q: Can I freeze individual Assets in a Collection?
+    a: No. When Permanent Freeze Delegate is on a Collection, freezing affects all Assets at once. Use Asset-level Permanent Freeze Delegate for individual control.
+  - q: Can a permanently frozen Asset be burned?
+    a: Only if there's also a Permanent Burn Delegate. Regular Burn Delegate cannot burn frozen Assets, but Permanent Burn Delegate uses forceApprove.
 ---
 The **Permanent Freeze Delegate Plugin** provides irrevocable freeze authority that persists across transfers. Use it for soulbound tokens, collection-wide freezing, and permanent lock mechanisms. {% .lead %}
 {% callout title="What You'll Learn" %}

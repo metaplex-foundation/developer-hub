@@ -3,6 +3,16 @@ title: Guides
 metaTitle: Guides | Core
 description: A list of guides and tutorials for the Metaplex Core digital asset standard on the Solana blockchain.
 updated: '01-31-2026'
+keywords:
+  - Core guides
+  - Core tutorials
+  - NFT tutorials
+  - Solana NFT guide
+about:
+  - Tutorials
+  - Implementation guides
+  - Code examples
+proficiencyLevel: Intermediate
 ---
 The following Guides for MPL Core are currently available:
 {% quick-links %}

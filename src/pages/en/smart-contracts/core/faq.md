@@ -3,6 +3,28 @@ title: FAQ
 metaTitle: FAQ | Core
 description: Frequently asked questions about the Metaplex Core protocol.
 updated: '01-31-2026'
+keywords:
+  - Core FAQ
+  - Metaplex Core questions
+  - NFT FAQ
+  - mpl-core help
+about:
+  - Metaplex Core
+  - NFT development
+proficiencyLevel: Beginner
+faqs:
+  - q: Why does Core have both onchain and off-chain data?
+    a: Storing everything onchain would be expensive (rent costs) and inflexible. Splitting data allows onchain guarantees while off-chain provides flexible metadata. Use Inscriptions for fully on-chain data.
+  - q: Are there any costs to using Core?
+    a: Core charges 0.0015 SOL per Asset mint. See the Protocol Fees page for details.
+  - q: How to create a Soulbound Asset?
+    a: Use the Permanent Freeze Delegate plugin or the Oracle Plugin. See the Soulbound Assets Guide for implementation details.
+  - q: How to set an Asset to be Immutable?
+    a: There are multiple immutability levels in Core. Use the ImmutableMetadata plugin or remove the update authority. See the Immutability guide.
+  - q: What are the differences between Token Metadata and Core?
+    a: Core is cheaper (~80% lower costs), requires fewer accounts (1 vs 3+), uses less compute units, and has a flexible plugin system instead of scattered delegates.
+  - q: Does Core Support Editions?
+    a: Yes, using the Edition and Master Edition plugins. See the Print Editions guide for details.
 ---
 ## Why does the Core Asset and Collection accounts have both onchain and off-chain data?
 The Core Asset and Collection accounts both contain onchain data, yet both also include a `URI` attribute that points to an off-chain JSON file which provides additional data. Why is that? Can't we just store everything onchain? Well, there are several issues with storing data onchain:

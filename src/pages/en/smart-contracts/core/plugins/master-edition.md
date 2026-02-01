@@ -3,6 +3,30 @@ title: Master Edition Plugin
 metaTitle: Master Edition Plugin | Metaplex Core
 description: Group edition Assets under a Collection with the Master Edition plugin. Store max supply and edition metadata for prints and limited runs.
 updated: '01-31-2026'
+keywords:
+  - master edition
+  - max supply
+  - print series
+  - edition collection
+about:
+  - Master editions
+  - Supply management
+  - Edition grouping
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Does Master Edition enforce the max supply?
+    a: No. The maxSupply is informational only. Use Candy Machine with appropriate guards to actually enforce supply limits during minting.
+  - q: What's the difference between Master Edition name/uri and Collection name/uri?
+    a: Master Edition name/uri can provide edition-specific metadata that differs from the base Collection. For example, a Collection might be "Abstract Art Series" while the Master Edition name could be "Limited Print Run 2024."
+  - q: Can I create open editions (unlimited supply)?
+    a: Yes. Set maxSupply to null or omit it entirely. This indicates an open edition with no defined limit.
+  - q: Do I need both Master Edition and Edition plugins?
+    a: For proper print tracking, yes. Master Edition goes on the Collection, Edition goes on each Asset. They work together.
+  - q: Can I add Master Edition to an existing Collection?
+    a: Yes, unlike the Edition plugin on Assets, Master Edition can be added to existing Collections using addCollectionPlugin.
 ---
 The **Master Edition Plugin** groups numbered edition Assets under a Collection. Store maximum supply, edition names, and URIs to create print series like "Limited to 100 copies." {% .lead %}
 {% callout title="What You'll Learn" %}

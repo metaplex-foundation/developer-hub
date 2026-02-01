@@ -3,6 +3,33 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Metaplex Core
 description: Complete reference for the Metaplex Core JavaScript SDK. Covers Umi setup, creating assets, transfers, burns, updates, collections, plugins, and fetching data.
 updated: '01-31-2026'
+keywords:
+  - mpl-core JavaScript
+  - Core TypeScript SDK
+  - Umi framework
+  - NFT JavaScript
+  - Solana NFT SDK
+about:
+  - JavaScript SDK
+  - Umi integration
+  - TypeScript development
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What is the Core JavaScript SDK?
+    a: The Core JavaScript SDK (@metaplex-foundation/mpl-core) is a TypeScript library for interacting with Metaplex Core NFTs on Solana. It provides type-safe functions for creating, transferring, burning, and managing Assets and Collections.
+  - q: Do I need Umi to use this SDK?
+    a: Yes. The Core SDK is built on the Umi framework, which handles wallet connections, RPC communication, and transaction building. Install both @metaplex-foundation/mpl-core and @metaplex-foundation/umi-bundle-defaults.
+  - q: How do I connect a browser wallet?
+    a: Use the @metaplex-foundation/umi-signer-wallet-adapters package with your wallet adapter and call umi.use(walletAdapterIdentity(wallet)).
+  - q: What's the difference between sendAndConfirm and send?
+    a: sendAndConfirm() waits for transaction confirmation before returning. send() returns immediately after broadcasting. Use sendAndConfirm() for most cases.
+  - q: How do I batch multiple operations?
+    a: Use transactionBuilder() to combine instructions, but be aware of Solana's transaction size limits (~1232 bytes). For large batches, send multiple transactions.
+  - q: Can I use this SDK in React/Next.js?
+    a: Yes. The SDK works in both browser and Node.js environments. For React, use wallet adapters from @solana/wallet-adapter-react with Umi's wallet adapter identity.
 ---
 The **Metaplex Core JavaScript SDK** (`@metaplex-foundation/mpl-core`) provides a complete TypeScript/JavaScript interface for interacting with Core Assets and Collections on Solana. Built on the [Umi framework](/dev-tools/umi), it offers type-safe methods for all Core operations. {% .lead %}
 {% callout title="What You'll Learn" %}

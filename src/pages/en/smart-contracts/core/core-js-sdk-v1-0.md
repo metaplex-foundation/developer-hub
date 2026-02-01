@@ -3,6 +3,19 @@ title: Core JS SDK v1.0
 metaTitle: Core JS SDK v1.0 | Core
 description: Whats new in the Metaplex Core JS SDK v1.0?
 updated: '01-31-2026'
+keywords:
+  - Core SDK v1
+  - SDK changelog
+  - mpl-core updates
+  - breaking changes
+about:
+  - SDK updates
+  - Version changes
+  - Migration guide
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
 ## The V1 Milestone!
 Launching the **Core JS SDK v1.0** welcomes new improvements to both naming and functionality for devs and end users working with the JS Mpl Core package.

@@ -3,6 +3,30 @@ title: Transfer Delegate Plugin
 metaTitle: Transfer Delegate Plugin | Metaplex Core
 description: Allow a delegate to transfer Core NFT Assets. Use the Transfer Delegate plugin for escrowless sales, game mechanics, and marketplace listings.
 updated: '01-31-2026'
+keywords:
+  - transfer delegate
+  - delegate transfer
+  - escrowless sale
+  - NFT marketplace
+about:
+  - Transfer delegation
+  - Escrowless mechanics
+  - Marketplace integration
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Why was my transfer authority revoked?
+    a: Transfer Delegate authority is automatically revoked after any transfer. This is by design for marketplace safety - the delegate can only transfer once.
+  - q: How do I implement escrowless listings?
+    a: Seller adds Transfer Delegate with marketplace as authority. When buyer pays, marketplace transfers Asset to buyer. Authority is revoked so seller can't double-list.
+  - q: What's the difference between Transfer Delegate and Permanent Transfer Delegate?
+    a: Transfer Delegate is revoked after one transfer. Permanent Transfer Delegate persists forever and can only be added at Asset creation.
+  - q: Can I transfer a frozen Asset as a delegate?
+    a: No. Frozen Assets block all transfers including delegate transfers. Use Permanent Transfer Delegate with a Permanent Freeze Delegate for complex escrow scenarios.
+  - q: Does the owner need to approve each transfer?
+    a: No. Once the Transfer Delegate is set, the delegate can transfer without owner approval. However, they can only do it once before authority is revoked.
 ---
 The **Transfer Delegate Plugin** allows a designated authority to transfer Core Assets on behalf of the owner. Essential for escrowless marketplace sales, game mechanics, and subscription services. {% .lead %}
 {% callout title="What You'll Learn" %}

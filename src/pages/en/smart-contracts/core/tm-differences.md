@@ -3,6 +3,31 @@ title: Differences between Core and Token Metadata
 metaTitle: Core vs Token Metadata | Metaplex Core
 description: Compare Metaplex Core and Token Metadata NFT standards. Learn what changed, what's new, and how to migrate your mental model from TM to Core.
 updated: '01-31-2026'
+keywords:
+  - Core vs Token Metadata
+  - NFT standard comparison
+  - migrate from Token Metadata
+  - mpl-core differences
+  - NFT migration
+about:
+  - NFT standards comparison
+  - Token Metadata migration
+  - Core advantages
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Should I use Core or Token Metadata for new projects?
+    a: Use Core for all new projects. It's cheaper, simpler, and has better features. Token Metadata is legacy.
+  - q: Can I migrate existing TM NFTs to Core?
+    a: Not automatically. Core Assets are different on-chain accounts. Migration would require burning TM NFTs and minting new Core Assets.
+  - q: What happened to pNFTs?
+    a: Core's royalty enforcement is built-in via the Royalties plugin with allowlist/denylist support. No separate programmable variant needed.
+  - q: Do I still need Associated Token Accounts?
+    a: No. Core Assets don't use ATAs. Ownership is stored directly in the Asset account.
+  - q: How do I verify creators in Core?
+    a: Use the Verified Creators plugin. It works similarly to TM's creator array but is opt-in.
 ---
 Coming from **Token Metadata**? This guide explains what's different in Core, why it's better, and how to translate your TM knowledge to Core concepts. {% .lead %}
 {% callout title="Key Differences" %}

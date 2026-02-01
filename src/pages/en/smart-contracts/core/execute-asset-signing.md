@@ -3,6 +3,19 @@ title: Execute Asset Signing
 metaTitle: Execute and Asset Signer | Core
 description: Learn how MPL Core Assets can use the Execute instruction and sign instructions and transactions.
 updated: '01-31-2026'
+keywords:
+  - asset signer
+  - execute instruction
+  - NFT as signer
+  - asset PDA
+about:
+  - Asset signing
+  - Execute instruction
+  - Advanced operations
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+  - JavaScript
 ---
 The MPL Core Execute instruction introduces the concept of **Asset Signers** to
 MPL Core Assets.

@@ -2,10 +2,30 @@
 title: How to Create a Core Collection with Anchor
 metaTitle: How to Create a Core Collection with Anchor | Core Guides
 description: Learn how to create a Core Collection on Solana with Metaplex Core using Anchor!
----
-# remember to update dates also in /components/guides/index.js
 created: '08-21-2024'
 updated: '01-31-2026'
+keywords:
+  - Anchor collection
+  - collection CPI
+  - Rust collection
+  - Solana program collection
+about:
+  - Anchor framework
+  - Collection CPI
+  - On-chain creation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - Rust
+howToSteps:
+  - Set up an Anchor project and add mpl-core dependency
+  - Define the instruction accounts for creating a Collection
+  - Build the CPI call to the Core program
+  - Deploy and test your program on devnet
+howToTools:
+  - Anchor framework
+  - mpl-core Rust crate
+  - Solana CLI
+---
 This guide will demonstrate the use of the `mpl-core` Rust SDK crate to create a **Core NFT Collection** via CPI using the **Anchor** framework in a **Solana** program.
 {% callout title="What is Core?" %}
 **Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.

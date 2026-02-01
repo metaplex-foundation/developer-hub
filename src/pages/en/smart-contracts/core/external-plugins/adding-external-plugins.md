@@ -3,6 +3,27 @@ title: Adding External Plugins
 metaTitle: Adding External Plugins | Metaplex Core
 description: Learn how to add Oracle and AppData plugins to Core Assets and Collections. Code examples for JavaScript and Rust.
 updated: '01-31-2026'
+keywords:
+  - add external plugin
+  - add Oracle
+  - add AppData
+  - external plugin setup
+about:
+  - External plugin setup
+  - Oracle configuration
+  - AppData configuration
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Can I add multiple external plugins to one Asset?
+    a: Yes. You can add multiple Oracle and/or AppData plugins to a single Asset.
+  - q: Do I need to create the Oracle account first?
+    a: Yes. The Oracle account must exist before adding an Oracle plugin adapter.
+  - q: What's the difference between adding at creation vs adding later?
+    a: No functional difference. Adding at creation is more efficient (one transaction). Adding later requires a separate transaction.
 ---
 This guide shows how to **add External Plugins** (Oracle, AppData) to Core Assets and Collections. Add at creation time or to existing Assets/Collections. {% .lead %}
 {% callout title="What You'll Learn" %}

@@ -3,6 +3,28 @@ title: Permanent Transfer Delegate
 metaTitle: Permanent Transfer Delegate | Metaplex Core
 description: Grant permanent transfer authority that persists across ownership changes. Use for game mechanics, subscription services, and automated asset management.
 updated: '01-31-2026'
+keywords:
+  - permanent transfer
+  - irrevocable delegate
+  - automated transfers
+  - game mechanics
+about:
+  - Permanent delegation
+  - Automated management
+  - Game integration
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What's the difference between Transfer Delegate and Permanent Transfer Delegate?
+    a: Regular Transfer Delegate is revoked after one transfer. Permanent Transfer Delegate persists forever and can transfer unlimited times.
+  - q: Can Permanent Transfer Delegate transfer frozen Assets?
+    a: Yes. Permanent plugins use forceApprove, which overrides freeze rejections.
+  - q: Can I add this to an existing Asset?
+    a: No. Permanent plugins can only be added at Asset creation time. Use regular Transfer Delegate for existing Assets.
+  - q: How does Collection-level Permanent Transfer Delegate work?
+    a: The delegate can transfer any individual Asset in the Collection, but not all at once. Each transfer is a separate transaction.
 ---
 The **Permanent Transfer Delegate Plugin** provides irrevocable transfer authority that persists forever. Unlike regular Transfer Delegate, this authority is never revoked and can transfer Assets repeatedly. {% .lead %}
 {% callout title="What You'll Learn" %}

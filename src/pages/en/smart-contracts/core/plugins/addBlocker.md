@@ -3,6 +3,30 @@ title: AddBlocker Plugin
 metaTitle: AddBlocker Plugin | Metaplex Core
 description: Prevent new authority-managed plugins from being added to Core Assets and Collections. Lock down plugin configuration permanently.
 updated: '01-31-2026'
+keywords:
+  - add blocker
+  - lock plugins
+  - prevent plugins
+  - plugin restriction
+about:
+  - Plugin restriction
+  - Configuration locking
+  - Authority management
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Can I still add Freeze Delegate after AddBlocker?
+    a: Yes. Owner-managed plugins like Freeze Delegate, Transfer Delegate, and Burn Delegate can always be added, even after AddBlocker is active.
+  - q: Can I remove AddBlocker after adding it?
+    a: Yes, if it hasn't been made immutable. The plugin can be removed by the authority. However, this defeats the purpose of using AddBlocker.
+  - q: If I add AddBlocker to a Collection, can I still add plugins to individual Assets?
+    a: No. Collection-level AddBlocker prevents adding authority-managed plugins to both the Collection and all its Assets.
+  - q: What if Metaplex releases a new plugin I want to use?
+    a: If AddBlocker is active, you cannot add new authority-managed plugins, even new ones released in the future. Plan accordingly.
+  - q: Why would I use AddBlocker?
+    a: To guarantee that the NFT's authority-managed plugin configuration is final. This provides assurance to collectors that royalties, attributes, and other critical settings cannot be modified.
 ---
 The **AddBlocker Plugin** prevents any new authority-managed plugins from being added to an Asset or Collection. Lock down your NFT configuration while still allowing owner-managed plugins. {% .lead %}
 {% callout title="What You'll Learn" %}

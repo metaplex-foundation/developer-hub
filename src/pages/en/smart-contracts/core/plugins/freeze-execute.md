@@ -3,6 +3,20 @@ title: Freeze Execute
 metaTitle: Freeze Execute Plugin | Core
 description: Learn about the MPL Core Asset Freeze Execute Plugin. The 'Freeze Execute' plugin can freeze the Execute lifecycle event, preventing the asset from executing arbitrary instructions.
 updated: '01-31-2026'
+keywords:
+  - freeze execute
+  - block execute
+  - backed NFT
+  - escrowless staking
+about:
+  - Execute freezing
+  - Asset execution
+  - Backed NFTs
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
 ---
 ## Overview
 The Freeze Execute Plugin is an `Owner Managed` plugin that allows freezing the Execute lifecycle event on an Asset. When frozen, the asset cannot execute arbitrary instructions through its Asset Signer PDA, effectively blocking any execute operations until unfrozen.

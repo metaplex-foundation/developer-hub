@@ -3,6 +3,30 @@ title: Delegating and Revoking Plugins
 metaTitle: Delegating and Revoking Plugin Authority | Metaplex Core
 description: Learn how to delegate and revoke plugin authorities on Core Assets. Change who controls plugins and make plugin data immutable.
 updated: '01-31-2026'
+keywords:
+  - delegate plugin
+  - revoke plugin
+  - plugin authority
+  - immutable plugin
+about:
+  - Authority delegation
+  - Plugin revocation
+  - Immutability
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What's the difference between revoking and removing a plugin?
+    a: Revoking only changes who controls the plugin - the plugin and its data remain. Removing deletes the plugin entirely.
+  - q: Can I delegate to multiple addresses?
+    a: No. Each plugin has only one authority at a time. Delegating to a new address replaces the previous authority.
+  - q: What happens to delegated plugins when I transfer an Asset?
+    a: Owner Managed plugins automatically revoke back to Owner authority. Authority Managed plugins remain unchanged.
+  - q: Can I undo setting authority to None?
+    a: No. Setting authority to None makes the plugin permanently immutable. This cannot be reversed.
+  - q: Can a delegate revoke themselves?
+    a: Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
 ---
 This guide shows how to **delegate and revoke plugin authorities** on Core Assets. Transfer control of plugins to other addresses or make plugin data permanently immutable. {% .lead %}
 {% callout title="What You'll Learn" %}

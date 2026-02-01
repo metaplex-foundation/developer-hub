@@ -3,6 +3,39 @@ title: Overview
 metaTitle: Metaplex Core | Next-Gen NFT Standard for Solana
 description: Metaplex Core is the next-generation NFT standard on Solana with single-account design, enforced royalties, and a flexible plugin system. Lower costs, lower compute, better performance.
 updated: '01-31-2026'
+keywords:
+  - Metaplex Core
+  - Solana NFT
+  - NFT standard
+  - single-account NFT
+  - enforced royalties
+  - mpl-core
+about:
+  - NFT standards
+  - Solana blockchain
+  - Digital assets
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: What is Metaplex Core?
+    a: Metaplex Core is a next-generation NFT standard on Solana that uses a single-account design for lower costs, enforced royalties, and a flexible plugin system. It's the recommended standard for new NFT projects.
+  - q: How is Core different from Token Metadata?
+    a: Core uses one account per asset vs 3+ for Token Metadata, costs ~80% less to mint, has lower compute usage, and includes built-in royalty enforcement.
+  - q: Can I migrate from Token Metadata to Core?
+    a: Core Assets and Token Metadata NFTs are separate standards. There's no automatic migration. New projects should use Core; existing Token Metadata collections continue to work.
+  - q: Does Core support royalties?
+    a: Yes. Core has a Royalties plugin that enforces royalties by default. You can set basis points, creator splits, and allowlist/denylist rules for marketplaces.
+  - q: What are plugins?
+    a: Plugins are modular extensions that add behavior to Core Assets or Collections. Examples include Freeze Delegate, Attributes, and Royalties.
+  - q: How much does it cost to mint a Core Asset?
+    a: Approximately 0.0029 SOL per asset, compared to ~0.022 SOL for Token Metadata. This makes Core ~80% cheaper for minting.
+  - q: Which RPC providers support Core?
+    a: All major RPC providers supporting DAS (Digital Asset Standard) index Core assets.
+  - q: Can I use Core for gaming assets?
+    a: Yes. Core's plugin system makes it ideal for gaming with Attributes for on-chain stats, Freeze Delegate for locking items, and Transfer Delegate for marketplace integration.
 ---
 Metaplex Core ("Core") is the **next-generation NFT standard** on Solana. It uses a **single-account design** that reduces minting costs by 80%+ compared to alternatives, while providing **enforced royalties**, **collection-level operations**, and a **flexible plugin system** for custom behaviors. {% .lead %}
 {% callout title="What You'll Learn" %}

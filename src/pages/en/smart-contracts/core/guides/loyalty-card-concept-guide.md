@@ -3,6 +3,27 @@ title: Loyalty Card Concept Guide
 metaTitle: Loyalty Card Concept Guide | Core Guides
 description: This guide describes how to build a Loyalty Card program on Solana using MPL Core NFT Assets and the MPL Core plugin system.
 updated: '01-31-2026'
+keywords:
+  - loyalty card
+  - NFT membership
+  - rewards program
+  - Core plugins
+about:
+  - Loyalty programs
+  - Membership NFTs
+  - Plugin architecture
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+howToSteps:
+  - Create a Collection for loyalty cards with Update Delegate pointing to your program PDA
+  - Mint loyalty card Assets with AppData for points and Freeze Delegate for soulbound behavior
+  - Build instructions for minting cards, adding points, and redeeming rewards
+  - Use CPI builders to interact with Core from your program
+howToTools:
+  - Anchor framework
+  - mpl-core Rust crate
+  - Solana CLI
 ---
 ## Concept Guide: Setting Up Loyalty Cards with Metaplex Core and Plugins
 {% callout %}

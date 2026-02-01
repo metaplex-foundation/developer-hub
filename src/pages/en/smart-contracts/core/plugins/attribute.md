@@ -3,6 +3,36 @@ title: Attribute Plugin
 metaTitle: Attribute Plugin | Metaplex Core
 description: Store on-chain key-value data on Core NFT Assets. Use the Attributes plugin for game stats, traits, and any data that needs to be readable by on-chain programs.
 updated: '01-31-2026'
+keywords:
+  - on-chain attributes
+  - NFT traits
+  - game stats
+  - key-value storage
+  - DAS indexed
+about:
+  - On-chain data storage
+  - NFT attributes
+  - Program-readable data
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: What's the difference between on-chain attributes and off-chain metadata attributes?
+    a: On-chain attributes are stored on Solana and readable by programs. Off-chain attributes in JSON at URI are stored on Arweave/IPFS and only readable by clients.
+  - q: Can on-chain programs read these attributes?
+    a: Yes. Use CPI to fetch the Asset account and deserialize the Attributes plugin data.
+  - q: Are attributes indexed by DAS?
+    a: Yes. DAS automatically indexes attribute key-value pairs for fast queries.
+  - q: Can I store numbers or booleans?
+    a: Values are strings only. Convert as needed, for example level = '5' or active = 'true'.
+  - q: How do I update a single attribute?
+    a: You can't update individual attributes. Fetch the current list, modify it, and update with the full new list.
+  - q: What's the size limit for attributes?
+    a: There's no hard limit, but larger attribute lists increase rent cost. Keep data concise.
+  - q: Can the owner update attributes?
+    a: No. The Attributes plugin is Authority Managed, so only the update authority can modify it.
 ---
 The **Attributes Plugin** stores key-value pairs directly on-chain within Core Assets or Collections. Perfect for game stats, traits, and any data that on-chain programs need to read. {% .lead %}
 {% callout title="What You'll Learn" %}

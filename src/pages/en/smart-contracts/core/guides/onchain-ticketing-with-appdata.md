@@ -3,6 +3,28 @@ title: Create an Event Ticketing Platform leveraging the Appdata Plugin
 metaTitle: Core - Appdata Plugin Example
 description: This guide shows how to create a ticketing platform leveraging the Appdata Plugin.
 updated: '01-31-2026'
+keywords:
+  - NFT ticketing
+  - event tickets
+  - AppData plugin
+  - digital tickets
+about:
+  - Ticketing platforms
+  - AppData implementation
+  - Event management
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+  - JavaScript
+howToSteps:
+  - Create a Solana program with Manager, Event, and Ticket instructions
+  - Set up LinkedAppData on Event collections for venue verification
+  - Create ticket Assets with AppData for ticket status tracking
+  - Build verification system to read and update ticket status
+howToTools:
+  - Anchor framework
+  - mpl-core SDK
+  - Solana CLI
 ---
 This developer guide leverages the new Appdata Plugin to **create a ticketing solution that could be used to generate tickets as digital assets and verified by an external source of trust other  than the issuer, like for example a venue manager**. 
 ## Introduction

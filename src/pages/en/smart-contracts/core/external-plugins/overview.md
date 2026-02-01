@@ -3,6 +3,31 @@ title: External Plugins
 metaTitle: External Plugins | Metaplex Core
 description: Extend Core NFTs with external programs using Oracle and AppData plugins. Add custom validation logic and store arbitrary data on Assets.
 updated: '01-31-2026'
+keywords:
+  - external plugins
+  - Oracle plugin
+  - AppData plugin
+  - custom validation
+about:
+  - External integrations
+  - Plugin adapters
+  - Custom logic
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: When should I use External Plugins vs Built-in Plugins?
+    a: Use External Plugins when you need custom validation logic (Oracle) or third-party data storage (AppData). Use built-in plugins for standard NFT functionality like freezing, royalties, or attributes.
+  - q: Can External Plugins reject transfers?
+    a: Yes. Oracle plugins can reject lifecycle events (create, transfer, update, burn) based on external account state. This enables time-based restrictions, price-based rules, or any custom logic.
+  - q: Who can write to AppData?
+    a: Only the Data Authority can write to an AppData plugin. This is separate from the plugin authority and provides secure, partitioned storage for third-party applications.
+  - q: Can I have multiple External Plugins on one Asset?
+    a: Yes. You can add multiple Oracle or AppData plugins to a single Asset, each with different configurations and authorities.
+  - q: Are External Plugins indexed by DAS?
+    a: Yes. AppData with JSON or MsgPack schemas is automatically indexed by DAS for easy querying.
 ---
 **External Plugins** connect Core Assets to external programs for advanced functionality. Use Oracle plugins for custom validation logic and AppData plugins for storing arbitrary data that third-party apps can read and write. {% .lead %}
 {% callout title="What You'll Learn" %}

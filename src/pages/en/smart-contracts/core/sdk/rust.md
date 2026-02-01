@@ -3,6 +3,18 @@ title: MPL-Core Rust SDK
 metaTitle: Rust SDK | MPL-Core
 description: Learn how to set up your project to run the MPL-Core Rust SDK.
 updated: '01-31-2026'
+keywords:
+  - mpl-core Rust
+  - Core Rust SDK
+  - Solana Rust NFT
+  - NFT Rust crate
+about:
+  - Rust SDK
+  - CPI integration
+  - On-chain programs
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - Rust
 ---
 Metaplex provides a Rust library that can be used to interact with the MPL-Core program. The Rust library can be used in rust scripts/builds as well as onchain programs via CPI instructions.
 ## Installation

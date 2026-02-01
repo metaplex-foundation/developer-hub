@@ -3,6 +3,30 @@ title: Autograph Plugin
 metaTitle: Autograph Plugin | Metaplex Core
 description: Allow anyone to add signatures and messages to Core NFT Assets. Create collectible autographs from creators, artists, or community members.
 updated: '01-31-2026'
+keywords:
+  - autograph NFT
+  - NFT signature
+  - collectible autograph
+  - artist signature
+about:
+  - Digital autographs
+  - Signature collection
+  - Community interaction
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: How is this different from Verified Creators?
+    a: Verified Creators is for proving creatorship and is managed by the update authority. Autograph is for collectible signatures from anyone, like getting an autograph at an event.
+  - q: Can someone add multiple autographs?
+    a: No. Each address can only add one autograph per Asset. Attempting to add a second autograph from the same address will fail.
+  - q: Can I remove my own autograph?
+    a: No. Only the owner or autograph delegate can remove autographs. This prevents someone from signing and then immediately removing it.
+  - q: Do I need the owner's permission to add an autograph?
+    a: No. Once the owner enables the Autograph plugin, anyone can add their signature. The owner doesn't need to approve individual autographs.
+  - q: What happens to autographs when an Asset is transferred?
+    a: Autographs remain on the Asset. They are permanent records of who signed, regardless of ownership changes.
 ---
 The **Autograph Plugin** allows anyone to add their signature and a message to an Asset or Collection. Perfect for collectible signatures from artists, celebrities, or community members. {% .lead %}
 {% callout title="What You'll Learn" %}

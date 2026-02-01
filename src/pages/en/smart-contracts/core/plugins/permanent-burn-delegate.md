@@ -3,6 +3,30 @@ title: Permanent Burn Delegate
 metaTitle: Permanent Burn Delegate | Metaplex Core
 description: Grant permanent burn authority that can destroy Assets even when frozen. Use for game mechanics, subscription expirations, and automated asset lifecycle.
 updated: '01-31-2026'
+keywords:
+  - permanent burn
+  - irrevocable burn
+  - subscription expiry
+  - automated burn
+about:
+  - Permanent delegation
+  - Asset lifecycle
+  - Automated destruction
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What's the difference between Burn Delegate and Permanent Burn Delegate?
+    a: Regular Burn Delegate cannot burn frozen Assets and is revoked on transfer. Permanent Burn Delegate can burn frozen Assets (forceApprove) and persists forever.
+  - q: Can Permanent Burn Delegate burn frozen Assets?
+    a: Yes. Permanent plugins use forceApprove, which overrides freeze rejections. This is useful for game mechanics where items must be destroyable.
+  - q: Can I add this to an existing Asset?
+    a: No. Permanent plugins can only be added at Asset creation time. Use regular Burn Delegate for existing Assets.
+  - q: How does Collection-level Permanent Burn Delegate work?
+    a: The delegate can burn any individual Asset in the Collection, but not all at once. Each burn is a separate transaction.
+  - q: Is this safe to use?
+    a: Use with caution. The delegate can burn Assets at any time without owner approval. Only assign to trusted programs or addresses.
 ---
 The **Permanent Burn Delegate Plugin** provides irrevocable burn authority that persists forever. The delegate can burn Assets even when frozen, making it ideal for games and subscription services. {% .lead %}
 {% callout title="What You'll Learn" %}

@@ -3,6 +3,28 @@ title: Print Editions with MPL Core
 metaTitle: Print Editions | Core Guides
 description: This guide shows you how to combine plugins to create Editions with the Metaplex Core protocol.
 updated: '01-31-2026'
+keywords:
+  - print editions
+  - NFT editions
+  - limited edition
+  - master edition
+about:
+  - Edition creation
+  - Print series
+  - Edition plugins
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Create a Collection with the Master Edition plugin for supply tracking
+  - Create Assets with the Edition plugin containing edition numbers
+  - Optionally use Candy Machine Edition Guard for automatic numbering
+  - Verify editions are properly linked to the Master Edition Collection
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
 ---
 ## Introduction
 ### What is an Edition?

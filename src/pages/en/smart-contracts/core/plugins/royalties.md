@@ -3,6 +3,34 @@ title: Royalties Plugin
 metaTitle: Royalties Plugin | Metaplex Core
 description: The Royalties plugin enforces creator royalties on Core Assets and Collections. Set basis points, creator splits, and allowlist/denylist rules for marketplace compliance.
 updated: '01-31-2026'
+keywords:
+  - NFT royalties
+  - creator royalties
+  - royalties plugin
+  - basis points
+  - marketplace royalties
+about:
+  - Royalty enforcement
+  - Creator payments
+  - Marketplace rules
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Are Core royalties enforced?
+    a: Yes, when using an allowlist ruleset. Only programs on the allowlist can transfer the asset, ensuring royalties are paid.
+  - q: What's the difference between Core royalties and Token Metadata royalties?
+    a: Core royalties are built into the asset with optional enforcement via rulesets. Token Metadata royalties are advisory and rely on marketplace cooperation.
+  - q: Can I have different royalties per asset in a collection?
+    a: Yes. Add the Royalties plugin to individual assets to override the collection-level setting.
+  - q: How do marketplaces read royalties?
+    a: Marketplaces query the asset's plugins via DAS or on-chain data. The Royalties plugin data includes basis points, creators, and ruleset.
+  - q: What happens if I don't set a ruleset?
+    a: Use ruleSet('None'). Any program can transfer the asset and royalties are advisory only.
+  - q: Can I change royalties after minting?
+    a: Yes. Use updatePlugin for assets or updateCollectionPlugin for collections if you have the authority.
 ---
 The **Royalties Plugin** enforces creator royalties on secondary sales of Core Assets. It specifies the royalty percentage, creator split, and which programs (marketplaces) are allowed or denied from transferring the asset. {% .lead %}
 {% callout title="What You'll Learn" %}

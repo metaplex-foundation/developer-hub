@@ -3,6 +3,19 @@ title: Updating Plugins
 metaTitle: Updating Plugins | Core
 description: Learn how to update existing plugins on MPL Core Assets and Collections using the updatePlugin function.
 updated: '01-31-2026'
+keywords:
+  - update plugin
+  - modify plugin
+  - plugin data
+  - updatePlugin
+about:
+  - Plugin modification
+  - Data updates
+  - Plugin management
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
 Many plugins on MPL Core Assets and Collections can be updated after they've been added. The `updatePlugin` function allows you to modify plugin data, such as changing attributes, updating royalties, or modifying freeze states.
 {% totem %}

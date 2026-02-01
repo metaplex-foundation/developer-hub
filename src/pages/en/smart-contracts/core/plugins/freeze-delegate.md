@@ -3,6 +3,34 @@ title: Freeze Delegate
 metaTitle: Freeze Delegate Plugin | Metaplex Core
 description: Learn how to freeze Core NFT Assets to block transfers and burns. Use the Freeze Delegate plugin for escrowless staking, marketplace listings, and game item locking.
 updated: '01-31-2026'
+keywords:
+  - freeze NFT
+  - freeze delegate
+  - escrowless staking
+  - lock NFT
+  - freeze plugin
+about:
+  - Asset freezing
+  - Escrowless mechanics
+  - Staking
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Can I freeze an Asset I don't own?
+    a: No. The Freeze Delegate is Owner Managed, so only the owner can add it. After adding, you can delegate authority to another address.
+  - q: What's the difference between Freeze Delegate and Permanent Freeze Delegate?
+    a: Freeze Delegate authority is revoked on transfer. Permanent Freeze Delegate authority persists forever and can only be added at creation time.
+  - q: Can a frozen Asset be burned?
+    a: No. Frozen Assets block both transfers and burns. Thaw the Asset first if you want to burn it.
+  - q: Can I freeze an entire Collection at once?
+    a: Not with the regular Freeze Delegate. Use Permanent Freeze Delegate on the Collection instead, which supports collection-level freezing. Note that it can only be added at Collection creation time.
+  - q: Does freezing affect metadata updates?
+    a: No. The Asset owner or update authority can still update metadata while frozen. Only transfers and burns are blocked.
+  - q: How do I implement escrowless staking?
+    a: Add Freeze Delegate with your staking program as authority. When user stakes, freeze the Asset. When user unstakes, thaw the Asset. The NFT never leaves the user's wallet.
 ---
 The **Freeze Delegate Plugin** allows you to freeze Core Assets, blocking transfers and burns while the asset remains in the owner's wallet. Perfect for escrowless staking, marketplace listings, and game mechanics. {% .lead %}
 {% callout title="What You'll Learn" %}

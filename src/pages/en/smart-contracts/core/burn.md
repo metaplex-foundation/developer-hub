@@ -2,7 +2,43 @@
 title: Burning Assets
 metaTitle: Burning Assets | Metaplex Core
 description: Learn how to burn Core NFT Assets on Solana. Permanently destroy Assets and recover rent using the Metaplex Core SDK.
+created: '06-15-2024'
 updated: '01-31-2026'
+keywords:
+  - burn NFT
+  - destroy asset
+  - recover rent
+  - Solana NFT
+  - mpl-core burn
+about:
+  - NFT burning
+  - Rent recovery
+  - Asset destruction
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Install the SDK with npm install @metaplex-foundation/mpl-core
+  - Fetch the Asset to verify ownership
+  - Call burn(umi, { asset }) as the owner
+  - Rent is automatically returned to your wallet
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+faqs:
+  - q: Can I recover the ~0.0009 SOL left in the account?
+    a: No. This small amount is intentionally left to mark the account as burned and prevent address reuse.
+  - q: What happens to the Asset's metadata after burning?
+    a: The on-chain account is cleared. Off-chain metadata on Arweave/IPFS remains accessible but has no on-chain link.
+  - q: Can a Burn Delegate burn without owner approval?
+    a: Yes. Once assigned, a Burn Delegate can burn the Asset at any time. Only assign trusted addresses.
+  - q: Does burning affect the Collection's count?
+    a: Yes. The Collection's currentSize decrements. The numMinted counter stays unchanged.
+  - q: Can I burn multiple Assets at once?
+    a: Not in a single instruction. You can batch multiple burn instructions in one transaction up to size limits.
 ---
 This guide shows how to **burn Core Assets** on Solana using the Metaplex Core SDK. Permanently destroy Assets and recover most of the rent deposit. {% .lead %}
 {% callout title="What You'll Learn" %}
@@ -54,24 +90,25 @@ Here is how you can use our SDKs to burn a Core asset that is part of a collecti
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { burnV1, fetchAsset } from '@metaplex-foundation/mpl-core'
-import { publicKey } from '@metaplex-foundation/umi'
 import {
   burn,
   fetchAsset,
   collectionAddress,
   fetchCollection,
 } from '@metaplex-foundation/mpl-core'
+
 const assetId = publicKey('11111111111111111111111111111111')
 const asset = await fetchAsset(umi, assetId)
 const collectionId = collectionAddress(asset)
+
 let collection = undefined
 if (collectionId) {
-  collection = await fetchCollection(umi, collection)
+  collection = await fetchCollection(umi, collectionId)
 }
+
 await burn(umi, {
-  asset: asset,
-  collection: collection,
+  asset,
+  collection,
 }).sendAndConfirm(umi)
 ```
 {% /dialect %}
