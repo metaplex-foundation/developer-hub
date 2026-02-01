@@ -1,244 +1,205 @@
 ---
-title: アセットの転送
-metaTitle: アセットの転送 | Metaplex Core
-description: Solana上でCore NFTアセットをウォレット間で転送する方法を学びます。NFTを他のユーザーに送信し、コレクション転送を処理し、Transfer Delegateを使用します。
+title: Transferring Assets
+metaTitle: Transferring Assets | Metaplex Core
+description: Learn how to transfer Core NFT Assets between wallets on Solana. Send NFTs to other users, handle collection transfers, and use transfer delegates.
+updated: '01-31-2026'
+keywords:
+  - transfer NFT
+  - send NFT
+  - NFT ownership
+  - mpl-core transfer
+  - transfer delegate
+about:
+  - NFT transfers
+  - Ownership change
+  - Transfer delegates
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
+  - Fetch the Asset to verify ownership and collection membership
+  - Call transfer(umi, { asset, newOwner }) with the recipient address
+  - Verify with fetchAsset() that ownership changed
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+faqs:
+  - q: How do I know if an Asset is in a Collection?
+    a: Fetch the Asset and check its updateAuthority. If the type is 'Collection', pass the address as the collection parameter.
+  - q: Can I transfer to myself?
+    a: Yes. Transferring to your own address is valid and useful for consolidating wallets or testing.
+  - q: What happens to the Transfer Delegate after a transfer?
+    a: The Transfer Delegate plugin is automatically revoked when the transfer completes. The new owner must assign a new delegate if needed.
+  - q: Can I cancel a transfer?
+    a: No. Transfers are atomic - once the transaction confirms, ownership has changed. There's no pending state to cancel.
+  - q: Can I transfer multiple Assets at once?
+    a: Not in a single instruction. You can batch multiple transfer instructions in one transaction, but each Asset requires its own transfer call.
+  - q: Does transferring change the update authority?
+    a: No. Transfer only changes ownership. The update authority remains the same unless explicitly changed via the update instruction.
 ---
-
-このガイドでは、Metaplex Core SDKを使用してSolana上で**Core Assetをウォレット間で転送**する方法を説明します。単一のインストラクションでNFTを他のユーザーに送信できます。 {% .lead %}
-
-{% callout title="学習内容" %}
-
-- Assetを新しい所有者に転送する
-- コレクション内のAssetの転送を処理する
-- 認可された転送にTransfer Delegateを使用する
-- 転送権限の要件を理解する
-
+This guide shows how to **transfer Core Assets** between wallets on Solana using the Metaplex Core SDK. Send NFTs to other users with a single instruction. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Transfer an Asset to a new owner
+- Handle transfers for Assets in Collections
+- Use Transfer Delegate for authorized transfers
+- Understand transfer authority requirements
 {% /callout %}
-
-## 概要
-
-`transfer`インストラクションを使用してCore Assetを新しい所有者に転送します。現在の所有者（または認可されたTransfer Delegate）のみが転送を開始できます。
-
-- 受信者のアドレスで`transfer(umi, { asset, newOwner })`を呼び出す
-- コレクションAssetの場合は、`collection`パラメータを含める
-- Transfer Delegateは所有者に代わって転送可能
-- 転送は無料（トランザクション手数料のみ適用）
-
-## 対象外
-
-Token Metadata転送（mpl-token-metadataを使用）、バッチ転送（Assetをループ処理）、マーケットプレイス販売（エスクロープログラムを使用）。
-
-## クイックスタート
-
-**移動先:** [基本的な転送](#core-assetの転送) · [コレクション転送](#コレクション内のcore-assetの転送) · [Delegate転送](#アセットのtransfer-delegateである場合はどうなりますか)
-
-1. インストール: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
-2. Assetをフェッチして所有権とコレクションメンバーシップを確認
-3. `transfer(umi, { asset, newOwner })`を呼び出す
-4. `fetchAsset()`で所有権が変更されたことを確認
-
-## 前提条件
-
-- Assetを所有する（またはTransfer Delegateである）署名者で設定された**Umi**
-- 転送するAssetの**Assetアドレス**
-- 新しい所有者の**受信者アドレス**（公開鍵）
-
-Core Assetの所有者は、MPL Coreプログラムへの`transfer`インストラクションを使用して、別のアカウントに所有権を転送できます。
-
+## Summary
+Transfer a Core Asset to a new owner using the `transfer` instruction. Only the current owner (or an authorized Transfer Delegate) can initiate a transfer.
+- Call `transfer(umi, { asset, newOwner })` with the recipient's address
+- For Collection Assets, include the `collection` parameter
+- Transfer Delegates can transfer on behalf of owners
+- Transfers are free (only transaction fee applies)
+## Out of Scope
+Token Metadata transfers (use mpl-token-metadata), batch transfers (loop through Assets), and marketplace sales (use escrow programs).
+## Quick Start
+**Jump to:** [Basic Transfer](#transferring-a-core-asset) · [Collection Transfer](#transferring-a-core-asset-in-a-collection) · [Delegate Transfer](#what-if-i-am-the-transfer-delegate-of-an-asset)
+1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
+2. Fetch the Asset to verify ownership and collection membership
+3. Call `transfer(umi, { asset, newOwner })`
+4. Verify with `fetchAsset()` that ownership changed
+## Prerequisites
+- **Umi** configured with a signer that owns the Asset (or is its Transfer Delegate)
+- **Asset address** of the Asset to transfer
+- **Recipient address** (public key) of the new owner
+The owner of a Core Asset can transfer ownership to another account by using the `transfer` instruction to the MPL Core program.
 {% totem %}
-{% totem-accordion title="技術的インストラクション詳細" %}
-**インストラクションアカウントリスト**
-
-| アカウント      | 説明                                          |
-| ------------- | -------------------------------------------- |
-| asset         | MPL Core Assetのアドレス                      |
-| collection    | Core Assetが属するコレクション                  |
-| authority     | アセットの所有者またはデリゲート                 |
-| payer         | ストレージ手数料を支払うアカウント                |
-| newOwner      | アセットを転送する新しい所有者                   |
-| systemProgram | System Programアカウント                      |
-| logWrapper    | SPL Noopプログラム                           |
-
-一部のアカウントは、使いやすさのためにSDKで抽象化されるか、オプションである場合があります。
-オンチェーンインストラクションの詳細な説明は[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L139)で見ることができます。
+{% totem-accordion title="Technical Instruction Details" %}
+**Instruction Accounts List**
+| Account       | Description                                     |
+| ------------- | ----------------------------------------------- |
+| asset         | The address of the MPL Core Asset.              |
+| collection    | The collection to which the Core Asset belongs. |
+| authority     | The owner or delegate of the asset.             |
+| payer         | The account paying for the storage fees.        |
+| newOwner      | The new owner to which to transfer the asset.   |
+| systemProgram | The System Program account.                     |
+| logWrapper    | The SPL Noop Program.                           |
+Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
+A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L139).
 {% /totem-accordion %}
 {% /totem %}
-
-## Core Assetの転送
-
+## Transferring a Core Asset
 {% code-tabs-imported from="core/transfer-asset" frameworks="umi" /%}
-
-## コレクション内のCore Assetの転送
-
-コレクションを持つAssetを転送する場合は、コレクションアドレスを渡す必要があります。
-[Assetがコレクションに含まれているかどうかを確認する方法は？]()
-
-{% dialect-switcher title="コレクションの一部であるAssetの転送" %}
+## Transferring a Core Asset in a Collection
+If you are transferring an Asset which has a collection you will need to pass the collection address in.
+[How to tell if an asset is in a Collection?]()
+{% dialect-switcher title="Transfer an Asset that is part of a Collection" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { transferV1 } from '@metaplex-foundation/mpl-core'
-
 const asset = publicKey('11111111111111111111111111111111')
-
 await transferV1(umi, {
   asset: asset.publicKey,
   newOwner: newOwner.publicKey,
   collection: colleciton.publicKey,
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::instructions::TransferV1Builder;
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn transfer_asset_in_collection() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
     let collection = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-
     let new_owner = Pubkey::from_str("33333333333333333333333333333333").unwrap();
-
     let transfer_asset_in_collection_ix = TransferV1Builder::new()
         .asset(asset)
         .collection(Some(collection))
         .payer(authority.pubkey())
         .new_owner(new_owner)
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let transfer_asset_in_collection_tx = Transaction::new_signed_with_payer(
         &[transfer_asset_in_collection_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&transfer_asset_in_collection_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
-
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## アセットのTransfer Delegateである場合はどうなりますか？
-
-[Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate)プラグインを介してAssetのTransfer Delegateである場合、Assetの所有者であるかのように`transferV1`関数を呼び出すことができます。
-
-## よくあるエラー
-
+## What if I am the Transfer Delegate of an Asset?
+If you are the Transfer Delegate of an Asset via the [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) plugin then you can call the `transferV1` function as you would if you were the owner of the Asset.
+## Common Errors
 ### `Authority mismatch`
-
-AssetのオーナーまたはTransfer Delegateではありません。所有権を確認してください：
-
+You're not the owner or Transfer Delegate of the Asset. Check ownership:
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
-console.log(asset.owner) // 署名者と一致する必要があります
+console.log(asset.owner) // Must match your signer
 ```
-
 ### `Asset is frozen`
-
-AssetにはFreeze Delegateプラグインがあり、現在フリーズされています。転送前にフリーズ権限者がフリーズを解除する必要があります。
-
+The Asset has a Freeze Delegate plugin and is currently frozen. The freeze authority must unfreeze it before transfer.
 ### `Missing collection parameter`
-
-コレクション内のAssetの場合、`collection`アドレスを渡す必要があります。Assetにコレクションがあるか確認してください：
-
+For Assets in a Collection, you must pass the `collection` address. Check if the Asset has a collection:
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
 if (asset.updateAuthority.type === 'Collection') {
   console.log('Collection:', asset.updateAuthority.address)
 }
 ```
-
-## 注意事項
-
-- 転送は**無料** - レントコストなし、トランザクション手数料のみ（約0.000005 SOL）
-- 新しい所有者はAssetの完全な制御権を受け取ります
-- Transfer Delegateは転送成功後に取り消されます
-- フリーズされたAssetはフリーズ解除されるまで転送できません
-- 常にAssetをフェッチしてコレクションメンバーシップを確認してください
-
-## クイックリファレンス
-
-### 転送パラメータ
-
-| パラメータ | 必須 | 説明 |
+## Notes
+- Transfers are **free** - no rent cost, only the transaction fee (~0.000005 SOL)
+- The new owner receives full control of the Asset
+- Transfer Delegates are revoked after a successful transfer
+- Frozen Assets cannot be transferred until unfrozen
+- Always fetch the Asset first to check collection membership
+## Quick Reference
+### Transfer Parameters
+| Parameter | Required | Description |
 |-----------|----------|-------------|
-| `asset` | はい | Assetアドレスまたはフェッチされたオブジェクト |
-| `newOwner` | はい | 受信者の公開鍵 |
-| `collection` | コレクション内の場合 | コレクションアドレス |
-| `authority` | いいえ | デフォルトは署名者（デリゲートに使用） |
-
-### 誰が転送できますか？
-
-| 権限 | 転送可能？ |
+| `asset` | Yes | Asset address or fetched object |
+| `newOwner` | Yes | Recipient's public key |
+| `collection` | If in collection | Collection address |
+| `authority` | No | Defaults to signer (use for delegates) |
+### Who Can Transfer?
+| Authority | Can Transfer? |
 |-----------|---------------|
-| Asset所有者 | はい |
-| Transfer Delegate | はい（転送後に取り消し） |
-| Update Authority | いいえ |
-| Collection Authority | いいえ |
-
+| Asset Owner | Yes |
+| Transfer Delegate | Yes (revoked after) |
+| Update Authority | No |
+| Collection Authority | No |
 ## FAQ
-
-### Assetがコレクションに含まれているかどうかを確認する方法は？
-
-Assetをフェッチして`updateAuthority`を確認してください：
-
+### How do I know if an Asset is in a Collection?
+Fetch the Asset and check its `updateAuthority`:
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
 if (asset.updateAuthority.type === 'Collection') {
-  // asset.updateAuthority.addressをcollectionパラメータとして渡す
+  // Pass asset.updateAuthority.address as collection parameter
 }
 ```
-
-### 自分自身に転送できますか？
-
-はい。自分のアドレスへの転送は有効です（ウォレットの統合やテストに便利です）。
-
-### 転送後にTransfer Delegateはどうなりますか？
-
-Transfer Delegateプラグインは転送が完了すると自動的に取り消されます。新しい所有者は必要に応じて新しいデリゲートを割り当てる必要があります。
-
-### 転送をキャンセルできますか？
-
-いいえ。転送はアトミックです - トランザクションが確認されると、所有権は変更されています。キャンセルする保留状態はありません。
-
-### 一度に複数のAssetを転送できますか？
-
-単一のインストラクションではできません。1つのトランザクションで複数の転送インストラクションをバッチ処理できます（トランザクションサイズ制限まで）が、各Assetには独自の転送呼び出しが必要です。
-
-### 転送するとUpdate Authorityは変更されますか？
-
-いいえ。転送は所有権のみを変更します。Update Authorityは`update`インストラクションで明示的に変更しない限り同じままです。
-
-## 用語集
-
-| 用語 | 定義 |
+### Can I transfer to myself?
+Yes. Transferring to your own address is valid (useful for consolidating wallets or testing).
+### What happens to the Transfer Delegate after a transfer?
+The Transfer Delegate plugin is automatically revoked when the transfer completes. The new owner must assign a new delegate if needed.
+### Can I cancel a transfer?
+No. Transfers are atomic - once the transaction confirms, ownership has changed. There's no pending state to cancel.
+### Can I transfer multiple Assets at once?
+Not in a single instruction. You can batch multiple transfer instructions in one transaction (up to transaction size limits), but each Asset requires its own transfer call.
+### Does transferring change the update authority?
+No. Transfer only changes ownership. The update authority remains the same unless explicitly changed via the `update` instruction.
+## Glossary
+| Term | Definition |
 |------|------------|
-| **Owner** | 現在Assetを所有しているウォレット |
-| **Transfer Delegate** | 所有者に代わって転送を許可されたアカウント |
-| **Frozen** | 転送がブロックされているAssetの状態 |
-| **New Owner** | Assetを受け取る受信者ウォレット |
-| **Collection** | Assetが属するコレクション（転送要件に影響） |
-
----
-
-*Metaplex Foundationによって管理・2026年1月最終確認・@metaplex-foundation/mpl-coreに適用*
+| **Owner** | The wallet that currently owns the Asset |
+| **Transfer Delegate** | An account authorized to transfer on behalf of the owner |
+| **Frozen** | An Asset state where transfers are blocked |
+| **New Owner** | The recipient wallet receiving the Asset |
+| **Collection** | The Collection an Asset belongs to (affects transfer requirements) |

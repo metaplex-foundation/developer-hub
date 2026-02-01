@@ -1,104 +1,341 @@
 ---
-title: MPL Core JavaScript SDK
+title: JavaScript SDK
 metaTitle: JavaScript SDK | Metaplex Core
-description: MPL Core JavaScript SDK를 설치하고 설정하세요. Core Assets 및 Collections 생성, 관리, 전송을 위한 완전한 TypeScript 지원.
+description: Complete reference for the Metaplex Core JavaScript SDK. Covers Umi setup, creating assets, transfers, burns, updates, collections, plugins, and fetching data.
+updated: '01-31-2026'
+keywords:
+  - mpl-core JavaScript
+  - Core TypeScript SDK
+  - Umi framework
+  - NFT JavaScript
+  - Solana NFT SDK
+about:
+  - JavaScript SDK
+  - Umi integration
+  - TypeScript development
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What is the Core JavaScript SDK?
+    a: The Core JavaScript SDK (@metaplex-foundation/mpl-core) is a TypeScript library for interacting with Metaplex Core NFTs on Solana. It provides type-safe functions for creating, transferring, burning, and managing Assets and Collections.
+  - q: Do I need Umi to use this SDK?
+    a: Yes. The Core SDK is built on the Umi framework, which handles wallet connections, RPC communication, and transaction building. Install both @metaplex-foundation/mpl-core and @metaplex-foundation/umi-bundle-defaults.
+  - q: How do I connect a browser wallet?
+    a: Use the @metaplex-foundation/umi-signer-wallet-adapters package with your wallet adapter and call umi.use(walletAdapterIdentity(wallet)).
+  - q: What's the difference between sendAndConfirm and send?
+    a: sendAndConfirm() waits for transaction confirmation before returning. send() returns immediately after broadcasting. Use sendAndConfirm() for most cases.
+  - q: How do I batch multiple operations?
+    a: Use transactionBuilder() to combine instructions, but be aware of Solana's transaction size limits (~1232 bytes). For large batches, send multiple transactions.
+  - q: Can I use this SDK in React/Next.js?
+    a: Yes. The SDK works in both browser and Node.js environments. For React, use wallet adapters from @solana/wallet-adapter-react with Umi's wallet adapter identity.
 ---
-
-**MPL Core JavaScript SDK**는 Solana에서 Core Assets와 Collections를 생성하고 관리하기 위한 완전한 TypeScript 라이브러리입니다. Umi 프레임워크를 기반으로 하며 완전한 타입 안전성과 최소한의 의존성을 제공합니다. {% .lead %}
-
-{% callout title="배울 내용" %}
-
-- SDK 설치 및 설정
-- Umi 인스턴스 구성
-- mpl-core 패키지 등록
-
+The **Metaplex Core JavaScript SDK** (`@metaplex-foundation/mpl-core`) provides a complete TypeScript/JavaScript interface for interacting with Core Assets and Collections on Solana. Built on the [Umi framework](/dev-tools/umi), it offers type-safe methods for all Core operations. {% .lead %}
+{% callout title="What You'll Learn" %}
+This SDK reference covers:
+- Setting up Umi with the Core plugin
+- Creating, transferring, burning, and updating Assets
+- Managing Collections and collection-level operations
+- Adding, updating, and removing Plugins
+- Fetching Assets and Collections with DAS
+- Error handling and common patterns
 {% /callout %}
-
-## 요약
-
-SDK는 npm을 통해 설치하고 Umi 인스턴스와 함께 구성합니다. 완전한 TypeScript 지원으로 Assets, Collections 및 플러그인 작업을 위한 모든 기능을 제공합니다.
-
-- `npm install @metaplex-foundation/mpl-core`로 설치
-- Umi 프레임워크 필요(의존성 관리)
-- `.use(mplCore())`로 umi에 등록
-
-## 설치
-
-설치는 npm, yarn, bun 등 모든 JS 패키지 매니저로 실행할 수 있습니다.
-
-```sh
-npm install @metaplex-foundation/mpl-core
-```
-
+## Summary
+The **Core JavaScript SDK** is the recommended way to interact with Metaplex Core from JavaScript/TypeScript applications. It wraps the Core program instructions in a type-safe API.
+- Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
+- Requires Umi framework for wallet/RPC management
+- All functions return transaction builders for flexible execution
+- Supports both browser and Node.js environments
+## Out of Scope
+Rust SDK usage (see [Rust SDK](/smart-contracts/core/sdk/rust)), Token Metadata operations, Candy Machine integration, and low-level Solana transaction construction.
+## Quick Start
+**Jump to:** [Setup](#umi-setup) · [Create](#create-an-asset) · [Transfer](#transfer-an-asset) · [Burn](#burn-an-asset) · [Update](#update-an-asset) · [Collections](#collections) · [Plugins](#plugins) · [Fetch](#fetching-assets) · [Errors](#common-errors) · [FAQ](#faq)
+1. Install dependencies: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi-bundle-defaults`
+2. Create Umi instance with `mplCore()` plugin
+3. Generate or load a signer for transactions
+4. Call SDK functions and confirm transactions
+## Prerequisites
+- **Node.js 18+** or modern browser with ES modules
+- **Umi framework** configured with RPC and signer
+- **SOL** for transaction fees (~0.003 SOL per asset)
 {% quick-links %}
-
-{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-core.typedoc.metaplex.com/" description="MPL-Core Javascript SDK 생성된 패키지 API 문서." /%}
-
-{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-core" description="NPM의 MPL-Core Javascript SDK." /%}
-
+{% quick-link title="API Reference" target="_blank" icon="JavaScript" href="https://mpl-core.typedoc.metaplex.com/" description="Full TypeDoc API documentation for the SDK." /%}
+{% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-core" description="Package on npmjs.com with version history." /%}
 {% /quick-links %}
-
-## Umi 설정
-
-Metaplex Javascript SDK와 상호작용하려면 `umi` 인스턴스가 필요합니다. 아직 `umi` 인스턴스를 설정하고 구성하지 않았다면 [Umi 시작하기](/ko/dev-tools/umi/getting-started) 페이지를 확인하고 RPC 엔드포인트와 `umi` identity/signer를 구성할 수 있습니다.
-
-`umi` 인스턴스 초기화 중에 다음을 사용하여 mpl-core 패키지를 `umi`에 추가할 수 있습니다
-
-```js
-.use(mplCore())
+## Installation
+Install the Core SDK and Umi framework:
+```bash {% title="Terminal" %}
+npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi-bundle-defaults
 ```
-
-umi 인스턴스 생성에서 `.use()`로 `mplCore()` 패키지를 어디든 추가할 수 있습니다.
-
-```ts
+For metadata uploads, add an uploader plugin:
+```bash {% title="Terminal" %}
+npm install @metaplex-foundation/umi-uploader-irys
+```
+## Umi Setup
+Create and configure an Umi instance with the Core plugin:
+```ts {% title="setup-umi.ts" %}
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { mplCore } from '@metaplex-foundation/mpl-core'
-
-// 원하는 RPC 엔드포인트를 사용하세요.
-const umi = createUmi('http://api.devnet.solana.com')
-... // 추가 umi 설정, 패키지, 그리고 signer들
-.use(mplCore())
+import { keypairIdentity } from '@metaplex-foundation/umi'
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+// Create Umi with RPC endpoint
+const umi = createUmi('https://api.devnet.solana.com')
+  .use(mplCore())
+  .use(keypairIdentity(yourKeypair))
+  .use(irysUploader()) // Optional: for metadata uploads
 ```
-
-여기서부터 `umi` 인스턴스는 mpl-core 패키지에 액세스할 수 있고 mpl-core 기능 세트를 탐색할 수 있습니다.
-
-## 일반적인 오류
-
-### `Umi instance not configured`
-
-mpl-core를 사용하기 전에 `.use(mplCore())`를 호출해야 합니다.
-
-### `No signer configured`
-
-트랜잭션에 서명할 identity/signer를 Umi에 구성해야 합니다.
-
-## 참고 사항
-
-- SDK는 Umi 프레임워크 필요(별도 설치)
-- 모든 함수는 완전한 TypeScript 타입 지원
-- devnet과 mainnet 모두에서 작동
-- 트랜잭션 빌더 패턴으로 체이닝 가능
-
+{% totem %}
+{% totem-accordion title="Loading a Keypair from File" %}
+```ts {% title="load-keypair.ts" %}
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { mplCore } from '@metaplex-foundation/mpl-core'
+import { keypairIdentity } from '@metaplex-foundation/umi'
+import { readFileSync } from 'fs'
+const secretKey = JSON.parse(
+  readFileSync('/path/to/keypair.json', 'utf-8')
+)
+const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))
+const umi = createUmi('https://api.devnet.solana.com')
+  .use(mplCore())
+  .use(keypairIdentity(keypair))
+```
+{% /totem-accordion %}
+{% totem-accordion title="Browser Wallet Adapter" %}
+```ts {% title="browser-wallet.ts" %}
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { mplCore } from '@metaplex-foundation/mpl-core'
+import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
+const umi = createUmi('https://api.devnet.solana.com')
+  .use(mplCore())
+  .use(walletAdapterIdentity(wallet)) // From @solana/wallet-adapter-react
+```
+{% /totem-accordion %}
+{% /totem %}
+## Assets
+### Create an Asset
+Use `create()` to mint a new Core Asset:
+{% code-tabs-imported from="core/create-asset" frameworks="umi" /%}
+### Transfer an Asset
+Use `transfer()` to send an Asset to another wallet:
+{% code-tabs-imported from="core/transfer-asset" frameworks="umi" /%}
+### Burn an Asset
+Use `burn()` to permanently destroy an Asset and reclaim rent:
+{% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
+### Update an Asset
+Use `update()` to modify Asset metadata:
+{% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
+## Collections
+### Create a Collection
+Use `createCollection()` to create a Collection account:
+{% code-tabs-imported from="core/create-collection" frameworks="umi" /%}
+### Create Asset in Collection
+Pass the `collection` parameter to `create()`:
+{% code-tabs-imported from="core/create-asset-in-collection" frameworks="umi" /%}
+## Plugins
+Plugins add behavior to Assets and Collections. They can be added at creation time or afterwards.
+### Add Plugin at Creation
+{% code-tabs-imported from="core/create-asset-with-plugins" frameworks="umi" /%}
+### Add Plugin to Existing Asset
+{% code-tabs-imported from="core/add-plugin" frameworks="umi" /%}
+### Available Plugin Types
+| Plugin | Type String | Purpose |
+|--------|-------------|---------|
+| Royalties | `'Royalties'` | Creator royalty enforcement |
+| Freeze Delegate | `'FreezeDelegate'` | Allow freezing/unfreezing |
+| Burn Delegate | `'BurnDelegate'` | Allow burning by delegate |
+| Transfer Delegate | `'TransferDelegate'` | Allow transfers by delegate |
+| Update Delegate | `'UpdateDelegate'` | Allow metadata updates |
+| Attributes | `'Attributes'` | On-chain key/value data |
+| Permanent Freeze | `'PermanentFreezeDelegate'` | Permanent freeze state |
+| Permanent Transfer | `'PermanentTransferDelegate'` | Permanent transfer delegate |
+| Permanent Burn | `'PermanentBurnDelegate'` | Permanent burn delegate |
+See [Plugins Overview](/smart-contracts/core/plugins) for detailed plugin documentation.
+## Fetching Assets
+### Fetch Single Asset
+{% code-tabs-imported from="core/fetch-asset" frameworks="umi" /%}
+### Fetch Assets by Owner (DAS)
+Use the DAS API to query indexed assets:
+```ts {% title="fetch-by-owner.ts" %}
+import { publicKey } from '@metaplex-foundation/umi'
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+// Add DAS plugin to Umi
+const umi = createUmi('https://api.devnet.solana.com')
+  .use(mplCore())
+  .use(dasApi())
+const owner = publicKey('OwnerAddressHere...')
+const assets = await umi.rpc.getAssetsByOwner({
+  owner,
+  limit: 100,
+})
+console.log('Assets owned:', assets.items.length)
+```
+### Fetch Assets by Collection (DAS)
+```ts {% title="fetch-by-collection.ts" %}
+import { publicKey } from '@metaplex-foundation/umi'
+const collectionAddress = publicKey('CollectionAddressHere...')
+const assets = await umi.rpc.getAssetsByGroup({
+  groupKey: 'collection',
+  groupValue: collectionAddress,
+  limit: 100,
+})
+console.log('Collection assets:', assets.items.length)
+```
+## Uploading Metadata
+Use Umi's uploader plugins to store metadata JSON:
+```ts {% title="upload-metadata.ts" %}
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+const umi = createUmi('https://api.devnet.solana.com')
+  .use(mplCore())
+  .use(keypairIdentity(yourKeypair))
+  .use(irysUploader())
+// Upload image first
+const imageFile = await fs.promises.readFile('image.png')
+const [imageUri] = await umi.uploader.upload([imageFile])
+// Upload metadata JSON
+const uri = await umi.uploader.uploadJson({
+  name: 'My NFT',
+  description: 'An awesome NFT',
+  image: imageUri,
+  attributes: [
+    { trait_type: 'Background', value: 'Blue' },
+    { trait_type: 'Rarity', value: 'Rare' },
+  ],
+})
+console.log('Metadata URI:', uri)
+```
+## Transaction Patterns
+### Send and Confirm
+The standard pattern waits for confirmation:
+```ts {% title="send-confirm.ts" %}
+const result = await create(umi, { asset, name, uri }).sendAndConfirm(umi)
+console.log('Signature:', result.signature)
+```
+### Custom Confirmation Options
+```ts {% title="custom-confirm.ts" %}
+const result = await create(umi, { asset, name, uri }).sendAndConfirm(umi, {
+  confirm: { commitment: 'finalized' },
+})
+```
+### Build Transaction Without Sending
+```ts {% title="build-only.ts" %}
+const tx = create(umi, { asset, name, uri })
+const builtTx = await tx.buildAndSign(umi)
+// Send later with: await umi.rpc.sendTransaction(builtTx)
+```
+### Combine Multiple Instructions
+```ts {% title="combine-instructions.ts" %}
+import { transactionBuilder } from '@metaplex-foundation/umi'
+const tx = transactionBuilder()
+  .add(create(umi, { asset: asset1, name: 'NFT 1', uri: uri1 }))
+  .add(create(umi, { asset: asset2, name: 'NFT 2', uri: uri2 }))
+await tx.sendAndConfirm(umi)
+```
+## Common Errors
+### `Account does not exist`
+The asset or collection address doesn't exist. Verify the address is correct:
+```ts
+const asset = await fetchAsset(umi, assetAddress).catch(() => null)
+if (!asset) {
+  console.log('Asset not found')
+}
+```
+### `Invalid authority`
+You're not authorized to perform this action. Check that:
+- You own the asset (for transfers, burns)
+- You're the update authority (for updates)
+- You have the required delegate permission
+### `Insufficient funds`
+Your wallet needs more SOL. Fund it with:
+```bash
+solana airdrop 1 <WALLET_ADDRESS> --url devnet
+```
+### `Asset already exists`
+The asset keypair was already used. Generate a new signer:
+```ts
+const assetSigner = generateSigner(umi) // Must be unique
+```
+### `Plugin not found`
+The plugin doesn't exist on this asset. Check installed plugins:
+```ts
+const asset = await fetchAsset(umi, assetAddress)
+console.log('Plugins:', Object.keys(asset))
+```
+## Notes
+- Always use `generateSigner()` for new assets - never reuse keypairs
+- The `asset` parameter in `create()` must be a signer, not just a public key
+- Collection-level plugins override asset-level plugins of the same type
+- Use `commitment: 'finalized'` when creating assets that you immediately fetch
+- Transaction builders are immutable - each method returns a new builder
+## Quick Reference
+### Minimum Dependencies
+```json {% title="package.json" %}
+{
+  "dependencies": {
+    "@metaplex-foundation/mpl-core": "^1.0.0",
+    "@metaplex-foundation/umi": "^0.9.0",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.9.0"
+  }
+}
+```
+### Core Functions
+| Function | Purpose |
+|----------|---------|
+| `create()` | Create a new Asset |
+| `createCollection()` | Create a new Collection |
+| `transfer()` | Transfer Asset ownership |
+| `burn()` | Destroy an Asset |
+| `update()` | Update Asset metadata |
+| `updateCollection()` | Update Collection metadata |
+| `addPlugin()` | Add plugin to Asset |
+| `addCollectionPlugin()` | Add plugin to Collection |
+| `updatePlugin()` | Update existing plugin |
+| `removePlugin()` | Remove plugin from Asset |
+| `fetchAsset()` | Fetch Asset by address |
+| `fetchCollection()` | Fetch Collection by address |
+### Program ID
+| Network | Address |
+|---------|---------|
+| Mainnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
+| Devnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
 ## FAQ
-
-### Umi가 필요한가요?
-
-네. Umi 프레임워크는 RPC 연결, 서명자 관리, 트랜잭션 빌딩을 처리합니다. mpl-core를 사용하기 전에 먼저 설정해야 합니다.
-
-### SDK가 React/Next.js에서 작동하나요?
-
-네. SDK는 모든 JavaScript 환경에서 작동합니다. Next.js의 경우 `umi-bundle-defaults`를 사용하세요.
-
-### TypeScript가 필요한가요?
-
-필수는 아니지만 권장됩니다. SDK는 JavaScript에서도 작동하지만 TypeScript의 자동완성과 타입 검사가 개발 경험을 크게 향상시킵니다.
-
-## 관련 페이지
-
-- [Umi 시작하기](/ko/dev-tools/umi/getting-started) - Umi 설치 및 구성
-- [Core 개요](/ko/smart-contracts/core) - Core 프로그램 소개
-- [Asset 생성하기](/ko/smart-contracts/core/create-asset) - 첫 번째 Asset 생성
-
----
-
-*Metaplex Foundation 관리 · 2026년 1월 최종 검증 · @metaplex-foundation/mpl-core 적용*
+### What is the Core JavaScript SDK?
+The Core JavaScript SDK (`@metaplex-foundation/mpl-core`) is a TypeScript library for interacting with Metaplex Core NFTs on Solana. It provides type-safe functions for creating, transferring, burning, and managing Assets and Collections.
+### Do I need Umi to use this SDK?
+Yes. The Core SDK is built on the Umi framework, which handles wallet connections, RPC communication, and transaction building. Install both `@metaplex-foundation/mpl-core` and `@metaplex-foundation/umi-bundle-defaults`.
+### How do I connect a browser wallet?
+Use the `@metaplex-foundation/umi-signer-wallet-adapters` package with your wallet adapter:
+```ts
+import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
+umi.use(walletAdapterIdentity(wallet))
+```
+### What's the difference between sendAndConfirm and send?
+`sendAndConfirm()` waits for transaction confirmation before returning. `send()` returns immediately after broadcasting. Use `sendAndConfirm()` for most cases to ensure your transaction succeeded.
+### How do I batch multiple operations?
+Use `transactionBuilder()` to combine instructions, but be aware of Solana's transaction size limits (~1232 bytes). For large batches, send multiple transactions.
+### Can I use this SDK in React/Next.js?
+Yes. The SDK works in both browser and Node.js environments. For React, use wallet adapters from `@solana/wallet-adapter-react` with Umi's wallet adapter identity.
+### How do I handle errors?
+Wrap SDK calls in try/catch blocks. The SDK throws typed errors that include program error codes:
+```ts
+try {
+  await transfer(umi, { asset, newOwner }).sendAndConfirm(umi)
+} catch (error) {
+  console.error('Transfer failed:', error.message)
+}
+```
+### Where can I find the full API documentation?
+See the [TypeDoc API Reference](https://mpl-core.typedoc.metaplex.com/) for complete function signatures and types.
+## Glossary
+| Term | Definition |
+|------|------------|
+| **Umi** | Metaplex's framework for building Solana applications with wallet and RPC management |
+| **Asset** | A Core on-chain account representing an NFT with ownership, metadata, and plugins |
+| **Collection** | A Core account that groups related Assets and can apply collection-wide plugins |
+| **Signer** | A keypair that can sign transactions (required for creating new accounts) |
+| **Plugin** | A modular extension that adds behavior to Assets or Collections |
+| **URI** | The off-chain metadata URL pointing to a JSON file with name, image, and attributes |
+| **DAS** | Digital Asset Standard - API for querying indexed NFT data from RPC providers |
+| **Transaction Builder** | An immutable object that constructs transactions before sending |
+| **Identity** | The wallet/keypair configured as the transaction signer in Umi |
+| **Commitment** | Solana confirmation level (processed, confirmed, finalized) |

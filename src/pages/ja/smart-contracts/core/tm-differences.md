@@ -1,122 +1,108 @@
 ---
-title: CoreとToken Metadataの違い
+title: Differences between Core and Token Metadata
 metaTitle: Core vs Token Metadata | Metaplex Core
-description: Metaplex CoreとToken Metadata NFT標準を比較します。何が変わったか、何が新しいか、そしてTMからCoreへのメンタルモデルの移行方法を学びます。
+description: Compare Metaplex Core and Token Metadata NFT standards. Learn what changed, what's new, and how to migrate your mental model from TM to Core.
+updated: '01-31-2026'
+keywords:
+  - Core vs Token Metadata
+  - NFT standard comparison
+  - migrate from Token Metadata
+  - mpl-core differences
+  - NFT migration
+about:
+  - NFT standards comparison
+  - Token Metadata migration
+  - Core advantages
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Should I use Core or Token Metadata for new projects?
+    a: Use Core for all new projects. It's cheaper, simpler, and has better features. Token Metadata is legacy.
+  - q: Can I migrate existing TM NFTs to Core?
+    a: Not automatically. Core Assets are different on-chain accounts. Migration would require burning TM NFTs and minting new Core Assets.
+  - q: What happened to pNFTs?
+    a: Core's royalty enforcement is built-in via the Royalties plugin with allowlist/denylist support. No separate programmable variant needed.
+  - q: Do I still need Associated Token Accounts?
+    a: No. Core Assets don't use ATAs. Ownership is stored directly in the Asset account.
+  - q: How do I verify creators in Core?
+    a: Use the Verified Creators plugin. It works similarly to TM's creator array but is opt-in.
 ---
-
-**Token Metadata**から来ましたか？このガイドでは、Coreで何が異なるか、なぜ優れているか、そしてTMの知識をCoreの概念に変換する方法を説明します。 {% .lead %}
-
-{% callout title="主な違い" %}
-
-- **単一アカウント** vs 3以上のアカウント（ミント、メタデータ、トークンアカウント）
-- **80%低いコスト**: ミントごとに約0.0037 SOL vs 0.022 SOL
-- デリゲートとフリーズ権限の代わりに**プラグイン**
-- コレクションレベルの操作を持つ**ファーストクラスのコレクション**
-- **Associated Token Account**不要
-
+Coming from **Token Metadata**? This guide explains what's different in Core, why it's better, and how to translate your TM knowledge to Core concepts. {% .lead %}
+{% callout title="Key Differences" %}
+- **Single account** vs 3+ accounts (mint, metadata, token account)
+- **80% lower costs**: ~0.0037 SOL vs 0.022 SOL per mint
+- **Plugins** instead of delegates and freeze authorities
+- **Collections are first-class** with collection-level operations
+- **No Associated Token Accounts** needed
 {% /callout %}
-
-## 概要
-
-Coreは、Token Metadataのマルチアカウントモデルを単一アカウント設計に置き換えます。作成、フリーズ、デリゲート、コレクション管理のすべてがシンプルになります。プラグインシステムは、TMの散在したデリゲートタイプを統一された拡張可能なアーキテクチャに置き換えます。
-
-| 機能 | Token Metadata | Core |
+## Summary
+Core replaces Token Metadata's multi-account model with a single-account design. Everything is simpler: creating, freezing, delegating, and managing collections. The plugin system replaces TM's scattered delegate types with a unified, extensible architecture.
+| Feature | Token Metadata | Core |
 |---------|---------------|------|
-| NFTごとのアカウント | 3以上（ミント、メタデータ、ATA） | 1 |
-| ミントコスト | 約0.022 SOL | 約0.0037 SOL |
-| フリーズ機構 | デリゲート + フリーズ権限 | Freeze Delegateプラグイン |
-| コレクションロイヤリティ | Asset単位の更新 | コレクションレベルプラグイン |
-| オンチェーン属性 | なし | Attributesプラグインあり |
-
-## 対象外
-
-移行スクリプト（近日公開）、pNFT固有の機能、ファンジブルトークン処理（SPL Tokenを使用）。
-
-## クイックスタート
-
-**移動先:** [コスト比較](#違いの概要) · [コレクション](#コレクション) · [フリーズ/ロック](#フリーズ--ロック) · [ライフサイクルイベント](#ライフサイクルイベントとプラグイン)
-
-新しく始める場合はCoreを使用してください。移行する場合、主要なメンタルシフトは：
-1. 3つではなく1つのアカウント
-2. デリゲートではなくプラグイン
-3. コレクションレベルの操作がネイティブ
-
-## 違いの概要
-
-- **前例のないコスト効率**: Metaplex Coreは利用可能な代替品と比較して最低のミントコストを提供します。例えば、Token Metadataで0.022 SOLかかるNFTが、Coreでは0.0037 SOLでミントできます。
-- **改善された開発者エクスペリエンス**: ほとんどのデジタルアセットが完全なファンジブルトークンプログラムを維持するために必要なデータを継承する一方で、CoreはNFTに最適化されており、すべての重要なデータを単一のSolanaアカウントに保存できます。これにより、開発者の複雑さが大幅に軽減され、Solana全体のネットワークパフォーマンス向上にも貢献します。
-- **強化されたコレクション管理**: コレクションのファーストクラスサポートにより、開発者とクリエイターはロイヤリティやプラグインなどのコレクションレベル設定を簡単に管理でき、これらは個別のNFTに対して独自に上書きできます。これは単一のトランザクションで実行でき、コレクション管理コストとSolanaトランザクション手数料を削減します。
-- **高度なプラグインサポート**: 組み込みステーキングからアセットベースのポイントシステムまで、Metaplex Coreのプラグインアーキテクチャは広大なユーティリティとカスタマイゼーションの景観を開きます。プラグインにより、開発者は作成、転送、バーンなどのアセットライフサイクルイベントにフックしてカスタム動作を追加できます。
-- **互換性とサポート**: Metaplex開発者プラットフォームによって完全にサポートされ、CoreはSDKスイートと今後のプログラムとシームレスに統合され、Metaplexエコシステムを豊かにします。
-- **すぐに使えるインデックス化**: Metaplex Digital Asset Standard API（DAS API）を拡張して、Coreアセットは自動的にインデックス化され、すべてのSolana NFTに使用される共通インターフェースを通じてアプリケーション開発者が利用できます。ただし、独特な改善点として、Core attributeプラグインにより、開発者は自動的にインデックス化されるオンチェーンデータを追加できるようになります。
-
-## 技術概要
-
-### 作成
-
-Core Assetを作成するには、単一の作成インストラクションのみが必要です。Token Metadataで必要だったように、後でミントしてメタデータを付加する必要はありません。これにより、複雑さとトランザクションサイズが削減されます。
-
+| Accounts per NFT | 3+ (mint, metadata, ATA) | 1 |
+| Mint cost | ~0.022 SOL | ~0.0037 SOL |
+| Freeze mechanism | Delegate + freeze authority | Freeze Delegate plugin |
+| Collection royalties | Per-asset updates | Collection-level plugin |
+| On-chain attributes | ❌ | ✅ Attributes plugin |
+## Out of Scope
+Migration scripts (coming soon), pNFT-specific features, and fungible token handling (use SPL Token).
+## Quick Start
+**Jump to:** [Cost Comparison](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze--lock) · [Lifecycle Events](#lifecycle-events-and-plugins)
+If you're starting fresh, use Core. If migrating, the key mental shifts are:
+1. One account, not three
+2. Plugins, not delegates
+3. Collection-level operations are native
+## Difference Overview
+- **Unprecedented Cost Efficiency**: Metaplex Core offers the lowest minting costs compared to available alternatives. For instance, an NFT that would cost .022 SOL with Token Metadata can be minted with Core for .0037 SOL.
+- **Improved Developer Experience**: While most digital assets inherit the data needed to maintain an entire fungible token program, Core is optimized for NFTs, allowing all key data to be stored in a single Solana account. This dramatically reduces complexity for developers, while also helping improve network performance for Solana more broadly.
+- **Enhanced Collection Management**: With first-class support for collections, developers and creators can easily manage collection-level configurations such as royalties and plugins, which can be uniquely overridden for individual NFTs. This can be done in a single transaction, reducing collection management costs and Solana transaction fees.
+- **Advanced Plugin Support**: From built-in staking to asset-based point systems, the plugin architecture of Metaplex Core opens a vast landscape of utility and customization. Plugins allow developers to hook into any asset life cycle event like create, transfer and burn to add custom behaviors.
+- **Compatibility and Support**: Fully supported by the Metaplex Developer Platform, Core is set to integrate seamlessly with a suite of SDKs and upcoming programs, enriching the Metaplex ecosystem.
+- **Out of the Box Indexing**: Expanding on the Metaplex Digital Asset Standard API (DAS API), Core assets will be automatically indexed and available for application developers through a common interface that is used for all Solana NFTs. However, a unique improvement is that with the Core attribute plugin, developers will be able to add on chain data that is now also automatically indexed.
+## Technical overview
+### Create
+To create a Core Asset, only a single create instruction is required. There is no need to mint and attach metadata later as was required by Token Metadata. This reduces the complexity and transaction size.
 {% totem %}
-{% totem-accordion title="作成" %}
-次のスニペットは、アセットデータを既にアップロードしていることを前提としています。
-
+{% totem-accordion title="Create" %}
+The following snippet assumes that you have already uploaded your asset data.
 ```js
 import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
 import { create } from '@metaplex-foundation/mpl-core'
-
 const assetAddress = generateSigner(umi)
-
 const result = createV1(umi, {
   asset: assetAddress,
   name: 'My Nft',
   uri: 'https://example.com/my-nft',
 }).sendAndConfirm(umi)
 ```
-
 {% /totem-accordion %}
 {% /totem %}
-
-### コレクション
-
-Coreコレクションには複数の新機能が含まれています。コレクションは独自のアカウントタイプであり、通常のアセットとは区別されます。これは、NFTとコレクションの両方を表すために同じアカウントと状態を使用するToken Metadataのアプローチからの歓迎すべき追加であり、両者を区別するのが困難でした。
-
-Coreでは、コレクションは追加機能を可能にする**ファーストクラスアセット**です。例えば、Coreはコレクションにロイヤリティプラグインを追加することで、コレクションレベルのロイヤリティ調整を提供します。開発者とクリエイターは、各アセットを個別に更新することを強制されるのではなく、コレクション内のすべてのアセットを一度に更新できるようになりました。しかし、コレクション内の一部のアセットが異なるロイヤリティ設定を持つべき場合はどうでしょうか？問題ありません - 同じプラグインをアセットに追加するだけで、コレクションレベルのロイヤリティプラグインが上書きされます。
-
-TMでは不可能だったコレクション機能の例として、コレクションレベルロイヤリティがあります - ロイヤリティやクリエイターを変更する際にもう各アセットを更新する必要はなく、コレクションで定義します。これは、コレクションに[ロイヤリティプラグイン](/ja/smart-contracts/core/plugins/royalties)を追加することで実現できます。一部のアセットが異なるロイヤリティ設定を持つべきですか？同じプラグインをアセットに追加するだけで、コレクションレベルのロイヤリティプラグインが上書きされます。
-
-フリーズもコレクションレベルで可能です。
-
-コレクションの作成や更新など、コレクションの取り扱いに関する詳細情報は、[コレクション管理](/ja/smart-contracts/core/collections)ページで見つけることができます。
-
-### ライフサイクルイベントとプラグイン
-
-アセットのライフサイクル中に、以下のような複数のイベントがトリガーされる可能性があります：
-
-- 作成
-- 転送
-- 更新
-- バーン
-- プラグイン追加
-- 権限プラグイン承認
-- 権限プラグイン削除
-
-TMでは、これらのライフサイクルイベントは所有者またはデリゲートによって実行されます。すべてのTMアセット（nfts/pNfts）には、すべてのライフサイクルイベントに対する関数が含まれています。Coreでは、これらのイベントはアセットまたはコレクション全体レベルで[プラグイン](/ja/smart-contracts/core/plugins)によって処理されます。
-
-アセットレベルまたはコレクションレベルの両方に付加されたプラグインは、これらのライフサイクルイベント中に検証プロセスを実行し、イベントの実行を`承認`、`拒否`、または`強制承認`します。
-
-### フリーズ / ロック
-
-TMでアセットをフリーズするには、通常まずフリーズ権限を別のウォレットにデリゲートし、それがNFTをフリーズします。Coreでは、2つのプラグインのいずれかを使用する必要があります：`Freeze Delegate`または`Permanent Freeze Delegate`。後者はアセット作成時にのみ追加できますが、`Freeze Delegate`プラグインは、現在の所有者がトランザクションに署名すれば、いつでも[追加](/ja/smart-contracts/core/plugins/adding-plugins)できます。
-
-デリゲートもCoreでより簡単になります。Delegate Recordアカウントを廃止し、デリゲート権限を直接プラグイン自体に保存し、アセット作成時または`addPluginV1`関数を介してアセットにプラグインを追加する際に割り当て可能にしています。
-
-所有者がフリーズ権限を別のアカウントに割り当てる場合、アセットにまだフリーズプラグインがない場合は、その権限でプラグインを追加してフリーズする必要があります。
-
-デリゲート権限に割り当てながら、アセットに`Freeze Delegate`プラグインを追加する簡単な例を以下に示します。
-
+### Collections
+Core Collections include multiple new features. Collections are now their own account type and differentiate themselves from regular Assets. This is a welcome addition from Token Metadatas approach of using the same accounts and state to represent both NFT's and Collections making the two difficult to tell apart.
+With Core, Collections are **first class assets** that allow additional functionalities. For example, Core provides for collection-level royalty adjustments by adding the Royalties Plugin to the collection. Developers and creators can now update all assets in a collection at once rather than being forced to update each asset individually. But what if some assets in the collection should have different royalty settings? No problem – just add the same plugin to the asset and the collection-level royalty plugin will be overwritten
+Collection features that were not possible with TM are for example collection level royalties - no more having updating each asset when changing the royalties or creators but define it in the collection. This can be done by adding the [Royalties Plugin](/smart-contracts/core/plugins/royalties) to your collection. Some assets should have different royalty settings? Just add the same plugin to the asset and the collection level royalty plugin would be overwritten.
+Freezing is also possible on the collection level.
+You can find more information on handling collections, like creating or updating them on the [Managing Collections](/smart-contracts/core/collections) page.
+### Lifecycle events and Plugins
+During an Asset's lifecycle multiple events can be triggered, such as:
+- Creating
+- Transferring
+- Updating
+- Burning
+- Add Plugin
+- Approve Authority Plugin
+- Remove Authority Plugin
+In TM these lifecyle events are either executed by the owner or a delegate. All TM Assets (nfts/pNfts) include functions for every lifecycle event. In Core these events are handled by [Plugins](/smart-contracts/core/plugins) at either a Asset or Collection wide level.
+Plugins attached on both an Asset level or a Collection level will run through a validation process during these lifecycle events to either `approve`, `reject`, or `force approve` the event from execution.
+### Freeze / Lock
+To freeze an asset with TM you typically first delegate the freeze authority to a different wallet, which then freezes the NFT. In Core you must use one of two plugins: `Freeze Delegate` or `Permanent Freeze Delegate`. The latter can only be added during Asset creation, while the `Freeze Delegate` plugin can be [added](/smart-contracts/core/plugins/adding-plugins) at any time providing the current owner signs the transaction.
+Delegation is also easier with Core as we do away with Delegete Record accounts and store delegate authorities directly on the plugin itself while also being assignable at the point of adding a plugin to an Asset either during Asset creation or via `addPluginV1` function.
+To have the owner assign the freeze authority to a different Account, when the asset does not have a freeze plugin yet they would need to add the plugin with that authority and freeze it.
+Here's a quick example of adding the `Freeze Delegate` plugin to an Asset while also assigning it to a delegated authority.
 {% totem %}
-{% totem-accordion title="フリーズプラグインを追加し、権限を割り当ててフリーズ" %}
-
+{% totem-accordion title="Add Freeze Plugin, assign Authority and freeze" %}
 ```js
 await addPlugin(umi, {
   asset: asset.publicKey,
@@ -124,89 +110,58 @@ await addPlugin(umi, {
   initAuthority: pluginAuthority('Address', { address: delegate.publicKey }),
 }).sendAndConfirm(umi)
 ```
-
 {% /totem-accordion %}
 {% /totem %}
-
-さらに、Coreではフリーズは**コレクションレベル**で実行できます。完全なコレクションを単一のトランザクションでフリーズまたは解凍できます。
-
-### アセットステータス
-
-TMでは、アセットの現在のステータスと、それがフリーズ、ロック、または転送可能な状態にあるかどうかを確認するために、複数のアカウントをチェックする必要があることがよくあります。Coreでは、このステータスはアセットアカウントに保存されますが、コレクションアカウントによっても影響を受ける可能性があります。
-
-物事を簡単にするために、`@metaplex-foundation/mpl-core`パッケージに含まれる`canBurn`、`canTransfer`、`canUpdate`などのライフサイクルヘルパーを導入しました。これらのヘルパーは`boolean`値を返し、渡されたアドレスがこれらのライフサイクルイベントを実行する権限を持っているかどうかを知らせます。
-
+Additionally in Core freezing can be done on the **collection level**. A complete collection can be frozen or thawed in just one transaction.
+### Asset status
+In TM you often have to check multiple Accounts to find the current status of an Asset and if it has been frozen, locked, or even in a transferable state. With Core this status is stored in the Asset account but can be also be affected by the Collection account.
+To make things easier we have introduced lifecycle helpers such as `canBurn`, `canTransfer`, `canUpdate` which come included in the `@metaplex-foundation/mpl-core` package. These helpers return a `boolean` value letting you know if the passed in address has permission to execute these lifecycle events.
 ```js
 const burningAllowed = canBurn(authority, asset, collection)
 ```
-
-## クイックリファレンス
-
-### TM概念 → Core同等物
-
-| Token Metadata | Core同等物 |
+## Quick Reference
+### TM Concept → Core Equivalent
+| Token Metadata | Core Equivalent |
 |----------------|-----------------|
-| Mintアカウント | Assetアカウント |
-| Metadataアカウント | Assetアカウント（統合） |
-| Associated Token Account | 不要 |
-| フリーズ権限 | Freeze Delegateプラグイン |
-| Update Authority | Update Authority（同じ） |
-| デリゲート | Transfer/Burn/Update Delegateプラグイン |
-| コレクション検証済み | コレクションメンバーシップ（自動） |
-| クリエイター配列 | Verified Creatorsプラグイン |
-| Uses/ユーティリティ | プラグイン（カスタムロジック） |
-
-### 一般的な操作
-
-| 操作 | Token Metadata | Core |
+| Mint account | Asset account |
+| Metadata account | Asset account (combined) |
+| Associated Token Account | Not needed |
+| Freeze authority | Freeze Delegate plugin |
+| Update authority | Update authority (same) |
+| Delegate | Transfer/Burn/Update Delegate plugins |
+| Collection verified | Collection membership (automatic) |
+| Creators array | Verified Creators plugin |
+| Uses/utility | Plugins (custom logic) |
+### Common Operations
+| Operation | Token Metadata | Core |
 |-----------|---------------|------|
-| NFT作成 | `createV1()`（複数アカウント） | `create()`（単一アカウント） |
-| フリーズ | デリゲートしてフリーズ | Freeze Delegateプラグインを追加 |
-| メタデータ更新 | `updateV1()` | `update()` |
-| 転送 | SPL Token転送 | `transfer()` |
-| バーン | `burnV1()` | `burn()` |
-
+| Create NFT | `createV1()` (multiple accounts) | `create()` (single account) |
+| Freeze | Delegate then freeze | Add Freeze Delegate plugin |
+| Update metadata | `updateV1()` | `update()` |
+| Transfer | SPL Token transfer | `transfer()` |
+| Burn | `burnV1()` | `burn()` |
 ## FAQ
-
-### 新しいプロジェクトにはCoreとToken Metadataどちらを使用すべきですか？
-
-すべての新しいプロジェクトにはCoreを使用してください。より安価で、シンプルで、より良い機能があります。Token Metadataはレガシーです。
-
-### 既存のTM NFTをCoreに移行できますか？
-
-自動的にはできません。Core Assetは異なるオンチェーンアカウントです。移行にはTM NFTをバーンして新しいCore Assetをミントする必要があります。
-
-### pNFTはどうなりましたか？
-
-Coreのロイヤリティ強制は、許可リスト/拒否リストサポートを持つRoyaltiesプラグインを介して組み込まれています。別の「プログラマブル」バリアントは不要です。
-
-### まだAssociated Token Accountは必要ですか？
-
-いいえ。Core AssetはATAを使用しません。所有権はAssetアカウントに直接保存されます。
-
-### Coreでクリエイターを検証する方法は？
-
-[Verified Creatorsプラグイン](/ja/smart-contracts/core/plugins/verified-creators)を使用します。TMのクリエイター配列と同様に機能しますが、オプトインです。
-
-## さらなる読み物
-
-上記で説明した機能は氷山の一角に過ぎません。追加の興味深いトピックには以下が含まれます：
-
-- [コレクション管理](/ja/smart-contracts/core/collections)
-- [プラグイン概要](/ja/smart-contracts/core/plugins)
-- [属性プラグイン](/ja/smart-contracts/core/plugins/attribute)を使用したオンチェーンデータの追加
-- [アセットの作成](/ja/smart-contracts/core/create-asset)
-
-## 用語集
-
-| 用語 | 定義 |
+### Should I use Core or Token Metadata for new projects?
+Use Core for all new projects. It's cheaper, simpler, and has better features. Token Metadata is legacy.
+### Can I migrate existing TM NFTs to Core?
+Not automatically. Core Assets are different on-chain accounts. Migration would require burning TM NFTs and minting new Core Assets.
+### What happened to pNFTs?
+Core's royalty enforcement is built-in via the Royalties plugin with allowlist/denylist support. No separate "programmable" variant needed.
+### Do I still need Associated Token Accounts?
+No. Core Assets don't use ATAs. Ownership is stored directly in the Asset account.
+### How do I verify creators in Core?
+Use the [Verified Creators plugin](/smart-contracts/core/plugins/verified-creators). It works similarly to TM's creator array but is opt-in.
+## Further Reading
+The features described above are just the tip of the iceberg. Additional interesting topics include:
+- [Collection Management](/smart-contracts/core/collections)
+- [Plugin Overview](/smart-contracts/core/plugins)
+- Adding on-chain data using the [Attributes Plugin](/smart-contracts/core/plugins/attribute)
+- [Creating Assets](/smart-contracts/core/create-asset)
+## Glossary
+| Term | Definition |
 |------|------------|
-| **Token Metadata (TM)** | 複数アカウントを使用するレガシーMetaplex NFT標準 |
-| **Core** | 単一アカウント設計の新しいMetaplex NFT標準 |
-| **プラグイン** | Core Assetに追加されるモジュラー機能 |
-| **ATA** | Associated Token Account（Coreでは不要） |
-| **pNFT** | TMのプログラマブルNFT（ロイヤリティ強制はCoreに組み込み） |
-
----
-
-*Metaplex Foundationによって管理・2026年1月最終確認・@metaplex-foundation/mpl-coreに適用*
+| **Token Metadata (TM)** | Legacy Metaplex NFT standard using multiple accounts |
+| **Core** | New Metaplex NFT standard with single-account design |
+| **Plugin** | Modular functionality added to Core Assets |
+| **ATA** | Associated Token Account (not needed in Core) |
+| **pNFT** | Programmable NFT in TM (royalty enforcement built into Core) |

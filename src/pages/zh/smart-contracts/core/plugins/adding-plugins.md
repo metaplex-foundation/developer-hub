@@ -1,69 +1,69 @@
 ---
-title: 添加 Plugin
-metaTitle: 向 Core Asset 添加 Plugin | Metaplex Core
-description: 了解如何向 Core NFT Asset 和 Collection 添加 Plugin。在创建时或之后设置 Plugin 权限和配置 Plugin 数据。
+title: Adding Plugins
+metaTitle: Adding Plugins to Core Assets | Metaplex Core
+description: Learn how to add plugins to Core NFT Assets and Collections. Set plugin authorities and configure plugin data at creation or after.
+updated: '01-31-2026'
+keywords:
+  - add plugin
+  - addPlugin
+  - plugin authority
+  - configure plugin
+about:
+  - Adding plugins
+  - Plugin configuration
+  - Authority management
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Can I add multiple plugins in one transaction?
+    a: Yes, when creating an Asset. For existing Assets, each addPlugin call is a separate transaction.
+  - q: What happens if I set authority to None?
+    a: The plugin becomes immutable. No one can update or remove it.
+  - q: Can I add Owner Managed plugins as the update authority?
+    a: No. Owner Managed plugins always require the owner's signature to add, regardless of who signs.
+  - q: Why can't I add a Permanent plugin?
+    a: Permanent plugins can only be added during Asset/Collection creation. They cannot be added to existing accounts.
 ---
-
-本指南展示如何向 Core Asset 和 Collection **添加 Plugin**。Plugin 添加版税、冻结、属性和委托权限等功能。 {% .lead %}
-
-{% callout title="您将学到" %}
-
-- 向现有 Asset 和 Collection 添加 Plugin
-- 设置默认与自定义 Plugin 权限
-- 在添加时配置 Plugin 数据
-- 理解权限类型的差异
-
+This guide shows how to **add plugins** to Core Assets and Collections. Plugins add functionality like royalties, freezing, attributes, and delegate permissions. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Add plugins to existing Assets and Collections
+- Set default vs custom plugin authorities
+- Configure plugin data during addition
+- Understand authority type differences
 {% /callout %}
-
-## 概要
-
-使用 `addPlugin()` 向 Asset 添加 Plugin，或使用 `addCollectionPlugin()` 向 Collection 添加。每个 Plugin 都有默认权限类型，但您可以覆盖它。
-
-- **Owner Managed** Plugin 默认为 `Owner` 权限
-- **Authority Managed** Plugin 默认为 `UpdateAuthority`
-- **Permanent** Plugin 只能在创建时添加
-- 可以使用 `authority` 参数设置自定义权限
-
-## 不在范围内
-
-Permanent Plugin（必须在创建时添加）、Plugin 移除（参见[移除 Plugin](/zh/smart-contracts/core/plugins/removing-plugins)）和 Plugin 更新（参见[更新 Plugin](/zh/smart-contracts/core/plugins/update-plugins)）。
-
-## 快速开始
-
-**跳转至：** [添加到 Asset](#向-core-资产添加插件) · [添加到 Collection](#向集合添加插件) · [自定义权限](#使用指定权限添加插件)
-
-1. 从[Plugin 概述](/zh/smart-contracts/core/plugins)选择一个 Plugin
-2. 使用 Asset 地址和 Plugin 配置调用 `addPlugin()`
-3. Plugin 立即生效
-
-Plugin 可以分配给 MPL Core Asset 和 MPL Core Collection。MPL Core Asset 和 MPL Core Collection 共享相似的可用 Plugin 列表。要了解每个 Plugin 可以在哪里使用，请访问[Plugin 概述](/zh/smart-contracts/core/plugins)区域。
-
-## 向 Core 资产添加插件
-
-Plugin 支持为 Plugin 分配权限的功能。如果提供了 `initAuthority` 参数，这将把权限设置为所需的 Plugin 权限类型。如果未分配，将分配 Plugin 的默认权限类型（下一节）。
-
-**创建 Plugin 辅助函数**
-
-`createPlugin()` 辅助函数为您提供了一个类型化的方法，允许您在 `addPlugin()` 过程中分配 Plugin。
-有关 Plugin 及其参数的完整列表，请参阅[Plugin 概述](/zh/smart-contracts/core/plugins)页面。
-
-### 使用默认权限添加 Plugin
-
-如果您在不指定 Plugin 权限的情况下向 Asset 或 Collection 添加 Plugin，权限将设置为该 Plugin 的默认权限类型。
-
-- Owner Managed Plugin 将默认为 `Owner` Plugin 权限类型。
-- Authority Managed Plugin 将默认为 `UpdateAuthority` Plugin 权限类型。
-- Permanent Plugin 将默认为 `UpdateAuthority` Plugin 权限类型。
-
-{% dialect-switcher title="使用默认权限添加 Plugin" %}
+## Summary
+Add plugins to Assets using `addPlugin()` or to Collections using `addCollectionPlugin()`. Each plugin has a default authority type, but you can override it.
+- **Owner Managed** plugins default to `Owner` authority
+- **Authority Managed** plugins default to `UpdateAuthority`
+- **Permanent** plugins can only be added at creation time
+- Custom authority can be set with the `authority` parameter
+## Out of Scope
+Permanent plugins (must be added at creation), plugin removal (see [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)), and plugin updates (see [Updating Plugins](/smart-contracts/core/plugins/update-plugins)).
+## Quick Start
+**Jump to:** [Add to Asset](#adding-a-plugin-to-a-core-asset) · [Add to Collection](#adding-a-plugin-to-a-collection) · [Custom Authority](#adding-a-plugin-with-an-assigned-authority)
+1. Choose a plugin from the [Plugins Overview](/smart-contracts/core/plugins)
+2. Call `addPlugin()` with the Asset address and plugin config
+3. Plugin is active immediately
+Plugins can be assigned to both the MPL Core Asset and also the MPL Core Collection. MPL
+Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on each visit the [Plugins Overview](/smart-contracts/core/plugins) area.
+## Adding a Plugin to a Core Asset
+Plugins support the ability to assign an authority over the plugin. If an `initAuthority` argument is supplied this will set the authority to the desired plugin authority type. If left unassigned the plugins default authority type will be assigned (next section).
+**Create Plugin Helper**
+The `createPlugin()` helper gives you a typed method that allows you to assign plugins during the `addPlugin()` process.
+For a full list of plugins and their arguments see the [plugins overview](/smart-contracts/core/plugins) page.
+### Adding a Plugin with the default authority
+If you add a plugin to an Asset or Collection without specifying the authority of the plugin the authority will be set to that plugins default authority type.
+- Owner Managed Plugins will default to the plugin authority type of `Owner`.
+- Authority Managed Plugins will default to the plugin authority type of `UpdateAuthority`.
+- Permanent Plugins will default to the plugin authority type of `UpdateAuthority`
+{% dialect-switcher title="Adding a Plugin with the default authority" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
-
 const assetId = publicKey('11111111111111111111111111111111')
-
 await addPlugin(umi, {
   asset: assetId,
   plugin: {
@@ -72,10 +72,8 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -84,48 +82,35 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn add_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let add_plugin_ix = AddPluginV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
         .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let add_plugin_tx = Transaction::new_signed_with_payer(
         &[add_plugin_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&add_plugin_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### 使用指定权限添加插件
-
-有一些权限辅助函数可以帮助您设置 Plugin 的权限。
-
+### Adding a Plugin with an assigned authority
+There are a few authority helpers to aid you in setting the authorities of plugins.
 **Address**
-
 ```js
 await addPlugin(umi, {
     ...
@@ -138,11 +123,8 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-
-这将 Plugin 的权限设置为特定地址。
-
+This sets the plugin's authority to a specific address.
 **Owner**
-
 ```js
 await addPlugin(umi, {
     ...
@@ -154,12 +136,9 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-
-这将 Plugin 的权限设置为 `Owner` 类型。
-Asset 的当前所有者将有权访问此 Plugin。
-
+This sets the plugin's authority to the type of `Owner`.
+The current owner of the Asset will have access to this plugin.
 **UpdateAuthority**
-
 ```js
 await addPlugin(umi, {
     ...
@@ -171,12 +150,9 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-
-这将 Plugin 的权限设置为 `UpdateAuthority` 类型。
-Asset 的当前更新权限将有权访问此 Plugin。
-
+This sets the plugin's authority to the type of `UpdateAuthority`.
+The current update authority of the Asset will have access to this plugin.
 **None**
-
 ```js
 await addPlugin(umi, {
     ...
@@ -188,13 +164,10 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-
-这将 Plugin 的权限设置为 `None` 类型。
-此时 Plugin 的数据（如果有）将变为不可变。
-
-{% dialect-switcher title="使用指定权限添加 Plugin" %}
+This sets the plugin's authority to the type of `None`.
+The plugin's data if it has any becomes immutable at this point.
+{% dialect-switcher title="Adding a Plugin with an assigned authority" %}
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -203,15 +176,11 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn add_plugin_with_authority() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let plugin_authority = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-
     let add_plugin_with_authority_ix = AddPluginV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
@@ -220,40 +189,30 @@ pub async fn add_plugin_with_authority() {
             address: plugin_authority,
         })
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let add_plugin_with_authority_tx = Transaction::new_signed_with_payer(
         &[add_plugin_with_authority_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&add_plugin_with_authority_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
-
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import {
   addPlugin,
 } from '@metaplex-foundation/mpl-core'
-
 const asset = publicKey("11111111111111111111111111111111")
 const delegate = publicKey('222222222222222222222222222222')
-
 await addPlugin(umi, {
     asset: asset.publicKey,
     plugin: {
@@ -266,27 +225,18 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## 向集合添加插件
-
-向 Core Collection 添加 Plugin 与向 Core Asset 添加 Plugin 类似。您可以在创建时添加 Plugin，也可以使用 `addCollectionV1` 指令添加。Collection 只能访问 `Authority Plugin` 和 `Permanent Plugin`。
-
-### 使用默认权限添加 Collection Plugin
-
-{% dialect-switcher title="使用默认权限添加 Collection Plugin" %}
+## Adding a Plugin to a Collection
+Adding a Plugin to a Core Collection is similar to that of adding to a Core Asset. You can add plugins during creation and also using the `addCollectionV1` instruction. Collections only have access to `Authority Plugins` and `Permanent Plugins`.
+### Adding a Collection Plugin with the default authority
+{% dialect-switcher title="Adding a Collection Plugin with the default authority" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
-
 const collection = publicKey('11111111111111111111111111111111')
-
 const creator = publicKey('22222222222222222222222222222222')
-
 await addCollectionPlugin(umi, {
   collection: collection,
   plugin: {
@@ -304,11 +254,8 @@ await addCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::AddCollectionPluginV1Builder,
@@ -317,57 +264,43 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn add_plugin_to_collection() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let add_plugin_to_collection_ix = AddCollectionPluginV1Builder::new()
         .collection(collection)
         .payer(authority.pubkey())
         .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let add_plugin_to_collection_tx = Transaction::new_signed_with_payer(
         &[add_plugin_to_collection_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&add_plugin_to_collection_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### 使用指定权限添加 Collection Plugin
-
-{% dialect-switcher title="销毁 Asset" %}
+### Adding a Collection Plugin with an assigned authority
+{% dialect-switcher title="Burning an Assets" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import {
   addCollectionPlugin,
   ruleSet,
 } from '@metaplex-foundation/mpl-core'
-
 const collection = publicKey('11111111111111111111111111111111')
 const delegate = publicKey('22222222222222222222222222222222')
-
 await addCollectionPlugin(umi, {
   collection: collection.publicKey,
   plugin: {
@@ -380,10 +313,8 @@ await addCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::AddCollectionPluginV1Builder,
@@ -392,15 +323,11 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn add_plugin_to_collection_with_authority() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let plugin_authority = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-
     let add_plugin_to_collection_with_authority_ix = AddCollectionPluginV1Builder::new()
         .collection(collection)
         .payer(authority.pubkey())
@@ -409,104 +336,67 @@ pub async fn add_plugin_to_collection_with_authority() {
             address: plugin_authority,
         })
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let add_plugin_to_collection_with_authority_tx = Transaction::new_signed_with_payer(
         &[add_plugin_to_collection_with_authority_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&add_plugin_to_collection_with_authority_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## 常见错误
-
+## Common Errors
 ### `Authority mismatch`
-
-您没有权限添加此 Plugin。Owner Managed Plugin 需要所有者签名；Authority Managed Plugin 需要更新权限。
-
+You don't have permission to add this plugin. Owner Managed plugins require owner signature; Authority Managed plugins require update authority.
 ### `Plugin already exists`
-
-Asset/Collection 已经有此 Plugin 类型。使用 `updatePlugin` 来修改它。
-
+The Asset/Collection already has this plugin type. Use `updatePlugin` to modify it instead.
 ### `Cannot add permanent plugin`
-
-Permanent Plugin 只能在创建时添加。它们不能添加到现有的 Asset/Collection。
-
-## 注意事项
-
-- Owner Managed Plugin 需要**所有者签名**才能添加
-- Authority Managed Plugin 需要**更新权限签名**
-- Permanent Plugin 只能在**创建时**添加
-- 添加 Plugin 会增加账户大小和租金
-
-## 快速参考
-
-### 默认权限类型
-
-| Plugin 类型 | 默认权限 |
+Permanent plugins can only be added at creation time. They cannot be added to existing Assets/Collections.
+## Notes
+- Owner Managed plugins require **owner signature** to add
+- Authority Managed plugins require **update authority signature**
+- Permanent plugins can only be added at **creation time**
+- Adding plugins increases account size and rent
+## Quick Reference
+### Default Authority Types
+| Plugin Type | Default Authority |
 |-------------|-------------------|
 | Owner Managed | `Owner` |
 | Authority Managed | `UpdateAuthority` |
 | Permanent | `UpdateAuthority` |
-
-### 权限选项
-
-| 权限类型 | 描述 |
+### Authority Options
+| Authority Type | Description |
 |----------------|-------------|
-| `Owner` | 当前 Asset 所有者 |
-| `UpdateAuthority` | 当前更新权限 |
-| `Address` | 特定公钥 |
-| `None` | 不可变（无人可更新） |
-
-## 常见问题
-
-### 可以在一个交易中添加多个 Plugin 吗？
-
-可以，在创建 Asset 时。对于现有 Asset，每个 `addPlugin` 调用是单独的交易。
-
-### 如果将权限设置为 None 会发生什么？
-
-Plugin 变为不可变。没有人可以更新或移除它。
-
-### 可以作为更新权限添加 Owner Managed Plugin 吗？
-
-不可以。Owner Managed Plugin 始终需要所有者签名才能添加，无论谁签名。
-
-### 为什么我不能添加 Permanent Plugin？
-
-Permanent Plugin 只能在 Asset/Collection 创建时添加。它们不能添加到现有账户。
-
-## 相关操作
-
-- [移除 Plugin](/zh/smart-contracts/core/plugins/removing-plugins) - 从 Asset/Collection 删除 Plugin
-- [委托 Plugin](/zh/smart-contracts/core/plugins/delegating-and-revoking-plugins) - 更改 Plugin 权限
-- [更新 Plugin](/zh/smart-contracts/core/plugins/update-plugins) - 修改 Plugin 数据
-- [Plugin 概述](/zh/smart-contracts/core/plugins) - 可用 Plugin 的完整列表
-
-## 术语表
-
-| 术语 | 定义 |
+| `Owner` | Current Asset owner |
+| `UpdateAuthority` | Current update authority |
+| `Address` | Specific public key |
+| `None` | Immutable (no one can update) |
+## FAQ
+### Can I add multiple plugins in one transaction?
+Yes, when creating an Asset. For existing Assets, each `addPlugin` call is a separate transaction.
+### What happens if I set authority to None?
+The plugin becomes immutable. No one can update or remove it.
+### Can I add Owner Managed plugins as the update authority?
+No. Owner Managed plugins always require the owner's signature to add, regardless of who signs.
+### Why can't I add a Permanent plugin?
+Permanent plugins can only be added during Asset/Collection creation. They cannot be added to existing accounts.
+## Related Operations
+- [Removing Plugins](/smart-contracts/core/plugins/removing-plugins) - Delete plugins from Assets/Collections
+- [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins) - Change plugin authorities
+- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
+- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
+## Glossary
+| Term | Definition |
 |------|------------|
-| **Owner Managed** | 需要所有者签名才能添加的 Plugin |
-| **Authority Managed** | 更新权限可以添加的 Plugin |
-| **Permanent** | 只能在创建时添加的 Plugin |
-| **initAuthority** | 设置自定义 Plugin 权限的参数 |
-
----
-
-*由 Metaplex Foundation 维护 · 最后验证于 2026 年 1 月 · 适用于 @metaplex-foundation/mpl-core*
+| **Owner Managed** | Plugin requiring owner signature to add |
+| **Authority Managed** | Plugin that update authority can add |
+| **Permanent** | Plugin only addable at creation time |
+| **initAuthority** | Parameter to set custom plugin authority |

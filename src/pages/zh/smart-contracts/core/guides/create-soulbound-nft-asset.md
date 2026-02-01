@@ -1,42 +1,53 @@
 ---
-title: MPL Core 中的灵魂绑定资产
-metaTitle: MPL Core 中的灵魂绑定资产 | Core 指南
-description: 本指南探讨 MPL Core 中灵魂绑定资产的不同选项
+title: Soulbound Assets in MPL Core
+metaTitle: Soulbound Assets in MPL Core | Core Guides
+description: This Guide explores the different options for soulbound Assets in MPL Core
+updated: '01-31-2026'
+keywords:
+  - soulbound NFT
+  - non-transferable NFT
+  - bound token
+  - SBT
+about:
+  - Soulbound tokens
+  - Non-transferable NFTs
+  - Identity tokens
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Choose between Permanent Freeze Delegate or Oracle Plugin approach
+  - Create a Collection with the soulbound plugin at collection level
+  - Add the plugin with frozen state set to true and authority to None
+  - Mint Assets into the Collection - they inherit soulbound behavior
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
 ---
-
-
-灵魂绑定 NFT 是永久绑定到特定钱包地址且无法转移给另一个所有者的非同质化代币。它们对于表示应该与特定身份绑定的成就、凭证或会员资格非常有用。{% .lead %}
-
-## 概述
-
-在本指南中，我们将探讨如何使用 MPL Core 和 Umi 框架创建灵魂绑定资产。无论您是希望在 TypeScript 中实现灵魂绑定 NFT 的开发者，还是只想了解它们的工作原理，我们都将涵盖从基本概念到实际实现的所有内容。我们将检查使资产灵魂绑定的不同方法，并逐步在集合中创建您的第一个灵魂绑定 NFT。
-
-在 MPL Core 中，有两种主要方法来创建灵魂绑定 NFT：
-
-### 1. Permanent Freeze Delegate 插件
-- 使资产完全不可转移且不可销毁
-- 可以在以下级别应用：
-  - 单个资产级别
-  - 集合级别（更节省租金）
-- 集合级别实现允许在单个交易中解冻所有资产
-
-### 2. Oracle 插件
-- 使资产不可转移但仍可销毁
-- 也可以在以下级别应用：
-  - 单个资产级别
-  - 集合级别（更节省租金）
-- 集合级别实现允许在单个交易中解冻所有资产
-
-## 使用 Permanent Freeze Delegate 插件创建灵魂绑定 NFT
-
-Permanent Freeze Delegate 插件提供通过冻结使资产不可转移的功能。创建灵魂绑定资产时，您需要：
-
-1. 在资产创建期间包含 Permanent Freeze 插件
-2. 将初始状态设置为冻结
-3. 将权限设置为 None，使冻结状态永久且不可变
-
-这有效地创建了一个无法转移或解冻的永久灵魂绑定资产。在以下代码片段中显示了在哪里添加这三个选项：
-
+Soulbound NFTs are non-fungible tokens that are permanently bound to a specific wallet address and cannot be transferred to another owner. They are useful for representing achievements, credentials, or memberships that should remain tied to a specific identity.  {% .lead %}
+## Overview
+In this guide, we'll explore how to create soulbound assets using MPL Core and the Umi Framework. Whether you're a developer looking to implement soulbound NFTs in TypeScript or just want to understand how they work, we'll cover everything from basic concepts to practical implementation. We'll examine different approaches for making assets soulbound and walk through creating your first soulbound NFT within a collection.
+In MPL Core, there are two main approaches to create soulbound NFTs:
+### 1. Permanent Freeze Delegate Plugin
+- Makes assets completely non-transferrable and non-burnable
+- Can be applied at either:
+  - Individual asset level
+  - Collection level (more rent efficient)
+- Collection-level implementation allows thawing all assets in a single transaction
+### 2. Oracle Plugin
+- Makes assets non-transferrable but still burnable
+- Can also be applied at:
+  - Individual asset level  
+  - Collection level (more rent efficient)
+- Collection-level implementation allows thawing all assets in a single transaction
+## Creating Soulbound NFTs with the Permanent Freeze Delegate Plugin
+The Permanent Freeze Delegate Plugin provides functionality to make assets non-transferrable by freezing them. When creating a soulbound asset, you would:
+1. Include the Permanent Freeze plugin during asset creation
+2. Set the initial state to frozen
+3. Set the authority to None, making the frozen state permanent and immutable
+This effectively creates a permanently soulbound asset that cannot be transferred or thawed. In the following code snippet it is shown where to add those three options:
 ```js
   await create(umi, {
     asset: assetSigner,
@@ -45,20 +56,17 @@ Permanent Freeze Delegate 插件提供通过冻结使资产不可转移的功能
     uri: "https://example.com/my-asset.json",
     plugins: [
       {
-        type: 'PermanentFreezeDelegate', // 包含 Permanent Freeze 插件
-        frozen: true, // 将初始状态设置为冻结
-        authority: { type: "None" }, // 将权限设置为 None
+        type: 'PermanentFreezeDelegate', // Include the Permanent Freeze plugin
+        frozen: true, // Set the initial state to frozen
+        authority: { type: "None" }, // Set the authority to None
       },
     ],
   })
 ```
-
-
-### 资产级别实现
-Permanent Freeze Delegate 插件可以附加到单个资产上使其灵魂绑定。这提供了更精细的控制，但需要更多租金，并且如果以后不应该是灵魂绑定，则需要为每个资产进行单独的解冻交易。
-
+### Asset-Level Implementation
+The Permanent Freeze Delegate Plugin can be attached to individual assets to make them soulbound. This provides more granular control but requires more rent and separate thaw transactions per asset in case it ever should not be soulbound anymore.
 {% totem %}
-{% totem-accordion title="代码示例" %}
+{% totem-accordion title="Code Example" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -76,24 +84,19 @@ import {
   fetchAssetV1,
 } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
-
-// 定义用于测试转移限制的虚拟目标钱包
+// Define a dummy destination wallet for testing transfer restrictions
 const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d");
-
 (async () => {
-  // 步骤 1：使用 devnet RPC 端点初始化 Umi
+  // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
     "https://api.devnet.solana.com"
   ).use(mplCore());
-
-  // 步骤 2：创建并为测试钱包注资
+  // Step 2: Create and fund a test wallet
   const walletSigner = generateSigner(umi);
   umi.use(keypairIdentity(walletSigner));
-
   console.log("Funding test wallet with devnet SOL...");
   await umi.rpc.airdrop(walletSigner.publicKey, sol(0.1));
-
-  // 步骤 3：创建一个新集合来持有我们的冻结资产
+  // Step 3: Create a new collection to hold our frozen asset
   console.log("Creating parent collection...");
   const collectionSigner = generateSigner(umi);
   await createCollection(umi, {
@@ -101,19 +104,17 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     name: "My Collection",
     uri: "https://example.com/my-collection.json",
   }).sendAndConfirm(umi);
-
-  // 等待交易确认
+  
+  // Wait for transaction confirmation
   await new Promise(resolve => setTimeout(resolve, 15000));
-
-  // 获取并验证集合已创建
+  // Fetch and verify the collection was created
   const collection = await fetchCollection(umi, collectionSigner.publicKey);
   console.log("Collection created successfully:", collectionSigner.publicKey);
-
-  // 步骤 4：在集合中创建冻结资产
+  // Step 4: Create a frozen asset within the collection
   console.log("Creating frozen asset...");
   const assetSigner = generateSigner(umi);
-
-  // 使用 PermanentFreezeDelegate 插件创建具有永久冻结的资产
+  
+  // Create the asset with permanent freeze using the PermanentFreezeDelegate plugin
   await create(umi, {
     asset: assetSigner,
     collection: collection,
@@ -121,49 +122,43 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     uri: "https://example.com/my-asset.json",
     plugins: [
       {
-        // PermanentFreezeDelegate 插件永久冻结资产
+        // The PermanentFreezeDelegate plugin permanently freezes the asset
         type: 'PermanentFreezeDelegate',
-        frozen: true, // 将资产设置为冻结
-        authority: { type: "None" }, // 没有权限可以解冻它
+        frozen: true, // Set the asset as frozen
+        authority: { type: "None" }, // No authority can unfreeze it
       },
     ],
   }).sendAndConfirm(umi);
-
-  // 等待交易确认
+  
+  // Wait for transaction confirmation
   await new Promise(resolve => setTimeout(resolve, 15000));
-
-  // 获取并验证资产已创建
+  // Fetch and verify the asset was created
   const asset = await fetchAssetV1(umi, assetSigner.publicKey);
   console.log("Frozen asset created successfully:", assetSigner.publicKey);
-
-  // 步骤 5：演示资产确实已冻结
+  // Step 5: Demonstrate that the asset is truly frozen
   console.log(
     "Testing frozen property by attempting a transfer (this should fail)..."
   );
-
-  // 尝试转移资产（由于冻结，这将失败）
+  
+  // Attempt to transfer the asset (this will fail due to freeze)
   const transferResponse = await transfer(umi, {
     asset: asset,
     newOwner: DESTINATION_WALLET,
     collection,
   }).sendAndConfirm(umi, { send: { skipPreflight: true } });
-
-  // 记录失败的转移尝试签名
+  // Log the failed transfer attempt signature
   console.log(
     "Transfer attempt signature:",
     base58.deserialize(transferResponse.signature)[0]
   );
 })();
-
 ```
 {% /totem-accordion  %}
 {% /totem %}
-
-### 集合级别实现
-对于所有资产都应该是灵魂绑定的集合，在集合级别应用插件更高效。这需要更少的租金，并能在一个交易中解冻整个集合。
-
+### Collection-Level Implementation
+For collections where all assets should be soulbound, applying the plugin at the collection level is more efficient. This requires less rent and enables thawing the entire collection in one transaction.
 {% totem %}
-{% totem-accordion title="代码示例" %}
+{% totem-accordion title="Code Example" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -181,27 +176,22 @@ import {
   fetchAssetV1,
 } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
-
-// 定义用于测试转移限制的虚拟目标钱包
+// Define a dummy destination wallet for testing transfer restrictions
 const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d");
-
 (async () => {
-  // 步骤 1：使用 devnet RPC 端点初始化 Umi
+  // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
     "https://api.devnet.solana.com"
   ).use(mplCore());
-
-  // 步骤 2：创建并为测试钱包注资
+  // Step 2: Create and fund a test wallet
   const walletSigner = generateSigner(umi);
   umi.use(keypairIdentity(walletSigner));
-
   console.log("Funding test wallet with devnet SOL...");
   await umi.rpc.airdrop(walletSigner.publicKey, sol(0.1));
-
-  // 等待空投确认
+  
+  // Wait for airdrop confirmation
   await new Promise(resolve => setTimeout(resolve, 15000));
-
-  // 步骤 3：创建一个新的冻结集合
+  // Step 3: Create a new frozen collection
   console.log("Creating frozen collection...");
   const collectionSigner = generateSigner(umi);
   await createCollection(umi, {
@@ -210,22 +200,19 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     uri: "https://example.com/my-collection.json",
     plugins: [
       {
-        // PermanentFreezeDelegate 插件永久冻结集合
+        // The PermanentFreezeDelegate plugin permanently freezes the collection
         type: 'PermanentFreezeDelegate',
-        frozen: true, // 将集合设置为冻结
-        authority: { type: "None" }, // 没有权限可以解冻它
+        frozen: true, // Set the collection as frozen
+        authority: { type: "None" }, // No authority can unfreeze it
       },
     ],
   }).sendAndConfirm(umi);
-
-  // 等待集合创建确认
+  // Wait for collection creation confirmation
   await new Promise(resolve => setTimeout(resolve, 15000));
-
-  // 获取并验证集合已创建
+  // Fetch and verify the collection was created
   const collection = await fetchCollection(umi, collectionSigner.publicKey);
   console.log("Frozen collection created successfully:", collectionSigner.publicKey);
-
-  // 步骤 4：在冻结集合中创建资产
+  // Step 4: Create an asset within the frozen collection
   console.log("Creating asset in frozen collection...");
   const assetSigner = generateSigner(umi);
   await create(umi, {
@@ -234,50 +221,39 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     name: "Frozen Asset",
     uri: "https://example.com/my-asset.json",
   }).sendAndConfirm(umi);
-
-  // 等待资产创建确认
+  // Wait for asset creation confirmation
   await new Promise(resolve => setTimeout(resolve, 15000));
-
-  // 获取并验证资产已创建
+  // Fetch and verify the asset was created
   const asset = await fetchAssetV1(umi, assetSigner.publicKey);
   console.log("Asset created successfully in frozen collection:", assetSigner.publicKey);
-
-  // 步骤 5：演示资产被集合冻结
+  // Step 5: Demonstrate that the asset is frozen by the collection
   console.log(
     "Testing frozen property by attempting a transfer (this should fail)..."
   );
-
-  // 尝试转移资产（由于集合冻结，这将失败）
+  
+  // Attempt to transfer the asset (this will fail due to collection freeze)
   const transferResponse = await transfer(umi, {
     asset: asset,
     newOwner: DESTINATION_WALLET,
     collection,
   }).sendAndConfirm(umi, { send: { skipPreflight: true } });
-
-  // 记录失败的转移尝试签名
+  // Log the failed transfer attempt signature
   console.log(
     "Transfer attempt signature:",
     base58.deserialize(transferResponse.signature)[0]
   );
 })();
-
 ```
 {% /totem-accordion  %}
 {% /totem %}
-
-## 使用 Oracle 插件创建灵魂绑定 NFT
-
-Oracle 插件提供了一种批准或拒绝资产不同生命周期事件的方法。要创建灵魂绑定 NFT，我们可以使用 Metaplex 部署的特殊 Oracle，它始终拒绝转移事件，同时仍允许其他操作如销毁。这与 Permanent Freeze Delegate 插件方法不同，因为即使资产无法转移，它们仍然可以销毁。
-
-使用 Oracle 插件创建灵魂绑定资产时，需要将插件附加到资产上。这可以在创建时或之后完成。在此示例中，我们使用 Metaplex 部署的[默认 Oracle](/zh/smart-contracts/core/external-plugins/oracle#metaplex-部署的默认-oracles)，它将始终拒绝。
-
-这有效地创建了一个无法转移但可以销毁的永久灵魂绑定资产。以下代码片段展示了如何操作：
-
+## Creating Soulbound NFTs with the Oracle Plugin
+The Oracle Plugin provides a way to approve or reject different lifecycle events for an asset. To create soulbound NFTs, we can use a special Oracle deployed by Metaplex that always rejects transfer events while still allowing other operations like burning. This differs from the Permanent Freeze Delegate Plugin approach since assets remain burnable even though they cannot be transferred.
+When creating a soulbound asset using the Oracle Plugin, one would attach the plugin to the asset. This can be done on creation or afterwards. In this example we are using a [default Oracle](/smart-contracts/core/external-plugins/oracle#default-oracles-deployed-by-metaplex) that will always reject and has been deployed by Metaplex.
+This effectively creates a permanently soulbound asset that cannot be transferred but burned. In the following code snippet it is shown how:
 ```js
 const ORACLE_ACCOUNT = publicKey(
   "GxaWxaQVeaNeFHehFQEDeKR65MnT6Nup81AGwh2EEnuq"
 );
-
 await create(umi, {
   asset: assetSigner,
   collection: collection,
@@ -285,14 +261,14 @@ await create(umi, {
   uri: "https://example.com/my-asset.json",
   plugins: [
     {
-      // Oracle 插件允许我们控制转移权限
+      // The Oracle plugin allows us to control transfer permissions
       type: "Oracle",
       resultsOffset: {
         type: "Anchor",
       },
       baseAddress: ORACLE_ACCOUNT,
       lifecycleChecks: {
-        // 配置 Oracle 拒绝所有转移尝试
+        // Configure the Oracle to reject all transfer attempts
         transfer: [CheckResult.CAN_REJECT],
       },
       baseAddressConfig: undefined,
@@ -300,12 +276,10 @@ await create(umi, {
   ],
 })
 ```
-
-### 资产级别实现
-Oracle 插件可以使单个资产不可转移，同时保留销毁它们的能力。这为可能需要销毁资产的情况提供了灵活性。
-
+### Asset-Level Implementation
+The Oracle Plugin can make individual assets non-transferrable while preserving the ability to burn them. This provides flexibility for cases where assets may need to be destroyed.
 {% totem %}
-{% totem-accordion title="代码示例" %}
+{% totem-accordion title="Code Example" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -324,30 +298,24 @@ import {
   fetchAssetV1,
 } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
-
-// 定义将控制转移权限的 Oracle 账户
-// 这是 Metaplex 部署的始终拒绝转移的 Oracle
+// Define the Oracle account that will control transfer permissions
+// This is an Oracle deployed by Metaplex that always rejects tranferring
 const ORACLE_ACCOUNT = publicKey(
   "GxaWxaQVeaNeFHehFQEDeKR65MnT6Nup81AGwh2EEnuq"
 );
-
-// 定义用于测试转移限制的虚拟目标钱包
+// Define a dummy destination wallet for testing transfer restrictions
 const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d");
-
 (async () => {
-  // 步骤 1：使用 devnet RPC 端点初始化 Umi
+  // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
     "https://api.devnet.solana.com"
   ).use(mplCore());
-
-  // 步骤 2：创建并为测试钱包注资
+  // Step 2: Create and fund a test wallet
   const walletSigner = generateSigner(umi);
   umi.use(keypairIdentity(walletSigner));
-
   console.log("Funding test wallet with devnet SOL...");
   await umi.rpc.airdrop(walletSigner.publicKey, sol(0.1));
-
-  // 步骤 3：创建一个新集合来持有我们的灵魂绑定资产
+  // Step 3: Create a new collection to hold our soulbound asset
   console.log("Creating parent collection...");
   const collectionSigner = generateSigner(umi);
   await createCollection(umi, {
@@ -355,19 +323,17 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     name: "My Collection",
     uri: "https://example.com/my-collection.json",
   }).sendAndConfirm(umi);
-
-  // 等待交易确认
+  
+  // Wait for transaction confirmation
   await new Promise(resolve => setTimeout(resolve, 15000));
-
-  // 获取并验证集合已创建
+  // Fetch and verify the collection was created
   const collection = await fetchCollection(umi, collectionSigner.publicKey);
   console.log("Collection created successfully:", collectionSigner.publicKey);
-
-  // 步骤 4：在集合中创建灵魂绑定资产
+  // Step 4: Create a soulbound asset within the collection
   console.log("Creating soulbound asset...");
   const assetSigner = generateSigner(umi);
-
-  // 使用 Oracle 插件创建具有转移限制的资产
+  
+  // Create the asset with transfer restrictions using an Oracle plugin
   await create(umi, {
     asset: assetSigner,
     collection: collection,
@@ -375,56 +341,50 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     uri: "https://example.com/my-asset.json",
     plugins: [
       {
-        // Oracle 插件允许我们控制转移权限
+        // The Oracle plugin allows us to control transfer permissions
         type: "Oracle",
         resultsOffset: {
           type: "Anchor",
         },
         baseAddress: ORACLE_ACCOUNT,
         lifecycleChecks: {
-          // 配置 Oracle 拒绝所有转移尝试
+          // Configure the Oracle to reject all transfer attempts
           transfer: [CheckResult.CAN_REJECT],
         },
         baseAddressConfig: undefined,
       },
     ],
   }).sendAndConfirm(umi);
-
-  // 等待交易确认
+  
+  // Wait for transaction confirmation
   await new Promise(resolve => setTimeout(resolve, 15000));
-
-  // 获取并验证资产已创建
+  // Fetch and verify the asset was created
   const asset = await fetchAssetV1(umi, assetSigner.publicKey);
   console.log("Soulbound asset created successfully:", assetSigner.publicKey);
-
-  // 步骤 5：演示资产确实是灵魂绑定的
+  // Step 5: Demonstrate that the asset is truly soulbound
   console.log(
     "Testing soulbound property by attempting a transfer (this should fail)..."
   );
-
-  // 尝试转移资产（由于 Oracle 限制，这将失败）
+  
+  // Attempt to transfer the asset (this will fail due to Oracle restrictions)
   const transferResponse = await transfer(umi, {
     asset: asset,
     newOwner: DESTINATION_WALLET,
     collection,
   }).sendAndConfirm(umi, { send: { skipPreflight: true } });
-
-  // 记录失败的转移尝试签名
+  // Log the failed transfer attempt signature
   console.log(
     "Transfer attempt signature:",
     base58.deserialize(transferResponse.signature)[0]
   );
 })();
-
 ```
 {% /totem-accordion  %}
 {% /totem %}
-
-### 集合级别实现
-在集合级别应用 Oracle 插件使集合中的所有资产不可转移但可销毁。这更节省租金，并允许一次性管理整个集合的权限。
-
+### Collection-Level Implementation
+Applying the Oracle Plugin at the collection level makes all assets in the collection non-transferrable but burnable. This is more rent efficient and allows managing permissions for the entire collection at once.
 {% totem %}
-{% totem-accordion title="代码示例" %}
+{% totem-accordion title="Code Example" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -443,33 +403,27 @@ import {
   fetchAssetV1,
 } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
-
-// 定义将控制转移权限的 Oracle 账户
-// 这是 Metaplex 部署的始终拒绝转移的 Oracle
+// Define the Oracle account that will control transfer permissions
+// This is an Oracle deployed by Metaplex that always rejects transferring
 const ORACLE_ACCOUNT = publicKey(
   "GxaWxaQVeaNeFHehFQEDeKR65MnT6Nup81AGwh2EEnuq"
 );
-
-// 定义用于测试转移限制的虚拟目标钱包
+// Define a dummy destination wallet for testing transfer restrictions
 const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d");
-
 (async () => {
-  // 步骤 1：使用 devnet RPC 端点初始化 Umi
+  // Step 1: Initialize Umi with devnet RPC endpoint
   const umi = createUmi(
     "https://api.devnet.solana.com"
   ).use(mplCore());
-
-  // 步骤 2：创建并为测试钱包注资
+  // Step 2: Create and fund a test wallet
   const walletSigner = generateSigner(umi);
   umi.use(keypairIdentity(walletSigner));
-
   console.log("Funding test wallet with devnet SOL...");
   await umi.rpc.airdrop(walletSigner.publicKey, sol(0.1));
-
-  // 等待空投确认
+  
+  // Wait for airdrop confirmation
   await new Promise(resolve => setTimeout(resolve, 15000));
-
-  // 步骤 3：创建具有转移限制的新集合
+  // Step 3: Create a new collection with transfer restrictions
   console.log("Creating soulbound collection...");
   const collectionSigner = generateSigner(umi);
   await createCollection(umi, {
@@ -478,29 +432,26 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     uri: "https://example.com/my-collection.json",
     plugins: [
       {
-        // Oracle 插件允许我们控制转移权限
+        // The Oracle plugin allows us to control transfer permissions
         type: "Oracle",
         resultsOffset: {
           type: "Anchor",
         },
         baseAddress: ORACLE_ACCOUNT,
         lifecycleChecks: {
-          // 配置 Oracle 拒绝所有转移尝试
+          // Configure the Oracle to reject all transfer attempts
           transfer: [CheckResult.CAN_REJECT],
         },
         baseAddressConfig: undefined,
       },
     ],
   }).sendAndConfirm(umi);
-
-  // 等待集合创建确认
+  // Wait for collection creation confirmation
   await new Promise(resolve => setTimeout(resolve, 15000));
-
-  // 获取并验证集合已创建
+  // Fetch and verify the collection was created
   const collection = await fetchCollection(umi, collectionSigner.publicKey);
   console.log("Soulbound collection created successfully:", collectionSigner.publicKey);
-
-  // 步骤 4：在集合中创建灵魂绑定资产
+  // Step 4: Create a soulbound asset within the collection
   console.log("Creating soulbound asset...");
   const assetSigner = generateSigner(umi);
   await create(umi, {
@@ -509,33 +460,28 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     name: "Soulbound Asset",
     uri: "https://example.com/my-asset.json",
   }).sendAndConfirm(umi);
-
-  // 等待资产创建确认
+  // Wait for asset creation confirmation
   await new Promise(resolve => setTimeout(resolve, 15000));
-
-  // 获取并验证资产已创建
+  // Fetch and verify the asset was created
   const asset = await fetchAssetV1(umi, assetSigner.publicKey);
   console.log("Soulbound asset created successfully:", assetSigner.publicKey);
-
-  // 步骤 5：演示资产确实是灵魂绑定的
+  // Step 5: Demonstrate that the asset is truly soulbound
   console.log(
     "Testing soulbound property by attempting a transfer (this should fail)..."
   );
-
-  // 尝试转移资产（由于 Oracle 限制，这将失败）
+  
+  // Attempt to transfer the asset (this will fail due to Oracle restrictions)
   const transferResponse = await transfer(umi, {
     asset: asset,
     newOwner: DESTINATION_WALLET,
     collection,
   }).sendAndConfirm(umi, { send: { skipPreflight: true } });
-
-  // 记录失败的转移尝试签名
+  // Log the failed transfer attempt signature
   console.log(
     "Transfer attempt signature:",
     base58.deserialize(transferResponse.signature)[0]
   );
 })();
-
 ```
 {% /totem-accordion  %}
 {% /totem %}

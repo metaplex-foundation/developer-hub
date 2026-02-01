@@ -1,83 +1,77 @@
 ---
-title: 在 Anchor 中使用 Metaplex Core
-metaTitle: 在 Anchor 中使用 Metaplex Core | Metaplex Core
-description: 将 Metaplex Core 集成到 Anchor 程序中。学习用于链上 NFT 操作的 CPI 调用、账户反序列化和插件访问。
+title: Using Metaplex Core in Anchor
+metaTitle: Using Metaplex Core in Anchor | Metaplex Core
+description: Integrate Metaplex Core into Anchor programs. Learn CPI calls, account deserialization, and plugin access for on-chain NFT operations.
+updated: '01-31-2026'
+keywords:
+  - Core Anchor
+  - mpl-core CPI
+  - Anchor NFT
+  - on-chain Core
+about:
+  - Anchor integration
+  - CPI patterns
+  - On-chain development
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+faqs:
+  - q: Do I need the anchor feature flag?
+    a: Yes, for direct deserialization in Accounts structs. Without it, use from_bytes() manually.
+  - q: How do I check if a plugin exists?
+    a: Use fetch_plugin() which returns Option - it won't throw an error if the plugin doesn't exist.
+  - q: Can I access external plugins (Oracle, AppData)?
+    a: Yes. Use fetch_external_plugin() instead of fetch_plugin() with the appropriate key.
+  - q: Where can I find all available instructions?
+    a: See the mpl-core docs.rs instructions module for the complete API reference.
 ---
-
-使用 Anchor 构建与 Core Assets 交互的**链上程序**。本指南涵盖安装、账户反序列化、插件访问和 CPI 模式。 {% .lead %}
-
-{% callout title="您将学到" %}
-
-- 在 Anchor 项目中安装和配置 mpl-core
-- 在程序中反序列化 Core Assets 和 Collections
-- 访问插件数据（Attributes、Freeze 等）
-- 进行 CPI 调用以创建、转移和管理 Assets
-
+Build **on-chain programs** that interact with Core Assets using Anchor. This guide covers installation, account deserialization, plugin access, and CPI patterns. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Install and configure mpl-core in Anchor projects
+- Deserialize Core Assets and Collections in your programs
+- Access plugin data (Attributes, Freeze, etc.)
+- Make CPI calls to create, transfer, and manage Assets
 {% /callout %}
-
-## 摘要
-
-`mpl-core` Rust crate 提供了从 Anchor 程序与 Core 交互所需的一切。启用 `anchor` feature flag 以获得原生 Anchor 账户反序列化。
-
-- 使用 `features = ["anchor"]` 添加 `mpl-core`
-- 在 Accounts 结构体中反序列化 Assets/Collections
-- 使用 `fetch_plugin()` 读取插件数据
-- CPI 构建器简化指令调用
-
-## 范围外
-
-客户端 JavaScript SDK（参见 [JavaScript SDK](/zh/smart-contracts/core/sdk/javascript)）、独立 Rust 客户端（参见 [Rust SDK](/zh/smart-contracts/core/sdk/rust)）、从客户端创建 Core Assets。
-
-## 快速开始
-
-**跳转至：** [安装](#安装) · [账户反序列化](#账户反序列化) · [插件访问](#反序列化插件) · [CPI 示例](#cpi-指令构建器)
-
-1. 在 Cargo.toml 中添加 `mpl-core = { version = "x.x.x", features = ["anchor"] }`
-2. 使用 `Account<'info, BaseAssetV1>` 反序列化 Assets
-3. 使用 `fetch_plugin::<BaseAssetV1, PluginType>()` 访问插件
-4. 使用 `CreateV2CpiBuilder`、`TransferV1CpiBuilder` 等进行 CPI 调用
-
-## 安装
-
-要在 Anchor 项目中开始使用 Core，首先确保您已通过运行以下命令将最新版本的 crate 添加到您的项目中：
-
+## Summary
+The `mpl-core` Rust crate provides everything needed to interact with Core from Anchor programs. Enable the `anchor` feature flag for native Anchor account deserialization.
+- Add `mpl-core` with `features = ["anchor"]`
+- Deserialize Assets/Collections in Accounts structs
+- Use `fetch_plugin()` to read plugin data
+- CPI builders simplify instruction calls
+## Out of Scope
+Client-side JavaScript SDK (see [JavaScript SDK](/smart-contracts/core/sdk/javascript)), standalone Rust clients (see [Rust SDK](/smart-contracts/core/sdk/rust)), and creating Core Assets from clients.
+## Quick Start
+**Jump to:** [Installation](#installation) · [Account Deserialization](#accounts-deserialization) · [Plugin Access](#deserializing-plugins) · [CPI Examples](#the-cpi-instruction-builders)
+1. Add `mpl-core = { version = "x.x.x", features = ["anchor"] }` to Cargo.toml
+2. Deserialize Assets with `Account<'info, BaseAssetV1>`
+3. Access plugins with `fetch_plugin::<BaseAssetV1, PluginType>()`
+4. Make CPI calls with `CreateV2CpiBuilder`, `TransferV1CpiBuilder`, etc.
+## Installation
+To start using Core in an Anchor project, first ensure that you have added the latest version of the crate to your project by running:
 ```rust
 cargo add mpl-core
 ```
-
-或者，您可以在 cargo.toml 文件中手动指定版本：
-
+Alternatively, you can manually specify the version in your cargo.toml file:
 ```rust
 [dependencies]
 mpl-core = "x.x.x"
 ```
-
 ### Feature Flag
-
-使用 Core crate，您可以通过修改 `cargo.toml` 中的依赖项条目来启用 mpl-core crate 中的 anchor feature flag 以访问 Anchor 特定功能：
-
+With the Core crate you can enable the anchor feature flag in the mpl-core crate to access Anchor-specific features by modifying the dependency entry in your `cargo.toml`:
 ```rust
 [dependencies]
 mpl-core = { version = "x.x.x", features = [ "anchor" ] }
 ```
-
-### Core Rust SDK 模块
-
-Core Rust SDK 被组织成几个模块：
-
-- `accounts`：表示程序的账户
-- `errors`：枚举程序的错误
-- `instructions`：简化指令、指令参数和 CPI 指令的创建
-- `types`：表示程序使用的类型
-
-有关如何调用和使用不同指令的更多详细信息，请参阅 [mpl-core docs.rs 网站](https://docs.rs/mpl-core/0.7.2/mpl_core/)，或者您可以使用 `Cmd + 左键点击`（Mac）或 `Ctrl + 左键点击`（Windows）展开指令。
-
-## 账户反序列化
-
-### 可反序列化的账户
-
-以下账户结构可在 `mpl-core` crate 中进行反序列化：
-
+### Core Rust SDK Modules
+The Core Rust SDK is organized into several modules:
+- `accounts`: represents the program's accounts.
+- `errors`: enumerates the program's errors.
+- `instructions`: facilitates the creation of instructions, instruction arguments, and CPI instructions.
+- `types`: represents types used by the program.
+For more detailed information on how different instructions are called and used, refer to the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/) or you can use `cmd + left click` (mac) or `ctrl + left click` (windows) on the instruction to expand it.
+## Accounts Deserialization
+### Deserializable Accounts
+The following account structs are available for deserialization within the `mpl-core` crate:
 ```rust
 - BaseAssetV1
 - BaseCollectionV1
@@ -85,20 +79,13 @@ Core Rust SDK 被组织成几个模块：
 - PluginHeaderV1
 - PluginRegistryV1
 ```
-
-在 Anchor 中反序列化 Core 账户有两种方式：
-
-- 使用 Anchor 的 Account 列表结构（大多数情况下推荐）
-- 直接在指令函数体中使用 `<Account>::from_bytes()`
-
-### Anchor Accounts List 方法
-
-通过激活 `anchor flag`，您将能够直接在 Anchor Accounts 列表结构中反序列化 `BaseAssetV1` 和 `BaseCollectionV1` 账户：
-
-{% dialect-switcher title="账户反序列化" %}
-
+There are two ways to deserialize Core accounts within Anchor. 
+- Using Anchors Account list struct (recommended in most cases),
+- Directly in the instruction functions body using `<Account>::from_bytes()`.
+### Anchor Accounts List Method
+By activating the `anchor flag` you'll be able to deserialize both the `BaseAssetV1` and `BaseCollectionV1` accounts directly in the Anchor Accounts list struct:
+{% dialect-switcher title="Accounts Deserialization" %}
 {% dialect title="Asset" id="asset" %}
-
 ```rust
 #[derive(Accounts)]
 pub struct ExampleAccountStruct<'info> {
@@ -106,11 +93,8 @@ pub struct ExampleAccountStruct<'info> {
     pub asset: Account<'info, BaseAssetV1>,
 }
 ```
-
 {% /dialect %}
-
 {% dialect title="Collection" id="collection" %}
-
 ```rust
 #[derive(Accounts)]
 pub struct ExampleAccountStruct<'info> {
@@ -118,83 +102,50 @@ pub struct ExampleAccountStruct<'info> {
     pub collection: Account<'info, BaseCollectionV1>,
 }
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-### Account from_bytes() 方法
-
-使用 `try_borrow_data()` 函数借用 asset/collection 账户内的数据，并从这些字节创建 asset/collection 结构：
-
-{% dialect-switcher title="账户反序列化" %}
-
+### Account from_bytes() Method
+Borrow the data inside the asset/collection account using the `try_borrow_data()` function and create the asset/collection struct from those bytes:
+{% dialect-switcher title="Accounts Deserialization" %}
 {% dialect title="Asset" id="asset" %}
-
 ```rust
 let data = ctx.accounts.asset.try_borrow_data()?;
 let base_asset: BaseAssetV1 = BaseAssetV1::from_bytes(&data.as_ref())?;
 ```
-
 {% /dialect %}
-
 {% dialect title="Collection" id="collection" %}
-
 ```rust
 let data = ctx.accounts.collectino.try_borrow_data()?;
 let base_collection: BaseCollectionV1 = BaseCollectionV1::from_bytes(&data.as_ref())?;
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-### 反序列化插件
-
-要访问 Asset 或 Collection 账户中的单个插件，请使用 `fetch_plugin()` 函数。此函数将返回插件数据或 `null` 响应而不会抛出硬错误，允许您检查插件是否存在而无需访问其数据。
-
-`fetch_plugin()` 函数用于 Assets 和 Collections 账户，并可以通过指定适当的类型来处理每种插件类型。如果您想访问插件内的数据，请使用此函数返回的中间值。
-
-{% dialect-switcher title="插件反序列化" %}
-
+### Deserializing Plugins
+To access individual plugins within an Asset or Collection account, use the `fetch_plugin()` function. This function will either return the plugin data or a `null` response without throwing an hard error, allowing you to check if a plugin exists without having to access its data.
+The `fetch_plugin()` function is used for both Assets and Collections accounts and can handle every plugin type by specifying the appropriate typing. If you want to access the data inside a plugin, use the middle value returned by this function.
+{% dialect-switcher title="Plugins Deserialization" %}
 {% dialect title="Asset" id="asset" %}
-
 ```rust
 let (_, attribute_list, _) = fetch_plugin::<BaseAssetV1, Attributes>(&ctx.accounts.asset.to_account_info(), mpl_core::types::PluginType::Attributes)?;
 ```
-
 {% /dialect %}
-
 {% dialect title="Collection" id="collection" %}
-
 ```rust
 let (_, attribute_list, _) = fetch_plugin::<BaseCollectionV1, Attributes>(&ctx.accounts.asset.to_account_info(), mpl_core::types::PluginType::Attributes)?;
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-**注意**：`fetch_plugin()` 函数仅用于非外部插件。要读取外部插件，请使用 `fetch_external_plugin()` 函数，其操作方式与 `fetch_plugin()` 相同。
-
-## CPI 指令构建器
-
-Core crate 中的每个指令都有一个 **CpiBuilder** 版本。CpiBuilder 版本使用 `指令名称` + `CpiBuilder` 创建，并显著简化代码，抽象掉大量样板代码！
-
-如果您想了解更多关于 Core 中所有可用指令的信息，可以在 [mpl-core docs.rs 网站](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)找到它们。
-
-### CPI 示例
-
-让我们以 `CreateCollectionV2CpiBuilder` 指令为例。
-
-通过在 `CpiBuilder` 上调用 `new` 并传入 core 程序作为 `AccountInfo` 来初始化构建器：
-
+**Note**: The `fetch_plugin()` function is only used for non-external plugins. To read external plugins, use the `fetch_external_plugin()` function, which operates in the same way as `fetch_plugin()`.
+## The CPI Instruction Builders
+Each instruction from the Core crate comes with a **CpiBuilder** version. The CpiBuilder version is created using `name of the instruction` + `CpiBuilder` and simplifies the code significantly abstracting a lot of boilerplate code away! 
+If you want to learn more about all the possible instruction available in Core, you can find them on the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)
+### CPI Example
+Let's take the `CreateCollectionV2CpiBuilder` instruction as an example
+Initialize the builder by calling `new` on the `CpiBuilder` and passing in the core program as `AccountInfo`:
 ```rust
 CreateCollectionV2CpiBuilder::new(ctx.accounts.mpl_core_program.to_account_info);
 ```
-
-然后使用 Cmd + 左键点击（Windows 用户使用 Ctrl + 左键点击）查看此 CPI 调用所需的所有 CPI 参数：
-
+Use then Cmd + left click (Ctrl + left click for Windows users) to view all the CPI arguments required for this CPI call:
 ```rust
 CreateCollectionV2CpiBuilder::new(&ctx.accounts.core_program)
     .collection(&ctx.accounts.collection)
@@ -204,87 +155,57 @@ CreateCollectionV2CpiBuilder::new(&ctx.accounts.core_program)
     .uri("https://test.com".to_string())
     .invoke()?;
 ```
-
-## 常见错误
-
+## Common Errors
 ### `AccountNotInitialized`
-
-Asset 或 Collection 账户不存在或尚未创建。
-
+The Asset or Collection account doesn't exist or hasn't been created yet.
 ### `PluginNotFound`
-
-您尝试获取的插件在 Asset 上不存在。使用 `fetch_plugin()` 检查，它会安全地返回 `None`。
-
+The plugin you're trying to fetch doesn't exist on the Asset. Check with `fetch_plugin()` which returns `None` safely.
 ### `InvalidAuthority`
-
-签名者没有此操作的权限。验证正确的权限正在签名。
-
-## 注意事项
-
-- 始终启用 `features = ["anchor"]` 以获得原生反序列化
-- 对内置插件使用 `fetch_plugin()`，对外部插件使用 `fetch_external_plugin()`
-- CPI 构建器抽象了账户排序的复杂性
-- 查看 [docs.rs/mpl-core](https://docs.rs/mpl-core/) 获取完整的 API 参考
-
-## 快速参考
-
-### 常见 CPI 构建器
-
-| 操作 | CPI 构建器 |
+The signer doesn't have permission for this operation. Verify the correct authority is signing.
+## Notes
+- Always enable `features = ["anchor"]` for native deserialization
+- Use `fetch_plugin()` for built-in plugins, `fetch_external_plugin()` for external
+- CPI builders abstract away account ordering complexity
+- Check [docs.rs/mpl-core](https://docs.rs/mpl-core/) for complete API reference
+## Quick Reference
+### Common CPI Builders
+| Operation | CPI Builder |
 |-----------|-------------|
-| 创建 Asset | `CreateV2CpiBuilder` |
-| 创建 Collection | `CreateCollectionV2CpiBuilder` |
-| 转移 Asset | `TransferV1CpiBuilder` |
-| 销毁 Asset | `BurnV1CpiBuilder` |
-| 更新 Asset | `UpdateV1CpiBuilder` |
-| 添加插件 | `AddPluginV1CpiBuilder` |
-| 更新插件 | `UpdatePluginV1CpiBuilder` |
-
-### 账户类型
-
-| 账户 | 结构体 |
+| Create Asset | `CreateV2CpiBuilder` |
+| Create Collection | `CreateCollectionV2CpiBuilder` |
+| Transfer Asset | `TransferV1CpiBuilder` |
+| Burn Asset | `BurnV1CpiBuilder` |
+| Update Asset | `UpdateV1CpiBuilder` |
+| Add Plugin | `AddPluginV1CpiBuilder` |
+| Update Plugin | `UpdatePluginV1CpiBuilder` |
+### Account Types
+| Account | Struct |
 |---------|--------|
 | Asset | `BaseAssetV1` |
 | Collection | `BaseCollectionV1` |
 | Hashed Asset | `HashedAssetV1` |
 | Plugin Header | `PluginHeaderV1` |
 | Plugin Registry | `PluginRegistryV1` |
-
-## 常见问题
-
-### 需要 anchor feature flag 吗？
-
-是的，在 Accounts 结构体中直接反序列化需要它。没有它，需要手动使用 `from_bytes()`。
-
-### 如何检查插件是否存在？
-
-使用 `fetch_plugin()`，它返回 `Option` - 如果插件不存在不会抛出错误。
-
-### 可以访问外部插件（Oracle、AppData）吗？
-
-可以。使用 `fetch_external_plugin()` 代替 `fetch_plugin()`，并使用适当的键。
-
-### 在哪里可以找到所有可用的指令？
-
-参见 [mpl-core docs.rs instructions 模块](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)。
-
-## 术语表
-
-| 术语 | 定义 |
+## FAQ
+### Do I need the anchor feature flag?
+Yes, for direct deserialization in Accounts structs. Without it, use `from_bytes()` manually.
+### How do I check if a plugin exists?
+Use `fetch_plugin()` which returns `Option` - it won't throw an error if the plugin doesn't exist.
+### Can I access external plugins (Oracle, AppData)?
+Yes. Use `fetch_external_plugin()` instead of `fetch_plugin()` with the appropriate key.
+### Where can I find all available instructions?
+See the [mpl-core docs.rs instructions module](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html).
+## Glossary
+| Term | Definition |
 |------|------------|
-| **CPI** | Cross-Program Invocation - 从一个程序调用另一个程序 |
-| **CpiBuilder** | 用于构造 CPI 调用的帮助结构体 |
-| **BaseAssetV1** | 用于反序列化的 Core Asset 账户结构体 |
-| **fetch_plugin()** | 从账户读取插件数据的函数 |
-| **anchor feature** | 启用 Anchor 原生反序列化的 Cargo feature |
+| **CPI** | Cross-Program Invocation - calling one program from another |
+| **CpiBuilder** | Helper struct for constructing CPI calls |
+| **BaseAssetV1** | Core Asset account struct for deserialization |
+| **fetch_plugin()** | Function to read plugin data from accounts |
+| **anchor feature** | Cargo feature enabling Anchor-native deserialization |
+## Related Pages
+- [Anchor Staking Example](/smart-contracts/core/guides/anchor/anchor-staking-example) - Complete staking program
+- [Create Asset with Anchor](/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - Step-by-step guide
+- [Rust SDK](/smart-contracts/core/sdk/rust) - Standalone Rust client usage
+- [mpl-core docs.rs](https://docs.rs/mpl-core/) - Complete API reference
 
-## 相关页面
-
-- [Anchor 质押示例](/zh/smart-contracts/core/guides/anchor/anchor-staking-example) - 完整的质押程序
-- [使用 Anchor 创建 Core Asset](/zh/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - 分步指南
-- [Rust SDK](/zh/smart-contracts/core/sdk/rust) - 独立 Rust 客户端使用
-- [mpl-core docs.rs](https://docs.rs/mpl-core/) - 完整 API 参考
-
----
-
-*由 Metaplex Foundation 维护 · 2026年1月最后验证 · 适用于 @metaplex-foundation/mpl-core*

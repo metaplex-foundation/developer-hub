@@ -1,66 +1,70 @@
 ---
-title: Pluginの委任と取り消し
-metaTitle: Plugin権限の委任と取り消し | Metaplex Core
-description: Core AssetでPlugin権限を委任および取り消しする方法を学びます。Pluginを制御する人を変更し、Pluginデータを永続的に不変にします。
+title: Delegating and Revoking Plugins
+metaTitle: Delegating and Revoking Plugin Authority | Metaplex Core
+description: Learn how to delegate and revoke plugin authorities on Core Assets. Change who controls plugins and make plugin data immutable.
+updated: '01-31-2026'
+keywords:
+  - delegate plugin
+  - revoke plugin
+  - plugin authority
+  - immutable plugin
+about:
+  - Authority delegation
+  - Plugin revocation
+  - Immutability
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What's the difference between revoking and removing a plugin?
+    a: Revoking only changes who controls the plugin - the plugin and its data remain. Removing deletes the plugin entirely.
+  - q: Can I delegate to multiple addresses?
+    a: No. Each plugin has only one authority at a time. Delegating to a new address replaces the previous authority.
+  - q: What happens to delegated plugins when I transfer an Asset?
+    a: Owner Managed plugins automatically revoke back to Owner authority. Authority Managed plugins remain unchanged.
+  - q: Can I undo setting authority to None?
+    a: No. Setting authority to None makes the plugin permanently immutable. This cannot be reversed.
+  - q: Can a delegate revoke themselves?
+    a: Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
 ---
-
-このガイドでは、Core Assetで**Plugin権限を委任および取り消し**する方法を説明します。Pluginの制御を他のアドレスに移行したり、Pluginデータを永続的に不変にしたりします。 {% .lead %}
-
-{% callout title="学習内容" %}
-
-- 別のアドレスにPlugin権限を委任
-- 委任された権限を取り消し
-- 異なるPluginタイプの取り消し動作を理解
-- Pluginデータを不変にする
-
+This guide shows how to **delegate and revoke plugin authorities** on Core Assets. Transfer control of plugins to other addresses or make plugin data permanently immutable. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Delegate plugin authority to another address
+- Revoke delegated authority
+- Understand revocation behavior for different plugin types
+- Make plugin data immutable
 {% /callout %}
-
-## 概要
-
-`approvePluginAuthority()`を使用してPlugin権限を委任し、`revokePluginAuthority()`で取り消します。異なるPluginタイプには異なる取り消し動作があります。
-
-- **所有者管理**：`Owner`権限に戻る
-- **権限管理**：`UpdateAuthority`に戻る
-- 権限を`None`に設定するとPluginが不変になる
-- 所有者管理PluginはAsset転送時に自動取り消し
-
-## 対象外
-
-Pluginの削除（[Pluginの削除](/ja/smart-contracts/core/plugins/removing-plugins)を参照）、Pluginの追加（[Pluginの追加](/ja/smart-contracts/core/plugins/adding-plugins)を参照）、永続Plugin権限の変更は対象外です。
-
-## クイックスタート
-
-**ジャンプ：** [権限の委任](#権限の委任) · [権限の取り消し](#権限の取り消し) · [不変にする](#pluginデータを不変にする)
-
-1. 新しい権限アドレスで`approvePluginAuthority()`を呼び出す
-2. 取り消す場合：`revokePluginAuthority()`を呼び出す
-3. 不変にする場合：権限を`None`に設定
-
-## 権限の委任
-
-Pluginは委任権限命令の更新で他のアドレスに委任できます。委任されたPluginは、メインの権限者以外のアドレスにも、そのPlugin機能の制御を許可します。
-
-{% dialect-switcher title="Plugin権限の委任" %}
+## Summary
+Delegate plugin authority using `approvePluginAuthority()` and revoke with `revokePluginAuthority()`. Different plugin types have different revocation behaviors.
+- **Owner Managed**: Revokes back to `Owner` authority
+- **Authority Managed**: Revokes back to `UpdateAuthority`
+- Set authority to `None` to make plugin immutable
+- Owner Managed plugins auto-revoke on Asset transfer
+## Out of Scope
+Plugin removal (see [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)), adding plugins (see [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)), and permanent plugin authority changes.
+## Quick Start
+**Jump to:** [Delegate Authority](#delegating-an-authority) · [Revoke Authority](#revoking-an-authority) · [Make Immutable](#making-plugin-data-immutable)
+1. Call `approvePluginAuthority()` with the new authority address
+2. To revoke: call `revokePluginAuthority()`
+3. To make immutable: set authority to `None`
+## Delegating an Authority
+Plugins can be delegated to another address with a Delegate Authority instruction update. Delegated plugins allow addresses other than the main authority to have control over that plugins functionality.
+{% dialect-switcher title="Delegate a Plugin Authority" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
-
 const assetAddress = publicKey('11111111111111111111111111111111')
 const delegate = publicKey('33333333333333333333333333333')
-
 await approvePluginAuthority(umi, {
   asset: assetAddress,
   plugin: { type: 'Attributes' },
   newAuthority: { type: 'Address', address: delegate },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::ApprovePluginAuthorityV1Builder,
@@ -69,15 +73,11 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn delegate_plugin_authority() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let delegate_authority = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-
     let delegate_plugin_authority_ix = ApprovePluginAuthorityV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
@@ -86,150 +86,104 @@ pub async fn delegate_plugin_authority() {
             address: delegate_authority,
         })
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let delegate_plugin_authority_tx = Transaction::new_signed_with_payer(
         &[delegate_plugin_authority_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&delegate_plugin_authority_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## 権限の取り消し
-
-Pluginの権限を取り消した際の動作は、取り消されるPluginの種類によって異なります。
-
-- **所有者管理Plugin：** `所有者管理Plugin`でアドレスを取り消した場合、Pluginは`Owner`権限タイプにデフォルトで戻ります。
-
-- **権限管理Plugin：** `権限管理Plugin`でアドレスを取り消した場合、Pluginは`UpdateAuthority`権限タイプにデフォルトで戻ります。
-
-### 誰がPluginを取り消せるか？
-
-#### 所有者管理Plugin
-
-- 所有者管理Pluginは所有者が取り消すことができ、委任者を取り消してpluginAuthority タイプを`Owner`に設定します。
-- Pluginの委任された権限は自分自身を取り消すことができ、その後Plugin権限タイプが`Owner`に設定されます。
-- 転送時、所有者管理Pluginの委任された権限は自動的に`Owner Authority`タイプに戻されます。
-
-#### 権限管理Plugin
-
-- Assetの更新権限は委任者を取り消すことができ、pluginAuthorityタイプを`UpdateAuthority`に設定します。
-- Pluginの委任された権限は自分自身を取り消すことができ、その後Plugin権限タイプが`UpdateAuthority`に設定されます。
-
-Pluginとそのタイプのリストは[Plugin概要](/ja/smart-contracts/core/plugins)ページで確認できます。
-
-{% dialect-switcher title="Plugin権限の取り消し" %}
+## Revoking an Authority
+Revoking an Authority on a plugin results in different behaviours depending on the plugin type that's being revoked.
+- **Owner Managed Plugins:** If an address is revoked from an `Owner Managed Plugin` then the plugin will default back to the `Owner` authority type.
+- **Authority Managed Plugins:** If an address is revoked from an `Authority Managed Plugin` then the plugin will default back to the `UpdateAuthority` authority type.
+### Who can Revoke a Plugin?
+#### Owner Managed Plugins
+- An Owner Managed Plugin can be revoked by the owner which revokes the delegate and sets the pluginAuthority type to `Owner`.
+- The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `Owner`.
+- On Transfer, delegated Authorities of owner managed plugins are automatically revoked back to the `Owner Authority` type.
+#### Authority Managed Plugins
+- The Update Authority of an Asset can revoke a delegate which thens sets the pluginAuthority type to `UpdateAuthority`.
+- The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `UpdateAuthority`.
+A list of plugins and their types can be viewed on the [Plugins Overview](/smart-contracts/core/plugins) page.
+{% dialect-switcher title="Revoking a Plugin Authority" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
-
 await revokePluginAuthority(umi, {
   asset: asset.publicKey,
   plugin: { type: 'Attributes' },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{instructions::RevokePluginAuthorityV1Builder, types::PluginType};
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn revoke_plugin_authority() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let revoke_plugin_authority_ix = RevokePluginAuthorityV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
         .plugin_type(PluginType::FreezeDelegate)
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let revoke_plugin_authority_tx = Transaction::new_signed_with_payer(
         &[revoke_plugin_authority_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&revoke_plugin_authority_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### Asset転送時の委任リセット
-
-すべての所有者管理Pluginは、Assetの転送時に委任された権限が取り消され、`Owner`の権限タイプに戻ります。
-
-これには以下が含まれます：
-
+### Delegate Resets Upon Asset Transfer
+All Owner Managed plugins will have their delegated authorities revoked and set back to the authority type of `Owner` upon Transfer of an Asset.
+This includes:
 - Freeze Delegate
 - Transfer Delegate
 - Burn Delegate
-
-## Pluginデータを不変にする
-
-Pluginの権限を`None`値に更新すると、Pluginのデータは実質的に不変になります。
-
+## Making Plugin Data Immutable
+By updating your plugin's authority to a `None` value will effectively make your plugin's data immutable.
 {% callout type="warning" %}
-
-**警告** - これを行うとPluginデータは不変になります。注意して進めてください！
-
+**WARNING** - Doing so will leave your plugin data immutable. Proceed with caution!
 {% /callout %}
-
-{% dialect-switcher title="Pluginを不変にする" %}
+{% dialect-switcher title="Making a Plugin Immutable" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import {
   approvePluginAuthority
 } from '@metaplex-foundation/mpl-core'
-
 await approvePluginAuthority(umi, {
   asset: asset.publicKey,
   plugin: { type: 'FreezeDelegate' },
   newAuthority: { type: 'None' },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::ApprovePluginAuthorityV1Builder,
@@ -238,119 +192,77 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn make_plugin_data_immutable() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let make_plugin_data_immutable_ix = ApprovePluginAuthorityV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
         .plugin_type(PluginType::FreezeDelegate)
         .new_authority(PluginAuthority::None)
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let make_plugin_data_immutable_tx = Transaction::new_signed_with_payer(
         &[make_plugin_data_immutable_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&make_plugin_data_immutable_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## 一般的なエラー
-
+## Common Errors
 ### `Authority mismatch`
-
-このPluginを委任または取り消しする権限がありません。現在の権限のみが委任でき、所有者/権限のみが取り消しできます。
-
+You don't have permission to delegate or revoke this plugin. Only the current authority can delegate; only owner/authority can revoke.
 ### `Plugin not found`
-
-Asset/CollectionにはこのPluginタイプがアタッチされていません。
-
+The Asset/Collection doesn't have this plugin type attached.
 ### `Cannot revoke None authority`
-
-`None`権限のPluginは不変です。取り消す権限がありません。
-
-## 注意事項
-
-- 委任は制御を移行しますが、元の権限の取り消し能力は削除されない
-- 権限を`None`に設定することは永続的で不可逆
-- 所有者管理PluginはAssetが新しい所有者に転送されると自動取り消し
-- 取り消しは権限をデフォルトタイプ（OwnerまたはUpdateAuthority）に戻す
-
-## クイックリファレンス
-
-### Pluginタイプ別の取り消し動作
-
-| Pluginタイプ | 戻り先 |
+A plugin with `None` authority is immutable. There's no authority to revoke.
+## Notes
+- Delegation transfers control but doesn't remove the original authority's ability to revoke
+- Setting authority to `None` is permanent and irreversible
+- Owner Managed plugins auto-revoke when the Asset transfers to a new owner
+- Revocation returns authority to the default type (Owner or UpdateAuthority)
+## Quick Reference
+### Revocation Behavior by Plugin Type
+| Plugin Type | Revokes To |
 |-------------|------------|
-| 所有者管理 | `Owner`権限 |
-| 権限管理 | `UpdateAuthority` |
-
-### 誰が委任/取り消しできるか
-
-| アクション | 所有者管理 | 権限管理 |
+| Owner Managed | `Owner` authority |
+| Authority Managed | `UpdateAuthority` |
+### Who Can Delegate/Revoke
+| Action | Owner Managed | Authority Managed |
 |--------|---------------|-------------------|
-| 委任 | 所有者 | 更新権限 |
-| 取り消し | 所有者または委任者 | 更新権限または委任者 |
-
+| Delegate | Owner | Update Authority |
+| Revoke | Owner or Delegate | Update Authority or Delegate |
 ## FAQ
-
-### 取り消しとPluginの削除の違いは何ですか？
-
-取り消しはPluginを制御する人を変更するだけで、Pluginとそのデータは残ります。削除はPluginを完全に削除します。
-
-### 複数のアドレスに委任できますか？
-
-いいえ。各Pluginは一度に1つの権限しか持てません。新しいアドレスに委任すると、前の権限が置き換えられます。
-
-### Assetを転送すると委任されたPluginはどうなりますか？
-
-所有者管理Pluginは自動的に`Owner`権限に戻ります。権限管理Pluginは変更されません。
-
-### 権限をNoneに設定した後で元に戻せますか？
-
-いいえ。権限を`None`に設定するとPluginは永久に不変になります。これは元に戻せません。
-
-### 委任者は自分自身を取り消せますか？
-
-はい。委任された権限は自分のアクセスを取り消すことができ、その後制御はデフォルトの権限タイプに戻ります。
-
-## 関連操作
-
-- [Pluginの追加](/ja/smart-contracts/core/plugins/adding-plugins) - Asset/CollectionにPluginを追加
-- [Pluginの削除](/ja/smart-contracts/core/plugins/removing-plugins) - Pluginを完全に削除
-- [Pluginの更新](/ja/smart-contracts/core/plugins/update-plugins) - Pluginデータの変更
-- [Plugin概要](/ja/smart-contracts/core/plugins) - 利用可能なPluginの完全なリスト
-
-## 用語集
-
-| 用語 | 定義 |
+### What's the difference between revoking and removing a plugin?
+Revoking only changes who controls the plugin—the plugin and its data remain. Removing deletes the plugin entirely.
+### Can I delegate to multiple addresses?
+No. Each plugin has only one authority at a time. Delegating to a new address replaces the previous authority.
+### What happens to delegated plugins when I transfer an Asset?
+Owner Managed plugins automatically revoke back to `Owner` authority. Authority Managed plugins remain unchanged.
+### Can I undo setting authority to None?
+No. Setting authority to `None` makes the plugin permanently immutable. This cannot be reversed.
+### Can a delegate revoke themselves?
+Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
+## Related Operations
+- [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) - Add plugins to Assets/Collections
+- [Removing Plugins](/smart-contracts/core/plugins/removing-plugins) - Delete plugins entirely
+- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
+- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
+## Glossary
+| Term | Definition |
 |------|------------|
-| **委任者** | Pluginの一時的な制御を与えられたアドレス |
-| **取り消し** | 委任された権限を削除し、デフォルトに戻す |
-| **None権限** | Pluginを不変にする特別な権限タイプ |
-| **自動取り消し** | 転送時の所有者管理Pluginの自動取り消し |
-| **Plugin権限** | Pluginを制御する現在のアドレス |
-
----
-
-*Metaplex Foundationによって管理 · 最終確認2026年1月 · @metaplex-foundation/mpl-coreに適用*
+| **Delegate** | Address given temporary control of a plugin |
+| **Revoke** | Remove delegated authority, returning to default |
+| **None Authority** | Special authority type making plugin immutable |
+| **Auto-revoke** | Automatic revocation of Owner Managed plugins on transfer |
+| **Plugin Authority** | Current address with control over a plugin |

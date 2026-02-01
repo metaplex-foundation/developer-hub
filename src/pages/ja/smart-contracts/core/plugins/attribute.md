@@ -1,101 +1,102 @@
 ---
 title: Attribute Plugin
 metaTitle: Attribute Plugin | Metaplex Core
-description: Core NFT Assetにオンチェーンのキーバリューデータを保存します。Attributes Pluginを使用してゲームステータス、特性、オンチェーンプログラムが読み取る必要のあるデータを保存します。
+description: Store on-chain key-value data on Core NFT Assets. Use the Attributes plugin for game stats, traits, and any data that needs to be readable by on-chain programs.
+updated: '01-31-2026'
+keywords:
+  - on-chain attributes
+  - NFT traits
+  - game stats
+  - key-value storage
+  - DAS indexed
+about:
+  - On-chain data storage
+  - NFT attributes
+  - Program-readable data
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: What's the difference between on-chain attributes and off-chain metadata attributes?
+    a: On-chain attributes are stored on Solana and readable by programs. Off-chain attributes in JSON at URI are stored on Arweave/IPFS and only readable by clients.
+  - q: Can on-chain programs read these attributes?
+    a: Yes. Use CPI to fetch the Asset account and deserialize the Attributes plugin data.
+  - q: Are attributes indexed by DAS?
+    a: Yes. DAS automatically indexes attribute key-value pairs for fast queries.
+  - q: Can I store numbers or booleans?
+    a: Values are strings only. Convert as needed, for example level = '5' or active = 'true'.
+  - q: How do I update a single attribute?
+    a: You can't update individual attributes. Fetch the current list, modify it, and update with the full new list.
+  - q: What's the size limit for attributes?
+    a: There's no hard limit, but larger attribute lists increase rent cost. Keep data concise.
+  - q: Can the owner update attributes?
+    a: No. The Attributes plugin is Authority Managed, so only the update authority can modify it.
 ---
-
-**Attributes Plugin**は、Core AssetまたはCollection内にキーバリューペアを直接オンチェーンに保存します。ゲームステータス、特性、オンチェーンプログラムが読み取る必要のあるあらゆるデータに最適です。 {% .lead %}
-
-{% callout title="学習内容" %}
-
-- AssetとCollectionにオンチェーン属性を追加
-- キーバリューペアを保存および更新
-- オンチェーンプログラムから属性を読み取る
-- ユースケース：ゲームステータス、特性、アクセスレベル
-
+The **Attributes Plugin** stores key-value pairs directly on-chain within Core Assets or Collections. Perfect for game stats, traits, and any data that on-chain programs need to read. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Add on-chain attributes to Assets and Collections
+- Store and update key-value pairs
+- Read attributes from on-chain programs
+- Use cases: game stats, traits, access levels
 {% /callout %}
-
-## 概要
-
-**Attributes Plugin**は、オンチェーンにキーバリュー文字列ペアを保存する権限管理Pluginです。オフチェーンメタデータとは異なり、これらの属性はSolanaプログラムで読み取り可能で、DASでインデックス化されます。
-
-- 任意の文字列キーバリューペアをオンチェーンに保存
-- CPI経由でオンチェーンプログラムで読み取り可能
-- DASで高速クエリのために自動インデックス化
-- 更新権限によって変更可能
-
-## 対象外
-
-オフチェーンメタデータ属性（URIのJSONに保存）、複雑なデータ型（文字列のみサポート）、不変属性（すべての属性は変更可能）は対象外です。
-
-## クイックスタート
-
-**ジャンプ：** [Assetに追加](#assetにattributes-pluginを追加) · [属性を更新](#assetのattributes-pluginを更新)
-
-1. Attributes Pluginを追加：`addPlugin(umi, { asset, plugin: { type: 'Attributes', attributeList: [...] } })`
-2. 各属性は`{ key: string, value: string }`ペア
-3. いつでも`updatePlugin()`で更新可能
-4. DASまたはオンチェーンフェッチでクエリ
-
-{% callout type="note" title="オンチェーンとオフチェーン属性" %}
-
-| 機能 | オンチェーン（このPlugin） | オフチェーン（JSONメタデータ） |
+## Summary
+The **Attributes Plugin** is an Authority Managed plugin that stores key-value string pairs on-chain. Unlike off-chain metadata, these attributes are readable by Solana programs and indexed by DAS.
+- Store any string key-value pairs on-chain
+- Readable by on-chain programs via CPI
+- Automatically indexed by DAS for fast queries
+- Mutable by the update authority
+## Out of Scope
+Off-chain metadata attributes (stored in JSON at URI), complex data types (only strings supported), and immutable attributes (all attributes are mutable).
+## Quick Start
+**Jump to:** [Add to Asset](#adding-the-attributes-plugin-to-an-asset) · [Update Attributes](#updating-the-attributes-plugin-on-an-asset)
+1. Add the Attributes plugin: `addPlugin(umi, { asset, plugin: { type: 'Attributes', attributeList: [...] } })`
+2. Each attribute is a `{ key: string, value: string }` pair
+3. Update anytime with `updatePlugin()`
+4. Query via DAS or fetch on-chain
+{% callout type="note" title="On-Chain vs Off-Chain Attributes" %}
+| Feature | On-Chain (this plugin) | Off-Chain (JSON metadata) |
 |---------|------------------------|---------------------------|
-| 保存場所 | Solanaアカウント | Arweave/IPFS |
-| プログラムで読み取り可能 | ✅ Yes（CPI） | ❌ No |
-| DASでインデックス化 | ✅ Yes | ✅ Yes |
-| 変更可能 | ✅ Yes | ストレージに依存 |
-| コスト | レント（回収可能） | アップロードコスト（一回限り） |
-| 最適な用途 | 動的データ、ゲームステータス | 静的特性、画像 |
-
-**オンチェーン属性を使用**：プログラムがデータを読み取る必要がある場合、または頻繁に変更される場合。
-**オフチェーンメタデータを使用**：静的特性や画像参照の場合。
-
+| Storage location | Solana account | Arweave/IPFS |
+| Readable by programs | ✅ Yes (CPI) | ❌ No |
+| Indexed by DAS | ✅ Yes | ✅ Yes |
+| Mutable | ✅ Yes | Depends on storage |
+| Cost | Rent (recoverable) | Upload cost (one-time) |
+| Best for | Dynamic data, game stats | Static traits, images |
+**Use on-chain attributes** when programs need to read the data or it changes frequently.
+**Use off-chain metadata** for static traits and image references.
 {% /callout %}
-
-## 一般的なユースケース
-
-- **ゲームキャラクターステータス**：体力、XP、レベル、クラス - ゲームプレイ中に変化するデータ
-- **アクセス制御**：ティア、ロール、権限 - プログラムが認可のためにチェックするデータ
-- **動的特性**：アクションに基づいて特性が変化する進化するNFT
-- **ステーキング状態**：ステーキングステータス、獲得報酬、ステーキング時間の追跡
-- **実績追跡**：バッジ、マイルストーン、完了ステータス
-- **レンタル/貸付**：レンタル期間、借り手情報、返却日の追跡
-
-## 動作対象
-
+## Common Use Cases
+- **Game character stats**: Health, XP, level, class - data that changes during gameplay
+- **Access control**: Tier, role, permissions - data programs check for authorization
+- **Dynamic traits**: Evolving NFTs where traits change based on actions
+- **Staking state**: Track staking status, rewards earned, time staked
+- **Achievement tracking**: Badges, milestones, completion status
+- **Rental/lending**: Track rental periods, borrower info, return dates
+## Works With
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-
-## 引数
-
-| 引数           | 値                               |
+## Arguments
+| Arg           | Value                               |
 | ------------- | ----------------------------------- |
 | attributeList | Array<{key: string, value: string}> |
-
 ### AttributeList
-
-属性リストは、配列[]とキーバリューペア`{key: "value"}`文字列値ペアのオブジェクトで構成されています。
-
+The attribute list consists of an Array[] then an object of key-value pairs `{key: "value"}` string value pairs.
 {% dialect-switcher title="AttributeList" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 const attributeList = [
   { key: 'key0', value: 'value0' },
   { key: 'key1', value: 'value1' },
 ]
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::types::{Attributes, Attribute}
-
 let attributes = Attributes {
     attribute_list: vec![
         Attribute {
@@ -109,21 +110,15 @@ let attributes = Attributes {
     ],
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## AssetにAttributes Pluginを追加
-
-{% dialect-switcher title="MPL Core AssetにAttribute Pluginを追加" %}
+## Adding the Attributes Plugin to an Asset
+{% dialect-switcher title="Adding a Attribute Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
-
 const asset = publicKey('11111111111111111111111111111111')
-
 await addPlugin(umi, {
   asset: asset.publicKey,
   plugin: {
@@ -135,11 +130,8 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -148,13 +140,10 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn add_attributes_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let add_attribute_plugin_ix = AddPluginV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
@@ -171,42 +160,30 @@ pub async fn add_attributes_plugin() {
             ],
         }))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let add_attribute_plugin_tx = Transaction::new_signed_with_payer(
         &[add_attribute_plugin_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&add_attribute_plugin_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-## AssetのAttributes Pluginを更新
-
-{% dialect-switcher title="AssetのAttributes Pluginを更新" %}
+## Updating the Attributes Plugin on an Asset
+{% dialect-switcher title="Updating the Attributes Plugin on an Asset" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin } from '@metaplex-foundation/mpl-core'
-
 const assetAddress = publicKey('11111111111111111111111111111111')
-
 await updatePlugin(umi, {
   asset: assetAddress,
   plugin: {
@@ -218,11 +195,8 @@ await updatePlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```ts
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -231,13 +205,10 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn update_attributes_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let update_attributes_plugin_ix = UpdatePluginV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
@@ -258,56 +229,38 @@ pub async fn update_attributes_plugin() {
             ],
         }))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let update_attributes_plugin_tx = Transaction::new_signed_with_payer(
         &[update_attributes_plugin_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&update_attributes_plugin_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-## 一般的なエラー
-
+## Common Errors
 ### `Authority mismatch`
-
-Plugin権限（通常は更新権限）のみが属性を追加または更新できます。正しいキーペアで署名していることを確認してください。
-
+Only the plugin authority (usually update authority) can add or update attributes. Verify you're signing with the correct keypair.
 ### `String too long`
-
-属性のキーと値にはサイズ制限があります。簡潔に保ってください。
-
-## 注意事項
-
-- 権限管理：更新権限は所有者の署名なしで追加/更新可能
-- すべての値は文字列 - 必要に応じて数値/ブール値を変換
-- 更新は属性リスト全体を置き換える（部分更新なし）
-- 属性はアカウントサイズとレントコストを増加させる
-- DASは高速クエリのために属性をインデックス化
-
-## クイックリファレンス
-
-### 最小コード
-
+Attribute keys and values are limited in size. Keep them concise.
+## Notes
+- Authority Managed: update authority can add/update without owner signature
+- All values are strings - convert numbers/booleans as needed
+- Updating replaces the entire attribute list (no partial updates)
+- Attributes increase account size and rent cost
+- DAS indexes attributes for fast queries
+## Quick Reference
+### Minimum Code
 ```ts {% title="minimal-attributes.ts" %}
 import { addPlugin } from '@metaplex-foundation/mpl-core'
-
 await addPlugin(umi, {
   asset: assetAddress,
   plugin: {
@@ -319,62 +272,37 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-
-### 一般的な属性パターン
-
-| ユースケース | 例のキー |
+### Common Attribute Patterns
+| Use Case | Example Keys |
 |----------|--------------|
-| ゲームキャラクター | `level`、`health`、`xp`、`class` |
-| アクセス制御 | `tier`、`access_level`、`role` |
-| 特性 | `background`、`eyes`、`rarity` |
-| 状態 | `staked`、`listed`、`locked` |
-
+| Game character | `level`, `health`, `xp`, `class` |
+| Access control | `tier`, `access_level`, `role` |
+| Traits | `background`, `eyes`, `rarity` |
+| State | `staked`, `listed`, `locked` |
 ## FAQ
-
-### オンチェーン属性とオフチェーンメタデータ属性の違いは何ですか？
-
-オンチェーン属性（このPlugin）はSolanaに保存され、プログラムで読み取り可能です。オフチェーン属性（URIのJSON）はArweave/IPFSに保存され、クライアントのみで読み取り可能です。
-
-### オンチェーンプログラムはこれらの属性を読み取れますか？
-
-はい。CPIを使用してAssetアカウントをフェッチし、Attributes Pluginデータをデシリアライズします。
-
-### 属性はDASでインデックス化されますか？
-
-はい。DASは高速クエリのために属性のキーバリューペアを自動的にインデックス化します。
-
-### 数値やブール値を保存できますか？
-
-値は文字列のみです。必要に応じて変換：`{ key: 'level', value: '5' }`、`{ key: 'active', value: 'true' }`。
-
-### 単一の属性を更新するにはどうすればよいですか？
-
-個別の属性は更新できません。現在のリストをフェッチし、変更して、完全な新しいリストで更新します。
-
-### 属性のサイズ制限は何ですか？
-
-厳密な制限はありませんが、属性リストが大きいほどレントコストが増加します。データは簡潔に保ってください。
-
-### 所有者は属性を更新できますか？
-
-いいえ。Attributes Pluginは権限管理なので、更新権限のみが変更できます（所有者ではありません）。
-
-## 関連Plugin
-
-- [Update Delegate](/ja/smart-contracts/core/plugins/update-delegate) - 他者に属性を更新する権限を付与
-- [ImmutableMetadata](/ja/smart-contracts/core/plugins/immutableMetadata) - 名前/URIをロック（属性は変更可能のまま）
-- [AddBlocker](/ja/smart-contracts/core/plugins/addBlocker) - 新しいPluginの追加を防止
-
-## 用語集
-
-| 用語 | 定義 |
+### What's the difference between on-chain attributes and off-chain metadata attributes?
+On-chain attributes (this plugin) are stored on Solana and readable by programs. Off-chain attributes (in JSON at URI) are stored on Arweave/IPFS and only readable by clients.
+### Can on-chain programs read these attributes?
+Yes. Use CPI to fetch the Asset account and deserialize the Attributes plugin data.
+### Are attributes indexed by DAS?
+Yes. DAS automatically indexes attribute key-value pairs for fast queries.
+### Can I store numbers or booleans?
+Values are strings only. Convert as needed: `{ key: 'level', value: '5' }`, `{ key: 'active', value: 'true' }`.
+### How do I update a single attribute?
+You can't update individual attributes. Fetch the current list, modify it, and update with the full new list.
+### What's the size limit for attributes?
+There's no hard limit, but larger attribute lists increase rent cost. Keep data concise.
+### Can the owner update attributes?
+No. The Attributes plugin is Authority Managed, so only the update authority can modify it (not the owner).
+## Related Plugins
+- [Update Delegate](/smart-contracts/core/plugins/update-delegate) - Grant others permission to update attributes
+- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - Lock name/URI (attributes remain mutable)
+- [AddBlocker](/smart-contracts/core/plugins/addBlocker) - Prevent adding new plugins
+## Glossary
+| Term | Definition |
 |------|------------|
-| **Attributes Plugin** | オンチェーンのキーバリューペアを保存する権限管理Plugin |
-| **attributeList** | `{ key, value }`オブジェクトの配列 |
-| **権限管理** | 更新権限によって制御されるPluginタイプ |
-| **オンチェーンデータ** | Solanaアカウントに直接保存されるデータ（プログラムで読み取り可能） |
-| **DAS** | 属性をインデックス化するDigital Asset Standard API |
-
----
-
-*Metaplex Foundationによって管理 · 最終確認2026年1月 · @metaplex-foundation/mpl-coreに適用*
+| **Attributes Plugin** | Authority Managed plugin storing on-chain key-value pairs |
+| **attributeList** | Array of `{ key, value }` objects |
+| **Authority Managed** | Plugin type controlled by update authority |
+| **On-chain Data** | Data stored directly in Solana account (readable by programs) |
+| **DAS** | Digital Asset Standard API that indexes attributes |

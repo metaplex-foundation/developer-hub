@@ -1,66 +1,68 @@
 ---
-title: Bubblegumプラグイン
-metaTitle: Bubblegumプラグイン | Core Plugins
-description: Bubblegumプラグインを使って、圧縮NFT向けに使用できるコレクションを作成する方法を学びます。
+title: Bubblegum Plugin
+metaTitle: Bubblegum Plugin | Core Plugins
+description: Learn how to use the Bubblegum Plugin to create Collections that can be used for compressed NFTs.
+updated: '01-31-2026'
+keywords:
+  - Bubblegum plugin
+  - compressed NFT
+  - cNFT collection
+  - merkle tree
+about:
+  - Compressed NFTs
+  - Bubblegum integration
+  - Collection setup
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
-
-`Bubblegum`プラグインは「権限管理型（Authority Managed）」プラグインで、圧縮NFTで利用できるコレクションを作成できます。
-
-このプラグインは`MPL Core Collections`でのみ使用できます。
-
-## 対応状況
-
+The `Bubblegum` Plugin is a `Authority Managed` plugin that allows you to create Collections that can be used for compressed NFTs.
+This plugin can only be used on `MPL Core Collections`.
+## Works With
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ❌  |
 | MPL Core Collection | ✅  |
-
-## 引数
-
-`Bubblegum`プラグインに引数は不要です。
-
-## Bubblegumプラグイン付きコレクションの作成（コード例）
-
-{% dialect-switcher title="Bubblegumプラグイン付きコレクションの作成" %}
+## Arguments
+The `Bubblegum` Plugin requires no arguments.
+## Create a Collection with the Bubblegum Plugin code example
+{% dialect-switcher title="Create a Collection with the Bubblegum Plugin" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
-import { createCollection } from '@metaplex-foundation/mpl-core'
-import { generateSigner } from '@metaplex-foundation/umi'
-
-const collectionSigner = generateSigner(umi)
-
+import {
+  createCollection,
+} from '@metaplex-foundation/mpl-core';
+import {
+  generateSigner,
+} from '@metaplex-foundation/umi';
+const collectionSigner = generateSigner(umi);
 await createCollection(umi, {
-  collection: collectionSigner,
-  name: 'My Collection',
-  uri: 'https://example.com/my-nft.json',
-  plugins: [
-    {
-      type: 'BubblegumV2',
-    },
-  ],
-})
+    collection: collectionSigner,
+    name: "My Collection",
+    uri: "https://example.com/my-nft.json",
+    plugins: [
+      {
+        type: "BubblegumV2",
+      },
+    ],
+  })
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## 既存コレクションへBubblegumプラグインを追加（コード例）
-
-{% dialect-switcher title="コレクションへBubblegumプラグインを追加" %}
+## Adding the Bubblegum Plugin to a Collection code example
+{% dialect-switcher title="Add Bubblegum Plugin to Collection" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
-import { addCollectionPlugin } from '@metaplex-foundation/mpl-core'
-
+import {
+  addCollectionPlugin,
+} from '@metaplex-foundation/mpl-core';
 await addCollectionPlugin(umi, {
   collection: collection.publicKey,
   plugin: {
-    type: 'BubblegumV2',
+    type: "BubblegumV2",
   },
-}).sendAndConfirm(umi)
+}).sendAndConfirm(umi);
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-

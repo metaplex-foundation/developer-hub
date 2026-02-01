@@ -1,70 +1,65 @@
 ---
 title: Freeze Execute
-metaTitle: Freeze Executeプラグイン | Core
-description: MPL CoreのFreeze Executeプラグインについて学びます。'Freeze Execute'プラグインはExecuteライフサイクルイベントを凍結し、アセットが任意の命令を実行することを防ぎます。
+metaTitle: Freeze Execute Plugin | Core
+description: Learn about the MPL Core Asset Freeze Execute Plugin. The 'Freeze Execute' plugin can freeze the Execute lifecycle event, preventing the asset from executing arbitrary instructions.
+updated: '01-31-2026'
+keywords:
+  - freeze execute
+  - block execute
+  - backed NFT
+  - escrowless staking
+about:
+  - Execute freezing
+  - Asset execution
+  - Backed NFTs
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
 ---
-
-## 概要
-
-Freeze Executeプラグインは「オーナー管理型（Owner Managed）」で、アセット上のExecuteライフサイクルイベントを凍結できます。凍結中は、アセット署名者PDAを通じた任意の命令実行ができなくなり、凍結解除されるまで一切のexecute操作がブロックされます。
-
+## Overview
+The Freeze Execute Plugin is an `Owner Managed` plugin that allows freezing the Execute lifecycle event on an Asset. When frozen, the asset cannot execute arbitrary instructions through its Asset Signer PDA, effectively blocking any execute operations until unfrozen.
 {% callout type="warning" %}
-重要: 本プラグインはオーナー管理型のため、アセットが新しいオーナーへ移転されると、以前の権限設定は維持されません。以前と同じ権限者に`freeze`状態の変更を許可したい場合は、新しいオーナーが再度権限設定を行う必要があります。
+**Important**: Since this is an Owner Managed plugin, the authority will not persist after the asset is transferred to a new owner. The new owner will need to re-add the authority if they want the previous authorities to be able to change the `freeze` status of the plugin.
 {% /callout %}
-
-有用なシナリオの例:
-
-- バックドNFT: 基礎資産（SOLやトークン）の不正な引き出しを防ぐためにロック
-- エスクロー不要の資産管理: 所有権を移さずに金融処理中は実行機能を凍結
-- ステーキングプロトコル: ステーキング期間中は実行を防止
-- スマートコントラクトの安全性: 複雑な操作を実行可能なアセットに保護層を追加
-- ガバナンス制御: 投票等に関与するアセットの凍結メカニズムを実装
-- レンタル: レンタル期間中の実行を防止
-- 担保管理: DeFiの担保として使用中は実行をロック
-
-## 対応状況
-
+The Freeze Execute Plugin is particularly useful for scenarios such as:
+- **Backed NFTs**: Lock NFTs that represent ownership of underlying assets (SOL, tokens) to prevent unauthorized withdrawals
+- **Escrowless asset management**: Freeze assets while they're involved in financial operations without transferring ownership
+- **Staking protocols**: Prevent asset execution during staking periods while maintaining ownership
+- **Smart contract security**: Add a layer of protection for assets that can execute complex operations
+- **Governance controls**: Implement freezing mechanisms for assets involved in governance or voting
+- **Asset rental**: Prevent execution while assets are being rented out
+- **Collateral management**: Lock assets used as collateral in DeFi protocols
+## Works With
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-
-## 引数
-
+## Arguments
 | Arg    | Value |
 | ------ | ----- |
 | frozen | bool  |
-
-## 関数
-
-### アセットへFreeze Executeを追加
-
-`addPlugin`で、アセットのExecute機能を凍結可能にするFreeze Executeプラグインを追加します。
-
-{% dialect-switcher title="MPL CoreアセットへFreeze Executeプラグインを追加" %}
+## Functions
+### Add Freeze Execute Plugin to an Asset
+The `addPlugin` command adds the Freeze Execute Plugin to an Asset. This plugin allows the Asset's Execute functionality to be frozen, preventing execution of arbitrary instructions.
+{% dialect-switcher title="Adding a Freeze Execute Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin, mplCore } from '@metaplex-foundation/mpl-core'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-
 ;(async () => {
   const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
-
   const assetAddress = publicKey('11111111111111111111111111111111')
-
   await addPlugin(umi, {
     asset: assetAddress,
     plugin: { type: 'FreezeExecute', data: { frozen: false } },
   }).sendAndConfirm(umi)
 })()
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust CPI" id="rust-cpi" %}
-
 ```rust
 AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -74,11 +69,8 @@ AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: false }))
     .invoke();
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -87,59 +79,44 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn add_freeze_execute_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let add_freeze_execute_plugin_ix = AddPluginV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
         .plugin(Plugin::FreezeExecute(FreezeExecute {frozen: false}))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let add_freeze_execute_plugin_ix_tx = Transaction::new_signed_with_payer(
         &[add_freeze_execute_plugin_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&add_freeze_execute_plugin_ix_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### Freeze Execute付きでアセット作成
-
-作成時にFreeze Executeプラグインを追加することもできます。
-
-{% dialect-switcher title="Freeze Executeプラグイン付きでアセット作成" %}
+### Creating an Asset with Freeze Execute Plugin
+You can also add the Freeze Execute Plugin during asset creation:
+{% dialect-switcher title="Creating an Asset with Freeze Execute Plugin" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
 import { create, mplCore } from '@metaplex-foundation/mpl-core'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-
 ;(async () => {
   const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
   const assetSigner = generateSigner(umi)
   const delegateAddress = generateSigner(umi)
-
   await create(umi, {
     asset: assetSigner,
     name: 'My Asset',
@@ -154,26 +131,19 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
   }).sendAndConfirm(umi)
 })()
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### Freeze Execute付きでコレクション作成
-
-Freeze Executeプラグインはコレクションにも適用できます。
-
-{% dialect-switcher title="Freeze Executeプラグイン付きでコレクション作成" %}
+### Creating a Collection with Freeze Execute Plugin
+The Freeze Execute Plugin can also be applied to collections:
+{% dialect-switcher title="Creating a Collection with Freeze Execute Plugin" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
 import { createCollection, mplCore } from '@metaplex-foundation/mpl-core'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-
 ;(async () => {
   const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
   const collectionSigner = generateSigner(umi)
-
   await createCollection(umi, {
     collection: collectionSigner,
     name: 'My Collection',
@@ -182,36 +152,26 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
   }).sendAndConfirm(umi)
 })()
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### Execute操作を凍結
-
-`updatePlugin`で、アセットのExecute機能を凍結できます。
-
-{% dialect-switcher title="MPL CoreアセットのExecute操作を凍結" %}
+### Freezing Execute Operations
+The `updatePlugin` command can be used to freeze the Asset's Execute functionality, preventing it from executing arbitrary instructions until unfrozen.
+{% dialect-switcher title="Freeze Execute Operations on an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { createUmi, publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, mplCore } from '@metaplex-foundation/mpl-core'
-
 ;(async () => {
   const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
   const assetAddress = publicKey('11111111111111111111111111111111')
-
   await updatePlugin(umi, {
     asset: assetAddress,
     plugin: { type: 'FreezeExecute', data: { frozen: true } },
   }).sendAndConfirm(umi)
 })()
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust CPI" id="rust-cpi" %}
-
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -223,11 +183,8 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: true }))
     .invoke()?;
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -236,72 +193,54 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn freeze_execute_operations() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
     let collection = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-
     let freeze_execute_plugin_ix = UpdatePluginV1Builder::new()
         .asset(asset)
-        // アセットがコレクションの一部ならコレクションを渡す
+        // Pass in Collection if Asset is part of collection
         .collection(Some(collection))
         .payer(authority.pubkey())
-        // `frozen: true`に設定
+        // Set the FreezeExecute plugin to `frozen: true`
         .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: true }))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let freeze_execute_plugin_tx = Transaction::new_signed_with_payer(
         &[freeze_execute_plugin_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&freeze_execute_plugin_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res);
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### Execute操作の凍結解除
-
-`updatePlugin`で、凍結したExecute機能を解除できます。
-
-{% dialect-switcher title="MPL CoreアセットのExecute操作を解凍" %}
+### Unfreezing Execute Operations
+The `updatePlugin` command can also be used to unfreeze the Asset's Execute functionality, restoring its ability to execute arbitrary instructions.
+{% dialect-switcher title="Unfreeze Execute Operations on an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { createUmi, publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, mplCore } from '@metaplex-foundation/mpl-core'
-
 ;(async () => {
   const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
   const assetAddress = publicKey('11111111111111111111111111111111')
-
   await updatePlugin(umi, {
     asset: assetAddress,
     plugin: { type: 'FreezeExecute', data: { frozen: false } },
   }).sendAndConfirm(umi)
 })()
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust CPI" id="rust-cpi" %}
-
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -313,11 +252,8 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: false }))
     .invoke()?;
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -326,158 +262,150 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn unfreeze_execute_operations() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
     let collection = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-
     let unfreeze_execute_plugin_ix = UpdatePluginV1Builder::new()
         .asset(asset)
-        // アセットがコレクションの一部ならコレクションを渡す
+        // Pass in Collection if Asset is part of collection
         .collection(Some(collection))
         .payer(authority.pubkey())
-        // `frozen: false`に設定
+        // Set the FreezeExecute plugin to `frozen: false`
         .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: false }))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let unfreeze_execute_plugin_tx = Transaction::new_signed_with_payer(
         &[unfreeze_execute_plugin_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&unfreeze_execute_plugin_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res);
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## プラグイン権限
-
-Freeze Executeプラグインで凍結/解凍を制御できる権限タイプ:
-
-- **Owner権限（既定）**: アセットのオーナーのみが操作可能
-- **Delegate権限**: 特定アドレスを委任して凍結操作を許可
-- **UpdateAuthority**: 明示的に委任された場合のみアップデート権限で操作可能
-
-{% dialect-switcher title="プラグイン権限の設定" %}
+## Plugin Authority
+The Freeze Execute Plugin supports different authority types for controlling who can freeze/unfreeze execute operations:
+- **Owner Authority** (default): Only the asset owner can freeze/unfreeze
+- **Delegate Authority**: A specific address can be delegated to control freezing
+- **Update Authority**: The asset's update authority can control freezing, but only if explicitly delegated
+{% dialect-switcher title="Setting Plugin Authority" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
-import { generateSigner } from '@metaplex-foundation/umi'
-import { create, mplCore } from '@metaplex-foundation/mpl-core'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-
+import { generateSigner } from "@metaplex-foundation/umi";
+import { create, mplCore } from "@metaplex-foundation/mpl-core";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 (async () => {
-  const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
-
-  const assetSigner = generateSigner(umi)
-  const delegateAddress = generateSigner(umi)
-
+  const umi = createUmi("https://api.devnet.solana.com").use(mplCore());
+  const assetSigner = generateSigner(umi);
+  const delegateAddress = generateSigner(umi);
   await create(umi, {
     asset: assetSigner,
-    name: 'My Asset',
-    uri: 'https://example.com/my-asset.json',
+    name: "My Asset",
+    uri: "https://example.com/my-asset.json",
     plugins: [
       {
-        type: 'FreezeExecute',
+        type: "FreezeExecute",
         data: { frozen: false },
-        authority: { type: 'Address', address: delegateAddress.publicKey },
+        authority: { type: "Address", address: delegateAddress.publicKey },
       },
     ],
-  }).sendAndConfirm(umi)
-})()
-
+  }).sendAndConfirm(umi);
+})();
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## 注意事項
-
-- `frozen: true`の間は、すべてのexecute操作がブロックされます
-- 既定の権限はオーナーです
-- 凍結/解凍は現在の権限者のみが可能です
-- 権限を他者に委任中は、元のオーナーは権限が戻るまで解凍できません
-- 凍結中はプラグインを削除できません
-- 凍結中は権限の再割り当てはできません
-- このプラグインは[Execute命令](/ja/smart-contracts/core/execute-asset-signing)と連携します
-
-## ユースケース例: バックドNFT
-
-Freeze Executeプラグインは、NFTが基礎資産（SOLやトークン）を保有し、execute命令で引き出せる「バックドNFT」でよく使われます。一時的にexecute操作を凍結できます。
-
-{% dialect-switcher title="Backed NFTの例" %}
+## Important Notes
+- When the `frozen` field is set to `true`, any execute operations will be blocked
+- **Default authority**: The asset owner controls the plugin by default
+- **Authority delegation**: Only the current authority can freeze/unfreeze the execute functionality
+- **Authority constraints**: If authority is delegated to someone else, the original owner cannot unfreeze until authority is revoked
+- The plugin cannot be removed when frozen
+- Authority cannot be reassigned when frozen
+- The plugin works with the [Execute instruction](/smart-contracts/core/execute-asset-signing) system
+## Example Use Case: Backed NFT
+A common use case for the Freeze Execute Plugin is creating "backed NFTs" where the NFT represents ownership of underlying assets (like SOL or tokens) that can be withdrawn via execute instructions. The plugin allows you to temporarily freeze these execute operations.
+{% dialect-switcher title="Backed NFT Example" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
-import { generateSigner, publicKey, sol, createNoopSigner, keypairIdentity } from '@metaplex-foundation/umi'
-import { create, execute, findAssetSignerPda, updatePlugin, fetchAsset, mplCore } from '@metaplex-foundation/mpl-core'
-import { transferSol } from '@metaplex-foundation/mpl-toolbox'
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-
+import {
+  generateSigner,
+  publicKey,
+  sol,
+  createNoopSigner,
+  keypairIdentity,
+} from "@metaplex-foundation/umi";
+import {
+  create,
+  execute,
+  findAssetSignerPda,
+  updatePlugin,
+  fetchAsset,
+  mplCore,
+} from "@metaplex-foundation/mpl-core";
+import { transferSol } from "@metaplex-foundation/mpl-toolbox";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 (async () => {
-  const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
-
-  // 実運用では自分のウォレットを使う
-  const wallet = generateSigner(umi)
-  umi.use(keypairIdentity(wallet))
-
-  // 1. 実行機能を凍結したアセットを作成
-  const assetSigner = generateSigner(umi)
-
+  const umi = createUmi("https://api.devnet.solana.com").use(mplCore());
+  //use your wallet instead
+  const wallet = generateSigner(umi);
+  umi.use(keypairIdentity(wallet));
+  // 1. Create asset with frozen execute functionality
+  const assetSigner = generateSigner(umi);
   await create(umi, {
     asset: assetSigner,
-    name: 'Backed NFT',
-    uri: 'https://example.com/backed-nft.json',
-    plugins: [{ type: 'FreezeExecute', frozen: true }],
-  }).sendAndConfirm(umi)
-
-  // 2. アセット署名者PDAを取得
-  const [assetSignerPda] = findAssetSignerPda(umi, { asset: assetSigner.publicKey })
-
-  // 3. NFTを"裏付け"るためにSOLを預け入れ
+    name: "Backed NFT",
+    uri: "https://example.com/backed-nft.json",
+    plugins: [{ type: "FreezeExecute", frozen: true }],
+  }).sendAndConfirm(umi);
+  // 2. Find the Asset Signer PDA
+  const [assetSignerPda] = findAssetSignerPda(umi, {
+    asset: assetSigner.publicKey,
+  });
+  // 3. Deposit SOL to "back" the NFT
   await transferSol(umi, {
     source: umi.identity,
     destination: publicKey(assetSignerPda),
-    amount: sol(0.01),
-  }).sendAndConfirm(umi)
-
-  // 4. 引き出し前に凍結解除
+    amount: sol(0.01), // 0.01 SOL backing
+  }).sendAndConfirm(umi);
+  // 4. Execute operations are blocked while frozen
+  // This transaction will fail:
+  try {
+    await execute(umi, {
+      asset: await fetchAsset(umi, assetSigner.publicKey),
+      instructions: transferSol(umi, {
+        source: createNoopSigner(publicKey(assetSignerPda)),
+        destination: generateSigner(umi).publicKey,
+        amount: sol(0.001),
+      }),
+    }).sendAndConfirm(umi, { send: { skipPreflight: true } });
+  } catch (e) {
+    console.log("execute failed as expected", e);
+  }
+  // 5. Unfreeze to allow withdrawals
   await updatePlugin(umi, {
     asset: assetSigner.publicKey,
-    plugin: { type: 'FreezeExecute', data: { frozen: false } },
-  }).sendAndConfirm(umi)
-
-  // 5. アセット署名者からの送金（例）
-  const destination = generateSigner(umi).publicKey
-  const transferIx = transferSol(umi, {
-    source: createNoopSigner(publicKey(assetSignerPda)),
-    destination,
-    amount: sol(0.005),
-  })
-
+    plugin: { type: "FreezeExecute", data: { frozen: false } },
+  }).sendAndConfirm(umi);
+  // 6. Now execute operations are allowed
+  const recipient = generateSigner(umi);
   await execute(umi, {
     asset: await fetchAsset(umi, assetSigner.publicKey),
-    instructions: transferIx,
-  }).sendAndConfirm(umi)
-})()
+    instructions: transferSol(umi, {
+      source: createNoopSigner(publicKey(assetSignerPda)),
+      destination: recipient.publicKey,
+      amount: sol(0.001),
+    }),
+  }).sendAndConfirm(umi);
+})();
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-

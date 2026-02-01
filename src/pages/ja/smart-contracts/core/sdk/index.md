@@ -1,15 +1,24 @@
 ---
-title: MPL-Core SDK
-metaTitle: はじめに | Core
-description: Metaplexの新しいデジタルアセット標準であるCoreをはじめましょう。CoreはSolanaブロックチェーン上のNFTとデジタルアセットにシンプルさを最優先にしたアプローチを提供します。
+title: MPL-Core SDKs
+metaTitle: Getting Started | Core
+description: Get started with the new Digital Asset Standard from Metaplex, Core. Core provides a simplicity first approach to NFTs and Digital Assets on the Solana blockchain.
+updated: '01-31-2026'
+keywords:
+  - Core SDK
+  - mpl-core SDK
+  - NFT SDK
+  - Solana NFT library
+about:
+  - SDK installation
+  - Getting started
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
 ---
-
-新しいMetaplex Core標準をはじめるために、以下から使用したい言語/ライブラリを選択してください。
-
+Select the language / library you want to use below to get started with the new Metaplex Core Standard.
 {% quick-links %}
-
-{% quick-link title="JavaScript" icon="JavaScript" href="/ja/smart-contracts/core/sdk/javascript" description="Umiフレームワークに基づくMPL-Core用JavaScriptライブラリをはじめましょう。" /%}
-
-{% quick-link title="Rust" icon="Rust" href="/ja/smart-contracts/core/sdk/rust" description="MPL-Core Rustクレートの使用をはじめましょう。" /%}
-
+{% quick-link title="JavaScript" icon="JavaScript" href="/core/sdk/javascript" description="Get started with our JavaScript library for MPL-Core based on the Umi framework." /%}
+{% quick-link title="Rust" icon="Rust" href="/core/sdk/rust" description="Get started using our MPL-Core Rust crate." /%}
 {% /quick-links %}

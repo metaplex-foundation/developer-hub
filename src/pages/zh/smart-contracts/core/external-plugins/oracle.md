@@ -1,87 +1,86 @@
 ---
-title: Oracle 插件
-metaTitle: Oracle 插件 | Metaplex Core
-description: 使用外部验证构建动态 NFT 行为。Oracle 插件根据自定义条件拒绝 Asset 转移、更新、销毁和创建。
+title: Oracle Plugin
+metaTitle: Oracle Plugin | Metaplex Core
+description: Add custom validation logic to Core NFTs with Oracle plugins. Control transfers, burns, and updates based on external account state and custom rules.
+updated: '01-31-2026'
+keywords:
+  - Oracle plugin
+  - custom validation
+  - transfer restrictions
+  - time-based rules
+about:
+  - Custom validation
+  - Lifecycle controls
+  - External accounts
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Can Oracle plugins approve transfers, or only reject?
+    a: Oracle plugins can only reject or pass. They cannot force-approve transfers that other plugins reject.
+  - q: How do I create time-based transfer restrictions?
+    a: Deploy an Oracle account and use a cron job to update the validation result at specific times.
+  - q: Can I use one Oracle for multiple Assets?
+    a: Yes. Use a static base address for a single Oracle, or use PDA derivation with PreconfiguredCollection for collection-wide validation.
+  - q: What's the difference between Oracle and Freeze Delegate?
+    a: Freeze Delegate is built-in and binary (frozen/unfrozen). Oracle allows custom logic - time-based, price-based, or any condition you implement.
+  - q: Do I need to write a Solana program for Oracle?
+    a: Yes. The Oracle account must be a Solana account with the correct structure. You can use Anchor or native Rust.
 ---
-
-**Oracle 插件**为 Core Assets 和 Collections 添加外部链上验证。通过引用由权限控制的单独 Oracle 账户，根据自定义条件拒绝生命周期事件（转移、更新、销毁、创建）。{% .lead %}
-
-{% callout title="您将学到" %}
-
-- 向 Assets/Collections 添加 Oracle 插件
-- 配置 Oracle 账户结构和偏移量
-- 设置生命周期检查（转移/更新/销毁/创建）
-- 使用 PDA 进行动态验证
-
+The **Oracle Plugin** connects Core Assets to external Oracle accounts for custom validation logic. Reject transfers, burns, or updates based on time, price, ownership, or any custom rule you implement. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Create Oracle accounts for validation
+- Configure lifecycle checks (reject transfers, updates, burns)
+- Use PDA-based Oracle addressing
+- Deploy time-based and condition-based restrictions
 {% /callout %}
-
-## 摘要
-
-**Oracle** 插件引用外部账户来验证生命周期事件。当发生生命周期事件（转移、更新、销毁、创建）时，MPL Core 程序加载 Oracle 账户并检查批准/拒绝状态。
-
-- 通过外部验证拒绝生命周期事件
-- Oracle 账户可随时更新（动态行为）
-- 基于 PDA 的配置支持按 Asset/Owner/Collection 验证
-- 适用于灵魂绑定 NFT、条件转移等
-
-## 超出范围
-
-AppData 存储（参见 [AppData 插件](/zh/smart-contracts/core/external-plugins/app-data)）、内置插件验证（参见[插件概述](/zh/smart-contracts/core/plugins)）和链下验证逻辑。
-
-## 快速开始
-
-**跳转到：** [添加到 Asset](#向-asset-添加-oracle-插件) · [添加到 Collection](#向-collection-添加-oracle-插件) · [默认 Oracles](#metaplex-部署的默认-oracles)
-
-1. 创建具有适当结构的 Oracle 账户（外部）
-2. 向 Asset/Collection 添加 Oracle 插件适配器
-3. 配置生命周期检查和结果偏移量
-4. 更新 Oracle 账户以动态更改验证
-
-## 什么是 Oracle 插件？
-
-Oracle 插件是由权限在 MPL Core Asset 或 Collection 外部创建的链上账户。如果 Asset 或 Collection 启用了 Oracle 适配器并分配了 Oracle 账户，MPL Core 程序将加载 Oracle 账户以对生命周期事件进行验证。
-
-Oracle 插件存储与 `create`、`transfer`、`burn` 和 `update` 这 4 个生命周期事件相关的数据，可以配置为执行 **Reject** 验证。
-
-更新和更改 Oracle 账户的能力提供了强大的交互式生命周期体验。
-
-## 适用于
-
+## Summary
+The **Oracle Plugin** validates lifecycle events against external Oracle accounts. The Oracle account stores validation results that the Core program reads to approve or reject operations.
+- Can reject create, transfer, burn, and update events
+- Oracle account is external to the Asset (you control it)
+- Dynamic: update the Oracle account to change behavior
+- Supports PDA derivation for per-asset or per-owner oracles
+## Out of Scope
+AppData storage (see [AppData Plugin](/smart-contracts/core/external-plugins/app-data)), built-in freeze behavior (see [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate)), and off-chain oracles.
+## Quick Start
+**Jump to:** [Oracle Account Structure](#on-chain-oracle-account-structure) · [Create with Oracle](#creating-an-asset-with-the-oracle-plugin) · [Add to Asset](#adding-an-oracle-plugin-to-an-asset) · [Default Oracles](#default-oracles-deployed-by-metaplex)
+1. Deploy an Oracle account with validation rules
+2. Add Oracle plugin adapter to Asset/Collection
+3. Configure lifecycle checks (which events to validate)
+4. Update Oracle account to change validation behavior dynamically
+## What is an Oracle Plugin?
+An Oracle Plugin is an onchain account that is created by the authority externally from the MPL Core Asset or Collection. If an Asset or Collection has an Oracle Adapter enabled and an Oracle Account assigned to it the Oracle Account will be loaded by the MPL Core program for validations against lifecycle events.
+The Oracle Plugin stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can be configured to perform a **Reject** validation.
+The ability to update and change the Oracle Account provides a powerful and interactive lifecycle experience.
+## Works With
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-
-## 允许的验证
-
-以下验证结果可以从 Oracle 账户返回到 Oracle 插件。
-
+## Allowed Validations
+The following validation results can be returned from the Oracle Account to the Oracle Plugin.
 |             |     |
 | ----------- | --- |
 | Can Approve | ❌  |
 | Can Reject  | ✅  |
 | Can Pass    | ❌  |
-
-## 链上 Oracle 账户结构
-
-Oracle 账户应具有以下链上账户结构。
-
-{% dialect-switcher title="Oracle 账户的链上账户结构" %}
+## On Chain Oracle Account Structure
+The Oracle Account should have the following onchain account structure.
+{% dialect-switcher title="On Chain Account Struct of Oracle Account" %}
 {% dialect title="Anchor" id="rust-anchor" %}
-
 ```rust
 #[account]
 pub struct Validation {
     pub validation: OracleValidation,
 }
-
 impl Validation {
     pub fn size() -> usize {
         8 // anchor discriminator
         + 5 // validation
     }
 }
-
 pub enum OracleValidation {
     Uninitialized,
     V1 {
@@ -91,31 +90,25 @@ pub enum OracleValidation {
         update: ExternalValidationResult,
     },
 }
-
 pub enum ExternalValidationResult {
     Approved,
     Rejected,
     Pass,
 }
 ```
-
 {% /dialect %}
-
 {% dialect title="Shank" id="rust-shank" %}
-
 ```rust
 #[account]
 pub struct Validation {
     pub validation: OracleValidation,
 }
-
 impl Validation {
     pub fn size() -> usize {
         1 // shank discriminator
         + 5 // validation
     }
 }
-
 pub enum OracleValidation {
     V1 {
         create: ExternalValidationResult,
@@ -124,167 +117,135 @@ pub enum OracleValidation {
         update: ExternalValidationResult,
     },
 }
-
 pub enum ExternalValidationResult {
     Approved,
     Rejected,
     Pass,
 }
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-### Oracle 账户偏移量
-
-由于账户所需的判别器大小不同，账户结构在不同账户框架（Anchor、Shank 等）之间会略有不同：
-
-- 如果 `OracleValidation` 结构位于 Oracle 账户数据部分的开头，则为 `ValidationResultsOffset` 选择 `NoOffset`。
-- 如果 Oracle 账户仅包含 `OracleValidation` 结构但由 Anchor 程序管理，则为 `ValidationResultsOffset` 选择 `Anchor`，以便结构可以位于 Anchor 账户判别器之后。
-- 如果 `OracleValidation` 结构位于 Oracle 账户中的其他偏移量位置，请使用 `Custom` 偏移量。
-
+### Oracle Account Offset
+The account structure will differ slightly between account frameworks (Anchor, Shank, etc.) due to the discriminator sizes needed for accounts:
+- If the `OracleValidation` struct is located at the beginning of the data section for the Oracle account, then choose `NoOffset` for the `ValidationResultsOffset`.
+- If the Oracle account only contains the `OracleValidation` struct but is managed by an Anchor program, select `Anchor` for `ValidationResultsOffset` so that the struct can be located after the Anchor account discriminator.
+- If the `OracleValidation` struct is located at some other offset in the Oracle account, use the `Custom` offset.
 {% dialect-switcher title="resultsOffset / result_offset" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```js
 const resultsOffset: ValidationResultsOffset =
   | { type: 'NoOffset' }
   | { type: 'Anchor' }
   | { type: 'Custom'; offset: bigint };
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 pub enum ValidationResultsOffset {
     NoOffset,
     Anchor,
     Custom(u64),
 }
-
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-## 更新 Oracle 账户
-
-由于 Oracle 账户由创建者/开发者创建和维护，`OracleValidation` 结构可以随时更新，允许生命周期是动态的。
-
-## Oracle 适配器
-
-Oracle 适配器接受以下参数和数据。
-
-### 链上结构
-
+## Updating the Oracle Account
+Because the Oracle Account is created and maintained by the creator/developer the `OracleValidation` struct can be updated at anytime allowing lifecycles to be dynamic.
+## The Oracle Adapter
+The Oracle Adapter accepts the following arguments and data.
+### On Chain Struct
 ```rust
 pub struct Oracle {
-    /// Oracle 的地址，或者如果使用 `pda` 选项，
-    /// 则为用于派生 PDA 的程序 ID。
+    /// The address of the oracle, or if using the `pda` option,
+    /// a program ID from which to derive a PDA.
     pub base_address: Pubkey,
-    /// 可选的账户规范（从 `base_address` 或其他
-    /// 可用账户规范派生的 PDA）。请注意，即使使用此
-    /// 配置，适配器仍然只指定一个 Oracle 账户。
+    /// Optional account specification (PDA derived from `base_address` or other
+    /// available account specifications).  Note that even when this
+    /// configuration is used there is still only one
+    /// Oracle account specified by the adapter.
     pub base_address_config: Option<ExtraAccount>,
-    /// Oracle 账户中的验证结果偏移量。
-    /// 默认值为 `ValidationResultsOffset::NoOffset`
+    /// Validation results offset in the Oracle account.
+    /// Default is `ValidationResultsOffset::NoOffset`
     pub results_offset: ValidationResultsOffset,
 }
 ```
-
-### 声明 Oracle 插件的 PDA
-
-**Oracle 插件适配器**的默认行为是向适配器提供一个静态 `base_address`，然后适配器可以从中读取并提供生成的验证结果。
-
-如果您希望让 **Oracle 插件适配器**更加动态，您可以将 `program_id` 作为 `base_address` 传入，然后传入一个 `ExtraAccount`，可用于派生一个或多个指向 **Oracle 账户**地址的 PDA。这允许 Oracle 适配器从多个派生的 Oracle 账户访问数据。请注意，使用 `ExtraAccount` 时还有其他高级非 PDA 规范可用。
-
-#### ExtraAccounts 选项列表
-
-对于集合中所有资产都相同的额外账户示例是 `PreconfiguredCollection` PDA，它使用集合的 Pubkey 来派生 Oracle 账户。更动态的额外账户示例是 `PreconfiguredOwner` PDA，它使用所有者 pubkey 来派生 Oracle 账户。
-
+### Declaring the PDA of an Oracle Plugin
+The default behavior of the **Oracle Plugin Adapter** is to supply the adapter with a static `base_address` which the adapter can then read from and provide the resulting validation results.
+If you wish to get more dynamic with the **Oracle Plugin Adapter** you can pass in your `program_id` as the `base_address` and then an `ExtraAccount`, which can be used to derive one or more PDAs pointing to **Oracle Account** addresses. This allows the Oracle Adapter to access data from multiple derived Oracle Accounts. Note that there are other advanced non-PDA specifications also available when using `ExtraAccount`.
+#### List of ExtraAccounts Options
+An example of an extra account that is the same for all assets in a collection is the `PreconfiguredCollection` PDA, which uses the collection's Pubkey to derive the Oracle account. An example of more dynamic extra account is the `PreconfiguredOwner` PDA, which uses the owner pubkey to derive the Oracle account.
 ```rust
 pub enum ExtraAccount {
-    /// 基于程序的 PDA，seeds 为 \["mpl-core"\]
+    /// Program-based PDA with seeds \["mpl-core"\]
     PreconfiguredProgram {
-        /// 账户是签名者
+        /// Account is a signer
         is_signer: bool,
-        /// 账户可写
+        /// Account is writable.
         is_writable: bool,
     },
-    /// 基于集合的 PDA，seeds 为 \["mpl-core", collection_pubkey\]
+    /// Collection-based PDA with seeds \["mpl-core", collection_pubkey\]
     PreconfiguredCollection {
-        /// 账户是签名者
+        /// Account is a signer
         is_signer: bool,
-        /// 账户可写
+        /// Account is writable.
         is_writable: bool,
     },
-    /// 基于所有者的 PDA，seeds 为 \["mpl-core", owner_pubkey\]
+    /// Owner-based PDA with seeds \["mpl-core", owner_pubkey\]
     PreconfiguredOwner {
-        /// 账户是签名者
+        /// Account is a signer
         is_signer: bool,
-        /// 账户可写
+        /// Account is writable.
         is_writable: bool,
     },
-    /// 基于接收者的 PDA，seeds 为 \["mpl-core", recipient_pubkey\]
-    /// 如果生命周期事件没有接收者，派生将失败。
+    /// Recipient-based PDA with seeds \["mpl-core", recipient_pubkey\]
+    /// If the lifecycle event has no recipient the derivation will fail.
     PreconfiguredRecipient {
-        /// 账户是签名者
+        /// Account is a signer
         is_signer: bool,
-        /// 账户可写
+        /// Account is writable.
         is_writable: bool,
     },
-    /// 基于资产的 PDA，seeds 为 \["mpl-core", asset_pubkey\]
+    /// Asset-based PDA with seeds \["mpl-core", asset_pubkey\]
     PreconfiguredAsset {
-        /// 账户是签名者
+        /// Account is a signer
         is_signer: bool,
-        /// 账户可写
+        /// Account is writable.
         is_writable: bool,
     },
-    /// 基于用户指定 seeds 的 PDA。
+    /// PDA based on user-specified seeds.
     CustomPda {
-        /// 用于派生 PDA 的 seeds。
+        /// Seeds used to derive the PDA.
         seeds: Vec<Seed>,
-        /// 如果不是外部插件的基地址/程序 ID，则为程序 ID。
+        /// Program ID if not the base address/program ID for the external plugin.
         custom_program_id: Option<Pubkey>,
-        /// 账户是签名者
+        /// Account is a signer
         is_signer: bool,
-        /// 账户可写
+        /// Account is writable.
         is_writable: bool,
     },
-    /// 直接指定的地址。
+    /// Directly-specified address.
     Address {
-        /// 地址。
+        /// Address.
         address: Pubkey,
-        /// 账户是签名者
+        /// Account is a signer
         is_signer: bool,
-        /// 账户可写
+        /// Account is writable.
         is_writable: bool,
     },
 }
 ```
-
-## 创建和添加 Oracle 插件
-
-### 创建带有 Oracle 插件的 Asset
-
-{% dialect-switcher title="创建带有 Oracle 插件的 MPL Core Asset" %}
+## Creating and Adding Oracle Plugins
+### Creating an Asset with the Oracle Plugin
+{% dialect-switcher title="Create a MPL Core Asset with an Oracle Plugin" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
   create,
   CheckResult
 } from '@metaplex-foundation/mpl-core'
-
 const collectionSigner = generateSigner(umi)
-
 const oracleAccount = publicKey('11111111111111111111111111111111')
-
 const asset = await create(umi, {
     ... CreateAssetArgs,
     plugins: [
@@ -302,11 +263,8 @@ const asset = await create(umi, {
     ],
   });.sendAndConfirm(umi)
 ```
-
 {% /dialect  %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::CreateV2Builder,
@@ -318,15 +276,11 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn create_asset_with_oracle_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let payer = Keypair::new();
     let asset = Keypair::new();
-
     let oracle_plugin = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let create_asset_with_oracle_plugin_ix = CreateV2Builder::new()
     .asset(asset.pubkey())
     .payer(payer.pubkey())
@@ -345,46 +299,121 @@ pub async fn create_asset_with_oracle_plugin() {
         results_offset: Some(ValidationResultsOffset::Anchor),
     })])
     .instruction();
-
     let signers = vec![&asset, &payer];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let create_asset_with_oracle_plugin_tx = Transaction::new_signed_with_payer(
         &[create_asset_with_oracle_plugin_ix],
         Some(&payer.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&create_asset_with_oracle_plugin_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
-
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
 {% seperator h="6" /%}
-
-### 向 Asset 添加 Oracle 插件
-
-{% dialect-switcher title="向 Collection 添加 Oracle 插件" %}
+<!-- {% seperator h="6" /%}
+{% dialect-switcher title="lifecycleChecks / lifecycle_checks" %}
+{% dialect title="JavaScript" id="js" %}
+```js
+const lifecycleChecks: LifecycleChecks =  {
+    create: [CheckResult.CAN_REJECT],
+    transfer: [CheckResult.CAN_REJECT],
+    update: [CheckResult.CAN_REJECT],
+    burn: [CheckResult.CAN_REJECT],
+},
+```
+{% /dialect %}
+{% dialect title="Rust" id="rust" %}
+```rust
+pub lifecycle_checks: Vec<(HookableLifecycleEvent, ExternalCheckResult)>,
+pub enum HookableLifecycleEvent {
+    Create,
+    Transfer,
+    Burn,
+    Update,
+}
+pub struct ExternalCheckResult {
+    pub flags: u32,
+}
+```
+{% /dialect %}
+{% /dialect-switcher %}
+{% seperator h="6" /%}
+{% dialect-switcher title="pda: ExtraAccount / extra_account" %}
+{% dialect title="JavaScript" id="js" %}
+```js
+const pda: ExtraAccount =  {
+    type: {
+        "PreconfiguredProgram",
+        | "PreconfiguredCollection",
+        | "PreconfiguredOwner",
+        | "PreconfiguredRecipient",
+        | "PreconfiguredAsset",
+    }
+}
+There are two additional ExtraAccount types that take additional properties these are:
+const pda: ExtraAccount = {
+    type: 'CustomPda',
+    seeds: [],
+}
+const pda: ExtraAccount = {
+    type: 'Address',
+    address: publickey("33333333333333333333333333333333") ,
+}
+```
+{% /dialect %}
+{% dialect title="Rust" id="rust" %}
+```rust
+pub pda: Option<ExtraAccount>
+pub enum ExtraAccount {
+    PreconfiguredProgram {
+        is_signer: bool,
+        is_writable: bool,
+    },
+    PreconfiguredCollection {
+        is_signer: bool,
+        is_writable: bool,
+    },
+    PreconfiguredOwner {
+        is_signer: bool,
+        is_writable: bool,
+    },
+    PreconfiguredRecipient {
+        is_signer: bool,
+        is_writable: bool,
+    },
+    PreconfiguredAsset {
+        is_signer: bool,
+        is_writable: bool,
+    },
+    CustomPda {
+        seeds: Vec<Seed>,
+        is_signer: bool,
+        is_writable: bool,
+    },
+    Address {
+        address: Pubkey,
+        is_signer: bool,
+        is_writable: bool,
+    },
+}
+```
+{% /dialect %}
+{% /dialect-switcher %} -->
+### Adding an Oracle Plugin to An Asset
+{% dialect-switcher title="Adding an Oracle Plugin to a Collection" %}
 {% dialect title="Javascript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin, CheckResult } from '@metaplex-foundation/mpl-core'
-
 const asset = publicKey('11111111111111111111111111111111')
 const oracleAccount = publicKey('22222222222222222222222222222222')
-
 addPlugin(umi, {
   asset,
   plugin: {
@@ -399,10 +428,8 @@ addPlugin(umi, {
   },
 })
 ```
-
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::AddExternalPluginAdapterV1Builder,
@@ -414,14 +441,11 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn add_oracle_plugin_to_asset() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
     let oracle_plugin = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-
     let add_oracle_plugin_to_asset_ix = AddExternalPluginAdapterV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
@@ -436,46 +460,34 @@ pub async fn add_oracle_plugin_to_asset() {
             init_plugin_authority: None,
         }))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let add_oracle_plugin_to_asset_tx = Transaction::new_signed_with_payer(
         &[add_oracle_plugin_to_asset_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&add_oracle_plugin_to_asset_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-### 创建带有 Oracle 插件的 Collection
-
-{% dialect-switcher title="创建带有 Oracle 插件的 Collection" %}
+### Creating a Collection with an Oracle Plugin
+{% dialect-switcher title="Creating a Collection with an Oracle Plugin" %}
 {% dialect title="Javascript" id="js" %}
-
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
   create,
   CheckResult
   } from '@metaplex-foundation/mpl-core'
-
 const collectionSigner = generateSigner(umi)
 const oracleAccount = publicKey('11111111111111111111111111111111')
-
 const collection = await createCollection(umi, {
     ... CreateCollectionArgs,
     plugins: [
@@ -493,10 +505,8 @@ const collection = await createCollection(umi, {
     ],
   });.sendAndConfirm(umi)
 ```
-
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::CreateCollectionV2Builder,
@@ -508,15 +518,11 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn create_collection_with_oracle_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let payer = Keypair::new();
     let collection = Keypair::new();
-
     let onchain_oracle_plugin = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let create_collection_with_oracle_plugin_ix = CreateCollectionV2Builder::new()
         .collection(collection.pubkey())
         .payer(payer.pubkey())
@@ -533,43 +539,31 @@ pub async fn create_collection_with_oracle_plugin() {
             results_offset: Some(ValidationResultsOffset::Anchor),
         })])
         .instruction();
-
     let signers = vec![&collection, &payer];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let create_collection_with_oracle_plugin_tx = Transaction::new_signed_with_payer(
         &[create_collection_with_oracle_plugin_ix],
         Some(&payer.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&create_collection_with_oracle_plugin_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
-
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### 向 Collection 添加 Oracle 插件
-
-{% dialect-switcher title="向 Collection 添加 Oracle 插件" %}
+### Adding an Oracle Plugin to a Collection
+{% dialect-switcher title="Adding an Oracle Plugin to a Collection" %}
 {% dialect title="Javascript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addCollectionPlugin, CheckResult } from '@metaplex-foundation/mpl-core'
-
 const collection = publicKey('11111111111111111111111111111111')
 const oracleAccount = publicKey('22222222222222222222222222222222')
-
 await addCollectionPlugin(umi, {
   collection: collection,
   plugin: {
@@ -584,10 +578,8 @@ await addCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::AddCollectionExternalPluginAdapterV1Builder,
@@ -599,14 +591,11 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn add_oracle_plugin_to_collection() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
     let oracle_plugin = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-
     let add_oracle_plugin_to_collection_ix = AddCollectionExternalPluginAdapterV1Builder::new()
         .collection(collection)
         .payer(authority.pubkey())
@@ -621,115 +610,73 @@ pub async fn add_oracle_plugin_to_collection() {
             init_plugin_authority: None,
         }))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let add_oracle_plugin_to_collection_tx = Transaction::new_signed_with_payer(
         &[add_oracle_plugin_to_collection_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&add_oracle_plugin_to_collection_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-## Metaplex 部署的默认 Oracles
-
-在某些罕见情况下，如[灵魂绑定 NFT](/zh/smart-contracts/core/guides/create-soulbound-nft-asset)，拥有始终拒绝或批准生命周期事件的 Oracles 可能很有用。为此，以下 Oracles 已部署，任何人都可以使用：
-
-- **Transfer Oracle**：始终拒绝转移。`AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
-
-- **Update Oracle**：始终拒绝更新。`6cKyMV4toCVCEtvh6Sh5RQ1fevynvBDByaQP4ufz1Zj6`
-
-- **Create Oracle**：始终拒绝创建。`2GhRFi9RhqmtEFWCwrAHC61Lti3jEKuCKPcZTfuujaGr`
-
-## 示例用法/想法
-
-### 示例 1
-
-**资产在 UTC 时间中午到午夜期间不可转移。**
-
-- 在您选择的程序中创建链上 Oracle 插件。
-- 向 Asset 或 Collection 添加 Oracle 插件适配器，指定您希望进行拒绝验证的生命周期事件。
-- 您编写一个 cron，在中午和午夜写入和更新您的 Oracle 插件，翻转位验证从 true/false/true。
-
-### 示例 2
-
-**只有当地板价高于 $10 且资产具有属性"红色帽子"时，才能更新资产。**
-
-- 在您选择的程序中创建链上 Oracle 插件。
-- 向 Asset 添加 Oracle 插件适配器，指定您希望进行拒绝验证的生命周期事件。
-- 开发者编写可以写入 Oracle 账户的 Anchor 程序，派生相同的 PRECONFIGURED_ASSET 账户。
-- 开发者编写 web2 脚本，监控市场上的价格，并使用已知的具有"Red Hat"特征的 Assets 哈希列表更新并写入相关的 Oracle 账户。
-
-## 常见错误
-
+## Default Oracles deployed by Metaplex
+In some rare cases like [Soulbound NFT](/smart-contracts/core/guides/create-soulbound-nft-asset) it might be useful to have Oracles that always Deny or Approve a lifecycle event. For those the following Oracles have been deployed and can be used by anyone:
+- **Transfer Oracle**: Always denies transferring. `AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
+- **Update Oracle**: Always denies updating. `6cKyMV4toCVCEtvh6Sh5RQ1fevynvBDByaQP4ufz1Zj6`
+- **Create Oracle**: Always denies creating. `2GhRFi9RhqmtEFWCwrAHC61Lti3jEKuCKPcZTfuujaGr`
+## Example Usage/Ideas
+### Example 1
+**Assets to be not transferable during the hours of noon-midnight UTC.**
+- Create onchain Oracle Plugin in a program of your choice.
+- Add the Oracle Plugin Adapter to an Asset or Collection specifying the lifecycle events you wish to have rejection validation over.
+- You write a cron that writes and updates to your Oracle Plugin at noon and midnight flipping a bit validation from true/false/true.
+### Example 2
+**Assets can only be updated if the floor price is above $10 and the asset has attribute “red hat”.**
+- Create onchain Oracle Plugin in a program of your choice.
+- Add the Oracle Plugin Adapter to Asset specifying the lifecycle events you wish to have rejection validation over.
+- Dev writes Anchor program that can write to the Oracle Account that derive the same PRECONFIGURED_ASSET accounts
+- Dev writes web2 script that watches prices on a marketplace, AND with known hashlist of Assets with the 'Red Hat' trait red updates and writes to the relevant Oracle Accounts.
+## Common Errors
+### `Oracle validation failed`
+The Oracle account returned a rejection. Check your Oracle account state and validation logic.
 ### `Oracle account not found`
-
-Oracle 基地址不存在或没有正确的结构。
-
-### `Invalid validation offset`
-
-在指定的偏移量处找不到 OracleValidation 结构。对于 Anchor 程序使用 `Anchor` 偏移量。
-
-### `Lifecycle check rejected`
-
-Oracle 账户为该生命周期事件返回 `Rejected`。
-
-## 注意事项
-
-- Oracles 只能拒绝，不能批准
-- 更新 Oracle 账户会立即更改验证
-- PreconfiguredAsset/Owner/Collection 支持按 Asset 验证
-- Metaplex 部署的默认 Oracles 支持灵魂绑定 NFT
-
+The Oracle account address is invalid or doesn't exist. Verify the base address and any PDA derivation.
+### `Invalid results offset`
+The ValidationResultsOffset doesn't match your Oracle account structure. Use `Anchor` for Anchor programs, `NoOffset` for raw accounts.
+## Notes
+- Oracle accounts are external—you deploy and maintain them
+- Validation is read-only: Core reads the Oracle, doesn't write to it
+- Use cron jobs or event listeners to update Oracle state dynamically
+- PDA derivation allows per-asset, per-owner, or per-collection oracles
 ## FAQ
-
-### Oracle 可以批准创建/转移/更新/销毁吗？
-
-不能。Oracles **只能拒绝**。这是有意的安全设计——外部账户不能单方面批准生命周期事件。
-
-### Oracle 账户在哪里创建？
-
-Oracle 账户在 MPL Core 外部创建——通常在自定义 Anchor 程序中。它们必须遵循正确的 `OracleValidation` 结构。
-
-### 我可以对不同的 Assets 进行不同的验证吗？
-
-可以。使用 `PreconfiguredAsset`、`PreconfiguredOwner` 或 `CustomPda` 为每个 Asset 的验证派生唯一的 Oracle 账户。
-
-### 如何创建灵魂绑定 NFT？
-
-使用 Metaplex 的默认 Transfer Oracle (`AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`) 始终拒绝转移。
-
-## 术语表
-
-| 术语 | 定义 |
+### Can Oracle plugins approve transfers, or only reject?
+Oracle plugins can only reject or pass. They cannot force-approve transfers that other plugins reject.
+### How do I create time-based transfer restrictions?
+Deploy an Oracle account and use a cron job to update the validation result at specific times. See Example 1 above.
+### Can I use one Oracle for multiple Assets?
+Yes. Use a static base address for a single Oracle, or use PDA derivation with `PreconfiguredCollection` for collection-wide validation.
+### What's the difference between Oracle and Freeze Delegate?
+Freeze Delegate is built-in and binary (frozen/unfrozen). Oracle allows custom logic—time-based, price-based, or any condition you implement.
+### Do I need to write a Solana program for Oracle?
+Yes. The Oracle account must be a Solana account with the correct structure. You can use Anchor or native Rust. See the [Oracle Plugin Example](/smart-contracts/core/guides/oracle-plugin-example) guide.
+## Glossary
+| Term | Definition |
 |------|------------|
-| **Oracle** | 存储验证状态的外部链上账户 |
-| **ValidationResultsOffset** | Oracle 账户中数据开始的位置（NoOffset、Anchor、Custom） |
-| **ExternalCheckResult** | Rejected、Approved 或 Pass 验证结果 |
-| **ExtraAccount** | 用于动态 Oracle 地址的 PDA 配置 |
-| **生命周期事件** | 可验证的操作：create、transfer、update、burn |
-
-## 相关页面
-
-- [外部插件概述](/zh/smart-contracts/core/external-plugins/overview) - 理解外部插件
-- [AppData 插件](/zh/smart-contracts/core/external-plugins/app-data) - 数据存储而非验证
-- [创建灵魂绑定 NFT](/zh/smart-contracts/core/guides/create-soulbound-nft-asset) - 使用 Oracle 实现不可转移代币
-
----
-
-*由 Metaplex Foundation 维护 · 最后验证于 2026 年 1 月 · 适用于 @metaplex-foundation/mpl-core*
+| **Oracle Account** | External Solana account storing validation results |
+| **Oracle Adapter** | Plugin component attached to Asset referencing the Oracle |
+| **ValidationResultsOffset** | Byte offset to locate validation data in Oracle account |
+| **ExtraAccount** | PDA derivation configuration for dynamic Oracle addressing |
+| **Lifecycle Check** | Configuration specifying which events the Oracle validates |
+## Related Pages
+- [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
+- [AppData Plugin](/smart-contracts/core/external-plugins/app-data) - Data storage instead of validation
+- [Oracle Plugin Example](/smart-contracts/core/guides/oracle-plugin-example) - Complete implementation guide
+- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Built-in freeze alternative

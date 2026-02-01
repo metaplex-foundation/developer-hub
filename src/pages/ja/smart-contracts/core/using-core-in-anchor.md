@@ -1,83 +1,77 @@
 ---
-title: AnchorでMetaplex Coreを使う
-metaTitle: AnchorでMetaplex Coreを使う | Metaplex Core
-description: Metaplex CoreをAnchorプログラムに統合します。オンチェーンNFT操作のためのCPI呼び出し、アカウントデシリアライズ、プラグインアクセスを学びます。
+title: Using Metaplex Core in Anchor
+metaTitle: Using Metaplex Core in Anchor | Metaplex Core
+description: Integrate Metaplex Core into Anchor programs. Learn CPI calls, account deserialization, and plugin access for on-chain NFT operations.
+updated: '01-31-2026'
+keywords:
+  - Core Anchor
+  - mpl-core CPI
+  - Anchor NFT
+  - on-chain Core
+about:
+  - Anchor integration
+  - CPI patterns
+  - On-chain development
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+faqs:
+  - q: Do I need the anchor feature flag?
+    a: Yes, for direct deserialization in Accounts structs. Without it, use from_bytes() manually.
+  - q: How do I check if a plugin exists?
+    a: Use fetch_plugin() which returns Option - it won't throw an error if the plugin doesn't exist.
+  - q: Can I access external plugins (Oracle, AppData)?
+    a: Yes. Use fetch_external_plugin() instead of fetch_plugin() with the appropriate key.
+  - q: Where can I find all available instructions?
+    a: See the mpl-core docs.rs instructions module for the complete API reference.
 ---
-
-Anchorを使用してCore Assetと対話する**オンチェーンプログラム**を構築します。このガイドでは、インストール、アカウントのデシリアライズ、プラグインアクセス、CPIパターンをカバーします。 {% .lead %}
-
-{% callout title="学習内容" %}
-
-- AnchorプロジェクトでMPL-Coreをインストールして設定する
-- プログラム内でCore AssetとCollectionをデシリアライズする
-- プラグインデータ（Attributes、Freezeなど）にアクセスする
-- Assetを作成、転送、管理するためのCPI呼び出しを行う
-
+Build **on-chain programs** that interact with Core Assets using Anchor. This guide covers installation, account deserialization, plugin access, and CPI patterns. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Install and configure mpl-core in Anchor projects
+- Deserialize Core Assets and Collections in your programs
+- Access plugin data (Attributes, Freeze, etc.)
+- Make CPI calls to create, transfer, and manage Assets
 {% /callout %}
-
-## 概要
-
-`mpl-core` RustクレートはAnchorプログラムからCoreと対話するために必要なすべてを提供します。ネイティブなAnchorアカウントデシリアライズのために`anchor`機能フラグを有効にしてください。
-
-- `features = ["anchor"]`で`mpl-core`を追加
-- Accounts構造体でAsset/Collectionをデシリアライズ
-- プラグインデータを読み取るために`fetch_plugin()`を使用
-- CPIビルダーがインストラクション呼び出しを簡素化
-
-## 対象外
-
-クライアントサイドJavaScript SDK（[JavaScript SDK](/ja/smart-contracts/core/sdk/javascript)を参照）、スタンドアロンRustクライアント（[Rust SDK](/ja/smart-contracts/core/sdk/rust)を参照）、クライアントからのCore Asset作成。
-
-## クイックスタート
-
-**移動先:** [インストール](#インストール) · [アカウントのデシリアライズ](#アカウントのデシリアライズ) · [プラグインアクセス](#プラグインのデシリアライズ) · [CPI例](#cpiインストラクションビルダー)
-
-1. Cargo.tomlに`mpl-core = { version = "x.x.x", features = ["anchor"] }`を追加
-2. `Account<'info, BaseAssetV1>`でAssetをデシリアライズ
-3. `fetch_plugin::<BaseAssetV1, PluginType>()`でプラグインにアクセス
-4. `CreateV2CpiBuilder`、`TransferV1CpiBuilder`などでCPI呼び出しを行う
-
-## インストール
-
-AnchorプロジェクトでCoreを使い始めるには、まず最新のクレートを追加します：
-
+## Summary
+The `mpl-core` Rust crate provides everything needed to interact with Core from Anchor programs. Enable the `anchor` feature flag for native Anchor account deserialization.
+- Add `mpl-core` with `features = ["anchor"]`
+- Deserialize Assets/Collections in Accounts structs
+- Use `fetch_plugin()` to read plugin data
+- CPI builders simplify instruction calls
+## Out of Scope
+Client-side JavaScript SDK (see [JavaScript SDK](/smart-contracts/core/sdk/javascript)), standalone Rust clients (see [Rust SDK](/smart-contracts/core/sdk/rust)), and creating Core Assets from clients.
+## Quick Start
+**Jump to:** [Installation](#installation) · [Account Deserialization](#accounts-deserialization) · [Plugin Access](#deserializing-plugins) · [CPI Examples](#the-cpi-instruction-builders)
+1. Add `mpl-core = { version = "x.x.x", features = ["anchor"] }` to Cargo.toml
+2. Deserialize Assets with `Account<'info, BaseAssetV1>`
+3. Access plugins with `fetch_plugin::<BaseAssetV1, PluginType>()`
+4. Make CPI calls with `CreateV2CpiBuilder`, `TransferV1CpiBuilder`, etc.
+## Installation
+To start using Core in an Anchor project, first ensure that you have added the latest version of the crate to your project by running:
 ```rust
 cargo add mpl-core
 ```
-
-あるいは`cargo.toml`にバージョンを直接記述します：
-
+Alternatively, you can manually specify the version in your cargo.toml file:
 ```rust
 [dependencies]
 mpl-core = "x.x.x"
 ```
-
-### 機能フラグ
-
-Coreクレートでは、`mpl-core`の`anchor`機能フラグを有効化してAnchor向けの機能にアクセスできます。`cargo.toml`で次のように設定します：
-
+### Feature Flag
+With the Core crate you can enable the anchor feature flag in the mpl-core crate to access Anchor-specific features by modifying the dependency entry in your `cargo.toml`:
 ```rust
 [dependencies]
 mpl-core = { version = "x.x.x", features = [ "anchor" ] }
 ```
-
-### Core Rust SDKのモジュール
-
-Core Rust SDKは次のモジュールで構成されています：
-
-- `accounts`: プログラムのアカウント
-- `errors`: プログラムのエラー
-- `instructions`: インストラクションの作成、引数、CPIインストラクション
-- `types`: プログラムで使用される型
-
-各インストラクションの呼び出し方法の詳細は、[mpl-core docs.rs](https://docs.rs/mpl-core/0.7.2/mpl_core/)を参照するか、エディタで該当インストラクションを`Cmd + 左クリック（WindowsはCtrl）`して展開できます。
-
-## アカウントのデシリアライズ
-
-### デシリアライズ可能なアカウント
-
-`mpl-core`クレートでデシリアライズできるアカウント構造体：
-
+### Core Rust SDK Modules
+The Core Rust SDK is organized into several modules:
+- `accounts`: represents the program's accounts.
+- `errors`: enumerates the program's errors.
+- `instructions`: facilitates the creation of instructions, instruction arguments, and CPI instructions.
+- `types`: represents types used by the program.
+For more detailed information on how different instructions are called and used, refer to the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/) or you can use `cmd + left click` (mac) or `ctrl + left click` (windows) on the instruction to expand it.
+## Accounts Deserialization
+### Deserializable Accounts
+The following account structs are available for deserialization within the `mpl-core` crate:
 ```rust
 - BaseAssetV1
 - BaseCollectionV1
@@ -85,20 +79,13 @@ Core Rust SDKは次のモジュールで構成されています：
 - PluginHeaderV1
 - PluginRegistryV1
 ```
-
-AnchorでCoreアカウントをデシリアライズする方法は2つあります。
-
-- AnchorのAccountsリスト構造体を使う（多くの場合推奨）
-- インストラクション関数の本体で`<Account>::from_bytes()`を直接呼ぶ
-
-### AnchorのAccountsリスト方式
-
-`anchor`フラグを有効にすると、`BaseAssetV1`と`BaseCollectionV1`をAccountsリスト構造体内で直接デシリアライズできます。
-
-{% dialect-switcher title="Accountsのデシリアライズ" %}
-
+There are two ways to deserialize Core accounts within Anchor. 
+- Using Anchors Account list struct (recommended in most cases),
+- Directly in the instruction functions body using `<Account>::from_bytes()`.
+### Anchor Accounts List Method
+By activating the `anchor flag` you'll be able to deserialize both the `BaseAssetV1` and `BaseCollectionV1` accounts directly in the Anchor Accounts list struct:
+{% dialect-switcher title="Accounts Deserialization" %}
 {% dialect title="Asset" id="asset" %}
-
 ```rust
 #[derive(Accounts)]
 pub struct ExampleAccountStruct<'info> {
@@ -106,11 +93,8 @@ pub struct ExampleAccountStruct<'info> {
     pub asset: Account<'info, BaseAssetV1>,
 }
 ```
-
 {% /dialect %}
-
 {% dialect title="Collection" id="collection" %}
-
 ```rust
 #[derive(Accounts)]
 pub struct ExampleAccountStruct<'info> {
@@ -118,83 +102,50 @@ pub struct ExampleAccountStruct<'info> {
     pub collection: Account<'info, BaseCollectionV1>,
 }
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-### from_bytes()方式
-
-`try_borrow_data()`でアセット/コレクションアカウント内部のデータを借用し、そのバイト列から構造体を生成します。
-
-{% dialect-switcher title="Accountsのデシリアライズ" %}
-
+### Account from_bytes() Method
+Borrow the data inside the asset/collection account using the `try_borrow_data()` function and create the asset/collection struct from those bytes:
+{% dialect-switcher title="Accounts Deserialization" %}
 {% dialect title="Asset" id="asset" %}
-
 ```rust
 let data = ctx.accounts.asset.try_borrow_data()?;
 let base_asset: BaseAssetV1 = BaseAssetV1::from_bytes(&data.as_ref())?;
 ```
-
 {% /dialect %}
-
 {% dialect title="Collection" id="collection" %}
-
 ```rust
 let data = ctx.accounts.collectino.try_borrow_data()?;
 let base_collection: BaseCollectionV1 = BaseCollectionV1::from_bytes(&data.as_ref())?;
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-### プラグインのデシリアライズ
-
-アセット/コレクション内の個別プラグインへアクセスするには`fetch_plugin()`を使用します。これは、該当プラグインのデータが存在しない場合でもハードエラーを投げず、`null`を返して存在確認を容易にします。
-
-`fetch_plugin()`はアセット/コレクション両方に利用でき、プラグイン型を指定してあらゆるプラグインに対応します。プラグイン内部のデータが必要な場合は、戻り値の中間の値を利用します。
-
-{% dialect-switcher title="プラグインのデシリアライズ" %}
-
+### Deserializing Plugins
+To access individual plugins within an Asset or Collection account, use the `fetch_plugin()` function. This function will either return the plugin data or a `null` response without throwing an hard error, allowing you to check if a plugin exists without having to access its data.
+The `fetch_plugin()` function is used for both Assets and Collections accounts and can handle every plugin type by specifying the appropriate typing. If you want to access the data inside a plugin, use the middle value returned by this function.
+{% dialect-switcher title="Plugins Deserialization" %}
 {% dialect title="Asset" id="asset" %}
-
 ```rust
 let (_, attribute_list, _) = fetch_plugin::<BaseAssetV1, Attributes>(&ctx.accounts.asset.to_account_info(), mpl_core::types::PluginType::Attributes)?;
 ```
-
 {% /dialect %}
-
 {% dialect title="Collection" id="collection" %}
-
 ```rust
 let (_, attribute_list, _) = fetch_plugin::<BaseCollectionV1, Attributes>(&ctx.accounts.asset.to_account_info(), mpl_core::types::PluginType::Attributes)?;
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-**注意**: `fetch_plugin()`は「外部プラグイン」には使いません。外部プラグインの読み取りには`fetch_external_plugin()`を使います（使い方は同様）。
-
-## CPIインストラクションビルダー
-
-Coreクレートの各インストラクションには**CpiBuilder**版が用意されています。`<インストラクション名>CpiBuilder`の形で使用し、多くのボイラープレートを隠蔽してコードを簡潔にします。
-
-Coreで利用可能なインストラクション一覧は[docs.rsの一覧](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)を参照してください。
-
-### CPI例
-
-例として`CreateCollectionV2CpiBuilder`を取り上げます。
-
-まず`CpiBuilder::new`にCoreプログラムの`AccountInfo`を渡して初期化します：
-
+**Note**: The `fetch_plugin()` function is only used for non-external plugins. To read external plugins, use the `fetch_external_plugin()` function, which operates in the same way as `fetch_plugin()`.
+## The CPI Instruction Builders
+Each instruction from the Core crate comes with a **CpiBuilder** version. The CpiBuilder version is created using `name of the instruction` + `CpiBuilder` and simplifies the code significantly abstracting a lot of boilerplate code away! 
+If you want to learn more about all the possible instruction available in Core, you can find them on the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)
+### CPI Example
+Let's take the `CreateCollectionV2CpiBuilder` instruction as an example
+Initialize the builder by calling `new` on the `CpiBuilder` and passing in the core program as `AccountInfo`:
 ```rust
 CreateCollectionV2CpiBuilder::new(ctx.accounts.mpl_core_program.to_account_info);
 ```
-
-次に、エディタでCmd+左クリック（WindowsはCtrl）して必要なCPI引数を確認し、ビルダーに渡して呼び出します：
-
+Use then Cmd + left click (Ctrl + left click for Windows users) to view all the CPI arguments required for this CPI call:
 ```rust
 CreateCollectionV2CpiBuilder::new(&ctx.accounts.core_program)
     .collection(&ctx.accounts.collection)
@@ -204,87 +155,57 @@ CreateCollectionV2CpiBuilder::new(&ctx.accounts.core_program)
     .uri("https://test.com".to_string())
     .invoke()?;
 ```
-
-## よくあるエラー
-
+## Common Errors
 ### `AccountNotInitialized`
-
-AssetまたはCollectionアカウントが存在しないか、まだ作成されていません。
-
+The Asset or Collection account doesn't exist or hasn't been created yet.
 ### `PluginNotFound`
-
-フェッチしようとしているプラグインがAssetに存在しません。`fetch_plugin()`で確認してください。安全に`None`を返します。
-
+The plugin you're trying to fetch doesn't exist on the Asset. Check with `fetch_plugin()` which returns `None` safely.
 ### `InvalidAuthority`
-
-署名者にこの操作の権限がありません。正しい権限が署名していることを確認してください。
-
-## 注意事項
-
-- ネイティブデシリアライズには常に`features = ["anchor"]`を有効にする
-- 組み込みプラグインには`fetch_plugin()`、外部プラグインには`fetch_external_plugin()`を使用
-- CPIビルダーはアカウント順序の複雑さを抽象化
-- 完全なAPIリファレンスは[docs.rs/mpl-core](https://docs.rs/mpl-core/)を確認
-
-## クイックリファレンス
-
-### 一般的なCPIビルダー
-
-| 操作 | CPIビルダー |
+The signer doesn't have permission for this operation. Verify the correct authority is signing.
+## Notes
+- Always enable `features = ["anchor"]` for native deserialization
+- Use `fetch_plugin()` for built-in plugins, `fetch_external_plugin()` for external
+- CPI builders abstract away account ordering complexity
+- Check [docs.rs/mpl-core](https://docs.rs/mpl-core/) for complete API reference
+## Quick Reference
+### Common CPI Builders
+| Operation | CPI Builder |
 |-----------|-------------|
-| Asset作成 | `CreateV2CpiBuilder` |
-| Collection作成 | `CreateCollectionV2CpiBuilder` |
-| Asset転送 | `TransferV1CpiBuilder` |
-| Assetバーン | `BurnV1CpiBuilder` |
-| Asset更新 | `UpdateV1CpiBuilder` |
-| プラグイン追加 | `AddPluginV1CpiBuilder` |
-| プラグイン更新 | `UpdatePluginV1CpiBuilder` |
-
-### アカウントタイプ
-
-| アカウント | 構造体 |
+| Create Asset | `CreateV2CpiBuilder` |
+| Create Collection | `CreateCollectionV2CpiBuilder` |
+| Transfer Asset | `TransferV1CpiBuilder` |
+| Burn Asset | `BurnV1CpiBuilder` |
+| Update Asset | `UpdateV1CpiBuilder` |
+| Add Plugin | `AddPluginV1CpiBuilder` |
+| Update Plugin | `UpdatePluginV1CpiBuilder` |
+### Account Types
+| Account | Struct |
 |---------|--------|
 | Asset | `BaseAssetV1` |
 | Collection | `BaseCollectionV1` |
 | Hashed Asset | `HashedAssetV1` |
 | Plugin Header | `PluginHeaderV1` |
 | Plugin Registry | `PluginRegistryV1` |
-
 ## FAQ
-
-### anchor機能フラグは必要ですか？
-
-はい、Accounts構造体での直接デシリアライズには必要です。それなしでは、手動で`from_bytes()`を使用してください。
-
-### プラグインが存在するかどうかを確認するにはどうすればよいですか？
-
-`fetch_plugin()`を使用してください。`Option`を返すため、プラグインが存在しない場合でもエラーをスローしません。
-
-### 外部プラグイン（Oracle、AppData）にアクセスできますか？
-
-はい。`fetch_plugin()`の代わりに適切なキーで`fetch_external_plugin()`を使用してください。
-
-### 利用可能なすべてのインストラクションはどこで見つけられますか？
-
-[mpl-core docs.rs instructionsモジュール](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)を参照してください。
-
-## 用語集
-
-| 用語 | 定義 |
+### Do I need the anchor feature flag?
+Yes, for direct deserialization in Accounts structs. Without it, use `from_bytes()` manually.
+### How do I check if a plugin exists?
+Use `fetch_plugin()` which returns `Option` - it won't throw an error if the plugin doesn't exist.
+### Can I access external plugins (Oracle, AppData)?
+Yes. Use `fetch_external_plugin()` instead of `fetch_plugin()` with the appropriate key.
+### Where can I find all available instructions?
+See the [mpl-core docs.rs instructions module](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html).
+## Glossary
+| Term | Definition |
 |------|------------|
-| **CPI** | Cross-Program Invocation - あるプログラムから別のプログラムを呼び出す |
-| **CpiBuilder** | CPI呼び出しを構築するためのヘルパー構造体 |
-| **BaseAssetV1** | デシリアライズ用のCore Assetアカウント構造体 |
-| **fetch_plugin()** | アカウントからプラグインデータを読み取る関数 |
-| **anchor feature** | Anchorネイティブデシリアライズを有効にするCargo機能 |
+| **CPI** | Cross-Program Invocation - calling one program from another |
+| **CpiBuilder** | Helper struct for constructing CPI calls |
+| **BaseAssetV1** | Core Asset account struct for deserialization |
+| **fetch_plugin()** | Function to read plugin data from accounts |
+| **anchor feature** | Cargo feature enabling Anchor-native deserialization |
+## Related Pages
+- [Anchor Staking Example](/smart-contracts/core/guides/anchor/anchor-staking-example) - Complete staking program
+- [Create Asset with Anchor](/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - Step-by-step guide
+- [Rust SDK](/smart-contracts/core/sdk/rust) - Standalone Rust client usage
+- [mpl-core docs.rs](https://docs.rs/mpl-core/) - Complete API reference
 
-## 関連ページ
-
-- [Anchorステーキング例](/ja/smart-contracts/core/guides/anchor/anchor-staking-example) - 完全なステーキングプログラム
-- [AnchorでCore Assetを作成](/ja/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - ステップバイステップガイド
-- [Rust SDK](/ja/smart-contracts/core/sdk/rust) - スタンドアロンRustクライアントの使用
-- [mpl-core docs.rs](https://docs.rs/mpl-core/) - 完全なAPIリファレンス
-
----
-
-*Metaplex Foundationによって管理・2026年1月最終確認・@metaplex-foundation/mpl-coreに適用*

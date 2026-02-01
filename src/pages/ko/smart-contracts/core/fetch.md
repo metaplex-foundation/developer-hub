@@ -1,121 +1,115 @@
 ---
-title: Asset 가져오기
-metaTitle: Asset 가져오기 | Metaplex Core
-description: Solana에서 Core NFT Asset과 Collection을 가져오는 방법을 알아보세요. 단일 Asset 검색, 소유자나 Collection별 쿼리, 빠른 인덱스 쿼리를 위한 DAS API 사용법.
+title: Fetching Assets
+metaTitle: Fetching Assets | Metaplex Core
+description: Learn how to fetch Core NFT Assets and Collections on Solana. Retrieve single assets, query by owner or collection, and use the DAS API for fast indexed queries.
+updated: '01-31-2026'
+keywords:
+  - fetch NFT
+  - query NFT
+  - DAS API
+  - get NFT by owner
+  - mpl-core fetch
+about:
+  - NFT queries
+  - DAS API
+  - Asset retrieval
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
+  - Configure Umi with your RPC endpoint
+  - Call fetchAsset(umi, publicKey) with the Asset address
+  - Access Asset properties like name, uri, owner, plugins
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+  - DAS-enabled RPC (optional)
+faqs:
+  - q: Should I use GPA or DAS for fetching multiple Assets?
+    a: Use DAS whenever possible. GPA queries scan all program accounts and can be slow and expensive on mainnet. DAS provides indexed queries that are faster and include off-chain metadata.
+  - q: How do I fetch an Asset's off-chain metadata?
+    a: The uri field contains the metadata URL. Fetch it separately with a standard HTTP request after getting the Asset.
+  - q: Can I fetch Assets across multiple Collections?
+    a: Not in a single query. Fetch each Collection's Assets separately and combine the results, or use DAS with custom filters.
+  - q: Why is skipDerivePlugins useful?
+    a: By default, fetchAsset derives Collection-level plugins onto the Asset. Setting skipDerivePlugins to true skips this step, returning only Asset-level plugins for faster fetches.
+  - q: How do I paginate large result sets?
+    a: GPA functions don't support built-in pagination. For large collections, use DAS which supports page and limit parameters, or implement client-side pagination.
 ---
-
-이 가이드에서는 Metaplex Core SDK를 사용하여 Solana 블록체인에서 **Core Asset과 Collection**을 가져오는 방법을 설명합니다. 개별 Asset 검색, 소유자나 Collection별 쿼리, 또는 DAS를 사용한 인덱스 쿼리를 수행합니다. {% .lead %}
-
-{% callout title="학습 내용" %}
-
-- 주소로 단일 Asset 또는 Collection 가져오기
-- 소유자, Collection, 업데이트 권한별로 Asset 쿼리
-- 빠른 인덱스 쿼리를 위해 DAS (Digital Asset Standard) API 사용
-- GPA vs DAS 성능 트레이드오프 이해
-
+This guide shows how to **fetch Core Assets and Collections** from the Solana blockchain using the Metaplex Core SDK. Retrieve individual Assets, query by owner or collection, or use DAS for indexed queries. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Fetch a single Asset or Collection by address
+- Query Assets by owner, collection, or update authority
+- Use DAS (Digital Asset Standard) API for fast indexed queries
+- Understand GPA vs DAS performance trade-offs
 {% /callout %}
-
-## 요약
-
-SDK 헬퍼 함수 또는 DAS API를 사용하여 Core Asset과 Collection을 가져옵니다. 사용 사례에 따라 적절한 방법을 선택하세요:
-
-- **단일 Asset/Collection**: public key로 `fetchAsset()` 또는 `fetchCollection()` 사용
-- **여러 Asset**: `fetchAssetsByOwner()`, `fetchAssetsByCollection()`, 또는 `fetchAssetsByUpdateAuthority()` 사용
-- **DAS API**: 더 빠른 성능을 위해 인덱스 쿼리 사용 (DAS 지원 RPC 필요)
-
-## 범위 외
-
-Token Metadata 가져오기 (mpl-token-metadata 사용), 압축 NFT 가져오기 (Bubblegum DAS 확장 사용), 오프체인 메타데이터 가져오기 (URI 직접 가져오기).
-
-## 빠른 시작
-
-**이동:** [단일 Asset](#단일-asset-또는-collection-가져오기) · [소유자별](#소유자별-asset-가져오기) · [Collection별](#collection별-asset-가져오기) · [DAS API](#das---digital-asset-standard-api)
-
-1. 설치: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
-2. RPC 엔드포인트로 Umi 구성
-3. Asset 주소로 `fetchAsset(umi, publicKey)` 호출
-4. Asset 속성에 액세스: `name`, `uri`, `owner`, `plugins`
-
-## 전제 조건
-
-- **Umi** - RPC 연결이 구성됨
-- **Asset/Collection 주소** - 가져올 public key
-- **DAS 지원 RPC** - 인덱스 쿼리용 (선택 사항이지만 권장)
-
-## 단일 Asset 또는 Collection 가져오기
-
-단일 Asset을 가져오려면 다음 함수를 사용할 수 있습니다:
-
+## Summary
+Fetch Core Assets and Collections using SDK helper functions or the DAS API. Choose the right method based on your use case:
+- **Single Asset/Collection**: Use `fetchAsset()` or `fetchCollection()` with the public key
+- **Multiple Assets**: Use `fetchAssetsByOwner()`, `fetchAssetsByCollection()`, or `fetchAssetsByUpdateAuthority()`
+- **DAS API**: Use indexed queries for faster performance (requires DAS-enabled RPC)
+## Out of Scope
+Token Metadata fetching (use mpl-token-metadata), compressed NFT fetching (use Bubblegum DAS extensions), and off-chain metadata fetching (fetch the URI directly).
+## Quick Start
+**Jump to:** [Single Asset](#fetch-a-single-asset-or-collection) · [By Owner](#fetch-assets-by-owner) · [By Collection](#fetch-assets-by-collection) · [DAS API](#das---digital-asset-standard-api)
+1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
+2. Configure Umi with your RPC endpoint
+3. Call `fetchAsset(umi, publicKey)` with the Asset address
+4. Access Asset properties: `name`, `uri`, `owner`, `plugins`
+## Prerequisites
+- **Umi** configured with an RPC connection
+- **Asset/Collection address** (public key) to fetch
+- **DAS-enabled RPC** for indexed queries (optional but recommended)
+## Fetch a Single Asset or Collection
+To fetch a single Asset the following function can be used:
 {% code-tabs-imported from="core/fetch-asset" frameworks="umi" /%}
-
 {% seperator h="6" /%}
-
-{% dialect-switcher title="Core Collection 가져오기" %}
+{% dialect-switcher title="Fetch a Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { fetchCollection } from '@metaplex-foundation/mpl-core'
-
 const asset = await fetchCollection(umi, collection.publicKey, {
   skipDerivePlugins: false,
 })
-
 console.log(asset)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```ts
 use std::str::FromStr;
 use mpl_core::Collection;
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::pubkey::Pubkey;
-
 pub async fn fetch_asset() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let collection_id = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let rpc_data = rpc_client.get_account_data(&collection_id).await.unwrap();
-
     let collection = Collection::from_bytes(&rpc_data).unwrap();
-
     print!("{:?}", collection)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## 여러 Asset 가져오기
-
-여러 Asset은 RPC 측면에서 상당히 비싸고 느릴 수 있는 `getProgramAccounts` (GPA) 호출을 사용하거나, 더 빠르지만 [특정 RPC 제공업체](/ko/rpc-providers)가 필요한 `Digital Asset Standard` API를 사용하여 가져올 수 있습니다.
-
-### 소유자별 Asset 가져오기
-
-{% dialect-switcher title="소유자별 Asset 가져오기" %}
-
+## Fetch Multiple Assets
+Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/rpc-providers).
+### Fetch Assets By Owner
+{% dialect-switcher title="fetch Assets by Owner" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { fetchAssetsByOwner } from '@metaplex-foundation/mpl-core'
-
 const owner = publicKey('11111111111111111111111111111111')
-
 const assetsByOwner = await fetchAssetsByOwner(umi, owner, {
   skipDerivePlugins: false,
 })
-
 console.log(assetsByOwner)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use std::str::FromStr;
 use mpl_core::{accounts::BaseAssetV1, types::Key, ID as MPL_CORE_ID};
@@ -125,12 +119,9 @@ use solana_client::{
     rpc_filter::{Memcmp, MemcmpEncodedBytes, RpcFilterType},
 };
 use solana_sdk::pubkey::Pubkey;
-
 pub async fn fetch_assets_by_owner() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let owner = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let rpc_data = rpc_client
         .get_program_accounts_with_config(
             &MPL_CORE_ID,
@@ -156,46 +147,31 @@ pub async fn fetch_assets_by_owner() {
         )
         .await
         .unwrap();
-
     let accounts_iter = rpc_data.into_iter().map(|(_, account)| account);
-
     let mut assets: Vec<BaseAssetV1> = vec![];
-
     for account in accounts_iter {
         let asset = BaseAssetV1::from_bytes(&account.data).unwrap();
         assets.push(asset);
     }
-
     print!("{:?}", assets)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### Collection별 Asset 가져오기
-
-{% dialect-switcher title="Collection별 Asset 가져오기" %}
-
+### Fetch Assets by Collection
+{% dialect-switcher title="Fetch Assets by Collection" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { fetchAssetsByCollection } from '@metaplex-foundation/mpl-core'
-
 const collection = publicKey('11111111111111111111111111111111')
-
 const assetsByCollection = await fetchAssetsByCollection(umi, collection, {
   skipDerivePlugins: false,
 })
-
 console.log(assetsByCollection)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```ts
 use mpl_core::{accounts::BaseAssetV1, types::Key, ID as MPL_CORE_ID};
 use solana_client::{
@@ -205,12 +181,9 @@ use solana_client::{
 };
 use solana_sdk::pubkey::Pubkey;
 use std::str::FromStr;
-
 pub async fn fetch_assets_by_collection() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let collection = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let rpc_data = rpc_client
         .get_program_accounts_with_config(
             &MPL_CORE_ID,
@@ -240,56 +213,38 @@ pub async fn fetch_assets_by_collection() {
         )
         .await
         .unwrap();
-
     let accounts_iter = rpc_data.into_iter().map(|(_, account)| account);
-
     let mut assets: Vec<BaseAssetV1> = vec![];
-
     for account in accounts_iter {
         let asset = BaseAssetV1::from_bytes(&account.data).unwrap();
         assets.push(asset);
     }
-
     print!("{:?}", assets)
 }
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-### 업데이트 권한별 Asset 가져오기
-
-단일 Asset을 가져오려면 다음 함수를 사용할 수 있습니다:
-
-{% dialect-switcher title="단일 Asset 가져오기" %}
+### Fetch Assets by Update Authority
+To fetch a single Asset the following function can be used:
+{% dialect-switcher title="Fetch a single asset" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { fetchAssetsByUpdateAuthority } from '@metaplex-foundation/mpl-core'
-
 const updateAuthority = publicKey('11111111111111111111111111111111')
-
 const assetsByUpdateAuthority = await fetchAssetsByUpdateAuthority(
   umi,
   updateAuthority,
   { skipDerivePlugins: false }
 )
-
 console.log(assetsByUpdateAuthority)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```ts
 pub async fn fetch_assets_by_update_authority() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let update_authority = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let rpc_data = rpc_client
         .get_program_accounts_with_config(
             &MPL_CORE_ID,
@@ -319,33 +274,22 @@ pub async fn fetch_assets_by_update_authority() {
         )
         .await
         .unwrap();
-
     let accounts_iter = rpc_data.into_iter().map(|(_, account)| account);
-
     let mut assets: Vec<BaseAssetV1> = vec![];
-
     for account in accounts_iter {
         let asset = BaseAssetV1::from_bytes(&account.data).unwrap();
         assets.push(asset);
     }
-
     print!("{:?}", assets)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
 ## DAS - Digital Asset Standard API
-
-DAS 지원 RPC를 사용하면 인덱스된 Asset을 활용하여 매우 빠른 가져오기와 데이터 검색이 가능합니다.
-
-DAS는 메타데이터, 오프체인 메타데이터, Collection 데이터, 플러그인(Attributes 포함) 등 모든 것을 인덱스합니다. Metaplex DAS API에 대해 자세히 알아보려면 [여기를 클릭](/ko/dev-tools/das-api)하세요. 일반 DAS SDK 외에도 MPL Core SDK에서 직접 사용할 수 있는 올바른 타입을 반환하는 [MPL Core용 확장](/ko/dev-tools/das-api/core-extension)이 만들어졌습니다. 또한 Collection에서 상속된 Asset의 플러그인을 자동으로 도출하고 DAS-to-Core 타입 변환을 위한 함수를 제공합니다.
-
-다음은 DAS로 MPL Core Asset을 가져온 반환 데이터의 예시입니다.
-
-### FetchAsset 예시
-
+If you use a DAS enabled RPC you'll be able to take advantage of indexed Assets for lighting fast fetches and data retrieval.
+DAS will index everything from metadata, off chain metadata, collection data, plugins (including Attributes), and more. To learn more about the Metaplex DAS API you can [click here](/dev-tools/das-api). In addition to the general DAS SDK an [extension for MPL Core](/dev-tools/das-api/core-extension) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for DAS-to-Core type conversions.
+Below is an example of returned data from fetching a MPL Core Asset with DAS.
+### FetchAsset Example
 ```json
 {
   "id": 0,
@@ -434,88 +378,58 @@ DAS는 메타데이터, 오프체인 메타데이터, Collection 데이터, 플�
   }
 }
 ```
-
-## 일반적인 오류
-
+## Common Errors
 ### `Asset not found`
-
-public key가 유효한 Core Asset을 가리키지 않습니다. 확인하세요:
-- 주소가 정확하고 예상하는 네트워크(devnet vs mainnet)에 있는지
-- 계정이 존재하고 Core Asset인지 (Token Metadata가 아님)
-
+The public key doesn't point to a valid Core Asset. Verify:
+- The address is correct and on the expected network (devnet vs mainnet)
+- The account exists and is a Core Asset (not Token Metadata)
 ### `RPC rate limit exceeded`
-
-GPA 쿼리는 비쌀 수 있습니다. 해결책:
-- 인덱스 쿼리를 위해 DAS 지원 RPC 사용
-- 결과를 제한하기 위해 페이지네이션 추가
-- 적절한 곳에서 결과 캐시
-
-## 참고 사항
-
-- `fetchAsset`은 Collection에서 도출된 플러그인을 포함한 전체 Asset을 반환합니다
-- Asset 레벨 플러그인만 가져오려면 `skipDerivePlugins: true` 설정 (더 빠름)
-- GPA 쿼리(`fetchAssetsByOwner` 등)는 mainnet에서 느릴 수 있음 - DAS 권장
-- DAS는 오프체인 메타데이터를 반환; SDK 가져오기 함수는 온체인 데이터만 반환
-
-## 빠른 참조
-
-### 가져오기 함수
-
-| 함수 | 사용 사례 |
+GPA queries can be expensive. Solutions:
+- Use a DAS-enabled RPC for indexed queries
+- Add pagination to limit results
+- Cache results where appropriate
+## Notes
+- `fetchAsset` returns the full Asset including derived plugins from the Collection
+- Set `skipDerivePlugins: true` to fetch only Asset-level plugins (faster)
+- GPA queries (`fetchAssetsByOwner`, etc.) can be slow on mainnet - prefer DAS
+- DAS returns off-chain metadata; SDK fetch functions return on-chain data only
+## Quick Reference
+### Fetch Functions
+| Function | Use Case |
 |----------|----------|
-| `fetchAsset(umi, publicKey)` | 주소로 단일 Asset |
-| `fetchCollection(umi, publicKey)` | 주소로 단일 Collection |
-| `fetchAssetsByOwner(umi, owner)` | 지갑이 소유한 모든 Asset |
-| `fetchAssetsByCollection(umi, collection)` | Collection 내 모든 Asset |
-| `fetchAssetsByUpdateAuthority(umi, authority)` | 업데이트 권한별 모든 Asset |
-
-### DAS vs GPA 비교
-
-| 기능 | GPA (getProgramAccounts) | DAS API |
+| `fetchAsset(umi, publicKey)` | Single Asset by address |
+| `fetchCollection(umi, publicKey)` | Single Collection by address |
+| `fetchAssetsByOwner(umi, owner)` | All Assets owned by a wallet |
+| `fetchAssetsByCollection(umi, collection)` | All Assets in a Collection |
+| `fetchAssetsByUpdateAuthority(umi, authority)` | All Assets by update authority |
+### DAS vs GPA Comparison
+| Feature | GPA (getProgramAccounts) | DAS API |
 |---------|--------------------------|---------|
-| 속도 | 느림 (모든 계정 스캔) | 빠름 (인덱스) |
-| RPC 부하 | 높음 | 낮음 |
-| 오프체인 메타데이터 | 없음 | 있음 |
-| 특별한 RPC 필요 | 없음 | 있음 |
-
+| Speed | Slow (scans all accounts) | Fast (indexed) |
+| RPC Load | High | Low |
+| Off-chain Metadata | No | Yes |
+| Requires Special RPC | No | Yes |
 ## FAQ
-
-### 여러 Asset을 가져올 때 GPA와 DAS 중 어떤 것을 사용해야 하나요?
-
-가능하면 DAS를 사용하세요. GPA 쿼리는 모든 프로그램 계정을 스캔하며 mainnet에서 느리고 비쌀 수 있습니다. DAS는 더 빠른 인덱스 쿼리를 제공하고 오프체인 메타데이터도 포함합니다. 호환되는 엔드포인트는 [DAS RPC 제공업체](/ko/rpc-providers)를 참조하세요.
-
-### Asset의 오프체인 메타데이터를 가져오려면 어떻게 하나요?
-
-`uri` 필드에 메타데이터 URL이 포함되어 있습니다. 별도로 가져오세요:
-
+### Should I use GPA or DAS for fetching multiple Assets?
+Use DAS whenever possible. GPA queries scan all program accounts and can be slow and expensive on mainnet. DAS provides indexed queries that are faster and include off-chain metadata. See [DAS RPC providers](/rpc-providers) for compatible endpoints.
+### How do I fetch an Asset's off-chain metadata?
+The `uri` field contains the metadata URL. Fetch it separately:
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
 const metadata = await fetch(asset.uri).then(res => res.json())
 ```
-
-### 여러 Collection에 걸쳐 Asset을 가져올 수 있나요?
-
-단일 쿼리로는 불가능합니다. 각 Collection의 Asset을 별도로 가져와 결과를 결합하거나, 사용자 정의 필터가 있는 DAS를 사용하세요.
-
-### `skipDerivePlugins`는 무엇에 유용한가요?
-
-기본적으로 `fetchAsset`은 Collection 레벨 플러그인을 Asset에 도출합니다. `skipDerivePlugins: true`를 설정하면 이 단계를 건너뛰고 Asset 레벨 플러그인만 반환합니다. Asset의 자체 플러그인만 필요하거나 더 빠른 가져오기가 필요할 때 사용하세요.
-
-### 큰 결과 집합을 페이지네이션하려면 어떻게 하나요?
-
-GPA 함수는 내장 페이지네이션을 지원하지 않습니다. 대규모 Collection의 경우 `page`와 `limit` 매개변수를 지원하는 DAS를 사용하거나 클라이언트 측 페이지네이션을 구현하세요.
-
-## 용어집
-
-| 용어 | 정의 |
+### Can I fetch Assets across multiple Collections?
+Not in a single query. Fetch each Collection's Assets separately and combine the results, or use DAS with custom filters.
+### Why is `skipDerivePlugins` useful?
+By default, `fetchAsset` derives Collection-level plugins onto the Asset. Setting `skipDerivePlugins: true` skips this step, returning only Asset-level plugins. Use this when you only need the Asset's own plugins or want faster fetches.
+### How do I paginate large result sets?
+GPA functions don't support built-in pagination. For large collections, use DAS which supports `page` and `limit` parameters, or implement client-side pagination.
+## Glossary
+| Term | Definition |
 |------|------------|
-| **GPA** | getProgramAccounts - 프로그램이 소유한 모든 계정을 쿼리하는 Solana RPC 메서드 |
-| **DAS** | Digital Asset Standard - 빠른 Asset 쿼리를 위한 인덱스 API |
-| **도출된 플러그인** | Collection에서 Asset으로 상속된 플러그인 |
-| **skipDerivePlugins** | 가져오기 시 Collection 플러그인 도출을 건너뛰는 옵션 |
-| **오프체인 메타데이터** | Asset의 URI에 저장된 JSON 데이터 (이름, 이미지, 속성) |
-| **온체인 데이터** | Solana 계정에 직접 저장된 데이터 (소유자, 플러그인, URI) |
-
----
-
-*Metaplex Foundation에서 관리 · 마지막 확인 2026년 1월 · @metaplex-foundation/mpl-core에 적용*
+| **GPA** | getProgramAccounts - Solana RPC method to query all accounts owned by a program |
+| **DAS** | Digital Asset Standard - Indexed API for fast asset queries |
+| **Derived Plugin** | A plugin inherited from the Collection onto an Asset |
+| **skipDerivePlugins** | Option to skip Collection plugin derivation during fetch |
+| **Off-chain Metadata** | JSON data stored at the Asset's URI (name, image, attributes) |
+| **On-chain Data** | Data stored directly in the Solana account (owner, plugins, URI) |

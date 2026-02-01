@@ -1,29 +1,34 @@
 ---
-title: Bubblegum 플러그인
-metaTitle: Bubblegum 플러그인 | Core 플러그인
-description: Bubblegum 플러그인을 사용하여 압축 NFT에 사용할 수 있는 컬렉션을 생성하는 방법을 알아보세요.
+title: Bubblegum Plugin
+metaTitle: Bubblegum Plugin | Core Plugins
+description: Learn how to use the Bubblegum Plugin to create Collections that can be used for compressed NFTs.
+updated: '01-31-2026'
+keywords:
+  - Bubblegum plugin
+  - compressed NFT
+  - cNFT collection
+  - merkle tree
+about:
+  - Compressed NFTs
+  - Bubblegum integration
+  - Collection setup
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
-
-`Bubblegum` 플러그인은 압축 NFT에 사용할 수 있는 컬렉션을 생성할 수 있도록 하는 `권한 관리` 플러그인입니다.
-
-이 플러그인은 `MPL Core 컬렉션`에서만 사용할 수 있습니다.
-
-## 호환성
-
+The `Bubblegum` Plugin is a `Authority Managed` plugin that allows you to create Collections that can be used for compressed NFTs.
+This plugin can only be used on `MPL Core Collections`.
+## Works With
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ❌  |
 | MPL Core Collection | ✅  |
-
-## 인수
-
-`Bubblegum` 플러그인은 인수가 필요하지 않습니다.
-
-## Bubblegum 플러그인으로 컬렉션 생성하기 코드 예제
-
-{% dialect-switcher title="Bubblegum 플러그인으로 컬렉션 생성하기" %}
+## Arguments
+The `Bubblegum` Plugin requires no arguments.
+## Create a Collection with the Bubblegum Plugin code example
+{% dialect-switcher title="Create a Collection with the Bubblegum Plugin" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import {
   createCollection,
@@ -31,9 +36,7 @@ import {
 import {
   generateSigner,
 } from '@metaplex-foundation/umi';
-
 const collectionSigner = generateSigner(umi);
-
 await createCollection(umi, {
     collection: collectionSigner,
     name: "My Collection",
@@ -45,21 +48,15 @@ await createCollection(umi, {
     ],
   })
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-
-## 컬렉션에 Bubblegum 플러그인 추가하기 코드 예제
-
-{% dialect-switcher title="컬렉션에 Bubblegum 플러그인 추가하기" %}
+## Adding the Bubblegum Plugin to a Collection code example
+{% dialect-switcher title="Add Bubblegum Plugin to Collection" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import {
   addCollectionPlugin,
 } from '@metaplex-foundation/mpl-core';
-
 await addCollectionPlugin(umi, {
   collection: collection.publicKey,
   plugin: {
@@ -67,6 +64,5 @@ await addCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi);
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}

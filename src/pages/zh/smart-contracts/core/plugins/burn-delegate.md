@@ -1,99 +1,92 @@
 ---
-title: 销毁委托
-metaTitle: 销毁委托插件 | Metaplex Core
-description: 允许委托销毁 Core NFT 资产。使用销毁委托插件进行游戏机制、订阅到期和自动化资产销毁。
+title: Burn Delegate
+metaTitle: Burn Delegate Plugin | Metaplex Core
+description: Allow a delegate to burn Core NFT Assets. Use the Burn Delegate plugin for game mechanics, subscription expirations, and automated asset destruction.
+updated: '01-31-2026'
+keywords:
+  - burn delegate
+  - delegate burn
+  - automated burn
+  - NFT lifecycle
+about:
+  - Burn delegation
+  - Game mechanics
+  - Asset lifecycle
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What's the difference between Burn Delegate and Permanent Burn Delegate?
+    a: Burn Delegate authority is revoked on transfer. Permanent Burn Delegate authority persists forever and uses forceApprove, meaning it can burn even if the Asset is frozen.
+  - q: Can the owner still burn if there's a Burn Delegate?
+    a: Yes. The owner can always burn their own Asset regardless of delegates.
+  - q: Does Burn Delegate work on frozen Assets?
+    a: No. Regular Burn Delegate cannot burn frozen Assets. Use Permanent Burn Delegate if you need to burn frozen Assets.
+  - q: When is Burn Delegate revoked?
+    a: When the Asset is transferred to a new owner. The new owner would need to add a new Burn Delegate.
 ---
-
-**销毁委托插件**允许指定的权限代表所有者销毁 Core 资产。对于游戏机制、订阅服务和自动化资产生命周期管理很有用。{% .lead %}
-
-{% callout title="您将学到" %}
-
-- 向资产添加销毁委托插件
-- 将销毁权限委托给另一个地址
-- 撤销销毁权限
-- 用例：游戏、订阅、自动化销毁
-
+The **Burn Delegate Plugin** allows a designated authority to burn Core Assets on behalf of the owner. Useful for game mechanics, subscription services, and automated asset lifecycle management. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Add the Burn Delegate plugin to an Asset
+- Delegate burn authority to another address
+- Revoke burn authority
+- Use cases: games, subscriptions, automated burns
 {% /callout %}
-
-## 摘要
-
-**销毁委托**是一个所有者管理插件，允许委托销毁资产。添加后，委托可以随时无需所有者批准即可销毁资产。
-
-- 将销毁权限委托给程序或钱包
-- 资产转移时权限被撤销
-- 使用[永久销毁委托](/zh/smart-contracts/core/plugins/permanent-burn-delegate)获取不可撤销的销毁权限
-- 无需额外参数
-
-## 范围外
-
-集合销毁（不同流程）、永久销毁权限（见永久销毁委托）和 Token Metadata 销毁权限（不同系统）。
-
-## 快速开始
-
-**跳转到:** [添加插件](#向资产添加销毁插件) · [委托权限](#委托销毁权限) · [撤销](#撤销销毁权限)
-
-1. 添加销毁委托插件: `addPlugin(umi, { asset, plugin: { type: 'BurnDelegate' } })`
-2. 可选择委托给另一个地址
-3. 委托现在可以随时销毁资产
-
-{% callout type="note" title="何时使用销毁委托 vs 永久销毁委托" %}
-
-| 用例 | 销毁委托 | 永久销毁委托 |
-|------|---------|-------------|
-| 游戏物品销毁 | ✅ 最佳选择 | ✅ 也可以 |
-| 订阅到期 | ✅ 最佳选择 | ❌ 太永久 |
-| 销毁冻结资产 | ❌ 不能销毁 | ✅ 可以强制销毁 |
-| 转移时权限保持 | ❌ 撤销 | ✅ 保持 |
-| 紧急销毁能力 | ❌ 有限 | ✅ 最佳选择 |
-
-当销毁权限应在所有权变更时重置时选择**销毁委托**。
-当权限必须永久保持时选择**[永久销毁委托](/zh/smart-contracts/core/plugins/permanent-burn-delegate)**。
-
+## Summary
+The **Burn Delegate** is an Owner Managed plugin that allows a delegate to burn an Asset. Once added, the delegate can burn the Asset at any time without owner approval.
+- Delegate burn authority to a program or wallet
+- Authority is revoked on Asset transfer
+- Use [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) for irrevocable burn authority
+- No additional arguments required
+## Out of Scope
+Collection burning (different process), permanent burn authority (see Permanent Burn Delegate), and Token Metadata burn authority (different system).
+## Quick Start
+**Jump to:** [Add Plugin](#adding-the-burn-plugin-to-an-asset) · [Delegate Authority](#delegating-burn-authority) · [Revoke](#revoking-burn-authority)
+1. Add the Burn Delegate plugin: `addPlugin(umi, { asset, plugin: { type: 'BurnDelegate' } })`
+2. Optionally delegate to another address
+3. The delegate can now burn the Asset at any time
+{% callout type="note" title="When to Use Burn vs Permanent Burn Delegate" %}
+| Use Case | Burn Delegate | Permanent Burn Delegate |
+|----------|---------------|-------------------------|
+| Game item destruction | ✅ Best choice | ✅ Also works |
+| Subscription expiration | ✅ Best choice | ❌ Too permanent |
+| Burn frozen Assets | ❌ Cannot burn | ✅ Can force burn |
+| Authority persists on transfer | ❌ Revokes | ✅ Persists |
+| Emergency burn capability | ❌ Limited | ✅ Best choice |
+**Choose Burn Delegate** when burn authority should reset on ownership change.
+**Choose [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)** when authority must persist forever.
 {% /callout %}
-
-## 常见用例
-
-- **游戏机制**: 物品在游戏中被消耗、销毁或丢失时销毁 NFT
-- **订阅服务**: 自动销毁过期订阅代币
-- **制作系统**: 制作新物品时销毁原材料 NFT
-- **成就兑换**: 兑换奖励时销毁成就代币
-- **活动门票**: 活动签到后销毁门票
-- **限时资产**: 到期后销毁资产
-
-## 适用于
-
+## Common Use Cases
+- **Game mechanics**: Burn NFTs when items are consumed, destroyed, or lost in-game
+- **Subscription services**: Auto-burn expired subscription tokens
+- **Crafting systems**: Burn ingredient NFTs when crafting new items
+- **Achievement redemption**: Burn achievement tokens when redeemed for rewards
+- **Event tickets**: Burn tickets after event check-in
+- **Limited-time assets**: Burn assets after expiration period
+## Works With
 |                     |     |
 | ------------------- | --- |
-| MPL Core 资产      | ✅  |
-| MPL Core 集合 | ❌  |
-
-## 参数
-
-销毁插件不包含任何需要传入的参数。
-
-## 向资产添加销毁插件
-
-{% dialect-switcher title="向 MPL Core 资产添加销毁插件" %}
+| MPL Core Asset      | ✅  |
+| MPL Core Collection | ❌  |
+## Arguments
+The Burn Plugin doesn't contain any arguments to pass in.
+## Adding the Burn Plugin to an Asset
+{% dialect-switcher title="Adding a Burn Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
-
 (async () => {
     const asset = publicKey('11111111111111111111111111111111')
-
     await addPlugin(umi, {
     asset: asset,
     plugin: { type: 'BurnDelegate' },
     }).sendAndConfirm(umi)
 })();
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```ts
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -102,57 +95,42 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn add_burn_delegate_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let add_burn_delegate_plugin_ix = AddPluginV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
         .plugin(Plugin::BurnDelegate(BurnDelegate {}))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let add_burn_delegate_plugin_ix_tx = Transaction::new_signed_with_payer(
         &[add_burn_delegate_plugin_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&add_burn_delegate_plugin_ix_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## 委托销毁权限
-
-销毁委托插件权限可以使用 `approvePluginAuthority` 函数委托给不同的地址。这允许您更改谁可以销毁资产。
-
-{% dialect-switcher title="委托销毁权限" %}
+## Delegating Burn Authority
+The Burn Delegate plugin authority can be delegated to a different address using the `approvePluginAuthority` function. This allows you to change who can burn the Asset.
+{% dialect-switcher title="Delegate Burn Authority" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
-
 (async () => {
     const assetAddress = publicKey('11111111111111111111111111111111')
     const newDelegate = publicKey('22222222222222222222222222222222')
-
     await approvePluginAuthority(umi, {
     asset: assetAddress,
     plugin: { type: 'BurnDelegate' },
@@ -160,98 +138,62 @@ import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
     }).sendAndConfirm(umi)
 })();
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-## 撤销销毁权限
-
-可以使用 `revokePluginAuthority` 函数撤销销毁权限，将控制权返还给资产所有者。
-
-{% dialect-switcher title="撤销销毁权限" %}
+## Revoking Burn Authority
+The burn authority can be revoked using the `revokePluginAuthority` function, returning control to the asset owner.
+{% dialect-switcher title="Revoke Burn Authority" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
-
 (async () => {
     const assetAddress = publicKey('11111111111111111111111111111111')
-
     await revokePluginAuthority(umi, {
     asset: assetAddress,
     plugin: { type: 'BurnDelegate' },
     }).sendAndConfirm(umi)
 })();
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## 常见错误
-
+## Common Errors
 ### `Authority mismatch`
-
-只有销毁委托权限可以销毁资产。验证您使用正确的密钥对签名。
-
+Only the burn delegate authority can burn the Asset. Verify you're signing with the correct keypair.
 ### `Asset is frozen`
-
-冻结的资产无法销毁。冻结权限必须先解冻资产。
-
-## 注意事项
-
-- 所有者管理：需要所有者签名才能添加
-- 资产转移时权限自动撤销
-- 冻结的资产无法销毁
-- 如果需要权限在转移后保持，使用永久销毁委托
-- 销毁立即执行且不可逆
-
-## 快速参考
-
-### 谁可以销毁？
-
-| 权限 | 可以销毁？ |
-|------|----------|
-| 资产所有者 | 是（始终） |
-| 销毁委托 | 是 |
-| 永久销毁委托 | 是（强制批准） |
-| 更新权限 | 否 |
-
-## 常见问题
-
-### 销毁委托和永久销毁委托有什么区别？
-
-销毁委托权限在转移时被撤销。永久销毁委托权限永久保持，并使用 `forceApprove`，意味着即使资产被冻结也可以销毁。
-
-### 有销毁委托时所有者仍然可以销毁吗？
-
-是的。所有者始终可以销毁自己的资产，无论委托如何。
-
-### 销毁委托对冻结的资产有效吗？
-
-不。常规销毁委托无法销毁冻结的资产。如果需要销毁冻结的资产，请使用永久销毁委托。
-
-### 销毁委托何时被撤销？
-
-当资产转移给新所有者时。新所有者需要添加新的销毁委托。
-
-## 相关插件
-
-- [永久销毁委托](/zh/smart-contracts/core/plugins/permanent-burn-delegate) - 带有 forceApprove 的不可撤销销毁权限
-- [冻结委托](/zh/smart-contracts/core/plugins/freeze-delegate) - 临时阻止转移和销毁
-- [转移委托](/zh/smart-contracts/core/plugins/transfer-delegate) - 允许委托转移资产
-
-## 术语表
-
-| 术语 | 定义 |
-|------|------|
-| **销毁委托** | 允许委托销毁资产的所有者管理插件 |
-| **所有者管理** | 需要所有者签名才能添加的插件类型 |
-| **撤销** | 移除委托的销毁权限 |
-| **永久销毁委托** | 转移后仍保持的不可撤销版本 |
-| **forceApprove** | 永久插件绕过冻结限制的能力 |
-
----
-
-*由 Metaplex Foundation 维护 · 2026年1月最后验证 · 适用于 @metaplex-foundation/mpl-core*
+Frozen Assets cannot be burned. The freeze authority must thaw the Asset first.
+## Notes
+- Owner Managed: requires owner signature to add
+- Authority is automatically revoked when the Asset transfers
+- Frozen Assets cannot be burned
+- Use Permanent Burn Delegate if authority must persist after transfer
+- Burning is immediate and irreversible
+## Quick Reference
+### Who Can Burn?
+| Authority | Can Burn? |
+|-----------|-----------|
+| Asset Owner | Yes (always) |
+| Burn Delegate | Yes |
+| Permanent Burn Delegate | Yes (force approve) |
+| Update Authority | No |
+## FAQ
+### What's the difference between Burn Delegate and Permanent Burn Delegate?
+Burn Delegate authority is revoked on transfer. Permanent Burn Delegate authority persists forever and uses `forceApprove`, meaning it can burn even if the Asset is frozen.
+### Can the owner still burn if there's a Burn Delegate?
+Yes. The owner can always burn their own Asset regardless of delegates.
+### Does Burn Delegate work on frozen Assets?
+No. Regular Burn Delegate cannot burn frozen Assets. Use Permanent Burn Delegate if you need to burn frozen Assets.
+### When is Burn Delegate revoked?
+When the Asset is transferred to a new owner. The new owner would need to add a new Burn Delegate.
+## Related Plugins
+- [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) - Irrevocable burn authority with forceApprove
+- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Block transfers and burns temporarily
+- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - Allow delegate to transfer Assets
+## Glossary
+| Term | Definition |
+|------|------------|
+| **Burn Delegate** | Owner Managed plugin allowing a delegate to burn the Asset |
+| **Owner Managed** | Plugin type requiring owner signature to add |
+| **Revoke** | Remove the delegate's burn authority |
+| **Permanent Burn Delegate** | Irrevocable version that persists after transfer |
+| **forceApprove** | Permanent plugin ability to override freeze restrictions |

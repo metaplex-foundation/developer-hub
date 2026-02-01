@@ -1,31 +1,45 @@
 ---
-title: 使用 MPL Core 打印版本
-metaTitle: 打印版本 | Core 指南
-description: 本指南展示如何组合插件以使用 Metaplex Core 协议创建版本。
+title: Print Editions with MPL Core
+metaTitle: Print Editions | Core Guides
+description: This guide shows you how to combine plugins to create Editions with the Metaplex Core protocol.
+updated: '01-31-2026'
+keywords:
+  - print editions
+  - NFT editions
+  - limited edition
+  - master edition
+about:
+  - Edition creation
+  - Print series
+  - Edition plugins
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Create a Collection with the Master Edition plugin for supply tracking
+  - Create Assets with the Edition plugin containing edition numbers
+  - Optionally use Candy Machine Edition Guard for automatic numbering
+  - Verify editions are properly linked to the Master Edition Collection
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
 ---
-
-## 简介
-
-### 什么是版本（Edition）？
-
-版本是同一"主版本（Master Edition）"的副本。要理解这个概念，可以将其想象成实体绘画：主版本是最初的绘画，版本（也称为打印品）是该绘画的副本。
-
-### Core 中的版本
-
-MPL Core 版本支持在主网发布后不久就添加了。与 Token Metadata 版本不同，版本编号和供应量不是强制性的，而是信息性的。
-
-为了在 Core 中实现版本概念，使用了两个[插件](/zh/smart-contracts/core/plugins)：Collection 中的 [Master Edition](/zh/smart-contracts/core/plugins/master-edition) 和 Asset（即打印品）中的 [Edition](/zh/smart-contracts/core/plugins/edition)。层次结构如下：
-
+## Introduction
+### What is an Edition?
+An Edition is a copy of the same "Master Edition". To understand the concept it can be helpful to think of physical Paintings: The Master Edition is the initial Painting, the Editions, also known as prints, are copies of that painting. 
+### Editions with Core
+MPL Core Edition support was added close after to the mainnet release. Different to Token Metadata Editions the Edition Numbers and Supply are not enforced, but informational.
+To achieve the Edition concept in Core two [Plugins](/smart-contracts/core/plugins) are used: [Master Edition](/smart-contracts/core/plugins/master-edition) in the Collection and [Edition](/smart-contracts/core/plugins/edition) in the Asset, which are the prints. The hierarchy looks like this:
 {% diagram %}
 {% node %}
 {% node #master label="Master Edition" theme="indigo" /%}
 {% /node %}
 {% node y="50" parent="master" theme="transparent" %}
-带有
-
-Master Edition 插件的 Collection
+Collection with 
+Master Edition Plugin
 {% /node %}
-
 {% node x="200" y="-70" parent="master" %}
 {% node #asset1 label="Edition" theme="blue" /%}
 {% /node %}
@@ -35,38 +49,28 @@ Master Edition 插件的 Collection
 {% node y="70" parent="asset2" %}
 {% node #asset3 label="Edition" theme="blue" /%}
 {% /node %}
-
 {% node y="50" parent="asset3" theme="transparent" %}
-带有
-
-Edition 插件的 Assets
+Assets with 
+Edition Plugin
 {% /node %}
-
 {% edge from="master" to="asset1" /%}
 {% edge from="master" to="asset2" /%}
 {% edge from="master" to="asset3" /%}
-
 {% /diagram %}
-
-## 使用 Candy Machine 创建版本
-
-创建和销售版本的最简单方法是利用 Core Candy Machine。
-
-以下代码创建一个 Master Edition Collection 和为您打印版本的 Candy Machine。
-
-{% dialect-switcher title="创建带有 Edition Guard 和 Master Edition Collection 的 Candy Machine" %}
+## Create Editions using Candy Machine
+The easiest method to create and sell Edition is by leveraging Core Candy Machine. 
+The following Code creates a Master Edition Collection and the Candy Machine that prints the Editions for you.
+{% dialect-switcher title="Create a Candy Machine with Edition Guard and Master Edition Collection" %} 
 {% dialect title="JavaScript" id="js" %}
-
-首先导入所有必需的函数，并使用您的 RPC 和钱包设置 Umi：
-
+First all the required functions are imported and Umi set up with your RPC and Wallet:
 ```ts
 import {
   create,
   mplCandyMachine,
 } from "@metaplex-foundation/mpl-core-candy-machine";
-import {
-    createCollection,
-    ruleSet
+import { 
+    createCollection, 
+    ruleSet 
 } from "@metaplex-foundation/mpl-core";
 import crypto from "crypto";
 import {
@@ -74,19 +78,14 @@ import {
   keypairIdentity,
 } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
-
-// 使用您选择的 RPC 端点。
+// Use the RPC endpoint of your choice.
 const umi = createUmi("http://127.0.0.1:8899").use(mplCandyMachine());
-
-// 在这里使用您的密钥对或 Wallet Adapter。
+// use your keypair or Wallet Adapter here.
 const keypair = generateSigner(umi);
 umi.use(keypairIdentity(keypair));
 ```
-
-设置完成后，我们可以使用 [Master Edition 插件](/zh/smart-contracts/core/plugins/master-edition)创建 Collection。`maxSupply` 字段确定您想要打印多少版本。插件中的 `name` 和 `uri` 字段可以在 Collection Name 和 uri 之外额外使用。
-
-为了便于使用，我们还添加了 [Royalty 插件](/zh/smart-contracts/core/plugins/royalties)。
-
+After this setup we can create the Collection with [Master Edition Plugin](/smart-contracts/core/plugins/master-edition). The `maxSupply` field determines how many Editions you want to print. The `name` and `uri` fields in the Plugin can be used in addition to the Collection Name and uri.
+For ease of use we also add the [Royalty Plugin](/smart-contracts/core/plugins/royalties).
 ```ts
 const collectionSigner = generateSigner(umi);
 await createCollection(umi, {
@@ -97,7 +96,7 @@ await createCollection(umi, {
     {
       type: "MasterEdition",
         maxSupply: 100,
-        // 如果您希望它们与父集合相似，则不需要 name 和 uri
+        //name and uri are not needed if you want them to be similar to the parent collection
         name: undefined,
         uri: undefined,
     },
@@ -110,23 +109,19 @@ await createCollection(umi, {
     ]
   }).sendAndConfirm(umi);
 ```
-
-创建 Collection 后，我们可以使用 `hiddenSettings` 和 `edition` guard 创建 candy machine。
-
-- `hiddenSettings` 用于为所有铸造的 Assets 分配相同或类似的名称和元数据。您可以使用 `$ID$` 变量，它将在铸造时替换为铸造 Asset 的索引。
-- `edition` Guard 用于将 [Edition 插件](/zh/smart-contracts/core/plugins/edition)添加到 Assets。版本号从 `editionStartOffset` 中的数字开始，对于每个铸造的 Asset 递增。
-
+After the creation of the Collection we can create the candy machine using `hiddenSettings` and the `edition` guard.
+- `hiddenSettings` are used to assign the same, or similar, Name and Metadata to all Assets minted. You can use a `$ID$` variable that will be replaced by the index of the minted Asset on mint.
+- The `edition` Guard is used to add the [Edition Plugin](/smart-contracts/core/plugins/edition) to the Assets. The Edition number is increasing for each minted Asset, starting with the number in `editionStartOffset`.
 ```ts
-// 您的版本的名称和链下元数据
+// The Name and off chain Metadata of your Editions
 const editionData = {
   name: "Edition Name",
   uri: "https://example.com/edition-asset.json",
 };
-
-// 这创建一个哈希，版本不使用但 Candy Machine 需要
+// This creates a hash that editions do not 
+// use but the Candy Machine requires  
 const string = JSON.stringify(editionData);
 const hash = crypto.createHash("sha256").update(string).digest();
-
 const candyMachine = generateSigner(umi);
 const createIx = await create(umi, {
   candyMachine,
@@ -140,45 +135,32 @@ const createIx = await create(umi, {
   },
   guards: {
     edition: { editionStartOffset: 0 },
-    // ... 额外的 Guards
+    // ... additional Guards
   },
 })
-
 await createIx.sendAndConfirm(umi);
 ```
-
-{% /dialect %}
+{% /dialect %} 
 {% /dialect-switcher %}
-
-就是这样！
-
-现在用户可以从您的 candy machine 铸造版本。
-
-## 不使用 Core Candy Machine 创建版本
-
+That's it! 
+Now users can mint editions from your candy machine.
+## Create Editions without Core Candy Machine
 {% callout type="note" %}
-我们强烈建议使用 Core Candy Machine 来创建 MPL Core 版本。Candy Machine 为您处理创建以及版本的正确编号。
+We strongly recommend to use Core Candy Machine for MPL Core Editions. Candy Machine handles the creation and also the correct numbering of the editions for you.
 {% /callout %}
-
-要在不使用 Core Candy Machine 的情况下创建版本，您需要：
-
-1. 使用 [Master Edition](/zh/smart-contracts/core/plugins/master-edition) 插件创建 Collection
-
-{% dialect-switcher title="创建带有 Master Edition 插件的 MPL Core Collection" %}
+To create an Edition without Core Candy Machine you would:
+1. Create a Collection using the [Master Edition](/smart-contracts/core/plugins/master-edition) Plugin
+{% dialect-switcher title="Create a MPL Core Collection with Master Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
   createCollection,
   ruleSet,
 } from '@metaplex-foundation/core'
-
 const collectionSigner = generateSigner(umi)
-
 const creator1 = publicKey('11111111111111111111111111111111')
 const creator2 = publicKey('22222222222222222222222222222222')
-
 await createCollection(umi, {
   collection: collectionSigner,
   name: "Master Edition",
@@ -187,7 +169,7 @@ await createCollection(umi, {
     {
       type: "MasterEdition",
         maxSupply: 100,
-        // 如果您希望它们与父集合相似，则不需要 name 和 uri
+        //name and uri are not needed if you want them to be similar to the parent collection
         name: undefined,
         uri: undefined,
     },
@@ -195,7 +177,7 @@ await createCollection(umi, {
       type: "Royalties",
       basisPoints: 500,
       creators: [
-        { address: creator1, percentage: 50 },
+        { address: creator1, percentage: 50 }, 
         { address: creator2, percentage: 50 }
       ],
       ruleSet: ruleSet("None"),
@@ -203,11 +185,8 @@ await createCollection(umi, {
     ]
   }).sendAndConfirm(umi);
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::CreateCollectionV1Builder,
@@ -216,15 +195,11 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn create_collection_with_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let payer = Keypair::new();
     let collection = Keypair::new();
-
     let creator = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let create_collection_ix = CreateCollectionV1Builder::new()
         .collection(collection.pubkey())
         .payer(payer.pubkey())
@@ -239,44 +214,32 @@ pub async fn create_collection_with_plugin() {
             authority: Some(PluginAuthority::UpdateAuthority),
         }])
         .instruction();
-
     let signers = vec![&collection, &payer];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let create_collection_tx = Transaction::new_signed_with_payer(
         &[create_collection_ix],
         Some(&payer.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&create_collection_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-2. 使用 [Edition](/zh/smart-contracts/core/plugins/edition) 插件创建 Assets。记住在插件中增加编号。
-
-{% dialect-switcher title="使用 Edition 插件创建 MPL Core Asset" %}
+2. Create Assets with the [Edition](/smart-contracts/core/plugins/edition) Plugin. Remember to increase the number in the plugin.
+{% dialect-switcher title="Creating an MPL Core Asset with the Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import {
-    create,
+import { 
+    create, 
 } from '@metaplex-foundation/mpl-core'
-
 const asset = generateSigner(umi)
-
 const result = create(umi, {
   asset: asset,
   name: 'My Nft',
@@ -290,11 +253,8 @@ const result = create(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use std::str::FromStr;
 use mpl_core::{
@@ -303,16 +263,12 @@ use mpl_core::{
 };
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
-
 pub async fn create_asset_with_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let payer = Keypair::new();
     let asset = Keypair::new();
     let authority = Keypair::new();
-
     let creator = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let create_asset_with_plugin_ix = CreateV1Builder::new()
         .asset(asset.pubkey())
         .payer(payer.pubkey())
@@ -324,33 +280,24 @@ pub async fn create_asset_with_plugin() {
             })
         }])
         .instruction();
-
     let signers = vec![&asset, &payer];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let create_asset_with_plugin_tx = Transaction::new_signed_with_payer(
         &[create_asset_with_plugin_ix],
         Some(&payer.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&create_asset_with_plugin_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
-
 ```
-
 {% /dialect %}
-
 {% /dialect-switcher %}
-
-## 延伸阅读
-- [从 Candy Machine 铸造](/zh/smart-contracts/core-candy-machine/mint)
-- [Master Edition 插件](/zh/smart-contracts/core/plugins/master-edition)
-- [Edition 插件](/zh/smart-contracts/core/plugins/edition)
+## Further Reading
+- [Mint from Candy Machine](/core-candy-machine/mint)
+- [Master Edition Plugin](/smart-contracts/core/plugins/master-edition)
+- [Edition Plugin](/smart-contracts/core/plugins/edition)

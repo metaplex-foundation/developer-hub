@@ -1,115 +1,102 @@
 ---
-title: 利用 AppData 插件创建活动票务平台
-metaTitle: Core - AppData 插件示例
-description: 本指南展示如何利用 AppData 插件创建票务平台。
+title: Create an Event Ticketing Platform leveraging the Appdata Plugin
+metaTitle: Core - Appdata Plugin Example
+description: This guide shows how to create a ticketing platform leveraging the Appdata Plugin.
+updated: '01-31-2026'
+keywords:
+  - NFT ticketing
+  - event tickets
+  - AppData plugin
+  - digital tickets
+about:
+  - Ticketing platforms
+  - AppData implementation
+  - Event management
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+  - JavaScript
+howToSteps:
+  - Create a Solana program with Manager, Event, and Ticket instructions
+  - Set up LinkedAppData on Event collections for venue verification
+  - Create ticket Assets with AppData for ticket status tracking
+  - Build verification system to read and update ticket status
+howToTools:
+  - Anchor framework
+  - mpl-core SDK
+  - Solana CLI
 ---
-
-本开发者指南利用新的 AppData 插件来**创建一个票务解决方案，可用于生成作为数字资产的门票，并由发行者以外的外部信任来源（如场馆经理）进行验证**。
-
-## 简介
-
-### 外部插件
-
-**外部插件**是一种由*外部*来源控制行为的插件。Core 程序将为这些插件提供适配器，但开发者通过将此适配器指向外部数据源来决定行为。
-
-每个外部适配器都能够将生命周期检查分配给生命周期事件，影响正在发生的生命周期事件的行为。这意味着我们可以将以下检查分配给创建、转移、更新和销毁等生命周期事件：
-- **Listen**：一个"web3"webhook，在生命周期事件发生时提醒插件。这对于跟踪数据或执行操作特别有用。
-- **Reject**：插件可以拒绝生命周期事件。
-- **Approve**：插件可以批准生命周期事件。
-
-如果您想了解更多关于外部插件的信息，请在[这里](/zh/smart-contracts/core/external-plugins/overview)阅读更多内容。
-
-### AppData 插件
-
-**AppData 插件**允许资产/集合权限保存可由 `data_authority`（外部信任来源）写入和更改的任意数据，可以分配给资产/集合权限决定的任何人。通过 AppData 插件，集合/资产权限可以将向其资产添加数据的任务委托给受信任的第三方。
-
-如果您不熟悉新的 AppData 插件，请在[这里](/zh/smart-contracts/core/external-plugins/app-data)阅读更多内容。
-
-## 总体概述：程序设计
-
-在这个示例中，我们将开发一个包含四个基本操作的票务解决方案：
-
-- **设置管理器**：建立负责创建和发行门票的权限。
-- **创建活动**：生成作为集合资产的活动。
-- **创建单独门票**：生成属于活动集合的单独门票。
-- **处理场馆操作**：管理场馆运营商的操作，如在使用门票时扫描门票。
-
-**注意**：虽然这些操作为票务解决方案提供了基础起点，但完整规模的实现需要额外的功能，如用于索引活动集合的外部数据库。然而，这个示例对于那些有兴趣开发票务解决方案的人来说是一个很好的起点。
-
-### 拥有外部信任来源处理扫描门票的重要性
-
-在引入 **AppData 插件**和 **Core 标准**之前，由于链下存储的限制，管理资产的属性更改是有限的。也不可能将资产特定部分的权限委托给他人。
-
-这一进步对于受监管的用例（如票务系统）是一个游戏规则改变者，因为它允许场馆权限**在不授予他们对属性更改和其他数据方面的完全控制的情况下向资产添加数据**。
-
-这种设置降低了欺诈活动的风险，并将错误的责任从场馆转移出去，因此发行公司保留了资产的不可变记录，而特定的数据更新（如将门票标记为已使用）通过 `AppData 插件`安全地管理。
-
-### 使用数字资产存储数据而不是 PDA
-
-与其依赖通用的外部程序派生地址（[PDAs](/zh/guides/understanding-pdas)）来存储活动相关数据，**您可以将活动本身创建为集合资产**。这种方法允许将活动的所有门票包含在"活动"集合中，使一般活动数据易于访问，并轻松将活动详情与门票资产本身链接。然后您可以对单个门票相关数据使用相同的方法，包括门票号码、大厅、区域、排、座位和价格，直接存储在 Asset 上。
-
-使用 Core 账户（如 `Collection` 或 `Asset` 账户）在处理数字资产时保存相关数据，而不是依赖外部 PDA，可以让门票购买者直接从他们的钱包查看所有相关活动信息，而无需反序列化数据。此外，直接在资产本身上存储数据允许您利用数字资产标准（DAS）通过单个指令在您的网站上获取和显示它，如下所示：
-
+This developer guide leverages the new Appdata Plugin to **create a ticketing solution that could be used to generate tickets as digital assets and verified by an external source of trust other  than the issuer, like for example a venue manager**. 
+## Introduction
+### External Plugin
+An **External Plugin** is a plugin whose behavior is controlled by an *external* source. The core program will provide an adapter for these plugins, but developers decide the behavior by pointing this adapter to an external data source.
+Each External Adapter has the ability to assign lifecycle checks to Lifecycle Events, influencing the behavior of the lifecycle event taking place. This means we can assign the following checks to lifecycle events like create, transfer, update, and burn:
+- **Listen**: A “web3” webhook that alerts the plugin when a lifecycle event occurs. This is particularly useful for tracking data or performing actions.
+- **Reject**: The plugin can reject a lifecycle event.
+- **Approve**: The plugin can approve a lifecycle event.
+If you want to learn more about External Plugins, read more about them [here](/smart-contracts/core/external-plugins/overview).
+### Appdata Plugin
+The **AppData Plugin** allows asset/collection authorities to save arbitrary data that can be written and changed by the `data_authority`, an external source of trust and can be assigned to anyone the asset/collection authority decides to. With the AppData Plugin, collection/asset authorities can delegate the task of adding data to their assets to trusted third parties.
+If you’re not familiar with the new Appdata Plugin, read more about it [here](/smart-contracts/core/external-plugins/app-data).
+## General Overview: Program Design
+In this example, we will develop a ticketing solution that comes with four basic operations:
+- **Setting up the Manager**: Establish the authority responsible for the creation and issuance of tickets.
+- **Creating an Event**: Generate an event as a collection asset.
+- **Creating Individual Tickets**: Produce individual tickets that are part of the event collection.
+- **Handling Venue Operations**: Manage operations for the venue operator, such as scanning tickets when they are used.
+**Note**: While these operations provide a foundational start for a ticketing solution, a full-scale implementation would require additional features like an external database for indexing the event collection. However, this example serves as a good starting point for those interested in developing a ticketing solution.
+### The importance of having an external source of trust to handle scanning tickets
+Until the introduction of the **AppData plugin** and the **Core standard**, managing attribute changes for assets was limited due to off-chain storage constraints. It was also impossible to delegate authority over specific parts of an asset. 
+This advancement is a game changer for regulated use cases, such as ticketing systems since it allows venue authorities to **add data to the asset without granting them complete control over attribute changes and other data aspects**. 
+This setup reduces the risk of fraudulent activities and shifts the responsibility for errors away from the venue so the issuing company retains immutable records of the assets, while specific data updates, like marking tickets as used, are securely managed through the `AppData plugin`.
+### Using Digital Assets to store data instead of PDAs 
+Instead of relying on generic external Program Derived Addresses ([PDAs](/guides/understanding-pdas)) for event-related data, **you can create the event itself as a collection asset**. This approach allow all tickets for the event to be included in the "event" collection, making general event data easily accessible and easily link event details with the ticket assets itself. You can then apply the same method for individual ticket-related data, including ticket number, hall, section, row, seat, and price directly on the Asset. 
+Using Core accounts like `Collection` or `Asset` accounts to save relevant data when dealing with digital assets, rather than relying on external PDAs, let ticket purchasers view all relevant event information directly from their wallet without needing to deserialize data. In addition, storing data directly on the asset itself allows you to leverage the Digital Asset Standard (DAS) to fetch and display it on your website with a single instruction, as shown below:
 ```typescript
 const ticketData = await fetchAsset(umi, ticket);
 console.log("\nThis are all the ticket-related data: ", ticketData.attributes);
 ```
-
-## 开始实践：程序
-
-### 前提条件和设置
-为了简单起见，我们将使用 Anchor，采用单文件方法，所有必要的宏都可以在 `lib.rs` 文件中找到：
-
-- `declare_id`：指定程序的链上地址。
-- `#[program]`：指定包含程序指令逻辑的模块。
-- `#[derive(Accounts)]`：应用于结构体以指示指令所需的账户列表。
-- `#[account]`：应用于结构体以创建特定于程序的自定义账户类型。
-
-**注意**：您可以跟随并在 Solana Playground（一个用于构建和部署 Solana 程序的在线工具）中打开以下示例：[Solana Playground](https://beta.solpg.io/669fef20cffcf4b13384d277)。
-
-作为风格选择，在所有指令的账户结构中，我们将分离 `Signer` 和 `Payer`。通常两者使用相同的账户，但这是一个标准程序，以防 `Signer` 是 PDA，因为它无法支付账户创建费用，因此需要两个不同的字段。虽然这种分离对我们的指令不是严格必要的，但这被认为是良好的实践。
-
-**注意**：Signer 和 Payer 都必须仍然是交易的签名者。
-
-### 依赖项和导入
-
-在这个示例中，我们主要使用启用了 anchor 功能的 `mpl_core` crate：
-
+## Getting our hands dirty: The program
+### Prerequisite and Setup
+For simplicity, we’ll use Anchor, leveraging a mono-file approach where all the necessary macros can be found in the `lib.rs` file:
+- `declare_id`: Specifies the program's on-chain address.
+- `#[program]`: Specifies the module containing the program’s instruction logic.
+- `#[derive(Accounts)]`: Applied to structs to indicate a list of accounts required for an instruction.
+- `#[account]`: Applied to structs to create custom account types specific to the program.
+**Note**: You can follow along and open the following example in Solana Playground, an online tool to build and deploy Solana programs: [Solana Playground](https://beta.solpg.io/669fef20cffcf4b13384d277).
+As a stylistic choice, in the account struct of all instructions, we will separate the `Signer` and the `Payer`. Quite often the same account is used for both but this is a standard procedure in case the `Signer` is a PDAs since it cannot pay for account creation, therefore, there need to be two different fields for it. While this separation isn't strictly necessary for our instructions, it's considered good practice.
+**Note**: Both the Signer and the Payer must still be signers of the transaction.
+### Dependencies and Imports
+In this example, we primarily use the `mpl_core` crate with the anchor feature enabled:
 ```toml
-mpl-core = { version = "x.x.x", features = ["anchor"] }
+mpl-core = { version = "x.x.x", features = ["anchor"] } 
 ```
-
-使用的依赖项如下：
-
+The dependencies used are as follows:
 ```rust
 use anchor_lang::prelude::*;
-
 use mpl_core::{
     ID as MPL_CORE_ID,
-    fetch_external_plugin_adapter_data_info,
-    fetch_plugin,
+    fetch_external_plugin_adapter_data_info, 
+    fetch_plugin, 
     instructions::{
-        CreateCollectionV2CpiBuilder,
-        CreateV2CpiBuilder,
-        WriteExternalPluginAdapterDataV1CpiBuilder,
+        CreateCollectionV2CpiBuilder, 
+        CreateV2CpiBuilder, 
+        WriteExternalPluginAdapterDataV1CpiBuilder, 
         UpdatePluginV1CpiBuilder
-    },
-    accounts::{BaseAssetV1, BaseCollectionV1},
+    }, 
+    accounts::{BaseAssetV1, BaseCollectionV1}, 
     types::{
-        AppDataInitInfo, Attribute, Attributes,
-        ExternalPluginAdapterInitInfo, ExternalPluginAdapterKey,
+        AppDataInitInfo, Attribute, Attributes, 
+        ExternalPluginAdapterInitInfo, ExternalPluginAdapterKey, 
         ExternalPluginAdapterSchema, PermanentBurnDelegate, UpdateAuthority,
-        PermanentFreezeDelegate, PermanentTransferDelegate, Plugin,
+        PermanentFreezeDelegate, PermanentTransferDelegate, Plugin, 
         PluginAuthority, PluginAuthorityPair, PluginType
-    },
+    }, 
 };
 ```
-
-### 设置管理器指令
-
-设置管理器指令是一个一次性过程，用于初始化 `manager` PDA 并在 manager 账户中保存 bumps。
-
-大部分操作发生在 `Account` 结构中：
+### The Setup Manager Instruction
+The setup manager instruction is a one-off process needed to initialize the `manager` PDA and save the bumps inside the manager account.
+Most of the action happens in the `Account` struct:
 ```rust
 #[derive(Accounts)]
 pub struct SetupManager<'info> {
@@ -127,36 +114,26 @@ pub struct SetupManager<'info> {
    pub system_program: Program<'info, System>,
 }
 ```
-
-这里，我们使用 `init` 宏初始化 `Manager` 账户，payer 转移足够的 lamports 用于租金，`INIT_SPACE` 变量保留适当数量的字节。
-
+Here, we initialize the `Manager` account using the `init` macro, with the payer transferring enough lamports for rent and the `INIT_SPACE` variable to reserve the appropriate number of bytes.
 ```rust
 #[account]
 pub struct Manager {
     pub bump: u8,
 }
-
 impl Space for Manager {
     const INIT_SPACE: usize = 8 + 1;
 }
 ```
-
-在指令本身中，我们只是声明并保存 bumps 以供将来使用签名者种子时引用。这避免了每次使用 manager 账户时浪费计算单元来重新查找它们。
-
+In the instruction itself, we just declare and save the bumps for future reference when using signer seeds. This avoids wasting compute units on refinding them everytime we use the manager account.
 ```rust
 pub fn setup_manager(ctx: Context<SetupManager>) -> Result<()> {
     ctx.accounts.manager.bump = ctx.bumps.manager;
-
     Ok(())
 }
 ```
-
-### 创建活动指令
-
-创建活动指令将活动设置为集合资产形式的数字资产，允许您以无缝和有组织的方式包含所有相关门票和活动数据。
-
-此指令的账户结构与设置管理器指令非常相似：
-
+### The Create Event Instruction
+The Create Event Instruction sets up an event as a digital asset in the form of a collection asset, allowing you to include all related tickets and event data in a seamless and organized manner. 
+The account struct for this instruction, closely resembles the Setup Manager instruction:
 ```rust
 #[derive(Accounts)]
 pub struct CreateEvent<'info> {
@@ -176,13 +153,10 @@ pub struct CreateEvent<'info> {
    pub mpl_core_program: UncheckedAccount<'info>
 }
 ```
-
-主要区别是：
-- `Manager` 账户已经初始化，将用作活动账户的更新权限。
-- 活动账户设置为可变和签名者，将在此指令期间转换为 Core Collection 账户。
-
-由于我们需要在集合账户中保存大量数据，我们通过结构化格式传递所有输入，以避免用大量参数使函数混乱。
-
+The main differences are
+- The `Manager` account is already initialized and will be used as the update authority for the event account. 
+- The event account, set as mutable and a signer, will be transformed into a Core Collection Account during this instruction.
+Since we need to save a lot of data within the collection account, we pass all the inputs via a structured format to avoid cluttering the function with numerous parameters.
 ```rust
 #[derive(AnchorDeserialize, AnchorSerialize)]
 pub struct CreateEventArgs {
@@ -196,49 +170,46 @@ pub struct CreateEventArgs {
    pub capacity: u64,
 }
 ```
-
-主函数 `create_event` 然后利用上述输入创建活动集合并添加包含所有活动详情的属性。
-
+The main function, `create_event`, just then utilizes the above inputs to create the event collection and add attributes containing all event details.
 ```rust
 pub fn create_event(ctx: Context<CreateEvent>, args: CreateEventArgs) -> Result<()> {
-    // 添加一个 Attribute 插件来保存活动详情
+    // Add an Attribute Plugin that will hold the event details
     let mut collection_plugin: Vec<PluginAuthorityPair> = vec![];
-
     let attribute_list: Vec<Attribute> = vec![
-        Attribute {
-            key: "City".to_string(),
-            value: args.city
+        Attribute { 
+            key: "City".to_string(), 
+            value: args.city 
         },
-        Attribute {
-            key: "Venue".to_string(),
-            value: args.venue
+        Attribute { 
+            key: "Venue".to_string(), 
+            value: args.venue 
         },
-        Attribute {
-            key: "Artist".to_string(),
-            value: args.artist
+        Attribute { 
+            key: "Artist".to_string(), 
+            value: args.artist 
         },
-        Attribute {
-            key: "Date".to_string(),
-            value: args.date
+        Attribute { 
+            key: "Date".to_string(), 
+            value: args.date 
         },
-        Attribute {
-            key: "Time".to_string(),
-            value: args.time
+        Attribute { 
+            key: "Time".to_string(), 
+            value: args.time 
         },
-        Attribute {
-            key: "Capacity".to_string(),
-            value: args.capacity.to_string()
+        Attribute { 
+            key: "Capacity".to_string(), 
+            value: args.capacity.to_string() 
         }
     ];
-
+    
     collection_plugin.push(
-        PluginAuthorityPair {
-            plugin: Plugin::Attributes(Attributes { attribute_list }),
-            authority: Some(PluginAuthority::UpdateAuthority)
+        PluginAuthorityPair { 
+            plugin: Plugin::Attributes(Attributes { attribute_list }), 
+            authority: Some(PluginAuthority::UpdateAuthority) 
         }
     );
-
-    // 创建将保存门票的 Collection
+    
+    // Create the Collection that will hold the tickets
     CreateCollectionV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .collection(&ctx.accounts.event.to_account_info())
     .update_authority(Some(&ctx.accounts.manager.to_account_info()))
@@ -248,16 +219,12 @@ pub fn create_event(ctx: Context<CreateEvent>, args: CreateEventArgs) -> Result<
     .uri(args.uri)
     .plugins(collection_plugin)
     .invoke()?;
-
     Ok(())
 }
 ```
-
-### 创建门票指令
-创建活动指令将活动设置为集合资产形式的数字资产，允许您以无缝和有组织的方式包含所有相关门票和活动数据。
-
-整个指令与 `create_event` 非常相似，因为目标非常相似，但这次我们不是创建活动资产，而是创建将包含在 `活动集合` 中的门票资产。
-
+### The Create Ticket Instruction
+The Create Event Instruction sets up an event as a digital asset in the form of a collection asset, allowing you to include all related tickets and event data in a seamless and organized manner. 
+The whole instruction closely resemble the `create_event` one since the goal are very similar, but this time instead of creating the event asset, we’re going to create the ticket asset that will be contained inside of the `event collection`
 ```rust
 #[derive(Accounts)]
 pub struct CreateTicket<'info> {
@@ -282,13 +249,10 @@ pub struct CreateTicket<'info> {
    pub mpl_core_program: UncheckedAccount<'info>
 }
 ```
-
-账户结构中的主要区别是：
-- 活动账户已经初始化，所以我们可以将其反序列化为 `BaseCollectionV1` 资产，在这里我们可以检查 `update_authority` 是 manager PDA。
-- 门票账户设置为可变和签名者，将在此指令期间转换为 Core Collection 账户。
-
-由于我们在这个函数中也需要保存大量数据，我们通过结构化格式传递这些输入，就像在 `create_event` 指令中已经做的那样。
-
+The main differences in the account struct are:
+- The event account is already initialized so we can deserialize it as a `BaseCollectionV1` asset where we can check that the `update_authority` is the manager PDA. 
+- The ticket account, set as mutable and a signer, will be transformed into a Core Collection Account during this instruction.
+Since we need to save extensive data in this function too, we pass these inputs via a structured format as done already in the `create_event` instruction.
 ```rust
 #[derive(AnchorDeserialize, AnchorSerialize)]
 pub struct CreateTicketArgs {
@@ -302,98 +266,91 @@ pub struct CreateTicketArgs {
    pub venue_authority: Pubkey,
 }
 ```
-
-当我们谈到指令时，主要区别是：
-- 合并了额外的插件，如 `PermanentFreeze`、`PermanentBurn` 和 `PermanentTransfer`，以便在出现问题时添加安全层。
-- 使用新的 `AppData` 外部插件在其中存储由我们在指令中作为输入传递的 `venue_authority` 管理的二进制数据。
-- 在开始时有一个健全性检查，以查看发行的门票总数是否超过容量限制。
-
+When we talk about the instruction, the main differences are:
+- Incorporates additional plugins like the `PermanentFreeze`, `PermanentBurn`, and `PermanentTransfer`in order to add a security layer in case something goes wrong. 
+- Use the new `AppData` external plugin to store binary data inside of it managed by the `venue_authority` that we pass in as input in the instruction. 
+- It has a sanity check at the start to see if the total number of ticket issued doesn’t go beyond capacity limit
 ```rust
 pub fn create_ticket(ctx: Context<CreateTicket>, args: CreateTicketArgs) -> Result<()> {
-    // 检查是否尚未达到最大门票数量
+    // Check that the maximum number of tickets has not been reached yet
     let (_, collection_attribute_list, _) = fetch_plugin::<BaseCollectionV1, Attributes>(
-            &ctx.accounts.event.to_account_info(),
+            &ctx.accounts.event.to_account_info(), 
             PluginType::Attributes
         )?;
-
-    // 搜索 Capacity 属性
+    // Search for the Capacity attribute
     let capacity_attribute = collection_attribute_list
         .attribute_list
         .iter()
         .find(|attr| attr.key == "Capacity")
         .ok_or(TicketError::MissingAttribute)?;
-
-    // 解包 Capacity 属性值
+    // Unwrap the Capacity attribute value
     let capacity = capacity_attribute
         .value
         .parse::<u32>()
         .map_err(|_| TicketError::NumericalOverflow)?;
-
     require!(
-        ctx.accounts.event.num_minted < capacity,
+        ctx.accounts.event.num_minted < capacity, 
         TicketError::MaximumTicketsReached
     );
-
-    // 添加一个 Attribute 插件来保存门票详情
+    // Add an Attribute Plugin that will hold the ticket details
     let mut ticket_plugin: Vec<PluginAuthorityPair> = vec![];
-
+    
     let attribute_list: Vec<Attribute> = vec![
-    Attribute {
-        key: "Ticket Number".to_string(),
+    Attribute { 
+        key: "Ticket Number".to_string(), 
         value: ctx.accounts.event.num_minted.checked_add(1).ok_or(TicketError::NumericalOverflow)?.to_string()
     },
-    Attribute {
-        key: "Hall".to_string(),
-        value: args.hall
+    Attribute { 
+        key: "Hall".to_string(), 
+        value: args.hall 
     },
-    Attribute {
-        key: "Section".to_string(),
-        value: args.section
+    Attribute { 
+        key: "Section".to_string(), 
+        value: args.section 
     },
-    Attribute {
-        key: "Row".to_string(),
-        value: args.row
+    Attribute { 
+        key: "Row".to_string(), 
+        value: args.row 
     },
-    Attribute {
-        key: "Seat".to_string(),
-        value: args.seat
+    Attribute { 
+        key: "Seat".to_string(), 
+        value: args.seat 
     },
-    Attribute {
-        key: "Price".to_string(),
-        value: args.price.to_string()
+    Attribute { 
+        key: "Price".to_string(), 
+        value: args.price.to_string() 
     }
     ];
-
+    
     ticket_plugin.push(
-        PluginAuthorityPair {
-            plugin: Plugin::Attributes(Attributes { attribute_list }),
-            authority: Some(PluginAuthority::UpdateAuthority)
+        PluginAuthorityPair { 
+            plugin: Plugin::Attributes(Attributes { attribute_list }), 
+            authority: Some(PluginAuthority::UpdateAuthority) 
         }
     );
-
+    
     ticket_plugin.push(
-        PluginAuthorityPair {
-            plugin: Plugin::PermanentFreezeDelegate(PermanentFreezeDelegate { frozen: false }),
-            authority: Some(PluginAuthority::UpdateAuthority)
+        PluginAuthorityPair { 
+            plugin: Plugin::PermanentFreezeDelegate(PermanentFreezeDelegate { frozen: false }), 
+            authority: Some(PluginAuthority::UpdateAuthority) 
         }
     );
-
+    
     ticket_plugin.push(
-        PluginAuthorityPair {
-            plugin: Plugin::PermanentBurnDelegate(PermanentBurnDelegate {}),
-            authority: Some(PluginAuthority::UpdateAuthority)
+        PluginAuthorityPair { 
+            plugin: Plugin::PermanentBurnDelegate(PermanentBurnDelegate {}), 
+            authority: Some(PluginAuthority::UpdateAuthority) 
         }
     );
-
+    
     ticket_plugin.push(
-        PluginAuthorityPair {
-            plugin: Plugin::PermanentTransferDelegate(PermanentTransferDelegate {}),
-            authority: Some(PluginAuthority::UpdateAuthority)
+        PluginAuthorityPair { 
+            plugin: Plugin::PermanentTransferDelegate(PermanentTransferDelegate {}), 
+            authority: Some(PluginAuthority::UpdateAuthority) 
         }
     );
-
     let mut ticket_external_plugin: Vec<ExternalPluginAdapterInitInfo> = vec![];
-
+    
     ticket_external_plugin.push(ExternalPluginAdapterInitInfo::AppData(
         AppDataInitInfo {
             init_plugin_authority: Some(PluginAuthority::UpdateAuthority),
@@ -401,10 +358,8 @@ pub fn create_ticket(ctx: Context<CreateTicket>, args: CreateTicketArgs) -> Resu
             schema: Some(ExternalPluginAdapterSchema::Binary),
         }
     ));
-
     let signer_seeds = &[b"manager".as_ref(), &[ctx.accounts.manager.bump]];
-
-    // 创建门票
+    // Create the Ticket
     CreateV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .asset(&ctx.accounts.ticket.to_account_info())
     .collection(Some(&ctx.accounts.event.to_account_info()))
@@ -417,16 +372,12 @@ pub fn create_ticket(ctx: Context<CreateTicket>, args: CreateTicketArgs) -> Resu
     .plugins(ticket_plugin)
     .external_plugin_adapters(ticket_external_plugin)
     .invoke_signed(&[signer_seeds])?;
-
     Ok(())
 }
 ```
-
-**注意**：要使用外部插件，我们需要使用 create 函数的 V2 版本，它允许设置 .external_plugin_adapter 输入。
-
-### 扫描门票指令
-扫描门票指令通过在扫描时验证和更新门票状态来完成该过程。
-
+**Note**: To use external plugins, we need to use the V2 of the create function, which allows setting the .external_plugin_adapter input. 
+### The Scan Ticket Instruction
+The Scan Ticket Instruction finalizes the process by verifying and updating the status of the ticket when scanned.
 ```rust
 #[derive(Accounts)]
 pub struct ScanTicket<'info> {
@@ -456,32 +407,23 @@ pub struct ScanTicket<'info> {
    pub mpl_core_program: UncheckedAccount<'info>,
 }
 ```
-
-账户结构中的主要区别是：
-- 门票账户已经初始化，所以我们可以将其反序列化为 `BaseAssetV1` 资产，在这里我们可以检查 `update_authority` 是活动集合，并且资产的所有者是 `owner` 账户。
-- 我们要求 `owner` 和 `venue_authority` 都是签名者，以确保扫描由双方认证且无错误。应用程序将创建一个由 `venue_authority` 部分签名的交易并广播它，以便门票的 `owner` 可以签名并发送它。
-
-在指令中，我们首先进行健全性检查，查看 AppData 插件中是否有任何数据，因为如果有，门票就已经被扫描过了。
-
-之后，我们创建一个 `data` 变量，它由一个表示"Scanned"的 u8 向量组成，我们稍后将其写入 AppData 插件。
-
-我们通过使数字资产成为灵魂绑定来完成指令，这样它在验证后就不能被交易或转移。使其仅成为活动的纪念品。
-
-```rust
+The main differences in the account struct are:
+- The ticket account is already initialized so we can deserialize it as a `BaseAssetV1` asset where we can check that the `update_authority` is the event collection and that the owner of the asset is the `owner` account. 
+- We require for both the `owner` and the `venue_authority` to be signer to ensure the scan is authenticated by both party and error-free. The application will create a transaction, partially signed by the `venue_authority` and broadcast it so the `owner` of the ticket can sign it and send it
+In the instruction we start with a sanity check to see if there is any data inside of the Appdata plugin because if there is, the ticket would’ve been already scanned.
+After that, we create a `data` variable that consist of a vector of u8 that says “Scanned” that we’ll later write inside the Appdata plugin 
+We finish the instruction by making the digital asset soulbounded so it can’t be traded or transferred after validation. Making it just a memorabilia of the event.
+```rust 
 pub fn scan_ticket(ctx: Context<ScanTicket>) -> Result<()> {
-
     let (_, app_data_length) = fetch_external_plugin_adapter_data_info::<BaseAssetV1>(
-            &ctx.accounts.ticket.to_account_info(),
-            None,
+            &ctx.accounts.ticket.to_account_info(), 
+            None, 
             &ExternalPluginAdapterKey::AppData(
                 PluginAuthority::Address { address: ctx.accounts.signer.key() }
             )
         )?;
-
     require!(app_data_length == 0, TicketError::AlreadyScanned);
-
     let data: Vec<u8> = "Scanned".as_bytes().to_vec();
-
     WriteExternalPluginAdapterDataV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .asset(&ctx.accounts.ticket.to_account_info())
     .collection(Some(&ctx.accounts.event.to_account_info()))
@@ -490,9 +432,7 @@ pub fn scan_ticket(ctx: Context<ScanTicket>) -> Result<()> {
     .key(ExternalPluginAdapterKey::AppData(PluginAuthority::Address { address: ctx.accounts.signer.key() }))
     .data(data)
     .invoke()?;
-
     let signer_seeds = &[b"manager".as_ref(), &[ctx.accounts.manager.bump]];
-
     UpdatePluginV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .asset(&ctx.accounts.ticket.to_account_info())
     .collection(Some(&ctx.accounts.event.to_account_info()))
@@ -501,11 +441,8 @@ pub fn scan_ticket(ctx: Context<ScanTicket>) -> Result<()> {
     .system_program(&ctx.accounts.system_program.to_account_info())
     .plugin(Plugin::PermanentFreezeDelegate(PermanentFreezeDelegate { frozen: true }))
     .invoke_signed(&[signer_seeds])?;
-
     Ok(())
 }
 ```
-
-## 结论
-
-恭喜！您现在已经具备使用 AppData 插件创建票务解决方案的能力。如果您想了解更多关于 Core 和 Metaplex 的信息，请查看[开发者中心](/zh/smart-contracts/core/sdk)。
+## Conclusion
+Congratulations! You are now equipped to create a Ticketing Solution using the Appdata Plugin. If you want to learn more about Core and Metaplex, check out the [developer hub](/smart-contracts/core/getting-started).

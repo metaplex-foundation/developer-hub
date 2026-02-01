@@ -1,289 +1,213 @@
 ---
-title: Plugin概要
-metaTitle: Core Plugin概要 | Metaplex Core
-description: Metaplex Core Pluginについて学びます。ロイヤリティ、フリーズ、バーン、オンチェーン属性などの動作をNFT AssetやCollectionに追加するモジュラー拡張機能です。
+title: Plugins Overview
+metaTitle: Core Plugins Overview | Metaplex Core
+description: Learn about Metaplex Core plugins - modular extensions that add behaviors like royalties, freezing, burning, and on-chain attributes to NFT Assets and Collections.
+updated: '01-31-2026'
+keywords:
+  - Core plugins
+  - NFT plugins
+  - plugin system
+  - royalties plugin
+  - freeze plugin
+about:
+  - Plugin architecture
+  - NFT extensions
+  - Lifecycle events
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Can I add plugins after an Asset is created?
+    a: Yes, except for Permanent plugins. Owner Managed plugins require owner signature; Authority Managed plugins require update authority signature.
+  - q: What happens to plugins when an Asset is transferred?
+    a: Owner Managed plugins (Transfer, Freeze, Burn Delegate) have their authority automatically revoked on transfer. Authority Managed and Permanent plugins persist.
+  - q: Can an Asset have the same plugin as its Collection?
+    a: Yes. When both have the same plugin type, the Asset-level plugin takes precedence over the Collection-level plugin.
+  - q: How do I remove a plugin?
+    a: Use the removePlugin instruction. Only the plugin authority can remove it.
+  - q: Can I create custom plugins?
+    a: No. Only built-in plugins are supported. The plugin system is not extensible by third parties.
+  - q: Do plugins cost extra SOL?
+    a: Adding plugins increases account size, which increases rent. The cost is minimal (~0.001 SOL per plugin depending on data size).
 ---
-
-このページでは**Core Pluginシステム**について説明します。Core AssetやCollectionに動作やデータストレージを追加するモジュラー拡張機能です。Pluginはライフサイクルイベントにフックしてルールを強制したり、オンチェーンデータを保存したりします。 {% .lead %}
-
-{% callout title="学習内容" %}
-
-- Pluginとは何か、どのように機能するか
-- Pluginの種類：所有者管理、権限管理、永続
-- Pluginがライフサイクルイベント（作成、転送、バーン）にどのように影響するか
-- AssetとCollection間のPlugin優先度
-
+This page explains the **Core Plugin system** - modular extensions that add behaviors and data storage to Core Assets and Collections. Plugins hook into lifecycle events to enforce rules or store on-chain data. {% .lead %}
+{% callout title="What You'll Learn" %}
+- What plugins are and how they work
+- Types of plugins: Owner Managed, Authority Managed, Permanent
+- How plugins affect lifecycle events (create, transfer, burn)
+- Plugin priority between Assets and Collections
 {% /callout %}
-
-## 概要
-
-**Plugin**は、Core AssetまたはCollectionに機能を追加するオンチェーン拡張機能です。データを保存したり（属性など）、ルールを強制したり（ロイヤリティなど）、権限を委任したり（フリーズ/転送権限など）できます。
-
-- **所有者管理**：追加には所有者の署名が必要（Transfer、Freeze、Burn Delegate）
-- **権限管理**：更新権限によって追加可能（Royalties、Attributes、Update Delegate）
-- **永続**：作成時にのみ追加可能（Permanent Transfer/Freeze/Burn Delegate）
-
-## 対象外
-
-カスタムPluginの作成（組み込みPluginのみサポート）、Token Metadata Plugin（別システム）、オフチェーンPluginデータストレージは対象外です。
-
-## クイックスタート
-
-**ジャンプ：** [Pluginの種類](#pluginの種類) · [Plugin表](#plugin表) · [ライフサイクルイベント](#pluginとライフサイクルイベント) · [Pluginの追加](/ja/smart-contracts/core/plugins/adding-plugins)
-
-1. ユースケースに基づいてPluginを選択（ロイヤリティ、フリーズ、属性など）
-2. `addPlugin()`を使用するか、Asset/Collection作成時にPluginを追加
-3. Pluginは自動的にライフサイクルイベントにフック
-4. DASまたはオンチェーンフェッチでPluginデータをクエリ
-
-## ライフサイクル
-
-Core Assetのライフサイクル中に、以下のようなイベントがトリガーされる可能性があります：
-
-- 作成
-- 転送
-- 更新
-- バーン
-- Plugin追加
-- 権限Plugin承認
-- 権限Plugin削除
-
-ライフサイクルイベントは、作成からウォレット間の転送、Assetの破壊まで、さまざまな方法でAssetに影響を与えます。AssetレベルまたはCollectionレベルに付加されたPluginは、これらのライフサイクルイベント中に検証プロセスを実行し、イベントの実行を`承認`、`拒否`、または`強制承認`します。
-
-## Pluginとは？
-
-Pluginは、データを保存したりAssetに追加機能を提供したりできるNFT用のオンチェーンアプリのようなものです。
-
-## Pluginの種類
-
-### 所有者管理Plugin
-
-所有者管理Pluginは、トランザクションにAsset所有者の署名が存在する場合にのみCore Assetに追加できるPluginです。
-
-所有者管理Pluginには以下が含まれますが、これらに限定されません：
-
-- [Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate)（マーケットプレース、ゲーム）
-- [Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate)（マーケットプレース、ステーキング、ゲーム）
-- [Burn Delegate](/ja/smart-contracts/core/plugins/burn-delegate)（ゲーム）
-
-権限が設定されていない状態で所有者管理PluginがAsset/Collectionに追加された場合、権限タイプは`owner`タイプにデフォルト設定されます。
-
-所有者管理Pluginの権限は、転送時に自動的に取り消されます。
-
-### 権限管理Plugin
-
-権限管理Pluginは、MPL Core AssetまたはCore Collectionの権限がいつでも追加および更新できるPluginです。
-
-権限管理Pluginには以下が含まれますが、これらに限定されません：
-
-- [Royalties](/ja/smart-contracts/core/plugins/royalties)
-- [Update Delegate](/ja/smart-contracts/core/plugins/update-delegate)
-- [Attribute](/ja/smart-contracts/core/plugins/attribute)
-
-権限引数が存在しない状態で権限管理PluginがAsset/Collectionに追加された場合、Pluginは権限タイプ`update authority`にデフォルト設定されます。
-
-### 永続Plugin
-
-**永続Pluginは、作成時にのみCore Assetに追加できるPluginです。** Assetが既に存在する場合、永続Pluginを追加することはできません。
-
-永続Pluginには以下が含まれますが、これらに限定されません：
-
-- [Permanent Transfer Delegate](/ja/smart-contracts/core/plugins/permanent-transfer-delegate)
-- [Permanent Freeze Delegate](/ja/smart-contracts/core/plugins/permanent-freeze-delegate)
-- [Permanent Burn Delegate](/ja/smart-contracts/core/plugins/permanent-burn-delegate)
-
-権限が設定されていない状態で永続PluginがAsset/Collectionに追加された場合、権限タイプは`update authority`タイプにデフォルト設定されます。
-
-## Collection Plugin
-
-Collection Pluginは、Collectionレベルで追加されるPluginで、Collection全体に影響を与えることができます。これは特にロイヤリティに有用で、[royalties plugin](/ja/smart-contracts/core/plugins/royalties)をCollection Assetに割り当てると、そのCollection内のすべてのAssetがそのPluginを参照するようになります。
-
-Collectionは`永続Plugin`と`権限管理Plugin`のみにアクセスできます。
-
-## Plugin優先度
-
-MPL Core AssetとMPL Core Collection Assetの両方が同じPluginタイプを共有する場合、AssetレベルのPluginとそのデータがCollectionレベルのPluginよりも優先されます。
-
-これは、Assetコレクションの異なるレベルでロイヤリティを設定するなど、創造的な方法で使用できます。
-
-- Collection Assetには2%のRoyalties Pluginが割り当てられています
-- Collection内のスーパーレアなMPL Core Assetには5%のRoyalty Pluginが割り当てられています
-
-上記の場合、Collectionからの通常のMPL Core Asset販売では2%のロイヤリティが保持されますが、スーパーレアなMPL Core Assetは、Collection Asset Royalties Pluginよりも優先される独自のRoyalties Pluginを持っているため、販売時に5%のロイヤリティが保持されます。
-
-## Plugin表
-
-| Plugin                                                                   | 所有者管理 | 権限管理 | 永続 |
-| ------------------------------------------------------------------------ | ---------- | -------- | ---- |
-| [Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate)                  | ✅         |          |      |
-| [Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate)                      | ✅         |          |      |
-| [Burn Delegate](/ja/smart-contracts/core/plugins/burn-delegate)                          | ✅         |          |      |
-| [Royalties](/ja/smart-contracts/core/plugins/royalties)                                  |            | ✅       |      |
-| [Update Delegate](/ja/smart-contracts/core/plugins/update-delegate)                      |            | ✅       |      |
-| [Attribute](/ja/smart-contracts/core/plugins/attribute)                                  |            | ✅       |      |
-| [Permanent Transfer Delegate](/ja/smart-contracts/core/plugins/permanent-transfer-delegate) |            |          | ✅   |
-| [Permanent Freeze Delegate](/ja/smart-contracts/core/plugins/permanent-freeze-delegate)  |            |          | ✅   |
-| [Permanent Burn Delegate](/ja/smart-contracts/core/plugins/permanent-burn-delegate)      |            |          | ✅   |
-
-## Pluginとライフサイクルイベント
-
-MPL CoreのPluginは、作成、転送、バーン、更新などの特定のライフサイクルアクションの結果に影響を与える能力を持っています。
-
-各Pluginは、アクションを`拒否`、`承認`、または`強制承認`して望ましい結果にする能力を持っています。
-
-ライフサイクルイベント中、アクションは事前定義されたPluginのリストを下って、それらに対してチェックと検証を行います。
-Pluginの条件が検証されると、ライフサイクルは通過してアクションを続行します。
-
-Pluginの検証が失敗すると、ライフサイクルは停止し、拒否されます。
-
-Plugin検証の規則は、以下の条件の階層に従います：
-
-- 強制承認がある場合、常に承認
-- そうでなければ、拒否がある場合は拒否
-- そうでなければ、承認がある場合は承認
-- そうでなければ拒否
-
-`強制承認`検証は、1stパーティPluginと`Permanent Delegate`Pluginでのみ利用可能です。
-
-### 強制承認
-
-強制承認は、Pluginの検証をチェックする際に最初に行われるチェックです。現在、検証を強制承認するPluginは以下のとおりです：
-
+## Summary
+**Plugins** are on-chain extensions that add functionality to Core Assets or Collections. They can store data (like attributes), enforce rules (like royalties), or delegate permissions (like freeze/transfer authority).
+- **Owner Managed**: Require owner signature to add (Transfer, Freeze, Burn Delegate)
+- **Authority Managed**: Can be added by update authority (Royalties, Attributes, Update Delegate)
+- **Permanent**: Can only be added at creation time (Permanent Transfer/Freeze/Burn Delegate)
+## Out of Scope
+Creating custom plugins (only built-in plugins are supported), Token Metadata plugins (different system), and off-chain plugin data storage.
+## Quick Start
+**Jump to:** [Plugin Types](#types-of-plugins) · [Plugin Table](#plugin-table) · [Lifecycle Events](#plugins-and-lifecycle-events) · [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)
+1. Choose a plugin based on your use case (royalties, freezing, attributes, etc.)
+2. Add the plugin using `addPlugin()` or at Asset/Collection creation
+3. Plugins automatically hook into lifecycle events
+4. Query plugin data via DAS or on-chain fetch
+## Lifecycles
+During a Core Assets lifecycle, multiple events can be triggered such as:
+- Creating
+- Transferring
+- Updating
+- Burning
+- Add Plugin
+- Approve Authority Plugin
+- Remove Authority Plugin
+Lifecycle events impact the Asset in various ways from creating, to transfers between wallets, all the way through to the Assets destruction. Plugins attached an Asset level or a Collection level will run through a validation process during these lifecycle events to either `approve`, `reject`, or `force approve` the event from execution.
+## What are Plugins?
+A plugin is like an onchain app for your NFT that can either store data or provide additional functionality to the asset.
+## Types of Plugins
+### Owner Managed Plugins
+Owner managed plugins are plugins that can only be added to an Core Asset if the Asset owner's signature is present in the transaction.
+Owner Managed Plugins include but are not limited to:
+- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) (market places, games)
+- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) (market places, staking, games)
+- [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) (games)
+If an Owner Managed plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `owner`.
+The authority of owner managed plugins is automatically revoked when they are transferred.
+### Authority Managed Plugins
+Authority managed plugins are plugins that the authority of the MPL Core Asset or Core Collection can add and update at any time.
+Authority manages plugins include but are not limited to:
+- [Royalties](/smart-contracts/core/plugins/royalties)
+- [Update Delegate](/smart-contracts/core/plugins/update-delegate)
+- [Attribute](/smart-contracts/core/plugins/attribute)
+If an Authority Managed plugin is added to an Asset/Collection without an authority argument present then the plugin will default to the authority type of `update authority`.
+### Permanent Plugins
+**Permanent plugins are plugins that may only be added to a Core Asset at the time of creation.** If an Asset already exists then Permanent Plugins cannot be added.
+Permanent Plugins include but are not limited to:
+- [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate)
+- [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)
+- [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)
+If an Permanent Plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `update authority`.
+## Collection Plugins
+Collection Plugins are plugins that are added at the collection level can have a collection-wide effect. This is particularly useful for royalties because you can assign the [royalties plugin](/smart-contracts/core/plugins/royalties) to the Collection Asset and all Assets in that collection will now reference that plugin.
+Collections only have access to `Permanent Plugins` and `Authority Managed Plugins`.
+## Plugin Priority
+If an MPL Core Asset and MPL Core Collection Asset both share the same plugin type then the Asset level plugin and its data will take precedence over the Collection level plugin.
+This can be used in creative ways like setting royalties at different levels for a collection of assets.
+- Collection Asset has a Royalties Plugin assigned at 2%
+- A Super Rare MPL Core Asset within the collection has a Royalty Plugin assigned at 5%
+In the above case, regular MPL Core Asset sales from the collection will retain a 2% royalty while the Super Rare MPL Core Asset will retain a 5% royalty at sale because it has it's own Royalties Plugin that takes precedence over the Collection Asset Royalties Plugin.
+## Plugin Table
+| Plugin                                                                   | Owner Managed | Authority Managed | Permanent |
+| ------------------------------------------------------------------------ | ------------- | ----------------- | --------- |
+| [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate)                     | ✅            |                   |           |
+| [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate)                         | ✅            |                   |           |
+| [Burn Delegate](/smart-contracts/core/plugins/burn-delegate)                             | ✅            |                   |           |
+| [Royalties](/smart-contracts/core/plugins/royalties)                                     |               | ✅                |           |
+| [Update Delegate](/smart-contracts/core/plugins/update-delegate)                         |               | ✅                |           |
+| [Attribute](/smart-contracts/core/plugins/attribute)                                     |               | ✅                |           |
+| [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate) |               |                   | ✅        |
+| [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)     |               |                   | ✅        |
+| [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)         |               |                   | ✅        |
+## Plugins and Lifecycle Events
+Plugins in MPL Core have the ability to affect the outcome of certain lifecycle actions such as Create, Transfer, Burn, and Update.
+Each plugin has the ability to to `reject`, `approve`, or `force approve` an action to a desired outcome.
+During lifecycle events the action will work its way down a list of predefined plugins checking and validating against them.
+If the plugins conditions are validated the lifecycle passes and continues its action.
+If a plugin validation fails then the lifecycle will be halted and rejected.
+The rules for plugin validation are as follows in this hierarchy of conditions;
+- If there is force approve, always approve
+- Else if there is any reject, reject
+- Else if there is any approve, approve
+- Else reject
+The `force approve` validation is only available on 1st party plugins and on `Permanent Delegate ` plugins.
+### Force Approve
+Force approve is the first check made when checking a plugins validations. The plugins which will force approve validations currently are:
 - **Permanent Transfer**
-- **Permanent Burn**
+- **Pernament Burn**
 - **Permanent Freeze**
-
-これらのPluginは、永続的でない対応Pluginや他のPluginよりもアクションで優先されます。
-
-#### 例
-AssetレベルでFreeze PluginによってAssetが凍結されている間に、同時にAssetに**Permanent Burn** Pluginがある場合、Assetが凍結されていても、永続Pluginの`forceApprove`性質により、**Permanent Burn** Plugin経由で呼び出されたバーン手順は実行されます。
-
-### 作成
-
+These plugins will take precedence with their actions over their non permanent counterparts and other plugins. 
+#### Example
+If you have an Asset frozen at Asset level with a Freeze Plugin while simultaneously have a **Permanent Burn** plugin on the Asset, even if the Asset is frozen the burn procedure called via the **Pernament Burn** plugin with still execute due to the `forceApprove` nature of permanent plugins.
+### Create
 {% totem %}
-
-| Plugin    | アクション | 条件     |
-| --------- | ---------- | -------- |
-| Royalties | 拒否可能   | Ruleset |
-
+| Plugin    | Action     | Conditions |
+| --------- | ---------- | ---------- |
+| Royalties | Can Reject | Ruleset    |
 {% /totem %}
-
-### 更新
-
+### Update
 {% totem %}
-更新には現在Plugin条件や検証はありません。
+Update currently has no plugin conditions or validations.
 {% /totem %}
-
-### 転送
-
+### Transfer
 {% totem %}
-
-| Plugin                      | アクション | 条件        |
-| --------------------------- | ---------- | ----------- |
-| Royalties                   | 拒否可能   | Ruleset     |
-| Freeze Delegate             | 拒否可能   | isFrozen    |
-| Transfer Delegate           | 承認可能   | isAuthority |
-| Permanent Freeze Delegate   | 拒否可能   | isFrozen    |
-| Permanent Transfer Delegate | 承認可能   | isAuthority |
-
+| Plugin                      | Action      | Conditions  |
+| --------------------------- | ----------- | ----------- |
+| Royalties                   | Can Reject  | Ruleset     |
+| Freeze Delegate             | Can Reject  | isFrozen    |
+| Transfer Delegate           | Can Approve | isAuthority |
+| Permanent Freeze Delegate   | Can Reject  | isFrozen    |
+| Permanent Transfer Delegate | Can Approve | isAuthority |
 {% /totem %}
-
-### バーン
-
+### Burn
 {% totem %}
-
-| Plugin                    | アクション | 条件        |
-| ------------------------- | ---------- | ----------- |
-| Freeze Delegate           | 拒否可能   | isFrozen    |
-| Burn Delegate             | 拒否可能   | isAuthority |
-| Permanent Freeze Delegate | 拒否可能   | isFrozen    |
-| Permanent Burn Delegate   | 承認可能   | isAuthority |
-
+| Plugin                    | Action      | Conditions  |
+| ------------------------- | ----------- | ----------- |
+| Freeze Delegate           | Can Reject  | isFrozen    |
+| Burn Delegate             | Can Reject  | isAuthority |
+| Permanent Freeze Delegate | Can Reject  | isFrozen    |
+| Permanent Burn Delegate   | Can Approve | isAuthority |
 {% /totem %}
-
-### Plugin追加
-
+### Add Plugin
 {% totem %}
-
-| Plugin          | アクション | 条件        |
-| --------------- | ---------- | ----------- |
-| Royalties       | 拒否可能   | Ruleset     |
-| Update Delegate | 承認可能   | isAuthority |
-
+| Plugin          | Action      | Conditions  |
+| --------------- | ----------- | ----------- |
+| Royalties       | Can Reject  | Ruleset     |
+| Update Delegate | Can Approve | isAuthority |
 {% /totem %}
-
-### Plugin削除
-
+### Remove Plugin
 {% totem %}
-
-| Plugin          | アクション | 条件        |
-| --------------- | ---------- | ----------- |
-| Royalties       | 拒否可能   | Ruleset     |
-| Update Delegate | 承認可能   | isAuthority |
-
+| Plugin          | Action      | Conditions  |
+| --------------- | ----------- | ----------- |
+| Royalties       | Can Reject  | Ruleset     |
+| Update Delegate | Can Approve | isAuthority |
 {% /totem %}
-
-### Plugin権限承認
-
+### Approve Plugin Authority
 {% totem %}
-承認には現在Plugin条件や検証はありません。
+Approve currently has no plugin conditions or validations.
 {% /totem %}
-
-### 権限Plugin取り消し
-
+### Revoke Authority Plugin
 {% totem %}
-取り消しには現在Plugin条件や検証はありません。
+Revoke currently has no plugin conditions or validations.
 {% /totem %}
-
-## 一般的なユースケース
-
-| ユースケース | 推奨Plugin |
+## Common Use Cases
+| Use Case | Recommended Plugin |
 |----------|-------------------|
-| クリエイターロイヤリティの強制 | [Royalties](/ja/smart-contracts/core/plugins/royalties) |
-| エスクローレスステーキング | [Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate) |
-| マーケットプレースリスティング | [Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate) + [Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate) |
-| オンチェーンゲームステータス | [Attributes](/ja/smart-contracts/core/plugins/attribute) |
-| サードパーティバーンの許可 | [Burn Delegate](/ja/smart-contracts/core/plugins/burn-delegate) |
-| 永続ステーキングプログラム | [Permanent Freeze Delegate](/ja/smart-contracts/core/plugins/permanent-freeze-delegate) |
-
+| Enforce creator royalties | [Royalties](/smart-contracts/core/plugins/royalties) |
+| Escrowless staking | [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) |
+| Marketplace listings | [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) + [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) |
+| On-chain game stats | [Attributes](/smart-contracts/core/plugins/attribute) |
+| Allow third-party burns | [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) |
+| Permanent staking program | [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) |
 ## FAQ
-
-### Asset作成後にPluginを追加できますか？
-
-はい、永続Plugin以外は可能です。所有者管理Pluginには所有者の署名が必要です。権限管理Pluginには更新権限の署名が必要です。
-
-### Assetが転送されるとPluginはどうなりますか？
-
-所有者管理Plugin（Transfer、Freeze、Burn Delegate）は転送時に権限が自動的に取り消されます。権限管理Pluginと永続Pluginは維持されます。
-
-### AssetはそのCollectionと同じPluginを持つことができますか？
-
-はい。両方が同じPluginタイプを持つ場合、AssetレベルのPluginがCollectionレベルのPluginよりも優先されます。
-
-### Pluginを削除するにはどうすればよいですか？
-
-`removePlugin`命令を使用します。Plugin権限のみが削除できます。[Pluginの削除](/ja/smart-contracts/core/plugins/removing-plugins)を参照してください。
-
-### カスタムPluginを作成できますか？
-
-いいえ。組み込みPluginのみがサポートされています。Pluginシステムはサードパーティによる拡張はできません。
-
-### Pluginには追加のSOLがかかりますか？
-
-Pluginを追加するとアカウントサイズが増加し、レントが増加します。コストはデータサイズに応じてPluginごとに約0.001 SOLと最小限です。
-
-## 用語集
-
-| 用語 | 定義 |
+### Can I add plugins after an Asset is created?
+Yes, except for Permanent plugins. Owner Managed plugins require owner signature; Authority Managed plugins require update authority signature.
+### What happens to plugins when an Asset is transferred?
+Owner Managed plugins (Transfer, Freeze, Burn Delegate) have their authority automatically revoked on transfer. Authority Managed and Permanent plugins persist.
+### Can an Asset have the same plugin as its Collection?
+Yes. When both have the same plugin type, the Asset-level plugin takes precedence over the Collection-level plugin.
+### How do I remove a plugin?
+Use the `removePlugin` instruction. Only the plugin authority can remove it. See [Removing Plugins](/smart-contracts/core/plugins/removing-plugins).
+### Can I create custom plugins?
+No. Only built-in plugins are supported. The plugin system is not extensible by third parties.
+### Do plugins cost extra SOL?
+Adding plugins increases account size, which increases rent. The cost is minimal (~0.001 SOL per plugin depending on data size).
+## Glossary
+| Term | Definition |
 |------|------------|
-| **Plugin** | Asset/Collectionに動作やデータを追加するモジュラー拡張機能 |
-| **所有者管理** | 追加に所有者の署名が必要なPluginタイプ |
-| **権限管理** | 更新権限が追加できるPluginタイプ |
-| **永続** | 作成時にのみ追加できるPluginタイプ |
-| **ライフサイクルイベント** | Pluginが検証できるアクション（作成、転送、バーン） |
-| **強制承認** | 他の拒否を上書きする永続Plugin検証 |
-| **Plugin権限** | Pluginを更新または削除する権限を持つアカウント |
-
----
-
-*Metaplex Foundationによって管理 · 最終確認2026年1月 · @metaplex-foundation/mpl-coreに適用*
+| **Plugin** | A modular extension adding behavior or data to an Asset/Collection |
+| **Owner Managed** | Plugin type requiring owner signature to add |
+| **Authority Managed** | Plugin type that update authority can add |
+| **Permanent** | Plugin type that can only be added at creation |
+| **Lifecycle Event** | An action (create, transfer, burn) that plugins can validate |
+| **Force Approve** | Permanent plugin validation that overrides other rejections |
+| **Plugin Authority** | The account authorized to update or remove a plugin |

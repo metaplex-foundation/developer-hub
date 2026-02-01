@@ -1,141 +1,111 @@
 ---
-title: 外部プラグイン
-metaTitle: 外部プラグイン | Metaplex Core
-description: OracleとAppDataプラグインを使用してCore NFTを外部プログラムで拡張します。カスタム検証ロジックの追加とアセットへの任意データ保存が可能です。
+title: External Plugins
+metaTitle: External Plugins | Metaplex Core
+description: Extend Core NFTs with external programs using Oracle and AppData plugins. Add custom validation logic and store arbitrary data on Assets.
+updated: '01-31-2026'
+keywords:
+  - external plugins
+  - Oracle plugin
+  - AppData plugin
+  - custom validation
+about:
+  - External integrations
+  - Plugin adapters
+  - Custom logic
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: When should I use External Plugins vs Built-in Plugins?
+    a: Use External Plugins when you need custom validation logic (Oracle) or third-party data storage (AppData). Use built-in plugins for standard NFT functionality like freezing, royalties, or attributes.
+  - q: Can External Plugins reject transfers?
+    a: Yes. Oracle plugins can reject lifecycle events (create, transfer, update, burn) based on external account state. This enables time-based restrictions, price-based rules, or any custom logic.
+  - q: Who can write to AppData?
+    a: Only the Data Authority can write to an AppData plugin. This is separate from the plugin authority and provides secure, partitioned storage for third-party applications.
+  - q: Can I have multiple External Plugins on one Asset?
+    a: Yes. You can add multiple Oracle or AppData plugins to a single Asset, each with different configurations and authorities.
+  - q: Are External Plugins indexed by DAS?
+    a: Yes. AppData with JSON or MsgPack schemas is automatically indexed by DAS for easy querying.
 ---
-
-**外部プラグイン**は、高度な機能のためにCore Assetsを外部プログラムに接続します。カスタム検証ロジックにはOracleプラグインを、サードパーティアプリが読み書きできる任意データの保存にはAppDataプラグインを使用します。 {% .lead %}
-
-{% callout title="学習内容" %}
-
-- 外部プラグインアーキテクチャを理解（アダプター + プラグイン）
-- ライフサイクルチェックを設定（create、transfer、update、burn）
-- 安全なデータ保存のためのData Authorityを設定
-- OracleとAppDataプラグインの選択
-
+**External Plugins** connect Core Assets to external programs for advanced functionality. Use Oracle plugins for custom validation logic and AppData plugins for storing arbitrary data that third-party apps can read and write. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Understand External Plugin architecture (Adapters + Plugins)
+- Configure lifecycle checks (create, transfer, update, burn)
+- Set up data authorities for secure data storage
+- Choose between Oracle and AppData plugins
 {% /callout %}
-
-## 概要
-
-外部プラグインは、Core Assetsを外部プログラム機能で拡張します。アセット/コレクションに付与される**プラグインアダプター**と、データと検証を提供する**外部プラグイン**（Oracleアカウントまたはappdata保存）の2つの部分で構成されます。
-
-- 権限管理プラグイン（更新権限が制御）
-- ライフサイクル検証をサポート：承認、拒否、またはリッスン
-- Data Authorityがプラグインデータの書き込みを制御
-- アセットとコレクションで動作
-
-## 対象外
-
-内蔵プラグイン（[プラグイン概要](/ja/smart-contracts/core/plugins)を参照）、Oracleプログラムの作成（[Oracleガイド](/ja/smart-contracts/core/guides/oracle-plugin-example)を参照）、およびToken Metadata拡張。
-
-## クイックスタート
-
-**ジャンプ先:** [Oracleプラグイン](/ja/smart-contracts/core/external-plugins/oracle) · [AppDataプラグイン](/ja/smart-contracts/core/external-plugins/app-data) · [外部プラグインの追加](/ja/smart-contracts/core/external-plugins/adding-external-plugins)
-
-1. プラグインタイプを選択：Oracle（検証）またはAppData（データ保存）
-2. 外部アカウント（Oracle）を作成/デプロイまたはData Authority（AppData）を設定
-3. アセットまたはコレクションにプラグインアダプターを追加
-
-## 外部プラグインとは？
-
-外部プラグインは[権限管理型](/ja/smart-contracts/core/plugins#authority-managed-plugins)で、**アダプター**と**プラグイン**の2要素で構成されます。**プラグインアダプター**はアセット/コレクションに割り当てられ、外部プラグインからデータと検証を受け取れます。外部プラグインは、**プラグインアダプター**にデータと検証を提供します。
-
-## ライフサイクルチェック
-
-各外部プラグインには、ライフサイクルイベントにチェックを割り当てる機能があり、実行中のライフサイクルイベントの動作に影響を与えます。利用可能なライフサイクルチェックは以下です：
-
+## Summary
+External Plugins extend Core Assets with external program functionality. They consist of two parts: a **Plugin Adapter** attached to the Asset/Collection, and an **External Plugin** (Oracle account or AppData storage) that provides data and validations.
+- Authority Managed plugins (update authority controls)
+- Support lifecycle validation: approve, reject, or listen
+- Data Authority controls who can write plugin data
+- Works with Assets and Collections
+## Out of Scope
+Built-in plugins (see [Plugins Overview](/smart-contracts/core/plugins)), creating Oracle programs (see [Oracle guide](/smart-contracts/core/guides/oracle-plugin-example)), and Token Metadata extensions.
+## Quick Start
+**Jump to:** [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) · [AppData Plugin](/smart-contracts/core/external-plugins/app-data) · [Adding External Plugins](/smart-contracts/core/external-plugins/adding-external-plugins)
+1. Choose plugin type: Oracle (validation) or AppData (data storage)
+2. Create/deploy the external account (Oracle) or configure data authority (AppData)
+3. Add the plugin adapter to your Asset or Collection
+## What are External Plugins?
+External Plugins are [Authority Managed](/smart-contracts/core/plugins#authority-managed-plugins), consisting of 2 parts, the **Adapter**, and the **Plugin**. A **Plugin Adapter** is assigned to the Assets/Collection and allows data and validations to to be passed from an External Plugin. The External Plugin provides data and validations for the **Plugin Adapter**.
+## Lifecycle Checks
+Each External Plugin comes with the ability to assign lifecycle checks to Lifecycle Events influencing the behavior of the lifecycle event that is trying to take place. The lifecycle checks available are:
 - Create
 - Transfer
 - Update
 - Burn
-
-各ライフサイクルイベントには、以下のチェックを割り当てられます：
-
+Each of the lifecycle events can be assigned with the following checks:
 - Can Listen
 - Can Reject
 - Can Approve
-
 ### Can Listen
-
-ライフサイクルイベントが発生したことをプラグインに通知するweb3タイプのwebhookです。データ追跡や発生したイベントに基づく別タスクの実行に役立ちます。
-
+A web3 type webhook that alerts the plugin that a lifecycle event has taken place. This is useful for tracking data or performing another task based on an event that's taken place.
 ### Can Reject
-
-プラグインがライフサイクルイベントのアクションを拒否できます。
-
+The plugin has the ability to reject a lifecycle events action.
 ### Can Approve
-
-プラグインがライフサイクルイベントを承認できます。
-
+The plugin has the ability to approve a lifecycle event.
 ## Data Authority
-
-外部プラグインには、プロジェクトがそのプラグインにデータを安全に保存できるデータ領域がある場合があります。
-
-外部プラグインのData Authorityのみが、外部プラグインのデータセクションへの書き込みを許可されます。プラグインの更新権限は、Data Authorityでもない限り権限を持ちません。
-
-## プラグイン
-
-### Oracleプラグイン
-
-Oracleプラグインは、Web 2.0-3.0ワークフローのシンプルさを目的に設計されています。OracleプラグインはMPL Core Asset外部のオンチェーンOracleアカウントにアクセスでき、権限によって設定されたライフサイクルイベントの使用を拒否できます。外部Oracleアカウントはいつでも更新してライフサイクルイベントの認可動作を変更でき、動的な体験を実現します。
-
-Oracleプラグインの詳細は[こちら](/ja/smart-contracts/core/external-plugins/oracle)をご覧ください。
-
-### AppDataプラグイン
-
-AppDataプラグインは、アセット上に安全でパーティション化されたデータストレージを提供します。各AppDataプラグインには、そのデータセクションへの書き込みを独占的に制御するData Authorityがあります。ユーザーデータ、ゲーム状態、またはアプリケーション固有のメタデータを保存するサードパーティアプリに便利です。
-
-AppDataプラグインの詳細は[こちら](/ja/smart-contracts/core/external-plugins/app-data)をご覧ください。
-
-## 外部プラグイン vs 内蔵プラグイン
-
-| 機能 | 外部プラグイン | 内蔵プラグイン |
+An External Plugin may have a data area in which projects can securely store data to that particular plugin.
+The Data Authority of an External Plugin is the only authority allowed to write to the External Plugin's data section. The Update Authority of the plugin does not have permission unless they are also the Data Authority.
+## Plugins
+### Oracle Plugin
+The Oracle Plugin is designed for simplicity in a web 2.0-3.0 workflow. The Oracle Plugin can access onchain Oracle accounts external from the MPL Core Asset that can reject the use of lifecycle events set by the authority. The external Oracle Account can also be updated at any time to change the authorization behavior of the lifecycle events, making for a dynamic experience.
+You can read more about the Oracle Plugin [here](/smart-contracts/core/external-plugins/oracle).
+### AppData Plugin
+The AppData Plugin provides secure, partitioned data storage on Assets. Each AppData plugin has a Data Authority that exclusively controls writes to that data section. Useful for third-party apps storing user data, game state, or application-specific metadata.
+You can read more about the AppData Plugin [here](/smart-contracts/core/external-plugins/app-data).
+## External Plugins vs Built-in Plugins
+| Feature | External Plugins | Built-in Plugins |
 |---------|------------------|------------------|
-| データ保存 | 外部アカウントまたはアセット上 | アセット上のみ |
-| カスタム検証 | ✅ 完全制御 | ❌ 事前定義された動作 |
-| 動的更新 | ✅ 外部アカウント更新 | ✅ プラグイン更新 |
-| 複雑さ | 高い（外部プログラム） | 低い（内蔵） |
-| ユースケース | カスタムロジック、サードパーティアプリ | 標準NFT機能 |
-
+| Data storage | External account or on-asset | On-asset only |
+| Custom validation | ✅ Full control | ❌ Predefined behavior |
+| Dynamic updates | ✅ Update external account | ✅ Update plugin |
+| Complexity | Higher (external program) | Lower (built-in) |
+| Use case | Custom logic, third-party apps | Standard NFT functionality |
 ## FAQ
-
-### 外部プラグイン vs 内蔵プラグインはいつ使うべき？
-
-カスタム検証ロジック（Oracle）またはサードパーティデータ保存（AppData）が必要な場合は外部プラグインを使用します。フリーズ、ロイヤリティ、属性などの標準NFT機能には内蔵プラグインを使用します。
-
-### 外部プラグインは転送を拒否できますか？
-
-はい。Oracleプラグインは、外部アカウントの状態に基づいてライフサイクルイベント（create、transfer、update、burn）を拒否できます。これにより、時間ベースの制限、価格ベースのルール、またはカスタムロジックが可能になります。
-
-### AppDataに書き込めるのは誰？
-
-Data Authorityのみが AppDataプラグインに書き込めます。これはプラグイン権限とは別であり、サードパーティアプリケーションに安全でパーティション化されたストレージを提供します。
-
-### 1つのアセットに複数の外部プラグインを持てますか？
-
-はい。単一のアセットに複数のOracleまたはAppDataプラグインを追加でき、それぞれ異なる設定と権限を持つことができます。
-
-### 外部プラグインはDASでインデックスされますか？
-
-はい。JSONまたはMsgPackスキーマのAppDataは、簡単なクエリのためにDASによって自動的にインデックスされます。
-
-## 用語集
-
-| 用語 | 定義 |
+### When should I use External Plugins vs Built-in Plugins?
+Use External Plugins when you need custom validation logic (Oracle) or third-party data storage (AppData). Use built-in plugins for standard NFT functionality like freezing, royalties, or attributes.
+### Can External Plugins reject transfers?
+Yes. Oracle plugins can reject lifecycle events (create, transfer, update, burn) based on external account state. This enables time-based restrictions, price-based rules, or any custom logic.
+### Who can write to AppData?
+Only the Data Authority can write to an AppData plugin. This is separate from the plugin authority and provides secure, partitioned storage for third-party applications.
+### Can I have multiple External Plugins on one Asset?
+Yes. You can add multiple Oracle or AppData plugins to a single Asset, each with different configurations and authorities.
+### Are External Plugins indexed by DAS?
+Yes. AppData with JSON or MsgPack schemas is automatically indexed by DAS for easy querying.
+## Glossary
+| Term | Definition |
 |------|------------|
-| **Plugin Adapter** | アセットに付与され外部プラグインに接続するオンチェーンコンポーネント |
-| **External Plugin** | 機能を提供する外部アカウント（Oracle）またはデータストレージ（AppData） |
-| **Lifecycle Check** | イベントを承認、拒否、またはリッスンできる検証 |
-| **Data Authority** | AppDataへの排他的書き込み権限を持つアドレス |
-| **Oracle Account** | 検証結果を保存する外部アカウント |
-
-## 関連ページ
-
-- [Oracleプラグイン](/ja/smart-contracts/core/external-plugins/oracle) - カスタム検証ロジック
-- [AppDataプラグイン](/ja/smart-contracts/core/external-plugins/app-data) - サードパーティデータ保存
-- [外部プラグインの追加](/ja/smart-contracts/core/external-plugins/adding-external-plugins) - コード例
-- [内蔵プラグイン](/ja/smart-contracts/core/plugins) - 標準プラグイン機能
-
----
-
-*Metaplex Foundation管理 · 2026年1月最終確認 · @metaplex-foundation/mpl-core対応*
+| **Plugin Adapter** | On-chain component attached to Asset that connects to external plugin |
+| **External Plugin** | External account (Oracle) or data storage (AppData) providing functionality |
+| **Lifecycle Check** | Validation that can approve, reject, or listen to events |
+| **Data Authority** | Address with exclusive write permission to AppData |
+| **Oracle Account** | External account storing validation results |
+## Related Pages
+- [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) - Custom validation logic
+- [AppData Plugin](/smart-contracts/core/external-plugins/app-data) - Third-party data storage
+- [Adding External Plugins](/smart-contracts/core/external-plugins/adding-external-plugins) - Code examples
+- [Built-in Plugins](/smart-contracts/core/plugins) - Standard plugin functionality

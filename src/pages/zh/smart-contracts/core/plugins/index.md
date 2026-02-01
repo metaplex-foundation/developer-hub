@@ -1,289 +1,213 @@
 ---
-title: Plugin 概述
-metaTitle: Core Plugin 概述 | Metaplex Core
-description: 了解 Metaplex Core Plugin - 为 NFT Asset 和 Collection 添加版税、冻结、销毁和链上属性等行为的模块化扩展。
+title: Plugins Overview
+metaTitle: Core Plugins Overview | Metaplex Core
+description: Learn about Metaplex Core plugins - modular extensions that add behaviors like royalties, freezing, burning, and on-chain attributes to NFT Assets and Collections.
+updated: '01-31-2026'
+keywords:
+  - Core plugins
+  - NFT plugins
+  - plugin system
+  - royalties plugin
+  - freeze plugin
+about:
+  - Plugin architecture
+  - NFT extensions
+  - Lifecycle events
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Can I add plugins after an Asset is created?
+    a: Yes, except for Permanent plugins. Owner Managed plugins require owner signature; Authority Managed plugins require update authority signature.
+  - q: What happens to plugins when an Asset is transferred?
+    a: Owner Managed plugins (Transfer, Freeze, Burn Delegate) have their authority automatically revoked on transfer. Authority Managed and Permanent plugins persist.
+  - q: Can an Asset have the same plugin as its Collection?
+    a: Yes. When both have the same plugin type, the Asset-level plugin takes precedence over the Collection-level plugin.
+  - q: How do I remove a plugin?
+    a: Use the removePlugin instruction. Only the plugin authority can remove it.
+  - q: Can I create custom plugins?
+    a: No. Only built-in plugins are supported. The plugin system is not extensible by third parties.
+  - q: Do plugins cost extra SOL?
+    a: Adding plugins increases account size, which increases rent. The cost is minimal (~0.001 SOL per plugin depending on data size).
 ---
-
-本页介绍 **Core Plugin 系统** - 为 Core Asset 和 Collection 添加行为和数据存储的模块化扩展。Plugin 挂钩到生命周期事件以强制执行规则或存储链上数据。 {% .lead %}
-
-{% callout title="您将学到" %}
-
-- 什么是 Plugin 以及它们如何工作
-- Plugin 类型：Owner Managed、Authority Managed、Permanent
-- Plugin 如何影响生命周期事件（创建、转移、销毁）
-- Asset 和 Collection 之间的 Plugin 优先级
-
+This page explains the **Core Plugin system** - modular extensions that add behaviors and data storage to Core Assets and Collections. Plugins hook into lifecycle events to enforce rules or store on-chain data. {% .lead %}
+{% callout title="What You'll Learn" %}
+- What plugins are and how they work
+- Types of plugins: Owner Managed, Authority Managed, Permanent
+- How plugins affect lifecycle events (create, transfer, burn)
+- Plugin priority between Assets and Collections
 {% /callout %}
-
-## 概要
-
-**Plugin** 是为 Core Asset 或 Collection 添加功能的链上扩展。它们可以存储数据（如属性）、强制执行规则（如版税）或委托权限（如冻结/转移权限）。
-
-- **Owner Managed**：需要所有者签名才能添加（Transfer、Freeze、Burn Delegate）
-- **Authority Managed**：可由更新权限添加（Royalties、Attributes、Update Delegate）
-- **Permanent**：只能在创建时添加（Permanent Transfer/Freeze/Burn Delegate）
-
-## 不在范围内
-
-创建自定义 Plugin（仅支持内置 Plugin）、Token Metadata Plugin（不同的系统）以及链下 Plugin 数据存储。
-
-## 快速开始
-
-**跳转至：** [Plugin 类型](#插件类型) · [Plugin 表格](#插件表) · [生命周期事件](#插件和生命周期事件) · [添加 Plugin](/zh/smart-contracts/core/plugins/adding-plugins)
-
-1. 根据您的用例选择 Plugin（版税、冻结、属性等）
-2. 使用 `addPlugin()` 或在 Asset/Collection 创建时添加 Plugin
-3. Plugin 自动挂钩到生命周期事件
-4. 通过 DAS 或链上获取查询 Plugin 数据
-
-## 生命周期
-
-在 Core Asset 的生命周期中，可以触发多个事件，例如：
-
-- 创建
-- 转移
-- 更新
-- 销毁
-- 添加 Plugin
-- 批准权限 Plugin
-- 移除权限 Plugin
-
-生命周期事件以各种方式影响 Asset，从创建、钱包之间的转移，一直到 Asset 的销毁。附加在 Asset 级别或 Collection 级别的 Plugin 将在这些生命周期事件期间经过验证过程，以`批准`、`拒绝`或`强制批准`事件的执行。
-
-## 什么是 Plugin？
-
-Plugin 就像 NFT 的链上应用程序，可以存储数据或为 Asset 提供额外的功能。
-
-## 插件类型
-
-### Owner Managed Plugin
-
-Owner Managed Plugin 是只有在交易中存在 Asset 所有者签名时才能添加到 Core Asset 的 Plugin。
-
-Owner Managed Plugin 包括但不限于：
-
-- [Transfer Delegate](/zh/smart-contracts/core/plugins/transfer-delegate)（市场、游戏）
-- [Freeze Delegate](/zh/smart-contracts/core/plugins/freeze-delegate)（市场、质押、游戏）
-- [Burn Delegate](/zh/smart-contracts/core/plugins/burn-delegate)（游戏）
-
-如果在没有设置权限的情况下将 Owner Managed Plugin 添加到 Asset/Collection，它将默认权限类型为 `owner`。
-
-当 Owner Managed Plugin 被转移时，其权限会自动撤销。
-
-### Authority Managed Plugin
-
-Authority Managed Plugin 是 MPL Core Asset 或 Core Collection 的权限可以随时添加和更新的 Plugin。
-
-Authority Managed Plugin 包括但不限于：
-
-- [Royalties](/zh/smart-contracts/core/plugins/royalties)
-- [Update Delegate](/zh/smart-contracts/core/plugins/update-delegate)
-- [Attribute](/zh/smart-contracts/core/plugins/attribute)
-
-如果在没有权限参数的情况下将 Authority Managed Plugin 添加到 Asset/Collection，则 Plugin 将默认为 `update authority` 权限类型。
-
-### Permanent Plugin
-
-**Permanent Plugin 是只能在创建 Core Asset 时添加的 Plugin。** 如果 Asset 已经存在，则无法添加 Permanent Plugin。
-
-Permanent Plugin 包括但不限于：
-
-- [Permanent Transfer Delegate](/zh/smart-contracts/core/plugins/permanent-transfer-delegate)
-- [Permanent Freeze Delegate](/zh/smart-contracts/core/plugins/permanent-freeze-delegate)
-- [Permanent Burn Delegate](/zh/smart-contracts/core/plugins/permanent-burn-delegate)
-
-如果在没有设置权限的情况下将 Permanent Plugin 添加到 Asset/Collection，它将默认权限类型为 `update authority`。
-
-## Collection Plugin
-
-Collection Plugin 是添加在 Collection 级别的 Plugin，可以产生集合范围的效果。这对于版税特别有用，因为您可以将 [Royalties Plugin](/zh/smart-contracts/core/plugins/royalties) 分配给 Collection Asset，该 Collection 中的所有 Asset 现在都将引用该 Plugin。
-
-Collection 只能访问 `Permanent Plugin` 和 `Authority Managed Plugin`。
-
-## Plugin 优先级
-
-如果 MPL Core Asset 和 MPL Core Collection Asset 都共享相同的 Plugin 类型，则 Asset 级别的 Plugin 及其数据将优先于 Collection 级别的 Plugin。
-
-这可以以创造性的方式使用，例如为一组 Asset 设置不同级别的版税。
-
-- Collection Asset 分配了 2% 的 Royalties Plugin
-- Collection 中的超稀有 MPL Core Asset 分配了 5% 的 Royalties Plugin
-
-在上述情况下，来自 Collection 的常规 MPL Core Asset 销售将保留 2% 的版税，而超稀有 MPL Core Asset 将在销售时保留 5% 的版税，因为它有自己的 Royalties Plugin，优先于 Collection Asset Royalties Plugin。
-
-## 插件表
-
+## Summary
+**Plugins** are on-chain extensions that add functionality to Core Assets or Collections. They can store data (like attributes), enforce rules (like royalties), or delegate permissions (like freeze/transfer authority).
+- **Owner Managed**: Require owner signature to add (Transfer, Freeze, Burn Delegate)
+- **Authority Managed**: Can be added by update authority (Royalties, Attributes, Update Delegate)
+- **Permanent**: Can only be added at creation time (Permanent Transfer/Freeze/Burn Delegate)
+## Out of Scope
+Creating custom plugins (only built-in plugins are supported), Token Metadata plugins (different system), and off-chain plugin data storage.
+## Quick Start
+**Jump to:** [Plugin Types](#types-of-plugins) · [Plugin Table](#plugin-table) · [Lifecycle Events](#plugins-and-lifecycle-events) · [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)
+1. Choose a plugin based on your use case (royalties, freezing, attributes, etc.)
+2. Add the plugin using `addPlugin()` or at Asset/Collection creation
+3. Plugins automatically hook into lifecycle events
+4. Query plugin data via DAS or on-chain fetch
+## Lifecycles
+During a Core Assets lifecycle, multiple events can be triggered such as:
+- Creating
+- Transferring
+- Updating
+- Burning
+- Add Plugin
+- Approve Authority Plugin
+- Remove Authority Plugin
+Lifecycle events impact the Asset in various ways from creating, to transfers between wallets, all the way through to the Assets destruction. Plugins attached an Asset level or a Collection level will run through a validation process during these lifecycle events to either `approve`, `reject`, or `force approve` the event from execution.
+## What are Plugins?
+A plugin is like an onchain app for your NFT that can either store data or provide additional functionality to the asset.
+## Types of Plugins
+### Owner Managed Plugins
+Owner managed plugins are plugins that can only be added to an Core Asset if the Asset owner's signature is present in the transaction.
+Owner Managed Plugins include but are not limited to:
+- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) (market places, games)
+- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) (market places, staking, games)
+- [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) (games)
+If an Owner Managed plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `owner`.
+The authority of owner managed plugins is automatically revoked when they are transferred.
+### Authority Managed Plugins
+Authority managed plugins are plugins that the authority of the MPL Core Asset or Core Collection can add and update at any time.
+Authority manages plugins include but are not limited to:
+- [Royalties](/smart-contracts/core/plugins/royalties)
+- [Update Delegate](/smart-contracts/core/plugins/update-delegate)
+- [Attribute](/smart-contracts/core/plugins/attribute)
+If an Authority Managed plugin is added to an Asset/Collection without an authority argument present then the plugin will default to the authority type of `update authority`.
+### Permanent Plugins
+**Permanent plugins are plugins that may only be added to a Core Asset at the time of creation.** If an Asset already exists then Permanent Plugins cannot be added.
+Permanent Plugins include but are not limited to:
+- [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate)
+- [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)
+- [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)
+If an Permanent Plugin is added to an Asset/Collection without an authority set it will default the authority type to the type of `update authority`.
+## Collection Plugins
+Collection Plugins are plugins that are added at the collection level can have a collection-wide effect. This is particularly useful for royalties because you can assign the [royalties plugin](/smart-contracts/core/plugins/royalties) to the Collection Asset and all Assets in that collection will now reference that plugin.
+Collections only have access to `Permanent Plugins` and `Authority Managed Plugins`.
+## Plugin Priority
+If an MPL Core Asset and MPL Core Collection Asset both share the same plugin type then the Asset level plugin and its data will take precedence over the Collection level plugin.
+This can be used in creative ways like setting royalties at different levels for a collection of assets.
+- Collection Asset has a Royalties Plugin assigned at 2%
+- A Super Rare MPL Core Asset within the collection has a Royalty Plugin assigned at 5%
+In the above case, regular MPL Core Asset sales from the collection will retain a 2% royalty while the Super Rare MPL Core Asset will retain a 5% royalty at sale because it has it's own Royalties Plugin that takes precedence over the Collection Asset Royalties Plugin.
+## Plugin Table
 | Plugin                                                                   | Owner Managed | Authority Managed | Permanent |
 | ------------------------------------------------------------------------ | ------------- | ----------------- | --------- |
-| [Transfer Delegate](/zh/smart-contracts/core/plugins/transfer-delegate)                     | ✅            |                   |           |
-| [Freeze Delegate](/zh/smart-contracts/core/plugins/freeze-delegate)                         | ✅            |                   |           |
-| [Burn Delegate](/zh/smart-contracts/core/plugins/burn-delegate)                             | ✅            |                   |           |
-| [Royalties](/zh/smart-contracts/core/plugins/royalties)                                     |               | ✅                |           |
-| [Update Delegate](/zh/smart-contracts/core/plugins/update-delegate)                         |               | ✅                |           |
-| [Attribute](/zh/smart-contracts/core/plugins/attribute)                                     |               | ✅                |           |
-| [Permanent Transfer Delegate](/zh/smart-contracts/core/plugins/permanent-transfer-delegate) |               |                   | ✅        |
-| [Permanent Freeze Delegate](/zh/smart-contracts/core/plugins/permanent-freeze-delegate)     |               |                   | ✅        |
-| [Permanent Burn Delegate](/zh/smart-contracts/core/plugins/permanent-burn-delegate)         |               |                   | ✅        |
-
-## 插件和生命周期事件
-
-MPL Core 中的 Plugin 能够影响某些生命周期操作的结果，例如创建、转移、销毁和更新。
-
-每个 Plugin 都有能力`拒绝`、`批准`或`强制批准`操作以达到预期结果。
-
-在生命周期事件期间，操作将按照预定义的 Plugin 列表逐一检查和验证。
-如果 Plugin 条件验证通过，生命周期将继续其操作。
-
-如果 Plugin 验证失败，则生命周期将被停止并拒绝。
-
-Plugin 验证的规则按以下条件层次结构进行：
-
-- 如果有强制批准，则始终批准
-- 否则如果有任何拒绝，则拒绝
-- 否则如果有任何批准，则批准
-- 否则拒绝
-
-`强制批准`验证仅适用于第一方 Plugin 和 `Permanent Delegate` Plugin。
-
-### 强制批准
-
-强制批准是检查 Plugin 验证时的第一个检查。目前将强制批准验证的 Plugin 有：
-
+| [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate)                     | ✅            |                   |           |
+| [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate)                         | ✅            |                   |           |
+| [Burn Delegate](/smart-contracts/core/plugins/burn-delegate)                             | ✅            |                   |           |
+| [Royalties](/smart-contracts/core/plugins/royalties)                                     |               | ✅                |           |
+| [Update Delegate](/smart-contracts/core/plugins/update-delegate)                         |               | ✅                |           |
+| [Attribute](/smart-contracts/core/plugins/attribute)                                     |               | ✅                |           |
+| [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate) |               |                   | ✅        |
+| [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)     |               |                   | ✅        |
+| [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)         |               |                   | ✅        |
+## Plugins and Lifecycle Events
+Plugins in MPL Core have the ability to affect the outcome of certain lifecycle actions such as Create, Transfer, Burn, and Update.
+Each plugin has the ability to to `reject`, `approve`, or `force approve` an action to a desired outcome.
+During lifecycle events the action will work its way down a list of predefined plugins checking and validating against them.
+If the plugins conditions are validated the lifecycle passes and continues its action.
+If a plugin validation fails then the lifecycle will be halted and rejected.
+The rules for plugin validation are as follows in this hierarchy of conditions;
+- If there is force approve, always approve
+- Else if there is any reject, reject
+- Else if there is any approve, approve
+- Else reject
+The `force approve` validation is only available on 1st party plugins and on `Permanent Delegate ` plugins.
+### Force Approve
+Force approve is the first check made when checking a plugins validations. The plugins which will force approve validations currently are:
 - **Permanent Transfer**
-- **Permanent Burn**
+- **Pernament Burn**
 - **Permanent Freeze**
-
-这些 Plugin 的操作将优先于其非永久对应 Plugin 和其他 Plugin。
-
-#### 示例
-如果您的 Asset 在 Asset 级别被 Freeze Plugin 冻结，同时 Asset 上有 **Permanent Burn** Plugin，即使 Asset 被冻结，通过 **Permanent Burn** Plugin 调用的销毁程序仍将执行，这是由于永久 Plugin 的 `forceApprove` 特性。
-
-### 创建
-
+These plugins will take precedence with their actions over their non permanent counterparts and other plugins. 
+#### Example
+If you have an Asset frozen at Asset level with a Freeze Plugin while simultaneously have a **Permanent Burn** plugin on the Asset, even if the Asset is frozen the burn procedure called via the **Pernament Burn** plugin with still execute due to the `forceApprove` nature of permanent plugins.
+### Create
 {% totem %}
-
-| Plugin    | 操作     | 条件 |
+| Plugin    | Action     | Conditions |
 | --------- | ---------- | ---------- |
-| Royalties | 可以拒绝 | Ruleset    |
-
+| Royalties | Can Reject | Ruleset    |
 {% /totem %}
-
-### 更新
-
+### Update
 {% totem %}
-更新目前没有 Plugin 条件或验证。
+Update currently has no plugin conditions or validations.
 {% /totem %}
-
-### 转移
-
+### Transfer
 {% totem %}
-
-| Plugin                      | 操作      | 条件  |
+| Plugin                      | Action      | Conditions  |
 | --------------------------- | ----------- | ----------- |
-| Royalties                   | 可以拒绝  | Ruleset     |
-| Freeze Delegate             | 可以拒绝  | isFrozen    |
-| Transfer Delegate           | 可以批准 | isAuthority |
-| Permanent Freeze Delegate   | 可以拒绝  | isFrozen    |
-| Permanent Transfer Delegate | 可以批准 | isAuthority |
-
+| Royalties                   | Can Reject  | Ruleset     |
+| Freeze Delegate             | Can Reject  | isFrozen    |
+| Transfer Delegate           | Can Approve | isAuthority |
+| Permanent Freeze Delegate   | Can Reject  | isFrozen    |
+| Permanent Transfer Delegate | Can Approve | isAuthority |
 {% /totem %}
-
-### 销毁
-
+### Burn
 {% totem %}
-
-| Plugin                    | 操作      | 条件  |
+| Plugin                    | Action      | Conditions  |
 | ------------------------- | ----------- | ----------- |
-| Freeze Delegate           | 可以拒绝  | isFrozen    |
-| Burn Delegate             | 可以拒绝  | isAuthority |
-| Permanent Freeze Delegate | 可以拒绝  | isFrozen    |
-| Permanent Burn Delegate   | 可以批准 | isAuthority |
-
+| Freeze Delegate           | Can Reject  | isFrozen    |
+| Burn Delegate             | Can Reject  | isAuthority |
+| Permanent Freeze Delegate | Can Reject  | isFrozen    |
+| Permanent Burn Delegate   | Can Approve | isAuthority |
 {% /totem %}
-
-### 添加 Plugin
-
+### Add Plugin
 {% totem %}
-
-| Plugin          | 操作      | 条件  |
+| Plugin          | Action      | Conditions  |
 | --------------- | ----------- | ----------- |
-| Royalties       | 可以拒绝  | Ruleset     |
-| Update Delegate | 可以批准 | isAuthority |
-
+| Royalties       | Can Reject  | Ruleset     |
+| Update Delegate | Can Approve | isAuthority |
 {% /totem %}
-
-### 移除 Plugin
-
+### Remove Plugin
 {% totem %}
-
-| Plugin          | 操作      | 条件  |
+| Plugin          | Action      | Conditions  |
 | --------------- | ----------- | ----------- |
-| Royalties       | 可以拒绝  | Ruleset     |
-| Update Delegate | 可以批准 | isAuthority |
-
+| Royalties       | Can Reject  | Ruleset     |
+| Update Delegate | Can Approve | isAuthority |
 {% /totem %}
-
-### 批准 Plugin 权限
-
+### Approve Plugin Authority
 {% totem %}
-批准目前没有 Plugin 条件或验证。
+Approve currently has no plugin conditions or validations.
 {% /totem %}
-
-### 撤销权限 Plugin
-
+### Revoke Authority Plugin
 {% totem %}
-撤销目前没有 Plugin 条件或验证。
+Revoke currently has no plugin conditions or validations.
 {% /totem %}
-
-## 常见用例
-
-| 用例 | 推荐 Plugin |
+## Common Use Cases
+| Use Case | Recommended Plugin |
 |----------|-------------------|
-| 强制创作者版税 | [Royalties](/zh/smart-contracts/core/plugins/royalties) |
-| 无托管质押 | [Freeze Delegate](/zh/smart-contracts/core/plugins/freeze-delegate) |
-| 市场挂单 | [Freeze Delegate](/zh/smart-contracts/core/plugins/freeze-delegate) + [Transfer Delegate](/zh/smart-contracts/core/plugins/transfer-delegate) |
-| 链上游戏统计 | [Attributes](/zh/smart-contracts/core/plugins/attribute) |
-| 允许第三方销毁 | [Burn Delegate](/zh/smart-contracts/core/plugins/burn-delegate) |
-| 永久质押程序 | [Permanent Freeze Delegate](/zh/smart-contracts/core/plugins/permanent-freeze-delegate) |
-
-## 常见问题
-
-### 创建 Asset 后可以添加 Plugin 吗？
-
-可以，除了 Permanent Plugin。Owner Managed Plugin 需要所有者签名；Authority Managed Plugin 需要更新权限签名。
-
-### Asset 转移时 Plugin 会发生什么？
-
-Owner Managed Plugin（Transfer、Freeze、Burn Delegate）的权限会在转移时自动撤销。Authority Managed 和 Permanent Plugin 会保留。
-
-### Asset 可以拥有与其 Collection 相同的 Plugin 吗？
-
-可以。当两者拥有相同的 Plugin 类型时，Asset 级别的 Plugin 优先于 Collection 级别的 Plugin。
-
-### 如何移除 Plugin？
-
-使用 `removePlugin` 指令。只有 Plugin 权限可以移除它。参见[移除 Plugin](/zh/smart-contracts/core/plugins/removing-plugins)。
-
-### 可以创建自定义 Plugin 吗？
-
-不可以。只支持内置 Plugin。Plugin 系统不能由第三方扩展。
-
-### Plugin 需要额外的 SOL 吗？
-
-添加 Plugin 会增加账户大小，从而增加租金。成本很小（根据数据大小约 0.001 SOL 每个 Plugin）。
-
-## 术语表
-
-| 术语 | 定义 |
+| Enforce creator royalties | [Royalties](/smart-contracts/core/plugins/royalties) |
+| Escrowless staking | [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) |
+| Marketplace listings | [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) + [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) |
+| On-chain game stats | [Attributes](/smart-contracts/core/plugins/attribute) |
+| Allow third-party burns | [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) |
+| Permanent staking program | [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) |
+## FAQ
+### Can I add plugins after an Asset is created?
+Yes, except for Permanent plugins. Owner Managed plugins require owner signature; Authority Managed plugins require update authority signature.
+### What happens to plugins when an Asset is transferred?
+Owner Managed plugins (Transfer, Freeze, Burn Delegate) have their authority automatically revoked on transfer. Authority Managed and Permanent plugins persist.
+### Can an Asset have the same plugin as its Collection?
+Yes. When both have the same plugin type, the Asset-level plugin takes precedence over the Collection-level plugin.
+### How do I remove a plugin?
+Use the `removePlugin` instruction. Only the plugin authority can remove it. See [Removing Plugins](/smart-contracts/core/plugins/removing-plugins).
+### Can I create custom plugins?
+No. Only built-in plugins are supported. The plugin system is not extensible by third parties.
+### Do plugins cost extra SOL?
+Adding plugins increases account size, which increases rent. The cost is minimal (~0.001 SOL per plugin depending on data size).
+## Glossary
+| Term | Definition |
 |------|------------|
-| **Plugin** | 为 Asset/Collection 添加行为或数据的模块化扩展 |
-| **Owner Managed** | 需要所有者签名才能添加的 Plugin 类型 |
-| **Authority Managed** | 更新权限可以添加的 Plugin 类型 |
-| **Permanent** | 只能在创建时添加的 Plugin 类型 |
-| **生命周期事件** | Plugin 可以验证的操作（创建、转移、销毁） |
-| **强制批准** | 覆盖其他拒绝的永久 Plugin 验证 |
-| **Plugin 权限** | 被授权更新或移除 Plugin 的账户 |
-
----
-
-*由 Metaplex Foundation 维护 · 最后验证于 2026 年 1 月 · 适用于 @metaplex-foundation/mpl-core*
+| **Plugin** | A modular extension adding behavior or data to an Asset/Collection |
+| **Owner Managed** | Plugin type requiring owner signature to add |
+| **Authority Managed** | Plugin type that update authority can add |
+| **Permanent** | Plugin type that can only be added at creation |
+| **Lifecycle Event** | An action (create, transfer, burn) that plugins can validate |
+| **Force Approve** | Permanent plugin validation that overrides other rejections |
+| **Plugin Authority** | The account authorized to update or remove a plugin |

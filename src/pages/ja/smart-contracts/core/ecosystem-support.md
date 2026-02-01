@@ -1,60 +1,55 @@
 ---
-title: エコシステム対応状況
-metaTitle: エコシステム対応状況 | Core
-description: Metaplex Coreエコシステムと、Core対応のサイト/アプリ/dAppを紹介します。
+title: Ecosystem Support
+metaTitle: Ecosystem Support | Core
+description: Learn about the Metaplex Core Ecosystem and which websites/apps/dApps support Metaplex Core.
+updated: '01-31-2026'
+keywords:
+  - Core marketplace
+  - Core wallet support
+  - Core ecosystem
+  - supported platforms
+about:
+  - Marketplace support
+  - Wallet compatibility
+  - Ecosystem integrations
+proficiencyLevel: Beginner
 ---
-
-以下は、エコシステムに存在する主要なマーケットプレイス、ウォレット、エクスプローラー、RPCプロバイダー、その他dAppのCore対応状況をまとめた表です。
-
-Metaplexは、Coreデジタルアセットの作成・譲渡・閲覧ができる無償のオープンソースUIも提供しています。
-URL: [https://core.metaplex.com/](https://core.metaplex.com/)
-
-## マーケットプレイス
-
-| プロジェクト                                 | ステータス |
-| -------------------------------------------- | ---------- |
-| [Tensor](https://www.tensor.trade/)          | 対応済み   |
-| [Magic Eden](https://magiceden.io/solana)    | 対応済み   |
-| [Sniper](https://www.sniper.xyz/)            | 対応済み   |
-| [OKX](https://www.okx.com/)                  | 対応済み   |
-| [Mallow](https://www.mallow.art/)            | 対応済み   |
-
-## ウォレット
-
-| プロジェクト                          | ステータス |
-| ------------------------------------- | ---------- |
-| [Solflare](https://solflare.com/)     | 対応済み   |
-| [Phantom](https://phantom.app/)       | 対応済み   |
-| [Backpack](https://backpack.app/)     | 対応済み   |
-
-## エクスプローラー
-
-| プロジェクト                       | ステータス |
-| ---------------------------------- | ---------- |
-| [SolanaFM](https://solana.fm/)     | 対応済み   |
-| [Solscan](https://solscan.io/)     | 対応済み   |
-
-## RPC（DAS）
-
-| プロジェクト                                 | ステータス |
-| ------------------------------------------- | ---------- |
-| [ExtrNode](https://extrnode.com/)           | 対応済み   |
-| [Helius](https://www.helius.dev/)           | 対応済み   |
-| [Quicknode](https://www.quicknode.com/)     | 対応済み   |
-| [Shyft](https://shyft.to/)                  | 対応済み   |
-| [Triton](https://triton.one/)               | 対応済み   |
-
-## ノーコードツール
-
-| プロジェクト                                     | ステータス |
-| ----------------------------------------------- | ---------- |
-| [Truffle](https://truffle.wtf)                  | 対応済み   |
-| [Underdog](https://www.underdogprotocol.com/)   | 対応済み   |
-
-## その他
-
-| プロジェクト                       | ステータス |
-| ---------------------------------- | ---------- |
-| [dReader](https://dreader.io/)     | 対応済み   |
-| [Matrica](https://matrica.io/)     | 対応済み   |
-
+The table below includes the Core integration status of many of the major marketplaces, wallets, explorers, RPC providers, and other dapps across the ecosystem.
+Metaplex also offers a free, open-source UI for creating, transferring and viewing Core digital assets at [https://core.metaplex.com/](https://core.metaplex.com/).
+## Marketplaces
+| Project                                   | Status   |
+| ----------------------------------------- | -------- |
+| [Tensor](https://www.tensor.trade/)       | Complete |
+| [Magic Eden](https://magiceden.io/solana) | Complete |
+| [Sniper](https://www.sniper.xyz/)         | Complete |
+| [OKX](https://www.okx.com/)               | Complete |
+| [Mallow](https://www.mallow.art/)         | Complete |
+## Wallets
+| Project                           | Status   |
+| --------------------------------- | -------- |
+| [Solflare](https://solflare.com/) | Complete |
+| [Phantom](https://phantom.app/)   | Complete |
+| [Backpack](https://backpack.app/) | Complete |
+## Explorers
+| Project                        | Status   |
+| ------------------------------ | -------- |
+| [SolanaFM](https://solana.fm/) | Complete |
+| [Solscan](https://solscan.io/) | Complete |
+## RPC (DAS)
+| Project                                 | Status   |
+| --------------------------------------- | -------- |
+| [ExtrNode](https://extrnode.com/)       | Complete |
+| [Helius](https://www.helius.dev/)       | Complete |
+| [Quicknode](https://www.quicknode.com/) | Complete |
+| [Shyft](https://shyft.to/)              | Complete |
+| [Triton](https://triton.one/)           | Complete |
+## No Code Tooling
+| Project                                       | Status   |
+| --------------------------------------------- | -------- |
+| [Truffle](https://truffle.wtf)                | Complete |
+| [Underdog](https://www.underdogprotocol.com/) | Complete |
+## Other
+| Project                        | Status   |
+| ------------------------------ | -------- |
+| [dReader](https://dreader.io/) | Complete |
+| [Matrica](https://matrica.io/) | Complete |

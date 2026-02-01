@@ -1,141 +1,111 @@
 ---
-title: 外部插件
-metaTitle: 外部插件 | Metaplex Core
-description: 使用Oracle和AppData插件通过外部程序扩展Core NFT。添加自定义验证逻辑并在资产上存储任意数据。
+title: External Plugins
+metaTitle: External Plugins | Metaplex Core
+description: Extend Core NFTs with external programs using Oracle and AppData plugins. Add custom validation logic and store arbitrary data on Assets.
+updated: '01-31-2026'
+keywords:
+  - external plugins
+  - Oracle plugin
+  - AppData plugin
+  - custom validation
+about:
+  - External integrations
+  - Plugin adapters
+  - Custom logic
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: When should I use External Plugins vs Built-in Plugins?
+    a: Use External Plugins when you need custom validation logic (Oracle) or third-party data storage (AppData). Use built-in plugins for standard NFT functionality like freezing, royalties, or attributes.
+  - q: Can External Plugins reject transfers?
+    a: Yes. Oracle plugins can reject lifecycle events (create, transfer, update, burn) based on external account state. This enables time-based restrictions, price-based rules, or any custom logic.
+  - q: Who can write to AppData?
+    a: Only the Data Authority can write to an AppData plugin. This is separate from the plugin authority and provides secure, partitioned storage for third-party applications.
+  - q: Can I have multiple External Plugins on one Asset?
+    a: Yes. You can add multiple Oracle or AppData plugins to a single Asset, each with different configurations and authorities.
+  - q: Are External Plugins indexed by DAS?
+    a: Yes. AppData with JSON or MsgPack schemas is automatically indexed by DAS for easy querying.
 ---
-
-**外部插件**将Core Assets连接到外部程序以实现高级功能。使用Oracle插件实现自定义验证逻辑，使用AppData插件存储第三方应用可以读写的任意数据。 {% .lead %}
-
-{% callout title="学习内容" %}
-
-- 了解外部插件架构（适配器 + 插件）
-- 配置生命周期检查（create、transfer、update、burn）
-- 设置用于安全数据存储的Data Authority
-- 在Oracle和AppData插件之间选择
-
+**External Plugins** connect Core Assets to external programs for advanced functionality. Use Oracle plugins for custom validation logic and AppData plugins for storing arbitrary data that third-party apps can read and write. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Understand External Plugin architecture (Adapters + Plugins)
+- Configure lifecycle checks (create, transfer, update, burn)
+- Set up data authorities for secure data storage
+- Choose between Oracle and AppData plugins
 {% /callout %}
-
-## 概述
-
-外部插件使用外部程序功能扩展Core Assets。它们由两部分组成：附加到资产/集合的**插件适配器**，以及提供数据和验证的**外部插件**（Oracle账户或AppData存储）。
-
-- 权限管理插件（更新权限控制）
-- 支持生命周期验证：批准、拒绝或监听
-- Data Authority控制谁可以写入插件数据
-- 与资产和集合一起工作
-
-## 范围外
-
-内置插件（参见[插件概述](/zh/smart-contracts/core/plugins)）、创建Oracle程序（参见[Oracle指南](/zh/smart-contracts/core/guides/oracle-plugin-example)）和Token Metadata扩展。
-
-## 快速开始
-
-**跳转到：** [Oracle插件](/zh/smart-contracts/core/external-plugins/oracle) · [AppData插件](/zh/smart-contracts/core/external-plugins/app-data) · [添加外部插件](/zh/smart-contracts/core/external-plugins/adding-external-plugins)
-
-1. 选择插件类型：Oracle（验证）或AppData（数据存储）
-2. 创建/部署外部账户（Oracle）或配置Data Authority（AppData）
-3. 将插件适配器添加到您的资产或集合
-
-## 什么是外部插件？
-
-外部插件是[权限管理的](/zh/smart-contracts/core/plugins#authority-managed-plugins)，由2部分组成：**适配器**和**插件**。**插件适配器**被分配给资产/集合，允许从外部插件传递数据和验证。外部插件为**插件适配器**提供数据和验证。
-
-## 生命周期检查
-
-每个外部插件都具有将生命周期检查分配给生命周期事件的能力，影响正在发生的生命周期事件的行为。可用的生命周期检查有：
-
+## Summary
+External Plugins extend Core Assets with external program functionality. They consist of two parts: a **Plugin Adapter** attached to the Asset/Collection, and an **External Plugin** (Oracle account or AppData storage) that provides data and validations.
+- Authority Managed plugins (update authority controls)
+- Support lifecycle validation: approve, reject, or listen
+- Data Authority controls who can write plugin data
+- Works with Assets and Collections
+## Out of Scope
+Built-in plugins (see [Plugins Overview](/smart-contracts/core/plugins)), creating Oracle programs (see [Oracle guide](/smart-contracts/core/guides/oracle-plugin-example)), and Token Metadata extensions.
+## Quick Start
+**Jump to:** [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) · [AppData Plugin](/smart-contracts/core/external-plugins/app-data) · [Adding External Plugins](/smart-contracts/core/external-plugins/adding-external-plugins)
+1. Choose plugin type: Oracle (validation) or AppData (data storage)
+2. Create/deploy the external account (Oracle) or configure data authority (AppData)
+3. Add the plugin adapter to your Asset or Collection
+## What are External Plugins?
+External Plugins are [Authority Managed](/smart-contracts/core/plugins#authority-managed-plugins), consisting of 2 parts, the **Adapter**, and the **Plugin**. A **Plugin Adapter** is assigned to the Assets/Collection and allows data and validations to to be passed from an External Plugin. The External Plugin provides data and validations for the **Plugin Adapter**.
+## Lifecycle Checks
+Each External Plugin comes with the ability to assign lifecycle checks to Lifecycle Events influencing the behavior of the lifecycle event that is trying to take place. The lifecycle checks available are:
 - Create
 - Transfer
 - Update
 - Burn
-
-每个生命周期事件可以分配以下检查：
-
+Each of the lifecycle events can be assigned with the following checks:
 - Can Listen
 - Can Reject
 - Can Approve
-
 ### Can Listen
-
-一种web3类型的webhook，在生命周期事件发生时提醒插件。这对于跟踪数据或基于已发生的事件执行另一个任务很有用。
-
+A web3 type webhook that alerts the plugin that a lifecycle event has taken place. This is useful for tracking data or performing another task based on an event that's taken place.
 ### Can Reject
-
-插件有能力拒绝生命周期事件的操作。
-
+The plugin has the ability to reject a lifecycle events action.
 ### Can Approve
-
-插件有能力批准生命周期事件。
-
+The plugin has the ability to approve a lifecycle event.
 ## Data Authority
-
-外部插件可能有一个数据区域，项目可以在其中安全地存储该特定插件的数据。
-
-外部插件的Data Authority是唯一允许写入外部插件数据部分的权限。除非更新权限同时也是Data Authority，否则更新权限没有权限。
-
-## 插件
-
-### Oracle插件
-
-Oracle插件旨在简化web 2.0-3.0工作流程。Oracle插件可以访问MPL Core Asset外部的链上Oracle账户，该账户可以拒绝权限设置的生命周期事件的使用。外部Oracle账户也可以随时更新以更改生命周期事件的授权行为，从而实现动态体验。
-
-您可以在[这里](/zh/smart-contracts/core/external-plugins/oracle)阅读更多关于Oracle插件的信息。
-
-### AppData插件
-
-AppData插件在资产上提供安全的分区数据存储。每个AppData插件都有一个Data Authority，独占控制对该数据部分的写入。对于存储用户数据、游戏状态或应用程序特定元数据的第三方应用很有用。
-
-您可以在[这里](/zh/smart-contracts/core/external-plugins/app-data)阅读更多关于AppData插件的信息。
-
-## 外部插件 vs 内置插件
-
-| 功能 | 外部插件 | 内置插件 |
+An External Plugin may have a data area in which projects can securely store data to that particular plugin.
+The Data Authority of an External Plugin is the only authority allowed to write to the External Plugin's data section. The Update Authority of the plugin does not have permission unless they are also the Data Authority.
+## Plugins
+### Oracle Plugin
+The Oracle Plugin is designed for simplicity in a web 2.0-3.0 workflow. The Oracle Plugin can access onchain Oracle accounts external from the MPL Core Asset that can reject the use of lifecycle events set by the authority. The external Oracle Account can also be updated at any time to change the authorization behavior of the lifecycle events, making for a dynamic experience.
+You can read more about the Oracle Plugin [here](/smart-contracts/core/external-plugins/oracle).
+### AppData Plugin
+The AppData Plugin provides secure, partitioned data storage on Assets. Each AppData plugin has a Data Authority that exclusively controls writes to that data section. Useful for third-party apps storing user data, game state, or application-specific metadata.
+You can read more about the AppData Plugin [here](/smart-contracts/core/external-plugins/app-data).
+## External Plugins vs Built-in Plugins
+| Feature | External Plugins | Built-in Plugins |
 |---------|------------------|------------------|
-| 数据存储 | 外部账户或资产内 | 仅资产内 |
-| 自定义验证 | ✅ 完全控制 | ❌ 预定义行为 |
-| 动态更新 | ✅ 更新外部账户 | ✅ 更新插件 |
-| 复杂性 | 较高（外部程序） | 较低（内置） |
-| 用例 | 自定义逻辑、第三方应用 | 标准NFT功能 |
-
-## 常见问题
-
-### 什么时候应该使用外部插件vs内置插件？
-
-当您需要自定义验证逻辑（Oracle）或第三方数据存储（AppData）时，使用外部插件。对于冻结、版税或属性等标准NFT功能，使用内置插件。
-
-### 外部插件可以拒绝转移吗？
-
-可以。Oracle插件可以根据外部账户状态拒绝生命周期事件（create、transfer、update、burn）。这使得基于时间的限制、基于价格的规则或任何自定义逻辑成为可能。
-
-### 谁可以写入AppData？
-
-只有Data Authority可以写入AppData插件。这与插件权限分开，为第三方应用程序提供安全的分区存储。
-
-### 我可以在一个资产上拥有多个外部插件吗？
-
-可以。您可以向单个资产添加多个Oracle或AppData插件，每个都有不同的配置和权限。
-
-### 外部插件会被DAS索引吗？
-
-是的。具有JSON或MsgPack模式的AppData会被DAS自动索引以便于查询。
-
-## 术语表
-
-| 术语 | 定义 |
+| Data storage | External account or on-asset | On-asset only |
+| Custom validation | ✅ Full control | ❌ Predefined behavior |
+| Dynamic updates | ✅ Update external account | ✅ Update plugin |
+| Complexity | Higher (external program) | Lower (built-in) |
+| Use case | Custom logic, third-party apps | Standard NFT functionality |
+## FAQ
+### When should I use External Plugins vs Built-in Plugins?
+Use External Plugins when you need custom validation logic (Oracle) or third-party data storage (AppData). Use built-in plugins for standard NFT functionality like freezing, royalties, or attributes.
+### Can External Plugins reject transfers?
+Yes. Oracle plugins can reject lifecycle events (create, transfer, update, burn) based on external account state. This enables time-based restrictions, price-based rules, or any custom logic.
+### Who can write to AppData?
+Only the Data Authority can write to an AppData plugin. This is separate from the plugin authority and provides secure, partitioned storage for third-party applications.
+### Can I have multiple External Plugins on one Asset?
+Yes. You can add multiple Oracle or AppData plugins to a single Asset, each with different configurations and authorities.
+### Are External Plugins indexed by DAS?
+Yes. AppData with JSON or MsgPack schemas is automatically indexed by DAS for easy querying.
+## Glossary
+| Term | Definition |
 |------|------------|
-| **Plugin Adapter** | 附加到资产并连接到外部插件的链上组件 |
-| **External Plugin** | 提供功能的外部账户（Oracle）或数据存储（AppData） |
-| **Lifecycle Check** | 可以批准、拒绝或监听事件的验证 |
-| **Data Authority** | 具有对AppData独占写入权限的地址 |
-| **Oracle Account** | 存储验证结果的外部账户 |
-
-## 相关页面
-
-- [Oracle插件](/zh/smart-contracts/core/external-plugins/oracle) - 自定义验证逻辑
-- [AppData插件](/zh/smart-contracts/core/external-plugins/app-data) - 第三方数据存储
-- [添加外部插件](/zh/smart-contracts/core/external-plugins/adding-external-plugins) - 代码示例
-- [内置插件](/zh/smart-contracts/core/plugins) - 标准插件功能
-
----
-
-*由Metaplex Foundation维护 · 2026年1月最后验证 · 适用于@metaplex-foundation/mpl-core*
+| **Plugin Adapter** | On-chain component attached to Asset that connects to external plugin |
+| **External Plugin** | External account (Oracle) or data storage (AppData) providing functionality |
+| **Lifecycle Check** | Validation that can approve, reject, or listen to events |
+| **Data Authority** | Address with exclusive write permission to AppData |
+| **Oracle Account** | External account storing validation results |
+## Related Pages
+- [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) - Custom validation logic
+- [AppData Plugin](/smart-contracts/core/external-plugins/app-data) - Third-party data storage
+- [Adding External Plugins](/smart-contracts/core/external-plugins/adding-external-plugins) - Code examples
+- [Built-in Plugins](/smart-contracts/core/plugins) - Standard plugin functionality

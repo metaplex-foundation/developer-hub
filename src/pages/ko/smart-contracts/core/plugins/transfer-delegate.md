@@ -1,97 +1,90 @@
 ---
 title: Transfer Delegate Plugin
 metaTitle: Transfer Delegate Plugin | Metaplex Core
-description: 위임자가 Core NFT Asset을 전송할 수 있도록 허용합니다. 에스크로 없는 판매, 게임 메커니즘, 마켓플레이스 리스팅에 Transfer Delegate 플러그인을 사용하세요.
+description: Allow a delegate to transfer Core NFT Assets. Use the Transfer Delegate plugin for escrowless sales, game mechanics, and marketplace listings.
+updated: '01-31-2026'
+keywords:
+  - transfer delegate
+  - delegate transfer
+  - escrowless sale
+  - NFT marketplace
+about:
+  - Transfer delegation
+  - Escrowless mechanics
+  - Marketplace integration
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Why was my transfer authority revoked?
+    a: Transfer Delegate authority is automatically revoked after any transfer. This is by design for marketplace safety - the delegate can only transfer once.
+  - q: How do I implement escrowless listings?
+    a: Seller adds Transfer Delegate with marketplace as authority. When buyer pays, marketplace transfers Asset to buyer. Authority is revoked so seller can't double-list.
+  - q: What's the difference between Transfer Delegate and Permanent Transfer Delegate?
+    a: Transfer Delegate is revoked after one transfer. Permanent Transfer Delegate persists forever and can only be added at Asset creation.
+  - q: Can I transfer a frozen Asset as a delegate?
+    a: No. Frozen Assets block all transfers including delegate transfers. Use Permanent Transfer Delegate with a Permanent Freeze Delegate for complex escrow scenarios.
+  - q: Does the owner need to approve each transfer?
+    a: No. Once the Transfer Delegate is set, the delegate can transfer without owner approval. However, they can only do it once before authority is revoked.
 ---
-
-**Transfer Delegate Plugin**은 지정된 권한이 소유자를 대신하여 Core Asset을 전송할 수 있도록 합니다. 에스크로 없는 마켓플레이스 판매, 게임 메커니즘, 구독 서비스에 필수적입니다. {% .lead %}
-
-{% callout title="학습 내용" %}
-
-- Asset에 Transfer Delegate 플러그인 추가
-- 마켓플레이스나 프로그램에 전송 권한 위임
-- 위임자로서 전송 실행
-- 전송 시 권한 동작
-
+The **Transfer Delegate Plugin** allows a designated authority to transfer Core Assets on behalf of the owner. Essential for escrowless marketplace sales, game mechanics, and subscription services. {% .lead %}
+{% callout title="What You'll Learn" %}
+- Add the Transfer Delegate plugin to an Asset
+- Delegate transfer authority to a marketplace or program
+- Execute transfers as a delegate
+- Authority behavior on transfer
 {% /callout %}
-
-## 요약
-
-**Transfer Delegate**는 위임자가 Asset을 전송할 수 있게 하는 Owner Managed 플러그인입니다. 위임되면 권한은 소유자 승인 없이 Asset을 어떤 주소로든 전송할 수 있습니다.
-
-- 에스크로 없는 마켓플레이스 리스팅 활성화
-- 권한은 **전송 후 철회됨** (일회용)
-- 지속적인 권한을 위해서는 [Permanent Transfer Delegate](/ko/smart-contracts/core/plugins/permanent-transfer-delegate) 사용
-- 추가 인수 불필요
-
-## 범위 외
-
-영구 전송 권한 (Permanent Transfer Delegate 참조), Collection 수준 전송, Token Metadata 전송 권한 (다른 시스템).
-
-## 빠른 시작
-
-**바로가기:** [플러그인 추가](#asset에-transfer-delegate-plugin-추가) · [권한 위임](#transfer-권한-위임) · [위임자로 전송](#위임자로서-asset-전송)
-
-1. 위임자 주소와 함께 Transfer Delegate 플러그인 추가
-2. 이제 위임자가 Asset을 한 번 전송 가능
-3. 전송 후 권한이 자동으로 철회됨
-
-## 개요
-
-`Transfer Delegate` Plugin은 Transfer Delegate Plugin의 권한이 언제든지 Asset을 전송할 수 있게 하는 `Owner Managed` 플러그인입니다.
-
-Transfer Plugin은 다음과 같은 영역에서 작동합니다:
-
-- Asset의 에스크로 없는 판매: 에스크로 계정 없이 구매자에게 NFT를 직접 전송
-- 사용자가 이벤트를 기반으로 자신의 에셋을 교환/분실하는 게임 시나리오: 게임 이벤트가 발생할 때 자동으로 에셋 전송
-- 구독 서비스: 구독 서비스의 일부로 NFT 전송
-
-{% callout type="note" title="Transfer vs Permanent Transfer Delegate 사용 시기" %}
-
-| 사용 사례 | Transfer Delegate | Permanent Transfer Delegate |
+## Summary
+The **Transfer Delegate** is an Owner Managed plugin that allows a delegate to transfer an Asset. Once delegated, the authority can transfer the Asset to any address without owner approval.
+- Enable escrowless marketplace listings
+- Authority is **revoked after transfer** (one-time use)
+- Use [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate) for persistent authority
+- No additional arguments required
+## Out of Scope
+Permanent transfer authority (see Permanent Transfer Delegate), collection-level transfers, and Token Metadata transfer authority (different system).
+## Quick Start
+**Jump to:** [Add Plugin](#add-transfer-delegate-plugin-to-an-asset) · [Delegate Authority](#delegate-the-transfer-authority) · [Transfer as Delegate](#transferring-an-asset-as-delegate)
+1. Add the Transfer Delegate plugin with the delegate address
+2. The delegate can now transfer the Asset once
+3. After transfer, the authority is automatically revoked
+## Overview
+The `Transfer Delegate` Plugin is a `Owner Managed` plugin that allows the authority of the Transfer Delegate Plugin to transfer the Asset at any time.
+The Transfer Plugin will work in areas such as:
+- Escrowless sale of the Asset: Transfer NFTs directly to buyers without needing an escrow account
+- Gaming scenario where the user swaps/loses their asset based on an event: Automatically transfer assets when game events occur
+- Subscription services: Transfer NFTs as part of a subscription service
+{% callout type="note" title="When to Use Transfer vs Permanent Transfer Delegate" %}
+| Use Case | Transfer Delegate | Permanent Transfer Delegate |
 |----------|-------------------|----------------------------|
-| 마켓플레이스 리스팅 | ✅ 최적 선택 | ❌ 너무 위험함 |
-| 일회성 전송 | ✅ 최적 선택 | ❌ 과도함 |
-| 렌탈 반환 | ❌ 일회용 | ✅ 최적 선택 |
-| 게임 에셋 교환 | ✅ 최적 선택 | ✅ 사용 가능 |
-| 전송 시 권한 유지 | ❌ 철회됨 | ✅ 유지됨 |
-
-일회성 에스크로 없는 판매에는 **Transfer Delegate를 선택**하세요 (전송 후 권한 철회).
-권한이 영구적으로 유지되어야 할 때 **[Permanent Transfer Delegate](/ko/smart-contracts/core/plugins/permanent-transfer-delegate)를 선택**하세요.
-
+| Marketplace listings | ✅ Best choice | ❌ Too risky |
+| One-time transfers | ✅ Best choice | ❌ Overkill |
+| Rental returns | ❌ Single use | ✅ Best choice |
+| Game asset swaps | ✅ Best choice | ✅ Also works |
+| Authority persists on transfer | ❌ Revokes | ✅ Persists |
+**Choose Transfer Delegate** for one-time escrowless sales (authority revokes after transfer).
+**Choose [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate)** when authority must persist forever.
 {% /callout %}
-
-{% callout title="경고!" %}
-전송 위임 권한은 임시적이며 에셋 전송 시 재설정됩니다.
+{% callout title="Warning!" %}
+The transfer delegate authority is temporary and will be reset upon asset transfer.
 {% /callout %}
-
-## 호환성
-
+## Works With
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
-
-## 인수
-
-Transfer Plugin은 전달할 인수를 포함하지 않습니다.
-
-## 함수
-
-### Asset에 Transfer Delegate Plugin 추가
-
-`addPlugin` 명령은 Asset에 Transfer Delegate Plugin을 추가합니다. 이 플러그인을 통해 위임자가 언제든지 Asset을 전송할 수 있습니다.
-
-{% dialect-switcher title="MPL Core Asset에 Transfer Plugin 추가" %}
+## Arguments
+The Transfer Plugin doesn't contain any arguments to pass in.
+## Functions
+### Add Transfer Delegate Plugin to an Asset
+The `addPlugin` command adds the Transfer Delegate Plugin to an Asset. This plugin allows a delegate to transfer the Asset at any time.
+{% dialect-switcher title="Adding a Transfer Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
-
 const assetAddress = publicKey('11111111111111111111111111111111')
 const delegate = publicKey('22222222222222222222222222222222')
-
 await addPlugin(umi, {
   asset: assetAddress,
   plugin: {
@@ -100,9 +93,7 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust CPI" id="rust-cpi" %}
 ```rust
 AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
@@ -114,9 +105,7 @@ AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .invoke();
 ```
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
-
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -125,58 +114,42 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn add_transfer_delegate_plugin() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
     let add_plugin_ix = AddPluginV1Builder::new()
         .asset(asset)
         .payer(authority.pubkey())
         .plugin(Plugin::TransferDelegate(TransferDelegate {}))
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let add_plugin_tx = Transaction::new_signed_with_payer(
         &[add_plugin_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&add_plugin_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res)
 }
-
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### Transfer 권한 위임
-
-`approvePluginAuthority` 명령은 전송 권한을 다른 주소에 위임합니다. 이를 통해 소유권을 유지하면서 다른 주소가 Asset을 전송할 수 있습니다.
-
-{% dialect-switcher title="Transfer 권한 위임" %}
+### Delegate the Transfer Authority
+The `approvePluginAuthority` command delegates the transfer authority to a different address. This allows another address to transfer the Asset while maintaining ownership.
+{% dialect-switcher title="Delegate the Transfer Authority" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
-
 const asset = publicKey("11111111111111111111111111111111");
 const collection = publicKey("22222222222222222222222222222222");
 const delegateAddress = publicKey("33333333333333333333333333333333");
-
 await approvePluginAuthority(umi, {
   asset: asset,
   collection: collection,
@@ -184,9 +157,7 @@ await approvePluginAuthority(umi, {
   newAuthority: { type: "Address", address: delegateAddress },
 }).sendAndConfirm(umi);
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust CPI" id="rust-cpi" %}
 ```rust
 ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
@@ -199,7 +170,6 @@ ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .invoke()?;
 ```
 {% /dialect %}
-
 {% dialect title="Rust" id="rust" %}
 ```rust
 use mpl_core::{
@@ -209,54 +179,42 @@ use mpl_core::{
 use solana_client::nonblocking::rpc_client;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
 use std::str::FromStr;
-
 pub async fn approve_plugin_authority() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
     let authority = Keypair::new();
     let new_authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
     let collection = Pubkey::from_str("2222222222222222222222222222222").unwrap();
-
     let approve_plugin_authority_ix = ApprovePluginAuthorityV1Builder::new()
         .asset(asset)
-        // Asset이 컬렉션의 일부인 경우, 컬렉션을 전달해야 합니다
+        // If the Asset is part of a collection, the collection must be passed in
         .collection(Some(collection))
         .authority(Some(authority.pubkey()))
         .payer(authority.pubkey())
         .plugin_type(PluginType::TransferDelegate)
         .new_authority(PluginAuthority::Address { address: new_authority.pubkey() })
         .instruction();
-
     let signers = vec![&authority];
-
     let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
     let approve_plugin_authority_tx = Transaction::new_signed_with_payer(
         &[approve_plugin_authority_ix],
         Some(&authority.pubkey()),
         &signers,
         last_blockhash,
     );
-
     let res = rpc_client
         .send_and_confirm_transaction(&approve_plugin_authority_tx)
         .await
         .unwrap();
-
     println!("Signature: {:?}", res);
 }
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-
-### 위임자로서 Asset 전송
-
-`transfer` 명령은 transfer delegate 권한을 사용하여 Asset을 다른 주소로 전송합니다.
-
-{% dialect-switcher title="MPL Core Asset 전송" %}
+### Transferring an Asset As Delegate
+The `transfer` instruction transfers an Asset to another address using the transfer delegate authority.
+{% dialect-switcher title="Transfer an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import {
   fetchAsset,
@@ -264,21 +222,17 @@ import {
   transfer,
 } from "@metaplex-foundation/mpl-core";
 import { publicKey } from "@metaplex-foundation/umi";
-
-// 전송하려는 Asset ID
+// Asset ID you wish to transfer
 const assetId = publicKey("11111111111111111111111111111111");
-
-// Asset 가져오기
+// Fetch the Asset
 const assetItem = await fetchAsset(umi, assetId);
-
-// Asset이 컬렉션의 일부인 경우 컬렉션 가져오기
+// Fetch collection if Asset is apart of collection
 const collectionItem =
     assetItem.updateAuthority.type == "Collection" &&
     assetItem.updateAuthority.address
       ? await fetchCollection(umi, assetItem.updateAuthority.address)
       : undefined;
-
-// Core NFT Asset 전송
+// Transfer the Core NFT Asset
 const { signature } = await transfer(umi, {
     asset: assetItem,
     newOwner: publicKey("22222222222222222222222222222222"),
@@ -286,9 +240,7 @@ const { signature } = await transfer(umi, {
   })
   .sendAndConfirm(umi);
 ```
-
 {% /dialect %}
-
 {% dialect title="Rust CPI" id="rust-cpi" %}
 ```rust
 TransferV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
@@ -299,30 +251,21 @@ TransferV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .system_program(&ctx.accounts.system_program.to_account_info())
     .invoke()?;
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## Transfer Delegate 권한 업데이트
-
-Transfer Delegate 플러그인에는 업데이트할 플러그인 데이터가 없으므로 (빈 객체 `{}`), 주요 "업데이트" 작업은 플러그인 권한을 변경하는 것입니다. 이를 통해 다른 주소에 전송 권한을 위임할 수 있습니다.
-
-### Transfer Delegate 권한 변경
-
-`approvePluginAuthority` 함수를 사용하여 전송 권한을 가진 사람을 변경할 수 있습니다:
-
-{% dialect-switcher title="Transfer Delegate 권한 업데이트" %}
+## Updating Transfer Delegate Authority
+Since the Transfer Delegate plugin doesn't contain plugin data to update (it's an empty object `{}`), the main "update" operation is changing the plugin authority. This allows you to delegate transfer permissions to different addresses.
+### Changing the Transfer Delegate Authority
+You can change who has transfer authority using the `approvePluginAuthority` function:
+{% dialect-switcher title="Update Transfer Delegate Authority" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
-
 (async () => {
     const assetAddress = publicKey('11111111111111111111111111111111')
     const newDelegate = publicKey('44444444444444444444444444444444')
-
-    // Transfer delegate를 새 주소로 변경
+    // Change the transfer delegate to a new address
     await approvePluginAuthority(umi, {
     asset: assetAddress,
     plugin: { type: 'TransferDelegate' },
@@ -330,112 +273,72 @@ import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
     }).sendAndConfirm(umi)
 })();
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-### Transfer Delegate 권한 철회
-
-`revokePluginAuthority` 함수를 사용하여 전송 권한을 철회하고 자산 소유자에게 전송 제어권을 반환할 수 있습니다.
-
-{% dialect-switcher title="Transfer Delegate 권한 철회" %}
+### Revoking Transfer Delegate Authority
+The transfer authority can be revoked using the `revokePluginAuthority` function, returning transfer control to the asset owner.
+{% dialect-switcher title="Revoke Transfer Delegate Authority" %}
 {% dialect title="JavaScript" id="js" %}
-
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
-
 const assetAddress = publicKey('11111111111111111111111111111111')
-
 await revokePluginAuthority(umi, {
   asset: assetAddress,
   plugin: { type: 'TransferDelegate' },
 }).sendAndConfirm(umi)
 ```
-
 {% /dialect %}
 {% /dialect-switcher %}
-
-## 일반적인 오류
-
+## Common Errors
 ### `Authority mismatch`
-
-전송 위임 권한만 Asset을 전송할 수 있습니다. 올바른 키페어로 서명하고 있는지 확인하세요.
-
+Only the transfer delegate authority can transfer the Asset. Verify you're signing with the correct keypair.
 ### `Asset is frozen`
-
-동결된 Asset은 전송할 수 없습니다. 동결 권한이 먼저 Asset을 해제해야 합니다.
-
+Frozen Assets cannot be transferred. The freeze authority must thaw the Asset first.
 ### `Transfer delegate not found`
-
-Asset에 Transfer Delegate 플러그인이 없거나 이전 전송 후 권한이 이미 철회되었습니다.
-
-## 참고 사항
-
-- Owner Managed: 추가하려면 소유자 서명 필요
-- 권한은 **전송 후 자동으로 철회됨**
-- 각 전송마다 새 소유자의 재위임 필요
-- 동결된 Asset은 위임자가 전송 불가
-- 지속적인 권한을 위해서는 Permanent Transfer Delegate 사용
-
-## 빠른 참조
-
-### 권한 수명 주기
-
-| 이벤트 | 권한 상태 |
-|-------|----------|
-| 플러그인 추가 | 활성 |
-| Asset 전송 | **철회됨** |
-| 새 소유자가 플러그인 추가 | 활성 (새 위임자) |
-
-### 누가 전송할 수 있나요?
-
-| 권한 | 전송 가능? |
-|------|----------|
-| Asset 소유자 | 예 (항상) |
-| Transfer Delegate | 예 (한 번) |
-| Permanent Transfer Delegate | 예 (항상) |
-| Update Authority | 아니오 |
-
+The Asset doesn't have a Transfer Delegate plugin or authority was already revoked after a previous transfer.
+## Notes
+- Owner Managed: requires owner signature to add
+- Authority is **automatically revoked after transfer**
+- Each transfer requires re-delegation by the new owner
+- Frozen Assets cannot be transferred by delegates
+- Use Permanent Transfer Delegate for persistent authority
+## Quick Reference
+### Authority Lifecycle
+| Event | Authority Status |
+|-------|------------------|
+| Plugin added | Active |
+| Asset transferred | **Revoked** |
+| New owner adds plugin | Active (new delegate) |
+### Who Can Transfer?
+| Authority | Can Transfer? |
+|-----------|---------------|
+| Asset Owner | Yes (always) |
+| Transfer Delegate | Yes (once) |
+| Permanent Transfer Delegate | Yes (always) |
+| Update Authority | No |
 ## FAQ
+### Why was my transfer authority revoked?
+Transfer Delegate authority is automatically revoked after any transfer. This is by design for marketplace safety - the delegate can only transfer once.
+### How do I implement escrowless listings?
+1. Seller adds Transfer Delegate with marketplace as authority
+2. When buyer pays, marketplace transfers Asset to buyer
+3. Authority is revoked; seller can't double-list
+### What's the difference between Transfer Delegate and Permanent Transfer Delegate?
+Transfer Delegate is revoked after one transfer. Permanent Transfer Delegate persists forever and can only be added at Asset creation.
+### Can I transfer a frozen Asset as a delegate?
+No. Frozen Assets block all transfers including delegate transfers. Use Permanent Transfer Delegate with a Permanent Freeze Delegate for complex escrow scenarios.
+### Does the owner need to approve each transfer?
+No. Once the Transfer Delegate is set, the delegate can transfer without owner approval. However, they can only do it once before authority is revoked.
+## Related Plugins
+- [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate) - Irrevocable transfer authority
+- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Block transfers temporarily
+- [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - Allow delegate to burn Assets
+## Glossary
+| Term | Definition |
+|------|------------|
+| **Transfer Delegate** | Owner Managed plugin allowing one-time transfer authority |
+| **Owner Managed** | Plugin type requiring owner signature to add |
+| **Escrowless** | Selling without transferring to a holding account |
+| **Permanent Transfer Delegate** | Irrevocable version added at creation |
 
-### 내 전송 권한이 왜 철회되었나요?
-
-Transfer Delegate 권한은 모든 전송 후 자동으로 철회됩니다. 이는 마켓플레이스 안전을 위한 설계 - 위임자는 한 번만 전송할 수 있습니다.
-
-### 에스크로 없는 리스팅을 어떻게 구현하나요?
-
-1. 판매자가 마켓플레이스를 권한으로 하여 Transfer Delegate 추가
-2. 구매자가 결제하면 마켓플레이스가 Asset을 구매자에게 전송
-3. 권한이 철회됨; 판매자는 중복 등록 불가
-
-### Transfer Delegate와 Permanent Transfer Delegate의 차이점은 무엇인가요?
-
-Transfer Delegate는 한 번의 전송 후 철회됩니다. Permanent Transfer Delegate는 영구적으로 유지되며 Asset 생성 시에만 추가할 수 있습니다.
-
-### 위임자로서 동결된 Asset을 전송할 수 있나요?
-
-아니요. 동결된 Asset은 위임자 전송을 포함한 모든 전송을 차단합니다. 복잡한 에스크로 시나리오에는 Permanent Transfer Delegate와 Permanent Freeze Delegate를 함께 사용하세요.
-
-### 각 전송마다 소유자가 승인해야 하나요?
-
-아니요. Transfer Delegate가 설정되면 위임자는 소유자 승인 없이 전송할 수 있습니다. 그러나 권한이 철회되기 전에 한 번만 가능합니다.
-
-## 관련 플러그인
-
-- [Permanent Transfer Delegate](/ko/smart-contracts/core/plugins/permanent-transfer-delegate) - 철회 불가능한 전송 권한
-- [Freeze Delegate](/ko/smart-contracts/core/plugins/freeze-delegate) - 일시적으로 전송 차단
-- [Burn Delegate](/ko/smart-contracts/core/plugins/burn-delegate) - 위임자가 Asset 소각 허용
-
-## 용어 정리
-
-| 용어 | 정의 |
-|------|------|
-| **Transfer Delegate** | 일회성 전송 권한을 허용하는 Owner Managed 플러그인 |
-| **Owner Managed** | 추가하려면 소유자 서명이 필요한 플러그인 유형 |
-| **Escrowless** | 보관 계정으로 전송하지 않는 판매 |
-| **Permanent Transfer Delegate** | 생성 시 추가되는 철회 불가능한 버전 |
-
----
-
-*Metaplex Foundation 관리 · 2026년 1월 최종 검증 · @metaplex-foundation/mpl-core에 적용*
