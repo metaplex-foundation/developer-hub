@@ -98,7 +98,7 @@ export function Fence({
             >
               {showCopy && <CopyToClipboardButton text={code} />}
               <code className={clsx(
-                'block overflow-auto',
+                'block overflow-auto text-sm',
                 showCopy ? 'w-[calc(100%-25px)]' : 'w-full'
               )}>
                 {displayTokens.map((line, lineIndex) => {

@@ -72,7 +72,7 @@ export function InteractiveCodeViewer({
               className={clsx(className, 'relative m-0 overflow-auto bg-card p-4')}
               style={style}
             >
-              <code className="block">
+              <code className="block text-sm">
                 {tokens.map((line, lineIndex) => {
                   const lineNumber = lineIndex + 1
 
