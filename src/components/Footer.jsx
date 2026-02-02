@@ -96,7 +96,7 @@ export function Footer() {
                 aria-label="GitHub"
                 target="_blank"
               >
-                <GitHubIcon className="h-5 w-5 fill-muted-foreground transition-colors group-hover:fill-accent-400" />
+                <GitHubIcon className="h-5 w-5 fill-muted-foreground transition-colors group-hover:fill-foreground" />
               </Link>
               <Link
                 href="https://discord.com/invite/metaplex"
@@ -104,7 +104,7 @@ export function Footer() {
                 aria-label="Discord"
                 target="_blank"
               >
-                <DiscordIcon className="h-5 w-5 fill-muted-foreground transition-colors group-hover:fill-accent-400" />
+                <DiscordIcon className="h-5 w-5 fill-muted-foreground transition-colors group-hover:fill-foreground" />
               </Link>
               <Link
                 href="https://x.com/metaplex"
@@ -112,7 +112,7 @@ export function Footer() {
                 aria-label="X"
                 target="_blank"
               >
-                <XIcon className="h-5 w-5 fill-muted-foreground transition-colors group-hover:fill-accent-400" />
+                <XIcon className="h-5 w-5 fill-muted-foreground transition-colors group-hover:fill-foreground" />
               </Link>
             </div>
           </div>
