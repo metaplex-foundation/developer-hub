@@ -11,10 +11,10 @@ const ProductCard = ({ item, locale, learnMoreText }) => {
   return (
     <Link
       href={href}
-      // className="group relative flex flex-col rounded-lg border border-border bg-transparent p-6 transition-all duration-200 hover:border-accent-400"
+      // className="group relative flex flex-col rounded-lg border border-border bg-transparent p-6 transition-all duration-200 hover:border-foreground"
       {...(item.target && { target: item.target })}
     >
-      <Card className="hover:border-accent-400 group relative flex flex-col">
+      <Card className="hover:border-foreground group relative flex flex-col transition-colors duration-200">
         <CardContent className="p-0">
           <h3 className="text-sm font-medium text-balance md:text-lg">
             {item.name}
@@ -22,7 +22,7 @@ const ProductCard = ({ item, locale, learnMoreText }) => {
           <p className="mt-2 flex-1 text-sm text-muted-foreground">
             {item.headline || item.description}
           </p>
-          <span className="mt-4 inline-flex items-center text-sm font-medium text-accent-400">
+          <span className="mt-4 inline-flex items-center text-sm font-medium text-primary">
             {learnMoreText}
             <svg
               className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"

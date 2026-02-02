@@ -77,7 +77,7 @@ export function TableOfContent({ tableOfContents }) {
                     href={`#${section.id}`}
                     className={clsx(
                       isActive(section)
-                        ? 'text-accent-400'
+                        ? 'text-primary'
                         : 'font-normal text-muted-foreground hover:text-foreground'
                     )}
                   >
@@ -95,7 +95,7 @@ export function TableOfContent({ tableOfContents }) {
                           href={`#${subSection.id}`}
                           className={
                             isActive(subSection)
-                              ? 'text-accent-400'
+                              ? 'text-primary'
                               : 'hover:text-foreground'
                           }
                         >

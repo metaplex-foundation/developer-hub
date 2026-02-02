@@ -36,25 +36,25 @@ export function Footer() {
             <div className="flex flex-col gap-2 text-sm text-muted-foreground">
               <Link
                 href={getLocalizedHref('/official-links', locale)}
-                className="hover:text-accent-400 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('officialLinks', 'Official Links')}
               </Link>
               <Link
                 href={getLocalizedHref('/security', locale)}
-                className="hover:text-accent-400 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('security', 'Security')}
               </Link>
               <Link
                 href={getLocalizedHref('/protocol-fees', locale)}
-                className="hover:text-accent-400 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('protocolFees', 'Protocol Fees')}
               </Link>
               <Link
                 href={getLocalizedHref('/stability-index', locale)}
-                className="hover:text-accent-400 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('stabilityIndex', 'Stability Index')}
               </Link>
@@ -70,14 +70,14 @@ export function Footer() {
               <Link
                 href="https://www.metaplex.com/terms-and-conditions"
                 target="_blank"
-                className="hover:text-accent-400 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('termsAndConditions', 'Terms & Conditions')}
               </Link>
               <Link
                 href="https://www.metaplex.com/privacy-policy"
                 target="_blank"
-                className="hover:text-accent-400 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('privacyPolicy', 'Privacy Policy')}
               </Link>

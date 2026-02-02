@@ -3,7 +3,6 @@ import {
   referencesSection
 } from '@/shared/sections'
 import { ArrowsPointingOutIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
 
 export const hydra = {
   name: 'Hydra',
@@ -14,7 +13,6 @@ export const hydra = {
   icon: <ArrowsPointingOutIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-hydra',
   className: 'accent-amber',
-  heroes: [{ path: '/smart-contracts/hydra', component: Hero }],
   deprecated: true,
   sections: [
     {

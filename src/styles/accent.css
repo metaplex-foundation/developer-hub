@@ -1,6 +1,0 @@
-/* Unified accent colors - neutral gray tones from design system */
-:root {
-  /* Quick links component styling */
-  --quick-links-hover-bg: hsl(0, 0%, 10%);
-  --quick-links-hover-border: hsl(0, 0%, 53%), hsl(0, 0%, 45%), hsl(0, 0%, 63%);
-}

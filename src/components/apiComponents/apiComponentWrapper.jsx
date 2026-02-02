@@ -8,13 +8,13 @@ import { Totem, TotemAccordion } from '../Totem'
 import ApiParameterDisplay from './apiParams'
 import ApiExampleSelector from './exampleSelector'
 import LanguageRenderer from './languageRenderer'
-import Responce from './responce'
+import Response from './response'
 
 const ApiComponentWrapper = (args) => {
   const api = apiMethods[args.method]
 
   const [screenWidth, setScreenWidth] = useState(null)
-  const [responce, setResponce] = useState(null)
+  const [response, setResponse] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [selectedExample, setSelectedExample] = useState(-1)
   const [activeEndpoint, setActiveEndpoint] = useState("https://api.devnet.solana.com")
@@ -139,7 +139,7 @@ const ApiComponentWrapper = (args) => {
   }
 
   const handleTryItOut = async () => {
-    setResponce(null)
+    setResponse(null)
     setIsLoading(true)
 
     try {
@@ -166,9 +166,9 @@ const ApiComponentWrapper = (args) => {
       }
 
       const resJson = await res.json()
-      setResponce(resJson)
+      setResponse(resJson)
     } catch (error) {
-      setResponce({
+      setResponse({
         error: {
           message: error.message || 'Failed to fetch. Please check your endpoint URL and try again.'
         }
@@ -203,7 +203,7 @@ const ApiComponentWrapper = (args) => {
           >
             {isLoading ? <Spinner className="h-6 w-6" /> : 'Try it out'}
           </button>
-          {responce && !isLargeScreen && <Responce responce={responce} />}
+          {response && !isLargeScreen && <Response response={response} />}
         </div>
 
         <div className="flex w-full flex-col items-end gap-4 2xl:w-1/2">
@@ -227,7 +227,7 @@ const ApiComponentWrapper = (args) => {
           >
             {isLoading ? <Spinner className="h-6 w-6" /> : 'Try it out'}
           </button>
-          {responce && isLargeScreen && <Responce responce={responce} />}
+          {response && isLargeScreen && <Response response={response} />}
         </div>
       </div>
 

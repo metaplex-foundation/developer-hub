@@ -2,7 +2,6 @@ import {
   documentationSection
 } from '@/shared/sections';
 import { MapIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
 
 export const shank = {
   name: 'Shank',
@@ -13,7 +12,6 @@ export const shank = {
   navigationMenuCatergory: 'Dev Tools',
   github: 'https://github.com/metaplex-foundation/shank',
   className: 'accent-orange',
-  heroes: [{ path: '/dev-tools/shank', component: Hero }],
   sections: [
     {
       ...documentationSection('dev-tools/shank'),

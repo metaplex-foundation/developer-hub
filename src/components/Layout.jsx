@@ -20,7 +20,6 @@ export function Layout({ children, page }) {
     path => page.pathname === path || page.pathname.match(new RegExp(`^/(en|ja|ko|zh)${path}$`))
   )
   const hasNavigation = !!page.activeSection?.navigation
-  const Hero = page.activeHero
   const t = useTranslations('homepage')
   useLightense()
   useAccentClass(page.product)
@@ -65,10 +64,6 @@ export function Layout({ children, page }) {
   return (
     <div className="min-h-screen bg-background">
       <Header page={page} />
-
-
-
-      {/* {Hero && <Hero page={page} />} */}
 
       {isHomePage && (
         <>

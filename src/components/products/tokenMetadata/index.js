@@ -3,7 +3,6 @@ import {
   guidesSection,
 } from '@/shared/sections';
 import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
 
 export const tokenMetadata = {
   name: 'Token Metadata',
@@ -14,7 +13,6 @@ export const tokenMetadata = {
   icon: <EllipsisHorizontalCircleIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',
   className: 'accent-green',
-  heroes: [{ path: '/smart-contracts/token-metadata', component: Hero }],
   protocolFees: {
     create: {
       solana: '0.01 SOL',

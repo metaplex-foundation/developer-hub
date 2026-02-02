@@ -2,7 +2,6 @@ import {
   documentationSection
 } from '@/shared/sections'
 import { ServerIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
 
 export const amman = {
   name: 'Amman',
@@ -14,7 +13,6 @@ export const amman = {
   icon: <ServerIcon />,
   github: 'https://github.com/metaplex-foundation/amman',
   className: 'accent-sky',
-  heroes: [{ path: '/dev-tools/amman', component: Hero }],
   sections: [
     {
       ...documentationSection('dev-tools/amman'),

@@ -1,6 +1,5 @@
 import { documentationSection } from '@/shared/sections'
 import { SparklesIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
 import { buildProductTranslations } from '@/config/navigation-translations'
 
 export const tokens = {
@@ -12,7 +11,6 @@ export const tokens = {
   icon: <SparklesIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',
   className: 'accent-amber',
-  heroes: [{ path: '/tokens', component: Hero }],
   sections: [
     {
       ...documentationSection('tokens'),

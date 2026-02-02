@@ -1,6 +1,5 @@
 import { documentationSection, guidesSection, referencesSection } from '@/shared/sections';
 import { SparklesIcon } from '@heroicons/react/24/outline';
-import { Hero } from './Hero';
 
 export const genesis = {
   name: 'Genesis',
@@ -11,7 +10,6 @@ export const genesis = {
   path: 'smart-contracts/genesis',
   icon: <SparklesIcon />,
   className: 'accent-pink',
-  heroes: [{ path: '/smart-contracts/genesis', component: Hero }],
   protocolFees: {
     launchPool: {
       deposit: {

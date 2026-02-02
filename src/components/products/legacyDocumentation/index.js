@@ -4,7 +4,6 @@ import {
   recipesSection,
   referencesSection,
 } from '@/shared/sections'
-import { Hero } from './Hero'
 import { ClockIcon } from '@heroicons/react/24/solid'
 
 export const legacyDocumentation = {

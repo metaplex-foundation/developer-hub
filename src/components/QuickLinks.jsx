@@ -12,12 +12,11 @@ export function QuickLinks({ children }) {
 
 export function QuickLink({ title, description, href, target, icon }) {
   return (
-    <div className="group relative rounded-xl border border-border bg-card">
-      <div className="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg),var(--quick-links-hover-bg))_padding-box,linear-gradient(to_bottom,var(--quick-links-hover-border))_border-box] group-hover:opacity-100" />
+    <div className="group relative rounded-xl border border-border bg-card transition-colors duration-200 hover:border-foreground">
       <div className="relative overflow-hidden rounded-xl p-6">
         <Icon
           icon={icon}
-          className="h-8 w-8 group-hover:text-primary"
+          className="h-8 w-8 transition-colors duration-200 group-hover:text-primary"
         />
         <h2 className="mt-4 font-display text-base text-card-foreground">
           <Link href={href} target={target}>

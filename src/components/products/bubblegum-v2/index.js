@@ -4,7 +4,6 @@ import {
   referencesSection
 } from '@/shared/sections';
 import { FolderIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
 import { buildProductTranslations } from '@/config/navigation-translations';
 
 export const bubblegumv2 = {
@@ -16,7 +15,6 @@ export const bubblegumv2 = {
   icon: <FolderIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-bubblegum',
   className: 'accent-green',
-  heroes: [{ path: '/smart-contracts/bubblegum-v2', component: Hero }],
   protocolFees: {
     create: {
       solana: '0.00009 SOL',

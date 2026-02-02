@@ -4,7 +4,6 @@ import {
   referencesSection
 } from '@/shared/sections'
 import { CodeBracketSquareIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
 
 export const umi = {
   name: 'Umi',
@@ -15,7 +14,6 @@ export const umi = {
   icon: <CodeBracketSquareIcon />,
   github: 'https://github.com/metaplex-foundation/umi',
   className: 'accent-pink',
-  heroes: [{ path: '/dev-tools/umi', component: Hero }],
   sections: [
     {
       ...documentationSection('dev-tools/umi'),

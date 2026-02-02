@@ -15,12 +15,14 @@ const selectClassName = clsx(
 
 // Recursive component for rendering nested parameters
 const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
+  const paramId = `param-${path.join('-')}`
   let content
 
   switch (param.type) {
     case 'string':
       content = (
         <input
+          id={paramId}
           name={param.name}
           type="text"
           className={inputClassName}
@@ -34,6 +36,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
     case 'number':
       content = (
         <input
+          id={paramId}
           name={param.name}
           type="number"
           className={inputClassName}
@@ -102,6 +105,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
       content = (
         <div className="relative flex h-10 w-full">
           <Select
+            id={paramId}
             onChange={(e) =>
               setParam(path, e.target.value === 'true' ? true : false)
             }
@@ -122,6 +126,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
       content = (
         <div className="relative flex h-10 w-full">
           <Select
+            id={paramId}
             onChange={(e) => setParam(path, e.target.value)}
             className={selectClassName}
           >
@@ -145,6 +150,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
       content = (
         <div div className="flex flex-col gap-2">
           <input
+            id={paramId}
             name={`${param.name}-key`}
             type="text"
             className={inputClassName}
@@ -156,6 +162,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
             value={value ? value[0] : ''}
           />
           <input
+            id={`${paramId}-value`}
             name={`${param.name}-value`}
             type="text"
             className={inputClassName}
@@ -181,7 +188,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
       } ${param.type === 'object' ? '' : 'flex flex-col gap-2'}`}
     >
       <div className="px-3">
-        <label className="text-sm font-medium text-foreground">
+        <label htmlFor={paramId} className="text-sm font-medium text-foreground">
           {param.name}
         </label>
         <span className="ml-2 inline-block text-xs text-muted-foreground">

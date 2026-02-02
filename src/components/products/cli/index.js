@@ -1,6 +1,5 @@
 import { documentationSection } from '@/shared/sections';
 import { CommandLineIcon, SparklesIcon } from '@heroicons/react/24/outline';
-import { Hero } from './Hero';
 
 export const cli = {
   name: 'CLI',
@@ -15,7 +14,6 @@ export const cli = {
   primaryCta: {
     disabled: false,
   },
-  heroes: [{ path: '/dev-tools/cli', component: Hero }],
   sections: [
     {
       ...documentationSection('dev-tools/cli'),

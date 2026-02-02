@@ -103,38 +103,38 @@ export function MobileNavigation({ page }) {
           </div>
           <Link
             href={getLocalizedHref('/', locale)}
-            className="mt-12 flex items-center gap-2 text-foreground transition-colors hover:text-accent-400"
+            className="mt-12 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <HomeIcon height={20} /> {t('home', 'Home')}
           </Link>
           <Link
             href={getLocalizedHref('/tokens', locale)}
-            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-accent-400"
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <SparklesIcon height={20} /> {t('tokens', 'Tokens')}
           </Link>
           <Link
             href={getLocalizedHref('/nfts', locale)}
-            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-accent-400"
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <PhotoIcon height={20} /> {t('nfts', 'NFTs')}
           </Link>
           <Link
             href={getLocalizedHref('/smart-contracts', locale)}
-            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-accent-400"
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <DocumentTextIcon height={20} /> {t('smartContracts', 'Smart Contracts')}
           </Link>
           <Link
             href={getLocalizedHref('/dev-tools', locale)}
-            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-accent-400"
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <ComputerDesktopIcon height={20} /> {t('devTools', 'Dev Tools')}
           </Link>
 
           <Link
             href={getLocalizedHref('/guides', locale)}
-            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-accent-400"
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <BookOpenIcon height={20} /> {t('guides', 'Guides')}
           </Link>

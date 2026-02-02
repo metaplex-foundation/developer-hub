@@ -6,21 +6,6 @@ pre[class*='language-'] {
   padding: 1rem;
 }
 
-/* Hero code blocks have their own container styling */
-.hero-code pre[class*='language-'] {
-  color: hsl(var(--card-foreground));
-  background-color: transparent !important;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  margin: 0;
-}
-
-.hero-code code {
-  margin: 0;
-  padding: 0;
-}
-
 /* Code blocks inside CodeTabs - remove border and rounded corners (parent has them) */
 .code-tabs pre[class*='language-'] {
   border: none;

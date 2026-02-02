@@ -3,7 +3,6 @@ import {
   referencesSection
 } from '@/shared/sections'
 import { LockOpenIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
 
 export const tokenAuthRules = {
   name: 'Token Auth Rules',
@@ -14,7 +13,6 @@ export const tokenAuthRules = {
   icon: <LockOpenIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-auth-rules',
   className: 'accent-green',
-  heroes: [{ path: '/smart-contracts/token-auth-rules', component: Hero }],
   deprecated: true,
   sections: [
     {
