@@ -41,6 +41,14 @@ function AppContent({ Component, pageProps }) {
         created={page.created}
         updated={page.updated}
         isHomePage={page.pathname === '/'}
+        // Enhanced JSON-LD schema fields
+        keywords={page.keywords}
+        about={page.about}
+        proficiencyLevel={page.proficiencyLevel}
+        programmingLanguage={page.programmingLanguage}
+        howToSteps={page.howToSteps}
+        howToTools={page.howToTools}
+        faqs={page.faqs}
       />
 
       <DialectProvider>

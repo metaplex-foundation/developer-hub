@@ -141,11 +141,22 @@ export function Layout({ children, page }) {
                   {page.updated && (
                     <p className="text-sm text-slate-500 dark:text-slate-400">
                       Last updated{' '}
-                      {new Date(page.updated).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
+                      {(() => {
+                        // Parse MM-DD-YYYY or YYYY-MM-DD format
+                        const dateStr = page.updated
+                        let date
+                        if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
+                          const [month, day, year] = dateStr.split('-')
+                          date = new Date(year, month - 1, day)
+                        } else {
+                          date = new Date(dateStr)
+                        }
+                        return date.toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })
+                      })()}
                     </p>
                   )}
                 </header>

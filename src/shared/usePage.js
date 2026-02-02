@@ -48,6 +48,14 @@ export function usePage(pageProps) {
     tableOfContents: pageProps.markdoc?.frontmatter.tableOfContents != false && pageProps.markdoc?.content
       ? parseTableOfContents(pageProps.markdoc.content)
       : [],
+    // Enhanced JSON-LD schema fields
+    keywords: pageProps.markdoc?.frontmatter.keywords ?? null,
+    about: pageProps.markdoc?.frontmatter.about ?? null,
+    proficiencyLevel: pageProps.markdoc?.frontmatter.proficiencyLevel ?? null,
+    programmingLanguage: pageProps.markdoc?.frontmatter.programmingLanguage ?? null,
+    faqs: pageProps.markdoc?.frontmatter.faqs ?? null,
+    howToSteps: pageProps.markdoc?.frontmatter.howToSteps ?? null,
+    howToTools: pageProps.markdoc?.frontmatter.howToTools ?? null,
   }
 }
 

@@ -196,48 +196,246 @@ function generateBreadcrumbSchema(pathname, productName, productPath, sectionTit
 }
 
 /**
- * Generate TechArticle schema for documentation pages
+ * Convert date string to ISO 8601 format (YYYY-MM-DD)
+ * Handles formats: MM-DD-YYYY, YYYY-MM-DD, or Date objects
  */
-function generateTechArticleSchema(title, description, canonicalUrl, locale, created, updated) {
+function toISO8601Date(dateStr) {
+  if (!dateStr) return null
+
+  // Already in ISO format
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+    return dateStr
+  }
+
+  // MM-DD-YYYY format
+  if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
+    const [month, day, year] = dateStr.split('-')
+    return `${year}-${month}-${day}`
+  }
+
+  // Try parsing as date
+  const date = new Date(dateStr)
+  if (!isNaN(date.getTime())) {
+    return date.toISOString().split('T')[0]
+  }
+
+  return dateStr
+}
+
+/**
+ * Generate TechArticle schema for documentation pages
+ * Enhanced with: @id (fragment), mainEntityOfPage, audience, keywords (array),
+ * about, proficiencyLevel, programmingLanguage, isPartOf (CreativeWork),
+ * discussionUrl, softwareRequirements (text + structured mentions)
+ */
+function generateTechArticleSchema({
+  title,
+  description,
+  canonicalUrl,
+  locale,
+  created,
+  updated,
+  keywords,
+  about,
+  proficiencyLevel,
+  programmingLanguage,
+  productName,
+  productPath,
+}) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
+    // Use fragment identifier for the article itself
+    '@id': `${canonicalUrl}#article`,
     headline: title,
     url: canonicalUrl,
+    // Language is important for indexing and LLM pipelines
     inLanguage: locale,
+    // Link to the WebPage that contains this article
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': canonicalUrl,
+      url: canonicalUrl,
     },
+    // Author and publisher share the same Organization identity
     author: {
       '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
       name: 'Metaplex',
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: LOGO_URL,
+      },
     },
     publisher: {
       '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
       name: 'Metaplex',
       logo: {
         '@type': 'ImageObject',
         url: LOGO_URL,
       },
     },
+    // Target audience is developers
+    audience: {
+      '@type': 'Audience',
+      audienceType: 'Developers',
+    },
+    // Community discussion channel
+    discussionUrl: 'https://discord.gg/metaplex',
+  }
+
+  // Description is important for TechArticle
+  if (description) {
+    schema.description = description
+  }
+
+  if (created) {
+    schema.datePublished = toISO8601Date(created)
+  }
+
+  if (updated) {
+    schema.dateModified = toISO8601Date(updated)
+  } else if (created) {
+    schema.dateModified = toISO8601Date(created)
+  }
+
+  // Keywords as array (more machine-friendly than comma-separated string)
+  if (keywords && keywords.length > 0) {
+    schema.keywords = Array.isArray(keywords) ? keywords : [keywords]
+  }
+
+  // About - topics/entities as Thing objects
+  if (about && about.length > 0) {
+    schema.about = about.map(topic => ({
+      '@type': 'Thing',
+      name: topic,
+    }))
+  }
+
+  // Proficiency level (Beginner, Intermediate, Advanced)
+  if (proficiencyLevel) {
+    schema.proficiencyLevel = proficiencyLevel
+  }
+
+  // Programming languages used in code examples
+  if (programmingLanguage && programmingLanguage.length > 0) {
+    schema.programmingLanguage = programmingLanguage.map(lang => ({
+      '@type': 'ComputerLanguage',
+      name: lang,
+    }))
+  }
+
+  // isPartOf - use CreativeWork for doc sections (not WebSite which implies whole site)
+  if (productName && productPath) {
+    schema.isPartOf = {
+      '@type': 'CreativeWork',
+      '@id': `${SITE_URL}/${productPath}#documentation`,
+      name: `${productName} Documentation`,
+      url: `${SITE_URL}/${productPath}`,
+    }
+  }
+
+  // Software requirements - use text string for broad compatibility
+  // Plus structured 'mentions' for richer data consumers
+  const requirements = []
+  const mentionedSoftware = []
+
+  if (programmingLanguage && programmingLanguage.some(lang =>
+    ['JavaScript', 'TypeScript'].includes(lang)
+  )) {
+    requirements.push('@metaplex-foundation/mpl-core', '@metaplex-foundation/umi')
+    mentionedSoftware.push(
+      {
+        '@type': 'SoftwareSourceCode',
+        name: '@metaplex-foundation/mpl-core',
+        codeRepository: 'https://github.com/metaplex-foundation/mpl-core',
+        programmingLanguage: { '@type': 'ComputerLanguage', name: 'TypeScript' },
+      },
+      {
+        '@type': 'SoftwareSourceCode',
+        name: '@metaplex-foundation/umi',
+        codeRepository: 'https://github.com/metaplex-foundation/umi',
+        programmingLanguage: { '@type': 'ComputerLanguage', name: 'TypeScript' },
+      }
+    )
+  }
+
+  if (programmingLanguage && programmingLanguage.includes('Rust')) {
+    requirements.push('mpl-core (Rust crate)')
+    mentionedSoftware.push({
+      '@type': 'SoftwareSourceCode',
+      name: 'mpl-core',
+      codeRepository: 'https://github.com/metaplex-foundation/mpl-core',
+      programmingLanguage: { '@type': 'ComputerLanguage', name: 'Rust' },
+    })
+  }
+
+  // softwareRequirements as text (broad compatibility)
+  if (requirements.length > 0) {
+    schema.softwareRequirements = requirements.join(', ')
+  }
+
+  // mentions for structured software references (richer data)
+  if (mentionedSoftware.length > 0) {
+    schema.mentions = mentionedSoftware
+  }
+
+  return schema
+}
+
+/**
+ * Generate HowTo schema for tutorial/guide sections
+ */
+function generateHowToSchema({ name, description, steps, tools }) {
+  if (!steps || steps.length === 0) return null
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: name,
+    step: steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: typeof step === 'string' ? step : step.name,
+      text: typeof step === 'string' ? step : step.text || step.name,
+    })),
   }
 
   if (description) {
     schema.description = description
   }
 
-  if (created) {
-    schema.datePublished = created
-  }
-
-  if (updated) {
-    schema.dateModified = updated
-  } else if (created) {
-    schema.dateModified = created
+  // Tools/supplies (optional)
+  if (tools && tools.length > 0) {
+    schema.tool = tools.map(tool => ({
+      '@type': 'HowToTool',
+      name: tool,
+    }))
   }
 
   return schema
+}
+
+/**
+ * Generate FAQPage schema for FAQ sections
+ */
+function generateFAQPageSchema(faqs) {
+  if (!faqs || faqs.length === 0) return null
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.q || faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a || faq.answer,
+      },
+    })),
+  }
 }
 
 /**
@@ -256,6 +454,13 @@ function generateJsonLdSchemas({
   pathname,
   created,
   updated,
+  keywords,
+  about,
+  proficiencyLevel,
+  programmingLanguage,
+  faqs,
+  howToSteps,
+  howToTools,
 }) {
   const schemas = []
 
@@ -268,7 +473,37 @@ function generateJsonLdSchemas({
   // Per-page schemas
   if (!isHomePage && title) {
     schemas.push(generateBreadcrumbSchema(pathname, productName, productPath, sectionTitle, navigationGroup, title))
-    schemas.push(generateTechArticleSchema(title, description, canonicalUrl, locale, created, updated))
+    schemas.push(generateTechArticleSchema({
+      title,
+      description,
+      canonicalUrl,
+      locale,
+      created,
+      updated,
+      keywords,
+      about,
+      proficiencyLevel,
+      programmingLanguage,
+      productName,
+      productPath,
+    }))
+
+    // Add HowTo schema if steps are provided
+    const howToSchema = generateHowToSchema({
+      name: title,
+      description,
+      steps: howToSteps,
+      tools: howToTools,
+    })
+    if (howToSchema) {
+      schemas.push(howToSchema)
+    }
+
+    // Add FAQPage schema if FAQs are provided
+    const faqSchema = generateFAQPageSchema(faqs)
+    if (faqSchema) {
+      schemas.push(faqSchema)
+    }
   }
 
   return schemas
@@ -286,6 +521,16 @@ export function SEOHead({
   created,
   updated,
   isHomePage = false,
+  // Enhanced TechArticle fields
+  keywords,
+  about,
+  proficiencyLevel,
+  programmingLanguage,
+  // HowTo schema fields
+  howToSteps,
+  howToTools,
+  // FAQPage schema fields
+  faqs,
 }) {
   const router = useRouter()
   const { pathname } = router
@@ -340,6 +585,13 @@ export function SEOHead({
     pathname: normalizedPath,
     created,
     updated,
+    keywords,
+    about,
+    proficiencyLevel,
+    programmingLanguage,
+    faqs,
+    howToSteps,
+    howToTools,
   })
 
   return (
