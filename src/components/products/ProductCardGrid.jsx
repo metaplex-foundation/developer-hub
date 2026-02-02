@@ -14,7 +14,7 @@ const ProductCard = ({ item, locale, learnMoreText }) => {
       // className="group relative flex flex-col rounded-lg border border-border bg-transparent p-6 transition-all duration-200 hover:border-foreground"
       {...(item.target && { target: item.target })}
     >
-      <Card className="hover:border-foreground group relative flex flex-col transition-colors duration-200">
+      <Card className="hover:border-foreground/50 group relative flex flex-col transition-colors duration-200">
         <CardContent className="p-0">
           <h3 className="text-sm font-medium text-balance md:text-lg">
             {item.name}
