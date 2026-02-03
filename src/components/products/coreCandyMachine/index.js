@@ -1,6 +1,5 @@
 import { documentationSection, guidesSection, referencesSection } from '@/shared/sections'
 import { Square3Stack3DIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
 
 export const coreCandyMachine = {
   name: 'Core Candy Machine',
@@ -11,7 +10,6 @@ export const coreCandyMachine = {
   icon: <Square3Stack3DIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-core-candy-machine',
   className: 'accent-pink',
-  heroes: [{ path: '/smart-contracts/core-candy-machine', component: Hero }],
   sections: [
     {
       ...documentationSection('smart-contracts/core-candy-machine'),

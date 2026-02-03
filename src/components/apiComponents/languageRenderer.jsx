@@ -29,7 +29,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'javascript':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <JavascriptRequestRenderer
@@ -45,7 +45,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'python':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <PythonRequestRenderer
@@ -61,7 +61,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'curl':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <CurlRequestRenderer
@@ -77,7 +77,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'go':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <GoRequestRenderer
@@ -93,7 +93,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'csharp':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <CSharpRequestRenderer
@@ -109,7 +109,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'java':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <JavaRenderer
@@ -125,7 +125,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'php':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <PhpRenderer
@@ -155,7 +155,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'ruby':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <RubyRenderer
@@ -170,7 +170,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'rust':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <RustRequestRenderer
@@ -185,7 +185,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'swift':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             <SwiftRequestRenderer
@@ -200,7 +200,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
       case 'umi':
         return (
           <div className="flex flex-col">
-            <div className="-mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400">
+            <div className="mb-2 text-sm font-medium text-muted-foreground">
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             {noUmi ? (

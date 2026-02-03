@@ -9,9 +9,9 @@ import { Prose } from '@/components/Prose'
 import { TableOfContent } from '@/components/TableOfContent'
 import { ProductCardGrid } from '@/components/products/ProductCardGrid'
 import { productCategories } from '@/components/products/index'
+import { useTranslations } from '@/contexts/LocaleContext'
 import { useAccentClass } from '@/shared/useAccentClass'
 import { useLightense } from '@/shared/useLightense'
-import { useTranslations } from '@/contexts/LocaleContext'
 
 export function Layout({ children, page }) {
   const isHomePage = page.pathname === '/'
@@ -20,7 +20,6 @@ export function Layout({ children, page }) {
     path => page.pathname === path || page.pathname.match(new RegExp(`^/(en|ja|ko|zh)${path}$`))
   )
   const hasNavigation = !!page.activeSection?.navigation
-  const Hero = page.activeHero
   const t = useTranslations('homepage')
   useLightense()
   useAccentClass(page.product)
@@ -63,19 +62,15 @@ export function Layout({ children, page }) {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Header page={page} />
-
-
-
-      {/* {Hero && <Hero page={page} />} */}
 
       {isHomePage && (
         <>
           {productCategories.map((category, index) => (
             <div key={category} className={clsx("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8", index === 0 ? "pt-12 pb-12" : "py-12")}>
-              <h2 className="mb-2 text-2xl font-bold text-white">{getCategoryName(category)}</h2>
-              <p className="mb-8 text-sm text-neutral-400">
+              <h2 className="mb-2 text-2xl font-bold text-foreground">{getCategoryName(category)}</h2>
+              <p className="mb-8 text-sm text-muted-foreground">
                 {getCategoryDescription(category)}
               </p>
               <ProductCardGrid category={category} />
@@ -87,10 +82,10 @@ export function Layout({ children, page }) {
       {isCategoryIndexPage && (
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-12">
           {page.title && (
-            <h2 className="mb-2 text-2xl font-bold text-white">{page.title}</h2>
+            <h2 className="mb-2 text-2xl font-bold text-foreground">{page.title}</h2>
           )}
           {page.description && (
-            <p className="mb-8 text-sm text-neutral-400">{page.description}</p>
+            <p className="mb-8 text-sm text-muted-foreground">{page.description}</p>
           )}
           <Prose className="break-words">{children}</Prose>
         </div>
@@ -99,20 +94,19 @@ export function Layout({ children, page }) {
       {!isHomePage && !isCategoryIndexPage && (
         <div
           className={clsx(
-            'relative mx-auto flex max-w-[1800px] justify-center sm:px-2 lg:px-8 xl:px-12'
+            'relative mx-auto flex max-w-[1800px] sm:px-2 lg:px-8 xl:px-12'
           )}
         >
           {/* Navigation. */}
           {hasNavigation && !page.product.isFallbackProduct && (
-            <div className="hidden lg:relative lg:block lg:flex-none scrollbar">
-              <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
-              <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
-              <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" />
-              <div className="sticky top-[133px] -ml-0.5 h-[calc(100vh-133px)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
+            <div className="hidden lg:relative lg:block lg:flex-none scrollbar border-r border-border">
+              <div className="sticky top-[73px] -ml-0.5 h-[calc(100vh-73px)] overflow-y-auto overflow-x-hidden py-8 pl-0.5">
                 <Navigation
                   product={page.product}
                   navigation={page.activeSection.navigation}
-                  className="w-64 pr-8 xl:w-72 xl:pr-16"
+                  sections={page.product.sections}
+                  activeSectionId={page.activeSection?.id}
+                  className="w-56 pr-8 xl:w-64 xl:pr-12"
                 />
               </div>
             </div>
@@ -121,7 +115,7 @@ export function Layout({ children, page }) {
           {/* Content. */}
           <div
             className={clsx(
-              'min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-[1200px]',
+              'min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-3xl xl:max-w-4xl mx-auto',
               hasNavigation ? 'lg:pl-8 lg:pr-0 xl:px-16' : 'lg:pl-0 lg:pr-16'
             )}
           >
@@ -129,12 +123,12 @@ export function Layout({ children, page }) {
               {!isCodeViewer && (page.title || page.activeSection?.navigationGroup) && (
                 <header className="mb-9 space-y-1">
                   {page.activeSection?.navigationGroup && (
-                    <p className="font-display text-sm font-medium text-accent-500">
+                    <p className="font-display text-sm font-medium text-primary">
                       {page.activeSection.navigationGroup.title}
                     </p>
                   )}
                   {page.title && (
-                    <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
+                    <h1 className="font-display text-3xl tracking-tight text-foreground">
                       {page.title}
                     </h1>
                   )}
@@ -143,16 +137,16 @@ export function Layout({ children, page }) {
               <Prose className="break-words">{children}</Prose>
             </article>
             {!page.product.isFallbackProduct && (page.activeSection?.previousPage || page.activeSection?.nextPage) && (
-            <dl className="mt-12 flex border-t border-slate-200 pt-6 dark:border-slate-800">
+            <dl className="mt-12 flex border-t border-border pt-6">
               {page.activeSection?.previousPage && (
                 <div>
-                  <dt className="font-display text-sm font-medium text-slate-900 dark:text-white">
+                  <dt className="font-display text-sm font-medium text-foreground">
                     Previous
                   </dt>
                   <dd className="mt-1">
                     <Link
                       href={page.activeSection.previousPage.href}
-                      className="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+                      className="text-base font-semibold text-muted-foreground hover:text-foreground"
                     >
                       <span aria-hidden="true">&larr;</span>{' '}
                       {page.activeSection.previousPage.title}
@@ -162,13 +156,13 @@ export function Layout({ children, page }) {
               )}
               {page.activeSection?.nextPage && (
                 <div className="ml-auto text-right">
-                  <dt className="font-display text-sm font-medium text-slate-900 dark:text-white">
+                  <dt className="font-display text-sm font-medium text-foreground">
                     Next
                   </dt>
                   <dd className="mt-1">
                     <Link
                       href={page.activeSection.nextPage.href}
-                      className="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+                      className="text-base font-semibold text-muted-foreground hover:text-foreground"
                     >
                       {page.activeSection.nextPage.title}{' '}
                       <span aria-hidden="true">&rarr;</span>

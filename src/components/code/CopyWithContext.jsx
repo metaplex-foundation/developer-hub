@@ -1,30 +1,23 @@
+'use client'
+
 import { useState } from 'react'
-import { CheckIcon, ClipboardIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
+
+const ClipboardIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className} aria-hidden="true" focusable="false">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+  </svg>
+)
+
+const CheckIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className} aria-hidden="true" focusable="false">
+    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+  </svg>
+)
 
 /**
  * Enhanced copy button that allows copying and displaying code with full context
  * (imports, setup, main code, and output)
- *
- * @param {Object} props
- * @param {Object} props.sections - Code sections: { imports, setup, main, output, full }
- * @param {string} props.language - Programming language
- * @param {boolean} props.showToggle - Show toggle controls (default: true)
- * @param {string} props.displayMode - Current display mode ('main' or 'full')
- * @param {Function} props.onDisplayModeChange - Callback when display mode changes
- *
- * @example
- * <CopyWithContext
- *   sections={{
- *     imports: "import { create } from '@metaplex-foundation/mpl-core'",
- *     setup: "const umi = createUmi('https://api.devnet.solana.com')",
- *     main: "const asset = await create(umi, { ... })",
- *     output: "console.log('Created:', asset)"
- *   }}
- *   language="javascript"
- *   displayMode="main"
- *   onDisplayModeChange={(mode) => setDisplayMode(mode)}
- * />
  */
 export function CopyWithContext({ sections, language, showToggle = true, displayMode, onDisplayModeChange }) {
   const [copied, setCopied] = useState(false)
@@ -75,14 +68,14 @@ export function CopyWithContext({ sections, language, showToggle = true, display
     <div className="flex items-center gap-2">
       {/* Toggle between display modes - styled as segmented control */}
       {showToggle && hasContext && (
-        <div className="flex items-center rounded-md bg-slate-200/50 p-0.5 dark:bg-slate-700/50">
+        <div className="flex items-center rounded-md bg-muted p-0.5">
           <button
             onClick={() => onDisplayModeChange('main')}
             className={clsx(
               'rounded px-2.5 py-1 text-xs font-medium transition-all',
               displayMode === 'main'
-                ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-800 dark:text-slate-100'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
+                ? 'bg-card text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
             )}
           >
             Snippet
@@ -92,8 +85,8 @@ export function CopyWithContext({ sections, language, showToggle = true, display
             className={clsx(
               'rounded px-2.5 py-1 text-xs font-medium transition-all',
               displayMode === 'full'
-                ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-800 dark:text-slate-100'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
+                ? 'bg-card text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
             )}
           >
             Full
@@ -107,22 +100,17 @@ export function CopyWithContext({ sections, language, showToggle = true, display
         className={clsx(
           'flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all',
           copied
-            ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
-            : 'bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-700 dark:hover:bg-slate-600'
+            ? 'bg-green-500/20 text-green-400'
+            : 'bg-card text-foreground hover:bg-card/80'
         )}
         title={displayMode === 'full' ? 'Copy with imports and setup' : 'Copy snippet only'}
       >
         {copied ? (
-          <>
-            <CheckIcon className="h-3.5 w-3.5" />
-            <span>Copied!</span>
-          </>
+          <CheckIcon className="h-3.5 w-3.5" />
         ) : (
-          <>
-            <ClipboardIcon className="h-3.5 w-3.5" />
-            <span>Copy</span>
-          </>
+          <ClipboardIcon className="h-3.5 w-3.5" />
         )}
+        <span>Copy</span>
       </button>
     </div>
   )

@@ -24,7 +24,6 @@ export function usePage(pageProps) {
   const product = rawProduct ? localizeProduct(rawProduct, locale) : rawProduct
   // Pass both normalized pathname (for section matching) and original pathname (for link matching after localization)
   const activeSection = getActiveSection(normalizedPathname, product, pageProps, pathname)
-  const activeHero = getActiveHero(normalizedPathname, product, pageProps)
 
   // Special handling for 404 pages - localize the title
   const localizedTitle = title === 'Page Not Found' ? t('404.title') : title
@@ -42,7 +41,6 @@ export function usePage(pageProps) {
     originalPathname: pathname,
     locale,
     product,
-    activeHero,
     activeSection,
     isIndexPage: product?.path ? normalizedPathname === `/${product.path}` : normalizedPathname === '/',
     tableOfContents: pageProps.markdoc?.frontmatter.tableOfContents != false && pageProps.markdoc?.content
@@ -71,17 +69,6 @@ function getActiveProduct(pathname, pageProps) {
   if (fallbackProduct) return fallbackProduct
 
   throw new Error('No product found')
-}
-
-function getActiveHero(pathname, product, pageProps) {
-  if (!product?.heroes) return undefined
-  return (
-    product.heroes.find((hero) => {
-      return hero.doesPageHaveHero
-        ? hero.doesPageHaveHero({ pathname, hero, product, pageProps })
-        : pathname === hero.path
-    })?.component ?? undefined
-  )
 }
 
 function getActiveSection(pathname, product, pageProps, originalPathname) {

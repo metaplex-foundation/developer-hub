@@ -403,7 +403,7 @@ const GuideIndexComponent = () => {
                 borderRadius: '5px',
                 color: selectedTag === value ? 'black' : 'white',
                 backgroundColor:
-                  selectedTag === value ? 'var(--color-accent-400)' : '#262626',
+                  selectedTag === value ? 'hsl(var(--primary))' : '#262626',
               }}
               onClick={() =>
                 selectedTag === value ? setSelectedTag(undefined) : setSelectedTag(value)

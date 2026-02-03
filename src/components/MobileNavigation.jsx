@@ -76,22 +76,22 @@ export function MobileNavigation({ page }) {
         className="relative"
         aria-label="Open navigation"
       >
-        <MenuIcon className="h-6 w-6 stroke-slate-500" />
+        <MenuIcon className="h-6 w-6 stroke-muted-foreground" />
       </button>
       <Dialog
         open={isOpen}
         onClose={setIsOpen}
-        className="bg-netural-900/50 fixed inset-0 z-50 flex items-start overflow-y-auto pr-10 backdrop-blur lg:hidden"
+        className="fixed inset-0 z-50 flex items-start overflow-y-auto bg-background/50 pr-10 backdrop-blur lg:hidden"
         aria-label="Navigation"
       >
-        <Dialog.Panel className="min-h-full w-full max-w-sm border-r border-slate-600 bg-neutral-900 px-4 pb-12 pt-5 sm:px-6">
+        <Dialog.Panel className="min-h-full w-full max-w-sm border-r border-border bg-sidebar px-4 pb-12 pt-5 sm:px-6">
           <div className="flex items-center">
             <button
               type="button"
               onClick={() => setIsOpen(false)}
               aria-label="Close navigation"
             >
-              <CloseIcon className="h-6 w-6 stroke-slate-500" />
+              <CloseIcon className="h-6 w-6 stroke-muted-foreground" />
             </button>
             <Link href={getLocalizedHref('/', locale)} className="ml-6" aria-label="Home page">
               <img
@@ -103,38 +103,38 @@ export function MobileNavigation({ page }) {
           </div>
           <Link
             href={getLocalizedHref('/', locale)}
-            className="mt-12 flex items-center gap-2 text-white"
+            className="mt-12 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <HomeIcon height={20} /> {t('home', 'Home')}
           </Link>
           <Link
             href={getLocalizedHref('/tokens', locale)}
-            className="mt-4 flex items-center gap-2 text-white"
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <SparklesIcon height={20} /> {t('tokens', 'Tokens')}
           </Link>
           <Link
             href={getLocalizedHref('/nfts', locale)}
-            className="mt-4 flex items-center gap-2 text-white"
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <PhotoIcon height={20} /> {t('nfts', 'NFTs')}
           </Link>
           <Link
             href={getLocalizedHref('/smart-contracts', locale)}
-            className="mt-4 flex items-center gap-2 text-white"
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <DocumentTextIcon height={20} /> {t('smartContracts', 'Smart Contracts')}
           </Link>
           <Link
             href={getLocalizedHref('/dev-tools', locale)}
-            className="mt-4 flex items-center gap-2 text-white"
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <ComputerDesktopIcon height={20} /> {t('devTools', 'Dev Tools')}
           </Link>
 
           <Link
             href={getLocalizedHref('/guides', locale)}
-            className="mt-4 flex items-center gap-2 text-white"
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <BookOpenIcon height={20} /> {t('guides', 'Guides')}
           </Link>
@@ -142,8 +142,8 @@ export function MobileNavigation({ page }) {
           {/* Only show product-specific navigation when not on the global/home pages */}
           {!page.product.isFallbackProduct && (
             <>
-              <hr className="mt-8 border-neutral-700" />
-              <div className="mt-6 text-xl font-bold text-white">
+              <hr className="mt-8 border-border" />
+              <div className="mt-6 text-xl font-bold text-foreground">
                 {page.product.name}
               </div>
 

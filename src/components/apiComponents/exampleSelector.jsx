@@ -24,8 +24,8 @@ const ApiExampleSelector = ({
     { mainnetExamples: [], devnetExamples: [] }
   );
 
-  const currentExample = selectedExample >= 0 && selectedExample < examples.length 
-    ? examples[selectedExample] 
+  const currentExample = selectedExample >= 0 && selectedExample < examples.length
+    ? examples[selectedExample]
     : null;
 
   const handleExampleChange = (e) => {
@@ -44,7 +44,7 @@ const ApiExampleSelector = ({
   return (
     <div className="w-full">
       <label
-        className="mb-3 text-sm font-medium text-gray-800 dark:text-neutral-400"
+        className="mb-3 text-sm font-medium text-muted-foreground"
         htmlFor="endPoint"
       >
         Example Queries
@@ -55,9 +55,9 @@ const ApiExampleSelector = ({
             onChange={handleExampleChange}
             value={selectedExample >= 0 ? selectedExample.toString() : ''}
             className={clsx(
-              'dark:white block w-full appearance-none rounded-lg border border-black/10 bg-white/5 px-3 py-1.5 text-sm/6 text-black dark:border-white/15 dark:bg-transparent',
-              'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
-              '*:text-black dark:text-white'
+              'block w-full appearance-none rounded-lg border border-border bg-card px-3 py-1.5 text-sm/6 text-foreground',
+              'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-primary/25',
+              '*:text-foreground'
             )}
           >
             <option value="">-</option>
@@ -87,14 +87,14 @@ const ApiExampleSelector = ({
             )}
           </Select>
           <ChevronDownIcon
-            className="group pointer-events-none absolute right-2.5 top-4 my-auto size-4 fill-black/60 dark:fill-white"
+            className="group pointer-events-none absolute right-2.5 top-4 my-auto size-4 fill-muted-foreground"
             aria-hidden="true"
           />
         </div>
 
         <button
           onClick={() => handleSetExample(-1)}
-          className="block rounded-lg border border-gray-200 px-4 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:placeholder-neutral-500"
+          className="block rounded-lg border border-border bg-card px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:pointer-events-none disabled:opacity-50"
         >
           Clear
         </button>

@@ -2,7 +2,6 @@ import {
   documentationSection
 } from '@/shared/sections';
 import { CircleStackIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
 
 export const fusion = {
   name: 'Fusion',
@@ -13,7 +12,6 @@ export const fusion = {
   icon: <CircleStackIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-trifle',
   className: 'accent-amber',
-  heroes: [{ path: '/smart-contracts/fusion', component: Hero }],
   protocolFees: {
     combine: {
       solana: '0.002 SOL',

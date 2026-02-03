@@ -1,6 +1,6 @@
+import clsx from 'clsx';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import { Fragment } from 'react';
-import clsx from 'clsx';
 import CopyToClipboardButton from './products/CopyToClipboard';
 (typeof global !== 'undefined' ? global : window).Prism = Prism
 
@@ -64,7 +64,7 @@ export function Fence({
     <div className="not-prose">
       {/* Title bar */}
       {title && (
-        <div className="rounded-t-lg border border-b-0 border-slate-200 bg-slate-100 px-4 py-2 font-mono text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+        <div className="rounded-t-lg border border-b-0 border-border bg-muted px-4 py-2 font-mono text-sm text-muted-foreground">
           {title}
         </div>
       )}
@@ -91,14 +91,14 @@ export function Fence({
             <pre
               className={clsx(
                 className,
-                'scrollbar relative',
+                'scrollbar relative bg-card',
                 title ? 'rounded-t-none' : ''
               )}
               style={style}
             >
               {showCopy && <CopyToClipboardButton text={code} />}
               <code className={clsx(
-                'block overflow-auto',
+                'block overflow-auto text-sm',
                 showCopy ? 'w-[calc(100%-25px)]' : 'w-full'
               )}>
                 {displayTokens.map((line, lineIndex) => {
@@ -110,13 +110,13 @@ export function Fence({
                       key={lineIndex}
                       className={clsx(
                         'table-row',
-                        isHighlighted && 'bg-yellow-100/10 dark:bg-yellow-500/10'
+                        isHighlighted && 'bg-primary/10'
                       )}
                     >
                       {/* Line number column */}
                       {showLineNumbers && (
                         <span
-                          className="table-cell select-none pr-4 text-right text-slate-500 dark:text-slate-600"
+                          className="table-cell select-none pr-4 text-right text-muted-foreground"
                           style={{ minWidth: '3em' }}
                         >
                           {actualLineNumber}

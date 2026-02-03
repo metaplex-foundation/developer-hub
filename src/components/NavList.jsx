@@ -1,7 +1,7 @@
 'use client'
 
-import { useLocale, useTranslations } from '@/contexts/LocaleContext';
 import { getLocalizedHref } from '@/config/languages';
+import { useLocale, useTranslations } from '@/contexts/LocaleContext';
 import { Popover } from '@headlessui/react';
 import Link from 'next/link';
 import { SwitcherPopover } from './products/SwitcherPopover';
@@ -211,7 +211,7 @@ const NavList = () => {
           return (
             <div className="hidden flex-col lg:flex" key={index}>
               <Link href={getLocalizedHref(path, locale)}>
-                <div className="-mx-3 -my-2 whitespace-nowrap rounded-lg px-3 py-2 text-black dark:text-white">
+                <div className="-mx-3 -my-2 whitespace-nowrap rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground">
                   {getTranslatedCategory(item)}
                 </div>
               </Link>

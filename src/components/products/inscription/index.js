@@ -3,7 +3,6 @@ import {
   referencesSection
 } from '@/shared/sections'
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
 
 export const inscription = {
   name: 'Inscription',
@@ -14,7 +13,6 @@ export const inscription = {
   navigationMenuCatergory: 'Smart Contracts',
   github: 'https://github.com/metaplex-foundation/mpl-inscription',
   className: 'accent-green',
-  heroes: [{ path: '/smart-contracts/inscription', component: Hero }],
   sections: [
     {
       ...documentationSection('smart-contracts/inscription'),

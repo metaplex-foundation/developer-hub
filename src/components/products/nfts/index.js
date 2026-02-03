@@ -1,6 +1,5 @@
 import { documentationSection } from '@/shared/sections';
 import { PhotoIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
 import { buildProductTranslations } from '@/config/navigation-translations';
 
 export const nfts = {
@@ -12,7 +11,6 @@ export const nfts = {
   icon: <PhotoIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-core',
   className: 'accent-green',
-  heroes: [{ path: '/nfts', component: Hero }],
   sections: [
     {
       ...documentationSection('nfts'),

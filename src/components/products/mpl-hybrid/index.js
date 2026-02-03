@@ -4,7 +4,6 @@ import {
   referencesSection,
 } from '@/shared/sections';
 import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
 
 export const mplHybrid = {
   name: 'MPL-Hybrid',
@@ -15,7 +14,6 @@ export const mplHybrid = {
   icon: <ArrowsRightLeftIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-hybrid',
   className: 'accent-green',
-  heroes: [{ path: '/smart-contracts/mpl-hybrid', component: Hero }],
   protocolFees: {
     swap: {
       solana: '0.005 SOL',

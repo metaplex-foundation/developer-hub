@@ -1,6 +1,14 @@
 'use client'
 
 import { useTranslations } from '@/contexts/LocaleContext'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 const products = [
   { name: 'Token Metadata', level: 3 },
@@ -32,35 +40,26 @@ const products = [
 function StabilityLevelCard({ level, name, description, levelProducts, t }) {
   return (
     <div className="my-6">
-      <h3 className="mb-2 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+      <h3 className="mb-2 text-lg font-semibold text-foreground">
         {t('stability', 'Stability')} {level} - {name}
       </h3>
-      <p className="mb-3 text-sm text-neutral-600 dark:text-neutral-400">
+      <p className="mb-3 text-sm text-muted-foreground">
         {description}
       </p>
-      <div className="overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700">
-        <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
-          <thead className="bg-neutral-50 dark:bg-neutral-800">
-            <tr>
-              <th
-                scope="col"
-                className="px-4 py-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-100"
-              >
-                {t('productName', 'Product Name')}
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-neutral-200 bg-white dark:divide-neutral-700 dark:bg-neutral-900">
-            {levelProducts.map((product) => (
-              <tr key={product.name}>
-                <td className="px-4 py-3 text-sm text-neutral-700 dark:text-neutral-300">
-                  {product.name}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>{t('productName', 'Product Name')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {levelProducts.map((product) => (
+            <TableRow key={product.name}>
+              <TableCell>{product.name}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   )
 }
@@ -99,8 +98,8 @@ export function StabilityIndex({ level }) {
 
     if (!levelInfo) {
       return (
-        <div className="my-4 rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
-          <p className="text-sm text-red-700 dark:text-red-400">
+        <div className="my-4 rounded-lg border border-destructive/50 bg-destructive/10 p-4">
+          <p className="text-sm text-destructive">
             Stability level &quot;{level}&quot; not found.
           </p>
         </div>

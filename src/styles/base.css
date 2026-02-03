@@ -1,0 +1,94 @@
+@layer base {
+  :root {
+    --background: 90 7% 97%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 44 100% 47%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 180 3% 92%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 6% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 248 100% 55%;
+    --radius: 0.5rem;
+    --chart-1: 150 84% 46%;
+    --chart-2: 207 100% 53%;
+    --chart-3: 258 87% 71%;
+    --chart-4: 37 100% 53%;
+    --chart-5: 187 86% 55%;
+    --sidebar-background: 90 7% 97%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 180 3% 92%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 6.5%;
+    --foreground: 0 0% 98%;
+    --card: 240 0 5.2%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 212 100% 66%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 79% 62%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 12%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 10% 3.9%;
+    --chart-1: 150 84% 38%;
+    --chart-2: 207 100% 45%;
+    --chart-3: 258 70% 58%;
+    --chart-4: 37 100% 45%;
+    --chart-5: 187 86% 55%;
+    --sidebar-background: 0 0% 6.5%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+* {
+    border-color: hsl(var(--border));
+}
+
+html {
+    scrollbar-gutter: stable;
+}
+
+/* Prevent Radix UI from causing layout shift when opening dropdowns */
+html body[data-scroll-locked],
+body[data-scroll-locked="1"],
+body[data-scroll-locked] {
+    overflow: auto !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    position: static !important;
+    overscroll-behavior: auto !important;
+    --removed-body-scroll-bar-size: 0 !important;
+}

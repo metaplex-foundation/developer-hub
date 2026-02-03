@@ -4,16 +4,14 @@ import { Icon } from '@/components/icons/dual-tone'
 
 const styles = {
   note: {
-    container:
-      'bg-sky-50 dark:bg-neutral-800/60 dark:ring-1 dark:ring-neutral-300/10',
-    title: 'text-sky-900 dark:text-sky-400',
-    body: 'text-sky-800 [--tw-prose-underline:theme(colors.sky.400)] [--tw-prose-background:theme(colors.sky.50)] prose-a:text-sky-900 prose-code:text-sky-900 dark:text-slate-300 dark:prose-code:text-slate-300 dark:[--tw-prose-underline:theme(colors.accent.700)]',
+    container: 'bg-muted ring-1 ring-border',
+    title: 'text-primary',
+    body: 'text-muted-foreground prose-a:text-primary prose-code:text-foreground',
   },
   warning: {
-    container:
-      'bg-amber-50 dark:bg-slate-800/60 dark:ring-1 dark:ring-slate-300/10',
-    title: 'text-amber-900 dark:text-amber-500',
-    body: 'text-amber-800 [--tw-prose-underline:theme(colors.amber.400)] [--tw-prose-background:theme(colors.accent.50)] prose-a:text-amber-900 prose-code:text-amber-900 dark:text-slate-300 dark:[--tw-prose-underline:theme(colors.accent.700)] dark:prose-code:text-slate-300',
+    container: 'bg-amber-50 ring-1 ring-amber-200 dark:bg-amber-950/30 dark:ring-amber-900/50',
+    title: 'text-amber-900 dark:text-amber-400',
+    body: 'text-amber-800 prose-a:text-amber-900 prose-code:text-amber-900 dark:text-amber-200 dark:prose-a:text-amber-400 dark:prose-code:text-amber-200',
   },
 }
 
@@ -32,12 +30,7 @@ export function Callout({ type = 'note', title, children }) {
         <p className={clsx('m-0 font-display text-xl', styles[type].title)}>
           {title}
         </p>
-        <div
-          className={clsx(
-            'prose prose-slate mt-2.5 dark:prose-invert',
-            styles[type].body
-          )}
-        >
+        <div className={clsx('prose mt-2.5', styles[type].body)}>
           {children}
         </div>
       </div>

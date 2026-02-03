@@ -6,8 +6,6 @@ import {
   createTransactionMessage,
   generateKeyPairSigner,
   getSignatureFromTransaction,
-  type Instruction,
-  type TransactionSigner,
   pipe,
   sendAndConfirmTransactionFactory,
   setTransactionMessageFeePayer,
@@ -31,10 +29,7 @@ const mint = await generateKeyPairSigner();
 
 // Helper function to send and confirm transactions
 // Works with any signer type - signers are automatically extracted from instruction accounts
-async function sendAndConfirm(options: {
-  instructions: Instruction[];
-  payer: TransactionSigner;
-}) {
+async function sendAndConfirm(options) {
   const { instructions, payer } = options;
   const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();
 
