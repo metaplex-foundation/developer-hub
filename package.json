@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint && markdownlint-cli2 'src/pages/**/*.md'",
+    "lint:md": "markdownlint-cli2 'src/pages/**/*.md'",
+    "lint:md:fix": "markdownlint-cli2 --fix 'src/pages/**/*.md'",
     "sitemap": "node generate-sitemap.mjs",
     "validate-translations": "node scripts/validate-translations.js",
     "build-examples": "node scripts/build-examples.js"
@@ -41,6 +43,7 @@
   "devDependencies": {
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.2",
+    "markdownlint-cli2": "^0.14.0",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
     "sharp": "^0.32.6"
