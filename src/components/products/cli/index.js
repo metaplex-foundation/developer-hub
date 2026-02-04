@@ -120,6 +120,14 @@ export const cli = {
               href: '/dev-tools/cli/toolbox/token-create',
             },
             {
+              title: 'Add Metadata to Token',
+              href: '/dev-tools/cli/toolbox/add-metadata-to-token',
+            },
+            {
+              title: 'Update Token Metadata',
+              href: '/dev-tools/cli/toolbox/update-token-metadata',
+            },
+            {
               title: 'Token Transfer',
               href: '/dev-tools/cli/toolbox/token-transfer',
             },
@@ -135,8 +143,6 @@ export const cli = {
               title: 'SOL Transfer',
               href: '/dev-tools/cli/toolbox/sol-transfer',
             },
-            
-            
           ],
         },
       ],
@@ -157,7 +163,9 @@ export const cli = {
         'Installation': 'Installation',
         'Wallets': 'Wallets',
         'RPCs': 'RPCs',
-        'Explorer': 'Explorer'
+        'Explorer': 'Explorer',
+        'Add Metadata to Token': 'Add Metadata to Token',
+        'Update Token Metadata': 'Update Token Metadata'
       }
     },
     ja: {
@@ -174,7 +182,9 @@ export const cli = {
         'Installation': 'インストール',
         'Wallets': 'ウォレット',
         'RPCs': 'RPC',
-        'Explorer': 'エクスプローラー'
+        'Explorer': 'エクスプローラー',
+        'Add Metadata to Token': 'トークンメタデータ追加',
+        'Update Token Metadata': 'トークンメタデータ更新'
       }
     },
     ko: {
@@ -191,7 +201,9 @@ export const cli = {
         'Installation': '설치',
         'Wallets': '지갑',
         'RPCs': 'RPC',
-        'Explorer': '익스플로러'
+        'Explorer': '익스플로러',
+        'Add Metadata to Token': '토큰 메타데이터 추가',
+        'Update Token Metadata': '토큰 메타데이터 업데이트'
       }
     },
     zh: {
@@ -224,6 +236,8 @@ export const cli = {
         'Fetch Information': '获取信息',
         'Withdraw': '提取',
         'Token Creation': '创建代币',
+        'Add Metadata to Token': '添加代币元数据',
+        'Update Token Metadata': '更新代币元数据',
         'Token Transfer': '转移代币',
         'SOL Airdrop': 'SOL空投',
         'SOL Balance': 'SOL余额',
