@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { LANGUAGES, generateAlternateUrls } from '@/config/languages'
+import { products } from '@/components/products'
 
 /**
  * SEOHead Component
@@ -419,6 +420,46 @@ function generateHowToSchema({ name, description, steps, tools }) {
 }
 
 /**
+ * Resolve {% fee %} Markdoc tags in plain text strings.
+ * Frontmatter values are parsed as raw YAML strings, so Markdoc tags
+ * like {% fee product="genesis" config="launchPool" fee="withdraw" /%}
+ * need to be resolved to their actual values for JSON-LD output.
+ */
+function resolveMarkdocFeeTags(text) {
+  if (!text || typeof text !== 'string') return text
+
+  return text.replace(
+    /\{%\s*fee\s+(.*?)\s*\/%\s*\}/g,
+    (match, attrString) => {
+      const attrs = {}
+      const attrRegex = /(\w+)="([^"]+)"/g
+      let m
+      while ((m = attrRegex.exec(attrString)) !== null) {
+        attrs[m[1]] = m[2]
+      }
+
+      const { product: productName, config, fee, field = 'solana' } = attrs
+      if (!productName || !config || !fee) return match
+
+      const product = products.find(
+        (p) =>
+          p.path === productName ||
+          p.path.endsWith(`/${productName}`) ||
+          p.name.toLowerCase() === productName.toLowerCase()
+      )
+
+      if (!product?.protocolFees?.[config]?.[fee]) return match
+
+      const feeData = product.protocolFees[config][fee]
+      if (typeof feeData === 'string') return feeData
+      if (typeof feeData === 'object') return feeData[field] || match
+
+      return match
+    }
+  )
+}
+
+/**
  * Generate FAQPage schema for FAQ sections
  */
 function generateFAQPageSchema(faqs) {
@@ -429,10 +470,10 @@ function generateFAQPageSchema(faqs) {
     '@type': 'FAQPage',
     mainEntity: faqs.map(faq => ({
       '@type': 'Question',
-      name: faq.q || faq.question,
+      name: resolveMarkdocFeeTags(faq.q || faq.question),
       acceptedAnswer: {
         '@type': 'Answer',
-        text: faq.a || faq.answer,
+        text: resolveMarkdocFeeTags(faq.a || faq.answer),
       },
     })),
   }
