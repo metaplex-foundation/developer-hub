@@ -30,7 +30,7 @@ faqs:
   - q: Can I create custom plugins?
     a: No. Only built-in plugins are supported. The plugin system is not extensible by third parties.
   - q: Do plugins cost extra SOL?
-    a: Adding plugins increases account size, which increases rent. The cost is minimal (~0.001 SOL per plugin depending on data size).
+    a: Adding plugins increases account size, which increases rent. Most plugins cost ~0.001 SOL, but data-storage plugins (like AppData or Attributes) can cost more depending on how much data is stored.
 ---
 This page explains the **Core Plugin system** - modular extensions that add behaviors and data storage to Core Assets and Collections. Plugins hook into lifecycle events to enforce rules or store on-chain data. {% .lead %}
 {% callout title="What You'll Learn" %}
@@ -200,7 +200,7 @@ Use the `removePlugin` instruction. Only the plugin authority can remove it. See
 ### Can I create custom plugins?
 No. Only built-in plugins are supported. The plugin system is not extensible by third parties.
 ### Do plugins cost extra SOL?
-Adding plugins increases account size, which increases rent. The cost is minimal (~0.001 SOL per plugin depending on data size).
+Adding plugins increases account size, which increases rent. Most plugins cost ~0.001 SOL, but data-storage plugins (like AppData or Attributes) can cost more depending on how much data is stored.
 ## Glossary
 | Term | Definition |
 |------|------------|

@@ -1,7 +1,7 @@
 ---
-title: Adding Plugins
-metaTitle: Adding Plugins to Core Assets | Metaplex Core
-description: Learn how to add plugins to Core NFT Assets and Collections. Set plugin authorities and configure plugin data at creation or after.
+title: プラグインの追加
+metaTitle: Core Assetにプラグインを追加 | Metaplex Core
+description: Core NFT AssetとCollectionにプラグインを追加する方法を学びます。プラグインの権限を設定し、作成時または後からプラグインデータを設定します。
 updated: '01-31-2026'
 keywords:
   - add plugin
@@ -17,48 +17,48 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Can I add multiple plugins in one transaction?
-    a: Yes, when creating an Asset. For existing Assets, each addPlugin call is a separate transaction.
-  - q: What happens if I set authority to None?
-    a: The plugin becomes immutable. No one can update or remove it.
-  - q: Can I add Owner Managed plugins as the update authority?
-    a: No. Owner Managed plugins always require the owner's signature to add, regardless of who signs.
-  - q: Why can't I add a Permanent plugin?
-    a: Permanent plugins can only be added during Asset/Collection creation. They cannot be added to existing accounts.
+  - q: 1つのトランザクションで複数のプラグインを追加できますか？
+    a: はい、Assetの作成時に可能です。既存のAssetの場合、各addPlugin呼び出しは別々のトランザクションになります。
+  - q: 権限をNoneに設定するとどうなりますか？
+    a: プラグインは不変になります。誰も更新や削除ができなくなります。
+  - q: update authorityとしてOwner Managedプラグインを追加できますか？
+    a: いいえ。Owner Managedプラグインは、誰が署名しても常にオーナーの署名が必要です。
+  - q: なぜPermanentプラグインを追加できないのですか？
+    a: Permanentプラグインは、Asset/Collection作成時にのみ追加できます。既存のアカウントには追加できません。
 ---
-This guide shows how to **add plugins** to Core Assets and Collections. Plugins add functionality like royalties, freezing, attributes, and delegate permissions. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add plugins to existing Assets and Collections
-- Set default vs custom plugin authorities
-- Configure plugin data during addition
-- Understand authority type differences
+このガイドでは、Core AssetとCollectionに**プラグインを追加**する方法を説明します。プラグインは、ロイヤリティ、凍結、属性、委任権限などの機能を追加します。 {% .lead %}
+{% callout title="学べること" %}
+- 既存のAssetとCollectionにプラグインを追加
+- デフォルトとカスタムのプラグイン権限を設定
+- 追加時にプラグインデータを設定
+- 権限タイプの違いを理解
 {% /callout %}
-## Summary
-Add plugins to Assets using `addPlugin()` or to Collections using `addCollectionPlugin()`. Each plugin has a default authority type, but you can override it.
-- **Owner Managed** plugins default to `Owner` authority
-- **Authority Managed** plugins default to `UpdateAuthority`
-- **Permanent** plugins can only be added at creation time
-- Custom authority can be set with the `authority` parameter
-## Out of Scope
-Permanent plugins (must be added at creation), plugin removal (see [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)), and plugin updates (see [Updating Plugins](/smart-contracts/core/plugins/update-plugins)).
-## Quick Start
-**Jump to:** [Add to Asset](#adding-a-plugin-to-a-core-asset) · [Add to Collection](#adding-a-plugin-to-a-collection) · [Custom Authority](#adding-a-plugin-with-an-assigned-authority)
-1. Choose a plugin from the [Plugins Overview](/smart-contracts/core/plugins)
-2. Call `addPlugin()` with the Asset address and plugin config
-3. Plugin is active immediately
-Plugins can be assigned to both the MPL Core Asset and also the MPL Core Collection. MPL
-Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on each visit the [Plugins Overview](/smart-contracts/core/plugins) area.
-## Adding a Plugin to a Core Asset
-Plugins support the ability to assign an authority over the plugin. If an `initAuthority` argument is supplied this will set the authority to the desired plugin authority type. If left unassigned the plugins default authority type will be assigned (next section).
-**Create Plugin Helper**
-The `createPlugin()` helper gives you a typed method that allows you to assign plugins during the `addPlugin()` process.
-For a full list of plugins and their arguments see the [plugins overview](/smart-contracts/core/plugins) page.
-### Adding a Plugin with the default authority
-If you add a plugin to an Asset or Collection without specifying the authority of the plugin the authority will be set to that plugins default authority type.
-- Owner Managed Plugins will default to the plugin authority type of `Owner`.
-- Authority Managed Plugins will default to the plugin authority type of `UpdateAuthority`.
-- Permanent Plugins will default to the plugin authority type of `UpdateAuthority`
-{% dialect-switcher title="Adding a Plugin with the default authority" %}
+## 概要
+`addPlugin()`を使用してAssetに、または`addCollectionPlugin()`を使用してCollectionにプラグインを追加します。各プラグインにはデフォルトの権限タイプがありますが、上書きすることができます。
+- **Owner Managed**プラグインはデフォルトで`Owner`権限
+- **Authority Managed**プラグインはデフォルトで`UpdateAuthority`
+- **Permanent**プラグインは作成時にのみ追加可能
+- `authority`パラメータでカスタム権限を設定可能
+## 範囲外
+Permanentプラグイン（作成時に追加が必要）、プラグインの削除（[プラグインの削除](/ja/smart-contracts/core/plugins/removing-plugins)を参照）、プラグインの更新（[プラグインの更新](/ja/smart-contracts/core/plugins/update-plugins)を参照）。
+## クイックスタート
+**ジャンプ：** [Assetに追加](#core-assetにプラグインを追加) · [Collectionに追加](#collectionにプラグインを追加) · [カスタム権限](#権限を指定してプラグインを追加)
+1. [プラグイン概要](/ja/smart-contracts/core/plugins)からプラグインを選択
+2. Assetアドレスとプラグイン設定で`addPlugin()`を呼び出す
+3. トランザクションを送信
+4. トランザクション確認後、プラグインがアクティブになる
+プラグインはMPL Core AssetとMPL Core Collectionの両方に割り当てることができます。MPL Core AssetとMPL Core Collectionは、利用可能なプラグインの同様のリストを共有しています。各プラグインがどれで使用できるかについては、[プラグイン概要](/ja/smart-contracts/core/plugins)エリアをご覧ください。
+## Core Assetにプラグインを追加
+プラグインは、プラグインに対する権限を割り当てる機能をサポートしています。`initAuthority`引数が指定された場合、希望するプラグイン権限タイプに権限が設定されます。未指定の場合、プラグインのデフォルト権限タイプが割り当てられます（次のセクション）。
+**createPluginヘルパー**
+`createPlugin()`ヘルパーは、`addPlugin()`プロセス中にプラグインを割り当てることができる型付きメソッドを提供します。
+プラグインとその引数の完全なリストについては、[プラグイン概要](/ja/smart-contracts/core/plugins)ページを参照してください。
+### デフォルト権限でプラグインを追加
+プラグインの権限を指定せずにAssetまたはCollectionにプラグインを追加すると、権限はそのプラグインのデフォルト権限タイプに設定されます。
+- Owner Managedプラグインはデフォルトで`Owner`タイプのプラグイン権限になります。
+- Authority Managedプラグインはデフォルトで`UpdateAuthority`タイプのプラグイン権限になります。
+- Permanentプラグインはデフォルトで`UpdateAuthority`タイプのプラグイン権限になります。
+{% dialect-switcher title="デフォルト権限でプラグインを追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -108,8 +108,8 @@ pub async fn add_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Adding a Plugin with an assigned authority
-There are a few authority helpers to aid you in setting the authorities of plugins.
+### 権限を指定してプラグインを追加
+プラグインの権限を設定するためのいくつかの権限ヘルパーがあります。
 **Address**
 ```js
 await addPlugin(umi, {
@@ -123,7 +123,7 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-This sets the plugin's authority to a specific address.
+これにより、プラグインの権限が特定のアドレスに設定されます。
 **Owner**
 ```js
 await addPlugin(umi, {
@@ -136,8 +136,8 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-This sets the plugin's authority to the type of `Owner`.
-The current owner of the Asset will have access to this plugin.
+これにより、プラグインの権限が`Owner`タイプに設定されます。
+Assetの現在のオーナーがこのプラグインにアクセスできます。
 **UpdateAuthority**
 ```js
 await addPlugin(umi, {
@@ -150,8 +150,8 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-This sets the plugin's authority to the type of `UpdateAuthority`.
-The current update authority of the Asset will have access to this plugin.
+これにより、プラグインの権限が`UpdateAuthority`タイプに設定されます。
+Assetの現在のupdate authorityがこのプラグインにアクセスできます。
 **None**
 ```js
 await addPlugin(umi, {
@@ -164,9 +164,9 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-This sets the plugin's authority to the type of `None`.
-The plugin's data if it has any becomes immutable at this point.
-{% dialect-switcher title="Adding a Plugin with an assigned authority" %}
+これにより、プラグインの権限が`None`タイプに設定されます。
+プラグインのデータがある場合、この時点で不変になります。
+{% dialect-switcher title="権限を指定してプラグインを追加" %}
 {% dialect title="Rust" id="rust" %}
 ```rust
 use mpl_core::{
@@ -227,10 +227,10 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding a Plugin to a Collection
-Adding a Plugin to a Core Collection is similar to that of adding to a Core Asset. You can add plugins during creation and also using the `addCollectionV1` instruction. Collections only have access to `Authority Plugins` and `Permanent Plugins`.
-### Adding a Collection Plugin with the default authority
-{% dialect-switcher title="Adding a Collection Plugin with the default authority" %}
+## Collectionにプラグインを追加
+Core Collectionにプラグインを追加することは、Core Assetに追加するのと似ています。作成中にプラグインを追加することも、`addCollectionV1`命令を使用して追加することもできます。Collectionは`Authority Plugins`と`Permanent Plugins`にのみアクセスできます。
+### デフォルト権限でCollectionプラグインを追加
+{% dialect-switcher title="デフォルト権限でCollectionプラグインを追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -290,8 +290,8 @@ pub async fn add_plugin_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Adding a Collection Plugin with an assigned authority
-{% dialect-switcher title="Burning an Assets" %}
+### 権限を指定してCollectionプラグインを追加
+{% dialect-switcher title="Assetのバーン" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -353,50 +353,50 @@ pub async fn add_plugin_to_collection_with_authority() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 一般的なエラー
 ### `Authority mismatch`
-You don't have permission to add this plugin. Owner Managed plugins require owner signature; Authority Managed plugins require update authority.
+このプラグインを追加する権限がありません。Owner Managedプラグインはオーナーの署名が必要で、Authority Managedプラグインはupdate authorityが必要です。
 ### `Plugin already exists`
-The Asset/Collection already has this plugin type. Use `updatePlugin` to modify it instead.
+Asset/Collectionには既にこのプラグインタイプがあります。代わりに`updatePlugin`を使用して変更してください。
 ### `Cannot add permanent plugin`
-Permanent plugins can only be added at creation time. They cannot be added to existing Assets/Collections.
-## Notes
-- Owner Managed plugins require **owner signature** to add
-- Authority Managed plugins require **update authority signature**
-- Permanent plugins can only be added at **creation time**
-- Adding plugins increases account size and rent
-## Quick Reference
-### Default Authority Types
-| Plugin Type | Default Authority |
+Permanentプラグインは作成時にのみ追加できます。既存のAsset/Collectionには追加できません。
+## 注意事項
+- Owner Managedプラグインは追加に**オーナー署名**が必要
+- Authority Managedプラグインは**update authority署名**が必要
+- Permanentプラグインは**作成時**にのみ追加可能
+- プラグインを追加するとアカウントサイズとrentが増加
+## クイックリファレンス
+### デフォルト権限タイプ
+| プラグインタイプ | デフォルト権限 |
 |-------------|-------------------|
 | Owner Managed | `Owner` |
 | Authority Managed | `UpdateAuthority` |
 | Permanent | `UpdateAuthority` |
-### Authority Options
-| Authority Type | Description |
+### 権限オプション
+| 権限タイプ | 説明 |
 |----------------|-------------|
-| `Owner` | Current Asset owner |
-| `UpdateAuthority` | Current update authority |
-| `Address` | Specific public key |
-| `None` | Immutable (no one can update) |
+| `Owner` | 現在のAssetオーナー |
+| `UpdateAuthority` | 現在のupdate authority |
+| `Address` | 特定の公開鍵 |
+| `None` | 不変（誰も更新不可） |
 ## FAQ
-### Can I add multiple plugins in one transaction?
-Yes, when creating an Asset. For existing Assets, each `addPlugin` call is a separate transaction.
-### What happens if I set authority to None?
-The plugin becomes immutable. No one can update or remove it.
-### Can I add Owner Managed plugins as the update authority?
-No. Owner Managed plugins always require the owner's signature to add, regardless of who signs.
-### Why can't I add a Permanent plugin?
-Permanent plugins can only be added during Asset/Collection creation. They cannot be added to existing accounts.
-## Related Operations
-- [Removing Plugins](/smart-contracts/core/plugins/removing-plugins) - Delete plugins from Assets/Collections
-- [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins) - Change plugin authorities
-- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
-- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
-## Glossary
-| Term | Definition |
+### 1つのトランザクションで複数のプラグインを追加できますか？
+はい、Assetの作成時に可能です。既存のAssetの場合、各`addPlugin`呼び出しは別々の命令です。複数の命令を1つのトランザクションに組み合わせることができます。
+### 権限をNoneに設定するとどうなりますか？
+プラグインは不変になります。誰も更新や削除ができなくなります。
+### update authorityとしてOwner Managedプラグインを追加できますか？
+いいえ。Owner Managedプラグインは、誰が署名しても常にオーナーの署名が必要です。
+### なぜPermanentプラグインを追加できないのですか？
+Permanentプラグインは、Asset/Collection作成時にのみ追加できます。既存のアカウントには追加できません。
+## 関連操作
+- [プラグインの削除](/ja/smart-contracts/core/plugins/removing-plugins) - Asset/Collectionからプラグインを削除
+- [プラグインの委任](/ja/smart-contracts/core/plugins/delegating-and-revoking-plugins) - プラグイン権限の変更
+- [プラグインの更新](/ja/smart-contracts/core/plugins/update-plugins) - プラグインデータの変更
+- [プラグイン概要](/ja/smart-contracts/core/plugins) - 利用可能なプラグインの完全なリスト
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Owner Managed** | Plugin requiring owner signature to add |
-| **Authority Managed** | Plugin that update authority can add |
-| **Permanent** | Plugin only addable at creation time |
-| **initAuthority** | Parameter to set custom plugin authority |
+| **Owner Managed** | 追加にオーナー署名が必要なプラグイン |
+| **Authority Managed** | update authorityが追加できるプラグイン |
+| **Permanent** | 作成時にのみ追加可能なプラグイン |
+| **initAuthority** | カスタムプラグイン権限を設定するパラメータ |

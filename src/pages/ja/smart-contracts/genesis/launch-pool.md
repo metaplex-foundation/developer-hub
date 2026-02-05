@@ -1,7 +1,7 @@
 ---
 title: Launch Pool
-metaTitle: Genesis - Launch Pool | Fair Token Distribution | Metaplex
-description: Token distribution where users deposit during a window and receive tokens proportionally. Organic price discovery with anti-sniping design.
+metaTitle: Genesis - Launch Pool | 公平なトークン配布 | Metaplex
+description: ユーザーがウィンドウ期間中に入金し、比例配分でトークンを受け取るトークン配布方式。スナイピング対策設計による自然な価格発見メカニズム。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -20,56 +20,56 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 howToSteps:
-  - Initialize a Genesis Account with your token
-  - Add a Launch Pool bucket with deposit window configuration
-  - Add an Unlocked bucket to receive collected funds
-  - Finalize and let users deposit during the window
+  - トークンを使用して Genesis Account を初期化する
+  - 入金ウィンドウ設定を持つ Launch Pool bucket を追加する
+  - 集めた資金を受け取る Unlocked bucket を追加する
+  - ファイナライズし、ユーザーがウィンドウ期間中に入金できるようにする
 howToTools:
   - Node.js
   - Umi framework
   - Genesis SDK
 faqs:
-  - q: How is the token price determined in a Launch Pool?
-    a: The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
-  - q: Can users withdraw their deposits?
-    a: Yes, users can withdraw during the deposit period. A 2% withdrawal fee applies to discourage gaming the system.
-  - q: What happens if I deposit multiple times?
-    a: Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
-  - q: When can users claim their tokens?
-    a: After the deposit period ends and the claim window opens (defined by claimStartCondition). The transition must be executed first to process end behaviors.
-  - q: What's the difference between Launch Pool and Presale?
-    a: Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
+  - q: Launch Pool でトークン価格はどのように決まりますか？
+    a: 価格は総入金額に基づいて自然に発見されます。最終価格は、入金された SOL の総額を割り当てられたトークン数で割った値になります。入金が多いほど、トークンあたりの暗黙の価格が高くなります。
+  - q: ユーザーは入金を引き出せますか？
+    a: はい、入金期間中に引き出すことができます。システムの悪用を防ぐため、{% fee product="genesis" config="launchPool" fee="withdraw" /%} の引き出し手数料が適用されます。
+  - q: 複数回入金するとどうなりますか？
+    a: 同じウォレットからの複数の入金は、単一の入金アカウントに蓄積されます。あなたの合計シェアは、合算された入金額に基づきます。
+  - q: ユーザーはいつトークンを請求できますか？
+    a: 入金期間が終了し、請求ウィンドウが開いた後（claimStartCondition で定義）に請求できます。End Behavior を処理するために、先に Transition を実行する必要があります。
+  - q: Launch Pool と Presale の違いは何ですか？
+    a: Launch Pool は入金に基づいて自然に価格を発見し、比例配分で配布します。Presale は事前に固定価格が設定され、上限に達するまで先着順で割り当てられます。
 ---
 
-**Launch Pools** provide organic price discovery for token launches. Users deposit during a window and receive tokens proportional to their share of total deposits—no sniping, no front-running, fair distribution for everyone. {% .lead %}
+**Launch Pool** はトークンローンチのための自然な価格発見メカニズムを提供します。ユーザーはウィンドウ期間中に入金し、総入金額に対する自分のシェアに比例してトークンを受け取ります。スナイピングなし、フロントランニングなし、全員にとって公平な配布です。 {% .lead %}
 
-{% callout title="What You'll Learn" %}
-This guide covers:
-- How Launch Pool pricing and distribution works
-- Setting up deposit and claim windows
-- Configuring end behaviors for fund collection
-- User operations: deposit, withdraw, and claim
+{% callout title="学べること" %}
+このガイドでは以下を説明します：
+- Launch Pool の価格設定と配布の仕組み
+- 入金ウィンドウと請求ウィンドウの設定方法
+- 資金回収のための End Behavior の設定
+- ユーザー操作：入金、引き出し、請求
 {% /callout %}
 
-## Summary
+## 概要
 
-Launch Pools accept deposits during a defined window, then distribute tokens proportionally. The final token price is determined by total deposits divided by token allocation.
+Launch Pool は定義されたウィンドウ期間中に入金を受け付け、その後トークンを比例配分で配布します。最終的なトークン価格は、総入金額をトークン割り当て量で割って決定されます。
 
-- Users deposit SOL during the deposit window (2% fee applies)
-- Withdrawals allowed during deposit period (2% fee)
-- Token distribution is proportional to deposit share
-- End behaviors route collected SOL to treasury buckets
+- ユーザーは入金ウィンドウ期間中に SOL を入金します（{% fee product="genesis" config="launchPool" fee="deposit" /%} の手数料が適用）
+- 入金期間中は引き出しが可能です（{% fee product="genesis" config="launchPool" fee="withdraw" /%} の手数料）
+- トークン配布は入金シェアに比例します
+- End Behavior が集められた SOL をトレジャリー bucket にルーティングします
 
-## Out of Scope
+## 対象外
 
-Fixed-price sales (see [Presale](/smart-contracts/genesis/presale)), bid-based auctions (see [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)), and liquidity pool creation (use Raydium/Orca).
+固定価格販売（[Presale](/smart-contracts/genesis/presale) を参照）、入札ベースのオークション（[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) を参照）、流動性プール作成（Raydium/Orca を使用）。
 
-## Quick Start
+## クイックスタート
 
 {% totem %}
-{% totem-accordion title="View complete setup script" %}
+{% totem-accordion title="完全なセットアップスクリプトを表示" %}
 
-This shows how to set up a Launch Pool with deposit and claim windows. To build the user-facing app, see [User Operations](#user-operations).
+これは入金ウィンドウと請求ウィンドウを持つ Launch Pool のセットアップ方法を示しています。ユーザー向けアプリの構築については、[ユーザー操作](#ユーザー操作)を参照してください。
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -203,38 +203,38 @@ setupLaunchPool().catch(console.error);
 {% /totem-accordion %}
 {% /totem %}
 
-## How It Works
+## 仕組み
 
-1. A specific quantity of tokens is allocated to the Launch Pool bucket
-2. Users deposit SOL during the deposit window (withdrawals allowed with fee)
-3. When the window closes, tokens distribute proportionally based on deposit share
+1. 特定量のトークンが Launch Pool bucket に割り当てられます
+2. ユーザーは入金ウィンドウ期間中に SOL を入金します（手数料付きで引き出し可能）
+3. ウィンドウが閉じると、入金シェアに基づいてトークンが比例配分されます
 
-### Price Discovery
+### 価格発見
 
-The token price emerges from total deposits:
+トークン価格は総入金額から決まります：
 
 ```
 tokenPrice = totalDeposits / tokenAllocation
 userTokens = (userDeposit / totalDeposits) * tokenAllocation
 ```
 
-**Example:** 1,000,000 tokens allocated, 100 SOL total deposits = 0.0001 SOL per token
+**例：** 1,000,000 トークンが割り当てられ、総入金額が 100 SOL の場合 = 1トークンあたり 0.0001 SOL
 
-### Lifecycle
+### ライフサイクル
 
-1. **Deposit Period** - Users deposit SOL during a defined window
-2. **Transition** - End behaviors execute (e.g., send collected SOL to another bucket)
-3. **Claim Period** - Users claim tokens proportional to their deposit weight
+1. **入金期間** - ユーザーは定義されたウィンドウ期間中に SOL を入金します
+2. **Transition** - End Behavior が実行されます（例：集められた SOL を別の bucket に送信）
+3. **請求期間** - ユーザーは入金の重みに比例してトークンを請求します
 
-## Fees
+## 手数料
 
 {% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
-Deposit Fee Example: A user deposit of 10 SOL results in 9.8 SOL credited to the user's deposit account.
+入金手数料の例：ユーザーが 10 SOL を入金すると、ユーザーの入金アカウントには 9.8 SOL がクレジットされます。
 
-## Setup Guide
+## セットアップガイド
 
-### Prerequisites
+### 前提条件
 
 {% totem %}
 
@@ -244,9 +244,9 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 
 {% /totem %}
 
-### 1. Initialize the Genesis Account
+### 1. Genesis Account の初期化
 
-The Genesis Account creates your token and coordinates all distribution buckets.
+Genesis Account はトークンを作成し、すべての配布 bucket を調整します。
 
 {% totem %}
 
@@ -287,12 +287,12 @@ await initializeV2(umi, {
 {% /totem %}
 
 {% callout type="note" %}
-The `totalSupplyBaseToken` should equal the sum of all bucket allocations.
+`totalSupplyBaseToken` は、すべての bucket 割り当ての合計と等しくなるようにしてください。
 {% /callout %}
 
-### 2. Add the Launch Pool Bucket
+### 2. Launch Pool Bucket の追加
 
-The Launch Pool bucket collects deposits and distributes tokens proportionally. Configure timing here.
+Launch Pool bucket は入金を収集し、トークンを比例配分で配布します。ここでタイミングを設定します。
 
 {% totem %}
 
@@ -363,9 +363,9 @@ await addLaunchPoolBucketV2(umi, {
 
 {% /totem %}
 
-### 3. Add the Unlocked Bucket
+### 3. Unlocked Bucket の追加
 
-The Unlocked bucket receives SOL from the Launch Pool after the transition.
+Unlocked bucket は Transition 後に Launch Pool から SOL を受け取ります。
 
 {% totem %}
 
@@ -398,9 +398,9 @@ await addUnlockedBucketV2(umi, {
 
 {% /totem %}
 
-### 4. Finalize
+### 4. ファイナライズ
 
-Once all buckets are configured, finalize to activate the launch. This is irreversible.
+すべての bucket が設定されたら、ファイナライズしてローンチを有効化します。この操作は取り消せません。
 
 {% totem %}
 
@@ -415,11 +415,11 @@ await finalizeV2(umi, {
 
 {% /totem %}
 
-## User Operations
+## ユーザー操作
 
-### Wrapping SOL
+### SOL のラッピング
 
-Users must wrap SOL to wSOL before depositing.
+ユーザーは入金前に SOL を wSOL にラップする必要があります。
 
 {% totem %}
 
@@ -455,7 +455,7 @@ await createTokenIfMissing(umi, {
 
 {% /totem %}
 
-### Depositing
+### 入金
 
 {% totem %}
 
@@ -485,11 +485,11 @@ console.log('Deposited (after fee):', deposit.amountQuoteToken);
 
 {% /totem %}
 
-Multiple deposits from the same user accumulate into a single deposit account.
+同じユーザーからの複数の入金は、単一の入金アカウントに蓄積されます。
 
-### Withdrawing
+### 引き出し
 
-Users can withdraw during the deposit period. A 2% fee applies.
+ユーザーは入金期間中に引き出すことができます。{% fee product="genesis" config="launchPool" fee="withdraw" /%} の手数料が適用されます。
 
 {% totem %}
 
@@ -507,11 +507,11 @@ await withdrawLaunchPoolV2(umi, {
 
 {% /totem %}
 
-If a user withdraws their entire balance, the deposit PDA is closed.
+ユーザーが残高全額を引き出すと、入金 PDA はクローズされます。
 
-### Claiming Tokens
+### トークンの請求
 
-After the deposit period ends and claims open:
+入金期間が終了し、請求が開始された後：
 
 {% totem %}
 
@@ -528,13 +528,13 @@ await claimLaunchPoolV2(umi, {
 
 {% /totem %}
 
-Token allocation: `userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation`
+トークン割り当て：`userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation`
 
-## Admin Operations
+## 管理者操作
 
-### Executing the Transition
+### Transition の実行
 
-After deposits close, execute the transition to move collected SOL to the unlocked bucket.
+入金が終了した後、Transition を実行して集められた SOL を Unlocked bucket に移動します。
 
 {% totem %}
 
@@ -562,22 +562,22 @@ await transitionV2(umi, {
 
 {% /totem %}
 
-**Why this matters:** Without transition, collected SOL stays locked in the Launch Pool bucket. Users can still claim tokens, but the team cannot access the raised funds.
+**これが重要な理由：** Transition を行わないと、集められた SOL は Launch Pool bucket にロックされたままになります。ユーザーはトークンを請求できますが、チームは調達した資金にアクセスできません。
 
-## Reference
+## リファレンス
 
-### Time Conditions
+### Time Condition
 
-Four conditions control Launch Pool timing:
+4つの条件が Launch Pool のタイミングを制御します：
 
-| Condition | Purpose |
-|-----------|---------|
-| `depositStartCondition` | When deposits open |
-| `depositEndCondition` | When deposits close |
-| `claimStartCondition` | When claims open |
-| `claimEndCondition` | When claims close |
+| 条件 | 目的 |
+|------|------|
+| `depositStartCondition` | 入金の開始タイミング |
+| `depositEndCondition` | 入金の終了タイミング |
+| `claimStartCondition` | 請求の開始タイミング |
+| `claimEndCondition` | 請求の終了タイミング |
 
-Use `TimeAbsolute` with a Unix timestamp:
+`TimeAbsolute` をUnixタイムスタンプと共に使用します：
 
 {% totem %}
 
@@ -594,9 +594,9 @@ const condition = {
 
 {% /totem %}
 
-### End Behaviors
+### End Behavior
 
-Define what happens to collected SOL after the deposit period:
+入金期間後に集められた SOL の処理方法を定義します：
 
 {% totem %}
 
@@ -614,7 +614,7 @@ endBehaviors: [
 
 {% /totem %}
 
-You can split funds across multiple buckets:
+資金を複数の bucket に分割することもできます：
 
 {% totem %}
 
@@ -639,9 +639,9 @@ endBehaviors: [
 
 {% /totem %}
 
-### Fetching State
+### 状態の取得
 
-**Bucket state:**
+**Bucket の状態：**
 
 {% totem %}
 
@@ -657,7 +657,7 @@ console.log('Token allocation:', bucket.bucket.baseTokenAllocation);
 
 {% /totem %}
 
-**Deposit state:**
+**入金の状態：**
 
 {% totem %}
 
@@ -675,46 +675,46 @@ if (deposit) {
 
 {% /totem %}
 
-## Notes
+## 注意事項
 
-- The 2% protocol fee applies to both deposits and withdrawals
-- Multiple deposits from the same user accumulate in one deposit account
-- If a user withdraws their entire balance, the deposit PDA closes
-- Transitions must be executed after deposits close for end behaviors to process
-- Users must have wSOL (wrapped SOL) to deposit
+- {% fee product="genesis" config="launchPool" fee="deposit" /%} のプロトコル手数料が入金と引き出しの両方に適用されます
+- 同じユーザーからの複数の入金は1つの入金アカウントに蓄積されます
+- ユーザーが残高全額を引き出すと、入金 PDA はクローズされます
+- End Behavior を処理するには、入金終了後に Transition を実行する必要があります
+- ユーザーは入金するために wSOL（ラップされた SOL）を保持している必要があります
 
 ## FAQ
 
-### How is the token price determined in a Launch Pool?
-The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
+### Launch Pool でトークン価格はどのように決まりますか？
+価格は総入金額に基づいて自然に発見されます。最終価格は、入金された SOL の総額を割り当てられたトークン数で割った値になります。入金が多いほど、トークンあたりの暗黙の価格が高くなります。
 
-### Can users withdraw their deposits?
-Yes, users can withdraw during the deposit period. A 2% withdrawal fee applies to discourage gaming the system.
+### ユーザーは入金を引き出せますか？
+はい、入金期間中に引き出すことができます。システムの悪用を防ぐため、{% fee product="genesis" config="launchPool" fee="withdraw" /%} の引き出し手数料が適用されます。
 
-### What happens if I deposit multiple times?
-Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
+### 複数回入金するとどうなりますか？
+同じウォレットからの複数の入金は、単一の入金アカウントに蓄積されます。あなたの合計シェアは、合算された入金額に基づきます。
 
-### When can users claim their tokens?
-After the deposit period ends and the claim window opens (defined by `claimStartCondition`). The transition must be executed first to process end behaviors.
+### ユーザーはいつトークンを請求できますか？
+入金期間が終了し、請求ウィンドウが開いた後（`claimStartCondition` で定義）に請求できます。End Behavior を処理するために、先に Transition を実行する必要があります。
 
-### What's the difference between Launch Pool and Presale?
-Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
+### Launch Pool と Presale の違いは何ですか？
+Launch Pool は入金に基づいて自然に価格を発見し、比例配分で配布します。Presale は事前に固定価格が設定され、先着順で上限まで割り当てられます。
 
-## Glossary
+## 用語集
 
-| Term | Definition |
-|------|------------|
-| **Launch Pool** | Deposit-based distribution where price is discovered at close |
-| **Deposit Window** | Time period when users can deposit and withdraw SOL |
-| **Claim Window** | Time period when users can claim their proportional tokens |
-| **End Behavior** | Automated action executed after deposit period ends |
-| **Transition** | Instruction that processes end behaviors and routes funds |
-| **Proportional Distribution** | Token allocation based on user's share of total deposits |
-| **Quote Token** | The token users deposit (usually wSOL) |
-| **Base Token** | The token being distributed |
+| 用語 | 定義 |
+|------|------|
+| **Launch Pool** | 入金ベースの配布方式で、終了時に価格が発見される |
+| **入金ウィンドウ** | ユーザーが SOL を入金・引き出しできる期間 |
+| **請求ウィンドウ** | ユーザーが比例配分されたトークンを請求できる期間 |
+| **End Behavior** | 入金期間終了後に実行される自動アクション |
+| **Transition** | End Behavior を処理し資金をルーティングするインストラクション |
+| **比例配分** | 総入金額に対するユーザーのシェアに基づくトークン割り当て |
+| **Quote Token** | ユーザーが入金するトークン（通常は wSOL） |
+| **Base Token** | 配布されるトークン |
 
-## Next Steps
+## 次のステップ
 
-- [Presale](/smart-contracts/genesis/presale) - Fixed-price token sales
-- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based allocation
-- [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API
+- [Presale](/smart-contracts/genesis/presale) - 固定価格トークン販売
+- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - 入札ベースの割り当て
+- [Aggregation API](/smart-contracts/genesis/aggregation) - API経由でローンチデータを照会

@@ -1,7 +1,7 @@
 ---
-title: Attribute Plugin
-metaTitle: Attribute Plugin | Metaplex Core
-description: Store on-chain key-value data on Core NFT Assets. Use the Attributes plugin for game stats, traits, and any data that needs to be readable by on-chain programs.
+title: Attribute 插件
+metaTitle: Attribute 插件 | Metaplex Core
+description: 在 Core NFT Asset 上存储链上键值数据。使用 Attributes 插件存储游戏统计数据、特征以及任何需要被链上程序读取的数据。
 updated: '01-31-2026'
 keywords:
   - on-chain attributes
@@ -19,72 +19,72 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: What's the difference between on-chain attributes and off-chain metadata attributes?
-    a: On-chain attributes are stored on Solana and readable by programs. Off-chain attributes in JSON at URI are stored on Arweave/IPFS and only readable by clients.
-  - q: Can on-chain programs read these attributes?
-    a: Yes. Use CPI to fetch the Asset account and deserialize the Attributes plugin data.
-  - q: Are attributes indexed by DAS?
-    a: Yes. DAS automatically indexes attribute key-value pairs for fast queries.
-  - q: Can I store numbers or booleans?
-    a: Values are strings only. Convert as needed, for example level = '5' or active = 'true'.
-  - q: How do I update a single attribute?
-    a: You can't update individual attributes. Fetch the current list, modify it, and update with the full new list.
-  - q: What's the size limit for attributes?
-    a: There's no hard limit, but larger attribute lists increase rent cost. Keep data concise.
-  - q: Can the owner update attributes?
-    a: No. The Attributes plugin is Authority Managed, so only the update authority can modify it.
+  - q: 链上属性和链下元数据属性有什么区别？
+    a: 链上属性存储在 Solana 上，可被程序读取。URI 中 JSON 里的链下属性存储在 Arweave/IPFS 上，只能被客户端读取。
+  - q: 链上程序能读取这些属性吗？
+    a: 可以。使用 CPI 获取 Asset 账户并反序列化 Attributes 插件数据。
+  - q: 属性会被 DAS 索引吗？
+    a: 是的。DAS 会自动索引属性键值对以便快速查询。
+  - q: 可以存储数字或布尔值吗？
+    a: 值只能是字符串。根据需要进行转换，例如 level = '5' 或 active = 'true'。
+  - q: 如何更新单个属性？
+    a: 不能单独更新属性。需要获取当前列表，修改后用完整的新列表进行更新。
+  - q: 属性的大小限制是多少？
+    a: 没有硬性限制，但较大的属性列表会增加租金成本。请保持数据简洁。
+  - q: 所有者可以更新属性吗？
+    a: 不可以。Attributes 插件是权限管理的，所以只有更新权限者可以修改它。
 ---
-The **Attributes Plugin** stores key-value pairs directly on-chain within Core Assets or Collections. Perfect for game stats, traits, and any data that on-chain programs need to read. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add on-chain attributes to Assets and Collections
-- Store and update key-value pairs
-- Read attributes from on-chain programs
-- Use cases: game stats, traits, access levels
+**Attributes 插件**在 Core Asset 或 Collection 中直接在链上存储键值对。非常适合游戏统计数据、特征以及链上程序需要读取的任何数据。{% .lead %}
+{% callout title="学习内容" %}
+- 向 Asset 和 Collection 添加链上属性
+- 存储和更新键值对
+- 从链上程序读取属性
+- 用例：游戏统计数据、特征、访问级别
 {% /callout %}
-## Summary
-The **Attributes Plugin** is an Authority Managed plugin that stores key-value string pairs on-chain. Unlike off-chain metadata, these attributes are readable by Solana programs and indexed by DAS.
-- Store any string key-value pairs on-chain
-- Readable by on-chain programs via CPI
-- Automatically indexed by DAS for fast queries
-- Mutable by the update authority
-## Out of Scope
-Off-chain metadata attributes (stored in JSON at URI), complex data types (only strings supported), and immutable attributes (all attributes are mutable).
-## Quick Start
-**Jump to:** [Add to Asset](#adding-the-attributes-plugin-to-an-asset) · [Update Attributes](#updating-the-attributes-plugin-on-an-asset)
-1. Add the Attributes plugin: `addPlugin(umi, { asset, plugin: { type: 'Attributes', attributeList: [...] } })`
-2. Each attribute is a `{ key: string, value: string }` pair
-3. Update anytime with `updatePlugin()`
-4. Query via DAS or fetch on-chain
-{% callout type="note" title="On-Chain vs Off-Chain Attributes" %}
-| Feature | On-Chain (this plugin) | Off-Chain (JSON metadata) |
+## 摘要
+**Attributes 插件**是一个权限管理插件，在链上存储键值字符串对。与链下元数据不同，这些属性可被 Solana 程序读取并被 DAS 索引。
+- 在链上存储任何字符串键值对
+- 可通过 CPI 被链上程序读取
+- 自动被 DAS 索引以便快速查询
+- 可由更新权限者修改
+## 范围外
+链下元数据属性（存储在 URI 的 JSON 中）、复杂数据类型（仅支持字符串）以及不可变属性（所有属性都可修改）。
+## 快速开始
+**跳转至：** [添加到 Asset](#向-asset-添加-attributes-插件) · [更新属性](#更新-asset-上的-attributes-插件)
+1. 添加 Attributes 插件：`addPlugin(umi, { asset, plugin: { type: 'Attributes', attributeList: [...] } })`
+2. 每个属性是一个 `{ key: string, value: string }` 对
+3. 随时使用 `updatePlugin()` 更新
+4. 通过 DAS 查询或在链上获取
+{% callout type="note" title="链上 vs 链下属性" %}
+| 特性 | 链上（此插件） | 链下（JSON 元数据） |
 |---------|------------------------|---------------------------|
-| Storage location | Solana account | Arweave/IPFS |
-| Readable by programs | ✅ Yes (CPI) | ❌ No |
-| Indexed by DAS | ✅ Yes | ✅ Yes |
-| Mutable | ✅ Yes | Depends on storage |
-| Cost | Rent (recoverable) | Upload cost (one-time) |
-| Best for | Dynamic data, game stats | Static traits, images |
-**Use on-chain attributes** when programs need to read the data or it changes frequently.
-**Use off-chain metadata** for static traits and image references.
+| 存储位置 | Solana 账户 | Arweave/IPFS |
+| 可被程序读取 | ✅ 是（CPI） | ❌ 否 |
+| 被 DAS 索引 | ✅ 是 | ✅ 是 |
+| 可修改 | ✅ 是 | 取决于存储 |
+| 成本 | 租金（可回收） | 上传成本（一次性） |
+| 最适合 | 动态数据、游戏统计 | 静态特征、图片 |
+**使用链上属性**当程序需要读取数据或数据经常变化时。
+**使用链下元数据**用于静态特征和图片引用。
 {% /callout %}
-## Common Use Cases
-- **Game character stats**: Health, XP, level, class - data that changes during gameplay
-- **Access control**: Tier, role, permissions - data programs check for authorization
-- **Dynamic traits**: Evolving NFTs where traits change based on actions
-- **Staking state**: Track staking status, rewards earned, time staked
-- **Achievement tracking**: Badges, milestones, completion status
-- **Rental/lending**: Track rental periods, borrower info, return dates
-## Works With
+## 常见用例
+- **游戏角色统计**：生命值、经验值、等级、职业 - 游戏过程中变化的数据
+- **访问控制**：等级、角色、权限 - 程序用于授权检查的数据
+- **动态特征**：基于操作变化特征的进化 NFT
+- **质押状态**：跟踪质押状态、已赚取的奖励、质押时间
+- **成就追踪**：徽章、里程碑、完成状态
+- **租赁/借贷**：跟踪租赁期限、借用者信息、归还日期
+## 适用于
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-## Arguments
-| Arg           | Value                               |
+## 参数
+| 参数           | 值                               |
 | ------------- | ----------------------------------- |
 | attributeList | Array<{key: string, value: string}> |
 ### AttributeList
-The attribute list consists of an Array[] then an object of key-value pairs `{key: "value"}` string value pairs.
+属性列表由 Array[] 组成，然后是键值对 `{key: "value"}` 字符串值对的对象。
 {% dialect-switcher title="AttributeList" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -112,8 +112,8 @@ let attributes = Attributes {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the Attributes Plugin to an Asset
-{% dialect-switcher title="Adding a Attribute Plugin to an MPL Core Asset" %}
+## 向 Asset 添加 Attributes 插件
+{% dialect-switcher title="向 MPL Core Asset 添加 Attribute 插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -177,8 +177,8 @@ pub async fn add_attributes_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating the Attributes Plugin on an Asset
-{% dialect-switcher title="Updating the Attributes Plugin on an Asset" %}
+## 更新 Asset 上的 Attributes 插件
+{% dialect-switcher title="更新 Asset 上的 Attributes 插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -246,19 +246,19 @@ pub async fn update_attributes_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Authority mismatch`
-Only the plugin authority (usually update authority) can add or update attributes. Verify you're signing with the correct keypair.
+只有插件权限者（通常是更新权限者）可以添加或更新属性。验证您是否使用正确的密钥对签名。
 ### `String too long`
-Attribute keys and values are limited in size. Keep them concise.
-## Notes
-- Authority Managed: update authority can add/update without owner signature
-- All values are strings - convert numbers/booleans as needed
-- Updating replaces the entire attribute list (no partial updates)
-- Attributes increase account size and rent cost
-- DAS indexes attributes for fast queries
-## Quick Reference
-### Minimum Code
+属性键和值的大小有限制。请保持简洁。
+## 注意事项
+- 权限管理：更新权限者无需所有者签名即可添加/更新
+- 所有值都是字符串 - 根据需要转换数字/布尔值
+- 更新会替换整个属性列表（不支持部分更新）
+- 属性会增加账户大小和租金成本
+- DAS 索引属性以便快速查询
+## 快速参考
+### 最少代码
 ```ts {% title="minimal-attributes.ts" %}
 import { addPlugin } from '@metaplex-foundation/mpl-core'
 await addPlugin(umi, {
@@ -272,37 +272,37 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-### Common Attribute Patterns
-| Use Case | Example Keys |
+### 常见属性模式
+| 用例 | 示例键 |
 |----------|--------------|
-| Game character | `level`, `health`, `xp`, `class` |
-| Access control | `tier`, `access_level`, `role` |
-| Traits | `background`, `eyes`, `rarity` |
-| State | `staked`, `listed`, `locked` |
-## FAQ
-### What's the difference between on-chain attributes and off-chain metadata attributes?
-On-chain attributes (this plugin) are stored on Solana and readable by programs. Off-chain attributes (in JSON at URI) are stored on Arweave/IPFS and only readable by clients.
-### Can on-chain programs read these attributes?
-Yes. Use CPI to fetch the Asset account and deserialize the Attributes plugin data.
-### Are attributes indexed by DAS?
-Yes. DAS automatically indexes attribute key-value pairs for fast queries.
-### Can I store numbers or booleans?
-Values are strings only. Convert as needed: `{ key: 'level', value: '5' }`, `{ key: 'active', value: 'true' }`.
-### How do I update a single attribute?
-You can't update individual attributes. Fetch the current list, modify it, and update with the full new list.
-### What's the size limit for attributes?
-There's no hard limit, but larger attribute lists increase rent cost. Keep data concise.
-### Can the owner update attributes?
-No. The Attributes plugin is Authority Managed, so only the update authority can modify it (not the owner).
-## Related Plugins
-- [Update Delegate](/smart-contracts/core/plugins/update-delegate) - Grant others permission to update attributes
-- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - Lock name/URI (attributes remain mutable)
-- [AddBlocker](/smart-contracts/core/plugins/addBlocker) - Prevent adding new plugins
-## Glossary
-| Term | Definition |
+| 游戏角色 | `level`, `health`, `xp`, `class` |
+| 访问控制 | `tier`, `access_level`, `role` |
+| 特征 | `background`, `eyes`, `rarity` |
+| 状态 | `staked`, `listed`, `locked` |
+## 常见问题
+### 链上属性和链下元数据属性有什么区别？
+链上属性（此插件）存储在 Solana 上，可被程序读取。链下属性（URI 中的 JSON）存储在 Arweave/IPFS 上，只能被客户端读取。
+### 链上程序能读取这些属性吗？
+可以。使用 CPI 获取 Asset 账户并反序列化 Attributes 插件数据。
+### 属性会被 DAS 索引吗？
+是的。DAS 会自动索引属性键值对以便快速查询。
+### 可以存储数字或布尔值吗？
+值只能是字符串。根据需要进行转换：`{ key: 'level', value: '5' }`，`{ key: 'active', value: 'true' }`。
+### 如何更新单个属性？
+不能单独更新属性。需要获取当前列表，修改后用完整的新列表进行更新。
+### 属性的大小限制是多少？
+没有硬性限制，但较大的属性列表会增加租金成本。请保持数据简洁。
+### 所有者可以更新属性吗？
+不可以。Attributes 插件是权限管理的，所以只有更新权限者可以修改它（不是所有者）。
+## 相关插件
+- [Update Delegate](/smart-contracts/core/plugins/update-delegate) - 授予他人更新属性的权限
+- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - 锁定名称/URI（属性仍可修改）
+- [AddBlocker](/smart-contracts/core/plugins/addBlocker) - 防止添加新插件
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Attributes Plugin** | Authority Managed plugin storing on-chain key-value pairs |
-| **attributeList** | Array of `{ key, value }` objects |
-| **Authority Managed** | Plugin type controlled by update authority |
-| **On-chain Data** | Data stored directly in Solana account (readable by programs) |
-| **DAS** | Digital Asset Standard API that indexes attributes |
+| **Attributes 插件** | 存储链上键值对的权限管理插件 |
+| **attributeList** | `{ key, value }` 对象的数组 |
+| **权限管理** | 由更新权限者控制的插件类型 |
+| **链上数据** | 直接存储在 Solana 账户中的数据（可被程序读取） |
+| **DAS** | 索引属性的 Digital Asset Standard API |

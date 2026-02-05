@@ -1,7 +1,7 @@
 ---
-title: Delegating and Revoking Plugins
-metaTitle: Delegating and Revoking Plugin Authority | Metaplex Core
-description: Learn how to delegate and revoke plugin authorities on Core Assets. Change who controls plugins and make plugin data immutable.
+title: 플러그인 위임 및 취소
+metaTitle: 플러그인 권한 위임 및 취소 | Metaplex Core
+description: Core Asset에서 플러그인 권한을 위임하고 취소하는 방법을 알아보세요. 플러그인을 제어하는 사람을 변경하고 플러그인 데이터를 불변으로 만들 수 있습니다.
 updated: '01-31-2026'
 keywords:
   - delegate plugin
@@ -17,40 +17,40 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What's the difference between revoking and removing a plugin?
-    a: Revoking only changes who controls the plugin - the plugin and its data remain. Removing deletes the plugin entirely.
-  - q: Can I delegate to multiple addresses?
-    a: No. Each plugin has only one authority at a time. Delegating to a new address replaces the previous authority.
-  - q: What happens to delegated plugins when I transfer an Asset?
-    a: Owner Managed plugins automatically revoke back to Owner authority. Authority Managed plugins remain unchanged.
-  - q: Can I undo setting authority to None?
-    a: No. Setting authority to None makes the plugin permanently immutable. This cannot be reversed.
-  - q: Can a delegate revoke themselves?
-    a: Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
+  - q: 취소와 제거의 차이점은 무엇인가요?
+    a: 취소는 플러그인을 제어하는 사람만 변경합니다 - 플러그인과 데이터는 그대로 유지됩니다. 제거는 플러그인 전체를 삭제합니다.
+  - q: 여러 주소에 위임할 수 있나요?
+    a: 아니요. 각 플러그인은 한 번에 하나의 권한자만 가집니다. 새 주소에 위임하면 이전 권한자가 대체됩니다.
+  - q: Asset을 전송할 때 위임된 플러그인은 어떻게 되나요?
+    a: 소유자 관리 플러그인은 자동으로 Owner 권한으로 취소됩니다. 권한 관리 플러그인은 변경되지 않습니다.
+  - q: 권한을 None으로 설정한 것을 취소할 수 있나요?
+    a: 아니요. 권한을 None으로 설정하면 플러그인이 영구적으로 불변이 됩니다. 이는 되돌릴 수 없습니다.
+  - q: 위임자가 스스로 취소할 수 있나요?
+    a: 네. 위임된 권한자는 자신의 접근 권한을 취소할 수 있으며, 이는 기본 권한 유형으로 제어권을 반환합니다.
 ---
-This guide shows how to **delegate and revoke plugin authorities** on Core Assets. Transfer control of plugins to other addresses or make plugin data permanently immutable. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Delegate plugin authority to another address
-- Revoke delegated authority
-- Understand revocation behavior for different plugin types
-- Make plugin data immutable
+이 가이드는 Core Asset에서 **플러그인 권한을 위임하고 취소하는 방법**을 보여줍니다. 플러그인 제어권을 다른 주소에 전달하거나 플러그인 데이터를 영구적으로 불변으로 만들 수 있습니다. {% .lead %}
+{% callout title="학습 내용" %}
+- 플러그인 권한을 다른 주소에 위임
+- 위임된 권한 취소
+- 다양한 플러그인 유형의 취소 동작 이해
+- 플러그인 데이터를 불변으로 만들기
 {% /callout %}
-## Summary
-Delegate plugin authority using `approvePluginAuthority()` and revoke with `revokePluginAuthority()`. Different plugin types have different revocation behaviors.
-- **Owner Managed**: Revokes back to `Owner` authority
-- **Authority Managed**: Revokes back to `UpdateAuthority`
-- Set authority to `None` to make plugin immutable
-- Owner Managed plugins auto-revoke on Asset transfer
-## Out of Scope
-Plugin removal (see [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)), adding plugins (see [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)), and permanent plugin authority changes.
-## Quick Start
-**Jump to:** [Delegate Authority](#delegating-an-authority) · [Revoke Authority](#revoking-an-authority) · [Make Immutable](#making-plugin-data-immutable)
-1. Call `approvePluginAuthority()` with the new authority address
-2. To revoke: call `revokePluginAuthority()`
-3. To make immutable: set authority to `None`
-## Delegating an Authority
-Plugins can be delegated to another address with a Delegate Authority instruction update. Delegated plugins allow addresses other than the main authority to have control over that plugins functionality.
-{% dialect-switcher title="Delegate a Plugin Authority" %}
+## 요약
+`approvePluginAuthority()`를 사용하여 플러그인 권한을 위임하고 `revokePluginAuthority()`로 취소합니다. 다양한 플러그인 유형에는 다양한 취소 동작이 있습니다.
+- **소유자 관리**: `Owner` 권한으로 취소됨
+- **권한 관리**: `UpdateAuthority`로 취소됨
+- 권한을 `None`으로 설정하면 플러그인이 불변
+- 소유자 관리 플러그인은 Asset 전송 시 자동 취소
+## 범위 외
+플러그인 제거 ([플러그인 제거](/smart-contracts/core/plugins/removing-plugins) 참조), 플러그인 추가 ([플러그인 추가](/smart-contracts/core/plugins/adding-plugins) 참조), 영구 플러그인 권한 변경.
+## 빠른 시작
+**바로 가기:** [권한 위임](#권한-위임) · [권한 취소](#권한-취소) · [불변으로 만들기](#플러그인-데이터를-불변으로-만들기)
+1. 새 권한 주소로 `approvePluginAuthority()` 호출
+2. 취소하려면: `revokePluginAuthority()` 호출
+3. 불변으로 만들려면: 권한을 `None`으로 설정
+## 권한 위임
+플러그인은 Delegate Authority 명령 업데이트를 통해 다른 주소에 위임할 수 있습니다. 위임된 플러그인은 주요 권한자 외의 주소가 해당 플러그인 기능을 제어할 수 있게 합니다.
+{% dialect-switcher title="플러그인 권한 위임" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -103,20 +103,20 @@ pub async fn delegate_plugin_authority() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Revoking an Authority
-Revoking an Authority on a plugin results in different behaviours depending on the plugin type that's being revoked.
-- **Owner Managed Plugins:** If an address is revoked from an `Owner Managed Plugin` then the plugin will default back to the `Owner` authority type.
-- **Authority Managed Plugins:** If an address is revoked from an `Authority Managed Plugin` then the plugin will default back to the `UpdateAuthority` authority type.
-### Who can Revoke a Plugin?
-#### Owner Managed Plugins
-- An Owner Managed Plugin can be revoked by the owner which revokes the delegate and sets the pluginAuthority type to `Owner`.
-- The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `Owner`.
-- On Transfer, delegated Authorities of owner managed plugins are automatically revoked back to the `Owner Authority` type.
-#### Authority Managed Plugins
-- The Update Authority of an Asset can revoke a delegate which thens sets the pluginAuthority type to `UpdateAuthority`.
-- The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `UpdateAuthority`.
-A list of plugins and their types can be viewed on the [Plugins Overview](/smart-contracts/core/plugins) page.
-{% dialect-switcher title="Revoking a Plugin Authority" %}
+## 권한 취소
+플러그인 권한을 취소하면 플러그인 유형에 따라 다른 동작이 발생합니다.
+- **소유자 관리 플러그인:** `소유자 관리 플러그인`에서 주소가 취소되면 플러그인은 기본적으로 `Owner` 권한 유형으로 돌아갑니다.
+- **권한 관리 플러그인:** `권한 관리 플러그인`에서 주소가 취소되면 플러그인은 기본적으로 `UpdateAuthority` 권한 유형으로 돌아갑니다.
+### 누가 플러그인을 취소할 수 있나요?
+#### 소유자 관리 플러그인
+- 소유자가 소유자 관리 플러그인을 취소하면 위임을 취소하고 pluginAuthority 유형을 `Owner`로 설정합니다.
+- 플러그인의 위임된 권한자가 스스로 취소할 수 있으며, 이는 플러그인 권한 유형을 `Owner`로 설정합니다.
+- 전송 시, 소유자 관리 플러그인의 위임된 권한자는 자동으로 `Owner Authority` 유형으로 취소됩니다.
+#### 권한 관리 플러그인
+- Asset의 업데이트 권한자가 위임을 취소할 수 있으며, 이는 pluginAuthority 유형을 `UpdateAuthority`로 설정합니다.
+- 플러그인의 위임된 권한자가 스스로 취소할 수 있으며, 이는 플러그인 권한 유형을 `UpdateAuthority`로 설정합니다.
+플러그인과 해당 유형 목록은 [플러그인 개요](/smart-contracts/core/plugins) 페이지에서 확인할 수 있습니다.
+{% dialect-switcher title="플러그인 권한 취소" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -159,18 +159,18 @@ pub async fn revoke_plugin_authority() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Delegate Resets Upon Asset Transfer
-All Owner Managed plugins will have their delegated authorities revoked and set back to the authority type of `Owner` upon Transfer of an Asset.
-This includes:
+### Asset 전송 시 위임 재설정
+모든 소유자 관리 플러그인은 Asset 전송 시 위임된 권한자가 취소되어 `Owner` 권한 유형으로 다시 설정됩니다.
+여기에는 다음이 포함됩니다:
 - Freeze Delegate
 - Transfer Delegate
 - Burn Delegate
-## Making Plugin Data Immutable
-By updating your plugin's authority to a `None` value will effectively make your plugin's data immutable.
+## 플러그인 데이터를 불변으로 만들기
+플러그인 권한을 `None` 값으로 업데이트하면 플러그인 데이터가 효과적으로 불변이 됩니다.
 {% callout type="warning" %}
-**WARNING** - Doing so will leave your plugin data immutable. Proceed with caution!
+**경고** - 이렇게 하면 플러그인 데이터가 불변이 됩니다. 주의하세요!
 {% /callout %}
-{% dialect-switcher title="Making a Plugin Immutable" %}
+{% dialect-switcher title="플러그인을 불변으로 만들기" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -219,50 +219,50 @@ pub async fn make_plugin_data_immutable() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 일반적인 오류
 ### `Authority mismatch`
-You don't have permission to delegate or revoke this plugin. Only the current authority can delegate; only owner/authority can revoke.
+이 플러그인을 위임하거나 취소할 권한이 없습니다. 현재 권한자만 위임할 수 있고; 소유자/권한자만 취소할 수 있습니다.
 ### `Plugin not found`
-The Asset/Collection doesn't have this plugin type attached.
+Asset/Collection에 이 플러그인 유형이 첨부되어 있지 않습니다.
 ### `Cannot revoke None authority`
-A plugin with `None` authority is immutable. There's no authority to revoke.
-## Notes
-- Delegation transfers control but doesn't remove the original authority's ability to revoke
-- Setting authority to `None` is permanent and irreversible
-- Owner Managed plugins auto-revoke when the Asset transfers to a new owner
-- Revocation returns authority to the default type (Owner or UpdateAuthority)
-## Quick Reference
-### Revocation Behavior by Plugin Type
-| Plugin Type | Revokes To |
+`None` 권한이 있는 플러그인은 불변입니다. 취소할 권한이 없습니다.
+## 참고 사항
+- 위임은 제어권을 전달하지만 원래 권한자의 취소 능력을 제거하지 않음
+- 권한을 `None`으로 설정하면 영구적이며 되돌릴 수 없음
+- 소유자 관리 플러그인은 Asset이 새 소유자에게 전송될 때 자동 취소됨
+- 취소는 기본 유형 (Owner 또는 UpdateAuthority)으로 권한을 반환
+## 빠른 참조
+### 플러그인 유형별 취소 동작
+| 플러그인 유형 | 취소 대상 |
 |-------------|------------|
-| Owner Managed | `Owner` authority |
-| Authority Managed | `UpdateAuthority` |
-### Who Can Delegate/Revoke
-| Action | Owner Managed | Authority Managed |
+| 소유자 관리 | `Owner` 권한 |
+| 권한 관리 | `UpdateAuthority` |
+### 누가 위임/취소할 수 있나요
+| 작업 | 소유자 관리 | 권한 관리 |
 |--------|---------------|-------------------|
-| Delegate | Owner | Update Authority |
-| Revoke | Owner or Delegate | Update Authority or Delegate |
+| 위임 | 소유자 | 업데이트 권한자 |
+| 취소 | 소유자 또는 위임자 | 업데이트 권한자 또는 위임자 |
 ## FAQ
-### What's the difference between revoking and removing a plugin?
-Revoking only changes who controls the plugin—the plugin and its data remain. Removing deletes the plugin entirely.
-### Can I delegate to multiple addresses?
-No. Each plugin has only one authority at a time. Delegating to a new address replaces the previous authority.
-### What happens to delegated plugins when I transfer an Asset?
-Owner Managed plugins automatically revoke back to `Owner` authority. Authority Managed plugins remain unchanged.
-### Can I undo setting authority to None?
-No. Setting authority to `None` makes the plugin permanently immutable. This cannot be reversed.
-### Can a delegate revoke themselves?
-Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
-## Related Operations
-- [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) - Add plugins to Assets/Collections
-- [Removing Plugins](/smart-contracts/core/plugins/removing-plugins) - Delete plugins entirely
-- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
-- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
-## Glossary
-| Term | Definition |
+### 취소와 제거의 차이점은 무엇인가요?
+취소는 플러그인을 제어하는 사람만 변경합니다—플러그인과 데이터는 그대로 유지됩니다. 제거는 플러그인 전체를 삭제합니다.
+### 여러 주소에 위임할 수 있나요?
+아니요. 각 플러그인은 한 번에 하나의 권한자만 가집니다. 새 주소에 위임하면 이전 권한자가 대체됩니다.
+### Asset을 전송할 때 위임된 플러그인은 어떻게 되나요?
+소유자 관리 플러그인은 자동으로 `Owner` 권한으로 취소됩니다. 권한 관리 플러그인은 변경되지 않습니다.
+### 권한을 None으로 설정한 것을 취소할 수 있나요?
+아니요. 권한을 `None`으로 설정하면 플러그인이 영구적으로 불변이 됩니다. 이는 되돌릴 수 없습니다.
+### 위임자가 스스로 취소할 수 있나요?
+네. 위임된 권한자는 자신의 접근 권한을 취소할 수 있으며, 이는 기본 권한 유형으로 제어권을 반환합니다.
+## 관련 작업
+- [플러그인 추가](/smart-contracts/core/plugins/adding-plugins) - Asset/Collection에 플러그인 추가
+- [플러그인 제거](/smart-contracts/core/plugins/removing-plugins) - 플러그인 완전 삭제
+- [플러그인 업데이트](/smart-contracts/core/plugins/update-plugins) - 플러그인 데이터 수정
+- [플러그인 개요](/smart-contracts/core/plugins) - 사용 가능한 플러그인 전체 목록
+## 용어집
+| 용어 | 정의 |
 |------|------------|
-| **Delegate** | Address given temporary control of a plugin |
-| **Revoke** | Remove delegated authority, returning to default |
-| **None Authority** | Special authority type making plugin immutable |
-| **Auto-revoke** | Automatic revocation of Owner Managed plugins on transfer |
-| **Plugin Authority** | Current address with control over a plugin |
+| **위임자** | 플러그인의 임시 제어권을 부여받은 주소 |
+| **취소** | 위임된 권한 제거, 기본값으로 반환 |
+| **None 권한** | 플러그인을 불변으로 만드는 특수 권한 유형 |
+| **자동 취소** | 전송 시 소유자 관리 플러그인의 자동 취소 |
+| **플러그인 권한** | 플러그인을 제어하는 현재 주소 |

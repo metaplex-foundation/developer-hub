@@ -28,14 +28,14 @@ faqs:
   - q: Is Core compatible with existing NFT marketplaces?
     a: Most major Solana marketplaces support Core Assets. Check Ecosystem Support for the current list.
   - q: What happens if off-chain metadata goes offline?
-    a: The Asset still exists on-chain with name and URI, but image/attributes won't load. Use permanent storage like Arweave or pinned IPFS.
+    a: The Asset still exists on-chain with name and URI, but image and off-chain attributes won't load. On-chain attributes (via the Attributes plugin) remain accessible. Use permanent storage like Arweave or pinned IPFS.
 ---
 This page explains **what a Core Asset is** and how it differs from traditional Solana NFTs. Understand the account structure, collection relationships, and metadata storage. {% .lead %}
 {% callout title="Key Concepts" %}
 - **Single-account model**: Core Assets store ownership within the Asset account itself
 - **No token accounts**: Unlike SPL tokens, Core doesn't require Associated Token Accounts
 - **Collection membership**: Assets can belong to Collections via the updateAuthority field
-- **Off-chain metadata**: A URI points to JSON metadata stored on Arweave/IPFS
+- **Off-chain metadata**: A URI points to JSON metadata (permanent storage like Arweave/IPFS is recommended)
 {% /callout %}
 ## Summary
 A Core Asset is a single Solana account that represents an NFT. Unlike Token Metadata (which requires 3+ accounts), Core stores all essential data in one account: owner, name, URI, and update authority. This makes Core Assets ~80% cheaper and simpler to work with.
@@ -281,7 +281,7 @@ Not directly. Core and Token Metadata are separate standards. You would need to 
 ### Is Core compatible with existing NFT marketplaces?
 Most major Solana marketplaces support Core Assets. Check [Ecosystem Support](/smart-contracts/core/ecosystem-support) for the current list of compatible platforms.
 ### What happens if the off-chain metadata goes offline?
-The Asset still exists on-chain with its name and URI, but the image/attributes won't be accessible. Use permanent storage (Arweave, IPFS with pinning) to prevent this.
+The Asset still exists on-chain with its name and URI, but the image and off-chain attributes won't be accessible. On-chain attributes (via the [Attributes plugin](/smart-contracts/core/plugins/attribute)) remain accessible. Use permanent storage (Arweave, IPFS with pinning) to prevent this.
 ## Glossary
 | Term | Definition |
 |------|------------|

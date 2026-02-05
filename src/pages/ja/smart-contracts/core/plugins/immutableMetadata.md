@@ -1,7 +1,7 @@
 ---
-title: ImmutableMetadata Plugin
-metaTitle: ImmutableMetadata Plugin | Metaplex Core
-description: Make Core NFT Asset and Collection metadata permanently immutable. Lock the name and URI to prevent any future changes.
+title: ImmutableMetadataプラグイン
+metaTitle: ImmutableMetadataプラグイン | Metaplex Core
+description: Core NFT AssetとCollectionのメタデータを永続的に不変にします。名前とURIをロックして将来の変更を防ぎます。
 updated: '01-31-2026'
 keywords:
   - immutable metadata
@@ -17,63 +17,63 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Can I undo adding ImmutableMetadata?
-    a: No. Once added, the ImmutableMetadata plugin cannot be removed. The metadata is permanently locked. This is by design for provenance guarantees.
-  - q: What exactly becomes immutable?
-    a: The Asset or Collection's name and uri fields. Other plugin data is not affected - use authority None on individual plugins to make their data immutable.
-  - q: If I add this to a Collection, are existing Assets affected?
-    a: Yes. When ImmutableMetadata is on a Collection, all Assets in that Collection inherit the immutability. Their metadata cannot be changed.
-  - q: Can I add this during Asset creation?
-    a: Yes. You can add ImmutableMetadata during create() to ensure the metadata is locked from the start.
-  - q: Why would I want immutable metadata?
-    a: Immutable metadata provides permanent provenance - collectors know the NFT's name and associated metadata URI can never be changed, preventing rug-pulls.
+  - q: ImmutableMetadataの追加を取り消せますか？
+    a: いいえ。一度追加されると、ImmutableMetadataプラグインは削除できません。メタデータは永続的にロックされます。これは来歴保証のための設計です。
+  - q: 具体的に何が不変になりますか？
+    a: AssetまたはCollectionのnameとuriフィールドです。他のプラグインデータは影響を受けません—それらのデータを不変にするには個別のプラグインでauthority Noneを使用してください。
+  - q: Collectionにこれを追加すると、既存のAssetsに影響しますか？
+    a: はい。ImmutableMetadataがCollectionにあると、そのCollection内のすべてのAssetsが不変性を継承します。それらのメタデータは変更できなくなります。
+  - q: Asset作成時にこれを追加できますか？
+    a: はい。create()中にImmutableMetadataを追加して、メタデータが最初からロックされるようにできます。
+  - q: なぜ不変メタデータが必要なのですか？
+    a: 不変メタデータは永続的な来歴を提供します—コレクターはNFTの名前と関連するメタデータURIが決して変更されないことを知り、アートワークや説明を差し替えるラグプルを防ぎます。
 ---
-The **ImmutableMetadata Plugin** permanently locks the name and URI of Assets or Collections. Once added, the metadata cannot be changed by anyone, ensuring permanent provenance. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Make Asset metadata immutable
-- Make Collection metadata immutable
-- Understand inheritance from Collections to Assets
-- Protect NFT provenance permanently
+**ImmutableMetadataプラグイン**は、AssetsまたはCollectionsの名前とURIを永続的にロックします。一度追加されると、メタデータは誰も変更できなくなり、永続的な来歴を保証します。 {% .lead %}
+{% callout title="学べること" %}
+- Assetのメタデータを不変にする
+- Collectionのメタデータを不変にする
+- CollectionsからAssetsへの継承を理解
+- NFTの来歴を永続的に保護
 {% /callout %}
-## Summary
-The **ImmutableMetadata** plugin is an Authority Managed plugin that prevents any changes to an Asset or Collection's name and URI. Once added, this protection is permanent.
-- Authority Managed (only update authority can add)
-- Makes name and URI permanently unchangeable
-- Cannot be removed after addition
-- Collection plugin affects all Assets in that Collection
-## Out of Scope
-Making other plugin data immutable (use authority `None` on those plugins), selective field immutability, and temporary locks.
-## Quick Start
-**Jump to:** [Add to Asset](#adding-the-immutablemetadata-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-immutablemetadata-plugin-to-a-collection-code-example)
-1. Ensure metadata (name, URI) is finalized
-2. Add ImmutableMetadata plugin as update authority
-3. Metadata is now permanently locked
-{% callout type="note" title="When to Use ImmutableMetadata" %}
-| Scenario | Use ImmutableMetadata? |
+## 概要
+**ImmutableMetadata**プラグインは、AssetまたはCollectionの名前とURIへの変更を防ぐAuthority Managedプラグインです。一度追加されると、この保護は永続的です。
+- Authority Managed（update authorityのみが追加可能）
+- 名前とURIを永続的に変更不可にする
+- 追加後は削除不可
+- Collectionプラグインはそのコレクション内のすべてのAssetsに影響
+## 対象外
+他のプラグインデータを不変にする（それらのプラグインでauthority `None`を使用）、選択的なフィールドの不変性、一時的なロック。
+## クイックスタート
+**ジャンプ先:** [Assetに追加](#assetへのimmutablemetadataプラグインの追加コード例) · [Collectionに追加](#collectionへのimmutablemetadataプラグインの追加コード例)
+1. メタデータ（名前、URI）が最終版であることを確認
+2. Update authorityとしてImmutableMetadataプラグインを追加
+3. メタデータが永続的にロックされる
+{% callout type="note" title="ImmutableMetadataを使用するタイミング" %}
+| シナリオ | ImmutableMetadataを使用？ |
 |----------|------------------------|
-| Art NFTs with permanent artwork | ✅ Yes |
-| Game items with evolving stats | ❌ No (need to update attributes) |
-| Prevent rug-pulls | ✅ Yes |
-| Dynamic/evolving NFTs | ❌ No |
-| Certificates/credentials | ✅ Yes |
-**Use ImmutableMetadata** for art, collectibles, and certificates where permanence is valued.
-**Don't use** for game items or dynamic NFTs that need updates.
+| 永続的なアートワークを持つアートNFT | ✅ はい |
+| 進化するステータスを持つゲームアイテム | ❌ いいえ（属性の更新が必要） |
+| ラグプルを防止 | ✅ はい |
+| 動的/進化するNFT | ❌ いいえ |
+| 証明書/資格 | ✅ はい |
+**ImmutableMetadataを使用**するのは、永続性が重視されるアート、コレクティブル、証明書の場合です。
+**使用しない**のは、更新が必要なゲームアイテムや動的NFTの場合です。
 {% /callout %}
-## Common Use Cases
-- **Art collectibles**: Guarantee artwork and metadata will never change
-- **Certificates**: Issue credentials that can't be altered
-- **Provenance protection**: Prevent rug-pulls by locking metadata
-- **Historical records**: Preserve NFT data permanently
-- **Brand guarantees**: Assure collectors the NFT's identity is fixed
-## Works With
+## 一般的なユースケース
+- **アートコレクティブル**: アートワークとメタデータが決して変更されないことを保証
+- **証明書**: 変更できない資格を発行
+- **来歴保護**: メタデータをロックしてラグプルを防止
+- **歴史的記録**: NFTデータを永続的に保存
+- **ブランド保証**: NFTのアイデンティティが固定されていることをコレクターに保証
+## 対応
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-## Arguments
-The ImmutableMetadata Plugin requires no arguments.
-## Adding the immutableMetadata Plugin to an Asset code example
-{% dialect-switcher title="Adding a Immutability Plugin to an MPL Core Asset" %}
+## 引数
+ImmutableMetadataプラグインには引数は必要ありません。
+## Assetへのimmutablemetadataプラグインの追加コード例
+{% dialect-switcher title="MPL Core AssetへのImmutabilityプラグインの追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -88,8 +88,8 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the immutableMetadata Plugin to a Collection code example
-{% dialect-switcher title="Add immutableMetadata Plugin to Collection" %}
+## Collectionへのimmutablemetadataプラグインの追加コード例
+{% dialect-switcher title="CollectionへのimmutableMetadataプラグインの追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -104,48 +104,48 @@ await addCollectionPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 一般的なエラー
 ### `Authority mismatch`
-Only the update authority can add the ImmutableMetadata plugin.
+Update authorityのみがImmutableMetadataプラグインを追加できます。
 ### `Cannot update metadata`
-The ImmutableMetadata plugin is active. The name and URI cannot be changed.
-## Notes
-- This action is **permanent and irreversible**
-- Double-check name and URI before adding this plugin
-- Adding to a Collection makes ALL Assets in that Collection immutable
-- The plugin has no arguments—just add it to lock metadata
-## Quick Reference
-### Affected Fields
-| Field | Locked |
+ImmutableMetadataプラグインがアクティブです。名前とURIは変更できません。
+## 注意事項
+- このアクションは**永続的で不可逆**です
+- このプラグインを追加する前に名前とURIを再確認してください
+- Collectionに追加すると、そのCollection内のすべてのAssetsが不変になります
+- プラグインには引数がありません—追加するだけでメタデータがロックされます
+## クイックリファレンス
+### 影響を受けるフィールド
+| フィールド | ロック |
 |-------|--------|
 | `name` | ✅ |
 | `uri` | ✅ |
-| Other metadata | ❌ (use other methods) |
-### Inheritance Behavior
-| Added To | Effect |
+| その他のメタデータ | ❌（他の方法を使用） |
+### 継承動作
+| 追加先 | 効果 |
 |----------|--------|
-| Asset | Only that Asset's metadata is locked |
-| Collection | Collection AND all Assets' metadata locked |
+| Asset | そのAssetのメタデータのみがロック |
+| Collection | CollectionとすべてのAssetsのメタデータがロック |
 ## FAQ
-### Can I undo adding ImmutableMetadata?
-No. Once added, the ImmutableMetadata plugin cannot be removed. The metadata is permanently locked. This is by design for provenance guarantees.
-### What exactly becomes immutable?
-The Asset or Collection's `name` and `uri` fields. Other plugin data is not affected—use authority `None` on individual plugins to make their data immutable.
-### If I add this to a Collection, are existing Assets affected?
-Yes. When ImmutableMetadata is on a Collection, all Assets in that Collection inherit the immutability. Their metadata cannot be changed.
-### Can I add this during Asset creation?
-Yes. You can add ImmutableMetadata during `create()` to ensure the metadata is locked from the start.
-### Why would I want immutable metadata?
-Immutable metadata provides permanent provenance—collectors know the NFT's name and associated metadata URI can never be changed, preventing rug-pulls where creators swap out artwork or descriptions.
-## Related Plugins
-- [AddBlocker](/smart-contracts/core/plugins/addBlocker) - Prevent new plugins (complementary to ImmutableMetadata)
-- [Attributes](/smart-contracts/core/plugins/attribute) - On-chain data (not locked by ImmutableMetadata)
-- [Royalties](/smart-contracts/core/plugins/royalties) - Set royalties before making immutable
-## Glossary
-| Term | Definition |
+### ImmutableMetadataの追加を取り消せますか？
+いいえ。一度追加されると、ImmutableMetadataプラグインは削除できません。メタデータは永続的にロックされます。これは来歴保証のための設計です。
+### 具体的に何が不変になりますか？
+AssetまたはCollectionの`name`と`uri`フィールドです。他のプラグインデータは影響を受けません—それらのデータを不変にするには個別のプラグインでauthority `None`を使用してください。
+### Collectionにこれを追加すると、既存のAssetsに影響しますか？
+はい。ImmutableMetadataがCollectionにあると、そのCollection内のすべてのAssetsが不変性を継承します。それらのメタデータは変更できなくなります。
+### Asset作成時にこれを追加できますか？
+はい。`create()`中にImmutableMetadataを追加して、メタデータが最初からロックされるようにできます。
+### なぜ不変メタデータが必要なのですか？
+不変メタデータは永続的な来歴を提供します—コレクターはNFTの名前と関連するメタデータURIが決して変更されないことを知り、クリエイターがアートワークや説明を差し替えるラグプルを防ぎます。
+## 関連プラグイン
+- [AddBlocker](/smart-contracts/core/plugins/addBlocker) - 新しいプラグインを防止（ImmutableMetadataを補完）
+- [Attributes](/smart-contracts/core/plugins/attribute) - オンチェーンデータ（ImmutableMetadataではロックされない）
+- [Royalties](/smart-contracts/core/plugins/royalties) - 不変にする前にロイヤリティを設定
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Immutable** | Cannot be changed or modified |
-| **Metadata** | The name and URI associated with an Asset/Collection |
-| **Provenance** | Verifiable record of authenticity and ownership |
-| **URI** | Link to off-chain JSON metadata |
-| **Inheritance** | Assets automatically get Collection-level plugin effects |
+| **不変** | 変更または修正できない |
+| **メタデータ** | Asset/Collectionに関連付けられた名前とURI |
+| **来歴** | 真正性と所有権の検証可能な記録 |
+| **URI** | オフチェーンJSONメタデータへのリンク |
+| **継承** | AssetsがCollectionレベルのプラグイン効果を自動的に取得 |

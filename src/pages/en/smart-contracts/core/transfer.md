@@ -158,7 +158,7 @@ if (asset.updateAuthority.type === 'Collection') {
 ## Notes
 - Transfers are **free** - no rent cost, only the transaction fee (~0.000005 SOL)
 - The new owner receives full control of the Asset
-- Transfer Delegates are revoked after a successful transfer
+- Transfer, Burn, and Freeze Delegates are revoked after a successful transfer
 - Frozen Assets cannot be transferred until unfrozen
 - Always fetch the Asset first to check collection membership
 ## Quick Reference

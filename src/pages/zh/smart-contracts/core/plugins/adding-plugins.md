@@ -1,7 +1,7 @@
 ---
-title: Adding Plugins
-metaTitle: Adding Plugins to Core Assets | Metaplex Core
-description: Learn how to add plugins to Core NFT Assets and Collections. Set plugin authorities and configure plugin data at creation or after.
+title: 添加插件
+metaTitle: 向 Core Asset 添加插件 | Metaplex Core
+description: 了解如何向 Core NFT Asset 和 Collection 添加插件。设置插件权限并在创建时或之后配置插件数据。
 updated: '01-31-2026'
 keywords:
   - add plugin
@@ -17,48 +17,48 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Can I add multiple plugins in one transaction?
-    a: Yes, when creating an Asset. For existing Assets, each addPlugin call is a separate transaction.
-  - q: What happens if I set authority to None?
-    a: The plugin becomes immutable. No one can update or remove it.
-  - q: Can I add Owner Managed plugins as the update authority?
-    a: No. Owner Managed plugins always require the owner's signature to add, regardless of who signs.
-  - q: Why can't I add a Permanent plugin?
-    a: Permanent plugins can only be added during Asset/Collection creation. They cannot be added to existing accounts.
+  - q: 可以在一个交易中添加多个插件吗？
+    a: 可以，在创建 Asset 时。对于现有 Asset，每个 addPlugin 调用是单独的交易。
+  - q: 如果将权限设置为 None 会怎样？
+    a: 插件变为不可变。没有人可以更新或删除它。
+  - q: 可以作为 update authority 添加 Owner Managed 插件吗？
+    a: 不可以。Owner Managed 插件始终需要所有者的签名，无论谁签名。
+  - q: 为什么无法添加 Permanent 插件？
+    a: Permanent 插件只能在 Asset/Collection 创建时添加。无法添加到现有账户。
 ---
-This guide shows how to **add plugins** to Core Assets and Collections. Plugins add functionality like royalties, freezing, attributes, and delegate permissions. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add plugins to existing Assets and Collections
-- Set default vs custom plugin authorities
-- Configure plugin data during addition
-- Understand authority type differences
+本指南展示如何向 Core Asset 和 Collection **添加插件**。插件添加版税、冻结、属性和委托权限等功能。 {% .lead %}
+{% callout title="您将学到" %}
+- 向现有 Asset 和 Collection 添加插件
+- 设置默认和自定义插件权限
+- 在添加时配置插件数据
+- 了解权限类型差异
 {% /callout %}
-## Summary
-Add plugins to Assets using `addPlugin()` or to Collections using `addCollectionPlugin()`. Each plugin has a default authority type, but you can override it.
-- **Owner Managed** plugins default to `Owner` authority
-- **Authority Managed** plugins default to `UpdateAuthority`
-- **Permanent** plugins can only be added at creation time
-- Custom authority can be set with the `authority` parameter
-## Out of Scope
-Permanent plugins (must be added at creation), plugin removal (see [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)), and plugin updates (see [Updating Plugins](/smart-contracts/core/plugins/update-plugins)).
-## Quick Start
-**Jump to:** [Add to Asset](#adding-a-plugin-to-a-core-asset) · [Add to Collection](#adding-a-plugin-to-a-collection) · [Custom Authority](#adding-a-plugin-with-an-assigned-authority)
-1. Choose a plugin from the [Plugins Overview](/smart-contracts/core/plugins)
-2. Call `addPlugin()` with the Asset address and plugin config
-3. Plugin is active immediately
-Plugins can be assigned to both the MPL Core Asset and also the MPL Core Collection. MPL
-Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on each visit the [Plugins Overview](/smart-contracts/core/plugins) area.
-## Adding a Plugin to a Core Asset
-Plugins support the ability to assign an authority over the plugin. If an `initAuthority` argument is supplied this will set the authority to the desired plugin authority type. If left unassigned the plugins default authority type will be assigned (next section).
-**Create Plugin Helper**
-The `createPlugin()` helper gives you a typed method that allows you to assign plugins during the `addPlugin()` process.
-For a full list of plugins and their arguments see the [plugins overview](/smart-contracts/core/plugins) page.
-### Adding a Plugin with the default authority
-If you add a plugin to an Asset or Collection without specifying the authority of the plugin the authority will be set to that plugins default authority type.
-- Owner Managed Plugins will default to the plugin authority type of `Owner`.
-- Authority Managed Plugins will default to the plugin authority type of `UpdateAuthority`.
-- Permanent Plugins will default to the plugin authority type of `UpdateAuthority`
-{% dialect-switcher title="Adding a Plugin with the default authority" %}
+## 摘要
+使用 `addPlugin()` 向 Asset 添加插件，或使用 `addCollectionPlugin()` 向 Collection 添加。每个插件都有默认权限类型，但您可以覆盖它。
+- **Owner Managed** 插件默认为 `Owner` 权限
+- **Authority Managed** 插件默认为 `UpdateAuthority`
+- **Permanent** 插件只能在创建时添加
+- 可以使用 `authority` 参数设置自定义权限
+## 范围外
+Permanent 插件（必须在创建时添加）、插件删除（参见[移除插件](/zh/smart-contracts/core/plugins/removing-plugins)）和插件更新（参见[更新插件](/zh/smart-contracts/core/plugins/update-plugins)）。
+## 快速开始
+**跳转至：** [添加到 Asset](#向-core-asset-添加插件) · [添加到 Collection](#向-collection-添加插件) · [自定义权限](#指定权限添加插件)
+1. 从[插件概述](/zh/smart-contracts/core/plugins)选择插件
+2. 使用 Asset 地址和插件配置调用 `addPlugin()`
+3. 发送交易
+4. 交易确认后插件激活
+插件可以分配给 MPL Core Asset 和 MPL Core Collection。MPL Core Asset 和 MPL Core Collection 共享类似的可用插件列表。要了解每个插件可以在哪里使用，请访问[插件概述](/zh/smart-contracts/core/plugins)区域。
+## 向 Core Asset 添加插件
+插件支持为插件分配权限的功能。如果提供了 `initAuthority` 参数，这将把权限设置为所需的插件权限类型。如果未指定，将分配插件的默认权限类型（下一节）。
+**createPlugin 助手**
+`createPlugin()` 助手提供了一个类型化方法，允许您在 `addPlugin()` 过程中分配插件。
+有关插件及其参数的完整列表，请参阅[插件概述](/zh/smart-contracts/core/plugins)页面。
+### 使用默认权限添加插件
+如果您在不指定插件权限的情况下向 Asset 或 Collection 添加插件，权限将设置为该插件的默认权限类型。
+- Owner Managed 插件默认为 `Owner` 类型的插件权限。
+- Authority Managed 插件默认为 `UpdateAuthority` 类型的插件权限。
+- Permanent 插件默认为 `UpdateAuthority` 类型的插件权限。
+{% dialect-switcher title="使用默认权限添加插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -108,8 +108,8 @@ pub async fn add_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Adding a Plugin with an assigned authority
-There are a few authority helpers to aid you in setting the authorities of plugins.
+### 指定权限添加插件
+有几个权限助手可帮助您设置插件权限。
 **Address**
 ```js
 await addPlugin(umi, {
@@ -123,7 +123,7 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-This sets the plugin's authority to a specific address.
+这将插件的权限设置为特定地址。
 **Owner**
 ```js
 await addPlugin(umi, {
@@ -136,8 +136,8 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-This sets the plugin's authority to the type of `Owner`.
-The current owner of the Asset will have access to this plugin.
+这将插件的权限设置为 `Owner` 类型。
+Asset 的当前所有者将可以访问此插件。
 **UpdateAuthority**
 ```js
 await addPlugin(umi, {
@@ -150,8 +150,8 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-This sets the plugin's authority to the type of `UpdateAuthority`.
-The current update authority of the Asset will have access to this plugin.
+这将插件的权限设置为 `UpdateAuthority` 类型。
+Asset 的当前 update authority 将可以访问此插件。
 **None**
 ```js
 await addPlugin(umi, {
@@ -164,9 +164,9 @@ await addPlugin(umi, {
     },
   }).sendAndConfirm(umi);
 ```
-This sets the plugin's authority to the type of `None`.
-The plugin's data if it has any becomes immutable at this point.
-{% dialect-switcher title="Adding a Plugin with an assigned authority" %}
+这将插件的权限设置为 `None` 类型。
+如果插件有数据，此时将变为不可变。
+{% dialect-switcher title="指定权限添加插件" %}
 {% dialect title="Rust" id="rust" %}
 ```rust
 use mpl_core::{
@@ -227,10 +227,10 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding a Plugin to a Collection
-Adding a Plugin to a Core Collection is similar to that of adding to a Core Asset. You can add plugins during creation and also using the `addCollectionV1` instruction. Collections only have access to `Authority Plugins` and `Permanent Plugins`.
-### Adding a Collection Plugin with the default authority
-{% dialect-switcher title="Adding a Collection Plugin with the default authority" %}
+## 向 Collection 添加插件
+向 Core Collection 添加插件与向 Core Asset 添加类似。您可以在创建期间添加插件，也可以使用 `addCollectionV1` 指令添加。Collection 只能访问 `Authority Plugins` 和 `Permanent Plugins`。
+### 使用默认权限添加 Collection 插件
+{% dialect-switcher title="使用默认权限添加 Collection 插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -290,8 +290,8 @@ pub async fn add_plugin_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Adding a Collection Plugin with an assigned authority
-{% dialect-switcher title="Burning an Assets" %}
+### 指定权限添加 Collection 插件
+{% dialect-switcher title="销毁 Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -353,50 +353,50 @@ pub async fn add_plugin_to_collection_with_authority() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Authority mismatch`
-You don't have permission to add this plugin. Owner Managed plugins require owner signature; Authority Managed plugins require update authority.
+您没有权限添加此插件。Owner Managed 插件需要所有者签名；Authority Managed 插件需要 update authority。
 ### `Plugin already exists`
-The Asset/Collection already has this plugin type. Use `updatePlugin` to modify it instead.
+Asset/Collection 已有此插件类型。请改用 `updatePlugin` 进行修改。
 ### `Cannot add permanent plugin`
-Permanent plugins can only be added at creation time. They cannot be added to existing Assets/Collections.
-## Notes
-- Owner Managed plugins require **owner signature** to add
-- Authority Managed plugins require **update authority signature**
-- Permanent plugins can only be added at **creation time**
-- Adding plugins increases account size and rent
-## Quick Reference
-### Default Authority Types
-| Plugin Type | Default Authority |
+Permanent 插件只能在创建时添加。无法添加到现有 Asset/Collection。
+## 注意事项
+- Owner Managed 插件需要**所有者签名**才能添加
+- Authority Managed 插件需要 **update authority 签名**
+- Permanent 插件只能在**创建时**添加
+- 添加插件会增加账户大小和租金
+## 快速参考
+### 默认权限类型
+| 插件类型 | 默认权限 |
 |-------------|-------------------|
 | Owner Managed | `Owner` |
 | Authority Managed | `UpdateAuthority` |
 | Permanent | `UpdateAuthority` |
-### Authority Options
-| Authority Type | Description |
+### 权限选项
+| 权限类型 | 描述 |
 |----------------|-------------|
-| `Owner` | Current Asset owner |
-| `UpdateAuthority` | Current update authority |
-| `Address` | Specific public key |
-| `None` | Immutable (no one can update) |
+| `Owner` | 当前 Asset 所有者 |
+| `UpdateAuthority` | 当前 update authority |
+| `Address` | 特定公钥 |
+| `None` | 不可变（无人可更新） |
 ## FAQ
-### Can I add multiple plugins in one transaction?
-Yes, when creating an Asset. For existing Assets, each `addPlugin` call is a separate transaction.
-### What happens if I set authority to None?
-The plugin becomes immutable. No one can update or remove it.
-### Can I add Owner Managed plugins as the update authority?
-No. Owner Managed plugins always require the owner's signature to add, regardless of who signs.
-### Why can't I add a Permanent plugin?
-Permanent plugins can only be added during Asset/Collection creation. They cannot be added to existing accounts.
-## Related Operations
-- [Removing Plugins](/smart-contracts/core/plugins/removing-plugins) - Delete plugins from Assets/Collections
-- [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins) - Change plugin authorities
-- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
-- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
-## Glossary
-| Term | Definition |
+### 可以在一个交易中添加多个插件吗？
+可以，在创建 Asset 时。对于现有 Asset，每个 `addPlugin` 调用是单独的指令。可以将多个指令组合到一个交易中。
+### 如果将权限设置为 None 会怎样？
+插件变为不可变。没有人可以更新或删除它。
+### 可以作为 update authority 添加 Owner Managed 插件吗？
+不可以。Owner Managed 插件始终需要所有者的签名，无论谁签名。
+### 为什么无法添加 Permanent 插件？
+Permanent 插件只能在 Asset/Collection 创建时添加。无法添加到现有账户。
+## 相关操作
+- [移除插件](/zh/smart-contracts/core/plugins/removing-plugins) - 从 Asset/Collection 删除插件
+- [委托插件](/zh/smart-contracts/core/plugins/delegating-and-revoking-plugins) - 更改插件权限
+- [更新插件](/zh/smart-contracts/core/plugins/update-plugins) - 修改插件数据
+- [插件概述](/zh/smart-contracts/core/plugins) - 可用插件的完整列表
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Owner Managed** | Plugin requiring owner signature to add |
-| **Authority Managed** | Plugin that update authority can add |
-| **Permanent** | Plugin only addable at creation time |
-| **initAuthority** | Parameter to set custom plugin authority |
+| **Owner Managed** | 需要所有者签名才能添加的插件 |
+| **Authority Managed** | update authority 可以添加的插件 |
+| **Permanent** | 只能在创建时添加的插件 |
+| **initAuthority** | 用于设置自定义插件权限的参数 |

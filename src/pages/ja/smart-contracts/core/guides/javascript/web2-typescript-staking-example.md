@@ -1,7 +1,7 @@
 ---
-title: Create Core Staking Using Javascript
-metaTitle: Create Core Staking Using Javascript | Core Guides
-description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking platform using web2 practices with a backend server.
+title: Javascriptを使用してCoreステーキングを作成する
+metaTitle: Javascriptを使用してCoreステーキングを作成する | Coreガイド
+description: このガイドでは、FreezeDelegateとAttributeプラグインを活用して、バックエンドサーバーを使用したweb2プラクティスでステーキングプラットフォームを作成する方法を示します。
 updated: '01-31-2026'
 keywords:
   - NFT staking
@@ -17,46 +17,46 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 howToSteps:
-  - Set up a TypeScript backend with Umi and your authority keypair
-  - Add Freeze Delegate and Attribute plugins to staking Assets
-  - Create stake endpoint that freezes Asset and writes staking timestamp
-  - Create unstake endpoint that thaws Asset and calculates staking duration
+  - UmiとauthorityキーペアでTypeScriptバックエンドをセットアップ
+  - ステーキングAssetsにFreeze DelegateとAttributeプラグインを追加
+  - Assetをフリーズしステーキングタイムスタンプを書き込むstakeエンドポイントを作成
+  - Assetを解凍しステーキング期間を計算するunstakeエンドポイントを作成
 howToTools:
   - Node.js
-  - Umi framework
+  - Umiフレームワーク
   - mpl-core SDK
-  - Express or similar backend
+  - Expressまたは類似のバックエンド
 ---
-This developer guide demonstrates how to create a staking program for your collection using only TypeScript, leveraging the attribute plugin and freeze delegate. **This approach eliminates the need for a smart contract** to track staking time and manage staking/unstaking, making it more accessible for Web2 developer.
-## Starting off: Understanding the Logic behind the program
-This program operates with a standard TypeScript backend and uses the asset keypair authority in the secret to sign attribute changes.
-**To implement this example, you will need the following components:**
-- **An Asset**
-- **A Collection** (optional, but relevant for this example)
-- **The FreezeDelegate Plugin**
-- **The Attribute Plugin**
-### The Freeze Delegate Plugin
-The **Freeze Delegate Plugin** is an **owner managed plugin**, that means that it requires the owner's signature to be applied to the asset.
-This plugin allows the **delegate to freeze and thaw the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be thawed before revocation).
-**Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
-_Learn more about it [here](/smart-contracts/core/plugins/freeze-delegate)_
-### The Attribute Plugin
-The **Attribute Plugin** is an **authority managed plugin**, that means that it requires the authority's signature to be applied to the asset. For an asset included in a collection, the collection authority serves as the authority since the asset's authority field is occupied by the collection address.
-This plugin allows for **data storage directly on the assets, functioning as onchain attributes or traits**. These traits can be accessed directly by onchain programs since they aren’t stored off-chain as it was for the mpl-program.
-**This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
-_Learn more about it [here](/smart-contracts/core/plugins/attribute)_
-### The program Logic
-For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement. 
-_Both the Stake and Unstake functions utilize, differently, the plugins introduced previously_.
-Before diving into the instructions, let’s spend some time talking about the attributes used, the `staked` and `staked_time` keys. The `staked` key indicates if the asset is staked and when it was staked if it was (unstaked = 0, staked = time of staked). The `staked_time` key tracks the total staking duration of the asset, updated only after an asset get’s unstaked.
-**Instructions**:
-- **Stake**: This instruction applies the Freeze Delegate Plugin to freeze the asset by setting the flag to true. Additionally, it updates the`staked` key in the Attribute Plugin from 0 to the current time.
-- **Unstake**: This instruction changes the flag of the Freeze Delegate Plugin and revokes it to prevent malicious entities from controlling the asset and demanding ransom to thaw it. It also updates the `staked` key to 0 and sets the `staked_time` to the current time minus the staked timestamp.
-## Building the Program: A Step-by-Step Guide
-Now that we understand the logic behind our program, **it’s time to dive into the code and bring everything together**!
-### Dependencies and Imports
-Before writing our program, let's look at what package we need and what function from them to make sure our program works! 
-Let's look at the different packages used for this example:
+この開発者ガイドでは、attributeプラグインとfreeze delegateを活用して、TypeScriptのみを使用してコレクションのステーキングプログラムを作成する方法を示します。**このアプローチにより、ステーキング時間の追跡やステーキング/アンステーキングの管理にスマートコントラクトが不要**になり、Web2開発者にとってよりアクセスしやすくなります。
+## はじめに：プログラムのロジックを理解する
+このプログラムは標準的なTypeScriptバックエンドで動作し、シークレット内のアセットキーペアauthorityを使用してattribute変更に署名します。
+**この例を実装するには、以下のコンポーネントが必要です：**
+- **Asset**
+- **Collection**（オプション、この例では関連性があります）
+- **FreezeDelegateプラグイン**
+- **Attributeプラグイン**
+### Freeze Delegateプラグイン
+**Freeze Delegateプラグイン**は**オーナー管理プラグイン**であり、アセットに適用するにはオーナーの署名が必要です。
+このプラグインにより、**delegateがアセットをフリーズおよび解凍し、転送を防止**できます。アセットオーナーまたはプラグインauthorityは、アセットがフリーズされている場合を除き、いつでもこのプラグインを取り消すことができます（フリーズされている場合は、取り消す前に解凍する必要があります）。
+**このプラグインの使用は軽量**で、アセットのフリーズ/解凍はプラグインデータ内のブール値を変更するだけです（唯一の引数はFrozen: boolです）。
+_詳細は[こちら](/smart-contracts/core/plugins/freeze-delegate)をご覧ください_
+### Attributeプラグイン
+**Attributeプラグイン**は**authority管理プラグイン**であり、アセットに適用するにはauthorityの署名が必要です。コレクションに含まれるアセットの場合、アセットのauthorityフィールドはコレクションアドレスで占有されているため、コレクションauthorityがauthorityとして機能します。
+このプラグインにより、**データをアセットに直接保存でき、オンチェーンのattributesやtraitsとして機能**します。これらのtraitsは、mpl-programのようにオフチェーンに保存されないため、オンチェーンプログラムから直接アクセスできます。
+**このプラグインはAttributeListフィールドを受け入れ**、keyとvalueのペアの配列で構成され、両方とも文字列です。
+_詳細は[こちら](/smart-contracts/core/plugins/attribute)をご覧ください_
+### プログラムロジック
+簡単にするため、この例にはステーキングプログラムが意図したとおりに動作するために不可欠な**stake**と**unstake**関数の2つの命令のみが含まれています。蓄積されたポイントを利用するための**spendPoint**命令などの追加命令を追加することもできますが、これは読者の実装に委ねます。
+_StakeとUnstake関数の両方が、前述のプラグインを異なる方法で利用します_。
+命令に入る前に、使用されるattributesである`staked`と`staked_time`キーについて説明しましょう。`staked`キーはアセットがステーキングされているかどうか、ステーキングされている場合はいつステーキングされたかを示します（unstaked = 0、staked = ステーキング時刻）。`staked_time`キーはアセットの総ステーキング期間を追跡し、アセットがアンステーキングされた後にのみ更新されます。
+**命令**：
+- **Stake**：この命令はFreeze Delegateプラグインを適用してフラグをtrueに設定してアセットをフリーズします。さらに、Attributeプラグインの`staked`キーを0から現在時刻に更新します。
+- **Unstake**：この命令はFreeze Delegateプラグインのフラグを変更し、悪意のあるエンティティがアセットを制御して解凍のために身代金を要求することを防ぐために取り消します。また、`staked`キーを0に更新し、`staked_time`を現在時刻からステーキングタイムスタンプを引いた値に設定します。
+## プログラムの構築：ステップバイステップガイド
+プログラムのロジックを理解したので、**コードに飛び込んですべてをまとめましょう**！
+### 依存関係とインポート
+プログラムを書く前に、プログラムが動作するために必要なパッケージとそれらの関数を見てみましょう！
+この例で使用する異なるパッケージを見てみましょう：
 ```json
 "dependencies": {
     "@metaplex-foundation/mpl-core": "1.1.0-alpha.0",
@@ -66,76 +66,76 @@ Let's look at the different packages used for this example:
     "typescript": "^5.4.5"
 }
 ```
-And the different functions from those packages are as follow:
+それらのパッケージからの異なる関数は以下の通りです：
 ```typescript
 import { createSignerFromKeypair, signerIdentity, publicKey, transactionBuilder, Transaction } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { addPlugin, updatePlugin, fetchAsset, removePlugin } from '@metaplex-foundation/mpl-core'
 import { base58 } from '@metaplex-foundation/umi/serializers';
 ```
-### Umi and Core SDK Overview
-In this guide, we’ll use both **Umi** and the **Core SDK** to create all necessary instructions. 
-**Umi is a modular framework for building and using JavaScript clients for Solana programs**. It provides a zero-dependency library that defines a set of core interfaces, enabling libraries to operate independently of specific implementations. 
-_For more information, you can find an overview [here](/dev-tools/umi/getting-started)_
-**The basic Umi setup for this example will look like this**:
+### UmiとCore SDKの概要
+このガイドでは、**Umi**と**Core SDK**の両方を使用して必要なすべての命令を作成します。
+**UmiはSolanaプログラム用のJavaScriptクライアントを構築および使用するためのモジュラーフレームワーク**です。コアインターフェースのセットを定義するゼロ依存ライブラリを提供し、ライブラリが特定の実装から独立して動作できるようにします。
+_詳細については、[こちら](/dev-tools/umi/getting-started)で概要を確認できます_
+**この例の基本的なUmiセットアップは次のようになります**：
 ```typescript
 const umi = createUmi("https://api.devnet.solana.com", "finalized")
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const myKeypairSigner = createSignerFromKeypair(umi, keypair);
 umi.use(signerIdentity(myKeypairSigner));
 ```
-This setup involves:
-- **Establishing a connection with Devnet** for our Umi provider
-- **Setting up a keypair** to be used as both the authority and payer (umi.use(signerIdentity(...)))
-**Note**: If you prefer to use a new keypair for this example, you can always use the generateSigner() function to create one.
-### Creating an Asset and Adding it to a Collection
-Before diving into the logic for staking and unstaking, we should learn **how to create an asset from scratch and add it to a collection**.
-**Creating a Collection**:
+このセットアップには以下が含まれます：
+- **Umiプロバイダー用のDevnetへの接続確立**
+- **authorityとpayerの両方として使用するキーペアのセットアップ**（umi.use(signerIdentity(...))）
+**注意**：この例で新しいキーペアを使用したい場合は、generateSigner()関数を使用していつでも作成できます。
+### AssetとCollectionへの追加の作成
+ステーキングとアンステーキングのロジックに入る前に、**アセットをゼロから作成してコレクションに追加する方法**を学ぶ必要があります。
+**Collectionの作成**：
 ```typescript
 (async () => {
-   // Generate the Collection KeyPair
+   // CollectionキーペアをJ生成
    const collection = generateSigner(umi)
    console.log("\nCollection Address: ", collection.publicKey.toString())
-   // Generate the collection
+   // コレクションを生成
    const tx = await createCollection(umi, {
        collection: collection,
        name: 'My Collection',
        uri: 'https://example.com/my-collection.json',
    }).sendAndConfirm(umi)
-   // Deserialize the Signature from the Transaction
+   // トランザクションから署名をデシリアライズ
    const signature = base58.deserialize(tx.signature)[0];
    console.log(`\nCollection Created: https://solana.fm/tx/${signature}?cluster=devnet-alpha`);
 })();
 ```
-**Creating an Asset and Adding it to the Collection:**
+**AssetをCollectionに作成および追加：**
 ```typescript
 (async () => {
-   // Generate the Asset KeyPair
+   // AssetキーペアをJ生成
    const asset = generateSigner(umi)
    console.log("\nAsset Address: ", asset.publicKey.toString())
-   // Pass and Fetch the Collection
+   // Collectionを渡してフェッチ
    const collection = publicKey("<collection_pubkey>")
    const fetchedCollection = await fetchCollection(umi, collection);
-   // Generate the Asset
+   // Assetを生成
    const tx = await create(umi, {
        name: 'My NFT',
        uri: 'https://example.com/my-nft.json',
        asset,
        collection: fetchedCollection,
    }).sendAndConfirm(umi)
-   // Deserialize the Signature from the Transaction
+   // トランザクションから署名をデシリアライズ
    const signature = base58.deserialize(tx.signature)[0];
    console.log(`Asset added to the Collection: https://solana.fm/tx/${signature}?cluster=devnet-alpha`);
 })();
 ```
-### The Staking Instruction
-Here's the full **Staking instruction** 
-We begin by using the `fetchAsset(...)` instruction from the mpl-core SDK to retrieve information about an asset, including whether it has the attribute plugin and, if so, the attributes it contains.
+### ステーキング命令
+完全な**ステーキング命令**は以下の通りです
+mpl-core SDKの`fetchAsset(...)`命令を使用して、アセットに関する情報（attributeプラグインがあるかどうか、ある場合はどのattributesが含まれているかなど）を取得することから始めます。
 ```typescript
 const fetchedAsset = await fetchAsset(umi, asset);
 ```
-1. **Check for the Attribute Plugin**
-If the asset does not have the attribute plugin, add it and populate it with the `staked` and `stakedTime` keys.
+1. **Attributeプラグインのチェック**
+アセットにattributeプラグインがない場合は、追加して`staked`と`stakedTime`キーを設定します。
 ```typescript
 if (!fetchedAsset.attributes) {
     tx = await transactionBuilder().add(addPlugin(umi, {
@@ -153,8 +153,8 @@ if (!fetchedAsset.attributes) {
     )
 } else {
 ```
-2. **Check for Staking Attributes**:
-If the asset has the staking attribute, ensure it contains the staking attributes necessary for the staking instruction. 
+2. **ステーキングAttributesのチェック**：
+アセットにステーキングattributeがある場合、ステーキング命令に必要なステーキングattributesが含まれていることを確認します。
 ```typescript
 } else {
     const assetAttribute = fetchedAsset.attributes.attributeList;
@@ -162,7 +162,7 @@ If the asset has the staking attribute, ensure it contains the staking attribute
         (attribute) => attribute.key === "staked" || attribute.key === "stakedTime"
     );
 ```
-If it does, check if the asset is already staked and update the `staked` key with the current timeStamp as string:
+含まれている場合、アセットがすでにステーキングされているかどうかをチェックし、`staked`キーを現在のタイムスタンプの文字列として更新します：
 ```typescript
 if (isInitialized) {
     const stakedAttribute = assetAttribute.find(
@@ -179,15 +179,15 @@ if (isInitialized) {
     }
 } else {
 ```
-If it doesn't, add them to the existing attribute list.
+含まれていない場合は、既存のattributeリストに追加します。
 ```typescript
 } else {
     assetAttribute.push({ key: "staked", value: currentTime });
     assetAttribute.push({ key: "stakedTime", value: "0" });
 }
 ```
-3. **Update the Attribute Plugin**:
-Update the attribute plugin with the new or modified attributes.
+3. **Attributeプラグインの更新**：
+新しいまたは変更されたattributesでattributeプラグインを更新します。
 ```typescript
 tx = await transactionBuilder().add(updatePlugin(umi, {
     asset,
@@ -200,8 +200,8 @@ tx = await transactionBuilder().add(updatePlugin(umi, {
     [...]
 )
 ```
-4. **Freeze the Asset**
-Whether the asset already had the attribute plugin or not, freeze the asset in place so it can't be traded
+4. **Assetのフリーズ**
+アセットにすでにattributeプラグインがあったかどうかに関係なく、アセットをフリーズして取引できないようにします
 ```typescript
 tx = await transactionBuilder().add(
     [...]
@@ -215,18 +215,18 @@ tx = await transactionBuilder().add(
     }
 })).buildAndSign(umi);
 ```
-**Here's the full instruction**:
+**完全な命令は以下の通りです**：
 ```typescript
 (async () => {
-    // Pass the Asset and Collection
+    // AssetとCollectionを渡す
     const asset = publicKey("6AWm5uyhmHQXygeJV7iVotjvs2gVZbDXaGUQ8YGVtnJo");
     const collection = publicKey("CYKbtF2Y56QwQLYHUmpAPeiMJTz1DbBZGvXGgbB6VdNQ")
-    // Fetch the Asset Attributes
+    // Asset Attributesをフェッチ
     const fetchedAsset = await fetchAsset(umi, asset);
     console.log("\nThis is the current state of your Asset Attribute Plugin: ", fetchedAsset.attributes);
     const currentTime = new Date().getTime().toString();
     let tx: Transaction;
-    // Check if the Asset has an Attribute Plugin attached to it, if not, add it
+    // アセットにAttributeプラグインがアタッチされているかチェック、なければ追加
     if (!fetchedAsset.attributes) {
         tx = await transactionBuilder().add(addPlugin(umi, {
             asset,
@@ -248,13 +248,13 @@ tx = await transactionBuilder().add(
             }
         })).buildAndSign(umi);
     } else {
-        // If it is, fetch the Asset Attribute Plugin attributeList
+        // ある場合、Asset Attribute PluginのattributeListをフェッチ
         const assetAttribute = fetchedAsset.attributes.attributeList;
-        // Check if the Asset is already been staked
+        // アセットがすでにステーキングされているかチェック
         const isInitialized = assetAttribute.some(
             (attribute) => attribute.key === "staked" || attribute.key === "stakedTime"
         );
-        // If it is, check if it is already staked and if not update the staked attribute
+        // されている場合、すでにステーキングされているかチェックし、されていなければstaked attributeを更新
         if (isInitialized) {
             const stakedAttribute = assetAttribute.find(
                 (attr) => attr.key === "staked"
@@ -269,11 +269,11 @@ tx = await transactionBuilder().add(
                 });
             }
         } else {
-            // If it is not, add the staked & stakedTime attribute
+            // されていない場合、staked & stakedTime attributeを追加
             assetAttribute.push({ key: "staked", value: currentTime });
             assetAttribute.push({ key: "stakedTime", value: "0" });
         }
-        // Update the Asset Attribute Plugin and Add the FreezeDelegate Plugin
+        // Asset Attribute Pluginを更新し、FreezeDelegate Pluginを追加
         tx = await transactionBuilder().add(updatePlugin(umi, {
             asset,
             collection,
@@ -291,22 +291,22 @@ tx = await transactionBuilder().add(
             }
         })).buildAndSign(umi);
     }
-    // Deserialize the Signature from the Transaction
+    // トランザクションから署名をデシリアライズ
     console.log(`Asset Staked: https://solana.fm/tx/${base58.deserialize(await umi.rpc.sendTransaction(tx))[0]}?cluster=devnet-alpha`);
 })();
 ```
-### The Unstaking Instruction
-The unstaking instruction will be even easier simpler because, since the unstaking instruction can be called only after the staking instruction, many of the checks are inherently covered by the staking instruction itself. 
-We start by calling the `fetchAsset(...)` instruction to retrieve all information about the asset.
+### アンステーキング命令
+アンステーキング命令はさらに簡単です。アンステーキング命令はステーキング命令の後にのみ呼び出すことができるため、多くのチェックはステーキング命令自体で本質的にカバーされています。
+`fetchAsset(...)`命令を呼び出してアセットに関するすべての情報を取得することから始めます。
 ```typescript
 const fetchedAsset = await fetchAsset(umi, asset);
 ```
-1. **Run all the checks for the attribute plugin**
-To verify if an asset has already gone through the staking instruction, **the instruction check the attribute plugin for the following**:
-- **Does the attribute plugin exist on the asset?**
-- **Does it have the staked key?**
-- **Does it have the stakedTime key?**
-If any of these checks are missing, the asset has never gone through the staking instruction.
+1. **Attributeプラグインのすべてのチェックを実行**
+アセットがすでにステーキング命令を通過したかどうかを確認するために、**命令は以下のattributeプラグインをチェックします**：
+- **アセットにattributeプラグインは存在するか？**
+- **stakedキーはあるか？**
+- **stakedTimeキーはあるか？**
+これらのチェックのいずれかが欠けている場合、アセットはステーキング命令を通過していません。
 ```typescript
 if (!fetchedAsset.attributes) {
     throw new Error(
@@ -327,9 +327,9 @@ if (!stakedAttribute) {
     );
 }
 ```
-Once we confirm that the asset has the staking attributes, **we check if the asset is currently staked**. If it is staked, we update the staking attributes as follows:
-- Set `Staked` field to zero
-- Update `stakedTime` to `stakedTime` + (currentTimestamp - stakedTimestamp)
+アセットにステーキングattributesがあることを確認したら、**アセットが現在ステーキングされているかどうかをチェック**します。ステーキングされている場合、ステーキングattributesを次のように更新します：
+- `Staked`フィールドをゼロに設定
+- `stakedTime`を`stakedTime` + (現在のタイムスタンプ - ステーキングタイムスタンプ)に更新
 ```typescript
 if (stakedAttribute.value === "0") {
     throw new Error("Asset is not staked");
@@ -347,8 +347,8 @@ if (stakedAttribute.value === "0") {
     });
 }
 ```
-2. **Update the Attribute Plugin**
-Update the attribute plugin with the new or modified attributes.
+2. **Attributeプラグインの更新**
+新しいまたは変更されたattributesでattributeプラグインを更新します。
 ```typescript
 tx = await transactionBuilder().add(updatePlugin(umi, {
     asset,
@@ -363,8 +363,8 @@ tx = await transactionBuilder().add(updatePlugin(umi, {
     [...]
 ).buildAndSign(umi);
 ```
-3. **Thaw and remove the FreezeDelegate Plugin**
-At the end of the instruction, thaw the asset and remove the FreezeDelegate plugin so the asset is `free` and not controlled by the `update_authority`
+3. **FreezeDelegateプラグインの解凍と削除**
+命令の最後に、アセットを解凍し、FreezeDelegateプラグインを削除して、アセットが「自由」になり、`update_authority`によって制御されないようにします
 ```typescript
 tx = await transactionBuilder().add(
     [...]
@@ -383,46 +383,46 @@ tx = await transactionBuilder().add(
     },
 })).buildAndSign(umi);
 ```
-**Here's the full instruction**:
+**完全な命令は以下の通りです**：
 ```typescript
 (async () => {
-    // Pass the Asset and Collection
+    // AssetとCollectionを渡す
     const asset = publicKey("6AWm5uyhmHQXygeJV7iVotjvs2gVZbDXaGUQ8YGVtnJo");
     const collection = publicKey("CYKbtF2Y56QwQLYHUmpAPeiMJTz1DbBZGvXGgbB6VdNQ")
     let tx: Transaction;
-    // Fetch the Asset Attributes
+    // Asset Attributesをフェッチ
     const fetchedAsset = await fetchAsset(umi, asset);
     console.log("This is the current state of your Asset Attribute Plugin", fetchedAsset.attributes);
-    // If there is no attribute plugin attached to the asset, throw an error
+    // アセットにattributeプラグインがアタッチされていない場合はエラーをスロー
     if (!fetchedAsset.attributes) {
       throw new Error(
         "Asset has no Attribute Plugin attached to it. Please go through the stake instruction before."
       );
     }
-    
+
     const assetAttribute = fetchedAsset.attributes.attributeList;
-    // Check if the asset has a stakedTime attribute attached to it, if not throw an error
+    // アセットにstakedTime attributeがアタッチされているかチェック、なければエラーをスロー
     const stakedTimeAttribute = assetAttribute.find((attr) => attr.key === "stakedTime");
     if (!stakedTimeAttribute) {
       throw new Error(
         "Asset has no stakedTime attribute attached to it. Please go through the stake instruction before."
       );
     }
-    // Check if the asset has a staked attribute attached to it, if not throw an error
+    // アセットにstaked attributeがアタッチされているかチェック、なければエラーをスロー
     const stakedAttribute = assetAttribute.find((attr) => attr.key === "staked");
     if (!stakedAttribute) {
       throw new Error(
         "Asset has no staked attribute attached to it. Please go through the stake instruction before."
       );
     }
-    // Check if the asset is already staked (!0), if not throw an error.
+    // アセットがすでにステーキングされているか(!0)をチェック、されていなければエラーをスロー
     if (stakedAttribute.value === "0") {
       throw new Error("Asset is not staked");
     } else {
       const stakedTimeValue = parseInt(stakedTimeAttribute.value);
       const stakedValue = parseInt(stakedAttribute.value);
       const elapsedTime = new Date().getTime() - stakedValue;
-      // Update the stakedTime attribute to the new value and the staked attribute to 0
+      // stakedTime attributeを新しい値に、staked attributeを0に更新
       assetAttribute.forEach((attr) => {
         if (attr.key === "stakedTime") {
           attr.value = (stakedTimeValue + elapsedTime).toString();
@@ -432,9 +432,9 @@ tx = await transactionBuilder().add(
         }
       });
     }
-    // Update the Asset Attribute Plugin with the new attributeList
-    // then Update the Asset FreezeDelegate Plugin to thaw the asset
-    // and then Remove the FreezeDelegate Plugin from the asset
+    // 新しいattributeListでAsset Attribute Pluginを更新
+    // 次にアセットを解凍するためにAsset FreezeDelegate Pluginを更新
+    // その後アセットからFreezeDelegateプラグインを削除
     tx = await transactionBuilder().add(updatePlugin(umi, {
       asset,
       collection,
@@ -456,9 +456,9 @@ tx = await transactionBuilder().add(
         type: "FreezeDelegate",
       },
     })).buildAndSign(umi);
-     // Deserialize the Signature from the Transaction
+     // トランザクションから署名をデシリアライズ
      console.log(`Asset Unstaked: https://solana.fm/tx/${base58.deserialize(await umi.rpc.sendTransaction(tx))[0]}?cluster=devnet-alpha`);
 })();
 ```
-## Conclusion
-Congratulations! You are now equipped to create a staking solution for your NFT collection! If you want to learn more about Core and Metaplex, check out the [developer hub](/smart-contracts/core/getting-started).
+## 結論
+おめでとうございます！これでNFTコレクションのステーキングソリューションを作成する準備が整いました！CoreとMetaplexについてさらに学びたい場合は、[開発者ハブ](/smart-contracts/core/getting-started)をご覧ください。

@@ -1,7 +1,7 @@
 ---
 title: Royalties Plugin
 metaTitle: Royalties Plugin | Metaplex Core
-description: The Royalties plugin enforces creator royalties on Core Assets and Collections. Set basis points, creator splits, and allowlist/denylist rules for marketplace compliance.
+description: Royalties Plugin 在 Core Assets 和 Collections 上强制执行创作者版税。设置基点、创作者分成以及市场合规的白名单/黑名单规则。
 updated: '01-31-2026'
 keywords:
   - NFT royalties
@@ -19,64 +19,64 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: Are Core royalties enforced?
-    a: Yes, when using an allowlist ruleset. Only programs on the allowlist can transfer the asset, ensuring royalties are paid.
-  - q: What's the difference between Core royalties and Token Metadata royalties?
-    a: Core royalties are built into the asset with optional enforcement via rulesets. Token Metadata royalties are advisory and rely on marketplace cooperation.
-  - q: Can I have different royalties per asset in a collection?
-    a: Yes. Add the Royalties plugin to individual assets to override the collection-level setting.
-  - q: How do marketplaces read royalties?
-    a: Marketplaces query the asset's plugins via DAS or on-chain data. The Royalties plugin data includes basis points, creators, and ruleset.
-  - q: What happens if I don't set a ruleset?
-    a: Use ruleSet('None'). Any program can transfer the asset and royalties are advisory only.
-  - q: Can I change royalties after minting?
-    a: Yes. Use updatePlugin for assets or updateCollectionPlugin for collections if you have the authority.
+  - q: Core 版税是强制执行的吗？
+    a: 是的，当使用白名单规则集时。只有白名单中的程序才能转移资产，确保版税得到支付。
+  - q: Core 版税和 Token Metadata 版税有什么区别？
+    a: Core 版税需要在 Asset 或 Collection 级别使用 Royalties Plugin，并可选择通过规则集强制执行。标准 Token Metadata NFT 版税仅为建议性质，依赖市场的配合。pNFTs（可编程 NFT）也支持类似于 Core 的基于规则集的强制执行。
+  - q: 我可以为 Collection 中的每个 Asset 设置不同的版税吗？
+    a: 可以。将 Royalties Plugin 添加到单个 Asset 即可覆盖 Collection 级别的设置。
+  - q: 市场如何读取版税信息？
+    a: 市场通过 DAS 或链上数据查询 Asset 的 Plugin。Royalties Plugin 数据包括基点、创作者和规则集。
+  - q: 如果我不设置规则集会怎样？
+    a: 使用 ruleSet('None')。任何程序都可以转移资产，版税仅为建议性质。
+  - q: 铸造后可以更改版税吗？
+    a: 可以。如果您有权限，可以使用 updatePlugin（用于 Assets）或 updateCollectionPlugin（用于 Collections）。
 ---
-The **Royalties Plugin** enforces creator royalties on secondary sales of Core Assets. It specifies the royalty percentage, creator split, and which programs (marketplaces) are allowed or denied from transferring the asset. {% .lead %}
-{% callout title="What You'll Learn" %}
-How to:
-- Add royalties to Assets and Collections
-- Configure basis points and creator splits
-- Set up allowlists and denylists for marketplace control
-- Update royalties after creation
+**Royalties Plugin** 在 Core Assets 的二次销售中强制执行创作者版税。它指定版税百分比、创作者分成，以及哪些程序（市场）被允许或禁止转移资产。 {% .lead %}
+{% callout title="您将学到" %}
+如何：
+- 为 Assets 和 Collections 添加版税
+- 配置基点和创作者分成
+- 设置白名单和黑名单以控制市场访问
+- 创建后更新版税
 {% /callout %}
-## Summary
-The **Royalties Plugin** is an authority-managed plugin that enforces royalties on Core Assets. Set a percentage (basis points), distribute to multiple creators, and optionally restrict which programs can transfer assets.
-- Set royalties as basis points (500 = 5%)
-- Split royalties between up to 5 creators
-- Use allowlists/denylists to control marketplace access
-- Apply at Asset level (individual) or Collection level (all assets)
-## Out of Scope
-Token Metadata royalties (different system), royalty collection/distribution (handled by marketplaces), and legal enforcement of royalties.
-## Quick Start
-**Jump to:** [Add to Asset](#adding-the-royalties-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-royalties-plugin-to-a-collection-code-example) · [RuleSets](#rulesets) · [Update](#updating-the-royalties-plugin-on-an-asset)
-1. Import `addPlugin` from `@metaplex-foundation/mpl-core`
-2. Call with `type: 'Royalties'`, `basisPoints`, `creators`, and `ruleSet`
-3. Marketplaces read the plugin and enforce the royalty on sales
-## Works With
-| Account Type | Supported |
+## 概述
+**Royalties Plugin** 是一个由 Authority 管理的 Plugin，用于在 Core Assets 上强制执行版税。设置百分比（基点），分配给多个创作者，并可选择限制哪些程序可以转移资产。
+- 将版税设置为基点（500 = 5%）
+- 在最多 5 个创作者之间分配版税
+- 使用白名单/黑名单控制市场访问
+- 应用于 Asset 级别（单个）或 Collection 级别（所有资产）
+## 不在范围内
+Token Metadata 版税（不同的系统）、版税收取/分配（由市场处理）以及版税的法律强制执行。
+## 快速开始
+**跳转到：** [添加到 Asset](#adding-the-royalties-plugin-to-an-asset-code-example) · [添加到 Collection](#adding-the-royalties-plugin-to-a-collection-code-example) · [RuleSets](#rulesets) · [更新](#updating-the-royalties-plugin-on-an-asset)
+1. 从 `@metaplex-foundation/mpl-core` 导入 `addPlugin`
+2. 使用 `type: 'Royalties'`、`basisPoints`、`creators` 和 `ruleSet` 调用
+3. 市场读取 Plugin 并在销售时强制执行版税
+## 适用于
+| 账户类型 | 支持 |
 |--------------|-----------|
-| MPL Core Asset | Yes |
-| MPL Core Collection | Yes |
-When applied to both an Asset and its Collection, the **Asset-level plugin takes precedence**.
-## Arguments
-| Argument | Type | Description |
+| MPL Core Asset | 是 |
+| MPL Core Collection | 是 |
+当同时应用于 Asset 和其 Collection 时，**Asset 级别的 Plugin 优先**。
+## 参数
+| 参数 | 类型 | 描述 |
 |----------|------|-------------|
-| basisPoints | number | Royalty percentage (500 = 5%, 1000 = 10%) |
-| creators | Creator[] | Array of creator addresses and their percentage share |
-| ruleSet | RuleSet | Program allowlist, denylist, or none |
-## Basis Points
-The royalty percentage in hundredths of a percent.
-| Basis Points | Percentage |
+| basisPoints | number | 版税百分比（500 = 5%，1000 = 10%） |
+| creators | Creator[] | 创作者地址及其百分比份额的数组 |
+| ruleSet | RuleSet | 程序白名单、黑名单或无 |
+## 基点
+版税百分比以百分之一的百分比表示。
+| 基点 | 百分比 |
 |--------------|------------|
 | 100 | 1% |
 | 250 | 2.5% |
 | 500 | 5% |
 | 1000 | 10% |
-Example: If `basisPoints` is 500 and an Asset sells for 1 SOL, creators receive 0.05 SOL total.
+示例：如果 `basisPoints` 为 500，Asset 以 1 SOL 出售，创作者总共获得 0.05 SOL。
 ## Creators
-The creators array defines who receives royalties and how they're split. Up to 5 creators are supported. Percentages must add up to 100.
-{% dialect-switcher title="Creators Array" %}
+creators 数组定义谁接收版税以及如何分配。最多支持 5 个创作者。百分比必须加起来等于 100。
+{% dialect-switcher title="Creators 数组" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="creators-array.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
@@ -105,9 +105,9 @@ let creators = vec![
 {% /dialect %}
 {% /dialect-switcher %}
 ## RuleSets
-RuleSets control which programs can transfer Assets with royalties. Use them to enforce royalties by restricting transfers to compliant marketplaces.
-### None (No Restrictions)
-Any program can transfer the asset. Royalties are advisory only.
+RuleSets 控制哪些程序可以转移带有版税的 Assets。使用它们通过限制转移到合规市场来强制执行版税。
+### None（无限制）
+任何程序都可以转移资产。版税仅为建议性质。
 {% dialect-switcher title="RuleSet None" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="ruleset-none.ts" %}
@@ -122,8 +122,8 @@ let rule_set = RuleSet::None;
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Allowlist (Recommended for Enforcement)
-Only programs on the list can transfer. Use this to restrict to royalty-compliant marketplaces.
+### Allowlist（推荐用于强制执行）
+只有列表中的程序才能转移。使用此选项限制为符合版税的市场。
 {% dialect-switcher title="RuleSet Allowlist" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="ruleset-allowlist.ts" %}
@@ -150,7 +150,7 @@ let rule_set = RuleSet::ProgramAllowList(vec![
 {% /dialect %}
 {% /dialect-switcher %}
 ### Denylist
-All programs can transfer except those on the list. Use to block known non-compliant marketplaces.
+除列表中的程序外，所有程序都可以转移。用于阻止已知的不合规市场。
 {% dialect-switcher title="RuleSet DenyList" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="ruleset-denylist.ts" %}
@@ -174,8 +174,8 @@ let rule_set = RuleSet::ProgramDenyList(vec![
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the Royalties Plugin to an Asset (Code Example)
-{% dialect-switcher title="Add Royalties Plugin to Asset" %}
+## 将 Royalties Plugin 添加到 Asset（代码示例）
+{% dialect-switcher title="将 Royalties Plugin 添加到 Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="add-royalties-to-asset.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
@@ -236,9 +236,9 @@ pub async fn add_royalties_to_asset() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the Royalties Plugin to a Collection (Code Example)
-Collection-level royalties apply to all Assets in the Collection unless overridden at the Asset level.
-{% dialect-switcher title="Add Royalties Plugin to Collection" %}
+## 将 Royalties Plugin 添加到 Collection（代码示例）
+Collection 级别的版税适用于 Collection 中的所有 Assets，除非在 Asset 级别被覆盖。
+{% dialect-switcher title="将 Royalties Plugin 添加到 Collection" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="add-royalties-to-collection.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
@@ -300,9 +300,9 @@ pub async fn add_royalties_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating the Royalties Plugin on an Asset
-Modify royalty percentage, creators, or ruleset on an existing Asset.
-{% dialect-switcher title="Update Royalties Plugin on Asset" %}
+## 更新 Asset 上的 Royalties Plugin
+修改现有 Asset 上的版税百分比、创作者或规则集。
+{% dialect-switcher title="更新 Asset 上的 Royalties Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="update-royalties-asset.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
@@ -342,8 +342,8 @@ let update_ix = UpdatePluginV1Builder::new()
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating the Royalties Plugin on a Collection
-{% dialect-switcher title="Update Royalties Plugin on Collection" %}
+## 更新 Collection 上的 Royalties Plugin
+{% dialect-switcher title="更新 Collection 上的 Royalties Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="update-royalties-collection.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
@@ -363,20 +363,20 @@ await updateCollectionPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Creator percentages must sum to 100`
-The creator percentage values don't add up to 100. Adjust the splits.
+创作者百分比值加起来不等于 100。调整分配比例。
 ### `Authority mismatch`
-Only the plugin authority can update royalties. Ensure you're signing with the correct keypair.
+只有 Plugin Authority 可以更新版税。确保您使用正确的密钥对签名。
 ### `Program not in allowlist`
-A transfer was blocked because the calling program isn't in the allowlist. Add the program or switch to a denylist/none ruleset.
-## Notes
-- Asset-level royalties override Collection-level royalties
-- Creator percentages must sum to exactly 100
-- Use allowlists for strict enforcement, denylists for flexibility
-- Royalty collection/distribution is handled by marketplaces, not the Core program
-## Quick Reference
-### Minimum Code
+转移被阻止，因为调用程序不在白名单中。添加该程序或切换到黑名单/无规则集。
+## 注意事项
+- Asset 级别的版税覆盖 Collection 级别的版税
+- 创作者百分比必须正好加起来等于 100
+- 使用白名单进行严格执行，黑名单提供灵活性
+- 版税收取/分配由市场处理，而不是 Core 程序
+## 快速参考
+### 最小代码
 ```ts {% title="minimal-royalties.ts" %}
 import { addPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 await addPlugin(umi, {
@@ -389,32 +389,32 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-### Basis Points Reference
-| Desired % | Basis Points |
+### 基点参考
+| 期望百分比 | 基点 |
 |-----------|--------------|
 | 2.5% | 250 |
 | 5% | 500 |
 | 7.5% | 750 |
 | 10% | 1000 |
-## FAQ
-### Are Core royalties enforced?
-Yes, when using an allowlist ruleset. Only programs on the allowlist can transfer the asset, ensuring royalties are paid.
-### What's the difference between Core royalties and Token Metadata royalties?
-Core royalties are built into the asset with optional enforcement via rulesets. Token Metadata royalties are advisory and rely on marketplace cooperation.
-### Can I have different royalties per asset in a collection?
-Yes. Add the Royalties plugin to individual assets to override the collection-level setting.
-### How do marketplaces read royalties?
-Marketplaces query the asset's plugins via DAS or on-chain data. The Royalties plugin data includes basis points, creators, and ruleset.
-### What happens if I don't set a ruleset?
-Use `ruleSet('None')`. Any program can transfer the asset and royalties are advisory only.
-### Can I change royalties after minting?
-Yes. Use `updatePlugin` (for assets) or `updateCollectionPlugin` (for collections) if you have the authority.
-## Glossary
-| Term | Definition |
+## 常见问题
+### Core 版税是强制执行的吗？
+是的，当使用白名单规则集时。只有白名单中的程序才能转移资产，确保版税得到支付。
+### Core 版税和 Token Metadata 版税有什么区别？
+Core 版税需要在 Asset 或 Collection 级别使用 Royalties Plugin，并可选择通过规则集强制执行。标准 Token Metadata NFT 版税仅为建议性质，依赖市场的配合。pNFTs（可编程 NFT）也支持类似于 Core 的基于规则集的强制执行。
+### 我可以为 Collection 中的每个 Asset 设置不同的版税吗？
+可以。将 Royalties Plugin 添加到单个 Asset 即可覆盖 Collection 级别的设置。
+### 市场如何读取版税信息？
+市场通过 DAS 或链上数据查询 Asset 的 Plugin。Royalties Plugin 数据包括基点、创作者和规则集。
+### 如果我不设置规则集会怎样？
+使用 `ruleSet('None')`。任何程序都可以转移资产，版税仅为建议性质。
+### 铸造后可以更改版税吗？
+可以。如果您有权限，可以使用 `updatePlugin`（用于 Assets）或 `updateCollectionPlugin`（用于 Collections）。
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Basis Points** | Royalty percentage in hundredths (500 = 5%) |
-| **Creators** | Array of addresses that receive royalty payments |
-| **RuleSet** | Allowlist/denylist controlling which programs can transfer |
-| **Allowlist** | Only listed programs can transfer (strict enforcement) |
-| **Denylist** | All programs except listed ones can transfer |
-| **Authority** | The account permitted to update the plugin |
+| **Basis Points** | 以百分之一表示的版税百分比（500 = 5%） |
+| **Creators** | 接收版税付款的地址数组 |
+| **RuleSet** | 控制哪些程序可以转移的白名单/黑名单 |
+| **Allowlist** | 只有列出的程序可以转移（严格执行） |
+| **Denylist** | 除列出的程序外所有程序都可以转移 |
+| **Authority** | 被允许更新 Plugin 的账户 |

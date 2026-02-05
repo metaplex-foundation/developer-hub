@@ -1,7 +1,7 @@
 ---
 title: Presale
-metaTitle: Genesis - Presale | Fixed-Price Token Sale | Metaplex
-description: Fixed-price token sale where users deposit SOL and receive tokens at a predetermined rate. Set your price upfront with controlled distribution.
+metaTitle: Genesis - Presale | 고정가 토큰 판매 | Metaplex
+description: 사용자가 SOL을 예치하고 미리 정해진 비율로 토큰을 받는 고정가 토큰 판매. 가격을 미리 설정하고 제어된 배포를 실현합니다.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -29,71 +29,71 @@ howToTools:
   - Umi framework
   - Genesis SDK
 faqs:
-  - q: How is the token price calculated in a Presale?
-    a: Price equals SOL cap divided by token allocation. For 1,000,000 tokens with a 100 SOL cap, the price is 0.0001 SOL per token.
-  - q: What happens if the SOL cap isn't reached?
-    a: Users still receive tokens proportional to their deposits. If only 50 SOL is deposited against a 100 SOL cap, depositors receive 50% of allocated tokens.
-  - q: Can I set deposit limits per user?
-    a: Yes. Use minimumDepositAmount for minimum per-transaction limits and depositLimit for maximum total deposit per user.
-  - q: What's the difference between Presale and Launch Pool?
-    a: Presale has a fixed price determined by token allocation and SOL cap. Launch Pool discovers price organically based on total deposits.
-  - q: When should I use Presale vs Launch Pool?
-    a: Use Presale when you want predictable pricing and know exactly how much you want to raise. Use Launch Pool for organic price discovery.
+  - q: Presale에서 토큰 가격은 어떻게 계산되나요?
+    a: 가격은 SOL 상한을 토큰 할당량으로 나눈 값입니다. 100 SOL 상한에 1,000,000 토큰의 경우, 가격은 토큰당 0.0001 SOL입니다.
+  - q: SOL 상한에 도달하지 못하면 어떻게 되나요?
+    a: 사용자는 예치금에 비례하여 토큰을 받습니다. 100 SOL 상한에 대해 50 SOL만 예치되면, 예치자는 할당된 토큰의 50%를 받습니다.
+  - q: 사용자별 예치 한도를 설정할 수 있나요?
+    a: 네. 거래당 최소 한도에는 minimumDepositAmount를, 사용자당 최대 총 예치금에는 depositLimit을 사용합니다.
+  - q: Presale과 Launch Pool의 차이점은 무엇인가요?
+    a: Presale은 토큰 할당량과 SOL 상한에 의해 결정되는 고정 가격입니다. Launch Pool은 총 예치금을 기반으로 자연스럽게 가격이 결정됩니다.
+  - q: Presale과 Launch Pool은 언제 사용해야 하나요?
+    a: 예측 가능한 가격 책정이 필요하고 모금 목표가 명확할 때 Presale을 사용합니다. 자연스러운 가격 발견에는 Launch Pool을 사용합니다.
 ---
 
-**Presales** offer fixed-price token distribution. Set your token price upfront based on allocation and SOL cap—users know exactly what they're getting, and you know exactly what you'll raise. {% .lead %}
+**Presale**은 고정가 토큰 배포를 제공합니다. 할당량과 SOL 상한을 기반으로 토큰 가격을 미리 설정합니다. 사용자는 받을 수량을 정확히 알고, 여러분은 모금액을 정확히 파악할 수 있습니다. {% .lead %}
 
-{% callout title="What You'll Learn" %}
-This guide covers:
-- How Presale pricing works (allocation + cap = price)
-- Setting up deposit windows and claim periods
-- Configuring deposit limits and cooldowns
-- User operations: wrap SOL, deposit, and claim
+{% callout title="학습 내용" %}
+이 가이드에서 다루는 내용:
+- Presale 가격 책정 방식 (할당량 + 상한 = 가격)
+- 예치 기간과 청구 기간 설정
+- 예치 한도와 쿨다운 설정
+- 사용자 작업: SOL 래핑, 예치, 청구
 {% /callout %}
 
-## Summary
+## 요약
 
-Presales sell tokens at a predetermined price. The price is calculated from the token allocation and SOL cap you configure.
+Presale은 미리 정해진 가격으로 토큰을 판매합니다. 가격은 설정한 토큰 할당량과 SOL 상한에서 계산됩니다.
 
-- Fixed price = SOL cap / token allocation
-- Users deposit SOL during the deposit window (2% fee applies)
-- First-come-first-served up to the SOL cap
-- Optional: minimum/maximum deposit limits, cooldowns, backend authorization
+- 고정 가격 = SOL 상한 / 토큰 할당량
+- 사용자는 예치 기간 동안 SOL을 예치합니다 ({% fee product="genesis" config="presale" fee="deposit" /%} 수수료 적용)
+- SOL 상한까지 선착순
+- 옵션: 최소/최대 예치 한도, 쿨다운, 백엔드 인증
 
-## Out of Scope
+## 범위 외
 
-Organic price discovery (see [Launch Pool](/smart-contracts/genesis/launch-pool)), bid-based auctions (see [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)), and vesting schedules.
+자연스러운 가격 발견([Launch Pool](/ko/smart-contracts/genesis/launch-pool) 참조), 입찰 기반 경매([Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) 참조), 베스팅 스케줄.
 
-## How It Works
+## 작동 방식
 
-1. You allocate tokens to the Presale with a SOL cap that determines the fixed price
-2. Users deposit SOL during the deposit window at the fixed rate
-3. After the deposit period ends, you execute the transition to move funds
-4. Users claim their tokens based on their deposit amount
+1. SOL 상한을 설정하여 고정 가격을 결정하고, 토큰을 Presale에 할당합니다
+2. 사용자는 예치 기간 동안 고정 비율로 SOL을 예치합니다
+3. 예치 기간 종료 후, 트랜지션을 실행하여 자금을 이동합니다
+4. 사용자는 예치금에 따라 토큰을 청구합니다
 
-### Price Calculation
+### 가격 계산
 
-The token price is determined by the ratio of allocated tokens to the SOL cap:
+토큰 가격은 할당 토큰과 SOL 상한의 비율로 결정됩니다:
 
 ```
 price = allocationQuoteTokenCap / baseTokenAllocation
 tokens = deposit / price
 ```
 
-For example, if you allocate 1,000,000 tokens with a 100 SOL cap:
-- Price = 100 SOL / 1,000,000 tokens = 0.0001 SOL per token
-- A 10 SOL deposit receives 100,000 tokens
+예를 들어, 100 SOL 상한으로 1,000,000 토큰을 할당한 경우:
+- 가격 = 100 SOL / 1,000,000 토큰 = 토큰당 0.0001 SOL
+- 10 SOL 예치로 100,000 토큰을 받습니다
 
-### Fees
+### 수수료
 
 {% protocol-fees program="genesis" config="presale" showTitle=false /%}
 
-## Quick Start
+## 빠른 시작
 
 {% totem %}
-{% totem-accordion title="View complete setup Script" %}
+{% totem-accordion title="전체 설정 스크립트 보기" %}
 
-This shows how to setup a Presale with Start and End Dates. You can also add a minimum deposit amount and a maximum deposit amount or a backend signer. To build the user-facing app, see [User Operations](#user-operations).
+이것은 시작 및 종료 날짜가 있는 Presale 설정 방법을 보여줍니다. 최소 예치 금액, 최대 예치 금액 또는 백엔드 서명자를 추가할 수도 있습니다. 사용자 대상 앱을 빌드하려면 [사용자 작업](#사용자-작업)을 참조하세요.
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -120,9 +120,9 @@ async function setupPresale() {
 
   const baseMint = generateSigner(umi);
   const backendSigner = generateSigner(umi);
-  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
+  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 100만 토큰 (소수점 9자리)
 
-  // 1. Initialize
+  // 1. 초기화
   const [genesisAccount] = findGenesisAccountV2Pda(umi, {
     baseMint: baseMint.publicKey,
     genesisIndex: 0,
@@ -137,23 +137,23 @@ async function setupPresale() {
     uri: 'https://example.com/metadata.json',
   }).sendAndConfirm(umi);
 
-  // 2. Define timing
+  // 2. 타이밍 정의
   const now = BigInt(Math.floor(Date.now() / 1000));
   const depositStart = now + 60n;
   const depositEnd = now + 86400n;
   const claimStart = depositEnd + 1n;
   const claimEnd = claimStart + 604800n;
 
-  // 3. Derive bucket PDAs
+  // 3. Bucket PDA 도출
   const [presaleBucket] = findPresaleBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
   const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
 
-  // 4. Add Presale bucket
+  // 4. Presale Bucket 추가
   await addPresaleBucketV2(umi, {
     genesisAccount,
     baseMint: baseMint.publicKey,
     baseTokenAllocation: TOTAL_SUPPLY,
-    allocationQuoteTokenCap: sol(100).basisPoints, // 100 SOL cap
+    allocationQuoteTokenCap: sol(100).basisPoints, // 100 SOL 상한
     depositStartCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
@@ -190,7 +190,7 @@ async function setupPresale() {
     ],
   }).sendAndConfirm(umi);
 
-  // 5. Add Unlocked bucket (receives SOL after transition)
+  // 5. Unlocked Bucket 추가 (트랜지션 후 SOL 수령)
   await addUnlockedBucketV2(umi, {
     genesisAccount,
     baseMint: baseMint.publicKey,
@@ -228,9 +228,9 @@ setupPresale().catch(console.error);
 {% /totem-accordion %}
 {% /totem %}
 
-## Setup Guide
+## 설정 가이드
 
-### Prerequisites
+### 사전 요구 사항
 
 {% totem %}
 
@@ -240,9 +240,9 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 
 {% /totem %}
 
-### 1. Initialize the Genesis Account
+### 1. Genesis Account 초기화
 
-The Genesis Account creates your token and coordinates all distribution buckets.
+Genesis Account는 토큰을 생성하고 모든 배포 Bucket을 조정합니다.
 
 {% totem %}
 
@@ -263,7 +263,7 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 // umi.use(keypairIdentity(yourKeypair));
 
 const baseMint = generateSigner(umi);
-const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
+const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 100만 토큰 (소수점 9자리)
 
 const [genesisAccount] = findGenesisAccountV2Pda(umi, {
   baseMint: baseMint.publicKey,
@@ -283,12 +283,12 @@ await initializeV2(umi, {
 {% /totem %}
 
 {% callout type="note" %}
-The `totalSupplyBaseToken` should equal the sum of all bucket allocations.
+`totalSupplyBaseToken`은 모든 Bucket 할당량의 합계와 같아야 합니다.
 {% /callout %}
 
-### 2. Add the Presale Bucket
+### 2. Presale Bucket 추가
 
-The Presale bucket collects deposits and distributes tokens. Configure timing and optional limits here.
+Presale Bucket은 예치금을 수집하고 토큰을 배포합니다. 여기서 타이밍과 선택적 제한을 설정합니다.
 
 {% totem %}
 
@@ -306,17 +306,17 @@ const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIn
 
 const now = BigInt(Math.floor(Date.now() / 1000));
 const depositStart = now;
-const depositEnd = now + 86400n; // 24 hours
+const depositEnd = now + 86400n; // 24시간
 const claimStart = depositEnd + 1n;
-const claimEnd = claimStart + 604800n; // 1 week
+const claimEnd = claimStart + 604800n; // 1주일
 
 await addPresaleBucketV2(umi, {
   genesisAccount,
   baseMint: baseMint.publicKey,
   baseTokenAllocation: TOTAL_SUPPLY,
-  allocationQuoteTokenCap: 100_000_000_000n, // 100 SOL cap (sets price)
+  allocationQuoteTokenCap: 100_000_000_000n, // 100 SOL 상한 (가격 설정)
 
-  // Timing
+  // 타이밍
   depositStartCondition: {
     __kind: 'TimeAbsolute',
     padding: Array(47).fill(0),
@@ -342,11 +342,11 @@ await addPresaleBucketV2(umi, {
     triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
   },
 
-  // Optional: Deposit limits
-  minimumDepositAmount: null, // or { amount: sol(0.1).basisPoints }
-  depositLimit: null, // or { limit: sol(10).basisPoints }
+  // 옵션: 예치 제한
+  minimumDepositAmount: null, // 또는 { amount: sol(0.1).basisPoints }
+  depositLimit: null, // 또는 { limit: sol(10).basisPoints }
 
-  // Where collected SOL goes after transition
+  // 트랜지션 후 수집된 SOL의 목적지
   endBehaviors: [
     {
       __kind: 'SendQuoteTokenPercentage',
@@ -361,9 +361,9 @@ await addPresaleBucketV2(umi, {
 
 {% /totem %}
 
-### 3. Add the Unlocked Bucket
+### 3. Unlocked Bucket 추가
 
-The Unlocked bucket receives SOL from the Presale after the transition.
+Unlocked Bucket은 트랜지션 후 Presale에서 SOL을 받습니다.
 
 {% totem %}
 
@@ -398,7 +398,7 @@ await addUnlockedBucketV2(umi, {
 
 ### 4. Finalize
 
-Once all buckets are configured, finalize to activate the presale. This is irreversible.
+모든 Bucket이 설정되면 Finalize하여 Presale을 활성화합니다. 이는 되돌릴 수 없습니다.
 
 {% totem %}
 
@@ -413,11 +413,11 @@ await finalizeV2(umi, {
 
 {% /totem %}
 
-## User Operations
+## 사용자 작업
 
-### Wrapping SOL
+### SOL 래핑
 
-Users must wrap SOL to wSOL before depositing.
+사용자는 예치 전에 SOL을 wSOL로 래핑해야 합니다.
 
 {% totem %}
 
@@ -453,7 +453,7 @@ await createTokenIfMissing(umi, {
 
 {% /totem %}
 
-### Depositing
+### 예치
 
 {% totem %}
 
@@ -472,7 +472,7 @@ await depositPresaleV2(umi, {
   amountQuoteToken: sol(1).basisPoints,
 }).sendAndConfirm(umi);
 
-// Verify
+// 확인
 const [depositPda] = findPresaleDepositV2Pda(umi, {
   bucket: presaleBucket,
   recipient: umi.identity.publicKey,
@@ -483,11 +483,11 @@ console.log('Deposited (after fee):', deposit.amountQuoteToken);
 
 {% /totem %}
 
-Multiple deposits from the same user accumulate into a single deposit account.
+동일한 사용자의 여러 예치는 단일 예치 계정에 누적됩니다.
 
-### Claiming Tokens
+### 토큰 청구
 
-After the deposit period ends and claims open:
+예치 기간 종료 후 청구가 시작되면:
 
 {% totem %}
 
@@ -504,13 +504,13 @@ await claimPresaleV2(umi, {
 
 {% /totem %}
 
-Token allocation: `userTokens = (userDeposit / allocationQuoteTokenCap) * baseTokenAllocation`
+토큰 할당: `userTokens = (userDeposit / allocationQuoteTokenCap) * baseTokenAllocation`
 
-## Admin Operations
+## 관리자 작업
 
-### Executing the Transition
+### 트랜지션 실행
 
-After deposits close, execute the transition to move collected SOL to the unlocked bucket.
+예치 종료 후, 트랜지션을 실행하여 수집된 SOL을 Unlocked Bucket으로 이동합니다.
 
 {% totem %}
 
@@ -538,34 +538,34 @@ await transitionV2(umi, {
 
 {% /totem %}
 
-**Why this matters:** Without transition, collected SOL stays locked in the Presale bucket. Users can still claim tokens, but the team cannot access the raised funds.
+**이것이 중요한 이유:** 트랜지션이 없으면 수집된 SOL은 Presale Bucket에 잠긴 상태로 유지됩니다. 사용자는 토큰을 청구할 수 있지만 팀은 모금한 자금에 접근할 수 없습니다.
 
-## Reference
+## 참조
 
-### Configuration Options
+### 설정 옵션
 
-These options are set when creating the Presale bucket:
+이 옵션들은 Presale Bucket 생성 시 설정됩니다:
 
-| Option | Description | Example |
+| 옵션 | 설명 | 예시 |
 |--------|-------------|---------|
-| `minimumDepositAmount` | Minimum deposit per transaction | `{ amount: sol(0.1).basisPoints }` |
-| `depositLimit` | Maximum total deposit per user | `{ limit: sol(10).basisPoints }` |
-| `depositCooldown` | Time between deposits | `{ seconds: 60n }` |
-| `perCooldownDepositLimit` | Max deposit per cooldown period | `{ amount: sol(1).basisPoints }` |
-| `backendSigner` | Require backend authorization | `{ signer: publicKey }` |
+| `minimumDepositAmount` | 거래당 최소 예치 | `{ amount: sol(0.1).basisPoints }` |
+| `depositLimit` | 사용자당 최대 총 예치 | `{ limit: sol(10).basisPoints }` |
+| `depositCooldown` | 예치 간 대기 시간 | `{ seconds: 60n }` |
+| `perCooldownDepositLimit` | 쿨다운 기간당 최대 예치 | `{ amount: sol(1).basisPoints }` |
+| `backendSigner` | 백엔드 인증 요구 | `{ signer: publicKey }` |
 
-### Time Conditions
+### 시간 조건
 
-Four conditions control presale timing:
+4가지 조건이 Presale 타이밍을 제어합니다:
 
-| Condition | Purpose |
+| 조건 | 목적 |
 |-----------|---------|
-| `depositStartCondition` | When deposits open |
-| `depositEndCondition` | When deposits close |
-| `claimStartCondition` | When claims open |
-| `claimEndCondition` | When claims close |
+| `depositStartCondition` | 예치 시작 시점 |
+| `depositEndCondition` | 예치 종료 시점 |
+| `claimStartCondition` | 청구 시작 시점 |
+| `claimEndCondition` | 청구 종료 시점 |
 
-Use `TimeAbsolute` with a Unix timestamp:
+Unix 타임스탬프와 함께 `TimeAbsolute`를 사용합니다:
 
 {% totem %}
 
@@ -575,16 +575,16 @@ import { NOT_TRIGGERED_TIMESTAMP } from '@metaplex-foundation/genesis';
 const condition = {
   __kind: 'TimeAbsolute',
   padding: Array(47).fill(0),
-  time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 1 hour from now
+  time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 1시간 후
   triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
 };
 ```
 
 {% /totem %}
 
-### End Behaviors
+### 종료 동작
 
-Define what happens to collected SOL after the deposit period:
+예치 기간 후 수집된 SOL의 처리를 정의합니다:
 
 {% totem %}
 
@@ -594,7 +594,7 @@ endBehaviors: [
     __kind: 'SendQuoteTokenPercentage',
     padding: Array(4).fill(0),
     destinationBucket: publicKey(unlockedBucket),
-    percentageBps: 10000, // 100% = 10000 basis points
+    percentageBps: 10000, // 100% = 10000 베이시스 포인트
     processed: false,
   },
 ]
@@ -602,9 +602,9 @@ endBehaviors: [
 
 {% /totem %}
 
-### Fetching State
+### 상태 조회
 
-**Bucket state:**
+**Bucket 상태:**
 
 {% totem %}
 
@@ -620,15 +620,15 @@ console.log('SOL cap:', bucket.allocationQuoteTokenCap);
 
 {% /totem %}
 
-**Deposit state:**
+**예치 상태:**
 
 {% totem %}
 
 ```typescript
 import { fetchPresaleDepositV2, safeFetchPresaleDepositV2 } from '@metaplex-foundation/genesis';
 
-const deposit = await fetchPresaleDepositV2(umi, depositPda); // throws if not found
-const maybeDeposit = await safeFetchPresaleDepositV2(umi, depositPda); // returns null
+const deposit = await fetchPresaleDepositV2(umi, depositPda); // 찾을 수 없으면 에러 발생
+const maybeDeposit = await safeFetchPresaleDepositV2(umi, depositPda); // null 반환
 
 if (deposit) {
   console.log('Amount deposited:', deposit.amountQuoteToken);
@@ -639,46 +639,46 @@ if (deposit) {
 
 {% /totem %}
 
-## Notes
+## 참고 사항
 
-- The 2% protocol fee applies to deposits
-- Users must wrap SOL to wSOL before depositing
-- Multiple deposits from the same user accumulate in one deposit account
-- The transition must be executed after deposits close for the team to access funds
-- Finalization is permanent—double-check all configuration before calling `finalizeV2`
+- 예치에는 {% fee product="genesis" config="presale" fee="deposit" /%} 프로토콜 수수료가 적용됩니다
+- 사용자는 예치 전에 SOL을 wSOL로 래핑해야 합니다
+- 동일한 사용자의 여러 예치는 하나의 예치 계정에 누적됩니다
+- 팀이 자금에 접근하려면 예치 종료 후 트랜지션을 실행해야 합니다
+- Finalize는 영구적입니다—`finalizeV2`를 호출하기 전에 모든 설정을 다시 확인하세요
 
 ## FAQ
 
-### How is the token price calculated in a Presale?
-Price equals SOL cap divided by token allocation. For 1,000,000 tokens with a 100 SOL cap, the price is 0.0001 SOL per token.
+### Presale에서 토큰 가격은 어떻게 계산되나요?
+가격은 SOL 상한을 토큰 할당량으로 나눈 값입니다. 100 SOL 상한에 1,000,000 토큰의 경우, 가격은 토큰당 0.0001 SOL입니다.
 
-### What happens if the SOL cap isn't reached?
-Users still receive tokens proportional to their deposits. If only 50 SOL is deposited against a 100 SOL cap, depositors receive 50% of allocated tokens.
+### SOL 상한에 도달하지 못하면 어떻게 되나요?
+사용자는 예치금에 비례하여 토큰을 받습니다. 100 SOL 상한에 대해 50 SOL만 예치되면, 예치자는 할당된 토큰의 50%를 받습니다.
 
-### Can I set deposit limits per user?
-Yes. Use `minimumDepositAmount` for minimum per-transaction limits and `depositLimit` for maximum total deposit per user.
+### 사용자별 예치 한도를 설정할 수 있나요?
+네. 거래당 최소 한도에는 `minimumDepositAmount`를, 사용자당 최대 총 예치금에는 `depositLimit`을 사용합니다.
 
-### What's the difference between Presale and Launch Pool?
-Presale has a fixed price determined by token allocation and SOL cap. Launch Pool discovers price organically based on total deposits.
+### Presale과 Launch Pool의 차이점은 무엇인가요?
+Presale은 토큰 할당량과 SOL 상한에 의해 결정되는 고정 가격입니다. Launch Pool은 총 예치금을 기반으로 자연스럽게 가격이 결정됩니다.
 
-### When should I use Presale vs Launch Pool?
-Use Presale when you want predictable pricing and know exactly how much you want to raise. Use Launch Pool for organic price discovery.
+### Presale과 Launch Pool은 언제 사용해야 하나요?
+예측 가능한 가격 책정이 필요하고 모금 목표가 명확할 때 Presale을 사용합니다. 자연스러운 가격 발견에는 Launch Pool을 사용합니다.
 
-## Glossary
+## 용어집
 
-| Term | Definition |
+| 용어 | 정의 |
 |------|------------|
-| **Presale** | Fixed-price token sale with predetermined rate |
-| **SOL Cap** | Maximum SOL the presale will accept (determines price) |
-| **Token Allocation** | Number of tokens available in the presale |
-| **Deposit Limit** | Maximum total deposit allowed per user |
-| **Minimum Deposit** | Minimum amount required per deposit transaction |
-| **Cooldown** | Time users must wait between deposits |
-| **End Behavior** | Automated action after deposit period ends |
-| **Transition** | Instruction that processes end behaviors |
+| **Presale** | 미리 정해진 비율의 고정가 토큰 판매 |
+| **SOL Cap** | Presale이 수락하는 최대 SOL (가격 결정) |
+| **Token Allocation** | Presale에서 사용 가능한 토큰 수 |
+| **Deposit Limit** | 사용자당 허용되는 최대 총 예치금 |
+| **Minimum Deposit** | 예치 거래당 필요한 최소 금액 |
+| **Cooldown** | 사용자가 예치 사이에 기다려야 하는 시간 |
+| **End Behavior** | 예치 기간 종료 후 자동화된 동작 |
+| **Transition** | 종료 동작을 처리하는 명령 |
 
-## Next Steps
+## 다음 단계
 
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Organic price discovery
-- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based allocation
-- [Getting Started](/smart-contracts/genesis/getting-started) - Genesis fundamentals
+- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 자연스러운 가격 발견
+- [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - 입찰 기반 할당
+- [시작하기](/ko/smart-contracts/genesis/getting-started) - Genesis 기초

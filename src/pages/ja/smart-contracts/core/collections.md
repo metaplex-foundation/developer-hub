@@ -1,7 +1,7 @@
 ---
-title: Managing Collections
-metaTitle: Core Collections | Metaplex Core
-description: Learn how to create and manage Core Collections on Solana. Group NFT Assets together, set collection-level royalties, and manage collection metadata.
+title: Collectionの管理
+metaTitle: Core Collection | Metaplex Core
+description: SolanaでCore Collectionを作成・管理する方法を学びましょう。NFT Assetをグループ化し、コレクションレベルのロイヤリティを設定し、コレクションメタデータを管理します。
 updated: '01-31-2026'
 keywords:
   - NFT collection
@@ -28,80 +28,80 @@ howToTools:
   - Umi framework
   - mpl-core SDK
 faqs:
-  - q: What's the difference between a Collection and an Asset?
-    a: A Collection is a container that groups Assets together. It has its own metadata but cannot be owned or transferred like an Asset. Assets are the actual NFTs that users own.
-  - q: Can I add an existing Asset to a Collection?
-    a: Yes, use the update instruction with the newCollection parameter. The Asset's update authority must have permission to add it to the target Collection.
-  - q: Do I need a Collection for my NFTs?
-    a: No. Assets can exist standalone without a Collection. However, Collections enable collection-level royalties, easier discoverability, and batch operations.
-  - q: Can I remove an Asset from a Collection?
-    a: Yes, use the update instruction to change the Asset's collection. You need the appropriate authority on both the Asset and Collection.
-  - q: What happens if I delete a Collection?
-    a: Collections cannot be deleted while they contain Assets. Remove all Assets first, then the Collection account can be closed.
+  - q: CollectionとAssetの違いは何ですか？
+    a: CollectionはAssetをグループ化するコンテナです。独自のメタデータを持ちますが、Assetのように所有したり転送したりすることはできません。Assetはユーザーが所有する実際のNFTです。
+  - q: 既存のAssetをCollectionに追加できますか？
+    a: はい、newCollectionパラメータを指定してupdate命令を使用します。AssetのUpdate AuthorityがターゲットのCollectionに追加する権限を持っている必要があります。
+  - q: NFTにCollectionは必要ですか？
+    a: いいえ。AssetはCollectionなしでスタンドアロンで存在できます。ただし、Collectionを使用するとコレクションレベルのロイヤリティ、発見しやすさ、一括操作が可能になります。
+  - q: CollectionからAssetを削除できますか？
+    a: はい、update命令を使用してAssetのCollectionを変更できます。AssetとCollection両方で適切な権限が必要です。
+  - q: Collectionを削除するとどうなりますか？
+    a: CollectionはAssetを含んでいる間は削除できません。まずすべてのAssetを削除してから、Collectionアカウントをクローズできます。
 ---
-This guide shows how to **create and manage Core Collections** on Solana using the Metaplex Core SDK. Collections group related Assets together under a shared identity with collection-level metadata and plugins. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Create a Collection with name, URI, and optional plugins
-- Add Assets to Collections at creation time
-- Fetch and update Collection metadata
-- Manage collection-level plugins (royalties, etc.)
+このガイドでは、Metaplex Core SDKを使用してSolanaで**Core Collectionを作成・管理**する方法を説明します。Collectionは関連するAssetを共有のアイデンティティとコレクションレベルのメタデータとプラグインでグループ化します。 {% .lead %}
+{% callout title="学習内容" %}
+- 名前、URI、オプションのプラグインを持つCollectionの作成
+- 作成時にAssetをCollectionに追加
+- Collectionメタデータの取得と更新
+- コレクションレベルのプラグイン（ロイヤリティなど）の管理
 {% /callout %}
-## Summary
-A **Collection** is a Core account that groups related Assets together. It stores collection metadata (name, image, description) and can hold plugins that apply to all Assets in the collection.
-- Collections act as the "front cover" for a group of Assets
-- Assets reference their Collection via the `collection` field
-- Collection plugins (like Royalties) can apply to all member Assets
-- Creating a Collection costs ~0.0015 SOL
-## Out of Scope
-Token Metadata Collections (use mpl-token-metadata), compressed NFT collections (use Bubblegum), and migrating existing collections to Core.
-## Quick Start
-**Jump to:** [Create Collection](#creating-a-simple-collection) · [With Plugins](#creating-a-collection-with-plugins) · [Fetch](#fetch-a-collection) · [Update](#updating-a-collection)
-1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
-2. Upload collection metadata JSON to get a URI
-3. Call `createCollection(umi, { collection, name, uri })`
-4. Pass collection address when creating Assets
-## Prerequisites
-- **Umi** configured with a signer and RPC connection
-- **SOL** for transaction fees (~0.002 SOL per collection)
-- **Metadata JSON** uploaded to Arweave/IPFS with collection image
-## What are Collections?
-Collections are a group of Assets that belong together, part of the same series, or group. In order to group Assets together, we must first create a Collection Asset whose purpose is to store any metadata related to that collection such as collection name and collection image. The Collection Asset acts as a front cover to your collection and can also store collection wide plugins.
-The data that is stored and accessible from the Collection Asset is as follows;
-| Accounts        | Description                                       |
-| --------------- | ------------------------------------------------- |
-| key             | The account key discriminator                     |
-| updateAuthority | The authority of the new asset.                   |
-| name            | The collection name.                              |
-| uri             | The uri to the collections off-chain metadata.    |
-| num minted      | The number of assets minted in the collection.    |
-| current size    | The number of assets currently in the collection. |
-## Creating a Collection
-To create a Core Collection you can use the `CreateCollection` instruction like this:
+## 概要
+**Collection**は関連するAssetをグループ化するCoreアカウントです。コレクションメタデータ（名前、画像、説明）を保存し、コレクション内のすべてのAssetに適用されるプラグインを保持できます。
+- CollectionはAssetグループの「表紙」として機能します
+- Assetは`collection`フィールドを通じてCollectionを参照します
+- Collectionプラグイン（ロイヤリティなど）はすべてのメンバーAssetに適用できます
+- Collectionの作成には約0.0015 SOLかかります
+## スコープ外
+Token Metadata Collection（mpl-token-metadataを使用）、圧縮NFTコレクション（Bubblegumを使用）、既存のコレクションのCoreへの移行。
+## クイックスタート
+**ジャンプ先:** [Collection作成](#シンプルなcollectionの作成) · [プラグイン付き](#プラグイン付きcollectionの作成) · [取得](#collectionの取得) · [更新](#collectionの更新)
+1. インストール: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
+2. コレクションメタデータJSONをアップロードしてURIを取得
+3. `createCollection(umi, { collection, name, uri })`を呼び出す
+4. Asset作成時にCollectionアドレスを渡す
+## 前提条件
+- 署名者とRPC接続が設定された**Umi**
+- トランザクション手数料用の**SOL**（Collectionあたり約0.002 SOL）
+- Arweave/IPFSにアップロードされたコレクション画像付きの**メタデータJSON**
+## Collectionとは？
+Collectionは、同じシリーズやグループに属するAssetのグループです。Assetをグループ化するには、まずコレクション名やコレクション画像などのコレクション関連のメタデータを保存するためのCollection Assetを作成する必要があります。Collection Assetはコレクションの表紙として機能し、コレクション全体のプラグインも保存できます。
+Collection Assetから保存およびアクセスできるデータは以下の通りです：
+| アカウント        | 説明                                       |
+| --------------- | ------------------------------------------ |
+| key             | アカウントキーの識別子                      |
+| updateAuthority | 新しいAssetの権限者                         |
+| name            | コレクション名                              |
+| uri             | コレクションのオフチェーンメタデータへのURI  |
+| num minted      | コレクション内でミントされたAssetの数        |
+| current size    | 現在コレクション内にあるAssetの数            |
+## Collectionの作成
+Core Collectionを作成するには、`CreateCollection`命令を次のように使用できます：
 {% totem %}
-{% totem-accordion title="Technical Instruction Details - CreateCollectionV1" %}
-**Instruction Accounts List**
-| Accounts        | Description                                        |
-| --------------- | -------------------------------------------------- |
-| collection      | The collection to which the Core Asset belongs to. |
-| updateAuthority | The authority of the new asset.                    |
-| payer           | The account paying for the storage fees.           |
-| systemProgram   | The System Program account.                        |
-**Instruction Arguments**
-| Arg     | Description                                        |
-| ------- | -------------------------------------------------- |
-| name    | The collection to which the Core Asset belongs to. |
-| uri     | The authority of the new asset.                    |
-| plugins | Plugins you would like the collection to have.     |
-Some of the accounts and arguments may be abstracted out and/or optional in our SDKs for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L30).
+{% totem-accordion title="技術的な命令の詳細 - CreateCollectionV1" %}
+**命令アカウントリスト**
+| アカウント        | 説明                                        |
+| --------------- | ------------------------------------------ |
+| collection      | Core Assetが属するCollection                |
+| updateAuthority | 新しいAssetの権限者                         |
+| payer           | ストレージ手数料を支払うアカウント           |
+| systemProgram   | System Programアカウント                    |
+**命令引数**
+| 引数     | 説明                                        |
+| ------- | ------------------------------------------ |
+| name    | Core Assetが属するCollection                |
+| uri     | 新しいAssetの権限者                         |
+| plugins | Collectionに持たせたいプラグイン            |
+一部のアカウントと引数は、SDKで使いやすくするために抽象化されているか、オプションになっている場合があります。
+オンチェーン命令の詳細は[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L30)で確認できます。
 {% /totem-accordion %}
 {% /totem %}
-### Creating a Simple Collection
-The following snippet creates a simple collection without Plugins or anything special.
+### シンプルなCollectionの作成
+以下のスニペットは、プラグインや特別なものなしでシンプルなCollectionを作成します。
 {% code-tabs-imported from="core/create-collection" frameworks="umi" /%}
-### Creating a Collection with Plugins
-The following snippet creates a collection with the [Royalties Plugin](/smart-contracts/core/plugins/royalties) attached. You can attach additional plugins as described [here](/smart-contracts/core/plugins).
-{% dialect-switcher title="Create a MPL Core Collection with Plugin" %}
+### プラグイン付きCollectionの作成
+以下のスニペットは、[Royaltiesプラグイン](/ja/smart-contracts/core/plugins/royalties)を添付してCollectionを作成します。[こちら](/ja/smart-contracts/core/plugins)で説明されているように、追加のプラグインを添付できます。
+{% dialect-switcher title="プラグイン付きMPL Core Collectionの作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -127,7 +127,7 @@ await createCollection(umi, {
           percentage: 80,
         },
       ],
-      ruleSet: ruleSet('None'), // Compatibility rule set
+      ruleSet: ruleSet('None'), // 互換性ルールセット
     },
   ],
 }).sendAndConfirm(umi)
@@ -181,9 +181,9 @@ pub async fn create_collection_with_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Fetch a Collection
-To fetch a collection the following function can be used:
-{% dialect-switcher title="Fetch a collection" %}
+## Collectionの取得
+Collectionを取得するには、以下の関数を使用できます：
+{% dialect-switcher title="Collectionの取得" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { fetchCollectionV1 } from '@metaplex-foundation/mpl-core'
@@ -209,30 +209,30 @@ pub async fn fetch_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating a Collection
-To update the data of a Core Collection use the `UpdateCollection` instruction. For example, you use this instruction to change the name of a collection.
+## Collectionの更新
+Core Collectionのデータを更新するには、`UpdateCollection`命令を使用します。例えば、この命令を使用してCollectionの名前を変更できます。
 {% totem %}
-{% totem-accordion title="Technical Instruction Details - UpdateCollectionV1" %}
-**Instruction Accounts List**
-| Accounts           | Description                                        |
-| ------------------ | -------------------------------------------------- |
-| collection         | The collection to which the Core Asset belongs to. |
-| payer              | The account paying for the storage fees.           |
-| authority          | The authority of the new asset.                    |
-| newUpdateAuthority | The new update authority of the collection.        |
-| systemProgram      | The System Program account.                        |
-| logWrapper         | The SPL Noop Program.                              |
-**Instruction Arguments**
-| Args | Description                      |
-| ---- | -------------------------------- |
-| name | The name of your MPL Core Asset. |
-| uri  | The off chain json metadata uri. |
-Some of the accounts and arguments may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L167C4-L167C23).
+{% totem-accordion title="技術的な命令の詳細 - UpdateCollectionV1" %}
+**命令アカウントリスト**
+| アカウント           | 説明                                        |
+| ------------------ | ------------------------------------------ |
+| collection         | Core Assetが属するCollection                |
+| payer              | ストレージ手数料を支払うアカウント           |
+| authority          | 新しいAssetの権限者                         |
+| newUpdateAuthority | Collectionの新しいUpdate Authority          |
+| systemProgram      | System Programアカウント                    |
+| logWrapper         | SPL Noop Program                           |
+**命令引数**
+| 引数  | 説明                       |
+| ---- | ------------------------- |
+| name | MPL Core Assetの名前       |
+| uri  | オフチェーンJSONメタデータURI |
+一部のアカウントと引数は、SDKで使いやすくするために抽象化されているか、オプションになっている場合があります。
+オンチェーン命令の詳細は[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L167C4-L167C23)で確認できます。
 {% /totem-accordion %}
 {% /totem %}
 {% seperator h="6" /%}
-{% dialect-switcher title="Updating a Collection" %}
+{% dialect-switcher title="Collectionの更新" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -278,28 +278,28 @@ pub async fn update_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating a Collection Plugin
-If you want to change the behaviour of a plugin that is attached to a Core Collection you may want to use the `updateCollectionPlugin` instruction.
+## Collectionプラグインの更新
+Core Collectionに添付されているプラグインの動作を変更したい場合は、`updateCollectionPlugin`命令を使用できます。
 {% totem %}
-{% totem-accordion title="Technical Instruction Details - UpdateCollectionPluginV1" %}
-**Instruction Accounts List**
-| Accounts      | Description                                        |
-| ------------- | -------------------------------------------------- |
-| collection    | The collection to which the Core Asset belongs to. |
-| payer         | The account paying for the storage fees.           |
-| authority     | The authority of the new asset.                    |
-| systemProgram | The System Program account.                        |
-| logWrapper    | The SPL Noop Program.                              |
-**Instruction Arguments**
-| Args   | Description                    |
-| ------ | ------------------------------ |
-| plugin | The plugin you wish to update. |
-Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L81).
+{% totem-accordion title="技術的な命令の詳細 - UpdateCollectionPluginV1" %}
+**命令アカウントリスト**
+| アカウント      | 説明                                        |
+| ------------- | ------------------------------------------ |
+| collection    | Core Assetが属するCollection                |
+| payer         | ストレージ手数料を支払うアカウント           |
+| authority     | 新しいAssetの権限者                         |
+| systemProgram | System Programアカウント                    |
+| logWrapper    | SPL Noop Program                           |
+**命令引数**
+| 引数    | 説明                    |
+| ------ | ----------------------- |
+| plugin | 更新したいプラグイン     |
+一部のアカウントは、SDKで使いやすくするために抽象化されているか、オプションになっている場合があります。
+オンチェーン命令の詳細は[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L81)で確認できます。
 {% /totem-accordion %}
 {% /totem %}
 {% seperator h="6" /%}
-{% dialect-switcher title="Updating a Collection Plugin" %}
+{% dialect-switcher title="Collectionプラグインの更新" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -360,60 +360,60 @@ pub async fn update_collection_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## よくあるエラー
 ### `Collection account already exists`
-The collection keypair was already used. Generate a new signer:
+Collectionキーペアはすでに使用されています。新しい署名者を生成してください：
 ```ts
-const collectionSigner = generateSigner(umi) // Must be unique
+const collectionSigner = generateSigner(umi) // 一意である必要があります
 ```
 ### `Authority mismatch`
-You're not the update authority of the collection. Check the collection's `updateAuthority` field matches your signer.
+あなたはCollectionのUpdate Authorityではありません。Collectionの`updateAuthority`フィールドが署名者と一致しているか確認してください。
 ### `Insufficient funds`
-Your payer wallet needs ~0.002 SOL. Fund it with:
+支払いウォレットには約0.002 SOLが必要です。以下でファンドを追加してください：
 ```bash
 solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```
-## Notes
-- The `collection` parameter must be a **new keypair** when creating
-- Collection plugins are inherited by Assets unless overridden at the Asset level
-- Use `fetchCollection` to verify collection state after creation
-- The `numMinted` counter tracks total Assets ever created (not current size)
-## Quick Reference
-### Program ID
-| Network | Address |
+## 注意事項
+- `collection`パラメータは作成時に**新しいキーペア**である必要があります
+- Collectionプラグインは、Assetレベルでオーバーライドしない限り、Assetに継承されます
+- 作成後にCollectionの状態を確認するには`fetchCollection`を使用してください
+- `numMinted`カウンターは現在のサイズではなく、これまでに作成されたAssetの総数を追跡します
+## クイックリファレンス
+### プログラムID
+| ネットワーク | アドレス |
 |---------|---------|
 | Mainnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
 | Devnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
-### Minimum Code
+### 最小コード
 ```ts {% title="minimal-collection.ts" %}
 import { generateSigner } from '@metaplex-foundation/umi'
 import { createCollection } from '@metaplex-foundation/mpl-core'
 const collection = generateSigner(umi)
 await createCollection(umi, { collection, name: 'My Collection', uri: 'https://...' }).sendAndConfirm(umi)
 ```
-### Cost Breakdown
-| Item | Cost |
+### コスト内訳
+| 項目 | コスト |
 |------|------|
-| Collection account rent | ~0.0015 SOL |
-| Transaction fee | ~0.000005 SOL |
-| **Total** | **~0.002 SOL** |
+| Collectionアカウントのレント | 約0.0015 SOL |
+| トランザクション手数料 | 約0.000005 SOL |
+| **合計** | **約0.002 SOL** |
 ## FAQ
-### What's the difference between a Collection and an Asset?
-A Collection is a container that groups Assets together. It has its own metadata (name, image) but cannot be owned or transferred like an Asset. Assets are the actual NFTs that users own.
-### Can I add an existing Asset to a Collection?
-Yes, use the `update` instruction with the `newCollection` parameter. The Asset's update authority must have permission to add it to the target Collection.
-### Do I need a Collection for my NFTs?
-No. Assets can exist standalone without a Collection. However, Collections enable collection-level royalties, easier discoverability, and batch operations.
-### Can I remove an Asset from a Collection?
-Yes, use the `update` instruction to change the Asset's collection. You need the appropriate authority on both the Asset and Collection.
-### What happens if I delete a Collection?
-Collections cannot be deleted while they contain Assets. Remove all Assets first, then the Collection account can be closed.
-## Glossary
-| Term | Definition |
+### CollectionとAssetの違いは何ですか？
+CollectionはAssetをグループ化するコンテナです。独自のメタデータ（名前、画像）を持ちますが、Assetのように所有したり転送したりすることはできません。Assetはユーザーが所有する実際のNFTです。
+### 既存のAssetをCollectionに追加できますか？
+はい、`newCollection`パラメータを指定して`update`命令を使用します。AssetのUpdate AuthorityがターゲットのCollectionに追加する権限を持っている必要があります。
+### NFTにCollectionは必要ですか？
+いいえ。AssetはCollectionなしでスタンドアロンで存在できます。ただし、Collectionを使用するとコレクションレベルのロイヤリティ、発見しやすさ、一括操作が可能になります。
+### CollectionからAssetを削除できますか？
+はい、`update`命令を使用してAssetのCollectionを変更できます。AssetとCollection両方で適切な権限が必要です。
+### Collectionを削除するとどうなりますか？
+CollectionはAssetを含んでいる間は削除できません。まずすべてのAssetを削除してから、Collectionアカウントをクローズできます。
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Collection** | A Core account that groups related Assets under shared metadata |
-| **Update Authority** | The account that can modify Collection metadata and plugins |
-| **numMinted** | Counter tracking total Assets ever created in the Collection |
-| **currentSize** | Number of Assets currently in the Collection |
-| **Collection Plugin** | A plugin attached to the Collection (e.g., Royalties) |
-| **URI** | URL pointing to off-chain JSON metadata for the Collection |
+| **Collection** | 共有メタデータの下で関連するAssetをグループ化するCoreアカウント |
+| **Update Authority** | Collectionのメタデータとプラグインを変更できるアカウント |
+| **numMinted** | Collection内でこれまでに作成されたAssetの総数を追跡するカウンター |
+| **currentSize** | 現在Collection内にあるAssetの数 |
+| **Collectionプラグイン** | Collectionに添付されたプラグイン（例：Royalties） |
+| **URI** | Collectionのオフチェーンメタデータを指すURL |

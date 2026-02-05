@@ -1,7 +1,7 @@
 ---
-title: Burning Assets
-metaTitle: Burning Assets | Metaplex Core
-description: Learn how to burn Core NFT Assets on Solana. Permanently destroy Assets and recover rent using the Metaplex Core SDK.
+title: Assetのバーン
+metaTitle: Assetのバーン | Metaplex Core
+description: SolanaでCore NFT Assetをバーンする方法を学びます。Metaplex Core SDKを使用してAssetを永久に破棄し、レントを回収します。
 created: '06-15-2024'
 updated: '01-31-2026'
 keywords:
@@ -20,73 +20,73 @@ programmingLanguage:
   - TypeScript
   - Rust
 howToSteps:
-  - Install the SDK with npm install @metaplex-foundation/mpl-core
-  - Fetch the Asset to verify ownership
-  - Call burn(umi, { asset }) as the owner
-  - Rent is automatically returned to your wallet
+  - npm install @metaplex-foundation/mpl-coreでSDKをインストール
+  - Assetを取得して所有権を確認
+  - 所有者としてburn(umi, { asset })を呼び出す
+  - レントは自動的にウォレットに返却される
 howToTools:
   - Node.js
   - Umi framework
   - mpl-core SDK
 faqs:
-  - q: Can I recover the ~0.0009 SOL left in the account?
-    a: No. This small amount is intentionally left to mark the account as burned and prevent address reuse.
-  - q: What happens to the Asset's metadata after burning?
-    a: The on-chain account is cleared. Off-chain metadata on Arweave/IPFS remains accessible but has no on-chain link.
-  - q: Can a Burn Delegate burn without owner approval?
-    a: Yes. Once assigned, a Burn Delegate can burn the Asset at any time. Only assign trusted addresses.
-  - q: Does burning affect the Collection's count?
-    a: Yes. The Collection's currentSize decrements. The numMinted counter stays unchanged.
-  - q: Can I burn multiple Assets at once?
-    a: Not in a single instruction. You can batch multiple burn instructions in one transaction up to size limits.
+  - q: アカウントに残っている約0.0009 SOLを回収できますか？
+    a: いいえ。この少額はアカウントをバーン済みとしてマークし、アドレスの再利用を防ぐために意図的に残されています。
+  - q: バーン後、Assetのメタデータはどうなりますか？
+    a: オンチェーンアカウントはクリアされます。Arweave/IPFSのオフチェーンメタデータはアクセス可能ですが、オンチェーンリンクはありません。
+  - q: Burn Delegateは所有者の承認なしにバーンできますか？
+    a: はい。一度割り当てられると、Burn Delegateはいつでもアセットをバーンできます。信頼できるアドレスのみを割り当ててください。
+  - q: バーンはコレクションのカウントに影響しますか？
+    a: はい。コレクションのcurrentSizeが減少します。numMintedカウンターは変更されません。
+  - q: 複数のAssetを一度にバーンできますか？
+    a: 単一の命令ではできません。サイズ制限内で1つのトランザクションに複数のバーン命令をバッチ処理できます。
 ---
-This guide shows how to **burn Core Assets** on Solana using the Metaplex Core SDK. Permanently destroy Assets and recover most of the rent deposit. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Burn an Asset and recover rent
-- Handle burning for Assets in Collections
-- Understand Burn Delegate permissions
-- Know what happens to the account after burning
+このガイドでは、Metaplex Core SDKを使用してSolana上で**Core Assetをバーン**する方法を説明します。Assetを永久に破棄し、レント保証金のほとんどを回収します。 {% .lead %}
+{% callout title="学習内容" %}
+- Assetをバーンしてレントを回収する
+- Collection内のAssetのバーンを処理する
+- Burn Delegate権限を理解する
+- バーン後にアカウントがどうなるかを知る
 {% /callout %}
-## Summary
-Burn a Core Asset to permanently destroy it and recover rent. Only the owner (or Burn Delegate) can burn an Asset.
-- Call `burn(umi, { asset })` to destroy the Asset
-- Most rent (~0.0028 SOL) is returned to the payer
-- A small amount (~0.0009 SOL) remains to prevent account reuse
-- Burning is **permanent and irreversible**
-## Out of Scope
-Token Metadata burning (use mpl-token-metadata), compressed NFT burning (use Bubblegum), and Collection burning (Collections have their own burn process).
-## Quick Start
-**Jump to:** [Burn Asset](#code-example) · [Burn in Collection](#burning-an-asset-that-is-part-of-a-collection)
-1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
-2. Fetch the Asset to verify ownership
-3. Call `burn(umi, { asset })` as the owner
-4. Rent is automatically returned to your wallet
-## Prerequisites
-- **Umi** configured with a signer that owns the Asset (or is its Burn Delegate)
-- **Asset address** of the Asset to burn
-- **Collection address** (if the Asset is in a Collection)
-Assets can be burnt using the `burn` instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL (0.00089784) will stay in the account to prevent it from being reopened.
+## 概要
+Core Assetをバーンして永久に破棄し、レントを回収します。所有者（またはBurn Delegate）のみがAssetをバーンできます。
+- `burn(umi, { asset })`を呼び出してAssetを破棄
+- ほとんどのレント（約0.0028 SOL）が支払者に返却される
+- 少額（約0.0009 SOL）がアカウント再利用防止のために残る
+- バーンは**永久的で取り消し不可能**
+## 対象外
+Token Metadataのバーン（mpl-token-metadataを使用）、圧縮NFTのバーン（Bubblegumを使用）、Collectionのバーン（Collectionには独自のバーンプロセスがあります）。
+## クイックスタート
+**ジャンプ先：** [Assetをバーン](#code-example) · [Collection内でバーン](#burning-an-asset-that-is-part-of-a-collection)
+1. インストール: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
+2. Assetを取得して所有権を確認
+3. 所有者として`burn(umi, { asset })`を呼び出す
+4. レントは自動的にウォレットに返却される
+## 前提条件
+- Assetを所有する（またはBurn Delegateである）署名者で構成された**Umi**
+- バーンするAssetの**Assetアドレス**
+- **Collectionアドレス**（AssetがCollection内にある場合）
+Assetは`burn`命令を使用してバーンできます。これにより、レント免除手数料が所有者に返却されます。アカウントの再オープンを防ぐため、非常に少額のSOL（0.00089784）のみがアカウントに残ります。
 {% totem %}
-{% totem-accordion title="Technical Instruction Details" %}
-**Instruction Accounts List**
-| Account       | Description                                     |
+{% totem-accordion title="技術的な命令の詳細" %}
+**命令アカウントリスト**
+| アカウント | 説明 |
 | ------------- | ----------------------------------------------- |
-| asset         | The address of the MPL Core Asset.              |
-| collection    | The collection to which the Core Asset belongs. |
-| payer         | The account paying for the storage fees.        |
-| authority     | The owner or delegate of the asset.             |
-| systemProgram | The System Program account.                     |
-| logWrapper    | The SPL Noop Program.                           |
-Some of the accounts may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L123).
+| asset         | MPL Core Assetのアドレス |
+| collection    | Core Assetが属するコレクション |
+| payer         | ストレージ手数料を支払うアカウント |
+| authority     | アセットの所有者またはデリゲート |
+| systemProgram | System Programアカウント |
+| logWrapper    | SPL Noop Program |
+使いやすさのため、一部のアカウントはSDKで抽象化および/またはオプションになっている場合があります。
+オンチェーン命令の完全な詳細は[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L123)で確認できます。
 {% /totem-accordion %}
 {% /totem %}
-## Code Example
-Here is how you can use our SDKs to burn a Core asset. The snippet assumes that you are the owner of the asset.
+## コード例
+SDKを使用してCore assetをバーンする方法を示します。このスニペットはあなたがアセットの所有者であることを前提としています。
 {% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
-## Burning an Asset that is part of a Collection
-Here is how you can use our SDKs to burn a Core asset that is part of a collection. The snippet assumes that you are the owner of the asset.
-{% dialect-switcher title="Burning an Asset that is part of a collection" %}
+## Collectionに属するAssetのバーン
+コレクションの一部であるCore assetをバーンするためのSDKの使用方法を示します。このスニペットはあなたがアセットの所有者であることを前提としています。
+{% dialect-switcher title="Collectionに属するAssetのバーン" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -145,63 +145,62 @@ pub async fn burn_asset_in_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## よくあるエラー
 ### `Authority mismatch`
-You're not the owner or Burn Delegate of the Asset. Check ownership:
+Assetの所有者またはBurn Delegateではありません。所有権を確認してください：
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
-console.log(asset.owner) // Must match your signer
+console.log(asset.owner) // 署名者と一致する必要があります
 ```
 ### `Asset is frozen`
-The Asset has a Freeze Delegate plugin and is currently frozen. The freeze authority must unfreeze it before burning.
+AssetにFreeze Delegateプラグインがあり、現在フリーズされています。バーンする前にフリーズ権限者が解除する必要があります。
 ### `Missing collection parameter`
-For Assets in a Collection, you must pass the `collection` address. Fetch the Asset first to get the collection:
+Collection内のAssetの場合、`collection`アドレスを渡す必要があります。最初にAssetを取得してコレクションを取得してください：
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
 const collectionId = collectionAddress(asset)
 ```
-## Notes
-- Burning is **permanent and irreversible** - the Asset cannot be recovered
-- ~0.0028 SOL is returned from rent, but ~0.0009 SOL stays in the account
-- The remaining SOL prevents the account address from being reused
-- Burn Delegates can burn on behalf of owners (via the Burn Delegate plugin)
-- Frozen Assets must be unfrozen before burning
-## Quick Reference
-### Burn Parameters
-| Parameter | Required | Description |
+## 注意事項
+- バーンは**永久的で取り消し不可能** - Assetは回復できません
+- レントは所有者に返却されます（金額はアセットサイズとプラグインによって異なります）
+- 残りのSOLはアカウントアドレスの再利用を防ぎます
+- Burn Delegateは所有者に代わってバーンできます（Burn Delegateプラグイン経由）
+- フリーズされたAssetはバーン前に解除する必要があります
+## クイックリファレンス
+### バーンパラメータ
+| パラメータ | 必須 | 説明 |
 |-----------|----------|-------------|
-| `asset` | Yes | Asset address or fetched object |
-| `collection` | If in collection | Collection address |
-| `authority` | No | Defaults to signer (use for delegates) |
-### Who Can Burn?
-| Authority | Can Burn? |
+| `asset` | はい | Assetアドレスまたは取得したオブジェクト |
+| `collection` | コレクション内の場合 | Collectionアドレス |
+| `authority` | いいえ | デフォルトは署名者（デリゲート用） |
+### 誰がバーンできるか？
+| 権限 | バーン可能？ |
 |-----------|-----------|
-| Asset Owner | Yes |
-| Burn Delegate | Yes |
-| Transfer Delegate | No |
-| Update Authority | No |
-### Rent Recovery
-| Item | Amount |
+| Asset所有者 | はい |
+| Burn Delegate | はい |
+| Transfer Delegate | いいえ |
+| Update Authority | いいえ |
+### レント回収
+| 項目 | 金額 |
 |------|--------|
-| Returned to payer | ~0.0028 SOL |
-| Remaining in account | ~0.0009 SOL |
-| **Total original rent** | **~0.0029 SOL** |
+| 支払者に返却 | ベース + プラグインストレージレント |
+| アカウントに残る | 約0.0009 SOL |
 ## FAQ
-### Can I recover the ~0.0009 SOL left in the account?
-No. This small amount is intentionally left to mark the account as "burned" and prevent its address from being reused for a new Asset.
-### What happens to the Asset's metadata after burning?
-The on-chain account is cleared (zeroed out). The off-chain metadata (on Arweave/IPFS) remains accessible via the original URI, but there's no on-chain record linking to it.
-### Can a Burn Delegate burn without the owner's approval?
-Yes. Once an owner assigns a Burn Delegate via the plugin, the delegate can burn the Asset at any time. Owners should only assign trusted addresses as Burn Delegates.
-### Does burning affect the Collection's count?
-Yes. The Collection's `currentSize` is decremented when an Asset is burned. The `numMinted` counter remains unchanged (it tracks total ever minted).
-### Can I burn multiple Assets at once?
-Not in a single instruction. You can batch multiple burn instructions in one transaction (up to transaction size limits).
-## Glossary
-| Term | Definition |
+### アカウントに残っている約0.0009 SOLを回収できますか？
+いいえ。この少額はアカウントを「バーン済み」としてマークし、そのアドレスが新しいAssetに再利用されるのを防ぐために意図的に残されています。
+### バーン後、Assetのメタデータはどうなりますか？
+オンチェーンアカウントはクリア（ゼロ化）されます。オフチェーンメタデータは元のURIからアクセス可能ですが、それにリンクするオンチェーンレコードはありません。
+### Burn Delegateは所有者の承認なしにバーンできますか？
+はい。所有者がプラグイン経由でBurn Delegateを割り当てると、デリゲートはいつでもAssetをバーンできます。所有者は信頼できるアドレスのみをBurn Delegateとして割り当てるべきです。
+### バーンはCollectionのカウントに影響しますか？
+はい。Assetがバーンされると、Collectionの`currentSize`が減少します。`numMinted`カウンターは変更されません（これまでにミントされた総数を追跡します）。
+### 複数のAssetを一度にバーンできますか？
+単一の命令ではできません。1つのトランザクションに複数のバーン命令をバッチ処理できます（トランザクションサイズ制限内で）。
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Burn** | Permanently destroy an Asset and recover rent |
-| **Burn Delegate** | An account authorized to burn on behalf of the owner |
-| **Rent** | SOL deposited to keep an account alive on Solana |
-| **Frozen** | An Asset state where burns and transfers are blocked |
-| **Collection** | A group account that the Asset may belong to |
+| **バーン** | Assetを永久に破棄してレントを回収する |
+| **Burn Delegate** | 所有者に代わってバーンする権限を持つアカウント |
+| **レント** | Solana上でアカウントを維持するために預けるSOL |
+| **フリーズ** | バーンと転送がブロックされるAssetの状態 |
+| **Collection** | Assetが属する可能性のあるグループアカウント |

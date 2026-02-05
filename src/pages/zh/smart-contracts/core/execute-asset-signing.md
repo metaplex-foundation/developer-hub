@@ -1,7 +1,7 @@
 ---
-title: Execute Asset Signing
-metaTitle: Execute and Asset Signer | Core
-description: Learn how MPL Core Assets can use the Execute instruction and sign instructions and transactions.
+title: Execute和Asset签名
+metaTitle: Execute和Asset签名 | Core
+description: 了解MPL Core Asset如何使用Execute指令来签署指令和交易。
 updated: '01-31-2026'
 keywords:
   - asset signer
@@ -17,66 +17,53 @@ programmingLanguage:
   - Rust
   - JavaScript
 ---
-The MPL Core Execute instruction introduces the concept of **Asset Signers** to
-MPL Core Assets.
-These **Asset Signers** act as Signers on behalf of the Asset itself which
-unlocks the ability for MPL Core Assets
-- to transfer out Solana and SPL Tokens.
-- to become the authority of other accounts.
-- to perform other actions and validations that have been assigned to the
-`assetSignerPda` that require transaction/instruction/CPI signing.
-MPL Core Assets have the ability to sign and submit transactions/CPIs to the
-blockchain. This effectively gives the Core Asset it's own wallet in the form of
-an `assetSigner`.
+MPL Core Execute指令为MPL Core Asset引入了**Asset Signer**的概念。
+这些**Asset Signer**代表Asset本身充当签名者，这使MPL Core Asset能够：
+- 转移Solana和SPL代币
+- 成为其他账户的authority
+- 执行已分配给`assetSignerPda`的其他需要交易/指令/CPI签名的操作和验证
+MPL Core Asset能够签署并向区块链提交交易/CPI。这有效地为Core Asset提供了自己的钱包，形式为`assetSigner`。
 ## Asset Signer PDA
-Assets are now able to access the `assetSignerPda` account/address which allows
-the `execute` instruction on the MPL Core program to pass through additional
-instructions sent to it to sign the CPI instructions with the `assetSignerPda`.
-This allows the `assetSignerPda` account to effectively own and execute account
-instructions on behalf of the current asset owner.
-You can think of the `assetSignerPda` as a wallet attached to a Core Asset.
+Asset现在可以访问`assetSignerPda`账户/地址，这允许MPL Core程序上的`execute`指令传递发送给它的额外指令，以使用`assetSignerPda`签署CPI指令。
+这允许`assetSignerPda`账户代表当前资产所有者有效地拥有和执行账户指令。
+您可以将`assetSignerPda`视为附加到Core Asset的钱包。
 ### findAssetSignerPda()
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
 const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
 ```
-## Execute Instruction
-### Overview
-The `execute` instruction allows users to pass in the Core Asset and also some
-pass through instructions that will get signed by the AssetSigner when it hits
-the MPL Core programs `execute` instruction on chain.
-An overview of the `execute` instruction and it's args.
+## Execute指令
+### 概述
+`execute`指令允许用户传入Core Asset以及一些通过指令，当它到达链上MPL Core程序的`execute`指令时，AssetSigner将签署这些指令。
+`execute`指令及其参数的概述。
 ```ts
 const executeIx = await execute(umi, {
     {
-        // The asset via `fetchAsset()` that is signing the transaction.
+        // 通过`fetchAsset()`签署交易的asset
         asset: AssetV1,
-        // The collection via `fetchCollection()`
+        // 通过`fetchCollection()`的collection
         collection?: CollectionV1,
-        // Either a TransactionBuilder | Instruction[]
+        // TransactionBuilder | Instruction[]
         instructions: ExecuteInput,
-        // Additional Signers that will be required for the transaction/instructions.
+        // 交易/指令所需的额外签名者
         signers?: Signer[]
     }
 })
 ```
-### Validation
-{% callout title="assetSignerPda Validation" %}
-The MPL Core Execute instruction will validate that the **current Asset owner**
-has also signed the transaction. This insures only the current Asset Owner can
-execute transactions while using the `assetSignerPda` with the `execute` instruction.
+### 验证
+{% callout title="assetSignerPda验证" %}
+MPL Core Execute指令将验证**当前Asset所有者**也已签署交易。这确保只有当前Asset所有者可以使用`execute`指令与`assetSignerPda`执行交易。
 {% /callout %}
-### Controlling Execute Operations
-The execute functionality can be controlled using the [Freeze Execute Plugin](/smart-contracts/core/plugins/freeze-execute). This plugin allows you to freeze the execute operations on an asset, preventing any execute instructions from being processed until unfrozen.
-The Freeze Execute Plugin is particularly useful for:
-- **Backed NFTs**: Prevent withdrawal of underlying assets when needed
-- **Escrowless protocols**: Temporarily lock execute functionality during protocol operations
-- **Security measures**: Add an additional layer of protection for assets that can execute complex operations
-When the Freeze Execute Plugin is active and set to `frozen: true`, any attempts to use the execute instruction will be blocked until the plugin is updated to `frozen: false`.
-## Examples
-### Transferring SOL From the Asset Signer
-In the following example we transfer SOL that had been sent to the
-`assetSignerPda` to a destination of our choice.
+### 控制Execute操作
+execute功能可以使用[Freeze Execute插件](/smart-contracts/core/plugins/freeze-execute)进行控制。此插件允许您冻结资产上的execute操作，防止在解冻之前处理任何execute指令。
+Freeze Execute插件特别适用于：
+- **担保NFT**：在需要时防止提取底层资产
+- **无托管协议**：在协议操作期间临时锁定execute功能
+- **安全措施**：为可以执行复杂操作的资产添加额外的保护层
+当Freeze Execute插件处于活动状态并设置为`frozen: true`时，任何使用execute指令的尝试都将被阻止，直到插件更新为`frozen: false`。
+## 示例
+### 从Asset Signer转移SOL
+在以下示例中，我们将发送到`assetSignerPda`的SOL转移到我们选择的目的地。
 ```js
 import {
   execute,
@@ -88,41 +75,38 @@ import { transferSol } from '@metaplex-foundation/mpl-toolbox'
 import { publickey, createNoopSigner, sol } from '@metaplex-foundation/umi'
 const assetId = publickey('11111111111111111111111111111111')
 const asset = await fetchAsset(umi, assetId)
-// Optional - If Asset is part of collection fetch the collection object
+// 可选 - 如果Asset是收藏品的一部分，获取收藏品对象
 const collection =
   asset.updateAuthority.type == 'Collection' && asset.updateAuthority.address
     ? await fetchCollection(umi, asset.updateAuthority.address)
     : undefined
-// Asset signer has a balance of 1 SOL in the account.
+// Asset signer账户中有1 SOL余额
 const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
-// Destination account we wish to transfer the SOL to.
+// 我们希望将SOL转移到的目标账户
 const destination = publickey('2222222222222222222222222222222222')
-// A standard `transferSol()` transactionBuilder.
+// 标准`transferSol()` transactionBuilder
 const transferSolIx = transferSol(umi, {
-  // Create a noopSigner as the assetSigner will sign later during CPI
+  // 创建noopSigner，因为assetSigner稍后将在CPI期间签名
   source: createNoopSigner(publicKey(assetSigner)),
-  // Destination address
+  // 目标地址
   destination,
-  // Amount you wish to transfer
+  // 您希望转移的金额
   amount: sol(0.5),
 })
-// Call the `execute` instruction and send to the chain.
+// 调用`execute`指令并发送到链上
 const res = await execute(umi, {
-  // Execute instruction(s) with this asset
+  // 使用此asset执行指令
   asset,
-  // If Asset is part of collection pass in collection object via `fetchCollection()`
+  // 如果Asset是收藏品的一部分，通过`fetchCollection()`传入收藏品对象
   collection,
-  // The transactionBuilder/instruction[] to execute
+  // 要执行的transactionBuilder/instruction[]
   instructions: transferSolIx,
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
-### Transferring SPL Tokens From the Asset Signer
-In the following example we transfer some of our SPL Token balance from the
-`assetSignerPda` account to a destination.
-This example is based on the best practices in regards to derived tokens
-accounts for a base wallet address. If tokens are not in their correctly derived
-token account based on the `assetSignerPda` address then this example will need adjusting.
+### 从Asset Signer转移SPL代币
+在以下示例中，我们将`assetSignerPda`账户中的部分SPL代币余额转移到目的地。
+此示例基于有关基础钱包地址的派生代币账户的最佳实践。如果代币不在基于`assetSignerPda`地址正确派生的代币账户中，则需要调整此示例。
 ```js
 import {
   execute,
@@ -137,45 +121,44 @@ import {
 import { publickey } from '@metaplex-foundation/umi'
 const assetId = publickey('11111111111111111111111111111111')
 const asset = await fetchAsset(umi, assetId)
-// Optional - If Asset is part of collection fetch the collection object
+// 可选 - 如果Asset是收藏品的一部分，获取收藏品对象
 const collection =
   asset.updateAuthority.type == 'Collection' && asset.updateAuthority.address
     ? await fetchCollection(umi, asset.updateAuthority.address)
     : undefined
 const splTokenMint = publickey('2222222222222222222222222222222222')
-// Asset signer has a balance of tokens.
+// Asset signer有代币余额
 const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
-// Destination wallet we wish to transfer the SOL to.
+// 我们希望将SOL转移到的目标钱包
 const destinationWallet = publickey('3333333333333333333333333333333')
-// A standard `transferTokens()` transactionBuilder.
+// 标准`transferTokens()` transactionBuilder
 const transferTokensIx = transferTokens(umi, {
-  // Source is the `assetSignerPda` derived Token Account
+  // Source是`assetSignerPda`派生的代币账户
   source: findAssociatedTokenPda(umi, {
     mint: splTokenMint,
     owner: assetSignerPda,
   }),
-  // Destination is the `destinationWallet` derived Token Account
+  // Destination是`destinationWallet`派生的代币账户
   destination: findAssociatedTokenPda(umi, {
     mint: splTokenMint,
     owner: destinationWallet,
   }),
-  // Amount to send in lamports.
+  // 以lamport为单位的发送金额
   amount: 5000,
 })
-// Call the `execute` instruction and send to the chain.
+// 调用`execute`指令并发送到链上
 const res = await execute(umi, {
-  // Execute instruction(s) with this asset
+  // 使用此asset执行指令
   asset,
-  // If Asset is part of collection pass in collection object via `fetchCollection()`
+  // 如果Asset是收藏品的一部分，通过`fetchCollection()`传入收藏品对象
   collection,
-  // The transactionBuilder/instruction[] to execute
+  // 要执行的transactionBuilder/instruction[]
   instructions: transferTokensIx,
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
-### Transferring Ownership of an Asset to Another Asset
-In the following example we transfer a Core Asset that is owned by another Core
-Asset, to another.
+### 将Asset所有权转移到另一个Asset
+在以下示例中，我们将一个Core Asset拥有的另一个Core Asset转移到另一个Asset。
 ```js
 import {
   execute,
@@ -185,40 +168,40 @@ import {
   transfer,
 } from '@metaplex-foundation/mpl-core'
 import { publickey } from '@metaplex-foundation/umi'
-// Asset we wish to transfer.
+// 我们希望转移的Asset
 const assetId = publickey('11111111111111111111111111111111')
 const asset = await fetchAsset(assetId)
-// Optional - If Asset is part of collection fetch the collection object
+// 可选 - 如果Asset是收藏品的一部分，获取收藏品对象
 const collection =
   asset.updateAuthority.type == 'Collection' && asset.updateAuthority.address
     ? await fetchCollection(umi, asset.updateAuthority.address)
     : undefined
-// Asset ID that owns the Asset we wish to transfer.
+// 拥有我们要转移的Asset的Asset ID
 const sourceAssetId = publickey('2222222222222222222222222222222222')
-// The source Asset object.
+// 源Asset对象
 const sourceAsset = fetchAsset(umi, sourceAssetId)
-// Asset signer has a balance of 1 SOL in the account.
+// Asset signer账户中有1 SOL余额
 const sourceAssetSignerPda = findAssetSignerPda(umi, { asset: assetId })
-// Destination account we wish to transfer the SOL to.
+// 我们希望将SOL转移到的目标账户
 const destinationAssetId = publickey('33333333333333333333333333333333')
-// Destination Asset signer we wish to transfer the Asset to.
+// 我们希望将Asset转移到的目标Asset signer
 const destinationAssetSignerPda = findAssetSignerPda(umi, {
   asset: destinationAssetId,
 })
 const transferAssetIx = transfer(umi, {
-  // Asset object via `fetchAsset()`.
+  // 通过`fetchAsset()`的Asset对象
   asset,
-  // Optional - Collection object via `fetchCollection()`
+  // 可选 - 通过`fetchCollection()`的Collection对象
   collection,
-  // New Owner of the Asset.
+  // Asset的新所有者
   newOwner: destinationAssetSignerPda,
 }).sendAndConfirm(umi)
 const res = await execute(umi, {
-  // Execute instruction(s) with this asset
+  // 使用此asset执行指令
   asset,
-  // If Asset is part of collection pass in collection object via `fetchCollection()`
+  // 如果Asset是收藏品的一部分，通过`fetchCollection()`传入收藏品对象
   collection,
-  // The transactionBuilder/instruction[] to execute
+  // 要执行的transactionBuilder/instruction[]
   instructions: transferAssetIx,
 }).sendAndConfirm(umi)
 console.log({ res })

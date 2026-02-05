@@ -1,7 +1,7 @@
 ---
-title: Removing External Plugins
-metaTitle: Removing External Plugins | Metaplex Core
-description: Learn how to remove Oracle and AppData plugins from Core Assets and Collections. Code examples for JavaScript and Rust.
+title: 外部プラグインの削除
+metaTitle: 外部プラグインの削除 | Metaplex Core
+description: Core AssetsとCollectionsからOracleおよびAppDataプラグインを削除する方法を学びます。JavaScriptとRustのコード例。
 updated: '01-31-2026'
 keywords:
   - remove external plugin
@@ -17,37 +17,37 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Does removing an Oracle plugin delete the Oracle account?
-    a: No. Only the plugin adapter on the Asset is removed. The external Oracle account remains and can be reused.
-  - q: Can I recover AppData before removing?
-    a: Yes. Read the AppData using fetchAsset() before removing the plugin if you need to preserve the data.
-  - q: What happens to the rent?
-    a: The rent from the plugin adapter is recovered and returned to the transaction payer.
+  - q: Oracleプラグインを削除するとOracleアカウントも削除されますか？
+    a: いいえ。Asset上のプラグインアダプターのみが削除されます。外部Oracleアカウントは残り、再利用できます。
+  - q: 削除前にAppDataを復元できますか？
+    a: はい。データを保存する必要がある場合は、プラグインを削除する前にfetchAsset()を使用してAppDataを読み取ってください。
+  - q: レントはどうなりますか？
+    a: プラグインアダプターからのレントは回収され、トランザクションの支払者に返されます。
 ---
-This guide shows how to **remove External Plugins** from Core Assets and Collections. Remove Oracle or AppData plugins when they're no longer needed. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Remove external plugins from Assets
-- Remove external plugins from Collections
-- Understand authority requirements
-- Recover rent from removed plugins
+このガイドでは、Core AssetsとCollectionsから**外部プラグイン**を削除する方法を説明します。不要になったOracleまたはAppDataプラグインを削除します。 {% .lead %}
+{% callout title="学べること" %}
+- Assetsから外部プラグインを削除
+- Collectionsから外部プラグインを削除
+- authority要件の理解
+- 削除されたプラグインからのレントの回収
 {% /callout %}
-## Summary
-Remove external plugins using `removePlugin()` for Assets or `removeCollectionPlugin()` for Collections. Only the plugin authority can remove external plugins.
-- Specify the plugin type and base address
-- Plugin data is deleted
-- Rent is recovered
-- Requires plugin authority signature
-## Out of Scope
-Adding external plugins (see [Adding External Plugins](/smart-contracts/core/external-plugins/adding-external-plugins)), updating plugin data, and removing built-in plugins (see [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)).
-## Quick Start
-**Jump to:** [Remove from Asset](#remove-from-asset) · [Remove from Collection](#remove-from-collection)
-1. Identify the plugin type and base address to remove
-2. Call `removePlugin()` with the plugin key
-3. Plugin is removed immediately, rent recovered
-## Remove from Asset
-{% dialect-switcher title="Remove External Plugin from Asset" %}
+## 概要
+Assetsには`removePlugin()`を、Collectionsには`removeCollectionPlugin()`を使用して外部プラグインを削除します。プラグインauthorityのみが外部プラグインを削除できます。
+- プラグインタイプとベースアドレスを指定
+- プラグインデータは削除される
+- レントは回収される
+- プラグインauthorityの署名が必要
+## 対象外
+外部プラグインの追加（[外部プラグインの追加](/smart-contracts/core/external-plugins/adding-external-plugins)を参照）、プラグインデータの更新、および組み込みプラグインの削除（[プラグインの削除](/smart-contracts/core/plugins/removing-plugins)を参照）。
+## クイックスタート
+**ジャンプ先:** [Assetから削除](#assetから削除) · [Collectionから削除](#collectionから削除)
+1. 削除するプラグインタイプとベースアドレスを特定
+2. プラグインキーを指定して`removePlugin()`を呼び出し
+3. プラグインは即座に削除され、レントは回収される
+## Assetから削除
+{% dialect-switcher title="Assetから外部プラグインを削除" %}
 {% dialect title="JavaScript" id="js" %}
-To remove the External Plugin Adapter from an Asset you'll need to use the `removePlugin()` function.
+Assetから外部プラグインアダプターを削除するには、`removePlugin()`関数を使用する必要があります。
 ```ts
 import {publicKey } from '@metaplex-foundation/umi'
 import { removePlugin, CheckResult } from '@metaplex-foundation/mpl-core'
@@ -63,7 +63,7 @@ await removePlugin(umi, {
 ```
 {% /dialect  %}
 {% dialect title="Rust" id="rust" %}
-To remove the External Plugin Adapter from an Asset you'll need to use the `RemoveExternalPluginAdapterV1Builder()` function.
+Assetから外部プラグインアダプターを削除するには、`RemoveExternalPluginAdapterV1Builder()`関数を使用する必要があります。
 ```rust
 use mpl_core::{instructions::RemoveExternalPluginAdapterV1Builder, types::ExternalPluginAdapterKey};
 use solana_client::nonblocking::rpc_client;
@@ -96,10 +96,10 @@ pub async fn remove_external_plugin_adapter_from_asset() {
 ```
 {% /dialect  %}
 {% /dialect-switcher %}
-## Remove from Collection
-{% dialect-switcher title="Remove External Plugin from Collection" %}
+## Collectionから削除
+{% dialect-switcher title="Collectionから外部プラグインを削除" %}
 {% dialect title="JavaScript" id="js" %}
-To remove the External Plugin Adapter from a Collection you'll need to use the `removeCollectionPlugin()` function.
+Collectionから外部プラグインアダプターを削除するには、`removeCollectionPlugin()`関数を使用する必要があります。
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { removeCollectionPlugin, CheckResult } from '@metaplex-foundation/mpl-core'
@@ -115,7 +115,7 @@ removeCollectionPlugin(umi, {
 ```
 {% /dialect  %}
 {% dialect title="Rust" id="rust" %}
-To remove the External Plugin Adapter from a Collection you'll need to use the `RemoveCollectionExternalPluginAdapterV1Builder()` function.
+Collectionから外部プラグインアダプターを削除するには、`RemoveCollectionExternalPluginAdapterV1Builder()`関数を使用する必要があります。
 ```rust
 use mpl_core::{instructions::RemoveCollectionExternalPluginAdapterV1Builder, types::ExternalPluginAdapterKey};
 use solana_client::nonblocking::rpc_client;
@@ -148,24 +148,24 @@ pub async fn remove_external_plugin_adapter_from_collection() {
 ```
 {% /dialect  %}
 {% /dialect-switcher %}
-## Common Errors
+## 一般的なエラー
 ### `Authority mismatch`
-Only the plugin authority can remove external plugins. Verify you're signing with the correct keypair.
+プラグインauthorityのみが外部プラグインを削除できます。正しいキーペアで署名していることを確認してください。
 ### `Plugin not found`
-No external plugin with the specified key exists on this Asset/Collection.
-## Notes
-- Removing a plugin deletes all its data
-- Rent is recovered and returned to the payer
-- Only the plugin authority can remove (usually update authority)
-- The external Oracle/AppData account is NOT deleted—only the adapter
+指定されたキーを持つ外部プラグインがこのAsset/Collectionに存在しません。
+## 注意事項
+- プラグインを削除するとすべてのデータが削除される
+- レントは回収され、支払者に返される
+- プラグインauthorityのみが削除可能（通常はupdate authority）
+- 外部Oracle/AppDataアカウントは削除されない—アダプターのみ
 ## FAQ
-### Does removing an Oracle plugin delete the Oracle account?
-No. Only the plugin adapter on the Asset is removed. The external Oracle account remains and can be reused.
-### Can I recover AppData before removing?
-Yes. Read the AppData using `fetchAsset()` before removing the plugin if you need to preserve the data.
-### What happens to the rent?
-The rent from the plugin adapter is recovered and returned to the transaction payer.
-## Related Operations
-- [Adding External Plugins](/smart-contracts/core/external-plugins/adding-external-plugins) - Add external plugins
-- [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
-- [Removing Plugins](/smart-contracts/core/plugins/removing-plugins) - Remove built-in plugins
+### Oracleプラグインを削除するとOracleアカウントも削除されますか？
+いいえ。Asset上のプラグインアダプターのみが削除されます。外部Oracleアカウントは残り、再利用できます。
+### 削除前にAppDataを復元できますか？
+はい。データを保存する必要がある場合は、プラグインを削除する前に`fetchAsset()`を使用してAppDataを読み取ってください。
+### レントはどうなりますか？
+プラグインアダプターからのレントは回収され、トランザクションの支払者に返されます。
+## 関連操作
+- [外部プラグインの追加](/smart-contracts/core/external-plugins/adding-external-plugins) - 外部プラグインの追加
+- [外部プラグイン概要](/smart-contracts/core/external-plugins/overview) - 外部プラグインの理解
+- [プラグインの削除](/smart-contracts/core/plugins/removing-plugins) - 組み込みプラグインの削除

@@ -1,7 +1,7 @@
 ---
-title: Guides
-metaTitle: Guides | Core
-description: A list of guides and tutorials for the Metaplex Core digital asset standard on the Solana blockchain.
+title: ガイド
+metaTitle: ガイド | Core
+description: Solanaブロックチェーン上のMetaplex Coreデジタルアセット標準のガイドとチュートリアルのリスト。
 updated: '01-31-2026'
 keywords:
   - Core guides
@@ -14,14 +14,14 @@ about:
   - Code examples
 proficiencyLevel: Intermediate
 ---
-The following Guides for MPL Core are currently available:
+現在利用可能なMPL Coreのガイドは以下の通りです：
 {% quick-links %}
-{% quick-link title="Soulbound NFT" icon="CodeBracketSquare" href="/smart-contracts/core/guides/create-soulbound-nft-asset" description="Different options for Soulbound NFT including code examples" /%}
-{% quick-link title="Print Editions" icon="CodeBracketSquare" href="/smart-contracts/core/guides/print-editions" description="Learn how to combine plugins to create Editions with MPL Core" /%}
-{% quick-link title="Immutability" icon="BookOpen" href="/smart-contracts/core/guides/immutability" description="Learn how Immutability works in MPL Core" /%}
-{% quick-link title="Oracle Plugin Example" icon="CodeBracketSquare" href="/smart-contracts/core/guides/oracle-plugin-example" description="Learn how you can create a collection that can be traded only during US market hours" /%}
-{% quick-link title="Appdata Plugin Example" icon="CodeBracketSquare" href="/smart-contracts/core/guides/onchain-ticketing-with-appdata" description="Learn how you can create a ticketing platform leveraging the Appdata plugin" /%}
-{% quick-link title="Typescript Staking Example" icon="CodeBracketSquare" href="/smart-contracts/core/guides/javascript/web2-typescript-staking-example" description="Learn how you can create a staking program for your collection using only Typescript" /%}
-{% quick-link title="Anchor Staking Example" icon="CodeBracketSquare" href="/smart-contracts/core/guides/anchor/anchor-staking-example" description="Learn how you can create a staking smart contract for your collection" /%}
-{% quick-link title="Create a claim based airdrop using Gumdrop" icon="CodeBracketSquare" href="/guides/general/spl-token-claim-airdrop-using-gumdrop" description="Learn how to create a claim based airdrop using Gumdrop" /%}
+{% quick-link title="Soulbound NFT" icon="CodeBracketSquare" href="/smart-contracts/core/guides/create-soulbound-nft-asset" description="コード例を含むSoulbound NFTのさまざまなオプション" /%}
+{% quick-link title="プリントエディション" icon="CodeBracketSquare" href="/smart-contracts/core/guides/print-editions" description="MPL Coreでプラグインを組み合わせてエディションを作成する方法を学ぶ" /%}
+{% quick-link title="不変性" icon="BookOpen" href="/smart-contracts/core/guides/immutability" description="MPL Coreでの不変性の仕組みを学ぶ" /%}
+{% quick-link title="Oracleプラグインの例" icon="CodeBracketSquare" href="/smart-contracts/core/guides/oracle-plugin-example" description="米国市場時間中にのみ取引できるコレクションの作成方法を学ぶ" /%}
+{% quick-link title="Appdataプラグインの例" icon="CodeBracketSquare" href="/smart-contracts/core/guides/onchain-ticketing-with-appdata" description="Appdataプラグインを活用したチケッティングプラットフォームの作成方法を学ぶ" /%}
+{% quick-link title="Typescriptステーキングの例" icon="CodeBracketSquare" href="/smart-contracts/core/guides/javascript/web2-typescript-staking-example" description="Typescriptのみを使用してコレクションのステーキングプログラムを作成する方法を学ぶ" /%}
+{% quick-link title="Anchorステーキングの例" icon="CodeBracketSquare" href="/smart-contracts/core/guides/anchor/anchor-staking-example" description="コレクション用のステーキングスマートコントラクトの作成方法を学ぶ" /%}
+{% quick-link title="Gumdropを使用したクレームベースのエアドロップ作成" icon="CodeBracketSquare" href="/guides/general/spl-token-claim-airdrop-using-gumdrop" description="Gumdropを使用してクレームベースのエアドロップを作成する方法を学ぶ" /%}
 {% /quick-links %}

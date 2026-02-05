@@ -1,7 +1,7 @@
 ---
-title: Updating Assets
-metaTitle: Updating Assets | Metaplex Core
-description: Learn how to update Core NFT Asset metadata on Solana. Change name, URI, collection membership, and make assets immutable using the Metaplex Core SDK.
+title: Asset 업데이트
+metaTitle: Asset 업데이트 | Metaplex Core
+description: Solana에서 Core NFT Asset 메타데이터를 업데이트하는 방법을 배웁니다. Metaplex Core SDK를 사용하여 이름, URI, 컬렉션 멤버십을 변경하고 Asset을 불변으로 만듭니다.
 updated: '01-31-2026'
 keywords:
   - update NFT
@@ -28,70 +28,70 @@ howToTools:
   - Umi framework
   - mpl-core SDK
 faqs:
-  - q: Can I undo making an Asset immutable?
-    a: No. Setting the update authority to None is permanent. The Asset's name, URI, and collection membership are frozen forever.
-  - q: How do I update only the name without changing the URI?
-    a: Pass only the fields you want to change. Omit uri to keep the current value.
-  - q: What's the difference between updating and transferring?
-    a: Update changes the Asset's metadata (name, URI). Transfer changes ownership. They're separate operations with different authority requirements.
-  - q: Can a delegate update an Asset?
-    a: Yes, if they have been assigned as an Update Delegate via the Update Delegate plugin.
-  - q: Does updating cost SOL?
-    a: Updates are free unless the new data is larger than the current account size. The transaction fee (~0.000005 SOL) still applies.
+  - q: Asset을 불변으로 만든 후 되돌릴 수 있나요?
+    a: 아니요. Update Authority를 None으로 설정하는 것은 영구적입니다. Asset의 이름, URI, 컬렉션 멤버십이 영원히 고정됩니다.
+  - q: URI를 변경하지 않고 이름만 업데이트하려면 어떻게 하나요?
+    a: 변경하려는 필드만 전달합니다. 현재 값을 유지하려면 uri를 생략하세요.
+  - q: 업데이트와 전송의 차이점은 무엇인가요?
+    a: 업데이트는 Asset의 메타데이터(이름, URI)를 변경합니다. 전송은 소유권을 변경합니다. 서로 다른 권한 요구사항을 가진 별개의 작업입니다.
+  - q: 위임자가 Asset을 업데이트할 수 있나요?
+    a: 네, Update Delegate 플러그인을 통해 Update Delegate로 지정된 경우 가능합니다.
+  - q: 업데이트에 SOL이 드나요?
+    a: 새 데이터가 현재 계정 크기보다 큰 경우를 제외하고 업데이트는 무료입니다. 트랜잭션 수수료(약 0.000005 SOL)는 여전히 적용됩니다.
 ---
-This guide shows how to **update Core Asset metadata** on Solana using the Metaplex Core SDK. Modify the name, URI, or collection membership of Assets you control. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Update Asset name and metadata URI
-- Move an Asset to a different Collection
-- Make an Asset immutable (permanent)
-- Understand update authority requirements
+이 가이드에서는 Metaplex Core SDK를 사용하여 Solana에서 **Core Asset 메타데이터를 업데이트**하는 방법을 설명합니다. 관리하는 Asset의 이름, URI 또는 컬렉션 멤버십을 변경할 수 있습니다. {% .lead %}
+{% callout title="배울 내용" %}
+- Asset 이름 및 메타데이터 URI 업데이트
+- Asset을 다른 Collection으로 이동
+- Asset을 불변(영구적)으로 만들기
+- Update Authority 요구사항 이해
 {% /callout %}
-## Summary
-Update a Core Asset's metadata using the `update` instruction. Only the update authority (or an authorized delegate) can modify an Asset.
-- Change `name` and `uri` to update metadata
-- Use `newCollection` to move Assets between Collections
-- Set `updateAuthority` to `None` to make immutable
-- Updates are free (no rent cost) unless changing account size
-## Out of Scope
-Updating Token Metadata NFTs (use mpl-token-metadata), plugin modifications (see [Plugins](/smart-contracts/core/plugins)), and ownership transfers (see [Transferring Assets](/smart-contracts/core/transfer)).
-## Quick Start
-**Jump to:** [Update Asset](#updating-a-core-asset) · [Change Collection](#change-the-collection-of-a-core-asset) · [Make Immutable](#making-a-core-asset-data-immutable)
-1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
-2. Fetch the Asset to get current state
-3. Call `update(umi, { asset, name, uri })` with new values
-4. Verify changes with `fetchAsset()`
-## Prerequisites
-- **Umi** configured with a signer that is the Asset's update authority
-- **Asset address** of the Asset to update
-- **New metadata** uploaded to Arweave/IPFS (if changing URI)
-The update authority or delegate of a Core Asset has the ability to change some of the Asset's data.
+## 요약
+`update` 명령어를 사용하여 Core Asset의 메타데이터를 업데이트합니다. Update Authority(또는 승인된 위임자)만 Asset을 수정할 수 있습니다.
+- `name`과 `uri`를 변경하여 메타데이터 업데이트
+- `newCollection`을 사용하여 Collection 간 Asset 이동
+- `updateAuthority`를 `None`으로 설정하여 불변으로 만들기
+- 계정 크기를 변경하지 않는 한 업데이트는 무료(렌트 비용 없음)
+## 범위 외
+Token Metadata NFT 업데이트(mpl-token-metadata 사용), 플러그인 수정([플러그인](/ko/smart-contracts/core/plugins) 참조), 소유권 전송([Asset 전송](/ko/smart-contracts/core/transfer) 참조).
+## 빠른 시작
+**바로가기:** [Asset 업데이트](#core-asset-업데이트) · [Collection 변경](#core-asset의-collection-변경) · [불변화](#core-asset-데이터-불변화)
+1. 설치: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
+2. 현재 상태를 가져오기 위해 Asset 페치
+3. 새 값으로 `update(umi, { asset, name, uri })` 호출
+4. `fetchAsset()`으로 변경 사항 확인
+## 전제 조건
+- Asset의 Update Authority인 서명자가 구성된 **Umi**
+- 업데이트할 **Asset 주소**
+- Arweave/IPFS에 업로드된 **새 메타데이터**(URI 변경 시)
+Core Asset의 Update Authority 또는 위임자는 Asset 데이터의 일부를 변경할 권한이 있습니다.
 {% totem %}
-{% totem-accordion title="Technical Instruction Details" %}
-**Instruction Accounts List**
-| Account            | Description                                     |
-| ------------------ | ----------------------------------------------- |
-| asset              | The address of the MPL Core Asset.              |
-| collection         | The collection to which the Core Asset belongs. |
-| payer              | The account paying for the storage fees.        |
-| authority          | The owner or delegate of the asset.             |
-| newUpdateAuthority | The new update authority of the asset.          |
-| systemProgram      | The System Program account.                     |
-| logWrapper         | The SPL Noop Program.                           |
-**Instruction Arguments**
-| Args    | Description                      |
-| ------- | -------------------------------- |
-| newName | The new name of your Core Asset. |
-| newUri  | The new off-chain metadata URI.  |
-Some of the accounts/args may be abstracted out and/or optional in our sdks for ease of use.
-A full detailed look at the on chain instruction it can be viewed here. [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/clients/rust/src/generated/instructions/update_v1.rs#L126)
+{% totem-accordion title="기술적 명령어 상세" %}
+**명령어 계정 목록**
+| 계정               | 설명                                     |
+| ------------------ | ---------------------------------------- |
+| asset              | MPL Core Asset의 주소                    |
+| collection         | Core Asset이 속하는 Collection           |
+| payer              | 스토리지 수수료를 지불하는 계정          |
+| authority          | Asset의 소유자 또는 위임자               |
+| newUpdateAuthority | Asset의 새 Update Authority              |
+| systemProgram      | System Program 계정                      |
+| logWrapper         | SPL Noop Program                         |
+**명령어 인수**
+| 인수     | 설명                       |
+| ------- | ------------------------- |
+| newName | Core Asset의 새 이름       |
+| newUri  | 새 오프체인 메타데이터 URI |
+일부 계정/인수는 SDK에서 사용 편의를 위해 추상화되거나 선택 사항일 수 있습니다.
+온체인 명령어의 전체 상세 내용은 [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/clients/rust/src/generated/instructions/update_v1.rs#L126)에서 확인할 수 있습니다.
 {% /totem-accordion %}
 {% /totem %}
-## Updating a Core Asset
-Here is how you can use our SDKs to update an MPL Core Asset.
+## Core Asset 업데이트
+SDK를 사용하여 MPL Core Asset을 업데이트하는 방법입니다.
 {% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
-## Change the Collection of a Core Asset
-Here is how you can use our SDKs to change the collection of a Core Asset.
-{% dialect-switcher title="Change the collection of a Core Asset" %}
+## Core Asset의 Collection 변경
+SDK를 사용하여 Core Asset의 Collection을 변경하는 방법입니다.
+{% dialect-switcher title="Core Asset의 Collection 변경" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from "@metaplex-foundation/umi";
@@ -120,13 +120,13 @@ const updateTx = await update(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Making a Core Asset Data Immutable
-Here is how you can use our SDKs to make a Core Asset fully immutable. Be aware that there are different levels of immutability described in the [immutability Guide](/smart-contracts/core/guides/immutability).
-{% callout type="warning" title="Important" %}
-This is a destructive action and will remove the ability to update the asset.
-It will also remove the asset from any collections it was in. To make collection assets immutable you will need to change the update authority of the collection.
+## Core Asset 데이터 불변화
+SDK를 사용하여 Core Asset을 완전히 불변으로 만드는 방법입니다. [불변성 가이드](/ko/smart-contracts/core/guides/immutability)에서 설명하는 다양한 수준의 불변성이 있다는 점에 유의하세요.
+{% callout type="warning" title="중요" %}
+이것은 파괴적인 작업이며 Asset을 업데이트하는 기능이 제거됩니다.
+또한 Asset이 속해 있던 모든 Collection에서도 제거됩니다. Collection Asset을 불변으로 만들려면 Collection의 Update Authority를 변경해야 합니다.
 {% /callout %}
-{% dialect-switcher title="Make a Core Asset Immutable" %}
+{% dialect-switcher title="Core Asset을 불변으로 만들기" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -171,57 +171,57 @@ pub async fn update_asset_data_to_immutable() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 일반적인 오류
 ### `Authority mismatch`
-You're not the update authority of the Asset. Check:
+당신은 Asset의 Update Authority가 아닙니다. 확인하세요:
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
-console.log(asset.updateAuthority) // Must match your signer
+console.log(asset.updateAuthority) // 서명자와 일치해야 합니다
 ```
 ### `Collection authority required`
-When changing Collections, you need authority on both the Asset and the target Collection.
+Collection을 변경할 때 Asset과 대상 Collection 모두에서 권한이 필요합니다.
 ### `Asset is immutable`
-The Asset's update authority is set to `None`. This cannot be reversed.
-## Notes
-- Fetch the Asset before updating to ensure you have the current state
-- Only the update authority (or delegate) can update an Asset
-- Making an Asset immutable is **permanent and irreversible**
-- Changing Collections may affect inherited plugins (royalties, etc.)
-- Updates don't change the Asset's owner
-## Quick Reference
-### Update Parameters
-| Parameter | Description |
+Asset의 Update Authority가 `None`으로 설정되어 있습니다. 이것은 되돌릴 수 없습니다.
+## 참고 사항
+- 업데이트 전에 Asset을 페치하여 현재 상태 확인
+- Update Authority(또는 위임자)만 Asset을 업데이트할 수 있음
+- Asset을 불변으로 만드는 것은 **영구적이고 되돌릴 수 없음**
+- Collection을 변경하면 상속된 플러그인(로열티 등)에 영향을 줄 수 있음
+- 업데이트로 Asset의 소유자는 변경되지 않음
+## 빠른 참조
+### 업데이트 매개변수
+| 매개변수 | 설명 |
 |-----------|-------------|
-| `asset` | The Asset to update (address or fetched object) |
-| `name` | New name for the Asset |
-| `uri` | New metadata URI |
-| `newCollection` | Target Collection address |
-| `newUpdateAuthority` | New authority (or `None` for immutable) |
-### Authority Types
-| Type | Description |
+| `asset` | 업데이트할 Asset(주소 또는 페치된 객체) |
+| `name` | Asset의 새 이름 |
+| `uri` | 새 메타데이터 URI |
+| `newCollection` | 대상 Collection 주소 |
+| `newUpdateAuthority` | 새 Authority(또는 불변의 경우 `None`) |
+### Authority 타입
+| 타입 | 설명 |
 |------|-------------|
-| `Address` | A specific public key |
-| `Collection` | The Collection's update authority |
-| `None` | Immutable - no updates allowed |
+| `Address` | 특정 공개 키 |
+| `Collection` | Collection의 Update Authority |
+| `None` | 불변 - 업데이트 불가 |
 ## FAQ
-### Can I undo making an Asset immutable?
-No. Setting the update authority to `None` is permanent. The Asset's name, URI, and collection membership are frozen forever. Only do this when you're certain.
-### How do I update only the name without changing the URI?
-Pass only the fields you want to change. Omit `uri` to keep the current value:
+### Asset을 불변으로 만든 후 되돌릴 수 있나요?
+아니요. Update Authority를 `None`으로 설정하는 것은 영구적입니다. Asset의 이름, URI, 컬렉션 멤버십이 영원히 고정됩니다. 확실할 때만 수행하세요.
+### URI를 변경하지 않고 이름만 업데이트하려면 어떻게 하나요?
+변경하려는 필드만 전달합니다. 현재 값을 유지하려면 `uri`를 생략하세요:
 ```ts
 await update(umi, { asset, name: 'New Name' }).sendAndConfirm(umi)
 ```
-### What's the difference between updating and transferring?
-Update changes the Asset's metadata (name, URI). Transfer changes ownership. They're separate operations with different authority requirements.
-### Can a delegate update an Asset?
-Yes, if they have been assigned as an Update Delegate via the [Update Delegate plugin](/smart-contracts/core/plugins/update-delegate).
-### Does updating cost SOL?
-Updates are free unless the new data is larger than the current account size (rare). The transaction fee (~0.000005 SOL) still applies.
-## Glossary
-| Term | Definition |
+### 업데이트와 전송의 차이점은 무엇인가요?
+업데이트는 Asset의 메타데이터(이름, URI)를 변경합니다. 전송은 소유권을 변경합니다. 서로 다른 권한 요구사항을 가진 별개의 작업입니다.
+### 위임자가 Asset을 업데이트할 수 있나요?
+네, [Update Delegate 플러그인](/ko/smart-contracts/core/plugins/update-delegate)을 통해 Update Delegate로 지정된 경우 가능합니다.
+### 업데이트에 SOL이 드나요?
+새 데이터가 현재 계정 크기보다 큰 경우(드물게)를 제외하고 업데이트는 무료입니다. 트랜잭션 수수료(약 0.000005 SOL)는 여전히 적용됩니다.
+## 용어집
+| 용어 | 정의 |
 |------|------------|
-| **Update Authority** | The account authorized to modify an Asset's metadata |
-| **Immutable** | An Asset that cannot be updated (update authority is None) |
-| **URI** | The URL pointing to off-chain metadata JSON |
-| **Delegate** | An account granted specific permissions via a plugin |
-| **Collection Membership** | The Collection an Asset belongs to |
+| **Update Authority** | Asset의 메타데이터를 수정할 권한이 있는 계정 |
+| **불변(Immutable)** | 업데이트할 수 없는 Asset(Update Authority가 None) |
+| **URI** | 오프체인 메타데이터 JSON을 가리키는 URL |
+| **위임자** | 플러그인을 통해 특정 권한이 부여된 계정 |
+| **컬렉션 멤버십** | Asset이 속하는 Collection |

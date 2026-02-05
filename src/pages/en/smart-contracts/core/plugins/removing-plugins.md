@@ -24,9 +24,9 @@ faqs:
   - q: Can I remove a plugin someone else delegated to me?
     a: Yes, if you're the delegated authority for that plugin, you can remove it.
   - q: Why can't I remove a Permanent plugin?
-    a: Permanent plugins are designed to be immutable and cannot be removed after creation. This is by design for use cases that require guaranteed permanence.
+    a: Permanent plugins cannot be removed after creation, though their settings can still be adjusted. This is by design for use cases that require guaranteed plugin presence.
   - q: Can I remove a plugin from a Collection and its Assets at once?
-    a: No. Collection plugins and Asset plugins are managed separately. Removing a Collection plugin only affects the Collection, not its Assets.
+    a: No. Collection plugins and Asset plugins are managed separately. However, removing a Collection plugin can affect Assets that inherit from it (e.g., Assets without their own Royalties plugin will no longer have royalties enforced).
 ---
 This guide shows how to **remove plugins** from Core Assets and Collections. Removing a plugin deletes its data and functionality. {% .lead %}
 {% callout title="What You'll Learn" %}
@@ -169,9 +169,9 @@ The rent that was used to store the plugin data is recovered and returned to the
 ### Can I remove a plugin someone else delegated to me?
 Yes, if you're the delegated authority for that plugin, you can remove it.
 ### Why can't I remove a Permanent plugin?
-Permanent plugins are designed to be immutable and cannot be removed after creation. This is by design for use cases that require guaranteed permanence.
+Permanent plugins cannot be removed after creation, though their settings can still be adjusted. This is by design for use cases that require guaranteed plugin presence.
 ### Can I remove a plugin from a Collection and its Assets at once?
-No. Collection plugins and Asset plugins are managed separately. Removing a Collection plugin only affects the Collection, not its Assets.
+No. Collection plugins and Asset plugins are managed separately. However, removing a Collection plugin can affect Assets that inherit from it (e.g., Assets without their own Royalties plugin will no longer have royalties enforced).
 ## Related Operations
 - [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) - Add plugins to Assets/Collections
 - [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins) - Change plugin authorities

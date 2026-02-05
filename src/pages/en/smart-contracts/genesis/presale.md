@@ -56,7 +56,7 @@ This guide covers:
 Presales sell tokens at a predetermined price. The price is calculated from the token allocation and SOL cap you configure.
 
 - Fixed price = SOL cap / token allocation
-- Users deposit SOL during the deposit window (2% fee applies)
+- Users deposit SOL during the deposit window ({% fee product="genesis" config="presale" fee="deposit" /%} fee applies)
 - First-come-first-served up to the SOL cap
 - Optional: minimum/maximum deposit limits, cooldowns, backend authorization
 
@@ -641,7 +641,7 @@ if (deposit) {
 
 ## Notes
 
-- The 2% protocol fee applies to deposits
+- The {% fee product="genesis" config="presale" fee="deposit" /%} protocol fee applies to deposits
 - Users must wrap SOL to wSOL before depositing
 - Multiple deposits from the same user accumulate in one deposit account
 - The transition must be executed after deposits close for the team to access funds

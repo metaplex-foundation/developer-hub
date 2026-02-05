@@ -1,7 +1,7 @@
 ---
-title: Deserialization
-metaTitle: Deserialization | Core
-description: Learn about the deserialization of Asset accounts, Collection accounts and plugins using the Metaplex Core packages.
+title: 反序列化
+metaTitle: 反序列化 | Core
+description: 了解如何使用Metaplex Core包反序列化Asset账户、Collection账户和插件。
 updated: '01-31-2026'
 keywords:
   - deserialize asset
@@ -18,16 +18,16 @@ programmingLanguage:
   - TypeScript
   - Rust
 ---
-Digital assets on Core are composed of exactly **one onchain account** that contains both the base asset data and the plugin.
-That means that if we want to read that data we need to learn how to deserialize it.
-In Javascript we can deserialize both the base asset data and the plugin using a single function. In Rust we should deserialize the base asset and only the required plugins separately to avoid unnecessary compute usage and to prevent overflowing the stack.
-## Deserializing Assets
-Deserializing the `Asset` account will return information about:
-- **Owner**: The owner of the asset
-- **Update Authority**: The authority over the asset, or the collection Address if it's part of one 
-- **Name**: The Asset Name
-- **Uri**: The uri to the asset off-chain metadata. -->
-{% dialect-switcher title="Deserialize an Asset" %}
+Core上的数字资产由**一个链上账户**组成，其中包含基础资产数据和插件。
+这意味着如果我们想读取该数据，我们需要学习如何反序列化它。
+在Javascript中，我们可以使用单个函数反序列化基础资产数据和插件。在Rust中，我们应该分别反序列化基础资产和仅需要的插件，以避免不必要的计算使用并防止堆栈溢出。
+## 反序列化Asset
+反序列化`Asset`账户将返回以下信息：
+- **Owner**：资产的所有者
+- **Update Authority**：资产的authority，或者如果它是收藏品的一部分则为收藏品地址
+- **Name**：资产名称
+- **Uri**：资产链下元数据的uri
+{% dialect-switcher title="反序列化Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 const accountData = await umi.rpc.getAccount(
@@ -56,14 +56,14 @@ println!("assetV1: {:?}", asset_v1);
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Deserializing Collections
-Deserializing the `Collection` account will return information about:
-- **Update** Authority:	The authority over the collection and all the asset inside of it
-- **Name**:	The collection name.
-- **Uri**:	The uri to the collections off-chain metadata.
-- **Num Minted**: The number of assets minted in the collection.
-- **Current size**:	The number of assets currently in the collection.
-{% dialect-switcher title="Deserialize a Collection" %}
+## 反序列化Collection
+反序列化`Collection`账户将返回以下信息：
+- **Update Authority**：收藏品及其中所有资产的authority
+- **Name**：收藏品名称
+- **Uri**：收藏品链下元数据的uri
+- **Num Minted**：收藏品中铸造的资产数量
+- **Current size**：当前收藏品中的资产数量
+{% dialect-switcher title="反序列化Collection" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 const accountData = await umi.rpc.getAccount(
@@ -92,29 +92,29 @@ println!("collection_V1: {:?}", collection_v1);
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Deserializing Plugins
-As said before, 
-- Using **Javascript** we can deserialize the whole asset into a single variable, in this section we're going to see how we can access the specific data associated with the plugins.
-- Using **Rust** we need to deserialize specific plugin data to avoid stack violation because of the size of the account.
-{% dialect-switcher title="Deserialize Plugins" %}
+## 反序列化插件
+如前所述，
+- 使用**Javascript**，我们可以将整个资产反序列化为单个变量，在本节中，我们将了解如何访问与插件相关的特定数据。
+- 使用**Rust**时，我们需要反序列化特定的插件数据，以避免由于账户大小而导致的堆栈违规。
+{% dialect-switcher title="反序列化插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 const assetV1 = await fetchAsset(
   umi,
   publicKey('11111111111111111111111111111111')
 )
-// Example of saving just the deserialized data of the Attributes Plugin
+// 仅保存Attributes插件反序列化数据的示例
 let attributes_plugin = assetV1.attributes
-// Example of saving just the deserialized data of the Royalties Plugin
+// 仅保存Royalties插件反序列化数据的示例
 let royalties_plugin = assetV1.royalties
 ```
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 ```rust
-// Example of using the AccountInfo of Core Asset account to deserialize an Attributes plugin stored on the asset.
+// 使用Core Asset账户的AccountInfo反序列化存储在资产上的Attributes插件的示例
 let attributes_plugin =
     fetch_plugin::<BaseAssetV1, Attributes>(&account_info, PluginType::Attributes).unwrap();
-// // Example of using the AccountInfo of Core Collection account to deserialize an Attributes plugin stored on the asset.
+// 使用Core Collection账户的AccountInfo反序列化存储在资产上的Royalties插件的示例
 let royalties_plugin =
     fetch_plugin::<BaseCollectionV1, Royalties>(&account_info, PluginType::Royalties).unwrap();
 ```

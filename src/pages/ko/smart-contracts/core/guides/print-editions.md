@@ -1,7 +1,7 @@
 ---
-title: Print Editions with MPL Core
-metaTitle: Print Editions | Core Guides
-description: This guide shows you how to combine plugins to create Editions with the Metaplex Core protocol.
+title: MPL Core에서의 프린트 에디션
+metaTitle: 프린트 에디션 | Core 가이드
+description: 이 가이드에서는 Metaplex Core 프로토콜에서 플러그인을 조합하여 에디션을 만드는 방법을 보여줍니다.
 updated: '01-31-2026'
 keywords:
   - print editions
@@ -17,28 +17,28 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 howToSteps:
-  - Create a Collection with the Master Edition plugin for supply tracking
-  - Create Assets with the Edition plugin containing edition numbers
-  - Optionally use Candy Machine Edition Guard for automatic numbering
-  - Verify editions are properly linked to the Master Edition Collection
+  - 공급량 추적을 위해 Master Edition 플러그인이 있는 Collection 생성
+  - 에디션 번호를 포함하는 Edition 플러그인이 있는 Asset 생성
+  - 선택적으로 Candy Machine Edition Guard를 사용하여 자동 번호 매기기
+  - 에디션이 Master Edition Collection에 적절히 연결되어 있는지 확인
 howToTools:
   - Node.js
-  - Umi framework
+  - Umi 프레임워크
   - mpl-core SDK
 ---
-## Introduction
-### What is an Edition?
-An Edition is a copy of the same "Master Edition". To understand the concept it can be helpful to think of physical Paintings: The Master Edition is the initial Painting, the Editions, also known as prints, are copies of that painting. 
-### Editions with Core
-MPL Core Edition support was added close after to the mainnet release. Different to Token Metadata Editions the Edition Numbers and Supply are not enforced, but informational.
-To achieve the Edition concept in Core two [Plugins](/smart-contracts/core/plugins) are used: [Master Edition](/smart-contracts/core/plugins/master-edition) in the Collection and [Edition](/smart-contracts/core/plugins/edition) in the Asset, which are the prints. The hierarchy looks like this:
+## 시작하기
+### 에디션이란?
+에디션은 동일한 "마스터 에디션"의 복사본입니다. 개념을 이해하기 위해 물리적 그림을 생각해보면 도움이 됩니다: 마스터 에디션은 첫 번째 그림이고, 에디션(프린트라고도 함)은 그 그림의 복사본입니다.
+### Core에서의 에디션
+MPL Core 에디션 지원은 메인넷 출시 직후에 추가되었습니다. Token Metadata 에디션과 달리 에디션 번호와 공급량은 강제되지 않으며 정보 제공 목적으로만 사용됩니다.
+Core에서 에디션 개념을 구현하기 위해 두 개의 [플러그인](/smart-contracts/core/plugins)이 사용됩니다: Collection의 [Master Edition](/smart-contracts/core/plugins/master-edition)과 Asset(프린트)의 [Edition](/smart-contracts/core/plugins/edition). 계층 구조는 다음과 같습니다:
 {% diagram %}
 {% node %}
 {% node #master label="Master Edition" theme="indigo" /%}
 {% /node %}
 {% node y="50" parent="master" theme="transparent" %}
-Collection with 
-Master Edition Plugin
+Master Edition 플러그인이 있는
+Collection
 {% /node %}
 {% node x="200" y="-70" parent="master" %}
 {% node #asset1 label="Edition" theme="blue" /%}
@@ -50,27 +50,27 @@ Master Edition Plugin
 {% node #asset3 label="Edition" theme="blue" /%}
 {% /node %}
 {% node y="50" parent="asset3" theme="transparent" %}
-Assets with 
-Edition Plugin
+Edition 플러그인이 있는
+Asset
 {% /node %}
 {% edge from="master" to="asset1" /%}
 {% edge from="master" to="asset2" /%}
 {% edge from="master" to="asset3" /%}
 {% /diagram %}
-## Create Editions using Candy Machine
-The easiest method to create and sell Edition is by leveraging Core Candy Machine. 
-The following Code creates a Master Edition Collection and the Candy Machine that prints the Editions for you.
-{% dialect-switcher title="Create a Candy Machine with Edition Guard and Master Edition Collection" %} 
+## Candy Machine을 사용한 에디션 생성
+에디션을 생성하고 판매하는 가장 쉬운 방법은 Core Candy Machine을 활용하는 것입니다.
+다음 코드는 Master Edition Collection과 에디션을 프린트할 Candy Machine을 생성합니다.
+{% dialect-switcher title="Edition Guard와 Master Edition Collection이 있는 Candy Machine 생성" %}
 {% dialect title="JavaScript" id="js" %}
-First all the required functions are imported and Umi set up with your RPC and Wallet:
+먼저 필요한 모든 함수를 임포트하고 RPC와 Wallet으로 Umi를 설정합니다:
 ```ts
 import {
   create,
   mplCandyMachine,
 } from "@metaplex-foundation/mpl-core-candy-machine";
-import { 
-    createCollection, 
-    ruleSet 
+import {
+    createCollection,
+    ruleSet
 } from "@metaplex-foundation/mpl-core";
 import crypto from "crypto";
 import {
@@ -78,14 +78,14 @@ import {
   keypairIdentity,
 } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
-// Use the RPC endpoint of your choice.
+// 선택한 RPC 엔드포인트 사용
 const umi = createUmi("http://127.0.0.1:8899").use(mplCandyMachine());
-// use your keypair or Wallet Adapter here.
+// 본인의 키페어 또는 Wallet Adapter 사용
 const keypair = generateSigner(umi);
 umi.use(keypairIdentity(keypair));
 ```
-After this setup we can create the Collection with [Master Edition Plugin](/smart-contracts/core/plugins/master-edition). The `maxSupply` field determines how many Editions you want to print. The `name` and `uri` fields in the Plugin can be used in addition to the Collection Name and uri.
-For ease of use we also add the [Royalty Plugin](/smart-contracts/core/plugins/royalties).
+이 설정 후 [Master Edition 플러그인](/smart-contracts/core/plugins/master-edition)이 있는 Collection을 생성할 수 있습니다. `maxSupply` 필드는 프린트할 에디션 수를 결정합니다. 플러그인의 `name`과 `uri` 필드는 Collection 이름과 uri 외에 추가로 사용할 수 있습니다.
+편의를 위해 [Royalty 플러그인](/smart-contracts/core/plugins/royalties)도 추가합니다.
 ```ts
 const collectionSigner = generateSigner(umi);
 await createCollection(umi, {
@@ -96,7 +96,7 @@ await createCollection(umi, {
     {
       type: "MasterEdition",
         maxSupply: 100,
-        //name and uri are not needed if you want them to be similar to the parent collection
+        // 부모 컬렉션과 동일하게 하려면 name과 uri 불필요
         name: undefined,
         uri: undefined,
     },
@@ -109,17 +109,17 @@ await createCollection(umi, {
     ]
   }).sendAndConfirm(umi);
 ```
-After the creation of the Collection we can create the candy machine using `hiddenSettings` and the `edition` guard.
-- `hiddenSettings` are used to assign the same, or similar, Name and Metadata to all Assets minted. You can use a `$ID$` variable that will be replaced by the index of the minted Asset on mint.
-- The `edition` Guard is used to add the [Edition Plugin](/smart-contracts/core/plugins/edition) to the Assets. The Edition number is increasing for each minted Asset, starting with the number in `editionStartOffset`.
+Collection 생성 후 `hiddenSettings`와 `edition` 가드를 사용하여 Candy Machine을 생성할 수 있습니다.
+- `hiddenSettings`는 민팅된 모든 Asset에 동일하거나 유사한 이름과 메타데이터를 할당하는 데 사용됩니다. `$ID$` 변수를 사용하면 민팅 시 민팅된 Asset의 인덱스로 대체됩니다.
+- `edition` 가드는 Asset에 [Edition 플러그인](/smart-contracts/core/plugins/edition)을 추가하는 데 사용됩니다. 에디션 번호는 민팅된 Asset마다 증가하며 `editionStartOffset` 번호부터 시작합니다.
 ```ts
-// The Name and off chain Metadata of your Editions
+// 에디션의 이름과 오프체인 메타데이터
 const editionData = {
   name: "Edition Name",
   uri: "https://example.com/edition-asset.json",
 };
-// This creates a hash that editions do not 
-// use but the Candy Machine requires  
+// 에디션은 사용하지 않지만 Candy Machine이 필요로 하는
+// 해시 생성
 const string = JSON.stringify(editionData);
 const hash = crypto.createHash("sha256").update(string).digest();
 const candyMachine = generateSigner(umi);
@@ -135,22 +135,22 @@ const createIx = await create(umi, {
   },
   guards: {
     edition: { editionStartOffset: 0 },
-    // ... additional Guards
+    // ... 추가 Guard
   },
 })
 await createIx.sendAndConfirm(umi);
 ```
-{% /dialect %} 
+{% /dialect %}
 {% /dialect-switcher %}
-That's it! 
-Now users can mint editions from your candy machine.
-## Create Editions without Core Candy Machine
+완료되었습니다!
+사용자는 Candy Machine에서 에디션을 민팅할 수 있습니다.
+## Core Candy Machine 없이 에디션 생성
 {% callout type="note" %}
-We strongly recommend to use Core Candy Machine for MPL Core Editions. Candy Machine handles the creation and also the correct numbering of the editions for you.
+MPL Core 에디션에는 Core Candy Machine 사용을 강력히 권장합니다. Candy Machine은 에디션 생성과 올바른 번호 매기기를 처리합니다.
 {% /callout %}
-To create an Edition without Core Candy Machine you would:
-1. Create a Collection using the [Master Edition](/smart-contracts/core/plugins/master-edition) Plugin
-{% dialect-switcher title="Create a MPL Core Collection with Master Edition Plugin" %}
+Core Candy Machine 없이 에디션을 생성하려면:
+1. [Master Edition](/smart-contracts/core/plugins/master-edition) 플러그인을 사용하여 Collection 생성
+{% dialect-switcher title="Master Edition 플러그인으로 MPL Core Collection 생성" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -169,7 +169,7 @@ await createCollection(umi, {
     {
       type: "MasterEdition",
         maxSupply: 100,
-        //name and uri are not needed if you want them to be similar to the parent collection
+        // 부모 컬렉션과 동일하게 하려면 name과 uri 불필요
         name: undefined,
         uri: undefined,
     },
@@ -177,7 +177,7 @@ await createCollection(umi, {
       type: "Royalties",
       basisPoints: 500,
       creators: [
-        { address: creator1, percentage: 50 }, 
+        { address: creator1, percentage: 50 },
         { address: creator2, percentage: 50 }
       ],
       ruleSet: ruleSet("None"),
@@ -231,13 +231,13 @@ pub async fn create_collection_with_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-2. Create Assets with the [Edition](/smart-contracts/core/plugins/edition) Plugin. Remember to increase the number in the plugin.
-{% dialect-switcher title="Creating an MPL Core Asset with the Edition Plugin" %}
+2. [Edition](/smart-contracts/core/plugins/edition) 플러그인이 있는 Asset 생성. 플러그인 내 번호를 증가시키는 것을 잊지 마세요.
+{% dialect-switcher title="Edition 플러그인으로 MPL Core Asset 생성" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
-import { 
-    create, 
+import {
+    create,
 } from '@metaplex-foundation/mpl-core'
 const asset = generateSigner(umi)
 const result = create(umi, {
@@ -297,7 +297,7 @@ pub async fn create_asset_with_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Further Reading
-- [Mint from Candy Machine](/core-candy-machine/mint)
-- [Master Edition Plugin](/smart-contracts/core/plugins/master-edition)
-- [Edition Plugin](/smart-contracts/core/plugins/edition)
+## 관련 정보
+- [Candy Machine에서 민팅](/core-candy-machine/mint)
+- [Master Edition 플러그인](/smart-contracts/core/plugins/master-edition)
+- [Edition 플러그인](/smart-contracts/core/plugins/edition)

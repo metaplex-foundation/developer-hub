@@ -1,7 +1,7 @@
 ---
-title: Adding External Plugins
-metaTitle: Adding External Plugins | Metaplex Core
-description: Learn how to add Oracle and AppData plugins to Core Assets and Collections. Code examples for JavaScript and Rust.
+title: 添加外部插件
+metaTitle: 添加外部插件 | Metaplex Core
+description: 学习如何向 Core Asset 和 Collection 添加 Oracle 和 AppData 插件。包含 JavaScript 和 Rust 代码示例。
 updated: '01-31-2026'
 keywords:
   - add external plugin
@@ -18,36 +18,36 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: Can I add multiple external plugins to one Asset?
-    a: Yes. You can add multiple Oracle and/or AppData plugins to a single Asset.
-  - q: Do I need to create the Oracle account first?
-    a: Yes. The Oracle account must exist before adding an Oracle plugin adapter.
-  - q: What's the difference between adding at creation vs adding later?
-    a: No functional difference. Adding at creation is more efficient (one transaction). Adding later requires a separate transaction.
+  - q: 我可以向一个 Asset 添加多个外部插件吗？
+    a: 可以。您可以向单个 Asset 添加多个 Oracle 和/或 AppData 插件。
+  - q: 我需要先创建 Oracle 账户吗？
+    a: 是的。在添加 Oracle 插件适配器之前，Oracle 账户必须已经存在。
+  - q: 创建时添加和之后添加有什么区别？
+    a: 功能上没有区别。创建时添加更高效（一个交易）。之后添加需要单独的交易。
 ---
-This guide shows how to **add External Plugins** (Oracle, AppData) to Core Assets and Collections. Add at creation time or to existing Assets/Collections. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add external plugins during Asset/Collection creation
-- Add external plugins to existing Assets/Collections
-- Configure Oracle lifecycle checks
-- Set up AppData with data authorities
+本指南展示如何向 Core Asset 和 Collection **添加外部插件**（Oracle、AppData）。可以在创建时添加，也可以添加到现有的 Asset/Collection。{% .lead %}
+{% callout title="您将学到" %}
+- 在 Asset/Collection 创建期间添加外部插件
+- 向现有 Asset/Collection 添加外部插件
+- 配置 Oracle 生命周期检查
+- 使用数据权限设置 AppData
 {% /callout %}
-## Summary
-Add external plugins using `create()` with the `plugins` array, or `addPlugin()` for existing Assets. Collections use `createCollection()` and `addCollectionPlugin()`.
-- Add at creation: include in `plugins` array
-- Add to existing: use `addPlugin()` / `addCollectionPlugin()`
-- Requires update authority signature
-- Configure lifecycle checks for Oracle plugins
-## Out of Scope
-Removing external plugins (see [Removing External Plugins](/smart-contracts/core/external-plugins/removing-external-plugins)), updating plugin data, and built-in plugins (see [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)).
-## Quick Start
-**Jump to:** [Create Asset with Plugin](#creating-a-core-asset-with-an-external-plugin) · [Add to Existing Asset](#adding-a-external-plugin-to-a-core-asset) · [Create Collection with Plugin](#creating-a-core-collection-with-an-external-plugin)
-1. Prepare your Oracle account or AppData configuration
-2. Add plugin at creation or via `addPlugin()`
-3. Configure lifecycle checks (Oracle) or data authority (AppData)
-## Assets
-### Creating a Core Asset with an External Plugin
-{% dialect-switcher title="Creating a Core Asset with an External Plugin" %}
+## 概要
+使用带有 `plugins` 数组的 `create()` 添加外部插件，或使用 `addPlugin()` 添加到现有 Asset。Collection 使用 `createCollection()` 和 `addCollectionPlugin()`。
+- 创建时添加：包含在 `plugins` 数组中
+- 添加到现有：使用 `addPlugin()` / `addCollectionPlugin()`
+- 需要更新权限签名
+- 为 Oracle 插件配置生命周期检查
+## 超出范围
+移除外部插件（参见[移除外部插件](/smart-contracts/core/external-plugins/removing-external-plugins)）、更新插件数据和内置插件（参见[添加插件](/smart-contracts/core/plugins/adding-plugins)）。
+## 快速开始
+**跳转至：** [创建带插件的 Asset](#creating-a-core-asset-with-an-external-plugin) · [添加到现有 Asset](#adding-a-external-plugin-to-a-core-asset) · [创建带插件的 Collection](#creating-a-core-collection-with-an-external-plugin)
+1. 准备您的 Oracle 账户或 AppData 配置
+2. 在创建时添加插件或通过 `addPlugin()` 添加
+3. 配置生命周期检查（Oracle）或数据权限（AppData）
+## Asset
+### 创建带外部插件的 Core Asset
+{% dialect-switcher title="创建带外部插件的 Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -123,8 +123,8 @@ pub async fn create_asset_with_oracle_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Adding a External Plugin to a Core Asset
-{% dialect-switcher title="Adding a Plugin with an assigned authority" %}
+### 向 Core Asset 添加外部插件
+{% dialect-switcher title="添加带有指定权限的插件" %}
 {% dialect title="Rust" id="rust" %}
 ```rust
 use mpl_core::{
@@ -194,9 +194,9 @@ addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Collections
-### Creating a Core Collection with an External Plugin
-{% dialect-switcher title="Adding a External Plugin to a Core Collection" %}
+## Collection
+### 创建带外部插件的 Core Collection
+{% dialect-switcher title="向 Core Collection 添加外部插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -273,8 +273,8 @@ pub async fn create_collection_with_oracle_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Adding a External Plugin to a Collection
-{% dialect-switcher title="Burning an Assets" %}
+### 向 Collection 添加外部插件
+{% dialect-switcher title="销毁 Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -344,27 +344,27 @@ pub async fn add_oracle_plugin_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Authority mismatch`
-Only the update authority can add external plugins. Verify you're signing with the correct keypair.
+只有更新权限可以添加外部插件。请验证您使用的是正确的密钥对进行签名。
 ### `Plugin already exists`
-An external plugin with the same key already exists. Remove it first or update it instead.
+具有相同键的外部插件已存在。请先移除它或改为更新它。
 ### `Invalid Oracle account`
-The Oracle base address is invalid or the account doesn't exist.
-## Notes
-- External plugins are Authority Managed (update authority controls)
-- Oracle plugins require an existing Oracle account
-- AppData plugins need a Data Authority for write permissions
-- Collection plugins don't automatically apply to existing Assets
-## FAQ
-### Can I add multiple external plugins to one Asset?
-Yes. You can add multiple Oracle and/or AppData plugins to a single Asset.
-### Do I need to create the Oracle account first?
-Yes. The Oracle account must exist before adding an Oracle plugin adapter.
-### What's the difference between adding at creation vs adding later?
-No functional difference. Adding at creation is more efficient (one transaction). Adding later requires a separate transaction.
-## Related Operations
-- [Removing External Plugins](/smart-contracts/core/external-plugins/removing-external-plugins) - Remove external plugins
-- [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
-- [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) - Oracle configuration details
-- [AppData Plugin](/smart-contracts/core/external-plugins/app-data) - AppData configuration details
+Oracle 基础地址无效或账户不存在。
+## 注意事项
+- 外部插件是权限管理的（由更新权限控制）
+- Oracle 插件需要现有的 Oracle 账户
+- AppData 插件需要数据权限才能写入
+- Collection 插件不会自动应用于现有 Asset
+## 常见问题
+### 我可以向一个 Asset 添加多个外部插件吗？
+可以。您可以向单个 Asset 添加多个 Oracle 和/或 AppData 插件。
+### 我需要先创建 Oracle 账户吗？
+是的。在添加 Oracle 插件适配器之前，Oracle 账户必须已经存在。
+### 创建时添加和之后添加有什么区别？
+功能上没有区别。创建时添加更高效（一个交易）。之后添加需要单独的交易。
+## 相关操作
+- [移除外部插件](/smart-contracts/core/external-plugins/removing-external-plugins) - 移除外部插件
+- [外部插件概述](/smart-contracts/core/external-plugins/overview) - 了解外部插件
+- [Oracle 插件](/smart-contracts/core/external-plugins/oracle) - Oracle 配置详情
+- [AppData 插件](/smart-contracts/core/external-plugins/app-data) - AppData 配置详情

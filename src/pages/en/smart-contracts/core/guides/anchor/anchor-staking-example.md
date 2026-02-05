@@ -25,7 +25,7 @@ howToTools:
   - mpl-core Rust crate
   - Solana CLI
 ---
-This developer guide demonstrates how to create a staking program for your collection using Anchor leveraging the `Attribute` and `Freeze Delegate` plugins. This approach uses a smart contract for all the logic behind staking like time calculation and management of the state of the asset (staking/unstaking), but the data will not be saved in a PDA, like the standard before Core, but it will be saved on the asset itself.
+This developer guide demonstrates how to create a staking program for your collection using Anchor leveraging the `Attribute` and `Freeze Delegate` plugins. This approach uses a smart contract for all the logic behind staking like time calculation and management of the state of the asset (staking/unstaking), but the data will not be saved in a PDA, like the standard before Core, but it will be saved on the asset itself. {% .lead %}
 ## Starting off: Understanding the Logic behind the program
 This program operates with a standard Anchor, leveraging a mono-file approach where all the necessary macros can be found in the lib.rs file:
 - declare_id: Specifies the program's on-chain address.

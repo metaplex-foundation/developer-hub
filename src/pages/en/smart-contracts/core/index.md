@@ -117,7 +117,7 @@ Please note that certain Core instructions require protocol fees. Review the [Pr
 ### What is Metaplex Core?
 Metaplex Core is a next-generation NFT standard on Solana that uses a single-account design for lower costs, enforced royalties, and a flexible plugin system. It's the recommended standard for new NFT projects.
 ### How is Core different from Token Metadata?
-Core uses one account per asset (vs 3+ for Token Metadata), costs ~80% less to mint, has lower compute usage, and includes built-in royalty enforcement. Token Metadata is considered legacy for new projects.
+Core uses one account per asset (vs 3+ for Token Metadata), costs ~80% less to mint, has lower compute usage, and includes built-in royalty enforcement. Token Metadata is considered legacy for new projects. See [Differences from Token Metadata](/smart-contracts/core/tm-differences) for a detailed comparison.
 ### Can I migrate from Token Metadata to Core?
 Core Assets and Token Metadata NFTs are separate standards. There's no automatic migration. New projects should use Core; existing Token Metadata collections continue to work.
 ### Does Core support royalties?
@@ -125,7 +125,7 @@ Yes. Core has a [Royalties plugin](/smart-contracts/core/plugins/royalties) that
 ### What are plugins?
 Plugins are modular extensions that add behavior to Core Assets or Collections. Examples include Freeze Delegate (allow freezing), Attributes (on-chain data), and Royalties (creator payments).
 ### How much does it cost to mint a Core Asset?
-Approximately 0.0029 SOL per asset, compared to ~0.022 SOL for Token Metadata. This makes Core ~80% cheaper for minting.
+Approximately 0.0029 SOL per base asset, compared to ~0.022 SOL for Token Metadata. This makes Core ~80% cheaper for minting. See [Differences from Token Metadata](/smart-contracts/core/tm-differences) for more details.
 ### Which RPC providers support Core?
 All major RPC providers supporting DAS (Digital Asset Standard) index Core assets. See [RPC Providers](/rpc-providers) for a current list.
 ### Can I use Core for gaming assets?

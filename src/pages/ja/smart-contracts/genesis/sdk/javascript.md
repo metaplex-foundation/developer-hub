@@ -1,7 +1,7 @@
 ---
 title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
-description: API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
+description: Genesis JavaScript SDKのAPIリファレンス。Solana上でのトークンローンチに必要な関数シグネチャ、パラメータ、型の解説。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -20,27 +20,27 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What is Umi and why is it required?
-    a: Umi is Metaplex's JavaScript framework for Solana. It provides a consistent interface for building transactions, managing signers, and interacting with Metaplex programs.
-  - q: Can I use the Genesis SDK in a browser?
-    a: Yes. The SDK works in both Node.js and browser environments. For browsers, use a wallet adapter for signing instead of keypair files.
-  - q: What's the difference between fetch and safeFetch?
-    a: fetch throws an error if the account doesn't exist. safeFetch returns null instead, useful for checking if an account exists without error handling.
-  - q: How do I handle transaction errors?
-    a: Wrap sendAndConfirm calls in try/catch blocks. Common errors include insufficient funds, already-initialized accounts, and time condition violations.
+  - q: Umiとは何ですか？なぜ必要ですか？
+    a: UmiはMetaplexのSolana向けJavaScriptフレームワークです。トランザクションの構築、署名者の管理、Metaplexプログラムとのやり取りに一貫したインターフェースを提供します。
+  - q: Genesis SDKをブラウザで使用できますか？
+    a: はい。SDKはNode.jsとブラウザの両方の環境で動作します。ブラウザでは、キーペアファイルの代わりにウォレットアダプターを使用して署名を行います。
+  - q: fetchとsafeFetchの違いは何ですか？
+    a: fetchはアカウントが存在しない場合にエラーをスローします。safeFetchは代わりにnullを返すため、エラーハンドリングなしでアカウントの存在確認に便利です。
+  - q: トランザクションエラーはどのように処理しますか？
+    a: sendAndConfirmの呼び出しをtry/catchブロックで囲みます。一般的なエラーには、残高不足、既に初期化済みのアカウント、時間条件違反などがあります。
 ---
 
-API reference for the Genesis JavaScript SDK. For complete tutorials, see [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale). {% .lead %}
+Genesis JavaScript SDKのAPIリファレンスです。完全なチュートリアルについては、[Launch Pool](/smart-contracts/genesis/launch-pool)または[Presale](/smart-contracts/genesis/presale)を参照してください。 {% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
+{% quick-link title="NPMパッケージ" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
 
-{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="Auto-generated API docs" /%}
+{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="自動生成されたAPIドキュメント" /%}
 
 {% /quick-links %}
 
-## Installation
+## インストール
 
 ```bash
 npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
@@ -48,7 +48,7 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
   @metaplex-foundation/mpl-token-metadata
 ```
 
-## Setup
+## セットアップ
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -60,53 +60,53 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(mplTokenMetadata());
 ```
 
-For complete implementation examples, see [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale).
+完全な実装例については、[Launch Pool](/smart-contracts/genesis/launch-pool)または[Presale](/smart-contracts/genesis/presale)を参照してください。
 
 ---
 
-## Instructions Reference
+## インストラクションリファレンス
 
-### Core
+### コア
 
-| Function | Description |
+| 関数 | 説明 |
 |----------|-------------|
-| [initializeV2()](#initialize-v2) | Create Genesis Account and mint token |
-| [finalizeV2()](#finalize-v2) | Lock configuration, activate launch |
+| [initializeV2()](#initialize-v2) | Genesis Accountの作成とトークンの発行 |
+| [finalizeV2()](#finalize-v2) | 設定のロックとローンチの有効化 |
 
-### Buckets
+### バケット
 
-| Function | Description |
+| 関数 | 説明 |
 |----------|-------------|
-| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | Add proportional distribution bucket |
-| [addPresaleBucketV2()](#add-presale-bucket-v2) | Add fixed-price sale bucket |
-| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | Add treasury/recipient bucket |
+| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | 比例配分バケットの追加 |
+| [addPresaleBucketV2()](#add-presale-bucket-v2) | 固定価格販売バケットの追加 |
+| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | トレジャリー/受取人バケットの追加 |
 
-### Launch Pool Operations
+### Launch Pool操作
 
-| Function | Description |
+| 関数 | 説明 |
 |----------|-------------|
-| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Deposit SOL into Launch Pool |
-| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | Withdraw SOL (during deposit period) |
-| [claimLaunchPoolV2()](#claim-launch-pool-v2) | Claim tokens (after deposit period) |
+| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Launch PoolにSOLを入金 |
+| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | SOLの出金（入金期間中） |
+| [claimLaunchPoolV2()](#claim-launch-pool-v2) | トークンの請求（入金期間終了後） |
 
-### Presale Operations
+### Presale操作
 
-| Function | Description |
+| 関数 | 説明 |
 |----------|-------------|
-| [depositPresaleV2()](#deposit-presale-v2) | Deposit SOL into Presale |
-| [claimPresaleV2()](#claim-presale-v2) | Claim tokens (after deposit period) |
+| [depositPresaleV2()](#deposit-presale-v2) | PresaleにSOLを入金 |
+| [claimPresaleV2()](#claim-presale-v2) | トークンの請求（入金期間終了後） |
 
-### Admin
+### 管理者
 
-| Function | Description |
+| 関数 | 説明 |
 |----------|-------------|
-| [transitionV2()](#transition-v2) | Execute end behaviors |
-| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | Permanently revoke mint authority |
-| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | Permanently revoke freeze authority |
+| [transitionV2()](#transition-v2) | 終了動作の実行 |
+| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | ミント権限の永久取り消し |
+| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | フリーズ権限の永久取り消し |
 
 ---
 
-## Function Signatures
+## 関数シグネチャ
 
 ### initializeV2
 
@@ -264,9 +264,9 @@ await revokeFreezeAuthorityV2(umi, {
 
 ---
 
-## PDA Helpers
+## PDAヘルパー
 
-| Function | Seeds |
+| 関数 | シード |
 |----------|-------|
 | findGenesisAccountV2Pda() | `baseMint`, `genesisIndex` |
 | findLaunchPoolBucketV2Pda() | `genesisAccount`, `bucketIndex` |
@@ -283,31 +283,31 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ---
 
-## Fetch Functions
+## フェッチ関数
 
-| Function | Returns |
+| 関数 | 戻り値 |
 |----------|---------|
-| fetchLaunchPoolBucketV2() | Bucket state (throws if missing) |
-| safeFetchLaunchPoolBucketV2() | Bucket state or `null` |
-| fetchPresaleBucketV2() | Bucket state (throws if missing) |
-| safeFetchPresaleBucketV2() | Bucket state or `null` |
-| fetchLaunchPoolDepositV2() | Deposit state (throws if missing) |
-| safeFetchLaunchPoolDepositV2() | Deposit state or `null` |
-| fetchPresaleDepositV2() | Deposit state (throws if missing) |
-| safeFetchPresaleDepositV2() | Deposit state or `null` |
+| fetchLaunchPoolBucketV2() | バケットの状態（存在しない場合はエラーをスロー） |
+| safeFetchLaunchPoolBucketV2() | バケットの状態または`null` |
+| fetchPresaleBucketV2() | バケットの状態（存在しない場合はエラーをスロー） |
+| safeFetchPresaleBucketV2() | バケットの状態または`null` |
+| fetchLaunchPoolDepositV2() | 入金の状態（存在しない場合はエラーをスロー） |
+| safeFetchLaunchPoolDepositV2() | 入金の状態または`null` |
+| fetchPresaleDepositV2() | 入金の状態（存在しない場合はエラーをスロー） |
+| safeFetchPresaleDepositV2() | 入金の状態または`null` |
 
 ```typescript
 const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
 const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
 ```
 
-**Bucket state fields:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
+**バケットの状態フィールド:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
 
-**Deposit state fields:** `amountQuoteToken`, `claimed`
+**入金の状態フィールド:** `amountQuoteToken`, `claimed`
 
 ---
 
-## Types
+## 型
 
 ### TimeCondition
 
@@ -334,47 +334,47 @@ const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if 
 
 ---
 
-## Constants
+## 定数
 
-| Constant | Value |
+| 定数 | 値 |
 |----------|-------|
 | `WRAPPED_SOL_MINT` | `So11111111111111111111111111111111111111112` |
-| `NOT_TRIGGERED_TIMESTAMP` | Use in time conditions |
+| `NOT_TRIGGERED_TIMESTAMP` | 時間条件で使用 |
 
 ---
 
-## Common Errors
+## よくあるエラー
 
-| Error | Cause |
+| エラー | 原因 |
 |-------|-------|
-| `insufficient funds` | Not enough SOL for fees |
-| `already initialized` | Genesis Account exists |
-| `already finalized` | Cannot modify after finalization |
-| `deposit period not active` | Outside deposit window |
-| `claim period not active` | Outside claim window |
+| `insufficient funds` | 手数料に必要なSOLが不足 |
+| `already initialized` | Genesis Accountが既に存在 |
+| `already finalized` | ファイナライズ後は変更不可 |
+| `deposit period not active` | 入金期間外 |
+| `claim period not active` | 請求期間外 |
 
 ---
 
 ## FAQ
 
-### What is Umi and why is it required?
-Umi is Metaplex's JavaScript framework for Solana. It provides a consistent interface for building transactions, managing signers, and interacting with Metaplex programs.
+### Umiとは何ですか？なぜ必要ですか？
+UmiはMetaplexのSolana向けJavaScriptフレームワークです。トランザクションの構築、署名者の管理、Metaplexプログラムとのやり取りに一貫したインターフェースを提供します。
 
-### Can I use the Genesis SDK in a browser?
-Yes. The SDK works in both Node.js and browser environments. For browsers, use a wallet adapter for signing instead of keypair files.
+### Genesis SDKをブラウザで使用できますか？
+はい。SDKはNode.jsとブラウザの両方の環境で動作します。ブラウザでは、キーペアファイルの代わりにウォレットアダプターを使用して署名を行います。
 
-### What's the difference between fetch and safeFetch?
-`fetch` throws an error if the account doesn't exist. `safeFetch` returns `null` instead, useful for checking if an account exists.
+### fetchとsafeFetchの違いは何ですか？
+`fetch`はアカウントが存在しない場合にエラーをスローします。`safeFetch`は代わりに`null`を返すため、アカウントの存在確認に便利です。
 
-### How do I handle transaction errors?
-Wrap `sendAndConfirm` calls in try/catch blocks. Check error messages for specific failure reasons.
+### トランザクションエラーはどのように処理しますか？
+`sendAndConfirm`の呼び出しを try/catch ブロックで囲みます。エラーメッセージで具体的な失敗理由を確認してください。
 
 ---
 
-## Next Steps
+## 次のステップ
 
-For complete implementation tutorials:
+完全な実装チュートリアルについて：
 
-- [Getting Started](/smart-contracts/genesis/getting-started) - Setup and first launch
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Proportional distribution
-- [Presale](/smart-contracts/genesis/presale) - Fixed-price sales
+- [はじめに](/smart-contracts/genesis/getting-started) - セットアップと初回ローンチ
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - 比例配分
+- [Presale](/smart-contracts/genesis/presale) - 固定価格販売

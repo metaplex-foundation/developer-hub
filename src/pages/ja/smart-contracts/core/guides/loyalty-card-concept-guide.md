@@ -1,7 +1,7 @@
 ---
-title: Loyalty Card Concept Guide
-metaTitle: Loyalty Card Concept Guide | Core Guides
-description: This guide describes how to build a Loyalty Card program on Solana using MPL Core NFT Assets and the MPL Core plugin system.
+title: ロイヤルティカードコンセプトガイド
+metaTitle: ロイヤルティカードコンセプトガイド | Coreガイド
+description: このガイドでは、MPL Core NFT AssetsとMPL Coreプラグインシステムを使用してSolana上でロイヤルティカードプログラムを構築する方法について説明します。
 updated: '01-31-2026'
 keywords:
   - loyalty card
@@ -16,47 +16,47 @@ proficiencyLevel: Advanced
 programmingLanguage:
   - Rust
 howToSteps:
-  - Create a Collection for loyalty cards with Update Delegate pointing to your program PDA
-  - Mint loyalty card Assets with AppData for points and Freeze Delegate for soulbound behavior
-  - Build instructions for minting cards, adding points, and redeeming rewards
-  - Use CPI builders to interact with Core from your program
+  - プログラムPDAを指すUpdate Delegateを持つロイヤルティカード用Collectionを作成
+  - ポイント用AppDataとソウルバウンド動作用Freeze Delegateを持つロイヤルティカードAssetsをミント
+  - カードのミント、ポイント追加、報酬交換のための命令を構築
+  - CPIビルダーを使用してプログラムからCoreと対話
 howToTools:
-  - Anchor framework
-  - mpl-core Rust crate
+  - Anchorフレームワーク
+  - mpl-core Rustクレート
   - Solana CLI
 ---
-## Concept Guide: Setting Up Loyalty Cards with Metaplex Core and Plugins
+## コンセプトガイド：Metaplex Coreとプラグインでロイヤルティカードをセットアップする
 {% callout %}
-⚠️ This is a **concept guide**, not a complete end-to-end tutorial. It is intended for developers with a working understanding of Rust and Solana, particularly using the Anchor framework. While it walks through key architectural decisions and code examples, it assumes familiarity with program structure, CPIs, and deploying Solana smart contracts.
+⚠️ これは**コンセプトガイド**であり、完全なエンドツーエンドのチュートリアルではありません。RustとSolana、特にAnchorフレームワークを使用した開発に精通した開発者向けです。主要なアーキテクチャの決定とコード例を説明しますが、プログラム構造、CPI、Solanaスマートコントラクトのデプロイに関する知識があることを前提としています。
 {% /callout %}
-> 
-This guide assumes you have some basic knowledge of Solana and Rust using Anchor. It explores one way to implement a loyalty card system using Core NFT Assets on Solana, powered by Metaplex Core. Rather than prescribing a rigid approach, this guide aims to demonstrate a flexible pattern that you can adapt to your own project.
-### What is Metaplex Core?
-Metaplex Core is a modern NFT Asset standard on Solana that provides a plugin-based architecture. Unlike the legacy Token Metadata program, Core allows developers to attach modular functionality to NFTs, such as custom data storage, ownership controls, and rule enforcement.
-In this example, you'll use three components from Metaplex Core:
-- **AppData Plugin**: To store custom structured data (like loyalty points).
-- **Freeze Delegate Plugin**: To lock NFTs, so users cannot transfer or burn them (Soulbound behavior).
-- **Update Delegate Authority (via PDA)**: To give your program control to update child NFTs minted under a specific collection.
-We'll also use **CPI builders** (e.g., `CreateV2CpiBuilder`) to interact with the Metaplex Core program. These builders simplify how you construct and invoke instructions, making code easier to read and maintain.
-### Quick Lifecycle Overview
+>
+このガイドは、AnchorでRustとSolanaの基本的な知識があることを前提としています。Metaplex Coreを活用して、Solana上のCore NFT Assetsを使用してロイヤルティカードシステムを実装する1つの方法を探ります。厳格なアプローチを規定するのではなく、自分のプロジェクトに適応できる柔軟なパターンを示すことを目的としています。
+### Metaplex Coreとは？
+Metaplex Coreは、プラグインベースのアーキテクチャを提供するSolana上の最新のNFT Asset標準です。レガシーのToken Metadataプログラムとは異なり、Coreは開発者がカスタムデータストレージ、所有権制御、ルール適用などのモジュラー機能をNFTにアタッチできます。
+この例では、Metaplex Coreの3つのコンポーネントを使用します：
+- **AppDataプラグイン**：カスタム構造化データ（ロイヤルティポイントなど）を保存するため。
+- **Freeze Delegateプラグイン**：ユーザーが転送やバーンできないようにNFTをロック（ソウルバウンド動作）するため。
+- **Update Delegate Authority（PDA経由）**：特定のコレクションでミントされた子NFTを更新する制御をプログラムに与えるため。
+また、Metaplex Coreプログラムと対話するために**CPIビルダー**（例：`CreateV2CpiBuilder`）を使用します。これらのビルダーは命令の構築と呼び出し方法を簡素化し、コードを読みやすく保守しやすくします。
+### クイックライフサイクル概要
 ```
-[User] → requests loyalty card
+[ユーザー] → ロイヤルティカードを要求
     ↓
-[Program] → mints NFT + AppData + FreezeDelegate (Soulbound)
+[プログラム] → NFT + AppData + FreezeDelegate（ソウルバウンド）をミント
     ↓
-[User] → purchases coffee or redeems points
+[ユーザー] → コーヒーを購入またはポイントを交換
     ↓
-[Program] → updates loyalty data in AppData plugin
+[プログラム] → AppDataプラグインのロイヤルティデータを更新
 ```
-See the [Metaplex Core documentation](https://developers.metaplex.com/core) for more setup details.
-## Loyalty System Architecture
-This example outlines one potential structure for creating a loyalty card system using Metaplex Core on the Solana blockchain. The loyalty cards are NFTs, each associated with plugins that manage how they behave and store data.
-### Why Use Soulbound NFT Assets?
-Making loyalty cards Soulbound helps ensure that they're tied to a single user and can't be transferred or sold. This can help preserve the integrity of the loyalty program and prevent users from gaming the system by trading or duplicating rewards.
-### LoyaltyCardData Structure
-Each loyalty card needs to track user-specific data, such as how many coffees they’ve purchased or redeemed. Since Core NFTs are designed to be lightweight and extensible, we use the AppData plugin to store this structured loyalty data directly on the NFT in a binary format.
-This plugin attaches to the NFT and can only be written to by the authority set during minting — in this case, a PDA derived per loyalty card (explained below). Your Solana program will write to this plugin anytime a stamp is earned or redeemed.
-Here’s one example of the data structure you might store:
+セットアップの詳細については、[Metaplex Coreドキュメント](https://developers.metaplex.com/core)をご覧ください。
+## ロイヤルティシステムアーキテクチャ
+この例では、Solanaブロックチェーン上でMetaplex Coreを使用してロイヤルティカードシステムを作成するための1つの潜在的な構造を概説します。ロイヤルティカードはNFTであり、それぞれの動作とデータの保存方法を管理するプラグインに関連付けられています。
+### なぜソウルバウンドNFT Assetsを使用するのか？
+ロイヤルティカードをソウルバウンドにすることで、単一のユーザーに紐付けられ、転送や販売ができないようになります。これにより、ロイヤルティプログラムの整合性を保ち、報酬の取引や複製によるシステムの悪用を防ぐことができます。
+### LoyaltyCardData構造
+各ロイヤルティカードは、購入または交換したコーヒーの数など、ユーザー固有のデータを追跡する必要があります。Core NFTは軽量で拡張可能に設計されているため、AppDataプラグインを使用してこの構造化されたロイヤルティデータをバイナリ形式でNFTに直接保存します。
+このプラグインはNFTにアタッチされ、ミント時に設定されたauthority（この場合、ロイヤルティカードごとに導出されるPDA、以下で説明）によってのみ書き込むことができます。Solanaプログラムは、スタンプが獲得または交換されるたびにこのプラグインに書き込みます。
+保存可能なデータ構造の例は以下の通りです：
 ```rust
 pub struct LoyaltyCardData {
     pub current_stamps: u8,
@@ -76,37 +76,37 @@ impl LoyaltyCardData {
     }
 }
 ```
-This structure tracks the number of stamps a user has, how many they've earned overall, and when their card was issued or last used. You could customize this structure to suit different reward logic.
+この構造は、ユーザーが持っているスタンプの数、全体で獲得したスタンプの数、カードが発行または最後に使用された日時を追跡します。異なる報酬ロジックに合わせてこの構造をカスタマイズできます。
 ### PDA Collection Delegate
-If you're new to PDAs (Program Derived Addresses), think of them as deterministic, program-owned addresses that are generated using a set of seeds and the program ID. These addresses are not controlled by a private key, but instead can only be signed by the program itself using `invoke_signed`. This makes them ideal for assigning authority or roles in your program logic.
-In this case, the **collection delegate** is a PDA generated using the seed `[b"collection_delegate"]`. It acts as a trusted authority that your program uses to manage any NFTs in the loyalty card collection. This authority is needed, for example, to update plugin data (like stamps) or freeze/unfreeze NFTs.
-This approach helps ensure only your program — not any external wallet — can update loyalty card data.
-A Collection Delegate is a Program Derived Address (PDA) that gives your program authority to update all assets in a collection. You can generate this PDA using the seed `[b"collection_delegate"]`. While there are other ways to manage collection-level permissions, this is one commonly used pattern.
+PDA（Program Derived Addresses）に慣れていない場合、シードとプログラムIDを使用して生成される決定論的なプログラム所有アドレスと考えてください。これらのアドレスは秘密鍵で制御されませんが、`invoke_signed`を使用してプログラム自体でのみ署名できます。これにより、プログラムロジックでauthorityやロールを割り当てるのに理想的です。
+この場合、**collection delegate**はシード`[b"collection_delegate"]`を使用して生成されるPDAです。プログラムがロイヤルティカードコレクション内のNFTを管理するために使用する信頼されたauthorityとして機能します。このauthorityは、例えばプラグインデータ（スタンプなど）の更新やNFTのフリーズ/解凍に必要です。
+このアプローチにより、プログラムのみが（外部ウォレットではなく）ロイヤルティカードデータを更新できることが保証されます。
+Collection Delegateは、コレクション内のすべてのアセットを更新する権限をプログラムに与えるProgram Derived Address（PDA）です。シード`[b"collection_delegate"]`を使用してこのPDAを生成できます。コレクションレベルの権限を管理する他の方法もありますが、これは一般的に使用されるパターンの1つです。
 ```rust
-// Seed used to generate the PDA
+// PDAを生成するために使用されるシード
 let seeds = &[b"collection_delegate"];
 let (collection_delegate, bump) = Pubkey::find_program_address(seeds, &program_id);
 ```
-### Loyalty Authority PDA (Per-Card Authority)
-In addition to the collection delegate, this pattern uses a unique PDA per loyalty card as the plugin authority. This PDA is derived using the card’s public key as a seed:
+### Loyalty Authority PDA（カードごとのAuthority）
+collection delegateに加えて、このパターンではロイヤルティカードごとに固有のPDAをプラグインauthorityとして使用します。このPDAはカードの公開鍵をシードとして使用して導出されます：
 ```rust
-// Seed used to derive a PDA based on each individual loyalty card NFT
+// 各ロイヤルティカードNFTに基づいてPDAを導出するために使用されるシード
 let seeds = &[loyalty_card.key().as_ref()];
 let (loyalty_authority, bump) = Pubkey::find_program_address(seeds, &program_id);
 ```
-This PDA is set as the authority for the AppData and FreezeDelegate plugins during minting. It ensures that only your program — using invoke_signed with the correct seeds — can modify data or manage freeze status for that specific card.
-Using per-card authorities is especially useful when you want fine-grained, asset-specific control rather than managing all NFTs under a single centralized authority.
-### Step 1: Creating the Loyalty Card Collection
-This step can be handled off-chain using tools like the Metaplex JS SDK or CLI. You might create a collection NFT that represents your loyalty program (e.g., "Sol Coffee Loyalty Cards"). This collection can act as a parent to individual loyalty card NFTs, giving your program an efficient way to manage them.
-Assigning a PDA as the collection's update authority allows your program to issue and modify cards programmatically. While it isn’t strictly required to implement this as a Solana program instruction, doing so might be useful if you're building functionality for onboarding "manager" accounts or supporting white-labeled loyalty programs for multiple businesses.
-Assigning a PDA as the collection's update authority allows your program to issue and modify cards programmatically. This isn’t strictly required but helps streamline control.
-To understand more about minting a Core Collection, you could visit [Creating a Core Collection](https://developers.metaplex.com/core/collections#creating-a-collection).
-### Step 2: Minting a Soulbound Loyalty Card
-When a user joins your program, you could mint them a loyalty card NFT with the following traits:
-- Belongs to your loyalty collection
-- Frozen (Soulbound) using the Freeze Delegate plugin
-- Stores its state in an AppData plugin
-Here’s one way to structure the minting logic:
+このPDAはミント時にAppDataとFreezeDelegateプラグインのauthorityとして設定されます。正しいシードで`invoke_signed`を使用するプログラムのみが、その特定のカードのデータを変更したりフリーズ状態を管理できることが保証されます。
+カードごとのauthorityを使用することは、すべてのNFTを単一の集中型authorityで管理するよりも、きめ細かいアセット固有の制御が必要な場合に特に便利です。
+### ステップ1：ロイヤルティカードCollectionの作成
+このステップは、Metaplex JS SDKやCLIなどのツールを使用してオフチェーンで処理できます。ロイヤルティプログラムを表すコレクションNFT（例：「Sol Coffee Loyalty Cards」）を作成できます。このコレクションは、個々のロイヤルティカードNFTの親として機能し、プログラムがそれらを効率的に管理する方法を提供します。
+PDAをコレクションのupdate authorityとして割り当てることで、プログラムがプログラム的にカードを発行および変更できるようになります。これをSolanaプログラム命令として実装することは厳密には必要ありませんが、「マネージャー」アカウントのオンボーディング機能を構築したり、複数のビジネス向けのホワイトラベルロイヤルティプログラムをサポートしたりする場合に役立ちます。
+PDAをコレクションのupdate authorityとして割り当てることで、プログラムがプログラム的にカードを発行および変更できるようになります。これは厳密には必要ありませんが、制御を効率化するのに役立ちます。
+Core Collectionのミントについて詳しく理解するには、[Core Collectionの作成](https://developers.metaplex.com/core/collections#creating-a-collection)をご覧ください。
+### ステップ2：ソウルバウンドロイヤルティカードのミント
+ユーザーがプログラムに参加すると、以下の特性を持つロイヤルティカードNFTをミントできます：
+- ロイヤルティコレクションに属する
+- Freeze Delegateプラグインを使用してフリーズ（ソウルバウンド）
+- AppDataプラグインに状態を保存
+ミントロジックを構造化する1つの方法は以下の通りです：
 ```rust
 CreateV2CpiBuilder::new(&ctx.accounts.core_program)
     .asset(&ctx.accounts.loyalty_card)
@@ -131,11 +131,11 @@ CreateV2CpiBuilder::new(&ctx.accounts.core_program)
     .authority(Some(&ctx.accounts.collection_delegate))
     .invoke_signed(collection_delegate_seeds)?;
 ```
-### Step 3: Updating Loyalty Card Data During Purchases
-When a customer makes a purchase or redeems a reward, you'll want to update their loyalty card's data accordingly. In this example, that behavior is controlled by a `redeem` flag passed as an argument to the instruction from the front end or client. This flag determines whether the user is redeeming points for a free item or making a regular purchase. Here’s one approach using a `match` statement based on that `redeem` flag:
-- If `redeem = true`, you check if the user has enough points and deduct them.
-- If `redeem = false`, you transfer lamports (SOL) and add a stamp.
-In both cases, you update the `last_used` timestamp and write the updated struct back to the AppData plugin.
+### ステップ3：購入時のロイヤルティカードデータの更新
+顧客が購入したり報酬を交換したりするとき、ロイヤルティカードのデータを適宜更新する必要があります。この例では、その動作はフロントエンドまたはクライアントから命令への引数として渡される`redeem`フラグによって制御されます。このフラグは、ユーザーが無料アイテムのポイントを交換しているのか、通常の購入を行っているのかを決定します。その`redeem`フラグに基づく`match`ステートメントを使用した1つのアプローチは以下の通りです：
+- `redeem = true`の場合、ユーザーに十分なポイントがあるかチェックし、控除します。
+- `redeem = false`の場合、lamports（SOL）を転送し、スタンプを追加します。
+どちらの場合も、`last_used`タイムスタンプを更新し、更新された構造体をAppDataプラグインに書き戻します。
 ```rust
 match redeem {
     true => {
@@ -167,19 +167,19 @@ WriteExternalPluginAdapterDataV1CpiBuilder::new(&ctx.accounts.core_program)
     .data(binary)
     .invoke_signed(seeds)?;
 ```
-## Summary
-This guide has walked through a conceptual implementation of a loyalty card system using Metaplex Core. We explored how to:
-- Create a collection NFT for loyalty cards
-- Use plugins like AppData and FreezeDelegate to store data and make NFTs Soulbound
-- Assign PDA authorities to allow your program to control loyalty cards
-- Handle user interactions like earning and redeeming points
-This structure provides a clean separation of concerns between your program logic, user interactions, and the state of each loyalty card.
-## Ideas for Extending Functionality
-Once you have the basics in place, here are a few directions you might explore to make your loyalty system more powerful or engaging:
-- **Tiered Rewards:** Introduce multiple reward levels (e.g., silver, gold, platinum) based on lifetime stamps.
-- **Expiration Logic:** Add expiration windows for stamps or cards, encouraging ongoing engagement.
-- **Cross-Store Usage:** Allow loyalty cards to be used across multiple storefronts or merchants within your brand.
-- **Custom Badges or Metadata:** Dynamically update the NFT metadata to show a visual representation of progress.
-- **Notifications or Hooks:** Integrate off-chain systems that notify users of earned rewards or loyalty milestones.
-By combining Metaplex Core's plugin system with your own creativity, you can build a loyalty platform that feels genuinely rewarding and uniquely yours.
-This pattern offers a flexible, modular approach to managing on-chain loyalty systems. You may customize and extend this approach to align with your program’s specific goals.
+## まとめ
+このガイドでは、Metaplex Coreを使用したロイヤルティカードシステムの概念的な実装を説明しました。以下を探りました：
+- ロイヤルティカード用のコレクションNFTの作成
+- AppDataやFreezeDelegateなどのプラグインを使用したデータの保存とNFTのソウルバウンド化
+- プログラムがロイヤルティカードを制御できるようにするPDA authorityの割り当て
+- ポイントの獲得と交換などのユーザーインタラクションの処理
+この構造は、プログラムロジック、ユーザーインタラクション、各ロイヤルティカードの状態間のクリーンな関心の分離を提供します。
+## 機能拡張のアイデア
+基本を整えたら、ロイヤルティシステムをより強力で魅力的にするためのいくつかの方向性を探ることができます：
+- **ティア報酬**：生涯スタンプに基づいて複数の報酬レベル（例：シルバー、ゴールド、プラチナ）を導入。
+- **有効期限ロジック**：スタンプやカードの有効期限を追加し、継続的なエンゲージメントを促進。
+- **クロスストア利用**：ブランド内の複数の店舗またはマーチャントでロイヤルティカードを使用可能に。
+- **カスタムバッジまたはメタデータ**：進捗の視覚的表現を示すためにNFTメタデータを動的に更新。
+- **通知またはフック**：獲得した報酬やロイヤルティマイルストーンをユーザーに通知するオフチェーンシステムを統合。
+Metaplex Coreのプラグインシステムと独自の創造性を組み合わせることで、真にやりがいがあり、ユニークなロイヤルティプラットフォームを構築できます。
+このパターンは、オンチェーンロイヤルティシステムを管理するための柔軟でモジュラーなアプローチを提供します。プログラムの特定の目標に合わせてこのアプローチをカスタマイズおよび拡張できます。

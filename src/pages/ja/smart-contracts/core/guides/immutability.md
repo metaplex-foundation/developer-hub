@@ -1,7 +1,7 @@
 ---
-title: Immutability in MPL Core
-metaTitle: Immutability in MPL Core | Core Guides
-description: This Guide describes the different immutability layers of MPL Core
+title: MPL Coreでの不変性
+metaTitle: MPL Coreでの不変性 | Coreガイド
+description: このガイドでは、MPL Coreのさまざまな不変性レイヤーについて説明します
 updated: '01-31-2026'
 keywords:
   - immutable NFT
@@ -18,11 +18,11 @@ programmingLanguage:
   - TypeScript
   - Rust
 ---
-## What is Immutability?
-In the general context of Digital Assets immutability is often used referring to the metadata of a Token or NFT. In the past this was asked for by communities to make sure that a purchased Asset can not be changed in the future. With the additional functionality MPL Core offers it can make sense to add additional immutability features. This guide aims to provide information about those different options and how they can be used to tailor the immutability of a digital Asset to the needs of a project.
-To understand some of the differentiations below it might be helpful to be familiar with the general MPL Core [plugin functionality](/smart-contracts/core/plugins).
-## Immutability Options in MPL Core
-- **Immutable Metadata**: The [immutableMetadata](/smart-contracts/core/plugins/immutableMetadata) Plugin allows to make the Name and URI of a Asset, or a whole collection, unchangeable.
-- **Forbid adding new Plugins**: Core can disallow creators to add additional Plugins to an asset using the [addBlocker](/smart-contracts/core/plugins/addBlocker) Plugin. Without this Plugin the update authority could add Authority Managed plugins like the royalties plugin. 
-- **Plugin Level Immutability**: Some Plugins can have an authority set that is different to the owner or the update authority. When removing this authority this specific plugin cannot be changed anymore. This can for example be useful in cases where the creator wants to guarantee the asset owners that the royalties will not change in the future. Removing the authority can either be done on creation of the plugin, or when updating it.
-- **Full Immutability**: When removing the update authority of an asset or a collection none of the authority based actions can be triggered anymore. This includes changing Metadata or adding authority based Plugins. When aiming for full immutability one has to make sure that also the plugin authorities are removed in addition to the [general authority](/smart-contracts/core/update#making-a-core-asset-data-immutable).
+## 不変性とは？
+デジタルアセットの一般的な文脈において、不変性はしばしばトークンやNFTのメタデータを指して使用されます。過去には、購入したアセットが将来変更されないことを確認するため、コミュニティからこれが求められていました。MPL Coreが提供する追加機能により、追加の不変性機能を加えることが意味を持つ場合があります。このガイドでは、これらのさまざまなオプションとそれらをプロジェクトのニーズに合わせてデジタルアセットの不変性を調整する方法についての情報を提供することを目的としています。
+以下の違いを理解するためには、一般的なMPL Core[プラグイン機能](/smart-contracts/core/plugins)に精通していることが役立つかもしれません。
+## MPL Coreの不変性オプション
+- **不変メタデータ**: [immutableMetadata](/smart-contracts/core/plugins/immutableMetadata)プラグインは、Assetまたはコレクション全体の名前とURIを変更不可にできます。
+- **新しいプラグインの追加を禁止**: Coreは、[addBlocker](/smart-contracts/core/plugins/addBlocker)プラグインを使用して、クリエイターがアセットに追加のプラグインを追加することを禁止できます。このプラグインがないと、update authorityはロイヤリティプラグインのようなAuthority Managedプラグインを追加できます。
+- **プラグインレベルの不変性**: 一部のプラグインは、オーナーやupdate authorityとは異なるauthorityを設定できます。このauthorityを削除すると、その特定のプラグインは変更できなくなります。これは、例えばクリエイターがアセットオーナーに対してロイヤリティが将来変更されないことを保証したい場合に便利です。authorityの削除は、プラグインの作成時または更新時に行えます。
+- **完全な不変性**: アセットまたはコレクションのupdate authorityを削除すると、authorityベースのアクションはトリガーできなくなります。これには、メタデータの変更やauthorityベースのプラグインの追加が含まれます。完全な不変性を目指す場合、[一般的なauthority](/smart-contracts/core/update#making-a-core-asset-data-immutable)に加えて、プラグインのauthorityも削除されていることを確認する必要があります。

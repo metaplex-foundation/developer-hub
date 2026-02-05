@@ -24,7 +24,7 @@ faqs:
   - q: What launch mechanisms does Genesis support?
     a: Genesis supports three mechanisms - Presale (fixed price), Launch Pool (proportional distribution with price discovery), and Uniform Price Auction (bid-based with clearing price).
   - q: How much does it cost to use Genesis?
-    a: Genesis charges a 2% protocol fee on deposits. There are no upfront costs - you only pay Solana transaction fees plus the protocol fee on funds raised.
+    a: Genesis charges a {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee on deposits. There are no upfront costs - you only pay Solana transaction fees plus the protocol fee on funds raised.
   - q: Can I revoke token authorities after launch?
     a: Yes. Genesis provides instructions to revoke mint and freeze authorities, signaling to holders that no additional tokens can be minted.
   - q: What's the difference between Launch Pool and Presale?
@@ -98,8 +98,8 @@ Every bucket has time windows that control when actions are allowed:
 
 | Action | Fee |
 |--------|-----|
-| Deposit | 2% of deposit amount |
-| Withdraw | 2% of withdrawal amount |
+| Deposit | {% fee product="genesis" config="launchPool" fee="deposit" /%} of deposit amount |
+| Withdraw | {% fee product="genesis" config="launchPool" fee="withdraw" /%} of withdrawal amount |
 | Claim | Transaction fee only |
 
 No upfront costs. You only pay fees on funds raised.
@@ -129,7 +129,7 @@ Genesis is a Metaplex smart contract for Token Generation Events (TGE) on Solana
 Genesis supports three mechanisms: **Launch Pool** (proportional distribution with price discovery), **Presale** (fixed price), and **Uniform Price Auction** (bid-based with clearing price).
 
 ### How much does it cost to use Genesis?
-Genesis charges a 2% protocol fee on deposits. There are no upfront costs—you only pay Solana transaction fees plus the protocol fee on funds raised.
+Genesis charges a {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee on deposits. There are no upfront costs—you only pay Solana transaction fees plus the protocol fee on funds raised.
 
 ### Can I revoke token authorities after launch?
 Yes. Genesis provides `revokeMintAuthorityV2` and `revokeFreezeAuthorityV2` instructions to permanently revoke authorities.

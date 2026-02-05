@@ -1,7 +1,7 @@
 ---
 title: Royalties Plugin
 metaTitle: Royalties Plugin | Metaplex Core
-description: The Royalties plugin enforces creator royalties on Core Assets and Collections. Set basis points, creator splits, and allowlist/denylist rules for marketplace compliance.
+description: Royalties PluginはCore AssetおよびCollectionにクリエイターロイヤリティを強制します。Basis Point、クリエイター分配、マーケットプレイスコンプライアンスのためのAllowlist/Denylistルールを設定できます。
 updated: '01-31-2026'
 keywords:
   - NFT royalties
@@ -19,63 +19,63 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: Are Core royalties enforced?
-    a: Yes, when using an allowlist ruleset. Only programs on the allowlist can transfer the asset, ensuring royalties are paid.
-  - q: What's the difference between Core royalties and Token Metadata royalties?
-    a: Core royalties are built into the asset with optional enforcement via rulesets. Token Metadata royalties are advisory and rely on marketplace cooperation.
-  - q: Can I have different royalties per asset in a collection?
-    a: Yes. Add the Royalties plugin to individual assets to override the collection-level setting.
-  - q: How do marketplaces read royalties?
-    a: Marketplaces query the asset's plugins via DAS or on-chain data. The Royalties plugin data includes basis points, creators, and ruleset.
-  - q: What happens if I don't set a ruleset?
-    a: Use ruleSet('None'). Any program can transfer the asset and royalties are advisory only.
-  - q: Can I change royalties after minting?
-    a: Yes. Use updatePlugin for assets or updateCollectionPlugin for collections if you have the authority.
+  - q: Coreのロイヤリティは強制されますか？
+    a: はい、Allowlist RuleSetを使用する場合に強制されます。Allowlistに含まれるプログラムのみがAssetを転送でき、ロイヤリティの支払いが保証されます。
+  - q: CoreのロイヤリティとToken Metadataのロイヤリティの違いは何ですか？
+    a: CoreのロイヤリティはAssetまたはCollectionレベルでRoyalties Pluginが必要で、RuleSetによるオプションの強制があります。標準のToken Metadata NFTロイヤリティは推奨事項であり、マーケットプレイスの協力に依存します。pNFT（プログラマブルNFT）もCoreと同様のRuleSetベースの強制をサポートしています。
+  - q: Collection内のAssetごとに異なるロイヤリティを設定できますか？
+    a: はい。個別のAssetにRoyalties Pluginを追加することで、Collectionレベルの設定を上書きできます。
+  - q: マーケットプレイスはどのようにロイヤリティを読み取りますか？
+    a: マーケットプレイスはDASまたはオンチェーンデータを通じてAssetのPluginを照会します。Royalties Pluginのデータには、Basis Point、クリエイター、RuleSetが含まれます。
+  - q: RuleSetを設定しない場合はどうなりますか？
+    a: ruleSet('None')を使用してください。任意のプログラムがAssetを転送でき、ロイヤリティは推奨事項のみとなります。
+  - q: ミント後にロイヤリティを変更できますか？
+    a: はい。Authorityがあれば、AssetにはupdatePluginを、CollectionにはupdateCollectionPluginを使用できます。
 ---
-The **Royalties Plugin** enforces creator royalties on secondary sales of Core Assets. It specifies the royalty percentage, creator split, and which programs (marketplaces) are allowed or denied from transferring the asset. {% .lead %}
-{% callout title="What You'll Learn" %}
-How to:
-- Add royalties to Assets and Collections
-- Configure basis points and creator splits
-- Set up allowlists and denylists for marketplace control
-- Update royalties after creation
+**Royalties Plugin**は、Core Assetの二次販売においてクリエイターロイヤリティを強制します。ロイヤリティの割合、クリエイター分配、およびどのプログラム（マーケットプレイス）がAssetの転送を許可または拒否されるかを指定します。 {% .lead %}
+{% callout title="学習内容" %}
+以下の方法を学びます：
+- AssetとCollectionにロイヤリティを追加する
+- Basis Pointとクリエイター分配を設定する
+- マーケットプレイス制御のためのAllowlistとDenylistを設定する
+- 作成後にロイヤリティを更新する
 {% /callout %}
-## Summary
-The **Royalties Plugin** is an authority-managed plugin that enforces royalties on Core Assets. Set a percentage (basis points), distribute to multiple creators, and optionally restrict which programs can transfer assets.
-- Set royalties as basis points (500 = 5%)
-- Split royalties between up to 5 creators
-- Use allowlists/denylists to control marketplace access
-- Apply at Asset level (individual) or Collection level (all assets)
-## Out of Scope
-Token Metadata royalties (different system), royalty collection/distribution (handled by marketplaces), and legal enforcement of royalties.
-## Quick Start
-**Jump to:** [Add to Asset](#adding-the-royalties-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-royalties-plugin-to-a-collection-code-example) · [RuleSets](#rulesets) · [Update](#updating-the-royalties-plugin-on-an-asset)
-1. Import `addPlugin` from `@metaplex-foundation/mpl-core`
-2. Call with `type: 'Royalties'`, `basisPoints`, `creators`, and `ruleSet`
-3. Marketplaces read the plugin and enforce the royalty on sales
-## Works With
-| Account Type | Supported |
+## 概要
+**Royalties Plugin**は、Core Assetにロイヤリティを強制するAuthority管理のPluginです。割合（Basis Point）を設定し、複数のクリエイターに分配し、オプションでどのプログラムがAssetを転送できるかを制限できます。
+- Basis Pointでロイヤリティを設定（500 = 5%）
+- 最大5人のクリエイター間でロイヤリティを分配
+- Allowlist/Denylistを使用してマーケットプレイスアクセスを制御
+- Assetレベル（個別）またはCollectionレベル（全Asset）に適用
+## 範囲外
+Token Metadataロイヤリティ（異なるシステム）、ロイヤリティの収集/分配（マーケットプレイスが処理）、およびロイヤリティの法的強制。
+## クイックスタート
+**ジャンプ先:** [Assetに追加](#assetへのroyalties-pluginの追加コード例) · [Collectionに追加](#collectionへのroyalties-pluginの追加コード例) · [RuleSets](#rulesets) · [更新](#assetのroyalties-pluginの更新)
+1. `@metaplex-foundation/mpl-core`から`addPlugin`をインポート
+2. `type: 'Royalties'`、`basisPoints`、`creators`、`ruleSet`を指定して呼び出し
+3. マーケットプレイスがPluginを読み取り、販売時にロイヤリティを強制
+## 対応アカウントタイプ
+| アカウントタイプ | サポート |
 |--------------|-----------|
-| MPL Core Asset | Yes |
-| MPL Core Collection | Yes |
-When applied to both an Asset and its Collection, the **Asset-level plugin takes precedence**.
-## Arguments
-| Argument | Type | Description |
+| MPL Core Asset | はい |
+| MPL Core Collection | はい |
+AssetとそのCollectionの両方に適用された場合、**Assetレベルのpluginが優先**されます。
+## 引数
+| 引数 | 型 | 説明 |
 |----------|------|-------------|
-| basisPoints | number | Royalty percentage (500 = 5%, 1000 = 10%) |
-| creators | Creator[] | Array of creator addresses and their percentage share |
-| ruleSet | RuleSet | Program allowlist, denylist, or none |
+| basisPoints | number | ロイヤリティの割合（500 = 5%、1000 = 10%） |
+| creators | Creator[] | クリエイターのアドレスと割合のシェアの配列 |
+| ruleSet | RuleSet | プログラムのAllowlist、Denylist、またはなし |
 ## Basis Points
-The royalty percentage in hundredths of a percent.
-| Basis Points | Percentage |
+ロイヤリティの割合を100分の1パーセントで表します。
+| Basis Points | パーセンテージ |
 |--------------|------------|
 | 100 | 1% |
 | 250 | 2.5% |
 | 500 | 5% |
 | 1000 | 10% |
-Example: If `basisPoints` is 500 and an Asset sells for 1 SOL, creators receive 0.05 SOL total.
+例：`basisPoints`が500で、Assetが1 SOLで売却された場合、クリエイターは合計0.05 SOLを受け取ります。
 ## Creators
-The creators array defines who receives royalties and how they're split. Up to 5 creators are supported. Percentages must add up to 100.
+Creators配列は、誰がロイヤリティを受け取り、どのように分配されるかを定義します。最大5人のクリエイターがサポートされています。パーセンテージの合計は100である必要があります。
 {% dialect-switcher title="Creators Array" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="creators-array.ts" %}
@@ -105,9 +105,9 @@ let creators = vec![
 {% /dialect %}
 {% /dialect-switcher %}
 ## RuleSets
-RuleSets control which programs can transfer Assets with royalties. Use them to enforce royalties by restricting transfers to compliant marketplaces.
-### None (No Restrictions)
-Any program can transfer the asset. Royalties are advisory only.
+RuleSetsは、ロイヤリティ付きのAssetをどのプログラムが転送できるかを制御します。準拠したマーケットプレイスへの転送を制限することで、ロイヤリティを強制するために使用します。
+### None（制限なし）
+任意のプログラムがAssetを転送できます。ロイヤリティは推奨事項のみです。
 {% dialect-switcher title="RuleSet None" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="ruleset-none.ts" %}
@@ -122,8 +122,8 @@ let rule_set = RuleSet::None;
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Allowlist (Recommended for Enforcement)
-Only programs on the list can transfer. Use this to restrict to royalty-compliant marketplaces.
+### Allowlist（強制に推奨）
+リストにあるプログラムのみが転送できます。ロイヤリティ準拠のマーケットプレイスに制限するために使用します。
 {% dialect-switcher title="RuleSet Allowlist" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="ruleset-allowlist.ts" %}
@@ -150,7 +150,7 @@ let rule_set = RuleSet::ProgramAllowList(vec![
 {% /dialect %}
 {% /dialect-switcher %}
 ### Denylist
-All programs can transfer except those on the list. Use to block known non-compliant marketplaces.
+リストにあるプログラム以外のすべてのプログラムが転送できます。既知の非準拠マーケットプレイスをブロックするために使用します。
 {% dialect-switcher title="RuleSet DenyList" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="ruleset-denylist.ts" %}
@@ -174,7 +174,7 @@ let rule_set = RuleSet::ProgramDenyList(vec![
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the Royalties Plugin to an Asset (Code Example)
+## AssetへのRoyalties Pluginの追加（コード例）
 {% dialect-switcher title="Add Royalties Plugin to Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="add-royalties-to-asset.ts" %}
@@ -236,8 +236,8 @@ pub async fn add_royalties_to_asset() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the Royalties Plugin to a Collection (Code Example)
-Collection-level royalties apply to all Assets in the Collection unless overridden at the Asset level.
+## CollectionへのRoyalties Pluginの追加（コード例）
+CollectionレベルのロイヤリティはCollection内のすべてのAssetに適用されますが、Assetレベルで上書きされない限りです。
 {% dialect-switcher title="Add Royalties Plugin to Collection" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="add-royalties-to-collection.ts" %}
@@ -300,8 +300,8 @@ pub async fn add_royalties_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating the Royalties Plugin on an Asset
-Modify royalty percentage, creators, or ruleset on an existing Asset.
+## AssetのRoyalties Pluginの更新
+既存のAssetのロイヤリティ割合、クリエイター、またはRuleSetを変更します。
 {% dialect-switcher title="Update Royalties Plugin on Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="update-royalties-asset.ts" %}
@@ -342,7 +342,7 @@ let update_ix = UpdatePluginV1Builder::new()
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating the Royalties Plugin on a Collection
+## CollectionのRoyalties Pluginの更新
 {% dialect-switcher title="Update Royalties Plugin on Collection" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="update-royalties-collection.ts" %}
@@ -363,20 +363,20 @@ await updateCollectionPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## よくあるエラー
 ### `Creator percentages must sum to 100`
-The creator percentage values don't add up to 100. Adjust the splits.
+クリエイターのパーセンテージ値が合計100になっていません。分配を調整してください。
 ### `Authority mismatch`
-Only the plugin authority can update royalties. Ensure you're signing with the correct keypair.
+PluginのAuthorityのみがロイヤリティを更新できます。正しいキーペアで署名していることを確認してください。
 ### `Program not in allowlist`
-A transfer was blocked because the calling program isn't in the allowlist. Add the program or switch to a denylist/none ruleset.
-## Notes
-- Asset-level royalties override Collection-level royalties
-- Creator percentages must sum to exactly 100
-- Use allowlists for strict enforcement, denylists for flexibility
-- Royalty collection/distribution is handled by marketplaces, not the Core program
-## Quick Reference
-### Minimum Code
+呼び出しプログラムがAllowlistにないため、転送がブロックされました。プログラムを追加するか、Denylist/None RuleSetに切り替えてください。
+## 注意事項
+- AssetレベルのロイヤリティはCollectionレベルのロイヤリティを上書きします
+- クリエイターのパーセンテージは正確に合計100である必要があります
+- 厳格な強制にはAllowlistを、柔軟性にはDenylistを使用
+- ロイヤリティの収集/分配はCoreプログラムではなく、マーケットプレイスが処理します
+## クイックリファレンス
+### 最小コード
 ```ts {% title="minimal-royalties.ts" %}
 import { addPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 await addPlugin(umi, {
@@ -389,32 +389,32 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-### Basis Points Reference
-| Desired % | Basis Points |
+### Basis Pointsリファレンス
+| 希望% | Basis Points |
 |-----------|--------------|
 | 2.5% | 250 |
 | 5% | 500 |
 | 7.5% | 750 |
 | 10% | 1000 |
 ## FAQ
-### Are Core royalties enforced?
-Yes, when using an allowlist ruleset. Only programs on the allowlist can transfer the asset, ensuring royalties are paid.
-### What's the difference between Core royalties and Token Metadata royalties?
-Core royalties are built into the asset with optional enforcement via rulesets. Token Metadata royalties are advisory and rely on marketplace cooperation.
-### Can I have different royalties per asset in a collection?
-Yes. Add the Royalties plugin to individual assets to override the collection-level setting.
-### How do marketplaces read royalties?
-Marketplaces query the asset's plugins via DAS or on-chain data. The Royalties plugin data includes basis points, creators, and ruleset.
-### What happens if I don't set a ruleset?
-Use `ruleSet('None')`. Any program can transfer the asset and royalties are advisory only.
-### Can I change royalties after minting?
-Yes. Use `updatePlugin` (for assets) or `updateCollectionPlugin` (for collections) if you have the authority.
-## Glossary
-| Term | Definition |
+### Coreのロイヤリティは強制されますか？
+はい、Allowlist RuleSetを使用する場合に強制されます。Allowlistに含まれるプログラムのみがAssetを転送でき、ロイヤリティの支払いが保証されます。
+### CoreのロイヤリティとToken Metadataのロイヤリティの違いは何ですか？
+CoreのロイヤリティはAssetまたはCollectionレベルでRoyalties Pluginが必要で、RuleSetによるオプションの強制があります。標準のToken Metadata NFTロイヤリティは推奨事項であり、マーケットプレイスの協力に依存します。pNFT（プログラマブルNFT）もCoreと同様のRuleSetベースの強制をサポートしています。
+### Collection内のAssetごとに異なるロイヤリティを設定できますか？
+はい。個別のAssetにRoyalties Pluginを追加することで、Collectionレベルの設定を上書きできます。
+### マーケットプレイスはどのようにロイヤリティを読み取りますか？
+マーケットプレイスはDASまたはオンチェーンデータを通じてAssetのPluginを照会します。Royalties Pluginのデータには、Basis Point、クリエイター、RuleSetが含まれます。
+### RuleSetを設定しない場合はどうなりますか？
+`ruleSet('None')`を使用してください。任意のプログラムがAssetを転送でき、ロイヤリティは推奨事項のみとなります。
+### ミント後にロイヤリティを変更できますか？
+はい。Authorityがあれば、`updatePlugin`（Asset用）または`updateCollectionPlugin`（Collection用）を使用できます。
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Basis Points** | Royalty percentage in hundredths (500 = 5%) |
-| **Creators** | Array of addresses that receive royalty payments |
-| **RuleSet** | Allowlist/denylist controlling which programs can transfer |
-| **Allowlist** | Only listed programs can transfer (strict enforcement) |
-| **Denylist** | All programs except listed ones can transfer |
-| **Authority** | The account permitted to update the plugin |
+| **Basis Points** | ロイヤリティの割合を100分の1で表したもの（500 = 5%） |
+| **Creators** | ロイヤリティの支払いを受け取るアドレスの配列 |
+| **RuleSet** | どのプログラムが転送できるかを制御するAllowlist/Denylist |
+| **Allowlist** | リストにあるプログラムのみが転送可能（厳格な強制） |
+| **Denylist** | リストにあるプログラム以外のすべてが転送可能 |
+| **Authority** | Pluginを更新する権限を持つアカウント |

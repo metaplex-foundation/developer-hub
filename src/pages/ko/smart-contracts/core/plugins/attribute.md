@@ -1,7 +1,7 @@
 ---
-title: Attribute Plugin
-metaTitle: Attribute Plugin | Metaplex Core
-description: Store on-chain key-value data on Core NFT Assets. Use the Attributes plugin for game stats, traits, and any data that needs to be readable by on-chain programs.
+title: Attribute 플러그인
+metaTitle: Attribute 플러그인 | Metaplex Core
+description: Core NFT Asset에 온체인 키-값 데이터를 저장합니다. 게임 스탯, 특성 및 온체인 프로그램에서 읽어야 하는 모든 데이터에 Attributes 플러그인을 사용하세요.
 updated: '01-31-2026'
 keywords:
   - on-chain attributes
@@ -19,72 +19,72 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: What's the difference between on-chain attributes and off-chain metadata attributes?
-    a: On-chain attributes are stored on Solana and readable by programs. Off-chain attributes in JSON at URI are stored on Arweave/IPFS and only readable by clients.
-  - q: Can on-chain programs read these attributes?
-    a: Yes. Use CPI to fetch the Asset account and deserialize the Attributes plugin data.
-  - q: Are attributes indexed by DAS?
-    a: Yes. DAS automatically indexes attribute key-value pairs for fast queries.
-  - q: Can I store numbers or booleans?
-    a: Values are strings only. Convert as needed, for example level = '5' or active = 'true'.
-  - q: How do I update a single attribute?
-    a: You can't update individual attributes. Fetch the current list, modify it, and update with the full new list.
-  - q: What's the size limit for attributes?
-    a: There's no hard limit, but larger attribute lists increase rent cost. Keep data concise.
-  - q: Can the owner update attributes?
-    a: No. The Attributes plugin is Authority Managed, so only the update authority can modify it.
+  - q: 온체인 속성과 오프체인 메타데이터 속성의 차이점은 무엇인가요?
+    a: 온체인 속성은 Solana에 저장되며 프로그램에서 읽을 수 있습니다. URI의 JSON에 있는 오프체인 속성은 Arweave/IPFS에 저장되며 클라이언트에서만 읽을 수 있습니다.
+  - q: 온체인 프로그램이 이러한 속성을 읽을 수 있나요?
+    a: 네. CPI를 사용하여 Asset 계정을 가져오고 Attributes 플러그인 데이터를 역직렬화할 수 있습니다.
+  - q: 속성이 DAS에 의해 인덱싱되나요?
+    a: 네. DAS는 빠른 쿼리를 위해 속성 키-값 쌍을 자동으로 인덱싱합니다.
+  - q: 숫자나 불리언을 저장할 수 있나요?
+    a: 값은 문자열만 가능합니다. 필요에 따라 변환하세요. 예를 들어 level = '5' 또는 active = 'true'.
+  - q: 단일 속성을 어떻게 업데이트하나요?
+    a: 개별 속성을 업데이트할 수 없습니다. 현재 목록을 가져와서 수정한 후 전체 새 목록으로 업데이트하세요.
+  - q: 속성의 크기 제한은 무엇인가요?
+    a: 하드 제한은 없지만, 더 큰 속성 목록은 렌트 비용을 증가시킵니다. 데이터를 간결하게 유지하세요.
+  - q: 소유자가 속성을 업데이트할 수 있나요?
+    a: 아니요. Attributes 플러그인은 권한 관리이므로 업데이트 권한자만 수정할 수 있습니다.
 ---
-The **Attributes Plugin** stores key-value pairs directly on-chain within Core Assets or Collections. Perfect for game stats, traits, and any data that on-chain programs need to read. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add on-chain attributes to Assets and Collections
-- Store and update key-value pairs
-- Read attributes from on-chain programs
-- Use cases: game stats, traits, access levels
+**Attributes 플러그인**은 Core Asset 또는 Collection 내에서 직접 온체인에 키-값 쌍을 저장합니다. 게임 스탯, 특성 및 온체인 프로그램이 읽어야 하는 모든 데이터에 완벽합니다. {% .lead %}
+{% callout title="학습 내용" %}
+- Asset과 Collection에 온체인 속성 추가
+- 키-값 쌍 저장 및 업데이트
+- 온체인 프로그램에서 속성 읽기
+- 사용 사례: 게임 스탯, 특성, 접근 레벨
 {% /callout %}
-## Summary
-The **Attributes Plugin** is an Authority Managed plugin that stores key-value string pairs on-chain. Unlike off-chain metadata, these attributes are readable by Solana programs and indexed by DAS.
-- Store any string key-value pairs on-chain
-- Readable by on-chain programs via CPI
-- Automatically indexed by DAS for fast queries
-- Mutable by the update authority
-## Out of Scope
-Off-chain metadata attributes (stored in JSON at URI), complex data types (only strings supported), and immutable attributes (all attributes are mutable).
-## Quick Start
-**Jump to:** [Add to Asset](#adding-the-attributes-plugin-to-an-asset) · [Update Attributes](#updating-the-attributes-plugin-on-an-asset)
-1. Add the Attributes plugin: `addPlugin(umi, { asset, plugin: { type: 'Attributes', attributeList: [...] } })`
-2. Each attribute is a `{ key: string, value: string }` pair
-3. Update anytime with `updatePlugin()`
-4. Query via DAS or fetch on-chain
-{% callout type="note" title="On-Chain vs Off-Chain Attributes" %}
-| Feature | On-Chain (this plugin) | Off-Chain (JSON metadata) |
+## 요약
+**Attributes 플러그인**은 온체인에 키-값 문자열 쌍을 저장하는 권한 관리 플러그인입니다. 오프체인 메타데이터와 달리 이러한 속성은 Solana 프로그램에서 읽을 수 있고 DAS에 의해 인덱싱됩니다.
+- 모든 문자열 키-값 쌍을 온체인에 저장
+- CPI를 통해 온체인 프로그램에서 읽기 가능
+- 빠른 쿼리를 위해 DAS에 자동으로 인덱싱
+- 업데이트 권한자가 변경 가능
+## 범위 외
+오프체인 메타데이터 속성 (URI의 JSON에 저장됨), 복잡한 데이터 유형 (문자열만 지원), 불변 속성 (모든 속성은 변경 가능).
+## 빠른 시작
+**바로 가기:** [Asset에 추가](#asset에-attributes-플러그인-추가) · [속성 업데이트](#asset의-attributes-플러그인-업데이트)
+1. Attributes 플러그인 추가: `addPlugin(umi, { asset, plugin: { type: 'Attributes', attributeList: [...] } })`
+2. 각 속성은 `{ key: string, value: string }` 쌍
+3. `updatePlugin()`으로 언제든지 업데이트
+4. DAS를 통해 쿼리하거나 온체인에서 가져오기
+{% callout type="note" title="온체인 vs 오프체인 속성" %}
+| 기능 | 온체인 (이 플러그인) | 오프체인 (JSON 메타데이터) |
 |---------|------------------------|---------------------------|
-| Storage location | Solana account | Arweave/IPFS |
-| Readable by programs | ✅ Yes (CPI) | ❌ No |
-| Indexed by DAS | ✅ Yes | ✅ Yes |
-| Mutable | ✅ Yes | Depends on storage |
-| Cost | Rent (recoverable) | Upload cost (one-time) |
-| Best for | Dynamic data, game stats | Static traits, images |
-**Use on-chain attributes** when programs need to read the data or it changes frequently.
-**Use off-chain metadata** for static traits and image references.
+| 저장 위치 | Solana 계정 | Arweave/IPFS |
+| 프로그램에서 읽기 가능 | ✅ 예 (CPI) | ❌ 아니요 |
+| DAS에 의해 인덱싱 | ✅ 예 | ✅ 예 |
+| 변경 가능 | ✅ 예 | 저장소에 따라 다름 |
+| 비용 | 렌트 (회수 가능) | 업로드 비용 (일회성) |
+| 적합한 용도 | 동적 데이터, 게임 스탯 | 정적 특성, 이미지 |
+**온체인 속성 사용** 프로그램이 데이터를 읽어야 하거나 자주 변경되는 경우.
+**오프체인 메타데이터 사용** 정적 특성 및 이미지 참조용.
 {% /callout %}
-## Common Use Cases
-- **Game character stats**: Health, XP, level, class - data that changes during gameplay
-- **Access control**: Tier, role, permissions - data programs check for authorization
-- **Dynamic traits**: Evolving NFTs where traits change based on actions
-- **Staking state**: Track staking status, rewards earned, time staked
-- **Achievement tracking**: Badges, milestones, completion status
-- **Rental/lending**: Track rental periods, borrower info, return dates
-## Works With
+## 일반적인 사용 사례
+- **게임 캐릭터 스탯**: 체력, XP, 레벨, 클래스 - 게임플레이 중 변경되는 데이터
+- **접근 제어**: 티어, 역할, 권한 - 프로그램이 인증을 위해 확인하는 데이터
+- **동적 특성**: 행동에 따라 특성이 변화하는 진화하는 NFT
+- **스테이킹 상태**: 스테이킹 상태, 획득한 보상, 스테이킹 시간 추적
+- **업적 추적**: 배지, 마일스톤, 완료 상태
+- **임대/대출**: 임대 기간, 차용자 정보, 반환 날짜 추적
+## 호환 대상
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-## Arguments
-| Arg           | Value                               |
+## 인자
+| 인자           | 값                               |
 | ------------- | ----------------------------------- |
 | attributeList | Array<{key: string, value: string}> |
 ### AttributeList
-The attribute list consists of an Array[] then an object of key-value pairs `{key: "value"}` string value pairs.
+속성 목록은 Array[]로 구성되며 키-값 쌍 `{key: "value"}` 문자열 값 쌍의 객체입니다.
 {% dialect-switcher title="AttributeList" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -112,8 +112,8 @@ let attributes = Attributes {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the Attributes Plugin to an Asset
-{% dialect-switcher title="Adding a Attribute Plugin to an MPL Core Asset" %}
+## Asset에 Attributes 플러그인 추가
+{% dialect-switcher title="MPL Core Asset에 Attribute 플러그인 추가" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -177,8 +177,8 @@ pub async fn add_attributes_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating the Attributes Plugin on an Asset
-{% dialect-switcher title="Updating the Attributes Plugin on an Asset" %}
+## Asset의 Attributes 플러그인 업데이트
+{% dialect-switcher title="Asset의 Attributes 플러그인 업데이트" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -246,19 +246,19 @@ pub async fn update_attributes_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 일반적인 오류
 ### `Authority mismatch`
-Only the plugin authority (usually update authority) can add or update attributes. Verify you're signing with the correct keypair.
+플러그인 권한자 (보통 업데이트 권한자)만 속성을 추가하거나 업데이트할 수 있습니다. 올바른 키페어로 서명하고 있는지 확인하세요.
 ### `String too long`
-Attribute keys and values are limited in size. Keep them concise.
-## Notes
-- Authority Managed: update authority can add/update without owner signature
-- All values are strings - convert numbers/booleans as needed
-- Updating replaces the entire attribute list (no partial updates)
-- Attributes increase account size and rent cost
-- DAS indexes attributes for fast queries
-## Quick Reference
-### Minimum Code
+속성 키와 값은 크기가 제한됩니다. 간결하게 유지하세요.
+## 참고 사항
+- 권한 관리: 업데이트 권한자는 소유자 서명 없이 추가/업데이트 가능
+- 모든 값은 문자열 - 필요에 따라 숫자/불리언 변환
+- 업데이트는 전체 속성 목록을 대체 (부분 업데이트 없음)
+- 속성은 계정 크기와 렌트 비용을 증가시킴
+- DAS는 빠른 쿼리를 위해 속성을 인덱싱
+## 빠른 참조
+### 최소 코드
 ```ts {% title="minimal-attributes.ts" %}
 import { addPlugin } from '@metaplex-foundation/mpl-core'
 await addPlugin(umi, {
@@ -272,37 +272,37 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
-### Common Attribute Patterns
-| Use Case | Example Keys |
+### 일반적인 속성 패턴
+| 사용 사례 | 예시 키 |
 |----------|--------------|
-| Game character | `level`, `health`, `xp`, `class` |
-| Access control | `tier`, `access_level`, `role` |
-| Traits | `background`, `eyes`, `rarity` |
-| State | `staked`, `listed`, `locked` |
+| 게임 캐릭터 | `level`, `health`, `xp`, `class` |
+| 접근 제어 | `tier`, `access_level`, `role` |
+| 특성 | `background`, `eyes`, `rarity` |
+| 상태 | `staked`, `listed`, `locked` |
 ## FAQ
-### What's the difference between on-chain attributes and off-chain metadata attributes?
-On-chain attributes (this plugin) are stored on Solana and readable by programs. Off-chain attributes (in JSON at URI) are stored on Arweave/IPFS and only readable by clients.
-### Can on-chain programs read these attributes?
-Yes. Use CPI to fetch the Asset account and deserialize the Attributes plugin data.
-### Are attributes indexed by DAS?
-Yes. DAS automatically indexes attribute key-value pairs for fast queries.
-### Can I store numbers or booleans?
-Values are strings only. Convert as needed: `{ key: 'level', value: '5' }`, `{ key: 'active', value: 'true' }`.
-### How do I update a single attribute?
-You can't update individual attributes. Fetch the current list, modify it, and update with the full new list.
-### What's the size limit for attributes?
-There's no hard limit, but larger attribute lists increase rent cost. Keep data concise.
-### Can the owner update attributes?
-No. The Attributes plugin is Authority Managed, so only the update authority can modify it (not the owner).
-## Related Plugins
-- [Update Delegate](/smart-contracts/core/plugins/update-delegate) - Grant others permission to update attributes
-- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - Lock name/URI (attributes remain mutable)
-- [AddBlocker](/smart-contracts/core/plugins/addBlocker) - Prevent adding new plugins
-## Glossary
-| Term | Definition |
+### 온체인 속성과 오프체인 메타데이터 속성의 차이점은 무엇인가요?
+온체인 속성 (이 플러그인)은 Solana에 저장되며 프로그램에서 읽을 수 있습니다. 오프체인 속성 (URI의 JSON)은 Arweave/IPFS에 저장되며 클라이언트에서만 읽을 수 있습니다.
+### 온체인 프로그램이 이러한 속성을 읽을 수 있나요?
+네. CPI를 사용하여 Asset 계정을 가져오고 Attributes 플러그인 데이터를 역직렬화할 수 있습니다.
+### 속성이 DAS에 의해 인덱싱되나요?
+네. DAS는 빠른 쿼리를 위해 속성 키-값 쌍을 자동으로 인덱싱합니다.
+### 숫자나 불리언을 저장할 수 있나요?
+값은 문자열만 가능합니다. 필요에 따라 변환하세요: `{ key: 'level', value: '5' }`, `{ key: 'active', value: 'true' }`.
+### 단일 속성을 어떻게 업데이트하나요?
+개별 속성을 업데이트할 수 없습니다. 현재 목록을 가져와서 수정한 후 전체 새 목록으로 업데이트하세요.
+### 속성의 크기 제한은 무엇인가요?
+하드 제한은 없지만, 더 큰 속성 목록은 렌트 비용을 증가시킵니다. 데이터를 간결하게 유지하세요.
+### 소유자가 속성을 업데이트할 수 있나요?
+아니요. Attributes 플러그인은 권한 관리이므로 업데이트 권한자만 수정할 수 있습니다 (소유자가 아닌).
+## 관련 플러그인
+- [Update Delegate](/smart-contracts/core/plugins/update-delegate) - 다른 사람에게 속성 업데이트 권한 부여
+- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - 이름/URI 잠금 (속성은 여전히 변경 가능)
+- [AddBlocker](/smart-contracts/core/plugins/addBlocker) - 새 플러그인 추가 방지
+## 용어집
+| 용어 | 정의 |
 |------|------------|
-| **Attributes Plugin** | Authority Managed plugin storing on-chain key-value pairs |
-| **attributeList** | Array of `{ key, value }` objects |
-| **Authority Managed** | Plugin type controlled by update authority |
-| **On-chain Data** | Data stored directly in Solana account (readable by programs) |
-| **DAS** | Digital Asset Standard API that indexes attributes |
+| **Attributes 플러그인** | 온체인 키-값 쌍을 저장하는 권한 관리 플러그인 |
+| **attributeList** | `{ key, value }` 객체의 배열 |
+| **권한 관리** | 업데이트 권한자가 제어하는 플러그인 유형 |
+| **온체인 데이터** | Solana 계정에 직접 저장된 데이터 (프로그램에서 읽기 가능) |
+| **DAS** | 속성을 인덱싱하는 Digital Asset Standard API |

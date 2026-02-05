@@ -1,7 +1,7 @@
 ---
 title: MPL-Core Rust SDK
 metaTitle: Rust SDK | MPL-Core
-description: Learn how to set up your project to run the MPL-Core Rust SDK.
+description: MPL-Core Rust SDK를 실행하기 위한 프로젝트 설정 방법을 배웁니다.
 updated: '01-31-2026'
 keywords:
   - mpl-core Rust
@@ -16,21 +16,21 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - Rust
 ---
-Metaplex provides a Rust library that can be used to interact with the MPL-Core program. The Rust library can be used in rust scripts/builds as well as onchain programs via CPI instructions.
-## Installation
-The MPL-Core Rust SDK can be used in both scripts/desktop/mobile applications as well as with Solana onchain programs.
+Metaplex는 MPL-Core 프로그램과 상호 작용하는 데 사용할 수 있는 Rust 라이브러리를 제공합니다. Rust 라이브러리는 rust 스크립트/빌드뿐만 아니라 CPI 명령을 통한 온체인 프로그램에서도 사용할 수 있습니다.
+## 설치
+MPL-Core Rust SDK는 스크립트/데스크톱/모바일 애플리케이션과 Solana 온체인 프로그램 모두에서 사용할 수 있습니다.
 ```rust
 cargo add mpl-core
 ```
 {% quick-links %}
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core" description="Get started with our JavaScript library based on the Umi framework." /%}
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core/latest/mpl_core/" description="The Rust SDK typedoc platform." /%}
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core" description="Umi 프레임워크 기반 JavaScript 라이브러리로 시작하세요." /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core/latest/mpl_core/" description="Rust SDK typedoc 플랫폼." /%}
 {% /quick-links %}
-## Local Scripts
-For local scripts is recommended to use the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return a instruction that can be added to a transaction.
-A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
-For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/guides/rust/metaplex-rust-sdks) page.
-#### CreateV1Builder - Example
+## 로컬 스크립트
+로컬 스크립트의 경우 나열된 모든 명령의 `Builder` 버전을 사용하는 것이 좋습니다. 이러한 빌더는 많은 작업을 추상화하고 트랜잭션에 추가할 수 있는 명령을 반환합니다.
+모든 Core 명령 목록은 여기에서 찾을 수 있습니다: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
+Rust 사용에 대한 보다 포괄적인 가이드는 [Metaplex Rust SDK 가이드](/guides/rust/metaplex-rust-sdks) 페이지를 확인하세요.
+#### CreateV1Builder - 예제
 ```rust
 use mpl_core::instructions::CreateV1Builder;
 use solana_client::rpc_client;
@@ -59,10 +59,10 @@ let keypair_path = ".../my-key.json"
 }
 ```
 ## CPI (Cross Program Invocation)
-Performing CPI instructions from your own programs can be achieved easily by using the `CpiBuilder` version of an instruction function that can be found for all instructions in the `mpl-core` Rust crate.
-A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
-For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
-#### CreateV1CpiBuilder - Example
+자신의 프로그램에서 CPI 명령을 수행하는 것은 `mpl-core` Rust crate의 모든 명령에서 찾을 수 있는 명령 함수의 `CpiBuilder` 버전을 사용하여 쉽게 달성할 수 있습니다.
+모든 Core 명령 목록은 여기에서 찾을 수 있습니다: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
+Metaplex crate를 사용하여 CPI 명령을 생성하는 보다 포괄적인 가이드는 [Metaplex 프로그램에 CPI하는 방법 가이드](/guides/rust/how-to-cpi-into-a-metaplex-program) 페이지를 확인하세요.
+#### CreateV1CpiBuilder - 예제
 ```rust
 CreateV1CpiBuilder::new()
         .asset(context.accounts.asset)

@@ -138,7 +138,7 @@ Plugins add behavior to Assets and Collections. They can be added at creation ti
 {% code-tabs-imported from="core/create-asset-with-plugins" frameworks="umi" /%}
 ### Add Plugin to Existing Asset
 {% code-tabs-imported from="core/add-plugin" frameworks="umi" /%}
-### Available Plugin Types
+### Common Plugin Types
 | Plugin | Type String | Purpose |
 |--------|-------------|---------|
 | Royalties | `'Royalties'` | Creator royalty enforcement |
@@ -262,7 +262,7 @@ const asset = await fetchAsset(umi, assetAddress)
 console.log('Plugins:', Object.keys(asset))
 ```
 ## Notes
-- Always use `generateSigner()` for new assets - never reuse keypairs
+- Always use a new keypair for new assets - never reuse keypairs
 - The `asset` parameter in `create()` must be a signer, not just a public key
 - Collection-level plugins override asset-level plugins of the same type
 - Use `commitment: 'finalized'` when creating assets that you immediately fetch

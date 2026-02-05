@@ -1,7 +1,7 @@
 ---
 title: Freeze Delegate
-metaTitle: Freeze Delegate Plugin | Metaplex Core
-description: Learn how to freeze Core NFT Assets to block transfers and burns. Use the Freeze Delegate plugin for escrowless staking, marketplace listings, and game item locking.
+metaTitle: Freeze Delegate 플러그인 | Metaplex Core
+description: Core NFT Asset을 동결하여 전송과 소각을 차단하는 방법을 알아보세요. 에스크로 없는 스테이킹, 마켓플레이스 등록 및 게임 아이템 잠금에 Freeze Delegate 플러그인을 사용하세요.
 updated: '01-31-2026'
 keywords:
   - freeze NFT
@@ -19,73 +19,73 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: Can I freeze an Asset I don't own?
-    a: No. The Freeze Delegate is Owner Managed, so only the owner can add it. After adding, you can delegate authority to another address.
-  - q: What's the difference between Freeze Delegate and Permanent Freeze Delegate?
-    a: Freeze Delegate authority is revoked on transfer. Permanent Freeze Delegate authority persists forever and can only be added at creation time.
-  - q: Can a frozen Asset be burned?
-    a: No. Frozen Assets block both transfers and burns. Thaw the Asset first if you want to burn it.
-  - q: Can I freeze an entire Collection at once?
-    a: Not with the regular Freeze Delegate. Use Permanent Freeze Delegate on the Collection instead, which supports collection-level freezing. Note that it can only be added at Collection creation time.
-  - q: Does freezing affect metadata updates?
-    a: No. The Asset owner or update authority can still update metadata while frozen. Only transfers and burns are blocked.
-  - q: How do I implement escrowless staking?
-    a: Add Freeze Delegate with your staking program as authority. When user stakes, freeze the Asset. When user unstakes, thaw the Asset. The NFT never leaves the user's wallet.
+  - q: 소유하지 않은 Asset을 동결할 수 있나요?
+    a: 아니요. Freeze Delegate는 소유자 관리이므로 소유자만 추가할 수 있습니다. 추가 후 다른 주소에 권한을 위임할 수 있습니다.
+  - q: Freeze Delegate와 Permanent Freeze Delegate의 차이점은 무엇인가요?
+    a: Freeze Delegate 권한은 전송 시 취소됩니다. Permanent Freeze Delegate 권한은 영구적으로 유지되며 생성 시에만 추가할 수 있습니다.
+  - q: 동결된 Asset을 소각할 수 있나요?
+    a: 아니요. 동결된 Asset은 전송과 소각 모두 차단합니다. 소각하려면 먼저 Asset을 해동하세요.
+  - q: 전체 Collection을 한 번에 동결할 수 있나요?
+    a: 일반 Freeze Delegate로는 안 됩니다. 대신 Collection-level 동결을 지원하는 Permanent Freeze Delegate를 Collection에 사용하세요. Collection 생성 시에만 추가할 수 있습니다.
+  - q: 동결이 메타데이터 업데이트에 영향을 미치나요?
+    a: 아니요. 동결된 동안에도 Asset 소유자나 업데이트 권한자가 메타데이터를 업데이트할 수 있습니다. 전송과 소각만 차단됩니다.
+  - q: 에스크로 없는 스테이킹을 어떻게 구현하나요?
+    a: 스테이킹 프로그램을 권한으로 하여 Freeze Delegate를 추가합니다. 사용자가 스테이킹하면 Asset을 동결합니다. 언스테이킹하면 Asset을 해동합니다. NFT는 사용자 지갑을 떠나지 않습니다.
 ---
-The **Freeze Delegate Plugin** allows you to freeze Core Assets, blocking transfers and burns while the asset remains in the owner's wallet. Perfect for escrowless staking, marketplace listings, and game mechanics. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add the Freeze Delegate plugin to an Asset
-- Freeze and thaw Assets
-- Delegate freeze authority to another address
-- Use cases: staking, listings, game locking
+**Freeze Delegate 플러그인**을 사용하면 Core Asset을 동결하여 자산이 소유자 지갑에 남아 있는 동안 전송과 소각을 차단할 수 있습니다. 에스크로 없는 스테이킹, 마켓플레이스 등록 및 게임 메커니즘에 완벽합니다. {% .lead %}
+{% callout title="학습 내용" %}
+- Asset에 Freeze Delegate 플러그인 추가
+- Asset 동결 및 해동
+- 다른 주소에 동결 권한 위임
+- 사용 사례: 스테이킹, 등록, 게임 잠금
 {% /callout %}
-## Summary
-The **Freeze Delegate** is an Owner Managed plugin that freezes Assets in place. When frozen, the Asset cannot be transferred or burned until thawed by the freeze authority.
-- Freeze Assets without transferring to escrow
-- Delegate freeze authority to a program or other wallet
-- Authority is revoked on transfer (for non-permanent version)
-- Use [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) for irrevocable freezing
-## Out of Scope
-Collection-level freezing (use Asset-level only), permanent freezing (see Permanent Freeze Delegate), and Token Metadata freeze authority (different system).
-## Quick Start
-**Jump to:** [Add Plugin](#add-freeze-delegate-plugin-to-an-asset) · [Delegate Authority](#delegate-the-freeze-authority) · [Freeze](#freezing-an-asset) · [Thaw](#thawing-a-frozen-asset)
-1. Add the Freeze Delegate plugin: `addPlugin(umi, { asset, plugin: { type: 'FreezeDelegate', data: { frozen: true } } })`
-2. The Asset is now frozen and cannot be transferred
-3. Thaw when ready: update the plugin with `frozen: false`
-4. Authority is revoked on transfer
-{% callout type="note" title="When to Use Freeze vs Permanent Freeze" %}
-| Use Case | Freeze Delegate | Permanent Freeze Delegate |
+## 요약
+**Freeze Delegate**는 Asset을 제자리에서 동결하는 소유자 관리 플러그인입니다. 동결되면 Asset은 동결 권한자가 해동할 때까지 전송하거나 소각할 수 없습니다.
+- 에스크로에 전송하지 않고 Asset 동결
+- 프로그램이나 다른 지갑에 동결 권한 위임
+- 비영구 버전의 경우 전송 시 권한 취소됨
+- 취소 불가능한 동결은 [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) 사용
+## 범위 외
+Collection-level 동결 (Asset 수준만 사용), 영구 동결 (Permanent Freeze Delegate 참조), Token Metadata 동결 권한 (다른 시스템).
+## 빠른 시작
+**바로 가기:** [플러그인 추가](#asset에-freeze-delegate-플러그인-추가) · [권한 위임](#동결-권한-위임) · [동결](#asset-동결) · [해동](#동결된-asset-해동)
+1. Freeze Delegate 플러그인 추가: `addPlugin(umi, { asset, plugin: { type: 'FreezeDelegate', data: { frozen: true } } })`
+2. Asset이 이제 동결되어 전송 불가
+3. 준비되면 해동: `frozen: false`로 플러그인 업데이트
+4. 전송 시 권한 취소됨
+{% callout type="note" title="Freeze vs Permanent Freeze 사용 시기" %}
+| 사용 사례 | Freeze Delegate | Permanent Freeze Delegate |
 |----------|-----------------|---------------------------|
-| Marketplace listings | ✅ Best choice | ❌ Overkill |
-| Escrowless staking | ✅ Best choice | ✅ Also works |
-| Soulbound tokens | ❌ Revokes on transfer | ✅ Best choice |
-| Collection-wide freeze | ❌ Assets only | ✅ Supports Collections |
-| Rental protocols | ✅ Best choice | ✅ Also works |
-**Choose Freeze Delegate** when authority should reset on ownership change.
-**Choose [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)** when authority must persist forever.
+| 마켓플레이스 등록 | ✅ 최선의 선택 | ❌ 과도함 |
+| 에스크로 없는 스테이킹 | ✅ 최선의 선택 | ✅ 사용 가능 |
+| 소울바운드 토큰 | ❌ 전송 시 취소됨 | ✅ 최선의 선택 |
+| Collection 전체 동결 | ❌ Asset만 | ✅ Collection 지원 |
+| 렌탈 프로토콜 | ✅ 최선의 선택 | ✅ 사용 가능 |
+**Freeze Delegate 선택** 소유권 변경 시 권한이 재설정되어야 할 때.
+**[Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) 선택** 권한이 영원히 유지되어야 할 때.
 {% /callout %}
-## Common Use Cases
-- **Escrowless staking**: Freeze NFTs while staked without transferring to escrow
-- **Marketplace listings**: Lock NFTs for sale without escrow accounts
-- **Game item locking**: Temporarily lock items during gameplay
-- **Rental protocols**: Lock NFTs while rented out
-- **Governance**: Lock tokens during voting periods
-- **Collateral**: Lock NFTs used as lending collateral
-- **Tournaments**: Lock NFTs during competition participation
-## Works With
+## 일반적인 사용 사례
+- **에스크로 없는 스테이킹**: 에스크로에 전송하지 않고 스테이킹 중인 NFT 동결
+- **마켓플레이스 등록**: 에스크로 계정 없이 판매용 NFT 잠금
+- **게임 아이템 잠금**: 게임 플레이 중 아이템 일시적 잠금
+- **렌탈 프로토콜**: 대여 중인 NFT 잠금
+- **거버넌스**: 투표 기간 중 토큰 잠금
+- **담보**: 대출 담보로 사용되는 NFT 잠금
+- **토너먼트**: 대회 참가 중 NFT 잠금
+## 호환 대상
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
-For collection-level freezing, use [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) instead.
-## Arguments
-| Arg    | Value |
+Collection-level 동결은 대신 [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)를 사용하세요.
+## 인자
+| 인자    | 값 |
 | ------ | ----- |
 | frozen | bool  |
-## Functions
-### Add Freeze Delegate Plugin to an Asset
-The `addPlugin` command adds the Freeze Delegate Plugin to an Asset. This plugin allows the Asset to be frozen, preventing transfers and burns.
-{% dialect-switcher title="Adding a Freeze Plugin to an MPL Core Asset" %}
+## 함수
+### Asset에 Freeze Delegate 플러그인 추가
+`addPlugin` 명령은 Asset에 Freeze Delegate 플러그인을 추가합니다. 이 플러그인은 Asset을 동결하여 전송과 소각을 방지할 수 있게 합니다.
+{% dialect-switcher title="MPL Core Asset에 Freeze 플러그인 추가" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -143,9 +143,9 @@ pub async fn add_freeze_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Delegate the Freeze Authority
-The `approvePluginAuthority` command delegates the freeze authority to a different address. This allows another address to freeze and thaw the Asset while maintaining ownership.
-{% dialect-switcher title="Delegate the Freeze Authority" %}
+### 동결 권한 위임
+`approvePluginAuthority` 명령은 동결 권한을 다른 주소에 위임합니다. 이를 통해 소유권을 유지하면서 다른 주소가 Asset을 동결하고 해동할 수 있습니다.
+{% dialect-switcher title="동결 권한 위임" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -212,11 +212,11 @@ pub async fn approve_plugin_authority() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating the Freeze Delegate Plugin
-The Freeze Delegate Plugin can be updated to change the frozen state of the asset. This is the same as using the [Freezing an Asset](#freezing-an-asset) and [Thawing a Frozen Asset](#thawing-a-frozen-asset) functions shown below.
-### Freezing an Asset
-The `freezeAsset` command freezes an Asset, preventing it from being transferred or burned. This is useful for escrowless staking or marketplace listings.
-{% dialect-switcher title="Freeze an MPL Core Asset" %}
+## Freeze Delegate 플러그인 업데이트
+Freeze Delegate 플러그인은 자산의 동결 상태를 변경하기 위해 업데이트할 수 있습니다. 이는 아래 표시된 [Asset 동결](#asset-동결) 및 [동결된 Asset 해동](#동결된-asset-해동) 함수를 사용하는 것과 동일합니다.
+### Asset 동결
+`freezeAsset` 명령은 Asset을 동결하여 전송하거나 소각할 수 없게 합니다. 에스크로 없는 스테이킹이나 마켓플레이스 등록에 유용합니다.
+{% dialect-switcher title="MPL Core Asset 동결" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -283,9 +283,9 @@ pub async fn update_freeze_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Thawing a Frozen Asset
-The `thawAsset` command unfreezes a frozen Asset, restoring its ability to be transferred and burned.
-{% dialect-switcher title="Thaw an MPL Core Asset" %}
+### 동결된 Asset 해동
+`thawAsset` 명령은 동결된 Asset을 해동하여 전송하고 소각할 수 있는 기능을 복원합니다.
+{% dialect-switcher title="MPL Core Asset 해동" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -351,57 +351,57 @@ pub async fn thaw_freeze_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 일반적인 오류
 ### `Asset is frozen`
-You tried to transfer or burn a frozen Asset. The freeze authority must thaw it first.
+동결된 Asset을 전송하거나 소각하려고 했습니다. 동결 권한자가 먼저 해동해야 합니다.
 ### `Authority mismatch`
-Only the freeze delegate authority can freeze/thaw the Asset. Check who has the plugin authority.
+동결 위임 권한자만 Asset을 동결/해동할 수 있습니다. 플러그인 권한이 누구인지 확인하세요.
 ### `Plugin not found`
-The Asset doesn't have a Freeze Delegate plugin. Add it first with `addPlugin`.
-## Notes
-- Owner Managed: requires owner signature to add
-- Authority is automatically revoked when the Asset transfers
-- Frozen Assets can still be updated (metadata changes allowed)
-- Use Permanent Freeze Delegate if you need the authority to persist after transfer
-- Freezing is immediate - no confirmation period
-## Quick Reference
-### Freeze States
-| State | Can Transfer | Can Burn | Can Update |
+Asset에 Freeze Delegate 플러그인이 없습니다. 먼저 `addPlugin`으로 추가하세요.
+## 참고 사항
+- 소유자 관리: 추가하려면 소유자 서명 필요
+- Asset 전송 시 권한이 자동으로 취소됨
+- 동결된 Asset은 여전히 업데이트 가능 (메타데이터 변경 허용)
+- 전송 후에도 권한이 유지되어야 하면 Permanent Freeze Delegate 사용
+- 동결은 즉시 적용 - 확인 기간 없음
+## 빠른 참조
+### 동결 상태
+| 상태 | 전송 가능 | 소각 가능 | 업데이트 가능 |
 |-------|--------------|----------|------------|
-| Unfrozen | Yes | Yes | Yes |
-| Frozen | No | No | Yes |
-### Authority Behavior
-| Event | Authority Result |
+| 해동됨 | 예 | 예 | 예 |
+| 동결됨 | 아니요 | 아니요 | 예 |
+### 권한 동작
+| 이벤트 | 권한 결과 |
 |-------|------------------|
-| Asset transfers | Authority revoked |
-| Plugin removed | Authority gone |
-| Thaw | Authority retained |
+| Asset 전송 | 권한 취소됨 |
+| 플러그인 제거됨 | 권한 사라짐 |
+| 해동 | 권한 유지됨 |
 ## FAQ
-### Can I freeze an Asset I don't own?
-No. The Freeze Delegate is Owner Managed, so only the owner can add it. After adding, you can delegate authority to another address.
-### What's the difference between Freeze Delegate and Permanent Freeze Delegate?
-Freeze Delegate authority is revoked on transfer. Permanent Freeze Delegate authority persists forever and can only be added at creation time.
-### Can a frozen Asset be burned?
-No. Frozen Assets block both transfers and burns. Thaw the Asset first if you want to burn it.
-### Can I freeze an entire Collection at once?
-Not with the regular Freeze Delegate (Assets only). Use [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) on the Collection instead - it supports collection-level freezing and will freeze all Assets in that Collection at once. Note that Permanent Freeze Delegate can only be added at Collection creation time.
-### Does freezing affect metadata updates?
-No. The Asset owner or update authority can still update metadata (name, URI) while frozen. Only transfers and burns are blocked.
-### How do I implement escrowless staking?
-1. Add Freeze Delegate plugin with your staking program as authority
-2. When user stakes: freeze the Asset
-3. When user unstakes: thaw the Asset
-4. The NFT never leaves the user's wallet
-## Related Plugins
-- [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) - Irrevocable freeze authority, supports Collections
-- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - Allow delegate to transfer Assets
-- [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - Allow delegate to burn Assets
-## Glossary
-| Term | Definition |
+### 소유하지 않은 Asset을 동결할 수 있나요?
+아니요. Freeze Delegate는 소유자 관리이므로 소유자만 추가할 수 있습니다. 추가 후 다른 주소에 권한을 위임할 수 있습니다.
+### Freeze Delegate와 Permanent Freeze Delegate의 차이점은 무엇인가요?
+Freeze Delegate 권한은 전송 시 취소됩니다. Permanent Freeze Delegate 권한은 영구적으로 유지되며 생성 시에만 추가할 수 있습니다.
+### 동결된 Asset을 소각할 수 있나요?
+아니요. 동결된 Asset은 전송과 소각 모두 차단합니다. 소각하려면 먼저 Asset을 해동하세요.
+### 전체 Collection을 한 번에 동결할 수 있나요?
+일반 Freeze Delegate로는 안 됩니다 (Asset만). 대신 Collection에 [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)를 사용하세요 - Collection-level 동결을 지원하며 해당 Collection의 모든 Asset을 한 번에 동결합니다. Permanent Freeze Delegate는 Collection 생성 시에만 추가할 수 있습니다.
+### 동결이 메타데이터 업데이트에 영향을 미치나요?
+아니요. 동결된 동안에도 Asset 소유자나 업데이트 권한자가 메타데이터 (이름, URI)를 업데이트할 수 있습니다. 전송과 소각만 차단됩니다.
+### 에스크로 없는 스테이킹을 어떻게 구현하나요?
+1. 스테이킹 프로그램을 권한으로 하여 Freeze Delegate 플러그인 추가
+2. 사용자가 스테이킹할 때: Asset 동결
+3. 사용자가 언스테이킹할 때: Asset 해동
+4. NFT는 사용자 지갑을 떠나지 않음
+## 관련 플러그인
+- [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) - 취소 불가능한 동결 권한, Collection 지원
+- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - 위임자가 Asset을 전송할 수 있도록 허용
+- [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - 위임자가 Asset을 소각할 수 있도록 허용
+## 용어집
+| 용어 | 정의 |
 |------|------------|
-| **Freeze Delegate** | Owner Managed plugin that blocks transfers and burns |
-| **Frozen** | Asset state where transfers and burns are blocked |
-| **Thaw** | Unfreezing an Asset to allow transfers again |
-| **Delegate Authority** | The account authorized to freeze/thaw the Asset |
-| **Escrowless** | Staking/listing without transferring to a holding account |
-| **Owner Managed** | Plugin type requiring owner signature to add |
+| **Freeze Delegate** | 전송과 소각을 차단하는 소유자 관리 플러그인 |
+| **동결됨** | 전송과 소각이 차단된 Asset 상태 |
+| **해동** | 다시 전송을 허용하기 위해 Asset을 해동 |
+| **위임 권한** | Asset을 동결/해동할 권한이 있는 계정 |
+| **에스크로 없음** | 보관 계정에 전송하지 않고 스테이킹/등록 |
+| **소유자 관리** | 추가하려면 소유자 서명이 필요한 플러그인 유형 |

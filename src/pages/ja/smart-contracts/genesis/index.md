@@ -1,7 +1,7 @@
 ---
-title: Genesis - Solana Token Launch Smart Contract
-metaTitle: Genesis | Solana TGE & Token Launch Platform | Fair Launch | Metaplex
-description: Launch tokens on Solana with Genesis smart contract. Build token generation events (TGE), fair launches, ICOs, priced sales, and launch pools on-chain.
+title: Genesis - Solana トークンローンチスマートコントラクト
+metaTitle: Genesis | Solana TGE & トークンローンチプラットフォーム | Fair Launch | Metaplex
+description: Genesis スマートコントラクトで Solana 上にトークンをローンチ。トークン生成イベント（TGE）、Fair Launch、ICO、価格付き販売、Launch Pool をオンチェーンで構築できます。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -19,143 +19,143 @@ about:
   - Fair distribution
 proficiencyLevel: Beginner
 faqs:
-  - q: What is Genesis?
-    a: Genesis is a Metaplex smart contract for Token Generation Events (TGE) on Solana. It provides on-chain infrastructure for presales, launch pools, and auctions.
-  - q: What launch mechanisms does Genesis support?
-    a: Genesis supports three mechanisms - Presale (fixed price), Launch Pool (proportional distribution with price discovery), and Uniform Price Auction (bid-based with clearing price).
-  - q: How much does it cost to use Genesis?
-    a: Genesis charges a 2% protocol fee on deposits. There are no upfront costs - you only pay Solana transaction fees plus the protocol fee on funds raised.
-  - q: Can I revoke token authorities after launch?
-    a: Yes. Genesis provides instructions to revoke mint and freeze authorities, signaling to holders that no additional tokens can be minted.
-  - q: What's the difference between Launch Pool and Presale?
-    a: Presale has a fixed price set upfront. Launch Pool discovers price organically based on total deposits - more deposits means higher implied price per token.
+  - q: Genesis とは何ですか？
+    a: Genesis は Solana 上のトークン生成イベント（TGE）のための Metaplex スマートコントラクトです。Presale、Launch Pool、オークションのためのオンチェーンインフラを提供します。
+  - q: Genesis はどのようなローンチメカニズムに対応していますか？
+    a: Genesis は3つのメカニズムに対応しています。Presale（固定価格）、Launch Pool（価格発見を伴う比例配分）、Uniform Price Auction（入札ベースのクリアリング価格）です。
+  - q: Genesis の利用にかかる費用はいくらですか？
+    a: Genesis は入金に対して {% fee product="genesis" config="launchPool" fee="deposit" /%} のプロトコル手数料を徴収します。初期費用はかかりません。Solana のトランザクション手数料と調達資金に対するプロトコル手数料のみです。
+  - q: ローンチ後にトークン権限を取り消すことはできますか？
+    a: はい。Genesis はミント権限とフリーズ権限を取り消す命令を提供しており、追加のトークンが発行されないことを保有者に示すことができます。
+  - q: Launch Pool と Presale の違いは何ですか？
+    a: Presale は事前に固定価格が設定されます。Launch Pool は預入総額に基づいて価格が自然に決定されます。預入額が多いほど、トークンあたりの暗示価格が高くなります。
 ---
 
-**Genesis** is a Metaplex smart contract for **Token Generation Events (TGE)** on Solana. Build presales, launch pools, and auctions with on-chain coordination for token creation, distribution, and fund collection. {% .lead %}
+**Genesis** は、Solana 上の**トークン生成イベント（TGE）**のための Metaplex スマートコントラクトです。トークンの作成、配布、資金収集のためのオンチェーン調整機能を備えた Presale、Launch Pool、オークションを構築できます。 {% .lead %}
 
-{% callout title="Choose Your Path" %}
-- **New to Genesis?** Start with [Getting Started](/smart-contracts/genesis/getting-started) to understand the flow
-- **Ready to build?** Jump to [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale)
-- **Need SDK reference?** See [JavaScript SDK](/smart-contracts/genesis/sdk/javascript)
+{% callout title="あなたに合ったパスを選択" %}
+- **Genesis が初めての方は？** [はじめに](/smart-contracts/genesis/getting-started)から全体の流れを理解しましょう
+- **構築する準備ができた方は？** [Launch Pool](/smart-contracts/genesis/launch-pool) または [Presale](/smart-contracts/genesis/presale) へ進みましょう
+- **SDK リファレンスが必要な方は？** [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) をご覧ください
 {% /callout %}
 
-## What is Genesis?
+## Genesis とは？
 
-Genesis provides on-chain infrastructure for launching tokens on Solana. It handles:
+Genesis は Solana 上でトークンをローンチするためのオンチェーンインフラを提供します。以下の機能を処理します：
 
-- **Token creation** with metadata (name, symbol, image)
-- **Fund collection** from participants (SOL deposits)
-- **Distribution** based on your chosen mechanism
-- **Time coordination** for deposit and claim windows
+- **トークン作成** - メタデータ（名前、シンボル、画像）付き
+- **資金収集** - 参加者からの入金（SOL の預入）
+- **配布** - 選択したメカニズムに基づく分配
+- **時間調整** - 預入期間と請求期間のウィンドウ管理
 
-Think of Genesis as a smart contract that sits between you (the launcher) and your participants, ensuring fair, transparent, and automated token distribution.
+Genesis は、あなた（ローンチ主催者）と参加者の間に位置するスマートコントラクトであり、公平で透明性のある自動化されたトークン配布を保証します。
 
-## Launch Mechanisms
+## ローンチメカニズム
 
-Genesis supports three mechanisms that can be combined:
+Genesis は組み合わせ可能な3つのメカニズムに対応しています：
 
-| Mechanism | Price | Distribution | Best For |
-|-----------|-------|--------------|----------|
-| **[Launch Pool](/smart-contracts/genesis/launch-pool)** | Discovered at close | Proportional to deposit | Fair launches, community tokens |
-| **[Presale](/smart-contracts/genesis/presale)** | Fixed upfront | First-come-first-served | Predictable raises, known valuation |
-| **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** | Clearing price | Highest bidders win | Large raises, institutional interest |
+| メカニズム | 価格 | 配布方法 | 最適な用途 |
+|-----------|------|---------|-----------|
+| **[Launch Pool](/smart-contracts/genesis/launch-pool)** | 終了時に決定 | 預入額に比例 | Fair Launch、コミュニティトークン |
+| **[Presale](/smart-contracts/genesis/presale)** | 事前に固定 | 先着順 | 予測可能な調達、既知のバリュエーション |
+| **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** | クリアリング価格 | 最高入札者が獲得 | 大規模調達、機関投資家の関心 |
 
-### Which Should I Use?
+### どれを使うべきですか？
 
-**Launch Pool** - You want organic price discovery and fair distribution. Everyone who deposits gets tokens proportional to their share. No one gets sniped.
+**Launch Pool** - 自然な価格発見と公平な配布を求める場合。預入した全員が、自分のシェアに応じてトークンを受け取ります。先行者に奪われることはありません。
 
-**Presale** - You know your valuation and want predictable pricing. Set a fixed price and let participants buy until the cap is reached.
+**Presale** - バリュエーションが確定しており、予測可能な価格設定を求める場合。固定価格を設定し、上限に達するまで参加者が購入できます。
 
-**Auction** - You want competitive bidding from larger participants. Best for established projects with institutional interest.
+**Auction** - 大口参加者による競争入札を求める場合。機関投資家の関心がある確立されたプロジェクトに最適です。
 
-## Core Concepts
+## 主要コンセプト
 
 ### Genesis Account
 
-The central coordinator for your launch. When you initialize a Genesis Account, it:
+ローンチの中心的なコーディネーターです。Genesis Account を初期化すると、以下が行われます：
 
-- Creates your SPL token with metadata
-- Mints the total supply to escrow
-- Provides the foundation for adding distribution buckets
+- メタデータ付きの SPL token を作成
+- 総供給量をエスクローにミント
+- 配布用 bucket を追加するための基盤を提供
 
-### Buckets
+### Bucket
 
-Modular components that define how tokens and funds flow:
+トークンと資金の流れを定義するモジュラーコンポーネントです：
 
-| Type | Purpose | Examples |
-|------|---------|----------|
-| **Inflow** | Collect SOL from users | Launch Pool, Presale |
-| **Outflow** | Receive funds for team/treasury | Unlocked Bucket |
+| タイプ | 目的 | 例 |
+|-------|------|-----|
+| **Inflow** | ユーザーから SOL を収集 | Launch Pool、Presale |
+| **Outflow** | チーム/トレジャリーへの資金受取 | Unlocked Bucket |
 
-### Time Conditions
+### 時間条件
 
-Every bucket has time windows that control when actions are allowed:
+すべての bucket にはアクションを制御する時間ウィンドウがあります：
 
-- **Deposit window** - When users can deposit SOL
-- **Claim window** - When users can claim tokens
+- **預入ウィンドウ** - ユーザーが SOL を預入できる期間
+- **請求ウィンドウ** - ユーザーがトークンを請求できる期間
 
-## Protocol Fees
+## プロトコル手数料
 
-| Action | Fee |
-|--------|-----|
-| Deposit | 2% of deposit amount |
-| Withdraw | 2% of withdrawal amount |
-| Claim | Transaction fee only |
+| アクション | 手数料 |
+|-----------|--------|
+| 預入 | 預入額の {% fee product="genesis" config="launchPool" fee="deposit" /%} |
+| 引出 | 引出額の {% fee product="genesis" config="launchPool" fee="withdraw" /%} |
+| 請求 | トランザクション手数料のみ |
 
-No upfront costs. You only pay fees on funds raised.
+初期費用はかかりません。調達資金に対する手数料のみをお支払いいただきます。
 
-## Program Information
+## プログラム情報
 
-| Network | Program ID |
-|---------|------------|
+| ネットワーク | プログラム ID |
+|-------------|--------------|
 | Mainnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
 | Devnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
 
-## Security
+## セキュリティ
 
-After your launch completes, revoke token authorities to signal that no additional tokens can be minted:
+ローンチ完了後、トークン権限を取り消して追加のトークンが発行されないことを示しましょう：
 
-- **Mint authority** - Revoke to prevent new token minting
-- **Freeze authority** - Revoke to prevent token freezing
+- **ミント権限** - 取り消すことで新規トークンの発行を防止
+- **フリーズ権限** - 取り消すことでトークンの凍結を防止
 
-See [Getting Started](/smart-contracts/genesis/getting-started) for details on authority management.
+権限管理の詳細については[はじめに](/smart-contracts/genesis/getting-started)をご覧ください。
 
 ## FAQ
 
-### What is Genesis?
-Genesis is a Metaplex smart contract for Token Generation Events (TGE) on Solana. It provides on-chain infrastructure for presales, launch pools, and auctions with coordinated token creation and distribution.
+### Genesis とは何ですか？
+Genesis は Solana 上のトークン生成イベント（TGE）のための Metaplex スマートコントラクトです。トークンの作成と配布を調整する Presale、Launch Pool、オークションのためのオンチェーンインフラを提供します。
 
-### What launch mechanisms does Genesis support?
-Genesis supports three mechanisms: **Launch Pool** (proportional distribution with price discovery), **Presale** (fixed price), and **Uniform Price Auction** (bid-based with clearing price).
+### Genesis はどのようなローンチメカニズムに対応していますか？
+Genesis は3つのメカニズムに対応しています：**Launch Pool**（価格発見を伴う比例配分）、**Presale**（固定価格）、**Uniform Price Auction**（入札ベースのクリアリング価格）。
 
-### How much does it cost to use Genesis?
-Genesis charges a 2% protocol fee on deposits. There are no upfront costs—you only pay Solana transaction fees plus the protocol fee on funds raised.
+### Genesis の利用にかかる費用はいくらですか？
+Genesis は入金に対して {% fee product="genesis" config="launchPool" fee="deposit" /%} のプロトコル手数料を徴収します。初期費用はかかりません。Solana のトランザクション手数料と調達資金に対するプロトコル手数料のみです。
 
-### Can I revoke token authorities after launch?
-Yes. Genesis provides `revokeMintAuthorityV2` and `revokeFreezeAuthorityV2` instructions to permanently revoke authorities.
+### ローンチ後にトークン権限を取り消すことはできますか？
+はい。Genesis は `revokeMintAuthorityV2` および `revokeFreezeAuthorityV2` 命令を提供しており、権限を恒久的に取り消すことができます。
 
-### What's the difference between Launch Pool and Presale?
-**Presale** has a fixed price set upfront. **Launch Pool** discovers price organically—more deposits means higher implied price per token, with proportional distribution to all participants.
+### Launch Pool と Presale の違いは何ですか？
+**Presale** は事前に固定価格が設定されます。**Launch Pool** は価格が自然に決定されます。預入額が多いほどトークンあたりの暗示価格が高くなり、全参加者への比例配分が行われます。
 
-### Can I combine multiple launch mechanisms?
-Yes. Genesis uses a bucket system where you can add multiple inflow buckets and configure outflow buckets for treasury or vesting.
+### 複数のローンチメカニズムを組み合わせることはできますか？
+はい。Genesis は bucket システムを採用しており、複数の Inflow bucket を追加し、トレジャリーやベスティング用の Outflow bucket を設定できます。
 
-## Glossary
+## 用語集
 
-| Term | Definition |
-|------|------------|
-| **Genesis Account** | Central coordinator that creates the token and manages all buckets |
-| **Bucket** | Modular component that defines token/SOL flow |
-| **Inflow Bucket** | Bucket that collects SOL from users |
-| **Outflow Bucket** | Bucket that receives funds via end behaviors |
-| **Launch Pool** | Deposit-based distribution where price is discovered at close |
-| **Presale** | Fixed-price sale at a predetermined rate |
-| **Quote Token** | The token users deposit (usually wSOL) |
-| **Base Token** | The token being launched and distributed |
+| 用語 | 定義 |
+|------|------|
+| **Genesis Account** | トークンを作成し、すべての bucket を管理する中心的なコーディネーター |
+| **Bucket** | トークン/SOL の流れを定義するモジュラーコンポーネント |
+| **Inflow Bucket** | ユーザーから SOL を収集する bucket |
+| **Outflow Bucket** | エンドビヘイビアを通じて資金を受け取る bucket |
+| **Launch Pool** | 終了時に価格が決定される預入ベースの配布方式 |
+| **Presale** | 事前に決定された価格での固定価格販売 |
+| **Quote Token** | ユーザーが預入するトークン（通常は wSOL） |
+| **Base Token** | ローンチされ配布されるトークン |
 
-## Next Steps
+## 次のステップ
 
-1. **[Getting Started](/smart-contracts/genesis/getting-started)** - Understand the Genesis flow
-2. **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - Installation and setup
-3. **[Launch Pool](/smart-contracts/genesis/launch-pool)** - Build a proportional distribution launch
-4. **[Presale](/smart-contracts/genesis/presale)** - Build a fixed-price sale
+1. **[はじめに](/smart-contracts/genesis/getting-started)** - Genesis の全体フローを理解する
+2. **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - インストールとセットアップ
+3. **[Launch Pool](/smart-contracts/genesis/launch-pool)** - 比例配分ローンチを構築する
+4. **[Presale](/smart-contracts/genesis/presale)** - 固定価格販売を構築する

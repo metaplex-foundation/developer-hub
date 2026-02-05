@@ -1,7 +1,7 @@
 ---
 title: Permanent Freeze Delegate
 metaTitle: Permanent Freeze Delegate | Metaplex Core
-description: Create soulbound NFTs and freeze entire Collections with the Permanent Freeze Delegate plugin. Irrevocable freeze authority that persists forever.
+description: Permanent Freeze Delegate pluginでソウルバウンドNFTを作成し、Collection全体をフリーズします。永続的に有効な取り消し不可能なfreeze権限。
 updated: '01-31-2026'
 keywords:
   - soulbound NFT
@@ -17,67 +17,67 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I create a soulbound (non-transferable) token?
-    a: Create the Asset with PermanentFreezeDelegate, set frozen to true, and set authority to None. The Asset can never be unfrozen or transferred.
-  - q: What's the difference between Freeze Delegate and Permanent Freeze Delegate?
-    a: Regular Freeze Delegate authority is revoked on transfer and only works on Assets. Permanent Freeze Delegate persists forever, works on Collections, and uses forceApprove.
-  - q: Can I freeze individual Assets in a Collection?
-    a: No. When Permanent Freeze Delegate is on a Collection, freezing affects all Assets at once. Use Asset-level Permanent Freeze Delegate for individual control.
-  - q: Can a permanently frozen Asset be burned?
-    a: Only if there's also a Permanent Burn Delegate. Regular Burn Delegate cannot burn frozen Assets, but Permanent Burn Delegate uses forceApprove.
+  - q: ソウルバウンド（譲渡不可）トークンはどのように作成しますか？
+    a: PermanentFreezeDelegateでAssetを作成し、frozenをtrueに設定し、authorityをNoneに設定します。Assetは決してアンフリーズまたは転送できなくなります。
+  - q: Freeze DelegateとPermanent Freeze Delegateの違いは何ですか？
+    a: 通常のFreeze Delegate authorityは転送時に取り消され、Assetでのみ機能します。Permanent Freeze Delegateは永続的に有効で、Collectionで機能し、forceApproveを使用します。
+  - q: Collection内の個別のAssetをフリーズできますか？
+    a: いいえ。Permanent Freeze DelegateがCollectionにある場合、フリーズは全てのAssetに一度に影響します。個別制御にはAssetレベルのPermanent Freeze Delegateを使用してください。
+  - q: 永続的にフリーズされたAssetはburnできますか？
+    a: Permanent Burn Delegateもある場合のみ可能です。通常のBurn DelegateはフリーズされたAssetをburnできませんが、Permanent Burn DelegateはforceApproveを使用します。
 ---
-The **Permanent Freeze Delegate Plugin** provides irrevocable freeze authority that persists across transfers. Use it for soulbound tokens, collection-wide freezing, and permanent lock mechanisms. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Create Assets with permanent freeze capability
-- Freeze entire Collections at once
-- Implement soulbound (non-transferable) tokens
-- Understand permanent vs regular freeze delegate
+**Permanent Freeze Delegate Plugin**は、転送後も持続する取り消し不可能なfreeze権限を提供します。ソウルバウンドトークン、Collection全体のフリーズ、永続的なロックメカニズムに使用します。 {% .lead %}
+{% callout title="学習内容" %}
+- 永続的なfreeze機能を持つAssetの作成
+- Collection全体を一度にフリーズ
+- ソウルバウンド（譲渡不可）トークンの実装
+- permanent vs 通常のfreeze delegateの理解
 {% /callout %}
-## Summary
-The **Permanent Freeze Delegate** is a permanent plugin that can only be added at creation time. Unlike the regular Freeze Delegate, this authority persists forever and can freeze/thaw even after transfers.
-- Can only be added at Asset/Collection creation
-- Authority persists across transfers (never revoked)
-- Uses `forceApprove` - can freeze even with other blocking plugins
-- Collection-level freezing affects all Assets in the Collection
-## Out of Scope
-Regular freeze delegate (see [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate)), temporary freezing, and Token Metadata freeze authority.
-## Quick Start
-**Jump to:** [Create Asset](#creating-an-asset-with-a-permanent-freeze-plugin) · [Create Collection](#creating-a-collection-with-a-permanent-freeze-plugin) · [Update (Thaw)](#updating-the-permanent-freeze-delegate-plugin-on-an-asset)
-1. Add `PermanentFreezeDelegate` plugin at Asset/Collection creation
-2. Set `frozen: true` for immediate freeze, or `false` to freeze later
-3. The delegate can freeze/thaw at any time, even after transfers
-{% callout type="note" title="Permanent vs Regular Freeze Delegate" %}
-| Feature | Freeze Delegate | Permanent Freeze Delegate |
+## 概要
+**Permanent Freeze Delegate**は、作成時にのみ追加できるpermanent pluginです。通常のFreeze Delegateとは異なり、この権限は永続的に有効で、転送後もフリーズ/解凍できます。
+- Asset/Collection作成時にのみ追加可能
+- 権限は転送後も持続（取り消されない）
+- `forceApprove`を使用 - 他のブロッキングpluginがあってもフリーズ可能
+- Collectionレベルのフリーズは、Collection内の全Assetに影響
+## 対象外
+通常のfreeze delegate（[Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate)を参照）、一時的なフリーズ、Token Metadata freeze権限。
+## クイックスタート
+**移動先:** [Assetの作成](#creating-an-asset-with-a-permanent-freeze-plugin) · [Collectionの作成](#creating-a-collection-with-a-permanent-freeze-plugin) · [更新（解凍）](#updating-the-permanent-freeze-delegate-plugin-on-an-asset)
+1. Asset/Collection作成時に`PermanentFreezeDelegate` pluginを追加
+2. 即時フリーズには`frozen: true`、後でフリーズするには`false`を設定
+3. delegateは転送後もいつでもフリーズ/解凍可能
+{% callout type="note" title="Permanent vs 通常のFreeze Delegate" %}
+| 機能 | Freeze Delegate | Permanent Freeze Delegate |
 |---------|-----------------|---------------------------|
-| Add after creation | ✅ Yes | ❌ Creation only |
-| Authority persists on transfer | ❌ Revokes | ✅ Persists |
-| Works with Collections | ❌ No | ✅ Yes |
-| forceApprove | ❌ No | ✅ Yes |
-| Soulbound tokens | ❌ Limited | ✅ Best choice |
-**Choose [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate)** for temporary, revocable freezing.
-**Choose Permanent Freeze Delegate** for permanent authority or collection-wide freezing.
+| 作成後に追加 | ✅ 可能 | ❌ 作成時のみ |
+| 転送後も権限が持続 | ❌ 取り消し | ✅ 持続 |
+| Collectionで動作 | ❌ 不可 | ✅ 可能 |
+| forceApprove | ❌ なし | ✅ あり |
+| ソウルバウンドトークン | ❌ 限定的 | ✅ 最適な選択 |
+**[Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate)を選択**：一時的で取り消し可能なフリーズの場合。
+**Permanent Freeze Delegateを選択**：永続的な権限またはCollection全体のフリーズの場合。
 {% /callout %}
-## Common Use Cases
-- **Soulbound tokens**: Create non-transferable credentials, achievements, or memberships
-- **Collection-wide freeze**: Freeze all Assets in a Collection with one plugin
-- **Permanent collateral**: Lock Assets as collateral that survives ownership changes
-- **Game item permanence**: Items that stay locked regardless of trades
-- **Compliance requirements**: Assets that must remain frozen for regulatory reasons
-## Works With
+## 一般的なユースケース
+- **ソウルバウンドトークン**：譲渡不可の資格証明、実績、またはメンバーシップを作成
+- **Collection全体のフリーズ**：1つのpluginでCollection内の全Assetをフリーズ
+- **永続的な担保**：所有権の変更後も存続する担保としてAssetをロック
+- **ゲームアイテムの永続性**：取引に関係なくロックされたままのアイテム
+- **コンプライアンス要件**：規制上の理由でフリーズしたままにする必要があるAsset
+## 対応
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-### Behaviours
-- **Asset**: Allows the delegated address to freeze and thaw the NFT at any time.
-- **Collection**: Allows the collection authority to freeze and thaw the whole collection at once. It does **not** allow to freeze a single asset in the collection using this delegate.
-## Arguments
-| Arg    | Value |
+### 動作
+- **Asset**：delegatedアドレスがいつでもNFTをフリーズおよび解凍できるようにします。
+- **Collection**：collection authorityがCollection全体を一度にフリーズおよび解凍できるようにします。このdelegateを使用してCollection内の単一assetをフリーズすることは**できません**。
+## 引数
+| 引数    | 値 |
 | ------ | ----- |
 | frozen | bool  |
-## Creating an Asset with a Permanent Freeze plugin
-The following example shows how to create an Asset with a Permanent Freeze plugin.
-{% dialect-switcher title="Creating an Asset with a Permanent Freeze plugin" %}
+## Permanent Freeze pluginを持つAssetの作成
+以下の例は、Permanent Freeze pluginを持つAssetを作成する方法を示しています。
+{% dialect-switcher title="Permanent Freeze pluginを持つAssetの作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -139,9 +139,9 @@ pub async fn create_asset_with_permanent_freeze_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating the Permanent Freeze Delegate plugin on an Asset
-The following example shows how to update the Permanent Freeze Delegate plugin on an Asset. Freeze or unfreeze it by setting the `frozen` argument to `true` or `false` respectively. It assumes that the signing wallet is the plugin authority.
-{% dialect-switcher title="Updating the Permanent Freeze Delegate plugin on an Asset" %}
+## AssetのPermanent Freeze Delegate pluginの更新
+以下の例は、AssetのPermanent Freeze Delegate pluginを更新する方法を示しています。`frozen`引数を`true`または`false`に設定してフリーズまたは解凍します。署名ウォレットがplugin authorityであることを前提としています。
+{% dialect-switcher title="AssetのPermanent Freeze Delegate pluginの更新" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { updatePlugin } from '@metaplex-foundation/mpl-core'
@@ -154,10 +154,10 @@ const updateAssetResponse = await updatePlugin(umi, {
 }).sendAndConfirm(umi);
 ```
 {% /dialect %}
-{% /dialect-switcher %} 
-## Creating a Collection with a Permanent Freeze plugin
-The following example shows how to create a collection with a Permanent Freeze plugin.
-{% dialect-switcher title="Creating a Collection with a Permanent Freeze plugin" %}
+{% /dialect-switcher %}
+## Permanent Freeze pluginを持つCollectionの作成
+以下の例は、Permanent Freeze pluginを持つCollectionを作成する方法を示しています。
+{% dialect-switcher title="Permanent Freeze pluginを持つCollectionの作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -178,9 +178,9 @@ await createCollection(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating a Collection with a Permanent Freeze plugin
-The following example shows how to update the Permanent Freeze Delegate plugin on a Collection. Freeze or unfreeze it by setting the `frozen` argument to `true` or `false` respectively. It assumes that the signing wallet is the plugin authority.
-{% dialect-switcher title="Updating a Collection with a Permanent Freeze plugin" %}
+## Permanent Freeze pluginを持つCollectionの更新
+以下の例は、CollectionのPermanent Freeze Delegate pluginを更新する方法を示しています。`frozen`引数を`true`または`false`に設定してフリーズまたは解凍します。署名ウォレットがplugin authorityであることを前提としています。
+{% dialect-switcher title="Permanent Freeze pluginを持つCollectionの更新" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { updateCollectionPlugin } from '@metaplex-foundation/mpl-core'
@@ -194,34 +194,34 @@ const updateCollectionResponse =  await updateCollectionPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 一般的なエラー
 ### `Cannot add permanent plugin after creation`
-Permanent plugins can only be added at Asset/Collection creation. You cannot add a Permanent Freeze Delegate to an existing Asset.
+Permanent pluginはAsset/Collection作成時にのみ追加できます。既存のAssetにPermanent Freeze Delegateを追加することはできません。
 ### `Authority mismatch`
-Only the plugin authority can freeze/thaw. Verify you're signing with the correct keypair.
-## Notes
-- **Creation only**: Cannot be added after Asset/Collection exists
-- **Force approve**: Can freeze even with conflicting plugins
-- **Collection behavior**: Freezes all Assets at once, not individually
-- **Persists forever**: Authority is never revoked, even after transfers
-- Use for soulbound tokens by setting `frozen: true` with authority `None`
+plugin authorityのみがフリーズ/解凍できます。正しいキーペアで署名しているか確認してください。
+## 注意事項
+- **作成時のみ**：Asset/Collection存在後は追加不可
+- **Force approve**：競合するpluginがあってもフリーズ可能
+- **Collection動作**：全Assetを一度にフリーズ、個別ではない
+- **永続的**：権限は転送後も取り消されない
+- ソウルバウンドトークンには`frozen: true`とauthority `None`を設定して使用
 ## FAQ
-### How do I create a soulbound (non-transferable) token?
-Create the Asset with `PermanentFreezeDelegate`, set `frozen: true`, and set authority to `None`. The Asset can never be unfrozen or transferred.
-### What's the difference between Freeze Delegate and Permanent Freeze Delegate?
-Regular Freeze Delegate authority is revoked on transfer and only works on Assets. Permanent Freeze Delegate persists forever, works on Collections, and uses `forceApprove`.
-### Can I freeze individual Assets in a Collection?
-No. When Permanent Freeze Delegate is on a Collection, freezing affects all Assets at once. Use Asset-level Permanent Freeze Delegate for individual control.
-### Can a permanently frozen Asset be burned?
-Only if there's also a Permanent Burn Delegate. Regular Burn Delegate cannot burn frozen Assets, but Permanent Burn Delegate uses `forceApprove`.
-## Related Plugins
-- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Revocable freeze for temporary locking
-- [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate) - Permanent transfer authority
-- [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) - Burn even frozen Assets
-## Glossary
-| Term | Definition |
+### ソウルバウンド（譲渡不可）トークンはどのように作成しますか？
+`PermanentFreezeDelegate`でAssetを作成し、`frozen: true`に設定し、authorityを`None`に設定します。Assetは決してアンフリーズまたは転送できなくなります。
+### Freeze DelegateとPermanent Freeze Delegateの違いは何ですか？
+通常のFreeze Delegate authorityは転送時に取り消され、Assetでのみ機能します。Permanent Freeze Delegateは永続的に有効で、Collectionで機能し、`forceApprove`を使用します。
+### Collection内の個別のAssetをフリーズできますか？
+いいえ。Permanent Freeze DelegateがCollectionにある場合、フリーズは全てのAssetに一度に影響します。個別制御にはAssetレベルのPermanent Freeze Delegateを使用してください。
+### 永続的にフリーズされたAssetはburnできますか？
+Permanent Burn Delegateもある場合のみ可能です。通常のBurn DelegateはフリーズされたAssetをburnできませんが、Permanent Burn Delegateは`forceApprove`を使用します。
+## 関連Plugin
+- [Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate) - 一時的なロック用の取り消し可能なfreeze
+- [Permanent Transfer Delegate](/ja/smart-contracts/core/plugins/permanent-transfer-delegate) - 永続的なtransfer権限
+- [Permanent Burn Delegate](/ja/smart-contracts/core/plugins/permanent-burn-delegate) - フリーズ中のAssetもburn可能
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Permanent Plugin** | Plugin that can only be added at creation and persists forever |
-| **forceApprove** | Validation that overrides other plugin rejections |
-| **Soulbound** | Non-transferable token permanently frozen to a wallet |
-| **Collection Freeze** | Freezing all Assets in a Collection at once |
+| **Permanent Plugin** | 作成時にのみ追加でき、永続的に有効なPlugin |
+| **forceApprove** | 他のpluginの拒否を上書きする検証 |
+| **Soulbound** | ウォレットに永続的にフリーズされた譲渡不可のトークン |
+| **Collection Freeze** | Collection内の全Assetを一度にフリーズ |

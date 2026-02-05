@@ -1,7 +1,7 @@
 ---
-title: Autograph Plugin
-metaTitle: Autograph Plugin | Metaplex Core
-description: Allow anyone to add signatures and messages to Core NFT Assets. Create collectible autographs from creators, artists, or community members.
+title: Autographプラグイン
+metaTitle: Autographプラグイン | Metaplex Core
+description: 誰でもCore NFT Assetsに署名とメッセージを追加できるようにします。クリエイター、アーティスト、コミュニティメンバーからの収集可能なサインを作成します。
 updated: '01-31-2026'
 keywords:
   - autograph NFT
@@ -17,77 +17,77 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How is this different from Verified Creators?
-    a: Verified Creators is for proving creatorship and is managed by the update authority. Autograph is for collectible signatures from anyone, like getting an autograph at an event.
-  - q: Can someone add multiple autographs?
-    a: No. Each address can only add one autograph per Asset. Attempting to add a second autograph from the same address will fail.
-  - q: Can I remove my own autograph?
-    a: No. Only the owner or autograph delegate can remove autographs. This prevents someone from signing and then immediately removing it.
-  - q: Do I need the owner's permission to add an autograph?
-    a: No. Once the owner enables the Autograph plugin, anyone can add their signature. The owner doesn't need to approve individual autographs.
-  - q: What happens to autographs when an Asset is transferred?
-    a: Autographs remain on the Asset. They are permanent records of who signed, regardless of ownership changes.
+  - q: Verified Creatorsとの違いは何ですか？
+    a: Verified Creatorsは作成者であることを証明するためのもので、update authorityによって管理されます。Autographは誰からでも収集可能な署名用で、イベントでサインをもらうようなものです。
+  - q: 複数のサインを追加できますか？
+    a: いいえ。各アドレスはAssetごとに1つのサインのみ追加できます。同じアドレスから2番目のサインを追加しようとすると失敗します。
+  - q: 自分のサインを削除できますか？
+    a: いいえ。オーナーまたはautographデリゲートのみがサインを削除できます。これにより、誰かが署名してすぐに削除することを防ぎます。
+  - q: サインを追加するにはオーナーの許可が必要ですか？
+    a: いいえ。オーナーがAutographプラグインを有効にすると、誰でも自分の署名を追加できます。オーナーは個々のサインを承認する必要はありません。
+  - q: Assetが転送されるとサインはどうなりますか？
+    a: サインはAssetに残ります。所有権の変更に関係なく、誰が署名したかの永続的な記録です。
 ---
-The **Autograph Plugin** allows anyone to add their signature and a message to an Asset or Collection. Perfect for collectible signatures from artists, celebrities, or community members. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Enable autographs on Assets and Collections
-- Add your signature to an Asset
-- Remove autographs as the owner
-- Understand autograph permissions
+**Autographプラグイン**により、誰でもAssetまたはCollectionに署名とメッセージを追加できます。アーティスト、有名人、コミュニティメンバーからの収集可能な署名に最適です。 {% .lead %}
+{% callout title="学べること" %}
+- AssetsとCollectionsでサインを有効化
+- Assetに署名を追加
+- オーナーとしてサインを削除
+- サインの権限を理解
 {% /callout %}
-## Summary
-The **Autograph** plugin is an Owner Managed plugin that stores signatures with messages. Once enabled, anyone can add their signature. The owner can remove any autograph.
-- Owner adds the plugin (or update authority at mint)
-- Anyone can add their own signature
-- Only owner/delegate can remove autographs
-- Autographers cannot remove their own signature
-- Assets inherit autographs from their Collection
-## Out of Scope
-Creator verification (use [Verified Creators](/smart-contracts/core/plugins/verified-creators)), royalties, and automatic signature validation.
-## Quick Start
-**Jump to:** [Add Plugin](#adding-the-autograph-plugin-to-an-asset-code-example) · [Add Autograph](#adding-an-autograph-to-an-asset-code-example) · [Remove Autograph](#removing-an-autograph-from-an-asset-code-example)
-1. Owner adds the Autograph plugin to enable signatures
-2. Anyone can add their signature with `updatePlugin`
-3. Owner can remove any autograph
+## 概要
+**Autograph**プラグインは、メッセージ付きの署名を保存するOwner Managedプラグインです。有効にすると、誰でも自分の署名を追加できます。オーナーは任意のサインを削除できます。
+- オーナーがプラグインを追加（またはミント時にupdate authority）
+- 誰でも自分の署名を追加可能
+- オーナー/デリゲートのみがサインを削除可能
+- 署名者は自分の署名を削除できない
+- AssetsはCollectionからサインを継承
+## 対象外
+作成者の検証（[Verified Creators](/smart-contracts/core/plugins/verified-creators)を使用）、ロイヤリティ、自動署名検証。
+## クイックスタート
+**ジャンプ先:** [プラグインを追加](#assetへのautographプラグインの追加コード例) · [サインを追加](#assetへのサインの追加コード例) · [サインを削除](#assetからのサインの削除コード例)
+1. オーナーがAutographプラグインを追加して署名を有効化
+2. 誰でも`updatePlugin`で自分の署名を追加可能
+3. オーナーは任意のサインを削除可能
 {% callout type="note" title="Autograph vs Verified Creators" %}
-| Feature | Autograph | Verified Creators |
+| 機能 | Autograph | Verified Creators |
 |---------|-----------|-------------------|
-| Who can sign | Anyone | Only listed creators |
-| Permission to enable | Owner | Update authority |
-| Self-removal | ❌ Cannot remove own | ✅ Can unverify self |
-| Purpose | Collectible signatures | Prove creatorship |
-| Best for | Fan engagement, events | Team attribution |
-**Use Autograph** for collectible signatures (like autographed memorabilia).
-**Use [Verified Creators](/smart-contracts/core/plugins/verified-creators)** for proving who created the Asset.
+| 署名できる人 | 誰でも | リストされた作成者のみ |
+| 有効化の権限 | オーナー | Update authority |
+| 自己削除 | ❌ 自分のものを削除不可 | ✅ 自分の検証を解除可能 |
+| 目的 | 収集可能な署名 | 作成者であることを証明 |
+| 最適な用途 | ファンエンゲージメント、イベント | チーム帰属 |
+**Autographを使用**するのは、収集可能な署名（サイン入り記念品のような）の場合です。
+**[Verified Creators](/smart-contracts/core/plugins/verified-creators)を使用**するのは、誰がAssetを作成したかを証明する場合です。
 {% /callout %}
-## Common Use Cases
-- **Celebrity autographs**: Artists sign NFTs at events
-- **Fan engagement**: Community members sign limited edition pieces
-- **Authentication**: Real-world item creators sign digital twins
-- **Event memorabilia**: Conference speakers sign event NFTs
-- **Charity auctions**: Multiple celebrities sign charity NFTs 
-To add a autograph some conditions have to be met:
-- The autograph plugin must be added already.
-- The signer may only add their own address.
-- The existing list have to be passed along with the added signature using the `updatePlugin` function.
-- There is no existing Autograph by that signer yet.
+## 一般的なユースケース
+- **有名人のサイン**: アーティストがイベントでNFTに署名
+- **ファンエンゲージメント**: コミュニティメンバーが限定版作品に署名
+- **認証**: 実世界のアイテム作成者がデジタルツインに署名
+- **イベント記念品**: カンファレンススピーカーがイベントNFTに署名
+- **チャリティオークション**: 複数の有名人がチャリティNFTに署名
+サインを追加するにはいくつかの条件を満たす必要があります：
+- autographプラグインがすでに追加されている必要があります。
+- 署名者は自分のアドレスのみ追加できます。
+- 既存のリストを追加する署名と一緒に`updatePlugin`関数を使用して渡す必要があります。
+- その署名者による既存のサインがまだないこと。
 {% callout type="note" %}
-As soon as the autograph plugin has been added by the owner everyone can add their signature. It can again be removed by the owner at any time.
+autographプラグインがオーナーによって追加されると、誰でも自分の署名を追加できます。オーナーはいつでも削除できます。
 {% /callout %}
-## Works With
+## 対応
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-Assets inherit Autographs from the Collection.
-## Arguments
-The `autograph` Plugin requires the following arguments in a `signatures` Array:
-| Arg     | Value     |
+AssetsはCollectionからサインを継承します。
+## 引数
+`autograph`プラグインは`signatures`配列に以下の引数が必要です：
+| 引数     | 値     |
 | ------- | ------    |
 | address | publicKey |
 | message | string    |
-## Adding the autograph Plugin to an Asset code example
-{% dialect-switcher title="Adding a autograph Plugin to an MPL Core Asset as the owner" %}
+## Assetへのautographプラグインの追加コード例
+{% dialect-switcher title="オーナーとしてMPL Core AssetにautographプラグインをhA追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -107,26 +107,26 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding an Autograph to an Asset code example
-{% dialect-switcher title="Adding a Autograph to an MPL Core Asset" %}
+## Assetへのサインの追加コード例
+{% dialect-switcher title="MPL Core Assetにサインを追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 const asset = await fetchAsset(umi, assetAddress.publicKey, {
   skipDerivePlugins: false,
 })
-// The new autograph that you want to add
+// 追加したい新しいサイン
 const newAutograph = {
   address: umi.identity.publicKey,
   message: "your message"
 }
-// Add the new autograph to the existing signatures array
+// 既存のsignatures配列に新しいサインを追加
 const updatedAutographs = [...asset.autograph.signatures, newAutograph]
 await updatePlugin(umi, {
   asset: asset.publicKey,
   plugin: {
     type: 'Autograph',
-    // This should contain all autographs that you do not want to remove
+    // 削除したくないすべてのサインを含める必要があります
     signatures: updatedAutographs,
   },
   authority: umi.identity,
@@ -134,8 +134,8 @@ await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Removing an Autograph from an Asset code example
-{% dialect-switcher title="Removing a Autograph from an MPL Core Asset" %}
+## Assetからのサインの削除コード例
+{% dialect-switcher title="MPL Core Assetからサインを削除" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -143,7 +143,7 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 const asset = await fetchAsset(umi, assetAddress.publicKey, {
   skipDerivePlugins: false,
 })
-// The Publickey of the autograph that you want to remove 
+// 削除したいサインのPublickey
 const publicKeyToRemove = publicKey("abc...")
 const autographsToKeep = asset.autograph.signatures.filter(
   (autograph) => autograph.address !== publicKeyToRemove
@@ -152,16 +152,16 @@ await updatePlugin(umi, {
   asset: asset.publicKey,
   plugin: {
     type: 'Autograph',
-    // This should contain all Autographs that you do not want to remove
+    // 削除したくないすべてのサインを含める必要があります
     signatures: autographsToKeep,
   },
-  authority: umi.identity, // Should be the owner of the asset
+  authority: umi.identity, // アセットのオーナーである必要があります
 }).sendAndConfirm(umi)
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the autograph Plugin to a Collection code example
-{% dialect-switcher title="Add autograph Plugin to Collection" %}
+## Collectionへのautographプラグインの追加コード例
+{% dialect-switcher title="Collectionにautographプラグインを追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { addCollectionPlugin } from '@metaplex-foundation/mpl-core'
@@ -179,53 +179,53 @@ await addCollectionPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 一般的なエラー
 ### `Plugin not added`
-The Autograph plugin must be added by the owner before anyone can add autographs.
+Autographプラグインは、誰かがサインを追加する前にオーナーによって追加される必要があります。
 ### `Autograph already exists`
-This address has already signed this Asset. Each address can only add one autograph.
+このアドレスはすでにこのAssetに署名しています。各アドレスは1つのサインのみ追加できます。
 ### `Cannot remove own autograph`
-Autographers cannot remove their own signature (unless they are also the owner or autograph delegate).
-## Notes
-- Anyone can add their signature once the plugin is enabled
-- Only the owner or autograph delegate can remove autographs
-- Autographers cannot remove their own signature
-- Assets inherit autographs from their Collection
-- Each address can only sign once per Asset
-## Quick Reference
-### Permission Matrix
-| Action | Owner | Anyone | Autographer |
+署名者は自分の署名を削除できません（オーナーまたはautographデリゲートでもない限り）。
+## 注意事項
+- プラグインが有効になると誰でも自分の署名を追加可能
+- オーナーまたはautographデリゲートのみがサインを削除可能
+- 署名者は自分の署名を削除できない
+- AssetsはCollectionからサインを継承
+- 各アドレスはAssetごとに1回のみ署名可能
+## クイックリファレンス
+### 権限マトリックス
+| アクション | オーナー | 誰でも | 署名者 |
 |--------|-------|--------|-------------|
-| Add plugin | ✅ | ❌ | ❌ |
-| Add own autograph | ✅ | ✅ | ✅ |
-| Remove any autograph | ✅ | ❌ | ❌ |
-| Remove own autograph | ✅ (as owner) | ❌ | ❌ |
-### Autograph Lifecycle
-| Step | Action | Who |
+| プラグインを追加 | ✅ | ❌ | ❌ |
+| 自分のサインを追加 | ✅ | ✅ | ✅ |
+| 任意のサインを削除 | ✅ | ❌ | ❌ |
+| 自分のサインを削除 | ✅（オーナーとして） | ❌ | ❌ |
+### サインのライフサイクル
+| ステップ | アクション | 誰が |
 |------|--------|-----|
-| 1 | Add Autograph plugin | Owner |
-| 2 | Add autograph | Anyone |
-| 3 | Remove autograph (optional) | Owner only |
+| 1 | Autographプラグインを追加 | オーナー |
+| 2 | サインを追加 | 誰でも |
+| 3 | サインを削除（オプション） | オーナーのみ |
 ## FAQ
-### How is this different from Verified Creators?
-Verified Creators is for proving creatorship and is managed by the update authority. Autograph is for collectible signatures from anyone (like getting an autograph at an event).
-### Can someone add multiple autographs?
-No. Each address can only add one autograph per Asset. Attempting to add a second autograph from the same address will fail.
-### Can I remove my own autograph?
-No. Only the owner or autograph delegate can remove autographs. This prevents someone from signing and then immediately removing it.
-### Do I need the owner's permission to add an autograph?
-No. Once the owner enables the Autograph plugin, anyone can add their signature. The owner doesn't need to approve individual autographs.
-### What happens to autographs when an Asset is transferred?
-Autographs remain on the Asset. They are permanent records of who signed, regardless of ownership changes.
-## Glossary
-| Term | Definition |
+### Verified Creatorsとの違いは何ですか？
+Verified Creatorsは作成者であることを証明するためのもので、update authorityによって管理されます。Autographは誰からでも収集可能な署名用です（イベントでサインをもらうようなもの）。
+### 複数のサインを追加できますか？
+いいえ。各アドレスはAssetごとに1つのサインのみ追加できます。同じアドレスから2番目のサインを追加しようとすると失敗します。
+### 自分のサインを削除できますか？
+いいえ。オーナーまたはautographデリゲートのみがサインを削除できます。これにより、誰かが署名してすぐに削除することを防ぎます。
+### サインを追加するにはオーナーの許可が必要ですか？
+いいえ。オーナーがAutographプラグインを有効にすると、誰でも自分の署名を追加できます。オーナーは個々のサインを承認する必要はありません。
+### Assetが転送されるとサインはどうなりますか？
+サインはAssetに残ります。所有権の変更に関係なく、誰が署名したかの永続的な記録です。
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Autograph** | A signature with optional message added to an Asset |
-| **Autographer** | Address that added their signature |
-| **Autograph Delegate** | Address with permission to remove autographs |
-| **Signatures Array** | List of all autographs on an Asset |
-| **Owner Managed** | Plugin type where the owner controls addition |
-## Related Plugins
-- [Verified Creators](/smart-contracts/core/plugins/verified-creators) - Prove creatorship (authority managed)
-- [Attributes](/smart-contracts/core/plugins/attribute) - Store on-chain data
-- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - Lock metadata permanently
+| **Autograph** | Assetに追加されたオプションのメッセージ付き署名 |
+| **Autographer** | 自分の署名を追加したアドレス |
+| **Autograph Delegate** | サインを削除する権限を持つアドレス |
+| **Signatures Array** | Asset上のすべてのサインのリスト |
+| **Owner Managed** | オーナーが追加を制御するプラグインタイプ |
+## 関連プラグイン
+- [Verified Creators](/smart-contracts/core/plugins/verified-creators) - 作成者であることを証明（authority管理）
+- [Attributes](/smart-contracts/core/plugins/attribute) - オンチェーンデータを保存
+- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - メタデータを永続的にロック

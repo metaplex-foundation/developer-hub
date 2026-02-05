@@ -1,7 +1,7 @@
 ---
-title: Deserialization
-metaTitle: Deserialization | Core
-description: Learn about the deserialization of Asset accounts, Collection accounts and plugins using the Metaplex Core packages.
+title: 역직렬화
+metaTitle: 역직렬화 | Core
+description: Metaplex Core 패키지를 사용한 Asset 계정, Collection 계정 및 플러그인의 역직렬화에 대해 알아봅니다.
 updated: '01-31-2026'
 keywords:
   - deserialize asset
@@ -18,16 +18,16 @@ programmingLanguage:
   - TypeScript
   - Rust
 ---
-Digital assets on Core are composed of exactly **one onchain account** that contains both the base asset data and the plugin.
-That means that if we want to read that data we need to learn how to deserialize it.
-In Javascript we can deserialize both the base asset data and the plugin using a single function. In Rust we should deserialize the base asset and only the required plugins separately to avoid unnecessary compute usage and to prevent overflowing the stack.
-## Deserializing Assets
-Deserializing the `Asset` account will return information about:
-- **Owner**: The owner of the asset
-- **Update Authority**: The authority over the asset, or the collection Address if it's part of one 
-- **Name**: The Asset Name
-- **Uri**: The uri to the asset off-chain metadata. -->
-{% dialect-switcher title="Deserialize an Asset" %}
+Core의 디지털 자산은 기본 자산 데이터와 플러그인을 모두 포함하는 정확히 **하나의 온체인 계정**으로 구성됩니다.
+즉, 해당 데이터를 읽으려면 역직렬화 방법을 배워야 합니다.
+Javascript에서는 단일 함수를 사용하여 기본 자산 데이터와 플러그인을 모두 역직렬화할 수 있습니다. Rust에서는 불필요한 계산 사용을 피하고 스택 오버플로우를 방지하기 위해 기본 자산과 필요한 플러그인만 별도로 역직렬화해야 합니다.
+## Asset 역직렬화
+`Asset` 계정을 역직렬화하면 다음 정보가 반환됩니다:
+- **Owner**: 자산의 소유자
+- **Update Authority**: 자산에 대한 authority, 또는 컬렉션의 일부인 경우 컬렉션 주소
+- **Name**: 자산 이름
+- **Uri**: 자산의 오프체인 메타데이터에 대한 uri
+{% dialect-switcher title="Asset 역직렬화" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 const accountData = await umi.rpc.getAccount(
@@ -56,14 +56,14 @@ println!("assetV1: {:?}", asset_v1);
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Deserializing Collections
-Deserializing the `Collection` account will return information about:
-- **Update** Authority:	The authority over the collection and all the asset inside of it
-- **Name**:	The collection name.
-- **Uri**:	The uri to the collections off-chain metadata.
-- **Num Minted**: The number of assets minted in the collection.
-- **Current size**:	The number of assets currently in the collection.
-{% dialect-switcher title="Deserialize a Collection" %}
+## Collection 역직렬화
+`Collection` 계정을 역직렬화하면 다음 정보가 반환됩니다:
+- **Update Authority**: 컬렉션과 그 안의 모든 자산에 대한 authority
+- **Name**: 컬렉션 이름
+- **Uri**: 컬렉션의 오프체인 메타데이터에 대한 uri
+- **Num Minted**: 컬렉션에서 발행된 자산 수
+- **Current size**: 현재 컬렉션에 있는 자산 수
+{% dialect-switcher title="Collection 역직렬화" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 const accountData = await umi.rpc.getAccount(
@@ -92,29 +92,29 @@ println!("collection_V1: {:?}", collection_v1);
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Deserializing Plugins
-As said before, 
-- Using **Javascript** we can deserialize the whole asset into a single variable, in this section we're going to see how we can access the specific data associated with the plugins.
-- Using **Rust** we need to deserialize specific plugin data to avoid stack violation because of the size of the account.
-{% dialect-switcher title="Deserialize Plugins" %}
+## 플러그인 역직렬화
+앞서 말했듯이,
+- **Javascript**를 사용하면 전체 자산을 단일 변수로 역직렬화할 수 있으며, 이 섹션에서는 플러그인과 관련된 특정 데이터에 액세스하는 방법을 살펴봅니다.
+- **Rust**를 사용할 때는 계정 크기로 인한 스택 위반을 방지하기 위해 특정 플러그인 데이터를 역직렬화해야 합니다.
+{% dialect-switcher title="플러그인 역직렬화" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 const assetV1 = await fetchAsset(
   umi,
   publicKey('11111111111111111111111111111111')
 )
-// Example of saving just the deserialized data of the Attributes Plugin
+// Attributes 플러그인의 역직렬화된 데이터만 저장하는 예
 let attributes_plugin = assetV1.attributes
-// Example of saving just the deserialized data of the Royalties Plugin
+// Royalties 플러그인의 역직렬화된 데이터만 저장하는 예
 let royalties_plugin = assetV1.royalties
 ```
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 ```rust
-// Example of using the AccountInfo of Core Asset account to deserialize an Attributes plugin stored on the asset.
+// Core Asset 계정의 AccountInfo를 사용하여 자산에 저장된 Attributes 플러그인을 역직렬화하는 예
 let attributes_plugin =
     fetch_plugin::<BaseAssetV1, Attributes>(&account_info, PluginType::Attributes).unwrap();
-// // Example of using the AccountInfo of Core Collection account to deserialize an Attributes plugin stored on the asset.
+// Core Collection 계정의 AccountInfo를 사용하여 자산에 저장된 Royalties 플러그인을 역직렬화하는 예
 let royalties_plugin =
     fetch_plugin::<BaseCollectionV1, Royalties>(&account_info, PluginType::Royalties).unwrap();
 ```

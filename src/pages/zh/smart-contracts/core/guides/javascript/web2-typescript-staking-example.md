@@ -1,7 +1,7 @@
 ---
-title: Create Core Staking Using Javascript
-metaTitle: Create Core Staking Using Javascript | Core Guides
-description: This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking platform using web2 practices with a backend server.
+title: 使用Javascript创建Core质押
+metaTitle: 使用Javascript创建Core质押 | Core指南
+description: 本指南将展示如何利用FreezeDelegate和Attribute插件使用Web2实践和后端服务器创建质押平台。
 updated: '01-31-2026'
 keywords:
   - NFT staking
@@ -17,46 +17,46 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 howToSteps:
-  - Set up a TypeScript backend with Umi and your authority keypair
-  - Add Freeze Delegate and Attribute plugins to staking Assets
-  - Create stake endpoint that freezes Asset and writes staking timestamp
-  - Create unstake endpoint that thaws Asset and calculates staking duration
+  - 使用Umi和您的authority密钥对设置TypeScript后端
+  - 向质押Asset添加Freeze Delegate和Attribute插件
+  - 创建冻结Asset并写入质押时间戳的stake端点
+  - 创建解冻Asset并计算质押持续时间的unstake端点
 howToTools:
   - Node.js
-  - Umi framework
+  - Umi框架
   - mpl-core SDK
-  - Express or similar backend
+  - Express或类似后端
 ---
-This developer guide demonstrates how to create a staking program for your collection using only TypeScript, leveraging the attribute plugin and freeze delegate. **This approach eliminates the need for a smart contract** to track staking time and manage staking/unstaking, making it more accessible for Web2 developer.
-## Starting off: Understanding the Logic behind the program
-This program operates with a standard TypeScript backend and uses the asset keypair authority in the secret to sign attribute changes.
-**To implement this example, you will need the following components:**
-- **An Asset**
-- **A Collection** (optional, but relevant for this example)
-- **The FreezeDelegate Plugin**
-- **The Attribute Plugin**
-### The Freeze Delegate Plugin
-The **Freeze Delegate Plugin** is an **owner managed plugin**, that means that it requires the owner's signature to be applied to the asset.
-This plugin allows the **delegate to freeze and thaw the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be thawed before revocation).
-**Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
-_Learn more about it [here](/smart-contracts/core/plugins/freeze-delegate)_
-### The Attribute Plugin
-The **Attribute Plugin** is an **authority managed plugin**, that means that it requires the authority's signature to be applied to the asset. For an asset included in a collection, the collection authority serves as the authority since the asset's authority field is occupied by the collection address.
-This plugin allows for **data storage directly on the assets, functioning as onchain attributes or traits**. These traits can be accessed directly by onchain programs since they aren’t stored off-chain as it was for the mpl-program.
-**This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
-_Learn more about it [here](/smart-contracts/core/plugins/attribute)_
-### The program Logic
-For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement. 
-_Both the Stake and Unstake functions utilize, differently, the plugins introduced previously_.
-Before diving into the instructions, let’s spend some time talking about the attributes used, the `staked` and `staked_time` keys. The `staked` key indicates if the asset is staked and when it was staked if it was (unstaked = 0, staked = time of staked). The `staked_time` key tracks the total staking duration of the asset, updated only after an asset get’s unstaked.
-**Instructions**:
-- **Stake**: This instruction applies the Freeze Delegate Plugin to freeze the asset by setting the flag to true. Additionally, it updates the`staked` key in the Attribute Plugin from 0 to the current time.
-- **Unstake**: This instruction changes the flag of the Freeze Delegate Plugin and revokes it to prevent malicious entities from controlling the asset and demanding ransom to thaw it. It also updates the `staked` key to 0 and sets the `staked_time` to the current time minus the staked timestamp.
-## Building the Program: A Step-by-Step Guide
-Now that we understand the logic behind our program, **it’s time to dive into the code and bring everything together**!
-### Dependencies and Imports
-Before writing our program, let's look at what package we need and what function from them to make sure our program works! 
-Let's look at the different packages used for this example:
+本开发者指南演示了如何仅使用TypeScript为您的收藏品创建质押程序，利用attribute插件和freeze delegate。**这种方法无需智能合约**来跟踪质押时间和管理质押/解除质押，使其对Web2开发人员更加易用。
+## 入门：理解程序背后的逻辑
+此程序使用标准TypeScript后端运行，并使用secret中的asset密钥对authority来签署属性更改。
+**要实现此示例，您需要以下组件：**
+- **一个Asset**
+- **一个Collection**（可选，但与此示例相关）
+- **FreezeDelegate插件**
+- **Attribute插件**
+### Freeze Delegate插件
+**Freeze Delegate插件**是一个**所有者管理的插件**，这意味着它需要所有者的签名才能应用到资产上。
+此插件允许**委托人冻结和解冻资产，防止转移**。资产所有者或插件authority可以随时撤销此插件，除非资产被冻结（在这种情况下必须先解冻才能撤销）。
+**使用此插件很轻量**，因为冻结/解冻资产只涉及更改插件数据中的布尔值（唯一的参数是Frozen: bool）。
+_在[此处](/smart-contracts/core/plugins/freeze-delegate)了解更多信息_
+### Attribute插件
+**Attribute插件**是一个**authority管理的插件**，这意味着它需要authority的签名才能应用到资产上。对于包含在收藏品中的资产，收藏品authority充当authority，因为资产的authority字段被收藏品地址占用。
+此插件允许**直接在资产上存储数据，作为链上属性或特征**。这些特征可以直接由链上程序访问，因为它们不像mpl-program那样存储在链下。
+**此插件接受AttributeList字段**，由键值对数组组成，键和值都是字符串。
+_在[此处](/smart-contracts/core/plugins/attribute)了解更多信息_
+### 程序逻辑
+为简单起见，此示例仅包含两个指令：**stake**和**unstake**函数，因为它们是质押程序正常工作所必需的。虽然可以添加其他指令，如**spendPoint**指令来使用累积的积分，但这留给读者自行实现。
+_Stake和Unstake函数都以不同方式使用前面介绍的插件_。
+在深入指令之前，让我们花一些时间讨论使用的属性，即`staked`和`staked_time`键。`staked`键指示资产是否已质押以及何时质押（unstaked = 0，staked = 质押时间）。`staked_time`键跟踪资产的总质押持续时间，仅在资产解除质押后更新。
+**指令**：
+- **Stake**：此指令应用Freeze Delegate插件，通过将标志设置为true来冻结资产。此外，它将Attribute插件中的`staked`键从0更新为当前时间。
+- **Unstake**：此指令更改Freeze Delegate插件的标志并撤销它，以防止恶意实体控制资产并要求赎金才能解冻。它还将`staked`键更新为0，并将`staked_time`设置为当前时间减去质押时间戳。
+## 构建程序：分步指南
+现在我们了解了程序背后的逻辑，**是时候深入代码并将所有内容整合在一起了**！
+### 依赖项和导入
+在编写程序之前，让我们看看我们需要哪些包以及从中需要哪些函数来确保程序正常工作！
+让我们看看此示例使用的不同包：
 ```json
 "dependencies": {
     "@metaplex-foundation/mpl-core": "1.1.0-alpha.0",
@@ -66,76 +66,76 @@ Let's look at the different packages used for this example:
     "typescript": "^5.4.5"
 }
 ```
-And the different functions from those packages are as follow:
+以及这些包中的不同函数如下：
 ```typescript
 import { createSignerFromKeypair, signerIdentity, publicKey, transactionBuilder, Transaction } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { addPlugin, updatePlugin, fetchAsset, removePlugin } from '@metaplex-foundation/mpl-core'
 import { base58 } from '@metaplex-foundation/umi/serializers';
 ```
-### Umi and Core SDK Overview
-In this guide, we’ll use both **Umi** and the **Core SDK** to create all necessary instructions. 
-**Umi is a modular framework for building and using JavaScript clients for Solana programs**. It provides a zero-dependency library that defines a set of core interfaces, enabling libraries to operate independently of specific implementations. 
-_For more information, you can find an overview [here](/dev-tools/umi/getting-started)_
-**The basic Umi setup for this example will look like this**:
+### Umi和Core SDK概述
+在本指南中，我们将使用**Umi**和**Core SDK**来创建所有必要的指令。
+**Umi是一个用于构建和使用Solana程序JavaScript客户端的模块化框架**。它提供了一个零依赖的库，定义了一组核心接口，使库能够独立于特定实现运行。
+_有关更多信息，您可以在[此处](/dev-tools/umi/getting-started)找到概述_
+**此示例的基本Umi设置如下**：
 ```typescript
 const umi = createUmi("https://api.devnet.solana.com", "finalized")
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const myKeypairSigner = createSignerFromKeypair(umi, keypair);
 umi.use(signerIdentity(myKeypairSigner));
 ```
-This setup involves:
-- **Establishing a connection with Devnet** for our Umi provider
-- **Setting up a keypair** to be used as both the authority and payer (umi.use(signerIdentity(...)))
-**Note**: If you prefer to use a new keypair for this example, you can always use the generateSigner() function to create one.
-### Creating an Asset and Adding it to a Collection
-Before diving into the logic for staking and unstaking, we should learn **how to create an asset from scratch and add it to a collection**.
-**Creating a Collection**:
+此设置涉及：
+- **为我们的Umi提供程序建立与Devnet的连接**
+- **设置一个密钥对**，用作authority和付款人（umi.use(signerIdentity(...))）
+**注意**：如果您更喜欢为此示例使用新的密钥对，您可以随时使用generateSigner()函数创建一个。
+### 创建Asset并将其添加到Collection
+在深入质押和解除质押的逻辑之前，我们应该学习**如何从头创建资产并将其添加到收藏品中**。
+**创建Collection**：
 ```typescript
 (async () => {
-   // Generate the Collection KeyPair
+   // 生成Collection密钥对
    const collection = generateSigner(umi)
    console.log("\nCollection Address: ", collection.publicKey.toString())
-   // Generate the collection
+   // 生成收藏品
    const tx = await createCollection(umi, {
        collection: collection,
        name: 'My Collection',
        uri: 'https://example.com/my-collection.json',
    }).sendAndConfirm(umi)
-   // Deserialize the Signature from the Transaction
+   // 从交易反序列化签名
    const signature = base58.deserialize(tx.signature)[0];
    console.log(`\nCollection Created: https://solana.fm/tx/${signature}?cluster=devnet-alpha`);
 })();
 ```
-**Creating an Asset and Adding it to the Collection:**
+**创建Asset并将其添加到Collection：**
 ```typescript
 (async () => {
-   // Generate the Asset KeyPair
+   // 生成Asset密钥对
    const asset = generateSigner(umi)
    console.log("\nAsset Address: ", asset.publicKey.toString())
-   // Pass and Fetch the Collection
+   // 传递并获取Collection
    const collection = publicKey("<collection_pubkey>")
    const fetchedCollection = await fetchCollection(umi, collection);
-   // Generate the Asset
+   // 生成Asset
    const tx = await create(umi, {
        name: 'My NFT',
        uri: 'https://example.com/my-nft.json',
        asset,
        collection: fetchedCollection,
    }).sendAndConfirm(umi)
-   // Deserialize the Signature from the Transaction
+   // 从交易反序列化签名
    const signature = base58.deserialize(tx.signature)[0];
    console.log(`Asset added to the Collection: https://solana.fm/tx/${signature}?cluster=devnet-alpha`);
 })();
 ```
-### The Staking Instruction
-Here's the full **Staking instruction** 
-We begin by using the `fetchAsset(...)` instruction from the mpl-core SDK to retrieve information about an asset, including whether it has the attribute plugin and, if so, the attributes it contains.
+### 质押指令
+以下是完整的**质押指令**
+我们首先使用mpl-core SDK中的`fetchAsset(...)`指令来检索有关资产的信息，包括它是否具有attribute插件，如果有，它包含哪些属性。
 ```typescript
 const fetchedAsset = await fetchAsset(umi, asset);
 ```
-1. **Check for the Attribute Plugin**
-If the asset does not have the attribute plugin, add it and populate it with the `staked` and `stakedTime` keys.
+1. **检查Attribute插件**
+如果资产没有attribute插件，添加它并用`staked`和`stakedTime`键填充它。
 ```typescript
 if (!fetchedAsset.attributes) {
     tx = await transactionBuilder().add(addPlugin(umi, {
@@ -153,8 +153,8 @@ if (!fetchedAsset.attributes) {
     )
 } else {
 ```
-2. **Check for Staking Attributes**:
-If the asset has the staking attribute, ensure it contains the staking attributes necessary for the staking instruction. 
+2. **检查质押属性**：
+如果资产具有staking属性，确保它包含质押指令所需的质押属性。
 ```typescript
 } else {
     const assetAttribute = fetchedAsset.attributes.attributeList;
@@ -162,7 +162,7 @@ If the asset has the staking attribute, ensure it contains the staking attribute
         (attribute) => attribute.key === "staked" || attribute.key === "stakedTime"
     );
 ```
-If it does, check if the asset is already staked and update the `staked` key with the current timeStamp as string:
+如果有，检查资产是否已经质押，并用当前时间戳作为字符串更新`staked`键：
 ```typescript
 if (isInitialized) {
     const stakedAttribute = assetAttribute.find(
@@ -179,15 +179,15 @@ if (isInitialized) {
     }
 } else {
 ```
-If it doesn't, add them to the existing attribute list.
+如果没有，将它们添加到现有属性列表中。
 ```typescript
 } else {
     assetAttribute.push({ key: "staked", value: currentTime });
     assetAttribute.push({ key: "stakedTime", value: "0" });
 }
 ```
-3. **Update the Attribute Plugin**:
-Update the attribute plugin with the new or modified attributes.
+3. **更新Attribute插件**：
+使用新的或修改的属性更新attribute插件。
 ```typescript
 tx = await transactionBuilder().add(updatePlugin(umi, {
     asset,
@@ -200,8 +200,8 @@ tx = await transactionBuilder().add(updatePlugin(umi, {
     [...]
 )
 ```
-4. **Freeze the Asset**
-Whether the asset already had the attribute plugin or not, freeze the asset in place so it can't be traded
+4. **冻结Asset**
+无论资产之前是否有attribute插件，冻结资产以使其无法交易
 ```typescript
 tx = await transactionBuilder().add(
     [...]
@@ -215,18 +215,18 @@ tx = await transactionBuilder().add(
     }
 })).buildAndSign(umi);
 ```
-**Here's the full instruction**:
+**以下是完整指令**：
 ```typescript
 (async () => {
-    // Pass the Asset and Collection
+    // 传递Asset和Collection
     const asset = publicKey("6AWm5uyhmHQXygeJV7iVotjvs2gVZbDXaGUQ8YGVtnJo");
     const collection = publicKey("CYKbtF2Y56QwQLYHUmpAPeiMJTz1DbBZGvXGgbB6VdNQ")
-    // Fetch the Asset Attributes
+    // 获取Asset属性
     const fetchedAsset = await fetchAsset(umi, asset);
     console.log("\nThis is the current state of your Asset Attribute Plugin: ", fetchedAsset.attributes);
     const currentTime = new Date().getTime().toString();
     let tx: Transaction;
-    // Check if the Asset has an Attribute Plugin attached to it, if not, add it
+    // 检查Asset是否附加了Attribute插件，如果没有，添加它
     if (!fetchedAsset.attributes) {
         tx = await transactionBuilder().add(addPlugin(umi, {
             asset,
@@ -248,13 +248,13 @@ tx = await transactionBuilder().add(
             }
         })).buildAndSign(umi);
     } else {
-        // If it is, fetch the Asset Attribute Plugin attributeList
+        // 如果有，获取Asset Attribute插件的attributeList
         const assetAttribute = fetchedAsset.attributes.attributeList;
-        // Check if the Asset is already been staked
+        // 检查Asset是否已经被质押过
         const isInitialized = assetAttribute.some(
             (attribute) => attribute.key === "staked" || attribute.key === "stakedTime"
         );
-        // If it is, check if it is already staked and if not update the staked attribute
+        // 如果是，检查它是否已经质押，如果没有则更新staked属性
         if (isInitialized) {
             const stakedAttribute = assetAttribute.find(
                 (attr) => attr.key === "staked"
@@ -269,11 +269,11 @@ tx = await transactionBuilder().add(
                 });
             }
         } else {
-            // If it is not, add the staked & stakedTime attribute
+            // 如果不是，添加staked和stakedTime属性
             assetAttribute.push({ key: "staked", value: currentTime });
             assetAttribute.push({ key: "stakedTime", value: "0" });
         }
-        // Update the Asset Attribute Plugin and Add the FreezeDelegate Plugin
+        // 更新Asset Attribute插件并添加FreezeDelegate插件
         tx = await transactionBuilder().add(updatePlugin(umi, {
             asset,
             collection,
@@ -291,22 +291,22 @@ tx = await transactionBuilder().add(
             }
         })).buildAndSign(umi);
     }
-    // Deserialize the Signature from the Transaction
+    // 从交易反序列化签名
     console.log(`Asset Staked: https://solana.fm/tx/${base58.deserialize(await umi.rpc.sendTransaction(tx))[0]}?cluster=devnet-alpha`);
 })();
 ```
-### The Unstaking Instruction
-The unstaking instruction will be even easier simpler because, since the unstaking instruction can be called only after the staking instruction, many of the checks are inherently covered by the staking instruction itself. 
-We start by calling the `fetchAsset(...)` instruction to retrieve all information about the asset.
+### 解除质押指令
+解除质押指令会更简单，因为解除质押指令只能在质押指令之后调用，许多检查本质上已经被质押指令覆盖了。
+我们首先调用`fetchAsset(...)`指令来检索有关资产的所有信息。
 ```typescript
 const fetchedAsset = await fetchAsset(umi, asset);
 ```
-1. **Run all the checks for the attribute plugin**
-To verify if an asset has already gone through the staking instruction, **the instruction check the attribute plugin for the following**:
-- **Does the attribute plugin exist on the asset?**
-- **Does it have the staked key?**
-- **Does it have the stakedTime key?**
-If any of these checks are missing, the asset has never gone through the staking instruction.
+1. **对attribute插件运行所有检查**
+要验证资产是否已经通过质押指令，**指令检查attribute插件是否满足以下条件**：
+- **资产上是否存在attribute插件？**
+- **是否有staked键？**
+- **是否有stakedTime键？**
+如果缺少任何这些检查，资产从未通过质押指令。
 ```typescript
 if (!fetchedAsset.attributes) {
     throw new Error(
@@ -327,9 +327,9 @@ if (!stakedAttribute) {
     );
 }
 ```
-Once we confirm that the asset has the staking attributes, **we check if the asset is currently staked**. If it is staked, we update the staking attributes as follows:
-- Set `Staked` field to zero
-- Update `stakedTime` to `stakedTime` + (currentTimestamp - stakedTimestamp)
+一旦我们确认资产具有质押属性，**我们检查资产当前是否已质押**。如果已质押，我们按如下方式更新质押属性：
+- 将`Staked`字段设置为零
+- 将`stakedTime`更新为`stakedTime` +（当前时间戳 - 质押时间戳）
 ```typescript
 if (stakedAttribute.value === "0") {
     throw new Error("Asset is not staked");
@@ -347,8 +347,8 @@ if (stakedAttribute.value === "0") {
     });
 }
 ```
-2. **Update the Attribute Plugin**
-Update the attribute plugin with the new or modified attributes.
+2. **更新Attribute插件**
+使用新的或修改的属性更新attribute插件。
 ```typescript
 tx = await transactionBuilder().add(updatePlugin(umi, {
     asset,
@@ -363,8 +363,8 @@ tx = await transactionBuilder().add(updatePlugin(umi, {
     [...]
 ).buildAndSign(umi);
 ```
-3. **Thaw and remove the FreezeDelegate Plugin**
-At the end of the instruction, thaw the asset and remove the FreezeDelegate plugin so the asset is `free` and not controlled by the `update_authority`
+3. **解冻并移除FreezeDelegate插件**
+在指令结束时，解冻资产并移除FreezeDelegate插件，使资产"自由"且不受`update_authority`控制
 ```typescript
 tx = await transactionBuilder().add(
     [...]
@@ -383,46 +383,46 @@ tx = await transactionBuilder().add(
     },
 })).buildAndSign(umi);
 ```
-**Here's the full instruction**:
+**以下是完整指令**：
 ```typescript
 (async () => {
-    // Pass the Asset and Collection
+    // 传递Asset和Collection
     const asset = publicKey("6AWm5uyhmHQXygeJV7iVotjvs2gVZbDXaGUQ8YGVtnJo");
     const collection = publicKey("CYKbtF2Y56QwQLYHUmpAPeiMJTz1DbBZGvXGgbB6VdNQ")
     let tx: Transaction;
-    // Fetch the Asset Attributes
+    // 获取Asset属性
     const fetchedAsset = await fetchAsset(umi, asset);
     console.log("This is the current state of your Asset Attribute Plugin", fetchedAsset.attributes);
-    // If there is no attribute plugin attached to the asset, throw an error
+    // 如果资产没有附加attribute插件，抛出错误
     if (!fetchedAsset.attributes) {
       throw new Error(
         "Asset has no Attribute Plugin attached to it. Please go through the stake instruction before."
       );
     }
-    
+
     const assetAttribute = fetchedAsset.attributes.attributeList;
-    // Check if the asset has a stakedTime attribute attached to it, if not throw an error
+    // 检查资产是否附加了stakedTime属性，如果没有抛出错误
     const stakedTimeAttribute = assetAttribute.find((attr) => attr.key === "stakedTime");
     if (!stakedTimeAttribute) {
       throw new Error(
         "Asset has no stakedTime attribute attached to it. Please go through the stake instruction before."
       );
     }
-    // Check if the asset has a staked attribute attached to it, if not throw an error
+    // 检查资产是否附加了staked属性，如果没有抛出错误
     const stakedAttribute = assetAttribute.find((attr) => attr.key === "staked");
     if (!stakedAttribute) {
       throw new Error(
         "Asset has no staked attribute attached to it. Please go through the stake instruction before."
       );
     }
-    // Check if the asset is already staked (!0), if not throw an error.
+    // 检查资产是否已经质押(!0)，如果没有抛出错误。
     if (stakedAttribute.value === "0") {
       throw new Error("Asset is not staked");
     } else {
       const stakedTimeValue = parseInt(stakedTimeAttribute.value);
       const stakedValue = parseInt(stakedAttribute.value);
       const elapsedTime = new Date().getTime() - stakedValue;
-      // Update the stakedTime attribute to the new value and the staked attribute to 0
+      // 将stakedTime属性更新为新值，将staked属性更新为0
       assetAttribute.forEach((attr) => {
         if (attr.key === "stakedTime") {
           attr.value = (stakedTimeValue + elapsedTime).toString();
@@ -432,9 +432,9 @@ tx = await transactionBuilder().add(
         }
       });
     }
-    // Update the Asset Attribute Plugin with the new attributeList
-    // then Update the Asset FreezeDelegate Plugin to thaw the asset
-    // and then Remove the FreezeDelegate Plugin from the asset
+    // 使用新的attributeList更新Asset Attribute插件
+    // 然后更新Asset FreezeDelegate插件以解冻资产
+    // 然后从资产中移除FreezeDelegate插件
     tx = await transactionBuilder().add(updatePlugin(umi, {
       asset,
       collection,
@@ -456,9 +456,9 @@ tx = await transactionBuilder().add(
         type: "FreezeDelegate",
       },
     })).buildAndSign(umi);
-     // Deserialize the Signature from the Transaction
+     // 从交易反序列化签名
      console.log(`Asset Unstaked: https://solana.fm/tx/${base58.deserialize(await umi.rpc.sendTransaction(tx))[0]}?cluster=devnet-alpha`);
 })();
 ```
-## Conclusion
-Congratulations! You are now equipped to create a staking solution for your NFT collection! If you want to learn more about Core and Metaplex, check out the [developer hub](/smart-contracts/core/getting-started).
+## 结论
+恭喜！您现在已准备好为您的NFT收藏品创建质押解决方案！如果您想了解更多关于Core和Metaplex的信息，请查看[开发者中心](/smart-contracts/core/getting-started)。

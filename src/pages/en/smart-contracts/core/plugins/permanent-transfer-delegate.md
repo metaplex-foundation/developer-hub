@@ -143,7 +143,7 @@ Permanent plugins can only be added at Asset/Collection creation. You cannot add
 ### `Authority mismatch`
 Only the plugin authority can transfer. Verify you're signing with the correct keypair.
 ## Notes
-- **Creation only**: Cannot be added after Asset/Collection exists
+- **On creation only**: Cannot be added after Asset/Collection exists
 - **Force approve**: Can transfer even when frozen
 - **Collection behavior**: Can transfer any Asset in the Collection individually
 - **Persists forever**: Authority is never revoked

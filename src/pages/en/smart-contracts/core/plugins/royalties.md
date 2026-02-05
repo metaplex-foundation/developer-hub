@@ -22,7 +22,7 @@ faqs:
   - q: Are Core royalties enforced?
     a: Yes, when using an allowlist ruleset. Only programs on the allowlist can transfer the asset, ensuring royalties are paid.
   - q: What's the difference between Core royalties and Token Metadata royalties?
-    a: Core royalties are built into the asset with optional enforcement via rulesets. Token Metadata royalties are advisory and rely on marketplace cooperation.
+    a: Core royalties require the Royalties plugin at either asset or collection level, with optional enforcement via rulesets. Standard Token Metadata NFT royalties are advisory and rely on marketplace cooperation. pNFTs (programmable NFTs) also support ruleset-based enforcement similar to Core.
   - q: Can I have different royalties per asset in a collection?
     a: Yes. Add the Royalties plugin to individual assets to override the collection-level setting.
   - q: How do marketplaces read royalties?
@@ -400,7 +400,7 @@ await addPlugin(umi, {
 ### Are Core royalties enforced?
 Yes, when using an allowlist ruleset. Only programs on the allowlist can transfer the asset, ensuring royalties are paid.
 ### What's the difference between Core royalties and Token Metadata royalties?
-Core royalties are built into the asset with optional enforcement via rulesets. Token Metadata royalties are advisory and rely on marketplace cooperation.
+Core royalties require the Royalties plugin at either asset or collection level, with optional enforcement via rulesets. Standard Token Metadata NFT royalties are advisory and rely on marketplace cooperation. pNFTs (programmable NFTs) also support ruleset-based enforcement similar to Core.
 ### Can I have different royalties per asset in a collection?
 Yes. Add the Royalties plugin to individual assets to override the collection-level setting.
 ### How do marketplaces read royalties?

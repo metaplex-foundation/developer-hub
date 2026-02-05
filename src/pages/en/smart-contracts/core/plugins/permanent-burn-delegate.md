@@ -32,7 +32,7 @@ The **Permanent Burn Delegate Plugin** provides irrevocable burn authority that 
 {% callout title="What You'll Learn" %}
 - Create Assets with permanent burn capability
 - Enable collection-wide burn authority
-- Burn frozen Assets (forceApprove behavior)
+- Burn frozen Assets (`forceApprove` behavior)
 - Use cases: games, subscriptions, automated cleanup
 {% /callout %}
 ## Summary
@@ -142,7 +142,7 @@ Permanent plugins can only be added at Asset/Collection creation. You cannot add
 ### `Authority mismatch`
 Only the plugin authority can burn. Verify you're signing with the correct keypair.
 ## Notes
-- **Creation only**: Cannot be added after Asset/Collection exists
+- **On creation only**: Cannot be added after Asset/Collection exists
 - **Force approve**: Can burn even when frozen
 - **Collection behavior**: Can burn any Asset in the Collection individually
 - **Persists forever**: Authority is never revoked

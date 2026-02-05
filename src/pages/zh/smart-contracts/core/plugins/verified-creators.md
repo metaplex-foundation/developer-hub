@@ -1,7 +1,7 @@
 ---
-title: Verified Creator Plugin
-metaTitle: Verified Creator Plugin | Metaplex Core
-description: Add verified creator signatures to Core NFT Assets and Collections. Prove creatorship without affecting royalty distribution.
+title: Verified Creator 插件
+metaTitle: Verified Creator 插件 | Metaplex Core
+description: 为 Core NFT Asset 和 Collection 添加已验证创作者签名。证明创作者身份而不影响版税分配。
 updated: '01-31-2026'
 keywords:
   - verified creator
@@ -17,76 +17,76 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How is this different from the Token Metadata creator array?
-    a: In Token Metadata, the creator array was used for royalty distribution. In Core, Verified Creators is purely for proof of creatorship - use the Royalties plugin for royalty distribution.
-  - q: Can the update authority verify a creator?
-    a: No. Each creator must verify themselves by signing the transaction. This ensures authentic proof of creatorship.
-  - q: Why can't I remove a verified creator?
-    a: To remove a verified creator, they must first unverify themselves. This prevents unauthorized removal of verified creators.
-  - q: Do Assets automatically get the Collection's verified creators?
-    a: Yes. Assets inherit the creators array from their Collection. Individual Assets can also have their own Verified Creators plugin with different creators.
-  - q: Can I use this for co-creator attribution?
-    a: Yes. This is a common use case - multiple creators can all verify their involvement in creating an Asset or Collection.
+  - q: 这与 Token Metadata 的创作者数组有什么不同？
+    a: 在 Token Metadata 中，创作者数组用于版税分配。在 Core 中，Verified Creators 纯粹用于证明创作者身份——版税分配请使用 Royalties 插件。
+  - q: Update authority 可以验证创作者吗？
+    a: 不可以。每个创作者必须通过签署交易来验证自己。这确保了创作者身份证明的真实性。
+  - q: 为什么我无法移除已验证的创作者？
+    a: 要移除已验证的创作者，他们必须先取消验证自己。这可以防止未经授权移除已验证的创作者。
+  - q: Asset 会自动获得 Collection 的已验证创作者吗？
+    a: 是的。Asset 会从其 Collection 继承创作者数组。单个 Asset 也可以拥有自己的 Verified Creators 插件，包含不同的创作者。
+  - q: 我可以用这个来标注联合创作者吗？
+    a: 可以。这是一个常见用例——多个创作者都可以验证他们参与创建 Asset 或 Collection。
 ---
-The **Verified Creators Plugin** stores a list of verified creator signatures on Assets or Collections. Prove creatorship publicly without affecting royalty distribution. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add verified creators to Assets and Collections
-- Verify creator signatures
-- Remove creators from the list
-- Understand the verification workflow
+**Verified Creators Plugin** 在 Asset 或 Collection 上存储已验证创作者签名的列表。公开证明创作者身份而不影响版税分配。{% .lead %}
+{% callout title="您将学到" %}
+- 为 Asset 和 Collection 添加已验证创作者
+- 验证创作者签名
+- 从列表中移除创作者
+- 了解验证工作流程
 {% /callout %}
-## Summary
-The **Verified Creators** plugin is an Authority Managed plugin that stores creator addresses with verification status. Unlike Token Metadata, these creators are NOT used for royalty distribution (use the Royalties plugin for that).
-- Update authority adds unverified creators
-- Creators verify themselves by signing
-- Verified creators must unverify before removal
-- Assets inherit creators from their Collection
-## Out of Scope
-Royalty distribution (use [Royalties plugin](/smart-contracts/core/plugins/royalties)), Token Metadata creator arrays, and automatic verification.
-## Quick Start
-**Jump to:** [Add to Asset](#adding-the-autograph-plugin-to-an-asset-code-example) · [Add Creator](#adding-a-different-creator-to-an-asset-code-example) · [Remove Creator](#removing-a-creator-from-an-asset-code-example)
-1. Add the Verified Creators plugin with initial creators
-2. Creators verify themselves using `updatePlugin`
-3. To remove: creator unverifies, then update authority removes
-{% callout type="note" title="Verified Creators vs Autograph" %}
-| Feature | Verified Creators | Autograph |
+## 概述
+**Verified Creators** 插件是一个由 Authority 管理的插件，用于存储带有验证状态的创作者地址。与 Token Metadata 不同，这些创作者不用于版税分配（版税分配请使用 Royalties 插件）。
+- Update authority 添加未验证的创作者
+- 创作者通过签名验证自己
+- 已验证的创作者必须先取消验证才能被移除
+- Asset 从其 Collection 继承创作者
+## 不在范围内
+版税分配（请使用 [Royalties 插件](/zh/smart-contracts/core/plugins/royalties)）、Token Metadata 创作者数组和自动验证。
+## 快速开始
+**跳转到：** [添加到 Asset](#adding-the-autograph-plugin-to-an-asset-code-example) · [添加创作者](#adding-a-different-creator-to-an-asset-code-example) · [移除创作者](#removing-a-creator-from-an-asset-code-example)
+1. 添加带有初始创作者的 Verified Creators 插件
+2. 创作者使用 `updatePlugin` 验证自己
+3. 要移除：创作者先取消验证，然后 update authority 移除
+{% callout type="note" title="Verified Creators 与 Autograph 对比" %}
+| 功能 | Verified Creators | Autograph |
 |---------|-------------------|-----------|
-| Who can add | Update authority only | Anyone (after enabled) |
-| Purpose | Prove creatorship | Collectible signatures |
-| Verification | Creators verify themselves | No verification needed |
-| Removal | Must unverify first | Owner can remove anytime |
-| Used for royalties | ❌ No | ❌ No |
-**Use Verified Creators** for proving authentic creatorship.
-**Use [Autograph](/smart-contracts/core/plugins/autograph)** for collectible signatures from fans/celebrities.
+| 谁可以添加 | 仅 Update authority | 任何人（启用后） |
+| 用途 | 证明创作者身份 | 收藏签名 |
+| 验证 | 创作者自己验证 | 无需验证 |
+| 移除 | 必须先取消验证 | 所有者可随时移除 |
+| 用于版税 | 否 | 否 |
+**使用 Verified Creators** 来证明真实的创作者身份。
+**使用 [Autograph](/zh/smart-contracts/core/plugins/autograph)** 来收集粉丝/名人的签名。
 {% /callout %}
-## Common Use Cases
-- **Team attribution**: Designer, developer, and founder each verify their involvement
-- **Co-creator proof**: Multiple artists verify collaboration on a piece
-- **Brand verification**: Official brand accounts verify partnership
-- **Authenticity proof**: Original creator verifies they created the Asset
-- **Historical record**: Document who was involved in creating a Collection
-The `update authority` can: 
-- Add the plugin.
-- Add unverified creators to the creators array.
-- Can remove unverified creators. To remove verified creators they must unverify themselves first.
-- Can verify themselves.
-To verify a creator the `updatePlugin` instruction has to be signed by the public key that was added by the update authority to the creators array. 
-## Works With
+## 常见用例
+- **团队归属**：设计师、开发者和创始人各自验证他们的参与
+- **联合创作证明**：多位艺术家验证合作创作
+- **品牌验证**：官方品牌账户验证合作关系
+- **真实性证明**：原创作者验证他们创建了该 Asset
+- **历史记录**：记录谁参与了 Collection 的创建
+`update authority` 可以：
+- 添加插件
+- 将未验证的创作者添加到创作者数组
+- 移除未验证的创作者。要移除已验证的创作者，他们必须先取消验证自己
+- 验证自己
+要验证创作者，`updatePlugin` 指令必须由 update authority 添加到创作者数组中的公钥签名。
+## 适用于
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-## Arguments
-The `verifiedCreator` Plugin requires the following arguments in a `VerifiedCreatorsSignature` Array:
-| Arg     | Value     |
+## 参数
+`verifiedCreator` 插件需要在 `VerifiedCreatorsSignature` 数组中提供以下参数：
+| 参数    | 值        |
 | ------- | ------    |
 | address | publicKey |
 | message | string    |
-Assets inherit the Creators array from the Collection.
-## Adding the autograph Plugin to an Asset code example
-{% dialect-switcher title="Adding a verified Creators Plugin to an MPL Core Asset" %}
+Asset 从 Collection 继承创作者数组。
+## 将 Verified Creators 插件添加到 Asset 的代码示例
+{% dialect-switcher title="将 Verified Creators 插件添加到 MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-This snippet assumes that the umi identity is the update authority of the asset.
+此代码片段假设 umi identity 是 asset 的 update authority。
 ```ts
 import {
   addPlugin,
@@ -105,10 +105,10 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding a different Creator to an Asset code example
-{% dialect-switcher title="Adding a different Creator to an MPL Core Asset" %}
+## 将不同的创作者添加到 Asset 的代码示例
+{% dialect-switcher title="将不同的创作者添加到 MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-This snippet assumes that the umi identity is the update authority of the asset to add a unverified Creator.
+此代码片段假设 umi identity 是 asset 的 update authority，用于添加未验证的创作者。
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -132,8 +132,8 @@ await updatePlugin(umi, {
   authority: umi.identity,
 }).sendAndConfirm(umi)
 ```
-After adding the unverified Creator they can verify themselves using the `updatePlugin` function again.
-This snippet assumes that the umi identity is the Creator.
+添加未验证的创作者后，他们可以再次使用 `updatePlugin` 函数验证自己。
+此代码片段假设 umi identity 是创作者。
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -159,23 +159,23 @@ await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Removing a Creator from an Asset code example
-{% dialect-switcher title="Removing a Creator from an MPL Core Asset" %}
+## 从 Asset 移除创作者的代码示例
+{% dialect-switcher title="从 MPL Core Asset 移除创作者" %}
 {% dialect title="JavaScript" id="js" %}
-Only the update authority can remove creators. To remove the creator it has to be `verified:false` or the update authority itself. Therefore the update will be done in two steps. If you are able to sign with the update authority and the creator at the same time this could be done in one transaction combining both instructions.
-1. Set `verified:false`
-This snippet assumes that `umi.identity` is the creator that you want to remove
+只有 update authority 可以移除创作者。要移除创作者，必须是 `verified:false` 或者是 update authority 本身。因此，更新将分两步完成。如果您能够同时使用 update authority 和创作者进行签名，这可以在一个交易中组合两个指令完成。
+1. 设置 `verified:false`
+此代码片段假设 `umi.identity` 是您要移除的创作者
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 const asset = await fetchAsset(umi, assetAddress.publicKey, {
   skipDerivePlugins: false,
 })
-// The Publickey of the creator that you want to remove 
+// The Publickey of the creator that you want to remove
 const publicKeyToRemove = publicKey("abc...")
-const modifiedCreators = signatures.map(signature => 
-  signature.address === creator.publicKey 
-    ? { ...signature, verified: false } 
+const modifiedCreators = signatures.map(signature =>
+  signature.address === creator.publicKey
+    ? { ...signature, verified: false }
     : signature
 );
 await updatePlugin(umi, {
@@ -187,15 +187,15 @@ await updatePlugin(umi, {
   authority: umi.identity, // Should be the creator
 }).sendAndConfirm(umi)
 ```
-2. remove the creator
-This snippet assumes that `umi.identity` is the update authority
+2. 移除创作者
+此代码片段假设 `umi.identity` 是 update authority
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 const asset = await fetchAsset(umi, assetAddress.publicKey, {
   skipDerivePlugins: false,
 })
-// The Publickey of the creator that you want to remove 
+// The Publickey of the creator that you want to remove
 const publicKeyToRemove = publicKey("abc...")
 const creatorsToKeep = asset.verifiedCreators.signatures.filter(
   (creator) => creator.address !== publicKeyToRemove
@@ -211,10 +211,10 @@ await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the verified Creators Plugin to a Collection code example
-{% dialect-switcher title="Add verified Creators Plugin to Collection" %}
+## 将 Verified Creators 插件添加到 Collection 的代码示例
+{% dialect-switcher title="将 Verified Creators 插件添加到 Collection" %}
 {% dialect title="JavaScript" id="js" %}
-This snippet assumes that the `umi.identity` is the update authority
+此代码片段假设 `umi.identity` 是 update authority
 ```ts
 import { addCollectionPlugin } from '@metaplex-foundation/mpl-core'
 await addCollectionPlugin(umi, {
@@ -231,54 +231,54 @@ await addCollectionPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Authority mismatch`
-Only the update authority can add the plugin or add new creators. Only the creator themselves can verify their own signature.
+只有 update authority 可以添加插件或添加新创作者。只有创作者本人可以验证自己的签名。
 ### `Creator already verified`
-The creator has already verified themselves. No action needed.
+该创作者已经验证过自己。无需任何操作。
 ### `Cannot remove verified creator`
-A verified creator must unverify themselves before the update authority can remove them.
-## Notes
-- Verified Creators are NOT used for royalty distribution (use Royalties plugin)
-- Creators must verify themselves—update authority cannot verify on their behalf
-- A creator must unverify before they can be removed
-- Assets inherit the creators array from their Collection
-## Quick Reference
-### Verification Workflow
-| Step | Action | Who |
+已验证的创作者必须先取消验证自己，然后 update authority 才能移除他们。
+## 注意事项
+- Verified Creators 不用于版税分配（请使用 Royalties 插件）
+- 创作者必须自己验证——update authority 无法代替他们验证
+- 创作者必须先取消验证才能被移除
+- Asset 从其 Collection 继承创作者数组
+## 快速参考
+### 验证工作流程
+| 步骤 | 操作 | 执行者 |
 |------|--------|-----|
-| 1 | Add unverified creator | Update Authority |
-| 2 | Verify creator | Creator signs |
-| 3 | Unverify (optional) | Creator signs |
-| 4 | Remove (optional) | Update Authority |
-### Permission Matrix
-| Action | Update Authority | Creator |
+| 1 | 添加未验证的创作者 | Update Authority |
+| 2 | 验证创作者 | 创作者签名 |
+| 3 | 取消验证（可选） | 创作者签名 |
+| 4 | 移除（可选） | Update Authority |
+### 权限矩阵
+| 操作 | Update Authority | 创作者 |
 |--------|------------------|---------|
-| Add plugin | ✅ | ❌ |
-| Add unverified creator | ✅ | ❌ |
-| Verify creator | ❌ | ✅ (self only) |
-| Unverify creator | ❌ | ✅ (self only) |
-| Remove unverified creator | ✅ | ❌ |
-## FAQ
-### How is this different from the Token Metadata creator array?
-In Token Metadata, the creator array was used for royalty distribution. In Core, Verified Creators is purely for proof of creatorship—use the Royalties plugin for royalty distribution.
-### Can the update authority verify a creator?
-No. Each creator must verify themselves by signing the transaction. This ensures authentic proof of creatorship.
-### Why can't I remove a verified creator?
-To remove a verified creator, they must first unverify themselves. This prevents unauthorized removal of verified creators.
-### Do Assets automatically get the Collection's verified creators?
-Yes. Assets inherit the creators array from their Collection. Individual Assets can also have their own Verified Creators plugin with different creators.
-### Can I use this for co-creator attribution?
-Yes. This is a common use case—multiple creators (designer, developer, artist) can all verify their involvement in creating an Asset or Collection.
-## Glossary
-| Term | Definition |
+| 添加插件 | ✅ | 否 |
+| 添加未验证的创作者 | ✅ | 否 |
+| 验证创作者 | 否 | ✅（仅限本人） |
+| 取消验证创作者 | 否 | ✅（仅限本人） |
+| 移除未验证的创作者 | ✅ | 否 |
+## 常见问题
+### 这与 Token Metadata 的创作者数组有什么不同？
+在 Token Metadata 中，创作者数组用于版税分配。在 Core 中，Verified Creators 纯粹用于证明创作者身份——版税分配请使用 Royalties 插件。
+### Update authority 可以验证创作者吗？
+不可以。每个创作者必须通过签署交易来验证自己。这确保了创作者身份证明的真实性。
+### 为什么我无法移除已验证的创作者？
+要移除已验证的创作者，他们必须先取消验证自己。这可以防止未经授权移除已验证的创作者。
+### Asset 会自动获得 Collection 的已验证创作者吗？
+是的。Asset 从其 Collection 继承创作者数组。单个 Asset 也可以拥有自己的 Verified Creators 插件，包含不同的创作者。
+### 我可以用这个来标注联合创作者吗？
+可以。这是一个常见用例——多个创作者（设计师、开发者、艺术家）都可以验证他们参与创建 Asset 或 Collection。
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Verified Creator** | Creator who has signed to confirm their involvement |
-| **Unverified Creator** | Creator added by update authority but not yet confirmed |
-| **Verification** | Creator signing to prove authentic creatorship |
-| **Royalties Plugin** | Separate plugin for royalty distribution (not this one) |
-| **Creator Array** | List of addresses associated with an Asset/Collection |
-## Related Plugins
-- [Autograph](/smart-contracts/core/plugins/autograph) - Collectible signatures from anyone (fans, celebrities)
-- [Royalties](/smart-contracts/core/plugins/royalties) - Set royalty distribution (separate from verified creators)
-- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - Lock metadata permanently
+| **Verified Creator** | 已签名确认参与的创作者 |
+| **Unverified Creator** | 由 update authority 添加但尚未确认的创作者 |
+| **Verification** | 创作者签名以证明真实创作者身份 |
+| **Royalties Plugin** | 用于版税分配的独立插件（不是本插件） |
+| **Creator Array** | 与 Asset/Collection 关联的地址列表 |
+## 相关插件
+- [Autograph](/zh/smart-contracts/core/plugins/autograph) - 收集任何人（粉丝、名人）的签名
+- [Royalties](/zh/smart-contracts/core/plugins/royalties) - 设置版税分配（与已验证创作者分开）
+- [ImmutableMetadata](/zh/smart-contracts/core/plugins/immutableMetadata) - 永久锁定元数据

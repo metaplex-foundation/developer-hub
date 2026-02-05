@@ -1,7 +1,7 @@
 ---
-title: Edition Plugin
-metaTitle: Edition Plugin | Metaplex Core
-description: Add edition numbers to Core NFT Assets for prints and limited runs. Track edition numbers like 1/100 for collectible series.
+title: Edition 插件
+metaTitle: Edition 插件 | Metaplex Core
+description: 向 Core NFT Asset 添加版本号，用于印刷品和限量发行。跟踪像 1/100 这样的版本号用于收藏系列。
 updated: '01-31-2026'
 keywords:
   - NFT edition
@@ -17,56 +17,56 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Is the edition number enforced to be unique?
-    a: No. The edition number is informational only. Creators are responsible for ensuring unique numbers. Use Candy Machine with the Edition Guard for automatic sequential numbering.
-  - q: Can I add the Edition plugin to an existing Asset?
-    a: No. The Edition plugin must be added during Asset creation. Plan ahead if you need edition numbers.
-  - q: How do I create a 1 of 100 style edition?
-    a: Add the Edition plugin to Assets with numbers 1-100 and add the Master Edition plugin to the Collection with maxSupply of 100.
-  - q: Can I change the edition number after creation?
-    a: Yes, if the plugin authority is not set to None. The update authority can modify the number using updatePlugin.
-  - q: What's the difference between Edition and Master Edition?
-    a: Edition stores the individual number on an Asset. Master Edition stores collection-level data (max supply, edition name/URI) on a Collection.
+  - q: 版本号是否强制唯一？
+    a: 不是。版本号仅供参考。创作者负责确保唯一的编号。使用带有 Edition Guard 的 Candy Machine 进行自动顺序编号。
+  - q: 可以向现有 Asset 添加 Edition 插件吗？
+    a: 不可以。Edition 插件必须在 Asset 创建时添加。如果需要版本号，请提前规划。
+  - q: 如何创建 1 of 100 风格的版本？
+    a: 向 Asset 添加 Edition 插件（编号 1-100），并向 Collection 添加 maxSupply 为 100 的 Master Edition 插件。
+  - q: 创建后可以更改版本号吗？
+    a: 可以，如果插件权限未设置为 None。更新权限者可以使用 updatePlugin 修改编号。
+  - q: Edition 和 Master Edition 有什么区别？
+    a: Edition 在 Asset 上存储单个编号。Master Edition 在 Collection 上存储集合级别的数据（最大供应量、版本名称/URI）。
 ---
-The **Edition Plugin** stores an edition number on individual Assets. Use it to create numbered prints like "1 of 100" for collectible series and limited editions. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add edition numbers to Assets
-- Create mutable and immutable editions
-- Update edition numbers
-- Understand the Edition workflow
+**Edition 插件**在单个 Asset 上存储版本号。用于为收藏系列和限量版创建编号的印刷品，如"1 of 100"。{% .lead %}
+{% callout title="学习内容" %}
+- 向 Asset 添加版本号
+- 创建可变和不可变版本
+- 更新版本号
+- 了解 Edition 工作流程
 {% /callout %}
-## Summary
-The **Edition** plugin is an Authority Managed plugin that stores a unique edition number on an Asset. Best used with the [Master Edition plugin](/smart-contracts/core/plugins/master-edition) on Collections to group numbered editions together.
-- Authority Managed (update authority controls)
-- Must be added at Asset creation
-- Number can be updated if authority is mutable
-- Use with Candy Machine Edition Guard for automatic numbering
-## Out of Scope
-Supply enforcement (informational only), automatic numbering (use Candy Machine), and Collection-level editions (use Master Edition plugin for Collections).
-## Quick Start
-**Jump to:** [Create Mutable Edition](#create-with-a-mutable-plugin) · [Create Immutable Edition](#create-with-a-immutable-plugin) · [Update Edition](#update-the-editions-plugin)
-1. Add Edition plugin during Asset creation with a unique number
-2. Optionally set authority to `None` for immutability
-3. Update the number later if mutable
-{% callout type="note" title="Intended Usage" %}
-We recommend to
-- Group the Editions using the Master Edition Plugin
-- use Candy Machine with the Edition Guard to handled numbering automatically.
+## 摘要
+**Edition** 插件是一个权限管理插件，在 Asset 上存储唯一的版本号。最好与 Collection 上的 [Master Edition 插件](/smart-contracts/core/plugins/master-edition) 一起使用，将编号的版本组合在一起。
+- 权限管理（更新权限者控制）
+- 必须在 Asset 创建时添加
+- 如果权限可变，可以更新编号
+- 使用 Candy Machine Edition Guard 进行自动编号
+## 范围外
+供应量强制（仅供参考）、自动编号（使用 Candy Machine）和 Collection 级别版本（对 Collection 使用 Master Edition 插件）。
+## 快速开始
+**跳转至：** [创建可变版本](#使用可变插件创建) · [创建不可变版本](#使用不可变插件创建) · [更新版本](#更新-editions-插件)
+1. 在 Asset 创建时添加带有唯一编号的 Edition 插件
+2. 可选地将权限设为 `None` 以实现不可变性
+3. 如果可变，稍后更新编号
+{% callout type="note" title="推荐用法" %}
+我们建议
+- 使用 Master Edition Plugin 对版本进行分组
+- 使用带有 Edition Guard 的 Candy Machine 自动处理编号。
 {% /callout %}
-## Works With
+## 适用于
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
-## Arguments
-| Arg    | Value  |
+## 参数
+| 参数    | 值  |
 | ------ | ------ |
 | number | number |
-The number is a specific value that is assigned to the asset. Usually this number is unique, therefore the Creator should make sure that a number is not used twice.
-## Creating an Asset with the editions plugin
-The Editions Plugin must be added on creation of the asset. As long as it is mutable the number can be changed.
-### Create with a mutable Plugin
-{% dialect-switcher title="Creating an MPL Core Asset with the Edition Plugin" %}
+编号是分配给资产的特定值。通常这个编号是唯一的，因此创作者应确保编号不会使用两次。
+## 使用 editions 插件创建 Asset
+Editions Plugin 必须在资产创建时添加。只要它是可变的，编号就可以更改。
+### 使用可变插件创建
+{% dialect-switcher title="使用 Edition Plugin 创建 MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -128,11 +128,11 @@ pub async fn create_asset_with_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Create with a Immutable Plugin
-To create the Asset with immutable Edition Plugin the following code can be used:
-{% dialect-switcher title="Adding the Editions Plugin to an MPL Core Asset" %}
+### 使用不可变插件创建
+要创建带有不可变 Edition Plugin 的 Asset，可以使用以下代码：
+{% dialect-switcher title="向 MPL Core Asset 添加 Editions Plugin" %}
 {% dialect title="JavaScript" id="js" %}
-To have the editions Plugin immutable the authority has to be set to `nonePluginAuthority()` like this:
+要使 editions Plugin 不可变，authority 必须设置为 `nonePluginAuthority()`，如下所示：
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { create } from '@metaplex-foundation/mpl-core'
@@ -195,9 +195,9 @@ pub async fn create_asset_with_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Update the Editions Plugin
-If the Editions Plugin is mutable it can be updated similar to other Plugins:
-{% dialect-switcher title="Update The Edition Plugin on an Asset" %}
+## 更新 Editions 插件
+如果 Editions Plugin 是可变的，可以像其他插件一样更新：
+{% dialect-switcher title="更新 Asset 上的 Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -210,49 +210,49 @@ const asset = publicKey('11111111111111111111111111111111')
 ```
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
-_coming soon_
+_即将推出_
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Cannot add Edition plugin after creation`
-The Edition plugin must be added during Asset creation. It cannot be added to existing Assets.
+Edition 插件必须在 Asset 创建时添加。不能添加到现有 Asset。
 ### `Authority mismatch`
-Only the update authority can update the edition number (if mutable).
+只有更新权限者可以更新版本号（如果可变）。
 ### `Plugin is immutable`
-The Edition plugin has authority set to `None`. The number cannot be changed.
-## Notes
-- Edition numbers are NOT enforced to be unique—creators must track this
-- The plugin must be added during `create()`, not after
-- Setting authority to `None` makes the edition number permanent
-- Use with Master Edition plugin on Collections for proper grouping
-## Quick Reference
-### Authority Options
-| Authority | Can Update | Use Case |
+Edition 插件的权限设置为 `None`。编号无法更改。
+## 注意事项
+- 版本号不强制唯一——创作者必须跟踪
+- 插件必须在 `create()` 期间添加，而不是之后
+- 将权限设置为 `None` 使版本号永久
+- 与 Collection 上的 Master Edition 插件一起使用以正确分组
+## 快速参考
+### 权限选项
+| 权限 | 可更新 | 用例 |
 |-----------|------------|----------|
-| `UpdateAuthority` | ✅ | Mutable edition numbers |
-| `None` | ❌ | Permanent, immutable editions |
-### Recommended Setup
-| Component | Location | Purpose |
+| `UpdateAuthority` | ✅ | 可变版本号 |
+| `None` | ❌ | 永久、不可变版本 |
+### 推荐设置
+| 组件 | 位置 | 目的 |
 |-----------|----------|---------|
-| Master Edition | Collection | Groups editions, stores max supply |
-| Edition | Asset | Stores individual edition number |
-| Candy Machine | Minting | Automatic sequential numbering |
-## FAQ
-### Is the edition number enforced to be unique?
-No. The edition number is informational only. Creators are responsible for ensuring unique numbers. Use Candy Machine with the Edition Guard for automatic sequential numbering.
-### Can I add the Edition plugin to an existing Asset?
-No. The Edition plugin must be added during Asset creation. Plan ahead if you need edition numbers.
-### How do I create a "1 of 100" style edition?
-Add the Edition plugin to Assets (with numbers 1-100) and add the Master Edition plugin to the Collection with `maxSupply: 100`. The Master Edition groups the editions and indicates total supply.
-### Can I change the edition number after creation?
-Yes, if the plugin authority is not set to `None`. The update authority can modify the number using `updatePlugin`.
-### What's the difference between Edition and Master Edition?
-Edition stores the individual number (e.g., #5) on an Asset. Master Edition stores collection-level data (max supply, edition name/URI) on a Collection and groups the editions together.
-## Glossary
-| Term | Definition |
+| Master Edition | Collection | 分组版本，存储最大供应量 |
+| Edition | Asset | 存储单个版本号 |
+| Candy Machine | 铸造 | 自动顺序编号 |
+## 常见问题
+### 版本号是否强制唯一？
+不是。版本号仅供参考。创作者负责确保唯一的编号。使用带有 Edition Guard 的 Candy Machine 进行自动顺序编号。
+### 可以向现有 Asset 添加 Edition 插件吗？
+不可以。Edition 插件必须在 Asset 创建时添加。如果需要版本号，请提前规划。
+### 如何创建"1 of 100"风格的版本？
+向 Asset 添加 Edition 插件（编号 1-100），并向 Collection 添加 `maxSupply: 100` 的 Master Edition 插件。Master Edition 分组版本并指示总供应量。
+### 创建后可以更改版本号吗？
+可以，如果插件权限未设置为 `None`。更新权限者可以使用 `updatePlugin` 修改编号。
+### Edition 和 Master Edition 有什么区别？
+Edition 在 Asset 上存储单个编号（例如 #5）。Master Edition 在 Collection 上存储集合级别的数据（最大供应量、版本名称/URI）并将版本组合在一起。
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Edition Number** | Unique identifier for a specific print (e.g., 1, 2, 3) |
-| **Master Edition** | Collection-level plugin that groups editions |
-| **Edition Guard** | Candy Machine guard for automatic numbering |
-| **Authority Managed** | Plugin controlled by update authority |
-| **Immutable Edition** | Edition with authority set to `None` |
+| **版本号** | 特定印刷品的唯一标识符（例如 1、2、3） |
+| **Master Edition** | 分组版本的 Collection 级别插件 |
+| **Edition Guard** | 用于自动编号的 Candy Machine 守卫 |
+| **权限管理** | 由更新权限者控制的插件 |
+| **不可变版本** | 权限设置为 `None` 的版本 |

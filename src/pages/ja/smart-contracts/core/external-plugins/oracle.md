@@ -1,7 +1,7 @@
 ---
 title: Oracle Plugin
 metaTitle: Oracle Plugin | Metaplex Core
-description: Add custom validation logic to Core NFTs with Oracle plugins. Control transfers, burns, and updates based on external account state and custom rules.
+description: Oracle Pluginを使用してCore NFTにカスタムバリデーションロジックを追加。外部アカウントの状態やカスタムルールに基づいて、転送、バーン、更新を制御します。
 updated: '01-31-2026'
 keywords:
   - Oracle plugin
@@ -18,57 +18,57 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: Can Oracle plugins approve transfers, or only reject?
-    a: Oracle plugins can only reject or pass. They cannot force-approve transfers that other plugins reject.
-  - q: How do I create time-based transfer restrictions?
-    a: Deploy an Oracle account and use a cron job to update the validation result at specific times.
-  - q: Can I use one Oracle for multiple Assets?
-    a: Yes. Use a static base address for a single Oracle, or use PDA derivation with PreconfiguredCollection for collection-wide validation.
-  - q: What's the difference between Oracle and Freeze Delegate?
-    a: Freeze Delegate is built-in and binary (frozen/unfrozen). Oracle allows custom logic - time-based, price-based, or any condition you implement.
-  - q: Do I need to write a Solana program for Oracle?
-    a: Yes. The Oracle account must be a Solana account with the correct structure. You can use Anchor or native Rust.
+  - q: Oracle Pluginは転送を承認できますか？それとも拒否のみ？
+    a: Oracle Pluginは拒否またはパスのみ可能です。他のPluginが拒否した転送を強制的に承認することはできません。
+  - q: 時間ベースの転送制限を作成するにはどうすればよいですか？
+    a: Oracle Accountをデプロイし、cronジョブを使用して特定の時間にバリデーション結果を更新します。
+  - q: 1つのOracleを複数のAssetに使用できますか？
+    a: はい。単一のOracleには静的なベースアドレスを使用するか、Collection全体のバリデーションにはPreconfiguredCollectionを使用したPDA導出を使用します。
+  - q: OracleとFreeze Delegateの違いは何ですか？
+    a: Freeze Delegateは組み込みでバイナリ（凍結/非凍結）です。Oracleはカスタムロジック（時間ベース、価格ベース、または実装する任意の条件）を可能にします。
+  - q: OracleにはSolanaプログラムを書く必要がありますか？
+    a: はい。Oracle Accountは正しい構造を持つSolanaアカウントである必要があります。AnchorまたはネイティブRustを使用できます。
 ---
-The **Oracle Plugin** connects Core Assets to external Oracle accounts for custom validation logic. Reject transfers, burns, or updates based on time, price, ownership, or any custom rule you implement. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Create Oracle accounts for validation
-- Configure lifecycle checks (reject transfers, updates, burns)
-- Use PDA-based Oracle addressing
-- Deploy time-based and condition-based restrictions
+**Oracle Plugin**は、Core Assetを外部Oracle Accountに接続してカスタムバリデーションロジックを実現します。時間、価格、所有権、または実装する任意のカスタムルールに基づいて、転送、バーン、更新を拒否できます。 {% .lead %}
+{% callout title="学習内容" %}
+- バリデーション用のOracle Accountの作成
+- ライフサイクルチェックの設定（転送、更新、バーンの拒否）
+- PDAベースのOracleアドレッシングの使用
+- 時間ベースおよび条件ベースの制限のデプロイ
 {% /callout %}
-## Summary
-The **Oracle Plugin** validates lifecycle events against external Oracle accounts. The Oracle account stores validation results that the Core program reads to approve or reject operations.
-- Can reject create, transfer, burn, and update events
-- Oracle account is external to the Asset (you control it)
-- Dynamic: update the Oracle account to change behavior
-- Supports PDA derivation for per-asset or per-owner oracles
-## Out of Scope
-AppData storage (see [AppData Plugin](/smart-contracts/core/external-plugins/app-data)), built-in freeze behavior (see [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate)), and off-chain oracles.
-## Quick Start
-**Jump to:** [Oracle Account Structure](#on-chain-oracle-account-structure) · [Create with Oracle](#creating-an-asset-with-the-oracle-plugin) · [Add to Asset](#adding-an-oracle-plugin-to-an-asset) · [Default Oracles](#default-oracles-deployed-by-metaplex)
-1. Deploy an Oracle account with validation rules
-2. Add Oracle plugin adapter to Asset/Collection
-3. Configure lifecycle checks (which events to validate)
-4. Update Oracle account to change validation behavior dynamically
-## What is an Oracle Plugin?
-An Oracle Plugin is an onchain account that is created by the authority externally from the MPL Core Asset or Collection. If an Asset or Collection has an Oracle Adapter enabled and an Oracle Account assigned to it the Oracle Account will be loaded by the MPL Core program for validations against lifecycle events.
-The Oracle Plugin stores data relating to 4 lifecycle events of `create`, `transfer`, `burn`, and `update` and can be configured to perform a **Reject** validation.
-The ability to update and change the Oracle Account provides a powerful and interactive lifecycle experience.
-## Works With
+## 概要
+**Oracle Plugin**は、外部Oracle Accountに対してライフサイクルイベントをバリデーションします。Oracle Accountはバリデーション結果を保存し、Coreプログラムがそれを読み取って操作を承認または拒否します。
+- create、transfer、burn、updateイベントを拒否可能
+- Oracle AccountはAssetの外部（あなたが管理）
+- 動的：Oracle Accountを更新して動作を変更
+- Asset単位またはオーナー単位のOracleのためのPDA導出をサポート
+## 対象外
+AppDataストレージ（[AppData Plugin](/ja/smart-contracts/core/external-plugins/app-data)を参照）、組み込みのフリーズ動作（[Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate)を参照）、およびオフチェーンOracleは対象外です。
+## クイックスタート
+**ジャンプ先:** [Oracle Accountの構造](#on-chain-oracle-account-structure) · [Oracleで作成](#creating-an-asset-with-the-oracle-plugin) · [Assetに追加](#adding-an-oracle-plugin-to-an-asset) · [デフォルトOracle](#default-oracles-deployed-by-metaplex)
+1. バリデーションルールを持つOracle Accountをデプロイ
+2. Oracle Plugin AdapterをAsset/Collectionに追加
+3. ライフサイクルチェックを設定（どのイベントをバリデーションするか）
+4. Oracle Accountを更新してバリデーション動作を動的に変更
+## Oracle Pluginとは？
+Oracle Pluginは、MPL Core AssetまたはCollectionとは別に、Authorityによって外部で作成されるオンチェーンアカウントです。AssetまたはCollectionでOracle Adapterが有効になり、Oracle Accountが割り当てられている場合、Oracle AccountはMPL Coreプログラムによってライフサイクルイベントに対するバリデーションのために読み込まれます。
+Oracle Pluginは`create`、`transfer`、`burn`、`update`の4つのライフサイクルイベントに関連するデータを保存し、**Reject**バリデーションを実行するように設定できます。
+Oracle Accountを更新・変更できることで、強力でインタラクティブなライフサイクル体験が可能になります。
+## 対応状況
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-## Allowed Validations
-The following validation results can be returned from the Oracle Account to the Oracle Plugin.
+## 許可されるバリデーション
+Oracle AccountからOracle Pluginに以下のバリデーション結果を返すことができます。
 |             |     |
 | ----------- | --- |
 | Can Approve | ❌  |
 | Can Reject  | ✅  |
 | Can Pass    | ❌  |
-## On Chain Oracle Account Structure
-The Oracle Account should have the following onchain account structure.
-{% dialect-switcher title="On Chain Account Struct of Oracle Account" %}
+## オンチェーンOracle Accountの構造
+Oracle Accountは以下のオンチェーンアカウント構造を持つ必要があります。
+{% dialect-switcher title="Oracle Accountのオンチェーンアカウント構造" %}
 {% dialect title="Anchor" id="rust-anchor" %}
 ```rust
 #[account]
@@ -125,11 +125,11 @@ pub enum ExternalValidationResult {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Oracle Account Offset
-The account structure will differ slightly between account frameworks (Anchor, Shank, etc.) due to the discriminator sizes needed for accounts:
-- If the `OracleValidation` struct is located at the beginning of the data section for the Oracle account, then choose `NoOffset` for the `ValidationResultsOffset`.
-- If the Oracle account only contains the `OracleValidation` struct but is managed by an Anchor program, select `Anchor` for `ValidationResultsOffset` so that the struct can be located after the Anchor account discriminator.
-- If the `OracleValidation` struct is located at some other offset in the Oracle account, use the `Custom` offset.
+### Oracle Accountのオフセット
+アカウント構造は、アカウントに必要なdiscriminatorサイズにより、アカウントフレームワーク（Anchor、Shankなど）間でわずかに異なります：
+- `OracleValidation`構造体がOracle Accountのデータセクションの先頭にある場合、`ValidationResultsOffset`には`NoOffset`を選択します。
+- Oracle Accountが`OracleValidation`構造体のみを含み、Anchorプログラムによって管理されている場合、Anchorアカウントdiscriminatorの後に構造体を配置できるように`ValidationResultsOffset`に`Anchor`を選択します。
+- `OracleValidation`構造体がOracle Account内の他のオフセットにある場合、`Custom`オフセットを使用します。
 {% dialect-switcher title="resultsOffset / result_offset" %}
 {% dialect title="JavaScript" id="js" %}
 ```js
@@ -149,11 +149,11 @@ pub enum ValidationResultsOffset {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating the Oracle Account
-Because the Oracle Account is created and maintained by the creator/developer the `OracleValidation` struct can be updated at anytime allowing lifecycles to be dynamic.
-## The Oracle Adapter
-The Oracle Adapter accepts the following arguments and data.
-### On Chain Struct
+## Oracle Accountの更新
+Oracle Accountは作成者/開発者によって作成・維持されるため、`OracleValidation`構造体はいつでも更新でき、ライフサイクルを動的にすることができます。
+## Oracle Adapter
+Oracle Adapterは以下の引数とデータを受け入れます。
+### オンチェーン構造体
 ```rust
 pub struct Oracle {
     /// The address of the oracle, or if using the `pda` option,
@@ -169,11 +169,11 @@ pub struct Oracle {
     pub results_offset: ValidationResultsOffset,
 }
 ```
-### Declaring the PDA of an Oracle Plugin
-The default behavior of the **Oracle Plugin Adapter** is to supply the adapter with a static `base_address` which the adapter can then read from and provide the resulting validation results.
-If you wish to get more dynamic with the **Oracle Plugin Adapter** you can pass in your `program_id` as the `base_address` and then an `ExtraAccount`, which can be used to derive one or more PDAs pointing to **Oracle Account** addresses. This allows the Oracle Adapter to access data from multiple derived Oracle Accounts. Note that there are other advanced non-PDA specifications also available when using `ExtraAccount`.
-#### List of ExtraAccounts Options
-An example of an extra account that is the same for all assets in a collection is the `PreconfiguredCollection` PDA, which uses the collection's Pubkey to derive the Oracle account. An example of more dynamic extra account is the `PreconfiguredOwner` PDA, which uses the owner pubkey to derive the Oracle account.
+### Oracle PluginのPDAの宣言
+**Oracle Plugin Adapter**のデフォルトの動作は、アダプターに静的な`base_address`を提供し、アダプターがそこから読み取って結果のバリデーション結果を提供することです。
+**Oracle Plugin Adapter**をより動的にしたい場合は、`base_address`として`program_id`を渡し、次に**Oracle Account**アドレスを指す1つ以上のPDAを導出するために使用できる`ExtraAccount`を渡すことができます。これにより、Oracle Adapterは複数の導出されたOracle Accountからデータにアクセスできます。`ExtraAccount`を使用する場合、他の高度な非PDA仕様も利用可能であることに注意してください。
+#### ExtraAccountオプションのリスト
+Collection内のすべてのAssetで同じ追加アカウントの例は`PreconfiguredCollection` PDAで、CollectionのPubkeyを使用してOracle Accountを導出します。より動的な追加アカウントの例は`PreconfiguredOwner` PDAで、オーナーのpubkeyを使用してOracle Accountを導出します。
 ```rust
 pub enum ExtraAccount {
     /// Program-based PDA with seeds \["mpl-core"\]
@@ -234,9 +234,9 @@ pub enum ExtraAccount {
     },
 }
 ```
-## Creating and Adding Oracle Plugins
-### Creating an Asset with the Oracle Plugin
-{% dialect-switcher title="Create a MPL Core Asset with an Oracle Plugin" %}
+## Oracle Pluginの作成と追加
+### Oracle PluginでAssetを作成
+{% dialect-switcher title="Oracle PluginでMPL Core Assetを作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -406,8 +406,8 @@ pub enum ExtraAccount {
 ```
 {% /dialect %}
 {% /dialect-switcher %} -->
-### Adding an Oracle Plugin to An Asset
-{% dialect-switcher title="Adding an Oracle Plugin to a Collection" %}
+### AssetにOracle Pluginを追加
+{% dialect-switcher title="CollectionにOracle Pluginを追加" %}
 {% dialect title="Javascript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -477,8 +477,8 @@ pub async fn add_oracle_plugin_to_asset() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Creating a Collection with an Oracle Plugin
-{% dialect-switcher title="Creating a Collection with an Oracle Plugin" %}
+### Oracle PluginでCollectionを作成
+{% dialect-switcher title="Oracle PluginでCollectionを作成" %}
 {% dialect title="Javascript" id="js" %}
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -556,8 +556,8 @@ pub async fn create_collection_with_oracle_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Adding an Oracle Plugin to a Collection
-{% dialect-switcher title="Adding an Oracle Plugin to a Collection" %}
+### CollectionにOracle Pluginを追加
+{% dialect-switcher title="CollectionにOracle Pluginを追加" %}
 {% dialect title="Javascript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -627,56 +627,56 @@ pub async fn add_oracle_plugin_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Default Oracles deployed by Metaplex
-In some rare cases like [Soulbound NFT](/smart-contracts/core/guides/create-soulbound-nft-asset) it might be useful to have Oracles that always Deny or Approve a lifecycle event. For those the following Oracles have been deployed and can be used by anyone:
-- **Transfer Oracle**: Always denies transferring. `AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
-- **Update Oracle**: Always denies updating. `6cKyMV4toCVCEtvh6Sh5RQ1fevynvBDByaQP4ufz1Zj6`
-- **Create Oracle**: Always denies creating. `2GhRFi9RhqmtEFWCwrAHC61Lti3jEKuCKPcZTfuujaGr`
-## Example Usage/Ideas
-### Example 1
-**Assets to be not transferable during the hours of noon-midnight UTC.**
-- Create onchain Oracle Plugin in a program of your choice.
-- Add the Oracle Plugin Adapter to an Asset or Collection specifying the lifecycle events you wish to have rejection validation over.
-- You write a cron that writes and updates to your Oracle Plugin at noon and midnight flipping a bit validation from true/false/true.
-### Example 2
-**Assets can only be updated if the floor price is above $10 and the asset has attribute “red hat”.**
-- Create onchain Oracle Plugin in a program of your choice.
-- Add the Oracle Plugin Adapter to Asset specifying the lifecycle events you wish to have rejection validation over.
-- Dev writes Anchor program that can write to the Oracle Account that derive the same PRECONFIGURED_ASSET accounts
-- Dev writes web2 script that watches prices on a marketplace, AND with known hashlist of Assets with the 'Red Hat' trait red updates and writes to the relevant Oracle Accounts.
-## Common Errors
+## MetaplexがデプロイしたデフォルトのOracle
+[Soulbound NFT](/ja/smart-contracts/core/guides/create-soulbound-nft-asset)のようなまれなケースでは、常にライフサイクルイベントを拒否または承認するOracleがあると便利な場合があります。そのために、以下のOracleがデプロイされており、誰でも使用できます：
+- **Transfer Oracle**: 常に転送を拒否します。`AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
+- **Update Oracle**: 常に更新を拒否します。`6cKyMV4toCVCEtvh6Sh5RQ1fevynvBDByaQP4ufz1Zj6`
+- **Create Oracle**: 常に作成を拒否します。`2GhRFi9RhqmtEFWCwrAHC61Lti3jEKuCKPcZTfuujaGr`
+## 使用例/アイデア
+### 例1
+**正午から深夜（UTC）の間、Assetを転送不可にする。**
+- 任意のプログラムでオンチェーンOracle Pluginを作成します。
+- 拒否バリデーションを行いたいライフサイクルイベントを指定して、Oracle Plugin AdapterをAssetまたはCollectionに追加します。
+- 正午と深夜にOracle Pluginに書き込み更新を行い、バリデーションビットをtrue/false/trueに切り替えるcronを作成します。
+### 例2
+**フロア価格が$10以上で、Assetに「red hat」属性がある場合のみ更新可能。**
+- 任意のプログラムでオンチェーンOracle Pluginを作成します。
+- 拒否バリデーションを行いたいライフサイクルイベントを指定して、Oracle Plugin AdapterをAssetに追加します。
+- 開発者は同じPRECONFIGURED_ASSETアカウントを導出するOracle Accountに書き込むことができるAnchorプログラムを作成します。
+- 開発者はマーケットプレイスの価格を監視し、'Red Hat'トレイトを持つAssetの既知のハッシュリストを使用して、関連するOracle Accountを更新・書き込みするweb2スクリプトを作成します。
+## 一般的なエラー
 ### `Oracle validation failed`
-The Oracle account returned a rejection. Check your Oracle account state and validation logic.
+Oracle Accountが拒否を返しました。Oracle Accountの状態とバリデーションロジックを確認してください。
 ### `Oracle account not found`
-The Oracle account address is invalid or doesn't exist. Verify the base address and any PDA derivation.
+Oracle Accountアドレスが無効か存在しません。ベースアドレスとPDA導出を確認してください。
 ### `Invalid results offset`
-The ValidationResultsOffset doesn't match your Oracle account structure. Use `Anchor` for Anchor programs, `NoOffset` for raw accounts.
-## Notes
-- Oracle accounts are external—you deploy and maintain them
-- Validation is read-only: Core reads the Oracle, doesn't write to it
-- Use cron jobs or event listeners to update Oracle state dynamically
-- PDA derivation allows per-asset, per-owner, or per-collection oracles
+ValidationResultsOffsetがOracle Accountの構造と一致しません。Anchorプログラムには`Anchor`を、生のアカウントには`NoOffset`を使用してください。
+## 注意事項
+- Oracle Accountは外部です。あなたがデプロイして維持します
+- バリデーションは読み取り専用です：CoreはOracleを読み取りますが、書き込みはしません
+- cronジョブやイベントリスナーを使用してOracle状態を動的に更新します
+- PDA導出により、Asset単位、オーナー単位、またはCollection単位のOracleが可能になります
 ## FAQ
-### Can Oracle plugins approve transfers, or only reject?
-Oracle plugins can only reject or pass. They cannot force-approve transfers that other plugins reject.
-### How do I create time-based transfer restrictions?
-Deploy an Oracle account and use a cron job to update the validation result at specific times. See Example 1 above.
-### Can I use one Oracle for multiple Assets?
-Yes. Use a static base address for a single Oracle, or use PDA derivation with `PreconfiguredCollection` for collection-wide validation.
-### What's the difference between Oracle and Freeze Delegate?
-Freeze Delegate is built-in and binary (frozen/unfrozen). Oracle allows custom logic—time-based, price-based, or any condition you implement.
-### Do I need to write a Solana program for Oracle?
-Yes. The Oracle account must be a Solana account with the correct structure. You can use Anchor or native Rust. See the [Oracle Plugin Example](/smart-contracts/core/guides/oracle-plugin-example) guide.
-## Glossary
-| Term | Definition |
+### Oracle Pluginは転送を承認できますか？それとも拒否のみ？
+Oracle Pluginは拒否またはパスのみ可能です。他のPluginが拒否した転送を強制的に承認することはできません。
+### 時間ベースの転送制限を作成するにはどうすればよいですか？
+Oracle Accountをデプロイし、cronジョブを使用して特定の時間にバリデーション結果を更新します。上記の例1を参照してください。
+### 1つのOracleを複数のAssetに使用できますか？
+はい。単一のOracleには静的なベースアドレスを使用するか、Collection全体のバリデーションには`PreconfiguredCollection`を使用したPDA導出を使用します。
+### OracleとFreeze Delegateの違いは何ですか？
+Freeze Delegateは組み込みでバイナリ（凍結/非凍結）です。Oracleはカスタムロジック（時間ベース、価格ベース、または実装する任意の条件）を可能にします。
+### OracleにはSolanaプログラムを書く必要がありますか？
+はい。Oracle Accountは正しい構造を持つSolanaアカウントである必要があります。AnchorまたはネイティブRustを使用できます。[Oracle Pluginの例](/ja/smart-contracts/core/guides/oracle-plugin-example)ガイドを参照してください。
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Oracle Account** | External Solana account storing validation results |
-| **Oracle Adapter** | Plugin component attached to Asset referencing the Oracle |
-| **ValidationResultsOffset** | Byte offset to locate validation data in Oracle account |
-| **ExtraAccount** | PDA derivation configuration for dynamic Oracle addressing |
-| **Lifecycle Check** | Configuration specifying which events the Oracle validates |
-## Related Pages
-- [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
-- [AppData Plugin](/smart-contracts/core/external-plugins/app-data) - Data storage instead of validation
-- [Oracle Plugin Example](/smart-contracts/core/guides/oracle-plugin-example) - Complete implementation guide
-- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Built-in freeze alternative
+| **Oracle Account** | バリデーション結果を保存する外部Solanaアカウント |
+| **Oracle Adapter** | Oracleを参照するAssetにアタッチされたPluginコンポーネント |
+| **ValidationResultsOffset** | Oracle Account内のバリデーションデータを見つけるためのバイトオフセット |
+| **ExtraAccount** | 動的なOracleアドレッシングのためのPDA導出設定 |
+| **Lifecycle Check** | Oracleがバリデーションするイベントを指定する設定 |
+## 関連ページ
+- [External Plugins概要](/ja/smart-contracts/core/external-plugins/overview) - External Pluginの理解
+- [AppData Plugin](/ja/smart-contracts/core/external-plugins/app-data) - バリデーションではなくデータストレージ
+- [Oracle Pluginの例](/ja/smart-contracts/core/guides/oracle-plugin-example) - 完全な実装ガイド
+- [Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate) - 組み込みのフリーズ代替機能

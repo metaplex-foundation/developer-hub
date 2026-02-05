@@ -1,7 +1,7 @@
 ---
 title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
-description: API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
+description: Genesis JavaScript SDK의 API 레퍼런스. Solana에서 토큰 런칭을 위한 함수 시그니처, 매개변수 및 타입.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -20,27 +20,27 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What is Umi and why is it required?
-    a: Umi is Metaplex's JavaScript framework for Solana. It provides a consistent interface for building transactions, managing signers, and interacting with Metaplex programs.
-  - q: Can I use the Genesis SDK in a browser?
-    a: Yes. The SDK works in both Node.js and browser environments. For browsers, use a wallet adapter for signing instead of keypair files.
-  - q: What's the difference between fetch and safeFetch?
-    a: fetch throws an error if the account doesn't exist. safeFetch returns null instead, useful for checking if an account exists without error handling.
-  - q: How do I handle transaction errors?
-    a: Wrap sendAndConfirm calls in try/catch blocks. Common errors include insufficient funds, already-initialized accounts, and time condition violations.
+  - q: Umi란 무엇이며 왜 필요한가요?
+    a: Umi는 Solana를 위한 Metaplex의 JavaScript 프레임워크입니다. 트랜잭션 구축, 서명자 관리, Metaplex 프로그램과의 상호작용을 위한 일관된 인터페이스를 제공합니다.
+  - q: 브라우저에서 Genesis SDK를 사용할 수 있나요?
+    a: 네. SDK는 Node.js와 브라우저 환경 모두에서 작동합니다. 브라우저에서는 키페어 파일 대신 지갑 어댑터를 사용하세요.
+  - q: fetch와 safeFetch의 차이점은 무엇인가요?
+    a: fetch는 계정이 존재하지 않으면 오류를 던집니다. safeFetch는 대신 null을 반환하며, 오류 처리 없이 계정 존재 여부를 확인하는 데 유용합니다.
+  - q: 트랜잭션 오류를 어떻게 처리하나요?
+    a: sendAndConfirm 호출을 try/catch 블록으로 감싸세요. 일반적인 오류에는 잔액 부족, 이미 초기화된 계정, 시간 조건 위반이 포함됩니다.
 ---
 
-API reference for the Genesis JavaScript SDK. For complete tutorials, see [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale). {% .lead %}
+Genesis JavaScript SDK의 API 레퍼런스. 전체 튜토리얼은 [Launch Pool](/smart-contracts/genesis/launch-pool) 또는 [Presale](/smart-contracts/genesis/presale)을 참조하세요. {% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
+{% quick-link title="NPM 패키지" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
 
-{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="Auto-generated API docs" /%}
+{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="자동 생성된 API 문서" /%}
 
 {% /quick-links %}
 
-## Installation
+## 설치
 
 ```bash
 npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
@@ -48,7 +48,7 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
   @metaplex-foundation/mpl-token-metadata
 ```
 
-## Setup
+## 설정
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -60,53 +60,53 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(mplTokenMetadata());
 ```
 
-For complete implementation examples, see [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale).
+전체 구현 예제는 [Launch Pool](/smart-contracts/genesis/launch-pool) 또는 [Presale](/smart-contracts/genesis/presale)을 참조하세요.
 
 ---
 
-## Instructions Reference
+## 명령어 레퍼런스
 
-### Core
-
-| Function | Description |
-|----------|-------------|
-| [initializeV2()](#initialize-v2) | Create Genesis Account and mint token |
-| [finalizeV2()](#finalize-v2) | Lock configuration, activate launch |
-
-### Buckets
+### 코어
 
 | Function | Description |
 |----------|-------------|
-| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | Add proportional distribution bucket |
-| [addPresaleBucketV2()](#add-presale-bucket-v2) | Add fixed-price sale bucket |
-| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | Add treasury/recipient bucket |
+| [initializeV2()](#initialize-v2) | Genesis 계정 생성 및 토큰 발행 |
+| [finalizeV2()](#finalize-v2) | 설정 잠금, 런칭 활성화 |
 
-### Launch Pool Operations
-
-| Function | Description |
-|----------|-------------|
-| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Deposit SOL into Launch Pool |
-| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | Withdraw SOL (during deposit period) |
-| [claimLaunchPoolV2()](#claim-launch-pool-v2) | Claim tokens (after deposit period) |
-
-### Presale Operations
+### 버킷
 
 | Function | Description |
 |----------|-------------|
-| [depositPresaleV2()](#deposit-presale-v2) | Deposit SOL into Presale |
-| [claimPresaleV2()](#claim-presale-v2) | Claim tokens (after deposit period) |
+| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | 비례 배분 버킷 추가 |
+| [addPresaleBucketV2()](#add-presale-bucket-v2) | 고정가 판매 버킷 추가 |
+| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | 트레저리/수신자 버킷 추가 |
 
-### Admin
+### Launch Pool 운영
 
 | Function | Description |
 |----------|-------------|
-| [transitionV2()](#transition-v2) | Execute end behaviors |
-| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | Permanently revoke mint authority |
-| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | Permanently revoke freeze authority |
+| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Launch Pool에 SOL 예치 |
+| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | SOL 출금 (예치 기간 중) |
+| [claimLaunchPoolV2()](#claim-launch-pool-v2) | 토큰 청구 (예치 기간 후) |
+
+### Presale 운영
+
+| Function | Description |
+|----------|-------------|
+| [depositPresaleV2()](#deposit-presale-v2) | Presale에 SOL 예치 |
+| [claimPresaleV2()](#claim-presale-v2) | 토큰 청구 (예치 기간 후) |
+
+### 관리자
+
+| Function | Description |
+|----------|-------------|
+| [transitionV2()](#transition-v2) | 종료 동작 실행 |
+| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | 민트 권한 영구 폐기 |
+| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | 동결 권한 영구 폐기 |
 
 ---
 
-## Function Signatures
+## 함수 시그니처
 
 ### initializeV2
 
@@ -264,7 +264,7 @@ await revokeFreezeAuthorityV2(umi, {
 
 ---
 
-## PDA Helpers
+## PDA 헬퍼
 
 | Function | Seeds |
 |----------|-------|
@@ -283,31 +283,31 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ---
 
-## Fetch Functions
+## 조회 함수
 
 | Function | Returns |
 |----------|---------|
-| fetchLaunchPoolBucketV2() | Bucket state (throws if missing) |
-| safeFetchLaunchPoolBucketV2() | Bucket state or `null` |
-| fetchPresaleBucketV2() | Bucket state (throws if missing) |
-| safeFetchPresaleBucketV2() | Bucket state or `null` |
-| fetchLaunchPoolDepositV2() | Deposit state (throws if missing) |
-| safeFetchLaunchPoolDepositV2() | Deposit state or `null` |
-| fetchPresaleDepositV2() | Deposit state (throws if missing) |
-| safeFetchPresaleDepositV2() | Deposit state or `null` |
+| fetchLaunchPoolBucketV2() | 버킷 상태 (없으면 오류 발생) |
+| safeFetchLaunchPoolBucketV2() | 버킷 상태 또는 `null` |
+| fetchPresaleBucketV2() | 버킷 상태 (없으면 오류 발생) |
+| safeFetchPresaleBucketV2() | 버킷 상태 또는 `null` |
+| fetchLaunchPoolDepositV2() | 예치 상태 (없으면 오류 발생) |
+| safeFetchLaunchPoolDepositV2() | 예치 상태 또는 `null` |
+| fetchPresaleDepositV2() | 예치 상태 (없으면 오류 발생) |
+| safeFetchPresaleDepositV2() | 예치 상태 또는 `null` |
 
 ```typescript
 const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
-const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
+const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // 찾지 못하면 null
 ```
 
-**Bucket state fields:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
+**버킷 상태 필드:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
 
-**Deposit state fields:** `amountQuoteToken`, `claimed`
+**예치 상태 필드:** `amountQuoteToken`, `claimed`
 
 ---
 
-## Types
+## 타입
 
 ### TimeCondition
 
@@ -334,47 +334,47 @@ const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if 
 
 ---
 
-## Constants
+## 상수
 
 | Constant | Value |
 |----------|-------|
 | `WRAPPED_SOL_MINT` | `So11111111111111111111111111111111111111112` |
-| `NOT_TRIGGERED_TIMESTAMP` | Use in time conditions |
+| `NOT_TRIGGERED_TIMESTAMP` | 시간 조건에서 사용 |
 
 ---
 
-## Common Errors
+## 일반 오류
 
 | Error | Cause |
 |-------|-------|
-| `insufficient funds` | Not enough SOL for fees |
-| `already initialized` | Genesis Account exists |
-| `already finalized` | Cannot modify after finalization |
-| `deposit period not active` | Outside deposit window |
-| `claim period not active` | Outside claim window |
+| `insufficient funds` | 수수료를 위한 SOL 부족 |
+| `already initialized` | Genesis 계정이 이미 존재 |
+| `already finalized` | 확정 후 수정 불가 |
+| `deposit period not active` | 예치 기간 외 |
+| `claim period not active` | 청구 기간 외 |
 
 ---
 
 ## FAQ
 
-### What is Umi and why is it required?
-Umi is Metaplex's JavaScript framework for Solana. It provides a consistent interface for building transactions, managing signers, and interacting with Metaplex programs.
+### Umi란 무엇이며 왜 필요한가요?
+Umi는 Solana를 위한 Metaplex의 JavaScript 프레임워크입니다. 트랜잭션 구축, 서명자 관리, Metaplex 프로그램과의 상호작용을 위한 일관된 인터페이스를 제공합니다.
 
-### Can I use the Genesis SDK in a browser?
-Yes. The SDK works in both Node.js and browser environments. For browsers, use a wallet adapter for signing instead of keypair files.
+### 브라우저에서 Genesis SDK를 사용할 수 있나요?
+네. SDK는 Node.js와 브라우저 환경 모두에서 작동합니다. 브라우저에서는 키페어 파일 대신 지갑 어댑터를 사용하세요.
 
-### What's the difference between fetch and safeFetch?
-`fetch` throws an error if the account doesn't exist. `safeFetch` returns `null` instead, useful for checking if an account exists.
+### fetch와 safeFetch의 차이점은 무엇인가요?
+`fetch`는 계정이 존재하지 않으면 오류를 던집니다. `safeFetch`는 대신 `null`을 반환하며, 계정 존재 여부를 확인하는 데 유용합니다.
 
-### How do I handle transaction errors?
-Wrap `sendAndConfirm` calls in try/catch blocks. Check error messages for specific failure reasons.
+### 트랜잭션 오류를 어떻게 처리하나요?
+`sendAndConfirm` 호출을 try/catch 블록으로 감싸세요. 구체적인 실패 원인은 오류 메시지를 확인하세요.
 
 ---
 
-## Next Steps
+## 다음 단계
 
-For complete implementation tutorials:
+전체 구현 튜토리얼:
 
-- [Getting Started](/smart-contracts/genesis/getting-started) - Setup and first launch
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Proportional distribution
-- [Presale](/smart-contracts/genesis/presale) - Fixed-price sales
+- [시작하기](/smart-contracts/genesis/getting-started) - 설정 및 첫 런칭
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - 비례 배분
+- [Presale](/smart-contracts/genesis/presale) - 고정가 판매

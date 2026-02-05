@@ -1,7 +1,7 @@
 ---
 title: Burn Delegate
-metaTitle: Burn Delegate Plugin | Metaplex Core
-description: Allow a delegate to burn Core NFT Assets. Use the Burn Delegate plugin for game mechanics, subscription expirations, and automated asset destruction.
+metaTitle: Burn Delegate 플러그인 | Metaplex Core
+description: 위임자가 Core NFT Asset을 소각할 수 있도록 합니다. 게임 메커니즘, 구독 만료 및 자동화된 자산 파기에 Burn Delegate 플러그인을 사용하세요.
 updated: '01-31-2026'
 keywords:
   - burn delegate
@@ -17,62 +17,62 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What's the difference between Burn Delegate and Permanent Burn Delegate?
-    a: Burn Delegate authority is revoked on transfer. Permanent Burn Delegate authority persists forever and uses forceApprove, meaning it can burn even if the Asset is frozen.
-  - q: Can the owner still burn if there's a Burn Delegate?
-    a: Yes. The owner can always burn their own Asset regardless of delegates.
-  - q: Does Burn Delegate work on frozen Assets?
-    a: No. Regular Burn Delegate cannot burn frozen Assets. Use Permanent Burn Delegate if you need to burn frozen Assets.
-  - q: When is Burn Delegate revoked?
-    a: When the Asset is transferred to a new owner. The new owner would need to add a new Burn Delegate.
+  - q: Burn Delegate와 Permanent Burn Delegate의 차이점은 무엇인가요?
+    a: Burn Delegate 권한은 전송 시 취소됩니다. Permanent Burn Delegate 권한은 영구적으로 유지되며 forceApprove를 사용하므로 Asset이 동결되어 있어도 소각할 수 있습니다.
+  - q: Burn Delegate가 있어도 소유자가 소각할 수 있나요?
+    a: 네. 소유자는 위임자와 관계없이 항상 자신의 Asset을 소각할 수 있습니다.
+  - q: Burn Delegate가 동결된 Asset에 작동하나요?
+    a: 아니요. 일반 Burn Delegate는 동결된 Asset을 소각할 수 없습니다. 동결된 Asset을 소각해야 하는 경우 Permanent Burn Delegate를 사용하세요.
+  - q: Burn Delegate는 언제 취소되나요?
+    a: Asset이 새 소유자에게 전송될 때. 새 소유자는 새로운 Burn Delegate를 추가해야 합니다.
 ---
-The **Burn Delegate Plugin** allows a designated authority to burn Core Assets on behalf of the owner. Useful for game mechanics, subscription services, and automated asset lifecycle management. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add the Burn Delegate plugin to an Asset
-- Delegate burn authority to another address
-- Revoke burn authority
-- Use cases: games, subscriptions, automated burns
+**Burn Delegate 플러그인**은 지정된 권한자가 소유자를 대신하여 Core Asset을 소각할 수 있게 합니다. 게임 메커니즘, 구독 서비스 및 자동화된 자산 수명 주기 관리에 유용합니다. {% .lead %}
+{% callout title="학습 내용" %}
+- Asset에 Burn Delegate 플러그인 추가
+- 소각 권한을 다른 주소에 위임
+- 소각 권한 취소
+- 사용 사례: 게임, 구독, 자동화 소각
 {% /callout %}
-## Summary
-The **Burn Delegate** is an Owner Managed plugin that allows a delegate to burn an Asset. Once added, the delegate can burn the Asset at any time without owner approval.
-- Delegate burn authority to a program or wallet
-- Authority is revoked on Asset transfer
-- Use [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) for irrevocable burn authority
-- No additional arguments required
-## Out of Scope
-Collection burning (different process), permanent burn authority (see Permanent Burn Delegate), and Token Metadata burn authority (different system).
-## Quick Start
-**Jump to:** [Add Plugin](#adding-the-burn-plugin-to-an-asset) · [Delegate Authority](#delegating-burn-authority) · [Revoke](#revoking-burn-authority)
-1. Add the Burn Delegate plugin: `addPlugin(umi, { asset, plugin: { type: 'BurnDelegate' } })`
-2. Optionally delegate to another address
-3. The delegate can now burn the Asset at any time
-{% callout type="note" title="When to Use Burn vs Permanent Burn Delegate" %}
-| Use Case | Burn Delegate | Permanent Burn Delegate |
+## 요약
+**Burn Delegate**는 위임자가 Asset을 소각할 수 있게 하는 소유자 관리 플러그인입니다. 추가되면 위임자는 소유자 승인 없이 언제든지 Asset을 소각할 수 있습니다.
+- 프로그램이나 지갑에 소각 권한 위임
+- Asset 전송 시 권한 취소됨
+- 취소 불가능한 소각 권한은 [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) 사용
+- 추가 인자 필요 없음
+## 범위 외
+Collection 소각 (다른 프로세스), 영구 소각 권한 (Permanent Burn Delegate 참조), Token Metadata 소각 권한 (다른 시스템).
+## 빠른 시작
+**바로 가기:** [플러그인 추가](#asset에-burn-플러그인-추가) · [권한 위임](#소각-권한-위임) · [취소](#소각-권한-취소)
+1. Burn Delegate 플러그인 추가: `addPlugin(umi, { asset, plugin: { type: 'BurnDelegate' } })`
+2. 선택적으로 다른 주소에 위임
+3. 위임자가 이제 언제든지 Asset을 소각할 수 있음
+{% callout type="note" title="Burn vs Permanent Burn Delegate 사용 시기" %}
+| 사용 사례 | Burn Delegate | Permanent Burn Delegate |
 |----------|---------------|-------------------------|
-| Game item destruction | ✅ Best choice | ✅ Also works |
-| Subscription expiration | ✅ Best choice | ❌ Too permanent |
-| Burn frozen Assets | ❌ Cannot burn | ✅ Can force burn |
-| Authority persists on transfer | ❌ Revokes | ✅ Persists |
-| Emergency burn capability | ❌ Limited | ✅ Best choice |
-**Choose Burn Delegate** when burn authority should reset on ownership change.
-**Choose [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)** when authority must persist forever.
+| 게임 아이템 파기 | ✅ 최선의 선택 | ✅ 사용 가능 |
+| 구독 만료 | ✅ 최선의 선택 | ❌ 너무 영구적 |
+| 동결된 Asset 소각 | ❌ 소각 불가 | ✅ 강제 소각 가능 |
+| 전송 시 권한 유지 | ❌ 취소됨 | ✅ 유지됨 |
+| 긴급 소각 기능 | ❌ 제한적 | ✅ 최선의 선택 |
+**Burn Delegate 선택** 소유권 변경 시 소각 권한이 재설정되어야 할 때.
+**[Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) 선택** 권한이 영원히 유지되어야 할 때.
 {% /callout %}
-## Common Use Cases
-- **Game mechanics**: Burn NFTs when items are consumed, destroyed, or lost in-game
-- **Subscription services**: Auto-burn expired subscription tokens
-- **Crafting systems**: Burn ingredient NFTs when crafting new items
-- **Achievement redemption**: Burn achievement tokens when redeemed for rewards
-- **Event tickets**: Burn tickets after event check-in
-- **Limited-time assets**: Burn assets after expiration period
-## Works With
+## 일반적인 사용 사례
+- **게임 메커니즘**: 아이템이 소비, 파괴 또는 게임 내에서 분실될 때 NFT 소각
+- **구독 서비스**: 만료된 구독 토큰 자동 소각
+- **제작 시스템**: 새 아이템을 제작할 때 재료 NFT 소각
+- **업적 교환**: 보상으로 교환 시 업적 토큰 소각
+- **이벤트 티켓**: 이벤트 체크인 후 티켓 소각
+- **한정 시간 자산**: 만료 기간 후 자산 소각
+## 호환 대상
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
-## Arguments
-The Burn Plugin doesn't contain any arguments to pass in.
-## Adding the Burn Plugin to an Asset
-{% dialect-switcher title="Adding a Burn Plugin to an MPL Core Asset" %}
+## 인자
+Burn 플러그인은 전달할 인자가 없습니다.
+## Asset에 Burn 플러그인 추가
+{% dialect-switcher title="MPL Core Asset에 Burn 플러그인 추가" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -121,9 +121,9 @@ pub async fn add_burn_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Delegating Burn Authority
-The Burn Delegate plugin authority can be delegated to a different address using the `approvePluginAuthority` function. This allows you to change who can burn the Asset.
-{% dialect-switcher title="Delegate Burn Authority" %}
+## 소각 권한 위임
+Burn Delegate 플러그인 권한은 `approvePluginAuthority` 함수를 사용하여 다른 주소에 위임할 수 있습니다. 이를 통해 누가 Asset을 소각할 수 있는지 변경할 수 있습니다.
+{% dialect-switcher title="소각 권한 위임" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -140,9 +140,9 @@ import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Revoking Burn Authority
-The burn authority can be revoked using the `revokePluginAuthority` function, returning control to the asset owner.
-{% dialect-switcher title="Revoke Burn Authority" %}
+## 소각 권한 취소
+소각 권한은 `revokePluginAuthority` 함수를 사용하여 취소할 수 있으며, 이는 자산 소유자에게 제어권을 반환합니다.
+{% dialect-switcher title="소각 권한 취소" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -157,43 +157,43 @@ import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 일반적인 오류
 ### `Authority mismatch`
-Only the burn delegate authority can burn the Asset. Verify you're signing with the correct keypair.
+소각 위임 권한자만 Asset을 소각할 수 있습니다. 올바른 키페어로 서명하고 있는지 확인하세요.
 ### `Asset is frozen`
-Frozen Assets cannot be burned. The freeze authority must thaw the Asset first.
-## Notes
-- Owner Managed: requires owner signature to add
-- Authority is automatically revoked when the Asset transfers
-- Frozen Assets cannot be burned
-- Use Permanent Burn Delegate if authority must persist after transfer
-- Burning is immediate and irreversible
-## Quick Reference
-### Who Can Burn?
-| Authority | Can Burn? |
+동결된 Asset은 소각할 수 없습니다. 동결 권한자가 먼저 Asset을 해동해야 합니다.
+## 참고 사항
+- 소유자 관리: 추가하려면 소유자 서명 필요
+- Asset 전송 시 권한이 자동으로 취소됨
+- 동결된 Asset은 소각 불가
+- 전송 후에도 권한이 유지되어야 하면 Permanent Burn Delegate 사용
+- 소각은 즉시 적용되며 되돌릴 수 없음
+## 빠른 참조
+### 누가 소각할 수 있나요?
+| 권한자 | 소각 가능? |
 |-----------|-----------|
-| Asset Owner | Yes (always) |
-| Burn Delegate | Yes |
-| Permanent Burn Delegate | Yes (force approve) |
-| Update Authority | No |
+| Asset 소유자 | 예 (항상) |
+| Burn Delegate | 예 |
+| Permanent Burn Delegate | 예 (force approve) |
+| 업데이트 권한자 | 아니요 |
 ## FAQ
-### What's the difference between Burn Delegate and Permanent Burn Delegate?
-Burn Delegate authority is revoked on transfer. Permanent Burn Delegate authority persists forever and uses `forceApprove`, meaning it can burn even if the Asset is frozen.
-### Can the owner still burn if there's a Burn Delegate?
-Yes. The owner can always burn their own Asset regardless of delegates.
-### Does Burn Delegate work on frozen Assets?
-No. Regular Burn Delegate cannot burn frozen Assets. Use Permanent Burn Delegate if you need to burn frozen Assets.
-### When is Burn Delegate revoked?
-When the Asset is transferred to a new owner. The new owner would need to add a new Burn Delegate.
-## Related Plugins
-- [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) - Irrevocable burn authority with forceApprove
-- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Block transfers and burns temporarily
-- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - Allow delegate to transfer Assets
-## Glossary
-| Term | Definition |
+### Burn Delegate와 Permanent Burn Delegate의 차이점은 무엇인가요?
+Burn Delegate 권한은 전송 시 취소됩니다. Permanent Burn Delegate 권한은 영구적으로 유지되며 `forceApprove`를 사용하므로 Asset이 동결되어 있어도 소각할 수 있습니다.
+### Burn Delegate가 있어도 소유자가 소각할 수 있나요?
+네. 소유자는 위임자와 관계없이 항상 자신의 Asset을 소각할 수 있습니다.
+### Burn Delegate가 동결된 Asset에 작동하나요?
+아니요. 일반 Burn Delegate는 동결된 Asset을 소각할 수 없습니다. 동결된 Asset을 소각해야 하는 경우 Permanent Burn Delegate를 사용하세요.
+### Burn Delegate는 언제 취소되나요?
+Asset이 새 소유자에게 전송될 때. 새 소유자는 새로운 Burn Delegate를 추가해야 합니다.
+## 관련 플러그인
+- [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) - forceApprove가 있는 취소 불가능한 소각 권한
+- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - 일시적으로 전송과 소각 차단
+- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - 위임자가 Asset을 전송할 수 있도록 허용
+## 용어집
+| 용어 | 정의 |
 |------|------------|
-| **Burn Delegate** | Owner Managed plugin allowing a delegate to burn the Asset |
-| **Owner Managed** | Plugin type requiring owner signature to add |
-| **Revoke** | Remove the delegate's burn authority |
-| **Permanent Burn Delegate** | Irrevocable version that persists after transfer |
-| **forceApprove** | Permanent plugin ability to override freeze restrictions |
+| **Burn Delegate** | 위임자가 Asset을 소각할 수 있게 하는 소유자 관리 플러그인 |
+| **소유자 관리** | 추가하려면 소유자 서명이 필요한 플러그인 유형 |
+| **취소** | 위임자의 소각 권한 제거 |
+| **Permanent Burn Delegate** | 전송 후에도 유지되는 취소 불가능한 버전 |
+| **forceApprove** | 동결 제한을 무시하는 영구 플러그인 기능 |

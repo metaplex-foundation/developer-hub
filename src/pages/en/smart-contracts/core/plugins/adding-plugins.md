@@ -45,7 +45,8 @@ Permanent plugins (must be added at creation), plugin removal (see [Removing Plu
 **Jump to:** [Add to Asset](#adding-a-plugin-to-a-core-asset) · [Add to Collection](#adding-a-plugin-to-a-collection) · [Custom Authority](#adding-a-plugin-with-an-assigned-authority)
 1. Choose a plugin from the [Plugins Overview](/smart-contracts/core/plugins)
 2. Call `addPlugin()` with the Asset address and plugin config
-3. Plugin is active immediately
+3. Send the transaction
+4. Plugin is active after transaction confirms
 Plugins can be assigned to both the MPL Core Asset and also the MPL Core Collection. MPL
 Core Asset and MPL Core Collection both share a similar list of available plugins. To find out which plugins can be used on each visit the [Plugins Overview](/smart-contracts/core/plugins) area.
 ## Adding a Plugin to a Core Asset
@@ -381,7 +382,7 @@ Permanent plugins can only be added at creation time. They cannot be added to ex
 | `None` | Immutable (no one can update) |
 ## FAQ
 ### Can I add multiple plugins in one transaction?
-Yes, when creating an Asset. For existing Assets, each `addPlugin` call is a separate transaction.
+Yes, when creating an Asset. For existing Assets, each `addPlugin` call is a separate instruction. Multiple instructions can be combined into one transaction.
 ### What happens if I set authority to None?
 The plugin becomes immutable. No one can update or remove it.
 ### Can I add Owner Managed plugins as the update authority?

@@ -1,7 +1,7 @@
 ---
-title: Helpers
-metaTitle: Helpers | Core
-description: Learn about the Core helper functions such as validation helpers, fetch helpers, plugin helpers, and more.
+title: 헬퍼
+metaTitle: 헬퍼 | Core
+description: 유효성 검사 헬퍼, 페치 헬퍼, 플러그인 헬퍼 등 Core 헬퍼 함수에 대해 알아봅니다.
 updated: '01-31-2026'
 keywords:
   - Core helpers
@@ -18,34 +18,34 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 ---
-{% callout type="note" title="JS Helper Functions" %}
-The following helper functions are for the JS client.
+{% callout type="note" title="JS 헬퍼 함수" %}
+다음 헬퍼 함수들은 JS 클라이언트용입니다.
 {% /callout %}
-## Fetch Helpers
-The new fetch helpers allows you the option to derive the plugins or not from each helper method.
+## 페치 헬퍼
+새로운 페치 헬퍼를 사용하면 각 헬퍼 메서드에서 플러그인을 상속할지 여부를 선택할 수 있습니다.
 ### fetchAsset()
-Fetches a single Asset.
+단일 Asset을 가져옵니다.
 ```ts
 const asset = await fetchAsset(umi, assetAddress.publicKey, {
   skipDerivePlugins: false,
 })
 ```
 ### fetchAssetsByOwner()
-Fetches all the Assets of a given owners Address.
+지정된 소유자 주소의 모든 Asset을 가져옵니다.
 ```ts
 const assetsByOwner = await fetchAssetsByOwner(umi, owner, {
   skipDerivePlugins: false,
 })
 ```
 ### fetchAssetsByCollection()
-Fetches all the Assets of a given Collection Address.
+지정된 Collection 주소의 모든 Asset을 가져옵니다.
 ```ts
 const assetsByCollection = await fetchAssetsByCollection(umi, collection, {
   skipDerivePlugins: false,
 })
 ```
 ### fetchAssetsByUpdateAuthority()
-Fetches all the Assets of a given Collection Address.
+지정된 Collection 주소의 모든 Asset을 가져옵니다.
 ```ts
 const assetsByUpdateAuthority = await fetchAssetsByUpdateAuthority(
   umi,
@@ -53,10 +53,10 @@ const assetsByUpdateAuthority = await fetchAssetsByUpdateAuthority(
   { skipDerivePlugins: false }
 )
 ```
-## Authority Helpers
-The Authority helpers allow you to pass in a `publicKey` to check with that the address has the authority over certain aspects of the Core ecosystem (Assets, Collections, and Plugins).
+## Authority 헬퍼
+Authority 헬퍼를 사용하면 `publicKey`를 전달하여 해당 주소가 Core 생태계의 특정 측면(Asset, Collection, 플러그인)에 대한 권한을 가지고 있는지 확인할 수 있습니다.
 ### hasPluginAddressAuthority()
-The `hasPluginAddressAuthority()` returns a `boolean` value based on wether the plugin passed in its authority set to an `Address` type and the `pubkey` matches.
+`hasPluginAddressAuthority()`는 전달된 플러그인의 권한이 `Address` 타입으로 설정되어 있고 `pubkey`가 일치하는지 여부에 따라 `boolean` 값을 반환합니다.
 ```ts
 export function hasPluginAddressAuthority(
   pubkey: PublicKey | string,
@@ -64,7 +64,7 @@ export function hasPluginAddressAuthority(
 )
 ```
 ### hasPluginOwnerAuthority()
-The `hasPluginOwnerAuthority()` returns a `boolean` value based on wether the plugin passed in its authority set to an `Owner` type and the `pubkey` matches.
+`hasPluginOwnerAuthority()`는 전달된 플러그인의 권한이 `Owner` 타입으로 설정되어 있고 `pubkey`가 일치하는지 여부에 따라 `boolean` 값을 반환합니다.
 ```ts
 export function hasPluginOwnerAuthority(
   pubkey: PublicKey | string,
@@ -73,7 +73,7 @@ export function hasPluginOwnerAuthority(
 )
 ```
 ### hasPluginUpdateAuthority()
-The `hasPluginUpdateAuthority()` returns a `boolean` value based on wether the plugin passed in its authority set to an `UpdateAuthority` type and the `pubkey` matches.
+`hasPluginUpdateAuthority()`는 전달된 플러그인의 권한이 `UpdateAuthority` 타입으로 설정되어 있고 `pubkey`가 일치하는지 여부에 따라 `boolean` 값을 반환합니다.
 ```ts
 export function hasPluginUpdateAuthority(
   pubkey: PublicKey | string,
@@ -83,7 +83,7 @@ export function hasPluginUpdateAuthority(
 )
 ```
 ### hasAssetUpdateAuthority()
-The `hasAssetUpdateAuthority()` returns a `boolean` value based on wether the passed in `pubkey` holds update authority over the Asset.
+`hasAssetUpdateAuthority()`는 전달된 `pubkey`가 Asset에 대한 Update Authority를 가지고 있는지 여부에 따라 `boolean` 값을 반환합니다.
 ```ts
 export function hasAssetUpdateAuthority(
   pubkey: string | PublicKey,
@@ -92,17 +92,17 @@ export function hasAssetUpdateAuthority(
 )
 ```
 ### hasCollectionUpdateAuthority()
-The `hasCollectionUpdateAuthority()` returns a `boolean` value based on wether the passed in `pubkey` holds update authority over the Collection.
+`hasCollectionUpdateAuthority()`는 전달된 `pubkey`가 Collection에 대한 Update Authority를 가지고 있는지 여부에 따라 `boolean` 값을 반환합니다.
 ```ts
 export function hasCollectionUpdateAuthority(
   pubkey: string | PublicKey,
   collection: CollectionV1
 )
 ```
-## Lifecycle Helpers
-The **Lifecycle Helpers** provide a quick and efficient way to check whether an address can perform a certain lifecycle event.
+## 라이프사이클 헬퍼
+**라이프사이클 헬퍼**는 주소가 특정 라이프사이클 이벤트를 수행할 수 있는지 빠르고 효율적으로 확인하는 방법을 제공합니다.
 ### validateTransfer()
-Returns a `boolean` value on whether the publicKey is eligible to transfer the Asset.
+publicKey가 Asset을 전송할 자격이 있는지 여부에 대한 `boolean` 값을 반환합니다.
 ```ts
 export async function validateTransfer(
   umi,
@@ -110,31 +110,31 @@ export async function validateTransfer(
 )
 ```
 ### validateBurn
-Returns a `boolean` value on whether the publicKey can burn the Asset.
+publicKey가 Asset을 번할 수 있는지 여부에 대한 `boolean` 값을 반환합니다.
 ```ts
 export async function validateBurn(umi, { authority, asset, collection })
 ```
 ### canUpdate()
-Returns a `boolean` value on whether the publicKey is eligible to update Asset.
+publicKey가 Asset을 업데이트할 자격이 있는지 여부에 대한 `boolean` 값을 반환합니다.
 ```ts
 export async function validateUpdate(
   umi,
   { authority, asset, collection }
 )
 ```
-### Plugin Helpers
+### 플러그인 헬퍼
 ### assetPluginKeyFromType()
-Convert a plugin type to a key for the asset plugins.
+플러그인 타입을 Asset 플러그인용 키로 변환합니다.
 ```ts
 export function assetPluginKeyFromType(pluginType: PluginType)
 ```
 ### pluginTypeFromAssetPluginKey()
-Convert a plugin key to a type.
+플러그인 키를 타입으로 변환합니다.
 ```ts
 export function pluginTypeFromAssetPluginKey(key: AssetPluginKey)
 ```
 ### checkPluginAuthorities()
-Check the authority for the given plugin types on an asset.
+Asset의 지정된 플러그인 타입에 대한 권한을 확인합니다.
 ```ts
 export function checkPluginAuthorities({
   authority,
@@ -143,20 +143,20 @@ export function checkPluginAuthorities({
   collection,
 })
 ```
-## State Helpers
+## 상태 헬퍼
 ### collectionAddress()
-Find the collection address for the given asset if it is part of a collection.
-Returns either a `publicKey | undefined`
+Asset이 Collection의 일부인 경우 해당 Collection 주소를 찾습니다.
+`publicKey | undefined`를 반환합니다.
 ```ts
 export function collectionAddress(asset: AssetV1)
 ```
 ### deriveAssetPlugins()
-Derive the asset plugins from the asset and collection. Plugins on the asset take precedence over plugins on the collection.
+Asset과 Collection에서 Asset 플러그인을 상속합니다. Asset의 플러그인이 Collection의 플러그인보다 우선합니다.
 ```ts
 export function deriveAssetPlugins(asset: AssetV1, collection?: CollectionV1)
 ```
 ### isFrozen()
-Returns a `boolean` on whether the Asset is frozen.
+Asset이 동결되어 있는지 여부에 대한 `boolean`을 반환합니다.
 ```ts
 export function isFrozen(asset: AssetV1, collection?: CollectionV1)
 ```

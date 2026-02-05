@@ -1,7 +1,7 @@
 ---
 title: Permanent Burn Delegate
 metaTitle: Permanent Burn Delegate | Metaplex Core
-description: Grant permanent burn authority that can destroy Assets even when frozen. Use for game mechanics, subscription expirations, and automated asset lifecycle.
+description: 授予即使在冻结状态下也能销毁Asset的永久burn权限。用于游戏机制、订阅过期和自动化资产生命周期管理。
 updated: '01-31-2026'
 keywords:
   - permanent burn
@@ -17,67 +17,67 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What's the difference between Burn Delegate and Permanent Burn Delegate?
-    a: Regular Burn Delegate cannot burn frozen Assets and is revoked on transfer. Permanent Burn Delegate can burn frozen Assets (forceApprove) and persists forever.
-  - q: Can Permanent Burn Delegate burn frozen Assets?
-    a: Yes. Permanent plugins use forceApprove, which overrides freeze rejections. This is useful for game mechanics where items must be destroyable.
-  - q: Can I add this to an existing Asset?
-    a: No. Permanent plugins can only be added at Asset creation time. Use regular Burn Delegate for existing Assets.
-  - q: How does Collection-level Permanent Burn Delegate work?
-    a: The delegate can burn any individual Asset in the Collection, but not all at once. Each burn is a separate transaction.
-  - q: Is this safe to use?
-    a: Use with caution. The delegate can burn Assets at any time without owner approval. Only assign to trusted programs or addresses.
+  - q: Burn Delegate和Permanent Burn Delegate有什么区别？
+    a: 普通Burn Delegate无法burn冻结的Asset，且在转移时会被撤销。Permanent Burn Delegate可以burn冻结的Asset（forceApprove）并永久有效。
+  - q: Permanent Burn Delegate能burn冻结的Asset吗？
+    a: 是的。Permanent plugin使用forceApprove，可以覆盖冻结拒绝。这对于需要物品可销毁的游戏机制很有用。
+  - q: 我可以将此添加到现有Asset吗？
+    a: 不可以。Permanent plugin只能在Asset创建时添加。对于现有Asset，请使用普通Burn Delegate。
+  - q: Collection级别的Permanent Burn Delegate如何工作？
+    a: delegate可以burn Collection中的任何单个Asset，但不能一次性burn所有Asset。每次burn都是单独的交易。
+  - q: 使用这个安全吗？
+    a: 请谨慎使用。delegate可以在任何时候无需所有者批准就burn Asset。只分配给可信任的程序或地址。
 ---
-The **Permanent Burn Delegate Plugin** provides irrevocable burn authority that persists forever. The delegate can burn Assets even when frozen, making it ideal for games and subscription services. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Create Assets with permanent burn capability
-- Enable collection-wide burn authority
-- Burn frozen Assets (forceApprove behavior)
-- Use cases: games, subscriptions, automated cleanup
+**Permanent Burn Delegate Plugin**提供永久有效的不可撤销burn权限。delegate即使在冻结状态下也可以burn Asset，非常适合游戏和订阅服务。 {% .lead %}
+{% callout title="学习内容" %}
+- 创建具有永久burn功能的Asset
+- 启用Collection范围的burn权限
+- burn冻结的Asset（`forceApprove`行为）
+- 用例：游戏、订阅、自动清理
 {% /callout %}
-## Summary
-The **Permanent Burn Delegate** is a permanent plugin that can only be added at creation time. The delegate can burn the Asset at any time, even when the Asset is frozen.
-- Can only be added at Asset/Collection creation
-- Authority persists forever (never revoked)
-- Uses `forceApprove` - can burn even when frozen
-- Collection-level: allows burning any Asset in the Collection
-## Out of Scope
-Regular burn delegate (see [Burn Delegate](/smart-contracts/core/plugins/burn-delegate)), conditional burns, and Token Metadata burn authority.
-## Quick Start
-**Jump to:** [Create Asset](#creating-an-asset-with-a-permanent-burn-plugin)
-1. Add `PermanentBurnDelegate` plugin at Asset/Collection creation
-2. Set the authority to your program or delegate address
-3. The delegate can burn the Asset at any time, even if frozen
-{% callout type="note" title="Permanent vs Regular Burn Delegate" %}
-| Feature | Burn Delegate | Permanent Burn Delegate |
+## 概述
+**Permanent Burn Delegate**是一个只能在创建时添加的permanent plugin。delegate可以在任何时候burn Asset，即使Asset处于冻结状态。
+- 只能在Asset/Collection创建时添加
+- 权限永久有效（永不撤销）
+- 使用`forceApprove` - 即使冻结也可以burn
+- Collection级别：允许burn Collection中的任何Asset
+## 范围外
+普通burn delegate（参见[Burn Delegate](/zh/smart-contracts/core/plugins/burn-delegate)）、条件burn和Token Metadata burn权限。
+## 快速开始
+**跳转到:** [创建Asset](#creating-an-asset-with-a-permanent-burn-plugin)
+1. 在Asset/Collection创建时添加`PermanentBurnDelegate` plugin
+2. 将authority设置为您的程序或delegate地址
+3. delegate可以在任何时候burn Asset，即使冻结
+{% callout type="note" title="Permanent vs 普通Burn Delegate" %}
+| 功能 | Burn Delegate | Permanent Burn Delegate |
 |---------|---------------|-------------------------|
-| Add after creation | ✅ Yes | ❌ Creation only |
-| Authority persists on transfer | ❌ Revokes | ✅ Persists forever |
-| Can burn frozen Assets | ❌ No | ✅ Yes (forceApprove) |
-| Works with Collections | ❌ No | ✅ Yes |
-| Emergency destruction | ❌ Limited | ✅ Best choice |
-**Choose [Burn Delegate](/smart-contracts/core/plugins/burn-delegate)** for user-revocable burn permissions.
-**Choose Permanent Burn Delegate** for games, emergency destruction, or automated cleanup.
+| 创建后添加 | ✅ 可以 | ❌ 仅限创建时 |
+| 转移后权限保留 | ❌ 撤销 | ✅ 永久保留 |
+| 可以burn冻结的Asset | ❌ 不可以 | ✅ 可以（forceApprove） |
+| 适用于Collection | ❌ 不可以 | ✅ 可以 |
+| 紧急销毁 | ❌ 有限 | ✅ 最佳选择 |
+**选择[Burn Delegate](/zh/smart-contracts/core/plugins/burn-delegate)**：用于用户可撤销的burn权限。
+**选择Permanent Burn Delegate**：用于游戏、紧急销毁或自动清理。
 {% /callout %}
-## Common Use Cases
-- **Game mechanics**: Destroy Assets when items are consumed, lost, or destroyed in-game
-- **Subscription expiration**: Auto-burn expired subscription tokens even if frozen
-- **Emergency destruction**: Remove compromised or unwanted Assets regardless of state
-- **Crafting systems**: Burn ingredient NFTs when crafting (even if locked)
-- **Time-limited assets**: Automatically destroy expired content
-- **Compliance**: Remove Assets that violate terms, even if owner tries to freeze them
-## Works With
+## 常见用例
+- **游戏机制**：当游戏中物品被消耗、丢失或销毁时销毁Asset
+- **订阅过期**：即使冻结也自动burn过期的订阅代币
+- **紧急销毁**：无论状态如何，删除受损或不需要的Asset
+- **制作系统**：制作时burn原料NFT（即使锁定）
+- **限时资产**：自动销毁过期内容
+- **合规**：即使所有者尝试冻结，也删除违反条款的Asset
+## 兼容性
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-### Behaviours
-- **Asset**: Allows burning of the Asset using the delegated address.
-- **Collection**: Allows burning of any Asset in the collection using the collection authority. It does not burn all at once.
-## Arguments
-The Permanent Burn Plugin doesn't contain any arguments to pass in.
-## Creating an Asset with a Permanent Burn Plugin
-{% dialect-switcher title="Creating an Asset with a Permanent Freeze plugin" %}
+### 行为
+- **Asset**：允许使用delegated地址burn Asset。
+- **Collection**：允许使用collection authority burn Collection中的任何Asset。不会一次性burn所有Asset。
+## 参数
+Permanent Burn Plugin没有需要传入的参数。
+## 创建带有Permanent Burn Plugin的Asset
+{% dialect-switcher title="创建带有Permanent Freeze plugin的Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -136,35 +136,35 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Cannot add permanent plugin after creation`
-Permanent plugins can only be added at Asset/Collection creation. You cannot add a Permanent Burn Delegate to an existing Asset.
+Permanent plugin只能在Asset/Collection创建时添加。您无法将Permanent Burn Delegate添加到现有Asset。
 ### `Authority mismatch`
-Only the plugin authority can burn. Verify you're signing with the correct keypair.
-## Notes
-- **Creation only**: Cannot be added after Asset/Collection exists
-- **Force approve**: Can burn even when frozen
-- **Collection behavior**: Can burn any Asset in the Collection individually
-- **Persists forever**: Authority is never revoked
-- **Irreversible**: Burned Assets cannot be recovered
+只有plugin authority可以burn。请验证您是否使用正确的密钥对签名。
+## 注意事项
+- **仅限创建时**：Asset/Collection存在后无法添加
+- **Force approve**：即使冻结也可以burn
+- **Collection行为**：可以单独burn Collection中的任何Asset
+- **永久有效**：权限永不撤销
+- **不可逆**：burn的Asset无法恢复
 ## FAQ
-### What's the difference between Burn Delegate and Permanent Burn Delegate?
-Regular Burn Delegate cannot burn frozen Assets and is revoked on transfer. Permanent Burn Delegate can burn frozen Assets (forceApprove) and persists forever.
-### Can Permanent Burn Delegate burn frozen Assets?
-Yes. Permanent plugins use `forceApprove`, which overrides freeze rejections. This is useful for game mechanics where items must be destroyable.
-### Can I add this to an existing Asset?
-No. Permanent plugins can only be added at Asset creation time. Use regular Burn Delegate for existing Assets.
-### How does Collection-level Permanent Burn Delegate work?
-The delegate can burn any individual Asset in the Collection, but not all at once. Each burn is a separate transaction.
-### Is this safe to use?
-Use with caution. The delegate can burn Assets at any time without owner approval. Only assign to trusted programs or addresses.
-## Related Plugins
-- [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - Revocable burn authority
-- [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) - Permanent freeze authority
-- [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate) - Permanent transfer authority
-## Glossary
-| Term | Definition |
+### Burn Delegate和Permanent Burn Delegate有什么区别？
+普通Burn Delegate无法burn冻结的Asset，且在转移时会被撤销。Permanent Burn Delegate可以burn冻结的Asset（forceApprove）并永久有效。
+### Permanent Burn Delegate能burn冻结的Asset吗？
+是的。Permanent plugin使用`forceApprove`，可以覆盖冻结拒绝。这对于需要物品可销毁的游戏机制很有用。
+### 我可以将此添加到现有Asset吗？
+不可以。Permanent plugin只能在Asset创建时添加。对于现有Asset，请使用普通Burn Delegate。
+### Collection级别的Permanent Burn Delegate如何工作？
+delegate可以burn Collection中的任何单个Asset，但不能一次性burn所有Asset。每次burn都是单独的交易。
+### 使用这个安全吗？
+请谨慎使用。delegate可以在任何时候无需所有者批准就burn Asset。只分配给可信任的程序或地址。
+## 相关Plugin
+- [Burn Delegate](/zh/smart-contracts/core/plugins/burn-delegate) - 可撤销的burn权限
+- [Permanent Freeze Delegate](/zh/smart-contracts/core/plugins/permanent-freeze-delegate) - 永久freeze权限
+- [Permanent Transfer Delegate](/zh/smart-contracts/core/plugins/permanent-transfer-delegate) - 永久transfer权限
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Permanent Plugin** | Plugin that can only be added at creation and persists forever |
-| **forceApprove** | Validation that overrides other plugin rejections |
-| **Collection Burn** | Ability to burn any Asset in a Collection |
+| **Permanent Plugin** | 只能在创建时添加且永久有效的Plugin |
+| **forceApprove** | 覆盖其他plugin拒绝的验证 |
+| **Collection Burn** | burn Collection中任何Asset的能力 |

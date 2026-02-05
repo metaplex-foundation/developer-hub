@@ -652,7 +652,7 @@ The Oracle account address is invalid or doesn't exist. Verify the base address 
 ### `Invalid results offset`
 The ValidationResultsOffset doesn't match your Oracle account structure. Use `Anchor` for Anchor programs, `NoOffset` for raw accounts.
 ## Notes
-- Oracle accounts are external—you deploy and maintain them
+- Oracle accounts are external. You deploy and maintain them
 - Validation is read-only: Core reads the Oracle, doesn't write to it
 - Use cron jobs or event listeners to update Oracle state dynamically
 - PDA derivation allows per-asset, per-owner, or per-collection oracles

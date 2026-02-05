@@ -200,7 +200,7 @@ Permanent plugins can only be added at Asset/Collection creation. You cannot add
 ### `Authority mismatch`
 Only the plugin authority can freeze/thaw. Verify you're signing with the correct keypair.
 ## Notes
-- **Creation only**: Cannot be added after Asset/Collection exists
+- **On creation only**: Cannot be added after Asset/Collection exists
 - **Force approve**: Can freeze even with conflicting plugins
 - **Collection behavior**: Freezes all Assets at once, not individually
 - **Persists forever**: Authority is never revoked, even after transfers

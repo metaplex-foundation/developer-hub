@@ -1,7 +1,7 @@
 ---
-title: Getting Started
-metaTitle: Genesis - Getting Started | Token Launch Flow
-description: Understand the Genesis token launch flow. Learn the steps from initialization to distribution and how to plan your launch.
+title: 시작하기
+metaTitle: Genesis - 시작하기 | 토큰 출시 흐름
+description: Genesis 토큰 출시 흐름을 이해하세요. 초기화부터 배포까지의 단계와 출시 계획 방법을 배웁니다.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -16,30 +16,30 @@ about:
   - Token distribution
 proficiencyLevel: Beginner
 faqs:
-  - q: What does initializing a Genesis Account create?
-    a: It creates a new SPL token with metadata, a master coordination account, and holds the total token supply in escrow for distribution.
-  - q: Can I add more buckets after finalizing?
-    a: No. Finalization is permanent. You cannot add more buckets or change configurations after finalizing.
-  - q: What's the difference between inflow and outflow buckets?
-    a: Inflow buckets collect SOL from users (Launch Pool, Presale). Outflow buckets receive tokens or SOL for team/treasury claims.
-  - q: When does the launch become active?
-    a: After finalization, the launch activates based on your bucket time conditions (start timestamps).
-  - q: How do I calculate token supply with decimals?
-    a: Multiply your desired supply by 10^decimals. For 1 million tokens with 9 decimals, use 1,000,000,000,000,000.
+  - q: Genesis Account 초기화 시 무엇이 생성되나요?
+    a: 메타데이터가 포함된 새로운 SPL 토큰, 마스터 조정 계정, 그리고 배포를 위해 에스크로에 보관되는 전체 토큰 공급량이 생성됩니다.
+  - q: Finalize 후에 Bucket을 더 추가할 수 있나요?
+    a: 아니요. Finalize는 영구적입니다. Finalize 후에는 Bucket을 더 추가하거나 구성을 변경할 수 없습니다.
+  - q: Inflow와 Outflow Bucket의 차이점은 무엇인가요?
+    a: Inflow Bucket은 사용자로부터 SOL을 수집합니다 (Launch Pool, Presale). Outflow Bucket은 팀/재무 청구를 위해 토큰 또는 SOL을 받습니다.
+  - q: 출시는 언제 활성화되나요?
+    a: Finalize 후, Bucket 시간 조건(시작 타임스탬프)에 따라 출시가 활성화됩니다.
+  - q: 소수점이 있는 토큰 공급량은 어떻게 계산하나요?
+    a: 원하는 공급량에 10^소수점을 곱합니다. 소수점 9자리의 100만 토큰의 경우 1,000,000,000,000,000을 사용합니다.
 ---
 
-Understand the Genesis token launch flow before building. This guide explains each step from initialization to distribution, helping you plan your launch. {% .lead %}
+빌드하기 전에 Genesis 토큰 출시 흐름을 이해하세요. 이 가이드는 초기화부터 배포까지 각 단계를 설명하여 출시 계획에 도움을 줍니다. {% .lead %}
 
-{% callout title="Ready to Build?" %}
-Once you understand the flow:
-- **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - Installation and function reference
-- **[Launch Pool](/smart-contracts/genesis/launch-pool)** - Complete tutorial for proportional distribution
-- **[Presale](/smart-contracts/genesis/presale)** - Complete tutorial for fixed-price sales
+{% callout title="빌드할 준비가 되셨나요?" %}
+흐름을 이해했다면:
+- **[JavaScript SDK](/ko/smart-contracts/genesis/sdk/javascript)** - 설치 및 함수 참조
+- **[Launch Pool](/ko/smart-contracts/genesis/launch-pool)** - 비례 배분을 위한 전체 튜토리얼
+- **[Presale](/ko/smart-contracts/genesis/presale)** - 고정 가격 판매를 위한 전체 튜토리얼
 {% /callout %}
 
-## The Genesis Flow
+## Genesis 흐름
 
-Every Genesis launch follows this lifecycle:
+모든 Genesis 출시는 다음 생명주기를 따릅니다:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -78,48 +78,48 @@ Every Genesis launch follows this lifecycle:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Step 1: Initialize
+## 1단계: 초기화
 
-**What happens:** You create a Genesis Account which mints your token and holds the entire supply in escrow.
+**진행 사항:** 토큰을 발행하고 전체 공급량을 에스크로에 보관하는 Genesis Account를 생성합니다.
 
-**You provide:**
-- Token metadata (name, symbol, URI)
-- Total supply (with decimals)
-- Quote token (usually wSOL)
+**제공해야 할 것:**
+- 토큰 메타데이터 (이름, 심볼, URI)
+- 총 공급량 (소수점 포함)
+- Quote 토큰 (일반적으로 wSOL)
 
-**Result:** A new SPL token exists, controlled by the Genesis Account until distribution.
+**결과:** 새로운 SPL 토큰이 생성되어 배포 시까지 Genesis Account가 관리합니다.
 
-### Token Supply Planning
+### 토큰 공급량 계획
 
-SPL tokens use 9 decimals by default:
+SPL 토큰은 기본적으로 9자리 소수점을 사용합니다:
 
-| Desired Supply | With 9 Decimals |
+| 원하는 공급량 | 9자리 소수점 적용 시 |
 |----------------|-----------------|
-| 1 token | 1,000,000,000 |
-| 1,000 tokens | 1,000,000,000,000 |
-| 1 million tokens | 1,000,000,000,000,000 |
-| 1 billion tokens | 1,000,000,000,000,000,000 |
+| 1 토큰 | 1,000,000,000 |
+| 1,000 토큰 | 1,000,000,000,000 |
+| 100만 토큰 | 1,000,000,000,000,000 |
+| 10억 토큰 | 1,000,000,000,000,000,000 |
 
-**Important:** Your total supply must equal the sum of all bucket allocations.
+**중요:** 총 공급량은 모든 Bucket 할당량의 합과 같아야 합니다.
 
-## Step 2: Add Buckets
+## 2단계: Bucket 추가
 
-**What happens:** You configure how tokens will be distributed by adding buckets.
+**진행 사항:** Bucket을 추가하여 토큰 배포 방식을 구성합니다.
 
-### Bucket Types
+### Bucket 유형
 
-| Bucket | Type | Purpose |
+| Bucket | 유형 | 목적 |
 |--------|------|---------|
-| **Launch Pool** | Inflow | Proportional distribution based on deposits |
-| **Presale** | Inflow | Fixed-price sale up to a cap |
-| **Unlocked** | Outflow | Treasury that receives raised funds |
+| **Launch Pool** | Inflow | 예치금에 따른 비례 배분 |
+| **Presale** | Inflow | 상한까지의 고정 가격 판매 |
+| **Unlocked** | Outflow | 모금된 자금을 받는 재무 |
 
-### Example Configuration
+### 구성 예시
 
-A typical launch uses:
+일반적인 출시는 다음을 사용합니다:
 
-1. **Inflow bucket** (Launch Pool OR Presale) - Collects SOL from participants
-2. **Outflow bucket** (Unlocked) - Receives collected SOL for team/treasury
+1. **Inflow Bucket** (Launch Pool 또는 Presale) - 참가자로부터 SOL 수집
+2. **Outflow Bucket** (Unlocked) - 팀/재무를 위해 수집된 SOL 수령
 
 ```
 Token Allocation Example (1 million tokens):
@@ -130,136 +130,136 @@ Fund Flow:
 Users deposit SOL → Launch Pool → End Behavior → Unlocked Bucket → Team claims
 ```
 
-### Time Conditions
+### 시간 조건
 
-Each bucket has four time conditions:
+각 Bucket에는 네 가지 시간 조건이 있습니다:
 
-| Condition | Controls |
+| 조건 | 제어 내용 |
 |-----------|----------|
-| Deposit Start | When users can begin depositing |
-| Deposit End | When deposits close |
-| Claim Start | When users can claim tokens |
-| Claim End | When claims close |
+| Deposit Start | 사용자가 예치를 시작할 수 있는 시점 |
+| Deposit End | 예치가 마감되는 시점 |
+| Claim Start | 사용자가 토큰을 청구할 수 있는 시점 |
+| Claim End | 청구가 마감되는 시점 |
 
-Use Unix timestamps (seconds, not milliseconds).
+Unix 타임스탬프를 사용합니다 (밀리초가 아닌 초 단위).
 
-## Step 3: Finalize
+## 3단계: Finalize
 
-**What happens:** Configuration locks permanently. The launch activates based on time conditions.
+**진행 사항:** 구성이 영구적으로 잠깁니다. 시간 조건에 따라 출시가 활성화됩니다.
 
-### Before vs After Finalization
+### Finalize 전후 비교
 
-| Before | After |
+| 전 | 후 |
 |--------|-------|
-| Can add buckets | No more buckets |
-| Can modify settings | Settings locked |
-| Launch inactive | Launch active (per time conditions) |
+| Bucket 추가 가능 | 더 이상 Bucket 추가 불가 |
+| 설정 수정 가능 | 설정 잠김 |
+| 출시 비활성 | 출시 활성 (시간 조건에 따름) |
 
 {% callout type="warning" %}
-**Finalization is irreversible.** Triple-check your bucket allocations, time conditions, and end behaviors before finalizing.
+**Finalize는 되돌릴 수 없습니다.** Finalize 전에 Bucket 할당, 시간 조건, 종료 동작을 세 번 확인하세요.
 {% /callout %}
 
-## Step 4: Deposit Period
+## 4단계: 예치 기간
 
-**What happens:** Users deposit SOL into your inflow bucket(s).
+**진행 사항:** 사용자가 Inflow Bucket에 SOL을 예치합니다.
 
-- **Launch Pool:** Users deposit SOL, can withdraw with 2% fee
-- **Presale:** Users deposit SOL at fixed price, up to cap
+- **Launch Pool:** 사용자가 SOL을 예치하고, {% fee product="genesis" config="launchPool" fee="withdraw" /%} 수수료로 출금 가능
+- **Presale:** 사용자가 고정 가격으로 SOL을 예치하며, 사용자당 예치 상한(각 사용자가 기여할 수 있는 최대 금액)까지 가능
 
-A 2% protocol fee applies to all deposits.
+모든 예치에 {% fee product="genesis" config="launchPool" fee="deposit" /%} 프로토콜 수수료가 적용됩니다.
 
-## Step 5: Transition
+## 5단계: Transition
 
-**What happens:** After deposits close, execute end behaviors to route funds.
+**진행 사항:** 예치가 마감된 후, 종료 동작을 실행하여 자금을 라우팅합니다.
 
-Common end behavior: Send 100% of collected SOL to the Unlocked bucket (treasury).
+일반적인 종료 동작: 수집된 SOL의 100%를 Unlocked Bucket (재무)으로 전송합니다.
 
-You can split funds across multiple destinations:
-- 80% to treasury
-- 20% to liquidity pool bucket
+여러 목적지로 자금을 분할할 수 있습니다:
+- 80%는 재무로
+- 20%는 유동성 풀 Bucket으로
 
-## Step 6: Claim Period
+## 6단계: 청구 기간
 
-**What happens:**
-- Users claim tokens based on their deposit
-- Team claims raised SOL from the Unlocked bucket
+**진행 사항:**
+- 사용자가 예치금에 따라 토큰을 청구합니다
+- 팀이 Unlocked Bucket에서 모금된 SOL을 청구합니다
 
-### Token Distribution
+### 토큰 배분
 
-**Launch Pool:** `userTokens = (userDeposit / totalDeposits) × bucketAllocation`
+**Launch Pool:** `사용자 토큰 = (사용자 예치금 / 총 예치금) × Bucket 할당량`
 
-**Presale:** `userTokens = userDeposit / pricePerToken`
+**Presale:** `사용자 토큰 = 사용자 예치금 / 토큰당 가격`
 
-## Step 7: Post-Launch (Optional)
+## 7단계: 출시 후 (선택 사항)
 
-**What happens:** Revoke token authorities for security.
+**진행 사항:** 보안을 위해 토큰 권한을 폐기합니다.
 
-- **Mint authority** - Revoke so no more tokens can ever be minted
-- **Freeze authority** - Revoke so tokens can never be frozen
+- **Mint authority** - 더 이상 토큰을 발행할 수 없도록 폐기
+- **Freeze authority** - 토큰을 동결할 수 없도록 폐기
 
-This signals to holders and rug checkers that the token supply is fixed.
+이는 보유자와 러그 체커에게 토큰 공급량이 고정되었음을 알려줍니다.
 
 {% callout type="warning" %}
-Authority revocation is irreversible. Only do this when your launch is complete.
+권한 폐기는 되돌릴 수 없습니다. 출시가 완료되었을 때만 이 작업을 수행하세요.
 {% /callout %}
 
-## Common Errors
+## 일반적인 오류
 
-| Error | Cause | Solution |
+| 오류 | 원인 | 해결 방법 |
 |-------|-------|----------|
-| `already finalized` | Trying to modify after finalize | Create new Genesis Account |
-| `invalid total supply` | Bucket allocations don't match supply | Ensure allocations sum to total |
-| `time conditions overlap` | Conflicting timestamps | Use sequential time windows |
-| `deposit period not active` | Outside deposit window | Check timestamps |
+| `already finalized` | Finalize 후 수정 시도 | 새 Genesis Account 생성 |
+| `invalid total supply` | Bucket 할당량이 공급량과 불일치 | 할당량 합계가 총량과 일치하는지 확인 |
+| `time conditions overlap` | 타임스탬프 충돌 | 순차적인 시간 창 사용 |
+| `deposit period not active` | 예치 창 외부 | 타임스탬프 확인 |
 
-## Planning Checklist
+## 계획 체크리스트
 
-Before you start building:
+빌드를 시작하기 전에:
 
-- [ ] Decide on launch mechanism (Launch Pool vs Presale)
-- [ ] Calculate total token supply with decimals
-- [ ] Plan bucket allocations (must sum to total supply)
-- [ ] Set time windows (deposit start/end, claim start/end)
-- [ ] Decide end behaviors (where do funds go?)
-- [ ] Prepare token metadata (name, symbol, image URI)
+- [ ] 출시 메커니즘 결정 (Launch Pool vs Presale)
+- [ ] 소수점이 포함된 총 토큰 공급량 계산
+- [ ] Bucket 할당 계획 (총 공급량과 합이 일치해야 함)
+- [ ] 시간 창 설정 (예치 시작/종료, 청구 시작/종료)
+- [ ] 종료 동작 결정 (자금은 어디로 가는가?)
+- [ ] 토큰 메타데이터 준비 (이름, 심볼, 이미지 URI)
 
 ## FAQ
 
-### What does initializing a Genesis Account create?
-It creates a new SPL token with metadata, a master coordination account (the Genesis Account PDA), and mints the total supply to be held in escrow for distribution.
+### Genesis Account 초기화 시 무엇이 생성되나요?
+메타데이터가 포함된 새로운 SPL 토큰, 마스터 조정 계정 (Genesis Account PDA), 그리고 배포를 위해 에스크로에 보관되는 총 공급량이 발행됩니다.
 
-### Can I add more buckets after finalizing?
-No. Finalization is permanent. You cannot add more buckets or change configurations. Plan your complete bucket structure before finalizing.
+### Finalize 후에 Bucket을 더 추가할 수 있나요?
+아니요. Finalize는 영구적입니다. Bucket을 더 추가하거나 구성을 변경할 수 없습니다. Finalize 전에 완전한 Bucket 구조를 계획하세요.
 
-### What's the difference between inflow and outflow buckets?
-**Inflow buckets** collect SOL from users (Launch Pool, Presale). **Outflow buckets** receive tokens or SOL via end behaviors—typically an Unlocked Bucket for team/treasury claims.
+### Inflow와 Outflow Bucket의 차이점은 무엇인가요?
+**Inflow Bucket**은 사용자로부터 SOL을 수집합니다 (Launch Pool, Presale). **Outflow Bucket**은 종료 동작을 통해 토큰 또는 SOL을 받습니다—일반적으로 팀/재무 청구를 위한 Unlocked Bucket입니다.
 
-### When does the launch become active?
-After finalization, the launch activates based on your bucket time conditions. Users can participate when the current time is within a bucket's deposit window.
+### 출시는 언제 활성화되나요?
+Finalize 후, Bucket 시간 조건에 따라 출시가 활성화됩니다. 현재 시간이 Bucket의 예치 창 내에 있을 때 사용자가 참여할 수 있습니다.
 
-### How do I calculate token supply with decimals?
-Multiply your desired supply by 10^decimals. For 1 million tokens with 9 decimals: 1,000,000 × 1,000,000,000 = 1,000,000,000,000,000.
+### 소수점이 있는 토큰 공급량은 어떻게 계산하나요?
+원하는 공급량에 10^소수점을 곱합니다. 소수점 9자리의 100만 토큰의 경우: 1,000,000 × 1,000,000,000 = 1,000,000,000,000,000.
 
-### Can I use a token other than SOL for deposits?
-Yes. Set `quoteMint` to any SPL token. However, wSOL is standard for SOL-denominated launches.
+### SOL 이외의 토큰을 예치에 사용할 수 있나요?
+예. `quoteMint`를 아무 SPL 토큰으로 설정할 수 있습니다. 그러나 SOL 단위 출시에는 wSOL이 표준입니다.
 
-## Glossary
+## 용어집
 
-| Term | Definition |
+| 용어 | 정의 |
 |------|------------|
-| **Genesis Account** | PDA that coordinates the launch and holds tokens |
-| **Inflow Bucket** | Bucket that collects deposits from users |
-| **Outflow Bucket** | Bucket that receives funds via end behaviors |
-| **Finalize** | Lock configuration and activate the launch |
-| **Time Condition** | Unix timestamp controlling bucket phases |
-| **End Behavior** | Automated action when deposit period ends |
-| **Transition** | Instruction that executes end behaviors |
-| **Quote Token** | Token users deposit (usually wSOL) |
+| **Genesis Account** | 출시를 조정하고 토큰을 보관하는 PDA |
+| **Inflow Bucket** | 사용자로부터 예치금을 수집하는 Bucket |
+| **Outflow Bucket** | 종료 동작을 통해 자금을 받는 Bucket |
+| **Finalize** | 구성을 잠그고 출시를 활성화 |
+| **Time Condition** | Bucket 단계를 제어하는 Unix 타임스탬프 |
+| **End Behavior** | 예치 기간 종료 시 자동화된 동작 |
+| **Transition** | 종료 동작을 실행하는 명령 |
+| **Quote Token** | 사용자가 예치하는 토큰 (일반적으로 wSOL) |
 
-## Next Steps
+## 다음 단계
 
-Ready to build? Choose your launch type:
+빌드할 준비가 되셨나요? 출시 유형을 선택하세요:
 
-1. **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - Install and configure
-2. **[Launch Pool Tutorial](/smart-contracts/genesis/launch-pool)** - Proportional distribution
-3. **[Presale Tutorial](/smart-contracts/genesis/presale)** - Fixed-price sale
+1. **[JavaScript SDK](/ko/smart-contracts/genesis/sdk/javascript)** - 설치 및 구성
+2. **[Launch Pool 튜토리얼](/ko/smart-contracts/genesis/launch-pool)** - 비례 배분
+3. **[Presale 튜토리얼](/ko/smart-contracts/genesis/presale)** - 고정 가격 판매

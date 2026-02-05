@@ -1,7 +1,7 @@
 ---
-title: Delegating and Revoking Plugins
-metaTitle: Delegating and Revoking Plugin Authority | Metaplex Core
-description: Learn how to delegate and revoke plugin authorities on Core Assets. Change who controls plugins and make plugin data immutable.
+title: 委托和撤销插件
+metaTitle: 委托和撤销插件权限 | Metaplex Core
+description: 了解如何在 Core Asset 上委托和撤销插件权限。更改谁控制插件并使插件数据不可变。
 updated: '01-31-2026'
 keywords:
   - delegate plugin
@@ -17,40 +17,40 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What's the difference between revoking and removing a plugin?
-    a: Revoking only changes who controls the plugin - the plugin and its data remain. Removing deletes the plugin entirely.
-  - q: Can I delegate to multiple addresses?
-    a: No. Each plugin has only one authority at a time. Delegating to a new address replaces the previous authority.
-  - q: What happens to delegated plugins when I transfer an Asset?
-    a: Owner Managed plugins automatically revoke back to Owner authority. Authority Managed plugins remain unchanged.
-  - q: Can I undo setting authority to None?
-    a: No. Setting authority to None makes the plugin permanently immutable. This cannot be reversed.
-  - q: Can a delegate revoke themselves?
-    a: Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
+  - q: 撤销和删除插件有什么区别？
+    a: 撤销只改变谁控制插件——插件及其数据保持不变。删除会完全移除插件。
+  - q: 可以委托给多个地址吗？
+    a: 不可以。每个插件一次只有一个权限者。委托给新地址会替换之前的权限者。
+  - q: 转移 Asset 时委托的插件会怎样？
+    a: 所有者管理的插件会自动撤销回 Owner 权限。权限管理的插件保持不变。
+  - q: 设置权限为 None 后可以撤销吗？
+    a: 不可以。设置权限为 None 会使插件永久不可变。这无法逆转。
+  - q: 委托人可以撤销自己吗？
+    a: 可以。被委托的权限者可以撤销自己的访问权限，这会将控制权返回给默认的权限类型。
 ---
-This guide shows how to **delegate and revoke plugin authorities** on Core Assets. Transfer control of plugins to other addresses or make plugin data permanently immutable. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Delegate plugin authority to another address
-- Revoke delegated authority
-- Understand revocation behavior for different plugin types
-- Make plugin data immutable
+本指南展示如何在 Core Asset 上**委托和撤销插件权限**。将插件控制权转移给其他地址或使插件数据永久不可变。{% .lead %}
+{% callout title="学习内容" %}
+- 将插件权限委托给另一个地址
+- 撤销已委托的权限
+- 了解不同插件类型的撤销行为
+- 使插件数据不可变
 {% /callout %}
-## Summary
-Delegate plugin authority using `approvePluginAuthority()` and revoke with `revokePluginAuthority()`. Different plugin types have different revocation behaviors.
-- **Owner Managed**: Revokes back to `Owner` authority
-- **Authority Managed**: Revokes back to `UpdateAuthority`
-- Set authority to `None` to make plugin immutable
-- Owner Managed plugins auto-revoke on Asset transfer
-## Out of Scope
-Plugin removal (see [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)), adding plugins (see [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)), and permanent plugin authority changes.
-## Quick Start
-**Jump to:** [Delegate Authority](#delegating-an-authority) · [Revoke Authority](#revoking-an-authority) · [Make Immutable](#making-plugin-data-immutable)
-1. Call `approvePluginAuthority()` with the new authority address
-2. To revoke: call `revokePluginAuthority()`
-3. To make immutable: set authority to `None`
-## Delegating an Authority
-Plugins can be delegated to another address with a Delegate Authority instruction update. Delegated plugins allow addresses other than the main authority to have control over that plugins functionality.
-{% dialect-switcher title="Delegate a Plugin Authority" %}
+## 摘要
+使用 `approvePluginAuthority()` 委托插件权限，使用 `revokePluginAuthority()` 撤销。不同的插件类型有不同的撤销行为。
+- **所有者管理**：撤销回 `Owner` 权限
+- **权限管理**：撤销回 `UpdateAuthority`
+- 设置权限为 `None` 使插件不可变
+- 所有者管理的插件在 Asset 转移时自动撤销
+## 范围外
+插件删除（见[删除插件](/smart-contracts/core/plugins/removing-plugins)）、添加插件（见[添加插件](/smart-contracts/core/plugins/adding-plugins)）和永久插件权限更改。
+## 快速开始
+**跳转至：** [委托权限](#委托权限) · [撤销权限](#撤销权限) · [设为不可变](#使插件数据不可变)
+1. 使用新权限地址调用 `approvePluginAuthority()`
+2. 要撤销：调用 `revokePluginAuthority()`
+3. 要设为不可变：将权限设为 `None`
+## 委托权限
+插件可以通过委托权限指令更新委托给另一个地址。委托的插件允许主要权限者以外的地址控制该插件的功能。
+{% dialect-switcher title="委托插件权限" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -103,20 +103,20 @@ pub async fn delegate_plugin_authority() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Revoking an Authority
-Revoking an Authority on a plugin results in different behaviours depending on the plugin type that's being revoked.
-- **Owner Managed Plugins:** If an address is revoked from an `Owner Managed Plugin` then the plugin will default back to the `Owner` authority type.
-- **Authority Managed Plugins:** If an address is revoked from an `Authority Managed Plugin` then the plugin will default back to the `UpdateAuthority` authority type.
-### Who can Revoke a Plugin?
-#### Owner Managed Plugins
-- An Owner Managed Plugin can be revoked by the owner which revokes the delegate and sets the pluginAuthority type to `Owner`.
-- The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `Owner`.
-- On Transfer, delegated Authorities of owner managed plugins are automatically revoked back to the `Owner Authority` type.
-#### Authority Managed Plugins
-- The Update Authority of an Asset can revoke a delegate which thens sets the pluginAuthority type to `UpdateAuthority`.
-- The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `UpdateAuthority`.
-A list of plugins and their types can be viewed on the [Plugins Overview](/smart-contracts/core/plugins) page.
-{% dialect-switcher title="Revoking a Plugin Authority" %}
+## 撤销权限
+撤销插件权限会根据被撤销的插件类型产生不同的行为。
+- **所有者管理的插件**：如果从`所有者管理的插件`撤销一个地址，那么插件将默认返回 `Owner` 权限类型。
+- **权限管理的插件**：如果从`权限管理的插件`撤销一个地址，那么插件将默认返回 `UpdateAuthority` 权限类型。
+### 谁可以撤销插件？
+#### 所有者管理的插件
+- 所有者可以撤销所有者管理的插件，这会撤销委托并将 pluginAuthority 类型设置为 `Owner`。
+- 插件的被委托权限者可以撤销自己，这会将插件权限类型设置为 `Owner`。
+- 在转移时，所有者管理插件的被委托权限者会自动撤销回 `Owner Authority` 类型。
+#### 权限管理的插件
+- Asset 的更新权限者可以撤销委托，这会将 pluginAuthority 类型设置为 `UpdateAuthority`。
+- 插件的被委托权限者可以撤销自己，这会将插件权限类型设置为 `UpdateAuthority`。
+插件及其类型的列表可以在[插件概述](/smart-contracts/core/plugins)页面查看。
+{% dialect-switcher title="撤销插件权限" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -159,18 +159,18 @@ pub async fn revoke_plugin_authority() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Delegate Resets Upon Asset Transfer
-All Owner Managed plugins will have their delegated authorities revoked and set back to the authority type of `Owner` upon Transfer of an Asset.
-This includes:
+### Asset 转移时委托重置
+所有所有者管理的插件在 Asset 转移时，其被委托的权限者会被撤销并设置回 `Owner` 权限类型。
+这包括：
 - Freeze Delegate
 - Transfer Delegate
 - Burn Delegate
-## Making Plugin Data Immutable
-By updating your plugin's authority to a `None` value will effectively make your plugin's data immutable.
+## 使插件数据不可变
+通过将插件权限更新为 `None` 值，将有效地使插件数据不可变。
 {% callout type="warning" %}
-**WARNING** - Doing so will leave your plugin data immutable. Proceed with caution!
+**警告** - 这样做会使您的插件数据不可变。请谨慎操作！
 {% /callout %}
-{% dialect-switcher title="Making a Plugin Immutable" %}
+{% dialect-switcher title="使插件不可变" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -219,50 +219,50 @@ pub async fn make_plugin_data_immutable() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Authority mismatch`
-You don't have permission to delegate or revoke this plugin. Only the current authority can delegate; only owner/authority can revoke.
+您没有委托或撤销此插件的权限。只有当前权限者可以委托；只有所有者/权限者可以撤销。
 ### `Plugin not found`
-The Asset/Collection doesn't have this plugin type attached.
+Asset/Collection 没有附加此插件类型。
 ### `Cannot revoke None authority`
-A plugin with `None` authority is immutable. There's no authority to revoke.
-## Notes
-- Delegation transfers control but doesn't remove the original authority's ability to revoke
-- Setting authority to `None` is permanent and irreversible
-- Owner Managed plugins auto-revoke when the Asset transfers to a new owner
-- Revocation returns authority to the default type (Owner or UpdateAuthority)
-## Quick Reference
-### Revocation Behavior by Plugin Type
-| Plugin Type | Revokes To |
+权限为 `None` 的插件是不可变的。没有权限可以撤销。
+## 注意事项
+- 委托转移控制权但不移除原权限者撤销的能力
+- 设置权限为 `None` 是永久且不可逆的
+- 所有者管理的插件在 Asset 转移给新所有者时自动撤销
+- 撤销将权限返回给默认类型（Owner 或 UpdateAuthority）
+## 快速参考
+### 按插件类型的撤销行为
+| 插件类型 | 撤销到 |
 |-------------|------------|
-| Owner Managed | `Owner` authority |
-| Authority Managed | `UpdateAuthority` |
-### Who Can Delegate/Revoke
-| Action | Owner Managed | Authority Managed |
+| 所有者管理 | `Owner` 权限 |
+| 权限管理 | `UpdateAuthority` |
+### 谁可以委托/撤销
+| 操作 | 所有者管理 | 权限管理 |
 |--------|---------------|-------------------|
-| Delegate | Owner | Update Authority |
-| Revoke | Owner or Delegate | Update Authority or Delegate |
-## FAQ
-### What's the difference between revoking and removing a plugin?
-Revoking only changes who controls the plugin—the plugin and its data remain. Removing deletes the plugin entirely.
-### Can I delegate to multiple addresses?
-No. Each plugin has only one authority at a time. Delegating to a new address replaces the previous authority.
-### What happens to delegated plugins when I transfer an Asset?
-Owner Managed plugins automatically revoke back to `Owner` authority. Authority Managed plugins remain unchanged.
-### Can I undo setting authority to None?
-No. Setting authority to `None` makes the plugin permanently immutable. This cannot be reversed.
-### Can a delegate revoke themselves?
-Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
-## Related Operations
-- [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) - Add plugins to Assets/Collections
-- [Removing Plugins](/smart-contracts/core/plugins/removing-plugins) - Delete plugins entirely
-- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
-- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
-## Glossary
-| Term | Definition |
+| 委托 | 所有者 | 更新权限者 |
+| 撤销 | 所有者或委托人 | 更新权限者或委托人 |
+## 常见问题
+### 撤销和删除插件有什么区别？
+撤销只改变谁控制插件——插件及其数据保持不变。删除会完全移除插件。
+### 可以委托给多个地址吗？
+不可以。每个插件一次只有一个权限者。委托给新地址会替换之前的权限者。
+### 转移 Asset 时委托的插件会怎样？
+所有者管理的插件会自动撤销回 `Owner` 权限。权限管理的插件保持不变。
+### 设置权限为 None 后可以撤销吗？
+不可以。设置权限为 `None` 会使插件永久不可变。这无法逆转。
+### 委托人可以撤销自己吗？
+可以。被委托的权限者可以撤销自己的访问权限，这会将控制权返回给默认的权限类型。
+## 相关操作
+- [添加插件](/smart-contracts/core/plugins/adding-plugins) - 向 Asset/Collection 添加插件
+- [删除插件](/smart-contracts/core/plugins/removing-plugins) - 完全删除插件
+- [更新插件](/smart-contracts/core/plugins/update-plugins) - 修改插件数据
+- [插件概述](/smart-contracts/core/plugins) - 可用插件的完整列表
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Delegate** | Address given temporary control of a plugin |
-| **Revoke** | Remove delegated authority, returning to default |
-| **None Authority** | Special authority type making plugin immutable |
-| **Auto-revoke** | Automatic revocation of Owner Managed plugins on transfer |
-| **Plugin Authority** | Current address with control over a plugin |
+| **委托人** | 被授予插件临时控制权的地址 |
+| **撤销** | 移除被委托的权限，返回默认值 |
+| **None 权限** | 使插件不可变的特殊权限类型 |
+| **自动撤销** | 转移时所有者管理插件的自动撤销 |
+| **插件权限** | 当前控制插件的地址 |

@@ -1,7 +1,7 @@
 ---
-title: Removing Plugins
-metaTitle: Removing Plugins | Metaplex Core
-description: Learn how to remove plugins from Core NFT Assets and Collections. Remove functionality and recover rent from plugin accounts.
+title: プラグインの削除
+metaTitle: プラグインの削除 | Metaplex Core
+description: Core NFT Asset と Collection からプラグインを削除する方法を学びます。機能を削除し、プラグインアカウントからレントを回収します。
 updated: '01-31-2026'
 keywords:
   - remove plugin
@@ -17,40 +17,40 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Can I recover the data after removing a plugin?
-    a: No. Removing a plugin permanently deletes all its data. Make sure to back up any important data before removal.
-  - q: What happens to the rent when I remove a plugin?
-    a: The rent that was used to store the plugin data is recovered and returned to the payer.
-  - q: Can I remove a plugin someone else delegated to me?
-    a: Yes, if you're the delegated authority for that plugin, you can remove it.
-  - q: Why can't I remove a Permanent plugin?
-    a: Permanent plugins are designed to be immutable and cannot be removed after creation. This is by design for use cases that require guaranteed permanence.
-  - q: Can I remove a plugin from a Collection and its Assets at once?
-    a: No. Collection plugins and Asset plugins are managed separately. Removing a Collection plugin only affects the Collection, not its Assets.
+  - q: プラグインを削除した後、データを復元できますか？
+    a: いいえ。プラグインを削除するとすべてのデータが完全に削除されます。削除前に重要なデータをバックアップしてください。
+  - q: プラグインを削除するとレントはどうなりますか？
+    a: プラグインデータの保存に使用されていたレントは回収され、支払者に返還されます。
+  - q: 他の人が委任したプラグインを削除できますか？
+    a: はい。そのプラグインの委任された権限者であれば削除できます。
+  - q: Permanent プラグインを削除できないのはなぜですか？
+    a: Permanent プラグインは作成後に削除できません。ただし、設定は引き続き調整できます。これは、プラグインの存在を保証する必要があるユースケースのための設計です。
+  - q: Collection とその Asset のプラグインを一度に削除できますか？
+    a: いいえ。Collection プラグインと Asset プラグインは個別に管理されます。ただし、Collection プラグインを削除すると、そこから継承している Asset に影響を与える可能性があります（例：独自の Royalties プラグインを持たない Asset はロイヤリティが適用されなくなります）。
 ---
-This guide shows how to **remove plugins** from Core Assets and Collections. Removing a plugin deletes its data and functionality. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Remove plugins from Assets
-- Remove plugins from Collections
-- Understand authority requirements for removal
-- Recover rent from removed plugins
+このガイドでは、Core Asset と Collection から**プラグインを削除**する方法を説明します。プラグインを削除すると、そのデータと機能が削除されます。 {% .lead %}
+{% callout title="学習内容" %}
+- Asset からプラグインを削除
+- Collection からプラグインを削除
+- 削除に必要な権限要件を理解
+- 削除したプラグインからレントを回収
 {% /callout %}
-## Summary
-Remove plugins using `removePlugin()` for Assets or `removeCollectionPlugin()` for Collections. Only the plugin authority can remove a plugin.
-- Specify the plugin type to remove
-- Plugin data is deleted
-- Rent is recovered
-- Permanent plugins cannot be removed
-## Out of Scope
-Permanent plugin removal (not possible), plugin updates (see [Updating Plugins](/smart-contracts/core/plugins/update-plugins)), and authority changes (see [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins)).
-## Quick Start
-**Jump to:** [Remove from Asset](#removing-a-plugin-from-a-mpl-core-asset) · [Remove from Collection](#removing-a-plugin-from-a-collection)
-1. Identify the plugin type to remove
-2. Call `removePlugin()` with the Asset and plugin type
-3. Plugin is removed immediately
-Plugins can also be removed from MPL Core Assets and MPL Core Collections.
-## Removing a Plugin from a MPL Core Asset
-{% dialect-switcher title="Removing a Plugin from a MPL Core Asset" %}
+## 概要
+Asset には `removePlugin()`、Collection には `removeCollectionPlugin()` を使用してプラグインを削除します。プラグインを削除できるのはプラグイン権限者のみです。
+- 削除するプラグインタイプを指定
+- プラグインデータは削除される
+- レントは回収される
+- Permanent プラグインは削除不可
+## 対象外
+Permanent プラグインの削除（不可能）、プラグインの更新（[プラグインの更新](/ja/smart-contracts/core/plugins/update-plugins)を参照）、権限の変更（[プラグインの委任](/ja/smart-contracts/core/plugins/delegating-and-revoking-plugins)を参照）。
+## クイックスタート
+**ジャンプ先:** [Asset から削除](#mpl-core-asset-からプラグインを削除) · [Collection から削除](#collection-からプラグインを削除)
+1. 削除するプラグインタイプを特定
+2. Asset とプラグインタイプを指定して `removePlugin()` を呼び出す
+3. プラグインは即座に削除される
+プラグインは MPL Core Asset と MPL Core Collection からも削除できます。
+## MPL Core Asset からプラグインを削除
+{% dialect-switcher title="MPL Core Asset からプラグインを削除" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -94,8 +94,8 @@ pub async fn remove_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Removing a Plugin from a Collection
-{% dialect-switcher title="Removing a Plugin from a MPL Core Collection" %}
+## Collection からプラグインを削除
+{% dialect-switcher title="MPL Core Collection からプラグインを削除" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -142,46 +142,46 @@ pub async fn remove_collection_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## よくあるエラー
 ### `Authority mismatch`
-You don't have permission to remove this plugin. Check who has authority over the plugin.
+このプラグインを削除する権限がありません。誰がプラグインの権限を持っているか確認してください。
 ### `Plugin not found`
-The Asset/Collection doesn't have this plugin type attached.
+Asset/Collection にこのプラグインタイプがアタッチされていません。
 ### `Cannot remove permanent plugin`
-Permanent plugins cannot be removed after creation. They are permanently attached.
-## Notes
-- Removing a plugin deletes all its data
-- Rent from the removed plugin is recovered
-- Only the plugin authority can remove a plugin
-- Permanent plugins can never be removed
-## Quick Reference
-### Removal Authority Requirements
-| Plugin Type | Who Can Remove |
+Permanent プラグインは作成後に削除できません。永続的にアタッチされています。
+## 注意事項
+- プラグインを削除するとすべてのデータが削除される
+- 削除されたプラグインのレントは回収される
+- プラグイン権限者のみがプラグインを削除できる
+- Permanent プラグインは削除不可
+## クイックリファレンス
+### 削除権限の要件
+| プラグインタイプ | 削除できる人 |
 |-------------|----------------|
-| Owner Managed | Owner or delegate |
-| Authority Managed | Update authority or delegate |
-| Permanent | Cannot be removed |
+| Owner Managed | 所有者または委任者 |
+| Authority Managed | Update authority または委任者 |
+| Permanent | 削除不可 |
 ## FAQ
-### Can I recover the data after removing a plugin?
-No. Removing a plugin permanently deletes all its data. Make sure to back up any important data before removal.
-### What happens to the rent when I remove a plugin?
-The rent that was used to store the plugin data is recovered and returned to the payer.
-### Can I remove a plugin someone else delegated to me?
-Yes, if you're the delegated authority for that plugin, you can remove it.
-### Why can't I remove a Permanent plugin?
-Permanent plugins are designed to be immutable and cannot be removed after creation. This is by design for use cases that require guaranteed permanence.
-### Can I remove a plugin from a Collection and its Assets at once?
-No. Collection plugins and Asset plugins are managed separately. Removing a Collection plugin only affects the Collection, not its Assets.
-## Related Operations
-- [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) - Add plugins to Assets/Collections
-- [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins) - Change plugin authorities
-- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
-- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
-## Glossary
-| Term | Definition |
+### プラグインを削除した後、データを復元できますか？
+いいえ。プラグインを削除するとすべてのデータが完全に削除されます。削除前に重要なデータをバックアップしてください。
+### プラグインを削除するとレントはどうなりますか？
+プラグインデータの保存に使用されていたレントは回収され、支払者に返還されます。
+### 他の人が委任したプラグインを削除できますか？
+はい。そのプラグインの委任された権限者であれば削除できます。
+### Permanent プラグインを削除できないのはなぜですか？
+Permanent プラグインは作成後に削除できません。ただし、設定は引き続き調整できます。これは、プラグインの存在を保証する必要があるユースケースのための設計です。
+### Collection とその Asset のプラグインを一度に削除できますか？
+いいえ。Collection プラグインと Asset プラグインは個別に管理されます。ただし、Collection プラグインを削除すると、そこから継承している Asset に影響を与える可能性があります（例：独自の Royalties プラグインを持たない Asset はロイヤリティが適用されなくなります）。
+## 関連操作
+- [プラグインの追加](/ja/smart-contracts/core/plugins/adding-plugins) - Asset/Collection にプラグインを追加
+- [プラグインの委任](/ja/smart-contracts/core/plugins/delegating-and-revoking-plugins) - プラグイン権限の変更
+- [プラグインの更新](/ja/smart-contracts/core/plugins/update-plugins) - プラグインデータの変更
+- [プラグイン概要](/ja/smart-contracts/core/plugins) - 利用可能なプラグインの完全なリスト
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Plugin Authority** | Address with permission to manage the plugin |
-| **Permanent Plugin** | Plugin that cannot be removed after creation |
-| **Rent** | SOL deposited to store account data on Solana |
-| **Owner Managed** | Plugin where owner controls removal |
-| **Authority Managed** | Plugin where update authority controls removal |
+| **Plugin Authority** | プラグインを管理する権限を持つアドレス |
+| **Permanent Plugin** | 作成後に削除できないプラグイン |
+| **Rent** | Solana でアカウントデータを保存するために預けられる SOL |
+| **Owner Managed** | 所有者が削除を制御するプラグイン |
+| **Authority Managed** | Update authority が削除を制御するプラグイン |

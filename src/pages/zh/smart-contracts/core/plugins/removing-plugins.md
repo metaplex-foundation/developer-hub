@@ -1,7 +1,7 @@
 ---
-title: Removing Plugins
-metaTitle: Removing Plugins | Metaplex Core
-description: Learn how to remove plugins from Core NFT Assets and Collections. Remove functionality and recover rent from plugin accounts.
+title: 移除插件
+metaTitle: 移除插件 | Metaplex Core
+description: 了解如何从 Core NFT Asset 和 Collection 中移除插件。移除功能并从插件账户中回收租金。
 updated: '01-31-2026'
 keywords:
   - remove plugin
@@ -17,40 +17,40 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Can I recover the data after removing a plugin?
-    a: No. Removing a plugin permanently deletes all its data. Make sure to back up any important data before removal.
-  - q: What happens to the rent when I remove a plugin?
-    a: The rent that was used to store the plugin data is recovered and returned to the payer.
-  - q: Can I remove a plugin someone else delegated to me?
-    a: Yes, if you're the delegated authority for that plugin, you can remove it.
-  - q: Why can't I remove a Permanent plugin?
-    a: Permanent plugins are designed to be immutable and cannot be removed after creation. This is by design for use cases that require guaranteed permanence.
-  - q: Can I remove a plugin from a Collection and its Assets at once?
-    a: No. Collection plugins and Asset plugins are managed separately. Removing a Collection plugin only affects the Collection, not its Assets.
+  - q: 移除插件后可以恢复数据吗？
+    a: 不可以。移除插件会永久删除所有数据。请在移除前备份重要数据。
+  - q: 移除插件时租金会怎样？
+    a: 用于存储插件数据的租金会被回收并返还给支付者。
+  - q: 我可以移除别人委托给我的插件吗？
+    a: 可以，如果您是该插件的委托权限者，就可以移除它。
+  - q: 为什么不能移除 Permanent 插件？
+    a: Permanent 插件在创建后无法移除，但其设置仍可调整。这是为需要保证插件存在的用例而设计的。
+  - q: 可以同时移除 Collection 及其 Asset 的插件吗？
+    a: 不可以。Collection 插件和 Asset 插件是分开管理的。但是，移除 Collection 插件可能会影响从其继承的 Asset（例如，没有自己 Royalties 插件的 Asset 将不再执行版税）。
 ---
-This guide shows how to **remove plugins** from Core Assets and Collections. Removing a plugin deletes its data and functionality. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Remove plugins from Assets
-- Remove plugins from Collections
-- Understand authority requirements for removal
-- Recover rent from removed plugins
+本指南展示如何从 Core Asset 和 Collection 中**移除插件**。移除插件会删除其数据和功能。 {% .lead %}
+{% callout title="您将学到" %}
+- 从 Asset 移除插件
+- 从 Collection 移除插件
+- 理解移除所需的权限要求
+- 从已移除的插件回收租金
 {% /callout %}
-## Summary
-Remove plugins using `removePlugin()` for Assets or `removeCollectionPlugin()` for Collections. Only the plugin authority can remove a plugin.
-- Specify the plugin type to remove
-- Plugin data is deleted
-- Rent is recovered
-- Permanent plugins cannot be removed
-## Out of Scope
-Permanent plugin removal (not possible), plugin updates (see [Updating Plugins](/smart-contracts/core/plugins/update-plugins)), and authority changes (see [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins)).
-## Quick Start
-**Jump to:** [Remove from Asset](#removing-a-plugin-from-a-mpl-core-asset) · [Remove from Collection](#removing-a-plugin-from-a-collection)
-1. Identify the plugin type to remove
-2. Call `removePlugin()` with the Asset and plugin type
-3. Plugin is removed immediately
-Plugins can also be removed from MPL Core Assets and MPL Core Collections.
-## Removing a Plugin from a MPL Core Asset
-{% dialect-switcher title="Removing a Plugin from a MPL Core Asset" %}
+## 摘要
+使用 `removePlugin()` 从 Asset 移除插件，使用 `removeCollectionPlugin()` 从 Collection 移除。只有插件权限者可以移除插件。
+- 指定要移除的插件类型
+- 插件数据被删除
+- 租金被回收
+- Permanent 插件无法移除
+## 范围外
+Permanent 插件移除（不可能）、插件更新（参见[更新插件](/zh/smart-contracts/core/plugins/update-plugins)）和权限变更（参见[委托插件](/zh/smart-contracts/core/plugins/delegating-and-revoking-plugins)）。
+## 快速开始
+**跳转至：** [从 Asset 移除](#从-mpl-core-asset-移除插件) · [从 Collection 移除](#从-collection-移除插件)
+1. 确定要移除的插件类型
+2. 使用 Asset 和插件类型调用 `removePlugin()`
+3. 插件立即被移除
+也可以从 MPL Core Asset 和 MPL Core Collection 中移除插件。
+## 从 MPL Core Asset 移除插件
+{% dialect-switcher title="从 MPL Core Asset 移除插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -94,8 +94,8 @@ pub async fn remove_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Removing a Plugin from a Collection
-{% dialect-switcher title="Removing a Plugin from a MPL Core Collection" %}
+## 从 Collection 移除插件
+{% dialect-switcher title="从 MPL Core Collection 移除插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -142,46 +142,46 @@ pub async fn remove_collection_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Authority mismatch`
-You don't have permission to remove this plugin. Check who has authority over the plugin.
+您没有权限移除此插件。检查谁拥有该插件的权限。
 ### `Plugin not found`
-The Asset/Collection doesn't have this plugin type attached.
+Asset/Collection 没有附加此插件类型。
 ### `Cannot remove permanent plugin`
-Permanent plugins cannot be removed after creation. They are permanently attached.
-## Notes
-- Removing a plugin deletes all its data
-- Rent from the removed plugin is recovered
-- Only the plugin authority can remove a plugin
-- Permanent plugins can never be removed
-## Quick Reference
-### Removal Authority Requirements
-| Plugin Type | Who Can Remove |
+Permanent 插件在创建后无法移除。它们是永久附加的。
+## 注意事项
+- 移除插件会删除所有数据
+- 已移除插件的租金会被回收
+- 只有插件权限者可以移除插件
+- Permanent 插件永远无法移除
+## 快速参考
+### 移除权限要求
+| 插件类型 | 可移除者 |
 |-------------|----------------|
-| Owner Managed | Owner or delegate |
-| Authority Managed | Update authority or delegate |
-| Permanent | Cannot be removed |
+| Owner Managed | 所有者或委托者 |
+| Authority Managed | Update authority 或委托者 |
+| Permanent | 无法移除 |
 ## FAQ
-### Can I recover the data after removing a plugin?
-No. Removing a plugin permanently deletes all its data. Make sure to back up any important data before removal.
-### What happens to the rent when I remove a plugin?
-The rent that was used to store the plugin data is recovered and returned to the payer.
-### Can I remove a plugin someone else delegated to me?
-Yes, if you're the delegated authority for that plugin, you can remove it.
-### Why can't I remove a Permanent plugin?
-Permanent plugins are designed to be immutable and cannot be removed after creation. This is by design for use cases that require guaranteed permanence.
-### Can I remove a plugin from a Collection and its Assets at once?
-No. Collection plugins and Asset plugins are managed separately. Removing a Collection plugin only affects the Collection, not its Assets.
-## Related Operations
-- [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) - Add plugins to Assets/Collections
-- [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins) - Change plugin authorities
-- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
-- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
-## Glossary
-| Term | Definition |
+### 移除插件后可以恢复数据吗？
+不可以。移除插件会永久删除所有数据。请在移除前备份重要数据。
+### 移除插件时租金会怎样？
+用于存储插件数据的租金会被回收并返还给支付者。
+### 我可以移除别人委托给我的插件吗？
+可以，如果您是该插件的委托权限者，就可以移除它。
+### 为什么不能移除 Permanent 插件？
+Permanent 插件在创建后无法移除，但其设置仍可调整。这是为需要保证插件存在的用例而设计的。
+### 可以同时移除 Collection 及其 Asset 的插件吗？
+不可以。Collection 插件和 Asset 插件是分开管理的。但是，移除 Collection 插件可能会影响从其继承的 Asset（例如，没有自己 Royalties 插件的 Asset 将不再执行版税）。
+## 相关操作
+- [添加插件](/zh/smart-contracts/core/plugins/adding-plugins) - 向 Asset/Collection 添加插件
+- [委托插件](/zh/smart-contracts/core/plugins/delegating-and-revoking-plugins) - 更改插件权限
+- [更新插件](/zh/smart-contracts/core/plugins/update-plugins) - 修改插件数据
+- [插件概述](/zh/smart-contracts/core/plugins) - 可用插件完整列表
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Plugin Authority** | Address with permission to manage the plugin |
-| **Permanent Plugin** | Plugin that cannot be removed after creation |
-| **Rent** | SOL deposited to store account data on Solana |
-| **Owner Managed** | Plugin where owner controls removal |
-| **Authority Managed** | Plugin where update authority controls removal |
+| **Plugin Authority** | 有权管理插件的地址 |
+| **Permanent Plugin** | 创建后无法移除的插件 |
+| **Rent** | 在 Solana 上存储账户数据所需存入的 SOL |
+| **Owner Managed** | 由所有者控制移除的插件 |
+| **Authority Managed** | 由 update authority 控制移除的插件 |

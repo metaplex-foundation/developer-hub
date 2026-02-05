@@ -1,7 +1,7 @@
 ---
 title: Presale
-metaTitle: Genesis - Presale | Fixed-Price Token Sale | Metaplex
-description: Fixed-price token sale where users deposit SOL and receive tokens at a predetermined rate. Set your price upfront with controlled distribution.
+metaTitle: Genesis - Presale | 固定価格トークン販売 | Metaplex
+description: ユーザーが SOL を入金し、事前に決められたレートでトークンを受け取る固定価格トークン販売。価格を事前に設定し、制御された配布を実現します。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -20,80 +20,80 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 howToSteps:
-  - Initialize a Genesis Account with your token allocation
-  - Add a Presale bucket with price and cap configuration
-  - Add an Unlocked bucket for collected funds
-  - Finalize and open the presale for deposits
+  - トークン割り当てで Genesis Account を初期化する
+  - 価格と上限を設定した Presale bucket を追加する
+  - 収集した資金用の Unlocked bucket を追加する
+  - ファイナライズして Presale を入金可能にする
 howToTools:
   - Node.js
   - Umi framework
   - Genesis SDK
 faqs:
-  - q: How is the token price calculated in a Presale?
-    a: Price equals SOL cap divided by token allocation. For 1,000,000 tokens with a 100 SOL cap, the price is 0.0001 SOL per token.
-  - q: What happens if the SOL cap isn't reached?
-    a: Users still receive tokens proportional to their deposits. If only 50 SOL is deposited against a 100 SOL cap, depositors receive 50% of allocated tokens.
-  - q: Can I set deposit limits per user?
-    a: Yes. Use minimumDepositAmount for minimum per-transaction limits and depositLimit for maximum total deposit per user.
-  - q: What's the difference between Presale and Launch Pool?
-    a: Presale has a fixed price determined by token allocation and SOL cap. Launch Pool discovers price organically based on total deposits.
-  - q: When should I use Presale vs Launch Pool?
-    a: Use Presale when you want predictable pricing and know exactly how much you want to raise. Use Launch Pool for organic price discovery.
+  - q: Presale でのトークン価格はどのように計算されますか？
+    a: 価格は SOL 上限をトークン割り当てで割った値です。1,000,000 トークンで 100 SOL の上限の場合、価格は 1 トークンあたり 0.0001 SOL になります。
+  - q: SOL の上限に達しなかった場合はどうなりますか？
+    a: ユーザーは入金額に比例してトークンを受け取ります。100 SOL の上限に対して 50 SOL しか入金されなかった場合、入金者は割り当てトークンの 50% を受け取ります。
+  - q: ユーザーごとの入金上限を設定できますか？
+    a: はい。minimumDepositAmount でトランザクションごとの最低額を、depositLimit でユーザーごとの最大入金総額を設定できます。
+  - q: Presale と Launch Pool の違いは何ですか？
+    a: Presale はトークン割り当てと SOL 上限で決定される固定価格です。Launch Pool は入金総額に基づいて価格が自然に決定されます。
+  - q: Presale と Launch Pool のどちらを使うべきですか？
+    a: 予測可能な価格設定が必要で、調達額を正確に把握したい場合は Presale を使用してください。自然な価格発見には Launch Pool を使用してください。
 ---
 
-**Presales** offer fixed-price token distribution. Set your token price upfront based on allocation and SOL cap—users know exactly what they're getting, and you know exactly what you'll raise. {% .lead %}
+**Presale** は固定価格でのトークン配布を提供します。割り当てと SOL 上限に基づいてトークン価格を事前に設定します。ユーザーは受け取る量を正確に把握でき、あなたは調達額を正確に把握できます。 {% .lead %}
 
-{% callout title="What You'll Learn" %}
-This guide covers:
-- How Presale pricing works (allocation + cap = price)
-- Setting up deposit windows and claim periods
-- Configuring deposit limits and cooldowns
-- User operations: wrap SOL, deposit, and claim
+{% callout title="学習内容" %}
+このガイドでは以下を説明します：
+- Presale の価格設定の仕組み（割り当て + 上限 = 価格）
+- 入金ウィンドウと請求期間の設定
+- 入金上限とクールダウンの設定
+- ユーザー操作：SOL のラップ、入金、請求
 {% /callout %}
 
-## Summary
+## 概要
 
-Presales sell tokens at a predetermined price. The price is calculated from the token allocation and SOL cap you configure.
+Presale は事前に決められた価格でトークンを販売します。価格は設定したトークン割り当てと SOL 上限から計算されます。
 
-- Fixed price = SOL cap / token allocation
-- Users deposit SOL during the deposit window (2% fee applies)
-- First-come-first-served up to the SOL cap
-- Optional: minimum/maximum deposit limits, cooldowns, backend authorization
+- 固定価格 = SOL 上限 / トークン割り当て
+- ユーザーは入金ウィンドウ中に SOL を入金（{% fee product="genesis" config="presale" fee="deposit" /%} の手数料が適用）
+- SOL 上限まで先着順
+- オプション：最低/最大入金上限、クールダウン、バックエンド認証
 
-## Out of Scope
+## 対象外
 
-Organic price discovery (see [Launch Pool](/smart-contracts/genesis/launch-pool)), bid-based auctions (see [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)), and vesting schedules.
+自然な価格発見（[Launch Pool](/smart-contracts/genesis/launch-pool) を参照）、入札ベースのオークション（[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) を参照）、およびべスティングスケジュールは本ガイドの対象外です。
 
-## How It Works
+## 仕組み
 
-1. You allocate tokens to the Presale with a SOL cap that determines the fixed price
-2. Users deposit SOL during the deposit window at the fixed rate
-3. After the deposit period ends, you execute the transition to move funds
-4. Users claim their tokens based on their deposit amount
+1. SOL 上限で固定価格を決定し、Presale にトークンを割り当てる
+2. ユーザーが入金ウィンドウ中に固定レートで SOL を入金する
+3. 入金期間終了後、Transition を実行して資金を移動する
+4. ユーザーが入金額に基づいてトークンを請求する
 
-### Price Calculation
+### 価格計算
 
-The token price is determined by the ratio of allocated tokens to the SOL cap:
+トークン価格は割り当てトークン数と SOL 上限の比率で決まります：
 
 ```
 price = allocationQuoteTokenCap / baseTokenAllocation
 tokens = deposit / price
 ```
 
-For example, if you allocate 1,000,000 tokens with a 100 SOL cap:
-- Price = 100 SOL / 1,000,000 tokens = 0.0001 SOL per token
-- A 10 SOL deposit receives 100,000 tokens
+例えば、1,000,000 トークンを 100 SOL の上限で割り当てた場合：
+- 価格 = 100 SOL / 1,000,000 トークン = 1 トークンあたり 0.0001 SOL
+- 10 SOL の入金で 100,000 トークンを受け取る
 
-### Fees
+### 手数料
 
 {% protocol-fees program="genesis" config="presale" showTitle=false /%}
 
-## Quick Start
+## クイックスタート
 
 {% totem %}
-{% totem-accordion title="View complete setup Script" %}
+{% totem-accordion title="完全なセットアップスクリプトを表示" %}
 
-This shows how to setup a Presale with Start and End Dates. You can also add a minimum deposit amount and a maximum deposit amount or a backend signer. To build the user-facing app, see [User Operations](#user-operations).
+開始日と終了日を設定した Presale のセットアップ方法を示します。最低入金額、最大入金額、またはバックエンド署名者を追加することもできます。ユーザー向けアプリを構築するには、[ユーザー操作](#user-operations)を参照してください。
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -228,9 +228,9 @@ setupPresale().catch(console.error);
 {% /totem-accordion %}
 {% /totem %}
 
-## Setup Guide
+## セットアップガイド
 
-### Prerequisites
+### 前提条件
 
 {% totem %}
 
@@ -240,9 +240,9 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 
 {% /totem %}
 
-### 1. Initialize the Genesis Account
+### 1. Genesis Account の初期化
 
-The Genesis Account creates your token and coordinates all distribution buckets.
+Genesis Account はトークンを作成し、すべての配布 bucket を調整します。
 
 {% totem %}
 
@@ -283,12 +283,12 @@ await initializeV2(umi, {
 {% /totem %}
 
 {% callout type="note" %}
-The `totalSupplyBaseToken` should equal the sum of all bucket allocations.
+`totalSupplyBaseToken` はすべての bucket 割り当ての合計と一致する必要があります。
 {% /callout %}
 
-### 2. Add the Presale Bucket
+### 2. Presale Bucket の追加
 
-The Presale bucket collects deposits and distributes tokens. Configure timing and optional limits here.
+Presale bucket は入金を収集し、トークンを配布します。タイミングとオプションの上限をここで設定します。
 
 {% totem %}
 
@@ -361,9 +361,9 @@ await addPresaleBucketV2(umi, {
 
 {% /totem %}
 
-### 3. Add the Unlocked Bucket
+### 3. Unlocked Bucket の追加
 
-The Unlocked bucket receives SOL from the Presale after the transition.
+Unlocked bucket は Transition 後に Presale から SOL を受け取ります。
 
 {% totem %}
 
@@ -396,9 +396,9 @@ await addUnlockedBucketV2(umi, {
 
 {% /totem %}
 
-### 4. Finalize
+### 4. ファイナライズ
 
-Once all buckets are configured, finalize to activate the presale. This is irreversible.
+すべての bucket が設定されたら、ファイナライズして Presale を有効化します。この操作は元に戻せません。
 
 {% totem %}
 
@@ -413,11 +413,11 @@ await finalizeV2(umi, {
 
 {% /totem %}
 
-## User Operations
+## ユーザー操作
 
-### Wrapping SOL
+### SOL のラップ
 
-Users must wrap SOL to wSOL before depositing.
+ユーザーは入金前に SOL を wSOL にラップする必要があります。
 
 {% totem %}
 
@@ -453,7 +453,7 @@ await createTokenIfMissing(umi, {
 
 {% /totem %}
 
-### Depositing
+### 入金
 
 {% totem %}
 
@@ -483,11 +483,11 @@ console.log('Deposited (after fee):', deposit.amountQuoteToken);
 
 {% /totem %}
 
-Multiple deposits from the same user accumulate into a single deposit account.
+同じユーザーからの複数回の入金は、1 つの入金アカウントに累積されます。
 
-### Claiming Tokens
+### トークンの請求
 
-After the deposit period ends and claims open:
+入金期間が終了し、請求が開始された後：
 
 {% totem %}
 
@@ -504,13 +504,13 @@ await claimPresaleV2(umi, {
 
 {% /totem %}
 
-Token allocation: `userTokens = (userDeposit / allocationQuoteTokenCap) * baseTokenAllocation`
+トークン割り当て：`userTokens = (userDeposit / allocationQuoteTokenCap) * baseTokenAllocation`
 
-## Admin Operations
+## 管理者操作
 
-### Executing the Transition
+### Transition の実行
 
-After deposits close, execute the transition to move collected SOL to the unlocked bucket.
+入金が締め切られた後、Transition を実行して収集した SOL を Unlocked bucket に移動します。
 
 {% totem %}
 
@@ -538,34 +538,34 @@ await transitionV2(umi, {
 
 {% /totem %}
 
-**Why this matters:** Without transition, collected SOL stays locked in the Presale bucket. Users can still claim tokens, but the team cannot access the raised funds.
+**これが重要な理由：** Transition を実行しないと、収集した SOL は Presale bucket にロックされたままになります。ユーザーはトークンを請求できますが、チームは調達した資金にアクセスできません。
 
-## Reference
+## リファレンス
 
-### Configuration Options
+### 設定オプション
 
-These options are set when creating the Presale bucket:
+これらのオプションは Presale bucket の作成時に設定します：
 
-| Option | Description | Example |
+| オプション | 説明 | 例 |
 |--------|-------------|---------|
-| `minimumDepositAmount` | Minimum deposit per transaction | `{ amount: sol(0.1).basisPoints }` |
-| `depositLimit` | Maximum total deposit per user | `{ limit: sol(10).basisPoints }` |
-| `depositCooldown` | Time between deposits | `{ seconds: 60n }` |
-| `perCooldownDepositLimit` | Max deposit per cooldown period | `{ amount: sol(1).basisPoints }` |
-| `backendSigner` | Require backend authorization | `{ signer: publicKey }` |
+| `minimumDepositAmount` | トランザクションごとの最低入金額 | `{ amount: sol(0.1).basisPoints }` |
+| `depositLimit` | ユーザーごとの最大入金総額 | `{ limit: sol(10).basisPoints }` |
+| `depositCooldown` | 入金間の待機時間 | `{ seconds: 60n }` |
+| `perCooldownDepositLimit` | クールダウン期間ごとの最大入金額 | `{ amount: sol(1).basisPoints }` |
+| `backendSigner` | バックエンド認証の要求 | `{ signer: publicKey }` |
 
-### Time Conditions
+### Time Condition
 
-Four conditions control presale timing:
+4 つの条件で Presale のタイミングを制御します：
 
-| Condition | Purpose |
+| 条件 | 目的 |
 |-----------|---------|
-| `depositStartCondition` | When deposits open |
-| `depositEndCondition` | When deposits close |
-| `claimStartCondition` | When claims open |
-| `claimEndCondition` | When claims close |
+| `depositStartCondition` | 入金が開始されるタイミング |
+| `depositEndCondition` | 入金が締め切られるタイミング |
+| `claimStartCondition` | 請求が開始されるタイミング |
+| `claimEndCondition` | 請求が締め切られるタイミング |
 
-Use `TimeAbsolute` with a Unix timestamp:
+Unix タイムスタンプで `TimeAbsolute` を使用します：
 
 {% totem %}
 
@@ -582,9 +582,9 @@ const condition = {
 
 {% /totem %}
 
-### End Behaviors
+### End Behavior
 
-Define what happens to collected SOL after the deposit period:
+入金期間後に収集した SOL の処理方法を定義します：
 
 {% totem %}
 
@@ -602,9 +602,9 @@ endBehaviors: [
 
 {% /totem %}
 
-### Fetching State
+### 状態の取得
 
-**Bucket state:**
+**Bucket の状態：**
 
 {% totem %}
 
@@ -620,7 +620,7 @@ console.log('SOL cap:', bucket.allocationQuoteTokenCap);
 
 {% /totem %}
 
-**Deposit state:**
+**入金の状態：**
 
 {% totem %}
 
@@ -639,46 +639,46 @@ if (deposit) {
 
 {% /totem %}
 
-## Notes
+## 注意事項
 
-- The 2% protocol fee applies to deposits
-- Users must wrap SOL to wSOL before depositing
-- Multiple deposits from the same user accumulate in one deposit account
-- The transition must be executed after deposits close for the team to access funds
-- Finalization is permanent—double-check all configuration before calling `finalizeV2`
+- 入金には {% fee product="genesis" config="presale" fee="deposit" /%} のプロトコル手数料が適用されます
+- ユーザーは入金前に SOL を wSOL にラップする必要があります
+- 同じユーザーからの複数回の入金は 1 つの入金アカウントに累積されます
+- チームが資金にアクセスするには、入金締め切り後に Transition を実行する必要があります
+- ファイナライズは永続的です。`finalizeV2` を呼び出す前にすべての設定を十分に確認してください
 
 ## FAQ
 
-### How is the token price calculated in a Presale?
-Price equals SOL cap divided by token allocation. For 1,000,000 tokens with a 100 SOL cap, the price is 0.0001 SOL per token.
+### Presale でのトークン価格はどのように計算されますか？
+価格は SOL 上限をトークン割り当てで割った値です。1,000,000 トークンで 100 SOL の上限の場合、価格は 1 トークンあたり 0.0001 SOL になります。
 
-### What happens if the SOL cap isn't reached?
-Users still receive tokens proportional to their deposits. If only 50 SOL is deposited against a 100 SOL cap, depositors receive 50% of allocated tokens.
+### SOL の上限に達しなかった場合はどうなりますか？
+ユーザーは入金額に比例してトークンを受け取ります。100 SOL の上限に対して 50 SOL しか入金されなかった場合、入金者は割り当てトークンの 50% を受け取ります。
 
-### Can I set deposit limits per user?
-Yes. Use `minimumDepositAmount` for minimum per-transaction limits and `depositLimit` for maximum total deposit per user.
+### ユーザーごとの入金上限を設定できますか？
+はい。`minimumDepositAmount` でトランザクションごとの最低額を、`depositLimit` でユーザーごとの最大入金総額を設定できます。
 
-### What's the difference between Presale and Launch Pool?
-Presale has a fixed price determined by token allocation and SOL cap. Launch Pool discovers price organically based on total deposits.
+### Presale と Launch Pool の違いは何ですか？
+Presale はトークン割り当てと SOL 上限で決定される固定価格です。Launch Pool は入金総額に基づいて価格が自然に決定されます。
 
-### When should I use Presale vs Launch Pool?
-Use Presale when you want predictable pricing and know exactly how much you want to raise. Use Launch Pool for organic price discovery.
+### Presale と Launch Pool のどちらを使うべきですか？
+予測可能な価格設定が必要で、調達額を正確に把握したい場合は Presale を使用してください。自然な価格発見には Launch Pool を使用してください。
 
-## Glossary
+## 用語集
 
-| Term | Definition |
+| 用語 | 定義 |
 |------|------------|
-| **Presale** | Fixed-price token sale with predetermined rate |
-| **SOL Cap** | Maximum SOL the presale will accept (determines price) |
-| **Token Allocation** | Number of tokens available in the presale |
-| **Deposit Limit** | Maximum total deposit allowed per user |
-| **Minimum Deposit** | Minimum amount required per deposit transaction |
-| **Cooldown** | Time users must wait between deposits |
-| **End Behavior** | Automated action after deposit period ends |
-| **Transition** | Instruction that processes end behaviors |
+| **Presale** | 事前に決められたレートでの固定価格トークン販売 |
+| **SOL Cap** | Presale が受け入れる最大 SOL 額（価格を決定） |
+| **Token Allocation** | Presale で利用可能なトークン数 |
+| **Deposit Limit** | ユーザーごとに許可される最大入金総額 |
+| **Minimum Deposit** | 入金トランザクションごとに必要な最低額 |
+| **Cooldown** | ユーザーが入金間に待機する必要がある時間 |
+| **End Behavior** | 入金期間終了後の自動アクション |
+| **Transition** | End Behavior を処理するインストラクション |
 
-## Next Steps
+## 次のステップ
 
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Organic price discovery
-- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based allocation
-- [Getting Started](/smart-contracts/genesis/getting-started) - Genesis fundamentals
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - 自然な価格発見
+- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - 入札ベースの割り当て
+- [Getting Started](/smart-contracts/genesis/getting-started) - Genesis の基礎

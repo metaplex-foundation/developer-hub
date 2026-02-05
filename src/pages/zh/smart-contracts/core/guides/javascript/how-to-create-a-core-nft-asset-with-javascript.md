@@ -1,7 +1,7 @@
 ---
-title: How to Create a Core NFT Asset with Javascript
-metaTitle: How to Create a Core NFT Asset with Javascript | Core Guides
-description: Learn how to create a Core NFT Asset on the Solana blockchain with the Metaplex Core javascript package.
+title: 使用Javascript创建Core NFT Asset
+metaTitle: 使用Javascript创建Core NFT Asset | Core指南
+description: 学习如何使用Metaplex Core JavaScript包在Solana区块链上创建Core NFT Asset。
 created: '06-16-2024'
 updated: '01-31-2026'
 keywords:
@@ -18,37 +18,37 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 howToSteps:
-  - Set up a new Node.js project and install dependencies
-  - Configure Umi with your wallet and RPC endpoint
-  - Upload your image and metadata to decentralized storage
-  - Create the Asset using the create() function
-  - Verify the Asset was created successfully
+  - 设置新的Node.js项目并安装依赖项
+  - 使用钱包和RPC端点配置Umi
+  - 将图像和元数据上传到去中心化存储
+  - 使用create()函数创建Asset
+  - 验证Asset已成功创建
 howToTools:
   - Node.js
-  - Umi framework
+  - Umi框架
   - mpl-core SDK
-  - Irys or IPFS for storage
+  - Irys或IPFS（用于存储）
 ---
-This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Javascript SDK package to create a **Core NFT Asset** using the Metaplex Core onchain program.
-{% callout title="What is Core?" %}
-**Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
+本指南将演示如何使用`@metaplex-foundation/mpl-core` Javascript SDK包通过Metaplex Core链上程序创建**Core NFT Asset**。
+{% callout title="什么是Core？" %}
+**Core**使用单账户设计，与替代方案相比降低了铸造成本并改善了Solana网络负载。它还具有灵活的插件系统，允许开发人员修改资产的行为和功能。
 {% /callout %}
-But before starting, let's talk about Assets: 
-{% callout title="What is an Asset?" %}
-Setting itself apart from existing Asset programs, like Solana’s Token program, Metaplex Core and Core NFT Assets (sometimes referred to as Core NFT Assets) do not rely on multiple accounts, like Associated Token Accounts. Instead, Core NFT Assets store the relationship between a wallet and the "mint" account within the asset itself.
+但在开始之前，让我们谈谈Asset：
+{% callout title="什么是Asset？" %}
+与现有的Asset程序（如Solana的Token程序）不同，Metaplex Core和Core NFT Asset（有时称为Core NFT资产）不依赖于多个账户，如关联Token账户。相反，Core NFT Asset将钱包和"mint"账户之间的关系存储在资产本身中。
 {% /callout %}
-## Prerequisite
-- Code Editor of your choice (recommended **Visual Studio Code**)
-- Node **18.x.x** or above.
-## Initial Setup
-This guide will teach you how to create an NFT Core Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
-### Initializing
-Start by initializing a new project (optional) with the package manager of your choice (npm, yarn, pnpm, bun) and fill in required details when prompted.
+## 前提条件
+- 您选择的代码编辑器（推荐**Visual Studio Code**）
+- Node **18.x.x**或更高版本。
+## 初始设置
+本指南将教您如何基于单文件脚本用Javascript创建NFT Core Asset。您可能需要根据需要修改和移动函数。
+### 初始化
+使用您喜欢的包管理器（npm、yarn、pnpm、bun）初始化新项目（可选），并在提示时输入所需的详细信息。
 ```js
 npm init
 ```
-### Required Packages
-Install the required packages for this guide.
+### 必需的包
+安装本指南所需的包。
 {% packagesUsed packages=["umi", "umiDefaults", "core", "@metaplex-foundation/umi-uploader-irys"] type="npm" /%}
 ```js
 npm i @metaplex-foundation/umi
@@ -62,8 +62,8 @@ npm i @metaplex-foundation/mpl-core
 ```js
 npm i @metaplex-foundation/umi-uploader-irys;
 ```
-### Imports and Wrapper Function
-Here we will define all needed imports for this particular guide and create a wrapper function where all our code will execute.
+### 导入和包装函数
+这里我们定义本指南所需的所有导入，并创建一个包装函数来执行所有代码。
 ```ts
 import { create, mplCore } from '@metaplex-foundation/mpl-core'
 import {
@@ -77,111 +77,111 @@ import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 import fs from 'fs'
 import path from 'path'
-// Create the wrapper function
+// 创建包装函数
 const createNft = async () => {
   ///
   ///
-  ///  all our code will go in here
+  ///  所有代码都在这里
   ///
   ///
 }
-// run the wrapper function
+// 运行包装函数
 createNft()
 ```
-## Setting up Umi
-While setting up Umi you can use or generate keypairs/wallets from different sources. You create a new wallet for testing, import an existing wallet from the filesystem, or use `walletAdapter` if you are creating a website/dApp.  
-**Note**: For this example we're going to set up Umi with a `generatedSigner()` but you can find all the possible setup down below!
+## 设置Umi
+设置Umi时，您可以从各种来源使用或生成密钥对/钱包。您可以创建新钱包进行测试，从文件系统导入现有钱包，或者如果您正在构建网站/dApp，可以使用`walletAdapter`。
+**注意**：在此示例中，我们将使用`generatedSigner()`设置Umi，但您可以在下面找到所有可能的设置！
 {% totem %}
-{% totem-accordion title="With a New Wallet" %}
+{% totem-accordion title="使用新钱包" %}
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
   .use(
     irysUploader({
-      // mainnet address: "https://node1.irys.xyz"
-      // devnet address: "https://devnet.irys.xyz"
+      // 主网地址："https://node1.irys.xyz"
+      // 开发网地址："https://devnet.irys.xyz"
       address: 'https://devnet.irys.xyz',
     })
   )
 const signer = generateSigner(umi)
 umi.use(signerIdentity(signer))
-// This will airdrop SOL on devnet only for testing.
+// 这将仅在开发网上空投SOL用于测试。
 console.log('Airdropping 1 SOL to identity')
 await umi.rpc.airdrop(umi.identity.publickey)
 ```
 {% /totem-accordion %}
-{% totem-accordion title="With an Existing Wallet" %}
+{% totem-accordion title="使用现有钱包" %}
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
     .use(
     irysUploader({
-      // mainnet address: "https://node1.irys.xyz"
-      // devnet address: "https://devnet.irys.xyz"
+      // 主网地址："https://node1.irys.xyz"
+      // 开发网地址："https://devnet.irys.xyz"
       address: 'https://devnet.irys.xyz',
     })
   )
-// Generate a new keypair signer.
+// 生成新的密钥对签名者。
 const signer = generateSigner(umi)
-// You will need to us fs and navigate the filesystem to
-// load the wallet you wish to use via relative pathing.
+// 您需要使用fs并导航文件系统
+// 通过相对路径加载您想使用的钱包。
 const walletFile = fs.readFileSync('./keypair.json')
-// Convert your walletFile onto a keypair.
+// 将您的walletFile转换为密钥对。
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
-// Load the keypair into umi.
+// 将密钥对加载到umi中。
 umi.use(keypairIdentity(umiSigner));
 ```
 {% /totem-accordion %}
-{% totem-accordion title="With the Wallet Adapter" %}
+{% totem-accordion title="使用钱包适配器" %}
 ```ts
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
 import { useWallet } from '@solana/wallet-adapter-react'
 const wallet = useWallet()
 const umi = createUmi('https://api.devnet.solana.com')
 .use(mplCore())
-// Register Wallet Adapter to Umi
+// 将钱包适配器注册到Umi
 .use(walletAdapterIdentity(wallet))
 ```
 {% /totem-accordion %}
 {% /totem %}
-**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
-## Creating the Metadata for the Asset
-To display a recognisable image for your Asset in the Wallets or on the Explorer, we need to create the URI where we can store the Metadata!
-### Uploading the Image
-Umi comes with downloadable storage plugins that allow you to upload to storage solutions such `Arweave`, `NftStorage`, `AWS`, and `ShdwDrive`. For this guide we're going to use the `irysUploader()` plugin which stores content on  Arweave.
-In this example we're going to use a local approach using Irys to upload to Arweave; if you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
+**注意**：`walletAdapter`部分仅提供连接到Umi所需的代码，假设您已经安装并设置了`walletAdapter`。有关完整指南，请参阅[此处](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
+## 创建Asset的元数据
+要在钱包或Explorer中显示Asset的可识别图像，我们需要创建存储元数据的URI！
+### 上传图像
+Umi附带可下载的存储插件，允许您上传到`Arweave`、`NftStorage`、`AWS`和`ShdwDrive`等存储解决方案。在本指南中，我们将使用`irysUploader()`插件将内容存储在Arweave上。
+在此示例中，我们将使用本地方法通过Irys上传到Arweave；如果您希望将文件上传到其他存储提供商或从浏览器上传，您需要采取不同的方法。在浏览器场景中导入和使用`fs`将不起作用。
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 import fs from 'fs'
 import path from 'path'
-// Create Umi and tell it to use Irys
+// 创建Umi并告诉它使用Irys
 const umi = createUmi('https://api.devnet.solana.com')
   .use(irysUploader())
-// use `fs` to read file via a string path.
-// You will need to understand the concept of pathing from a computing perspective.
+// 使用`fs`通过字符串路径读取文件。
+// 您需要从计算角度理解路径的概念。
 const imageFile = fs.readFileSync(
   path.join(__dirname, '..', '/assets/my-image.jpg')
 )
-// Use `createGenericFile` to transform the file into a `GenericFile` type
-// that umi can understand. Make sure you set the mimi tag type correctly
-// otherwise Arweave will not know how to display your image.
+// 使用`createGenericFile`将文件转换为umi可以理解的`GenericFile`类型
+// 确保正确设置mimi标签类型
+// 否则Arweave将不知道如何显示您的图像。
 const umiImageFile = createGenericFile(imageFile, 'my-image.jpeg', {
   tags: [{ name: 'Content-Type', value: 'image/jpeg' }],
 })
-// Here we upload the image to Arweave via Irys and we get returned a uri
-// address where the file is located. You can log this out but as the
-// uploader can takes an array of files it also returns an array of uris.
-// To get the uri we want we can call index [0] in the array.
+// 这里我们通过Irys将图像上传到Arweave，并返回一个uri
+// 地址，表示文件所在的位置。您可以记录这个，但由于
+// 上传器可以接受文件数组，它也返回uri数组。
+// 要获取我们想要的uri，我们可以调用数组中的索引[0]。
 const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
   throw new Error(err)
 })
 console.log(imageUri[0])
 ```
-### Uploading the Metadata
-Once we have a valid and working image URI we can start working on the metadata for our asset.
-The standard for offchain metadata for a fungible token is as follows. This should be filled out and writen to either an object `{}` without Javascript or saved to a `metadata.json` file.
-We are going to look at the JavaScript object approach.
+### 上传元数据
+一旦我们有了有效且可用的图像URI，我们就可以开始处理资产的元数据。
+可替代代币离链元数据的标准如下。这应该填写并写入Javascript中的对象`{}`或保存到`metadata.json`文件中。
+我们将看看JavaScript对象方法。
 ```ts
 const metadata = {
   name: 'My NFT',
@@ -209,28 +209,27 @@ const metadata = {
   },
 }
 ```
-The fields here include:
-| field         | description                                                                                                                                                                               |
+这里的字段包括：
+| 字段          | 描述                                                                                                                                                                                      |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name          | The name of your NFT.                                                                                                                                                                     |
-| description   | The description of your NFT.                                                                                                                                                              |
-| image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
-| animation_url | This will be set to the `animation_ulr` (or any online location of the video/glb) that you've uploaded.                                                                                   |
-| external_url  | This would link to an external address of your choice. This is normally the projects website.                                                                                             |
-| attributes    | Using an object og `{trait_type: vlue, "value": "value1"}`                                                                                                                                |
-| image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
-| properties    | Contains the `files` field that takes an `[] array` of `{uri: string, type: mimeType}`. Also contains the category field which can be set to `image`, `audio`, `video`, `vfx`, and `html` |
-After creating the metadata, we need to upload it as a JSON file, so we can get a URI to attach to our Collection. To do this, we'll use Umi's `uploadJson()` function:
+| name          | 您的NFT的名称。                                                                                                                                                                           |
+| description   | 您的NFT的描述。                                                                                                                                                                           |
+| image         | 这将设置为我们之前上传的`imageUri`（或图像的任何在线位置）。                                                                                                                              |
+| animation_url | 这将设置为您上传的`animation_url`（或视频/glb的任何在线位置）。                                                                                                                           |
+| external_url  | 这将链接到您选择的外部地址。这通常是项目的网站。                                                                                                                                          |
+| attributes    | 使用`{trait_type: value, "value": "value1"}`的对象                                                                                                                                        |
+| properties    | 包含`files`字段，接受`{uri: string, type: mimeType}`的`[]数组`。还包含category字段，可以设置为`image`、`audio`、`video`、`vfx`和`html`                                                    |
+创建元数据后，我们需要将其作为JSON文件上传，以便获得附加到我们Collection的URI。为此，我们将使用Umi的`uploadJson()`函数：
 ```js
-// Call upon Umi's `uploadJson()` function to upload our metadata to Arweave via Irys.
+// 调用Umi的`uploadJson()`函数通过Irys将我们的元数据上传到Arweave。
 const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
   throw new Error(err)
 })
 ```
-This function automatically converts our JavaScript object to JSON before uploading.
-Now we should finally have the URI of JSON file stored in the `metadataUri` providing it did not throw any errors.
-### Minting the NFT Core Asset
-From here we can use the `create` function from the `@metaplex-foundation/mpl-core` package to create our Core NFT Asset.
+此函数在上传之前自动将我们的JavaScript对象转换为JSON。
+现在我们应该最终在`metadataUri`中存储了JSON文件的URI，前提是它没有抛出任何错误。
+### 铸造NFT Core Asset
+从这里我们可以使用`@metaplex-foundation/mpl-core`包中的`create`函数来创建我们的Core NFT Asset。
 ```ts
 const asset = generateSigner(umi)
 const tx = await create(umi, {
@@ -240,9 +239,9 @@ const tx = await create(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
-And log out the detail as follow: 
+然后记录详细信息如下：
 ```ts
-  // Log out the signature and the links to the transaction and the NFT.
+  // 记录签名和交易以及NFT的链接。
   console.log('\nNFT Created')
   console.log('View Transaction on Solana Explorer')
   console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
@@ -250,10 +249,10 @@ And log out the detail as follow:
   console.log('View NFT on Metaplex Explorer')
   console.log(`https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`)
 ```
-### Additional Actions
-Before moving on, what if we want to create an asset with plugins and/or external plugins, such as the `FreezeDelegate` plugin or the `AppData` external plugin, already included? Here's how we can do it.
-The `create()` instruction supports adding both normal and external plugin through the `plugins` field. So we can just easily add all the required field for the specific plugins, and everything it will be handled by the instruction.
-Here's an example on how to do it:
+### 附加操作
+在继续之前，如果我们想创建已经包含插件和/或外部插件（如`FreezeDelegate`插件或`AppData`外部插件）的资产怎么办？以下是方法。
+`create()`指令通过`plugins`字段支持添加常规插件和外部插件。因此，我们可以轻松地添加特定插件所需的所有字段，一切都将由指令处理。
+以下是如何操作的示例：
 ```typescript
 const asset = generateSigner(umi)
 const tx = await create(umi, {
@@ -270,13 +269,13 @@ const tx = await create(umi, {
       type: "AppData",
       dataAuthority: { type: "UpdateAuthority"},
       schema: ExternalPluginAdapterSchema.Binary,
-    }           
+    }
   ]
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
-**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use! 
-## Full Code Example
+**注意**：如果您不确定使用哪些字段和插件，请参阅[文档](/smart-contracts/core/plugins)！
+## 完整代码示例
 ```ts
 import { create } from '@metaplex-foundation/mpl-core'
 import {
@@ -291,49 +290,49 @@ import fs from 'fs'
 import path from 'path'
 const createNft = async () => {
   //
-  // ** Setting Up Umi **
+  // ** 设置Umi **
   //
   const umi = createUmi('https://api.devnet.solana.com')
     .use(mplCore())
     .use(
       irysUploader({
-        // mainnet address: "https://node1.irys.xyz"
-        // devnet address: "https://devnet.irys.xyz"
+        // 主网地址："https://node1.irys.xyz"
+        // 开发网地址："https://devnet.irys.xyz"
         address: 'https://devnet.irys.xyz',
       })
     )
   const signer = generateSigner(umi)
   umi.use(signerIdentity(signer))
-  // Airdrop 1 SOL to the identity
-  // if you end up with a 429 too many requests error, you may have to use
-  // the filesystem wallet method or change rpcs.
+  // 空投1 SOL到身份
+  // 如果您遇到429请求过多的错误，您可能需要使用
+  // 文件系统钱包方法或更改rpc。
   console.log('Airdropping 1 SOL to identity')
   await umi.rpc.airdrop(umi.identity.publicKey, sol(1))
   //
-  // ** Upload an image to Arweave **
+  // ** 上传图像到Arweave **
   //
-  // use `fs` to read file via a string path.
-  // You will need to understand the concept of pathing from a computing perspective.
+  // 使用`fs`通过字符串路径读取文件。
+  // 您需要从计算角度理解路径的概念。
   const imageFile = fs.readFileSync(
     path.join('./image.png')
   )
-  // Use `createGenericFile` to transform the file into a `GenericFile` type
-  // that umi can understand. Make sure you set the mimi tag type correctly
-  // otherwise Arweave will not know how to display your image.
+  // 使用`createGenericFile`将文件转换为umi可以理解的`GenericFile`类型
+  // 确保正确设置mimi标签类型
+  // 否则Arweave将不知道如何显示您的图像。
   const umiImageFile = createGenericFile(imageFile, 'image.png', {
     tags: [{ name: 'Content-Type', value: 'image/png' }],
   })
-  // Here we upload the image to Arweave via Irys and we get returned a uri
-  // address where the file is located. You can log this out but as the
-  // uploader can takes an array of files it also returns an array of uris.
-  // To get the uri we want we can call index [0] in the array.
+  // 这里我们通过Irys将图像上传到Arweave，并返回一个uri
+  // 地址，表示文件所在的位置。您可以记录这个，但由于
+  // 上传器可以接受文件数组，它也返回uri数组。
+  // 要获取我们想要的uri，我们可以调用数组中的索引[0]。
   console.log('Uploading Image...')
   const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
     throw new Error(err)
   })
   console.log('imageUri: ' + imageUri[0])
   //
-  // ** Upload Metadata to Arweave **
+  // ** 上传元数据到Arweave **
   //
   const metadata = {
     name: 'My NFT',
@@ -360,15 +359,15 @@ const createNft = async () => {
       category: 'image',
     },
   }
-  // Call upon umi's `uploadJson` function to upload our metadata to Arweave via Irys.
+  // 调用umi的`uploadJson`函数通过Irys将我们的元数据上传到Arweave。
   console.log('Uploading Metadata...')
   const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
     throw new Error(err)
   })
   //
-  // ** Creating the NFT **
+  // ** 创建NFT **
   //
-  // We generate a signer for the NFT
+  // 我们为NFT生成一个签名者
   const asset = generateSigner(umi)
   console.log('Creating NFT...')
   const tx = await create(umi, {
@@ -376,9 +375,9 @@ const createNft = async () => {
     name: 'My NFT',
     uri: metadataUri,
   }).sendAndConfirm(umi)
-  // Finally we can deserialize the signature that we can check on chain.
+  // 最后我们可以反序列化签名，以便在链上检查。
   const signature = base58.deserialize(tx.signature)[0]
-  // Log out the signature and the links to the transaction and the NFT.
+  // 记录签名和交易以及NFT的链接。
   console.log('\nNFT Created')
   console.log('View Transaction on Solana Explorer')
   console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)

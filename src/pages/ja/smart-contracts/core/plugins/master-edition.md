@@ -1,7 +1,7 @@
 ---
-title: Master Edition Plugin
-metaTitle: Master Edition Plugin | Metaplex Core
-description: Group edition Assets under a Collection with the Master Edition plugin. Store max supply and edition metadata for prints and limited runs.
+title: Master Editionプラグイン
+metaTitle: Master Editionプラグイン | Metaplex Core
+description: Master Editionプラグインを使用してCollection内のエディションAssetsをグループ化します。プリントと限定版の最大供給量とエディションメタデータを保存します。
 updated: '01-31-2026'
 keywords:
   - master edition
@@ -17,56 +17,56 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Does Master Edition enforce the max supply?
-    a: No. The maxSupply is informational only. Use Candy Machine with appropriate guards to actually enforce supply limits during minting.
-  - q: What's the difference between Master Edition name/uri and Collection name/uri?
-    a: Master Edition name/uri can provide edition-specific metadata that differs from the base Collection. For example, a Collection might be "Abstract Art Series" while the Master Edition name could be "Limited Print Run 2024."
-  - q: Can I create open editions (unlimited supply)?
-    a: Yes. Set maxSupply to null or omit it entirely. This indicates an open edition with no defined limit.
-  - q: Do I need both Master Edition and Edition plugins?
-    a: For proper print tracking, yes. Master Edition goes on the Collection, Edition goes on each Asset. They work together.
-  - q: Can I add Master Edition to an existing Collection?
-    a: Yes, unlike the Edition plugin on Assets, Master Edition can be added to existing Collections using addCollectionPlugin.
+  - q: Master Editionは最大供給量を強制しますか？
+    a: いいえ。maxSupplyは情報提供のみです。ミント中の供給量制限を実際に強制するには、Candy Machineと適切なガードを使用してください。
+  - q: Master Editionの名前/uriとCollectionの名前/uriの違いは何ですか？
+    a: Master Editionの名前/uriは、ベースCollectionとは異なるエディション固有のメタデータを提供できます。例えば、Collectionが「Abstract Art Series」で、Master Editionの名前が「Limited Print Run 2024」になることがあります。
+  - q: オープンエディション（無制限供給）を作成できますか？
+    a: はい。maxSupplyをnullに設定するか、完全に省略します。これは定義された制限のないオープンエディションを示します。
+  - q: Master EditionとEditionプラグインの両方が必要ですか？
+    a: 適切なプリント追跡のためには、はい。Master EditionはCollectionに、Editionは各Assetに追加します。これらは連携して機能します。
+  - q: 既存のCollectionにMaster Editionを追加できますか？
+    a: はい、AssetsのEditionプラグインとは異なり、Master EditionはaddCollectionPluginを使用して既存のCollectionに追加できます。
 ---
-The **Master Edition Plugin** groups numbered edition Assets under a Collection. Store maximum supply, edition names, and URIs to create print series like "Limited to 100 copies." {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add Master Edition to Collections
-- Configure max supply and metadata
-- Group Edition Assets together
-- Understand the print workflow
+**Master Editionプラグイン**は、番号付きエディションAssetsをCollection内でグループ化します。「100部限定」のようなプリントシリーズを作成するために、最大供給量、エディション名、URIを保存します。 {% .lead %}
+{% callout title="学べること" %}
+- CollectionsにMaster Editionを追加
+- 最大供給量とメタデータを設定
+- Edition Assetsをグループ化
+- プリントワークフローを理解
 {% /callout %}
-## Summary
-The **Master Edition** plugin is an Authority Managed plugin for Collections that groups [Edition](/smart-contracts/core/plugins/edition) Assets together. Store the maximum supply and optional edition-specific metadata.
-- Authority Managed (update authority controls)
-- Works with Collections only (not Assets)
-- Values are informational, not enforced
-- Use with Candy Machine for automatic edition creation
-## Out of Scope
-Supply enforcement (use Candy Machine guards), individual edition numbers (use Edition plugin on Assets), and automatic minting.
-## Quick Start
-**Jump to:** [Create Collection](#creating-a-collection-with-the-master-edition-plugin) · [Update Plugin](#update-the-master-edition-plugin)
-1. Create Collection with Master Edition plugin and max supply
-2. Mint Assets with Edition plugin (numbers 1, 2, 3...)
-3. Update max supply or metadata as needed
-{% callout type="note" title="Intended Usage" %}
-We recommend to
-- Group the Editions using the Master Edition Plugin
-- use Candy Machine with the Edition Guard to handle numbering automatically.
+## 概要
+**Master Edition**プラグインは、[Edition](/smart-contracts/core/plugins/edition) Assetsをグループ化するCollections用のAuthority Managedプラグインです。最大供給量とオプションのエディション固有メタデータを保存します。
+- Authority Managed（update authorityが制御）
+- Collectionsでのみ動作（Assetsでは不可）
+- 値は情報提供のみで、強制されない
+- 自動エディション作成にはCandy Machineと一緒に使用
+## 対象外
+供給量の強制（Candy Machineガードを使用）、個別のエディション番号（AssetsではEditionプラグインを使用）、自動ミント。
+## クイックスタート
+**ジャンプ先:** [Collectionを作成](#master-editionプラグインを持つcollectionの作成) · [プラグインを更新](#master-editionプラグインの更新)
+1. Master Editionプラグインと最大供給量でCollectionを作成
+2. Editionプラグイン（番号1, 2, 3...）でAssetsをミント
+3. 必要に応じて最大供給量やメタデータを更新
+{% callout type="note" title="推奨される使用方法" %}
+推奨事項：
+- Master Editionプラグインを使用してエディションをグループ化
+- Candy MachineとEdition Guardを使用して番号付けを自動処理
 {% /callout %}
-## Works With
+## 対応
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ❌  |
 | MPL Core Collection | ✅  |
-## Arguments
-| Arg       | Value                | Usecase                                                                         |
+## 引数
+| 引数       | 値                | ユースケース                                                                         |
 | --------- | -------------------- | ------------------------------------------------------------------------------- |
-| maxSupply | Option<number> (u32) | Indicate how many prints will exist as maximum. Optional to allow Open Editions |
-| name      | Option<String>       | Name of the Editions (if different to the Collection Name)                      |
-| uri       | Option<String>       | URI of the Editions (if different to the Collection uri)                       |
-These values can be changed by the Authority at any time. They are purely informational and not enforced.
-## Creating a Collection with the Master Edition plugin
-{% dialect-switcher title="Create a MPL Core Collection with Master Edition Plugin" %}
+| maxSupply | Option<number> (u32) | 最大プリント数を示す。オープンエディションを許可するためオプション |
+| name      | Option<String>       | エディションの名前（Collection名と異なる場合）                      |
+| uri       | Option<String>       | エディションのURI（Collection uriと異なる場合）                       |
+これらの値はAuthorityによっていつでも変更可能です。純粋に情報提供であり、強制されません。
+## Master Editionプラグインを持つCollectionの作成
+{% dialect-switcher title="Master Editionプラグインを持つMPL Core Collectionの作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -131,9 +131,9 @@ pub async fn create_collection_with_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Update the Master Edition Plugin
-If the Master Edition Plugin is mutable it can be updated similar to other Collection Plugins:
-{% dialect-switcher title="Update Master Edition Plugin" %}
+## Master Editionプラグインの更新
+Master Editionプラグインが変更可能な場合、他のCollectionプラグインと同様に更新できます：
+{% dialect-switcher title="Master Editionプラグインの更新" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -151,48 +151,48 @@ await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
-_coming soon_
+_近日公開_
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 一般的なエラー
 ### `Cannot add to Asset`
-Master Edition only works with Collections, not individual Assets. Use the Edition plugin for Assets.
+Master EditionはCollectionsでのみ動作し、個別のAssetsでは動作しません。AssetsにはEditionプラグインを使用してください。
 ### `Authority mismatch`
-Only the update authority can add or update the Master Edition plugin.
-## Notes
-- All values (maxSupply, name, uri) are informational only—not enforced
-- Use Candy Machine guards to enforce actual supply limits
-- The name/uri override Collection metadata for edition-specific branding
-- Can be updated at any time by the authority
-## Quick Reference
-### Arguments
-| Argument | Type | Required | Description |
+Update authorityのみがMaster Editionプラグインを追加または更新できます。
+## 注意事項
+- すべての値（maxSupply、name、uri）は情報提供のみで、強制されません
+- 実際の供給量制限を強制するにはCandy Machineガードを使用
+- name/uriはエディション固有のブランディングのためにCollectionメタデータを上書き
+- Authorityによっていつでも更新可能
+## クイックリファレンス
+### 引数
+| 引数 | 型 | 必須 | 説明 |
 |----------|------|----------|-------------|
-| `maxSupply` | `Option<u32>` | No | Maximum editions (null for open editions) |
-| `name` | `Option<String>` | No | Edition-specific name |
-| `uri` | `Option<String>` | No | Edition-specific metadata URI |
-### Edition Setup Pattern
-| Step | Action | Plugin |
+| `maxSupply` | `Option<u32>` | いいえ | 最大エディション数（オープンエディションはnull） |
+| `name` | `Option<String>` | いいえ | エディション固有の名前 |
+| `uri` | `Option<String>` | いいえ | エディション固有のメタデータURI |
+### エディションセットアップパターン
+| ステップ | アクション | プラグイン |
 |------|--------|--------|
-| 1 | Create Collection | Master Edition (max supply) |
-| 2 | Mint Assets | Edition (number 1, 2, 3...) |
-| 3 | Verify | Check edition numbers and supply |
+| 1 | Collectionを作成 | Master Edition（最大供給量） |
+| 2 | Assetsをミント | Edition（番号1, 2, 3...） |
+| 3 | 検証 | エディション番号と供給量を確認 |
 ## FAQ
-### Does Master Edition enforce the max supply?
-No. The `maxSupply` is informational only. Use Candy Machine with appropriate guards to actually enforce supply limits during minting.
-### What's the difference between Master Edition name/uri and Collection name/uri?
-Master Edition name/uri can provide edition-specific metadata that differs from the base Collection. For example, a Collection might be "Abstract Art Series" while the Master Edition name could be "Limited Print Run 2024."
-### Can I create open editions (unlimited supply)?
-Yes. Set `maxSupply` to `null` or omit it entirely. This indicates an open edition with no defined limit.
-### Do I need both Master Edition and Edition plugins?
-For proper print tracking, yes. Master Edition goes on the Collection (grouping and supply info), Edition goes on each Asset (individual numbers). They work together.
-### Can I add Master Edition to an existing Collection?
-Yes, unlike the Edition plugin on Assets, Master Edition can be added to existing Collections using `addCollectionPlugin`.
-## Glossary
-| Term | Definition |
+### Master Editionは最大供給量を強制しますか？
+いいえ。`maxSupply`は情報提供のみです。ミント中の供給量制限を実際に強制するには、Candy Machineと適切なガードを使用してください。
+### Master Editionの名前/uriとCollectionの名前/uriの違いは何ですか？
+Master Editionの名前/uriは、ベースCollectionとは異なるエディション固有のメタデータを提供できます。例えば、Collectionが「Abstract Art Series」で、Master Editionの名前が「Limited Print Run 2024」になることがあります。
+### オープンエディション（無制限供給）を作成できますか？
+はい。`maxSupply`を`null`に設定するか、完全に省略します。これは定義された制限のないオープンエディションを示します。
+### Master EditionとEditionプラグインの両方が必要ですか？
+適切なプリント追跡のためには、はい。Master EditionはCollection（グループ化と供給情報）に、Editionは各Asset（個別の番号）に追加します。これらは連携して機能します。
+### 既存のCollectionにMaster Editionを追加できますか？
+はい、AssetsのEditionプラグインとは異なり、Master Editionは`addCollectionPlugin`を使用して既存のCollectionに追加できます。
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Master Edition** | Collection plugin that groups editions and stores supply |
-| **Edition** | Asset plugin that stores individual edition number |
-| **Open Edition** | Edition series with no maximum supply limit |
-| **Provenance** | Record of origin and ownership history |
-| **maxSupply** | Maximum number of editions (informational) |
+| **Master Edition** | エディションをグループ化し供給量を保存するCollectionプラグイン |
+| **Edition** | 個別のエディション番号を保存するAssetプラグイン |
+| **オープンエディション** | 最大供給量制限のないエディションシリーズ |
+| **来歴** | 起源と所有履歴の記録 |
+| **maxSupply** | 最大エディション数（情報提供） |

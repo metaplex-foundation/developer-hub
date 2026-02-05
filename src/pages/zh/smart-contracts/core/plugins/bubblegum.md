@@ -1,7 +1,7 @@
 ---
-title: Bubblegum Plugin
-metaTitle: Bubblegum Plugin | Core Plugins
-description: Learn how to use the Bubblegum Plugin to create Collections that can be used for compressed NFTs.
+title: Bubblegum 插件
+metaTitle: Bubblegum 插件 | Core Plugins
+description: 了解如何使用 Bubblegum 插件创建可用于压缩 NFT 的 Collection。
 updated: '01-31-2026'
 keywords:
   - Bubblegum plugin
@@ -17,17 +17,17 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 ---
-The `Bubblegum` Plugin is a `Authority Managed` plugin that allows you to create Collections that can be used for compressed NFTs.
-This plugin can only be used on `MPL Core Collections`.
-## Works With
+`Bubblegum` 插件是一个 `Authority Managed` 插件，允许您创建可用于压缩 NFT 的 Collection。 {% .lead %}
+此插件只能在 `MPL Core Collection` 上使用。
+## 兼容性
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ❌  |
 | MPL Core Collection | ✅  |
-## Arguments
-The `Bubblegum` Plugin requires no arguments.
-## Create a Collection with the Bubblegum Plugin code example
-{% dialect-switcher title="Create a Collection with the Bubblegum Plugin" %}
+## 参数
+`Bubblegum` 插件不需要任何参数。
+## 使用 Bubblegum 插件创建 Collection 代码示例
+{% dialect-switcher title="使用 Bubblegum 插件创建 Collection" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -50,8 +50,8 @@ await createCollection(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the Bubblegum Plugin to a Collection code example
-{% dialect-switcher title="Add Bubblegum Plugin to Collection" %}
+## 向 Collection 添加 Bubblegum 插件代码示例
+{% dialect-switcher title="向 Collection 添加 Bubblegum 插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {

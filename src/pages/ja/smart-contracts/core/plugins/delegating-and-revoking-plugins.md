@@ -1,7 +1,7 @@
 ---
-title: Delegating and Revoking Plugins
-metaTitle: Delegating and Revoking Plugin Authority | Metaplex Core
-description: Learn how to delegate and revoke plugin authorities on Core Assets. Change who controls plugins and make plugin data immutable.
+title: プラグインのデリゲートと取り消し
+metaTitle: プラグイン権限のデリゲートと取り消し | Metaplex Core
+description: Core Assetsでプラグイン権限をデリゲートおよび取り消す方法を学びます。プラグインを制御する人を変更し、プラグインデータを不変にします。
 updated: '01-31-2026'
 keywords:
   - delegate plugin
@@ -17,40 +17,40 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What's the difference between revoking and removing a plugin?
-    a: Revoking only changes who controls the plugin - the plugin and its data remain. Removing deletes the plugin entirely.
-  - q: Can I delegate to multiple addresses?
-    a: No. Each plugin has only one authority at a time. Delegating to a new address replaces the previous authority.
-  - q: What happens to delegated plugins when I transfer an Asset?
-    a: Owner Managed plugins automatically revoke back to Owner authority. Authority Managed plugins remain unchanged.
-  - q: Can I undo setting authority to None?
-    a: No. Setting authority to None makes the plugin permanently immutable. This cannot be reversed.
-  - q: Can a delegate revoke themselves?
-    a: Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
+  - q: 取り消しと削除の違いは何ですか？
+    a: 取り消しはプラグインを制御する人のみを変更します。プラグインとそのデータは残ります。削除はプラグインを完全に消去します。
+  - q: 複数のアドレスにデリゲートできますか？
+    a: いいえ。各プラグインは一度に1つのauthorityのみを持ちます。新しいアドレスにデリゲートすると、以前のauthorityが置き換えられます。
+  - q: Assetを転送するとデリゲートされたプラグインはどうなりますか？
+    a: Owner Managedプラグインは自動的にOwner authorityに戻ります。Authority Managedプラグインは変更されません。
+  - q: authorityをNoneに設定したものを元に戻せますか？
+    a: いいえ。authorityをNoneに設定すると、プラグインは永続的に不変になります。これは元に戻せません。
+  - q: デリゲートは自分自身を取り消せますか？
+    a: はい。デリゲートされたauthorityは自分のアクセスを取り消すことができ、制御はデフォルトのauthorityタイプに戻ります。
 ---
-This guide shows how to **delegate and revoke plugin authorities** on Core Assets. Transfer control of plugins to other addresses or make plugin data permanently immutable. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Delegate plugin authority to another address
-- Revoke delegated authority
-- Understand revocation behavior for different plugin types
-- Make plugin data immutable
+このガイドでは、Core Assetsで**プラグイン権限をデリゲートおよび取り消す**方法を説明します。プラグインの制御を他のアドレスに移譲したり、プラグインデータを永続的に不変にしたりします。 {% .lead %}
+{% callout title="学べること" %}
+- プラグイン権限を別のアドレスにデリゲート
+- デリゲートされた権限を取り消し
+- プラグインタイプによる取り消し動作の違いを理解
+- プラグインデータを不変にする
 {% /callout %}
-## Summary
-Delegate plugin authority using `approvePluginAuthority()` and revoke with `revokePluginAuthority()`. Different plugin types have different revocation behaviors.
-- **Owner Managed**: Revokes back to `Owner` authority
-- **Authority Managed**: Revokes back to `UpdateAuthority`
-- Set authority to `None` to make plugin immutable
-- Owner Managed plugins auto-revoke on Asset transfer
-## Out of Scope
-Plugin removal (see [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)), adding plugins (see [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)), and permanent plugin authority changes.
-## Quick Start
-**Jump to:** [Delegate Authority](#delegating-an-authority) · [Revoke Authority](#revoking-an-authority) · [Make Immutable](#making-plugin-data-immutable)
-1. Call `approvePluginAuthority()` with the new authority address
-2. To revoke: call `revokePluginAuthority()`
-3. To make immutable: set authority to `None`
-## Delegating an Authority
-Plugins can be delegated to another address with a Delegate Authority instruction update. Delegated plugins allow addresses other than the main authority to have control over that plugins functionality.
-{% dialect-switcher title="Delegate a Plugin Authority" %}
+## 概要
+`approvePluginAuthority()`でプラグイン権限をデリゲートし、`revokePluginAuthority()`で取り消します。プラグインタイプによって取り消し動作が異なります。
+- **Owner Managed**: `Owner` authorityに戻る
+- **Authority Managed**: `UpdateAuthority`に戻る
+- authorityを`None`に設定するとプラグインが不変になる
+- Owner ManagedプラグインはAsset転送時に自動取り消し
+## 対象外
+プラグインの削除（[プラグインの削除](/smart-contracts/core/plugins/removing-plugins)を参照）、プラグインの追加（[プラグインの追加](/smart-contracts/core/plugins/adding-plugins)を参照）、永続的なプラグイン権限変更。
+## クイックスタート
+**ジャンプ先:** [権限をデリゲート](#権限のデリゲート) · [権限を取り消し](#権限の取り消し) · [不変にする](#プラグインデータを不変にする)
+1. 新しいauthorityアドレスで`approvePluginAuthority()`を呼び出す
+2. 取り消すには`revokePluginAuthority()`を呼び出す
+3. 不変にするにはauthorityを`None`に設定
+## 権限のデリゲート
+プラグインは、Delegate Authority命令の更新で別のアドレスにデリゲートできます。デリゲートされたプラグインにより、メインのauthority以外のアドレスがそのプラグインの機能を制御できます。
+{% dialect-switcher title="プラグイン権限のデリゲート" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -103,20 +103,20 @@ pub async fn delegate_plugin_authority() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Revoking an Authority
-Revoking an Authority on a plugin results in different behaviours depending on the plugin type that's being revoked.
-- **Owner Managed Plugins:** If an address is revoked from an `Owner Managed Plugin` then the plugin will default back to the `Owner` authority type.
-- **Authority Managed Plugins:** If an address is revoked from an `Authority Managed Plugin` then the plugin will default back to the `UpdateAuthority` authority type.
-### Who can Revoke a Plugin?
-#### Owner Managed Plugins
-- An Owner Managed Plugin can be revoked by the owner which revokes the delegate and sets the pluginAuthority type to `Owner`.
-- The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `Owner`.
-- On Transfer, delegated Authorities of owner managed plugins are automatically revoked back to the `Owner Authority` type.
-#### Authority Managed Plugins
-- The Update Authority of an Asset can revoke a delegate which thens sets the pluginAuthority type to `UpdateAuthority`.
-- The delegated Authority of the plugin can revoke themselves which then sets the plugin authority type to `UpdateAuthority`.
-A list of plugins and their types can be viewed on the [Plugins Overview](/smart-contracts/core/plugins) page.
-{% dialect-switcher title="Revoking a Plugin Authority" %}
+## 権限の取り消し
+プラグインの権限を取り消すと、取り消されるプラグインタイプによって異なる動作が発生します。
+- **Owner Managedプラグイン:** `Owner Managedプラグイン`からアドレスが取り消されると、プラグインはデフォルトで`Owner` authorityタイプに戻ります。
+- **Authority Managedプラグイン:** `Authority Managedプラグイン`からアドレスが取り消されると、プラグインはデフォルトで`UpdateAuthority` authorityタイプに戻ります。
+### 誰がプラグインを取り消せるか？
+#### Owner Managedプラグイン
+- Owner Managedプラグインはオーナーによって取り消すことができ、デリゲートを取り消してpluginAuthorityタイプを`Owner`に設定します。
+- プラグインのデリゲートされたAuthorityは自分自身を取り消すことができ、その後プラグインauthorityタイプは`Owner`に設定されます。
+- 転送時、Owner Managedプラグインのデリゲートされた権限は自動的に取り消され、`Owner Authority`タイプに戻ります。
+#### Authority Managedプラグイン
+- AssetのUpdate Authorityはデリゲートを取り消すことができ、pluginAuthorityタイプを`UpdateAuthority`に設定します。
+- プラグインのデリゲートされたAuthorityは自分自身を取り消すことができ、その後プラグインauthorityタイプは`UpdateAuthority`に設定されます。
+プラグインとそのタイプのリストは[プラグイン概要](/smart-contracts/core/plugins)ページで確認できます。
+{% dialect-switcher title="プラグイン権限の取り消し" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -159,18 +159,18 @@ pub async fn revoke_plugin_authority() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Delegate Resets Upon Asset Transfer
-All Owner Managed plugins will have their delegated authorities revoked and set back to the authority type of `Owner` upon Transfer of an Asset.
-This includes:
+### Asset転送時のデリゲートリセット
+すべてのOwner ManagedプラグインはAsset転送時にデリゲートされた権限が取り消され、`Owner` authorityタイプに戻ります。
+これには以下が含まれます：
 - Freeze Delegate
 - Transfer Delegate
 - Burn Delegate
-## Making Plugin Data Immutable
-By updating your plugin's authority to a `None` value will effectively make your plugin's data immutable.
+## プラグインデータを不変にする
+プラグインのauthorityを`None`値に更新すると、プラグインのデータが実質的に不変になります。
 {% callout type="warning" %}
-**WARNING** - Doing so will leave your plugin data immutable. Proceed with caution!
+**警告** - これを行うと、プラグインデータは不変になります。注意して進めてください！
 {% /callout %}
-{% dialect-switcher title="Making a Plugin Immutable" %}
+{% dialect-switcher title="プラグインを不変にする" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -219,50 +219,50 @@ pub async fn make_plugin_data_immutable() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 一般的なエラー
 ### `Authority mismatch`
-You don't have permission to delegate or revoke this plugin. Only the current authority can delegate; only owner/authority can revoke.
+このプラグインをデリゲートまたは取り消す権限がありません。現在のauthorityのみがデリゲートでき、オーナー/authorityのみが取り消せます。
 ### `Plugin not found`
-The Asset/Collection doesn't have this plugin type attached.
+Asset/Collectionにこのプラグインタイプがアタッチされていません。
 ### `Cannot revoke None authority`
-A plugin with `None` authority is immutable. There's no authority to revoke.
-## Notes
-- Delegation transfers control but doesn't remove the original authority's ability to revoke
-- Setting authority to `None` is permanent and irreversible
-- Owner Managed plugins auto-revoke when the Asset transfers to a new owner
-- Revocation returns authority to the default type (Owner or UpdateAuthority)
-## Quick Reference
-### Revocation Behavior by Plugin Type
-| Plugin Type | Revokes To |
+`None` authorityのプラグインは不変です。取り消すauthorityがありません。
+## 注意事項
+- デリゲートは制御を移譲しますが、元のauthorityの取り消し能力は削除されません
+- authorityを`None`に設定することは永続的で不可逆です
+- Owner ManagedプラグインはAssetが新しいオーナーに転送されると自動取り消しされます
+- 取り消しはauthorityをデフォルトタイプ（OwnerまたはUpdateAuthority）に戻します
+## クイックリファレンス
+### プラグインタイプ別の取り消し動作
+| プラグインタイプ | 取り消し先 |
 |-------------|------------|
 | Owner Managed | `Owner` authority |
 | Authority Managed | `UpdateAuthority` |
-### Who Can Delegate/Revoke
-| Action | Owner Managed | Authority Managed |
+### 誰がデリゲート/取り消しできるか
+| アクション | Owner Managed | Authority Managed |
 |--------|---------------|-------------------|
-| Delegate | Owner | Update Authority |
-| Revoke | Owner or Delegate | Update Authority or Delegate |
+| デリゲート | オーナー | Update Authority |
+| 取り消し | オーナーまたはデリゲート | Update Authorityまたはデリゲート |
 ## FAQ
-### What's the difference between revoking and removing a plugin?
-Revoking only changes who controls the plugin—the plugin and its data remain. Removing deletes the plugin entirely.
-### Can I delegate to multiple addresses?
-No. Each plugin has only one authority at a time. Delegating to a new address replaces the previous authority.
-### What happens to delegated plugins when I transfer an Asset?
-Owner Managed plugins automatically revoke back to `Owner` authority. Authority Managed plugins remain unchanged.
-### Can I undo setting authority to None?
-No. Setting authority to `None` makes the plugin permanently immutable. This cannot be reversed.
-### Can a delegate revoke themselves?
-Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
-## Related Operations
-- [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) - Add plugins to Assets/Collections
-- [Removing Plugins](/smart-contracts/core/plugins/removing-plugins) - Delete plugins entirely
-- [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
-- [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
-## Glossary
-| Term | Definition |
+### 取り消しと削除の違いは何ですか？
+取り消しはプラグインを制御する人のみを変更します—プラグインとそのデータは残ります。削除はプラグインを完全に消去します。
+### 複数のアドレスにデリゲートできますか？
+いいえ。各プラグインは一度に1つのauthorityのみを持ちます。新しいアドレスにデリゲートすると、以前のauthorityが置き換えられます。
+### Assetを転送するとデリゲートされたプラグインはどうなりますか？
+Owner Managedプラグインは自動的に`Owner` authorityに戻ります。Authority Managedプラグインは変更されません。
+### authorityをNoneに設定したものを元に戻せますか？
+いいえ。authorityを`None`に設定すると、プラグインは永続的に不変になります。これは元に戻せません。
+### デリゲートは自分自身を取り消せますか？
+はい。デリゲートされたauthorityは自分のアクセスを取り消すことができ、制御はデフォルトのauthorityタイプに戻ります。
+## 関連操作
+- [プラグインの追加](/smart-contracts/core/plugins/adding-plugins) - Assets/Collectionsにプラグインを追加
+- [プラグインの削除](/smart-contracts/core/plugins/removing-plugins) - プラグインを完全に削除
+- [プラグインの更新](/smart-contracts/core/plugins/update-plugins) - プラグインデータを変更
+- [プラグイン概要](/smart-contracts/core/plugins) - 利用可能なプラグインの完全なリスト
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Delegate** | Address given temporary control of a plugin |
-| **Revoke** | Remove delegated authority, returning to default |
-| **None Authority** | Special authority type making plugin immutable |
-| **Auto-revoke** | Automatic revocation of Owner Managed plugins on transfer |
-| **Plugin Authority** | Current address with control over a plugin |
+| **デリゲート** | プラグインの一時的な制御を与えられたアドレス |
+| **取り消し** | デリゲートされた権限を削除し、デフォルトに戻す |
+| **None Authority** | プラグインを不変にする特別なauthorityタイプ |
+| **自動取り消し** | 転送時のOwner Managedプラグインの自動取り消し |
+| **Plugin Authority** | プラグインを制御する現在のアドレス |

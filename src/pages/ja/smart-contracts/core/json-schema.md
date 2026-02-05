@@ -1,7 +1,7 @@
 ---
-title: JSON Schema
-metaTitle: JSON Schema | Core
-description: Understand the structure and requirements of the off-chain JSON schema for Metaplex Core assets.
+title: JSONスキーマ
+metaTitle: JSONスキーマ | Core
+description: Metaplex CoreアセットのオフチェーンJSONスキーマの構造と要件を理解します。
 updated: '01-31-2026'
 keywords:
   - NFT metadata
@@ -14,12 +14,12 @@ about:
   - Off-chain data
 proficiencyLevel: Beginner
 ---
-The off-chain JSON metadata for Metaplex Core assets is similar to the Metaplex Token Metadata standard. However, since more data can be stored on-chain in the asset itself using plugins, some of the data like attributes can in addition be stored on chain.
-## Schema Examples
-Below are examples for the different known types of NFTs. It's important to note that all of these different types can also be part of a single Asset using the `image`, `animation_url`, and `properties` fields. All the different fields are further described in the [JSON Schema Fields](#json-schema-fields) section.
-{% totem title="Examples" id="schema-examples" %}
-{% totem-accordion title="Image" %}
-The Attributes  can alternatively be stored onchain using the [Attributes Plugin](/smart-contracts/core/plugins/attribute).
+Metaplex CoreアセットのオフチェーンJSONメタデータは、Metaplex Token Metadataスタンダードに似ています。ただし、プラグインを使用してアセット自体にオンチェーンでより多くのデータを保存できるため、属性などの一部のデータはオンチェーンでも保存できます。
+## スキーマの例
+以下は、異なる種類のNFTの例です。これらの異なるタイプはすべて、`image`、`animation_url`、`properties`フィールドを使用して単一のAssetの一部にすることもできることに注意してください。すべての異なるフィールドについては、[JSONスキーマフィールド](#jsonスキーマフィールド)セクションで詳しく説明しています。
+{% totem title="例" id="schema-examples" %}
+{% totem-accordion title="画像" %}
+属性は、[Attributesプラグイン](/smart-contracts/core/plugins/attribute)を使用してオンチェーンに保存することもできます。
 ```json
 {
   "name": "Number #0001",
@@ -48,7 +48,7 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 }
 ```
 {% /totem-accordion  %}
-{% totem-accordion title="Animated GIF" %}
+{% totem-accordion title="アニメーションGIF" %}
 ```json
 {
   "name": "Number #0001",
@@ -67,7 +67,7 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 }
 ```
 {% /totem-accordion  %}
-{% totem-accordion title="Video" %}
+{% totem-accordion title="動画" %}
 ```json
 {
     "name": "Video Asset",
@@ -91,7 +91,7 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 }
 ```
 {% /totem-accordion  %}
-{% totem-accordion title="Audio" %}
+{% totem-accordion title="オーディオ" %}
 ```json
 {
     "name": "Audio Asset",
@@ -116,7 +116,7 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 ```
 {% /totem-accordion  %}
 {% totem-accordion title="VR" %}
-While most Explorers and wallets support `.glb` files it is recommended to also have a fallback image as part of the schema.
+ほとんどのエクスプローラーとウォレットは`.glb`ファイルをサポートしていますが、スキーマの一部としてフォールバック画像も用意することをお勧めします。
 ```json
 {
     "name": "VR Asset",
@@ -141,7 +141,7 @@ While most Explorers and wallets support `.glb` files it is recommended to also 
 ```
 {% /totem-accordion  %}
 {% totem-accordion title="HTML" %}
-The following example for HTML Assets is not supported by wallets currently, as they might see them as security risk. Some explorers render them correctly though, therefore it is recommended to have a fallback image for all the tools not supporting HTML Assets.
+HTML Assetsの以下の例は、セキュリティリスクと見なされる可能性があるため、現在ウォレットではサポートされていません。ただし、一部のエクスプローラーは正しくレンダリングするため、HTML Assetsをサポートしていないすべてのツールに対してフォールバック画像を用意することをお勧めします。
 ```json
 {
     "name": "HTML Asset",
@@ -166,37 +166,37 @@ The following example for HTML Assets is not supported by wallets currently, as 
 ```
 {% /totem-accordion  %}
 {% /totem %}
-## JSON Schema Fields
-Below explanations for the different fields can be found.
-If you miss some fields that you knew from Metaplex Token Metadata those are probably deprecated. The `creators` for example are part of the [Royalties Plugin](/smart-contracts/core/plugins/royalties) now.
-### Required Fields
-- **name**: The name of your NFT asset
-  - Example: "Solana Monkey #123", "Degen Ape #45"
-  
-- **description**: A detailed description of your NFT
-  - Example: "A rare cosmic monkey floating through the Solana blockchain"
-- **image**: URI pointing to the primary image of your NFT
-  - Example: `https://arweave.net/123abc...?ext=png`
-  - Supports: PNG, GIF, JPG/JPEG
-- **category**: Type of NFT content
-    - Examples: `image`, `video`, `audio`, `vr`, `html`
-### Optional Fields
-  
-- **animation_url**: URI for multimedia attachments
-  - Example: `https://arweave.net/xyz789...?ext=mp4`
-  - Supports: MP4, GIF, GLB, HTML
-- **external_url**: Link to an external website for the NFT
-  - Example: `https://www.myproject.io/nft/123`
-- **attributes**: Array of traits and their values. These can alternatively be stored onchain using the [Attributes Plugin](/smart-contracts/core/plugins/attribute)
-  - Example:
+## JSONスキーマフィールド
+以下は、異なるフィールドの説明です。
+Metaplex Token Metadataから知っていた一部のフィールドがない場合、それらはおそらく非推奨です。例えば、`creators`は現在[Royaltiesプラグイン](/smart-contracts/core/plugins/royalties)の一部です。
+### 必須フィールド
+- **name**: NFTアセットの名前
+  - 例: "Solana Monkey #123", "Degen Ape #45"
+
+- **description**: NFTの詳細な説明
+  - 例: "Solanaブロックチェーンを漂う珍しい宇宙の猿"
+- **image**: NFTのプライマリ画像を指すURI
+  - 例: `https://arweave.net/123abc...?ext=png`
+  - サポート: PNG, GIF, JPG/JPEG
+- **category**: NFTコンテンツのタイプ
+    - 例: `image`, `video`, `audio`, `vr`, `html`
+### オプションフィールド
+
+- **animation_url**: マルチメディア添付ファイル用のURI
+  - 例: `https://arweave.net/xyz789...?ext=mp4`
+  - サポート: MP4, GIF, GLB, HTML
+- **external_url**: NFTの外部ウェブサイトへのリンク
+  - 例: `https://www.myproject.io/nft/123`
+- **attributes**: 特性とその値の配列。これらは[Attributesプラグイン](/smart-contracts/core/plugins/attribute)を使用してオンチェーンに保存することもできます
+  - 例:
     ```json
     {
       "trait_type": "Background",
       "value": "Galaxy"
     }
     ```
-- **properties**: Additional metadata including files and categories
-  - **files**: Array of all assets associated with the NFT. the `type` is the [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types) of the file.
+- **properties**: ファイルとカテゴリを含む追加のメタデータ
+  - **files**: NFTに関連付けられたすべてのアセットの配列。`type`はファイルの[MIMEタイプ](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types)です。
     ```json
     {
       "uri": "https://arweave.net/abc123...?ext=png",

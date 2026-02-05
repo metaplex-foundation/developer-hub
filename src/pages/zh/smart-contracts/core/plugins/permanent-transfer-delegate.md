@@ -1,7 +1,7 @@
 ---
 title: Permanent Transfer Delegate
 metaTitle: Permanent Transfer Delegate | Metaplex Core
-description: Grant permanent transfer authority that persists across ownership changes. Use for game mechanics, subscription services, and automated asset management.
+description: 授予即使所有权变更后仍然有效的永久transfer权限。用于游戏机制、订阅服务和自动化资产管理。
 updated: '01-31-2026'
 keywords:
   - permanent transfer
@@ -17,66 +17,66 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What's the difference between Transfer Delegate and Permanent Transfer Delegate?
-    a: Regular Transfer Delegate is revoked after one transfer. Permanent Transfer Delegate persists forever and can transfer unlimited times.
-  - q: Can Permanent Transfer Delegate transfer frozen Assets?
-    a: Yes. Permanent plugins use forceApprove, which overrides freeze rejections.
-  - q: Can I add this to an existing Asset?
-    a: No. Permanent plugins can only be added at Asset creation time. Use regular Transfer Delegate for existing Assets.
-  - q: How does Collection-level Permanent Transfer Delegate work?
-    a: The delegate can transfer any individual Asset in the Collection, but not all at once. Each transfer is a separate transaction.
+  - q: Transfer Delegate和Permanent Transfer Delegate有什么区别？
+    a: 普通Transfer Delegate在一次转移后会被撤销。Permanent Transfer Delegate永久有效，可以无限次转移。
+  - q: Permanent Transfer Delegate能转移冻结的Asset吗？
+    a: 是的。Permanent plugin使用forceApprove，可以覆盖冻结拒绝。
+  - q: 我可以将此添加到现有Asset吗？
+    a: 不可以。Permanent plugin只能在Asset创建时添加。对于现有Asset，请使用普通Transfer Delegate。
+  - q: Collection级别的Permanent Transfer Delegate如何工作？
+    a: delegate可以转移Collection中的任何单个Asset，但不能一次性转移所有Asset。每次转移都是单独的交易。
 ---
-The **Permanent Transfer Delegate Plugin** provides irrevocable transfer authority that persists forever. Unlike regular Transfer Delegate, this authority is never revoked and can transfer Assets repeatedly. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Create Assets with permanent transfer capability
-- Enable collection-wide transfer authority
-- Use cases: games, subscriptions, automated systems
-- Understand permanent vs regular transfer delegate
+**Permanent Transfer Delegate Plugin**提供永久有效的不可撤销transfer权限。与普通Transfer Delegate不同，此权限永不撤销，可以重复转移Asset。 {% .lead %}
+{% callout title="学习内容" %}
+- 创建具有永久transfer功能的Asset
+- 启用Collection范围的transfer权限
+- 用例：游戏、订阅、自动化系统
+- 理解permanent vs 普通transfer delegate
 {% /callout %}
-## Summary
-The **Permanent Transfer Delegate** is a permanent plugin that can only be added at creation time. The delegate can transfer the Asset unlimited times without owner approval.
-- Can only be added at Asset/Collection creation
-- Authority persists forever (never revoked)
-- Uses `forceApprove` - can transfer even when frozen
-- Collection-level: allows transfer of any Asset in the Collection
-## Out of Scope
-Regular transfer delegate (see [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate)), escrowless listings (use regular delegate), and Token Metadata transfer authority.
-## Quick Start
-**Jump to:** [Create Asset](#creating-a-mpl-core-asset-with-a-permanent-transfer-plugin)
-1. Add `PermanentTransferDelegate` plugin at Asset/Collection creation
-2. Set the authority to your program or delegate address
-3. The delegate can transfer the Asset at any time, unlimited times
-{% callout type="note" title="Permanent vs Regular Transfer Delegate" %}
-| Feature | Transfer Delegate | Permanent Transfer Delegate |
+## 概述
+**Permanent Transfer Delegate**是一个只能在创建时添加的permanent plugin。delegate可以无需所有者批准无限次转移Asset。
+- 只能在Asset/Collection创建时添加
+- 权限永久有效（永不撤销）
+- 使用`forceApprove` - 即使冻结也可以转移
+- Collection级别：允许转移Collection中的任何Asset
+## 范围外
+普通transfer delegate（参见[Transfer Delegate](/zh/smart-contracts/core/plugins/transfer-delegate)）、无托管列表（使用普通delegate）和Token Metadata transfer权限。
+## 快速开始
+**跳转到:** [创建Asset](#creating-a-mpl-core-asset-with-a-permanent-transfer-plugin)
+1. 在Asset/Collection创建时添加`PermanentTransferDelegate` plugin
+2. 将authority设置为您的程序或delegate地址
+3. delegate可以在任何时候无限次转移Asset
+{% callout type="note" title="Permanent vs 普通Transfer Delegate" %}
+| 功能 | Transfer Delegate | Permanent Transfer Delegate |
 |---------|-------------------|----------------------------|
-| Add after creation | ✅ Yes | ❌ Creation only |
-| Authority persists on transfer | ❌ Revokes after 1 transfer | ✅ Persists forever |
-| Multiple transfers | ❌ One-time | ✅ Unlimited |
-| Can transfer frozen Assets | ❌ No | ✅ Yes (forceApprove) |
-| Works with Collections | ❌ No | ✅ Yes |
-**Choose [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate)** for one-time escrowless sales.
-**Choose Permanent Transfer Delegate** for games, rentals, or automated systems needing repeated transfers.
+| 创建后添加 | ✅ 可以 | ❌ 仅限创建时 |
+| 转移后权限保留 | ❌ 1次转移后撤销 | ✅ 永久保留 |
+| 多次转移 | ❌ 一次性 | ✅ 无限 |
+| 可以转移冻结的Asset | ❌ 不可以 | ✅ 可以（forceApprove） |
+| 适用于Collection | ❌ 不可以 | ✅ 可以 |
+**选择[Transfer Delegate](/zh/smart-contracts/core/plugins/transfer-delegate)**：用于一次性无托管销售。
+**选择Permanent Transfer Delegate**：用于游戏、租赁或需要重复转移的自动化系统。
 {% /callout %}
-## Common Use Cases
-- **Game mechanics**: Transfer Assets when game events occur (losing battles, trading)
-- **Rental returns**: Automatically return rented NFTs to the owner
-- **Subscription management**: Transfer tokens when subscriptions end or renew
-- **DAO treasury management**: Allow DAOs to manage Asset distribution
-- **Automated systems**: Programs that need to move Assets without per-transfer approval
-## Works With
+## 常见用例
+- **游戏机制**：当游戏事件发生时（战斗失败、交易）转移Asset
+- **租赁返还**：自动将租借的NFT返还给所有者
+- **订阅管理**：当订阅结束或续订时转移代币
+- **DAO财库管理**：允许DAO管理Asset分配
+- **自动化系统**：需要在无需每次转移批准的情况下移动Asset的程序
+## 兼容性
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-### Behaviours
-- **Asset**: Allows transferring of the Asset using the delegated address.
-- **Collection**: Allows transferring of any Asset in the collection using the collection authority. It does not transfer all at once.
-## Arguments
-| Arg    | Value |
+### 行为
+- **Asset**：允许使用delegated地址转移Asset。
+- **Collection**：允许使用collection authority转移Collection中的任何Asset。不会一次性转移所有Asset。
+## 参数
+| 参数    | 值 |
 | ------ | ----- |
 | frozen | bool  |
-## Creating a MPL Core Asset with a Permanent Transfer Plugin
-{% dialect-switcher title="Creating a MPL Core Asset with a Permanent Transfer Plugin" %}
+## 创建带有Permanent Transfer Plugin的MPL Core Asset
+{% dialect-switcher title="创建带有Permanent Transfer Plugin的MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -137,33 +137,33 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Cannot add permanent plugin after creation`
-Permanent plugins can only be added at Asset/Collection creation. You cannot add a Permanent Transfer Delegate to an existing Asset.
+Permanent plugin只能在Asset/Collection创建时添加。您无法将Permanent Transfer Delegate添加到现有Asset。
 ### `Authority mismatch`
-Only the plugin authority can transfer. Verify you're signing with the correct keypair.
-## Notes
-- **Creation only**: Cannot be added after Asset/Collection exists
-- **Force approve**: Can transfer even when frozen
-- **Collection behavior**: Can transfer any Asset in the Collection individually
-- **Persists forever**: Authority is never revoked
-- **Unlimited transfers**: No limit on how many times the delegate can transfer
+只有plugin authority可以转移。请验证您是否使用正确的密钥对签名。
+## 注意事项
+- **仅限创建时**：Asset/Collection存在后无法添加
+- **Force approve**：即使冻结也可以转移
+- **Collection行为**：可以单独转移Collection中的任何Asset
+- **永久有效**：权限永不撤销
+- **无限转移**：delegate可以转移的次数没有限制
 ## FAQ
-### What's the difference between Transfer Delegate and Permanent Transfer Delegate?
-Regular Transfer Delegate is revoked after one transfer. Permanent Transfer Delegate persists forever and can transfer unlimited times.
-### Can Permanent Transfer Delegate transfer frozen Assets?
-Yes. Permanent plugins use `forceApprove`, which overrides freeze rejections.
-### Can I add this to an existing Asset?
-No. Permanent plugins can only be added at Asset creation time. Use regular Transfer Delegate for existing Assets.
-### How does Collection-level Permanent Transfer Delegate work?
-The delegate can transfer any individual Asset in the Collection, but not all at once. Each transfer is a separate transaction.
-## Related Plugins
-- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - One-time transfer authority
-- [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) - Permanent freeze authority
-- [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) - Permanent burn authority
-## Glossary
-| Term | Definition |
+### Transfer Delegate和Permanent Transfer Delegate有什么区别？
+普通Transfer Delegate在一次转移后会被撤销。Permanent Transfer Delegate永久有效，可以无限次转移。
+### Permanent Transfer Delegate能转移冻结的Asset吗？
+是的。Permanent plugin使用`forceApprove`，可以覆盖冻结拒绝。
+### 我可以将此添加到现有Asset吗？
+不可以。Permanent plugin只能在Asset创建时添加。对于现有Asset，请使用普通Transfer Delegate。
+### Collection级别的Permanent Transfer Delegate如何工作？
+delegate可以转移Collection中的任何单个Asset，但不能一次性转移所有Asset。每次转移都是单独的交易。
+## 相关Plugin
+- [Transfer Delegate](/zh/smart-contracts/core/plugins/transfer-delegate) - 一次性transfer权限
+- [Permanent Freeze Delegate](/zh/smart-contracts/core/plugins/permanent-freeze-delegate) - 永久freeze权限
+- [Permanent Burn Delegate](/zh/smart-contracts/core/plugins/permanent-burn-delegate) - 永久burn权限
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Permanent Plugin** | Plugin that can only be added at creation and persists forever |
-| **forceApprove** | Validation that overrides other plugin rejections |
-| **Collection Transfer** | Ability to transfer any Asset in a Collection |
+| **Permanent Plugin** | 只能在创建时添加且永久有效的Plugin |
+| **forceApprove** | 覆盖其他plugin拒绝的验证 |
+| **Collection Transfer** | 转移Collection中任何Asset的能力 |

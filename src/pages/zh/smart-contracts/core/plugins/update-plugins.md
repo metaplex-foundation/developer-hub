@@ -1,7 +1,7 @@
 ---
-title: Updating Plugins
-metaTitle: Updating Plugins | Core
-description: Learn how to update existing plugins on MPL Core Assets and Collections using the updatePlugin function.
+title: 更新插件
+metaTitle: 更新插件 | Core
+description: 学习如何使用 updatePlugin 函数更新 MPL Core Asset 和 Collection 上的现有插件。
 updated: '01-31-2026'
 keywords:
   - update plugin
@@ -17,52 +17,52 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 ---
-Many plugins on MPL Core Assets and Collections can be updated after they've been added. The `updatePlugin` function allows you to modify plugin data, such as changing attributes, updating royalties, or modifying freeze states.
+MPL Core Asset 和 Collection 上的许多插件在添加后可以更新。`updatePlugin` 函数允许您修改插件数据，例如更改属性、更新版税或修改冻结状态。
 {% totem %}
-{% totem-accordion title="Technical Instruction Details" %}
-**Instruction Accounts List**
-| Account       | Description                                     |
+{% totem-accordion title="技术指令详情" %}
+**指令账户列表**
+| 账户          | 描述                                            |
 | ------------- | ----------------------------------------------- |
-| asset         | The address of the MPL Core Asset.              |
-| collection    | The collection to which the Core Asset belongs. |
-| payer         | The account paying for the storage fees.        |
-| authority     | The owner or delegate with update permissions.  |
-| systemProgram | The System Program account.                     |
-| logWrapper    | The SPL Noop Program.                           |
-**Instruction Arguments**
-| Args   | Description                            |
+| asset         | MPL Core Asset 的地址。                         |
+| collection    | Core Asset 所属的 Collection。                  |
+| payer         | 支付存储费用的账户。                            |
+| authority     | 具有更新权限的所有者或委托方。                  |
+| systemProgram | System Program 账户。                           |
+| logWrapper    | SPL Noop Program。                              |
+**指令参数**
+| 参数   | 描述                                   |
 | ------ | -------------------------------------- |
-| plugin | The plugin type and data to update. |
-Some of the accounts/args may be abstracted out and/or optional in our SDKs for ease of use.
-For detailed TypeDoc documentation, see:
+| plugin | 要更新的插件类型和数据。               |
+某些账户/参数可能在我们的 SDK 中被抽象化或为可选，以便于使用。
+详细的 TypeDoc 文档，请参阅：
 - [updatePlugin](https://mpl-core.typedoc.metaplex.com/functions/updatePlugin.html)
 - [updateCollectionPlugin](https://mpl-core.typedoc.metaplex.com/functions/updateCollectionPlugin.html)
-Note: In the JavaScript SDK, updatePlugin expects the plugin data without a data wrapper (e.g., `{ type: 'FreezeDelegate', frozen: true }`). By contrast, addPlugin wraps data under `data` (e.g., `{ type: 'FreezeDelegate', data: { frozen: true } }`). This mirrors the shape used in createAsset/createCollection plugin lists.
+注意：在 JavaScript SDK 中，updatePlugin 期望插件数据不带 data 包装器（例如 `{ type: 'FreezeDelegate', frozen: true }`）。相比之下，addPlugin 将数据包装在 `data` 下（例如 `{ type: 'FreezeDelegate', data: { frozen: true } }`）。这反映了 createAsset/createCollection 插件列表中使用的形式。
 {% /totem-accordion %}
 {% /totem %}
-## Updating Plugins on Assets
-### Basic Plugin Update Example
-Here's how to update a plugin on an MPL Core Asset using the Attributes plugin as an example:
-{% dialect-switcher title="Update Plugin on Asset" %}
+## 更新 Asset 上的插件
+### 基本插件更新示例
+以下是使用 Attributes 插件作为示例更新 MPL Core Asset 上插件的方法：
+{% dialect-switcher title="更新 Asset 上的插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 (async () => {
   const assetAddress = publicKey('11111111111111111111111111111111')
-  // Fetch the current asset to see existing plugin data
+  // 获取当前 Asset 以查看现有插件数据
   const asset = await fetchAsset(umi, assetAddress, {
     skipDerivePlugins: false,
   })
-  // Update the Attributes plugin with new data
+  // 使用新数据更新 Attributes 插件
   await updatePlugin(umi, {
     asset: assetAddress,
     plugin: {
       type: 'Attributes',
       attributeList: [
-        { key: 'level', value: '5' },        // Updated value
-        { key: 'rarity', value: 'legendary' }, // New attribute
-        { key: 'power', value: '150' },      // New attribute
+        { key: 'level', value: '5' },        // 更新的值
+        { key: 'rarity', value: 'legendary' }, // 新属性
+        { key: 'power', value: '150' },      // 新属性
       ],
     },
   }).sendAndConfirm(umi)
@@ -70,8 +70,8 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Updating Royalties Plugin
-{% dialect-switcher title="Update Royalties Plugin" %}
+### 更新 Royalties 插件
+{% dialect-switcher title="更新 Royalties 插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -84,9 +84,9 @@ import { updatePlugin, ruleSet } from '@metaplex-foundation/mpl-core'
     asset: assetAddress,
     plugin: {
       type: 'Royalties',
-      basisPoints: 750, // Updated from 500 to 750 (7.5%)
+      basisPoints: 750, // 从 500 更新到 750 (7.5%)
       creators: [
-        { address: creator1, percentage: 70 }, // Updated distribution
+        { address: creator1, percentage: 70 }, // 更新的分配
         { address: creator2, percentage: 30 },
       ],
       ruleSet: ruleSet('ProgramAllowList', [
@@ -101,38 +101,38 @@ import { updatePlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Updating State-Based Plugins
-Some plugins store simple state that can be toggled, like the Freeze Delegate plugin:
-{% dialect-switcher title="Update Freeze State" %}
+### 更新基于状态的插件
+某些插件存储可以切换的简单状态，如 Freeze Delegate 插件：
+{% dialect-switcher title="更新冻结状态" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin } from '@metaplex-foundation/mpl-core'
 (async () => {
   const assetAddress = publicKey('11111111111111111111111111111111')
-  // Freeze the asset
+  // 冻结 Asset
   await updatePlugin(umi, {
     asset: assetAddress,
     plugin: {
       type: 'FreezeDelegate',
-      frozen: true, // Set to true to freeze, false to unfreeze
+      frozen: true, // 设置为 true 冻结，false 解冻
     },
   }).sendAndConfirm(umi)
-  // Later, unfreeze the asset
+  // 稍后，解冻 Asset
   await updatePlugin(umi, {
     asset: assetAddress,
     plugin: {
       type: 'FreezeDelegate',
-      frozen: false, // Unfreeze the asset
+      frozen: false, // 解冻 Asset
     },
   }).sendAndConfirm(umi)
 })();
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Updating Plugins on Collections
-Collection plugins work similarly to asset plugins, but use the `updateCollectionPlugin` function:
-{% dialect-switcher title="Update Plugin on Collection" %}
+## 更新 Collection 上的插件
+Collection 插件的工作方式与 Asset 插件类似，但使用 `updateCollectionPlugin` 函数：
+{% dialect-switcher title="更新 Collection 上的插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -141,12 +141,12 @@ import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
   const collectionAddress = publicKey('11111111111111111111111111111111')
   const creator1 = publicKey('22222222222222222222222222222222')
   const creator2 = publicKey('33333333333333333333333333333333')
-  // Update collection-wide royalties
+  // 更新 Collection 范围的版税
   await updateCollectionPlugin(umi, {
     collection: collectionAddress,
     plugin: {
       type: 'Royalties',
-      basisPoints: 600, // 6% royalty for the collection
+      basisPoints: 600, // Collection 的 6% 版税
       creators: [
         { address: creator1, percentage: 80 },
         { address: creator2, percentage: 20 },
@@ -158,32 +158,32 @@ import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Working with Complex Plugin Data
-### Managing Lists in Plugins
-Some plugins like Autograph and Verified Creators maintain lists of data. When updating these plugins, you need to pass the complete list you want to maintain:
-{% dialect-switcher title="Update List-Based Plugin" %}
+## 处理复杂的插件数据
+### 管理插件中的列表
+某些插件如 Autograph 和 Verified Creators 维护数据列表。更新这些插件时，您需要传递要维护的完整列表：
+{% dialect-switcher title="更新基于列表的插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 (async () => {
   const assetAddress = publicKey('11111111111111111111111111111111')
-  // First, fetch the current asset to see existing autographs
+  // 首先，获取当前 Asset 以查看现有签名
   const asset = await fetchAsset(umi, assetAddress, {
     skipDerivePlugins: false,
   })
-  // Add a new autograph while keeping existing ones
+  // 保留现有签名的同时添加新签名
   const newAutograph = {
     address: umi.identity.publicKey,
-    message: "Amazing NFT! Signed by collector."
+    message: "很棒的 NFT！收藏家签名。"
   }
-  // Include all existing autographs plus the new one
+  // 包括所有现有签名加上新签名
   const updatedAutographs = [...asset.autograph.signatures, newAutograph]
   await updatePlugin(umi, {
     asset: assetAddress,
     plugin: {
       type: 'Autograph',
-      signatures: updatedAutographs, // Complete list including new addition
+      signatures: updatedAutographs, // 包括新添加的完整列表
     },
     authority: umi.identity,
   }).sendAndConfirm(umi)
@@ -191,8 +191,8 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Removing Items from Lists
-{% dialect-switcher title="Remove Items from Plugin Lists" %}
+### 从列表中删除项目
+{% dialect-switcher title="从插件列表中删除项目" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -200,11 +200,11 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 (async () => {
   const assetAddress = publicKey('11111111111111111111111111111111')
   const autographToRemove = publicKey('44444444444444444444444444444444')
-  // Fetch current asset data
+  // 获取当前 Asset 数据
   const asset = await fetchAsset(umi, assetAddress, {
     skipDerivePlugins: false,
   })
-  // Filter out the autograph we want to remove
+  // 过滤掉我们要删除的签名
   const filteredAutographs = asset.autograph.signatures.filter(
     (autograph) => autograph.address !== autographToRemove
   )
@@ -212,7 +212,7 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
     asset: assetAddress,
     plugin: {
       type: 'Autograph',
-      signatures: filteredAutographs, // List without the removed item
+      signatures: filteredAutographs, // 不包含已删除项目的列表
     },
     authority: umi.identity,
   }).sendAndConfirm(umi)
@@ -220,25 +220,25 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Authority Requirements
-Different plugins require different authorities to update:
-- **Authority Managed Plugins** (Royalties, Attributes, Update Delegate): Require the **authority** of the asset or collection
-- **Owner Managed Plugins** (Autograph, Freeze Delegate): Require the **owner** of the asset or the plugin's specific authority
-- **Verified Creators Plugin**: Requires the **update authority** to add/remove creators, but individual **creators can verify themselves**
-## Error Handling
-Common errors when updating plugins:
-- **Authority mismatch**: Ensure you're signing with the correct authority for the plugin type
-- **Plugin not found**: The plugin must exist on the asset/collection before it can be updated
-- **Invalid data**: Plugin data must conform to the expected structure and constraints
-- **Collection mismatch**: If the asset is part of a collection, you may need to include the collection in the update
-## Best Practices
-1. **Fetch before updating**: Always fetch the current asset/collection state to see existing plugin data
-2. **Preserve existing data**: When updating list-based plugins, include existing data you want to keep
-3. **Use proper authorities**: Ensure you're using the correct signing authority for each plugin type
-4. **Batch updates**: If updating multiple plugins, consider batching operations for efficiency
-5. **Validate data**: Ensure your update data meets the plugin's requirements (e.g., creator percentages sum to 100%)
-## Next Steps
-- Learn about specific plugin updates in individual plugin documentation
-- Explore [Plugin Overview](/smart-contracts/core/plugins) for all available plugins
-- Check out [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) and [Removing Plugins](/smart-contracts/core/plugins/removing-plugins)
-- Visit the [MPL Core TypeDoc](https://mpl-core.typedoc.metaplex.com) for detailed API documentation.
+## 权限要求
+不同的插件需要不同的权限来更新：
+- **权限管理插件**（Royalties、Attributes、Update Delegate）：需要 Asset 或 Collection 的**权限**
+- **所有者管理插件**（Autograph、Freeze Delegate）：需要 Asset 的**所有者**或插件的特定权限
+- **Verified Creators 插件**：添加/删除创作者需要**更新权限**，但个别**创作者可以验证自己**
+## 错误处理
+更新插件时的常见错误：
+- **Authority mismatch**：确保您使用正确的权限为插件类型签名
+- **Plugin not found**：在更新之前，插件必须存在于 Asset/Collection 上
+- **Invalid data**：插件数据必须符合预期的结构和约束
+- **Collection mismatch**：如果 Asset 是 Collection 的一部分，您可能需要在更新中包含 Collection
+## 最佳实践
+1. **更新前获取**：始终获取当前 Asset/Collection 状态以查看现有插件数据
+2. **保留现有数据**：更新基于列表的插件时，包括您想要保留的现有数据
+3. **使用正确的权限**：确保您为每种插件类型使用正确的签名权限
+4. **批量更新**：如果更新多个插件，考虑批量操作以提高效率
+5. **验证数据**：确保您的更新数据满足插件的要求（例如，创作者百分比总和为 100%）
+## 下一步
+- 在各个插件文档中了解特定插件更新
+- 在[插件概述](/smart-contracts/core/plugins)中探索所有可用插件
+- 查看[添加插件](/smart-contracts/core/plugins/adding-plugins)和[删除插件](/smart-contracts/core/plugins/removing-plugins)
+- 访问 [MPL Core TypeDoc](https://mpl-core.typedoc.metaplex.com) 获取详细的 API 文档

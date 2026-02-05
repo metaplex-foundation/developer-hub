@@ -1,7 +1,7 @@
 ---
 title: Verified Creator Plugin
 metaTitle: Verified Creator Plugin | Metaplex Core
-description: Add verified creator signatures to Core NFT Assets and Collections. Prove creatorship without affecting royalty distribution.
+description: Core NFT AssetやCollectionに検証済みクリエイター署名を追加します。ロイヤリティ配分に影響を与えずにクリエイターであることを証明できます。
 updated: '01-31-2026'
 keywords:
   - verified creator
@@ -17,76 +17,76 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How is this different from the Token Metadata creator array?
-    a: In Token Metadata, the creator array was used for royalty distribution. In Core, Verified Creators is purely for proof of creatorship - use the Royalties plugin for royalty distribution.
-  - q: Can the update authority verify a creator?
-    a: No. Each creator must verify themselves by signing the transaction. This ensures authentic proof of creatorship.
-  - q: Why can't I remove a verified creator?
-    a: To remove a verified creator, they must first unverify themselves. This prevents unauthorized removal of verified creators.
-  - q: Do Assets automatically get the Collection's verified creators?
-    a: Yes. Assets inherit the creators array from their Collection. Individual Assets can also have their own Verified Creators plugin with different creators.
-  - q: Can I use this for co-creator attribution?
-    a: Yes. This is a common use case - multiple creators can all verify their involvement in creating an Asset or Collection.
+  - q: Token Metadataのcreator配列との違いは何ですか？
+    a: Token Metadataでは、creator配列はロイヤリティ配分に使用されていました。Coreでは、Verified Creatorsは純粋にクリエイターであることの証明用です。ロイヤリティ配分にはRoyalties Pluginを使用してください。
+  - q: Update authorityがクリエイターを検証できますか？
+    a: いいえ。各クリエイターはトランザクションに署名して自分自身を検証する必要があります。これにより本物のクリエイターであることの証明が保証されます。
+  - q: 検証済みクリエイターを削除できないのはなぜですか？
+    a: 検証済みクリエイターを削除するには、まず自分自身の検証を解除する必要があります。これにより、検証済みクリエイターの不正な削除を防止します。
+  - q: AssetはCollectionの検証済みクリエイターを自動的に取得しますか？
+    a: はい。AssetはCollectionからcreators配列を継承します。個別のAssetは異なるクリエイターを持つ独自のVerified Creators Pluginを持つこともできます。
+  - q: 共同クリエイターの帰属表示に使用できますか？
+    a: はい。これは一般的なユースケースです。複数のクリエイターが全員、AssetやCollectionの作成への関与を検証できます。
 ---
-The **Verified Creators Plugin** stores a list of verified creator signatures on Assets or Collections. Prove creatorship publicly without affecting royalty distribution. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add verified creators to Assets and Collections
-- Verify creator signatures
-- Remove creators from the list
-- Understand the verification workflow
+**Verified Creators Plugin**は、AssetまたはCollectionに検証済みクリエイター署名のリストを保存します。ロイヤリティ配分に影響を与えずに、クリエイターであることを公に証明できます。{% .lead %}
+{% callout title="学習内容" %}
+- AssetとCollectionに検証済みクリエイターを追加する
+- クリエイター署名を検証する
+- リストからクリエイターを削除する
+- 検証ワークフローを理解する
 {% /callout %}
-## Summary
-The **Verified Creators** plugin is an Authority Managed plugin that stores creator addresses with verification status. Unlike Token Metadata, these creators are NOT used for royalty distribution (use the Royalties plugin for that).
-- Update authority adds unverified creators
-- Creators verify themselves by signing
-- Verified creators must unverify before removal
-- Assets inherit creators from their Collection
-## Out of Scope
-Royalty distribution (use [Royalties plugin](/smart-contracts/core/plugins/royalties)), Token Metadata creator arrays, and automatic verification.
-## Quick Start
-**Jump to:** [Add to Asset](#adding-the-autograph-plugin-to-an-asset-code-example) · [Add Creator](#adding-a-different-creator-to-an-asset-code-example) · [Remove Creator](#removing-a-creator-from-an-asset-code-example)
-1. Add the Verified Creators plugin with initial creators
-2. Creators verify themselves using `updatePlugin`
-3. To remove: creator unverifies, then update authority removes
+## 概要
+**Verified Creators** Pluginは、検証ステータス付きのクリエイターアドレスを保存するAuthority Managedプラグインです。Token Metadataとは異なり、これらのクリエイターはロイヤリティ配分には使用されません（それにはRoyalties Pluginを使用してください）。
+- Update authorityが未検証のクリエイターを追加
+- クリエイターは署名して自分自身を検証
+- 検証済みクリエイターは削除前に検証解除が必要
+- AssetはCollectionからクリエイターを継承
+## 対象外
+ロイヤリティ配分（[Royalties Plugin](/ja/smart-contracts/core/plugins/royalties)を使用）、Token Metadataのcreator配列、自動検証。
+## クイックスタート
+**ジャンプ先:** [Assetに追加](#adding-the-autograph-plugin-to-an-asset-code-example) · [クリエイターを追加](#adding-a-different-creator-to-an-asset-code-example) · [クリエイターを削除](#removing-a-creator-from-an-asset-code-example)
+1. 初期クリエイターでVerified Creators Pluginを追加
+2. クリエイターは`updatePlugin`を使用して自分自身を検証
+3. 削除するには: クリエイターが検証解除、その後update authorityが削除
 {% callout type="note" title="Verified Creators vs Autograph" %}
-| Feature | Verified Creators | Autograph |
+| 機能 | Verified Creators | Autograph |
 |---------|-------------------|-----------|
-| Who can add | Update authority only | Anyone (after enabled) |
-| Purpose | Prove creatorship | Collectible signatures |
-| Verification | Creators verify themselves | No verification needed |
-| Removal | Must unverify first | Owner can remove anytime |
-| Used for royalties | ❌ No | ❌ No |
-**Use Verified Creators** for proving authentic creatorship.
-**Use [Autograph](/smart-contracts/core/plugins/autograph)** for collectible signatures from fans/celebrities.
+| 追加できる人 | Update authorityのみ | 誰でも（有効化後） |
+| 目的 | クリエイターであることの証明 | コレクタブル署名 |
+| 検証 | クリエイターが自分で検証 | 検証不要 |
+| 削除 | まず検証解除が必要 | オーナーがいつでも削除可能 |
+| ロイヤリティに使用 | いいえ | いいえ |
+**Verified Creators**は本物のクリエイターであることを証明するために使用します。
+**[Autograph](/ja/smart-contracts/core/plugins/autograph)**はファンや有名人からのコレクタブル署名に使用します。
 {% /callout %}
-## Common Use Cases
-- **Team attribution**: Designer, developer, and founder each verify their involvement
-- **Co-creator proof**: Multiple artists verify collaboration on a piece
-- **Brand verification**: Official brand accounts verify partnership
-- **Authenticity proof**: Original creator verifies they created the Asset
-- **Historical record**: Document who was involved in creating a Collection
-The `update authority` can: 
-- Add the plugin.
-- Add unverified creators to the creators array.
-- Can remove unverified creators. To remove verified creators they must unverify themselves first.
-- Can verify themselves.
-To verify a creator the `updatePlugin` instruction has to be signed by the public key that was added by the update authority to the creators array. 
-## Works With
+## 一般的なユースケース
+- **チーム帰属**: デザイナー、開発者、創設者がそれぞれ関与を検証
+- **共同クリエイターの証明**: 複数のアーティストが作品へのコラボレーションを検証
+- **ブランド検証**: 公式ブランドアカウントがパートナーシップを検証
+- **真正性の証明**: オリジナルクリエイターがAssetを作成したことを検証
+- **履歴記録**: Collectionの作成に関わった人を文書化
+`update authority`ができること:
+- Pluginを追加する
+- creators配列に未検証のクリエイターを追加する
+- 未検証のクリエイターを削除できる。検証済みクリエイターを削除するには、まず自分自身の検証を解除する必要がある
+- 自分自身を検証できる
+クリエイターを検証するには、`updatePlugin`インストラクションにupdate authorityによってcreators配列に追加された公開鍵で署名する必要があります。
+## 対応
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-## Arguments
-The `verifiedCreator` Plugin requires the following arguments in a `VerifiedCreatorsSignature` Array:
-| Arg     | Value     |
+## 引数
+`verifiedCreator` Pluginは`VerifiedCreatorsSignature`配列で以下の引数を必要とします:
+| 引数    | 値        |
 | ------- | ------    |
 | address | publicKey |
 | message | string    |
-Assets inherit the Creators array from the Collection.
-## Adding the autograph Plugin to an Asset code example
+AssetはCollectionからCreators配列を継承します。
+## Assetへのautograph Plugin追加のコード例
 {% dialect-switcher title="Adding a verified Creators Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-This snippet assumes that the umi identity is the update authority of the asset.
+このスニペットは、umiのidentityがassetのupdate authorityであることを前提としています。
 ```ts
 import {
   addPlugin,
@@ -105,10 +105,10 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding a different Creator to an Asset code example
+## Assetに別のCreatorを追加するコード例
 {% dialect-switcher title="Adding a different Creator to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-This snippet assumes that the umi identity is the update authority of the asset to add a unverified Creator.
+このスニペットは、umiのidentityがassetのupdate authorityであり、未検証のCreatorを追加することを前提としています。
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -132,8 +132,8 @@ await updatePlugin(umi, {
   authority: umi.identity,
 }).sendAndConfirm(umi)
 ```
-After adding the unverified Creator they can verify themselves using the `updatePlugin` function again.
-This snippet assumes that the umi identity is the Creator.
+未検証のCreatorを追加した後、`updatePlugin`関数を再度使用して自分自身を検証できます。
+このスニペットは、umiのidentityがCreatorであることを前提としています。
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -159,23 +159,23 @@ await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Removing a Creator from an Asset code example
+## AssetからCreatorを削除するコード例
 {% dialect-switcher title="Removing a Creator from an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
-Only the update authority can remove creators. To remove the creator it has to be `verified:false` or the update authority itself. Therefore the update will be done in two steps. If you are able to sign with the update authority and the creator at the same time this could be done in one transaction combining both instructions.
-1. Set `verified:false`
-This snippet assumes that `umi.identity` is the creator that you want to remove
+update authorityのみがクリエイターを削除できます。クリエイターを削除するには、`verified:false`であるか、update authority自身である必要があります。そのため、更新は2つのステップで行われます。update authorityとクリエイターの両方で同時に署名できる場合、両方のインストラクションを組み合わせて1つのトランザクションで実行できます。
+1. `verified:false`を設定
+このスニペットは、`umi.identity`が削除したいクリエイターであることを前提としています
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 const asset = await fetchAsset(umi, assetAddress.publicKey, {
   skipDerivePlugins: false,
 })
-// The Publickey of the creator that you want to remove 
+// The Publickey of the creator that you want to remove
 const publicKeyToRemove = publicKey("abc...")
-const modifiedCreators = signatures.map(signature => 
-  signature.address === creator.publicKey 
-    ? { ...signature, verified: false } 
+const modifiedCreators = signatures.map(signature =>
+  signature.address === creator.publicKey
+    ? { ...signature, verified: false }
     : signature
 );
 await updatePlugin(umi, {
@@ -187,15 +187,15 @@ await updatePlugin(umi, {
   authority: umi.identity, // Should be the creator
 }).sendAndConfirm(umi)
 ```
-2. remove the creator
-This snippet assumes that `umi.identity` is the update authority
+2. クリエイターを削除
+このスニペットは、`umi.identity`がupdate authorityであることを前提としています
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
 const asset = await fetchAsset(umi, assetAddress.publicKey, {
   skipDerivePlugins: false,
 })
-// The Publickey of the creator that you want to remove 
+// The Publickey of the creator that you want to remove
 const publicKeyToRemove = publicKey("abc...")
 const creatorsToKeep = asset.verifiedCreators.signatures.filter(
   (creator) => creator.address !== publicKeyToRemove
@@ -211,10 +211,10 @@ await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the verified Creators Plugin to a Collection code example
+## Collectionにverified Creators Pluginを追加するコード例
 {% dialect-switcher title="Add verified Creators Plugin to Collection" %}
 {% dialect title="JavaScript" id="js" %}
-This snippet assumes that the `umi.identity` is the update authority
+このスニペットは、`umi.identity`がupdate authorityであることを前提としています
 ```ts
 import { addCollectionPlugin } from '@metaplex-foundation/mpl-core'
 await addCollectionPlugin(umi, {
@@ -231,54 +231,54 @@ await addCollectionPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## よくあるエラー
 ### `Authority mismatch`
-Only the update authority can add the plugin or add new creators. Only the creator themselves can verify their own signature.
+update authorityのみがPluginを追加したり、新しいクリエイターを追加したりできます。クリエイター自身のみが自分の署名を検証できます。
 ### `Creator already verified`
-The creator has already verified themselves. No action needed.
+クリエイターは既に自分自身を検証しています。アクションは不要です。
 ### `Cannot remove verified creator`
-A verified creator must unverify themselves before the update authority can remove them.
-## Notes
-- Verified Creators are NOT used for royalty distribution (use Royalties plugin)
-- Creators must verify themselves—update authority cannot verify on their behalf
-- A creator must unverify before they can be removed
-- Assets inherit the creators array from their Collection
-## Quick Reference
-### Verification Workflow
-| Step | Action | Who |
+検証済みクリエイターは、update authorityが削除する前に自分自身の検証を解除する必要があります。
+## 注意事項
+- Verified Creatorsはロイヤリティ配分には使用されません（Royalties Pluginを使用）
+- クリエイターは自分自身を検証する必要があります。update authorityは代わりに検証できません
+- クリエイターは削除される前に検証を解除する必要があります
+- AssetはCollectionからcreators配列を継承します
+## クイックリファレンス
+### 検証ワークフロー
+| ステップ | アクション | 実行者 |
 |------|--------|-----|
-| 1 | Add unverified creator | Update Authority |
-| 2 | Verify creator | Creator signs |
-| 3 | Unverify (optional) | Creator signs |
-| 4 | Remove (optional) | Update Authority |
-### Permission Matrix
-| Action | Update Authority | Creator |
+| 1 | 未検証クリエイターを追加 | Update Authority |
+| 2 | クリエイターを検証 | クリエイターが署名 |
+| 3 | 検証解除（オプション） | クリエイターが署名 |
+| 4 | 削除（オプション） | Update Authority |
+### 権限マトリックス
+| アクション | Update Authority | Creator |
 |--------|------------------|---------|
-| Add plugin | ✅ | ❌ |
-| Add unverified creator | ✅ | ❌ |
-| Verify creator | ❌ | ✅ (self only) |
-| Unverify creator | ❌ | ✅ (self only) |
-| Remove unverified creator | ✅ | ❌ |
+| Pluginを追加 | ✅ | ❌ |
+| 未検証クリエイターを追加 | ✅ | ❌ |
+| クリエイターを検証 | ❌ | ✅（自分のみ） |
+| クリエイターの検証解除 | ❌ | ✅（自分のみ） |
+| 未検証クリエイターを削除 | ✅ | ❌ |
 ## FAQ
-### How is this different from the Token Metadata creator array?
-In Token Metadata, the creator array was used for royalty distribution. In Core, Verified Creators is purely for proof of creatorship—use the Royalties plugin for royalty distribution.
-### Can the update authority verify a creator?
-No. Each creator must verify themselves by signing the transaction. This ensures authentic proof of creatorship.
-### Why can't I remove a verified creator?
-To remove a verified creator, they must first unverify themselves. This prevents unauthorized removal of verified creators.
-### Do Assets automatically get the Collection's verified creators?
-Yes. Assets inherit the creators array from their Collection. Individual Assets can also have their own Verified Creators plugin with different creators.
-### Can I use this for co-creator attribution?
-Yes. This is a common use case—multiple creators (designer, developer, artist) can all verify their involvement in creating an Asset or Collection.
-## Glossary
-| Term | Definition |
+### Token Metadataのcreator配列との違いは何ですか？
+Token Metadataでは、creator配列はロイヤリティ配分に使用されていました。Coreでは、Verified Creatorsは純粋にクリエイターであることの証明用です。ロイヤリティ配分にはRoyalties Pluginを使用してください。
+### Update authorityがクリエイターを検証できますか？
+いいえ。各クリエイターはトランザクションに署名して自分自身を検証する必要があります。これにより本物のクリエイターであることの証明が保証されます。
+### 検証済みクリエイターを削除できないのはなぜですか？
+検証済みクリエイターを削除するには、まず自分自身の検証を解除する必要があります。これにより、検証済みクリエイターの不正な削除を防止します。
+### AssetはCollectionの検証済みクリエイターを自動的に取得しますか？
+はい。AssetはCollectionからcreators配列を継承します。個別のAssetは異なるクリエイターを持つ独自のVerified Creators Pluginを持つこともできます。
+### 共同クリエイターの帰属表示に使用できますか？
+はい。これは一般的なユースケースです。複数のクリエイター（デザイナー、開発者、アーティスト）が全員、AssetやCollectionの作成への関与を検証できます。
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Verified Creator** | Creator who has signed to confirm their involvement |
-| **Unverified Creator** | Creator added by update authority but not yet confirmed |
-| **Verification** | Creator signing to prove authentic creatorship |
-| **Royalties Plugin** | Separate plugin for royalty distribution (not this one) |
-| **Creator Array** | List of addresses associated with an Asset/Collection |
-## Related Plugins
-- [Autograph](/smart-contracts/core/plugins/autograph) - Collectible signatures from anyone (fans, celebrities)
-- [Royalties](/smart-contracts/core/plugins/royalties) - Set royalty distribution (separate from verified creators)
-- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - Lock metadata permanently
+| **Verified Creator** | 関与を確認するために署名したクリエイター |
+| **Unverified Creator** | update authorityによって追加されたがまだ確認されていないクリエイター |
+| **Verification** | 本物のクリエイターであることを証明するためのクリエイターの署名 |
+| **Royalties Plugin** | ロイヤリティ配分用の別のPlugin（これではない） |
+| **Creator Array** | Asset/Collectionに関連付けられたアドレスのリスト |
+## 関連Plugin
+- [Autograph](/ja/smart-contracts/core/plugins/autograph) - 誰でも（ファン、有名人）からのコレクタブル署名
+- [Royalties](/ja/smart-contracts/core/plugins/royalties) - ロイヤリティ配分の設定（検証済みクリエイターとは別）
+- [ImmutableMetadata](/ja/smart-contracts/core/plugins/immutableMetadata) - メタデータを永久にロック

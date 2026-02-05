@@ -1,7 +1,7 @@
 ---
-title: AppData Plugin
-metaTitle: AppData Plugin | Metaplex Core
-description: Store arbitrary data on Core NFTs with the AppData plugin. Create secure, partitioned storage for third-party apps, game state, or custom metadata.
+title: AppData 插件
+metaTitle: AppData 插件 | Metaplex Core
+description: 使用 AppData 插件在 Core NFT 上存储任意数据。为第三方应用、游戏状态或自定义元数据创建安全的分区存储。
 updated: '01-31-2026'
 keywords:
   - AppData plugin
@@ -18,52 +18,52 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: What's the difference between AppData and the Attributes plugin?
-    a: Attributes stores key-value strings controlled by the update authority. AppData stores arbitrary data controlled by a separate Data Authority, making it ideal for third-party applications.
-  - q: Can I have multiple AppData plugins on one Asset?
-    a: Yes. Each AppData plugin can have a different Data Authority, allowing multiple third-party apps to store data on the same Asset.
-  - q: How do I update existing AppData?
-    a: Call writeData() with the new data. This replaces the existing data entirely - there's no partial update.
-  - q: Is AppData indexed by DAS?
-    a: Yes. JSON and MsgPack schemas are automatically deserialized and indexed. Binary is stored as base64.
-  - q: What is LinkedAppData?
-    a: LinkedAppData is added to a Collection and allows the Data Authority to write to any Asset in that Collection without adding AppData to each Asset individually.
+  - q: AppData 和 Attributes 插件有什么区别？
+    a: Attributes 存储由更新权限控制的键值字符串。AppData 存储由单独的数据权限控制的任意数据，非常适合第三方应用程序。
+  - q: 我可以在一个 Asset 上有多个 AppData 插件吗？
+    a: 可以。每个 AppData 插件可以有不同的数据权限，允许多个第三方应用在同一个 Asset 上存储数据。
+  - q: 如何更新现有的 AppData？
+    a: 使用新数据调用 writeData()。这会完全替换现有数据——没有部分更新。
+  - q: AppData 会被 DAS 索引吗？
+    a: 会。JSON 和 MsgPack 模式会自动反序列化并索引。Binary 存储为 base64。
+  - q: 什么是 LinkedAppData？
+    a: LinkedAppData 添加到 Collection 上，允许数据权限写入该 Collection 中的任何 Asset，而无需为每个 Asset 单独添加 AppData。
 ---
-The **AppData Plugin** provides secure, partitioned data storage on Core Assets. Third-party applications can store and read arbitrary data (JSON, MsgPack, or binary) with exclusive write access controlled by a Data Authority. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add AppData to Assets and Collections
-- Configure Data Authorities for secure writes
-- Choose data schemas (JSON, MsgPack, Binary)
-- Read and write data from on-chain and off-chain
+**AppData 插件**在 Core Asset 上提供安全的分区数据存储。第三方应用程序可以存储和读取任意数据（JSON、MsgPack 或 binary），由数据权限控制独占写入访问。{% .lead %}
+{% callout title="您将学到" %}
+- 向 Asset 和 Collection 添加 AppData
+- 配置数据权限以安全写入
+- 选择数据模式（JSON、MsgPack、Binary）
+- 从链上和链下读写数据
 {% /callout %}
-## Summary
-The **AppData** plugin stores arbitrary data on Assets with controlled write access. Only the Data Authority can write to the plugin's data section, enabling secure third-party integrations.
-- Store JSON, MsgPack, or Binary data
-- Data Authority has exclusive write permission
-- Automatically indexed by DAS (JSON/MsgPack)
-- LinkedAppData variant for collection-wide writes
-## Out of Scope
-Oracle validation (see [Oracle Plugin](/smart-contracts/core/external-plugins/oracle)), on-chain attributes (see [Attributes Plugin](/smart-contracts/core/plugins/attribute)), and off-chain metadata storage.
-## Quick Start
-**Jump to:** [Add to Asset](#adding-the-appdata-plugin-to-an-asset) · [Write Data](#writing-data-to-the-appdata-plugin) · [Read Data](#reading-data-from-the-appdata-plugin)
-1. Add AppData plugin with a Data Authority address
-2. Choose schema: JSON, MsgPack, or Binary
-3. Write data using `writeData()` (must sign as Data Authority)
-4. Read data via DAS or direct account fetch
-## What is an AppData Plugin?
-The `AppData` external plugin stores and contains arbitrary data that can be written to by the `dataAuthority`. Note this is different then the overall plugin authority stored in the `ExternalRegistryRecord` as it cannot update/revoke authority or change other metadata for the plugin.
-Think of `AppData` as like a partition data area of an Asset that only a certain authority can change and write to.
-This is useful for 3rd party sites/apps to store data needed to execute certain functionality within their product/app.
-## Works With
+## 概要
+**AppData** 插件在 Asset 上存储任意数据，具有受控的写入访问。只有数据权限可以写入插件的数据部分，实现安全的第三方集成。
+- 存储 JSON、MsgPack 或 Binary 数据
+- 数据权限具有独占写入权限
+- 由 DAS 自动索引（JSON/MsgPack）
+- LinkedAppData 变体用于集合范围的写入
+## 超出范围
+Oracle 验证（参见 [Oracle 插件](/smart-contracts/core/external-plugins/oracle)）、链上属性（参见 [Attributes 插件](/smart-contracts/core/plugins/attribute)）和链下元数据存储。
+## 快速开始
+**跳转至：** [添加到 Asset](#adding-the-appdata-plugin-to-an-asset) · [写入数据](#writing-data-to-the-appdata-plugin) · [读取数据](#reading-data-from-the-appdata-plugin)
+1. 添加带有数据权限地址的 AppData 插件
+2. 选择模式：JSON、MsgPack 或 Binary
+3. 使用 `writeData()` 写入数据（必须以数据权限签名）
+4. 通过 DAS 或直接账户获取读取数据
+## 什么是 AppData 插件？
+`AppData` 外部插件存储和包含可以由 `dataAuthority` 写入的任意数据。请注意，这与存储在 `ExternalRegistryRecord` 中的整体插件权限不同，因为它不能更新/撤销权限或更改插件的其他元数据。
+可以将 `AppData` 视为 Asset 的一个分区数据区域，只有特定的权限可以更改和写入。
+这对于第三方网站/应用程序存储执行其产品/应用程序中某些功能所需的数据非常有用。
+## 适用范围
 |                       |     |
 | --------------------- | --- |
 | MPL Core Asset        | ✅  |
 | MPL Core Collection\* | ✅  |
-\* MPL Core Collections can also work with the `LinkedAppData` Plugin.
-## What is a LinkedAppData Plugin?
-The `LinkedAppData` plugin is built for Collections. It allows you to add a single plugin adapter on the collection which will allow you to write to any Asset in the collection.
-## Arguments
-| Arg           | Value                       |
+\* MPL Core Collection 也可以使用 `LinkedAppData` 插件。
+## 什么是 LinkedAppData 插件？
+`LinkedAppData` 插件专为 Collection 构建。它允许您在 collection 上添加单个插件适配器，这将允许您写入 collection 中的任何 Asset。
+## 参数
+| 参数          | 值                          |
 | ------------- | --------------------------- |
 | dataAuthority | PluginAuthority             |
 | schema        | ExternalPluginAdapterSchema |
@@ -85,30 +85,30 @@ let data_authority = Some(PluginAuthority::Address {address: authority.key()}),
 {% /dialect %}
 {% /dialect-switcher %}
 ### schema
-The schema determines the type of data that is being stored within the `AppData` plugin. All schemas will be indexed by DAS.
-| Arg               | DAS Supported | Stored as |
-| ----------------- | ------------- | --------- |
-| Binary (Raw Data) | ✅            | base64    |
-| Json              | ✅            | json      |
-| MsgPack           | ✅            | json      |
-When indexing the data if there was an error reading the `JSON` or `MsgPack` schema then it will be saved as binary.
-{% dialect-switcher title="Writing data to the `AppData` plugin" %}
+schema 决定了存储在 `AppData` 插件中的数据类型。所有 schema 都将被 DAS 索引。
+| 参数              | DAS 支持 | 存储为   |
+| ----------------- | -------- | -------- |
+| Binary (原始数据) | ✅       | base64   |
+| Json              | ✅       | json     |
+| MsgPack           | ✅       | json     |
+在索引数据时，如果读取 `JSON` 或 `MsgPack` schema 时出错，则会保存为 binary。
+{% dialect-switcher title="向 AppData 插件写入数据" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { ExternalPluginAdapterSchema } from '@metaplex-foundation/mpl-core'
-// Chose from Binary, Json or MsgPack
+// 从 Binary、Json 或 MsgPack 中选择
 const schema = ExternalPluginAdapterSchema.Json
 ```
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 ```rust
-// Chose from Binary, Json or MsgPack
+// 从 Binary、Json 或 MsgPack 中选择
 let schema = ExternalPluginAdapterSchema::Json
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the AppData Plugin to an Asset
-{% dialect-switcher title="Adding a Attribute Plugin to an MPL Core Asset" %}
+## 向 Asset 添加 AppData 插件
+{% dialect-switcher title="向 MPL Core Asset 添加 Attribute 插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -127,7 +127,7 @@ await create(umi, {
         },
     ],
 }).sendAndConfirm(umi)
-// Alternatively you could add the plugin to an existing Asset
+// 或者您可以将插件添加到现有的 Asset
 await addPlugin(umi, {
   asset,
   plugin: {
@@ -179,17 +179,17 @@ pub async fn add_app_data_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Writing Data to the AppData Plugin
-Only the dataAuthority address can write data to the `AppData` plugin.
-To write data to the `AppData` plugin we will use a `writeData()` helper which takes the following args.
-| Arg       | Value                                     |
+## 向 AppData 插件写入数据
+只有 dataAuthority 地址可以向 `AppData` 插件写入数据。
+要向 `AppData` 插件写入数据，我们将使用 `writeData()` 辅助函数，它接受以下参数。
+| 参数      | 值                                        |
 | --------- | ----------------------------------------- |
 | key       | { type: string, dataAuthority: publicKey} |
 | authority | signer                                    |
-| data      | data in the format you wish to store      |
+| data      | 您希望存储的格式的数据                    |
 | asset     | publicKey                                 |
-### Serializing JSON
-{% dialect-switcher title="Serializing JSON" %}
+### 序列化 JSON
+{% dialect-switcher title="序列化 JSON" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 const json = {
@@ -201,7 +201,7 @@ const data = new TextEncoder().encode(JSON.stringify(json))
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 ```rust
-// This uses `serde` and the `serde_json` crates.
+// 这使用 `serde` 和 `serde_json` crate。
 let struct_data = MyData {
     timestamp: 1234567890,
     message: "Hello World".to_string(),
@@ -210,11 +210,11 @@ let data = serde_json::to_vec(&struct_data).unwrap();
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Serializing MsgPack
-{% dialect-switcher title="Serializing MsgPack" %}
+### 序列化 MsgPack
+{% dialect-switcher title="序列化 MsgPack" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
-// This implementation uses `msgpack-lite` for serialization
+// 此实现使用 `msgpack-lite` 进行序列化
 const json = {
   timeStamp: Date.now(),
   message: 'Hello, World!',
@@ -224,7 +224,7 @@ const data = msgpack.encode(json)
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 ```rust
-// This uses `serde` and the `rmp-serde` crates.
+// 这使用 `serde` 和 `rmp-serde` crate。
 let data = MyData {
     timestamp: 1234567890,
     message: "Hello World".to_string(),
@@ -233,18 +233,18 @@ let data = rmp_serde::to_vec(&data).unwrap();
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Serializing Binary
-As binary can store arbitrary data it's up to you to decide on how you are going to serialize and deserialize the data.
-{% dialect-switcher title="Serializing Binary" %}
+### 序列化 Binary
+由于 binary 可以存储任意数据，因此如何序列化和反序列化数据由您决定。
+{% dialect-switcher title="序列化 Binary" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
-// The below example is just creating bytes that are considered `true` or `false`.
+// 下面的示例只是创建被视为 `true` 或 `false` 的字节。
 const data = new Uint8Array([1, 0, 0, 1, 0])
 ```
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 ```rust
-// This example shows how to serialize a Rust struct with `bincode`.
+// 此示例展示如何使用 `bincode` 序列化 Rust 结构体。
 let data = MyData {
     timestamp: 1234567890,
     message: "Hello World".to_string(),
@@ -253,8 +253,8 @@ let data = bincode::serialize(&data).unwrap();
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Writing Data
-{% dialect-switcher title="Adding a Attribute Plugin to an MPL Core Asset" %}
+### 写入数据
+{% dialect-switcher title="向 MPL Core Asset 添加 Attribute 插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 await writeData(umi, {
@@ -270,7 +270,7 @@ await writeData(umi, {
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 ```rust
-/// ### Accounts:
+/// ### 账户:
 ///
 ///   0. `[writable]` asset
 ///   1. `[writable, optional]` collection
@@ -279,8 +279,8 @@ await writeData(umi, {
 ///   4. `[optional]` buffer
 ///   5. `[]` system_program
 ///   6. `[optional]` log_wrapper
-// You need to convert your data (Binary, Json, MsgPack) to bytes for storage.
-// This can be achieved in a few ways depending on your schema chosen.
+// 您需要将数据（Binary、Json、MsgPack）转换为字节以进行存储。
+// 根据您选择的 schema，可以通过几种方式实现。
 let write_to_app_data_plugin_ix = WriteExternalPluginAdapterDataV1CpiBuilder::new()
     .asset(asset)
     .collection(collection)
@@ -295,11 +295,11 @@ let write_to_app_data_plugin_ix = WriteExternalPluginAdapterDataV1CpiBuilder::ne
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Reading Data from the AppData Plugin
-Data can be both read on chain programs and external sources pulling account data.
-### Fetch the Raw Data
-The first step to deserializing the data stored in an `AppData` plugin is to fetch the raw data and check the schema field which dictates the format in which the data is stored before serialization.
-{% dialect-switcher title="Fetching `AppData` Raw Data" %}
+## 从 AppData 插件读取数据
+数据可以从链上程序和提取账户数据的外部来源读取。
+### 获取原始数据
+反序列化存储在 `AppData` 插件中的数据的第一步是获取原始数据并检查 schema 字段，该字段指示数据在序列化之前的存储格式。
+{% dialect-switcher title="获取 AppData 原始数据" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 const assetId = publicKey('11111111111111111111111111111111')
@@ -310,11 +310,11 @@ let appDataPlugin = asset.appDatas?.filter(
 )
 let data
 let schema
-// Check if `AppData` plugin with the given authority exists
+// 检查具有给定权限的 `AppData` 插件是否存在
 if (appDataPlugin && appDataPlugin.length > 0) {
-  // Save plugin data to `data`
+  // 将插件数据保存到 `data`
   data = appDataPlugin[0].data
-  // Save plugin schema to `schema`
+  // 将插件 schema 保存到 `schema`
   schema = appDataPlugin[0].schema
 }
 ```
@@ -323,7 +323,7 @@ if (appDataPlugin && appDataPlugin.length > 0) {
 ```rust
 let plugin_authority = ctx.accounts.authority.key();
 let asset = BaseAssetV1::from_bytes(&data).unwrap();
-// Fetches the `AppData` plugin based on the Authority of the plugin.
+// 根据插件的权限获取 `AppData` 插件。
 let plugin_key = ExternalPluginAdapterKey::AppData(PluginAuthority::Address {
     address: plugin_authority });
 let app_data_plugin = fetch_external_plugin_adapter::<BaseAssetV1, AppData>(
@@ -335,26 +335,25 @@ let app_data_plugin = fetch_external_plugin_adapter::<BaseAssetV1, AppData>(
 let (data_offset, data_length) =
         fetch_external_plugin_adapter_data_info(&account_info, Some(&asset), &plugin_key)
             .unwrap();
-// grab app_data data from account_info
+// 从 account_info 获取 app_data 数据
 let data = account_info.data.borrow()[data_offset..data_offset + data_length].to_vec();
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Deserialization
-Now that you have the data you'll need to deserialize the data depending on the schema you chose to write the data with to the `AppData` plugins.
-#### Deserialize JSON Schema
-{% dialect-switcher title="Deserializing JSON" %}
+### 反序列化
+现在您有了数据，您需要根据您选择用于向 `AppData` 插件写入数据的 schema 来反序列化数据。
+#### 反序列化 JSON Schema
+{% dialect-switcher title="反序列化 JSON" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
-// Due to the JS SDK, the deserialization for the MsgPack schema is automatic and deserialized
-// data can be accessed at the RAW location example above.
+// 由于 JS SDK，MsgPack schema 的反序列化是自动的，反序列化的
+// 数据可以在上面的 RAW 位置示例中访问。
 ```
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 ```rust
-// For the `JSON` schema you will need to use the `serde` and `serde_json` crates.
-// You will need to add `Serialize` and `Deserialize` to your `derive` macro
-// on your struct.
+// 对于 `JSON` schema，您需要使用 `serde` 和 `serde_json` crate。
+// 您需要在结构体的 `derive` 宏中添加 `Serialize` 和 `Deserialize`。
 #[derive(Debug, Serialize, Deserialize)]
 pub struct MyData {
     pub timestamp: u64,
@@ -365,19 +364,18 @@ println!("{:?}", my_data);
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-#### Deserialize MsgPack Schema
-{% dialect-switcher title="Deserializing MsgPack" %}
+#### 反序列化 MsgPack Schema
+{% dialect-switcher title="反序列化 MsgPack" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
-// Due to the JS SDK, the deserialization for the MsgPack schema is automatic and deserialized
-// data can be accessed at the RAW location example above.
+// 由于 JS SDK，MsgPack schema 的反序列化是自动的，反序列化的
+// 数据可以在上面的 RAW 位置示例中访问。
 ```
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 ```rust
-// For the `MsgPack` schema you will need to use the `serde` and `rmp_serde` crates.
-// You will need to add `Serialize` and `Deserialize` to your `derive` macro
-// on your struct.
+// 对于 `MsgPack` schema，您需要使用 `serde` 和 `rmp_serde` crate。
+// 您需要在结构体的 `derive` 宏中添加 `Serialize` 和 `Deserialize`。
 #[derive(Debug, Serialize, Deserialize)]
 pub struct MyData {
     pub timestamp: u64,
@@ -388,13 +386,13 @@ println!("{:?}", my_data);
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-#### Deserialize Binary Schema
-Because the **Binary** schema is arbitrary data then deserialization will be dependent on the serialization you used.
-{% dialect-switcher title="Deserializing Binary" %}
+#### 反序列化 Binary Schema
+因为 **Binary** schema 是任意数据，所以反序列化取决于您使用的序列化方式。
+{% dialect-switcher title="反序列化 Binary" %}
 {% dialect title="JavaScript" id="js" %}
 ```js
-// As the binary data is arbitrary you will need to include your own deserializer to
-// parse the data into a usable format your app/website will understand.
+// 由于 binary 数据是任意的，您需要包含自己的反序列化器来
+// 将数据解析为您的应用/网站可以理解的可用格式。
 ```
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
@@ -404,60 +402,60 @@ pub struct MyData {
     pub timestamp: u64,
     pub message: String,
 }
-// In the below example we'll look at deserialization 
-// using the `bincode` crate to a struct.
+// 在下面的示例中，我们将看看使用 `bincode` crate
+// 反序列化到结构体。
 let my_data: MyData = bincode::deserialize(&data).unwrap();
 println!("{:?}", my_data);
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Authority mismatch`
-Only the Data Authority can write data. Verify you're signing with the correct keypair.
+只有数据权限可以写入数据。请验证您使用的是正确的密钥对进行签名。
 ### `Data too large`
-The data exceeds account size limits. Consider compressing or splitting data across multiple plugins.
+数据超出账户大小限制。考虑压缩或将数据拆分到多个插件中。
 ### `Invalid schema`
-The data doesn't match the declared schema. Ensure JSON is valid or MsgPack is properly encoded.
-## Notes
-- Data Authority is separate from plugin authority
-- Choose JSON or MsgPack for DAS indexing
-- Binary schema for custom serialization formats
-- LinkedAppData allows writing to any Asset in a Collection
-## Quick Reference
-### Schema Comparison
-| Schema | DAS Indexed | Best For |
-|--------|-------------|----------|
-| JSON | ✅ As JSON | Human-readable, web apps |
-| MsgPack | ✅ As JSON | Compact, typed data |
-| Binary | ✅ As base64 | Custom formats, max efficiency |
-### AppData vs Attributes Plugin
-| Feature | AppData | Attributes |
-|---------|---------|------------|
-| Write permission | Data Authority only | Update Authority |
-| Data format | Any (JSON, MsgPack, Binary) | Key-value strings |
-| Third-party friendly | ✅ Yes | ❌ Requires update authority |
-| DAS indexing | ✅ Yes | ✅ Yes |
-## FAQ
-### What's the difference between AppData and the Attributes plugin?
-Attributes stores key-value strings controlled by the update authority. AppData stores arbitrary data controlled by a separate Data Authority, making it ideal for third-party applications.
-### Can I have multiple AppData plugins on one Asset?
-Yes. Each AppData plugin can have a different Data Authority, allowing multiple third-party apps to store data on the same Asset.
-### How do I update existing AppData?
-Call `writeData()` with the new data. This replaces the existing data entirely—there's no partial update.
-### Is AppData indexed by DAS?
-Yes. JSON and MsgPack schemas are automatically deserialized and indexed. Binary is stored as base64.
-### What is LinkedAppData?
-LinkedAppData is added to a Collection and allows the Data Authority to write to any Asset in that Collection without adding AppData to each Asset individually.
-## Glossary
-| Term | Definition |
-|------|------------|
-| **AppData** | External plugin for storing arbitrary data on Assets |
-| **Data Authority** | Address with exclusive write permission |
-| **LinkedAppData** | Collection-level variant for writing to any Asset |
-| **Schema** | Data format: JSON, MsgPack, or Binary |
-| **writeData()** | Function to write data to AppData plugin |
-## Related Pages
-- [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
-- [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) - Validation instead of data storage
-- [Attributes Plugin](/smart-contracts/core/plugins/attribute) - Built-in key-value storage
-- [On-chain Ticketing Guide](/smart-contracts/core/guides/onchain-ticketing-with-appdata) - AppData example
+数据与声明的 schema 不匹配。确保 JSON 有效或 MsgPack 正确编码。
+## 注意事项
+- 数据权限与插件权限是分开的
+- 选择 JSON 或 MsgPack 以进行 DAS 索引
+- Binary schema 用于自定义序列化格式
+- LinkedAppData 允许写入 Collection 中的任何 Asset
+## 快速参考
+### Schema 比较
+| Schema | DAS 索引 | 最适合 |
+|--------|----------|--------|
+| JSON | ✅ 作为 JSON | 人类可读，Web 应用 |
+| MsgPack | ✅ 作为 JSON | 紧凑，类型化数据 |
+| Binary | ✅ 作为 base64 | 自定义格式，最大效率 |
+### AppData 与 Attributes 插件对比
+| 特性 | AppData | Attributes |
+|------|---------|------------|
+| 写入权限 | 仅数据权限 | 更新权限 |
+| 数据格式 | 任意（JSON、MsgPack、Binary） | 键值字符串 |
+| 第三方友好 | ✅ 是 | ❌ 需要更新权限 |
+| DAS 索引 | ✅ 是 | ✅ 是 |
+## 常见问题
+### AppData 和 Attributes 插件有什么区别？
+Attributes 存储由更新权限控制的键值字符串。AppData 存储由单独的数据权限控制的任意数据，非常适合第三方应用程序。
+### 我可以在一个 Asset 上有多个 AppData 插件吗？
+可以。每个 AppData 插件可以有不同的数据权限，允许多个第三方应用在同一个 Asset 上存储数据。
+### 如何更新现有的 AppData？
+使用新数据调用 `writeData()`。这会完全替换现有数据——没有部分更新。
+### AppData 会被 DAS 索引吗？
+会。JSON 和 MsgPack schema 会自动反序列化并索引。Binary 存储为 base64。
+### 什么是 LinkedAppData？
+LinkedAppData 添加到 Collection 上，允许数据权限写入该 Collection 中的任何 Asset，而无需为每个 Asset 单独添加 AppData。
+## 术语表
+| 术语 | 定义 |
+|------|------|
+| **AppData** | 用于在 Asset 上存储任意数据的外部插件 |
+| **Data Authority** | 具有独占写入权限的地址 |
+| **LinkedAppData** | 用于写入任何 Asset 的 Collection 级变体 |
+| **Schema** | 数据格式：JSON、MsgPack 或 Binary |
+| **writeData()** | 向 AppData 插件写入数据的函数 |
+## 相关页面
+- [外部插件概述](/smart-contracts/core/external-plugins/overview) - 了解外部插件
+- [Oracle 插件](/smart-contracts/core/external-plugins/oracle) - 验证而非数据存储
+- [Attributes 插件](/smart-contracts/core/plugins/attribute) - 内置键值存储
+- [链上票务指南](/smart-contracts/core/guides/onchain-ticketing-with-appdata) - AppData 示例

@@ -1,7 +1,7 @@
 ---
 title: Permanent Transfer Delegate
 metaTitle: Permanent Transfer Delegate | Metaplex Core
-description: Grant permanent transfer authority that persists across ownership changes. Use for game mechanics, subscription services, and automated asset management.
+description: 소유권 변경 후에도 유지되는 영구적인 transfer 권한을 부여합니다. 게임 메커니즘, 구독 서비스, 자동화된 자산 관리에 사용할 수 있습니다.
 updated: '01-31-2026'
 keywords:
   - permanent transfer
@@ -17,66 +17,66 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What's the difference between Transfer Delegate and Permanent Transfer Delegate?
-    a: Regular Transfer Delegate is revoked after one transfer. Permanent Transfer Delegate persists forever and can transfer unlimited times.
-  - q: Can Permanent Transfer Delegate transfer frozen Assets?
-    a: Yes. Permanent plugins use forceApprove, which overrides freeze rejections.
-  - q: Can I add this to an existing Asset?
-    a: No. Permanent plugins can only be added at Asset creation time. Use regular Transfer Delegate for existing Assets.
-  - q: How does Collection-level Permanent Transfer Delegate work?
-    a: The delegate can transfer any individual Asset in the Collection, but not all at once. Each transfer is a separate transaction.
+  - q: Transfer Delegate와 Permanent Transfer Delegate의 차이점은 무엇인가요?
+    a: 일반 Transfer Delegate는 1회 전송 후 취소됩니다. Permanent Transfer Delegate는 영구적으로 유지되며 무제한으로 전송할 수 있습니다.
+  - q: Permanent Transfer Delegate가 동결된 Asset을 전송할 수 있나요?
+    a: 네. Permanent plugin은 forceApprove를 사용하여 동결 거부를 무시합니다.
+  - q: 기존 Asset에 이것을 추가할 수 있나요?
+    a: 아니요. Permanent plugin은 Asset 생성 시에만 추가할 수 있습니다. 기존 Asset에는 일반 Transfer Delegate를 사용하세요.
+  - q: Collection 레벨의 Permanent Transfer Delegate는 어떻게 작동하나요?
+    a: delegate는 Collection 내의 개별 Asset을 전송할 수 있지만, 한 번에 모두 전송할 수는 없습니다. 각 전송은 별도의 트랜잭션입니다.
 ---
-The **Permanent Transfer Delegate Plugin** provides irrevocable transfer authority that persists forever. Unlike regular Transfer Delegate, this authority is never revoked and can transfer Assets repeatedly. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Create Assets with permanent transfer capability
-- Enable collection-wide transfer authority
-- Use cases: games, subscriptions, automated systems
-- Understand permanent vs regular transfer delegate
+**Permanent Transfer Delegate Plugin**은 영구적으로 유지되는 취소 불가능한 transfer 권한을 제공합니다. 일반 Transfer Delegate와 달리 이 권한은 취소되지 않으며 Asset을 반복적으로 전송할 수 있습니다. {% .lead %}
+{% callout title="학습 내용" %}
+- 영구 transfer 기능이 있는 Asset 생성
+- Collection 전체 transfer 권한 활성화
+- 사용 사례: 게임, 구독, 자동화 시스템
+- permanent vs 일반 transfer delegate 이해
 {% /callout %}
-## Summary
-The **Permanent Transfer Delegate** is a permanent plugin that can only be added at creation time. The delegate can transfer the Asset unlimited times without owner approval.
-- Can only be added at Asset/Collection creation
-- Authority persists forever (never revoked)
-- Uses `forceApprove` - can transfer even when frozen
-- Collection-level: allows transfer of any Asset in the Collection
-## Out of Scope
-Regular transfer delegate (see [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate)), escrowless listings (use regular delegate), and Token Metadata transfer authority.
-## Quick Start
-**Jump to:** [Create Asset](#creating-a-mpl-core-asset-with-a-permanent-transfer-plugin)
-1. Add `PermanentTransferDelegate` plugin at Asset/Collection creation
-2. Set the authority to your program or delegate address
-3. The delegate can transfer the Asset at any time, unlimited times
-{% callout type="note" title="Permanent vs Regular Transfer Delegate" %}
-| Feature | Transfer Delegate | Permanent Transfer Delegate |
+## 개요
+**Permanent Transfer Delegate**는 생성 시에만 추가할 수 있는 permanent plugin입니다. delegate는 소유자 승인 없이 무제한으로 Asset을 전송할 수 있습니다.
+- Asset/Collection 생성 시에만 추가 가능
+- 권한은 영구적으로 유지 (취소되지 않음)
+- `forceApprove` 사용 - 동결 상태에서도 전송 가능
+- Collection 레벨: Collection 내의 모든 Asset 전송 가능
+## 범위 외
+일반 transfer delegate ([Transfer Delegate](/ko/smart-contracts/core/plugins/transfer-delegate) 참조), 에스크로 없는 리스팅 (일반 delegate 사용), Token Metadata transfer 권한.
+## 빠른 시작
+**바로가기:** [Asset 생성](#creating-a-mpl-core-asset-with-a-permanent-transfer-plugin)
+1. Asset/Collection 생성 시 `PermanentTransferDelegate` plugin 추가
+2. authority를 프로그램 또는 delegate 주소로 설정
+3. delegate는 언제든지 무제한으로 Asset 전송 가능
+{% callout type="note" title="Permanent vs 일반 Transfer Delegate" %}
+| 기능 | Transfer Delegate | Permanent Transfer Delegate |
 |---------|-------------------|----------------------------|
-| Add after creation | ✅ Yes | ❌ Creation only |
-| Authority persists on transfer | ❌ Revokes after 1 transfer | ✅ Persists forever |
-| Multiple transfers | ❌ One-time | ✅ Unlimited |
-| Can transfer frozen Assets | ❌ No | ✅ Yes (forceApprove) |
-| Works with Collections | ❌ No | ✅ Yes |
-**Choose [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate)** for one-time escrowless sales.
-**Choose Permanent Transfer Delegate** for games, rentals, or automated systems needing repeated transfers.
+| 생성 후 추가 | ✅ 가능 | ❌ 생성 시에만 |
+| 전송 후 권한 유지 | ❌ 1회 전송 후 취소 | ✅ 영구 유지 |
+| 다중 전송 | ❌ 1회성 | ✅ 무제한 |
+| 동결된 Asset 전송 가능 | ❌ 불가 | ✅ 가능 (forceApprove) |
+| Collection에서 동작 | ❌ 불가 | ✅ 가능 |
+**[Transfer Delegate](/ko/smart-contracts/core/plugins/transfer-delegate) 선택**: 1회성 에스크로 없는 판매가 필요한 경우.
+**Permanent Transfer Delegate 선택**: 게임, 렌탈, 또는 반복 전송이 필요한 자동화 시스템의 경우.
 {% /callout %}
-## Common Use Cases
-- **Game mechanics**: Transfer Assets when game events occur (losing battles, trading)
-- **Rental returns**: Automatically return rented NFTs to the owner
-- **Subscription management**: Transfer tokens when subscriptions end or renew
-- **DAO treasury management**: Allow DAOs to manage Asset distribution
-- **Automated systems**: Programs that need to move Assets without per-transfer approval
-## Works With
+## 일반적인 사용 사례
+- **게임 메커니즘**: 게임 이벤트 (전투 패배, 거래) 발생 시 Asset 전송
+- **렌탈 반환**: 렌탈한 NFT를 자동으로 소유자에게 반환
+- **구독 관리**: 구독 종료 또는 갱신 시 토큰 전송
+- **DAO 트레저리 관리**: DAO가 Asset 배포를 관리할 수 있도록 허용
+- **자동화 시스템**: 전송마다 승인 없이 Asset을 이동해야 하는 프로그램
+## 호환성
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-### Behaviours
-- **Asset**: Allows transferring of the Asset using the delegated address.
-- **Collection**: Allows transferring of any Asset in the collection using the collection authority. It does not transfer all at once.
-## Arguments
-| Arg    | Value |
+### 동작
+- **Asset**: delegated 주소를 사용하여 Asset 전송을 허용합니다.
+- **Collection**: collection authority를 사용하여 Collection 내의 모든 Asset 전송을 허용합니다. 한 번에 모두 전송하지 않습니다.
+## 인수
+| 인수    | 값 |
 | ------ | ----- |
 | frozen | bool  |
-## Creating a MPL Core Asset with a Permanent Transfer Plugin
-{% dialect-switcher title="Creating a MPL Core Asset with a Permanent Transfer Plugin" %}
+## Permanent Transfer Plugin이 있는 MPL Core Asset 생성
+{% dialect-switcher title="Permanent Transfer Plugin이 있는 MPL Core Asset 생성" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -137,33 +137,33 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 일반적인 오류
 ### `Cannot add permanent plugin after creation`
-Permanent plugins can only be added at Asset/Collection creation. You cannot add a Permanent Transfer Delegate to an existing Asset.
+Permanent plugin은 Asset/Collection 생성 시에만 추가할 수 있습니다. 기존 Asset에는 Permanent Transfer Delegate를 추가할 수 없습니다.
 ### `Authority mismatch`
-Only the plugin authority can transfer. Verify you're signing with the correct keypair.
-## Notes
-- **Creation only**: Cannot be added after Asset/Collection exists
-- **Force approve**: Can transfer even when frozen
-- **Collection behavior**: Can transfer any Asset in the Collection individually
-- **Persists forever**: Authority is never revoked
-- **Unlimited transfers**: No limit on how many times the delegate can transfer
+plugin authority만 전송할 수 있습니다. 올바른 키페어로 서명하고 있는지 확인하세요.
+## 참고 사항
+- **생성 시에만**: Asset/Collection 존재 후에는 추가 불가
+- **Force approve**: 동결 상태에서도 전송 가능
+- **Collection 동작**: Collection 내의 모든 Asset을 개별적으로 전송 가능
+- **영구적**: 권한은 취소되지 않음
+- **무제한 전송**: delegate가 전송할 수 있는 횟수에 제한 없음
 ## FAQ
-### What's the difference between Transfer Delegate and Permanent Transfer Delegate?
-Regular Transfer Delegate is revoked after one transfer. Permanent Transfer Delegate persists forever and can transfer unlimited times.
-### Can Permanent Transfer Delegate transfer frozen Assets?
-Yes. Permanent plugins use `forceApprove`, which overrides freeze rejections.
-### Can I add this to an existing Asset?
-No. Permanent plugins can only be added at Asset creation time. Use regular Transfer Delegate for existing Assets.
-### How does Collection-level Permanent Transfer Delegate work?
-The delegate can transfer any individual Asset in the Collection, but not all at once. Each transfer is a separate transaction.
-## Related Plugins
-- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - One-time transfer authority
-- [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) - Permanent freeze authority
-- [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) - Permanent burn authority
-## Glossary
-| Term | Definition |
+### Transfer Delegate와 Permanent Transfer Delegate의 차이점은 무엇인가요?
+일반 Transfer Delegate는 1회 전송 후 취소됩니다. Permanent Transfer Delegate는 영구적으로 유지되며 무제한으로 전송할 수 있습니다.
+### Permanent Transfer Delegate가 동결된 Asset을 전송할 수 있나요?
+네. Permanent plugin은 `forceApprove`를 사용하여 동결 거부를 무시합니다.
+### 기존 Asset에 이것을 추가할 수 있나요?
+아니요. Permanent plugin은 Asset 생성 시에만 추가할 수 있습니다. 기존 Asset에는 일반 Transfer Delegate를 사용하세요.
+### Collection 레벨의 Permanent Transfer Delegate는 어떻게 작동하나요?
+delegate는 Collection 내의 개별 Asset을 전송할 수 있지만, 한 번에 모두 전송할 수는 없습니다. 각 전송은 별도의 트랜잭션입니다.
+## 관련 Plugin
+- [Transfer Delegate](/ko/smart-contracts/core/plugins/transfer-delegate) - 1회성 transfer 권한
+- [Permanent Freeze Delegate](/ko/smart-contracts/core/plugins/permanent-freeze-delegate) - 영구적인 freeze 권한
+- [Permanent Burn Delegate](/ko/smart-contracts/core/plugins/permanent-burn-delegate) - 영구적인 burn 권한
+## 용어집
+| 용어 | 정의 |
 |------|------------|
-| **Permanent Plugin** | Plugin that can only be added at creation and persists forever |
-| **forceApprove** | Validation that overrides other plugin rejections |
-| **Collection Transfer** | Ability to transfer any Asset in a Collection |
+| **Permanent Plugin** | 생성 시에만 추가할 수 있고 영구적으로 유지되는 Plugin |
+| **forceApprove** | 다른 plugin의 거부를 무시하는 검증 |
+| **Collection Transfer** | Collection 내의 모든 Asset을 전송하는 기능 |

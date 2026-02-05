@@ -162,7 +162,7 @@ const collectionId = collectionAddress(asset)
 ```
 ## Notes
 - Burning is **permanent and irreversible** - the Asset cannot be recovered
-- ~0.0028 SOL is returned from rent, but ~0.0009 SOL stays in the account
+- Rent is returned to the owner (amount varies based on asset size and plugins)
 - The remaining SOL prevents the account address from being reused
 - Burn Delegates can burn on behalf of owners (via the Burn Delegate plugin)
 - Frozen Assets must be unfrozen before burning
@@ -183,14 +183,13 @@ const collectionId = collectionAddress(asset)
 ### Rent Recovery
 | Item | Amount |
 |------|--------|
-| Returned to payer | ~0.0028 SOL |
+| Returned to payer | Base + plugin storage rent |
 | Remaining in account | ~0.0009 SOL |
-| **Total original rent** | **~0.0029 SOL** |
 ## FAQ
 ### Can I recover the ~0.0009 SOL left in the account?
 No. This small amount is intentionally left to mark the account as "burned" and prevent its address from being reused for a new Asset.
 ### What happens to the Asset's metadata after burning?
-The on-chain account is cleared (zeroed out). The off-chain metadata (on Arweave/IPFS) remains accessible via the original URI, but there's no on-chain record linking to it.
+The on-chain account is cleared (zeroed out). The off-chain metadata remains accessible via the original URI, but there's no on-chain record linking to it.
 ### Can a Burn Delegate burn without the owner's approval?
 Yes. Once an owner assigns a Burn Delegate via the plugin, the delegate can burn the Asset at any time. Owners should only assign trusted addresses as Burn Delegates.
 ### Does burning affect the Collection's count?

@@ -19,7 +19,7 @@ programmingLanguage:
   - TypeScript
 faqs:
   - q: Should I use Core or Token Metadata for new projects?
-    a: Use Core for all new projects. It's cheaper, simpler, and has better features. Token Metadata is legacy.
+    a: Use Core for all new projects. It's cheaper, simpler, and has better features. Token Metadata for NFTs is legacy.
   - q: Can I migrate existing TM NFTs to Core?
     a: Not automatically. Core Assets are different on-chain accounts. Migration would require burning TM NFTs and minting new Core Assets.
   - q: What happened to pNFTs?
@@ -44,10 +44,10 @@ Core replaces Token Metadata's multi-account model with a single-account design.
 | Accounts per NFT | 3+ (mint, metadata, ATA) | 1 |
 | Mint cost | ~0.022 SOL | ~0.0037 SOL |
 | Freeze mechanism | Delegate + freeze authority | Freeze Delegate plugin |
-| Collection royalties | Per-asset updates | Collection-level plugin |
+| Royalties | Per-asset updates | Flexible: collection or asset level |
 | On-chain attributes | ❌ | ✅ Attributes plugin |
 ## Out of Scope
-Migration scripts (coming soon), pNFT-specific features, and fungible token handling (use SPL Token).
+pNFT-specific features and fungible token handling (use SPL Token).
 ## Quick Start
 **Jump to:** [Cost Comparison](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze--lock) · [Lifecycle Events](#lifecycle-events-and-plugins)
 If you're starting fresh, use Core. If migrating, the key mental shifts are:
@@ -142,7 +142,7 @@ const burningAllowed = canBurn(authority, asset, collection)
 | Burn | `burnV1()` | `burn()` |
 ## FAQ
 ### Should I use Core or Token Metadata for new projects?
-Use Core for all new projects. It's cheaper, simpler, and has better features. Token Metadata is legacy.
+Use Core for all new projects. It's cheaper, simpler, and has better features. Token Metadata for NFTs is legacy.
 ### Can I migrate existing TM NFTs to Core?
 Not automatically. Core Assets are different on-chain accounts. Migration would require burning TM NFTs and minting new Core Assets.
 ### What happened to pNFTs?

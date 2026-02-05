@@ -1,7 +1,7 @@
 ---
-title: JSON Schema
-metaTitle: JSON Schema | Core
-description: Understand the structure and requirements of the off-chain JSON schema for Metaplex Core assets.
+title: JSON 스키마
+metaTitle: JSON 스키마 | Core
+description: Metaplex Core 자산의 오프체인 JSON 스키마 구조와 요구 사항을 이해합니다.
 updated: '01-31-2026'
 keywords:
   - NFT metadata
@@ -14,12 +14,12 @@ about:
   - Off-chain data
 proficiencyLevel: Beginner
 ---
-The off-chain JSON metadata for Metaplex Core assets is similar to the Metaplex Token Metadata standard. However, since more data can be stored on-chain in the asset itself using plugins, some of the data like attributes can in addition be stored on chain.
-## Schema Examples
-Below are examples for the different known types of NFTs. It's important to note that all of these different types can also be part of a single Asset using the `image`, `animation_url`, and `properties` fields. All the different fields are further described in the [JSON Schema Fields](#json-schema-fields) section.
-{% totem title="Examples" id="schema-examples" %}
-{% totem-accordion title="Image" %}
-The Attributes  can alternatively be stored onchain using the [Attributes Plugin](/smart-contracts/core/plugins/attribute).
+Metaplex Core 자산의 오프체인 JSON 메타데이터는 Metaplex Token Metadata 표준과 유사합니다. 그러나 플러그인을 사용하여 자산 자체에 더 많은 데이터를 온체인에 저장할 수 있으므로 속성과 같은 일부 데이터는 추가로 온체인에 저장할 수 있습니다.
+## 스키마 예제
+아래는 알려진 다양한 NFT 유형에 대한 예제입니다. 이러한 모든 다른 유형은 `image`, `animation_url` 및 `properties` 필드를 사용하여 단일 Asset의 일부가 될 수도 있다는 점에 유의하세요. 모든 다른 필드는 [JSON 스키마 필드](#json-스키마-필드) 섹션에서 자세히 설명합니다.
+{% totem title="예제" id="schema-examples" %}
+{% totem-accordion title="이미지" %}
+Attributes는 [Attributes 플러그인](/smart-contracts/core/plugins/attribute)을 사용하여 온체인에 저장할 수도 있습니다.
 ```json
 {
   "name": "Number #0001",
@@ -48,7 +48,7 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 }
 ```
 {% /totem-accordion  %}
-{% totem-accordion title="Animated GIF" %}
+{% totem-accordion title="애니메이션 GIF" %}
 ```json
 {
   "name": "Number #0001",
@@ -67,7 +67,7 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 }
 ```
 {% /totem-accordion  %}
-{% totem-accordion title="Video" %}
+{% totem-accordion title="비디오" %}
 ```json
 {
     "name": "Video Asset",
@@ -91,7 +91,7 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 }
 ```
 {% /totem-accordion  %}
-{% totem-accordion title="Audio" %}
+{% totem-accordion title="오디오" %}
 ```json
 {
     "name": "Audio Asset",
@@ -116,7 +116,7 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 ```
 {% /totem-accordion  %}
 {% totem-accordion title="VR" %}
-While most Explorers and wallets support `.glb` files it is recommended to also have a fallback image as part of the schema.
+대부분의 익스플로러와 지갑이 `.glb` 파일을 지원하지만 스키마의 일부로 대체 이미지를 포함하는 것이 좋습니다.
 ```json
 {
     "name": "VR Asset",
@@ -141,7 +141,7 @@ While most Explorers and wallets support `.glb` files it is recommended to also 
 ```
 {% /totem-accordion  %}
 {% totem-accordion title="HTML" %}
-The following example for HTML Assets is not supported by wallets currently, as they might see them as security risk. Some explorers render them correctly though, therefore it is recommended to have a fallback image for all the tools not supporting HTML Assets.
+다음 HTML Asset 예제는 현재 지갑에서 지원되지 않으며 보안 위험으로 간주될 수 있습니다. 그러나 일부 익스플로러는 올바르게 렌더링하므로 HTML Asset을 지원하지 않는 모든 도구에 대해 대체 이미지를 포함하는 것이 좋습니다.
 ```json
 {
     "name": "HTML Asset",
@@ -166,37 +166,37 @@ The following example for HTML Assets is not supported by wallets currently, as 
 ```
 {% /totem-accordion  %}
 {% /totem %}
-## JSON Schema Fields
-Below explanations for the different fields can be found.
-If you miss some fields that you knew from Metaplex Token Metadata those are probably deprecated. The `creators` for example are part of the [Royalties Plugin](/smart-contracts/core/plugins/royalties) now.
-### Required Fields
-- **name**: The name of your NFT asset
-  - Example: "Solana Monkey #123", "Degen Ape #45"
-  
-- **description**: A detailed description of your NFT
-  - Example: "A rare cosmic monkey floating through the Solana blockchain"
-- **image**: URI pointing to the primary image of your NFT
-  - Example: `https://arweave.net/123abc...?ext=png`
-  - Supports: PNG, GIF, JPG/JPEG
-- **category**: Type of NFT content
-    - Examples: `image`, `video`, `audio`, `vr`, `html`
-### Optional Fields
-  
-- **animation_url**: URI for multimedia attachments
-  - Example: `https://arweave.net/xyz789...?ext=mp4`
-  - Supports: MP4, GIF, GLB, HTML
-- **external_url**: Link to an external website for the NFT
-  - Example: `https://www.myproject.io/nft/123`
-- **attributes**: Array of traits and their values. These can alternatively be stored onchain using the [Attributes Plugin](/smart-contracts/core/plugins/attribute)
-  - Example:
+## JSON 스키마 필드
+아래에서 다양한 필드에 대한 설명을 찾을 수 있습니다.
+Metaplex Token Metadata에서 알고 있던 일부 필드가 없다면 아마도 더 이상 사용되지 않을 것입니다. 예를 들어 `creators`는 이제 [Royalties 플러그인](/smart-contracts/core/plugins/royalties)의 일부입니다.
+### 필수 필드
+- **name**: NFT 자산의 이름
+  - 예: "Solana Monkey #123", "Degen Ape #45"
+
+- **description**: NFT에 대한 상세 설명
+  - 예: "Solana 블록체인을 통해 떠다니는 희귀한 우주 원숭이"
+- **image**: NFT의 기본 이미지를 가리키는 URI
+  - 예: `https://arweave.net/123abc...?ext=png`
+  - 지원: PNG, GIF, JPG/JPEG
+- **category**: NFT 콘텐츠 유형
+    - 예: `image`, `video`, `audio`, `vr`, `html`
+### 선택 필드
+
+- **animation_url**: 멀티미디어 첨부 파일용 URI
+  - 예: `https://arweave.net/xyz789...?ext=mp4`
+  - 지원: MP4, GIF, GLB, HTML
+- **external_url**: NFT의 외부 웹사이트 링크
+  - 예: `https://www.myproject.io/nft/123`
+- **attributes**: 특성 및 해당 값의 배열. [Attributes 플러그인](/smart-contracts/core/plugins/attribute)을 사용하여 온체인에 저장할 수도 있습니다.
+  - 예:
     ```json
     {
       "trait_type": "Background",
       "value": "Galaxy"
     }
     ```
-- **properties**: Additional metadata including files and categories
-  - **files**: Array of all assets associated with the NFT. the `type` is the [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types) of the file.
+- **properties**: 파일 및 카테고리를 포함한 추가 메타데이터
+  - **files**: NFT와 관련된 모든 자산의 배열. `type`은 파일의 [MIME 유형](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types)입니다.
     ```json
     {
       "uri": "https://arweave.net/abc123...?ext=png",

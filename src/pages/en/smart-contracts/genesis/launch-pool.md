@@ -32,7 +32,7 @@ faqs:
   - q: How is the token price determined in a Launch Pool?
     a: The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
   - q: Can users withdraw their deposits?
-    a: Yes, users can withdraw during the deposit period. A 2% withdrawal fee applies to discourage gaming the system.
+    a: Yes, users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} withdrawal fee applies to discourage gaming the system.
   - q: What happens if I deposit multiple times?
     a: Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
   - q: When can users claim their tokens?
@@ -41,22 +41,22 @@ faqs:
     a: Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
 ---
 
-**Launch Pools** provide organic price discovery for token launches. Users deposit during a window and receive tokens proportional to their share of total deposits—no sniping, no front-running, fair distribution for everyone. {% .lead %}
+**Launch Pools** provide organic price discovery for token launches. Users deposit during a window and receive tokens proportional to their share of total deposits - no sniping, no front-running, fair distribution for everyone. {% .lead %}
 
 {% callout title="What You'll Learn" %}
 This guide covers:
 - How Launch Pool pricing and distribution works
 - Setting up deposit and claim windows
 - Configuring end behaviors for fund collection
-- User operations: deposit, withdraw, and claim
+- User operations: Deposit, withdraw, and claim
 {% /callout %}
 
 ## Summary
 
 Launch Pools accept deposits during a defined window, then distribute tokens proportionally. The final token price is determined by total deposits divided by token allocation.
 
-- Users deposit SOL during the deposit window (2% fee applies)
-- Withdrawals allowed during deposit period (2% fee)
+- Users deposit SOL during the deposit window ({% fee product="genesis" config="launchPool" fee="deposit" /%} fee applies)
+- Withdrawals allowed during deposit period ({% fee product="genesis" config="launchPool" fee="withdraw" /%} fee)
 - Token distribution is proportional to deposit share
 - End behaviors route collected SOL to treasury buckets
 
@@ -489,7 +489,7 @@ Multiple deposits from the same user accumulate into a single deposit account.
 
 ### Withdrawing
 
-Users can withdraw during the deposit period. A 2% fee applies.
+Users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} fee applies.
 
 {% totem %}
 
@@ -677,7 +677,7 @@ if (deposit) {
 
 ## Notes
 
-- The 2% protocol fee applies to both deposits and withdrawals
+- The {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee applies to both deposits and withdrawals
 - Multiple deposits from the same user accumulate in one deposit account
 - If a user withdraws their entire balance, the deposit PDA closes
 - Transitions must be executed after deposits close for end behaviors to process
@@ -689,7 +689,7 @@ if (deposit) {
 The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
 
 ### Can users withdraw their deposits?
-Yes, users can withdraw during the deposit period. A 2% withdrawal fee applies to discourage gaming the system.
+Yes, users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} withdrawal fee applies to discourage gaming the system.
 
 ### What happens if I deposit multiple times?
 Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.

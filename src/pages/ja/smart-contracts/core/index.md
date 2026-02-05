@@ -1,7 +1,7 @@
 ---
-title: Overview
-metaTitle: Metaplex Core | Next-Gen NFT Standard for Solana
-description: Metaplex Core is the next-generation NFT standard on Solana with single-account design, enforced royalties, and a flexible plugin system. Lower costs, lower compute, better performance.
+title: 概要
+metaTitle: Metaplex Core | Solana向け次世代NFT標準
+description: Metaplex Coreは、シングルアカウント設計、強制ロイヤリティ、柔軟なプラグインシステムを備えたSolana上の次世代NFT標準です。低コスト、低コンピュート、高パフォーマンス。
 updated: '01-31-2026'
 keywords:
   - Metaplex Core
@@ -20,124 +20,124 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: What is Metaplex Core?
-    a: Metaplex Core is a next-generation NFT standard on Solana that uses a single-account design for lower costs, enforced royalties, and a flexible plugin system. It's the recommended standard for new NFT projects.
-  - q: How is Core different from Token Metadata?
-    a: Core uses one account per asset vs 3+ for Token Metadata, costs ~80% less to mint, has lower compute usage, and includes built-in royalty enforcement.
-  - q: Can I migrate from Token Metadata to Core?
-    a: Core Assets and Token Metadata NFTs are separate standards. There's no automatic migration. New projects should use Core; existing Token Metadata collections continue to work.
-  - q: Does Core support royalties?
-    a: Yes. Core has a Royalties plugin that enforces royalties by default. You can set basis points, creator splits, and allowlist/denylist rules for marketplaces.
-  - q: What are plugins?
-    a: Plugins are modular extensions that add behavior to Core Assets or Collections. Examples include Freeze Delegate, Attributes, and Royalties.
-  - q: How much does it cost to mint a Core Asset?
-    a: Approximately 0.0029 SOL per asset, compared to ~0.022 SOL for Token Metadata. This makes Core ~80% cheaper for minting.
-  - q: Which RPC providers support Core?
-    a: All major RPC providers supporting DAS (Digital Asset Standard) index Core assets.
-  - q: Can I use Core for gaming assets?
-    a: Yes. Core's plugin system makes it ideal for gaming with Attributes for on-chain stats, Freeze Delegate for locking items, and Transfer Delegate for marketplace integration.
+  - q: Metaplex Coreとは何ですか？
+    a: Metaplex Coreは、シングルアカウント設計による低コスト、強制ロイヤリティ、柔軟なプラグインシステムを特徴とするSolana上の次世代NFT標準です。新規NFTプロジェクトに推奨される標準です。
+  - q: CoreはToken Metadataとどう違いますか？
+    a: Coreはアセットごとに1アカウント（Token Metadataは3つ以上）を使用し、ミントコストが約80%削減され、コンピュート使用量が少なく、ロイヤリティ強制が組み込まれています。
+  - q: Token MetadataからCoreに移行できますか？
+    a: Core AssetとToken Metadata NFTは別々の標準です。自動移行はありません。新規プロジェクトはCoreを使用すべきで、既存のToken Metadataコレクションは引き続き機能します。
+  - q: Coreはロイヤリティをサポートしていますか？
+    a: はい。Coreにはデフォルトでロイヤリティを強制するRoyaltiesプラグインがあります。ベーシスポイント、クリエイター分配、マーケットプレイス向けの許可リスト/拒否リストルールを設定できます。
+  - q: プラグインとは何ですか？
+    a: プラグインは、Core AssetまたはCollectionに動作を追加するモジュラー拡張機能です。例としてFreeze Delegate、Attributes、Royaltiesがあります。
+  - q: Core Assetのミントにはいくらかかりますか？
+    a: アセットあたり約0.0029 SOLで、Token Metadataの約0.022 SOLと比較できます。これによりCoreはミントが約80%安くなります。
+  - q: どのRPCプロバイダーがCoreをサポートしていますか？
+    a: DAS（Digital Asset Standard）をサポートするすべての主要RPCプロバイダーがCore assetをインデックスしています。
+  - q: ゲームアセットにCoreを使用できますか？
+    a: はい。Coreのプラグインシステムは、オンチェーンステータス用のAttributes、アイテムロック用のFreeze Delegate、マーケットプレイス統合用のTransfer Delegateにより、ゲームに最適です。
 ---
-Metaplex Core ("Core") is the **next-generation NFT standard** on Solana. It uses a **single-account design** that reduces minting costs by 80%+ compared to alternatives, while providing **enforced royalties**, **collection-level operations**, and a **flexible plugin system** for custom behaviors. {% .lead %}
-{% callout title="What You'll Learn" %}
-This overview covers:
-- What Metaplex Core is and why it exists
-- Key advantages over Token Metadata and other standards
-- Core concepts: Assets, Collections, and Plugins
-- How to get started building with Core
+Metaplex Core（「Core」）は、Solana上の**次世代NFT標準**です。**シングルアカウント設計**を使用し、代替手段と比較してミントコストを80%以上削減しながら、**強制ロイヤリティ**、**コレクションレベル操作**、およびカスタム動作のための**柔軟なプラグインシステム**を提供します。 {% .lead %}
+{% callout title="学習内容" %}
+この概要では以下を説明します：
+- Metaplex Coreとは何か、なぜ存在するのか
+- Token Metadataやその他の標準に対する主な利点
+- コア概念：Asset、Collection、Plugin
+- Coreでの開発を始める方法
 {% /callout %}
-## Summary
-**Metaplex Core** is a Solana NFT standard that replaces Token Metadata for most new projects. It offers the lowest minting costs, enforced royalties, and a plugin architecture for custom functionality.
-- Single-account design: ~0.0029 SOL per mint (vs 0.022 SOL for Token Metadata)
-- Enforced royalties by default with allowlist/denylist controls
-- Plugin system for staking, attributes, delegates, and custom behaviors
-- Collection-level operations: freeze, update royalties, or modify all assets at once
-## Out of Scope
-This overview does not cover: fungible tokens (use SPL Token), Token Metadata migration paths, or detailed plugin implementation. See specific pages for those topics.
-## Quick Start
-**Jump to:** [Getting Started](#next-steps) · [Key Advantages](#introduction) · [FAQ](#faq) · [Glossary](#glossary)
-1. Install the SDK: `npm install @metaplex-foundation/mpl-core`
-2. Create an Asset: [Creating Assets guide](/smart-contracts/core/create-asset)
-3. Add plugins: [Plugins overview](/smart-contracts/core/plugins)
-4. Query with DAS: [Fetching Assets](/smart-contracts/core/fetch)
+## 概要
+**Metaplex Core**は、ほとんどの新規プロジェクトでToken Metadataに代わるSolana NFT標準です。最低のミントコスト、強制ロイヤリティ、およびカスタム機能のためのプラグインアーキテクチャを提供します。
+- シングルアカウント設計：ミントあたり約0.0029 SOL（Token Metadataの0.022 SOLに対して）
+- デフォルトで強制ロイヤリティ、許可リスト/拒否リスト制御付き
+- ステーキング、属性、デリゲート、カスタム動作のためのプラグインシステム
+- コレクションレベル操作：すべてのアセットを一度にフリーズ、ロイヤリティ更新、または変更
+## 対象外
+この概要では、ファンジブルトークン（SPL Tokenを使用）、Token Metadata移行パス、または詳細なプラグイン実装は扱いません。それらのトピックについては特定のページを参照してください。
+## クイックスタート
+**ジャンプ先：** [はじめに](#次のステップ) · [主な利点](#紹介) · [FAQ](#faq) · [用語集](#用語集)
+1. SDKをインストール: `npm install @metaplex-foundation/mpl-core`
+2. Assetを作成: [Assetの作成ガイド](/ja/smart-contracts/core/create-asset)
+3. プラグインを追加: [プラグイン概要](/ja/smart-contracts/core/plugins)
+4. DASでクエリ: [Assetの取得](/ja/smart-contracts/core/fetch)
 {% quick-links %}
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/smart-contracts/core/sdk" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
-{% quick-link title="API Reference" icon="CodeBracketSquare" href="https://mpl-core.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Check our API References." /%}
-{% quick-link title="Differences from Token Metadata" icon="AcademicCap" href="/smart-contracts/core/tm-differences" description="Coming from Token Metadata? See what's changed and what's new." /%}
-{% quick-link title="Try Core in a UI" icon="Beaker" href="https://core.metaplex.com/" target="_blank" description="Mint a Core Asset yourself using our web interface." /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/core/sdk" description="お好みの言語またはライブラリを選択し、Solana上のデジタルアセットを始めましょう。" /%}
+{% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-core.typedoc.metaplex.com/" target="_blank" description="特定の内容をお探しですか？APIリファレンスをご覧ください。" /%}
+{% quick-link title="Token Metadataとの違い" icon="AcademicCap" href="/ja/smart-contracts/core/tm-differences" description="Token Metadataからの移行ですか？変更点と新機能を確認してください。" /%}
+{% quick-link title="UIでCoreを試す" icon="Beaker" href="https://core.metaplex.com/" target="_blank" description="Webインターフェースを使用してCore Assetをミントしてみましょう。" /%}
 {% /quick-links %}
-## Introduction
-Metaplex Core is the recommended NFT standard for new projects on Solana. Compared to Token Metadata and other standards, Core provides:
-### Cost Efficiency
-| Standard | Mint Cost | Compute Units |
+## 紹介
+Metaplex Coreは、Solanaでの新規プロジェクトに推奨されるNFT標準です。Token Metadataやその他の標準と比較して、Coreは以下を提供します：
+### コスト効率
+| 標準 | ミントコスト | コンピュートユニット |
 |----------|-----------|---------------|
-| **Metaplex Core** | ~0.0029 SOL | ~17,000 CU |
-| Token Metadata | ~0.022 SOL | ~205,000 CU |
-| Token Extensions | ~0.0046 SOL | ~85,000 CU |
-### Key Advantages
-- **Single Account Design**: Core uses one account per asset instead of multiple (mint + metadata + token account). This reduces costs and simplifies development.
-- **Enforced Royalties**: The [Royalties plugin](/smart-contracts/core/plugins/royalties) enforces creator royalties by default with allowlist/denylist controls.
-- **Collection-Level Operations**: Update royalties, freeze assets, or modify metadata for an entire collection in a single transaction.
-- **Plugin Architecture**: Add custom behaviors to assets via plugins:
-  - [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Allow others to freeze/unfreeze
-  - [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - Allow others to burn
-  - [Attributes](/smart-contracts/core/plugins/attribute) - On-chain key/value data (auto-indexed by DAS)
-  - [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - Allow others to transfer
-  - And many more in the [Plugins section](/smart-contracts/core/plugins)
-- **DAS Indexing**: All major [RPC providers supporting DAS](/rpc-providers) already index Core assets.
-## Core Concepts
-### Assets
-An **Asset** is a single on-chain account representing an NFT. Unlike Token Metadata (which uses 3+ accounts), Core Assets contain ownership, metadata URI, and plugin data in one account.
-See: [What is an Asset?](/smart-contracts/core/what-is-an-asset)
-### Collections
-A **Collection** is a Core account that groups related Assets. Collections can have their own plugins that apply to all member Assets. Collection-level royalties, for example, apply to every Asset in the collection unless overridden.
-See: [Collections](/smart-contracts/core/collections)
-### Plugins
-**Plugins** are modular extensions that add behavior to Assets or Collections. They hook into lifecycle events (create, transfer, burn) to enforce rules or store data.
-See: [Plugins Overview](/smart-contracts/core/plugins)
-## Quick Reference
-### Program IDs
-| Program | Address |
+| **Metaplex Core** | 約0.0029 SOL | 約17,000 CU |
+| Token Metadata | 約0.022 SOL | 約205,000 CU |
+| Token Extensions | 約0.0046 SOL | 約85,000 CU |
+### 主な利点
+- **シングルアカウント設計**：Coreは複数のアカウント（mint + metadata + token account）の代わりに、アセットごとに1つのアカウントを使用します。これによりコストが削減され、開発が簡素化されます。
+- **強制ロイヤリティ**：[Royaltiesプラグイン](/ja/smart-contracts/core/plugins/royalties)は、許可リスト/拒否リスト制御付きでデフォルトでクリエイターロイヤリティを強制します。
+- **コレクションレベル操作**：1つのトランザクションでコレクション全体のロイヤリティ更新、アセットのフリーズ、またはメタデータの変更が可能です。
+- **プラグインアーキテクチャ**：プラグインを介してアセットにカスタム動作を追加：
+  - [Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate) - 他者がフリーズ/解除可能
+  - [Burn Delegate](/ja/smart-contracts/core/plugins/burn-delegate) - 他者がバーン可能
+  - [Attributes](/ja/smart-contracts/core/plugins/attribute) - オンチェーンキー/バリューデータ（DASで自動インデックス）
+  - [Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate) - 他者が転送可能
+  - その他多数は[プラグインセクション](/ja/smart-contracts/core/plugins)をご覧ください
+- **DASインデックス**：[DASをサポートする](/rpc-providers)すべての主要RPCプロバイダーは、すでにCore assetをインデックスしています。
+## コア概念
+### Asset
+**Asset**は、NFTを表す単一のオンチェーンアカウントです。Token Metadata（3つ以上のアカウントを使用）とは異なり、Core Assetは所有権、メタデータURI、およびプラグインデータを1つのアカウントに含みます。
+参照：[Assetとは？](/ja/smart-contracts/core/what-is-an-asset)
+### Collection
+**Collection**は、関連するAssetをグループ化するCoreアカウントです。Collectionは、すべてのメンバーAssetに適用される独自のプラグインを持つことができます。例えば、コレクションレベルのロイヤリティは、オーバーライドされない限り、コレクション内のすべてのAssetに適用されます。
+参照：[Collection](/ja/smart-contracts/core/collections)
+### Plugin
+**Plugin**は、AssetまたはCollectionに動作を追加するモジュラー拡張機能です。ライフサイクルイベント（作成、転送、バーン）にフックして、ルールを強制したりデータを保存したりします。
+参照：[プラグイン概要](/ja/smart-contracts/core/plugins)
+## クイックリファレンス
+### プログラムID
+| プログラム | アドレス |
 |---------|---------|
 | MPL Core | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
 | MPL Core (Devnet) | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
-### SDK Packages
-| Language | Package |
+### SDKパッケージ
+| 言語 | パッケージ |
 |----------|---------|
 | JavaScript/TypeScript | `@metaplex-foundation/mpl-core` |
 | Rust | `mpl-core` |
-## Next Steps
-1. **Choose your SDK**: Visit [Getting Started](/smart-contracts/core/sdk) to install the JavaScript or Rust SDK
-2. **Create your first Asset**: Follow the [Creating Assets](/smart-contracts/core/create-asset) guide
-3. **Explore plugins**: See available behaviors in [Plugins](/smart-contracts/core/plugins)
-4. **Migrate from Token Metadata**: Review [Differences from Token Metadata](/smart-contracts/core/tm-differences)
+## 次のステップ
+1. **SDKを選択**：[はじめに](/ja/smart-contracts/core/sdk)でJavaScriptまたはRust SDKをインストール
+2. **最初のAssetを作成**：[Assetの作成](/ja/smart-contracts/core/create-asset)ガイドに従う
+3. **プラグインを探索**：[プラグイン](/ja/smart-contracts/core/plugins)で利用可能な動作を確認
+4. **Token Metadataから移行**：[Token Metadataとの違い](/ja/smart-contracts/core/tm-differences)を確認
 {% callout %}
-Please note that certain Core instructions require protocol fees. Review the [Protocol Fees](/protocol-fees) page for current information.
+特定のCore命令にはプロトコル手数料が必要です。現在の情報については[プロトコル手数料](/protocol-fees)ページをご確認ください。
 {% /callout %}
 ## FAQ
-### What is Metaplex Core?
-Metaplex Core is a next-generation NFT standard on Solana that uses a single-account design for lower costs, enforced royalties, and a flexible plugin system. It's the recommended standard for new NFT projects.
-### How is Core different from Token Metadata?
-Core uses one account per asset (vs 3+ for Token Metadata), costs ~80% less to mint, has lower compute usage, and includes built-in royalty enforcement. Token Metadata is considered legacy for new projects.
-### Can I migrate from Token Metadata to Core?
-Core Assets and Token Metadata NFTs are separate standards. There's no automatic migration. New projects should use Core; existing Token Metadata collections continue to work.
-### Does Core support royalties?
-Yes. Core has a [Royalties plugin](/smart-contracts/core/plugins/royalties) that enforces royalties by default. You can set basis points, creator splits, and allowlist/denylist rules for marketplaces.
-### What are plugins?
-Plugins are modular extensions that add behavior to Core Assets or Collections. Examples include Freeze Delegate (allow freezing), Attributes (on-chain data), and Royalties (creator payments).
-### How much does it cost to mint a Core Asset?
-Approximately 0.0029 SOL per asset, compared to ~0.022 SOL for Token Metadata. This makes Core ~80% cheaper for minting.
-### Which RPC providers support Core?
-All major RPC providers supporting DAS (Digital Asset Standard) index Core assets. See [RPC Providers](/rpc-providers) for a current list.
-### Can I use Core for gaming assets?
-Yes. Core's plugin system makes it ideal for gaming: use Attributes for on-chain stats, Freeze Delegate for locking items, and Transfer Delegate for marketplace integration.
-## Glossary
-| Term | Definition |
+### Metaplex Coreとは何ですか？
+Metaplex Coreは、シングルアカウント設計による低コスト、強制ロイヤリティ、柔軟なプラグインシステムを特徴とするSolana上の次世代NFT標準です。新規NFTプロジェクトに推奨される標準です。
+### CoreはToken Metadataとどう違いますか？
+Coreはアセットごとに1アカウント（Token Metadataは3つ以上）を使用し、ミントコストが約80%削減され、コンピュート使用量が少なく、ロイヤリティ強制が組み込まれています。Token Metadataは新規プロジェクトではレガシーと見なされています。詳細な比較については[Token Metadataとの違い](/ja/smart-contracts/core/tm-differences)をご覧ください。
+### Token MetadataからCoreに移行できますか？
+Core AssetとToken Metadata NFTは別々の標準です。自動移行はありません。新規プロジェクトはCoreを使用すべきで、既存のToken Metadataコレクションは引き続き機能します。
+### Coreはロイヤリティをサポートしていますか？
+はい。Coreにはデフォルトでロイヤリティを強制する[Royaltiesプラグイン](/ja/smart-contracts/core/plugins/royalties)があります。ベーシスポイント、クリエイター分配、マーケットプレイス向けの許可リスト/拒否リストルールを設定できます。
+### プラグインとは何ですか？
+プラグインは、Core AssetまたはCollectionに動作を追加するモジュラー拡張機能です。例としてFreeze Delegate（フリーズ許可）、Attributes（オンチェーンデータ）、Royalties（クリエイター支払い）があります。
+### Core Assetのミントにはいくらかかりますか？
+ベースアセットあたり約0.0029 SOLで、Token Metadataの約0.022 SOLと比較できます。これによりCoreはミントが約80%安くなります。詳細については[Token Metadataとの違い](/ja/smart-contracts/core/tm-differences)をご覧ください。
+### どのRPCプロバイダーがCoreをサポートしていますか？
+DAS（Digital Asset Standard）をサポートするすべての主要RPCプロバイダーがCore assetをインデックスしています。現在のリストについては[RPCプロバイダー](/rpc-providers)をご覧ください。
+### ゲームアセットにCoreを使用できますか？
+はい。Coreのプラグインシステムは、オンチェーンステータス用のAttributes、アイテムロック用のFreeze Delegate、マーケットプレイス統合用のTransfer Delegateにより、ゲームに最適です。
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Asset** | A single Core on-chain account representing an NFT with ownership, metadata, and plugins |
-| **Collection** | A Core account that groups related Assets and can apply collection-wide plugins |
-| **Plugin** | A modular extension that adds behavior to Assets or Collections (royalties, freeze, attributes) |
-| **DAS** | Digital Asset Standard - the API specification for querying indexed NFT data |
-| **Basis Points** | Royalty percentage in hundredths of a percent (500 = 5%) |
-| **Delegate** | An account authorized to perform specific actions on an Asset without owning it |
-| **CPI** | Cross-Program Invocation - calling the Core program from another Solana program |
-| **URI** | The off-chain metadata URL pointing to a JSON file with name, image, and attributes |
+| **Asset** | 所有権、メタデータ、プラグインを持つNFTを表す単一のCoreオンチェーンアカウント |
+| **Collection** | 関連するAssetをグループ化し、コレクション全体のプラグインを適用できるCoreアカウント |
+| **Plugin** | AssetまたはCollectionに動作を追加するモジュラー拡張機能（ロイヤリティ、フリーズ、属性） |
+| **DAS** | Digital Asset Standard - インデックスされたNFTデータをクエリするためのAPI仕様 |
+| **ベーシスポイント** | パーセントの100分の1単位のロイヤリティ割合（500 = 5%） |
+| **Delegate** | 所有せずにAssetに対して特定のアクションを実行する権限を持つアカウント |
+| **CPI** | Cross-Program Invocation - 別のSolanaプログラムからCoreプログラムを呼び出すこと |
+| **URI** | 名前、画像、属性を含むJSONファイルを指すオフチェーンメタデータURL |

@@ -1,7 +1,7 @@
 ---
-title: Soulbound Assets in MPL Core
-metaTitle: Soulbound Assets in MPL Core | Core Guides
-description: This Guide explores the different options for soulbound Assets in MPL Core
+title: MPL Core의 소울바운드 Asset
+metaTitle: MPL Core의 소울바운드 Asset | Core 가이드
+description: 이 가이드에서는 MPL Core에서 소울바운드 Asset의 다양한 옵션을 살펴봅니다
 updated: '01-31-2026'
 keywords:
   - soulbound NFT
@@ -17,37 +17,37 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 howToSteps:
-  - Choose between Permanent Freeze Delegate or Oracle Plugin approach
-  - Create a Collection with the soulbound plugin at collection level
-  - Add the plugin with frozen state set to true and authority to None
-  - Mint Assets into the Collection - they inherit soulbound behavior
+  - Permanent Freeze Delegate 또는 Oracle Plugin 접근 방식 중 선택
+  - 컬렉션 수준에 소울바운드 플러그인이 있는 Collection 생성
+  - frozen 상태를 true로, authority를 None으로 설정하여 플러그인 추가
+  - Collection에 Asset 민팅 - 소울바운드 동작 상속
 howToTools:
   - Node.js
-  - Umi framework
+  - Umi 프레임워크
   - mpl-core SDK
 ---
-Soulbound NFTs are non-fungible tokens that are permanently bound to a specific wallet address and cannot be transferred to another owner. They are useful for representing achievements, credentials, or memberships that should remain tied to a specific identity.  {% .lead %}
-## Overview
-In this guide, we'll explore how to create soulbound assets using MPL Core and the Umi Framework. Whether you're a developer looking to implement soulbound NFTs in TypeScript or just want to understand how they work, we'll cover everything from basic concepts to practical implementation. We'll examine different approaches for making assets soulbound and walk through creating your first soulbound NFT within a collection.
-In MPL Core, there are two main approaches to create soulbound NFTs:
+소울바운드 NFT는 특정 지갑 주소에 영구적으로 묶여 있고 다른 소유자에게 전송할 수 없는 대체 불가능한 토큰입니다. 특정 신원에 연결되어야 하는 업적, 자격증 또는 멤버십을 나타내는 데 유용합니다. {% .lead %}
+## 개요
+이 가이드에서는 MPL Core와 Umi 프레임워크를 사용하여 소울바운드 에셋을 생성하는 방법을 살펴봅니다. TypeScript에서 소울바운드 NFT를 구현하려는 개발자이든 작동 방식을 이해하고 싶은 분이든, 기본 개념부터 실제 구현까지 모든 것을 다룹니다. 에셋을 소울바운드로 만드는 다양한 접근 방식을 살펴보고 컬렉션 내에서 첫 번째 소울바운드 NFT를 생성하는 방법을 안내합니다.
+MPL Core에서 소울바운드 NFT를 생성하는 두 가지 주요 접근 방식이 있습니다:
 ### 1. Permanent Freeze Delegate Plugin
-- Makes assets completely non-transferrable and non-burnable
-- Can be applied at either:
-  - Individual asset level
-  - Collection level (more rent efficient)
-- Collection-level implementation allows thawing all assets in a single transaction
+- 에셋을 완전히 전송 불가능하고 소각 불가능하게 만듭니다
+- 다음 수준에서 적용할 수 있습니다:
+  - 개별 에셋 수준
+  - 컬렉션 수준 (더 렌트 효율적)
+- 컬렉션 수준 구현은 단일 트랜잭션으로 모든 에셋 해동 가능
 ### 2. Oracle Plugin
-- Makes assets non-transferrable but still burnable
-- Can also be applied at:
-  - Individual asset level  
-  - Collection level (more rent efficient)
-- Collection-level implementation allows thawing all assets in a single transaction
-## Creating Soulbound NFTs with the Permanent Freeze Delegate Plugin
-The Permanent Freeze Delegate Plugin provides functionality to make assets non-transferrable by freezing them. When creating a soulbound asset, you would:
-1. Include the Permanent Freeze plugin during asset creation
-2. Set the initial state to frozen
-3. Set the authority to None, making the frozen state permanent and immutable
-This effectively creates a permanently soulbound asset that cannot be transferred or thawed. In the following code snippet it is shown where to add those three options:
+- 에셋을 전송 불가능하게 만들지만 여전히 소각 가능합니다
+- 다음 수준에서도 적용할 수 있습니다:
+  - 개별 에셋 수준
+  - 컬렉션 수준 (더 렌트 효율적)
+- 컬렉션 수준 구현은 단일 트랜잭션으로 모든 에셋 해동 가능
+## Permanent Freeze Delegate Plugin으로 소울바운드 NFT 생성
+Permanent Freeze Delegate Plugin은 에셋을 동결하여 전송 불가능하게 만드는 기능을 제공합니다. 소울바운드 에셋을 생성할 때:
+1. 에셋 생성 시 Permanent Freeze 플러그인 포함
+2. 초기 상태를 frozen으로 설정
+3. authority를 None으로 설정하여 frozen 상태를 영구적이고 변경 불가능하게 만듦
+이렇게 하면 전송하거나 해동할 수 없는 영구적으로 소울바운드된 에셋이 효과적으로 생성됩니다. 다음 코드 스니펫에서 이 세 가지 옵션을 추가하는 위치를 보여줍니다:
 ```js
   await create(umi, {
     asset: assetSigner,
@@ -56,17 +56,17 @@ This effectively creates a permanently soulbound asset that cannot be transferre
     uri: "https://example.com/my-asset.json",
     plugins: [
       {
-        type: 'PermanentFreezeDelegate', // Include the Permanent Freeze plugin
-        frozen: true, // Set the initial state to frozen
-        authority: { type: "None" }, // Set the authority to None
+        type: 'PermanentFreezeDelegate', // Permanent Freeze 플러그인 포함
+        frozen: true, // 초기 상태를 frozen으로 설정
+        authority: { type: "None" }, // authority를 None으로 설정
       },
     ],
   })
 ```
-### Asset-Level Implementation
-The Permanent Freeze Delegate Plugin can be attached to individual assets to make them soulbound. This provides more granular control but requires more rent and separate thaw transactions per asset in case it ever should not be soulbound anymore.
+### Asset 수준 구현
+Permanent Freeze Delegate Plugin은 개별 에셋에 첨부하여 소울바운드로 만들 수 있습니다. 이는 더 세분화된 제어를 제공하지만 더 많은 렌트가 필요하고 소울바운드가 아니어야 할 경우 에셋별로 별도의 해동 트랜잭션이 필요합니다.
 {% totem %}
-{% totem-accordion title="Code Example" %}
+{% totem-accordion title="코드 예제" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -84,37 +84,37 @@ import {
   fetchAssetV1,
 } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
-// Define a dummy destination wallet for testing transfer restrictions
+// 전송 제한 테스트를 위한 더미 대상 지갑 정의
 const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d");
 (async () => {
-  // Step 1: Initialize Umi with devnet RPC endpoint
+  // 1단계: devnet RPC 엔드포인트로 Umi 초기화
   const umi = createUmi(
     "https://api.devnet.solana.com"
   ).use(mplCore());
-  // Step 2: Create and fund a test wallet
+  // 2단계: 테스트 지갑 생성 및 자금 조달
   const walletSigner = generateSigner(umi);
   umi.use(keypairIdentity(walletSigner));
-  console.log("Funding test wallet with devnet SOL...");
+  console.log("devnet SOL로 테스트 지갑에 자금 조달 중...");
   await umi.rpc.airdrop(walletSigner.publicKey, sol(0.1));
-  // Step 3: Create a new collection to hold our frozen asset
-  console.log("Creating parent collection...");
+  // 3단계: frozen 에셋을 담을 새 컬렉션 생성
+  console.log("부모 컬렉션 생성 중...");
   const collectionSigner = generateSigner(umi);
   await createCollection(umi, {
     collection: collectionSigner,
     name: "My Collection",
     uri: "https://example.com/my-collection.json",
   }).sendAndConfirm(umi);
-  
-  // Wait for transaction confirmation
+
+  // 트랜잭션 확인 대기
   await new Promise(resolve => setTimeout(resolve, 15000));
-  // Fetch and verify the collection was created
+  // 컬렉션 생성 확인을 위해 가져오기
   const collection = await fetchCollection(umi, collectionSigner.publicKey);
-  console.log("Collection created successfully:", collectionSigner.publicKey);
-  // Step 4: Create a frozen asset within the collection
-  console.log("Creating frozen asset...");
+  console.log("컬렉션이 성공적으로 생성됨:", collectionSigner.publicKey);
+  // 4단계: 컬렉션 내에 frozen 에셋 생성
+  console.log("frozen 에셋 생성 중...");
   const assetSigner = generateSigner(umi);
-  
-  // Create the asset with permanent freeze using the PermanentFreezeDelegate plugin
+
+  // PermanentFreezeDelegate 플러그인을 사용하여 영구 동결된 에셋 생성
   await create(umi, {
     asset: assetSigner,
     collection: collection,
@@ -122,43 +122,43 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     uri: "https://example.com/my-asset.json",
     plugins: [
       {
-        // The PermanentFreezeDelegate plugin permanently freezes the asset
+        // PermanentFreezeDelegate 플러그인은 에셋을 영구적으로 동결
         type: 'PermanentFreezeDelegate',
-        frozen: true, // Set the asset as frozen
-        authority: { type: "None" }, // No authority can unfreeze it
+        frozen: true, // 에셋을 frozen으로 설정
+        authority: { type: "None" }, // 어떤 authority도 해동 불가
       },
     ],
   }).sendAndConfirm(umi);
-  
-  // Wait for transaction confirmation
+
+  // 트랜잭션 확인 대기
   await new Promise(resolve => setTimeout(resolve, 15000));
-  // Fetch and verify the asset was created
+  // 에셋 생성 확인을 위해 가져오기
   const asset = await fetchAssetV1(umi, assetSigner.publicKey);
-  console.log("Frozen asset created successfully:", assetSigner.publicKey);
-  // Step 5: Demonstrate that the asset is truly frozen
+  console.log("Frozen 에셋이 성공적으로 생성됨:", assetSigner.publicKey);
+  // 5단계: 에셋이 정말로 frozen인지 시연
   console.log(
-    "Testing frozen property by attempting a transfer (this should fail)..."
+    "전송 시도로 frozen 속성 테스트 (실패해야 함)..."
   );
-  
-  // Attempt to transfer the asset (this will fail due to freeze)
+
+  // 에셋 전송 시도 (freeze로 인해 실패)
   const transferResponse = await transfer(umi, {
     asset: asset,
     newOwner: DESTINATION_WALLET,
     collection,
   }).sendAndConfirm(umi, { send: { skipPreflight: true } });
-  // Log the failed transfer attempt signature
+  // 실패한 전송 시도 서명 로그
   console.log(
-    "Transfer attempt signature:",
+    "전송 시도 서명:",
     base58.deserialize(transferResponse.signature)[0]
   );
 })();
 ```
 {% /totem-accordion  %}
 {% /totem %}
-### Collection-Level Implementation
-For collections where all assets should be soulbound, applying the plugin at the collection level is more efficient. This requires less rent and enables thawing the entire collection in one transaction.
+### Collection 수준 구현
+모든 에셋이 소울바운드되어야 하는 컬렉션의 경우 컬렉션 수준에서 플러그인을 적용하는 것이 더 효율적입니다. 이는 더 적은 렌트가 필요하고 하나의 트랜잭션으로 전체 컬렉션을 해동할 수 있습니다.
 {% totem %}
-{% totem-accordion title="Code Example" %}
+{% totem-accordion title="코드 예제" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -176,23 +176,23 @@ import {
   fetchAssetV1,
 } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
-// Define a dummy destination wallet for testing transfer restrictions
+// 전송 제한 테스트를 위한 더미 대상 지갑 정의
 const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d");
 (async () => {
-  // Step 1: Initialize Umi with devnet RPC endpoint
+  // 1단계: devnet RPC 엔드포인트로 Umi 초기화
   const umi = createUmi(
     "https://api.devnet.solana.com"
   ).use(mplCore());
-  // Step 2: Create and fund a test wallet
+  // 2단계: 테스트 지갑 생성 및 자금 조달
   const walletSigner = generateSigner(umi);
   umi.use(keypairIdentity(walletSigner));
-  console.log("Funding test wallet with devnet SOL...");
+  console.log("devnet SOL로 테스트 지갑에 자금 조달 중...");
   await umi.rpc.airdrop(walletSigner.publicKey, sol(0.1));
-  
-  // Wait for airdrop confirmation
+
+  // 에어드롭 확인 대기
   await new Promise(resolve => setTimeout(resolve, 15000));
-  // Step 3: Create a new frozen collection
-  console.log("Creating frozen collection...");
+  // 3단계: 새 frozen 컬렉션 생성
+  console.log("frozen 컬렉션 생성 중...");
   const collectionSigner = generateSigner(umi);
   await createCollection(umi, {
     collection: collectionSigner,
@@ -200,20 +200,20 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     uri: "https://example.com/my-collection.json",
     plugins: [
       {
-        // The PermanentFreezeDelegate plugin permanently freezes the collection
+        // PermanentFreezeDelegate 플러그인은 컬렉션을 영구적으로 동결
         type: 'PermanentFreezeDelegate',
-        frozen: true, // Set the collection as frozen
-        authority: { type: "None" }, // No authority can unfreeze it
+        frozen: true, // 컬렉션을 frozen으로 설정
+        authority: { type: "None" }, // 어떤 authority도 해동 불가
       },
     ],
   }).sendAndConfirm(umi);
-  // Wait for collection creation confirmation
+  // 컬렉션 생성 확인 대기
   await new Promise(resolve => setTimeout(resolve, 15000));
-  // Fetch and verify the collection was created
+  // 컬렉션 생성 확인을 위해 가져오기
   const collection = await fetchCollection(umi, collectionSigner.publicKey);
-  console.log("Frozen collection created successfully:", collectionSigner.publicKey);
-  // Step 4: Create an asset within the frozen collection
-  console.log("Creating asset in frozen collection...");
+  console.log("Frozen 컬렉션이 성공적으로 생성됨:", collectionSigner.publicKey);
+  // 4단계: frozen 컬렉션 내에 에셋 생성
+  console.log("frozen 컬렉션에 에셋 생성 중...");
   const assetSigner = generateSigner(umi);
   await create(umi, {
     asset: assetSigner,
@@ -221,35 +221,35 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     name: "Frozen Asset",
     uri: "https://example.com/my-asset.json",
   }).sendAndConfirm(umi);
-  // Wait for asset creation confirmation
+  // 에셋 생성 확인 대기
   await new Promise(resolve => setTimeout(resolve, 15000));
-  // Fetch and verify the asset was created
+  // 에셋 생성 확인을 위해 가져오기
   const asset = await fetchAssetV1(umi, assetSigner.publicKey);
-  console.log("Asset created successfully in frozen collection:", assetSigner.publicKey);
-  // Step 5: Demonstrate that the asset is frozen by the collection
+  console.log("frozen 컬렉션에 에셋이 성공적으로 생성됨:", assetSigner.publicKey);
+  // 5단계: 에셋이 컬렉션에 의해 frozen되었는지 시연
   console.log(
-    "Testing frozen property by attempting a transfer (this should fail)..."
+    "전송 시도로 frozen 속성 테스트 (실패해야 함)..."
   );
-  
-  // Attempt to transfer the asset (this will fail due to collection freeze)
+
+  // 에셋 전송 시도 (컬렉션 freeze로 인해 실패)
   const transferResponse = await transfer(umi, {
     asset: asset,
     newOwner: DESTINATION_WALLET,
     collection,
   }).sendAndConfirm(umi, { send: { skipPreflight: true } });
-  // Log the failed transfer attempt signature
+  // 실패한 전송 시도 서명 로그
   console.log(
-    "Transfer attempt signature:",
+    "전송 시도 서명:",
     base58.deserialize(transferResponse.signature)[0]
   );
 })();
 ```
 {% /totem-accordion  %}
 {% /totem %}
-## Creating Soulbound NFTs with the Oracle Plugin
-The Oracle Plugin provides a way to approve or reject different lifecycle events for an asset. To create soulbound NFTs, we can use a special Oracle deployed by Metaplex that always rejects transfer events while still allowing other operations like burning. This differs from the Permanent Freeze Delegate Plugin approach since assets remain burnable even though they cannot be transferred.
-When creating a soulbound asset using the Oracle Plugin, one would attach the plugin to the asset. This can be done on creation or afterwards. In this example we are using a [default Oracle](/smart-contracts/core/external-plugins/oracle#default-oracles-deployed-by-metaplex) that will always reject and has been deployed by Metaplex.
-This effectively creates a permanently soulbound asset that cannot be transferred but burned. In the following code snippet it is shown how:
+## Oracle Plugin으로 소울바운드 NFT 생성
+Oracle Plugin은 에셋에 대한 다양한 라이프사이클 이벤트를 승인하거나 거부하는 방법을 제공합니다. 소울바운드 NFT를 생성하기 위해 Metaplex가 배포한 특별한 Oracle을 사용할 수 있습니다. 이 Oracle은 소각과 같은 다른 작업은 허용하면서 전송 이벤트는 항상 거부합니다. 이는 에셋이 전송할 수 없지만 여전히 소각 가능하기 때문에 Permanent Freeze Delegate Plugin 접근 방식과 다릅니다.
+Oracle Plugin을 사용하여 소울바운드 에셋을 생성할 때 플러그인을 에셋에 첨부합니다. 이는 생성 시 또는 이후에 수행할 수 있습니다. 이 예에서는 항상 거부하고 Metaplex에 의해 배포된 [기본 Oracle](/smart-contracts/core/external-plugins/oracle#default-oracles-deployed-by-metaplex)을 사용합니다.
+이렇게 하면 전송할 수 없지만 소각 가능한 영구적으로 소울바운드된 에셋이 효과적으로 생성됩니다. 다음 코드 스니펫에서 방법을 보여줍니다:
 ```js
 const ORACLE_ACCOUNT = publicKey(
   "GxaWxaQVeaNeFHehFQEDeKR65MnT6Nup81AGwh2EEnuq"
@@ -261,14 +261,14 @@ await create(umi, {
   uri: "https://example.com/my-asset.json",
   plugins: [
     {
-      // The Oracle plugin allows us to control transfer permissions
+      // Oracle 플러그인으로 전송 권한 제어 가능
       type: "Oracle",
       resultsOffset: {
         type: "Anchor",
       },
       baseAddress: ORACLE_ACCOUNT,
       lifecycleChecks: {
-        // Configure the Oracle to reject all transfer attempts
+        // Oracle이 모든 전송 시도를 거부하도록 구성
         transfer: [CheckResult.CAN_REJECT],
       },
       baseAddressConfig: undefined,
@@ -276,10 +276,10 @@ await create(umi, {
   ],
 })
 ```
-### Asset-Level Implementation
-The Oracle Plugin can make individual assets non-transferrable while preserving the ability to burn them. This provides flexibility for cases where assets may need to be destroyed.
+### Asset 수준 구현
+Oracle Plugin은 개별 에셋을 전송 불가능하게 만들면서 소각 기능은 유지합니다. 이는 에셋을 파괴해야 할 수 있는 경우에 유연성을 제공합니다.
 {% totem %}
-{% totem-accordion title="Code Example" %}
+{% totem-accordion title="코드 예제" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -298,42 +298,42 @@ import {
   fetchAssetV1,
 } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
-// Define the Oracle account that will control transfer permissions
-// This is an Oracle deployed by Metaplex that always rejects tranferring
+// 전송 권한을 제어할 Oracle 계정 정의
+// 항상 전송을 거부하는 Metaplex가 배포한 Oracle
 const ORACLE_ACCOUNT = publicKey(
   "GxaWxaQVeaNeFHehFQEDeKR65MnT6Nup81AGwh2EEnuq"
 );
-// Define a dummy destination wallet for testing transfer restrictions
+// 전송 제한 테스트를 위한 더미 대상 지갑 정의
 const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d");
 (async () => {
-  // Step 1: Initialize Umi with devnet RPC endpoint
+  // 1단계: devnet RPC 엔드포인트로 Umi 초기화
   const umi = createUmi(
     "https://api.devnet.solana.com"
   ).use(mplCore());
-  // Step 2: Create and fund a test wallet
+  // 2단계: 테스트 지갑 생성 및 자금 조달
   const walletSigner = generateSigner(umi);
   umi.use(keypairIdentity(walletSigner));
-  console.log("Funding test wallet with devnet SOL...");
+  console.log("devnet SOL로 테스트 지갑에 자금 조달 중...");
   await umi.rpc.airdrop(walletSigner.publicKey, sol(0.1));
-  // Step 3: Create a new collection to hold our soulbound asset
-  console.log("Creating parent collection...");
+  // 3단계: 소울바운드 에셋을 담을 새 컬렉션 생성
+  console.log("부모 컬렉션 생성 중...");
   const collectionSigner = generateSigner(umi);
   await createCollection(umi, {
     collection: collectionSigner,
     name: "My Collection",
     uri: "https://example.com/my-collection.json",
   }).sendAndConfirm(umi);
-  
-  // Wait for transaction confirmation
+
+  // 트랜잭션 확인 대기
   await new Promise(resolve => setTimeout(resolve, 15000));
-  // Fetch and verify the collection was created
+  // 컬렉션 생성 확인을 위해 가져오기
   const collection = await fetchCollection(umi, collectionSigner.publicKey);
-  console.log("Collection created successfully:", collectionSigner.publicKey);
-  // Step 4: Create a soulbound asset within the collection
-  console.log("Creating soulbound asset...");
+  console.log("컬렉션이 성공적으로 생성됨:", collectionSigner.publicKey);
+  // 4단계: 컬렉션 내에 소울바운드 에셋 생성
+  console.log("소울바운드 에셋 생성 중...");
   const assetSigner = generateSigner(umi);
-  
-  // Create the asset with transfer restrictions using an Oracle plugin
+
+  // Oracle 플러그인을 사용하여 전송 제한이 있는 에셋 생성
   await create(umi, {
     asset: assetSigner,
     collection: collection,
@@ -341,50 +341,50 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     uri: "https://example.com/my-asset.json",
     plugins: [
       {
-        // The Oracle plugin allows us to control transfer permissions
+        // Oracle 플러그인으로 전송 권한 제어 가능
         type: "Oracle",
         resultsOffset: {
           type: "Anchor",
         },
         baseAddress: ORACLE_ACCOUNT,
         lifecycleChecks: {
-          // Configure the Oracle to reject all transfer attempts
+          // Oracle이 모든 전송 시도를 거부하도록 구성
           transfer: [CheckResult.CAN_REJECT],
         },
         baseAddressConfig: undefined,
       },
     ],
   }).sendAndConfirm(umi);
-  
-  // Wait for transaction confirmation
+
+  // 트랜잭션 확인 대기
   await new Promise(resolve => setTimeout(resolve, 15000));
-  // Fetch and verify the asset was created
+  // 에셋 생성 확인을 위해 가져오기
   const asset = await fetchAssetV1(umi, assetSigner.publicKey);
-  console.log("Soulbound asset created successfully:", assetSigner.publicKey);
-  // Step 5: Demonstrate that the asset is truly soulbound
+  console.log("소울바운드 에셋이 성공적으로 생성됨:", assetSigner.publicKey);
+  // 5단계: 에셋이 정말로 소울바운드인지 시연
   console.log(
-    "Testing soulbound property by attempting a transfer (this should fail)..."
+    "전송 시도로 소울바운드 속성 테스트 (실패해야 함)..."
   );
-  
-  // Attempt to transfer the asset (this will fail due to Oracle restrictions)
+
+  // 에셋 전송 시도 (Oracle 제한으로 인해 실패)
   const transferResponse = await transfer(umi, {
     asset: asset,
     newOwner: DESTINATION_WALLET,
     collection,
   }).sendAndConfirm(umi, { send: { skipPreflight: true } });
-  // Log the failed transfer attempt signature
+  // 실패한 전송 시도 서명 로그
   console.log(
-    "Transfer attempt signature:",
+    "전송 시도 서명:",
     base58.deserialize(transferResponse.signature)[0]
   );
 })();
 ```
 {% /totem-accordion  %}
 {% /totem %}
-### Collection-Level Implementation
-Applying the Oracle Plugin at the collection level makes all assets in the collection non-transferrable but burnable. This is more rent efficient and allows managing permissions for the entire collection at once.
+### Collection 수준 구현
+컬렉션 수준에서 Oracle Plugin을 적용하면 컬렉션의 모든 에셋을 전송 불가능하지만 소각 가능하게 만듭니다. 이는 더 렌트 효율적이며 전체 컬렉션의 권한을 한 번에 관리할 수 있습니다.
 {% totem %}
-{% totem-accordion title="Code Example" %}
+{% totem-accordion title="코드 예제" %}
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -403,28 +403,28 @@ import {
   fetchAssetV1,
 } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
-// Define the Oracle account that will control transfer permissions
-// This is an Oracle deployed by Metaplex that always rejects transferring
+// 전송 권한을 제어할 Oracle 계정 정의
+// 항상 전송을 거부하는 Metaplex가 배포한 Oracle
 const ORACLE_ACCOUNT = publicKey(
   "GxaWxaQVeaNeFHehFQEDeKR65MnT6Nup81AGwh2EEnuq"
 );
-// Define a dummy destination wallet for testing transfer restrictions
+// 전송 제한 테스트를 위한 더미 대상 지갑 정의
 const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d");
 (async () => {
-  // Step 1: Initialize Umi with devnet RPC endpoint
+  // 1단계: devnet RPC 엔드포인트로 Umi 초기화
   const umi = createUmi(
     "https://api.devnet.solana.com"
   ).use(mplCore());
-  // Step 2: Create and fund a test wallet
+  // 2단계: 테스트 지갑 생성 및 자금 조달
   const walletSigner = generateSigner(umi);
   umi.use(keypairIdentity(walletSigner));
-  console.log("Funding test wallet with devnet SOL...");
+  console.log("devnet SOL로 테스트 지갑에 자금 조달 중...");
   await umi.rpc.airdrop(walletSigner.publicKey, sol(0.1));
-  
-  // Wait for airdrop confirmation
+
+  // 에어드롭 확인 대기
   await new Promise(resolve => setTimeout(resolve, 15000));
-  // Step 3: Create a new collection with transfer restrictions
-  console.log("Creating soulbound collection...");
+  // 3단계: 전송 제한이 있는 새 컬렉션 생성
+  console.log("소울바운드 컬렉션 생성 중...");
   const collectionSigner = generateSigner(umi);
   await createCollection(umi, {
     collection: collectionSigner,
@@ -432,27 +432,27 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     uri: "https://example.com/my-collection.json",
     plugins: [
       {
-        // The Oracle plugin allows us to control transfer permissions
+        // Oracle 플러그인으로 전송 권한 제어 가능
         type: "Oracle",
         resultsOffset: {
           type: "Anchor",
         },
         baseAddress: ORACLE_ACCOUNT,
         lifecycleChecks: {
-          // Configure the Oracle to reject all transfer attempts
+          // Oracle이 모든 전송 시도를 거부하도록 구성
           transfer: [CheckResult.CAN_REJECT],
         },
         baseAddressConfig: undefined,
       },
     ],
   }).sendAndConfirm(umi);
-  // Wait for collection creation confirmation
+  // 컬렉션 생성 확인 대기
   await new Promise(resolve => setTimeout(resolve, 15000));
-  // Fetch and verify the collection was created
+  // 컬렉션 생성 확인을 위해 가져오기
   const collection = await fetchCollection(umi, collectionSigner.publicKey);
-  console.log("Soulbound collection created successfully:", collectionSigner.publicKey);
-  // Step 4: Create a soulbound asset within the collection
-  console.log("Creating soulbound asset...");
+  console.log("소울바운드 컬렉션이 성공적으로 생성됨:", collectionSigner.publicKey);
+  // 4단계: 컬렉션 내에 소울바운드 에셋 생성
+  console.log("소울바운드 에셋 생성 중...");
   const assetSigner = generateSigner(umi);
   await create(umi, {
     asset: assetSigner,
@@ -460,25 +460,25 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
     name: "Soulbound Asset",
     uri: "https://example.com/my-asset.json",
   }).sendAndConfirm(umi);
-  // Wait for asset creation confirmation
+  // 에셋 생성 확인 대기
   await new Promise(resolve => setTimeout(resolve, 15000));
-  // Fetch and verify the asset was created
+  // 에셋 생성 확인을 위해 가져오기
   const asset = await fetchAssetV1(umi, assetSigner.publicKey);
-  console.log("Soulbound asset created successfully:", assetSigner.publicKey);
-  // Step 5: Demonstrate that the asset is truly soulbound
+  console.log("소울바운드 에셋이 성공적으로 생성됨:", assetSigner.publicKey);
+  // 5단계: 에셋이 정말로 소울바운드인지 시연
   console.log(
-    "Testing soulbound property by attempting a transfer (this should fail)..."
+    "전송 시도로 소울바운드 속성 테스트 (실패해야 함)..."
   );
-  
-  // Attempt to transfer the asset (this will fail due to Oracle restrictions)
+
+  // 에셋 전송 시도 (Oracle 제한으로 인해 실패)
   const transferResponse = await transfer(umi, {
     asset: asset,
     newOwner: DESTINATION_WALLET,
     collection,
   }).sendAndConfirm(umi, { send: { skipPreflight: true } });
-  // Log the failed transfer attempt signature
+  // 실패한 전송 시도 서명 로그
   console.log(
-    "Transfer attempt signature:",
+    "전송 시도 서명:",
     base58.deserialize(transferResponse.signature)[0]
   );
 })();

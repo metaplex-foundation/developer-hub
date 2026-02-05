@@ -261,7 +261,7 @@ A verified creator must unverify themselves before the update authority can remo
 | Remove unverified creator | ✅ | ❌ |
 ## FAQ
 ### How is this different from the Token Metadata creator array?
-In Token Metadata, the creator array was used for royalty distribution. In Core, Verified Creators is purely for proof of creatorship—use the Royalties plugin for royalty distribution.
+In Token Metadata, the creator array was used for royalty distribution. In Core, Verified Creators is purely for proof of creatorship - use the Royalties plugin for royalty distribution.
 ### Can the update authority verify a creator?
 No. Each creator must verify themselves by signing the transaction. This ensures authentic proof of creatorship.
 ### Why can't I remove a verified creator?

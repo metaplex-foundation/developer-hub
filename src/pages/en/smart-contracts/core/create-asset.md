@@ -43,7 +43,7 @@ faqs:
 This guide shows how to **create a Core Asset** (NFT) on Solana using the Metaplex Core SDK. You'll upload off-chain metadata, create the on-chain Asset account, and optionally add it to a Collection or attach plugins. {% .lead %}
 {% callout title="What You'll Build" %}
 A Core Asset with:
-- Off-chain metadata (name, image, attributes) stored on Arweave/IPFS
+- Off-chain metadata (name, image, attributes) stored on Arweave
 - On-chain Asset account with ownership and metadata URI
 - Optional: Collection membership
 - Optional: Plugins (royalties, freeze, attributes)
@@ -70,7 +70,7 @@ Token Metadata NFTs (use mpl-token-metadata), compressed NFTs (use Bubblegum), f
 1. **Upload off-chain data.** Store a JSON file containing name, description, image URL, and attributes. The file must be accessible via a public **URI**.
 2. **Create on-chain Asset account.** Call the `create` instruction with the metadata URI to mint the Asset.
 ## Uploading Off-chain Data
-Use any storage service (Arweave, IPFS, AWS) to upload your metadata JSON. Umi provides uploader plugins for common services.
+Use any storage service (Arweave, IPFS, AWS) to upload your metadata JSON. Umi provides uploader plugins for common services. See the [JSON Schema](/smart-contracts/core/json-schema) for all available metadata fields.
 ```ts {% title="upload-metadata.ts" %}
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 // Configure an uploader (Irys, AWS, etc.)
@@ -118,7 +118,8 @@ See [Collections](/smart-contracts/core/collections) for creating Collections.
 ## Create an Asset with Plugins
 Add plugins at creation time by passing them in the `plugins` array. This example adds the Royalties plugin:
 {% code-tabs-imported from="core/create-asset-with-plugins" frameworks="umi" /%}
-### Available Plugins
+### Common Plugins
+Here are a few commonly used plugins. See [Plugins Overview](/smart-contracts/core/plugins) for the full list.
 - [Royalties](/smart-contracts/core/plugins/royalties) - Creator royalty enforcement
 - [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Allow freezing/unfreezing
 - [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - Allow burning

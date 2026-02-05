@@ -1,7 +1,7 @@
 ---
-title: Creating Assets
-metaTitle: Creating Assets | Metaplex Core
-description: Learn how to create Core NFT Assets on Solana using JavaScript or Rust. Includes uploading metadata, minting into collections, and adding plugins.
+title: 创建 Asset
+metaTitle: 创建 Asset | Metaplex Core
+description: 了解如何使用 JavaScript 或 Rust 在 Solana 上创建 Core NFT Asset。包括上传元数据、铸造到收藏和添加插件。
 updated: '01-31-2026'
 keywords:
   - create NFT
@@ -19,65 +19,65 @@ programmingLanguage:
   - TypeScript
   - Rust
 howToSteps:
-  - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
-  - Upload metadata JSON to Arweave or IPFS to get a URI
-  - Call create(umi, { asset, name, uri }) with your metadata URI
-  - Verify the Asset on core.metaplex.com
+  - 使用 npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi 安装 SDK
+  - 将元数据 JSON 上传到 Arweave 或 IPFS 以获取 URI
+  - 使用元数据 URI 调用 create(umi, { asset, name, uri })
+  - 在 core.metaplex.com 验证 Asset
 howToTools:
   - Node.js
   - Umi framework
   - mpl-core SDK
   - Arweave or IPFS for storage
 faqs:
-  - q: What's the difference between Core Assets and Token Metadata NFTs?
-    a: Core Assets use a single account and cost ~80% less. Token Metadata uses 3+ accounts (mint, metadata, token). Core is recommended for new projects.
-  - q: Can I create multiple assets in one transaction?
-    a: No. Each create instruction creates one asset. For bulk minting, use Core Candy Machine or batch transactions.
-  - q: Do I need to create a Collection first?
-    a: No. Assets can exist without a Collection. However, Collections enable collection-level royalties and operations.
-  - q: How do I mint to a different wallet?
-    a: Pass the owner parameter in the create function with the recipient's address.
-  - q: What metadata format should I use?
-    a: Use the standard NFT metadata format with name, description, image, and optional attributes array. See the JSON Schema documentation.
+  - q: Core Asset 和 Token Metadata NFT 有什么区别？
+    a: Core Asset 使用单个账户，成本降低约 80%。Token Metadata 使用 3 个以上账户（mint、metadata、token）。新项目推荐使用 Core。
+  - q: 可以在一个交易中创建多个资产吗？
+    a: 不可以。每个 create 指令创建一个资产。大量铸造请使用 Core Candy Machine 或批量交易。
+  - q: 需要先创建 Collection 吗？
+    a: 不需要。Asset 可以不属于 Collection 而存在。但是，Collection 可以启用收藏级别的版税和操作。
+  - q: 如何铸造到不同的钱包？
+    a: 在 create 函数中传递 owner 参数，使用接收者的地址。
+  - q: 应该使用什么元数据格式？
+    a: 使用标准 NFT 元数据格式，包含 name、description、image 和可选的 attributes 数组。请参阅 JSON Schema 文档。
 ---
-This guide shows how to **create a Core Asset** (NFT) on Solana using the Metaplex Core SDK. You'll upload off-chain metadata, create the on-chain Asset account, and optionally add it to a Collection or attach plugins. {% .lead %}
-{% callout title="What You'll Build" %}
-A Core Asset with:
-- Off-chain metadata (name, image, attributes) stored on Arweave/IPFS
-- On-chain Asset account with ownership and metadata URI
-- Optional: Collection membership
-- Optional: Plugins (royalties, freeze, attributes)
+本指南展示如何使用 Metaplex Core SDK 在 Solana 上创建 **Core Asset**（NFT）。您将上传链下元数据，创建链上 Asset 账户，并可选择将其添加到 Collection 或附加插件。 {% .lead %}
+{% callout title="您将构建" %}
+包含以下内容的 Core Asset：
+- 存储在 Arweave 上的链下元数据（名称、图像、属性）
+- 具有所有权和元数据 URI 的链上 Asset 账户
+- 可选：Collection 成员资格
+- 可选：插件（版税、冻结、属性）
 {% /callout %}
-## Summary
-Create a **Core Asset** by uploading metadata JSON to decentralized storage, then calling `create()` with the URI. Assets can be minted standalone or into Collections, and can include plugins at creation time.
-- Upload metadata JSON to Arweave/IPFS, get a URI
-- Call `create()` with name, URI, and optional plugins
-- For collections: pass the `collection` parameter
-- Costs ~0.0029 SOL per asset
-## Out of Scope
-Token Metadata NFTs (use mpl-token-metadata), compressed NFTs (use Bubblegum), fungible tokens (use SPL Token), and NFT migration.
-## Quick Start
-**Jump to:** [Upload Metadata](#uploading-off-chain-data) · [Create Asset](#create-an-asset) · [With Collection](#create-an-asset-into-a-collection) · [With Plugins](#create-an-asset-with-plugins)
-1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
-2. Upload metadata JSON to get a URI
-3. Call `create(umi, { asset, name, uri })`
-4. Verify on [core.metaplex.com](https://core.metaplex.com)
-## Prerequisites
-- **Umi** configured with a signer and RPC connection
-- **SOL** for transaction fees (~0.003 SOL per asset)
-- **Metadata JSON** ready to upload (name, image, attributes)
-## The Creation Process
-1. **Upload off-chain data.** Store a JSON file containing name, description, image URL, and attributes. The file must be accessible via a public **URI**.
-2. **Create on-chain Asset account.** Call the `create` instruction with the metadata URI to mint the Asset.
-## Uploading Off-chain Data
-Use any storage service (Arweave, IPFS, AWS) to upload your metadata JSON. Umi provides uploader plugins for common services.
+## 摘要
+通过将元数据 JSON 上传到去中心化存储，然后使用 URI 调用 `create()` 来创建 **Core Asset**。Asset 可以独立铸造或铸造到 Collection 中，并且可以在创建时包含插件。
+- 将元数据 JSON 上传到 Arweave/IPFS，获取 URI
+- 使用 name、URI 和可选插件调用 `create()`
+- 对于收藏：传递 `collection` 参数
+- 每个资产成本约 0.0029 SOL
+## 范围外
+Token Metadata NFT（使用 mpl-token-metadata）、压缩 NFT（使用 Bubblegum）、同质化代币（使用 SPL Token）和 NFT 迁移。
+## 快速开始
+**跳转至：** [上传元数据](#uploading-off-chain-data) · [创建 Asset](#create-an-asset) · [带 Collection](#create-an-asset-into-a-collection) · [带插件](#create-an-asset-with-plugins)
+1. 安装：`npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
+2. 上传元数据 JSON 以获取 URI
+3. 调用 `create(umi, { asset, name, uri })`
+4. 在 [core.metaplex.com](https://core.metaplex.com) 验证
+## 前提条件
+- 配置了签名者和 RPC 连接的 **Umi**
+- 用于交易费用的 **SOL**（每个资产约 0.003 SOL）
+- 准备上传的 **元数据 JSON**（名称、图像、属性）
+## 创建流程
+1. **上传链下数据。** 存储包含名称、描述、图像 URL 和属性的 JSON 文件。文件必须通过公共 **URI** 可访问。
+2. **创建链上 Asset 账户。** 使用元数据 URI 调用 `create` 指令来铸造 Asset。
+## 上传链下数据
+使用任何存储服务（Arweave、IPFS、AWS）上传您的元数据 JSON。Umi 为常见服务提供上传器插件。有关所有可用元数据字段，请参阅 [JSON Schema](/smart-contracts/core/json-schema)。
 ```ts {% title="upload-metadata.ts" %}
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
-// Configure an uploader (Irys, AWS, etc.)
+// 配置上传器（Irys、AWS 等）
 umi.use(irysUploader())
-// Upload image first
+// 首先上传图像
 const [imageUri] = await umi.uploader.upload([imageFile])
-// Upload metadata JSON
+// 上传元数据 JSON
 const uri = await umi.uploader.uploadJson({
   name: 'My NFT',
   description: 'This is my NFT',
@@ -87,102 +87,103 @@ const uri = await umi.uploader.uploadJson({
   ],
 })
 ```
-Now that you have a **URI**, you can create the Asset.
-## Create an Asset
-Use the `create` instruction to mint a new Core Asset.
+获得 **URI** 后，您可以创建 Asset。
+## 创建 Asset
+使用 `create` 指令铸造新的 Core Asset。
 {% totem %}
-{% totem-accordion title="Technical Instruction Details" %}
-**Instruction Accounts**
-| Account | Description |
+{% totem-accordion title="技术指令详情" %}
+**指令账户**
+| 账户 | 描述 |
 |---------|-------------|
-| asset | The address of the new MPL Core Asset (signer) |
-| collection | The collection to add the Asset to (optional) |
-| authority | The authority of the new asset |
-| payer | The account paying for storage fees |
-| owner | The wallet that will own the asset |
-| systemProgram | The System Program account |
-**Instruction Arguments**
-| Argument | Description |
+| asset | 新 MPL Core Asset 的地址（签名者） |
+| collection | 要将 Asset 添加到的收藏（可选） |
+| authority | 新资产的权限 |
+| payer | 支付存储费用的账户 |
+| owner | 将拥有资产的钱包 |
+| systemProgram | System Program 账户 |
+**指令参数**
+| 参数 | 描述 |
 |----------|-------------|
-| name | The name of your MPL Core Asset |
-| uri | The off-chain JSON metadata URI |
-| plugins | Plugins to add at creation (optional) |
-Full instruction details: [GitHub](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/instruction.rs)
+| name | MPL Core Asset 的名称 |
+| uri | 链下 JSON 元数据 URI |
+| plugins | 创建时添加的插件（可选） |
+完整指令详情：[GitHub](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/instruction.rs)
 {% /totem-accordion %}
 {% /totem %}
 {% code-tabs-imported from="core/create-asset" frameworks="umi" /%}
-## Create an Asset into a Collection
-To create an Asset as part of a Collection, pass the `collection` parameter. The Collection must already exist.
+## 将 Asset 创建到 Collection 中
+要将 Asset 作为 Collection 的一部分创建，请传递 `collection` 参数。Collection 必须已经存在。
 {% code-tabs-imported from="core/create-asset-in-collection" frameworks="umi" /%}
-See [Collections](/smart-contracts/core/collections) for creating Collections.
-## Create an Asset with Plugins
-Add plugins at creation time by passing them in the `plugins` array. This example adds the Royalties plugin:
+有关创建 Collection，请参阅 [Collection](/zh/smart-contracts/core/collections)。
+## 使用插件创建 Asset
+通过在 `plugins` 数组中传递来在创建时添加插件。此示例添加 Royalties 插件：
 {% code-tabs-imported from="core/create-asset-with-plugins" frameworks="umi" /%}
-### Available Plugins
-- [Royalties](/smart-contracts/core/plugins/royalties) - Creator royalty enforcement
-- [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Allow freezing/unfreezing
-- [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - Allow burning
-- [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - Allow transfers
-- [Update Delegate](/smart-contracts/core/plugins/update-delegate) - Allow metadata updates
-- [Attributes](/smart-contracts/core/plugins/attribute) - On-chain key/value data
-See [Plugins Overview](/smart-contracts/core/plugins) for the full list.
-## Common Errors
+### 常用插件
+以下是一些常用的插件。完整列表请参阅 [插件概述](/zh/smart-contracts/core/plugins)。
+- [Royalties](/zh/smart-contracts/core/plugins/royalties) - 创作者版税强制
+- [Freeze Delegate](/zh/smart-contracts/core/plugins/freeze-delegate) - 允许冻结/解冻
+- [Burn Delegate](/zh/smart-contracts/core/plugins/burn-delegate) - 允许销毁
+- [Transfer Delegate](/zh/smart-contracts/core/plugins/transfer-delegate) - 允许转移
+- [Update Delegate](/zh/smart-contracts/core/plugins/update-delegate) - 允许元数据更新
+- [Attributes](/zh/smart-contracts/core/plugins/attribute) - 链上键/值数据
+完整列表请参阅 [插件概述](/zh/smart-contracts/core/plugins)。
+## 常见错误
 ### `Asset account already exists`
-The asset keypair was already used. Generate a new signer:
+资产密钥对已被使用。生成新的签名者：
 ```ts
-const assetSigner = generateSigner(umi) // Must be unique
+const assetSigner = generateSigner(umi) // 必须唯一
 ```
 ### `Collection not found`
-The collection address doesn't exist or isn't a valid Core Collection. Verify the address and that you've created the Collection first.
+收藏地址不存在或不是有效的 Core Collection。验证地址并确保您已先创建 Collection。
 ### `Insufficient funds`
-Your payer wallet needs ~0.003 SOL for rent. Fund it with:
+您的付款钱包需要约 0.003 SOL 用于租金。使用以下命令添加资金：
 ```bash
 solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```
-## Notes
-- The `asset` parameter must be a **new keypair** - you cannot reuse an existing account
-- If minting to a different owner, pass the `owner` parameter
-- Plugins added at creation are cheaper than adding them after (one transaction vs two)
-- Use `commitment: 'finalized'` when creating assets in a script that immediately fetches them
-## Quick Reference
-### Program ID
-| Network | Address |
+## 注意事项
+- `asset` 参数必须是 **新密钥对** - 不能重用现有账户
+- 如果铸造给不同的所有者，请传递 `owner` 参数
+- 创建时添加的插件比之后添加更便宜（一个交易 vs 两个）
+- 在立即获取资产的脚本中创建资产时使用 `commitment: 'finalized'`
+## 快速参考
+### 程序 ID
+| 网络 | 地址 |
 |---------|---------|
 | Mainnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
 | Devnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
-### Minimum Code
+### 最小代码
 ```ts {% title="minimal-create.ts" %}
 import { generateSigner } from '@metaplex-foundation/umi'
 import { create } from '@metaplex-foundation/mpl-core'
 const asset = generateSigner(umi)
 await create(umi, { asset, name: 'My NFT', uri: 'https://...' }).sendAndConfirm(umi)
 ```
-### Cost Breakdown
-| Item | Cost |
+### 成本明细
+| 项目 | 成本 |
 |------|------|
-| Asset account rent | ~0.0029 SOL |
-| Transaction fee | ~0.000005 SOL |
-| **Total** | **~0.003 SOL** |
+| Asset 账户租金 | ~0.0029 SOL |
+| 交易费用 | ~0.000005 SOL |
+| **总计** | **~0.003 SOL** |
 ## FAQ
-### What's the difference between Core Assets and Token Metadata NFTs?
-Core Assets use a single account and cost ~80% less. Token Metadata uses 3+ accounts (mint, metadata, token). Core is recommended for new projects.
-### Can I create multiple assets in one transaction?
-No. Each `create` instruction creates one asset. For bulk minting, use [Core Candy Machine](/smart-contracts/core-candy-machine) or batch transactions.
-### Do I need to create a Collection first?
-No. Assets can exist without a Collection. However, Collections enable collection-level royalties and operations.
-### How do I mint to a different wallet?
-Pass the `owner` parameter:
+### Core Asset 和 Token Metadata NFT 有什么区别？
+Core Asset 使用单个账户，成本降低约 80%。Token Metadata 使用 3 个以上账户（mint、metadata、token）。新项目推荐使用 Core。
+### 可以在一个交易中创建多个资产吗？
+不可以。每个 `create` 指令创建一个资产。大量铸造请使用 [Core Candy Machine](/smart-contracts/core-candy-machine) 或批量交易。
+### 需要先创建 Collection 吗？
+不需要。Asset 可以不属于 Collection 而存在。但是，Collection 可以启用收藏级别的版税和操作。
+### 如何铸造到不同的钱包？
+传递 `owner` 参数：
 ```ts
 await create(umi, { asset, name, uri, owner: recipientAddress })
 ```
-### What metadata format should I use?
-Use the standard NFT metadata format with `name`, `description`, `image`, and optional `attributes` array. See [JSON Schema](/smart-contracts/core/json-schema).
-## Glossary
-| Term | Definition |
+### 应该使用什么元数据格式？
+使用标准 NFT 元数据格式，包含 `name`、`description`、`image` 和可选的 `attributes` 数组。请参阅 [JSON Schema](/smart-contracts/core/json-schema)。
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Asset** | A Core on-chain account representing an NFT |
-| **URI** | The URL pointing to off-chain metadata JSON |
-| **Signer** | A keypair that signs the transaction (asset must be a signer at creation) |
-| **Collection** | A Core account that groups related Assets |
-| **Plugin** | A modular extension adding behavior to an Asset |
-| **Rent** | SOL required to keep an account alive on Solana |
+| **Asset** | 代表 NFT 的 Core 链上账户 |
+| **URI** | 指向链下元数据 JSON 的 URL |
+| **签名者** | 签署交易的密钥对（资产在创建时必须是签名者） |
+| **Collection** | 将相关 Asset 分组的 Core 账户 |
+| **Plugin** | 为 Asset 添加行为的模块化扩展 |
+| **租金** | 在 Solana 上保持账户活跃所需的 SOL |

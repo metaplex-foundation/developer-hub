@@ -1,7 +1,7 @@
 ---
-title: AddBlocker Plugin
-metaTitle: AddBlocker Plugin | Metaplex Core
-description: Prevent new authority-managed plugins from being added to Core Assets and Collections. Lock down plugin configuration permanently.
+title: AddBlockerプラグイン
+metaTitle: AddBlockerプラグイン | Metaplex Core
+description: Core AssetsとCollectionsに新しいauthority管理プラグインが追加されるのを防ぎます。プラグイン構成を永続的にロックダウンします。
 updated: '01-31-2026'
 keywords:
   - add blocker
@@ -17,61 +17,61 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Can I still add Freeze Delegate after AddBlocker?
-    a: Yes. Owner-managed plugins like Freeze Delegate, Transfer Delegate, and Burn Delegate can always be added, even after AddBlocker is active.
-  - q: Can I remove AddBlocker after adding it?
-    a: Yes, if it hasn't been made immutable. The plugin can be removed by the authority. However, this defeats the purpose of using AddBlocker.
-  - q: If I add AddBlocker to a Collection, can I still add plugins to individual Assets?
-    a: No. Collection-level AddBlocker prevents adding authority-managed plugins to both the Collection and all its Assets.
-  - q: What if Metaplex releases a new plugin I want to use?
-    a: If AddBlocker is active, you cannot add new authority-managed plugins, even new ones released in the future. Plan accordingly.
-  - q: Why would I use AddBlocker?
-    a: To guarantee that the NFT's authority-managed plugin configuration is final. This provides assurance to collectors that royalties, attributes, and other critical settings cannot be modified.
+  - q: AddBlocker後もFreeze Delegateを追加できますか？
+    a: はい。Freeze Delegate、Transfer Delegate、Burn Delegateなどのオーナー管理プラグインは、AddBlockerがアクティブでも常に追加できます。
+  - q: AddBlockerを追加した後に削除できますか？
+    a: はい、不変にされていなければ可能です。プラグインはauthorityによって削除できます。ただし、これはAddBlockerを使用する目的を無効にします。
+  - q: CollectionにAddBlockerを追加した場合、個々のAssetにプラグインを追加できますか？
+    a: いいえ。コレクションレベルのAddBlockerは、コレクションとそのすべてのAssetの両方にauthority管理プラグインを追加することを防ぎます。
+  - q: Metaplexが使用したい新しいプラグインをリリースした場合はどうなりますか？
+    a: AddBlockerがアクティブな場合、将来リリースされる新しいものを含め、新しいauthority管理プラグインを追加することはできません。計画的に対応してください。
+  - q: なぜAddBlockerを使用するのですか？
+    a: NFTのauthority管理プラグイン構成が最終的であることを保証するためです。これは、ロイヤリティ、属性、その他の重要な設定が変更できないことをコレクターに保証します。
 ---
-The **AddBlocker Plugin** prevents any new authority-managed plugins from being added to an Asset or Collection. Lock down your NFT configuration while still allowing owner-managed plugins. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Block new authority-managed plugins
-- Understand which plugins are still allowed
-- Apply to Assets and Collections
-- Plan your plugin configuration before locking
+**AddBlockerプラグイン**は、AssetまたはCollectionに新しいauthority管理プラグインが追加されるのを防ぎます。オーナー管理プラグインを許可しながら、NFT構成をロックダウンします。 {% .lead %}
+{% callout title="学べること" %}
+- 新しいauthority管理プラグインをブロック
+- どのプラグインがまだ許可されているかを理解
+- AssetsとCollectionsに適用
+- ロックする前にプラグイン構成を計画
 {% /callout %}
-## Summary
-The **AddBlocker** plugin is an Authority Managed plugin that prevents adding new authority-managed plugins. Owner-managed plugins (like Freeze Delegate, Transfer Delegate) can still be added.
-- Authority Managed (only update authority can add)
-- Blocks new authority-managed plugins permanently
-- Owner-managed plugins are NOT blocked
-- Collection plugin affects all Assets in that Collection
-## Out of Scope
-Blocking owner-managed plugins (always allowed), removing existing plugins, and blocking updates to existing plugins.
-## Quick Start
-**Jump to:** [Add to Asset](#adding-the-addblocker-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-addblocker-plugin-to-a-collection-code-example)
-1. Add all authority-managed plugins you'll need
-2. Add AddBlocker plugin as update authority
-3. No new authority-managed plugins can be added
-{% callout type="note" title="When to Use AddBlocker" %}
-| Scenario | Use AddBlocker? |
+## 概要
+**AddBlocker**プラグインは、新しいauthority管理プラグインの追加を防ぐAuthority Managedプラグインです。オーナー管理プラグイン（Freeze Delegate、Transfer Delegateなど）は引き続き追加できます。
+- Authority Managed（update authorityのみが追加可能）
+- 新しいauthority管理プラグインを永続的にブロック
+- オーナー管理プラグインはブロックされない
+- Collectionプラグインはそのコレクション内のすべてのAssetに影響
+## 対象外
+オーナー管理プラグインのブロック（常に許可）、既存のプラグインの削除、既存のプラグインへの更新のブロック。
+## クイックスタート
+**ジャンプ先:** [Assetに追加](#assetへのaddblockerプラグインの追加コード例) · [Collectionに追加](#collectionへのaddblockerプラグインの追加コード例)
+1. 必要なすべてのauthority管理プラグインを追加
+2. update authorityとしてAddBlockerプラグインを追加
+3. 新しいauthority管理プラグインは追加できなくなる
+{% callout type="note" title="AddBlockerを使用するタイミング" %}
+| シナリオ | AddBlockerを使用？ |
 |----------|-----------------|
-| Guarantee royalties can't be changed | ✅ Yes (add Royalties first, then AddBlocker) |
-| Prevent future plugin additions | ✅ Yes |
-| Lock attributes permanently | ❌ No (use authority `None` on Attributes) |
-| Allow marketplace listings | ✅ Still works (owner-managed allowed) |
-| Need new plugins in future | ❌ Don't use AddBlocker |
-**Use AddBlocker** to give collectors confidence that the NFT's configuration is final.
+| ロイヤリティが変更できないことを保証 | ✅ はい（先にRoyaltiesを追加、次にAddBlocker） |
+| 将来のプラグイン追加を防止 | ✅ はい |
+| 属性を永続的にロック | ❌ いいえ（Attributesでauthority `None`を使用） |
+| マーケットプレイスリスティングを許可 | ✅ 動作する（オーナー管理は許可） |
+| 将来新しいプラグインが必要 | ❌ AddBlockerを使用しない |
+**AddBlockerを使用**して、NFTの構成が最終的であることをコレクターに信頼させます。
 {% /callout %}
-## Common Use Cases
-- **Royalty protection**: Ensure royalties cannot be changed by blocking new Royalties plugins
-- **Configuration finality**: Guarantee collectors the NFT's plugins won't change
-- **Trust building**: Prove to buyers that critical settings are locked
-- **Collection standards**: Enforce consistent plugin configuration across a Collection
-## Works With
+## 一般的なユースケース
+- **ロイヤリティ保護**: 新しいRoyaltiesプラグインをブロックしてロイヤリティが変更されないことを保証
+- **構成の最終性**: コレクターにNFTのプラグインが変更されないことを保証
+- **信頼構築**: 重要な設定がロックされていることを購入者に証明
+- **コレクション標準**: コレクション全体で一貫したプラグイン構成を強制
+## 対応
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-## Arguments
-The `AddBlocker` Plugin requires no arguments.
-## Adding the addBlocker Plugin to an Asset code example
-{% dialect-switcher title="Adding a addBlocker Plugin to an MPL Core Asset" %}
+## 引数
+`AddBlocker`プラグインには引数は必要ありません。
+## Assetへのaddplockerプラグインの追加コード例
+{% dialect-switcher title="MPL Core AssetへのaddBlockerプラグインの追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -86,8 +86,8 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the addBlocker Plugin to a Collection code example
-{% dialect-switcher title="Add addBlocker Plugin to Collection" %}
+## CollectionへのaddBlockerプラグインの追加コード例
+{% dialect-switcher title="CollectionにaddBlockerプラグインを追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -102,53 +102,53 @@ await addCollectionPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 一般的なエラー
 ### `Authority mismatch`
-Only the update authority can add the AddBlocker plugin.
+update authorityのみがAddBlockerプラグインを追加できます。
 ### `Cannot add plugin - AddBlocker active`
-The AddBlocker plugin is preventing new authority-managed plugins. This is expected behavior.
-## Notes
-- Plan your plugin configuration carefully before adding AddBlocker
-- Future Metaplex plugin features cannot be added once blocked
-- Owner-managed plugins (Freeze, Transfer, Burn Delegates) are always allowed
-- Adding to a Collection blocks plugins on ALL Assets too
-## Quick Reference
-### What Gets Blocked
-| Plugin Type | Blocked |
+AddBlockerプラグインが新しいauthority管理プラグインを防いでいます。これは期待される動作です。
+## 注意事項
+- AddBlockerを追加する前にプラグイン構成を慎重に計画
+- ブロックされると将来のMetaplexプラグイン機能は追加できない
+- オーナー管理プラグイン（Freeze、Transfer、Burn Delegates）は常に許可
+- Collectionに追加するとすべてのAssetのプラグインもブロック
+## クイックリファレンス
+### ブロックされるもの
+| プラグインタイプ | ブロック |
 |-------------|---------|
-| Authority Managed | ✅ Blocked |
-| Owner Managed | ❌ Still allowed |
-| Permanent | ✅ Blocked (must add at creation) |
-### Common Authority Managed Plugins (Blocked)
+| Authority Managed | ✅ ブロック |
+| Owner Managed | ❌ 引き続き許可 |
+| Permanent | ✅ ブロック（作成時に追加が必要） |
+### 一般的なAuthority Managedプラグイン（ブロック）
 - Royalties
 - Attributes
 - Verified Creators
 - ImmutableMetadata
-- AddBlocker (itself)
-### Owner Managed Plugins (Still Allowed)
+- AddBlocker（自身）
+### Owner Managedプラグイン（引き続き許可）
 - Freeze Delegate
 - Transfer Delegate
 - Burn Delegate
 ## FAQ
-### Can I still add Freeze Delegate after AddBlocker?
-Yes. Owner-managed plugins like Freeze Delegate, Transfer Delegate, and Burn Delegate can always be added, even after AddBlocker is active.
-### Can I remove AddBlocker after adding it?
-Yes, if it hasn't been made immutable. The plugin can be removed by the authority. However, this defeats the purpose of using AddBlocker.
-### If I add AddBlocker to a Collection, can I still add plugins to individual Assets?
-No. Collection-level AddBlocker prevents adding authority-managed plugins to both the Collection and all its Assets.
-### What if Metaplex releases a new plugin I want to use?
-If AddBlocker is active, you cannot add new authority-managed plugins, even new ones released in the future. Plan accordingly.
-### Why would I use AddBlocker?
-To guarantee that the NFT's authority-managed plugin configuration is final. This provides assurance to collectors that royalties, attributes, and other critical settings cannot be modified by adding new plugins.
-## Related Plugins
-- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - Lock name and URI permanently
-- [Royalties](/smart-contracts/core/plugins/royalties) - Set royalties before using AddBlocker
-- [Attributes](/smart-contracts/core/plugins/attribute) - Add attributes before using AddBlocker
-## Glossary
-| Term | Definition |
+### AddBlocker後もFreeze Delegateを追加できますか？
+はい。Freeze Delegate、Transfer Delegate、Burn Delegateなどのオーナー管理プラグインは、AddBlockerがアクティブでも常に追加できます。
+### AddBlockerを追加した後に削除できますか？
+はい、不変にされていなければ可能です。プラグインはauthorityによって削除できます。ただし、これはAddBlockerを使用する目的を無効にします。
+### CollectionにAddBlockerを追加した場合、個々のAssetにプラグインを追加できますか？
+いいえ。コレクションレベルのAddBlockerは、コレクションとそのすべてのAssetの両方にauthority管理プラグインを追加することを防ぎます。
+### Metaplexが使用したい新しいプラグインをリリースした場合はどうなりますか？
+AddBlockerがアクティブな場合、将来リリースされる新しいものを含め、新しいauthority管理プラグインを追加することはできません。計画的に対応してください。
+### なぜAddBlockerを使用するのですか？
+NFTのauthority管理プラグイン構成が最終的であることを保証するためです。これは、新しいプラグインを追加することでロイヤリティ、属性、その他の重要な設定が変更できないことをコレクターに保証します。
+## 関連プラグイン
+- [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - 名前とURIを永続的にロック
+- [Royalties](/smart-contracts/core/plugins/royalties) - AddBlockerを使用する前にロイヤリティを設定
+- [Attributes](/smart-contracts/core/plugins/attribute) - AddBlockerを使用する前に属性を追加
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **AddBlocker** | Plugin that prevents new authority-managed plugins |
-| **Authority Managed** | Plugins controlled by update authority |
-| **Owner Managed** | Plugins controlled by Asset owner |
-| **Plugin Configuration** | Set of plugins attached to an Asset/Collection |
-| **Inheritance** | Assets get Collection-level restrictions |
+| **AddBlocker** | 新しいauthority管理プラグインを防ぐプラグイン |
+| **Authority Managed** | update authorityによって制御されるプラグイン |
+| **Owner Managed** | Assetオーナーによって制御されるプラグイン |
+| **Plugin Configuration** | Asset/Collectionにアタッチされたプラグインのセット |
+| **Inheritance** | Assetsがコレクションレベルの制限を取得 |

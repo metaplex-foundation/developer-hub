@@ -1,7 +1,7 @@
 ---
 title: Launch Pool
-metaTitle: Genesis - Launch Pool | Fair Token Distribution | Metaplex
-description: Token distribution where users deposit during a window and receive tokens proportionally. Organic price discovery with anti-sniping design.
+metaTitle: Genesis - Launch Pool | 公平代币分发 | Metaplex
+description: 用户在指定时间窗口内存入资金，按比例接收代币的代币分发方式。具有防抢跑设计的有机价格发现机制。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -20,56 +20,56 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 howToSteps:
-  - Initialize a Genesis Account with your token
-  - Add a Launch Pool bucket with deposit window configuration
-  - Add an Unlocked bucket to receive collected funds
-  - Finalize and let users deposit during the window
+  - 使用您的代币初始化 Genesis Account
+  - 添加配置了存款窗口的 Launch Pool bucket
+  - 添加 Unlocked bucket 用于接收募集的资金
+  - 完成最终化设置，让用户在窗口期内存款
 howToTools:
   - Node.js
   - Umi framework
   - Genesis SDK
 faqs:
-  - q: How is the token price determined in a Launch Pool?
-    a: The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
-  - q: Can users withdraw their deposits?
-    a: Yes, users can withdraw during the deposit period. A 2% withdrawal fee applies to discourage gaming the system.
-  - q: What happens if I deposit multiple times?
-    a: Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
-  - q: When can users claim their tokens?
-    a: After the deposit period ends and the claim window opens (defined by claimStartCondition). The transition must be executed first to process end behaviors.
-  - q: What's the difference between Launch Pool and Presale?
-    a: Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
+  - q: Launch Pool 中的代币价格是如何确定的？
+    a: 价格是根据总存款有机发现的。最终价格等于存入的总 SOL 除以分配的代币数量。存款越多意味着每个代币的隐含价格越高。
+  - q: 用户可以提取他们的存款吗？
+    a: 可以，用户可以在存款期间提取。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 的提款费用，以防止系统被利用。
+  - q: 如果我多次存款会怎样？
+    a: 同一钱包的多次存款会累积到一个存款账户中。您的总份额基于您的累计存款。
+  - q: 用户何时可以领取他们的代币？
+    a: 在存款期结束且领取窗口开启后（由 claimStartCondition 定义）。必须先执行 Transition 来处理结束行为。
+  - q: Launch Pool 和 Presale 有什么区别？
+    a: Launch Pool 根据存款有机发现价格，按比例分配。Presale 则是预先设定固定价格，按先到先得的方式分配，直到达到上限。
 ---
 
-**Launch Pools** provide organic price discovery for token launches. Users deposit during a window and receive tokens proportional to their share of total deposits—no sniping, no front-running, fair distribution for everyone. {% .lead %}
+**Launch Pool** 为代币发行提供有机价格发现机制。用户在窗口期内存款，并根据其在总存款中的份额按比例获得代币——没有抢跑，没有抢先交易，每个人都能获得公平分配。 {% .lead %}
 
-{% callout title="What You'll Learn" %}
-This guide covers:
-- How Launch Pool pricing and distribution works
-- Setting up deposit and claim windows
-- Configuring end behaviors for fund collection
-- User operations: deposit, withdraw, and claim
+{% callout title="您将学到什么" %}
+本指南涵盖：
+- Launch Pool 定价和分配的工作原理
+- 设置存款和领取窗口
+- 配置资金收集的结束行为
+- 用户操作：存款、提款和领取
 {% /callout %}
 
-## Summary
+## 概要
 
-Launch Pools accept deposits during a defined window, then distribute tokens proportionally. The final token price is determined by total deposits divided by token allocation.
+Launch Pool 在定义的窗口期内接受存款，然后按比例分配代币。最终代币价格由总存款除以代币分配量确定。
 
-- Users deposit SOL during the deposit window (2% fee applies)
-- Withdrawals allowed during deposit period (2% fee)
-- Token distribution is proportional to deposit share
-- End behaviors route collected SOL to treasury buckets
+- 用户在存款窗口期间存入 SOL（收取 {% fee product="genesis" config="launchPool" fee="deposit" /%} 费用）
+- 存款期间允许提款（收取 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 费用）
+- 代币分配与存款份额成比例
+- 结束行为将收集的 SOL 路由到资金库 bucket
 
-## Out of Scope
+## 不在范围内
 
-Fixed-price sales (see [Presale](/smart-contracts/genesis/presale)), bid-based auctions (see [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)), and liquidity pool creation (use Raydium/Orca).
+固定价格销售（参见 [Presale](/zh/smart-contracts/genesis/presale)）、基于出价的拍卖（参见 [Uniform Price Auction](/zh/smart-contracts/genesis/uniform-price-auction)）以及流动性池创建（使用 Raydium/Orca）。
 
-## Quick Start
+## 快速开始
 
 {% totem %}
-{% totem-accordion title="View complete setup script" %}
+{% totem-accordion title="查看完整设置脚本" %}
 
-This shows how to set up a Launch Pool with deposit and claim windows. To build the user-facing app, see [User Operations](#user-operations).
+这展示了如何设置带有存款和领取窗口的 Launch Pool。要构建面向用户的应用，请参阅[用户操作](#用户操作)。
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -203,38 +203,38 @@ setupLaunchPool().catch(console.error);
 {% /totem-accordion %}
 {% /totem %}
 
-## How It Works
+## 工作原理
 
-1. A specific quantity of tokens is allocated to the Launch Pool bucket
-2. Users deposit SOL during the deposit window (withdrawals allowed with fee)
-3. When the window closes, tokens distribute proportionally based on deposit share
+1. 特定数量的代币被分配到 Launch Pool bucket
+2. 用户在存款窗口期间存入 SOL（允许带费用提款）
+3. 窗口关闭后，根据存款份额按比例分配代币
 
-### Price Discovery
+### 价格发现
 
-The token price emerges from total deposits:
+代币价格从总存款中产生：
 
 ```
 tokenPrice = totalDeposits / tokenAllocation
 userTokens = (userDeposit / totalDeposits) * tokenAllocation
 ```
 
-**Example:** 1,000,000 tokens allocated, 100 SOL total deposits = 0.0001 SOL per token
+**示例：** 分配 1,000,000 个代币，总存款 100 SOL = 每个代币 0.0001 SOL
 
-### Lifecycle
+### 生命周期
 
-1. **Deposit Period** - Users deposit SOL during a defined window
-2. **Transition** - End behaviors execute (e.g., send collected SOL to another bucket)
-3. **Claim Period** - Users claim tokens proportional to their deposit weight
+1. **存款期** - 用户在定义的窗口期间存入 SOL
+2. **Transition** - 执行结束行为（例如，将收集的 SOL 发送到另一个 bucket）
+3. **领取期** - 用户根据其存款权重按比例领取代币
 
-## Fees
+## 费用
 
 {% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
-Deposit Fee Example: A user deposit of 10 SOL results in 9.8 SOL credited to the user's deposit account.
+存款费用示例：用户存入 10 SOL，实际记入用户存款账户的是 9.8 SOL。
 
-## Setup Guide
+## 设置指南
 
-### Prerequisites
+### 前置条件
 
 {% totem %}
 
@@ -244,9 +244,9 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 
 {% /totem %}
 
-### 1. Initialize the Genesis Account
+### 1. 初始化 Genesis Account
 
-The Genesis Account creates your token and coordinates all distribution buckets.
+Genesis Account 创建您的代币并协调所有分发 bucket。
 
 {% totem %}
 
@@ -287,12 +287,12 @@ await initializeV2(umi, {
 {% /totem %}
 
 {% callout type="note" %}
-The `totalSupplyBaseToken` should equal the sum of all bucket allocations.
+`totalSupplyBaseToken` 应等于所有 bucket 分配的总和。
 {% /callout %}
 
-### 2. Add the Launch Pool Bucket
+### 2. 添加 Launch Pool Bucket
 
-The Launch Pool bucket collects deposits and distributes tokens proportionally. Configure timing here.
+Launch Pool bucket 收集存款并按比例分配代币。在此处配置时间。
 
 {% totem %}
 
@@ -363,9 +363,9 @@ await addLaunchPoolBucketV2(umi, {
 
 {% /totem %}
 
-### 3. Add the Unlocked Bucket
+### 3. 添加 Unlocked Bucket
 
-The Unlocked bucket receives SOL from the Launch Pool after the transition.
+Unlocked bucket 在 Transition 后接收来自 Launch Pool 的 SOL。
 
 {% totem %}
 
@@ -398,9 +398,9 @@ await addUnlockedBucketV2(umi, {
 
 {% /totem %}
 
-### 4. Finalize
+### 4. 最终化
 
-Once all buckets are configured, finalize to activate the launch. This is irreversible.
+配置完所有 bucket 后，进行最终化以激活发行。此操作不可逆。
 
 {% totem %}
 
@@ -415,11 +415,11 @@ await finalizeV2(umi, {
 
 {% /totem %}
 
-## User Operations
+## 用户操作
 
-### Wrapping SOL
+### 包装 SOL
 
-Users must wrap SOL to wSOL before depositing.
+用户必须在存款前将 SOL 包装为 wSOL。
 
 {% totem %}
 
@@ -455,7 +455,7 @@ await createTokenIfMissing(umi, {
 
 {% /totem %}
 
-### Depositing
+### 存款
 
 {% totem %}
 
@@ -485,11 +485,11 @@ console.log('Deposited (after fee):', deposit.amountQuoteToken);
 
 {% /totem %}
 
-Multiple deposits from the same user accumulate into a single deposit account.
+同一用户的多次存款会累积到一个存款账户中。
 
-### Withdrawing
+### 提款
 
-Users can withdraw during the deposit period. A 2% fee applies.
+用户可以在存款期间提款。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 费用。
 
 {% totem %}
 
@@ -507,11 +507,11 @@ await withdrawLaunchPoolV2(umi, {
 
 {% /totem %}
 
-If a user withdraws their entire balance, the deposit PDA is closed.
+如果用户提取全部余额，存款 PDA 将被关闭。
 
-### Claiming Tokens
+### 领取代币
 
-After the deposit period ends and claims open:
+在存款期结束且领取开放后：
 
 {% totem %}
 
@@ -528,13 +528,13 @@ await claimLaunchPoolV2(umi, {
 
 {% /totem %}
 
-Token allocation: `userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation`
+代币分配：`userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation`
 
-## Admin Operations
+## 管理员操作
 
-### Executing the Transition
+### 执行 Transition
 
-After deposits close, execute the transition to move collected SOL to the unlocked bucket.
+存款结束后，执行 Transition 将收集的 SOL 转移到 Unlocked bucket。
 
 {% totem %}
 
@@ -562,22 +562,22 @@ await transitionV2(umi, {
 
 {% /totem %}
 
-**Why this matters:** Without transition, collected SOL stays locked in the Launch Pool bucket. Users can still claim tokens, but the team cannot access the raised funds.
+**为什么这很重要：** 如果不执行 Transition，收集的 SOL 将保持锁定在 Launch Pool bucket 中。用户仍然可以领取代币，但团队无法获取募集的资金。
 
-## Reference
+## 参考
 
-### Time Conditions
+### 时间条件
 
-Four conditions control Launch Pool timing:
+四个条件控制 Launch Pool 的时间：
 
-| Condition | Purpose |
+| 条件 | 用途 |
 |-----------|---------|
-| `depositStartCondition` | When deposits open |
-| `depositEndCondition` | When deposits close |
-| `claimStartCondition` | When claims open |
-| `claimEndCondition` | When claims close |
+| `depositStartCondition` | 存款开放时间 |
+| `depositEndCondition` | 存款关闭时间 |
+| `claimStartCondition` | 领取开放时间 |
+| `claimEndCondition` | 领取关闭时间 |
 
-Use `TimeAbsolute` with a Unix timestamp:
+使用带有 Unix 时间戳的 `TimeAbsolute`：
 
 {% totem %}
 
@@ -594,9 +594,9 @@ const condition = {
 
 {% /totem %}
 
-### End Behaviors
+### 结束行为
 
-Define what happens to collected SOL after the deposit period:
+定义存款期结束后收集的 SOL 会发生什么：
 
 {% totem %}
 
@@ -614,7 +614,7 @@ endBehaviors: [
 
 {% /totem %}
 
-You can split funds across multiple buckets:
+您可以将资金分配到多个 bucket：
 
 {% totem %}
 
@@ -639,9 +639,9 @@ endBehaviors: [
 
 {% /totem %}
 
-### Fetching State
+### 获取状态
 
-**Bucket state:**
+**Bucket 状态：**
 
 {% totem %}
 
@@ -657,7 +657,7 @@ console.log('Token allocation:', bucket.bucket.baseTokenAllocation);
 
 {% /totem %}
 
-**Deposit state:**
+**存款状态：**
 
 {% totem %}
 
@@ -675,46 +675,46 @@ if (deposit) {
 
 {% /totem %}
 
-## Notes
+## 注意事项
 
-- The 2% protocol fee applies to both deposits and withdrawals
-- Multiple deposits from the same user accumulate in one deposit account
-- If a user withdraws their entire balance, the deposit PDA closes
-- Transitions must be executed after deposits close for end behaviors to process
-- Users must have wSOL (wrapped SOL) to deposit
+- {% fee product="genesis" config="launchPool" fee="deposit" /%} 协议费用适用于存款和提款
+- 同一用户的多次存款会累积在一个存款账户中
+- 如果用户提取全部余额，存款 PDA 将被关闭
+- 存款结束后必须执行 Transition 以处理结束行为
+- 用户必须拥有 wSOL（包装的 SOL）才能存款
 
-## FAQ
+## 常见问题
 
-### How is the token price determined in a Launch Pool?
-The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
+### Launch Pool 中的代币价格是如何确定的？
+价格是根据总存款有机发现的。最终价格等于存入的总 SOL 除以分配的代币数量。存款越多意味着每个代币的隐含价格越高。
 
-### Can users withdraw their deposits?
-Yes, users can withdraw during the deposit period. A 2% withdrawal fee applies to discourage gaming the system.
+### 用户可以提取他们的存款吗？
+可以，用户可以在存款期间提取。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 的提款费用，以防止系统被利用。
 
-### What happens if I deposit multiple times?
-Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
+### 如果我多次存款会怎样？
+同一钱包的多次存款会累积到一个存款账户中。您的总份额基于您的累计存款。
 
-### When can users claim their tokens?
-After the deposit period ends and the claim window opens (defined by `claimStartCondition`). The transition must be executed first to process end behaviors.
+### 用户何时可以领取他们的代币？
+在存款期结束且领取窗口开启后（由 `claimStartCondition` 定义）。必须先执行 Transition 来处理结束行为。
 
-### What's the difference between Launch Pool and Presale?
-Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
+### Launch Pool 和 Presale 有什么区别？
+Launch Pool 根据存款有机发现价格，按比例分配。Presale 则是预先设定固定价格，按先到先得的方式分配，直到达到上限。
 
-## Glossary
+## 术语表
 
-| Term | Definition |
+| 术语 | 定义 |
 |------|------------|
-| **Launch Pool** | Deposit-based distribution where price is discovered at close |
-| **Deposit Window** | Time period when users can deposit and withdraw SOL |
-| **Claim Window** | Time period when users can claim their proportional tokens |
-| **End Behavior** | Automated action executed after deposit period ends |
-| **Transition** | Instruction that processes end behaviors and routes funds |
-| **Proportional Distribution** | Token allocation based on user's share of total deposits |
-| **Quote Token** | The token users deposit (usually wSOL) |
-| **Base Token** | The token being distributed |
+| **Launch Pool** | 基于存款的分发方式，价格在结束时发现 |
+| **存款窗口** | 用户可以存入和提取 SOL 的时间段 |
+| **领取窗口** | 用户可以领取其按比例分配代币的时间段 |
+| **End Behavior** | 存款期结束后执行的自动化操作 |
+| **Transition** | 处理结束行为并路由资金的指令 |
+| **按比例分配** | 基于用户在总存款中的份额进行代币分配 |
+| **Quote Token** | 用户存入的代币（通常是 wSOL） |
+| **Base Token** | 正在分发的代币 |
 
-## Next Steps
+## 后续步骤
 
-- [Presale](/smart-contracts/genesis/presale) - Fixed-price token sales
-- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based allocation
-- [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API
+- [Presale](/zh/smart-contracts/genesis/presale) - 固定价格代币销售
+- [Uniform Price Auction](/zh/smart-contracts/genesis/uniform-price-auction) - 基于出价的分配
+- [Aggregation API](/zh/smart-contracts/genesis/aggregation) - 通过 API 查询发行数据

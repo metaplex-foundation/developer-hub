@@ -1,7 +1,7 @@
 ---
 title: API
 metaTitle: Genesis - API | Launch Data API | Metaplex
-description: Public API for querying Genesis launch data by genesis address or token mint. No authentication required.
+description: Genesis 주소 또는 토큰 민트로 Genesis 런칭 데이터를 조회하기 위한 공개 API. 인증 불필요.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -20,65 +20,65 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: Is authentication required?
-    a: No. The Genesis API is public with rate limits. No API key or authentication is needed.
-  - q: Which endpoint should I use if I only have a token mint?
-    a: Use /tokens/{mint} to get all launches for a token. Use /launches/{genesis_pubkey} if you have the genesis address.
-  - q: What are the rate limits?
-    a: Rate limits apply to prevent abuse. If you receive a 429 response, reduce your request frequency.
-  - q: Can a token have multiple launches?
-    a: Yes. The /tokens endpoint returns an array of launches because tokens can have multiple campaigns.
+  - q: 인증이 필요한가요?
+    a: 아니요. Genesis API는 요청 제한이 있는 공개 API입니다. API 키나 인증이 필요하지 않습니다.
+  - q: 토큰 민트만 있으면 어떤 엔드포인트를 사용해야 하나요?
+    a: /tokens/{mint}를 사용하여 토큰의 모든 런칭을 가져오세요. genesis 주소가 있으면 /launches/{genesis_pubkey}를 사용하세요.
+  - q: 요청 제한은 어떻게 되나요?
+    a: 남용 방지를 위해 요청 제한이 적용됩니다. 429 응답을 받으면 요청 빈도를 줄이세요.
+  - q: 토큰이 여러 런칭을 가질 수 있나요?
+    a: 예. /tokens 엔드포인트는 토큰이 여러 캠페인을 가질 수 있으므로 런칭 배열을 반환합니다.
 ---
 
-The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application. {% .lead %}
+Genesis API를 사용하면 애그리게이터와 애플리케이션이 Genesis 토큰 런칭에서 런칭 데이터를 조회할 수 있습니다. 이 엔드포인트를 사용하여 애플리케이션에 런칭 정보, 토큰 메타데이터 및 소셜 링크를 표시하세요. {% .lead %}
 
-{% callout title="What You'll Learn" %}
-This reference covers:
-- Available endpoints and their use cases
-- Request/response formats with examples
-- TypeScript and Rust type definitions
-- Error handling
+{% callout title="배우게 될 내용" %}
+이 레퍼런스에서 다루는 내용:
+- 사용 가능한 엔드포인트와 사용 사례
+- 예제가 포함된 요청/응답 형식
+- TypeScript 및 Rust 타입 정의
+- 오류 처리
 {% /callout %}
 
-## Summary
+## 요약
 
-The Genesis API provides read-only access to launch data. Query by genesis address or token mint.
+Genesis API는 런칭 데이터에 대한 읽기 전용 접근을 제공합니다. genesis 주소 또는 토큰 민트로 조회하세요.
 
-- Public API with rate limits (no authentication)
-- Returns launch info, token metadata, and social links
-- TypeScript and Rust types provided
-- Standard REST error codes
+- 요청 제한이 있는 공개 API (인증 불필요)
+- 런칭 정보, 토큰 메타데이터 및 소셜 링크 반환
+- TypeScript 및 Rust 타입 제공
+- 표준 REST 오류 코드
 
 {% callout type="note" %}
-The API is public with rate limits. No authentication is required.
+이 API는 요청 제한이 있는 공개 API입니다. 인증이 필요하지 않습니다.
 {% /callout %}
 
-## Base URL
+## 기본 URL
 
 ```
 https://api.metaplex.com/v1
 ```
 
-## Use Cases
+## 사용 사례
 
-- **`/launches/{genesis_pubkey}`** - Use when you have a genesis address, such as from an on-chain event or transaction log.
-- **`/tokens/{mint}`** - Use when you only know the token mint address. Returns all launches associated with that token (a token can have multiple launch campaigns).
+- **`/launches/{genesis_pubkey}`** - 온체인 이벤트나 트랜잭션 로그에서 genesis 주소를 가지고 있을 때 사용합니다.
+- **`/tokens/{mint}`** - 토큰 민트 주소만 알고 있을 때 사용합니다. 해당 토큰과 관련된 모든 런칭을 반환합니다 (토큰은 여러 런칭 캠페인을 가질 수 있습니다).
 
-## Endpoints
+## 엔드포인트
 
-### Get Launch by Genesis Address
+### Genesis 주소로 런칭 조회
 
 ```
 GET /launches/{genesis_pubkey}
 ```
 
-**Example Request:**
+**요청 예시:**
 
 ```
 GET https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
 ```
 
-**Response:**
+**응답:**
 
 ```json
 {
@@ -105,15 +105,15 @@ GET https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSf
 }
 ```
 
-### Get Launches by Token Mint
+### 토큰 민트로 런칭 조회
 
 ```
 GET /tokens/{mint}
 ```
 
-Returns all launches for a token. The response is identical except `launches` is an array.
+토큰의 모든 런칭을 반환합니다. 응답은 `launches`가 배열이라는 점을 제외하면 동일합니다.
 
-**Response:**
+**응답:**
 
 ```json
 {
@@ -143,10 +143,10 @@ Returns all launches for a token. The response is identical except `launches` is
 ```
 
 {% callout type="note" %}
-Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only have a token mint, use the `/tokens` endpoint instead.
+genesis 공개키를 찾으려면 인덱싱 또는 `getProgramAccounts`가 필요합니다. 토큰 민트만 가지고 있다면 `/tokens` 엔드포인트를 대신 사용하세요.
 {% /callout %}
 
-## Errors
+## 오류
 
 ```json
 {
@@ -157,14 +157,14 @@ Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only h
 }
 ```
 
-| Code | Description |
+| 코드 | 설명 |
 | --- | --- |
-| `400` | Bad request - invalid parameters |
-| `404` | Launch or token not found |
-| `429` | Rate limit exceeded |
-| `500` | Internal server error |
+| `400` | 잘못된 요청 - 유효하지 않은 매개변수 |
+| `404` | 런칭 또는 토큰을 찾을 수 없음 |
+| `429` | 요청 제한 초과 |
+| `500` | 내부 서버 오류 |
 
-## TypeScript Types
+## TypeScript 타입
 
 ```ts
 interface Launch {
@@ -213,7 +213,7 @@ interface ErrorResponse {
 }
 ```
 
-**Example:**
+**예시:**
 
 ```ts
 const response = await fetch(
@@ -223,7 +223,7 @@ const { data }: LaunchResponse = await response.json();
 console.log(data.baseToken.name); // "My Token"
 ```
 
-## Rust Types
+## Rust 타입
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -294,7 +294,7 @@ pub struct ErrorResponse {
 }
 ```
 
-**Example:**
+**예시:**
 
 ```rust
 let response: LaunchResponse = reqwest::get(
@@ -308,7 +308,7 @@ println!("{}", response.data.base_token.name); // "My Token"
 ```
 
 {% callout type="note" %}
-Add these dependencies to your `Cargo.toml`:
+`Cargo.toml`에 다음 의존성을 추가하세요:
 ```toml
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
@@ -319,30 +319,30 @@ serde = { version = "1", features = ["derive"] }
 
 ## FAQ
 
-### Is authentication required?
-No. The Genesis API is public with rate limits. No API key or authentication is needed.
+### 인증이 필요한가요?
+아니요. Genesis API는 요청 제한이 있는 공개 API입니다. API 키나 인증이 필요하지 않습니다.
 
-### Which endpoint should I use if I only have a token mint?
-Use `/tokens/{mint}` to get all launches for a token. Use `/launches/{genesis_pubkey}` if you have the genesis address.
+### 토큰 민트만 있으면 어떤 엔드포인트를 사용해야 하나요?
+`/tokens/{mint}`를 사용하여 토큰의 모든 런칭을 가져오세요. genesis 주소가 있으면 `/launches/{genesis_pubkey}`를 사용하세요.
 
-### What are the rate limits?
-Rate limits apply to prevent abuse. If you receive a 429 response, reduce your request frequency.
+### 요청 제한은 어떻게 되나요?
+남용 방지를 위해 요청 제한이 적용됩니다. 429 응답을 받으면 요청 빈도를 줄이세요.
 
-### Can a token have multiple launches?
-Yes. The `/tokens` endpoint returns an array of launches because tokens can have multiple campaigns (using different `genesisIndex` values).
+### 토큰이 여러 런칭을 가질 수 있나요?
+예. `/tokens` 엔드포인트는 토큰이 여러 캠페인을 가질 수 있으므로 (다른 `genesisIndex` 값을 사용하여) 런칭 배열을 반환합니다.
 
-## Glossary
+## 용어집
 
-| Term | Definition |
-|------|------------|
-| **Genesis Address** | The PDA identifying a specific launch campaign |
-| **Base Token** | The token being launched |
-| **Launch Page** | The URL where users can participate in the launch |
-| **Launch Type** | The mechanism used (launchpool, presale, auction) |
-| **Socials** | Social media links associated with the token |
+| 용어 | 정의 |
+|------|------|
+| **Genesis Address** | 특정 런칭 캠페인을 식별하는 PDA |
+| **Base Token** | 런칭되는 토큰 |
+| **Launch Page** | 사용자가 런칭에 참여할 수 있는 URL |
+| **Launch Type** | 사용된 메커니즘 (launchpool, presale, auction) |
+| **Socials** | 토큰과 관련된 소셜 미디어 링크 |
 
-## Next Steps
+## 다음 단계
 
-- [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) - Programmatic access to Genesis
-- [Aggregation API](/smart-contracts/genesis/aggregation) - Additional API details and on-chain fetching
-- [Getting Started](/smart-contracts/genesis/getting-started) - Launch your own token
+- [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) - Genesis에 대한 프로그래밍 방식 접근
+- [Aggregation API](/smart-contracts/genesis/aggregation) - 추가 API 세부사항 및 온체인 조회
+- [Getting Started](/smart-contracts/genesis/getting-started) - 자신의 토큰 런칭하기

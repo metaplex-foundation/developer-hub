@@ -62,14 +62,14 @@
 
 ## Genesis (Token Launch)
 
-- [Aggregation API](https://developers.metaplex.com/smart-contracts/genesis/aggregation): Public API for querying Genesis launch data by genesis address or token mint.
-- [API](https://developers.metaplex.com/smart-contracts/genesis/api): Public API for querying Genesis launch data by genesis address or token mint.
+- [Aggregation API](https://developers.metaplex.com/smart-contracts/genesis/aggregation): Public API for querying Genesis launch data by genesis address or token mint. Includes on-chain state fetching.
+- [API](https://developers.metaplex.com/smart-contracts/genesis/api): Public API for querying Genesis launch data by genesis address or token mint. No authentication required.
 - [Genesis - Solana Token Launch Smart Contract](https://developers.metaplex.com/smart-contracts/genesis): Launch tokens on Solana with Genesis smart contract. Build token generation events (TGE), fair launches, ICOs, priced sales, and launch pools on-chain.
-- [Getting Started](https://developers.metaplex.com/smart-contracts/genesis/getting-started): Learn the fundamentals of launching a token with Genesis on Solana.
-- [JavaScript SDK](https://developers.metaplex.com/smart-contracts/genesis/sdk/javascript): Learn how to install and configure the Genesis JavaScript SDK for token launches on Solana.
-- [Launch Pool](https://developers.metaplex.com/smart-contracts/genesis/launch-pool): Token distribution where users deposit during a window and receive tokens proportionally.
-- [Presale](https://developers.metaplex.com/smart-contracts/genesis/presale): Fixed-price token sale where users deposit SOL and receive tokens at a predetermined rate.
-- [Uniform Price Auction](https://developers.metaplex.com/smart-contracts/genesis/uniform-price-auction): Time-based auction mechanism for token launches with uniform clearing price.
+- [Getting Started](https://developers.metaplex.com/smart-contracts/genesis/getting-started): Understand the Genesis token launch flow. Learn the steps from initialization to distribution and how to plan your launch.
+- [JavaScript SDK](https://developers.metaplex.com/smart-contracts/genesis/sdk/javascript): API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
+- [Launch Pool](https://developers.metaplex.com/smart-contracts/genesis/launch-pool): Token distribution where users deposit during a window and receive tokens proportionally. Organic price discovery with anti-sniping design.
+- [Presale](https://developers.metaplex.com/smart-contracts/genesis/presale): Fixed-price token sale where users deposit SOL and receive tokens at a predetermined rate. Set your price upfront with controlled distribution.
+- [Uniform Price Auction](https://developers.metaplex.com/smart-contracts/genesis/uniform-price-auction): Time-based auction mechanism for token launches with uniform clearing price. Competitive bidding for larger participants.
 
 ## Core (NFT Standard)
 
@@ -91,7 +91,6 @@
 - [Bubblegum Plugin](https://developers.metaplex.com/smart-contracts/core/plugins/bubblegum): Learn how to use the Bubblegum Plugin to create Collections that can be used for compressed NFTs.
 - [Burn Delegate](https://developers.metaplex.com/smart-contracts/core/plugins/burn-delegate): Allow a delegate to burn Core NFT Assets. Use the Burn Delegate plugin for game mechanics, subscription expirations, and automated asset destruction.
 - [Burning Assets](https://developers.metaplex.com/smart-contracts/core/burn): Learn how to burn Core NFT Assets on Solana. Permanently destroy Assets and recover rent using the Metaplex Core SDK.
-- [Core JS SDK v1.0](https://developers.metaplex.com/smart-contracts/core/core-js-sdk-v1-0): Whats new in the Metaplex Core JS SDK v1.0?
 - [Create a Staking Program in Anchor](https://developers.metaplex.com/smart-contracts/core/guides/anchor/anchor-staking-example): This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking program using the Metaplex Core digital asset standard!
 - [Create a US Market Trading Experience Using the Oracle External Plugin](https://developers.metaplex.com/smart-contracts/core/guides/oracle-plugin-example): This guide shows how to limit your Core Collection trades and sales during open US market hours.
 - [Create an Event Ticketing Platform leveraging the Appdata Plugin](https://developers.metaplex.com/smart-contracts/core/guides/onchain-ticketing-with-appdata): This guide shows how to create a ticketing platform leveraging the Appdata Plugin.
@@ -305,8 +304,10 @@
 - [Fetching Assets](https://developers.metaplex.com/smart-contracts/token-metadata/fetch): Learn how to fetch the various onchain accounts of your assets on Token Metadata
 - [Get Mints in a Collection](https://developers.metaplex.com/smart-contracts/token-metadata/guides/get-by-collection): How-to guide to get all mints in a collection.
 - [Getting Started](https://developers.metaplex.com/smart-contracts/token-metadata/getting-started): Get started with NFTs.
-- [Getting Started using JavaScript](https://developers.metaplex.com/smart-contracts/token-metadata/getting-started/js): Get started with NFTs using the Metaplex Token Metadata JavaScript SDK.
+- [Getting Started using JavaScript](https://developers.metaplex.com/smart-contracts/token-metadata/getting-started/js): Get started with NFTs using the Metaplex Token Metadata JavaScript SDKs.
 - [Getting Started using Rust](https://developers.metaplex.com/smart-contracts/token-metadata/getting-started/rust): Get started with NFTs using the Token Metadata Rust SDK
+- [Getting Started with Kit SDK](https://developers.metaplex.com/smart-contracts/token-metadata/getting-started/kit): Get started with NFTs using the Metaplex Token Metadata Kit SDK.
+- [Getting Started with Umi SDK](https://developers.metaplex.com/smart-contracts/token-metadata/getting-started/umi): Get started with NFTs using the Metaplex Token Metadata Umi SDK.
 - [Guides](https://developers.metaplex.com/smart-contracts/token-metadata/guides): How-to guides for Metaplex's Token Metadata product.
 - [How to Create a NFT On Solana](https://developers.metaplex.com/smart-contracts/token-metadata/guides/javascript/create-an-nft): Learn how to create an NFT on the Solana blockchain with the Metaplex.
 - [How to Create a Token Claimer Smart Contract leveraging Merkle Tree](https://developers.metaplex.com/smart-contracts/token-metadata/guides/anchor/token-claimer-smart-contract): Learn how to create a Token Claimer Smart Contract on Solana leveraging Merkle Trees and using Anchor!

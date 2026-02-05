@@ -1,7 +1,7 @@
 ---
-title: ImmutableMetadata Plugin
-metaTitle: ImmutableMetadata Plugin | Metaplex Core
-description: Make Core NFT Asset and Collection metadata permanently immutable. Lock the name and URI to prevent any future changes.
+title: ImmutableMetadata 插件
+metaTitle: ImmutableMetadata 插件 | Metaplex Core
+description: 使 Core NFT Asset 和 Collection 元数据永久不可变。锁定名称和 URI 以防止任何未来更改。
 updated: '01-31-2026'
 keywords:
   - immutable metadata
@@ -17,63 +17,63 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Can I undo adding ImmutableMetadata?
-    a: No. Once added, the ImmutableMetadata plugin cannot be removed. The metadata is permanently locked. This is by design for provenance guarantees.
-  - q: What exactly becomes immutable?
-    a: The Asset or Collection's name and uri fields. Other plugin data is not affected - use authority None on individual plugins to make their data immutable.
-  - q: If I add this to a Collection, are existing Assets affected?
-    a: Yes. When ImmutableMetadata is on a Collection, all Assets in that Collection inherit the immutability. Their metadata cannot be changed.
-  - q: Can I add this during Asset creation?
-    a: Yes. You can add ImmutableMetadata during create() to ensure the metadata is locked from the start.
-  - q: Why would I want immutable metadata?
-    a: Immutable metadata provides permanent provenance - collectors know the NFT's name and associated metadata URI can never be changed, preventing rug-pulls.
+  - q: 可以撤销添加 ImmutableMetadata 吗？
+    a: 不可以。一旦添加，ImmutableMetadata 插件就无法移除。元数据将永久锁定。这是为了出处保证而设计的。
+  - q: 具体什么变得不可变？
+    a: Asset 或 Collection 的 name 和 uri 字段。其他插件数据不受影响 - 使用权限 None 来使各个插件的数据不可变。
+  - q: 如果我将其添加到 Collection，现有 Asset 会受影响吗？
+    a: 是的。当 ImmutableMetadata 在 Collection 上时，该 Collection 中的所有 Asset 都会继承不可变性。它们的元数据无法更改。
+  - q: 可以在 Asset 创建时添加吗？
+    a: 可以。您可以在 create() 时添加 ImmutableMetadata，以确保元数据从一开始就被锁定。
+  - q: 为什么需要不可变元数据？
+    a: 不可变元数据提供永久出处 - 收藏家知道 NFT 的名称和相关元数据 URI 永远不会改变，从而防止抽地毯骗局。
 ---
-The **ImmutableMetadata Plugin** permanently locks the name and URI of Assets or Collections. Once added, the metadata cannot be changed by anyone, ensuring permanent provenance. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Make Asset metadata immutable
-- Make Collection metadata immutable
-- Understand inheritance from Collections to Assets
-- Protect NFT provenance permanently
+**ImmutableMetadata 插件**永久锁定 Asset 或 Collection 的名称和 URI。一旦添加，任何人都无法更改元数据，确保永久出处。 {% .lead %}
+{% callout title="您将学到" %}
+- 使 Asset 元数据不可变
+- 使 Collection 元数据不可变
+- 理解从 Collection 到 Asset 的继承
+- 永久保护 NFT 出处
 {% /callout %}
-## Summary
-The **ImmutableMetadata** plugin is an Authority Managed plugin that prevents any changes to an Asset or Collection's name and URI. Once added, this protection is permanent.
-- Authority Managed (only update authority can add)
-- Makes name and URI permanently unchangeable
-- Cannot be removed after addition
-- Collection plugin affects all Assets in that Collection
-## Out of Scope
-Making other plugin data immutable (use authority `None` on those plugins), selective field immutability, and temporary locks.
-## Quick Start
-**Jump to:** [Add to Asset](#adding-the-immutablemetadata-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-immutablemetadata-plugin-to-a-collection-code-example)
-1. Ensure metadata (name, URI) is finalized
-2. Add ImmutableMetadata plugin as update authority
-3. Metadata is now permanently locked
-{% callout type="note" title="When to Use ImmutableMetadata" %}
-| Scenario | Use ImmutableMetadata? |
+## 摘要
+**ImmutableMetadata** 插件是一个权限管理插件，可防止对 Asset 或 Collection 的名称和 URI 进行任何更改。一旦添加，此保护是永久的。
+- 权限管理（只有更新权限可以添加）
+- 使名称和 URI 永久不可更改
+- 添加后无法移除
+- Collection 插件影响该 Collection 中的所有 Asset
+## 范围外
+使其他插件数据不可变（对这些插件使用权限 `None`）、选择性字段不可变性和临时锁定不在范围内。
+## 快速开始
+**跳转到：** [添加到 Asset](#asset-添加-immutablemetadata-插件代码示例) · [添加到 Collection](#collection-添加-immutablemetadata-插件代码示例)
+1. 确保元数据（名称、URI）已最终确定
+2. 以更新权限添加 ImmutableMetadata 插件
+3. 元数据现已永久锁定
+{% callout type="note" title="何时使用 ImmutableMetadata" %}
+| 场景 | 使用 ImmutableMetadata？ |
 |----------|------------------------|
-| Art NFTs with permanent artwork | ✅ Yes |
-| Game items with evolving stats | ❌ No (need to update attributes) |
-| Prevent rug-pulls | ✅ Yes |
-| Dynamic/evolving NFTs | ❌ No |
-| Certificates/credentials | ✅ Yes |
-**Use ImmutableMetadata** for art, collectibles, and certificates where permanence is valued.
-**Don't use** for game items or dynamic NFTs that need updates.
+| 具有永久艺术品的艺术 NFT | ✅ 是 |
+| 具有演变属性的游戏物品 | ❌ 否（需要更新属性） |
+| 防止抽地毯骗局 | ✅ 是 |
+| 动态/演变 NFT | ❌ 否 |
+| 证书/凭证 | ✅ 是 |
+**使用 ImmutableMetadata** 用于艺术品、收藏品和证书，这些地方永久性很重要。
+**不要使用** 用于需要更新的游戏物品或动态 NFT。
 {% /callout %}
-## Common Use Cases
-- **Art collectibles**: Guarantee artwork and metadata will never change
-- **Certificates**: Issue credentials that can't be altered
-- **Provenance protection**: Prevent rug-pulls by locking metadata
-- **Historical records**: Preserve NFT data permanently
-- **Brand guarantees**: Assure collectors the NFT's identity is fixed
-## Works With
+## 常见用例
+- **艺术收藏品**：保证艺术品和元数据永不改变
+- **证书**：发行无法更改的凭证
+- **出处保护**：通过锁定元数据防止抽地毯骗局
+- **历史记录**：永久保存 NFT 数据
+- **品牌保证**：向收藏家保证 NFT 的身份是固定的
+## 兼容性
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
-## Arguments
-The ImmutableMetadata Plugin requires no arguments.
-## Adding the immutableMetadata Plugin to an Asset code example
-{% dialect-switcher title="Adding a Immutability Plugin to an MPL Core Asset" %}
+## 参数
+ImmutableMetadata 插件不需要参数。
+## Asset 添加 immutableMetadata 插件代码示例
+{% dialect-switcher title="向 MPL Core Asset 添加 Immutability 插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -88,8 +88,8 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Adding the immutableMetadata Plugin to a Collection code example
-{% dialect-switcher title="Add immutableMetadata Plugin to Collection" %}
+## Collection 添加 immutableMetadata 插件代码示例
+{% dialect-switcher title="向 Collection 添加 immutableMetadata 插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import {
@@ -104,48 +104,48 @@ await addCollectionPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 常见错误
 ### `Authority mismatch`
-Only the update authority can add the ImmutableMetadata plugin.
+只有更新权限可以添加 ImmutableMetadata 插件。
 ### `Cannot update metadata`
-The ImmutableMetadata plugin is active. The name and URI cannot be changed.
-## Notes
-- This action is **permanent and irreversible**
-- Double-check name and URI before adding this plugin
-- Adding to a Collection makes ALL Assets in that Collection immutable
-- The plugin has no arguments—just add it to lock metadata
-## Quick Reference
-### Affected Fields
-| Field | Locked |
+ImmutableMetadata 插件已激活。名称和 URI 无法更改。
+## 注意事项
+- 此操作是**永久且不可逆的**
+- 添加此插件前请仔细检查名称和 URI
+- 添加到 Collection 会使该 Collection 中的所有 Asset 不可变
+- 插件没有参数——只需添加即可锁定元数据
+## 快速参考
+### 受影响的字段
+| 字段 | 已锁定 |
 |-------|--------|
 | `name` | ✅ |
 | `uri` | ✅ |
-| Other metadata | ❌ (use other methods) |
-### Inheritance Behavior
-| Added To | Effect |
+| 其他元数据 | ❌（使用其他方法） |
+### 继承行为
+| 添加到 | 效果 |
 |----------|--------|
-| Asset | Only that Asset's metadata is locked |
-| Collection | Collection AND all Assets' metadata locked |
-## FAQ
-### Can I undo adding ImmutableMetadata?
-No. Once added, the ImmutableMetadata plugin cannot be removed. The metadata is permanently locked. This is by design for provenance guarantees.
-### What exactly becomes immutable?
-The Asset or Collection's `name` and `uri` fields. Other plugin data is not affected—use authority `None` on individual plugins to make their data immutable.
-### If I add this to a Collection, are existing Assets affected?
-Yes. When ImmutableMetadata is on a Collection, all Assets in that Collection inherit the immutability. Their metadata cannot be changed.
-### Can I add this during Asset creation?
-Yes. You can add ImmutableMetadata during `create()` to ensure the metadata is locked from the start.
-### Why would I want immutable metadata?
-Immutable metadata provides permanent provenance—collectors know the NFT's name and associated metadata URI can never be changed, preventing rug-pulls where creators swap out artwork or descriptions.
-## Related Plugins
-- [AddBlocker](/smart-contracts/core/plugins/addBlocker) - Prevent new plugins (complementary to ImmutableMetadata)
-- [Attributes](/smart-contracts/core/plugins/attribute) - On-chain data (not locked by ImmutableMetadata)
-- [Royalties](/smart-contracts/core/plugins/royalties) - Set royalties before making immutable
-## Glossary
-| Term | Definition |
+| Asset | 仅该 Asset 的元数据被锁定 |
+| Collection | Collection 和所有 Asset 的元数据被锁定 |
+## 常见问题
+### 可以撤销添加 ImmutableMetadata 吗？
+不可以。一旦添加，ImmutableMetadata 插件就无法移除。元数据将永久锁定。这是为了出处保证而设计的。
+### 具体什么变得不可变？
+Asset 或 Collection 的 `name` 和 `uri` 字段。其他插件数据不受影响——使用权限 `None` 来使各个插件的数据不可变。
+### 如果我将其添加到 Collection，现有 Asset 会受影响吗？
+是的。当 ImmutableMetadata 在 Collection 上时，该 Collection 中的所有 Asset 都会继承不可变性。它们的元数据无法更改。
+### 可以在 Asset 创建时添加吗？
+可以。您可以在 `create()` 时添加 ImmutableMetadata，以确保元数据从一开始就被锁定。
+### 为什么需要不可变元数据？
+不可变元数据提供永久出处——收藏家知道 NFT 的名称和相关元数据 URI 永远不会改变，从而防止创作者替换艺术品或描述的抽地毯骗局。
+## 相关插件
+- [AddBlocker](/smart-contracts/core/plugins/addBlocker) - 防止添加新插件（与 ImmutableMetadata 互补）
+- [Attributes](/smart-contracts/core/plugins/attribute) - 链上数据（不被 ImmutableMetadata 锁定）
+- [Royalties](/smart-contracts/core/plugins/royalties) - 在设为不可变之前设置版税
+## 术语表
+| 术语 | 定义 |
 |------|------------|
-| **Immutable** | Cannot be changed or modified |
-| **Metadata** | The name and URI associated with an Asset/Collection |
-| **Provenance** | Verifiable record of authenticity and ownership |
-| **URI** | Link to off-chain JSON metadata |
-| **Inheritance** | Assets automatically get Collection-level plugin effects |
+| **不可变** | 无法更改或修改 |
+| **元数据** | 与 Asset/Collection 关联的名称和 URI |
+| **出处** | 可验证的真实性和所有权记录 |
+| **URI** | 链下 JSON 元数据的链接 |
+| **继承** | Asset 自动获得 Collection 级别的插件效果 |

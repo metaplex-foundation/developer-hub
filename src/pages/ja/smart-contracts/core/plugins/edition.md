@@ -1,7 +1,7 @@
 ---
-title: Edition Plugin
-metaTitle: Edition Plugin | Metaplex Core
-description: Add edition numbers to Core NFT Assets for prints and limited runs. Track edition numbers like 1/100 for collectible series.
+title: Editionプラグイン
+metaTitle: Editionプラグイン | Metaplex Core
+description: Core NFT Assetsにエディション番号を追加してプリントと限定版を作成します。コレクティブルシリーズの1/100のようなエディション番号を追跡します。
 updated: '01-31-2026'
 keywords:
   - NFT edition
@@ -17,56 +17,56 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Is the edition number enforced to be unique?
-    a: No. The edition number is informational only. Creators are responsible for ensuring unique numbers. Use Candy Machine with the Edition Guard for automatic sequential numbering.
-  - q: Can I add the Edition plugin to an existing Asset?
-    a: No. The Edition plugin must be added during Asset creation. Plan ahead if you need edition numbers.
-  - q: How do I create a 1 of 100 style edition?
-    a: Add the Edition plugin to Assets with numbers 1-100 and add the Master Edition plugin to the Collection with maxSupply of 100.
-  - q: Can I change the edition number after creation?
-    a: Yes, if the plugin authority is not set to None. The update authority can modify the number using updatePlugin.
-  - q: What's the difference between Edition and Master Edition?
-    a: Edition stores the individual number on an Asset. Master Edition stores collection-level data (max supply, edition name/URI) on a Collection.
+  - q: エディション番号は一意であることが強制されますか？
+    a: いいえ。エディション番号は情報提供のみです。クリエイターは一意の番号を確保する責任があります。自動連番にはCandy MachineとEdition Guardを使用してください。
+  - q: 既存のAssetにEditionプラグインを追加できますか？
+    a: いいえ。Editionプラグインは Asset作成時に追加する必要があります。エディション番号が必要な場合は事前に計画してください。
+  - q: 1/100スタイルのエディションを作成するにはどうすればよいですか？
+    a: 番号1-100のAssetsにEditionプラグインを追加し、Collectionにmax Supply 100のMaster Editionプラグインを追加します。
+  - q: 作成後にエディション番号を変更できますか？
+    a: はい、プラグインauthorityがNoneに設定されていなければ可能です。Update authorityはupdatePluginを使用して番号を変更できます。
+  - q: EditionとMaster Editionの違いは何ですか？
+    a: EditionはAssetに個別の番号を保存します。Master EditionはCollection上にコレクションレベルのデータ（最大供給量、エディション名/URI）を保存します。
 ---
-The **Edition Plugin** stores an edition number on individual Assets. Use it to create numbered prints like "1 of 100" for collectible series and limited editions. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add edition numbers to Assets
-- Create mutable and immutable editions
-- Update edition numbers
-- Understand the Edition workflow
+**Editionプラグイン**は、個々のAssetsにエディション番号を保存します。コレクティブルシリーズや限定版の「1 of 100」のような番号付きプリントを作成するために使用します。 {% .lead %}
+{% callout title="学べること" %}
+- Assetsにエディション番号を追加
+- 変更可能および不変のエディションを作成
+- エディション番号を更新
+- Editionワークフローを理解
 {% /callout %}
-## Summary
-The **Edition** plugin is an Authority Managed plugin that stores a unique edition number on an Asset. Best used with the [Master Edition plugin](/smart-contracts/core/plugins/master-edition) on Collections to group numbered editions together.
-- Authority Managed (update authority controls)
-- Must be added at Asset creation
-- Number can be updated if authority is mutable
-- Use with Candy Machine Edition Guard for automatic numbering
-## Out of Scope
-Supply enforcement (informational only), automatic numbering (use Candy Machine), and Collection-level editions (use Master Edition plugin for Collections).
-## Quick Start
-**Jump to:** [Create Mutable Edition](#create-with-a-mutable-plugin) · [Create Immutable Edition](#create-with-a-immutable-plugin) · [Update Edition](#update-the-editions-plugin)
-1. Add Edition plugin during Asset creation with a unique number
-2. Optionally set authority to `None` for immutability
-3. Update the number later if mutable
-{% callout type="note" title="Intended Usage" %}
-We recommend to
-- Group the Editions using the Master Edition Plugin
-- use Candy Machine with the Edition Guard to handled numbering automatically.
+## 概要
+**Edition**プラグインは、Assetに固有のエディション番号を保存するAuthority Managedプラグインです。番号付きエディションをグループ化するために、Collectionsの[Master Editionプラグイン](/smart-contracts/core/plugins/master-edition)と一緒に使用するのが最適です。
+- Authority Managed（update authorityが制御）
+- Asset作成時に追加する必要がある
+- authorityが変更可能なら番号を更新可能
+- 自動番号付けにはCandy Machine Edition Guardを使用
+## 対象外
+供給量の強制（情報提供のみ）、自動番号付け（Candy Machineを使用）、コレクションレベルのエディション（CollectionsにはMaster Editionプラグインを使用）。
+## クイックスタート
+**ジャンプ先:** [変更可能なエディションを作成](#変更可能なプラグインで作成) · [不変のエディションを作成](#不変のプラグインで作成) · [エディションを更新](#editionsプラグインの更新)
+1. Asset作成時に固有の番号でEditionプラグインを追加
+2. オプションで不変性のためにauthorityを`None`に設定
+3. 変更可能なら後で番号を更新
+{% callout type="note" title="推奨される使用方法" %}
+推奨事項：
+- Master Editionプラグインを使用してエディションをグループ化
+- Candy MachineとEdition Guardを使用して番号付けを自動処理
 {% /callout %}
-## Works With
+## 対応
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
-## Arguments
-| Arg    | Value  |
+## 引数
+| 引数    | 値  |
 | ------ | ------ |
 | number | number |
-The number is a specific value that is assigned to the asset. Usually this number is unique, therefore the Creator should make sure that a number is not used twice.
-## Creating an Asset with the editions plugin
-The Editions Plugin must be added on creation of the asset. As long as it is mutable the number can be changed.
-### Create with a mutable Plugin
-{% dialect-switcher title="Creating an MPL Core Asset with the Edition Plugin" %}
+numberは、Assetに割り当てられる特定の値です。通常この番号は一意であるため、クリエイターは番号が重複して使用されないように注意する必要があります。
+## Editionsプラグインを持つAssetの作成
+EditionsプラグインはAssetの作成時に追加する必要があります。変更可能である限り、番号は変更できます。
+### 変更可能なプラグインで作成
+{% dialect-switcher title="Editionプラグインを持つMPL Core Assetの作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -128,11 +128,11 @@ pub async fn create_asset_with_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Create with a Immutable Plugin
-To create the Asset with immutable Edition Plugin the following code can be used:
-{% dialect-switcher title="Adding the Editions Plugin to an MPL Core Asset" %}
+### 不変のプラグインで作成
+不変のEditionプラグインでAssetを作成するには、以下のコードを使用できます：
+{% dialect-switcher title="MPL Core AssetへのEditionsプラグインの追加" %}
 {% dialect title="JavaScript" id="js" %}
-To have the editions Plugin immutable the authority has to be set to `nonePluginAuthority()` like this:
+editionsプラグインを不変にするには、次のようにauthorityを`nonePluginAuthority()`に設定する必要があります：
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { create } from '@metaplex-foundation/mpl-core'
@@ -195,9 +195,9 @@ pub async fn create_asset_with_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Update the Editions Plugin
-If the Editions Plugin is mutable it can be updated similar to other Plugins:
-{% dialect-switcher title="Update The Edition Plugin on an Asset" %}
+## Editionsプラグインの更新
+Editionsプラグインが変更可能な場合、他のプラグインと同様に更新できます：
+{% dialect-switcher title="AssetのEditionプラグインの更新" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -210,49 +210,49 @@ const asset = publicKey('11111111111111111111111111111111')
 ```
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
-_coming soon_
+_近日公開_
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 一般的なエラー
 ### `Cannot add Edition plugin after creation`
-The Edition plugin must be added during Asset creation. It cannot be added to existing Assets.
+Editionプラグインは Asset作成時に追加する必要があります。既存のAssetsには追加できません。
 ### `Authority mismatch`
-Only the update authority can update the edition number (if mutable).
+（変更可能な場合）update authorityのみがエディション番号を更新できます。
 ### `Plugin is immutable`
-The Edition plugin has authority set to `None`. The number cannot be changed.
-## Notes
-- Edition numbers are NOT enforced to be unique—creators must track this
-- The plugin must be added during `create()`, not after
-- Setting authority to `None` makes the edition number permanent
-- Use with Master Edition plugin on Collections for proper grouping
-## Quick Reference
-### Authority Options
-| Authority | Can Update | Use Case |
+Editionプラグインのauthorityが`None`に設定されています。番号は変更できません。
+## 注意事項
+- エディション番号は一意であることが強制されません—クリエイターがこれを追跡する必要があります
+- プラグインは`create()`中に追加する必要があり、作成後はできません
+- authorityを`None`に設定すると、エディション番号は永続的になります
+- 適切なグループ化のためにCollectionsのMaster Editionプラグインと一緒に使用
+## クイックリファレンス
+### Authorityオプション
+| Authority | 更新可能 | ユースケース |
 |-----------|------------|----------|
-| `UpdateAuthority` | ✅ | Mutable edition numbers |
-| `None` | ❌ | Permanent, immutable editions |
-### Recommended Setup
-| Component | Location | Purpose |
+| `UpdateAuthority` | ✅ | 変更可能なエディション番号 |
+| `None` | ❌ | 永続的で不変のエディション |
+### 推奨セットアップ
+| コンポーネント | 配置場所 | 目的 |
 |-----------|----------|---------|
-| Master Edition | Collection | Groups editions, stores max supply |
-| Edition | Asset | Stores individual edition number |
-| Candy Machine | Minting | Automatic sequential numbering |
+| Master Edition | Collection | エディションをグループ化、最大供給量を保存 |
+| Edition | Asset | 個別のエディション番号を保存 |
+| Candy Machine | ミント | 自動連番 |
 ## FAQ
-### Is the edition number enforced to be unique?
-No. The edition number is informational only. Creators are responsible for ensuring unique numbers. Use Candy Machine with the Edition Guard for automatic sequential numbering.
-### Can I add the Edition plugin to an existing Asset?
-No. The Edition plugin must be added during Asset creation. Plan ahead if you need edition numbers.
-### How do I create a "1 of 100" style edition?
-Add the Edition plugin to Assets (with numbers 1-100) and add the Master Edition plugin to the Collection with `maxSupply: 100`. The Master Edition groups the editions and indicates total supply.
-### Can I change the edition number after creation?
-Yes, if the plugin authority is not set to `None`. The update authority can modify the number using `updatePlugin`.
-### What's the difference between Edition and Master Edition?
-Edition stores the individual number (e.g., #5) on an Asset. Master Edition stores collection-level data (max supply, edition name/URI) on a Collection and groups the editions together.
-## Glossary
-| Term | Definition |
+### エディション番号は一意であることが強制されますか？
+いいえ。エディション番号は情報提供のみです。クリエイターは一意の番号を確保する責任があります。自動連番にはCandy MachineとEdition Guardを使用してください。
+### 既存のAssetにEditionプラグインを追加できますか？
+いいえ。Editionプラグインは Asset作成時に追加する必要があります。エディション番号が必要な場合は事前に計画してください。
+### 「1 of 100」スタイルのエディションを作成するにはどうすればよいですか？
+Assetsに（番号1-100で）Editionプラグインを追加し、Collectionに`maxSupply: 100`でMaster Editionプラグインを追加します。Master Editionはエディションをグループ化し、総供給量を示します。
+### 作成後にエディション番号を変更できますか？
+はい、プラグインauthorityが`None`に設定されていなければ可能です。Update authorityは`updatePlugin`を使用して番号を変更できます。
+### EditionとMaster Editionの違いは何ですか？
+EditionはAssetに個別の番号（例：#5）を保存します。Master EditionはCollection上にコレクションレベルのデータ（最大供給量、エディション名/URI）を保存し、エディションをグループ化します。
+## 用語集
+| 用語 | 定義 |
 |------|------------|
-| **Edition Number** | Unique identifier for a specific print (e.g., 1, 2, 3) |
-| **Master Edition** | Collection-level plugin that groups editions |
-| **Edition Guard** | Candy Machine guard for automatic numbering |
-| **Authority Managed** | Plugin controlled by update authority |
-| **Immutable Edition** | Edition with authority set to `None` |
+| **エディション番号** | 特定のプリントの固有識別子（例：1, 2, 3） |
+| **Master Edition** | エディションをグループ化するCollectionレベルのプラグイン |
+| **Edition Guard** | 自動番号付けのためのCandy Machineガード |
+| **Authority Managed** | Update authorityによって制御されるプラグイン |
+| **不変エディション** | authorityが`None`に設定されたエディション |

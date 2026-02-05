@@ -1,7 +1,7 @@
 ---
-title: Adding External Plugins
-metaTitle: Adding External Plugins | Metaplex Core
-description: Learn how to add Oracle and AppData plugins to Core Assets and Collections. Code examples for JavaScript and Rust.
+title: 外部プラグインの追加
+metaTitle: 外部プラグインの追加 | Metaplex Core
+description: Core AssetsとCollectionsにOracleおよびAppDataプラグインを追加する方法を学びます。JavaScriptとRustのコード例。
 updated: '01-31-2026'
 keywords:
   - add external plugin
@@ -18,36 +18,36 @@ programmingLanguage:
   - TypeScript
   - Rust
 faqs:
-  - q: Can I add multiple external plugins to one Asset?
-    a: Yes. You can add multiple Oracle and/or AppData plugins to a single Asset.
-  - q: Do I need to create the Oracle account first?
-    a: Yes. The Oracle account must exist before adding an Oracle plugin adapter.
-  - q: What's the difference between adding at creation vs adding later?
-    a: No functional difference. Adding at creation is more efficient (one transaction). Adding later requires a separate transaction.
+  - q: 1つのAssetに複数の外部プラグインを追加できますか？
+    a: はい。1つのAssetに複数のOracleおよび/またはAppDataプラグインを追加できます。
+  - q: 最初にOracleアカウントを作成する必要がありますか？
+    a: はい。Oracleプラグインアダプターを追加する前に、Oracleアカウントが存在している必要があります。
+  - q: 作成時に追加する場合と後から追加する場合の違いは何ですか？
+    a: 機能的な違いはありません。作成時に追加する方が効率的です（1つのトランザクション）。後から追加する場合は、別のトランザクションが必要です。
 ---
-This guide shows how to **add External Plugins** (Oracle, AppData) to Core Assets and Collections. Add at creation time or to existing Assets/Collections. {% .lead %}
-{% callout title="What You'll Learn" %}
-- Add external plugins during Asset/Collection creation
-- Add external plugins to existing Assets/Collections
-- Configure Oracle lifecycle checks
-- Set up AppData with data authorities
+このガイドでは、Core AssetsとCollectionsに**外部プラグイン**（Oracle、AppData）を追加する方法を説明します。作成時または既存のAssets/Collectionsに追加します。 {% .lead %}
+{% callout title="学べること" %}
+- Asset/Collection作成時に外部プラグインを追加
+- 既存のAssets/Collectionsに外部プラグインを追加
+- Oracleライフサイクルチェックの設定
+- data authorityを使用したAppDataの設定
 {% /callout %}
-## Summary
-Add external plugins using `create()` with the `plugins` array, or `addPlugin()` for existing Assets. Collections use `createCollection()` and `addCollectionPlugin()`.
-- Add at creation: include in `plugins` array
-- Add to existing: use `addPlugin()` / `addCollectionPlugin()`
-- Requires update authority signature
-- Configure lifecycle checks for Oracle plugins
-## Out of Scope
-Removing external plugins (see [Removing External Plugins](/smart-contracts/core/external-plugins/removing-external-plugins)), updating plugin data, and built-in plugins (see [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)).
-## Quick Start
-**Jump to:** [Create Asset with Plugin](#creating-a-core-asset-with-an-external-plugin) · [Add to Existing Asset](#adding-a-external-plugin-to-a-core-asset) · [Create Collection with Plugin](#creating-a-core-collection-with-an-external-plugin)
-1. Prepare your Oracle account or AppData configuration
-2. Add plugin at creation or via `addPlugin()`
-3. Configure lifecycle checks (Oracle) or data authority (AppData)
+## 概要
+`plugins`配列を持つ`create()`を使用するか、既存のAssetsには`addPlugin()`を使用して外部プラグインを追加します。Collectionsは`createCollection()`と`addCollectionPlugin()`を使用します。
+- 作成時に追加：`plugins`配列に含める
+- 既存に追加：`addPlugin()` / `addCollectionPlugin()`を使用
+- update authorityの署名が必要
+- Oracleプラグインのライフサイクルチェックを設定
+## 対象外
+外部プラグインの削除（[外部プラグインの削除](/smart-contracts/core/external-plugins/removing-external-plugins)を参照）、プラグインデータの更新、および組み込みプラグイン（[プラグインの追加](/smart-contracts/core/plugins/adding-plugins)を参照）。
+## クイックスタート
+**ジャンプ先:** [プラグイン付きAssetの作成](#外部プラグイン付きcore-assetの作成) · [既存Assetへの追加](#core-assetへの外部プラグインの追加) · [プラグイン付きCollectionの作成](#外部プラグイン付きcore-collectionの作成)
+1. OracleアカウントまたはAppData設定を準備
+2. 作成時または`addPlugin()`でプラグインを追加
+3. ライフサイクルチェック（Oracle）またはdata authority（AppData）を設定
 ## Assets
-### Creating a Core Asset with an External Plugin
-{% dialect-switcher title="Creating a Core Asset with an External Plugin" %}
+### 外部プラグイン付きCore Assetの作成
+{% dialect-switcher title="外部プラグイン付きCore Assetの作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -123,8 +123,8 @@ pub async fn create_asset_with_oracle_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Adding a External Plugin to a Core Asset
-{% dialect-switcher title="Adding a Plugin with an assigned authority" %}
+### Core Assetへの外部プラグインの追加
+{% dialect-switcher title="割り当てられたauthorityを持つプラグインの追加" %}
 {% dialect title="Rust" id="rust" %}
 ```rust
 use mpl_core::{
@@ -195,8 +195,8 @@ addPlugin(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 ## Collections
-### Creating a Core Collection with an External Plugin
-{% dialect-switcher title="Adding a External Plugin to a Core Collection" %}
+### 外部プラグイン付きCore Collectionの作成
+{% dialect-switcher title="Core Collectionへの外部プラグインの追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -273,8 +273,8 @@ pub async fn create_collection_with_oracle_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Adding a External Plugin to a Collection
-{% dialect-switcher title="Burning an Assets" %}
+### Collectionへの外部プラグインの追加
+{% dialect-switcher title="Assetsのバーン" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
@@ -344,27 +344,27 @@ pub async fn add_oracle_plugin_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Common Errors
+## 一般的なエラー
 ### `Authority mismatch`
-Only the update authority can add external plugins. Verify you're signing with the correct keypair.
+update authorityのみが外部プラグインを追加できます。正しいキーペアで署名していることを確認してください。
 ### `Plugin already exists`
-An external plugin with the same key already exists. Remove it first or update it instead.
+同じキーを持つ外部プラグインが既に存在します。最初に削除するか、代わりに更新してください。
 ### `Invalid Oracle account`
-The Oracle base address is invalid or the account doesn't exist.
-## Notes
-- External plugins are Authority Managed (update authority controls)
-- Oracle plugins require an existing Oracle account
-- AppData plugins need a Data Authority for write permissions
-- Collection plugins don't automatically apply to existing Assets
+Oracleベースアドレスが無効であるか、アカウントが存在しません。
+## 注意事項
+- 外部プラグインはAuthority Managed（update authorityが制御）
+- Oracleプラグインには既存のOracleアカウントが必要
+- AppDataプラグインには書き込み権限のためのData Authorityが必要
+- Collectionプラグインは既存のAssetsには自動的に適用されない
 ## FAQ
-### Can I add multiple external plugins to one Asset?
-Yes. You can add multiple Oracle and/or AppData plugins to a single Asset.
-### Do I need to create the Oracle account first?
-Yes. The Oracle account must exist before adding an Oracle plugin adapter.
-### What's the difference between adding at creation vs adding later?
-No functional difference. Adding at creation is more efficient (one transaction). Adding later requires a separate transaction.
-## Related Operations
-- [Removing External Plugins](/smart-contracts/core/external-plugins/removing-external-plugins) - Remove external plugins
-- [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
-- [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) - Oracle configuration details
-- [AppData Plugin](/smart-contracts/core/external-plugins/app-data) - AppData configuration details
+### 1つのAssetに複数の外部プラグインを追加できますか？
+はい。1つのAssetに複数のOracleおよび/またはAppDataプラグインを追加できます。
+### 最初にOracleアカウントを作成する必要がありますか？
+はい。Oracleプラグインアダプターを追加する前に、Oracleアカウントが存在している必要があります。
+### 作成時に追加する場合と後から追加する場合の違いは何ですか？
+機能的な違いはありません。作成時に追加する方が効率的です（1つのトランザクション）。後から追加する場合は、別のトランザクションが必要です。
+## 関連操作
+- [外部プラグインの削除](/smart-contracts/core/external-plugins/removing-external-plugins) - 外部プラグインの削除
+- [外部プラグイン概要](/smart-contracts/core/external-plugins/overview) - 外部プラグインの理解
+- [Oracleプラグイン](/smart-contracts/core/external-plugins/oracle) - Oracle設定の詳細
+- [AppDataプラグイン](/smart-contracts/core/external-plugins/app-data) - AppData設定の詳細
