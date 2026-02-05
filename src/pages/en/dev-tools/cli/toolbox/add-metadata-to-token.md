@@ -9,7 +9,7 @@ The `mplx toolbox token add-metadata` command adds metadata to an existing token
 ## Basic Usage
 
 ```bash
-mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
+mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK" --image ./logo.png
 ```
 
 ## Arguments
@@ -28,7 +28,7 @@ mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
 | `--description <value>` | Description of the token (used when uploading metadata) |
 | `--image <value>` | Path to token image file (used when uploading metadata) |
 | `--is-mutable` | Whether metadata can be updated later (default: true) |
-| `--no-is-mutable` | Make metadata immutable |
+
 
 ## Global Flags
 
@@ -40,17 +40,7 @@ mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
 
 ## Examples
 
-1. Add basic metadata:
-```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK"
-```
-
-2. Add metadata with existing URI:
-```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --uri "https://example.com/metadata.json"
-```
-
-3. Add metadata with image and description (will upload automatically):
+1. Add metadata with image and description (will upload automatically):
 ```bash
 mplx toolbox token add-metadata <mintAddress> \
   --name "My Token" \
@@ -59,7 +49,12 @@ mplx toolbox token add-metadata <mintAddress> \
   --image ./logo.png
 ```
 
-4. Add immutable metadata. Be careful, this is not reversible!
+2. Add metadata with existing URI:
+```bash
+mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --uri "https://example.com/metadata.json"
+```
+
+3. Add immutable metadata. Be careful, this is not reversible!
 ```bash
 mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --no-is-mutable
 ```
@@ -106,4 +101,4 @@ Explorer: https://solscan.io/tx/<signature>
 - If mint authority has been revoked, metadata cannot be added
 - When providing `--image` and/or `--description` without `--uri`, the CLI will automatically upload the metadata to storage
 - The `--uri` flag is mutually exclusive with `--image` and `--description`
-- Be carful with the `--no-is-mutable` flag. It is irriversible
+- Be careful with the `--is-mutable false` flag. It is irreversible
