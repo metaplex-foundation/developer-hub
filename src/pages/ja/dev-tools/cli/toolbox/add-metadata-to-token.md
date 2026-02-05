@@ -9,7 +9,7 @@ description: メタデータアカウントを持たない既存のトークン�
 ## 基本的な使い方
 
 ```bash
-mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
+mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK" --image ./logo.png
 ```
 
 ## 引数
@@ -28,7 +28,6 @@ mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
 | `--description <value>` | トークンの説明（メタデータアップロード時に使用） |
 | `--image <value>` | トークン画像ファイルのパス（メタデータアップロード時に使用） |
 | `--is-mutable` | メタデータを後で更新可能にするかどうか（デフォルト: true） |
-| `--no-is-mutable` | メタデータを不変にする |
 
 ## グローバルフラグ
 
@@ -40,17 +39,7 @@ mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
 
 ## 例
 
-1. 基本的なメタデータを追加:
-```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK"
-```
-
-2. 既存のURIでメタデータを追加:
-```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --uri "https://example.com/metadata.json"
-```
-
-3. 画像と説明でメタデータを追加（自動的にアップロード）:
+1. 画像と説明でメタデータを追加（自動的にアップロード）:
 ```bash
 mplx toolbox token add-metadata <mintAddress> \
   --name "My Token" \
@@ -59,9 +48,14 @@ mplx toolbox token add-metadata <mintAddress> \
   --image ./logo.png
 ```
 
-4. 不変のメタデータを追加。これは元に戻せないので注意！
+2. 既存のURIでメタデータを追加:
 ```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --no-is-mutable
+mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --uri "https://example.com/metadata.json"
+```
+
+3. 不変のメタデータを追加。これは元に戻せないので注意！
+```bash
+mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --is-mutable false
 ```
 
 ## 出力
@@ -106,4 +100,4 @@ Explorer: https://solscan.io/tx/<signature>
 - ミント権限が取り消されている場合、メタデータを追加できません
 - `--uri`なしで`--image`や`--description`を指定すると、CLIは自動的にメタデータをストレージにアップロードします
 - `--uri`フラグは`--image`および`--description`と排他的です
-- `--no-is-mutable`フラグには注意してください。元に戻すことができません
+- `--is-mutable false`フラグには注意してください。元に戻すことができません

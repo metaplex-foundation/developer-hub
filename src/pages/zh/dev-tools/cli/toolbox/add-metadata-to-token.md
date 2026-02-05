@@ -9,7 +9,7 @@ description: 为没有元数据账户的现有代币添加元数据
 ## 基本用法
 
 ```bash
-mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
+mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK" --image ./logo.png
 ```
 
 ## 参数
@@ -28,7 +28,6 @@ mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
 | `--description <value>` | 代币描述（上传元数据时使用） |
 | `--image <value>` | 代币图片文件路径（上传元数据时使用） |
 | `--is-mutable` | 元数据是否可以在以后更新（默认：true） |
-| `--no-is-mutable` | 使元数据不可变 |
 
 ## 全局标志
 
@@ -40,17 +39,7 @@ mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
 
 ## 示例
 
-1. 添加基本元数据：
-```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK"
-```
-
-2. 使用现有 URI 添加元数据：
-```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --uri "https://example.com/metadata.json"
-```
-
-3. 使用图片和描述添加元数据（将自动上传）：
+1. 使用图片和描述添加元数据（将自动上传）：
 ```bash
 mplx toolbox token add-metadata <mintAddress> \
   --name "My Token" \
@@ -59,9 +48,14 @@ mplx toolbox token add-metadata <mintAddress> \
   --image ./logo.png
 ```
 
-4. 添加不可变元数据。注意：此操作不可逆！
+2. 使用现有 URI 添加元数据：
 ```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --no-is-mutable
+mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --uri "https://example.com/metadata.json"
+```
+
+3. 添加不可变元数据。注意：此操作不可逆！
+```bash
+mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --is-mutable false
 ```
 
 ## 输出
@@ -106,4 +100,4 @@ Explorer: https://solscan.io/tx/<signature>
 - 如果铸造权限已被撤销，则无法添加元数据
 - 在不提供 `--uri` 的情况下提供 `--image` 和/或 `--description` 时，CLI 将自动将元数据上传到存储
 - `--uri` 标志与 `--image` 和 `--description` 互斥
-- 使用 `--no-is-mutable` 标志时请小心，此操作不可逆
+- 使用 `--is-mutable false` 标志时请小心，此操作不可逆

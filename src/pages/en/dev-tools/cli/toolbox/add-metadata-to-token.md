@@ -29,7 +29,6 @@ mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK" --image 
 | `--image <value>` | Path to token image file (used when uploading metadata) |
 | `--is-mutable` | Whether metadata can be updated later (default: true) |
 
-
 ## Global Flags
 
 | Flag | Description |
@@ -56,7 +55,7 @@ mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" -
 
 3. Add immutable metadata. Be careful, this is not reversible!
 ```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --no-is-mutable
+mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --is-mutable false
 ```
 
 ## Output

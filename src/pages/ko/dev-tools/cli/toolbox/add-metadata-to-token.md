@@ -9,7 +9,7 @@ description: 메타데이터 계정이 없는 기존 토큰에 메타데이터 �
 ## 기본 사용법
 
 ```bash
-mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
+mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK" --image ./logo.png
 ```
 
 ## 인자
@@ -28,7 +28,6 @@ mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
 | `--description <value>` | 토큰 설명 (메타데이터 업로드 시 사용) |
 | `--image <value>` | 토큰 이미지 파일 경로 (메타데이터 업로드 시 사용) |
 | `--is-mutable` | 메타데이터를 나중에 업데이트할 수 있는지 여부 (기본값: true) |
-| `--no-is-mutable` | 메타데이터를 불변으로 설정 |
 
 ## 전역 플래그
 
@@ -40,17 +39,7 @@ mplx toolbox token add-metadata <mint> --name "My Token" --symbol "MTK"
 
 ## 예시
 
-1. 기본 메타데이터 추가:
-```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK"
-```
-
-2. 기존 URI로 메타데이터 추가:
-```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --uri "https://example.com/metadata.json"
-```
-
-3. 이미지와 설명으로 메타데이터 추가 (자동 업로드):
+1. 이미지와 설명으로 메타데이터 추가 (자동 업로드):
 ```bash
 mplx toolbox token add-metadata <mintAddress> \
   --name "My Token" \
@@ -59,9 +48,14 @@ mplx toolbox token add-metadata <mintAddress> \
   --image ./logo.png
 ```
 
-4. 불변 메타데이터 추가. 주의: 이 작업은 되돌릴 수 없습니다!
+2. 기존 URI로 메타데이터 추가:
 ```bash
-mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --no-is-mutable
+mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --uri "https://example.com/metadata.json"
+```
+
+3. 불변 메타데이터 추가. 주의: 이 작업은 되돌릴 수 없습니다!
+```bash
+mplx toolbox token add-metadata <mintAddress> --name "My Token" --symbol "MTK" --is-mutable false
 ```
 
 ## 출력
@@ -106,4 +100,4 @@ Explorer: https://solscan.io/tx/<signature>
 - 민트 권한이 취소된 경우 메타데이터를 추가할 수 없습니다
 - `--uri` 없이 `--image` 및/또는 `--description`을 제공하면 CLI가 자동으로 메타데이터를 스토리지에 업로드합니다
 - `--uri` 플래그는 `--image` 및 `--description`과 배타적입니다
-- `--no-is-mutable` 플래그 사용 시 주의하세요. 되돌릴 수 없습니다
+- `--is-mutable false` 플래그 사용 시 주의하세요. 되돌릴 수 없습니다
