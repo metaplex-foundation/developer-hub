@@ -1,4 +1,6 @@
-User-agent: * 
+Content-Signal: search=yes,ai-train=yes
+
+User-agent: *
 Disallow:
 
 Sitemap: https://developers.metaplex.com/sitemap.xml
