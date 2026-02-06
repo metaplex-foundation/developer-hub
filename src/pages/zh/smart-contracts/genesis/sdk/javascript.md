@@ -1,7 +1,7 @@
 ---
 title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
-description: Genesis JavaScript SDK의 API 레퍼런스. Solana에서 토큰 런칭을 위한 함수 시그니처, 매개변수 및 타입.
+description: Genesis JavaScript SDK 的 API 参考。Solana 上代币发行的函数签名、参数和类型。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -20,27 +20,27 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: Umi란 무엇이며 왜 필요한가요?
-    a: Umi는 Solana를 위한 Metaplex의 JavaScript 프레임워크입니다. 트랜잭션 구축, 서명자 관리, Metaplex 프로그램과의 상호작용을 위한 일관된 인터페이스를 제공합니다.
-  - q: 브라우저에서 Genesis SDK를 사용할 수 있나요?
-    a: 네. SDK는 Node.js와 브라우저 환경 모두에서 작동합니다. 브라우저에서는 키페어 파일 대신 지갑 어댑터를 사용하세요.
-  - q: fetch와 safeFetch의 차이점은 무엇인가요?
-    a: fetch는 계정이 존재하지 않으면 오류를 던집니다. safeFetch는 대신 null을 반환하며, 오류 처리 없이 계정 존재 여부를 확인하는 데 유용합니다.
-  - q: 트랜잭션 오류를 어떻게 처리하나요?
-    a: sendAndConfirm 호출을 try/catch 블록으로 감싸세요. 일반적인 오류에는 잔액 부족, 이미 초기화된 계정, 시간 조건 위반이 포함됩니다.
+  - q: 什么是 Umi，为什么需要它？
+    a: Umi 是 Metaplex 的 Solana JavaScript 框架。它提供了统一的接口来构建交易、管理签名者以及与 Metaplex 程序交互。
+  - q: 我可以在浏览器中使用 Genesis SDK 吗？
+    a: 可以。SDK 在 Node.js 和浏览器环境中都可以使用。在浏览器中，请使用钱包适配器进行签名，而不是密钥对文件。
+  - q: fetch 和 safeFetch 有什么区别？
+    a: fetch 在账户不存在时会抛出错误。safeFetch 则返回 null，适用于检查账户是否存在而无需错误处理。
+  - q: 如何处理交易错误？
+    a: 将 sendAndConfirm 调用包装在 try/catch 块中。常见错误包括资金不足、账户已初始化和时间条件违规。
 ---
 
-Genesis JavaScript SDK의 API 레퍼런스. 전체 튜토리얼은 [Launch Pool](/smart-contracts/genesis/launch-pool) 또는 [Presale](/smart-contracts/genesis/presale)을 참조하세요. {% .lead %}
+Genesis JavaScript SDK 的 API 参考。完整教程请参阅 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)。 {% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="NPM 패키지" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
+{% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
 
-{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="자동 생성된 API 문서" /%}
+{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="自动生成的 API 文档" /%}
 
 {% /quick-links %}
 
-## 설치
+## 安装
 
 ```bash
 npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
@@ -48,7 +48,7 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
   @metaplex-foundation/mpl-token-metadata
 ```
 
-## 설정
+## 设置
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -60,53 +60,53 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(mplTokenMetadata());
 ```
 
-전체 구현 예제는 [Launch Pool](/smart-contracts/genesis/launch-pool) 또는 [Presale](/smart-contracts/genesis/presale)을 참조하세요.
+完整的实现示例请参阅 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)。
 
 ---
 
-## 명령어 레퍼런스
+## 指令参考
 
-### 코어
+### 核心
 
-| Function | Description |
+| 函数 | 描述 |
 |----------|-------------|
-| [initializeV2()](#initialize-v2) | Genesis 계정 생성 및 토큰 발행 |
-| [finalizeV2()](#finalize-v2) | 설정 잠금, 런칭 활성화 |
+| [initializeV2()](#initialize-v2) | 创建 Genesis Account 并铸造代币 |
+| [finalizeV2()](#finalize-v2) | 锁定配置，激活发行 |
 
-### 버킷
+### Buckets
 
-| Function | Description |
+| 函数 | 描述 |
 |----------|-------------|
-| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | 비례 배분 버킷 추가 |
-| [addPresaleBucketV2()](#add-presale-bucket-v2) | 고정가 판매 버킷 추가 |
-| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | 트레저리/수신자 버킷 추가 |
+| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | 添加按比例分配的 bucket |
+| [addPresaleBucketV2()](#add-presale-bucket-v2) | 添加固定价格销售 bucket |
+| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | 添加资金库/接收者 bucket |
 
-### Launch Pool 운영
+### Launch Pool 操作
 
-| Function | Description |
+| 函数 | 描述 |
 |----------|-------------|
-| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Launch Pool에 SOL 예치 |
-| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | SOL 출금 (예치 기간 중) |
-| [claimLaunchPoolV2()](#claim-launch-pool-v2) | 토큰 청구 (예치 기간 후) |
+| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | 向 Launch Pool 存入 SOL |
+| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | 提取 SOL（存款期间） |
+| [claimLaunchPoolV2()](#claim-launch-pool-v2) | 领取代币（存款期结束后） |
 
-### Presale 운영
+### Presale 操作
 
-| Function | Description |
+| 函数 | 描述 |
 |----------|-------------|
-| [depositPresaleV2()](#deposit-presale-v2) | Presale에 SOL 예치 |
-| [claimPresaleV2()](#claim-presale-v2) | 토큰 청구 (예치 기간 후) |
+| [depositPresaleV2()](#deposit-presale-v2) | 向 Presale 存入 SOL |
+| [claimPresaleV2()](#claim-presale-v2) | 领取代币（存款期结束后） |
 
-### 관리자
+### 管理员
 
-| Function | Description |
+| 函数 | 描述 |
 |----------|-------------|
-| [transitionV2()](#transition-v2) | 종료 동작 실행 |
-| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | 민트 권한 영구 폐기 |
-| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | 동결 권한 영구 폐기 |
+| [transitionV2()](#transition-v2) | 执行结束行为 |
+| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | 永久撤销铸造权限 |
+| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | 永久撤销冻结权限 |
 
 ---
 
-## 함수 시그니처
+## 函数签名
 
 ### initializeV2
 
@@ -264,9 +264,9 @@ await revokeFreezeAuthorityV2(umi, {
 
 ---
 
-## PDA 헬퍼
+## PDA 辅助函数
 
-| Function | Seeds |
+| 函数 | 种子 |
 |----------|-------|
 | findGenesisAccountV2Pda() | `baseMint`, `genesisIndex` |
 | findLaunchPoolBucketV2Pda() | `genesisAccount`, `bucketIndex` |
@@ -283,31 +283,31 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ---
 
-## 조회 함수
+## 获取函数
 
-| Function | Returns |
+| 函数 | 返回值 |
 |----------|---------|
-| fetchLaunchPoolBucketV2() | 버킷 상태 (없으면 오류 발생) |
-| safeFetchLaunchPoolBucketV2() | 버킷 상태 또는 `null` |
-| fetchPresaleBucketV2() | 버킷 상태 (없으면 오류 발생) |
-| safeFetchPresaleBucketV2() | 버킷 상태 또는 `null` |
-| fetchLaunchPoolDepositV2() | 예치 상태 (없으면 오류 발생) |
-| safeFetchLaunchPoolDepositV2() | 예치 상태 또는 `null` |
-| fetchPresaleDepositV2() | 예치 상태 (없으면 오류 발생) |
-| safeFetchPresaleDepositV2() | 예치 상태 또는 `null` |
+| fetchLaunchPoolBucketV2() | Bucket 状态（不存在时抛出错误） |
+| safeFetchLaunchPoolBucketV2() | Bucket 状态或 `null` |
+| fetchPresaleBucketV2() | Bucket 状态（不存在时抛出错误） |
+| safeFetchPresaleBucketV2() | Bucket 状态或 `null` |
+| fetchLaunchPoolDepositV2() | 存款状态（不存在时抛出错误） |
+| safeFetchLaunchPoolDepositV2() | 存款状态或 `null` |
+| fetchPresaleDepositV2() | 存款状态（不存在时抛出错误） |
+| safeFetchPresaleDepositV2() | 存款状态或 `null` |
 
 ```typescript
 const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
-const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // 찾지 못하면 null
+const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
 ```
 
-**버킷 상태 필드:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
+**Bucket 状态字段：** `quoteTokenDepositTotal`、`depositCount`、`claimCount`、`bucket.baseTokenAllocation`
 
-**예치 상태 필드:** `amountQuoteToken`, `claimed`
+**存款状态字段：** `amountQuoteToken`、`claimed`
 
 ---
 
-## 타입
+## 类型
 
 ### TimeCondition
 
@@ -334,46 +334,46 @@ const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // 찾지 �
 
 ---
 
-## 상수
+## 常量
 
-| Constant | Value |
+| 常量 | 值 |
 |----------|-------|
 | `WRAPPED_SOL_MINT` | `So11111111111111111111111111111111111111112` |
 
 ---
 
-## 일반 오류
+## 常见错误
 
-| Error | Cause |
+| 错误 | 原因 |
 |-------|-------|
-| `insufficient funds` | 수수료를 위한 SOL 부족 |
-| `already initialized` | Genesis 계정이 이미 존재 |
-| `already finalized` | 확정 후 수정 불가 |
-| `deposit period not active` | 예치 기간 외 |
-| `claim period not active` | 청구 기간 외 |
+| `insufficient funds` | SOL 不足以支付费用 |
+| `already initialized` | Genesis Account 已存在 |
+| `already finalized` | 最终化后无法修改 |
+| `deposit period not active` | 不在存款窗口内 |
+| `claim period not active` | 不在领取窗口内 |
 
 ---
 
-## FAQ
+## 常见问题
 
-### Umi란 무엇이며 왜 필요한가요?
-Umi는 Solana를 위한 Metaplex의 JavaScript 프레임워크입니다. 트랜잭션 구축, 서명자 관리, Metaplex 프로그램과의 상호작용을 위한 일관된 인터페이스를 제공합니다.
+### 什么是 Umi，为什么需要它？
+Umi 是 Metaplex 的 Solana JavaScript 框架。它提供了统一的接口来构建交易、管理签名者以及与 Metaplex 程序交互。
 
-### 브라우저에서 Genesis SDK를 사용할 수 있나요?
-네. SDK는 Node.js와 브라우저 환경 모두에서 작동합니다. 브라우저에서는 키페어 파일 대신 지갑 어댑터를 사용하세요.
+### 我可以在浏览器中使用 Genesis SDK 吗？
+可以。SDK 在 Node.js 和浏览器环境中都可以使用。在浏览器中，请使用钱包适配器进行签名，而不是密钥对文件。
 
-### fetch와 safeFetch의 차이점은 무엇인가요?
-`fetch`는 계정이 존재하지 않으면 오류를 던집니다. `safeFetch`는 대신 `null`을 반환하며, 계정 존재 여부를 확인하는 데 유용합니다.
+### fetch 和 safeFetch 有什么区别？
+`fetch` 在账户不存在时会抛出错误。`safeFetch` 则返回 `null`，适用于检查账户是否存在。
 
-### 트랜잭션 오류를 어떻게 처리하나요?
-`sendAndConfirm` 호출을 try/catch 블록으로 감싸세요. 구체적인 실패 원인은 오류 메시지를 확인하세요.
+### 如何处理交易错误？
+将 `sendAndConfirm` 调用包装在 try/catch 块中。检查错误消息以了解具体的失败原因。
 
 ---
 
-## 다음 단계
+## 下一步
 
-전체 구현 튜토리얼:
+完整的实现教程：
 
-- [시작하기](/smart-contracts/genesis/getting-started) - 설정 및 첫 런칭
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - 비례 배분
-- [Presale](/smart-contracts/genesis/presale) - 고정가 판매
+- [开始使用](/zh/smart-contracts/genesis/getting-started) - 设置和首次发行
+- [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - 按比例分配
+- [Presale](/zh/smart-contracts/genesis/presale) - 固定价格销售

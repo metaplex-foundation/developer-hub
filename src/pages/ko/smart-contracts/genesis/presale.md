@@ -107,7 +107,6 @@ import {
   addUnlockedBucketV2,
   findUnlockedBucketV2Pda,
   finalizeV2,
-  NOT_TRIGGERED_TIMESTAMP,
 } from '@metaplex-foundation/genesis';
 import { generateSigner, publicKey, sol } from '@metaplex-foundation/umi';
 
@@ -158,25 +157,25 @@ async function setupPresale() {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: depositStart,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     depositEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: depositEnd,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     claimStartCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimStart,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     claimEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimEnd,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
     endBehaviors: [
@@ -200,13 +199,13 @@ async function setupPresale() {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimStart,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     claimEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimEnd,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     backendSigner: { signer: backendSigner.publicKey },
   }).sendAndConfirm(umi);
@@ -244,43 +243,7 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 
 Genesis Account는 토큰을 생성하고 모든 배포 Bucket을 조정합니다.
 
-{% totem %}
-
-```typescript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
-import {
-  genesis,
-  initializeV2,
-  findGenesisAccountV2Pda,
-} from '@metaplex-foundation/genesis';
-import { generateSigner, keypairIdentity } from '@metaplex-foundation/umi';
-
-const umi = createUmi('https://api.mainnet-beta.solana.com')
-  .use(mplToolbox())
-  .use(genesis());
-
-// umi.use(keypairIdentity(yourKeypair));
-
-const baseMint = generateSigner(umi);
-const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 100만 토큰 (소수점 9자리)
-
-const [genesisAccount] = findGenesisAccountV2Pda(umi, {
-  baseMint: baseMint.publicKey,
-  genesisIndex: 0,
-});
-
-await initializeV2(umi, {
-  baseMint,
-  fundingMode: 0,
-  totalSupplyBaseToken: TOTAL_SUPPLY,
-  name: 'My Token',
-  symbol: 'MTK',
-  uri: 'https://example.com/metadata.json',
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/initialize_v2" frameworks="umi" filename="initializeV2" /%}
 
 {% callout type="note" %}
 `totalSupplyBaseToken`은 모든 Bucket 할당량의 합계와 같아야 합니다.
@@ -290,128 +253,19 @@ await initializeV2(umi, {
 
 Presale Bucket은 예치금을 수집하고 토큰을 배포합니다. 여기서 타이밍과 선택적 제한을 설정합니다.
 
-{% totem %}
-
-```typescript
-import {
-  addPresaleBucketV2,
-  findPresaleBucketV2Pda,
-  findUnlockedBucketV2Pda,
-  NOT_TRIGGERED_TIMESTAMP,
-} from '@metaplex-foundation/genesis';
-import { publicKey, sol } from '@metaplex-foundation/umi';
-
-const [presaleBucket] = findPresaleBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-
-const now = BigInt(Math.floor(Date.now() / 1000));
-const depositStart = now;
-const depositEnd = now + 86400n; // 24시간
-const claimStart = depositEnd + 1n;
-const claimEnd = claimStart + 604800n; // 1주일
-
-await addPresaleBucketV2(umi, {
-  genesisAccount,
-  baseMint: baseMint.publicKey,
-  baseTokenAllocation: TOTAL_SUPPLY,
-  allocationQuoteTokenCap: 100_000_000_000n, // 100 SOL 상한 (가격 설정)
-
-  // 타이밍
-  depositStartCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: depositStart,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-  depositEndCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: depositEnd,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-  claimStartCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: claimStart,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-  claimEndCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: claimEnd,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-
-  // 옵션: 예치 제한
-  minimumDepositAmount: null, // 또는 { amount: sol(0.1).basisPoints }
-  depositLimit: null, // 또는 { limit: sol(10).basisPoints }
-
-  // 트랜지션 후 수집된 SOL의 목적지
-  endBehaviors: [
-    {
-      __kind: 'SendQuoteTokenPercentage',
-      padding: Array(4).fill(0),
-      destinationBucket: publicKey(unlockedBucket),
-      percentageBps: 10000, // 100%
-      processed: false,
-    },
-  ],
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/add_presale_bucket_v2" frameworks="umi" filename="addPresaleBucket" /%}
 
 ### 3. Unlocked Bucket 추가
 
 Unlocked Bucket은 트랜지션 후 Presale에서 SOL을 받습니다.
 
-{% totem %}
-
-```typescript
-import { addUnlockedBucketV2 } from '@metaplex-foundation/genesis';
-import { generateSigner } from '@metaplex-foundation/umi';
-
-const backendSigner = generateSigner(umi);
-
-await addUnlockedBucketV2(umi, {
-  genesisAccount,
-  baseMint: baseMint.publicKey,
-  baseTokenAllocation: 0n,
-  recipient: umi.identity.publicKey,
-  claimStartCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: claimStart,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-  claimEndCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: claimEnd,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-  backendSigner: { signer: backendSigner.publicKey },
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/add_unlocked_bucket_v2" frameworks="umi" filename="addUnlockedBucket" /%}
 
 ### 4. Finalize
 
 모든 Bucket이 설정되면 Finalize하여 Presale을 활성화합니다. 이는 되돌릴 수 없습니다.
 
-{% totem %}
-
-```typescript
-import { finalizeV2 } from '@metaplex-foundation/genesis';
-
-await finalizeV2(umi, {
-  baseMint: baseMint.publicKey,
-  genesisAccount,
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/finalize_v2" frameworks="umi" filename="finalize" /%}
 
 ## 사용자 작업
 
@@ -419,69 +273,11 @@ await finalizeV2(umi, {
 
 사용자는 예치 전에 SOL을 wSOL로 래핑해야 합니다.
 
-{% totem %}
-
-```typescript
-import {
-  findAssociatedTokenPda,
-  createTokenIfMissing,
-  transferSol,
-  syncNative,
-} from '@metaplex-foundation/mpl-toolbox';
-import { WRAPPED_SOL_MINT } from '@metaplex-foundation/genesis';
-import { publicKey, sol } from '@metaplex-foundation/umi';
-
-const userWsolAccount = findAssociatedTokenPda(umi, {
-  owner: umi.identity.publicKey,
-  mint: WRAPPED_SOL_MINT,
-});
-
-await createTokenIfMissing(umi, {
-  mint: WRAPPED_SOL_MINT,
-  owner: umi.identity.publicKey,
-  token: userWsolAccount,
-})
-  .add(
-    transferSol(umi, {
-      destination: publicKey(userWsolAccount),
-      amount: sol(1),
-    })
-  )
-  .add(syncNative(umi, { account: userWsolAccount }))
-  .sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/wrap_sol" frameworks="umi" filename="wrapSol" /%}
 
 ### 예치
 
-{% totem %}
-
-```typescript
-import {
-  depositPresaleV2,
-  findPresaleDepositV2Pda,
-  fetchPresaleDepositV2,
-} from '@metaplex-foundation/genesis';
-import { sol } from '@metaplex-foundation/umi';
-
-await depositPresaleV2(umi, {
-  genesisAccount,
-  bucket: presaleBucket,
-  baseMint: baseMint.publicKey,
-  amountQuoteToken: sol(1).basisPoints,
-}).sendAndConfirm(umi);
-
-// 확인
-const [depositPda] = findPresaleDepositV2Pda(umi, {
-  bucket: presaleBucket,
-  recipient: umi.identity.publicKey,
-});
-const deposit = await fetchPresaleDepositV2(umi, depositPda);
-console.log('Deposited (after fee):', deposit.amountQuoteToken);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/deposit_presale_v2" frameworks="umi" filename="depositPresale" /%}
 
 동일한 사용자의 여러 예치는 단일 예치 계정에 누적됩니다.
 
@@ -489,20 +285,7 @@ console.log('Deposited (after fee):', deposit.amountQuoteToken);
 
 예치 기간 종료 후 청구가 시작되면:
 
-{% totem %}
-
-```typescript
-import { claimPresaleV2 } from '@metaplex-foundation/genesis';
-
-await claimPresaleV2(umi, {
-  genesisAccount,
-  bucket: presaleBucket,
-  baseMint: baseMint.publicKey,
-  recipient: umi.identity.publicKey,
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/claim_presale_v2" frameworks="umi" filename="claimPresale" /%}
 
 토큰 할당: `userTokens = (userDeposit / allocationQuoteTokenCap) * baseTokenAllocation`
 
@@ -512,31 +295,7 @@ await claimPresaleV2(umi, {
 
 예치 종료 후, 트랜지션을 실행하여 수집된 SOL을 Unlocked Bucket으로 이동합니다.
 
-{% totem %}
-
-```typescript
-import { transitionV2, WRAPPED_SOL_MINT } from '@metaplex-foundation/genesis';
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
-import { publicKey } from '@metaplex-foundation/umi';
-
-const unlockedBucketQuoteTokenAccount = findAssociatedTokenPda(umi, {
-  owner: unlockedBucket,
-  mint: WRAPPED_SOL_MINT,
-});
-
-await transitionV2(umi, {
-  genesisAccount,
-  primaryBucket: presaleBucket,
-  baseMint: baseMint.publicKey,
-})
-  .addRemainingAccounts([
-    { pubkey: unlockedBucket, isSigner: false, isWritable: true },
-    { pubkey: publicKey(unlockedBucketQuoteTokenAccount), isSigner: false, isWritable: true },
-  ])
-  .sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/transition_presale_v2" frameworks="umi" filename="transitionPresale" /%}
 
 **이것이 중요한 이유:** 트랜지션이 없으면 수집된 SOL은 Presale Bucket에 잠긴 상태로 유지됩니다. 사용자는 토큰을 청구할 수 있지만 팀은 모금한 자금에 접근할 수 없습니다.
 
@@ -570,13 +329,11 @@ Unix 타임스탬프와 함께 `TimeAbsolute`를 사용합니다:
 {% totem %}
 
 ```typescript
-import { NOT_TRIGGERED_TIMESTAMP } from '@metaplex-foundation/genesis';
-
 const condition = {
   __kind: 'TimeAbsolute',
   padding: Array(47).fill(0),
   time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 1시간 후
-  triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+  triggeredTimestamp: null,
 };
 ```
 
