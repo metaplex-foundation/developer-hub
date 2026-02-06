@@ -170,4 +170,4 @@ userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 
 - [Genesis概述](/zh/smart-contracts/genesis) - 了解更多关于Genesis概念
 - [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - Launch Pool的详细文档
-- [聚合API](/zh/smart-contracts/genesis/aggregation) - 使用API查询发行数据
+- [Integration APIs](/zh/smart-contracts/genesis/integration-apis) - 使用API查询发行数据

@@ -717,4 +717,4 @@ Launch Pool 根据存款有机发现价格，按比例分配。Presale 则是预
 
 - [Presale](/zh/smart-contracts/genesis/presale) - 固定价格代币销售
 - [Uniform Price Auction](/zh/smart-contracts/genesis/uniform-price-auction) - 基于出价的分配
-- [Aggregation API](/zh/smart-contracts/genesis/aggregation) - 通过 API 查询发行数据
+- [Integration APIs](/zh/smart-contracts/genesis/integration-apis) - 通过 API 查询发行数据

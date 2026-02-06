@@ -434,4 +434,4 @@ main().catch(console.error);
 
 - [Genesis 개요](/ko/smart-contracts/genesis) - Genesis 개념에 대해 더 알아보기
 - [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 상세한 Launch Pool 문서
-- [Aggregation API](/ko/smart-contracts/genesis/aggregation) - API를 통해 출시 데이터 쿼리
+- [Integration APIs](/ko/smart-contracts/genesis/integration-apis) - API를 통해 출시 데이터 쿼리

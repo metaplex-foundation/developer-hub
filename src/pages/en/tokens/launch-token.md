@@ -434,4 +434,4 @@ main().catch(console.error);
 
 - [Genesis Overview](/smart-contracts/genesis) - Learn more about Genesis concepts
 - [Launch Pool](/smart-contracts/genesis/launch-pool) - Detailed Launch Pool documentation
-- [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API
+- [Integration APIs](/smart-contracts/genesis/integration-apis) - Query launch data via API

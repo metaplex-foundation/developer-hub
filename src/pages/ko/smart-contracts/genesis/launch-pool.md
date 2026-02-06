@@ -717,4 +717,4 @@ Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로
 
 - [Presale](/ko/smart-contracts/genesis/presale) - 고정 가격 토큰 판매
 - [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - 입찰 기반 할당
-- [Aggregation API](/ko/smart-contracts/genesis/aggregation) - API를 통한 출시 데이터 조회
+- [Integration APIs](/ko/smart-contracts/genesis/integration-apis) - API를 통한 출시 데이터 조회
