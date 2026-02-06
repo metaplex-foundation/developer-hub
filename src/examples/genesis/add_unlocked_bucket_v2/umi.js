@@ -4,7 +4,7 @@ import {
   genesis,
 } from '@metaplex-foundation/genesis'
 import { mplToolbox } from '@metaplex-foundation/mpl-toolbox'
-import { generateSigner, keypairIdentity } from '@metaplex-foundation/umi'
+import { keypairIdentity } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 // [/IMPORTS]
 

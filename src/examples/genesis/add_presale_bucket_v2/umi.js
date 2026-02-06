@@ -1,12 +1,12 @@
 // [IMPORTS]
 import {
-  genesis,
   addPresaleBucketV2,
   findPresaleBucketV2Pda,
   findUnlockedBucketV2Pda,
+  genesis,
 } from '@metaplex-foundation/genesis'
 import { mplToolbox } from '@metaplex-foundation/mpl-toolbox'
-import { keypairIdentity, publicKey, sol } from '@metaplex-foundation/umi'
+import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 // [/IMPORTS]
 
